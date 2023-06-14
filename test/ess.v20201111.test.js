@@ -288,6 +288,16 @@ it("ess.v20201111.DescribeUserAutoSignStatus", async function () {
     }
 })
 
+it("ess.v20201111.DescribeExtendedServiceAuthInfos", async function () {
+    try {
+       const data = await client.DescribeExtendedServiceAuthInfos({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ess.v20201111.CreateChannelSubOrganizationModifyQrCode", async function () {
     try {
        const data = await client.CreateChannelSubOrganizationModifyQrCode({})

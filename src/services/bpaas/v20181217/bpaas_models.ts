@@ -120,6 +120,16 @@ export interface StatusNode {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ParallelNodes?: string
+  /**
+   * scf拒绝时返回信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RejectedCloudFunctionMsg?: string
+  /**
+   * 上一个节点
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PrevNode?: string
 }
 
 /**
@@ -217,54 +227,59 @@ export interface GetBpaasApproveDetailResponse {
   /**
    * 申请人uin
    */
-  ApplyUin: number
+  ApplyUin?: number
   /**
    * 申请人主账号
    */
-  ApplyOwnUin: number
+  ApplyOwnUin?: number
   /**
    * 申请人昵称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ApplyUinNick: string
+  ApplyUinNick?: string
   /**
    * 审批流id
    */
-  BpaasId: number
+  BpaasId?: number
   /**
    * 审批流名称
    */
-  BpaasName: string
+  BpaasName?: string
   /**
    * 申请参数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ApplicationParams: Array<ApplyParam>
+  ApplicationParams?: Array<ApplyParam>
   /**
    * 申请原因
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Reason: string
+  Reason?: string
   /**
    * 申请时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CreateTime: string
+  CreateTime?: string
   /**
    * 申请单状态
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Status: number
+  Status?: number
   /**
    * 节点信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Nodes: Array<StatusNode>
+  Nodes?: Array<StatusNode>
   /**
    * 正在审批的节点id
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ApprovingNodeId: string
+  ApprovingNodeId?: string
+  /**
+   * 更新时间，时间格式：2021-12-12 10:12:10	
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ModifyTime?: string
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

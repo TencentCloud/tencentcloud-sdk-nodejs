@@ -924,6 +924,11 @@ export interface ServiceStatus {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RealTimeAsr: StatusInfo
+  /**
+   * 文本翻译服务开关状态
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TextTranslate?: StatusInfo
 }
 
 /**

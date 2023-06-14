@@ -597,10 +597,71 @@ export interface DomainInfo {
    */
   WeekPwdCount: number
   /**
-   * -
+   * 资产归属
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AssetLocation: string
+  /**
+   * 网络风险
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NetworkRisk: number
+  /**
+   * 网络攻击
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NetworkAttack: number
+  /**
+   * bot访问
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BotVisit: number
+  /**
+   * 网络访问
+
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NetworkAccess: number
+  /**
+   * 资产创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateTime: string
+  /**
+   * waf状态
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WafStatus: number
+  /**
+   * 最近扫描时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LastScanTime: string
+  /**
+   * 资产id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AssetId: Array<string>
+  /**
+   * 资产名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AssetName: Array<string>
+  /**
+   * 类别
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SourceType: string
+  /**
+   * 是否核心资产
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsNotCore: number
+  /**
+   * 是否云外资产
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsCloud: number
 }
 
 /**
@@ -1205,11 +1266,11 @@ export interface DescribeDomainListResponse {
   /**
    * 无
    */
-  Total: number
+  Total?: number
   /**
    * 无
    */
-  DomainInfoCollection: Array<DomainInfo>
+  DomainInfoCollection?: Array<DomainInfo>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2484,43 +2545,43 @@ export interface SaDivulgeDataQueryPub {
  */
 export interface DescribeDomainListRequest {
   /**
-   * -
+   * 起始，从0开始(只支持32位)
    */
   Offset?: number
   /**
-   * -
+   * limit,最大值200(只支持32位)
    */
   Limit?: number
   /**
-   * -
+   * 资产大类，根据此字段时返回不同的子结构,AssetBasicType(只支持32位)
    */
   AssetBasicType?: number
   /**
-   * -
+   * 过滤条件
    */
   Filter?: Array<QueryFilterV3>
   /**
-   * -
+   * 排序
    */
   Order?: string
   /**
-   * -
+   * 排序字段
    */
   By?: string
   /**
-   * -
+   * 导出字段
    */
   Field?: Array<string>
   /**
-   * -
+   * 时间范围(只支持32位)
    */
   TimeRange?: number
   /**
-   * -
+   * 逻辑字段(只支持32位)
    */
   Logic?: number
   /**
-   * -
+   * 聚合字段
    */
   GroupByField?: string
   /**
@@ -2528,7 +2589,7 @@ export interface DescribeDomainListRequest {
    */
   Task?: string
   /**
-   * -
+   * 0:cfw 1:vss 2.soc 3.waf 4.cwp
    */
   RequestFrom?: number
 }

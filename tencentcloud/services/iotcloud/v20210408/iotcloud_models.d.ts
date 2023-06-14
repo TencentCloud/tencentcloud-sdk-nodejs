@@ -1532,6 +1532,16 @@ export interface FirmwareInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     ProductId: string;
+    /**
+     * 固件类型
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    FwType: string;
+    /**
+     * 创建者 Uin
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CreateUserId: number;
 }
 /**
  * CreateProduct请求参数结构体
@@ -2669,6 +2679,11 @@ export interface DeviceInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     FirmwareUpdateTime: number;
+    /**
+     * 创建者 Uin
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CreateUserId: number;
 }
 /**
  * CreateTaskFileUrl请求参数结构体

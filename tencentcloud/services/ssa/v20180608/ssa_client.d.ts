@@ -36,7 +36,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeComplianceAssetList(req: DescribeComplianceAssetListRequest, cb?: (error: string, rep: DescribeComplianceAssetListResponse) => void): Promise<DescribeComplianceAssetListResponse>;
     /**
-     * 域名列表信息啊
+     * 域名列表信息
      */
     DescribeDomainList(req: DescribeDomainListRequest, cb?: (error: string, rep: DescribeDomainListResponse) => void): Promise<DescribeDomainListResponse>;
     /**

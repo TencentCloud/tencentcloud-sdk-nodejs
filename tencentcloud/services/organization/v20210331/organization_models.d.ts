@@ -1,4 +1,54 @@
 /**
+ * 成员和子账号的授权关系
+ */
+export interface OrgMemberAuthAccount {
+    /**
+     * 组织子账号Uin。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    OrgSubAccountUin: number;
+    /**
+     * 策略ID。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PolicyId: number;
+    /**
+     * 策略名。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PolicyName: string;
+    /**
+     * 身份ID。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IdentityId: number;
+    /**
+     * 身份角色名。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IdentityRoleName: string;
+    /**
+     * 身份角色别名。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IdentityRoleAliasName: string;
+    /**
+     * 创建时间。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CreateTime: string;
+    /**
+     * 更新时间。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    UpdateTime: string;
+    /**
+     * 子账号名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    OrgSubAccountName: string;
+}
+/**
  * DescribeOrganizationAuthNode返回参数结构体
  */
 export interface DescribeOrganizationAuthNodeResponse {
@@ -29,6 +79,76 @@ export interface OrgPermission {
      * 权限名
      */
     Name: string;
+}
+/**
+ * 组织成员被授权的策略
+ */
+export interface OrgMemberPolicy {
+    /**
+     * 策略ID。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PolicyId: number;
+    /**
+     * 策略名。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PolicyName: string;
+    /**
+     * 身份ID。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IdentityId: number;
+    /**
+     * 身份角色名。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IdentityRoleName: string;
+    /**
+     * 身份角色别名。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IdentityRoleAliasName: string;
+    /**
+     * 描述。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Description: string;
+    /**
+     * 创建时间。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CreateTime: string;
+    /**
+     * 更新时间。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    UpdateTime: string;
+}
+/**
+ * 组织产品财务信息
+ */
+export interface OrgProductFinancial {
+    /**
+     * 产品Code。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ProductName: string;
+    /**
+     * 产品名。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ProductCode: string;
+    /**
+     * 产品消耗，单位：元。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TotalCost: number;
+    /**
+     * 占比%。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Ratio?: string;
 }
 /**
  * BindOrganizationMemberAuthAccount请求参数结构体
@@ -66,103 +186,54 @@ export interface DeleteOrganizationMembersResponse {
     RequestId?: string;
 }
 /**
- * 企业组织成员
+ * DescribeOrganizationFinancialByMember请求参数结构体
  */
-export interface OrgMember {
+export interface DescribeOrganizationFinancialByMemberRequest {
     /**
-     * 成员Uin
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 查询开始月份。格式：yyyy-mm，例如：2021-01。
      */
-    MemberUin: number;
+    Month: string;
     /**
-     * 成员名
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 限制数目。取值范围：1~50，默认值：10
      */
-    Name: string;
+    Limit?: number;
     /**
-     * 成员类型，邀请：Invite， 创建：Create
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 偏移量。取值是limit的整数倍，默认值 : 0
      */
-    MemberType: string;
+    Offset?: number;
     /**
-     * 关系策略类型
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 查询结束月份。格式：yyyy-mm，例如：2021-01,默认值为查询开始月份。
      */
-    OrgPolicyType: string;
+    EndMonth?: string;
     /**
-     * 关系策略名
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 查询成员列表。 最大100个
      */
-    OrgPolicyName: string;
+    MemberUins?: Array<number>;
     /**
-     * 关系策略权限
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 查询产品列表。 最大100个
      */
-    OrgPermission: Array<OrgPermission>;
-    /**
-     * 所属节点ID
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    NodeId: number;
-    /**
-     * 所属节点名
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    NodeName: string;
-    /**
-     * 备注
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Remark: string;
-    /**
-     * 创建时间
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    CreateTime: string;
-    /**
-     * 更新时间
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    UpdateTime: string;
-    /**
-     * 是否允许成员退出。允许：Allow，不允许：Denied。
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    IsAllowQuit: string;
-    /**
-     * 代付者Uin
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    PayUin: string;
-    /**
-     * 代付者名称
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    PayName: string;
-    /**
-     * 管理身份
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    OrgIdentity: Array<MemberIdentity>;
-    /**
-     * 安全信息绑定状态  未绑定：Unbound，待激活：Valid，绑定成功：Success，绑定失败：Failed
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    BindStatus: string;
-    /**
-     * 成员权限状态 已确认：Confirmed ，待确认：UnConfirmed
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    PermissionStatus: string;
+    ProductCodes?: Array<string>;
 }
 /**
- * MoveOrganizationNodeMembers返回参数结构体
+ * DescribeOrganizationFinancialByMonth请求参数结构体
  */
-export interface MoveOrganizationNodeMembersResponse {
+export interface DescribeOrganizationFinancialByMonthRequest {
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     * 查询月数。取值范围：1~6，默认值：6
      */
-    RequestId?: string;
+    Limit?: number;
+    /**
+     * 查询结束月份。格式：yyyy-mm，例如：2021-01
+     */
+    EndMonth?: string;
+    /**
+     * 查询成员列表。 最大100个
+     */
+    MemberUins?: Array<number>;
+    /**
+     * 查询产品列表。 最大100个
+     */
+    ProductCodes?: Array<string>;
 }
 /**
  * DescribeOrganizationMemberAuthIdentities请求参数结构体
@@ -232,6 +303,41 @@ export interface DescribeOrganizationRequest {
      * 可信服务产品简称。查询是否该可信服务管理员时必须指定
      */
     Product?: string;
+}
+/**
+ * 组织身份
+ */
+export interface OrgIdentity {
+    /**
+     * 身份ID。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IdentityId: number;
+    /**
+     * 身份名称。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IdentityAliasName: string;
+    /**
+     * 描述。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Description: string;
+    /**
+     * 身份策略。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IdentityPolicy: Array<IdentityPolicy>;
+    /**
+     * 身份类型。 1-预设、 2-自定义
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IdentityType: number;
+    /**
+     * 更新时间。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    UpdateTime: string;
 }
 /**
  * DescribeOrganizationNodes请求参数结构体
@@ -419,6 +525,19 @@ export interface DeleteOrganizationNodesRequest {
     NodeId: Array<number>;
 }
 /**
+ * 组织身份策略
+ */
+export interface IdentityPolicy {
+    /**
+     * 策略ID
+     */
+    PolicyId: number;
+    /**
+     * 策略名称
+     */
+    PolicyName: string;
+}
+/**
  * AddOrganizationNode返回参数结构体
  */
 export interface AddOrganizationNodeResponse {
@@ -432,17 +551,67 @@ export interface AddOrganizationNodeResponse {
     RequestId?: string;
 }
 /**
- * 组织身份策略
+ * DescribeOrganizationFinancialByMonth返回参数结构体
  */
-export interface IdentityPolicy {
+export interface DescribeOrganizationFinancialByMonthResponse {
     /**
-     * 策略ID
+     * 产品消耗详情。
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    PolicyId: number;
+    Items?: Array<OrgFinancialByMonth>;
     /**
-     * 策略名称
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
-    PolicyName: string;
+    RequestId?: string;
+}
+/**
+ * 按月获取组织财务信息
+ */
+export interface OrgFinancialByMonth {
+    /**
+     * 记录ID。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Id: number;
+    /**
+     * 月份，格式：yyyy-mm，示例：2021-01。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Month: string;
+    /**
+     * 消耗金额，单元：元。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TotalCost: number;
+    /**
+     * 比上月增长率%。正数增长，负数下降，空值无法统计。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    GrowthRate?: string;
+}
+/**
+ * DescribeOrganizationFinancialByProduct返回参数结构体
+ */
+export interface DescribeOrganizationFinancialByProductResponse {
+    /**
+     * 当月总消耗。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TotalCost?: number;
+    /**
+     * 产品消耗详情。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Items?: Array<OrgProductFinancial>;
+    /**
+     * 总数目。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Total?: number;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * AddOrganizationMemberEmail请求参数结构体
@@ -464,6 +633,35 @@ export interface AddOrganizationMemberEmailRequest {
      * 手机号
      */
     Phone: string;
+}
+/**
+ * DescribeOrganizationFinancialByProduct请求参数结构体
+ */
+export interface DescribeOrganizationFinancialByProductRequest {
+    /**
+     * 查询开始月份。格式：yyyy-mm，例如：2021-01
+     */
+    Month: string;
+    /**
+     * 限制数目。取值范围：1~50，默认值：10
+     */
+    Limit?: number;
+    /**
+     * 偏移量。取值是limit的整数倍，默认值 : 0
+     */
+    Offset?: number;
+    /**
+     * 查询结束月份。格式：yyyy-mm，例如：2021-01,默认值为查询开始月份
+     */
+    EndMonth?: string;
+    /**
+     * 查询成员列表。 最大100个
+     */
+    MemberUins?: Array<number>;
+    /**
+     * 查询产品列表。 最大100个
+     */
+    ProductCodes?: Array<string>;
 }
 /**
  * ListOrganizationIdentity返回参数结构体
@@ -654,6 +852,15 @@ export interface DescribeOrganizationMemberPoliciesRequest {
     SearchKey?: string;
 }
 /**
+ * DescribeOrganizationMemberEmailBind请求参数结构体
+ */
+export interface DescribeOrganizationMemberEmailBindRequest {
+    /**
+     * 成员Uin
+     */
+    MemberUin: number;
+}
+/**
  * AddOrganizationNode请求参数结构体
  */
 export interface AddOrganizationNodeRequest {
@@ -690,49 +897,29 @@ export interface DescribeOrganizationMemberAuthIdentitiesResponse {
     RequestId?: string;
 }
 /**
- * 组织成员被授权的策略
+ * 组织成员财务信息。
  */
-export interface OrgMemberPolicy {
+export interface OrgMemberFinancial {
     /**
-     * 策略ID。
+     * 成员Uin。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    PolicyId: number;
+    MemberUin: number;
     /**
-     * 策略名。
+     * 成员名称。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    PolicyName: string;
+    MemberName: string;
     /**
-     * 身份ID。
+     * 消耗金额，单位：元。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    IdentityId: number;
+    TotalCost: number;
     /**
-     * 身份角色名。
+     * 占比%。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    IdentityRoleName: string;
-    /**
-     * 身份角色别名。
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    IdentityRoleAliasName: string;
-    /**
-     * 描述。
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Description: string;
-    /**
-     * 创建时间。
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    CreateTime: string;
-    /**
-     * 更新时间。
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    UpdateTime: string;
+    Ratio?: string;
 }
 /**
  * DescribeOrganizationAuthNode请求参数结构体
@@ -816,13 +1003,28 @@ export interface DeleteOrganizationNodesResponse {
     RequestId?: string;
 }
 /**
- * DescribeOrganizationMemberEmailBind请求参数结构体
+ * DescribeOrganizationFinancialByMember返回参数结构体
  */
-export interface DescribeOrganizationMemberEmailBindRequest {
+export interface DescribeOrganizationFinancialByMemberResponse {
     /**
-     * 成员Uin
+     * 当月总消耗。
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    MemberUin: number;
+    TotalCost?: number;
+    /**
+     * 成员消耗详情。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Items?: Array<OrgMemberFinancial>;
+    /**
+     * 总数目。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Total?: number;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * DescribeOrganizationMemberAuthAccounts返回参数结构体
@@ -844,54 +1046,94 @@ export interface DescribeOrganizationMemberAuthAccountsResponse {
     RequestId?: string;
 }
 /**
- * 成员和子账号的授权关系
+ * 企业组织成员
  */
-export interface OrgMemberAuthAccount {
+export interface OrgMember {
     /**
-     * 组织子账号Uin。
+     * 成员Uin
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    OrgSubAccountUin: number;
+    MemberUin: number;
     /**
-     * 策略ID。
+     * 成员名
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    PolicyId: number;
+    Name: string;
     /**
-     * 策略名。
+     * 成员类型，邀请：Invite， 创建：Create
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    PolicyName: string;
+    MemberType: string;
     /**
-     * 身份ID。
+     * 关系策略类型
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    IdentityId: number;
+    OrgPolicyType: string;
     /**
-     * 身份角色名。
+     * 关系策略名
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    IdentityRoleName: string;
+    OrgPolicyName: string;
     /**
-     * 身份角色别名。
+     * 关系策略权限
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    IdentityRoleAliasName: string;
+    OrgPermission: Array<OrgPermission>;
     /**
-     * 创建时间。
+     * 所属节点ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    NodeId: number;
+    /**
+     * 所属节点名
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    NodeName: string;
+    /**
+     * 备注
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Remark: string;
+    /**
+     * 创建时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
     CreateTime: string;
     /**
-     * 更新时间。
+     * 更新时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
     UpdateTime: string;
     /**
-     * 子账号名称
+     * 是否允许成员退出。允许：Allow，不允许：Denied。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    OrgSubAccountName: string;
+    IsAllowQuit: string;
+    /**
+     * 代付者Uin
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PayUin: string;
+    /**
+     * 代付者名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PayName: string;
+    /**
+     * 管理身份
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    OrgIdentity: Array<MemberIdentity>;
+    /**
+     * 安全信息绑定状态  未绑定：Unbound，待激活：Valid，绑定成功：Success，绑定失败：Failed
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    BindStatus: string;
+    /**
+     * 成员权限状态 已确认：Confirmed ，待确认：UnConfirmed
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PermissionStatus: string;
 }
 /**
  * 组织成员可授权的身份
@@ -994,39 +1236,13 @@ export interface CreateOrganizationMemberRequest {
     AuthRelationId?: number;
 }
 /**
- * 组织身份
+ * MoveOrganizationNodeMembers返回参数结构体
  */
-export interface OrgIdentity {
+export interface MoveOrganizationNodeMembersResponse {
     /**
-     * 身份ID。
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
-    IdentityId: number;
-    /**
-     * 身份名称。
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    IdentityAliasName: string;
-    /**
-     * 描述。
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Description: string;
-    /**
-     * 身份策略。
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    IdentityPolicy: Array<IdentityPolicy>;
-    /**
-     * 身份类型。 1-预设、 2-自定义
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    IdentityType: number;
-    /**
-     * 更新时间。
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    UpdateTime: string;
+    RequestId?: string;
 }
 /**
  * DescribeOrganizationMembers请求参数结构体

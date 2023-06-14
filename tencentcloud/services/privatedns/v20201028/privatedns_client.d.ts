@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeQuotaUsageResponse, ModifyPrivateZoneVpcRequest, DescribeAuditLogResponse, DescribePrivateDNSAccountListResponse, DescribePrivateZoneRecordListRequest, DescribePrivateZoneRecordListResponse, DescribePrivateZoneListResponse, DescribePrivateZoneRequest, ModifyRecordsStatusResponse, DescribeAccountVpcListResponse, DescribePrivateZoneServiceRequest, DescribeRequestDataRequest, ModifyPrivateZoneRecordResponse, DescribeAccountVpcListRequest, DescribeRequestDataResponse, ModifyPrivateZoneRequest, CreatePrivateZoneRequest, ModifyPrivateZoneResponse, DescribePrivateZoneListRequest, SubscribePrivateZoneServiceRequest, DescribePrivateZoneResponse, CreatePrivateZoneResponse, DescribeDashboardResponse, CreatePrivateZoneRecordResponse, DescribePrivateZoneServiceResponse, CreatePrivateDNSAccountResponse, DescribeAuditLogRequest, DescribeDashboardRequest, DeletePrivateZoneRequest, SubscribePrivateZoneServiceResponse, DeletePrivateDNSAccountRequest, DeletePrivateZoneRecordRequest, DeletePrivateZoneResponse, ModifyRecordsStatusRequest, CreatePrivateDNSAccountRequest, DescribePrivateDNSAccountListRequest, CreatePrivateZoneRecordRequest, DescribeQuotaUsageRequest, ModifyPrivateZoneRecordRequest, DeletePrivateDNSAccountResponse, DeletePrivateZoneRecordResponse, ModifyPrivateZoneVpcResponse } from "./privatedns_models";
+import { DescribeQuotaUsageResponse, ModifyPrivateZoneVpcRequest, DescribeAuditLogResponse, DescribePrivateDNSAccountListResponse, DescribePrivateZoneRecordListRequest, DescribePrivateZoneRecordListResponse, DescribePrivateZoneListResponse, DescribePrivateZoneRequest, ModifyRecordsStatusResponse, DescribeAccountVpcListResponse, DescribePrivateZoneServiceRequest, DeleteEndPointResponse, DeleteEndPointRequest, DescribeRequestDataRequest, ModifyPrivateZoneRecordResponse, DescribeAccountVpcListRequest, DescribeRequestDataResponse, ModifyPrivateZoneRequest, CreatePrivateZoneRequest, ModifyPrivateZoneResponse, DescribePrivateZoneListRequest, SubscribePrivateZoneServiceRequest, DescribePrivateZoneResponse, CreatePrivateZoneResponse, DescribeDashboardResponse, CreatePrivateZoneRecordResponse, DescribePrivateZoneServiceResponse, CreatePrivateDNSAccountResponse, DescribeAuditLogRequest, DescribeDashboardRequest, DeletePrivateZoneRequest, SubscribePrivateZoneServiceResponse, DeletePrivateDNSAccountRequest, DeletePrivateZoneRecordRequest, DeletePrivateZoneResponse, ModifyRecordsStatusRequest, CreatePrivateDNSAccountRequest, DescribePrivateDNSAccountListRequest, CreatePrivateZoneRecordRequest, DescribeQuotaUsageRequest, ModifyPrivateZoneRecordRequest, DeletePrivateDNSAccountResponse, DeletePrivateZoneRecordResponse, ModifyPrivateZoneVpcResponse } from "./privatedns_models";
 /**
  * privatedns client
  * @class
@@ -16,25 +16,9 @@ export declare class Client extends AbstractClient {
      */
     DescribePrivateZone(req: DescribePrivateZoneRequest, cb?: (error: string, rep: DescribePrivateZoneResponse) => void): Promise<DescribePrivateZoneResponse>;
     /**
-     * 修改私有域解析记录
+     * 删除终端节点
      */
-    ModifyPrivateZoneRecord(req: ModifyPrivateZoneRecordRequest, cb?: (error: string, rep: ModifyPrivateZoneRecordResponse) => void): Promise<ModifyPrivateZoneRecordResponse>;
-    /**
-     * 获取私有域解析账号的VPC列表
-     */
-    DescribeAccountVpcList(req: DescribeAccountVpcListRequest, cb?: (error: string, rep: DescribeAccountVpcListResponse) => void): Promise<DescribeAccountVpcListResponse>;
-    /**
-     * 获取私有域记录列表
-     */
-    DescribePrivateZoneRecordList(req: DescribePrivateZoneRecordListRequest, cb?: (error: string, rep: DescribePrivateZoneRecordListResponse) => void): Promise<DescribePrivateZoneRecordListResponse>;
-    /**
-     * 查询私有域解析开通状态
-     */
-    DescribePrivateZoneService(req?: DescribePrivateZoneServiceRequest, cb?: (error: string, rep: DescribePrivateZoneServiceResponse) => void): Promise<DescribePrivateZoneServiceResponse>;
-    /**
-     * 删除私有域解析账号
-     */
-    DeletePrivateDNSAccount(req: DeletePrivateDNSAccountRequest, cb?: (error: string, rep: DeletePrivateDNSAccountResponse) => void): Promise<DeletePrivateDNSAccountResponse>;
+    DeleteEndPoint(req: DeleteEndPointRequest, cb?: (error: string, rep: DeleteEndPointResponse) => void): Promise<DeleteEndPointResponse>;
     /**
      * 查询额度使用情况
      */
@@ -48,10 +32,6 @@ export declare class Client extends AbstractClient {
      */
     CreatePrivateZoneRecord(req: CreatePrivateZoneRecordRequest, cb?: (error: string, rep: CreatePrivateZoneRecordResponse) => void): Promise<CreatePrivateZoneRecordResponse>;
     /**
-     * 修改解析记录状态
-     */
-    ModifyRecordsStatus(req: ModifyRecordsStatusRequest, cb?: (error: string, rep: ModifyRecordsStatusResponse) => void): Promise<ModifyRecordsStatusResponse>;
-    /**
      * 创建私有域
      */
     CreatePrivateZone(req: CreatePrivateZoneRequest, cb?: (error: string, rep: CreatePrivateZoneResponse) => void): Promise<CreatePrivateZoneResponse>;
@@ -60,9 +40,21 @@ export declare class Client extends AbstractClient {
      */
     DescribePrivateZoneList(req: DescribePrivateZoneListRequest, cb?: (error: string, rep: DescribePrivateZoneListResponse) => void): Promise<DescribePrivateZoneListResponse>;
     /**
+     * 获取私有域记录列表
+     */
+    DescribePrivateZoneRecordList(req: DescribePrivateZoneRecordListRequest, cb?: (error: string, rep: DescribePrivateZoneRecordListResponse) => void): Promise<DescribePrivateZoneRecordListResponse>;
+    /**
      * 修改私有域信息
      */
     ModifyPrivateZone(req: ModifyPrivateZoneRequest, cb?: (error: string, rep: ModifyPrivateZoneResponse) => void): Promise<ModifyPrivateZoneResponse>;
+    /**
+     * 修改私有域解析记录
+     */
+    ModifyPrivateZoneRecord(req: ModifyPrivateZoneRecordRequest, cb?: (error: string, rep: ModifyPrivateZoneRecordResponse) => void): Promise<ModifyPrivateZoneRecordResponse>;
+    /**
+     * 删除私有域解析账号
+     */
+    DeletePrivateDNSAccount(req: DeletePrivateDNSAccountRequest, cb?: (error: string, rep: DeletePrivateDNSAccountResponse) => void): Promise<DeletePrivateDNSAccountResponse>;
     /**
      * 开通私有域解析
      */
@@ -76,17 +68,29 @@ export declare class Client extends AbstractClient {
      */
     ModifyPrivateZoneVpc(req: ModifyPrivateZoneVpcRequest, cb?: (error: string, rep: ModifyPrivateZoneVpcResponse) => void): Promise<ModifyPrivateZoneVpcResponse>;
     /**
-     * 获取私有域解析请求量
+     * 删除私有域并停止解析
      */
-    DescribeRequestData(req: DescribeRequestDataRequest, cb?: (error: string, rep: DescribeRequestDataResponse) => void): Promise<DescribeRequestDataResponse>;
+    DeletePrivateZone(req: DeletePrivateZoneRequest, cb?: (error: string, rep: DeletePrivateZoneResponse) => void): Promise<DeletePrivateZoneResponse>;
+    /**
+     * 获取私有域解析账号的VPC列表
+     */
+    DescribeAccountVpcList(req: DescribeAccountVpcListRequest, cb?: (error: string, rep: DescribeAccountVpcListResponse) => void): Promise<DescribeAccountVpcListResponse>;
+    /**
+     * 修改解析记录状态
+     */
+    ModifyRecordsStatus(req: ModifyRecordsStatusRequest, cb?: (error: string, rep: ModifyRecordsStatusResponse) => void): Promise<ModifyRecordsStatusResponse>;
+    /**
+     * 查询私有域解析开通状态
+     */
+    DescribePrivateZoneService(req?: DescribePrivateZoneServiceRequest, cb?: (error: string, rep: DescribePrivateZoneServiceResponse) => void): Promise<DescribePrivateZoneServiceResponse>;
     /**
      * 删除私有域解析记录
      */
     DeletePrivateZoneRecord(req: DeletePrivateZoneRecordRequest, cb?: (error: string, rep: DeletePrivateZoneRecordResponse) => void): Promise<DeletePrivateZoneRecordResponse>;
     /**
-     * 删除私有域并停止解析
+     * 获取私有域解析请求量
      */
-    DeletePrivateZone(req: DeletePrivateZoneRequest, cb?: (error: string, rep: DeletePrivateZoneResponse) => void): Promise<DeletePrivateZoneResponse>;
+    DescribeRequestData(req: DescribeRequestDataRequest, cb?: (error: string, rep: DescribeRequestDataResponse) => void): Promise<DescribeRequestDataResponse>;
     /**
      * 获取私有域解析账号列表
      */

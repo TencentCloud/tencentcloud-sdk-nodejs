@@ -364,6 +364,10 @@ serverCollationName：排序规则名称，可选参数，在初始化后不可�
 "bbf_unicode_general_ci_as", "bbf_unicode_cp1_ci_as", "bbf_unicode_CP1250_ci_as", "bbf_unicode_CP1251_ci_as", "bbf_unicode_cp1253_ci_as", "bbf_unicode_cp1254_ci_as", "bbf_unicode_cp1255_ci_as", "bbf_unicode_cp1256_ci_as", "bbf_unicode_cp1257_ci_as", "bbf_unicode_cp1258_ci_as", "bbf_unicode_cp874_ci_as", "sql_latin1_general_cp1250_ci_as", "sql_latin1_general_cp1251_ci_as", "sql_latin1_general_cp1_ci_as", "sql_latin1_general_cp1253_ci_as", "sql_latin1_general_cp1254_ci_as", "sql_latin1_general_cp1255_ci_as","sql_latin1_general_cp1256_ci_as", "sql_latin1_general_cp1257_ci_as", "sql_latin1_general_cp1258_ci_as", "chinese_prc_ci_as", "cyrillic_general_ci_as", "finnish_swedish_ci_as", "french_ci_as", "japanese_ci_as", "korean_wansung_ci_as", "latin1_general_ci_as", "modern_spanish_ci_as", "polish_ci_as", "thai_ci_as", "traditional_spanish_ci_as", "turkish_ci_as", "ukrainian_ci_as", "vietnamese_ci_as"。
    */
   DBEngineConfig?: string
+  /**
+   * 主从同步方式，取值： 1)Semi-sync：半同步 2)Async：异步 默认为Async
+   */
+  SyncMode?: string
 }
 
 /**
@@ -2033,7 +2037,7 @@ export interface ModifyDBInstancesProjectResponse {
   /**
    * 转移项目成功的实例个数
    */
-  Count: number
+  Count?: number
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2844,7 +2848,7 @@ export interface DescribeDBInstanceSecurityGroupsResponse {
   /**
    * 安全组信息数组
    */
-  SecurityGroupSet: Array<SecurityGroup>
+  SecurityGroupSet?: Array<SecurityGroup>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3062,7 +3066,7 @@ export interface OpenDBExtranetAccessResponse {
   /**
    * 异步任务流程ID
    */
-  FlowId: number
+  FlowId?: number
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3783,7 +3787,7 @@ export interface CloseDBExtranetAccessResponse {
   /**
    * 异步任务流程ID
    */
-  FlowId: number
+  FlowId?: number
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3917,11 +3921,11 @@ export interface DescribeCloneDBInstanceSpecResponse {
   /**
    * 可购买的最小规格码。
    */
-  MinSpecCode: string
+  MinSpecCode?: string
   /**
    * 可购买的最小磁盘容量，单位GB。
    */
-  MinStorage: number
+  MinStorage?: number
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3967,7 +3971,7 @@ export interface DescribeDatabasesResponse {
   /**
    * 数据库信息
    */
-  Items: Array<string>
+  Items?: Array<string>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4707,11 +4711,11 @@ export interface DescribeAccountsResponse {
   /**
    * 本次调用接口共返回了多少条数据。
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 帐号列表详细信息。
    */
-  Details: Array<AccountInfo>
+  Details?: Array<AccountInfo>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5073,7 +5077,7 @@ export interface DescribeEncryptionKeysResponse {
    * 实例密钥信息列表。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  EncryptionKeys: Array<EncryptionKey>
+  EncryptionKeys?: Array<EncryptionKey>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

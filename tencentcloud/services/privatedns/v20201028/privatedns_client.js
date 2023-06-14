@@ -40,34 +40,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribePrivateZone", req, cb);
     }
     /**
-     * 修改私有域解析记录
+     * 删除终端节点
      */
-    async ModifyPrivateZoneRecord(req, cb) {
-        return this.request("ModifyPrivateZoneRecord", req, cb);
-    }
-    /**
-     * 获取私有域解析账号的VPC列表
-     */
-    async DescribeAccountVpcList(req, cb) {
-        return this.request("DescribeAccountVpcList", req, cb);
-    }
-    /**
-     * 获取私有域记录列表
-     */
-    async DescribePrivateZoneRecordList(req, cb) {
-        return this.request("DescribePrivateZoneRecordList", req, cb);
-    }
-    /**
-     * 查询私有域解析开通状态
-     */
-    async DescribePrivateZoneService(req, cb) {
-        return this.request("DescribePrivateZoneService", req, cb);
-    }
-    /**
-     * 删除私有域解析账号
-     */
-    async DeletePrivateDNSAccount(req, cb) {
-        return this.request("DeletePrivateDNSAccount", req, cb);
+    async DeleteEndPoint(req, cb) {
+        return this.request("DeleteEndPoint", req, cb);
     }
     /**
      * 查询额度使用情况
@@ -88,12 +64,6 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreatePrivateZoneRecord", req, cb);
     }
     /**
-     * 修改解析记录状态
-     */
-    async ModifyRecordsStatus(req, cb) {
-        return this.request("ModifyRecordsStatus", req, cb);
-    }
-    /**
      * 创建私有域
      */
     async CreatePrivateZone(req, cb) {
@@ -106,10 +76,28 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribePrivateZoneList", req, cb);
     }
     /**
+     * 获取私有域记录列表
+     */
+    async DescribePrivateZoneRecordList(req, cb) {
+        return this.request("DescribePrivateZoneRecordList", req, cb);
+    }
+    /**
      * 修改私有域信息
      */
     async ModifyPrivateZone(req, cb) {
         return this.request("ModifyPrivateZone", req, cb);
+    }
+    /**
+     * 修改私有域解析记录
+     */
+    async ModifyPrivateZoneRecord(req, cb) {
+        return this.request("ModifyPrivateZoneRecord", req, cb);
+    }
+    /**
+     * 删除私有域解析账号
+     */
+    async DeletePrivateDNSAccount(req, cb) {
+        return this.request("DeletePrivateDNSAccount", req, cb);
     }
     /**
      * 开通私有域解析
@@ -130,10 +118,28 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyPrivateZoneVpc", req, cb);
     }
     /**
-     * 获取私有域解析请求量
+     * 删除私有域并停止解析
      */
-    async DescribeRequestData(req, cb) {
-        return this.request("DescribeRequestData", req, cb);
+    async DeletePrivateZone(req, cb) {
+        return this.request("DeletePrivateZone", req, cb);
+    }
+    /**
+     * 获取私有域解析账号的VPC列表
+     */
+    async DescribeAccountVpcList(req, cb) {
+        return this.request("DescribeAccountVpcList", req, cb);
+    }
+    /**
+     * 修改解析记录状态
+     */
+    async ModifyRecordsStatus(req, cb) {
+        return this.request("ModifyRecordsStatus", req, cb);
+    }
+    /**
+     * 查询私有域解析开通状态
+     */
+    async DescribePrivateZoneService(req, cb) {
+        return this.request("DescribePrivateZoneService", req, cb);
     }
     /**
      * 删除私有域解析记录
@@ -142,10 +148,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeletePrivateZoneRecord", req, cb);
     }
     /**
-     * 删除私有域并停止解析
+     * 获取私有域解析请求量
      */
-    async DeletePrivateZone(req, cb) {
-        return this.request("DeletePrivateZone", req, cb);
+    async DescribeRequestData(req, cb) {
+        return this.request("DescribeRequestData", req, cb);
     }
     /**
      * 获取私有域解析账号列表

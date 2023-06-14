@@ -28,16 +28,6 @@ it("organization.v20210331.DescribeOrganizationMembers", async function () {
     }
 })
 
-it("organization.v20210331.MoveOrganizationNodeMembers", async function () {
-    try {
-       const data = await client.MoveOrganizationNodeMembers({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("organization.v20210331.UpdateOrganizationNode", async function () {
     try {
        const data = await client.UpdateOrganizationNode({})
@@ -48,29 +38,9 @@ it("organization.v20210331.UpdateOrganizationNode", async function () {
     }
 })
 
-it("organization.v20210331.CreateOrganizationMember", async function () {
+it("organization.v20210331.ListOrganizationIdentity", async function () {
     try {
-       const data = await client.CreateOrganizationMember({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("organization.v20210331.BindOrganizationMemberAuthAccount", async function () {
-    try {
-       const data = await client.BindOrganizationMemberAuthAccount({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("organization.v20210331.DescribeOrganizationMemberAuthAccounts", async function () {
-    try {
-       const data = await client.DescribeOrganizationMemberAuthAccounts({})
+       const data = await client.ListOrganizationIdentity({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -88,56 +58,6 @@ it("organization.v20210331.DescribeOrganizationAuthNode", async function () {
     }
 })
 
-it("organization.v20210331.CancelOrganizationMemberAuthAccount", async function () {
-    try {
-       const data = await client.CancelOrganizationMemberAuthAccount({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("organization.v20210331.DeleteOrganizationNodes", async function () {
-    try {
-       const data = await client.DeleteOrganizationNodes({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("organization.v20210331.DescribeOrganization", async function () {
-    try {
-       const data = await client.DescribeOrganization({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("organization.v20210331.DescribeOrganizationNodes", async function () {
-    try {
-       const data = await client.DescribeOrganizationNodes({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("organization.v20210331.UpdateOrganizationMemberEmailBind", async function () {
-    try {
-       const data = await client.UpdateOrganizationMemberEmailBind({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("organization.v20210331.AddOrganizationNode", async function () {
     try {
        const data = await client.AddOrganizationNode({})
@@ -148,19 +68,9 @@ it("organization.v20210331.AddOrganizationNode", async function () {
     }
 })
 
-it("organization.v20210331.DescribeOrganizationMemberPolicies", async function () {
+it("organization.v20210331.UpdateOrganizationMemberEmailBind", async function () {
     try {
-       const data = await client.DescribeOrganizationMemberPolicies({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("organization.v20210331.CreateOrganizationMemberPolicy", async function () {
-    try {
-       const data = await client.CreateOrganizationMemberPolicy({})
+       const data = await client.UpdateOrganizationMemberEmailBind({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -188,9 +98,69 @@ it("organization.v20210331.DeleteOrganizationMembers", async function () {
     }
 })
 
-it("organization.v20210331.ListOrganizationIdentity", async function () {
+it("organization.v20210331.DescribeOrganizationFinancialByMonth", async function () {
     try {
-       const data = await client.ListOrganizationIdentity({})
+       const data = await client.DescribeOrganizationFinancialByMonth({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("organization.v20210331.DeleteOrganizationNodes", async function () {
+    try {
+       const data = await client.DeleteOrganizationNodes({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("organization.v20210331.DescribeOrganizationMemberPolicies", async function () {
+    try {
+       const data = await client.DescribeOrganizationMemberPolicies({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("organization.v20210331.CancelOrganizationMemberAuthAccount", async function () {
+    try {
+       const data = await client.CancelOrganizationMemberAuthAccount({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("organization.v20210331.DescribeOrganizationFinancialByMember", async function () {
+    try {
+       const data = await client.DescribeOrganizationFinancialByMember({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("organization.v20210331.DescribeOrganization", async function () {
+    try {
+       const data = await client.DescribeOrganization({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("organization.v20210331.MoveOrganizationNodeMembers", async function () {
+    try {
+       const data = await client.MoveOrganizationNodeMembers({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -211,6 +181,66 @@ it("organization.v20210331.AddOrganizationMemberEmail", async function () {
 it("organization.v20210331.DescribeOrganizationMemberEmailBind", async function () {
     try {
        const data = await client.DescribeOrganizationMemberEmailBind({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("organization.v20210331.CreateOrganizationMember", async function () {
+    try {
+       const data = await client.CreateOrganizationMember({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("organization.v20210331.BindOrganizationMemberAuthAccount", async function () {
+    try {
+       const data = await client.BindOrganizationMemberAuthAccount({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("organization.v20210331.DescribeOrganizationFinancialByProduct", async function () {
+    try {
+       const data = await client.DescribeOrganizationFinancialByProduct({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("organization.v20210331.DescribeOrganizationMemberAuthAccounts", async function () {
+    try {
+       const data = await client.DescribeOrganizationMemberAuthAccounts({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("organization.v20210331.DescribeOrganizationNodes", async function () {
+    try {
+       const data = await client.DescribeOrganizationNodes({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("organization.v20210331.CreateOrganizationMemberPolicy", async function () {
+    try {
+       const data = await client.CreateOrganizationMemberPolicy({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

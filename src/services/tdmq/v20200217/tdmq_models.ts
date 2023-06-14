@@ -1157,16 +1157,6 @@ filterType = 2表示用户使用 bindingKey 过滤。
 }
 
 /**
- * ModifyAMQPVHost返回参数结构体
- */
-export interface ModifyAMQPVHostResponse {
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * DescribeAMQPCluster返回参数结构体
  */
 export interface DescribeAMQPClusterResponse {
@@ -1363,28 +1353,6 @@ export interface DeleteCmqTopicResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * ModifyAMQPVHost请求参数结构体
- */
-export interface ModifyAMQPVHostRequest {
-  /**
-   * 集群ID
-   */
-  ClusterId: string
-  /**
-   * vhost名称，3-64个字符，只能包含字母、数字、“-”及“_”
-   */
-  VHostId: string
-  /**
-   * 未消费消息的保留时间，以毫秒为单位，60秒-15天
-   */
-  MsgTtl: number
-  /**
-   * 说明，最大128个字符
-   */
-  Remark?: string
 }
 
 /**

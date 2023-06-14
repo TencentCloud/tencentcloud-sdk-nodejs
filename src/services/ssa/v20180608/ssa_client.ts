@@ -190,7 +190,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 域名列表信息啊
+   * 域名列表信息
    */
   async DescribeDomainList(
     req: DescribeDomainListRequest,

@@ -59,7 +59,6 @@ import {
   RewindCmqQueueResponse,
   DeleteClusterRequest,
   CmqSubscription,
-  ModifyAMQPVHostResponse,
   DescribeAMQPClusterResponse,
   CreateAMQPClusterRequest,
   DeleteRocketMQGroupRequest,
@@ -68,7 +67,6 @@ import {
   DescribeRocketMQVipInstanceDetailRequest,
   RabbitMQClusterWhiteListInfo,
   DeleteCmqTopicResponse,
-  ModifyAMQPVHostRequest,
   CreateSubscriptionRequest,
   CreateRocketMQNamespaceRequest,
   Topic,
@@ -1089,18 +1087,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateAMQPQueueResponse) => void
   ): Promise<CreateAMQPQueueResponse> {
     return this.request("CreateAMQPQueue", req, cb)
-  }
-
-  /**
-     * 产品下线了，对应的接口也要下线。
-
-更新Vhost
-     */
-  async ModifyAMQPVHost(
-    req: ModifyAMQPVHostRequest,
-    cb?: (error: string, rep: ModifyAMQPVHostResponse) => void
-  ): Promise<ModifyAMQPVHostResponse> {
-    return this.request("ModifyAMQPVHost", req, cb)
   }
 
   /**

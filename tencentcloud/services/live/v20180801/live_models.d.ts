@@ -3658,57 +3658,17 @@ export interface DescribeStreamDayPlayInfoListRequest {
     ServiceName?: string;
 }
 /**
- * 转码详细信息。
+ * RestartLivePullStreamTask请求参数结构体
  */
-export interface TranscodeDetailInfo {
+export interface RestartLivePullStreamTaskRequest {
     /**
-     * 流名称。
+     * 任务 Id。
      */
-    StreamName: string;
+    TaskId: string;
     /**
-     * 开始时间（北京时间），格式：yyyy-mm-dd HH:MM。
+     * 操作人备注名称。
      */
-    StartTime: string;
-    /**
-     * 结束时间（北京时间），格式：yyyy-mm-dd HH:MM。
-     */
-    EndTime: string;
-    /**
-     * 转码时长，单位：分钟。
-  注意：因推流过程中可能有中断重推情况，此处时长为真实转码时长累加值，并非结束时间和开始时间的间隔。
-     */
-    Duration: number;
-    /**
-     * 编码方式，带模块，
-  示例：
-  liveprocessor_H264：直播转码-H264，
-  liveprocessor_H265： 直播转码-H265，
-  topspeed_H264：极速高清-H264，
-  topspeed_H265：极速高清-H265。
-     */
-    ModuleCodec: string;
-    /**
-     * 码率。
-     */
-    Bitrate: number;
-    /**
-     * 类型，包含：转码（Transcode），混流（MixStream），水印（WaterMark），快直播（Webrtc）。
-     */
-    Type: string;
-    /**
-     * 推流域名。
-     */
-    PushDomain: string;
-    /**
-     * 分辨率。
-     */
-    Resolution: string;
-    /**
-     * 地域：
-  Mainland：国内。
-  Overseas：海外。
-     */
-    MainlandOrOversea: string;
+    Operator: string;
 }
 /**
  * DescribeLiveSnapshotTemplate返回参数结构体
@@ -5295,6 +5255,59 @@ export interface CertInfo {
     DomainList?: Array<string>;
 }
 /**
+ * 转码详细信息。
+ */
+export interface TranscodeDetailInfo {
+    /**
+     * 流名称。
+     */
+    StreamName: string;
+    /**
+     * 开始时间（北京时间），格式：yyyy-mm-dd HH:MM。
+     */
+    StartTime: string;
+    /**
+     * 结束时间（北京时间），格式：yyyy-mm-dd HH:MM。
+     */
+    EndTime: string;
+    /**
+     * 转码时长，单位：分钟。
+  注意：因推流过程中可能有中断重推情况，此处时长为真实转码时长累加值，并非结束时间和开始时间的间隔。
+     */
+    Duration: number;
+    /**
+     * 编码方式，带模块，
+  示例：
+  liveprocessor_H264：直播转码-H264，
+  liveprocessor_H265： 直播转码-H265，
+  topspeed_H264：极速高清-H264，
+  topspeed_H265：极速高清-H265。
+     */
+    ModuleCodec: string;
+    /**
+     * 码率。
+     */
+    Bitrate: number;
+    /**
+     * 类型，包含：转码（Transcode），混流（MixStream），水印（WaterMark），快直播（Webrtc）。
+     */
+    Type: string;
+    /**
+     * 推流域名。
+     */
+    PushDomain: string;
+    /**
+     * 分辨率。
+     */
+    Resolution: string;
+    /**
+     * 地域：
+  Mainland：国内。
+  Overseas：海外。
+     */
+    MainlandOrOversea: string;
+}
+/**
  * DescribeRecordTask返回参数结构体
  */
 export interface DescribeRecordTaskResponse {
@@ -6761,6 +6774,15 @@ export interface DescribeLiveDomainPlayInfoListResponse {
      * 分域名的数据情况。
      */
     DomainInfoList: Array<DomainInfoList>;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * RestartLivePullStreamTask返回参数结构体
+ */
+export interface RestartLivePullStreamTaskResponse {
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */

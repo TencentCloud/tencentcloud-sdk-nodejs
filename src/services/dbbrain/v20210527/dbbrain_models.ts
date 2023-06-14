@@ -654,7 +654,7 @@ export interface SlowLogTopSqlItem {
    */
   RowsExaminedAvg: number
   /**
-   * SOL模板的MD5值
+   * SQL模板的MD5值
    */
   Md5: string
 }
@@ -2607,7 +2607,7 @@ export interface DescribeSlowLogUserHostStatsRequest {
    */
   Product?: string
   /**
-   * SOL模板的MD5值
+   * SQL模板的MD5值
    */
   Md5?: string
 }

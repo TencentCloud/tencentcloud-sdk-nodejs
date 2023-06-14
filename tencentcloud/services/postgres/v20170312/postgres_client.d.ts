@@ -8,7 +8,7 @@ import { CreateDBInstancesRequest, SetAutoRenewFlagRequest, DescribeDatabasesReq
 export declare class Client extends AbstractClient {
     constructor(clientConfig: ClientConfig);
     /**
-     * 本接口 (DescribeBackupDownloadURL) 用于获取备份下载链接。
+     * 本接口 (DescribeBackupDownloadURL) 用于查询指定备份集的下载地址，可包括全量备份集、增量日志备份集。
      */
     DescribeBackupDownloadURL(req: DescribeBackupDownloadURLRequest, cb?: (error: string, rep: DescribeBackupDownloadURLResponse) => void): Promise<DescribeBackupDownloadURLResponse>;
     /**
@@ -52,7 +52,7 @@ export declare class Client extends AbstractClient {
      */
     CreateDBInstanceNetworkAccess(req: CreateDBInstanceNetworkAccessRequest, cb?: (error: string, rep: CreateDBInstanceNetworkAccessResponse) => void): Promise<CreateDBInstanceNetworkAccessResponse>;
     /**
-     * 本接口（ModifyDBInstanceSpec）用于调整实例规格，包括内存、磁盘。
+     * 本接口（ModifyDBInstanceSpec）用于修改实例规格，包括内存、磁盘。
      */
     ModifyDBInstanceSpec(req: ModifyDBInstanceSpecRequest, cb?: (error: string, rep: ModifyDBInstanceSpecResponse) => void): Promise<ModifyDBInstanceSpecResponse>;
     /**
@@ -64,7 +64,7 @@ export declare class Client extends AbstractClient {
      */
     CreateServerlessDBInstance(req: CreateServerlessDBInstanceRequest, cb?: (error: string, rep: CreateServerlessDBInstanceResponse) => void): Promise<CreateServerlessDBInstanceResponse>;
     /**
-     * 接口（DescribeDatabases）用来拉取数据库列表
+     * 接口（DescribeDatabases）用来查询实例的数据库列表。
      */
     DescribeDatabases(req: DescribeDatabasesRequest, cb?: (error: string, rep: DescribeDatabasesResponse) => void): Promise<DescribeDatabasesResponse>;
     /**
@@ -88,7 +88,7 @@ export declare class Client extends AbstractClient {
      */
     ModifyDBInstanceChargeType(req: ModifyDBInstanceChargeTypeRequest, cb?: (error: string, rep: ModifyDBInstanceChargeTypeResponse) => void): Promise<ModifyDBInstanceChargeTypeResponse>;
     /**
-     * 本接口 (DestroyDBInstance) 用于彻底销毁指定DBInstanceId对应的实例，销毁后实例数据将彻底删除，无法找回，只能销毁隔离中的实例。
+     * 本接口 (DestroyDBInstance) 用于彻底销毁指定DBInstanceId对应的实例，销毁后实例数据将彻底删除，无法找回，调用前请仔细确认要操作的实例。只能销毁隔离中的实例。
      */
     DestroyDBInstance(req: DestroyDBInstanceRequest, cb?: (error: string, rep: DestroyDBInstanceResponse) => void): Promise<DestroyDBInstanceResponse>;
     /**
@@ -100,11 +100,11 @@ export declare class Client extends AbstractClient {
      */
     DescribeSlowQueryAnalysis(req: DescribeSlowQueryAnalysisRequest, cb?: (error: string, rep: DescribeSlowQueryAnalysisResponse) => void): Promise<DescribeSlowQueryAnalysisResponse>;
     /**
-     * 本接口 (InquiryPriceCreateDBInstances) 用于查询购买一个或多个实例的价格信息。
+     * 本接口 (InquiryPriceCreateDBInstances) 用于查询购买实例的价格信息。
      */
     InquiryPriceCreateDBInstances(req: InquiryPriceCreateDBInstancesRequest, cb?: (error: string, rep: InquiryPriceCreateDBInstancesResponse) => void): Promise<InquiryPriceCreateDBInstancesResponse>;
     /**
-     * 本接口（DescribeDBInstanceSecurityGroups）用于查询实例安全组信息。
+     * 本接口（DescribeDBInstanceSecurityGroups）用于查询实例安全组。
      */
     DescribeDBInstanceSecurityGroups(req: DescribeDBInstanceSecurityGroupsRequest, cb?: (error: string, rep: DescribeDBInstanceSecurityGroupsResponse) => void): Promise<DescribeDBInstanceSecurityGroupsResponse>;
     /**
@@ -116,7 +116,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeParameterTemplateAttributes(req: DescribeParameterTemplateAttributesRequest, cb?: (error: string, rep: DescribeParameterTemplateAttributesResponse) => void): Promise<DescribeParameterTemplateAttributesResponse>;
     /**
-     * 关闭serverlessDB实例外网
+     * 本接口（CloseServerlessDBExtranetAccess）用于关闭serverlessDB实例公网地址
      */
     CloseServerlessDBExtranetAccess(req: CloseServerlessDBExtranetAccessRequest, cb?: (error: string, rep: CloseServerlessDBExtranetAccessResponse) => void): Promise<CloseServerlessDBExtranetAccessResponse>;
     /**
@@ -128,7 +128,7 @@ export declare class Client extends AbstractClient {
      */
     RenewInstance(req: RenewInstanceRequest, cb?: (error: string, rep: RenewInstanceResponse) => void): Promise<RenewInstanceResponse>;
     /**
-     * 批量修改参数
+     * 本接口 (ModifyDBInstanceParameters) 用于修改实例参数。
      */
     ModifyDBInstanceParameters(req: ModifyDBInstanceParametersRequest, cb?: (error: string, rep: ModifyDBInstanceParametersResponse) => void): Promise<ModifyDBInstanceParametersResponse>;
     /**
@@ -144,7 +144,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeRegions(req?: DescribeRegionsRequest, cb?: (error: string, rep: DescribeRegionsResponse) => void): Promise<DescribeRegionsResponse>;
     /**
-     * 开通serverlessDB实例外网
+     * 本接口（OpenServerlessDBExtranetAccess）用于开通serverlessDB实例公网地址。
      */
     OpenServerlessDBExtranetAccess(req: OpenServerlessDBExtranetAccessRequest, cb?: (error: string, rep: OpenServerlessDBExtranetAccessResponse) => void): Promise<OpenServerlessDBExtranetAccessResponse>;
     /**
@@ -164,11 +164,11 @@ export declare class Client extends AbstractClient {
      */
     DescribeServerlessDBInstances(req: DescribeServerlessDBInstancesRequest, cb?: (error: string, rep: DescribeServerlessDBInstancesResponse) => void): Promise<DescribeServerlessDBInstancesResponse>;
     /**
-     * 本接口（DescribeDBVersions）用于查询支持的数据库版本号列表。
+     * 本接口（DescribeDBVersions）用于查询支持的数据库版本。
      */
     DescribeDBVersions(req?: DescribeDBVersionsRequest, cb?: (error: string, rep: DescribeDBVersionsResponse) => void): Promise<DescribeDBVersionsResponse>;
     /**
-     * 本接口（ModifyParameterTemplate）主要用于修改参数模板名称，描述，修改，添加和删除参数模板参数。
+     * 本接口（ModifyParameterTemplate）主要用于修改参数模板名称，描述等配置，也可用于管理参数模板中的参数列表。
      */
     ModifyParameterTemplate(req: ModifyParameterTemplateRequest, cb?: (error: string, rep: ModifyParameterTemplateResponse) => void): Promise<ModifyParameterTemplateResponse>;
     /**
@@ -192,7 +192,7 @@ export declare class Client extends AbstractClient {
      */
     CreateReadOnlyGroupNetworkAccess(req: CreateReadOnlyGroupNetworkAccessRequest, cb?: (error: string, rep: CreateReadOnlyGroupNetworkAccessResponse) => void): Promise<CreateReadOnlyGroupNetworkAccessResponse>;
     /**
-     * 获取实例的密钥信息列表。
+     * 本接口 （DescribeEncryptionKeys） 用于查询实例的密钥信息列表。
      */
     DescribeEncryptionKeys(req: DescribeEncryptionKeysRequest, cb?: (error: string, rep: DescribeEncryptionKeysResponse) => void): Promise<DescribeEncryptionKeysResponse>;
     /**
@@ -216,7 +216,7 @@ export declare class Client extends AbstractClient {
      */
     DeleteDBInstanceNetworkAccess(req: DeleteDBInstanceNetworkAccessRequest, cb?: (error: string, rep: DeleteDBInstanceNetworkAccessResponse) => void): Promise<DeleteDBInstanceNetworkAccessResponse>;
     /**
-     * 本接口（ModifyDBInstancesProject）用于将实例转至其他项目。
+     * 本接口（ModifyDBInstancesProject）用于修改实例所属项目。
      */
     ModifyDBInstancesProject(req: ModifyDBInstancesProjectRequest, cb?: (error: string, rep: ModifyDBInstancesProjectResponse) => void): Promise<ModifyDBInstancesProjectResponse>;
     /**
@@ -256,7 +256,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeLogBackups(req: DescribeLogBackupsRequest, cb?: (error: string, rep: DescribeLogBackupsResponse) => void): Promise<DescribeLogBackupsResponse>;
     /**
-     * 本接口（CloseDBExtranetAccess）用于关闭实例外网链接。
+     * 本接口（CloseDBExtranetAccess）用于关闭实例公网地址。
      */
     CloseDBExtranetAccess(req: CloseDBExtranetAccessRequest, cb?: (error: string, rep: CloseDBExtranetAccessResponse) => void): Promise<CloseDBExtranetAccessResponse>;
     /**
@@ -264,7 +264,7 @@ export declare class Client extends AbstractClient {
      */
     AddDBInstanceToReadOnlyGroup(req: AddDBInstanceToReadOnlyGroupRequest, cb?: (error: string, rep: AddDBInstanceToReadOnlyGroupResponse) => void): Promise<AddDBInstanceToReadOnlyGroupResponse>;
     /**
-     * 本接口（DescribeAccounts）用于获取实例用户列表。
+     * 本接口（DescribeAccounts）用于查询实例的数据库账号列表。
      */
     DescribeAccounts(req: DescribeAccountsRequest, cb?: (error: string, rep: DescribeAccountsResponse) => void): Promise<DescribeAccountsResponse>;
     /**
@@ -288,7 +288,7 @@ export declare class Client extends AbstractClient {
      */
     RemoveDBInstanceFromReadOnlyGroup(req: RemoveDBInstanceFromReadOnlyGroupRequest, cb?: (error: string, rep: RemoveDBInstanceFromReadOnlyGroupResponse) => void): Promise<RemoveDBInstanceFromReadOnlyGroupResponse>;
     /**
-     * 本接口 (DescribeParamsEvent) 用于查询参数修改事件详情。
+     * 本接口（DescribeParamsEvent）用于查询参数修改事件。
      */
     DescribeParamsEvent(req: DescribeParamsEventRequest, cb?: (error: string, rep: DescribeParamsEventResponse) => void): Promise<DescribeParamsEventResponse>;
     /**
@@ -308,7 +308,7 @@ export declare class Client extends AbstractClient {
      */
     ModifySwitchTimePeriod(req: ModifySwitchTimePeriodRequest, cb?: (error: string, rep: ModifySwitchTimePeriodResponse) => void): Promise<ModifySwitchTimePeriodResponse>;
     /**
-     * 本接口（OpenDBExtranetAccess）用于开通外网。
+     * 本接口（OpenDBExtranetAccess）用于开通实例公网地址。
      */
     OpenDBExtranetAccess(req: OpenDBExtranetAccessRequest, cb?: (error: string, rep: OpenDBExtranetAccessResponse) => void): Promise<OpenDBExtranetAccessResponse>;
     /**
@@ -340,7 +340,7 @@ export declare class Client extends AbstractClient {
      */
     DeleteBaseBackup(req: DeleteBaseBackupRequest, cb?: (error: string, rep: DeleteBaseBackupResponse) => void): Promise<DeleteBaseBackupResponse>;
     /**
-     * 本接口(DescribeReadOnlyGroups)用于查询用户输入指定实例的只读组
+     * 本接口（DescribeReadOnlyGroups）用于查询只读组列表
      */
     DescribeReadOnlyGroups(req: DescribeReadOnlyGroupsRequest, cb?: (error: string, rep: DescribeReadOnlyGroupsResponse) => void): Promise<DescribeReadOnlyGroupsResponse>;
     /**

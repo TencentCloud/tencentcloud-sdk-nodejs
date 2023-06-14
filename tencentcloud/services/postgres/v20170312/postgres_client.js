@@ -28,7 +28,7 @@ class Client extends abstract_client_1.AbstractClient {
         super("postgres.tencentcloudapi.com", "2017-03-12", clientConfig);
     }
     /**
-     * 本接口 (DescribeBackupDownloadURL) 用于获取备份下载链接。
+     * 本接口 (DescribeBackupDownloadURL) 用于查询指定备份集的下载地址，可包括全量备份集、增量日志备份集。
      */
     async DescribeBackupDownloadURL(req, cb) {
         return this.request("DescribeBackupDownloadURL", req, cb);
@@ -94,7 +94,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateDBInstanceNetworkAccess", req, cb);
     }
     /**
-     * 本接口（ModifyDBInstanceSpec）用于调整实例规格，包括内存、磁盘。
+     * 本接口（ModifyDBInstanceSpec）用于修改实例规格，包括内存、磁盘。
      */
     async ModifyDBInstanceSpec(req, cb) {
         return this.request("ModifyDBInstanceSpec", req, cb);
@@ -112,7 +112,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateServerlessDBInstance", req, cb);
     }
     /**
-     * 接口（DescribeDatabases）用来拉取数据库列表
+     * 接口（DescribeDatabases）用来查询实例的数据库列表。
      */
     async DescribeDatabases(req, cb) {
         return this.request("DescribeDatabases", req, cb);
@@ -148,7 +148,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyDBInstanceChargeType", req, cb);
     }
     /**
-     * 本接口 (DestroyDBInstance) 用于彻底销毁指定DBInstanceId对应的实例，销毁后实例数据将彻底删除，无法找回，只能销毁隔离中的实例。
+     * 本接口 (DestroyDBInstance) 用于彻底销毁指定DBInstanceId对应的实例，销毁后实例数据将彻底删除，无法找回，调用前请仔细确认要操作的实例。只能销毁隔离中的实例。
      */
     async DestroyDBInstance(req, cb) {
         return this.request("DestroyDBInstance", req, cb);
@@ -166,13 +166,13 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeSlowQueryAnalysis", req, cb);
     }
     /**
-     * 本接口 (InquiryPriceCreateDBInstances) 用于查询购买一个或多个实例的价格信息。
+     * 本接口 (InquiryPriceCreateDBInstances) 用于查询购买实例的价格信息。
      */
     async InquiryPriceCreateDBInstances(req, cb) {
         return this.request("InquiryPriceCreateDBInstances", req, cb);
     }
     /**
-     * 本接口（DescribeDBInstanceSecurityGroups）用于查询实例安全组信息。
+     * 本接口（DescribeDBInstanceSecurityGroups）用于查询实例安全组。
      */
     async DescribeDBInstanceSecurityGroups(req, cb) {
         return this.request("DescribeDBInstanceSecurityGroups", req, cb);
@@ -190,7 +190,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeParameterTemplateAttributes", req, cb);
     }
     /**
-     * 关闭serverlessDB实例外网
+     * 本接口（CloseServerlessDBExtranetAccess）用于关闭serverlessDB实例公网地址
      */
     async CloseServerlessDBExtranetAccess(req, cb) {
         return this.request("CloseServerlessDBExtranetAccess", req, cb);
@@ -208,7 +208,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("RenewInstance", req, cb);
     }
     /**
-     * 批量修改参数
+     * 本接口 (ModifyDBInstanceParameters) 用于修改实例参数。
      */
     async ModifyDBInstanceParameters(req, cb) {
         return this.request("ModifyDBInstanceParameters", req, cb);
@@ -232,7 +232,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeRegions", req, cb);
     }
     /**
-     * 开通serverlessDB实例外网
+     * 本接口（OpenServerlessDBExtranetAccess）用于开通serverlessDB实例公网地址。
      */
     async OpenServerlessDBExtranetAccess(req, cb) {
         return this.request("OpenServerlessDBExtranetAccess", req, cb);
@@ -262,13 +262,13 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeServerlessDBInstances", req, cb);
     }
     /**
-     * 本接口（DescribeDBVersions）用于查询支持的数据库版本号列表。
+     * 本接口（DescribeDBVersions）用于查询支持的数据库版本。
      */
     async DescribeDBVersions(req, cb) {
         return this.request("DescribeDBVersions", req, cb);
     }
     /**
-     * 本接口（ModifyParameterTemplate）主要用于修改参数模板名称，描述，修改，添加和删除参数模板参数。
+     * 本接口（ModifyParameterTemplate）主要用于修改参数模板名称，描述等配置，也可用于管理参数模板中的参数列表。
      */
     async ModifyParameterTemplate(req, cb) {
         return this.request("ModifyParameterTemplate", req, cb);
@@ -304,7 +304,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateReadOnlyGroupNetworkAccess", req, cb);
     }
     /**
-     * 获取实例的密钥信息列表。
+     * 本接口 （DescribeEncryptionKeys） 用于查询实例的密钥信息列表。
      */
     async DescribeEncryptionKeys(req, cb) {
         return this.request("DescribeEncryptionKeys", req, cb);
@@ -340,7 +340,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteDBInstanceNetworkAccess", req, cb);
     }
     /**
-     * 本接口（ModifyDBInstancesProject）用于将实例转至其他项目。
+     * 本接口（ModifyDBInstancesProject）用于修改实例所属项目。
      */
     async ModifyDBInstancesProject(req, cb) {
         return this.request("ModifyDBInstancesProject", req, cb);
@@ -400,7 +400,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeLogBackups", req, cb);
     }
     /**
-     * 本接口（CloseDBExtranetAccess）用于关闭实例外网链接。
+     * 本接口（CloseDBExtranetAccess）用于关闭实例公网地址。
      */
     async CloseDBExtranetAccess(req, cb) {
         return this.request("CloseDBExtranetAccess", req, cb);
@@ -412,7 +412,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("AddDBInstanceToReadOnlyGroup", req, cb);
     }
     /**
-     * 本接口（DescribeAccounts）用于获取实例用户列表。
+     * 本接口（DescribeAccounts）用于查询实例的数据库账号列表。
      */
     async DescribeAccounts(req, cb) {
         return this.request("DescribeAccounts", req, cb);
@@ -448,7 +448,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("RemoveDBInstanceFromReadOnlyGroup", req, cb);
     }
     /**
-     * 本接口 (DescribeParamsEvent) 用于查询参数修改事件详情。
+     * 本接口（DescribeParamsEvent）用于查询参数修改事件。
      */
     async DescribeParamsEvent(req, cb) {
         return this.request("DescribeParamsEvent", req, cb);
@@ -478,7 +478,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifySwitchTimePeriod", req, cb);
     }
     /**
-     * 本接口（OpenDBExtranetAccess）用于开通外网。
+     * 本接口（OpenDBExtranetAccess）用于开通实例公网地址。
      */
     async OpenDBExtranetAccess(req, cb) {
         return this.request("OpenDBExtranetAccess", req, cb);
@@ -526,7 +526,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteBaseBackup", req, cb);
     }
     /**
-     * 本接口(DescribeReadOnlyGroups)用于查询用户输入指定实例的只读组
+     * 本接口（DescribeReadOnlyGroups）用于查询只读组列表
      */
     async DescribeReadOnlyGroups(req, cb) {
         return this.request("DescribeReadOnlyGroups", req, cb);

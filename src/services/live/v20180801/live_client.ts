@@ -173,7 +173,7 @@ import {
   DescribeGroupProIspPlayInfoListRequest,
   ModifyPullStreamStatusRequest,
   DescribeStreamDayPlayInfoListRequest,
-  TranscodeDetailInfo,
+  RestartLivePullStreamTaskRequest,
   DescribeLiveSnapshotTemplateResponse,
   DescribeLiveTranscodeRulesResponse,
   CreateLiveTimeShiftTemplateRequest,
@@ -238,6 +238,7 @@ import {
   CancelCommonMixStreamRequest,
   RecentPullInfo,
   CertInfo,
+  TranscodeDetailInfo,
   DescribeRecordTaskResponse,
   DescribeLiveDelayInfoListResponse,
   DeleteLiveTranscodeTemplateRequest,
@@ -302,6 +303,7 @@ import {
   DescribeLiveRecordRulesResponse,
   CreateLiveSnapshotTemplateRequest,
   DescribeLiveDomainPlayInfoListResponse,
+  RestartLivePullStreamTaskResponse,
   DescribeLivePullStreamTasksRequest,
   DescribeLiveStreamOnlineListRequest,
   DeleteLiveCallbackTemplateRequest,
@@ -1531,6 +1533,19 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
     cb?: (error: string, rep: DeleteLiveTimeShiftRuleResponse) => void
   ): Promise<DeleteLiveTimeShiftRuleResponse> {
     return this.request("DeleteLiveTimeShiftRule", req, cb)
+  }
+
+  /**
+     * 将正在运行的拉流转推任务进行重启。
+注意：
+1. 重启任务会造成推流中断。
+2. 点播源任务的重启，会根据VodRefreshType决定是续播还是从头开始播。
+     */
+  async RestartLivePullStreamTask(
+    req: RestartLivePullStreamTaskRequest,
+    cb?: (error: string, rep: RestartLivePullStreamTaskResponse) => void
+  ): Promise<RestartLivePullStreamTaskResponse> {
+    return this.request("RestartLivePullStreamTask", req, cb)
   }
 
   /**

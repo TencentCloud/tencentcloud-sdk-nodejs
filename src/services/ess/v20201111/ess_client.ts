@@ -32,6 +32,7 @@ import {
   CreateMultiFlowSignQRCodeResponse,
   FlowCreateApprover,
   DescribeThirdPartyAuthCodeResponse,
+  HasAuthUser,
   DisableUserAutoSignResponse,
   CancelUserAutoSignEnableUrlResponse,
   BindEmployeeUserIdWithClientOpenIdResponse,
@@ -39,6 +40,7 @@ import {
   DescribeIntegrationRolesRequest,
   CreateFlowEvidenceReportRequest,
   StartFlowResponse,
+  SealInfo,
   StaffRole,
   FlowApproverUrlInfo,
   AuthorizedUser,
@@ -146,6 +148,7 @@ import {
   UploadFile,
   Component,
   IntegrationDepartment,
+  DescribeExtendedServiceAuthInfosRequest,
   DescribeIntegrationRolesResponse,
   CreateFlowRemindsRequest,
   UpdateIntegrationEmployeesRequest,
@@ -159,6 +162,7 @@ import {
   Caller,
   DescribeFlowTemplatesResponse,
   UploadFilesRequest,
+  ExtendAuthInfo,
   RelieveInfo,
   CreateBatchCancelFlowUrlRequest,
   CreateMultiFlowSignQRCodeRequest,
@@ -170,6 +174,7 @@ import {
   ReleasedApprover,
   FlowBrief,
   DescribeOrganizationGroupOrganizationsResponse,
+  DescribeExtendedServiceAuthInfosResponse,
   CcInfo,
 } from "./ess_models"
 
@@ -484,6 +489,16 @@ callbackinfo包含： 回调地址和签名key
     cb?: (error: string, rep: DescribeUserAutoSignStatusResponse) => void
   ): Promise<DescribeUserAutoSignStatusResponse> {
     return this.request("DescribeUserAutoSignStatus", req, cb)
+  }
+
+  /**
+   * 查询企业扩展服务授权信息，目前支持查询：企业静默签，企业与港澳台居民签署合同，使用手机号验证签署方身份，骑缝章，批量签署能力是否已经开通
+   */
+  async DescribeExtendedServiceAuthInfos(
+    req: DescribeExtendedServiceAuthInfosRequest,
+    cb?: (error: string, rep: DescribeExtendedServiceAuthInfosResponse) => void
+  ): Promise<DescribeExtendedServiceAuthInfosResponse> {
+    return this.request("DescribeExtendedServiceAuthInfos", req, cb)
   }
 
   /**

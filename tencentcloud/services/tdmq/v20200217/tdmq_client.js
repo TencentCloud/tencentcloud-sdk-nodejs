@@ -495,14 +495,6 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateAMQPQueue", req, cb);
     }
     /**
-     * 产品下线了，对应的接口也要下线。
-
-更新Vhost
-     */
-    async ModifyAMQPVHost(req, cb) {
-        return this.request("ModifyAMQPVHost", req, cb);
-    }
-    /**
      * 获取RocketMQ消费组列表
      */
     async DescribeRocketMQGroups(req, cb) {

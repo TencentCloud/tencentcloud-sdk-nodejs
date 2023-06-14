@@ -2502,7 +2502,7 @@ export interface CreateShipperRequest {
      */
     Interval?: number;
     /**
-     * 投递的文件的最大值，单位 MB，默认256，范围 100-256
+     * 投递的文件的最大值，单位 MB，默认256，范围 5-256
      */
     MaxSize?: number;
     /**
@@ -2917,15 +2917,15 @@ export interface DescribeLogContextResponse {
     /**
      * 日志上下文信息集合
      */
-    LogContextInfos: Array<LogContextInfo>;
+    LogContextInfos?: Array<LogContextInfo>;
     /**
      * 上文日志是否已经返回
      */
-    PrevOver: boolean;
+    PrevOver?: boolean;
     /**
      * 下文日志是否已经返回
      */
-    NextOver: boolean;
+    NextOver?: boolean;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -3083,7 +3083,7 @@ export interface ModifyShipperRequest {
      */
     Interval?: number;
     /**
-     * 投递的文件的最大值，单位 MB，默认256，范围 100-256
+     * 投递的文件的最大值，单位 MB，默认256，范围 5-256
      */
     MaxSize?: number;
     /**

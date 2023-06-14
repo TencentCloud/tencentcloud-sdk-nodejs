@@ -79,7 +79,7 @@ export interface RecognizeOnlineTaxiItineraryOCRResponse {
 export interface InvoiceItem {
     /**
      * 识别结果。
-  OK：表示识别成功；FailedOperation.UnsupportedInvioce：表示不支持识别；
+  OK：表示识别成功；FailedOperation.UnsupportedInvoice：表示不支持识别；
   FailedOperation.UnKnowError：表示识别失败；
   其它错误码见各个票据接口的定义。
      */
@@ -120,11 +120,11 @@ export interface InvoiceItem {
      */
     Page?: number;
     /**
-     * 发票详细类型，详见下方 SubType 返回值说明
+     * 发票详细类型，详见上方 SubType 返回值说明
      */
     SubType?: string;
     /**
-     * 发票类型描述，详见下方 TypeDescription  返回值说明
+     * 发票类型描述，详见上方 TypeDescription  返回值说明
      */
     TypeDescription?: string;
     /**
@@ -132,7 +132,7 @@ export interface InvoiceItem {
      */
     CutImage?: string;
     /**
-     * 发票详细类型描述，详见下方 SubType 返回值说明
+     * 发票详细类型描述，详见上方 SubType 返回值说明
      */
     SubTypeDescription?: string;
 }
@@ -2858,11 +2858,11 @@ export interface RecognizeThaiIDCardOCRResponse {
      */
     Birthday?: string;
     /**
-     * 首次领用日期
+     * 签发日期
      */
     IssueDate?: string;
     /**
-     * 签发日期
+     * 到期日期
      */
     ExpirationDate?: string;
     /**

@@ -243,6 +243,16 @@ export interface DescribeAccountVpcListResponse {
 export type DescribePrivateZoneServiceRequest = null
 
 /**
+ * DeleteEndPoint返回参数结构体
+ */
+export interface DeleteEndPointResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 私有域信息
  */
 export interface PrivateZoneRecord {
@@ -302,6 +312,16 @@ export interface PrivateZoneRecord {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Enabled: number
+}
+
+/**
+ * DeleteEndPoint请求参数结构体
+ */
+export interface DeleteEndPointRequest {
+  /**
+   * 终端节点ID
+   */
+  EndPointId?: string
 }
 
 /**

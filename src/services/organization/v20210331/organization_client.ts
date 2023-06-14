@@ -18,18 +18,22 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  OrgMemberAuthAccount,
   DescribeOrganizationAuthNodeResponse,
   OrgPermission,
+  OrgMemberPolicy,
+  OrgProductFinancial,
   BindOrganizationMemberAuthAccountRequest,
   UpdateOrganizationMemberEmailBindResponse,
   DeleteOrganizationMembersResponse,
-  OrgMember,
-  MoveOrganizationNodeMembersResponse,
+  DescribeOrganizationFinancialByMemberRequest,
+  DescribeOrganizationFinancialByMonthRequest,
   DescribeOrganizationMemberAuthIdentitiesRequest,
   AddOrganizationMemberEmailResponse,
   UpdateOrganizationNodeResponse,
   CreateOrganizationMemberPolicyRequest,
   DescribeOrganizationRequest,
+  OrgIdentity,
   DescribeOrganizationNodesRequest,
   BindOrganizationMemberAuthAccountResponse,
   CreateOrganizationMemberResponse,
@@ -40,9 +44,13 @@ import {
   DeleteOrganizationMembersRequest,
   DescribeOrganizationMemberPoliciesResponse,
   DeleteOrganizationNodesRequest,
-  AddOrganizationNodeResponse,
   IdentityPolicy,
+  AddOrganizationNodeResponse,
+  DescribeOrganizationFinancialByMonthResponse,
+  OrgFinancialByMonth,
+  DescribeOrganizationFinancialByProductResponse,
   AddOrganizationMemberEmailRequest,
+  DescribeOrganizationFinancialByProductRequest,
   ListOrganizationIdentityResponse,
   DescribeOrganizationNodesResponse,
   DescribeOrganizationMembersResponse,
@@ -50,21 +58,22 @@ import {
   CancelOrganizationMemberAuthAccountResponse,
   DescribeOrganizationResponse,
   DescribeOrganizationMemberPoliciesRequest,
+  DescribeOrganizationMemberEmailBindRequest,
   AddOrganizationNodeRequest,
   DescribeOrganizationMemberAuthIdentitiesResponse,
-  OrgMemberPolicy,
+  OrgMemberFinancial,
   DescribeOrganizationAuthNodeRequest,
   UpdateOrganizationNodeRequest,
   DescribeOrganizationMemberAuthAccountsRequest,
   CancelOrganizationMemberAuthAccountRequest,
   DeleteOrganizationNodesResponse,
-  DescribeOrganizationMemberEmailBindRequest,
+  DescribeOrganizationFinancialByMemberResponse,
   DescribeOrganizationMemberAuthAccountsResponse,
-  OrgMemberAuthAccount,
+  OrgMember,
   OrgMemberAuthIdentity,
   MemberMainInfo,
   CreateOrganizationMemberRequest,
-  OrgIdentity,
+  MoveOrganizationNodeMembersResponse,
   DescribeOrganizationMembersRequest,
   MemberIdentity,
   UpdateOrganizationMemberEmailBindRequest,
@@ -91,16 +100,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 移动成员到指定企业组织节点
-   */
-  async MoveOrganizationNodeMembers(
-    req: MoveOrganizationNodeMembersRequest,
-    cb?: (error: string, rep: MoveOrganizationNodeMembersResponse) => void
-  ): Promise<MoveOrganizationNodeMembersResponse> {
-    return this.request("MoveOrganizationNodeMembers", req, cb)
-  }
-
-  /**
    * 更新企业组织节点
    */
   async UpdateOrganizationNode(
@@ -111,33 +110,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建组织成员
+   * 获取组织成员访问身份列表
    */
-  async CreateOrganizationMember(
-    req: CreateOrganizationMemberRequest,
-    cb?: (error: string, rep: CreateOrganizationMemberResponse) => void
-  ): Promise<CreateOrganizationMemberResponse> {
-    return this.request("CreateOrganizationMember", req, cb)
-  }
-
-  /**
-   * 绑定组织成员和组织管理员子账号的授权关系
-   */
-  async BindOrganizationMemberAuthAccount(
-    req: BindOrganizationMemberAuthAccountRequest,
-    cb?: (error: string, rep: BindOrganizationMemberAuthAccountResponse) => void
-  ): Promise<BindOrganizationMemberAuthAccountResponse> {
-    return this.request("BindOrganizationMemberAuthAccount", req, cb)
-  }
-
-  /**
-   * 获取组织成员被绑定授权关系的子账号列表
-   */
-  async DescribeOrganizationMemberAuthAccounts(
-    req: DescribeOrganizationMemberAuthAccountsRequest,
-    cb?: (error: string, rep: DescribeOrganizationMemberAuthAccountsResponse) => void
-  ): Promise<DescribeOrganizationMemberAuthAccountsResponse> {
-    return this.request("DescribeOrganizationMemberAuthAccounts", req, cb)
+  async ListOrganizationIdentity(
+    req: ListOrganizationIdentityRequest,
+    cb?: (error: string, rep: ListOrganizationIdentityResponse) => void
+  ): Promise<ListOrganizationIdentityResponse> {
+    return this.request("ListOrganizationIdentity", req, cb)
   }
 
   /**
@@ -151,57 +130,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 取消组织成员和组织管理员子账号的授权关系
-
-     */
-  async CancelOrganizationMemberAuthAccount(
-    req: CancelOrganizationMemberAuthAccountRequest,
-    cb?: (error: string, rep: CancelOrganizationMemberAuthAccountResponse) => void
-  ): Promise<CancelOrganizationMemberAuthAccountResponse> {
-    return this.request("CancelOrganizationMemberAuthAccount", req, cb)
-  }
-
-  /**
-   * 批量删除企业组织节点
-   */
-  async DeleteOrganizationNodes(
-    req: DeleteOrganizationNodesRequest,
-    cb?: (error: string, rep: DeleteOrganizationNodesResponse) => void
-  ): Promise<DeleteOrganizationNodesResponse> {
-    return this.request("DeleteOrganizationNodes", req, cb)
-  }
-
-  /**
-   * 获取企业组织信息
-   */
-  async DescribeOrganization(
-    req: DescribeOrganizationRequest,
-    cb?: (error: string, rep: DescribeOrganizationResponse) => void
-  ): Promise<DescribeOrganizationResponse> {
-    return this.request("DescribeOrganization", req, cb)
-  }
-
-  /**
-   * 获取组织节点列表
-   */
-  async DescribeOrganizationNodes(
-    req: DescribeOrganizationNodesRequest,
-    cb?: (error: string, rep: DescribeOrganizationNodesResponse) => void
-  ): Promise<DescribeOrganizationNodesResponse> {
-    return this.request("DescribeOrganizationNodes", req, cb)
-  }
-
-  /**
-   * 修改绑定成员邮箱
-   */
-  async UpdateOrganizationMemberEmailBind(
-    req: UpdateOrganizationMemberEmailBindRequest,
-    cb?: (error: string, rep: UpdateOrganizationMemberEmailBindResponse) => void
-  ): Promise<UpdateOrganizationMemberEmailBindResponse> {
-    return this.request("UpdateOrganizationMemberEmailBind", req, cb)
-  }
-
-  /**
    * 添加企业组织节点
    */
   async AddOrganizationNode(
@@ -212,23 +140,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取组织成员的授权策略列表
+   * 修改绑定成员邮箱
    */
-  async DescribeOrganizationMemberPolicies(
-    req: DescribeOrganizationMemberPoliciesRequest,
-    cb?: (error: string, rep: DescribeOrganizationMemberPoliciesResponse) => void
-  ): Promise<DescribeOrganizationMemberPoliciesResponse> {
-    return this.request("DescribeOrganizationMemberPolicies", req, cb)
-  }
-
-  /**
-   * 创建组织成员访问授权策略
-   */
-  async CreateOrganizationMemberPolicy(
-    req: CreateOrganizationMemberPolicyRequest,
-    cb?: (error: string, rep: CreateOrganizationMemberPolicyResponse) => void
-  ): Promise<CreateOrganizationMemberPolicyResponse> {
-    return this.request("CreateOrganizationMemberPolicy", req, cb)
+  async UpdateOrganizationMemberEmailBind(
+    req: UpdateOrganizationMemberEmailBindRequest,
+    cb?: (error: string, rep: UpdateOrganizationMemberEmailBindResponse) => void
+  ): Promise<UpdateOrganizationMemberEmailBindResponse> {
+    return this.request("UpdateOrganizationMemberEmailBind", req, cb)
   }
 
   /**
@@ -252,13 +170,74 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取组织成员访问身份列表
+   * 以月维度获取组织财务信息趋势
    */
-  async ListOrganizationIdentity(
-    req: ListOrganizationIdentityRequest,
-    cb?: (error: string, rep: ListOrganizationIdentityResponse) => void
-  ): Promise<ListOrganizationIdentityResponse> {
-    return this.request("ListOrganizationIdentity", req, cb)
+  async DescribeOrganizationFinancialByMonth(
+    req: DescribeOrganizationFinancialByMonthRequest,
+    cb?: (error: string, rep: DescribeOrganizationFinancialByMonthResponse) => void
+  ): Promise<DescribeOrganizationFinancialByMonthResponse> {
+    return this.request("DescribeOrganizationFinancialByMonth", req, cb)
+  }
+
+  /**
+   * 批量删除企业组织节点
+   */
+  async DeleteOrganizationNodes(
+    req: DeleteOrganizationNodesRequest,
+    cb?: (error: string, rep: DeleteOrganizationNodesResponse) => void
+  ): Promise<DeleteOrganizationNodesResponse> {
+    return this.request("DeleteOrganizationNodes", req, cb)
+  }
+
+  /**
+   * 获取组织成员的授权策略列表
+   */
+  async DescribeOrganizationMemberPolicies(
+    req: DescribeOrganizationMemberPoliciesRequest,
+    cb?: (error: string, rep: DescribeOrganizationMemberPoliciesResponse) => void
+  ): Promise<DescribeOrganizationMemberPoliciesResponse> {
+    return this.request("DescribeOrganizationMemberPolicies", req, cb)
+  }
+
+  /**
+     * 取消组织成员和组织管理员子账号的授权关系
+
+     */
+  async CancelOrganizationMemberAuthAccount(
+    req: CancelOrganizationMemberAuthAccountRequest,
+    cb?: (error: string, rep: CancelOrganizationMemberAuthAccountResponse) => void
+  ): Promise<CancelOrganizationMemberAuthAccountResponse> {
+    return this.request("CancelOrganizationMemberAuthAccount", req, cb)
+  }
+
+  /**
+   * 以成员维度获取组织财务信息
+   */
+  async DescribeOrganizationFinancialByMember(
+    req: DescribeOrganizationFinancialByMemberRequest,
+    cb?: (error: string, rep: DescribeOrganizationFinancialByMemberResponse) => void
+  ): Promise<DescribeOrganizationFinancialByMemberResponse> {
+    return this.request("DescribeOrganizationFinancialByMember", req, cb)
+  }
+
+  /**
+   * 获取企业组织信息
+   */
+  async DescribeOrganization(
+    req: DescribeOrganizationRequest,
+    cb?: (error: string, rep: DescribeOrganizationResponse) => void
+  ): Promise<DescribeOrganizationResponse> {
+    return this.request("DescribeOrganization", req, cb)
+  }
+
+  /**
+   * 移动成员到指定企业组织节点
+   */
+  async MoveOrganizationNodeMembers(
+    req: MoveOrganizationNodeMembersRequest,
+    cb?: (error: string, rep: MoveOrganizationNodeMembersResponse) => void
+  ): Promise<MoveOrganizationNodeMembersResponse> {
+    return this.request("MoveOrganizationNodeMembers", req, cb)
   }
 
   /**
@@ -279,5 +258,65 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeOrganizationMemberEmailBindResponse) => void
   ): Promise<DescribeOrganizationMemberEmailBindResponse> {
     return this.request("DescribeOrganizationMemberEmailBind", req, cb)
+  }
+
+  /**
+   * 创建组织成员
+   */
+  async CreateOrganizationMember(
+    req: CreateOrganizationMemberRequest,
+    cb?: (error: string, rep: CreateOrganizationMemberResponse) => void
+  ): Promise<CreateOrganizationMemberResponse> {
+    return this.request("CreateOrganizationMember", req, cb)
+  }
+
+  /**
+   * 绑定组织成员和组织管理员子账号的授权关系
+   */
+  async BindOrganizationMemberAuthAccount(
+    req: BindOrganizationMemberAuthAccountRequest,
+    cb?: (error: string, rep: BindOrganizationMemberAuthAccountResponse) => void
+  ): Promise<BindOrganizationMemberAuthAccountResponse> {
+    return this.request("BindOrganizationMemberAuthAccount", req, cb)
+  }
+
+  /**
+   * 以产品维度获取组织财务信息
+   */
+  async DescribeOrganizationFinancialByProduct(
+    req: DescribeOrganizationFinancialByProductRequest,
+    cb?: (error: string, rep: DescribeOrganizationFinancialByProductResponse) => void
+  ): Promise<DescribeOrganizationFinancialByProductResponse> {
+    return this.request("DescribeOrganizationFinancialByProduct", req, cb)
+  }
+
+  /**
+   * 获取组织成员被绑定授权关系的子账号列表
+   */
+  async DescribeOrganizationMemberAuthAccounts(
+    req: DescribeOrganizationMemberAuthAccountsRequest,
+    cb?: (error: string, rep: DescribeOrganizationMemberAuthAccountsResponse) => void
+  ): Promise<DescribeOrganizationMemberAuthAccountsResponse> {
+    return this.request("DescribeOrganizationMemberAuthAccounts", req, cb)
+  }
+
+  /**
+   * 获取组织节点列表
+   */
+  async DescribeOrganizationNodes(
+    req: DescribeOrganizationNodesRequest,
+    cb?: (error: string, rep: DescribeOrganizationNodesResponse) => void
+  ): Promise<DescribeOrganizationNodesResponse> {
+    return this.request("DescribeOrganizationNodes", req, cb)
+  }
+
+  /**
+   * 创建组织成员访问授权策略
+   */
+  async CreateOrganizationMemberPolicy(
+    req: CreateOrganizationMemberPolicyRequest,
+    cb?: (error: string, rep: CreateOrganizationMemberPolicyResponse) => void
+  ): Promise<CreateOrganizationMemberPolicyResponse> {
+    return this.request("CreateOrganizationMemberPolicy", req, cb)
   }
 }

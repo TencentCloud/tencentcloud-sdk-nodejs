@@ -51,47 +51,6 @@ export interface AgentClientElem {
     ClientName: string;
 }
 /**
- * DescribeAgentDealsCache请求参数结构体
- */
-export interface DescribeAgentDealsCacheRequest {
-    /**
-     * 偏移量
-     */
-    Offset: number;
-    /**
-     * 限制数目 最大200
-     */
-    Limit: number;
-    /**
-     * 下单时间范围起始点【请保持时间范围最大90天】
-     */
-    CreatTimeRangeStart?: string;
-    /**
-     * 下单时间范围终止点【请保持时间范围最大90天】
-     */
-    CreatTimeRangeEnd?: string;
-    /**
-     * 0:下单时间降序；其他：下单时间升序
-     */
-    Order?: number;
-    /**
-     * 订单的状态(1：未支付;2：已支付;3：发货中;4：已发货;5：发货失败;6：已退款;7：已关单;8：订单过期;9：订单已失效;10：产品已失效;11：代付拒绝;12：支付中)
-     */
-    Status?: number;
-    /**
-     * 下单人账号ID列表
-     */
-    OwnerUins?: Array<string>;
-    /**
-     * 订单号列表
-     */
-    DealNames?: Array<string>;
-    /**
-     * 支付方式，0：自付；1：代付
-     */
-    PayerMode?: number;
-}
-/**
  * DescribeSalesmans请求参数结构体
  */
 export interface DescribeSalesmansRequest {
@@ -305,40 +264,6 @@ export interface RebateInfoElem {
     ExceptionFlag: string;
 }
 /**
- * DescribeClientBalance返回参数结构体
- */
-export interface DescribeClientBalanceResponse {
-    /**
-     * 账户可用余额，单位分 （可用余额 = 现金余额 - 冻结金额）  【注：该数据准确性存疑，请切换至DescribeClientBalanceNew取值】
-     */
-    Balance: number;
-    /**
-     * 账户现金余额，单位分
-     */
-    Cash: number;
-    /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
-/**
- * DescribeAgentSelfPayDeals返回参数结构体
- */
-export interface DescribeAgentSelfPayDealsResponse {
-    /**
-     * 订单数组
-     */
-    AgentPayDealSet?: Array<AgentDealElem>;
-    /**
-     * 符合条件的订单总数量
-     */
-    TotalCount?: number;
-    /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
-/**
  * DescribeAgentPayDealsV2返回参数结构体
  */
 export interface DescribeAgentPayDealsV2Response {
@@ -367,15 +292,6 @@ export interface AgentTransferMoneyRequest {
      * 转账金额，单位分
      */
     Amount: number;
-}
-/**
- * DescribeClientBalance请求参数结构体
- */
-export interface DescribeClientBalanceRequest {
-    /**
-     * 客户(代客)账号ID
-     */
-    ClientUin: string;
 }
 /**
  * DescribeAgentPayDealsV2请求参数结构体
@@ -526,43 +442,6 @@ export interface DescribeAgentBillsResponse {
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
-}
-/**
- * DescribeAgentPayDeals请求参数结构体
- */
-export interface DescribeAgentPayDealsRequest {
-    /**
-     * 偏移量
-     */
-    Offset: number;
-    /**
-     * 限制数目 最大100
-     */
-    Limit: number;
-    /**
-     * 下单时间范围起始点(不传时会默认查15天内订单，传值时需要传15天内的起始时间)
-     */
-    CreatTimeRangeStart?: string;
-    /**
-     * 下单时间范围终止点
-     */
-    CreatTimeRangeEnd?: string;
-    /**
-     * 0:下单时间降序；其他：下单时间升序
-     */
-    Order?: number;
-    /**
-     * 订单的状态(1：未支付;2：已支付;3：发货中;4：已发货;5：发货失败;6：已退款;7：已关单;8：订单过期;9：订单已失效;10：产品已失效;11：代付拒绝;12：支付中)
-     */
-    Status?: number;
-    /**
-     * 下单人账号ID列表
-     */
-    OwnerUins?: Array<string>;
-    /**
-     * 订单号列表
-     */
-    DealNames?: Array<string>;
 }
 /**
  * AuditApplyClient请求参数结构体
@@ -949,36 +828,6 @@ export interface DescribeUnbindClientListRequest {
     OrderDirection?: string;
 }
 /**
- * DescribeAgentPayDeals返回参数结构体
- */
-export interface DescribeAgentPayDealsResponse {
-    /**
-     * 订单数组
-     */
-    AgentPayDealSet?: Array<AgentDealElem>;
-    /**
-     * 符合条件的订单总数量
-     */
-    TotalCount?: number;
-    /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
-/**
- * 订单价格详情
- */
-export interface DealGoodsPriceElem {
-    /**
-     * 实付金额（单位：分）
-     */
-    RealTotalCost: number;
-    /**
-     * 订单实际金额（不含折扣，单位：分）
-     */
-    OriginalTotalCost: number;
-}
-/**
  * DescribeAgentDealsByCache请求参数结构体
  */
 export interface DescribeAgentDealsByCacheRequest {
@@ -1022,43 +871,6 @@ export interface DescribeAgentDealsByCacheRequest {
      * 支付方式，0：自付；1：代付
      */
     PayerMode?: number;
-}
-/**
- * DescribeAgentSelfPayDeals请求参数结构体
- */
-export interface DescribeAgentSelfPayDealsRequest {
-    /**
-     * 下单人账号ID
-     */
-    OwnerUin: string;
-    /**
-     * 偏移量
-     */
-    Offset: number;
-    /**
-     * 限制数目 最大100
-     */
-    Limit: number;
-    /**
-     * 下单时间范围起始点(不传时会默认查15天内订单，传值时需要传15天内的起始时间)
-     */
-    CreatTimeRangeStart?: string;
-    /**
-     * 下单时间范围终止点
-     */
-    CreatTimeRangeEnd?: string;
-    /**
-     * 0:下单时间降序；其他：下单时间升序
-     */
-    Order?: number;
-    /**
-     * 订单的状态(1：未支付;2：已支付;3：发货中;4：已发货;5：发货失败;6：已退款;7：已关单;8：订单过期;9：订单已失效;10：产品已失效;11：代付拒绝;12：支付中)
-     */
-    Status?: number;
-    /**
-     * 订单号列表
-     */
-    DealNames?: Array<string>;
 }
 /**
  * ModifyClientRemark请求参数结构体
@@ -1231,23 +1043,6 @@ export interface AuditApplyClientResponse {
     RequestId?: string;
 }
 /**
- * DescribeAgentDealsCache返回参数结构体
- */
-export interface DescribeAgentDealsCacheResponse {
-    /**
-     * 订单数组
-     */
-    AgentDealSet?: Array<AgentDealElem>;
-    /**
-     * 符合条件的订单总数量
-     */
-    TotalCount?: number;
-    /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
-/**
  * DescribeAgentBills请求参数结构体
  */
 export interface DescribeAgentBillsRequest {
@@ -1288,147 +1083,6 @@ export interface AgentPayDealsResponse {
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
-}
-/**
- * 描述代理商代付的订单信息
- */
-export interface AgentDealElem {
-    /**
-     * 订单自增 ID【请勿依赖该字段作为唯一标识】
-     */
-    DealId: string;
-    /**
-     * 订单号【订单唯一键】
-     */
-    DealName: string;
-    /**
-     * 商品类型 ID
-     */
-    GoodsCategoryId: string;
-    /**
-     * 订单所有者
-     */
-    OwnerUin: string;
-    /**
-     * 订单所有者对应 appId
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    AppId: string;
-    /**
-     * 商品数量
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    GoodsNum: string;
-    /**
-     * 价格详情
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    GoodsPrice: DealGoodsPriceElem;
-    /**
-     * 下单人
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Creater: string;
-    /**
-     * 下单时间
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    CreatTime: string;
-    /**
-     * 支付结束时间
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    PayEndTime: string;
-    /**
-     * 扣费流水号
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    BillId: string;
-    /**
-     * 支付人
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Payer: string;
-    /**
-     * 订单状态，中文描述
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    DealStatus: string;
-    /**
-     * 订单的状态(1：未支付;2：已支付;3：发货中;4：已发货;5：发货失败;6：已退款;7：已关单;8：订单过期;9：订单已失效;10：产品已失效;11：代付拒绝;12：支付中)
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Status: string;
-    /**
-     * 产品名称
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    GoodsName: string;
-    /**
-     * 客户备注
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ClientRemark: string;
-    /**
-     * 订单操作类型，purchase（新购），renew（续费），modify（配置变更）
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ActionType: string;
-    /**
-     * 代金券抵扣金额，单位分
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    VoucherDecline: string;
-    /**
-     * 大订单号
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    BigDealId: string;
-    /**
-     * 客户类型（new：自拓；old：官网；assign：指派；direct：直销；direct_newopp：直销(新商机)）
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ClientType: string;
-    /**
-     * 项目类型（self：自拓；repeat：直销；platform：官网合作）
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ProjectType: string;
-    /**
-     * 业务员账号ID
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    SalesUin: string;
-    /**
-     * 支付方式，0：自付；1：代付
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    PayerMode: string;
-    /**
-     * 活动ID
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ActivityId: string;
-    /**
-     * 订单过期时间
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    OverdueTime: string;
-    /**
-     * 产品详情
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ProductInfo: Array<ProductInfoElem>;
-    /**
-     * 付款方式
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    PaymentMethod: string;
-    /**
-     * 订单更新时间
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    UpdateTime: string;
 }
 /**
  * 代理商业务员信息

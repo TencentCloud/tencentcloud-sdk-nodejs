@@ -114,6 +114,7 @@ HONGKONG_MACAO_AND_TAIWAN 中国台湾
    * 印章图片的base64
 注：已废弃
 请先通过UploadFiles接口上传文件，获取 FileId
+   * @deprecated
    */
   SealImage?: string
   /**
@@ -342,6 +343,24 @@ export interface DescribeThirdPartyAuthCodeResponse {
 }
 
 /**
+ * 被授权用户信息
+ */
+export interface HasAuthUser {
+  /**
+   * 用户id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UserId?: string
+  /**
+   * 用户归属
+MainOrg：主企业
+CurrentOrg：当前企业
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BelongTo?: string
+}
+
+/**
  * DisableUserAutoSign返回参数结构体
  */
 export interface DisableUserAutoSignResponse {
@@ -384,7 +403,7 @@ export interface CreateIntegrationEmployeesRequest {
    */
   Operator: UserInfo
   /**
-   * 待创建员工的信息，Mobile和DisplayName必填
+   * 待创建员工的信息，Mobile和DisplayName必填,OpenId和Email选填，其他字段暂不支持
    */
   Employees: Array<Staff>
   /**
@@ -449,6 +468,11 @@ export interface StartFlowResponse {
    */
   RequestId?: string
 }
+
+/**
+ * 模板结构体中的印章信息
+ */
+export type SealInfo = null
 
 /**
  * 集成版企业角色信息
@@ -719,15 +743,14 @@ export interface DescribeFlowTemplatesRequest {
    */
   Limit?: number
   /**
-   * 这个参数跟下面的IsChannel参数配合使用。
-IsChannel=false时，ApplicationId参数不起任何作用。
-IsChannel=true时，ApplicationId为空，查询所有第三方应用集成平台企业模板列表；ApplicationId不为空，查询指定应用下的模板列表
+   * ApplicationId不为空，查询指定应用下的模板列表
 ApplicationId为空，查询所有应用下的模板列表
    */
   ApplicationId?: string
   /**
    * 默认为false，查询SaaS模板库列表；
 为true，查询第三方应用集成平台企业模板库管理列表
+   * @deprecated
    */
   IsChannel?: boolean
   /**
@@ -876,6 +899,17 @@ export interface TemplateInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Published?: boolean
+  /**
+   * 模板内部指定的印章列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TemplateSeals?: Array<SealInfo>
+  /**
+   * 模板内部指定的印章列表
+注意：此字段可能返回 null，表示取不到有效值。
+   * @deprecated
+   */
+  Seals?: Array<SealInfo>
 }
 
 /**
@@ -3515,11 +3549,10 @@ ComponentType为SIGN_SIGNATURE类型可以控制签署方式
 {“ComponentTypeLimit”: [“xxx”]}
 xxx可以为：
 HANDWRITE – 手写签名
-BORDERLESS_ESIGN – 自动生成无边框腾讯体
 OCR_ESIGN -- AI智能识别手写签名
 ESIGN -- 个人印章类型
 SYSTEM_ESIGN -- 系统签名（该类型可以在用户签署时根据用户姓名一键生成一个签名来进行签署）
-如：{“ComponentTypeLimit”: [“BORDERLESS_ESIGN”]}
+如：{“ComponentTypeLimit”: [“SYSTEM_ESIGN”]}
 
 ComponentType为SIGN_DATE时，支持以下参数：
 1 Font：字符串类型目前只支持"黑体"、"宋体"，如果不填默认为"黑体"
@@ -3692,6 +3725,29 @@ export interface IntegrationDepartment {
 }
 
 /**
+ * DescribeExtendedServiceAuthInfos请求参数结构体
+ */
+export interface DescribeExtendedServiceAuthInfosRequest {
+  /**
+   * 操作人信息
+   */
+  Operator: UserInfo
+  /**
+   * 代理相关应用信息，如集团主企业代子企业操作
+   */
+  Agent?: Agent
+  /**
+   * 扩展服务类型，默认为空，查询目前支持的所有扩展服务信息，单个指定则查询单个扩展服务开通信息，取值：
+OPEN_SERVER_SIGN：开通企业静默签署
+OVERSEA_SIGN：企业与港澳台居民签署合同
+MOBILE_CHECK_APPROVER：使用手机号验证签署方身份
+PAGING_SEAL：骑缝章
+BATCH_SIGN：批量签署
+   */
+  ExtendServiceType?: string
+}
+
+/**
  * DescribeIntegrationRoles返回参数结构体
  */
 export interface DescribeIntegrationRolesResponse {
@@ -3736,11 +3792,11 @@ export interface CreateFlowRemindsRequest {
  */
 export interface UpdateIntegrationEmployeesRequest {
   /**
-   * 操作人信息
+   * 操作人信息，userId必填
    */
   Operator: UserInfo
   /**
-   * 员工信息
+   * 员工信息，OpenId和UserId必填一个,Email、DisplayName和Email选填，其他字段暂不支持
    */
   Employees: Array<Staff>
   /**
@@ -3949,6 +4005,45 @@ true--是，处理置白
    * @deprecated
    */
   FileUrls?: string
+}
+
+/**
+ * 授权服务信息
+ */
+export interface ExtendAuthInfo {
+  /**
+   * 授权服务类型
+OPEN_SERVER_SIGN：开通企业静默签署
+OVERSEA_SIGN：企业与港澳台居民签署合同
+MOBILE_CHECK_APPROVER：使用手机号验证签署方身份
+PAGING_SEAL：骑缝章
+BATCH_SIGN：批量签署
+   */
+  Type?: string
+  /**
+   * 授权服务名称
+   */
+  Name?: string
+  /**
+   * 授权服务状态，ENABLE：开通
+DISABLE：未开通
+   */
+  Status?: string
+  /**
+   * 授权人用户id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OperatorUserId?: string
+  /**
+   * 授权时间戳，单位秒
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OperateOn?: number
+  /**
+   * 被授权用户列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HasAuthUserList?: Array<HasAuthUser>
 }
 
 /**
@@ -4240,6 +4335,20 @@ export interface DescribeOrganizationGroupOrganizationsResponse {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   List?: Array<GroupOrganization>
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeExtendedServiceAuthInfos返回参数结构体
+ */
+export interface DescribeExtendedServiceAuthInfosResponse {
+  /**
+   * 授权服务信息列表
+   */
+  AuthInfoList?: Array<ExtendAuthInfo>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

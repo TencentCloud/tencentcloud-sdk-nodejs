@@ -762,6 +762,15 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
         return this.request("DeleteLiveTimeShiftRule", req, cb);
     }
     /**
+     * 将正在运行的拉流转推任务进行重启。
+注意：
+1. 重启任务会造成推流中断。
+2. 点播源任务的重启，会根据VodRefreshType决定是续播还是从头开始播。
+     */
+    async RestartLivePullStreamTask(req, cb) {
+        return this.request("RestartLivePullStreamTask", req, cb);
+    }
+    /**
      * 获取水印规则列表。
      */
     async DescribeLiveWatermarkRules(req, cb) {
