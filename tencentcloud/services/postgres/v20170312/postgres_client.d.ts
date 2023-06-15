@@ -40,7 +40,7 @@ export declare class Client extends AbstractClient {
      */
     DeleteParameterTemplate(req: DeleteParameterTemplateRequest, cb?: (error: string, rep: DeleteParameterTemplateResponse) => void): Promise<DeleteParameterTemplateResponse>;
     /**
-     * 获取实例可修改参数列表
+     * 本接口（DescribeDBInstanceAttribute）用于查询实例的参数信息。
      */
     DescribeDBInstanceParameters(req: DescribeDBInstanceParametersRequest, cb?: (error: string, rep: DescribeDBInstanceParametersResponse) => void): Promise<DescribeDBInstanceParametersResponse>;
     /**

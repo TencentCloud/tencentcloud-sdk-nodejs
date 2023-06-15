@@ -18,342 +18,381 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
-  CreateLiveSnapshotRuleRequest,
-  BillDataInfo,
-  EnableLiveDomainResponse,
-  DescribeUploadStreamNumsResponse,
   DescribeLiveXP2PDetailInfoListResponse,
-  HlsSpecialParam,
-  TranscodeTotalInfo,
+  DescribeLiveWatermarkRulesResponse,
+  ModifyPullStreamStatusRequest,
+  DeleteLiveRecordTemplateRequest,
+  DescribeLiveTranscodeTemplatesRequest,
+  DescribeLiveStreamMonitorListRequest,
+  DescribeLiveSnapshotTemplateRequest,
+  DescribePlayErrorCodeDetailInfoListRequest,
+  DescribeBillBandwidthAndFluxListRequest,
+  CommonMixOutputParams,
+  DescribeLiveTranscodeDetailInfoResponse,
+  DescribeLiveStreamPublishedListRequest,
+  DescribeGroupProIspPlayInfoListResponse,
+  DescribeLiveTranscodeDetailInfoRequest,
+  DescribeLiveSnapshotTemplatesRequest,
+  CreateLiveWatermarkRuleResponse,
+  DescribeDeliverBandwidthListRequest,
+  PlayCodeTotalInfo,
+  AddLiveWatermarkRequest,
+  CommonMixLayoutParams,
+  DescribeLiveDomainCertRequest,
+  DiagnoseResult,
+  StopRecordTaskRequest,
+  RuleInfo,
+  ModifyLiveDomainCertBindingsRequest,
+  DescribeMonitorReportResponse,
+  CancelCommonMixStreamResponse,
+  DescribeLiveCertsResponse,
+  ResumeDelayLiveStreamRequest,
+  DescribeCallbackRecordsListRequest,
+  CallbackEventInfo,
+  DescribeTopClientIpSumInfoListResponse,
+  DescribeLiveStreamStateResponse,
+  DeleteLiveWatermarkRuleRequest,
+  DescribeLiveWatermarksRequest,
+  DescribeLiveWatermarkRulesRequest,
+  ProIspPlaySumInfo,
+  ModifyLiveTranscodeTemplateResponse,
+  DescribeStreamDayPlayInfoListRequest,
+  TimeShiftStreamInfo,
+  DescribeLivePadRulesResponse,
+  CreatePullStreamConfigRequest,
+  DescribeLiveCertsRequest,
+  DescribeLiveCertResponse,
+  DescribeVisitTopSumInfoListRequest,
+  DescribePushBandwidthAndFluxListResponse,
+  DescribeLiveStreamOnlineListResponse,
+  DescribeStreamPushInfoListResponse,
+  TimeShiftTemplate,
+  WatermarkInfo,
+  DescribeLiveDomainPlayInfoListRequest,
+  DeleteLiveWatermarkRuleResponse,
+  DescribeLogDownloadListResponse,
+  DeleteLivePadTemplateResponse,
+  DeleteLiveSnapshotRuleResponse,
+  BandwidthInfo,
+  LiveStreamMonitorOutputInfo,
+  DeleteLiveTranscodeTemplateRequest,
   StopRecordTaskResponse,
-  DescribeDeliverBandwidthListResponse,
-  DeleteLiveRecordRuleRequest,
+  CommonMixControlParams,
+  DescribeTranscodeTaskNumResponse,
+  ModifyLiveStreamMonitorResponse,
+  DeleteLivePadRuleResponse,
+  DescribeLiveRecordTemplateRequest,
+  HttpStatusInfo,
+  CreateLiveTranscodeTemplateRequest,
+  MPSResult,
+  DescribeLiveTimeShiftTemplatesResponse,
+  PlayAuthKeyInfo,
+  ModifyLiveTranscodeTemplateRequest,
+  ForbidLiveDomainResponse,
+  CreateRecordTaskRequest,
+  CallBackRuleInfo,
+  DescribeLivePadTemplateResponse,
   ResumeLiveStreamRequest,
-  DeleteLiveTranscodeTemplateResponse,
-  FlvSpecialParam,
   DescribeBillBandwidthAndFluxListResponse,
+  DescribeLiveDomainPlayInfoListResponse,
+  HttpCodeValue,
+  DeleteLiveStreamMonitorResponse,
+  DeleteLiveCallbackTemplateRequest,
+  CreateLiveCallbackTemplateResponse,
+  DescribeLiveCallbackTemplateRequest,
+  CreateLiveStreamMonitorRequest,
+  DescribeScreenShotSheetNumListRequest,
+  DescribeLiveTranscodeTemplateRequest,
+  MonitorStreamPlayInfo,
+  CreateLiveWatermarkRuleRequest,
+  DeleteRecordTaskRequest,
+  DescribeStreamDayPlayInfoListResponse,
+  DeleteLivePadRuleRequest,
+  CreateLiveSnapshotRuleResponse,
+  DescribeLiveStreamEventListResponse,
+  DescribeLiveTranscodeTotalInfoRequest,
+  LiveDomainCertBindings,
+  DescribeLivePushAuthKeyRequest,
+  DescribeUploadStreamNumsResponse,
+  DeleteLiveTranscodeTemplateResponse,
   CreateScreenshotTaskResponse,
   DeleteLiveCallbackRuleResponse,
-  ResumeDelayLiveStreamRequest,
-  DescribeLiveStreamPublishedListRequest,
+  DescribeStreamPlayInfoListRequest,
+  PushAuthKeyInfo,
+  ForbidStreamInfo,
+  DescribeLivePlayAuthKeyRequest,
+  CreateLiveTimeShiftRuleResponse,
+  DeleteLiveTranscodeRuleResponse,
+  DescribeLivePadTemplatesResponse,
+  DomainInfo,
+  DescribeLiveTranscodeRulesRequest,
+  PlayDataInfoByStream,
+  LiveStreamMonitorInputInfo,
+  DeleteLivePullStreamTaskRequest,
+  RestartLivePullStreamTaskResponse,
+  StopLiveRecordResponse,
+  DeleteScreenshotTaskRequest,
+  ModifyLiveTimeShiftTemplateResponse,
+  TranscodeTaskNum,
+  BillCountryInfo,
+  LogInfo,
+  AddDelayLiveStreamRequest,
+  DescribeLiveStreamEventListRequest,
+  CallBackTemplateInfo,
+  DeleteLiveRecordResponse,
+  ModifyLivePullStreamTaskRequest,
+  PullStreamConfig,
+  DescribeLiveStreamPushInfoListRequest,
+  DescribeLiveTimeShiftTemplatesRequest,
+  StopLiveStreamMonitorResponse,
+  DayStreamPlayInfo,
+  ModifyLivePlayDomainResponse,
+  GroupProIspDataInfo,
+  DescribeLiveDomainCertBindingsResponse,
+  CreateLivePadTemplateResponse,
+  DescribeLiveRecordTemplatesResponse,
+  DescribeScreenshotTaskRequest,
+  ScreenshotTask,
+  DeletePullStreamConfigResponse,
+  DeleteLiveTimeShiftRuleResponse,
+  PullPushWatermarkInfo,
+  DescribeGroupProIspPlayInfoListRequest,
+  DescribeLiveTranscodeRulesResponse,
+  DeleteLivePullStreamTaskResponse,
+  DescribeStreamPushInfoListRequest,
+  ResumeLiveStreamResponse,
+  DeletePullStreamConfigRequest,
+  DescribeLiveWatermarksResponse,
+  CreatePullStreamConfigResponse,
+  ModifyLivePadTemplateResponse,
+  DescribeTopClientIpSumInfoListRequest,
+  DescribeCallbackRecordsListResponse,
+  DeleteLiveWatermarkRequest,
+  UpdateLiveWatermarkRequest,
+  CreateLiveRecordRequest,
+  TemplateInfo,
+  DescribeLiveStreamPushInfoListResponse,
+  CancelCommonMixStreamRequest,
+  DeleteLiveStreamMonitorRequest,
+  DescribeLiveDelayInfoListResponse,
+  ClientIpPlaySumInfo,
+  CreateLiveSnapshotTemplateResponse,
+  DescribeProIspPlaySumInfoListRequest,
+  TranscodeTotalInfo,
+  UnBindLiveDomainCertResponse,
+  DescribePlayErrorCodeDetailInfoListResponse,
+  StreamOnlineInfo,
+  DomainDetailInfo,
+  DeleteLiveRecordRequest,
+  StopLiveRecordRequest,
+  DeleteLiveDomainRequest,
+  CreateRecordTaskResponse,
+  CreateLivePadTemplateRequest,
+  DescribeLivePullStreamTasksResponse,
+  CreateLiveCallbackRuleResponse,
+  DescribeAreaBillBandwidthAndFluxListRequest,
+  DescribeLiveDomainCertBindingsRequest,
+  DescribeLiveStreamOnlineListRequest,
+  DescribeRecordTaskRequest,
+  CommonMixCropParams,
+  XP2PDetailInfo,
+  ModifyLiveSnapshotTemplateRequest,
+  ModifyLiveCallbackTemplateResponse,
+  DescribeLiveCallbackTemplatesResponse,
+  DescribeLivePushAuthKeyResponse,
+  RestartLivePullStreamTaskRequest,
+  DelayInfo,
+  DescribeLiveStreamMonitorRequest,
+  DescribeLiveSnapshotRulesRequest,
+  DeleteLiveRecordRuleResponse,
+  DeleteLiveRecordRuleRequest,
+  StopScreenshotTaskRequest,
+  PublishTime,
+  FlvSpecialParam,
   DescribeLiveCallbackTemplateResponse,
   CreateLivePullStreamTaskRequest,
   DeleteLiveSnapshotTemplateRequest,
-  DescribeGroupProIspPlayInfoListResponse,
-  PushAuthKeyInfo,
   DomainInfoList,
-  PlayCodeTotalInfo,
-  DeleteLiveRecordTemplateRequest,
-  DeleteLiveCallbackTemplateResponse,
   CreateScreenshotTaskRequest,
-  PushQualityData,
-  UnBindLiveDomainCertResponse,
-  ModifyLivePlayAuthKeyRequest,
-  DescribeLiveDelayInfoListRequest,
-  HttpCodeValue,
   DomainCertInfo,
-  CreateLiveTimeShiftRuleResponse,
-  DeleteLiveTranscodeRuleResponse,
+  RecordTemplateInfo,
+  ProIspPlayCodeDataInfo,
   ConcurrentRecordStreamNum,
   DescribeStreamPlayInfoListResponse,
-  DescribeScreenShotSheetNumListResponse,
-  ForbidLiveStreamResponse,
-  DescribeLiveCertRequest,
   CreateLivePullStreamTaskResponse,
   ModifyLivePushAuthKeyRequest,
-  DeleteLiveSnapshotTemplateResponse,
-  DescribeLiveStreamStateRequest,
+  DescribeProIspPlaySumInfoListResponse,
   DescribeLivePlayAuthKeyResponse,
   DescribeLiveCallbackTemplatesRequest,
-  DomainInfo,
-  DescribeLiveTranscodeRulesRequest,
+  CreateLivePadRuleRequest,
   DeleteLiveSnapshotRuleRequest,
-  DescribePlayErrorCodeDetailInfoListRequest,
-  DeleteLivePullStreamTaskRequest,
   CreateLiveTimeShiftRuleRequest,
-  CommonMixOutputParams,
-  DescribePushBandwidthAndFluxListResponse,
-  DescribeUploadStreamNumsRequest,
-  DescribeLiveSnapshotRulesResponse,
-  DescribeLiveTranscodeDetailInfoResponse,
   DescribeLiveDomainRequest,
-  AuthenticateDomainOwnerResponse,
-  DeleteLiveTranscodeRuleRequest,
   DescribePushBandwidthAndFluxListRequest,
   CreateLiveRecordRuleRequest,
-  DescribeLiveSnapshotTemplatesRequest,
-  AddLiveWatermarkResponse,
-  DescribeLiveStreamPushInfoListResponse,
-  DescribeLiveDomainCertResponse,
-  DescribeLiveRecordTemplateRequest,
-  MonitorStreamPlayInfo,
-  StreamOnlineInfo,
-  CreateLiveWatermarkRuleResponse,
+  ModifyLiveStreamMonitorRequest,
   ModifyLiveSnapshotTemplateResponse,
-  DeleteScreenshotTaskRequest,
-  DescribeProIspPlaySumInfoListRequest,
+  DeleteLivePadTemplateRequest,
   DescribeTimeShiftStreamListRequest,
-  DescribeDeliverBandwidthListRequest,
-  DescribeScreenshotTaskResponse,
-  AddLiveWatermarkRequest,
-  TranscodeTaskNum,
-  BillCountryInfo,
   ModifyLivePlayDomainRequest,
-  DeleteLiveRecordTemplateResponse,
   DescribeLiveWatermarkRequest,
-  LogInfo,
-  CommonMixLayoutParams,
-  DescribeLiveDomainCertRequest,
-  DescribeLiveStreamEventListRequest,
-  DescribePullStreamConfigsRequest,
-  CallBackTemplateInfo,
-  DescribePlayErrorCodeSumInfoListResponse,
-  DescribeLiveTimeShiftTemplatesRequest,
-  DeleteLiveRecordResponse,
-  DescribeScreenShotSheetNumListRequest,
-  ForbidLiveStreamRequest,
   DescribeLiveDomainsResponse,
-  TimeValue,
   ModifyLiveTimeShiftTemplateRequest,
   ModifyLiveDomainCertBindingsResponse,
-  PullStreamConfig,
-  CreateLiveRecordResponse,
-  RuleInfo,
-  UpdateLiveWatermarkResponse,
-  ModifyLiveDomainCertBindingsRequest,
-  DescribeRecordTaskRequest,
-  LivePackageInfo,
-  CreateLiveTranscodeTemplateResponse,
-  BillAreaInfo,
-  TimeShiftTemplate,
-  LiveCertDomainInfo,
-  DescribeLiveTimeShiftRulesRequest,
-  DescribeVisitTopSumInfoListRequest,
-  DayStreamPlayInfo,
+  DescribeLiveRecordRulesRequest,
+  DescribeLiveStreamMonitorResponse,
   ModifyPullStreamStatusResponse,
   DeleteLiveTimeShiftRuleRequest,
-  CancelCommonMixStreamResponse,
-  DescribeLiveDomainCertBindingsResponse,
-  DescribeConcurrentRecordStreamNumResponse,
-  DescribeLiveTimeShiftBillInfoListRequest,
-  RecordTask,
-  DescribeLiveCertsResponse,
   CommonMixInputParam,
-  WatermarkInfo,
-  DescribeLiveWatermarkRulesResponse,
-  DescribeLiveRecordTemplatesResponse,
-  DescribeScreenshotTaskRequest,
-  PlayDataInfoByStream,
-  DescribeCallbackRecordsListRequest,
-  DescribeLiveCallbackTemplatesResponse,
-  ModifyLivePlayAuthKeyResponse,
   CreateLiveCallbackTemplateRequest,
-  CallbackEventInfo,
-  DescribeTopClientIpSumInfoListResponse,
-  DropLiveStreamResponse,
-  DescribeLiveStreamStateResponse,
-  ScreenshotTask,
-  DeletePullStreamConfigResponse,
-  DeleteLiveWatermarkRuleRequest,
   StreamEventInfo,
   DeleteRecordTaskResponse,
-  DescribeLiveWatermarksRequest,
   CreateLiveTranscodeRuleRequest,
-  DescribeLiveWatermarkRulesRequest,
   DropLiveStreamRequest,
-  DeleteLiveTimeShiftRuleResponse,
-  PullPushWatermarkInfo,
-  UnBindLiveDomainCertRequest,
-  DescribeProvinceIspPlayInfoListResponse,
   CreateCommonMixStreamRequest,
-  RefererAuthConfig,
-  DescribeTimeShiftRecordDetailRequest,
   PushDataInfo,
-  AddDelayLiveStreamRequest,
-  DescribeGroupProIspPlayInfoListRequest,
-  ModifyPullStreamStatusRequest,
-  DescribeStreamDayPlayInfoListRequest,
-  RestartLivePullStreamTaskRequest,
   DescribeLiveSnapshotTemplateResponse,
-  DescribeLiveTranscodeRulesResponse,
   CreateLiveTimeShiftTemplateRequest,
   DescribeLiveDomainRefererResponse,
-  AddLiveDomainRequest,
-  StreamName,
-  DescribeLivePackageInfoRequest,
-  CreatePullStreamConfigRequest,
-  DescribeLiveCertsRequest,
-  DeleteLiveTimeShiftTemplateRequest,
-  ModifyLivePlayDomainResponse,
-  CdnPlayStatData,
-  AddLiveDomainResponse,
   DescribeHttpStatusInfoListRequest,
-  ModifyPullStreamConfigResponse,
-  ModifyLiveCallbackTemplateRequest,
-  ProIspPlayCodeDataInfo,
-  DescribeProvinceIspPlayInfoListRequest,
-  DescribeLivePlayAuthKeyRequest,
-  DeleteLivePullStreamTaskResponse,
+  StartLiveStreamMonitorRequest,
   AuthenticateDomainOwnerRequest,
-  DescribeLiveForbidStreamListResponse,
-  DescribeStreamPushInfoListRequest,
   DeleteLiveTimeShiftTemplateResponse,
-  ModifyLivePushAuthKeyResponse,
-  DescribeLiveWatermarkResponse,
-  ResumeLiveStreamResponse,
-  DescribeLiveStreamOnlineListResponse,
-  DeletePullStreamConfigRequest,
-  DescribeTimeShiftStreamListResponse,
+  DescribeScreenshotTaskResponse,
   ModifyPullStreamConfigRequest,
-  ModifyLiveTimeShiftTemplateResponse,
-  DescribeStreamPushInfoListResponse,
-  DescribeLiveStreamPushInfoListRequest,
-  StopLiveRecordResponse,
-  DescribeLiveWatermarksResponse,
-  TimeShiftBillData,
-  DescribeLiveForbidStreamListRequest,
-  DescribeLiveDomainPlayInfoListRequest,
-  CreatePullStreamConfigResponse,
+  DescribeProvinceIspPlayInfoListResponse,
   DescribeLivePackageInfoResponse,
-  DescribeTopClientIpSumInfoListRequest,
   CreateLiveCallbackRuleRequest,
-  DeleteLiveWatermarkRuleResponse,
   TimeShiftRecord,
-  DescribeCallbackRecordsListResponse,
-  PublishTime,
-  ModifyLiveTranscodeTemplateResponse,
-  ModifyLivePullStreamTaskRequest,
-  DescribePlayErrorCodeSumInfoListRequest,
-  DescribeLiveTranscodeDetailInfoRequest,
-  ModifyLiveDomainRefererResponse,
-  DeleteLiveWatermarkRequest,
   DescribeLiveDomainsRequest,
-  ProIspPlaySumInfo,
   SnapshotTemplateInfo,
-  DeleteLiveSnapshotRuleResponse,
-  CreateLiveRecordRequest,
   DescribeLiveTimeShiftBillInfoListResponse,
-  BandwidthInfo,
-  DescribeLogDownloadListResponse,
-  CancelCommonMixStreamRequest,
-  RecentPullInfo,
   CertInfo,
-  TranscodeDetailInfo,
-  DescribeRecordTaskResponse,
-  DescribeLiveDelayInfoListResponse,
-  DeleteLiveTranscodeTemplateRequest,
   DescribeLiveCallbackRulesRequest,
-  XP2PDetailInfo,
-  ClientIpPlaySumInfo,
-  DescribeLiveTranscodeTemplateResponse,
-  CreateLiveSnapshotTemplateResponse,
   DescribeConcurrentRecordStreamNumRequest,
-  RecordTemplateInfo,
   DeleteScreenshotTaskResponse,
-  ModifyLiveRecordTemplateResponse,
-  CommonMixControlParams,
-  ModifyLiveRecordTemplateRequest,
-  DescribeTranscodeTaskNumResponse,
-  DescribeAreaBillBandwidthAndFluxListResponse,
-  ForbidLiveDomainRequest,
-  DescribeLiveRecordRulesRequest,
-  DescribePlayErrorCodeDetailInfoListResponse,
-  TimeShiftStreamInfo,
+  DescribeLiveStreamStateRequest,
   CreateLiveRecordTemplateResponse,
-  GroupProIspDataInfo,
-  RecordParam,
-  DomainDetailInfo,
-  HttpStatusInfo,
-  DeleteLiveRecordRequest,
-  DescribeLiveSnapshotTemplatesResponse,
-  StopRecordTaskRequest,
-  DescribeLiveDomainRefererRequest,
-  HttpStatusData,
-  StopScreenshotTaskRequest,
-  HttpCodeInfo,
-  DescribeStreamPlayInfoListRequest,
-  CreateLiveTranscodeTemplateRequest,
-  DescribeLiveStreamPublishedListResponse,
+  EnableLiveDomainRequest,
   DescribeLiveTimeShiftRulesResponse,
-  DeleteLiveDomainRequest,
-  ForbidLiveDomainResponse,
-  DescribeLiveTimeShiftTemplatesResponse,
-  AddDelayLiveStreamResponse,
   DescribeLiveTranscodeTemplatesResponse,
   DeleteLiveCallbackRuleRequest,
-  PlayAuthKeyInfo,
-  BatchDomainOperateErrors,
-  ModifyLiveTranscodeTemplateRequest,
-  ModifyLiveCallbackTemplateResponse,
-  EnableLiveDomainRequest,
   DescribeAllStreamPlayInfoListResponse,
-  DescribeLiveTranscodeTotalInfoResponse,
-  DescribeLiveSnapshotRulesRequest,
-  CreateRecordTaskRequest,
-  DescribeLivePullStreamTasksResponse,
-  CreateLiveTranscodeRuleResponse,
-  ResumeDelayLiveStreamResponse,
-  CreateLiveCallbackRuleResponse,
-  DescribeLiveRecordTemplateResponse,
-  DescribeAreaBillBandwidthAndFluxListRequest,
-  CallBackRuleInfo,
-  PlaySumStatInfo,
-  DescribeLiveTranscodeTemplatesRequest,
-  DescribeBillBandwidthAndFluxListRequest,
+  DescribeVisitTopSumInfoListResponse,
+  TimeShiftBillData,
+  HlsSpecialParam,
   DescribeLiveRecordRulesResponse,
-  CreateLiveSnapshotTemplateRequest,
-  DescribeLiveDomainPlayInfoListResponse,
-  RestartLivePullStreamTaskResponse,
-  DescribeLivePullStreamTasksRequest,
-  DescribeLiveStreamOnlineListRequest,
-  DeleteLiveCallbackTemplateRequest,
-  DescribeLiveSnapshotTemplateRequest,
-  LiveDomainCertBindings,
+  StopLiveStreamMonitorRequest,
+  DeleteLiveSnapshotTemplateResponse,
   CreateCommonMixStreamResponse,
   ModifyLiveDomainRefererRequest,
-  CreateLiveCallbackTemplateResponse,
-  DescribeLivePushAuthKeyRequest,
   PlayStatInfo,
-  DescribeLiveCallbackTemplateRequest,
-  ModifyLiveSnapshotTemplateRequest,
-  DescribeLiveCertResponse,
-  CreateLiveRecordRuleResponse,
-  DescribeLiveTranscodeTemplateRequest,
+  PadTemplate,
   DescribeLogDownloadListRequest,
   DeleteLiveWatermarkResponse,
-  DescribeLivePushAuthKeyResponse,
-  CreateLiveWatermarkRuleRequest,
+  DropLiveStreamResponse,
   DescribeLiveRecordTemplatesRequest,
-  DescribeAllStreamPlayInfoListRequest,
-  DescribeLiveDomainResponse,
-  DeleteRecordTaskRequest,
+  DescribeTimeShiftRecordDetailRequest,
   PullStreamTaskInfo,
-  UpdateLiveWatermarkRequest,
   CreateLiveTimeShiftTemplateResponse,
-  DescribeStreamDayPlayInfoListResponse,
-  StopLiveRecordRequest,
-  DescribeVisitTopSumInfoListResponse,
-  DescribeLiveXP2PDetailInfoListRequest,
-  ModifyLivePullStreamTaskResponse,
-  CreateLiveSnapshotRuleResponse,
-  DelayInfo,
-  DescribeLiveStreamEventListResponse,
+  DescribeLivePadRulesRequest,
   DescribePullStreamConfigsResponse,
   DescribeTranscodeTaskNumRequest,
   DescribeLiveCallbackRulesResponse,
-  DescribeLiveTranscodeTotalInfoRequest,
-  StopScreenshotTaskResponse,
-  CreateRecordTaskResponse,
-  ForbidStreamInfo,
-  DescribeTimeShiftRecordDetailResponse,
-  DescribeLiveDomainCertBindingsRequest,
-  DeleteLiveDomainResponse,
-  CommonMixCropParams,
+  BatchDomainOperateErrors,
+  ResumeDelayLiveStreamResponse,
+  ModifyLiveDomainRefererResponse,
   CreateLiveRecordTemplateRequest,
-  TemplateInfo,
-  DescribeProIspPlaySumInfoListResponse,
+  DescribeLivePullStreamTasksRequest,
   DescribeHttpStatusInfoListResponse,
-  DeleteLiveRecordRuleResponse,
+  CreateLiveSnapshotRuleRequest,
+  BillDataInfo,
+  DescribeLiveSnapshotRulesResponse,
+  DescribeDeliverBandwidthListResponse,
+  CreateLiveStreamMonitorResponse,
+  DescribeLivePadTemplateRequest,
+  DeleteLiveCallbackTemplateResponse,
+  ModifyLivePlayAuthKeyRequest,
+  DescribeLiveDelayInfoListRequest,
+  DescribeLiveTranscodeTemplateResponse,
+  DescribeScreenShotSheetNumListResponse,
+  CreateLiveRecordRuleResponse,
+  ModifyLivePullStreamTaskResponse,
+  DescribeUploadStreamNumsRequest,
+  EnableLiveDomainResponse,
+  AuthenticateDomainOwnerResponse,
+  DeleteLiveTranscodeRuleRequest,
+  AddLiveWatermarkResponse,
+  DescribeLiveDomainCertResponse,
+  ForbidLiveStreamRequest,
+  DescribeConcurrentRecordStreamNumResponse,
+  DeleteLiveRecordTemplateResponse,
+  DescribePullStreamConfigsRequest,
+  DescribePlayErrorCodeSumInfoListResponse,
+  UnBindLiveDomainCertRequest,
+  TimeValue,
+  CreateLiveRecordResponse,
+  UpdateLiveWatermarkResponse,
+  DescribeLiveRecordTemplateResponse,
+  BillAreaInfo,
+  LiveCertDomainInfo,
+  DescribeLiveTimeShiftRulesRequest,
+  DescribePlayErrorCodeSumInfoListRequest,
+  DescribeLiveTimeShiftBillInfoListRequest,
+  PushQualityData,
+  DescribeLiveCertRequest,
+  PlaySumStatInfo,
+  RefererAuthConfig,
+  TranscodeDetailInfo,
+  ModifyLiveRecordTemplateResponse,
+  AddLiveDomainRequest,
+  StreamName,
+  DescribeLivePackageInfoRequest,
+  DescribeLiveStreamMonitorListResponse,
+  DeleteLiveTimeShiftTemplateRequest,
+  CdnPlayStatData,
+  AddLiveDomainResponse,
+  ModifyPullStreamConfigResponse,
+  DescribeProvinceIspPlayInfoListRequest,
+  StartLiveStreamMonitorResponse,
+  DescribeLiveForbidStreamListResponse,
+  CreateLivePadRuleResponse,
+  DescribeLiveWatermarkResponse,
+  DescribeTimeShiftStreamListResponse,
+  LivePackageInfo,
+  DescribeLiveForbidStreamListRequest,
+  LiveStreamMonitorNotifyPolicy,
+  LiveStreamMonitorInfo,
+  RecentPullInfo,
+  ForbidLiveStreamResponse,
+  DescribeLiveSnapshotTemplatesResponse,
+  DescribeRecordTaskResponse,
+  DescribeAreaBillBandwidthAndFluxListResponse,
+  ForbidLiveDomainRequest,
+  RecordParam,
+  ModifyLiveRecordTemplateRequest,
+  DescribeLiveDomainRefererRequest,
+  HttpStatusData,
+  HttpCodeInfo,
+  DescribeLiveStreamPublishedListResponse,
+  AddDelayLiveStreamResponse,
+  DescribeLivePadTemplatesRequest,
+  ModifyLivePlayAuthKeyResponse,
+  DescribeLiveTranscodeTotalInfoResponse,
+  CreateLiveTranscodeRuleResponse,
+  CreateLiveTranscodeTemplateResponse,
+  ModifyLivePadTemplateRequest,
+  CreateLiveSnapshotTemplateRequest,
+  ModifyLiveCallbackTemplateRequest,
+  DescribeMonitorReportRequest,
+  DescribeAllStreamPlayInfoListRequest,
+  DescribeLiveDomainResponse,
+  DescribeLiveXP2PDetailInfoListRequest,
+  ModifyLivePushAuthKeyResponse,
+  StopScreenshotTaskResponse,
+  RecordTask,
+  DescribeTimeShiftRecordDetailResponse,
+  DeleteLiveDomainResponse,
 } from "./live_models"
 
 /**
@@ -533,6 +572,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 该接口用来启动直播流监播任务。
+   */
+  async StartLiveStreamMonitor(
+    req: StartLiveStreamMonitorRequest,
+    cb?: (error: string, rep: StartLiveStreamMonitorResponse) => void
+  ): Promise<StartLiveStreamMonitorResponse> {
+    return this.request("StartLiveStreamMonitor", req, cb)
+  }
+
+  /**
    * 获取截图规则列表
    */
   async DescribeLiveSnapshotRules(
@@ -560,6 +609,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteLiveTranscodeTemplateResponse) => void
   ): Promise<DeleteLiveTranscodeTemplateResponse> {
     return this.request("DeleteLiveTranscodeTemplate", req, cb)
+  }
+
+  /**
+   * 创建直播垫片模板。
+   */
+  async CreateLivePadTemplate(
+    req: CreateLivePadTemplateRequest,
+    cb?: (error: string, rep: CreateLivePadTemplateResponse) => void
+  ): Promise<CreateLivePadTemplateResponse> {
+    return this.request("CreateLivePadTemplate", req, cb)
+  }
+
+  /**
+   * 获取截图模板列表。
+   */
+  async DescribeLiveSnapshotTemplates(
+    req?: DescribeLiveSnapshotTemplatesRequest,
+    cb?: (error: string, rep: DescribeLiveSnapshotTemplatesResponse) => void
+  ): Promise<DescribeLiveSnapshotTemplatesResponse> {
+    return this.request("DescribeLiveSnapshotTemplates", req, cb)
   }
 
   /**
@@ -610,13 +679,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取录制模板列表。
+   * 该接口用来查询直播流监播任务配置的列表信息。
    */
-  async DescribeLiveRecordTemplates(
-    req: DescribeLiveRecordTemplatesRequest,
-    cb?: (error: string, rep: DescribeLiveRecordTemplatesResponse) => void
-  ): Promise<DescribeLiveRecordTemplatesResponse> {
-    return this.request("DescribeLiveRecordTemplates", req, cb)
+  async DescribeLiveStreamMonitorList(
+    req: DescribeLiveStreamMonitorListRequest,
+    cb?: (error: string, rep: DescribeLiveStreamMonitorListResponse) => void
+  ): Promise<DescribeLiveStreamMonitorListResponse> {
+    return this.request("DescribeLiveStreamMonitorList", req, cb)
   }
 
   /**
@@ -627,6 +696,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: AuthenticateDomainOwnerResponse) => void
   ): Promise<AuthenticateDomainOwnerResponse> {
     return this.request("AuthenticateDomainOwner", req, cb)
+  }
+
+  /**
+   * 该接口用来修改直播流监播任务的配置。
+   */
+  async ModifyLiveStreamMonitor(
+    req: ModifyLiveStreamMonitorRequest,
+    cb?: (error: string, rep: ModifyLiveStreamMonitorResponse) => void
+  ): Promise<ModifyLiveStreamMonitorResponse> {
+    return this.request("ModifyLiveStreamMonitor", req, cb)
   }
 
   /**
@@ -687,6 +766,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteLiveWatermarkRuleResponse) => void
   ): Promise<DeleteLiveWatermarkRuleResponse> {
     return this.request("DeleteLiveWatermarkRule", req, cb)
+  }
+
+  /**
+   * 删除直播垫片模板。
+   */
+  async DeleteLivePadTemplate(
+    req: DeleteLivePadTemplateRequest,
+    cb?: (error: string, rep: DeleteLivePadTemplateResponse) => void
+  ): Promise<DeleteLivePadTemplateResponse> {
+    return this.request("DeleteLivePadTemplate", req, cb)
   }
 
   /**
@@ -786,6 +875,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取单个转码模板。
+   */
+  async DescribeLiveTranscodeTemplate(
+    req: DescribeLiveTranscodeTemplateRequest,
+    cb?: (error: string, rep: DescribeLiveTranscodeTemplateResponse) => void
+  ): Promise<DescribeLiveTranscodeTemplateResponse> {
+    return this.request("DescribeLiveTranscodeTemplate", req, cb)
+  }
+
+  /**
    * 提前结束截图，中止运行中的截图任务。任务被成功终止后，本次任务将不再启动。
    */
   async StopScreenshotTask(
@@ -796,6 +895,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 用来查询监播场次7天内的智能识别、断流、低帧率等信息的汇总报告。
+   */
+  async DescribeMonitorReport(
+    req: DescribeMonitorReportRequest,
+    cb?: (error: string, rep: DescribeMonitorReportResponse) => void
+  ): Promise<DescribeMonitorReportResponse> {
+    return this.request("DescribeMonitorReport", req, cb)
+  }
+
+  /**
    * 查询直播拉流配置。该接口已下线,请使用新接口 DescribeLivePullStreamTasks。
    */
   async DescribePullStreamConfigs(
@@ -803,6 +912,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribePullStreamConfigsResponse) => void
   ): Promise<DescribePullStreamConfigsResponse> {
     return this.request("DescribePullStreamConfigs", req, cb)
+  }
+
+  /**
+   * 该接口用来查询某个特定监播任务的配置。
+   */
+  async DescribeLiveStreamMonitor(
+    req: DescribeLiveStreamMonitorRequest,
+    cb?: (error: string, rep: DescribeLiveStreamMonitorResponse) => void
+  ): Promise<DescribeLiveStreamMonitorResponse> {
+    return this.request("DescribeLiveStreamMonitor", req, cb)
   }
 
   /**
@@ -947,20 +1066,23 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
   }
 
   /**
-     * 创建直播拉流任务。支持将外部已有的点播文件，或者直播源拉取过来转推到指定的目标地址。
-注意：
-1. 默认支持任务数上限200个，如有特殊需求，可通过提单到售后进行评估增加上限。
-2. 源流视频编码目前只支持: H264, H265。其他编码格式建议先进行转码处理。
-3. 源流音频编码目前只支持: AAC。其他编码格式建议先进行转码处理。
-4. 可在控制台开启过期自动清理，避免过期任务占用任务数额度。
-5. 拉流转推功能为计费增值服务，计费规则详情可参见[计费文档](https://cloud.tencent.com/document/product/267/53308)。
-6. 拉流转推功能仅提供内容拉取与推送服务，请确保内容已获得授权并符合内容传播相关的法律法规。若内容有侵权或违规相关问题，云直播会停止相关的功能服务并保留追究法律责任的权利。
-     */
-  async CreateLivePullStreamTask(
-    req: CreateLivePullStreamTaskRequest,
-    cb?: (error: string, rep: CreateLivePullStreamTaskResponse) => void
-  ): Promise<CreateLivePullStreamTaskResponse> {
-    return this.request("CreateLivePullStreamTask", req, cb)
+   * 修改直播垫片模板。
+   */
+  async ModifyLivePadTemplate(
+    req: ModifyLivePadTemplateRequest,
+    cb?: (error: string, rep: ModifyLivePadTemplateResponse) => void
+  ): Promise<ModifyLivePadTemplateResponse> {
+    return this.request("ModifyLivePadTemplate", req, cb)
+  }
+
+  /**
+   * 获取单个水印信息。
+   */
+  async DescribeLiveWatermark(
+    req: DescribeLiveWatermarkRequest,
+    cb?: (error: string, rep: DescribeLiveWatermarkResponse) => void
+  ): Promise<DescribeLiveWatermarkResponse> {
+    return this.request("DescribeLiveWatermark", req, cb)
   }
 
   /**
@@ -1140,13 +1262,23 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
   }
 
   /**
-   * 获取截图模板列表。
+   * 该接口用来创建直播流监播任务。
    */
-  async DescribeLiveSnapshotTemplates(
-    req?: DescribeLiveSnapshotTemplatesRequest,
-    cb?: (error: string, rep: DescribeLiveSnapshotTemplatesResponse) => void
-  ): Promise<DescribeLiveSnapshotTemplatesResponse> {
-    return this.request("DescribeLiveSnapshotTemplates", req, cb)
+  async CreateLiveStreamMonitor(
+    req: CreateLiveStreamMonitorRequest,
+    cb?: (error: string, rep: CreateLiveStreamMonitorResponse) => void
+  ): Promise<CreateLiveStreamMonitorResponse> {
+    return this.request("CreateLiveStreamMonitor", req, cb)
+  }
+
+  /**
+   * 创建直播垫片规则。
+   */
+  async CreateLivePadRule(
+    req: CreateLivePadRuleRequest,
+    cb?: (error: string, rep: CreateLivePadRuleResponse) => void
+  ): Promise<CreateLivePadRuleResponse> {
+    return this.request("CreateLivePadRule", req, cb)
   }
 
   /**
@@ -1170,13 +1302,13 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
   }
 
   /**
-   * 获取单个转码模板。
+   * 获取单个直播垫片模板
    */
-  async DescribeLiveTranscodeTemplate(
-    req: DescribeLiveTranscodeTemplateRequest,
-    cb?: (error: string, rep: DescribeLiveTranscodeTemplateResponse) => void
-  ): Promise<DescribeLiveTranscodeTemplateResponse> {
-    return this.request("DescribeLiveTranscodeTemplate", req, cb)
+  async DescribeLivePadTemplate(
+    req: DescribeLivePadTemplateRequest,
+    cb?: (error: string, rep: DescribeLivePadTemplateResponse) => void
+  ): Promise<DescribeLivePadTemplateResponse> {
+    return this.request("DescribeLivePadTemplate", req, cb)
   }
 
   /**
@@ -1297,6 +1429,16 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
     cb?: (error: string, rep: DescribeLiveDomainResponse) => void
   ): Promise<DescribeLiveDomainResponse> {
     return this.request("DescribeLiveDomain", req, cb)
+  }
+
+  /**
+   * 删除直播垫片规则。
+   */
+  async DeleteLivePadRule(
+    req: DeleteLivePadRuleRequest,
+    cb?: (error: string, rep: DeleteLivePadRuleResponse) => void
+  ): Promise<DeleteLivePadRuleResponse> {
+    return this.request("DeleteLivePadRule", req, cb)
   }
 
   /**
@@ -1464,13 +1606,20 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
   }
 
   /**
-   * 获取单个水印信息。
-   */
-  async DescribeLiveWatermark(
-    req: DescribeLiveWatermarkRequest,
-    cb?: (error: string, rep: DescribeLiveWatermarkResponse) => void
-  ): Promise<DescribeLiveWatermarkResponse> {
-    return this.request("DescribeLiveWatermark", req, cb)
+     * 创建直播拉流任务。支持将外部已有的点播文件，或者直播源拉取过来转推到指定的目标地址。
+注意：
+1. 默认支持任务数上限200个，如有特殊需求，可通过提单到售后进行评估增加上限。
+2. 源流视频编码目前只支持: H264, H265。其他编码格式建议先进行转码处理。
+3. 源流音频编码目前只支持: AAC。其他编码格式建议先进行转码处理。
+4. 可在控制台开启过期自动清理，避免过期任务占用任务数额度。
+5. 拉流转推功能为计费增值服务，计费规则详情可参见[计费文档](https://cloud.tencent.com/document/product/267/53308)。
+6. 拉流转推功能仅提供内容拉取与推送服务，请确保内容已获得授权并符合内容传播相关的法律法规。若内容有侵权或违规相关问题，云直播会停止相关的功能服务并保留追究法律责任的权利。
+     */
+  async CreateLivePullStreamTask(
+    req: CreateLivePullStreamTaskRequest,
+    cb?: (error: string, rep: CreateLivePullStreamTaskResponse) => void
+  ): Promise<CreateLivePullStreamTaskResponse> {
+    return this.request("CreateLivePullStreamTask", req, cb)
   }
 
   /**
@@ -1549,6 +1698,21 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
   }
 
   /**
+     * 创建临时拉流转推任务，目前限制添加10条任务。
+该接口已下线,请使用新接口 CreateLivePullStreamTask。
+
+注意：该接口用于创建临时拉流转推任务，
+拉流源地址即 FromUrl 可以是腾讯或非腾讯数据源，
+但转推目标地址即 ToUrl 目前限制为已注册的腾讯直播域名。
+     */
+  async CreatePullStreamConfig(
+    req: CreatePullStreamConfigRequest,
+    cb?: (error: string, rep: CreatePullStreamConfigResponse) => void
+  ): Promise<CreatePullStreamConfigResponse> {
+    return this.request("CreatePullStreamConfig", req, cb)
+  }
+
+  /**
    * 获取水印规则列表。
    */
   async DescribeLiveWatermarkRules(
@@ -1559,6 +1723,16 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
   }
 
   /**
+   * 获取直播垫片规则列表。
+   */
+  async DescribeLivePadRules(
+    req?: DescribeLivePadRulesRequest,
+    cb?: (error: string, rep: DescribeLivePadRulesResponse) => void
+  ): Promise<DescribeLivePadRulesResponse> {
+    return this.request("DescribeLivePadRules", req, cb)
+  }
+
+  /**
    * 注：DeleteLiveRecord 接口仅用于删除录制任务记录，不具备停止录制的功能，也不能删除正在进行中的录制。如果需要停止录制任务，请使用终止录制[StopLiveRecord](/document/product/267/30146) 接口。
    */
   async DeleteLiveRecord(
@@ -1566,6 +1740,16 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
     cb?: (error: string, rep: DeleteLiveRecordResponse) => void
   ): Promise<DeleteLiveRecordResponse> {
     return this.request("DeleteLiveRecord", req, cb)
+  }
+
+  /**
+   * 获取录制模板列表。
+   */
+  async DescribeLiveRecordTemplates(
+    req: DescribeLiveRecordTemplatesRequest,
+    cb?: (error: string, rep: DescribeLiveRecordTemplatesResponse) => void
+  ): Promise<DescribeLiveRecordTemplatesResponse> {
+    return this.request("DescribeLiveRecordTemplates", req, cb)
   }
 
   /**
@@ -1588,6 +1772,16 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
     cb?: (error: string, rep: CreateLiveTimeShiftTemplateResponse) => void
   ): Promise<CreateLiveTimeShiftTemplateResponse> {
     return this.request("CreateLiveTimeShiftTemplate", req, cb)
+  }
+
+  /**
+   * 该接口用来删除直播流监播任务。
+   */
+  async DeleteLiveStreamMonitor(
+    req: DeleteLiveStreamMonitorRequest,
+    cb?: (error: string, rep: DeleteLiveStreamMonitorResponse) => void
+  ): Promise<DeleteLiveStreamMonitorResponse> {
+    return this.request("DeleteLiveStreamMonitor", req, cb)
   }
 
   /**
@@ -1628,6 +1822,16 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
     cb?: (error: string, rep: DescribeLivePlayAuthKeyResponse) => void
   ): Promise<DescribeLivePlayAuthKeyResponse> {
     return this.request("DescribeLivePlayAuthKey", req, cb)
+  }
+
+  /**
+   * 该接口用来停止直播流监播任务。
+   */
+  async StopLiveStreamMonitor(
+    req: StopLiveStreamMonitorRequest,
+    cb?: (error: string, rep: StopLiveStreamMonitorResponse) => void
+  ): Promise<StopLiveStreamMonitorResponse> {
+    return this.request("StopLiveStreamMonitor", req, cb)
   }
 
   /**
@@ -1751,18 +1955,13 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
   }
 
   /**
-     * 创建临时拉流转推任务，目前限制添加10条任务。
-该接口已下线,请使用新接口 CreateLivePullStreamTask。
-
-注意：该接口用于创建临时拉流转推任务，
-拉流源地址即 FromUrl 可以是腾讯或非腾讯数据源，
-但转推目标地址即 ToUrl 目前限制为已注册的腾讯直播域名。
-     */
-  async CreatePullStreamConfig(
-    req: CreatePullStreamConfigRequest,
-    cb?: (error: string, rep: CreatePullStreamConfigResponse) => void
-  ): Promise<CreatePullStreamConfigResponse> {
-    return this.request("CreatePullStreamConfig", req, cb)
+   * 获取直播垫片模板。
+   */
+  async DescribeLivePadTemplates(
+    req?: DescribeLivePadTemplatesRequest,
+    cb?: (error: string, rep: DescribeLivePadTemplatesResponse) => void
+  ): Promise<DescribeLivePadTemplatesResponse> {
+    return this.request("DescribeLivePadTemplates", req, cb)
   }
 
   /**

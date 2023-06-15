@@ -418,11 +418,11 @@ export interface SslVpnClient {
  */
 export interface SourceIpTranslationNatRule {
     /**
-     * 资源ID
+     * 资源ID，如果ResourceType为USERDEFINED，可以为空
      */
     ResourceId: string;
     /**
-     * 资源类型，目前包含SUBNET、NETWORKINTERFACE
+     * 资源类型，目前包含SUBNET、NETWORKINTERFACE、USERDEFINED
   注意：此字段可能返回 null，表示取不到有效值。
      */
     ResourceType: string;
@@ -3147,11 +3147,11 @@ export interface CreateNatGatewayResponse {
     /**
      * NAT网关对象数组。
      */
-    NatGatewaySet: Array<NatGateway>;
+    NatGatewaySet?: Array<NatGateway>;
     /**
      * 符合条件的 NAT网关对象数量。
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -4612,6 +4612,11 @@ export interface NatGateway {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     RestrictState: string;
+    /**
+     * NAT网关大版本号，传统型=1，标准型=2
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    NatProductVersion: number;
 }
 /**
  * AssociateDhcpIpWithAddressIp请求参数结构体
@@ -8198,7 +8203,7 @@ export interface ModifySecurityGroupAttributeResponse {
  */
 export interface AssociateDirectConnectGatewayNatGatewayRequest {
     /**
-     * 专线网关ID。
+     * VPC实例ID。可通过DescribeVpcs接口返回值中的VpcId获取。
      */
     VpcId: string;
     /**
@@ -8206,7 +8211,7 @@ export interface AssociateDirectConnectGatewayNatGatewayRequest {
      */
     NatGatewayId: string;
     /**
-     * VPC实例ID。可通过DescribeVpcs接口返回值中的VpcId获取。
+     * 专线网关ID。
      */
     DirectConnectGatewayId: string;
 }

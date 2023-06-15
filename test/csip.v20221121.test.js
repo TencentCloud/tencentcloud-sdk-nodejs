@@ -18,6 +18,36 @@ const client = new tencentcloud.csip.v20221121.Client({
 })
 describe("csip.v20221121.test.js", function () {
 
+it("csip.v20221121.DescribeRiskCenterAssetViewVULRiskList", async function () {
+    try {
+       const data = await client.DescribeRiskCenterAssetViewVULRiskList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("csip.v20221121.DescribeClusterPodAssets", async function () {
+    try {
+       const data = await client.DescribeClusterPodAssets({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("csip.v20221121.DescribeSubnetAssets", async function () {
+    try {
+       const data = await client.DescribeSubnetAssets({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("csip.v20221121.DescribeVpcAssets", async function () {
     try {
        const data = await client.DescribeVpcAssets({})
@@ -41,6 +71,26 @@ it("csip.v20221121.DescribeDbAssetInfo", async function () {
 it("csip.v20221121.DescribeCVMAssets", async function () {
     try {
        const data = await client.DescribeCVMAssets({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("csip.v20221121.DescribeDomainAssets", async function () {
+    try {
+       const data = await client.DescribeDomainAssets({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("csip.v20221121.DescribePublicIpAssets", async function () {
+    try {
+       const data = await client.DescribePublicIpAssets({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -78,9 +128,9 @@ it("csip.v20221121.CreateDomainAndIp", async function () {
     }
 })
 
-it("csip.v20221121.DescribeSubnetAssets", async function () {
+it("csip.v20221121.DescribeRiskCenterAssetViewPortRiskList", async function () {
     try {
-       const data = await client.DescribeSubnetAssets({})
+       const data = await client.DescribeRiskCenterAssetViewPortRiskList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -10,12 +10,12 @@ export interface Canvas {
      */
     Color?: string;
     /**
-     * 画布宽度，即输出视频的宽度，取值范围：0~ 4096，单位：px。
+     * 画布宽度，即输出视频的宽度，取值范围：0~ 3840，单位：px。
   默认值：0，表示和第一个视频轨的第一个视频片段的视频宽度一致。
      */
     Width?: number;
     /**
-     * 画布高度，即输出视频的高度（或长边），取值范围：0~ 4096，单位：px。
+     * 画布高度，即输出视频的高度（或长边），取值范围：0~ 3840，单位：px。
   默认值：0，表示和第一个视频轨的第一个视频片段的视频高度一致。
      */
     Height?: number;
@@ -1581,20 +1581,21 @@ export interface DescribeLicenseUsageDataResponse {
     RequestId?: string;
 }
 /**
- * 基于签名的 Key 防盗链信息
+ * DRM 自适应码流播放信息修改对象
  */
-export interface UrlSignatureAuthPolicy {
+export interface DrmStreamingsInfoForUpdate {
     /**
-     * [Key 防盗链](https://cloud.tencent.com/document/product/266/14047)设置状态，可选值：
-  <li>Enabled: 启用。</li>
-  <li>Disabled: 禁用。</li>
+     * 保护类型为 SimpleAES 的转自适应码流模板 ID。
      */
-    Status: string;
+    SimpleAesDefinition?: number;
     /**
-     * [Key 防盗链](https://cloud.tencent.com/document/product/266/14047)中用于生成签名的密钥。
-  EncryptedKey 字符串的长度为8~40个字节，不能包含不可见字符。
+     * 保护类型为 Widevine 的转自适应码流模板 ID。
      */
-    EncryptedKey?: string;
+    WidevineDefinition?: number;
+    /**
+     * 保护类型为 FairPlay 的转自适应码流模板 ID。
+     */
+    FairPlayDefinition?: number;
 }
 /**
  * 智能分类任务控制参数
@@ -2370,39 +2371,6 @@ export interface DeleteImageProcessingTemplateRequest {
      * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
      */
     SubAppId?: number;
-}
-/**
- * ApplyUpload返回参数结构体
- */
-export interface ApplyUploadResponse {
-    /**
-     * 存储桶，用于上传接口 URL 的 bucket_name。
-     */
-    StorageBucket: string;
-    /**
-     * 存储园区，用于上传接口 Host 的 Region。
-     */
-    StorageRegion: string;
-    /**
-     * 点播会话，用于确认上传接口的参数 VodSessionKey。
-     */
-    VodSessionKey: string;
-    /**
-     * 媒体存储路径，用于上传接口存储媒体的对象键（Key）。
-     */
-    MediaStoragePath: string;
-    /**
-     * 封面存储路径，用于上传接口存储封面的对象键（Key）。
-     */
-    CoverStoragePath: string;
-    /**
-     * 临时凭证，用于上传接口的权限验证。
-     */
-    TempCertificate: TempCertificate;
-    /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
 }
 /**
  * DescribeDailyPlayStatFileList返回参数结构体
@@ -8253,6 +8221,15 @@ export interface DescribeEventsStateResponse {
     RequestId?: string;
 }
 /**
+ * 版权水印参数
+ */
+export interface CopyRightWatermarkInput {
+    /**
+     * 版权信息，最大长度为 200 个字符。
+     */
+    Text: string;
+}
+/**
  * 视频片头片尾识别输出。
  */
 export interface AiRecognitionTaskHeadTailResultOutput {
@@ -8805,6 +8782,22 @@ export interface AiRecognitionTaskObjectResultItem {
      * 物体出现的片段列表。
      */
     SegmentSet: Array<AiRecognitionTaskObjectSeqmentItem>;
+}
+/**
+ * 基于签名的 Key 防盗链信息
+ */
+export interface UrlSignatureAuthPolicy {
+    /**
+     * [Key 防盗链](https://cloud.tencent.com/document/product/266/14047)设置状态，可选值：
+  <li>Enabled: 启用。</li>
+  <li>Disabled: 禁用。</li>
+     */
+    Status: string;
+    /**
+     * [Key 防盗链](https://cloud.tencent.com/document/product/266/14047)中用于生成签名的密钥。
+  EncryptedKey 字符串的长度为8~40个字节，不能包含不可见字符。
+     */
+    EncryptedKey?: string;
 }
 /**
  * ModifyVodDomainConfig返回参数结构体
@@ -11444,6 +11437,10 @@ export interface TranscodeTaskInput {
      */
     TraceWatermark?: TraceWatermarkInput;
     /**
+     * 版权水印。
+     */
+    CopyRightWatermark?: CopyRightWatermarkInput;
+    /**
      * 马赛克列表，最大可支持 10 张。
      */
     MosaicSet?: Array<MosaicInput>;
@@ -11907,6 +11904,7 @@ export interface EventContent {
   <li>RebuildMediaComplete：音画质重生完成事件。</li>
   <li>ReviewAudioVideoComplete：音视频审核完成；</li>
   <li>ExtractTraceWatermarkComplete：提取溯源水印完成；</li>
+  <li>ExtractCopyRightWatermarkComplete：提取版权水印完成；</li>
   <li>DescribeFileAttributesComplete：获取文件属性完成；</li>
   <b>兼容 2017 版的事件类型：</b>
   <li>TranscodeComplete：视频转码完成；</li>
@@ -12006,6 +12004,11 @@ export interface EventContent {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     ExtractTraceWatermarkCompleteEvent: ExtractTraceWatermarkTask;
+    /**
+     * 版权水印提取完成事件，当事件类型为 ExtractCopyRightWatermarkComplete 时有效。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ExtractCopyRightWatermarkCompleteEvent?: ExtractCopyRightWatermarkTask;
     /**
      * 音视频审核完成事件，当事件类型为 ReviewAudioVideoComplete 时有效。
   注意：此字段可能返回 null，表示取不到有效值。
@@ -12874,6 +12877,7 @@ export interface AdaptiveDynamicStreamingInfoItem {
     /**
      * 数字水印类型。可选值：
   <li>Trace 表示经过溯源水印处理；</li>
+  <li>CopyRight 表示经过版权水印处理；</li>
   <li>None 表示没有经过数字水印处理。</li>
      */
     DigitalWatermarkType?: string;
@@ -12881,6 +12885,10 @@ export interface AdaptiveDynamicStreamingInfoItem {
      * 子流信息列表。
      */
     SubStreamSet?: Array<MediaSubStreamInfoItem>;
+    /**
+     * 版权信息。
+     */
+    CopyRightWatermarkText?: string;
 }
 /**
  * 直播即时剪辑流信息
@@ -13250,6 +13258,10 @@ export interface AdaptiveDynamicStreamingTaskInput {
      */
     TraceWatermark?: TraceWatermarkInput;
     /**
+     * 版权水印。
+     */
+    CopyRightWatermark?: CopyRightWatermarkInput;
+    /**
      * 字幕列表，元素为字幕 ID，支持多个字幕，最大可支持16个。
      */
     SubtitleSet?: Array<string>;
@@ -13460,7 +13472,8 @@ export interface DescribeTaskDetailResponse {
   <li>DescribeFileAttributesTask：获取文件属性任务；</li>
   <li>RebuildMedia：音画质重生任务；</li>
   <li>ReviewAudioVideo：音视频审核任务；</li>
-  <li>ExtractTraceWatermark：提取溯源水印任务。</li>
+  <li>ExtractTraceWatermark：提取溯源水印任务；</li>
+  <li>ExtractCopyRightWatermark：提取版权水印任务。</li>
      */
     TaskType?: string;
     /**
@@ -13557,6 +13570,11 @@ export interface DescribeTaskDetailResponse {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     ExtractTraceWatermarkTask?: ExtractTraceWatermarkTask;
+    /**
+     * 提取版权水印任务信息，仅当 TaskType 为 ExtractCopyRightWatermark，该字段有值。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ExtractCopyRightWatermarkTask?: ExtractCopyRightWatermarkTask;
     /**
      * 音视频审核任务信息，仅当 TaskType 为 ReviewAudioVideo，该字段有值。
   注意：此字段可能返回 null，表示取不到有效值。
@@ -15055,6 +15073,15 @@ export interface CommitUploadResponse {
     RequestId?: string;
 }
 /**
+ * 提取版权水印任务输入
+ */
+export interface ExtractCopyRightWatermarkTaskInput {
+    /**
+     * 需要提取水印的媒体 URL。
+     */
+    Url?: string;
+}
+/**
  * DescribeSampleSnapshotTemplates返回参数结构体
  */
 export interface DescribeSampleSnapshotTemplatesResponse {
@@ -15182,21 +15209,37 @@ export interface TerrorismImgReviewTemplateInfo {
     ReviewConfidence?: number;
 }
 /**
- * DRM 自适应码流播放信息修改对象
+ * ApplyUpload返回参数结构体
  */
-export interface DrmStreamingsInfoForUpdate {
+export interface ApplyUploadResponse {
     /**
-     * 保护类型为 SimpleAES 的转自适应码流模板 ID。
+     * 存储桶，用于上传接口 URL 的 bucket_name。
      */
-    SimpleAesDefinition?: number;
+    StorageBucket: string;
     /**
-     * 保护类型为 Widevine 的转自适应码流模板 ID。
+     * 存储园区，用于上传接口 Host 的 Region。
      */
-    WidevineDefinition?: number;
+    StorageRegion: string;
     /**
-     * 保护类型为 FairPlay 的转自适应码流模板 ID。
+     * 点播会话，用于确认上传接口的参数 VodSessionKey。
      */
-    FairPlayDefinition?: number;
+    VodSessionKey: string;
+    /**
+     * 媒体存储路径，用于上传接口存储媒体的对象键（Key）。
+     */
+    MediaStoragePath: string;
+    /**
+     * 封面存储路径，用于上传接口存储封面的对象键（Key）。
+     */
+    CoverStoragePath: string;
+    /**
+     * 临时凭证，用于上传接口的权限验证。
+     */
+    TempCertificate: TempCertificate;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * ReviewAudioVideo返回参数结构体
@@ -15909,9 +15952,14 @@ export interface MediaTranscodeItem {
     /**
      * 数字水印类型。可选值：
   <li>Trace 表示经过溯源水印处理；</li>
+  <li>CopyRight 表示经过版权水印处理；</li>
   <li>None 表示没有经过数字水印处理。</li>
      */
     DigitalWatermarkType: string;
+    /**
+     * 版权信息。
+     */
+    CopyRightWatermarkText?: string;
 }
 /**
  * DescribePersonSamples返回参数结构体
@@ -15929,6 +15977,15 @@ export interface DescribePersonSamplesResponse {
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * 提取版权水印输出信息
+ */
+export interface ExtractCopyRightWatermarkTaskOutput {
+    /**
+     * 版权信息。
+     */
+    Text?: string;
 }
 /**
  * 视频拆条任务输入信息
@@ -16997,6 +17054,54 @@ export interface DescribeAnimatedGraphicsTemplatesResponse {
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * 提取版权水印任务。
+ */
+export interface ExtractCopyRightWatermarkTask {
+    /**
+     * 任务 ID。
+     */
+    TaskId?: string;
+    /**
+     * 任务状态，取值：
+  <li>PROCESSING：处理中；</li>
+  <li>FINISH：已完成。</li>
+     */
+    Status?: string;
+    /**
+     * 错误码，0 表示成功，其他值表示失败：
+  <li>40000：输入参数不合法，请检查输入参数；</li>
+  <li>60000：源文件错误（如视频数据损坏），请确认源文件是否正常；</li>
+  <li>70000：内部服务错误，建议重试。</li>
+     */
+    ErrCode?: number;
+    /**
+     * 错误信息。
+     */
+    Message?: string;
+    /**
+     * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/266/50368#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+     */
+    ErrCodeExt?: string;
+    /**
+     * 提取版权水印任务输入信息。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Input?: ExtractCopyRightWatermarkTaskInput;
+    /**
+     * 提取版权水印任务输出信息。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Output?: ExtractCopyRightWatermarkTaskOutput;
+    /**
+     * 用于去重的识别码，如果七天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。
+     */
+    SessionId?: string;
+    /**
+     * 来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长 1000 个字符。
+     */
+    SessionContext?: string;
 }
 /**
  * 智能按帧标签结果信息

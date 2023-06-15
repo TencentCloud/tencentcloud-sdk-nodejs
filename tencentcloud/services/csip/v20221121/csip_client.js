@@ -28,6 +28,24 @@ class Client extends abstract_client_1.AbstractClient {
         super("csip.tencentcloudapi.com", "2022-11-21", clientConfig);
     }
     /**
+     * 获取资产视角的漏洞风险列表
+     */
+    async DescribeRiskCenterAssetViewVULRiskList(req, cb) {
+        return this.request("DescribeRiskCenterAssetViewVULRiskList", req, cb);
+    }
+    /**
+     * 集群pod列表
+     */
+    async DescribeClusterPodAssets(req, cb) {
+        return this.request("DescribeClusterPodAssets", req, cb);
+    }
+    /**
+     * 获取子网列表
+     */
+    async DescribeSubnetAssets(req, cb) {
+        return this.request("DescribeSubnetAssets", req, cb);
+    }
+    /**
      * 获取vpc列表
      */
     async DescribeVpcAssets(req, cb) {
@@ -44,6 +62,18 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeCVMAssets(req, cb) {
         return this.request("DescribeCVMAssets", req, cb);
+    }
+    /**
+     * 域名列表
+     */
+    async DescribeDomainAssets(req, cb) {
+        return this.request("DescribeDomainAssets", req, cb);
+    }
+    /**
+     * ip公网列表
+     */
+    async DescribePublicIpAssets(req, cb) {
+        return this.request("DescribePublicIpAssets", req, cb);
     }
     /**
      * csip角色授权绑定接口
@@ -64,10 +94,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateDomainAndIp", req, cb);
     }
     /**
-     * 获取子网列表
+     * 获取资产视角的端口风险列表
      */
-    async DescribeSubnetAssets(req, cb) {
-        return this.request("DescribeSubnetAssets", req, cb);
+    async DescribeRiskCenterAssetViewPortRiskList(req, cb) {
+        return this.request("DescribeRiskCenterAssetViewPortRiskList", req, cb);
     }
     /**
      * 资产列表

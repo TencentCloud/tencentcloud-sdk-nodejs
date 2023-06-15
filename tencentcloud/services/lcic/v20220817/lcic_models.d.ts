@@ -7,11 +7,11 @@ export interface CreateRoomRequest {
      */
     Name: string;
     /**
-     * 预定的房间开始时间，unix时间戳。
+     * 预定的房间开始时间，unix时间戳（秒）。
      */
     StartTime: number;
     /**
-     * 预定的房间结束时间，unix时间戳。
+     * 预定的房间结束时间，unix时间戳（秒）。
      */
     EndTime: number;
     /**
@@ -1683,11 +1683,11 @@ export interface DescribeRoomResponse {
      */
     Name?: string;
     /**
-     * 预定的房间开始时间，unix时间戳。
+     * 预定的房间开始时间，unix时间戳（秒）。
      */
     StartTime?: number;
     /**
-     * 预定的房间结束时间，unix时间戳。
+     * 预定的房间结束时间，unix时间戳（秒）。
      */
     EndTime?: number;
     /**
@@ -2182,11 +2182,11 @@ export interface ModifyRoomRequest {
      */
     SdkAppId: number;
     /**
-     * 预定的房间开始时间，unix时间戳。直播开始后不允许修改。
+     * 预定的房间开始时间，unix时间戳（秒）。直播开始后不允许修改。
      */
     StartTime?: number;
     /**
-     * 预定的房间结束时间，unix时间戳。直播开始后不允许修改。
+     * 预定的房间结束时间，unix时间戳（秒）。直播开始后不允许修改。
      */
     EndTime?: number;
     /**

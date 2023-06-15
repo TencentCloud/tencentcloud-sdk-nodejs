@@ -929,7 +929,7 @@ export interface CreateCdbProxyAddressResponse {
    * 异步任务ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  AsyncRequestId: string
+  AsyncRequestId?: string
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1117,6 +1117,10 @@ export interface CreateCdbProxyAddressRequest {
    * 安全组
    */
   SecurityGroup?: Array<string>
+  /**
+   * 连接池类型。可选值 transaction（事务级别连接池），connection（会话级别连接池），ConnectionPool为true时生效。
+   */
+  ConnectionPoolType?: string
 }
 
 /**

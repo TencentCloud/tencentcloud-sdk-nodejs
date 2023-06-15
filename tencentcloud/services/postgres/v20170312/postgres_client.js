@@ -76,7 +76,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteParameterTemplate", req, cb);
     }
     /**
-     * 获取实例可修改参数列表
+     * 本接口（DescribeDBInstanceAttribute）用于查询实例的参数信息。
      */
     async DescribeDBInstanceParameters(req, cb) {
         return this.request("DescribeDBInstanceParameters", req, cb);

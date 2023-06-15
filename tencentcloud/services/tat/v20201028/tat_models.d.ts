@@ -1228,11 +1228,11 @@ export interface DescribeRegionsResponse {
     /**
      * 地域数量
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 地域信息列表
      */
-    RegionSet: Array<RegionInfo>;
+    RegionSet?: Array<RegionInfo>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */

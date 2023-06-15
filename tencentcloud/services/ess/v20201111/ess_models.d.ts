@@ -368,7 +368,8 @@ export interface CreateIntegrationEmployeesRequest {
      */
     Operator: UserInfo;
     /**
-     * 待创建员工的信息，Mobile和DisplayName必填,OpenId和Email选填，其他字段暂不支持
+     * 待创建员工的信息，不超过20个。
+  Mobile和DisplayName必填,OpenId、Email和Department.DepartmentId选填，其他字段暂不支持。
      */
     Employees: Array<Staff>;
     /**
@@ -381,7 +382,7 @@ export interface CreateIntegrationEmployeesRequest {
  */
 export interface DescribeIntegrationRolesRequest {
     /**
-     * 操作人信息
+     * 操作人信息，UserId必填
      */
     Operator: UserInfo;
     /**
@@ -3422,6 +3423,7 @@ export interface Component {
     ComponentExtra?: string;
     /**
      * 是否是表单域类型，默认不false-不是
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     IsFormType?: boolean;
     /**
@@ -3519,10 +3521,12 @@ export interface Component {
     ChannelComponentId?: string;
     /**
      * 指定关键字时横坐标偏移量，单位pt
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     OffsetX?: number;
     /**
      * 指定关键字时纵坐标偏移量，单位pt
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     OffsetY?: number;
     /**
@@ -3646,7 +3650,9 @@ export interface UpdateIntegrationEmployeesRequest {
      */
     Operator: UserInfo;
     /**
-     * 员工信息，OpenId和UserId必填一个,Email、DisplayName和Email选填，其他字段暂不支持
+     * 员工信息，不超过100个。
+  根据UserId或OpenId更新员工，必填一个，优先UserId。
+  可更新Mobile、DisplayName、Email和Department.DepartmentId字段，其他字段暂不支持
      */
     Employees: Array<Staff>;
     /**

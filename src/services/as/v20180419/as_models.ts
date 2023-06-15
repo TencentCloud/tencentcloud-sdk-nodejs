@@ -2352,6 +2352,7 @@ export interface EnhancedService {
   MonitorService?: RunMonitorServiceEnabled
   /**
    * 该参数已废弃，查询时会返回空值，请勿使用。
+   * @deprecated
    */
   AutomationService?: Array<RunAutomationServiceEnabled>
   /**

@@ -365,7 +365,10 @@ serverCollationName：排序规则名称，可选参数，在初始化后不可�
    */
   DBEngineConfig?: string
   /**
-   * 主从同步方式，取值： 1)Semi-sync：半同步 2)Async：异步 默认为Async
+   * 主从同步方式，可取值： 
+1、Semi-sync：半同步
+2、Async：异步 
+当前只支持Semi-sync
    */
   SyncMode?: string
 }
@@ -4465,11 +4468,11 @@ export interface DescribeDBInstanceParametersResponse {
   /**
    * 参数列表总数
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 参数列表返回详情
    */
-  Detail: Array<ParamInfo>
+  Detail?: Array<ParamInfo>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

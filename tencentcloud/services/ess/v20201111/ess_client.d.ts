@@ -273,11 +273,11 @@ httpProfile.setEndpoint("file.test.ess.tencent.cn");<br/>
      */
     ModifyIntegrationDepartment(req: ModifyIntegrationDepartmentRequest, cb?: (error: string, rep: ModifyIntegrationDepartmentResponse) => void): Promise<ModifyIntegrationDepartmentResponse>;
     /**
-     * 创建员工,如需在此接口提醒员工实名，入参Employees的OpenId不传
+     * 创建员工,此接口会发送提醒员工实名的短信
      */
     CreateIntegrationEmployees(req: CreateIntegrationEmployeesRequest, cb?: (error: string, rep: CreateIntegrationEmployeesResponse) => void): Promise<CreateIntegrationEmployeesResponse>;
     /**
-     * 更新员工信息(姓名，手机号，邮件)，用户实名后无法更改姓名与手机号
+     * 更新员工信息(姓名，手机号，邮件、部门)，用户实名后无法更改姓名与手机号
      */
     UpdateIntegrationEmployees(req: UpdateIntegrationEmployeesRequest, cb?: (error: string, rep: UpdateIntegrationEmployeesResponse) => void): Promise<UpdateIntegrationEmployeesResponse>;
 }

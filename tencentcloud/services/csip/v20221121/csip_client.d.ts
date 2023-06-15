@@ -1,12 +1,24 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeDbAssetInfoResponse, DescribeDbAssetsRequest, DescribeScanReportListRequest, CreateDomainAndIpRequest, DescribeScanReportListResponse, AddNewBindRoleUserRequest, DescribeCVMAssetInfoResponse, DescribeVpcAssetsResponse, DescribeCVMAssetsRequest, DescribeSubnetAssetsResponse, DescribeDbAssetInfoRequest, DescribeVpcAssetsRequest, DescribeSubnetAssetsRequest, DescribeCVMAssetsResponse, CreateDomainAndIpResponse, DescribeDbAssetsResponse, AddNewBindRoleUserResponse, DescribeCVMAssetInfoRequest } from "./csip_models";
+import { DescribeDomainAssetsResponse, DescribeDbAssetInfoResponse, DescribeDbAssetsRequest, DescribeScanReportListRequest, DescribeRiskCenterAssetViewVULRiskListRequest, CreateDomainAndIpRequest, DescribeVpcAssetsResponse, DescribeScanReportListResponse, DescribeClusterPodAssetsRequest, DescribeSubnetAssetsRequest, AddNewBindRoleUserRequest, DescribeCVMAssetInfoResponse, DescribePublicIpAssetsResponse, DescribeRiskCenterAssetViewVULRiskListResponse, DescribeCVMAssetsRequest, DescribeRiskCenterAssetViewPortRiskListResponse, DescribeSubnetAssetsResponse, DescribeDbAssetInfoRequest, DescribeRiskCenterAssetViewPortRiskListRequest, DescribeCVMAssetsResponse, DescribeVpcAssetsRequest, DescribeClusterPodAssetsResponse, DescribeDomainAssetsRequest, CreateDomainAndIpResponse, DescribePublicIpAssetsRequest, DescribeDbAssetsResponse, AddNewBindRoleUserResponse, DescribeCVMAssetInfoRequest } from "./csip_models";
 /**
  * csip client
  * @class
  */
 export declare class Client extends AbstractClient {
     constructor(clientConfig: ClientConfig);
+    /**
+     * 获取资产视角的漏洞风险列表
+     */
+    DescribeRiskCenterAssetViewVULRiskList(req: DescribeRiskCenterAssetViewVULRiskListRequest, cb?: (error: string, rep: DescribeRiskCenterAssetViewVULRiskListResponse) => void): Promise<DescribeRiskCenterAssetViewVULRiskListResponse>;
+    /**
+     * 集群pod列表
+     */
+    DescribeClusterPodAssets(req: DescribeClusterPodAssetsRequest, cb?: (error: string, rep: DescribeClusterPodAssetsResponse) => void): Promise<DescribeClusterPodAssetsResponse>;
+    /**
+     * 获取子网列表
+     */
+    DescribeSubnetAssets(req: DescribeSubnetAssetsRequest, cb?: (error: string, rep: DescribeSubnetAssetsResponse) => void): Promise<DescribeSubnetAssetsResponse>;
     /**
      * 获取vpc列表
      */
@@ -20,6 +32,14 @@ export declare class Client extends AbstractClient {
      */
     DescribeCVMAssets(req: DescribeCVMAssetsRequest, cb?: (error: string, rep: DescribeCVMAssetsResponse) => void): Promise<DescribeCVMAssetsResponse>;
     /**
+     * 域名列表
+     */
+    DescribeDomainAssets(req: DescribeDomainAssetsRequest, cb?: (error: string, rep: DescribeDomainAssetsResponse) => void): Promise<DescribeDomainAssetsResponse>;
+    /**
+     * ip公网列表
+     */
+    DescribePublicIpAssets(req: DescribePublicIpAssetsRequest, cb?: (error: string, rep: DescribePublicIpAssetsResponse) => void): Promise<DescribePublicIpAssetsResponse>;
+    /**
      * csip角色授权绑定接口
      */
     AddNewBindRoleUser(req?: AddNewBindRoleUserRequest, cb?: (error: string, rep: AddNewBindRoleUserResponse) => void): Promise<AddNewBindRoleUserResponse>;
@@ -32,9 +52,9 @@ export declare class Client extends AbstractClient {
      */
     CreateDomainAndIp(req: CreateDomainAndIpRequest, cb?: (error: string, rep: CreateDomainAndIpResponse) => void): Promise<CreateDomainAndIpResponse>;
     /**
-     * 获取子网列表
+     * 获取资产视角的端口风险列表
      */
-    DescribeSubnetAssets(req: DescribeSubnetAssetsRequest, cb?: (error: string, rep: DescribeSubnetAssetsResponse) => void): Promise<DescribeSubnetAssetsResponse>;
+    DescribeRiskCenterAssetViewPortRiskList(req: DescribeRiskCenterAssetViewPortRiskListRequest, cb?: (error: string, rep: DescribeRiskCenterAssetViewPortRiskListResponse) => void): Promise<DescribeRiskCenterAssetViewPortRiskListResponse>;
     /**
      * 资产列表
      */

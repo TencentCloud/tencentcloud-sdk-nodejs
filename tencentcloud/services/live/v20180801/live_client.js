@@ -139,6 +139,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeStreamPushInfoList", req, cb);
     }
     /**
+     * 该接口用来启动直播流监播任务。
+     */
+    async StartLiveStreamMonitor(req, cb) {
+        return this.request("StartLiveStreamMonitor", req, cb);
+    }
+    /**
      * 获取截图规则列表
      */
     async DescribeLiveSnapshotRules(req, cb) {
@@ -155,6 +161,18 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DeleteLiveTranscodeTemplate(req, cb) {
         return this.request("DeleteLiveTranscodeTemplate", req, cb);
+    }
+    /**
+     * 创建直播垫片模板。
+     */
+    async CreateLivePadTemplate(req, cb) {
+        return this.request("CreateLivePadTemplate", req, cb);
+    }
+    /**
+     * 获取截图模板列表。
+     */
+    async DescribeLiveSnapshotTemplates(req, cb) {
+        return this.request("DescribeLiveSnapshotTemplates", req, cb);
     }
     /**
      * 查询直播域名 Referer 黑白名单配置。
@@ -188,16 +206,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateScreenshotTask", req, cb);
     }
     /**
-     * 获取录制模板列表。
+     * 该接口用来查询直播流监播任务配置的列表信息。
      */
-    async DescribeLiveRecordTemplates(req, cb) {
-        return this.request("DescribeLiveRecordTemplates", req, cb);
+    async DescribeLiveStreamMonitorList(req, cb) {
+        return this.request("DescribeLiveStreamMonitorList", req, cb);
     }
     /**
      * 验证用户是否拥有特定直播域名。
      */
     async AuthenticateDomainOwner(req, cb) {
         return this.request("AuthenticateDomainOwner", req, cb);
+    }
+    /**
+     * 该接口用来修改直播流监播任务的配置。
+     */
+    async ModifyLiveStreamMonitor(req, cb) {
+        return this.request("ModifyLiveStreamMonitor", req, cb);
     }
     /**
      * 查询某时间段top n的域名或流id信息（暂支持top 1000）。
@@ -234,6 +258,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DeleteLiveWatermarkRule(req, cb) {
         return this.request("DeleteLiveWatermarkRule", req, cb);
+    }
+    /**
+     * 删除直播垫片模板。
+     */
+    async DeleteLivePadTemplate(req, cb) {
+        return this.request("DeleteLivePadTemplate", req, cb);
     }
     /**
      * 删除回调规则。
@@ -296,16 +326,34 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeLiveRecordTemplate", req, cb);
     }
     /**
+     * 获取单个转码模板。
+     */
+    async DescribeLiveTranscodeTemplate(req, cb) {
+        return this.request("DescribeLiveTranscodeTemplate", req, cb);
+    }
+    /**
      * 提前结束截图，中止运行中的截图任务。任务被成功终止后，本次任务将不再启动。
      */
     async StopScreenshotTask(req, cb) {
         return this.request("StopScreenshotTask", req, cb);
     }
     /**
+     * 用来查询监播场次7天内的智能识别、断流、低帧率等信息的汇总报告。
+     */
+    async DescribeMonitorReport(req, cb) {
+        return this.request("DescribeMonitorReport", req, cb);
+    }
+    /**
      * 查询直播拉流配置。该接口已下线,请使用新接口 DescribeLivePullStreamTasks。
      */
     async DescribePullStreamConfigs(req, cb) {
         return this.request("DescribePullStreamConfigs", req, cb);
+    }
+    /**
+     * 该接口用来查询某个特定监播任务的配置。
+     */
+    async DescribeLiveStreamMonitor(req, cb) {
+        return this.request("DescribeLiveStreamMonitor", req, cb);
     }
     /**
      * 删除水印。
@@ -397,17 +445,16 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
         return this.request("DescribeLiveForbidStreamList", req, cb);
     }
     /**
-     * 创建直播拉流任务。支持将外部已有的点播文件，或者直播源拉取过来转推到指定的目标地址。
-注意：
-1. 默认支持任务数上限200个，如有特殊需求，可通过提单到售后进行评估增加上限。
-2. 源流视频编码目前只支持: H264, H265。其他编码格式建议先进行转码处理。
-3. 源流音频编码目前只支持: AAC。其他编码格式建议先进行转码处理。
-4. 可在控制台开启过期自动清理，避免过期任务占用任务数额度。
-5. 拉流转推功能为计费增值服务，计费规则详情可参见[计费文档](https://cloud.tencent.com/document/product/267/53308)。
-6. 拉流转推功能仅提供内容拉取与推送服务，请确保内容已获得授权并符合内容传播相关的法律法规。若内容有侵权或违规相关问题，云直播会停止相关的功能服务并保留追究法律责任的权利。
+     * 修改直播垫片模板。
      */
-    async CreateLivePullStreamTask(req, cb) {
-        return this.request("CreateLivePullStreamTask", req, cb);
+    async ModifyLivePadTemplate(req, cb) {
+        return this.request("ModifyLivePadTemplate", req, cb);
+    }
+    /**
+     * 获取单个水印信息。
+     */
+    async DescribeLiveWatermark(req, cb) {
+        return this.request("DescribeLiveWatermark", req, cb);
     }
     /**
      * 获取证书信息
@@ -518,10 +565,16 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
         return this.request("ModifyLiveTimeShiftTemplate", req, cb);
     }
     /**
-     * 获取截图模板列表。
+     * 该接口用来创建直播流监播任务。
      */
-    async DescribeLiveSnapshotTemplates(req, cb) {
-        return this.request("DescribeLiveSnapshotTemplates", req, cb);
+    async CreateLiveStreamMonitor(req, cb) {
+        return this.request("CreateLiveStreamMonitor", req, cb);
+    }
+    /**
+     * 创建直播垫片规则。
+     */
+    async CreateLivePadRule(req, cb) {
+        return this.request("CreateLivePadRule", req, cb);
     }
     /**
      * 说明：录制后的文件存放于点播平台。用户如需使用录制功能，需首先自行开通点播账号并确保账号可用。录制文件存放后，相关费用（含存储以及下行播放流量）按照点播平台计费方式收取，请参考对应文档。
@@ -536,10 +589,10 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
         return this.request("ModifyLivePlayAuthKey", req, cb);
     }
     /**
-     * 获取单个转码模板。
+     * 获取单个直播垫片模板
      */
-    async DescribeLiveTranscodeTemplate(req, cb) {
-        return this.request("DescribeLiveTranscodeTemplate", req, cb);
+    async DescribeLivePadTemplate(req, cb) {
+        return this.request("DescribeLivePadTemplate", req, cb);
     }
     /**
      * 接口用来查询直播增值业务--截图的张数
@@ -612,6 +665,12 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
      */
     async DescribeLiveDomain(req, cb) {
         return this.request("DescribeLiveDomain", req, cb);
+    }
+    /**
+     * 删除直播垫片规则。
+     */
+    async DeleteLivePadRule(req, cb) {
+        return this.request("DeleteLivePadRule", req, cb);
     }
     /**
      * 创建回调规则，需要先调用[CreateLiveCallbackTemplate](/document/product/267/32637)接口创建回调模板，将返回的模板id绑定到域名/路径进行使用。
@@ -718,10 +777,17 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
         return this.request("CreateLiveRecordRule", req, cb);
     }
     /**
-     * 获取单个水印信息。
+     * 创建直播拉流任务。支持将外部已有的点播文件，或者直播源拉取过来转推到指定的目标地址。
+注意：
+1. 默认支持任务数上限200个，如有特殊需求，可通过提单到售后进行评估增加上限。
+2. 源流视频编码目前只支持: H264, H265。其他编码格式建议先进行转码处理。
+3. 源流音频编码目前只支持: AAC。其他编码格式建议先进行转码处理。
+4. 可在控制台开启过期自动清理，避免过期任务占用任务数额度。
+5. 拉流转推功能为计费增值服务，计费规则详情可参见[计费文档](https://cloud.tencent.com/document/product/267/53308)。
+6. 拉流转推功能仅提供内容拉取与推送服务，请确保内容已获得授权并符合内容传播相关的法律法规。若内容有侵权或违规相关问题，云直播会停止相关的功能服务并保留追究法律责任的权利。
      */
-    async DescribeLiveWatermark(req, cb) {
-        return this.request("DescribeLiveWatermark", req, cb);
+    async CreateLivePullStreamTask(req, cb) {
+        return this.request("CreateLivePullStreamTask", req, cb);
     }
     /**
      * 获取转码模板列表。
@@ -771,16 +837,39 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
         return this.request("RestartLivePullStreamTask", req, cb);
     }
     /**
+     * 创建临时拉流转推任务，目前限制添加10条任务。
+该接口已下线,请使用新接口 CreateLivePullStreamTask。
+
+注意：该接口用于创建临时拉流转推任务，
+拉流源地址即 FromUrl 可以是腾讯或非腾讯数据源，
+但转推目标地址即 ToUrl 目前限制为已注册的腾讯直播域名。
+     */
+    async CreatePullStreamConfig(req, cb) {
+        return this.request("CreatePullStreamConfig", req, cb);
+    }
+    /**
      * 获取水印规则列表。
      */
     async DescribeLiveWatermarkRules(req, cb) {
         return this.request("DescribeLiveWatermarkRules", req, cb);
     }
     /**
+     * 获取直播垫片规则列表。
+     */
+    async DescribeLivePadRules(req, cb) {
+        return this.request("DescribeLivePadRules", req, cb);
+    }
+    /**
      * 注：DeleteLiveRecord 接口仅用于删除录制任务记录，不具备停止录制的功能，也不能删除正在进行中的录制。如果需要停止录制任务，请使用终止录制[StopLiveRecord](/document/product/267/30146) 接口。
      */
     async DeleteLiveRecord(req, cb) {
         return this.request("DeleteLiveRecord", req, cb);
+    }
+    /**
+     * 获取录制模板列表。
+     */
+    async DescribeLiveRecordTemplates(req, cb) {
+        return this.request("DescribeLiveRecordTemplates", req, cb);
     }
     /**
      * 创建截图规则，需要先调用[CreateLiveSnapshotTemplate](/document/product/267/32624)接口创建截图模板，然后将返回的模板 ID 绑定到流进行使用。
@@ -795,6 +884,12 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
      */
     async CreateLiveTimeShiftTemplate(req, cb) {
         return this.request("CreateLiveTimeShiftTemplate", req, cb);
+    }
+    /**
+     * 该接口用来删除直播流监播任务。
+     */
+    async DeleteLiveStreamMonitor(req, cb) {
+        return this.request("DeleteLiveStreamMonitor", req, cb);
     }
     /**
      * 删除直播时移模板。
@@ -819,6 +914,12 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
      */
     async DescribeLivePlayAuthKey(req, cb) {
         return this.request("DescribeLivePlayAuthKey", req, cb);
+    }
+    /**
+     * 该接口用来停止直播流监播任务。
+     */
+    async StopLiveStreamMonitor(req, cb) {
+        return this.request("StopLiveStreamMonitor", req, cb);
     }
     /**
      * 返回直播中、无推流或者禁播等状态。
@@ -901,15 +1002,10 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
         return this.request("DescribeLivePackageInfo", req, cb);
     }
     /**
-     * 创建临时拉流转推任务，目前限制添加10条任务。
-该接口已下线,请使用新接口 CreateLivePullStreamTask。
-
-注意：该接口用于创建临时拉流转推任务，
-拉流源地址即 FromUrl 可以是腾讯或非腾讯数据源，
-但转推目标地址即 ToUrl 目前限制为已注册的腾讯直播域名。
+     * 获取直播垫片模板。
      */
-    async CreatePullStreamConfig(req, cb) {
-        return this.request("CreatePullStreamConfig", req, cb);
+    async DescribeLivePadTemplates(req, cb) {
+        return this.request("DescribeLivePadTemplates", req, cb);
     }
     /**
      * 查询转码任务数。

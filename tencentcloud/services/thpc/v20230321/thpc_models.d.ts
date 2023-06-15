@@ -355,6 +355,14 @@ export interface CFSOption {
      * 文件系统存储类型，默认值SD；其中 SD 为通用标准型标准型存储， HP为通用性能型存储， TB为turbo标准型， TP 为turbo性能型。
      */
     StorageType?: string;
+    /**
+     * 文件系统挂载挂载命令参数选项。
+  
+  - NFS 3.0默认值：vers=3,nolock,proto=tcp,noresvport
+  - NFS 4.0默认值：vers=4.0,noresvport
+  - TURBO默认值：user_xattr
+     */
+    MountOption?: string;
 }
 /**
  * 符合条件的集群活动信息。
@@ -1052,6 +1060,10 @@ export interface CFSOptionOverview {
      * 文件系统存储类型，默认值SD；其中 SD 为通用标准型标准型存储， HP为通用性能型存储， TB为turbo标准型， TP 为turbo性能型。
      */
     StorageType: string;
+    /**
+     * 文件系统挂载命令参数选项。
+     */
+    MountOption?: string;
 }
 /**
  * DeleteClusterStorageOption请求参数结构体
