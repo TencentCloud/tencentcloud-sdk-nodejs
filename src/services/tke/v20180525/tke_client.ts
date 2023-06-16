@@ -81,6 +81,7 @@ import {
   DescribeEKSClusterCredentialResponse,
   CheckInstancesUpgradeAbleRequest,
   ModifyPrometheusTemplateRequest,
+  DescribeEncryptionStatusRequest,
   DeleteClusterVirtualNodePoolRequest,
   DescribeImageCachesRequest,
   DescribePrometheusAlertRuleRequest,
@@ -241,6 +242,7 @@ import {
   RegionInstance,
   DescribePrometheusConfigRequest,
   DescribeEdgeLogSwitchesRequest,
+  EnableEncryptionProtectionResponse,
   DeletePrometheusTemplateRequest,
   DeletePrometheusRecordRuleYamlResponse,
   DescribePrometheusTempSyncResponse,
@@ -272,7 +274,7 @@ import {
   DisableClusterAuditResponse,
   DescribeClusterEndpointsResponse,
   RemoveNodeFromNodePoolRequest,
-  UninstallEdgeLogAgentRequest,
+  DescribeEncryptionStatusResponse,
   DescribeClusterLevelChangeRecordsRequest,
   UpdateClusterVersionResponse,
   InstanceUpgradePreCheckResultItem,
@@ -354,9 +356,9 @@ import {
   DescribeEKSContainerInstancesResponse,
   CreatePrometheusAlertRuleResponse,
   ECMEnhancedService,
-  ModifyClusterAuthenticationOptionsResponse,
+  InstanceDataDiskMountSetting,
   EdgeClusterPublicLB,
-  EnableEventPersistenceResponse,
+  EnableEncryptionProtectionRequest,
   EnhancedService,
   DeleteEKSContainerInstancesResponse,
   UninstallLogAgentRequest,
@@ -439,9 +441,11 @@ import {
   IPAddress,
   DescribeTKEEdgeClusterCredentialRequest,
   AutoUpgradeClusterLevel,
+  DisableEncryptionProtectionResponse,
   CreateEKSClusterRequest,
   CommonName,
   EnableEventPersistenceRequest,
+  ModifyClusterAuthenticationOptionsResponse,
   ModifyClusterVirtualNodePoolRequest,
   DescribeRegionsResponse,
   CreateClusterRouteResponse,
@@ -453,10 +457,11 @@ import {
   DescribeVersionsResponse,
   ScaleInClusterMasterRequest,
   DeleteEdgeClusterInstancesRequest,
-  PrometheusAlertRule,
+  EnableEventPersistenceResponse,
   VirtualNodeSpec,
   ClusterNetworkSettings,
   DescribeImagesResponse,
+  UninstallEdgeLogAgentRequest,
   ClusterExtraArgs,
   DeleteClusterVirtualNodePoolResponse,
   CreateClusterEndpointVipResponse,
@@ -507,6 +512,7 @@ import {
   DeleteClusterRouteTableRequest,
   DescribeClusterEndpointsRequest,
   InstanceExtraArgs,
+  PrometheusAlertRule,
   AcquireClusterAdminRoleRequest,
   ListClusterInspectionResultsRequest,
   DeletePrometheusTemplateResponse,
@@ -554,7 +560,7 @@ import {
   PrometheusTemplate,
   GPUArgs,
   RouteTableConflict,
-  InstanceDataDiskMountSetting,
+  DisableEncryptionProtectionRequest,
   PrometheusInstanceOverview,
   DescribeClusterVirtualNodeResponse,
   ScaleInMaster,
@@ -1403,6 +1409,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 关闭加密信息保护
+   */
+  async DisableEncryptionProtection(
+    req?: DisableEncryptionProtectionRequest,
+    cb?: (error: string, rep: DisableEncryptionProtectionResponse) => void
+  ): Promise<DisableEncryptionProtectionResponse> {
+    return this.request("DisableEncryptionProtection", req, cb)
+  }
+
+  /**
    * 更新容器实例
    */
   async UpdateEKSContainerInstance(
@@ -1553,6 +1569,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 开启加密数据保护
+   */
+  async EnableEncryptionProtection(
+    req?: EnableEncryptionProtectionRequest,
+    cb?: (error: string, rep: EnableEncryptionProtectionResponse) => void
+  ): Promise<EnableEncryptionProtectionResponse> {
+    return this.request("EnableEncryptionProtection", req, cb)
+  }
+
+  /**
    * 获取模板同步信息
    */
   async DescribePrometheusTemplateSync(
@@ -1670,6 +1696,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyClusterNodePoolResponse) => void
   ): Promise<ModifyClusterNodePoolResponse> {
     return this.request("ModifyClusterNodePool", req, cb)
+  }
+
+  /**
+   * 查询etcd数据是否进行加密
+   */
+  async DescribeEncryptionStatus(
+    req?: DescribeEncryptionStatusRequest,
+    cb?: (error: string, rep: DescribeEncryptionStatusResponse) => void
+  ): Promise<DescribeEncryptionStatusResponse> {
+    return this.request("DescribeEncryptionStatus", req, cb)
   }
 
   /**

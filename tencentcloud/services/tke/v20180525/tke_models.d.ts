@@ -1296,6 +1296,10 @@ export interface ModifyPrometheusTemplateRequest {
     Template: PrometheusTemplateModify;
 }
 /**
+ * DescribeEncryptionStatus请求参数结构体
+ */
+export declare type DescribeEncryptionStatusRequest = null;
+/**
  * DeleteClusterVirtualNodePool请求参数结构体
  */
 export interface DeleteClusterVirtualNodePoolRequest {
@@ -4701,6 +4705,15 @@ export interface DescribeEdgeLogSwitchesRequest {
     ClusterIds: Array<string>;
 }
 /**
+ * EnableEncryptionProtection返回参数结构体
+ */
+export interface EnableEncryptionProtectionResponse {
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * DeletePrometheusTemplate请求参数结构体
  */
 export interface DeletePrometheusTemplateRequest {
@@ -5350,13 +5363,13 @@ export interface RemoveNodeFromNodePoolRequest {
     InstanceIds: Array<string>;
 }
 /**
- * UninstallEdgeLogAgent请求参数结构体
+ * DescribeEncryptionStatus返回参数结构体
  */
-export interface UninstallEdgeLogAgentRequest {
+export interface DescribeEncryptionStatusResponse {
     /**
-     * 集群ID
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
-    ClusterId: string;
+    RequestId?: string;
 }
 /**
  * DescribeClusterLevelChangeRecords请求参数结构体
@@ -7040,13 +7053,21 @@ export interface ECMEnhancedService {
     MonitorService?: ECMRunSecurityServiceEnabled;
 }
 /**
- * ModifyClusterAuthenticationOptions返回参数结构体
+ * CVM实例数据盘挂载配置
  */
-export interface ModifyClusterAuthenticationOptionsResponse {
+export interface InstanceDataDiskMountSetting {
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     * CVM实例类型
      */
-    RequestId?: string;
+    InstanceType: string;
+    /**
+     * 数据盘挂载信息
+     */
+    DataDisks: Array<DataDisk>;
+    /**
+     * CVM实例所属可用区
+     */
+    Zone: string;
 }
 /**
  * 边缘计算集群公网访问负载均衡信息
@@ -7064,14 +7085,9 @@ export interface EdgeClusterPublicLB {
     AllowFromCidrs?: Array<string>;
 }
 /**
- * EnableEventPersistence返回参数结构体
+ * EnableEncryptionProtection请求参数结构体
  */
-export interface EnableEventPersistenceResponse {
-    /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
+export declare type EnableEncryptionProtectionRequest = null;
 /**
  * 描述了实例的增强服务启用情况与其设置，如云安全，云监控等实例 Agent
  */
@@ -8724,6 +8740,15 @@ export interface AutoUpgradeClusterLevel {
     IsAutoUpgrade: boolean;
 }
 /**
+ * DisableEncryptionProtection返回参数结构体
+ */
+export interface DisableEncryptionProtectionResponse {
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * CreateEKSCluster请求参数结构体
  */
 export interface CreateEKSClusterRequest {
@@ -8805,6 +8830,15 @@ export interface EnableEventPersistenceRequest {
      * topic所在地域，默认为集群所在地域
      */
     TopicRegion?: string;
+}
+/**
+ * ModifyClusterAuthenticationOptions返回参数结构体
+ */
+export interface ModifyClusterAuthenticationOptionsResponse {
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * ModifyClusterVirtualNodePool请求参数结构体
@@ -9003,44 +9037,13 @@ export interface DeleteEdgeClusterInstancesRequest {
     InstanceIds: Array<string>;
 }
 /**
- * Prometheus告警规则
+ * EnableEventPersistence返回参数结构体
  */
-export interface PrometheusAlertRule {
+export interface EnableEventPersistenceResponse {
     /**
-     * 规则名称
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
-    Name: string;
-    /**
-     * prometheus语句
-     */
-    Rule: string;
-    /**
-     * 额外标签
-     */
-    Labels: Array<Label>;
-    /**
-     * 告警发送模板
-     */
-    Template: string;
-    /**
-     * 持续时间
-     */
-    For: string;
-    /**
-     * 该条规则的描述信息
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Describe?: string;
-    /**
-     * 参考prometheus rule中的annotations
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Annotations?: Array<Label>;
-    /**
-     * 告警规则状态
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    RuleState?: number;
+    RequestId?: string;
 }
 /**
  * 虚拟节点
@@ -9146,6 +9149,15 @@ export interface DescribeImagesResponse {
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * UninstallEdgeLogAgent请求参数结构体
+ */
+export interface UninstallEdgeLogAgentRequest {
+    /**
+     * 集群ID
+     */
+    ClusterId: string;
 }
 /**
  * 集群master自定义参数
@@ -10106,6 +10118,46 @@ export interface InstanceExtraArgs {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Kubelet?: Array<string>;
+}
+/**
+ * Prometheus告警规则
+ */
+export interface PrometheusAlertRule {
+    /**
+     * 规则名称
+     */
+    Name: string;
+    /**
+     * prometheus语句
+     */
+    Rule: string;
+    /**
+     * 额外标签
+     */
+    Labels: Array<Label>;
+    /**
+     * 告警发送模板
+     */
+    Template: string;
+    /**
+     * 持续时间
+     */
+    For: string;
+    /**
+     * 该条规则的描述信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Describe?: string;
+    /**
+     * 参考prometheus rule中的annotations
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Annotations?: Array<Label>;
+    /**
+     * 告警规则状态
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RuleState?: number;
 }
 /**
  * AcquireClusterAdminRole请求参数结构体
@@ -11087,22 +11139,9 @@ export interface RouteTableConflict {
     RouteTableId: string;
 }
 /**
- * CVM实例数据盘挂载配置
+ * DisableEncryptionProtection请求参数结构体
  */
-export interface InstanceDataDiskMountSetting {
-    /**
-     * CVM实例类型
-     */
-    InstanceType: string;
-    /**
-     * 数据盘挂载信息
-     */
-    DataDisks: Array<DataDisk>;
-    /**
-     * CVM实例所属可用区
-     */
-    Zone: string;
-}
+export declare type DisableEncryptionProtectionRequest = null;
 /**
  * 托管prometheus实例概览
  */

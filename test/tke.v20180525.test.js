@@ -848,6 +848,16 @@ it("tke.v20180525.DeleteClusterVirtualNodePool", async function () {
     }
 })
 
+it("tke.v20180525.DisableEncryptionProtection", async function () {
+    try {
+       const data = await client.DisableEncryptionProtection({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tke.v20180525.UpdateEKSContainerInstance", async function () {
     try {
        const data = await client.UpdateEKSContainerInstance({})
@@ -998,6 +1008,16 @@ it("tke.v20180525.ListClusterInspectionResultsItems", async function () {
     }
 })
 
+it("tke.v20180525.EnableEncryptionProtection", async function () {
+    try {
+       const data = await client.EnableEncryptionProtection({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tke.v20180525.DescribePrometheusTemplateSync", async function () {
     try {
        const data = await client.DescribePrometheusTemplateSync({})
@@ -1111,6 +1131,16 @@ it("tke.v20180525.DescribeClusterReleaseHistory", async function () {
 it("tke.v20180525.ModifyClusterNodePool", async function () {
     try {
        const data = await client.ModifyClusterNodePool({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tke.v20180525.DescribeEncryptionStatus", async function () {
+    try {
+       const data = await client.DescribeEncryptionStatus({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

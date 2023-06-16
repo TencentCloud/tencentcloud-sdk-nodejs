@@ -8141,6 +8141,35 @@ export interface AnimatedGraphicsTemplate {
     UpdateTime: string;
 }
 /**
+ * ExtractCopyRightWatermark请求参数结构体
+ */
+export interface ExtractCopyRightWatermarkRequest {
+    /**
+     * 需要提取水印的媒体 URL。
+     */
+    Url: string;
+    /**
+     * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
+     */
+    SubAppId?: number;
+    /**
+     * 标识来源上下文，用于透传用户请求信息，在 ExtractCopyRightWatermarkComplete 回调和任务流状态变更回调将返回该字段值，最长 1000 个字符。
+     */
+    SessionContext?: string;
+    /**
+     * 用于任务去重的识别码，如果三天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。
+     */
+    SessionId?: string;
+    /**
+     * 任务的优先级，数值越大优先级越高，取值范围是 -10 到 10，不填代表 0。
+     */
+    TasksPriority?: number;
+    /**
+     * 保留字段，特殊用途时使用。
+     */
+    ExtInfo?: string;
+}
+/**
  * DescribeEnhanceMediaTemplates请求参数结构体
  */
 export interface DescribeEnhanceMediaTemplatesRequest {
@@ -9441,6 +9470,19 @@ export interface DescribeAIAnalysisTemplatesRequest {
      * 返回记录条数，默认值：10，最大值：100。
      */
     Limit?: number;
+}
+/**
+ * ExtractCopyRightWatermark返回参数结构体
+ */
+export interface ExtractCopyRightWatermarkResponse {
+    /**
+     * 任务 ID。
+     */
+    TaskId?: string;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * 点播文件转码信息

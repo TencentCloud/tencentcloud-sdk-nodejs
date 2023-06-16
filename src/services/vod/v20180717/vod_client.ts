@@ -342,6 +342,7 @@ import {
   TEHDConfig,
   ImageReviewUsageDataItem,
   AnimatedGraphicsTemplate,
+  ExtractCopyRightWatermarkRequest,
   DescribeEnhanceMediaTemplatesRequest,
   DailyPlayStatInfo,
   TerrorismOcrReviewTemplateInfoForUpdate,
@@ -396,6 +397,7 @@ import {
   ReduceMediaBitrateAdaptiveDynamicStreamingResult,
   ImageWatermarkInputForUpdate,
   DescribeAIAnalysisTemplatesRequest,
+  ExtractCopyRightWatermarkResponse,
   MediaTranscodeInfo,
   ResolutionNameInfo,
   AiRecognitionTaskOcrWordsResultItem,
@@ -1664,6 +1666,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDailyMostPlayedStatResponse) => void
   ): Promise<DescribeDailyMostPlayedStatResponse> {
     return this.request("DescribeDailyMostPlayedStat", req, cb)
+  }
+
+  /**
+   * 提取版权水印信息。
+   */
+  async ExtractCopyRightWatermark(
+    req: ExtractCopyRightWatermarkRequest,
+    cb?: (error: string, rep: ExtractCopyRightWatermarkResponse) => void
+  ): Promise<ExtractCopyRightWatermarkResponse> {
+    return this.request("ExtractCopyRightWatermark", req, cb)
   }
 
   /**

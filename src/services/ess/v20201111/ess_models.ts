@@ -998,15 +998,14 @@ export interface CreateFlowRequest {
    */
   ClientToken?: string
   /**
-   * 暂未开放
-   * @deprecated
-   */
-  RelatedFlowId?: string
-  /**
    * 签署流程的签署截止时间。
 值为unix时间戳,精确到秒,不传默认为当前时间一年后
    */
   DeadLine?: number
+  /**
+   * 合同到期提醒时间戳，单位秒。设定该值后，可以提前进行到期通知，方便客户处理合同到期事务，如合同续签等。该值支持的范围是从发起时间起到往后的10年内。仅合同发起方企业的发起人可以编辑修改。
+   */
+  RemindedOn?: number
   /**
    * 用户自定义字段，回调的时候会进行透传，长度需要小于20480
    */
@@ -1034,11 +1033,6 @@ false：有序签
    */
   NeedSignReview?: boolean
   /**
-   * 暂未开放
-   * @deprecated
-   */
-  CallbackUrl?: string
-  /**
    * 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填
    */
   Agent?: Agent
@@ -1051,6 +1045,16 @@ false：有序签
    * 个人自动签场景。发起自动签署时，需设置对应自动签署场景，目前仅支持场景：处方单-E_PRESCRIPTION_AUTO_SIGN
    */
   AutoSignScene?: string
+  /**
+   * 暂未开放
+   * @deprecated
+   */
+  RelatedFlowId?: string
+  /**
+   * 暂未开放
+   * @deprecated
+   */
+  CallbackUrl?: string
 }
 
 /**
@@ -1632,7 +1636,7 @@ REJECT: 拒绝
  */
 export interface UnbindEmployeeUserIdWithClientOpenIdRequest {
   /**
-   * 用户信息，OpenId与UserId二选一必填一个，OpenId是第三方客户ID，userId是用户实名后的电子签生成的ID,当传入客户系统openId，传入的openId需与电子签员工userId绑定，且参数Channel必填，Channel值为INTEGRATE；当传入参数UserId，Channel无需指定
+   * 用户信息，OpenId与UserId二选一必填一个，OpenId是第三方客户ID，userId是用户实名后的电子签生成的ID,当传入客户系统openId，传入的openId需与电子签员工userId绑定，且参数Channel必填，Channel值为INTEGRATE；当传入参数UserId，Channel无需指定(参数用法参考示例)
    */
   Operator: UserInfo
   /**
@@ -3057,6 +3061,10 @@ export interface CreateFlowByFilesRequest {
 值为unix时间戳,精确到秒,不传默认为当前时间一年后
    */
   Deadline?: number
+  /**
+   * 合同到期提醒时间戳，单位秒。设定该值后，可以提前进行到期通知，方便客户处理合同到期事务，如合同续签等。该值支持的范围是从发起时间起到往后的10年内。仅合同发起方企业的发起人可以编辑修改。
+   */
+  RemindedOn?: number
   /**
    * 发送类型：
 true：无序签

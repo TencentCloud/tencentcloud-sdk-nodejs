@@ -1,1 +1,1 @@
-export declare const sdkVersion = "4.0.622";
+export declare const sdkVersion = "4.0.623";

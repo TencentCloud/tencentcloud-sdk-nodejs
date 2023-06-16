@@ -652,6 +652,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDailyMostPlayedStat", req, cb);
     }
     /**
+     * 提取版权水印信息。
+     */
+    async ExtractCopyRightWatermark(req, cb) {
+        return this.request("ExtractCopyRightWatermark", req, cb);
+    }
+    /**
      * 该接口用于：
   1. 查询点播可开通的所有存储园区列表。
   2. 查询已经开通的园区列表。

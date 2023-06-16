@@ -526,6 +526,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteClusterVirtualNodePool", req, cb);
     }
     /**
+     * 关闭加密信息保护
+     */
+    async DisableEncryptionProtection(req, cb) {
+        return this.request("DisableEncryptionProtection", req, cb);
+    }
+    /**
      * 更新容器实例
      */
     async UpdateEKSContainerInstance(req, cb) {
@@ -616,6 +622,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ListClusterInspectionResultsItems", req, cb);
     }
     /**
+     * 开启加密数据保护
+     */
+    async EnableEncryptionProtection(req, cb) {
+        return this.request("EnableEncryptionProtection", req, cb);
+    }
+    /**
      * 获取模板同步信息
      */
     async DescribePrometheusTemplateSync(req, cb) {
@@ -686,6 +698,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ModifyClusterNodePool(req, cb) {
         return this.request("ModifyClusterNodePool", req, cb);
+    }
+    /**
+     * 查询etcd数据是否进行加密
+     */
+    async DescribeEncryptionStatus(req, cb) {
+        return this.request("DescribeEncryptionStatus", req, cb);
     }
     /**
      * 创建容器实例

@@ -391,7 +391,7 @@ export interface DescribeExclusiveInstancesStatusResponse {
   /**
    * 独享实例列表查询结果
    */
-  Result: InstanceSummary
+  Result?: InstanceSummary
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
