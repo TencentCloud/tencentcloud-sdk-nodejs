@@ -328,6 +328,16 @@ it("ess.v20201111.CreateFlowByFiles", async function () {
     }
 })
 
+it("ess.v20201111.CreateSeal", async function () {
+    try {
+       const data = await client.CreateSeal({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ess.v20201111.DescribeIntegrationRoles", async function () {
     try {
        const data = await client.DescribeIntegrationRoles({})

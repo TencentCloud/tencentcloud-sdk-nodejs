@@ -201,6 +201,7 @@ import {
   ParquetInfo,
   DeleteTopicResponse,
   CosRechargeInfo,
+  MultiTopicSearchInformation,
   ConsumerContent,
   RetryShipperTaskRequest,
   CreateExportResponse,

@@ -18,6 +18,7 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  CreateSealRequest,
   ModifyIntegrationDepartmentResponse,
   CancelFlowResponse,
   DescribeFlowEvidenceReportRequest,
@@ -139,6 +140,7 @@ import {
   ModifyApplicationCallbackInfoRequest,
   IntegrationMainOrganizationUser,
   StartFlowRequest,
+  CreateSealResponse,
   CreatePrepareFlowRequest,
   ApproverOption,
   FileUrl,
@@ -532,6 +534,16 @@ callbackinfo包含： 回调地址和签名key
     cb?: (error: string, rep: CreateFlowByFilesResponse) => void
   ): Promise<CreateFlowByFilesResponse> {
     return this.request("CreateFlowByFiles", req, cb)
+  }
+
+  /**
+   * 创建电子印章
+   */
+  async CreateSeal(
+    req: CreateSealRequest,
+    cb?: (error: string, rep: CreateSealResponse) => void
+  ): Promise<CreateSealResponse> {
+    return this.request("CreateSeal", req, cb)
   }
 
   /**

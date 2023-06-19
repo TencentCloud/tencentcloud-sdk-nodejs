@@ -2293,11 +2293,11 @@ export interface DescribeBinlogsRequest {
    */
   Limit?: number
   /**
-   * binlog开始时间，筛选大于等于此值，时间格式：2016-03-17 02:10:37
+   * binlog最早开始时间，时间格式：2016-03-17 02:10:37
    */
   MinStartTime?: string
   /**
-   * binlog开始时间，筛选小于等于此值，时间格式：2016-03-17 02:10:37
+   * binlog最晚开始时间，时间格式：2016-03-17 02:10:37
    */
   MaxStartTime?: string
 }

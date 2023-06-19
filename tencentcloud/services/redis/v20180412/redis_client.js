@@ -76,7 +76,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeInstanceMonitorTopNCmd", req, cb);
     }
     /**
-     * 将原本实例升级到高版本实例，或者将主从版实例升级到集群版实例
+     * 将当前实例升级到更高版本，或者将当前标准架构升级至集群架构。
      */
     async UpgradeInstanceVersion(req, cb) {
         return this.request("UpgradeInstanceVersion", req, cb);

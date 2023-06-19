@@ -20,11 +20,13 @@ import { ClientConfig } from "../../../common/interface"
 import {
   RemoveClusterSlaveZoneRequest,
   ModifyClusterNameRequest,
+  ModifyProxyRwSplitRequest,
   DescribeRollbackTimeRangeRequest,
   DescribeResourcePackageListResponse,
   InquirePriceRenewRequest,
   DescribeAccountPrivilegesResponse,
   InstanceAuditRule,
+  ProxyInstanceWeight,
   CreateResourcePackageRequest,
   DescribeAuditLogsRequest,
   DescribeBackupConfigRequest,
@@ -33,12 +35,14 @@ import {
   ModifyMaintainPeriodConfigRequest,
   DescribeRollbackTimeRangeResponse,
   BillingResourceInfo,
+  DescribeProxiesRequest,
   ModifyClusterPasswordComplexityResponse,
   ModifyBackupNameResponse,
   ModifyClusterStorageRequest,
   RollBackClusterRequest,
   DescribeAuditLogFilesResponse,
   SwitchClusterZoneResponse,
+  ProxyConnectionPoolInfo,
   DescribeResourcePackageDetailResponse,
   DescribeClusterPasswordComplexityRequest,
   AssociateSecurityGroupsRequest,
@@ -66,16 +70,19 @@ import {
   AuditLogFilter,
   DescribeParamTemplatesRequest,
   CopyClusterPasswordComplexityResponse,
-  Tag,
+  UpgradeProxyVersionRequest,
+  SwitchClusterVpcRequest,
   DescribeAuditLogsResponse,
   DescribeInstanceParamsRequest,
-  SearchClusterTablesRequest,
+  DescribeProxiesResponse,
   ModifyResourcePackageClustersRequest,
   DeleteParamTemplateRequest,
   DbInfo,
   DescribeFlowResponse,
   SetRenewFlagResponse,
+  DescribeResourcePackageSaleSpecRequest,
   ExportInstanceErrorLogsRequest,
+  SearchClusterTablesResponse,
   DescribeBackupConfigResponse,
   CreateClustersResponse,
   SetRenewFlagRequest,
@@ -86,6 +93,7 @@ import {
   ActivateInstanceRequest,
   RevokeAccountPrivilegesResponse,
   DatabaseTables,
+  ProxyGroup,
   AddClusterSlaveZoneRequest,
   RemoveClusterSlaveZoneResponse,
   CynosdbErrorLogItem,
@@ -94,6 +102,7 @@ import {
   ModifyVipVportRequest,
   DatabasePrivileges,
   DescribeClustersRequest,
+  ParamItem,
   ModifyClusterStorageResponse,
   CloseClusterPasswordComplexityRequest,
   ModifyDBInstanceSecurityGroupsResponse,
@@ -108,7 +117,9 @@ import {
   Package,
   SwitchClusterZoneRequest,
   InstanceParamItem,
+  ReloadBalanceProxyNodeRequest,
   DescribeInstanceDetailRequest,
+  ProxyZone,
   Ability,
   InstanceInitInfo,
   PackageDetail,
@@ -117,6 +128,7 @@ import {
   IsolateInstanceRequest,
   SwitchClusterVpcResponse,
   DescribeClusterDetailRequest,
+  SearchClusterTablesRequest,
   DeleteBackupResponse,
   ModifyInstanceParamRequest,
   DescribeProjectSecurityGroupsResponse,
@@ -125,21 +137,24 @@ import {
   OpenWanResponse,
   PauseServerlessResponse,
   ParamDetail,
-  DeleteAccountsResponse,
+  DescribeAuditRuleWithInstanceIdsResponse,
+  UpgradeProxyVersionResponse,
   ResetAccountPasswordResponse,
   NewAccount,
   BackupFileInfo,
   TablePrivileges,
+  UpgradeProxyRequest,
   DescribeClusterDetailDatabasesRequest,
   DescribeBinlogDownloadUrlResponse,
   BindInstanceInfo,
-  DescribeAuditRuleWithInstanceIdsResponse,
+  DeleteAccountsResponse,
   ModifyResourcePackageNameResponse,
   DescribeBackupListRequest,
-  SearchClusterDatabasesRequest,
-  SwitchClusterVpcRequest,
+  CloseProxyRequest,
+  ModifyProxyDescResponse,
   CreateResourcePackageResponse,
   CynosdbInstance,
+  SearchClusterDatabasesRequest,
   DescribeClusterPasswordComplexityResponse,
   DescribeAuditRuleWithInstanceIdsRequest,
   RefundResourcePackageRequest,
@@ -149,10 +164,12 @@ import {
   ParamItemDetail,
   GrantAccountPrivilegesRequest,
   BinlogItem,
+  ModifyProxyDescRequest,
   ModifyParamItem,
   ModifyAuditServiceRequest,
   CreateClustersRequest,
   RollbackTableInfo,
+  ProxyGroupRwInfo,
   DescribeClustersResponse,
   OpenAuditServiceRequest,
   QueryFilter,
@@ -172,7 +189,7 @@ import {
   ModifyClusterParamResponse,
   SecurityGroup,
   BindClusterResourcePackagesResponse,
-  SwitchProxyVpcRequest,
+  QueryParamFilter,
   DescribeBackupDownloadUrlRequest,
   SearchClusterDatabasesResponse,
   RollbackTimeRange,
@@ -181,8 +198,9 @@ import {
   RevokeAccountPrivilegesRequest,
   OpenWanRequest,
   UnbindClusterResourcePackagesRequest,
+  CreateProxyRequest,
   OpenClusterPasswordComplexityResponse,
-  DescribeInstanceDetailResponse,
+  CreateProxyEndPointResponse,
   DescribeResourcePackageSaleSpecResponse,
   OfflineInstanceResponse,
   ModifyInstanceParamResponse,
@@ -191,10 +209,14 @@ import {
   ResourcePackage,
   RestartInstanceResponse,
   CopyClusterPasswordComplexityRequest,
+  SwitchProxyVpcRequest,
+  ProxyGroupInfo,
   TemplateParamInfo,
   AssociateSecurityGroupsResponse,
   DescribeResourcesByDealNameRequest,
+  DescribeInstanceDetailResponse,
   CreateBackupResponse,
+  CreateProxyEndPointRequest,
   UserHostPrivilege,
   ModifyAccountPrivilegesResponse,
   DescribeRollbackTimeValidityResponse,
@@ -212,12 +234,14 @@ import {
   OpenClusterPasswordComplexityRequest,
   UnbindClusterResourcePackagesResponse,
   CreateAuditRuleTemplateRequest,
+  UpgradeProxyResponse,
   GrantAccountPrivilegesResponse,
   ModifyBackupConfigResponse,
+  ModifyProxyRwSplitResponse,
   DescribeInstanceSpecsRequest,
   ExportInstanceSlowQueriesRequest,
   ModifyAccountDescriptionRequest,
-  ParamItem,
+  DescribeProxyNodesResponse,
   ModifyAccountParamsRequest,
   CynosdbCluster,
   CreateAuditRuleTemplateResponse,
@@ -228,6 +252,7 @@ import {
   ModifyParamTemplateRequest,
   ObjectTask,
   OpenAuditServiceResponse,
+  ProxyNodeInfo,
   OfflineClusterResponse,
   SwitchProxyVpcResponse,
   DescribeParamTemplateDetailRequest,
@@ -243,9 +268,9 @@ import {
   CreateBackupRequest,
   CreateClusterDatabaseResponse,
   DescribeClusterParamLogsRequest,
-  SearchClusterTablesResponse,
+  CloseProxyResponse,
   Module,
-  DescribeResourcePackageSaleSpecRequest,
+  DescribeProxyNodesRequest,
   RollbackTable,
   DescribeMaintainPeriodResponse,
   ModifyClusterParamRequest,
@@ -288,6 +313,7 @@ import {
   DescribeBinlogSaveDaysResponse,
   DescribeAccountPrivilegesRequest,
   ParamTemplateListInfo,
+  ReloadBalanceProxyNodeResponse,
   DescribeAccountsResponse,
   ModifyAccountParamsResponse,
   CreateClusterDatabaseRequest,
@@ -298,6 +324,7 @@ import {
   DescribeInstanceSpecsResponse,
   DescribeDBSecurityGroupsRequest,
   ErrorLogItemExport,
+  CreateProxyResponse,
   DescribeAccountAllGrantPrivilegesRequest,
   DescribeParamTemplateDetailResponse,
   ModifyBinlogSaveDaysResponse,
@@ -314,6 +341,7 @@ import {
   DisassociateSecurityGroupsResponse,
   ZoneStockInfo,
   InquirePriceRenewResponse,
+  Tag,
   ModifyAuditRuleTemplatesResponse,
 } from "./cynosdb_models"
 
@@ -337,6 +365,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 升级数据库代理版本
+   */
+  async UpgradeProxyVersion(
+    req: UpgradeProxyVersionRequest,
+    cb?: (error: string, rep: UpgradeProxyVersionResponse) => void
+  ): Promise<UpgradeProxyVersionResponse> {
+    return this.request("UpgradeProxyVersion", req, cb)
+  }
+
+  /**
    * 获取指定集群的备份配置信息，包括全量备份时间段，备份文件保留时间
    */
   async DescribeBackupConfig(
@@ -344,6 +382,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeBackupConfigResponse) => void
   ): Promise<DescribeBackupConfigResponse> {
     return this.request("DescribeBackupConfig", req, cb)
+  }
+
+  /**
+   * 创建数据库代理连接点
+   */
+  async CreateProxyEndPoint(
+    req: CreateProxyEndPointRequest,
+    cb?: (error: string, rep: CreateProxyEndPointResponse) => void
+  ): Promise<CreateProxyEndPointResponse> {
+    return this.request("CreateProxyEndPoint", req, cb)
   }
 
   /**
@@ -437,6 +485,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 关闭数据库代理
+   */
+  async CloseProxy(
+    req: CloseProxyRequest,
+    cb?: (error: string, rep: CloseProxyResponse) => void
+  ): Promise<CloseProxyResponse> {
+    return this.request("CloseProxy", req, cb)
+  }
+
+  /**
    * 该接口（DescribeClusterDetail）显示集群详情
    */
   async DescribeClusterDetail(
@@ -494,6 +552,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ActivateInstanceResponse) => void
   ): Promise<ActivateInstanceResponse> {
     return this.request("ActivateInstance", req, cb)
+  }
+
+  /**
+   * 本接口（DescribeProxyNodes）用于查询代理接口列表。
+   */
+  async DescribeProxyNodes(
+    req: DescribeProxyNodesRequest,
+    cb?: (error: string, rep: DescribeProxyNodesResponse) => void
+  ): Promise<DescribeProxyNodesResponse> {
+    return this.request("DescribeProxyNodes", req, cb)
   }
 
   /**
@@ -587,6 +655,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 配置数据库代理读写分离
+   */
+  async ModifyProxyRwSplit(
+    req: ModifyProxyRwSplitRequest,
+    cb?: (error: string, rep: ModifyProxyRwSplitResponse) => void
+  ): Promise<ModifyProxyRwSplitResponse> {
+    return this.request("ModifyProxyRwSplit", req, cb)
+  }
+
+  /**
    * 修改实例组ip，端口
    */
   async ModifyVipVport(
@@ -604,6 +682,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteAuditRuleTemplatesResponse) => void
   ): Promise<DeleteAuditRuleTemplatesResponse> {
     return this.request("DeleteAuditRuleTemplates", req, cb)
+  }
+
+  /**
+   * 修改数据库代理描述
+   */
+  async ModifyProxyDesc(
+    req: ModifyProxyDescRequest,
+    cb?: (error: string, rep: ModifyProxyDescResponse) => void
+  ): Promise<ModifyProxyDescResponse> {
+    return this.request("ModifyProxyDesc", req, cb)
   }
 
   /**
@@ -684,6 +772,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: RestartInstanceResponse) => void
   ): Promise<RestartInstanceResponse> {
     return this.request("RestartInstance", req, cb)
+  }
+
+  /**
+   * 升级数据库代理配置
+   */
+  async UpgradeProxy(
+    req: UpgradeProxyRequest,
+    cb?: (error: string, rep: UpgradeProxyResponse) => void
+  ): Promise<UpgradeProxyResponse> {
+    return this.request("UpgradeProxy", req, cb)
   }
 
   /**
@@ -987,6 +1085,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询数据库代理列表
+   */
+  async DescribeProxies(
+    req: DescribeProxiesRequest,
+    cb?: (error: string, rep: DescribeProxiesResponse) => void
+  ): Promise<DescribeProxiesResponse> {
+    return this.request("DescribeProxies", req, cb)
+  }
+
+  /**
    * 本接口（OpenWan）用于开通外网
    */
   async OpenWan(
@@ -1104,6 +1212,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: InquirePriceRenewResponse) => void
   ): Promise<InquirePriceRenewResponse> {
     return this.request("InquirePriceRenew", req, cb)
+  }
+
+  /**
+   * 负载均衡数据库代理
+   */
+  async ReloadBalanceProxyNode(
+    req: ReloadBalanceProxyNodeRequest,
+    cb?: (error: string, rep: ReloadBalanceProxyNodeResponse) => void
+  ): Promise<ReloadBalanceProxyNodeResponse> {
+    return this.request("ReloadBalanceProxyNode", req, cb)
   }
 
   /**
@@ -1324,6 +1442,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeBackupDownloadUrlResponse) => void
   ): Promise<DescribeBackupDownloadUrlResponse> {
     return this.request("DescribeBackupDownloadUrl", req, cb)
+  }
+
+  /**
+   * 创建数据库代理
+   */
+  async CreateProxy(
+    req: CreateProxyRequest,
+    cb?: (error: string, rep: CreateProxyResponse) => void
+  ): Promise<CreateProxyResponse> {
+    return this.request("CreateProxy", req, cb)
   }
 
   /**

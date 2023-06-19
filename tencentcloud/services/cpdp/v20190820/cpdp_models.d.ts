@@ -5361,6 +5361,36 @@ export interface PayeeAccountBalanceResult {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     SumSettlementAmount: string;
+    /**
+     * 已缴个税
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PaidIncomeTax?: string;
+    /**
+     * 提现中个税
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InPayIncomeTax?: string;
+    /**
+     * 已缴增值税
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PaidValueAddedTax?: string;
+    /**
+     * 提现中增值税
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InPayValueAddedTax?: string;
+    /**
+     * 已缴附加税
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PaidAttachTax?: string;
+    /**
+     * 提现中附加税
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InPayAttachTax?: string;
 }
 /**
  * 云企付-门店信息

@@ -118,6 +118,16 @@ it("oceanus.v20190422.DescribeClusters", async function () {
     }
 })
 
+it("oceanus.v20190422.DeleteJobs", async function () {
+    try {
+       const data = await client.DeleteJobs({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("oceanus.v20190422.CreateJob", async function () {
     try {
        const data = await client.CreateJob({})
@@ -148,9 +158,9 @@ it("oceanus.v20190422.RunJobs", async function () {
     }
 })
 
-it("oceanus.v20190422.DeleteJobs", async function () {
+it("oceanus.v20190422.DescribeWorkSpaces", async function () {
     try {
-       const data = await client.DeleteJobs({})
+       const data = await client.DescribeWorkSpaces({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

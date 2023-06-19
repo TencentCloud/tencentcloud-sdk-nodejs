@@ -31,11 +31,13 @@ import {
   DeleteJobsRequest,
   StopJobDescription,
   CreateFolderRequest,
+  TriggerJobSavepointResponse,
   ModifyJobResponse,
   ClusterSession,
   CreateJobConfigResponse,
   CreateResourceConfigResponse,
   CreateJobConfigRequest,
+  TriggerJobSavepointRequest,
   CreateResourceConfigRequest,
   DescribeSystemResourcesResponse,
   ClusterVersion,
@@ -50,13 +52,14 @@ import {
   DeleteResourcesResponse,
   DeleteTableConfigResponse,
   ResourceConfigItem,
-  TriggerJobSavepointResponse,
+  RoleAuth,
   Tag,
   DescribeTreeResourcesRsp,
   DescribeResourcesRequest,
   TreeResourceItem,
   RefJobStatusCountItem,
   ResourceLocParam,
+  WorkSpaceSetItem,
   ResourceRefJobInfo,
   DescribeJobConfigsRequest,
   CheckSavepointResponse,
@@ -68,11 +71,13 @@ import {
   Filter,
   DeleteResourcesRequest,
   DescribeJobsResponse,
+  DescribeWorkSpacesResponse,
   ResourceItem,
   WorkSpaceClusterItem,
   StopJobsResponse,
   DescribeJobSavepointRequest,
   CreateResourceResponse,
+  ClusterGroupSetItem,
   DescribeSystemResourcesRequest,
   CreateFolderResponse,
   CopyJobItem,
@@ -86,7 +91,7 @@ import {
   DescribeResourcesResponse,
   Cluster,
   DescribeClustersResponse,
-  TriggerJobSavepointRequest,
+  DescribeWorkSpacesRequest,
   DescribeResourceConfigsResponse,
   ResourceRef,
   DescribeJobsRequest,
@@ -206,6 +211,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 批量删除作业接口，批量操作数量上限20
+   */
+  async DeleteJobs(
+    req: DeleteJobsRequest,
+    cb?: (error: string, rep: DeleteJobsResponse) => void
+  ): Promise<DeleteJobsResponse> {
+    return this.request("DeleteJobs", req, cb)
+  }
+
+  /**
    * 新建作业接口，一个 AppId 最多允许创建1000个作业
    */
   async CreateJob(
@@ -236,13 +251,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 批量删除作业接口，批量操作数量上限20
+   * 授权工作空间列表
    */
-  async DeleteJobs(
-    req: DeleteJobsRequest,
-    cb?: (error: string, rep: DeleteJobsResponse) => void
-  ): Promise<DeleteJobsResponse> {
-    return this.request("DeleteJobs", req, cb)
+  async DescribeWorkSpaces(
+    req: DescribeWorkSpacesRequest,
+    cb?: (error: string, rep: DescribeWorkSpacesResponse) => void
+  ): Promise<DescribeWorkSpacesResponse> {
+    return this.request("DescribeWorkSpaces", req, cb)
   }
 
   /**

@@ -617,7 +617,7 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
         return this.request("BindApiGroup", req, cb);
     }
     /**
-     * 查询调用监控指标
+     * 废弃
      */
     async DescribeInovcationIndicators(req, cb) {
         return this.request("DescribeInovcationIndicators", req, cb);

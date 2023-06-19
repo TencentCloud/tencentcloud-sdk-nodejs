@@ -401,7 +401,7 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
      */
     BindApiGroup(req: BindApiGroupRequest, cb?: (error: string, rep: BindApiGroupResponse) => void): Promise<BindApiGroupResponse>;
     /**
-     * 查询调用监控指标
+     * 废弃
      */
     DescribeInovcationIndicators(req: DescribeInovcationIndicatorsRequest, cb?: (error: string, rep: DescribeInovcationIndicatorsResponse) => void): Promise<DescribeInovcationIndicatorsResponse>;
     /**

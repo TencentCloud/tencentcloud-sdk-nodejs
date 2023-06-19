@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { CreateResourceRequest, CheckSavepointRequest, CreateJobRequest, StopJobsRequest, CreateJobResponse, RunJobsRequest, DeleteJobsRequest, CreateFolderRequest, ModifyJobResponse, CreateJobConfigResponse, CreateResourceConfigResponse, CreateJobConfigRequest, CreateResourceConfigRequest, DescribeSystemResourcesResponse, DescribeClustersRequest, DescribeTreeJobsResponse, DeleteTableConfigRequest, CopyJobsRequest, CopyJobsResponse, DescribeResourceRelatedJobsRequest, DeleteResourcesResponse, DeleteTableConfigResponse, TriggerJobSavepointResponse, DescribeResourcesRequest, DescribeJobConfigsRequest, CheckSavepointResponse, DeleteResourceConfigsRequest, DescribeJobSavepointResponse, DeleteJobsResponse, DescribeTreeResourcesResponse, RunJobsResponse, DeleteResourcesRequest, DescribeJobsResponse, StopJobsResponse, DescribeJobSavepointRequest, CreateResourceResponse, DescribeSystemResourcesRequest, CreateFolderResponse, ModifyJobRequest, DescribeTreeJobsRequest, DescribeJobConfigsResponse, DeleteResourceConfigsResponse, DescribeResourceRelatedJobsResponse, DescribeResourcesResponse, DescribeClustersResponse, TriggerJobSavepointRequest, DescribeResourceConfigsResponse, DescribeJobsRequest, DescribeResourceConfigsRequest, DescribeTreeResourcesRequest } from "./oceanus_models";
+import { CreateResourceRequest, CheckSavepointRequest, CreateJobRequest, StopJobsRequest, CreateJobResponse, RunJobsRequest, DeleteJobsRequest, CreateFolderRequest, TriggerJobSavepointResponse, ModifyJobResponse, CreateJobConfigResponse, CreateResourceConfigResponse, CreateJobConfigRequest, TriggerJobSavepointRequest, CreateResourceConfigRequest, DescribeSystemResourcesResponse, DescribeClustersRequest, DescribeTreeJobsResponse, DeleteTableConfigRequest, CopyJobsRequest, CopyJobsResponse, DescribeResourceRelatedJobsRequest, DeleteResourcesResponse, DeleteTableConfigResponse, DescribeResourcesRequest, DescribeJobConfigsRequest, CheckSavepointResponse, DeleteResourceConfigsRequest, DescribeJobSavepointResponse, DeleteJobsResponse, DescribeTreeResourcesResponse, RunJobsResponse, DeleteResourcesRequest, DescribeJobsResponse, DescribeWorkSpacesResponse, StopJobsResponse, DescribeJobSavepointRequest, CreateResourceResponse, DescribeSystemResourcesRequest, CreateFolderResponse, ModifyJobRequest, DescribeTreeJobsRequest, DescribeJobConfigsResponse, DeleteResourceConfigsResponse, DescribeResourceRelatedJobsResponse, DescribeResourcesResponse, DescribeClustersResponse, DescribeWorkSpacesRequest, DescribeResourceConfigsResponse, DescribeJobsRequest, DescribeResourceConfigsRequest, DescribeTreeResourcesRequest } from "./oceanus_models";
 /**
  * oceanus client
  * @class
@@ -48,6 +48,10 @@ export declare class Client extends AbstractClient {
      */
     DescribeClusters(req: DescribeClustersRequest, cb?: (error: string, rep: DescribeClustersResponse) => void): Promise<DescribeClustersResponse>;
     /**
+     * 批量删除作业接口，批量操作数量上限20
+     */
+    DeleteJobs(req: DeleteJobsRequest, cb?: (error: string, rep: DeleteJobsResponse) => void): Promise<DeleteJobsResponse>;
+    /**
      * 新建作业接口，一个 AppId 最多允许创建1000个作业
      */
     CreateJob(req: CreateJobRequest, cb?: (error: string, rep: CreateJobResponse) => void): Promise<CreateJobResponse>;
@@ -60,9 +64,9 @@ export declare class Client extends AbstractClient {
      */
     RunJobs(req: RunJobsRequest, cb?: (error: string, rep: RunJobsResponse) => void): Promise<RunJobsResponse>;
     /**
-     * 批量删除作业接口，批量操作数量上限20
+     * 授权工作空间列表
      */
-    DeleteJobs(req: DeleteJobsRequest, cb?: (error: string, rep: DeleteJobsResponse) => void): Promise<DeleteJobsResponse>;
+    DescribeWorkSpaces(req: DescribeWorkSpacesRequest, cb?: (error: string, rep: DescribeWorkSpacesResponse) => void): Promise<DescribeWorkSpacesResponse>;
     /**
      * 作业列表页面新建文件夹请求
      */

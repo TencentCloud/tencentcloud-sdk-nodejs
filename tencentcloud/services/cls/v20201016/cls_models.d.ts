@@ -3786,7 +3786,8 @@ export interface SearchLogRequest {
      */
     Query: string;
     /**
-     * 要检索分析的日志主题ID
+     * - 要检索分析的日志主题ID，仅能指定一个日志主题。
+  - 如需同时检索多个日志主题，请使用Topics参数。
      */
     TopicId?: string;
     /**
@@ -3831,6 +3832,12 @@ export interface SearchLogRequest {
   详细说明参见<a href="https://cloud.tencent.com/document/product/614/47044#RetrievesConditionalRules" target="_blank">检索条件语法规则</a>
      */
     SyntaxRule?: number;
+    /**
+     * - 要检索分析的日志主题列表，最大支持20个日志主题。
+  - 检索单个日志主题时请使用TopicId。
+  - 不能同时使用TopicId和Topics。
+     */
+    Topics?: Array<MultiTopicSearchInformation>;
 }
 /**
  * CreateMachineGroup请求参数结构体
@@ -4325,6 +4332,19 @@ export interface CosRechargeInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     ExtractRuleInfo: ExtractRuleInfo;
+}
+/**
+ * 多日志主题检索相关信息
+ */
+export interface MultiTopicSearchInformation {
+    /**
+     * 要检索分析的日志主题ID
+     */
+    TopicId?: string;
+    /**
+     * 透传上次接口返回的Context值，可获取后续更多日志，总计最多可获取1万条原始日志，过期时间1小时
+     */
+    Context?: string;
 }
 /**
  * 投递任务出入参 Content

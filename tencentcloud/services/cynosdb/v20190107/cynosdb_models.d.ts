@@ -25,6 +25,75 @@ export interface ModifyClusterNameRequest {
     ClusterName: string;
 }
 /**
+ * ModifyProxyRwSplit请求参数结构体
+ */
+export interface ModifyProxyRwSplitRequest {
+    /**
+     * 集群ID
+     */
+    ClusterId: string;
+    /**
+     * 数据库代理组ID
+     */
+    ProxyGroupId: string;
+    /**
+     * 一致性类型；“eventual"-最终一致性, "session"-会话一致性, "global"-全局一致性
+     */
+    ConsistencyType?: string;
+    /**
+     * 一致性超时时间
+     */
+    ConsistencyTimeOut?: string;
+    /**
+     * 读写权重分配模式；系统自动分配："system"， 自定义："custom"
+     */
+    WeightMode?: string;
+    /**
+     * 实例只读权重
+     */
+    InstanceWeights?: Array<ProxyInstanceWeight>;
+    /**
+     * 是否开启故障转移，代理出现故障后，连接地址将路由到主实例，取值："yes" , "no"
+     */
+    FailOver?: string;
+    /**
+     * 是否自动添加只读实例，取值："yes" , "no"
+     */
+    AutoAddRo?: string;
+    /**
+     * 是否打开读写分离
+     */
+    OpenRw?: string;
+    /**
+     * 读写类型：
+  READWRITE,READONLY
+     */
+    RwType?: string;
+    /**
+     * 事务拆分
+     */
+    TransSplit?: boolean;
+    /**
+     * 连接模式：
+  nearby,balance
+     */
+    AccessMode?: string;
+    /**
+     * 是否打开连接池：
+  yes,no
+     */
+    OpenConnectionPool?: string;
+    /**
+     * 连接池类型：
+  SessionConnectionPool
+     */
+    ConnectionPoolType?: string;
+    /**
+     * 连接池时间
+     */
+    ConnectionPoolTimeOut?: number;
+}
+/**
  * DescribeRollbackTimeRange请求参数结构体
  */
 export interface DescribeRollbackTimeRangeRequest {
@@ -99,6 +168,19 @@ export interface InstanceAuditRule {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     AuditRuleFilters: Array<AuditRuleFilters>;
+}
+/**
+ * 数据库代理，读写分离实例权重
+ */
+export interface ProxyInstanceWeight {
+    /**
+     * 实例Id
+     */
+    InstanceId: string;
+    /**
+     * 实例权重
+     */
+    Weight: number;
 }
 /**
  * CreateResourcePackage请求参数结构体
@@ -304,6 +386,39 @@ export interface BillingResourceInfo {
     DealName: string;
 }
 /**
+ * DescribeProxies请求参数结构体
+ */
+export interface DescribeProxiesRequest {
+    /**
+     * 集群ID
+     */
+    ClusterId?: string;
+    /**
+     * 返回数量，默认为 20，最大值为 100
+     */
+    Limit?: number;
+    /**
+     * 记录偏移量，默认值为0
+     */
+    Offset?: number;
+    /**
+     * 排序字段，取值范围：
+  <li> CREATETIME：创建时间</li>
+  <li> PERIODENDTIME：过期时间</li>
+     */
+    OrderBy?: string;
+    /**
+     * 排序类型，取值范围：
+  <li> ASC：升序排序 </li>
+  <li> DESC：降序排序 </li>
+     */
+    OrderByType?: string;
+    /**
+     * 搜索条件，若存在多个Filter时，Filter间的关系为逻辑与（AND）关系。
+     */
+    Filters?: Array<QueryParamFilter>;
+}
+/**
  * ModifyClusterPasswordComplexity返回参数结构体
  */
 export interface ModifyClusterPasswordComplexityResponse {
@@ -412,6 +527,26 @@ export interface SwitchClusterZoneResponse {
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * 数据库代理连接池信息
+ */
+export interface ProxyConnectionPoolInfo {
+    /**
+     * 连接池保持阈值：单位（秒）
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ConnectionPoolTimeOut: number;
+    /**
+     * 是否开启了连接池
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    OpenConnectionPool?: string;
+    /**
+     * 连接池类型：SessionConnectionPool（会话级别连接池
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ConnectionPoolType?: string;
 }
 /**
  * DescribeResourcePackageDetail返回参数结构体
@@ -919,17 +1054,50 @@ export interface CopyClusterPasswordComplexityResponse {
     RequestId?: string;
 }
 /**
- * 集群绑定的标签信息，包含标签键TagKey和标签值TagValue
+ * UpgradeProxyVersion请求参数结构体
  */
-export interface Tag {
+export interface UpgradeProxyVersionRequest {
     /**
-     * 标签键
+     * 集群ID
      */
-    TagKey: string;
+    ClusterId: string;
     /**
-     * 标签值
+     * 数据库代理当前版本
      */
-    TagValue: string;
+    SrcProxyVersion: string;
+    /**
+     * 数据库代理升级版本
+     */
+    DstProxyVersion: string;
+    /**
+     * 数据库代理组ID
+     */
+    ProxyGroupId?: string;
+    /**
+     * 升级时间 ：no（升级完成时）yes（实例维护时间）
+     */
+    IsInMaintainPeriod?: string;
+}
+/**
+ * SwitchClusterVpc请求参数结构体
+ */
+export interface SwitchClusterVpcRequest {
+    /**
+     * 集群ID
+     */
+    ClusterId: string;
+    /**
+     * 字符串vpc id
+     */
+    UniqVpcId: string;
+    /**
+     * 字符串子网id
+     */
+    UniqSubnetId: string;
+    /**
+     * 旧地址回收时间
+     */
+    OldIpReserveHours: number;
 }
 /**
  * DescribeAuditLogs返回参数结构体
@@ -967,28 +1135,27 @@ export interface DescribeInstanceParamsRequest {
     ParamKeyword?: string;
 }
 /**
- * SearchClusterTables请求参数结构体
+ * DescribeProxies返回参数结构体
  */
-export interface SearchClusterTablesRequest {
+export interface DescribeProxiesResponse {
     /**
-     * 集群id
+     * 数据库代理组数
      */
-    ClusterId: string;
+    TotalCount?: number;
     /**
-     * 数据库名
+     * 数据库代理组列表
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Database?: string;
+    ProxyGroupInfos?: Array<ProxyGroupInfo>;
     /**
-     * 数据表名
+     * 数据库代理节点
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Table?: string;
+    ProxyNodeInfos?: Array<ProxyNodeInfo>;
     /**
-     * 数据表类型：
-  view：只返回 view，
-  base_table： 只返回基本表，
-  all：返回 view 和表
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
-    TableType?: string;
+    RequestId?: string;
 }
 /**
  * ModifyResourcePackageClusters请求参数结构体
@@ -1104,6 +1271,34 @@ export interface SetRenewFlagResponse {
     RequestId?: string;
 }
 /**
+ * DescribeResourcePackageSaleSpec请求参数结构体
+ */
+export interface DescribeResourcePackageSaleSpecRequest {
+    /**
+     * 实例类型
+     */
+    InstanceType: string;
+    /**
+     * 资源包使用地域
+  china-中国内地通用，overseas-港澳台及海外通用
+     */
+    PackageRegion: string;
+    /**
+     * 资源包类型
+  CCU-计算资源包
+  DISK-存储资源包
+     */
+    PackageType: string;
+    /**
+     * 偏移量
+     */
+    Offset?: number;
+    /**
+     * 限制
+     */
+    Limit?: number;
+}
+/**
  * ExportInstanceErrorLogs请求参数结构体
  */
 export interface ExportInstanceErrorLogsRequest {
@@ -1147,6 +1342,20 @@ export interface ExportInstanceErrorLogsRequest {
      * ASC或DESC
      */
     OrderByType?: string;
+}
+/**
+ * SearchClusterTables返回参数结构体
+ */
+export interface SearchClusterTablesResponse {
+    /**
+     * 数据表列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Tables: Array<DatabaseTables>;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * DescribeBackupConfig返回参数结构体
@@ -1396,6 +1605,50 @@ export interface DatabaseTables {
     Tables?: Array<string>;
 }
 /**
+ * proxy组
+ */
+export interface ProxyGroup {
+    /**
+     * 数据库代理组ID
+     */
+    ProxyGroupId: string;
+    /**
+     * 数据库代理组节点个数
+     */
+    ProxyNodeCount: number;
+    /**
+     * 数据库代理组状态
+     */
+    Status: string;
+    /**
+     * 地域
+     */
+    Region: string;
+    /**
+     * 可用区
+     */
+    Zone: string;
+    /**
+     * 当前代理版本
+     */
+    CurrentProxyVersion: string;
+    /**
+     * 集群ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ClusterId: string;
+    /**
+     * 用户AppId
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AppId: number;
+    /**
+     * 读写节点开通数据库代理
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    OpenRw: string;
+}
+/**
  * AddClusterSlaveZone请求参数结构体
  */
 export interface AddClusterSlaveZoneRequest {
@@ -1558,6 +1811,23 @@ export interface DescribeClustersRequest {
      * 搜索条件，若存在多个Filter时，Filter间的关系为逻辑与（AND）关系。
      */
     Filters?: Array<QueryFilter>;
+}
+/**
+ * 修改参数时，传入参数描述
+ */
+export interface ParamItem {
+    /**
+     * 参数名称
+     */
+    ParamName: string;
+    /**
+     * 当前值
+     */
+    CurrentValue: string;
+    /**
+     * 原有值
+     */
+    OldValue: string;
 }
 /**
  * ModifyClusterStorage返回参数结构体
@@ -1858,6 +2128,19 @@ export interface InstanceParamItem {
     ParamsItems: Array<ParamItemDetail>;
 }
 /**
+ * ReloadBalanceProxyNode请求参数结构体
+ */
+export interface ReloadBalanceProxyNodeRequest {
+    /**
+     * 集群ID
+     */
+    ClusterId: string;
+    /**
+     * 数据库代理组ID
+     */
+    ProxyGroupId: string;
+}
+/**
  * DescribeInstanceDetail请求参数结构体
  */
 export interface DescribeInstanceDetailRequest {
@@ -1865,6 +2148,19 @@ export interface DescribeInstanceDetailRequest {
      * 实例ID
      */
     InstanceId: string;
+}
+/**
+ * proxy节点可用区内个数
+ */
+export interface ProxyZone {
+    /**
+     * proxy节点可用区
+     */
+    ProxyNodeZone?: string;
+    /**
+     * proxy节点数量
+     */
+    ProxyNodeCount?: number;
 }
 /**
  * 集群支持的功能
@@ -2045,6 +2341,30 @@ export interface DescribeClusterDetailRequest {
     ClusterId: string;
 }
 /**
+ * SearchClusterTables请求参数结构体
+ */
+export interface SearchClusterTablesRequest {
+    /**
+     * 集群id
+     */
+    ClusterId: string;
+    /**
+     * 数据库名
+     */
+    Database?: string;
+    /**
+     * 数据表名
+     */
+    Table?: string;
+    /**
+     * 数据表类型：
+  view：只返回 view，
+  base_table： 只返回基本表，
+  all：返回 view 和表
+     */
+    TableType?: string;
+}
+/**
  * DeleteBackup返回参数结构体
  */
 export interface DeleteBackupResponse {
@@ -2221,9 +2541,35 @@ export interface ParamDetail {
     ModifiableInfo: ModifiableInfo;
 }
 /**
- * DeleteAccounts返回参数结构体
+ * DescribeAuditRuleWithInstanceIds返回参数结构体
  */
-export interface DeleteAccountsResponse {
+export interface DescribeAuditRuleWithInstanceIdsResponse {
+    /**
+     * 无
+     */
+    TotalCount: number;
+    /**
+     * 实例审计规则信息。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Items: Array<InstanceAuditRule>;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * UpgradeProxyVersion返回参数结构体
+ */
+export interface UpgradeProxyVersionResponse {
+    /**
+     * 异步流程ID
+     */
+    FlowId?: number;
+    /**
+     * 异步任务id
+     */
+    TaskId?: number;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2337,6 +2683,43 @@ export interface TablePrivileges {
     Privileges: Array<string>;
 }
 /**
+ * UpgradeProxy请求参数结构体
+ */
+export interface UpgradeProxyRequest {
+    /**
+     * 集群ID
+     */
+    ClusterId: string;
+    /**
+     * cpu核数
+     */
+    Cpu: number;
+    /**
+     * 内存
+     */
+    Mem: number;
+    /**
+     * 数据库代理组节点个数
+     */
+    ProxyCount?: number;
+    /**
+     * 数据库代理组ID（已废弃）
+     */
+    ProxyGroupId?: string;
+    /**
+     * 重新负载均衡：auto（自动），manual（手动）
+     */
+    ReloadBalance?: string;
+    /**
+     * 升级时间 ：no（升级完成时）yes（实例维护时间）
+     */
+    IsInMaintainPeriod?: string;
+    /**
+     * 数据库代理节点信息
+     */
+    ProxyZones?: Array<ProxyZone>;
+}
+/**
  * DescribeClusterDetailDatabases请求参数结构体
  */
 export interface DescribeClusterDetailDatabasesRequest {
@@ -2391,18 +2774,9 @@ export interface BindInstanceInfo {
     InstanceType?: string;
 }
 /**
- * DescribeAuditRuleWithInstanceIds返回参数结构体
+ * DeleteAccounts返回参数结构体
  */
-export interface DescribeAuditRuleWithInstanceIdsResponse {
-    /**
-     * 无
-     */
-    TotalCount: number;
-    /**
-     * 实例审计规则信息。
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Items: Array<InstanceAuditRule>;
+export interface DeleteAccountsResponse {
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2476,44 +2850,30 @@ export interface DescribeBackupListRequest {
     SnapshotIdList?: Array<number>;
 }
 /**
- * SearchClusterDatabases请求参数结构体
+ * CloseProxy请求参数结构体
  */
-export interface SearchClusterDatabasesRequest {
-    /**
-     * 集群id
-     */
-    ClusterId: string;
-    /**
-     * 数据库名
-     */
-    Database?: string;
-    /**
-     * 是否精确搜索。
-  0: 模糊搜索 1:精确搜索
-  默认为0
-     */
-    MatchType?: number;
-}
-/**
- * SwitchClusterVpc请求参数结构体
- */
-export interface SwitchClusterVpcRequest {
+export interface CloseProxyRequest {
     /**
      * 集群ID
      */
     ClusterId: string;
     /**
-     * 字符串vpc id
+     * 数据库代理组ID
      */
-    UniqVpcId: string;
+    ProxyGroupId?: string;
     /**
-     * 字符串子网id
+     * 是否只关闭读写分离，取值：是 "true","false"
      */
-    UniqSubnetId: string;
+    OnlyCloseRW?: boolean;
+}
+/**
+ * ModifyProxyDesc返回参数结构体
+ */
+export interface ModifyProxyDescResponse {
     /**
-     * 旧地址回收时间
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
-    OldIpReserveHours: number;
+    RequestId?: string;
 }
 /**
  * CreateResourcePackage返回参数结构体
@@ -2757,6 +3117,25 @@ export interface CynosdbInstance {
     ResourcePackages?: Array<ResourcePackage>;
 }
 /**
+ * SearchClusterDatabases请求参数结构体
+ */
+export interface SearchClusterDatabasesRequest {
+    /**
+     * 集群id
+     */
+    ClusterId: string;
+    /**
+     * 数据库名
+     */
+    Database?: string;
+    /**
+     * 是否精确搜索。
+  0: 模糊搜索 1:精确搜索
+  默认为0
+     */
+    MatchType?: number;
+}
+/**
  * DescribeClusterPasswordComplexity返回参数结构体
  */
 export interface DescribeClusterPasswordComplexityResponse {
@@ -2953,6 +3332,23 @@ export interface BinlogItem {
      * Binlog文件ID
      */
     BinlogId: number;
+}
+/**
+ * ModifyProxyDesc请求参数结构体
+ */
+export interface ModifyProxyDescRequest {
+    /**
+     * 集群ID
+     */
+    ClusterId: string;
+    /**
+     * 数据库代理组ID
+     */
+    ProxyGroupId: string;
+    /**
+     * 数据库代理描述
+     */
+    Description: string;
 }
 /**
  * 修改的实例参数信息
@@ -3203,6 +3599,52 @@ export interface RollbackTableInfo {
      * 新表名称
      */
     NewTable: string;
+}
+/**
+ * 数据库代理组读写分离信息
+ */
+export interface ProxyGroupRwInfo {
+    /**
+     * 一致性类型 eventual-最终一致性,global-全局一致性,session-会话一致性
+     */
+    ConsistencyType?: string;
+    /**
+     * 一致性超时时间
+     */
+    ConsistencyTimeOut?: number;
+    /**
+     * 权重模式 system-系统分配，custom-自定义
+     */
+    WeightMode?: string;
+    /**
+     * 是否开启故障转移
+     */
+    FailOver?: string;
+    /**
+     * 是否自动添加只读实例，yes-是，no-不自动添加
+     */
+    AutoAddRo?: string;
+    /**
+     * 实例权重数组
+     */
+    InstanceWeights?: Array<ProxyInstanceWeight>;
+    /**
+     * 是否开通读写节点，yse-是，no-否
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    OpenRw?: string;
+    /**
+     * 读写属性，可选值：READWRITE,READONLY
+     */
+    RwType?: string;
+    /**
+     * 事务拆分
+     */
+    TransSplit?: boolean;
+    /**
+     * 连接模式，可选值：balance，nearby
+     */
+    AccessMode?: string;
 }
 /**
  * DescribeClusters返回参数结构体
@@ -3598,29 +4040,21 @@ export interface BindClusterResourcePackagesResponse {
     RequestId?: string;
 }
 /**
- * SwitchProxyVpc请求参数结构体
+ * 查询参数过滤器
  */
-export interface SwitchProxyVpcRequest {
+export interface QueryParamFilter {
     /**
-     * 集群ID
+     * 搜索字段，目前支持："InstanceId", "ProjectId", "InstanceName", "Vip"
      */
-    ClusterId: string;
+    Names: Array<string>;
     /**
-     * 字符串vpc id
+     * 搜索字符串
      */
-    UniqVpcId: string;
+    Values: Array<string>;
     /**
-     * 字符串子网id
+     * 是否精确匹配
      */
-    UniqSubnetId: string;
-    /**
-     * 旧地址回收时间
-     */
-    OldIpReserveHours: number;
-    /**
-     * 数据库代理组Id（该参数为必填项，可以通过DescribeProxies接口获得）
-     */
-    ProxyGroupId?: string;
+    ExactMatch?: boolean;
 }
 /**
  * DescribeBackupDownloadUrl请求参数结构体
@@ -3752,6 +4186,59 @@ export interface UnbindClusterResourcePackagesRequest {
     PackageIds?: Array<string>;
 }
 /**
+ * CreateProxy请求参数结构体
+ */
+export interface CreateProxyRequest {
+    /**
+     * 集群ID
+     */
+    ClusterId: string;
+    /**
+     * cpu核数
+     */
+    Cpu: number;
+    /**
+     * 内存
+     */
+    Mem: number;
+    /**
+     * 私有网络ID，默认与集群私有网络ID保持一致
+     */
+    UniqueVpcId?: string;
+    /**
+     * 私有网络子网ID，默认与集群子网ID保持一致
+     */
+    UniqueSubnetId?: string;
+    /**
+     * 数据库代理组节点个数
+     */
+    ProxyCount?: number;
+    /**
+     * 连接池类型：SessionConnectionPool(会话级别连接池 )
+     */
+    ConnectionPoolType?: string;
+    /**
+     * 是否开启连接池,yes-开启，no-不开启
+     */
+    OpenConnectionPool?: string;
+    /**
+     * 连接池阀值：单位（秒）
+     */
+    ConnectionPoolTimeOut?: number;
+    /**
+     * 安全组ID数组
+     */
+    SecurityGroupIds?: Array<string>;
+    /**
+     * 描述说明
+     */
+    Description?: string;
+    /**
+     * 数据库节点信息
+     */
+    ProxyZones?: Array<ProxyZone>;
+}
+/**
  * OpenClusterPasswordComplexity返回参数结构体
  */
 export interface OpenClusterPasswordComplexityResponse {
@@ -3765,13 +4252,17 @@ export interface OpenClusterPasswordComplexityResponse {
     RequestId?: string;
 }
 /**
- * DescribeInstanceDetail返回参数结构体
+ * CreateProxyEndPoint返回参数结构体
  */
-export interface DescribeInstanceDetailResponse {
+export interface CreateProxyEndPointResponse {
     /**
-     * 实例详情
+     * 异步流程ID
      */
-    Detail: CynosdbInstanceDetail;
+    FlowId?: number;
+    /**
+     * 异步任务ID
+     */
+    TaskId?: number;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -3961,6 +4452,66 @@ export interface CopyClusterPasswordComplexityRequest {
     SourceClusterId: string;
 }
 /**
+ * SwitchProxyVpc请求参数结构体
+ */
+export interface SwitchProxyVpcRequest {
+    /**
+     * 集群ID
+     */
+    ClusterId: string;
+    /**
+     * 字符串vpc id
+     */
+    UniqVpcId: string;
+    /**
+     * 字符串子网id
+     */
+    UniqSubnetId: string;
+    /**
+     * 旧地址回收时间
+     */
+    OldIpReserveHours: number;
+    /**
+     * 数据库代理组Id（该参数为必填项，可以通过DescribeProxies接口获得）
+     */
+    ProxyGroupId?: string;
+}
+/**
+ * 数据库代理组详细信息
+ */
+export interface ProxyGroupInfo {
+    /**
+     * 数据库代理组
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ProxyGroup: ProxyGroup;
+    /**
+     * 数据库代理组读写分离信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ProxyGroupRwInfo: ProxyGroupRwInfo;
+    /**
+     * 数据库代理节点信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ProxyNodes: Array<ProxyNodeInfo>;
+    /**
+     * 数据库代理连接池信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ConnectionPool: ProxyConnectionPoolInfo;
+    /**
+     * 数据库代理网络信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    NetAddrInfos: Array<NetAddr>;
+    /**
+     * 数据库代理任务集
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Tasks: Array<ObjectTask>;
+}
+/**
  * 参数模板详情
  */
 export interface TemplateParamInfo {
@@ -4027,6 +4578,19 @@ export interface DescribeResourcesByDealNameRequest {
     DealNames?: Array<string>;
 }
 /**
+ * DescribeInstanceDetail返回参数结构体
+ */
+export interface DescribeInstanceDetailResponse {
+    /**
+     * 实例详情
+     */
+    Detail: CynosdbInstanceDetail;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * CreateBackup返回参数结构体
  */
 export interface CreateBackupResponse {
@@ -4038,6 +4602,87 @@ export interface CreateBackupResponse {
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * CreateProxyEndPoint请求参数结构体
+ */
+export interface CreateProxyEndPointRequest {
+    /**
+     * 集群ID
+     */
+    ClusterId: string;
+    /**
+     * 私有网络ID，默认与集群私有网络ID保持一致
+     */
+    UniqueVpcId: string;
+    /**
+     * 私有网络子网ID，默认与集群子网ID保持一致
+     */
+    UniqueSubnetId: string;
+    /**
+     * 连接池类型：SessionConnectionPool(会话级别连接池 )
+     */
+    ConnectionPoolType?: string;
+    /**
+     * 是否开启连接池,yes-开启，no-不开启
+     */
+    OpenConnectionPool?: string;
+    /**
+     * 连接池阀值：单位（秒）
+     */
+    ConnectionPoolTimeOut?: number;
+    /**
+     * 安全组ID数组
+     */
+    SecurityGroupIds?: Array<string>;
+    /**
+     * 描述说明
+     */
+    Description?: string;
+    /**
+     * vip信息
+     */
+    Vip?: string;
+    /**
+     * 权重模式：
+  system-系统分配，custom-自定义
+     */
+    WeightMode?: string;
+    /**
+     * 是否自动添加只读实例，yes-是，no-不自动添加
+     */
+    AutoAddRo?: string;
+    /**
+     * 是否开启故障转移
+     */
+    FailOver?: string;
+    /**
+     * 一致性类型：
+  eventual,global,session
+     */
+    ConsistencyType?: string;
+    /**
+     * 读写属性：
+  READWRITE,READONLY
+     */
+    RwType?: string;
+    /**
+     * 一致性超时时间
+     */
+    ConsistencyTimeOut?: number;
+    /**
+     * 事务拆分
+     */
+    TransSplit?: boolean;
+    /**
+     * 连接模式：
+  nearby,balance
+     */
+    AccessMode?: string;
+    /**
+     * 实例权重
+     */
+    InstanceWeights?: Array<ProxyInstanceWeight>;
 }
 /**
  * 用户主机权限
@@ -4393,6 +5038,23 @@ export interface CreateAuditRuleTemplateRequest {
     Description?: string;
 }
 /**
+ * UpgradeProxy返回参数结构体
+ */
+export interface UpgradeProxyResponse {
+    /**
+     * 异步流程ID
+     */
+    FlowId?: number;
+    /**
+     * 异步任务ID
+     */
+    TaskId?: number;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * GrantAccountPrivileges返回参数结构体
  */
 export interface GrantAccountPrivilegesResponse {
@@ -4405,6 +5067,23 @@ export interface GrantAccountPrivilegesResponse {
  * ModifyBackupConfig返回参数结构体
  */
 export interface ModifyBackupConfigResponse {
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * ModifyProxyRwSplit返回参数结构体
+ */
+export interface ModifyProxyRwSplitResponse {
+    /**
+     * 异步FlowId
+     */
+    FlowId?: number;
+    /**
+     * 异步任务ID
+     */
+    TaskId?: number;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -4487,21 +5166,21 @@ export interface ModifyAccountDescriptionRequest {
     Host?: string;
 }
 /**
- * 修改参数时，传入参数描述
+ * DescribeProxyNodes返回参数结构体
  */
-export interface ParamItem {
+export interface DescribeProxyNodesResponse {
     /**
-     * 参数名称
+     * 数据库代理节点总数
      */
-    ParamName: string;
+    TotalCount: number;
     /**
-     * 当前值
+     * 数据库代理节点列表
      */
-    CurrentValue: string;
+    ProxyNodeInfos: Array<ProxyNodeInfo>;
     /**
-     * 原有值
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
-    OldValue: string;
+    RequestId?: string;
 }
 /**
  * ModifyAccountParams请求参数结构体
@@ -4943,6 +5622,51 @@ export interface OpenAuditServiceResponse {
     RequestId?: string;
 }
 /**
+ * 数据库代理组节点
+ */
+export interface ProxyNodeInfo {
+    /**
+     * 数据库代理节点ID
+     */
+    ProxyNodeId: string;
+    /**
+     * 节点当前连接数, DescribeProxyNodes接口此字段值不返回
+     */
+    ProxyNodeConnections: number;
+    /**
+     * 数据库代理节点cpu
+     */
+    Cpu: number;
+    /**
+     * 数据库代理节点内存
+     */
+    Mem: number;
+    /**
+     * 数据库代理节点状态
+     */
+    Status: string;
+    /**
+     * 数据库代理组ID
+     */
+    ProxyGroupId: string;
+    /**
+     * 集群ID
+     */
+    ClusterId: string;
+    /**
+     * 用户AppID
+     */
+    AppId: number;
+    /**
+     * 地域
+     */
+    Region: string;
+    /**
+     * 可用区
+     */
+    Zone: string;
+}
+/**
  * OfflineCluster返回参数结构体
  */
 export interface OfflineClusterResponse {
@@ -5262,14 +5986,17 @@ export interface DescribeClusterParamLogsRequest {
     Offset?: number;
 }
 /**
- * SearchClusterTables返回参数结构体
+ * CloseProxy返回参数结构体
  */
-export interface SearchClusterTablesResponse {
+export interface CloseProxyResponse {
     /**
-     * 数据表列表
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 异步流程ID
      */
-    Tables: Array<DatabaseTables>;
+    FlowId?: number;
+    /**
+     * 异步任务ID
+     */
+    TaskId?: number;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -5289,32 +6016,33 @@ export interface Module {
     ModuleName: string;
 }
 /**
- * DescribeResourcePackageSaleSpec请求参数结构体
+ * DescribeProxyNodes请求参数结构体
  */
-export interface DescribeResourcePackageSaleSpecRequest {
+export interface DescribeProxyNodesRequest {
     /**
-     * 实例类型
+     * 返回数量，默认为 20，最大值为 100
      */
-    InstanceType: string;
+    Limit?: number;
     /**
-     * 资源包使用地域
-  china-中国内地通用，overseas-港澳台及海外通用
-     */
-    PackageRegion: string;
-    /**
-     * 资源包类型
-  CCU-计算资源包
-  DISK-存储资源包
-     */
-    PackageType: string;
-    /**
-     * 偏移量
+     * 记录偏移量，默认值为0
      */
     Offset?: number;
     /**
-     * 限制
+     * 排序字段，取值范围：
+  <li> CREATETIME：创建时间</li>
+  <li> PERIODENDTIME：过期时间</li>
      */
-    Limit?: number;
+    OrderBy?: string;
+    /**
+     * 排序类型，取值范围：
+  <li> ASC：升序排序 </li>
+  <li> DESC：降序排序 </li>
+     */
+    OrderByType?: string;
+    /**
+     * 搜索条件，若存在多个Filter时，Filter间的关系为逻辑与（AND）关系。
+     */
+    Filters?: Array<QueryFilter>;
 }
 /**
  * 回档数据库及表
@@ -6487,6 +7215,23 @@ export interface ParamTemplateListInfo {
     ParamInfoSet: Array<TemplateParamInfo>;
 }
 /**
+ * ReloadBalanceProxyNode返回参数结构体
+ */
+export interface ReloadBalanceProxyNodeResponse {
+    /**
+     * 异步流程ID
+     */
+    FlowId: number;
+    /**
+     * 异步任务ID
+     */
+    TaskId: number;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * DescribeAccounts返回参数结构体
  */
 export interface DescribeAccountsResponse {
@@ -6707,6 +7452,23 @@ export interface ErrorLogItemExport {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Content?: string;
+}
+/**
+ * CreateProxy返回参数结构体
+ */
+export interface CreateProxyResponse {
+    /**
+     * 异步流程ID
+     */
+    FlowId?: number;
+    /**
+     * 异步任务ID
+     */
+    TaskId?: number;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * DescribeAccountAllGrantPrivileges请求参数结构体
@@ -6963,6 +7725,19 @@ export interface InquirePriceRenewResponse {
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * 集群绑定的标签信息，包含标签键TagKey和标签值TagValue
+ */
+export interface Tag {
+    /**
+     * 标签键
+     */
+    TagKey: string;
+    /**
+     * 标签值
+     */
+    TagValue: string;
 }
 /**
  * ModifyAuditRuleTemplates返回参数结构体

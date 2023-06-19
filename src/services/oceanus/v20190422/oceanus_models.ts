@@ -323,6 +323,35 @@ export interface CreateFolderRequest {
 }
 
 /**
+ * TriggerJobSavepoint返回参数结构体
+ */
+export interface TriggerJobSavepointResponse {
+  /**
+   * 是否成功
+   */
+  SavepointTrigger: boolean
+  /**
+   * 错误消息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ErrorMsg: string
+  /**
+   * 快照路径
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FinalSavepointPath: string
+  /**
+   * 快照 ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SavepointId: string
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyJob返回参数结构体
  */
 export interface ModifyJobResponse {
@@ -445,6 +474,24 @@ export interface CreateJobConfigRequest {
    * Oceanus 平台恢复作业开关 1:开启 -1: 关闭
    */
   AutoRecover?: number
+}
+
+/**
+ * TriggerJobSavepoint请求参数结构体
+ */
+export interface TriggerJobSavepointRequest {
+  /**
+   * 作业 SerialId
+   */
+  JobId: string
+  /**
+   * 描述
+   */
+  Description?: string
+  /**
+   * 工作空间 SerialId
+   */
+  WorkSpaceId?: string
 }
 
 /**
@@ -826,32 +873,60 @@ export interface ResourceConfigItem {
 }
 
 /**
- * TriggerJobSavepoint返回参数结构体
+ * 角色授权信息
  */
-export interface TriggerJobSavepointResponse {
+export interface RoleAuth {
   /**
-   * 是否成功
+   * 用户 AppID
    */
-  SavepointTrigger: boolean
+  AppId?: number
   /**
-   * 错误消息
+   * 工作空间 SerialId
+   */
+  WorkSpaceSerialId?: string
+  /**
+   * 主账号 UIN
+   */
+  OwnerUin?: string
+  /**
+   * 创建者 UIN
+   */
+  CreatorUin?: string
+  /**
+   * 绑定授权的 UIN
+   */
+  AuthSubAccountUin?: string
+  /**
+   * 对应 role表的id
+   */
+  Permission?: number
+  /**
+   * 创建时间
+   */
+  CreateTime?: string
+  /**
+   * 最后一次操作时间
+   */
+  UpdateTime?: string
+  /**
+   * 2 启用 1 停用
+   */
+  Status?: number
+  /**
+   * id
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ErrorMsg: string
+  Id?: number
   /**
-   * 快照路径
+   * 工作空间id
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  FinalSavepointPath: string
+  WorkSpaceId?: number
   /**
-   * 快照 ID
+   * 权限名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SavepointId: string
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  RoleName?: string
 }
 
 /**
@@ -1002,6 +1077,73 @@ export interface ResourceLocParam {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Region?: string
+}
+
+/**
+ * 工作空间详情
+ */
+export interface WorkSpaceSetItem {
+  /**
+   * 工作空间 SerialId
+   */
+  SerialId: string
+  /**
+   * 用户 APPID
+   */
+  AppId: number
+  /**
+   * 主账号 UIN
+   */
+  OwnerUin: string
+  /**
+   * 创建者 UIN
+   */
+  CreatorUin: string
+  /**
+   * 工作空间名称
+   */
+  WorkSpaceName: string
+  /**
+   * 区域
+   */
+  Region: string
+  /**
+   * 创建时间
+   */
+  CreateTime: string
+  /**
+   * 更新时间
+   */
+  UpdateTime: string
+  /**
+   * 1 未初始化 2 可用  -1 已删除
+   */
+  Status: number
+  /**
+   * 工作空间描述
+   */
+  Description: string
+  /**
+   * 工作空间包含集群信息
+   */
+  ClusterGroupSetItem: Array<ClusterGroupSetItem>
+  /**
+   * 工作空间角色的信息
+   */
+  RoleAuth: Array<RoleAuth>
+  /**
+   * 工作空间成员数量
+   */
+  RoleAuthCount: number
+  /**
+   * 工作空间 SerialId
+   */
+  WorkSpaceId: string
+  /**
+   * 1
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  JobsCount: number
 }
 
 /**
@@ -1229,6 +1371,25 @@ export interface DescribeJobsResponse {
 }
 
 /**
+ * DescribeWorkSpaces返回参数结构体
+ */
+export interface DescribeWorkSpacesResponse {
+  /**
+   * 空间详情列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WorkSpaceSetItem?: Array<WorkSpaceSetItem>
+  /**
+   * 空间总数
+   */
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 资源详细描述
  */
 export interface ResourceItem {
@@ -1400,6 +1561,88 @@ export interface CreateResourceResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 工作空间集群组信息
+ */
+export interface ClusterGroupSetItem {
+  /**
+   * clusterGroup 的 SerialId
+   */
+  ClusterId: string
+  /**
+   * 集群名称
+   */
+  Name: string
+  /**
+   * 地域
+   */
+  Region: string
+  /**
+   * 区
+   */
+  Zone: string
+  /**
+   * 账号 APPID
+   */
+  AppId: number
+  /**
+   * 主账号 UIN
+   */
+  OwnerUin: string
+  /**
+   * 创建账号 UIN
+   */
+  CreatorUin: string
+  /**
+   * CU 数量
+   */
+  CuNum: number
+  /**
+   * CU 内存规格
+   */
+  CuMem: number
+  /**
+   * 集群状态, 1 未初始化,，3 初始化中，2 运行中
+   */
+  Status: number
+  /**
+   * 状态描述
+   */
+  StatusDesc: string
+  /**
+   * 集群创建时间
+   */
+  CreateTime: string
+  /**
+   * 最后一次操作集群的时间
+   */
+  UpdateTime: string
+  /**
+   * 描述
+   */
+  Remark: string
+  /**
+   * 网络
+   */
+  NetEnvironmentType: number
+  /**
+   * 空闲 CU
+   */
+  FreeCuNum: number
+  /**
+   * 细粒度资源下的空闲CU
+   */
+  FreeCu: number
+  /**
+   * 运行中CU
+   */
+  RunningCu?: number
+  /**
+   * 付费模式
+   */
+  PayMode?: number
 }
 
 /**
@@ -1812,21 +2055,25 @@ export interface DescribeClustersResponse {
 }
 
 /**
- * TriggerJobSavepoint请求参数结构体
+ * DescribeWorkSpaces请求参数结构体
  */
-export interface TriggerJobSavepointRequest {
+export interface DescribeWorkSpacesRequest {
   /**
-   * 作业 SerialId
+   * 偏移量，默认 0
    */
-  JobId: string
+  Offset?: number
   /**
-   * 描述
+   * 1 按照创建时间降序排序(默认) 2.按照创建时间升序排序，3. 按照状态降序排序 4. 按照状态升序排序 默认为0
    */
-  Description?: string
+  OrderType?: number
   /**
-   * 工作空间 SerialId
+   * 请求的集群数量，默认 20
    */
-  WorkSpaceId?: string
+  Limit?: number
+  /**
+   * 过滤规则
+   */
+  Filters?: Array<Filter>
 }
 
 /**

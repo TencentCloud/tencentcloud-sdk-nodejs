@@ -28,9 +28,29 @@ it("cynosdb.v20190107.ResumeServerless", async function () {
     }
 })
 
+it("cynosdb.v20190107.UpgradeProxyVersion", async function () {
+    try {
+       const data = await client.UpgradeProxyVersion({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cynosdb.v20190107.DescribeBackupConfig", async function () {
     try {
        const data = await client.DescribeBackupConfig({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cynosdb.v20190107.CreateProxyEndPoint", async function () {
+    try {
+       const data = await client.CreateProxyEndPoint({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -128,6 +148,16 @@ it("cynosdb.v20190107.SwitchClusterVpc", async function () {
     }
 })
 
+it("cynosdb.v20190107.CloseProxy", async function () {
+    try {
+       const data = await client.CloseProxy({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cynosdb.v20190107.DescribeClusterDetail", async function () {
     try {
        const data = await client.DescribeClusterDetail({})
@@ -181,6 +211,16 @@ it("cynosdb.v20190107.ModifyClusterStorage", async function () {
 it("cynosdb.v20190107.ActivateInstance", async function () {
     try {
        const data = await client.ActivateInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cynosdb.v20190107.DescribeProxyNodes", async function () {
+    try {
+       const data = await client.DescribeProxyNodes({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -278,6 +318,16 @@ it("cynosdb.v20190107.ModifyClusterName", async function () {
     }
 })
 
+it("cynosdb.v20190107.ModifyProxyRwSplit", async function () {
+    try {
+       const data = await client.ModifyProxyRwSplit({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cynosdb.v20190107.ModifyVipVport", async function () {
     try {
        const data = await client.ModifyVipVport({})
@@ -291,6 +341,16 @@ it("cynosdb.v20190107.ModifyVipVport", async function () {
 it("cynosdb.v20190107.DeleteAuditRuleTemplates", async function () {
     try {
        const data = await client.DeleteAuditRuleTemplates({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cynosdb.v20190107.ModifyProxyDesc", async function () {
+    try {
+       const data = await client.ModifyProxyDesc({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -371,6 +431,16 @@ it("cynosdb.v20190107.IsolateCluster", async function () {
 it("cynosdb.v20190107.RestartInstance", async function () {
     try {
        const data = await client.RestartInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cynosdb.v20190107.UpgradeProxy", async function () {
+    try {
+       const data = await client.UpgradeProxy({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -678,6 +748,16 @@ it("cynosdb.v20190107.UnbindClusterResourcePackages", async function () {
     }
 })
 
+it("cynosdb.v20190107.DescribeProxies", async function () {
+    try {
+       const data = await client.DescribeProxies({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cynosdb.v20190107.OpenWan", async function () {
     try {
        const data = await client.OpenWan({})
@@ -791,6 +871,16 @@ it("cynosdb.v20190107.SetRenewFlag", async function () {
 it("cynosdb.v20190107.InquirePriceRenew", async function () {
     try {
        const data = await client.InquirePriceRenew({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cynosdb.v20190107.ReloadBalanceProxyNode", async function () {
+    try {
+       const data = await client.ReloadBalanceProxyNode({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1011,6 +1101,16 @@ it("cynosdb.v20190107.DescribeZones", async function () {
 it("cynosdb.v20190107.DescribeBackupDownloadUrl", async function () {
     try {
        const data = await client.DescribeBackupDownloadUrl({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cynosdb.v20190107.CreateProxy", async function () {
+    try {
+       const data = await client.CreateProxy({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

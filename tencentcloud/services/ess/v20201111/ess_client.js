@@ -251,6 +251,12 @@ callbackinfo包含： 回调地址和签名key
         return this.request("CreateFlowByFiles", req, cb);
     }
     /**
+     * 创建电子印章
+     */
+    async CreateSeal(req, cb) {
+        return this.request("CreateSeal", req, cb);
+    }
+    /**
      * 查询企业角色列表
      */
     async DescribeIntegrationRoles(req, cb) {
