@@ -28,7 +28,7 @@ class Client extends abstract_client_1.AbstractClient {
         super("dlc.tencentcloudapi.com", "2021-01-25", clientConfig);
     }
     /**
-     * 本接口（CreateTask）用于创建sql查询任务。（推荐使用CreateTasks接口）
+     * 本接口（CreateTask）用于创建并执行SQL任务。（推荐使用CreateTasks接口）
      */
     async CreateTask(req, cb) {
         return this.request("CreateTask", req, cb);
@@ -46,19 +46,19 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("AlterDMSTable", req, cb);
     }
     /**
-     * 本接口（DescribeForbiddenTablePro）用于获取被禁用的表属性列表
+     * 本接口（DescribeForbiddenTablePro）用于查询被禁用的表属性列表（新）
      */
     async DescribeForbiddenTablePro(req, cb) {
         return this.request("DescribeForbiddenTablePro", req, cb);
     }
     /**
-     * 本接口（DescribeNotebookSession）用于获取notebook livy session详情信息
+     * 本接口（DescribeNotebookSession）用于查询交互式 session详情信息
      */
     async DescribeNotebookSession(req, cb) {
         return this.request("DescribeNotebookSession", req, cb);
     }
     /**
-     * 本接口（CreateNotebookSession）用于创建notebook livy session
+     * 本接口（CreateNotebookSession）用于创建交互式session（notebook）
      */
     async CreateNotebookSession(req, cb) {
         return this.request("CreateNotebookSession", req, cb);
@@ -82,7 +82,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateStoreLocation", req, cb);
     }
     /**
-     * 本接口（CreateNotebookSessionStatementSupportBatchSQL）用于创建Statement批量运行SQL任务。
+     * 本接口（CreateNotebookSessionStatementSupportBatchSQL）用于创建交互式session并执行SQL任务
      */
     async CreateNotebookSessionStatementSupportBatchSQL(req, cb) {
         return this.request("CreateNotebookSessionStatementSupportBatchSQL", req, cb);
@@ -136,7 +136,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteScript", req, cb);
     }
     /**
-     * 创建spark任务
+     * 启动Spark作业
      */
     async CreateSparkAppTask(req, cb) {
         return this.request("CreateSparkAppTask", req, cb);
@@ -154,7 +154,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDatabases", req, cb);
     }
     /**
-     * 本接口（DescribeNotebookSessions）用于获取notebook livy session列表
+     * 本接口（DescribeNotebookSessions）用于查询交互式 session列表
      */
     async DescribeNotebookSessions(req, cb) {
         return this.request("DescribeNotebookSessions", req, cb);
@@ -190,7 +190,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("LockMetaData", req, cb);
     }
     /**
-     * 获取spark应用列表。
+     * 查询spark作业列表
      */
     async DescribeSparkAppJobs(req, cb) {
         return this.request("DescribeSparkAppJobs", req, cb);
@@ -202,13 +202,13 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeUsers", req, cb);
     }
     /**
-     * 本接口（CreateTasks），用于批量创建任务
+     * 本接口（CreateTasks），用于批量创建并执行SQL任务
      */
     async CreateTasks(req, cb) {
         return this.request("CreateTasks", req, cb);
     }
     /**
-     * 该接口（DescribeScripts）用于获取所有SQL查询。
+     * 该接口（DescribeScripts）用于查询SQL脚本列表
      */
     async DescribeScripts(req, cb) {
         return this.request("DescribeScripts", req, cb);
@@ -226,7 +226,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ReportHeartbeatMetaData", req, cb);
     }
     /**
-     * 本接口（ListTaskJobLogDetail）用于获取spark-jar日志列表
+     * 本接口（ListTaskJobLogDetail）用于获取spark 作业任务日志详情
      */
     async ListTaskJobLogDetail(req, cb) {
         return this.request("ListTaskJobLogDetail", req, cb);
@@ -250,7 +250,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("AttachWorkGroupPolicy", req, cb);
     }
     /**
-     * 创建spark应用
+     * 创建spark作业
      */
     async CreateSparkApp(req, cb) {
         return this.request("CreateSparkApp", req, cb);
@@ -268,13 +268,13 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateSparkSessionBatchSQL", req, cb);
     }
     /**
-     * 本接口（DescribeNotebookSessionStatements）用于获取Session Statement列表。
+     * 本接口（DescribeNotebookSessionStatements）用于查询Session中执行的任务列表
      */
     async DescribeNotebookSessionStatements(req, cb) {
         return this.request("DescribeNotebookSessionStatements", req, cb);
     }
     /**
-     * 本接口用于控制暂停或恢复数据引擎
+     * 本接口用于控制挂起或启动数据引擎
      */
     async SuspendResumeDataEngine(req, cb) {
         return this.request("SuspendResumeDataEngine", req, cb);
@@ -310,13 +310,13 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeNotebookSessionStatementSqlResult", req, cb);
     }
     /**
-     * 本接口（CreateNotebookSessionStatement）用于创建session statement
+     * 本接口（CreateNotebookSessionStatement）用于在session中执行代码片段
      */
     async CreateNotebookSessionStatement(req, cb) {
         return this.request("CreateNotebookSessionStatement", req, cb);
     }
     /**
-     * 本接口（DescribeDataEngines）用于获取DataEngines信息列表
+     * 本接口（DescribeDataEngines）用于查询DataEngines信息列表
      */
     async DescribeDataEngines(req, cb) {
         return this.request("DescribeDataEngines", req, cb);
@@ -334,19 +334,19 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("AddDMSPartitions", req, cb);
     }
     /**
-     * 本接口（CancelNotebookSessionStatementBatch）用于按批取消Session statement。
+     * 本接口（CancelNotebookSessionStatementBatch）用于批量取消Session 中执行的任务
      */
     async CancelNotebookSessionStatementBatch(req, cb) {
         return this.request("CancelNotebookSessionStatementBatch", req, cb);
     }
     /**
-     * 删除spark应用
+     * 删除spark作业
      */
     async DeleteSparkApp(req, cb) {
         return this.request("DeleteSparkApp", req, cb);
     }
     /**
-     * 本接口（DescribeNotebookSessionLog）用于获取notebook livy session日志
+     * 本接口（DescribeNotebookSessionLog）用于查询交互式 session日志
      */
     async DescribeNotebookSessionLog(req, cb) {
         return this.request("DescribeNotebookSessionLog", req, cb);
@@ -382,13 +382,13 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CancelSparkSessionBatchSQL", req, cb);
     }
     /**
-     * 本接口（CancelTask），用于取消任务执行
+     * 本接口（CancelTask），用于取消任务
      */
     async CancelTask(req, cb) {
         return this.request("CancelTask", req, cb);
     }
     /**
-     * 更新spark应用
+     * 更新spark作业
      */
     async ModifySparkApp(req, cb) {
         return this.request("ModifySparkApp", req, cb);
@@ -400,7 +400,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteUser", req, cb);
     }
     /**
-     * 本接口根据引擎ID获取数据引擎资源使用情况
+     * 本接口根据引擎ID查询数据引擎资源使用情况
      */
     async DescribeEngineUsageInfo(req, cb) {
         return this.request("DescribeEngineUsageInfo", req, cb);
@@ -496,7 +496,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateScript", req, cb);
     }
     /**
-     * 本接口（DescribeNotebookSessionStatement）用于获取session statement信息
+     * 本接口（DescribeNotebookSessionStatement）用于查询session 中执行任务的详情
      */
     async DescribeNotebookSessionStatement(req, cb) {
         return this.request("DescribeNotebookSessionStatement", req, cb);
@@ -538,7 +538,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteNotebookSession", req, cb);
     }
     /**
-     * 本接口（CancelNotebookSessionStatement）用于取消session statement
+     * 本接口（CancelNotebookSessionStatement）用于取消session中执行的任务
      */
     async CancelNotebookSessionStatement(req, cb) {
         return this.request("CancelNotebookSessionStatement", req, cb);
@@ -550,13 +550,13 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeStoreLocation", req, cb);
     }
     /**
-     * 查询具体的spark应用
+     * 查询spark作业信息
      */
     async DescribeSparkAppJob(req, cb) {
         return this.request("DescribeSparkAppJob", req, cb);
     }
     /**
-     * 查询spark应用的运行任务实例列表
+     * 查询Spark作业的运行任务列表
      */
     async DescribeSparkAppTasks(req, cb) {
         return this.request("DescribeSparkAppTasks", req, cb);

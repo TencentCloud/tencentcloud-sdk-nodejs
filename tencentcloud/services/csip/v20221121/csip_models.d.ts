@@ -52,13 +52,45 @@ export interface DescribeDbAssetInfoResponse {
     RequestId?: string;
 }
 /**
- * DescribeDbAssets请求参数结构体
+ * CreateRiskCenterScanTask请求参数结构体
  */
-export interface DescribeDbAssetsRequest {
+export interface CreateRiskCenterScanTaskRequest {
     /**
-     * -
+     * 任务名称
      */
-    Filter?: Filter;
+    TaskName: string;
+    /**
+     * 0-全扫，1-指定资产扫，2-排除资产扫，3-手动填写扫；1和2则Assets字段必填，3则SelfDefiningAssets必填
+     */
+    ScanAssetType: number;
+    /**
+     * 扫描项目；port/poc/weakpass/webcontent/configrisk
+     */
+    ScanItem: Array<string>;
+    /**
+     * 0-周期任务,1-立即扫描,2-定时扫描,3-自定义；0,2,3则ScanPlanContent必填
+     */
+    ScanPlanType: number;
+    /**
+     * 扫描资产信息列表
+     */
+    Assets?: Array<TaskAssetObject>;
+    /**
+     * 扫描计划详情
+     */
+    ScanPlanContent?: string;
+    /**
+     * ip/域名/url数组
+     */
+    SelfDefiningAssets?: Array<string>;
+    /**
+     * 高级配置
+     */
+    TaskAdvanceCFG?: TaskAdvanceCFG;
+    /**
+     * 体检模式，0-标准模式，1-快速模式，2-高级模式，默认标准模式
+     */
+    TaskMode?: number;
 }
 /**
  * DescribeScanReportList请求参数结构体
@@ -77,6 +109,19 @@ export interface DescribeRiskCenterAssetViewVULRiskListRequest {
      * 过滤内容
      */
     Filter?: Filter;
+}
+/**
+ * 弱口令风险高级配置
+ */
+export interface TaskCenterWeakPwdRiskInputParam {
+    /**
+     * 检测项ID
+     */
+    CheckItemId: number;
+    /**
+     * 是否开启，0-不开启，1-开启
+     */
+    Enable: number;
 }
 /**
  * CreateDomainAndIp请求参数结构体
@@ -258,6 +303,36 @@ export interface DomainAssetVO {
     WebAttack?: number;
 }
 /**
+ * 配置风险高级配置
+ */
+export interface TaskCenterCFGRiskInputParam {
+    /**
+     * 检测项ID
+     */
+    ItemId: string;
+    /**
+     * 是否开启，0-不开启，1-开启
+     */
+    Enable: number;
+    /**
+     * 资源类型
+     */
+    ResourceType: string;
+}
+/**
+ * 漏洞风险高级配置
+ */
+export interface TaskCenterVulRiskInputParam {
+    /**
+     * 风险ID
+     */
+    RiskId: string;
+    /**
+     * 是否开启，0-不开启，1-开启
+     */
+    Enable: number;
+}
+/**
  * DescribeVpcAssets返回参数结构体
  */
 export interface DescribeVpcAssetsResponse {
@@ -298,6 +373,15 @@ export interface FilterDataObject {
      * 中文翻译
      */
     Text?: string;
+}
+/**
+ * DescribeDbAssets请求参数结构体
+ */
+export interface DescribeDbAssetsRequest {
+    /**
+     * -
+     */
+    Filter?: Filter;
 }
 /**
  * 主机资产信息
@@ -767,6 +851,23 @@ export interface DescribeCVMAssetsRequest {
     Filter?: Filter;
 }
 /**
+ * 任务高级配置
+ */
+export interface TaskAdvanceCFG {
+    /**
+     * 漏洞风险高级配置
+     */
+    VulRisk?: Array<TaskCenterVulRiskInputParam>;
+    /**
+     * 弱口令风险高级配置
+     */
+    WeakPwdRisk?: Array<TaskCenterWeakPwdRiskInputParam>;
+    /**
+     * 配置风险高级配置
+     */
+    CFGRisk?: Array<TaskCenterCFGRiskInputParam>;
+}
+/**
  * db资产输出字段
  */
 export interface DBAssetVO {
@@ -1026,17 +1127,17 @@ export interface SubnetAsset {
     IsCore?: number;
 }
 /**
- * 标签
+ * CreateRiskCenterScanTask返回参数结构体
  */
-export interface Tag {
+export interface CreateRiskCenterScanTaskResponse {
     /**
-     * 标签名称
+     * 任务id
      */
-    Name: string;
+    TaskId?: string;
     /**
-     * 标签内容
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
-    Value: string;
+    RequestId?: string;
 }
 /**
  * DescribeRiskCenterAssetViewPortRiskList返回参数结构体
@@ -1200,6 +1301,35 @@ export interface DescribeVpcAssetsRequest {
     Filter?: Filter;
 }
 /**
+ * 任务资产项
+ */
+export interface TaskAssetObject {
+    /**
+     * 资产名
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AssetName?: string;
+    /**
+     * 	资产类型
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InstanceType?: string;
+    /**
+     * 资产分类
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AssetType?: string;
+    /**
+     * ip/域名/资产id，数据库id等
+     */
+    Asset?: string;
+    /**
+     * 地域
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Region?: string;
+}
+/**
  * 列表查询接口采用新filter 接口，直接传给后台供后台查询过滤
  */
 export interface Filter {
@@ -1291,6 +1421,19 @@ export interface DbAssetInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Tag?: Array<Tag>;
+}
+/**
+ * 标签
+ */
+export interface Tag {
+    /**
+     * 标签名称
+     */
+    Name: string;
+    /**
+     * 标签内容
+     */
+    Value: string;
 }
 /**
  * ip列表

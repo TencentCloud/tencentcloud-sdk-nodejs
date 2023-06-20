@@ -100,6 +100,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeRiskCenterAssetViewPortRiskList", req, cb);
     }
     /**
+     * 创建风险中心扫描任务
+     */
+    async CreateRiskCenterScanTask(req, cb) {
+        return this.request("CreateRiskCenterScanTask", req, cb);
+    }
+    /**
      * 资产列表
      */
     async DescribeDbAssets(req, cb) {

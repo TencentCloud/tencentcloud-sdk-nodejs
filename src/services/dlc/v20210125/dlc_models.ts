@@ -70,6 +70,22 @@ export interface DescribeTaskResultResponse {
 }
 
 /**
+ * Presto监控指标
+ */
+export interface PrestoMonitorMetrics {
+  /**
+   * 	Alluxio本地缓存命中率
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LocalCacheHitRate?: number
+  /**
+   * Fragment缓存命中率
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FragmentCacheHitRate?: number
+}
+
+/**
  * DescribeNotebookSessionStatement请求参数结构体
  */
 export interface DescribeNotebookSessionStatementRequest {
@@ -218,7 +234,7 @@ export interface DescribeDatabasesRequest {
    */
   DatasourceConnectionName?: string
   /**
-   * 排序字段，当前版本仅支持按库名排序
+   * 排序字段，CreateTime：创建时间，Name：数据库名称
    */
   Sort?: string
   /**
@@ -522,11 +538,11 @@ export interface DescribeNotebookSessionsRequest {
    */
   Asc?: boolean
   /**
-   * 分页字段
+   * 分页参数，默认10
    */
   Limit?: number
   /**
-   * 分页字段
+   * 分页参数，默认0
    */
   Offset?: number
 }
@@ -658,11 +674,11 @@ export interface DescribeTablesResponse {
   /**
    * 数据表对象列表。
    */
-  TableList: Array<TableResponseInfo>
+  TableList?: Array<TableResponseInfo>
   /**
    * 实例总数。
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -872,7 +888,7 @@ export interface SuspendResumeDataEngineResponse {
   /**
    * 虚拟集群详细信息
    */
-  DataEngineName: string
+  DataEngineName?: string
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -884,7 +900,7 @@ export interface SuspendResumeDataEngineResponse {
  */
 export interface DeleteSparkAppRequest {
   /**
-   * spark应用名
+   * spark作业名
    */
   AppName: string
 }
@@ -1003,7 +1019,7 @@ export interface AlterDMSTableResponse {
  */
 export interface DescribeEngineUsageInfoRequest {
   /**
-   * House Id
+   * 数据引擎ID
    */
   DataEngineId: string
 }
@@ -1193,6 +1209,67 @@ export interface NotebookSessions {
 }
 
 /**
+ * 任务公共指标
+ */
+export interface CommonMetrics {
+  /**
+   * 创建任务时长，单位：ms
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateTaskTime?: number
+  /**
+   * 预处理总时长，单位：ms
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProcessTime?: number
+  /**
+   * 排队时长，单位：ms
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  QueueTime?: number
+  /**
+   * 执行时长，单位：ms
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExecutionTime?: number
+  /**
+   * 是否命中结果缓存
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsResultCacheHit?: boolean
+  /**
+   * 匹配物化视图数据量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MatchedMVBytes?: number
+  /**
+   * 匹配物化视图列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MatchedMVs?: string
+  /**
+   * 结果数据量，单位：byte
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AffectedBytes?: string
+  /**
+   * 	结果行数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AffectedRows?: number
+  /**
+   * 扫描数据量，单位：byte
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProcessedBytes?: number
+  /**
+   * 	扫描行数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProcessedRows?: number
+}
+
+/**
  * CreateNotebookSessionStatementSupportBatchSQL请求参数结构体
  */
 export interface CreateNotebookSessionStatementSupportBatchSQLRequest {
@@ -1205,7 +1282,7 @@ export interface CreateNotebookSessionStatementSupportBatchSQLRequest {
    */
   Code: string
   /**
-   * 类型，当前支持：spark、pyspark、sparkr、sql
+   * 类型，当前支持：sql
    */
   Kind: string
   /**
@@ -1343,31 +1420,31 @@ export type DescribeLakeFsInfoRequest = null
  */
 export interface ModifySparkAppRequest {
   /**
-   * spark应用名
+   * spark作业名
    */
   AppName: string
   /**
-   * 1代表spark jar应用，2代表spark streaming应用
+   * spark作业类型，1代表spark jar作业，2代表spark streaming作业
    */
   AppType: number
   /**
-   * 执行spark作业的数据引擎
+   * 执行spark作业的数据引擎名称
    */
   DataEngine: string
   /**
-   * spark应用的执行入口
+   * spark作业程序包文件路径
    */
   AppFile: string
   /**
-   * 执行spark作业的角色ID
+   * 数据访问策略，CAM Role arn
    */
   RoleArn: number
   /**
-   * spark作业driver资源规格大小, 可取small,medium,large,xlarge
+   * 指定的Driver规格，当前支持：small（默认，1cu）、medium（2cu）、large（4cu）、xlarge（8cu）
    */
   AppDriverSize: string
   /**
-   * spark作业executor资源规格大小, 可取small,medium,large,xlarge
+   * 指定的Executor规格，当前支持：small（默认，1cu）、medium（2cu）、large（4cu）、xlarge（8cu）
    */
   AppExecutorSize: string
   /**
@@ -1375,7 +1452,7 @@ export interface ModifySparkAppRequest {
    */
   AppExecutorNums: number
   /**
-   * spark应用Id
+   * spark作业Id
    */
   SparkAppId: string
   /**
@@ -1383,11 +1460,11 @@ export interface ModifySparkAppRequest {
    */
   Eni?: string
   /**
-   * 是否本地上传，可取cos,lakefs
+   * spark作业程序包是否本地上传，cos：存放与cos，lakefs：本地上传（控制台使用，该方式不支持直接接口调用）
    */
   IsLocal?: string
   /**
-   * spark jar作业时的主类
+   * spark作业主类
    */
   MainClass?: string
   /**
@@ -1395,35 +1472,35 @@ export interface ModifySparkAppRequest {
    */
   AppConf?: string
   /**
-   * jar资源依赖上传方式，1、cos；2、lakefs（控制台使用，该方式不支持直接接口调用）
+   * spark 作业依赖jar包是否本地上传，cos：存放与cos，lakefs：本地上传（控制台使用，该方式不支持直接接口调用）
    */
   IsLocalJars?: string
   /**
-   * spark jar作业依赖jars，以逗号分隔
+   * spark 作业依赖jar包（--jars），以逗号分隔
    */
   AppJars?: string
   /**
-   * file资源依赖上传方式，1、cos；2、lakefs（控制台使用，该方式不支持直接接口调用）
+   * spark作业依赖文件资源是否本地上传，cos：存放与cos，lakefs：本地上传（控制台使用，该方式不支持直接接口调用）
    */
   IsLocalFiles?: string
   /**
-   * spark作业依赖资源，以逗号分隔
+   * spark作业依赖文件资源（--files）（非jar、zip），以逗号分隔
    */
   AppFiles?: string
   /**
-   * pyspark：依赖上传方式，1、cos；2、lakefs（控制台使用，该方式不支持直接接口调用）
+   * pyspark：依赖上传方式，cos：存放与cos，lakefs：本地上传（控制台使用，该方式不支持直接接口调用）
    */
   IsLocalPythonFiles?: string
   /**
-   * pyspark：python依赖, 除py文件外，还支持zip/egg等归档格式，多文件以逗号分隔
+   * pyspark作业依赖python资源（--py-files），支持py/zip/egg等归档格式，多文件以逗号分隔
    */
   AppPythonFiles?: string
   /**
-   * spark作业命令行参数
+   * spark作业程序入参
    */
   CmdArgs?: string
   /**
-   * 只对spark流任务生效
+   * 最大重试次数，只对spark流任务生效
    */
   MaxRetries?: number
   /**
@@ -1431,15 +1508,15 @@ export interface ModifySparkAppRequest {
    */
   DataSource?: string
   /**
-   * archives：依赖上传方式，1、cos；2、lakefs（控制台使用，该方式不支持直接接口调用）
+   * spark作业依赖archives资源是否本地上传，cos：存放与cos，lakefs：本地上传（控制台使用，该方式不支持直接接口调用）
    */
   IsLocalArchives?: string
   /**
-   * archives：依赖资源
+   * spark作业依赖archives资源（--archives），支持tar.gz/tgz/tar等归档格式，以逗号分隔
    */
   AppArchives?: string
   /**
-   * Spark Image 版本
+   * Spark Image 版本号
    */
   SparkImage?: string
   /**
@@ -1643,7 +1720,7 @@ export interface CheckLockMetaDataRequest {
  */
 export interface DescribeSparkAppJobRequest {
   /**
-   * spark作业Id，与JobName同时存在时，JobName无效
+   * spark作业Id，与JobName同时存在时，JobName无效，JobId与JobName至少存在一个
    */
   JobId?: string
   /**
@@ -1704,7 +1781,7 @@ task-kind - string （任务类型过滤）
    */
   EndTime?: string
   /**
-   * 支持计算资源名字筛选
+   * 数据引擎名称，用于筛选
    */
   DataEngineName?: string
 }
@@ -1718,7 +1795,7 @@ export interface CreateSparkAppTaskRequest {
    */
   JobName: string
   /**
-   * spark作业的命令行参数，以空格分隔；一般用于周期性调用使用
+   * spark作业程序入参，以空格分隔；一般用于周期性调用使用
    */
   CmdArgs?: string
 }
@@ -2065,11 +2142,11 @@ export interface DescribeDatabasesResponse {
   /**
    * 数据库对象列表。
    */
-  DatabaseList: Array<DatabaseResponseInfo>
+  DatabaseList?: Array<DatabaseResponseInfo>
   /**
    * 实例总数。
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2121,23 +2198,23 @@ export interface DescribeNotebookSessionsResponse {
   /**
    * session总数量
    */
-  TotalElements: number
+  TotalElements?: number
   /**
    * 总页数
    */
-  TotalPages: number
+  TotalPages?: number
   /**
    * 当前页码
    */
-  Page: number
+  Page?: number
   /**
    * 当前页数量
    */
-  Size: number
+  Size?: number
   /**
    * session列表信息
    */
-  Sessions: Array<NotebookSessions>
+  Sessions?: Array<NotebookSessions>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2268,7 +2345,7 @@ export interface DescribeSparkAppJobsRequest {
    */
   Sorting?: string
   /**
-   * 按照该参数过滤,支持spark-job-name
+   * 过滤条件，如下支持的过滤类型，传参Name应为其一:spark-job-name（作业名称），spark-job-id（作业id），spark-app-type（作业类型，1：批任务，2：流任务，4：SQL作业），user-name（创建人），key-word（作业名称或ID关键词模糊搜索）
    */
   Filters?: Array<Filter>
   /**
@@ -2499,7 +2576,7 @@ export interface CreateDataEngineRequest {
    */
   CrontabResumeSuspendStrategy?: CrontabResumeSuspendStrategy
   /**
-   * 引擎执行任务类型，默认为SQL
+   * 引擎执行任务类型，有效值：SQL/BATCH，默认为SQL
    */
   EngineExecType?: string
   /**
@@ -2630,6 +2707,22 @@ export interface CSV {
    * 格式，默认值为CSV
    */
   Format?: string
+}
+
+/**
+ * Spark监控数据
+ */
+export interface SparkMonitorMetrics {
+  /**
+   * shuffle写溢出到COS数据量，单位：byte
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ShuffleWriteBytesCos?: number
+  /**
+   * shuffle写数据量，单位：byte
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ShuffleWriteBytesTotal?: number
 }
 
 /**
@@ -3326,11 +3419,11 @@ export interface CreateSparkAppTaskResponse {
   /**
    * 批Id
    */
-  BatchId: string
+  BatchId?: string
   /**
    * 任务Id
    */
-  TaskId: string
+  TaskId?: string
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3521,6 +3614,21 @@ export interface TaskResponseInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ExecutorMaxNumbers?: number
+  /**
+   * 任务公共指标数据
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CommonMetrics?: CommonMetrics
+  /**
+   * spark任务指标数据
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SparkMonitorMetrics?: SparkMonitorMetrics
+  /**
+   * presto任务指标数据
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PrestoMonitorMetrics?: PrestoMonitorMetrics
 }
 
 /**
@@ -4140,15 +4248,15 @@ export interface DescribeNotebookSessionLogResponse {
   /**
    * 日志信息，默认获取最新的200条
    */
-  Logs: Array<string>
+  Logs?: Array<string>
   /**
    * 分页参数，默认200
    */
-  Limit: number
+  Limit?: number
   /**
    * 分页参数，默认0
    */
-  Offset: number
+  Offset?: number
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4358,15 +4466,15 @@ export interface DescribeEngineUsageInfoResponse {
   /**
    * 集群总规格
    */
-  Total: number
+  Total?: number
   /**
    * 已占用集群规格
    */
-  Used: number
+  Used?: number
   /**
    * 剩余集群规格
    */
-  Available: number
+  Available?: number
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4400,15 +4508,15 @@ table-id - String - （过滤条件）table id形如：12342。
    */
   DatasourceConnectionName?: string
   /**
-   * 起始时间：用于对更新时间的筛选
+   * 起始时间：用于对更新时间的筛选，格式为yyyy-mm-dd HH:MM:SS
    */
   StartTime?: string
   /**
-   * 终止时间：用于对更新时间的筛选
+   * 终止时间：用于对更新时间的筛选，格式为yyyy-mm-dd HH:MM:SS
    */
   EndTime?: string
   /**
-   * 排序字段，支持：CreateTime、UpdateTime、StorageSize、RecordCount、Name（不传则默认按name升序）
+   * 排序字段，支持：CreateTime（创建时间）、UpdateTime（更新时间）、StorageSize（存储空间）、RecordCount（行数）、Name（表名称）（不传则默认按name升序）
    */
   Sort?: string
   /**
@@ -4923,7 +5031,7 @@ export interface CreateTaskResponse {
    * 任务ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TaskId: string
+  TaskId?: string
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5026,16 +5134,16 @@ export interface DescribeSparkAppTasksResponse {
    * 任务结果（该字段已废弃）
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Tasks: TaskResponseInfo
+  Tasks?: TaskResponseInfo
   /**
    * 任务总数
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 任务结果列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SparkAppTasks: Array<TaskResponseInfo>
+  SparkAppTasks?: Array<TaskResponseInfo>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5261,11 +5369,11 @@ export interface CreateTasksResponse {
   /**
    * 本批次提交的任务的批次Id
    */
-  BatchId: string
+  BatchId?: string
   /**
    * 任务Id集合，按照执行顺序排列
    */
-  TaskIdSet: Array<string>
+  TaskIdSet?: Array<string>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5320,16 +5428,16 @@ export interface DescribeTasksResponse {
   /**
    * 任务对象列表。
    */
-  TaskList: Array<TaskResponseInfo>
+  TaskList?: Array<TaskResponseInfo>
   /**
    * 实例总数。
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 任务概览信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TasksOverview: TasksOverview
+  TasksOverview?: TasksOverview
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5341,31 +5449,31 @@ export interface DescribeTasksResponse {
  */
 export interface CreateSparkAppRequest {
   /**
-   * spark应用名
+   * spark作业名
    */
   AppName: string
   /**
-   * 1代表spark jar应用，2代表spark streaming应用
+   * spark作业类型，1代表spark jar作业，2代表spark streaming作业
    */
   AppType: number
   /**
-   * 执行spark作业的数据引擎
+   * 执行spark作业的数据引擎名称
    */
   DataEngine: string
   /**
-   * spark应用的执行入口
+   * spark作业程序包文件路径
    */
   AppFile: string
   /**
-   * 执行spark作业的角色ID
+   * 数据访问策略，CAM Role arn
    */
   RoleArn: number
   /**
-   * spark作业driver资源规格大小, 可取small,medium,large,xlarge
+   * 指定的Driver规格，当前支持：small（默认，1cu）、medium（2cu）、large（4cu）、xlarge（8cu）
    */
   AppDriverSize: string
   /**
-   * spark作业executor资源规格大小, 可取small,medium,large,xlarge
+   * 指定的Executor规格，当前支持：small（默认，1cu）、medium（2cu）、large（4cu）、xlarge（8cu）
    */
   AppExecutorSize: string
   /**
@@ -5377,11 +5485,11 @@ export interface CreateSparkAppRequest {
    */
   Eni?: string
   /**
-   * 是否本地上传，可去cos,lakefs
+   * spark作业程序包是否本地上传，cos：存放与cos，lakefs：本地上传（控制台使用，该方式不支持直接接口调用）
    */
   IsLocal?: string
   /**
-   * spark jar作业时的主类
+   * spark作业主类
    */
   MainClass?: string
   /**
@@ -5389,51 +5497,51 @@ export interface CreateSparkAppRequest {
    */
   AppConf?: string
   /**
-   * 是否本地上传，包含cos,lakefs
+   * spark 作业依赖jar包是否本地上传，cos：存放与cos，lakefs：本地上传（控制台使用，该方式不支持直接接口调用）
    */
   IsLocalJars?: string
   /**
-   * spark jar作业依赖jars，以逗号分隔
+   * spark 作业依赖jar包（--jars），以逗号分隔
    */
   AppJars?: string
   /**
-   * 是否本地上传，包含cos,lakefs
+   * spark作业依赖文件资源是否本地上传，cos：存放与cos，lakefs：本地上传（控制台使用，该方式不支持直接接口调用）
    */
   IsLocalFiles?: string
   /**
-   * spark作业依赖资源，以逗号分隔
+   * spark作业依赖文件资源（--files）（非jar、zip），以逗号分隔
    */
   AppFiles?: string
   /**
-   * spark作业命令行参数
+   * spark作业程序入参，空格分割
    */
   CmdArgs?: string
   /**
-   * 只对spark流任务生效
+   * 最大重试次数，只对spark流任务生效
    */
   MaxRetries?: number
   /**
-   * 数据源名
+   * 数据源名称
    */
   DataSource?: string
   /**
-   * pyspark：依赖上传方式，1、cos；2、lakefs（控制台使用，该方式不支持直接接口调用）
+   * pyspark：依赖上传方式，cos：存放与cos，lakefs：本地上传（控制台使用，该方式不支持直接接口调用）
    */
   IsLocalPythonFiles?: string
   /**
-   * pyspark：python依赖, 除py文件外，还支持zip/egg等归档格式，多文件以逗号分隔
+   * pyspark作业依赖python资源（--py-files），支持py/zip/egg等归档格式，多文件以逗号分隔
    */
   AppPythonFiles?: string
   /**
-   * archives：依赖上传方式，1、cos；2、lakefs（控制台使用，该方式不支持直接接口调用）
+   * spark作业依赖archives资源是否本地上传，cos：存放与cos，lakefs：本地上传（控制台使用，该方式不支持直接接口调用）
    */
   IsLocalArchives?: string
   /**
-   * archives：依赖资源
+   * spark作业依赖archives资源（--archives），支持tar.gz/tgz/tar等归档格式，以逗号分隔
    */
   AppArchives?: string
   /**
-   * Spark Image 版本
+   * Spark Image 版本号
    */
   SparkImage?: string
   /**
@@ -5509,13 +5617,7 @@ export interface DescribeDataEnginesRequest {
    */
   Offset?: number
   /**
-   * 滤类型，传参Name应为以下其中一个,
-data-engine-name - String 
-engine-type - String
-state - String 
-mode - String 
-create-time - String 
-message - String
+   * 过滤类型，支持如下的过滤类型，传参Name应为以下其中一个, data-engine-name - String（数据引擎名称）：engine-type - String（引擎类型：spark：spark 引擎，presto：presto引擎），state - String (数据引擎状态 -2已删除 -1失败 0初始化中 1挂起 2运行中 3准备删除 4删除中) ， mode - String（计费模式 0共享模式 1按量计费 2包年包月） ， create-time - String（创建时间，10位时间戳） message - String （描述信息），cluster-type - String (集群资源类型 spark_private/presto_private/presto_cu/spark_cu)，engine-id - String（数据引擎ID），key-word - String（数据引擎名称或集群资源类型或描述信息模糊搜索），engine-exec-type - String（引擎执行任务类型，SQL/BATCH）
    */
   Filters?: Array<Filter>
   /**
@@ -5543,7 +5645,7 @@ message - String
    */
   AccessTypes?: Array<string>
   /**
-   * 引擎执行任务类型，有效值：SQL/BATCH
+   * 引擎执行任务类型，有效值：SQL/BATCH，默认为SQL
    */
   EngineExecType?: string
   /**
@@ -5855,11 +5957,11 @@ export interface DescribeSparkAppTasksRequest {
    */
   TaskId?: string
   /**
-   * 更新时间起始点
+   * 更新时间起始点，支持格式：yyyy-MM-dd HH:mm:ss
    */
   StartTime?: string
   /**
-   * 更新时间截止点
+   * 更新时间截止点，支持格式：yyyy-MM-dd HH:mm:ss
    */
   EndTime?: string
   /**
@@ -6134,11 +6236,11 @@ export interface DescribeScriptsResponse {
    * Script列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Scripts: Array<Script>
+  Scripts?: Array<Script>
   /**
    * 实例总数
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

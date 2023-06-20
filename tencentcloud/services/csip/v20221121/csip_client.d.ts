@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeDomainAssetsResponse, DescribeDbAssetInfoResponse, DescribeDbAssetsRequest, DescribeScanReportListRequest, DescribeRiskCenterAssetViewVULRiskListRequest, CreateDomainAndIpRequest, DescribeVpcAssetsResponse, DescribeScanReportListResponse, DescribeClusterPodAssetsRequest, DescribeSubnetAssetsRequest, AddNewBindRoleUserRequest, DescribeCVMAssetInfoResponse, DescribePublicIpAssetsResponse, DescribeRiskCenterAssetViewVULRiskListResponse, DescribeCVMAssetsRequest, DescribeRiskCenterAssetViewPortRiskListResponse, DescribeSubnetAssetsResponse, DescribeDbAssetInfoRequest, DescribeRiskCenterAssetViewPortRiskListRequest, DescribeCVMAssetsResponse, DescribeVpcAssetsRequest, DescribeClusterPodAssetsResponse, DescribeDomainAssetsRequest, CreateDomainAndIpResponse, DescribePublicIpAssetsRequest, DescribeDbAssetsResponse, AddNewBindRoleUserResponse, DescribeCVMAssetInfoRequest } from "./csip_models";
+import { DescribeDomainAssetsResponse, DescribeDbAssetInfoResponse, CreateRiskCenterScanTaskRequest, DescribeScanReportListRequest, DescribeRiskCenterAssetViewVULRiskListRequest, CreateDomainAndIpRequest, DescribeVpcAssetsResponse, DescribeDbAssetsRequest, DescribeScanReportListResponse, DescribeClusterPodAssetsRequest, DescribeSubnetAssetsRequest, AddNewBindRoleUserRequest, DescribeCVMAssetInfoResponse, DescribePublicIpAssetsResponse, DescribeRiskCenterAssetViewVULRiskListResponse, DescribeCVMAssetsRequest, CreateRiskCenterScanTaskResponse, DescribeRiskCenterAssetViewPortRiskListResponse, DescribeSubnetAssetsResponse, DescribeDbAssetInfoRequest, DescribeRiskCenterAssetViewPortRiskListRequest, DescribeCVMAssetsResponse, DescribeVpcAssetsRequest, DescribeClusterPodAssetsResponse, DescribeDomainAssetsRequest, CreateDomainAndIpResponse, DescribePublicIpAssetsRequest, DescribeDbAssetsResponse, AddNewBindRoleUserResponse, DescribeCVMAssetInfoRequest } from "./csip_models";
 /**
  * csip client
  * @class
@@ -55,6 +55,10 @@ export declare class Client extends AbstractClient {
      * 获取资产视角的端口风险列表
      */
     DescribeRiskCenterAssetViewPortRiskList(req: DescribeRiskCenterAssetViewPortRiskListRequest, cb?: (error: string, rep: DescribeRiskCenterAssetViewPortRiskListResponse) => void): Promise<DescribeRiskCenterAssetViewPortRiskListResponse>;
+    /**
+     * 创建风险中心扫描任务
+     */
+    CreateRiskCenterScanTask(req: CreateRiskCenterScanTaskRequest, cb?: (error: string, rep: CreateRiskCenterScanTaskResponse) => void): Promise<CreateRiskCenterScanTaskResponse>;
     /**
      * 资产列表
      */

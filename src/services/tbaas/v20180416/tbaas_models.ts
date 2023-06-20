@@ -1127,6 +1127,52 @@ export interface GetClusterSummaryResponse {
 }
 
 /**
+ * GetLatestTransactionList请求参数结构体
+ */
+export interface GetLatestTransactionListRequest {
+  /**
+   * 模块名称，固定字段：transaction
+   */
+  Module: string
+  /**
+   * 操作名称，固定字段：latest_transaction_list
+   */
+  Operation: string
+  /**
+   * 组织ID，固定字段：0
+   */
+  GroupId: number
+  /**
+   * 通道ID，固定字段：0
+   */
+  ChannelId: number
+  /**
+   * 获取的最新交易的区块数量，取值范围1~5
+   */
+  LatestBlockNumber: number
+  /**
+   * 调用接口的组织名称，可以在组织管理列表中获取当前组织的名称
+   */
+  GroupName: string
+  /**
+   * 需要查询的通道名称，可在通道详情或列表中获取
+   */
+  ChannelName: string
+  /**
+   * 区块链网络ID，可在区块链网络详情或列表中获取
+   */
+  ClusterId: string
+  /**
+   * 需要获取的起始交易偏移
+   */
+  Offset?: number
+  /**
+   * 需要获取的交易数量
+   */
+  Limit?: number
+}
+
+/**
  * PeerSet
  */
 export interface PeerSet {
@@ -1750,6 +1796,24 @@ export interface GetBcosTransByHashRequest {
 }
 
 /**
+ * QueryChainMakerTransaction请求参数结构体
+ */
+export interface QueryChainMakerTransactionRequest {
+  /**
+   * 网络ID，可在区块链网络详情或列表中获取
+   */
+  ClusterId: string
+  /**
+   * 业务链ID，可在网络概览页获取
+   */
+  ChainId: string
+  /**
+   * 交易ID，通过调用合约的返回值获取
+   */
+  TxID: string
+}
+
+/**
  * GetChaincodeCompileLogForUser返回参数结构体
  */
 export interface GetChaincodeCompileLogForUserResponse {
@@ -1846,21 +1910,21 @@ export interface GetBcosTransListResponse {
 }
 
 /**
- * QueryChainMakerTransaction请求参数结构体
+ * GetLatestTransactionList返回参数结构体
  */
-export interface QueryChainMakerTransactionRequest {
+export interface GetLatestTransactionListResponse {
   /**
-   * 网络ID，可在区块链网络详情或列表中获取
+   * 交易总数量
    */
-  ClusterId: string
+  TotalCount?: number
   /**
-   * 业务链ID，可在网络概览页获取
+   * 交易列表
    */
-  ChainId: string
+  TransactionList?: Array<TransactionItem>
   /**
-   * 交易ID，通过调用合约的返回值获取
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  TxID: string
+  RequestId?: string
 }
 
 /**

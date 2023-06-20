@@ -158,6 +158,16 @@ it("tbaas.v20180416.DeployDynamicBcosContract", async function () {
     }
 })
 
+it("tbaas.v20180416.GetLatestTransactionList", async function () {
+    try {
+       const data = await client.GetLatestTransactionList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tbaas.v20180416.DownloadUserCert", async function () {
     try {
        const data = await client.DownloadUserCert({})

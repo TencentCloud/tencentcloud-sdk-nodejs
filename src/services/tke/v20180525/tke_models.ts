@@ -218,6 +218,20 @@ export interface CbsVolume {
 }
 
 /**
+ * DescribeAddon返回参数结构体
+ */
+export interface DescribeAddonResponse {
+  /**
+   * addon列表
+   */
+  Addons?: Array<Addon>
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeEKSClusters请求参数结构体
  */
 export interface DescribeEKSClustersRequest {
@@ -400,6 +414,35 @@ export interface UpgradeClusterReleaseRequest {
    * 集群类型，支持传 tke, eks, tkeedge, exernal(注册集群）
    */
   ClusterType?: string
+}
+
+/**
+ * addon的具体描述
+ */
+export interface Addon {
+  /**
+   * addon名称
+   */
+  AddonName?: string
+  /**
+   * addon的版本
+   */
+  AddonVersion?: string
+  /**
+   * addon的参数，是一个json格式的base64转码后的字符串
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RawValues?: string
+  /**
+   * addon的状态
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Phase?: string
+  /**
+   * addon失败的原因
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Reason?: string
 }
 
 /**
@@ -880,25 +923,21 @@ export interface ModifyClusterAttributeRequest {
 }
 
 /**
- * 自动扩所容的节点
+ * DescribeClusterRoutes返回参数结构体
  */
-export interface AutoscalingAdded {
+export interface DescribeClusterRoutesResponse {
   /**
-   * 正在加入中的节点数量
+   * 符合条件的实例数量。
    */
-  Joining: number
+  TotalCount?: number
   /**
-   * 初始化中的节点数量
+   * 集群路由对象。
    */
-  Initializing: number
+  RouteSet?: Array<RouteInfo>
   /**
-   * 正常的节点数量
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  Normal: number
-  /**
-   * 节点总数
-   */
-  Total: number
+  RequestId?: string
 }
 
 /**
@@ -1025,6 +1064,20 @@ export interface ExtensionAddon {
 }
 
 /**
+ * DescribeAddonValues请求参数结构体
+ */
+export interface DescribeAddonValuesRequest {
+  /**
+   * 集群ID
+   */
+  ClusterId: string
+  /**
+   * addon名称
+   */
+  AddonName: string
+}
+
+/**
  * DescribeResourceUsage请求参数结构体
  */
 export interface DescribeResourceUsageRequest {
@@ -1134,6 +1187,28 @@ export interface DescribeClusterReleaseDetailsResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 自动扩所容的节点
+ */
+export interface AutoscalingAdded {
+  /**
+   * 正在加入中的节点数量
+   */
+  Joining: number
+  /**
+   * 初始化中的节点数量
+   */
+  Initializing: number
+  /**
+   * 正常的节点数量
+   */
+  Normal: number
+  /**
+   * 节点总数
+   */
+  Total: number
 }
 
 /**
@@ -1428,26 +1503,17 @@ KeyName: image-cache-name
 }
 
 /**
- * DescribePrometheusAlertRule请求参数结构体
+ * DeleteAddon请求参数结构体
  */
-export interface DescribePrometheusAlertRuleRequest {
+export interface DeleteAddonRequest {
   /**
-   * 实例id
+   * 集群ID
    */
-  InstanceId: string
+  ClusterId: string
   /**
-   * 分页
+   * addon名称
    */
-  Offset?: number
-  /**
-   * 分页
-   */
-  Limit?: number
-  /**
-   * 过滤
-支持ID，Name
-   */
-  Filters?: Array<Filter>
+  AddonName: string
 }
 
 /**
@@ -2629,11 +2695,6 @@ export interface DescribeClusterNodePoolsRequest {
 export type DescribeClusterRouteTablesRequest = null
 
 /**
- * DescribeRegions请求参数结构体
- */
-export type DescribeRegionsRequest = null
-
-/**
  * DeleteClusterRoute请求参数结构体
  */
 export interface DeleteClusterRouteRequest {
@@ -3189,6 +3250,36 @@ export interface DescribeClusterNodePoolDetailResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DeletePrometheusConfig请求参数结构体
+ */
+export interface DeletePrometheusConfigRequest {
+  /**
+   * 实例id
+   */
+  InstanceId: string
+  /**
+   * 集群类型
+   */
+  ClusterType: string
+  /**
+   * 集群id
+   */
+  ClusterId: string
+  /**
+   * 要删除的ServiceMonitor名字列表
+   */
+  ServiceMonitors?: Array<string>
+  /**
+   * 要删除的PodMonitor名字列表
+   */
+  PodMonitors?: Array<string>
+  /**
+   * 要删除的RawJobs名字列表
+   */
+  RawJobs?: Array<string>
 }
 
 /**
@@ -3948,17 +4039,9 @@ export interface DisableClusterAuditRequest {
 }
 
 /**
- * DescribePrometheusRecordRules返回参数结构体
+ * DeleteBackupStorageLocation返回参数结构体
  */
-export interface DescribePrometheusRecordRulesResponse {
-  /**
-   * 聚合规则
-   */
-  Records: Array<PrometheusRecordRuleYamlItem>
-  /**
-   * 总数
-   */
-  Total: number
+export interface DeleteBackupStorageLocationResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4799,24 +4882,6 @@ export interface EdgeClusterInternalLB {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SubnetId?: Array<string>
-}
-
-/**
- * DescribeClusterRoutes返回参数结构体
- */
-export interface DescribeClusterRoutesResponse {
-  /**
-   * 符合条件的实例数量。
-   */
-  TotalCount?: number
-  /**
-   * 集群路由对象。
-   */
-  RouteSet?: Array<RouteInfo>
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**
@@ -5810,6 +5875,16 @@ CUCC：中国联通
 }
 
 /**
+ * UpdateAddon返回参数结构体
+ */
+export interface UpdateAddonResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeEKSContainerInstances请求参数结构体
  */
 export interface DescribeEKSContainerInstancesRequest {
@@ -6123,6 +6198,24 @@ export interface DescribeClusterVirtualNodePoolsRequest {
    * 集群ID
    */
   ClusterId: string
+}
+
+/**
+ * DescribePrometheusRecordRules返回参数结构体
+ */
+export interface DescribePrometheusRecordRulesResponse {
+  /**
+   * 聚合规则
+   */
+  Records: Array<PrometheusRecordRuleYamlItem>
+  /**
+   * 总数
+   */
+  Total: number
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -6529,24 +6622,6 @@ export interface ModifyPrometheusAlertPolicyResponse {
 }
 
 /**
- * DescribePrometheusClusterAgents返回参数结构体
- */
-export interface DescribePrometheusClusterAgentsResponse {
-  /**
-   * 被关联集群信息
-   */
-  Agents: Array<PrometheusAgentOverview>
-  /**
-   * 被关联集群总量
-   */
-  Total: number
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * 集群信息结构体
  */
 export interface Cluster {
@@ -6939,18 +7014,9 @@ export interface CreatePrometheusClusterAgentRequest {
 }
 
 /**
- * DescribeClusterNodePools返回参数结构体
+ * DeleteEKSContainerInstances返回参数结构体
  */
-export interface DescribeClusterNodePoolsResponse {
-  /**
-   * NodePools（节点池列表）
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  NodePoolSet: Array<NodePool>
-  /**
-   * 资源总数
-   */
-  TotalCount: number
+export interface DeleteEKSContainerInstancesResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -7465,13 +7531,45 @@ export interface EnhancedService {
 }
 
 /**
- * DeleteEKSContainerInstances返回参数结构体
+ * DescribeRouteTableConflicts返回参数结构体
  */
-export interface DeleteEKSContainerInstancesResponse {
+export interface DescribeRouteTableConflictsResponse {
+  /**
+   * 路由表是否冲突。
+   */
+  HasConflict: boolean
+  /**
+   * 路由表冲突列表。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RouteTableConflictSet: Array<RouteTableConflict>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribePrometheusAlertRule请求参数结构体
+ */
+export interface DescribePrometheusAlertRuleRequest {
+  /**
+   * 实例id
+   */
+  InstanceId: string
+  /**
+   * 分页
+   */
+  Offset?: number
+  /**
+   * 分页
+   */
+  Limit?: number
+  /**
+   * 过滤
+支持ID，Name
+   */
+  Filters?: Array<Filter>
 }
 
 /**
@@ -8053,6 +8151,24 @@ export interface CreatePrometheusDashboardRequest {
  * DeleteClusterRouteTable返回参数结构体
  */
 export interface DeleteClusterRouteTableResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeAddonValues返回参数结构体
+ */
+export interface DescribeAddonValuesResponse {
+  /**
+   * 参数列表，如果addon已安装，会使用已设置的的参数做渲染，是一个json格式的字符串
+   */
+  Values?: string
+  /**
+   * addon支持的参数列表，使用默认值，是一个json格式的字符串
+   */
+  DefaultValues?: string
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -9286,6 +9402,28 @@ export interface ModifyClusterAuthenticationOptionsResponse {
 }
 
 /**
+ * UpdateAddon请求参数结构体
+ */
+export interface UpdateAddonRequest {
+  /**
+   * 集群ID
+   */
+  ClusterId: string
+  /**
+   * addon名称
+   */
+  AddonName: string
+  /**
+   * addon版本（不传默认不更新）
+   */
+  AddonVersion?: string
+  /**
+   * addon的参数，是一个json格式的base64转码后的字符串（addon参数由DescribeAddonValues获取）
+   */
+  RawValues?: string
+}
+
+/**
  * ModifyClusterVirtualNodePool请求参数结构体
  */
 export interface ModifyClusterVirtualNodePoolRequest {
@@ -10082,6 +10220,25 @@ export interface ModifyPrometheusGlobalNotificationRequest {
 }
 
 /**
+ * DescribeClusterNodePools返回参数结构体
+ */
+export interface DescribeClusterNodePoolsResponse {
+  /**
+   * NodePools（节点池列表）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NodePoolSet: Array<NodePool>
+  /**
+   * 资源总数
+   */
+  TotalCount: number
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 不可用原因
  */
 export interface UnavailableReason {
@@ -10144,14 +10301,9 @@ export interface DescribeEdgeCVMInstancesResponse {
 }
 
 /**
- * DeleteBackupStorageLocation返回参数结构体
+ * DescribeRegions请求参数结构体
  */
-export interface DeleteBackupStorageLocationResponse {
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
+export type DescribeRegionsRequest = null
 
 /**
  * ModifyNodePoolDesiredCapacityAboutAsg请求参数结构体
@@ -10261,33 +10413,13 @@ alertmanager
 }
 
 /**
- * DeletePrometheusConfig请求参数结构体
+ * DeleteECMInstances返回参数结构体
  */
-export interface DeletePrometheusConfigRequest {
+export interface DeleteECMInstancesResponse {
   /**
-   * 实例id
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  InstanceId: string
-  /**
-   * 集群类型
-   */
-  ClusterType: string
-  /**
-   * 集群id
-   */
-  ClusterId: string
-  /**
-   * 要删除的ServiceMonitor名字列表
-   */
-  ServiceMonitors?: Array<string>
-  /**
-   * 要删除的PodMonitor名字列表
-   */
-  PodMonitors?: Array<string>
-  /**
-   * 要删除的RawJobs名字列表
-   */
-  RawJobs?: Array<string>
+  RequestId?: string
 }
 
 /**
@@ -10554,18 +10686,17 @@ export interface ImageRegistryCredential {
 }
 
 /**
- * DescribeRouteTableConflicts返回参数结构体
+ * DescribePrometheusClusterAgents返回参数结构体
  */
-export interface DescribeRouteTableConflictsResponse {
+export interface DescribePrometheusClusterAgentsResponse {
   /**
-   * 路由表是否冲突。
+   * 被关联集群信息
    */
-  HasConflict: boolean
+  Agents: Array<PrometheusAgentOverview>
   /**
-   * 路由表冲突列表。
-注意：此字段可能返回 null，表示取不到有效值。
+   * 被关联集群总量
    */
-  RouteTableConflictSet: Array<RouteTableConflict>
+  Total: number
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -10597,6 +10728,16 @@ ID 按templateId过滤
    * 总数限制
    */
   Limit?: number
+}
+
+/**
+ * DeleteAddon返回参数结构体
+ */
+export interface DeleteAddonResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -11480,6 +11621,28 @@ export interface DeletePrometheusRecordRuleYamlRequest {
 }
 
 /**
+ * InstallAddon请求参数结构体
+ */
+export interface InstallAddonRequest {
+  /**
+   * 集群ID
+   */
+  ClusterId: string
+  /**
+   * addon名称
+   */
+  AddonName: string
+  /**
+   * addon版本（不传默认安装最新版本）
+   */
+  AddonVersion?: string
+  /**
+   * addon的参数，是一个json格式的base64转码后的字符串（addon参数由DescribeAddonValues获取）
+   */
+  RawValues?: string
+}
+
+/**
  * 某个节点升级前检查结果
  */
 export interface InstanceUpgradePreCheckResult {
@@ -11556,13 +11719,17 @@ export interface DescribeClusterCommonNamesResponse {
 }
 
 /**
- * DeleteECMInstances返回参数结构体
+ * DescribeAddon请求参数结构体
  */
-export interface DeleteECMInstancesResponse {
+export interface DescribeAddonRequest {
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 集群ID
    */
-  RequestId?: string
+  ClusterId: string
+  /**
+   * addon名称（不传时会返回集群下全部的addon）
+   */
+  AddonName?: string
 }
 
 /**
@@ -11695,6 +11862,16 @@ export interface RouteTableConflict {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RouteTableId: string
+}
+
+/**
+ * InstallAddon返回参数结构体
+ */
+export interface InstallAddonResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

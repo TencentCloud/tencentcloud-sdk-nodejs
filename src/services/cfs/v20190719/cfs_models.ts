@@ -720,6 +720,10 @@ export interface AutoSnapshotPolicyInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IntervalDays?: number
+  /**
+   * 跨地域复制的快照保留时间
+   */
+  CrossRegionsAliveDays?: number
 }
 
 /**

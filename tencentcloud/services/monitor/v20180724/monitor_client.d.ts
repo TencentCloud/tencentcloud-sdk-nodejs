@@ -48,7 +48,7 @@ export declare class Client extends AbstractClient {
      */
     BindingPolicyObject(req: BindingPolicyObjectRequest, cb?: (error: string, rep: BindingPolicyObjectResponse) => void): Promise<BindingPolicyObjectResponse>;
     /**
-     * 创建 Grafana 实例
+     * 本接口（CreateGrafanaInstance）用于创建 Grafana 包年包月实例，默认基础版、到期自动续费、不可使用代金券。
      */
     CreateGrafanaInstance(req: CreateGrafanaInstanceRequest, cb?: (error: string, rep: CreateGrafanaInstanceResponse) => void): Promise<CreateGrafanaInstanceResponse>;
     /**
@@ -287,7 +287,7 @@ export declare class Client extends AbstractClient {
      */
     SetDefaultAlarmPolicy(req: SetDefaultAlarmPolicyRequest, cb?: (error: string, rep: SetDefaultAlarmPolicyResponse) => void): Promise<SetDefaultAlarmPolicyResponse>;
     /**
-     * 删除 Grafana 实例
+     * 本接口（DeleteGrafanaInstance）用于 Grafana 包年包月实例的退费，调用后实例处于停服状态，不可使用，7天后自动销毁。
      */
     DeleteGrafanaInstance(req: DeleteGrafanaInstanceRequest, cb?: (error: string, rep: DeleteGrafanaInstanceResponse) => void): Promise<DeleteGrafanaInstanceResponse>;
     /**
@@ -319,7 +319,7 @@ export declare class Client extends AbstractClient {
      */
     ModifyGrafanaInstance(req: ModifyGrafanaInstanceRequest, cb?: (error: string, rep: ModifyGrafanaInstanceResponse) => void): Promise<ModifyGrafanaInstanceResponse>;
     /**
-     * 恢复 Grafana 实例
+     * 本接口（ResumeGrafanaInstance）用于 Grafana 包年包月实例的停服续费，调用后按原版本续费一个月。仍在运行中的实例无法使用该接口进行续费。
      */
     ResumeGrafanaInstance(req: ResumeGrafanaInstanceRequest, cb?: (error: string, rep: ResumeGrafanaInstanceResponse) => void): Promise<ResumeGrafanaInstanceResponse>;
     /**

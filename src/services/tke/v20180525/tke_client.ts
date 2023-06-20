@@ -30,11 +30,13 @@ import {
   CreateClusterRouteTableResponse,
   SubnetInfos,
   CbsVolume,
+  DescribeAddonResponse,
   DescribeEKSClustersRequest,
   DescribePrometheusInstancesOverviewRequest,
   ServiceAccountAuthenticationOptions,
   CreateClusterNodePoolRequest,
   UpgradeClusterReleaseRequest,
+  Addon,
   DescribeEdgeClusterUpgradeInfoRequest,
   RunInstancesForNode,
   DisableVpcCniNetworkTypeResponse,
@@ -57,10 +59,11 @@ import {
   Tag,
   DescribePrometheusAgentInstancesRequest,
   ModifyClusterAttributeRequest,
-  AutoscalingAdded,
+  DescribeClusterRoutesResponse,
   DescribeClustersRequest,
   UpgradeClusterInstancesRequest,
   ExtensionAddon,
+  DescribeAddonValuesRequest,
   DescribeResourceUsageRequest,
   PrometheusRecordRuleYamlItem,
   Label,
@@ -68,6 +71,7 @@ import {
   DeletePrometheusTemplateSyncRequest,
   DisableVpcCniNetworkTypeRequest,
   DescribeClusterReleaseDetailsResponse,
+  AutoscalingAdded,
   SyncPrometheusTempResponse,
   CreateEdgeLogConfigRequest,
   CreatePrometheusDashboardResponse,
@@ -84,7 +88,7 @@ import {
   DescribeEncryptionStatusRequest,
   DeleteClusterVirtualNodePoolRequest,
   DescribeImageCachesRequest,
-  DescribePrometheusAlertRuleRequest,
+  DeleteAddonRequest,
   DescribeEdgeAvailableExtraArgsRequest,
   ExistedInstance,
   AddNodeToNodePoolResponse,
@@ -135,7 +139,6 @@ import {
   DeletePrometheusTempResponse,
   DescribeClusterNodePoolsRequest,
   DescribeClusterRouteTablesRequest,
-  DescribeRegionsRequest,
   DeleteClusterRouteRequest,
   DeleteClusterEndpointRequest,
   DeleteClusterVirtualNodeRequest,
@@ -162,6 +165,7 @@ import {
   NodeCountSummary,
   EdgeCluster,
   DescribeClusterNodePoolDetailResponse,
+  DeletePrometheusConfigRequest,
   DescribeEKSContainerInstanceEventRequest,
   ScaleOutClusterMasterResponse,
   Toleration,
@@ -192,7 +196,7 @@ import {
   EksCiRegionInfo,
   DescribeEdgeClusterInstancesRequest,
   DisableClusterAuditRequest,
-  DescribePrometheusRecordRulesResponse,
+  DeleteBackupStorageLocationResponse,
   DescribePrometheusGlobalNotificationResponse,
   HttpGet,
   ResourceUsage,
@@ -234,7 +238,6 @@ import {
   GetClusterLevelPriceResponse,
   DescribeResourceUsageResponse,
   EdgeClusterInternalLB,
-  DescribeClusterRoutesResponse,
   DescribeAvailableClusterVersionRequest,
   UpgradeClusterReleaseResponse,
   DescribePrometheusAlertPolicyRequest,
@@ -285,6 +288,7 @@ import {
   Filter,
   UpdateTKEEdgeClusterResponse,
   EipAttribute,
+  UpdateAddonResponse,
   DescribeEKSContainerInstancesRequest,
   DescribeClusterControllersRequest,
   ModifyPrometheusAlertRuleRequest,
@@ -299,6 +303,7 @@ import {
   ClusterVersion,
   InstanceUpgradeProgressItem,
   DescribeClusterVirtualNodePoolsRequest,
+  DescribePrometheusRecordRulesResponse,
   GetMostSuitableImageCacheRequest,
   SecurityContext,
   DNSConfig,
@@ -322,7 +327,6 @@ import {
   DescribePrometheusTemplateSyncResponse,
   ModifyPrometheusTemplateResponse,
   ModifyPrometheusAlertPolicyResponse,
-  DescribePrometheusClusterAgentsResponse,
   Cluster,
   DescribeClusterAuthenticationOptionsRequest,
   DescribeEksContainerInstanceLogResponse,
@@ -334,7 +338,7 @@ import {
   CreateClusterVirtualNodeResponse,
   ImageCacheEvent,
   CreatePrometheusClusterAgentRequest,
-  DescribeClusterNodePoolsResponse,
+  DeleteEKSContainerInstancesResponse,
   DescribePrometheusInstancesOverviewResponse,
   DescribeEKSClusterCredentialRequest,
   EnableClusterDeletionProtectionRequest,
@@ -360,7 +364,8 @@ import {
   EdgeClusterPublicLB,
   EnableEncryptionProtectionRequest,
   EnhancedService,
-  DeleteEKSContainerInstancesResponse,
+  DescribeRouteTableConflictsResponse,
+  DescribePrometheusAlertRuleRequest,
   UninstallLogAgentRequest,
   TcpSocket,
   TagSpecification,
@@ -389,6 +394,7 @@ import {
   CreatePrometheusTempRequest,
   CreatePrometheusDashboardRequest,
   DeleteClusterRouteTableResponse,
+  DescribeAddonValuesResponse,
   DisableClusterDeletionProtectionRequest,
   ListClusterInspectionResultsItemsResponse,
   PrometheusJobTargets,
@@ -446,6 +452,7 @@ import {
   CommonName,
   EnableEventPersistenceRequest,
   ModifyClusterAuthenticationOptionsResponse,
+  UpdateAddonRequest,
   ModifyClusterVirtualNodePoolRequest,
   DescribeRegionsResponse,
   CreateClusterRouteResponse,
@@ -485,15 +492,16 @@ import {
   DescribePrometheusGlobalConfigRequest,
   CreateECMInstancesResponse,
   ModifyPrometheusGlobalNotificationRequest,
+  DescribeClusterNodePoolsResponse,
   UnavailableReason,
   GetUpgradeInstanceProgressRequest,
   UpdateEKSClusterResponse,
   DescribeEdgeCVMInstancesResponse,
-  DeleteBackupStorageLocationResponse,
+  DescribeRegionsRequest,
   ModifyNodePoolDesiredCapacityAboutAsgRequest,
   DeleteClusterRouteResponse,
   PrometheusNotificationItem,
-  DeletePrometheusConfigRequest,
+  DeleteECMInstancesResponse,
   DescribeEdgeClusterUpgradeInfoResponse,
   ModifyClusterNodePoolResponse,
   PrometheusAlertPolicyItem,
@@ -506,9 +514,10 @@ import {
   DescribeClusterEndpointStatusRequest,
   DescribeClusterStatusResponse,
   ImageRegistryCredential,
-  DescribeRouteTableConflictsResponse,
+  DescribePrometheusClusterAgentsResponse,
   DescribeVersionsRequest,
   DescribePrometheusTempRequest,
+  DeleteAddonResponse,
   DeleteClusterRouteTableRequest,
   DescribeClusterEndpointsRequest,
   InstanceExtraArgs,
@@ -551,15 +560,17 @@ import {
   DescribePrometheusOverviewsResponse,
   DescribeClusterInspectionResultsOverviewResponse,
   DeletePrometheusRecordRuleYamlRequest,
+  InstallAddonRequest,
   InstanceUpgradePreCheckResult,
   ScaleInClusterMasterResponse,
   DescribeAvailableClusterVersionResponse,
   DeleteEKSContainerInstancesRequest,
   DescribeClusterCommonNamesResponse,
-  DeleteECMInstancesResponse,
+  DescribeAddonRequest,
   PrometheusTemplate,
   GPUArgs,
   RouteTableConflict,
+  InstallAddonResponse,
   DisableEncryptionProtectionRequest,
   PrometheusInstanceOverview,
   DescribeClusterVirtualNodeResponse,
@@ -1059,6 +1070,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 更新一个addon的参数和版本
+   */
+  async UpdateAddon(
+    req: UpdateAddonRequest,
+    cb?: (error: string, rep: UpdateAddonResponse) => void
+  ): Promise<UpdateAddonResponse> {
+    return this.request("UpdateAddon", req, cb)
+  }
+
+  /**
    * 查看集群认证配置
    */
   async DescribeClusterAuthenticationOptions(
@@ -1066,6 +1087,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeClusterAuthenticationOptionsResponse) => void
   ): Promise<DescribeClusterAuthenticationOptionsResponse> {
     return this.request("DescribeClusterAuthenticationOptions", req, cb)
+  }
+
+  /**
+   * 为目标集群安装一个addon
+   */
+  async InstallAddon(
+    req: InstallAddonRequest,
+    cb?: (error: string, rep: InstallAddonResponse) => void
+  ): Promise<InstallAddonResponse> {
+    return this.request("InstallAddon", req, cb)
   }
 
   /**
@@ -1369,13 +1400,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除边缘计算集群
+   * 获取一个addon的参数
    */
-  async DeleteTKEEdgeCluster(
-    req: DeleteTKEEdgeClusterRequest,
-    cb?: (error: string, rep: DeleteTKEEdgeClusterResponse) => void
-  ): Promise<DeleteTKEEdgeClusterResponse> {
-    return this.request("DeleteTKEEdgeCluster", req, cb)
+  async DescribeAddonValues(
+    req: DescribeAddonValuesRequest,
+    cb?: (error: string, rep: DescribeAddonValuesResponse) => void
+  ): Promise<DescribeAddonValuesResponse> {
+    return this.request("DescribeAddonValues", req, cb)
   }
 
   /**
@@ -1439,13 +1470,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取告警规则列表
+   * 删除一个addon
    */
-  async DescribePrometheusAlertRule(
-    req: DescribePrometheusAlertRuleRequest,
-    cb?: (error: string, rep: DescribePrometheusAlertRuleResponse) => void
-  ): Promise<DescribePrometheusAlertRuleResponse> {
-    return this.request("DescribePrometheusAlertRule", req, cb)
+  async DeleteAddon(
+    req: DeleteAddonRequest,
+    cb?: (error: string, rep: DeleteAddonResponse) => void
+  ): Promise<DeleteAddonResponse> {
+    return this.request("DeleteAddon", req, cb)
   }
 
   /**
@@ -1969,6 +2000,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 删除边缘计算集群
+   */
+  async DeleteTKEEdgeCluster(
+    req: DeleteTKEEdgeClusterRequest,
+    cb?: (error: string, rep: DeleteTKEEdgeClusterResponse) => void
+  ): Promise<DeleteTKEEdgeClusterResponse> {
+    return this.request("DeleteTKEEdgeCluster", req, cb)
+  }
+
+  /**
    * 获取集群的访问地址，包括内网地址，外网地址，外网域名，外网访问安全策略
    */
   async DescribeClusterEndpoints(
@@ -2369,6 +2410,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取告警规则列表
+   */
+  async DescribePrometheusAlertRule(
+    req: DescribePrometheusAlertRuleRequest,
+    cb?: (error: string, rep: DescribePrometheusAlertRuleResponse) => void
+  ): Promise<DescribePrometheusAlertRuleResponse> {
+    return this.request("DescribePrometheusAlertRule", req, cb)
+  }
+
+  /**
    * 启用集群删除保护
    */
   async EnableClusterDeletionProtection(
@@ -2456,6 +2507,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribePrometheusTemplatesResponse) => void
   ): Promise<DescribePrometheusTemplatesResponse> {
     return this.request("DescribePrometheusTemplates", req, cb)
+  }
+
+  /**
+   * 获取addon列表
+   */
+  async DescribeAddon(
+    req: DescribeAddonRequest,
+    cb?: (error: string, rep: DescribeAddonResponse) => void
+  ): Promise<DescribeAddonResponse> {
+    return this.request("DescribeAddon", req, cb)
   }
 
   /**

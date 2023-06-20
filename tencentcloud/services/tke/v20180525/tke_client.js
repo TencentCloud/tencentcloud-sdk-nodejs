@@ -316,10 +316,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyPrometheusAlertPolicy", req, cb);
     }
     /**
+     * 更新一个addon的参数和版本
+     */
+    async UpdateAddon(req, cb) {
+        return this.request("UpdateAddon", req, cb);
+    }
+    /**
      * 查看集群认证配置
      */
     async DescribeClusterAuthenticationOptions(req, cb) {
         return this.request("DescribeClusterAuthenticationOptions", req, cb);
+    }
+    /**
+     * 为目标集群安装一个addon
+     */
+    async InstallAddon(req, cb) {
+        return this.request("InstallAddon", req, cb);
     }
     /**
      * 删除ECM实例
@@ -502,10 +514,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeClusterLevelAttribute", req, cb);
     }
     /**
-     * 删除边缘计算集群
+     * 获取一个addon的参数
      */
-    async DeleteTKEEdgeCluster(req, cb) {
-        return this.request("DeleteTKEEdgeCluster", req, cb);
+    async DescribeAddonValues(req, cb) {
+        return this.request("DescribeAddonValues", req, cb);
     }
     /**
      * 给GR集群增加可用的ClusterCIDR
@@ -544,10 +556,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribePrometheusTemp", req, cb);
     }
     /**
-     * 获取告警规则列表
+     * 删除一个addon
      */
-    async DescribePrometheusAlertRule(req, cb) {
-        return this.request("DescribePrometheusAlertRule", req, cb);
+    async DeleteAddon(req, cb) {
+        return this.request("DeleteAddon", req, cb);
     }
     /**
      * 驱逐虚拟节点
@@ -862,6 +874,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeECMInstances", req, cb);
     }
     /**
+     * 删除边缘计算集群
+     */
+    async DeleteTKEEdgeCluster(req, cb) {
+        return this.request("DeleteTKEEdgeCluster", req, cb);
+    }
+    /**
      * 获取集群的访问地址，包括内网地址，外网地址，外网域名，外网访问安全策略
      */
     async DescribeClusterEndpoints(req, cb) {
@@ -1102,6 +1120,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeEnableVpcCniProgress", req, cb);
     }
     /**
+     * 获取告警规则列表
+     */
+    async DescribePrometheusAlertRule(req, cb) {
+        return this.request("DescribePrometheusAlertRule", req, cb);
+    }
+    /**
      * 启用集群删除保护
      */
     async EnableClusterDeletionProtection(req, cb) {
@@ -1154,6 +1178,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribePrometheusTemplates(req, cb) {
         return this.request("DescribePrometheusTemplates", req, cb);
+    }
+    /**
+     * 获取addon列表
+     */
+    async DescribeAddon(req, cb) {
+        return this.request("DescribeAddon", req, cb);
     }
     /**
      * 获取与云监控融合实例列表

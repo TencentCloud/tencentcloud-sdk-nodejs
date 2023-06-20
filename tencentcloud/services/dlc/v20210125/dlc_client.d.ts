@@ -8,7 +8,7 @@ import { DescribeResultDownloadResponse, DescribeTaskResultResponse, DescribeNot
 export declare class Client extends AbstractClient {
     constructor(clientConfig: ClientConfig);
     /**
-     * 本接口（CreateTask）用于创建sql查询任务。（推荐使用CreateTasks接口）
+     * 本接口（CreateTask）用于创建并执行SQL任务。（推荐使用CreateTasks接口）
      */
     CreateTask(req: CreateTaskRequest, cb?: (error: string, rep: CreateTaskResponse) => void): Promise<CreateTaskResponse>;
     /**
@@ -20,15 +20,15 @@ export declare class Client extends AbstractClient {
      */
     AlterDMSTable(req: AlterDMSTableRequest, cb?: (error: string, rep: AlterDMSTableResponse) => void): Promise<AlterDMSTableResponse>;
     /**
-     * 本接口（DescribeForbiddenTablePro）用于获取被禁用的表属性列表
+     * 本接口（DescribeForbiddenTablePro）用于查询被禁用的表属性列表（新）
      */
     DescribeForbiddenTablePro(req?: DescribeForbiddenTableProRequest, cb?: (error: string, rep: DescribeForbiddenTableProResponse) => void): Promise<DescribeForbiddenTableProResponse>;
     /**
-     * 本接口（DescribeNotebookSession）用于获取notebook livy session详情信息
+     * 本接口（DescribeNotebookSession）用于查询交互式 session详情信息
      */
     DescribeNotebookSession(req: DescribeNotebookSessionRequest, cb?: (error: string, rep: DescribeNotebookSessionResponse) => void): Promise<DescribeNotebookSessionResponse>;
     /**
-     * 本接口（CreateNotebookSession）用于创建notebook livy session
+     * 本接口（CreateNotebookSession）用于创建交互式session（notebook）
      */
     CreateNotebookSession(req: CreateNotebookSessionRequest, cb?: (error: string, rep: CreateNotebookSessionResponse) => void): Promise<CreateNotebookSessionResponse>;
     /**
@@ -44,7 +44,7 @@ export declare class Client extends AbstractClient {
      */
     CreateStoreLocation(req: CreateStoreLocationRequest, cb?: (error: string, rep: CreateStoreLocationResponse) => void): Promise<CreateStoreLocationResponse>;
     /**
-     * 本接口（CreateNotebookSessionStatementSupportBatchSQL）用于创建Statement批量运行SQL任务。
+     * 本接口（CreateNotebookSessionStatementSupportBatchSQL）用于创建交互式session并执行SQL任务
      */
     CreateNotebookSessionStatementSupportBatchSQL(req: CreateNotebookSessionStatementSupportBatchSQLRequest, cb?: (error: string, rep: CreateNotebookSessionStatementSupportBatchSQLResponse) => void): Promise<CreateNotebookSessionStatementSupportBatchSQLResponse>;
     /**
@@ -80,7 +80,7 @@ export declare class Client extends AbstractClient {
      */
     DeleteScript(req: DeleteScriptRequest, cb?: (error: string, rep: DeleteScriptResponse) => void): Promise<DeleteScriptResponse>;
     /**
-     * 创建spark任务
+     * 启动Spark作业
      */
     CreateSparkAppTask(req: CreateSparkAppTaskRequest, cb?: (error: string, rep: CreateSparkAppTaskResponse) => void): Promise<CreateSparkAppTaskResponse>;
     /**
@@ -92,7 +92,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeDatabases(req: DescribeDatabasesRequest, cb?: (error: string, rep: DescribeDatabasesResponse) => void): Promise<DescribeDatabasesResponse>;
     /**
-     * 本接口（DescribeNotebookSessions）用于获取notebook livy session列表
+     * 本接口（DescribeNotebookSessions）用于查询交互式 session列表
      */
     DescribeNotebookSessions(req: DescribeNotebookSessionsRequest, cb?: (error: string, rep: DescribeNotebookSessionsResponse) => void): Promise<DescribeNotebookSessionsResponse>;
     /**
@@ -116,7 +116,7 @@ export declare class Client extends AbstractClient {
      */
     LockMetaData(req: LockMetaDataRequest, cb?: (error: string, rep: LockMetaDataResponse) => void): Promise<LockMetaDataResponse>;
     /**
-     * 获取spark应用列表。
+     * 查询spark作业列表
      */
     DescribeSparkAppJobs(req: DescribeSparkAppJobsRequest, cb?: (error: string, rep: DescribeSparkAppJobsResponse) => void): Promise<DescribeSparkAppJobsResponse>;
     /**
@@ -124,11 +124,11 @@ export declare class Client extends AbstractClient {
      */
     DescribeUsers(req: DescribeUsersRequest, cb?: (error: string, rep: DescribeUsersResponse) => void): Promise<DescribeUsersResponse>;
     /**
-     * 本接口（CreateTasks），用于批量创建任务
+     * 本接口（CreateTasks），用于批量创建并执行SQL任务
      */
     CreateTasks(req: CreateTasksRequest, cb?: (error: string, rep: CreateTasksResponse) => void): Promise<CreateTasksResponse>;
     /**
-     * 该接口（DescribeScripts）用于获取所有SQL查询。
+     * 该接口（DescribeScripts）用于查询SQL脚本列表
      */
     DescribeScripts(req: DescribeScriptsRequest, cb?: (error: string, rep: DescribeScriptsResponse) => void): Promise<DescribeScriptsResponse>;
     /**
@@ -140,7 +140,7 @@ export declare class Client extends AbstractClient {
      */
     ReportHeartbeatMetaData(req: ReportHeartbeatMetaDataRequest, cb?: (error: string, rep: ReportHeartbeatMetaDataResponse) => void): Promise<ReportHeartbeatMetaDataResponse>;
     /**
-     * 本接口（ListTaskJobLogDetail）用于获取spark-jar日志列表
+     * 本接口（ListTaskJobLogDetail）用于获取spark 作业任务日志详情
      */
     ListTaskJobLogDetail(req: ListTaskJobLogDetailRequest, cb?: (error: string, rep: ListTaskJobLogDetailResponse) => void): Promise<ListTaskJobLogDetailResponse>;
     /**
@@ -156,7 +156,7 @@ export declare class Client extends AbstractClient {
      */
     AttachWorkGroupPolicy(req: AttachWorkGroupPolicyRequest, cb?: (error: string, rep: AttachWorkGroupPolicyResponse) => void): Promise<AttachWorkGroupPolicyResponse>;
     /**
-     * 创建spark应用
+     * 创建spark作业
      */
     CreateSparkApp(req: CreateSparkAppRequest, cb?: (error: string, rep: CreateSparkAppResponse) => void): Promise<CreateSparkAppResponse>;
     /**
@@ -168,11 +168,11 @@ export declare class Client extends AbstractClient {
      */
     CreateSparkSessionBatchSQL(req: CreateSparkSessionBatchSQLRequest, cb?: (error: string, rep: CreateSparkSessionBatchSQLResponse) => void): Promise<CreateSparkSessionBatchSQLResponse>;
     /**
-     * 本接口（DescribeNotebookSessionStatements）用于获取Session Statement列表。
+     * 本接口（DescribeNotebookSessionStatements）用于查询Session中执行的任务列表
      */
     DescribeNotebookSessionStatements(req: DescribeNotebookSessionStatementsRequest, cb?: (error: string, rep: DescribeNotebookSessionStatementsResponse) => void): Promise<DescribeNotebookSessionStatementsResponse>;
     /**
-     * 本接口用于控制暂停或恢复数据引擎
+     * 本接口用于控制挂起或启动数据引擎
      */
     SuspendResumeDataEngine(req: SuspendResumeDataEngineRequest, cb?: (error: string, rep: SuspendResumeDataEngineResponse) => void): Promise<SuspendResumeDataEngineResponse>;
     /**
@@ -196,11 +196,11 @@ export declare class Client extends AbstractClient {
      */
     DescribeNotebookSessionStatementSqlResult(req: DescribeNotebookSessionStatementSqlResultRequest, cb?: (error: string, rep: DescribeNotebookSessionStatementSqlResultResponse) => void): Promise<DescribeNotebookSessionStatementSqlResultResponse>;
     /**
-     * 本接口（CreateNotebookSessionStatement）用于创建session statement
+     * 本接口（CreateNotebookSessionStatement）用于在session中执行代码片段
      */
     CreateNotebookSessionStatement(req: CreateNotebookSessionStatementRequest, cb?: (error: string, rep: CreateNotebookSessionStatementResponse) => void): Promise<CreateNotebookSessionStatementResponse>;
     /**
-     * 本接口（DescribeDataEngines）用于获取DataEngines信息列表
+     * 本接口（DescribeDataEngines）用于查询DataEngines信息列表
      */
     DescribeDataEngines(req: DescribeDataEnginesRequest, cb?: (error: string, rep: DescribeDataEnginesResponse) => void): Promise<DescribeDataEnginesResponse>;
     /**
@@ -212,15 +212,15 @@ export declare class Client extends AbstractClient {
      */
     AddDMSPartitions(req: AddDMSPartitionsRequest, cb?: (error: string, rep: AddDMSPartitionsResponse) => void): Promise<AddDMSPartitionsResponse>;
     /**
-     * 本接口（CancelNotebookSessionStatementBatch）用于按批取消Session statement。
+     * 本接口（CancelNotebookSessionStatementBatch）用于批量取消Session 中执行的任务
      */
     CancelNotebookSessionStatementBatch(req: CancelNotebookSessionStatementBatchRequest, cb?: (error: string, rep: CancelNotebookSessionStatementBatchResponse) => void): Promise<CancelNotebookSessionStatementBatchResponse>;
     /**
-     * 删除spark应用
+     * 删除spark作业
      */
     DeleteSparkApp(req: DeleteSparkAppRequest, cb?: (error: string, rep: DeleteSparkAppResponse) => void): Promise<DeleteSparkAppResponse>;
     /**
-     * 本接口（DescribeNotebookSessionLog）用于获取notebook livy session日志
+     * 本接口（DescribeNotebookSessionLog）用于查询交互式 session日志
      */
     DescribeNotebookSessionLog(req: DescribeNotebookSessionLogRequest, cb?: (error: string, rep: DescribeNotebookSessionLogResponse) => void): Promise<DescribeNotebookSessionLogResponse>;
     /**
@@ -244,11 +244,11 @@ export declare class Client extends AbstractClient {
      */
     CancelSparkSessionBatchSQL(req: CancelSparkSessionBatchSQLRequest, cb?: (error: string, rep: CancelSparkSessionBatchSQLResponse) => void): Promise<CancelSparkSessionBatchSQLResponse>;
     /**
-     * 本接口（CancelTask），用于取消任务执行
+     * 本接口（CancelTask），用于取消任务
      */
     CancelTask(req: CancelTaskRequest, cb?: (error: string, rep: CancelTaskResponse) => void): Promise<CancelTaskResponse>;
     /**
-     * 更新spark应用
+     * 更新spark作业
      */
     ModifySparkApp(req: ModifySparkAppRequest, cb?: (error: string, rep: ModifySparkAppResponse) => void): Promise<ModifySparkAppResponse>;
     /**
@@ -256,7 +256,7 @@ export declare class Client extends AbstractClient {
      */
     DeleteUser(req: DeleteUserRequest, cb?: (error: string, rep: DeleteUserResponse) => void): Promise<DeleteUserResponse>;
     /**
-     * 本接口根据引擎ID获取数据引擎资源使用情况
+     * 本接口根据引擎ID查询数据引擎资源使用情况
      */
     DescribeEngineUsageInfo(req: DescribeEngineUsageInfoRequest, cb?: (error: string, rep: DescribeEngineUsageInfoResponse) => void): Promise<DescribeEngineUsageInfoResponse>;
     /**
@@ -320,7 +320,7 @@ export declare class Client extends AbstractClient {
      */
     CreateScript(req: CreateScriptRequest, cb?: (error: string, rep: CreateScriptResponse) => void): Promise<CreateScriptResponse>;
     /**
-     * 本接口（DescribeNotebookSessionStatement）用于获取session statement信息
+     * 本接口（DescribeNotebookSessionStatement）用于查询session 中执行任务的详情
      */
     DescribeNotebookSessionStatement(req: DescribeNotebookSessionStatementRequest, cb?: (error: string, rep: DescribeNotebookSessionStatementResponse) => void): Promise<DescribeNotebookSessionStatementResponse>;
     /**
@@ -348,7 +348,7 @@ export declare class Client extends AbstractClient {
      */
     DeleteNotebookSession(req: DeleteNotebookSessionRequest, cb?: (error: string, rep: DeleteNotebookSessionResponse) => void): Promise<DeleteNotebookSessionResponse>;
     /**
-     * 本接口（CancelNotebookSessionStatement）用于取消session statement
+     * 本接口（CancelNotebookSessionStatement）用于取消session中执行的任务
      */
     CancelNotebookSessionStatement(req: CancelNotebookSessionStatementRequest, cb?: (error: string, rep: CancelNotebookSessionStatementResponse) => void): Promise<CancelNotebookSessionStatementResponse>;
     /**
@@ -356,11 +356,11 @@ export declare class Client extends AbstractClient {
      */
     DescribeStoreLocation(req?: DescribeStoreLocationRequest, cb?: (error: string, rep: DescribeStoreLocationResponse) => void): Promise<DescribeStoreLocationResponse>;
     /**
-     * 查询具体的spark应用
+     * 查询spark作业信息
      */
     DescribeSparkAppJob(req: DescribeSparkAppJobRequest, cb?: (error: string, rep: DescribeSparkAppJobResponse) => void): Promise<DescribeSparkAppJobResponse>;
     /**
-     * 查询spark应用的运行任务实例列表
+     * 查询Spark作业的运行任务列表
      */
     DescribeSparkAppTasks(req: DescribeSparkAppTasksRequest, cb?: (error: string, rep: DescribeSparkAppTasksResponse) => void): Promise<DescribeSparkAppTasksResponse>;
     /**

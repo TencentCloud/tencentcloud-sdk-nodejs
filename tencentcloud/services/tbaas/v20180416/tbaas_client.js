@@ -28,7 +28,9 @@ class Client extends abstract_client_1.AbstractClient {
         super("tbaas.tencentcloudapi.com", "2018-04-16", clientConfig);
     }
     /**
-     * 执行Bcos交易，支持动态部署的合约
+     * Bcos区块链引擎已下线，请选用其他区块链引擎
+
+执行Bcos交易，支持动态部署的合约
      */
     async InvokeBcosTrans(req, cb) {
         return this.request("InvokeBcosTrans", req, cb);
@@ -40,7 +42,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("QueryChainMakerTransaction", req, cb);
     }
     /**
-     * 使用块高查询Bcos区块信息
+     * Bcos区块链引擎已下线，请选用其他区块链引擎
+
+使用块高查询Bcos区块信息
      */
     async GetBcosBlockByNumber(req, cb) {
         return this.request("GetBcosBlockByNumber", req, cb);
@@ -58,7 +62,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("GetChaincodeLogForUser", req, cb);
     }
     /**
-     * Bcos根据交易哈希查看交易详细信息
+     * Bcos区块链引擎已下线，请选用其他区块链引擎
+
+Bcos根据交易哈希查看交易详细信息
      */
     async GetBcosTransByHash(req, cb) {
         return this.request("GetBcosTransByHash", req, cb);
@@ -70,7 +76,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("GetClusterListForUser", req, cb);
     }
     /**
-     * Bcos分页查询当前群组下的区块列表
+     * Bcos区块链引擎已下线，请选用其他区块链引擎
+
+Bcos分页查询当前群组下的区块列表
      */
     async GetBcosBlockList(req, cb) {
         return this.request("GetBcosBlockList", req, cb);
@@ -106,10 +114,18 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("GetPeerLogForUser", req, cb);
     }
     /**
-     * 动态部署并发布Bcos合约
+     * Bcos区块链引擎已下线，请选用其他区块链引擎
+
+动态部署并发布Bcos合约
      */
     async DeployDynamicBcosContract(req, cb) {
         return this.request("DeployDynamicBcosContract", req, cb);
+    }
+    /**
+     * 获取fabric最新交易列表
+     */
+    async GetLatestTransactionList(req, cb) {
+        return this.request("GetLatestTransactionList", req, cb);
     }
     /**
      * 下载用户证书
@@ -130,7 +146,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("QueryChainMakerDemoTransaction", req, cb);
     }
     /**
-     * 获取最新交易列表
+     * 获取最新交易列表（已废弃）
      */
     async GetLatesdTransactionList(req, cb) {
         return this.request("GetLatesdTransactionList", req, cb);
@@ -196,7 +212,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("SrvInvoke", req, cb);
     }
     /**
-     * Bcos分页查询当前群组的交易信息列表
+     * Bcos区块链引擎已下线，请选用其他区块链引擎
+
+Bcos分页查询当前群组的交易信息列表
      */
     async GetBcosTransList(req, cb) {
         return this.request("GetBcosTransList", req, cb);

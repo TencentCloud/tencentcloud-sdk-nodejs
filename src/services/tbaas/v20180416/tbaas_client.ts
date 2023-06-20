@@ -58,6 +58,7 @@ import {
   QueryChainMakerTransactionResponse,
   DownloadUserCertRequest,
   GetClusterSummaryResponse,
+  GetLatestTransactionListRequest,
   PeerSet,
   ChainMakerTransactionResult,
   CreateChaincodeAndInstallForUserRequest,
@@ -86,11 +87,12 @@ import {
   GetChannelListForUserResponse,
   QueryChainMakerContractResponse,
   GetBcosTransByHashRequest,
+  QueryChainMakerTransactionRequest,
   GetChaincodeCompileLogForUserResponse,
   DeployDynamicBcosContractRequest,
   InvokeChainMakerContractRequest,
   GetBcosTransListResponse,
-  QueryChainMakerTransactionRequest,
+  GetLatestTransactionListResponse,
   BcosBlockObj,
   ChannelDetailForUser,
   QueryRequest,
@@ -112,8 +114,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 执行Bcos交易，支持动态部署的合约
-   */
+     * Bcos区块链引擎已下线，请选用其他区块链引擎
+
+执行Bcos交易，支持动态部署的合约
+     */
   async InvokeBcosTrans(
     req: InvokeBcosTransRequest,
     cb?: (error: string, rep: InvokeBcosTransResponse) => void
@@ -132,8 +136,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 使用块高查询Bcos区块信息
-   */
+     * Bcos区块链引擎已下线，请选用其他区块链引擎
+
+使用块高查询Bcos区块信息
+     */
   async GetBcosBlockByNumber(
     req: GetBcosBlockByNumberRequest,
     cb?: (error: string, rep: GetBcosBlockByNumberResponse) => void
@@ -162,8 +168,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * Bcos根据交易哈希查看交易详细信息
-   */
+     * Bcos区块链引擎已下线，请选用其他区块链引擎
+
+Bcos根据交易哈希查看交易详细信息
+     */
   async GetBcosTransByHash(
     req: GetBcosTransByHashRequest,
     cb?: (error: string, rep: GetBcosTransByHashResponse) => void
@@ -182,8 +190,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * Bcos分页查询当前群组下的区块列表
-   */
+     * Bcos区块链引擎已下线，请选用其他区块链引擎
+
+Bcos分页查询当前群组下的区块列表
+     */
   async GetBcosBlockList(
     req: GetBcosBlockListRequest,
     cb?: (error: string, rep: GetBcosBlockListResponse) => void
@@ -242,13 +252,25 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 动态部署并发布Bcos合约
-   */
+     * Bcos区块链引擎已下线，请选用其他区块链引擎
+
+动态部署并发布Bcos合约
+     */
   async DeployDynamicBcosContract(
     req: DeployDynamicBcosContractRequest,
     cb?: (error: string, rep: DeployDynamicBcosContractResponse) => void
   ): Promise<DeployDynamicBcosContractResponse> {
     return this.request("DeployDynamicBcosContract", req, cb)
+  }
+
+  /**
+   * 获取fabric最新交易列表
+   */
+  async GetLatestTransactionList(
+    req: GetLatestTransactionListRequest,
+    cb?: (error: string, rep: GetLatestTransactionListResponse) => void
+  ): Promise<GetLatestTransactionListResponse> {
+    return this.request("GetLatestTransactionList", req, cb)
   }
 
   /**
@@ -282,7 +304,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取最新交易列表
+   * 获取最新交易列表（已废弃）
    */
   async GetLatesdTransactionList(
     req: GetLatesdTransactionListRequest,
@@ -392,8 +414,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * Bcos分页查询当前群组的交易信息列表
-   */
+     * Bcos区块链引擎已下线，请选用其他区块链引擎
+
+Bcos分页查询当前群组的交易信息列表
+     */
   async GetBcosTransList(
     req: GetBcosTransListRequest,
     cb?: (error: string, rep: GetBcosTransListResponse) => void

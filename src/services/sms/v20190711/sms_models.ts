@@ -479,7 +479,7 @@ export interface SendSmsResponse {
   /**
    * 短信发送状态。
    */
-  SendStatusSet: Array<SendStatus>
+  SendStatusSet?: Array<SendStatus>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -530,7 +530,7 @@ export interface SendSmsRequest {
    */
   ExtendCode?: string
   /**
-   * 用户的 session 内容，可以携带用户侧 ID 等上下文信息，server 会原样返回。
+   * 用户的 session 内容，可以携带用户侧 ID 等上下文信息，server 会原样返回。注意长度需小于512字节。
    */
   SessionContext?: string
   /**

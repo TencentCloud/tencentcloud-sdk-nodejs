@@ -20,13 +20,17 @@ import { ClientConfig } from "../../../common/interface"
 import {
   DescribeDomainAssetsResponse,
   DescribeDbAssetInfoResponse,
-  DescribeDbAssetsRequest,
+  CreateRiskCenterScanTaskRequest,
   DescribeScanReportListRequest,
   DescribeRiskCenterAssetViewVULRiskListRequest,
+  TaskCenterWeakPwdRiskInputParam,
   CreateDomainAndIpRequest,
   DomainAssetVO,
+  TaskCenterCFGRiskInputParam,
+  TaskCenterVulRiskInputParam,
   DescribeVpcAssetsResponse,
   FilterDataObject,
+  DescribeDbAssetsRequest,
   CVMAssetVO,
   DescribeScanReportListResponse,
   DescribeClusterPodAssetsRequest,
@@ -37,18 +41,21 @@ import {
   Vpc,
   DescribeRiskCenterAssetViewVULRiskListResponse,
   DescribeCVMAssetsRequest,
+  TaskAdvanceCFG,
   DBAssetVO,
   ScanTaskInfo,
   SubnetAsset,
-  Tag,
+  CreateRiskCenterScanTaskResponse,
   DescribeRiskCenterAssetViewPortRiskListResponse,
   DescribeSubnetAssetsResponse,
   DescribeDbAssetInfoRequest,
   DescribeRiskCenterAssetViewPortRiskListRequest,
   DescribeCVMAssetsResponse,
   DescribeVpcAssetsRequest,
+  TaskAssetObject,
   Filter,
   DbAssetInfo,
+  Tag,
   IpAssetListVO,
   AssetViewVULRisk,
   DescribeClusterPodAssetsResponse,
@@ -191,6 +198,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeRiskCenterAssetViewPortRiskListResponse) => void
   ): Promise<DescribeRiskCenterAssetViewPortRiskListResponse> {
     return this.request("DescribeRiskCenterAssetViewPortRiskList", req, cb)
+  }
+
+  /**
+   * 创建风险中心扫描任务
+   */
+  async CreateRiskCenterScanTask(
+    req: CreateRiskCenterScanTaskRequest,
+    cb?: (error: string, rep: CreateRiskCenterScanTaskResponse) => void
+  ): Promise<CreateRiskCenterScanTaskResponse> {
+    return this.request("CreateRiskCenterScanTask", req, cb)
   }
 
   /**

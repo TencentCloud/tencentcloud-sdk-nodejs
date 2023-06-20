@@ -138,6 +138,16 @@ it("csip.v20221121.DescribeRiskCenterAssetViewPortRiskList", async function () {
     }
 })
 
+it("csip.v20221121.CreateRiskCenterScanTask", async function () {
+    try {
+       const data = await client.CreateRiskCenterScanTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("csip.v20221121.DescribeDbAssets", async function () {
     try {
        const data = await client.DescribeDbAssets({})

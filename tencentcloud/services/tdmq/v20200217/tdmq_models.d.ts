@@ -613,17 +613,33 @@ export interface ModifyClusterResponse {
     RequestId?: string;
 }
 /**
- * VPC配置信息
+ * SendRocketMQMessage请求参数结构体
  */
-export interface VpcConfig {
+export interface SendRocketMQMessageRequest {
     /**
-     * vpc的id
+     * 集群id
      */
-    VpcId: string;
+    ClusterId: string;
     /**
-     * 子网id
+     * 命名空间
      */
-    SubnetId: string;
+    NamespaceId: string;
+    /**
+     * topic名称
+     */
+    TopicName: string;
+    /**
+     * 信息内容
+     */
+    MsgBody: string;
+    /**
+     * 消息key信息
+     */
+    MsgKey?: string;
+    /**
+     * 消息tag信息
+     */
+    MsgTag?: string;
 }
 /**
  * RabbitMQ专享版虚拟机
@@ -1219,6 +1235,24 @@ export interface RocketMQGroup {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     RetryMaxTimes?: number;
+}
+/**
+ * SendRocketMQMessage返回参数结构体
+ */
+export interface SendRocketMQMessageResponse {
+    /**
+     * 发送结果
+     */
+    Result: boolean;
+    /**
+     * 消息ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MsgId: string;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * AMQP集群近期使用量
@@ -3821,6 +3855,19 @@ export interface SendMsgResponse {
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * VPC配置信息
+ */
+export interface VpcConfig {
+    /**
+     * vpc的id
+     */
+    VpcId: string;
+    /**
+     * 子网id
+     */
+    SubnetId: string;
 }
 /**
  * RocketMQ近期使用量

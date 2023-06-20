@@ -23,7 +23,12 @@ export interface ImportSnapshotsResponse {
    * TaskId由 AppInstanceId-taskId 组成，以区分不同集群的任务
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TaskId: string
+  TaskId?: string
+  /**
+   * ApplicationId由 AppInstanceId-applicationId 组成，以区分不同集群的申请
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ApplicationId?: string
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -278,11 +283,11 @@ export interface DescribeTablesResponse {
   /**
    * 表格数量
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 表格详情结果列表
    */
-  TableInfos: Array<TableInfoNew>
+  TableInfos?: Array<TableInfoNew>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -315,11 +320,11 @@ export interface UpdateApplyResponse {
    * 已更新的申请单列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ApplyResults: Array<ApplyResult>
+  ApplyResults?: Array<ApplyResult>
   /**
    * 更新数量
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -463,11 +468,11 @@ export interface SetTableDataFlowResponse {
   /**
    * 表格数据订阅创建结果数量
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 表格数据订阅创建结果列表
    */
-  TableResults: Array<TableResultNew>
+  TableResults?: Array<TableResultNew>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1845,11 +1850,11 @@ export interface SetTableIndexResponse {
   /**
    * 表格分布式索引创建结果数量
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 表格分布式索引创建结果列表
    */
-  TableResults: Array<TableResultNew>
+  TableResults?: Array<TableResultNew>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2522,11 +2527,11 @@ export interface EnableRestProxyResponse {
   /**
    * RestProxy的状态，0为关闭，1为开启中，2为开启，3为关闭中
    */
-  RestProxyStatus: number
+  RestProxyStatus?: number
   /**
    * TaskId由 AppInstanceId-taskId 组成，以区分不同集群的任务
    */
-  TaskId: string
+  TaskId?: string
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2628,7 +2633,7 @@ export interface DescribeTablesRequest {
    */
   TableGroupIds?: Array<string>
   /**
-   * 待查询表格信息列表
+   * 待查询表格信息列表，用户不用关注，过滤请使用filter
    */
   SelectedTables?: Array<SelectedTableInfoNew>
   /**
@@ -2682,11 +2687,11 @@ export interface DeleteTableDataFlowResponse {
   /**
    * 删除表格分布式索引结果数量
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 删除表格分布式索引结果列表
    */
-  TableResults: Array<TableResultNew>
+  TableResults?: Array<TableResultNew>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3011,7 +3016,7 @@ export interface MergeTablesDataResponse {
   /**
    * 合服结果集
    */
-  Results: Array<MergeTableResult>
+  Results?: Array<MergeTableResult>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

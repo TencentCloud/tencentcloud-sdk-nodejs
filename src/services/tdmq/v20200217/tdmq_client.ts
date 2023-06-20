@@ -44,7 +44,7 @@ import {
   BindCluster,
   Sort,
   ModifyClusterResponse,
-  VpcConfig,
+  SendRocketMQMessageRequest,
   RabbitMQPrivateVirtualHost,
   RocketMQVipInstance,
   RabbitMQVipInstance,
@@ -63,6 +63,7 @@ import {
   CreateAMQPClusterRequest,
   DeleteRocketMQGroupRequest,
   RocketMQGroup,
+  SendRocketMQMessageResponse,
   AMQPClusterRecentStats,
   DescribeRocketMQVipInstanceDetailRequest,
   RabbitMQClusterWhiteListInfo,
@@ -174,6 +175,7 @@ import {
   DescribeRocketMQClustersResponse,
   DeleteRolesResponse,
   SendMsgResponse,
+  VpcConfig,
   RocketMQClusterRecentStats,
   ModifyRocketMQTopicRequest,
   RocketMQClusterInfo,
@@ -1487,6 +1489,16 @@ BatchReceivePolicy 的接口会一次性返回多条消息：
     cb?: (error: string, rep: SendMsgResponse) => void
   ): Promise<SendMsgResponse> {
     return this.request("SendMsg", req, cb)
+  }
+
+  /**
+   * 发送RocketMQ消息
+   */
+  async SendRocketMQMessage(
+    req: SendRocketMQMessageRequest,
+    cb?: (error: string, rep: SendRocketMQMessageResponse) => void
+  ): Promise<SendRocketMQMessageResponse> {
+    return this.request("SendRocketMQMessage", req, cb)
   }
 
   /**
