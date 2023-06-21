@@ -568,6 +568,16 @@ it("mariadb.v20170312.CopyAccountPrivileges", async function () {
     }
 })
 
+it("mariadb.v20170312.DescribeDBTmpInstances", async function () {
+    try {
+       const data = await client.DescribeDBTmpInstances({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mariadb.v20170312.IsolateHourDBInstance", async function () {
     try {
        const data = await client.IsolateHourDBInstance({})

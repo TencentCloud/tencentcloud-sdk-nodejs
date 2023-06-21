@@ -438,6 +438,16 @@ it("ess.v20201111.UploadFiles", async function () {
     }
 })
 
+it("ess.v20201111.DescribeFlowComponents", async function () {
+    try {
+       const data = await client.DescribeFlowComponents({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ess.v20201111.CreateFlowReminds", async function () {
     try {
        const data = await client.CreateFlowReminds({})

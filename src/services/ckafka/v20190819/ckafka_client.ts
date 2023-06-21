@@ -122,7 +122,7 @@ import {
   RenewCkafkaInstanceResponse,
   DescribeACLRequest,
   CreateUserResponse,
-  DescribeDatahubTaskRes,
+  BrokerTopicData,
   CreatePartitionResponse,
   MongoDBConnectParam,
   MySQLParam,
@@ -177,6 +177,7 @@ import {
   TopicSubscribeGroup,
   DescribeUserResponse,
   DtsConnectParam,
+  DescribeDatahubTaskRes,
   DorisModifyConnectParam,
   FieldParam,
   DescribeGroupInfoResponse,
@@ -756,9 +757,8 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 获取Topic流量排行，消费者流量排行
-
-     */
+   * 获取Topic流量排行，消费者流量排行
+   */
   async DescribeTopicFlowRanking(
     req: DescribeTopicFlowRankingRequest,
     cb?: (error: string, rep: DescribeTopicFlowRankingResponse) => void

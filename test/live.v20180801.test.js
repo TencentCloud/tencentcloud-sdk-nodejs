@@ -768,9 +768,9 @@ it("live.v20180801.DescribeStreamPlayInfoList", async function () {
     }
 })
 
-it("live.v20180801.DescribeLiveTranscodeRules", async function () {
+it("live.v20180801.DescribeLivePullStreamTaskStatus", async function () {
     try {
-       const data = await client.DescribeLiveTranscodeRules({})
+       const data = await client.DescribeLivePullStreamTaskStatus({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1421,6 +1421,16 @@ it("live.v20180801.CreateLiveTranscodeTemplate", async function () {
 it("live.v20180801.DescribeLiveCerts", async function () {
     try {
        const data = await client.DescribeLiveCerts({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("live.v20180801.DescribeLiveTranscodeRules", async function () {
+    try {
+       const data = await client.DescribeLiveTranscodeRules({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

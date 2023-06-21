@@ -626,6 +626,11 @@ export interface AgentDealNewElem {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     UpdateTime: string;
+    /**
+     * 资源id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ResourceIds?: Array<string>;
 }
 /**
  * DescribeAgentClients请求参数结构体

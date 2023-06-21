@@ -173,7 +173,6 @@ export declare class Client extends AbstractClient {
     CheckCdcCluster(req: CheckCdcClusterRequest, cb?: (error: string, rep: CheckCdcClusterResponse) => void): Promise<CheckCdcClusterResponse>;
     /**
      * 获取Topic流量排行，消费者流量排行
-
      */
     DescribeTopicFlowRanking(req: DescribeTopicFlowRankingRequest, cb?: (error: string, rep: DescribeTopicFlowRankingResponse) => void): Promise<DescribeTopicFlowRankingResponse>;
     /**

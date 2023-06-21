@@ -371,5 +371,11 @@ httpProfile.setEndpoint("file.test.ess.tencent.cn");
     async DescribeFlowDetailInfo(req, cb) {
         return this.request("DescribeFlowDetailInfo", req, cb);
     }
+    /**
+     * 查询流程填写控件内容，可以根据流程Id查询该流程相关联的填写控件信息
+     */
+    async ChannelDescribeFlowComponents(req, cb) {
+        return this.request("ChannelDescribeFlowComponents", req, cb);
+    }
 }
 exports.Client = Client;

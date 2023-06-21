@@ -448,6 +448,31 @@ export interface CreateIntegrationEmployeesRequest {
     Agent?: Agent;
 }
 /**
+ * 解除协议的签署人，如不指定，默认使用待解除流程（即原流程）中的签署人。
+注意：不支持更换C端（个人身份类型）签署人，如果原流程中含有C端签署人，默认使用原流程中的该C端签署人。
+ */
+export interface ReleasedApprover {
+    /**
+     * 签署人姓名，最大长度50个字符
+  
+     */
+    Name: string;
+    /**
+     * 签署人手机号
+     */
+    Mobile: string;
+    /**
+     * 要替换的参与人在原合同参与人列表中的签署人编号,通过DescribeFlowInfo 接口获取（即FlowDetailInfos. FlowApproverInfos 结构中的ReceiptId ）
+     */
+    RelievedApproverReceiptId: string;
+    /**
+     * 指定签署人类型，目前仅支持
+  ORGANIZATION-企业
+  ENTERPRISESERVER-企业静默签
+     */
+    ApproverType?: string;
+}
+/**
  * DescribeIntegrationRoles请求参数结构体
  */
 export interface DescribeIntegrationRolesRequest {
@@ -788,6 +813,20 @@ export interface DescribeFlowTemplatesRequest {
     GenerateSource?: number;
 }
 /**
+ * DescribeFlowComponents返回参数结构体
+ */
+export interface DescribeFlowComponentsResponse {
+    /**
+     * 流程关联的填写控件信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RecipientComponentInfos?: Array<RecipientComponentInfo>;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * DescribeFlowEvidenceReport返回参数结构体
  */
 export interface DescribeFlowEvidenceReportResponse {
@@ -828,6 +867,31 @@ export interface CallbackInfo {
      * 回调验签token
      */
     CallbackToken?: string;
+}
+/**
+ * 参与方填写控件信息
+ */
+export interface RecipientComponentInfo {
+    /**
+     * 参与方Id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RecipientId?: string;
+    /**
+     * 参与方填写状态
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RecipientFillStatus?: string;
+    /**
+     * 是否发起方
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IsPromoter?: boolean;
+    /**
+     * 填写控件内容
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Components?: Array<FilledComponent>;
 }
 /**
  * 企业模板的信息结构
@@ -2054,6 +2118,23 @@ export interface DescribeFileUrlsResponse {
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * DescribeFlowComponents请求参数结构体
+ */
+export interface DescribeFlowComponentsRequest {
+    /**
+     * 操作者信息
+     */
+    Operator: UserInfo;
+    /**
+     * 电子签流程的Id
+     */
+    FlowId: string;
+    /**
+     * 应用相关信息
+     */
+    Agent?: Agent;
 }
 /**
  * CreateIntegrationDepartment请求参数结构体
@@ -3509,7 +3590,11 @@ export interface Component {
   5 Gaps:： 字符串类型，仅在Format为“yyyy m d”时起作用，格式为用逗号分开的两个整数，例如”2,2”，两个数字分别是日期格式的前后两个空隙中的空格个数
   如果extra参数为空，默认为”yyyy年m月d日”格式的居中日期
   特别地，如果extra中Format字段为空或无法被识别，则extra参数会被当作默认值处理（Font，FontSize，Gaps和FontAlign都不会起效）
-  参数样例：    "ComponentExtra": "{\"Format\":“yyyy m d”,\"FontSize\":12,\"Gaps\":\"2,2\", \"FontAlign\":\"Right\"}",
+  参数样例：    "ComponentExtra": "{\"Format\":“yyyy m d”,\"FontSize\":12,\"Gaps\":\"2,2\", \"FontAlign\":\"Right\"}"
+  
+  ComponentType为SIGN_SEAL类型时，支持以下参数：
+  1.PageRanges：PageRange的数组，通过PageRanges属性设置该印章在PDF所有页面上盖章（适用于标书在所有页面盖章的情况）
+  参数样例： "ComponentExtra":"{\"PageRanges\":[\"PageRange\":{\"BeginPage\":1,\"EndPage\":-1}]}"
      */
     ComponentExtra?: string;
     /**
@@ -4148,29 +4233,39 @@ export interface DescribeUserAutoSignStatusRequest {
     UserInfo: UserThreeFactor;
 }
 /**
- * 解除协议的签署人，如不指定，默认使用待解除流程（即原流程）中的签署人。
-注意：不支持更换C端（个人身份类型）签署人，如果原流程中含有C端签署人，默认使用原流程中的该C端签署人。
+ * 文档内的填充控件返回结构体，返回控件的基本信息和填写内容值
  */
-export interface ReleasedApprover {
+export interface FilledComponent {
     /**
-     * 签署人姓名，最大长度50个字符
-  
+     * 控件Id
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Name: string;
+    ComponentId?: string;
     /**
-     * 签署人手机号
+     * 控件名称
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Mobile: string;
+    ComponentName?: string;
     /**
-     * 要替换的参与人在原合同参与人列表中的签署人编号,通过DescribeFlowInfo 接口获取（即FlowDetailInfos. FlowApproverInfos 结构中的ReceiptId ）
+     * 控件填写状态；0-未填写；1-已填写
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    RelievedApproverReceiptId: string;
+    ComponentFillStatus?: string;
     /**
-     * 指定签署人类型，目前仅支持
-  ORGANIZATION-企业
-  ENTERPRISESERVER-企业静默签
+     * 控件填写内容
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    ApproverType?: string;
+    ComponentValue?: string;
+    /**
+     * 控件所属参与方Id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ComponentRecipientId?: string;
+    /**
+     * 图片填充控件下载链接，如果是图片填充控件时，这里返回图片的下载链接。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ImageUrl?: string;
 }
 /**
  * 流程信息摘要

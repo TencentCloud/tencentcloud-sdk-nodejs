@@ -1112,7 +1112,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（DeleteNotebookSession）用于删除notebook livy session
+   * 本接口（DeleteNotebookSession）用于删除交互式session（notebook）
    */
   async DeleteNotebookSession(
     req: DeleteNotebookSessionRequest,

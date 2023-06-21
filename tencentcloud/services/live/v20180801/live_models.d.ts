@@ -1351,6 +1351,19 @@ export interface DescribeTranscodeTaskNumResponse {
     RequestId?: string;
 }
 /**
+ * DescribeLivePullStreamTaskStatus返回参数结构体
+ */
+export interface DescribeLivePullStreamTaskStatusResponse {
+    /**
+     * 任务状态信息。
+     */
+    TaskStatusInfo: TaskStatusInfo;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * ModifyLiveStreamMonitor返回参数结构体
  */
 export interface ModifyLiveStreamMonitorResponse {
@@ -3889,6 +3902,13 @@ export interface StreamOnlineInfo {
      * 推流域名。
      */
     DomainName: string;
+    /**
+     * 流是否推送到延播。
+  0 - 无延播，
+  1 - 有延播。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PushToDelay?: number;
 }
 /**
  * 每个域名的统计信息。
@@ -4320,6 +4340,15 @@ export interface DescribeLivePushAuthKeyResponse {
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * DescribeLivePullStreamTaskStatus请求参数结构体
+ */
+export interface DescribeLivePullStreamTaskStatusRequest {
+    /**
+     * 任务 ID。
+     */
+    TaskId: string;
 }
 /**
  * RestartLivePullStreamTask请求参数结构体
@@ -6246,6 +6275,43 @@ export interface DescribeAllStreamPlayInfoListResponse {
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * 直播拉流任务状态信息。
+ */
+export interface TaskStatusInfo {
+    /**
+     * 当前使用的源 URL。
+     */
+    FileUrl: string;
+    /**
+     * 点播源任务的轮播次数。
+     */
+    LoopedTimes: number;
+    /**
+     * 点播源的播放偏移，单位：秒。
+     */
+    OffsetTime: number;
+    /**
+     * 最新心跳上报时间。UTC时间，例如：
+  2022-02-11T10:00:00Z。
+  注意：UTC时间与北京时间相差八小时。
+     */
+    ReportTime: string;
+    /**
+     * 实际运行状态：
+  active - 活跃，
+  inactive - 不活跃。
+     */
+    RunStatus: string;
+    /**
+     * 点播源的文件时长，单位：秒。
+     */
+    FileDuration: number;
+    /**
+     * 下一进度点播文件 URL。
+     */
+    NextFileUrl: string;
 }
 /**
  * DescribeVisitTopSumInfoList返回参数结构体

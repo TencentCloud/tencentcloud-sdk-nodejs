@@ -344,7 +344,7 @@ export declare class Client extends AbstractClient {
      */
     ModifyUser(req: ModifyUserRequest, cb?: (error: string, rep: ModifyUserResponse) => void): Promise<ModifyUserResponse>;
     /**
-     * 本接口（DeleteNotebookSession）用于删除notebook livy session
+     * 本接口（DeleteNotebookSession）用于删除交互式session（notebook）
      */
     DeleteNotebookSession(req: DeleteNotebookSessionRequest, cb?: (error: string, rep: DeleteNotebookSessionResponse) => void): Promise<DeleteNotebookSessionResponse>;
     /**

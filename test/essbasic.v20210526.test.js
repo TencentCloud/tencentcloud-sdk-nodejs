@@ -448,4 +448,14 @@ it("essbasic.v20210526.DescribeFlowDetailInfo", async function () {
     }
 })
 
+it("essbasic.v20210526.ChannelDescribeFlowComponents", async function () {
+    try {
+       const data = await client.ChannelDescribeFlowComponents({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 })

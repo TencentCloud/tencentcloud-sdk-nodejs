@@ -32,11 +32,11 @@ export interface DescribeLibrariesResponse {
   /**
    * 媒体库列表
    */
-  List: Array<Library>
+  List?: Array<Library>
   /**
    * 总数
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -508,7 +508,7 @@ export interface CreateLibraryResponse {
   /**
    * 媒体库 ID
    */
-  LibraryId: string
+  LibraryId?: string
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -570,21 +570,21 @@ export interface CreateLibraryRequest {
    */
   Name: string
   /**
-   * 存储桶全名，新建后不可更改
-   */
-  BucketName: string
-  /**
-   * 存储桶所在地域，新建后不可更改
-   */
-  BucketRegion: string
-  /**
-   * 媒体库配置项，部分参数新建后不可更改
-   */
-  LibraryExtension: LibraryExtension
-  /**
    * 备注，最多 250 个字符
    */
   Remark?: string
+  /**
+   * 存储桶全名，新建后不可更改。当前版本不再支持指定存储桶。
+   */
+  BucketName?: string
+  /**
+   * 存储桶所在地域，新建后不可更改。当前版本不再支持指定存储桶所在地域。
+   */
+  BucketRegion?: string
+  /**
+   * 媒体库配置项，部分参数新建后不可更改
+   */
+  LibraryExtension?: LibraryExtension
 }
 
 /**

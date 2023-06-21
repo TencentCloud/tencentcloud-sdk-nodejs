@@ -535,10 +535,10 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
         return this.request("DescribeStreamPlayInfoList", req, cb);
     }
     /**
-     * 获取转码规则列表
+     * 查询直播拉流任务状态信息。
      */
-    async DescribeLiveTranscodeRules(req, cb) {
-        return this.request("DescribeLiveTranscodeRules", req, cb);
+    async DescribeLivePullStreamTaskStatus(req, cb) {
+        return this.request("DescribeLivePullStreamTaskStatus", req, cb);
     }
     /**
      * 获取单个截图模板。
@@ -982,6 +982,12 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
      */
     async DescribeLiveCerts(req, cb) {
         return this.request("DescribeLiveCerts", req, cb);
+    }
+    /**
+     * 获取转码规则列表
+     */
+    async DescribeLiveTranscodeRules(req, cb) {
+        return this.request("DescribeLiveTranscodeRules", req, cb);
     }
     /**
      * 启用状态为停用的直播域名。

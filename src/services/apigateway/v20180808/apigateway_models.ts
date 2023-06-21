@@ -1990,33 +1990,33 @@ export interface AvailableApiInfo {
   /**
    * API ID。
    */
-  ApiId: string
+  ApiId?: string
   /**
    * API名称。
    */
-  ApiName: string
+  ApiName?: string
   /**
    * API类型。
    */
-  ApiType: string
+  ApiType?: string
   /**
    * API路径。
    */
-  Path: string
+  Path?: string
   /**
    * API方法。
    */
-  Method: string
+  Method?: string
   /**
    * API是否绑定其他插件。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  AttachedOtherPlugin: boolean
+  AttachedOtherPlugin?: boolean
   /**
    * API是否绑定当前插件。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  IsAttached: boolean
+  IsAttached?: boolean
 }
 
 /**
@@ -4640,40 +4640,40 @@ export interface InstanceInfo {
   /**
    * 独享实例唯一id
    */
-  InstanceId: string
+  InstanceId?: string
   /**
    * 独享实例name
    */
-  InstanceName: string
+  InstanceName?: string
   /**
    * 独享实例描述
    */
-  InstanceDescription: string
+  InstanceDescription?: string
   /**
    * 独享实例计费类型
    */
-  InstanceChargeType: string
+  InstanceChargeType?: string
   /**
    * 独享实例类型
    */
-  InstanceType: string
+  InstanceType?: string
   /**
    * 独享实例状态
    */
-  InstanceState: string
+  InstanceState?: string
   /**
    * 独享实例创建时间
    */
-  CreatedTime: string
+  CreatedTime?: string
   /**
    * 订单号
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DealName: string
+  DealName?: string
   /**
    * 资源ID同唯一id
    */
-  ResourceId: string
+  ResourceId?: string
 }
 
 /**

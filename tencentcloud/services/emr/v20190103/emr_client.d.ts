@@ -102,7 +102,7 @@ export declare class Client extends AbstractClient {
      */
     ModifyResourceScheduleConfig(req: ModifyResourceScheduleConfigRequest, cb?: (error: string, rep: ModifyResourceScheduleConfigResponse) => void): Promise<ModifyResourceScheduleConfigResponse>;
     /**
-     * 用于启动或停止监控或服务
+     * 用于启停服务 重启服务等功能
      */
     StartStopServiceOrMonitor(req: StartStopServiceOrMonitorRequest, cb?: (error: string, rep: StartStopServiceOrMonitorResponse) => void): Promise<StartStopServiceOrMonitorResponse>;
     /**

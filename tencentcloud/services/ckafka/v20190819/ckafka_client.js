@@ -275,7 +275,6 @@ class Client extends abstract_client_1.AbstractClient {
     }
     /**
      * 获取Topic流量排行，消费者流量排行
-
      */
     async DescribeTopicFlowRanking(req, cb) {
         return this.request("DescribeTopicFlowRanking", req, cb);

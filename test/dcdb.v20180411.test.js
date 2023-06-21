@@ -298,9 +298,9 @@ it("dcdb.v20180411.ModifyDBInstancesProject", async function () {
     }
 })
 
-it("dcdb.v20180411.CreateTmpDCDBInstance", async function () {
+it("dcdb.v20180411.DescribeDCDBInstanceDetail", async function () {
     try {
-       const data = await client.CreateTmpDCDBInstance({})
+       const data = await client.DescribeDCDBInstanceDetail({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -548,6 +548,16 @@ it("dcdb.v20180411.CopyAccountPrivileges", async function () {
     }
 })
 
+it("dcdb.v20180411.DescribeDBTmpInstances", async function () {
+    try {
+       const data = await client.DescribeDBTmpInstances({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dcdb.v20180411.DescribeDCDBShards", async function () {
     try {
        const data = await client.DescribeDCDBShards({})
@@ -668,9 +678,9 @@ it("dcdb.v20180411.CloneAccount", async function () {
     }
 })
 
-it("dcdb.v20180411.DescribeDCDBInstanceDetail", async function () {
+it("dcdb.v20180411.CreateTmpDCDBInstance", async function () {
     try {
-       const data = await client.DescribeDCDBInstanceDetail({})
+       const data = await client.CreateTmpDCDBInstance({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

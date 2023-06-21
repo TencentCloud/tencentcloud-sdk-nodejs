@@ -296,7 +296,7 @@ export interface DescribeApmInstancesResponse {
    * apm实例列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Instances: Array<ApmInstanceDetail>
+  Instances?: Array<ApmInstanceDetail>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -774,6 +774,10 @@ export interface DescribeApmInstancesRequest {
    * 是否查询官方demo实例
    */
   DemoInstanceFlag?: number
+  /**
+   * 是否查询全地域实例
+   */
+  AllRegionsFlag?: number
 }
 
 /**

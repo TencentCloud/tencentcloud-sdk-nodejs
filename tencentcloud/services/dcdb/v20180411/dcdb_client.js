@@ -205,10 +205,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyDBInstancesProject", req, cb);
     }
     /**
-     * 回档TDSQL实例
+     * 本接口（DescribeDCDBInstanceDetail）用于获取TDSQL实例详情
      */
-    async CreateTmpDCDBInstance(req, cb) {
-        return this.request("CreateTmpDCDBInstance", req, cb);
+    async DescribeDCDBInstanceDetail(req, cb) {
+        return this.request("DescribeDCDBInstanceDetail", req, cb);
     }
     /**
      * 已废弃接口
@@ -364,6 +364,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CopyAccountPrivileges", req, cb);
     }
     /**
+     * 本接口（DescribeDBTmpInstances）用于获取实例回档生成的临时实例
+     */
+    async DescribeDBTmpInstances(req, cb) {
+        return this.request("DescribeDBTmpInstances", req, cb);
+    }
+    /**
      * 本接口（DescribeDCDBShards）用于查询云数据库实例的分片信息。
      */
     async DescribeDCDBShards(req, cb) {
@@ -436,10 +442,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CloneAccount", req, cb);
     }
     /**
-     * 本接口（DescribeDCDBInstanceDetail）用于获取TDSQL实例详情
+     * 回档TDSQL实例
      */
-    async DescribeDCDBInstanceDetail(req, cb) {
-        return this.request("DescribeDCDBInstanceDetail", req, cb);
+    async CreateTmpDCDBInstance(req, cb) {
+        return this.request("CreateTmpDCDBInstance", req, cb);
     }
     /**
      * 本接口（ModifyDBInstanceName）用于修改实例名字

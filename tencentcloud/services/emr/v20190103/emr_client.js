@@ -168,7 +168,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyResourceScheduleConfig", req, cb);
     }
     /**
-     * 用于启动或停止监控或服务
+     * 用于启停服务 重启服务等功能
      */
     async StartStopServiceOrMonitor(req, cb) {
         return this.request("StartStopServiceOrMonitor", req, cb);

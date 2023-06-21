@@ -79,6 +79,7 @@ import {
   StopRecordTaskResponse,
   CommonMixControlParams,
   DescribeTranscodeTaskNumResponse,
+  DescribeLivePullStreamTaskStatusResponse,
   ModifyLiveStreamMonitorResponse,
   DeleteLivePadRuleResponse,
   DescribeLiveRecordTemplateRequest,
@@ -200,6 +201,7 @@ import {
   ModifyLiveCallbackTemplateResponse,
   DescribeLiveCallbackTemplatesResponse,
   DescribeLivePushAuthKeyResponse,
+  DescribeLivePullStreamTaskStatusRequest,
   RestartLivePullStreamTaskRequest,
   DelayInfo,
   DescribeLiveStreamMonitorRequest,
@@ -278,6 +280,7 @@ import {
   DescribeLiveTranscodeTemplatesResponse,
   DeleteLiveCallbackRuleRequest,
   DescribeAllStreamPlayInfoListResponse,
+  TaskStatusInfo,
   DescribeVisitTopSumInfoListResponse,
   TimeShiftBillData,
   HlsSpecialParam,
@@ -1212,13 +1215,13 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
   }
 
   /**
-   * 获取转码规则列表
+   * 查询直播拉流任务状态信息。
    */
-  async DescribeLiveTranscodeRules(
-    req: DescribeLiveTranscodeRulesRequest,
-    cb?: (error: string, rep: DescribeLiveTranscodeRulesResponse) => void
-  ): Promise<DescribeLiveTranscodeRulesResponse> {
-    return this.request("DescribeLiveTranscodeRules", req, cb)
+  async DescribeLivePullStreamTaskStatus(
+    req: DescribeLivePullStreamTaskStatusRequest,
+    cb?: (error: string, rep: DescribeLivePullStreamTaskStatusResponse) => void
+  ): Promise<DescribeLivePullStreamTaskStatusResponse> {
+    return this.request("DescribeLivePullStreamTaskStatus", req, cb)
   }
 
   /**
@@ -1922,6 +1925,16 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
     cb?: (error: string, rep: DescribeLiveCertsResponse) => void
   ): Promise<DescribeLiveCertsResponse> {
     return this.request("DescribeLiveCerts", req, cb)
+  }
+
+  /**
+   * 获取转码规则列表
+   */
+  async DescribeLiveTranscodeRules(
+    req: DescribeLiveTranscodeRulesRequest,
+    cb?: (error: string, rep: DescribeLiveTranscodeRulesResponse) => void
+  ): Promise<DescribeLiveTranscodeRulesResponse> {
+    return this.request("DescribeLiveTranscodeRules", req, cb)
   }
 
   /**

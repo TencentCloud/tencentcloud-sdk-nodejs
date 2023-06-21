@@ -38,6 +38,7 @@ import {
   CancelUserAutoSignEnableUrlResponse,
   BindEmployeeUserIdWithClientOpenIdResponse,
   CreateIntegrationEmployeesRequest,
+  ReleasedApprover,
   DescribeIntegrationRolesRequest,
   CreateFlowEvidenceReportRequest,
   StartFlowResponse,
@@ -51,8 +52,10 @@ import {
   Agent,
   FlowApproverDetail,
   DescribeFlowTemplatesRequest,
+  DescribeFlowComponentsResponse,
   DescribeFlowEvidenceReportResponse,
   CallbackInfo,
+  RecipientComponentInfo,
   TemplateInfo,
   CreateDocumentResponse,
   DescribeIntegrationEmployeesRequest,
@@ -95,6 +98,7 @@ import {
   Staff,
   CreateFlowEvidenceReportResponse,
   DescribeFileUrlsResponse,
+  DescribeFlowComponentsRequest,
   CreateIntegrationDepartmentRequest,
   GroupOrganization,
   DeleteIntegrationRoleUsersResponse,
@@ -173,7 +177,7 @@ import {
   CancelMultiFlowSignQRCodeResponse,
   CreateFlowResponse,
   DescribeUserAutoSignStatusRequest,
-  ReleasedApprover,
+  FilledComponent,
   FlowBrief,
   DescribeOrganizationGroupOrganizationsResponse,
   DescribeExtendedServiceAuthInfosResponse,
@@ -657,6 +661,16 @@ httpProfile.setEndpoint("file.test.ess.tencent.cn");<br/>
     cb?: (error: string, rep: UploadFilesResponse) => void
   ): Promise<UploadFilesResponse> {
     return this.request("UploadFiles", req, cb)
+  }
+
+  /**
+   * 查询流程填写控件内容，可以根据流程Id查询该流程相关联的填写控件信息
+   */
+  async DescribeFlowComponents(
+    req: DescribeFlowComponentsRequest,
+    cb?: (error: string, rep: DescribeFlowComponentsResponse) => void
+  ): Promise<DescribeFlowComponentsResponse> {
+    return this.request("DescribeFlowComponents", req, cb)
   }
 
   /**

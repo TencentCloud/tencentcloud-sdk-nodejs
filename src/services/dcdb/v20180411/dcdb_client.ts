@@ -20,7 +20,7 @@ import { ClientConfig } from "../../../common/interface"
 import {
   DescribeUserTasksResponse,
   InitDCDBInstancesResponse,
-  UpgradeDCDBInstanceResponse,
+  DescribeDBTmpInstancesRequest,
   DescribeAccountPrivilegesResponse,
   DescribeDatabasesRequest,
   ParamDesc,
@@ -42,6 +42,7 @@ import {
   DescribeDBSecurityGroupsResponse,
   CancelDcnJobResponse,
   DescribeFileDownloadUrlRequest,
+  UpgradeDCDBInstanceResponse,
   DescribeDBSyncModeResponse,
   DescribeProjectSecurityGroupsRequest,
   DescribeDCDBUpgradePriceResponse,
@@ -105,6 +106,7 @@ import {
   SwitchDBInstanceHARequest,
   DBParamValue,
   SpecConfigInfo,
+  TmpInstance,
   ModifyDBParametersRequest,
   DCDBInstanceInfo,
   ModifyDBInstanceSecurityGroupsRequest,
@@ -171,6 +173,7 @@ import {
   CreateDedicatedClusterDCDBInstanceResponse,
   UserTaskInfo,
   DatabaseProcedure,
+  DescribeDBTmpInstancesResponse,
   ModifyDBEncryptAttributesRequest,
   AddShardConfig,
   ModifyDBSyncModeRequest,
@@ -507,13 +510,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 回档TDSQL实例
+   * 本接口（DescribeDCDBInstanceDetail）用于获取TDSQL实例详情
    */
-  async CreateTmpDCDBInstance(
-    req: CreateTmpDCDBInstanceRequest,
-    cb?: (error: string, rep: CreateTmpDCDBInstanceResponse) => void
-  ): Promise<CreateTmpDCDBInstanceResponse> {
-    return this.request("CreateTmpDCDBInstance", req, cb)
+  async DescribeDCDBInstanceDetail(
+    req: DescribeDCDBInstanceDetailRequest,
+    cb?: (error: string, rep: DescribeDCDBInstanceDetailResponse) => void
+  ): Promise<DescribeDCDBInstanceDetailResponse> {
+    return this.request("DescribeDCDBInstanceDetail", req, cb)
   }
 
   /**
@@ -766,6 +769,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口（DescribeDBTmpInstances）用于获取实例回档生成的临时实例
+   */
+  async DescribeDBTmpInstances(
+    req: DescribeDBTmpInstancesRequest,
+    cb?: (error: string, rep: DescribeDBTmpInstancesResponse) => void
+  ): Promise<DescribeDBTmpInstancesResponse> {
+    return this.request("DescribeDBTmpInstances", req, cb)
+  }
+
+  /**
    * 本接口（DescribeDCDBShards）用于查询云数据库实例的分片信息。
    */
   async DescribeDCDBShards(
@@ -886,13 +899,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（DescribeDCDBInstanceDetail）用于获取TDSQL实例详情
+   * 回档TDSQL实例
    */
-  async DescribeDCDBInstanceDetail(
-    req: DescribeDCDBInstanceDetailRequest,
-    cb?: (error: string, rep: DescribeDCDBInstanceDetailResponse) => void
-  ): Promise<DescribeDCDBInstanceDetailResponse> {
-    return this.request("DescribeDCDBInstanceDetail", req, cb)
+  async CreateTmpDCDBInstance(
+    req: CreateTmpDCDBInstanceRequest,
+    cb?: (error: string, rep: CreateTmpDCDBInstanceResponse) => void
+  ): Promise<CreateTmpDCDBInstanceResponse> {
+    return this.request("CreateTmpDCDBInstance", req, cb)
   }
 
   /**

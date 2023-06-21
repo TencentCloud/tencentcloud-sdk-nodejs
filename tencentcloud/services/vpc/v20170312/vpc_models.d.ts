@@ -7989,7 +7989,7 @@ export interface AllocateAddressesRequest {
     InternetChargeType?: string;
     /**
      * EIP出带宽上限，单位：Mbps。
-  <ul style="margin:0"><li>已开通标准账户类型白名单的用户，可选值范围取决于EIP计费方式：<ul><li>BANDWIDTH_PACKAGE：1 Mbps 至 1000 Mbps</li>
+  <ul style="margin:0"><li>已开通标准账户类型白名单的用户，可选值范围取决于EIP计费方式：<ul><li>BANDWIDTH_PACKAGE：1 Mbps 至 2000 Mbps</li>
   <li>BANDWIDTH_POSTPAID_BY_HOUR：1 Mbps 至 100 Mbps</li>
   <li>BANDWIDTH_PREPAID_BY_MONTH：1 Mbps 至 200 Mbps</li>
   <li>TRAFFIC_POSTPAID_BY_HOUR：1 Mbps 至 100 Mbps</li></ul>默认值：1 Mbps。</li>
@@ -8004,6 +8004,8 @@ export interface AllocateAddressesRequest {
      * EIP类型。默认值：EIP。
   <ul style="margin:0"><li>已开通Anycast公网加速白名单的用户，可选值：<ul><li>AnycastEIP：加速IP，可参见 [Anycast 公网加速](https://cloud.tencent.com/document/product/644)</li></ul>注意：仅部分地域支持加速IP。</li></ul>
   <ul style="margin:0"><li>已开通精品IP白名单的用户，可选值：<ul><li>HighQualityEIP：精品IP</li></ul>注意：仅部分地域支持精品IP。</li></ul>
+  </ul>
+  <ul style="margin:0"><li>已开高防IP白名单的用户，可选值：<ul><li>AntiDDoSEIP：高防IP</li></ul>注意：仅部分地域支持高防IP。</li></ul>
      */
     AddressType?: string;
     /**
@@ -9174,11 +9176,11 @@ export interface DescribeTrafficPackagesResponse {
     /**
      * 按照条件查询出来的流量包数量
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 流量包信息
      */
-    TrafficPackageSet: Array<TrafficPackage>;
+    TrafficPackageSet?: Array<TrafficPackage>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -10336,11 +10338,11 @@ export interface AllocateAddressesResponse {
     /**
      * 申请到的 EIP 的唯一 ID 列表。
      */
-    AddressSet: Array<string>;
+    AddressSet?: Array<string>;
     /**
      * 异步任务TaskId。可以使用[DescribeTaskResult](https://cloud.tencent.com/document/api/215/36271)接口查询任务状态。
      */
-    TaskId: string;
+    TaskId?: string;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -10570,7 +10572,7 @@ export interface DescribeBandwidthPackageQuotaResponse {
     /**
      * 带宽包配额详细信息
      */
-    QuotaSet: Array<Quota>;
+    QuotaSet?: Array<Quota>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */

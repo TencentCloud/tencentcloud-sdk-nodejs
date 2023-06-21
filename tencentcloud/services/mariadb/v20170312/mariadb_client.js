@@ -374,6 +374,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CopyAccountPrivileges", req, cb);
     }
     /**
+     * 本接口（DescribeDBTmpInstances）用于获取实例回档生成的临时实例
+     */
+    async DescribeDBTmpInstances(req, cb) {
+        return this.request("DescribeDBTmpInstances", req, cb);
+    }
+    /**
      * 隔离MariaDB按量计费实例
      */
     async IsolateHourDBInstance(req, cb) {

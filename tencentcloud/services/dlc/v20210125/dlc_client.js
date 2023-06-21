@@ -532,7 +532,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyUser", req, cb);
     }
     /**
-     * 本接口（DeleteNotebookSession）用于删除notebook livy session
+     * 本接口（DeleteNotebookSession）用于删除交互式session（notebook）
      */
     async DeleteNotebookSession(req, cb) {
         return this.request("DeleteNotebookSession", req, cb);

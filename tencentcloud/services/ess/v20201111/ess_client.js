@@ -330,6 +330,12 @@ httpProfile.setEndpoint("file.test.ess.tencent.cn");<br/>
         return this.request("UploadFiles", req, cb);
     }
     /**
+     * 查询流程填写控件内容，可以根据流程Id查询该流程相关联的填写控件信息
+     */
+    async DescribeFlowComponents(req, cb) {
+        return this.request("DescribeFlowComponents", req, cb);
+    }
+    /**
      * 指定需要批量催办的签署流程Id，批量催办合同，最多100个; 接口失败后返回错误信息
 注意:
 该接口不可直接调用，请联系客户经理申请使用

@@ -1937,6 +1937,10 @@ export interface DescribeTopicFlowRankingRequest {
    * 排行结束日期
    */
   EndDate?: string
+  /**
+   * Broker IP 地址
+   */
+  BrokerIp?: string
 }
 
 /**
@@ -2738,80 +2742,24 @@ export interface CreateUserResponse {
 }
 
 /**
- * 查询Datahub任务信息
+ * 主题占用Broker磁盘大小
  */
-export interface DescribeDatahubTaskRes {
+export interface BrokerTopicData {
   /**
-   * 任务ID
-   */
-  TaskId: string
-  /**
-   * 任务名称
-   */
-  TaskName: string
-  /**
-   * 任务类型，SOURCE数据接入，SINK数据流出
-   */
-  TaskType: string
-  /**
-   * 状态，-1创建失败，0创建中，1运行中，2删除中，3已删除，4删除失败，5暂停中，6已暂停，7暂停失败，8恢复中，9恢复失败
-   */
-  Status: number
-  /**
-   * 数据源
+   * 主题名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SourceResource: DatahubResource
+  TopicName?: string
   /**
-   * 数据目标
+   * 主题ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TargetResource: DatahubResource
+  TopicId?: string
   /**
-   * Connection列表
+   * 主题占用Broker 容量大小
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Connections: Array<Connection>
-  /**
-   * 任务创建时间
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CreateTime: string
-  /**
-   * 消息处理规则
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TransformParam: TransformParam
-  /**
-   * 数据接入ID
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  DatahubId: string
-  /**
-   * 绑定的SchemaId
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SchemaId: string
-  /**
-   * 绑定的Schema名称
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SchemaName: string
-  /**
-   * 数据处理规则
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TransformsParam: TransformsParam
-  /**
-   * 异常信息
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ErrorMessage: string
-  /**
-   * 任务标签列表
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Tags: Array<Tag>
+  DataSize?: number
 }
 
 /**
@@ -4147,6 +4095,83 @@ export interface DtsConnectParam {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IsUpdate?: boolean
+}
+
+/**
+ * 查询Datahub任务信息
+ */
+export interface DescribeDatahubTaskRes {
+  /**
+   * 任务ID
+   */
+  TaskId: string
+  /**
+   * 任务名称
+   */
+  TaskName: string
+  /**
+   * 任务类型，SOURCE数据接入，SINK数据流出
+   */
+  TaskType: string
+  /**
+   * 状态，-1创建失败，0创建中，1运行中，2删除中，3已删除，4删除失败，5暂停中，6已暂停，7暂停失败，8恢复中，9恢复失败
+   */
+  Status: number
+  /**
+   * 数据源
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SourceResource: DatahubResource
+  /**
+   * 数据目标
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TargetResource: DatahubResource
+  /**
+   * Connection列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Connections: Array<Connection>
+  /**
+   * 任务创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateTime: string
+  /**
+   * 消息处理规则
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TransformParam: TransformParam
+  /**
+   * 数据接入ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DatahubId: string
+  /**
+   * 绑定的SchemaId
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SchemaId: string
+  /**
+   * 绑定的Schema名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SchemaName: string
+  /**
+   * 数据处理规则
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TransformsParam: TransformsParam
+  /**
+   * 异常信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ErrorMessage: string
+  /**
+   * 任务标签列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Tags: Array<Tag>
 }
 
 /**
@@ -5964,6 +5989,16 @@ export interface TopicFlowRankingResult {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TopicMessageHeap: Array<TopicMessageHeapRanking>
+  /**
+   * Broker Ip 列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BrokerIp?: Array<string>
+  /**
+   * 单个broker 节点 Topic占用的数据大小
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BrokerTopicData?: Array<BrokerTopicData>
 }
 
 /**
@@ -6830,7 +6865,7 @@ export interface DescribeTopicFlowRankingResponse {
   /**
    * 流量排行
    */
-  Result: TopicFlowRankingResult
+  Result?: TopicFlowRankingResult
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

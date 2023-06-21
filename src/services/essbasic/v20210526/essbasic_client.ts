@@ -37,6 +37,7 @@ import {
   FlowFileInfo,
   CreateFlowOption,
   BaseFlowInfo,
+  ReleasedApprover,
   CreateConsoleLoginUrlResponse,
   ChannelDeleteRoleUsersRequest,
   ChannelCreateUserRolesResponse,
@@ -54,7 +55,7 @@ import {
   DescribeResourceUrlsByFlowsResponse,
   ChannelCreateFlowGroupByFilesRequest,
   DescribeFlowDetailInfoResponse,
-  ResourceUrlInfo,
+  RecipientComponentInfo,
   ChannelDescribeRolesRequest,
   PrepareFlowsResponse,
   TemplateInfo,
@@ -80,8 +81,9 @@ import {
   FlowInfo,
   UserInfo,
   TaskInfo,
-  DescribeUsageResponse,
+  ChannelCreateBoundFlowsResponse,
   Staff,
+  ResourceUrlInfo,
   ChannelCreateBoundFlowsRequest,
   ChannelDescribeEmployeesRequest,
   AuthorizedUser,
@@ -101,7 +103,7 @@ import {
   UploadFile,
   ExtentServiceAuthInfo,
   Filter,
-  ReleasedApprover,
+  FilledComponent,
   CreateSignUrlsResponse,
   UploadFilesResponse,
   ChannelCreateBatchCancelFlowUrlRequest,
@@ -114,10 +116,10 @@ import {
   ChannelCancelMultiFlowSignQRCodeResponse,
   ChannelDescribeRolesResponse,
   ChannelCreateReleaseFlowRequest,
+  ChannelDescribeFlowComponentsResponse,
   ChannelCreateFlowGroupByFilesResponse,
   ChannelCreateMultiFlowSignQRCodeResponse,
   ApproverOption,
-  ChannelCreateBoundFlowsResponse,
   ProxyOrganizationOperator,
   ModifyExtendedServiceResponse,
   ChannelCreateUserRolesRequest,
@@ -135,6 +137,7 @@ import {
   ChannelCreateSealPolicyRequest,
   OccupiedSeal,
   CreateFlowsByTemplatesRequest,
+  DescribeUsageResponse,
   UsageDetail,
   ChannelCreateBatchCancelFlowUrlResponse,
   OperateChannelTemplateRequest,
@@ -149,6 +152,7 @@ import {
   DescribeExtendedServiceAuthInfoResponse,
   ChannelCreateEmbedWebUrlRequest,
   CcInfo,
+  ChannelDescribeFlowComponentsRequest,
 } from "./essbasic_models"
 
 /**
@@ -674,5 +678,15 @@ httpProfile.setEndpoint("file.test.ess.tencent.cn");
     cb?: (error: string, rep: DescribeFlowDetailInfoResponse) => void
   ): Promise<DescribeFlowDetailInfoResponse> {
     return this.request("DescribeFlowDetailInfo", req, cb)
+  }
+
+  /**
+   * 查询流程填写控件内容，可以根据流程Id查询该流程相关联的填写控件信息
+   */
+  async ChannelDescribeFlowComponents(
+    req: ChannelDescribeFlowComponentsRequest,
+    cb?: (error: string, rep: ChannelDescribeFlowComponentsResponse) => void
+  ): Promise<ChannelDescribeFlowComponentsResponse> {
+    return this.request("ChannelDescribeFlowComponents", req, cb)
   }
 }

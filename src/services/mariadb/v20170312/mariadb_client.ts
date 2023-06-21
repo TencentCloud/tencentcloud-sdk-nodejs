@@ -20,7 +20,7 @@ import { ClientConfig } from "../../../common/interface"
 import {
   IsolateHourDBInstanceResponse,
   CreateDBInstanceRequest,
-  ZonesInfo,
+  DescribeDBTmpInstancesRequest,
   DescribeAccountPrivilegesResponse,
   DescribeDatabasesRequest,
   ParamDesc,
@@ -91,6 +91,7 @@ import {
   DescribePriceRequest,
   CreateDBInstanceResponse,
   ModifyRealServerAccessStrategyRequest,
+  ZonesInfo,
   DescribeBackupTimeRequest,
   DescribeSaleInfoResponse,
   ModifyDBEncryptAttributesResponse,
@@ -106,6 +107,7 @@ import {
   SwitchDBInstanceHARequest,
   DBParamValue,
   SpecConfigInfo,
+  TmpInstance,
   ModifyDBParametersRequest,
   ModifyDBInstanceSecurityGroupsRequest,
   DescribeDcnDetailRequest,
@@ -162,6 +164,7 @@ import {
   DCNReplicaConfig,
   ModifyAccountPrivilegesRequest,
   DatabaseProcedure,
+  DescribeDBTmpInstancesResponse,
   ModifyDBSyncModeRequest,
   ActivateHourDBInstanceResponse,
   DescribeInstanceNodeInfoRequest,
@@ -773,6 +776,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CopyAccountPrivilegesResponse) => void
   ): Promise<CopyAccountPrivilegesResponse> {
     return this.request("CopyAccountPrivileges", req, cb)
+  }
+
+  /**
+   * 本接口（DescribeDBTmpInstances）用于获取实例回档生成的临时实例
+   */
+  async DescribeDBTmpInstances(
+    req: DescribeDBTmpInstancesRequest,
+    cb?: (error: string, rep: DescribeDBTmpInstancesResponse) => void
+  ): Promise<DescribeDBTmpInstancesResponse> {
+    return this.request("DescribeDBTmpInstances", req, cb)
   }
 
   /**

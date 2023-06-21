@@ -7,11 +7,11 @@ export interface AssumeRoleWithSAMLResponse {
      */
     Credentials?: Credentials;
     /**
-     * 证书无效的时间，返回 Unix 时间戳，精确到秒
+     * 临时访问凭证的过期时间，返回 Unix 时间戳，精确到秒
      */
     ExpiredTime?: number;
     /**
-     * 证书无效的时间，以 ISO8601 格式的 UTC 时间表示
+     * 临时访问凭证的过期时间，以 ISO8601 格式的 UTC 时间表示
      */
     Expiration?: string;
     /**
@@ -57,7 +57,7 @@ export interface AssumeRoleWithWebIdentityRequest {
      */
     RoleSessionName: string;
     /**
-     * 指定临时证书的有效期，单位：秒，默认 7200 秒，最长可设定有效期为 43200 秒
+     * 指定临时访问凭证的有效期，单位：秒，默认 7200 秒，最长可设定有效期为 43200 秒
      */
     DurationSeconds?: number;
 }
@@ -66,17 +66,17 @@ export interface AssumeRoleWithWebIdentityRequest {
  */
 export interface AssumeRoleWithWebIdentityResponse {
     /**
-     * 临时密钥过期时间(时间戳)
+     * 临时访问凭证过期时间(时间戳)
      */
-    ExpiredTime: number;
+    ExpiredTime?: number;
     /**
-     * 临时密钥过期时间
+     * 临时访问凭证过期时间
      */
-    Expiration: string;
+    Expiration?: string;
     /**
-     * 临时密钥
+     * 临时访问凭证
      */
-    Credentials: Credentials;
+    Credentials?: Credentials;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -87,15 +87,15 @@ export interface AssumeRoleWithWebIdentityResponse {
  */
 export interface GetFederationTokenResponse {
     /**
-     * 临时证书
+     * 临时访问凭证
      */
     Credentials?: Credentials;
     /**
-     * 临时证书有效的时间，返回 Unix 时间戳，精确到秒
+     * 临时访问凭证有效的时间，返回 Unix 时间戳，精确到秒
      */
     ExpiredTime?: number;
     /**
-     * 证书有效的时间，以 iso8601 格式的 UTC 时间表示
+     * 临时访问凭证有效的时间，以 iso8601 格式的 UTC 时间表示
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Expiration?: string;
@@ -122,17 +122,17 @@ export interface QueryApiKeyResponse {
  */
 export interface AssumeRoleResponse {
     /**
-     * 临时安全证书
+     * 临时访问凭证
      */
-    Credentials: Credentials;
+    Credentials?: Credentials;
     /**
-     * 证书无效的时间，返回 Unix 时间戳，精确到秒
+     * 临时访问凭证的过期时间，返回 Unix 时间戳，精确到秒
      */
-    ExpiredTime: number;
+    ExpiredTime?: number;
     /**
-     * 证书无效的时间，以 iso8601 格式的 UTC 时间表示
+     * 临时访问凭证的过期时间，以 iso8601 格式的 UTC 时间表示
      */
-    Expiration: string;
+    Expiration?: string;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -156,7 +156,7 @@ export interface GetFederationTokenRequest {
      */
     Name: string;
     /**
-     * 授予该临时证书权限的CAM策略
+     * 授予该临时访问凭证权限的CAM策略
   注意：
   1、策略语法参照[ CAM 策略语法](https://cloud.tencent.com/document/product/598/10603)。
   2、策略中不能包含 principal 元素。
@@ -250,7 +250,7 @@ export interface AssumeRoleRequest {
      */
     RoleSessionName: string;
     /**
-     * 指定临时证书的有效期，单位：秒，默认 7200 秒，最长可设定有效期为 43200 秒
+     * 指定临时访问凭证的有效期，单位：秒，默认 7200 秒，最长可设定有效期为 43200 秒
      */
     DurationSeconds?: number;
     /**
@@ -300,7 +300,7 @@ export interface AssumeRoleWithSAMLRequest {
      */
     RoleSessionName: string;
     /**
-     * 指定临时证书的有效期，单位：秒，默认 7200 秒，最长可设定有效期为 43200 秒
+     * 指定临时访问凭证的有效期，单位：秒，默认 7200 秒，最长可设定有效期为 43200 秒
      */
     DurationSeconds?: number;
 }
