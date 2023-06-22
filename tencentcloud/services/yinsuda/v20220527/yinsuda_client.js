@@ -106,6 +106,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeKTVRobots", req, cb);
     }
     /**
+     * 获取歌曲伴奏片段链接，可用于抢唱
+     */
+    async DescribeKTVMusicAccompanySegmentUrl(req, cb) {
+        return this.request("DescribeKTVMusicAccompanySegmentUrl", req, cb);
+    }
+    /**
      * 根据输入的规则匹配曲库中的歌曲。
      */
     async DescribeKTVMatchMusics(req, cb) {

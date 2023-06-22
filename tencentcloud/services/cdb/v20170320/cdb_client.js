@@ -253,6 +253,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("SwitchDBInstanceMasterSlave", req, cb);
     }
     /**
+     * 本接口(DeleteAuditPolicy)用于删除用户的审计策略。
+     */
+    async DeleteAuditPolicy(req, cb) {
+        return this.request("DeleteAuditPolicy", req, cb);
+    }
+    /**
      * 本接口(DisassociateSecurityGroups)用于安全组批量解绑实例。
      */
     async DisassociateSecurityGroups(req, cb) {
@@ -393,10 +399,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateCdbProxyAddress", req, cb);
     }
     /**
-     * 本接口(DeleteAuditPolicy)用于删除用户的审计策略。
+     * 本接口(CreateDatabase)用于在云数据库实例中创建数据库。
      */
-    async DeleteAuditPolicy(req, cb) {
-        return this.request("DeleteAuditPolicy", req, cb);
+    async CreateDatabase(req, cb) {
+        return this.request("CreateDatabase", req, cb);
     }
     /**
      * 本接口(DescribeProjectSecurityGroups)用于查询项目的安全组详情。

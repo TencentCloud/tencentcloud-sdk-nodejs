@@ -358,6 +358,16 @@ it("cdb.v20170320.SwitchDBInstanceMasterSlave", async function () {
     }
 })
 
+it("cdb.v20170320.DeleteAuditPolicy", async function () {
+    try {
+       const data = await client.DeleteAuditPolicy({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cdb.v20170320.DisassociateSecurityGroups", async function () {
     try {
        const data = await client.DisassociateSecurityGroups({})
@@ -578,9 +588,9 @@ it("cdb.v20170320.CreateCdbProxyAddress", async function () {
     }
 })
 
-it("cdb.v20170320.DeleteAuditPolicy", async function () {
+it("cdb.v20170320.CreateDatabase", async function () {
     try {
-       const data = await client.DeleteAuditPolicy({})
+       const data = await client.CreateDatabase({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

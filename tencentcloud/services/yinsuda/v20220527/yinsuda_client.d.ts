@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { ApplyChorusResponse, DescribeKTVSuggestionsResponse, DestroyKTVRobotResponse, CreateKTVRobotRequest, SyncKTVRobotCommandRequest, DescribeKTVPlaylistDetailRequest, SyncKTVRobotCommandResponse, CreateKTVRobotResponse, DescribeKTVSuggestionsRequest, DescribeKTVMatchMusicsRequest, DescribeKTVPlaylistsResponse, RechargeLiveVipResponse, DescribeKTVPlaylistsRequest, DescribeKTVPlaylistDetailResponse, DescribeLiveVipTradeInfosRequest, DescribeKTVRobotsResponse, BatchDescribeKTVMusicDetailsRequest, DescribeKTVMusicsByTagResponse, DescribeLiveVipTradeInfosResponse, SearchKTVMusicsResponse, DescribeKTVMatchMusicsResponse, DescribeKTVTagsResponse, RechargeLiveVipRequest, ApplyChorusRequest, BatchDescribeKTVMusicDetailsResponse, DescribeKTVMusicsByTagRequest, SearchKTVMusicsRequest, DescribeUserInfoRequest, DestroyKTVRobotRequest, DescribeUserInfoResponse, DescribeKTVRobotsRequest, DescribeKTVTagsRequest } from "./yinsuda_models";
+import { ApplyChorusResponse, DescribeKTVSuggestionsResponse, DestroyKTVRobotResponse, CreateKTVRobotRequest, SyncKTVRobotCommandRequest, DescribeKTVPlaylistDetailRequest, SyncKTVRobotCommandResponse, CreateKTVRobotResponse, DescribeKTVSuggestionsRequest, DescribeKTVMatchMusicsRequest, DescribeKTVPlaylistsResponse, RechargeLiveVipResponse, DescribeKTVPlaylistsRequest, DescribeKTVPlaylistDetailResponse, DescribeLiveVipTradeInfosRequest, DescribeKTVRobotsResponse, DescribeKTVMusicAccompanySegmentUrlRequest, BatchDescribeKTVMusicDetailsRequest, DescribeKTVMusicsByTagResponse, DescribeLiveVipTradeInfosResponse, SearchKTVMusicsResponse, DescribeKTVMatchMusicsResponse, DescribeKTVTagsResponse, RechargeLiveVipRequest, ApplyChorusRequest, BatchDescribeKTVMusicDetailsResponse, DescribeKTVMusicsByTagRequest, SearchKTVMusicsRequest, DescribeKTVMusicAccompanySegmentUrlResponse, DescribeUserInfoRequest, DestroyKTVRobotRequest, DescribeUserInfoResponse, DescribeKTVRobotsRequest, DescribeKTVTagsRequest } from "./yinsuda_models";
 /**
  * yinsuda client
  * @class
@@ -59,6 +59,10 @@ export declare class Client extends AbstractClient {
      * 获取机器人列表，支持 Id、状态等过滤条件。
      */
     DescribeKTVRobots(req: DescribeKTVRobotsRequest, cb?: (error: string, rep: DescribeKTVRobotsResponse) => void): Promise<DescribeKTVRobotsResponse>;
+    /**
+     * 获取歌曲伴奏片段链接，可用于抢唱
+     */
+    DescribeKTVMusicAccompanySegmentUrl(req: DescribeKTVMusicAccompanySegmentUrlRequest, cb?: (error: string, rep: DescribeKTVMusicAccompanySegmentUrlResponse) => void): Promise<DescribeKTVMusicAccompanySegmentUrlResponse>;
     /**
      * 根据输入的规则匹配曲库中的歌曲。
      */

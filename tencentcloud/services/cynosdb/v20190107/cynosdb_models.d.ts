@@ -1,4 +1,17 @@
 /**
+ * 数据库代理规格
+ */
+export interface ProxySpec {
+    /**
+     * 数据库代理cpu核数
+     */
+    Cpu: number;
+    /**
+     * 数据库代理内存
+     */
+    Mem: number;
+}
+/**
  * RemoveClusterSlaveZone请求参数结构体
  */
 export interface RemoveClusterSlaveZoneRequest {
@@ -793,6 +806,19 @@ export interface AddClusterSlaveZoneResponse {
      * 异步FlowId
      */
     FlowId: number;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * DescribeProxySpecs返回参数结构体
+ */
+export interface DescribeProxySpecsResponse {
+    /**
+     * 数据库代理规格列表
+     */
+    ProxySpecs: Array<ProxySpec>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1853,6 +1879,10 @@ export interface ModifyClusterStorageResponse {
      */
     RequestId?: string;
 }
+/**
+ * DescribeProxySpecs请求参数结构体
+ */
+export declare type DescribeProxySpecsRequest = null;
 /**
  * CloseClusterPasswordComplexity请求参数结构体
  */

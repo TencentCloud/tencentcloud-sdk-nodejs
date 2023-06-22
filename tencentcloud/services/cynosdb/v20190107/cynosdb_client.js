@@ -112,6 +112,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CloseProxy", req, cb);
     }
     /**
+     * 查询数据库代理规格
+     */
+    async DescribeProxySpecs(req, cb) {
+        return this.request("DescribeProxySpecs", req, cb);
+    }
+    /**
      * 该接口（DescribeClusterDetail）显示集群详情
      */
     async DescribeClusterDetail(req, cb) {

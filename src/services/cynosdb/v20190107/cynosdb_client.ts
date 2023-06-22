@@ -18,6 +18,7 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  ProxySpec,
   RemoveClusterSlaveZoneRequest,
   ModifyClusterNameRequest,
   ModifyProxyRwSplitRequest,
@@ -60,6 +61,7 @@ import {
   DescribeZonesRequest,
   ClusterInstanceDetail,
   AddClusterSlaveZoneResponse,
+  DescribeProxySpecsResponse,
   OldAddrInfo,
   ModifyClusterNameResponse,
   SlowQueriesItem,
@@ -104,6 +106,7 @@ import {
   DescribeClustersRequest,
   ParamItem,
   ModifyClusterStorageResponse,
+  DescribeProxySpecsRequest,
   CloseClusterPasswordComplexityRequest,
   ModifyDBInstanceSecurityGroupsResponse,
   DeleteAuditLogFileResponse,
@@ -492,6 +495,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CloseProxyResponse) => void
   ): Promise<CloseProxyResponse> {
     return this.request("CloseProxy", req, cb)
+  }
+
+  /**
+   * 查询数据库代理规格
+   */
+  async DescribeProxySpecs(
+    req?: DescribeProxySpecsRequest,
+    cb?: (error: string, rep: DescribeProxySpecsResponse) => void
+  ): Promise<DescribeProxySpecsResponse> {
+    return this.request("DescribeProxySpecs", req, cb)
   }
 
   /**

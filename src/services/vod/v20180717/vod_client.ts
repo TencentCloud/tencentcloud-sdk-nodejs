@@ -24,6 +24,7 @@ import {
   CreateStorageRegionRequest,
   AiRecognitionTaskAsrFullTextSegmentItem,
   DescribeFileAttributesTask,
+  QualityEvaluationConfigureInfo,
   ReviewAudioVideoTaskInput,
   DescribeAllClassRequest,
   DescribeRoundPlaysRequest,
@@ -48,7 +49,9 @@ import {
   ModifyDefaultStorageRegionRequest,
   ModifyEventConfigResponse,
   AiAnalysisTaskCoverOutput,
+  QualityInspectTaskOutput,
   UserDefineOcrTextReviewTemplateInfoForUpdate,
+  ResetProcedureTemplateResponse,
   MediaSnapshotByTimeOffsetItem,
   RebuildMediaTargetInfo,
   ModifySampleSnapshotTemplateRequest,
@@ -68,6 +71,7 @@ import {
   ContentReviewTemplateItem,
   DeleteAIRecognitionTemplateResponse,
   DeleteContentReviewTemplateRequest,
+  NoiseConfigureInfo,
   AiReviewPoliticalTaskInput,
   AudioTransform,
   ModifySuperPlayerConfigRequest,
@@ -85,6 +89,7 @@ import {
   DeletePersonSampleRequest,
   ProcedureReviewAudioVideoTaskInput,
   AiRecognitionTaskAsrWordsSegmentItem,
+  QualityEvaluationConfigureInfoForUpdate,
   AiRecognitionTaskInput,
   AudioTemplateInfo,
   ExecuteFunctionResponse,
@@ -107,12 +112,14 @@ import {
   DeleteAIAnalysisTemplateResponse,
   DeleteImageProcessingTemplateRequest,
   DescribeDailyPlayStatFileListResponse,
+  AbnormalLightingConfigureInfo,
   TextWatermarkTemplateInputForUpdate,
   DeleteSuperPlayerConfigRequest,
   AiReviewTerrorismOcrTaskInput,
   AiRecognitionTaskOcrWordsResultInput,
   ModifyMediaStorageClassResponse,
   AiReviewPornTaskInput,
+  JitterConfigureInfoForUpdate,
   UserDefineAsrTextReviewTemplateInfo,
   CreateProcedureTemplateRequest,
   DescribeMediaProcessUsageDataRequest,
@@ -125,7 +132,7 @@ import {
   TagConfigureInfo,
   SharpEnhanceInfo,
   ModifySuperPlayerConfigResponse,
-  AiRecognitionTaskOcrWordsResultOutput,
+  DescribeWordSamplesResponse,
   RefreshUrlCacheResponse,
   ConcatTask2017,
   DeleteAIRecognitionTemplateRequest,
@@ -141,9 +148,10 @@ import {
   AiRecognitionTaskOcrFullTextResultOutput,
   AiAnalysisTaskHighlightResult,
   CreateRebuildMediaTemplateResponse,
-  DescribeWordSamplesResponse,
+  AiRecognitionTaskOcrWordsResultOutput,
   AiSampleFaceInfo,
   MediaImageSpriteItem,
+  QualityInspectTask,
   DescribeEnhanceMediaTemplatesResponse,
   ImageBlur,
   ModifyVodDomainAccelerateConfigRequest,
@@ -153,6 +161,7 @@ import {
   FileReviewInfo,
   WatermarkTemplate,
   CoverBySnapshotTaskOutput,
+  ModifyQualityInspectTemplateResponse,
   TextWatermarkTemplateInput,
   ForbidMediaDistributionRequest,
   DescribeAIRecognitionTemplatesResponse,
@@ -192,6 +201,7 @@ import {
   ClassificationConfigureInfoForUpdate,
   DeleteAdaptiveDynamicStreamingTemplateResponse,
   CreateWordSamplesRequest,
+  BlurConfigureInfo,
   PoliticalAsrReviewTemplateInfoForUpdate,
   WechatMiniProgramPublishTaskInput,
   AiSampleFaceOperation,
@@ -200,6 +210,7 @@ import {
   AiRecognitionTaskOcrWordsResult,
   PornAsrReviewTemplateInfo,
   AiRecognitionTaskSegmentResult,
+  JitterConfigureInfo,
   MediaSubtitleItem,
   ProhibitedAsrReviewTemplateInfoForUpdate,
   ModifyAnimatedGraphicsTemplateResponse,
@@ -224,6 +235,7 @@ import {
   ContentReviewResult,
   MediaProcessTaskImageSpriteResult,
   ReduceMediaBitrateTask,
+  CrashScreenConfigureInfo,
   CreateReviewTemplateRequest,
   DescribeMediaInfosResponse,
   DeleteProcedureTemplateResponse,
@@ -264,6 +276,7 @@ import {
   SegmentConfigureInfoForUpdate,
   RebuildMediaTaskInput,
   UserDefineConfigureInfo,
+  NoiseConfigureInfoForUpdate,
   AiRecognitionTaskSegmentSegmentItem,
   RestoreMediaTask,
   AiReviewPornOcrTaskInput,
@@ -287,6 +300,7 @@ import {
   RemoveWaterMarkTaskOutput,
   ModifyMediaStorageClassRequest,
   AiAnalysisTaskTagOutput,
+  MosaicConfigureInfo,
   AiAnalysisTaskHighlightOutput,
   DescribeRebuildMediaTemplatesRequest,
   ReviewImageSegmentItem,
@@ -312,7 +326,7 @@ import {
   DescribeHeadTailTemplatesRequest,
   ModifyAdaptiveDynamicStreamingTemplateResponse,
   MediaProcessTaskTranscodeResult,
-  DomainDetailInfo,
+  BlurConfigureInfoForUpdate,
   EditMediaVideoStream,
   ExtractTraceWatermarkTask,
   AiRecognitionTaskSegmentResultOutput,
@@ -353,6 +367,8 @@ import {
   ExtractTraceWatermarkTaskOutput,
   MediaProcessTaskCoverBySnapshotResult,
   CreateWatermarkTemplateRequest,
+  BlackWhiteEdgeConfigureInfo,
+  SortBy,
   TerrorismConfigureInfoForUpdate,
   DescribeEventsStateRequest,
   WechatMiniProgramPublishTask,
@@ -362,9 +378,11 @@ import {
   ComposeMediaTask,
   HeadTailConfigureInfoForUpdate,
   ImageScale,
+  ImageContentReviewInput,
   TranscodePlayInfo2017,
   SplitMediaTask,
   ComposeMediaTaskInput,
+  ModifyQualityInspectTemplateRequest,
   AnimatedGraphicTaskInput,
   MosaicInput,
   AIAnalysisTemplateItem,
@@ -388,7 +406,7 @@ import {
   AiReviewTerrorismTaskOutput,
   ModifyReviewTemplateResponse,
   DescribeImageProcessingTemplatesRequest,
-  ResetProcedureTemplateResponse,
+  QualityInspectTaskInput,
   ProhibitedConfigureInfo,
   DrmStreamingsInfo,
   SplitMediaRequest,
@@ -413,6 +431,7 @@ import {
   MediaProcessTaskInput,
   OutputVideoStream,
   ProcedureTemplate,
+  DomainDetailInfo,
   AiReviewTaskTerrorismResult,
   ProcessMediaByUrlResponse,
   DescribeImageReviewUsageDataRequest,
@@ -422,14 +441,16 @@ import {
   MediaContentReviewPoliticalSegmentItem,
   DeletePersonSampleResponse,
   CreateSnapshotByTimeOffsetTemplateResponse,
+  VoiceConfigureInfoForUpdate,
   ModifyContentReviewTemplateRequest,
+  ImageSpriteTemplate,
   DeleteReviewTemplateRequest,
   AttachMediaSubtitlesResponse,
   AiContentReviewTaskInput,
   CreateAdaptiveDynamicStreamingTemplateResponse,
   DeleteSampleSnapshotTemplateRequest,
-  AiAnalysisTaskInput,
-  ImageSpriteTemplate,
+  DescribeTranscodeTemplatesResponse,
+  AbnormalLightingConfigureInfoForUpdate,
   AiRecognitionTaskOcrFullTextSegmentTextItem,
   ImageProcessingTemplate,
   SegmentConfigureInfo,
@@ -447,9 +468,10 @@ import {
   MediaBasicInfo,
   AiReviewPoliticalAsrTaskInput,
   PullUploadRequest,
-  SortBy,
+  CreateQualityInspectTemplateRequest,
   ProcessMediaByProcedureRequest,
   RebuildMediaTargetVideoStream,
+  VoiceConfigureInfo,
   ClipTask2017,
   TranscodeTemplate,
   DescribeCDNUsageDataRequest,
@@ -469,6 +491,7 @@ import {
   AiReviewProhibitedAsrTaskOutput,
   CreateClassResponse,
   DeleteSuperPlayerConfigResponse,
+  CrashScreenConfigureInfoForUpdate,
   DescribeSampleSnapshotTemplatesRequest,
   CoverConfigureInfoForUpdate,
   AiAnalysisTaskClassificationResult,
@@ -479,6 +502,7 @@ import {
   TranscodeTaskInput,
   DescribeClientUploadAccelerationUsageDataRequest,
   ModifyAIRecognitionTemplateRequest,
+  QRCodeConfigureInfo,
   DescribeStorageRegionsRequest,
   WechatPublishTask,
   DescribeCDNStatDetailsRequest,
@@ -501,9 +525,11 @@ import {
   AiReviewPoliticalAsrTaskOutput,
   OutputAudioStream,
   ModifyClassRequest,
+  QRCodeConfigureInfoForUpdate,
   SpecificationDataItem,
   TEHDConfigForUpdate,
   ComposeMediaTaskOutput,
+  DescribeQualityInspectTemplatesRequest,
   DescribeMediaInfosRequest,
   ModifyPersonSampleRequest,
   DescribeDrmDataKeyRequest,
@@ -519,7 +545,7 @@ import {
   AiReviewPornTaskOutput,
   SDMCDrmKeyProviderInfo,
   AiRecognitionTaskAsrFullTextResult,
-  ImageContentReviewInput,
+  DeleteQualityInspectTemplateResponse,
   PlayStatInfo,
   PoliticalImgReviewTemplateInfo,
   PoliticalConfigureInfo,
@@ -538,6 +564,7 @@ import {
   ModifyTranscodeTemplateResponse,
   MediaMetaData,
   MediaSampleSnapshotInfo,
+  InspectMediaQualityResponse,
   DescribeSubAppIdsResponse,
   MediaInfo,
   VideoTemplateInfoForUpdate,
@@ -545,9 +572,11 @@ import {
   DescribeContentReviewTemplatesRequest,
   AdaptiveDynamicStreamingTaskInput,
   DescribeImageSpriteTemplatesResponse,
+  InspectMediaQualityRequest,
   AiAnalysisTaskFrameTagInput,
   MediaAiAnalysisFrameTagSegmentItem,
   AiRecognitionTaskAsrWordsResultItem,
+  CreateQualityInspectTemplateResponse,
   RebuildMediaTaskOutput,
   MediaAiAnalysisTagItem,
   RebuildMediaRequest,
@@ -629,6 +658,7 @@ import {
   CreateRebuildMediaTemplateRequest,
   ImageOperation,
   MediaSubStreamInfoItem,
+  MosaicConfigureInfoForUpdate,
   DescribeWatermarkTemplatesResponse,
   WeChatMiniProgramPublishResponse,
   DescribeRoundPlaysResponse,
@@ -656,6 +686,7 @@ import {
   AiRecognitionTaskObjectResult,
   DescribeAIAnalysisTemplatesResponse,
   CreateSnapshotByTimeOffsetTemplateRequest,
+  DescribeQualityInspectTemplatesResponse,
   AiRecognitionTaskAsrWordsResult,
   CreateSubAppIdRequest,
   DescribeProcedureTemplatesResponse,
@@ -666,6 +697,7 @@ import {
   AudioVolumeParam,
   AiReviewTaskPornAsrResult,
   ModifyClassResponse,
+  BlackWhiteEdgeConfigureInfoForUpdate,
   EditMediaFileInfo,
   ProcessMediaByProcedureResponse,
   PullUploadResponse,
@@ -676,6 +708,7 @@ import {
   PornImgReviewTemplateInfoForUpdate,
   CreateWatermarkTemplateResponse,
   PornImgReviewTemplateInfo,
+  QualityInspectTemplateItem,
   AiReviewPoliticalOcrTaskOutput,
   OcrFullTextConfigureInfo,
   CommitUploadRequest,
@@ -683,12 +716,13 @@ import {
   SnapshotByTimeOffsetTask2017,
   ReviewInfo,
   MediaClassInfo,
-  DescribeTranscodeTemplatesResponse,
+  AiAnalysisTaskInput,
   DeleteAnimatedGraphicsTemplateRequest,
   DeleteSnapshotByTimeOffsetTemplateRequest,
   DescribeAnimatedGraphicsTemplatesResponse,
   ExtractCopyRightWatermarkTask,
   MediaAiAnalysisFrameTagItem,
+  QualityInspectItem,
   DescribeImageProcessingTemplatesResponse,
   SampleSnapshotTaskInput,
   ReviewImageRequest,
@@ -710,11 +744,13 @@ import {
   StorageStatData,
   TranscodeTask2017,
   DescribeFileAttributesRequest,
+  QualityInspectResultItem,
   MediaOutputInfo,
   EditMediaTaskOutput,
   HighlightSegmentItem,
   CreateReviewTemplateResponse,
   DeleteWatermarkTemplateResponse,
+  DeleteQualityInspectTemplateRequest,
   ComposeMediaOutput,
   ModifyWatermarkTemplateResponse,
   PullUploadTask,
@@ -884,6 +920,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ProcessMediaByProcedureResponse) => void
   ): Promise<ProcessMediaByProcedureResponse> {
     return this.request("ProcessMediaByProcedure", req, cb)
+  }
+
+  /**
+   * 创建音画质检测模板。
+   */
+  async CreateQualityInspectTemplate(
+    req: CreateQualityInspectTemplateRequest,
+    cb?: (error: string, rep: CreateQualityInspectTemplateResponse) => void
+  ): Promise<CreateQualityInspectTemplateResponse> {
+    return this.request("CreateQualityInspectTemplate", req, cb)
   }
 
   /**
@@ -1069,13 +1115,15 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 该接口用于批量创建关键词样本，样本用于通过OCR、ASR技术，进行不适宜内容识别、内容识别等视频处理。
-   */
-  async CreateWordSamples(
-    req: CreateWordSamplesRequest,
-    cb?: (error: string, rep: CreateWordSamplesResponse) => void
-  ): Promise<CreateWordSamplesResponse> {
-    return this.request("CreateWordSamples", req, cb)
+     * 该接口用于开通某地域的存储。
+  1. 用户开通点播业务时，系统默认为用户开通了部分地域的存储，用户如果需要开通其它地域的存储，可以通过该接口进行开通。
+  2. 通过 DescribeStorageRegions 接口可以查询到所有存储地域及已经开通的地域。
+     */
+  async CreateStorageRegion(
+    req: CreateStorageRegionRequest,
+    cb?: (error: string, rep: CreateStorageRegionResponse) => void
+  ): Promise<CreateStorageRegionResponse> {
+    return this.request("CreateStorageRegion", req, cb)
   }
 
   /**
@@ -1225,6 +1273,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeTranscodeTemplatesResponse) => void
   ): Promise<DescribeTranscodeTemplatesResponse> {
     return this.request("DescribeTranscodeTemplates", req, cb)
+  }
+
+  /**
+   * 对点播中的音视频媒体发起音画质检测任务。
+   */
+  async InspectMediaQuality(
+    req: InspectMediaQualityRequest,
+    cb?: (error: string, rep: InspectMediaQualityResponse) => void
+  ): Promise<InspectMediaQualityResponse> {
+    return this.request("InspectMediaQuality", req, cb)
   }
 
   /**
@@ -1568,15 +1626,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 该接口用于开通某地域的存储。
-  1. 用户开通点播业务时，系统默认为用户开通了部分地域的存储，用户如果需要开通其它地域的存储，可以通过该接口进行开通。
-  2. 通过 DescribeStorageRegions 接口可以查询到所有存储地域及已经开通的地域。
-     */
-  async CreateStorageRegion(
-    req: CreateStorageRegionRequest,
-    cb?: (error: string, rep: CreateStorageRegionResponse) => void
-  ): Promise<CreateStorageRegionResponse> {
-    return this.request("CreateStorageRegion", req, cb)
+   * 该接口用于根据素材 ID，修改素材样本信息，包括名称、描述的修改，以及五官、标签的添加、删除、重置操作。五官删除操作需保证至少剩余 1 张图片，否则，请使用重置操作。
+   */
+  async ModifyPersonSample(
+    req: ModifyPersonSampleRequest,
+    cb?: (error: string, rep: ModifyPersonSampleResponse) => void
+  ): Promise<ModifyPersonSampleResponse> {
+    return this.request("ModifyPersonSample", req, cb)
   }
 
   /**
@@ -1716,6 +1772,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 修改音画质检测模板。
+   */
+  async ModifyQualityInspectTemplate(
+    req: ModifyQualityInspectTemplateRequest,
+    cb?: (error: string, rep: ModifyQualityInspectTemplateResponse) => void
+  ): Promise<ModifyQualityInspectTemplateResponse> {
+    return this.request("ModifyQualityInspectTemplate", req, cb)
+  }
+
+  /**
      * 该 API 已经<font color='red'>不再维护</font>，新版播放器签名不再使用播放器配置模板，详细请参考 [播放器签名](https://cloud.tencent.com/document/product/266/45554)。
 创建播放器配置，数量上限：100。
      */
@@ -1747,6 +1813,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ConfirmEventsResponse) => void
   ): Promise<ConfirmEventsResponse> {
     return this.request("ConfirmEvents", req, cb)
+  }
+
+  /**
+   * 该接口用于获取轮播播单列表。
+   */
+  async DescribeRoundPlays(
+    req: DescribeRoundPlaysRequest,
+    cb?: (error: string, rep: DescribeRoundPlaysResponse) => void
+  ): Promise<DescribeRoundPlaysResponse> {
+    return this.request("DescribeRoundPlays", req, cb)
   }
 
   /**
@@ -1917,16 +1993,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 该接口用于根据素材 ID，修改素材样本信息，包括名称、描述的修改，以及五官、标签的添加、删除、重置操作。五官删除操作需保证至少剩余 1 张图片，否则，请使用重置操作。
-   */
-  async ModifyPersonSample(
-    req: ModifyPersonSampleRequest,
-    cb?: (error: string, rep: ModifyPersonSampleResponse) => void
-  ): Promise<ModifyPersonSampleResponse> {
-    return this.request("ModifyPersonSample", req, cb)
-  }
-
-  /**
    * 查询转动图模板列表，支持根据条件，分页查询。
    */
   async DescribeAnimatedGraphicsTemplates(
@@ -2004,13 +2070,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 该接口用于获取轮播播单列表。
+   * 该接口用于批量创建关键词样本，样本用于通过OCR、ASR技术，进行不适宜内容识别、内容识别等视频处理。
    */
-  async DescribeRoundPlays(
-    req: DescribeRoundPlaysRequest,
-    cb?: (error: string, rep: DescribeRoundPlaysResponse) => void
-  ): Promise<DescribeRoundPlaysResponse> {
-    return this.request("DescribeRoundPlays", req, cb)
+  async CreateWordSamples(
+    req: CreateWordSamplesRequest,
+    cb?: (error: string, rep: CreateWordSamplesResponse) => void
+  ): Promise<CreateWordSamplesResponse> {
+    return this.request("CreateWordSamples", req, cb)
   }
 
   /**
@@ -2156,6 +2222,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAIRecognitionTemplatesResponse) => void
   ): Promise<DescribeAIRecognitionTemplatesResponse> {
     return this.request("DescribeAIRecognitionTemplates", req, cb)
+  }
+
+  /**
+   * 删除音画质检测模板。
+   */
+  async DeleteQualityInspectTemplate(
+    req: DeleteQualityInspectTemplateRequest,
+    cb?: (error: string, rep: DeleteQualityInspectTemplateResponse) => void
+  ): Promise<DeleteQualityInspectTemplateResponse> {
+    return this.request("DeleteQualityInspectTemplate", req, cb)
+  }
+
+  /**
+   * 获取音画质检测模板列表。
+   */
+  async DescribeQualityInspectTemplates(
+    req: DescribeQualityInspectTemplatesRequest,
+    cb?: (error: string, rep: DescribeQualityInspectTemplatesResponse) => void
+  ): Promise<DescribeQualityInspectTemplatesResponse> {
+    return this.request("DescribeQualityInspectTemplates", req, cb)
   }
 
   /**

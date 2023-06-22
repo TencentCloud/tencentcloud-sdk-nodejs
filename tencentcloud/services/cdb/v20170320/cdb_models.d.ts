@@ -572,6 +572,23 @@ export interface BackupSummaryItem {
     BackupVolume: number;
 }
 /**
+ * CreateDatabase请求参数结构体
+ */
+export interface CreateDatabaseRequest {
+    /**
+     * 实例 ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。
+     */
+    InstanceId: string;
+    /**
+     * 数据库名称。
+     */
+    DBName: string;
+    /**
+     * 字符集，可选值：utf8，gbk，latin1，utf8mb4。
+     */
+    CharacterSetName: string;
+}
+/**
  * ModifyInstanceParam请求参数结构体
  */
 export interface ModifyInstanceParamRequest {
@@ -2713,6 +2730,15 @@ export interface BinlogInfo {
      * 实例 ID，格式如：cdb-c1nl9rpv。与云数据库控制台页面中显示的实例 ID 相同。
      */
     InstanceId: string;
+}
+/**
+ * CreateDatabase返回参数结构体
+ */
+export interface CreateDatabaseResponse {
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * DescribeErrorLogData返回参数结构体

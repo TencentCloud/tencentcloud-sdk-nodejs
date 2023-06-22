@@ -38,6 +38,7 @@ import {
   DescribeDataBackupOverviewResponse,
   DeleteAuditPolicyRequest,
   BackupSummaryItem,
+  CreateDatabaseRequest,
   ModifyInstanceParamRequest,
   CreateParamTemplateRequest,
   DescribeSupportedPrivilegesRequest,
@@ -135,6 +136,7 @@ import {
   ModifyAccountPasswordResponse,
   ReleaseIsolatedDBInstancesRequest,
   BinlogInfo,
+  CreateDatabaseResponse,
   DescribeErrorLogDataResponse,
   AddTimeWindowRequest,
   ImportRecord,
@@ -788,6 +790,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口(DeleteAuditPolicy)用于删除用户的审计策略。
+   */
+  async DeleteAuditPolicy(
+    req: DeleteAuditPolicyRequest,
+    cb?: (error: string, rep: DeleteAuditPolicyResponse) => void
+  ): Promise<DeleteAuditPolicyResponse> {
+    return this.request("DeleteAuditPolicy", req, cb)
+  }
+
+  /**
    * 本接口(DisassociateSecurityGroups)用于安全组批量解绑实例。
    */
   async DisassociateSecurityGroups(
@@ -1016,13 +1028,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口(DeleteAuditPolicy)用于删除用户的审计策略。
+   * 本接口(CreateDatabase)用于在云数据库实例中创建数据库。
    */
-  async DeleteAuditPolicy(
-    req: DeleteAuditPolicyRequest,
-    cb?: (error: string, rep: DeleteAuditPolicyResponse) => void
-  ): Promise<DeleteAuditPolicyResponse> {
-    return this.request("DeleteAuditPolicy", req, cb)
+  async CreateDatabase(
+    req: CreateDatabaseRequest,
+    cb?: (error: string, rep: CreateDatabaseResponse) => void
+  ): Promise<CreateDatabaseResponse> {
+    return this.request("CreateDatabase", req, cb)
   }
 
   /**

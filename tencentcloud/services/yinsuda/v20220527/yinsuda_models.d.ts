@@ -488,6 +488,21 @@ export interface TRTCJoinRoomInput {
     UserId: string;
 }
 /**
+ * 其它片段时间（可用于抢唱）
+ */
+export interface KTVOtherSegments {
+    /**
+     * 片段开始时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SegmentBegin?: number;
+    /**
+     * 片段结束时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SegmentEnd?: number;
+}
+/**
  * DescribeKTVRobots返回参数结构体
  */
 export interface DescribeKTVRobotsResponse {
@@ -503,6 +518,32 @@ export interface DescribeKTVRobotsResponse {
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * DescribeKTVMusicAccompanySegmentUrl请求参数结构体
+ */
+export interface DescribeKTVMusicAccompanySegmentUrlRequest {
+    /**
+     * 应用名称。
+     */
+    AppName: string;
+    /**
+     * 用户标识。
+     */
+    UserId: string;
+    /**
+     * 歌曲 Id 。
+     */
+    MusicId: string;
+    /**
+     * 播放场景。默认为Chat
+  <li>Live：直播</li><li>Chat：语聊</li>
+     */
+    PlayScene?: string;
+    /**
+     * 房间Id
+     */
+    RoomId?: string;
 }
 /**
  * 标签分组信息。
@@ -1059,6 +1100,49 @@ export interface TimeRange {
   <li>格式按照 ISO 8601标准表示，详见 <a href="https://cloud.tencent.com/document/product/266/11732#I" target="_blank">ISO 日期格式说明</a>。</li>
      */
     After?: string;
+}
+/**
+ * DescribeKTVMusicAccompanySegmentUrl返回参数结构体
+ */
+export interface DescribeKTVMusicAccompanySegmentUrlResponse {
+    /**
+     * 歌曲状态。
+  0：可用
+  1：下线
+  2：没权限
+  3：没伴奏
+  当返回2时，其他参数有可能全部为空
+     */
+    Status?: number;
+    /**
+     * 伴奏链接
+     */
+    Url?: string;
+    /**
+     * 伴奏类型，如mkv，mp3等
+     */
+    ExtName?: string;
+    /**
+     * 高潮开始时间
+     */
+    SegmentBegin?: number;
+    /**
+     * 高潮结束时间
+     */
+    SegmentEnd?: number;
+    /**
+     * 链接文件大小 单位 字节
+     */
+    FileSize?: number;
+    /**
+     * 其它片段时间（可用于抢唱）
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    OtherSegments?: Array<KTVOtherSegments>;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * 歌单基础信息。

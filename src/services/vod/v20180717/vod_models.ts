@@ -189,6 +189,22 @@ export interface DescribeFileAttributesTask {
 }
 
 /**
+ * 视频画面质量评价的控制参数。
+ */
+export interface QualityEvaluationConfigureInfo {
+  /**
+   * 视频画面质量评价检测开关，可选值：
+<li>ON：开启；</li>
+<li>OFF：关闭。</li>
+   */
+  Switch: string
+  /**
+   * 视频画面质量评价过滤阈值，结果只返回低于该值的时间段，默认值为 60。
+   */
+  Score?: number
+}
+
+/**
  * 音视频审核任务的输入。
  */
 export interface ReviewAudioVideoTaskInput {
@@ -839,6 +855,32 @@ export interface AiAnalysisTaskCoverOutput {
 }
 
 /**
+ * 音画质检测任务的输出。
+ */
+export interface QualityInspectTaskOutput {
+  /**
+   * 媒体文件是否无音频轨，取值范围：
+<li>0：否，即有音频轨；</li>
+<li>1：是，即无音频轨。</li>
+   */
+  NoAudio?: number
+  /**
+   * 媒体文件是否无视频轨，取值范围：
+<li>0：否，即有视频轨；</li>
+<li>1：是，即无视频轨。</li>
+   */
+  NoVideo?: number
+  /**
+   * 视频画面质量评分，取值范围：[0, 100]。
+   */
+  QualityEvaluationScore?: number
+  /**
+   * 音画质检测出的异常项列表。
+   */
+  QualityInspectResultSet?: Array<QualityInspectResultItem>
+}
+
+/**
  * 用户自定义文本音视频审核任务控制参数。
  */
 export interface UserDefineOcrTextReviewTemplateInfoForUpdate {
@@ -861,6 +903,16 @@ export interface UserDefineOcrTextReviewTemplateInfoForUpdate {
    * 判定需人工复核是否违规的分数阈值，当审核达到该分数以上，认为需人工复核。取值范围：0~100。
    */
   ReviewConfidence?: number
+}
+
+/**
+ * ResetProcedureTemplate返回参数结构体
+ */
+export interface ResetProcedureTemplateResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1432,6 +1484,18 @@ export interface DeleteContentReviewTemplateRequest {
 }
 
 /**
+ * 视频画面噪点检测的控制参数。
+ */
+export interface NoiseConfigureInfo {
+  /**
+   * 视频画面噪点检测开关，可选值：
+<li>ON：开启；</li>
+<li>OFF：关闭。</li>
+   */
+  Switch: string
+}
+
+/**
  * 音视频审核涉及令人不适宜信息的任务输入参数类型
  */
 export interface AiReviewPoliticalTaskInput {
@@ -1851,6 +1915,22 @@ export interface AiRecognitionTaskAsrWordsSegmentItem {
    * 识别片段置信度。取值：0~100。
    */
   Confidence: number
+}
+
+/**
+ * 视频画面质量评价的控制参数。
+ */
+export interface QualityEvaluationConfigureInfoForUpdate {
+  /**
+   * 视频画面质量评价开关，可选值：
+<li>ON：开启；</li>
+<li>OFF：关闭。</li>
+   */
+  Switch?: string
+  /**
+   * 视频画面质量评价过滤阈值，结果只返回低于该值的时间段。
+   */
+  Score?: number
 }
 
 /**
@@ -2492,6 +2572,18 @@ export interface DescribeDailyPlayStatFileListResponse {
 }
 
 /**
+ * 视频画面低光、过曝检测的控制参数。
+ */
+export interface AbnormalLightingConfigureInfo {
+  /**
+   * 视频画面低光、过曝检测开关，可选值：
+<li>ON：开启；</li>
+<li>OFF：关闭。</li>
+   */
+  Switch: string
+}
+
+/**
  * 文字水印模板
  */
 export interface TextWatermarkTemplateInputForUpdate {
@@ -2569,6 +2661,18 @@ export interface AiReviewPornTaskInput {
    * 鉴别涉及令人反感的信息的模板 ID。
    */
   Definition: number
+}
+
+/**
+ * 视频画面抖动重影检测的控制参数。
+ */
+export interface JitterConfigureInfoForUpdate {
+  /**
+   * 视频画面抖动重影检测开关，可选值：
+<li>ON：开启；</li>
+<li>OFF：关闭。</li>
+   */
+  Switch?: string
 }
 
 /**
@@ -2894,22 +2998,21 @@ export interface ModifySuperPlayerConfigResponse {
 }
 
 /**
- * 文本关键词识别输出。
+ * DescribeWordSamples返回参数结构体
  */
-export interface AiRecognitionTaskOcrWordsResultOutput {
+export interface DescribeWordSamplesResponse {
   /**
-   * 文本关键词识别结果集。
-<font color=red>注意</font> ：该列表最多仅展示前 100 个元素。如希望获得完整结果，请从 ResultSetFileUrl 对应的文件中获取。
+   * 符合条件的记录总数。
    */
-  ResultSet: Array<AiRecognitionTaskOcrWordsResultItem>
+  TotalCount: number
   /**
-   * 文本关键词识别结果集文件 URL。文件的内容为 JSON，数据结构与 ResultSet 字段一致。 （文件不会永久存储，到达ResultSetFileUrlExpireTime 时间点后文件将被删除）。
+   * 关键词信息。
    */
-  ResultSetFileUrl: string
+  WordSet: Array<AiSampleWord>
   /**
-   * 文本关键词识别结果集文件 URL 失效时间，使用  [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  ResultSetFileUrlExpireTime: string
+  RequestId?: string
 }
 
 /**
@@ -3242,21 +3345,22 @@ export interface CreateRebuildMediaTemplateResponse {
 }
 
 /**
- * DescribeWordSamples返回参数结构体
+ * 文本关键词识别输出。
  */
-export interface DescribeWordSamplesResponse {
+export interface AiRecognitionTaskOcrWordsResultOutput {
   /**
-   * 符合条件的记录总数。
+   * 文本关键词识别结果集。
+<font color=red>注意</font> ：该列表最多仅展示前 100 个元素。如希望获得完整结果，请从 ResultSetFileUrl 对应的文件中获取。
    */
-  TotalCount: number
+  ResultSet: Array<AiRecognitionTaskOcrWordsResultItem>
   /**
-   * 关键词信息。
+   * 文本关键词识别结果集文件 URL。文件的内容为 JSON，数据结构与 ResultSet 字段一致。 （文件不会永久存储，到达ResultSetFileUrlExpireTime 时间点后文件将被删除）。
    */
-  WordSet: Array<AiSampleWord>
+  ResultSetFileUrl: string
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 文本关键词识别结果集文件 URL 失效时间，使用  [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
    */
-  RequestId?: string
+  ResultSetFileUrlExpireTime: string
 }
 
 /**
@@ -3301,6 +3405,53 @@ export interface MediaImageSpriteItem {
    * 雪碧图子图位置与时间关系的 WebVtt 文件地址。WebVtt 文件表明了各个雪碧图小图对应的时间点，以及在雪碧大图里的坐标位置，一般被播放器用于实现预览。
    */
   WebVttUrl: string
+}
+
+/**
+ * 音画质检测任务信息。
+ */
+export interface QualityInspectTask {
+  /**
+   * 任务 ID。
+   */
+  TaskId?: string
+  /**
+   * 任务状态，取值：
+<li>PROCESSING：处理中；</li>
+<li>FINISH：已完成。</li>
+   */
+  Status?: string
+  /**
+   * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/266/50368#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+   */
+  ErrCodeExt?: string
+  /**
+   * 错误信息。
+   */
+  Message?: string
+  /**
+   * 音画质检测输入音视频的元信息。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MetaData?: MediaMetaData
+  /**
+   * 音画质检测任务输入。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Input?: QualityInspectTaskInput
+  /**
+   * 音画质检测任务输出。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Output?: QualityInspectTaskOutput
+  /**
+   * 用于去重的识别码，如果七天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。
+   */
+  SessionId?: string
+  /**
+   * 来源上下文，用于透传用户请求信息，音画质检测完成回调将返回该字段值，最长 1000 个字符。
+   */
+  SessionContext?: string
 }
 
 /**
@@ -3540,6 +3691,16 @@ export interface CoverBySnapshotTaskOutput {
    * 封面 URL。
    */
   CoverUrl: string
+}
+
+/**
+ * ModifyQualityInspectTemplate返回参数结构体
+ */
+export interface ModifyQualityInspectTemplateResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -4521,6 +4682,18 @@ export interface CreateWordSamplesRequest {
 }
 
 /**
+ * 视频画面模糊检测的控制参数。
+ */
+export interface BlurConfigureInfo {
+  /**
+   * 视频画面模糊检测开关，可选值：
+<li>ON：开启；</li>
+<li>OFF：关闭。</li>
+   */
+  Switch: string
+}
+
+/**
  * 语音鉴别涉及令人不适宜的信息的任务控制参数。
  */
 export interface PoliticalAsrReviewTemplateInfoForUpdate {
@@ -4750,6 +4923,18 @@ export interface AiRecognitionTaskSegmentResult {
    * 视频拆条任务执行完毕的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
    */
   FinishTime?: string
+}
+
+/**
+ * 视频画面抖动重影检测的控制参数。
+ */
+export interface JitterConfigureInfo {
+  /**
+   * 视频画面抖动重影检测开关，可选值：
+<li>ON：开启；</li>
+<li>OFF：关闭。</li>
+   */
+  Switch: string
 }
 
 /**
@@ -5405,6 +5590,18 @@ export interface ReduceMediaBitrateTask {
    * 用于去重的识别码，如果七天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。
    */
   SessionId: string
+}
+
+/**
+ * 视频画面花屏检测的控制参数。
+ */
+export interface CrashScreenConfigureInfo {
+  /**
+   * 视频画面花屏检测开关，可选值：
+<li>ON：开启；</li>
+<li>OFF：关闭。</li>
+   */
+  Switch: string
 }
 
 /**
@@ -6473,6 +6670,18 @@ export interface UserDefineConfigureInfo {
 }
 
 /**
+ * 视频画面噪点检测的控制参数。
+ */
+export interface NoiseConfigureInfoForUpdate {
+  /**
+   * 视频画面噪点检测开关，可选值：
+<li>ON：开启；</li>
+<li>OFF：关闭。</li>
+   */
+  Switch?: string
+}
+
+/**
  * 视频拆条片段。
  */
 export interface AiRecognitionTaskSegmentSegmentItem {
@@ -7077,6 +7286,18 @@ export interface AiAnalysisTaskTagOutput {
    * 视频智能标签列表文件 URL 失效时间，使用  [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
    */
   TagSetFileUrlExpireTime: string
+}
+
+/**
+ * 视频画面马赛克检测的控制参数。
+ */
+export interface MosaicConfigureInfo {
+  /**
+   * 视频画面马赛克检测开关，可选值：
+<li>ON：开启；</li>
+<li>OFF：关闭。</li>
+   */
+  Switch: string
 }
 
 /**
@@ -7731,50 +7952,15 @@ export interface MediaProcessTaskTranscodeResult {
 }
 
 /**
- * 域名信息
+ * 视频画面模糊检测的控制参数。
  */
-export interface DomainDetailInfo {
+export interface BlurConfigureInfoForUpdate {
   /**
-   * 域名名称。
+   * 视频画面模糊检测开关，可选值：
+<li>ON：开启；</li>
+<li>OFF：关闭。</li>
    */
-  Domain: string
-  /**
-   * 加速地区信息。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  AccelerateAreaInfos: Array<AccelerateAreaInfo>
-  /**
-   * 部署状态，取值有：
-<li>Online：上线；</li>
-<li>Deploying：部署中；</li>
-<li>Locked: 锁定中，出现该状态时，无法对该域名进行部署变更。</li>
-   */
-  DeployStatus: string
-  /**
-   * HTTPS 配置信息。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  HTTPSConfig: DomainHTTPSConfig
-  /**
-   * [Key 防盗链](https://cloud.tencent.com/document/product/266/14047)配置信息。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  UrlSignatureAuthPolicy: UrlSignatureAuthPolicy
-  /**
-   * [Referer 防盗链](https://cloud.tencent.com/document/product/266/14046)配置信息。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  RefererAuthPolicy: RefererAuthPolicy
-  /**
-   * 域名添加到腾讯云点播系统中的时间。
-<li>格式按照 ISO 8601标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。</li>
-   */
-  CreateTime: string
-  /**
-   * 域名 QUIC 配置信息。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  QUICConfig?: DomainQUICConfig
+  Switch?: string
 }
 
 /**
@@ -8754,6 +8940,32 @@ export interface CreateWatermarkTemplateRequest {
 }
 
 /**
+ * 视频画面黑边、白边、黑屏、白屏检测的控制参数。
+ */
+export interface BlackWhiteEdgeConfigureInfo {
+  /**
+   * 视频画面黑边、白边、黑屏、白屏检测开关，可选值：
+<li>ON：开启；</li>
+<li>OFF：关闭。</li>
+   */
+  Switch: string
+}
+
+/**
+ * 排序依据
+ */
+export interface SortBy {
+  /**
+   * 排序字段
+   */
+  Field: string
+  /**
+   * 排序方式，可选值：Asc（升序）、Desc（降序）
+   */
+  Order: string
+}
+
+/**
  * 鉴别涉及令人不安全的信息的任务控制参数。
  */
 export interface TerrorismConfigureInfoForUpdate {
@@ -8950,6 +9162,17 @@ export interface ImageScale {
 }
 
 /**
+ * 图片智能内容识别任务输入
+ */
+export interface ImageContentReviewInput {
+  /**
+   * 图片智能内容审核模板 ID。当前只支持：
+<li>10：所有审核类型均打开。</li>
+   */
+  Definition: number
+}
+
+/**
  * 视频转码播放信息（2017 版）
  */
 export interface TranscodePlayInfo2017 {
@@ -9036,6 +9259,72 @@ export interface ComposeMediaTaskInput {
    * 输出的媒体文件信息。
    */
   Output: ComposeMediaOutput
+}
+
+/**
+ * ModifyQualityInspectTemplate请求参数结构体
+ */
+export interface ModifyQualityInspectTemplateRequest {
+  /**
+   * 模板 ID。
+   */
+  Definition: number
+  /**
+   * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
+   */
+  SubAppId?: number
+  /**
+   * 模板名称，长度限制：64 个字符。
+   */
+  Name?: string
+  /**
+   * 模板描述信息，长度限制：256 个字符。
+   */
+  Comment?: string
+  /**
+   * 截帧间隔，单位为秒，最小值为 1。
+   */
+  ScreenshotInterval?: number
+  /**
+   * 视频画面抖动重影检测的控制参数。
+   */
+  JitterConfigure?: JitterConfigureInfoForUpdate
+  /**
+   * 视频画面模糊检测的控制参数。
+   */
+  BlurConfigure?: BlurConfigureInfoForUpdate
+  /**
+   * 视频画面低光、过曝检测的控制参数。
+   */
+  AbnormalLightingConfigure?: AbnormalLightingConfigureInfoForUpdate
+  /**
+   * 视频画面花屏检测的控制参数。
+   */
+  CrashScreenConfigure?: CrashScreenConfigureInfoForUpdate
+  /**
+   * 视频画面黑边、白边、黑屏、白屏检测的控制参数。
+   */
+  BlackWhiteEdgeConfigure?: BlackWhiteEdgeConfigureInfoForUpdate
+  /**
+   * 视频画面噪点检测的控制参数。
+   */
+  NoiseConfigure?: NoiseConfigureInfoForUpdate
+  /**
+   * 视频画面马赛克检测的控制参数。
+   */
+  MosaicConfigure?: MosaicConfigureInfoForUpdate
+  /**
+   * 视频画面二维码检测的控制参数。
+   */
+  QRCodeConfigure?: QRCodeConfigureInfoForUpdate
+  /**
+   * 视频画面质量评价的控制参数。
+   */
+  QualityEvaluationConfigure?: QualityEvaluationConfigureInfoForUpdate
+  /**
+   * 音频（静音、低音、爆音）检测的控制参数。
+   */
+  VoiceConfigure?: VoiceConfigureInfoForUpdate
 }
 
 /**
@@ -9641,13 +9930,17 @@ export interface DescribeImageProcessingTemplatesRequest {
 }
 
 /**
- * ResetProcedureTemplate返回参数结构体
+ * 音画质检测任务的输入。
  */
-export interface ResetProcedureTemplateResponse {
+export interface QualityInspectTaskInput {
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 媒体文件 ID。
    */
-  RequestId?: string
+  FileId?: string
+  /**
+   * 音画质检测模板 ID。
+   */
+  Definition?: number
 }
 
 /**
@@ -10220,6 +10513,53 @@ export interface ProcedureTemplate {
 }
 
 /**
+ * 域名信息
+ */
+export interface DomainDetailInfo {
+  /**
+   * 域名名称。
+   */
+  Domain: string
+  /**
+   * 加速地区信息。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AccelerateAreaInfos: Array<AccelerateAreaInfo>
+  /**
+   * 部署状态，取值有：
+<li>Online：上线；</li>
+<li>Deploying：部署中；</li>
+<li>Locked: 锁定中，出现该状态时，无法对该域名进行部署变更。</li>
+   */
+  DeployStatus: string
+  /**
+   * HTTPS 配置信息。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HTTPSConfig: DomainHTTPSConfig
+  /**
+   * [Key 防盗链](https://cloud.tencent.com/document/product/266/14047)配置信息。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UrlSignatureAuthPolicy: UrlSignatureAuthPolicy
+  /**
+   * [Referer 防盗链](https://cloud.tencent.com/document/product/266/14046)配置信息。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RefererAuthPolicy: RefererAuthPolicy
+  /**
+   * 域名添加到腾讯云点播系统中的时间。
+<li>格式按照 ISO 8601标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。</li>
+   */
+  CreateTime: string
+  /**
+   * 域名 QUIC 配置信息。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  QUICConfig?: DomainQUICConfig
+}
+
+/**
  * 音视频审核涉及令人不安全的信息的任务结果类型
  */
 export interface AiReviewTaskTerrorismResult {
@@ -10464,6 +10804,18 @@ export interface CreateSnapshotByTimeOffsetTemplateResponse {
 }
 
 /**
+ * 音频（静音、低音、爆音）检测的控制参数。
+ */
+export interface VoiceConfigureInfoForUpdate {
+  /**
+   * 音频（静音、低音、爆音）检测开关，可选值：
+<li>ON：开启；</li>
+<li>OFF：关闭。</li>
+   */
+  Switch?: string
+}
+
+/**
  * ModifyContentReviewTemplate请求参数结构体
  */
 export interface ModifyContentReviewTemplateRequest {
@@ -10515,78 +10867,6 @@ export interface ModifyContentReviewTemplateRequest {
 <li>OFF：否。</li>
    */
   ReviewWallSwitch?: string
-}
-
-/**
- * DeleteReviewTemplate请求参数结构体
- */
-export interface DeleteReviewTemplateRequest {
-  /**
-   * 审核模板唯一标识。
-   */
-  Definition: number
-  /**
-   * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
-   */
-  SubAppId?: number
-}
-
-/**
- * AttachMediaSubtitles返回参数结构体
- */
-export interface AttachMediaSubtitlesResponse {
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * 音视频审核任务类型
- */
-export interface AiContentReviewTaskInput {
-  /**
-   * 音视频审核模板 ID。
-   */
-  Definition: number
-}
-
-/**
- * CreateAdaptiveDynamicStreamingTemplate返回参数结构体
- */
-export interface CreateAdaptiveDynamicStreamingTemplateResponse {
-  /**
-   * 自适应转码模板唯一标识。
-   */
-  Definition: number
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DeleteSampleSnapshotTemplate请求参数结构体
- */
-export interface DeleteSampleSnapshotTemplateRequest {
-  /**
-   * 采样截图模板唯一标识。
-   */
-  Definition: number
-  /**
-   * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
-   */
-  SubAppId?: number
-}
-
-/**
- * AI 视频智能分析输入参数类型
- */
-export interface AiAnalysisTaskInput {
-  /**
-   * 视频内容分析模板 ID。
-   */
-  Definition: number
 }
 
 /**
@@ -10671,6 +10951,99 @@ export interface ImageSpriteTemplate {
    * 图片格式。
    */
   Format: string
+}
+
+/**
+ * DeleteReviewTemplate请求参数结构体
+ */
+export interface DeleteReviewTemplateRequest {
+  /**
+   * 审核模板唯一标识。
+   */
+  Definition: number
+  /**
+   * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
+   */
+  SubAppId?: number
+}
+
+/**
+ * AttachMediaSubtitles返回参数结构体
+ */
+export interface AttachMediaSubtitlesResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 音视频审核任务类型
+ */
+export interface AiContentReviewTaskInput {
+  /**
+   * 音视频审核模板 ID。
+   */
+  Definition: number
+}
+
+/**
+ * CreateAdaptiveDynamicStreamingTemplate返回参数结构体
+ */
+export interface CreateAdaptiveDynamicStreamingTemplateResponse {
+  /**
+   * 自适应转码模板唯一标识。
+   */
+  Definition: number
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeleteSampleSnapshotTemplate请求参数结构体
+ */
+export interface DeleteSampleSnapshotTemplateRequest {
+  /**
+   * 采样截图模板唯一标识。
+   */
+  Definition: number
+  /**
+   * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
+   */
+  SubAppId?: number
+}
+
+/**
+ * DescribeTranscodeTemplates返回参数结构体
+ */
+export interface DescribeTranscodeTemplatesResponse {
+  /**
+   * 符合过滤条件的记录总数。
+   */
+  TotalCount: number
+  /**
+   * 转码模板详情列表。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TranscodeTemplateSet: Array<TranscodeTemplate>
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 视频画面低光、过曝检测的控制参数。
+ */
+export interface AbnormalLightingConfigureInfoForUpdate {
+  /**
+   * 视频画面低光、过曝检测开关，可选值：
+<li>ON：开启；</li>
+<li>OFF：关闭。</li>
+   */
+  Switch?: string
 }
 
 /**
@@ -11136,17 +11509,65 @@ export interface PullUploadRequest {
 }
 
 /**
- * 排序依据
+ * CreateQualityInspectTemplate请求参数结构体
  */
-export interface SortBy {
+export interface CreateQualityInspectTemplateRequest {
   /**
-   * 排序字段
+   * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
    */
-  Field: string
+  SubAppId?: number
   /**
-   * 排序方式，可选值：Asc（升序）、Desc（降序）
+   * 音画质检测模板名称。
    */
-  Order: string
+  Name?: string
+  /**
+   * 音画质检测模板描述。
+   */
+  Comment?: string
+  /**
+   * 截帧间隔，单位为秒，最小值为 1。当不填时，默认截帧间隔为 1 秒。
+   */
+  ScreenshotInterval?: number
+  /**
+   * 视频画面抖动重影检测的控制参数。
+   */
+  JitterConfigure?: JitterConfigureInfo
+  /**
+   * 视频画面模糊检测的控制参数。
+   */
+  BlurConfigure?: BlurConfigureInfo
+  /**
+   * 视频画面低光、过曝检测的控制参数。
+   */
+  AbnormalLightingConfigure?: AbnormalLightingConfigureInfo
+  /**
+   * 视频画面花屏检测的控制参数。
+   */
+  CrashScreenConfigure?: CrashScreenConfigureInfo
+  /**
+   * 视频画面黑边、白边、黑屏、白屏检测的控制参数。
+   */
+  BlackWhiteEdgeConfigure?: BlackWhiteEdgeConfigureInfo
+  /**
+   * 视频画面噪点检测的控制参数。
+   */
+  NoiseConfigure?: NoiseConfigureInfo
+  /**
+   * 视频画面马赛克检测的控制参数。
+   */
+  MosaicConfigure?: MosaicConfigureInfo
+  /**
+   * 视频画面二维码检测的控制参数。
+   */
+  QRCodeConfigure?: QRCodeConfigureInfo
+  /**
+   * 视频画面质量评价的控制参数。
+   */
+  QualityEvaluationConfigure?: QualityEvaluationConfigureInfo
+  /**
+   * 音频（静音、低音、爆音）检测的控制参数。
+   */
+  VoiceConfigure?: VoiceConfigureInfo
 }
 
 /**
@@ -11249,6 +11670,18 @@ export interface RebuildMediaTargetVideoStream {
 当填 0 或不填时，系统将自动设置 gop 长度。
    */
   Gop?: number
+}
+
+/**
+ * 音频（静音、低音、爆音）检测的控制参数。
+ */
+export interface VoiceConfigureInfo {
+  /**
+   * 音频（静音、低音、爆音）检测开关，可选值：
+<li>ON：开启；</li>
+<li>OFF：关闭。</li>
+   */
+  Switch: string
 }
 
 /**
@@ -11749,6 +12182,18 @@ export interface DeleteSuperPlayerConfigResponse {
 }
 
 /**
+ * 视频画面花屏检测的控制参数。
+ */
+export interface CrashScreenConfigureInfoForUpdate {
+  /**
+   * 视频画面花屏检测开关，可选值：
+<li>ON：开启；</li>
+<li>OFF：关闭。</li>
+   */
+  Switch?: string
+}
+
+/**
  * DescribeSampleSnapshotTemplates请求参数结构体
  */
 export interface DescribeSampleSnapshotTemplatesRequest {
@@ -12062,6 +12507,18 @@ export interface ModifyAIRecognitionTemplateRequest {
    * 截帧间隔，单位为秒，最小值为 0.5 秒。
    */
   ScreenshotInterval?: number
+}
+
+/**
+ * 视频画面二维码检测的控制参数。
+ */
+export interface QRCodeConfigureInfo {
+  /**
+   * 视频画面二维码检测开关，可选值：
+<li>ON：开启；</li>
+<li>OFF：关闭。</li>
+   */
+  Switch: string
 }
 
 /**
@@ -12441,6 +12898,7 @@ export interface EventContent {
 <li>ExtractTraceWatermarkComplete：提取溯源水印完成；</li>
 <li>ExtractCopyRightWatermarkComplete：提取版权水印完成；</li>
 <li>DescribeFileAttributesComplete：获取文件属性完成；</li>
+<li>QualityInspectComplete：音画质检测完成。</li>
 <b>兼容 2017 版的事件类型：</b>
 <li>TranscodeComplete：视频转码完成；</li>
 <li>ConcatComplete：视频拼接完成；</li>
@@ -12559,6 +13017,11 @@ export interface EventContent {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DescribeFileAttributesCompleteEvent: DescribeFileAttributesTask
+  /**
+   * 音画质检测完成事件，当事件类型为 QualityInspectComplete 时有效。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  QualityInspectCompleteEvent?: QualityInspectTask
 }
 
 /**
@@ -12683,6 +13146,18 @@ export interface ModifyClassRequest {
 }
 
 /**
+ * 视频画面二维码检测的控制参数。
+ */
+export interface QRCodeConfigureInfoForUpdate {
+  /**
+   * 视频画面二维码检测开关，可选值：
+<li>ON：开启；</li>
+<li>OFF：关闭。</li>
+   */
+  Switch?: string
+}
+
+/**
  * 指定规格任务统计数据。
  */
 export interface SpecificationDataItem {
@@ -12739,6 +13214,34 @@ export interface ComposeMediaTaskOutput {
    * 输出文件的过期时间，超过该时间文件将被删除，默认为永久不过期，格式按照 ISO 8601标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。
    */
   ExpireTime: string
+}
+
+/**
+ * DescribeQualityInspectTemplates请求参数结构体
+ */
+export interface DescribeQualityInspectTemplatesRequest {
+  /**
+   * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
+   */
+  SubAppId?: number
+  /**
+   * 音画质检测模板列表。长度限制：100。
+   */
+  Definitions?: Array<number>
+  /**
+   * 模板类型过滤条件，可选值：
+<li>Preset：系统预置模板；</li>
+<li>Custom：用户自定义模板。</li>
+   */
+  Type?: string
+  /**
+   * 分页偏移量，默认值：0。
+   */
+  Offset?: number
+  /**
+   * 返回记录条数，默认值：10，最大值：100。
+   */
+  Limit?: number
 }
 
 /**
@@ -13156,14 +13659,13 @@ export interface AiRecognitionTaskAsrFullTextResult {
 }
 
 /**
- * 图片智能内容识别任务输入
+ * DeleteQualityInspectTemplate返回参数结构体
  */
-export interface ImageContentReviewInput {
+export interface DeleteQualityInspectTemplateResponse {
   /**
-   * 图片智能内容审核模板 ID。当前只支持：
-<li>10：所有审核类型均打开。</li>
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  Definition: number
+  RequestId?: string
 }
 
 /**
@@ -13586,6 +14088,20 @@ export interface MediaSampleSnapshotInfo {
 }
 
 /**
+ * InspectMediaQuality返回参数结构体
+ */
+export interface InspectMediaQualityResponse {
+  /**
+   * 音画质检测任务 ID。
+   */
+  TaskId?: string
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeSubAppIds返回参数结构体
  */
 export interface DescribeSubAppIdsResponse {
@@ -13870,6 +14386,40 @@ export interface DescribeImageSpriteTemplatesResponse {
 }
 
 /**
+ * InspectMediaQuality请求参数结构体
+ */
+export interface InspectMediaQualityRequest {
+  /**
+   * 媒体文件 ID，即该文件在云点播上的全局唯一标识符，在上传成功后由云点播后台分配。可以在 [视频上传完成事件通知](/document/product/266/7830) 或 [云点播控制台](https://console.cloud.tencent.com/vod/media) 获取该字段。
+   */
+  FileId: string
+  /**
+   * 音画质检测模板 ID。
+   */
+  Definition: number
+  /**
+   * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
+   */
+  SubAppId?: number
+  /**
+   * 任务的优先级，数值越大优先级越高，取值范围是 -10 到 10，不填代表 0。
+   */
+  TasksPriority?: number
+  /**
+   * 来源上下文，用于透传用户请求信息，音画质检测完成回调将返回该字段值，最长 1000 个字符。
+   */
+  SessionContext?: string
+  /**
+   * 用于去重的识别码，如果三天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。
+   */
+  SessionId?: string
+  /**
+   * 保留字段，特殊用途时使用。
+   */
+  ExtInfo?: string
+}
+
+/**
  * 智能按帧标签任务输入类型
  */
 export interface AiAnalysisTaskFrameTagInput {
@@ -13909,6 +14459,20 @@ export interface AiRecognitionTaskAsrWordsResultItem {
    * 语音关键词出现的时间片段列表。
    */
   SegmentSet: Array<AiRecognitionTaskAsrWordsSegmentItem>
+}
+
+/**
+ * CreateQualityInspectTemplate返回参数结构体
+ */
+export interface CreateQualityInspectTemplateResponse {
+  /**
+   * 音画质检测模板 ID。
+   */
+  Definition?: number
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -14065,7 +14629,8 @@ export interface DescribeTaskDetailResponse {
 <li>RebuildMedia：音画质重生任务；</li>
 <li>ReviewAudioVideo：音视频审核任务；</li>
 <li>ExtractTraceWatermark：提取溯源水印任务；</li>
-<li>ExtractCopyRightWatermark：提取版权水印任务。</li>
+<li>ExtractCopyRightWatermark：提取版权水印任务；</li>
+<li>QualityInspect：音画质检测任务。</li>
    */
   TaskType?: string
   /**
@@ -14182,6 +14747,11 @@ export interface DescribeTaskDetailResponse {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DescribeFileAttributesTask?: DescribeFileAttributesTask
+  /**
+   * 音画质检测任务信息，仅当 TaskType 为 QualityInspect 时该字段有值。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  QualityInspectTask?: QualityInspectTask
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -16169,6 +16739,18 @@ export interface MediaSubStreamInfoItem {
 }
 
 /**
+ * 视频画面马赛克检测的控制参数。
+ */
+export interface MosaicConfigureInfoForUpdate {
+  /**
+   * 视频画面马赛克检测开关，可选值：
+<li>ON：开启；</li>
+<li>OFF：关闭。</li>
+   */
+  Switch?: string
+}
+
+/**
  * DescribeWatermarkTemplates返回参数结构体
  */
 export interface DescribeWatermarkTemplatesResponse {
@@ -16924,6 +17506,24 @@ export interface CreateSnapshotByTimeOffsetTemplateRequest {
 }
 
 /**
+ * DescribeQualityInspectTemplates返回参数结构体
+ */
+export interface DescribeQualityInspectTemplatesResponse {
+  /**
+   * 符合过滤条件的记录总数。
+   */
+  TotalCount?: number
+  /**
+   * 音画质检测模板详情列表。
+   */
+  QualityInspectTemplateSet?: Array<QualityInspectTemplateItem>
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 语音关键词识别结果。
  */
 export interface AiRecognitionTaskAsrWordsResult {
@@ -17355,6 +17955,18 @@ export interface ModifyClassResponse {
 }
 
 /**
+ * 视频画面黑边、白边、黑屏、白屏检测的控制参数。
+ */
+export interface BlackWhiteEdgeConfigureInfoForUpdate {
+  /**
+   * 视频画面黑边、白边、黑屏、白屏检测开关，可选值：
+<li>ON：开启；</li>
+<li>OFF：关闭。</li>
+   */
+  Switch?: string
+}
+
+/**
  * 编辑点播视频文件信息
  */
 export interface EditMediaFileInfo {
@@ -17554,6 +18166,92 @@ export interface PornImgReviewTemplateInfo {
 }
 
 /**
+ * 音画质检测模板详情。
+ */
+export interface QualityInspectTemplateItem {
+  /**
+   * 模板 ID。
+   */
+  Definition?: number
+  /**
+   * 模板类型，可选值：
+<li>Preset：系统预置模板；</li>
+<li>Custom：用户自定义模板。</li>
+   */
+  Type?: string
+  /**
+   * 模板名称。
+   */
+  Name?: string
+  /**
+   * 模板描述。
+   */
+  Comment?: string
+  /**
+   * 截帧间隔，单位为秒。
+   */
+  ScreenshotInterval?: number
+  /**
+   * 视频画面抖动重影检测的控制参数。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  JitterConfigure?: JitterConfigureInfo
+  /**
+   * 视频画面模糊检测的控制参数。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BlurConfigure?: BlurConfigureInfo
+  /**
+   * 视频画面低光、过曝检测的控制参数。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AbnormalLightingConfigure?: AbnormalLightingConfigureInfo
+  /**
+   * 视频画面花屏检测的控制参数。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CrashScreenConfigure?: CrashScreenConfigureInfo
+  /**
+   * 视频画面黑边、白边、黑屏、白屏检测的控制参数。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BlackWhiteEdgeConfigure?: BlackWhiteEdgeConfigureInfo
+  /**
+   * 视频画面噪点检测的控制参数。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NoiseConfigure?: NoiseConfigureInfo
+  /**
+   * 视频画面马赛克检测的控制参数。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MosaicConfigure?: MosaicConfigureInfo
+  /**
+   * 视频画面二维码检测的控制参数。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  QRCodeConfigure?: QRCodeConfigureInfo
+  /**
+   * 视频画面质量评价的控制参数。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  QualityEvaluationConfigure?: QualityEvaluationConfigureInfo
+  /**
+   * 音频（静音、低音、爆音）检测的控制参数。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VoiceConfigure?: VoiceConfigureInfo
+  /**
+   * 模板创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+   */
+  CreateTime?: string
+  /**
+   * 模板最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+   */
+  UpdateTime?: string
+}
+
+/**
  * Ocr 文字涉及令人不适宜的信息
  */
 export interface AiReviewPoliticalOcrTaskOutput {
@@ -17719,22 +18417,13 @@ export interface MediaClassInfo {
 }
 
 /**
- * DescribeTranscodeTemplates返回参数结构体
+ * AI 视频智能分析输入参数类型
  */
-export interface DescribeTranscodeTemplatesResponse {
+export interface AiAnalysisTaskInput {
   /**
-   * 符合过滤条件的记录总数。
+   * 视频内容分析模板 ID。
    */
-  TotalCount: number
-  /**
-   * 转码模板详情列表。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TranscodeTemplateSet: Array<TranscodeTemplate>
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  Definition: number
 }
 
 /**
@@ -17849,6 +18538,39 @@ export interface MediaAiAnalysisFrameTagItem {
    * 按帧标签的可信度，取值范围是 0 到 100。
    */
   Confidence: number
+}
+
+/**
+ * 音画质检测异常片段信息。
+ */
+export interface QualityInspectItem {
+  /**
+   * 置信度，取值范围：[0, 100]。
+<font color=red>注意：</font> 仅当 Type 取值为下列之一时，本字段取值有效：
+<li>Mosaic：马赛克；</li>
+<li>QRCode：二维码；</li>
+<li>AppletCode：小程序码；</li>
+<li>BarCode：条形码。</li>
+   */
+  Confidence?: number
+  /**
+   * 异常片段起始的偏移时间，单位：秒。
+   */
+  StartTimeOffset?: number
+  /**
+   * 异常片段终止的偏移时间，单位：秒。
+   */
+  EndTimeOffset?: number
+  /**
+   * 检测出异常的区域坐标。数组包含 4 个元素 [x1,y1,x2,y2]，依次表示区域左上点、右下点的横纵坐标。
+<font color=red>注意：</font> 仅当 Type 取值为下列之一时，本字段取值有效：
+<li>BlackWhiteEdge：黑白边；</li>
+<li>Mosaic：马赛克；</li>
+<li>QRCode：二维码；</li>
+<li>AppletCode：小程序码；</li>
+<li>BarCode：条形码。</li>
+   */
+  AreaCoordSet?: Array<number>
 }
 
 /**
@@ -18441,6 +19163,45 @@ export interface DescribeFileAttributesRequest {
 }
 
 /**
+ * 音画质检测异常结果信息。
+ */
+export interface QualityInspectResultItem {
+  /**
+   * 异常类型，取值范围：
+<li>Jitter：抖动；</li>
+<li>Blur：模糊；</li>
+<li>LowLighting：低光照；</li>
+<li>HighLighting：过曝；</li>
+<li>CrashScreen：花屏；</li>
+<li>BlackWhiteEdge：黑白边；</li>
+<li>SolidColorScreen：纯色屏；</li>
+<li>Noise：噪点；</li>
+<li>Mosaic：马赛克；</li>
+<li>QRCode：二维码；</li>
+<li>AppletCode：小程序码；</li>
+<li>BarCode：条形码；</li>
+<li>LowVoice：低音；</li>
+<li>HighVoice：爆音；</li>
+<li>NoVoice：静音；</li>
+<li>LowEvaluation：无参考打分低于阈值。</li>
+   */
+  Type?: string
+  /**
+   * 异常片段列表。
+<font color=red>注意：</font> 该列表最多仅展示前 100 个元素。如希望获得完整结果，请从 SegmentSetFileUrl 对应的文件中获取。
+   */
+  SegmentSet?: Array<QualityInspectItem>
+  /**
+   * 异常片段列表文件 URL。文件 内容 为  JSON，数据结构与 SegmentSet 字段一致。（文件不会永久存储，到达SegmentSetFileUrlExpireTime 时间点后文件将被删除）。
+   */
+  SegmentSetFileUrl?: string
+  /**
+   * 异常片段列表文件 URL 失效时间，使用  [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+   */
+  SegmentSetFileUrlExpireTime?: string
+}
+
+/**
  * 视频处理输出文件信息参数。
  */
 export interface MediaOutputInfo {
@@ -18529,6 +19290,20 @@ export interface DeleteWatermarkTemplateResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DeleteQualityInspectTemplate请求参数结构体
+ */
+export interface DeleteQualityInspectTemplateRequest {
+  /**
+   * 音画质检测模板号。
+   */
+  Definition: number
+  /**
+   * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
+   */
+  SubAppId?: number
 }
 
 /**

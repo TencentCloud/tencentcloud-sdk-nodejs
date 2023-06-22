@@ -148,6 +148,16 @@ it("yinsuda.v20220527.DescribeKTVRobots", async function () {
     }
 })
 
+it("yinsuda.v20220527.DescribeKTVMusicAccompanySegmentUrl", async function () {
+    try {
+       const data = await client.DescribeKTVMusicAccompanySegmentUrl({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("yinsuda.v20220527.DescribeKTVMatchMusics", async function () {
     try {
        const data = await client.DescribeKTVMatchMusics({})

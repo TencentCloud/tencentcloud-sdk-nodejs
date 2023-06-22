@@ -45,7 +45,9 @@ import {
   SetAudioParamCommandInput,
   KTVMatchMusic,
   TRTCJoinRoomInput,
+  KTVOtherSegments,
   DescribeKTVRobotsResponse,
+  DescribeKTVMusicAccompanySegmentUrlRequest,
   KTVTagGroupInfo,
   BatchDescribeKTVMusicDetailsRequest,
   AMEMusicBaseInfo,
@@ -69,6 +71,7 @@ import {
   SearchKTVMusicsRequest,
   PlayCommandInput,
   TimeRange,
+  DescribeKTVMusicAccompanySegmentUrlResponse,
   KTVPlaylistBaseInfo,
   DescribeUserInfoRequest,
   SendMessageCommandInput,
@@ -218,6 +221,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeKTVRobotsResponse) => void
   ): Promise<DescribeKTVRobotsResponse> {
     return this.request("DescribeKTVRobots", req, cb)
+  }
+
+  /**
+   * 获取歌曲伴奏片段链接，可用于抢唱
+   */
+  async DescribeKTVMusicAccompanySegmentUrl(
+    req: DescribeKTVMusicAccompanySegmentUrlRequest,
+    cb?: (error: string, rep: DescribeKTVMusicAccompanySegmentUrlResponse) => void
+  ): Promise<DescribeKTVMusicAccompanySegmentUrlResponse> {
+    return this.request("DescribeKTVMusicAccompanySegmentUrl", req, cb)
   }
 
   /**

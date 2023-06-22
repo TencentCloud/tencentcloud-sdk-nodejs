@@ -130,6 +130,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ProcessMediaByProcedure", req, cb);
     }
     /**
+     * 创建音画质检测模板。
+     */
+    async CreateQualityInspectTemplate(req, cb) {
+        return this.request("CreateQualityInspectTemplate", req, cb);
+    }
+    /**
      * 修改音画质重生模板。
      */
     async ModifyRebuildMediaTemplate(req, cb) {
@@ -244,10 +250,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeTasks", req, cb);
     }
     /**
-     * 该接口用于批量创建关键词样本，样本用于通过OCR、ASR技术，进行不适宜内容识别、内容识别等视频处理。
+     * 该接口用于开通某地域的存储。
+  1. 用户开通点播业务时，系统默认为用户开通了部分地域的存储，用户如果需要开通其它地域的存储，可以通过该接口进行开通。
+  2. 通过 DescribeStorageRegions 接口可以查询到所有存储地域及已经开通的地域。
      */
-    async CreateWordSamples(req, cb) {
-        return this.request("CreateWordSamples", req, cb);
+    async CreateStorageRegion(req, cb) {
+        return this.request("CreateStorageRegion", req, cb);
     }
     /**
      * 重新设置用户自定义任务流模板的内容。
@@ -345,6 +353,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeTranscodeTemplates(req, cb) {
         return this.request("DescribeTranscodeTemplates", req, cb);
+    }
+    /**
+     * 对点播中的音视频媒体发起音画质检测任务。
+     */
+    async InspectMediaQuality(req, cb) {
+        return this.request("InspectMediaQuality", req, cb);
     }
     /**
      * 该接口可以查询用户已经购买的预付费商品的信息，包括：
@@ -587,12 +601,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("EnhanceMediaByTemplate", req, cb);
     }
     /**
-     * 该接口用于开通某地域的存储。
-  1. 用户开通点播业务时，系统默认为用户开通了部分地域的存储，用户如果需要开通其它地域的存储，可以通过该接口进行开通。
-  2. 通过 DescribeStorageRegions 接口可以查询到所有存储地域及已经开通的地域。
+     * 该接口用于根据素材 ID，修改素材样本信息，包括名称、描述的修改，以及五官、标签的添加、删除、重置操作。五官删除操作需保证至少剩余 1 张图片，否则，请使用重置操作。
      */
-    async CreateStorageRegion(req, cb) {
-        return this.request("CreateStorageRegion", req, cb);
+    async ModifyPersonSample(req, cb) {
+        return this.request("ModifyPersonSample", req, cb);
     }
     /**
      * 创建音画质重生模板。
@@ -683,6 +695,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeEventsState", req, cb);
     }
     /**
+     * 修改音画质检测模板。
+     */
+    async ModifyQualityInspectTemplate(req, cb) {
+        return this.request("ModifyQualityInspectTemplate", req, cb);
+    }
+    /**
      * 该 API 已经<font color='red'>不再维护</font>，新版播放器签名不再使用播放器配置模板，详细请参考 [播放器签名](https://cloud.tencent.com/document/product/266/45554)。
 创建播放器配置，数量上限：100。
      */
@@ -703,6 +721,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ConfirmEvents(req, cb) {
         return this.request("ConfirmEvents", req, cb);
+    }
+    /**
+     * 该接口用于获取轮播播单列表。
+     */
+    async DescribeRoundPlays(req, cb) {
+        return this.request("DescribeRoundPlays", req, cb);
     }
     /**
      * 该 API 已经<font color='red'>不再维护</font>，请使用 MPS 产品的 [ProcessMedia](https://cloud.tencent.com/document/product/862/37578) 接口，在入参 InputInfo.UrlInputInfo.Url 中指定视频 URL。
@@ -812,12 +836,6 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateSubAppId", req, cb);
     }
     /**
-     * 该接口用于根据素材 ID，修改素材样本信息，包括名称、描述的修改，以及五官、标签的添加、删除、重置操作。五官删除操作需保证至少剩余 1 张图片，否则，请使用重置操作。
-     */
-    async ModifyPersonSample(req, cb) {
-        return this.request("ModifyPersonSample", req, cb);
-    }
-    /**
      * 查询转动图模板列表，支持根据条件，分页查询。
      */
     async DescribeAnimatedGraphicsTemplates(req, cb) {
@@ -867,10 +885,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateClass", req, cb);
     }
     /**
-     * 该接口用于获取轮播播单列表。
+     * 该接口用于批量创建关键词样本，样本用于通过OCR、ASR技术，进行不适宜内容识别、内容识别等视频处理。
      */
-    async DescribeRoundPlays(req, cb) {
-        return this.request("DescribeRoundPlays", req, cb);
+    async CreateWordSamples(req, cb) {
+        return this.request("CreateWordSamples", req, cb);
     }
     /**
      * 腾讯云点播为客户提供了媒体上传、媒体管理、媒体处理等等服务，在这些服务执行过程或执行结束时，腾讯云点播也提供各种对应的事件通知，方便开发者感知服务处理状态，并做下一步的业务操作。
@@ -960,6 +978,18 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeAIRecognitionTemplates(req, cb) {
         return this.request("DescribeAIRecognitionTemplates", req, cb);
+    }
+    /**
+     * 删除音画质检测模板。
+     */
+    async DeleteQualityInspectTemplate(req, cb) {
+        return this.request("DeleteQualityInspectTemplate", req, cb);
+    }
+    /**
+     * 获取音画质检测模板列表。
+     */
+    async DescribeQualityInspectTemplates(req, cb) {
+        return this.request("DescribeQualityInspectTemplates", req, cb);
     }
     /**
      * 该 API 已经<font color='red'>不再维护</font>，新版播放器签名不再使用播放器配置模板，详细请参考 [播放器签名](https://cloud.tencent.com/document/product/266/45554)。

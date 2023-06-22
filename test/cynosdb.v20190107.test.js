@@ -158,6 +158,16 @@ it("cynosdb.v20190107.CloseProxy", async function () {
     }
 })
 
+it("cynosdb.v20190107.DescribeProxySpecs", async function () {
+    try {
+       const data = await client.DescribeProxySpecs({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cynosdb.v20190107.DescribeClusterDetail", async function () {
     try {
        const data = await client.DescribeClusterDetail({})
