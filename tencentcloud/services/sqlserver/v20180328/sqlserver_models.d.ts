@@ -1911,11 +1911,11 @@ export interface DescribeDBsResponse {
     /**
      * 数据库数量
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 实例数据库列表
      */
-    DBInstances: Array<InstanceDBDetail>;
+    DBInstances?: Array<InstanceDBDetail>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2794,6 +2794,10 @@ export interface DescribeDBsRequest {
      * 排序规则（desc-降序，asc-升序），默认desc
      */
     OrderByType?: string;
+    /**
+     * 是否已开启TDE加密，enable-已加密，disable-未加密
+     */
+    Encryption?: string;
 }
 /**
  * DescribeMigrationDatabases请求参数结构体
@@ -4345,6 +4349,24 @@ export interface DbNormalDetail {
     CreateTime?: string;
 }
 /**
+ * TDE透明数据加密配置
+ */
+export interface TDEConfigAttribute {
+    /**
+     * 是否已开通TDE加密，enable-已开通，disable-未开通
+     */
+    Encryption?: string;
+    /**
+     * 证书归属。self-表示使用该账号自身的证书，others-表示引用其他账号的证书，none-表示没有证书
+     */
+    CertificateAttribution?: string;
+    /**
+     * 开通TDE加密时引用的其他主账号ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    QuoteUin?: string;
+}
+/**
  * ModifyDBInstanceRenewFlag请求参数结构体
  */
 export interface ModifyDBInstanceRenewFlagRequest {
@@ -4389,6 +4411,10 @@ export interface DescribeDBInstancesAttributeResponse {
      * 慢SQL、阻塞、死锁扩展事件文件保留时长
      */
     EventSaveDays?: number;
+    /**
+     * TDE透明数据加密配置
+     */
+    TDEConfig?: TDEConfigAttribute;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -5508,6 +5534,10 @@ export interface DBDetail {
      * 内部状态。ONLINE表示运行中
      */
     InternalStatus: string;
+    /**
+     * 是否已开启TDE加密，enable-已加密，disable-未加密
+     */
+    Encryption?: string;
 }
 /**
  * ResetAccountPassword请求参数结构体

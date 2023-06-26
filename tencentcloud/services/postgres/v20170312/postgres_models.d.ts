@@ -1227,15 +1227,15 @@ export interface CreateReadOnlyDBInstanceResponse {
     /**
      * 订单号列表。每个实例对应一个订单号
      */
-    DealNames: Array<string>;
+    DealNames?: Array<string>;
     /**
      * 冻结流水号
      */
-    BillId: string;
+    BillId?: string;
     /**
      * 创建成功的实例ID集合，只在后付费情景下有返回值
      */
-    DBInstanceIdSet: Array<string>;
+    DBInstanceIdSet?: Array<string>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -3672,7 +3672,7 @@ export interface DescribeBackupDownloadRestrictionResponse {
  */
 export interface CreateReadOnlyDBInstanceRequest {
     /**
-     * 售卖规格ID。该参数可以通过调用DescribeProductConfig的返回值中的SpecCode字段来获取。
+     * 售卖规格ID。该参数可以通过调用DescribeClasses的返回值中的SpecCode字段来获取。
      */
     SpecCode: string;
     /**
@@ -3704,7 +3704,7 @@ export interface CreateReadOnlyDBInstanceRequest {
      */
     DBVersion?: string;
     /**
-     * 实例计费类型。目前支持：PREPAID（预付费，即包年包月），POSTPAID_BY_HOUR（后付费，即按量计费）。如果主实例为后付费，只读实例必须也为后付费。
+     * 实例计费类型。目前支持：PREPAID（预付费，即包年包月），POSTPAID_BY_HOUR（后付费，即按量计费）。默认值：PREPAID。如果主实例为后付费，只读实例必须也为后付费。
      */
     InstanceChargeType?: string;
     /**

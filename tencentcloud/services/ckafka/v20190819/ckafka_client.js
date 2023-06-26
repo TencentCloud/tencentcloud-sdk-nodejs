@@ -154,6 +154,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeInstances", req, cb);
     }
     /**
+     * 获取Topic 副本详情信息
+     */
+    async DescribeTopicSyncReplica(req, cb) {
+        return this.request("DescribeTopicSyncReplica", req, cb);
+    }
+    /**
      * 添加实例路由
      */
     async CreateRoute(req, cb) {
@@ -401,10 +407,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("BatchModifyGroupOffsets", req, cb);
     }
     /**
-     * 获取Topic 副本详情信息
+     * 当前接口用来替代 CreateInstancePost 接口。创建按量计费实例。通常用于 SDK 或云 API 控制台调用接口，创建后付费 CKafka 实例。调用接口与在 CKafka 控制台购买按量付费实例效果相同。
      */
-    async DescribeTopicSyncReplica(req, cb) {
-        return this.request("DescribeTopicSyncReplica", req, cb);
+    async CreatePostPaidInstance(req, cb) {
+        return this.request("CreatePostPaidInstance", req, cb);
     }
     /**
      * 获取消费分组offset

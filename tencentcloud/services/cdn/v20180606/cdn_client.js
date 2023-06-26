@@ -34,6 +34,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("AddCLSTopicDomains", req, cb);
     }
     /**
+     * ModifyDomainConfig 用于修改内容分发网络加速域名配置信息
+注意：
+Route 字段，使用点分隔，最后一段称为叶子节点，非叶子节点配置保持不变；
+Value 字段，使用 json 进行序列化，其中固定 update 作为 key，配置路径值参考 https://cloud.tencent.com/document/product/228/41116 接口各配置项复杂类型，为配置路径对应复杂类型下的节点。
+云审计相关：接口的入参可能包含密钥等敏感信息，所以此接口的入参不会上报到云审计。
+     */
+    async ModifyDomainConfig(req, cb) {
+        return this.request("ModifyDomainConfig", req, cb);
+    }
+    /**
      * DescribeIpStatus 用于查询域名所在加速平台的边缘节点、回源节点明细。注意事项：暂不支持查询边缘节点信息并且数据会存在一定延迟。
 
 >?  若您的业务已迁移至 CDN 控制台，请参考<a href="https://cloud.tencent.com/document/api/228/41954"> CDN 接口文档</a>，使用  CDN 相关API 进行操作。

@@ -28,26 +28,10 @@ class Client extends abstract_client_1.AbstractClient {
         super("tbaas.tencentcloudapi.com", "2018-04-16", clientConfig);
     }
     /**
-     * Bcos区块链引擎已下线，请选用其他区块链引擎
-
-执行Bcos交易，支持动态部署的合约
-     */
-    async InvokeBcosTrans(req, cb) {
-        return this.request("InvokeBcosTrans", req, cb);
-    }
-    /**
      * 通过交易ID查询长安链交易
      */
     async QueryChainMakerTransaction(req, cb) {
         return this.request("QueryChainMakerTransaction", req, cb);
-    }
-    /**
-     * Bcos区块链引擎已下线，请选用其他区块链引擎
-
-使用块高查询Bcos区块信息
-     */
-    async GetBcosBlockByNumber(req, cb) {
-        return this.request("GetBcosBlockByNumber", req, cb);
     }
     /**
      * 批量申请长安链用户签名证书
@@ -62,26 +46,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("GetChaincodeLogForUser", req, cb);
     }
     /**
-     * Bcos区块链引擎已下线，请选用其他区块链引擎
-
-Bcos根据交易哈希查看交易详细信息
+     * 通过交易ID查询长安链体验网络交易
      */
-    async GetBcosTransByHash(req, cb) {
-        return this.request("GetBcosTransByHash", req, cb);
+    async QueryChainMakerDemoTransaction(req, cb) {
+        return this.request("QueryChainMakerDemoTransaction", req, cb);
     }
     /**
      * 获取该用户的网络列表。网络信息中包含组织信息，但仅包含该用户所在组织的信息。
      */
     async GetClusterListForUser(req, cb) {
         return this.request("GetClusterListForUser", req, cb);
-    }
-    /**
-     * Bcos区块链引擎已下线，请选用其他区块链引擎
-
-Bcos分页查询当前群组下的区块列表
-     */
-    async GetBcosBlockList(req, cb) {
-        return this.request("GetBcosBlockList", req, cb);
     }
     /**
      * 调用长安链合约查询
@@ -114,14 +88,6 @@ Bcos分页查询当前群组下的区块列表
         return this.request("GetPeerLogForUser", req, cb);
     }
     /**
-     * Bcos区块链引擎已下线，请选用其他区块链引擎
-
-动态部署并发布Bcos合约
-     */
-    async DeployDynamicBcosContract(req, cb) {
-        return this.request("DeployDynamicBcosContract", req, cb);
-    }
-    /**
      * 获取fabric最新交易列表
      */
     async GetLatestTransactionList(req, cb) {
@@ -138,12 +104,6 @@ Bcos分页查询当前群组下的区块列表
      */
     async CreateChaincodeAndInstallForUser(req, cb) {
         return this.request("CreateChaincodeAndInstallForUser", req, cb);
-    }
-    /**
-     * 通过交易ID查询长安链体验网络交易
-     */
-    async QueryChainMakerDemoTransaction(req, cb) {
-        return this.request("QueryChainMakerDemoTransaction", req, cb);
     }
     /**
      * 获取最新交易列表（已废弃）
@@ -210,14 +170,6 @@ Bcos分页查询当前群组下的区块列表
      */
     async SrvInvoke(req, cb) {
         return this.request("SrvInvoke", req, cb);
-    }
-    /**
-     * Bcos区块链引擎已下线，请选用其他区块链引擎
-
-Bcos分页查询当前群组的交易信息列表
-     */
-    async GetBcosTransList(req, cb) {
-        return this.request("GetBcosTransList", req, cb);
     }
     /**
      * 调用长安链体验网络合约执行交易

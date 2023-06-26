@@ -2142,6 +2142,23 @@ export interface Compatibility {
     Code: number;
 }
 /**
+ * ModifyDomainConfig请求参数结构体
+ */
+export interface ModifyDomainConfigRequest {
+    /**
+     * 域名
+     */
+    Domain: string;
+    /**
+     * 配置路径
+     */
+    Route: string;
+    /**
+     * 配置路径值，使用 json 进行序列化，其中固定 update 作为 key
+     */
+    Value: string;
+}
+/**
  * Cls日志搜索结果
  */
 export interface ClsSearchLogs {
@@ -9663,6 +9680,15 @@ export interface CappingRule {
      * 下行速度值设置，单位为 KB/s
      */
     KBpsThreshold: number;
+}
+/**
+ * ModifyDomainConfig返回参数结构体
+ */
+export interface ModifyDomainConfigResponse {
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * Quic配置项

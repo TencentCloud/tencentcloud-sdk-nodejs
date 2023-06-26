@@ -19,89 +19,75 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   PeerDetailForUser,
-  GetBcosTransListRequest,
   QueryChainMakerDemoBlockTransactionResponse,
   QueryChainMakerContractRequest,
-  DeployDynamicBcosContractResponse,
+  QueryChainMakerBlockTransactionRequest,
   GetClusterListForUserResponse,
   GetBlockTransactionListForUserResponse,
   ApplyChainMakerBatchUserCertResponse,
   ApplyUserCertRequest,
-  SrvInvokeRequest,
   SrvInvokeResponse,
   GetChaincodeInitializeResultForUserRequest,
   InitializeChaincodeForUserRequest,
   GetTransactionDetailForUserResponse,
-  InvokeChainMakerDemoContractRequest,
+  SrvInvokeRequest,
   ApplyUserCertResponse,
   GetChaincodeCompileLogForUserRequest,
   GetInvokeTxRequest,
-  GetBcosBlockListResponse,
+  InvokeResponse,
   SignCertCsr,
   DownloadUserCertResponse,
-  QueryChainMakerBlockTransactionRequest,
   GetChaincodeLogForUserRequest,
   GetLatesdTransactionListRequest,
-  InvokeResponse,
+  LogDetailForUser,
+  DownloadUserCertRequest,
   GetTransactionDetailForUserRequest,
   GetBlockListResponse,
   GetBlockTransactionListForUserRequest,
   QueryChainMakerBlockTransactionResponse,
-  GetBcosBlockListRequest,
+  InvokeChainMakerDemoContractRequest,
   GetClusterSummaryRequest,
-  InvokeBcosTransRequest,
   InvokeChainMakerContractResponse,
-  QueryChainMakerDemoBlockTransactionRequest,
+  QueryChainMakerTransactionRequest,
   ClusterDetailForUser,
   GetPeerLogForUserRequest,
   GetLatesdTransactionListResponse,
   QueryChainMakerTransactionResponse,
-  DownloadUserCertRequest,
+  GetChaincodeInitializeResultForUserResponse,
   GetClusterSummaryResponse,
-  GetLatestTransactionListRequest,
   PeerSet,
   ChainMakerTransactionResult,
   CreateChaincodeAndInstallForUserRequest,
-  EndorserGroup,
-  GetBcosTransByHashResponse,
-  GetPeerLogForUserResponse,
-  QueryChainMakerDemoContractRequest,
+  GetLatestTransactionListRequest,
   QueryChainMakerDemoTransactionResponse,
   ApplyChainMakerBatchUserCertRequest,
   GetChaincodeLogForUserResponse,
   QueryChainMakerDemoTransactionRequest,
-  LogDetailForUser,
-  InvokeBcosTransResponse,
   InitializeChaincodeForUserResponse,
   GroupDetailForUser,
-  GetBcosBlockByNumberResponse,
+  QueryChainMakerDemoContractRequest,
   ChainMakerContractResult,
   GetClusterListForUserRequest,
   Block,
   QueryChainMakerDemoContractResponse,
   GetBlockListRequest,
-  BcosTransInfo,
-  GetChaincodeInitializeResultForUserResponse,
+  GetPeerLogForUserResponse,
   InvokeRequest,
   GetInvokeTxResponse,
   GetChannelListForUserResponse,
   QueryChainMakerContractResponse,
-  GetBcosTransByHashRequest,
-  QueryChainMakerTransactionRequest,
   GetChaincodeCompileLogForUserResponse,
-  DeployDynamicBcosContractRequest,
   InvokeChainMakerContractRequest,
-  GetBcosTransListResponse,
+  TransactionItem,
   GetLatestTransactionListResponse,
-  BcosBlockObj,
+  QueryChainMakerDemoBlockTransactionRequest,
   ChannelDetailForUser,
   QueryRequest,
   CreateChaincodeAndInstallForUserResponse,
   GetChannelListForUserRequest,
   InvokeChainMakerDemoContractResponse,
   QueryResponse,
-  GetBcosBlockByNumberRequest,
-  TransactionItem,
+  EndorserGroup,
 } from "./tbaas_models"
 
 /**
@@ -114,18 +100,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * Bcos区块链引擎已下线，请选用其他区块链引擎
-
-执行Bcos交易，支持动态部署的合约
-     */
-  async InvokeBcosTrans(
-    req: InvokeBcosTransRequest,
-    cb?: (error: string, rep: InvokeBcosTransResponse) => void
-  ): Promise<InvokeBcosTransResponse> {
-    return this.request("InvokeBcosTrans", req, cb)
-  }
-
-  /**
    * 通过交易ID查询长安链交易
    */
   async QueryChainMakerTransaction(
@@ -133,18 +107,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: QueryChainMakerTransactionResponse) => void
   ): Promise<QueryChainMakerTransactionResponse> {
     return this.request("QueryChainMakerTransaction", req, cb)
-  }
-
-  /**
-     * Bcos区块链引擎已下线，请选用其他区块链引擎
-
-使用块高查询Bcos区块信息
-     */
-  async GetBcosBlockByNumber(
-    req: GetBcosBlockByNumberRequest,
-    cb?: (error: string, rep: GetBcosBlockByNumberResponse) => void
-  ): Promise<GetBcosBlockByNumberResponse> {
-    return this.request("GetBcosBlockByNumber", req, cb)
   }
 
   /**
@@ -168,15 +130,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * Bcos区块链引擎已下线，请选用其他区块链引擎
-
-Bcos根据交易哈希查看交易详细信息
-     */
-  async GetBcosTransByHash(
-    req: GetBcosTransByHashRequest,
-    cb?: (error: string, rep: GetBcosTransByHashResponse) => void
-  ): Promise<GetBcosTransByHashResponse> {
-    return this.request("GetBcosTransByHash", req, cb)
+   * 通过交易ID查询长安链体验网络交易
+   */
+  async QueryChainMakerDemoTransaction(
+    req: QueryChainMakerDemoTransactionRequest,
+    cb?: (error: string, rep: QueryChainMakerDemoTransactionResponse) => void
+  ): Promise<QueryChainMakerDemoTransactionResponse> {
+    return this.request("QueryChainMakerDemoTransaction", req, cb)
   }
 
   /**
@@ -187,18 +147,6 @@ Bcos根据交易哈希查看交易详细信息
     cb?: (error: string, rep: GetClusterListForUserResponse) => void
   ): Promise<GetClusterListForUserResponse> {
     return this.request("GetClusterListForUser", req, cb)
-  }
-
-  /**
-     * Bcos区块链引擎已下线，请选用其他区块链引擎
-
-Bcos分页查询当前群组下的区块列表
-     */
-  async GetBcosBlockList(
-    req: GetBcosBlockListRequest,
-    cb?: (error: string, rep: GetBcosBlockListResponse) => void
-  ): Promise<GetBcosBlockListResponse> {
-    return this.request("GetBcosBlockList", req, cb)
   }
 
   /**
@@ -252,18 +200,6 @@ Bcos分页查询当前群组下的区块列表
   }
 
   /**
-     * Bcos区块链引擎已下线，请选用其他区块链引擎
-
-动态部署并发布Bcos合约
-     */
-  async DeployDynamicBcosContract(
-    req: DeployDynamicBcosContractRequest,
-    cb?: (error: string, rep: DeployDynamicBcosContractResponse) => void
-  ): Promise<DeployDynamicBcosContractResponse> {
-    return this.request("DeployDynamicBcosContract", req, cb)
-  }
-
-  /**
    * 获取fabric最新交易列表
    */
   async GetLatestTransactionList(
@@ -291,16 +227,6 @@ Bcos分页查询当前群组下的区块列表
     cb?: (error: string, rep: CreateChaincodeAndInstallForUserResponse) => void
   ): Promise<CreateChaincodeAndInstallForUserResponse> {
     return this.request("CreateChaincodeAndInstallForUser", req, cb)
-  }
-
-  /**
-   * 通过交易ID查询长安链体验网络交易
-   */
-  async QueryChainMakerDemoTransaction(
-    req: QueryChainMakerDemoTransactionRequest,
-    cb?: (error: string, rep: QueryChainMakerDemoTransactionResponse) => void
-  ): Promise<QueryChainMakerDemoTransactionResponse> {
-    return this.request("QueryChainMakerDemoTransaction", req, cb)
   }
 
   /**
@@ -411,18 +337,6 @@ Bcos分页查询当前群组下的区块列表
     cb?: (error: string, rep: SrvInvokeResponse) => void
   ): Promise<SrvInvokeResponse> {
     return this.request("SrvInvoke", req, cb)
-  }
-
-  /**
-     * Bcos区块链引擎已下线，请选用其他区块链引擎
-
-Bcos分页查询当前群组的交易信息列表
-     */
-  async GetBcosTransList(
-    req: GetBcosTransListRequest,
-    cb?: (error: string, rep: GetBcosTransListResponse) => void
-  ): Promise<GetBcosTransListResponse> {
-    return this.request("GetBcosTransList", req, cb)
   }
 
   /**

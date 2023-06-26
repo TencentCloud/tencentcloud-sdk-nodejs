@@ -40,6 +40,7 @@ import {
   DescribeProductsResponse,
   CreateTraceChainResponse,
   DescribeTraceDataListResponse,
+  AttrItem,
   DescribeTraceCodesRequest,
   CreateTraceCodesAsyncRequest,
   ModifyTraceDataResponse,

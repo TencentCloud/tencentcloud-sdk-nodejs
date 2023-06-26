@@ -375,7 +375,7 @@ export interface DescribeThirdPartyAuthCodeResponse {
     /**
      * 用户是否实名，VERIFIED 为实名，UNVERIFIED 未实名
      */
-    VerifyStatus: string;
+    VerifyStatus?: string;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -834,13 +834,13 @@ export interface DescribeFlowEvidenceReportResponse {
      * 报告 URL
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ReportUrl: string;
+    ReportUrl?: string;
     /**
      * 执行中：EvidenceStatusExecuting
   成功：EvidenceStatusSuccess
   失败：EvidenceStatusFailed
      */
-    Status: string;
+    Status?: string;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -3594,7 +3594,7 @@ export interface Component {
   
   ComponentType为SIGN_SEAL类型时，支持以下参数：
   1.PageRanges：PageRange的数组，通过PageRanges属性设置该印章在PDF所有页面上盖章（适用于标书在所有页面盖章的情况）
-  参数样例： "ComponentExtra":"{\"PageRanges\":[\"PageRange\":{\"BeginPage\":1,\"EndPage\":-1}]}"
+  参数样例："ComponentExtra":"{\"PageRanges\":[{\"BeginPage\":1,\"EndPage\":-1}]}"
      */
     ComponentExtra?: string;
     /**

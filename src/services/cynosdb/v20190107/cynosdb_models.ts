@@ -1549,6 +1549,24 @@ export interface SetRenewFlagRequest {
 }
 
 /**
+ * 审计规则的规则过滤条件
+ */
+export interface RuleFilters {
+  /**
+   * 审计规则过滤条件的参数名称。可选值：host – 客户端 IP；user – 数据库账户；dbName – 数据库名称；sqlType-SQL类型；sql-sql语句。
+   */
+  Type: string
+  /**
+   * 审计规则过滤条件的匹配类型。可选值：INC – 包含；EXC – 不包含；EQS – 等于；NEQ – 不等于。
+   */
+  Compare: string
+  /**
+   * 审计规则过滤条件的匹配值。
+   */
+  Value: Array<string>
+}
+
+/**
  * OfflineCluster请求参数结构体
  */
 export interface OfflineClusterRequest {
@@ -1957,6 +1975,20 @@ export interface ParamItem {
    * 原有值
    */
   OldValue: string
+}
+
+/**
+ * DescribeSupportProxyVersion请求参数结构体
+ */
+export interface DescribeSupportProxyVersionRequest {
+  /**
+   * 集群ID
+   */
+  ClusterId: string
+  /**
+   * 数据库代理组ID
+   */
+  ProxyGroupId?: string
 }
 
 /**
@@ -7004,21 +7036,23 @@ pause
 }
 
 /**
- * 审计规则的规则过滤条件
+ * DescribeSupportProxyVersion返回参数结构体
  */
-export interface RuleFilters {
+export interface DescribeSupportProxyVersionResponse {
   /**
-   * 审计规则过滤条件的参数名称。可选值：host – 客户端 IP；user – 数据库账户；dbName – 数据库名称；sqlType-SQL类型；sql-sql语句。
+   * 支持的数据库代理版本集合
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Type: string
+  SupportProxyVersions: Array<string>
   /**
-   * 审计规则过滤条件的匹配类型。可选值：INC – 包含；EXC – 不包含；EQS – 等于；NEQ – 不等于。
+   * 当前proxy版本号
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Compare: string
+  CurrentProxyVersion: string
   /**
-   * 审计规则过滤条件的匹配值。
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  Value: Array<string>
+  RequestId?: string
 }
 
 /**

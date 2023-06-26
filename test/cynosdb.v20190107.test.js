@@ -128,6 +128,16 @@ it("cynosdb.v20190107.CloseAuditService", async function () {
     }
 })
 
+it("cynosdb.v20190107.DescribeSupportProxyVersion", async function () {
+    try {
+       const data = await client.DescribeSupportProxyVersion({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cynosdb.v20190107.CreateAuditLogFile", async function () {
     try {
        const data = await client.CreateAuditLogFile({})

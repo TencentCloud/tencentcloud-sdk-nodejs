@@ -1398,6 +1398,16 @@ export interface CFSConfig {
      * 存储的路径
      */
     Path: string;
+    /**
+     * cfs的挂载类型，可选值为：STORAGE、SOURCE 分别表示存储拓展模式和数据源模式，默认为 STORAGE
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MountType?: string;
+    /**
+     * 协议 1: NFS, 2: TURBO
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Protocol?: string;
 }
 /**
  * 接口描述信息

@@ -146,54 +146,19 @@ export interface DropCls {
     DropClsLogSet?: string;
 }
 /**
- * PostgreSQL修改连接源参数
+ * 预付费/后付费接口中，订单和 CKafka 实例映射数据结构
  */
-export interface PostgreSQLModifyConnectParam {
+export interface DealInstanceDTO {
     /**
-     * PostgreSQL连接源的实例资源【不支持修改】
+     * 订单流水
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Resource: string;
+    DealName?: string;
     /**
-     * PostgreSQL的连接port【不支持修改】
+     * 订单流水对应购买的 CKafka 实例 id 列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Port?: number;
-    /**
-     * PostgreSQL连接源的实例vip【不支持修改】
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ServiceVip?: string;
-    /**
-     * PostgreSQL连接源的vpcId【不支持修改】
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    UniqVpcId?: string;
-    /**
-     * PostgreSQL连接源的用户名
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    UserName?: string;
-    /**
-     * PostgreSQL连接源的密码
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Password?: string;
-    /**
-     * 当type为TDSQL_C_POSTGRESQL时，该参数才有值【不支持修改】
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ClusterId?: string;
-    /**
-     * 是否更新到关联的Datahub任务
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    IsUpdate?: boolean;
-    /**
-     * 是否为自建集群
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    SelfBuilt?: boolean;
+    InstanceIdList?: Array<string>;
 }
 /**
  * consumer信息
@@ -916,54 +881,17 @@ export interface CancelAuthorizationTokenResponse {
     RequestId?: string;
 }
 /**
- * MySQL连接源参数
+ * FetchMessageListByOffset返回参数结构体
  */
-export interface MySQLConnectParam {
+export interface FetchMessageListByOffsetResponse {
     /**
-     * MySQL的连接port
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 返回结果。注意，列表中不返回具体的消息内容（key、value），如果需要查询具体消息内容，请使用FetchMessageByOffset接口
      */
-    Port: number;
+    Result?: Array<ConsumerRecord>;
     /**
-     * MySQL连接源的用户名
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
-    UserName: string;
-    /**
-     * MySQL连接源的密码
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Password: string;
-    /**
-     * MySQL连接源的实例资源
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Resource: string;
-    /**
-     * MySQL连接源的实例vip，当为腾讯云实例时，必填
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ServiceVip?: string;
-    /**
-     * MySQL连接源的vpcId，当为腾讯云实例时，必填
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    UniqVpcId?: string;
-    /**
-     * 是否更新到关联的Datahub任务
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    IsUpdate?: boolean;
-    /**
-     * 当type为TDSQL_C_MYSQL时，必填
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ClusterId?: string;
-    /**
-     * Mysql 连接源是否为自建集群
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    SelfBuilt?: boolean;
+    RequestId?: string;
 }
 /**
  * InquireCkafkaPrice接口询价返回值
@@ -2108,6 +2036,56 @@ export interface ModifyAclRuleResponse {
     RequestId?: string;
 }
 /**
+ * PostgreSQL修改连接源参数
+ */
+export interface PostgreSQLModifyConnectParam {
+    /**
+     * PostgreSQL连接源的实例资源【不支持修改】
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Resource: string;
+    /**
+     * PostgreSQL的连接port【不支持修改】
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Port?: number;
+    /**
+     * PostgreSQL连接源的实例vip【不支持修改】
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ServiceVip?: string;
+    /**
+     * PostgreSQL连接源的vpcId【不支持修改】
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    UniqVpcId?: string;
+    /**
+     * PostgreSQL连接源的用户名
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    UserName?: string;
+    /**
+     * PostgreSQL连接源的密码
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Password?: string;
+    /**
+     * 当type为TDSQL_C_POSTGRESQL时，该参数才有值【不支持修改】
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ClusterId?: string;
+    /**
+     * 是否更新到关联的Datahub任务
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IsUpdate?: boolean;
+    /**
+     * 是否为自建集群
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SelfBuilt?: boolean;
+}
+/**
  * ModifyConnectResource请求参数结构体
  */
 export interface ModifyConnectResourceRequest {
@@ -2298,6 +2276,24 @@ export interface DescribeTopicResponse {
     RequestId?: string;
 }
 /**
+ * 后付费实例相关接口返回结构
+ */
+export interface CreateInstancePostResp {
+    /**
+     * 返回的code，0为正常，非0为错误
+     */
+    ReturnCode: string;
+    /**
+     * 接口返回消息，当接口报错时提示错误信息
+     */
+    ReturnMessage: string;
+    /**
+     * 返回的Data数据
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Data: CreateInstancePostData;
+}
+/**
  * MongoDB修改连接源参数
  */
 export interface MongoDBModifyConnectParam {
@@ -2451,6 +2447,83 @@ export interface CreateConsumerResponse {
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * CreatePostPaidInstance请求参数结构体
+ */
+export interface CreatePostPaidInstanceRequest {
+    /**
+     * 实例名称，是一个不超过 64 个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-)
+     */
+    InstanceName?: string;
+    /**
+     * 创建的实例默认接入点所在的 vpc 对应 vpcId。目前不支持创建基础网络实例，因此该参数必填
+     */
+    VpcId?: string;
+    /**
+     * 子网id。创建实例默认接入点所在的子网对应的子网 id
+     */
+    SubnetId?: string;
+    /**
+     * 实例规格。当创建标准版实例时必填，创建专业版实例时不需要填写。1：入门型；2：标准型；3：进阶型；4：容量型；5：高阶型1；6：高阶性2；7：高阶型3；8：高阶型4；9 ：独占型
+     */
+    InstanceType?: number;
+    /**
+     * 实例日志的默认最长保留时间，单位分钟。不传入该参数时默认为 1440 分钟（1天），最大30天。当 topic 显式设置消息保留时间时，以 topic 保留时间为准
+     */
+    MsgRetentionTime?: number;
+    /**
+     * 创建实例时可以选择集群Id, 该入参表示集群Id。不指定实例所在集群则不传入该参数
+     */
+    ClusterId?: number;
+    /**
+     * 实例版本。目前支持 "0.10.2","1.1.1","2.4.2","2.8.1"
+     */
+    KafkaVersion?: string;
+    /**
+     * 实例类型。"standard"：标准版，"profession"：专业版
+     */
+    SpecificationsType?: string;
+    /**
+     * 实例硬盘类型，"CLOUD_BASIC"：云硬盘，"CLOUD_SSD"：高速云硬盘。不传默认为 "CLOUD_BASIC"
+     */
+    DiskType?: string;
+    /**
+     * 实例内网峰值带宽。单位 MB/s。标准版需传入当前实例规格所对应的峰值带宽。注意如果创建的实例为专业版实例，峰值带宽，分区数等参数配置需要满足专业版的计费规格。
+     */
+    BandWidth?: number;
+    /**
+     * 实例硬盘大小，需要满足当前实例的计费规格
+     */
+    DiskSize?: number;
+    /**
+     * 实例最大分区数量，需要满足当前实例的计费规格
+     */
+    Partition?: number;
+    /**
+     * 实例最大 topic 数量，需要满足当前实例的计费规格
+     */
+    TopicNum?: number;
+    /**
+     * 实例所在的可用区。当创建多可用区实例时，该参数为创建的默认接入点所在子网的可用区 id
+     */
+    ZoneId?: number;
+    /**
+     * 当前实例是否为多可用区实例。
+     */
+    MultiZoneFlag?: boolean;
+    /**
+     * 当实例为多可用区实例时，多可用区 id 列表。注意参数 ZoneId 对应的多可用区需要包含在该参数数组中
+     */
+    ZoneIds?: Array<number>;
+    /**
+     * 购买实例数量。非必填，默认值为 1。当传入该参数时，会创建多个 instanceName 加后缀区分的实例
+     */
+    InstanceNum?: number;
+    /**
+     * 公网带宽大小，单位 Mbps。默认是没有加上免费 3Mbps 带宽。例如总共需要 3Mbps 公网带宽，此处传 0；总共需要 4Mbps 公网带宽，此处传 1
+     */
+    PublicNetworkMonthly?: number;
 }
 /**
  * CreateCdcCluster返回参数结构体
@@ -2978,27 +3051,6 @@ export interface DescribeTopicSyncReplicaResponse {
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
-}
-/**
- * DescribeUser请求参数结构体
- */
-export interface DescribeUserRequest {
-    /**
-     * 实例Id
-     */
-    InstanceId: string;
-    /**
-     * 按照名称过滤
-     */
-    SearchWord?: string;
-    /**
-     * 偏移
-     */
-    Offset?: number;
-    /**
-     * 本次返回个数
-     */
-    Limit?: number;
 }
 /**
  * CreateConnectResource请求参数结构体
@@ -4145,19 +4197,17 @@ export interface DescribeTopicRequest {
     AclRuleName?: string;
 }
 /**
- * 预付费/后付费接口中，订单和 CKafka 实例映射数据结构
+ * CreateToken请求参数结构体
  */
-export interface DealInstanceDTO {
+export interface CreateTokenRequest {
     /**
-     * 订单流水
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 实例ID
      */
-    DealName?: string;
+    InstanceId: string;
     /**
-     * 订单流水对应购买的 CKafka 实例 id 列表
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 用户名
      */
-    InstanceIdList?: Array<string>;
+    User: string;
 }
 /**
  * CreatePartition请求参数结构体
@@ -4897,17 +4947,29 @@ export interface DescribeConsumerGroupResponse {
     RequestId?: string;
 }
 /**
- * FetchMessageListByOffset返回参数结构体
+ * 创建后付费接口返回的 Data 数据结构
  */
-export interface FetchMessageListByOffsetResponse {
+export interface CreateInstancePostData {
     /**
-     * 返回结果。注意，列表中不返回具体的消息内容（key、value），如果需要查询具体消息内容，请使用FetchMessageByOffset接口
+     * CreateInstancePre返回固定为0，不能作为CheckTaskStatus的查询条件。只是为了保证和后台数据结构对齐。
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Result?: Array<ConsumerRecord>;
+    FlowId: number;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     * 订单号列表
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    RequestId?: string;
+    DealNames: Array<string>;
+    /**
+     * 实例Id，当购买多个实例时，默认返回购买的第一个实例 id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InstanceId: string;
+    /**
+     * 订单和购买实例对应映射列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DealNameInstanceIdMapping?: Array<DealInstanceDTO>;
 }
 /**
  * 详细类别的价格
@@ -5807,6 +5869,19 @@ export interface CreateDatahubTopicResponse {
      * 返回创建结果
      */
     Result: DatahubTopicResp;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * CreatePostPaidInstance返回参数结构体
+ */
+export interface CreatePostPaidInstanceResponse {
+    /**
+     * 返回结果
+     */
+    Result?: CreateInstancePostResp;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -7501,6 +7576,56 @@ export interface DeleteTopicResponse {
     RequestId?: string;
 }
 /**
+ * MySQL连接源参数
+ */
+export interface MySQLConnectParam {
+    /**
+     * MySQL的连接port
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Port: number;
+    /**
+     * MySQL连接源的用户名
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    UserName: string;
+    /**
+     * MySQL连接源的密码
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Password: string;
+    /**
+     * MySQL连接源的实例资源
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Resource: string;
+    /**
+     * MySQL连接源的实例vip，当为腾讯云实例时，必填
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ServiceVip?: string;
+    /**
+     * MySQL连接源的vpcId，当为腾讯云实例时，必填
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    UniqVpcId?: string;
+    /**
+     * 是否更新到关联的Datahub任务
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IsUpdate?: boolean;
+    /**
+     * 当type为TDSQL_C_MYSQL时，必填
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ClusterId?: string;
+    /**
+     * Mysql 连接源是否为自建集群
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SelfBuilt?: boolean;
+}
+/**
  * Scf类型入参
  */
 export interface ScfParam {
@@ -7610,17 +7735,25 @@ export interface DescribeTaskStatusRequest {
     FlowId: number;
 }
 /**
- * CreateToken请求参数结构体
+ * DescribeUser请求参数结构体
  */
-export interface CreateTokenRequest {
+export interface DescribeUserRequest {
     /**
-     * 实例ID
+     * 实例Id
      */
     InstanceId: string;
     /**
-     * 用户名
+     * 按照名称过滤
      */
-    User: string;
+    SearchWord?: string;
+    /**
+     * 偏移
+     */
+    Offset?: number;
+    /**
+     * 本次返回个数
+     */
+    Limit?: number;
 }
 /**
  * Datahub主题列表

@@ -94,6 +94,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CloseAuditService", req, cb);
     }
     /**
+     * 查询支持的数据库代理版本
+     */
+    async DescribeSupportProxyVersion(req, cb) {
+        return this.request("DescribeSupportProxyVersion", req, cb);
+    }
+    /**
      * 本接口(CreateAuditLogFile)用于创建云数据库实例的审计日志文件。
      */
     async CreateAuditLogFile(req, cb) {

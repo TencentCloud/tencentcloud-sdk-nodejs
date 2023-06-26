@@ -88,6 +88,7 @@ import {
   DescribeBackupConfigResponse,
   CreateClustersResponse,
   SetRenewFlagRequest,
+  RuleFilters,
   OfflineClusterRequest,
   DescribeClusterDetailDatabasesResponse,
   CynosdbInstanceGrp,
@@ -105,6 +106,7 @@ import {
   DatabasePrivileges,
   DescribeClustersRequest,
   ParamItem,
+  DescribeSupportProxyVersionRequest,
   ModifyClusterStorageResponse,
   DescribeProxySpecsRequest,
   CloseClusterPasswordComplexityRequest,
@@ -296,7 +298,7 @@ import {
   ClusterParamModifyLog,
   DescribeInstanceSlowQueriesRequest,
   CynosdbInstanceDetail,
-  RuleFilters,
+  DescribeSupportProxyVersionResponse,
   UpgradeClusterVersionRequest,
   ExportInstanceSlowQueriesResponse,
   RefundResourcePackageResponse,
@@ -465,6 +467,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CloseAuditServiceResponse) => void
   ): Promise<CloseAuditServiceResponse> {
     return this.request("CloseAuditService", req, cb)
+  }
+
+  /**
+   * 查询支持的数据库代理版本
+   */
+  async DescribeSupportProxyVersion(
+    req: DescribeSupportProxyVersionRequest,
+    cb?: (error: string, rep: DescribeSupportProxyVersionResponse) => void
+  ): Promise<DescribeSupportProxyVersionResponse> {
+    return this.request("DescribeSupportProxyVersion", req, cb)
   }
 
   /**

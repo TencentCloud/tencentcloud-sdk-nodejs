@@ -205,6 +205,7 @@ import {
   ModifyDBNameResponse,
   CosUploadBackupFile,
   DbNormalDetail,
+  TDEConfigAttribute,
   ModifyDBInstanceRenewFlagRequest,
   DescribeDBInstancesAttributeResponse,
   Backup,

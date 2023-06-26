@@ -87,6 +87,20 @@ export interface CodeBatch {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Job?: Job;
+    /**
+     * 生产日期
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ProductionDate?: string;
+    /**
+     * 有效期
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ValidDate?: string;
+    /**
+     * 扩展属性
+     */
+    Attrs?: Array<AttrItem>;
 }
 /**
  * DescribeScanLogs返回参数结构体
@@ -94,17 +108,17 @@ export interface CodeBatch {
 export interface DescribeScanLogsResponse {
     /**
      * 【弃用】
-  注意：此字段可能返回 null，表示取不到有效值。
+     * @deprecated
      */
-    Products: Array<ScanLog>;
+    Products?: Array<ScanLog>;
     /**
      * 条数
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 扫描记录
      */
-    ScanLogs: Array<ScanLog>;
+    ScanLogs?: Array<ScanLog>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -186,7 +200,6 @@ export interface Quota {
 export interface ScanLog {
     /**
      * 行ID
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     LogId: number;
     /**
@@ -264,6 +277,20 @@ export interface ScanLog {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     BatchId?: string;
+    /**
+     * 扫码类型 0:无效扫码 1: 小程序扫码 2: 商家扫码
+     */
+    Type?: number;
+    /**
+     * 商户名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MerchantName?: string;
+    /**
+     * 产品名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ProductName?: string;
 }
 /**
  * DescribeProducts请求参数结构体
@@ -629,7 +656,11 @@ export interface DescribeTraceCodeByIdResponse {
     /**
      * 无
      */
-    TraceCode: TraceCode;
+    TraceCode?: TraceCode;
+    /**
+     * 码路径，如level是2，则为 [1级, 2级]
+     */
+    CodePath?: Array<string>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -729,6 +760,58 @@ export interface DescribeTraceDataListResponse {
     RequestId?: string;
 }
 /**
+ * 通用属性
+
+Type 的枚举值
+text:文本类型, longtext:长文本类型, banner:单图片类型, image:多图片类型, video:视频类型, mp:小程序类型
+
+具体组合如下
+- Type: "text" 文本类型, 对应值 Value: "文本字符串"
+- Type: "longtext" 长文本类型, 对应值 Value: "长文本字符串, 支持换行\n"
+- Type: "banner" 单图片类型, 对应图片地址 Value: "https://sample.cdn.com/xxx.jpg"
+- Type: "image" 多图片类型, 对应图片地址 Values: ["https://sample.cdn.com/1.jpg", "https://sample.cdn.com/2.jpg"]
+- Type: "video" 视频类型, 对应视频地址 Value: "https://sample.cdn.com/xxx.mp4"
+- Type: "mp" 小程序类型, 对应配置 Values: ["WXAPPID", "WXAPP_PATH", "跳转说明"]
+ */
+export interface AttrItem {
+    /**
+     * 字段名称
+     */
+    Name: string;
+    /**
+     * 字段值
+     */
+    Value: string;
+    /**
+     * 字段类型
+  text:文本类型,
+  longtext:长文本类型, banner:单图片类型, image:多图片类型,
+  video:视频类型,
+  mp:小程序类型
+     */
+    Type: string;
+    /**
+     * 只读
+     */
+    ReadOnly: boolean;
+    /**
+     * 扫码展示
+     */
+    Hidden: boolean;
+    /**
+     * 多个值
+     */
+    Values: Array<string>;
+    /**
+     * 类型标识
+     */
+    Key: string;
+    /**
+     * 扩展字段
+     */
+    Ext: string;
+}
+/**
  * DescribeTraceCodes请求参数结构体
  */
 export interface DescribeTraceCodesRequest {
@@ -803,7 +886,7 @@ export interface CreateCodeBatchResponse {
     /**
      * 批次ID
      */
-    BatchId: string;
+    BatchId?: string;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1115,10 +1198,6 @@ export interface TraceData {
      */
     TraceTime: string;
     /**
-     * 无
-     */
-    TraceItems: Array<TraceItem>;
-    /**
      * 创建时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
@@ -1147,6 +1226,10 @@ export interface TraceData {
      * 溯源阶段状态 0: 无效, 1: 有效
      */
     Status: number;
+    /**
+     * 无
+     */
+    TraceItems?: Array<TraceItem>;
 }
 /**
  * EffectFeedback返回参数结构体
@@ -1503,6 +1586,14 @@ export interface CreateCodeBatchRequest {
      * 批次编号，业务字段不判断唯一性
      */
     BatchCode?: string;
+    /**
+     * 有效期
+     */
+    ValidDate?: string;
+    /**
+     * 生产日期
+     */
+    ProductionDate?: string;
 }
 /**
  * 溯源数据项 Type 的枚举值
@@ -1535,25 +1626,25 @@ export interface TraceItem {
      */
     Type: string;
     /**
-     * 只读
-     */
-    ReadOnly: boolean;
-    /**
-     * 扫码展示
-     */
-    Hidden: boolean;
-    /**
      * 多个值
      */
     Values: Array<string>;
     /**
+     * 只读
+     */
+    ReadOnly?: boolean;
+    /**
+     * 扫码展示
+     */
+    Hidden?: boolean;
+    /**
      * 类型标识
      */
-    Key: string;
+    Key?: string;
     /**
      * 扩展字段
      */
-    Ext: string;
+    Ext?: string;
     /**
      * 额外属性
      */
@@ -2079,6 +2170,14 @@ export interface ModifyCodeBatchRequest {
      * 批次编码，业务字段不判断唯一性
      */
     BatchCode?: string;
+    /**
+     * 有效期
+     */
+    ValidDate?: string;
+    /**
+     * 生产日期
+     */
+    ProductionDate?: string;
 }
 /**
  * DescribeProductById请求参数结构体
@@ -2237,13 +2336,25 @@ export interface DeleteTraceDataRequest {
  */
 export interface DescribeScanLogsRequest {
     /**
-     * 码
-     */
-    Code: string;
-    /**
      * 企业ID
      */
     CorpId?: number;
+    /**
+     * 分页数量
+     */
+    PageSize?: number;
+    /**
+     * 当前分页
+     */
+    PageNumber?: number;
+    /**
+     * 安心码
+     */
+    Code?: string;
+    /**
+     * 小程序用户ID
+     */
+    Openid?: string;
 }
 /**
  * ModifyTraceCodeUnlink返回参数结构体
@@ -2355,57 +2466,57 @@ export interface Merchant {
  */
 export interface Product {
     /**
-     * 商品id
-     */
-    ProductId: string;
-    /**
-     * 企业id
-     */
-    CorpId: number;
-    /**
      * 商户标识码
      */
     MerchantId: string;
-    /**
-     * 商品编号
-     */
-    ProductCode: string;
     /**
      * 商品名称
      */
     Name: string;
     /**
+     * 商品id
+     */
+    ProductId?: string;
+    /**
+     * 企业id
+     */
+    CorpId?: number;
+    /**
+     * 商品编号
+     */
+    ProductCode?: string;
+    /**
      * 商品规格
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Specification: string;
+    Specification?: string;
     /**
      * 备注
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Remark: string;
+    Remark?: string;
     /**
      * 商品图片
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Logo: Array<string>;
+    Logo?: Array<string>;
     /**
      * 创建时间
      */
-    CreateTime: string;
+    CreateTime?: string;
     /**
      * 修改时间
      */
-    UpdateTime: string;
+    UpdateTime?: string;
     /**
      * 预留字段
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Ext: Ext;
+    Ext?: Ext;
     /**
      * 商户名称
      */
-    MerchantName: string;
+    MerchantName?: string;
 }
 /**
  * DescribeTmpToken请求参数结构体

@@ -28,6 +28,16 @@ it("cdn.v20180606.AddCLSTopicDomains", async function () {
     }
 })
 
+it("cdn.v20180606.ModifyDomainConfig", async function () {
+    try {
+       const data = await client.ModifyDomainConfig({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cdn.v20180606.DescribeIpStatus", async function () {
     try {
        const data = await client.DescribeIpStatus({})

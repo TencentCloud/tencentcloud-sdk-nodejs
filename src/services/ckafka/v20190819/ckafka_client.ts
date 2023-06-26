@@ -22,7 +22,7 @@ import {
   DeleteAclRequest,
   CreateInstancePostResponse,
   DropCls,
-  PostgreSQLModifyConnectParam,
+  DealInstanceDTO,
   GroupInfoMember,
   RowParam,
   RouteDTO,
@@ -53,7 +53,7 @@ import {
   GroupOffsetPartition,
   CancelAuthorizationTokenRequest,
   CancelAuthorizationTokenResponse,
-  MySQLConnectParam,
+  FetchMessageListByOffsetResponse,
   InquireCkafkaPriceResp,
   CreateRouteRequest,
   SQLServerModifyConnectParam,
@@ -95,6 +95,7 @@ import {
   Topic,
   Tag,
   ModifyAclRuleResponse,
+  PostgreSQLModifyConnectParam,
   ModifyConnectResourceRequest,
   ModifyInstanceAttributesResponse,
   DescribeACLResponse,
@@ -104,6 +105,7 @@ import {
   GroupOffsetResponse,
   CreateDatahubTopicRequest,
   DescribeTopicResponse,
+  CreateInstancePostResp,
   MongoDBModifyConnectParam,
   TdwParam,
   ModifyGroupOffsetsRequest,
@@ -111,6 +113,7 @@ import {
   DescribeCkafkaZoneRequest,
   FetchDatahubMessageByOffsetResponse,
   CreateConsumerResponse,
+  CreatePostPaidInstanceRequest,
   CreateCdcClusterResponse,
   DescribeGroupResponse,
   CdcClusterResponse,
@@ -135,7 +138,6 @@ import {
   DescribeTopicProduceConnectionRequest,
   CreateAclRequest,
   DescribeTopicSyncReplicaResponse,
-  DescribeUserRequest,
   CreateConnectResourceRequest,
   MariaDBParam,
   Route,
@@ -183,7 +185,7 @@ import {
   DescribeGroupInfoResponse,
   AppIdResponse,
   DescribeTopicRequest,
-  DealInstanceDTO,
+  CreateTokenRequest,
   CreatePartitionRequest,
   Group,
   GroupInfoResponse,
@@ -218,7 +220,7 @@ import {
   DescribeTopicAttributesResponse,
   DeleteDatahubTopicResponse,
   DescribeConsumerGroupResponse,
-  FetchMessageListByOffsetResponse,
+  CreateInstancePostData,
   InquiryDetailPrice,
   DeleteDatahubTaskRequest,
   DescribeGroupOffsetsRequest,
@@ -254,6 +256,7 @@ import {
   CreateConsumerRequest,
   InquireCkafkaPriceResponse,
   CreateDatahubTopicResponse,
+  CreatePostPaidInstanceResponse,
   InquireCkafkaPriceRequest,
   DateParam,
   FetchDatahubMessageByOffsetRequest,
@@ -316,12 +319,13 @@ import {
   DeleteTopicIpWhiteListRequest,
   SaleInfo,
   DeleteTopicResponse,
+  MySQLConnectParam,
   ScfParam,
   TaskStatusResponse,
   CreateDatahubTaskResponse,
   ClickHouseConnectParam,
   DescribeTaskStatusRequest,
-  CreateTokenRequest,
+  DescribeUserRequest,
   DescribeDatahubTopicsResp,
   DescribeTopicSyncReplicaRequest,
   DescribeConnectResource,
@@ -554,6 +558,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeInstancesResponse) => void
   ): Promise<DescribeInstancesResponse> {
     return this.request("DescribeInstances", req, cb)
+  }
+
+  /**
+   * 获取Topic 副本详情信息
+   */
+  async DescribeTopicSyncReplica(
+    req: DescribeTopicSyncReplicaRequest,
+    cb?: (error: string, rep: DescribeTopicSyncReplicaResponse) => void
+  ): Promise<DescribeTopicSyncReplicaResponse> {
+    return this.request("DescribeTopicSyncReplica", req, cb)
   }
 
   /**
@@ -968,13 +982,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取Topic 副本详情信息
+   * 当前接口用来替代 CreateInstancePost 接口。创建按量计费实例。通常用于 SDK 或云 API 控制台调用接口，创建后付费 CKafka 实例。调用接口与在 CKafka 控制台购买按量付费实例效果相同。
    */
-  async DescribeTopicSyncReplica(
-    req: DescribeTopicSyncReplicaRequest,
-    cb?: (error: string, rep: DescribeTopicSyncReplicaResponse) => void
-  ): Promise<DescribeTopicSyncReplicaResponse> {
-    return this.request("DescribeTopicSyncReplica", req, cb)
+  async CreatePostPaidInstance(
+    req: CreatePostPaidInstanceRequest,
+    cb?: (error: string, rep: CreatePostPaidInstanceResponse) => void
+  ): Promise<CreatePostPaidInstanceResponse> {
+    return this.request("CreatePostPaidInstance", req, cb)
   }
 
   /**
