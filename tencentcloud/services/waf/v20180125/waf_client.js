@@ -214,6 +214,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyWafThreatenIntelligence", req, cb);
     }
     /**
+     * 修改域名配置
+     */
+    async ModifySpartaProtection(req, cb) {
+        return this.request("ModifySpartaProtection", req, cb);
+    }
+    /**
      * 增加精准白名单规则
      */
     async AddCustomWhiteRule(req, cb) {

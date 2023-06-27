@@ -2477,7 +2477,7 @@ export interface CreatePostPaidInstanceRequest {
      */
     ClusterId?: number;
     /**
-     * 实例版本。目前支持 "0.10.2","1.1.1","2.4.2","2.8.1"
+     * 实例版本。目前支持 "0.10.2","1.1.1","2.4.1","2.4.2","2.8.1"。"2.4.1" 与 "2.4.2" 属于同一个版本，传任意一个均可。
      */
     KafkaVersion?: string;
     /**
@@ -2521,7 +2521,7 @@ export interface CreatePostPaidInstanceRequest {
      */
     InstanceNum?: number;
     /**
-     * 公网带宽大小，单位 Mbps。默认是没有加上免费 3Mbps 带宽。例如总共需要 3Mbps 公网带宽，此处传 0；总共需要 4Mbps 公网带宽，此处传 1
+     * 公网带宽大小，单位 Mbps。默认是没有加上免费 3Mbps 带宽。例如总共需要 3Mbps 公网带宽，此处传 0；总共需要 6Mbps 公网带宽，此处传 3。需要保证传入参数为 3 的整数倍
      */
     PublicNetworkMonthly?: number;
 }
@@ -5288,7 +5288,7 @@ export interface CreateInstancePostRequest {
      */
     ClusterId?: number;
     /**
-     * 实例版本。目前支持 "0.10.2","1.1.1","2.4.2","2.8.1"
+     * 实例版本。目前支持 "0.10.2","1.1.1","2.4.1","2.4.2","2.8.1"。"2.4.1" 与 "2.4.2" 属于同一个版本，传任意一个均可。
      */
     KafkaVersion?: string;
     /**
@@ -5328,7 +5328,7 @@ export interface CreateInstancePostRequest {
      */
     InstanceNum?: number;
     /**
-     * 公网带宽大小，单位 Mbps。默认是没有加上免费 3Mbps 带宽。例如总共需要 3Mbps 公网带宽，此处传 0；总共需要 4Mbps 公网带宽，此处传 1
+     * 公网带宽大小，单位 Mbps。默认是没有加上免费 3Mbps 带宽。例如总共需要 3Mbps 公网带宽，此处传 0；总共需要 6Mbps 公网带宽，此处传 3。需要保证传入参数为 3 的整数倍
      */
     PublicNetworkMonthly?: number;
 }
@@ -7460,7 +7460,7 @@ export interface CreateInstancePreRequest {
      */
     InstanceType: number;
     /**
-     * vpcId，不填默认基础网络
+     * vpcId必填
      */
     VpcId?: string;
     /**
@@ -7480,7 +7480,7 @@ export interface CreateInstancePreRequest {
      */
     RenewFlag?: number;
     /**
-     * CKafka版本号[0.10.2、1.1.1、2.4.1], 默认是1.1.1
+     * CKafka版本号[0.10.2、1.1.1、2.4.1、2.4.2、2.8.1], 默认是1.1.1。2.4.1 与 2.4.2 属于同一个版本，传任意一个均可。
      */
     KafkaVersion?: string;
     /**
@@ -7516,9 +7516,13 @@ export interface CreateInstancePreRequest {
      */
     ZoneIds?: Array<number>;
     /**
-     * 公网带宽大小，单位 Mbps。默认是没有加上免费 3Mbps 带宽。例如总共需要 3Mbps 公网带宽，此处传 0；总共需要 4Mbps 公网带宽，此处传 1。默认值为 0
+     * 公网带宽大小，单位 Mbps。默认是没有加上免费 3Mbps 带宽。例如总共需要 3Mbps 公网带宽，此处传 0；总共需要 6Mbps 公网带宽，此处传 3。默认值为 0。需要保证传入参数为 3 的整数倍
      */
     PublicNetworkMonthly?: number;
+    /**
+     * 购买实例数量。非必填，默认值为 1。当传入该参数时，会创建多个 instanceName 加后缀区分的实例
+     */
+    InstanceNum?: number;
 }
 /**
  * DeleteTopicIpWhiteList请求参数结构体

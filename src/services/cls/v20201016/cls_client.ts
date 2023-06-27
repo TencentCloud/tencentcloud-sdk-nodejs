@@ -855,7 +855,7 @@ cls.pb.cc cls.pb.h cls.proto
   }
 
   /**
-   * 删除投递规则
+   * 删除投递COS任务
    */
   async DeleteShipper(
     req: DeleteShipperRequest,

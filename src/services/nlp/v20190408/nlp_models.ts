@@ -54,6 +54,29 @@ export interface EvaluateWordSimilarityResponse {
 }
 
 /**
+ * ClassifyContent返回参数结构体
+ */
+export interface ClassifyContentResponse {
+  /**
+   * 一级分类。分类详情见附录-三级分类体系表。
+   */
+  FirstClassification?: Category
+  /**
+   * 二级分类。分类详情见附录-三级分类体系表。
+   */
+  SecondClassification?: Category
+  /**
+   * 三级分类。分类详情见附录-三级分类体系表。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ThirdClassification?: Category
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ParseWords返回参数结构体
  */
 export interface ParseWordsResponse {
@@ -167,6 +190,20 @@ export interface TextCorrectionProResponse {
 }
 
 /**
+ * ClassifyContent请求参数结构体
+ */
+export interface ClassifyContentRequest {
+  /**
+   * 待分类的文章的标题（仅支持UTF-8格式，不超过100字符）。
+   */
+  Title: string
+  /**
+   * 待分类文章的内容, 每个元素对应一个段落。（仅支持UTF-8格式，文章内容长度总和不超过2000字符）
+   */
+  Content: Array<string>
+}
+
+/**
  * 文本润色结果
  */
 export interface Embellish {
@@ -215,17 +252,19 @@ export interface DeleteDictResponse {
 }
 
 /**
- * TextWriting返回参数结构体
+ * TextClassification请求参数结构体
  */
-export interface TextWritingResponse {
+export interface TextClassificationRequest {
   /**
-   * 续写结果列表。
+   * 待分类的文本（仅支持UTF-8格式，不超过10000字）
    */
-  WritingList?: Array<Writing>
+  Text: string
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 领域分类体系（默认取1值）：
+1、通用领域，二分类
+2、新闻领域，五分类。类别数据不一定全部返回，详情见类目映射表（注意：目前五分类已下线不可用）
    */
-  RequestId?: string
+  Flag?: number
 }
 
 /**
@@ -244,17 +283,31 @@ export interface CreateDictResponse {
 }
 
 /**
- * TextClassification返回参数结构体
+ * TextSimilarity请求参数结构体
  */
-export interface TextClassificationResponse {
+export interface TextSimilarityRequest {
   /**
-   * 文本分类结果（文本分类映射表请参见附录）
+   * 需要与目标句子计算相似度的源句子（仅支持UTF-8格式，不超过500字符）
    */
-  Classes: Array<ClassificationResult>
+  SrcText: string
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 目标句子（以句子数量为单位消耗资源包）
    */
-  RequestId?: string
+  TargetText: Array<string>
+}
+
+/**
+ * 关键词提取结果
+ */
+export interface Keyword {
+  /**
+   * 权重
+   */
+  Score?: number
+  /**
+   * 关键词
+   */
+  Word?: string
 }
 
 /**
@@ -402,6 +455,28 @@ academic：学术领域，仅支持英文
 默认为general（通用领域）。
    */
   Domain?: string
+}
+
+/**
+ * ComposeCouplet返回参数结构体
+ */
+export interface ComposeCoupletResponse {
+  /**
+   * 横批。
+   */
+  TopScroll?: string
+  /**
+   * 上联与下联。
+   */
+  Content?: Array<string>
+  /**
+   * 当对联随机生成时，展示随机生成原因。
+   */
+  RandomCause?: string
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -586,6 +661,16 @@ urban_officialdom：职场
 }
 
 /**
+ * AnalyzeSentiment请求参数结构体
+ */
+export interface AnalyzeSentimentRequest {
+  /**
+   * 待分析的文本（仅支持UTF-8格式，不超过200字）。
+   */
+  Text: string
+}
+
+/**
  * AutoSummarization返回参数结构体
  */
 export interface AutoSummarizationResponse {
@@ -739,6 +824,32 @@ export interface CreateWordItemsResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 分类详细信息
+ */
+export interface Category {
+  /**
+   * 分类id。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Id?: number
+  /**
+   * 分类英文名。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Label?: string
+  /**
+   * 分类中文名。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name?: string
+  /**
+   * 分类置信度。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Score?: number
 }
 
 /**
@@ -1060,6 +1171,20 @@ export interface SentenceCorrectionResponse {
 }
 
 /**
+ * ComposeCouplet请求参数结构体
+ */
+export interface ComposeCoupletRequest {
+  /**
+   * 生成对联的关键词。长度需>=2，当长度>2时，自动截取前两个字作为关键字。内容需为常用汉字（不含有数字、英文、韩语、日语、符号等等其他）。
+   */
+  Text: string
+  /**
+   * 返回的文本结果为繁体还是简体。0：简体；1：繁体。默认为0。
+   */
+  TargetType?: number
+}
+
+/**
  * EvaluateSentenceSimilarity请求参数结构体
  */
 export interface EvaluateSentenceSimilarityRequest {
@@ -1113,6 +1238,42 @@ export interface CCIToken {
    * 错别字纠错结果
    */
   CorrectWord?: string
+}
+
+/**
+ * ComposePoetry返回参数结构体
+ */
+export interface ComposePoetryResponse {
+  /**
+   * 诗题，即输入的生成诗词的关键词。
+   */
+  Title?: string
+  /**
+   * 诗的内容。
+   */
+  Content?: Array<string>
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ComposePoetry请求参数结构体
+ */
+export interface ComposePoetryRequest {
+  /**
+   * 生成诗词的关键词。
+   */
+  Text: string
+  /**
+   * 生成诗词的类型。0：藏头或藏身；1：藏头；2：藏身。默认为0。
+   */
+  PoetryType?: number
+  /**
+   * 诗的体裁。0：五言律诗或七言律诗；5：五言律诗；7：七言律诗。默认为0。
+   */
+  Genre?: number
 }
 
 /**
@@ -1175,19 +1336,17 @@ export interface CorrectionItem {
 }
 
 /**
- * TextClassification请求参数结构体
+ * TextWriting返回参数结构体
  */
-export interface TextClassificationRequest {
+export interface TextWritingResponse {
   /**
-   * 待分类的文本（仅支持UTF-8格式，不超过10000字）
+   * 续写结果列表。
    */
-  Text: string
+  WritingList?: Array<Writing>
   /**
-   * 领域分类体系（默认取1值）：
-1、通用领域，二分类
-2、新闻领域，五分类。类别数据不一定全部返回，详情见类目映射表（注意：目前五分类已下线不可用）
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  Flag?: number
+  RequestId?: string
 }
 
 /**
@@ -1256,17 +1415,17 @@ export interface TextCorrectionRequest {
 }
 
 /**
- * 关键词提取结果
+ * TextClassification返回参数结构体
  */
-export interface Keyword {
+export interface TextClassificationResponse {
   /**
-   * 权重
+   * 文本分类结果（文本分类映射表请参见附录）
    */
-  Score?: number
+  Classes: Array<ClassificationResult>
   /**
-   * 关键词
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  Word?: string
+  RequestId?: string
 }
 
 /**
@@ -1304,17 +1463,32 @@ export interface DeleteWordItemsResponse {
 }
 
 /**
- * TextSimilarity请求参数结构体
+ * AnalyzeSentiment返回参数结构体
  */
-export interface TextSimilarityRequest {
+export interface AnalyzeSentimentResponse {
   /**
-   * 需要与目标句子计算相似度的源句子（仅支持UTF-8格式，不超过500字符）
+   * 正面情感概率。
    */
-  SrcText: string
+  Positive?: number
   /**
-   * 目标句子（以句子数量为单位消耗资源包）
+   * 中性情感概率。
    */
-  TargetText: Array<string>
+  Neutral?: number
+  /**
+   * 负面情感概率。
+   */
+  Negative?: number
+  /**
+   * 情感分类结果：
+positive：正面情感
+negative：负面情感
+neutral：中性、无情感
+   */
+  Sentiment?: string
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

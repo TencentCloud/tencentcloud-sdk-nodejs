@@ -138,16 +138,6 @@ it("tdid.v20210519.AddLabel", async function () {
     }
 })
 
-it("tdid.v20210519.GetDidClusterList", async function () {
-    try {
-       const data = await client.GetDidClusterList({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("tdid.v20210519.GetCredentialStatus", async function () {
     try {
        const data = await client.GetCredentialStatus({})
@@ -171,16 +161,6 @@ it("tdid.v20210519.GetConsortiumClusterList", async function () {
 it("tdid.v20210519.VerifyCredential", async function () {
     try {
        const data = await client.VerifyCredential({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("tdid.v20210519.GetDidClusterDetail", async function () {
-    try {
-       const data = await client.GetDidClusterDetail({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

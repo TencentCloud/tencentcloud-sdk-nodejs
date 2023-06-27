@@ -3067,50 +3067,51 @@ export interface ParameterInfo {
   /**
    * 名字
    */
-  Name: string
+  Name?: string
   /**
    * 当前值
    */
-  Value: number
+  Value?: number
   /**
    * 默认值
    */
-  Default: number
+  Default?: number
   /**
    * 单位
    */
-  Unit: string
+  Unit?: string
   /**
    * 类型, integer|string
    */
-  Type: string
+  Type?: string
   /**
    * 最小
    */
-  Minimum: number
+  Minimum?: number
   /**
    * 最大
    */
-  Maximum: number
+  Maximum?: number
   /**
    * 修改时间
+   * @deprecated
    */
-  ModifedTime: string
+  ModifedTime?: string
   /**
    * 字符类型的值，当Type为string时才有意义
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ValueString: string
+  ValueString?: string
   /**
    * 字符类型的默认值，当Type为string时才有意义
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DefaultValueString: string
+  DefaultValueString?: string
   /**
    * 可调整范围
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Range: string
+  Range?: string
 }
 
 /**
@@ -3734,8 +3735,9 @@ export interface ApiIdStatus {
   /**
    * 授权API关联的业务API列表。
 注意：此字段可能返回 null，表示取不到有效值。
+   * @deprecated
    */
-  RelationBuniessApiIds: Array<string>
+  RelationBuniessApiIds?: Array<string>
   /**
    * oauth配置信息。
 注意：此字段可能返回 null，表示取不到有效值。
@@ -5498,6 +5500,7 @@ export interface DescribeApisStatusResultApiIdStatusSetInfo {
   /**
    * 授权API关联的业务API列表。
 注意：此字段可能返回 null，表示取不到有效值。
+   * @deprecated
    */
   RelationBuniessApiIds?: Array<string>
   /**
@@ -6675,8 +6678,9 @@ export interface DesApisStatus {
   /**
    * 授权API关联的业务API列表。
 注意：此字段可能返回 null，表示取不到有效值。
+   * @deprecated
    */
-  RelationBuniessApiIds: Array<string>
+  RelationBuniessApiIds?: Array<string>
   /**
    * API关联的标签信息。
 注意：此字段可能返回 null，表示取不到有效值。

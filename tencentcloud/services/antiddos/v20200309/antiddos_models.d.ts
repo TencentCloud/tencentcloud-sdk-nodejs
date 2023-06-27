@@ -604,6 +604,10 @@ export interface DescribeListBGPInstancesRequest {
      * 资产IP数组
      */
     FilterAssetIpList?: Array<string>;
+    /**
+     * 是否包含基础防护增强版 0: 不包含 1: 包含
+     */
+    FilterBasicPlusFlag?: number;
 }
 /**
  * 字段值，K-V形式
@@ -2422,19 +2426,19 @@ export interface BGPIPInstance {
     /**
      * 资产实例的详细信息
      */
-    InstanceDetail: InstanceRelation;
+    InstanceDetail?: InstanceRelation;
     /**
      * 资产实例的规格信息
      */
-    SpecificationLimit: BGPIPInstanceSpecification;
+    SpecificationLimit?: BGPIPInstanceSpecification;
     /**
      * 资产实例的使用统计信息
      */
-    Usage: BGPIPInstanceUsages;
+    Usage?: BGPIPInstanceUsages;
     /**
      * 资产实例所在的地域
      */
-    Region: RegionInfo;
+    Region?: RegionInfo;
     /**
      * 资产实例的防护状态，状态码如下：
   "idle"：正常状态(无攻击)
@@ -2444,113 +2448,113 @@ export interface BGPIPInstance {
   "deblocking"：解封中
   "isolate"：回收隔离中
      */
-    Status: string;
+    Status?: string;
     /**
      * 到期时间
      */
-    ExpiredTime: string;
+    ExpiredTime?: string;
     /**
      * 购买时间
      */
-    CreatedTime: string;
+    CreatedTime?: string;
     /**
      * 资产实例的名称
      */
-    Name: string;
+    Name?: string;
     /**
      * 资产实例所属的套餐包信息，
   注意：当资产实例不是套餐包的实例时，此字段为null
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    PackInfo: PackInfo;
+    PackInfo?: PackInfo;
     /**
      * 资产实例所属的三网套餐包详情，
   注意：当资产实例不是三网套餐包的实例时，此字段为null
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    StaticPackRelation: StaticPackRelation;
+    StaticPackRelation?: StaticPackRelation;
     /**
      * 区分高防IP境外线路
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ZoneId: number;
+    ZoneId?: number;
     /**
      * 区分集群
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Tgw: number;
+    Tgw?: number;
     /**
      * 高防弹性公网IP状态，包含'CREATING'(创建中),'BINDING'(绑定中),'BIND'(已绑定),'UNBINDING'(解绑中),'UNBIND'(已解绑),'OFFLINING'(释放中),'BIND_ENI'(绑定悬空弹性网卡)。只对高防弹性公网IP实例有效。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    EipAddressStatus: string;
+    EipAddressStatus?: string;
     /**
      * 是否高防弹性公网IP实例，是为1，否为0。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    EipFlag: number;
+    EipFlag?: number;
     /**
      * 资产实例所属的高防弹性公网IP套餐包详情，
   注意：当资产实例不是高防弹性公网IP套餐包的实例时，此字段为null
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    EipAddressPackRelation: EipAddressPackRelation;
+    EipAddressPackRelation?: EipAddressPackRelation;
     /**
      * 高防弹性公网IP关联的实例信息。
   注意：当资产实例不是高防弹性公网IP实例时，此字段为null
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    EipAddressInfo: EipAddressRelation;
+    EipAddressInfo?: EipAddressRelation;
     /**
      * 建议客户接入的域名，客户可使用域名接入。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Domain: string;
+    Domain?: string;
     /**
      * 是否开启安全加速，是为1，否为0。
      */
-    DamDDoSStatus: number;
+    DamDDoSStatus?: number;
     /**
      * 是否Ipv6版本的IP, 是为1，否为0
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    V6Flag: number;
+    V6Flag?: number;
     /**
      * 是否渠道版高防IP，是为1，否为0
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    BGPIPChannelFlag: number;
+    BGPIPChannelFlag?: number;
     /**
      * 资源关联标签
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TagInfoList: Array<TagInfo>;
+    TagInfoList?: Array<TagInfo>;
     /**
      * 资产实例所属的全力防护套餐包详情，
   注意：当资产实例不是全力防护套餐包的实例时，此字段为null
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    AnycastOutPackRelation: AnycastOutPackRelation;
+    AnycastOutPackRelation?: AnycastOutPackRelation;
     /**
      * 资源实例版本
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    InstanceVersion: number;
+    InstanceVersion?: number;
     /**
      * 重保实例
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ConvoyId: string;
+    ConvoyId?: string;
     /**
      * 带宽后付费
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ElasticBandwidth: number;
+    ElasticBandwidth?: number;
     /**
      * 是否为EO代播的ip: 1是，0不是
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    EOFlag: number;
+    EOFlag?: number;
 }
 /**
  * DeleteWaterPrintConfig返回参数结构体
@@ -4907,6 +4911,11 @@ export interface BGPInstance {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     ModifyTime?: string;
+    /**
+     * 是否是基础防护加强版 0: 不是 1: 是
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    BasicPlusFlag?: number;
 }
 /**
  * DescribeListPortAclList返回参数结构体

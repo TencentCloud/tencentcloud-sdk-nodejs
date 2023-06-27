@@ -40,7 +40,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ApplyChainMakerBatchUserCert", req, cb);
     }
     /**
-     * 获取合约容器日志
+     * 接口已废弃，请通过控制台查询或操作
+
+获取合约容器日志
      */
     async GetChaincodeLogForUser(req, cb) {
         return this.request("GetChaincodeLogForUser", req, cb);
@@ -52,7 +54,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("QueryChainMakerDemoTransaction", req, cb);
     }
     /**
-     * 获取该用户的网络列表。网络信息中包含组织信息，但仅包含该用户所在组织的信息。
+     * 接口已废弃，请通过控制台查询或操作
+
+获取该用户的网络列表。网络信息中包含组织信息，但仅包含该用户所在组织的信息。
      */
     async GetClusterListForUser(req, cb) {
         return this.request("GetClusterListForUser", req, cb);
@@ -82,7 +86,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("GetClusterSummary", req, cb);
     }
     /**
-     * 获取节点日志
+     * 接口已废弃，请通过控制台查询或操作
+
+获取节点日志
      */
     async GetPeerLogForUser(req, cb) {
         return this.request("GetPeerLogForUser", req, cb);
@@ -100,7 +106,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DownloadUserCert", req, cb);
     }
     /**
-     * 创建并安装合约
+     * 接口已废弃，请通过控制台查询或操作
+
+创建并安装合约
      */
     async CreateChaincodeAndInstallForUser(req, cb) {
         return this.request("CreateChaincodeAndInstallForUser", req, cb);
@@ -130,13 +138,17 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("GetInvokeTx", req, cb);
     }
     /**
-     * 实例化结果查询
+     * 接口已废弃，请通过控制台查询或操作
+
+实例化结果查询
      */
     async GetChaincodeInitializeResultForUser(req, cb) {
         return this.request("GetChaincodeInitializeResultForUser", req, cb);
     }
     /**
-     * 获取通道列表
+     * 接口已废弃，请通过控制台查询或操作
+
+获取通道列表
      */
     async GetChannelListForUser(req, cb) {
         return this.request("GetChannelListForUser", req, cb);
@@ -148,7 +160,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("QueryChainMakerBlockTransaction", req, cb);
     }
     /**
-     * 实例化合约
+     * 接口已废弃，请通过控制台查询或操作
+
+实例化合约
      */
     async InitializeChaincodeForUser(req, cb) {
         return this.request("InitializeChaincodeForUser", req, cb);
@@ -178,7 +192,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("InvokeChainMakerDemoContract", req, cb);
     }
     /**
-     * 获取合约编译日志
+     * 接口已废弃，请通过控制台查询或操作
+
+获取合约编译日志
      */
     async GetChaincodeCompileLogForUser(req, cb) {
         return this.request("GetChaincodeCompileLogForUser", req, cb);

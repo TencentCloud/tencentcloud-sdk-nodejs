@@ -138,6 +138,16 @@ it("nlp.v20190408.ParseWords", async function () {
     }
 })
 
+it("nlp.v20190408.ComposeCouplet", async function () {
+    try {
+       const data = await client.ComposeCouplet({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("nlp.v20190408.TextClassification", async function () {
     try {
        const data = await client.TextClassification({})
@@ -201,6 +211,16 @@ it("nlp.v20190408.EvaluateWordSimilarity", async function () {
 it("nlp.v20190408.GenerateCouplet", async function () {
     try {
        const data = await client.GenerateCouplet({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("nlp.v20190408.ComposePoetry", async function () {
+    try {
+       const data = await client.ComposePoetry({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -298,6 +318,16 @@ it("nlp.v20190408.TextEmbellish", async function () {
     }
 })
 
+it("nlp.v20190408.ClassifyContent", async function () {
+    try {
+       const data = await client.ClassifyContent({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("nlp.v20190408.TextCorrectionPro", async function () {
     try {
        const data = await client.TextCorrectionPro({})
@@ -331,6 +361,16 @@ it("nlp.v20190408.SentenceCorrection", async function () {
 it("nlp.v20190408.DeleteDict", async function () {
     try {
        const data = await client.DeleteDict({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("nlp.v20190408.AnalyzeSentiment", async function () {
+    try {
+       const data = await client.AnalyzeSentiment({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -471,7 +471,7 @@ cls.pb.cc cls.pb.h cls.proto
         return this.request("DescribeMachineGroupConfigs", req, cb);
     }
     /**
-     * 删除投递规则
+     * 删除投递COS任务
      */
     async DeleteShipper(req, cb) {
         return this.request("DeleteShipper", req, cb);

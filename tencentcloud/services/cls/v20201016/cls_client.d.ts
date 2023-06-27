@@ -355,7 +355,7 @@ cls.pb.cc cls.pb.h cls.proto
      */
     DescribeMachineGroupConfigs(req: DescribeMachineGroupConfigsRequest, cb?: (error: string, rep: DescribeMachineGroupConfigsResponse) => void): Promise<DescribeMachineGroupConfigsResponse>;
     /**
-     * 删除投递规则
+     * 删除投递COS任务
      */
     DeleteShipper(req: DeleteShipperRequest, cb?: (error: string, rep: DeleteShipperResponse) => void): Promise<DeleteShipperResponse>;
     /**

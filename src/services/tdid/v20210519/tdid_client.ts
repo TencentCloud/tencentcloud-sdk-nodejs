@@ -30,13 +30,10 @@ import {
   GetAuthorityIssuerRequest,
   VerifyFunctionArg,
   GetConsortiumListRequest,
-  GetDidClusterListResponse,
   CreateCredentialRequest,
-  GetDidClusterDetailResponse,
   GetDidDocumentRequest,
   GetConsortiumListResponse,
   ConsortiumItem,
-  GetDidClusterListRequest,
   GetCredentialStatusRequest,
   GetAgencyTDidResponse,
   AddLabelResponse,
@@ -55,7 +52,6 @@ import {
   CreateTDidByPublicKeyResponse,
   GetCredentialCptRankRequest,
   RegisterCptRequest,
-  GetDidClusterDetailRequest,
   Proof,
   VerifyCredentialRequest,
   GetConsortiumClusterListRequest,
@@ -63,7 +59,6 @@ import {
   CreateTDidByPrivateKeyRequest,
   BcosClusterItem,
   SetCredentialStatusRequest,
-  DidCluster,
   GetCptInfoRequest,
   Identity,
   GetCredentialStatusResponse,
@@ -80,8 +75,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 检查区块链信息
-   */
+     * 该接口不再使用
+
+检查区块链信息
+     */
   async CheckChain(
     req: CheckChainRequest,
     cb?: (error: string, rep: CheckChainResponse) => void
@@ -90,8 +87,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 凭证模版详情
-   */
+     * 该接口不再使用
+
+凭证模版详情
+     */
   async GetCptInfo(
     req: GetCptInfoRequest,
     cb?: (error: string, rep: GetCptInfoResponse) => void
@@ -100,7 +99,9 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 查看DID文档
+     * 该接口不再使用
+
+查看DID文档
 
      */
   async GetDidDocument(
@@ -111,8 +112,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建选择性批露凭证
-   */
+     * 该接口不再使用
+
+创建选择性批露凭证
+     */
   async CreateSelectiveCredential(
     req: CreateSelectiveCredentialRequest,
     cb?: (error: string, rep: CreateSelectiveCredentialResponse) => void
@@ -121,8 +124,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建机构DID
-   */
+     * 该接口不再使用
+
+创建机构DID
+     */
   async CreateTDid(
     req: CreateTDidRequest,
     cb?: (error: string, rep: CreateTDidResponse) => void
@@ -143,8 +148,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建凭证
-   */
+     * 该接口不再使用
+
+创建凭证
+     */
   async CreateCredential(
     req: CreateCredentialRequest,
     cb?: (error: string, rep: CreateCredentialResponse) => void
@@ -153,8 +160,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   *  新建DID根据公钥生成Tdid
-   */
+     * 该接口不再使用
+
+ 新建DID根据公钥生成Tdid
+     */
   async CreateTDidByPublicKey(
     req: CreateTDidByPublicKeyRequest,
     cb?: (error: string, rep: CreateTDidByPublicKeyResponse) => void
@@ -187,8 +196,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 新建DID根据私钥生成Tdid
-   */
+     * 该接口不再使用
+
+新建DID根据私钥生成Tdid
+     */
   async CreateTDidByPrivateKey(
     req: CreateTDidByPrivateKeyRequest,
     cb?: (error: string, rep: CreateTDidByPrivateKeyResponse) => void
@@ -210,20 +221,10 @@ DID添加标签
   }
 
   /**
-     * 下线已有内测接口，待上线正式版本的接口
+     * 该接口不再使用
 
-获取用户的DID网络列表
+获取凭证链上状态信息
      */
-  async GetDidClusterList(
-    req?: GetDidClusterListRequest,
-    cb?: (error: string, rep: GetDidClusterListResponse) => void
-  ): Promise<GetDidClusterListResponse> {
-    return this.request("GetDidClusterList", req, cb)
-  }
-
-  /**
-   * 获取凭证链上状态信息
-   */
   async GetCredentialStatus(
     req: GetCredentialStatusRequest,
     cb?: (error: string, rep: GetCredentialStatusResponse) => void
@@ -244,8 +245,10 @@ DID添加标签
   }
 
   /**
-   * 验证凭证
-   */
+     * 该接口不再使用
+
+验证凭证
+     */
   async VerifyCredential(
     req: VerifyCredentialRequest,
     cb?: (error: string, rep: VerifyCredentialResponse) => void
@@ -254,20 +257,10 @@ DID添加标签
   }
 
   /**
-     * 下线已有内测接口，待上线正式版本的接口
+     * 该接口不再使用
 
-获取DID区块链网络详情
+获取权威机构信息
      */
-  async GetDidClusterDetail(
-    req: GetDidClusterDetailRequest,
-    cb?: (error: string, rep: GetDidClusterDetailResponse) => void
-  ): Promise<GetDidClusterDetailResponse> {
-    return this.request("GetDidClusterDetail", req, cb)
-  }
-
-  /**
-   * 获取权威机构信息
-   */
   async GetAuthorityIssuer(
     req: GetAuthorityIssuerRequest,
     cb?: (error: string, rep: GetAuthorityIssuerResponse) => void
@@ -276,8 +269,10 @@ DID添加标签
   }
 
   /**
-   * 设置凭证链上状态
-   */
+     * 该接口不再使用
+
+设置凭证链上状态
+     */
   async SetCredentialStatus(
     req: SetCredentialStatusRequest,
     cb?: (error: string, rep: SetCredentialStatusResponse) => void
@@ -286,8 +281,10 @@ DID添加标签
   }
 
   /**
-   * 凭证模版新建
-   */
+     * 该接口不再使用
+
+凭证模版新建
+     */
   async RegisterCpt(
     req: RegisterCptRequest,
     cb?: (error: string, rep: RegisterCptResponse) => void

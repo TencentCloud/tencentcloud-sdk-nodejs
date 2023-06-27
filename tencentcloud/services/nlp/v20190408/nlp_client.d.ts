@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { RetrieveSimilarWordsResponse, SentenceEmbeddingRequest, EvaluateWordSimilarityResponse, ParseWordsResponse, TextCorrectionProResponse, EvaluateWordSimilarityRequest, DeleteDictResponse, TextWritingResponse, CreateDictResponse, TextClassificationResponse, LexicalAnalysisResponse, DescribeDictResponse, DescribeDictsResponse, DeleteDictRequest, GeneratePoetryRequest, SearchWordItemsRequest, GenerateKeywordSentenceRequest, SentimentAnalysisResponse, ChatBotResponse, KeywordsExtractionRequest, SentenceEmbeddingResponse, UpdateDictRequest, SentimentAnalysisRequest, TextWritingRequest, AutoSummarizationResponse, TextCorrectionResponse, DeleteWordItemsRequest, SimilarWordsResponse, DependencyParsingResponse, GenerateCoupletRequest, LexicalAnalysisRequest, CreateWordItemsResponse, TextSimilarityProRequest, RetrieveSimilarWordsRequest, AutoSummarizationRequest, DescribeDictsRequest, WordSimilarityResponse, TextEmbellishRequest, EvaluateSentenceSimilarityResponse, CreateWordItemsRequest, SimilarWordsRequest, DescribeWordItemsRequest, GenerateCoupletResponse, WordEmbeddingResponse, KeywordsExtractionResponse, SentenceCorrectionResponse, EvaluateSentenceSimilarityRequest, GenerateKeywordSentenceResponse, TextEmbellishResponse, TextClassificationRequest, SearchWordItemsResponse, ChatBotRequest, TextCorrectionRequest, UpdateDictResponse, WordSimilarityRequest, DeleteWordItemsResponse, TextSimilarityRequest, WordEmbeddingRequest, DescribeWordItemsResponse, ParseWordsRequest, TextSimilarityResponse, DescribeDictRequest, GeneratePoetryResponse, TextSimilarityProResponse, DependencyParsingRequest, SentenceCorrectionRequest, TextCorrectionProRequest, CreateDictRequest } from "./nlp_models";
+import { RetrieveSimilarWordsResponse, SentenceEmbeddingRequest, EvaluateWordSimilarityResponse, ClassifyContentResponse, ParseWordsResponse, TextCorrectionProResponse, ClassifyContentRequest, EvaluateWordSimilarityRequest, DeleteDictResponse, TextClassificationRequest, CreateDictResponse, TextSimilarityRequest, LexicalAnalysisResponse, DescribeDictResponse, DescribeDictsResponse, DeleteDictRequest, GeneratePoetryRequest, SearchWordItemsRequest, GenerateKeywordSentenceRequest, ComposeCoupletResponse, SentimentAnalysisResponse, ChatBotResponse, KeywordsExtractionRequest, SentenceEmbeddingResponse, UpdateDictRequest, SentimentAnalysisRequest, TextWritingRequest, AnalyzeSentimentRequest, AutoSummarizationResponse, TextCorrectionResponse, DeleteWordItemsRequest, SimilarWordsResponse, DependencyParsingResponse, GenerateCoupletRequest, LexicalAnalysisRequest, CreateWordItemsResponse, TextSimilarityProRequest, RetrieveSimilarWordsRequest, AutoSummarizationRequest, DescribeDictsRequest, WordSimilarityResponse, TextEmbellishRequest, EvaluateSentenceSimilarityResponse, CreateWordItemsRequest, SimilarWordsRequest, DescribeWordItemsRequest, GenerateCoupletResponse, WordEmbeddingResponse, KeywordsExtractionResponse, SentenceCorrectionResponse, ComposeCoupletRequest, EvaluateSentenceSimilarityRequest, GenerateKeywordSentenceResponse, ComposePoetryResponse, ComposePoetryRequest, TextEmbellishResponse, TextWritingResponse, SearchWordItemsResponse, ChatBotRequest, TextCorrectionRequest, TextClassificationResponse, UpdateDictResponse, WordSimilarityRequest, DeleteWordItemsResponse, AnalyzeSentimentResponse, WordEmbeddingRequest, DescribeWordItemsResponse, ParseWordsRequest, TextSimilarityResponse, DescribeDictRequest, GeneratePoetryResponse, TextSimilarityProResponse, DependencyParsingRequest, SentenceCorrectionRequest, TextCorrectionProRequest, CreateDictRequest } from "./nlp_models";
 /**
  * nlp client
  * @class
@@ -72,6 +72,10 @@ export declare class Client extends AbstractClient {
      */
     ParseWords(req: ParseWordsRequest, cb?: (error: string, rep: ParseWordsResponse) => void): Promise<ParseWordsResponse>;
     /**
+     * 对联生成接口根据用户输入的命题关键词，智能生成一副完整的春联，包括上联、下联和横批。该接口利用先进的自然语言处理技术，确保生成的春联既符合传统对仗、对韵、对义的要求，又具有新意和创意，为用户提供独特的春节祝福。
+     */
+    ComposeCouplet(req: ComposeCoupletRequest, cb?: (error: string, rep: ComposeCoupletResponse) => void): Promise<ComposeCoupletResponse>;
+    /**
      * 因业务调整该接口将于北京时间2023年8月1日0点下线，届时该产品功能将无法正常使用，为了避免对您的业务造成影响，请您尽快做好相关业务调整。详见：https://cloud.tencent.com/document/product/271/90711
 
 文本分类接口能够对用户输入的文本进行自动分类，将其映射到具体的类目上，用户只需要提供待分类的文本，而无需关注具体实现。
@@ -121,6 +125,10 @@ export declare class Client extends AbstractClient {
 根据用户输入的命题关键词自动生成一副春联，包括上联、下联和横批。（如需开通请联系商务）
      */
     GenerateCouplet(req: GenerateCoupletRequest, cb?: (error: string, rep: GenerateCoupletResponse) => void): Promise<GenerateCoupletResponse>;
+    /**
+     * 诗词生成接口利用现代的自然语言处理和深度学习技术，模仿了古代著名诗人的风格，为用户产生独特的诗词。用户只需输入的命题关键词，接口就能自动生成一首七言律诗或五言律诗。
+     */
+    ComposePoetry(req: ComposePoetryRequest, cb?: (error: string, rep: ComposePoetryResponse) => void): Promise<ComposePoetryResponse>;
     /**
      * 因业务调整该接口将于北京时间2023年8月1日0点下线，届时该产品功能将无法正常使用，为了避免对您的业务造成影响，请您尽快做好相关业务调整。详见：https://cloud.tencent.com/document/product/271/90711
 
@@ -192,6 +200,10 @@ export declare class Client extends AbstractClient {
      */
     TextEmbellish(req: TextEmbellishRequest, cb?: (error: string, rep: TextEmbellishResponse) => void): Promise<TextEmbellishResponse>;
     /**
+     * 文本分类接口能够对用户输入的文章进行自动分类，将其映射到具体的类目上，用户只需要提供待分类的文本，而无需关注具体实现。该功能定义了一套较为完备的[三级分类体系](https://cloud.tencent.com/document/product/271/94286)，积累了数百万的语料，经过多轮迭代优化打造了较先进的深度学习模型，以保证效果不断提升。
+     */
+    ClassifyContent(req: ClassifyContentRequest, cb?: (error: string, rep: ClassifyContentResponse) => void): Promise<ClassifyContentResponse>;
+    /**
      * 因业务调整该接口将于北京时间2023年8月1日0点下线，届时该产品功能将无法正常使用，为了避免对您的业务造成影响，请您尽快做好相关业务调整。详见：https://cloud.tencent.com/document/product/271/90711
 
 提供对中文文本的自动纠错功能，能够识别输入文本中的错误片段，定位错误并给出正确的文本结果；支持长度不超过128字符（含标点符号）的长文本纠错。
@@ -218,6 +230,10 @@ export declare class Client extends AbstractClient {
 删除自定义词库，会附带相应删除词库包含的所有词条。
      */
     DeleteDict(req: DeleteDictRequest, cb?: (error: string, rep: DeleteDictResponse) => void): Promise<DeleteDictResponse>;
+    /**
+     * 情感分析接口能够对带有情感色彩的主观性文本进行分析、处理、归纳和推理，识别出用户的情感倾向，是积极、中性还是消极，并且提供各自概率。
+     */
+    AnalyzeSentiment(req: AnalyzeSentimentRequest, cb?: (error: string, rep: AnalyzeSentimentResponse) => void): Promise<AnalyzeSentimentResponse>;
     /**
      * 因业务调整该接口将于北京时间2023年8月1日0点下线，届时该产品功能将无法正常使用，为了避免对您的业务造成影响，请您尽快做好相关业务调整。详见：https://cloud.tencent.com/document/product/271/90711
 

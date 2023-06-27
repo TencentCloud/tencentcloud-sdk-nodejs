@@ -120,8 +120,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取合约容器日志
-   */
+     * 接口已废弃，请通过控制台查询或操作
+
+获取合约容器日志
+     */
   async GetChaincodeLogForUser(
     req: GetChaincodeLogForUserRequest,
     cb?: (error: string, rep: GetChaincodeLogForUserResponse) => void
@@ -140,8 +142,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取该用户的网络列表。网络信息中包含组织信息，但仅包含该用户所在组织的信息。
-   */
+     * 接口已废弃，请通过控制台查询或操作
+
+获取该用户的网络列表。网络信息中包含组织信息，但仅包含该用户所在组织的信息。
+     */
   async GetClusterListForUser(
     req: GetClusterListForUserRequest,
     cb?: (error: string, rep: GetClusterListForUserResponse) => void
@@ -190,8 +194,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取节点日志
-   */
+     * 接口已废弃，请通过控制台查询或操作
+
+获取节点日志
+     */
   async GetPeerLogForUser(
     req: GetPeerLogForUserRequest,
     cb?: (error: string, rep: GetPeerLogForUserResponse) => void
@@ -220,8 +226,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建并安装合约
-   */
+     * 接口已废弃，请通过控制台查询或操作
+
+创建并安装合约
+     */
   async CreateChaincodeAndInstallForUser(
     req: CreateChaincodeAndInstallForUserRequest,
     cb?: (error: string, rep: CreateChaincodeAndInstallForUserResponse) => void
@@ -270,8 +278,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 实例化结果查询
-   */
+     * 接口已废弃，请通过控制台查询或操作
+
+实例化结果查询
+     */
   async GetChaincodeInitializeResultForUser(
     req: GetChaincodeInitializeResultForUserRequest,
     cb?: (error: string, rep: GetChaincodeInitializeResultForUserResponse) => void
@@ -280,8 +290,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取通道列表
-   */
+     * 接口已废弃，请通过控制台查询或操作
+
+获取通道列表
+     */
   async GetChannelListForUser(
     req: GetChannelListForUserRequest,
     cb?: (error: string, rep: GetChannelListForUserResponse) => void
@@ -300,8 +312,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 实例化合约
-   */
+     * 接口已废弃，请通过控制台查询或操作
+
+实例化合约
+     */
   async InitializeChaincodeForUser(
     req: InitializeChaincodeForUserRequest,
     cb?: (error: string, rep: InitializeChaincodeForUserResponse) => void
@@ -350,8 +364,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取合约编译日志
-   */
+     * 接口已废弃，请通过控制台查询或操作
+
+获取合约编译日志
+     */
   async GetChaincodeCompileLogForUser(
     req: GetChaincodeCompileLogForUserRequest,
     cb?: (error: string, rep: GetChaincodeCompileLogForUserResponse) => void

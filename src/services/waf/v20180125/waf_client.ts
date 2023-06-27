@@ -51,6 +51,7 @@ import {
   DescribeFlowTrendResponse,
   GetAttackDownloadRecordsRequest,
   UpsertIpAccessControlRequest,
+  ModifySpartaProtectionResponse,
   DeleteDownloadRecordRequest,
   DescribeUserCdcClbWafRegionsResponse,
   DeleteAccessExportResponse,
@@ -75,6 +76,7 @@ import {
   HostRecord,
   CreateHostRequest,
   ModifyAreaBanStatusRequest,
+  SpartaProtectionPort,
   AddSpartaProtectionRequest,
   PeakPointsItem,
   PostAttackDownloadTaskRequest,
@@ -138,6 +140,7 @@ import {
   AccessRuleInfo,
   GetAttackDownloadRecordsResponse,
   DeleteAccessExportRequest,
+  ModifySpartaProtectionRequest,
   DescribeUserClbWafRegionsRequest,
   DescribeDomainWhiteRulesResponse,
   DescribeWafThreatenIntelligenceResponse,
@@ -479,6 +482,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyWafThreatenIntelligenceResponse) => void
   ): Promise<ModifyWafThreatenIntelligenceResponse> {
     return this.request("ModifyWafThreatenIntelligence", req, cb)
+  }
+
+  /**
+   * 修改域名配置
+   */
+  async ModifySpartaProtection(
+    req: ModifySpartaProtectionRequest,
+    cb?: (error: string, rep: ModifySpartaProtectionResponse) => void
+  ): Promise<ModifySpartaProtectionResponse> {
+    return this.request("ModifySpartaProtection", req, cb)
   }
 
   /**

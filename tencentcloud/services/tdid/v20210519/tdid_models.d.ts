@@ -209,19 +209,6 @@ export interface VerifyFunctionArg {
  */
 export declare type GetConsortiumListRequest = null;
 /**
- * GetDidClusterList返回参数结构体
- */
-export interface GetDidClusterListResponse {
-    /**
-     * DID网络列表
-     */
-    DidClusterList: Array<DidCluster>;
-    /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
-/**
  * CreateCredential请求参数结构体
  */
 export interface CreateCredentialRequest {
@@ -241,27 +228,6 @@ export interface CreateCredentialRequest {
      * 是否未签名
      */
     UnSigned?: boolean;
-}
-/**
- * GetDidClusterDetail返回参数结构体
- */
-export interface GetDidClusterDetailResponse {
-    /**
-     * 网络ID
-     */
-    ClusterId: string;
-    /**
-     * 组织名称
-     */
-    ConsortiumName: string;
-    /**
-     * 区块链组织名称
-     */
-    ChainAgency: string;
-    /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
 }
 /**
  * GetDidDocument请求参数结构体
@@ -298,10 +264,6 @@ export interface ConsortiumItem {
      */
     Name: string;
 }
-/**
- * GetDidClusterList请求参数结构体
- */
-export declare type GetDidClusterListRequest = null;
 /**
  * GetCredentialStatus请求参数结构体
  */
@@ -585,15 +547,6 @@ export interface RegisterCptRequest {
     CptId?: number;
 }
 /**
- * GetDidClusterDetail请求参数结构体
- */
-export interface GetDidClusterDetailRequest {
-    /**
-     * DID网络ID
-     */
-    ClusterId: string;
-}
-/**
  * 验证凭证签名
  */
 export interface Proof {
@@ -747,75 +700,6 @@ export interface SetCredentialStatusRequest {
      * 凭证状态
      */
     CredentialStatus: CredentialStatus;
-}
-/**
- * did区块链网络信息
- */
-export interface DidCluster {
-    /**
-     * 链ID
-     */
-    ChainId: number;
-    /**
-     * 链名称
-     */
-    ChainName: string;
-    /**
-     * 组织数量
-     */
-    AgencyCount: number;
-    /**
-     * 联盟ID
-     */
-    ConsortiumId: number;
-    /**
-     * 创建时间
-     */
-    CreateTime: string;
-    /**
-     * 过期时间
-     */
-    ExpireTime: string;
-    /**
-     * 网络状态
-     */
-    ChainStatus: number;
-    /**
-     * 资源ID
-     */
-    ResourceId: string;
-    /**
-     * 网络ID
-     */
-    ClusterId: string;
-    /**
-     * 联盟名称
-     */
-    ConsortiumName: string;
-    /**
-     * 组织ID
-     */
-    AgencyId: number;
-    /**
-     * 自动续费
-     */
-    AutoRenewFlag: number;
-    /**
-     * 网络节点总数
-     */
-    TotalNetworkNode: number;
-    /**
-     * 本机构节点数
-     */
-    TotalCreateNode: number;
-    /**
-     * 总群组数
-     */
-    TotalGroups: number;
-    /**
-     * DID总数
-     */
-    DidCount: number;
 }
 /**
  * GetCptInfo请求参数结构体

@@ -28,32 +28,42 @@ class Client extends abstract_client_1.AbstractClient {
         super("tdid.tencentcloudapi.com", "2021-05-19", clientConfig);
     }
     /**
-     * 检查区块链信息
+     * 该接口不再使用
+
+检查区块链信息
      */
     async CheckChain(req, cb) {
         return this.request("CheckChain", req, cb);
     }
     /**
-     * 凭证模版详情
+     * 该接口不再使用
+
+凭证模版详情
      */
     async GetCptInfo(req, cb) {
         return this.request("GetCptInfo", req, cb);
     }
     /**
-     * 查看DID文档
+     * 该接口不再使用
+
+查看DID文档
 
      */
     async GetDidDocument(req, cb) {
         return this.request("GetDidDocument", req, cb);
     }
     /**
-     * 创建选择性批露凭证
+     * 该接口不再使用
+
+创建选择性批露凭证
      */
     async CreateSelectiveCredential(req, cb) {
         return this.request("CreateSelectiveCredential", req, cb);
     }
     /**
-     * 创建机构DID
+     * 该接口不再使用
+
+创建机构DID
      */
     async CreateTDid(req, cb) {
         return this.request("CreateTDid", req, cb);
@@ -67,13 +77,17 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("GetCredentialCptRank", req, cb);
     }
     /**
-     * 创建凭证
+     * 该接口不再使用
+
+创建凭证
      */
     async CreateCredential(req, cb) {
         return this.request("CreateCredential", req, cb);
     }
     /**
-     *  新建DID根据公钥生成Tdid
+     * 该接口不再使用
+
+ 新建DID根据公钥生成Tdid
      */
     async CreateTDidByPublicKey(req, cb) {
         return this.request("CreateTDidByPublicKey", req, cb);
@@ -95,7 +109,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("GetAgencyTDid", req, cb);
     }
     /**
-     * 新建DID根据私钥生成Tdid
+     * 该接口不再使用
+
+新建DID根据私钥生成Tdid
      */
     async CreateTDidByPrivateKey(req, cb) {
         return this.request("CreateTDidByPrivateKey", req, cb);
@@ -110,15 +126,9 @@ DID添加标签
         return this.request("AddLabel", req, cb);
     }
     /**
-     * 下线已有内测接口，待上线正式版本的接口
+     * 该接口不再使用
 
-获取用户的DID网络列表
-     */
-    async GetDidClusterList(req, cb) {
-        return this.request("GetDidClusterList", req, cb);
-    }
-    /**
-     * 获取凭证链上状态信息
+获取凭证链上状态信息
      */
     async GetCredentialStatus(req, cb) {
         return this.request("GetCredentialStatus", req, cb);
@@ -132,33 +142,33 @@ DID添加标签
         return this.request("GetConsortiumClusterList", req, cb);
     }
     /**
-     * 验证凭证
+     * 该接口不再使用
+
+验证凭证
      */
     async VerifyCredential(req, cb) {
         return this.request("VerifyCredential", req, cb);
     }
     /**
-     * 下线已有内测接口，待上线正式版本的接口
+     * 该接口不再使用
 
-获取DID区块链网络详情
-     */
-    async GetDidClusterDetail(req, cb) {
-        return this.request("GetDidClusterDetail", req, cb);
-    }
-    /**
-     * 获取权威机构信息
+获取权威机构信息
      */
     async GetAuthorityIssuer(req, cb) {
         return this.request("GetAuthorityIssuer", req, cb);
     }
     /**
-     * 设置凭证链上状态
+     * 该接口不再使用
+
+设置凭证链上状态
      */
     async SetCredentialStatus(req, cb) {
         return this.request("SetCredentialStatus", req, cb);
     }
     /**
-     * 凭证模版新建
+     * 该接口不再使用
+
+凭证模版新建
      */
     async RegisterCpt(req, cb) {
         return this.request("RegisterCpt", req, cb);

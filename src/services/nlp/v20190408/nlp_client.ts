@@ -21,17 +21,20 @@ import {
   RetrieveSimilarWordsResponse,
   SentenceEmbeddingRequest,
   EvaluateWordSimilarityResponse,
+  ClassifyContentResponse,
   ParseWordsResponse,
   BasicParticiple,
   DictInfo,
   WordItem,
   TextCorrectionProResponse,
+  ClassifyContentRequest,
   Embellish,
   EvaluateWordSimilarityRequest,
   DeleteDictResponse,
-  TextWritingResponse,
+  TextClassificationRequest,
   CreateDictResponse,
-  TextClassificationResponse,
+  TextSimilarityRequest,
+  Keyword,
   LexicalAnalysisResponse,
   DescribeDictResponse,
   DescribeDictsResponse,
@@ -40,6 +43,7 @@ import {
   GeneratePoetryRequest,
   SearchWordItemsRequest,
   GenerateKeywordSentenceRequest,
+  ComposeCoupletResponse,
   SentimentAnalysisResponse,
   ChatBotResponse,
   KeywordsExtractionRequest,
@@ -48,6 +52,7 @@ import {
   UpdateDictRequest,
   SentimentAnalysisRequest,
   TextWritingRequest,
+  AnalyzeSentimentRequest,
   AutoSummarizationResponse,
   TextCorrectionResponse,
   DeleteWordItemsRequest,
@@ -57,6 +62,7 @@ import {
   GenerateCoupletRequest,
   LexicalAnalysisRequest,
   CreateWordItemsResponse,
+  Category,
   TextSimilarityProRequest,
   RetrieveSimilarWordsRequest,
   Writing,
@@ -74,22 +80,25 @@ import {
   PosToken,
   KeywordsExtractionResponse,
   SentenceCorrectionResponse,
+  ComposeCoupletRequest,
   EvaluateSentenceSimilarityRequest,
   Similarity,
   GenerateKeywordSentenceResponse,
   CCIToken,
+  ComposePoetryResponse,
+  ComposePoetryRequest,
   TextEmbellishResponse,
   CorrectionItem,
-  TextClassificationRequest,
+  TextWritingResponse,
   SearchWordItemsResponse,
   DpToken,
   ChatBotRequest,
   TextCorrectionRequest,
-  Keyword,
+  TextClassificationResponse,
   UpdateDictResponse,
   WordSimilarityRequest,
   DeleteWordItemsResponse,
-  TextSimilarityRequest,
+  AnalyzeSentimentResponse,
   WordEmbeddingRequest,
   CompoundParticiple,
   DescribeWordItemsResponse,
@@ -252,6 +261,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 对联生成接口根据用户输入的命题关键词，智能生成一副完整的春联，包括上联、下联和横批。该接口利用先进的自然语言处理技术，确保生成的春联既符合传统对仗、对韵、对义的要求，又具有新意和创意，为用户提供独特的春节祝福。
+   */
+  async ComposeCouplet(
+    req: ComposeCoupletRequest,
+    cb?: (error: string, rep: ComposeCoupletResponse) => void
+  ): Promise<ComposeCoupletResponse> {
+    return this.request("ComposeCouplet", req, cb)
+  }
+
+  /**
      * 因业务调整该接口将于北京时间2023年8月1日0点下线，届时该产品功能将无法正常使用，为了避免对您的业务造成影响，请您尽快做好相关业务调整。详见：https://cloud.tencent.com/document/product/271/90711
 
 文本分类接口能够对用户输入的文本进行自动分类，将其映射到具体的类目上，用户只需要提供待分类的文本，而无需关注具体实现。
@@ -341,6 +360,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: GenerateCoupletResponse) => void
   ): Promise<GenerateCoupletResponse> {
     return this.request("GenerateCouplet", req, cb)
+  }
+
+  /**
+   * 诗词生成接口利用现代的自然语言处理和深度学习技术，模仿了古代著名诗人的风格，为用户产生独特的诗词。用户只需输入的命题关键词，接口就能自动生成一首七言律诗或五言律诗。
+   */
+  async ComposePoetry(
+    req: ComposePoetryRequest,
+    cb?: (error: string, rep: ComposePoetryResponse) => void
+  ): Promise<ComposePoetryResponse> {
+    return this.request("ComposePoetry", req, cb)
   }
 
   /**
@@ -468,6 +497,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 文本分类接口能够对用户输入的文章进行自动分类，将其映射到具体的类目上，用户只需要提供待分类的文本，而无需关注具体实现。该功能定义了一套较为完备的[三级分类体系](https://cloud.tencent.com/document/product/271/94286)，积累了数百万的语料，经过多轮迭代优化打造了较先进的深度学习模型，以保证效果不断提升。
+   */
+  async ClassifyContent(
+    req: ClassifyContentRequest,
+    cb?: (error: string, rep: ClassifyContentResponse) => void
+  ): Promise<ClassifyContentResponse> {
+    return this.request("ClassifyContent", req, cb)
+  }
+
+  /**
      * 因业务调整该接口将于北京时间2023年8月1日0点下线，届时该产品功能将无法正常使用，为了避免对您的业务造成影响，请您尽快做好相关业务调整。详见：https://cloud.tencent.com/document/product/271/90711
 
 提供对中文文本的自动纠错功能，能够识别输入文本中的错误片段，定位错误并给出正确的文本结果；支持长度不超过128字符（含标点符号）的长文本纠错。
@@ -516,6 +555,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteDictResponse) => void
   ): Promise<DeleteDictResponse> {
     return this.request("DeleteDict", req, cb)
+  }
+
+  /**
+   * 情感分析接口能够对带有情感色彩的主观性文本进行分析、处理、归纳和推理，识别出用户的情感倾向，是积极、中性还是消极，并且提供各自概率。
+   */
+  async AnalyzeSentiment(
+    req: AnalyzeSentimentRequest,
+    cb?: (error: string, rep: AnalyzeSentimentResponse) => void
+  ): Promise<AnalyzeSentimentResponse> {
+    return this.request("AnalyzeSentiment", req, cb)
   }
 
   /**

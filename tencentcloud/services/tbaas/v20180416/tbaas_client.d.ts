@@ -16,7 +16,9 @@ export declare class Client extends AbstractClient {
      */
     ApplyChainMakerBatchUserCert(req: ApplyChainMakerBatchUserCertRequest, cb?: (error: string, rep: ApplyChainMakerBatchUserCertResponse) => void): Promise<ApplyChainMakerBatchUserCertResponse>;
     /**
-     * 获取合约容器日志
+     * 接口已废弃，请通过控制台查询或操作
+
+获取合约容器日志
      */
     GetChaincodeLogForUser(req: GetChaincodeLogForUserRequest, cb?: (error: string, rep: GetChaincodeLogForUserResponse) => void): Promise<GetChaincodeLogForUserResponse>;
     /**
@@ -24,7 +26,9 @@ export declare class Client extends AbstractClient {
      */
     QueryChainMakerDemoTransaction(req: QueryChainMakerDemoTransactionRequest, cb?: (error: string, rep: QueryChainMakerDemoTransactionResponse) => void): Promise<QueryChainMakerDemoTransactionResponse>;
     /**
-     * 获取该用户的网络列表。网络信息中包含组织信息，但仅包含该用户所在组织的信息。
+     * 接口已废弃，请通过控制台查询或操作
+
+获取该用户的网络列表。网络信息中包含组织信息，但仅包含该用户所在组织的信息。
      */
     GetClusterListForUser(req: GetClusterListForUserRequest, cb?: (error: string, rep: GetClusterListForUserResponse) => void): Promise<GetClusterListForUserResponse>;
     /**
@@ -44,7 +48,9 @@ export declare class Client extends AbstractClient {
      */
     GetClusterSummary(req: GetClusterSummaryRequest, cb?: (error: string, rep: GetClusterSummaryResponse) => void): Promise<GetClusterSummaryResponse>;
     /**
-     * 获取节点日志
+     * 接口已废弃，请通过控制台查询或操作
+
+获取节点日志
      */
     GetPeerLogForUser(req: GetPeerLogForUserRequest, cb?: (error: string, rep: GetPeerLogForUserResponse) => void): Promise<GetPeerLogForUserResponse>;
     /**
@@ -56,7 +62,9 @@ export declare class Client extends AbstractClient {
      */
     DownloadUserCert(req: DownloadUserCertRequest, cb?: (error: string, rep: DownloadUserCertResponse) => void): Promise<DownloadUserCertResponse>;
     /**
-     * 创建并安装合约
+     * 接口已废弃，请通过控制台查询或操作
+
+创建并安装合约
      */
     CreateChaincodeAndInstallForUser(req: CreateChaincodeAndInstallForUserRequest, cb?: (error: string, rep: CreateChaincodeAndInstallForUserResponse) => void): Promise<CreateChaincodeAndInstallForUserResponse>;
     /**
@@ -76,11 +84,15 @@ export declare class Client extends AbstractClient {
      */
     GetInvokeTx(req: GetInvokeTxRequest, cb?: (error: string, rep: GetInvokeTxResponse) => void): Promise<GetInvokeTxResponse>;
     /**
-     * 实例化结果查询
+     * 接口已废弃，请通过控制台查询或操作
+
+实例化结果查询
      */
     GetChaincodeInitializeResultForUser(req: GetChaincodeInitializeResultForUserRequest, cb?: (error: string, rep: GetChaincodeInitializeResultForUserResponse) => void): Promise<GetChaincodeInitializeResultForUserResponse>;
     /**
-     * 获取通道列表
+     * 接口已废弃，请通过控制台查询或操作
+
+获取通道列表
      */
     GetChannelListForUser(req: GetChannelListForUserRequest, cb?: (error: string, rep: GetChannelListForUserResponse) => void): Promise<GetChannelListForUserResponse>;
     /**
@@ -88,7 +100,9 @@ export declare class Client extends AbstractClient {
      */
     QueryChainMakerBlockTransaction(req: QueryChainMakerBlockTransactionRequest, cb?: (error: string, rep: QueryChainMakerBlockTransactionResponse) => void): Promise<QueryChainMakerBlockTransactionResponse>;
     /**
-     * 实例化合约
+     * 接口已废弃，请通过控制台查询或操作
+
+实例化合约
      */
     InitializeChaincodeForUser(req: InitializeChaincodeForUserRequest, cb?: (error: string, rep: InitializeChaincodeForUserResponse) => void): Promise<InitializeChaincodeForUserResponse>;
     /**
@@ -108,7 +122,9 @@ export declare class Client extends AbstractClient {
      */
     InvokeChainMakerDemoContract(req: InvokeChainMakerDemoContractRequest, cb?: (error: string, rep: InvokeChainMakerDemoContractResponse) => void): Promise<InvokeChainMakerDemoContractResponse>;
     /**
-     * 获取合约编译日志
+     * 接口已废弃，请通过控制台查询或操作
+
+获取合约编译日志
      */
     GetChaincodeCompileLogForUser(req: GetChaincodeCompileLogForUserRequest, cb?: (error: string, rep: GetChaincodeCompileLogForUserResponse) => void): Promise<GetChaincodeCompileLogForUserResponse>;
     /**

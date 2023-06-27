@@ -607,13 +607,30 @@ export interface SourceObject {
     /**
      * 源字段详细类型，int、string
   注意：此字段可能返回 null，表示取不到有效值。
+     * @deprecated
      */
     SourceObjectDataTypeName?: string;
     /**
      * 源字段名称
   注意：此字段可能返回 null，表示取不到有效值。
+     * @deprecated
      */
     SourceObjectValue?: string;
+    /**
+     * 源字段详细类型，int、string
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ObjectDataTypeName?: string;
+    /**
+     * 源字段名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ObjectValue?: string;
+    /**
+     * 对象类型 1.常量  2.离线表级   3.离线字段级
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ObjectType?: number;
 }
 /**
  * DescribeRules返回参数结构体
@@ -736,6 +753,11 @@ export interface RuleExecResultDetail {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     TableOwnerUserId?: number;
+    /**
+     * 2.HIVE 3.DLC
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DatasourceType?: number;
 }
 /**
  * 查询数据源分页列表
@@ -3613,6 +3635,14 @@ export interface DescribeQualityScoreRequest {
      * 数据来源id
      */
     DatasourceId?: string;
+    /**
+     * 1:按全维度权重计算,2:按已配置维度权重计算,3:不按维度权重计算,默认1
+     */
+    ScoreType?: string;
+    /**
+     * 过滤参数
+     */
+    Filters?: Array<Filter>;
 }
 /**
  * CommitIntegrationTask返回参数结构体
@@ -4074,6 +4104,11 @@ export interface RuleGroup {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     TableOwnerUserId?: number;
+    /**
+     * 实例ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InstanceId?: string;
 }
 /**
  * 规则配置
@@ -5372,6 +5407,10 @@ export interface DescribeTableQualityDetailsRequest {
      * 数据来源id
      */
     DatasourceId?: string;
+    /**
+     * 1:按全维度权重计算,2:按已配置维度权重计算,3:不按维度权重计算,默认1
+     */
+    ScoreType?: string;
 }
 /**
  * 集成节点详情
@@ -6705,7 +6744,7 @@ export interface DescribeQualityScoreResponse {
      * 质量评分
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Data: QualityScore;
+    Data?: QualityScore;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -6907,7 +6946,7 @@ export interface DescribeDimensionScoreResponse {
      * 维度评分
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Data: DimensionScore;
+    Data?: DimensionScore;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -7516,7 +7555,7 @@ export interface DescribeTableScoreTrendResponse {
      * 表得分趋势
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Data: QualityScoreTrend;
+    Data?: QualityScoreTrend;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -7674,6 +7713,7 @@ export interface DimensionCount {
     /**
      * 维度类型1：准确性，2：唯一性，3：完整性，4：一致性，5：及时性，6：有效性
   注意：此字段可能返回 null，表示取不到有效值。
+     * @deprecated
      */
     DimType?: number;
     /**
@@ -7681,6 +7721,11 @@ export interface DimensionCount {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Count?: number;
+    /**
+     * 维度类型1：准确性，2：唯一性，3：完整性，4：一致性，5：及时性，6：有效性
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    QualityDim?: number;
 }
 /**
  * DescribeInstanceLog返回参数结构体
@@ -8959,7 +9004,7 @@ export interface DescribeTableQualityDetailsResponse {
      * 表质量分详情结果
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Data: TableQualityDetailPage;
+    Data?: TableQualityDetailPage;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -9210,6 +9255,14 @@ export interface DescribeQualityScoreTrendRequest {
      * 数据来源id
      */
     DatasourceId?: string;
+    /**
+     * 1:按全维度权重计算,2:按已配置维度权重计算,3:不按维度权重计算,默认1
+     */
+    ScoreType?: string;
+    /**
+     * 过滤参数
+     */
+    Filters?: Array<Filter>;
 }
 /**
  * 抢锁状态：是否可以抢锁和当前持锁人
@@ -10332,6 +10385,16 @@ export interface RuleExecResult {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     RelConditionExpr: string;
+    /**
+     * 执行时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    StartTime?: string;
+    /**
+     * 1/2/3:低/中/高
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AlarmLevel?: number;
 }
 /**
  * GetOfflineInstanceList返回参数结构体
@@ -10726,6 +10789,10 @@ export interface DescribeTableScoreTrendRequest {
      * 表id
      */
     TableId: string;
+    /**
+     * 1:按全维度权重计算,2:按已配置维度权重计算,3:不按维度权重计算,默认1
+     */
+    ScoreType?: string;
 }
 /**
  * 规则执行结果分页
@@ -11649,6 +11716,10 @@ export interface DescribeDimensionScoreRequest {
      * 数据来源id
      */
     DatasourceId?: string;
+    /**
+     * 过滤参数
+     */
+    Filters?: Array<Filter>;
 }
 /**
  * dlc建表属性
@@ -12550,7 +12621,7 @@ export interface DescribeQualityScoreTrendResponse {
      * 质量评分趋势视图
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Data: QualityScoreTrend;
+    Data?: QualityScoreTrend;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
