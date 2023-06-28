@@ -748,6 +748,16 @@ it("sqlserver.v20180328.DeleteMigration", async function () {
     }
 })
 
+it("sqlserver.v20180328.ModifyInstanceEncryptAttributes", async function () {
+    try {
+       const data = await client.ModifyInstanceEncryptAttributes({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("sqlserver.v20180328.ModifyBackupName", async function () {
     try {
        const data = await client.ModifyBackupName({})
@@ -771,6 +781,16 @@ it("sqlserver.v20180328.DescribeAccounts", async function () {
 it("sqlserver.v20180328.ModifyIncrementalMigration", async function () {
     try {
        const data = await client.ModifyIncrementalMigration({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("sqlserver.v20180328.ModifyDBEncryptAttributes", async function () {
+    try {
+       const data = await client.ModifyDBEncryptAttributes({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

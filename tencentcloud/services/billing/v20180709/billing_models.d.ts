@@ -463,8 +463,7 @@ export interface CostDetail {
  */
 export interface DescribeBillSummaryByPayModeResponse {
     /**
-     * 数据是否准备好，0未准备好，1准备好。
-  Ready=0，为当前UIN首次进行初始化出账，预计需要5~10分钟，请于10分钟后重试
+     * 数据是否准备好，0准备中，1已就绪。（Ready=0，为当前UIN首次进行初始化出账，预计需要5~10分钟出账，请于10分钟后重试即可）
      */
     Ready?: number;
     /**
@@ -748,8 +747,7 @@ export interface Conditions {
  */
 export interface DescribeBillSummaryByProductResponse {
     /**
-     * 数据是否准备好，0未准备好，1准备好。
-  Ready=0，为当前UIN首次进行初始化出账，预计需要5~10分钟，请于10分钟后重试
+     * 数据是否准备好，0准备中，1已就绪。（Ready=0，为当前UIN首次进行初始化出账，预计需要5~10分钟出账，请于10分钟后重试即可）
      */
     Ready?: number;
     /**
@@ -785,8 +783,7 @@ export interface BillTagInfo {
  */
 export interface DescribeBillSummaryByRegionResponse {
     /**
-     * 数据是否准备好，0未准备好，1准备好
-  Ready=0，为当前UIN首次进行初始化出账，预计需要5~10分钟，请于10分钟后重试
+     * 数据是否准备好，0准备中，1已就绪。（Ready=0，为当前UIN首次进行初始化出账，预计需要5~10分钟出账，请于10分钟后重试即可）
      */
     Ready?: number;
     /**
@@ -1225,8 +1222,7 @@ export interface DescribeCostSummaryByProductResponse {
  */
 export interface DescribeBillSummaryByTagResponse {
     /**
-     * 数据是否准备好，0未准备好，1准备好
-  Ready=0，为当前UIN首次进行初始化出账，预计需要5~10分钟，请于10分钟后重试
+     * 数据是否准备好，0准备中，1已就绪。（Ready=0，为当前UIN首次进行初始化出账，预计需要5~10分钟出账，请于10分钟后重试即可）
      */
     Ready?: number;
     /**
@@ -2097,6 +2093,10 @@ export interface DescribeBillResourceSummaryRequest {
   备注：如需获取当月使用过的BusinessCode，请调用API：<a href="https://cloud.tencent.com/document/product/555/35761">获取产品汇总费用分布</a>
      */
     BusinessCode?: string;
+    /**
+     * 支付者的账号 ID（账号 ID 是用户在腾讯云的唯一账号标识），默认查询本账号账单，如集团管理账号需查询成员账号自付的账单，该字段需入参成员账号UIN
+     */
+    PayerUin?: string;
 }
 /**
  * PayDeals请求参数结构体
@@ -2736,8 +2736,7 @@ export interface DescribeBillSummaryByProjectRequest {
  */
 export interface DescribeBillSummaryByProjectResponse {
     /**
-     * 数据是否准备好，0未准备好，1准备好
-  Ready=0，为当前UIN首次进行初始化出账，预计需要5~10分钟，请于10分钟后重试
+     * 数据是否准备好，0准备中，1已就绪。（Ready=0，为当前UIN首次进行初始化出账，预计需要5~10分钟出账，请于10分钟后重试即可）
      */
     Ready?: number;
     /**

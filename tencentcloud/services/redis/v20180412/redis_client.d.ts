@@ -48,7 +48,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeProductInfo(req?: DescribeProductInfoRequest, cb?: (error: string, rep: DescribeProductInfoResponse) => void): Promise<DescribeProductInfoResponse>;
     /**
-     * 用于查询任务结果
+     * 本接口（DescribeTaskInfo）用于获取指定任务的执行情况。
      */
     DescribeTaskInfo(req: DescribeTaskInfoRequest, cb?: (error: string, rep: DescribeTaskInfoResponse) => void): Promise<DescribeTaskInfoResponse>;
     /**
@@ -232,7 +232,7 @@ export declare class Client extends AbstractClient {
      */
     UpgradeSmallVersion(req: UpgradeSmallVersionRequest, cb?: (error: string, rep: UpgradeSmallVersionResponse) => void): Promise<UpgradeSmallVersionResponse>;
     /**
-     * 创建复制组
+     * 该接口（CreateReplicationGroup）用于创建复制组。
      */
     CreateReplicationGroup(req: CreateReplicationGroupRequest, cb?: (error: string, rep: CreateReplicationGroupResponse) => void): Promise<CreateReplicationGroupResponse>;
     /**
@@ -292,7 +292,7 @@ export declare class Client extends AbstractClient {
      */
     SwitchInstanceVip(req: SwitchInstanceVipRequest, cb?: (error: string, rep: SwitchInstanceVipResponse) => void): Promise<SwitchInstanceVipResponse>;
     /**
-     * 本接口（DescribeReplicationGroup）查询复制组。
+     * 本接口（DescribeReplicationGroup）用于查询复制组。
      */
     DescribeReplicationGroup(req: DescribeReplicationGroupRequest, cb?: (error: string, rep: DescribeReplicationGroupResponse) => void): Promise<DescribeReplicationGroupResponse>;
     /**
@@ -344,7 +344,7 @@ export declare class Client extends AbstractClient {
      */
     ModifyDBInstanceSecurityGroups(req: ModifyDBInstanceSecurityGroupsRequest, cb?: (error: string, rep: ModifyDBInstanceSecurityGroupsResponse) => void): Promise<ModifyDBInstanceSecurityGroupsResponse>;
     /**
-     * 复制组实例切主
+     * 该接口（ChangeMasterInstance）用于将复制组内只读实例设置为主实例。
      */
     ChangeMasterInstance(req: ChangeMasterInstanceRequest, cb?: (error: string, rep: ChangeMasterInstanceResponse) => void): Promise<ChangeMasterInstanceResponse>;
     /**

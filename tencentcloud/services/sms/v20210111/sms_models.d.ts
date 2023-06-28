@@ -120,12 +120,12 @@ export interface SmsPackagesStatisticsRequest {
     Offset: number;
     /**
      * 起始时间，格式为yyyymmddhh，精确到小时，例如2021050113，表示2021年5月1号13时。
-  注：拉取套餐包的创建时间不小于起始时间。
+  注：接口会返回 BeginTime 到 EndTime 之间创建的套餐包的统计信息。
      */
     BeginTime: string;
     /**
      * 结束时间，格式为yyyymmddhh，精确到小时，例如2021050118，表示2021年5月1号18时。
-  注：EndTime 必须大于 BeginTime且小于当前时间，拉取套餐包的创建时间不大于结束时间。
+  注：EndTime 必须大于 BeginTime 且小于当前时间。
      */
     EndTime: string;
 }
@@ -527,7 +527,7 @@ export interface SendSmsRequest {
     TemplateId: string;
     /**
      * 短信签名内容，使用 UTF-8 编码，必须填写已审核通过的签名，例如：腾讯云，签名信息可前往 [国内短信](https://console.cloud.tencent.com/smsv2/csms-sign) 或 [国际/港澳台短信](https://console.cloud.tencent.com/smsv2/isms-sign) 的签名管理查看。
-  <dx-alert infotype="notice" title="注意">发送国内短信该参数必填。</dx-alert>
+  <dx-alert infotype="notice" title="注意">发送国内短信该参数必填，且需填写签名内容而非签名ID。</dx-alert>
      */
     SignName?: string;
     /**
@@ -1050,7 +1050,7 @@ export interface SmsPackagesStatisticsResponse {
     /**
      * 发送数据统计响应包体。
      */
-    SmsPackagesStatisticsSet: Array<SmsPackagesStatistics>;
+    SmsPackagesStatisticsSet?: Array<SmsPackagesStatistics>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */

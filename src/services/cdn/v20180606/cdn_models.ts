@@ -6243,20 +6243,20 @@ export interface DetailDomain {
   /**
    * 域名 ID
    */
-  ResourceId: string
+  ResourceId?: string
   /**
    * 腾讯云账号ID
    */
-  AppId: number
+  AppId?: number
   /**
    * 加速域名
    */
-  Domain: string
+  Domain?: string
   /**
    * 域名对应的 CNAME 地址
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Cname: string
+  Cname?: string
   /**
    * 加速服务状态
 rejected：域名审核未通过，域名备案过期/被注销导致
@@ -6265,11 +6265,11 @@ closing：关闭中
 online：已启动
 offline：已关闭
    */
-  Status: string
+  Status?: string
   /**
    * 项目 ID，可前往腾讯云项目管理页面查看
    */
-  ProjectId: number
+  ProjectId?: number
   /**
    * 加速域名业务类型
 web：网页小文件
@@ -6278,114 +6278,114 @@ media：音视频点播
 hybrid:  动静加速
 dynamic:  动态加速
    */
-  ServiceType: string
+  ServiceType?: string
   /**
    * 域名创建时间
    */
-  CreateTime: string
+  CreateTime?: string
   /**
    * 域名更新时间
    */
-  UpdateTime: string
+  UpdateTime?: string
   /**
    * 源站配置
    */
-  Origin: Origin
+  Origin?: Origin
   /**
    * IP 黑白名单配置
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  IpFilter: IpFilter
+  IpFilter?: IpFilter
   /**
    * IP 访问限频配置
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  IpFreqLimit: IpFreqLimit
+  IpFreqLimit?: IpFreqLimit
   /**
    * 状态码缓存配置
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  StatusCodeCache: StatusCodeCache
+  StatusCodeCache?: StatusCodeCache
   /**
    * 智能压缩配置
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Compression: Compression
+  Compression?: Compression
   /**
    * 带宽封顶配置
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  BandwidthAlert: BandwidthAlert
+  BandwidthAlert?: BandwidthAlert
   /**
    * Range 回源配置
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RangeOriginPull: RangeOriginPull
+  RangeOriginPull?: RangeOriginPull
   /**
    * 301/302 回源自动跟随配置
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  FollowRedirect: FollowRedirect
+  FollowRedirect?: FollowRedirect
   /**
    * 自定义错误页面配置
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ErrorPage: ErrorPage
+  ErrorPage?: ErrorPage
   /**
    * 自定义请求头部配置
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RequestHeader: RequestHeader
+  RequestHeader?: RequestHeader
   /**
    * 自定义响应头部配置
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ResponseHeader: ResponseHeader
+  ResponseHeader?: ResponseHeader
   /**
    * 单链接下行限速配置
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DownstreamCapping: DownstreamCapping
+  DownstreamCapping?: DownstreamCapping
   /**
    * 带参/不带参缓存配置
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CacheKey: CacheKey
+  CacheKey?: CacheKey
   /**
    * 源站头部缓存配置
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ResponseHeaderCache: ResponseHeaderCache
+  ResponseHeaderCache?: ResponseHeaderCache
   /**
    * 视频拖拽配置
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  VideoSeek: VideoSeek
+  VideoSeek?: VideoSeek
   /**
    * 节点缓存过期规则配置
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Cache: Cache
+  Cache?: Cache
   /**
    * 跨国链路优化配置（功能灰度中，敬请期待）
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  OriginPullOptimization: OriginPullOptimization
+  OriginPullOptimization?: OriginPullOptimization
   /**
    * Https 加速相关配置
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Https: Https
+  Https?: Https
   /**
    * 时间戳防盗链配置
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Authentication: Authentication
+  Authentication?: Authentication
   /**
    * SEO 优化配置
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Seo: Seo
+  Seo?: Seo
   /**
    * 域名封禁状态
 normal：正常状态
@@ -6398,37 +6398,37 @@ capping：触发配置的带宽阈值上限
 readonly：域名存在特殊配置，被锁定
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Disable: string
+  Disable?: string
   /**
    * 访问协议强制跳转配置
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ForceRedirect: ForceRedirect
+  ForceRedirect?: ForceRedirect
   /**
    * Referer 防盗链配置
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Referer: Referer
+  Referer?: Referer
   /**
    * 浏览器缓存过期规则配置（功能灰度中，敬请期待）
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  MaxAge: MaxAge
+  MaxAge?: MaxAge
   /**
    * Ipv6 回源配置（功能灰度中，敬请期待）
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Ipv6: Ipv6
+  Ipv6?: Ipv6
   /**
    * 是否兼容旧版本配置（内部兼容性字段）
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Compatibility: Compatibility
+  Compatibility?: Compatibility
   /**
    * 区域特殊配置
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SpecificConfig: SpecificConfig
+  SpecificConfig?: SpecificConfig
   /**
    * 加速区域
 mainland：中国境内加速
@@ -6436,7 +6436,7 @@ overseas：中国境外加速
 global：全球加速
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Area: string
+  Area?: string
   /**
    * 域名锁定状态
 normal：未锁定
@@ -6445,144 +6445,144 @@ overseas：中国境外锁定
 global：全球锁定
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Readonly: string
+  Readonly?: string
   /**
    * 回源超时配置
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  OriginPullTimeout: OriginPullTimeout
+  OriginPullTimeout?: OriginPullTimeout
   /**
    * 回源S3鉴权配置
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  AwsPrivateAccess: AwsPrivateAccess
+  AwsPrivateAccess?: AwsPrivateAccess
   /**
    * Scdn配置
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SecurityConfig: SecurityConfig
+  SecurityConfig?: SecurityConfig
   /**
    * ImageOptimization配置
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ImageOptimization: ImageOptimization
+  ImageOptimization?: ImageOptimization
   /**
    * UA黑白名单配置
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  UserAgentFilter: UserAgentFilter
+  UserAgentFilter?: UserAgentFilter
   /**
    * 访问控制
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  AccessControl: AccessControl
+  AccessControl?: AccessControl
   /**
    * 是否支持高级配置项
 on：支持
 off：不支持
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Advance: string
+  Advance?: string
   /**
    * URL重定向配置
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  UrlRedirect: UrlRedirect
+  UrlRedirect?: UrlRedirect
   /**
    * 访问端口配置
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  AccessPort: Array<number>
+  AccessPort?: Array<number>
   /**
    * 标签配置
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Tag: Array<Tag>
+  Tag?: Array<Tag>
   /**
    * 时间戳防盗链高级配置，白名单功能
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  AdvancedAuthentication: AdvancedAuthentication
+  AdvancedAuthentication?: AdvancedAuthentication
   /**
    * 回源鉴权高级配置，白名单功能
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  OriginAuthentication: OriginAuthentication
+  OriginAuthentication?: OriginAuthentication
   /**
    * Ipv6访问配置
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Ipv6Access: Ipv6Access
+  Ipv6Access?: Ipv6Access
   /**
    * 高级配置集合
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  AdvanceSet: Array<AdvanceConfig>
+  AdvanceSet?: Array<AdvanceConfig>
   /**
    * 离线缓存（功能灰度中，尚未全量，请等待后续全量发布）
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  OfflineCache: OfflineCache
+  OfflineCache?: OfflineCache
   /**
    * 合并回源（白名单功能）
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  OriginCombine: OriginCombine
+  OriginCombine?: OriginCombine
   /**
    * POST上传配置项
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  PostMaxSize: PostSize
+  PostMaxSize?: PostSize
   /**
    * Quic配置
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Quic: Quic
+  Quic?: Quic
   /**
    * 回源OSS私有鉴权
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  OssPrivateAccess: OssPrivateAccess
+  OssPrivateAccess?: OssPrivateAccess
   /**
    * WebSocket配置
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  WebSocket: WebSocket
+  WebSocket?: WebSocket
   /**
    * 远程鉴权配置
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RemoteAuthentication: RemoteAuthentication
+  RemoteAuthentication?: RemoteAuthentication
   /**
    * 共享CNAME配置（白名单功能）
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ShareCname: ShareCname
+  ShareCname?: ShareCname
   /**
    * 规则引擎
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RuleEngine: RuleEngine
+  RuleEngine?: RuleEngine
   /**
    * 主域名
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ParentHost: string
+  ParentHost?: string
   /**
    * 华为云对象存储回源鉴权
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  HwPrivateAccess: HwPrivateAccess
+  HwPrivateAccess?: HwPrivateAccess
   /**
    * 七牛云对象存储回源鉴权
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  QnPrivateAccess: QnPrivateAccess
+  QnPrivateAccess?: QnPrivateAccess
   /**
    * HTTPS服务，缺省时默认开启
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  HttpsBilling: HttpsBilling
+  HttpsBilling?: HttpsBilling
   /**
    * 其他厂商对象存储回源鉴权
 注意：此字段可能返回 null，表示取不到有效值。
@@ -8011,7 +8011,7 @@ export interface UpdateDomainConfigRequest {
    */
   ErrorPage?: ErrorPage
   /**
-   * 请求头部配置
+   * 回源请求头部配置
    */
   RequestHeader?: RequestHeader
   /**

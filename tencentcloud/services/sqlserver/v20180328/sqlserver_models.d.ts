@@ -160,6 +160,19 @@ export interface DealInfo {
     InstanceChargeType: string;
 }
 /**
+ * ModifyDBEncryptAttributes返回参数结构体
+ */
+export interface ModifyDBEncryptAttributesResponse {
+    /**
+     * 任务流ID
+     */
+    FlowId?: number;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * ModifyBackupStrategy请求参数结构体
  */
 export interface ModifyBackupStrategyRequest {
@@ -735,13 +748,17 @@ export interface DescribeProductConfigRequest {
     InstanceType?: string;
 }
 /**
- * ModifyPublishSubscribeName返回参数结构体
+ * ModifyDBEncryptAttributes请求参数结构体
  */
-export interface ModifyPublishSubscribeNameResponse {
+export interface ModifyDBEncryptAttributesRequest {
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     * 实例ID
      */
-    RequestId?: string;
+    InstanceId: string;
+    /**
+     * 开启、关闭数据库TDE加密
+     */
+    DBTDEEncrypt: Array<DBTDEEncrypt>;
 }
 /**
  * CreateAccount请求参数结构体
@@ -1479,6 +1496,23 @@ export interface RecycleDBInstanceRequest {
     InstanceId: string;
 }
 /**
+ * ModifyInstanceEncryptAttributes请求参数结构体
+ */
+export interface ModifyInstanceEncryptAttributesRequest {
+    /**
+     * 实例ID
+     */
+    InstanceId: string;
+    /**
+     * 证书归属。self-表示使用该账号自身的证书，others-表示引用其他账号的证书，默认self。
+     */
+    CertificateAttribution: string;
+    /**
+     * 引用的其他主账号ID，当CertificateAttribution 为others时必填。
+     */
+    QuoteUin?: string;
+}
+/**
  * 商业智能服务文件类型
  */
 export interface BusinessIntelligenceFile {
@@ -2102,6 +2136,19 @@ export interface CreateCloudReadOnlyDBInstancesRequest {
      * 系统时区，默认：China Standard Time
      */
     TimeZone?: string;
+}
+/**
+ * ModifyInstanceEncryptAttributes返回参数结构体
+ */
+export interface ModifyInstanceEncryptAttributesResponse {
+    /**
+     * 任务流ID
+     */
+    FlowId?: number;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * 冷备导入任务迁移步骤细节
@@ -3979,6 +4026,19 @@ export interface DescribeRollbackTimeRequest {
     DBs: Array<string>;
 }
 /**
+ * 开启、关闭TDE数据库加密
+ */
+export interface DBTDEEncrypt {
+    /**
+     * 数据库名称
+     */
+    DBName?: string;
+    /**
+     * enable-开启加密，disable-关闭加密
+     */
+    Encryption?: string;
+}
+/**
  * DescribeUploadBackupInfo返回参数结构体
  */
 export interface DescribeUploadBackupInfoResponse {
@@ -5257,6 +5317,15 @@ export interface DeleteDBInstanceRequest {
      * 实例ID，格式如：mssql-3l3fgqn7 或 mssqlro-3l3fgqn7
      */
     InstanceId: string;
+}
+/**
+ * ModifyPublishSubscribeName返回参数结构体
+ */
+export interface ModifyPublishSubscribeNameResponse {
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * CreateAccount返回参数结构体

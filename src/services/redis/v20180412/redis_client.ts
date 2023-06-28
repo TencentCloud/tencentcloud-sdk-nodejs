@@ -363,7 +363,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 用于查询任务结果
+   * 本接口（DescribeTaskInfo）用于获取指定任务的执行情况。
    */
   async DescribeTaskInfo(
     req: DescribeTaskInfoRequest,
@@ -823,7 +823,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建复制组
+   * 该接口（CreateReplicationGroup）用于创建复制组。
    */
   async CreateReplicationGroup(
     req: CreateReplicationGroupRequest,
@@ -973,7 +973,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（DescribeReplicationGroup）查询复制组。
+   * 本接口（DescribeReplicationGroup）用于查询复制组。
    */
   async DescribeReplicationGroup(
     req: DescribeReplicationGroupRequest,
@@ -1103,7 +1103,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 复制组实例切主
+   * 该接口（ChangeMasterInstance）用于将复制组内只读实例设置为主实例。
    */
   async ChangeMasterInstance(
     req: ChangeMasterInstanceRequest,

@@ -479,12 +479,12 @@ export interface DescribeMetricRecordsResponse {
      * 指标结果集
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Records: Array<ApmMetricRecord>;
+    Records?: Array<ApmMetricRecord>;
     /**
      * 查询指标结果集条数
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -612,6 +612,10 @@ export interface DescribeMetricRecordsRequest {
      * 页长
      */
     PageSize?: number;
+    /**
+     * Or过滤条件
+     */
+    OrFilters?: Array<Filter>;
 }
 /**
  * DescribeGeneralMetricData请求参数结构体

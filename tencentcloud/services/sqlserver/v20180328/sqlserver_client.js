@@ -468,6 +468,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteMigration", req, cb);
     }
     /**
+     * 本接口（ModifyInstanceEncryptAttributes）用于开通实例的TDE加密功能。
+     */
+    async ModifyInstanceEncryptAttributes(req, cb) {
+        return this.request("ModifyInstanceEncryptAttributes", req, cb);
+    }
+    /**
      * 本接口(ModifyBackupName)用于修改备份任务名称。
      */
     async ModifyBackupName(req, cb) {
@@ -484,6 +490,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ModifyIncrementalMigration(req, cb) {
         return this.request("ModifyIncrementalMigration", req, cb);
+    }
+    /**
+     * 本接口（ModifyDBEncryptAttributes）用于开启、关闭数据库的TDE加密功能。
+     */
+    async ModifyDBEncryptAttributes(req, cb) {
+        return this.request("ModifyDBEncryptAttributes", req, cb);
     }
     /**
      * 本接口（RemoveBackups）可以删除用户手动创建的备份文件。待删除的备份策略可以是实例备份，也可以是多库备份。

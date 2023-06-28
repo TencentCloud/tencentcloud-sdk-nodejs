@@ -23,6 +23,7 @@ import {
   CloneDBResponse,
   InstanceRenewInfo,
   DealInfo,
+  ModifyDBEncryptAttributesResponse,
   ModifyBackupStrategyRequest,
   RestoreInstanceRequest,
   CreateBasicDBInstancesResponse,
@@ -56,7 +57,7 @@ import {
   CreateBusinessIntelligenceFileResponse,
   OpenInterCommunicationRequest,
   DescribeProductConfigRequest,
-  ModifyPublishSubscribeNameResponse,
+  ModifyDBEncryptAttributesRequest,
   CreateAccountRequest,
   ParamRecord,
   RollbackInstanceResponse,
@@ -88,6 +89,7 @@ import {
   MigrationDetail,
   DescribeBackupByFlowIdResponse,
   RecycleDBInstanceRequest,
+  ModifyInstanceEncryptAttributesRequest,
   BusinessIntelligenceFile,
   CompleteMigrationResponse,
   ResetAccountPasswordResponse,
@@ -108,6 +110,7 @@ import {
   DescribeDBsResponse,
   DescribeDBInstancesRequest,
   CreateCloudReadOnlyDBInstancesRequest,
+  ModifyInstanceEncryptAttributesResponse,
   MigrationStep,
   ModifyAccountRemarkResponse,
   Events,
@@ -195,6 +198,7 @@ import {
   DBInstance,
   DescribeProductConfigResponse,
   DescribeRollbackTimeRequest,
+  DBTDEEncrypt,
   DescribeUploadBackupInfoResponse,
   CreateMigrationRequest,
   DescribeDBInstanceInterRequest,
@@ -250,6 +254,7 @@ import {
   CrossBackupAddr,
   Parameter,
   DeleteDBInstanceRequest,
+  ModifyPublishSubscribeNameResponse,
   CreateAccountResponse,
   RenewPostpaidDBInstanceResponse,
   DescribeBackupUploadSizeRequest,
@@ -1038,6 +1043,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口（ModifyInstanceEncryptAttributes）用于开通实例的TDE加密功能。
+   */
+  async ModifyInstanceEncryptAttributes(
+    req: ModifyInstanceEncryptAttributesRequest,
+    cb?: (error: string, rep: ModifyInstanceEncryptAttributesResponse) => void
+  ): Promise<ModifyInstanceEncryptAttributesResponse> {
+    return this.request("ModifyInstanceEncryptAttributes", req, cb)
+  }
+
+  /**
    * 本接口(ModifyBackupName)用于修改备份任务名称。
    */
   async ModifyBackupName(
@@ -1065,6 +1080,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyIncrementalMigrationResponse) => void
   ): Promise<ModifyIncrementalMigrationResponse> {
     return this.request("ModifyIncrementalMigration", req, cb)
+  }
+
+  /**
+   * 本接口（ModifyDBEncryptAttributes）用于开启、关闭数据库的TDE加密功能。
+   */
+  async ModifyDBEncryptAttributes(
+    req: ModifyDBEncryptAttributesRequest,
+    cb?: (error: string, rep: ModifyDBEncryptAttributesResponse) => void
+  ): Promise<ModifyDBEncryptAttributesResponse> {
+    return this.request("ModifyDBEncryptAttributes", req, cb)
   }
 
   /**

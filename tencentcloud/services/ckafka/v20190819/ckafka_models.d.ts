@@ -2959,7 +2959,7 @@ export interface DescribeConsumerGroupRequest {
      */
     TopicName?: string;
     /**
-     * 本次返回个数限制
+     * 本次返回个数限制，最大支持50
      */
     Limit?: number;
     /**
@@ -5855,7 +5855,7 @@ export interface InquireCkafkaPriceResponse {
     /**
      * 出参
      */
-    Result: InquireCkafkaPriceResp;
+    Result?: InquireCkafkaPriceResp;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -5892,7 +5892,7 @@ export interface CreatePostPaidInstanceResponse {
  */
 export interface InquireCkafkaPriceRequest {
     /**
-     * 国内站标准版填写standards2, 专业版填写profession
+     * 国内站标准版填写standards2, 国际站标准版填写standard，专业版填写profession
      */
     InstanceType: string;
     /**
@@ -5904,11 +5904,11 @@ export interface InquireCkafkaPriceRequest {
      */
     InstanceNum?: number;
     /**
-     * 实例内网带宽大小, 单位MB/s (购买时必填)
+     * 实例内网带宽大小, 单位MB/s (购买时必填，专业版询价时带宽信息必填)
      */
     Bandwidth?: number;
     /**
-     * 实例的硬盘购买类型以及大小 (购买时必填)
+     * 实例的硬盘购买类型以及大小 (购买时必填，专业版询价时磁盘信息必填)
      */
     InquiryDiskParam?: InquiryDiskParam;
     /**
@@ -5920,7 +5920,7 @@ export interface InquireCkafkaPriceRequest {
      */
     Topic?: number;
     /**
-     * 购买实例分区数, 单位个 (购买时必填)
+     * 购买实例分区数, 单位个 (购买时必填，专业版询价时带宽信息必填)
      */
     Partition?: number;
     /**

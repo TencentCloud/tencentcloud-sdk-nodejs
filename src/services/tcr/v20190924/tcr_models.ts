@@ -394,25 +394,35 @@ export interface DeleteInstanceTokenRequest {
 }
 
 /**
- * Tag列表的返回值
+ * 任务详情
  */
-export interface TagInfoResp {
+export interface TaskDetail {
   /**
-   * Tag的总数
+   * 任务
    */
-  TagCount: number
+  TaskName: string
   /**
-   * TagInfo列表
+   * 任务UUID
    */
-  TagInfo: Array<TagInfo>
+  TaskUUID: string
   /**
-   * Server
+   * 任务状态
    */
-  Server: string
+  TaskStatus: string
   /**
-   * 仓库名称
+   * 任务的状态信息
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  RepoName: string
+  TaskMessage: string
+  /**
+   * 任务开始时间
+   */
+  CreatedTime: string
+  /**
+   * 任务结束时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FinishedTime: string
 }
 
 /**
@@ -609,6 +619,40 @@ export interface RenewInstanceResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * CreateCustomAccount请求参数结构体
+ */
+export interface CreateCustomAccountRequest {
+  /**
+   * 实例Id
+   */
+  RegistryId: string
+  /**
+   * 自定义的账户名
+   */
+  Name: string
+  /**
+   * 策略列表
+   */
+  Permissions: Array<Permission>
+  /**
+   * 自定义的账户描述
+   */
+  Description?: string
+  /**
+   * 有效期(单位：天)，从当前时间开始计算，优先级高于ExpiresAt
+   */
+  Duration?: number
+  /**
+   * 自定义的账户过期时间（时间戳，单位:毫秒）
+   */
+  ExpiresAt?: number
+  /**
+   * 是否禁用自定义的账户
+   */
+  Disable?: boolean
 }
 
 /**
@@ -871,20 +915,6 @@ export interface NamespaceInfo {
 }
 
 /**
- * CreateImageAccelerationService返回参数结构体
- */
-export interface CreateImageAccelerationServiceResponse {
-  /**
-   * 实例Id
-   */
-  RegistryId?: string
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * CreateMultipleSecurityPolicy返回参数结构体
  */
 export interface CreateMultipleSecurityPolicyResponse {
@@ -1099,6 +1129,21 @@ export interface ManageReplicationRequest {
    * 开启跨主账号实例同步配置项
    */
   PeerReplicationOption?: PeerReplicationOption
+}
+
+/**
+ * DescribeInstanceStatus返回参数结构体
+ */
+export interface DescribeInstanceStatusResponse {
+  /**
+   * 实例的状态列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RegistryStatusSet?: Array<RegistryStatus>
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1419,6 +1464,36 @@ export interface DuplicateImagePersonalResponse {
 }
 
 /**
+ * DescribeCustomAccounts请求参数结构体
+ */
+export interface DescribeCustomAccountsRequest {
+  /**
+   * 实例Id
+   */
+  RegistryId: string
+  /**
+   * 列出所有自定义账户
+   */
+  All?: boolean
+  /**
+   * 填充策略
+   */
+  EmbedPermission?: boolean
+  /**
+   * 过滤条件
+   */
+  Filters?: Array<Filter>
+  /**
+   * 偏移量,默认0
+   */
+  Offset?: number
+  /**
+   * 最大输出条数，默认20，最大为100
+   */
+  Limit?: number
+}
+
+/**
  * DescribeImageLifecyclePersonal返回参数结构体
  */
 export interface DescribeImageLifecyclePersonalResponse {
@@ -1433,18 +1508,21 @@ export interface DescribeImageLifecyclePersonalResponse {
 }
 
 /**
- * DescribeInstanceStatus返回参数结构体
+ * DeleteReplicationInstance请求参数结构体
  */
-export interface DescribeInstanceStatusResponse {
+export interface DeleteReplicationInstanceRequest {
   /**
-   * 实例的状态列表
-注意：此字段可能返回 null，表示取不到有效值。
+   * 实例id
    */
-  RegistryStatusSet?: Array<RegistryStatus>
+  RegistryId: string
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 复制实例ID
    */
-  RequestId?: string
+  ReplicationRegistryId: string
+  /**
+   * 复制实例地域Id
+   */
+  ReplicationRegionId: number
 }
 
 /**
@@ -1600,6 +1678,22 @@ export interface VpcPrivateDomainStatus {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Status: string
+}
+
+/**
+ * 策略
+ */
+export interface Permission {
+  /**
+   * 资源路径，目前仅支持Namespace
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Resource: string
+  /**
+   * 动作，目前仅支持：tcr:PushRepository、tcr:PullRepository
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Actions: Array<string>
 }
 
 /**
@@ -1837,21 +1931,17 @@ export interface ModifyWebhookTriggerRequest {
 }
 
 /**
- * DeleteReplicationInstance请求参数结构体
+ * CreateImageAccelerationService返回参数结构体
  */
-export interface DeleteReplicationInstanceRequest {
+export interface CreateImageAccelerationServiceResponse {
   /**
-   * 实例id
+   * 实例Id
    */
-  RegistryId: string
+  RegistryId?: string
   /**
-   * 复制实例ID
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  ReplicationRegistryId: string
-  /**
-   * 复制实例地域Id
-   */
-  ReplicationRegionId: number
+  RequestId?: string
 }
 
 /**
@@ -1865,13 +1955,25 @@ export interface DeleteNamespaceResponse {
 }
 
 /**
- * DeleteNamespacePersonal返回参数结构体
+ * Tag列表的返回值
  */
-export interface DeleteNamespacePersonalResponse {
+export interface TagInfoResp {
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * Tag的总数
    */
-  RequestId?: string
+  TagCount: number
+  /**
+   * TagInfo列表
+   */
+  TagInfo: Array<TagInfo>
+  /**
+   * Server
+   */
+  Server: string
+  /**
+   * 仓库名称
+   */
+  RepoName: string
 }
 
 /**
@@ -1927,25 +2029,21 @@ export interface Favors {
 }
 
 /**
- * CreateSignature请求参数结构体
+ * CreateWebhookTrigger请求参数结构体
  */
-export interface CreateSignatureRequest {
+export interface CreateWebhookTriggerRequest {
   /**
-   * 实例ID
+   * 实例 Id
    */
   RegistryId: string
   /**
-   * 命名空间名称
+   * 触发器参数
    */
-  NamespaceName: string
+  Trigger: WebhookTrigger
   /**
-   * 仓库名称
+   * 命名空间
    */
-  RepositoryName: string
-  /**
-   * Tag名称
-   */
-  ImageVersion: string
+  Namespace: string
 }
 
 /**
@@ -2014,6 +2112,20 @@ export interface CreateUserPersonalRequest {
    * 用户密码，密码必须为8到16位
    */
   Password: string
+}
+
+/**
+ * ValidateRepositoryExistPersonal返回参数结构体
+ */
+export interface ValidateRepositoryExistPersonalResponse {
+  /**
+   * 验证个人版仓库是否存在返回信息
+   */
+  Data: RepoIsExistResp
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2123,29 +2235,25 @@ export interface ModifyRepositoryInfoPersonalResponse {
 }
 
 /**
- * DescribeWebhookTriggerLog请求参数结构体
+ * CreateSignature请求参数结构体
  */
-export interface DescribeWebhookTriggerLogRequest {
+export interface CreateSignatureRequest {
   /**
-   * 实例 Id
+   * 实例ID
    */
   RegistryId: string
   /**
-   * 命名空间
+   * 命名空间名称
    */
-  Namespace: string
+  NamespaceName: string
   /**
-   * 触发器 Id
+   * 仓库名称
    */
-  Id?: number
+  RepositoryName: string
   /**
-   * 分页单页数量
+   * Tag名称
    */
-  Limit?: number
-  /**
-   * 分页偏移量
-   */
-  Offset?: number
+  ImageVersion: string
 }
 
 /**
@@ -2457,6 +2565,22 @@ export interface DescribeApplicationTriggerLogPersonalResp {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   LogInfo: Array<TriggerLogResp>
+}
+
+/**
+ * 云标签
+ */
+export interface TagSpecification {
+  /**
+   * 默认值为instance
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResourceType: string
+  /**
+   * 云标签数组
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Tags: Array<Tag>
 }
 
 /**
@@ -2813,19 +2937,37 @@ export interface ModifyRepositoryAccessPersonalRequest {
 }
 
 /**
- * 云标签
+ * ModifyCustomAccount请求参数结构体
  */
-export interface TagSpecification {
+export interface ModifyCustomAccountRequest {
   /**
-   * 默认值为instance
-注意：此字段可能返回 null，表示取不到有效值。
+   * 实例Id
    */
-  ResourceType: string
+  RegistryId: string
   /**
-   * 云标签数组
-注意：此字段可能返回 null，表示取不到有效值。
+   * 自定义的账户名
    */
-  Tags: Array<Tag>
+  Name: string
+  /**
+   * 自定义的账户描述
+   */
+  Description?: string
+  /**
+   * 有效期(单位：天)，从当前时间开始计算，优先级高于ExpiresAt
+   */
+  Duration?: number
+  /**
+   * 自定义的账户过期时间（时间戳）
+   */
+  ExpiresAt?: number
+  /**
+   * 是否禁用自定义的账户
+   */
+  Disable?: boolean
+  /**
+   * 策略列表
+   */
+  Permissions?: Array<Permission>
 }
 
 /**
@@ -3213,13 +3355,28 @@ export interface DescribeChartDownloadInfoRequest {
 }
 
 /**
- * ValidateRepositoryExistPersonal返回参数结构体
+ * DescribeCustomAccounts返回参数结构体
  */
-export interface ValidateRepositoryExistPersonalResponse {
+export interface DescribeCustomAccountsResponse {
   /**
-   * 验证个人版仓库是否存在返回信息
+   * 自定义账户列表
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Data: RepoIsExistResp
+  CustomAccounts?: Array<CustomAccount>
+  /**
+   * 自定义账户数量
+   */
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyCustomAccount返回参数结构体
+ */
+export interface ModifyCustomAccountResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3393,6 +3550,32 @@ export interface RetentionExecution {
 }
 
 /**
+ * DescribeWebhookTriggerLog请求参数结构体
+ */
+export interface DescribeWebhookTriggerLogRequest {
+  /**
+   * 实例 Id
+   */
+  RegistryId: string
+  /**
+   * 命名空间
+   */
+  Namespace: string
+  /**
+   * 触发器 Id
+   */
+  Id?: number
+  /**
+   * 分页单页数量
+   */
+  Limit?: number
+  /**
+   * 分页偏移量
+   */
+  Offset?: number
+}
+
+/**
  * ManageReplication返回参数结构体
  */
 export interface ManageReplicationResponse {
@@ -3502,38 +3685,6 @@ export interface DescribeUserQuotaPersonalResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * 任务详情
- */
-export interface TaskDetail {
-  /**
-   * 任务
-   */
-  TaskName: string
-  /**
-   * 任务UUID
-   */
-  TaskUUID: string
-  /**
-   * 任务状态
-   */
-  TaskStatus: string
-  /**
-   * 任务的状态信息
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TaskMessage: string
-  /**
-   * 任务开始时间
-   */
-  CreatedTime: string
-  /**
-   * 任务结束时间
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  FinishedTime: string
 }
 
 /**
@@ -3671,9 +3822,9 @@ export interface DescribeNamespacePersonalResponse {
 }
 
 /**
- * DeleteReplicationInstance返回参数结构体
+ * DeleteNamespacePersonal返回参数结构体
  */
-export interface DeleteReplicationInstanceResponse {
+export interface DeleteNamespacePersonalResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3788,21 +3939,44 @@ export interface CreateSecurityPolicyRequest {
 }
 
 /**
- * CreateWebhookTrigger请求参数结构体
+ * 自定义账户
  */
-export interface CreateWebhookTriggerRequest {
+export interface CustomAccount {
   /**
-   * 实例 Id
+   * 自定义账户名
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  RegistryId: string
+  Name?: string
   /**
-   * 触发器参数
+   * 描述
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Trigger: WebhookTrigger
+  Description?: string
   /**
-   * 命名空间
+   * 是否禁用
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Namespace: string
+  Disable?: boolean
+  /**
+   * 过期时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExpiresAt?: number
+  /**
+   * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateTime?: string
+  /**
+   * 更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UpdateTime?: string
+  /**
+   * 策略
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Permissions?: Array<Permission>
 }
 
 /**
@@ -3977,6 +4151,42 @@ export interface CreateInstanceCustomizedDomainRequest {
 }
 
 /**
+ * 同步日志
+ */
+export interface ReplicationLog {
+  /**
+   * 资源类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResourceType: string
+  /**
+   * 源资源
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Source: string
+  /**
+   * 目的资源
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Destination: string
+  /**
+   * 同步状态
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status: string
+  /**
+   * 开始时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StartTime: string
+  /**
+   * 结束时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EndTime: string
+}
+
+/**
  * CreateTagRetentionExecution返回参数结构体
  */
 export interface CreateTagRetentionExecutionResponse {
@@ -4040,6 +4250,16 @@ export interface DescribeRepositoryOwnerPersonalRequest {
    * 仓库名称
    */
   RepoName?: string
+}
+
+/**
+ * DeleteReplicationInstance返回参数结构体
+ */
+export interface DeleteReplicationInstanceResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -4180,6 +4400,32 @@ export interface CreateReplicationInstanceResponse {
    * 企业版复制实例Id
    */
   ReplicationRegistryId: string
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateCustomAccount返回参数结构体
+ */
+export interface CreateCustomAccountResponse {
+  /**
+   * 自定义用户名（会自动加上前缀tcr$）
+   */
+  Name?: string
+  /**
+   * 自定义用户密码，仅展示一次，请注意留存
+   */
+  Password?: string
+  /**
+   * 自定义用户失效时间（时间戳）
+   */
+  ExpiresAt?: number
+  /**
+   * 自定义用户创建时间
+   */
+  CreateTime?: string
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4437,6 +4683,16 @@ export interface CreateRepositoryRequest {
  * DeleteImage返回参数结构体
  */
 export interface DeleteImageResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeleteCustomAccount返回参数结构体
+ */
+export interface DeleteCustomAccountResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4899,39 +5155,17 @@ export interface CreateTagRetentionExecutionRequest {
 }
 
 /**
- * 同步日志
+ * DeleteCustomAccount请求参数结构体
  */
-export interface ReplicationLog {
+export interface DeleteCustomAccountRequest {
   /**
-   * 资源类型
-注意：此字段可能返回 null，表示取不到有效值。
+   * 实例Id
    */
-  ResourceType: string
+  RegistryId: string
   /**
-   * 源资源
-注意：此字段可能返回 null，表示取不到有效值。
+   * 自定义的账户名
    */
-  Source: string
-  /**
-   * 目的资源
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Destination: string
-  /**
-   * 同步状态
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Status: string
-  /**
-   * 开始时间
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  StartTime: string
-  /**
-   * 结束时间
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  EndTime: string
+  Name: string
 }
 
 /**

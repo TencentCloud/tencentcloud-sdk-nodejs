@@ -360,7 +360,7 @@ export interface CreateReplicationGroupRequest {
      */
     InstanceId: string;
     /**
-     * 复制组名称。
+     * 复制组名称。名称只支持长度为2-64个字符的中文、英文、数字、下划线_、分隔符-。
      */
     GroupName?: string;
     /**
@@ -1500,9 +1500,9 @@ export interface DescribeInstanceDTSInfoResponse {
  */
 export interface ChangeMasterInstanceResponse {
     /**
-     * 异步流程ID
+     * 异步流程ID。
      */
-    TaskId: number;
+    TaskId?: number;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1698,13 +1698,22 @@ export interface ModifyDBInstanceSecurityGroupsResponse {
  */
 export interface ChangeMasterInstanceRequest {
     /**
-     * 复制组ID
+     * 复制组ID。创建复制组时，系统自动分配的 ID，是复制组的唯一标识。例如：crs-rpl-m3zt****，请登录[Redis 控制台](https://console.cloud.tencent.com/redis/replication)的全球复制组列表获取复制组 ID。
+  
      */
     GroupId: string;
     /**
-     * 实例ID
+     * 指定待提升为主实例的只读实例 ID。例如：crs-xjhsdj****。请登录[Redis控制台](https://console.cloud.tencent.com/redis)在实例列表复制实例 ID。
+  
+  
      */
     InstanceId: string;
+    /**
+     * 标识是否强制提主。
+  - true：强制提主。
+  - false：不强制提主。
+     */
+    ForceSwitch?: boolean;
 }
 /**
  * DescribeInstanceDTSInfo请求参数结构体
@@ -2445,7 +2454,7 @@ export interface CreateInstancesResponse {
  */
 export interface DescribeTaskInfoRequest {
     /**
-     * 任务ID
+     * 任务 ID。
      */
     TaskId: number;
 }
@@ -2560,11 +2569,11 @@ export interface DescribeReplicationGroupRequest {
      */
     Offset: number;
     /**
-     * 复制组ID。
+     * 指定复制组 ID。例如：crs-rpl-m3zt****。请登录[Redis 控制台](https://console.cloud.tencent.com/redis/replication)的全球复制组列表获取复制组 ID。
      */
     GroupId?: string;
     /**
-     * 模糊查询的关键字，可以设置为复制组ID或复制组名称进行模糊查询。
+     * 模糊查询的关键字，可以设置为复制组ID或复制组名称进行模糊查询。请登录[Redis 控制台](https://console.cloud.tencent.com/redis/replication)的全球复制组列表获取复制组 ID及名称。
      */
     SearchKey?: string;
 }
@@ -3339,25 +3348,30 @@ export interface ReplicaGroup {
  */
 export interface DescribeTaskInfoResponse {
     /**
-     * 任务状态preparing:待执行，running：执行中，succeed：成功，failed：失败，error 执行出错
+     * 任务状态。
+  - preparing：待执行。
+  - running：执行中。
+  - succeed：成功。
+  - failed：失败。
+  - error：执行出错。
      */
-    Status: string;
+    Status?: string;
     /**
-     * 任务开始时间
+     * 任务开始时间。
      */
-    StartTime: string;
+    StartTime?: string;
     /**
-     * 任务类型
+     * 任务类型。常见的类型包含：新建类型、配置变更、关闭实例、清空实例、重置密码、版本升级、备份实例、改变网络类型、实例可用区迁移、手动提主等。
      */
-    TaskType: string;
+    TaskType?: string;
     /**
-     * 实例的ID
+     * 实例的 ID。
      */
-    InstanceId: string;
+    InstanceId?: string;
     /**
-     * 任务信息，错误时显示错误信息。执行中与成功则为空
+     * 任务执行返回的信息，执行错误时显示错误信息。执行中或执行成功则为空。
      */
-    TaskMessage: string;
+    TaskMessage?: string;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -3418,7 +3432,7 @@ export interface Groups {
     /**
      * 用户 APPID。APPID是与账号ID有唯一对应关系的应用 ID，部分腾讯云产品会使用此 APPID。
      */
-    AppId: number;
+    AppId?: number;
     /**
      * 地域ID 。
   - 1：广州
@@ -3437,19 +3451,18 @@ export interface Groups {
   - 21：印度
   - 22：美东（弗吉尼亚）
   - 23：泰国
-  - 24：俄罗斯
   - 25：日本
      */
-    RegionId: number;
+    RegionId?: number;
     /**
      * 复制组 ID。格式如：crs-rpl-deind****。
      */
-    GroupId: string;
+    GroupId?: string;
     /**
      * 复制组名称。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    GroupName: string;
+    GroupName?: string;
     /**
      * 复制组状态。
   - 37：绑定复制组中。
@@ -3458,21 +3471,21 @@ export interface Groups {
   - 52：复制组实例切主中。
   - 53：角色变更中。
      */
-    Status: number;
+    Status?: number;
     /**
      * 复制组数量。
      */
-    InstanceCount: number;
+    InstanceCount?: number;
     /**
      * 复制组中的实例信息。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Instances: Array<Instances>;
+    Instances?: Array<Instances>;
     /**
      * 备注信息。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Remark: string;
+    Remark?: string;
 }
 /**
  * DescribeInstances请求参数结构体
@@ -4182,7 +4195,7 @@ export interface CreateReplicationGroupResponse {
     /**
      * 异步流程ID。
      */
-    TaskId: number;
+    TaskId?: number;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -5186,73 +5199,73 @@ export interface Instances {
     /**
      * 用户APPID。APPID是与账号ID有唯一对应关系的应用 ID，部分腾讯云产品会使用此 APPID。
      */
-    AppId: number;
+    AppId?: number;
     /**
      * 实例 ID。
      */
-    InstanceId: string;
+    InstanceId?: string;
     /**
      * 实例名称。
      */
-    InstanceName: string;
+    InstanceName?: string;
     /**
      * 地域ID。<ul><li>1：广州。</li><li>4：上海。</li><li> 5：香港。</li> <li> 6：多伦多。</li> <li> 7：上海金融。</li> <li> 8：北京。</li> <li> 9：新加坡。</li> <li> 11：深圳金融。</li> <li> 15：美西（硅谷）。</li> </ul>
      */
-    RegionId: number;
+    RegionId?: number;
     /**
      * 区域 ID。
      */
-    ZoneId: number;
+    ZoneId?: number;
     /**
      * 副本数量。
      */
-    RedisReplicasNum: number;
+    RedisReplicasNum?: number;
     /**
      * 分片数量。
      */
-    RedisShardNum: number;
+    RedisShardNum?: number;
     /**
      * 分片内存大小。
      */
-    RedisShardSize: number;
+    RedisShardSize?: number;
     /**
-     * 实例的磁盘大小
+     * 实例的磁盘大小。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DiskSize: number;
+    DiskSize?: number;
     /**
      * 引擎：社区版Redis、腾讯云CKV。
      */
-    Engine: string;
+    Engine?: string;
     /**
      * 实例读写权限。<ul><li>rw：可读写。</li><li>r：只读。</li></ul>
      */
-    Role: string;
+    Role?: string;
     /**
      * 实例 VIP 地址。
      */
-    Vip: string;
+    Vip?: string;
     /**
      * 内部参数，用户可忽略。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Vip6: string;
+    Vip6?: string;
     /**
      * VPC 网络ID，如：75101。
      */
-    VpcID: number;
+    VpcID?: number;
     /**
      * 实例端口。
      */
-    VPort: number;
+    VPort?: number;
     /**
      * 实例状态。<ul><li>0：待初始化。</li><li>1：流程中。</li><li>2：运行中。</li><li>-2：已隔离。</li><li>-3：待删除。</li></ul>
      */
-    Status: number;
+    Status?: number;
     /**
      * 仓库ID。
      */
-    GrocerySysId: number;
+    GrocerySysId?: number;
     /**
      * 实例类型。
   - 2：Redis 2.8内存版（标准架构）。
@@ -5266,15 +5279,15 @@ export interface Instances {
   - 15：Redis 6.2内存版（标准架构）。
   - 16：Redis 6.2内存版（集群架构）。
      */
-    ProductType: number;
+    ProductType?: number;
     /**
      * 实例加入复制组的时间。
      */
-    CreateTime: string;
+    CreateTime?: string;
     /**
      * 复制组中实例更新的时间。
      */
-    UpdateTime: string;
+    UpdateTime?: string;
 }
 /**
  * DescribeInstanceMonitorHotKey返回参数结构体

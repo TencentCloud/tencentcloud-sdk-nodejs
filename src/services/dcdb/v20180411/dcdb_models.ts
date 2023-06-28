@@ -1058,6 +1058,10 @@ export interface CreateDedicatedClusterDCDBInstanceRequest {
    */
   SecurityGroupId?: string
   /**
+   * 安全组ID列表
+   */
+  SecurityGroupIds?: Array<string>
+  /**
    * DCN源实例ID
    */
   DcnInstanceId?: string

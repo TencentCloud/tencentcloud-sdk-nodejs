@@ -2590,6 +2590,10 @@ export interface ModifyRocketMQClusterRequest {
      * 说明信息，不超过128个字符
      */
     Remark?: string;
+    /**
+     * 是否开启HTTP公网访问
+     */
+    PublicAccessEnabled?: boolean;
 }
 /**
  * vhostd信息
@@ -7199,6 +7203,10 @@ export interface ModifyRocketMQNamespaceRequest {
      * 说明，最大128个字符
      */
     Remark?: string;
+    /**
+     * 是否开启公网访问
+     */
+    PublicAccessEnabled?: boolean;
 }
 /**
  * DeleteAMQPVHost返回参数结构体

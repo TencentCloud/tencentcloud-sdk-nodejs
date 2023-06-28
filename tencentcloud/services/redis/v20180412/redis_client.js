@@ -88,7 +88,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeProductInfo", req, cb);
     }
     /**
-     * 用于查询任务结果
+     * 本接口（DescribeTaskInfo）用于获取指定任务的执行情况。
      */
     async DescribeTaskInfo(req, cb) {
         return this.request("DescribeTaskInfo", req, cb);
@@ -364,7 +364,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UpgradeSmallVersion", req, cb);
     }
     /**
-     * 创建复制组
+     * 该接口（CreateReplicationGroup）用于创建复制组。
      */
     async CreateReplicationGroup(req, cb) {
         return this.request("CreateReplicationGroup", req, cb);
@@ -454,7 +454,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("SwitchInstanceVip", req, cb);
     }
     /**
-     * 本接口（DescribeReplicationGroup）查询复制组。
+     * 本接口（DescribeReplicationGroup）用于查询复制组。
      */
     async DescribeReplicationGroup(req, cb) {
         return this.request("DescribeReplicationGroup", req, cb);
@@ -532,7 +532,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyDBInstanceSecurityGroups", req, cb);
     }
     /**
-     * 复制组实例切主
+     * 该接口（ChangeMasterInstance）用于将复制组内只读实例设置为主实例。
      */
     async ChangeMasterInstance(req, cb) {
         return this.request("ChangeMasterInstance", req, cb);
