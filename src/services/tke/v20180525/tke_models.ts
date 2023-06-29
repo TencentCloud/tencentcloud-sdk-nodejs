@@ -1453,7 +1453,12 @@ export interface ModifyPrometheusTemplateRequest {
 /**
  * DescribeEncryptionStatus请求参数结构体
  */
-export type DescribeEncryptionStatusRequest = null
+export interface DescribeEncryptionStatusRequest {
+  /**
+   * 集群id
+   */
+  ClusterId: string
+}
 
 /**
  * DeleteClusterVirtualNodePool请求参数结构体
@@ -5705,6 +5710,14 @@ export interface RemoveNodeFromNodePoolRequest {
  */
 export interface DescribeEncryptionStatusResponse {
   /**
+   * 加密状态
+   */
+  Status?: string
+  /**
+   * 加密错误信息
+   */
+  ErrorMsg?: string
+  /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -5837,6 +5850,11 @@ export interface Filter {
    */
   Values: Array<string>
 }
+
+/**
+ * kms加密参数
+ */
+export type KMSConfiguration = null
 
 /**
  * UpdateTKEEdgeCluster返回参数结构体
@@ -7510,7 +7528,16 @@ export interface EdgeClusterPublicLB {
 /**
  * EnableEncryptionProtection请求参数结构体
  */
-export type EnableEncryptionProtectionRequest = null
+export interface EnableEncryptionProtectionRequest {
+  /**
+   * 集群ID
+   */
+  ClusterId: string
+  /**
+   * kms加密配置
+   */
+  KMSConfiguration: KMSConfiguration
+}
 
 /**
  * 描述了实例的增强服务启用情况与其设置，如云安全，云监控等实例 Agent
@@ -11877,7 +11904,12 @@ export interface InstallAddonResponse {
 /**
  * DisableEncryptionProtection请求参数结构体
  */
-export type DisableEncryptionProtectionRequest = null
+export interface DisableEncryptionProtectionRequest {
+  /**
+   * 集群ID
+   */
+  ClusterId: string
+}
 
 /**
  * 托管prometheus实例概览

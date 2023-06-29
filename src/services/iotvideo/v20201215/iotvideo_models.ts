@@ -497,51 +497,51 @@ export interface DescribeForwardRuleResponse {
   /**
    * 腾讯云账号
    */
-  Endpoint: string
+  Endpoint?: string
   /**
    * 队列名称
    */
-  QueueName: string
+  QueueName?: string
   /**
    * 产品ID
    */
-  ProductID: string
+  ProductID?: string
   /**
    * 消息类型 1设备上报信息 2设备状态变化通知 3为全选
    */
-  MsgType: number
+  MsgType?: number
   /**
    * 结果 2表示禁用 其他为成功
    */
-  Result: number
+  Result?: number
   /**
    * 角色名
    */
-  RoleName: string
+  RoleName?: string
   /**
    * 角色ID
    */
-  RoleID: number
+  RoleID?: number
   /**
    * 队列区域
    */
-  QueueRegion: string
+  QueueRegion?: string
   /**
    * 队列类型，0：CMQ，1：Ckafka
    */
-  QueueType: number
+  QueueType?: number
   /**
-   * 实例id， 目前只有Ckafaka会用到
+   * 实例id， 目前只有Ckafka会用到
    */
-  InstanceId: string
+  InstanceId?: string
   /**
-   * 实例名称，目前只有Ckafaka会用到
+   * 实例名称，目前只有Ckafka会用到
    */
-  InstanceName: string
+  InstanceName?: string
   /**
    * 错误消息
    */
-  ErrMsg: string
+  ErrMsg?: string
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -994,51 +994,51 @@ export interface CreateForwardRuleResponse {
   /**
    * 腾讯云账号
    */
-  Endpoint: string
+  Endpoint?: string
   /**
    * 队列名
    */
-  QueueName: string
+  QueueName?: string
   /**
    * 产品ID
    */
-  ProductID: string
+  ProductID?: string
   /**
    * 消息类型
    */
-  MsgType: number
+  MsgType?: number
   /**
    * 结果
    */
-  Result: number
+  Result?: number
   /**
    * 角色名称
    */
-  RoleName: string
+  RoleName?: string
   /**
    * 角色ID
    */
-  RoleID: number
+  RoleID?: number
   /**
    * 队列区
    */
-  QueueRegion: string
+  QueueRegion?: string
   /**
-   * 消息队列的类型。 0：CMQ，1：CKafaka
+   * 消息队列的类型。 0：CMQ，1：Ckafka
    */
-  QueueType: number
+  QueueType?: number
   /**
-   * 实例id， 目前只有Ckafaka会用到
+   * 实例id， 目前只有Ckafka会用到
    */
-  InstanceId: string
+  InstanceId?: string
   /**
-   * 实例名称，目前只有Ckafaka会用到
+   * 实例名称，目前只有Ckafka会用到
    */
-  InstanceName: string
+  InstanceName?: string
   /**
    * 错误消息
    */
-  ErrMsg: string
+  ErrMsg?: string
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

@@ -1058,6 +1058,15 @@ export interface DescribeCodeBatchsRequest {
     CorpId?: number;
 }
 /**
+ * DescribeAgentCorps返回参数结构体
+ */
+export interface DescribeAgentCorpsResponse {
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * ModifyTraceDataRanks返回参数结构体
  */
 export interface ModifyTraceDataRanksResponse {
@@ -1377,9 +1386,50 @@ export interface CreateTraceDataRequest {
     PhaseData?: PhaseData;
 }
 /**
- * 预留字段
+ * CreateCodePack请求参数结构体
  */
-export declare type Ext = null;
+export interface CreateCodePackRequest {
+    /**
+     * 商户ID
+     */
+    MerchantId: string;
+    /**
+     * 码长度
+     */
+    CodeLength: number;
+    /**
+     * 码类型 alphabet 字母, number 数字, mixin 混合
+     */
+    CodeType: string;
+    /**
+     * 生码数量 普通码包时必填
+     */
+    Amount?: number;
+    /**
+     * 企业ID
+     */
+    CorpId?: number;
+    /**
+     * 码包类型 0: 普通码包 1: 层级码包
+     */
+    PackType?: number;
+    /**
+     * 码包层级
+     */
+    PackLevel?: number;
+    /**
+     * 码包规格
+     */
+    PackSpec?: Array<PackSpec>;
+    /**
+     * 批次ID，如果传了生码后会同时绑定批次，并激活码
+     */
+    BatchId?: string;
+    /**
+     * 是否有流水码 0:无 1:有
+     */
+    SerialType?: number;
+}
 /**
  * DescribeCorpQuotas请求参数结构体
  */
@@ -1502,50 +1552,9 @@ export interface CreateCustomPackRequest {
     SerialType?: number;
 }
 /**
- * CreateCodePack请求参数结构体
+ * 预留字段
  */
-export interface CreateCodePackRequest {
-    /**
-     * 商户ID
-     */
-    MerchantId: string;
-    /**
-     * 码长度
-     */
-    CodeLength: number;
-    /**
-     * 码类型 alphabet 字母, number 数字, mixin 混合
-     */
-    CodeType: string;
-    /**
-     * 生码数量 普通码包时必填
-     */
-    Amount?: number;
-    /**
-     * 企业ID
-     */
-    CorpId?: number;
-    /**
-     * 码包类型 0: 普通码包 1: 层级码包
-     */
-    PackType?: number;
-    /**
-     * 码包层级
-     */
-    PackLevel?: number;
-    /**
-     * 码包规格
-     */
-    PackSpec?: Array<PackSpec>;
-    /**
-     * 批次ID，如果传了生码后会同时绑定批次，并激活码
-     */
-    BatchId?: string;
-    /**
-     * 是否有流水码 0:无 1:有
-     */
-    SerialType?: number;
-}
+export declare type Ext = null;
 /**
  * CreateCodeBatch请求参数结构体
  */
@@ -1662,6 +1671,27 @@ export interface DescribeCustomRuleByIdRequest {
      * 码规则ID
      */
     CustomId: string;
+    /**
+     * 企业ID
+     */
+    CorpId?: number;
+}
+/**
+ * DescribeAgentCorps请求参数结构体
+ */
+export interface DescribeAgentCorpsRequest {
+    /**
+     * 每页数量
+     */
+    PageSize?: number;
+    /**
+     * 页数
+     */
+    PageNumber?: number;
+    /**
+     * 渠道ID
+     */
+    AgentId?: number;
     /**
      * 企业ID
      */

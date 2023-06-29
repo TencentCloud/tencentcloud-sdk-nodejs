@@ -51,6 +51,7 @@ import {
   DescribeCodePackStatusRequest,
   ModifyTraceDataRequest,
   DescribeCodeBatchsRequest,
+  DescribeAgentCorpsResponse,
   ModifyTraceDataRanksResponse,
   CreateTraceCodesRequest,
   DescribeCodeBatchByIdResponse,
@@ -65,16 +66,17 @@ import {
   DescribeCodesByPackResponse,
   CreateProductResponse,
   CreateTraceDataRequest,
-  Ext,
+  CreateCodePackRequest,
   DescribeCorpQuotasRequest,
   AuthorizedTransferRequest,
   ReportBatchCallbackStatusRequest,
   CreateProductRequest,
   CreateCustomPackRequest,
-  CreateCodePackRequest,
+  Ext,
   CreateCodeBatchRequest,
   TraceItem,
   DescribeCustomRuleByIdRequest,
+  DescribeAgentCorpsRequest,
   ReportBatchCallbackStatusResponse,
   ChainData,
   PhaseData,
@@ -156,6 +158,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeTraceCodeByIdResponse) => void
   ): Promise<DescribeTraceCodeByIdResponse> {
     return this.request("DescribeTraceCodeById", req, cb)
+  }
+
+  /**
+   * 查询商品列表
+   */
+  async DescribeProducts(
+    req: DescribeProductsRequest,
+    cb?: (error: string, rep: DescribeProductsResponse) => void
+  ): Promise<DescribeProductsResponse> {
+    return this.request("DescribeProducts", req, cb)
   }
 
   /**
@@ -270,13 +282,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询商品列表
+   * 查询渠道企业列表
    */
-  async DescribeProducts(
-    req: DescribeProductsRequest,
-    cb?: (error: string, rep: DescribeProductsResponse) => void
-  ): Promise<DescribeProductsResponse> {
-    return this.request("DescribeProducts", req, cb)
+  async DescribeAgentCorps(
+    req: DescribeAgentCorpsRequest,
+    cb?: (error: string, rep: DescribeAgentCorpsResponse) => void
+  ): Promise<DescribeAgentCorpsResponse> {
+    return this.request("DescribeAgentCorps", req, cb)
   }
 
   /**

@@ -230,7 +230,7 @@ API 网关的服务创建后，需要发布到某个环境方生效后，使用�
      */
     CreateApi(req: CreateApiRequest, cb?: (error: string, rep: CreateApiResponse) => void): Promise<CreateApiResponse>;
     /**
-     * 本接口（DescribeExclusiveInstanceDetail）用于查询独享实例详情信息。​
+     * 本接口（DescribeExclusiveInstanceDetail）用于查询独享实例详情信息。
      */
     DescribeExclusiveInstanceDetail(req: DescribeExclusiveInstanceDetailRequest, cb?: (error: string, rep: DescribeExclusiveInstanceDetailResponse) => void): Promise<DescribeExclusiveInstanceDetailResponse>;
     /**

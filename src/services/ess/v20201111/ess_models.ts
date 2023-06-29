@@ -397,6 +397,10 @@ HONGKONG_MACAO_AND_TAIWAN 港澳台居民居住证(格式同居民身份证)
 - 创建签署链接时，可以通过查询详情接口获得签署人的SignId，然后可传入此值为该签署人创建签署链接，无需再传姓名、手机号、证件号等其他信息
    */
   SignId?: string
+  /**
+   * 当前签署方进行签署操作是否需要企业内部审批，true 则为需要。为个人签署方时则由发起方企业审核。
+   */
+  ApproverNeedSignReview?: boolean
 }
 
 /**
@@ -2943,6 +2947,10 @@ HONGKONG_MACAO_AND_TAIWAN 港澳台居民居住证(格式同居民身份证)
 合同签署认证方式的优先级 verifyChannel>approverSignTypes
    */
   ApproverSignTypes?: Array<number>
+  /**
+   * 当前签署方进行签署操作是否需要企业内部审批，true 则为需要。为个人签署方时则由发起方企业审核。
+   */
+  ApproverNeedSignReview?: boolean
 }
 
 /**
@@ -4577,4 +4585,8 @@ export interface CcInfo {
 1--可查看也可下载
    */
   CcPermission?: number
+  /**
+   * 关注方通知类型：sms--短信，none--不通知
+   */
+  NotifyType?: string
 }

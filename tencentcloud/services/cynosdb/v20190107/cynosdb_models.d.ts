@@ -209,9 +209,7 @@ export interface CreateResourcePackageRequest {
      */
     PackageRegion: string;
     /**
-     * 资源包类型
-  
-  资源包类型：CCU-计算资源包，DISK-存储资源包
+     * 资源包类型：CCU-计算资源包，DISK-存储资源包
      */
     PackageType: string;
     /**
@@ -1216,59 +1214,59 @@ export interface DbInfo {
     /**
      * 数据库名称
      */
-    DbName: string;
+    DbName?: string;
     /**
      * 字符集类型
      */
-    CharacterSet: string;
+    CharacterSet?: string;
     /**
      * 数据库状态
      */
-    Status: string;
+    Status?: string;
     /**
-     * 拍讯规则
+     * 排序规则
      */
-    CollateRule: string;
+    CollateRule?: string;
     /**
      * 数据库备注
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Description: string;
+    Description?: string;
     /**
      * 用户权限
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    UserHostPrivileges: Array<UserHostPrivilege>;
+    UserHostPrivileges?: Array<UserHostPrivilege>;
     /**
      * 数据库ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DbId: number;
+    DbId?: number;
     /**
      * 创建时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CreateTime: string;
+    CreateTime?: string;
     /**
      * 更新时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    UpdateTime: string;
+    UpdateTime?: string;
     /**
      * 用户appid
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    AppId: number;
+    AppId?: number;
     /**
      * 用户Uin
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Uin: string;
+    Uin?: string;
     /**
      * 集群Id
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ClusterId: string;
+    ClusterId?: string;
 }
 /**
  * DescribeFlow返回参数结构体

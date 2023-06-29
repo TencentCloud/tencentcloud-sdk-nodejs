@@ -350,7 +350,7 @@ export declare class Client extends AbstractClient {
     /**
      * 关闭加密信息保护
      */
-    DisableEncryptionProtection(req?: DisableEncryptionProtectionRequest, cb?: (error: string, rep: DisableEncryptionProtectionResponse) => void): Promise<DisableEncryptionProtectionResponse>;
+    DisableEncryptionProtection(req: DisableEncryptionProtectionRequest, cb?: (error: string, rep: DisableEncryptionProtectionResponse) => void): Promise<DisableEncryptionProtectionResponse>;
     /**
      * 更新容器实例
      */
@@ -414,7 +414,7 @@ export declare class Client extends AbstractClient {
     /**
      * 开启加密数据保护
      */
-    EnableEncryptionProtection(req?: EnableEncryptionProtectionRequest, cb?: (error: string, rep: EnableEncryptionProtectionResponse) => void): Promise<EnableEncryptionProtectionResponse>;
+    EnableEncryptionProtection(req: EnableEncryptionProtectionRequest, cb?: (error: string, rep: EnableEncryptionProtectionResponse) => void): Promise<EnableEncryptionProtectionResponse>;
     /**
      * 获取模板同步信息
      */
@@ -466,7 +466,7 @@ export declare class Client extends AbstractClient {
     /**
      * 查询etcd数据是否进行加密
      */
-    DescribeEncryptionStatus(req?: DescribeEncryptionStatusRequest, cb?: (error: string, rep: DescribeEncryptionStatusResponse) => void): Promise<DescribeEncryptionStatusResponse>;
+    DescribeEncryptionStatus(req: DescribeEncryptionStatusRequest, cb?: (error: string, rep: DescribeEncryptionStatusResponse) => void): Promise<DescribeEncryptionStatusResponse>;
     /**
      * 创建容器实例
      */

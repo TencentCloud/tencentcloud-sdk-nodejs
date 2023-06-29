@@ -90,7 +90,7 @@ video 纯视频
    */
   RTCAudienceNumber?: number
   /**
-   * 观看类型，互动直播（默认）。
+   * 观看类型。互动观看 （默认）
    */
   AudienceType?: number
   /**
@@ -107,6 +107,16 @@ video 纯视频
 1 允许直接控制（无需同意）
    */
   EnableDirectControl?: number
+  /**
+   * 开启专注模式。
+0 收看全部角色音视频(默认)
+1 只看老师和助教
+   */
+  InteractionMode?: number
+  /**
+   * 横竖屏。0：横屏开播（默认值）; 1：竖屏开播，当前仅支持移动端的纯视频类型
+   */
+  VideoOrientation?: number
 }
 
 /**
@@ -462,6 +472,11 @@ export interface MemberRecord {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Stage?: number
+  /**
+   * 用户状态。0为未到，1为在线，2为离线，3为被踢，4为永久被踢，5为暂时掉线
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CurrentState?: number
 }
 
 /**
@@ -1853,6 +1868,16 @@ video 纯视频
    */
   EnableDirectControl?: number
   /**
+   * 开启专注模式。
+0 收看全部角色音视频(默认)
+1 只看老师和助教
+   */
+  InteractionMode?: number
+  /**
+   * 横竖屏。0：横屏开播（默认值）; 1：竖屏开播，当前仅支持移动端的纯视频类型
+   */
+  VideoOrientation?: number
+  /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -2284,6 +2309,14 @@ export interface RoomInfo {
    * 打开学生麦克风/摄像头的授权开关
    */
   EnableDirectControl?: number
+  /**
+   * 开启专注模式。 0 收看全部角色音视频(默认) 1 只看老师和助教
+   */
+  InteractionMode?: number
+  /**
+   * 横竖屏。0：横屏开播（默认值）; 1：竖屏开播，当前仅支持移动端的纯视频类型
+   */
+  VideoOrientation?: number
 }
 
 /**
@@ -2345,7 +2378,6 @@ export interface ModifyRoomRequest {
    * 房间子类型，可以有以下取值：
 videodoc 文档+视频
 video 纯视频
-coteaching 双师
 直播开始后不允许修改。
    */
   SubType?: string
@@ -2361,13 +2393,23 @@ coteaching 双师
    */
   Assistants?: Array<string>
   /**
-   * 房间绑定的群组ID
+   * 房间绑定的群组ID。直播开始后不允许修改。
    */
   GroupId?: string
   /**
-   * 打开学生麦克风/摄像头的授权开关
+   * 打开学生麦克风/摄像头的授权开关。直播开始后不允许修改。
    */
   EnableDirectControl?: number
+  /**
+   * 开启专注模式。
+0 收看全部角色音视频(默认)
+1 只看老师和助教
+   */
+  InteractionMode?: number
+  /**
+   * 横竖屏。0：横屏开播（默认值）; 1：竖屏开播，当前仅支持移动端的纯视频类型
+   */
+  VideoOrientation?: number
 }
 
 /**

@@ -356,7 +356,7 @@ API 网关的服务创建后，需要发布到某个环境方生效后，使用�
         return this.request("CreateApi", req, cb);
     }
     /**
-     * 本接口（DescribeExclusiveInstanceDetail）用于查询独享实例详情信息。​
+     * 本接口（DescribeExclusiveInstanceDetail）用于查询独享实例详情信息。
      */
     async DescribeExclusiveInstanceDetail(req, cb) {
         return this.request("DescribeExclusiveInstanceDetail", req, cb);

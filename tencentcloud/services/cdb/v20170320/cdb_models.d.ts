@@ -2681,55 +2681,55 @@ export interface BinlogInfo {
     /**
      * binlog 日志备份文件名
      */
-    Name: string;
+    Name?: string;
     /**
      * 备份文件大小，单位：Byte
      */
-    Size: number;
+    Size?: number;
     /**
      * 文件存储时间，时间格式：2016-03-17 02:10:37
      */
-    Date: string;
+    Date?: string;
     /**
      * 下载地址
      */
-    IntranetUrl: string;
+    IntranetUrl?: string;
     /**
      * 下载地址
      */
-    InternetUrl: string;
+    InternetUrl?: string;
     /**
      * 日志具体类型，可能的值有：binlog - 二进制日志
      */
-    Type: string;
+    Type?: string;
     /**
      * binlog 文件起始时间
      */
-    BinlogStartTime: string;
+    BinlogStartTime?: string;
     /**
      * binlog 文件截止时间
      */
-    BinlogFinishTime: string;
+    BinlogFinishTime?: string;
     /**
      * 本地binlog文件所在地域
      */
-    Region: string;
+    Region?: string;
     /**
      * 备份任务状态。可能的值有 "SUCCESS": 备份成功， "FAILED": 备份失败， "RUNNING": 备份进行中。
      */
-    Status: string;
+    Status?: string;
     /**
      * binlog异地备份详细信息
      */
-    RemoteInfo: Array<RemoteBackupInfo>;
+    RemoteInfo?: Array<RemoteBackupInfo>;
     /**
      * 存储方式，0-常规存储，1-归档存储，默认为0
      */
-    CosStorageType: number;
+    CosStorageType?: number;
     /**
      * 实例 ID，格式如：cdb-c1nl9rpv。与云数据库控制台页面中显示的实例 ID 相同。
      */
-    InstanceId: string;
+    InstanceId?: string;
 }
 /**
  * CreateDatabase返回参数结构体
@@ -3004,27 +3004,27 @@ export interface RemoteBackupInfo {
     /**
      * 异地备份子任务的ID
      */
-    SubBackupId: Array<number>;
+    SubBackupId?: number;
     /**
      * 异地备份所在地域
      */
-    Region: string;
+    Region?: string;
     /**
      * 备份任务状态。可能的值有 "SUCCESS": 备份成功， "FAILED": 备份失败， "RUNNING": 备份进行中。
      */
-    Status: string;
+    Status?: string;
     /**
      * 异地备份任务的开始时间
      */
-    StartTime: string;
+    StartTime?: string;
     /**
      * 异地备份任务的结束时间
      */
-    FinishTime: string;
+    FinishTime?: string;
     /**
      * 下载地址
      */
-    Url: string;
+    Url?: string;
 }
 /**
  * DescribeAsyncRequestInfo返回参数结构体
@@ -6955,7 +6955,7 @@ export interface DescribeBackupEncryptionStatusResponse {
     /**
      * 实例是否开启了物理备份加密。可能的值有 on, off 。
      */
-    EncryptionStatus: string;
+    EncryptionStatus?: string;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -8142,7 +8142,7 @@ export interface DescribeBackupDecryptionKeyResponse {
     /**
      * 备份文件解密密钥。
      */
-    DecryptionKey: string;
+    DecryptionKey?: string;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */

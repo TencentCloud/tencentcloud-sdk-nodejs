@@ -2157,7 +2157,7 @@ export interface ModifyInstanceAttributesResponse {
     /**
      * 返回结果
      */
-    Result: JgwOperateResponse;
+    Result?: JgwOperateResponse;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2587,7 +2587,7 @@ export interface ModifyInstanceAttributesConfig {
      */
     DefaultNumPartitions?: number;
     /**
-     * 如歌auto.create.topic.enable设置为true没有指定该值时默认设置为2
+     * 如果auto.create.topic.enable设置为true没有指定该值时默认设置为2
      */
     DefaultReplicationFactor?: number;
 }
@@ -4678,7 +4678,7 @@ export interface ModifyInstanceAttributesRequest {
      */
     DynamicRetentionConfig?: DynamicRetentionTime;
     /**
-     * 修改升配置rebalance时间
+     * 升配Rebalance时间
      */
     RebalanceTime?: number;
     /**
@@ -7166,7 +7166,7 @@ export interface AclRuleInfo {
      */
     PermissionType: string;
     /**
-     * 默认为*，表示任何host都可以访问，当前ckafka不支持host为*和ip网段
+     * 默认为：*，表示任何host都可以访问，当前ckafka不支持host为：* 和 ip网段
      */
     Host: string;
     /**
@@ -7194,29 +7194,29 @@ export interface Acl {
     /**
      * Acl资源类型，（0:UNKNOWN，1:ANY，2:TOPIC，3:GROUP，4:CLUSTER，5:TRANSACTIONAL_ID）当前只有TOPIC，
      */
-    ResourceType: number;
+    ResourceType?: number;
     /**
      * 资源名称，和resourceType相关如当resourceType为TOPIC时，则该字段表示topic名称，当resourceType为GROUP时，该字段表示group名称
      */
-    ResourceName: string;
+    ResourceName?: string;
     /**
      * 用户列表，默认为User:*，表示任何user都可以访问，当前用户只能是用户列表中包含的用户
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Principal: string;
+    Principal?: string;
     /**
-     * 默认为*，表示任何host都可以访问，当前ckafka不支持host为*，但是后面开源kafka的产品化会直接支持
+     * 默认为：*，表示任何host都可以访问，当前ckafka不支持host为：*，但是后面开源kafka的产品化会直接支持
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Host: string;
+    Host?: string;
     /**
      * Acl操作方式(0:UNKNOWN，1:ANY，2:ALL，3:READ，4:WRITE，5:CREATE，6:DELETE，7:ALTER，8:DESCRIBE，9:CLUSTER_ACTION，10:DESCRIBE_CONFIGS，11:ALTER_CONFIGS，12:IDEMPOTEN_WRITE)
      */
-    Operation: number;
+    Operation?: number;
     /**
      * 权限类型(0:UNKNOWN，1:ANY，2:DENY，3:ALLOW)
      */
-    PermissionType: number;
+    PermissionType?: number;
 }
 /**
  * DescribeAclRule请求参数结构体
@@ -7456,7 +7456,7 @@ export interface CreateInstancePreRequest {
     Period: string;
     /**
      * 实例规格说明 专业版实例[所有规格]填写1.
-  标准版实例 ([入门型(general)]填写1，[标准型(standard)]填写2，[进阶型(advanced)]填写3，[容量型(capacity)]填写4，[高阶型1(specialized-1)]填写5，[高阶性2(specialized-2)]填写6,[高阶型3(specialized-3)]填写7,[高阶型4(specialized-4)]填写8，[独占型(exclusive)]填写9。
+  标准版实例 ([入门型(general)]填写1，[标准型(standard)]填写2，[进阶型(advanced)]填写3，[容量型(capacity)]填写4，[高阶型1(specialized-1)]填写5，[高阶型2(specialized-2)]填写6,[高阶型3(specialized-3)]填写7,[高阶型4(specialized-4)]填写8，[独占型(exclusive)]填写9。
      */
     InstanceType: number;
     /**
@@ -7933,144 +7933,144 @@ export interface InstanceDetail {
     /**
      * 实例id
      */
-    InstanceId: string;
+    InstanceId?: string;
     /**
      * 实例名称
      */
-    InstanceName: string;
+    InstanceName?: string;
     /**
      * 访问实例的vip 信息
      */
-    Vip: string;
+    Vip?: string;
     /**
      * 访问实例的端口信息
      */
-    Vport: string;
+    Vport?: string;
     /**
      * 虚拟IP列表
      */
-    VipList: Array<VipEntity>;
+    VipList?: Array<VipEntity>;
     /**
      * 实例的状态。0：创建中，1：运行中，2：删除中：5隔离中， -1 创建失败
      */
-    Status: number;
+    Status?: number;
     /**
      * 实例带宽，单位Mbps
      */
-    Bandwidth: number;
+    Bandwidth?: number;
     /**
      * 实例的存储大小，单位GB
      */
-    DiskSize: number;
+    DiskSize?: number;
     /**
      * 可用区域ID
      */
-    ZoneId: number;
+    ZoneId?: number;
     /**
      * vpcId，如果为空，说明是基础网络
      */
-    VpcId: string;
+    VpcId?: string;
     /**
      * 子网id
      */
-    SubnetId: string;
+    SubnetId?: string;
     /**
      * 实例是否续费，int  枚举值：1表示自动续费，2表示明确不自动续费
      */
-    RenewFlag: number;
+    RenewFlag?: number;
     /**
      * 实例状态 int：1表示健康，2表示告警，3 表示实例状态异常
      */
-    Healthy: number;
+    Healthy?: number;
     /**
      * 实例状态信息
      */
-    HealthyMessage: string;
+    HealthyMessage?: string;
     /**
-     * 实例创建时间时间
+     * 实例创建时间
      */
-    CreateTime: number;
+    CreateTime?: number;
     /**
      * 实例过期时间
      */
-    ExpireTime: number;
+    ExpireTime?: number;
     /**
      * 是否为内部客户。值为1 表示内部客户
      */
-    IsInternal: number;
+    IsInternal?: number;
     /**
      * Topic个数
      */
-    TopicNum: number;
+    TopicNum?: number;
     /**
      * 标识tag
      */
-    Tags: Array<Tag>;
+    Tags?: Array<Tag>;
     /**
      * kafka版本信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Version: string;
+    Version?: string;
     /**
      * 跨可用区
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ZoneIds: Array<number>;
+    ZoneIds?: Array<number>;
     /**
      * ckafka售卖类型
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Cvm: number;
+    Cvm?: number;
     /**
      * ckafka实例类型
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    InstanceType: string;
+    InstanceType?: string;
     /**
      * 磁盘类型
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DiskType: string;
+    DiskType?: string;
     /**
      * 当前规格最大Topic数
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    MaxTopicNumber: number;
+    MaxTopicNumber?: number;
     /**
      * 当前规格最大Partition数
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    MaxPartitionNumber: number;
+    MaxPartitionNumber?: number;
     /**
      * 计划升级配置时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    RebalanceTime: string;
+    RebalanceTime?: string;
     /**
      * 实例当前partition数量
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    PartitionNumber: number;
+    PartitionNumber?: number;
     /**
      * 公网带宽类型
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    PublicNetworkChargeType: string;
+    PublicNetworkChargeType?: string;
     /**
      * 公网带宽值
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    PublicNetwork: number;
+    PublicNetwork?: number;
     /**
      * 实例类型
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ClusterType: string;
+    ClusterType?: string;
     /**
      * 实例功能列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Features: Array<string>;
+    Features?: Array<string>;
 }
 /**
  * 实例 / topic 维度限流策略

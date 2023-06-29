@@ -28,6 +28,16 @@ it("trp.v20210515.DescribeTraceCodeById", async function () {
     }
 })
 
+it("trp.v20210515.DescribeProducts", async function () {
+    try {
+       const data = await client.DescribeProducts({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("trp.v20210515.DescribeCustomRules", async function () {
     try {
        const data = await client.DescribeCustomRules({})
@@ -138,9 +148,9 @@ it("trp.v20210515.CreateProduct", async function () {
     }
 })
 
-it("trp.v20210515.DescribeProducts", async function () {
+it("trp.v20210515.DescribeAgentCorps", async function () {
     try {
-       const data = await client.DescribeProducts({})
+       const data = await client.DescribeAgentCorps({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

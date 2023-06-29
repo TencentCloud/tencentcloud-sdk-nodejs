@@ -20,7 +20,7 @@ export interface UnBindSubDomainResponse {
     /**
      * 解绑自定义域名操作是否成功。
      */
-    Result: boolean;
+    Result?: boolean;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -533,257 +533,257 @@ export interface ApiInfo {
      * API 所在的服务唯一 ID。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ServiceId: string;
+    ServiceId?: string;
     /**
      * API 所在的服务的名称。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ServiceName: string;
+    ServiceName?: string;
     /**
      * API 所在的服务的描述。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ServiceDesc: string;
+    ServiceDesc?: string;
     /**
      * API 接口唯一 ID。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ApiId: string;
+    ApiId?: string;
     /**
      * API 接口的描述。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ApiDesc: string;
+    ApiDesc?: string;
     /**
      * 创建时间，按照 ISO8601 标准表示，并且使用 UTC 时间。格式为：YYYY-MM-DDThh:mm:ssZ。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CreatedTime: string;
+    CreatedTime?: string;
     /**
      * 最后修改时间，按照 ISO8601 标准表示，并且使用 UTC 时间。格式为：YYYY-MM-DDThh:mm:ssZ。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ModifiedTime: string;
+    ModifiedTime?: string;
     /**
      * API 接口的名称。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ApiName: string;
+    ApiName?: string;
     /**
      * API 类型。可取值为NORMAL（普通API）、TSF（微服务API）。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ApiType: string;
+    ApiType?: string;
     /**
      * API 的前端请求类型，如 HTTP 或 HTTPS 或者 HTTP 和 HTTPS。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Protocol: string;
+    Protocol?: string;
     /**
      * API 鉴权类型。可取值为 SECRET（密钥对鉴权）、NONE（免鉴权）、OAUTH。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    AuthType: string;
+    AuthType?: string;
     /**
      * OAUTH API的类型。可取值为NORMAL（业务API）、OAUTH（授权API）。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ApiBusinessType: string;
+    ApiBusinessType?: string;
     /**
      * OAUTH 业务API 关联的授权API 唯一 ID。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    AuthRelationApiId: string;
+    AuthRelationApiId?: string;
     /**
      * OAUTH配置。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    OauthConfig: OauthConfig;
+    OauthConfig?: OauthConfig;
     /**
      * 是否购买后调试（云市场预留参数）。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    IsDebugAfterCharge: boolean;
+    IsDebugAfterCharge?: boolean;
     /**
      * 请求的前端配置。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    RequestConfig: RequestConfig;
+    RequestConfig?: RequestConfig;
     /**
      * 返回类型。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ResponseType: string;
+    ResponseType?: string;
     /**
      * 自定义响应配置成功响应示例。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ResponseSuccessExample: string;
+    ResponseSuccessExample?: string;
     /**
      * 自定义响应配置失败响应示例。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ResponseFailExample: string;
+    ResponseFailExample?: string;
     /**
      * 用户自定义错误码配置。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ResponseErrorCodes: Array<ErrorCodes>;
+    ResponseErrorCodes?: Array<ErrorCodes>;
     /**
      * 前端请求参数。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    RequestParameters: Array<ReqParameter>;
+    RequestParameters?: Array<ReqParameter>;
     /**
      * API 的后端服务超时时间，单位是秒。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ServiceTimeout: number;
+    ServiceTimeout?: number;
     /**
      * API 的后端服务类型。可取值为 HTTP、MOCK、TSF、CLB、SCF、WEBSOCKET、TARGET（内测）。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ServiceType: string;
+    ServiceType?: string;
     /**
      * API 的后端服务配置。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ServiceConfig: ServiceConfig;
+    ServiceConfig?: ServiceConfig;
     /**
      * API的后端服务参数。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ServiceParameters: Array<DescribeApiResultServiceParametersInfo>;
+    ServiceParameters?: Array<DescribeApiResultServiceParametersInfo>;
     /**
      * 常量参数。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ConstantParameters: Array<ConstantParameter>;
+    ConstantParameters?: Array<ConstantParameter>;
     /**
      * API 的后端 Mock 返回信息。如果 ServiceType 是 Mock，则此参数必传。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ServiceMockReturnMessage: string;
+    ServiceMockReturnMessage?: string;
     /**
      * scf 函数名称。当后端类型是SCF时生效。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ServiceScfFunctionName: string;
+    ServiceScfFunctionName?: string;
     /**
      * scf 函数命名空间。当后端类型是SCF时生效。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ServiceScfFunctionNamespace: string;
+    ServiceScfFunctionNamespace?: string;
     /**
      * scf函数版本。当后端类型是SCF时生效。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ServiceScfFunctionQualifier: string;
+    ServiceScfFunctionQualifier?: string;
     /**
      * 是否开启集成响应。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ServiceScfIsIntegratedResponse: boolean;
+    ServiceScfIsIntegratedResponse?: boolean;
     /**
      * scf websocket注册函数命名空间。当前端类型是WEBSOCKET且后端类型是SCF时生效
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ServiceWebsocketRegisterFunctionName: string;
+    ServiceWebsocketRegisterFunctionName?: string;
     /**
      * scf websocket注册函数命名空间。当前端类型是WEBSOCKET且后端类型是SCF时生效。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ServiceWebsocketRegisterFunctionNamespace: string;
+    ServiceWebsocketRegisterFunctionNamespace?: string;
     /**
      * scf websocket传输函数版本。当前端类型是WEBSOCKET且后端类型是SCF时生效。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ServiceWebsocketRegisterFunctionQualifier: string;
+    ServiceWebsocketRegisterFunctionQualifier?: string;
     /**
      * scf websocket清理函数。当前端类型是WEBSOCKET且后端类型是SCF时生效。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ServiceWebsocketCleanupFunctionName: string;
+    ServiceWebsocketCleanupFunctionName?: string;
     /**
      * scf websocket清理函数命名空间。当前端类型是WEBSOCKET且后端类型是SCF时生效。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ServiceWebsocketCleanupFunctionNamespace: string;
+    ServiceWebsocketCleanupFunctionNamespace?: string;
     /**
      * scf websocket清理函数版本。当前端类型是WEBSOCKET且后端类型是SCF时生效。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ServiceWebsocketCleanupFunctionQualifier: string;
+    ServiceWebsocketCleanupFunctionQualifier?: string;
     /**
      * WEBSOCKET 回推地址。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    InternalDomain: string;
+    InternalDomain?: string;
     /**
      * scf websocket传输函数。当前端类型是WEBSOCKET且后端类型是SCF时生效。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ServiceWebsocketTransportFunctionName: string;
+    ServiceWebsocketTransportFunctionName?: string;
     /**
      * scf websocket传输函数命名空间。当前端类型是WEBSOCKET且后端类型是SCF时生效。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ServiceWebsocketTransportFunctionNamespace: string;
+    ServiceWebsocketTransportFunctionNamespace?: string;
     /**
      * scf websocket传输函数版本。当前端类型是WEBSOCKET且后端类型是SCF时生效。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ServiceWebsocketTransportFunctionQualifier: string;
+    ServiceWebsocketTransportFunctionQualifier?: string;
     /**
-     * API绑定微服务服务列表。
+     * API绑定微服务列表。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    MicroServices: Array<MicroService>;
+    MicroServices?: Array<MicroService>;
     /**
      * 微服务信息详情。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    MicroServicesInfo: Array<number>;
+    MicroServicesInfo?: Array<number>;
     /**
      * 微服务的负载均衡配置。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ServiceTsfLoadBalanceConf: TsfLoadBalanceConfResp;
+    ServiceTsfLoadBalanceConf?: TsfLoadBalanceConfResp;
     /**
      * 微服务的健康检查配置。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ServiceTsfHealthCheckConf: HealthCheckConf;
+    ServiceTsfHealthCheckConf?: HealthCheckConf;
     /**
      * 是否开启跨域。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    EnableCORS: boolean;
+    EnableCORS?: boolean;
     /**
      * API绑定的tag信息。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Tags: Array<Tag>;
+    Tags?: Array<Tag>;
     /**
      * API已发布的环境信息。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Environments: Array<string>;
+    Environments?: Array<string>;
     /**
      * 是否开启Base64编码，只有后端为scf时才会生效。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    IsBase64Encoded: boolean;
+    IsBase64Encoded?: boolean;
     /**
      * 是否开启Base64编码的header触发，只有后端为scf时才会生效。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    IsBase64Trigger: boolean;
+    IsBase64Trigger?: boolean;
     /**
      * Header触发规则，总规则数量不超过10。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Base64EncodedTriggerRules: Array<Base64EncodedTriggerRule>;
+    Base64EncodedTriggerRules?: Array<Base64EncodedTriggerRule>;
 }
 /**
  * tsf serverless入参
@@ -1300,101 +1300,96 @@ export interface DescribeServiceForApiAppResponse {
     /**
      * 服务唯一ID。
      */
-    ServiceId: string;
+    ServiceId?: string;
     /**
      * 服务 环境列表。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    AvailableEnvironments: Array<string>;
+    AvailableEnvironments?: Array<string>;
     /**
      * 服务名称。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ServiceName: string;
+    ServiceName?: string;
     /**
      * 服务描述。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ServiceDesc: string;
+    ServiceDesc?: string;
     /**
      * 服务支持协议，可选值为http、https、http&https。
      */
-    Protocol: string;
+    Protocol?: string;
     /**
      * 服务创建时间。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CreatedTime: string;
+    CreatedTime?: string;
     /**
      * 服务修改时间。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ModifiedTime: string;
-    /**
-     * 独立集群名称。
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ExclusiveSetName: string;
+    ModifiedTime?: string;
     /**
      * 网络类型列表，INNER为内网访问，OUTER为外网访问。
      */
-    NetTypes: Array<string>;
+    NetTypes?: Array<string>;
     /**
      * 内网访问子域名。
      */
-    InternalSubDomain: string;
+    InternalSubDomain?: string;
     /**
      * 外网访问子域名。
      */
-    OuterSubDomain: string;
+    OuterSubDomain?: string;
     /**
      * 内网访问http服务端口号。
      */
-    InnerHttpPort: number;
+    InnerHttpPort?: number;
     /**
      * 内网访问https端口号。
      */
-    InnerHttpsPort: number;
+    InnerHttpsPort?: number;
     /**
      * API总数。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ApiTotalCount: number;
+    ApiTotalCount?: number;
     /**
      * API列表。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ApiIdStatusSet: Array<ApiIdStatus>;
+    ApiIdStatusSet?: Array<ApiIdStatus>;
     /**
      * 使用计划总数量。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    UsagePlanTotalCount: number;
+    UsagePlanTotalCount?: number;
     /**
      * 使用计划数组。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    UsagePlanList: Array<UsagePlan>;
+    UsagePlanList?: Array<UsagePlan>;
     /**
      * IP版本。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    IpVersion: string;
+    IpVersion?: string;
     /**
      * 此服务的用户类型。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    UserType: string;
+    UserType?: string;
     /**
      * 预留字段。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SetId: number;
+    SetId?: number;
     /**
      * 服务绑定的标签。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Tags: Array<Tag>;
+    Tags?: Array<Tag>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1482,10 +1477,6 @@ export interface DescribeServiceResponse {
      * 服务修改时间。
      */
     ModifiedTime?: string;
-    /**
-     * 独立集群名称。
-     */
-    ExclusiveSetName?: string;
     /**
      * 网络类型列表，INNER为内网访问，OUTER为外网访问。
      */
@@ -1649,7 +1640,7 @@ export interface DescribeExclusiveInstanceDetailResponse {
     /**
      * 独享实例详情
      */
-    Result: InstanceDetail;
+    Result?: InstanceDetail;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2228,7 +2219,7 @@ export interface CreateUsagePlanResponse {
      * 使用计划详情。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Result: UsagePlanInfo;
+    Result?: UsagePlanInfo;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2638,10 +2629,6 @@ export interface CreateServiceRequest {
      */
     ServiceDesc?: string;
     /**
-     * 独立集群名称，用于指定创建服务所在的独立集群。
-     */
-    ExclusiveSetName?: string;
-    /**
      * 网络类型列表，用于指定支持的访问类型，INNER为内网访问，OUTER为外网访问。默认为OUTER。
      */
     NetTypes?: Array<string>;
@@ -2650,7 +2637,7 @@ export interface CreateServiceRequest {
      */
     IpVersion?: string;
     /**
-     * 集群名称。保留字段，tsf serverlss类型使用。
+     * 集群名称。保留字段，tsf serverless类型使用。
      */
     SetServerName?: string;
     /**
@@ -2868,7 +2855,7 @@ export interface ModifySubDomainResponse {
     /**
      * 修改自定义域名操作是否成功。
      */
-    Result: boolean;
+    Result?: boolean;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -3244,7 +3231,7 @@ export interface ModifyApiRequest {
      */
     ServiceMockReturnMessage?: string;
     /**
-     * API绑定微服务服务列表。
+     * API绑定微服务列表。
      */
     MicroServices?: Array<MicroServiceReq>;
     /**
@@ -3648,7 +3635,7 @@ export interface CreateApiRequest {
      */
     ServiceMockReturnMessage?: string;
     /**
-     * API绑定微服务服务列表。
+     * API绑定微服务列表。
      */
     MicroServices?: Array<MicroServiceReq>;
     /**
@@ -4061,7 +4048,7 @@ export interface ReleaseServiceResponse {
     /**
      * 发布信息。
      */
-    Result: ReleaseService;
+    Result?: ReleaseService;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -4655,7 +4642,7 @@ export interface DeleteServiceSubDomainMappingResponse {
     /**
      * 删除自定义域名的路径映射操作是否成功。
      */
-    Result: boolean;
+    Result?: boolean;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -5146,7 +5133,7 @@ export interface DescribeUsagePlanEnvironmentsResponse {
      * 使用计划绑定详情。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Result: UsagePlanEnvironmentStatus;
+    Result?: UsagePlanEnvironmentStatus;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -5377,7 +5364,7 @@ export interface CreateIPStrategyResponse {
      * 新建的IP策略详情。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Result: IPStrategy;
+    Result?: IPStrategy;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -5967,7 +5954,7 @@ export interface DescribeUsagePlanEnvironmentsRequest {
      */
     UsagePlanId: string;
     /**
-     * 定类型，取值为 API、SERVICE，默认值为 SERVICE。
+     * 定义类型，取值为 API、SERVICE，默认值为 SERVICE。
      */
     BindType: string;
     /**
@@ -6252,36 +6239,36 @@ export interface CreateServiceResponse {
     /**
      * 服务唯一ID。
      */
-    ServiceId: string;
+    ServiceId?: string;
     /**
      * 用户自定义服务名称。
      */
-    ServiceName: string;
+    ServiceName?: string;
     /**
      * 用户自定义服务描述。
      */
-    ServiceDesc: string;
+    ServiceDesc?: string;
     /**
      * 外网默认域名。
      */
-    OuterSubDomain: string;
+    OuterSubDomain?: string;
     /**
      * vpc内网默认域名。
      */
-    InnerSubDomain: string;
+    InnerSubDomain?: string;
     /**
      * 服务创建时间。按照 ISO8601 标准表示，并且使用 UTC 时间。格式为：YYYY-MM-DDThh:mm:ssZ。
      */
-    CreatedTime: string;
+    CreatedTime?: string;
     /**
      * 网络类型列表，INNER为内网访问，OUTER为外网访问。
      */
-    NetTypes: Array<string>;
+    NetTypes?: Array<string>;
     /**
      * IP版本号。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    IpVersion: string;
+    IpVersion?: string;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -6661,63 +6648,63 @@ export interface InstanceDetail {
     /**
      * 独享实例唯一id
      */
-    InstanceId: string;
+    InstanceId?: string;
     /**
      * 可用区
      */
-    Zone: string;
+    Zone?: string;
     /**
      * 独享实例名字
      */
-    InstanceName: string;
+    InstanceName?: string;
     /**
      * 独享实例描述
      */
-    InstanceDescription: string;
+    InstanceDescription?: string;
     /**
      * 独享实例计费类型
      */
-    InstanceChargeType: string;
+    InstanceChargeType?: string;
     /**
      * 独享实例状态
      */
-    InstanceState: string;
+    InstanceState?: string;
     /**
      * 独享实例预付费类型
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    InstanceChargePrepaid: InstanceChargePrepaid;
+    InstanceChargePrepaid?: InstanceChargePrepaid;
     /**
      * 独享实例类型
      */
-    InstanceType: string;
+    InstanceType?: string;
     /**
      * 独享实例网络类型
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    NetworkConfig: NetworkConfig;
+    NetworkConfig?: NetworkConfig;
     /**
      * 独享实例vpc配置
      */
-    VpcConfig: VpcConfig;
+    VpcConfig?: VpcConfig;
     /**
      * 独享实例参数配置
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Parameters: Array<ParameterInfo>;
+    Parameters?: Array<ParameterInfo>;
     /**
      * 独享实例隔离时间
      */
-    IsolationStartedTime: string;
+    IsolationStartedTime?: string;
     /**
      * 创建时间
      */
-    CreatedTime: string;
+    CreatedTime?: string;
     /**
      * 可用区列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Zones: string;
+    Zones?: Array<string>;
 }
 /**
  * UnBindSecretIds返回参数结构体

@@ -949,17 +949,17 @@ export interface HandleMediaCastProjectResponse {
      * 播放信息，Operation 为 DescribePlayInfo 时返回。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    PlayInfo: MediaCastPlayInfo;
+    PlayInfo?: MediaCastPlayInfo;
     /**
      * 输入源信息， Operation 为 AddSource 时返回添加成功的输入源信息。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SourceInfoSet: Array<MediaCastSourceInfo>;
+    SourceInfoSet?: Array<MediaCastSourceInfo>;
     /**
      * 输出源信息， Operation 为 AddDestination 时返回添加成功的输出源信息。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DestinationInfoSet: Array<MediaCastDestinationInfo>;
+    DestinationInfoSet?: Array<MediaCastDestinationInfo>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1336,7 +1336,7 @@ export interface CreateProjectRequest {
      */
     RecordReplayProjectInput?: RecordReplayProjectInput;
     /**
-     * 点播转直播项目输入信息，仅当项目类型为 MEDIA_CAST 时必填。
+     * 媒体转推项目输入信息，仅当项目类型为 MEDIA_CAST 时必填。
      */
     MediaCastProjectInput?: MediaCastProjectInput;
 }
@@ -1587,6 +1587,7 @@ export interface MediaCastSourceInfo {
      * 输入源的媒体类型，取值有：
   <li>CME：多媒体创作引擎的媒体文件；</li>
   <li>VOD：云点播的媒资文件。</li>
+  <li>EXTERNAL：非多媒体创建引擎或者云点播的媒资文件。</li>
      */
     Type?: string;
     /**
@@ -1597,6 +1598,18 @@ export interface MediaCastSourceInfo {
      * 多媒体创作引擎的媒体 ID。当 Type = CME  时必填。
      */
     MaterialId?: string;
+    /**
+     * 文件播放的的起始位置，单位：秒。默认为0，从文件头开始播放。当 Type = CME  或者 VOD 时有效。
+     */
+    Offset?: number;
+    /**
+     * 播放时长，单位：秒。默认播放整个文件。当 Type = CME  或者 VOD 时有效。
+     */
+    Duration?: number;
+    /**
+     * 外部文件的 Url， Type=EXTERNAL 时必填，可以是点播文件或者直播文件，支持的 Scheme 包括HTTP、HTTPS、RTMP。
+     */
+    Url?: string;
 }
 /**
  * CreateLink返回参数结构体
@@ -3614,6 +3627,10 @@ export interface MediaCastPlaySetting {
      * 结束时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
      */
     EndTime?: string;
+    /**
+     * 自动启动时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+     */
+    AutoStartTime?: string;
 }
 /**
  * 媒体添加事件。
@@ -4286,7 +4303,7 @@ export interface HandleMediaCastProjectRequest {
      */
     Platform: string;
     /**
-     * 点播转直播项目 Id 。
+     * 媒体转推项目 Id 。
      */
     ProjectId: string;
     /**
@@ -4319,7 +4336,7 @@ export interface HandleMediaCastProjectRequest {
      */
     Position?: number;
     /**
-     * 操作者。如不填，默认为 `cmeid_system`，表示平台管理员操作，可以操作所有点播转直播项目。如果指定操作者，则操作者必须为项目所有者。
+     * 操作者。如不填，默认为 `cmeid_system`，表示平台管理员操作，可以操作所有媒体转推项目。如果指定操作者，则操作者必须为项目所有者。
      */
     Operator?: string;
 }

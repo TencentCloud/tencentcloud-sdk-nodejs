@@ -287,66 +287,71 @@ export interface Template {
   /**
    * 经验库ID
    */
-  TemplateId: number
+  TemplateId?: number
   /**
    * 经验库标题
    */
-  TemplateTitle: string
+  TemplateTitle?: string
   /**
    * 经验库描述
    */
-  TemplateDescription: string
+  TemplateDescription?: string
   /**
    * 自定义标签
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TemplateTag: string
+  TemplateTag?: string
   /**
    * 使用状态。1 ---- 使用中，2 --- 停用
    */
-  TemplateIsUsed: number
+  TemplateIsUsed?: number
   /**
    * 经验库创建时间
    */
-  TemplateCreateTime: string
+  TemplateCreateTime?: string
   /**
    * 经验库更新时间
    */
-  TemplateUpdateTime: string
+  TemplateUpdateTime?: string
   /**
    * 经验库模式。1:手工执行，2:自动执行
    */
-  TemplateMode: number
+  TemplateMode?: number
   /**
    * 自动暂停时长。单位分钟
    */
-  TemplatePauseDuration: number
+  TemplatePauseDuration?: number
   /**
    * 演练创建者Uin
    */
-  TemplateOwnerUin: string
+  TemplateOwnerUin?: string
   /**
    * 地域ID
    */
-  TemplateRegionId: number
+  TemplateRegionId?: number
   /**
    * 动作组
    */
-  TemplateGroups: Array<TemplateGroup>
+  TemplateGroups?: Array<TemplateGroup>
   /**
    * 监控指标
    */
-  TemplateMonitors: Array<TemplateMonitor>
+  TemplateMonitors?: Array<TemplateMonitor>
   /**
    * 护栏监控
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TemplatePolicy: TemplatePolicy
+  TemplatePolicy?: TemplatePolicy
   /**
    * 标签列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Tags: Array<TagWithDescribe>
+  Tags?: Array<TagWithDescribe>
+  /**
+   * 经验来源 0-自建 1-专家推荐
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TemplateSource?: number
 }
 
 /**
@@ -646,11 +651,11 @@ export interface DescribeTemplateListResponse {
   /**
    * 经验库列表
    */
-  TemplateList: Array<TemplateListItem>
+  TemplateList?: Array<TemplateListItem>
   /**
    * 列表数量
    */
-  Total: number
+  Total?: number
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -938,42 +943,47 @@ export interface TaskListItem {
   /**
    * 任务ID
    */
-  TaskId: number
+  TaskId?: number
   /**
    * 任务标题
    */
-  TaskTitle: string
+  TaskTitle?: string
   /**
    * 任务描述
    */
-  TaskDescription: string
+  TaskDescription?: string
   /**
    * 任务标签
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TaskTag: string
+  TaskTag?: string
   /**
    * 任务状态(1001 -- 未开始   1002 -- 进行中  1003 -- 暂停中   1004 -- 任务结束)
    */
-  TaskStatus: number
+  TaskStatus?: number
   /**
    * 任务创建时间
    */
-  TaskCreateTime: string
+  TaskCreateTime?: string
   /**
    * 任务更新时间
    */
-  TaskUpdateTime: string
+  TaskUpdateTime?: string
   /**
    * 0--未开始，1--进行中，2--已完成
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TaskPreCheckStatus: number
+  TaskPreCheckStatus?: number
   /**
    * 环境检查是否通过
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TaskPreCheckSuccess: boolean
+  TaskPreCheckSuccess?: boolean
+  /**
+   * 演练是否符合预期 1-符合预期 2-不符合预期
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskExpect?: number
 }
 
 /**
@@ -1130,6 +1140,14 @@ export interface DescribeTemplateListRequest {
    * 标签对
    */
   Tags?: Array<TagWithDescribe>
+  /**
+   * 经验来源 0-自建 1-专家推荐
+   */
+  TemplateSource?: number
+  /**
+   * 经验ID
+   */
+  TemplateIdList?: Array<number>
 }
 
 /**
@@ -1139,36 +1157,41 @@ export interface TemplateListItem {
   /**
    * 经验库ID
    */
-  TemplateId: number
+  TemplateId?: number
   /**
    * 经验库标题
    */
-  TemplateTitle: string
+  TemplateTitle?: string
   /**
    * 经验库描述
    */
-  TemplateDescription: string
+  TemplateDescription?: string
   /**
    * 经验库标签
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TemplateTag: string
+  TemplateTag?: string
   /**
    * 经验库状态。1 -- 使用中，2 -- 停用
    */
-  TemplateIsUsed: number
+  TemplateIsUsed?: number
   /**
    * 经验库创建时间
    */
-  TemplateCreateTime: string
+  TemplateCreateTime?: string
   /**
    * 经验库更新时间
    */
-  TemplateUpdateTime: string
+  TemplateUpdateTime?: string
   /**
    * 经验库关联的任务数量
    */
-  TemplateUsedNum: number
+  TemplateUsedNum?: number
+  /**
+   * 经验库来源 0-自建经验 1-专家推荐
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TemplateSource?: number
 }
 
 /**

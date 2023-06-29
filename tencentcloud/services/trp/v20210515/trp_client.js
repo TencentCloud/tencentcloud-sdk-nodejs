@@ -34,6 +34,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeTraceCodeById", req, cb);
     }
     /**
+     * 查询商品列表
+     */
+    async DescribeProducts(req, cb) {
+        return this.request("DescribeProducts", req, cb);
+    }
+    /**
      * 查自定义码规则列表
      */
     async DescribeCustomRules(req, cb) {
@@ -101,10 +107,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateProduct", req, cb);
     }
     /**
-     * 查询商品列表
+     * 查询渠道企业列表
      */
-    async DescribeProducts(req, cb) {
-        return this.request("DescribeProducts", req, cb);
+    async DescribeAgentCorps(req, cb) {
+        return this.request("DescribeAgentCorps", req, cb);
     }
     /**
      * 查询渠道商下属企业额度使用情况

@@ -286,6 +286,7 @@ import {
   ReleaseValues,
   CreateClusterNodePoolResponse,
   Filter,
+  KMSConfiguration,
   UpdateTKEEdgeClusterResponse,
   EipAttribute,
   UpdateAddonResponse,
@@ -1443,7 +1444,7 @@ export class Client extends AbstractClient {
    * 关闭加密信息保护
    */
   async DisableEncryptionProtection(
-    req?: DisableEncryptionProtectionRequest,
+    req: DisableEncryptionProtectionRequest,
     cb?: (error: string, rep: DisableEncryptionProtectionResponse) => void
   ): Promise<DisableEncryptionProtectionResponse> {
     return this.request("DisableEncryptionProtection", req, cb)
@@ -1603,7 +1604,7 @@ export class Client extends AbstractClient {
    * 开启加密数据保护
    */
   async EnableEncryptionProtection(
-    req?: EnableEncryptionProtectionRequest,
+    req: EnableEncryptionProtectionRequest,
     cb?: (error: string, rep: EnableEncryptionProtectionResponse) => void
   ): Promise<EnableEncryptionProtectionResponse> {
     return this.request("EnableEncryptionProtection", req, cb)
@@ -1733,7 +1734,7 @@ export class Client extends AbstractClient {
    * 查询etcd数据是否进行加密
    */
   async DescribeEncryptionStatus(
-    req?: DescribeEncryptionStatusRequest,
+    req: DescribeEncryptionStatusRequest,
     cb?: (error: string, rep: DescribeEncryptionStatusResponse) => void
   ): Promise<DescribeEncryptionStatusResponse> {
     return this.request("DescribeEncryptionStatus", req, cb)
