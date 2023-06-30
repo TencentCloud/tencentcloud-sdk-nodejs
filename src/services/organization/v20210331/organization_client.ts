@@ -56,6 +56,7 @@ import {
   DescribeOrganizationMembersResponse,
   CreateOrganizationMemberPolicyResponse,
   CancelOrganizationMemberAuthAccountResponse,
+  UpdateOrganizationMemberRequest,
   DescribeOrganizationResponse,
   DescribeOrganizationMemberPoliciesRequest,
   DescribeOrganizationMemberEmailBindRequest,
@@ -66,6 +67,7 @@ import {
   UpdateOrganizationNodeRequest,
   DescribeOrganizationMemberAuthAccountsRequest,
   CancelOrganizationMemberAuthAccountRequest,
+  UpdateOrganizationMemberResponse,
   DeleteOrganizationNodesResponse,
   DescribeOrganizationFinancialByMemberResponse,
   DescribeOrganizationMemberAuthAccountsResponse,
@@ -117,6 +119,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ListOrganizationIdentityResponse) => void
   ): Promise<ListOrganizationIdentityResponse> {
     return this.request("ListOrganizationIdentity", req, cb)
+  }
+
+  /**
+   * 更新组织成员信息
+   */
+  async UpdateOrganizationMember(
+    req: UpdateOrganizationMemberRequest,
+    cb?: (error: string, rep: UpdateOrganizationMemberResponse) => void
+  ): Promise<UpdateOrganizationMemberResponse> {
+    return this.request("UpdateOrganizationMember", req, cb)
   }
 
   /**

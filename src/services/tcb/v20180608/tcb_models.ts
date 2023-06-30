@@ -211,17 +211,19 @@ export interface DescribeCloudBaseRunServerVersionRequest {
 }
 
 /**
- * TurnOnStandaloneGateway返回参数结构体
+ * 代码包信息
  */
-export interface TurnOnStandaloneGatewayResponse {
+export interface CbrPackageInfo {
   /**
-   * 小租户网关开启状态
+   * 代码包名称
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Status: string
+  PackageName?: string
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 代码包版本
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  RequestId?: string
+  PackageVersion?: string
 }
 
 /**
@@ -470,6 +472,40 @@ export interface DescribeStandaloneGatewayPackageRequest {
 }
 
 /**
+ * DescribeGraphData返回参数结构体
+ */
+export interface DescribeGraphDataResponse {
+  /**
+   * 开始时间, 会根据数据的统计周期进行取整.
+   */
+  StartTime?: string
+  /**
+   * 结束时间, 会根据数据的统计周期进行取整.
+   */
+  EndTime?: string
+  /**
+   * 指标名
+   */
+  MetricName?: string
+  /**
+   * 统计周期(单位秒), 当时间区间为1天内, 统计周期为5分钟; 当时间区间选择为1天以上, 15天以下, 统计周期为1小时; 当时间区间选择为15天以上, 180天以下, 统计周期为1天.
+   */
+  Period?: number
+  /**
+   * 有效的监控数据, 每个有效监控数据的上报时间可以从时间数组中的对应位置上获取到.
+   */
+  Values?: Array<number>
+  /**
+   * 时间数据, 标识监控数据Values中的点是哪个时间段上报的.
+   */
+  Time?: Array<number>
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribePostpayPackageFreeQuotas请求参数结构体
  */
 export interface DescribePostpayPackageFreeQuotasRequest {
@@ -592,6 +628,28 @@ export interface DescribeCloudBaseRunServerDomainNameResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 封禁配置
+ */
+export interface BanConfig {
+  /**
+   * ip白名单，支持ipv4、ipv6，支持CIDR
+   */
+  IpWhiteList?: Array<string>
+  /**
+   * ip黑名单，支持ipv4、ipv6，支持CIDR
+   */
+  IpBlackList?: Array<string>
+  /**
+   * 地域白名单（国家英文名）
+   */
+  CountryWhiteList?: Array<string>
+  /**
+   * 地域黑名单（国家英文名）
+   */
+  CountryBlackList?: Array<string>
 }
 
 /**
@@ -838,7 +896,7 @@ export interface CreatePostpayPackageRequest {
    */
   Source?: string
   /**
-   * 用户享有的免费额度级别，目前只能为“basic”，不传该字段或该字段为空，标识不享受免费额度。
+   * 用户享有的免费额度级别，目前只能为“basic”，不传该字段或该字段为空，表示不享受免费额度。
    */
   FreeQuota?: string
   /**
@@ -906,7 +964,7 @@ export interface ModifyEndUserRequest {
    */
   UUId: string
   /**
-   * 帐号的状态
+   * 账号的状态
 <li>ENABLE</li>
 <li>DISABLE</li>
    */
@@ -1032,17 +1090,73 @@ export interface DescribeCloudBaseRunOperationTypesRequest {
 }
 
 /**
+ * 网关版本详情
+ */
+export interface GatewayVersionItem {
+  /**
+   * 版本名
+   */
+  VersionName: string
+  /**
+   * 版本流量权重
+   */
+  Weight: number
+  /**
+   * 创建状态
+   */
+  Status?: string
+  /**
+   * 创建时间
+   */
+  CreatedTime?: string
+  /**
+   * 更新时间
+   */
+  UpdatedTime?: string
+  /**
+   * 构建ID
+   */
+  BuildId?: number
+  /**
+   * 备注
+   */
+  Remark?: string
+  /**
+   * 优先级
+   */
+  Priority?: number
+  /**
+   * 是否默认版本
+   */
+  IsDefault?: boolean
+  /**
+   * 网关版本自定义配置
+   */
+  CustomConfig?: WxGatewayCustomConfig
+}
+
+/**
  * DescribeAuthDomains返回参数结构体
  */
 export interface DescribeAuthDomainsResponse {
   /**
-   * 安全域名列表列表
+   * 安全域名列表
    */
   Domains?: Array<AuthDomain>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ReinstateEnv请求参数结构体
+ */
+export interface ReinstateEnvRequest {
+  /**
+   * 环境ID
+   */
+  EnvId: string
 }
 
 /**
@@ -1532,6 +1646,46 @@ export interface EndUserInfo {
 }
 
 /**
+ * DescribeGatewayVersions返回参数结构体
+ */
+export interface DescribeGatewayVersionsResponse {
+  /**
+   * 网关id
+   */
+  GatewayId?: string
+  /**
+   * 版本总数
+   */
+  TotalCount?: number
+  /**
+   * 版本信息详情
+   */
+  GatewayVersionItems?: Array<GatewayVersionItem>
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeGatewayVersions请求参数结构体
+ */
+export interface DescribeGatewayVersionsRequest {
+  /**
+   * 环境id
+   */
+  EnvId: string
+  /**
+   * 网关id
+   */
+  GatewayId: string
+  /**
+   * 版本名
+   */
+  VersionName?: string
+}
+
+/**
  * DeleteEndUser请求参数结构体
  */
 export interface DeleteEndUserRequest {
@@ -1621,6 +1775,24 @@ export interface BaasPackageInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IsExternal: boolean
+}
+
+/**
+ * ModifyGatewayVersionTraffic请求参数结构体
+ */
+export interface ModifyGatewayVersionTrafficRequest {
+  /**
+   * 环境id
+   */
+  EnvId: string
+  /**
+   * 网关id
+   */
+  GatewayId: string
+  /**
+   * 网关版本流量比例信息
+   */
+  VersionsWeight: Array<GatewayVersionItem>
 }
 
 /**
@@ -1725,34 +1897,37 @@ export interface KVPair {
 }
 
 /**
- * 短信免费量
+ * DeleteGatewayVersion请求参数结构体
  */
-export interface SmsFreeQuota {
+export interface DeleteGatewayVersionRequest {
   /**
-   * 免费量总条数
-注意：此字段可能返回 null，表示取不到有效值。
+   * 环境id
    */
-  FreeQuota: number
+  EnvId: string
   /**
-   * 共计已使用总条数
-注意：此字段可能返回 null，表示取不到有效值。
+   * 网关id
    */
-  TotalUsedQuota: number
+  GatewayId: string
   /**
-   * 免费周期起点，0000-00-00 00:00:00 形式
-注意：此字段可能返回 null，表示取不到有效值。
+   * 版本名
    */
-  CycleStart: string
+  VersionName: string
   /**
-   * 免费周期终点，0000-00-00 00:00:00 形式
-注意：此字段可能返回 null，表示取不到有效值。
+   * 是否删除服务
    */
-  CycleEnd: string
+  IsDeleteServer?: boolean
   /**
-   * 今天已使用总条数
-注意：此字段可能返回 null，表示取不到有效值。
+   * 是否删除镜像
    */
-  TodayUsedQuota: number
+  IsDeleteImage?: boolean
+  /**
+   * 是否强制删除
+   */
+  IsForce?: boolean
+  /**
+   * 操作记录
+   */
+  OperatorRemark?: string
 }
 
 /**
@@ -1983,6 +2158,70 @@ export interface DescribeGatewayCurveDataRequest {
 }
 
 /**
+ * DescribeGraphData请求参数结构体
+ */
+export interface DescribeGraphDataRequest {
+  /**
+   * 环境ID
+   */
+  EnvId: string
+  /**
+   * 指标名: 
+StorageRead: 存储读请求次数 
+StorageWrite: 存储写请求次数 
+StorageCdnOriginFlux: CDN回源流量, 单位字节 
+CDNFlux: CDN回源流量, 单位字节 
+FunctionInvocation: 云函数调用次数 
+FunctionGBs: 云函数资源使用量, 单位Mb*Ms 
+FunctionFlux: 云函数流量, 单位千字节(KB) 
+FunctionError: 云函数调用错误次数 
+FunctionDuration: 云函数运行时间, 单位毫秒 
+DbRead: 数据库读请求数 
+DbWrite: 数据库写请求数 
+DbCostTime10ms: 数据库耗时在10ms~50ms请求数 
+DbCostTime50ms: 数据库耗时在50ms~100ms请求数 
+DbCostTime100ms: 数据库耗时在100ms以上请求数 
+TkeCpuRatio: 容器CPU占用率 
+TkeMemRatio: 容器内存占用率 
+TkeCpuUsed: 容器CPU使用量 
+TkeMemUsed: 容器内存使用量 
+TkeInvokeNum: 调用量 
+FunctionConcurrentExecutions: 云函数并发执行个数
+FunctionIdleProvisioned: 云函数预置并发闲置量 
+FunctionConcurrencyMemoryMB: 云函数并发执行内存量 
+FunctionThrottle: 云函数受限次数 
+FunctionProvisionedConcurrency: 云函数预置并发 
+   */
+  MetricName: string
+  /**
+   * 开始时间，如2018-08-24 10:50:00, 开始时间需要早于结束时间至少五分钟(原因是因为目前统计粒度最小是5分钟).
+   */
+  StartTime: string
+  /**
+   * 结束时间，如2018-08-24 10:50:00, 结束时间需要晚于开始时间至少五分钟(原因是因为目前统计粒度最小是5分钟)..
+   */
+  EndTime: string
+  /**
+   * 资源ID, 目前仅对云函数、容器托管相关的指标有意义。云函数(FunctionInvocation, FunctionGBs, FunctionFlux, FunctionError, FunctionDuration)、容器托管（服务名称）, 如果想查询某个云函数的指标则在ResourceId中传入函数名; 如果只想查询整个namespace的指标, 则留空或不传.如果想查询数据库某个集合相关信息，传入集合名称
+   */
+  ResourceID?: string
+}
+
+/**
+ * DescribeBillingInfo返回参数结构体
+ */
+export interface DescribeBillingInfoResponse {
+  /**
+   * 环境计费信息列表
+   */
+  EnvBillingInfoList?: Array<EnvBillingInfoItem>
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateAuthDomain返回参数结构体
  */
 export interface CreateAuthDomainResponse {
@@ -2168,6 +2407,32 @@ export interface CloudBaseCapabilities {
 }
 
 /**
+ * 仓库信息
+ */
+export interface CbrRepoInfo {
+  /**
+   * 仓库名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Repo?: string
+  /**
+   * 仓库平台
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RepoType?: string
+  /**
+   * 仓库语言
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RepoLanguage?: string
+  /**
+   * 分支名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Branch?: string
+}
+
+/**
  * DescribeEndUserLoginStatistic返回参数结构体
  */
 export interface DescribeEndUserLoginStatisticResponse {
@@ -2193,18 +2458,13 @@ export interface DescribeExtensionUploadInfoRequest {
 }
 
 /**
- * DescribeEnvPostpaidDeduct返回参数结构体
+ * DescribeBillingInfo请求参数结构体
  */
-export interface DescribeEnvPostpaidDeductResponse {
+export interface DescribeBillingInfoRequest {
   /**
-   * 指标抵扣详情列表
-注意：此字段可能返回 null，表示取不到有效值。
+   * 环境ID
    */
-  PostPaidEnvDeductInfoList: Array<PostPaidEnvDeductInfo>
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  EnvId?: string
 }
 
 /**
@@ -2502,115 +2762,125 @@ export interface EnvInfo {
   /**
    * 账户下该环境唯一标识
    */
-  EnvId: string
+  EnvId?: string
   /**
    * 环境来源。包含以下取值：
 <li>miniapp：微信小程序</li>
 <li>qcloud ：腾讯云</li>
    */
-  Source: string
+  Source?: string
   /**
    * 环境别名，要以a-z开头，不能包含 a-zA-z0-9- 以外的字符
    */
-  Alias: string
+  Alias?: string
   /**
    * 创建时间
    */
-  CreateTime: string
+  CreateTime?: string
   /**
    * 最后修改时间
    */
-  UpdateTime: string
+  UpdateTime?: string
   /**
    * 环境状态。包含以下取值：
 <li>NORMAL：正常可用</li>
 <li>UNAVAILABLE：服务不可用，可能是尚未初始化或者初始化过程中</li>
    */
-  Status: string
+  Status?: string
   /**
    * 数据库列表
    */
-  Databases: Array<DatabasesInfo>
+  Databases?: Array<DatabasesInfo>
   /**
    * 存储列表
    */
-  Storages: Array<StorageInfo>
+  Storages?: Array<StorageInfo>
   /**
    * 函数列表
    */
-  Functions: Array<FunctionInfo>
+  Functions?: Array<FunctionInfo>
   /**
    * tcb产品套餐ID，参考DescribePackages接口的返回值。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  PackageId: string
+  PackageId?: string
   /**
    * 套餐中文名称，参考DescribePackages接口的返回值。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  PackageName: string
+  PackageName?: string
   /**
    * 云日志服务列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  LogServices: Array<LogServiceInfo>
+  LogServices?: Array<LogServiceInfo>
   /**
    * 静态资源信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  StaticStorages: Array<StaticStorageInfo>
+  StaticStorages?: Array<StaticStorageInfo>
   /**
    * 是否到期自动降为免费版
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  IsAutoDegrade: boolean
+  IsAutoDegrade?: boolean
   /**
    * 环境渠道
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  EnvChannel: string
+  EnvChannel?: string
   /**
    * 支付方式。包含以下取值：
 <li> prepayment：预付费</li>
 <li> postpaid：后付费</li>
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  PayMode: string
+  PayMode?: string
   /**
    * 是否为默认环境
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  IsDefault: boolean
+  IsDefault?: boolean
   /**
    * 环境所属地域
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Region: string
+  Region?: string
   /**
    * 环境标签列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Tags: Array<Tag>
+  Tags?: Array<Tag>
   /**
    * 自定义日志服务
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CustomLogServices: Array<ClsInfo>
+  CustomLogServices?: Array<ClsInfo>
   /**
    * 环境类型：baas, run, hoting, weda
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  EnvType: string
+  EnvType?: string
   /**
    * 是否是dau新套餐
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  IsDauPackage: boolean
+  IsDauPackage?: boolean
   /**
    * 套餐类型:空\baas\tcbr
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  PackageType: string
+  PackageType?: string
+  /**
+   * 架构类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ArchitectureType?: string
+  /**
+   * 回收标志，默认为空
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Recycle?: string
 }
 
 /**
@@ -2836,6 +3106,21 @@ export interface CreateAuthDomainRequest {
    * 安全域名
    */
   Domains: Array<string>
+}
+
+/**
+ * DescribeEnvPostpaidDeduct返回参数结构体
+ */
+export interface DescribeEnvPostpaidDeductResponse {
+  /**
+   * 指标抵扣详情列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PostPaidEnvDeductInfoList: Array<PostPaidEnvDeductInfo>
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3257,24 +3542,23 @@ export interface DeleteWxGatewayRouteResponse {
 }
 
 /**
- * KV参数的优先级
+ * DescribeCloudBaseProjectVersionList返回参数结构体
  */
-export interface CloudBaseRunKVPriority {
+export interface DescribeCloudBaseProjectVersionListResponse {
   /**
-   * 参数的Key
+   * 版本列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Key: string
+  ProjectVersions: Array<CloudBaseProjectVersion>
   /**
-   * 参数的Value
+   * 总个数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Value: string
+  TotalCount: number
   /**
-   * 优先级
-注意：此字段可能返回 null，表示取不到有效值。
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  Priority: number
+  RequestId?: string
 }
 
 /**
@@ -3289,6 +3573,36 @@ export interface UnfreezeCloudBaseRunServersRequest {
    * 服务名称列表
    */
   ServerNameList: Array<string>
+}
+
+/**
+ * 安全网关自定义日志配置
+ */
+export interface CustomLogConfig {
+  /**
+   * 是否需要请求体
+   */
+  NeedReqBodyLog?: boolean
+  /**
+   * 是否需要请求头
+   */
+  NeedReqHeaderLog?: boolean
+  /**
+   * 是否需要回包体
+   */
+  NeedRspBodyLog?: boolean
+  /**
+   * 是否需要回包头部信息
+   */
+  NeedRspHeaderLog?: boolean
+  /**
+   * cls set信息
+   */
+  LogSetId?: string
+  /**
+   * cls topicId
+   */
+  LogTopicId?: string
 }
 
 /**
@@ -3435,23 +3749,68 @@ export interface CreateStandaloneGatewayRequest {
 }
 
 /**
- * DescribeCloudBaseProjectVersionList返回参数结构体
+ * DescribeWxGatewayRoutes请求参数结构体
  */
-export interface DescribeCloudBaseProjectVersionListResponse {
+export interface DescribeWxGatewayRoutesRequest {
   /**
-   * 版本列表
+   * 环境ID
+   */
+  EnvId: string
+  /**
+   * 网关名称
+   */
+  GatewayId: string
+  /**
+   * 网关路由名称
+   */
+  GatewayRouteName?: string
+  /**
+   * 网关版本名
+   */
+  GatewayVersion?: string
+}
+
+/**
+ * DescribeWxGateways请求参数结构体
+ */
+export interface DescribeWxGatewaysRequest {
+  /**
+   * 环境ID
+   */
+  EnvId: string
+  /**
+   * 服务名称，精确匹配
+   */
+  GatewayName?: string
+  /**
+   * 分页参数
+   */
+  Limit?: number
+  /**
+   * 分页参数
+   */
+  Offset?: number
+}
+
+/**
+ * KV参数的优先级
+ */
+export interface CloudBaseRunKVPriority {
+  /**
+   * 参数的Key
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ProjectVersions: Array<CloudBaseProjectVersion>
+  Key: string
   /**
-   * 总个数
+   * 参数的Value
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TotalCount: number
+  Value: string
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 优先级
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  RequestId?: string
+  Priority: number
 }
 
 /**
@@ -3803,6 +4162,44 @@ export interface DescribeCloudBaseRunConfForGateWayResponse {
 }
 
 /**
+ * DescribeCbrServerVersion请求参数结构体
+ */
+export interface DescribeCbrServerVersionRequest {
+  /**
+   * 环境ID
+   */
+  EnvId: string
+  /**
+   * 服务名称
+   */
+  ServerName: string
+  /**
+   * 版本名称
+   */
+  VersionName: string
+}
+
+/**
+ * DescribeWxGatewayRoutes返回参数结构体
+ */
+export interface DescribeWxGatewayRoutesResponse {
+  /**
+   * 返回的服务个数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalCount: number
+  /**
+   * 返回的服务列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WxGatewayRouteSet: Array<WxGatewayRountItem>
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 数据库资源信息
  */
 export interface DatabasesInfo {
@@ -3879,13 +4276,17 @@ export interface TurnOffStandaloneGatewayRequest {
 }
 
 /**
- * ReinstateEnv请求参数结构体
+ * DeleteGatewayVersion返回参数结构体
  */
-export interface ReinstateEnvRequest {
+export interface DeleteGatewayVersionResponse {
   /**
-   * 环境ID
+   * 删除结果
    */
-  EnvId: string
+  Result?: string
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3910,6 +4311,37 @@ export interface DescribeDatabaseACLRequest {
    * 集合名称
    */
   CollectionName: string
+}
+
+/**
+ * 短信免费量
+ */
+export interface SmsFreeQuota {
+  /**
+   * 免费量总条数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FreeQuota: number
+  /**
+   * 共计已使用总条数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalUsedQuota: number
+  /**
+   * 免费周期起点，0000-00-00 00:00:00 形式
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CycleStart: string
+  /**
+   * 免费周期终点，0000-00-00 00:00:00 形式
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CycleEnd: string
+  /**
+   * 今天已使用总条数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TodayUsedQuota: number
 }
 
 /**
@@ -4091,6 +4523,51 @@ export interface DescribeCloudBaseProjectLatestVersionListResponse {
 }
 
 /**
+ * DescribeWxGateways返回参数结构体
+ */
+export interface DescribeWxGatewaysResponse {
+  /**
+   * 返回的服务列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Gateways: Array<GatewayItem>
+  /**
+   * 网关总数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalCount: number
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeDownloadFile返回参数结构体
+ */
+export interface DescribeDownloadFileResponse {
+  /**
+   * 文件路径，该字段已废弃
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FilePath: string
+  /**
+   * 加密key，用于计算下载加密文件的header。参考SSE-C https://cloud.tencent.com/document/product/436/7728#sse-c
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CustomKey: string
+  /**
+   * 下载链接
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DownloadUrl: string
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 小租户网关套餐配置
  */
 export interface StandaloneGatewayPackageInfo {
@@ -4249,24 +4726,157 @@ export interface ModifyEnvResponse {
 }
 
 /**
- * DescribeDownloadFile返回参数结构体
+ * DescribeCbrServerVersion返回参数结构体
  */
-export interface DescribeDownloadFileResponse {
+export interface DescribeCbrServerVersionResponse {
   /**
-   * 文件路径，该字段已废弃
+   * 版本名称
+   */
+  VersionName?: string
+  /**
+   * 备注
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  FilePath: string
+  Remark?: string
   /**
-   * 加密key，用于计算下载加密文件的header。参考SSE-C https://cloud.tencent.com/document/product/436/7728#sse-c
+   * Dockefile的路径
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CustomKey: string
+  DockerfilePath?: string
   /**
-   * 下载链接
+   * DockerBuild的目录
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DownloadUrl: string
+  BuildDir?: string
+  /**
+   * Cpu大小
+   */
+  Cpu?: number
+  /**
+   * Mem大小
+   */
+  Mem?: number
+  /**
+   * 副本最小值
+   */
+  MinNum?: number
+  /**
+   * 副本最大值
+   */
+  MaxNum?: number
+  /**
+   * 环境变量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EnvParams?: string
+  /**
+   * 创建时间
+   */
+  CreatedTime?: string
+  /**
+   * 更新时间
+   */
+  UpdatedTime?: string
+  /**
+   * 版本的IP
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VersionIP?: string
+  /**
+   * 版本的端口号
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VersionPort?: number
+  /**
+   * 版本状态
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status?: string
+  /**
+   * 枚举（package/repository/image)
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UploadType?: string
+  /**
+   * 服务名字
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ServerName?: string
+  /**
+   * 是否对于外网开放
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsPublic?: boolean
+  /**
+   * vpc id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VpcId?: string
+  /**
+   * 子网实例id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SubnetIds?: Array<string>
+  /**
+   * 日志采集路径
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CustomLogs?: string
+  /**
+   * 监听端口
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ContainerPort?: number
+  /**
+   * 延迟多长时间开始健康检查（单位s）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InitialDelaySeconds?: number
+  /**
+   * 镜像地址
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ImageUrl?: string
+  /**
+   * 是否有Dockerfile：0-default has, 1-has, 2-has not
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HasDockerfile?: number
+  /**
+   * 基础镜像
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BaseImage?: string
+  /**
+   * 容器启动入口命令
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EntryPoint?: string
+  /**
+   * 自动扩缩容策略组
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PolicyDetail?: Array<HpaPolicy>
+  /**
+   * Tke集群信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TkeClusterInfo?: TkeClusterInfo
+  /**
+   * 版本工作负载类型；deployment/deamonset
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TkeWorkloadType?: string
+  /**
+   * 代码包信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PackageInfo?: CbrPackageInfo
+  /**
+   * 仓库信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RepoInfo?: CbrRepoInfo
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4561,6 +5171,16 @@ export interface DescribePostpayFreeQuotasResponse {
 }
 
 /**
+ * ModifyGatewayVersionTraffic返回参数结构体
+ */
+export interface ModifyGatewayVersionTrafficResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 活动详情
  */
 export interface ActivityRecordItem {
@@ -4696,6 +5316,20 @@ export interface LogServiceInfo {
 }
 
 /**
+ * 安全网关版本路由信息限额配置
+ */
+export interface FrequencyLimitConfig {
+  /**
+   * 限额对象 "ConnectionsLimit" 或 "QPSLimit"
+   */
+  LimitObject?: string
+  /**
+   * 限额配置
+   */
+  LimitConfig?: string
+}
+
+/**
  * DescribeEndUsers返回参数结构体
  */
 export interface DescribeEndUsersResponse {
@@ -4822,6 +5456,76 @@ export interface DescribeEndUserStatisticResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 安全网关路由
+ */
+export interface WxGatewayRountItem {
+  /**
+   * 安全网关路由名称
+   */
+  GatewayRouteName: string
+  /**
+   * 安全网关路由协议
+   */
+  GatewayRouteProtocol: string
+  /**
+   * 安全网关路由地址
+   */
+  GatewayRouteAddr: string
+  /**
+   * 安全网关路由描述
+   */
+  GatewayRouteDesc: string
+  /**
+   * 安全网关后端集群id，如果是外网服务，该id与GatewayRountName相同
+   */
+  GatewayRouteClusterId: string
+  /**
+   * 安全网关创建时间
+   */
+  GatewayRouteCreateTime: string
+  /**
+   * 安全网关路由限制
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FrequencyLimitConfig: Array<FrequencyLimitConfig>
+  /**
+   * ip代表绑定后端ip。cbr代表云托管服务
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  GatewayRouteServerType: string
+  /**
+   * 服务名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  GatewayRouteServerName: string
+  /**
+   * ip
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  GatewayRewriteHost: string
+  /**
+   * 网关版本
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  GatewayVersion: string
+  /**
+   * 请求路径
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  GatewayRoutePath: string
+  /**
+   * 请求模式
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  GatewayRouteMethod: string
+  /**
+   * 4层端口
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  GatewayRoutePort: number
 }
 
 /**
@@ -5258,20 +5962,20 @@ export interface DescribeAuthDomainsRequest {
  */
 export interface FreezeCloudBaseRunServersResponse {
   /**
-   * 批量状态状态
+   * 批量状态
 成功：succ
 失败：fail
 部分：partial（部分成功、部分失败）
 注意：此字段可能返回 null，表示取不到有效值。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Result: string
+  Result?: string
   /**
    * 冻结失败服务列表
 注意：此字段可能返回 null，表示取不到有效值。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  FailServerList: Array<string>
+  FailServerList?: Array<string>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5373,6 +6077,111 @@ export interface CloudBaseRunForGatewayConf {
 }
 
 /**
+ * 网关信息
+ */
+export interface GatewayItem {
+  /**
+   * 用户uin
+   */
+  Uin: string
+  /**
+   * 用户appid
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AppId: number
+  /**
+   * 环境id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EnvId: string
+  /**
+   * Gateway唯一id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  GatewayId: string
+  /**
+   * Gateway名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  GatewayName: string
+  /**
+   * Gateway类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  GatewayType: string
+  /**
+   * Gateway描述
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  GatewayDesc: string
+  /**
+   * 套餐版本
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PackageVersion: string
+  /**
+   * 套餐唯一id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PackageId: number
+  /**
+   * vpc唯一id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VpcId: string
+  /**
+   * 子网id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SubnetIds: Array<string>
+  /**
+   * 网关状态
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status: string
+  /**
+   * l5地址
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  L5Addr: string
+  /**
+   * 地域
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Region: string
+  /**
+   * 隔离时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsolateTime: string
+  /**
+   * 到期时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExpireTime: string
+  /**
+   * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateTime: string
+  /**
+   * 变更时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UpdateTime: string
+  /**
+   * 允许未登录访问
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AllowUncertified: number
+  /**
+   * 网关版本限额
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VersionNumLimit?: number
+}
+
+/**
  * 扩展文件信息
  */
 export interface ExtensionFileInfo {
@@ -5392,6 +6201,32 @@ export interface ExtensionFileInfo {
    * 文件大小限制，单位M，客户端上传前需要主动检查文件大小，超过限制的文件会被删除。
    */
   MaxSize: number
+}
+
+/**
+ * 安全网关自定义配置
+ */
+export interface WxGatewayCustomConfig {
+  /**
+   * 是否开启x-real-ip
+   */
+  IsOpenXRealIp?: boolean
+  /**
+   * 封禁配置
+   */
+  BanConfig?: BanConfig
+  /**
+   * 获取源ip方式，PPV1(Proxy Protocol V1)、PPV2(Proxy Protocol V2)、TOA(tcp option address)
+   */
+  SourceIpType?: string
+  /**
+   * 日志信息
+   */
+  LogConfig?: CustomLogConfig
+  /**
+   * 是否开启http1.0
+   */
+  IsAcceptHttpOne?: boolean
 }
 
 /**
@@ -5608,6 +6443,20 @@ export interface DescribeExtensionUploadInfoResponse {
    * 待上传文件的信息数组
    */
   FilesData: Array<ExtensionFileInfo>
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * TurnOnStandaloneGateway返回参数结构体
+ */
+export interface TurnOnStandaloneGatewayResponse {
+  /**
+   * 小租户网关开启状态
+   */
+  Status: string
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

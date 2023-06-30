@@ -118,6 +118,11 @@ export interface DescribeFlowEvidenceReportRequest {
    * 出证报告编号
    */
   ReportId: string
+  /**
+   * 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填
+
+   */
+  Agent?: Agent
 }
 
 /**
@@ -555,6 +560,11 @@ export interface CreateFlowEvidenceReportRequest {
    * 签署流程编号
    */
   FlowId: string
+  /**
+   * 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填
+
+   */
+  Agent?: Agent
 }
 
 /**
@@ -3979,6 +3989,10 @@ export interface CreateFlowRemindsRequest {
    * 需要执行催办的签署流程id数组，最多100个
    */
   FlowIds: Array<string>
+  /**
+   * 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填
+   */
+  Agent?: Agent
 }
 
 /**
@@ -4284,6 +4298,11 @@ export interface CreateBatchCancelFlowUrlRequest {
    * 需要执行撤回的签署流程id数组，最多100个
    */
   FlowIds: Array<string>
+  /**
+   * 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填
+
+   */
+  Agent?: Agent
 }
 
 /**

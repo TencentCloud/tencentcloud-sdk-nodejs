@@ -4388,56 +4388,56 @@ export interface CommonMixCropParams {
 }
 
 /**
- * 央视P2P流信息。
+ * P2P流信息。
  */
 export interface XP2PDetailInfo {
   /**
    * CDN流量。
    */
-  CdnBytes: number
+  CdnBytes?: number
   /**
    * P2P流量。
    */
-  P2pBytes: number
+  P2pBytes?: number
   /**
    * 卡播人数。
    */
-  StuckPeople: number
+  StuckPeople?: number
   /**
    * 卡播次数。
    */
-  StuckTimes: number
+  StuckTimes?: number
   /**
    * 在线人数。
    */
-  OnlinePeople: number
+  OnlinePeople?: number
   /**
    * 起播请求次数
    */
-  Request: number
+  Request?: number
   /**
    * 起播成功次数
    */
-  RequestSuccess: number
+  RequestSuccess?: number
   /**
    * 时间，一分钟粒度，utc格式：yyyy-mm-ddTHH:MM:SSZ，参考https://cloud.tencent.com/document/product/266/11732#I。。
    */
-  Time: string
+  Time?: string
   /**
    * 类型，分live和vod两种。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Type: string
+  Type?: string
   /**
    * 流ID。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  StreamName: string
+  StreamName?: string
   /**
    * AppId。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  AppId: string
+  AppId?: string
 }
 
 /**

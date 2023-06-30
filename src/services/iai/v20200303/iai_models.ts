@@ -2026,9 +2026,9 @@ export interface DetectFaceRequest {
    */
   MaxFaceNum?: number
   /**
-   * 人脸长和宽的最小尺寸，单位为像素。
-默认为34。建议不低于34。
-低于MinFaceSize值的人脸不会被检测。
+   * 人脸长和宽的最小尺寸，单位为像素，低于MinFaceSize值的人脸不会被检测。
+只支持设置34和20，建议使用34。
+
    */
   MinFaceSize?: number
   /**
@@ -2438,19 +2438,19 @@ export interface DetectFaceResponse {
   /**
    * 请求的图片宽度。
    */
-  ImageWidth: number
+  ImageWidth?: number
   /**
    * 请求的图片高度。
    */
-  ImageHeight: number
+  ImageHeight?: number
   /**
    * 人脸信息列表。包含人脸坐标信息、属性信息（若需要）、质量分信息（若需要）。
    */
-  FaceInfos: Array<FaceInfo>
+  FaceInfos?: Array<FaceInfo>
   /**
    * 人脸识别所用的算法模型版本。
    */
-  FaceModelVersion: string
+  FaceModelVersion?: string
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

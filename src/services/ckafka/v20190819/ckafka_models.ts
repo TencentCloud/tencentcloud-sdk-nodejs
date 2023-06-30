@@ -7471,7 +7471,7 @@ export interface AclRuleInfo {
    */
   PermissionType: string
   /**
-   * 默认为：*，表示任何host都可以访问，当前ckafka不支持host为：* 和 ip网段
+   * 默认为\*，表示任何host都可以访问，当前ckafka不支持host为\* 和 ip网段
    */
   Host: string
   /**
@@ -7512,7 +7512,7 @@ export interface Acl {
    */
   Principal?: string
   /**
-   * 默认为：*，表示任何host都可以访问，当前ckafka不支持host为：*，但是后面开源kafka的产品化会直接支持
+   * 默认\*,表示任何host都可以访问，当前ckafka不支持host为\*，但是后面开源kafka的产品化会直接支持
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Host?: string

@@ -1666,6 +1666,11 @@ export interface TelCdrInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     VoicemailRecordURL?: Array<string>;
+    /**
+     * 通话中语音留言ASR文本信息地址
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    VoicemailAsrURL?: Array<string>;
 }
 /**
  * 号码信息
@@ -1814,6 +1819,14 @@ export interface CreateExtensionRequest {
      * 分机名称
      */
     ExtensionName: string;
+    /**
+     * 绑定的技能组列表
+     */
+    SkillGroupIds?: Array<number>;
+    /**
+     * 绑定的坐席邮箱
+     */
+    Relation?: string;
 }
 /**
  * CreateAutoCalloutTask请求参数结构体

@@ -5569,7 +5569,16 @@ export interface Filter {
 /**
  * kms加密参数
  */
-export declare type KMSConfiguration = null;
+export interface KMSConfiguration {
+    /**
+     * kms id
+     */
+    KeyId?: string;
+    /**
+     * kms 地域
+     */
+    KmsRegion?: string;
+}
 /**
  * UpdateTKEEdgeCluster返回参数结构体
  */

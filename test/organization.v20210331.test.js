@@ -48,6 +48,16 @@ it("organization.v20210331.ListOrganizationIdentity", async function () {
     }
 })
 
+it("organization.v20210331.UpdateOrganizationMember", async function () {
+    try {
+       const data = await client.UpdateOrganizationMember({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("organization.v20210331.DescribeOrganizationAuthNode", async function () {
     try {
        const data = await client.DescribeOrganizationAuthNode({})

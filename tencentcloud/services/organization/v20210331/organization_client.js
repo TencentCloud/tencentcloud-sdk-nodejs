@@ -46,6 +46,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ListOrganizationIdentity", req, cb);
     }
     /**
+     * 更新组织成员信息
+     */
+    async UpdateOrganizationMember(req, cb) {
+        return this.request("UpdateOrganizationMember", req, cb);
+    }
+    /**
      * 获取已设置管理员的互信主体关系列表
      */
     async DescribeOrganizationAuthNode(req, cb) {

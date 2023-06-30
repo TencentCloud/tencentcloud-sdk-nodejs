@@ -4322,6 +4322,10 @@ export interface CreateProxyEndPointResponse {
      */
     TaskId?: number;
     /**
+     * 数据库代理组ID
+     */
+    ProxyGroupId?: string;
+    /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
@@ -7525,6 +7529,10 @@ export interface CreateProxyResponse {
      * 异步任务ID
      */
     TaskId?: number;
+    /**
+     * 数据库代理组ID
+     */
+    ProxyGroupId?: string;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */

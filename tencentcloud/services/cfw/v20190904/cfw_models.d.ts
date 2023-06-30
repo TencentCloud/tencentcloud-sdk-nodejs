@@ -2812,6 +2812,11 @@ export interface InstanceInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Server?: Array<string>;
+    /**
+     * 地域
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RegionKey?: string;
 }
 /**
  * DescribeIPStatusList请求参数结构体
@@ -4276,6 +4281,10 @@ export interface DescribeBlockIgnoreListResponse {
      * 状态信息，success：查询成功，fail：查询失败
      */
     ReturnMsg?: string;
+    /**
+     * 安全事件来源下拉框
+     */
+    SourceList?: Array<string>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */

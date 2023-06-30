@@ -28,9 +28,9 @@ it("tcr.v20190924.DescribeImageLifecycleGlobalPersonal", async function () {
     }
 })
 
-it("tcr.v20190924.CreateImageLifecyclePersonal", async function () {
+it("tcr.v20190924.DescribeReplicationInstances", async function () {
     try {
-       const data = await client.CreateImageLifecyclePersonal({})
+       const data = await client.DescribeReplicationInstances({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -71,16 +71,6 @@ it("tcr.v20190924.DeleteReplicationInstance", async function () {
 it("tcr.v20190924.CreateNamespace", async function () {
     try {
        const data = await client.CreateNamespace({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("tcr.v20190924.DescribeReplicationInstances", async function () {
-    try {
-       const data = await client.DescribeReplicationInstances({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -321,16 +311,6 @@ it("tcr.v20190924.DeleteNamespacePersonal", async function () {
 it("tcr.v20190924.ModifyRepositoryAccessPersonal", async function () {
     try {
        const data = await client.ModifyRepositoryAccessPersonal({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("tcr.v20190924.DeleteImageLifecyclePersonal", async function () {
-    try {
-       const data = await client.DeleteImageLifecyclePersonal({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

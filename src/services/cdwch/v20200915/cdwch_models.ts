@@ -244,11 +244,11 @@ export interface ModifyInstanceKeyValConfigsResponse {
    * 错误信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ErrorMsg: string
+  ErrorMsg?: string
   /**
    * ID
    */
-  FlowId: number
+  FlowId?: number
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -368,24 +368,39 @@ export interface OpenBackUpRequest {
 export interface BackupTableContent {
   /**
    * 数据库
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Database: string
   /**
    * 表
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Table: string
   /**
    * 表总字节数
+注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalBytes: number
   /**
    * 虚拟cluster
+注意：此字段可能返回 null，表示取不到有效值。
    */
   VCluster?: string
   /**
    * 表ip
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Ips?: string
+  /**
+   * zk路径
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ZooPath?: string
+  /**
+   * cvm的ip地址
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Rip?: string
 }
 
 /**
@@ -396,17 +411,17 @@ export interface CreateInstanceNewResponse {
    * 流程ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  FlowId: string
+  FlowId?: string
   /**
    * 实例ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  InstanceId: string
+  InstanceId?: string
   /**
    * 错误信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ErrorMsg: string
+  ErrorMsg?: string
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -943,6 +958,10 @@ export interface DescribeInstancesNewRequest {
    * 搜索标签列表
    */
   SearchTags?: Array<SearchTags>
+  /**
+   * 信息详细与否
+   */
+  IsSimple?: boolean
 }
 
 /**
@@ -1421,23 +1440,28 @@ export interface ScheduleStrategy {
    * 备份桶列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CosBucketName: string
+  CosBucketName?: string
   /**
    * 备份保留天数
    */
-  RetainDays: number
+  RetainDays?: number
   /**
    * 备份的天
    */
-  WeekDays: string
+  WeekDays?: string
   /**
    * 备份小时
    */
-  ExecuteHour: number
+  ExecuteHour?: number
   /**
    * 策略id
    */
-  ScheduleId: number
+  ScheduleId?: number
+  /**
+   * 下次备份时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NextBackupTime?: string
 }
 
 /**
@@ -1487,17 +1511,17 @@ export interface ResizeDiskResponse {
    * 流程ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  FlowId: string
+  FlowId?: string
   /**
    * 实例ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  InstanceId: string
+  InstanceId?: string
   /**
    * 错误信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ErrorMsg: string
+  ErrorMsg?: string
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1511,26 +1535,31 @@ export interface DescribeBackUpScheduleResponse {
   /**
    * 备份是否开启
    */
-  BackUpOpened: boolean
+  BackUpOpened?: boolean
   /**
    * 元数据备份策略
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  MetaStrategy: ScheduleStrategy
+  MetaStrategy?: ScheduleStrategy
   /**
    * 表数据备份策略
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DataStrategy: ScheduleStrategy
+  DataStrategy?: ScheduleStrategy
   /**
    * 备份表列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  BackUpContents: Array<BackupTableContent>
+  BackUpContents?: Array<BackupTableContent>
   /**
    * 备份的状态
    */
-  BackUpStatus: number
+  BackUpStatus?: number
+  /**
+   * 错误信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ErrorMsg?: string
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
