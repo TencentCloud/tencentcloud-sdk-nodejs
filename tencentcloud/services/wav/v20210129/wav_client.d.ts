@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { QueryVehicleInfoListResponse, CreateCorpTagResponse, QueryChatArchivingListResponse, QueryCustomerEventDetailStatisticsResponse, QueryExternalContactDetailRequest, QueryExternalUserMappingInfoResponse, QueryCustomerProfileListRequest, QueryUserInfoListRequest, QueryExternalUserEventListRequest, QueryMaterialListRequest, CreateLeadResponse, QueryUserInfoListResponse, QueryVehicleInfoListRequest, QueryExternalContactDetailByDateResponse, QueryExternalUserEventListResponse, QueryExternalContactListRequest, QueryClueInfoListResponse, CreateChannelCodeRequest, QueryExternalContactDetailResponse, QueryExternalContactListResponse, QueryActivityLiveCodeListRequest, QueryActivityLiveCodeListResponse, CreateCorpTagRequest, QueryLicenseInfoResponse, QueryClueInfoListRequest, QueryActivityListResponse, QueryStaffEventDetailStatisticsResponse, QueryActivityJoinListRequest, QueryExternalContactDetailByDateRequest, QueryExternalUserMappingInfoRequest, QueryCrmStatisticsResponse, QueryChannelCodeListRequest, QueryDealerInfoListResponse, QueryCustomerProfileListResponse, QueryActivityJoinListResponse, QueryStaffEventDetailStatisticsRequest, QueryDealerInfoListRequest, QueryMiniAppCodeListResponse, CreateChannelCodeResponse, QueryLicenseInfoRequest, QueryCustomerEventDetailStatisticsRequest, QueryCrmStatisticsRequest, QueryActivityListRequest, QueryMiniAppCodeListRequest, QueryChatArchivingListRequest, CreateLeadRequest, QueryChannelCodeListResponse, QueryMaterialListResponse } from "./wav_models";
+import { QueryExternalContactDetailRequest, QueryUserInfoListRequest, QueryMaterialListRequest, QueryExternalContactDetailResponse, QueryCrmStatisticsResponse, QueryChannelCodeListResponse, QueryExternalUserEventListResponse, QueryChannelCodeListRequest, QueryActivityLiveCodeListRequest, QueryActivityListRequest, QueryExternalUserMappingInfoRequest, QueryFollowListResponse, CreateLeadRequest, QueryFollowListRequest, QueryMaterialListResponse, QueryDealerInfoListResponse, QueryVehicleInfoListRequest, QueryExternalContactDetailByDateResponse, CreateChannelCodeRequest, CreateCorpTagRequest, QueryMiniAppCodeListResponse, QueryLicenseInfoResponse, QueryArrivalListResponse, QueryExternalContactListResponse, QueryLicenseInfoRequest, QueryCustomerEventDetailStatisticsRequest, QueryUserInfoListResponse, CreateCorpTagResponse, QueryCustomerProfileListRequest, QueryCustomerProfileListResponse, CreateLeadResponse, QueryExternalContactDetailByDateRequest, QueryActivityLiveCodeListResponse, QueryActivityJoinListResponse, QueryArrivalListRequest, QueryActivityListResponse, QueryActivityJoinListRequest, QueryDealerInfoListRequest, CreateChannelCodeResponse, QueryMiniAppCodeListRequest, QueryChatArchivingListRequest, QueryCustomerEventDetailStatisticsResponse, QueryStaffEventDetailStatisticsResponse, QueryExternalUserMappingInfoResponse, QueryStaffEventDetailStatisticsRequest, QueryExternalUserEventListRequest, QueryExternalContactListRequest, QueryClueInfoListResponse, QueryClueInfoListRequest, QueryChatArchivingListResponse, QueryCrmStatisticsRequest, QueryVehicleInfoListResponse } from "./wav_models";
 /**
  * wav client
  * @class
@@ -23,6 +23,10 @@ export declare class Client extends AbstractClient {
      * 根据游标拉取活动参与列表信息
      */
     QueryActivityJoinList(req: QueryActivityJoinListRequest, cb?: (error: string, rep: QueryActivityJoinListResponse) => void): Promise<QueryActivityJoinListResponse>;
+    /**
+     * 查询指定时间范围内发生过到店的潜客到店信息
+     */
+    QueryArrivalList(req: QueryArrivalListRequest, cb?: (error: string, rep: QueryArrivalListResponse) => void): Promise<QueryArrivalListResponse>;
     /**
      * 根据游标拉取渠道活码列表信息
      */
@@ -47,6 +51,10 @@ export declare class Client extends AbstractClient {
      * 该接口获取license对应的详细信息
      */
     QueryLicenseInfo(req: QueryLicenseInfoRequest, cb?: (error: string, rep: QueryLicenseInfoResponse) => void): Promise<QueryLicenseInfoResponse>;
+    /**
+     * 查询指定时间范围内发生过跟进的潜客信息
+     */
+    QueryFollowList(req: QueryFollowListRequest, cb?: (error: string, rep: QueryFollowListResponse) => void): Promise<QueryFollowListResponse>;
     /**
      * 企业可通过此接口获取线索列表。
      */
@@ -76,17 +84,17 @@ export declare class Client extends AbstractClient {
      */
     CreateCorpTag(req: CreateCorpTagRequest, cb?: (error: string, rep: CreateCorpTagResponse) => void): Promise<CreateCorpTagResponse>;
     /**
-     * 通过接口拉取租户/指定成员/部门在指定日期范围内的CRM跟进统计数据
+     * 新增渠道活码接口
      */
-    QueryCrmStatistics(req: QueryCrmStatisticsRequest, cb?: (error: string, rep: QueryCrmStatisticsResponse) => void): Promise<QueryCrmStatisticsResponse>;
+    CreateChannelCode(req: CreateChannelCodeRequest, cb?: (error: string, rep: CreateChannelCodeResponse) => void): Promise<CreateChannelCodeResponse>;
     /**
      * 通过接口按类型拉取租户当前的素材列表及关键信息
      */
     QueryMaterialList(req: QueryMaterialListRequest, cb?: (error: string, rep: QueryMaterialListResponse) => void): Promise<QueryMaterialListResponse>;
     /**
-     * 新增渠道活码接口
+     * 通过接口拉取租户/指定成员/部门在指定日期范围内的CRM跟进统计数据
      */
-    CreateChannelCode(req: CreateChannelCodeRequest, cb?: (error: string, rep: CreateChannelCodeResponse) => void): Promise<CreateChannelCodeResponse>;
+    QueryCrmStatistics(req: QueryCrmStatisticsRequest, cb?: (error: string, rep: QueryCrmStatisticsResponse) => void): Promise<QueryCrmStatisticsResponse>;
     /**
      * 查询小程序码列表接口
      */

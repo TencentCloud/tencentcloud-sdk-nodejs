@@ -56,6 +56,7 @@ import {
   DescribeRecordTypeResponse,
   ModifyDomainRemarkResponse,
   DeleteSnapshotRequest,
+  DeleteRecordBatchResponse,
   DescribeDomainAliasListResponse,
   RollbackRecordSnapshotRequest,
   ModifyRecordToGroupRequest,
@@ -68,6 +69,7 @@ import {
   DeleteDomainRequest,
   ModifyDomainOwnerRequest,
   ModifyPackageAutoRenewRequest,
+  DeleteRecordBatchDetail,
   DomainShareInfo,
   DescribeSnapshotConfigRequest,
   LineInfo,
@@ -122,7 +124,7 @@ import {
   RecordListItem,
   DescribeDomainPreviewResponse,
   CreateDomainBatchResponse,
-  DescribeDomainGroupListResponse,
+  DescribeDomainShareInfoResponse,
   LockInfo,
   ModifyDomainOwnerResponse,
   SubdomainAnalyticsInfo,
@@ -132,7 +134,7 @@ import {
   CreateDomainRequest,
   ModifyPackageAutoRenewResponse,
   DomainAliasAnalyticsItem,
-  DescribeDomainShareInfoResponse,
+  DescribeDomainGroupListResponse,
   ModifyDomainRemarkRequest,
   CreateDomainAliasResponse,
   DescribeRecordListRequest,
@@ -171,6 +173,7 @@ import {
   ModifyRecordRemarkResponse,
   DescribeDomainListRequest,
   DomainCreateInfo,
+  DeleteRecordBatchRequest,
   DescribeDomainPurviewRequest,
   CreateDomainBatchDetail,
   ModifyDomainUnlockRequest,
@@ -624,13 +627,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 设置记录备注
+   * 获取任务详情
    */
-  async ModifyRecordRemark(
-    req: ModifyRecordRemarkRequest,
-    cb?: (error: string, rep: ModifyRecordRemarkResponse) => void
-  ): Promise<ModifyRecordRemarkResponse> {
-    return this.request("ModifyRecordRemark", req, cb)
+  async DescribeBatchTask(
+    req: DescribeBatchTaskRequest,
+    cb?: (error: string, rep: DescribeBatchTaskResponse) => void
+  ): Promise<DescribeBatchTaskResponse> {
+    return this.request("DescribeBatchTask", req, cb)
   }
 
   /**
@@ -714,13 +717,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取任务详情
+   * 批量删除解析记录
    */
-  async DescribeBatchTask(
-    req: DescribeBatchTaskRequest,
-    cb?: (error: string, rep: DescribeBatchTaskResponse) => void
-  ): Promise<DescribeBatchTaskResponse> {
-    return this.request("DescribeBatchTask", req, cb)
+  async DeleteRecordBatch(
+    req: DeleteRecordBatchRequest,
+    cb?: (error: string, rep: DeleteRecordBatchResponse) => void
+  ): Promise<DeleteRecordBatchResponse> {
+    return this.request("DeleteRecordBatch", req, cb)
   }
 
   /**
@@ -751,6 +754,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateDomainResponse) => void
   ): Promise<CreateDomainResponse> {
     return this.request("CreateDomain", req, cb)
+  }
+
+  /**
+   * 设置记录备注
+   */
+  async ModifyRecordRemark(
+    req: ModifyRecordRemarkRequest,
+    cb?: (error: string, rep: ModifyRecordRemarkResponse) => void
+  ): Promise<ModifyRecordRemarkResponse> {
+    return this.request("ModifyRecordRemark", req, cb)
   }
 
   /**

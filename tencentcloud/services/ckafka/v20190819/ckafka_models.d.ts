@@ -2465,7 +2465,7 @@ export interface CreatePostPaidInstanceRequest {
      */
     SubnetId?: string;
     /**
-     * 实例规格。当创建标准版实例时必填，创建专业版实例时不需要填写。1：入门型；2：标准型；3：进阶型；4：容量型；5：高阶型1；6：高阶性2；7：高阶型3；8：高阶型4；9 ：独占型
+     * 国际站标准版实例规格。目前只有国际站标准版使用当前字段区分规格，国内站标准版使用峰值带宽区分规格。除了国际站标准版外的所有实例填写 1 即可。国际站标准版实例：入门型(general)]填写1；[标准型(standard)]填写2；[进阶型(advanced)]填写3；[容量型(capacity)]填写4；[高阶型1(specialized-1)]填写5；[高阶型2(specialized-2)]填写6；[高阶型3(specialized-3)]填写7；[高阶型4(specialized-4)]填写8。
      */
     InstanceType?: number;
     /**
@@ -2485,7 +2485,7 @@ export interface CreatePostPaidInstanceRequest {
      */
     SpecificationsType?: string;
     /**
-     * 实例硬盘类型，"CLOUD_BASIC"：云硬盘，"CLOUD_SSD"：高速云硬盘。不传默认为 "CLOUD_BASIC"
+     * 专业版实例磁盘类型，标准版实例不需要填写。"CLOUD_SSD"：SSD云硬盘；"CLOUD_BASIC"：高性能云硬盘。不传默认值为 "CLOUD_BASIC"
      */
     DiskType?: string;
     /**
@@ -5276,7 +5276,7 @@ export interface CreateInstancePostRequest {
      */
     SubnetId?: string;
     /**
-     * 实例规格。当创建标准版实例时必填，创建专业版实例时不需要填写。1：入门型；2：标准型；3：进阶型；4：容量型；5：高阶型1；6：高阶性2；7：高阶型3；8：高阶型4；9 ：独占型
+     * 国际站标准版实例规格。目前只有国际站标准版使用当前字段区分规格，国内站标准版使用峰值带宽区分规格。除了国际站标准版外的所有实例填写 1 即可。国际站标准版实例：入门型(general)]填写1；[标准型(standard)]填写2；[进阶型(advanced)]填写3；[容量型(capacity)]填写4；[高阶型1(specialized-1)]填写5；[高阶型2(specialized-2)]填写6；[高阶型3(specialized-3)]填写7；[高阶型4(specialized-4)]填写8。
      */
     InstanceType?: number;
     /**
@@ -5296,7 +5296,7 @@ export interface CreateInstancePostRequest {
      */
     SpecificationsType?: string;
     /**
-     * 实例硬盘类型，"CLOUD_BASIC"：云硬盘，"CLOUD_SSD"：高速云硬盘。不传默认为 "CLOUD_BASIC"
+     * 专业版实例磁盘类型，标准版实例不需要填写。"CLOUD_SSD"：SSD云硬盘；"CLOUD_BASIC"：高性能云硬盘。不传默认值为 "CLOUD_BASIC"
      */
     DiskType?: string;
     /**
@@ -7447,7 +7447,7 @@ export interface CreateInstancePreRequest {
      */
     InstanceName: string;
     /**
-     * 可用区，购买多可用区实例时，填写ZoneIds.N字段中的任意一个值
+     * 可用区。当购买多可用区实例时，当前参数为主可用区。需要保证传入的参数和 SubnetId 所在子网属于同一个可用区
      */
     ZoneId: number;
     /**
@@ -7455,16 +7455,15 @@ export interface CreateInstancePreRequest {
      */
     Period: string;
     /**
-     * 实例规格说明 专业版实例[所有规格]填写1.
-  标准版实例 ([入门型(general)]填写1，[标准型(standard)]填写2，[进阶型(advanced)]填写3，[容量型(capacity)]填写4，[高阶型1(specialized-1)]填写5，[高阶型2(specialized-2)]填写6,[高阶型3(specialized-3)]填写7,[高阶型4(specialized-4)]填写8，[独占型(exclusive)]填写9。
+     * 国际站标准版实例规格。目前只有国际站标准版使用当前字段区分规格，国内站标准版使用峰值带宽区分规格。除了国际站标准版外的所有实例填写 1 即可。国际站标准版实例：入门型(general)]填写1；[标准型(standard)]填写2；[进阶型(advanced)]填写3；[容量型(capacity)]填写4；[高阶型1(specialized-1)]填写5；[高阶型2(specialized-2)]填写6；[高阶型3(specialized-3)]填写7；[高阶型4(specialized-4)]填写8。
      */
     InstanceType: number;
     /**
-     * vpcId必填
+     * vpcId，必填
      */
     VpcId?: string;
     /**
-     * 子网id，vpc网络需要传该参数，基础网络可以不传
+     * 子网id，必填
      */
     SubnetId?: string;
     /**
@@ -7484,19 +7483,19 @@ export interface CreateInstancePreRequest {
      */
     KafkaVersion?: string;
     /**
-     * 实例类型: [标准版实例]填写 standard(默认), [专业版实例]填写 profession
+     * 实例类型: [标准版实例]填写 "standard" (默认), [专业版实例]填写 "profession"
      */
     SpecificationsType?: string;
     /**
-     * 磁盘大小，专业版不填写默认最小磁盘，如果跟控制台规格配比不相符，则无法创建成功
+     * 磁盘大小，如果跟控制台规格配比不相符，则无法创建成功
      */
     DiskSize?: number;
     /**
-     * 带宽，专业版不填写默认最小带宽，如果跟控制台规格配比不相符，则无法创建成功
+     * 带宽，如果跟控制台规格配比不相符，则无法创建成功
      */
     BandWidth?: number;
     /**
-     * 分区大小，专业版不填写默认最小分区数，如果跟控制台规格配比不相符，则无法创建成功
+     * 分区大小，如果跟控制台规格配比不相符，则无法创建成功
      */
     Partition?: number;
     /**
@@ -7504,11 +7503,11 @@ export interface CreateInstancePreRequest {
      */
     Tags?: Array<Tag>;
     /**
-     * 磁盘类型（ssd填写CLOUD_SSD，sata填写CLOUD_BASIC）
+     * 专业版实例磁盘类型，标准版实例不需要填写。"CLOUD_SSD"：SSD云硬盘；"CLOUD_BASIC"：高性能云硬盘。不传默认为 "CLOUD_BASIC"
      */
     DiskType?: string;
     /**
-     * 跨可用区，zoneIds必填
+     * 是否创建跨可用区实例，当前参数为 true 时，zoneIds必填
      */
     MultiZoneFlag?: boolean;
     /**

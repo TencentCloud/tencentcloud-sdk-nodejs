@@ -1469,15 +1469,15 @@ export interface BillDetailComponent {
     /**
      * 组件类型：用户购买的产品或服务对应的组件大类，例如：云服务器 CVM 的组件：CPU、内存等
      */
-    ComponentCodeName: string;
+    ComponentCodeName?: string;
     /**
      * 组件名称：用户购买的产品或服务，所包含的具体组件
      */
-    ItemCodeName: string;
+    ItemCodeName?: string;
     /**
      * 组件刊例价：组件的官网原始单价（如果客户享受一口价/合同价则默认不展示）
      */
-    SinglePrice: string;
+    SinglePrice?: string;
     /**
      * 组件指定价（已废弃）
      * @deprecated
@@ -1486,51 +1486,61 @@ export interface BillDetailComponent {
     /**
      * 组件价格单位：组件价格的单位，单位构成：元/用量单位/时长单位
      */
-    PriceUnit: string;
+    PriceUnit?: string;
     /**
      * 组件用量：该组件实际结算用量，组件用量 = 组件原始用量 - 抵扣用量（含资源包
      */
-    UsedAmount: string;
+    UsedAmount?: string;
     /**
      * 组件用量单位：组件用量对应的单位
      */
-    UsedAmountUnit: string;
+    UsedAmountUnit?: string;
+    /**
+     * 原始用量/时长：组件被资源包抵扣前的原始用量/时长
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RealTotalMeasure?: string;
+    /**
+     * 抵扣用量/时长（含资源包）：组件被资源包抵扣的用量/时长
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DeductedMeasure?: string;
     /**
      * 使用时长：资源使用的时长
      */
-    TimeSpan: string;
+    TimeSpan?: string;
     /**
      * 时长单位：资源使用时长的单位
      */
-    TimeUnitName: string;
+    TimeUnitName?: string;
     /**
      * 组件原价：原价 = 组件刊例价 * 组件用量 * 使用时长（如果客户享受一口价/合同价则默认不展示，退费类场景也默认不展示）
      */
-    Cost: string;
+    Cost?: string;
     /**
      * 折扣率：本资源享受的折扣率（如果客户享受一口价/合同价则默认不展示，退费场景也默认不展示）
      */
-    Discount: string;
+    Discount?: string;
     /**
      * 优惠类型
      */
-    ReduceType: string;
+    ReduceType?: string;
     /**
      * 优惠后总价：优惠后总价=（原价 - 预留实例抵扣原价 - 节省计划抵扣原价）* 折扣率
      */
-    RealCost: string;
+    RealCost?: string;
     /**
      * 优惠券支出：使用各类优惠券（如代金券、现金券等）支付的金额
      */
-    VoucherPayAmount: string;
+    VoucherPayAmount?: string;
     /**
      * 现金账户支出：通过现金账户支付的金额
      */
-    CashPayAmount: string;
+    CashPayAmount?: string;
     /**
      * 赠送账户支出：使用赠送金支付的金额
      */
-    IncentivePayAmount: string;
+    IncentivePayAmount?: string;
     /**
      * 分成金账户支出：通过分成金账户支付的金额
   注意：此字段可能返回 null，表示取不到有效值。
@@ -1540,37 +1550,37 @@ export interface BillDetailComponent {
      * 组件类型编码
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ItemCode: string;
+    ItemCode?: string;
     /**
      * 组件名称编码
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ComponentCode: string;
+    ComponentCode?: string;
     /**
      * 组件单价：组件的折后单价，组件单价 = 刊例价 * 折扣
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ContractPrice: string;
+    ContractPrice?: string;
     /**
      * 实例类型：购买的产品服务对应的实例类型，包括资源包、RI、SP、竞价实例。正常的实例展示默认为不展示
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    InstanceType: string;
+    InstanceType?: string;
     /**
      * 预留实例抵扣的使用时长：本产品或服务使用预留实例抵扣的使用时长
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    RiTimeSpan: string;
+    RiTimeSpan?: string;
     /**
      * 预留实例抵扣组件原价：本产品或服务使用预留实例抵扣的组件原价金额
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    OriginalCostWithRI: string;
+    OriginalCostWithRI?: string;
     /**
      * 节省计划抵扣率：节省计划可用余额额度范围内，节省计划对于此组件打的折扣率
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SPDeductionRate: string;
+    SPDeductionRate?: string;
     /**
      * 节省计划抵扣金额（已废弃）
   注意：此字段可能返回 null，表示取不到有效值。
@@ -1581,12 +1591,12 @@ export interface BillDetailComponent {
      * 节省计划抵扣组件原价：节省计划抵扣原价=节省计划包抵扣金额/节省计划抵扣率
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    OriginalCostWithSP: string;
+    OriginalCostWithSP?: string;
     /**
      * 混合折扣率：综合各类折扣抵扣信息后的最终折扣率，混合折扣率 = 优惠后总价 / 组件原价
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    BlendedDiscount: string;
+    BlendedDiscount?: string;
 }
 /**
  * 消耗费用趋势

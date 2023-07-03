@@ -4130,7 +4130,7 @@ export interface ModifyBackupPlanRequest {
      */
     MaxBackupStartTime?: string;
     /**
-     * 实例备份保留时长，取值范围为3-7，单位是天
+     * 实例备份保留时长，取值范围为7-1830，单位是天
      */
     BaseBackupRetentionPeriod?: number;
     /**

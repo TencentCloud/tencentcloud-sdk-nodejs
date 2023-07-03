@@ -438,9 +438,9 @@ it("dnspod.v20210323.ModifyPackageAutoRenew", async function () {
     }
 })
 
-it("dnspod.v20210323.ModifyRecordRemark", async function () {
+it("dnspod.v20210323.DescribeBatchTask", async function () {
     try {
-       const data = await client.ModifyRecordRemark({})
+       const data = await client.DescribeBatchTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -528,9 +528,9 @@ it("dnspod.v20210323.DeleteDomainAlias", async function () {
     }
 })
 
-it("dnspod.v20210323.DescribeBatchTask", async function () {
+it("dnspod.v20210323.DeleteRecordBatch", async function () {
     try {
-       const data = await client.DescribeBatchTask({})
+       const data = await client.DeleteRecordBatch({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -561,6 +561,16 @@ it("dnspod.v20210323.DescribeDomainPreview", async function () {
 it("dnspod.v20210323.CreateDomain", async function () {
     try {
        const data = await client.CreateDomain({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dnspod.v20210323.ModifyRecordRemark", async function () {
+    try {
+       const data = await client.ModifyRecordRemark({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -52,6 +52,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("QueryActivityJoinList", req, cb);
     }
     /**
+     * 查询指定时间范围内发生过到店的潜客到店信息
+     */
+    async QueryArrivalList(req, cb) {
+        return this.request("QueryArrivalList", req, cb);
+    }
+    /**
      * 根据游标拉取渠道活码列表信息
      */
     async QueryChannelCodeList(req, cb) {
@@ -86,6 +92,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async QueryLicenseInfo(req, cb) {
         return this.request("QueryLicenseInfo", req, cb);
+    }
+    /**
+     * 查询指定时间范围内发生过跟进的潜客信息
+     */
+    async QueryFollowList(req, cb) {
+        return this.request("QueryFollowList", req, cb);
     }
     /**
      * 企业可通过此接口获取线索列表。
@@ -130,10 +142,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateCorpTag", req, cb);
     }
     /**
-     * 通过接口拉取租户/指定成员/部门在指定日期范围内的CRM跟进统计数据
+     * 新增渠道活码接口
      */
-    async QueryCrmStatistics(req, cb) {
-        return this.request("QueryCrmStatistics", req, cb);
+    async CreateChannelCode(req, cb) {
+        return this.request("CreateChannelCode", req, cb);
     }
     /**
      * 通过接口按类型拉取租户当前的素材列表及关键信息
@@ -142,10 +154,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("QueryMaterialList", req, cb);
     }
     /**
-     * 新增渠道活码接口
+     * 通过接口拉取租户/指定成员/部门在指定日期范围内的CRM跟进统计数据
      */
-    async CreateChannelCode(req, cb) {
-        return this.request("CreateChannelCode", req, cb);
+    async QueryCrmStatistics(req, cb) {
+        return this.request("QueryCrmStatistics", req, cb);
     }
     /**
      * 查询小程序码列表接口

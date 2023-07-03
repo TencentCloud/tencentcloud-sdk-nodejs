@@ -459,6 +459,8 @@ export interface CreateIntegrationEmployeesRequest {
 /**
  * 解除协议的签署人，如不指定，默认使用待解除流程（即原流程）中的签署人。
 注意：不支持更换C端（个人身份类型）签署人，如果原流程中含有C端签署人，默认使用原流程中的该C端签署人。
+注意：目前不支持替换C端（个人身份类型）签署人，但是可以指定C端签署人的签署方自定义控件别名，具体见参数ApproverSignRole描述。
+注意：当指定C端签署人的签署方自定义控件别名不空时，除RelievedApproverReceiptId参数外，可以只参数ApproverSignRole。
  */
 export interface ReleasedApprover {
     /**
@@ -480,6 +482,16 @@ export interface ReleasedApprover {
   ENTERPRISESERVER-企业静默签
      */
     ApproverType?: string;
+    /**
+     * 签署控件类型，支持自定义企业签署方的签署控件为“印章”或“签名”
+  - SIGN_SEAL-默认为印章控件类型
+  - SIGN_SIGNATURE-手写签名控件类型
+     */
+    ApproverSignComponentType?: string;
+    /**
+     * 签署方自定义控件别名，最大长度20个字符
+     */
+    ApproverSignRole?: string;
 }
 /**
  * DescribeIntegrationRoles请求参数结构体
@@ -2550,6 +2562,10 @@ export interface CreateReleaseFlowRequest {
   解除协议的签署人数量不能多于原流程的签署人数量
      */
     ReleasedApprovers?: Array<ReleasedApprover>;
+    /**
+     * 签署流程的签署截止时间。 值为unix时间戳,精确到秒,不传默认为当前时间七天后
+     */
+    Deadline?: number;
 }
 /**
  * CreateIntegrationUserRoles请求参数结构体

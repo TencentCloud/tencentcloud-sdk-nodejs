@@ -443,6 +443,8 @@ export interface BaseFlowInfo {
 /**
  * 解除协议的签署人，如不指定，默认使用待解除流程（即原流程）中的签署人。
 注意：不支持更换C端（个人身份类型）签署人，如果原流程中含有C端签署人，默认使用原流程中的该签署人。
+注意：目前不支持替换C端（个人身份类型）签署人，但是可以指定C端签署人的签署方自定义控件别名，具体见参数ApproverSignRole描述。 
+注意：当指定C端签署人的签署方自定义控件别名不空时，除参数ApproverNumber外，可以只参数ApproverSignRole。
 
 如果需要指定B端（机构身份类型）签署人，其中ReleasedApprover需要传递的参数如下：
 ApproverNumber, OrganizationName, ApproverType必传。
@@ -493,6 +495,16 @@ ENTERPRISESERVER-企业静默签
 当签署方为同一第三方应用下的员工时，该字必传
    */
   OpenId?: string
+  /**
+   * 签署控件类型，支持自定义企业签署方的签署控件为“印章”或“签名”
+- SIGN_SEAL-默认为印章控件类型
+- SIGN_SIGNATURE-手写签名控件类型
+   */
+  ApproverSignComponentType?: string
+  /**
+   * 签署方自定义控件别名，最大长度20个字符
+   */
+  ApproverSignRole?: string
 }
 
 /**
@@ -1648,7 +1660,7 @@ export interface ChannelCancelMultiFlowSignQRCodeRequest {
  */
 export interface UploadFilesRequest {
   /**
-   * 应用相关信息，若是第三方应用集成调用 appid 和proxyappid 必填
+   * 应用相关信息，若是第三方应用集成调用 若是第三方应用集成调用,Agent.AppId 和 Agent.ProxyOrganizationOpenId 必填
    */
   Agent: Agent
   /**
@@ -2741,13 +2753,13 @@ export interface CreateSignUrlsResponse {
  */
 export interface UploadFilesResponse {
   /**
-   * 文件id数组，有效期一个小时；有效期内此文件id可以反复使用
-   */
-  FileIds?: Array<string>
-  /**
    * 上传成功文件数量
    */
   TotalCount?: number
+  /**
+   * 文件id数组，有效期一个小时；有效期内此文件id可以反复使用
+   */
+  FileIds?: Array<string>
   /**
    * 文件Url
    */
@@ -2954,6 +2966,10 @@ export interface ChannelCreateReleaseFlowRequest {
    * @deprecated
    */
   Operator?: UserInfo
+  /**
+   * 签署流程的签署截止时间。 值为unix时间戳,精确到秒,不传默认为当前时间七天后
+   */
+  Deadline?: number
 }
 
 /**

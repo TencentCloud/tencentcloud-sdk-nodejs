@@ -905,6 +905,23 @@ export interface DeleteSnapshotRequest {
     DomainId?: number;
 }
 /**
+ * DeleteRecordBatch返回参数结构体
+ */
+export interface DeleteRecordBatchResponse {
+    /**
+     * 批量任务 ID
+     */
+    JobId?: number;
+    /**
+     * 任务详情
+     */
+    DetailList?: Array<DeleteRecordBatchDetail>;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * DescribeDomainAliasList返回参数结构体
  */
 export interface DescribeDomainAliasListResponse {
@@ -1192,6 +1209,36 @@ export interface ModifyPackageAutoRenewRequest {
      * enable 开启自动续费；disable 关闭自动续费
      */
     Status: string;
+}
+/**
+ * 批量删除记录详情
+ */
+export interface DeleteRecordBatchDetail {
+    /**
+     * 域名 ID
+     */
+    DomainId?: number;
+    /**
+     * 域名
+     */
+    Domain?: string;
+    /**
+     * 错误信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Error?: string;
+    /**
+     * 删除状态
+     */
+    Status?: string;
+    /**
+     * 操作
+     */
+    Operation?: string;
+    /**
+     * 解析记录列表，json 序列化之后的字符串形式
+     */
+    RecordList: string;
 }
 /**
  * 域名共享信息
@@ -2474,13 +2521,17 @@ export interface CreateDomainBatchResponse {
     RequestId?: string;
 }
 /**
- * DescribeDomainGroupList返回参数结构体
+ * DescribeDomainShareInfo返回参数结构体
  */
-export interface DescribeDomainGroupListResponse {
+export interface DescribeDomainShareInfoResponse {
     /**
-     * 分组列表
+     * 域名共享信息
      */
-    GroupList?: Array<GroupInfo>;
+    ShareList?: Array<DomainShareInfo>;
+    /**
+     * 域名拥有者账号
+     */
+    Owner?: string;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2664,17 +2715,13 @@ export interface DomainAliasAnalyticsItem {
     Data: Array<DomainAnalyticsDetail>;
 }
 /**
- * DescribeDomainShareInfo返回参数结构体
+ * DescribeDomainGroupList返回参数结构体
  */
-export interface DescribeDomainShareInfoResponse {
+export interface DescribeDomainGroupListResponse {
     /**
-     * 域名共享信息
+     * 分组列表
      */
-    ShareList?: Array<DomainShareInfo>;
-    /**
-     * 域名拥有者账号
-     */
-    Owner?: string;
+    GroupList?: Array<GroupInfo>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -3404,6 +3451,15 @@ export interface DomainCreateInfo {
      * 域名的NS列表
      */
     GradeNsList: Array<string>;
+}
+/**
+ * DeleteRecordBatch请求参数结构体
+ */
+export interface DeleteRecordBatchRequest {
+    /**
+     * 解析记录 ID 数组
+     */
+    RecordIdList: Array<number>;
 }
 /**
  * DescribeDomainPurview请求参数结构体

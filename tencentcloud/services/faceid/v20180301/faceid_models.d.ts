@@ -256,7 +256,7 @@ export interface BankCardVerificationRequest {
     BankCard: string;
     /**
      * 证件类型，请确认该证件为开户时使用的证件类型，未用于开户的证件信息不支持验证。
-  目前默认：0 身份证，其他证件类型需求可以添加[腾讯云人脸核身小助手](https://cloud.tencent.com/document/product/1007/56130)进行确认。
+  目前默认：0 身份证，其他证件类型暂不支持。
      */
     CertType?: number;
     /**
@@ -332,7 +332,7 @@ export interface WeChatBillDetail {
     RuleId: string;
 }
 /**
- * 获取token时的的配置
+ * 获取token时的配置
  */
 export interface GetEidTokenConfig {
     /**
@@ -1901,11 +1901,11 @@ export interface BankCardVerificationResponse {
   '-4': '银行卡号码有误'
   '-17': '验证中心服务繁忙'
      */
-    Result: string;
+    Result?: string;
     /**
      * 业务结果描述。
      */
-    Description: string;
+    Description?: string;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */

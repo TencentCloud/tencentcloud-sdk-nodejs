@@ -18,87 +18,93 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
-  ActivityJoinDetail,
-  QueryVehicleInfoListResponse,
-  CreateCorpTagResponse,
-  QueryChatArchivingListResponse,
-  FollowUserPro,
-  CustomerActionEventDetail,
-  QueryCustomerEventDetailStatisticsResponse,
+  VehiclePurpose,
   QueryExternalContactDetailRequest,
-  QueryExternalUserMappingInfoResponse,
-  QueryCustomerProfileListRequest,
-  EnterpriseTag,
-  SalesActionEventDetail,
   QueryUserInfoListRequest,
-  ExternalUserEventInfo,
-  ChannelCodeInnerDetail,
-  ExternalContact,
-  QueryExternalUserEventListRequest,
-  TagInfo,
+  CrmStatisticsData,
+  QueryMaterialListRequest,
+  QueryExternalContactDetailResponse,
+  FollowInfo,
+  DealerInfo,
+  QueryCrmStatisticsResponse,
+  QueryChannelCodeListResponse,
+  CorpUserInfo,
+  QueryExternalUserEventListResponse,
+  ActivityDetail,
+  QueryChannelCodeListRequest,
+  QueryActivityLiveCodeListRequest,
+  ClueInfoDetail,
+  QueryActivityListRequest,
+  QueryExternalUserMappingInfoRequest,
+  QueryFollowListResponse,
+  ActivityJoinDetail,
+  CreateLeadRequest,
+  QueryFollowListRequest,
+  QueryMaterialListResponse,
+  EnterpriseTag,
   TagDetailInfo,
   VehicleInfo,
-  ChatArchivingMsgTypeVideo,
-  QueryMaterialListRequest,
-  CustomerProfile,
-  CreateLeadResponse,
-  QueryUserInfoListResponse,
+  QueryDealerInfoListResponse,
   QueryVehicleInfoListRequest,
   QueryExternalContactDetailByDateResponse,
-  QueryExternalUserEventListResponse,
-  QueryExternalContactListRequest,
-  MiniAppCodeInfo,
-  QueryClueInfoListResponse,
-  WeComTagDetail,
   CreateChannelCodeRequest,
-  QueryExternalContactDetailResponse,
-  ExternalContactSimpleInfo,
-  QueryExternalContactListResponse,
-  QueryActivityLiveCodeListRequest,
-  FollowUser,
-  DealerInfo,
-  QueryActivityLiveCodeListResponse,
   CreateCorpTagRequest,
-  ExternalUserMappingInfo,
-  QueryLicenseInfoResponse,
-  CorpUserInfo,
-  QueryClueInfoListRequest,
-  CrmStatisticsData,
-  MaterialInfo,
-  VehiclePurpose,
-  ActivityDetail,
-  LiveCodeDetail,
-  TagGroup,
-  ExternalContactTag,
-  ChatArchivingDetail,
-  QueryActivityListResponse,
-  QueryStaffEventDetailStatisticsResponse,
-  QueryActivityJoinListRequest,
-  QueryExternalContactDetailByDateRequest,
-  ChannelTag,
-  QueryExternalUserMappingInfoRequest,
-  QueryCrmStatisticsResponse,
-  QueryChannelCodeListRequest,
-  QueryDealerInfoListResponse,
-  QueryCustomerProfileListResponse,
-  ExternalContactDetailPro,
-  QueryActivityJoinListResponse,
-  ClueInfoDetail,
-  QueryStaffEventDetailStatisticsRequest,
-  QueryDealerInfoListRequest,
   QueryMiniAppCodeListResponse,
-  CreateChannelCodeResponse,
+  QueryLicenseInfoResponse,
+  LiveCodeDetail,
+  QueryArrivalListResponse,
+  QueryExternalContactListResponse,
   QueryLicenseInfoRequest,
   QueryCustomerEventDetailStatisticsRequest,
-  QueryCrmStatisticsRequest,
-  QueryActivityListRequest,
+  QueryUserInfoListResponse,
+  CreateCorpTagResponse,
+  FollowUserPro,
+  CustomerActionEventDetail,
+  QueryCustomerProfileListRequest,
+  QueryCustomerProfileListResponse,
+  ExternalUserEventInfo,
+  ExternalUserMappingInfo,
+  ArrivalInfo,
+  PurchaseConcern,
+  CreateLeadResponse,
+  MiniAppCodeInfo,
+  FollowUser,
+  QueryExternalContactDetailByDateRequest,
+  QueryActivityLiveCodeListResponse,
+  QueryActivityJoinListResponse,
+  QueryArrivalListRequest,
+  QueryActivityListResponse,
+  QueryActivityJoinListRequest,
+  TagGroup,
+  ChannelTag,
+  WeComTagDetail,
+  ExternalContactDetailPro,
+  SalesActionEventDetail,
+  QueryDealerInfoListRequest,
+  CreateChannelCodeResponse,
   QueryMiniAppCodeListRequest,
   QueryChatArchivingListRequest,
-  CreateLeadRequest,
-  QueryChannelCodeListResponse,
+  ExternalContact,
   LicenseInfo,
-  QueryMaterialListResponse,
-  PurchaseConcern,
+  QueryCustomerEventDetailStatisticsResponse,
+  QueryStaffEventDetailStatisticsResponse,
+  QueryExternalUserMappingInfoResponse,
+  QueryStaffEventDetailStatisticsRequest,
+  ChannelCodeInnerDetail,
+  QueryExternalUserEventListRequest,
+  ChatArchivingMsgTypeVideo,
+  QueryExternalContactListRequest,
+  QueryClueInfoListResponse,
+  TagInfo,
+  ExternalContactSimpleInfo,
+  CustomerProfile,
+  QueryClueInfoListRequest,
+  MaterialInfo,
+  ExternalContactTag,
+  ChatArchivingDetail,
+  QueryChatArchivingListResponse,
+  QueryCrmStatisticsRequest,
+  QueryVehicleInfoListResponse,
 } from "./wav_models"
 
 /**
@@ -148,6 +154,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: QueryActivityJoinListResponse) => void
   ): Promise<QueryActivityJoinListResponse> {
     return this.request("QueryActivityJoinList", req, cb)
+  }
+
+  /**
+   * 查询指定时间范围内发生过到店的潜客到店信息
+   */
+  async QueryArrivalList(
+    req: QueryArrivalListRequest,
+    cb?: (error: string, rep: QueryArrivalListResponse) => void
+  ): Promise<QueryArrivalListResponse> {
+    return this.request("QueryArrivalList", req, cb)
   }
 
   /**
@@ -208,6 +224,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: QueryLicenseInfoResponse) => void
   ): Promise<QueryLicenseInfoResponse> {
     return this.request("QueryLicenseInfo", req, cb)
+  }
+
+  /**
+   * 查询指定时间范围内发生过跟进的潜客信息
+   */
+  async QueryFollowList(
+    req: QueryFollowListRequest,
+    cb?: (error: string, rep: QueryFollowListResponse) => void
+  ): Promise<QueryFollowListResponse> {
+    return this.request("QueryFollowList", req, cb)
   }
 
   /**
@@ -281,13 +307,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 通过接口拉取租户/指定成员/部门在指定日期范围内的CRM跟进统计数据
+   * 新增渠道活码接口
    */
-  async QueryCrmStatistics(
-    req: QueryCrmStatisticsRequest,
-    cb?: (error: string, rep: QueryCrmStatisticsResponse) => void
-  ): Promise<QueryCrmStatisticsResponse> {
-    return this.request("QueryCrmStatistics", req, cb)
+  async CreateChannelCode(
+    req: CreateChannelCodeRequest,
+    cb?: (error: string, rep: CreateChannelCodeResponse) => void
+  ): Promise<CreateChannelCodeResponse> {
+    return this.request("CreateChannelCode", req, cb)
   }
 
   /**
@@ -301,13 +327,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 新增渠道活码接口
+   * 通过接口拉取租户/指定成员/部门在指定日期范围内的CRM跟进统计数据
    */
-  async CreateChannelCode(
-    req: CreateChannelCodeRequest,
-    cb?: (error: string, rep: CreateChannelCodeResponse) => void
-  ): Promise<CreateChannelCodeResponse> {
-    return this.request("CreateChannelCode", req, cb)
+  async QueryCrmStatistics(
+    req: QueryCrmStatisticsRequest,
+    cb?: (error: string, rep: QueryCrmStatisticsResponse) => void
+  ): Promise<QueryCrmStatisticsResponse> {
+    return this.request("QueryCrmStatistics", req, cb)
   }
 
   /**

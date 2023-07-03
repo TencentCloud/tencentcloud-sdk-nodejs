@@ -280,10 +280,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyPackageAutoRenew", req, cb);
     }
     /**
-     * 设置记录备注
+     * 获取任务详情
      */
-    async ModifyRecordRemark(req, cb) {
-        return this.request("ModifyRecordRemark", req, cb);
+    async DescribeBatchTask(req, cb) {
+        return this.request("DescribeBatchTask", req, cb);
     }
     /**
      * 创建域名别名
@@ -334,10 +334,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteDomainAlias", req, cb);
     }
     /**
-     * 获取任务详情
+     * 批量删除解析记录
      */
-    async DescribeBatchTask(req, cb) {
-        return this.request("DescribeBatchTask", req, cb);
+    async DeleteRecordBatch(req, cb) {
+        return this.request("DeleteRecordBatch", req, cb);
     }
     /**
      * 回滚前检查单条记录
@@ -356,6 +356,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CreateDomain(req, cb) {
         return this.request("CreateDomain", req, cb);
+    }
+    /**
+     * 设置记录备注
+     */
+    async ModifyRecordRemark(req, cb) {
+        return this.request("ModifyRecordRemark", req, cb);
     }
     /**
      * 获取域名筛选列表

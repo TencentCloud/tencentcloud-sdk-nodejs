@@ -4035,27 +4035,27 @@ export interface DescribeLivePullStreamTasksResponse {
     /**
      * 直播拉流任务信息列表。
      */
-    TaskInfos: Array<PullStreamTaskInfo>;
+    TaskInfos?: Array<PullStreamTaskInfo>;
     /**
      * 分页的页码。
      */
-    PageNum: number;
+    PageNum?: number;
     /**
      * 每页大小。
      */
-    PageSize: number;
+    PageSize?: number;
     /**
      * 符合条件的总个数。
      */
-    TotalNum: number;
+    TotalNum?: number;
     /**
      * 总页数。
      */
-    TotalPage: number;
+    TotalPage?: number;
     /**
      * 限制可创建的最大任务数。
      */
-    LimitTaskNum: number;
+    LimitTaskNum?: number;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */

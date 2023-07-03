@@ -58,6 +58,16 @@ it("wav.v20210129.QueryActivityJoinList", async function () {
     }
 })
 
+it("wav.v20210129.QueryArrivalList", async function () {
+    try {
+       const data = await client.QueryArrivalList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("wav.v20210129.QueryChannelCodeList", async function () {
     try {
        const data = await client.QueryChannelCodeList({})
@@ -111,6 +121,16 @@ it("wav.v20210129.QueryExternalUserEventList", async function () {
 it("wav.v20210129.QueryLicenseInfo", async function () {
     try {
        const data = await client.QueryLicenseInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("wav.v20210129.QueryFollowList", async function () {
+    try {
+       const data = await client.QueryFollowList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -188,9 +208,9 @@ it("wav.v20210129.CreateCorpTag", async function () {
     }
 })
 
-it("wav.v20210129.QueryCrmStatistics", async function () {
+it("wav.v20210129.CreateChannelCode", async function () {
     try {
-       const data = await client.QueryCrmStatistics({})
+       const data = await client.CreateChannelCode({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -208,9 +228,9 @@ it("wav.v20210129.QueryMaterialList", async function () {
     }
 })
 
-it("wav.v20210129.CreateChannelCode", async function () {
+it("wav.v20210129.QueryCrmStatistics", async function () {
     try {
-       const data = await client.CreateChannelCode({})
+       const data = await client.QueryCrmStatistics({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -2418,7 +2418,8 @@ export interface CreateDataEngineRequest {
      */
     MaxClusters?: number;
     /**
-     * 是否为默虚拟集群
+     * 是否为默认虚拟集群
+     * @deprecated
      */
     DefaultDataEngine?: boolean;
     /**
@@ -2494,7 +2495,7 @@ export interface CreateDataEngineRequest {
      */
     ImageVersionName?: string;
     /**
-     * 主集群名称
+     * 主集群名称，创建容灾集群时指定
      */
     MainClusterName?: string;
     /**
