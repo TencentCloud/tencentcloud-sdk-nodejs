@@ -18,9 +18,9 @@ const client = new tencentcloud.ciam.v20220331.Client({
 })
 describe("ciam.v20220331.test.js", function () {
 
-it("ciam.v20220331.DeleteUsers", async function () {
+it("ciam.v20220331.UpdateUserStatus", async function () {
     try {
-       const data = await client.DeleteUsers({})
+       const data = await client.UpdateUserStatus({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -38,9 +38,9 @@ it("ciam.v20220331.ListJobs", async function () {
     }
 })
 
-it("ciam.v20220331.UpdateUser", async function () {
+it("ciam.v20220331.DeleteUserStore", async function () {
     try {
-       const data = await client.UpdateUser({})
+       const data = await client.DeleteUserStore({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -48,9 +48,9 @@ it("ciam.v20220331.UpdateUser", async function () {
     }
 })
 
-it("ciam.v20220331.DescribeUser", async function () {
+it("ciam.v20220331.DeleteUserGroups", async function () {
     try {
-       const data = await client.DescribeUser({})
+       const data = await client.DeleteUserGroups({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -58,79 +58,9 @@ it("ciam.v20220331.DescribeUser", async function () {
     }
 })
 
-it("ciam.v20220331.ListUser", async function () {
+it("ciam.v20220331.UpdateUserStore", async function () {
     try {
-       const data = await client.ListUser({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("ciam.v20220331.UpdateUserStatus", async function () {
-    try {
-       const data = await client.UpdateUserStatus({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("ciam.v20220331.ListUserByProperty", async function () {
-    try {
-       const data = await client.ListUserByProperty({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("ciam.v20220331.ListLogMessageByCondition", async function () {
-    try {
-       const data = await client.ListLogMessageByCondition({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("ciam.v20220331.DescribeUserById", async function () {
-    try {
-       const data = await client.DescribeUserById({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("ciam.v20220331.CreateUser", async function () {
-    try {
-       const data = await client.CreateUser({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("ciam.v20220331.SetPassword", async function () {
-    try {
-       const data = await client.SetPassword({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("ciam.v20220331.CreateFileExportUserJob", async function () {
-    try {
-       const data = await client.CreateFileExportUserJob({})
+       const data = await client.UpdateUserStore({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -161,6 +91,156 @@ it("ciam.v20220331.LinkAccount", async function () {
 it("ciam.v20220331.ResetPassword", async function () {
     try {
        const data = await client.ResetPassword({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ciam.v20220331.UpdateUser", async function () {
+    try {
+       const data = await client.UpdateUser({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ciam.v20220331.DescribeUser", async function () {
+    try {
+       const data = await client.DescribeUser({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ciam.v20220331.ListUserGroups", async function () {
+    try {
+       const data = await client.ListUserGroups({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ciam.v20220331.ListUser", async function () {
+    try {
+       const data = await client.ListUser({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ciam.v20220331.UpdateUserGroup", async function () {
+    try {
+       const data = await client.UpdateUserGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ciam.v20220331.CreateUserStore", async function () {
+    try {
+       const data = await client.CreateUserStore({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ciam.v20220331.DeleteUsers", async function () {
+    try {
+       const data = await client.DeleteUsers({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ciam.v20220331.ListUserByProperty", async function () {
+    try {
+       const data = await client.ListUserByProperty({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ciam.v20220331.DescribeUserById", async function () {
+    try {
+       const data = await client.DescribeUserById({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ciam.v20220331.SetPassword", async function () {
+    try {
+       const data = await client.SetPassword({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ciam.v20220331.CreateFileExportUserJob", async function () {
+    try {
+       const data = await client.CreateFileExportUserJob({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ciam.v20220331.ListUserStore", async function () {
+    try {
+       const data = await client.ListUserStore({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ciam.v20220331.CreateUserGroup", async function () {
+    try {
+       const data = await client.CreateUserGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ciam.v20220331.CreateUser", async function () {
+    try {
+       const data = await client.CreateUser({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ciam.v20220331.ListLogMessageByCondition", async function () {
+    try {
+       const data = await client.ListLogMessageByCondition({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

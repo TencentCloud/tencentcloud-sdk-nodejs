@@ -359,6 +359,86 @@ export interface ModifyConfigExtraResponse {
 }
 
 /**
+ * Kafka导入配置信息
+ */
+export interface KafkaRechargeInfo {
+  /**
+   * 主键ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Id: string
+  /**
+   * 日志主题ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TopicId: string
+  /**
+   * Kafka导入任务名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name: string
+  /**
+   * 导入Kafka类型，0: 腾讯云CKafka，1: 用户自建Kafka
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  KafkaType?: number
+  /**
+   * 腾讯云CKafka实例ID，KafkaType为0时必填
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  KafkaInstance?: string
+  /**
+   * 服务地址
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ServerAddr: string
+  /**
+   * ServerAddr是否为加密连接	
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsEncryptionAddr?: boolean
+  /**
+   * 加密访问协议，IsEncryptionAddr参数为true时必填
+   */
+  Protocol?: KafkaProtocolInfo
+  /**
+   * 用户需要导入的Kafka相关topic列表，多个topic之间使用半角逗号隔开
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UserKafkaTopics: string
+  /**
+   * 用户Kafka消费组名称	
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ConsumerGroupName: string
+  /**
+   * 状态   status 1: 运行中, 2: 暂停 ...
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status: number
+  /**
+   * 导入数据位置，-1:最早（默认），-2：最晚，大于等于0: 指定offset
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Offset?: number
+  /**
+   * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateTime: string
+  /**
+   * 更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UpdateTime: string
+  /**
+   * 日志导入规则
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LogRechargeRule: LogRechargeRuleInfo
+}
+
+/**
  * CreateLogset请求参数结构体
  */
 export interface CreateLogsetRequest {
@@ -650,50 +730,13 @@ export interface ModifyShipperResponse {
 }
 
 /**
- * ModifyTopic请求参数结构体
+ * DeleteKafkaRecharge返回参数结构体
  */
-export interface ModifyTopicRequest {
+export interface DeleteKafkaRechargeResponse {
   /**
-   * 日志主题ID
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  TopicId: string
-  /**
-   * 日志主题名称
-   */
-  TopicName?: string
-  /**
-   * 标签描述列表，通过指定该参数可以同时绑定标签到相应的日志主题。最大支持10个标签键值对，并且不能有重复的键值对。
-   */
-  Tags?: Array<Tag>
-  /**
-   * 该日志主题是否开始采集
-   */
-  Status?: boolean
-  /**
-   * 是否开启自动分裂
-   */
-  AutoSplit?: boolean
-  /**
-   * 若开启最大分裂，该主题能够能够允许的最大分区数
-   */
-  MaxSplitPartitions?: number
-  /**
-   * 生命周期，单位天，标准存储取值范围1\~3600，低频存储取值范围7\~3600。取值为3640时代表永久保存
-   */
-  Period?: number
-  /**
-   * 日志主题描述
-   */
-  Describes?: string
-  /**
-   * 0：关闭日志沉降。
-非0：开启日志沉降后标准存储的天数。HotPeriod需要大于等于7，且小于Period。仅在StorageType为 hot 时生效
-   */
-  HotPeriod?: number
-  /**
-   * webtracking开关； false: 关闭 true: 开启
-   */
-  IsWebTracking?: boolean
+  RequestId?: string
 }
 
 /**
@@ -875,19 +918,47 @@ export interface DeleteMachineGroupResponse {
 }
 
 /**
- * 创建资源实例时同时绑定的标签对说明
+ * Kafka访问协议
  */
-export interface Tag {
+export interface KafkaProtocolInfo {
   /**
-   * 标签键
+   * 协议类型，支持的协议类型包括 plaintext、sasl_plaintext 或 sasl_ssl。建议使用 sasl_ssl，此协议会进行连接加密同时需要用户认证
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Key: string
+  Protocol?: string
   /**
-   * 标签值
+   * 加密类型，支持 PLAIN、SCRAM-SHA-256 或 SCRAM-SHA-512
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Value: string
+  Mechanism?: string
+  /**
+   * 用户名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UserName?: string
+  /**
+   * 用户密码
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Password?: string
+}
+
+/**
+ * DescribeCosRecharges请求参数结构体
+ */
+export interface DescribeCosRechargesRequest {
+  /**
+   * 日志主题 ID
+   */
+  TopicId: string
+  /**
+   * 状态   status 0: 已创建, 1: 运行中, 2: 已停止, 3: 已完成, 4: 运行失败。
+   */
+  Status?: number
+  /**
+   * 是否启用:   0： 未启用  ， 1：启用
+   */
+  Enable?: number
 }
 
 /**
@@ -977,7 +1048,7 @@ export interface ExtractRuleInfo {
    */
   BeginRegex?: string
   /**
-   * 取的每个字段的key名字，为空的key代表丢弃这个字段，只有log_type为delimiter_log时有效，json_log的日志使用json本身的key
+   * 取的每个字段的key名字，为空的key代表丢弃这个字段，只有log_type为delimiter_log时有效，json_log的日志使用json本身的key。限制100个。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Keys?: Array<string>
@@ -1766,21 +1837,29 @@ export interface DescribeMachineGroupConfigsResponse {
 }
 
 /**
- * DescribeCosRecharges请求参数结构体
+ * CheckRechargeKafkaServer请求参数结构体
  */
-export interface DescribeCosRechargesRequest {
+export interface CheckRechargeKafkaServerRequest {
   /**
-   * 日志主题 ID
+   * 导入Kafka类型，0: 腾讯云CKafka，1: 用户自建Kafka
    */
-  TopicId: string
+  KafkaType: number
   /**
-   * 状态   status 0: 已创建, 1: 运行中, 2: 已停止, 3: 已完成, 4: 运行失败。
+   * 腾讯云CKafka实例ID，KafkaType为0时必填
    */
-  Status?: number
+  KafkaInstance?: string
   /**
-   * 是否启用:   0： 未启用  ， 1：启用
+   * 服务地址
    */
-  Enable?: number
+  ServerAddr?: string
+  /**
+   * ServerAddr是否为加密连接
+   */
+  IsEncryptionAddr?: boolean
+  /**
+   * 加密访问协议，IsEncryptionAddr参数为true时必填
+   */
+  Protocol?: KafkaProtocolInfo
 }
 
 /**
@@ -2134,6 +2213,20 @@ export interface AlarmTarget {
 }
 
 /**
+ * CreateKafkaRecharge返回参数结构体
+ */
+export interface CreateKafkaRechargeResponse {
+  /**
+   * Kafka导入配置ID
+   */
+  Id?: string
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * OpenKafkaConsumer请求参数结构体
  */
 export interface OpenKafkaConsumerRequest {
@@ -2145,6 +2238,10 @@ export interface OpenKafkaConsumerRequest {
    * 压缩方式[0:NONE；2:SNAPPY；3:LZ4]
    */
   Compression?: number
+  /**
+   * kafka协议消费数据格式
+   */
+  ConsumerContent?: KafkaConsumerContent
 }
 
 /**
@@ -2312,6 +2409,40 @@ topicId
 }
 
 /**
+ * kafka协议消费内容
+ */
+export interface KafkaConsumerContent {
+  /**
+   * 消费格式 0:全文；1:json
+   */
+  Format: number
+  /**
+   * 是否投递 TAG 信息
+Format为0时，此字段不需要赋值
+   */
+  EnableTag: boolean
+  /**
+   * 元数据信息列表, 可选值为：\_\_SOURCE\_\_、\_\_FILENAME\_\_
+、\_\_TIMESTAMP\_\_、\_\_HOSTNAME\_\_、\_\_PKGID\_\_
+Format为0时，此字段不需要赋值
+   */
+  MetaFields: Array<string>
+  /**
+   * tag数据处理方式：
+1:不平铺（默认值）
+2:平铺
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TagTransaction?: number
+  /**
+   * 消费数据Json格式：
+1：不转义（默认格式）
+2：转义
+   */
+  JsonType?: number
+}
+
+/**
  * 日志集相关信息
  */
 export interface LogsetInfo {
@@ -2381,6 +2512,78 @@ export interface AnalysisDimensional {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ConfigInfo?: Array<AlarmAnalysisConfig>
+}
+
+/**
+ * 日志导入规则
+ */
+export interface LogRechargeRuleInfo {
+  /**
+   * 导入类型，支持json_log：json格式日志，minimalist_log: 单行全文，fullregex_log: 单行完全正则
+   */
+  RechargeType: string
+  /**
+   * 解析编码格式，0: UTF-8（默认值），1: GBK
+   */
+  EncodingFormat: number
+  /**
+   * 使用默认时间，true：开启（默认值）， flase：关闭
+   */
+  DefaultTimeSwitch: boolean
+  /**
+   * 整条日志匹配规则，只有RechargeType为fullregex_log时有效
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LogRegex?: string
+  /**
+   * 解析失败日志是否上传，true表示上传，false表示不上传
+   */
+  UnMatchLogSwitch?: boolean
+  /**
+   * 解析失败日志的键名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UnMatchLogKey?: string
+  /**
+   * 解析失败日志时间来源，0: 系统当前时间，1: Kafka消息时间戳
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UnMatchLogTimeSrc?: number
+  /**
+   * 默认时间来源，0: 系统当前时间，1: Kafka消息时间戳
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DefaultTimeSrc?: number
+  /**
+   * 时间字段
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TimeKey?: string
+  /**
+   * 时间提取正则表达式
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TimeRegex?: string
+  /**
+   * 时间字段格式
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TimeFormat?: string
+  /**
+   * 时间字段时区
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TimeZone?: string
+  /**
+   * 元数据信息，Kafka导入支持kafka_topic,kafka_partition,kafka_offset,kafka_timestamp
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Metadata?: Array<string>
+  /**
+   * 日志Key列表，RechargeType为full_regex_log时必填
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Keys?: Array<string>
 }
 
 /**
@@ -2585,6 +2788,24 @@ export interface AddMachineGroupInfoRequest {
 }
 
 /**
+ * DescribeKafkaRecharges请求参数结构体
+ */
+export interface DescribeKafkaRechargesRequest {
+  /**
+   * 日志主题 ID
+   */
+  TopicId: string
+  /**
+   * 导入配置ID
+   */
+  Id?: string
+  /**
+   * 状态   status 1: 运行中, 2: 暂停...
+   */
+  Status?: number
+}
+
+/**
  * JSON类型描述
  */
 export interface JsonInfo {
@@ -2602,6 +2823,25 @@ export interface JsonInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   JsonType?: number
+}
+
+/**
+ * PreviewKafkaRecharge返回参数结构体
+ */
+export interface PreviewKafkaRechargeResponse {
+  /**
+   * 日志样例，PreviewType为2时返回
+   */
+  LogSample?: string
+  /**
+   * 日志预览结果
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LogData?: string
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2814,6 +3054,24 @@ export interface CreateShipperResponse {
    * 投递任务ID
    */
   ShipperId?: string
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeKafkaRecharges返回参数结构体
+ */
+export interface DescribeKafkaRechargesResponse {
+  /**
+   * KafkaRechargeInfo 信息列表
+   */
+  Infos?: Array<KafkaRechargeInfo>
+  /**
+   * Kafka导入信息总条数
+   */
+  TotalCount?: number
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3147,6 +3405,52 @@ export interface DeleteExportRequest {
 }
 
 /**
+ * PreviewKafkaRecharge请求参数结构体
+ */
+export interface PreviewKafkaRechargeRequest {
+  /**
+   * 预览类型，1:源数据预览，2:导出结果预览
+   */
+  PreviewType: number
+  /**
+   * 导入Kafka类型，0: 腾讯云CKafka，1: 用户自建Kafka
+   */
+  KafkaType: number
+  /**
+   * 用户需要导入的Kafka相关topic列表，多个topic之间使用半角逗号隔开
+   */
+  UserKafkaTopics: string
+  /**
+   * 导入数据位置，-2:最早（默认），-1：最晚
+   */
+  Offset: number
+  /**
+   * 腾讯云CKafka实例ID，KafkaType为0时必填
+   */
+  KafkaInstance?: string
+  /**
+   * 服务地址
+   */
+  ServerAddr?: string
+  /**
+   * ServerAddr是否为加密连接
+   */
+  IsEncryptionAddr?: boolean
+  /**
+   * 加密访问协议，IsEncryptionAddr参数为true时必填
+   */
+  Protocol?: KafkaProtocolInfo
+  /**
+   * 用户Kafka消费组
+   */
+  ConsumerGroupName?: string
+  /**
+   * 日志导入规则
+   */
+  LogRechargeRule?: LogRechargeRuleInfo
+}
+
+/**
  * SplitPartition返回参数结构体
  */
 export interface SplitPartitionResponse {
@@ -3257,6 +3561,70 @@ export interface ModifyShipperRequest {
    * 投递文件命名配置，0：随机数命名，1：投递时间命名，默认0（随机数命名）
    */
   FilenameMode?: number
+}
+
+/**
+ * CreateKafkaRecharge请求参数结构体
+ */
+export interface CreateKafkaRechargeRequest {
+  /**
+   * 导入CLS目标topic ID
+   */
+  TopicId: string
+  /**
+   * Kafka导入配置名称
+   */
+  Name: string
+  /**
+   * 导入Kafka类型，0: 腾讯云CKafka，1: 用户自建Kafka
+   */
+  KafkaType: number
+  /**
+   * 用户需要导入的Kafka相关topic列表，多个topic之间使用半角逗号隔开
+   */
+  UserKafkaTopics: string
+  /**
+   * 导入数据位置，-2:最早（默认），-1：最晚
+   */
+  Offset: number
+  /**
+   * 腾讯云CKafka实例ID，KafkaType为0时必填
+   */
+  KafkaInstance?: string
+  /**
+   * 服务地址，KafkaType为1时必填
+   */
+  ServerAddr?: string
+  /**
+   * ServerAddr是否为加密连接，KafkaType为1时必填
+   */
+  IsEncryptionAddr?: boolean
+  /**
+   * 加密访问协议，IsEncryptionAddr参数为true时必填
+   */
+  Protocol?: KafkaProtocolInfo
+  /**
+   * 用户Kafka消费组名称
+   */
+  ConsumerGroupName?: string
+  /**
+   * 日志导入规则
+   */
+  LogRechargeRule?: LogRechargeRuleInfo
+}
+
+/**
+ * DeleteKafkaRecharge请求参数结构体
+ */
+export interface DeleteKafkaRechargeRequest {
+  /**
+   * Kafka导入配置ID
+   */
+  Id: string
+  /**
+   * 导入CLS目标topic ID
+   */
+  TopicId: string
 }
 
 /**
@@ -3405,6 +3773,16 @@ export interface AlarmNotice {
  * ModifyConfig返回参数结构体
  */
 export interface ModifyConfigResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyKafkaRecharge返回参数结构体
+ */
+export interface ModifyKafkaRechargeResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3825,6 +4203,53 @@ export interface NoticeReceiver {
 }
 
 /**
+ * ModifyTopic请求参数结构体
+ */
+export interface ModifyTopicRequest {
+  /**
+   * 日志主题ID
+   */
+  TopicId: string
+  /**
+   * 日志主题名称
+   */
+  TopicName?: string
+  /**
+   * 标签描述列表，通过指定该参数可以同时绑定标签到相应的日志主题。最大支持10个标签键值对，并且不能有重复的键值对。
+   */
+  Tags?: Array<Tag>
+  /**
+   * 该日志主题是否开始采集
+   */
+  Status?: boolean
+  /**
+   * 是否开启自动分裂
+   */
+  AutoSplit?: boolean
+  /**
+   * 若开启最大分裂，该主题能够能够允许的最大分区数
+   */
+  MaxSplitPartitions?: number
+  /**
+   * 生命周期，单位天，标准存储取值范围1\~3600，低频存储取值范围7\~3600。取值为3640时代表永久保存
+   */
+  Period?: number
+  /**
+   * 日志主题描述
+   */
+  Describes?: string
+  /**
+   * 0：关闭日志沉降。
+非0：开启日志沉降后标准存储的天数。HotPeriod需要大于等于7，且小于Period。仅在StorageType为 hot 时生效
+   */
+  HotPeriod?: number
+  /**
+   * webtracking开关； false: 关闭 true: 开启
+   */
+  IsWebTracking?: boolean
+}
+
+/**
  * CKafka的描述-需要投递到的kafka信息
  */
 export interface Ckafka {
@@ -4057,6 +4482,22 @@ export interface CreateMachineGroupRequest {
    * 机器组元数据信息列表
    */
   MetaTags?: Array<MetaTagInfo>
+}
+
+/**
+ * 创建资源实例时同时绑定的标签对说明
+ */
+export interface Tag {
+  /**
+   * 标签键
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Key: string
+  /**
+   * 标签值
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Value: string
 }
 
 /**
@@ -4344,6 +4785,60 @@ export interface ModifyConfigExtraRequest {
 }
 
 /**
+ * ModifyKafkaRecharge请求参数结构体
+ */
+export interface ModifyKafkaRechargeRequest {
+  /**
+   * Kafka导入配置ID
+   */
+  Id: string
+  /**
+   * 导入CLS目标topic ID
+   */
+  TopicId: string
+  /**
+   * Kafka导入配置名称
+   */
+  Name?: string
+  /**
+   * 导入Kafka类型，0: 腾讯云CKafka，1: 用户自建Kafka
+   */
+  KafkaType?: number
+  /**
+   * 腾讯云CKafka实例ID，KafkaType为0时必填
+   */
+  KafkaInstance?: string
+  /**
+   * 服务地址
+   */
+  ServerAddr?: string
+  /**
+   * ServerAddr是否为加密连接
+   */
+  IsEncryptionAddr?: boolean
+  /**
+   * 加密访问协议，IsEncryptionAddr参数为true时必填
+   */
+  Protocol?: KafkaProtocolInfo
+  /**
+   * 用户需要导入的Kafka相关topic列表，多个topic之间使用半角逗号隔开
+   */
+  UserKafkaTopics?: string
+  /**
+   * 用户Kafka消费组名称
+   */
+  ConsumerGroupName?: string
+  /**
+   * 日志导入规则
+   */
+  LogRechargeRule?: LogRechargeRuleInfo
+  /**
+   * 导入控制，1：暂停，2：继续
+   */
+  StatusControl?: number
+}
+
+/**
  * ModifyLogset请求参数结构体
  */
 export interface ModifyLogsetRequest {
@@ -4365,6 +4860,21 @@ export interface ModifyLogsetRequest {
  * DeleteMachineGroupInfo返回参数结构体
  */
 export interface DeleteMachineGroupInfoResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CheckRechargeKafkaServer返回参数结构体
+ */
+export interface CheckRechargeKafkaServerResponse {
+  /**
+   * Kafka集群可访问状态，0：可正常访问 ...
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status?: number
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

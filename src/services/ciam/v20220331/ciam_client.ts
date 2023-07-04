@@ -23,42 +23,62 @@ import {
   ListUserRequest,
   ResetPasswordRequest,
   ErrorDetails,
+  ListJobsRequest,
   DescribeUserRequest,
+  UserGroup,
+  UserStore,
   DeleteUsersRequest,
   ImportUser,
   UpdateUserStatusResponse,
   FailedUsers,
   ListUserByPropertyRequest,
   CreateUserResponse,
+  Pageable,
   Filter,
-  SetPasswordResponse,
+  UpdateUserGroupRequest,
+  ResetPasswordResponse,
+  ListUserGroupsRequest,
+  Salt,
   ListUserByPropertyResponse,
-  ListJobsRequest,
+  ListUserStoreRequest,
+  CreateUserGroupResponse,
+  CreateUserStoreRequest,
   DescribeUserByIdResponse,
+  DeleteUserStoreResponse,
   Job,
   CreateFileExportUserJobRequest,
+  DeleteUserGroupsRequest,
   User,
+  AppAssociatedUserGroupIds,
+  QueryUserFilter,
+  UserGroupDeleteResp,
   Sort,
-  Pageable,
-  ResetPasswordResponse,
+  DeleteUserGroupsResponse,
+  ListUserGroupsResponse,
   UpdateUserResponse,
   SetPasswordRequest,
   SaltLocation,
+  CreateUserGroupRequest,
   UpdateUserStatusRequest,
   ListJobsResponse,
   ExportPropertyMap,
+  UpdateUserStoreResponse,
   LinkAccountResponse,
   CreateUserRequest,
-  Salt,
+  DeleteUserStoreRequest,
   DeleteUsersResponse,
   CreateApiImportUserJobRequest,
   CreateFileExportUserJobResponse,
   CreateApiImportUserJobResponse,
   LinkAccountRequest,
+  UpdateUserStoreRequest,
   ListLogMessageByConditionRequest,
+  UpdateUserGroupResponse,
   SaltLocationRule,
   MemberMap,
-  QueryUserFilter,
+  SetPasswordResponse,
+  CreateUserStoreResponse,
+  ListUserStoreResponse,
   DescribeUserResponse,
   ListUserResponse,
   LogMessage,
@@ -75,13 +95,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 批量删除用户
+   * 更新用户状态
    */
-  async DeleteUsers(
-    req: DeleteUsersRequest,
-    cb?: (error: string, rep: DeleteUsersResponse) => void
-  ): Promise<DeleteUsersResponse> {
-    return this.request("DeleteUsers", req, cb)
+  async UpdateUserStatus(
+    req: UpdateUserStatusRequest,
+    cb?: (error: string, rep: UpdateUserStatusResponse) => void
+  ): Promise<UpdateUserStatusResponse> {
+    return this.request("UpdateUserStatus", req, cb)
   }
 
   /**
@@ -95,103 +115,33 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 更新用户
+   * 删除用户目录
    */
-  async UpdateUser(
-    req: UpdateUserRequest,
-    cb?: (error: string, rep: UpdateUserResponse) => void
-  ): Promise<UpdateUserResponse> {
-    return this.request("UpdateUser", req, cb)
+  async DeleteUserStore(
+    req: DeleteUserStoreRequest,
+    cb?: (error: string, rep: DeleteUserStoreResponse) => void
+  ): Promise<DeleteUserStoreResponse> {
+    return this.request("DeleteUserStore", req, cb)
   }
 
   /**
-   * 多条件查询用户信息
+   * 批量删除用户组
    */
-  async DescribeUser(
-    req: DescribeUserRequest,
-    cb?: (error: string, rep: DescribeUserResponse) => void
-  ): Promise<DescribeUserResponse> {
-    return this.request("DescribeUser", req, cb)
+  async DeleteUserGroups(
+    req: DeleteUserGroupsRequest,
+    cb?: (error: string, rep: DeleteUserGroupsResponse) => void
+  ): Promise<DeleteUserGroupsResponse> {
+    return this.request("DeleteUserGroups", req, cb)
   }
 
   /**
-   * 查询用户列表
+   * 更新用户目录
    */
-  async ListUser(
-    req: ListUserRequest,
-    cb?: (error: string, rep: ListUserResponse) => void
-  ): Promise<ListUserResponse> {
-    return this.request("ListUser", req, cb)
-  }
-
-  /**
-   * 更新用户状态
-   */
-  async UpdateUserStatus(
-    req: UpdateUserStatusRequest,
-    cb?: (error: string, rep: UpdateUserStatusResponse) => void
-  ): Promise<UpdateUserStatusResponse> {
-    return this.request("UpdateUserStatus", req, cb)
-  }
-
-  /**
-   * 根据属性查询用户列表
-   */
-  async ListUserByProperty(
-    req: ListUserByPropertyRequest,
-    cb?: (error: string, rep: ListUserByPropertyResponse) => void
-  ): Promise<ListUserByPropertyResponse> {
-    return this.request("ListUserByProperty", req, cb)
-  }
-
-  /**
-   * 查询日志信息
-   */
-  async ListLogMessageByCondition(
-    req: ListLogMessageByConditionRequest,
-    cb?: (error: string, rep: ListLogMessageByConditionResponse) => void
-  ): Promise<ListLogMessageByConditionResponse> {
-    return this.request("ListLogMessageByCondition", req, cb)
-  }
-
-  /**
-   * 根据ID查询用户信息
-   */
-  async DescribeUserById(
-    req: DescribeUserByIdRequest,
-    cb?: (error: string, rep: DescribeUserByIdResponse) => void
-  ): Promise<DescribeUserByIdResponse> {
-    return this.request("DescribeUserById", req, cb)
-  }
-
-  /**
-   * 创建用户
-   */
-  async CreateUser(
-    req: CreateUserRequest,
-    cb?: (error: string, rep: CreateUserResponse) => void
-  ): Promise<CreateUserResponse> {
-    return this.request("CreateUser", req, cb)
-  }
-
-  /**
-   * 设置用户密码
-   */
-  async SetPassword(
-    req: SetPasswordRequest,
-    cb?: (error: string, rep: SetPasswordResponse) => void
-  ): Promise<SetPasswordResponse> {
-    return this.request("SetPassword", req, cb)
-  }
-
-  /**
-   * 新建文件导出用户任务
-   */
-  async CreateFileExportUserJob(
-    req: CreateFileExportUserJobRequest,
-    cb?: (error: string, rep: CreateFileExportUserJobResponse) => void
-  ): Promise<CreateFileExportUserJobResponse> {
-    return this.request("CreateFileExportUserJob", req, cb)
+  async UpdateUserStore(
+    req: UpdateUserStoreRequest,
+    cb?: (error: string, rep: UpdateUserStoreResponse) => void
+  ): Promise<UpdateUserStoreResponse> {
+    return this.request("UpdateUserStore", req, cb)
   }
 
   /**
@@ -222,5 +172,155 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ResetPasswordResponse) => void
   ): Promise<ResetPasswordResponse> {
     return this.request("ResetPassword", req, cb)
+  }
+
+  /**
+   * 更新用户
+   */
+  async UpdateUser(
+    req: UpdateUserRequest,
+    cb?: (error: string, rep: UpdateUserResponse) => void
+  ): Promise<UpdateUserResponse> {
+    return this.request("UpdateUser", req, cb)
+  }
+
+  /**
+   * 多条件查询用户信息
+   */
+  async DescribeUser(
+    req: DescribeUserRequest,
+    cb?: (error: string, rep: DescribeUserResponse) => void
+  ): Promise<DescribeUserResponse> {
+    return this.request("DescribeUser", req, cb)
+  }
+
+  /**
+   * 查询用户组列表
+   */
+  async ListUserGroups(
+    req: ListUserGroupsRequest,
+    cb?: (error: string, rep: ListUserGroupsResponse) => void
+  ): Promise<ListUserGroupsResponse> {
+    return this.request("ListUserGroups", req, cb)
+  }
+
+  /**
+   * 查询用户列表
+   */
+  async ListUser(
+    req: ListUserRequest,
+    cb?: (error: string, rep: ListUserResponse) => void
+  ): Promise<ListUserResponse> {
+    return this.request("ListUser", req, cb)
+  }
+
+  /**
+   * 更新用户组
+   */
+  async UpdateUserGroup(
+    req: UpdateUserGroupRequest,
+    cb?: (error: string, rep: UpdateUserGroupResponse) => void
+  ): Promise<UpdateUserGroupResponse> {
+    return this.request("UpdateUserGroup", req, cb)
+  }
+
+  /**
+   * 创建用户目录
+   */
+  async CreateUserStore(
+    req: CreateUserStoreRequest,
+    cb?: (error: string, rep: CreateUserStoreResponse) => void
+  ): Promise<CreateUserStoreResponse> {
+    return this.request("CreateUserStore", req, cb)
+  }
+
+  /**
+   * 批量删除用户
+   */
+  async DeleteUsers(
+    req: DeleteUsersRequest,
+    cb?: (error: string, rep: DeleteUsersResponse) => void
+  ): Promise<DeleteUsersResponse> {
+    return this.request("DeleteUsers", req, cb)
+  }
+
+  /**
+   * 根据属性查询用户列表
+   */
+  async ListUserByProperty(
+    req: ListUserByPropertyRequest,
+    cb?: (error: string, rep: ListUserByPropertyResponse) => void
+  ): Promise<ListUserByPropertyResponse> {
+    return this.request("ListUserByProperty", req, cb)
+  }
+
+  /**
+   * 根据ID查询用户信息
+   */
+  async DescribeUserById(
+    req: DescribeUserByIdRequest,
+    cb?: (error: string, rep: DescribeUserByIdResponse) => void
+  ): Promise<DescribeUserByIdResponse> {
+    return this.request("DescribeUserById", req, cb)
+  }
+
+  /**
+   * 设置用户密码
+   */
+  async SetPassword(
+    req: SetPasswordRequest,
+    cb?: (error: string, rep: SetPasswordResponse) => void
+  ): Promise<SetPasswordResponse> {
+    return this.request("SetPassword", req, cb)
+  }
+
+  /**
+   * 新建文件导出用户任务
+   */
+  async CreateFileExportUserJob(
+    req: CreateFileExportUserJobRequest,
+    cb?: (error: string, rep: CreateFileExportUserJobResponse) => void
+  ): Promise<CreateFileExportUserJobResponse> {
+    return this.request("CreateFileExportUserJob", req, cb)
+  }
+
+  /**
+   * 查询用户目录列表
+   */
+  async ListUserStore(
+    req?: ListUserStoreRequest,
+    cb?: (error: string, rep: ListUserStoreResponse) => void
+  ): Promise<ListUserStoreResponse> {
+    return this.request("ListUserStore", req, cb)
+  }
+
+  /**
+   * 创建用户组
+   */
+  async CreateUserGroup(
+    req: CreateUserGroupRequest,
+    cb?: (error: string, rep: CreateUserGroupResponse) => void
+  ): Promise<CreateUserGroupResponse> {
+    return this.request("CreateUserGroup", req, cb)
+  }
+
+  /**
+   * 创建用户
+   */
+  async CreateUser(
+    req: CreateUserRequest,
+    cb?: (error: string, rep: CreateUserResponse) => void
+  ): Promise<CreateUserResponse> {
+    return this.request("CreateUser", req, cb)
+  }
+
+  /**
+   * 查询日志信息
+   */
+  async ListLogMessageByCondition(
+    req: ListLogMessageByConditionRequest,
+    cb?: (error: string, rep: ListLogMessageByConditionResponse) => void
+  ): Promise<ListLogMessageByConditionResponse> {
+    return this.request("ListLogMessageByCondition", req, cb)
   }
 }

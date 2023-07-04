@@ -135,6 +135,19 @@ export interface ErrorDetails {
     Error: string;
 }
 /**
+ * ListJobs请求参数结构体
+ */
+export interface ListJobsRequest {
+    /**
+     * 用户目录ID
+     */
+    UserStoreId: string;
+    /**
+     * 任务ID列表，为空时返回全部任务
+     */
+    JobIds?: Array<string>;
+}
+/**
  * DescribeUser请求参数结构体
  */
 export interface DescribeUserRequest {
@@ -158,6 +171,100 @@ export interface DescribeUserRequest {
      * 排序设置
      */
     Sort?: Sort;
+}
+/**
+ * 用户组
+ */
+export interface UserGroup {
+    /**
+     * 用户组ID
+     */
+    UserGroupId: string;
+    /**
+     * 用户组名称
+     */
+    DisplayName: string;
+    /**
+     * 用户组描述
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Description: string;
+    /**
+     * 用户目录ID
+     */
+    UserStoreId: string;
+    /**
+     * 租户ID
+     */
+    TenantId: string;
+    /**
+     * 创建时间
+     */
+    CreatedDate: number;
+    /**
+     * 最近更新时间
+     */
+    LastModifyDate: number;
+}
+/**
+ * 用户池
+ */
+export interface UserStore {
+    /**
+     * 租户ID
+     */
+    TenantId: string;
+    /**
+     * 用户池logo
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    UserStoreLogo: string;
+    /**
+     * 用户池描述
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    UserStoreDesc: string;
+    /**
+     * 用户池名称
+     */
+    UserStoreName: string;
+    /**
+     * 用户数量
+     */
+    UserNum: number;
+    /**
+     * 用户池ID
+     */
+    UserStoreId: string;
+    /**
+     * 应用数量
+     */
+    AppNum: number;
+    /**
+     * 上次切换的用户池
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    LastStatus: boolean;
+    /**
+     * 默认用户池
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DefaultStatus: boolean;
+    /**
+     * 创建时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CreateDate: number;
+    /**
+     * 上次切换时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    LastStatusTime: number;
+    /**
+     * 用户目录域名
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    UserStoreProtocolHost: string;
 }
 /**
  * DeleteUsers请求参数结构体
@@ -370,6 +477,19 @@ export interface CreateUserResponse {
     RequestId?: string;
 }
 /**
+ * 分页对象
+ */
+export interface Pageable {
+    /**
+     * 每页数量
+     */
+    PageSize: number;
+    /**
+     * 当前页码
+     */
+    PageNumber: number;
+}
+/**
  * 查询条件
  */
 export interface Filter {
@@ -387,13 +507,70 @@ export interface Filter {
     Logic?: boolean;
 }
 /**
- * SetPassword返回参数结构体
+ * UpdateUserGroup请求参数结构体
  */
-export interface SetPasswordResponse {
+export interface UpdateUserGroupRequest {
+    /**
+     * 用户组ID
+     */
+    UserGroupId: string;
+    /**
+     * 用户组名称
+     */
+    DisplayName: string;
+    /**
+     * 用户目录ID
+     */
+    UserStoreId: string;
+    /**
+     * 用户组描述
+     */
+    Description?: string;
+}
+/**
+ * ResetPassword返回参数结构体
+ */
+export interface ResetPasswordResponse {
+    /**
+     * 重置后的用户密码
+     */
+    Password: string;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * ListUserGroups请求参数结构体
+ */
+export interface ListUserGroupsRequest {
+    /**
+     * 用户目录ID
+     */
+    UserStoreId: string;
+    /**
+     * 分页数据
+     */
+    Pageable: Pageable;
+    /**
+     * Key可选值为condition
+  
+  <li> **condition** </li>	Values = 查询条件，用户组ID或用户组名称
+     */
+    Filters?: Array<Filter>;
+}
+/**
+ * 密码盐
+ */
+export interface Salt {
+    /**
+     * 盐值
+     */
+    SaltValue?: string;
+    /**
+     * 盐值位置
+     */
+    SaltLocation?: SaltLocation;
 }
 /**
  * ListUserByProperty返回参数结构体
@@ -410,17 +587,34 @@ export interface ListUserByPropertyResponse {
     RequestId?: string;
 }
 /**
- * ListJobs请求参数结构体
+ * ListUserStore请求参数结构体
  */
-export interface ListJobsRequest {
+export declare type ListUserStoreRequest = null;
+/**
+ * CreateUserGroup返回参数结构体
+ */
+export interface CreateUserGroupResponse {
     /**
-     * 用户目录ID
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
-    UserStoreId: string;
+    RequestId?: string;
+}
+/**
+ * CreateUserStore请求参数结构体
+ */
+export interface CreateUserStoreRequest {
     /**
-     * 任务ID列表，为空时返回全部任务
+     * 用户池名字
      */
-    JobIds?: Array<string>;
+    UserPoolName: string;
+    /**
+     * 用户池描述
+     */
+    UserPoolDesc?: string;
+    /**
+     * 用户池logo
+     */
+    UserPoolLogo?: string;
 }
 /**
  * DescribeUserById返回参数结构体
@@ -431,6 +625,15 @@ export interface DescribeUserByIdResponse {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     User: User;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * DeleteUserStore返回参数结构体
+ */
+export interface DeleteUserStoreResponse {
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -514,6 +717,19 @@ export interface CreateFileExportUserJobRequest {
      * 导出用户包含的属性和映射名称，为空时包含所有的属性
      */
     ExportPropertyMaps?: Array<ExportPropertyMap>;
+}
+/**
+ * DeleteUserGroups请求参数结构体
+ */
+export interface DeleteUserGroupsRequest {
+    /**
+     * 用户组ID数组
+     */
+    UserGroupIds: Array<string>;
+    /**
+     * 用户目录ID
+     */
+    UserStoreId: string;
 }
 /**
  * 用户信息
@@ -722,6 +938,62 @@ export interface User {
     IndexedAttribute5: string;
 }
 /**
+ * 用户组删除时关联的应用信息
+ */
+export interface AppAssociatedUserGroupIds {
+    /**
+     * 用户组id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    UserGroupId: string;
+    /**
+     * 应用id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ApplicationId: string;
+    /**
+     * 应用名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ApplicationName: string;
+}
+/**
+ * 查询用户信息条件
+ */
+export interface QueryUserFilter {
+    /**
+     * 属性key
+     */
+    PropertyKey?: string;
+    /**
+     * 属性value
+     */
+    PropertyValue?: string;
+    /**
+     * 逻辑值，等于true，不等于false
+     */
+    Logic?: boolean;
+    /**
+     * 操作逻辑符（支持> < = >= <=  != between）
+     */
+    OperateLogic?: string;
+}
+/**
+ * 删除用户组信息时返回的详情
+ */
+export interface UserGroupDeleteResp {
+    /**
+     * 错误详情
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ErrorMessage: string;
+    /**
+     * 用户组关联的应用信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AppAssociatedUserGroupIds: Array<AppAssociatedUserGroupIds>;
+}
+/**
  * 查询用户排序
  */
 export interface Sort {
@@ -735,26 +1007,38 @@ export interface Sort {
     Order?: string;
 }
 /**
- * 分页对象
+ * DeleteUserGroups返回参数结构体
  */
-export interface Pageable {
+export interface DeleteUserGroupsResponse {
     /**
-     * 每页数量
+     * 删除的用户组关联的应用信息
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    PageSize: number;
+    UserGroupDeletedInfo: UserGroupDeleteResp;
     /**
-     * 当前页码
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
-    PageNumber: number;
+    RequestId?: string;
 }
 /**
- * ResetPassword返回参数结构体
+ * ListUserGroups返回参数结构体
  */
-export interface ResetPasswordResponse {
+export interface ListUserGroupsResponse {
     /**
-     * 重置后的用户密码
+     * 用户组列表
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Password: string;
+    Content: Array<UserGroup>;
+    /**
+     * 总条数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Total: number;
+    /**
+     * 分页
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Pageable: Pageable;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -805,6 +1089,23 @@ export interface SaltLocation {
     SaltLocationRule?: SaltLocationRule;
 }
 /**
+ * CreateUserGroup请求参数结构体
+ */
+export interface CreateUserGroupRequest {
+    /**
+     * 用户组名称
+     */
+    DisplayName: string;
+    /**
+     * 用户目录ID
+     */
+    UserStoreId: string;
+    /**
+     * 用户组描述
+     */
+    Description?: string;
+}
+/**
  * UpdateUserStatus请求参数结构体
  */
 export interface UpdateUserStatusRequest {
@@ -851,6 +1152,15 @@ export interface ExportPropertyMap {
      * 用户属性映射名称
      */
     ColumnName: string;
+}
+/**
+ * UpdateUserStore返回参数结构体
+ */
+export interface UpdateUserStoreResponse {
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * LinkAccount返回参数结构体
@@ -927,17 +1237,13 @@ export interface CreateUserRequest {
     IndexedAttribute5?: string;
 }
 /**
- * 密码盐
+ * DeleteUserStore请求参数结构体
  */
-export interface Salt {
+export interface DeleteUserStoreRequest {
     /**
-     * 盐值
+     * 用户池ID
      */
-    SaltValue?: string;
-    /**
-     * 盐值位置
-     */
-    SaltLocation?: SaltLocation;
+    UserPoolId: string;
 }
 /**
  * DeleteUsers返回参数结构体
@@ -1012,6 +1318,27 @@ export interface LinkAccountRequest {
     UserLinkedOnAttribute: string;
 }
 /**
+ * UpdateUserStore请求参数结构体
+ */
+export interface UpdateUserStoreRequest {
+    /**
+     * 用户池ID
+     */
+    UserPoolId: string;
+    /**
+     * 用户池名字
+     */
+    UserPoolName?: string;
+    /**
+     * 用户池描述
+     */
+    UserPoolDesc?: string;
+    /**
+     * 用户池logo
+     */
+    UserPoolLogo?: string;
+}
+/**
  * ListLogMessageByCondition请求参数结构体
  */
 export interface ListLogMessageByConditionRequest {
@@ -1033,6 +1360,15 @@ export interface ListLogMessageByConditionRequest {
   <li> **events** </li>	Values为["SIGNUP", "USER_UPDATE", "USER_DELETE", "USER_CREATE", "ACCOUNT_LINKING"] 中的一个或多个
      */
     Filters?: Array<Filter>;
+}
+/**
+ * UpdateUserGroup返回参数结构体
+ */
+export interface UpdateUserGroupResponse {
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * 盐位规则
@@ -1062,25 +1398,36 @@ export interface MemberMap {
     Type?: string;
 }
 /**
- * 查询用户信息条件
+ * SetPassword返回参数结构体
  */
-export interface QueryUserFilter {
+export interface SetPasswordResponse {
     /**
-     * 属性key
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
-    PropertyKey?: string;
+    RequestId?: string;
+}
+/**
+ * CreateUserStore返回参数结构体
+ */
+export interface CreateUserStoreResponse {
     /**
-     * 属性value
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
-    PropertyValue?: string;
+    RequestId?: string;
+}
+/**
+ * ListUserStore返回参数结构体
+ */
+export interface ListUserStoreResponse {
     /**
-     * 逻辑值，等于true，不等于false
+     * 用户目录列表
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Logic?: boolean;
+    UserStoreSet: Array<UserStore>;
     /**
-     * 操作逻辑符（支持> < = >= <=  != between）
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
-    OperateLogic?: string;
+    RequestId?: string;
 }
 /**
  * DescribeUser返回参数结构体

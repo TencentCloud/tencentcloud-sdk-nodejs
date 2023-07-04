@@ -1189,7 +1189,7 @@ export interface ComposeCoupletRequest {
  */
 export interface EvaluateSentenceSimilarityRequest {
   /**
-   * 待分析的句子对数组。句子对应不超过5对，支持中英文文本，原句子与目标句子均应不超过500字符。
+   * 待分析的句子对数组。句子对应不超过1对，仅支持中文文本，原句子与目标句子均应不超过64字符。
    */
   SentencePairList: Array<SentencePair>
 }

@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { UploadLogResponse, CreateAlarmResponse, DeleteAlarmNoticeResponse, DescribeLogHistogramRequest, DescribeLogContextRequest, DeleteShipperRequest, DeleteLogsetResponse, DescribeCosRechargesResponse, DescribeShipperTasksResponse, CreateMachineGroupResponse, DescribeConfigMachineGroupsRequest, ModifyConfigExtraResponse, CreateLogsetRequest, DescribeShippersRequest, SearchLogResponse, DeleteTopicRequest, DescribePartitionsRequest, ModifyAlarmResponse, DescribeShipperTasksRequest, DescribeAlarmsRequest, MergePartitionRequest, DescribeShippersResponse, CreateConfigExtraResponse, ModifyShipperResponse, ModifyTopicRequest, DescribeConfigExtrasResponse, OpenKafkaConsumerResponse, DescribeIndexRequest, DescribeConfigsResponse, DeleteMachineGroupInfoRequest, CreateLogsetResponse, DeleteMachineGroupResponse, CreateCosRechargeRequest, DescribeConsumerRequest, DeleteConfigExtraResponse, ModifyConsumerRequest, CreateIndexResponse, DeleteConfigFromMachineGroupResponse, CreateConsumerResponse, ModifyMachineGroupResponse, DeleteMachineGroupRequest, DescribePartitionsResponse, DescribeConfigMachineGroupsResponse, ModifyAlarmRequest, DescribeTopicsResponse, ModifyAlarmNoticeRequest, CreateAlarmRequest, DeleteExportResponse, RetryShipperTaskResponse, SplitPartitionRequest, DescribeMachineGroupConfigsResponse, DescribeCosRechargesRequest, DescribeLogHistogramResponse, CloseKafkaConsumerResponse, DescribeMachineGroupsRequest, CreateIndexRequest, DescribeLogsetsResponse, DeleteConsumerResponse, DescribeTopicsRequest, GetAlarmLogResponse, CreateTopicRequest, DescribeExportsRequest, OpenKafkaConsumerRequest, DeleteConfigResponse, ModifyIndexResponse, DeleteConsumerRequest, DeleteIndexRequest, DescribeConsumerResponse, UploadLogRequest, ModifyConsumerResponse, DescribeAlertRecordHistoryRequest, DescribeConfigsRequest, DeleteConfigRequest, CloseKafkaConsumerRequest, CreateExportRequest, DescribeAlarmNoticesResponse, DescribeMachineGroupsResponse, DeleteConfigExtraRequest, ModifyConfigRequest, AddMachineGroupInfoRequest, CreateShipperRequest, CreateTopicResponse, DeleteAlarmResponse, DescribeAlarmsResponse, CreateAlarmNoticeResponse, ModifyTopicResponse, CreateConfigRequest, CreateShipperResponse, DeleteIndexResponse, ModifyIndexRequest, GetAlarmLogRequest, DeleteShipperResponse, DescribeLogContextResponse, DeleteExportRequest, SplitPartitionResponse, ModifyShipperRequest, CreateConfigExtraRequest, CreateConsumerRequest, ModifyConfigResponse, ModifyAlarmNoticeResponse, DescribeMachinesResponse, ModifyCosRechargeResponse, ApplyConfigToMachineGroupResponse, DeleteAlarmRequest, CreateConfigResponse, DeleteConfigFromMachineGroupRequest, CreateCosRechargeResponse, DescribeAlertRecordHistoryResponse, AddMachineGroupInfoResponse, ModifyMachineGroupRequest, DescribeAlarmNoticesRequest, DescribeMachinesRequest, DeleteAlarmNoticeRequest, DeleteLogsetRequest, ModifyLogsetResponse, SearchLogRequest, CreateMachineGroupRequest, DescribeExportsResponse, ApplyConfigToMachineGroupRequest, DescribeConfigExtrasRequest, CreateAlarmNoticeRequest, DescribeIndexResponse, DescribeMachineGroupConfigsRequest, ModifyConfigExtraRequest, ModifyLogsetRequest, DeleteMachineGroupInfoResponse, ModifyCosRechargeRequest, DescribeLogsetsRequest, DeleteTopicResponse, RetryShipperTaskRequest, CreateExportResponse, MergePartitionResponse } from "./cls_models";
+import { UploadLogResponse, CreateAlarmResponse, DeleteAlarmNoticeResponse, DescribeLogHistogramRequest, DescribeLogContextRequest, DeleteShipperRequest, DeleteLogsetResponse, DescribeCosRechargesResponse, DescribeShipperTasksResponse, CreateMachineGroupResponse, DescribeConfigMachineGroupsRequest, ModifyConfigExtraResponse, CreateLogsetRequest, DescribeShippersRequest, SearchLogResponse, DeleteTopicRequest, DescribePartitionsRequest, ModifyAlarmResponse, DescribeShipperTasksRequest, DescribeAlarmsRequest, MergePartitionRequest, DescribeShippersResponse, CreateConfigExtraResponse, ModifyShipperResponse, DeleteKafkaRechargeResponse, DescribeConfigExtrasResponse, OpenKafkaConsumerResponse, DescribeIndexRequest, DescribeConfigsResponse, DeleteMachineGroupInfoRequest, CreateLogsetResponse, DeleteMachineGroupResponse, DescribeCosRechargesRequest, CreateCosRechargeRequest, DescribeConsumerRequest, DeleteConfigExtraResponse, ModifyConsumerRequest, CreateIndexResponse, DeleteConfigFromMachineGroupResponse, CreateConsumerResponse, ModifyMachineGroupResponse, DeleteMachineGroupRequest, DescribePartitionsResponse, DescribeConfigMachineGroupsResponse, ModifyAlarmRequest, DescribeTopicsResponse, ModifyAlarmNoticeRequest, CreateAlarmRequest, DeleteExportResponse, RetryShipperTaskResponse, SplitPartitionRequest, DescribeMachineGroupConfigsResponse, CheckRechargeKafkaServerRequest, DescribeLogHistogramResponse, CloseKafkaConsumerResponse, DescribeMachineGroupsRequest, CreateIndexRequest, DescribeLogsetsResponse, DeleteConsumerResponse, DescribeTopicsRequest, GetAlarmLogResponse, CreateTopicRequest, DescribeExportsRequest, CreateKafkaRechargeResponse, OpenKafkaConsumerRequest, DeleteConfigResponse, ModifyIndexResponse, DeleteConsumerRequest, DeleteIndexRequest, DescribeConsumerResponse, UploadLogRequest, ModifyConsumerResponse, DescribeAlertRecordHistoryRequest, DescribeConfigsRequest, DeleteConfigRequest, CloseKafkaConsumerRequest, CreateExportRequest, DescribeAlarmNoticesResponse, DescribeMachineGroupsResponse, DeleteConfigExtraRequest, ModifyConfigRequest, AddMachineGroupInfoRequest, DescribeKafkaRechargesRequest, PreviewKafkaRechargeResponse, CreateShipperRequest, CreateTopicResponse, DeleteAlarmResponse, DescribeAlarmsResponse, CreateAlarmNoticeResponse, ModifyTopicResponse, CreateConfigRequest, CreateShipperResponse, DescribeKafkaRechargesResponse, DeleteIndexResponse, ModifyIndexRequest, GetAlarmLogRequest, DeleteShipperResponse, DescribeLogContextResponse, DeleteExportRequest, PreviewKafkaRechargeRequest, SplitPartitionResponse, ModifyShipperRequest, CreateKafkaRechargeRequest, DeleteKafkaRechargeRequest, CreateConfigExtraRequest, CreateConsumerRequest, ModifyConfigResponse, ModifyKafkaRechargeResponse, ModifyAlarmNoticeResponse, DescribeMachinesResponse, ModifyCosRechargeResponse, ApplyConfigToMachineGroupResponse, DeleteAlarmRequest, CreateConfigResponse, DeleteConfigFromMachineGroupRequest, CreateCosRechargeResponse, DescribeAlertRecordHistoryResponse, AddMachineGroupInfoResponse, ModifyMachineGroupRequest, DescribeAlarmNoticesRequest, ModifyTopicRequest, DescribeMachinesRequest, DeleteAlarmNoticeRequest, DeleteLogsetRequest, ModifyLogsetResponse, SearchLogRequest, CreateMachineGroupRequest, DescribeExportsResponse, ApplyConfigToMachineGroupRequest, DescribeConfigExtrasRequest, CreateAlarmNoticeRequest, DescribeIndexResponse, DescribeMachineGroupConfigsRequest, ModifyConfigExtraRequest, ModifyKafkaRechargeRequest, ModifyLogsetRequest, DeleteMachineGroupInfoResponse, CheckRechargeKafkaServerResponse, ModifyCosRechargeRequest, DescribeLogsetsRequest, DeleteTopicResponse, RetryShipperTaskRequest, CreateExportResponse, MergePartitionResponse } from "./cls_models";
 /**
  * cls client
  * @class
@@ -194,9 +194,9 @@ cls.pb.cc cls.pb.h cls.proto
      */
     DescribeLogsets(req: DescribeLogsetsRequest, cb?: (error: string, rep: DescribeLogsetsResponse) => void): Promise<DescribeLogsetsResponse>;
     /**
-     * 本接口用于修改日志集信息
+     * 本接口用于修改Kafka数据订阅任务
      */
-    ModifyLogset(req: ModifyLogsetRequest, cb?: (error: string, rep: ModifyLogsetResponse) => void): Promise<ModifyLogsetResponse>;
+    ModifyKafkaRecharge(req: ModifyKafkaRechargeRequest, cb?: (error: string, rep: ModifyKafkaRechargeResponse) => void): Promise<ModifyKafkaRechargeResponse>;
     /**
      * 本接口用于获取日志下载任务列表
      */
@@ -207,9 +207,9 @@ cls.pb.cc cls.pb.h cls.proto
      */
     ModifyIndex(req: ModifyIndexRequest, cb?: (error: string, rep: ModifyIndexResponse) => void): Promise<ModifyIndexResponse>;
     /**
-     * 本接口用于修改特殊采集配置任务，特殊采集配置应用于自建K8S环境的采集Agent
+     * 新建投递到COS的任务，【！！！注意】使用此接口，需要检查是否配置了投递COS的角色和权限。如果没有配置，请参考文档投递权限查看和配置https://cloud.tencent.com/document/product/614/71623。
      */
-    ModifyConfigExtra(req: ModifyConfigExtraRequest, cb?: (error: string, rep: ModifyConfigExtraResponse) => void): Promise<ModifyConfigExtraResponse>;
+    CreateShipper(req: CreateShipperRequest, cb?: (error: string, rep: CreateShipperResponse) => void): Promise<CreateShipperResponse>;
     /**
      * 本接口用于获取索引配置信息
      */
@@ -231,13 +231,17 @@ cls.pb.cc cls.pb.h cls.proto
      */
     DescribeConfigExtras(req: DescribeConfigExtrasRequest, cb?: (error: string, rep: DescribeConfigExtrasResponse) => void): Promise<DescribeConfigExtrasResponse>;
     /**
-     * 新建投递到COS的任务，【！！！注意】使用此接口，需要检查是否配置了投递COS的角色和权限。如果没有配置，请参考文档投递权限查看和配置https://cloud.tencent.com/document/product/614/71623。
+     * 本接口用于校验Kafka服务集群是否可以正常访问
      */
-    CreateShipper(req: CreateShipperRequest, cb?: (error: string, rep: CreateShipperResponse) => void): Promise<CreateShipperResponse>;
+    CheckRechargeKafkaServer(req: CheckRechargeKafkaServerRequest, cb?: (error: string, rep: CheckRechargeKafkaServerResponse) => void): Promise<CheckRechargeKafkaServerResponse>;
     /**
      * 本接口用于修改投递任务
      */
     ModifyConsumer(req: ModifyConsumerRequest, cb?: (error: string, rep: ModifyConsumerResponse) => void): Promise<ModifyConsumerResponse>;
+    /**
+     * 本接口用于创建Kafka数据订阅任务
+     */
+    CreateKafkaRecharge(req: CreateKafkaRechargeRequest, cb?: (error: string, rep: CreateKafkaRechargeResponse) => void): Promise<CreateKafkaRechargeResponse>;
     /**
      * 该接口用于创建通知渠道组。
      */
@@ -254,6 +258,10 @@ cls.pb.cc cls.pb.h cls.proto
      * 删除机器组
      */
     DeleteMachineGroup(req: DeleteMachineGroupRequest, cb?: (error: string, rep: DeleteMachineGroupResponse) => void): Promise<DeleteMachineGroupResponse>;
+    /**
+     * 重试失败的投递任务
+     */
+    RetryShipperTask(req: RetryShipperTaskRequest, cb?: (error: string, rep: RetryShipperTaskResponse) => void): Promise<RetryShipperTaskResponse>;
     /**
      * 本接口用于获取日志主题列表，支持分页
      */
@@ -279,6 +287,10 @@ cls.pb.cc cls.pb.h cls.proto
      */
     DeleteConfigExtra(req: DeleteConfigExtraRequest, cb?: (error: string, rep: DeleteConfigExtraResponse) => void): Promise<DeleteConfigExtraResponse>;
     /**
+     * 本接口用于获取Kafka数据订阅任务
+     */
+    DescribeKafkaRecharges(req: DescribeKafkaRechargesRequest, cb?: (error: string, rep: DescribeKafkaRechargesResponse) => void): Promise<DescribeKafkaRechargesResponse>;
+    /**
      * 本接口用于获取告警策略列表。
      */
     DescribeAlarms(req: DescribeAlarmsRequest, cb?: (error: string, rep: DescribeAlarmsResponse) => void): Promise<DescribeAlarmsResponse>;
@@ -302,6 +314,10 @@ cls.pb.cc cls.pb.h cls.proto
      * 本接口用于创建日志集，返回新创建的日志集的 ID。
      */
     CreateLogset(req: CreateLogsetRequest, cb?: (error: string, rep: CreateLogsetResponse) => void): Promise<CreateLogsetResponse>;
+    /**
+     * 本接口用于修改cos导入任务
+     */
+    ModifyCosRecharge(req: ModifyCosRechargeRequest, cb?: (error: string, rep: ModifyCosRechargeResponse) => void): Promise<ModifyCosRechargeResponse>;
     /**
      * 本接口用于分裂主题分区
      */
@@ -343,9 +359,9 @@ cls.pb.cc cls.pb.h cls.proto
      */
     DescribeShipperTasks(req: DescribeShipperTasksRequest, cb?: (error: string, rep: DescribeShipperTasksResponse) => void): Promise<DescribeShipperTasksResponse>;
     /**
-     * 修改现有的投递规则，客户如果使用此接口，需要自行处理CLS对指定bucket的写权限。
+     * 本接口用于删除Kafka数据订阅任务
      */
-    ModifyShipper(req: ModifyShipperRequest, cb?: (error: string, rep: ModifyShipperResponse) => void): Promise<ModifyShipperResponse>;
+    DeleteKafkaRecharge(req: DeleteKafkaRechargeRequest, cb?: (error: string, rep: DeleteKafkaRechargeResponse) => void): Promise<DeleteKafkaRechargeResponse>;
     /**
      * 创建采集规则配置
      */
@@ -362,6 +378,10 @@ cls.pb.cc cls.pb.h cls.proto
      * 本接口用于删除日志主题的索引配置，删除索引配置后将无法检索和查询采集到的日志。
      */
     DeleteIndex(req: DeleteIndexRequest, cb?: (error: string, rep: DeleteIndexResponse) => void): Promise<DeleteIndexResponse>;
+    /**
+     * 修改现有的投递规则，客户如果使用此接口，需要自行处理CLS对指定bucket的写权限。
+     */
+    ModifyShipper(req: ModifyShipperRequest, cb?: (error: string, rep: ModifyShipperResponse) => void): Promise<ModifyShipperResponse>;
     /**
      * 本接口用于删除告警策略。
      */
@@ -395,17 +415,21 @@ cls.pb.cc cls.pb.h cls.proto
      */
     CreateConfigExtra(req: CreateConfigExtraRequest, cb?: (error: string, rep: CreateConfigExtraResponse) => void): Promise<CreateConfigExtraResponse>;
     /**
-     * 重试失败的投递任务
+     * 本接口用于预览Kafka数据订阅任务客户日志信息
      */
-    RetryShipperTask(req: RetryShipperTaskRequest, cb?: (error: string, rep: RetryShipperTaskResponse) => void): Promise<RetryShipperTaskResponse>;
+    PreviewKafkaRecharge(req: PreviewKafkaRechargeRequest, cb?: (error: string, rep: PreviewKafkaRechargeResponse) => void): Promise<PreviewKafkaRechargeResponse>;
     /**
      * 获取采集规则配置所绑定的机器组
      */
     DescribeConfigMachineGroups(req: DescribeConfigMachineGroupsRequest, cb?: (error: string, rep: DescribeConfigMachineGroupsResponse) => void): Promise<DescribeConfigMachineGroupsResponse>;
     /**
-     * 本接口用于修改cos导入任务
+     * 本接口用于修改特殊采集配置任务，特殊采集配置应用于自建K8S环境的采集Agent
      */
-    ModifyCosRecharge(req: ModifyCosRechargeRequest, cb?: (error: string, rep: ModifyCosRechargeResponse) => void): Promise<ModifyCosRechargeResponse>;
+    ModifyConfigExtra(req: ModifyConfigExtraRequest, cb?: (error: string, rep: ModifyConfigExtraResponse) => void): Promise<ModifyConfigExtraResponse>;
+    /**
+     * 本接口用于修改日志集信息
+     */
+    ModifyLogset(req: ModifyLogsetRequest, cb?: (error: string, rep: ModifyLogsetResponse) => void): Promise<ModifyLogsetResponse>;
     /**
      * 本接口用于删除日志下载任务
      */

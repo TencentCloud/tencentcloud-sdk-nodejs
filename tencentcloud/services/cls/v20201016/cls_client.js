@@ -230,10 +230,10 @@ cls.pb.cc cls.pb.h cls.proto
         return this.request("DescribeLogsets", req, cb);
     }
     /**
-     * 本接口用于修改日志集信息
+     * 本接口用于修改Kafka数据订阅任务
      */
-    async ModifyLogset(req, cb) {
-        return this.request("ModifyLogset", req, cb);
+    async ModifyKafkaRecharge(req, cb) {
+        return this.request("ModifyKafkaRecharge", req, cb);
     }
     /**
      * 本接口用于获取日志下载任务列表
@@ -249,10 +249,10 @@ cls.pb.cc cls.pb.h cls.proto
         return this.request("ModifyIndex", req, cb);
     }
     /**
-     * 本接口用于修改特殊采集配置任务，特殊采集配置应用于自建K8S环境的采集Agent
+     * 新建投递到COS的任务，【！！！注意】使用此接口，需要检查是否配置了投递COS的角色和权限。如果没有配置，请参考文档投递权限查看和配置https://cloud.tencent.com/document/product/614/71623。
      */
-    async ModifyConfigExtra(req, cb) {
-        return this.request("ModifyConfigExtra", req, cb);
+    async CreateShipper(req, cb) {
+        return this.request("CreateShipper", req, cb);
     }
     /**
      * 本接口用于获取索引配置信息
@@ -285,16 +285,22 @@ cls.pb.cc cls.pb.h cls.proto
         return this.request("DescribeConfigExtras", req, cb);
     }
     /**
-     * 新建投递到COS的任务，【！！！注意】使用此接口，需要检查是否配置了投递COS的角色和权限。如果没有配置，请参考文档投递权限查看和配置https://cloud.tencent.com/document/product/614/71623。
+     * 本接口用于校验Kafka服务集群是否可以正常访问
      */
-    async CreateShipper(req, cb) {
-        return this.request("CreateShipper", req, cb);
+    async CheckRechargeKafkaServer(req, cb) {
+        return this.request("CheckRechargeKafkaServer", req, cb);
     }
     /**
      * 本接口用于修改投递任务
      */
     async ModifyConsumer(req, cb) {
         return this.request("ModifyConsumer", req, cb);
+    }
+    /**
+     * 本接口用于创建Kafka数据订阅任务
+     */
+    async CreateKafkaRecharge(req, cb) {
+        return this.request("CreateKafkaRecharge", req, cb);
     }
     /**
      * 该接口用于创建通知渠道组。
@@ -319,6 +325,12 @@ cls.pb.cc cls.pb.h cls.proto
      */
     async DeleteMachineGroup(req, cb) {
         return this.request("DeleteMachineGroup", req, cb);
+    }
+    /**
+     * 重试失败的投递任务
+     */
+    async RetryShipperTask(req, cb) {
+        return this.request("RetryShipperTask", req, cb);
     }
     /**
      * 本接口用于获取日志主题列表，支持分页
@@ -357,6 +369,12 @@ cls.pb.cc cls.pb.h cls.proto
         return this.request("DeleteConfigExtra", req, cb);
     }
     /**
+     * 本接口用于获取Kafka数据订阅任务
+     */
+    async DescribeKafkaRecharges(req, cb) {
+        return this.request("DescribeKafkaRecharges", req, cb);
+    }
+    /**
      * 本接口用于获取告警策略列表。
      */
     async DescribeAlarms(req, cb) {
@@ -391,6 +409,12 @@ cls.pb.cc cls.pb.h cls.proto
      */
     async CreateLogset(req, cb) {
         return this.request("CreateLogset", req, cb);
+    }
+    /**
+     * 本接口用于修改cos导入任务
+     */
+    async ModifyCosRecharge(req, cb) {
+        return this.request("ModifyCosRecharge", req, cb);
     }
     /**
      * 本接口用于分裂主题分区
@@ -453,10 +477,10 @@ cls.pb.cc cls.pb.h cls.proto
         return this.request("DescribeShipperTasks", req, cb);
     }
     /**
-     * 修改现有的投递规则，客户如果使用此接口，需要自行处理CLS对指定bucket的写权限。
+     * 本接口用于删除Kafka数据订阅任务
      */
-    async ModifyShipper(req, cb) {
-        return this.request("ModifyShipper", req, cb);
+    async DeleteKafkaRecharge(req, cb) {
+        return this.request("DeleteKafkaRecharge", req, cb);
     }
     /**
      * 创建采集规则配置
@@ -481,6 +505,12 @@ cls.pb.cc cls.pb.h cls.proto
      */
     async DeleteIndex(req, cb) {
         return this.request("DeleteIndex", req, cb);
+    }
+    /**
+     * 修改现有的投递规则，客户如果使用此接口，需要自行处理CLS对指定bucket的写权限。
+     */
+    async ModifyShipper(req, cb) {
+        return this.request("ModifyShipper", req, cb);
     }
     /**
      * 本接口用于删除告警策略。
@@ -531,10 +561,10 @@ cls.pb.cc cls.pb.h cls.proto
         return this.request("CreateConfigExtra", req, cb);
     }
     /**
-     * 重试失败的投递任务
+     * 本接口用于预览Kafka数据订阅任务客户日志信息
      */
-    async RetryShipperTask(req, cb) {
-        return this.request("RetryShipperTask", req, cb);
+    async PreviewKafkaRecharge(req, cb) {
+        return this.request("PreviewKafkaRecharge", req, cb);
     }
     /**
      * 获取采集规则配置所绑定的机器组
@@ -543,10 +573,16 @@ cls.pb.cc cls.pb.h cls.proto
         return this.request("DescribeConfigMachineGroups", req, cb);
     }
     /**
-     * 本接口用于修改cos导入任务
+     * 本接口用于修改特殊采集配置任务，特殊采集配置应用于自建K8S环境的采集Agent
      */
-    async ModifyCosRecharge(req, cb) {
-        return this.request("ModifyCosRecharge", req, cb);
+    async ModifyConfigExtra(req, cb) {
+        return this.request("ModifyConfigExtra", req, cb);
+    }
+    /**
+     * 本接口用于修改日志集信息
+     */
+    async ModifyLogset(req, cb) {
+        return this.request("ModifyLogset", req, cb);
     }
     /**
      * 本接口用于删除日志下载任务

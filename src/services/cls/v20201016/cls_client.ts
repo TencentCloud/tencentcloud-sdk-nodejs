@@ -35,6 +35,7 @@ import {
   Filter,
   DescribeConfigMachineGroupsRequest,
   ModifyConfigExtraResponse,
+  KafkaRechargeInfo,
   CreateLogsetRequest,
   DescribeShippersRequest,
   LogItem,
@@ -49,7 +50,7 @@ import {
   DescribeShippersResponse,
   CreateConfigExtraResponse,
   ModifyShipperResponse,
-  ModifyTopicRequest,
+  DeleteKafkaRechargeResponse,
   ContainerWorkLoadInfo,
   DescribeConfigExtrasResponse,
   CallBackInfo,
@@ -60,7 +61,8 @@ import {
   DeleteMachineGroupInfoRequest,
   CreateLogsetResponse,
   DeleteMachineGroupResponse,
-  Tag,
+  KafkaProtocolInfo,
+  DescribeCosRechargesRequest,
   MetaTagInfo,
   CreateCosRechargeRequest,
   ExtractRuleInfo,
@@ -92,7 +94,7 @@ import {
   RetryShipperTaskResponse,
   SplitPartitionRequest,
   DescribeMachineGroupConfigsResponse,
-  DescribeCosRechargesRequest,
+  CheckRechargeKafkaServerRequest,
   MachineGroupInfo,
   DescribeLogHistogramResponse,
   CloseKafkaConsumerResponse,
@@ -105,6 +107,7 @@ import {
   CreateTopicRequest,
   DescribeExportsRequest,
   AlarmTarget,
+  CreateKafkaRechargeResponse,
   OpenKafkaConsumerRequest,
   DeleteConfigResponse,
   ModifyIndexResponse,
@@ -115,9 +118,11 @@ import {
   ModifyConsumerResponse,
   DescribeAlertRecordHistoryRequest,
   DescribeConfigsRequest,
+  KafkaConsumerContent,
   LogsetInfo,
   DeleteConfigRequest,
   AnalysisDimensional,
+  LogRechargeRuleInfo,
   ShipperTaskInfo,
   CloseKafkaConsumerRequest,
   RuleTagInfo,
@@ -127,7 +132,9 @@ import {
   DeleteConfigExtraRequest,
   ModifyConfigRequest,
   AddMachineGroupInfoRequest,
+  DescribeKafkaRechargesRequest,
   JsonInfo,
+  PreviewKafkaRechargeResponse,
   CreateShipperRequest,
   CreateTopicResponse,
   DeleteAlarmResponse,
@@ -137,6 +144,7 @@ import {
   ModifyTopicResponse,
   CreateConfigRequest,
   CreateShipperResponse,
+  DescribeKafkaRechargesResponse,
   DeleteIndexResponse,
   AlarmAnalysisConfig,
   ModifyIndexRequest,
@@ -150,13 +158,17 @@ import {
   DescribeLogContextResponse,
   ConfigInfo,
   DeleteExportRequest,
+  PreviewKafkaRechargeRequest,
   SplitPartitionResponse,
   LogContextInfo,
   ModifyShipperRequest,
+  CreateKafkaRechargeRequest,
+  DeleteKafkaRechargeRequest,
   CreateConfigExtraRequest,
   CreateConsumerRequest,
   AlarmNotice,
   ModifyConfigResponse,
+  ModifyKafkaRechargeResponse,
   ModifyAlarmNoticeResponse,
   DescribeMachinesResponse,
   ModifyCosRechargeResponse,
@@ -175,6 +187,7 @@ import {
   ModifyMachineGroupRequest,
   DescribeAlarmNoticesRequest,
   NoticeReceiver,
+  ModifyTopicRequest,
   Ckafka,
   DescribeMachinesRequest,
   DeleteAlarmNoticeRequest,
@@ -184,6 +197,7 @@ import {
   MonitorTime,
   SearchLogRequest,
   CreateMachineGroupRequest,
+  Tag,
   DescribeExportsResponse,
   ApplyConfigToMachineGroupRequest,
   ContainerFileInfo,
@@ -194,8 +208,10 @@ import {
   HistogramInfo,
   DescribeMachineGroupConfigsRequest,
   ModifyConfigExtraRequest,
+  ModifyKafkaRechargeRequest,
   ModifyLogsetRequest,
   DeleteMachineGroupInfoResponse,
+  CheckRechargeKafkaServerResponse,
   ModifyCosRechargeRequest,
   DescribeLogsetsRequest,
   ParquetInfo,
@@ -454,13 +470,13 @@ cls.pb.cc cls.pb.h cls.proto
   }
 
   /**
-   * 本接口用于修改日志集信息
+   * 本接口用于修改Kafka数据订阅任务
    */
-  async ModifyLogset(
-    req: ModifyLogsetRequest,
-    cb?: (error: string, rep: ModifyLogsetResponse) => void
-  ): Promise<ModifyLogsetResponse> {
-    return this.request("ModifyLogset", req, cb)
+  async ModifyKafkaRecharge(
+    req: ModifyKafkaRechargeRequest,
+    cb?: (error: string, rep: ModifyKafkaRechargeResponse) => void
+  ): Promise<ModifyKafkaRechargeResponse> {
+    return this.request("ModifyKafkaRecharge", req, cb)
   }
 
   /**
@@ -485,13 +501,13 @@ cls.pb.cc cls.pb.h cls.proto
   }
 
   /**
-   * 本接口用于修改特殊采集配置任务，特殊采集配置应用于自建K8S环境的采集Agent
+   * 新建投递到COS的任务，【！！！注意】使用此接口，需要检查是否配置了投递COS的角色和权限。如果没有配置，请参考文档投递权限查看和配置https://cloud.tencent.com/document/product/614/71623。
    */
-  async ModifyConfigExtra(
-    req: ModifyConfigExtraRequest,
-    cb?: (error: string, rep: ModifyConfigExtraResponse) => void
-  ): Promise<ModifyConfigExtraResponse> {
-    return this.request("ModifyConfigExtra", req, cb)
+  async CreateShipper(
+    req: CreateShipperRequest,
+    cb?: (error: string, rep: CreateShipperResponse) => void
+  ): Promise<CreateShipperResponse> {
+    return this.request("CreateShipper", req, cb)
   }
 
   /**
@@ -545,13 +561,13 @@ cls.pb.cc cls.pb.h cls.proto
   }
 
   /**
-   * 新建投递到COS的任务，【！！！注意】使用此接口，需要检查是否配置了投递COS的角色和权限。如果没有配置，请参考文档投递权限查看和配置https://cloud.tencent.com/document/product/614/71623。
+   * 本接口用于校验Kafka服务集群是否可以正常访问
    */
-  async CreateShipper(
-    req: CreateShipperRequest,
-    cb?: (error: string, rep: CreateShipperResponse) => void
-  ): Promise<CreateShipperResponse> {
-    return this.request("CreateShipper", req, cb)
+  async CheckRechargeKafkaServer(
+    req: CheckRechargeKafkaServerRequest,
+    cb?: (error: string, rep: CheckRechargeKafkaServerResponse) => void
+  ): Promise<CheckRechargeKafkaServerResponse> {
+    return this.request("CheckRechargeKafkaServer", req, cb)
   }
 
   /**
@@ -562,6 +578,16 @@ cls.pb.cc cls.pb.h cls.proto
     cb?: (error: string, rep: ModifyConsumerResponse) => void
   ): Promise<ModifyConsumerResponse> {
     return this.request("ModifyConsumer", req, cb)
+  }
+
+  /**
+   * 本接口用于创建Kafka数据订阅任务
+   */
+  async CreateKafkaRecharge(
+    req: CreateKafkaRechargeRequest,
+    cb?: (error: string, rep: CreateKafkaRechargeResponse) => void
+  ): Promise<CreateKafkaRechargeResponse> {
+    return this.request("CreateKafkaRecharge", req, cb)
   }
 
   /**
@@ -602,6 +628,16 @@ cls.pb.cc cls.pb.h cls.proto
     cb?: (error: string, rep: DeleteMachineGroupResponse) => void
   ): Promise<DeleteMachineGroupResponse> {
     return this.request("DeleteMachineGroup", req, cb)
+  }
+
+  /**
+   * 重试失败的投递任务
+   */
+  async RetryShipperTask(
+    req: RetryShipperTaskRequest,
+    cb?: (error: string, rep: RetryShipperTaskResponse) => void
+  ): Promise<RetryShipperTaskResponse> {
+    return this.request("RetryShipperTask", req, cb)
   }
 
   /**
@@ -665,6 +701,16 @@ cls.pb.cc cls.pb.h cls.proto
   }
 
   /**
+   * 本接口用于获取Kafka数据订阅任务
+   */
+  async DescribeKafkaRecharges(
+    req: DescribeKafkaRechargesRequest,
+    cb?: (error: string, rep: DescribeKafkaRechargesResponse) => void
+  ): Promise<DescribeKafkaRechargesResponse> {
+    return this.request("DescribeKafkaRecharges", req, cb)
+  }
+
+  /**
    * 本接口用于获取告警策略列表。
    */
   async DescribeAlarms(
@@ -722,6 +768,16 @@ cls.pb.cc cls.pb.h cls.proto
     cb?: (error: string, rep: CreateLogsetResponse) => void
   ): Promise<CreateLogsetResponse> {
     return this.request("CreateLogset", req, cb)
+  }
+
+  /**
+   * 本接口用于修改cos导入任务
+   */
+  async ModifyCosRecharge(
+    req: ModifyCosRechargeRequest,
+    cb?: (error: string, rep: ModifyCosRechargeResponse) => void
+  ): Promise<ModifyCosRechargeResponse> {
+    return this.request("ModifyCosRecharge", req, cb)
   }
 
   /**
@@ -825,13 +881,13 @@ cls.pb.cc cls.pb.h cls.proto
   }
 
   /**
-   * 修改现有的投递规则，客户如果使用此接口，需要自行处理CLS对指定bucket的写权限。
+   * 本接口用于删除Kafka数据订阅任务
    */
-  async ModifyShipper(
-    req: ModifyShipperRequest,
-    cb?: (error: string, rep: ModifyShipperResponse) => void
-  ): Promise<ModifyShipperResponse> {
-    return this.request("ModifyShipper", req, cb)
+  async DeleteKafkaRecharge(
+    req: DeleteKafkaRechargeRequest,
+    cb?: (error: string, rep: DeleteKafkaRechargeResponse) => void
+  ): Promise<DeleteKafkaRechargeResponse> {
+    return this.request("DeleteKafkaRecharge", req, cb)
   }
 
   /**
@@ -872,6 +928,16 @@ cls.pb.cc cls.pb.h cls.proto
     cb?: (error: string, rep: DeleteIndexResponse) => void
   ): Promise<DeleteIndexResponse> {
     return this.request("DeleteIndex", req, cb)
+  }
+
+  /**
+   * 修改现有的投递规则，客户如果使用此接口，需要自行处理CLS对指定bucket的写权限。
+   */
+  async ModifyShipper(
+    req: ModifyShipperRequest,
+    cb?: (error: string, rep: ModifyShipperResponse) => void
+  ): Promise<ModifyShipperResponse> {
+    return this.request("ModifyShipper", req, cb)
   }
 
   /**
@@ -955,13 +1021,13 @@ cls.pb.cc cls.pb.h cls.proto
   }
 
   /**
-   * 重试失败的投递任务
+   * 本接口用于预览Kafka数据订阅任务客户日志信息
    */
-  async RetryShipperTask(
-    req: RetryShipperTaskRequest,
-    cb?: (error: string, rep: RetryShipperTaskResponse) => void
-  ): Promise<RetryShipperTaskResponse> {
-    return this.request("RetryShipperTask", req, cb)
+  async PreviewKafkaRecharge(
+    req: PreviewKafkaRechargeRequest,
+    cb?: (error: string, rep: PreviewKafkaRechargeResponse) => void
+  ): Promise<PreviewKafkaRechargeResponse> {
+    return this.request("PreviewKafkaRecharge", req, cb)
   }
 
   /**
@@ -975,13 +1041,23 @@ cls.pb.cc cls.pb.h cls.proto
   }
 
   /**
-   * 本接口用于修改cos导入任务
+   * 本接口用于修改特殊采集配置任务，特殊采集配置应用于自建K8S环境的采集Agent
    */
-  async ModifyCosRecharge(
-    req: ModifyCosRechargeRequest,
-    cb?: (error: string, rep: ModifyCosRechargeResponse) => void
-  ): Promise<ModifyCosRechargeResponse> {
-    return this.request("ModifyCosRecharge", req, cb)
+  async ModifyConfigExtra(
+    req: ModifyConfigExtraRequest,
+    cb?: (error: string, rep: ModifyConfigExtraResponse) => void
+  ): Promise<ModifyConfigExtraResponse> {
+    return this.request("ModifyConfigExtra", req, cb)
+  }
+
+  /**
+   * 本接口用于修改日志集信息
+   */
+  async ModifyLogset(
+    req: ModifyLogsetRequest,
+    cb?: (error: string, rep: ModifyLogsetResponse) => void
+  ): Promise<ModifyLogsetResponse> {
+    return this.request("ModifyLogset", req, cb)
   }
 
   /**

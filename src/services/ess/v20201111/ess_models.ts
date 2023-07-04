@@ -3548,11 +3548,11 @@ export interface CreatePrepareFlowRequest {
  */
 export interface ApproverOption {
   /**
-   * 是否可以拒签 false-可以拒签,默认 true-不可以拒签
+   * 是否可以拒签 默认false-可以拒签 true-不可以拒签
    */
   NoRefuse?: boolean
   /**
-   * 是否可以转发 false-可以转发,默认 true-不可以转发
+   * 是否可以转发 默认false-可以转发 true-不可以转发
    */
   NoTransfer?: boolean
 }
