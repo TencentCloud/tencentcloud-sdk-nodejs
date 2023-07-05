@@ -22,13 +22,16 @@ import {
   PodSpecInfo,
   PodSaleSpec,
   ScaleOutInstanceResponse,
+  ImpalaQuery,
   PodVolume,
   SyncPodStateResponse,
   CreateInstanceResponse,
+  PersistentVolumeContext,
   TerminateTasksRequest,
   HostVolumeContext,
   ScaleOutClusterRequest,
   DiskSpecInfo,
+  HiveQuery,
   Step,
   DescribeEmrApplicationStaticsRequest,
   UserManagerFilter,
@@ -48,8 +51,9 @@ import {
   AddUsersForUserManagerResponse,
   EmrProductConfigOutter,
   VPCSettings,
-  DescribeInstancesListResponse,
+  CustomServiceDefine,
   DescribeInstanceRenewNodesRequest,
+  YarnApplication,
   JobResult,
   PartDetailPriceItem,
   DependService,
@@ -70,31 +74,34 @@ import {
   RenewInstancesInfo,
   RunJobFlowResponse,
   StartStopServiceOrMonitorResponse,
-  MultiDisk,
+  DescribeHiveQueriesResponse,
   PodNewParameter,
-  SearchItem,
+  DescribeInstanceRenewNodesResponse,
   MultiZoneSetting,
-  TerminateInstanceResponse,
+  DescribeYarnApplicationsRequest,
   InquiryPriceUpdateInstanceResponse,
   NewResourceSpec,
-  PersistentVolumeContext,
+  DiskGroup,
   ScaleOutNodeConfig,
   DeleteUserManagerUserListRequest,
   DescribeResourceScheduleResponse,
+  MultiDisk,
   TerminateClusterNodesResponse,
   ModifyResourceSchedulerRequest,
   LoginSettings,
   RunJobFlowRequest,
   PriceResource,
-  CustomServiceDefine,
+  DescribeHiveQueriesRequest,
   CreateClusterResponse,
   SubnetInfo,
   DescribeCvmQuotaResponse,
+  SearchItem,
   CreateClusterRequest,
   UserAndGroup,
   BootstrapAction,
-  DescribeCvmQuotaRequest,
   DescribeClusterNodesRequest,
+  DescribeCvmQuotaRequest,
+  DescribeImpalaQueriesRequest,
   ComponentBasicRestartInfo,
   CreateInstanceRequest,
   Execution,
@@ -106,10 +113,12 @@ import {
   DescribeInstancesListRequest,
   OutterResource,
   OpScope,
+  DescribeInstancesListResponse,
   DeleteUserManagerUserListResponse,
   ModifyResourcePoolsResponse,
   TerminateTasksResponse,
   DescribeInstancesResponse,
+  DescribeYarnApplicationsResponse,
   DescribeUsersForUserManagerResponse,
   InquiryPriceRenewInstanceRequest,
   CdbInfo,
@@ -136,10 +145,9 @@ import {
   Filters,
   DescribeEmrApplicationStaticsResponse,
   InquirePriceRenewEmrRequest,
-  DescribeInstanceRenewNodesResponse,
+  DescribeImpalaQueriesResponse,
   CustomMetaDBInfo,
   UserManagerUserBriefInfo,
-  DiskGroup,
   InquiryPriceScaleOutInstanceResponse,
   ModifyResourceSchedulerResponse,
   VirtualPrivateCloud,
@@ -154,6 +162,7 @@ import {
   ModifyResourcePoolsRequest,
   DescribeJobFlowResponse,
   InstanceChargePrepaid,
+  TerminateInstanceResponse,
 } from "./emr_models"
 
 /**
@@ -163,6 +172,16 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("emr.tencentcloudapi.com", "2019-01-03", clientConfig)
+  }
+
+  /**
+   * DescribeYarnApplications
+   */
+  async DescribeYarnApplications(
+    req: DescribeYarnApplicationsRequest,
+    cb?: (error: string, rep: DescribeYarnApplicationsResponse) => void
+  ): Promise<DescribeYarnApplicationsResponse> {
+    return this.request("DescribeYarnApplications", req, cb)
   }
 
   /**
@@ -206,13 +225,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询流程任务
+   * DescribeImpalaQueries
    */
-  async DescribeJobFlow(
-    req: DescribeJobFlowRequest,
-    cb?: (error: string, rep: DescribeJobFlowResponse) => void
-  ): Promise<DescribeJobFlowResponse> {
-    return this.request("DescribeJobFlow", req, cb)
+  async DescribeImpalaQueries(
+    req: DescribeImpalaQueriesRequest,
+    cb?: (error: string, rep: DescribeImpalaQueriesResponse) => void
+  ): Promise<DescribeImpalaQueriesResponse> {
+    return this.request("DescribeImpalaQueries", req, cb)
+  }
+
+  /**
+   * 修改YARN资源调度的资源配置
+   */
+  async ModifyResourceScheduleConfig(
+    req: ModifyResourceScheduleConfigRequest,
+    cb?: (error: string, rep: ModifyResourceScheduleConfigResponse) => void
+  ): Promise<ModifyResourceScheduleConfigResponse> {
+    return this.request("ModifyResourceScheduleConfig", req, cb)
   }
 
   /**
@@ -388,13 +417,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改YARN资源调度的资源配置
+   * 查询流程任务
    */
-  async ModifyResourceScheduleConfig(
-    req: ModifyResourceScheduleConfigRequest,
-    cb?: (error: string, rep: ModifyResourceScheduleConfigResponse) => void
-  ): Promise<ModifyResourceScheduleConfigResponse> {
-    return this.request("ModifyResourceScheduleConfig", req, cb)
+  async DescribeJobFlow(
+    req: DescribeJobFlowRequest,
+    cb?: (error: string, rep: DescribeJobFlowResponse) => void
+  ): Promise<DescribeJobFlowResponse> {
+    return this.request("DescribeJobFlow", req, cb)
+  }
+
+  /**
+   * 获取hive查询信息
+   */
+  async DescribeHiveQueries(
+    req: DescribeHiveQueriesRequest,
+    cb?: (error: string, rep: DescribeHiveQueriesResponse) => void
+  ): Promise<DescribeHiveQueriesResponse> {
+    return this.request("DescribeHiveQueries", req, cb)
   }
 
   /**

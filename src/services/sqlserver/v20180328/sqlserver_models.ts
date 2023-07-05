@@ -290,7 +290,7 @@ export interface CreateBasicDBInstancesResponse {
   /**
    * 订单名称
    */
-  DealName: string
+  DealName?: string
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1859,11 +1859,11 @@ export interface InquiryPriceCreateDBInstancesResponse {
   /**
    * 未打折前价格，其值除以100表示多少钱。例如10010表示100.10元
    */
-  OriginalPrice: number
+  OriginalPrice?: number
   /**
    * 实际需要支付的价格，其值除以100表示多少钱。例如10010表示100.10元
    */
-  Price: number
+  Price?: number
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1981,7 +1981,7 @@ export interface InquiryPriceCreateDBInstancesRequest {
    */
   GoodsNum?: number
   /**
-   * sqlserver版本，目前只支持：2008R2（SQL Server 2008 Enterprise），2012SP3（SQL Server 2012 Enterprise），2016SP1（SQL Server 2016 Enterprise），201602（SQL Server 2016 Standard）2017（SQL Server 2017 Enterprise）版本。默认为2008R2版本
+   * sqlserver版本，目前所有支持的版本有：2008R2 (SQL Server 2008 R2 Enterprise)，2012SP3 (SQL Server 2012 Enterprise)，201202 (SQL Server 2012 Standard)，2014SP2 (SQL Server 2014 Enterprise)，201402 (SQL Server 2014 Standard)，2016SP1 (SQL Server 2016 Enterprise)，201602 (SQL Server 2016 Standard)，2017 (SQL Server 2017 Enterprise)，201702 (SQL Server 2017 Standard)，2019 (SQL Server 2019 Enterprise)，201902 (SQL Server 2019 Standard)。每个地域支持售卖的版本不同，可通过DescribeProductConfig接口来拉取每个地域可售卖的版本信息。不填，默认为版本2008R2。
    */
   DBVersion?: string
   /**
@@ -1989,11 +1989,12 @@ export interface InquiryPriceCreateDBInstancesRequest {
    */
   Cpu?: number
   /**
-   * 购买实例的类型 HA-高可用型(包括双机高可用，alwaysOn集群)，RO-只读副本，SI-基础版，默认取值HA
+   * 购买实例的类型 HA-高可用型(包括双机高可用，alwaysOn集群)，RO-只读副本型，SI-单节点型,cvmHA-新版高可用,cvmRO-新版只读
    */
   InstanceType?: string
   /**
-   * 购买实例的宿主机类型，PM-物理机, CLOUD_PREMIUM-虚拟机高性能云盘，CLOUD_SSD-虚拟机SSD云盘，默认取值PM
+   * 购买实例的宿主机类型，PM-物理机, CLOUD_PREMIUM-虚拟机高性能云盘，CLOUD_SSD-虚拟机SSD云盘,
+CLOUD_HSSD-虚拟机加强型SSD云盘，CLOUD_TSSD-虚拟机极速型SSD云盘，CLOUD_BSSD-虚拟机通用型SSD云盘
    */
   MachineType?: string
 }
@@ -2205,7 +2206,7 @@ export interface CreateCloudReadOnlyDBInstancesRequest {
    */
   InstanceChargeType?: string
   /**
-   * 本次购买几个只读实例，默认值为1。
+   * 本次购买几个只读实例，默认值为2。
    */
   GoodsNum?: number
   /**
@@ -2755,7 +2756,7 @@ export interface CreateReadOnlyDBInstancesRequest {
    */
   InstanceChargeType?: string
   /**
-   * 本次购买几个只读实例，默认值为1。
+   * 本次购买几个只读实例，默认值为2。
    */
   GoodsNum?: number
   /**
@@ -3104,7 +3105,7 @@ export interface CreateReadOnlyDBInstancesResponse {
   /**
    * 订单名称数组
    */
-  DealNames: Array<string>
+  DealNames?: Array<string>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4441,7 +4442,7 @@ export interface CreateBasicDBInstancesRequest {
    */
   VpcId: string
   /**
-   * 购买实例的宿主机类型, CLOUD_PREMIUM-虚拟机高性能云盘，CLOUD_SSD-虚拟机SSD云盘
+   * 购买实例的宿主机类型，CLOUD_PREMIUM-虚拟机高性能云盘，CLOUD_SSD-虚拟机SSD云盘,CLOUD_HSSD-虚拟机加强型SSD云盘，CLOUD_TSSD-虚拟机极速型SSD云盘，CLOUD_BSSD-虚拟机通用型SSD云盘
    */
   MachineType: string
   /**
@@ -4457,7 +4458,7 @@ export interface CreateBasicDBInstancesRequest {
    */
   GoodsNum?: number
   /**
-   * sqlserver版本，目前只支持：2008R2（SQL Server 2008 Enterprise），2012SP3（SQL Server 2012 Enterprise），2016SP1（SQL Server 2016 Enterprise），201602（SQL Server 2016 Standard），2017（SQL Server 2017 Enterprise），201202（SQL Server 2012 Standard），201402（SQL Server 2014 Standard），2014SP2（SQL Server 2014 Enterprise），201702（SQL Server 2017 Standard）版本。每个地域支持售卖的版本不同，可通过DescribeProductConfig接口来拉取每个地域可售卖的版本信息。不填，默认为版本2008R2。
+   * sqlserver版本，目前所有支持的版本有：2008R2 (SQL Server 2008 R2 Enterprise)，2012SP3 (SQL Server 2012 Enterprise)，201202 (SQL Server 2012 Standard)，2014SP2 (SQL Server 2014 Enterprise)，201402 (SQL Server 2014 Standard)，2016SP1 (SQL Server 2016 Enterprise)，201602 (SQL Server 2016 Standard)，2017 (SQL Server 2017 Enterprise)，201702 (SQL Server 2017 Standard)，2019 (SQL Server 2019 Enterprise)，201902 (SQL Server 2019 Standard)。每个地域支持售卖的版本不同，可通过DescribeProductConfig接口来拉取每个地域可售卖的版本信息。不填，默认为版本2008R2。
    */
   DBVersion?: string
   /**

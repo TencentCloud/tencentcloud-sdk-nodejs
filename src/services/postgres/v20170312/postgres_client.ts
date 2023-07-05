@@ -814,7 +814,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（IsolateDBInstances）用于隔离实例
+   * 本接口（IsolateDBInstances）用于隔离实例。
    */
   async IsolateDBInstances(
     req: IsolateDBInstancesRequest,

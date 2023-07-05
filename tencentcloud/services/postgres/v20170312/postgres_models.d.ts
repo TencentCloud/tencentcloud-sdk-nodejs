@@ -892,11 +892,16 @@ export interface ModifyDBInstanceDeploymentRequest {
      */
     DBInstanceId: string;
     /**
-     * 实例节点信息。
+     * 实例节点部署信息，支持多可用区部署时需要指定每个节点的部署可用区信息。
+  可用区信息可以通过调用 [DescribeZones](https://cloud.tencent.com/document/api/409/16769) 接口的返回值中的Zone字段来获取。
      */
     DBNodeSet: Array<DBNode>;
     /**
-     * 切换时间。默认为 立即切换，入参为 0 ：立即切换 。1：指定时间切换。2：维护时间窗口内切换
+     * 指定实例配置完成变更后的切换时间。
+  <li>0：立即切换
+  <li>1：指定时间切换
+  <li>2：维护时间窗口内切换
+  默认值：0
      */
     SwitchTag: number;
     /**
@@ -1670,7 +1675,10 @@ export interface ModifyDBInstanceSpecRequest {
      */
     Storage: number;
     /**
-     * 是否自动使用代金券,1是,0否，默认不使用。
+     * 是否自动使用代金券：
+  <li>0：否
+  <li>1：是
+  默认值：0
      */
     AutoVoucher?: number;
     /**
@@ -1682,7 +1690,11 @@ export interface ModifyDBInstanceSpecRequest {
      */
     ActivityId?: number;
     /**
-     * 指定实例配置完成变更后的切换时间，默认为 立即切换，入参为 0 ：立即切换 。1：指定时间切换。2：维护时间窗口内切换。
+     * 指定实例配置完成变更后的切换时间。
+  <li>0：立即切换
+  <li>1：指定时间切换
+  <li>2：维护时间窗口内切换
+  默认值：0
      */
     SwitchTag?: number;
     /**
@@ -2668,7 +2680,9 @@ export interface DescribeParamsEventResponse {
  */
 export interface ModifyDBInstanceSecurityGroupsRequest {
     /**
-     * 实例或只读组要绑定的安全组列表
+     * 实例或只读组要绑定的安全组列表。
+  安全组信息可以通过调用 [DescribeSecurityGroups](https://cloud.tencent.com/document/api/215/15808) 的返回值中的sgId字段来查询。
+  
      */
     SecurityGroupIdSet: Array<string>;
     /**
@@ -2981,7 +2995,8 @@ export interface ModifyDBInstanceNameRequest {
      */
     DBInstanceId: string;
     /**
-     * 新的数据库实例名字
+     * 实例名称，仅支持长度小于60的中文/英文/数字/"_"/"-"，不指定实例名称则默认显示"未命名"。
+  
      */
     InstanceName: string;
 }
@@ -4313,19 +4328,24 @@ export interface RegionInfo {
  */
 export interface DisIsolateDBInstancesRequest {
     /**
-     * 资源ID列表。注意：当前已不支持同时解隔离多个实例，这里只能传入单个实例ID。
+     * 实例ID列表。注意：当前已不支持同时解隔离多个实例，这里只能传入单个实例ID。
      */
     DBInstanceIdSet: Array<string>;
     /**
-     * 包年包月实例解隔离时购买时常 以月为单位
+     * 购买时长，单位：月。
+  <li>预付费：支持1,2,3,4,5,6,7,8,9,10,11,12,24,36
+  <li>后付费：只支持1
      */
     Period?: number;
     /**
-     * 是否使用代金券：true-使用,false-不使用，默认不使用
+     * 是否使用代金券：
+  <li>true：使用
+  <li>false：不使用
+  默认值：false
      */
     AutoVoucher?: boolean;
     /**
-     * 代金券id列表
+     * 代金券id列表。
      */
     VoucherIds?: Array<string>;
 }
@@ -4523,19 +4543,30 @@ export interface ModifyDBInstanceChargeTypeRequest {
      */
     DBInstanceId: string;
     /**
-     * 实例计费类型。目前支持：PREPAID（预付费，即包年包月），POSTPAID_BY_HOUR（后付费，即按量计费）。默认值：PREPAID。
+     * 实例计费类型，目前支持：
+  <li>PREPAID：预付费，即包年包月
+  <li>POSTPAID_BY_HOUR：后付费，即按量计费
+  默认值：PREPAID
      */
     InstanceChargeType: string;
     /**
-     * 购买时长，单位：月。目前只支持1,2,3,4,5,6,7,8,9,10,11,12,24,36这些值，按量计费模式下该参数传1。
+     * 购买时长，单位：月。
+  <li>预付费：支持1,2,3,4,5,6,7,8,9,10,11,12,24,36
+  <li>后付费：只支持1
      */
     Period: number;
     /**
-     * 续费标记：0-正常续费（默认）；1-自动续费。
+     * 续费标记：
+  <li>0：手动续费
+  <li>1：自动续费
+  默认值：0
      */
     AutoRenewFlag?: number;
     /**
-     * 是否自动使用代金券,1是,0否，默认不使用
+     * 是否自动使用代金券：
+  <li>0：否
+  <li>1：是
+  默认值：0
      */
     AutoVoucher?: number;
 }
@@ -4779,18 +4810,20 @@ export interface DescribeDBXlogsResponse {
  */
 export interface UpgradeDBInstanceKernelVersionRequest {
     /**
-     * 实例ID
+     * 实例ID。
      */
     DBInstanceId: string;
     /**
-     * 升级的目标内核版本号。可以通过接口DescribeDBVersions的返回字段AvailableUpgradeTarget获取。
+     * 升级的目标内核版本号。可以通过接口[DescribeDBVersions](https://cloud.tencent.com/document/api/409/89018)的返回字段AvailableUpgradeTarget获取。
+  
      */
     TargetDBKernelVersion: string;
     /**
-     * 指定实例升级内核版本号完成后的切换时间。可选值，
-  0：立即切换（默认值）。
-  1：指定时间切换。
-  2：维护时间窗口内切换。
+     * 指定实例升级内核版本号完成后的切换时间。可选值:
+  <li>0：立即切换
+  <li>1：指定时间切换
+  <li>2：维护时间窗口内切换
+  默认值：0
      */
     SwitchTag?: number;
     /**
@@ -4802,9 +4835,10 @@ export interface UpgradeDBInstanceKernelVersionRequest {
      */
     SwitchEndTime?: string;
     /**
-     * 是否对本次升级实例内核版本号操作执行预检查。可选值，
-  true：执行预检查操作，不升级内核版本号。检查项目包含请求参数、内核版本号兼容性、实例参数等。
-  false：发送正常请求（默认值），通过检查后直接升级内核版本号。
+     * 是否对本次升级实例内核版本号操作执行预检查。
+  <li>true：执行预检查操作，不升级内核版本号。检查项目包含请求参数、内核版本号兼容性、实例参数等。
+  <li>false：发送正常请求（默认值），通过检查后直接升级内核版本号。
+  默认值：false
      */
     DryRun?: boolean;
 }

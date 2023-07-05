@@ -1760,6 +1760,29 @@ export interface PhaseData {
     AppName?: string;
 }
 /**
+ * DescribeRawScanLogs请求参数结构体
+ */
+export interface DescribeRawScanLogsRequest {
+    /**
+     * 企业ID, 默认为当前企业
+  如果有渠道权限，可以传 0 会查渠道下所有的企业
+     */
+    CorpId?: number;
+    /**
+     * 分页数量，默认为 100，最大为 1000
+     */
+    PageSize?: number;
+    /**
+     * 当前分页，默认为 1
+     */
+    PageNumber?: number;
+    /**
+     * 从哪个日志后查询
+  即: LogId > $AfterLogId
+     */
+    AfterLogId?: number;
+}
+/**
  * DeleteProduct请求参数结构体
  */
 export interface DeleteProductRequest {
@@ -2136,6 +2159,62 @@ export interface CreateTraceCodesAsyncResponse {
     RequestId?: string;
 }
 /**
+ * 原始扫码日志
+ */
+export interface RawScanLog {
+    /**
+     * 日志ID
+     */
+    LogId?: number;
+    /**
+     * 微信小程序openid
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Openid?: string;
+    /**
+     * 扫码时间
+     */
+    CreateTime?: string;
+    /**
+     * 溯源码
+     */
+    Code?: string;
+    /**
+     * 企业ID
+     */
+    CorpId?: number;
+    /**
+     * 商户ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MerchantId?: string;
+    /**
+     * 商品ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ProductId?: string;
+    /**
+     * 批次ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    BatchId?: string;
+    /**
+     * 省份
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Province?: string;
+    /**
+     * 地市
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    City?: string;
+    /**
+     * 区/县
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    District?: string;
+}
+/**
  * DescribeCustomRules请求参数结构体
  */
 export interface DescribeCustomRulesRequest {
@@ -2393,15 +2472,15 @@ export interface ModifyTraceCodeUnlinkResponse {
     /**
      * 成功解绑溯源码的数量
      */
-    UnlinkCnt: number;
+    UnlinkCnt?: number;
     /**
      * 当前批次的码数量
      */
-    CodeCnt: number;
+    CodeCnt?: number;
     /**
      * 批次ID
      */
-    BatchId: string;
+    BatchId?: string;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2655,6 +2734,19 @@ export interface DescribeMerchantsResponse {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     TotalCount: number;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * DescribeRawScanLogs返回参数结构体
+ */
+export interface DescribeRawScanLogsResponse {
+    /**
+     * 原始扫码日志
+     */
+    ScanLogs?: Array<RawScanLog>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */

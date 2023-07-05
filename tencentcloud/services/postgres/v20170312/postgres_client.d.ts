@@ -236,7 +236,7 @@ export declare class Client extends AbstractClient {
      */
     DeleteLogBackup(req: DeleteLogBackupRequest, cb?: (error: string, rep: DeleteLogBackupResponse) => void): Promise<DeleteLogBackupResponse>;
     /**
-     * 本接口（IsolateDBInstances）用于隔离实例
+     * 本接口（IsolateDBInstances）用于隔离实例。
      */
     IsolateDBInstances(req: IsolateDBInstancesRequest, cb?: (error: string, rep: IsolateDBInstancesResponse) => void): Promise<IsolateDBInstancesResponse>;
     /**

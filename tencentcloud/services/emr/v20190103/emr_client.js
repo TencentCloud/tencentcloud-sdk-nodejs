@@ -28,6 +28,12 @@ class Client extends abstract_client_1.AbstractClient {
         super("emr.tencentcloudapi.com", "2019-01-03", clientConfig);
     }
     /**
+     * DescribeYarnApplications
+     */
+    async DescribeYarnApplications(req, cb) {
+        return this.request("DescribeYarnApplications", req, cb);
+    }
+    /**
      * 销毁EMR实例。此接口仅支持弹性MapReduce正式计费版本。
      */
     async TerminateInstance(req, cb) {
@@ -52,10 +58,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("InquiryPriceRenewInstance", req, cb);
     }
     /**
-     * 查询流程任务
+     * DescribeImpalaQueries
      */
-    async DescribeJobFlow(req, cb) {
-        return this.request("DescribeJobFlow", req, cb);
+    async DescribeImpalaQueries(req, cb) {
+        return this.request("DescribeImpalaQueries", req, cb);
+    }
+    /**
+     * 修改YARN资源调度的资源配置
+     */
+    async ModifyResourceScheduleConfig(req, cb) {
+        return this.request("ModifyResourceScheduleConfig", req, cb);
     }
     /**
      * 集群续费询价。
@@ -162,10 +174,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeResourceSchedule", req, cb);
     }
     /**
-     * 修改YARN资源调度的资源配置
+     * 查询流程任务
      */
-    async ModifyResourceScheduleConfig(req, cb) {
-        return this.request("ModifyResourceScheduleConfig", req, cb);
+    async DescribeJobFlow(req, cb) {
+        return this.request("DescribeJobFlow", req, cb);
+    }
+    /**
+     * 获取hive查询信息
+     */
+    async DescribeHiveQueries(req, cb) {
+        return this.request("DescribeHiveQueries", req, cb);
     }
     /**
      * 用于启停服务 重启服务等功能

@@ -484,7 +484,8 @@ export interface CreateIntegrationEmployeesRequest {
   Operator: UserInfo
   /**
    * 待创建员工的信息，不超过20个。
-Mobile和DisplayName必填,OpenId、Email和Department.DepartmentId选填，其他字段暂不支持。
+所有类型的企业支持的入参：Mobile和DisplayName必填,OpenId、Email和Department.DepartmentId选填，其他字段暂不支持。
+企微类型的企业特有支持的入参：WeworkOpenId，传入此字段无需在传入其他信息
    */
   Employees: Array<Staff>
   /**
@@ -1793,6 +1794,18 @@ REJECT: 拒绝
    * 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填
    */
   Agent?: Agent
+  /**
+   * 审核签署节点使用 非必填 如果填写则审核该签署节点。给个人审核时必填。
+   */
+  RecipientId?: string
+  /**
+   * 操作类型：
+操作类型，默认：SignReview；SignReview:签署审核
+注：接口通过该字段区分操作类型
+该字段不传或者为空，则默认为SignReview签署审核，走签署审核流程
+若发起个人审核，则指定该字段为：SignReview（注意，给个人审核时，需联系客户经理开白使用）
+   */
+  OperateType?: string
 }
 
 /**
@@ -2139,6 +2152,7 @@ export interface CreateFlowApproversRequest {
 export interface Staff {
   /**
    * 用户在电子签平台的id
+注：创建和更新场景无需填写
    */
   UserId?: string
   /**
@@ -2161,6 +2175,7 @@ export interface Staff {
   OpenId?: string
   /**
    * 员工角色
+注：创建和更新场景无需填写
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Roles?: Array<StaffRole>
@@ -2171,30 +2186,42 @@ export interface Staff {
   Department?: Department
   /**
    * 员工是否实名
+注：创建和更新场景无需填写
    */
   Verified?: boolean
   /**
    * 员工创建时间戳，单位秒
+注：创建和更新场景无需填写
    */
   CreatedOn?: number
   /**
    * 员工实名时间戳，单位秒
+注：创建和更新场景无需填写
 注意：此字段可能返回 null，表示取不到有效值。
    */
   VerifiedOn?: number
   /**
    * 员工是否离职：0-未离职，1-离职
+注：创建和更新场景无需填写
 注意：此字段可能返回 null，表示取不到有效值。
    */
   QuiteJob?: number
   /**
    * 员工离职交接人用户id
+注：创建和更新场景无需填写
    */
   ReceiveUserId?: string
   /**
    * 员工离职交接人用户OpenId
+注：创建和更新场景无需填写
    */
   ReceiveOpenId?: string
+  /**
+   * 企业微信用户账号ID
+注：仅企微类型的企业创建员工接口支持该字段
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WeworkOpenId?: string
 }
 
 /**
@@ -2786,20 +2813,24 @@ export interface SuccessCreateStaffData {
   /**
    * 员工名
    */
-  DisplayName: string
+  DisplayName?: string
   /**
    * 员工手机号
    */
-  Mobile: string
+  Mobile?: string
   /**
    * 员工在电子签平台的id
    */
-  UserId: string
+  UserId?: string
   /**
    * 提示，当创建已存在未实名用户时，该字段有值
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Note?: string
+  /**
+   * 传入的企微账号id
+   */
+  WeworkOpenId?: string
 }
 
 /**
@@ -3143,15 +3174,19 @@ export interface FailedCreateStaffData {
   /**
    * 员工名
    */
-  DisplayName: string
+  DisplayName?: string
   /**
    * 员工手机号
    */
-  Mobile: string
+  Mobile?: string
+  /**
+   * 传入的企微账号id
+   */
+  WeworkOpenId?: string
   /**
    * 失败原因
    */
-  Reason: string
+  Reason?: string
 }
 
 /**

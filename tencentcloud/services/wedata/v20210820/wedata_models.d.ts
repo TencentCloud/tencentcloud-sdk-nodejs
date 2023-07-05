@@ -3148,7 +3148,7 @@ export interface ResumeIntegrationTaskResponse {
     /**
      * 操作成功与否标识
      */
-    Data: boolean;
+    Data?: boolean;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -3561,6 +3561,36 @@ export interface RerunInstancesRequest {
     SonInstanceType: string;
 }
 /**
+ * 移除孤立文件治理项
+ */
+export interface DlcRemoveOrphanFilesInfo {
+    /**
+     * 是否启用移除孤立文件治理项：enable、none
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RemoveOrphanFilesEnable?: string;
+    /**
+     * 用于运行移除孤立文件治理项的引擎名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Engine?: string;
+    /**
+     * 移除指定天前的孤立文件
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    BeforeDays?: number;
+    /**
+     * 移除孤立文件的并行数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MaxConcurrentDeletes?: number;
+    /**
+     * 移除孤立文件治理运行周期，单位为分钟
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IntervalMin?: number;
+}
+/**
  * DescribeTemplateHistory请求参数结构体
  */
 export interface DescribeTemplateHistoryRequest {
@@ -3601,6 +3631,10 @@ export interface CommitIntegrationTaskRequest {
      * 实时任务 201   离线任务 202  默认实时任务
      */
     TaskType?: number;
+    /**
+     * 额外参数
+     */
+    ExtConfig?: Array<RecordField>;
 }
 /**
  * DescribeTableInfoList请求参数结构体
@@ -3651,7 +3685,7 @@ export interface CommitIntegrationTaskResponse {
     /**
      * 操作成功与否标识
      */
-    Data: boolean;
+    Data?: boolean;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -5577,6 +5611,14 @@ export interface GenHiveTableDDLSqlRequest {
      * 下游节点数据源ID
      */
     TargetDatasourceId?: string;
+    /**
+     * dlc upsert主键
+     */
+    UpsertKeys?: Array<string>;
+    /**
+     * dlc表治理信息
+     */
+    TableBaseInfo?: TableBaseInfo;
 }
 /**
  * DescribeRuleExecResultsByPage请求参数结构体
@@ -5627,6 +5669,27 @@ export interface LockIntegrationTaskResponse {
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * 查询实例条件(新)
+ */
+export interface SearchConditionNew {
+    /**
+     * 查询框架，必选
+     */
+    Instance: SearchConditionInstanceNew;
+    /**
+     * 查询关键字（任务Id精确匹配，任务名称模糊匹配），可选
+     */
+    Keyword?: string;
+    /**
+     * 排序顺序（asc，desc）
+     */
+    Sort?: string;
+    /**
+     * 排序列（costTime 运行耗时，startTime 开始时间，state 实例状态，curRunDate 数据时间）
+     */
+    SortCol?: string;
 }
 /**
  * DescribeFunctionTypes返回参数结构体
@@ -6730,11 +6793,11 @@ export interface RecordField {
     /**
      * 字段名称
      */
-    Name: string;
+    Name?: string;
     /**
      * 字段值
      */
-    Value: string;
+    Value?: string;
 }
 /**
  * DescribeQualityScore返回参数结构体
@@ -7141,6 +7204,46 @@ export interface DescribeStreamTaskLogListResponse {
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * 数据治理配置项
+ */
+export interface DlcDataGovernPolicy {
+    /**
+     * 数据排布治理项
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RewriteDataPolicy?: DlcRewriteDataInfo;
+    /**
+     * 快照过期治理项
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ExpiredSnapshotsPolicy?: DlcExpiredSnapshotsInfo;
+    /**
+     * 移除孤立文件治理项
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RemoveOrphanFilesPolicy?: DlcRemoveOrphanFilesInfo;
+    /**
+     * 合并元数据Manifests治理项
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MergeManifestsPolicy?: DlcMergeManifestsInfo;
+    /**
+     * 是否集成库规则：default（默认继承）、none（不继承）
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InheritDataBase?: string;
+    /**
+     * 治理规则类型，Customize: 自定义；Intelligence: 智能治理
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RuleType?: string;
+    /**
+     * 治理引擎
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    GovernEngine?: string;
 }
 /**
  * DeleteWorkflowNew返回参数结构体
@@ -7935,6 +8038,11 @@ export interface SourceFieldInfo {
      * 字段别名
      */
     Alias?: string;
+    /**
+     * 字段描述
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Comment?: string;
 }
 /**
  * FreezeTasksByMultiWorkflow返回参数结构体
@@ -8222,7 +8330,7 @@ export interface StartIntegrationTaskResponse {
     /**
      * 操作成功与否标识
      */
-    Data: boolean;
+    Data?: boolean;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -9167,6 +9275,26 @@ export interface DescribeRuleTemplatesRequest {
     SourceEngineTypes?: Array<number>;
 }
 /**
+ * 合并元数据Manifests治理项
+ */
+export interface DlcMergeManifestsInfo {
+    /**
+     * 是否启用合并元数据Manifests文件治理项：enable、none
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MergeManifestsEnable?: string;
+    /**
+     * 用于运行合并元数据Manifests文件治理项的引擎名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Engine?: string;
+    /**
+     * 合并元数据Manifests文件治理运行周期，单位为分钟
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IntervalMin?: number;
+}
+/**
  * 告警指标
  */
 export interface AlarmIndicatorInfo {
@@ -9205,6 +9333,18 @@ export interface AlarmIndicatorInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     AlarmIndicatorUnit?: string;
+    /**
+     * 告警周期
+     */
+    Duration?: number;
+    /**
+     * 告警周期单位
+     */
+    DurationUnit?: string;
+    /**
+     * 周期内最多告警次数
+     */
+    MaxTimes?: number;
 }
 /**
  * RegisterEvent返回参数结构体
@@ -10172,21 +10312,22 @@ export interface ForceSucInstancesResponse {
     RequestId?: string;
 }
 /**
- * DescribeTaskLockStatus请求参数结构体
+ * GenHiveTableDDLSql返回参数结构体
  */
-export interface DescribeTaskLockStatusRequest {
+export interface GenHiveTableDDLSqlResponse {
     /**
-     * 任务id
+     * 生成的ddl语句
      */
-    TaskId: string;
+    DDLSql?: string;
     /**
-     * 项目id
+     * 生成的ddl语句。与DDLSql相同含义，优先取Data，如果Data为空，则取DDLSql。
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    ProjectId: string;
+    Data?: string;
     /**
-     * 任务类型：201. stream,   202. offline
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
-    TaskType: number;
+    RequestId?: string;
 }
 /**
  * DescribeTaskReport返回参数结构体
@@ -10570,6 +10711,14 @@ export interface StartIntegrationTaskRequest {
      * 项目id
      */
     ProjectId: string;
+    /**
+     * 事件类型(START, STOP, SUSPEND, RESUME, COMMIT, TIMESTAMP)
+     */
+    Event?: string;
+    /**
+     * 额外参数
+     */
+    ExtConfig?: Array<RecordField>;
 }
 /**
  * DescribeTaskDetail返回参数结构体
@@ -11608,6 +11757,41 @@ export interface DescribeAlarmReceiverResponse {
     RequestId?: string;
 }
 /**
+ * 快照过期治理项
+ */
+export interface DlcExpiredSnapshotsInfo {
+    /**
+     * 是否启用快照过期治理项：enable、none
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ExpiredSnapshotsEnable?: string;
+    /**
+     * 用于运行快照过期治理项的引擎名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Engine?: string;
+    /**
+     * 需要保留的最近快照个数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RetainLast?: number;
+    /**
+     * 过期指定天前的快照
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    BeforeDays?: number;
+    /**
+     * 清理过期快照的并行数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MaxConcurrentDeletes?: number;
+    /**
+     * 快照过期治理运行周期，单位为分钟
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IntervalMin?: number;
+}
+/**
  * BatchModifyOwnersNew返回参数结构体
  */
 export interface BatchModifyOwnersNewResponse {
@@ -12391,25 +12575,34 @@ export interface CreateRuleTemplateRequest {
     WhereFlag?: boolean;
 }
 /**
- * 查询实例条件(新)
+ * 数据排布治理项
  */
-export interface SearchConditionNew {
+export interface DlcRewriteDataInfo {
     /**
-     * 查询框架，必选
+     * 是否启用数据重排布治理项：enable（启动）、disable（不启用，默认）
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Instance: SearchConditionInstanceNew;
+    RewriteDataEnable?: string;
     /**
-     * 查询关键字（任务Id精确匹配，任务名称模糊匹配），可选
+     * 用于运行数据重排布治理项的引擎名称
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Keyword?: string;
+    Engine?: string;
     /**
-     * 排序顺序（asc，desc）
+     * 重排布任务执行的文件个数
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Sort?: string;
+    MinInputFiles?: number;
     /**
-     * 排序列（costTime 运行耗时，startTime 开始时间，state 实例状态，curRunDate 数据时间）
+     * 数据重排布写后的数据文件大小，单位为字节
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    SortCol?: string;
+    TargetFileSizeBytes?: number;
+    /**
+     * 数据重排布治理运行周期，单位为分钟
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IntervalMin?: number;
 }
 /**
  * BatchStopTasksNew返回参数结构体
@@ -12478,6 +12671,61 @@ export interface DeleteIntegrationTaskResponse {
     RequestId?: string;
 }
 /**
+ * 建dlc表所需信息
+ */
+export interface TableBaseInfo {
+    /**
+     * 数据库名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DatabaseName?: string;
+    /**
+     * 表名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TableName?: string;
+    /**
+     * 数据表所属数据源名字
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DatasourceConnectionName?: string;
+    /**
+     * 表备注
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TableComment?: string;
+    /**
+     * 类型
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Type?: string;
+    /**
+     * 数据格式类型
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TableFormat?: string;
+    /**
+     * 用户昵称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    UserAlias?: string;
+    /**
+     * 建表用户ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    UserSubUin?: string;
+    /**
+     * 数据治理配置项
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    GovernPolicy?: DlcDataGovernPolicy;
+    /**
+     * 库数据治理是否关闭，关闭：true，开启：false
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DbGovernPolicyIsDisable?: string;
+}
+/**
  * ResumeIntegrationTask请求参数结构体
  */
 export interface ResumeIntegrationTaskRequest {
@@ -12489,6 +12737,14 @@ export interface ResumeIntegrationTaskRequest {
      * 项目id
      */
     ProjectId: string;
+    /**
+     * 事件类型(START, STOP, SUSPEND, RESUME, COMMIT, TIMESTAMP)
+     */
+    Event?: string;
+    /**
+     * 额外参数
+     */
+    ExtConfig?: Array<RecordField>;
 }
 /**
  * DescribeRuleGroupsByPage返回参数结构体
@@ -12882,22 +13138,21 @@ export interface DryRunDIOfflineTaskResponse {
     RequestId?: string;
 }
 /**
- * GenHiveTableDDLSql返回参数结构体
+ * DescribeTaskLockStatus请求参数结构体
  */
-export interface GenHiveTableDDLSqlResponse {
+export interface DescribeTaskLockStatusRequest {
     /**
-     * 生成的ddl语句
+     * 任务id
      */
-    DDLSql?: string;
+    TaskId: string;
     /**
-     * 生成的ddl语句。与DDLSql相同含义，优先取Data，如果Data为空，则取DDLSql。
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 项目id
      */
-    Data?: string;
+    ProjectId: string;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     * 任务类型：201. stream,   202. offline
      */
-    RequestId?: string;
+    TaskType: number;
 }
 /**
  * DescribeRuleExecStat请求参数结构体

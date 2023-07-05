@@ -370,7 +370,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteLogBackup", req, cb);
     }
     /**
-     * 本接口（IsolateDBInstances）用于隔离实例
+     * 本接口（IsolateDBInstances）用于隔离实例。
      */
     async IsolateDBInstances(req, cb) {
         return this.request("IsolateDBInstances", req, cb);

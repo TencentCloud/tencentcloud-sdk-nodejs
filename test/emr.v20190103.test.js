@@ -18,6 +18,16 @@ const client = new tencentcloud.emr.v20190103.Client({
 })
 describe("emr.v20190103.test.js", function () {
 
+it("emr.v20190103.DescribeYarnApplications", async function () {
+    try {
+       const data = await client.DescribeYarnApplications({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("emr.v20190103.TerminateInstance", async function () {
     try {
        const data = await client.TerminateInstance({})
@@ -58,9 +68,19 @@ it("emr.v20190103.InquiryPriceRenewInstance", async function () {
     }
 })
 
-it("emr.v20190103.DescribeJobFlow", async function () {
+it("emr.v20190103.DescribeImpalaQueries", async function () {
     try {
-       const data = await client.DescribeJobFlow({})
+       const data = await client.DescribeImpalaQueries({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("emr.v20190103.ModifyResourceScheduleConfig", async function () {
+    try {
+       const data = await client.ModifyResourceScheduleConfig({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -238,9 +258,19 @@ it("emr.v20190103.DescribeResourceSchedule", async function () {
     }
 })
 
-it("emr.v20190103.ModifyResourceScheduleConfig", async function () {
+it("emr.v20190103.DescribeJobFlow", async function () {
     try {
-       const data = await client.ModifyResourceScheduleConfig({})
+       const data = await client.DescribeJobFlow({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("emr.v20190103.DescribeHiveQueries", async function () {
+    try {
+       const data = await client.DescribeHiveQueries({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

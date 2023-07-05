@@ -262,7 +262,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateDatabase", req, cb);
     }
     /**
-     * 本接口（CreateSparkSessionBatchSQL）用于提交Spark SQL批任务。
+     * 本接口（CreateSparkSessionBatchSQL）用于向Spark作业引擎提交Spark SQL批任务。
      */
     async CreateSparkSessionBatchSQL(req, cb) {
         return this.request("CreateSparkSessionBatchSQL", req, cb);

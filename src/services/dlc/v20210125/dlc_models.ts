@@ -1535,6 +1535,10 @@ export interface ModifySparkAppRequest {
    * 任务资源配置是否继承集群配置模板：0（默认）不继承、1：继承
    */
   IsInherit?: number
+  /**
+   * 是否使用session脚本的sql运行任务：false：否，true：是
+   */
+  IsSessionStarted?: boolean
 }
 
 /**
@@ -2431,7 +2435,10 @@ export interface CreateNotebookSessionRequest {
    */
   ExecutorNumbers?: number
   /**
-   * Session相关配置，当前支持：dlc.eni、dlc.role.arn、dlc.sql.set.config以及用户指定的配置，注：roleArn必填；
+   * Session相关配置，当前支持：
+1. dlc.eni: 用户配置的eni网关信息，可以通过该字段设置；
+2. dlc.role.arn: 用户配置的roleArn鉴权策略配置信息，可以通过该字段设置；
+3. dlc.sql.set.config: 用户配置的集群配置信息，可以通过该字段设置；
    */
   Arguments?: Array<KVPair>
   /**
@@ -2446,6 +2453,10 @@ export interface CreateNotebookSessionRequest {
    * 指定的Executor数量（最大值），默认为1，当开启动态分配有效，若未开启，则该值等于ExecutorNumbers
    */
   ExecutorMaxNumbers?: number
+  /**
+   * 指定spark版本名称，当前任务使用该spark镜像运行
+   */
+  SparkImage?: string
 }
 
 /**
@@ -5561,6 +5572,10 @@ export interface CreateSparkAppRequest {
    * 任务资源配置是否继承集群模板，0（默认）不继承，1：继承
    */
   IsInherit?: number
+  /**
+   * 是否使用session脚本的sql运行任务：false：否，true：是
+   */
+  IsSessionStarted?: boolean
 }
 
 /**
@@ -5604,7 +5619,9 @@ export interface CreateSparkSessionBatchSQLRequest {
    */
   SessionName?: string
   /**
-   * Session相关配置，当前支持：dlc.eni、dlc.role.arn、dlc.sql.set.config以及用户指定的配置，注：roleArn必填；
+   * Session相关配置，当前支持：1.dlc.eni：用户配置的eni网关信息，可以用过该字段设置；
+2.dlc.role.arn：用户配置的roleArn鉴权策略配置信息，可以用过该字段设置；
+3.dlc.sql.set.config：用户配置的集群配置信息，可以用过该字段设置；
    */
   Arguments?: Array<KVPair>
 }

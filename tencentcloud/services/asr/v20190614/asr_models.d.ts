@@ -25,6 +25,15 @@ export interface CreateCustomizationResponse {
     RequestId?: string;
 }
 /**
+ * VoicePrintDelete请求参数结构体
+ */
+export interface VoicePrintDeleteRequest {
+    /**
+     * 说话人id，说话人唯一标识
+     */
+    VoicePrintId: string;
+}
+/**
  * DescribeAsyncRecognitionTasks请求参数结构体
  */
 export declare type DescribeAsyncRecognitionTasksRequest = null;
@@ -79,6 +88,44 @@ export interface GetAsrVocabResponse {
     RequestId?: string;
 }
 /**
+ * VoicePrintEnroll返回参数结构体
+ */
+export interface VoicePrintEnrollResponse {
+    /**
+     * 说话人基本数据
+     */
+    Data?: VoicePrintBaseData;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * VoicePrintUpdate请求参数结构体
+ */
+export interface VoicePrintUpdateRequest {
+    /**
+     * 音频格式 0: pcm, 1: wav
+     */
+    VoiceFormat: number;
+    /**
+     * 音频采样率 目前仅支持16000 单位Hz
+     */
+    SampleRate: number;
+    /**
+     * 说话人id， 说话人唯一标识
+     */
+    VoicePrintId: string;
+    /**
+     * 音频数据, base64 编码, 音频时长不能超过30s，数据大小不超过2M
+     */
+    Data: string;
+    /**
+     * 说话人昵称  不超过32字节
+     */
+    SpeakerNick?: string;
+}
+/**
  * CreateAsyncRecognitionTask请求参数结构体
  */
 export interface CreateAsyncRecognitionTaskRequest {
@@ -86,7 +133,7 @@ export interface CreateAsyncRecognitionTaskRequest {
      * 引擎模型类型。
   • 16k_zh：中文普通话通用；
   • 16k_en：英语；
-  • 16k_ca：粤语；
+  • 16k_yue：粤语；
   • 16k_id：印度尼西亚语；
   • 16k_fil：菲律宾语；
   • 16k_th：泰语；
@@ -272,6 +319,26 @@ export interface SentenceRecognitionRequest {
     HotwordList?: string;
 }
 /**
+ * 说话人验证数据
+ */
+export interface VoicePrintVerifyData {
+    /**
+     * 说话人id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    VoicePrintId?: string;
+    /**
+     * 匹配度 取值范围(0.0 - 100.0)
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Score?: string;
+    /**
+     * 验证结果 0: 未通过 1: 通过
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Decision?: number;
+}
+/**
  * CloseAsyncRecognitionTask返回参数结构体
  */
 export interface CloseAsyncRecognitionTaskResponse {
@@ -423,6 +490,19 @@ export interface CreateAsyncRecognitionTaskResponse {
     RequestId?: string;
 }
 /**
+ * VoicePrintDelete返回参数结构体
+ */
+export interface VoicePrintDeleteResponse {
+    /**
+     * 说话人基本信息
+     */
+    Data?: VoicePrintBaseData;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * DeleteAsrVocab返回参数结构体
  */
 export interface DeleteAsrVocabResponse {
@@ -459,7 +539,7 @@ export interface CreateRecTaskRequest {
   • 16k_zh-PY：中英粤;
   • 16k_zh_medical：中文医疗；
   • 16k_en：英语；
-  • 16k_ca：粤语；
+  • 16k_yue：粤语；
   • 16k_ja：日语；
   • 16k_ko：韩语；
   • 16k_vi：越南语；
@@ -477,7 +557,7 @@ export interface CreateRecTaskRequest {
      */
     ChannelNum: number;
     /**
-     * 识别结果返回形式。0： 识别结果文本(含分段时间戳)； 1：词级别粒度的[详细识别结果](https://cloud.tencent.com/document/api/1093/37824#SentenceDetail)(不含标点，含语速值)；2：词级别粒度的详细识别结果（包含标点、语速值）；3: 标点符号分段，包含每段时间戳，特别适用于字幕场景（包含词级时间、标点、语速值）。
+     * 识别结果返回形式。0： 识别结果文本(含分段时间戳)； 1：词级别粒度的[详细识别结果](https://cloud.tencent.com/document/api/1093/37824#SentenceDetail)(不含标点，含语速值)；2：词级别粒度的详细识别结果（包含标点、语速值）；3: 标点符号分段，包含每段时间戳，特别适用于字幕场景（包含词级时间、标点、语速值）。4：【付费功能】将对ASR结果按照语义分段，并展示词级别粒度的详细识别结果（注意：如果开启后付费，将[自动计费](https://cloud.tencent.com/document/product/1093/35686)）
      */
     ResTextFormat: number;
     /**
@@ -591,6 +671,27 @@ export interface GetCustomizationListResponse {
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * VoicePrintVerify请求参数结构体
+ */
+export interface VoicePrintVerifyRequest {
+    /**
+     * 音频格式 0: pcm, 1: wav
+     */
+    VoiceFormat: number;
+    /**
+     * 音频采样率，目前支持16000，单位：Hz，必填
+     */
+    SampleRate: number;
+    /**
+     * 说话人id, 说话人唯一标识
+     */
+    VoicePrintId: string;
+    /**
+     * 音频数据, base64 编码, 音频时长不能超过30s，数据大小不超过2M
+     */
+    Data: string;
 }
 /**
  * DownloadAsrVocab请求参数结构体
@@ -785,6 +886,27 @@ export interface UpdateAsrVocabResponse {
     RequestId?: string;
 }
 /**
+ * VoicePrintEnroll请求参数结构体
+ */
+export interface VoicePrintEnrollRequest {
+    /**
+     * 音频格式 0: pcm, 1: wav
+     */
+    VoiceFormat: number;
+    /**
+     * 音频采样率，目前支持16000，单位：Hz，必填
+     */
+    SampleRate: number;
+    /**
+     * 音频数据, base64 编码, 音频时长不能超过30s，数据大小不超过2M
+     */
+    Data: string;
+    /**
+     * 说话人昵称  不超过32字节
+     */
+    SpeakerNick?: string;
+}
+/**
  * CreateAsrVocab返回参数结构体
  */
 export interface CreateAsrVocabResponse {
@@ -903,6 +1025,19 @@ export interface UpdateAsrVocabRequest {
     Description?: string;
 }
 /**
+ * VoicePrintVerify返回参数结构体
+ */
+export interface VoicePrintVerifyResponse {
+    /**
+     * 说话人验证数据
+     */
+    Data?: VoicePrintVerifyData;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * DescribeTaskStatus请求参数结构体
  */
 export interface DescribeTaskStatusRequest {
@@ -937,6 +1072,34 @@ export interface SentenceRecognitionResponse {
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * VoicePrintUpdate返回参数结构体
+ */
+export interface VoicePrintUpdateResponse {
+    /**
+     * 说话人基础数据
+     */
+    Data?: VoicePrintBaseData;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * 说话人基础数据，包括说话人id和说话人昵称
+ */
+export interface VoicePrintBaseData {
+    /**
+     * 说话人id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    VoicePrintId?: string;
+    /**
+     * 说话人昵称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SpeakerNick?: string;
 }
 /**
  * DeleteCustomization请求参数结构体

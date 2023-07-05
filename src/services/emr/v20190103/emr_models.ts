@@ -150,6 +150,122 @@ export interface ScaleOutInstanceResponse {
 }
 
 /**
+ * Impala查询详情
+ */
+export interface ImpalaQuery {
+  /**
+   * 执行语句
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Statement?: string
+  /**
+   * 查询ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Id?: string
+  /**
+   * 开始时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StartTime?: number
+  /**
+   * 运行时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Duration?: string
+  /**
+   * 结束时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EndTime?: number
+  /**
+   * 执行状态
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  State?: string
+  /**
+   * 获取行数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RowsFetched?: number
+  /**
+   * 用户
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  User?: string
+  /**
+   * 默认DB
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DefaultDB?: string
+  /**
+   * 执行的Coordinator节点
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Coordinator?: string
+  /**
+   * 单节点内存峰值
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MaxNodePeakMemoryUsage?: string
+  /**
+   * 查询类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  QueryType?: string
+  /**
+   * 扫描的HDFS行数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ScanHDFSRows?: number
+  /**
+   * 扫描的Kudu行数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ScanKUDURows?: number
+  /**
+   * 扫描的总行数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ScanRowsTotal?: number
+  /**
+   * 读取的总字节数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalBytesRead?: number
+  /**
+   * 发送的总字节数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalBytesSent?: number
+  /**
+   * CPU总时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalCpuTime?: number
+  /**
+   * 内部数据发送总量(Bytes)
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalInnerBytesSent?: number
+  /**
+   * 内部扫描数据发送总量(Bytes)
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalScanBytesSent?: number
+  /**
+   * 预估单节点内存
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EstimatedPerHostMemBytes?: number
+  /**
+   * 从缓存中获取的数据行数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NumRowsFetchedFromCache?: number
+}
+
+/**
  * Pod的存储设备描述信息。
  */
 export interface PodVolume {
@@ -193,6 +309,27 @@ export interface CreateInstanceResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * Pod PVC存储方式描述
+ */
+export interface PersistentVolumeContext {
+  /**
+   * 磁盘大小，单位为GB。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DiskSize?: number
+  /**
+   * 磁盘类型。CLOUD_PREMIUM;CLOUD_SSD
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DiskType?: string
+  /**
+   * 磁盘数量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DiskNum?: number
 }
 
 /**
@@ -342,6 +479,57 @@ export interface DiskSpecInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DiskSize: number
+}
+
+/**
+ * Hive查询详情
+ */
+export interface HiveQuery {
+  /**
+   * 查询语句
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Statement?: string
+  /**
+   * 执行时长
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Duration?: string
+  /**
+   * 开始时间毫秒
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StartTime?: number
+  /**
+   * 结束时间毫秒
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EndTime?: number
+  /**
+   * 状态
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  State?: string
+  /**
+   * 用户
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  User?: string
+  /**
+   * appId列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  JobIds?: Array<string>
+  /**
+   * 执行引擎
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExecutionEngine?: string
+  /**
+   * 查询ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Id?: string
 }
 
 /**
@@ -1316,21 +1504,17 @@ export interface VPCSettings {
 }
 
 /**
- * DescribeInstancesList返回参数结构体
+ * 共用自建组件参数
  */
-export interface DescribeInstancesListResponse {
+export interface CustomServiceDefine {
   /**
-   * 符合条件的实例总数。
+   * 自定义参数key
    */
-  TotalCnt: number
+  Name?: string
   /**
-   * 集群实例列表
+   * 自定义参数value
    */
-  InstancesList: Array<EmrListInstance>
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  Value?: string
 }
 
 /**
@@ -1341,6 +1525,257 @@ export interface DescribeInstanceRenewNodesRequest {
    * 集群实例ID,实例ID形如: emr-xxxxxxxx
    */
   InstanceId: string
+}
+
+/**
+ * Yarn 运行的Application信息
+ */
+export interface YarnApplication {
+  /**
+   * 应用ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Id?: string
+  /**
+   * 用户
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  User?: string
+  /**
+   * 应用名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name?: string
+  /**
+   * 队列
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Queue?: string
+  /**
+   * 应用类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ApplicationType?: string
+  /**
+   * 运行时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ElapsedTime?: string
+  /**
+   * 状态
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  State?: string
+  /**
+   * 最终状态
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FinalStatus?: string
+  /**
+   * 进度
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Progress?: number
+  /**
+   * 开始时间毫秒
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StartedTime?: number
+  /**
+   * 结束时间毫秒
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FinishedTime?: number
+  /**
+   * 申请内存MB
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AllocatedMB?: number
+  /**
+   * 申请VCores
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AllocatedVCores?: number
+  /**
+   * 运行的Containers数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RunningContainers?: number
+  /**
+   * 内存MB*时间秒
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MemorySeconds?: number
+  /**
+   * VCores*时间秒
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VCoreSeconds?: number
+  /**
+   * 队列资源占比
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  QueueUsagePercentage?: number
+  /**
+   * 集群资源占比
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ClusterUsagePercentage?: number
+  /**
+   * 预占用的内存
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PreemptedResourceMB?: number
+  /**
+   * 预占用的VCore
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PreemptedResourceVCores?: number
+  /**
+   * 预占的非应用程序主节点容器数量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NumNonAMContainerPreempted?: number
+  /**
+   * AM预占用的容器数量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NumAMContainerPreempted?: number
+  /**
+   * Map总数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MapsTotal?: number
+  /**
+   * 完成的Map数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MapsCompleted?: number
+  /**
+   * Reduce总数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ReducesTotal?: number
+  /**
+   * 完成的Reduce数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ReducesCompleted?: number
+  /**
+   * 平均Map时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AvgMapTime?: number
+  /**
+   * 平均Reduce时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AvgReduceTime?: number
+  /**
+   * 平均Shuffle时间毫秒
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AvgShuffleTime?: number
+  /**
+   * 平均Merge时间毫秒
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AvgMergeTime?: number
+  /**
+   * 失败的Reduce执行次数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FailedReduceAttempts?: number
+  /**
+   * Kill的Reduce执行次数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  KilledReduceAttempts?: number
+  /**
+   * 成功的Reduce执行次数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SuccessfulReduceAttempts?: number
+  /**
+   * 失败的Map执行次数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FailedMapAttempts?: number
+  /**
+   * Kill的Map执行次数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  KilledMapAttempts?: number
+  /**
+   * 成功的Map执行次数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SuccessfulMapAttempts?: number
+  /**
+   * GC毫秒
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  GcTimeMillis?: number
+  /**
+   * Map使用的VCore毫秒
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VCoreMillisMaps?: number
+  /**
+   * Map使用的内存毫秒
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MbMillisMaps?: number
+  /**
+   * Reduce使用的VCore毫秒
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VCoreMillisReduces?: number
+  /**
+   * Reduce使用的内存毫秒
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MbMillisReduces?: number
+  /**
+   * 启动Map的总数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalLaunchedMaps?: number
+  /**
+   * 启动Reduce的总数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalLaunchedReduces?: number
+  /**
+   * Map输入记录数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MapInputRecords?: number
+  /**
+   * Map输出记录数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MapOutputRecords?: number
+  /**
+   * Reduce输入记录数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ReduceInputRecords?: number
+  /**
+   * Reduce输出记录数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ReduceOutputRecords?: number
+  /**
+   * HDFS写入字节数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HDFSBytesWritten?: number
+  /**
+   * HDFS读取字节数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HDFSBytesRead?: number
 }
 
 /**
@@ -1975,24 +2410,21 @@ export interface StartStopServiceOrMonitorResponse {
 }
 
 /**
- * 多云盘参数
+ * DescribeHiveQueries返回参数结构体
  */
-export interface MultiDisk {
+export interface DescribeHiveQueriesResponse {
   /**
-   * 云盘类型
-<li>CLOUD_SSD：表示云SSD。</li>
-<li>CLOUD_PREMIUM：表示高效云盘。</li>
-<li>CLOUD_HSSD：表示增强型SSD云硬盘。</li>
+   * 总条数
    */
-  DiskType?: string
+  Total?: number
   /**
-   * 云盘大小
+   * 结果列表
    */
-  Volume?: number
+  Results?: Array<HiveQuery>
   /**
-   * 该类型云盘个数
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  Count?: number
+  RequestId?: string
 }
 
 /**
@@ -2122,17 +2554,27 @@ export interface PodNewParameter {
 }
 
 /**
- * 搜索字段
+ * DescribeInstanceRenewNodes返回参数结构体
  */
-export interface SearchItem {
+export interface DescribeInstanceRenewNodesResponse {
   /**
-   * 支持搜索的类型
+   * 查询到的节点总数
    */
-  SearchType: string
+  TotalCnt: number
   /**
-   * 支持搜索的值
+   * 节点详细信息列表
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  SearchValue: string
+  NodeList: Array<RenewInstancesInfo>
+  /**
+   * 用户所有的标签键列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MetaInfo: Array<string>
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2159,13 +2601,29 @@ export interface MultiZoneSetting {
 }
 
 /**
- * TerminateInstance返回参数结构体
+ * DescribeYarnApplications请求参数结构体
  */
-export interface TerminateInstanceResponse {
+export interface DescribeYarnApplicationsRequest {
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 集群ID
    */
-  RequestId?: string
+  InstanceId: string
+  /**
+   * 起始时间秒
+   */
+  StartTime: number
+  /**
+   * 结束时间秒，EndTime-StartTime不得超过31天秒数31243600
+   */
+  EndTime: number
+  /**
+   * 分页起始偏移，从0开始
+   */
+  Offset: number
+  /**
+   * 分页大小，合法范围[1,100]
+   */
+  Limit: number
 }
 
 /**
@@ -2244,24 +2702,17 @@ export interface NewResourceSpec {
 }
 
 /**
- * Pod PVC存储方式描述
+ * 磁盘组。
  */
-export interface PersistentVolumeContext {
+export interface DiskGroup {
   /**
-   * 磁盘大小，单位为GB。
-注意：此字段可能返回 null，表示取不到有效值。
+   * 磁盘规格。
    */
-  DiskSize?: number
+  Spec: DiskSpec
   /**
-   * 磁盘类型。CLOUD_PREMIUM;CLOUD_SSD
-注意：此字段可能返回 null，表示取不到有效值。
+   * 同类型磁盘数量。
    */
-  DiskType?: string
-  /**
-   * 磁盘数量
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  DiskNum?: number
+  Count: number
 }
 
 /**
@@ -2332,6 +2783,27 @@ export interface DescribeResourceScheduleResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 多云盘参数
+ */
+export interface MultiDisk {
+  /**
+   * 云盘类型
+<li>CLOUD_SSD：表示云SSD。</li>
+<li>CLOUD_PREMIUM：表示高效云盘。</li>
+<li>CLOUD_HSSD：表示增强型SSD云硬盘。</li>
+   */
+  DiskType?: string
+  /**
+   * 云盘大小
+   */
+  Volume?: number
+  /**
+   * 该类型云盘个数
+   */
+  Count?: number
 }
 
 /**
@@ -2520,17 +2992,29 @@ export interface PriceResource {
 }
 
 /**
- * 共用自建组件参数
+ * DescribeHiveQueries请求参数结构体
  */
-export interface CustomServiceDefine {
+export interface DescribeHiveQueriesRequest {
   /**
-   * 自定义参数key
+   * 集群ID
    */
-  Name?: string
+  InstanceId: string
   /**
-   * 自定义参数value
+   * 起始时间秒
    */
-  Value?: string
+  StartTime: number
+  /**
+   * 结束时间秒，EndTime-StartTime不得超过31天秒数31*24*3600
+   */
+  EndTime: number
+  /**
+   * 分页起始偏移，从0开始
+   */
+  Offset: number
+  /**
+   * 分页大小，合法范围[1,100]
+   */
+  Limit: number
 }
 
 /**
@@ -2587,6 +3071,20 @@ export interface DescribeCvmQuotaResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 搜索字段
+ */
+export interface SearchItem {
+  /**
+   * 支持搜索的类型
+   */
+  SearchType: string
+  /**
+   * 支持搜索的值
+   */
+  SearchValue: string
 }
 
 /**
@@ -2732,20 +3230,6 @@ clusterAfter 表示在集群初始化后执行。
 }
 
 /**
- * DescribeCvmQuota请求参数结构体
- */
-export interface DescribeCvmQuotaRequest {
-  /**
-   * EMR集群ID
-   */
-  ClusterId: string
-  /**
-   * 区ID
-   */
-  ZoneId?: number
-}
-
-/**
  * DescribeClusterNodes请求参数结构体
  */
 export interface DescribeClusterNodesRequest {
@@ -2791,6 +3275,46 @@ export interface DescribeClusterNodesRequest {
    * 无
    */
   Asc?: number
+}
+
+/**
+ * DescribeCvmQuota请求参数结构体
+ */
+export interface DescribeCvmQuotaRequest {
+  /**
+   * EMR集群ID
+   */
+  ClusterId: string
+  /**
+   * 区ID
+   */
+  ZoneId?: number
+}
+
+/**
+ * DescribeImpalaQueries请求参数结构体
+ */
+export interface DescribeImpalaQueriesRequest {
+  /**
+   * 集群ID
+   */
+  InstanceId: string
+  /**
+   * 起始时间秒
+   */
+  StartTime: number
+  /**
+   * 结束时间秒，EndTime-StartTime不得超过31天秒数31243600
+   */
+  EndTime: number
+  /**
+   * 分页起始偏移，从0开始
+   */
+  Offset: number
+  /**
+   * 分页大小，合法范围[1,100]
+   */
+  Limit: number
 }
 
 /**
@@ -3254,6 +3778,24 @@ export interface OpScope {
 }
 
 /**
+ * DescribeInstancesList返回参数结构体
+ */
+export interface DescribeInstancesListResponse {
+  /**
+   * 符合条件的实例总数。
+   */
+  TotalCnt: number
+  /**
+   * 集群实例列表
+   */
+  InstancesList: Array<EmrListInstance>
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteUserManagerUserList返回参数结构体
  */
 export interface DeleteUserManagerUserListResponse {
@@ -3310,6 +3852,24 @@ export interface DescribeInstancesResponse {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TagKeys: Array<string>
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeYarnApplications返回参数结构体
+ */
+export interface DescribeYarnApplicationsResponse {
+  /**
+   * 总数
+   */
+  Total?: number
+  /**
+   * 结果列表
+   */
+  Results?: Array<YarnApplication>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4176,23 +4736,17 @@ export interface InquirePriceRenewEmrRequest {
 }
 
 /**
- * DescribeInstanceRenewNodes返回参数结构体
+ * DescribeImpalaQueries返回参数结构体
  */
-export interface DescribeInstanceRenewNodesResponse {
+export interface DescribeImpalaQueriesResponse {
   /**
-   * 查询到的节点总数
+   * 总数
    */
-  TotalCnt: number
+  Total?: number
   /**
-   * 节点详细信息列表
-注意：此字段可能返回 null，表示取不到有效值。
+   * 结果列表
    */
-  NodeList: Array<RenewInstancesInfo>
-  /**
-   * 用户所有的标签键列表
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  MetaInfo: Array<string>
+  Results?: Array<ImpalaQuery>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4258,20 +4812,6 @@ export interface UserManagerUserBriefInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DownLoadKeyTabUrl: string
-}
-
-/**
- * 磁盘组。
- */
-export interface DiskGroup {
-  /**
-   * 磁盘规格。
-   */
-  Spec: DiskSpec
-  /**
-   * 同类型磁盘数量。
-   */
-  Count: number
 }
 
 /**
@@ -4803,4 +5343,14 @@ export interface InstanceChargePrepaid {
 <li>false：否</li>
    */
   RenewFlag: boolean
+}
+
+/**
+ * TerminateInstance返回参数结构体
+ */
+export interface TerminateInstanceResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }

@@ -517,6 +517,11 @@ export interface DiagnoseResult {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     LowFrameRateResults?: Array<string>;
+    /**
+     * 流格式诊断信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    StreamFormatResults?: Array<string>;
 }
 /**
  * StopRecordTask请求参数结构体
@@ -1982,6 +1987,10 @@ export interface CreateLiveStreamMonitorRequest {
      * 是否存储监播事件到监播报告，以及是否允许查询监播报告。
      */
     AllowMonitorReport?: number;
+    /**
+     * 是否开启格式诊断。
+     */
+    AiFormatDiagnose?: number;
 }
 /**
  * DescribeScreenShotSheetNumList请求参数结构体
@@ -5177,6 +5186,10 @@ export interface ModifyLiveStreamMonitorRequest {
      * 是否存储监播事件到监播报告，以及是否允许查询监播报告。
      */
     AllowMonitorReport?: number;
+    /**
+     * 是否开启格式诊断。
+     */
+    AiFormatDiagnose?: number;
 }
 /**
  * ModifyLiveSnapshotTemplate返回参数结构体
@@ -8281,6 +8294,11 @@ export interface LiveStreamMonitorInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     AllowMonitorReport?: number;
+    /**
+     * 是否开启格式诊断
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AiFormatDiagnose?: number;
 }
 /**
  * 直播拉流当前正在拉的文件信息。

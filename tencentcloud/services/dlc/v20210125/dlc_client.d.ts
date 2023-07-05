@@ -164,7 +164,7 @@ export declare class Client extends AbstractClient {
      */
     CreateDatabase(req: CreateDatabaseRequest, cb?: (error: string, rep: CreateDatabaseResponse) => void): Promise<CreateDatabaseResponse>;
     /**
-     * 本接口（CreateSparkSessionBatchSQL）用于提交Spark SQL批任务。
+     * 本接口（CreateSparkSessionBatchSQL）用于向Spark作业引擎提交Spark SQL批任务。
      */
     CreateSparkSessionBatchSQL(req: CreateSparkSessionBatchSQLRequest, cb?: (error: string, rep: CreateSparkSessionBatchSQLResponse) => void): Promise<CreateSparkSessionBatchSQLResponse>;
     /**

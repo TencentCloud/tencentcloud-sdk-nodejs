@@ -83,6 +83,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeTraceCodes", req, cb);
     }
     /**
+     * 支持增量查询扫码日志，通常提供给数据同步使用，调用时需要指定从哪一行开始查询数据
+     */
+    async DescribeRawScanLogs(req, cb) {
+        return this.request("DescribeRawScanLogs", req, cb);
+    }
+    /**
      * 修改溯源信息的排序
      */
     async ModifyTraceDataRanks(req, cb) {

@@ -734,7 +734,7 @@ class Client extends abstract_client_1.AbstractClient {
     }
     /**
      * 本接口（AttachCcnInstances）用于将网络实例加载到云联网实例中，网络实例包括VPC和专线网关。<br />
-每个云联网能够关联的网络实例个数是有限的，详请参考产品文档。如果需要扩充请联系在线客服。
+每个云联网能够关联的网络实例个数是有限的，详情请参考产品文档。如果需要扩充请联系在线客服。
      */
     async AttachCcnInstances(req, cb) {
         return this.request("AttachCcnInstances", req, cb);

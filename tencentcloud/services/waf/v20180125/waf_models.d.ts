@@ -315,7 +315,7 @@ export interface DescribeIpAccessControlResponse {
     RequestId?: string;
 }
 /**
- * 负载均衡算法
+ * 负载均衡器
  */
 export interface LoadBalancerPackageNew {
     /**
@@ -497,7 +497,7 @@ export interface DescribePeakPointsRequest {
  */
 export declare type DescribeAccessIndexRequest = null;
 /**
- * 域名的详细信息
+ * domain列表
  */
 export interface DomainInfo {
     /**
@@ -517,7 +517,7 @@ export interface DomainInfo {
      */
     Cname: string;
     /**
-     * 实例类型
+     * 实例类型,sparta-waf表示saaswaf实例域名,clb-waf表示clbwaf实例域名,cdc-clb-waf表示CDC环境下clbwaf实例域名,cdn-waf表示cdnwaf实例域名
      */
     Edition: string;
     /**
@@ -533,19 +533,19 @@ export interface DomainInfo {
      */
     ClsStatus: number;
     /**
-     * clb模式
+     * clbwaf使用模式,0镜像模式 1清洗模式
      */
     FlowMode: number;
     /**
-     * waf开关
+     * waf开关,0关闭 1开启
      */
     Status: number;
     /**
-     * 防御模式
+     * 规则防御模式,0观察模式 1拦截模式
      */
     Mode: number;
     /**
-     * AI防御模式
+     * AI防御模式,10规则引擎观察&&AI引擎关闭模式 11规则引擎观察&&AI引擎观察模式 12规则引擎观察&&AI引擎拦截模式 20规则引擎拦截&&AI引擎关闭模式 21规则引擎拦截&&AI引擎观察模式 22规则引擎拦截&&AI引擎拦截模式
      */
     Engine: number;
     /**
@@ -569,7 +569,7 @@ export interface DomainInfo {
      */
     AppId: number;
     /**
-     * clb状态
+     * clbwaf域名监听器状态,0操作成功 4正在绑定LB 6正在解绑LB 7解绑LB失败 8绑定LB失败 10内部错误
      */
     State: number;
     /**
@@ -577,11 +577,11 @@ export interface DomainInfo {
      */
     CreateTime?: string;
     /**
-     * 0关闭 1开启
+     * Ipv6开关状态,0关闭 1开启
      */
     Ipv6Status?: number;
     /**
-     * 0关闭 1开启
+     * BOT开关状态,0关闭 1开启
      */
     BotStatus?: number;
     /**
@@ -589,18 +589,38 @@ export interface DomainInfo {
      */
     Level?: number;
     /**
-     * 是否开启投递CLS功能
+     * 是否开启投递CLS功能,0关闭 1开启
      */
     PostCLSStatus?: number;
     /**
-     * 是否开启投递CKafka功能
+     * 是否开启投递CKafka功能,0关闭 1开启
      */
     PostCKafkaStatus?: number;
     /**
-     * 应用型负载均衡类型: clb或者apisix，默认clb
+     * cdc实例域名接入的集群信息,非cdc实例忽略
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CdcClusters?: string;
+    /**
+     * api安全开关状态,0关闭 1开启
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ApiStatus?: number;
+    /**
+     * 应用型负载均衡类型,clb或者apisix，默认clb
   注意：此字段可能返回 null，表示取不到有效值。
      */
     AlbType?: string;
+    /**
+     * 安全组状态,0不展示 1非腾讯云源站 2安全组绑定失败 3安全组发生变更
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SgState?: number;
+    /**
+     * 安全组状态的详细解释
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SgDetail?: string;
 }
 /**
  * 日志KeyValue对

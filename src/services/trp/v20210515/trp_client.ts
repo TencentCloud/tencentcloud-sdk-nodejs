@@ -80,6 +80,7 @@ import {
   ReportBatchCallbackStatusResponse,
   ChainData,
   PhaseData,
+  DescribeRawScanLogsRequest,
   DeleteProductRequest,
   ModifyTraceDataRanksRequest,
   ModifyCustomRuleStatusResponse,
@@ -105,6 +106,7 @@ import {
   DescribeCodesByPackRequest,
   DescribeJobFileUrlRequest,
   CreateTraceCodesAsyncResponse,
+  RawScanLog,
   DescribeCustomRulesRequest,
   ModifyCodeBatchRequest,
   DescribeProductByIdRequest,
@@ -124,6 +126,7 @@ import {
   DescribeScanStatsResponse,
   CreateMerchantResponse,
   DescribeMerchantsResponse,
+  DescribeRawScanLogsResponse,
   DescribeTraceDataListRequest,
   DescribeScanStatsRequest,
   DeleteMerchantResponse,
@@ -239,6 +242,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeTraceCodesResponse) => void
   ): Promise<DescribeTraceCodesResponse> {
     return this.request("DescribeTraceCodes", req, cb)
+  }
+
+  /**
+   * 支持增量查询扫码日志，通常提供给数据同步使用，调用时需要指定从哪一行开始查询数据
+   */
+  async DescribeRawScanLogs(
+    req: DescribeRawScanLogsRequest,
+    cb?: (error: string, rep: DescribeRawScanLogsResponse) => void
+  ): Promise<DescribeRawScanLogsResponse> {
+    return this.request("DescribeRawScanLogs", req, cb)
   }
 
   /**

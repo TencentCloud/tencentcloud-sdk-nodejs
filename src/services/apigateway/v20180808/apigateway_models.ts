@@ -4032,7 +4032,7 @@ export interface DescribeServiceEnvironmentReleaseHistoryResponse {
    * 服务发布历史。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Result: ServiceReleaseHistory
+  Result?: ServiceReleaseHistory
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6448,7 +6448,7 @@ export interface DescribeServiceEnvironmentReleaseHistoryRequest {
   /**
    * 环境名称。
    */
-  EnvironmentName: string
+  EnvironmentName?: string
   /**
    * 返回数量，默认为 20，最大值为 100。
    */
