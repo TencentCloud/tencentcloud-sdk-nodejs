@@ -4177,7 +4177,7 @@ export interface ModifyWorkGroupRequest {
      */
     WorkGroupId: number;
     /**
-     * 工作组描述
+     * 工作组描述，最大字符数限制50
      */
     WorkGroupDescription: string;
 }

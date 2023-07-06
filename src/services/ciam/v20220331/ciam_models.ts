@@ -635,6 +635,10 @@ export type ListUserStoreRequest = null
  */
 export interface CreateUserGroupResponse {
   /**
+   * 用户组ID
+   */
+  UserGroupId?: string
+  /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -1486,6 +1490,10 @@ export interface SetPasswordResponse {
  * CreateUserStore返回参数结构体
  */
 export interface CreateUserStoreResponse {
+  /**
+   * 用户目录ID
+   */
+  UserStoreId?: string
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

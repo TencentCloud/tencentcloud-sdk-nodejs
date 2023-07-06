@@ -556,9 +556,16 @@ export interface ModifyInstanceRequest {
      */
     RegistryId: string;
     /**
-     * 实例的规格
+     * 实例的规格,
+  基础版：basic
+  标准版：standard
+  高级版：premium
      */
-    RegistryType: string;
+    RegistryType?: string;
+    /**
+     * 实例删除保护，false为关闭
+     */
+    DeletionProtection?: boolean;
 }
 /**
  * RenewInstance返回参数结构体
@@ -2906,6 +2913,10 @@ export interface CreateInstanceRequest {
      * 是否开启Cos桶多AZ特性
      */
     EnableCosMAZ?: boolean;
+    /**
+     * 是否开启实例删除保护
+     */
+    DeletionProtection?: boolean;
 }
 /**
  * DescribeInstanceToken请求参数结构体

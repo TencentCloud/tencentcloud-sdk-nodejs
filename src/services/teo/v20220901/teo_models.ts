@@ -64,20 +64,6 @@ export interface DownloadL7LogsRequest {
 }
 
 /**
- * DescribeSpeedTestingQuota返回参数结构体
- */
-export interface DescribeSpeedTestingQuotaResponse {
-  /**
-   * 配额数据。
-   */
-  SpeedTestingQuota?: SpeedTestingQuota
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * 智能压缩配置。
  */
 export interface Compression {
@@ -160,37 +146,17 @@ export interface ExceptUserRuleCondition {
 }
 
 /**
- * ModifyDefaultCertificate请求参数结构体
+ * CheckCnameStatus返回参数结构体
  */
-export interface ModifyDefaultCertificateRequest {
+export interface CheckCnameStatusResponse {
   /**
-   * 站点ID。
+   * 域名Cname状态信息列表。
    */
-  ZoneId: string
+  CnameStatus: Array<CnameStatus>
   /**
-   * 默认证书ID。
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  CertId?: string
-  /**
-   * 证书状态，取值有：
-<li>deployed ：部署证书；</li>
-<li>disabled ：禁用证书。</li>失败状态下重新deployed即可重试。
-   */
-  Status?: string
-}
-
-/**
- * 单值类数据记录
- */
-export interface SingleDataRecord {
-  /**
-   * 查询维度值。
-   */
-  TypeKey: string
-  /**
-   * 查询维度下具体指标值。
-   */
-  TypeValue: Array<SingleTypeValue>
+  RequestId?: string
 }
 
 /**
@@ -209,43 +175,6 @@ export interface DescribeOriginGroupResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * DescribeWebManagedRulesLog返回参数结构体
- */
-export interface DescribeWebManagedRulesLogResponse {
-  /**
-   * Web攻击日志数据列表。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Data: Array<WebLogs>
-  /**
-   * 查询结果的总条数。
-   */
-  TotalCount: number
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * 客户端ip信息
- */
-export interface SecClientIp {
-  /**
-   * 客户端ip。
-   */
-  ClientIp: string
-  /**
-   * 最大qps。
-   */
-  RequestMaxQps: number
-  /**
-   * 请求数。
-   */
-  RequestNum: number
 }
 
 /**
@@ -302,30 +231,6 @@ export interface DescribeTopL7CacheDataRequest {
 <li>global：全球数据。</li>不填默认取值为global。
    */
   Area?: string
-}
-
-/**
- * 单值指标数据
- */
-export interface SingleTypeValue {
-  /**
-   * 指标名。
-   */
-  MetricName: string
-  /**
-   * 指标值。
-   */
-  DetailData: number
-}
-
-/**
- * CreateCredential返回参数结构体
- */
-export interface CreateCredentialResponse {
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**
@@ -544,27 +449,14 @@ export interface DiffIPWhitelist {
 }
 
 /**
- * DescribeLogTopicTasks请求参数结构体
+ * DeleteSecurityIPGroup返回参数结构体
  */
-export interface DescribeLogTopicTasksRequest {
+export interface DeleteSecurityIPGroupResponse {
   /**
-   * 站点ID。
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  ZoneId: string
-  /**
-   * 分页查询的限制数目，默认值为20，最大查询条目为1000。
-   */
-  Limit?: number
-  /**
-   * 分页的偏移量，默认值为0。
-   */
-  Offset?: number
+  RequestId?: string
 }
-
-/**
- * CreateCredential请求参数结构体
- */
-export type CreateCredentialRequest = null
 
 /**
  * ModifyRule请求参数结构体
@@ -670,55 +562,6 @@ export interface DescribePrefetchTasksResponse {
 }
 
 /**
- * DescribeWebManagedRulesHitRuleDetail请求参数结构体
- */
-export interface DescribeWebManagedRulesHitRuleDetailRequest {
-  /**
-   * 开始时间。
-   */
-  StartTime: string
-  /**
-   * 结束时间。
-   */
-  EndTime: string
-  /**
-   * 站点集合，不填默认选择全部站点。
-   */
-  ZoneIds?: Array<string>
-  /**
-   * 子域名列表，不填默认选择全部全部子域名。
-   */
-  Domains?: Array<string>
-  /**
-   * 查询时间粒度，取值有：
-<li>min：1分钟；</li>
-<li>5min：5分钟；</li>
-<li>hour：1小时；</li>
-<li>day：1天 。</li>不填将根据开始时间跟结束时间的间距自动推算粒度，具体为：一小时范围内以min粒度查询，两天范围内以5min粒度查询，七天范围内以hour粒度查询，超过七天以day粒度查询。
-   */
-  Interval?: string
-  /**
-   * 筛选条件，key可选的值有：
-<li>action ：执行动作 。</li>
-   */
-  QueryCondition?: Array<QueryCondition>
-  /**
-   * 分页查询的限制数目，默认值为20，最大查询条目为1000。
-   */
-  Limit?: number
-  /**
-   * 分页的偏移量，默认值为0。
-   */
-  Offset?: number
-  /**
-   * 数据归属地区，取值有：
-<li>overseas：全球（除中国大陆地区）数据；</li>
-<li>mainland：中国大陆地区数据。</li>不填将根据用户所在地智能选择地区。
-   */
-  Area?: string
-}
-
-/**
  * 描述键值对过滤器，用于条件过滤查询，支持模糊查询。例如过滤ID、名称、状态等。
 若存在多个Filter时，Filter间的关系为逻辑与（AND）关系。
 若同一个Filter存在多个Values，同一Filter下Values间的关系为逻辑或（OR）关系。
@@ -814,57 +657,6 @@ export interface DescribeDDoSAttackDataResponse {
 }
 
 /**
- * ModifySecurityWafGroupPolicy请求参数结构体
- */
-export interface ModifySecurityWafGroupPolicyRequest {
-  /**
-   * 站点Id。当使用ZoneId和Entity时可不填写TemplateId，否则必须填写TemplateId。
-   */
-  ZoneId?: string
-  /**
-   * 子域名。当使用ZoneId和Entity时可不填写TemplateId，否则必须填写TemplateId。
-   */
-  Entity?: string
-  /**
-   * 总开关，取值有：
-<li>on：开启；</li>
-<li>off：关闭。</li>不填默认为上次的配置。
-   */
-  Switch?: string
-  /**
-   * 规则等级，取值有：
-<li> loose：宽松；</li>
-<li> normal：正常；</li>
-<li> strict：严格；</li>
-<li> stricter：超严格；</li>
-<li> custom：自定义。</li>不填默认为上次的配置。
-   */
-  Level?: string
-  /**
-   * 处置方式，取值有：
-<li> block：阻断；</li>
-<li> observe：观察。</li>不填默认为上次的配置。
-   */
-  Mode?: string
-  /**
-   * 托管规则。不填默认为上次的配置。
-   */
-  WafRules?: WafRule
-  /**
-   * AI引擎模式。不填默认为上次的配置。
-   */
-  AiRule?: AiRule
-  /**
-   * 托管规则等级组。不填默认为上次的配置。
-   */
-  WafGroups?: Array<WafGroup>
-  /**
-   * 模板Id。当使用模板Id时可不填ZoneId和Entity，否则必须填写ZoneId和Entity。
-   */
-  TemplateId?: string
-}
-
-/**
  * DescribeZoneSetting请求参数结构体
  */
 export interface DescribeZoneSettingRequest {
@@ -875,22 +667,19 @@ export interface DescribeZoneSettingRequest {
 }
 
 /**
- * DescribeClientRuleList返回参数结构体
+ * ModifyZoneStatus请求参数结构体
  */
-export interface DescribeClientRuleListResponse {
+export interface ModifyZoneStatusRequest {
   /**
-   * 封禁客户端数据列表。
-注意：此字段可能返回 null，表示取不到有效值。
+   * 站点 ID。
    */
-  Data: Array<ClientRule>
+  ZoneId: string
   /**
-   * 查询结果的总条数。
+   * 站点状态，取值有：
+<li> false：开启站点；</li>
+<li> true：关闭站点。</li>
    */
-  TotalCount: number
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  Paused: boolean
 }
 
 /**
@@ -934,22 +723,19 @@ export interface ModifySecurityPolicyRequest {
 }
 
 /**
- * DescribeDDoSAttackEvent返回参数结构体
+ * 无
  */
-export interface DescribeDDoSAttackEventResponse {
+export interface Waf {
   /**
-   * DDOS攻击事件数据列表。
-注意：此字段可能返回 null，表示取不到有效值。
+   * Waf开关，取值为：
+<li> on：开启；</li>
+<li> off：关闭。</li>
    */
-  Data?: Array<DDoSAttackEvent>
+  Switch: string
   /**
-   * 查询结果的总条数。
+   * 策略ID。
    */
-  TotalCount?: number
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  PolicyId?: number
 }
 
 /**
@@ -960,48 +746,6 @@ export interface ModifyApplicationProxyRuleStatusResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * DescribeClientRuleList请求参数结构体
- */
-export interface DescribeClientRuleListRequest {
-  /**
-   * 查询的站点ID.
-   */
-  ZoneId: string
-  /**
-   * 查询的子域名。
-   */
-  Domain: string
-  /**
-   * 规则类型，取值有：
-<li>acl：自定义规则；</li>
-<li>rate：限速规则。</li>不填表示查询所有规则。
-   */
-  RuleType?: string
-  /**
-   * 规则ID。
-   */
-  RuleId?: number
-  /**
-   * 客户端IP。
-   */
-  SourceClientIp?: string
-  /**
-   * 分页查询的限制数目，默认值为20，最大查询条目为1000。
-   */
-  Limit?: number
-  /**
-   * 分页的偏移量，默认值为0。
-   */
-  Offset?: number
-  /**
-   * 数据归属地区，取值有：
-<li>overseas：全球（除中国大陆地区）数据；</li>
-<li>mainland：中国大陆地区数据。</li>不填将根据用户所在地智能选择地区。
-   */
-  Area?: string
 }
 
 /**
@@ -1107,6 +851,10 @@ export interface ModifyZoneSettingRequest {
 不填写表示关闭。
    */
   ImageOptimize?: ImageOptimize
+  /**
+   * 标准 Debug 配置。
+   */
+  StandardDebug?: StandardDebug
 }
 
 /**
@@ -1305,46 +1053,6 @@ export interface ModifyAliasDomainRequest {
 export type DescribeAvailablePlansRequest = null
 
 /**
- * 拨测结果信息
- */
-export interface SpeedTestingInfo {
-  /**
-   * 任务状态，取值有：
-<li> 200：任务完成;</li>
-<li> 100：任务进行中；</li>
-<li> 503: 任务失败。</li>
-   */
-  StatusCode: number
-  /**
-   * 拨测任务 ID。
-   */
-  TestId: string
-  /**
-   * 拨测任务配置。
-   */
-  SpeedTestingConfig: SpeedTestingConfig
-  /**
-   * 拨测任务统计结果。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SpeedTestingStatistics: SpeedTestingStatistics
-}
-
-/**
- * 拨测分地域统计数据
- */
-export interface DistrictStatistics {
-  /**
-   * ISO 3166-2 国家/地区简写，详情请参考[ISO 3166-2](https://zh.m.wikipedia.org/zh-hans/ISO_3166-2)。
-   */
-  Alpha2: string
-  /**
-   * 整体拨测用时，单位ms。
-   */
-  LoadTime: number
-}
-
-/**
  * 加速域名源站信息。
  */
 export interface OriginInfo {
@@ -1354,6 +1062,7 @@ export interface OriginInfo {
 <li>COS：COS源。</li>
 <li>ORIGIN_GROUP：源站组类型源站。</li>
 <li>AWS_S3：AWS S3对象存储源站。</li>
+<li>SPACE：Edgeone源站Space存储，Space存储不允许配置该类型源站。</li>
    */
   OriginType: string
   /**
@@ -1377,53 +1086,19 @@ export interface OriginInfo {
 }
 
 /**
- * DescribeSingleL7AnalysisData请求参数结构体
+ * 标签配置
  */
-export interface DescribeSingleL7AnalysisDataRequest {
+export interface Tag {
   /**
-   * 开始时间。
+   * 标签键。
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  StartTime: string
+  TagKey: string
   /**
-   * 结束时间。
+   * 标签值。
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  EndTime: string
-  /**
-   * 查询的指标，取值有:
-<li> l7Flow_singleIpRequest：独立IP请求数。</li>
-   */
-  MetricNames: Array<string>
-  /**
-   * 站点集合。
-若不填写，默认选择全部站点，且最多只能查询近30天的数据；
-若填写，则可查询站点绑定套餐支持的<a href="https://cloud.tencent.com/document/product/1552/77380#edgeone-.E5.A5.97.E9.A4.90">数据分析最大查询范围</a>。
-   */
-  ZoneIds?: Array<string>
-  /**
-   * 过滤条件，详细的过滤条件Key值如下：
-<li>country<br>   按照【<strong>国家/地区</strong>】进行过滤，国家/地区遵循<a href="https://zh.wikipedia.org/wiki/ISO_3166-1">ISO 3166</a>规范。</li>
-<li>domain<br>   按照【<strong>子域名</strong>】进行过滤，子域名形如： test.example.com。</li>
-<li>protocol<br>   按照【<strong>HTTP协议版本</strong>】进行过滤。<br>   对应的Value可选项如下：<br>   HTTP/1.0：HTTP 1.0；<br>   HTTP/1.1：HTTP 1.1；<br>   HTTP/2.0：HTTP 2.0；<br>   HTTP/3.0：HTTP 3.0；<br>   WebSocket：WebSocket。</li>
-<li>socket<br>   按照【<strong>HTTP协议类型</strong>】进行过滤。<br>   对应的Value可选项如下：<br>   HTTP：HTTP 协议；<br>   HTTPS：HTTPS协议；<br>   QUIC：QUIC协议。</li>
-<li>tagKey<br>   按照【<strong>标签Key</strong>】进行过滤。</li>
-<li>tagValue<br>   按照【<strong>标签Value</strong>】进行过滤。</li>
-   */
-  Filters?: Array<QueryCondition>
-  /**
-   * 查询时间粒度，取值有：
-<li>min：1分钟；</li>
-<li>5min：5分钟；</li>
-<li>hour：1小时；</li>
-<li>day：1天;。</li>不填将根据开始时间跟结束时间的间距自动推算粒度，具体为：1小时范围内以min粒度查询，2天范围内以5min粒度查询，7天范围内以hour粒度查询，超过7天以day粒度查询。
-   */
-  Interval?: string
-  /**
-   * 数据归属地区，取值有：
-<li>overseas：全球（除中国大陆地区）数据；</li>
-<li>mainland：中国大陆地区数据；</li>
-<li>global：全球数据。</li>不填默认取值为global。
-   */
-  Area?: string
+  TagValue: string
 }
 
 /**
@@ -1475,20 +1150,6 @@ export interface ModifyZoneResponse {
 }
 
 /**
- * 安全模板配置
- */
-export interface TemplateConfig {
-  /**
-   * 模板ID。
-   */
-  TemplateId: string
-  /**
-   * 模板名称。
-   */
-  TemplateName: string
-}
-
-/**
  * Cookie校验与会话跟踪。
  */
 export interface AlgDetectSession {
@@ -1537,17 +1198,28 @@ export interface ModifyZoneRequest {
   /**
    * 站点接入方式，取值有：
 <li> full：NS 接入；</li>
-<li> partial：CNAME 接入。</li>不填写保持原有配置。
+<li> partial：CNAME 接入，如果站点当前是无域名接入，仅支持切换到CNAME接入。</li>不填写保持原有配置。
    */
   Type?: string
   /**
-   * 自定义站点信息，以替代系统默认分配的名称服务器。不填写保持原有配置。
+   * 自定义站点信息，以替代系统默认分配的名称服务器。不填写保持原有配置。当站点是无域名接入方式时不允许传此参数。
    */
   VanityNameServers?: VanityNameServers
   /**
    * 站点别名。数字、英文、-和_组合，限制20个字符。
    */
   AliasZoneName?: string
+  /**
+   * 站点接入地域，取值有：
+<li> global：全球；</li>
+<li> mainland：中国大陆；</li>
+<li> overseas：境外区域。</li>当站点是无域名接入方式时，不允许传此参数。
+   */
+  Area?: string
+  /**
+   * 站点名称。仅当站点由无域名接入方式切换到CNAME接入方式的场景下有效。
+   */
+  ZoneName?: string
 }
 
 /**
@@ -1611,14 +1283,14 @@ export interface BotExtendAction {
  */
 export interface CreatePurgeTaskResponse {
   /**
-   * 任务ID。
+   * 任务 ID。
    */
-  JobId: string
+  JobId?: string
   /**
    * 失败的任务列表及原因。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  FailedList: Array<FailReason>
+  FailedList?: Array<FailReason>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1633,20 +1305,6 @@ export interface DeleteApplicationProxyRuleResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * ReclaimAliasDomain请求参数结构体
- */
-export interface ReclaimAliasDomainRequest {
-  /**
-   * 站点 ID。
-   */
-  ZoneId?: string
-  /**
-   * 站点名称。
-   */
-  ZoneName?: string
 }
 
 /**
@@ -1881,37 +1539,6 @@ export interface AclCondition {
 }
 
 /**
- * 速率限制规则
- */
-export interface RateLimitConfig {
-  /**
-   * 开关，取值有：
-<li>on：开启；</li>
-<li>off：关闭。</li>
-   */
-  Switch: string
-  /**
-   * 速率限制-用户规则列表。如果为null，默认使用历史配置。
-   */
-  RateLimitUserRules?: Array<RateLimitUserRule>
-  /**
-   * 速率限制模板功能。如果为null，默认使用历史配置。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  RateLimitTemplate?: RateLimitTemplate
-  /**
-   * 智能客户端过滤。如果为null，默认使用历史配置。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  RateLimitIntelligence?: RateLimitIntelligence
-  /**
-   * 速率限制-托管定制规则。如果为null，默认使用历史配置。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  RateLimitCustomizes?: Array<RateLimitUserRule>
-}
-
-/**
  * DescribeAliasDomains请求参数结构体
  */
 export interface DescribeAliasDomainsRequest {
@@ -1932,26 +1559,6 @@ export interface DescribeAliasDomainsRequest {
 <li>target-name<br>   按照【<strong>目标域名名称</strong>】进行过滤。<br>   类型：String<br>   必选：否</li><li>alias-name<br>   按照【<strong>别称域名名称</strong>】进行过滤。<br>   类型：String<br>   必选：否</li>模糊查询时仅支持过滤字段名为alias-name。
    */
   Filters?: Array<AdvancedFilter>
-}
-
-/**
- * ModifyApplicationProxyStatus请求参数结构体
- */
-export interface ModifyApplicationProxyStatusRequest {
-  /**
-   * 站点ID。
-   */
-  ZoneId: string
-  /**
-   * 代理ID。
-   */
-  ProxyId: string
-  /**
-   * 状态，取值有：
-<li>offline: 停用；</li>
-<li>online: 启用。</li>
-   */
-  Status: string
 }
 
 /**
@@ -2171,6 +1778,11 @@ export interface ApplicationProxyRule {
    */
   SessionPersist?: boolean
   /**
+   * 会话保持的时间，只有当SessionPersist为true时，该值才会生效。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SessionPersistTime?: number
+  /**
    * 源站端口，支持格式：
 <li>单端口，如：80。</li>
 <li>端口段：81-82，表示81，82两个端口。</li>
@@ -2191,17 +1803,41 @@ export interface SmartRouting {
 }
 
 /**
- * DescribeDnsData返回参数结构体
+ * ModifyApplicationProxy请求参数结构体
  */
-export interface DescribeDnsDataResponse {
+export interface ModifyApplicationProxyRequest {
   /**
-   * 统计数据。
+   * 站点 ID。
    */
-  Data: Array<DnsData>
+  ZoneId: string
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 代理 ID。
    */
-  RequestId?: string
+  ProxyId: string
+  /**
+   * 当 ProxyType=hostname 时，表示域名或子域名；
+当 ProxyType=instance 时，表示代理名称。
+   */
+  ProxyName: string
+  /**
+   * 会话保持时间，取值范围：30-3600，单位：秒。
+不填写保持原有配置。
+   */
+  SessionPersistTime?: number
+  /**
+   * 四层代理模式，取值有：
+<li>hostname：表示子域名模式；</li>
+<li>instance：表示实例模式。</li>不填写保持原有配置。
+   */
+  ProxyType?: string
+  /**
+   * Ipv6 访问配置，不填写保持原有配置。
+   */
+  Ipv6?: Ipv6
+  /**
+   * 中国大陆加速优化配置。 不填写表示保持原有配置。
+   */
+  AccelerateMainland?: AccelerateMainland
 }
 
 /**
@@ -2245,7 +1881,8 @@ export interface Zone {
   /**
    * 站点接入方式，取值有
 <li> full：NS 接入； </li>
-<li> partial：CNAME 接入。</li>
+<li> partial：CNAME 接入；</li>
+<li> noDomainAccess：无域名接入。</li>
    */
   Type: string
   /**
@@ -2592,83 +2229,23 @@ export interface DescribeRulesRequest {
 }
 
 /**
- * 日志任务主题信息
+ * DescribeContentQuota返回参数结构体
  */
-export interface ClsLogTopicInfo {
+export interface DescribeContentQuotaResponse {
   /**
-   * 任务名。
-   */
-  TaskName: string
-  /**
-   * 站点名称。
-   */
-  ZoneName: string
-  /**
-   * 日志集ID。
-   */
-  LogSetId: string
-  /**
-   * 日志主题ID。
-   */
-  TopicId: string
-  /**
-   * 任务类型。
-   */
-  EntityType: string
-  /**
-   * 任务主题保存时间。
-   */
-  Period: number
-  /**
-   * 任务主题是否开启。
-   */
-  Enabled: boolean
-  /**
-   * 任务主题是否异常。
-   */
-  Deleted: string
-  /**
-   * 创建时间。
-   */
-  CreateTime: string
-  /**
-   * 推送目标地址,取值有：
-<li>cls: 推送到cls；</li>
-<li>custom_enpoint: 自定义推送地址。</li>
-   */
-  Target: string
-  /**
-   * 日志集所属地区。
+   * 刷新相关配额。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  LogSetRegion: string
+  PurgeQuota: Array<Quota>
   /**
-   * 站点id。
+   * 预热相关配额。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ZoneId: string
+  PrefetchQuota: Array<Quota>
   /**
-   * 加速区域，取值有：
-<li>mainland：中国大陆境内;</li>
-<li>overseas：全球（不含中国大陆）。</li>
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  Area: string
-  /**
-   * 推送任务类型，取值有：
-<li>cls：推送到cls；</li>
-<li>custom_endpoint：推送到自定义接口。</li>
-   */
-  LogSetType: string
-}
-
-/**
- * DescribeSpeedTestingMetricData请求参数结构体
- */
-export interface DescribeSpeedTestingMetricDataRequest {
-  /**
-   * 站点ID。
-   */
-  ZoneId: string
+  RequestId?: string
 }
 
 /**
@@ -2916,17 +2493,15 @@ export interface WafConfig {
 }
 
 /**
- * DescribeSpeedTestingDetails返回参数结构体
+ * Grpc配置项
  */
-export interface DescribeSpeedTestingDetailsResponse {
+export interface Grpc {
   /**
-   * 分地域拨测统计数据。
+   * 是否开启 Grpc 配置，取值有：
+<li>on：开启；</li>
+<li>off：关闭。</li>
    */
-  SpeedTestingDetailData: SpeedTestingDetailData
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  Switch: string
 }
 
 /**
@@ -2949,20 +2524,6 @@ export interface SlowRateConfig {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Threshold?: number
-}
-
-/**
- * Dns统计曲线数据项
- */
-export interface DnsData {
-  /**
-   * 时间。
-   */
-  Time: string
-  /**
-   * 数值。
-   */
-  Value: number
 }
 
 /**
@@ -3007,33 +2568,6 @@ export interface ServerCertInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CommonName?: string
-}
-
-/**
- * 时序类型详细数据
- */
-export interface TimingTypeValue {
-  /**
-   * 数据和。
-   */
-  Sum: number
-  /**
-   * 最大值。
-   */
-  Max: number
-  /**
-   * 平均值。
-   */
-  Avg: number
-  /**
-   * 指标名。
-   */
-  MetricName: string
-  /**
-   * 详细数据。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Detail: Array<TimingDataItem>
 }
 
 /**
@@ -3126,6 +2660,7 @@ export interface CreatePrefetchTaskRequest {
   /**
    * 要预热的资源列表，每个元素格式类似如下:
 http://www.example.com/example.txt。
+注意：提交任务数受计费套餐配额限制，请查看 [EO计费套餐](https://cloud.tencent.com/document/product/1552/77380)。
    */
   Targets?: Array<string>
   /**
@@ -3296,123 +2831,118 @@ export interface ZoneSetting {
   /**
    * 站点名称。
    */
-  ZoneName: string
+  ZoneName?: string
   /**
    * 站点加速区域信息，取值有：
 <li> mainland：中国境内加速；</li>
 <li> overseas：中国境外加速。</li>
    */
-  Area: string
+  Area?: string
   /**
    * 节点缓存键配置。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CacheKey: CacheKey
+  CacheKey?: CacheKey
   /**
    * Quic访问配置。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Quic: Quic
+  Quic?: Quic
   /**
    * POST请求传输配置。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  PostMaxSize: PostMaxSize
+  PostMaxSize?: PostMaxSize
   /**
    * 智能压缩配置。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Compression: Compression
+  Compression?: Compression
   /**
    * Http2回源配置。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  UpstreamHttp2: UpstreamHttp2
+  UpstreamHttp2?: UpstreamHttp2
   /**
    * 访问协议强制Https跳转配置。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ForceRedirect: ForceRedirect
+  ForceRedirect?: ForceRedirect
   /**
    * 缓存过期时间配置。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CacheConfig: CacheConfig
+  CacheConfig?: CacheConfig
   /**
    * 源站配置。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Origin: Origin
+  Origin?: Origin
   /**
    * 智能加速配置。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SmartRouting: SmartRouting
+  SmartRouting?: SmartRouting
   /**
    * 浏览器缓存配置。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  MaxAge: MaxAge
+  MaxAge?: MaxAge
   /**
    * 离线缓存配置。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  OfflineCache: OfflineCache
+  OfflineCache?: OfflineCache
   /**
    * WebSocket配置。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  WebSocket: WebSocket
+  WebSocket?: WebSocket
   /**
    * 客户端IP回源请求头配置。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ClientIpHeader: ClientIpHeader
+  ClientIpHeader?: ClientIpHeader
   /**
    * 缓存预刷新配置。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CachePrefresh: CachePrefresh
+  CachePrefresh?: CachePrefresh
   /**
    * Ipv6访问配置。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Ipv6: Ipv6
+  Ipv6?: Ipv6
   /**
    * Https 加速配置。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Https: Https
+  Https?: Https
   /**
    * 回源时是否携带客户端IP所属地域信息的配置。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ClientIpCountry: ClientIpCountry
+  ClientIpCountry?: ClientIpCountry
   /**
    * Grpc协议支持配置。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Grpc: Grpc
+  Grpc?: Grpc
   /**
    * 图片优化相关配置。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ImageOptimize: ImageOptimize
+  ImageOptimize?: ImageOptimize
   /**
    * 中国大陆加速优化配置。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AccelerateMainland?: AccelerateMainland
-}
-
-/**
- * ModifyRulePriority返回参数结构体
- */
-export interface ModifyRulePriorityResponse {
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 标准 Debug 配置。
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  RequestId?: string
+  StandardDebug?: StandardDebug
 }
 
 /**
@@ -3546,88 +3076,6 @@ export interface WebSocket {
 }
 
 /**
- * DescribeWebProtectionTopData请求参数结构体
- */
-export interface DescribeWebProtectionTopDataRequest {
-  /**
-   * 开始时间。
-   */
-  StartTime: string
-  /**
-   * 结束时间。
-   */
-  EndTime: string
-  /**
-   * 统计指标列表，取值有：
-<li>ccRate_requestNum_url：速率限制规则请求次数url分布排行；</li>
-<li>ccRate_cipRequestNum_region：速率限制规则请求次数区域客户端ip分布排行；</li>
-<li>ccAcl_requestNum_url：自定义规则请求次数url分布排行；</li>
-<li>ccAcl_requestNum_cip：自定义规则请求次数客户端ip分布排行；</li>
-<li>ccAcl_cipRequestNum_region：自定义规则请求次数客户端区域分布排行。</li>
-   */
-  MetricName: string
-  /**
-   * 查询时间粒度，取值有：
-<li>min：1分钟；</li>
-<li>5min：5分钟；</li>
-<li>hour：1小时；</li>
-<li>day：1天。</li>不填将根据开始时间跟结束时间的间距自动推算粒度，具体为：一小时范围内以min粒度查询，两天范围内以5min粒度查询，七天范围内以hour粒度查询，超过七天以day粒度查询。
-   */
-  Interval?: string
-  /**
-   * 站点集合，不填默认选择全部站点。
-   */
-  ZoneIds?: Array<string>
-  /**
-   * 域名集合，不填默认选择全部子域名。
-   */
-  Domains?: Array<string>
-  /**
-   * 查询前多少个数据，不填默认默认为10， 表示查询前top 10的数据。
-   */
-  Limit?: number
-  /**
-   * 筛选条件，key可选的值有：
-<li>action：执行动作 。</li>
-   */
-  QueryCondition?: Array<QueryCondition>
-  /**
-   * 数据归属地区，取值有：
-<li>overseas：全球（除中国大陆地区）数据；</li>
-<li>mainland：中国大陆地区数据。</li>不填将根据用户所在地智能选择地区。
-   */
-  Area?: string
-}
-
-/**
- * 拨测详细数据，包括各地域性能数据。
- */
-export interface SpeedTestingDetailData {
-  /**
-   * 站点ID。
-   */
-  ZoneId: string
-  /**
-   * 站点名称。
-   */
-  ZoneName: string
-  /**
-   * 地域性能数据。
-   */
-  DistrictStatistics: Array<DistrictStatistics>
-}
-
-/**
- * DeleteSecurityIPGroup返回参数结构体
- */
-export interface DeleteSecurityIPGroupResponse {
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * DDoS封禁解封信息
  */
 export interface DDoSBlockData {
@@ -3659,113 +3107,6 @@ export interface VanityNameServers {
    * 自定义 ns 列表。
    */
   Servers?: Array<string>
-}
-
-/**
- * 规则引擎规则详情
- */
-export interface RuleItem {
-  /**
-   * 规则ID。
-   */
-  RuleId: string
-  /**
-   * 规则名称，名称字符串长度 1~255。
-   */
-  RuleName: string
-  /**
-   * 规则状态，取值有:
-<li> enable: 启用； </li>
-<li> disable: 未启用。 </li>
-   */
-  Status: string
-  /**
-   * 规则内容。
-   */
-  Rules: Array<Rule>
-  /**
-   * 规则优先级, 值越大优先级越高，最小为 1。
-   */
-  RulePriority: number
-  /**
-   * 规则标签。
-   */
-  Tags: Array<string>
-}
-
-/**
- * ModifySecurityWafGroupPolicy返回参数结构体
- */
-export interface ModifySecurityWafGroupPolicyResponse {
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DescribeTimingL7SourceData返回参数结构体
- */
-export interface DescribeTimingL7SourceDataResponse {
-  /**
-   * 查询结果的总条数。
-   */
-  TotalCount?: number
-  /**
-   * 时序流量数据列表。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TimingDataRecords?: Array<TimingDataRecord>
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DescribeWebManagedRulesData请求参数结构体
- */
-export interface DescribeWebManagedRulesDataRequest {
-  /**
-   * 开始时间。
-   */
-  StartTime: string
-  /**
-   * 结束时间。
-   */
-  EndTime: string
-  /**
-   * 统计指标列表，取值有：
-<li>waf_interceptNum：waf拦截次数。</li>
-   */
-  MetricNames: Array<string>
-  /**
-   * 站点集合，不填默认选择全部站点。
-   */
-  ZoneIds?: Array<string>
-  /**
-   * 子域名集合，不填默认选择全部子域名。
-   */
-  Domains?: Array<string>
-  /**
-   * 筛选条件，key可选的值有：
-<li>action：执行动作。</li>
-   */
-  QueryCondition?: Array<QueryCondition>
-  /**
-   * 查询时间粒度，取值有：
-<li>min：1分钟；</li>
-<li>5min：5分钟；</li>
-<li>hour：1小时；</li>
-<li>day：1天。</li>不填将根据开始时间跟结束时间的间距自动推算粒度，具体为：一小时范围内以min粒度查询，两天范围内以5min粒度查询，七天范围内以hour粒度查询，超过七天以day粒度查询。
-   */
-  Interval?: string
-  /**
-   * 数据归属地区，取值有：
-<li>overseas：全球（除中国大陆地区）数据；</li>
-<li>mainland：中国大陆地区数据。</li>不填将根据用户所在地智能选择地区。
-   */
-  Area?: string
 }
 
 /**
@@ -3812,25 +3153,6 @@ export interface RuleChoicePropertiesItem {
 <li> 成员参数 Id 为 StatusCode：RuleAction 选择 CodeAction。</li>
    */
   ExtraParameter: RuleExtraParameter
-}
-
-/**
- * DescribeWebManagedRulesData返回参数结构体
- */
-export interface DescribeWebManagedRulesDataResponse {
-  /**
-   * WAF攻击的时序数据列表。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Data: Array<SecEntry>
-  /**
-   * 查询结果的总条数。
-   */
-  TotalCount: number
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**
@@ -3910,17 +3232,30 @@ export interface SecurityConfig {
 }
 
 /**
- * CreateSpeedTesting请求参数结构体
+ * DescribePrefetchTasks请求参数结构体
  */
-export interface CreateSpeedTestingRequest {
+export interface DescribePrefetchTasksRequest {
   /**
-   * 站点 ID。
+   * 查询起始时间。
    */
-  ZoneId: string
+  StartTime?: string
   /**
-   * 拨测子域名。
+   * 查询结束时间。
    */
-  Host?: string
+  EndTime?: string
+  /**
+   * 分页查询偏移量，默认为 0。
+   */
+  Offset?: number
+  /**
+   * 分页查询限制数目，默认值：20，上限：1000。
+   */
+  Limit?: number
+  /**
+   * 过滤条件，Filters.Values的上限为20。详细的过滤条件如下：
+<li>zone-id<br>   按照【<strong>站点 ID</strong>】进行过滤。zone-id形如：zone-1379afjk91u32h，暂不支持多值。<br>   类型：String<br>   必选：否。<br>   模糊查询：不支持。</li><li>job-id<br>   按照【<strong>任务ID</strong>】进行过滤。job-id形如：1379afjk91u32h，暂不支持多值。<br>   类型：String<br>   必选：否。<br>   模糊查询：不支持。</li><li>target<br>   按照【<strong>目标资源信息</strong>】进行过滤。target形如：http://www.qq.com/1.txt，暂不支持多值。<br>   类型：String<br>   必选：否。<br>   模糊查询：不支持。</li><li>domains<br>   按照【<strong>域名</strong>】进行过滤。domains形如：www.qq.com。<br>   类型：String<br>   必选：否。<br>   模糊查询：不支持。</li><li>statuses<br>   按照【<strong>任务状态</strong>】进行过滤。<br>   必选：否<br>   模糊查询：不支持。<br>   可选项：<br>   processing：处理中<br>   success：成功<br>   failed：失败<br>   timeout：超时</li>
+   */
+  Filters?: Array<AdvancedFilter>
 }
 
 /**
@@ -3984,20 +3319,6 @@ export interface IPGroup {
    * IP 组内容，可以填入 IP 及 IP 掩码。
    */
   Content: Array<string>
-}
-
-/**
- * ModifyRulePriority请求参数结构体
- */
-export interface ModifyRulePriorityRequest {
-  /**
-   * 站点 ID。
-   */
-  ZoneId: string
-  /**
-   * 规则 ID 的顺序，多条规则执行顺序依次往下。
-   */
-  RuleIds: Array<string>
 }
 
 /**
@@ -4073,12 +3394,12 @@ export interface CreatePrefetchTaskResponse {
   /**
    * 任务 ID。
    */
-  JobId: string
+  JobId?: string
   /**
    * 失败的任务列表。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  FailedList: Array<FailReason>
+  FailedList?: Array<FailReason>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4117,72 +3438,33 @@ export interface DescribeDefaultCertificatesRequest {
 }
 
 /**
- * BindZoneToPlan请求参数结构体
+ * DescribeAliasDomains返回参数结构体
  */
-export interface BindZoneToPlanRequest {
+export interface DescribeAliasDomainsResponse {
   /**
-   * 未绑定套餐的站点ID。
+   * 符合条件的别称域名个数。
    */
-  ZoneId: string
+  TotalCount: number
   /**
-   * 待绑定的目标套餐ID。
+   * 别称域名详细信息列表。
    */
-  PlanId: string
+  AliasDomains: Array<AliasDomain>
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
- * DescribeWebProtectionHitRuleDetail请求参数结构体
+ * 安全类型配置项。
  */
-export interface DescribeWebProtectionHitRuleDetailRequest {
+export interface SecurityType {
   /**
-   * 开始时间。
+   * 安全类型开关，取值为：
+<li> on：开启；</li>
+<li> off：关闭。</li>
    */
-  StartTime: string
-  /**
-   * 结束时间。
-   */
-  EndTime: string
-  /**
-   * 所属规则数据类型，支持的规则有：
-<li>rate：限速规则；</li>
-<li>acl：自定义规则。</li>
-   */
-  EntityType: string
-  /**
-   * 站点集合，不填默认选择全部站点。
-   */
-  ZoneIds?: Array<string>
-  /**
-   * 域名列表，不填默认选择全部子域名。
-   */
-  Domains?: Array<string>
-  /**
-   * 筛选条件，key可选的值有：
-<li>action：执行动作。</li>
-   */
-  QueryCondition?: Array<QueryCondition>
-  /**
-   * 分页查询的限制数目，默认值为20，最大查询条目为1000。
-   */
-  Limit?: number
-  /**
-   * 分页的偏移量，默认值为0。
-   */
-  Offset?: number
-  /**
-   * 查询时间粒度，支持的时间粒度有：
-<li>min：1分钟；</li>
-<li>5min：5分钟；</li>
-<li>hour：1小时；</li>
-<li>day：1天。</li>不填将根据开始时间跟结束时间的间距自动推算粒度，具体为：一小时范围内以min粒度查询，两天范围内以5min粒度查询，七天范围内以hour粒度查询，超过七天以day粒度查询。
-   */
-  Interval?: string
-  /**
-   * 数据归属地区，取值有：
-<li>overseas：全球（除中国大陆地区）数据；</li>
-<li>mainland：中国大陆地区数据。</li>不填将根据用户所在地智能选择地区。
-   */
-  Area?: string
+  Switch: string
 }
 
 /**
@@ -4218,11 +3500,12 @@ export interface CreateZoneRequest {
   /**
    * 站点名称。
    */
-  ZoneName: string
+  ZoneName?: string
   /**
    * 接入方式，取值有：
 <li> full：NS接入；</li>
-<li> partial：CNAME接入，请先调用认证站点API（IdentifyZone）进行站点归属权校验，校验通过后继续调用本接口创建站点。</li>不填写使用默认值full。
+<li> partial：CNAME接入，请先调用认证站点API（IdentifyZone）进行站点归属权校验，校验通过后继续调用本接口创建站点；<li>noDomainAccess：无域名接入，取此值时仅Tags字段有效。</li>
+</li>不填写使用默认值full。
    */
   Type?: string
   /**
@@ -4357,33 +3640,33 @@ export interface DescribeTimingL7CacheDataRequest {
 }
 
 /**
- * 拨测配额数据。
+ * 内容管理任务结果
  */
-export interface SpeedTestingQuota {
+export interface Task {
   /**
-   * 站点总拨测次数。
+   * 任务 ID。
    */
-  TotalTestRuns: number
+  JobId: string
   /**
-   * 站点剩余可用拨测次数。
+   * 状态。
    */
-  AvailableTestRuns: number
-}
-
-/**
- * 无
- */
-export interface Waf {
+  Status: string
   /**
-   * Waf开关，取值为：
-<li> on：开启；</li>
-<li> off：关闭。</li>
+   * 资源。
    */
-  Switch: string
+  Target: string
   /**
-   * 策略ID。
+   * 任务类型。
    */
-  PolicyId?: number
+  Type: string
+  /**
+   * 任务创建时间。
+   */
+  CreateTime: string
+  /**
+   * 任务完成时间。
+   */
+  UpdateTime: string
 }
 
 /**
@@ -4394,16 +3677,6 @@ export interface ModifyRuleResponse {
    * 规则 ID。
    */
   RuleId?: string
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * CheckCertificate返回参数结构体
- */
-export interface CheckCertificateResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4429,83 +3702,35 @@ export interface AscriptionInfo {
 }
 
 /**
- * DescribeLogSets返回参数结构体
+ * 规则引擎规则详情
  */
-export interface DescribeLogSetsResponse {
+export interface RuleItem {
   /**
-   * 日志集列表数据。
-注意：此字段可能返回 null，表示取不到有效值。
+   * 规则ID。
    */
-  LogSetList: Array<LogSetInfo>
+  RuleId: string
   /**
-   * 查询结果的总条数。
+   * 规则名称，名称字符串长度 1~255。
    */
-  TotalCount: number
+  RuleName: string
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 规则状态，取值有:
+<li> enable: 启用； </li>
+<li> disable: 未启用。 </li>
    */
-  RequestId?: string
-}
-
-/**
- * DescribeWebProtectionData请求参数结构体
- */
-export interface DescribeWebProtectionDataRequest {
+  Status: string
   /**
-   * 开始时间。
+   * 规则内容。
    */
-  StartTime: string
+  Rules: Array<Rule>
   /**
-   * 结束时间。
+   * 规则优先级, 值越大优先级越高，最小为 1。
    */
-  EndTime: string
+  RulePriority: number
   /**
-   * 统计指标，取值有：
-<li>ccRate_interceptNum：速率限制规则限制次数；</li>
-<li>ccAcl_interceptNum：自定义规则拦截次数。</li>
+   * 规则标签。
    */
-  MetricNames: Array<string>
-  /**
-   * 站点集合，不填默认选择全部站点。
-   */
-  ZoneIds?: Array<string>
-  /**
-   * 域名集合，不填默认选择全部子域名。
-   */
-  Domains?: Array<string>
-  /**
-   * 查询时间粒度，支持的时间粒度有：
-<li>min：1分钟；</li>
-<li>5min：5分钟；</li>
-<li>hour：1小时；</li>
-<li>day：1天。</li>不填将根据开始时间跟结束时间的间距自动推算粒度，具体为：一小时范围内以min粒度查询，两天范围内以5min粒度查询，七天范围内以hour粒度查询，超过七天以day粒度查询。
-   */
-  Interval?: string
-  /**
-   * 筛选条件，key可选的值有：
-<li>action：执行动作。</li>
-   */
-  QueryCondition?: Array<QueryCondition>
-  /**
-   * 数据归属地区，取值有：
-<li>overseas：全球（除中国大陆地区）数据；</li>
-<li>mainland：中国大陆地区数据。</li>不填将根据用户所在地智能选择地区。
-   */
-  Area?: string
-}
-
-/**
- * CheckCertificate请求参数结构体
- */
-export interface CheckCertificateRequest {
-  /**
-   * 证书内容。
-   */
-  Certificate: string
-  /**
-   * 私钥内容。
-   */
-  PrivateKey: string
+  Tags: Array<string>
 }
 
 /**
@@ -4527,18 +3752,18 @@ export interface FirstPartConfig {
 }
 
 /**
- * DescribeAddableEntityList返回参数结构体
+ * DescribeDDoSAttackEvent返回参数结构体
  */
-export interface DescribeAddableEntityListResponse {
+export interface DescribeDDoSAttackEventResponse {
+  /**
+   * DDOS攻击事件数据列表。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Data?: Array<DDoSAttackEvent>
   /**
    * 查询结果的总条数。
    */
-  TotalCount: number
-  /**
-   * 可添加的实体列表。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  EntityList: Array<string>
+  TotalCount?: number
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4596,6 +3821,10 @@ export interface CreateApplicationProxyRuleRequest {
    */
   SessionPersist?: boolean
   /**
+   * 会话保持的时间，只有当SessionPersist为true时，该值才会生效。
+   */
+  SessionPersistTime?: number
+  /**
    * 源站端口，支持格式：
 <li>单端口：80；</li>
 <li>端口段：81-90，81至90端口。</li>
@@ -4624,6 +3853,7 @@ export interface Cache {
 <li>on：开启；</li>
 <li>off：关闭。</li>
 注意：此字段可能返回 null，表示取不到有效值。
+   * @deprecated
    */
   IgnoreCacheControl?: string
 }
@@ -4648,41 +3878,34 @@ export interface ForceRedirect {
 }
 
 /**
- * ModifyApplicationProxy请求参数结构体
+ * 速率限制规则
  */
-export interface ModifyApplicationProxyRequest {
+export interface RateLimitConfig {
   /**
-   * 站点 ID。
+   * 开关，取值有：
+<li>on：开启；</li>
+<li>off：关闭。</li>
    */
-  ZoneId: string
+  Switch: string
   /**
-   * 代理 ID。
+   * 速率限制-用户规则列表。如果为null，默认使用历史配置。
    */
-  ProxyId: string
+  RateLimitUserRules?: Array<RateLimitUserRule>
   /**
-   * 当 ProxyType=hostname 时，表示域名或子域名；
-当 ProxyType=instance 时，表示代理名称。
+   * 速率限制模板功能。如果为null，默认使用历史配置。
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  ProxyName: string
+  RateLimitTemplate?: RateLimitTemplate
   /**
-   * 会话保持时间，取值范围：30-3600，单位：秒。
-不填写保持原有配置。
+   * 智能客户端过滤。如果为null，默认使用历史配置。
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  SessionPersistTime?: number
+  RateLimitIntelligence?: RateLimitIntelligence
   /**
-   * 四层代理模式，取值有：
-<li>hostname：表示子域名模式；</li>
-<li>instance：表示实例模式。</li>不填写保持原有配置。
+   * 速率限制-托管定制规则。如果为null，默认使用历史配置。
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  ProxyType?: string
-  /**
-   * Ipv6 访问配置，不填写保持原有配置。
-   */
-  Ipv6?: Ipv6
-  /**
-   * 中国大陆加速优化配置。 不填写表示保持原有配置。
-   */
-  AccelerateMainland?: AccelerateMainland
+  RateLimitCustomizes?: Array<RateLimitUserRule>
 }
 
 /**
@@ -4730,32 +3953,120 @@ export interface CodeAction {
 }
 
 /**
- * CreateReplayTask请求参数结构体
+ * 域名配置信息
  */
-export interface CreateReplayTaskRequest {
+export interface DetailHost {
   /**
-   * 重放任务的 ID 列表。
+   * 站点ID。
    */
-  Ids: Array<string>
-}
-
-/**
- * DescribeWebProtectionHitRuleDetail返回参数结构体
- */
-export interface DescribeWebProtectionHitRuleDetailResponse {
+  ZoneId: string
   /**
-   * cc防护命中规则列表。
+   * 加速服务状态，取值为：
+<li> process：部署中；</li>
+<li> online：已启动；</li>
+<li> offline：已关闭。</li>
+   */
+  Status: string
+  /**
+   * 域名。
+   */
+  Host: string
+  /**
+   * 站点名称。
+   */
+  ZoneName: string
+  /**
+   * 分配的Cname域名
+   */
+  Cname: string
+  /**
+   * 资源ID。
+   */
+  Id: string
+  /**
+   * 实例ID。
+   */
+  InstanceId: string
+  /**
+   * 锁状态。
+   */
+  Lock: number
+  /**
+   * 域名状态类型。
+   */
+  Mode: number
+  /**
+   * 域名加速地域，取值有：
+<li> global：全球；</li>
+<li> mainland：中国大陆；</li>
+<li> overseas：境外区域。</li>
+   */
+  Area: string
+  /**
+   * 加速类型配置项。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Data: Array<SecHitRuleInfo>
+  AccelerateType: AccelerateType
   /**
-   * 查询结果的总条数。
+   * Https配置项。
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  TotalCount: number
+  Https: Https
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 缓存配置项。
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  RequestId?: string
+  CacheConfig: CacheConfig
+  /**
+   * 源站配置项。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Origin: Origin
+  /**
+   * 安全类型。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SecurityType: SecurityType
+  /**
+   * 缓存键配置项。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CacheKey: CacheKey
+  /**
+   * 智能压缩配置项。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Compression: Compression
+  /**
+   * Waf防护配置项。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Waf: Waf
+  /**
+   * CC防护配置项。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CC: CC
+  /**
+   * DDoS防护配置。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DDoS: DDoS
+  /**
+   * 智能路由配置项。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SmartRouting: SmartRouting
+  /**
+   * Ipv6访问配置项。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Ipv6: Ipv6
+  /**
+   * 回源时是否携带客户端IP所属地域信息的配置。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ClientIpCountry: ClientIpCountry
 }
 
 /**
@@ -4885,25 +4196,6 @@ export interface DescribePurgeTasksRequest {
 }
 
 /**
- * DescribeWebProtectionClientIpList返回参数结构体
- */
-export interface DescribeWebProtectionClientIpListResponse {
-  /**
-   * CC防护客户端（攻击源）ip信息列表。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Data: Array<SecClientIp>
-  /**
-   * 查询结果的总条数。
-   */
-  TotalCount: number
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * DescribeTimingL7AnalysisData返回参数结构体
  */
 export interface DescribeTimingL7AnalysisDataResponse {
@@ -4932,20 +4224,6 @@ export interface ImageOptimize {
 <li>off：关闭。</li>
    */
   Switch: string
-}
-
-/**
- * Top数据的详细信息
- */
-export interface TopDetailData {
-  /**
-   * 字段名。
-   */
-  Key: string
-  /**
-   * 字段值。
-   */
-  Value: number
 }
 
 /**
@@ -5230,19 +4508,17 @@ export interface CreateRuleRequest {
 }
 
 /**
- * ModifyZoneStatus请求参数结构体
+ * 安全模板配置
  */
-export interface ModifyZoneStatusRequest {
+export interface TemplateConfig {
   /**
-   * 站点 ID。
+   * 模板ID。
    */
-  ZoneId: string
+  TemplateId: string
   /**
-   * 站点状态，取值有：
-<li> false：开启站点；</li>
-<li> true：关闭站点。</li>
+   * 模板名称。
    */
-  Paused: boolean
+  TemplateName: string
 }
 
 /**
@@ -5369,7 +4645,7 @@ export interface CreateApplicationProxyRuleResponse {
   /**
    * 规则ID
    */
-  RuleId: string
+  RuleId?: string
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5465,24 +4741,6 @@ export interface SubRule {
 }
 
 /**
- * DescribeLogSets请求参数结构体
- */
-export interface DescribeLogSetsRequest {
-  /**
-   * 日志集所属的地域。
-   */
-  LogSetRegion: string
-  /**
-   * 日志集ID。
-   */
-  LogSetId?: string
-  /**
-   * 日志集名称。
-   */
-  LogSetName?: string
-}
-
-/**
  * CreatePlanForZone请求参数结构体
  */
 export interface CreatePlanForZoneRequest {
@@ -5529,44 +4787,6 @@ export interface ModifyAliasDomainStatusRequest {
 }
 
 /**
- * 客户端规则信息
- */
-export interface ClientRule {
-  /**
-   * 客户端ip。
-   */
-  ClientIp: string
-  /**
-   * 规则类型。
-   */
-  RuleType: string
-  /**
-   * 规则id。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  RuleId: number
-  /**
-   * 规则描述。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Description: string
-  /**
-   * 封禁状态，取值有：
-<li>block ：封禁 ；</li>
-<li>allow ：放行 。</li>
-   */
-  IpStatus: string
-  /**
-   * 封禁时间，采用unix秒级时间戳。
-   */
-  BlockTime: number
-  /**
-   * 每条数据的唯一标识id。
-   */
-  Id: string
-}
-
-/**
  * 统计曲线数据项
  */
 export interface TimingDataItem {
@@ -5578,34 +4798,6 @@ export interface TimingDataItem {
    * 具体数值。
    */
   Value: number
-}
-
-/**
- * 站点拨测配置
- */
-export interface SpeedTestingConfig {
-  /**
-   * 任务类型，取值有：
-<li>1：页面性能;</li>
-<li>2：文件上传;</li>
-<li>3：文件下载;</li>
-<li>4：端口性能;</li>
-<li>5：网络质量;</li>
-<li>6：音视频体验。</li>
-   */
-  TaskType: number
-  /**
-   * 拨测 url。
-   */
-  Url: string
-  /**
-   * 拨测 UA。
-   */
-  UA: string
-  /**
-   * 网络类型。
-   */
-  Connectivity: string
 }
 
 /**
@@ -5664,70 +4856,6 @@ export interface CreateApplicationProxyRequest {
    * 中国大陆加速优化配置。不填写表示关闭中国大陆加速优化。
    */
   AccelerateMainland?: AccelerateMainland
-}
-
-/**
- * 拨测任务状态信息
- */
-export interface SpeedTestingStatus {
-  /**
-   * 拨测 url。
-   */
-  Url: string
-  /**
-   * 拨测 url 是否使用 https。
-   */
-  Tls: boolean
-  /**
-   * 任务创建时间。
-   */
-  CreatedOn: string
-  /**
-   * 任务状态，取值有：
-<li> 200：任务完成;</li>
-<li> 100：任务进行中。</li>
-<li> 503: 任务失败。</li>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  StatusCode: number
-  /**
-   * 拨测 UA。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  UA: string
-  /**
-   * 网络环境。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Connectivity: string
-  /**
-   * 是否可达，取值：
-<li> true：可达；</li>
-<li> false：不可达。</li>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Reachable: boolean
-  /**
-   * 是否超时，取值：
-<li> true：超时；</li>
-<li> false：不超时。</li>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TimedOut: boolean
-}
-
-/**
- * DescribeSpeedTestingMetricData返回参数结构体
- */
-export interface DescribeSpeedTestingMetricDataResponse {
-  /**
-   * 站点拨测维度数据。
-   */
-  SpeedTestingMetricData: SpeedTestingMetricData
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**
@@ -5816,6 +4944,26 @@ export interface Sv {
    * 询价参数值。
    */
   Value: string
+  /**
+   * 询价参数映射的配额，取值有：
+<li>zone：站点数；</li>
+<li>custom-rule：自定义规则数；</li>
+<li>rate-limiting-rule：速率限制规则数；</li>
+<li>l4-proxy-instance：四层代理实例数。</li>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Pack?: string
+  /**
+   * 询价参数映射的四层代理实例Id。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceId?: string
+  /**
+   * 询价参数对应的防护等级。
+取值有： <li> cm_30G：中国大陆加速区域保底防护30Gbps；</li><li> cm_60G：中国大陆加速区域保底防护60Gbps；</li><li> cm_100G：中国大陆加速区域保底防护100Gbps；</li><li> anycast_300G：全球加速区域（除中国大陆）Anycast联防300Gbps；</li><li> anycast_unlimited：全球加速区域（除中国大陆）Anycast无上限全力防护；</li><li> cm_30G_anycast_300G：中国大陆加速区域保底防护30Gbps，全球加速区域（除中国大陆）Anycast联防300Gbps；</li><li> cm_30G_anycast_unlimited：中国大陆加速区域保底防护30Gbps，全球加速区域（除中国大陆）Anycast无上限全力防护；</li><li> cm_60G_anycast_300G：中国大陆加速区域保底防护60Gbps，全球加速区域（除中国大陆）Anycast联防300Gbps；</li><li> cm_60G_anycast_unlimited：中国大陆加速区域保底防护60Gbps，全球加速区域（除中国大陆）Anycast无上限全力防护；</li><li> cm_100G_anycast_300G：中国大陆加速区域保底防护100Gbps，全球加速区域（除中国大陆）Anycast联防300Gbps；</li><li> cm_100G_anycast_unlimited：中国大陆加速区域保底防护100Gbps，全球加速区域（除中国大陆）Anycast无上限全力防护。</li>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProtectionSpecs?: string
 }
 
 /**
@@ -5835,46 +4983,6 @@ export interface Rule {
    * 嵌套规则。
    */
   SubRules?: Array<SubRuleItem>
-}
-
-/**
- * 不同维度的测速数据。
- */
-export interface SpeedTestingMetricData {
-  /**
-   * 站点ID。
-   */
-  ZoneId: string
-  /**
-   * 站点名称。
-   */
-  ZoneName: string
-  /**
-   * 源站拨测信息。
-   */
-  OriginSpeedTestingInfo: Array<SpeedTestingInfo>
-  /**
-   * EO 拨测信息。
-   */
-  ProxySpeedTestingInfo: Array<SpeedTestingInfo>
-  /**
-   * 站点状态。
-   */
-  SpeedTestingStatus: SpeedTestingStatus
-  /**
-   * 优化建议。
-   */
-  OptimizeAction: Array<OptimizeAction>
-  /**
-   * EO 整体性能，单位ms。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ProxyLoadTime: number
-  /**
-   * 源站整体性能，单位ms。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  OriginLoadTime: number
 }
 
 /**
@@ -5929,21 +5037,11 @@ export interface CreateZoneResponse {
   /**
    * 站点ID。
    */
-  ZoneId: string
+  ZoneId?: string
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * UpdateOriginProtectionIPWhitelist请求参数结构体
- */
-export interface UpdateOriginProtectionIPWhitelistRequest {
-  /**
-   * 站点ID。
-   */
-  ZoneId: string
 }
 
 /**
@@ -5994,67 +5092,6 @@ export interface Action {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CodeAction?: CodeAction
-}
-
-/**
- * 拨测统计结果
- */
-export interface SpeedTestingStatistics {
-  /**
-   * 首屏时间，单位 ms。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  FirstContentfulPaint: number
-  /**
-   * 首屏完全渲染时间，单位 ms。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  FirstMeaningfulPaint: number
-  /**
-   * 整体下载速度，单位 KB/s。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  OverallDownloadSpeed: number
-  /**
-   * 渲染时间，单位 ms。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  RenderTime: number
-  /**
-   * 文档完成时间, 单位 ms。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  DocumentFinishTime: number
-  /**
-   * 基础文档TCP连接时间，单位 ms。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TcpConnectionTime: number
-  /**
-   * 基础文档服务器响应时间，单位 ms。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ResponseTime: number
-  /**
-   * 基础文档下载时间，单位 ms。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  FileDownloadTime: number
-  /**
-   * 整体性能，测试总时间，单位 ms。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  LoadTime: number
-}
-
-/**
- * DescribeSpeedTestingQuota请求参数结构体
- */
-export interface DescribeSpeedTestingQuotaRequest {
-  /**
-   * 站点ID。
-   */
-  ZoneId: string
 }
 
 /**
@@ -6178,16 +5215,6 @@ export interface ModifySecurityIPGroupResponse {
 }
 
 /**
- * ReclaimZone请求参数结构体
- */
-export interface ReclaimZoneRequest {
-  /**
-   * 站点名称。
-   */
-  ZoneName: string
-}
-
-/**
  * 缓存键配置。
  */
 export interface CacheKey {
@@ -6254,68 +5281,6 @@ export interface ModifyOriginGroupRequest {
 }
 
 /**
- * web攻击日志
- */
-export interface WebLogs {
-  /**
-   * 请求（事件）ID。
-   */
-  EventId: string
-  /**
-   * http 日志内容。
-   */
-  HttpLog: string
-  /**
-   * 受攻击子域名。
-   */
-  Domain: string
-  /**
-   * 攻击源（客户端）Ip。
-   */
-  AttackIp: string
-  /**
-   * IP所在国家iso-3166中alpha-2编码，编码信息请参考[ISO-3166](https://git.woa.com/edgeone/iso-3166/blob/master/all/all.json)
-   */
-  SipCountryCode: string
-  /**
-   * 真实客户端Ip。
-   */
-  RealClientIp?: string
-  /**
-   * 真实客户端Ip所在国家iso-3166中alpha-2编码。
-   */
-  RealClientIpCountryCode?: string
-  /**
-   * 攻击时间，采用unix秒级时间戳。
-   */
-  AttackTime: number
-  /**
-   * 请求地址。
-   */
-  RequestUri: string
-  /**
-   * 请求类型。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ReqMethod: string
-  /**
-   * 规则相关信息列表。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  RuleDetailList: Array<SecRuleRelatedInfo>
-  /**
-   * 攻击内容。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  AttackContent: string
-  /**
-   * 日志所属区域。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Area: string
-}
-
-/**
  * DownloadL4Logs返回参数结构体
  */
 export interface DownloadL4LogsResponse {
@@ -6376,32 +5341,6 @@ export interface RateLimitIntelligence {
 }
 
 /**
- * DescribeAddableEntityList请求参数结构体
- */
-export interface DescribeAddableEntityListRequest {
-  /**
-   * 站点ID。
-   */
-  ZoneId: string
-  /**
-   * 推送数据类型，取值有:
-<li>domain：七层加速日志；</li>
-<li>application：四层加速日志；</li>
-<li>web-rateLiming：速率限制日志；</li>
-<li>web-attack：web攻击防护日志；</li>
-<li>web-rule：自定义规则日志；</li>
-<li>web-bot：Bot管理日志。</li>
-   */
-  EntityType: string
-  /**
-   * 服务区域，取值有：
-<li>mainland：中国大陆境内；</li>
-<li>overseas：全球（不含中国大陆）。</li>若为国内站账号，则默认取值为mainland；若为国际站账号，则默认取值为overseas。
-   */
-  Area?: string
-}
-
-/**
  * IP黑白名单及IP区域控制配置
  */
 export interface IpTableConfig {
@@ -6420,22 +5359,23 @@ export interface IpTableConfig {
 }
 
 /**
- * DescribeSingleL7AnalysisData返回参数结构体
+ * ModifyApplicationProxyStatus请求参数结构体
  */
-export interface DescribeSingleL7AnalysisDataResponse {
+export interface ModifyApplicationProxyStatusRequest {
   /**
-   * 查询结果的总条数。
+   * 站点ID。
    */
-  TotalCount: number
+  ZoneId: string
   /**
-   * 单值流量数据列表。
-注意：此字段可能返回 null，表示取不到有效值。
+   * 代理ID。
    */
-  Data: Array<SingleDataRecord>
+  ProxyId: string
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 状态，取值有：
+<li>offline: 停用；</li>
+<li>online: 启用。</li>
    */
-  RequestId?: string
+  Status: string
 }
 
 /**
@@ -6473,66 +5413,6 @@ export interface RuleAndConditions {
 }
 
 /**
- * DescribeSpeedTestingDetails请求参数结构体
- */
-export interface DescribeSpeedTestingDetailsRequest {
-  /**
-   * 站点ID。
-   */
-  ZoneId?: string
-}
-
-/**
- * DescribeTimingL7SourceData请求参数结构体
- */
-export interface DescribeTimingL7SourceDataRequest {
-  /**
-   * 开始时间。
-   */
-  StartTime: string
-  /**
-   * 结束时间。
-   */
-  EndTime: string
-  /**
-   * 指标列表，取值有:
-<li>l7Flow_outFlux_hy: Edgeone请求流量；</li>
-<li>l7Flow_outBandwidth_hy: Edgeone请求带宽；</li>
-<li>l7Flow_inFlux_hy: 源站响应流量；</li>
-<li>l7Flow_inBandwidth_hy: 源站响应带宽；</li>
-<li>l7Flow_request_hy: 回源请求数；</li>
-   */
-  MetricNames: Array<string>
-  /**
-   * 待查询的站点列表，此参数必填。
-   */
-  ZoneIds?: Array<string>
-  /**
-   * 查询时间粒度，取值有：
-<li>min: 1分钟；</li>
-<li>5min: 5分钟；</li>
-<li>hour: 1小时；</li>
-<li>day: 1天。</li>不填将根据开始时间跟结束时间的间距自动推算粒度，具体为：一小时范围内以min粒度查询，两天范围内以5min粒度查询，七天范围内以hour粒度查询，超过七天以day粒度查询。
-   */
-  Interval?: string
-  /**
-   * 过滤条件，详细的过滤条件如下：
-<li>domain<br>   按照【<strong>回源Host</strong>】进行过滤。<br>   类型：String<br>   必选：否</li>
-<li>origin<br>   按照【<strong>源站</strong>】进行过滤。<br>   类型：String<br>   必选：否</li>
-<li>originGroup<br>   按照【<strong>源站组</strong>】进行过滤，源站组形如：origin-xxxxx。<br>   类型：String<br>   必选：否</li>
-<li>flowType<br>   按照【<strong>源站响应类型</strong>】进行过滤，优先级高于 MetricNames.N 参数。<br>   类型：String<br>   必选：否<br>   可选项：<br>   inFlow：源站响应流量，对应MetricNames中l7Flow_inFlux_hy、l7Flow_inBandwidth_hy、l7Flow_request_hy三个指标；<br>   outFlow：EdgeOne请求流量，对应MetricNames中l7Flow_outFlux_hy、l7Flow_outBandwidth_hy、l7Flow_request_hy三个指标。</li>
-   */
-  Filters?: Array<QueryCondition>
-  /**
-   * 数据归属地区，取值有：
-<li>overseas：全球（除中国大陆地区）数据；</li>
-<li>mainland：中国大陆地区数据；</li>
-<li>global：全球数据。</li>不填默认取值为global。
-   */
-  Area?: string
-}
-
-/**
  * 拦截页面的总体配置，用于配置各个模块的拦截后行为。
  */
 export interface DropPageConfig {
@@ -6552,26 +5432,6 @@ export interface DropPageConfig {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AclDropPageDetail?: DropPageDetail
-}
-
-/**
- * ReclaimZone返回参数结构体
- */
-export interface ReclaimZoneResponse {
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * UpdateOriginProtectionIPWhitelist返回参数结构体
- */
-export interface UpdateOriginProtectionIPWhitelistResponse {
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**
@@ -6692,35 +5552,17 @@ export interface AccelerateType {
 }
 
 /**
- * 规则引擎常规类型的动作
+ * BindZoneToPlan请求参数结构体
  */
-export interface NormalAction {
+export interface BindZoneToPlanRequest {
   /**
-   * 功能名称，功能名称填写规范可调用接口 [查询规则引擎的设置参数](https://tcloud4api.woa.com/document/product/1657/79433?!preview&!document=1) 查看。
+   * 未绑定套餐的站点ID。
    */
-  Action: string
+  ZoneId: string
   /**
-   * 参数。
+   * 待绑定的目标套餐ID。
    */
-  Parameters: Array<RuleNormalActionParams>
-}
-
-/**
- * DescribeAliasDomains返回参数结构体
- */
-export interface DescribeAliasDomainsResponse {
-  /**
-   * 符合条件的别称域名个数。
-   */
-  TotalCount: number
-  /**
-   * 别称域名详细信息列表。
-   */
-  AliasDomains: Array<AliasDomain>
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  PlanId: string
 }
 
 /**
@@ -6779,18 +5621,6 @@ export interface DeleteZoneRequest {
 }
 
 /**
- * 安全类型配置项。
- */
-export interface SecurityType {
-  /**
-   * 安全类型开关，取值为：
-<li> on：开启；</li>
-<li> off：关闭。</li>
-   */
-  Switch: string
-}
-
-/**
  * Bot 规则，下列规则ID可参考接口 DescribeBotManagedRules返回的ID信息
  */
 export interface BotManagedRule {
@@ -6834,149 +5664,31 @@ export interface BotManagedRule {
 }
 
 /**
- * ModifyDefaultCertificate返回参数结构体
+ * 规则引擎常规类型的动作
  */
-export interface ModifyDefaultCertificateResponse {
+export interface NormalAction {
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 功能名称，功能名称填写规范可调用接口 [查询规则引擎的设置参数](https://tcloud4api.woa.com/document/product/1657/79433?!preview&!document=1) 查看。
    */
-  RequestId?: string
+  Action: string
+  /**
+   * 参数。
+   */
+  Parameters: Array<RuleNormalActionParams>
 }
 
 /**
- * 域名配置信息
+ * Top数据的详细信息
  */
-export interface DetailHost {
+export interface TopDetailData {
   /**
-   * 站点ID。
+   * 字段名。
    */
-  ZoneId: string
+  Key: string
   /**
-   * 加速服务状态，取值为：
-<li> process：部署中；</li>
-<li> online：已启动；</li>
-<li> offline：已关闭。</li>
+   * 字段值。
    */
-  Status: string
-  /**
-   * 域名。
-   */
-  Host: string
-  /**
-   * 站点名称。
-   */
-  ZoneName: string
-  /**
-   * 分配的Cname域名
-   */
-  Cname: string
-  /**
-   * 资源ID。
-   */
-  Id: string
-  /**
-   * 实例ID。
-   */
-  InstanceId: string
-  /**
-   * 锁状态。
-   */
-  Lock: number
-  /**
-   * 域名状态类型。
-   */
-  Mode: number
-  /**
-   * 域名加速地域，取值有：
-<li> global：全球；</li>
-<li> mainland：中国大陆；</li>
-<li> overseas：境外区域。</li>
-   */
-  Area: string
-  /**
-   * 加速类型配置项。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  AccelerateType: AccelerateType
-  /**
-   * Https配置项。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Https: Https
-  /**
-   * 缓存配置项。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CacheConfig: CacheConfig
-  /**
-   * 源站配置项。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Origin: Origin
-  /**
-   * 安全类型。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SecurityType: SecurityType
-  /**
-   * 缓存键配置项。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CacheKey: CacheKey
-  /**
-   * 智能压缩配置项。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Compression: Compression
-  /**
-   * Waf防护配置项。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Waf: Waf
-  /**
-   * CC防护配置项。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CC: CC
-  /**
-   * DDoS防护配置。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  DDoS: DDoS
-  /**
-   * 智能路由配置项。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SmartRouting: SmartRouting
-  /**
-   * Ipv6访问配置项。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Ipv6: Ipv6
-  /**
-   * 回源时是否携带客户端IP所属地域信息的配置。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ClientIpCountry: ClientIpCountry
-}
-
-/**
- * DescribeTopL7AnalysisData返回参数结构体
- */
-export interface DescribeTopL7AnalysisDataResponse {
-  /**
-   * 查询结果的总条数。
-   */
-  TotalCount?: number
-  /**
-   * 七层流量前topN数据列表。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Data?: Array<TopDataRecord>
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  Value: number
 }
 
 /**
@@ -7112,22 +5824,18 @@ export interface QueryCondition {
 }
 
 /**
- * DescribeWebProtectionData返回参数结构体
+ * IdentifyZone请求参数结构体
  */
-export interface DescribeWebProtectionDataResponse {
+export interface IdentifyZoneRequest {
   /**
-   * CC防护时序数据列表。
-注意：此字段可能返回 null，表示取不到有效值。
+   * 站点名称。
    */
-  Data: Array<SecEntry>
+  ZoneName: string
   /**
-   * 查询结果的总条数。
+   * 站点下的子域名。如果验证站点下的子域名，则传该值，否则为空。
+
    */
-  TotalCount: number
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  Domain?: string
 }
 
 /**
@@ -7208,6 +5916,10 @@ export interface ModifyApplicationProxyRuleRequest {
    */
   SessionPersist?: boolean
   /**
+   * 会话保持的时间，只有当SessionPersist为true时，该值才会生效。
+   */
+  SessionPersistTime?: number
+  /**
    * 源站端口，支持格式：
 <li>单端口：80；</li>
 <li>端口段：81-90，81至90端口。</li>
@@ -7237,33 +5949,6 @@ export interface FailReason {
    * 处理失败的资源列表。
    */
   Targets: Array<string>
-}
-
-/**
- * DescribePrefetchTasks请求参数结构体
- */
-export interface DescribePrefetchTasksRequest {
-  /**
-   * 查询起始时间。
-   */
-  StartTime?: string
-  /**
-   * 查询结束时间。
-   */
-  EndTime?: string
-  /**
-   * 分页查询偏移量，默认为 0。
-   */
-  Offset?: number
-  /**
-   * 分页查询限制数目，默认值：20，上限：1000。
-   */
-  Limit?: number
-  /**
-   * 过滤条件，Filters.Values的上限为20。详细的过滤条件如下：
-<li>zone-id<br>   按照【<strong>站点 ID</strong>】进行过滤。zone-id形如：zone-1379afjk91u32h，暂不支持多值。<br>   类型：String<br>   必选：否。<br>   模糊查询：不支持。</li><li>job-id<br>   按照【<strong>任务ID</strong>】进行过滤。job-id形如：1379afjk91u32h，暂不支持多值。<br>   类型：String<br>   必选：否。<br>   模糊查询：不支持。</li><li>target<br>   按照【<strong>目标资源信息</strong>】进行过滤。target形如：http://www.qq.com/1.txt，暂不支持多值。<br>   类型：String<br>   必选：否。<br>   模糊查询：不支持。</li><li>domains<br>   按照【<strong>域名</strong>】进行过滤。domains形如：www.qq.com。<br>   类型：String<br>   必选：否。<br>   模糊查询：不支持。</li><li>statuses<br>   按照【<strong>任务状态</strong>】进行过滤。<br>   必选：否<br>   模糊查询：不支持。<br>   可选项：<br>   processing：处理中<br>   success：成功<br>   failed：失败<br>   timeout：超时</li>
-   */
-  Filters?: Array<AdvancedFilter>
 }
 
 /**
@@ -7300,30 +5985,6 @@ export interface ModifyAliasDomainResponse {
 }
 
 /**
- * 日志集基本信息
- */
-export interface LogSetInfo {
-  /**
-   * 日志集所属地区。
-   */
-  LogSetRegion: string
-  /**
-   * 日志集名
-   */
-  LogSetName: string
-  /**
-   * 日志集Id
-   */
-  LogSetId: string
-  /**
-   * 该日志集是否已被删除, 可选的值有：
-<li>no: 日志集没有被删除；</li>
-<li>yes: 日志集已经被删除；</li>
-   */
-  Deleted: string
-}
-
-/**
  * 规则引擎HTTP请求头/响应头类型的动作
  */
 export interface RewriteAction {
@@ -7338,28 +5999,17 @@ export interface RewriteAction {
 }
 
 /**
- * 站点拨测优化建议
+ * CheckCnameStatus请求参数结构体
  */
-export interface OptimizeAction {
+export interface CheckCnameStatusRequest {
   /**
-   * 站点性能优化配置项，取值有：
-<li>Http2；</li>
-<li>Http3；</li>
-<li>Brotli。</li>
+   * 站点ID。
    */
-  Name: string
+  ZoneId: string
   /**
-   * 网络环境。
+   * 记录名称列表。
    */
-  Connectivity: string
-  /**
-   * 开启配置项后，预估性能优化效果，单位ms。
-   */
-  Value: number
-  /**
-   * 开启配置项后，预估性能提升比例，单位%。
-   */
-  Ratio: number
+  RecordNames: Array<string>
 }
 
 /**
@@ -7377,23 +6027,25 @@ export interface DeleteAliasDomainRequest {
 }
 
 /**
- * DescribeContentQuota返回参数结构体
+ * CNAME 状态
  */
-export interface DescribeContentQuotaResponse {
+export interface CnameStatus {
   /**
-   * 刷新相关配额。
+   * 记录名称。
+   */
+  RecordName: string
+  /**
+   * CNAME 地址。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  PurgeQuota: Array<Quota>
+  Cname: string
   /**
-   * 预热相关配额。
+   * Cname状态信息，取值有：
+<li>active：生效；</li>
+<li>moved：不生效。</li>
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  PrefetchQuota: Array<Quota>
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  Status: string
 }
 
 /**
@@ -7407,34 +6059,42 @@ export interface DeleteAccelerationDomainsResponse {
 }
 
 /**
- * DescribeDnsData请求参数结构体
+ * DescribeTopL7AnalysisData返回参数结构体
  */
-export interface DescribeDnsDataRequest {
+export interface DescribeTopL7AnalysisDataResponse {
   /**
-   * 起始时间。
+   * 查询结果的总条数。
    */
-  StartTime: string
+  TotalCount?: number
   /**
-   * 结束时间。
+   * 七层流量前topN数据列表。
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  EndTime: string
+  Data?: Array<TopDataRecord>
   /**
-   * 过滤条件，Filters.Values的上限为20。详细的过滤条件如下：
-<li>zone<br>   按照【<strong>站点名称</strong>】进行过滤。站点名称形如：tencent.com<br>   类型：String<br>   必选：否，仅支持填写一个站点
-<li>host<br>   按照【<strong>域名</strong>】进行过滤。域名形如：test.tencent.com<br>   类型：String<br>   必选：否，仅支持填写一个域名
-<li>type<br>   按照【<strong>DNS解析类型</strong>】进行过滤<br>   类型：String<br>   必选：否<br>   可选项：<br>   A：A记录<br>   AAAA：AAAA记录<br>   CNAME：CNAME记录<br>   MX：MX记录<br>   TXT：TXT记录<br>   NS：NS记录<br>   SRV：SRV记录<br>   CAA：CAA记录
-<li>code<br>   按照【<strong>DNS解析状态码</strong>】进行过滤。<br>   类型：String<br>   必选：否<br>   可选项：<br>   NoError：成功<br>   NXDomain：请求域不存在<br>   NotImp：不支持的请求类型<br>   Refused：域名服务器因为策略的原因拒绝执行请求
-<li>area<br>   按照【<strong>DNS解析地域</strong>】进行过滤。<br>   类型：String<br>   必选：否。<br>   可选项：<br>   亚洲：Asia<br>   欧洲：Europe<br>   非洲：Africa<br>   大洋洲：Oceania<br>   美洲：Americas
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  Filters?: Array<Filter>
+  RequestId?: string
+}
+
+/**
+ * 支持标准debug结构体
+ */
+export interface StandardDebug {
   /**
-   * 时间粒度，取值有：
-<li>min：1分钟粒度；</li>
-<li>5min：5分钟粒度；</li>
-<li>hour：1小时粒度；</li>
-<li>day：天粒度。</li>不填写，默认值为：min。
+   * Debug 功能开关，取值有：
+<li>on：开启；</li>
+<li>off：关闭。</li>
    */
-  Interval?: string
+  Switch: string
+  /**
+   * 允许的客户端来源。支持填写 IPV4 以及 IPV6 的 IP/IP 段，不填则表示允许任意客户端 IP。
+   */
+  AllowClientIPList: Array<string>
+  /**
+   * Debug 功能到期时间。超出设置的时间，则功能失效。
+   */
+  ExpireTime: string
 }
 
 /**
@@ -7452,55 +6112,34 @@ export interface RuleNormalActionParams {
 }
 
 /**
- * 标签配置
- */
-export interface Tag {
-  /**
-   * 标签键。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TagKey: string
-  /**
-   * 标签值。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TagValue: string
-}
-
-/**
  * CreatePurgeTask请求参数结构体
  */
 export interface CreatePurgeTaskRequest {
   /**
-   * 站点ID。
+   * 站点 ID。
    */
   ZoneId: string
   /**
-   * 清除缓存类型，取值有：
-<li>purge_url：URL；</li>
-<li>purge_prefix：前缀；</li>
-<li>purge_host：Hostname；</li>
-<li>purge_all：全部缓存；</li>
-<li>purge_cache_tag：cache-tag刷新。</li>
+   * 节点缓存清除类型，取值有：
+<li>purge_url：URL刷新；</li>
+<li>purge_prefix：目录刷新；</li>
+<li>purge_host：Hostname 刷新；</li>
+<li>purge_all：站点下全部缓存刷新；</li>
+<li>purge_cache_tag：cache-tag 刷新。</li>缓存清除类型详情请查看[清除缓存](https://cloud.tencent.com/document/product/1552/70759)。
    */
   Type: string
   /**
-   * 要清除缓存的资源列表，每个元素格式依据Type而定：
-1) Type = purge_host 时：
-形如：www.example.com 或 foo.bar.example.com。
-2) Type = purge_prefix 时：
-形如：http://www.example.com/example。
-3) Type = purge_url 时：
-形如：https://www.example.com/example.jpg。
-4）Type = purge_all 时：
-Targets可为空，不需要填写。
-5）Type = purge_cache_tag 时：
-形如：tag1。
+   * 节点缓存清除方法，仅对目录刷新类型有效，取值有：<li> invalidate：仅刷新目录下产生了更新的资源；</li><li> delete：无论目录下资源是否更新都刷新节点资源。</li>注意：使用目录刷新时，默认值： invalidate。
+   */
+  Method?: string
+  /**
+   * 要清除缓存的资源列表。每个元素格式依据清除缓存类型而定，可参考接口示例。<li>EO 默认针对内容含有非 ASCII 字符集的字符进行转义，编码规则遵循 RFC3986；</li><li>单次提交的任务数受计费套餐配额限制，请查看 [EO计费套餐](https://cloud.tencent.com/document/product/1552/77380)。</li>
    */
   Targets?: Array<string>
   /**
    * 若有编码转换，仅清除编码转换后匹配的资源。
 若内容含有非 ASCII 字符集的字符，请开启此开关进行编码转换（编码规则遵循 RFC3986）。
+   * @deprecated
    */
   EncodeUrl?: boolean
 }
@@ -7559,6 +6198,19 @@ export interface Resource {
 <li>global：全球。</li>
    */
   Area: string
+  /**
+   * 资源类型，取值有：
+<li>plan：套餐类型；</li>
+<li>pay-as-you-go：后付费类型。</li>
+<li>value-added：增值服务类型。</li>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Group?: string
+  /**
+   * 当前资源绑定的站点数量。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ZoneNumber?: number
 }
 
 /**
@@ -7829,88 +6481,6 @@ export interface SubRuleItem {
 }
 
 /**
- * DescribeWebManagedRulesLog请求参数结构体
- */
-export interface DescribeWebManagedRulesLogRequest {
-  /**
-   * 开始时间。
-   */
-  StartTime: string
-  /**
-   * 结束时间。
-   */
-  EndTime: string
-  /**
-   * 站点集合，不填默认选择全部站点。
-   */
-  ZoneIds?: Array<string>
-  /**
-   * 域名集合，不填默认选择全部子域名。
-   */
-  Domains?: Array<string>
-  /**
-   * 分页查询的限制数目，默认值为20，最大查询条目为1000。
-   */
-  Limit?: number
-  /**
-   * 分页的偏移量，默认值为0。
-   */
-  Offset?: number
-  /**
-   * 筛选条件，key可选的值有：
-<li>attackType：攻击类型；</li>
-<li>riskLevel：风险等级；</li>
-<li>action：执行动作（处置方式）；</li>
-<li>ruleId：规则id；</li>
-<li>sipCountryCode：ip所在国家；</li>
-<li>attackIp：攻击ip；</li>
-<li>realClientIp：真实客户端ip；</li>
-<li>oriDomain：被攻击的子域名；</li>
-<li>eventId：事件id；</li>
-<li>ua：用户代理；</li>
-<li>requestMethod：请求方法；</li>
-<li>uri：统一资源标识符。</li>
-   */
-  QueryCondition?: Array<QueryCondition>
-  /**
-   * 数据归属地区，取值有：
-<li>overseas：全球（除中国大陆地区）数据；</li>
-<li>mainland：中国大陆地区数据。</li>不填将根据用户所在地智能选择地区。
-   */
-  Area?: string
-}
-
-/**
- * 内容管理任务结果
- */
-export interface Task {
-  /**
-   * 任务 ID。
-   */
-  JobId: string
-  /**
-   * 状态。
-   */
-  Status: string
-  /**
-   * 资源。
-   */
-  Target: string
-  /**
-   * 任务类型。
-   */
-  Type: string
-  /**
-   * 任务创建时间。
-   */
-  CreateTime: string
-  /**
-   * 任务完成时间。
-   */
-  UpdateTime: string
-}
-
-/**
  * CreateSecurityIPGroup返回参数结构体
  */
 export interface CreateSecurityIPGroupResponse {
@@ -7922,34 +6492,6 @@ export interface CreateSecurityIPGroupResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * Waf托管规则组
- */
-export interface WafGroup {
-  /**
-   * 执行动作，取值有：
-<li> block：阻断；</li>
-<li> observe：观察。</li>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Action?: string
-  /**
-   * 防护级别，取值有：
-<li> loose：宽松；</li>
-<li> normal：正常；</li>
-<li> strict：严格；</li>
-<li> stricter：超严格；</li>
-<li> custom：自定义。</li>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Level?: string
-  /**
-   * 规则类型id。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TypeId?: number
 }
 
 /**
@@ -8088,25 +6630,6 @@ export interface OriginGroup {
 }
 
 /**
- * DescribeWebProtectionTopData返回参数结构体
- */
-export interface DescribeWebProtectionTopDataResponse {
-  /**
-   * CC防护的TopN数据列表。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Data: Array<TopEntry>
-  /**
-   * 查询结果的总条数。
-   */
-  TotalCount: number
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * ModifySecurityIPGroup请求参数结构体
  */
 export interface ModifySecurityIPGroupRequest {
@@ -8125,89 +6648,6 @@ export interface ModifySecurityIPGroupRequest {
 <li> update: 全量替换 IPGroup 内容，并可修改 IPGroup 名称。 </li>
    */
   Mode: string
-}
-
-/**
- * DescribeWebManagedRulesHitRuleDetail返回参数结构体
- */
-export interface DescribeWebManagedRulesHitRuleDetailResponse {
-  /**
-   * 命中规则的详细列表。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Data: Array<SecHitRuleInfo>
-  /**
-   * 查询结果的总条数。
-   */
-  TotalCount: number
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DescribeWebProtectionClientIpList请求参数结构体
- */
-export interface DescribeWebProtectionClientIpListRequest {
-  /**
-   * 开始时间。
-   */
-  StartTime: string
-  /**
-   * 结束时间。
-   */
-  EndTime: string
-  /**
-   * 站点集合，不填默认选择全部站点。
-   */
-  ZoneIds?: Array<string>
-  /**
-   * 域名集合，不填默认选择全部子域名。
-   */
-  Domains?: Array<string>
-  /**
-   * 查询的时间粒度，支持的粒度有：
-<li>min：1分钟；</li>
-<li>5min：5分钟；</li>
-<li>hour：1小时；</li>
-<li>day：1天。</li>不填将根据开始时间跟结束时间的间距自动推算粒度，具体为：一小时范围内以min粒度查询，两天范围内以5min粒度查询，七天范围内以hour粒度查询，超过七天以day粒度查询。
-   */
-  Interval?: string
-  /**
-   * 筛选条件，key可选的值有：
-<li>action：执行动作。</li>
-   */
-  QueryCondition?: Array<QueryCondition>
-  /**
-   * 分页查询的限制数目，默认值为20，最大查询条目为1000。
-   */
-  Limit?: number
-  /**
-   * 分页的偏移量，默认值为0。
-   */
-  Offset?: number
-  /**
-   * 数据归属地区，取值有：
-<li>overseas：全球（除中国大陆地区）数据；</li>
-<li>mainland：中国大陆地区数据。</li>不填将根据用户所在地智能选择地区。
-   */
-  Area?: string
-}
-
-/**
- * IdentifyZone请求参数结构体
- */
-export interface IdentifyZoneRequest {
-  /**
-   * 站点名称。
-   */
-  ZoneName: string
-  /**
-   * 站点下的子域名。如果验证站点下的子域名，则传该值，否则为空。
-
-   */
-  Domain?: string
 }
 
 /**
@@ -8236,16 +6676,6 @@ export interface AlgDetectResult {
 <li>longdelay：（长时间）等待后响应。</li>
    */
   Action?: string
-}
-
-/**
- * CreateSpeedTesting返回参数结构体
- */
-export interface CreateSpeedTestingResponse {
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**
@@ -8335,74 +6765,6 @@ export interface DefaultServerCertInfo {
 }
 
 /**
- * 命中规则信息
- */
-export interface SecHitRuleInfo {
-  /**
-   * 站点ID。
-   */
-  ZoneId: string
-  /**
-   * 规则ID。
-   */
-  RuleId: number
-  /**
-   * 规则类型名称。
-   */
-  RuleTypeName: string
-  /**
-   * 命中时间，采用unix秒级时间戳。
-   */
-  HitTime: number
-  /**
-   * 请求数。
-   */
-  RequestNum: number
-  /**
-   * 规则描述。
-   */
-  Description: string
-  /**
-   * 子域名。
-   */
-  Domain: string
-  /**
-   * 执行动作（处置方式），取值有：
-<li>trans ：通过 ；</li>
-<li>alg ：算法挑战 ；</li>
-<li>drop ：丢弃 ；</li>
-<li>ban ：封禁源ip ；</li>
-<li>redirect ：重定向 ；</li>
-<li>page ：返回指定页面 ；</li>
-<li>monitor ：观察 。</li>
-   */
-  Action: string
-  /**
-   * Bot标签，取值有:
-<li>evil_bot：恶意Bot；</li>
-<li>suspect_bot：疑似Bot；</li>
-<li>good_bot：正常Bot；</li>
-<li>normal：正常请求；</li>
-<li>none：未分类。</li>
-   */
-  BotLabel: string
-  /**
-   * 规则是否启用。
-   */
-  RuleEnabled: boolean
-  /**
-   * 规则是否启用监控告警。
-   */
-  AlarmEnabled: boolean
-  /**
-   * 规则是否存在，取值有：
-<li>true: 规则不存在；</li>
-<li>false: 规则存在。</li>
-   */
-  RuleDeleted: boolean
-}
-
-/**
  * DescribeAccelerationDomains请求参数结构体
  */
 export interface DescribeAccelerationDomainsRequest {
@@ -8450,18 +6812,6 @@ export interface DescribeAccelerationDomainsRequest {
 }
 
 /**
- * Grpc配置项
- */
-export interface Grpc {
-  /**
-   * 是否开启 Grpc 配置，取值有：
-<li>on：开启；</li>
-<li>off：关闭。</li>
-   */
-  Switch: string
-}
-
-/**
  * Http2回源配置
  */
 export interface UpstreamHttp2 {
@@ -8485,16 +6835,6 @@ export interface TopEntryValue {
    * 排序实体数量。
    */
   Count: number
-}
-
-/**
- * ReclaimAliasDomain返回参数结构体
- */
-export interface ReclaimAliasDomainResponse {
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**
@@ -8536,75 +6876,6 @@ export interface DeleteAliasDomainResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * 安全规则（cc/waf/bot）相关信息
- */
-export interface SecRuleRelatedInfo {
-  /**
-   * 规则ID。
-   */
-  RuleId: number
-  /**
-   * 执行动作（处置方式），取值有：
-<li>trans ：通过 ；</li>
-<li>alg ：算法挑战 ；</li>
-<li>drop ：丢弃 ；</li>
-<li>ban ：封禁源ip ；</li>
-<li>redirect ：重定向 ；</li>
-<li>page ：返回指定页面 ；</li>
-<li>monitor ：观察 。</li>
-   */
-  Action: string
-  /**
-   * 风险等级（waf日志中独有），取值有：
-<li>high risk ：高危 ；</li>
-<li>middle risk ：中危 ；</li>
-<li>low risk ：低危 ；</li>
-<li>unkonw ：未知 。</li>
-   */
-  RiskLevel: string
-  /**
-   * 规则等级，取值有：
-<li>normal  ：正常 。</li>
-   */
-  RuleLevel: string
-  /**
-   * 规则描述。
-   */
-  Description: string
-  /**
-   * 规则类型名称。
-   */
-  RuleTypeName: string
-  /**
-   * 攻击内容。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  AttackContent: string
-  /**
-   * 规则类型，取值有：
-<li>waf: 托管规则；</li>
-<li>acl：自定义规则；</li>
-<li>rate：速率限制规则；</li>
-<li>bot：bot防护规则。</li>
-   */
-  RuleType: string
-  /**
-   * 规则是否开启。
-   */
-  RuleEnabled: boolean
-  /**
-   * 规则是否存在，取值有：
-<li>true: 规则不存在；</li>
-<li>false: 规则存在。</li>
-   */
-  RuleDeleted: boolean
-  /**
-   * 规则是否启用监控告警。
-   */
-  AlarmEnabled: boolean
 }
 
 /**
@@ -8672,38 +6943,28 @@ export interface BotConfig {
 }
 
 /**
- * DescribeLogTopicTasks返回参数结构体
+ * 时序类型详细数据
  */
-export interface DescribeLogTopicTasksResponse {
+export interface TimingTypeValue {
   /**
-   * 推送任务列表。
+   * 数据和。
+   */
+  Sum: number
+  /**
+   * 最大值。
+   */
+  Max: number
+  /**
+   * 平均值。
+   */
+  Avg: number
+  /**
+   * 指标名。
+   */
+  MetricName: string
+  /**
+   * 详细数据。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TopicList: Array<ClsLogTopicInfo>
-  /**
-   * 查询结果的总条数。
-   */
-  TotalCount: number
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * CreateReplayTask返回参数结构体
- */
-export interface CreateReplayTaskResponse {
-  /**
-   * 此次任务ID。
-   */
-  JobId: string
-  /**
-   * 失败的任务列表及原因。
-   */
-  FailedList: Array<FailReason>
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  Detail: Array<TimingDataItem>
 }
