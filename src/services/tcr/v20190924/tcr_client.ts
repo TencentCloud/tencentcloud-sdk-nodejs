@@ -24,7 +24,7 @@ import {
   DescribeImagePersonalResponse,
   DescribeUserQuotaPersonalRequest,
   WebhookTarget,
-  DescribeReplicationInstancesResponse,
+  DeleteSignaturePolicyRequest,
   DescribeReplicationInstanceCreateTasksResponse,
   WebhookTriggerLog,
   AccessVpc,
@@ -32,13 +32,14 @@ import {
   ModifyRepositoryResponse,
   TriggerInvokePara,
   DescribeNamespacesResponse,
+  DescribeInstanceCustomizedDomainResponse,
   TriggerLogResp,
   DownloadHelmChartRequest,
   DuplicateImagePersonalRequest,
   RetentionRule,
   CreateInstanceResponse,
   DeleteInstanceTokenRequest,
-  TagInfoResp,
+  TaskDetail,
   ModifyRepositoryRequest,
   RegistryCondition,
   DescribeInternalEndpointDnsStatusRequest,
@@ -62,19 +63,21 @@ import {
   DeleteNamespacePersonalRequest,
   ModifyImmutableTagRulesResponse,
   Region,
-  NamespaceInfo,
-  CreateImageAccelerationServiceResponse,
+  ModifyServiceAccountRequest,
   CreateMultipleSecurityPolicyResponse,
   TriggerResp,
   CreateTagRetentionRuleResponse,
   DescribeRegionsResponse,
   DescribeChartDownloadInfoResponse,
+  NamespaceInfo,
+  DescribeServiceAccountsRequest,
   DescribeExternalEndpointStatusRequest,
   DeleteRepositoryResponse,
   DeleteImagePersonalResponse,
   DescribeWebhookTriggerLogResponse,
   DownloadHelmChartResponse,
   ManageReplicationRequest,
+  DescribeInstanceStatusResponse,
   DeleteWebhookTriggerResponse,
   DeleteImageLifecycleGlobalPersonalResponse,
   ModifySecurityPolicyRequest,
@@ -98,7 +101,7 @@ import {
   DuplicateImagePersonalResponse,
   DescribeCustomAccountsRequest,
   DescribeImageLifecyclePersonalResponse,
-  DescribeInstanceStatusResponse,
+  DeleteReplicationInstanceRequest,
   CreateImageAccelerationServiceRequest,
   DescribeWebhookTriggerResponse,
   ModifyInstanceTokenRequest,
@@ -112,6 +115,7 @@ import {
   DeleteRepositoryTagsRequest,
   RepoIsExistResp,
   TcrImageInfo,
+  RetentionPolicy,
   DescribeImageLifecycleGlobalPersonalResponse,
   CreateNamespacePersonalResponse,
   DescribeReplicationInstanceSyncStatusRequest,
@@ -119,15 +123,16 @@ import {
   DeleteImageLifecycleGlobalPersonalRequest,
   DescribeInstanceStatusRequest,
   ModifyWebhookTriggerRequest,
-  DeleteReplicationInstanceRequest,
+  CreateImageAccelerationServiceResponse,
   DeleteNamespaceResponse,
-  DeleteNamespacePersonalResponse,
+  TagInfoResp,
   Favors,
   CreateWebhookTriggerRequest,
   DescribeRepositoryPersonalResponse,
   CreateSecurityPolicyResponse,
   DescribeRepositoriesRequest,
   CreateUserPersonalRequest,
+  DeleteServiceAccountResponse,
   ValidateRepositoryExistPersonalResponse,
   ModifyNamespaceResponse,
   ValidateRepositoryExistPersonalRequest,
@@ -167,7 +172,7 @@ import {
   TriggerInvokeResult,
   CreateUserPersonalResponse,
   CustomizedDomainInfo,
-  DescribeInstanceCustomizedDomainResponse,
+  DeleteServiceAccountRequest,
   DescribeImageManifestsRequest,
   RegistryChargePrepaid,
   ModifyNamespaceRequest,
@@ -186,6 +191,7 @@ import {
   DescribeInstanceTokenRequest,
   BatchDeleteRepositoryPersonalResponse,
   CreateNamespaceRequest,
+  CreateServiceAccountResponse,
   BatchDeleteRepositoryPersonalRequest,
   GCJobInfo,
   Registry,
@@ -208,20 +214,19 @@ import {
   RepoInfo,
   ManageImageLifecycleGlobalPersonalRequest,
   DescribeUserQuotaPersonalResponse,
-  TaskDetail,
   DescribeImagePersonalRequest,
-  DeleteSignaturePolicyRequest,
+  CreateServiceAccountRequest,
   DescribeRepositoryFilterPersonalResponse,
   ModifySecurityPolicyResponse,
   ModifyApplicationTriggerPersonalResponse,
   DeleteInstanceRequest,
   DescribeImageManifestsResponse,
   DescribeNamespacePersonalResponse,
-  DeleteReplicationInstanceResponse,
+  DeleteNamespacePersonalResponse,
   DescribeWebhookTriggerRequest,
   ImmutableTagRule,
   Header,
-  RetentionPolicy,
+  DescribeReplicationInstancesResponse,
   CreateSecurityPolicyRequest,
   CustomAccount,
   DeleteImageAccelerateServiceResponse,
@@ -241,6 +246,7 @@ import {
   CheckInstanceNameResponse,
   DeleteTagRetentionRuleResponse,
   DescribeRepositoryOwnerPersonalRequest,
+  DeleteReplicationInstanceResponse,
   DescribeExternalEndpointStatusResponse,
   DescribeTagRetentionRulesResponse,
   DescribeRegionsRequest,
@@ -250,7 +256,7 @@ import {
   CreateReplicationInstanceResponse,
   CreateCustomAccountResponse,
   CreateInstanceTokenRequest,
-  ModifyUserPasswordPersonalRequest,
+  DescribeServiceAccountsResponse,
   CreateInstanceCustomizedDomainResponse,
   PeerReplicationOption,
   DescribeSecurityPoliciesRequest,
@@ -272,6 +278,7 @@ import {
   DescribeTagRetentionExecutionRequest,
   CreateRepositoryResponse,
   DescribeTagRetentionRulesRequest,
+  ServiceAccount,
   RespLimit,
   CheckInstanceNameRequest,
   DescribeInstanceAllNamespacesRequest,
@@ -282,11 +289,13 @@ import {
   CreateNamespacePersonalRequest,
   DeleteImmutableTagRulesRequest,
   CreateWebhookTriggerResponse,
+  ModifyServiceAccountResponse,
   CreateSignaturePolicyRequest,
   DeleteTagRetentionRuleRequest,
   ReplicationFilter,
   TcrRepositoryInfo,
   TcrInstanceToken,
+  ModifyUserPasswordPersonalRequest,
   DeleteRepositoryRequest,
   CreateInternalEndpointDnsResponse,
   CreateTagRetentionExecutionRequest,
@@ -538,6 +547,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateMultipleSecurityPolicyResponse) => void
   ): Promise<CreateMultipleSecurityPolicyResponse> {
     return this.request("CreateMultipleSecurityPolicy", req, cb)
+  }
+
+  /**
+   * 删除服务级账号
+   */
+  async DeleteServiceAccount(
+    req: DeleteServiceAccountRequest,
+    cb?: (error: string, rep: DeleteServiceAccountResponse) => void
+  ): Promise<DeleteServiceAccountResponse> {
+    return this.request("DeleteServiceAccount", req, cb)
   }
 
   /**
@@ -991,6 +1010,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 更新服务级账号
+   */
+  async ModifyServiceAccount(
+    req: ModifyServiceAccountRequest,
+    cb?: (error: string, rep: ModifyServiceAccountResponse) => void
+  ): Promise<ModifyServiceAccountResponse> {
+    return this.request("ModifyServiceAccount", req, cb)
+  }
+
+  /**
    * 查询个人用户配额
    */
   async DescribeUserQuotaPersonal(
@@ -1131,6 +1160,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询服务级账号
+   */
+  async DescribeServiceAccounts(
+    req: DescribeServiceAccountsRequest,
+    cb?: (error: string, rep: DescribeServiceAccountsResponse) => void
+  ): Promise<DescribeServiceAccountsResponse> {
+    return this.request("DescribeServiceAccounts", req, cb)
+  }
+
+  /**
    * 为一个镜像版本创建签名
    */
   async CreateSignature(
@@ -1228,6 +1267,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteSignaturePolicyResponse) => void
   ): Promise<DeleteSignaturePolicyResponse> {
     return this.request("DeleteSignaturePolicy", req, cb)
+  }
+
+  /**
+   * 创建自定义账户
+   */
+  async CreateServiceAccount(
+    req: CreateServiceAccountRequest,
+    cb?: (error: string, rep: CreateServiceAccountResponse) => void
+  ): Promise<CreateServiceAccountResponse> {
+    return this.request("CreateServiceAccount", req, cb)
   }
 
   /**

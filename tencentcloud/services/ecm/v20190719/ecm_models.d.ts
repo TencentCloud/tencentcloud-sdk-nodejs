@@ -1005,6 +1005,27 @@ export interface RunSecurityServiceEnabled {
     Version?: number;
 }
 /**
+ * 峰值信息
+ */
+export interface PeakBase {
+    /**
+     * CPU峰值
+     */
+    PeakCpuNum: number;
+    /**
+     * 内存峰值
+     */
+    PeakMemoryNum: number;
+    /**
+     * 硬盘峰值
+     */
+    PeakStorageNum: number;
+    /**
+     * 记录时间
+     */
+    RecordTime: string;
+}
+/**
  * DeleteLoadBalancer请求参数结构体
  */
 export interface DeleteLoadBalancerRequest {
@@ -1029,6 +1050,8 @@ export interface DescribeVpcsRequest {
   region - String - vpc的region。
   tag-key - String -是否必填：否- 按照标签键进行过滤。
   tag:tag-key - String - 是否必填：否 - 按照标签键值对进行过滤。
+  ipv6-cidr-block - String - 是否必填：否 - 按照IPv6 CIDR block进行过滤。
+  isp-type - String - 是否必填：否 - 按照运营商（如CMCC, CUCC, CTCC）进行过滤。
      */
     Filters?: Array<Filter>;
     /**
@@ -1897,25 +1920,13 @@ export interface Address {
     PayMode: string;
 }
 /**
- * 峰值信息
+ * ModifyModuleImage返回参数结构体
  */
-export interface PeakBase {
+export interface ModifyModuleImageResponse {
     /**
-     * CPU峰值
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
-    PeakCpuNum: number;
-    /**
-     * 内存峰值
-     */
-    PeakMemoryNum: number;
-    /**
-     * 硬盘峰值
-     */
-    PeakStorageNum: number;
-    /**
-     * 记录时间
-     */
-    RecordTime: string;
+    RequestId?: string;
 }
 /**
  * ReplaceRouteTableAssociation请求参数结构体
@@ -2705,24 +2716,6 @@ export interface ResetRoutesResponse {
     RequestId?: string;
 }
 /**
- * AllocateAddresses返回参数结构体
- */
-export interface AllocateAddressesResponse {
-    /**
-     * 申请到的 EIP 的唯一 ID 列表。
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    AddressSet: Array<string>;
-    /**
-     * 异步任务TaskId。可以使用DescribeTaskResult接口查询任务状态。
-     */
-    TaskId: string;
-    /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
-/**
  * CreateImage返回参数结构体
  */
 export interface CreateImageResponse {
@@ -2790,6 +2783,18 @@ export interface AssignIpv6AddressesRequest {
   CTCC：中国电信
   CUCC：中国联通
   CMCC：中国移动
+     */
+    ISPType?: string;
+    /**
+     * 是否跳过校验一个网卡只能分配一个IPv6 CIDR。该字段通常为true（用于兼容存量子机只有一个地址的情形）。
+     */
+    SkipCheckIPv6Address?: boolean;
+    /**
+     * 是否跳过自动开通公网带宽。通常为true(根据运营系统的用户配置来决定是否自动开通，以支持当前子机购买时的行为）。
+     */
+    SkipAllocateBandwidth?: boolean;
+    /**
+     * 该字段没有使用（已过期）。
      */
     Ipv6ISP?: string;
 }
@@ -3680,7 +3685,8 @@ export interface DescribeSubnetsRequest {
   region - String - ECM地域
   zone - String - 可用区。
   tag-key - String -是否必填：否- 按照标签键进行过滤。
-  tag:tag-key - String - 是否必填：否 - 按照标签键值对进行过滤。
+  ipv6-cidr-block- String - 是否必填：否 - 按照IPv6 CIDR进行过滤。
+  isp-type - String - 是否必填：否 - 按照运营商类型( 如CMCC，CUCC， CTCC)进行过滤。
      */
     Filters?: Array<Filter>;
     /**
@@ -4706,6 +4712,21 @@ export interface DiskChargePrepaid {
     CurInstanceDeadline?: string;
 }
 /**
+ * 多运营商IPv6 Cidr Block
+ */
+export interface ISPIPv6CidrBlock {
+    /**
+     * IPv6 CIdr Block。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IPv6CidrBlock?: string;
+    /**
+     * 网络运营商类型 取值范围:'CMCC'-中国移动, 'CTCC'-中国电信, 'CUCC'-中国联调
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ISPType?: string;
+}
+/**
  * DisableRoutes请求参数结构体
  */
 export interface DisableRoutesRequest {
@@ -5189,9 +5210,18 @@ export interface PublicIPAddressInfo {
     MaxBandwidthIn: number;
 }
 /**
- * ModifyModuleImage返回参数结构体
+ * AllocateAddresses返回参数结构体
  */
-export interface ModifyModuleImageResponse {
+export interface AllocateAddressesResponse {
+    /**
+     * 申请到的 EIP 的唯一 ID 列表。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AddressSet: Array<string>;
+    /**
+     * 异步任务TaskId。可以使用DescribeTaskResult接口查询任务状态。
+     */
+    TaskId: string;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -5207,84 +5237,94 @@ export interface DeleteLoadBalancerListenersResponse {
     RequestId?: string;
 }
 /**
- * 私有网络(VPC)对象。
+ * 私有网络(VPC) 对象。
  */
 export interface VpcInfo {
     /**
      * VPC名称。
      */
-    VpcName: string;
+    VpcName?: string;
     /**
      * VPC实例ID，例如：vpc-azd4dt1c。
      */
-    VpcId: string;
+    VpcId?: string;
     /**
      * VPC的IPv4 CIDR。
      */
-    CidrBlock: string;
+    CidrBlock?: string;
     /**
      * 是否默认VPC。
      */
-    IsDefault: boolean;
+    IsDefault?: boolean;
     /**
      * 是否开启组播。
      */
-    EnableMulticast: boolean;
+    EnableMulticast?: boolean;
     /**
      * 创建时间。
      */
-    CreatedTime: string;
+    CreatedTime?: string;
     /**
      * DNS列表。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DnsServerSet: Array<string>;
+    DnsServerSet?: Array<string>;
     /**
      * DHCP域名选项值。
      */
-    DomainName: string;
+    DomainName?: string;
     /**
      * DHCP选项集ID。
      */
-    DhcpOptionsId: string;
+    DhcpOptionsId?: string;
     /**
      * 是否开启DHCP。
      */
-    EnableDhcp: boolean;
+    EnableDhcp?: boolean;
     /**
      * VPC的IPv6 CIDR。
      */
-    Ipv6CidrBlock: string;
+    Ipv6CidrBlock?: string;
     /**
      * 标签键值对
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TagSet: Array<Tag>;
+    TagSet?: Array<Tag>;
     /**
      * 辅助CIDR
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    AssistantCidrSet: Array<AssistantCidr>;
+    AssistantCidrSet?: Array<AssistantCidr>;
     /**
      * 地域
      */
-    Region: string;
+    Region?: string;
     /**
      * 描述
      */
-    Description: string;
+    Description?: string;
     /**
      * 地域中文名
      */
-    RegionName: string;
+    RegionName?: string;
     /**
      * 包含子网数量
      */
-    SubnetCount: number;
+    SubnetCount?: number;
     /**
      * 包含实例数量
      */
-    InstanceCount: number;
+    InstanceCount?: number;
+    /**
+     * ipv6运营商
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Ipv6ISP?: string;
+    /**
+     * 多运营商IPv6 Cidr Block。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Ipv6CidrBlockSet?: Array<ISPIPv6CidrBlock>;
 }
 /**
  * 模块列表Item信息
@@ -6091,7 +6131,7 @@ export interface AssignIpv6AddressesResponse {
     /**
      * 分配给弹性网卡的IPv6地址列表。
      */
-    Ipv6AddressSet: Array<Ipv6Address>;
+    Ipv6AddressSet?: Array<Ipv6Address>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -6311,85 +6351,90 @@ export interface Subnet {
     /**
      * VPC实例ID。
      */
-    VpcId: string;
+    VpcId?: string;
     /**
      * 子网实例ID，例如：subnet-bthucmmy。
      */
-    SubnetId: string;
+    SubnetId?: string;
     /**
      * 子网名称。
      */
-    SubnetName: string;
+    SubnetName?: string;
     /**
      * 子网的 IPv4 CIDR。
      */
-    CidrBlock: string;
+    CidrBlock?: string;
     /**
      * 是否默认子网。
      */
-    IsDefault: boolean;
+    IsDefault?: boolean;
     /**
      * 是否开启广播。
      */
-    EnableBroadcast: boolean;
+    EnableBroadcast?: boolean;
     /**
      * 路由表实例ID，例如：rtb-l2h8d7c2。
      */
-    RouteTableId: string;
+    RouteTableId?: string;
     /**
      * 创建时间。
      */
-    CreatedTime: string;
+    CreatedTime?: string;
     /**
      * 可用IP数。
      */
-    AvailableIpAddressCount: number;
+    AvailableIpAddressCount?: number;
     /**
      * 子网的 IPv6 CIDR。
      */
-    Ipv6CidrBlock: string;
+    Ipv6CidrBlock?: string;
     /**
      * 关联ACLID
      */
-    NetworkAclId: string;
+    NetworkAclId?: string;
     /**
      * 是否为 SNAT 地址池子网。
      */
-    IsRemoteVpcSnat: boolean;
+    IsRemoteVpcSnat?: boolean;
     /**
      * 标签键值对。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TagSet: Array<Tag>;
+    TagSet?: Array<Tag>;
     /**
      * 所在区域
      */
-    Zone: string;
+    Zone?: string;
     /**
      * 可用区名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ZoneName: string;
+    ZoneName?: string;
     /**
      * 实例数量
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    InstanceCount: number;
+    InstanceCount?: number;
     /**
      * VPC的 IPv4 CIDR。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    VpcCidrBlock: string;
+    VpcCidrBlock?: string;
     /**
      * VPC的 IPv6 CIDR。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    VpcIpv6CidrBlock: string;
+    VpcIpv6CidrBlock?: string;
     /**
      * 地域
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Region: string;
+    Region?: string;
+    /**
+     * 运营商类型。'CMCC'-中国移动, 'CTCC'-中国电信, 'CUCC'-中国联调
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ISPType?: string;
 }
 /**
  * AttachNetworkInterface请求参数结构体

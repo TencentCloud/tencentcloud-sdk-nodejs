@@ -306,22 +306,17 @@ export interface ScoreItem {
 }
 
 /**
- * 实例配置。
+ * CreateRedisBigKeyAnalysisTask返回参数结构体
  */
-export interface InstanceConfs {
+export interface CreateRedisBigKeyAnalysisTaskResponse {
   /**
-   * 数据库巡检开关, Yes/No。
+   * 异步任务ID。
    */
-  DailyInspection?: string
+  AsyncRequestId?: number
   /**
-   * 实例概览开关，Yes/No。
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  OverviewDisplay?: string
-  /**
-   * redis大key分析的自定义分割符，仅redis使用
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  KeyDelimiters?: Array<string>
+  RequestId?: string
 }
 
 /**
@@ -736,6 +731,29 @@ export interface DescribeProxySessionKillTasksRequest {
    * 服务产品类型，支持值包括： "redis" - 云数据库 Redis。
    */
   Product: string
+}
+
+/**
+ * CreateRedisBigKeyAnalysisTask请求参数结构体
+ */
+export interface CreateRedisBigKeyAnalysisTaskRequest {
+  /**
+   * 实例ID。
+   */
+  InstanceId: string
+  /**
+   * 服务产品类型，支持值包括 "redis" - 云数据库 Redis。
+   */
+  Product: string
+  /**
+   * 分片节点序号列表。当列表为空时，选择所有分片节点。
+   */
+  ShardIds?: Array<number>
+  /**
+   * Top Key前缀的分隔符列表。
+目前仅支持以下分割符：[",", ";", ":", "_", "-", "+", "@", "=", "|", "#", "."]，当列表为空时，默认选择所有分隔符。
+   */
+  KeyDelimiterList?: Array<string>
 }
 
 /**
@@ -1669,6 +1687,25 @@ export interface DescribeRedisTopKeyPrefixListRequest {
    * 查询数目，默认为20，最大值为100。
    */
   Limit?: number
+}
+
+/**
+ * 实例配置。
+ */
+export interface InstanceConfs {
+  /**
+   * 数据库巡检开关, Yes/No。
+   */
+  DailyInspection?: string
+  /**
+   * 实例概览开关，Yes/No。
+   */
+  OverviewDisplay?: string
+  /**
+   * redis大key分析的自定义分割符，仅redis使用
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  KeyDelimiters?: Array<string>
 }
 
 /**

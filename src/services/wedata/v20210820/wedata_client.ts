@@ -18,6 +18,7 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  DescribeBatchOperateTaskPage,
   CreateRuleTemplateResponse,
   AlarmInfo,
   TaskLogResponse,
@@ -126,7 +127,7 @@ import {
   ModifyTaskNameResponse,
   DescribeTaskReportDetailListResponse,
   BatchResult,
-  DescribeRuleExecHistoryRequest,
+  FreezeTasksResponse,
   DescribeIntegrationStatisticsInstanceTrendResponse,
   DescribeInstanceLogListRequest,
   RunnerRuleExecResult,
@@ -179,6 +180,7 @@ import {
   ModifyTaskScriptResponse,
   DeleteResourceResponse,
   ModifyRuleResponse,
+  DescribeBatchOperateTaskDTO,
   Namespace,
   RuleDimStat,
   DescribeTaskInstancesResponse,
@@ -233,6 +235,7 @@ import {
   SchedulerTaskInstanceInfo,
   UpdateInLongAgentResponse,
   ModifyWorkflowInfoRequest,
+  DescribeBatchOperateTaskResponse,
   SubmitWorkflow,
   BatchResumeIntegrationTasksRequest,
   DescribeFolderListRequest,
@@ -383,7 +386,7 @@ import {
   FunctionVersion,
   InstanceReportReadNode,
   DescribeTaskAlarmRegulationsRequest,
-  FreezeTasksResponse,
+  DescribeRuleExecHistoryRequest,
   CreateCustomFunctionResponse,
   ModifyTaskInfoRequest,
   DataSourceInfo,
@@ -439,6 +442,7 @@ import {
   DescribeRealTimeTaskInstanceNodeInfoResponse,
   RuleHistoryPage,
   DescribeProdTasksResponse,
+  DescribeBatchOperateTaskRequest,
   DescribeTaskReportRequest,
   CommitRuleGroupTaskResponse,
   DescribeRealTimeTaskMetricOverviewResponse,
@@ -1705,6 +1709,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: RerunInstancesResponse) => void
   ): Promise<RerunInstancesResponse> {
     return this.request("RerunInstances", req, cb)
+  }
+
+  /**
+   * 批量操作任务列表
+   */
+  async DescribeBatchOperateTask(
+    req: DescribeBatchOperateTaskRequest,
+    cb?: (error: string, rep: DescribeBatchOperateTaskResponse) => void
+  ): Promise<DescribeBatchOperateTaskResponse> {
+    return this.request("DescribeBatchOperateTask", req, cb)
   }
 
   /**

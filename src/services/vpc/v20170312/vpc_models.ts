@@ -1305,7 +1305,7 @@ export interface CcnRegionBandwidthLimitInfo {
  */
 export interface CloneSecurityGroupRequest {
   /**
-   * 安全组实例ID，例如sg-33ocnj9n，可通过DescribeSecurityGroups获取。
+   * 安全组实例ID，例如sg-33ocnj9n，可通过<a href="https://cloud.tencent.com/document/product/215/15808">DescribeSecurityGroups</a>获取。
    */
   SecurityGroupId: string
   /**
@@ -1317,7 +1317,7 @@ export interface CloneSecurityGroupRequest {
    */
   GroupDescription?: string
   /**
-   * 项目ID，默认0。可在qcloud控制台项目管理页面查询到。
+   * 项目ID，默认0。可在<a href="https://console.cloud.tencent.com/project">qcloud控制台项目管理页面</a>查询到。
    */
   ProjectId?: string
   /**
@@ -2324,7 +2324,7 @@ export interface DescribeSnapshotFilesRequest {
    */
   BusinessType: string
   /**
-   * 实例Id。
+   * 业务实例Id，和BusinessType对应。
    */
   InstanceId: string
   /**
@@ -4245,15 +4245,15 @@ export interface Vpc {
   /**
    * `VPC`名称。
    */
-  VpcName: string
+  VpcName?: string
   /**
    * `VPC`实例`ID`，例如：vpc-azd4dt1c。
    */
-  VpcId: string
+  VpcId?: string
   /**
    * `VPC`的`IPv4` `CIDR`。
    */
-  CidrBlock: string
+  CidrBlock?: string
   /**
    * 是否默认`VPC`。
    */
@@ -4261,7 +4261,7 @@ export interface Vpc {
   /**
    * 是否开启组播。
    */
-  EnableMulticast: boolean
+  EnableMulticast?: boolean
   /**
    * 创建时间。
    */
@@ -4269,32 +4269,32 @@ export interface Vpc {
   /**
    * `DNS`列表。
    */
-  DnsServerSet: Array<string>
+  DnsServerSet?: Array<string>
   /**
    * `DHCP`域名选项值。
    */
-  DomainName: string
+  DomainName?: string
   /**
    * `DHCP`选项集`ID`。
    */
-  DhcpOptionsId: string
+  DhcpOptionsId?: string
   /**
    * 是否开启`DHCP`。
    */
-  EnableDhcp: boolean
+  EnableDhcp?: boolean
   /**
    * `VPC`的`IPv6` `CIDR`。
    */
-  Ipv6CidrBlock: string
+  Ipv6CidrBlock?: string
   /**
    * 标签键值对
    */
-  TagSet: Array<Tag>
+  TagSet?: Array<Tag>
   /**
    * 辅助CIDR
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  AssistantCidrSet: Array<AssistantCidr>
+  AssistantCidrSet?: Array<AssistantCidr>
 }
 
 /**
@@ -9492,15 +9492,15 @@ export interface DescribeUsedIpAddressRequest {
    */
   SubnetId?: string
   /**
-   * 查询是否占用的ip列表
+   * 查询是否占用的ip列表，ip需要在vpc或子网内。最多允许一次查询100个IP。
    */
   IpAddresses?: Array<string>
   /**
-   * 偏移量。
+   * 偏移量，默认为0。
    */
   Offset?: number
   /**
-   * 请求对象个数。
+   * 返回数量，默认为20，最大值为100。
    */
   Limit?: number
 }
@@ -10989,6 +10989,10 @@ export interface ModifyVpcAttributeRequest {
    * 域名。
    */
   DomainName?: string
+  /**
+   * 发布cdc 子网到云联网的开关。true: 发布, false: 不发布。
+   */
+  EnableCdcPublish?: boolean
 }
 
 /**
@@ -14049,7 +14053,7 @@ export interface CreateSecurityGroupWithPoliciesRequest {
    */
   GroupDescription: string
   /**
-   * 项目ID，默认0。可在qcloud控制台项目管理页面查询到。
+   * 项目ID，默认0。可在<a href="https://console.cloud.tencent.com/project">qcloud控制台项目管理页面</a>查询到。
    */
   ProjectId?: string
   /**

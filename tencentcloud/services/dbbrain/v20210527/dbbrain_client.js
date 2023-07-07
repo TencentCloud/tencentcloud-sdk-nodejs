@@ -88,6 +88,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyDiagDBInstanceConf", req, cb);
     }
     /**
+     * 即时创建redis实例大key分析任务，限制正在运行的即时分析任务数量默认为5。
+     */
+    async CreateRedisBigKeyAnalysisTask(req, cb) {
+        return this.request("CreateRedisBigKeyAnalysisTask", req, cb);
+    }
+    /**
      * 用于删除云数据库实例的审计日志文件。
      */
     async DeleteAuditLogFile(req, cb) {

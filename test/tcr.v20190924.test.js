@@ -248,6 +248,16 @@ it("tcr.v20190924.CreateMultipleSecurityPolicy", async function () {
     }
 })
 
+it("tcr.v20190924.DeleteServiceAccount", async function () {
+    try {
+       const data = await client.DeleteServiceAccount({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcr.v20190924.DescribeTagRetentionRules", async function () {
     try {
        const data = await client.DescribeTagRetentionRules({})
@@ -698,6 +708,16 @@ it("tcr.v20190924.CreateCustomAccount", async function () {
     }
 })
 
+it("tcr.v20190924.ModifyServiceAccount", async function () {
+    try {
+       const data = await client.ModifyServiceAccount({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcr.v20190924.DescribeUserQuotaPersonal", async function () {
     try {
        const data = await client.DescribeUserQuotaPersonal({})
@@ -838,6 +858,16 @@ it("tcr.v20190924.DescribeNamespaces", async function () {
     }
 })
 
+it("tcr.v20190924.DescribeServiceAccounts", async function () {
+    try {
+       const data = await client.DescribeServiceAccounts({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcr.v20190924.CreateSignature", async function () {
     try {
        const data = await client.CreateSignature({})
@@ -931,6 +961,16 @@ it("tcr.v20190924.DeleteNamespace", async function () {
 it("tcr.v20190924.DeleteSignaturePolicy", async function () {
     try {
        const data = await client.DeleteSignaturePolicy({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcr.v20190924.CreateServiceAccount", async function () {
+    try {
+       const data = await client.CreateServiceAccount({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

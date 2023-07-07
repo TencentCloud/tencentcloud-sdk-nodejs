@@ -5336,35 +5336,35 @@ export interface ProxyInfo {
      * （旧参数，请使用ProxyId）通道实例ID。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    InstanceId: string;
+    InstanceId?: string;
     /**
      * 创建时间，采用Unix时间戳的方式，表示从1970年1月1日（UTC/GMT的午夜）开始所经过的秒数。
      */
-    CreateTime: number;
+    CreateTime?: number;
     /**
      * 项目ID。
      */
-    ProjectId: number;
+    ProjectId?: number;
     /**
      * 通道名称。
      */
-    ProxyName: string;
+    ProxyName?: string;
     /**
      * 接入地域。
      */
-    AccessRegion: string;
+    AccessRegion?: string;
     /**
      * 源站地域。
      */
-    RealServerRegion: string;
+    RealServerRegion?: string;
     /**
      * 带宽，单位：Mbps。
      */
-    Bandwidth: number;
+    Bandwidth?: number;
     /**
      * 并发，单位：万个/秒。
      */
-    Concurrent: number;
+    Concurrent?: number;
     /**
      * 通道状态。其中：
   RUNNING表示运行中；
@@ -5380,129 +5380,129 @@ export interface ProxyInfo {
   RECOVERING表示通道维护中；
   MOVING表示迁移中。
      */
-    Status: string;
+    Status?: string;
     /**
      * 接入域名。
      */
-    Domain: string;
+    Domain?: string;
     /**
      * 接入IP。
      */
-    IP: string;
+    IP?: string;
     /**
      * 通道版本号：1.0，2.0，3.0。
      */
-    Version: string;
+    Version?: string;
     /**
      * （新参数）通道实例ID。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ProxyId: string;
+    ProxyId?: string;
     /**
      * 1，该通道可缩扩容；0，该通道无法缩扩容。
      */
-    Scalarable: number;
+    Scalarable?: number;
     /**
      * 支持的协议类型。
      */
-    SupportProtocols: Array<string>;
+    SupportProtocols?: Array<string>;
     /**
      * 通道组ID，当通道归属于某一通道组时，存在该字段。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    GroupId: string;
+    GroupId?: string;
     /**
      * 安全策略ID，当设置了安全策略时，存在该字段。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    PolicyId: string;
+    PolicyId?: string;
     /**
      * 接入地域详细信息，包括地域ID和地域名。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    AccessRegionInfo: RegionDetail;
+    AccessRegionInfo?: RegionDetail;
     /**
      * 源站地域详细信息，包括地域ID和地域名。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    RealServerRegionInfo: RegionDetail;
+    RealServerRegionInfo?: RegionDetail;
     /**
      * 通道转发IP
      */
-    ForwardIP: string;
+    ForwardIP?: string;
     /**
      * 标签列表，不存在标签时，该字段为空列表。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TagSet: Array<TagPair>;
+    TagSet?: Array<TagPair>;
     /**
      * 是否支持安全组配置
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SupportSecurity: number;
+    SupportSecurity?: number;
     /**
      * 计费类型: 0表示按带宽计费  1表示按流量计费。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    BillingType: number;
+    BillingType?: number;
     /**
      * 关联了解析的域名列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    RelatedGlobalDomains: Array<string>;
+    RelatedGlobalDomains?: Array<string>;
     /**
      * 配置变更时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ModifyConfigTime: number;
+    ModifyConfigTime?: number;
     /**
      * 通道类型，100表示THUNDER通道，103表示微软合作通道
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ProxyType: number;
+    ProxyType?: number;
     /**
      * 通道获取客户端IP的方式，0表示TOA，1表示Proxy Protocol
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ClientIPMethod: Array<number>;
+    ClientIPMethod?: Array<number>;
     /**
      * IP版本：IPv4、IPv6
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    IPAddressVersion: string;
+    IPAddressVersion?: string;
     /**
      * 网络类型：normal表示常规BGP，cn2表示精品BGP，triple表示三网，secure_eip表示定制安全EIP
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    NetworkType: string;
+    NetworkType?: string;
     /**
      * 通道套餐类型：Thunder表示标准通道，Accelerator表示银牌加速通道，
   CrossBorder表示跨境通道。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    PackageType: string;
+    PackageType?: string;
     /**
      * 封禁解封状态：BANNED表示已封禁，RECOVER表示已解封或未封禁，BANNING表示封禁中，RECOVERING表示解封中，BAN_FAILED表示封禁失败，RECOVER_FAILED表示解封失败。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    BanStatus: string;
+    BanStatus?: string;
     /**
      * IP列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    IPList: Array<IPDetail>;
+    IPList?: Array<IPDetail>;
     /**
      * 支持Http3协议的标识，其中：
   0表示关闭；
   1表示启用。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Http3Supported: number;
+    Http3Supported?: number;
     /**
      * 是否在封禁黑名单中，其中：0表示不在黑名单中，1表示在黑名单中。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    InBanBlacklist: number;
+    InBanBlacklist?: number;
     /**
      * 特性位图，每个bit位代表一种特性，其中：
   0，表示不支持该特性；
@@ -5518,7 +5518,7 @@ export interface ProxyInfo {
   注意：此字段可能返回 null，表示取不到有效值。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    FeatureBitmap: number;
+    FeatureBitmap?: number;
 }
 /**
  * RemoveRealServers返回参数结构体

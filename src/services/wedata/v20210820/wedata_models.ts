@@ -16,6 +16,27 @@
  */
 
 /**
+ * 批量操作任务列表分页
+ */
+export interface DescribeBatchOperateTaskPage {
+  /**
+   * 总页码数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PageCount: number
+  /**
+   * 内容
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Items: Array<DescribeBatchOperateTaskDTO>
+  /**
+   * 总个数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalCount?: number
+}
+
+/**
  * CreateRuleTemplate返回参数结构体
  */
 export interface CreateRuleTemplateResponse {
@@ -3343,17 +3364,17 @@ export interface BatchResult {
 }
 
 /**
- * DescribeRuleExecHistory请求参数结构体
+ * FreezeTasks返回参数结构体
  */
-export interface DescribeRuleExecHistoryRequest {
+export interface FreezeTasksResponse {
   /**
-   * 规则Id
+   * 操作结果
    */
-  RuleId?: number
+  Data: OperateResult
   /**
-   * 项目Id
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  ProjectId?: string
+  RequestId?: string
 }
 
 /**
@@ -4824,6 +4845,83 @@ export interface ModifyRuleResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 批量操作任务列表
+ */
+export interface DescribeBatchOperateTaskDTO {
+  /**
+   * 任务ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskId?: string
+  /**
+   * 任务名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskName?: string
+  /**
+   * 工作流Id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WorkflowId?: string
+  /**
+   * 工作流名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WorkflowName?: string
+  /**
+   * 状态
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status?: string
+  /**
+   * 任务ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskTypeId?: number
+  /**
+   * 任务类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskTypeDesc?: string
+  /**
+   * 文件夹名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FolderName?: string
+  /**
+   * 文件夹ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FolderId?: string
+  /**
+   * 负责人
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InCharge?: string
+  /**
+   * 是否提交
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Submit?: number
+  /**
+   * 引擎：
+presto\SparkJob\SparkSql
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DataEngine?: string
+  /**
+   * 更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UpdateTime?: string
+  /**
+   * 创造时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateTime?: string
 }
 
 /**
@@ -6462,6 +6560,21 @@ export interface ModifyWorkflowInfoRequest {
    * 用于配置优化参数（线程、内存、CPU核数等），仅作用于Spark SQL节点。多个参数用英文分号分隔。
    */
   GeneralTaskParams?: Array<GeneralTaskParam>
+}
+
+/**
+ * DescribeBatchOperateTask返回参数结构体
+ */
+export interface DescribeBatchOperateTaskResponse {
+  /**
+   * 无
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Data?: DescribeBatchOperateTaskPage
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -10073,17 +10186,17 @@ export interface DescribeTaskAlarmRegulationsRequest {
 }
 
 /**
- * FreezeTasks返回参数结构体
+ * DescribeRuleExecHistory请求参数结构体
  */
-export interface FreezeTasksResponse {
+export interface DescribeRuleExecHistoryRequest {
   /**
-   * 操作结果
+   * 规则Id
    */
-  Data: OperateResult
+  RuleId?: number
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 项目Id
    */
-  RequestId?: string
+  ProjectId?: string
 }
 
 /**
@@ -11540,6 +11653,91 @@ export interface DescribeProdTasksResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeBatchOperateTask请求参数结构体
+ */
+export interface DescribeBatchOperateTaskRequest {
+  /**
+   * 项目Id
+   */
+  ProjectId: string
+  /**
+   * 页码
+   */
+  Page: string
+  /**
+   * 页号
+   */
+  Size: string
+  /**
+   * 状态列表
+草稿：'NS'，'N','P','R'
+运行：''Y'
+停止：'F'
+冻结：'O'
+停止中：'T'
+   */
+  StatusList?: Array<string>
+  /**
+   * 责任人名列表
+   */
+  OwnerNameList?: Array<string>
+  /**
+   * 工作流列表
+   */
+  WorkflowIdList?: Array<string>
+  /**
+   * 任务名称搜索
+   */
+  TaskNameFilter?: string
+  /**
+   * 任务类型列表
+   */
+  TaskTypeList?: Array<string>
+  /**
+   * 文件夹列表
+   */
+  FordIdList?: Array<string>
+  /**
+   * 任务Id搜索
+   */
+  TaskIdFilter?: string
+  /**
+   * 责任人搜索
+   */
+  OwnerNameFilter?: string
+  /**
+   * 排序字段：
+UpdateTime
+CreateTime
+   */
+  SortItem?: string
+  /**
+   * asc:升序
+desc:降序
+   */
+  SortType?: string
+  /**
+   * 引擎类型列表：三种
+SparkJob
+SparkSql
+presto
+   */
+  DataEngineList?: Array<string>
+  /**
+   * 操作人名
+   */
+  UserId?: string
+  /**
+   * 1
+   */
+  OwnerId?: string
+  /**
+   * 1
+   */
+  TenantId?: string
 }
 
 /**

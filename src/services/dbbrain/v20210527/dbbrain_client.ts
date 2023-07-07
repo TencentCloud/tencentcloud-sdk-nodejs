@@ -28,7 +28,7 @@ import {
   DescribeSlowLogsRequest,
   DescribeTopSpaceTablesRequest,
   ScoreItem,
-  InstanceConfs,
+  CreateRedisBigKeyAnalysisTaskResponse,
   CreateSecurityAuditLogExportTaskRequest,
   DescribeDBDiagEventResponse,
   DescribeDBDiagEventsResponse,
@@ -43,6 +43,7 @@ import {
   CreateKillTaskResponse,
   DiagHistoryEventItem,
   DescribeProxySessionKillTasksRequest,
+  CreateRedisBigKeyAnalysisTaskRequest,
   DescribeMySqlProcessListResponse,
   SessionItem,
   HealthStatus,
@@ -88,6 +89,7 @@ import {
   CreateDBDiagReportUrlRequest,
   DescribeSecurityAuditLogExportTasksResponse,
   DescribeRedisTopKeyPrefixListRequest,
+  InstanceConfs,
   DescribeSqlTemplateResponse,
   HealthScoreInfo,
   DescribeTopSpaceTableTimeSeriesResponse,
@@ -266,6 +268,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyDiagDBInstanceConfResponse) => void
   ): Promise<ModifyDiagDBInstanceConfResponse> {
     return this.request("ModifyDiagDBInstanceConf", req, cb)
+  }
+
+  /**
+   * 即时创建redis实例大key分析任务，限制正在运行的即时分析任务数量默认为5。
+   */
+  async CreateRedisBigKeyAnalysisTask(
+    req: CreateRedisBigKeyAnalysisTaskRequest,
+    cb?: (error: string, rep: CreateRedisBigKeyAnalysisTaskResponse) => void
+  ): Promise<CreateRedisBigKeyAnalysisTaskResponse> {
+    return this.request("CreateRedisBigKeyAnalysisTask", req, cb)
   }
 
   /**

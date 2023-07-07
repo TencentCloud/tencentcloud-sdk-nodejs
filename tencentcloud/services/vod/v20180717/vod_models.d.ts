@@ -1490,7 +1490,7 @@ export interface ModifySuperPlayerConfigRequest {
      */
     ImageSpriteDefinition?: number;
     /**
-     * 播放器对不于不同分辨率的子流展示名字。
+     * 播放器对于不同分辨率的子流展示名字。
      */
     ResolutionNames?: Array<ResolutionNameInfo>;
     /**
@@ -7859,7 +7859,7 @@ export interface CreateSuperPlayerConfigRequest {
      */
     ImageSpriteDefinition?: number;
     /**
-     * 播放器对不于不同分辨率的子流展示名字，不填或者填空数组则使用默认配置：
+     * 播放器对于不同分辨率的子流展示名字，不填或者填空数组则使用默认配置：
   <li>MinEdgeLength：240，Name：流畅；</li>
   <li>MinEdgeLength：480，Name：标清；</li>
   <li>MinEdgeLength：720，Name：高清；</li>
@@ -11844,11 +11844,11 @@ export interface DescribeVodDomainsResponse {
     /**
      * 域名总数量。
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 域名信息列表。
      */
-    DomainSet: Array<DomainDetailInfo>;
+    DomainSet?: Array<DomainDetailInfo>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -15111,7 +15111,7 @@ export interface ProhibitedOcrReviewTemplateInfoForUpdate {
  */
 export interface DescribeVodDomainsRequest {
     /**
-     * 域名列表。当该字段不填时，则默认列出所有域名信息。本字段字段限制如下：
+     * 域名列表。当该字段不填时，则默认列出所有域名信息。本字段限制如下：
   <li>域名个数度最大为 20。</li>
      */
     Domains?: Array<string>;
@@ -16118,7 +16118,7 @@ export interface WeChatMiniProgramPublishResponse {
     /**
      * 任务 ID。
      */
-    TaskId: string;
+    TaskId?: string;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -16502,55 +16502,55 @@ export interface MediaTranscodeItem {
     /**
      * 转码后的视频文件地址。
      */
-    Url: string;
+    Url?: string;
     /**
      * 转码规格 ID，参见[转码参数模板](https://cloud.tencent.com/document/product/266/33476)。
      */
-    Definition: number;
+    Definition?: number;
     /**
      * 视频流码率平均值与音频流码率平均值之和， 单位：bps。
      */
-    Bitrate: number;
+    Bitrate?: number;
     /**
      * 视频流高度的最大值，单位：px。
      */
-    Height: number;
+    Height?: number;
     /**
      * 视频流宽度的最大值，单位：px。
      */
-    Width: number;
+    Width?: number;
     /**
      * 媒体文件总大小，单位：字节。
   <li>当媒体文件为 HLS 时，大小是 m3u8 和 ts 文件大小的总和。</li>
      */
-    Size: number;
+    Size?: number;
     /**
      * 视频时长，单位：秒。
      */
-    Duration: number;
+    Duration?: number;
     /**
      * 视频的 md5 值。
      */
-    Md5: string;
+    Md5?: string;
     /**
      * 容器类型，例如 m4a，mp4 等。
      */
-    Container: string;
+    Container?: string;
     /**
      * 视频流信息。
      */
-    VideoStreamSet: Array<MediaVideoStreamItem>;
+    VideoStreamSet?: Array<MediaVideoStreamItem>;
     /**
      * 音频流信息。
      */
-    AudioStreamSet: Array<MediaAudioStreamItem>;
+    AudioStreamSet?: Array<MediaAudioStreamItem>;
     /**
      * 数字水印类型。可选值：
   <li>Trace 表示经过溯源水印处理；</li>
   <li>CopyRight 表示经过版权水印处理；</li>
   <li>None 表示没有经过数字水印处理。</li>
      */
-    DigitalWatermarkType: string;
+    DigitalWatermarkType?: string;
     /**
      * 版权信息。
      */

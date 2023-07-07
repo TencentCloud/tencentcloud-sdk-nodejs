@@ -121,16 +121,16 @@ export interface Department {
     /**
      * 部门ID
      */
-    Id: string;
+    Id?: string;
     /**
      * 部门名称，1 - 256个字符
      */
-    Name: string;
+    Name?: string;
     /**
      * 部门管理员账号ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Managers: Array<string>;
+    Managers?: Array<string>;
 }
 /**
  * 主机账号
@@ -900,7 +900,7 @@ export interface CreateUserResponse {
     /**
      * 新建用户的ID
      */
-    Id: number;
+    Id?: number;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1431,6 +1431,10 @@ export interface DescribeUsersRequest {
      */
     Phone?: string;
     /**
+     * 邮箱，精确查询
+     */
+    Email?: string;
+    /**
      * 查询具有指定资产ID访问权限的用户
      */
     AuthorizedDeviceIdSet?: Array<number>;
@@ -1755,13 +1759,13 @@ export interface User {
      */
     RealName: string;
     /**
-     * 手机号码， 大陆手机号直接填写，如果是其他国家、地区号码,按照"国家地区代码|手机号"的格式输入。如: "+852|xxxxxxxx"
-     */
-    Phone: string;
-    /**
      * 用户ID
      */
     Id?: number;
+    /**
+     * 手机号码， 大陆手机号直接填写，如果是其他国家、地区号码,按照"国家地区代码|手机号"的格式输入。如: "+852|xxxxxxxx"
+     */
+    Phone?: string;
     /**
      * 电子邮件
      */
@@ -1931,11 +1935,11 @@ export interface DescribeUsersResponse {
     /**
      * 用户总数
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 用户列表
      */
-    UserSet: Array<User>;
+    UserSet?: Array<User>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1965,7 +1969,7 @@ export interface CreateUserRequest {
     /**
      * 大陆手机号直接填写，如果是其他国家、地区号码， 按照"国家地区代码|手机号"的格式输入。如: "+852|xxxxxxxx"
      */
-    Phone: string;
+    Phone?: string;
     /**
      * 电子邮件
      */
@@ -2294,11 +2298,11 @@ export interface ModifyUserRequest {
     /**
      * 大陆手机号直接填写，如果是其他国家、地区号码,按照"国家地区代码|手机号"的格式输入。如: "+852|xxxxxxxx"
      */
-    Phone: string;
+    Phone?: string;
     /**
      * 电子邮件
      */
-    Email: string;
+    Email?: string;
     /**
      * 用户生效时间，如:"2021-09-22T00:00:00+00:00"
   生效、失效时间不填则用户长期有效

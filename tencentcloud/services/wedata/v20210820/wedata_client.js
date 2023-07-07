@@ -718,6 +718,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("RerunInstances", req, cb);
     }
     /**
+     * 批量操作任务列表
+     */
+    async DescribeBatchOperateTask(req, cb) {
+        return this.request("DescribeBatchOperateTask", req, cb);
+    }
+    /**
      * 删除质量规则接口
      */
     async DeleteRule(req, cb) {

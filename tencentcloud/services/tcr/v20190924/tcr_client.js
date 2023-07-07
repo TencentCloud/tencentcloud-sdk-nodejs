@@ -168,6 +168,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateMultipleSecurityPolicy", req, cb);
     }
     /**
+     * 删除服务级账号
+     */
+    async DeleteServiceAccount(req, cb) {
+        return this.request("DeleteServiceAccount", req, cb);
+    }
+    /**
      * 查询版本保留规则
      */
     async DescribeTagRetentionRules(req, cb) {
@@ -438,6 +444,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateCustomAccount", req, cb);
     }
     /**
+     * 更新服务级账号
+     */
+    async ModifyServiceAccount(req, cb) {
+        return this.request("ModifyServiceAccount", req, cb);
+    }
+    /**
      * 查询个人用户配额
      */
     async DescribeUserQuotaPersonal(req, cb) {
@@ -522,6 +534,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeNamespaces", req, cb);
     }
     /**
+     * 查询服务级账号
+     */
+    async DescribeServiceAccounts(req, cb) {
+        return this.request("DescribeServiceAccounts", req, cb);
+    }
+    /**
      * 为一个镜像版本创建签名
      */
     async CreateSignature(req, cb) {
@@ -580,6 +598,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DeleteSignaturePolicy(req, cb) {
         return this.request("DeleteSignaturePolicy", req, cb);
+    }
+    /**
+     * 创建自定义账户
+     */
+    async CreateServiceAccount(req, cb) {
+        return this.request("CreateServiceAccount", req, cb);
     }
     /**
      * 查询实例信息

@@ -4854,19 +4854,23 @@ export interface DescribeResourceUsageResponse {
   /**
    * CRD使用量
    */
-  CRDUsage: ResourceUsage
+  CRDUsage?: ResourceUsage
   /**
    * Pod使用量
    */
-  PodUsage: number
+  PodUsage?: number
+  /**
+   * ReplicaSet使用量
+   */
+  RSUsage?: number
   /**
    * ConfigMap使用量
    */
-  ConfigMapUsage: number
+  ConfigMapUsage?: number
   /**
    * 其他资源使用量
    */
-  OtherUsage: ResourceUsage
+  OtherUsage?: ResourceUsage
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5539,6 +5543,10 @@ export interface ClusterLevelAttribute {
    * Configmap数量
    */
   ConfigMapCount: number
+  /**
+   * ReplicaSets数量
+   */
+  RSCount?: number
   /**
    * CRD数量
    */
@@ -9475,6 +9483,10 @@ export interface ModifyClusterVirtualNodePoolRequest {
    * 节点池名称
    */
   Name?: string
+  /**
+   * 安全组ID列表
+   */
+  SecurityGroupIds?: Array<string>
   /**
    * 虚拟节点label
    */
