@@ -1078,6 +1078,16 @@ it("tdmq.v20200217.DescribePulsarProInstances", async function () {
     }
 })
 
+it("tdmq.v20200217.DeleteRabbitMQVipInstance", async function () {
+    try {
+       const data = await client.DeleteRabbitMQVipInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tdmq.v20200217.DescribeAMQPQueues", async function () {
     try {
        const data = await client.DescribeAMQPQueues({})

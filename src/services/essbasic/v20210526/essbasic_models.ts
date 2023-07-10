@@ -629,11 +629,11 @@ export interface ChannelCreatePrepareFlowRequest {
    */
   FlowApproverList: Array<CommonFlowApprover>
   /**
-   * 应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 均必填
+   * 应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 必填
    */
   Agent?: Agent
   /**
-   * 合同流程配置信息
+   * 合同流程配置信息，用于配置发起合同时定制化
    */
   FlowOption?: CreateFlowOption
   /**
@@ -642,6 +642,7 @@ export interface ChannelCreatePrepareFlowRequest {
   FlowId?: string
   /**
    * 该参数不可用，请通过获取 web 可嵌入接口获取合同流程预览 URL
+   * @deprecated
    */
   NeedPreview?: boolean
   /**
@@ -1207,7 +1208,7 @@ export interface Agent {
    */
   ProxyOperator?: UserInfo
   /**
-   * 在第三方平台子客企业开通电子签后，会生成唯一的子客应用Id（ProxyAppId）用于代理调用时的鉴权，在子客开通的回调中获取。
+   * 非必需参数，在第三方平台子客企业开通电子签后，会生成唯一的子客应用Id（ProxyAppId）用于代理调用时的鉴权，在子客开通的回调中获取。
    */
   ProxyAppId?: string
   /**

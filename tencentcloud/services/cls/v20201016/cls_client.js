@@ -363,6 +363,12 @@ cls.pb.cc cls.pb.h cls.proto
         return this.request("DeleteConfigFromMachineGroup", req, cb);
     }
     /**
+     * 本接口用于删除数据加工任务
+     */
+    async DeleteDataTransform(req, cb) {
+        return this.request("DeleteDataTransform", req, cb);
+    }
+    /**
      * 本接口用于删除特殊采集规则配置，特殊采集配置应用于自建K8S环境的采集Agent
      */
     async DeleteConfigExtra(req, cb) {
@@ -375,16 +381,22 @@ cls.pb.cc cls.pb.h cls.proto
         return this.request("DescribeKafkaRecharges", req, cb);
     }
     /**
-     * 本接口用于获取告警策略列表。
+     * 本接口用于创建数据加工任务。
      */
-    async DescribeAlarms(req, cb) {
-        return this.request("DescribeAlarms", req, cb);
+    async CreateDataTransform(req, cb) {
+        return this.request("CreateDataTransform", req, cb);
     }
     /**
      * 用于添加机器组信息
      */
     async AddMachineGroupInfo(req, cb) {
         return this.request("AddMachineGroupInfo", req, cb);
+    }
+    /**
+     * 本接口用于获取数据加工任务列表基本信息
+     */
+    async DescribeDataTransformInfo(req, cb) {
+        return this.request("DescribeDataTransformInfo", req, cb);
     }
     /**
      * 该接口用于获取通知渠道组列表
@@ -507,6 +519,12 @@ cls.pb.cc cls.pb.h cls.proto
         return this.request("DeleteIndex", req, cb);
     }
     /**
+     * 本接口用于修改数据加工任务
+     */
+    async ModifyDataTransform(req, cb) {
+        return this.request("ModifyDataTransform", req, cb);
+    }
+    /**
      * 修改现有的投递规则，客户如果使用此接口，需要自行处理CLS对指定bucket的写权限。
      */
     async ModifyShipper(req, cb) {
@@ -613,6 +631,12 @@ cls.pb.cc cls.pb.h cls.proto
      */
     async CloseKafkaConsumer(req, cb) {
         return this.request("CloseKafkaConsumer", req, cb);
+    }
+    /**
+     * 本接口用于获取告警策略列表。
+     */
+    async DescribeAlarms(req, cb) {
+        return this.request("DescribeAlarms", req, cb);
     }
 }
 exports.Client = Client;

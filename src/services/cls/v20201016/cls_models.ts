@@ -439,6 +439,24 @@ export interface KafkaRechargeInfo {
 }
 
 /**
+ * ModifyLogset请求参数结构体
+ */
+export interface ModifyLogsetRequest {
+  /**
+   * 日志集ID
+   */
+  LogsetId: string
+  /**
+   * 日志集名称
+   */
+  LogsetName?: string
+  /**
+   * 日志集的绑定的标签键值对。最大支持10个标签键值对，同一个资源只能同时绑定一个标签键。
+   */
+  Tags?: Array<Tag>
+}
+
+/**
  * CreateLogset请求参数结构体
  */
 export interface CreateLogsetRequest {
@@ -780,6 +798,32 @@ export interface DescribeConfigExtrasResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ModifyDataTransform请求参数结构体
+ */
+export interface ModifyDataTransformRequest {
+  /**
+   * 加工任务id
+   */
+  TaskId: string
+  /**
+   * 加工任务名称
+   */
+  Name?: string
+  /**
+   * 加工语句
+   */
+  EtlContent?: string
+  /**
+   * 任务启动状态. 默认为1，开启,  2关闭
+   */
+  EnableFlag?: number
+  /**
+   * 加工任务目的topic_id以及别名
+   */
+  DstResources?: Array<DataTransformResouceInfo>
 }
 
 /**
@@ -1198,13 +1242,13 @@ export interface TopicInfo {
 }
 
 /**
- * DescribeConsumer请求参数结构体
+ * DeleteDataTransform返回参数结构体
  */
-export interface DescribeConsumerRequest {
+export interface DeleteDataTransformResponse {
   /**
-   * 投递任务绑定的日志主题 ID
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  TopicId: string
+  RequestId?: string
 }
 
 /**
@@ -1288,29 +1332,17 @@ export interface ModifyMachineGroupResponse {
 }
 
 /**
- * 索引规则，FullText、KeyValue、Tag参数必须输入一个有效参数
+ * 数据加工的资源信息
  */
-export interface RuleInfo {
+export interface DataTransformResouceInfo {
   /**
-   * 全文索引配置, 如果为空时代表未开启全文索引
-注意：此字段可能返回 null，表示取不到有效值。
+   * 目标主题id
    */
-  FullText?: FullTextInfo
+  TopicId: string
   /**
-   * 键值索引配置，如果为空时代表未开启键值索引
-注意：此字段可能返回 null，表示取不到有效值。
+   * 别名
    */
-  KeyValue?: RuleKeyValueInfo
-  /**
-   * 元字段索引配置，如果为空时代表未开启元字段索引
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Tag?: RuleTagInfo
-  /**
-   * 动态索引配置，如果为空时代表未开启动态段索引
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  DynamicIndex?: DynamicIndex
+  Alias: string
 }
 
 /**
@@ -2494,6 +2526,16 @@ export interface LogsetInfo {
 }
 
 /**
+ * DescribeConsumer请求参数结构体
+ */
+export interface DescribeConsumerRequest {
+  /**
+   * 投递任务绑定的日志主题 ID
+   */
+  TopicId: string
+}
+
+/**
  * DeleteConfig请求参数结构体
  */
 export interface DeleteConfigRequest {
@@ -2718,6 +2760,16 @@ export interface DescribeAlarmNoticesResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DeleteDataTransform请求参数结构体
+ */
+export interface DeleteDataTransformRequest {
+  /**
+   * 数据加工任务id
+   */
+  TaskId: string
 }
 
 /**
@@ -3214,37 +3266,50 @@ long及double类型字段需为空；
 }
 
 /**
- * GetAlarmLog请求参数结构体
+ * DescribeDataTransformInfo请求参数结构体
  */
-export interface GetAlarmLogRequest {
+export interface DescribeDataTransformInfoRequest {
   /**
-   * 要查询的日志的起始时间，Unix时间戳，单位ms
+   * <br><li> taskName
+
+按照【加工任务名称】进行过滤。
+类型：String
+
+必选：否
+
+<br><li> taskId
+
+按照【加工任务id】进行过滤。
+类型：String
+
+必选：否
+
+<br><li> srctopicId
+
+按照【源topicId】进行过滤。
+类型：String
+
+必选：否
+
+每次请求的Filters的上限为10，Filter.Values的上限为100。
    */
-  From: number
+  Filters?: Array<Filter>
   /**
-   * 要查询的日志的结束时间，Unix时间戳，单位ms
+   * 分页的偏移量，默认值为0。
    */
-  To: number
+  Offset?: number
   /**
-   * 查询语句，语句长度最大为1024
-   */
-  Query: string
-  /**
-   * 单次查询返回的日志条数，最大值为1000
+   * 分页单页限制数目，默认值为20，最大值100。
    */
   Limit?: number
   /**
-   * 加载更多日志时使用，透传上次返回的Context值，获取后续的日志内容
+   * 默认值为2.   1: 获取单个任务的详细信息 2：获取任务列表
    */
-  Context?: string
+  Type?: number
   /**
-   * 日志接口是否按时间排序返回；可选值：asc(升序)、desc(降序)，默认为 desc
+   * Type为1， 此参数必填
    */
-  Sort?: string
-  /**
-   * 为true代表使用新检索,响应参数AnalysisRecords和Columns有效， 为false时代表使用老检索方式, AnalysisResults和ColNames有效
-   */
-  UseNewAnalysis?: boolean
+  TaskId?: string
 }
 
 /**
@@ -3480,6 +3545,20 @@ export interface SplitPartitionResponse {
 }
 
 /**
+ * CreateDataTransform返回参数结构体
+ */
+export interface CreateDataTransformResponse {
+  /**
+   * 任务id
+   */
+  TaskId?: string
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 日志上下文信息
  */
 export interface LogContextInfo {
@@ -3643,6 +3722,32 @@ export interface DeleteKafkaRechargeRequest {
 }
 
 /**
+ * 索引规则，FullText、KeyValue、Tag参数必须输入一个有效参数
+ */
+export interface RuleInfo {
+  /**
+   * 全文索引配置, 如果为空时代表未开启全文索引
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FullText?: FullTextInfo
+  /**
+   * 键值索引配置，如果为空时代表未开启键值索引
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  KeyValue?: RuleKeyValueInfo
+  /**
+   * 元字段索引配置，如果为空时代表未开启元字段索引
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Tag?: RuleTagInfo
+  /**
+   * 动态索引配置，如果为空时代表未开启动态段索引
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DynamicIndex?: DynamicIndex
+}
+
+/**
  * CreateConfigExtra请求参数结构体
  */
 export interface CreateConfigExtraRequest {
@@ -3743,6 +3848,20 @@ export interface CreateConsumerRequest {
 }
 
 /**
+ * 多日志主题检索相关信息
+ */
+export interface MultiTopicSearchInformation {
+  /**
+   * 要检索分析的日志主题ID
+   */
+  TopicId?: string
+  /**
+   * 透传上次接口返回的Context值，可获取后续更多日志，总计最多可获取1万条原始日志，过期时间1小时
+   */
+  Context?: string
+}
+
+/**
  * 告警通知模板类型
  */
 export interface AlarmNotice {
@@ -3815,6 +3934,64 @@ export interface ModifyAlarmNoticeResponse {
 }
 
 /**
+ * 数据加工任务基本详情
+ */
+export interface DataTransformTaskInfo {
+  /**
+   * 数据加工任务名称
+   */
+  Name: string
+  /**
+   * 数据加工任务id
+   */
+  TaskId: string
+  /**
+   * 任务启用状态，默认为1，正常开启,  2关闭
+   */
+  EnableFlag: number
+  /**
+   * 加工任务类型，1： DSL， 2：SQL
+   */
+  Type: number
+  /**
+   * 源日志主题
+   */
+  SrcTopicId: string
+  /**
+   * 当前加工任务状态（1准备中/2运行中/3停止中/4已停止）
+   */
+  Status: number
+  /**
+   * 加工任务创建时间
+   */
+  CreateTime: string
+  /**
+   * 最近修改时间
+   */
+  UpdateTime: string
+  /**
+   * 最后启用时间，如果需要重建集群，修改该时间
+   */
+  LastEnableTime: string
+  /**
+   * 日志主题名称
+   */
+  SrcTopicName: string
+  /**
+   * 日志集id
+   */
+  LogsetId: string
+  /**
+   * 加工任务目的topic_id以及别名
+   */
+  DstResources: Array<DataTransformResouceInfo>
+  /**
+   * 加工逻辑函数
+   */
+  EtlContent: string
+}
+
+/**
  * DescribeMachines返回参数结构体
  */
 export interface DescribeMachinesResponse {
@@ -3856,6 +4033,37 @@ export interface ModifyCosRechargeResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 预览数据详情
+ */
+export interface PreviewLogStatistic {
+  /**
+   * 日志内容
+   */
+  LogContent: string
+  /**
+   * 行号
+   */
+  LineNum: number
+  /**
+   * 目标日志主题
+   */
+  DstTopicId?: string
+  /**
+   * 失败错误码， 空字符串""表示正常
+   */
+  FailReason?: string
+  /**
+   * 日志时间戳
+   */
+  Time?: string
+  /**
+   * 目标topic-name
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DstTopicName?: string
 }
 
 /**
@@ -4548,6 +4756,40 @@ export interface ApplyConfigToMachineGroupRequest {
 }
 
 /**
+ * GetAlarmLog请求参数结构体
+ */
+export interface GetAlarmLogRequest {
+  /**
+   * 要查询的日志的起始时间，Unix时间戳，单位ms
+   */
+  From: number
+  /**
+   * 要查询的日志的结束时间，Unix时间戳，单位ms
+   */
+  To: number
+  /**
+   * 查询语句，语句长度最大为1024
+   */
+  Query: string
+  /**
+   * 单次查询返回的日志条数，最大值为1000
+   */
+  Limit?: number
+  /**
+   * 加载更多日志时使用，透传上次返回的Context值，获取后续的日志内容
+   */
+  Context?: string
+  /**
+   * 日志接口是否按时间排序返回；可选值：asc(升序)、desc(降序)，默认为 desc
+   */
+  Sort?: string
+  /**
+   * 为true代表使用新检索,响应参数AnalysisRecords和Columns有效， 为false时代表使用老检索方式, AnalysisResults和ColNames有效
+   */
+  UseNewAnalysis?: boolean
+}
+
+/**
  * 自建k8s-容器文件路径信息
  */
 export interface ContainerFileInfo {
@@ -4854,21 +5096,41 @@ export interface ModifyKafkaRechargeRequest {
 }
 
 /**
- * ModifyLogset请求参数结构体
+ * CreateDataTransform请求参数结构体
  */
-export interface ModifyLogsetRequest {
+export interface CreateDataTransformRequest {
   /**
-   * 日志集ID
+   * 任务类型. 1: 指定主题；2:动态创建
    */
-  LogsetId: string
+  FuncType: number
   /**
-   * 日志集名称
+   * 源日志主题
    */
-  LogsetName?: string
+  SrcTopicId: string
   /**
-   * 日志集的绑定的标签键值对。最大支持10个标签键值对，同一个资源只能同时绑定一个标签键。
+   * 加工任务名称
    */
-  Tags?: Array<Tag>
+  Name: string
+  /**
+   * 加工语句
+   */
+  EtlContent: string
+  /**
+   * 加工类型  1 使用源日志主题中的随机数据，进行加工预览 :2 使用用户自定义测试数据，进行加工预览 3 创建真实加工任务
+   */
+  TaskType: number
+  /**
+   * 任务启动状态.   默认为1:开启,  2:关闭
+   */
+  EnableFlag?: number
+  /**
+   * 加工任务目的topic_id以及别名
+   */
+  DstResources?: Array<DataTransformResouceInfo>
+  /**
+   * 用于预览加工结果的测试数据
+   */
+  PreviewLogStatistics?: Array<PreviewLogStatistic>
 }
 
 /**
@@ -5059,17 +5321,31 @@ export interface CosRechargeInfo {
 }
 
 /**
- * 多日志主题检索相关信息
+ * ModifyDataTransform返回参数结构体
  */
-export interface MultiTopicSearchInformation {
+export interface ModifyDataTransformResponse {
   /**
-   * 要检索分析的日志主题ID
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  TopicId?: string
+  RequestId?: string
+}
+
+/**
+ * DescribeDataTransformInfo返回参数结构体
+ */
+export interface DescribeDataTransformInfoResponse {
   /**
-   * 透传上次接口返回的Context值，可获取后续更多日志，总计最多可获取1万条原始日志，过期时间1小时
+   * 数据加工任务列表信息
    */
-  Context?: string
+  DataTransformTaskInfos?: Array<DataTransformTaskInfo>
+  /**
+   * 任务总次数
+   */
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

@@ -632,6 +632,16 @@ export interface RoomItem {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     EnableDirectControl?: number;
+    /**
+     * 开启专注模式。 0 收看全部角色音视频(默认) 1 只看老师和助教
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InteractionMode?: number;
+    /**
+     * 横竖屏。0：横屏开播（默认值）; 1：竖屏开播，当前仅支持移动端的纯视频类型
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    VideoOrientation?: number;
 }
 /**
  * SetWatermark请求参数结构体
@@ -2484,6 +2494,10 @@ export interface GetRoomsRequest {
      * 默认是10条
      */
     Limit?: number;
+    /**
+     * 课堂状态。默认展示所有课堂，0为未开始，1为正在上课，2为已结束，3为已过期
+     */
+    Status?: Array<number>;
 }
 /**
  * DescribeDeveloper请求参数结构体

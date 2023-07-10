@@ -175,7 +175,9 @@ API 网关可绑定自定义域名到服务，并且可以对自定义域名的�
         return this.request("DescribeApi", req, cb);
     }
     /**
-     * 本接口（GenerateApiDocument）用于自动生成 API 文档和 SDK，一个服务的一个环境生成一份文档和 SDK。
+     * 接口已废弃
+
+本接口（GenerateApiDocument）用于自动生成 API 文档和 SDK，一个服务的一个环境生成一份文档和 SDK。
      */
     async GenerateApiDocument(req, cb) {
         return this.request("GenerateApiDocument", req, cb);

@@ -36,6 +36,7 @@ import {
   DescribeConfigMachineGroupsRequest,
   ModifyConfigExtraResponse,
   KafkaRechargeInfo,
+  ModifyLogsetRequest,
   CreateLogsetRequest,
   DescribeShippersRequest,
   LogItem,
@@ -53,6 +54,7 @@ import {
   DeleteKafkaRechargeResponse,
   ContainerWorkLoadInfo,
   DescribeConfigExtrasResponse,
+  ModifyDataTransformRequest,
   CallBackInfo,
   OpenKafkaConsumerResponse,
   AlarmTargetInfo,
@@ -67,14 +69,14 @@ import {
   CreateCosRechargeRequest,
   ExtractRuleInfo,
   TopicInfo,
-  DescribeConsumerRequest,
+  DeleteDataTransformResponse,
   DeleteConfigExtraResponse,
   ModifyConsumerRequest,
   CreateIndexResponse,
   DeleteConfigFromMachineGroupResponse,
   CreateConsumerResponse,
   ModifyMachineGroupResponse,
-  RuleInfo,
+  DataTransformResouceInfo,
   DeleteMachineGroupRequest,
   FullTextInfo,
   DescribePartitionsResponse,
@@ -120,6 +122,7 @@ import {
   DescribeConfigsRequest,
   KafkaConsumerContent,
   LogsetInfo,
+  DescribeConsumerRequest,
   DeleteConfigRequest,
   AnalysisDimensional,
   LogRechargeRuleInfo,
@@ -128,6 +131,7 @@ import {
   RuleTagInfo,
   CreateExportRequest,
   DescribeAlarmNoticesResponse,
+  DeleteDataTransformRequest,
   DescribeMachineGroupsResponse,
   DeleteConfigExtraRequest,
   ModifyConfigRequest,
@@ -151,7 +155,7 @@ import {
   Column,
   ContentInfo,
   ValueInfo,
-  GetAlarmLogRequest,
+  DescribeDataTransformInfoRequest,
   DeleteShipperResponse,
   ExportInfo,
   GroupTriggerConditionInfo,
@@ -160,18 +164,23 @@ import {
   DeleteExportRequest,
   PreviewKafkaRechargeRequest,
   SplitPartitionResponse,
+  CreateDataTransformResponse,
   LogContextInfo,
   ModifyShipperRequest,
   CreateKafkaRechargeRequest,
   DeleteKafkaRechargeRequest,
+  RuleInfo,
   CreateConfigExtraRequest,
   CreateConsumerRequest,
+  MultiTopicSearchInformation,
   AlarmNotice,
   ModifyConfigResponse,
   ModifyKafkaRechargeResponse,
   ModifyAlarmNoticeResponse,
+  DataTransformTaskInfo,
   DescribeMachinesResponse,
   ModifyCosRechargeResponse,
+  PreviewLogStatistic,
   CompressInfo,
   ApplyConfigToMachineGroupResponse,
   AlertHistoryNotice,
@@ -200,6 +209,7 @@ import {
   Tag,
   DescribeExportsResponse,
   ApplyConfigToMachineGroupRequest,
+  GetAlarmLogRequest,
   ContainerFileInfo,
   CsvInfo,
   DescribeConfigExtrasRequest,
@@ -209,7 +219,7 @@ import {
   DescribeMachineGroupConfigsRequest,
   ModifyConfigExtraRequest,
   ModifyKafkaRechargeRequest,
-  ModifyLogsetRequest,
+  CreateDataTransformRequest,
   DeleteMachineGroupInfoResponse,
   CheckRechargeKafkaServerResponse,
   ModifyCosRechargeRequest,
@@ -217,7 +227,8 @@ import {
   ParquetInfo,
   DeleteTopicResponse,
   CosRechargeInfo,
-  MultiTopicSearchInformation,
+  ModifyDataTransformResponse,
+  DescribeDataTransformInfoResponse,
   ConsumerContent,
   RetryShipperTaskRequest,
   CreateExportResponse,
@@ -691,6 +702,16 @@ cls.pb.cc cls.pb.h cls.proto
   }
 
   /**
+   * 本接口用于删除数据加工任务
+   */
+  async DeleteDataTransform(
+    req: DeleteDataTransformRequest,
+    cb?: (error: string, rep: DeleteDataTransformResponse) => void
+  ): Promise<DeleteDataTransformResponse> {
+    return this.request("DeleteDataTransform", req, cb)
+  }
+
+  /**
    * 本接口用于删除特殊采集规则配置，特殊采集配置应用于自建K8S环境的采集Agent
    */
   async DeleteConfigExtra(
@@ -711,13 +732,13 @@ cls.pb.cc cls.pb.h cls.proto
   }
 
   /**
-   * 本接口用于获取告警策略列表。
+   * 本接口用于创建数据加工任务。
    */
-  async DescribeAlarms(
-    req: DescribeAlarmsRequest,
-    cb?: (error: string, rep: DescribeAlarmsResponse) => void
-  ): Promise<DescribeAlarmsResponse> {
-    return this.request("DescribeAlarms", req, cb)
+  async CreateDataTransform(
+    req: CreateDataTransformRequest,
+    cb?: (error: string, rep: CreateDataTransformResponse) => void
+  ): Promise<CreateDataTransformResponse> {
+    return this.request("CreateDataTransform", req, cb)
   }
 
   /**
@@ -728,6 +749,16 @@ cls.pb.cc cls.pb.h cls.proto
     cb?: (error: string, rep: AddMachineGroupInfoResponse) => void
   ): Promise<AddMachineGroupInfoResponse> {
     return this.request("AddMachineGroupInfo", req, cb)
+  }
+
+  /**
+   * 本接口用于获取数据加工任务列表基本信息
+   */
+  async DescribeDataTransformInfo(
+    req: DescribeDataTransformInfoRequest,
+    cb?: (error: string, rep: DescribeDataTransformInfoResponse) => void
+  ): Promise<DescribeDataTransformInfoResponse> {
+    return this.request("DescribeDataTransformInfo", req, cb)
   }
 
   /**
@@ -931,6 +962,16 @@ cls.pb.cc cls.pb.h cls.proto
   }
 
   /**
+   * 本接口用于修改数据加工任务
+   */
+  async ModifyDataTransform(
+    req: ModifyDataTransformRequest,
+    cb?: (error: string, rep: ModifyDataTransformResponse) => void
+  ): Promise<ModifyDataTransformResponse> {
+    return this.request("ModifyDataTransform", req, cb)
+  }
+
+  /**
    * 修改现有的投递规则，客户如果使用此接口，需要自行处理CLS对指定bucket的写权限。
    */
   async ModifyShipper(
@@ -1108,5 +1149,15 @@ cls.pb.cc cls.pb.h cls.proto
     cb?: (error: string, rep: CloseKafkaConsumerResponse) => void
   ): Promise<CloseKafkaConsumerResponse> {
     return this.request("CloseKafkaConsumer", req, cb)
+  }
+
+  /**
+   * 本接口用于获取告警策略列表。
+   */
+  async DescribeAlarms(
+    req: DescribeAlarmsRequest,
+    cb?: (error: string, rep: DescribeAlarmsResponse) => void
+  ): Promise<DescribeAlarmsResponse> {
+    return this.request("DescribeAlarms", req, cb)
   }
 }

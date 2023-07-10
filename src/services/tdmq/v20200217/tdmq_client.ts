@@ -305,6 +305,7 @@ import {
   RabbitMQClusterSpecInfo,
   RabbitMQPrivateNode,
   DeleteCmqSubscribeResponse,
+  DeleteRabbitMQVipInstanceRequest,
   DescribePublisherSummaryRequest,
   DeleteSubscriptionsRequest,
   SendCmqMsgRequest,
@@ -319,6 +320,7 @@ import {
   ModifyRocketMQNamespaceRequest,
   DeleteAMQPVHostResponse,
   DeleteAMQPVHostRequest,
+  DeleteRabbitMQVipInstanceResponse,
   DescribeAllTenantsRequest,
   DescribeRabbitMQVirtualHostRequest,
 } from "./tdmq_models"
@@ -1447,6 +1449,16 @@ BatchReceivePolicy 的接口会一次性返回多条消息：
     cb?: (error: string, rep: DescribePulsarProInstancesResponse) => void
   ): Promise<DescribePulsarProInstancesResponse> {
     return this.request("DescribePulsarProInstances", req, cb)
+  }
+
+  /**
+   * 删除RabbitMQ专享版实例
+   */
+  async DeleteRabbitMQVipInstance(
+    req: DeleteRabbitMQVipInstanceRequest,
+    cb?: (error: string, rep: DeleteRabbitMQVipInstanceResponse) => void
+  ): Promise<DeleteRabbitMQVipInstanceResponse> {
+    return this.request("DeleteRabbitMQVipInstance", req, cb)
   }
 
   /**

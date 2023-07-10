@@ -721,6 +721,12 @@ BatchReceivePolicy 的接口会一次性返回多条消息：
         return this.request("DescribePulsarProInstances", req, cb);
     }
     /**
+     * 删除RabbitMQ专享版实例
+     */
+    async DeleteRabbitMQVipInstance(req, cb) {
+        return this.request("DeleteRabbitMQVipInstance", req, cb);
+    }
+    /**
      * 产品下线了，对应的接口也要下线。
 
 获取Amqp队列列表

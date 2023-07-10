@@ -19,6 +19,7 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   SentenceInfo,
+  Tone,
   InitOralProcessRequest,
   Keyword,
   KeywordEvaluateRequest,

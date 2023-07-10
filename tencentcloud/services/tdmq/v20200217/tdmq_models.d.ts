@@ -6914,6 +6914,15 @@ export interface DeleteCmqSubscribeResponse {
     RequestId?: string;
 }
 /**
+ * DeleteRabbitMQVipInstance请求参数结构体
+ */
+export interface DeleteRabbitMQVipInstanceRequest {
+    /**
+     * 实例Id
+     */
+    InstanceId: string;
+}
+/**
  * DescribePublisherSummary请求参数结构体
  */
 export interface DescribePublisherSummaryRequest {
@@ -7229,6 +7238,25 @@ export interface DeleteAMQPVHostRequest {
      * vhost名称
      */
     VHostId: string;
+}
+/**
+ * DeleteRabbitMQVipInstance返回参数结构体
+ */
+export interface DeleteRabbitMQVipInstanceResponse {
+    /**
+     * 订单号Id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TranId?: string;
+    /**
+     * 实例Id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InstanceId?: string;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * DescribeAllTenants请求参数结构体

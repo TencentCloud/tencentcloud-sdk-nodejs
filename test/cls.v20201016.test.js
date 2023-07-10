@@ -318,6 +318,16 @@ it("cls.v20201016.DeleteConfigFromMachineGroup", async function () {
     }
 })
 
+it("cls.v20201016.DeleteDataTransform", async function () {
+    try {
+       const data = await client.DeleteDataTransform({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cls.v20201016.DeleteConfigExtra", async function () {
     try {
        const data = await client.DeleteConfigExtra({})
@@ -338,9 +348,9 @@ it("cls.v20201016.DescribeKafkaRecharges", async function () {
     }
 })
 
-it("cls.v20201016.DescribeAlarms", async function () {
+it("cls.v20201016.CreateDataTransform", async function () {
     try {
-       const data = await client.DescribeAlarms({})
+       const data = await client.CreateDataTransform({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -351,6 +361,16 @@ it("cls.v20201016.DescribeAlarms", async function () {
 it("cls.v20201016.AddMachineGroupInfo", async function () {
     try {
        const data = await client.AddMachineGroupInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cls.v20201016.DescribeDataTransformInfo", async function () {
+    try {
+       const data = await client.DescribeDataTransformInfo({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -558,6 +578,16 @@ it("cls.v20201016.DeleteIndex", async function () {
     }
 })
 
+it("cls.v20201016.ModifyDataTransform", async function () {
+    try {
+       const data = await client.ModifyDataTransform({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cls.v20201016.ModifyShipper", async function () {
     try {
        const data = await client.ModifyShipper({})
@@ -731,6 +761,16 @@ it("cls.v20201016.CreateExport", async function () {
 it("cls.v20201016.CloseKafkaConsumer", async function () {
     try {
        const data = await client.CloseKafkaConsumer({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cls.v20201016.DescribeAlarms", async function () {
+    try {
+       const data = await client.DescribeAlarms({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

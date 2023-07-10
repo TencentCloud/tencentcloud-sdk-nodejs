@@ -723,6 +723,11 @@ export interface DomainInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     IsSubDomain?: boolean;
+    /**
+     * 域名关联的标签列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TagList?: Array<TagItem>;
 }
 /**
  * CreateDomainBatch请求参数结构体
@@ -855,6 +860,11 @@ export interface DomainListItem {
      * 域名所属账号
      */
     Owner: string;
+    /**
+     * 域名关联的标签列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TagList?: Array<TagItem>;
 }
 /**
  * DeleteDomainBatch请求参数结构体
@@ -864,6 +874,19 @@ export interface DeleteDomainBatchRequest {
      * 域名数组
      */
     DomainList: Array<string>;
+}
+/**
+ * 标签过滤条件
+ */
+export interface TagItemFilter {
+    /**
+     * 标签键
+     */
+    TagKey: string;
+    /**
+     * 标签键
+     */
+    TagValue?: Array<string>;
 }
 /**
  * DescribeRecordType返回参数结构体
@@ -2691,6 +2714,14 @@ export interface CreateDomainRequest {
      * 是否星标域名，”yes”、”no” 分别代表是和否。
      */
     IsMark?: string;
+    /**
+     * 添加子域名时，是否迁移相关父域名的解析记录。不传默认为 true
+     */
+    TransferSubDomain?: boolean;
+    /**
+     * 域名绑定的标签
+     */
+    Tags?: Array<TagItem>;
 }
 /**
  * ModifyPackageAutoRenew返回参数结构体
@@ -3319,6 +3350,10 @@ export interface DescribeDomainFilterListRequest {
      * 项目ID
      */
     ProjectId?: number;
+    /**
+     * 标签过滤
+     */
+    Tags?: Array<TagItemFilter>;
 }
 /**
  * 域名权限项
@@ -3430,6 +3465,10 @@ export interface DescribeDomainListRequest {
      * 根据关键字搜索域名
      */
     Keyword?: string;
+    /**
+     * 标签过滤
+     */
+    Tags?: Array<TagItemFilter>;
 }
 /**
  * 域名信息（创建域名时返回）
@@ -3768,6 +3807,20 @@ export interface PreviewDetail {
      * 增值服务数量
      */
     VASCount: number;
+}
+/**
+ * 标签项
+ */
+export interface TagItem {
+    /**
+     * 标签键
+     */
+    TagKey: string;
+    /**
+     * 标签值
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TagValue?: string;
 }
 /**
  * DescribeDomainWhois返回参数结构体

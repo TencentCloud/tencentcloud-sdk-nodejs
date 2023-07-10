@@ -1848,7 +1848,7 @@ export interface DescribeRawScanLogsRequest {
    */
   CorpId?: number
   /**
-   * 分页数量，默认为 100，最大为 1000
+   * 分页数量，默认为 20，最大为 1000
    */
   PageSize?: number
   /**
@@ -1860,6 +1860,14 @@ export interface DescribeRawScanLogsRequest {
 即: LogId > $AfterLogId
    */
   AfterLogId?: number
+  /**
+   * 开始时间 >= StartTime
+   */
+  StartTime?: string
+  /**
+   * 结束时间 < EndTime
+   */
+  EndTime?: string
 }
 
 /**
