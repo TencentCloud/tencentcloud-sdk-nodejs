@@ -145,6 +145,12 @@ callbackinfo包含： 回调地址和签名key
         return this.request("CreateFlowApprovers", req, cb);
     }
     /**
+     * 通过此接口，更新企业的部门信息，支持更新部门名、客户系统部门ID、部门序列号。
+     */
+    async ModifyIntegrationDepartment(req, cb) {
+        return this.request("ModifyIntegrationDepartment", req, cb);
+    }
+    /**
      * 企业方可以通过此接口关闭个人的自动签功能（处方单场景专用，使用此接口请与客户经理确认）
      */
     async DisableUserAutoSign(req, cb) {
@@ -222,6 +228,13 @@ callbackinfo包含： 回调地址和签名key
      */
     async DescribeUserAutoSignStatus(req, cb) {
         return this.request("DescribeUserAutoSignStatus", req, cb);
+    }
+    /**
+     * 此接口（CreateFlowGroupByTemplates）通过多模板创建合同组签署流程。<br/>
+此接口合同组中的子合同必须都是模板发起的合同。 <br/>目前最大仅支持50个子合同
+     */
+    async CreateFlowGroupByTemplates(req, cb) {
+        return this.request("CreateFlowGroupByTemplates", req, cb);
     }
     /**
      * 查询企业扩展服务授权信息，目前支持查询：企业静默签，企业与港澳台居民签署合同，使用手机号验证签署方身份，骑缝章，批量签署能力是否已经开通
@@ -399,10 +412,12 @@ httpProfile.setEndpoint("file.test.ess.tencent.cn");<br/>
         return this.request("DescribeIntegrationDepartments", req, cb);
     }
     /**
-     * 通过此接口，更新企业的部门信息，支持更新部门名、客户系统部门ID、部门序列号。
+     * 此接口（CreateFlowGroupByFiles）通过多文件创建合同组签署流程。<br/>
+PDF资源Id 通过上传文件接口获取
+此接口合同组中的子合同必须都是文件发起的合同
      */
-    async ModifyIntegrationDepartment(req, cb) {
-        return this.request("ModifyIntegrationDepartment", req, cb);
+    async CreateFlowGroupByFiles(req, cb) {
+        return this.request("CreateFlowGroupByFiles", req, cb);
     }
     /**
      * 创建员工,此接口会发送提醒员工实名的短信

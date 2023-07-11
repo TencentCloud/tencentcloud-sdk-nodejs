@@ -388,6 +388,16 @@ it("essbasic.v20210526.SyncProxyOrganization", async function () {
     }
 })
 
+it("essbasic.v20210526.ChannelCreateFlowGroupByTemplates", async function () {
+    try {
+       const data = await client.ChannelCreateFlowGroupByTemplates({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("essbasic.v20210526.SyncProxyOrganizationOperators", async function () {
     try {
        const data = await client.SyncProxyOrganizationOperators({})

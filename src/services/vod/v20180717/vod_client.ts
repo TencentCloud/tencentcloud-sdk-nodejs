@@ -1393,7 +1393,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除音画质重生模板。
+   * 删除视频重生模板。
    */
   async DeleteRebuildMediaTemplate(
     req: DeleteRebuildMediaTemplateRequest,
@@ -1646,7 +1646,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建音画质重生模板。
+   * 创建视频重生模板。
    */
   async CreateRebuildMediaTemplate(
     req: CreateRebuildMediaTemplateRequest,

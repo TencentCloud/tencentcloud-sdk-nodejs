@@ -596,7 +596,7 @@ export interface ProxyConnectionPoolInfo {
    */
   OpenConnectionPool?: string
   /**
-   * 连接池类型：SessionConnectionPool（会话级别连接池
+   * 连接池类型：SessionConnectionPool（会话级别连接池）
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ConnectionPoolType?: string
@@ -921,47 +921,47 @@ export interface SlowQueriesItem {
   /**
    * 执行时间戳
    */
-  Timestamp: number
+  Timestamp?: number
   /**
    * 执行时长，单位秒
    */
-  QueryTime: number
+  QueryTime?: number
   /**
    * sql语句
    */
-  SqlText: string
+  SqlText?: string
   /**
    * 客户端host
    */
-  UserHost: string
+  UserHost?: string
   /**
    * 用户名
    */
-  UserName: string
+  UserName?: string
   /**
    * 数据库名
    */
-  Database: string
+  Database?: string
   /**
    * 锁时长，单位秒
    */
-  LockTime: number
+  LockTime?: number
   /**
    * 扫描行数
    */
-  RowsExamined: number
+  RowsExamined?: number
   /**
    * 返回行数
    */
-  RowsSent: number
+  RowsSent?: number
   /**
-   * sql模版
+   * sql模板
    */
-  SqlTemplate: string
+  SqlTemplate?: string
   /**
    * sql语句md5
    */
-  SqlMd5: string
+  SqlMd5?: string
 }
 
 /**
@@ -1093,11 +1093,11 @@ export interface DescribeParamTemplatesRequest {
    */
   EngineVersions?: Array<string>
   /**
-   * 模版名称
+   * 模板名称
    */
   TemplateNames?: Array<string>
   /**
-   * 模版ID
+   * 模板ID
    */
   TemplateIds?: Array<number>
   /**
@@ -1117,7 +1117,7 @@ export interface DescribeParamTemplatesRequest {
    */
   Products?: Array<string>
   /**
-   * 模版类型
+   * 模板类型
    */
   TemplateTypes?: Array<string>
   /**
@@ -1280,7 +1280,7 @@ export interface ModifyResourcePackageClustersRequest {
  */
 export interface DeleteParamTemplateRequest {
   /**
-   * 参数模版ID
+   * 参数模板ID
    */
   TemplateId: number
 }
@@ -1691,7 +1691,7 @@ export interface CynosdbInstanceGrp {
  */
 export interface CreateParamTemplateResponse {
   /**
-   * 模版ID
+   * 模板ID
    */
   TemplateId?: number
   /**
@@ -4011,11 +4011,11 @@ export interface DescribeParamTemplatesResponse {
   /**
    * 参数模板数量
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 参数模板信息
    */
-  Items: Array<ParamTemplateListInfo>
+  Items?: Array<ParamTemplateListInfo>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4482,7 +4482,7 @@ export interface CreateProxyRequest {
    */
   OpenConnectionPool?: string
   /**
-   * 连接池阀值：单位（秒）
+   * 连接池阈值：单位（秒）
    */
   ConnectionPoolTimeOut?: number
   /**
@@ -4589,35 +4589,35 @@ export interface PolicyRule {
   /**
    * 策略，ACCEPT或者DROP
    */
-  Action: string
+  Action?: string
   /**
-   * 来源Ip或Ip段，例如192.168.0.0/16
+   * 来源IP或IP段，例如192.168.0.0/16
    */
-  CidrIp: string
+  CidrIp?: string
   /**
    * 端口
    */
-  PortRange: string
+  PortRange?: string
   /**
    * 网络协议，支持udp、tcp等
    */
-  IpProtocol: string
+  IpProtocol?: string
   /**
    * 协议端口ID或者协议端口组ID。
    */
-  ServiceModule: string
+  ServiceModule?: string
   /**
    * IP地址ID或者ID地址组ID。
    */
-  AddressModule: string
+  AddressModule?: string
   /**
    * id
    */
-  Id: string
+  Id?: string
   /**
    * 描述
    */
-  Desc: string
+  Desc?: string
 }
 
 /**
@@ -4910,7 +4910,7 @@ export interface CreateProxyEndPointRequest {
    */
   OpenConnectionPool?: string
   /**
-   * 连接池阀值：单位（秒）
+   * 连接池阈值：单位（秒）
    */
   ConnectionPoolTimeOut?: number
   /**
@@ -5881,15 +5881,15 @@ export interface SaleZone {
  */
 export interface ModifyParamTemplateRequest {
   /**
-   * 模版ID
+   * 模板ID
    */
   TemplateId: number
   /**
-   * 模版名
+   * 模板名
    */
   TemplateName?: string
   /**
-   * 模版描述
+   * 模板描述
    */
   TemplateDescription?: string
   /**
@@ -6046,7 +6046,7 @@ export interface ModifyAccountHostRequest {
  */
 export interface CreateParamTemplateRequest {
   /**
-   * 模版名称
+   * 模板名称
    */
   TemplateName: string
   /**
@@ -6054,11 +6054,11 @@ export interface CreateParamTemplateRequest {
    */
   EngineVersion: string
   /**
-   * 模版描述
+   * 模板描述
    */
   TemplateDescription?: string
   /**
-   * 可选参数，需要复制的模版ID
+   * 可选参数，需要复制的模板ID
    */
   TemplateId?: number
   /**
@@ -6714,7 +6714,7 @@ export interface AddInstancesRequest {
    */
   DealMode?: number
   /**
-   * 参数模版ID
+   * 参数模板ID
    */
   ParamTemplateId?: number
   /**

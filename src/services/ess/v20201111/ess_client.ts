@@ -47,15 +47,16 @@ import {
   FlowApproverUrlInfo,
   AuthorizedUser,
   CreateConvertTaskApiRequest,
+  DeleteIntegrationEmployeesResponse,
   CreateFlowRemindsResponse,
   DescribeOrganizationGroupOrganizationsRequest,
   Agent,
   FlowApproverDetail,
-  DescribeFlowTemplatesRequest,
+  CreateFlowGroupByFilesRequest,
   DescribeFlowComponentsResponse,
   DescribeFlowEvidenceReportResponse,
   CallbackInfo,
-  RecipientComponentInfo,
+  CreateFlowGroupByTemplatesResponse,
   TemplateInfo,
   CreateDocumentResponse,
   DescribeIntegrationEmployeesRequest,
@@ -70,6 +71,7 @@ import {
   BindEmployeeUserIdWithClientOpenIdRequest,
   DescribeIntegrationDepartmentsRequest,
   CreateIntegrationDepartmentResponse,
+  DescribeFlowTemplatesRequest,
   DeleteSealPoliciesResponse,
   OrganizationInfo,
   DescribeUserAutoSignStatusResponse,
@@ -89,6 +91,7 @@ import {
   UnbindEmployeeUserIdWithClientOpenIdRequest,
   CreateSchemeUrlResponse,
   CreateUserAutoSignEnableUrlResponse,
+  FlowGroupInfo,
   CreateFlowSignUrlResponse,
   DescribeFileUrlsRequest,
   FormField,
@@ -96,6 +99,7 @@ import {
   UserInfo,
   CreateFlowApproversRequest,
   Staff,
+  RecipientComponentInfo,
   CreateFlowEvidenceReportResponse,
   DescribeFileUrlsResponse,
   DescribeFlowComponentsRequest,
@@ -109,7 +113,9 @@ import {
   DeleteIntegrationEmployeesRequest,
   FailedUpdateStaffData,
   GetTaskResultApiRequest,
+  FlowGroupOptions,
   RegisterInfo,
+  CreateFlowGroupByFilesResponse,
   CreateIntegrationEmployeesResponse,
   DeleteIntegrationRoleUsersRequest,
   CreateFlowSignUrlRequest,
@@ -159,7 +165,7 @@ import {
   CreateFlowRemindsRequest,
   UpdateIntegrationEmployeesRequest,
   DescribeFlowBriefsRequest,
-  DeleteIntegrationEmployeesResponse,
+  CreateFlowGroupByTemplatesRequest,
   SignUrl,
   VerifyPdfResponse,
   DeleteStaffsResult,
@@ -379,6 +385,16 @@ callbackinfo包含： 回调地址和签名key
   }
 
   /**
+   * 通过此接口，更新企业的部门信息，支持更新部门名、客户系统部门ID、部门序列号。
+   */
+  async ModifyIntegrationDepartment(
+    req: ModifyIntegrationDepartmentRequest,
+    cb?: (error: string, rep: ModifyIntegrationDepartmentResponse) => void
+  ): Promise<ModifyIntegrationDepartmentResponse> {
+    return this.request("ModifyIntegrationDepartment", req, cb)
+  }
+
+  /**
    * 企业方可以通过此接口关闭个人的自动签功能（处方单场景专用，使用此接口请与客户经理确认）
    */
   async DisableUserAutoSign(
@@ -495,6 +511,17 @@ callbackinfo包含： 回调地址和签名key
     cb?: (error: string, rep: DescribeUserAutoSignStatusResponse) => void
   ): Promise<DescribeUserAutoSignStatusResponse> {
     return this.request("DescribeUserAutoSignStatus", req, cb)
+  }
+
+  /**
+     * 此接口（CreateFlowGroupByTemplates）通过多模板创建合同组签署流程。<br/>
+此接口合同组中的子合同必须都是模板发起的合同。 <br/>目前最大仅支持50个子合同
+     */
+  async CreateFlowGroupByTemplates(
+    req: CreateFlowGroupByTemplatesRequest,
+    cb?: (error: string, rep: CreateFlowGroupByTemplatesResponse) => void
+  ): Promise<CreateFlowGroupByTemplatesResponse> {
+    return this.request("CreateFlowGroupByTemplates", req, cb)
   }
 
   /**
@@ -769,13 +796,15 @@ httpProfile.setEndpoint("file.test.ess.tencent.cn");<br/>
   }
 
   /**
-   * 通过此接口，更新企业的部门信息，支持更新部门名、客户系统部门ID、部门序列号。
-   */
-  async ModifyIntegrationDepartment(
-    req: ModifyIntegrationDepartmentRequest,
-    cb?: (error: string, rep: ModifyIntegrationDepartmentResponse) => void
-  ): Promise<ModifyIntegrationDepartmentResponse> {
-    return this.request("ModifyIntegrationDepartment", req, cb)
+     * 此接口（CreateFlowGroupByFiles）通过多文件创建合同组签署流程。<br/>
+PDF资源Id 通过上传文件接口获取
+此接口合同组中的子合同必须都是文件发起的合同
+     */
+  async CreateFlowGroupByFiles(
+    req: CreateFlowGroupByFilesRequest,
+    cb?: (error: string, rep: CreateFlowGroupByFilesResponse) => void
+  ): Promise<CreateFlowGroupByFilesResponse> {
+    return this.request("CreateFlowGroupByFiles", req, cb)
   }
 
   /**

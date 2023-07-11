@@ -689,6 +689,20 @@ export interface CreateConvertTaskApiRequest {
 }
 
 /**
+ * DeleteIntegrationEmployees返回参数结构体
+ */
+export interface DeleteIntegrationEmployeesResponse {
+  /**
+   * 员工删除数据
+   */
+  DeleteEmployeeResult?: DeleteStaffsResult
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateFlowReminds返回参数结构体
  */
 export interface CreateFlowRemindsResponse {
@@ -773,7 +787,7 @@ export interface FlowApproverDetail {
   /**
    * 签署方姓名
    */
-  ApproveName: string
+  ApproveName?: string
   /**
    * 签署方的签署状态
 0：还没有发起
@@ -790,104 +804,79 @@ export interface FlowApproverDetail {
 15：已解除
 19：转他人处理
    */
-  ApproveStatus: number
+  ApproveStatus?: number
   /**
    * 模板配置中的参与方ID,与控件绑定
    */
-  ReceiptId: string
+  ReceiptId?: string
   /**
    * 客户自定义的用户ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CustomUserId: string
+  CustomUserId?: string
   /**
    * 签署人手机号
    */
-  Mobile: string
+  Mobile?: string
   /**
    * 签署顺序，如果是有序签署，签署顺序从小到大
    */
-  SignOrder: number
+  SignOrder?: number
   /**
    * 签署人签署时间，时间戳，单位秒
    */
-  ApproveTime: number
+  ApproveTime?: number
   /**
    * 签署方类型，ORGANIZATION-企业员工，PERSON-个人，ENTERPRISESERVER-企业静默签
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ApproveType: string
+  ApproveType?: string
   /**
    * 签署方侧用户来源，如WEWORKAPP-企业微信等
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ApproverSource: string
+  ApproverSource?: string
   /**
    * 客户自定义签署方标识
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CustomApproverTag: string
+  CustomApproverTag?: string
   /**
    * 签署方企业Id
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  OrganizationId: string
+  OrganizationId?: string
   /**
    * 签署方企业名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  OrganizationName: string
+  OrganizationName?: string
 }
 
 /**
- * DescribeFlowTemplates请求参数结构体
+ * CreateFlowGroupByFiles请求参数结构体
  */
-export interface DescribeFlowTemplatesRequest {
+export interface CreateFlowGroupByFilesRequest {
   /**
-   * 调用方用户信息，userId 必填
+   * 调用方用户信息，userId 必填。支持填入集团子公司经办人 userId 代发合同
    */
   Operator: UserInfo
+  /**
+   * 合同（流程）组名称,最大长度200个字符
+   */
+  FlowGroupName: string
+  /**
+   * 合同（流程）组的子合同信息，支持2-50个子合同
+   */
+  FlowGroupInfos: Array<FlowGroupInfo>
   /**
    * 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填
    */
   Agent?: Agent
   /**
-   * 查询内容：0-模板列表及详情（默认），1-仅模板列表
+   * 合同（流程）组的配置项信息。包括是否通知本企业签署方，是否通知其他签署方
    */
-  ContentType?: number
-  /**
-   * 搜索条件，具体参考Filter结构体。本接口取值：template-id：按照【 **模板唯一标识** 】进行过滤
-   */
-  Filters?: Array<Filter>
-  /**
-   * 查询偏移位置，默认0
-   */
-  Offset?: number
-  /**
-   * 查询个数，默认20，最大200
-   */
-  Limit?: number
-  /**
-   * ApplicationId不为空，查询指定应用下的模板列表
-ApplicationId为空，查询所有应用下的模板列表
-   */
-  ApplicationId?: string
-  /**
-   * 默认为false，查询SaaS模板库列表；
-为true，查询第三方应用集成平台企业模板库管理列表
-   * @deprecated
-   */
-  IsChannel?: boolean
-  /**
-   * 暂未开放
-   * @deprecated
-   */
-  Organization?: OrganizationInfo
-  /**
-   * 暂未开放
-   * @deprecated
-   */
-  GenerateSource?: number
+  FlowGroupOptions?: FlowGroupOptions
 }
 
 /**
@@ -950,29 +939,23 @@ export interface CallbackInfo {
 }
 
 /**
- * 参与方填写控件信息
+ * CreateFlowGroupByTemplates返回参数结构体
  */
-export interface RecipientComponentInfo {
+export interface CreateFlowGroupByTemplatesResponse {
   /**
-   * 参与方Id
+   * 合同(流程)组的合同组Id
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RecipientId?: string
+  FlowGroupId?: string
   /**
-   * 参与方填写状态
+   * 合同(流程)组中子合同列表.
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RecipientFillStatus?: string
+  FlowIds?: Array<string>
   /**
-   * 是否发起方
-注意：此字段可能返回 null，表示取不到有效值。
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  IsPromoter?: boolean
-  /**
-   * 填写控件内容
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Components?: Array<FilledComponent>
+  RequestId?: string
 }
 
 /**
@@ -1254,6 +1237,10 @@ APP：第三方APP或小程序跳转电子签小程序的path。
    */
   FlowId?: string
   /**
+   * 合同组ID
+   */
+  FlowGroupId?: string
+  /**
    * 跳转页面 1: 小程序合同详情 2: 小程序合同列表页 0: 不传, 默认主页
    */
   PathType?: number
@@ -1398,6 +1385,57 @@ export interface CreateIntegrationDepartmentResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeFlowTemplates请求参数结构体
+ */
+export interface DescribeFlowTemplatesRequest {
+  /**
+   * 调用方用户信息，userId 必填
+   */
+  Operator: UserInfo
+  /**
+   * 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填
+   */
+  Agent?: Agent
+  /**
+   * 查询内容：0-模板列表及详情（默认），1-仅模板列表
+   */
+  ContentType?: number
+  /**
+   * 搜索条件，具体参考Filter结构体。本接口取值：template-id：按照【 **模板唯一标识** 】进行过滤
+   */
+  Filters?: Array<Filter>
+  /**
+   * 查询偏移位置，默认0
+   */
+  Offset?: number
+  /**
+   * 查询个数，默认20，最大200
+   */
+  Limit?: number
+  /**
+   * ApplicationId不为空，查询指定应用下的模板列表
+ApplicationId为空，查询所有应用下的模板列表
+   */
+  ApplicationId?: string
+  /**
+   * 默认为false，查询SaaS模板库列表；
+为true，查询第三方应用集成平台企业模板库管理列表
+   * @deprecated
+   */
+  IsChannel?: boolean
+  /**
+   * 暂未开放
+   * @deprecated
+   */
+  Organization?: OrganizationInfo
+  /**
+   * 暂未开放
+   * @deprecated
+   */
+  GenerateSource?: number
 }
 
 /**
@@ -1875,6 +1913,64 @@ export interface CreateUserAutoSignEnableUrlResponse {
 }
 
 /**
+ * 此结构体(FlowGroupInfo)描述的是合同组(流程组)的单个合同(流程)信息
+ */
+export interface FlowGroupInfo {
+  /**
+   * 合同（流程）的名称
+   */
+  FlowName: string
+  /**
+   * 合同（流程）的签署方信息
+   */
+  Approvers: Array<ApproverInfo>
+  /**
+   * 发起合同（流程）的资源Id,此资源必须是PDF文件,来自UploadFiles,使用文件发起合同(流程)组时必传
+   */
+  FileIds?: Array<string>
+  /**
+   * 发起合同（流程）的模板Id,用模板发起合同（流程）组时必填
+   */
+  TemplateId?: string
+  /**
+   * 合同（流程）的类型
+   */
+  FlowType?: string
+  /**
+   * 合同（流程）的描述
+   */
+  FlowDescription?: string
+  /**
+   * 合同（流程）的截止时间戳，单位秒。默认是一年
+   */
+  Deadline?: number
+  /**
+   * 合同（流程）的回调地址
+   */
+  CallbackUrl?: string
+  /**
+   * 第三方平台传递过来的信息, 限制1024字符 格式必须是base64的
+   */
+  UserData?: string
+  /**
+   * 合同（流程）的签署是否是无序签, true - 无序。 false - 有序, 默认
+   */
+  Unordered?: boolean
+  /**
+   * 合同（流程）发起方的填写控件，用户
+   */
+  Components?: Array<Component>
+  /**
+   * 本企业（发起方）是否需要签署审批，若需要审批则只允许查看不允许签署，需要您调用接口CreateFlowSignReview提交审批结果。
+   */
+  NeedSignReview?: boolean
+  /**
+   * 本企业（发起方）自动签署，需要您在发起合同时给印章控件指定自动签的印章。
+   */
+  AutoSignScene?: string
+}
+
+/**
  * CreateFlowSignUrl返回参数结构体
  */
 export interface CreateFlowSignUrlResponse {
@@ -2225,6 +2321,32 @@ export interface Staff {
 }
 
 /**
+ * 参与方填写控件信息
+ */
+export interface RecipientComponentInfo {
+  /**
+   * 参与方Id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RecipientId?: string
+  /**
+   * 参与方填写状态
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RecipientFillStatus?: string
+  /**
+   * 是否发起方
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsPromoter?: boolean
+  /**
+   * 填写控件内容
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Components?: Array<FilledComponent>
+}
+
+/**
  * CreateFlowEvidenceReport返回参数结构体
  */
 export interface CreateFlowEvidenceReportResponse {
@@ -2447,16 +2569,16 @@ export interface FlowDetailInfo {
   /**
    * 合同(流程)的ID
    */
-  FlowId: string
+  FlowId?: string
   /**
    * 合同(流程)的名字
    */
-  FlowName: string
+  FlowName?: string
   /**
    * 合同(流程)的类型
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  FlowType: string
+  FlowType?: string
   /**
    * 流程状态
 - 0 还没有发起
@@ -2472,25 +2594,25 @@ export interface FlowDetailInfo {
 - 10 拒填
 - 21 已解除
    */
-  FlowStatus: number
+  FlowStatus?: number
   /**
    * 合同(流程)的信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  FlowMessage: string
+  FlowMessage?: string
   /**
    * 流程的描述
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  FlowDescription: string
+  FlowDescription?: string
   /**
    * 合同(流程)的创建时间戳，单位秒
    */
-  CreatedOn: number
+  CreatedOn?: number
   /**
    * 合同(流程)的签署方数组
    */
-  FlowApproverInfos: Array<FlowApproverDetail>
+  FlowApproverInfos?: Array<FlowApproverDetail>
   /**
    * 合同(流程)的关注方信息列表
    */
@@ -2603,6 +2725,29 @@ export interface GetTaskResultApiRequest {
 }
 
 /**
+ * 此结构体(FlowGroupOptions)描述的是合同组的个性化配置，支持控制是否发送短信、未实名个人签署方查看合同组时是否需要实名认证（仅在合同组文件发起配置时生效）
+ */
+export interface FlowGroupOptions {
+  /**
+   * 发起合同（流程）组的合同（流程）签署人校验方式
+VerifyCheck: 人脸识别（默认）
+MobileCheck：手机号验证
+参数说明：此参数仅在合同组文件发起有效，可选人脸识别或手机号验证两种方式，若选择后者，未实名个人签署方在签署合同时，无需经过实名认证和意愿确认两次人脸识别，该能力仅适用于个人签署方。
+   */
+  ApproverVerifyType?: string
+  /**
+   * 发起合同（流程）组本方企业经办人通知方式
+签署通知类型：sms--短信，none--不通知
+   */
+  SelfOrganizationApproverNotifyType?: string
+  /**
+   * 发起合同（流程）组他方经办人通知方式
+签署通知类型：sms--短信，none--不通知
+   */
+  OtherApproverNotifyType?: string
+}
+
+/**
  * 发起流程快速注册相关信息
  */
 export interface RegisterInfo {
@@ -2614,6 +2759,26 @@ export interface RegisterInfo {
    * 社会统一信用代码
    */
   Uscc: string
+}
+
+/**
+ * CreateFlowGroupByFiles返回参数结构体
+ */
+export interface CreateFlowGroupByFilesResponse {
+  /**
+   * 合同(流程)组的合同组Id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FlowGroupId?: string
+  /**
+   * 合同(流程)组中子合同列表.
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FlowIds?: Array<string>
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2942,13 +3107,13 @@ export interface ApproverInfo {
    */
   ApproverMobile: string
   /**
-   * 签署人的签署控件列表
-   */
-  SignComponents: Array<Component>
-  /**
    * 如果签署方是企业签署方，则为企业名
    */
   OrganizationName?: string
+  /**
+   * 签署人的签署控件列表
+   */
+  SignComponents?: Array<Component>
   /**
    * 签署人的身份证号
    */
@@ -4085,17 +4250,29 @@ export interface DescribeFlowBriefsRequest {
 }
 
 /**
- * DeleteIntegrationEmployees返回参数结构体
+ * CreateFlowGroupByTemplates请求参数结构体
  */
-export interface DeleteIntegrationEmployeesResponse {
+export interface CreateFlowGroupByTemplatesRequest {
   /**
-   * 员工删除数据
+   * 调用方用户信息，userId 必填。支持填入集团子公司经办人 userId 代发合同
    */
-  DeleteEmployeeResult?: DeleteStaffsResult
+  Operator: UserInfo
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 合同组名称,最大长度200个字符
    */
-  RequestId?: string
+  FlowGroupName: string
+  /**
+   * 合同组的子合同信息，支持2-50个子合同
+   */
+  FlowGroupInfos: Array<FlowGroupInfo>
+  /**
+   * 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填
+   */
+  Agent?: Agent
+  /**
+   * 合同组的配置信息。包括是否通知本企业签署方，是否通知其他签署方
+   */
+  FlowGroupOptions?: FlowGroupOptions
 }
 
 /**
@@ -4416,17 +4593,21 @@ export interface CreateMultiFlowSignQRCodeRequest {
  */
 export interface DescribeFlowInfoRequest {
   /**
-   * 需要查询的流程ID列表，限制最大100个
-   */
-  FlowIds: Array<string>
-  /**
    * 调用方用户信息，userId 必填
    */
   Operator?: UserInfo
   /**
+   * 需要查询的流程ID列表，限制最大100个
+   */
+  FlowIds?: Array<string>
+  /**
    * 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填
    */
   Agent?: Agent
+  /**
+   * 合同组ID
+   */
+  FlowGroupId?: string
 }
 
 /**
@@ -4437,6 +4618,14 @@ export interface DescribeFlowInfoResponse {
    * 签署流程信息
    */
   FlowDetailInfos?: Array<FlowDetailInfo>
+  /**
+   * 合同组ID
+   */
+  FlowGroupId?: string
+  /**
+   * 合同组名称
+   */
+  FlowGroupName?: string
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

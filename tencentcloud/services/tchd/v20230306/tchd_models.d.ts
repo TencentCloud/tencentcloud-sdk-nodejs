@@ -1,0 +1,76 @@
+/**
+ * 事件详情信息，包含：产品名称、地域名称、事件开始时间、事件结束时间、事件当前状态；
+ */
+export interface EventDetail {
+    /**
+     * 产品ID
+     */
+    ProductId?: string;
+    /**
+     * 产品名称
+     */
+    ProductName?: string;
+    /**
+     * 地域ID，非区域性地域返回non-regional
+     */
+    RegionId?: string;
+    /**
+     * 地域名称
+     */
+    RegionName?: string;
+    /**
+     * 事件开始时间
+     */
+    StartTime?: string;
+    /**
+     * 事件结束时间，当事件正在发生还未结束时，结束时间返回空
+     */
+    EndTime?: string;
+    /**
+     * 事件当前状态：提示、异常、正常
+     */
+    CurrentStatus?: string;
+}
+/**
+ * DescribeEvents返回参数结构体
+ */
+export interface DescribeEventsResponse {
+    /**
+     * 事件详情列表
+     */
+    Data?: ProductEventList;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * DescribeEvents请求参数结构体
+ */
+export interface DescribeEventsRequest {
+    /**
+     * 事件的发生日期
+     */
+    EventDate: string;
+    /**
+     * 1. 不指定产品列表时将查询所有产品。
+  2. 产品ID示例：cvm、lb、cdb、cdn、crs
+     */
+    ProductIds?: Array<string>;
+    /**
+     * 1. 不指定地域列表时将查询所有地域。
+  2. 查询非区域性产品事件时，地域ID指定为：non-regional
+  3. 其他地域ID取值请参考：https://cloud.tencent.com/document/api/213/15692
+     */
+    RegionIds?: Array<string>;
+}
+/**
+ * 产品可用性事件详情列表
+ */
+export interface ProductEventList {
+    /**
+     * 事件详情列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    EventList?: Array<EventDetail>;
+}

@@ -2482,12 +2482,12 @@ export interface ClusterAsGroupOption {
      */
     ScaleDownUtilizationThreshold?: number;
     /**
-     * 含有本地存储Pod的节点是否不缩容(默认： FALSE)
+     * 含有本地存储Pod的节点是否不缩容(默认： true)
   注意：此字段可能返回 null，表示取不到有效值。
      */
     SkipNodesWithLocalStorage?: boolean;
     /**
-     * 含有kube-system namespace下非DaemonSet管理的Pod的节点是否不缩容 (默认： FALSE)
+     * 含有kube-system namespace下非DaemonSet管理的Pod的节点是否不缩容 (默认： true)
   注意：此字段可能返回 null，表示取不到有效值。
      */
     SkipNodesWithSystemPods?: boolean;
@@ -2500,22 +2500,22 @@ export interface ClusterAsGroupOption {
      * CA做健康性判断的个数，默认3，即超过OkTotalUnreadyCount个数后，CA会进行健康性判断。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    OkTotalUnreadyCount: number;
+    OkTotalUnreadyCount?: number;
     /**
      * 未就绪节点的最大百分比，此后CA会停止操作
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    MaxTotalUnreadyPercentage: number;
+    MaxTotalUnreadyPercentage?: number;
     /**
      * 表示未准备就绪的节点在有资格进行缩减之前应该停留多长时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ScaleDownUnreadyTime: number;
+    ScaleDownUnreadyTime?: number;
     /**
      * CA删除未在Kubernetes中注册的节点之前等待的时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    UnregisteredNodeRemovalTime: number;
+    UnregisteredNodeRemovalTime?: number;
 }
 /**
  * DeletePrometheusTemp返回参数结构体

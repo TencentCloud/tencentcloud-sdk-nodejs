@@ -107,6 +107,24 @@ export interface TerminateInstancesResponse {
 }
 
 /**
+ * AssignIpv6CidrBlocks请求参数结构体
+ */
+export interface AssignIpv6CidrBlocksRequest {
+  /**
+   * `VPC`实例`ID`，形如：`vpc-f49l6u0z`。
+   */
+  VpcId: string
+  /**
+   * 网络运营商类型 取值范围:'CMCC'-中国移动, 'CTCC'-中国电信, 'CUCC'-中国联调
+   */
+  ISPTypes: Array<ISPTypeItem>
+  /**
+   * ECM地域。
+   */
+  EcmRegion?: string
+}
+
+/**
  * DescribeMonthPeakNetwork返回参数结构体
  */
 export interface DescribeMonthPeakNetworkResponse {
@@ -274,6 +292,16 @@ timestamp 按实例创建时间排序。
    * 指定排序是降序还是升序。0表示降序； 1表示升序。如果不传默认为降序
    */
   OrderDirection?: number
+}
+
+/**
+ * DeleteSecurityGroup返回参数结构体
+ */
+export interface DeleteSecurityGroupResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -512,21 +540,21 @@ export interface DescribeListenersResponse {
 }
 
 /**
- * 目标和权重的描述信息
+ * AssignIpv6SubnetCidrBlock请求参数结构体
  */
-export interface TargetsWeightRule {
+export interface AssignIpv6SubnetCidrBlockRequest {
   /**
-   * 负载均衡监听器 ID
+   * 子网所在私有网络`ID`。形如：`vpc-f49l6u0z`。
    */
-  ListenerId?: string
+  VpcId: string
   /**
-   * 要修改权重的后端机器列表
+   * 分配 `IPv6` 子网段列表。
    */
-  Targets?: Array<Target>
+  Ipv6SubnetCidrBlocks: Array<Ipv6SubnetCidrBlock>
   /**
-   * 后端服务新的转发权重，取值范围：0~100。
+   * ECM地域。
    */
-  Weight?: number
+  EcmRegion?: string
 }
 
 /**
@@ -834,34 +862,39 @@ export interface ImageTask {
 }
 
 /**
- * ModifyListener请求参数结构体
+ * AllocateIpv6AddressesBandwidth请求参数结构体
  */
-export interface ModifyListenerRequest {
+export interface AllocateIpv6AddressesBandwidthRequest {
   /**
-   * 负载均衡实例 ID
+   * ECM 地域。
    */
-  LoadBalancerId: string
+  EcmRegion: string
   /**
-   * 负载均衡监听器 ID
+   * 需要开通公网访问能力的IPV6地址。
    */
-  ListenerId: string
+  Ipv6Addresses: Array<string>
   /**
-   * 新的监听器名称
+   * 带宽，单位Mbps，默认是1Mbps。
    */
-  ListenerName?: string
+  InternetMaxBandwidthOut?: number
   /**
-   * 会话保持时间，单位：秒。可选值：30~3600，默认 0，表示不开启。此参数仅适用于TCP/UDP监听器。
+   * 网络计费模式，当前支持 BANDWIDTH_PACKAGE。
    */
-  SessionExpireTime?: number
+  InternetChargeType?: string
+}
+
+/**
+ * 云镜服务；
+ */
+export interface RunSecurityServiceEnabled {
   /**
-   * 健康检查相关参数
+   * 是否开启。
    */
-  HealthCheck?: HealthCheck
+  Enabled?: boolean
   /**
-   * 监听器转发的方式。可选值：WRR、LEAST_CONN
-分别表示按权重轮询、最小连接数， 默认为 WRR。
+   * 云镜版本：0 基础版，1 专业版。目前仅支持基础版
    */
-  Scheduler?: string
+  Version?: number
 }
 
 /**
@@ -1053,17 +1086,63 @@ PROTECTIVELY_ISOLATED：表示被安全隔离的实例。
 }
 
 /**
- * 云镜服务；
+ * DescribeRegionIpv6Addresses返回参数结构体
  */
-export interface RunSecurityServiceEnabled {
+export interface DescribeRegionIpv6AddressesResponse {
   /**
-   * 是否开启。
+   * 符合条件的 IPV6 数量。
    */
-  Enabled?: boolean
+  TotalCount: number
   /**
-   * 云镜版本：0 基础版，1 专业版。目前仅支持基础版
+   * IPV6 详细信息列表。
    */
-  Version?: number
+  AddressSet: Array<Address>
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 节点信息
+ */
+export interface Node {
+  /**
+   * zone信息。
+   */
+  ZoneInfo: ZoneInfo
+  /**
+   * 国家信息。
+   */
+  Country: Country
+  /**
+   * 区域信息。
+   */
+  Area: Area
+  /**
+   * 省份信息。
+   */
+  Province: Province
+  /**
+   * 城市信息。
+   */
+  City: City
+  /**
+   * Region信息。
+   */
+  RegionInfo: RegionInfo
+  /**
+   * 运营商列表。
+   */
+  ISPSet: Array<ISP>
+  /**
+   * 运营商数量。
+   */
+  ISPNum: number
+  /**
+   * 节点是否支持LB
+   */
+  LBSupported?: boolean
 }
 
 /**
@@ -1201,6 +1280,16 @@ export interface DescribeTargetHealthResponse {
 }
 
 /**
+ * QueryVpcTaskResult请求参数结构体
+ */
+export interface QueryVpcTaskResultRequest {
+  /**
+   * 无
+   */
+  TaskId: string
+}
+
+/**
  * ModifyDefaultSubnet请求参数结构体
  */
 export interface ModifyDefaultSubnetRequest {
@@ -1234,6 +1323,20 @@ export interface DescribeTaskResultRequest {
    * 异步任务ID。
    */
   TaskId: string
+}
+
+/**
+ * 申请ipv6 cidr block的信息
+ */
+export interface ISPTypeItem {
+  /**
+   * IPv6 Cidr所属运营商类型，支持的类型有 'CMCC'-中国移动, 'CTCC'-中国电信, 'CUCC'-中国联调。作为入参数时为必选。
+   */
+  ISPType?: string
+  /**
+   * 申请IPv6 Cidr Block的个数。作为入参数时为必选。
+   */
+  Count?: number
 }
 
 /**
@@ -1327,6 +1430,24 @@ export interface AttachDisksResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * AssignIpv6CidrBlock请求参数结构体
+ */
+export interface AssignIpv6CidrBlockRequest {
+  /**
+   * `VPC`实例`ID`，形如：`vpc-f49l6u0z`。
+   */
+  VpcId: string
+  /**
+   * 网络运营商类型 'CMCC'-中国移动, 'CTCC'-中国电信, 'CUCC'-中国联调
+   */
+  ISPType: string
+  /**
+   * ECM地域。
+   */
+  EcmRegion?: string
 }
 
 /**
@@ -1485,6 +1606,24 @@ tag:tag-key - String - 是否必填：否 - （过滤条件）按照标签键值
    * 返回数量，默认为20，最大值为100。
    */
   Limit?: number
+}
+
+/**
+ * ReleaseIpv6AddressesBandwidth请求参数结构体
+ */
+export interface ReleaseIpv6AddressesBandwidthRequest {
+  /**
+   * ECM 地域。
+   */
+  EcmRegion: string
+  /**
+   * IPV6地址。Ipv6Addresses和Ipv6AddressIds必须且只能传一个。
+   */
+  Ipv6Addresses?: Array<string>
+  /**
+   * IPV6地址对应的唯一ID，形如eip-xxxxxxxx。Ipv6Addresses和Ipv6AddressIds必须且只能传一个。
+   */
+  Ipv6AddressIds?: Array<string>
 }
 
 /**
@@ -1716,6 +1855,20 @@ export interface DescribePackingQuotaGroupResponse {
    * 装箱配额组
    */
   PackingQuotaSet?: Array<PackingQuotaGroup>
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * AssignIpv6CidrBlocks返回参数结构体
+ */
+export interface AssignIpv6CidrBlocksResponse {
+  /**
+   * IPv6网段和所属运营商。
+   */
+  IPv6CidrBlockSet?: Array<ISPIPv6CidrBlock>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2080,25 +2233,33 @@ export interface DescribeCustomImageTaskResponse {
 }
 
 /**
- * 运行商统计信息
+ * 安全组对象
  */
-export interface ISPCounter {
+export interface SecurityGroup {
   /**
-   * 运营商名称
+   * 安全组实例ID，例如：esg-ohuuioma。
    */
-  ProviderName: string
+  SecurityGroupId: string
   /**
-   * 节点数量
+   * 安全组名称，可任意命名，但不得超过60个字符。
    */
-  ProviderNodeNum: number
+  SecurityGroupName: string
   /**
-   * 实例数量
+   * 安全组备注，最多100个字符。
    */
-  ProvederInstanceNum: number
+  SecurityGroupDesc: string
   /**
-   * Zone实例信息结构体数组
+   * 是否是默认安全组，默认安全组不支持删除。
    */
-  ZoneInstanceInfoSet: Array<ZoneInstanceInfo>
+  IsDefault?: boolean
+  /**
+   * 安全组创建时间。
+   */
+  CreatedTime?: string
+  /**
+   * 标签键值对。
+   */
+  TagSet?: Array<Tag>
 }
 
 /**
@@ -2868,6 +3029,24 @@ export interface CreateImageResponse {
 }
 
 /**
+ * UnassignIpv6SubnetCidrBlock请求参数结构体
+ */
+export interface UnassignIpv6SubnetCidrBlockRequest {
+  /**
+   * 子网所在私有网络`ID`。形如：`vpc-f49l6u0z`。
+   */
+  VpcId: string
+  /**
+   * `IPv6` 子网段列表。
+   */
+  Ipv6SubnetCidrBlocks: Array<Ipv6SubnetCidrBlock>
+  /**
+   * ECM地域。
+   */
+  EcmRegion?: string
+}
+
+/**
  * ModifyModuleNetwork请求参数结构体
  */
 export interface ModifyModuleNetworkRequest {
@@ -3155,6 +3334,16 @@ Windows实例密码必须12到16位，至少包括三项[a-z]，[A-Z]，[0-9]和
    * 待重置密码的实例的用户名，不得超过64个字符。若未指定用户名，则对于Linux而言，默认重置root用户的密码，对于Windows而言，默认重置administrator的密码。
    */
   UserName?: string
+}
+
+/**
+ * ModifyIpv6AddressesBandwidth返回参数结构体
+ */
+export interface ModifyIpv6AddressesBandwidthResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3524,6 +3713,24 @@ export interface SetLoadBalancerSecurityGroupsRequest {
 }
 
 /**
+ * 目标和权重的描述信息
+ */
+export interface TargetsWeightRule {
+  /**
+   * 负载均衡监听器 ID
+   */
+  ListenerId?: string
+  /**
+   * 要修改权重的后端机器列表
+   */
+  Targets?: Array<Target>
+  /**
+   * 后端服务新的转发权重，取值范围：0~100。
+   */
+  Weight?: number
+}
+
+/**
  * DescribeImportImageOs返回参数结构体
  */
 export interface DescribeImportImageOsResponse {
@@ -3549,6 +3756,35 @@ export interface MigrateNetworkInterfaceResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeRegionIpv6Addresses请求参数结构体
+ */
+export interface DescribeRegionIpv6AddressesRequest {
+  /**
+   * ECM 地域，为空时返回所有地域的IPv6地址。
+   */
+  EcmRegion: string
+  /**
+   * 详细的过滤条件如下：
+address-id - String - 是否必填：否 - （过滤条件）按照 EIP 的 ID 过滤。
+address-ip - String - 是否必填：否 - （过滤条件）按照 EIP 的 IP 地址过滤。
+network-interface-id - String - 是否必填：否 - （过滤条件）按照弹性网卡的唯一ID过滤。
+instance-id - String - 是否必填：否 - （过滤条件）按照 EIP 所绑定的实例 ID 过滤。
+vpc-id - String - 是否必填：否 - （过滤条件）按照 EIP 所在 VPC 的 ID 进行过滤。
+address-isp - String - 是否必填：否 - （过滤条件）按照 EIP 的运营商进行过滤。
+address-status  - String - 是否必填：否 - （过滤条件）按照 EIP  的状态信息进行过滤。
+   */
+  Filters?: Array<Filter>
+  /**
+   * 偏移量，默认为0。关于Offset的更进一步介绍请参考 API 简介中的相关小节。
+   */
+  Offset?: number
+  /**
+   * 返回数量，默认为20，最大值为100。关于Limit的更进一步介绍请参考 API 简介中的相关小节。
+   */
+  Limit?: number
 }
 
 /**
@@ -4126,6 +4362,20 @@ export interface DescribeInstancesResponse {
 }
 
 /**
+ * ReleaseIpv6AddressesBandwidth返回参数结构体
+ */
+export interface ReleaseIpv6AddressesBandwidthResponse {
+  /**
+   * 异步任务TaskId。
+   */
+  TaskId: string
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 机型配置
  */
 export interface InstanceTypeConfig {
@@ -4274,6 +4524,20 @@ export interface DescribeNodeRequest {
  * ModifySecurityGroupAttribute返回参数结构体
  */
 export interface ModifySecurityGroupAttributeResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * AssignIpv6CidrBlock返回参数结构体
+ */
+export interface AssignIpv6CidrBlockResponse {
+  /**
+   * 分配的 `IPv6` 网段。形如：`3402:4e00:20:1000::/56`。
+   */
+  Ipv6CidrBlock?: string
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4532,6 +4796,20 @@ export interface DeleteSnapshotsRequest {
 }
 
 /**
+ * AssignIpv6SubnetCidrBlock返回参数结构体
+ */
+export interface AssignIpv6SubnetCidrBlockResponse {
+  /**
+   * 分配 `IPv6` 子网段列表。
+   */
+  Ipv6SubnetCidrBlockSet?: Array<Ipv6SubnetCidrBlock>
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 描述了实例的抽象位置，包括其所在的可用区，所属的项目，以及所属的独享集群的ID和名字。
  */
 export interface Placement {
@@ -4700,9 +4978,17 @@ export interface DataDisk {
 }
 
 /**
- * ModifyVpcAttribute返回参数结构体
+ * QueryVpcTaskResult返回参数结构体
  */
-export interface ModifyVpcAttributeResponse {
+export interface QueryVpcTaskResultResponse {
+  /**
+   * 执行结果，包括"SUCCESS", "FAILED", "RUNNING"
+   */
+  Status: string
+  /**
+   * 异步任务执行输出。
+   */
+  Output: string
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5301,6 +5587,16 @@ export interface ImageOsList {
 }
 
 /**
+ * UnassignIpv6SubnetCidrBlock返回参数结构体
+ */
+export interface UnassignIpv6SubnetCidrBlockResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * BatchModifyTargetWeight请求参数结构体
  */
 export interface BatchModifyTargetWeightRequest {
@@ -5725,6 +6021,16 @@ export interface BatchDeregisterTargetsResponse {
  * SetLoadBalancerSecurityGroups返回参数结构体
  */
 export interface SetLoadBalancerSecurityGroupsResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyVpcAttribute返回参数结构体
+ */
+export interface ModifyVpcAttributeResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6215,13 +6521,25 @@ export interface RuleHealth {
 }
 
 /**
- * DeleteSecurityGroup返回参数结构体
+ * ModifyIpv6AddressesBandwidth请求参数结构体
  */
-export interface DeleteSecurityGroupResponse {
+export interface ModifyIpv6AddressesBandwidthRequest {
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * ECM 地域
    */
-  RequestId?: string
+  EcmRegion: string
+  /**
+   * 修改的目标带宽，单位Mbps
+   */
+  InternetMaxBandwidthOut: number
+  /**
+   * IPV6地址。Ipv6Addresses和Ipv6AddressId必须且只能传一个
+   */
+  Ipv6Addresses?: Array<Ipv6Address>
+  /**
+   * IPV6地址对应的唯一ID，形如eip-xxxxxxxx。Ipv6Addresses和Ipv6AddressId必须且只能传一个
+   */
+  Ipv6AddressIds?: Array<string>
 }
 
 /**
@@ -6239,45 +6557,34 @@ export interface CreateNetworkInterfaceResponse {
 }
 
 /**
- * 节点信息
+ * ModifyListener请求参数结构体
  */
-export interface Node {
+export interface ModifyListenerRequest {
   /**
-   * zone信息。
+   * 负载均衡实例 ID
    */
-  ZoneInfo: ZoneInfo
+  LoadBalancerId: string
   /**
-   * 国家信息。
+   * 负载均衡监听器 ID
    */
-  Country: Country
+  ListenerId: string
   /**
-   * 区域信息。
+   * 新的监听器名称
    */
-  Area: Area
+  ListenerName?: string
   /**
-   * 省份信息。
+   * 会话保持时间，单位：秒。可选值：30~3600，默认 0，表示不开启。此参数仅适用于TCP/UDP监听器。
    */
-  Province: Province
+  SessionExpireTime?: number
   /**
-   * 城市信息。
+   * 健康检查相关参数
    */
-  City: City
+  HealthCheck?: HealthCheck
   /**
-   * Region信息。
+   * 监听器转发的方式。可选值：WRR、LEAST_CONN
+分别表示按权重轮询、最小连接数， 默认为 WRR。
    */
-  RegionInfo: RegionInfo
-  /**
-   * 运营商列表。
-   */
-  ISPSet: Array<ISP>
-  /**
-   * 运营商数量。
-   */
-  ISPNum: number
-  /**
-   * 节点是否支持LB
-   */
-  LBSupported?: boolean
+  Scheduler?: string
 }
 
 /**
@@ -6307,7 +6614,7 @@ export interface ZoneInstanceCountISP {
    */
   Zone: string
   /**
-   * 在当前可用区欲创建的实例数目。
+   * 在当前可用区创建的实例数目。
    */
   InstanceCount: number
   /**
@@ -6792,33 +7099,25 @@ export interface ResetInstancesPasswordResponse {
 }
 
 /**
- * 安全组对象
+ * 运行商统计信息
  */
-export interface SecurityGroup {
+export interface ISPCounter {
   /**
-   * 安全组实例ID，例如：esg-ohuuioma。
+   * 运营商名称
    */
-  SecurityGroupId: string
+  ProviderName: string
   /**
-   * 安全组名称，可任意命名，但不得超过60个字符。
+   * 节点数量
    */
-  SecurityGroupName: string
+  ProviderNodeNum: number
   /**
-   * 安全组备注，最多100个字符。
+   * 实例数量
    */
-  SecurityGroupDesc: string
+  ProvederInstanceNum: number
   /**
-   * 是否是默认安全组，默认安全组不支持删除。
+   * Zone实例信息结构体数组
    */
-  IsDefault?: boolean
-  /**
-   * 安全组创建时间。
-   */
-  CreatedTime?: string
-  /**
-   * 标签键值对。
-   */
-  TagSet?: Array<Tag>
+  ZoneInstanceInfoSet: Array<ZoneInstanceInfo>
 }
 
 /**
@@ -7034,6 +7333,22 @@ export interface CreateDisksResponse {
 }
 
 /**
+ * IPv6子网段对象。
+ */
+export interface Ipv6SubnetCidrBlock {
+  /**
+   * 子网实例`ID`。形如：`subnet-pxir56ns`。	
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SubnetId?: string
+  /**
+   * `IPv6`子网段。形如：`3402:4e00:20:1001::/64`	
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Ipv6CidrBlock?: string
+}
+
+/**
  * DescribeAddressQuota返回参数结构体
  */
 export interface DescribeAddressQuotaResponse {
@@ -7145,6 +7460,25 @@ export interface ModifyPrivateIpAddressesAttributeRequest {
    * ECM 节点Region信息，形如ap-xian-ecm。
    */
   EcmRegion: string
+}
+
+/**
+ * AllocateIpv6AddressesBandwidth返回参数结构体
+ */
+export interface AllocateIpv6AddressesBandwidthResponse {
+  /**
+   * 弹性公网 IPV6 的唯一 ID 列表。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AddressSet: Array<string>
+  /**
+   * 异步任务TaskId。
+   */
+  TaskId: string
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

@@ -184,6 +184,7 @@ export { tcaplusdb } from "./tcaplusdb";
 export { tcb } from "./tcb";
 export { tcbr } from "./tcbr";
 export { tcex } from "./tcex";
+export { tchd } from "./tchd";
 export { tci } from "./tci";
 export { tcm } from "./tcm";
 export { tcr } from "./tcr";

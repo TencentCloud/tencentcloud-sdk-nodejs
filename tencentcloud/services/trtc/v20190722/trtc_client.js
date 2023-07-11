@@ -227,15 +227,6 @@ TRTC 的一个房间中可能会同时存在多路音视频流，您可以通过
         return this.request("CreateCloudRecording", req, cb);
     }
     /**
-     * 接口内部调用计量接口，计量接口迁通用集群后不可用。目前已有新的对外接口可以供用户使用。
-
-获取Trtc的用量统计数据。走计费渠道二期 只允许查两天的数据。
-当前接口已不再更新维护，请使用新版音视频用量接口：DescribeTrtcUsage （https://cloud.tencent.com/document/product/647/81425）
-     */
-    async DescribeExternalTrtcMeasure(req, cb) {
-        return this.request("DescribeExternalTrtcMeasure", req, cb);
-    }
-    /**
      * 可查询SdkAppId每天的房间数和用户数，按天统计，可查询最近14天的数据。当天未结束，数据未统计完成，无法查到当天的房间数与用户数。（同老接口DescribeHistoryScale）
      */
     async DescribeScaleInfo(req, cb) {

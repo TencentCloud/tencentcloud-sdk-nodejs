@@ -3335,7 +3335,7 @@ export interface AiAnalysisTaskHighlightResult {
  */
 export interface CreateRebuildMediaTemplateResponse {
   /**
-   * 音画质重生模板 ID。
+   * 视频重生模板 ID。
    */
   Definition?: number
   /**
@@ -8296,7 +8296,7 @@ export interface DeleteRebuildMediaTemplateResponse {
  */
 export interface DeleteRebuildMediaTemplateRequest {
   /**
-   * 音画质重生模板号。
+   * 视频重生模板号。
    */
   Definition: number
   /**

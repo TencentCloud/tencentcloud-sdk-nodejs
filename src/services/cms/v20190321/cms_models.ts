@@ -25,6 +25,10 @@ export interface CreateKeywordsSamplesResponse {
    */
   SampleIDs?: Array<string>
   /**
+   * 成功入库关键词列表
+   */
+  SuccessInfos?: Array<UserKeywordInfo>
+  /**
    * 重复关键词列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
@@ -396,6 +400,10 @@ export interface DescribeLibSamplesRequest {
    * 违规类型列表过滤
    */
   EvilTypeList?: Array<number>
+  /**
+   * 样本词ID列表过滤
+   */
+  SampleIDs?: Array<string>
 }
 
 /**
@@ -1069,13 +1077,17 @@ export interface RrectF {
  */
 export interface DeleteLibSamplesRequest {
   /**
-   * 关键词ID
+   * 关键词ID列表
    */
   SampleIDs: Array<string>
   /**
    * 词库ID
    */
   LibID?: string
+  /**
+   * 关键词内容列表
+   */
+  SampleContents?: Array<string>
 }
 
 /**

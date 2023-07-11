@@ -82,6 +82,15 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ResetRoutes", req, cb);
     }
     /**
+     * 本接口（AssignIpv6CidrBlocks）用于分配IPv6网段。
+
+使用本接口前，您需要已有VPC实例，如果没有可通过接口CreateVpc创建。
+每个VPC 可以同时支持运营商网络('CMCC'-中国移动, 'CTCC'-中国电信, 'CUCC'-中国联调)。本接口可以同时申请不同类型的IPv6网段
+     */
+    async AssignIpv6CidrBlocks(req, cb) {
+        return this.request("AssignIpv6CidrBlocks", req, cb);
+    }
+    /**
      * 用于修改弹性网卡内网IP属性。
      */
     async ModifyPrivateIpAddressesAttribute(req, cb) {
@@ -94,10 +103,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("RunInstances", req, cb);
     }
     /**
-     * 从CVM产品导入镜像到ECM
+     * 弹性网卡申请内网 IP
      */
-    async ImportImage(req, cb) {
-        return this.request("ImportImage", req, cb);
+    async AssignPrivateIpAddresses(req, cb) {
+        return this.request("AssignPrivateIpAddresses", req, cb);
     }
     /**
      * 查询弹性公网IP列表
@@ -136,10 +145,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeCustomImageTask", req, cb);
     }
     /**
-     * 修改子网关联的路由表，一个子网只能关联一个路由表。
+     * 本接口（AssignIpv6CidrBlock）用于分配IPv6网段。
+
+使用本接口前，您需要已有VPC实例，如果没有可通过接口CreateVpc创建。
      */
-    async ReplaceRouteTableAssociation(req, cb) {
-        return this.request("ReplaceRouteTableAssociation", req, cb);
+    async AssignIpv6CidrBlock(req, cb) {
+        return this.request("AssignIpv6CidrBlock", req, cb);
     }
     /**
      * 查询负载均衡实例列表。
@@ -250,6 +261,15 @@ EIP 如果被封堵，则不能进行解绑定操作。
         return this.request("AttachDisks", req, cb);
     }
     /**
+     * 本接口（AssignIpv6SubnetCidrBlock）用于分配IPv6子网段。
+
+给子网分配 IPv6 网段，要求子网所属 VPC 已获得 IPv6 网段。如果尚未分配，请先通过接口 AssignIpv6CidrBlock 给子网所属 VPC 分配一个 IPv6 网段。否则无法分配 IPv6 子网段。
+每个子网只能分配一个IPv6网段。
+     */
+    async AssignIpv6SubnetCidrBlock(req, cb) {
+        return this.request("AssignIpv6SubnetCidrBlock", req, cb);
+    }
+    /**
      * 设置负载均衡实例的安全组。
      */
     async SetLoadBalancerSecurityGroups(req, cb) {
@@ -293,6 +313,18 @@ EIP 如果被封堵，则不能进行解绑定操作。
      */
     async DeleteSubnet(req, cb) {
         return this.request("DeleteSubnet", req, cb);
+    }
+    /**
+     * 该接口(ModifyIpv6AddressesBandwidth)用于修改IPV6地址访问internet的带宽
+     */
+    async ModifyIpv6AddressesBandwidth(req, cb) {
+        return this.request("ModifyIpv6AddressesBandwidth", req, cb);
+    }
+    /**
+     * 本接口用于给IPv6地址分配公网带宽
+     */
+    async AllocateIpv6AddressesBandwidth(req, cb) {
+        return this.request("AllocateIpv6AddressesBandwidth", req, cb);
     }
     /**
      * 批量绑定后端目标。
@@ -391,6 +423,13 @@ EIP 如果被封堵，则不能进行解绑定操作。
         return this.request("ReplaceRoutes", req, cb);
     }
     /**
+     * 本接口（UnassignIpv6SubnetCidrBlock）用于释放IPv6子网段。
+子网段如果还有IP占用且未回收，则子网段无法释放。
+     */
+    async UnassignIpv6SubnetCidrBlock(req, cb) {
+        return this.request("UnassignIpv6SubnetCidrBlock", req, cb);
+    }
+    /**
      * 查询自定义路由策略与云联网路由策略冲突列表
      */
     async DescribeRouteConflicts(req, cb) {
@@ -410,6 +449,12 @@ EIP 如果被封堵，则不能进行解绑定操作。
      */
     async DisableRoutes(req, cb) {
         return this.request("DisableRoutes", req, cb);
+    }
+    /**
+     * 修改子网关联的路由表，一个子网只能关联一个路由表。
+     */
+    async ReplaceRouteTableAssociation(req, cb) {
+        return this.request("ReplaceRouteTableAssociation", req, cb);
     }
     /**
      * 查询实例价格
@@ -440,6 +485,12 @@ EIP 如果被封堵，则不能进行解绑定操作。
      */
     async DeleteSecurityGroupPolicies(req, cb) {
         return this.request("DeleteSecurityGroupPolicies", req, cb);
+    }
+    /**
+     * 该接口（DescribeRegionIpv6Addresses）用于查询ECM地域之下的IPV6地址信息。
+     */
+    async DescribeRegionIpv6Addresses(req, cb) {
+        return this.request("DescribeRegionIpv6Addresses", req, cb);
     }
     /**
      * 用于创建一个 OpenSSH RSA 密钥对，可以用于登录 Linux 实例。
@@ -637,16 +688,22 @@ EIP 如果被封堵，则不能进行解绑定操作。
         return this.request("DescribeHaVips", req, cb);
     }
     /**
-     * 弹性网卡申请内网 IP
+     * 从CVM产品导入镜像到ECM
      */
-    async AssignPrivateIpAddresses(req, cb) {
-        return this.request("AssignPrivateIpAddresses", req, cb);
+    async ImportImage(req, cb) {
+        return this.request("ImportImage", req, cb);
     }
     /**
      * 用于删除高可用虚拟IP（HAVIP）
      */
     async DeleteHaVip(req, cb) {
         return this.request("DeleteHaVip", req, cb);
+    }
+    /**
+     * 查询私有网络下Vpc、子网、havip等异步任务请求结果
+     */
+    async QueryVpcTaskResult(req, cb) {
+        return this.request("QueryVpcTaskResult", req, cb);
     }
     /**
      * 查询您账户的弹性公网IP（简称 EIP）在当前地域的配额信息
@@ -707,6 +764,12 @@ EIP 如果被封堵，则不能进行解绑定操作。
      */
     async CreateModule(req, cb) {
         return this.request("CreateModule", req, cb);
+    }
+    /**
+     * 该接口用于给弹性公网IPv6地址释放带宽。
+     */
+    async ReleaseIpv6AddressesBandwidth(req, cb) {
+        return this.request("ReleaseIpv6AddressesBandwidth", req, cb);
     }
     /**
      * 启用已禁用的子网路由。

@@ -25,6 +25,7 @@ import {
   ChannelBatchCancelFlowsResponse,
   Department,
   CommonApproverOption,
+  ChannelCreateFlowGroupByTemplatesResponse,
   ChannelCreateFlowSignReviewRequest,
   AuthFailMessage,
   DescribeFlowDetailInfoRequest,
@@ -130,6 +131,7 @@ import {
   ChannelCreateEmbedWebUrlResponse,
   ChannelBatchCancelFlowsRequest,
   ChannelUpdateSealStatusRequest,
+  ChannelCreateFlowGroupByTemplatesRequest,
   SignUrl,
   ChannelCancelFlowRequest,
   DescribeTemplatesRequest,
@@ -545,7 +547,7 @@ https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/launchAp
   }
 
   /**
-   * 查询用户角色
+   * 查询角色列表，支持根据类型和状态过滤角色列表
    */
   async ChannelDescribeRoles(
     req: ChannelDescribeRolesRequest,
@@ -611,6 +613,16 @@ httpProfile.setEndpoint("file.test.ess.tencent.cn");
     cb?: (error: string, rep: SyncProxyOrganizationResponse) => void
   ): Promise<SyncProxyOrganizationResponse> {
     return this.request("SyncProxyOrganization", req, cb)
+  }
+
+  /**
+   * 接口（ChannelCreateFlowGroupByTemplates）用于通过多模板创建合同组签署流程。
+   */
+  async ChannelCreateFlowGroupByTemplates(
+    req: ChannelCreateFlowGroupByTemplatesRequest,
+    cb?: (error: string, rep: ChannelCreateFlowGroupByTemplatesResponse) => void
+  ): Promise<ChannelCreateFlowGroupByTemplatesResponse> {
+    return this.request("ChannelCreateFlowGroupByTemplates", req, cb)
   }
 
   /**

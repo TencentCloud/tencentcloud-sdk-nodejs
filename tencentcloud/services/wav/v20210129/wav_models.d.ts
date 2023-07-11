@@ -619,6 +619,10 @@ export interface ClueInfoDetail {
      * 职位
      */
     Position?: string;
+    /**
+     * 自定义的门店id
+     */
+    CorpShopId?: string;
 }
 /**
  * QueryActivityList请求参数结构体

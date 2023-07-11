@@ -4189,91 +4189,91 @@ export interface CloudBaseRunServerVersionItem {
     /**
      * 版本名称
      */
-    VersionName: string;
+    VersionName?: string;
     /**
      * 状态
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Status: string;
+    Status?: string;
     /**
      * 流量占比
      */
-    FlowRatio: number;
+    FlowRatio?: number;
     /**
      * 创建时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CreatedTime: string;
+    CreatedTime?: string;
     /**
      * 更新时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    UpdatedTime: string;
+    UpdatedTime?: string;
     /**
      * 构建ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    BuildId: number;
+    BuildId?: number;
     /**
      * 构建方式
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    UploadType: string;
+    UploadType?: string;
     /**
      * 备注
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Remark: string;
+    Remark?: string;
     /**
      * url中的参数路径
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    UrlParam: ObjectKV;
+    UrlParam?: ObjectKV;
     /**
      * 优先级（数值越小，优先级越高）
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Priority: number;
+    Priority?: number;
     /**
      * 是否是默认兜底版本
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    IsDefaultPriority: boolean;
+    IsDefaultPriority?: boolean;
     /**
      * KV Params
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    FlowParams: Array<CloudBaseRunKVPriority>;
+    FlowParams?: Array<CloudBaseRunKVPriority>;
     /**
      * 最小副本数
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    MinReplicas: number;
+    MinReplicas?: number;
     /**
      * 最大副本数
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    MaxReplicas: number;
+    MaxReplicas?: number;
     /**
      * 操作记录id
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    RunId: string;
+    RunId?: string;
     /**
      * 进度
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Percent: number;
+    Percent?: number;
     /**
      * 当前副本数
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CurrentReplicas: number;
+    CurrentReplicas?: number;
     /**
      * Monolithic，Microservice
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Architecture: string;
+    Architecture?: string;
 }
 /**
  * 终端用户平台统计信息
@@ -5102,10 +5102,12 @@ export interface LogServiceInfo {
 export interface FrequencyLimitConfig {
     /**
      * 限额对象 "ConnectionsLimit" 或 "QPSLimit"
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     LimitObject?: string;
     /**
      * 限额配置
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     LimitConfig?: string;
 }
@@ -5302,6 +5304,11 @@ export interface WxGatewayRountItem {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     GatewayRoutePort: number;
+    /**
+     * 路由环境ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    GatewayRouteEnvId?: string;
 }
 /**
  * DescribeSmsQuotas请求参数结构体

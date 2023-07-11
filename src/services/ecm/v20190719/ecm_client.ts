@@ -23,6 +23,7 @@ import {
   DescribeHaVipsResponse,
   ModifyModuleSecurityGroupsRequest,
   TerminateInstancesResponse,
+  AssignIpv6CidrBlocksRequest,
   DescribeMonthPeakNetworkResponse,
   DescribeNetworkInterfacesRequest,
   CreateSecurityGroupPoliciesResponse,
@@ -31,6 +32,7 @@ import {
   SystemDisk,
   DescribeNodeResponse,
   DescribeModuleRequest,
+  DeleteSecurityGroupResponse,
   RebootInstancesRequest,
   CreateDisksRequest,
   AttachDisksRequest,
@@ -40,7 +42,7 @@ import {
   DescribeImageRequest,
   OsVersion,
   DescribeListenersResponse,
-  TargetsWeightRule,
+  AssignIpv6SubnetCidrBlockRequest,
   StartInstancesResponse,
   CreateVpcResponse,
   AssistantCidr,
@@ -59,10 +61,12 @@ import {
   StopInstancesRequest,
   DetachNetworkInterfaceResponse,
   ImageTask,
-  ModifyListenerRequest,
+  AllocateIpv6AddressesBandwidthRequest,
+  RunSecurityServiceEnabled,
   CreateImageRequest,
   Instance,
-  RunSecurityServiceEnabled,
+  DescribeRegionIpv6AddressesResponse,
+  Node,
   PeakBase,
   DeleteLoadBalancerRequest,
   DescribeVpcsRequest,
@@ -71,10 +75,13 @@ import {
   BatchDeregisterTargetsRequest,
   ModifyListenerResponse,
   DescribeTargetHealthResponse,
+  QueryVpcTaskResultRequest,
   ModifyDefaultSubnetRequest,
   DescribeTaskResultRequest,
+  ISPTypeItem,
   Snapshot,
   AttachDisksResponse,
+  AssignIpv6CidrBlockRequest,
   DescribeLoadBalancersRequest,
   DeleteRoutesResponse,
   DescribeCustomImageTaskRequest,
@@ -83,6 +90,7 @@ import {
   PriceDetail,
   ImportImageResponse,
   DescribeSecurityGroupsRequest,
+  ReleaseIpv6AddressesBandwidthRequest,
   DescribePriceRunInstanceResponse,
   DeleteImageResponse,
   ModifySubnetAttributeResponse,
@@ -92,6 +100,7 @@ import {
   DescribeVpcsResponse,
   ModifySecurityGroupAttributeRequest,
   DescribePackingQuotaGroupResponse,
+  AssignIpv6CidrBlocksResponse,
   LoadBalancer,
   ModifyModuleNameResponse,
   DescribePeakBaseOverviewRequest,
@@ -108,7 +117,7 @@ import {
   ReplaceRouteTableAssociationRequest,
   ModifyTargetWeightResponse,
   DescribeCustomImageTaskResponse,
-  ISPCounter,
+  SecurityGroup,
   CreateModuleResponse,
   DescribePackingQuotaGroupRequest,
   SecurityGroupPolicy,
@@ -140,6 +149,7 @@ import {
   MonthNetwork,
   ResetRoutesResponse,
   CreateImageResponse,
+  UnassignIpv6SubnetCidrBlockRequest,
   ModifyModuleNetworkRequest,
   AddressTemplateSpecification,
   AssignIpv6AddressesRequest,
@@ -158,6 +168,7 @@ import {
   CreateKeyPairRequest,
   ModifyModuleIpDirectResponse,
   ResetInstancesPasswordRequest,
+  ModifyIpv6AddressesBandwidthResponse,
   AssociateAddressResponse,
   DescribeAddressesRequest,
   DescribeSecurityGroupPoliciesRequest,
@@ -177,8 +188,10 @@ import {
   CreateModuleRequest,
   CreateLoadBalancerResponse,
   SetLoadBalancerSecurityGroupsRequest,
+  TargetsWeightRule,
   DescribeImportImageOsResponse,
   MigrateNetworkInterfaceResponse,
+  DescribeRegionIpv6AddressesRequest,
   Module,
   ListenerHealth,
   DisassociateSecurityGroupsResponse,
@@ -197,6 +210,7 @@ import {
   ModifyAddressesBandwidthResponse,
   RunInstancesRequest,
   DescribeInstancesResponse,
+  ReleaseIpv6AddressesBandwidthResponse,
   InstanceTypeConfig,
   AllocateAddressesRequest,
   ZoneInfo,
@@ -204,6 +218,7 @@ import {
   ResetInstancesResponse,
   DescribeNodeRequest,
   ModifySecurityGroupAttributeResponse,
+  AssignIpv6CidrBlockResponse,
   ModifyModuleConfigRequest,
   Area,
   ModifyAddressAttributeResponse,
@@ -217,6 +232,7 @@ import {
   Listener,
   StartInstancesRequest,
   DeleteSnapshotsRequest,
+  AssignIpv6SubnetCidrBlockResponse,
   Placement,
   Target,
   DeleteSnapshotsResponse,
@@ -226,7 +242,7 @@ import {
   DisableRoutesResponse,
   DescribeConfigResponse,
   DataDisk,
-  ModifyVpcAttributeResponse,
+  QueryVpcTaskResultResponse,
   PrivateIpAddressSpecification,
   MigratePrivateIpAddressResponse,
   DeleteRouteTableResponse,
@@ -258,6 +274,7 @@ import {
   DescribePriceRunInstanceRequest,
   DescribeTargetsResponse,
   ImageOsList,
+  UnassignIpv6SubnetCidrBlockResponse,
   BatchModifyTargetWeightRequest,
   BatchTarget,
   City,
@@ -280,6 +297,7 @@ import {
   DescribeTaskResultResponse,
   BatchDeregisterTargetsResponse,
   SetLoadBalancerSecurityGroupsResponse,
+  ModifyVpcAttributeResponse,
   CreateLoadBalancerRequest,
   Internet,
   DescribeModuleResponse,
@@ -307,9 +325,9 @@ import {
   ReplaceSecurityGroupPolicyResponse,
   ModifyPrivateIpAddressesAttributeResponse,
   RuleHealth,
-  DeleteSecurityGroupResponse,
+  ModifyIpv6AddressesBandwidthRequest,
   CreateNetworkInterfaceResponse,
-  Node,
+  ModifyListenerRequest,
   DescribeDisksResponse,
   ZoneInstanceCountISP,
   DescribeAddressQuotaRequest,
@@ -330,7 +348,7 @@ import {
   Subnet,
   AttachNetworkInterfaceRequest,
   ResetInstancesPasswordResponse,
-  SecurityGroup,
+  ISPCounter,
   ModifyModuleDisableWanIpRequest,
   DescribeInstanceVncUrlResponse,
   DisassociateAddressResponse,
@@ -344,6 +362,7 @@ import {
   DescribeSnapshotsResponse,
   CreateHaVipRequest,
   CreateDisksResponse,
+  Ipv6SubnetCidrBlock,
   DescribeAddressQuotaResponse,
   ZoneInstanceInfo,
   DeleteLoadBalancerResponse,
@@ -351,6 +370,7 @@ import {
   CreateRouteTableResponse,
   DescribeDisksRequest,
   ModifyPrivateIpAddressesAttributeRequest,
+  AllocateIpv6AddressesBandwidthResponse,
   DetachDisksResponse,
   CreateSecurityGroupRequest,
   DescribeSecurityGroupLimitsRequest,
@@ -483,6 +503,19 @@ export class Client extends AbstractClient {
   }
 
   /**
+     * 本接口（AssignIpv6CidrBlocks）用于分配IPv6网段。
+
+使用本接口前，您需要已有VPC实例，如果没有可通过接口CreateVpc创建。
+每个VPC 可以同时支持运营商网络('CMCC'-中国移动, 'CTCC'-中国电信, 'CUCC'-中国联调)。本接口可以同时申请不同类型的IPv6网段
+     */
+  async AssignIpv6CidrBlocks(
+    req: AssignIpv6CidrBlocksRequest,
+    cb?: (error: string, rep: AssignIpv6CidrBlocksResponse) => void
+  ): Promise<AssignIpv6CidrBlocksResponse> {
+    return this.request("AssignIpv6CidrBlocks", req, cb)
+  }
+
+  /**
    * 用于修改弹性网卡内网IP属性。
    */
   async ModifyPrivateIpAddressesAttribute(
@@ -503,13 +536,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 从CVM产品导入镜像到ECM
+   * 弹性网卡申请内网 IP
    */
-  async ImportImage(
-    req: ImportImageRequest,
-    cb?: (error: string, rep: ImportImageResponse) => void
-  ): Promise<ImportImageResponse> {
-    return this.request("ImportImage", req, cb)
+  async AssignPrivateIpAddresses(
+    req: AssignPrivateIpAddressesRequest,
+    cb?: (error: string, rep: AssignPrivateIpAddressesResponse) => void
+  ): Promise<AssignPrivateIpAddressesResponse> {
+    return this.request("AssignPrivateIpAddresses", req, cb)
   }
 
   /**
@@ -573,13 +606,15 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改子网关联的路由表，一个子网只能关联一个路由表。
-   */
-  async ReplaceRouteTableAssociation(
-    req: ReplaceRouteTableAssociationRequest,
-    cb?: (error: string, rep: ReplaceRouteTableAssociationResponse) => void
-  ): Promise<ReplaceRouteTableAssociationResponse> {
-    return this.request("ReplaceRouteTableAssociation", req, cb)
+     * 本接口（AssignIpv6CidrBlock）用于分配IPv6网段。
+
+使用本接口前，您需要已有VPC实例，如果没有可通过接口CreateVpc创建。
+     */
+  async AssignIpv6CidrBlock(
+    req: AssignIpv6CidrBlockRequest,
+    cb?: (error: string, rep: AssignIpv6CidrBlockResponse) => void
+  ): Promise<AssignIpv6CidrBlockResponse> {
+    return this.request("AssignIpv6CidrBlock", req, cb)
   }
 
   /**
@@ -759,6 +794,19 @@ EIP 如果被封堵，则不能进行解绑定操作。
   }
 
   /**
+     * 本接口（AssignIpv6SubnetCidrBlock）用于分配IPv6子网段。
+
+给子网分配 IPv6 网段，要求子网所属 VPC 已获得 IPv6 网段。如果尚未分配，请先通过接口 AssignIpv6CidrBlock 给子网所属 VPC 分配一个 IPv6 网段。否则无法分配 IPv6 子网段。
+每个子网只能分配一个IPv6网段。
+     */
+  async AssignIpv6SubnetCidrBlock(
+    req: AssignIpv6SubnetCidrBlockRequest,
+    cb?: (error: string, rep: AssignIpv6SubnetCidrBlockResponse) => void
+  ): Promise<AssignIpv6SubnetCidrBlockResponse> {
+    return this.request("AssignIpv6SubnetCidrBlock", req, cb)
+  }
+
+  /**
    * 设置负载均衡实例的安全组。
    */
   async SetLoadBalancerSecurityGroups(
@@ -829,6 +877,26 @@ EIP 如果被封堵，则不能进行解绑定操作。
     cb?: (error: string, rep: DeleteSubnetResponse) => void
   ): Promise<DeleteSubnetResponse> {
     return this.request("DeleteSubnet", req, cb)
+  }
+
+  /**
+   * 该接口(ModifyIpv6AddressesBandwidth)用于修改IPV6地址访问internet的带宽
+   */
+  async ModifyIpv6AddressesBandwidth(
+    req: ModifyIpv6AddressesBandwidthRequest,
+    cb?: (error: string, rep: ModifyIpv6AddressesBandwidthResponse) => void
+  ): Promise<ModifyIpv6AddressesBandwidthResponse> {
+    return this.request("ModifyIpv6AddressesBandwidth", req, cb)
+  }
+
+  /**
+   * 本接口用于给IPv6地址分配公网带宽
+   */
+  async AllocateIpv6AddressesBandwidth(
+    req: AllocateIpv6AddressesBandwidthRequest,
+    cb?: (error: string, rep: AllocateIpv6AddressesBandwidthResponse) => void
+  ): Promise<AllocateIpv6AddressesBandwidthResponse> {
+    return this.request("AllocateIpv6AddressesBandwidth", req, cb)
   }
 
   /**
@@ -988,6 +1056,17 @@ EIP 如果被封堵，则不能进行解绑定操作。
   }
 
   /**
+     * 本接口（UnassignIpv6SubnetCidrBlock）用于释放IPv6子网段。
+子网段如果还有IP占用且未回收，则子网段无法释放。
+     */
+  async UnassignIpv6SubnetCidrBlock(
+    req: UnassignIpv6SubnetCidrBlockRequest,
+    cb?: (error: string, rep: UnassignIpv6SubnetCidrBlockResponse) => void
+  ): Promise<UnassignIpv6SubnetCidrBlockResponse> {
+    return this.request("UnassignIpv6SubnetCidrBlock", req, cb)
+  }
+
+  /**
    * 查询自定义路由策略与云联网路由策略冲突列表
    */
   async DescribeRouteConflicts(
@@ -1018,6 +1097,16 @@ EIP 如果被封堵，则不能进行解绑定操作。
     cb?: (error: string, rep: DisableRoutesResponse) => void
   ): Promise<DisableRoutesResponse> {
     return this.request("DisableRoutes", req, cb)
+  }
+
+  /**
+   * 修改子网关联的路由表，一个子网只能关联一个路由表。
+   */
+  async ReplaceRouteTableAssociation(
+    req: ReplaceRouteTableAssociationRequest,
+    cb?: (error: string, rep: ReplaceRouteTableAssociationResponse) => void
+  ): Promise<ReplaceRouteTableAssociationResponse> {
+    return this.request("ReplaceRouteTableAssociation", req, cb)
   }
 
   /**
@@ -1068,6 +1157,16 @@ EIP 如果被封堵，则不能进行解绑定操作。
     cb?: (error: string, rep: DeleteSecurityGroupPoliciesResponse) => void
   ): Promise<DeleteSecurityGroupPoliciesResponse> {
     return this.request("DeleteSecurityGroupPolicies", req, cb)
+  }
+
+  /**
+   * 该接口（DescribeRegionIpv6Addresses）用于查询ECM地域之下的IPV6地址信息。
+   */
+  async DescribeRegionIpv6Addresses(
+    req: DescribeRegionIpv6AddressesRequest,
+    cb?: (error: string, rep: DescribeRegionIpv6AddressesResponse) => void
+  ): Promise<DescribeRegionIpv6AddressesResponse> {
+    return this.request("DescribeRegionIpv6Addresses", req, cb)
   }
 
   /**
@@ -1390,13 +1489,13 @@ EIP 如果被封堵，则不能进行解绑定操作。
   }
 
   /**
-   * 弹性网卡申请内网 IP
+   * 从CVM产品导入镜像到ECM
    */
-  async AssignPrivateIpAddresses(
-    req: AssignPrivateIpAddressesRequest,
-    cb?: (error: string, rep: AssignPrivateIpAddressesResponse) => void
-  ): Promise<AssignPrivateIpAddressesResponse> {
-    return this.request("AssignPrivateIpAddresses", req, cb)
+  async ImportImage(
+    req: ImportImageRequest,
+    cb?: (error: string, rep: ImportImageResponse) => void
+  ): Promise<ImportImageResponse> {
+    return this.request("ImportImage", req, cb)
   }
 
   /**
@@ -1407,6 +1506,16 @@ EIP 如果被封堵，则不能进行解绑定操作。
     cb?: (error: string, rep: DeleteHaVipResponse) => void
   ): Promise<DeleteHaVipResponse> {
     return this.request("DeleteHaVip", req, cb)
+  }
+
+  /**
+   * 查询私有网络下Vpc、子网、havip等异步任务请求结果
+   */
+  async QueryVpcTaskResult(
+    req: QueryVpcTaskResultRequest,
+    cb?: (error: string, rep: QueryVpcTaskResultResponse) => void
+  ): Promise<QueryVpcTaskResultResponse> {
+    return this.request("QueryVpcTaskResult", req, cb)
   }
 
   /**
@@ -1507,6 +1616,16 @@ EIP 如果被封堵，则不能进行解绑定操作。
     cb?: (error: string, rep: CreateModuleResponse) => void
   ): Promise<CreateModuleResponse> {
     return this.request("CreateModule", req, cb)
+  }
+
+  /**
+   * 该接口用于给弹性公网IPv6地址释放带宽。
+   */
+  async ReleaseIpv6AddressesBandwidth(
+    req: ReleaseIpv6AddressesBandwidthRequest,
+    cb?: (error: string, rep: ReleaseIpv6AddressesBandwidthResponse) => void
+  ): Promise<ReleaseIpv6AddressesBandwidthResponse> {
+    return this.request("ReleaseIpv6AddressesBandwidth", req, cb)
   }
 
   /**

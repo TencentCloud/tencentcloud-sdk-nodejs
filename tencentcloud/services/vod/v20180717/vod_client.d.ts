@@ -310,7 +310,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeMediaInfos(req: DescribeMediaInfosRequest, cb?: (error: string, rep: DescribeMediaInfosResponse) => void): Promise<DescribeMediaInfosResponse>;
     /**
-     * 删除音画质重生模板。
+     * 删除视频重生模板。
      */
     DeleteRebuildMediaTemplate(req: DeleteRebuildMediaTemplateRequest, cb?: (error: string, rep: DeleteRebuildMediaTemplateResponse) => void): Promise<DeleteRebuildMediaTemplateResponse>;
     /**
@@ -449,7 +449,7 @@ export declare class Client extends AbstractClient {
      */
     CreateEnhanceMediaTemplate(req: CreateEnhanceMediaTemplateRequest, cb?: (error: string, rep: CreateEnhanceMediaTemplateResponse) => void): Promise<CreateEnhanceMediaTemplateResponse>;
     /**
-     * 创建音画质重生模板。
+     * 创建视频重生模板。
      */
     CreateRebuildMediaTemplate(req: CreateRebuildMediaTemplateRequest, cb?: (error: string, rep: CreateRebuildMediaTemplateResponse) => void): Promise<CreateRebuildMediaTemplateResponse>;
     /**

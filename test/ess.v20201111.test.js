@@ -188,6 +188,16 @@ it("ess.v20201111.CreateFlowApprovers", async function () {
     }
 })
 
+it("ess.v20201111.ModifyIntegrationDepartment", async function () {
+    try {
+       const data = await client.ModifyIntegrationDepartment({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ess.v20201111.DisableUserAutoSign", async function () {
     try {
        const data = await client.DisableUserAutoSign({})
@@ -281,6 +291,16 @@ it("ess.v20201111.CreateReleaseFlow", async function () {
 it("ess.v20201111.DescribeUserAutoSignStatus", async function () {
     try {
        const data = await client.DescribeUserAutoSignStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ess.v20201111.CreateFlowGroupByTemplates", async function () {
+    try {
+       const data = await client.CreateFlowGroupByTemplates({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -528,9 +548,9 @@ it("ess.v20201111.DescribeIntegrationDepartments", async function () {
     }
 })
 
-it("ess.v20201111.ModifyIntegrationDepartment", async function () {
+it("ess.v20201111.CreateFlowGroupByFiles", async function () {
     try {
-       const data = await client.ModifyIntegrationDepartment({})
+       const data = await client.CreateFlowGroupByFiles({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

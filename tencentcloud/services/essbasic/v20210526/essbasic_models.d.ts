@@ -99,6 +99,28 @@ export interface CommonApproverOption {
     CanEditApprover?: boolean;
 }
 /**
+ * ChannelCreateFlowGroupByTemplates返回参数结构体
+ */
+export interface ChannelCreateFlowGroupByTemplatesResponse {
+    /**
+     * 合同组ID
+     */
+    FlowGroupId?: string;
+    /**
+     * 子合同ID列表
+     */
+    FlowIds?: Array<string>;
+    /**
+     * 复杂文档合成任务（如，包含动态表格的预览任务）的任务信息数组；
+  如果文档需要异步合成，此字段会返回该异步任务的任务信息，后续可以通过ChannelGetTaskResultApi接口查询任务详情；
+     */
+    TaskInfos?: Array<TaskInfo>;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * ChannelCreateFlowSignReview请求参数结构体
  */
 export interface ChannelCreateFlowSignReviewRequest {
@@ -338,6 +360,10 @@ export interface FlowFileInfo {
      * 合同签署顺序类型(无序签,顺序签)，默认为false，即有序签署
      */
     Unordered?: boolean;
+    /**
+     * 签署文件中的发起方的填写控件，需要在发起的时候进行填充
+     */
+    Components?: Array<Component>;
     /**
      * 合同显示的页卡模板，说明：只支持{合同名称}, {发起方企业}, {发起方姓名}, {签署方N企业}, {签署方N姓名}，且N不能超过签署人的数量，N从1开始
      */
@@ -917,7 +943,7 @@ export interface DescribeResourceUrlsByFlowsResponse {
  */
 export interface ChannelCreateFlowGroupByFilesRequest {
     /**
-     * 每个子合同的发起所需的信息，数量限制2-100
+     * 每个子合同的发起所需的信息，数量限制2-50
      */
     FlowFileInfos: Array<FlowFileInfo>;
     /**
@@ -3398,6 +3424,23 @@ export interface ChannelUpdateSealStatusRequest {
      * @deprecated
      */
     Operator?: UserInfo;
+}
+/**
+ * ChannelCreateFlowGroupByTemplates请求参数结构体
+ */
+export interface ChannelCreateFlowGroupByTemplatesRequest {
+    /**
+     * 应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 均必填。
+     */
+    Agent: Agent;
+    /**
+     * 每个子合同的发起所需的信息，数量限制2-50（合同组暂不支持抄送功能）
+     */
+    FlowInfos: Array<FlowInfo>;
+    /**
+     * 合同组名称，长度不超过200个字符
+     */
+    FlowGroupName: string;
 }
 /**
  * 一码多扫签署二维码签署信息

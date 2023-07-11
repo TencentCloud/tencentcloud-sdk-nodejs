@@ -178,16 +178,6 @@ it("trtc.v20190722.CreateCloudRecording", async function () {
     }
 })
 
-it("trtc.v20190722.DescribeExternalTrtcMeasure", async function () {
-    try {
-       const data = await client.DescribeExternalTrtcMeasure({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("trtc.v20190722.DescribeScaleInfo", async function () {
     try {
        const data = await client.DescribeScaleInfo({})

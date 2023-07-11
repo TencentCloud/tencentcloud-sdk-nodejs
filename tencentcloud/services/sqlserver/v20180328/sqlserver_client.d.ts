@@ -399,7 +399,8 @@ export declare class Client extends AbstractClient {
      */
     RenewDBInstance(req: RenewDBInstanceRequest, cb?: (error: string, rep: RenewDBInstanceResponse) => void): Promise<RenewDBInstanceResponse>;
     /**
-     * 本接口（InquiryPriceUpgradeDBInstance）用于查询升级实例的价格。
+     * 本接口（InquiryPriceUpgradeDBInstance）用于查询包年包月实例升级变配的价格。
+按量计费实例变配后的价格参考InquiryPriceCreateDBInstances接口。
      */
     InquiryPriceUpgradeDBInstance(req: InquiryPriceUpgradeDBInstanceRequest, cb?: (error: string, rep: InquiryPriceUpgradeDBInstanceResponse) => void): Promise<InquiryPriceUpgradeDBInstanceResponse>;
     /**
@@ -407,7 +408,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeBackupFiles(req: DescribeBackupFilesRequest, cb?: (error: string, rep: DescribeBackupFilesResponse) => void): Promise<DescribeBackupFilesResponse>;
     /**
-     * 本接口（InquiryPriceRenewDBInstance）用于查询续费实例的价格。
+     * 本接口（InquiryPriceRenewDBInstance）用于查询包年包月实例的续费价格。
      */
     InquiryPriceRenewDBInstance(req: InquiryPriceRenewDBInstanceRequest, cb?: (error: string, rep: InquiryPriceRenewDBInstanceResponse) => void): Promise<InquiryPriceRenewDBInstanceResponse>;
     /**

@@ -436,7 +436,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeMediaInfos", req, cb);
     }
     /**
-     * 删除音画质重生模板。
+     * 删除视频重生模板。
      */
     async DeleteRebuildMediaTemplate(req, cb) {
         return this.request("DeleteRebuildMediaTemplate", req, cb);
@@ -613,7 +613,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateEnhanceMediaTemplate", req, cb);
     }
     /**
-     * 创建音画质重生模板。
+     * 创建视频重生模板。
      */
     async CreateRebuildMediaTemplate(req, cb) {
         return this.request("CreateRebuildMediaTemplate", req, cb);

@@ -284,7 +284,7 @@ https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/launchAp
         return this.request("CreateFlowsByTemplates", req, cb);
     }
     /**
-     * 查询用户角色
+     * 查询角色列表，支持根据类型和状态过滤角色列表
      */
     async ChannelDescribeRoles(req, cb) {
         return this.request("ChannelDescribeRoles", req, cb);
@@ -327,6 +327,12 @@ httpProfile.setEndpoint("file.test.ess.tencent.cn");
      */
     async SyncProxyOrganization(req, cb) {
         return this.request("SyncProxyOrganization", req, cb);
+    }
+    /**
+     * 接口（ChannelCreateFlowGroupByTemplates）用于通过多模板创建合同组签署流程。
+     */
+    async ChannelCreateFlowGroupByTemplates(req, cb) {
+        return this.request("ChannelCreateFlowGroupByTemplates", req, cb);
     }
     /**
      * 此接口（SyncProxyOrganizationOperators）用于同步 第三方平台子客企业经办人列表，主要是同步经办人的离职状态。子客Web控制台的组织架构管理，是依赖于第三方应用平台的，无法针对员工做新增/更新/离职等操作。
