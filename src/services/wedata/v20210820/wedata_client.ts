@@ -47,12 +47,14 @@ import {
   SourceObject,
   DescribeRulesResponse,
   RecordsSpeed,
+  ColumnLineageInfo,
   CreateWorkflowRequest,
   SubmitTaskRequest,
   RuleExecResultDetail,
   DataSourceInfoPage,
   DescribeRuleGroupExecResultsByPageRequest,
   Label,
+  DescribeTableLineageRequest,
   TaskExtInfo,
   BatchResumeIntegrationTasksResponse,
   DescribeRuleExecResultsByPageResponse,
@@ -100,10 +102,12 @@ import {
   BatchDeleteIntegrationTasksResponse,
   SearchConditionInstanceNew,
   BatchRerunIntegrationTaskInstancesRequest,
+  TableLineageInfo,
   RuleTemplateHistoryPage,
   DescribeDataObjectsRequest,
   SearchCondition,
   Rule,
+  DescribeTableLineageResponse,
   ModifyRuleGroupSubscriptionRequest,
   DescribeDataSourceListResponse,
   ModifyIntegrationTaskRequest,
@@ -126,6 +130,7 @@ import {
   ResumeIntegrationTaskResponse,
   ModifyTaskNameResponse,
   DescribeTaskReportDetailListResponse,
+  LineageParamRecord,
   BatchResult,
   FreezeTasksResponse,
   DescribeIntegrationStatisticsInstanceTrendResponse,
@@ -161,6 +166,7 @@ import {
   RunTaskRequest,
   DescribeDependTasksNewRequest,
   CreateOfflineTaskResponse,
+  DescribeColumnLineageRequest,
   CreateTaskAlarmRegularRequest,
   ModifyRuleRequest,
   BatchReturn,
@@ -173,6 +179,7 @@ import {
   DescribeIntegrationStatisticsTaskStatusRequest,
   BatchDeleteTasksNewResponse,
   IntegrationNodeMapping,
+  ColumnAggregationLineage,
   ModifyRuleGroupSubscriptionResponse,
   SuspendIntegrationTaskRequest,
   CreateHiveTableByDDLResponse,
@@ -241,6 +248,7 @@ import {
   DescribeFolderListRequest,
   DeleteTaskAlarmRegularResponse,
   DescribeRuleGroupSubscriptionRequest,
+  SimpleColumnInfo,
   DescribeInLongAgentListResponse,
   Folder,
   CreateTaskResponse,
@@ -318,6 +326,7 @@ import {
   DeleteInLongAgentResponse,
   InstanceLogList,
   ModifyMonitorStatusRequest,
+  DescribeColumnLineageResponse,
   DeleteFolderRequest,
   DescribeIntegrationTaskRequest,
   DescribeRulesByPageRequest,
@@ -1988,6 +1997,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 列出表血缘信息
+   */
+  async DescribeTableLineage(
+    req: DescribeTableLineageRequest,
+    cb?: (error: string, rep: DescribeTableLineageResponse) => void
+  ): Promise<DescribeTableLineageResponse> {
+    return this.request("DescribeTableLineage", req, cb)
+  }
+
+  /**
    * 查询规则执行导出结果
    */
   async DescribeRuleExecExportResult(
@@ -2065,6 +2084,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyMonitorStatusResponse) => void
   ): Promise<ModifyMonitorStatusResponse> {
     return this.request("ModifyMonitorStatus", req, cb)
+  }
+
+  /**
+   * 列出字段血缘信息
+   */
+  async DescribeColumnLineage(
+    req: DescribeColumnLineageRequest,
+    cb?: (error: string, rep: DescribeColumnLineageResponse) => void
+  ): Promise<DescribeColumnLineageResponse> {
+    return this.request("DescribeColumnLineage", req, cb)
   }
 
   /**

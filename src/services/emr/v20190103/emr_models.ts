@@ -1931,23 +1931,23 @@ export interface InquiryPriceRenewInstanceResponse {
    * 原价，单位为元。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  OriginalCost: number
+  OriginalCost?: number
   /**
    * 折扣价，单位为元。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DiscountCost: number
+  DiscountCost?: number
   /**
    * 实例续费的时间单位。取值范围：
 <li>m：表示月份。</li>
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TimeUnit: string
+  TimeUnit?: string
   /**
    * 实例续费的时长。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TimeSpan: number
+  TimeSpan?: number
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3900,7 +3900,7 @@ export interface DescribeUsersForUserManagerResponse {
  */
 export interface InquiryPriceRenewInstanceRequest {
   /**
-   * 实例续费的时长。需要结合TimeUnit一起使用。1表示续费1一个月
+   * 实例续费的时长。需要结合TimeUnit一起使用。1表示续费一个月
    */
   TimeSpan: number
   /**

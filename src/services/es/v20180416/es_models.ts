@@ -362,6 +362,20 @@ export interface DeleteLogstashPipelinesResponse {
 }
 
 /**
+ * 实例标签信息
+ */
+export interface TagInfo {
+  /**
+   * 标签键
+   */
+  TagKey: string
+  /**
+   * 标签值
+   */
+  TagValue: string
+}
+
+/**
  * OperationDetail使用此结构的数组描述新旧配置
  */
 export interface KeyValue {
@@ -2420,6 +2434,20 @@ export interface GetRequestTargetNodeTypesRequest {
 }
 
 /**
+ * ModifyEsVipSecurityGroup请求参数结构体
+ */
+export interface ModifyEsVipSecurityGroupRequest {
+  /**
+   * es集群的实例id
+   */
+  InstanceId: string
+  /**
+   * 安全组id列表
+   */
+  SecurityGroupIds?: Array<string>
+}
+
+/**
  * DescribeLogstashInstances请求参数结构体
  */
 export interface DescribeLogstashInstancesRequest {
@@ -2890,17 +2918,13 @@ export interface NodeView {
 }
 
 /**
- * 实例标签信息
+ * ModifyEsVipSecurityGroup返回参数结构体
  */
-export interface TagInfo {
+export interface ModifyEsVipSecurityGroupResponse {
   /**
-   * 标签键
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  TagKey: string
-  /**
-   * 标签值
-   */
-  TagValue: string
+  RequestId?: string
 }
 
 /**

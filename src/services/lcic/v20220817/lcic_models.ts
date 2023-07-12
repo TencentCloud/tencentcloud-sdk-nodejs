@@ -1333,59 +1333,63 @@ export interface DescribeDocumentResponse {
   /**
    * 文档Id
    */
-  DocumentId: string
+  DocumentId?: string
   /**
    * 文档原址url
    */
-  DocumentUrl: string
+  DocumentUrl?: string
   /**
    * 文档名称
    */
-  DocumentName: string
+  DocumentName?: string
   /**
    * 文档所有者UserId
    */
-  Owner: string
+  Owner?: string
   /**
    * 应用Id
    */
-  SdkAppId: number
+  SdkAppId?: number
   /**
    * 文档权限
    */
-  Permission: number
+  Permission?: number
   /**
    * 转码结果，无需转码为空，转码成功为结果url，转码失败为错误码
    */
-  TranscodeResult: string
+  TranscodeResult?: string
   /**
    * 转码类型
    */
-  TranscodeType: number
+  TranscodeType?: number
   /**
    * 转码进度， 0 - 100 表示（0% - 100%）
    */
-  TranscodeProgress: number
+  TranscodeProgress?: number
   /**
    * 转码状态，0为无需转码，1为正在转码，2为转码失败，3为转码成功
    */
-  TranscodeState: number
+  TranscodeState?: number
   /**
    * 转码失败后的错误信息
    */
-  TranscodeInfo: string
+  TranscodeInfo?: string
   /**
    * 文档类型
    */
-  DocumentType: string
+  DocumentType?: string
   /**
    * 文档大小，单位：字节
    */
-  DocumentSize: number
+  DocumentSize?: number
   /**
    * 更新的UNIX时间戳
    */
-  UpdateTime: number
+  UpdateTime?: number
+  /**
+   * 课件页数
+   */
+  Pages?: number
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

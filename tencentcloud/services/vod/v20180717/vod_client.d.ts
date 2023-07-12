@@ -90,7 +90,7 @@ export declare class Client extends AbstractClient {
      */
     CreateQualityInspectTemplate(req: CreateQualityInspectTemplateRequest, cb?: (error: string, rep: CreateQualityInspectTemplateResponse) => void): Promise<CreateQualityInspectTemplateResponse>;
     /**
-     * 修改音画质重生模板。
+     * 修改视频重生模板。
      */
     ModifyRebuildMediaTemplate(req: ModifyRebuildMediaTemplateRequest, cb?: (error: string, rep: ModifyRebuildMediaTemplateResponse) => void): Promise<ModifyRebuildMediaTemplateResponse>;
     /**
@@ -281,7 +281,7 @@ export declare class Client extends AbstractClient {
      */
     CreateContentReviewTemplate(req: CreateContentReviewTemplateRequest, cb?: (error: string, rep: CreateContentReviewTemplateResponse) => void): Promise<CreateContentReviewTemplateResponse>;
     /**
-     * 发起音画质重生
+     * 发起视频重生
      */
     RebuildMedia(req: RebuildMediaRequest, cb?: (error: string, rep: RebuildMediaResponse) => void): Promise<RebuildMediaResponse>;
     /**
@@ -697,7 +697,7 @@ export declare class Client extends AbstractClient {
      */
     SetDrmKeyProviderInfo(req: SetDrmKeyProviderInfoRequest, cb?: (error: string, rep: SetDrmKeyProviderInfoResponse) => void): Promise<SetDrmKeyProviderInfoResponse>;
     /**
-     * 使用模板发起音画质重生。
+     * 使用模板发起视频重生。
      */
     RebuildMediaByTemplate(req: RebuildMediaByTemplateRequest, cb?: (error: string, rep: RebuildMediaByTemplateResponse) => void): Promise<RebuildMediaByTemplateResponse>;
     /**
@@ -906,7 +906,7 @@ export declare class Client extends AbstractClient {
      */
     DeleteEnhanceMediaTemplate(req: DeleteEnhanceMediaTemplateRequest, cb?: (error: string, rep: DeleteEnhanceMediaTemplateResponse) => void): Promise<DeleteEnhanceMediaTemplateResponse>;
     /**
-     * 获取音画质重生模板列表。
+     * 获取视频重生模板列表。
      */
     DescribeRebuildMediaTemplates(req: DescribeRebuildMediaTemplatesRequest, cb?: (error: string, rep: DescribeRebuildMediaTemplatesResponse) => void): Promise<DescribeRebuildMediaTemplatesResponse>;
     /**

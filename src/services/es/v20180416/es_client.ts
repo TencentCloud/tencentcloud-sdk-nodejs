@@ -30,6 +30,7 @@ import {
   CreateInstanceResponse,
   DescribeInstanceLogsRequest,
   DeleteLogstashPipelinesResponse,
+  TagInfo,
   KeyValue,
   UpdateLogstashPipelineDescResponse,
   DescribeInstancesResponse,
@@ -95,6 +96,7 @@ import {
   DescribeLogstashPipelinesRequest,
   RestartNodesRequest,
   GetRequestTargetNodeTypesRequest,
+  ModifyEsVipSecurityGroupRequest,
   DescribeLogstashInstancesRequest,
   MasterNodeInfo,
   DeleteInstanceRequest,
@@ -114,7 +116,7 @@ import {
   BackingIndexMetaField,
   UpdateLogstashPipelineDescRequest,
   NodeView,
-  TagInfo,
+  ModifyEsVipSecurityGroupResponse,
   UpdateInstanceRequest,
   DescribeLogstashInstanceLogsRequest,
   RestartInstanceRequest,
@@ -343,13 +345,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 用于下发并且部署管道
+   * 修改绑定VIP的安全组，传安全组id列表
    */
-  async SaveAndDeployLogstashPipeline(
-    req: SaveAndDeployLogstashPipelineRequest,
-    cb?: (error: string, rep: SaveAndDeployLogstashPipelineResponse) => void
-  ): Promise<SaveAndDeployLogstashPipelineResponse> {
-    return this.request("SaveAndDeployLogstashPipeline", req, cb)
+  async ModifyEsVipSecurityGroup(
+    req: ModifyEsVipSecurityGroupRequest,
+    cb?: (error: string, rep: ModifyEsVipSecurityGroupResponse) => void
+  ): Promise<ModifyEsVipSecurityGroupResponse> {
+    return this.request("ModifyEsVipSecurityGroup", req, cb)
   }
 
   /**
@@ -490,6 +492,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeLogstashInstanceLogsResponse) => void
   ): Promise<DescribeLogstashInstanceLogsResponse> {
     return this.request("DescribeLogstashInstanceLogs", req, cb)
+  }
+
+  /**
+   * 用于下发并且部署管道
+   */
+  async SaveAndDeployLogstashPipeline(
+    req: SaveAndDeployLogstashPipelineRequest,
+    cb?: (error: string, rep: SaveAndDeployLogstashPipelineResponse) => void
+  ): Promise<SaveAndDeployLogstashPipelineResponse> {
+    return this.request("SaveAndDeployLogstashPipeline", req, cb)
   }
 
   /**

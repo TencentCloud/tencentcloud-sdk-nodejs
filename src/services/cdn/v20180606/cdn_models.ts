@@ -2724,75 +2724,75 @@ export interface HttpsPackage {
   /**
    * HTTPS请求包 Id
    */
-  Id: number
+  Id?: number
   /**
    * HTTPS请求包类型
    */
-  Type: string
+  Type?: string
   /**
    * HTTPS请求包大小（单位为：次）
    */
-  Size: number
+  Size?: number
   /**
    * 已消耗HTTPS请求包（单位为：次）
    */
-  SizeUsed: number
+  SizeUsed?: number
   /**
    * HTTPS请求包状态
 enabled：已启用
 expired：已过期
 disabled：未启用
    */
-  Status: string
+  Status?: string
   /**
    * HTTPS请求包发放时间
    */
-  CreateTime: string
+  CreateTime?: string
   /**
    * HTTPS请求包生效时间
    */
-  EnableTime: string
+  EnableTime?: string
   /**
    * HTTPS请求包过期时间
    */
-  ExpireTime: string
+  ExpireTime?: string
   /**
    * HTTPS请求包来源
    */
-  Channel: string
+  Channel?: string
   /**
    * HTTPS请求包生命周期月数
    */
-  LifeTimeMonth: number
+  LifeTimeMonth?: number
   /**
    * HTTPS请求包是否支持退费
    */
-  RefundAvailable: boolean
+  RefundAvailable?: boolean
   /**
    * HTTPS请求包类型id
    */
-  ConfigId: number
+  ConfigId?: number
   /**
    * HTTPS请求包实际生效时间
    */
-  TrueEnableTime: string
+  TrueEnableTime?: string
   /**
    * HTTPS请求包实际过期时间
    */
-  TrueExpireTime: string
+  TrueExpireTime?: string
   /**
    * HTTPS请求包生效区域 
 global：全球
    */
-  Area: string
+  Area?: string
   /**
    * HTTPS请求包是否续订
    */
-  ContractExtension: boolean
+  ContractExtension?: boolean
   /**
    * HTTPS请求包是否支持续订
    */
-  ExtensionAvailable: boolean
+  ExtensionAvailable?: boolean
   /**
    * HTTPS请求包当前续订模式
 0：未续订
@@ -2800,7 +2800,7 @@ global：全球
 2：用完续订
 3：到期或用完续订
    */
-  ExtensionMode: number
+  ExtensionMode?: number
   /**
    * HTTPS请求包是否自动续订
 注意：此字段可能返回 null，表示取不到有效值。
@@ -3254,66 +3254,66 @@ export interface TrafficPackage {
   /**
    * 流量包 Id
    */
-  Id: number
+  Id?: number
   /**
    * 流量包类型
    */
-  Type: string
+  Type?: string
   /**
    * 流量包大小（单位为 Byte）
    */
-  Bytes: number
+  Bytes?: number
   /**
    * 已消耗流量（单位为 Byte）
    */
-  BytesUsed: number
+  BytesUsed?: number
   /**
    * 流量包状态
 enabled：已启用
 expired：已过期
 disabled：未启用
    */
-  Status: string
+  Status?: string
   /**
    * 流量包发放时间
    */
-  CreateTime: string
+  CreateTime?: string
   /**
    * 流量包生效时间
    */
-  EnableTime: string
+  EnableTime?: string
   /**
    * 流量包过期时间
    */
-  ExpireTime: string
+  ExpireTime?: string
   /**
    * 流量包是否续订
    */
-  ContractExtension: boolean
+  ContractExtension?: boolean
   /**
    * 流量包是否自动续订
    */
-  AutoExtension: boolean
+  AutoExtension?: boolean
   /**
    * 流量包来源
    */
-  Channel: string
+  Channel?: string
   /**
    * 流量包生效区域，mainland或overseas
    */
-  Area: string
+  Area?: string
   /**
    * 流量包生命周期月数
    */
-  LifeTimeMonth: number
+  LifeTimeMonth?: number
   /**
    * 流量包是否支持续订
    */
-  ExtensionAvailable: boolean
+  ExtensionAvailable?: boolean
   /**
    * 流量包是否支持退费
    */
-  RefundAvailable: boolean
+  RefundAvailable?: boolean
   /**
    * 流量包生效区域
 0：中国大陆
@@ -3327,27 +3327,27 @@ disabled：未启用
 8：非洲
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Region: number
+  Region?: number
   /**
    * 流量包类型id
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ConfigId: number
+  ConfigId?: number
   /**
    * 流量包当前续订模式，0 未续订、1到期续订、2用完续订、3到期或用完续订
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ExtensionMode: number
+  ExtensionMode?: number
   /**
    * 流量包实际生效时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TrueEnableTime: string
+  TrueEnableTime?: string
   /**
    * 流量包实际过期时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TrueExpireTime: string
+  TrueExpireTime?: string
 }
 
 /**
@@ -7035,23 +7035,23 @@ export interface DescribeTrafficPackagesResponse {
   /**
    * 流量包总个数
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 流量包详情
    */
-  TrafficPackages: Array<TrafficPackage>
+  TrafficPackages?: Array<TrafficPackage>
   /**
    * 即将过期的流量包个数（7天内）
    */
-  ExpiringCount: number
+  ExpiringCount?: number
   /**
    * 有效流量包个数
    */
-  EnabledCount: number
+  EnabledCount?: number
   /**
    * 付费流量包个数
    */
-  PaidCount: number
+  PaidCount?: number
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

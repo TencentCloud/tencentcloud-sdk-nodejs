@@ -886,6 +886,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("SuspendIntegrationTask", req, cb);
     }
     /**
+     * 列出表血缘信息
+     */
+    async DescribeTableLineage(req, cb) {
+        return this.request("DescribeTableLineage", req, cb);
+    }
+    /**
      * 查询规则执行导出结果
      */
     async DescribeRuleExecExportResult(req, cb) {
@@ -932,6 +938,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ModifyMonitorStatus(req, cb) {
         return this.request("ModifyMonitorStatus", req, cb);
+    }
+    /**
+     * 列出字段血缘信息
+     */
+    async DescribeColumnLineage(req, cb) {
+        return this.request("DescribeColumnLineage", req, cb);
     }
     /**
      * 数据质量概览页面趋势变化接口

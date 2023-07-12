@@ -1388,6 +1388,16 @@ it("wedata.v20210820.SuspendIntegrationTask", async function () {
     }
 })
 
+it("wedata.v20210820.DescribeTableLineage", async function () {
+    try {
+       const data = await client.DescribeTableLineage({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("wedata.v20210820.DescribeRuleExecExportResult", async function () {
     try {
        const data = await client.DescribeRuleExecExportResult({})
@@ -1461,6 +1471,16 @@ it("wedata.v20210820.DescribeIntegrationTasks", async function () {
 it("wedata.v20210820.ModifyMonitorStatus", async function () {
     try {
        const data = await client.ModifyMonitorStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("wedata.v20210820.DescribeColumnLineage", async function () {
+    try {
+       const data = await client.DescribeColumnLineage({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

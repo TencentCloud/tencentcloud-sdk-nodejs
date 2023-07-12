@@ -326,11 +326,11 @@ export interface DescribeCfsFileSystemsResponse {
   /**
    * 文件系统信息
    */
-  FileSystems: Array<FileSystemInfo>
+  FileSystems?: Array<FileSystemInfo>
   /**
    * 文件系统总数
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -767,15 +767,15 @@ export interface UpdateCfsPGroupResponse {
   /**
    * 权限组ID
    */
-  PGroupId: string
+  PGroupId?: string
   /**
    * 权限组名称
    */
-  Name: string
+  Name?: string
   /**
    * 描述信息
    */
-  DescInfo: string
+  DescInfo?: string
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1548,6 +1548,18 @@ export interface CreateCfsFileSystemRequest {
    * 文件系统容量，turbo系列必填，单位为GiB。 turbo标准型单位GB，起售40TiB，即40960 GiB；扩容步长20TiB，即20480 GiB。turbo性能型起售20TiB，即20480 GiB；扩容步长10TiB，10240 GiB。
    */
   Capacity?: number
+  /**
+   * 文件系统快照ID
+   */
+  SnapshotId?: string
+  /**
+   * 定期快照策略ID
+   */
+  AutoSnapshotPolicyId?: string
+  /**
+   * 是否开启默认扩容，仅Turbo类型文件存储支持
+   */
+  EnableAutoScaleUp?: boolean
 }
 
 /**
@@ -1860,60 +1872,65 @@ export interface SnapshotInfo {
   /**
    * 创建快照时间
    */
-  CreationTime: string
+  CreationTime?: string
   /**
    * 快照名称
    */
-  SnapshotName: string
+  SnapshotName?: string
   /**
    * 快照ID
    */
-  SnapshotId: string
+  SnapshotId?: string
   /**
    * 快照状态
    */
-  Status: string
+  Status?: string
   /**
    * 地域名称
    */
-  RegionName: string
+  RegionName?: string
   /**
    * 文件系统ID
    */
-  FileSystemId: string
+  FileSystemId?: string
   /**
    * 快照大小
    */
-  Size: number
+  Size?: number
   /**
    * 保留时长天
    */
-  AliveDay: number
+  AliveDay?: number
   /**
    * 快照进度
    */
-  Percent: number
+  Percent?: number
   /**
    * 帐号ID
    */
-  AppId: number
+  AppId?: number
   /**
    * 快照删除时间
    */
-  DeleteTime: string
+  DeleteTime?: string
   /**
    * 文件系统名称
    */
-  FsName: string
+  FsName?: string
   /**
    * 快照标签
    */
-  Tags: Array<TagInfo>
+  Tags?: Array<TagInfo>
   /**
    * 快照类型
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SnapshotType?: string
+  /**
+   * 实际快照时间，这里主要是为了标识跨地域复制快照的时间快照时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SnapshotTime?: string
 }
 
 /**
@@ -2057,7 +2074,7 @@ export interface UpdateCfsPGroupRequest {
    */
   Name?: string
   /**
-   * 权限组描述信息，1-255个字符
+   * 权限组描述信息，1-255个字符。 Name和Descinfo不能同时为空
    */
   DescInfo?: string
 }

@@ -2125,7 +2125,7 @@ export interface KongUpstreamInfo {
    */
   SourceID?: string
   /**
-   * 名字空间
+   * 命名空间
    */
   Namespace?: string
   /**

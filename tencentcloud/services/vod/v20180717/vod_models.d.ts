@@ -1945,7 +1945,7 @@ export interface DescribeClientUploadAccelerationUsageDataResponse {
  */
 export interface ModifyRebuildMediaTemplateRequest {
     /**
-     * 音画质重生模板号。
+     * 视频重生模板号。
      */
     Definition: number;
     /**
@@ -1953,19 +1953,19 @@ export interface ModifyRebuildMediaTemplateRequest {
      */
     SubAppId?: string;
     /**
-     * 音画质重生模板名称。
+     * 视频重生模板名称。
      */
     Name?: string;
     /**
-     * 音画质重生模板描述。
+     * 视频重生模板描述。
      */
     Comment?: string;
     /**
-     * 音画质重生视频控制信息。
+     * 视频重生视频控制信息。
      */
     RebuildVideoInfo?: RebuildVideoInfo;
     /**
-     * 音画质重生音频控制信息。
+     * 视频重生音频控制信息。
      */
     RebuildAudioInfo?: RebuildAudioInfo;
     /**
@@ -4533,7 +4533,7 @@ export interface AiSampleFaceOperation {
      */
     FaceIds?: Array<string>;
     /**
-     * 人脸图片 [Base64](https://tools.ietf.org/html/rfc4648) 编码后的字符串集合。
+     * 人脸图片 [Base64](https://tools.ietf.org/html/rfc4648) 编码后的字符串集合，仅支持 jpeg、png 图片格式。
   <li>当 Type为add 或 reset 时，该字段必填；</li>
   <li>数组长度限制：5 张图片。</li>
   注意：图片必须是单人像正面人脸较清晰的照片，像素不低于 200*200。
@@ -7023,7 +7023,7 @@ export interface AiAnalysisTaskHighlightOutput {
  */
 export interface DescribeRebuildMediaTemplatesRequest {
     /**
-     * 音画质重生模板列表。
+     * 视频重生模板列表。
      */
     Definitions?: Array<number>;
     /**
@@ -7790,7 +7790,7 @@ export interface DescribeReviewTemplatesRequest {
      */
     SubAppId?: number;
     /**
-     * 审核模版唯一标识过滤条件，数组长度限制：100。
+     * 审核模板唯一标识过滤条件，数组长度限制：100。
      */
     Definitions?: Array<number>;
     /**
@@ -9226,7 +9226,7 @@ export interface RebuildMediaByTemplateRequest {
      */
     FileId: string;
     /**
-     * 音画质重生模板 ID。
+     * 视频重生模板 ID。
      */
     Definition: number;
     /**
@@ -9242,7 +9242,7 @@ export interface RebuildMediaByTemplateRequest {
      */
     EndTimeOffset?: number;
     /**
-     * 音画质重生后的文件配置。
+     * 视频重生后的文件配置。
      */
     OutputConfig?: RebuildMediaOutputConfig;
     /**
@@ -14339,7 +14339,7 @@ export interface ModifyEnhanceMediaTemplateRequest {
  */
 export interface RebuildMediaResponse {
     /**
-     * 音画质重生的任务 ID，可以通过该 ID 查询音画质重生任务的状态。
+     * 视频重生的任务 ID，可以通过该 ID 查询视频重生任务的状态。
      */
     TaskId?: string;
     /**
@@ -15299,7 +15299,7 @@ export interface AiReviewTerrorismTaskInput {
  */
 export interface RebuildMediaByTemplateResponse {
     /**
-     * 音画质重生的任务 ID，可以通过该 ID 查询音画质重生任务的状态。
+     * 视频重生的任务 ID，可以通过该 ID 查询视频重生任务的状态。
      */
     TaskId?: string;
     /**
@@ -17188,7 +17188,7 @@ export interface DescribeRebuildMediaTemplatesResponse {
      */
     TotalCount?: number;
     /**
-     * 音画质重生模板详情列表。
+     * 视频重生模板详情列表。
      */
     RebuildMediaTemplateSet?: Array<RebuildMediaTemplate>;
     /**

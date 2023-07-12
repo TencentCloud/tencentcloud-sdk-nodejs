@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { RestartLogstashInstanceRequest, DescribeInstanceOperationsRequest, StartLogstashPipelinesRequest, DescribeLogstashInstanceLogsResponse, CreateInstanceResponse, DescribeInstanceLogsRequest, DeleteLogstashPipelinesResponse, UpdateLogstashPipelineDescResponse, DescribeInstancesResponse, DescribeInstanceLogsResponse, DiagnoseInstanceRequest, UpdateDiagnoseSettingsRequest, DescribeInstanceOperationsResponse, UpdateRequestTargetNodeTypesResponse, DeleteLogstashInstanceResponse, GetRequestTargetNodeTypesResponse, DescribeIndexMetaResponse, DiagnoseInstanceResponse, UpgradeLicenseResponse, UpdateLogstashInstanceRequest, UpdateRequestTargetNodeTypesRequest, DescribeLogstashInstancesResponse, DeleteInstanceResponse, DescribeLogstashInstanceOperationsResponse, CreateIndexRequest, UpdatePluginsRequest, UpgradeLicenseRequest, UpdateJdkResponse, UpdateInstanceResponse, DeleteIndexRequest, DescribeViewsRequest, DescribeIndexListResponse, StartLogstashPipelinesResponse, DescribeLogstashInstanceOperationsRequest, CreateLogstashInstanceResponse, SaveAndDeployLogstashPipelineRequest, CreateIndexResponse, DeleteLogstashPipelinesRequest, RestartKibanaRequest, DescribeIndexListRequest, UpdateDictionariesRequest, SaveAndDeployLogstashPipelineResponse, DescribeLogstashPipelinesResponse, CreateInstanceRequest, CreateLogstashInstanceRequest, UpdateDictionariesResponse, DeleteIndexResponse, UpdatePluginsResponse, DescribeInstancesRequest, DescribeLogstashPipelinesRequest, RestartNodesRequest, GetRequestTargetNodeTypesRequest, DescribeLogstashInstancesRequest, DeleteInstanceRequest, UpgradeInstanceResponse, DescribeIndexMetaRequest, RestartKibanaResponse, UpdateIndexRequest, UpdateIndexResponse, UpdateJdkRequest, UpdateLogstashInstanceResponse, StopLogstashPipelinesRequest, RestartInstanceResponse, UpdateLogstashPipelineDescRequest, UpdateInstanceRequest, DescribeLogstashInstanceLogsRequest, RestartInstanceRequest, StopLogstashPipelinesResponse, UpdateDiagnoseSettingsResponse, RestartNodesResponse, DeleteLogstashInstanceRequest, UpgradeInstanceRequest, DescribeViewsResponse, RestartLogstashInstanceResponse } from "./es_models";
+import { RestartLogstashInstanceRequest, DescribeInstanceOperationsRequest, StartLogstashPipelinesRequest, DescribeLogstashInstanceLogsResponse, CreateInstanceResponse, DescribeInstanceLogsRequest, DeleteLogstashPipelinesResponse, UpdateLogstashPipelineDescResponse, DescribeInstancesResponse, DescribeInstanceLogsResponse, DiagnoseInstanceRequest, UpdateDiagnoseSettingsRequest, DescribeInstanceOperationsResponse, UpdateRequestTargetNodeTypesResponse, DeleteLogstashInstanceResponse, GetRequestTargetNodeTypesResponse, DescribeIndexMetaResponse, DiagnoseInstanceResponse, UpgradeLicenseResponse, UpdateLogstashInstanceRequest, UpdateRequestTargetNodeTypesRequest, DescribeLogstashInstancesResponse, DeleteInstanceResponse, DescribeLogstashInstanceOperationsResponse, CreateIndexRequest, UpdatePluginsRequest, UpgradeLicenseRequest, UpdateJdkResponse, UpdateInstanceResponse, DeleteIndexRequest, DescribeViewsRequest, DescribeIndexListResponse, StartLogstashPipelinesResponse, DescribeLogstashInstanceOperationsRequest, CreateLogstashInstanceResponse, SaveAndDeployLogstashPipelineRequest, CreateIndexResponse, DeleteLogstashPipelinesRequest, RestartKibanaRequest, DescribeIndexListRequest, UpdateDictionariesRequest, SaveAndDeployLogstashPipelineResponse, DescribeLogstashPipelinesResponse, CreateInstanceRequest, CreateLogstashInstanceRequest, UpdateDictionariesResponse, DeleteIndexResponse, UpdatePluginsResponse, DescribeInstancesRequest, DescribeLogstashPipelinesRequest, RestartNodesRequest, GetRequestTargetNodeTypesRequest, ModifyEsVipSecurityGroupRequest, DescribeLogstashInstancesRequest, DeleteInstanceRequest, UpgradeInstanceResponse, DescribeIndexMetaRequest, RestartKibanaResponse, UpdateIndexRequest, UpdateIndexResponse, UpdateJdkRequest, UpdateLogstashInstanceResponse, StopLogstashPipelinesRequest, RestartInstanceResponse, UpdateLogstashPipelineDescRequest, ModifyEsVipSecurityGroupResponse, UpdateInstanceRequest, DescribeLogstashInstanceLogsRequest, RestartInstanceRequest, StopLogstashPipelinesResponse, UpdateDiagnoseSettingsResponse, RestartNodesResponse, DeleteLogstashInstanceRequest, UpgradeInstanceRequest, DescribeViewsResponse, RestartLogstashInstanceResponse } from "./es_models";
 /**
  * es client
  * @class
@@ -96,9 +96,9 @@ export declare class Client extends AbstractClient {
      */
     RestartKibana(req: RestartKibanaRequest, cb?: (error: string, rep: RestartKibanaResponse) => void): Promise<RestartKibanaResponse>;
     /**
-     * 用于下发并且部署管道
+     * 修改绑定VIP的安全组，传安全组id列表
      */
-    SaveAndDeployLogstashPipeline(req: SaveAndDeployLogstashPipelineRequest, cb?: (error: string, rep: SaveAndDeployLogstashPipelineResponse) => void): Promise<SaveAndDeployLogstashPipelineResponse>;
+    ModifyEsVipSecurityGroup(req: ModifyEsVipSecurityGroupRequest, cb?: (error: string, rep: ModifyEsVipSecurityGroupResponse) => void): Promise<ModifyEsVipSecurityGroupResponse>;
     /**
      * 查询实例指定条件下的操作记录
      */
@@ -155,6 +155,10 @@ export declare class Client extends AbstractClient {
      * 查询用户该地域下符合条件的Logstash实例的日志
      */
     DescribeLogstashInstanceLogs(req: DescribeLogstashInstanceLogsRequest, cb?: (error: string, rep: DescribeLogstashInstanceLogsResponse) => void): Promise<DescribeLogstashInstanceLogsResponse>;
+    /**
+     * 用于下发并且部署管道
+     */
+    SaveAndDeployLogstashPipeline(req: SaveAndDeployLogstashPipelineRequest, cb?: (error: string, rep: SaveAndDeployLogstashPipelineResponse) => void): Promise<SaveAndDeployLogstashPipelineResponse>;
     /**
      * 更新ES集群词典
      */

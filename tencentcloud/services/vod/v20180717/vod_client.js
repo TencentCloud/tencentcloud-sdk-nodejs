@@ -136,7 +136,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateQualityInspectTemplate", req, cb);
     }
     /**
-     * 修改音画质重生模板。
+     * 修改视频重生模板。
      */
     async ModifyRebuildMediaTemplate(req, cb) {
         return this.request("ModifyRebuildMediaTemplate", req, cb);
@@ -399,7 +399,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateContentReviewTemplate", req, cb);
     }
     /**
-     * 发起音画质重生
+     * 发起视频重生
      */
     async RebuildMedia(req, cb) {
         return this.request("RebuildMedia", req, cb);
@@ -961,7 +961,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("SetDrmKeyProviderInfo", req, cb);
     }
     /**
-     * 使用模板发起音画质重生。
+     * 使用模板发起视频重生。
      */
     async RebuildMediaByTemplate(req, cb) {
         return this.request("RebuildMediaByTemplate", req, cb);
@@ -1238,7 +1238,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteEnhanceMediaTemplate", req, cb);
     }
     /**
-     * 获取音画质重生模板列表。
+     * 获取视频重生模板列表。
      */
     async DescribeRebuildMediaTemplates(req, cb) {
         return this.request("DescribeRebuildMediaTemplates", req, cb);

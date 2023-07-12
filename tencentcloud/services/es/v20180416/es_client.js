@@ -154,10 +154,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("RestartKibana", req, cb);
     }
     /**
-     * 用于下发并且部署管道
+     * 修改绑定VIP的安全组，传安全组id列表
      */
-    async SaveAndDeployLogstashPipeline(req, cb) {
-        return this.request("SaveAndDeployLogstashPipeline", req, cb);
+    async ModifyEsVipSecurityGroup(req, cb) {
+        return this.request("ModifyEsVipSecurityGroup", req, cb);
     }
     /**
      * 查询实例指定条件下的操作记录
@@ -242,6 +242,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeLogstashInstanceLogs(req, cb) {
         return this.request("DescribeLogstashInstanceLogs", req, cb);
+    }
+    /**
+     * 用于下发并且部署管道
+     */
+    async SaveAndDeployLogstashPipeline(req, cb) {
+        return this.request("SaveAndDeployLogstashPipeline", req, cb);
     }
     /**
      * 更新ES集群词典

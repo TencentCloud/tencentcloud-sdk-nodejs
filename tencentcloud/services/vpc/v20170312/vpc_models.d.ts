@@ -2649,7 +2649,7 @@ export interface AssignPrivateIpAddressesResponse {
  */
 export interface DescribeSecurityGroupsRequest {
     /**
-     * 安全组实例ID，例如：sg-33ocnj9n，可通过DescribeSecurityGroups获取。每次请求的实例的上限为100。参数不支持同时指定SecurityGroupIds和Filters。
+     * 安全组实例ID，例如：sg-33ocnj9n。每次请求的实例的上限为100。参数不支持同时指定SecurityGroupIds和Filters。
      */
     SecurityGroupIds?: Array<string>;
     /**
@@ -2669,6 +2669,14 @@ export interface DescribeSecurityGroupsRequest {
      * 返回数量，默认为20，最大值为100。
      */
     Limit?: string;
+    /**
+     * 排序字段。支持：`CreatedTime` `UpdateTime`。注意：该字段没有默认值。
+     */
+    OrderField?: string;
+    /**
+     * 排序方法。升序：`ASC`，倒序：`DESC`。默认值：`ASC`
+     */
+    OrderDirection?: string;
 }
 /**
  * RefreshDirectConnectGatewayRouteToNatGateway请求参数结构体
@@ -12003,11 +12011,11 @@ export interface DescribeSecurityGroupsResponse {
      * 安全组对象。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SecurityGroupSet: Array<SecurityGroup>;
+    SecurityGroupSet?: Array<SecurityGroup>;
     /**
      * 符合条件的实例数量。
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */

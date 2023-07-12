@@ -687,6 +687,126 @@ export interface RecordsSpeed {
     Values: Array<SpeedValue>;
 }
 /**
+ * 血缘字段信息
+ */
+export interface ColumnLineageInfo {
+    /**
+     * 血缘id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Id: string;
+    /**
+     * 由中心节点出发的路径信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PrefixPath: string;
+    /**
+     * 数据源ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DatasourceId: string;
+    /**
+     * 表ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TableId: string;
+    /**
+     * 字段名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ColumnName?: string;
+    /**
+     * 字段中文名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ColumnNameCn?: string;
+    /**
+     * 字段类型
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ColumnType?: string;
+    /**
+     * 关系参数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RelationParams?: string;
+    /**
+     * 参数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Params?: string;
+    /**
+     * 父id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ParentId?: string;
+    /**
+     * 元数据类型
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MetastoreType?: string;
+    /**
+     * 元数据类型名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MetastoreTypeName?: string;
+    /**
+     * 表名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TableName?: string;
+    /**
+     * 字段全名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    QualifiedName?: string;
+    /**
+     * 下游节点数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DownStreamCount?: number;
+    /**
+     * 上游节点数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    UpStreamCount?: number;
+    /**
+     * 描述信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Description?: string;
+    /**
+     * 创建时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CreateTime?: string;
+    /**
+     * 更新时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ModifyTime?: string;
+    /**
+     * 任务id列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Tasks?: Array<string>;
+    /**
+     * 父节点列表字符串
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ParentSet?: string;
+    /**
+     * 子节点列表字符串
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ChildSet?: string;
+    /**
+     * 额外参数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ExtParams?: Array<LineageParamRecord>;
+}
+/**
  * CreateWorkflow请求参数结构体
  */
 export interface CreateWorkflowRequest {
@@ -846,6 +966,35 @@ export interface Label {
      * 类型名称。
      */
     Text: string;
+}
+/**
+ * DescribeTableLineage请求参数结构体
+ */
+export interface DescribeTableLineageRequest {
+    /**
+     * 查询方向，INPUT,OUTPUT,BOTH枚举值
+     */
+    Direction: string;
+    /**
+     * 表信息
+     */
+    Data: TableLineageInfo;
+    /**
+     * 单次查询入度,默认 1
+     */
+    InputDepth?: number;
+    /**
+     * 单次查询出度,默认 1
+     */
+    OutputDepth?: number;
+    /**
+     * 额外参数（传递调用方信息）
+     */
+    ExtParams?: Array<LineageParamRecord>;
+    /**
+     * 是否过滤临时表,默认true
+     */
+    IgnoreTemp?: boolean;
 }
 /**
  * 任务扩展信息
@@ -2168,6 +2317,106 @@ export interface BatchRerunIntegrationTaskInstancesRequest {
     ProjectId: string;
 }
 /**
+ * 表血缘详细信息
+ */
+export interface TableLineageInfo {
+    /**
+     * 元数据类型
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MetastoreType: string;
+    /**
+     * 由中心节点到该节点的路径
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PrefixPath: string;
+    /**
+     * 空间id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ProjectId?: string;
+    /**
+     * 数据源id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DatasourceId?: string;
+    /**
+     * 表id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TableId?: string;
+    /**
+     * 表血缘参数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Params?: Array<LineageParamRecord>;
+    /**
+     * 父节点列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ParentSet?: string;
+    /**
+     * 子节点列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ChildSet?: string;
+    /**
+     * 额外参数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ExtParams?: Array<RecordField>;
+    /**
+     * 血缘id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Id?: string;
+    /**
+     * 元数据类型名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MetastoreTypeName?: string;
+    /**
+     * 表名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TableName?: string;
+    /**
+     * 表全称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    QualifiedName?: string;
+    /**
+     * 血缘下游节点数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DownStreamCount?: number;
+    /**
+     * 血缘上游节点数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    UpStreamCount?: number;
+    /**
+     * 血缘描述
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Description?: string;
+    /**
+     * 血缘创建时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CreateTime?: string;
+    /**
+     * 血缘更新时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ModifyTime?: string;
+    /**
+     * 修改血缘的任务id列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Tasks?: Array<string>;
+}
+/**
  * 规则模版分页
  */
 export interface RuleTemplateHistoryPage {
@@ -2403,6 +2652,20 @@ export interface Rule {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     SourceEngineTypes?: Array<number>;
+}
+/**
+ * DescribeTableLineage返回参数结构体
+ */
+export interface DescribeTableLineageResponse {
+    /**
+     * 表血缘信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TableLineage: TableLineageInfo;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * ModifyRuleGroupSubscription请求参数结构体
@@ -3215,6 +3478,20 @@ export interface DescribeTaskReportDetailListResponse {
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * 血缘参数记录
+ */
+export interface LineageParamRecord {
+    /**
+     * 字段名
+     */
+    Name: string;
+    /**
+     * 字段值
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Value: string;
 }
 /**
  * 批量操作结果
@@ -4246,6 +4523,35 @@ export interface CreateOfflineTaskResponse {
     RequestId?: string;
 }
 /**
+ * DescribeColumnLineage请求参数结构体
+ */
+export interface DescribeColumnLineageRequest {
+    /**
+     * 查询方向，INPUT,OUTPUT,BOTH枚举值
+     */
+    Direction: string;
+    /**
+     * 字段信息
+     */
+    Data: ColumnLineageInfo;
+    /**
+     * 单次查询入度
+     */
+    InputDepth?: number;
+    /**
+     * 单次查询出度
+     */
+    OutputDepth?: number;
+    /**
+     * 额外参数（传递调用方信息）
+     */
+    ExtParams?: Array<RecordField>;
+    /**
+     * 是否过滤临时表 默认值为true
+     */
+    IgnoreTemp?: boolean;
+}
+/**
  * CreateTaskAlarmRegular请求参数结构体
  */
 export interface CreateTaskAlarmRegularRequest {
@@ -4571,6 +4877,41 @@ export interface IntegrationNodeMapping {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     ExtConfig?: Array<RecordField>;
+}
+/**
+ * 列血缘聚合信息
+ */
+export interface ColumnAggregationLineage {
+    /**
+     * 表名
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TableName: string;
+    /**
+     * 父节点ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ParentId: string;
+    /**
+     * 元数据类型
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MetastoreType: string;
+    /**
+     * 字符串类型的父节点集合
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ParentSet: string;
+    /**
+     * 字符串类型的子节点集合
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ChildSet: string;
+    /**
+     * 列信息集合
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ColumnInfoSet: Array<SimpleColumnInfo>;
 }
 /**
  * ModifyRuleGroupSubscription返回参数结构体
@@ -6436,6 +6777,86 @@ export interface DescribeRuleGroupSubscriptionRequest {
     ProjectId?: string;
 }
 /**
+ * 血缘列描述
+ */
+export interface SimpleColumnInfo {
+    /**
+     * 列ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Id: string;
+    /**
+     * 限定名
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    QualifiedName: string;
+    /**
+     * 列名
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ColumnName: string;
+    /**
+     * 列中文名
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ColumnNameCn: string;
+    /**
+     * 列类型
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ColumnType: string;
+    /**
+     * 列描述
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Description: string;
+    /**
+     * 前缀路径
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PrefixPath: string;
+    /**
+     * 创建时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CreateTime: string;
+    /**
+     * 修改时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ModifyTime: string;
+    /**
+     * 数据源ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DatasourceId: string;
+    /**
+     * 下游数量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DownStreamCount: number;
+    /**
+     * 上游数量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    UpStreamCount: number;
+    /**
+     * 关系参数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RelationParams: string;
+    /**
+     * 参数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Params: string;
+    /**
+     * 任务集合
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Tasks: Array<string>;
+}
+/**
  * DescribeInLongAgentList返回参数结构体
  */
 export interface DescribeInLongAgentListResponse {
@@ -8043,6 +8464,20 @@ export interface ModifyMonitorStatusRequest {
      * 监控开关状态
      */
     MonitorStatus?: boolean;
+}
+/**
+ * DescribeColumnLineage返回参数结构体
+ */
+export interface DescribeColumnLineageResponse {
+    /**
+     * 字段血缘信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ColumnAggregationLineage: ColumnAggregationLineage;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * DeleteFolder请求参数结构体

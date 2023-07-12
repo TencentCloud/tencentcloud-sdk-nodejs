@@ -208,9 +208,9 @@ it("es.v20180416.RestartKibana", async function () {
     }
 })
 
-it("es.v20180416.SaveAndDeployLogstashPipeline", async function () {
+it("es.v20180416.ModifyEsVipSecurityGroup", async function () {
     try {
-       const data = await client.SaveAndDeployLogstashPipeline({})
+       const data = await client.ModifyEsVipSecurityGroup({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -351,6 +351,16 @@ it("es.v20180416.RestartLogstashInstance", async function () {
 it("es.v20180416.DescribeLogstashInstanceLogs", async function () {
     try {
        const data = await client.DescribeLogstashInstanceLogs({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("es.v20180416.SaveAndDeployLogstashPipeline", async function () {
+    try {
+       const data = await client.SaveAndDeployLogstashPipeline({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

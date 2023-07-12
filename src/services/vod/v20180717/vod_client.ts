@@ -933,7 +933,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改音画质重生模板。
+   * 修改视频重生模板。
    */
   async ModifyRebuildMediaTemplate(
     req: ModifyRebuildMediaTemplateRequest,
@@ -1340,7 +1340,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 发起音画质重生
+   * 发起视频重生
    */
   async RebuildMedia(
     req: RebuildMediaRequest,
@@ -2194,7 +2194,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 使用模板发起音画质重生。
+   * 使用模板发起视频重生。
    */
   async RebuildMediaByTemplate(
     req: RebuildMediaByTemplateRequest,
@@ -2607,7 +2607,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取音画质重生模板列表。
+   * 获取视频重生模板列表。
    */
   async DescribeRebuildMediaTemplates(
     req: DescribeRebuildMediaTemplatesRequest,
