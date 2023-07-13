@@ -72,7 +72,7 @@ export interface ScaleUpFileSystemResponse {
      */
     FileSystemId?: string;
     /**
-     * 扩容的目标容量
+     * 扩容的目标容量（单位GiB）
      */
     TargetCapacity?: number;
     /**
@@ -496,7 +496,7 @@ export interface ScaleUpFileSystemRequest {
      */
     FileSystemId: string;
     /**
-     * 扩容的目标容量
+     * 扩容的目标容量（单位GiB）
      */
     TargetCapacity: number;
 }
@@ -1117,15 +1117,15 @@ export interface AvailableType {
     /**
      * 协议与售卖详情
      */
-    Protocols: Array<AvailableProtoStatus>;
+    Protocols?: Array<AvailableProtoStatus>;
     /**
-     * 存储类型。返回值中 SD 为标准型存储、HP 为性能型存储
+     * 存储类型。返回值中 SD 为通用标准型存储， HP为通用性能型存储， TB为Turbo标准型， TP 为Turbo性能型。
      */
-    Type: string;
+    Type?: string;
     /**
      * 是否支持预付费。返回值中 true 为支持、false 为不支持
      */
-    Prepayment: boolean;
+    Prepayment?: boolean;
 }
 /**
  * CreateCfsSnapshot返回参数结构体
@@ -1484,23 +1484,23 @@ export interface AvailableZone {
     /**
      * 可用区名称
      */
-    Zone: string;
+    Zone?: string;
     /**
      * 可用区ID
      */
-    ZoneId: number;
+    ZoneId?: number;
     /**
      * 可用区中文名称
      */
-    ZoneCnName: string;
+    ZoneCnName?: string;
     /**
      * Type数组
      */
-    Types: Array<AvailableType>;
+    Types?: Array<AvailableType>;
     /**
      * 可用区中英文名称
      */
-    ZoneName: string;
+    ZoneName?: string;
 }
 /**
  * DescribeMigrationTasks请求参数结构体

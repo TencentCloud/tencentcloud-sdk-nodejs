@@ -85,7 +85,7 @@ export interface ImportMaterialResponse {
      */
     MaterialId?: string;
     /**
-     * 媒体文预处理任务 ID，如果未指定发起预处理任务则为空。
+     * 媒体文件预处理任务 ID，如果未指定发起预处理任务则为空。
      */
     PreProcessTaskId?: string;
     /**
@@ -1217,7 +1217,7 @@ export interface ExportVideoByEditorTrackDataRequest {
      */
     VODExportInfo?: VODExportInfo;
     /**
-     * 操作者。如不填，默认为 `cmeid_system`，表示平台管理员操作，无权限限制。如果指定操作者，轨道数据中使的媒资该操作者需要拥有使用权限。
+     * 操作者。如不填，默认为 `cmeid_system`，表示平台管理员操作，无权限限制。如果指定操作者，轨道数据中使用的媒资该操作者需要拥有使用权限。
      */
     Operator?: string;
 }
@@ -2581,7 +2581,7 @@ export interface ModifyTeamMemberRequest {
      */
     Role?: string;
     /**
-     * 操作者。如不填，默认为 `cmeid_system`，表示平台管理员操作，可以个改任意团队成员的信息。如果指定操作者，则操作者必须为团队的管理员或者所有者。
+     * 操作者。如不填，默认为 `cmeid_system`，表示平台管理员操作，可以修改任意团队成员的信息。如果指定操作者，则操作者必须为团队的管理员或者所有者。
      */
     Operator?: string;
 }
@@ -3236,31 +3236,31 @@ export interface MediaCastProjectInfo {
   <li>Working ：运行中；</li>
   <li>Idle ：空闲。</li>
      */
-    Status: string;
+    Status?: string;
     /**
      * 输入源列表。
      */
-    SourceInfos: Array<MediaCastSourceInfo>;
+    SourceInfos?: Array<MediaCastSourceInfo>;
     /**
      * 输出源列表。
      */
-    DestinationInfos: Array<MediaCastDestinationInfo>;
+    DestinationInfos?: Array<MediaCastDestinationInfo>;
     /**
      * 输出媒体配置。
      */
-    OutputMediaSetting: MediaCastOutputMediaSetting;
+    OutputMediaSetting?: MediaCastOutputMediaSetting;
     /**
      * 播放参数。
      */
-    PlaySetting: MediaCastPlaySetting;
+    PlaySetting?: MediaCastPlaySetting;
     /**
      * 项目启动时间。采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
      */
-    StartTime: string;
+    StartTime?: string;
     /**
-     * 项目结束时间。采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。如果项目还在运行中，改字段为空。
+     * 项目结束时间。采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。如果项目还在运行中，该字段为空。
      */
-    StopTime: string;
+    StopTime?: string;
 }
 /**
  * ExportVideoByTemplate请求参数结构体

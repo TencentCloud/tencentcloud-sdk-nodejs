@@ -158,6 +158,16 @@ it("dbbrain.v20210527.DescribeDBDiagEvents", async function () {
     }
 })
 
+it("dbbrain.v20210527.DescribeAuditInstanceList", async function () {
+    try {
+       const data = await client.DescribeAuditInstanceList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dbbrain.v20210527.DescribeSlowLogTimeSeriesStats", async function () {
     try {
        const data = await client.DescribeSlowLogTimeSeriesStats({})
@@ -248,6 +258,16 @@ it("dbbrain.v20210527.CreateSecurityAuditLogExportTask", async function () {
     }
 })
 
+it("dbbrain.v20210527.CloseAuditService", async function () {
+    try {
+       const data = await client.CloseAuditService({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dbbrain.v20210527.DescribeUserSqlAdvice", async function () {
     try {
        const data = await client.DescribeUserSqlAdvice({})
@@ -271,6 +291,16 @@ it("dbbrain.v20210527.DeleteSecurityAuditLogExportTasks", async function () {
 it("dbbrain.v20210527.ModifySqlFilters", async function () {
     try {
        const data = await client.ModifySqlFilters({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dbbrain.v20210527.ModifyAuditService", async function () {
+    try {
+       const data = await client.ModifyAuditService({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -391,6 +421,16 @@ it("dbbrain.v20210527.DescribeDiagDBInstances", async function () {
 it("dbbrain.v20210527.DeleteSqlFilters", async function () {
     try {
        const data = await client.DeleteSqlFilters({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dbbrain.v20210527.OpenAuditService", async function () {
+    try {
+       const data = await client.OpenAuditService({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

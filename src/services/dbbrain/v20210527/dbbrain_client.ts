@@ -21,7 +21,9 @@ import {
   SchemaSpaceTimeSeries,
   SlowLogUser,
   RedisKeySpaceData,
+  DescribeRedisTopKeyPrefixListRequest,
   HealthReportTask,
+  OpenAuditServiceResponse,
   CreateDBDiagReportTaskRequest,
   TableSpaceTimeSeries,
   DescribeAuditLogFilesResponse,
@@ -34,6 +36,7 @@ import {
   DescribeDBDiagEventsResponse,
   DescribeDBDiagReportTasksResponse,
   AddUserContactResponse,
+  AuditInstanceInfo,
   CancelKillTaskResponse,
   DescribeRedisTopBigKeysResponse,
   DescribeSqlTemplateRequest,
@@ -41,6 +44,7 @@ import {
   AuditLogFilter,
   SlowLogTopSqlItem,
   CreateKillTaskResponse,
+  DescribeAuditInstanceListResponse,
   DiagHistoryEventItem,
   DescribeProxySessionKillTasksRequest,
   CreateRedisBigKeyAnalysisTaskRequest,
@@ -68,9 +72,12 @@ import {
   MySqlProcess,
   DescribeDBDiagHistoryRequest,
   CreateAuditLogFileResponse,
+  AuditInstance,
   DeleteSqlFiltersResponse,
   DescribeDBDiagEventsRequest,
   CreateDBDiagReportUrlResponse,
+  ScoreDetail,
+  OpenAuditServiceRequest,
   CreateProxySessionKillTaskRequest,
   DeleteDBDiagReportTasksResponse,
   DescribeProxyProcessStatisticsResponse,
@@ -82,13 +89,14 @@ import {
   DescribeSlowLogUserHostStatsResponse,
   TableSpaceData,
   EventInfo,
+  AuditInstanceFilter,
   DescribeMailProfileRequest,
   DeleteSecurityAuditLogExportTasksResponse,
   KillMySqlThreadsRequest,
   DescribeSqlFiltersResponse,
   CreateDBDiagReportUrlRequest,
   DescribeSecurityAuditLogExportTasksResponse,
-  DescribeRedisTopKeyPrefixListRequest,
+  CloseAuditServiceRequest,
   InstanceConfs,
   DescribeSqlTemplateResponse,
   HealthScoreInfo,
@@ -108,16 +116,18 @@ import {
   DescribeDiagDBInstancesRequest,
   DescribeNoPrimaryKeyTablesRequest,
   InstanceInfo,
-  CreateSqlFilterResponse,
+  DescribeAuditInstanceListRequest,
   VerifyUserAccountResponse,
   DescribeSqlFiltersRequest,
   DescribeSecurityAuditLogExportTasksRequest,
   DeleteSecurityAuditLogExportTasksRequest,
   CreateSchedulerMailProfileResponse,
   DescribeTopSpaceSchemaTimeSeriesRequest,
+  ModifyAuditServiceRequest,
   DescribeSlowLogTopSqlsRequest,
   DescribeMailProfileResponse,
   DescribeRedisTopBigKeysRequest,
+  ModifyAuditServiceResponse,
   DescribeHealthScoreRequest,
   IssueTypeInfo,
   DescribeDiagDBInstancesResponse,
@@ -125,6 +135,7 @@ import {
   CreateKillTaskRequest,
   CreateSecurityAuditLogExportTaskResponse,
   SchemaItem,
+  CreateSqlFilterResponse,
   DescribeSlowLogUserHostStatsRequest,
   DescribeTopSpaceSchemasResponse,
   CreateProxySessionKillTaskResponse,
@@ -148,7 +159,7 @@ import {
   SlowLogInfoItem,
   SecLogExportTaskInfo,
   DescribeHealthScoreResponse,
-  ScoreDetail,
+  CloseAuditServiceResponse,
   DescribeTopSpaceSchemasRequest,
   DescribeSlowLogTopSqlsResponse,
   DescribeNoPrimaryKeyTablesResponse,
@@ -311,6 +322,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询实例列表
+   */
+  async DescribeAuditInstanceList(
+    req: DescribeAuditInstanceListRequest,
+    cb?: (error: string, rep: DescribeAuditInstanceListResponse) => void
+  ): Promise<DescribeAuditInstanceListResponse> {
+    return this.request("DescribeAuditInstanceList", req, cb)
+  }
+
+  /**
    * 获取慢日志统计柱状图。
    */
   async DescribeSlowLogTimeSeriesStats(
@@ -401,6 +422,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 不用审计日志时，关闭数据库审计
+   */
+  async CloseAuditService(
+    req: CloseAuditServiceRequest,
+    cb?: (error: string, rep: CloseAuditServiceResponse) => void
+  ): Promise<CloseAuditServiceResponse> {
+    return this.request("CloseAuditService", req, cb)
+  }
+
+  /**
    * 获取SQL优化建议。【产品用户回馈，此接口限免开放，后续将并入dbbrain专业版】
    */
   async DescribeUserSqlAdvice(
@@ -428,6 +459,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifySqlFiltersResponse) => void
   ): Promise<ModifySqlFiltersResponse> {
     return this.request("ModifySqlFilters", req, cb)
+  }
+
+  /**
+   * 修改审计配置相关信息，如高频存储时长等
+   */
+  async ModifyAuditService(
+    req: ModifyAuditServiceRequest,
+    cb?: (error: string, rep: ModifyAuditServiceResponse) => void
+  ): Promise<ModifyAuditServiceResponse> {
+    return this.request("ModifyAuditService", req, cb)
   }
 
   /**
@@ -548,6 +589,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteSqlFiltersResponse) => void
   ): Promise<DeleteSqlFiltersResponse> {
     return this.request("DeleteSqlFilters", req, cb)
+  }
+
+  /**
+   * 开启数据库审计服务
+   */
+  async OpenAuditService(
+    req: OpenAuditServiceRequest,
+    cb?: (error: string, rep: OpenAuditServiceResponse) => void
+  ): Promise<OpenAuditServiceResponse> {
+    return this.request("OpenAuditService", req, cb)
   }
 
   /**

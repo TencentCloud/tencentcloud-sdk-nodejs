@@ -174,6 +174,7 @@ import {
   DescribeEnvironmentRolesRequest,
   DescribeRocketMQClustersResponse,
   DeleteRolesResponse,
+  EnvironmentRoleSet,
   SendMsgResponse,
   VpcConfig,
   RocketMQClusterRecentStats,

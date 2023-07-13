@@ -290,7 +290,7 @@ export interface DescribeAuditLogsRequest {
    */
   OrderBy?: string
   /**
-   * 过滤条件。可按设置的过滤条件过滤日志。
+   * 已废弃。
    */
   Filter?: AuditLogFilter
   /**
@@ -301,6 +301,10 @@ export interface DescribeAuditLogsRequest {
    * 分页偏移量。
    */
   Offset?: number
+  /**
+   * 审计日志过滤条件。
+   */
+  LogFilter?: Array<InstanceAuditLogFilter>
 }
 
 /**
@@ -1203,12 +1207,12 @@ export interface DescribeAuditLogsResponse {
   /**
    * 符合条件的审计日志条数。
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 审计日志详情。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Items: Array<AuditLog>
+  Items?: Array<AuditLog>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2630,7 +2634,7 @@ export interface CreateAuditLogFileResponse {
   /**
    * 审计日志文件名称。
    */
-  FileName: string
+  FileName?: string
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6637,9 +6641,13 @@ export interface CreateAuditLogFileRequest {
    */
   OrderBy?: string
   /**
-   * 过滤条件。可按设置的过滤条件过滤日志。
+   * 已废弃。
    */
   Filter?: AuditLogFilter
+  /**
+   * 审计日志过滤条件
+   */
+  LogFilter?: Array<InstanceAuditLogFilter>
 }
 
 /**
@@ -7745,59 +7753,89 @@ export interface AuditLog {
   /**
    * 影响行数。
    */
-  AffectRows: number
+  AffectRows?: number
   /**
    * 错误码。
    */
-  ErrCode: number
+  ErrCode?: number
   /**
    * SQL类型。
    */
-  SqlType: string
+  SqlType?: string
   /**
    * 表名称。
    */
-  TableName: string
+  TableName?: string
   /**
    * 实例名称。
    */
-  InstanceName: string
+  InstanceName?: string
   /**
    * 审计策略名称。
    */
-  PolicyName: string
+  PolicyName?: string
   /**
    * 数据库名称。
    */
-  DBName: string
+  DBName?: string
   /**
    * SQL语句。
    */
-  Sql: string
+  Sql?: string
   /**
    * 客户端地址。
    */
-  Host: string
+  Host?: string
   /**
    * 用户名。
    */
-  User: string
+  User?: string
   /**
-   * 执行时间。
+   * 执行时间，微秒。
    */
-  ExecTime: number
+  ExecTime?: number
   /**
-   * 时间戳。
+   * 时间。
    */
-  Timestamp: string
+  Timestamp?: string
   /**
-   * 发送行数。
+   * 返回行数。
    */
-  SentRows: number
+  SentRows?: number
   /**
    * 执行线程ID。
    */
-  ThreadId: number
+  ThreadId?: number
+  /**
+   * 扫描行数。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CheckRows?: number
+  /**
+   * cpu执行时间，微秒。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CpuTime?: number
+  /**
+   * IO等待时间，微秒。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IoWaitTime?: number
+  /**
+   * 锁等待时间，微秒。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LockWaitTime?: number
+  /**
+   * 事物持续等待时间，微秒。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TrxLivingTime?: number
+  /**
+   * 开始时间，与timestamp构成一个精确到纳秒的时间。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NsTime?: number
 }
 
 /**
@@ -8089,6 +8127,53 @@ export interface DisassociateSecurityGroupsResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 审计日志搜索条件
+ */
+export interface InstanceAuditLogFilter {
+  /**
+   * 过滤项。支持以下搜索条件:
+
+分词搜索：
+sql - SQL语句；
+
+等于、不等于、包含、不包含：
+host - 客户端地址；
+user - 用户名；
+dbName - 数据库名称；
+
+等于、不等于：
+sqlType - SQL类型；
+errCode - 错误码；
+threadId - 线程ID；
+
+范围搜索（时间类型统一为微妙）：
+execTime - 执行时间；
+lockWaitTime - 执行时间；
+ioWaitTime - IO等待时间；
+trxLivingTime - 事物持续时间；
+cpuTime - cpu时间；
+checkRows - 扫描行数；
+affectRows - 影响行数；
+sentRows - 返回行数。
+
+   */
+  Type: string
+  /**
+   * 过滤条件。支持以下选项:
+INC - 包含,
+EXC - 不包含,
+EQS - 等于,
+NEQ - 不等于,
+RA - 范围.
+   */
+  Compare: string
+  /**
+   * 过滤的值。
+   */
+  Value: Array<string>
 }
 
 /**

@@ -3852,6 +3852,22 @@ export interface DeleteRolesResponse {
     RequestId?: string;
 }
 /**
+ * 批量绑定名字空间和角色权限关系
+ */
+export interface EnvironmentRoleSet {
+    /**
+     * 需要绑定的命名空间Id，不重复且存在资源
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    EnvironmentId: string;
+    /**
+     * 名字空间需要绑定的权限，枚举为 "consume" "produce" 组合，但是不为空
+  
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Permissions: Array<string>;
+}
+/**
  * SendMsg返回参数结构体
  */
 export interface SendMsgResponse {
@@ -5958,16 +5974,21 @@ export interface CreateRoleResponse {
     /**
      * 角色名称
      */
-    RoleName: string;
+    RoleName?: string;
     /**
      * 角色token
      */
-    Token: string;
+    Token?: string;
     /**
      * 备注说明
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Remark: string;
+    Remark?: string;
+    /**
+     * 批量绑定名字空间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    EnvironmentRoleSets?: Array<EnvironmentRoleSet>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */

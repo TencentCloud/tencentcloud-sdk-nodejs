@@ -2455,7 +2455,7 @@ export interface DescribeLogSearchResponse {
     /**
      * 获取更多检索结果的游标，值为""表示无后续结果
      */
-    ConText: string;
+    ConText?: string;
     /**
      * 由0或多条日志组成，每条日志格式如下：
   '[$app_id][$env_name][$service_id][$http_host][$api_id][$uri][$scheme][rsp_st:$status][ups_st:$upstream_status]'
@@ -2486,11 +2486,11 @@ export interface DescribeLogSearchResponse {
   tcp_rtt： 客户端 TCP 连接信息，RTT（Round Trip Time）由三部分组成：链路的传播时间（propagation delay）、末端系统的处理时间、路由器缓存中的排队和处理时间（queuing delay）。
   req_id：请求id。
      */
-    LogSet: Array<string>;
+    LogSet?: Array<string>;
     /**
      * 单次搜索返回的日志条数，TotalCount <= Limit
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -6477,6 +6477,7 @@ export interface DescribeLogSearchRequest {
   
   说明：
   “:”表示包含，“!=”表示不等于，字段含义见输出参数的LogSet说明
+     * @deprecated
      */
     LogQuerys?: Array<LogQuery>;
 }

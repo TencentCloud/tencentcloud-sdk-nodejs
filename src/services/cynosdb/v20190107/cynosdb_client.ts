@@ -344,6 +344,7 @@ import {
   DescribeBinlogsRequest,
   InputAccount,
   DisassociateSecurityGroupsResponse,
+  InstanceAuditLogFilter,
   ZoneStockInfo,
   InquirePriceRenewResponse,
   Tag,

@@ -70,6 +70,27 @@ export interface RedisKeySpaceData {
     ShardId?: string;
 }
 /**
+ * DescribeRedisTopKeyPrefixList请求参数结构体
+ */
+export interface DescribeRedisTopKeyPrefixListRequest {
+    /**
+     * 实例ID。
+     */
+    InstanceId: string;
+    /**
+     * 查询日期，如2021-05-27，最早可为前30天的日期。
+     */
+    Date: string;
+    /**
+     * 服务产品类型，支持值包括 "redis" - 云数据库 Redis。
+     */
+    Product: string;
+    /**
+     * 查询数目，默认为20，最大值为100。
+     */
+    Limit?: number;
+}
+/**
  * 健康报告任务详情。
  */
 export interface HealthReportTask {
@@ -105,6 +126,19 @@ export interface HealthReportTask {
      * 健康报告中的健康信息。
      */
     HealthStatus: HealthStatus;
+}
+/**
+ * OpenAuditService返回参数结构体
+ */
+export interface OpenAuditServiceResponse {
+    /**
+     * taskId 为0表示开通审计成功，否则开通失败
+     */
+    TaskId?: number;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * CreateDBDiagReportTask请求参数结构体
@@ -418,6 +452,40 @@ export interface AddUserContactResponse {
     RequestId?: string;
 }
 /**
+ * 实例详情
+ */
+export interface AuditInstanceInfo {
+    /**
+     * appId。
+     */
+    AppId?: number;
+    /**
+     * 审计状态，0-未开通审计；1-已开通审计。
+     */
+    AuditStatus?: number;
+    /**
+     * 实例Id。
+     */
+    InstanceId?: string;
+    /**
+     * 实例名称。
+     */
+    InstanceName?: string;
+    /**
+     * 项目Id。
+     */
+    ProjectId?: number;
+    /**
+     * 实例所在地域。
+     */
+    Region?: string;
+    /**
+     * 资源Tags。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ResourceTags?: Array<string>;
+}
+/**
  * CancelKillTask返回参数结构体
  */
 export interface CancelKillTaskResponse {
@@ -623,6 +691,24 @@ export interface CreateKillTaskResponse {
      * kill会话任务创建成功返回1
      */
     Status: number;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * DescribeAuditInstanceList返回参数结构体
+ */
+export interface DescribeAuditInstanceListResponse {
+    /**
+     * 符合条件的实例个数。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TotalCount?: number;
+    /**
+     * 实例详情。
+     */
+    Items?: Array<AuditInstance>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1157,6 +1243,55 @@ export interface CreateAuditLogFileResponse {
     RequestId?: string;
 }
 /**
+ * 实例详细信息
+ */
+export interface AuditInstance {
+    /**
+     * 审计状态，已开通审计为：YES，未开通审计为：ON。
+     */
+    AuditStatus?: string;
+    /**
+     * 审计日志大小，为兼容老版本用。
+     */
+    BillingAmount?: number;
+    /**
+     * 计费确认状态，0-未确认；1-已确认。
+     */
+    BillingConfirmed?: number;
+    /**
+     * 低频存储时长。
+     */
+    ColdLogExpireDay?: number;
+    /**
+     * 低频日志存储量单位MB。
+     */
+    ColdLogSize?: number;
+    /**
+     * 高频日志存储天数。
+     */
+    HotLogExpireDay?: number;
+    /**
+     * 高频日志存储量，单位MB。
+     */
+    HotLogSize?: number;
+    /**
+     * 实例Id。
+     */
+    InstanceId?: string;
+    /**
+     * 日志保存总天数，为高频存储时长+低频存储时长。
+     */
+    LogExpireDay?: number;
+    /**
+     * 实例创建时间。
+     */
+    CreateTime?: string;
+    /**
+     * 实例详细信息。
+     */
+    InstanceInfo?: AuditInstanceInfo;
+}
+/**
  * DeleteSqlFilters返回参数结构体
  */
 export interface DeleteSqlFiltersResponse {
@@ -1210,6 +1345,53 @@ export interface CreateDBDiagReportUrlResponse {
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * 扣分详情。
+ */
+export interface ScoreDetail {
+    /**
+     * 扣分项分类，取值包括：可用性、可维护性、性能及可靠性。
+     */
+    IssueType: string;
+    /**
+     * 扣分总分。
+     */
+    ScoreLost: number;
+    /**
+     * 扣分总分上限。
+     */
+    ScoreLostMax: number;
+    /**
+     * 扣分项列表。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Items: Array<ScoreItem>;
+}
+/**
+ * OpenAuditService请求参数结构体
+ */
+export interface OpenAuditServiceRequest {
+    /**
+     * 与Product保持一致。如："dcdb" ,"mariadb"。
+     */
+    Product: string;
+    /**
+     * 与Product保持一致。如："dcdb" ,"mariadb"。
+     */
+    NodeRequestType: string;
+    /**
+     * 实例ID
+     */
+    InstanceId: string;
+    /**
+     * 日志保存总时长，只能是7,30,90,180,365,1095,1825
+     */
+    LogExpireDay: number;
+    /**
+     * 高频日志保存时长，只能是7,30,90,180,365,1095,1825
+     */
+    HotLogExpireDay: number;
 }
 /**
  * CreateProxySessionKillTask请求参数结构体
@@ -1467,6 +1649,19 @@ export interface EventInfo {
     Count: number;
 }
 /**
+ * 实例列表查询条件
+ */
+export interface AuditInstanceFilter {
+    /**
+     * 搜索条件名称
+     */
+    Name: string;
+    /**
+     * 要搜索的条件的值
+     */
+    Values: Array<string>;
+}
+/**
  * DescribeMailProfile请求参数结构体
  */
 export interface DescribeMailProfileRequest {
@@ -1581,25 +1776,21 @@ export interface DescribeSecurityAuditLogExportTasksResponse {
     RequestId?: string;
 }
 /**
- * DescribeRedisTopKeyPrefixList请求参数结构体
+ * CloseAuditService请求参数结构体
  */
-export interface DescribeRedisTopKeyPrefixListRequest {
+export interface CloseAuditServiceRequest {
     /**
-     * 实例ID。
-     */
-    InstanceId: string;
-    /**
-     * 查询日期，如2021-05-27，最早可为前30天的日期。
-     */
-    Date: string;
-    /**
-     * 服务产品类型，支持值包括 "redis" - 云数据库 Redis。
+     * 服务产品类型，支持值包括： "dcdb" - 云数据库 Tdsql， "mariadb" - 云数据库 MariaDB for MariaDB。
      */
     Product: string;
     /**
-     * 查询数目，默认为20，最大值为100。
+     * 与Product保持一致。如："dcdb" ,"mariadb"。
      */
-    Limit?: number;
+    NodeRequestType: string;
+    /**
+     * 实例Id。
+     */
+    InstanceId: string;
 }
 /**
  * 实例配置。
@@ -2145,17 +2336,33 @@ export interface InstanceInfo {
     ClusterName?: string;
 }
 /**
- * CreateSqlFilter返回参数结构体
+ * DescribeAuditInstanceList请求参数结构体
  */
-export interface CreateSqlFilterResponse {
+export interface DescribeAuditInstanceListRequest {
     /**
-     * 限流任务ID。
+     * 服务产品类型，支持值包括： "dcdb" - 云数据库 Tdsql， "mariadb" - 云数据库 MariaDB for MariaDB。
      */
-    FilterId?: number;
+    Product: string;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     * 与Product保持一致。如："dcdb" ,"mariadb"。
      */
-    RequestId?: string;
+    NodeRequestType: string;
+    /**
+     * 审计状态标识，0-未开通审计；1-已开通审计，默认为0。
+     */
+    AuditSwitch?: number;
+    /**
+     * 偏移量，默认为0。
+     */
+    Offset?: number;
+    /**
+     * 查询数目，默认为20，最大为100。
+     */
+    Limit?: number;
+    /**
+     * 查询实例的搜索条件。
+     */
+    Filters?: Array<AuditInstanceFilter>;
 }
 /**
  * VerifyUserAccount返回参数结构体
@@ -2280,6 +2487,31 @@ export interface DescribeTopSpaceSchemaTimeSeriesRequest {
     Product?: string;
 }
 /**
+ * ModifyAuditService请求参数结构体
+ */
+export interface ModifyAuditServiceRequest {
+    /**
+     * 服务产品类型，支持值包括： "dcdb" - 云数据库 Tdsql， "mariadb" - 云数据库 MariaDB for MariaDB。
+     */
+    Product: string;
+    /**
+     * 与Product保持一致。如："dcdb" ,"mariadb"。
+     */
+    NodeRequestType: string;
+    /**
+     * 实例ID。
+     */
+    InstanceId: string;
+    /**
+     * 日志保存总时长，只能是7,30,90,180,365,1095,1825
+     */
+    LogExpireDay: number;
+    /**
+     * 高频日志保存时长，只能是7,30,90,180,365,1095,1825
+     */
+    HotLogExpireDay: number;
+}
+/**
  * DescribeSlowLogTopSqls请求参数结构体
  */
 export interface DescribeSlowLogTopSqlsRequest {
@@ -2367,6 +2599,19 @@ export interface DescribeRedisTopBigKeysRequest {
      * 查询数目，默认为20，最大值为100。
      */
     Limit?: number;
+}
+/**
+ * ModifyAuditService返回参数结构体
+ */
+export interface ModifyAuditServiceResponse {
+    /**
+     * 审计配置修改结果，0-修改成功,非0-修改失败。
+     */
+    Success?: number;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * DescribeHealthScore请求参数结构体
@@ -2498,6 +2743,19 @@ export interface SchemaItem {
      * 数据库名称
      */
     Schema: string;
+}
+/**
+ * CreateSqlFilter返回参数结构体
+ */
+export interface CreateSqlFilterResponse {
+    /**
+     * 限流任务ID。
+     */
+    FilterId?: number;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * DescribeSlowLogUserHostStats请求参数结构体
@@ -3118,26 +3376,17 @@ export interface DescribeHealthScoreResponse {
     RequestId?: string;
 }
 /**
- * 扣分详情。
+ * CloseAuditService返回参数结构体
  */
-export interface ScoreDetail {
+export interface CloseAuditServiceResponse {
     /**
-     * 扣分项分类，取值包括：可用性、可维护性、性能及可靠性。
+     * 0-关闭审计成功，非0关闭审计失败。
      */
-    IssueType: string;
+    TaskId?: number;
     /**
-     * 扣分总分。
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
-    ScoreLost: number;
-    /**
-     * 扣分总分上限。
-     */
-    ScoreLostMax: number;
-    /**
-     * 扣分项列表。
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Items: Array<ScoreItem>;
+    RequestId?: string;
 }
 /**
  * DescribeTopSpaceSchemas请求参数结构体

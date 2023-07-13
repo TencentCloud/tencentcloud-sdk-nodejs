@@ -176,7 +176,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("MoveClass", req, cb);
     }
     /**
-     * 创建媒体链接或分类路径链接，将源资源信息链接到目标。
+     * 创建媒体链接或分类路径链接，将资源信息链接到目标。
      */
     async CreateLink(req, cb) {
         return this.request("CreateLink", req, cb);

@@ -110,7 +110,7 @@ export declare class Client extends AbstractClient {
      */
     MoveClass(req: MoveClassRequest, cb?: (error: string, rep: MoveClassResponse) => void): Promise<MoveClassResponse>;
     /**
-     * 创建媒体链接或分类路径链接，将源资源信息链接到目标。
+     * 创建媒体链接或分类路径链接，将资源信息链接到目标。
      */
     CreateLink(req: CreateLinkRequest, cb?: (error: string, rep: CreateLinkResponse) => void): Promise<CreateLinkResponse>;
     /**

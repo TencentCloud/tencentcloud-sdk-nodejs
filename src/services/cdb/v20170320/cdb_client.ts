@@ -277,6 +277,7 @@ import {
   DeviceNetInfo,
   ModifyDBInstanceVipVportResponse,
   DeleteAuditRuleResponse,
+  InstanceAuditLogFilters,
   DescribeUploadedFilesRequest,
   InstanceInfo,
   DescribeDefaultParamsResponse,

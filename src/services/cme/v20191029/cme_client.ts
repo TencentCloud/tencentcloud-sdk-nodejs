@@ -475,7 +475,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建媒体链接或分类路径链接，将源资源信息链接到目标。
+   * 创建媒体链接或分类路径链接，将资源信息链接到目标。
    */
   async CreateLink(
     req: CreateLinkRequest,

@@ -112,6 +112,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDBDiagEvents", req, cb);
     }
     /**
+     * 查询实例列表
+     */
+    async DescribeAuditInstanceList(req, cb) {
+        return this.request("DescribeAuditInstanceList", req, cb);
+    }
+    /**
      * 获取慢日志统计柱状图。
      */
     async DescribeSlowLogTimeSeriesStats(req, cb) {
@@ -166,6 +172,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateSecurityAuditLogExportTask", req, cb);
     }
     /**
+     * 不用审计日志时，关闭数据库审计
+     */
+    async CloseAuditService(req, cb) {
+        return this.request("CloseAuditService", req, cb);
+    }
+    /**
      * 获取SQL优化建议。【产品用户回馈，此接口限免开放，后续将并入dbbrain专业版】
      */
     async DescribeUserSqlAdvice(req, cb) {
@@ -182,6 +194,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ModifySqlFilters(req, cb) {
         return this.request("ModifySqlFilters", req, cb);
+    }
+    /**
+     * 修改审计配置相关信息，如高频存储时长等
+     */
+    async ModifyAuditService(req, cb) {
+        return this.request("ModifyAuditService", req, cb);
     }
     /**
      * 用于创建云数据库实例的审计日志文件，最多下载600w审计日志。
@@ -254,6 +272,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DeleteSqlFilters(req, cb) {
         return this.request("DeleteSqlFilters", req, cb);
+    }
+    /**
+     * 开启数据库审计服务
+     */
+    async OpenAuditService(req, cb) {
+        return this.request("OpenAuditService", req, cb);
     }
     /**
      * 添加邮件接收联系人的姓名， 邮件地址，返回值为添加成功的联系人id。
