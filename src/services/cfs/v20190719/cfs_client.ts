@@ -368,7 +368,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询文件系统配额
+   * 查询文件系统配额（仅部分Turbo实例能使用，若需要调用请提交工单与我们联系）
    */
   async DescribeUserQuota(
     req: DescribeUserQuotaRequest,

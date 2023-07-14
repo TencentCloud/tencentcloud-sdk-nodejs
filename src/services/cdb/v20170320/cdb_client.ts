@@ -210,6 +210,7 @@ import {
   ReloadBalanceProxyNodeRequest,
   DescribeAccountsResponse,
   RollbackTimeRange,
+  AuditLog,
   DescribeAuditLogFilesRequest,
   ModifyBackupConfigRequest,
   DisassociateSecurityGroupsResponse,
@@ -220,6 +221,7 @@ import {
   DescribeProxyConnectionPoolConfRequest,
   DescribeParamTemplatesRequest,
   DescribeAccountPrivilegesResponse,
+  DescribeAuditLogsRequest,
   DescribeBackupConfigRequest,
   RoVipInfo,
   DescribeAccountsRequest,
@@ -343,6 +345,7 @@ import {
   DeleteParamTemplateResponse,
   DBSwitchInfo,
   DescribeTasksResponse,
+  DescribeAuditLogsResponse,
   DescribeAuditPoliciesResponse,
   IsolateDBInstanceResponse,
   AdjustCdbProxyRequest,
@@ -1449,6 +1452,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAsyncRequestInfoResponse) => void
   ): Promise<DescribeAsyncRequestInfoResponse> {
     return this.request("DescribeAsyncRequestInfo", req, cb)
+  }
+
+  /**
+   * 本接口(DescribeAuditLogs)用于查询数据库审计日志。
+   */
+  async DescribeAuditLogs(
+    req: DescribeAuditLogsRequest,
+    cb?: (error: string, rep: DescribeAuditLogsResponse) => void
+  ): Promise<DescribeAuditLogsResponse> {
+    return this.request("DescribeAuditLogs", req, cb)
   }
 
   /**

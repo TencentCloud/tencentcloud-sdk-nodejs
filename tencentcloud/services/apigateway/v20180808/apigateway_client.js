@@ -407,7 +407,7 @@ API 网关的服务创建后，需要发布到某个环境方生效后，使用�
         return this.request("DescribeApiUsagePlan", req, cb);
     }
     /**
-     * 本接口（DescribeIPStrategysStatus）用于查询服务IP策略列表。
+     * 本接口（DescribeIPStrategysStatus）用于查询服务IP策略列表，因为接口名拼写错误，已不推荐使用，请优先使用DescribeIPStrategiesStatus接口。
      */
     async DescribeIPStrategysStatus(req, cb) {
         return this.request("DescribeIPStrategysStatus", req, cb);

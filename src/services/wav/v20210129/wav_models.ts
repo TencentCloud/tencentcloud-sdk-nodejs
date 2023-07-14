@@ -2433,6 +2433,59 @@ export interface CustomerProfile {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ChannelTags?: Array<ChannelTag>
+  /**
+   * 关联线索id
+   */
+  LeadId?: number
+  /**
+   * 客户微信id
+   */
+  WxId?: string
+  /**
+   * 顾问职位
+   */
+  Position?: string
+  /**
+   * 是否关联微信 1 是 0 否
+   */
+  IsBindWx?: number
+  /**
+   * 是否无效
+   */
+  IsInvalid?: number
+  /**
+   * 无效类型
+   */
+  InvalidType?: string
+  /**
+   * 无效类型名称
+   */
+  InvalidTypeName?: string
+  /**
+   * 无效时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InvalidTime?: number
+  /**
+   * 由顾问手动输入的无效原因文字
+   */
+  InvalidRemark?: string
+  /**
+   * 线索是否战败
+   */
+  IsLose?: number
+  /**
+   * 战败类型
+   */
+  LoseType?: string
+  /**
+   * 战败类型名称
+   */
+  LoseTypeName?: string
+  /**
+   * 战败申请原因
+   */
+  LoseRemark?: string
 }
 
 /**

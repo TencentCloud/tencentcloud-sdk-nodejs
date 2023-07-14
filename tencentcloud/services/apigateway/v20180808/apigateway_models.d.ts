@@ -2212,6 +2212,21 @@ export interface ModifyUsagePlanResponse {
     RequestId?: string;
 }
 /**
+ * 策略列表
+ */
+export interface IPStrategiesStatus {
+    /**
+     * 策略数量。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TotalCount: number;
+    /**
+     * 策略列表。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    StrategySet: Array<IPStrategy>;
+}
+/**
  * CreateUsagePlan返回参数结构体
  */
 export interface CreateUsagePlanResponse {
@@ -3125,19 +3140,19 @@ export interface DomainSetList {
     RegistrationStatus: boolean;
 }
 /**
- * 策略列表
+ * 服务列表展示
  */
-export interface IPStrategysStatus {
+export interface ServicesStatus {
     /**
-     * 策略数量。
+     * 服务列表总数。
   注意：此字段可能返回 null，表示取不到有效值。
      */
     TotalCount: number;
     /**
-     * 策略列表。
+     * 服务列表详情。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    StrategySet: Array<IPStrategy>;
+    ServiceSet: Array<Service>;
 }
 /**
  * DescribeApiKey返回参数结构体
@@ -3792,6 +3807,31 @@ export interface CreateApiRequest {
     Owner?: string;
 }
 /**
+ * UnBindEnvironment请求参数结构体
+ */
+export interface UnBindEnvironmentRequest {
+    /**
+     * 绑定类型，取值为 API、SERVICE，默认值为 SERVICE。
+     */
+    BindType: string;
+    /**
+     * 待绑定的使用计划唯一 ID 列表。
+     */
+    UsagePlanIds: Array<string>;
+    /**
+     * 待解绑的服务环境。
+     */
+    Environment: string;
+    /**
+     * 待解绑的服务唯一 ID。
+     */
+    ServiceId: string;
+    /**
+     * API 唯一 ID 数组，当 BindType=API 时，需要传入此参数。
+     */
+    ApiIds?: Array<string>;
+}
+/**
  * DescribeServiceEnvironmentStrategy请求参数结构体
  */
 export interface DescribeServiceEnvironmentStrategyRequest {
@@ -3930,46 +3970,6 @@ export interface DescribePluginsByApiRequest {
     Offset?: number;
 }
 /**
- * 用于使用计划列表展示
- */
-export interface UsagePlanStatusInfo {
-    /**
-     * 使用计划唯一 ID。
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    UsagePlanId: string;
-    /**
-     * 用户自定义的使用计划名称。
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    UsagePlanName: string;
-    /**
-     * 用户自定义的使用计划描述。
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    UsagePlanDesc: string;
-    /**
-     * 每秒最大请求次数。
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    MaxRequestNumPreSec: number;
-    /**
-     * 请求配额总量，-1表示没有限制。
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    MaxRequestNum: number;
-    /**
-     * 创建时间。按照 ISO8601 标准表示，并且使用 UTC 时间。格式为：YYYY-MM-DDThh:mm:ssZ。
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    CreatedTime: string;
-    /**
-     * 最后修改时间。按照 ISO8601 标准表示，并且使用 UTC 时间。格式为：YYYY-MM-DDThh:mm:ssZ。
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ModifiedTime: string;
-}
-/**
  * 服务发布列表详情
  */
 export interface ServiceReleaseHistoryInfo {
@@ -3977,17 +3977,17 @@ export interface ServiceReleaseHistoryInfo {
      * 版本号。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    VersionName: string;
+    VersionName?: string;
     /**
      * 版本描述。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    VersionDesc: string;
+    VersionDesc?: string;
     /**
      * 版本发布时间。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ReleaseTime: string;
+    ReleaseTime?: string;
 }
 /**
  * CreatePlugin返回参数结构体
@@ -5540,7 +5540,7 @@ export interface DescribeApiEnvironmentStrategyResponse {
      * api绑定策略详情
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Result: ApiEnvironmentStrategyStataus;
+    Result?: ApiEnvironmentStrategyStatus;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -5558,21 +5558,6 @@ export interface DescribeApiRequest {
      * API 接口唯一 ID。
      */
     ApiId: string;
-}
-/**
- * API绑定策略列表
- */
-export interface ApiEnvironmentStrategyStataus {
-    /**
-     * API绑定的限流策略数量。
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    TotalCount: number;
-    /**
-     * API绑定的限流策略列表。
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ApiEnvironmentStrategySet: Array<ApiEnvironmentStrategy>;
 }
 /**
  * 插件列表详情。
@@ -5801,29 +5786,19 @@ export interface ReqParameter {
     Desc: string;
 }
 /**
- * UnBindEnvironment请求参数结构体
+ * API绑定策略列表
  */
-export interface UnBindEnvironmentRequest {
+export interface ApiEnvironmentStrategyStatus {
     /**
-     * 绑定类型，取值为 API、SERVICE，默认值为 SERVICE。
+     * API绑定的限流策略数量。
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    BindType: string;
+    TotalCount: number;
     /**
-     * 待绑定的使用计划唯一 ID 列表。
+     * API绑定的限流策略列表。
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    UsagePlanIds: Array<string>;
-    /**
-     * 待解绑的服务环境。
-     */
-    Environment: string;
-    /**
-     * 待解绑的服务唯一 ID。
-     */
-    ServiceId: string;
-    /**
-     * API 唯一 ID 数组，当 BindType=API 时，需要传入此参数。
-     */
-    ApiIds?: Array<string>;
+    ApiEnvironmentStrategySet: Array<ApiEnvironmentStrategy>;
 }
 /**
  * AttachPlugin返回参数结构体
@@ -6415,19 +6390,44 @@ export interface DescribeApiKeysStatusResponse {
     RequestId?: string;
 }
 /**
- * 服务列表展示
+ * 用于使用计划列表展示
  */
-export interface ServicesStatus {
+export interface UsagePlanStatusInfo {
     /**
-     * 服务列表总数。
+     * 使用计划唯一 ID。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TotalCount: number;
+    UsagePlanId: string;
     /**
-     * 服务列表详情。
+     * 用户自定义的使用计划名称。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ServiceSet: Array<Service>;
+    UsagePlanName: string;
+    /**
+     * 用户自定义的使用计划描述。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    UsagePlanDesc: string;
+    /**
+     * 每秒最大请求次数。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MaxRequestNumPreSec: number;
+    /**
+     * 请求配额总量，-1表示没有限制。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MaxRequestNum: number;
+    /**
+     * 创建时间。按照 ISO8601 标准表示，并且使用 UTC 时间。格式为：YYYY-MM-DDThh:mm:ssZ。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CreatedTime: string;
+    /**
+     * 最后修改时间。按照 ISO8601 标准表示，并且使用 UTC 时间。格式为：YYYY-MM-DDThh:mm:ssZ。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ModifiedTime: string;
 }
 /**
  * DescribeLogSearch请求参数结构体
@@ -6605,7 +6605,7 @@ export interface DescribeIPStrategysStatusResponse {
      * 符合条件的策略列表。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Result: IPStrategysStatus;
+    Result?: IPStrategiesStatus;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */

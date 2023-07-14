@@ -329,7 +329,7 @@ export interface OperateChannelTemplateResponse {
    */
   TemplateId?: string
   /**
-   * 描述模版可见性更改的结果，和参数中Available无关，全部成功-"all-success",部分成功-"part-success", 全部失败-"fail"失败的会在FailMessageList中展示。
+   * 描述模板可见性更改的结果，和参数中Available无关，全部成功-"all-success",部分成功-"part-success", 全部失败-"fail"失败的会在FailMessageList中展示。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   OperateResult?: string
@@ -417,23 +417,23 @@ export interface CreateFlowOption {
    */
   CanEditFlow?: boolean
   /**
-   * 是否允许发起合同弹窗隐藏合同名称
+   * 是否允许发起合同弹窗隐藏合同名称，true-允许，false-不允许
    */
   HideShowFlowName?: boolean
   /**
-   * 是否允许发起合同弹窗隐藏合同类型
+   * 是否允许发起合同弹窗隐藏合同类型，true-允许，false-不允许
    */
   HideShowFlowType?: boolean
   /**
-   * 是否允许发起合同弹窗隐藏合同到期时间
+   * 是否允许发起合同弹窗隐藏合同到期时间，true-允许，false-不允许
    */
   HideShowDeadline?: boolean
   /**
-   * 是否允许发起合同步骤跳过指定签署方步骤
+   * 是否允许发起合同步骤跳过指定签署方步骤，true-允许，false-不允许
    */
   CanSkipAddApprover?: boolean
   /**
-   * 定制化发起合同页合同描述信息
+   * 定制化发起合同弹窗的描述信息，描述信息最长500
    */
   CustomCreateFlowDescription?: string
 }
@@ -1842,7 +1842,7 @@ CreateFlowsByTemplates 接口不使用此字段。
    */
   ComponentName?: string
   /**
-   * 是否锁定模版控件值，锁定后无法修改（用于嵌入式发起合同）
+   * 是否锁定模版控件值，锁定后无法修改（用于嵌入式发起合同），true-锁定，false-不锁定
 注意：此字段可能返回 null，表示取不到有效值。
    */
   LockComponentValue?: boolean
@@ -2501,8 +2501,8 @@ HANDWRITE -手写签名
    */
   SignId?: string
   /**
-   * SMS: 短信; NONE: 不发信息
-默认为SMS(该字段对子客无效)
+   * SMS: 短信(需确保“电子签短信通知签署方”功能是开启状态才能生效); NONE: 不发信息
+默认为SMS(签署方为子客时该字段不生效)
    */
   NotifyType?: string
 }
@@ -4141,9 +4141,9 @@ export interface ChannelCreateEmbedWebUrlRequest {
   /**
    * WEB嵌入资源类型。
 CREATE_SEAL: 创建印章
-CREATE_TEMPLATE：创建模版
-MODIFY_TEMPLATE：修改模版
-PREVIEW_TEMPLATE：预览模版
+CREATE_TEMPLATE：创建模板
+MODIFY_TEMPLATE：修改模板
+PREVIEW_TEMPLATE：预览模板
 PREVIEW_FLOW：预览合同文档
 PREVIEW_FLOW_DETAIL：预览合同详情
 PREVIEW_SEAL_LIST：预览印章列表
@@ -4153,7 +4153,7 @@ EXTEND_SERVICE：扩展服务
   EmbedType: string
   /**
    * WEB嵌入的业务资源ID
-EmbedType取值MODIFY_TEMPLATE，PREVIEW_TEMPLATE时必填，取值为模版id
+EmbedType取值MODIFY_TEMPLATE，PREVIEW_TEMPLATE时必填，取值为模板id
 PREVIEW_FLOW，PREVIEW_FLOW_DETAIL时必填，取值为合同id
 PREVIEW_SEAL_DETAIL，必填，取值为印章id
    */

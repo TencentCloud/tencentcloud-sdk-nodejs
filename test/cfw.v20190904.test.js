@@ -58,6 +58,16 @@ it("cfw.v20190904.DescribeNatFwVpcDnsLst", async function () {
     }
 })
 
+it("cfw.v20190904.DescribeUnHandleEventTabList", async function () {
+    try {
+       const data = await client.DescribeUnHandleEventTabList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cfw.v20190904.ModifyAllPublicIPSwitchStatus", async function () {
     try {
        const data = await client.ModifyAllPublicIPSwitchStatus({})
@@ -188,9 +198,9 @@ it("cfw.v20190904.ModifyAssetScan", async function () {
     }
 })
 
-it("cfw.v20190904.DescribeSwitchLists", async function () {
+it("cfw.v20190904.CreateAddressTemplate", async function () {
     try {
-       const data = await client.DescribeSwitchLists({})
+       const data = await client.CreateAddressTemplate({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -428,9 +438,9 @@ it("cfw.v20190904.DescribeGuideScanInfo", async function () {
     }
 })
 
-it("cfw.v20190904.DescribeUnHandleEventTabList", async function () {
+it("cfw.v20190904.DeleteAddressTemplate", async function () {
     try {
-       const data = await client.DescribeUnHandleEventTabList({})
+       const data = await client.DeleteAddressTemplate({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -498,9 +508,9 @@ it("cfw.v20190904.ModifyAllRuleStatus", async function () {
     }
 })
 
-it("cfw.v20190904.RemoveAcRule", async function () {
+it("cfw.v20190904.DescribeSwitchLists", async function () {
     try {
-       const data = await client.RemoveAcRule({})
+       const data = await client.DescribeSwitchLists({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -508,9 +518,9 @@ it("cfw.v20190904.RemoveAcRule", async function () {
     }
 })
 
-it("cfw.v20190904.SetNatFwEip", async function () {
+it("cfw.v20190904.RemoveAcRule", async function () {
     try {
-       const data = await client.SetNatFwEip({})
+       const data = await client.RemoveAcRule({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -741,6 +751,16 @@ it("cfw.v20190904.DescribeBlockByIpTimesList", async function () {
 it("cfw.v20190904.DescribeBlockStaticList", async function () {
     try {
        const data = await client.DescribeBlockStaticList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cfw.v20190904.SetNatFwEip", async function () {
+    try {
+       const data = await client.SetNatFwEip({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

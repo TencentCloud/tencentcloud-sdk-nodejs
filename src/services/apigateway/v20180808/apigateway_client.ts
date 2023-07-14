@@ -110,6 +110,7 @@ import {
   NetworkConfig,
   ServiceReleaseHistory,
   ModifyUsagePlanResponse,
+  IPStrategiesStatus,
   CreateUsagePlanResponse,
   DomainSets,
   DeletePluginRequest,
@@ -154,7 +155,7 @@ import {
   UpdateApiAppKeyRequest,
   ApigatewayTags,
   DomainSetList,
-  IPStrategysStatus,
+  ServicesStatus,
   DescribeApiKeyResponse,
   ModifyApiIncrementResponse,
   ModifyApiRequest,
@@ -165,6 +166,7 @@ import {
   DescribeAllPluginApisRequest,
   ApiIdStatus,
   CreateApiRequest,
+  UnBindEnvironmentRequest,
   DescribeServiceEnvironmentStrategyRequest,
   DescribeUpstreamBindApisResponse,
   ReleaseServiceRequest,
@@ -173,7 +175,6 @@ import {
   Environment,
   DescribeAPIDocsRequest,
   DescribePluginsByApiRequest,
-  UsagePlanStatusInfo,
   ServiceReleaseHistoryInfo,
   CreatePluginResponse,
   ModifyExclusiveInstanceResponse,
@@ -252,7 +253,6 @@ import {
   MicroService,
   DescribeApiEnvironmentStrategyResponse,
   DescribeApiRequest,
-  ApiEnvironmentStrategyStataus,
   PluginSummary,
   ApiAppInfo,
   DeleteIPStrategyResponse,
@@ -262,7 +262,7 @@ import {
   ApiAppApiInfo,
   DescribeUsagePlanResponse,
   ReqParameter,
-  UnBindEnvironmentRequest,
+  ApiEnvironmentStrategyStatus,
   AttachPluginResponse,
   BindEnvironmentRequest,
   ModifyUpstreamResponse,
@@ -287,7 +287,7 @@ import {
   DescribeServiceEnvironmentStrategyResponse,
   DesApisStatus,
   DescribeApiKeysStatusResponse,
-  ServicesStatus,
+  UsagePlanStatusInfo,
   DescribeLogSearchRequest,
   BuildAPIDocRequest,
   ApiKeysStatus,
@@ -948,7 +948,7 @@ API 网关的服务创建后，需要发布到某个环境方生效后，使用�
   }
 
   /**
-   * 本接口（DescribeIPStrategysStatus）用于查询服务IP策略列表。
+   * 本接口（DescribeIPStrategysStatus）用于查询服务IP策略列表，因为接口名拼写错误，已不推荐使用，请优先使用DescribeIPStrategiesStatus接口。
    */
   async DescribeIPStrategysStatus(
     req: DescribeIPStrategysStatusRequest,

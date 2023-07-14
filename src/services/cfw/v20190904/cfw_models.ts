@@ -549,11 +549,6 @@ export interface DeleteAllAccessControlRuleRequest {
 }
 
 /**
- * DescribeEnterpriseSGRuleProgress请求参数结构体
- */
-export type DescribeEnterpriseSGRuleProgressRequest = null
-
-/**
  * ModifySecurityGroupRule请求参数结构体
  */
 export interface ModifySecurityGroupRuleRequest {
@@ -1016,6 +1011,20 @@ export interface AddEnterpriseSecurityGroupRulesRequest {
    * 是否延迟下发，1则延迟下发，否则立即下发
    */
   IsDelay?: number
+}
+
+/**
+ * ModifySecurityGroupSequenceRules返回参数结构体
+ */
+export interface ModifySecurityGroupSequenceRulesResponse {
+  /**
+   * 状态值，0：修改成功，非0：修改失败
+   */
+  Status: number
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1621,31 +1630,9 @@ export interface DescribeTLogInfoRequest {
 }
 
 /**
- * DescribeSecurityGroupList返回参数结构体
+ * DescribeEnterpriseSGRuleProgress请求参数结构体
  */
-export interface DescribeSecurityGroupListResponse {
-  /**
-   * 列表当前规则总条数
-   */
-  Total: number
-  /**
-   * 安全组规则列表数据
-   */
-  Data: Array<SecurityGroupListData>
-  /**
-   * 不算筛选条数的总条数
-   */
-  AllTotal: number
-  /**
-   * 访问控制规则全部启用/全部停用
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Enable: number
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
+export type DescribeEnterpriseSGRuleProgressRequest = null
 
 /**
  * AssetZone
@@ -2292,6 +2279,30 @@ export interface ModifyAllPublicIPSwitchStatusRequest {
 }
 
 /**
+ * CreateAddressTemplate请求参数结构体
+ */
+export interface CreateAddressTemplateRequest {
+  /**
+   * 模板名称
+   */
+  Name: string
+  /**
+   * 模板描述
+   */
+  Detail: string
+  /**
+   * Type为1，ip模板eg：1.1.1.1,2.2.2.2；
+Type为5，域名模板eg：www.qq.com,www.tencent.com
+   */
+  IpString: string
+  /**
+   * 1 ip模板
+5 域名模板
+   */
+  Type: number
+}
+
+/**
  * DescribeBlockStaticList返回参数结构体
  */
 export interface DescribeBlockStaticListResponse {
@@ -2484,13 +2495,26 @@ export interface ModifyEnterpriseSecurityGroupRuleResponse {
 }
 
 /**
- * ModifySecurityGroupSequenceRules返回参数结构体
+ * DescribeSecurityGroupList返回参数结构体
  */
-export interface ModifySecurityGroupSequenceRulesResponse {
+export interface DescribeSecurityGroupListResponse {
   /**
-   * 状态值，0：修改成功，非0：修改失败
+   * 列表当前规则总条数
    */
-  Status: number
+  Total: number
+  /**
+   * 安全组规则列表数据
+   */
+  Data: Array<SecurityGroupListData>
+  /**
+   * 不算筛选条数的总条数
+   */
+  AllTotal: number
+  /**
+   * 访问控制规则全部启用/全部停用
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Enable: number
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2661,6 +2685,20 @@ export interface RemoveEnterpriseSecurityGroupRuleResponse {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Status: number
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateAddressTemplate返回参数结构体
+ */
+export interface CreateAddressTemplateResponse {
+  /**
+   * 创建结果,0成功
+   */
+  Status?: number
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4117,6 +4155,20 @@ export interface DescribeResourceGroupResponse {
 }
 
 /**
+ * DeleteAddressTemplate返回参数结构体
+ */
+export interface DeleteAddressTemplateResponse {
+  /**
+   * 删除结果,0成功
+   */
+  Status?: number
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeCfwEips返回参数结构体
  */
 export interface DescribeCfwEipsResponse {
@@ -4220,6 +4272,16 @@ export interface ModifyRunSyncAssetRequest {
    * 0: 互联网防火墙开关，1：vpc 防火墙开关
    */
   Type?: number
+}
+
+/**
+ * DeleteAddressTemplate请求参数结构体
+ */
+export interface DeleteAddressTemplateRequest {
+  /**
+   * 模板id
+   */
+  Uuid: string
 }
 
 /**

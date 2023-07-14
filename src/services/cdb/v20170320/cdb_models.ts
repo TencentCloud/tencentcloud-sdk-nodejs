@@ -4205,6 +4205,90 @@ export interface RollbackTimeRange {
 }
 
 /**
+ * 审计日志详细信息
+ */
+export interface AuditLog {
+  /**
+   * 影响行数。
+   */
+  AffectRows?: number
+  /**
+   * 错误码。
+   */
+  ErrCode?: number
+  /**
+   * SQL 类型。
+   */
+  SqlType?: string
+  /**
+   * 审计策略名称，逐步下线。
+   */
+  PolicyName?: string
+  /**
+   * 数据库名称。
+   */
+  DBName?: string
+  /**
+   * SQL 语句。
+   */
+  Sql?: string
+  /**
+   * 客户端地址。
+   */
+  Host?: string
+  /**
+   * 用户名。
+   */
+  User?: string
+  /**
+   * 执行时间，微秒。
+   */
+  ExecTime?: number
+  /**
+   * 时间。
+   */
+  Timestamp?: string
+  /**
+   * 返回行数。
+   */
+  SentRows?: number
+  /**
+   * 线程ID。
+   */
+  ThreadId?: number
+  /**
+   * 扫描行数。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CheckRows?: number
+  /**
+   * cpu执行时间，微秒。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CpuTime?: number
+  /**
+   * IO等待时间，微秒。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IoWaitTime?: number
+  /**
+   * 锁等待时间，微秒。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LockWaitTime?: number
+  /**
+   * 开始时间，与timestamp构成一个精确到纳秒的时间。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NsTime?: number
+  /**
+   * 事物持续时间，微秒。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TrxLivingTime?: number
+}
+
+/**
  * DescribeAuditLogFiles请求参数结构体
  */
 export interface DescribeAuditLogFilesRequest {
@@ -4617,6 +4701,47 @@ export interface DescribeAccountPrivilegesResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeAuditLogs请求参数结构体
+ */
+export interface DescribeAuditLogsRequest {
+  /**
+   * 实例 ID。
+   */
+  InstanceId: string
+  /**
+   * 开始时间。
+   */
+  StartTime: string
+  /**
+   * 结束时间。
+   */
+  EndTime: string
+  /**
+   * 分页参数，单次返回的数据条数。默认值为100，最大值为100。
+   */
+  Limit?: number
+  /**
+   * 分页偏移量。
+   */
+  Offset?: number
+  /**
+   * 排序方式。支持值包括："ASC" - 升序，"DESC" - 降序。
+   */
+  Order?: string
+  /**
+   * 排序字段。支持值包括：
+"timestamp" - 时间戳；
+"affectRows" - 影响行数；
+"execTime" - 执行时间。
+   */
+  OrderBy?: string
+  /**
+   * 过滤条件。可按设置的过滤条件过滤日志。
+   */
+  LogFilter?: Array<InstanceAuditLogFilters>
 }
 
 /**
@@ -7635,6 +7760,25 @@ export interface DescribeTasksResponse {
    * 返回的实例任务信息。
    */
   Items?: Array<TaskDetail>
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeAuditLogs返回参数结构体
+ */
+export interface DescribeAuditLogsResponse {
+  /**
+   * 符合条件的审计日志条数。
+   */
+  TotalCount?: number
+  /**
+   * 审计日志详情。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Items?: Array<AuditLog>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

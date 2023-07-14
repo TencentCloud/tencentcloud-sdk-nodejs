@@ -39,7 +39,6 @@ import {
   ModifyNatFwVpcDnsSwitchRequest,
   DeleteNatFwInstanceResponse,
   DeleteAllAccessControlRuleRequest,
-  DescribeEnterpriseSGRuleProgressRequest,
   ModifySecurityGroupRuleRequest,
   ModifyAllVPCSwitchStatusResponse,
   VpcZoneData,
@@ -60,6 +59,7 @@ import {
   ModifyAssetScanRequest,
   ModifyBlockIgnoreListRequest,
   AddEnterpriseSecurityGroupRulesRequest,
+  ModifySecurityGroupSequenceRulesResponse,
   SecurityGroupRule,
   DeleteSecurityGroupRuleResponse,
   ModifySequenceRulesRequest,
@@ -81,7 +81,7 @@ import {
   SecurityGroupOrderIndexData,
   DescribeSourceAssetResponse,
   DescribeTLogInfoRequest,
-  DescribeSecurityGroupListResponse,
+  DescribeEnterpriseSGRuleProgressRequest,
   AssetZone,
   RuleChangeItem,
   DescribeTLogIpListRequest,
@@ -107,6 +107,7 @@ import {
   RuleInfoData,
   DescribeAcListsResponse,
   ModifyAllPublicIPSwitchStatusRequest,
+  CreateAddressTemplateRequest,
   DescribeBlockStaticListResponse,
   AddNatAcRuleRequest,
   ModifySecurityGroupSequenceRulesRequest,
@@ -118,7 +119,7 @@ import {
   ScanResultInfo,
   ModifyRunSyncAssetResponse,
   ModifyEnterpriseSecurityGroupRuleResponse,
-  ModifySecurityGroupSequenceRulesResponse,
+  DescribeSecurityGroupListResponse,
   IpStatic,
   AddEnterpriseSecurityGroupRulesResponse,
   UnHandleEventDetail,
@@ -127,6 +128,7 @@ import {
   CreateNatFwInstanceRequest,
   DescribeBlockByIpTimesListRequest,
   RemoveEnterpriseSecurityGroupRuleResponse,
+  CreateAddressTemplateResponse,
   ModifyEnterpriseSecurityGroupRuleRequest,
   ModifySequenceRulesResponse,
   DescribeResourceGroupNewResponse,
@@ -180,6 +182,7 @@ import {
   SwitchListsData,
   CreateNatFwInstanceWithDomainRequest,
   DescribeResourceGroupResponse,
+  DeleteAddressTemplateResponse,
   DescribeCfwEipsResponse,
   ModifyResourceGroupResponse,
   DeleteResourceGroupResponse,
@@ -187,6 +190,7 @@ import {
   DescribeBlockStaticListRequest,
   FwVpcCidr,
   ModifyRunSyncAssetRequest,
+  DeleteAddressTemplateRequest,
   CreateAcRulesResponse,
   DescribeSwitchListsResponse,
   ModifyAcRuleRequest,
@@ -252,6 +256,17 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeNatFwVpcDnsLstResponse) => void
   ): Promise<DescribeNatFwVpcDnsLstResponse> {
     return this.request("DescribeNatFwVpcDnsLst", req, cb)
+  }
+
+  /**
+     * DescribeUnHandleEventTabList 告警中心伪攻击链事件未处置接口
+
+     */
+  async DescribeUnHandleEventTabList(
+    req: DescribeUnHandleEventTabListRequest,
+    cb?: (error: string, rep: DescribeUnHandleEventTabListResponse) => void
+  ): Promise<DescribeUnHandleEventTabListResponse> {
+    return this.request("DescribeUnHandleEventTabList", req, cb)
   }
 
   /**
@@ -387,13 +402,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 防火墙开关列表
+   * 创建地址模板规则
    */
-  async DescribeSwitchLists(
-    req: DescribeSwitchListsRequest,
-    cb?: (error: string, rep: DescribeSwitchListsResponse) => void
-  ): Promise<DescribeSwitchListsResponse> {
-    return this.request("DescribeSwitchLists", req, cb)
+  async CreateAddressTemplate(
+    req: CreateAddressTemplateRequest,
+    cb?: (error: string, rep: CreateAddressTemplateResponse) => void
+  ): Promise<CreateAddressTemplateResponse> {
+    return this.request("CreateAddressTemplate", req, cb)
   }
 
   /**
@@ -628,14 +643,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * DescribeUnHandleEventTabList 告警中心伪攻击链事件未处置接口
-
-     */
-  async DescribeUnHandleEventTabList(
-    req: DescribeUnHandleEventTabListRequest,
-    cb?: (error: string, rep: DescribeUnHandleEventTabListResponse) => void
-  ): Promise<DescribeUnHandleEventTabListResponse> {
-    return this.request("DescribeUnHandleEventTabList", req, cb)
+   * 删除地址模板规则
+   */
+  async DeleteAddressTemplate(
+    req: DeleteAddressTemplateRequest,
+    cb?: (error: string, rep: DeleteAddressTemplateResponse) => void
+  ): Promise<DeleteAddressTemplateResponse> {
+    return this.request("DeleteAddressTemplate", req, cb)
   }
 
   /**
@@ -700,6 +714,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 防火墙开关列表
+   */
+  async DescribeSwitchLists(
+    req: DescribeSwitchListsRequest,
+    cb?: (error: string, rep: DescribeSwitchListsResponse) => void
+  ): Promise<DescribeSwitchListsResponse> {
+    return this.request("DescribeSwitchLists", req, cb)
+  }
+
+  /**
    * 删除互联网边界规则
    */
   async RemoveAcRule(
@@ -707,16 +731,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: RemoveAcRuleResponse) => void
   ): Promise<RemoveAcRuleResponse> {
     return this.request("RemoveAcRule", req, cb)
-  }
-
-  /**
-   * 设置防火墙实例弹性公网ip，目前仅支持新增模式的防火墙实例
-   */
-  async SetNatFwEip(
-    req: SetNatFwEipRequest,
-    cb?: (error: string, rep: SetNatFwEipResponse) => void
-  ): Promise<SetNatFwEipResponse> {
-    return this.request("SetNatFwEip", req, cb)
   }
 
   /**
@@ -953,5 +967,15 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeBlockStaticListResponse) => void
   ): Promise<DescribeBlockStaticListResponse> {
     return this.request("DescribeBlockStaticList", req, cb)
+  }
+
+  /**
+   * 设置防火墙实例弹性公网ip，目前仅支持新增模式的防火墙实例
+   */
+  async SetNatFwEip(
+    req: SetNatFwEipRequest,
+    cb?: (error: string, rep: SetNatFwEipResponse) => void
+  ): Promise<SetNatFwEipResponse> {
+    return this.request("SetNatFwEip", req, cb)
   }
 }

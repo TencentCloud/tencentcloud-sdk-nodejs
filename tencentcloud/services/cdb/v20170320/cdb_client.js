@@ -658,6 +658,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeAsyncRequestInfo", req, cb);
     }
     /**
+     * 本接口(DescribeAuditLogs)用于查询数据库审计日志。
+     */
+    async DescribeAuditLogs(req, cb) {
+        return this.request("DescribeAuditLogs", req, cb);
+    }
+    /**
      * 本接口(DescribeDBInstanceRebootTime)用于查询云数据库实例重启预计所需的时间。
      */
     async DescribeDBInstanceRebootTime(req, cb) {

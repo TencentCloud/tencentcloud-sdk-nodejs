@@ -52,6 +52,13 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeNatFwVpcDnsLst", req, cb);
     }
     /**
+     * DescribeUnHandleEventTabList 告警中心伪攻击链事件未处置接口
+
+     */
+    async DescribeUnHandleEventTabList(req, cb) {
+        return this.request("DescribeUnHandleEventTabList", req, cb);
+    }
+    /**
      * 互联网边界防火墙一键开关
      */
     async ModifyAllPublicIPSwitchStatus(req, cb) {
@@ -132,10 +139,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyAssetScan", req, cb);
     }
     /**
-     * 防火墙开关列表
+     * 创建地址模板规则
      */
-    async DescribeSwitchLists(req, cb) {
-        return this.request("DescribeSwitchLists", req, cb);
+    async CreateAddressTemplate(req, cb) {
+        return this.request("CreateAddressTemplate", req, cb);
     }
     /**
      * 创建暴露数据库白名单规则
@@ -277,11 +284,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeGuideScanInfo", req, cb);
     }
     /**
-     * DescribeUnHandleEventTabList 告警中心伪攻击链事件未处置接口
-
+     * 删除地址模板规则
      */
-    async DescribeUnHandleEventTabList(req, cb) {
-        return this.request("DescribeUnHandleEventTabList", req, cb);
+    async DeleteAddressTemplate(req, cb) {
+        return this.request("DeleteAddressTemplate", req, cb);
     }
     /**
      * 修改NAT防火墙开关
@@ -321,16 +327,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyAllRuleStatus", req, cb);
     }
     /**
+     * 防火墙开关列表
+     */
+    async DescribeSwitchLists(req, cb) {
+        return this.request("DescribeSwitchLists", req, cb);
+    }
+    /**
      * 删除互联网边界规则
      */
     async RemoveAcRule(req, cb) {
         return this.request("RemoveAcRule", req, cb);
-    }
-    /**
-     * 设置防火墙实例弹性公网ip，目前仅支持新增模式的防火墙实例
-     */
-    async SetNatFwEip(req, cb) {
-        return this.request("SetNatFwEip", req, cb);
     }
     /**
      * ModifyBlockTop取消置顶接口
@@ -475,6 +481,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeBlockStaticList(req, cb) {
         return this.request("DescribeBlockStaticList", req, cb);
+    }
+    /**
+     * 设置防火墙实例弹性公网ip，目前仅支持新增模式的防火墙实例
+     */
+    async SetNatFwEip(req, cb) {
+        return this.request("SetNatFwEip", req, cb);
     }
 }
 exports.Client = Client;

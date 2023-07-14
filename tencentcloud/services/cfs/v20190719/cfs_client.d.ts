@@ -103,7 +103,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeCfsSnapshotOverview(req?: DescribeCfsSnapshotOverviewRequest, cb?: (error: string, rep: DescribeCfsSnapshotOverviewResponse) => void): Promise<DescribeCfsSnapshotOverviewResponse>;
     /**
-     * 查询文件系统配额
+     * 查询文件系统配额（仅部分Turbo实例能使用，若需要调用请提交工单与我们联系）
      */
     DescribeUserQuota(req: DescribeUserQuotaRequest, cb?: (error: string, rep: DescribeUserQuotaResponse) => void): Promise<DescribeUserQuotaResponse>;
     /**
