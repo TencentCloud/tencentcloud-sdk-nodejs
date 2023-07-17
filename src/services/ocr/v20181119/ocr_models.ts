@@ -103,7 +103,7 @@ OK：表示识别成功；FailedOperation.UnsupportedInvoice：表示不支持�
 FailedOperation.UnKnowError：表示识别失败；
 其它错误码见各个票据接口的定义。
    */
-  Code: string
+  Code?: string
   /**
    * 识别出的图片所属的票据类型。
 -1：未知类型
@@ -122,19 +122,19 @@ FailedOperation.UnKnowError：表示识别失败；
 16：全电发票
 17：医疗发票
    */
-  Type: number
+  Type?: number
   /**
-   * 旋转后的图片四点坐标。
+   * 该发票在原图片中的四点坐标。
    */
-  Polygon: Polygon
+  Polygon?: Polygon
   /**
    * 识别出的图片在混贴票据图片中的旋转角度。
    */
-  Angle: number
+  Angle?: number
   /**
    * 识别到的内容。
    */
-  SingleInvoiceInfos: SingleInvoiceItem
+  SingleInvoiceInfos?: SingleInvoiceItem
   /**
    * 发票处于识别图片或PDF文件中的页教，默认从1开始。
    */

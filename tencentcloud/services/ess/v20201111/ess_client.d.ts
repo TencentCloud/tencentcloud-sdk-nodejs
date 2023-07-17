@@ -163,7 +163,13 @@ callbackinfo包含： 回调地址和签名key
      */
     DescribeExtendedServiceAuthInfos(req: DescribeExtendedServiceAuthInfosRequest, cb?: (error: string, rep: DescribeExtendedServiceAuthInfosResponse) => void): Promise<DescribeExtendedServiceAuthInfosResponse>;
     /**
-     * 生成子客编辑企业信息二维码
+     * 根据产品要求，调整接口目录
+
+新接口：ChannelCreateOrganizationModifyQrCode
+
+老接口目前无线上流量，测试用例已下线处理
+
+生成子客编辑企业信息二维码
      */
     CreateChannelSubOrganizationModifyQrCode(req: CreateChannelSubOrganizationModifyQrCodeRequest, cb?: (error: string, rep: CreateChannelSubOrganizationModifyQrCodeResponse) => void): Promise<CreateChannelSubOrganizationModifyQrCodeResponse>;
     /**

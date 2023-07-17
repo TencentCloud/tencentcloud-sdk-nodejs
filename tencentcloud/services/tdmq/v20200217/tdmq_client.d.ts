@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeRolesResponse, DescribeAMQPRouteRelationsRequest, DescribeRabbitMQVirtualHostResponse, DescribeNamespaceBundlesOptRequest, DeleteRabbitMQUserRequest, DescribeSubscriptionsRequest, DescribeRocketMQGroupsRequest, CreateRocketMQGroupRequest, ModifyRabbitMQVirtualHostRequest, ModifyEnvironmentAttributesRequest, DeleteClusterResponse, SendBatchMessagesResponse, ModifyCmqSubscriptionAttributeResponse, CreateCmqTopicRequest, ModifyRabbitMQVipInstanceRequest, CreateAMQPExchangeRequest, DescribeRocketMQNamespacesResponse, ResetRocketMQConsumerOffSetResponse, DescribeBindClustersResponse, ModifyClusterResponse, SendRocketMQMessageRequest, DescribeCmqQueuesResponse, CreateRabbitMQVipInstanceRequest, DescribeAllTenantsResponse, CreateRabbitMQVirtualHostResponse, DescribeRabbitMQNodeListRequest, DescribeNamespaceBundlesOptResponse, DescribeBindVpcsResponse, RewindCmqQueueResponse, DeleteClusterRequest, DescribeAMQPClusterResponse, CreateAMQPClusterRequest, DeleteRocketMQGroupRequest, SendRocketMQMessageResponse, DescribeRocketMQVipInstanceDetailRequest, DeleteCmqTopicResponse, CreateSubscriptionRequest, CreateRocketMQNamespaceRequest, DescribeCmqTopicDetailResponse, ModifyRabbitMQVirtualHostResponse, CreateEnvironmentResponse, CreateSubscriptionResponse, DeleteAMQPQueueResponse, ModifyCmqTopicAttributeResponse, DescribeCmqSubscriptionDetailRequest, DescribePublisherSummaryResponse, DescribeAMQPVHostsResponse, DescribeEnvironmentsRequest, DescribeRocketMQNamespacesRequest, DeleteAMQPClusterResponse, DescribeAMQPClusterRequest, DescribeRocketMQTopicsRequest, ModifyRocketMQClusterResponse, DescribeCmqQueueDetailResponse, CreateEnvironmentRequest, CreateAMQPQueueRequest, ClearCmqQueueRequest, ModifyEnvironmentAttributesResponse, DescribeClustersRequest, DescribeRocketMQClusterResponse, CreateAMQPVHostResponse, DescribeCmqSubscriptionDetailResponse, RewindCmqQueueRequest, DescribeAMQPVHostsRequest, DescribePulsarProInstancesRequest, ModifyClusterRequest, DescribeAMQPQueuesRequest, ModifyRocketMQClusterRequest, ModifyAMQPExchangeResponse, DescribeAMQPExchangesResponse, AcknowledgeMessageRequest, DeleteAMQPClusterRequest, DescribeRocketMQVipInstanceDetailResponse, PublishCmqMsgResponse, DescribePublishersRequest, CreateRocketMQClusterRequest, CreateRabbitMQUserResponse, AcknowledgeMessageResponse, ModifyCmqQueueAttributeResponse, DeleteEnvironmentRolesResponse, DescribeClusterDetailRequest, DescribeRabbitMQUserResponse, ModifyRoleResponse, ModifyAMQPQueueRequest, DeleteCmqQueueResponse, DescribeRocketMQClusterRequest, DeleteRocketMQTopicResponse, DescribeRocketMQMsgRequest, ModifyCmqTopicAttributeRequest, DescribeRabbitMQVipInstancesResponse, DeleteRolesRequest, ModifyRocketMQTopicResponse, CreateCmqSubscribeResponse, DescribeCmqDeadLetterSourceQueuesRequest, DescribeSubscriptionsResponse, ModifyRoleRequest, DescribeRabbitMQNodeListResponse, SendMessagesResponse, ReceiveMessageRequest, CreateTopicRequest, DescribeTopicsRequest, DeleteEnvironmentsResponse, ModifyAMQPClusterRequest, DescribeEnvironmentRolesResponse, DescribeAMQPCreateQuotaResponse, ModifyRocketMQGroupRequest, DescribeCmqTopicsResponse, DescribeCmqTopicDetailRequest, UnbindCmqDeadLetterResponse, ModifyRocketMQNamespaceResponse, DeleteAMQPQueueRequest, DeleteEnvironmentsRequest, DescribeRocketMQClustersRequest, ReceiveMessageResponse, DescribeBindVpcsRequest, DescribeClustersResponse, DeleteRocketMQNamespaceResponse, ClearCmqSubscriptionFilterTagsRequest, DescribePulsarProInstancesResponse, CreateRocketMQGroupResponse, CreateEnvironmentRoleRequest, DescribeEnvironmentRolesRequest, DescribeRocketMQClustersResponse, DeleteRolesResponse, SendMsgResponse, ModifyRocketMQTopicRequest, DescribeRabbitMQUserRequest, DescribeRocketMQTopicsResponse, CreateAMQPVHostRequest, DeleteRocketMQGroupResponse, CreateCmqQueueResponse, DescribeRocketMQGroupsResponse, ResetMsgSubOffsetByTimestampResponse, CreateClusterResponse, DeleteAMQPExchangeResponse, DeleteRocketMQNamespaceRequest, DescribeRolesRequest, CreateAMQPQueueResponse, CreateClusterRequest, DescribeRabbitMQVirtualHostListRequest, DescribeAMQPClustersRequest, CreateAMQPRouteRelationResponse, CreateTopicResponse, DescribeCmqQueuesRequest, DescribeEnvironmentsResponse, DescribeRabbitMQVipInstanceResponse, ModifyCmqSubscriptionAttributeRequest, ModifyTopicResponse, DescribeAMQPRouteRelationsResponse, DeleteTopicsResponse, CreateAMQPClusterResponse, DescribeRocketMQVipInstancesRequest, DeleteAMQPExchangeRequest, DeleteRabbitMQVirtualHostRequest, DeleteRocketMQClusterResponse, CreateCmqTopicResponse, SendCmqMsgResponse, ModifyRabbitMQVipInstanceResponse, ClearCmqSubscriptionFilterTagsResponse, CreateRabbitMQVipInstanceResponse, DescribeRabbitMQVipInstanceRequest, DescribeCmqTopicsRequest, DeleteTopicsRequest, ModifyTopicRequest, ResetMsgSubOffsetByTimestampRequest, CreateEnvironmentRoleResponse, CreateCmqSubscribeRequest, DeleteCmqSubscribeRequest, DescribeAMQPClustersResponse, ModifyRocketMQInstanceSpecResponse, DescribeCmqDeadLetterSourceQueuesResponse, DeleteSubscriptionsResponse, DeleteRocketMQTopicRequest, CreateRocketMQClusterResponse, ModifyRocketMQInstanceSpecRequest, DescribeAMQPCreateQuotaRequest, DescribePublishersResponse, DeleteAMQPRouteRelationResponse, SendMsgRequest, ResetRocketMQConsumerOffSetRequest, DescribeCmqQueueDetailRequest, DescribeRocketMQMsgResponse, DescribeAMQPQueuesResponse, CreateRocketMQTopicRequest, CreateRoleResponse, DeleteRocketMQClusterRequest, DescribeEnvironmentAttributesRequest, DeleteEnvironmentRolesRequest, ClearCmqQueueResponse, ModifyRabbitMQUserResponse, CreateAMQPExchangeResponse, DescribeNodeHealthOptRequest, DeleteRabbitMQVirtualHostResponse, CreateRocketMQTopicResponse, CreateRabbitMQVirtualHostRequest, ModifyAMQPQueueResponse, CreateCmqQueueRequest, ModifyEnvironmentRoleResponse, DeleteCmqQueueRequest, DeleteRabbitMQUserResponse, DescribeRabbitMQVirtualHostListResponse, DescribeBindClustersRequest, DescribePulsarProInstanceDetailRequest, CreateRabbitMQUserRequest, CreateRoleRequest, ModifyEnvironmentRoleRequest, DescribeEnvironmentAttributesResponse, ModifyAMQPClusterResponse, DescribeTopicsResponse, DescribeAMQPExchangesRequest, CreateRocketMQNamespaceResponse, ModifyAMQPExchangeRequest, SendBatchMessagesRequest, DeleteCmqTopicRequest, DeleteAMQPRouteRelationRequest, DescribePulsarProInstanceDetailResponse, DescribeNodeHealthOptResponse, PublishCmqMsgRequest, UnbindCmqDeadLetterRequest, CreateAMQPRouteRelationRequest, DeleteCmqSubscribeResponse, DeleteRabbitMQVipInstanceRequest, DescribePublisherSummaryRequest, DeleteSubscriptionsRequest, SendCmqMsgRequest, ModifyRabbitMQUserRequest, ModifyCmqQueueAttributeRequest, ModifyRocketMQGroupResponse, DescribeRocketMQVipInstancesResponse, DescribeRabbitMQVipInstancesRequest, DescribeClusterDetailResponse, SendMessagesRequest, ModifyRocketMQNamespaceRequest, DeleteAMQPVHostResponse, DeleteAMQPVHostRequest, DeleteRabbitMQVipInstanceResponse, DescribeAllTenantsRequest, DescribeRabbitMQVirtualHostRequest } from "./tdmq_models";
+import { DescribeRolesResponse, DescribeBindClustersResponse, DescribeRabbitMQVirtualHostResponse, DescribeNamespaceBundlesOptRequest, DeleteRabbitMQUserRequest, DescribeSubscriptionsRequest, DescribeRocketMQGroupsRequest, CreateRocketMQGroupRequest, ModifyRabbitMQVirtualHostRequest, ModifyEnvironmentAttributesRequest, DeleteClusterResponse, SendBatchMessagesResponse, ModifyCmqSubscriptionAttributeResponse, CreateCmqTopicRequest, ModifyRabbitMQVipInstanceRequest, DescribeRocketMQNamespacesResponse, ModifyRocketMQInstanceSpecRequest, ModifyClusterResponse, SendRocketMQMessageRequest, DescribeCmqQueuesResponse, CreateRabbitMQVipInstanceRequest, DescribeAllTenantsResponse, CreateRabbitMQVirtualHostResponse, DescribeRabbitMQNodeListRequest, DescribeNamespaceBundlesOptResponse, DescribeBindVpcsResponse, RewindCmqQueueResponse, DeleteClusterRequest, DeleteRocketMQGroupRequest, ModifyRabbitMQUserRequest, DeleteCmqTopicResponse, CreateSubscriptionRequest, CreateRocketMQNamespaceRequest, DescribeCmqTopicDetailResponse, ModifyRabbitMQVirtualHostResponse, CreateEnvironmentResponse, CreateSubscriptionResponse, SendMsgResponse, ModifyCmqTopicAttributeResponse, DescribeCmqSubscriptionDetailRequest, DescribeEnvironmentsRequest, DescribeRocketMQNamespacesRequest, DescribeRocketMQTopicsRequest, ModifyRocketMQClusterResponse, DescribeCmqQueueDetailResponse, CreateEnvironmentRequest, DeleteTopicsResponse, ModifyEnvironmentAttributesResponse, DescribeClustersRequest, DescribeRocketMQClusterResponse, DescribePublisherSummaryResponse, DescribeCmqSubscriptionDetailResponse, RewindCmqQueueRequest, DescribeRabbitMQUserResponse, DescribeRocketMQMsgResponse, ModifyClusterRequest, DescribeEnvironmentAttributesRequest, ModifyRocketMQClusterRequest, DeleteRabbitMQVirtualHostResponse, AcknowledgeMessageRequest, ResetRocketMQConsumerOffSetResponse, DescribeRocketMQVipInstanceDetailResponse, PublishCmqMsgResponse, DescribePublishersRequest, CreateRocketMQClusterRequest, CreateRabbitMQUserResponse, AcknowledgeMessageResponse, DeleteEnvironmentRolesResponse, DescribeClusterDetailRequest, ModifyRoleResponse, DeleteCmqQueueResponse, DescribeRocketMQClusterRequest, DeleteRocketMQTopicResponse, SendRocketMQMessageResponse, ModifyCmqTopicAttributeRequest, DescribeRabbitMQVipInstancesResponse, DeleteRolesRequest, ModifyRocketMQTopicResponse, CreateCmqSubscribeResponse, DescribeSubscriptionsResponse, ModifyRoleRequest, DescribeRocketMQMsgRequest, SendMessagesResponse, ReceiveMessageRequest, CreateTopicRequest, DescribeTopicsRequest, DeleteEnvironmentsResponse, ModifyAMQPClusterRequest, DescribeEnvironmentRolesResponse, ClearCmqQueueRequest, ModifyRocketMQGroupRequest, DescribeCmqTopicsResponse, DescribeCmqTopicDetailRequest, UnbindCmqDeadLetterResponse, ModifyRocketMQNamespaceResponse, SendCmqMsgRequest, DeleteEnvironmentsRequest, DescribeRocketMQClustersRequest, DescribeBindVpcsRequest, DescribeClustersResponse, ClearCmqSubscriptionFilterTagsRequest, SendCmqMsgResponse, CreateRocketMQGroupResponse, ModifyRocketMQNamespaceRequest, DescribeEnvironmentRolesRequest, DeleteRolesResponse, ModifyRocketMQTopicRequest, DescribeRabbitMQUserRequest, DescribeRocketMQTopicsResponse, DeleteRocketMQGroupResponse, CreateCmqQueueResponse, DescribeRocketMQGroupsResponse, ResetMsgSubOffsetByTimestampResponse, CreateClusterResponse, DescribeCmqDeadLetterSourceQueuesRequest, DeleteRocketMQNamespaceRequest, DescribeRolesRequest, CreateClusterRequest, DescribeRabbitMQVirtualHostListRequest, DescribeAMQPClustersRequest, ModifyCmqQueueAttributeResponse, CreateTopicResponse, DescribeCmqQueuesRequest, DescribeEnvironmentsResponse, DescribeRabbitMQVipInstanceResponse, ModifyCmqSubscriptionAttributeRequest, ModifyTopicResponse, ModifyRocketMQInstanceSpecResponse, DescribeRocketMQVipInstancesRequest, DescribeRocketMQVipInstanceDetailRequest, DeleteRabbitMQVirtualHostRequest, DeleteRocketMQClusterResponse, CreateCmqTopicResponse, ClearCmqSubscriptionFilterTagsResponse, CreateRabbitMQVipInstanceResponse, DescribeRabbitMQVipInstanceRequest, DescribeCmqTopicsRequest, DeleteTopicsRequest, ModifyTopicRequest, ResetMsgSubOffsetByTimestampRequest, CreateEnvironmentRoleResponse, CreateCmqSubscribeRequest, DeleteCmqSubscribeRequest, DescribeAMQPClustersResponse, DescribeCmqDeadLetterSourceQueuesResponse, DeleteSubscriptionsResponse, DeleteRocketMQTopicRequest, CreateRocketMQClusterResponse, ReceiveMessageResponse, DeleteRocketMQNamespaceResponse, DescribePublishersResponse, ModifyRabbitMQVipInstanceResponse, SendMsgRequest, ResetRocketMQConsumerOffSetRequest, DescribeCmqQueueDetailRequest, DescribePulsarProInstancesRequest, CreateRocketMQTopicRequest, CreateRoleResponse, DeleteRocketMQClusterRequest, DescribePulsarProInstancesResponse, DeleteEnvironmentRolesRequest, ClearCmqQueueResponse, ModifyRabbitMQUserResponse, DescribeNodeHealthOptRequest, DescribeBindClustersRequest, CreateRocketMQTopicResponse, CreateRabbitMQVirtualHostRequest, CreateCmqQueueRequest, ModifyEnvironmentRoleResponse, DeleteCmqQueueRequest, DeleteRabbitMQUserResponse, DescribeRabbitMQVirtualHostListResponse, DescribeRocketMQClustersResponse, DescribePulsarProInstanceDetailRequest, CreateRabbitMQUserRequest, CreateRoleRequest, ModifyEnvironmentRoleRequest, DescribeEnvironmentAttributesResponse, ModifyAMQPClusterResponse, DescribeTopicsResponse, CreateRocketMQNamespaceResponse, SendBatchMessagesRequest, DeleteCmqTopicRequest, DescribeRabbitMQNodeListResponse, DescribePulsarProInstanceDetailResponse, DescribeNodeHealthOptResponse, PublishCmqMsgRequest, UnbindCmqDeadLetterRequest, ModifyCmqQueueAttributeRequest, DeleteCmqSubscribeResponse, DeleteRabbitMQVipInstanceRequest, DescribePublisherSummaryRequest, DeleteSubscriptionsRequest, ModifyRocketMQGroupResponse, DescribeRocketMQVipInstancesResponse, DescribeRabbitMQVipInstancesRequest, DescribeClusterDetailResponse, SendMessagesRequest, CreateEnvironmentRoleRequest, DeleteRabbitMQVipInstanceResponse, DescribeAllTenantsRequest, DescribeRabbitMQVirtualHostRequest } from "./tdmq_models";
 /**
  * tdmq client
  * @class
@@ -24,12 +24,6 @@ export declare class Client extends AbstractClient {
      */
     ModifyAMQPCluster(req: ModifyAMQPClusterRequest, cb?: (error: string, rep: ModifyAMQPClusterResponse) => void): Promise<ModifyAMQPClusterResponse>;
     /**
-     * 产品下线了，对应的接口也要下线。
-
-删除Amqp交换机
-     */
-    DeleteAMQPExchange(req: DeleteAMQPExchangeRequest, cb?: (error: string, rep: DeleteAMQPExchangeResponse) => void): Promise<DeleteAMQPExchangeResponse>;
-    /**
      * 创建cmq主题
      */
     CreateCmqTopic(req: CreateCmqTopicRequest, cb?: (error: string, rep: CreateCmqTopicResponse) => void): Promise<CreateCmqTopicResponse>;
@@ -45,12 +39,6 @@ export declare class Client extends AbstractClient {
      * 枚举cmq全量主题
      */
     DescribeCmqTopics(req: DescribeCmqTopicsRequest, cb?: (error: string, rep: DescribeCmqTopicsResponse) => void): Promise<DescribeCmqTopicsResponse>;
-    /**
-     * 产品下线了，对应的接口也要下线。
-
-创建Amqp Vhost
-     */
-    CreateAMQPVHost(req: CreateAMQPVHostRequest, cb?: (error: string, rep: CreateAMQPVHostResponse) => void): Promise<CreateAMQPVHostResponse>;
     /**
      * 批量删除topics
      */
@@ -72,19 +60,9 @@ export declare class Client extends AbstractClient {
      */
     RewindCmqQueue(req: RewindCmqQueueRequest, cb?: (error: string, rep: RewindCmqQueueResponse) => void): Promise<RewindCmqQueueResponse>;
     /**
-     * 发送cmq主题消息
-     */
-    PublishCmqMsg(req: PublishCmqMsgRequest, cb?: (error: string, rep: PublishCmqMsgResponse) => void): Promise<PublishCmqMsgResponse>;
-    /**
      * 新增指定分区、类型的消息主题
      */
     CreateTopic(req: CreateTopicRequest, cb?: (error: string, rep: CreateTopicResponse) => void): Promise<CreateTopicResponse>;
-    /**
-     * 产品下线了，对应的接口也要下线。
-
-获取单个Amqp集群信息
-     */
-    DescribeAMQPCluster(req: DescribeAMQPClusterRequest, cb?: (error: string, rep: DescribeAMQPClusterResponse) => void): Promise<DescribeAMQPClusterResponse>;
     /**
      * 查询cmq全量队列
      */
@@ -151,10 +129,6 @@ export declare class Client extends AbstractClient {
      */
     DeleteCmqTopic(req: DeleteCmqTopicRequest, cb?: (error: string, rep: DeleteCmqTopicResponse) => void): Promise<DeleteCmqTopicResponse>;
     /**
-     * 修改cmq队列属性
-     */
-    ModifyCmqQueueAttribute(req: ModifyCmqQueueAttributeRequest, cb?: (error: string, rep: ModifyCmqQueueAttributeResponse) => void): Promise<ModifyCmqQueueAttributeResponse>;
-    /**
      * 创建cmq队列接口
      */
     CreateCmqQueue(req: CreateCmqQueueRequest, cb?: (error: string, rep: CreateCmqQueueResponse) => void): Promise<CreateCmqQueueResponse>;
@@ -175,31 +149,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeRabbitMQVirtualHost(req: DescribeRabbitMQVirtualHostRequest, cb?: (error: string, rep: DescribeRabbitMQVirtualHostResponse) => void): Promise<DescribeRabbitMQVirtualHostResponse>;
     /**
-     * 产品下线了，对应的接口也要下线。
-
-创建AMQP集群
-     */
-    CreateAMQPCluster(req: CreateAMQPClusterRequest, cb?: (error: string, rep: CreateAMQPClusterResponse) => void): Promise<CreateAMQPClusterResponse>;
-    /**
      * 枚举cmq死信队列源队列
      */
     DescribeCmqDeadLetterSourceQueues(req: DescribeCmqDeadLetterSourceQueuesRequest, cb?: (error: string, rep: DescribeCmqDeadLetterSourceQueuesResponse) => void): Promise<DescribeCmqDeadLetterSourceQueuesResponse>;
-    /**
-     * 产品下线了，对应的接口也要下线。
-
-获取Amqp Vhost 列表
-     */
-    DescribeAMQPVHosts(req: DescribeAMQPVHostsRequest, cb?: (error: string, rep: DescribeAMQPVHostsResponse) => void): Promise<DescribeAMQPVHostsResponse>;
-    /**
-     * 产品下线了，对应的接口也要下线。
-
-更新Amqp队列
-     */
-    ModifyAMQPQueue(req: ModifyAMQPQueueRequest, cb?: (error: string, rep: ModifyAMQPQueueResponse) => void): Promise<ModifyAMQPQueueResponse>;
-    /**
-     * 本API用于修改RocketMQ专享实例配置，可以支持实例规格、节点数和存储的升配和实例规格的降配。本API发起订单并成功支付后进入实例配置变更的流程，可通过DescribeRocketMQVipInstances查询实例是否已变更完成。
-     */
-    ModifyRocketMQInstanceSpec(req: ModifyRocketMQInstanceSpecRequest, cb?: (error: string, rep: ModifyRocketMQInstanceSpecResponse) => void): Promise<ModifyRocketMQInstanceSpecResponse>;
     /**
      * 获取集群列表
      */
@@ -229,17 +181,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeRabbitMQUser(req: DescribeRabbitMQUserRequest, cb?: (error: string, rep: DescribeRabbitMQUserResponse) => void): Promise<DescribeRabbitMQUserResponse>;
     /**
-     * 产品下线了，对应的接口也要下线。
-
-删除Amqp队列
+     * 更新RocketMQ集群信息
      */
-    DeleteAMQPQueue(req: DeleteAMQPQueueRequest, cb?: (error: string, rep: DeleteAMQPQueueResponse) => void): Promise<DeleteAMQPQueueResponse>;
-    /**
-     * 产品下线了，对应的接口也要下线。
-
-删除Vhost
-     */
-    DeleteAMQPVHost(req: DeleteAMQPVHostRequest, cb?: (error: string, rep: DeleteAMQPVHostResponse) => void): Promise<DeleteAMQPVHostResponse>;
+    ModifyRocketMQCluster(req: ModifyRocketMQClusterRequest, cb?: (error: string, rep: ModifyRocketMQClusterResponse) => void): Promise<ModifyRocketMQClusterResponse>;
     /**
      * 更新集群信息
      */
@@ -256,12 +200,6 @@ export declare class Client extends AbstractClient {
      * 创建一个主题的订阅关系
      */
     CreateSubscription(req: CreateSubscriptionRequest, cb?: (error: string, rep: CreateSubscriptionResponse) => void): Promise<CreateSubscriptionResponse>;
-    /**
-     * 产品下线了，对应的接口也要下线。
-
-删除AMQP集群
-     */
-    DeleteAMQPCluster(req: DeleteAMQPClusterRequest, cb?: (error: string, rep: DeleteAMQPClusterResponse) => void): Promise<DeleteAMQPClusterResponse>;
     /**
      * 获取单个RocketMQ集群信息
      */
@@ -283,33 +221,17 @@ export declare class Client extends AbstractClient {
      */
     DescribeBindVpcs(req: DescribeBindVpcsRequest, cb?: (error: string, rep: DescribeBindVpcsResponse) => void): Promise<DescribeBindVpcsResponse>;
     /**
-     * 产品下线了，对应的接口也要下线。
-
-获取用户的配额，如Queue容量，Exchange容量，Vhost容量，单Vhost Tps数,剩余可创建集群数
-     */
-    DescribeAMQPCreateQuota(req?: DescribeAMQPCreateQuotaRequest, cb?: (error: string, rep: DescribeAMQPCreateQuotaResponse) => void): Promise<DescribeAMQPCreateQuotaResponse>;
-    /**
      * 删除RocketMQ主题
      */
     DeleteRocketMQTopic(req: DeleteRocketMQTopicRequest, cb?: (error: string, rep: DeleteRocketMQTopicResponse) => void): Promise<DeleteRocketMQTopicResponse>;
     /**
-     * 产品下线了，对应的接口也要下线。
-
-创建AMQP Exchange
+     * 修改cmq队列属性
      */
-    CreateAMQPExchange(req: CreateAMQPExchangeRequest, cb?: (error: string, rep: CreateAMQPExchangeResponse) => void): Promise<CreateAMQPExchangeResponse>;
+    ModifyCmqQueueAttribute(req: ModifyCmqQueueAttributeRequest, cb?: (error: string, rep: ModifyCmqQueueAttributeResponse) => void): Promise<ModifyCmqQueueAttributeResponse>;
     /**
-     * 产品下线了，对应的接口也要下线。
-
-创建AMQP路由关系
+     * 本API用于修改RocketMQ专享实例配置，可以支持实例规格、节点数和存储的升配和实例规格的降配。本API发起订单并成功支付后进入实例配置变更的流程，可通过DescribeRocketMQVipInstances查询实例是否已变更完成。
      */
-    CreateAMQPRouteRelation(req: CreateAMQPRouteRelationRequest, cb?: (error: string, rep: CreateAMQPRouteRelationResponse) => void): Promise<CreateAMQPRouteRelationResponse>;
-    /**
-     * 产品下线了，对应的接口也要下线。
-
-获取Amqp路由关系列表
-     */
-    DescribeAMQPRouteRelations(req: DescribeAMQPRouteRelationsRequest, cb?: (error: string, rep: DescribeAMQPRouteRelationsResponse) => void): Promise<DescribeAMQPRouteRelationsResponse>;
+    ModifyRocketMQInstanceSpec(req: ModifyRocketMQInstanceSpecRequest, cb?: (error: string, rep: ModifyRocketMQInstanceSpecResponse) => void): Promise<ModifyRocketMQInstanceSpecResponse>;
     /**
      * 查询用户已购的RocketMQ专享实例列表
      */
@@ -323,12 +245,6 @@ export declare class Client extends AbstractClient {
      */
     CreateRabbitMQVipInstance(req: CreateRabbitMQVipInstanceRequest, cb?: (error: string, rep: CreateRabbitMQVipInstanceResponse) => void): Promise<CreateRabbitMQVipInstanceResponse>;
     /**
-     * 产品下线了，对应的接口也要下线。
-
-创建AMQP队列
-     */
-    CreateAMQPQueue(req: CreateAMQPQueueRequest, cb?: (error: string, rep: CreateAMQPQueueResponse) => void): Promise<CreateAMQPQueueResponse>;
-    /**
      * 获取RocketMQ消费组列表
      */
     DescribeRocketMQGroups(req: DescribeRocketMQGroupsRequest, cb?: (error: string, rep: DescribeRocketMQGroupsResponse) => void): Promise<DescribeRocketMQGroupsResponse>;
@@ -341,10 +257,6 @@ export declare class Client extends AbstractClient {
      */
     DeleteRocketMQCluster(req: DeleteRocketMQClusterRequest, cb?: (error: string, rep: DeleteRocketMQClusterResponse) => void): Promise<DeleteRocketMQClusterResponse>;
     /**
-     * 更新RocketMQ集群信息
-     */
-    ModifyRocketMQCluster(req: ModifyRocketMQClusterRequest, cb?: (error: string, rep: ModifyRocketMQClusterResponse) => void): Promise<ModifyRocketMQClusterResponse>;
-    /**
      * 删除RabbitMQ的用户
      */
     DeleteRabbitMQUser(req: DeleteRabbitMQUserRequest, cb?: (error: string, rep: DeleteRabbitMQUserResponse) => void): Promise<DeleteRabbitMQUserResponse>;
@@ -352,12 +264,6 @@ export declare class Client extends AbstractClient {
      * 删除角色，支持批量。
      */
     DeleteRoles(req: DeleteRolesRequest, cb?: (error: string, rep: DeleteRolesResponse) => void): Promise<DeleteRolesResponse>;
-    /**
-     * 产品下线了，对应的接口也要下线。
-
-获取AMQP Exchange列表
-     */
-    DescribeAMQPExchanges(req: DescribeAMQPExchangesRequest, cb?: (error: string, rep: DescribeAMQPExchangesResponse) => void): Promise<DescribeAMQPExchangesResponse>;
     /**
      * 当前 ReceiveMessage 接口只支持 Partitioned 类型的 Topic。该接口用于接收发送到指定 Partitioned Topic 中的消息，当 Partitioned Topic 中没有消息但还去尝试调用该接口时，会抛出 ReceiveTimeout 的异常。
 
@@ -382,12 +288,6 @@ BatchReceivePolicy 的接口会一次性返回多条消息：
 
      */
     ReceiveMessage(req: ReceiveMessageRequest, cb?: (error: string, rep: ReceiveMessageResponse) => void): Promise<ReceiveMessageResponse>;
-    /**
-     * 产品下线了，对应的接口也要下线。
-
-更新Amqp交换机
-     */
-    ModifyAMQPExchange(req: ModifyAMQPExchangeRequest, cb?: (error: string, rep: ModifyAMQPExchangeResponse) => void): Promise<ModifyAMQPExchangeResponse>;
     /**
      * 删除RabbitMQ的vhost
      */
@@ -441,12 +341,6 @@ BatchReceivePolicy 的接口会一次性返回多条消息：
      */
     ModifyTopic(req: ModifyTopicRequest, cb?: (error: string, rep: ModifyTopicResponse) => void): Promise<ModifyTopicResponse>;
     /**
-     * 产品下线了，对应的接口也要下线。
-
-删除Amqp路由关系
-     */
-    DeleteAMQPRouteRelation(req: DeleteAMQPRouteRelationRequest, cb?: (error: string, rep: DeleteAMQPRouteRelationResponse) => void): Promise<DeleteAMQPRouteRelationResponse>;
-    /**
      * 运营端获节点健康状态
      */
     DescribeNodeHealthOpt(req: DescribeNodeHealthOptRequest, cb?: (error: string, rep: DescribeNodeHealthOptResponse) => void): Promise<DescribeNodeHealthOptResponse>;
@@ -469,9 +363,9 @@ BatchReceivePolicy 的接口会一次性返回多条消息：
      */
     ClearCmqQueue(req: ClearCmqQueueRequest, cb?: (error: string, rep: ClearCmqQueueResponse) => void): Promise<ClearCmqQueueResponse>;
     /**
-     * 获取命名空间角色列表
+     * 查询用户已购的Pulsar专业版实例列表
      */
-    DescribeEnvironmentRoles(req: DescribeEnvironmentRolesRequest, cb?: (error: string, rep: DescribeEnvironmentRolesResponse) => void): Promise<DescribeEnvironmentRolesResponse>;
+    DescribePulsarProInstances(req: DescribePulsarProInstancesRequest, cb?: (error: string, rep: DescribePulsarProInstancesResponse) => void): Promise<DescribePulsarProInstancesResponse>;
     /**
      * 获取生产者信息列表
      */
@@ -485,19 +379,17 @@ BatchReceivePolicy 的接口会一次性返回多条消息：
      */
     DescribeRocketMQMsg(req: DescribeRocketMQMsgRequest, cb?: (error: string, rep: DescribeRocketMQMsgResponse) => void): Promise<DescribeRocketMQMsgResponse>;
     /**
-     * 查询用户已购的Pulsar专业版实例列表
+     * 获取命名空间角色列表
      */
-    DescribePulsarProInstances(req: DescribePulsarProInstancesRequest, cb?: (error: string, rep: DescribePulsarProInstancesResponse) => void): Promise<DescribePulsarProInstancesResponse>;
+    DescribeEnvironmentRoles(req: DescribeEnvironmentRolesRequest, cb?: (error: string, rep: DescribeEnvironmentRolesResponse) => void): Promise<DescribeEnvironmentRolesResponse>;
     /**
      * 删除RabbitMQ专享版实例
      */
     DeleteRabbitMQVipInstance(req: DeleteRabbitMQVipInstanceRequest, cb?: (error: string, rep: DeleteRabbitMQVipInstanceResponse) => void): Promise<DeleteRabbitMQVipInstanceResponse>;
     /**
-     * 产品下线了，对应的接口也要下线。
-
-获取Amqp队列列表
+     * 发送cmq主题消息
      */
-    DescribeAMQPQueues(req: DescribeAMQPQueuesRequest, cb?: (error: string, rep: DescribeAMQPQueuesResponse) => void): Promise<DescribeAMQPQueuesResponse>;
+    PublishCmqMsg(req: PublishCmqMsgRequest, cb?: (error: string, rep: PublishCmqMsgResponse) => void): Promise<PublishCmqMsgResponse>;
     /**
      * 获取用户绑定的专享集群列表
      */

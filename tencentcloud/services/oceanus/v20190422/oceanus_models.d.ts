@@ -1,4 +1,41 @@
 /**
+ * DescribeJobSubmissionLog返回参数结构体
+ */
+export interface DescribeJobSubmissionLogResponse {
+    /**
+     * 日志搜索的游标，需要搜索更多时透传这个值
+     */
+    Cursor: string;
+    /**
+     * 是否返回了所有的日志记录
+     */
+    ListOver: boolean;
+    /**
+     * 作业启动的requestId
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    JobRequestId: string;
+    /**
+     * 该时间段内符合关键字的所有的作业实例列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    JobInstanceList: Array<JobInstanceForSubmissionLog>;
+    /**
+     * 废弃，请使用LogContentList
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    LogList: Array<string>;
+    /**
+     * 日志列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    LogContentList: Array<LogContent>;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * 复制作业单条明细结果
  */
 export interface CopyJobResult {
@@ -175,6 +212,23 @@ export interface ResourceRefDetail {
      * 1: 系统内置资源
      */
     SystemProvide: number;
+}
+/**
+ * 搜索启动日志时返回的作业实例
+ */
+export interface JobInstanceForSubmissionLog {
+    /**
+     * 实例的Id, 按照启动的时间顺序，从1开始
+     */
+    RunningOrderId: number;
+    /**
+     * 作业实例的启动时间
+     */
+    JobInstanceStartTime: string;
+    /**
+     * 作业实例启动的时间（毫秒）
+     */
+    StartingMillis: number;
 }
 /**
  * StopJobs请求参数结构体
@@ -878,19 +932,33 @@ export interface RoleAuth {
     RoleName?: string;
 }
 /**
- * 标签
+ * 日志查询的每行日志信息
  */
-export interface Tag {
+export interface LogContent {
     /**
-     * 标签键
+     * 日志内容
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TagKey?: string;
+    Log: string;
     /**
-     * 标签值
+     * 毫秒级时间戳
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TagValue?: string;
+    Time: number;
+    /**
+     * 日志组Id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PkgId: string;
+    /**
+     * 日志Id，在日志组范围里唯一
+     */
+    PkgLogId: number;
+    /**
+     * 日志所属的容器名
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ContainerName: string;
 }
 /**
  * 树状结构资源列表对象
@@ -1020,6 +1088,21 @@ export interface ResourceLocParam {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Region?: string;
+}
+/**
+ * 标签
+ */
+export interface Tag {
+    /**
+     * 标签键
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TagKey?: string;
+    /**
+     * 标签值
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TagValue?: string;
 }
 /**
  * 工作空间详情
@@ -1439,6 +1522,23 @@ export interface WorkSpaceClusterItem {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     ProjectIdStr: string;
+}
+/**
+ * DescribeResourceConfigs返回参数结构体
+ */
+export interface DescribeResourceConfigsResponse {
+    /**
+     * 资源配置描述数组
+     */
+    ResourceConfigSet: Array<ResourceConfigItem>;
+    /**
+     * 资源配置数量
+     */
+    TotalCount: number;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * StopJobs返回参数结构体
@@ -1986,21 +2086,41 @@ export interface DescribeWorkSpacesRequest {
     Filters?: Array<Filter>;
 }
 /**
- * DescribeResourceConfigs返回参数结构体
+ * DescribeJobSubmissionLog请求参数结构体
  */
-export interface DescribeResourceConfigsResponse {
+export interface DescribeJobSubmissionLogRequest {
     /**
-     * 资源配置描述数组
+     * 作业ID，例如：cql-6v1jkxrn
      */
-    ResourceConfigSet: Array<ResourceConfigItem>;
+    JobId: string;
     /**
-     * 资源配置数量
+     * 起始时间，unix时间戳，毫秒级，例如：1611754219108
      */
-    TotalCount: number;
+    StartTime: number;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     * 结束时间，unix时间戳，毫秒级，例如：1611754219108
      */
-    RequestId?: string;
+    EndTime: number;
+    /**
+     * 作业运行的实例ID, 例如：1,2,3。默认为0，表示未选中任何实例，搜索该时间段内最近的一个实例的日志
+     */
+    RunningOrderId?: number;
+    /**
+     * 日志搜索的关键词，默认为空
+     */
+    Keyword?: string;
+    /**
+     * 日志搜索的游标，可透传上次返回的值，默认为空
+     */
+    Cursor?: string;
+    /**
+     * 时间戳排序规则，asc - 升序，desc - 降序。默认为升序
+     */
+    OrderType?: string;
+    /**
+     * 搜索的日志条数上限值，最大为100
+     */
+    Limit?: number;
 }
 /**
  * 资源引用参数

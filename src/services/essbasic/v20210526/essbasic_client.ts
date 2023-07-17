@@ -55,6 +55,7 @@ import {
   FlowApproverDetail,
   DescribeResourceUrlsByFlowsResponse,
   ChannelCreateFlowGroupByFilesRequest,
+  ChannelCreateOrganizationModifyQrCodeRequest,
   DescribeFlowDetailInfoResponse,
   RecipientComponentInfo,
   ChannelDescribeRolesRequest,
@@ -125,6 +126,7 @@ import {
   ModifyExtendedServiceResponse,
   ChannelCreateUserRolesRequest,
   ChannelGetTaskResultApiResponse,
+  ChannelCreateOrganizationModifyQrCodeResponse,
   ChannelDeleteSealPoliciesResponse,
   Component,
   GetDownloadFlowUrlRequest,
@@ -378,13 +380,13 @@ https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/launchAp
   }
 
   /**
-   * 此接口（ChannelCreateBoundFlows）用于子客领取合同，经办人需要有相应的角色，合同不能重复领取。
+   * 生成渠道子客编辑企业信息二维码
    */
-  async ChannelCreateBoundFlows(
-    req: ChannelCreateBoundFlowsRequest,
-    cb?: (error: string, rep: ChannelCreateBoundFlowsResponse) => void
-  ): Promise<ChannelCreateBoundFlowsResponse> {
-    return this.request("ChannelCreateBoundFlows", req, cb)
+  async ChannelCreateOrganizationModifyQrCode(
+    req: ChannelCreateOrganizationModifyQrCodeRequest,
+    cb?: (error: string, rep: ChannelCreateOrganizationModifyQrCodeResponse) => void
+  ): Promise<ChannelCreateOrganizationModifyQrCodeResponse> {
+    return this.request("ChannelCreateOrganizationModifyQrCode", req, cb)
   }
 
   /**
@@ -445,6 +447,16 @@ https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/launchAp
     cb?: (error: string, rep: ChannelUpdateSealStatusResponse) => void
   ): Promise<ChannelUpdateSealStatusResponse> {
     return this.request("ChannelUpdateSealStatus", req, cb)
+  }
+
+  /**
+   * 此接口（ChannelCreateBoundFlows）用于子客领取合同，经办人需要有相应的角色，合同不能重复领取。
+   */
+  async ChannelCreateBoundFlows(
+    req: ChannelCreateBoundFlowsRequest,
+    cb?: (error: string, rep: ChannelCreateBoundFlowsResponse) => void
+  ): Promise<ChannelCreateBoundFlowsResponse> {
+    return this.request("ChannelCreateBoundFlows", req, cb)
   }
 
   /**

@@ -260,6 +260,8 @@ var lowcode_1 = require("./lowcode");
 Object.defineProperty(exports, "lowcode", { enumerable: true, get: function () { return lowcode_1.lowcode; } });
 var lp_1 = require("./lp");
 Object.defineProperty(exports, "lp", { enumerable: true, get: function () { return lp_1.lp; } });
+var mall_1 = require("./mall");
+Object.defineProperty(exports, "mall", { enumerable: true, get: function () { return mall_1.mall; } });
 var mariadb_1 = require("./mariadb");
 Object.defineProperty(exports, "mariadb", { enumerable: true, get: function () { return mariadb_1.mariadb; } });
 var market_1 = require("./market");

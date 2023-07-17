@@ -150,6 +150,14 @@ HYBRID_PAID:
    * 回调地址，用于回调创建服务状态信息，回调格式&内容详情见：[TI-ONE 接口回调说明](https://cloud.tencent.com/document/product/851/84292)
    */
   CallbackUrl?: string
+  /**
+   * 是否开启模型的加速, 仅对StableDiffusion(动态加速)格式的模型有效。
+   */
+  ModelTurboEnable?: boolean
+  /**
+   * 服务分类
+   */
+  ServiceCategory?: string
 }
 
 /**
@@ -191,6 +199,11 @@ export interface ModelInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ModelType?: string
+  /**
+   * 模型格式
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ModelFormat?: string
 }
 
 /**
@@ -736,6 +749,11 @@ export interface Service {
    */
   ServiceDescription: string
   /**
+   * 服务的详细信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ServiceInfo: ServiceInfo
+  /**
    * 集群id
 注意：此字段可能返回 null，表示取不到有效值。
    */
@@ -760,6 +778,21 @@ export interface Service {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ResourceGroupId: string
+  /**
+   * 包年包月服务对应的资源组名字
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResourceGroupName: string
+  /**
+   * 服务的标签
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Tags: Array<Tag>
+  /**
+   * 服务所在的 ingress 的 name
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IngressName: string
   /**
    * 创建者
 注意：此字段可能返回 null，表示取不到有效值。
@@ -791,37 +824,25 @@ export interface Service {
    */
   AppId: number
   /**
-   * 版本号
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Version: string
-  /**
-   * 服务组下服务的最高版本号
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  LatestVersion: string
-  /**
-   * 服务的详细信息
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ServiceInfo: ServiceInfo
-  /**
    * 服务的业务状态
 注意：此字段可能返回 null，表示取不到有效值。
    */
   BusinessStatus: string
   /**
-   * 服务的创建来源
-AUTO_ML: 来自自动学习的一键发布
-DEFAULT: 其他来源
+   * 已废弃
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CreateSource: string
+  ServiceLimit: ServiceLimit
   /**
-   * 费用信息
+   * 已废弃
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  BillingInfo: string
+  ScheduledAction: ScheduledAction
+  /**
+   * 服务创建失败的原因，创建成功后该字段为默认值 CREATE_SUCCEED
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateFailedReason: string
   /**
    * 服务状态
 CREATING 创建中
@@ -836,40 +857,32 @@ Waiting 就绪中
    */
   Status: string
   /**
+   * 费用信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BillingInfo: string
+  /**
    * 模型权重
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Weight: number
   /**
-   * 服务所在的 ingress 的 name
+   * 服务的创建来源
+AUTO_ML: 来自自动学习的一键发布
+DEFAULT: 其他来源
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  IngressName: string
+  CreateSource: string
   /**
-   * 服务限速限流相关配置
+   * 版本号
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ServiceLimit: ServiceLimit
+  Version: string
   /**
-   * 定时停止的配置
+   * 服务组下服务的最高版本号
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ScheduledAction: ScheduledAction
-  /**
-   * 服务创建失败的原因，创建成功后该字段为默认值 CREATE_SUCCEED
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CreateFailedReason: string
-  /**
-   * 包年包月服务对应的资源组名字
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ResourceGroupName: string
-  /**
-   * 服务的标签
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Tags: Array<Tag>
+  LatestVersion: string
 }
 
 /**
@@ -916,6 +929,11 @@ export interface HyperParameter {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   PipelineArgs?: string
+  /**
+   * Stable Diffusion 模型优化参数，控制Lora模型的影响效果
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LoraScale?: string
 }
 
 /**
@@ -1438,6 +1456,11 @@ Stopping 停止中
    * 工作负载历史的状况信息
    */
   Conditions?: Array<StatefulSetCondition>
+  /**
+   * 状态异常时，展示原因
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Reason?: string
 }
 
 /**
@@ -1692,6 +1715,10 @@ HYBRID_PAID:
    * 挂载配置，目前只支持CFS
    */
   VolumeMount?: VolumeMount
+  /**
+   * 是否开启模型的加速, 仅对StableDiffusion(动态加速)格式的模型有效。默认不开启
+   */
+  ModelTurboEnable?: boolean
 }
 
 /**
@@ -2418,12 +2445,12 @@ export interface GpuDetail {
    * GPU 显卡类型；枚举值: V100 A100 T4
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Name: string
+  Name?: string
   /**
    * GPU 显卡数；单位为1/100卡，比如100代表1卡
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Value: number
+  Value?: number
 }
 
 /**
@@ -2515,6 +2542,10 @@ export interface InferTemplateGroup {
  * DescribeModelServiceHotUpdated返回参数结构体
  */
 export interface DescribeModelServiceHotUpdatedResponse {
+  /**
+   * 模型加速标志位.Allowed 允许模型加速. Forbidden 禁止模型加速
+   */
+  ModelTurboFlag?: string
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2971,6 +3002,27 @@ HYBRID_PAID:
    */
   ModelHotUpdateEnable: boolean
   /**
+   * 实例数量调节方式,默认为手动
+支持：自动 - "AUTO", 手动 - "MANUAL"
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ScaleMode?: string
+  /**
+   * 定时伸缩任务
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CronScaleJobs?: Array<CronScaleJob>
+  /**
+   * 定时伸缩策略
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ScaleStrategy?: string
+  /**
+   * 定时停止的配置
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ScheduledAction?: string
+  /**
    * Pod列表信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
@@ -2981,31 +3033,15 @@ HYBRID_PAID:
    */
   PodInfos?: Array<Pod>
   /**
-   * 定时伸缩策略
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ScaleStrategy?: string
-  /**
-   * 定时伸缩任务
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CronScaleJobs?: Array<CronScaleJob>
-  /**
-   * 实例数量调节方式,默认为手动
-支持：自动 - "AUTO", 手动 - "MANUAL"
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ScaleMode?: string
-  /**
    * 服务限速限流相关配置
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ServiceLimit?: ServiceLimit
   /**
-   * 定时停止的配置
+   * 是否开启模型的加速, 仅对StableDiffusion(动态加速)格式的模型有效。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ScheduledAction?: string
+  ModelTurboEnable?: boolean
 }
 
 /**
@@ -4050,7 +4086,7 @@ export interface ModifyModelServiceResponse {
    * 生成的模型服务
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Service: Service
+  Service?: Service
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

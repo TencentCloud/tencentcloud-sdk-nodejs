@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { CreateResourceRequest, CheckSavepointRequest, CreateJobRequest, StopJobsRequest, CreateJobResponse, RunJobsRequest, DeleteJobsRequest, CreateFolderRequest, TriggerJobSavepointResponse, ModifyJobResponse, CreateJobConfigResponse, CreateResourceConfigResponse, CreateJobConfigRequest, TriggerJobSavepointRequest, CreateResourceConfigRequest, DescribeSystemResourcesResponse, DescribeClustersRequest, DescribeTreeJobsResponse, DeleteTableConfigRequest, CopyJobsRequest, CopyJobsResponse, DescribeResourceRelatedJobsRequest, DeleteResourcesResponse, DeleteTableConfigResponse, DescribeResourcesRequest, DescribeJobConfigsRequest, CheckSavepointResponse, DeleteResourceConfigsRequest, DescribeJobSavepointResponse, DeleteJobsResponse, DescribeTreeResourcesResponse, RunJobsResponse, DeleteResourcesRequest, DescribeJobsResponse, DescribeWorkSpacesResponse, StopJobsResponse, DescribeJobSavepointRequest, CreateResourceResponse, DescribeSystemResourcesRequest, CreateFolderResponse, ModifyJobRequest, DescribeTreeJobsRequest, DescribeJobConfigsResponse, DeleteResourceConfigsResponse, DescribeResourceRelatedJobsResponse, DescribeResourcesResponse, DescribeClustersResponse, DescribeWorkSpacesRequest, DescribeResourceConfigsResponse, DescribeJobsRequest, DescribeResourceConfigsRequest, DescribeTreeResourcesRequest } from "./oceanus_models";
+import { DescribeJobSubmissionLogResponse, CreateResourceRequest, CheckSavepointRequest, CreateJobRequest, StopJobsRequest, CreateJobResponse, RunJobsRequest, DeleteJobsRequest, CreateFolderRequest, TriggerJobSavepointResponse, ModifyJobResponse, CreateJobConfigResponse, CreateResourceConfigResponse, CreateJobConfigRequest, TriggerJobSavepointRequest, CreateResourceConfigRequest, DescribeSystemResourcesResponse, DescribeClustersRequest, DescribeTreeJobsResponse, DeleteTableConfigRequest, CopyJobsRequest, CopyJobsResponse, DescribeResourceRelatedJobsRequest, DeleteResourcesResponse, DeleteTableConfigResponse, DescribeResourcesRequest, DescribeJobConfigsRequest, CheckSavepointResponse, DeleteResourceConfigsRequest, DescribeJobSavepointResponse, DeleteJobsResponse, DescribeTreeResourcesResponse, RunJobsResponse, DeleteResourcesRequest, DescribeJobsResponse, DescribeWorkSpacesResponse, DescribeResourceConfigsResponse, StopJobsResponse, DescribeJobSavepointRequest, CreateResourceResponse, DescribeSystemResourcesRequest, CreateFolderResponse, ModifyJobRequest, DescribeTreeJobsRequest, DescribeJobConfigsResponse, DeleteResourceConfigsResponse, DescribeResourceRelatedJobsResponse, DescribeResourcesResponse, DescribeClustersResponse, DescribeWorkSpacesRequest, DescribeJobSubmissionLogRequest, DescribeJobsRequest, DescribeResourceConfigsRequest, DescribeTreeResourcesRequest } from "./oceanus_models";
 /**
  * oceanus client
  * @class
@@ -40,6 +40,10 @@ export declare class Client extends AbstractClient {
      */
     DescribeJobSavepoint(req: DescribeJobSavepointRequest, cb?: (error: string, rep: DescribeJobSavepointResponse) => void): Promise<DescribeJobSavepointResponse>;
     /**
+     * 查询作业实例启动日志
+     */
+    DescribeJobSubmissionLog(req: DescribeJobSubmissionLogRequest, cb?: (error: string, rep: DescribeJobSubmissionLogResponse) => void): Promise<DescribeJobSubmissionLogResponse>;
+    /**
      * 描述资源接口
      */
     DescribeResources(req: DescribeResourcesRequest, cb?: (error: string, rep: DescribeResourcesResponse) => void): Promise<DescribeResourcesResponse>;
@@ -48,9 +52,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeClusters(req: DescribeClustersRequest, cb?: (error: string, rep: DescribeClustersResponse) => void): Promise<DescribeClustersResponse>;
     /**
-     * 批量删除作业接口，批量操作数量上限20
+     * 授权工作空间列表
      */
-    DeleteJobs(req: DeleteJobsRequest, cb?: (error: string, rep: DeleteJobsResponse) => void): Promise<DeleteJobsResponse>;
+    DescribeWorkSpaces(req: DescribeWorkSpacesRequest, cb?: (error: string, rep: DescribeWorkSpacesResponse) => void): Promise<DescribeWorkSpacesResponse>;
     /**
      * 新建作业接口，一个 AppId 最多允许创建1000个作业
      */
@@ -64,9 +68,9 @@ export declare class Client extends AbstractClient {
      */
     RunJobs(req: RunJobsRequest, cb?: (error: string, rep: RunJobsResponse) => void): Promise<RunJobsResponse>;
     /**
-     * 授权工作空间列表
+     * 批量删除作业接口，批量操作数量上限20
      */
-    DescribeWorkSpaces(req: DescribeWorkSpacesRequest, cb?: (error: string, rep: DescribeWorkSpacesResponse) => void): Promise<DescribeWorkSpacesResponse>;
+    DeleteJobs(req: DeleteJobsRequest, cb?: (error: string, rep: DeleteJobsResponse) => void): Promise<DeleteJobsResponse>;
     /**
      * 作业列表页面新建文件夹请求
      */

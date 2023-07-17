@@ -54,7 +54,7 @@ export declare class Client extends AbstractClient {
      */
     GetModelList(req: GetModelListRequest, cb?: (error: string, rep: GetModelListResponse) => void): Promise<GetModelListResponse>;
     /**
-     * 视频美颜
+     * 视频美颜(此接口目前已下线)
      */
     BeautifyVideo(req: BeautifyVideoRequest, cb?: (error: string, rep: BeautifyVideoResponse) => void): Promise<BeautifyVideoResponse>;
 }

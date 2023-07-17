@@ -65,17 +65,17 @@ export interface ApplyEmbedIntervalResponse {
      * 额外参数
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Extra: string;
+    Extra?: string;
     /**
      * 结果数据
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Data: ApplyEmbedTokenInfo;
+    Data?: ApplyEmbedTokenInfo;
     /**
      * 结果描述
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Msg: string;
+    Msg?: string;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */

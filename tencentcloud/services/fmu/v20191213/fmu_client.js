@@ -92,7 +92,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("GetModelList", req, cb);
     }
     /**
-     * 视频美颜
+     * 视频美颜(此接口目前已下线)
      */
     async BeautifyVideo(req, cb) {
         return this.request("BeautifyVideo", req, cb);

@@ -112,7 +112,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("AddRule", req, cb);
     }
     /**
-     * 取消子设备产品与网关设备产品的关联
+     * 业务无客户使用，下线接口。
+
+取消子设备产品与网关设备产品的关联
      */
     async UnassociateSubDeviceFromGatewayProduct(req, cb) {
         return this.request("UnassociateSubDeviceFromGatewayProduct", req, cb);

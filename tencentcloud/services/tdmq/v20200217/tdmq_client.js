@@ -52,14 +52,6 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyAMQPCluster", req, cb);
     }
     /**
-     * 产品下线了，对应的接口也要下线。
-
-删除Amqp交换机
-     */
-    async DeleteAMQPExchange(req, cb) {
-        return this.request("DeleteAMQPExchange", req, cb);
-    }
-    /**
      * 创建cmq主题
      */
     async CreateCmqTopic(req, cb) {
@@ -82,14 +74,6 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeCmqTopics(req, cb) {
         return this.request("DescribeCmqTopics", req, cb);
-    }
-    /**
-     * 产品下线了，对应的接口也要下线。
-
-创建Amqp Vhost
-     */
-    async CreateAMQPVHost(req, cb) {
-        return this.request("CreateAMQPVHost", req, cb);
     }
     /**
      * 批量删除topics
@@ -122,24 +106,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("RewindCmqQueue", req, cb);
     }
     /**
-     * 发送cmq主题消息
-     */
-    async PublishCmqMsg(req, cb) {
-        return this.request("PublishCmqMsg", req, cb);
-    }
-    /**
      * 新增指定分区、类型的消息主题
      */
     async CreateTopic(req, cb) {
         return this.request("CreateTopic", req, cb);
-    }
-    /**
-     * 产品下线了，对应的接口也要下线。
-
-获取单个Amqp集群信息
-     */
-    async DescribeAMQPCluster(req, cb) {
-        return this.request("DescribeAMQPCluster", req, cb);
     }
     /**
      * 查询cmq全量队列
@@ -239,12 +209,6 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteCmqTopic", req, cb);
     }
     /**
-     * 修改cmq队列属性
-     */
-    async ModifyCmqQueueAttribute(req, cb) {
-        return this.request("ModifyCmqQueueAttribute", req, cb);
-    }
-    /**
      * 创建cmq队列接口
      */
     async CreateCmqQueue(req, cb) {
@@ -275,40 +239,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeRabbitMQVirtualHost", req, cb);
     }
     /**
-     * 产品下线了，对应的接口也要下线。
-
-创建AMQP集群
-     */
-    async CreateAMQPCluster(req, cb) {
-        return this.request("CreateAMQPCluster", req, cb);
-    }
-    /**
      * 枚举cmq死信队列源队列
      */
     async DescribeCmqDeadLetterSourceQueues(req, cb) {
         return this.request("DescribeCmqDeadLetterSourceQueues", req, cb);
-    }
-    /**
-     * 产品下线了，对应的接口也要下线。
-
-获取Amqp Vhost 列表
-     */
-    async DescribeAMQPVHosts(req, cb) {
-        return this.request("DescribeAMQPVHosts", req, cb);
-    }
-    /**
-     * 产品下线了，对应的接口也要下线。
-
-更新Amqp队列
-     */
-    async ModifyAMQPQueue(req, cb) {
-        return this.request("ModifyAMQPQueue", req, cb);
-    }
-    /**
-     * 本API用于修改RocketMQ专享实例配置，可以支持实例规格、节点数和存储的升配和实例规格的降配。本API发起订单并成功支付后进入实例配置变更的流程，可通过DescribeRocketMQVipInstances查询实例是否已变更完成。
-     */
-    async ModifyRocketMQInstanceSpec(req, cb) {
-        return this.request("ModifyRocketMQInstanceSpec", req, cb);
     }
     /**
      * 获取集群列表
@@ -353,20 +287,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeRabbitMQUser", req, cb);
     }
     /**
-     * 产品下线了，对应的接口也要下线。
-
-删除Amqp队列
+     * 更新RocketMQ集群信息
      */
-    async DeleteAMQPQueue(req, cb) {
-        return this.request("DeleteAMQPQueue", req, cb);
-    }
-    /**
-     * 产品下线了，对应的接口也要下线。
-
-删除Vhost
-     */
-    async DeleteAMQPVHost(req, cb) {
-        return this.request("DeleteAMQPVHost", req, cb);
+    async ModifyRocketMQCluster(req, cb) {
+        return this.request("ModifyRocketMQCluster", req, cb);
     }
     /**
      * 更新集群信息
@@ -391,14 +315,6 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CreateSubscription(req, cb) {
         return this.request("CreateSubscription", req, cb);
-    }
-    /**
-     * 产品下线了，对应的接口也要下线。
-
-删除AMQP集群
-     */
-    async DeleteAMQPCluster(req, cb) {
-        return this.request("DeleteAMQPCluster", req, cb);
     }
     /**
      * 获取单个RocketMQ集群信息
@@ -431,42 +347,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeBindVpcs", req, cb);
     }
     /**
-     * 产品下线了，对应的接口也要下线。
-
-获取用户的配额，如Queue容量，Exchange容量，Vhost容量，单Vhost Tps数,剩余可创建集群数
-     */
-    async DescribeAMQPCreateQuota(req, cb) {
-        return this.request("DescribeAMQPCreateQuota", req, cb);
-    }
-    /**
      * 删除RocketMQ主题
      */
     async DeleteRocketMQTopic(req, cb) {
         return this.request("DeleteRocketMQTopic", req, cb);
     }
     /**
-     * 产品下线了，对应的接口也要下线。
-
-创建AMQP Exchange
+     * 修改cmq队列属性
      */
-    async CreateAMQPExchange(req, cb) {
-        return this.request("CreateAMQPExchange", req, cb);
+    async ModifyCmqQueueAttribute(req, cb) {
+        return this.request("ModifyCmqQueueAttribute", req, cb);
     }
     /**
-     * 产品下线了，对应的接口也要下线。
-
-创建AMQP路由关系
+     * 本API用于修改RocketMQ专享实例配置，可以支持实例规格、节点数和存储的升配和实例规格的降配。本API发起订单并成功支付后进入实例配置变更的流程，可通过DescribeRocketMQVipInstances查询实例是否已变更完成。
      */
-    async CreateAMQPRouteRelation(req, cb) {
-        return this.request("CreateAMQPRouteRelation", req, cb);
-    }
-    /**
-     * 产品下线了，对应的接口也要下线。
-
-获取Amqp路由关系列表
-     */
-    async DescribeAMQPRouteRelations(req, cb) {
-        return this.request("DescribeAMQPRouteRelations", req, cb);
+    async ModifyRocketMQInstanceSpec(req, cb) {
+        return this.request("ModifyRocketMQInstanceSpec", req, cb);
     }
     /**
      * 查询用户已购的RocketMQ专享实例列表
@@ -487,14 +383,6 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateRabbitMQVipInstance", req, cb);
     }
     /**
-     * 产品下线了，对应的接口也要下线。
-
-创建AMQP队列
-     */
-    async CreateAMQPQueue(req, cb) {
-        return this.request("CreateAMQPQueue", req, cb);
-    }
-    /**
      * 获取RocketMQ消费组列表
      */
     async DescribeRocketMQGroups(req, cb) {
@@ -513,12 +401,6 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteRocketMQCluster", req, cb);
     }
     /**
-     * 更新RocketMQ集群信息
-     */
-    async ModifyRocketMQCluster(req, cb) {
-        return this.request("ModifyRocketMQCluster", req, cb);
-    }
-    /**
      * 删除RabbitMQ的用户
      */
     async DeleteRabbitMQUser(req, cb) {
@@ -529,14 +411,6 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DeleteRoles(req, cb) {
         return this.request("DeleteRoles", req, cb);
-    }
-    /**
-     * 产品下线了，对应的接口也要下线。
-
-获取AMQP Exchange列表
-     */
-    async DescribeAMQPExchanges(req, cb) {
-        return this.request("DescribeAMQPExchanges", req, cb);
     }
     /**
      * 当前 ReceiveMessage 接口只支持 Partitioned 类型的 Topic。该接口用于接收发送到指定 Partitioned Topic 中的消息，当 Partitioned Topic 中没有消息但还去尝试调用该接口时，会抛出 ReceiveTimeout 的异常。
@@ -563,14 +437,6 @@ BatchReceivePolicy 的接口会一次性返回多条消息：
      */
     async ReceiveMessage(req, cb) {
         return this.request("ReceiveMessage", req, cb);
-    }
-    /**
-     * 产品下线了，对应的接口也要下线。
-
-更新Amqp交换机
-     */
-    async ModifyAMQPExchange(req, cb) {
-        return this.request("ModifyAMQPExchange", req, cb);
     }
     /**
      * 删除RabbitMQ的vhost
@@ -651,14 +517,6 @@ BatchReceivePolicy 的接口会一次性返回多条消息：
         return this.request("ModifyTopic", req, cb);
     }
     /**
-     * 产品下线了，对应的接口也要下线。
-
-删除Amqp路由关系
-     */
-    async DeleteAMQPRouteRelation(req, cb) {
-        return this.request("DeleteAMQPRouteRelation", req, cb);
-    }
-    /**
      * 运营端获节点健康状态
      */
     async DescribeNodeHealthOpt(req, cb) {
@@ -691,10 +549,10 @@ BatchReceivePolicy 的接口会一次性返回多条消息：
         return this.request("ClearCmqQueue", req, cb);
     }
     /**
-     * 获取命名空间角色列表
+     * 查询用户已购的Pulsar专业版实例列表
      */
-    async DescribeEnvironmentRoles(req, cb) {
-        return this.request("DescribeEnvironmentRoles", req, cb);
+    async DescribePulsarProInstances(req, cb) {
+        return this.request("DescribePulsarProInstances", req, cb);
     }
     /**
      * 获取生产者信息列表
@@ -715,10 +573,10 @@ BatchReceivePolicy 的接口会一次性返回多条消息：
         return this.request("DescribeRocketMQMsg", req, cb);
     }
     /**
-     * 查询用户已购的Pulsar专业版实例列表
+     * 获取命名空间角色列表
      */
-    async DescribePulsarProInstances(req, cb) {
-        return this.request("DescribePulsarProInstances", req, cb);
+    async DescribeEnvironmentRoles(req, cb) {
+        return this.request("DescribeEnvironmentRoles", req, cb);
     }
     /**
      * 删除RabbitMQ专享版实例
@@ -727,12 +585,10 @@ BatchReceivePolicy 的接口会一次性返回多条消息：
         return this.request("DeleteRabbitMQVipInstance", req, cb);
     }
     /**
-     * 产品下线了，对应的接口也要下线。
-
-获取Amqp队列列表
+     * 发送cmq主题消息
      */
-    async DescribeAMQPQueues(req, cb) {
-        return this.request("DescribeAMQPQueues", req, cb);
+    async PublishCmqMsg(req, cb) {
+        return this.request("PublishCmqMsg", req, cb);
     }
     /**
      * 获取用户绑定的专享集群列表

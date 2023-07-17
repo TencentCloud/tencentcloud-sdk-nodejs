@@ -18,11 +18,13 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  DescribeJobSubmissionLogResponse,
   CopyJobResult,
   CreateResourceRequest,
   CheckSavepointRequest,
   CreateJobRequest,
   ResourceRefDetail,
+  JobInstanceForSubmissionLog,
   StopJobsRequest,
   CreateJobResponse,
   ResourceLoc,
@@ -53,12 +55,13 @@ import {
   DeleteTableConfigResponse,
   ResourceConfigItem,
   RoleAuth,
-  Tag,
+  LogContent,
   DescribeTreeResourcesRsp,
   DescribeResourcesRequest,
   TreeResourceItem,
   RefJobStatusCountItem,
   ResourceLocParam,
+  Tag,
   WorkSpaceSetItem,
   ResourceRefJobInfo,
   DescribeJobConfigsRequest,
@@ -74,6 +77,7 @@ import {
   DescribeWorkSpacesResponse,
   ResourceItem,
   WorkSpaceClusterItem,
+  DescribeResourceConfigsResponse,
   StopJobsResponse,
   DescribeJobSavepointRequest,
   CreateResourceResponse,
@@ -92,7 +96,7 @@ import {
   Cluster,
   DescribeClustersResponse,
   DescribeWorkSpacesRequest,
-  DescribeResourceConfigsResponse,
+  DescribeJobSubmissionLogRequest,
   ResourceRef,
   DescribeJobsRequest,
   JobV1,
@@ -191,6 +195,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询作业实例启动日志
+   */
+  async DescribeJobSubmissionLog(
+    req: DescribeJobSubmissionLogRequest,
+    cb?: (error: string, rep: DescribeJobSubmissionLogResponse) => void
+  ): Promise<DescribeJobSubmissionLogResponse> {
+    return this.request("DescribeJobSubmissionLog", req, cb)
+  }
+
+  /**
    * 描述资源接口
    */
   async DescribeResources(
@@ -211,13 +225,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 批量删除作业接口，批量操作数量上限20
+   * 授权工作空间列表
    */
-  async DeleteJobs(
-    req: DeleteJobsRequest,
-    cb?: (error: string, rep: DeleteJobsResponse) => void
-  ): Promise<DeleteJobsResponse> {
-    return this.request("DeleteJobs", req, cb)
+  async DescribeWorkSpaces(
+    req: DescribeWorkSpacesRequest,
+    cb?: (error: string, rep: DescribeWorkSpacesResponse) => void
+  ): Promise<DescribeWorkSpacesResponse> {
+    return this.request("DescribeWorkSpaces", req, cb)
   }
 
   /**
@@ -251,13 +265,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 授权工作空间列表
+   * 批量删除作业接口，批量操作数量上限20
    */
-  async DescribeWorkSpaces(
-    req: DescribeWorkSpacesRequest,
-    cb?: (error: string, rep: DescribeWorkSpacesResponse) => void
-  ): Promise<DescribeWorkSpacesResponse> {
-    return this.request("DescribeWorkSpaces", req, cb)
+  async DeleteJobs(
+    req: DeleteJobsRequest,
+    cb?: (error: string, rep: DeleteJobsResponse) => void
+  ): Promise<DeleteJobsResponse> {
+    return this.request("DeleteJobs", req, cb)
   }
 
   /**

@@ -156,7 +156,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 视频美颜
+   * 视频美颜(此接口目前已下线)
    */
   async BeautifyVideo(
     req: BeautifyVideoRequest,

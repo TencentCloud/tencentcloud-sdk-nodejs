@@ -171,10 +171,10 @@ https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/launchAp
         return this.request("CreateConsoleLoginUrl", req, cb);
     }
     /**
-     * 此接口（ChannelCreateBoundFlows）用于子客领取合同，经办人需要有相应的角色，合同不能重复领取。
+     * 生成渠道子客编辑企业信息二维码
      */
-    async ChannelCreateBoundFlows(req, cb) {
-        return this.request("ChannelCreateBoundFlows", req, cb);
+    async ChannelCreateOrganizationModifyQrCode(req, cb) {
+        return this.request("ChannelCreateOrganizationModifyQrCode", req, cb);
     }
     /**
      * 创建预发起合同
@@ -215,6 +215,12 @@ https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/launchAp
      */
     async ChannelUpdateSealStatus(req, cb) {
         return this.request("ChannelUpdateSealStatus", req, cb);
+    }
+    /**
+     * 此接口（ChannelCreateBoundFlows）用于子客领取合同，经办人需要有相应的角色，合同不能重复领取。
+     */
+    async ChannelCreateBoundFlows(req, cb) {
+        return this.request("ChannelCreateBoundFlows", req, cb);
     }
     /**
      * 对流程的合同文件进行验证，判断文件是否合法。

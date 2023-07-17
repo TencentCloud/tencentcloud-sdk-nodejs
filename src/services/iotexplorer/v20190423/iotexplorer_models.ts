@@ -247,12 +247,12 @@ export interface GetDeviceListResponse {
    * 返回的设备列表, 注意列表设备的 DevicePsk 为空, 要获取设备的 DevicePsk 请使用 DescribeDevice
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Devices: Array<DeviceInfo>
+  Devices?: Array<DeviceInfo>
   /**
    * 产品下的设备总数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Total: number
+  Total?: number
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1025,12 +1025,12 @@ export interface GetProjectListResponse {
    * 项目列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Projects: Array<ProjectEntryEx>
+  Projects?: Array<ProjectEntryEx>
   /**
    * 列表项个数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Total: number
+  Total?: number
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1062,7 +1062,7 @@ export interface DescribeProjectResponse {
   /**
    * 返回信息
    */
-  Project: ProjectEntryEx
+  Project?: ProjectEntryEx
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1090,11 +1090,11 @@ export interface SearchStudioProductResponse {
   /**
    * 产品列表
    */
-  Products: Array<ProductEntry>
+  Products?: Array<ProductEntry>
   /**
    * 产品数量
    */
-  Total: number
+  Total?: number
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1413,11 +1413,11 @@ export interface ListFirmwaresResponse {
   /**
    * 固件总数
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 固件列表
    */
-  Firmwares: Array<FirmwareInfo>
+  Firmwares?: Array<FirmwareInfo>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1930,42 +1930,52 @@ export interface DescribeFirmwareTaskResponse {
    * 固件任务ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TaskId: number
+  TaskId?: number
   /**
    * 固件任务状态
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Status: number
+  Status?: number
   /**
    * 固件任务创建时间，单位：秒
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CreateTime: number
+  CreateTime?: number
   /**
    * 固件任务升级类型
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Type: number
+  Type?: number
   /**
    * 产品名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ProductName: string
+  ProductName?: string
   /**
    * 固件任务升级模式。originalVersion（按版本号升级）、filename（提交文件升级）、devicenames（按设备名称升级）
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  UpgradeMode: string
+  UpgradeMode?: string
   /**
    * 产品ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ProductId: string
+  ProductId?: string
   /**
    * 原始固件版本号，在UpgradeMode是originalVersion升级模式下会返回
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  OriginalVersion: string
+  OriginalVersion?: string
+  /**
+   * 创建账号ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateUserId?: number
+  /**
+   * 创建账号ID昵称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreatorNickName?: string
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2119,7 +2129,7 @@ export interface DescribeDeviceResponse {
   /**
    * 设备信息
    */
-  Device: DeviceInfo
+  Device?: DeviceInfo
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

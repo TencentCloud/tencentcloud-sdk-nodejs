@@ -75,37 +75,21 @@ export interface RabbitMQClusterAccessInfo {
     PrometheusEndpointInfo?: PrometheusEndpointInfo;
 }
 /**
- * DescribeAMQPRouteRelations请求参数结构体
+ * DescribeBindClusters返回参数结构体
  */
-export interface DescribeAMQPRouteRelationsRequest {
+export interface DescribeBindClustersResponse {
     /**
-     * 查询偏移量
+     * 专享集群的数量
      */
-    Offset: number;
+    TotalCount: number;
     /**
-     * 查询限制数
+     * 专享集群的列表
      */
-    Limit: number;
+    ClusterSet: Array<BindCluster>;
     /**
-     * 集群ID
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
-    ClusterId: string;
-    /**
-     * Vhost名称
-     */
-    VHostId: string;
-    /**
-     * 按源exchange名称过滤查询结果，支持模糊查询
-     */
-    FilterSourceExchange?: string;
-    /**
-     * 按绑定的目标类型过滤查询结果，可选值:Exchange、Queue
-     */
-    FilterDestType?: string;
-    /**
-     * 按目标名称过滤查询结果，支持模糊查询
-     */
-    FilterDestValue?: string;
+    RequestId?: string;
 }
 /**
  * DescribeRabbitMQVirtualHost返回参数结构体
@@ -489,39 +473,6 @@ export interface ModifyRabbitMQVipInstanceRequest {
     Remark?: string;
 }
 /**
- * CreateAMQPExchange请求参数结构体
- */
-export interface CreateAMQPExchangeRequest {
-    /**
-     * 交换机名称，3-64个字符，只能包含字母、数字、“-”及“_”
-     */
-    Exchange: string;
-    /**
-     * 交换机所在的vhost，目前支持在单个vhost下创建主题
-     */
-    VHosts: Array<string>;
-    /**
-     * 交换机类型，可选值为Direct, Fanout, Topic, x-delayed-message
-     */
-    Type: string;
-    /**
-     * 集群ID
-     */
-    ClusterId: string;
-    /**
-     * 交换机说明，最大128个字符
-     */
-    Remark?: string;
-    /**
-     * 备用交换机名称
-     */
-    AlternateExchange?: string;
-    /**
-     * 延迟交换机类型，可选值为Direct, Fanout, Topic, 不允许为x-delayed-message
-     */
-    DelayedType?: string;
-}
-/**
  * RocketMQtopic分布情况
  */
 export interface RocketMQTopicDistribution {
@@ -552,30 +503,29 @@ export interface DescribeRocketMQNamespacesResponse {
     RequestId?: string;
 }
 /**
- * ResetRocketMQConsumerOffSet返回参数结构体
+ * ModifyRocketMQInstanceSpec请求参数结构体
  */
-export interface ResetRocketMQConsumerOffSetResponse {
+export interface ModifyRocketMQInstanceSpecRequest {
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     * 专享实例ID
      */
-    RequestId?: string;
-}
-/**
- * DescribeBindClusters返回参数结构体
- */
-export interface DescribeBindClustersResponse {
+    InstanceId: string;
     /**
-     * 专享集群的数量
+     * 实例规格，
+  rocket-vip-basic-1 基础型
+  rocket-vip-basic-2 标准型
+  rocket-vip-basic-3 高阶Ⅰ型
+  rocket-vip-basic-4 高阶Ⅱ型
      */
-    TotalCount: number;
+    Specification?: string;
     /**
-     * 专享集群的列表
+     * 节点数量
      */
-    ClusterSet: Array<BindCluster>;
+    NodeCount?: number;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     * 存储空间，GB为单位
      */
-    RequestId?: string;
+    StorageSize?: number;
 }
 /**
  * 用户专享集群信息
@@ -1115,41 +1065,6 @@ export interface CmqSubscription {
     NotifyContentFormat: string;
 }
 /**
- * DescribeAMQPCluster返回参数结构体
- */
-export interface DescribeAMQPClusterResponse {
-    /**
-     * 集群信息
-     */
-    ClusterInfo: AMQPClusterInfo;
-    /**
-     * 集群配置
-     */
-    ClusterConfig: AMQPClusterConfig;
-    /**
-     * 集群最近使用量
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ClusterStats: AMQPClusterRecentStats;
-    /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
-/**
- * CreateAMQPCluster请求参数结构体
- */
-export interface CreateAMQPClusterRequest {
-    /**
-     * 3-64个字符，只能包含字母、数字、“-”及“_”
-     */
-    Name: string;
-    /**
-     * 集群描述，128个字符以内
-     */
-    Remark?: string;
-}
-/**
  * DeleteRocketMQGroup请求参数结构体
  */
 export interface DeleteRocketMQGroupRequest {
@@ -1237,52 +1152,37 @@ export interface RocketMQGroup {
     RetryMaxTimes?: number;
 }
 /**
- * SendRocketMQMessage返回参数结构体
+ * ModifyRabbitMQUser请求参数结构体
  */
-export interface SendRocketMQMessageResponse {
+export interface ModifyRabbitMQUserRequest {
     /**
-     * 发送结果
+     * 集群实例Id
      */
-    Result: boolean;
+    InstanceId: string;
     /**
-     * 消息ID
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 用户名，登录时使用
      */
-    MsgId: string;
+    User: string;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     * 密码，登录时使用
      */
-    RequestId?: string;
-}
-/**
- * AMQP集群近期使用量
- */
-export interface AMQPClusterRecentStats {
+    Password: string;
     /**
-     * Queue数量
+     * 描述，不传则不修改
      */
-    QueueNum: number;
+    Description?: string;
     /**
-     * 消息生产数
+     * 用户标签，用于决定改用户访问RabbitMQ Management的权限范围，不传则不修改
      */
-    ProducedMsgNum: number;
+    Tags?: Array<string>;
     /**
-     * 消息堆积数
+     * 该用户的最大连接数，不传则不修改
      */
-    AccumulativeMsgNum: number;
+    MaxConnections?: number;
     /**
-     * Exchange数量
+     * 该用户的最大channel数，不传则不修改
      */
-    ExchangeNum: number;
-}
-/**
- * DescribeRocketMQVipInstanceDetail请求参数结构体
- */
-export interface DescribeRocketMQVipInstanceDetailRequest {
-    /**
-     * 集群ID
-     */
-    ClusterId: string;
+    MaxChannels?: number;
 }
 /**
  * RabbiteMQ集群白名单信息
@@ -1386,130 +1286,6 @@ export interface CreateRocketMQNamespaceRequest {
     Remark?: string;
 }
 /**
- * 主题实例
- */
-export interface Topic {
-    /**
-     * 最后一次间隔内发布消息的平均byte大小。
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    AverageMsgSize: string;
-    /**
-     * 消费者数量。
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ConsumerCount: string;
-    /**
-     * 被记录下来的消息总数。
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    LastConfirmedEntry: string;
-    /**
-     * 最后一个ledger创建的时间。
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    LastLedgerCreatedTimestamp: string;
-    /**
-     * 本地和复制的发布者每秒发布消息的速率。
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    MsgRateIn: string;
-    /**
-     * 本地和复制的消费者每秒分发消息的数量之和。
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    MsgRateOut: string;
-    /**
-     * 本地和复制的发布者每秒发布消息的byte。
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    MsgThroughputIn: string;
-    /**
-     * 本地和复制的消费者每秒分发消息的byte。
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    MsgThroughputOut: string;
-    /**
-     * 被记录下来的消息总数。
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    NumberOfEntries: string;
-    /**
-     * 分区数<=0：topic下无子分区。
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Partitions: number;
-    /**
-     * 生产者数量。
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ProducerCount: string;
-    /**
-     * 以byte计算的所有消息存储总量。
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    TotalSize: string;
-    /**
-     * 分区topic里面的子分区。
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    SubTopicSets: Array<PartitionsTopic>;
-    /**
-     * topic类型描述：
-  0：普通消息；
-  1：全局顺序消息；
-  2：局部顺序消息；
-  3：重试队列；
-  4：死信队列；
-  5：事务消息。
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    TopicType: number;
-    /**
-     * 环境（命名空间）名称。
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    EnvironmentId: string;
-    /**
-     * 主题名称。
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    TopicName: string;
-    /**
-     * 说明，128个字符以内。
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Remark: string;
-    /**
-     * 创建时间。
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    CreateTime: string;
-    /**
-     * 最近修改时间。
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    UpdateTime: string;
-    /**
-     * 生产者上限。
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ProducerLimit: string;
-    /**
-     * 消费者上限。
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ConsumerLimit: string;
-    /**
-     * 0: 非持久非分区
-  1: 非持久分区
-  2: 持久非分区
-  3: 持久分区
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    PulsarTopicType: number;
-}
-/**
  * RabbitMQ的vhost详情
  */
 export interface RabbitMQVirtualHostInfo {
@@ -1599,54 +1375,6 @@ export interface ModifyRabbitMQVirtualHostResponse {
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
-}
-/**
- * 命名空间信息
- */
-export interface Environment {
-    /**
-     * 命名空间名称
-     */
-    EnvironmentId: string;
-    /**
-     * 说明
-     */
-    Remark: string;
-    /**
-     * 未消费消息过期时间，单位：秒，最大1296000（15天）
-     */
-    MsgTTL: number;
-    /**
-     * 创建时间
-     */
-    CreateTime: string;
-    /**
-     * 最近修改时间
-     */
-    UpdateTime: string;
-    /**
-     * 命名空间ID
-     */
-    NamespaceId: string;
-    /**
-     * 命名空间名称
-     */
-    NamespaceName: string;
-    /**
-     * Topic数量
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    TopicNum: number;
-    /**
-     * 消息保留策略
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    RetentionPolicy: RetentionPolicy;
-    /**
-     * 是否自动创建订阅
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    AutoSubscriptionCreation?: boolean;
 }
 /**
  * cmq 批量queue属性信息
@@ -1870,9 +1598,9 @@ export interface CreateSubscriptionResponse {
     RequestId?: string;
 }
 /**
- * DeleteAMQPQueue返回参数结构体
+ * SendMsg返回参数结构体
  */
-export interface DeleteAMQPQueueResponse {
+export interface SendMsgResponse {
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1909,50 +1637,128 @@ export interface DescribeCmqSubscriptionDetailRequest {
     SubscriptionName?: string;
 }
 /**
- * DescribePublisherSummary返回参数结构体
+ * 主题实例
  */
-export interface DescribePublisherSummaryResponse {
+export interface Topic {
     /**
-     * 生产速率（条/秒）
+     * 最后一次间隔内发布消息的平均byte大小。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    MsgRateIn: number;
+    AverageMsgSize: string;
     /**
-     * 生产速率（字节/秒）
+     * 消费者数量。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    MsgThroughputIn: number;
+    ConsumerCount: string;
     /**
-     * 生产者数量
+     * 被记录下来的消息总数。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    PublisherCount: number;
+    LastConfirmedEntry: string;
     /**
-     * 消息存储大小，以字节为单位
+     * 最后一个ledger创建的时间。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    StorageSize: number;
+    LastLedgerCreatedTimestamp: string;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     * 本地和复制的发布者每秒发布消息的速率。
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    RequestId?: string;
-}
-/**
- * DescribeAMQPVHosts返回参数结构体
- */
-export interface DescribeAMQPVHostsResponse {
+    MsgRateIn: string;
     /**
-     * Vhost 列表
+     * 本地和复制的消费者每秒分发消息的数量之和。
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    VHosts: Array<AMQPVHost>;
+    MsgRateOut: string;
     /**
-     * 总条数
+     * 本地和复制的发布者每秒发布消息的byte。
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    TotalCount: number;
+    MsgThroughputIn: string;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     * 本地和复制的消费者每秒分发消息的byte。
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    RequestId?: string;
+    MsgThroughputOut: string;
+    /**
+     * 被记录下来的消息总数。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    NumberOfEntries: string;
+    /**
+     * 分区数<=0：topic下无子分区。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Partitions: number;
+    /**
+     * 生产者数量。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ProducerCount: string;
+    /**
+     * 以byte计算的所有消息存储总量。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TotalSize: string;
+    /**
+     * 分区topic里面的子分区。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SubTopicSets: Array<PartitionsTopic>;
+    /**
+     * topic类型描述：
+  0：普通消息；
+  1：全局顺序消息；
+  2：局部顺序消息；
+  3：重试队列；
+  4：死信队列；
+  5：事务消息。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TopicType: number;
+    /**
+     * 环境（命名空间）名称。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    EnvironmentId: string;
+    /**
+     * 主题名称。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TopicName: string;
+    /**
+     * 说明，128个字符以内。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Remark: string;
+    /**
+     * 创建时间。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CreateTime: string;
+    /**
+     * 最近修改时间。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    UpdateTime: string;
+    /**
+     * 生产者上限。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ProducerLimit: string;
+    /**
+     * 消费者上限。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ConsumerLimit: string;
+    /**
+     * 0: 非持久非分区
+  1: 非持久分区
+  2: 持久非分区
+  3: 持久分区
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PulsarTopicType: number;
 }
 /**
  * DescribeEnvironments请求参数结构体
@@ -2002,24 +1808,6 @@ export interface DescribeRocketMQNamespacesRequest {
      * 按名称搜索
      */
     NameKeyword?: string;
-}
-/**
- * DeleteAMQPCluster返回参数结构体
- */
-export interface DeleteAMQPClusterResponse {
-    /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
-/**
- * DescribeAMQPCluster请求参数结构体
- */
-export interface DescribeAMQPClusterRequest {
-    /**
-     * 集群ID
-     */
-    ClusterId: string;
 }
 /**
  * DescribeRocketMQTopics请求参数结构体
@@ -2205,46 +1993,17 @@ export interface CreateEnvironmentRequest {
     AutoSubscriptionCreation?: boolean;
 }
 /**
- * CreateAMQPQueue请求参数结构体
+ * DeleteTopics返回参数结构体
  */
-export interface CreateAMQPQueueRequest {
+export interface DeleteTopicsResponse {
     /**
-     * 队列名称，3-64个字符，只能包含字母、数字、“-”及“_”
+     * 被删除的主题数组。
      */
-    Queue: string;
+    TopicSets: Array<TopicRecord>;
     /**
-     * 队列所在的vhost名称
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
-    VHostId: string;
-    /**
-     * 是否自动清除
-     */
-    AutoDelete: boolean;
-    /**
-     * 集群ID
-     */
-    ClusterId: string;
-    /**
-     * 队列说明，最大128个字符
-     */
-    Remark?: string;
-    /**
-     * 死信exchange
-     */
-    DeadLetterExchange?: string;
-    /**
-     * 路由键
-     */
-    DeadLetterRoutingKey?: string;
-}
-/**
- * ClearCmqQueue请求参数结构体
- */
-export interface ClearCmqQueueRequest {
-    /**
-     * 队列名字，在单个地域同一帐号下唯一。队列名称是一个不超过64个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-)。
-     */
-    QueueName: string;
+    RequestId?: string;
 }
 /**
  * ModifyEnvironmentAttributes返回参数结构体
@@ -2299,54 +2058,21 @@ export interface DescribeClustersRequest {
     Filters?: Array<Filter>;
 }
 /**
- * 生产者信息
+ * 订阅关系
  */
-export interface Publisher {
+export interface SubscriptionTopic {
     /**
-     * 生产者id
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 环境（命名空间）名称。
      */
-    ProducerId: number;
+    EnvironmentId: string;
     /**
-     * 生产者名称
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 主题名称。
      */
-    ProducerName: string;
+    TopicName: string;
     /**
-     * 生产者地址
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 订阅名称。
      */
-    Address: string;
-    /**
-     * 客户端版本
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ClientVersion: string;
-    /**
-     * 消息生产速率（条/秒）
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    MsgRateIn: number;
-    /**
-     * 消息生产吞吐速率（字节/秒）
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    MsgThroughputIn: number;
-    /**
-     * 平均消息大小（字节）
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    AverageMsgSize: number;
-    /**
-     * 连接时间
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ConnectedSince: string;
-    /**
-     * 生产者连接的主题分区号
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Partition: number;
+    SubscriptionName: string;
 }
 /**
  * RocketMQ主题信息
@@ -2405,9 +2131,29 @@ export interface DescribeRocketMQClusterResponse {
     RequestId?: string;
 }
 /**
- * CreateAMQPVHost返回参数结构体
+ * DescribePublisherSummary返回参数结构体
  */
-export interface CreateAMQPVHostResponse {
+export interface DescribePublisherSummaryResponse {
+    /**
+     * 生产速率（条/秒）
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MsgRateIn: number;
+    /**
+     * 生产速率（字节/秒）
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MsgThroughputIn: number;
+    /**
+     * 生产者数量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PublisherCount: number;
+    /**
+     * 消息存储大小，以字节为单位
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    StorageSize: number;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2475,46 +2221,60 @@ export interface RewindCmqQueueRequest {
     StartConsumeTime: number;
 }
 /**
- * DescribeAMQPVHosts请求参数结构体
+ * DescribeRabbitMQUser返回参数结构体
  */
-export interface DescribeAMQPVHostsRequest {
+export interface DescribeRabbitMQUserResponse {
     /**
-     * 集群ID
+     * 返回的User数量
      */
-    ClusterId: string;
+    TotalCount: number;
     /**
-     * 偏移量
+     * 当前已创建的RabbitMQ用户列表
      */
-    Offset: number;
+    RabbitMQUserList: Array<RabbitMQUser>;
     /**
-     * 限制数目
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
-    Limit: number;
-    /**
-     * 按名称搜索
-     */
-    NameKeyword?: string;
-    /**
-     * VHostId 列表过滤
-     */
-    VHostIdList?: Array<string>;
+    RequestId?: string;
 }
 /**
- * DescribePulsarProInstances请求参数结构体
+ * DescribeRocketMQMsg返回参数结构体
  */
-export interface DescribePulsarProInstancesRequest {
+export interface DescribeRocketMQMsgResponse {
     /**
-     * 查询条件过滤器
+     * 消息体
      */
-    Filters?: Array<Filter>;
+    Body?: string;
     /**
-     * 查询数目上限，默认20
+     * 详情参数
      */
-    Limit?: number;
+    Properties?: string;
     /**
-     * 查询起始位置
+     * 生产时间
      */
-    Offset?: number;
+    ProduceTime?: string;
+    /**
+     * 消息id
+     */
+    MsgId?: string;
+    /**
+     * 生产者地址
+     */
+    ProducerAddr?: string;
+    /**
+     * 消费组消费情况
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MessageTracks?: Array<RocketMQMessageTrack>;
+    /**
+     * 详情页展示的topic名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ShowTopicName?: string;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * ModifyCluster请求参数结构体
@@ -2538,41 +2298,17 @@ export interface ModifyClusterRequest {
     PublicAccessEnabled?: boolean;
 }
 /**
- * DescribeAMQPQueues请求参数结构体
+ * DescribeEnvironmentAttributes请求参数结构体
  */
-export interface DescribeAMQPQueuesRequest {
+export interface DescribeEnvironmentAttributesRequest {
     /**
-     * 查询偏移量
+     * 环境（命名空间）名称。
      */
-    Offset: number;
+    EnvironmentId: string;
     /**
-     * 查询限制数
+     * Pulsar 集群的ID
      */
-    Limit: number;
-    /**
-     * 集群ID
-     */
-    ClusterId: string;
-    /**
-     * Vhost名称
-     */
-    VHostId: string;
-    /**
-     * 按队列名称搜索，支持模糊查询
-     */
-    NameKeyword?: string;
-    /**
-     * 查询结果排序规则，ASC为升序，DESC为降序
-     */
-    SortOrder?: string;
-    /**
-     * 对查询结果排序，此为排序字段，目前支持Accumulative（消息堆积量）、Tps
-     */
-    SortedBy?: string;
-    /**
-     * 队列名称，指定此参数后将只返回该队列信息
-     */
-    FilterOneQueue?: string;
+    ClusterId?: string;
 }
 /**
  * ModifyRocketMQCluster请求参数结构体
@@ -2596,65 +2332,9 @@ export interface ModifyRocketMQClusterRequest {
     PublicAccessEnabled?: boolean;
 }
 /**
- * vhostd信息
+ * DeleteRabbitMQVirtualHost返回参数结构体
  */
-export interface AMQPVHost {
-    /**
-     * 命名空间名称，3-64个字符，只能包含字母、数字、“-”及“_”
-     */
-    VHostId: string;
-    /**
-     * 未消费消息的保留时间，以毫秒单位，范围60秒到15天
-     */
-    MsgTtl: number;
-    /**
-     * 备注
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Remark: string;
-    /**
-     * 创建时间，以毫秒为单位
-     */
-    CreateTime: number;
-    /**
-     * 更新时间，以毫秒为单位
-     */
-    UpdateTime: number;
-    /**
-     * 用户名
-     */
-    Username: string;
-    /**
-     * 密码
-     */
-    Password: string;
-    /**
-     * 集群状态，0:创建中，1:正常，2:销毁中，3:已删除，4: 隔离中，5:创建失败，6: 删除失败
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Status: number;
-}
-/**
- * ModifyAMQPExchange返回参数结构体
- */
-export interface ModifyAMQPExchangeResponse {
-    /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
-/**
- * DescribeAMQPExchanges返回参数结构体
- */
-export interface DescribeAMQPExchangesResponse {
-    /**
-     * 总记录数
-     */
-    TotalCount: number;
-    /**
-     * 主题信息列表
-     */
-    Exchanges: Array<AMQPExchange>;
+export interface DeleteRabbitMQVirtualHostResponse {
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2678,13 +2358,13 @@ export interface AcknowledgeMessageRequest {
     SubName: string;
 }
 /**
- * DeleteAMQPCluster请求参数结构体
+ * ResetRocketMQConsumerOffSet返回参数结构体
  */
-export interface DeleteAMQPClusterRequest {
+export interface ResetRocketMQConsumerOffSetResponse {
     /**
-     * 待删除的集群Id。
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
-    ClusterId: string;
+    RequestId?: string;
 }
 /**
  * DescribeRocketMQVipInstanceDetail返回参数结构体
@@ -2794,15 +2474,6 @@ export interface AcknowledgeMessageResponse {
     RequestId?: string;
 }
 /**
- * ModifyCmqQueueAttribute返回参数结构体
- */
-export interface ModifyCmqQueueAttributeResponse {
-    /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
-/**
  * DeleteEnvironmentRoles返回参数结构体
  */
 export interface DeleteEnvironmentRolesResponse {
@@ -2821,23 +2492,6 @@ export interface DescribeClusterDetailRequest {
     ClusterId: string;
 }
 /**
- * DescribeRabbitMQUser返回参数结构体
- */
-export interface DescribeRabbitMQUserResponse {
-    /**
-     * 返回的User数量
-     */
-    TotalCount: number;
-    /**
-     * 当前已创建的RabbitMQ用户列表
-     */
-    RabbitMQUserList: Array<RabbitMQUser>;
-    /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
-/**
  * ModifyRole返回参数结构体
  */
 export interface ModifyRoleResponse {
@@ -2853,39 +2507,6 @@ export interface ModifyRoleResponse {
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
-}
-/**
- * ModifyAMQPQueue请求参数结构体
- */
-export interface ModifyAMQPQueueRequest {
-    /**
-     * 集群ID
-     */
-    ClusterId: string;
-    /**
-     * Vhost名称
-     */
-    VHostId: string;
-    /**
-     * 队列名称
-     */
-    Queue: string;
-    /**
-     * 是否自动清除
-     */
-    AutoDelete: boolean;
-    /**
-     * 说明信息，最大128个字符
-     */
-    Remark?: string;
-    /**
-     * 死信exchange
-     */
-    DeadLetterExchange?: string;
-    /**
-     * 路由键
-     */
-    DeadLetterRoutingKey?: string;
 }
 /**
  * 标签的key/value的类型
@@ -2928,33 +2549,22 @@ export interface DeleteRocketMQTopicResponse {
     RequestId?: string;
 }
 /**
- * DescribeRocketMQMsg请求参数结构体
+ * SendRocketMQMessage返回参数结构体
  */
-export interface DescribeRocketMQMsgRequest {
+export interface SendRocketMQMessageResponse {
     /**
-     * 集群id
+     * 发送结果
      */
-    ClusterId: string;
+    Result: boolean;
     /**
-     * 命名空间
-     */
-    EnvironmentId: string;
-    /**
-     * 主题，查询死信时传groupId
-     */
-    TopicName: string;
-    /**
-     * 消息id
+     * 消息ID
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     MsgId: string;
     /**
-     * pulsar消息id
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
-    PulsarMsgId: string;
-    /**
-     * 查询死信时该值为true，只对Rocketmq有效
-     */
-    QueryDlqMsg?: boolean;
+    RequestId?: string;
 }
 /**
  * ModifyCmqTopicAttribute请求参数结构体
@@ -3030,25 +2640,54 @@ export interface CreateCmqSubscribeResponse {
     RequestId?: string;
 }
 /**
- * DescribeCmqDeadLetterSourceQueues请求参数结构体
+ * 生产者信息
  */
-export interface DescribeCmqDeadLetterSourceQueuesRequest {
+export interface Publisher {
     /**
-     * 死信队列名称
+     * 生产者id
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    DeadLetterQueueName: string;
+    ProducerId: number;
     /**
-     * 分页时本页获取主题列表的起始位置。如果填写了该值，必须也要填写 limit 。该值缺省时，后台取默认值 0。
+     * 生产者名称
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Limit?: number;
+    ProducerName: string;
     /**
-     * 分页时本页获取主题的个数，如果不传递该参数，则该参数默认为20，最大值为50。
+     * 生产者地址
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Offset?: number;
+    Address: string;
     /**
-     * 根据SourceQueueName过滤
+     * 客户端版本
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    SourceQueueName?: string;
+    ClientVersion: string;
+    /**
+     * 消息生产速率（条/秒）
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MsgRateIn: number;
+    /**
+     * 消息生产吞吐速率（字节/秒）
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MsgThroughputIn: number;
+    /**
+     * 平均消息大小（字节）
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AverageMsgSize: number;
+    /**
+     * 连接时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ConnectedSince: string;
+    /**
+     * 生产者连接的主题分区号
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Partition: number;
 }
 /**
  * DescribeSubscriptions返回参数结构体
@@ -3107,22 +2746,33 @@ export interface ModifyRoleRequest {
     ClusterId?: string;
 }
 /**
- * DescribeRabbitMQNodeList返回参数结构体
+ * DescribeRocketMQMsg请求参数结构体
  */
-export interface DescribeRabbitMQNodeListResponse {
+export interface DescribeRocketMQMsgRequest {
     /**
-     * 集群列表数量
+     * 集群id
      */
-    TotalCount?: number;
+    ClusterId: string;
     /**
-     * 集群列表
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 命名空间
      */
-    NodeList?: Array<RabbitMQPrivateNode>;
+    EnvironmentId: string;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     * 主题，查询死信时传groupId
      */
-    RequestId?: string;
+    TopicName: string;
+    /**
+     * 消息id
+     */
+    MsgId: string;
+    /**
+     * pulsar消息id
+     */
+    PulsarMsgId: string;
+    /**
+     * 查询死信时该值为true，只对Rocketmq有效
+     */
+    QueryDlqMsg?: boolean;
 }
 /**
  * SendMessages返回参数结构体
@@ -3312,33 +2962,13 @@ export interface DescribeEnvironmentRolesResponse {
     RequestId?: string;
 }
 /**
- * DescribeAMQPCreateQuota返回参数结构体
+ * ClearCmqQueue请求参数结构体
  */
-export interface DescribeAMQPCreateQuotaResponse {
+export interface ClearCmqQueueRequest {
     /**
-     * 租户总共可使用集群数量
+     * 队列名字，在单个地域同一帐号下唯一。队列名称是一个不超过64个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-)。
      */
-    MaxClusterNum: number;
-    /**
-     * 租户已创建集群数量
-     */
-    UsedClusterNum: number;
-    /**
-     * Exchange容量
-     */
-    ExchangeCapacity: number;
-    /**
-     * Queue容量
-     */
-    QueueCapacity: number;
-    /**
-     * 单Vhost TPS
-     */
-    MaxTpsPerVHost: number;
-    /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
+    QueueName: string;
 }
 /**
  * ModifyRocketMQGroup请求参数结构体
@@ -3527,63 +3157,118 @@ export interface ModifyRocketMQNamespaceResponse {
     RequestId?: string;
 }
 /**
- * AMQP路由关系
+ * 面向运营端的虚拟集群信息
  */
-export interface AMQPRouteRelation {
+export interface InternalTenant {
     /**
-     * 路由关系ID
+     * 虚拟集群ID
      */
-    RouteRelationId: string;
+    TenantId: string;
     /**
-     * 源Exchange
+     * 虚拟集群名称
      */
-    SourceExchange: string;
+    TenantName: string;
     /**
-     * 目标类型:Queue|Exchange
+     * 客户UIN
      */
-    DestType: string;
+    CustomerUin: string;
     /**
-     * 目标值
+     * 客户的APPID
      */
-    DestValue: string;
+    CustomerAppId: string;
     /**
-     * 绑定key
+     * 物理集群名称
      */
-    RoutingKey: string;
+    ClusterName: string;
     /**
-     * 源路由类型:Direct|Topic|Fanout
+     * 集群协议类型，支持的值为TDMQ，ROCKETMQ，AMQP，CMQ
      */
-    SourceExchangeType: string;
+    Type: string;
     /**
-     * 创建时间，以毫秒为单位
+     * 命名空间配额
+     */
+    MaxNamespaces: number;
+    /**
+     * 已使用命名空间配额
+     */
+    UsedNamespaces: number;
+    /**
+     * Topic配额
+     */
+    MaxTopics: number;
+    /**
+     * 已使用Topic配额
+     */
+    UsedTopics: number;
+    /**
+     * Topic分区数配额
+     */
+    MaxPartitions: number;
+    /**
+     * 已使用Topic分区数配额
+     */
+    UsedPartitions: number;
+    /**
+     * 存储配额, byte为单位
+     */
+    MaxMsgBacklogSize: number;
+    /**
+     * 命名空间最大生产TPS
+     */
+    MaxPublishTps: number;
+    /**
+     * 消息最大保留时间，秒为单位
+     */
+    MaxRetention: number;
+    /**
+     * 创建时间，毫秒为单位
      */
     CreateTime: number;
     /**
-     * 修改时间，以毫秒为单位
+     * 修改时间，毫秒为单位
      */
     UpdateTime: number;
     /**
-     * 说明信息
+     * 命名空间最大消费TPS
+     */
+    MaxDispatchTps: number;
+    /**
+     * 命名空间最大消费带宽，byte为单位
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Remark: string;
+    MaxDispatchRateInBytes: number;
+    /**
+     * 命名空间最大生产带宽，byte为单位
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MaxPublishRateInBytes: number;
+    /**
+     * 消息最大保留空间，MB为单位
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MaxRetentionSizeInMB: number;
+    /**
+     * public Access Enabled
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PublicAccessEnabled: boolean;
 }
 /**
- * DeleteAMQPQueue请求参数结构体
+ * SendCmqMsg请求参数结构体
  */
-export interface DeleteAMQPQueueRequest {
+export interface SendCmqMsgRequest {
     /**
-     * 集群ID
+     * 队列名
      */
-    ClusterId: string;
+    QueueName: string;
     /**
-     * Vhost名称
+     * 消息内容
      */
-    VHostId: string;
+    MsgContent: string;
     /**
-     * 队列名称
+     * 延迟时间
      */
-    Queue: string;
+    DelaySeconds: number;
 }
 /**
  * DeleteEnvironments请求参数结构体
@@ -3632,47 +3317,6 @@ export interface DescribeRocketMQClustersRequest {
     Filters?: Array<Filter>;
 }
 /**
- * ReceiveMessage返回参数结构体
- */
-export interface ReceiveMessageResponse {
-    /**
-     * 用作标识消息的唯一主键
-     */
-    MessageID: string;
-    /**
-     * 接收消息的内容
-     */
-    MessagePayload: string;
-    /**
-     * 提供给 Ack 接口，用来Ack哪一个topic中的消息
-     */
-    AckTopic: string;
-    /**
-     * 返回的错误信息，如果为空，说明没有错误
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ErrorMsg: string;
-    /**
-     * 返回订阅者的名字，用来创建 ack consumer时使用
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    SubName: string;
-    /**
-     * BatchReceivePolicy 一次性返回的多条消息的 MessageID，用 ‘###’ 来区分不同的 MessageID
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    MessageIDList: string;
-    /**
-     * BatchReceivePolicy 一次性返回的多条消息的消息内容，用 ‘###’ 来区分不同的消息内容
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    MessagesPayload: string;
-    /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
-/**
  * DescribeBindVpcs请求参数结构体
  */
 export interface DescribeBindVpcsRequest {
@@ -3707,15 +3351,6 @@ export interface DescribeClustersResponse {
     RequestId?: string;
 }
 /**
- * DeleteRocketMQNamespace返回参数结构体
- */
-export interface DeleteRocketMQNamespaceResponse {
-    /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
-/**
  * ClearCmqSubscriptionFilterTags请求参数结构体
  */
 export interface ClearCmqSubscriptionFilterTagsRequest {
@@ -3742,17 +3377,17 @@ export interface TopicRecord {
     TopicName: string;
 }
 /**
- * DescribePulsarProInstances返回参数结构体
+ * SendCmqMsg返回参数结构体
  */
-export interface DescribePulsarProInstancesResponse {
+export interface SendCmqMsgResponse {
     /**
-     * 未分页的总数目
+     * true表示发送成功
      */
-    TotalCount: number;
+    Result: boolean;
     /**
-     * 实例信息列表
+     * 消息id
      */
-    Instances: Array<PulsarProInstance>;
+    MsgId: string;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -3768,25 +3403,33 @@ export interface CreateRocketMQGroupResponse {
     RequestId?: string;
 }
 /**
- * CreateEnvironmentRole请求参数结构体
+ * ModifyRocketMQNamespace请求参数结构体
  */
-export interface CreateEnvironmentRoleRequest {
+export interface ModifyRocketMQNamespaceRequest {
     /**
-     * 环境（命名空间）名称。
+     * 集群ID
      */
-    EnvironmentId: string;
+    ClusterId: string;
     /**
-     * 角色名称。
+     * 命名空间名称，3-64个字符，只能包含字母、数字、“-”及“_”
      */
-    RoleName: string;
+    NamespaceId: string;
     /**
-     * 授权项，最多只能包含produce、consume两项的非空字符串数组。
+     * 已废弃
      */
-    Permissions: Array<string>;
+    Ttl?: number;
     /**
-     * 必填字段，集群的ID
+     * 已废弃
      */
-    ClusterId?: string;
+    RetentionTime?: number;
+    /**
+     * 说明，最大128个字符
+     */
+    Remark?: string;
+    /**
+     * 是否开启公网访问
+     */
+    PublicAccessEnabled?: boolean;
 }
 /**
  * DescribeEnvironmentRoles请求参数结构体
@@ -3821,24 +3464,6 @@ export interface DescribeEnvironmentRolesRequest {
     Filters?: Array<Filter>;
 }
 /**
- * DescribeRocketMQClusters返回参数结构体
- */
-export interface DescribeRocketMQClustersResponse {
-    /**
-     * 集群信息
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ClusterList: Array<RocketMQClusterDetail>;
-    /**
-     * 总条数
-     */
-    TotalCount: number;
-    /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
-/**
  * DeleteRoles返回参数结构体
  */
 export interface DeleteRolesResponse {
@@ -3866,28 +3491,6 @@ export interface EnvironmentRoleSet {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Permissions: Array<string>;
-}
-/**
- * SendMsg返回参数结构体
- */
-export interface SendMsgResponse {
-    /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
-/**
- * VPC配置信息
- */
-export interface VpcConfig {
-    /**
-     * vpc的id
-     */
-    VpcId: string;
-    /**
-     * 子网id
-     */
-    SubnetId: string;
 }
 /**
  * RocketMQ近期使用量
@@ -4049,45 +3652,6 @@ export interface DescribeRabbitMQUserRequest {
     Tags?: Array<string>;
 }
 /**
- * RabbitMQ用户实体详情
- */
-export interface RabbitMQUser {
-    /**
-     * 集群实例Id
-     */
-    InstanceId?: string;
-    /**
-     * 用户名，登录时使用
-     */
-    User?: string;
-    /**
-     * 密码，登录时使用
-     */
-    Password?: string;
-    /**
-     * 用户描述
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Description?: string;
-    /**
-     * 用户标签，用于决定改用户访问RabbitMQ Management的权限范围
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Tags?: Array<string>;
-    /**
-     * 用户创建时间
-     */
-    CreateTime?: string;
-    /**
-     * 用户最后修改时间
-     */
-    ModifyTime?: string;
-    /**
-     * 用户类型，System：系统创建，User：用户创建
-     */
-    Type?: string;
-}
-/**
  * DescribeRocketMQTopics返回参数结构体
  */
 export interface DescribeRocketMQTopicsResponse {
@@ -4105,25 +3669,52 @@ export interface DescribeRocketMQTopicsResponse {
     RequestId?: string;
 }
 /**
- * CreateAMQPVHost请求参数结构体
+ * 命名空间信息
  */
-export interface CreateAMQPVHostRequest {
+export interface Environment {
     /**
-     * 集群ID
+     * 命名空间名称
      */
-    ClusterId: string;
+    EnvironmentId: string;
     /**
-     * vhost名称，3-64个字符，只能包含字母、数字、“-”及“_”
+     * 说明
      */
-    VHostId: string;
+    Remark: string;
     /**
-     * 未消费消息的保留时间，以毫秒为单位，60秒-15天
+     * 未消费消息过期时间，单位：秒，最大1296000（15天）
      */
-    MsgTtl: number;
+    MsgTTL: number;
     /**
-     * 说明，最大128个字符
+     * 创建时间
      */
-    Remark?: string;
+    CreateTime: string;
+    /**
+     * 最近修改时间
+     */
+    UpdateTime: string;
+    /**
+     * 命名空间ID
+     */
+    NamespaceId: string;
+    /**
+     * 命名空间名称
+     */
+    NamespaceName: string;
+    /**
+     * Topic数量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TopicNum: number;
+    /**
+     * 消息保留策略
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RetentionPolicy: RetentionPolicy;
+    /**
+     * 是否自动创建订阅
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AutoSubscriptionCreation?: boolean;
 }
 /**
  * 租户RocketMQ集群详细信息
@@ -4353,13 +3944,25 @@ export interface CreateClusterResponse {
     RequestId?: string;
 }
 /**
- * DeleteAMQPExchange返回参数结构体
+ * DescribeCmqDeadLetterSourceQueues请求参数结构体
  */
-export interface DeleteAMQPExchangeResponse {
+export interface DescribeCmqDeadLetterSourceQueuesRequest {
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     * 死信队列名称
      */
-    RequestId?: string;
+    DeadLetterQueueName: string;
+    /**
+     * 分页时本页获取主题列表的起始位置。如果填写了该值，必须也要填写 limit 。该值缺省时，后台取默认值 0。
+     */
+    Limit?: number;
+    /**
+     * 分页时本页获取主题的个数，如果不传递该参数，则该参数默认为20，最大值为50。
+     */
+    Offset?: number;
+    /**
+     * 根据SourceQueueName过滤
+     */
+    SourceQueueName?: string;
 }
 /**
  * DeleteRocketMQNamespace请求参数结构体
@@ -4401,15 +4004,6 @@ export interface DescribeRolesRequest {
   必选：否
      */
     Filters?: Array<Filter>;
-}
-/**
- * CreateAMQPQueue返回参数结构体
- */
-export interface CreateAMQPQueueResponse {
-    /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
 }
 /**
  * CreateCluster请求参数结构体
@@ -4487,9 +4081,9 @@ export interface DescribeAMQPClustersRequest {
     Filters?: Array<Filter>;
 }
 /**
- * CreateAMQPRouteRelation返回参数结构体
+ * ModifyCmqQueueAttribute返回参数结构体
  */
-export interface CreateAMQPRouteRelationResponse {
+export interface ModifyCmqQueueAttributeResponse {
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -4714,43 +4308,14 @@ export interface AMQPClusterInfo {
     VpcEndPoint: string;
 }
 /**
- * DescribeAMQPRouteRelations返回参数结构体
+ * ModifyRocketMQInstanceSpec返回参数结构体
  */
-export interface DescribeAMQPRouteRelationsResponse {
+export interface ModifyRocketMQInstanceSpecResponse {
     /**
-     * 总记录数
+     * 订单号
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    TotalCount: number;
-    /**
-     * 路由关系列表
-     */
-    RouteRelations: Array<AMQPRouteRelation>;
-    /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
-/**
- * DeleteTopics返回参数结构体
- */
-export interface DeleteTopicsResponse {
-    /**
-     * 被删除的主题数组。
-     */
-    TopicSets: Array<TopicRecord>;
-    /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
-/**
- * CreateAMQPCluster返回参数结构体
- */
-export interface CreateAMQPClusterResponse {
-    /**
-     * 集群ID
-     */
-    ClusterId: string;
+    OrderId?: string;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -4776,21 +4341,13 @@ export interface DescribeRocketMQVipInstancesRequest {
     Offset?: number;
 }
 /**
- * DeleteAMQPExchange请求参数结构体
+ * DescribeRocketMQVipInstanceDetail请求参数结构体
  */
-export interface DeleteAMQPExchangeRequest {
+export interface DescribeRocketMQVipInstanceDetailRequest {
     /**
      * 集群ID
      */
     ClusterId: string;
-    /**
-     * Vhost名称
-     */
-    VHostId: string;
-    /**
-     * 交换机名称
-     */
-    Exchange: string;
 }
 /**
  * DeleteRabbitMQVirtualHost请求参数结构体
@@ -4904,23 +4461,6 @@ export interface CreateCmqTopicResponse {
     RequestId?: string;
 }
 /**
- * SendCmqMsg返回参数结构体
- */
-export interface SendCmqMsgResponse {
-    /**
-     * true表示发送成功
-     */
-    Result: boolean;
-    /**
-     * 消息id
-     */
-    MsgId: string;
-    /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
-/**
  * Cmq DeadLetterSource
  */
 export interface CmqDeadLetterSource {
@@ -4934,20 +4474,6 @@ export interface CmqDeadLetterSource {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     QueueName: string;
-}
-/**
- * ModifyRabbitMQVipInstance返回参数结构体
- */
-export interface ModifyRabbitMQVipInstanceResponse {
-    /**
-     * 实例id
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    InstanceId?: string;
-    /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
 }
 /**
  * ClearCmqSubscriptionFilterTags返回参数结构体
@@ -5057,59 +4583,6 @@ export interface Filter {
      * 数值
      */
     Values?: Array<string>;
-}
-/**
- * AMQP Exchange信息
- */
-export interface AMQPExchange {
-    /**
-     * Exchange名称
-     */
-    Name: string;
-    /**
-     * Exchange的类别，为枚举类型:Direct, Fanout, Topic
-     */
-    Type: string;
-    /**
-     * 主绑定数
-     */
-    SourceBindedNum: number;
-    /**
-     * 说明
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Remark: string;
-    /**
-     * 被绑定数
-     */
-    DestBindedNum: number;
-    /**
-     * 创建时间，以毫秒为单位
-     */
-    CreateTime: number;
-    /**
-     * 创建时间，以毫秒为单位
-     */
-    UpdateTime: number;
-    /**
-     * 是否为内部Exchange(以amq.前缀开头的)
-     */
-    Internal: boolean;
-    /**
-     * 备用Exchange名称
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    AlternateExchange: string;
-    /**
-     * 备用Exchange是否删除标识: true(已删除)
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    AlternateExchangeDeleteMark: boolean;
-    /**
-     * 延迟Exchange的类别，为枚举类型:Direct, Fanout, Topic
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    DelayType: string;
 }
 /**
  * DeleteTopics请求参数结构体
@@ -5334,18 +4807,43 @@ export interface DescribeAMQPClustersResponse {
     RequestId?: string;
 }
 /**
- * ModifyRocketMQInstanceSpec返回参数结构体
+ * RabbitMQ用户实体详情
  */
-export interface ModifyRocketMQInstanceSpecResponse {
+export interface RabbitMQUser {
     /**
-     * 订单号
+     * 集群实例Id
+     */
+    InstanceId?: string;
+    /**
+     * 用户名，登录时使用
+     */
+    User?: string;
+    /**
+     * 密码，登录时使用
+     */
+    Password?: string;
+    /**
+     * 用户描述
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    OrderId?: string;
+    Description?: string;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     * 用户标签，用于决定改用户访问RabbitMQ Management的权限范围
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    RequestId?: string;
+    Tags?: Array<string>;
+    /**
+     * 用户创建时间
+     */
+    CreateTime?: string;
+    /**
+     * 用户最后修改时间
+     */
+    ModifyTime?: string;
+    /**
+     * 用户类型，System：系统创建，User：用户创建
+     */
+    Type?: string;
 }
 /**
  * DescribeCmqDeadLetterSourceQueues返回参数结构体
@@ -5558,23 +5056,6 @@ export interface Cluster {
     PayMode: number;
 }
 /**
- * 订阅关系
- */
-export interface SubscriptionTopic {
-    /**
-     * 环境（命名空间）名称。
-     */
-    EnvironmentId: string;
-    /**
-     * 主题名称。
-     */
-    TopicName: string;
-    /**
-     * 订阅名称。
-     */
-    SubscriptionName: string;
-}
-/**
  * 消息保留策略
  */
 export interface RetentionPolicy {
@@ -5647,140 +5128,54 @@ export interface CreateRocketMQClusterResponse {
     RequestId?: string;
 }
 /**
- * ModifyRocketMQInstanceSpec请求参数结构体
+ * ReceiveMessage返回参数结构体
  */
-export interface ModifyRocketMQInstanceSpecRequest {
+export interface ReceiveMessageResponse {
     /**
-     * 专享实例ID
+     * 用作标识消息的唯一主键
      */
-    InstanceId: string;
+    MessageID: string;
     /**
-     * 实例规格，
-  rocket-vip-basic-1 基础型
-  rocket-vip-basic-2 标准型
-  rocket-vip-basic-3 高阶Ⅰ型
-  rocket-vip-basic-4 高阶Ⅱ型
+     * 接收消息的内容
      */
-    Specification?: string;
+    MessagePayload: string;
     /**
-     * 节点数量
+     * 提供给 Ack 接口，用来Ack哪一个topic中的消息
      */
-    NodeCount?: number;
+    AckTopic: string;
     /**
-     * 存储空间，GB为单位
+     * 返回的错误信息，如果为空，说明没有错误
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    StorageSize?: number;
+    ErrorMsg: string;
+    /**
+     * 返回订阅者的名字，用来创建 ack consumer时使用
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SubName: string;
+    /**
+     * BatchReceivePolicy 一次性返回的多条消息的 MessageID，用 ‘###’ 来区分不同的 MessageID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MessageIDList: string;
+    /**
+     * BatchReceivePolicy 一次性返回的多条消息的消息内容，用 ‘###’ 来区分不同的消息内容
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MessagesPayload: string;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
- * DescribeAMQPCreateQuota请求参数结构体
+ * DeleteRocketMQNamespace返回参数结构体
  */
-export declare type DescribeAMQPCreateQuotaRequest = null;
-/**
- * Pulsar专业版集群信息
- */
-export interface PulsarProClusterInfo {
+export interface DeleteRocketMQNamespaceResponse {
     /**
-     * 集群Id。
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
-    ClusterId?: string;
-    /**
-     * 集群名称。
-     */
-    ClusterName?: string;
-    /**
-     * 说明信息。
-     */
-    Remark?: string;
-    /**
-     * 创建时间
-     */
-    CreateTime?: string;
-    /**
-     * 集群状态，0:创建中，1:正常，2:隔离
-     */
-    Status?: number;
-    /**
-     * 集群版本
-     */
-    Version?: string;
-    /**
-     * 节点分布情况
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    NodeDistribution?: Array<InstanceNodeDistribution>;
-    /**
-     * 最大储存容量，单位：MB
-     */
-    MaxStorage?: number;
-    /**
-     * 是否可以修改路由
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    CanEditRoute?: boolean;
-}
-/**
- * AMQP 队列信息
- */
-export interface AMQPQueueDetail {
-    /**
-     * Queue名称
-     */
-    Name: string;
-    /**
-     * 说明
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Remark: string;
-    /**
-     * 被绑定数
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    DestBindedNum: number;
-    /**
-     * 创建时间，以毫秒为单位
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    CreateTime: number;
-    /**
-     * 创建时间，以毫秒为单位
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    UpdateTime: number;
-    /**
-     * 在线消费者数
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    OnlineConsumerNum: number;
-    /**
-     * 每秒钟的事务数
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Tps: number;
-    /**
-     * 消息堆积数
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    AccumulativeMsgNum: number;
-    /**
-     * 是否自动删除
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    AutoDelete: boolean;
-    /**
-     * 死信交换机
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    DeadLetterExchange: string;
-    /**
-     * 死信交换机路由键
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    DeadLetterRoutingKey: string;
-    /**
-     * Queue对应的Topic名称
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    TopicName: string;
+    RequestId?: string;
 }
 /**
  * DescribePublishers返回参数结构体
@@ -5801,9 +5196,14 @@ export interface DescribePublishersResponse {
     RequestId?: string;
 }
 /**
- * DeleteAMQPRouteRelation返回参数结构体
+ * ModifyRabbitMQVipInstance返回参数结构体
  */
-export interface DeleteAMQPRouteRelationResponse {
+export interface ModifyRabbitMQVipInstanceResponse {
+    /**
+     * 实例id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InstanceId?: string;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -5869,60 +5269,21 @@ export interface DescribeCmqQueueDetailRequest {
     QueueName: string;
 }
 /**
- * DescribeRocketMQMsg返回参数结构体
+ * DescribePulsarProInstances请求参数结构体
  */
-export interface DescribeRocketMQMsgResponse {
+export interface DescribePulsarProInstancesRequest {
     /**
-     * 消息体
+     * 查询条件过滤器
      */
-    Body?: string;
+    Filters?: Array<Filter>;
     /**
-     * 详情参数
+     * 查询数目上限，默认20
      */
-    Properties?: string;
+    Limit?: number;
     /**
-     * 生产时间
+     * 查询起始位置
      */
-    ProduceTime?: string;
-    /**
-     * 消息id
-     */
-    MsgId?: string;
-    /**
-     * 生产者地址
-     */
-    ProducerAddr?: string;
-    /**
-     * 消费组消费情况
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    MessageTracks?: Array<RocketMQMessageTrack>;
-    /**
-     * 详情页展示的topic名称
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ShowTopicName?: string;
-    /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
-/**
- * DescribeAMQPQueues返回参数结构体
- */
-export interface DescribeAMQPQueuesResponse {
-    /**
-     * 总记录数
-     */
-    TotalCount: number;
-    /**
-     * 队列信息列表
-     */
-    Queues: Array<AMQPQueueDetail>;
-    /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
+    Offset?: number;
 }
 /**
  * CreateRocketMQTopic请求参数结构体
@@ -6004,114 +5365,21 @@ export interface DeleteRocketMQClusterRequest {
     ClusterId: string;
 }
 /**
- * 面向运营端的虚拟集群信息
+ * DescribePulsarProInstances返回参数结构体
  */
-export interface InternalTenant {
+export interface DescribePulsarProInstancesResponse {
     /**
-     * 虚拟集群ID
+     * 未分页的总数目
      */
-    TenantId: string;
+    TotalCount: number;
     /**
-     * 虚拟集群名称
+     * 实例信息列表
      */
-    TenantName: string;
+    Instances: Array<PulsarProInstance>;
     /**
-     * 客户UIN
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
-    CustomerUin: string;
-    /**
-     * 客户的APPID
-     */
-    CustomerAppId: string;
-    /**
-     * 物理集群名称
-     */
-    ClusterName: string;
-    /**
-     * 集群协议类型，支持的值为TDMQ，ROCKETMQ，AMQP，CMQ
-     */
-    Type: string;
-    /**
-     * 命名空间配额
-     */
-    MaxNamespaces: number;
-    /**
-     * 已使用命名空间配额
-     */
-    UsedNamespaces: number;
-    /**
-     * Topic配额
-     */
-    MaxTopics: number;
-    /**
-     * 已使用Topic配额
-     */
-    UsedTopics: number;
-    /**
-     * Topic分区数配额
-     */
-    MaxPartitions: number;
-    /**
-     * 已使用Topic分区数配额
-     */
-    UsedPartitions: number;
-    /**
-     * 存储配额, byte为单位
-     */
-    MaxMsgBacklogSize: number;
-    /**
-     * 命名空间最大生产TPS
-     */
-    MaxPublishTps: number;
-    /**
-     * 消息最大保留时间，秒为单位
-     */
-    MaxRetention: number;
-    /**
-     * 创建时间，毫秒为单位
-     */
-    CreateTime: number;
-    /**
-     * 修改时间，毫秒为单位
-     */
-    UpdateTime: number;
-    /**
-     * 命名空间最大消费TPS
-     */
-    MaxDispatchTps: number;
-    /**
-     * 命名空间最大消费带宽，byte为单位
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    MaxDispatchRateInBytes: number;
-    /**
-     * 命名空间最大生产带宽，byte为单位
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    MaxPublishRateInBytes: number;
-    /**
-     * 消息最大保留空间，MB为单位
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    MaxRetentionSizeInMB: number;
-    /**
-     * public Access Enabled
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    PublicAccessEnabled: boolean;
-}
-/**
- * DescribeEnvironmentAttributes请求参数结构体
- */
-export interface DescribeEnvironmentAttributesRequest {
-    /**
-     * 环境（命名空间）名称。
-     */
-    EnvironmentId: string;
-    /**
-     * Pulsar 集群的ID
-     */
-    ClusterId?: string;
+    RequestId?: string;
 }
 /**
  * DeleteEnvironmentRoles请求参数结构体
@@ -6149,15 +5417,6 @@ export interface ModifyRabbitMQUserResponse {
     RequestId?: string;
 }
 /**
- * CreateAMQPExchange返回参数结构体
- */
-export interface CreateAMQPExchangeResponse {
-    /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
-/**
  * DescribeNodeHealthOpt请求参数结构体
  */
 export interface DescribeNodeHealthOptRequest {
@@ -6167,14 +5426,9 @@ export interface DescribeNodeHealthOptRequest {
     InstanceId: string;
 }
 /**
- * DeleteRabbitMQVirtualHost返回参数结构体
+ * DescribeBindClusters请求参数结构体
  */
-export interface DeleteRabbitMQVirtualHostResponse {
-    /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
+export declare type DescribeBindClustersRequest = null;
 /**
  * CreateRocketMQTopic返回参数结构体
  */
@@ -6233,15 +5487,6 @@ export interface EnvironmentRole {
      * 更新时间。
      */
     UpdateTime: string;
-}
-/**
- * ModifyAMQPQueue返回参数结构体
- */
-export interface ModifyAMQPQueueResponse {
-    /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
 }
 /**
  * CreateCmqQueue请求参数结构体
@@ -6362,9 +5607,23 @@ export interface DescribeRabbitMQVirtualHostListResponse {
     RequestId?: string;
 }
 /**
- * DescribeBindClusters请求参数结构体
+ * DescribeRocketMQClusters返回参数结构体
  */
-export declare type DescribeBindClustersRequest = null;
+export interface DescribeRocketMQClustersResponse {
+    /**
+     * 集群信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ClusterList: Array<RocketMQClusterDetail>;
+    /**
+     * 总条数
+     */
+    TotalCount: number;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
 /**
  * DescribePulsarProInstanceDetail请求参数结构体
  */
@@ -6610,39 +5869,6 @@ export interface AMQPClusterConfig {
     UsedQueueNum: number;
 }
 /**
- * DescribeAMQPExchanges请求参数结构体
- */
-export interface DescribeAMQPExchangesRequest {
-    /**
-     * 查询偏移量
-     */
-    Offset: number;
-    /**
-     * 查询限制数
-     */
-    Limit: number;
-    /**
-     * 集群ID
-     */
-    ClusterId: string;
-    /**
-     * Vhost ID
-     */
-    VHostId: string;
-    /**
-     * 按路由类型过滤查询结果，可选择Direct, Fanout, Topic
-     */
-    FilterType?: Array<string>;
-    /**
-     * 按exchange名称搜索，支持模糊查询
-     */
-    FilterName?: string;
-    /**
-     * 过滤查询内部或者外部exchange
-     */
-    FilterInternal?: boolean;
-}
-/**
  * CreateRocketMQNamespace返回参数结构体
  */
 export interface CreateRocketMQNamespaceResponse {
@@ -6650,27 +5876,6 @@ export interface CreateRocketMQNamespaceResponse {
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
-}
-/**
- * ModifyAMQPExchange请求参数结构体
- */
-export interface ModifyAMQPExchangeRequest {
-    /**
-     * 集群ID
-     */
-    ClusterId: string;
-    /**
-     * Vhost间名称
-     */
-    VHostId: string;
-    /**
-     * 交换机名称
-     */
-    Exchange: string;
-    /**
-     * 说明信息，最大128个字符
-     */
-    Remark?: string;
 }
 /**
  * SendBatchMessages请求参数结构体
@@ -6723,21 +5928,22 @@ export interface DeleteCmqTopicRequest {
     TopicName: string;
 }
 /**
- * DeleteAMQPRouteRelation请求参数结构体
+ * DescribeRabbitMQNodeList返回参数结构体
  */
-export interface DeleteAMQPRouteRelationRequest {
+export interface DescribeRabbitMQNodeListResponse {
     /**
-     * 集群ID
+     * 集群列表数量
      */
-    ClusterId: string;
+    TotalCount?: number;
     /**
-     * Vhost名称
+     * 集群列表
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    VHostId: string;
+    NodeList?: Array<RabbitMQPrivateNode>;
     /**
-     * 路由关系ID
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
-    RouteRelationId: string;
+    RequestId?: string;
 }
 /**
  * DescribePulsarProInstanceDetail返回参数结构体
@@ -6829,37 +6035,73 @@ export interface UnbindCmqDeadLetterRequest {
     SourceQueueName: string;
 }
 /**
- * CreateAMQPRouteRelation请求参数结构体
+ * ModifyCmqQueueAttribute请求参数结构体
  */
-export interface CreateAMQPRouteRelationRequest {
+export interface ModifyCmqQueueAttributeRequest {
     /**
-     * 集群ID
+     * 队列名字，在单个地域同一帐号下唯一。队列名称是一个不超过 64 个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-)。
      */
-    ClusterId: string;
+    QueueName: string;
     /**
-     * 交换机所在的vhost
+     * 最大堆积消息数。取值范围在公测期间为 1,000,000 - 10,000,000，正式上线后范围可达到 1000,000-1000,000,000。默认取值在公测期间为 10,000,000，正式上线后为 100,000,000。
      */
-    VHostId: string;
+    MaxMsgHeapNum?: number;
     /**
-     * 源Exchange名称
+     * 消息接收长轮询等待时间。取值范围 0-30 秒，默认值 0。
      */
-    SourceExchange: string;
+    PollingWaitSeconds?: number;
     /**
-     * 目标类型:Queue|Exchange
+     * 消息可见性超时。取值范围 1-43200 秒（即12小时内），默认值 30。
      */
-    DestType: string;
+    VisibilityTimeout?: number;
     /**
-     * 目标值
+     * 消息最大长度，新版CMQ新建的队列默认1024KB，不支持修改
      */
-    DestValue: string;
+    MaxMsgSize?: number;
     /**
-     * 交换机说明，最大128个字符
+     * 消息最长未确认时间。取值范围 30-43200 秒（30秒~12小时），默认值 3600 (1 小时)。
      */
-    Remark?: string;
+    MsgRetentionSeconds?: number;
     /**
-     * 绑定key,缺省值为default
+     * 队列是否开启回溯消息能力，该参数取值范围0-1296000，0表示不开启。
      */
-    RoutingKey?: string;
+    RewindSeconds?: number;
+    /**
+     * 第一次查询时间
+     */
+    FirstQueryInterval?: number;
+    /**
+     * 最大查询次数
+     */
+    MaxQueryCount?: number;
+    /**
+     * 死信队列名称
+     */
+    DeadLetterQueueName?: string;
+    /**
+     * MaxTimeToLivepolicy为1时必选。最大未消费过期时间。范围300-43200，单位秒，需要小于消息最大保留时间MsgRetentionSeconds
+     */
+    MaxTimeToLive?: number;
+    /**
+     * 最大接收次数
+     */
+    MaxReceiveCount?: number;
+    /**
+     * 死信队列策略
+     */
+    Policy?: number;
+    /**
+     * 是否开启消息轨迹标识，true表示开启，false表示不开启，不填表示不开启。
+     */
+    Trace?: boolean;
+    /**
+     * 是否开启事务，1开启，0不开启
+     */
+    Transaction?: number;
+    /**
+     * 队列可回溯存储空间：若开启消息回溯，取值范围：10240MB - 512000MB，若不开启消息回溯，取值：0
+     */
+    RetentionSizeInMB?: number;
 }
 /**
  * RabbitMQ集群规格信息
@@ -6982,123 +6224,60 @@ export interface DeleteSubscriptionsRequest {
     Force?: boolean;
 }
 /**
- * SendCmqMsg请求参数结构体
+ * VPC配置信息
  */
-export interface SendCmqMsgRequest {
+export interface VpcConfig {
     /**
-     * 队列名
+     * vpc的id
      */
-    QueueName: string;
+    VpcId: string;
     /**
-     * 消息内容
+     * 子网id
      */
-    MsgContent: string;
-    /**
-     * 延迟时间
-     */
-    DelaySeconds: number;
+    SubnetId: string;
 }
 /**
- * ModifyRabbitMQUser请求参数结构体
+ * Pulsar专业版集群信息
  */
-export interface ModifyRabbitMQUserRequest {
+export interface PulsarProClusterInfo {
     /**
-     * 集群实例Id
+     * 集群Id。
      */
-    InstanceId: string;
+    ClusterId?: string;
     /**
-     * 用户名，登录时使用
+     * 集群名称。
      */
-    User: string;
+    ClusterName?: string;
     /**
-     * 密码，登录时使用
+     * 说明信息。
      */
-    Password: string;
+    Remark?: string;
     /**
-     * 描述，不传则不修改
+     * 创建时间
      */
-    Description?: string;
+    CreateTime?: string;
     /**
-     * 用户标签，用于决定改用户访问RabbitMQ Management的权限范围，不传则不修改
+     * 集群状态，0:创建中，1:正常，2:隔离
      */
-    Tags?: Array<string>;
+    Status?: number;
     /**
-     * 该用户的最大连接数，不传则不修改
+     * 集群版本
      */
-    MaxConnections?: number;
+    Version?: string;
     /**
-     * 该用户的最大channel数，不传则不修改
+     * 节点分布情况
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    MaxChannels?: number;
-}
-/**
- * ModifyCmqQueueAttribute请求参数结构体
- */
-export interface ModifyCmqQueueAttributeRequest {
+    NodeDistribution?: Array<InstanceNodeDistribution>;
     /**
-     * 队列名字，在单个地域同一帐号下唯一。队列名称是一个不超过 64 个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-)。
+     * 最大储存容量，单位：MB
      */
-    QueueName: string;
+    MaxStorage?: number;
     /**
-     * 最大堆积消息数。取值范围在公测期间为 1,000,000 - 10,000,000，正式上线后范围可达到 1000,000-1000,000,000。默认取值在公测期间为 10,000,000，正式上线后为 100,000,000。
+     * 是否可以修改路由
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    MaxMsgHeapNum?: number;
-    /**
-     * 消息接收长轮询等待时间。取值范围 0-30 秒，默认值 0。
-     */
-    PollingWaitSeconds?: number;
-    /**
-     * 消息可见性超时。取值范围 1-43200 秒（即12小时内），默认值 30。
-     */
-    VisibilityTimeout?: number;
-    /**
-     * 消息最大长度，新版CMQ新建的队列默认1024KB，不支持修改
-     */
-    MaxMsgSize?: number;
-    /**
-     * 消息最长未确认时间。取值范围 30-43200 秒（30秒~12小时），默认值 3600 (1 小时)。
-     */
-    MsgRetentionSeconds?: number;
-    /**
-     * 队列是否开启回溯消息能力，该参数取值范围0-1296000，0表示不开启。
-     */
-    RewindSeconds?: number;
-    /**
-     * 第一次查询时间
-     */
-    FirstQueryInterval?: number;
-    /**
-     * 最大查询次数
-     */
-    MaxQueryCount?: number;
-    /**
-     * 死信队列名称
-     */
-    DeadLetterQueueName?: string;
-    /**
-     * MaxTimeToLivepolicy为1时必选。最大未消费过期时间。范围300-43200，单位秒，需要小于消息最大保留时间MsgRetentionSeconds
-     */
-    MaxTimeToLive?: number;
-    /**
-     * 最大接收次数
-     */
-    MaxReceiveCount?: number;
-    /**
-     * 死信队列策略
-     */
-    Policy?: number;
-    /**
-     * 是否开启消息轨迹标识，true表示开启，false表示不开启，不填表示不开启。
-     */
-    Trace?: boolean;
-    /**
-     * 是否开启事务，1开启，0不开启
-     */
-    Transaction?: number;
-    /**
-     * 队列可回溯存储空间：若开启消息回溯，取值范围：10240MB - 512000MB，若不开启消息回溯，取值：0
-     */
-    RetentionSizeInMB?: number;
+    CanEditRoute?: boolean;
 }
 /**
  * ModifyRocketMQGroup返回参数结构体
@@ -7210,55 +6389,25 @@ export interface SendMessagesRequest {
     MaxPendingMessages?: number;
 }
 /**
- * ModifyRocketMQNamespace请求参数结构体
+ * CreateEnvironmentRole请求参数结构体
  */
-export interface ModifyRocketMQNamespaceRequest {
+export interface CreateEnvironmentRoleRequest {
     /**
-     * 集群ID
+     * 环境（命名空间）名称。
      */
-    ClusterId: string;
+    EnvironmentId: string;
     /**
-     * 命名空间名称，3-64个字符，只能包含字母、数字、“-”及“_”
+     * 角色名称。
      */
-    NamespaceId: string;
+    RoleName: string;
     /**
-     * 已废弃
+     * 授权项，最多只能包含produce、consume两项的非空字符串数组。
      */
-    Ttl?: number;
+    Permissions: Array<string>;
     /**
-     * 已废弃
+     * 必填字段，集群的ID
      */
-    RetentionTime?: number;
-    /**
-     * 说明，最大128个字符
-     */
-    Remark?: string;
-    /**
-     * 是否开启公网访问
-     */
-    PublicAccessEnabled?: boolean;
-}
-/**
- * DeleteAMQPVHost返回参数结构体
- */
-export interface DeleteAMQPVHostResponse {
-    /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
-/**
- * DeleteAMQPVHost请求参数结构体
- */
-export interface DeleteAMQPVHostRequest {
-    /**
-     * 集群ID
-     */
-    ClusterId: string;
-    /**
-     * vhost名称
-     */
-    VHostId: string;
+    ClusterId?: string;
 }
 /**
  * DeleteRabbitMQVipInstance返回参数结构体

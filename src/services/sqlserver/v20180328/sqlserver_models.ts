@@ -2366,11 +2366,11 @@ export interface DescribeBackupFilesResponse {
   /**
    * 备份总数量
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 备份文件列表详情
    */
-  BackupFiles: Array<BackupFile>
+  BackupFiles?: Array<BackupFile>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3343,7 +3343,7 @@ export interface DescribeBackupFilesRequest {
    */
   InstanceId: string
   /**
-   * 聚合ID, 可通过接口DescribeBackups获取
+   * 单库备份的聚合ID, 可通过接口DescribeBackups获取（不支持查询打包备份记录）
    */
   GroupId: string
   /**
@@ -3958,7 +3958,7 @@ export interface CreateBackupResponse {
   /**
    * 异步任务ID
    */
-  FlowId: number
+  FlowId?: number
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4929,7 +4929,7 @@ export interface AccountPrivilegeModifyInfo {
    */
   DBPrivileges: Array<DBPrivilegeModifyInfo>
   /**
-   * 是否为管理员账户,当值为true 等价于基础版AccountType=L0，高可用AccountType=L1，当值为false时，表示删除管理员权限，默认false
+   * 表示是否为管理员账户，当值为true，表示是 管理员。若实例 是 单节点，则管理员所在的 账号类型为超级权限账号 ，即AccountType=L0；若实例 是 双节点，则管理员所在的 账号类型为高级权限账号，即AccountType=L1；当值为false，表示 不是管理员，则账号类型为普通账号，即AccountType=L3
    */
   IsAdmin?: boolean
   /**
@@ -5285,7 +5285,7 @@ export interface CreateBackupRequest {
    */
   DBNames?: Array<string>
   /**
-   * 实例ID，形如mssql-i1z41iwd
+   * 实例ID（必填），形如mssql-i1z41iwd
    */
   InstanceId?: string
   /**

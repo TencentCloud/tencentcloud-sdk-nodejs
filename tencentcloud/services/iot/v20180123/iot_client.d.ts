@@ -64,7 +64,9 @@ export declare class Client extends AbstractClient {
      */
     AddRule(req: AddRuleRequest, cb?: (error: string, rep: AddRuleResponse) => void): Promise<AddRuleResponse>;
     /**
-     * 取消子设备产品与网关设备产品的关联
+     * 业务无客户使用，下线接口。
+
+取消子设备产品与网关设备产品的关联
      */
     UnassociateSubDeviceFromGatewayProduct(req: UnassociateSubDeviceFromGatewayProductRequest, cb?: (error: string, rep: UnassociateSubDeviceFromGatewayProductResponse) => void): Promise<UnassociateSubDeviceFromGatewayProductResponse>;
     /**

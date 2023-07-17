@@ -315,7 +315,7 @@ export interface TerminateTasksRequest {
      */
     InstanceId: string;
     /**
-     * 待销毁节点的资源ID列表。资源ID形如：emr-vm-xxxxxxxx。有效的资源ID可通过登录[控制台](https://console.cloud.tencent.com/emr/static/hardware)查询。
+     * 待销毁节点的资源ID列表。资源ID形如：emr-vm-xxxxxxxx。有效的资源ID可通过登录[控制台](https://console.cloud.tencent.com/emr)查询。
      */
     ResourceIds: Array<string>;
 }
@@ -1882,7 +1882,7 @@ export interface InquiryPriceRenewInstanceResponse {
     DiscountCost?: number;
     /**
      * 实例续费的时间单位。取值范围：
-  <li>m：表示月份。</li>
+  <li>m：表示月份。</li>
   注意：此字段可能返回 null，表示取不到有效值。
      */
     TimeUnit?: string;
@@ -1913,29 +1913,29 @@ export interface InquiryPriceCreateInstanceResponse {
      * 原价，单位为元。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    OriginalCost: number;
+    OriginalCost?: number;
     /**
      * 折扣价，单位为元。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DiscountCost: number;
+    DiscountCost?: number;
     /**
      * 购买实例的时间单位。取值范围：
   <li>s：表示秒。</li>
-  <li>m：表示月份。</li>
+  <li>m：表示月份。</li>
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TimeUnit: string;
+    TimeUnit?: string;
     /**
      * 购买实例的时长。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TimeSpan: number;
+    TimeSpan?: number;
     /**
      * 价格清单
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    PriceList: Array<ZoneDetailPriceResult>;
+    PriceList?: Array<ZoneDetailPriceResult>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2710,14 +2710,17 @@ export interface MultiDisk {
   <li>CLOUD_SSD：表示云SSD。</li>
   <li>CLOUD_PREMIUM：表示高效云盘。</li>
   <li>CLOUD_HSSD：表示增强型SSD云硬盘。</li>
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     DiskType?: string;
     /**
      * 云盘大小
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     Volume?: number;
     /**
      * 该类型云盘个数
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     Count?: number;
 }
@@ -3488,7 +3491,7 @@ export interface DescribeInstancesRequest {
     /**
      * 建议必填-1，表示拉取所有项目下的集群。
   不填默认值为0，表示拉取默认项目下的集群。
-  实例所属项目ID。该参数可以通过调用 [DescribeProject](https://cloud.tencent.com/document/api/378/4400) 的返回值中的 projectId 字段来获取。
+  实例所属项目ID。该参数可以通过调用 [DescribeProjects](https://cloud.tencent.com/document/product/651/78725) 的返回值中的 projectId 字段来获取。
      */
     ProjectId?: number;
     /**
@@ -3501,7 +3504,7 @@ export interface DescribeInstancesRequest {
     /**
      * 按照OrderField升序或者降序进行排序。取值范围：
   <li>0：表示降序。</li>
-  <li>1：表示升序。</li>默认值为0。
+  <li>1：表示升序。</li>默认值为0。
      */
     Asc?: number;
 }
@@ -3597,7 +3600,7 @@ export interface DescribeInstancesListRequest {
      */
     OrderField?: string;
     /**
-     * 按照OrderField升序或者降序进行排序。取值范围：<li>0：表示降序。</li><li>1：表示升序。</li>默认值为0。
+     * 按照OrderField升序或者降序进行排序。取值范围：<li>0：表示降序。</li><li>1：表示升序。</li>默认值为0。
      */
     Asc?: number;
     /**
@@ -3672,11 +3675,11 @@ export interface DescribeInstancesListResponse {
     /**
      * 符合条件的实例总数。
      */
-    TotalCnt: number;
+    TotalCnt?: number;
     /**
      * 集群实例列表
      */
-    InstancesList: Array<EmrListInstance>;
+    InstancesList?: Array<EmrListInstance>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -3725,17 +3728,17 @@ export interface DescribeInstancesResponse {
     /**
      * 符合条件的实例总数。
      */
-    TotalCnt: number;
+    TotalCnt?: number;
     /**
      * EMR实例详细信息列表。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ClusterList: Array<ClusterInstancesInfo>;
+    ClusterList?: Array<ClusterInstancesInfo>;
     /**
      * 实例关联的标签键列表。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TagKeys: Array<string>;
+    TagKeys?: Array<string>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -3785,7 +3788,7 @@ export interface InquiryPriceRenewInstanceRequest {
      */
     TimeSpan: number;
     /**
-     * 待续费节点的资源ID列表。资源ID形如：emr-vm-xxxxxxxx。有效的资源ID可通过登录[控制台](https://console.cloud.tencent.com/emr/static/hardware)查询。
+     * 待续费节点的资源ID列表。资源ID形如：emr-vm-xxxxxxxx。有效的资源ID可通过登录[控制台](https://console.cloud.tencent.com/emr)查询。
      */
     ResourceIds: Array<string>;
     /**
@@ -3803,7 +3806,7 @@ export interface InquiryPriceRenewInstanceRequest {
     TimeUnit?: string;
     /**
      * 货币种类。取值范围：
-  <li>CNY：表示人民币。</li>
+  <li>CNY：表示人民币。</li>
      */
     Currency?: string;
     /**
@@ -3920,23 +3923,23 @@ export interface InquirePriceRenewEmrResponse {
      * 原价，单位为元。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    OriginalCost: number;
+    OriginalCost?: number;
     /**
      * 折扣价，单位为元。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DiscountCost: number;
+    DiscountCost?: number;
     /**
      * 实例续费的时间单位。取值范围：
-  <li>m：表示月份。</li>
+  <li>m：表示月份。</li>
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TimeUnit: string;
+    TimeUnit?: string;
     /**
      * 实例续费的时长。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TimeSpan: number;
+    TimeSpan?: number;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -4084,7 +4087,7 @@ export interface InquiryPriceCreateInstanceRequest {
     TimeSpan: number;
     /**
      * 货币种类。取值范围：
-  <li>CNY：表示人民币。</li>
+  <li>CNY：表示人民币。</li>
      */
     Currency: string;
     /**
@@ -4431,7 +4434,7 @@ export interface InquiryPriceScaleOutInstanceRequest {
     TaskCount: number;
     /**
      * 货币种类。取值范围：
-  <li>CNY：表示人民币。</li>
+  <li>CNY：表示人民币。</li>
      */
     Currency: string;
     /**
@@ -4587,7 +4590,7 @@ export interface InquirePriceRenewEmrRequest {
     TimeUnit?: string;
     /**
      * 货币种类。取值范围：
-  <li>CNY：表示人民币。</li>
+  <li>CNY：表示人民币。</li>
      */
     Currency?: string;
 }
@@ -4675,29 +4678,29 @@ export interface InquiryPriceScaleOutInstanceResponse {
      * 原价，单位为元。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    OriginalCost: string;
+    OriginalCost?: string;
     /**
      * 折扣价，单位为元。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DiscountCost: string;
+    DiscountCost?: string;
     /**
      * 扩容的时间单位。取值范围：
   <li>s：表示秒。</li>
-  <li>m：表示月份。</li>
+  <li>m：表示月份。</li>
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Unit: string;
+    Unit?: string;
     /**
      * 询价的节点规格。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    PriceSpec: PriceResource;
+    PriceSpec?: PriceResource;
     /**
      * 对应入参MultipleResources中多个规格的询价结果，其它出参返回的是第一个规格的询价结果
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    MultipleEmrPrice: Array<EmrPrice>;
+    MultipleEmrPrice?: Array<EmrPrice>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */

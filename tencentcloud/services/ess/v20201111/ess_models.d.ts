@@ -376,6 +376,22 @@ export interface FlowCreateApprover {
      * 当前签署方进行签署操作是否需要企业内部审批，true 则为需要。为个人签署方时则由发起方企业审核。
      */
     ApproverNeedSignReview?: boolean;
+    /**
+     * 签署人签署控件
+     */
+    SignComponents?: Array<Component>;
+    /**
+     * 签署人填写控件
+     */
+    Components?: Array<Component>;
+    /**
+     * 签署方控件类型为 SIGN_SIGNATURE时，可以指定签署方签名方式
+      HANDWRITE – 手写签名
+      OCR_ESIGN -- AI智能识别手写签名
+      ESIGN -- 个人印章类型
+      SYSTEM_ESIGN -- 系统签名（该类型可以在用户签署时根据用户姓名一键生成一个签名来进行签署）
+     */
+    ComponentLimitType?: Array<string>;
 }
 /**
  * DescribeThirdPartyAuthCode返回参数结构体

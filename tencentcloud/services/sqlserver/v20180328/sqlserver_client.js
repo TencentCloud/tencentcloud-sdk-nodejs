@@ -620,7 +620,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("InquiryPriceUpgradeDBInstance", req, cb);
     }
     /**
-     * 本接口(DescribeBackupFiles)用于在非打包备份模式下单个库对应的备份文件
+     * 本接口(DescribeBackupFiles)用于查询单库备份明细
      */
     async DescribeBackupFiles(req, cb) {
         return this.request("DescribeBackupFiles", req, cb);

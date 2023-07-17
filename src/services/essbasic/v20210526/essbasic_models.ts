@@ -1042,6 +1042,16 @@ MobileCheck：手机号验证
 }
 
 /**
+ * ChannelCreateOrganizationModifyQrCode请求参数结构体
+ */
+export interface ChannelCreateOrganizationModifyQrCodeRequest {
+  /**
+   * 应用相关信息。 此接口Agent.AppId 必填。
+   */
+  Agent: Agent
+}
+
+/**
  * DescribeFlowDetailInfo返回参数结构体
  */
 export interface DescribeFlowDetailInfoResponse {
@@ -2464,8 +2474,11 @@ ENTERPRISESERVER-企业静默签（文件发起时的企业静默签字）。
    */
   SignComponents?: Array<Component>
   /**
-   * 个人签署方指定签署控件类型，目前支持：OCR_ESIGN -AI智慧手写签名
-HANDWRITE -手写签名
+   * 	签署方控件类型为 SIGN_SIGNATURE时，可以指定签署方签名方式
+	HANDWRITE – 手写签名
+	OCR_ESIGN -- AI智能识别手写签名
+	ESIGN -- 个人印章类型
+	SYSTEM_ESIGN -- 系统签名（该类型可以在用户签署时根据用户姓名一键生成一个签名来进行签署）
    */
   ComponentLimitType?: Array<string>
   /**
@@ -3214,6 +3227,24 @@ ProcessTimeout - 转换文件超时
    * @deprecated
    */
   PreviewUrl?: string
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ChannelCreateOrganizationModifyQrCode返回参数结构体
+ */
+export interface ChannelCreateOrganizationModifyQrCodeResponse {
+  /**
+   * 二维码下载链接
+   */
+  QrCodeUrl?: string
+  /**
+   * 二维码失效时间 UNIX 时间戳 精确到秒
+   */
+  ExpiredTime?: number
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

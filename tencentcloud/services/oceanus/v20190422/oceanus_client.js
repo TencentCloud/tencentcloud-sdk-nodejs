@@ -76,6 +76,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeJobSavepoint", req, cb);
     }
     /**
+     * 查询作业实例启动日志
+     */
+    async DescribeJobSubmissionLog(req, cb) {
+        return this.request("DescribeJobSubmissionLog", req, cb);
+    }
+    /**
      * 描述资源接口
      */
     async DescribeResources(req, cb) {
@@ -88,10 +94,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeClusters", req, cb);
     }
     /**
-     * 批量删除作业接口，批量操作数量上限20
+     * 授权工作空间列表
      */
-    async DeleteJobs(req, cb) {
-        return this.request("DeleteJobs", req, cb);
+    async DescribeWorkSpaces(req, cb) {
+        return this.request("DescribeWorkSpaces", req, cb);
     }
     /**
      * 新建作业接口，一个 AppId 最多允许创建1000个作业
@@ -112,10 +118,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("RunJobs", req, cb);
     }
     /**
-     * 授权工作空间列表
+     * 批量删除作业接口，批量操作数量上限20
      */
-    async DescribeWorkSpaces(req, cb) {
-        return this.request("DescribeWorkSpaces", req, cb);
+    async DeleteJobs(req, cb) {
+        return this.request("DeleteJobs", req, cb);
     }
     /**
      * 作业列表页面新建文件夹请求

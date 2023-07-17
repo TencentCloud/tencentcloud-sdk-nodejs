@@ -1295,7 +1295,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口(DescribeBackupFiles)用于在非打包备份模式下单个库对应的备份文件
+   * 本接口(DescribeBackupFiles)用于查询单库备份明细
    */
   async DescribeBackupFiles(
     req: DescribeBackupFilesRequest,
