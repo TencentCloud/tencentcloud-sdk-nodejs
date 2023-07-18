@@ -1,4 +1,88 @@
 /**
+ * DescribeDataRepositoryTaskStatus返回参数结构体
+ */
+export interface DescribeDataRepositoryTaskStatusResponse {
+    /**
+     * 任务id
+     */
+    TaskId?: string;
+    /**
+     * 任务状态 0(初始化中), 1(运行中), 2(已完成), 3(任务失败)
+     */
+    Status?: number;
+    /**
+     * 已完成的文件数量
+     */
+    FinishedFileNumber?: number;
+    /**
+     * 已完成的数据量
+     */
+    FinishedCapacity?: number;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * DescribeClusterRoleToken请求参数结构体
+ */
+export interface DescribeClusterRoleTokenRequest {
+    /**
+     * 集群ID
+     */
+    ClusterId: string;
+    /**
+     * 角色名
+     */
+    RoleName: string;
+}
+/**
+ * 查询Client Token
+ */
+export interface ClientToken {
+    /**
+     * 挂载点
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    LocalDirectory?: string;
+}
+/**
+ * 角色凭证
+ */
+export interface RoleToken {
+    /**
+     * 角色名
+     */
+    RoleName?: string;
+    /**
+     * 用于goosefs client/sdk等
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Token?: string;
+}
+/**
+ * DescribeClusterRoleToken返回参数结构体
+ */
+export interface DescribeClusterRoleTokenResponse {
+    /**
+     * 角色凭证
+     */
+    RoleTokens?: Array<RoleToken>;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * DescribeClusterRoles请求参数结构体
+ */
+export interface DescribeClusterRolesRequest {
+    /**
+     * 集群ID
+     */
+    ClusterId: string;
+}
+/**
  * CreateDataRepositoryTask请求参数结构体
  */
 export interface CreateDataRepositoryTaskRequest {
@@ -32,6 +116,15 @@ export interface CreateDataRepositoryTaskRequest {
     TextLocation?: string;
 }
 /**
+ * DescribeClusterClientToken请求参数结构体
+ */
+export interface DescribeClusterClientTokenRequest {
+    /**
+     * 集群ID
+     */
+    ClusterId: string;
+}
+/**
  * CreateDataRepositoryTask返回参数结构体
  */
 export interface CreateDataRepositoryTaskResponse {
@@ -39,6 +132,19 @@ export interface CreateDataRepositoryTaskResponse {
      * 任务ID
      */
     TaskId?: string;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * DescribeClusterRoles返回参数结构体
+ */
+export interface DescribeClusterRolesResponse {
+    /**
+     * 集群角色
+     */
+    ClusterRoles?: Array<ClusterRole>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -58,25 +164,34 @@ export interface DescribeDataRepositoryTaskStatusRequest {
     FileSystemId: string;
 }
 /**
- * DescribeDataRepositoryTaskStatus返回参数结构体
+ * ClusterRole
  */
-export interface DescribeDataRepositoryTaskStatusResponse {
+export interface ClusterRole {
     /**
-     * 任务id
+     * 集群ID
      */
-    TaskId?: string;
+    ClusterId?: string;
     /**
-     * 任务状态 0(初始化中), 1(运行中), 2(已完成), 3(任务失败)
+     * 角色名
      */
-    Status?: number;
+    RoleName?: string;
     /**
-     * 已完成的文件数量
+     * 描述
      */
-    FinishedFileNumber?: number;
+    Description?: string;
     /**
-     * 已完成的数据量
+     * 目录列表
      */
-    FinishedCapacity?: number;
+    DirectoryList?: Array<string>;
+}
+/**
+ * DescribeClusterClientToken返回参数结构体
+ */
+export interface DescribeClusterClientTokenResponse {
+    /**
+     * 客户端凭证
+     */
+    ClientTokens?: Array<ClientToken>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */

@@ -106,6 +106,8 @@ export interface DomainSimpleInfo {
   clientTransferProhibited：注册商禁止转移
   clientUpdateProhibited：注册商禁止更新
   clientDeleteProhibited：注册商禁止删除
+  serverRenewProhibited: 注册局禁止续费
+  clientRenewProhobited: 注册商禁止续费
      */
     DomainStatus: Array<string>;
     /**
@@ -1092,11 +1094,11 @@ export interface DescribeDomainSimpleInfoResponse {
     /**
      * 域名信息
      */
-    DomainInfo: DomainSimpleInfo;
+    DomainInfo?: DomainSimpleInfo;
     /**
      * 账号ID
      */
-    Uin: string;
+    Uin?: string;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1425,7 +1427,7 @@ export interface CreatePhoneEmailResponse {
  */
 export interface SetDomainAutoRenewRequest {
     /**
-     * 域名ID。
+     * 域名ID 例如：domain-123abc
      */
     DomainId: string;
     /**

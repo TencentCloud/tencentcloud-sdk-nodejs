@@ -84,7 +84,6 @@ import {
   ExportAssetCoreModuleListRequest,
   DescribeComponentStatisticsResponse,
   DescribeMachineRegionsRequest,
-  DescribeSearchExportListResponse,
   DescribeAttackLogsRequest,
   DescribeVulLevelCountResponse,
   ExportBaselineItemDetectListRequest,
@@ -635,7 +634,6 @@ import {
   DeleteScanTaskResponse,
   ExportIgnoreBaselineRuleRequest,
   DescribeMachineRegionsResponse,
-  DescribeSearchExportListRequest,
   DestroyOrderRequest,
   AssetWebAppBaseInfo,
   DescribeBaselineRuleDetectListResponse,
@@ -835,18 +833,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeVulListResponse) => void
   ): Promise<DescribeVulListResponse> {
     return this.request("DescribeVulList", req, cb)
-  }
-
-  /**
-     * 旧版日志下载接口下线
-
-导出ES查询文档列表
-     */
-  async DescribeSearchExportList(
-    req: DescribeSearchExportListRequest,
-    cb?: (error: string, rep: DescribeSearchExportListResponse) => void
-  ): Promise<DescribeSearchExportListResponse> {
-    return this.request("DescribeSearchExportList", req, cb)
   }
 
   /**

@@ -1797,23 +1797,6 @@ export interface DescribeComponentStatisticsResponse {
  */
 export declare type DescribeMachineRegionsRequest = null;
 /**
- * DescribeSearchExportList返回参数结构体
- */
-export interface DescribeSearchExportListResponse {
-    /**
-     * 任务ID,需要到接口“异步导出任务”ExportTasks获取DownloadUrl下载地址
-     */
-    TaskId?: number;
-    /**
-     * 该参数作废
-     */
-    DownloadUrl?: string;
-    /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
-/**
  * DescribeAttackLogs请求参数结构体
  */
 export interface DescribeAttackLogsRequest {
@@ -15442,15 +15425,6 @@ export interface DescribeMachineRegionsResponse {
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
-}
-/**
- * DescribeSearchExportList请求参数结构体
- */
-export interface DescribeSearchExportListRequest {
-    /**
-     * ES查询条件JSON
-     */
-    Query: string;
 }
 /**
  * DestroyOrder请求参数结构体

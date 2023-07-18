@@ -18,20 +18,26 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  TrainingTexts,
+  CancelVRSTaskRequest,
+  CancelVRSTaskResponse,
   DescribeVRSTaskStatusResponse,
   CreateVRSTaskResponse,
+  DownloadVRSModelRsp,
   CreateVRSTaskRespData,
   DetectionEnvAndSoundQualityRespData,
   GetTrainingTextResponse,
+  Words,
   DescribeVRSTaskStatusRequest,
   DetectEnvAndSoundQualityRequest,
   DescribeVRSTaskStatusRespData,
+  DownloadVRSModelResponse,
+  DownloadVRSModelRequest,
   TrainingText,
-  Words,
-  TrainingTexts,
-  DetectEnvAndSoundQualityResponse,
+  CancelVRSTaskRsp,
   GetTrainingTextRequest,
   CreateVRSTaskRequest,
+  DetectEnvAndSoundQualityResponse,
 } from "./vrs_models"
 
 /**
@@ -44,27 +50,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 本接口服务对提交音频进行声音复刻任务创建接口，异步返回复刻结果。
-• 请求方法为 HTTP POST , Content-Type为"application/json; charset=utf-8"
-• 签名方法参考 公共参数 中签名方法v3。
-     */
-  async CreateVRSTask(
-    req: CreateVRSTaskRequest,
-    cb?: (error: string, rep: CreateVRSTaskResponse) => void
-  ): Promise<CreateVRSTaskResponse> {
-    return this.request("CreateVRSTask", req, cb)
+   * 下载声音复刻离线模型
+   */
+  async DownloadVRSModel(
+    req: DownloadVRSModelRequest,
+    cb?: (error: string, rep: DownloadVRSModelResponse) => void
+  ): Promise<DownloadVRSModelResponse> {
+    return this.request("DownloadVRSModel", req, cb)
   }
 
   /**
-     * 本接口用于获取声音复刻训练文本信息。
- 请求方法为 HTTP POST , Content-Type为"application/json; charset=utf-8"
-• 签名方法参考 公共参数 中签名方法v3。
-     */
-  async GetTrainingText(
-    req?: GetTrainingTextRequest,
-    cb?: (error: string, rep: GetTrainingTextResponse) => void
-  ): Promise<GetTrainingTextResponse> {
-    return this.request("GetTrainingText", req, cb)
+   * 声音复刻取消任务接口
+   */
+  async CancelVRSTask(
+    req: CancelVRSTaskRequest,
+    cb?: (error: string, rep: CancelVRSTaskResponse) => void
+  ): Promise<CancelVRSTaskResponse> {
+    return this.request("CancelVRSTask", req, cb)
   }
 
   /**
@@ -91,5 +93,29 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeVRSTaskStatusResponse) => void
   ): Promise<DescribeVRSTaskStatusResponse> {
     return this.request("DescribeVRSTaskStatus", req, cb)
+  }
+
+  /**
+     * 本接口服务对提交音频进行声音复刻任务创建接口，异步返回复刻结果。
+• 请求方法为 HTTP POST , Content-Type为"application/json; charset=utf-8"
+• 签名方法参考 公共参数 中签名方法v3。
+     */
+  async CreateVRSTask(
+    req: CreateVRSTaskRequest,
+    cb?: (error: string, rep: CreateVRSTaskResponse) => void
+  ): Promise<CreateVRSTaskResponse> {
+    return this.request("CreateVRSTask", req, cb)
+  }
+
+  /**
+     * 本接口用于获取声音复刻训练文本信息。
+ 请求方法为 HTTP POST , Content-Type为"application/json; charset=utf-8"
+• 签名方法参考 公共参数 中签名方法v3。
+     */
+  async GetTrainingText(
+    req?: GetTrainingTextRequest,
+    cb?: (error: string, rep: GetTrainingTextResponse) => void
+  ): Promise<GetTrainingTextResponse> {
+    return this.request("GetTrainingText", req, cb)
   }
 }

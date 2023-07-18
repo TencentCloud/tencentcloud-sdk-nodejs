@@ -126,8 +126,8 @@ class Client extends abstract_client_1.AbstractClient {
          <tr>
           <td>临时身份证告警</td>
         </tr>
-          <tr>
-          <td>身份证 PS 告警</td>
+         <tr>
+          <td>身份证疑似存在PS痕迹告警</td>
         </tr>
           <tr>
           <td>图片模糊告警（可根据图片质量分数判断）</td>

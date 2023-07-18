@@ -3956,32 +3956,32 @@ export interface ViolationUrl {
   /**
    * ID
    */
-  Id: number
+  Id?: number
   /**
    * 违规资源原始访问 URL
    */
-  RealUrl: string
+  RealUrl?: string
   /**
    * 快照路径，用于控制台展示违规内容快照
    */
-  DownloadUrl: string
+  DownloadUrl?: string
   /**
    * 违规资源当前状态
 forbid：已封禁
 release：已解封
 delay ： 延迟处理
-reject ：申诉驳回，状态仍为封禁态
+reject ：申诉驳回，状态仍为封禁状态
 complain：申诉进行中
    */
-  UrlStatus: string
+  UrlStatus?: string
   /**
    * 创建时间
    */
-  CreateTime: string
+  CreateTime?: string
   /**
    * 更新时间
    */
-  UpdateTime: string
+  UpdateTime?: string
 }
 
 /**
@@ -4119,7 +4119,7 @@ blacklist：黑名单
    */
   RefererType: string
   /**
-   * referer 内容列表列表
+   * referer 内容列表
    */
   Referers: Array<string>
   /**
@@ -5854,7 +5854,7 @@ export interface ManageClsTopicDomainsResponse {
 }
 
 /**
- * 域名海外地区特殊配置。UpdateDomainConfig接口只支持修改部分分地区配置，为了兼容旧版本配置，本类型会列出旧版本所有可能存在差异的配置列表，支持修改的配置列表如下：
+ * 域名海外地区特殊配置。UpdateDomainConfig接口只支持修改部分地区配置，为了兼容旧版本配置，本类型会列出旧版本所有可能存在差异的配置列表，支持修改的配置列表如下：
 + Authentication
 + BandwidthAlert
 + ErrorPage
@@ -6694,7 +6694,7 @@ failed: 处理失败
 }
 
 /**
- * 域名国内地区特殊配置。分地区特殊配置。UpdateDomainConfig接口只支持修改部分分地区配置，为了兼容旧版本配置，本类型会列出旧版本所有可能存在差异的配置列表，支持修改的配置列表如下：
+ * 域名国内地区特殊配置。分地区特殊配置。UpdateDomainConfig接口只支持修改部分地区配置，为了兼容旧版本配置，本类型会列出旧版本所有可能存在差异的配置列表，支持修改的配置列表如下：
 + Authentication
 + BandwidthAlert
 + ErrorPage

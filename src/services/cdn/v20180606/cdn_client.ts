@@ -1191,7 +1191,7 @@ Value 字段，使用 json 进行序列化，其中固定 update 作为 key，�
 
   /**
      * 查询指定域名的区域、运营商明细数据
-注意事项：接口尚未全量开放，未在内测名单中的账号不支持调用
+注意事项：接口尚未全面开放，未在内测名单中的账号不支持调用
      */
   async DescribeDistrictIspData(
     req: DescribeDistrictIspDataRequest,

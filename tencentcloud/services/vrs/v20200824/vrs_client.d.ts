@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeVRSTaskStatusResponse, CreateVRSTaskResponse, GetTrainingTextResponse, DescribeVRSTaskStatusRequest, DetectEnvAndSoundQualityRequest, DetectEnvAndSoundQualityResponse, GetTrainingTextRequest, CreateVRSTaskRequest } from "./vrs_models";
+import { CancelVRSTaskRequest, CancelVRSTaskResponse, DescribeVRSTaskStatusResponse, CreateVRSTaskResponse, GetTrainingTextResponse, DescribeVRSTaskStatusRequest, DetectEnvAndSoundQualityRequest, DownloadVRSModelResponse, DownloadVRSModelRequest, GetTrainingTextRequest, CreateVRSTaskRequest, DetectEnvAndSoundQualityResponse } from "./vrs_models";
 /**
  * vrs client
  * @class
@@ -8,17 +8,13 @@ import { DescribeVRSTaskStatusResponse, CreateVRSTaskResponse, GetTrainingTextRe
 export declare class Client extends AbstractClient {
     constructor(clientConfig: ClientConfig);
     /**
-     * 本接口服务对提交音频进行声音复刻任务创建接口，异步返回复刻结果。
-• 请求方法为 HTTP POST , Content-Type为"application/json; charset=utf-8"
-• 签名方法参考 公共参数 中签名方法v3。
+     * 下载声音复刻离线模型
      */
-    CreateVRSTask(req: CreateVRSTaskRequest, cb?: (error: string, rep: CreateVRSTaskResponse) => void): Promise<CreateVRSTaskResponse>;
+    DownloadVRSModel(req: DownloadVRSModelRequest, cb?: (error: string, rep: DownloadVRSModelResponse) => void): Promise<DownloadVRSModelResponse>;
     /**
-     * 本接口用于获取声音复刻训练文本信息。
- 请求方法为 HTTP POST , Content-Type为"application/json; charset=utf-8"
-• 签名方法参考 公共参数 中签名方法v3。
+     * 声音复刻取消任务接口
      */
-    GetTrainingText(req?: GetTrainingTextRequest, cb?: (error: string, rep: GetTrainingTextResponse) => void): Promise<GetTrainingTextResponse>;
+    CancelVRSTask(req: CancelVRSTaskRequest, cb?: (error: string, rep: CancelVRSTaskResponse) => void): Promise<CancelVRSTaskResponse>;
     /**
      * 本接口用于检测音频的环境和音频质量。
 • 请求方法为 HTTP POST , Content-Type为"application/json; charset=utf-8"
@@ -33,4 +29,16 @@ export declare class Client extends AbstractClient {
 • 签名方法参考 公共参数 中签名方法v3。
      */
     DescribeVRSTaskStatus(req: DescribeVRSTaskStatusRequest, cb?: (error: string, rep: DescribeVRSTaskStatusResponse) => void): Promise<DescribeVRSTaskStatusResponse>;
+    /**
+     * 本接口服务对提交音频进行声音复刻任务创建接口，异步返回复刻结果。
+• 请求方法为 HTTP POST , Content-Type为"application/json; charset=utf-8"
+• 签名方法参考 公共参数 中签名方法v3。
+     */
+    CreateVRSTask(req: CreateVRSTaskRequest, cb?: (error: string, rep: CreateVRSTaskResponse) => void): Promise<CreateVRSTaskResponse>;
+    /**
+     * 本接口用于获取声音复刻训练文本信息。
+ 请求方法为 HTTP POST , Content-Type为"application/json; charset=utf-8"
+• 签名方法参考 公共参数 中签名方法v3。
+     */
+    GetTrainingText(req?: GetTrainingTextRequest, cb?: (error: string, rep: GetTrainingTextResponse) => void): Promise<GetTrainingTextResponse>;
 }

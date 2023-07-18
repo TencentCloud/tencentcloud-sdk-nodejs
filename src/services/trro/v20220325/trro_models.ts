@@ -817,59 +817,119 @@ export interface SessionDeviceDetail {
   /**
    * 设备类型：field或remote
    */
-  DeviceType: string
+  DeviceType?: string
   /**
    * 起始点位时间，单位：秒
    */
-  StartTime: number
+  StartTime?: number
   /**
    * 结束点位时间，单位：秒
    */
-  EndTime: number
+  EndTime?: number
   /**
    * 会话ID
    */
-  SessionId: string
+  SessionId?: string
   /**
    * 码率，单位：kbps
    */
-  Rate: Array<number>
+  Rate?: Array<number>
   /**
    * 帧率
    */
-  Fps: Array<number>
+  Fps?: Array<number>
   /**
    * 丢包率，单位：%
    */
-  Lost: Array<number>
+  Lost?: Array<number>
   /**
    * 网络时延，单位：ms
    */
-  NetworkLatency: Array<number>
+  NetworkLatency?: Array<number>
   /**
    * 视频时延，单位：ms
    */
-  VideoLatency: Array<number>
+  VideoLatency?: Array<number>
   /**
    * CPU使用率，单位：%
    */
-  CpuUsed: Array<number>
+  CpuUsed?: Array<number>
   /**
    * 内存使用率，单位：%
    */
-  MemUsed: Array<number>
+  MemUsed?: Array<number>
   /**
    * 时间偏移量，单位：秒
    */
-  TimeOffset: Array<number>
+  TimeOffset?: Array<number>
   /**
    * 项目ID
    */
-  ProjectId: string
+  ProjectId?: string
   /**
    * 设备ID
    */
-  DeviceId: string
+  DeviceId?: string
+  /**
+   * sdk版本
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Ver?: string
+  /**
+   * 模式(p2p/server)
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SdkMode?: string
+  /**
+   * 解码耗时，单位：ms
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DecodeCost?: Array<number>
+  /**
+   * 渲染耗时，单位：ms
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RenderConst?: Array<number>
+  /**
+   * 卡顿k100
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  K100?: Array<number>
+  /**
+   * 卡顿k150
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  K150?: Array<number>
+  /**
+   * nack请求数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NACK?: Array<number>
+  /**
+   * 服务端调控码率,单位：kbps
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BitRateEstimate?: Array<number>
+  /**
+   * 宽度
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Width?: number
+  /**
+   * 高度
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Height?: number
+  /**
+   * 编码耗时，单位：ms
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EncodeCost?: Array<number>
+  /**
+   * 采集耗时，单位：ms
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CaptureCost?: Array<number>
 }
 
 /**

@@ -3314,153 +3314,153 @@ export interface TaskResponseInfo {
     /**
      * 任务所属Database的名称。
      */
-    DatabaseName: string;
+    DatabaseName?: string;
     /**
      * 任务数据量。
      */
-    DataAmount: number;
+    DataAmount?: number;
     /**
      * 任务Id。
      */
-    Id: string;
+    Id?: string;
     /**
      * 计算耗时，单位： ms
      */
-    UsedTime: number;
+    UsedTime?: number;
     /**
      * 任务输出路径。
      */
-    OutputPath: string;
+    OutputPath?: string;
     /**
      * 任务创建时间。
      */
-    CreateTime: string;
+    CreateTime?: string;
     /**
-     * 任务状态：0 初始化， 1 执行中， 2 执行成功，-1 执行失败，-3 已取消。
+     * 任务状态：0 初始化， 1 执行中， 2 执行成功，3 数据写入中，4 排队中。-1 执行失败，-3 已取消。
      */
-    State: number;
+    State?: number;
     /**
      * 任务SQL类型，DDL|DML等
      */
-    SQLType: string;
+    SQLType?: string;
     /**
      * 任务SQL语句
      */
-    SQL: string;
+    SQL?: string;
     /**
      * 结果是否过期。
      */
-    ResultExpired: boolean;
+    ResultExpired?: boolean;
     /**
      * 数据影响统计信息。
      */
-    RowAffectInfo: string;
+    RowAffectInfo?: string;
     /**
      * 任务结果数据表。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DataSet: string;
+    DataSet?: string;
     /**
      * 失败信息, 例如：errorMessage。该字段已废弃。
      */
-    Error: string;
+    Error?: string;
     /**
      * 任务执行进度num/100(%)
      */
-    Percentage: number;
+    Percentage?: number;
     /**
      * 任务执行输出信息。
      */
-    OutputMessage: string;
+    OutputMessage?: string;
     /**
      * 执行SQL的引擎类型
      */
-    TaskType: string;
+    TaskType?: string;
     /**
      * 任务进度明细
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ProgressDetail: string;
+    ProgressDetail?: string;
     /**
      * 任务结束时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    UpdateTime: string;
+    UpdateTime?: string;
     /**
      * 计算资源id
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DataEngineId: string;
+    DataEngineId?: string;
     /**
      * 执行sql的子uin
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    OperateUin: string;
+    OperateUin?: string;
     /**
      * 计算资源名字
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DataEngineName: string;
+    DataEngineName?: string;
     /**
      * 导入类型是本地导入还是cos
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    InputType: string;
+    InputType?: string;
     /**
      * 导入配置
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    InputConf: string;
+    InputConf?: string;
     /**
      * 数据条数
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DataNumber: number;
+    DataNumber?: number;
     /**
      * 查询数据能不能下载
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CanDownload: boolean;
+    CanDownload?: boolean;
     /**
      * 用户别名
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    UserAlias: string;
+    UserAlias?: string;
     /**
      * spark应用作业名
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SparkJobName: string;
+    SparkJobName?: string;
     /**
      * spark应用作业Id
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SparkJobId: string;
+    SparkJobId?: string;
     /**
      * spark应用入口jar文件
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SparkJobFile: string;
+    SparkJobFile?: string;
     /**
      * spark ui url
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    UiUrl: string;
+    UiUrl?: string;
     /**
      * 任务耗时，单位： ms
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TotalTime: number;
+    TotalTime?: number;
     /**
      * spark app job执行task的程序入口参数
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CmdArgs: string;
+    CmdArgs?: string;
     /**
      * 集群镜像大版本名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ImageVersion: string;
+    ImageVersion?: string;
     /**
      * driver规格：small,medium,large,xlarge；内存型(引擎类型)：m.small,m.medium,m.large,m.xlarge
   注意：此字段可能返回 null，表示取不到有效值。

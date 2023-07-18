@@ -128,16 +128,6 @@ it("cwp.v20180228.DescribeVulList", async function () {
     }
 })
 
-it("cwp.v20180228.DescribeSearchExportList", async function () {
-    try {
-       const data = await client.DescribeSearchExportList({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("cwp.v20180228.DescribeAssetPlanTaskList", async function () {
     try {
        const data = await client.DescribeAssetPlanTaskList({})

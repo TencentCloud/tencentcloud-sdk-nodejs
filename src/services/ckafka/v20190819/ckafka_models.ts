@@ -814,6 +814,14 @@ export interface EsParam {
    * 死信队列
    */
   DropDlq?: FailureParam
+  /**
+   * 使用数据订阅格式导入 es 时，消息与 es 索引字段映射关系。不填默认为默认字段匹配
+   */
+  RecordMappingList?: Array<EsRecordMapping>
+  /**
+   * 消息要映射为 es 索引中 @timestamp 的字段，如果当前配置为空，则使用消息的时间戳进行映射
+   */
+  DateField?: string
 }
 
 /**
@@ -1322,6 +1330,20 @@ export interface CreateInstancePreResp {
    * @deprecated
    */
   DeleteRouteTimestamp?: string
+}
+
+/**
+ * 消息字段与 es 索引的映射关系
+ */
+export interface EsRecordMapping {
+  /**
+   * es 索引成员名称
+   */
+  ColumnName?: string
+  /**
+   * 消息字段名称
+   */
+  JsonKey?: string
 }
 
 /**

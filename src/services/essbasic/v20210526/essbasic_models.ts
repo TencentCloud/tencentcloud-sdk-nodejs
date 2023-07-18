@@ -4144,6 +4144,10 @@ export interface ChannelCreateFlowSignUrlRequest {
    * @deprecated
    */
   Organization?: OrganizationInfo
+  /**
+   * 签署完之后的H5页面的跳转链接，此链接支持http://和https://，最大长度1000个字符。
+   */
+  JumpUrl?: string
 }
 
 /**

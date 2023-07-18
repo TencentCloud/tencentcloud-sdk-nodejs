@@ -4561,21 +4561,21 @@ export interface OpenSSLRequest {
  */
 export interface BackupDownloadInfo {
   /**
-   * 备份文件名称
+   * 备份文件名称。
    */
-  FileName: string
+  FileName?: string
   /**
-   * 备份文件大小，单位B，如果为0，表示无效
+   * 备份文件大小，单位B，如果为0，表示无效。
    */
-  FileSize: number
+  FileSize?: number
   /**
-   * 备份文件外网下载地址（6小时）
+   * 备份文件外网下载地址。下载地址的有效时长为6小时，过期后请重新获取。
    */
-  DownloadUrl: string
+  DownloadUrl?: string
   /**
-   * 备份文件内网下载地址（6小时）
+   * 备份文件内网下载地址。下载地址的有效时长为6小时，过期后请重新获取。
    */
-  InnerDownloadUrl: string
+  InnerDownloadUrl?: string
 }
 
 /**

@@ -18,10 +18,19 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
-  CreateDataRepositoryTaskRequest,
-  CreateDataRepositoryTaskResponse,
-  DescribeDataRepositoryTaskStatusRequest,
   DescribeDataRepositoryTaskStatusResponse,
+  DescribeClusterRoleTokenRequest,
+  ClientToken,
+  RoleToken,
+  DescribeClusterRoleTokenResponse,
+  DescribeClusterRolesRequest,
+  CreateDataRepositoryTaskRequest,
+  DescribeClusterClientTokenRequest,
+  CreateDataRepositoryTaskResponse,
+  DescribeClusterRolesResponse,
+  DescribeDataRepositoryTaskStatusRequest,
+  ClusterRole,
+  DescribeClusterClientTokenResponse,
 } from "./goosefs_models"
 
 /**
@@ -34,6 +43,26 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询GooseFS集群角色
+   */
+  async DescribeClusterRoles(
+    req: DescribeClusterRolesRequest,
+    cb?: (error: string, rep: DescribeClusterRolesResponse) => void
+  ): Promise<DescribeClusterRolesResponse> {
+    return this.request("DescribeClusterRoles", req, cb)
+  }
+
+  /**
+   * 查询GooseFS集群客户端凭证
+   */
+  async DescribeClusterClientToken(
+    req: DescribeClusterClientTokenRequest,
+    cb?: (error: string, rep: DescribeClusterClientTokenResponse) => void
+  ): Promise<DescribeClusterClientTokenResponse> {
+    return this.request("DescribeClusterClientToken", req, cb)
+  }
+
+  /**
    * 获取数据流通任务实时状态，用作客户端控制
    */
   async DescribeDataRepositoryTaskStatus(
@@ -41,6 +70,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDataRepositoryTaskStatusResponse) => void
   ): Promise<DescribeDataRepositoryTaskStatusResponse> {
     return this.request("DescribeDataRepositoryTaskStatus", req, cb)
+  }
+
+  /**
+   * 查询GooseFS集群角色凭证
+   */
+  async DescribeClusterRoleToken(
+    req: DescribeClusterRoleTokenRequest,
+    cb?: (error: string, rep: DescribeClusterRoleTokenResponse) => void
+  ): Promise<DescribeClusterRoleTokenResponse> {
+    return this.request("DescribeClusterRoleToken", req, cb)
   }
 
   /**

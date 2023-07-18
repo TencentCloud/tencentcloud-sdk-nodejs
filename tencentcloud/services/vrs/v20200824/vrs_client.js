@@ -28,20 +28,16 @@ class Client extends abstract_client_1.AbstractClient {
         super("vrs.tencentcloudapi.com", "2020-08-24", clientConfig);
     }
     /**
-     * 本接口服务对提交音频进行声音复刻任务创建接口，异步返回复刻结果。
-• 请求方法为 HTTP POST , Content-Type为"application/json; charset=utf-8"
-• 签名方法参考 公共参数 中签名方法v3。
+     * 下载声音复刻离线模型
      */
-    async CreateVRSTask(req, cb) {
-        return this.request("CreateVRSTask", req, cb);
+    async DownloadVRSModel(req, cb) {
+        return this.request("DownloadVRSModel", req, cb);
     }
     /**
-     * 本接口用于获取声音复刻训练文本信息。
- 请求方法为 HTTP POST , Content-Type为"application/json; charset=utf-8"
-• 签名方法参考 公共参数 中签名方法v3。
+     * 声音复刻取消任务接口
      */
-    async GetTrainingText(req, cb) {
-        return this.request("GetTrainingText", req, cb);
+    async CancelVRSTask(req, cb) {
+        return this.request("CancelVRSTask", req, cb);
     }
     /**
      * 本接口用于检测音频的环境和音频质量。
@@ -60,6 +56,22 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeVRSTaskStatus(req, cb) {
         return this.request("DescribeVRSTaskStatus", req, cb);
+    }
+    /**
+     * 本接口服务对提交音频进行声音复刻任务创建接口，异步返回复刻结果。
+• 请求方法为 HTTP POST , Content-Type为"application/json; charset=utf-8"
+• 签名方法参考 公共参数 中签名方法v3。
+     */
+    async CreateVRSTask(req, cb) {
+        return this.request("CreateVRSTask", req, cb);
+    }
+    /**
+     * 本接口用于获取声音复刻训练文本信息。
+ 请求方法为 HTTP POST , Content-Type为"application/json; charset=utf-8"
+• 签名方法参考 公共参数 中签名方法v3。
+     */
+    async GetTrainingText(req, cb) {
+        return this.request("GetTrainingText", req, cb);
     }
 }
 exports.Client = Client;

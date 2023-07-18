@@ -1,4 +1,36 @@
 /**
+ * 训练文本列表
+ */
+export interface TrainingTexts {
+    /**
+     * 训练文本列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TrainingTextList?: Array<TrainingText>;
+}
+/**
+ * CancelVRSTask请求参数结构体
+ */
+export interface CancelVRSTaskRequest {
+    /**
+     * 任务ID
+     */
+    TaskId: string;
+}
+/**
+ * CancelVRSTask返回参数结构体
+ */
+export interface CancelVRSTaskResponse {
+    /**
+     * 任务ID
+     */
+    Data?: CancelVRSTaskRsp;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * DescribeVRSTaskStatus返回参数结构体
  */
 export interface DescribeVRSTaskStatusResponse {
@@ -23,6 +55,38 @@ export interface CreateVRSTaskResponse {
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * 离线声音复刻模型下载响应
+ */
+export interface DownloadVRSModelRsp {
+    /**
+     * 模型cos地址
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Model?: string;
+    /**
+     * 音色名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    VoiceName?: string;
+    /**
+     * 音色性别:
+  1-male
+  2-female
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    VoiceGender?: number;
+    /**
+     * 语言类型：
+  1-中文
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    VoiceLanguage?: number;
+    /**
+     * 任务ID
+     */
+    TaskId?: string;
 }
 /**
  * 声音复刻任务创建响应
@@ -76,6 +140,39 @@ export interface GetTrainingTextResponse {
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * 音频检测提示信息：
+1.检测字是否存在多读、 少读、 错读等
+2.检测准确度和流畅度
+ */
+export interface Words {
+    /**
+     * 准确度 (<75则认为不合格)
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PronAccuracy?: number;
+    /**
+     * 流畅度 (<0.95则认为不合格)
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PronFluency?: number;
+    /**
+     * tag:
+  0: match  匹配
+  1: insert   多读
+  2: delete  少读
+  3: replace 错读
+  4: oov  待评估字不在发音评估的词库
+  5: unknown 未知错误
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Tag?: number;
+    /**
+     * 字
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Word?: string;
 }
 /**
  * DescribeVRSTaskStatus请求参数结构体
@@ -144,6 +241,28 @@ export interface DescribeVRSTaskStatusRespData {
     ErrorMsg?: string;
 }
 /**
+ * DownloadVRSModel返回参数结构体
+ */
+export interface DownloadVRSModelResponse {
+    /**
+     * 响应
+     */
+    Data?: DownloadVRSModelRsp;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * DownloadVRSModel请求参数结构体
+ */
+export interface DownloadVRSModelRequest {
+    /**
+     * 任务ID
+     */
+    TaskId: string;
+}
+/**
  * 训练文本
  */
 export interface TrainingText {
@@ -159,61 +278,9 @@ export interface TrainingText {
     Text?: string;
 }
 /**
- * 音频检测提示信息：
-1.检测字是否存在多读、 少读、 错读等
-2.检测准确度和流畅度
+ * 取消任务响应
  */
-export interface Words {
-    /**
-     * 准确度 (<75则认为不合格)
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    PronAccuracy?: number;
-    /**
-     * 流畅度 (<0.95则认为不合格)
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    PronFluency?: number;
-    /**
-     * tag:
-  0: match  匹配
-  1: insert   多读
-  2: delete  少读
-  3: replace 错读
-  4: oov  待评估字不在发音评估的词库
-  5: unknown 未知错误
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Tag?: number;
-    /**
-     * 字
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Word?: string;
-}
-/**
- * 训练文本列表
- */
-export interface TrainingTexts {
-    /**
-     * 训练文本列表
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    TrainingTextList?: Array<TrainingText>;
-}
-/**
- * DetectEnvAndSoundQuality返回参数结构体
- */
-export interface DetectEnvAndSoundQualityResponse {
-    /**
-     * 检测结果
-     */
-    Data?: DetectionEnvAndSoundQualityRespData;
-    /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
+export declare type CancelVRSTaskRsp = null;
 /**
  * GetTrainingText请求参数结构体
  */
@@ -263,4 +330,21 @@ export interface CreateVRSTaskRequest {
   回调采用POST请求方式，Content-Type为application/json，回调数据格式如下:{"TaskId":"xxxxxxxxxxxxxx","Status":2,"StatusStr":"success","VoiceType":xxxxx,"ErrorMsg":""}
      */
     CallbackUrl?: string;
+    /**
+     * 任务类型 1:在线 2:离线  默认为1
+     */
+    ModelType?: number;
+}
+/**
+ * DetectEnvAndSoundQuality返回参数结构体
+ */
+export interface DetectEnvAndSoundQualityResponse {
+    /**
+     * 检测结果
+     */
+    Data?: DetectionEnvAndSoundQualityRespData;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }

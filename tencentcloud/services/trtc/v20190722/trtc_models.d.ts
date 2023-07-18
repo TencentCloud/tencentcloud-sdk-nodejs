@@ -1247,7 +1247,7 @@ export interface StartMCUMixTranscodeRequest {
      */
     LayoutParams: LayoutParams;
     /**
-     * 第三方CDN转推参数。
+     * 第三方CDN转推参数。如需转推至腾讯云云直播，此参数无需填写，会默认转推
      */
     PublishCdnParams?: PublishCdnParams;
 }
@@ -2358,7 +2358,7 @@ export interface StartMCUMixTranscodeByStrRoomIdRequest {
      */
     LayoutParams: LayoutParams;
     /**
-     * 第三方CDN转推参数。
+     * 第三方CDN转推参数。如需转推至腾讯云云直播，此参数无需填写，会默认转推
      */
     PublishCdnParams?: PublishCdnParams;
 }

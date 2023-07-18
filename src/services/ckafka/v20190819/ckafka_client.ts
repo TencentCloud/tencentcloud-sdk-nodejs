@@ -65,6 +65,7 @@ import {
   ClickHouseParam,
   FilterMapParam,
   CreateInstancePreResp,
+  EsRecordMapping,
   ModifyDatahubTaskResponse,
   GroupInfoTopics,
   FetchMessageListByOffsetRequest,

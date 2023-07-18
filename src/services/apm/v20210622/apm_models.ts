@@ -83,6 +83,10 @@ export interface ModifyApmInstanceRequest {
    * CLS | ES
    */
   LogSource?: string
+  /**
+   * 用户自定义展示标签列表
+   */
+  CustomShowTags?: Array<string>
 }
 
 /**
@@ -93,130 +97,135 @@ export interface ApmInstanceDetail {
    * 存储使用量(MB)
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  AmountOfUsedStorage: number
+  AmountOfUsedStorage?: number
   /**
    * 实例名
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Name: string
+  Name?: string
   /**
    * 实例所属tag列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Tags: Array<ApmTag>
+  Tags?: Array<ApmTag>
   /**
    * 实例ID
    */
-  InstanceId: string
+  InstanceId?: string
   /**
    * 创建人Uin
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CreateUin: string
+  CreateUin?: string
   /**
    * 该实例已上报的服务端应用数量
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ServiceCount: number
+  ServiceCount?: number
   /**
    * 日均上报Span数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CountOfReportSpanPerDay: number
+  CountOfReportSpanPerDay?: number
   /**
    * AppId信息
    */
-  AppId: number
+  AppId?: number
   /**
    * Trace数据保存时长
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TraceDuration: number
+  TraceDuration?: number
   /**
    * 实例描述信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Description: string
+  Description?: string
   /**
    * 实例状态
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Status: number
+  Status?: number
   /**
    * 实例所属地域
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Region: string
+  Region?: string
   /**
    * 实例上报额度
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SpanDailyCounters: number
+  SpanDailyCounters?: number
   /**
    * 实例是否开通计费
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  BillingInstance: number
+  BillingInstance?: number
   /**
    * 错误率阈值
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ErrRateThreshold: number
+  ErrRateThreshold?: number
   /**
    * 采样率阈值
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SampleRate: number
+  SampleRate?: number
   /**
    * 是否开启错误采样 0  关 1 开
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ErrorSample: number
+  ErrorSample?: number
   /**
    * 慢调用保存阈值
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SlowRequestSavedThreshold: number
+  SlowRequestSavedThreshold?: number
   /**
    * cls日志所在地域
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  LogRegion: string
+  LogRegion?: string
   /**
    * 日志来源
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  LogSource: string
+  LogSource?: string
   /**
    * 日志功能开关 0 关 | 1 开
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  IsRelatedLog: number
+  IsRelatedLog?: number
   /**
    * 日志主题ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  LogTopicID: string
+  LogTopicID?: string
   /**
    * 该实例已上报的客户端应用数量
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ClientCount: number
+  ClientCount?: number
   /**
    * 该实例已上报的总应用数量
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * CLS日志集 | ES集群ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  LogSet: string
+  LogSet?: string
   /**
    * Metric数据保存时长
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  MetricDuration: number
+  MetricDuration?: number
+  /**
+   * 用户自定义展示标签列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CustomShowTags?: Array<string>
 }
 
 /**
