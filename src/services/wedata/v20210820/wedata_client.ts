@@ -25,6 +25,7 @@ import {
   RuleHistory,
   DescribeIntegrationStatisticsResponse,
   UnlockIntegrationTaskResponse,
+  SubmitTaskTestRunResponse,
   DescribeStreamTaskLogListRequest,
   DescribeIntegrationNodeResponse,
   MakeUpTasksNewResponse,
@@ -43,7 +44,8 @@ import {
   DescribeRuleTemplatesResponse,
   MakeUpWorkflowNewResponse,
   CreateIntegrationNodeResponse,
-  TaskInnerInfo,
+  BatchDeleteTasksDsRequest,
+  UserFileInfo,
   SourceObject,
   DescribeRulesResponse,
   RecordsSpeed,
@@ -56,6 +58,7 @@ import {
   Label,
   DescribeTableLineageRequest,
   TaskExtInfo,
+  StartIntegrationTaskResponse,
   BatchResumeIntegrationTasksResponse,
   DescribeRuleExecResultsByPageResponse,
   RuleGroupExecResult,
@@ -78,8 +81,10 @@ import {
   DescribeRuleExecResultsRequest,
   DescribeStandardRuleDetailInfoListResponse,
   RunTaskResponse,
+  SubmitWorkflowResponse,
   BatchStopTasksNewRequest,
   TriggerEventRequest,
+  StageCloudApiRequest,
   ResourcePathTree,
   DescribeClusterNamespaceListResponse,
   CreateInLongAgentResponse,
@@ -104,6 +109,7 @@ import {
   BatchRerunIntegrationTaskInstancesRequest,
   TableLineageInfo,
   RuleTemplateHistoryPage,
+  SubmitCustomFunctionResponse,
   DescribeDataObjectsRequest,
   SearchCondition,
   Rule,
@@ -143,25 +149,28 @@ import {
   ModifyTaskLinksRequest,
   ModifyWorkflowScheduleResponse,
   DeleteDataSourcesRequest,
+  TaskInnerInfo,
   ModifyTaskAlarmRegularRequest,
+  SubmitSqlTaskResponse,
   DescribeOrganizationalFunctionsRequest,
   DescribeRuleTemplateResponse,
   DescribeKafkaTopicInfoResponse,
   RerunInstancesRequest,
   DlcRemoveOrphanFilesInfo,
-  DescribeTemplateHistoryRequest,
+  DescribeBatchOperateTaskResponse,
   CommitIntegrationTaskRequest,
   DescribeTableInfoListRequest,
   DescribeQualityScoreRequest,
   CommitIntegrationTaskResponse,
   TaskReportDetail,
   IntegrationTaskInfo,
-  SubmitWorkflowResponse,
+  DeleteResourceFilesRequest,
   SubmitTaskResponse,
   ModifyFolderRequest,
   DescribeAlarmEventsResponse,
   DescribeInstanceLogListResponse,
   RuleGroup,
+  DeleteProjectParamDsResponse,
   RuleConfig,
   RunTaskRequest,
   DescribeDependTasksNewRequest,
@@ -188,6 +197,7 @@ import {
   DeleteResourceResponse,
   ModifyRuleResponse,
   DescribeBatchOperateTaskDTO,
+  DeleteTaskDsResponse,
   Namespace,
   RuleDimStat,
   DescribeTaskInstancesResponse,
@@ -212,7 +222,7 @@ import {
   CreateInLongAgentRequest,
   ModifyRuleTemplateRequest,
   DescribeRuleExecStatResponse,
-  DimensionScore,
+  DescribeTemplateHistoryRequest,
   CanvasInfo,
   DescribeTableQualityDetailsRequest,
   IntegrationNodeDetail,
@@ -227,7 +237,7 @@ import {
   DeleteWorkflowNewRequest,
   BatchUpdateIntegrationTasksResponse,
   CheckDuplicateRuleNameRequest,
-  MakeUpWorkflowNewRequest,
+  AdhocDetail,
   DescribeInstanceLastLogRequest,
   TableQualityDetailPage,
   DescribeTaskInstancesRequest,
@@ -242,7 +252,6 @@ import {
   SchedulerTaskInstanceInfo,
   UpdateInLongAgentResponse,
   ModifyWorkflowInfoRequest,
-  DescribeBatchOperateTaskResponse,
   SubmitWorkflow,
   BatchResumeIntegrationTasksRequest,
   DescribeFolderListRequest,
@@ -278,6 +287,7 @@ import {
   CheckIntegrationTaskNameExistsRequest,
   CheckIntegrationNodeNameExistsRequest,
   MakeUpTasksNewRequest,
+  BatchDeleteTasksDsResponse,
   DescribeDimensionScoreResponse,
   ScriptRequestInfo,
   DescribeOrganizationalFunctionsResponse,
@@ -287,6 +297,7 @@ import {
   CheckDuplicateRuleNameResponse,
   DeleteRuleRequest,
   RealTimeTaskInstanceNodeInfo,
+  DeleteResourceFilesResponse,
   GetOfflineInstanceListRequest,
   DescribeStreamTaskLogListResponse,
   DlcDataGovernPolicy,
@@ -329,12 +340,14 @@ import {
   DescribeColumnLineageResponse,
   DeleteFolderRequest,
   DescribeIntegrationTaskRequest,
+  DeleteFilePathRequest,
   DescribeRulesByPageRequest,
   DescribeTopTableStatResponse,
   ProdSchedulerTask,
   SourceFieldInfo,
   FreezeTasksByMultiWorkflowResponse,
   SaveCustomFunctionResponse,
+  AdhocRecord,
   OperateResult,
   CreateTaskRequest,
   ModifyDimensionWeightRequest,
@@ -348,10 +361,13 @@ import {
   DescribeMonitorsByPageRequest,
   SubmitWorkflowRequest,
   RerunInstancesResponse,
+  SubmitSqlTaskRequest,
   DescribeTaskLockStatusResponse,
   KillInstancesRequest,
-  StartIntegrationTaskResponse,
+  RemoveWorkflowDsRequest,
   BatchKillIntegrationTaskInstancesRequest,
+  DeleteTaskDsRequest,
+  DeleteFilePathResponse,
   InstanceReportWriteNode,
   DependencyConfig,
   RobAndLockIntegrationTaskRequest,
@@ -385,17 +401,19 @@ import {
   SubscribeReceiver,
   DescribeQualityScoreTrendRequest,
   RobLockState,
+  SubmitTaskTestRunRequest,
   DescribeAlarmEventsRequest,
   CompareResult,
   InstanceReportSummary,
   CheckAlarmRegularNameExistResponse,
-  SubmitCustomFunctionResponse,
+  DeleteProjectParamDsRequest,
   DescribeRuleTablesByPageResponse,
   SpeedValue,
   FunctionVersion,
   InstanceReportReadNode,
   DescribeTaskAlarmRegulationsRequest,
   DescribeRuleExecHistoryRequest,
+  DimensionScore,
   CreateCustomFunctionResponse,
   ModifyTaskInfoRequest,
   DataSourceInfo,
@@ -452,11 +470,13 @@ import {
   RuleHistoryPage,
   DescribeProdTasksResponse,
   DescribeBatchOperateTaskRequest,
+  MakeUpWorkflowNewRequest,
   DescribeTaskReportRequest,
   CommitRuleGroupTaskResponse,
   DescribeRealTimeTaskMetricOverviewResponse,
   DescribeOfflineTaskTokenResponse,
   DescribeTableInfoListResponse,
+  RemoveWorkflowDsResponse,
   GetOfflineDIInstanceListRequest,
   ModifyExecStrategyResponse,
   BatchStartIntegrationTasksRequest,
@@ -817,6 +837,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 删除编排空间工作流
+   */
+  async RemoveWorkflowDs(
+    req: RemoveWorkflowDsRequest,
+    cb?: (error: string, rep: RemoveWorkflowDsResponse) => void
+  ): Promise<RemoveWorkflowDsResponse> {
+    return this.request("RemoveWorkflowDs", req, cb)
+  }
+
+  /**
      * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
 批量删除任务，仅对任务状态为”已停止“有效；
 
@@ -909,6 +939,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteFolderResponse) => void
   ): Promise<DeleteFolderResponse> {
     return this.request("DeleteFolder", req, cb)
+  }
+
+  /**
+   * 删除项目参数
+   */
+  async DeleteProjectParamDs(
+    req: DeleteProjectParamDsRequest,
+    cb?: (error: string, rep: DeleteProjectParamDsResponse) => void
+  ): Promise<DeleteProjectParamDsResponse> {
+    return this.request("DeleteProjectParamDs", req, cb)
   }
 
   /**
@@ -1086,6 +1126,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 无
+   */
+  async SubmitTaskTestRun(
+    req: SubmitTaskTestRunRequest,
+    cb?: (error: string, rep: SubmitTaskTestRunResponse) => void
+  ): Promise<SubmitTaskTestRunResponse> {
+    return this.request("SubmitTaskTestRun", req, cb)
+  }
+
+  /**
    * Runner 规则检测结果上报
    */
   async CommitRuleGroupExecResult(
@@ -1096,13 +1146,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询Inlong manager日志
+   * 开发空间-批量删除目录和文件
    */
-  async TaskLog(
-    req: TaskLogRequest,
-    cb?: (error: string, rep: TaskLogResponse) => void
-  ): Promise<TaskLogResponse> {
-    return this.request("TaskLog", req, cb)
+  async DeleteFilePath(
+    req: DeleteFilePathRequest,
+    cb?: (error: string, rep: DeleteFilePathResponse) => void
+  ): Promise<DeleteFilePathResponse> {
+    return this.request("DeleteFilePath", req, cb)
   }
 
   /**
@@ -1493,14 +1543,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
-修改任务脚本
-     */
-  async ModifyTaskScript(
-    req: ModifyTaskScriptRequest,
-    cb?: (error: string, rep: ModifyTaskScriptResponse) => void
-  ): Promise<ModifyTaskScriptResponse> {
-    return this.request("ModifyTaskScript", req, cb)
+   * 资源管理-批量删除资源文件
+   */
+  async DeleteResourceFiles(
+    req: DeleteResourceFilesRequest,
+    cb?: (error: string, rep: DeleteResourceFilesResponse) => void
+  ): Promise<DeleteResourceFilesResponse> {
+    return this.request("DeleteResourceFiles", req, cb)
   }
 
   /**
@@ -1521,6 +1570,17 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeRuleGroupResponse) => void
   ): Promise<DescribeRuleGroupResponse> {
     return this.request("DescribeRuleGroup", req, cb)
+  }
+
+  /**
+     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
+修改任务脚本
+     */
+  async ModifyTaskScript(
+    req: ModifyTaskScriptRequest,
+    cb?: (error: string, rep: ModifyTaskScriptResponse) => void
+  ): Promise<ModifyTaskScriptResponse> {
+    return this.request("ModifyTaskScript", req, cb)
   }
 
   /**
@@ -1662,6 +1722,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeTableScoreTrendResponse) => void
   ): Promise<DescribeTableScoreTrendResponse> {
     return this.request("DescribeTableScoreTrend", req, cb)
+  }
+
+  /**
+   * 查询任务实例列表
+   */
+  async DescribeTaskInstances(
+    req: DescribeTaskInstancesRequest,
+    cb?: (error: string, rep: DescribeTaskInstancesResponse) => void
+  ): Promise<DescribeTaskInstancesResponse> {
+    return this.request("DescribeTaskInstances", req, cb)
   }
 
   /**
@@ -1987,6 +2057,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 按起止日期统计离线任务的所有实例的运行指标总和
+   */
+  async DescribeTaskReport(
+    req: DescribeTaskReportRequest,
+    cb?: (error: string, rep: DescribeTaskReportResponse) => void
+  ): Promise<DescribeTaskReportResponse> {
+    return this.request("DescribeTaskReport", req, cb)
+  }
+
+  /**
    * 暂停集成任务
    */
   async SuspendIntegrationTask(
@@ -2047,13 +2127,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 按起止日期统计离线任务的所有实例的运行指标总和
+   * 质量报告-质量分周期趋势
    */
-  async DescribeTaskReport(
-    req: DescribeTaskReportRequest,
-    cb?: (error: string, rep: DescribeTaskReportResponse) => void
-  ): Promise<DescribeTaskReportResponse> {
-    return this.request("DescribeTaskReport", req, cb)
+  async DescribeQualityScoreTrend(
+    req: DescribeQualityScoreTrendRequest,
+    cb?: (error: string, rep: DescribeQualityScoreTrendResponse) => void
+  ): Promise<DescribeQualityScoreTrendResponse> {
+    return this.request("DescribeQualityScoreTrend", req, cb)
   }
 
   /**
@@ -2127,13 +2207,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询任务实例列表
+   * 删除任务Ds
    */
-  async DescribeTaskInstances(
-    req: DescribeTaskInstancesRequest,
-    cb?: (error: string, rep: DescribeTaskInstancesResponse) => void
-  ): Promise<DescribeTaskInstancesResponse> {
-    return this.request("DescribeTaskInstances", req, cb)
+  async DeleteTaskDs(
+    req: DeleteTaskDsRequest,
+    cb?: (error: string, rep: DeleteTaskDsResponse) => void
+  ): Promise<DeleteTaskDsResponse> {
+    return this.request("DeleteTaskDs", req, cb)
   }
 
   /**
@@ -2178,13 +2258,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 质量报告-质量分周期趋势
+   * Ds批量删除任务，仅对任务状态为”已停止“有效；
    */
-  async DescribeQualityScoreTrend(
-    req: DescribeQualityScoreTrendRequest,
-    cb?: (error: string, rep: DescribeQualityScoreTrendResponse) => void
-  ): Promise<DescribeQualityScoreTrendResponse> {
-    return this.request("DescribeQualityScoreTrend", req, cb)
+  async BatchDeleteTasksDs(
+    req: BatchDeleteTasksDsRequest,
+    cb?: (error: string, rep: BatchDeleteTasksDsResponse) => void
+  ): Promise<BatchDeleteTasksDsResponse> {
+    return this.request("BatchDeleteTasksDs", req, cb)
   }
 
   /**
@@ -2412,6 +2492,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 即席分析提交SQL任务
+   */
+  async SubmitSqlTask(
+    req: SubmitSqlTaskRequest,
+    cb?: (error: string, rep: SubmitSqlTaskResponse) => void
+  ): Promise<SubmitSqlTaskResponse> {
+    return this.request("SubmitSqlTask", req, cb)
+  }
+
+  /**
    * 数据质量，查询调度任务的实例列表
    */
   async DescribeInstances(
@@ -2459,6 +2549,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeRuleExecHistoryResponse) => void
   ): Promise<DescribeRuleExecHistoryResponse> {
     return this.request("DescribeRuleExecHistory", req, cb)
+  }
+
+  /**
+   * 查询Inlong manager日志
+   */
+  async TaskLog(
+    req: TaskLogRequest,
+    cb?: (error: string, rep: TaskLogResponse) => void
+  ): Promise<TaskLogResponse> {
+    return this.request("TaskLog", req, cb)
   }
 
   /**

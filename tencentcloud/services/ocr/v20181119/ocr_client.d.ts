@@ -36,7 +36,7 @@ export declare class Client extends AbstractClient {
      */
     QueryBarCode(req: QueryBarCodeRequest, cb?: (error: string, rep: QueryBarCodeResponse) => void): Promise<QueryBarCodeResponse>;
     /**
-     * 本接口支持识别并提取各类证照、票据、表单、合同等结构化场景的字段信息。无需任何配置，灵活高效。适用于各类结构化信息录入场景。
+     * 本接口支持智能提取各类证照、票据、表单、合同等结构化场景的key:value字段信息，并支持提取表格信息的key:value组的结构化，灵活高效，适用于各类非标准材料的信息录入场景，点击[立即体验](https://cloud.tencent.com/product/smart-ocr)。
 
 默认接口请求频率限制：10次/秒。
      */
@@ -503,7 +503,7 @@ export declare class Client extends AbstractClient {
      */
     ClassifyDetectOCR(req: ClassifyDetectOCRRequest, cb?: (error: string, rep: ClassifyDetectOCRResponse) => void): Promise<ClassifyDetectOCRResponse>;
     /**
-     * 本接口支持各类印章识别，包括发票章，财务章等，适用于公文，票据等场景。
+     * 本接口支持各类印章主体内容、印章其他内容及形状识别，支持单图多印章识别，包括发票章、财务章等，适用于公文票据等场景。
 
 默认接口请求频率限制：5次/秒。
      */

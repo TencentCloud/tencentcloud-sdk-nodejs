@@ -241,6 +241,20 @@ export interface DeleteShipperRequest {
 }
 
 /**
+ * ScheduledSql的资源信息
+ */
+export interface ScheduledSqlResouceInfo {
+  /**
+   * 目标主题id
+   */
+  TopicId: string
+  /**
+   * topic的地域信息
+   */
+  Region?: string
+}
+
+/**
  * 动态更新索引配置
 
 注意：该功能尚处于内测阶段，如需使用请联系技术支持
@@ -492,6 +506,20 @@ export interface DescribeShippersRequest {
    * 分页单页的限制数目，默认值为20，最大值100
    */
   Limit?: number
+}
+
+/**
+ * CreateScheduledSql返回参数结构体
+ */
+export interface CreateScheduledSqlResponse {
+  /**
+   * 任务id
+   */
+  TaskId?: string
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -5451,4 +5479,62 @@ export interface MergePartitionResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * CreateScheduledSql请求参数结构体
+ */
+export interface CreateScheduledSqlRequest {
+  /**
+   * 源日志主题
+   */
+  SrcTopicId: string
+  /**
+   * 任务名称
+   */
+  Name: string
+  /**
+   * 任务启动状态.  1正常开启,  2关闭
+   */
+  EnableFlag: number
+  /**
+   * 加工任务目的topic_id以及别名
+   */
+  DstResource: ScheduledSqlResouceInfo
+  /**
+   * ScheduledSQL语句
+   */
+  ScheduledSqlContent: string
+  /**
+   * 调度开始时间,Unix时间戳，单位ms
+   */
+  ProcessStartTime: number
+  /**
+   * 调度类型，1:持续运行 2:指定调度结束时间
+   */
+  ProcessType: number
+  /**
+   * 调度周期(分钟)
+   */
+  ProcessPeriod: number
+  /**
+   * 调度时间窗口
+   */
+  ProcessTimeWindow: string
+  /**
+   * 执行延迟(秒)
+   */
+  ProcessDelay: number
+  /**
+   * 源topicId的地域信息
+   */
+  SrcTopicRegion: string
+  /**
+   * 调度结束时间，当ProcessType=2时为必传字段, Unix时间戳，单位ms
+   */
+  ProcessEndTime?: number
+  /**
+   * 语法规则。 默认值为0。0：Lucene语法，1：CQL语法
+   */
+  SyntaxRule?: number
 }

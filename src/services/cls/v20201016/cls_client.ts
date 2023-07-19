@@ -26,6 +26,7 @@ import {
   DescribeLogHistogramRequest,
   DescribeLogContextRequest,
   DeleteShipperRequest,
+  ScheduledSqlResouceInfo,
   DynamicIndex,
   DeleteLogsetResponse,
   ParquetKeyInfo,
@@ -39,6 +40,7 @@ import {
   ModifyLogsetRequest,
   CreateLogsetRequest,
   DescribeShippersRequest,
+  CreateScheduledSqlResponse,
   LogItem,
   SearchLogResponse,
   DeleteTopicRequest,
@@ -235,6 +237,7 @@ import {
   HostFileInfo,
   KeyRegexInfo,
   MergePartitionResponse,
+  CreateScheduledSqlRequest,
 } from "./cls_models"
 
 /**
@@ -712,13 +715,13 @@ cls.pb.cc cls.pb.h cls.proto
   }
 
   /**
-   * 本接口用于删除特殊采集规则配置，特殊采集配置应用于自建K8S环境的采集Agent
+   * 本接口用于创建日志集，返回新创建的日志集的 ID。
    */
-  async DeleteConfigExtra(
-    req: DeleteConfigExtraRequest,
-    cb?: (error: string, rep: DeleteConfigExtraResponse) => void
-  ): Promise<DeleteConfigExtraResponse> {
-    return this.request("DeleteConfigExtra", req, cb)
+  async CreateLogset(
+    req: CreateLogsetRequest,
+    cb?: (error: string, rep: CreateLogsetResponse) => void
+  ): Promise<CreateLogsetResponse> {
+    return this.request("CreateLogset", req, cb)
   }
 
   /**
@@ -792,13 +795,13 @@ cls.pb.cc cls.pb.h cls.proto
   }
 
   /**
-   * 本接口用于创建日志集，返回新创建的日志集的 ID。
+   * 本接口用于删除特殊采集规则配置，特殊采集配置应用于自建K8S环境的采集Agent
    */
-  async CreateLogset(
-    req: CreateLogsetRequest,
-    cb?: (error: string, rep: CreateLogsetResponse) => void
-  ): Promise<CreateLogsetResponse> {
-    return this.request("CreateLogset", req, cb)
+  async DeleteConfigExtra(
+    req: DeleteConfigExtraRequest,
+    cb?: (error: string, rep: DeleteConfigExtraResponse) => void
+  ): Promise<DeleteConfigExtraResponse> {
+    return this.request("DeleteConfigExtra", req, cb)
   }
 
   /**
@@ -899,6 +902,16 @@ cls.pb.cc cls.pb.h cls.proto
     cb?: (error: string, rep: DescribeAlertRecordHistoryResponse) => void
   ): Promise<DescribeAlertRecordHistoryResponse> {
     return this.request("DescribeAlertRecordHistory", req, cb)
+  }
+
+  /**
+   * 本接口用于删除日志主题。
+   */
+  async DeleteTopic(
+    req: DeleteTopicRequest,
+    cb?: (error: string, rep: DeleteTopicResponse) => void
+  ): Promise<DeleteTopicResponse> {
+    return this.request("DeleteTopic", req, cb)
   }
 
   /**
@@ -1122,13 +1135,13 @@ cls.pb.cc cls.pb.h cls.proto
   }
 
   /**
-   * 本接口用于删除日志主题。
+   * 本接口用于创建ScheduledSql任务
    */
-  async DeleteTopic(
-    req: DeleteTopicRequest,
-    cb?: (error: string, rep: DeleteTopicResponse) => void
-  ): Promise<DeleteTopicResponse> {
-    return this.request("DeleteTopic", req, cb)
+  async CreateScheduledSql(
+    req: CreateScheduledSqlRequest,
+    cb?: (error: string, rep: CreateScheduledSqlResponse) => void
+  ): Promise<CreateScheduledSqlResponse> {
+    return this.request("CreateScheduledSql", req, cb)
   }
 
   /**

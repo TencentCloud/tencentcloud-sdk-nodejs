@@ -1268,16 +1268,6 @@ it("monitor.v20180724.GetMonitorData", async function () {
     }
 })
 
-it("monitor.v20180724.PutMonitorData", async function () {
-    try {
-       const data = await client.PutMonitorData({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("monitor.v20180724.UpdateDNSConfig", async function () {
     try {
        const data = await client.UpdateDNSConfig({})

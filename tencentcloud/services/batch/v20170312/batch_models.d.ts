@@ -2284,17 +2284,17 @@ export interface StorageBlock {
      * HDD本地存储类型，值为：LOCAL_PRO.
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Type: string;
+    Type?: string;
     /**
      * HDD本地存储的最小容量
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    MinSize: number;
+    MinSize?: number;
     /**
      * HDD本地存储的最大容量
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    MaxSize: number;
+    MaxSize?: number;
 }
 /**
  * DescribeJobs请求参数结构体

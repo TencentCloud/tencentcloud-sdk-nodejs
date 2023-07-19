@@ -3375,6 +3375,10 @@ export interface DockerContainerConfiguration {
    * 运行的命令
    */
   Command?: string
+  /**
+   * 容器重启策略
+   */
+  RestartPolicy?: string
 }
 
 /**

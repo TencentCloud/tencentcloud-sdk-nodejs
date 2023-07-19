@@ -273,7 +273,7 @@ import {
   ModifyAlarmPolicyConditionResponse,
   DescribePrometheusInstancesOverviewResponse,
   MetricSet,
-  DescribePrometheusRecordRuleYamlResponse,
+  PrometheusInstanceGrantInfo,
   TemplateGroup,
   DescribeBindingPolicyObjectListInstance,
   UpdateGrafanaIntegrationResponse,
@@ -292,7 +292,7 @@ import {
   DescribeAccidentEventListAlarms,
   CreatePrometheusGlobalNotificationResponse,
   DescribeAlarmHistoriesRequest,
-  PrometheusInstanceGrantInfo,
+  DescribePrometheusRecordRuleYamlResponse,
   DeletePolicyGroupRequest,
   EnableSSOCamCheckRequest,
   DeleteGrafanaIntegrationResponse,
@@ -356,7 +356,6 @@ import {
   UpdatePrometheusAgentStatusRequest,
   DescribeGrafanaInstancesResponse,
   CheckIsPrometheusNewUserResponse,
-  PutMonitorDataResponse,
   DescribePolicyGroupInfoRequest,
   UpdateAlertRuleStateResponse,
   ModifyPrometheusRecordRuleYamlRequest,
@@ -414,7 +413,6 @@ import {
   DescribeProductEventListEventsGroupInfo,
   UpdateSSOAccountRequest,
   CreateSSOAccountResponse,
-  PutMonitorDataRequest,
   UpdatePrometheusScrapeJobResponse,
   DescribeAlarmPoliciesRequest,
   DescribePolicyConditionListConfigManualStatType,
@@ -430,7 +428,6 @@ import {
   UpdateGrafanaIntegrationRequest,
   DeletePrometheusRecordRuleYamlRequest,
   DescribeAlarmNoticeCallbacksRequest,
-  MetricDatum,
   DescribeStatisticDataRequest,
   GrafanaNotificationChannel,
   SetDefaultAlarmPolicyRequest,
@@ -1722,24 +1719,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: GetMonitorDataResponse) => void
   ): Promise<GetMonitorDataResponse> {
     return this.request("GetMonitorData", req, cb)
-  }
-
-  /**
-     * 对应的功能控制台及后端服务已于2年前下线，剩余该API接口未下线。
-
-默认接口请求频率限制：50次/秒。
-默认单租户指标上限：100个。
-单次上报最多 30 个指标/值对，请求返回错误时，请求中所有的指标/值均不会被保存。
-
-上报的时间戳为期望保存的时间戳，建议构造整数分钟时刻的时间戳。
-时间戳时间范围必须为当前时间到 300 秒前之间。
-同一 IP 指标对的数据需按分钟先后顺序上报。
-     */
-  async PutMonitorData(
-    req: PutMonitorDataRequest,
-    cb?: (error: string, rep: PutMonitorDataResponse) => void
-  ): Promise<PutMonitorDataResponse> {
-    return this.request("PutMonitorData", req, cb)
   }
 
   /**

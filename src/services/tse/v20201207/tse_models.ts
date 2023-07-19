@@ -314,6 +314,22 @@ export interface DescribeCloudNativeAPIGatewayServicesResponse {
 }
 
 /**
+ * 网关实例协议端口列表
+ */
+export interface GatewayInstanceSchemeAndPorts {
+  /**
+   * 端口协议，可选HTTP、HTTPS、TCP和UDP
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Scheme?: string
+  /**
+   * 端口列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PortList?: Array<number>
+}
+
+/**
  * 云原生网关限流插件Qps阈值
  */
 export interface QpsThreshold {
@@ -807,6 +823,21 @@ export interface DeleteCloudNativeAPIGatewayServiceResponse {
  * DeleteCloudNativeAPIGatewayRoute返回参数结构体
  */
 export interface DeleteCloudNativeAPIGatewayRouteResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeCloudNativeAPIGatewayPorts返回参数结构体
+ */
+export interface DescribeCloudNativeAPIGatewayPortsResponse {
+  /**
+   * 云原生API网关实例协议端口列表响应结果
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Result?: DescribeGatewayInstancePortResult
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1699,6 +1730,22 @@ export interface CloudNativeAPIGatewayNode {
 }
 
 /**
+ * 获取云原生API网关实例协议端口列表响应结果
+ */
+export interface DescribeGatewayInstancePortResult {
+  /**
+   * 云原生API网关ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  GatewayId?: string
+  /**
+   * 网关实例协议端口列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  GatewayInstancePortList?: Array<GatewayInstanceSchemeAndPorts>
+}
+
+/**
  * DescribeZookeeperServerInterfaces返回参数结构体
  */
 export interface DescribeZookeeperServerInterfacesResponse {
@@ -2501,6 +2548,16 @@ export interface DeleteCloudNativeAPIGatewayCanaryRuleResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeCloudNativeAPIGatewayPorts请求参数结构体
+ */
+export interface DescribeCloudNativeAPIGatewayPortsRequest {
+  /**
+   * 云原生API网关实例ID
+   */
+  GatewayId: string
 }
 
 /**

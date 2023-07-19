@@ -76,6 +76,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeCloudNativeAPIGatewayRoutes", req, cb);
     }
     /**
+     * 获取云原生API网关实例端口信息
+     */
+    async DescribeCloudNativeAPIGatewayPorts(req, cb) {
+        return this.request("DescribeCloudNativeAPIGatewayPorts", req, cb);
+    }
+    /**
      * 删除云原生网关路由
      */
     async DeleteCloudNativeAPIGatewayRoute(req, cb) {

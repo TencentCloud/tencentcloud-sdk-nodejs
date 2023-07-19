@@ -98,6 +98,16 @@ it("tse.v20201207.DescribeCloudNativeAPIGatewayRoutes", async function () {
     }
 })
 
+it("tse.v20201207.DescribeCloudNativeAPIGatewayPorts", async function () {
+    try {
+       const data = await client.DescribeCloudNativeAPIGatewayPorts({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tse.v20201207.DeleteCloudNativeAPIGatewayRoute", async function () {
     try {
        const data = await client.DeleteCloudNativeAPIGatewayRoute({})

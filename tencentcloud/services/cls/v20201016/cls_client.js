@@ -369,10 +369,10 @@ cls.pb.cc cls.pb.h cls.proto
         return this.request("DeleteDataTransform", req, cb);
     }
     /**
-     * 本接口用于删除特殊采集规则配置，特殊采集配置应用于自建K8S环境的采集Agent
+     * 本接口用于创建日志集，返回新创建的日志集的 ID。
      */
-    async DeleteConfigExtra(req, cb) {
-        return this.request("DeleteConfigExtra", req, cb);
+    async CreateLogset(req, cb) {
+        return this.request("CreateLogset", req, cb);
     }
     /**
      * 本接口用于获取Kafka数据订阅任务
@@ -417,10 +417,10 @@ cls.pb.cc cls.pb.h cls.proto
         return this.request("ApplyConfigToMachineGroup", req, cb);
     }
     /**
-     * 本接口用于创建日志集，返回新创建的日志集的 ID。
+     * 本接口用于删除特殊采集规则配置，特殊采集配置应用于自建K8S环境的采集Agent
      */
-    async CreateLogset(req, cb) {
-        return this.request("CreateLogset", req, cb);
+    async DeleteConfigExtra(req, cb) {
+        return this.request("DeleteConfigExtra", req, cb);
     }
     /**
      * 本接口用于修改cos导入任务
@@ -481,6 +481,12 @@ cls.pb.cc cls.pb.h cls.proto
      */
     async DescribeAlertRecordHistory(req, cb) {
         return this.request("DescribeAlertRecordHistory", req, cb);
+    }
+    /**
+     * 本接口用于删除日志主题。
+     */
+    async DeleteTopic(req, cb) {
+        return this.request("DeleteTopic", req, cb);
     }
     /**
      * 获取投递任务列表
@@ -615,10 +621,10 @@ cls.pb.cc cls.pb.h cls.proto
         return this.request("CreateAlarm", req, cb);
     }
     /**
-     * 本接口用于删除日志主题。
+     * 本接口用于创建ScheduledSql任务
      */
-    async DeleteTopic(req, cb) {
-        return this.request("DeleteTopic", req, cb);
+    async CreateScheduledSql(req, cb) {
+        return this.request("CreateScheduledSql", req, cb);
     }
     /**
      * 本接口仅创建下载任务，任务返回的下载地址，请用户调用DescribeExports查看任务列表。其中有下载地址CosPath参数。参考文档https://cloud.tencent.com/document/product/614/56449

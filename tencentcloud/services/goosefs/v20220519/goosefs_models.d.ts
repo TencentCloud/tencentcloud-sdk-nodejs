@@ -41,10 +41,25 @@ export interface DescribeClusterRoleTokenRequest {
  */
 export interface ClientToken {
     /**
+     * 节点 IP
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    NodeIp?: string;
+    /**
      * 挂载点
   注意：此字段可能返回 null，表示取不到有效值。
      */
     LocalDirectory?: string;
+    /**
+     * 可以访问的 GooseFS 目录
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    GooseFSDirectory?: string;
+    /**
+     * token
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Token?: string;
 }
 /**
  * 角色凭证
@@ -81,6 +96,10 @@ export interface DescribeClusterRolesRequest {
      * 集群ID
      */
     ClusterId: string;
+    /**
+     * 角色名
+     */
+    RoleName?: string;
 }
 /**
  * CreateDataRepositoryTask请求参数结构体

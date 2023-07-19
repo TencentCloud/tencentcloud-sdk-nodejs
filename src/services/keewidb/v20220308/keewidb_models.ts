@@ -155,10 +155,6 @@ export interface CreateInstancesRequest {
    */
   ReplicasNum: number
   /**
-   * 计算cpu核心数。
-   */
-  MachineCpu: number
-  /**
    * 实例内存容量，单位：GB。
 KeeWiDB 内存容量<b>MachineMemory</b>与持久内存容量<b>MemSize</b>为固定搭配，即2GB内存，固定分配8GB的持久内存，不可选择。具体信息，请参见[产品规格](https://cloud.tencent.com/document/product/1520/80808)。
    */
@@ -212,9 +208,17 @@ KeeWiDB 内存容量<b>MachineMemory</b>与持久内存容量<b>MemSize</b>为�
    */
   DiskSize?: number
   /**
+   * 计算 CPU 核数，可忽略不传。CPU 核数与内存为固定搭配，具体信息，请参见[产品规格](https://cloud.tencent.com/document/product/1520/80808)。
+   */
+  MachineCpu?: number
+  /**
    * 项目id，取值以用户账户>用户账户相关接口查询>项目列表返回的projectId为准。
    */
   ProjectId?: number
+  /**
+   * 数据压缩开关。<ul><li>ON：开启，默认开启压缩。</li><li>OFF：关闭。</li>
+   */
+  Compression?: string
 }
 
 /**
@@ -2433,7 +2437,7 @@ export interface UpgradeInstanceRequest {
    */
   MemSize?: number
   /**
-   * CPU 核数。
+   * CPU 核数，可忽略不传
    */
   MachineCpu?: number
   /**

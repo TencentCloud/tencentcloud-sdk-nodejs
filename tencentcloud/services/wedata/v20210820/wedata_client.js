@@ -166,6 +166,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeInLongAgentList", req, cb);
     }
     /**
+     * 删除编排空间工作流
+     */
+    async RemoveWorkflowDs(req, cb) {
+        return this.request("RemoveWorkflowDs", req, cb);
+    }
+    /**
      * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
 批量删除任务，仅对任务状态为”已停止“有效；
 
@@ -223,6 +229,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DeleteFolder(req, cb) {
         return this.request("DeleteFolder", req, cb);
+    }
+    /**
+     * 删除项目参数
+     */
+    async DeleteProjectParamDs(req, cb) {
+        return this.request("DeleteProjectParamDs", req, cb);
     }
     /**
      * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
@@ -331,16 +343,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteInLongAgent", req, cb);
     }
     /**
+     * 无
+     */
+    async SubmitTaskTestRun(req, cb) {
+        return this.request("SubmitTaskTestRun", req, cb);
+    }
+    /**
      * Runner 规则检测结果上报
      */
     async CommitRuleGroupExecResult(req, cb) {
         return this.request("CommitRuleGroupExecResult", req, cb);
     }
     /**
-     * 查询Inlong manager日志
+     * 开发空间-批量删除目录和文件
      */
-    async TaskLog(req, cb) {
-        return this.request("TaskLog", req, cb);
+    async DeleteFilePath(req, cb) {
+        return this.request("DeleteFilePath", req, cb);
     }
     /**
      * 调试运行集成任务
@@ -578,11 +596,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("BatchUpdateIntegrationTasks", req, cb);
     }
     /**
-     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
-修改任务脚本
+     * 资源管理-批量删除资源文件
      */
-    async ModifyTaskScript(req, cb) {
-        return this.request("ModifyTaskScript", req, cb);
+    async DeleteResourceFiles(req, cb) {
+        return this.request("DeleteResourceFiles", req, cb);
     }
     /**
      * 任务运维列表组合条件查询
@@ -595,6 +612,13 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeRuleGroup(req, cb) {
         return this.request("DescribeRuleGroup", req, cb);
+    }
+    /**
+     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
+修改任务脚本
+     */
+    async ModifyTaskScript(req, cb) {
+        return this.request("ModifyTaskScript", req, cb);
     }
     /**
      * 获取数据库信息
@@ -680,6 +704,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeTableScoreTrend(req, cb) {
         return this.request("DescribeTableScoreTrend", req, cb);
+    }
+    /**
+     * 查询任务实例列表
+     */
+    async DescribeTaskInstances(req, cb) {
+        return this.request("DescribeTaskInstances", req, cb);
     }
     /**
      * 质量报告-查询表质量详情
@@ -880,6 +910,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateWorkflow", req, cb);
     }
     /**
+     * 按起止日期统计离线任务的所有实例的运行指标总和
+     */
+    async DescribeTaskReport(req, cb) {
+        return this.request("DescribeTaskReport", req, cb);
+    }
+    /**
      * 暂停集成任务
      */
     async SuspendIntegrationTask(req, cb) {
@@ -916,10 +952,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("LockIntegrationTask", req, cb);
     }
     /**
-     * 按起止日期统计离线任务的所有实例的运行指标总和
+     * 质量报告-质量分周期趋势
      */
-    async DescribeTaskReport(req, cb) {
-        return this.request("DescribeTaskReport", req, cb);
+    async DescribeQualityScoreTrend(req, cb) {
+        return this.request("DescribeQualityScoreTrend", req, cb);
     }
     /**
      * 批量删除集成任务
@@ -964,10 +1000,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeRuleGroupSubscription", req, cb);
     }
     /**
-     * 查询任务实例列表
+     * 删除任务Ds
      */
-    async DescribeTaskInstances(req, cb) {
-        return this.request("DescribeTaskInstances", req, cb);
+    async DeleteTaskDs(req, cb) {
+        return this.request("DeleteTaskDs", req, cb);
     }
     /**
      * 删除任务告警规则
@@ -995,10 +1031,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteResource", req, cb);
     }
     /**
-     * 质量报告-质量分周期趋势
+     * Ds批量删除任务，仅对任务状态为”已停止“有效；
      */
-    async DescribeQualityScoreTrend(req, cb) {
-        return this.request("DescribeQualityScoreTrend", req, cb);
+    async BatchDeleteTasksDs(req, cb) {
+        return this.request("BatchDeleteTasksDs", req, cb);
     }
     /**
      * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
@@ -1137,6 +1173,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("SubmitTask", req, cb);
     }
     /**
+     * 即席分析提交SQL任务
+     */
+    async SubmitSqlTask(req, cb) {
+        return this.request("SubmitSqlTask", req, cb);
+    }
+    /**
      * 数据质量，查询调度任务的实例列表
      */
     async DescribeInstances(req, cb) {
@@ -1165,6 +1207,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeRuleExecHistory(req, cb) {
         return this.request("DescribeRuleExecHistory", req, cb);
+    }
+    /**
+     * 查询Inlong manager日志
+     */
+    async TaskLog(req, cb) {
+        return this.request("TaskLog", req, cb);
     }
     /**
      * 查询规则模版列表

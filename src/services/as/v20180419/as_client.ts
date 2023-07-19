@@ -29,6 +29,7 @@ import {
   LaunchConfiguration,
   DescribeAccountLimitsResponse,
   CreateLaunchConfigurationResponse,
+  RelatedInstance,
   Advice,
   CreateLifecycleHookResponse,
   ClearLaunchConfigurationAttributesResponse,

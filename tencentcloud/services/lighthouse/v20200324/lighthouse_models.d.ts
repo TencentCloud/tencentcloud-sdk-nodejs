@@ -3196,6 +3196,10 @@ export interface DockerContainerConfiguration {
      * 运行的命令
      */
     Command?: string;
+    /**
+     * 容器重启策略
+     */
+    RestartPolicy?: string;
 }
 /**
  * ResetAttachCcn返回参数结构体

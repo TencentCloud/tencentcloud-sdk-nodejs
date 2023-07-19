@@ -328,9 +328,9 @@ it("cls.v20201016.DeleteDataTransform", async function () {
     }
 })
 
-it("cls.v20201016.DeleteConfigExtra", async function () {
+it("cls.v20201016.CreateLogset", async function () {
     try {
-       const data = await client.DeleteConfigExtra({})
+       const data = await client.CreateLogset({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -408,9 +408,9 @@ it("cls.v20201016.ApplyConfigToMachineGroup", async function () {
     }
 })
 
-it("cls.v20201016.CreateLogset", async function () {
+it("cls.v20201016.DeleteConfigExtra", async function () {
     try {
-       const data = await client.CreateLogset({})
+       const data = await client.DeleteConfigExtra({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -511,6 +511,16 @@ it("cls.v20201016.ModifyConfig", async function () {
 it("cls.v20201016.DescribeAlertRecordHistory", async function () {
     try {
        const data = await client.DescribeAlertRecordHistory({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cls.v20201016.DeleteTopic", async function () {
+    try {
+       const data = await client.DeleteTopic({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -738,9 +748,9 @@ it("cls.v20201016.CreateAlarm", async function () {
     }
 })
 
-it("cls.v20201016.DeleteTopic", async function () {
+it("cls.v20201016.CreateScheduledSql", async function () {
     try {
-       const data = await client.DeleteTopic({})
+       const data = await client.CreateScheduledSql({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

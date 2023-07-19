@@ -6118,13 +6118,33 @@ export interface MetricSet {
 }
 
 /**
- * DescribePrometheusRecordRuleYaml返回参数结构体
+ * 实例的授权信息
  */
-export interface DescribePrometheusRecordRuleYamlResponse {
+export interface PrometheusInstanceGrantInfo {
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 是否有计费操作权限(1=有，2=无)
    */
-  RequestId?: string
+  HasChargeOperation: number
+  /**
+   * 是否显示VPC信息的权限(1=有，2=无)
+   */
+  HasVpcDisplay: number
+  /**
+   * 是否可修改Grafana的状态(1=有，2=无)
+   */
+  HasGrafanaStatusChange: number
+  /**
+   * 是否有管理agent的权限(1=有，2=无)
+   */
+  HasAgentManage: number
+  /**
+   * 是否有管理TKE集成的权限(1=有，2=无)
+   */
+  HasTkeManage: number
+  /**
+   * 是否显示API等信息(1=有, 2=无)
+   */
+  HasApiOperation: number
 }
 
 /**
@@ -6628,33 +6648,13 @@ export interface DescribeAlarmHistoriesRequest {
 }
 
 /**
- * 实例的授权信息
+ * DescribePrometheusRecordRuleYaml返回参数结构体
  */
-export interface PrometheusInstanceGrantInfo {
+export interface DescribePrometheusRecordRuleYamlResponse {
   /**
-   * 是否有计费操作权限(1=有，2=无)
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  HasChargeOperation: number
-  /**
-   * 是否显示VPC信息的权限(1=有，2=无)
-   */
-  HasVpcDisplay: number
-  /**
-   * 是否可修改Grafana的状态(1=有，2=无)
-   */
-  HasGrafanaStatusChange: number
-  /**
-   * 是否有管理agent的权限(1=有，2=无)
-   */
-  HasAgentManage: number
-  /**
-   * 是否有管理TKE集成的权限(1=有，2=无)
-   */
-  HasTkeManage: number
-  /**
-   * 是否显示API等信息(1=有, 2=无)
-   */
-  HasApiOperation: number
+  RequestId?: string
 }
 
 /**
@@ -8240,16 +8240,6 @@ export interface CheckIsPrometheusNewUserResponse {
 }
 
 /**
- * PutMonitorData返回参数结构体
- */
-export interface PutMonitorDataResponse {
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * DescribePolicyGroupInfo请求参数结构体
  */
 export interface DescribePolicyGroupInfoRequest {
@@ -9590,28 +9580,6 @@ export interface CreateSSOAccountResponse {
 }
 
 /**
- * PutMonitorData请求参数结构体
- */
-export interface PutMonitorDataRequest {
-  /**
-   * 一组指标和数据
-   */
-  Metrics: Array<MetricDatum>
-  /**
-   * 上报时自行指定的 IP
-   */
-  AnnounceIp?: string
-  /**
-   * 上报时自行指定的时间戳
-   */
-  AnnounceTimestamp?: number
-  /**
-   * 上报时自行指定的 IP 或 产品实例ID
-   */
-  AnnounceInstance?: string
-}
-
-/**
  * UpdatePrometheusScrapeJob返回参数结构体
  */
 export interface UpdatePrometheusScrapeJobResponse {
@@ -10014,20 +9982,6 @@ export interface DescribeAlarmNoticeCallbacksRequest {
    * 模块名，这里填“monitor”
    */
   Module: string
-}
-
-/**
- * 指标名称和值的封装
- */
-export interface MetricDatum {
-  /**
-   * 指标名称
-   */
-  MetricName: string
-  /**
-   * 指标的值
-   */
-  Value: number
 }
 
 /**

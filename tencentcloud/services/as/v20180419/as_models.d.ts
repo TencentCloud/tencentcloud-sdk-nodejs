@@ -532,6 +532,23 @@ export interface CreateLaunchConfigurationResponse {
     RequestId?: string;
 }
 /**
+ * 与本次伸缩活动相关的实例信息。
+ */
+export interface RelatedInstance {
+    /**
+     * 实例ID。
+     */
+    InstanceId?: string;
+    /**
+     * 实例在伸缩活动中的状态。取值如下：
+  INIT：初始化中
+  RUNNING：实例操作中
+  SUCCESSFUL：活动成功
+  FAILED：活动失败
+     */
+    InstanceStatus?: string;
+}
+/**
  * 伸缩配置建议。
  */
 export interface Advice {
@@ -3237,11 +3254,11 @@ export interface Activity {
     /**
      * 伸缩组ID。
      */
-    AutoScalingGroupId: string;
+    AutoScalingGroupId?: string;
     /**
      * 伸缩活动ID。
      */
-    ActivityId: string;
+    ActivityId?: string;
     /**
      * 伸缩活动类型。取值如下：<br>
   <li>SCALE_OUT：扩容活动<li>SCALE_IN：缩容活动<li>ATTACH_INSTANCES：添加实例<li>REMOVE_INSTANCES：销毁实例<li>DETACH_INSTANCES：移出实例<li>TERMINATE_INSTANCES_UNEXPECTEDLY：实例在CVM控制台被销毁<li>REPLACE_UNHEALTHY_INSTANCE：替换不健康实例
@@ -3249,7 +3266,7 @@ export interface Activity {
   <li>STOP_INSTANCES：关闭实例
   <li>INVOKE_COMMAND：执行命令
      */
-    ActivityType: string;
+    ActivityType?: string;
     /**
      * 伸缩活动状态。取值如下：<br>
   <li>INIT：初始化中
@@ -3259,51 +3276,56 @@ export interface Activity {
   <li>FAILED：活动失败
   <li>CANCELLED：活动取消
      */
-    StatusCode: string;
+    StatusCode?: string;
     /**
      * 伸缩活动状态描述。
      */
-    StatusMessage: string;
+    StatusMessage?: string;
     /**
      * 伸缩活动起因。
      */
-    Cause: string;
+    Cause?: string;
     /**
      * 伸缩活动描述。
      */
-    Description: string;
+    Description?: string;
     /**
      * 伸缩活动开始时间。
      */
-    StartTime: string;
+    StartTime?: string;
     /**
      * 伸缩活动结束时间。
      */
-    EndTime: string;
+    EndTime?: string;
     /**
      * 伸缩活动创建时间。
      */
-    CreatedTime: string;
+    CreatedTime?: string;
     /**
-     * 伸缩活动相关实例信息集合。
+     * 该参数已废弃，请勿使用。
+     * @deprecated
      */
-    ActivityRelatedInstanceSet: Array<ActivtyRelatedInstance>;
+    ActivityRelatedInstanceSet?: Array<ActivtyRelatedInstance>;
     /**
      * 伸缩活动状态简要描述。
      */
-    StatusMessageSimplified: string;
+    StatusMessageSimplified?: string;
     /**
      * 伸缩活动中生命周期挂钩的执行结果。
      */
-    LifecycleActionResultSet: Array<LifecycleActionResultInfo>;
+    LifecycleActionResultSet?: Array<LifecycleActionResultInfo>;
     /**
      * 伸缩活动状态详细描述。
      */
-    DetailedStatusMessageSet: Array<DetailedStatusMessage>;
+    DetailedStatusMessageSet?: Array<DetailedStatusMessage>;
     /**
      * 执行命令结果。
      */
-    InvocationResultSet: Array<InvocationResult>;
+    InvocationResultSet?: Array<InvocationResult>;
+    /**
+     * 伸缩活动相关实例信息集合。
+     */
+    RelatedInstanceSet?: Array<RelatedInstance>;
 }
 /**
  * ModifyDesiredCapacity返回参数结构体
@@ -3382,7 +3404,7 @@ export interface ActivtyRelatedInstance {
     /**
      * 实例ID。
      */
-    InstanceId: string;
+    InstanceId?: string;
     /**
      * 实例在伸缩活动中的状态。取值如下：
   <li>INIT：初始化中
@@ -3390,7 +3412,7 @@ export interface ActivtyRelatedInstance {
   <li>SUCCESSFUL：活动成功
   <li>FAILED：活动失败
      */
-    InstanceStatus: string;
+    InstanceStatus?: string;
 }
 /**
  * CreateAutoScalingGroupFromInstance请求参数结构体

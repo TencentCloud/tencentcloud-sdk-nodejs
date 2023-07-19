@@ -29,6 +29,7 @@ import {
   DescribeSREInstanceAccessAddressResponse,
   DeleteCloudNativeAPIGatewayCanaryRuleRequest,
   DescribeCloudNativeAPIGatewayServicesResponse,
+  GatewayInstanceSchemeAndPorts,
   QpsThreshold,
   ModifyCloudNativeAPIGatewayServiceResponse,
   DescribeCloudNativeAPIGatewayNodesResponse,
@@ -52,6 +53,7 @@ import {
   DescribeZookeeperReplicasRequest,
   DeleteCloudNativeAPIGatewayServiceResponse,
   DeleteCloudNativeAPIGatewayRouteResponse,
+  DescribeCloudNativeAPIGatewayPortsResponse,
   CreateCloudNativeAPIGatewayRouteRateLimitRequest,
   ModifyCloudNativeAPIGatewayRouteResponse,
   ServiceGovernanceInfo,
@@ -83,6 +85,7 @@ import {
   DeleteCloudNativeAPIGatewayServiceRateLimitResponse,
   ModifyCloudNativeAPIGatewayServiceRateLimitRequest,
   CloudNativeAPIGatewayNode,
+  DescribeGatewayInstancePortResult,
   DescribeZookeeperServerInterfacesResponse,
   Filter,
   PolarisLimiterAddress,
@@ -116,6 +119,7 @@ import {
   EngineAdmin,
   DescribeCloudNativeAPIGatewayCanaryRulesRequest,
   DeleteCloudNativeAPIGatewayCanaryRuleResponse,
+  DescribeCloudNativeAPIGatewayPortsRequest,
   KongServiceDetail,
 } from "./tse_models"
 
@@ -206,6 +210,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeCloudNativeAPIGatewayRoutesResponse) => void
   ): Promise<DescribeCloudNativeAPIGatewayRoutesResponse> {
     return this.request("DescribeCloudNativeAPIGatewayRoutes", req, cb)
+  }
+
+  /**
+   * 获取云原生API网关实例端口信息
+   */
+  async DescribeCloudNativeAPIGatewayPorts(
+    req: DescribeCloudNativeAPIGatewayPortsRequest,
+    cb?: (error: string, rep: DescribeCloudNativeAPIGatewayPortsResponse) => void
+  ): Promise<DescribeCloudNativeAPIGatewayPortsResponse> {
+    return this.request("DescribeCloudNativeAPIGatewayPorts", req, cb)
   }
 
   /**

@@ -2334,27 +2334,32 @@ export interface GetAccountSummaryResponse {
   /**
    * 策略数
    */
-  Policies: number
+  Policies?: number
   /**
    * 角色数
    */
-  Roles: number
+  Roles?: number
   /**
    * 身份提供商数
+   * @deprecated
    */
-  Idps: number
+  Idps?: number
   /**
    * 子账户数
    */
-  User: number
+  User?: number
   /**
    * 分组数
    */
-  Group: number
+  Group?: number
   /**
    * 分组用户总数
    */
-  Member: number
+  Member?: number
+  /**
+   * 身份提供商数。
+   */
+  IdentityProviders?: number
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
