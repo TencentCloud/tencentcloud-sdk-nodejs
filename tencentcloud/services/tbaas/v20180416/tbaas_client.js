@@ -34,44 +34,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("QueryChainMakerTransaction", req, cb);
     }
     /**
+     * 申请用户证书
+     */
+    async ApplyUserCert(req, cb) {
+        return this.request("ApplyUserCert", req, cb);
+    }
+    /**
      * 批量申请长安链用户签名证书
      */
     async ApplyChainMakerBatchUserCert(req, cb) {
         return this.request("ApplyChainMakerBatchUserCert", req, cb);
     }
     /**
-     * 接口已废弃，请通过控制台查询或操作
-
-获取合约容器日志
+     * trustsql服务统一接口
      */
-    async GetChaincodeLogForUser(req, cb) {
-        return this.request("GetChaincodeLogForUser", req, cb);
-    }
-    /**
-     * 通过交易ID查询长安链体验网络交易
-     */
-    async QueryChainMakerDemoTransaction(req, cb) {
-        return this.request("QueryChainMakerDemoTransaction", req, cb);
-    }
-    /**
-     * 接口已废弃，请通过控制台查询或操作
-
-获取该用户的网络列表。网络信息中包含组织信息，但仅包含该用户所在组织的信息。
-     */
-    async GetClusterListForUser(req, cb) {
-        return this.request("GetClusterListForUser", req, cb);
-    }
-    /**
-     * 调用长安链合约查询
-     */
-    async QueryChainMakerContract(req, cb) {
-        return this.request("QueryChainMakerContract", req, cb);
-    }
-    /**
-     * 查询长安链体验网络指定高度区块的交易
-     */
-    async QueryChainMakerDemoBlockTransaction(req, cb) {
-        return this.request("QueryChainMakerDemoBlockTransaction", req, cb);
+    async SrvInvoke(req, cb) {
+        return this.request("SrvInvoke", req, cb);
     }
     /**
      * 新增交易
@@ -86,86 +64,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("GetClusterSummary", req, cb);
     }
     /**
-     * 接口已废弃，请通过控制台查询或操作
-
-获取节点日志
-     */
-    async GetPeerLogForUser(req, cb) {
-        return this.request("GetPeerLogForUser", req, cb);
-    }
-    /**
-     * 获取fabric最新交易列表
-     */
-    async GetLatestTransactionList(req, cb) {
-        return this.request("GetLatestTransactionList", req, cb);
-    }
-    /**
-     * 下载用户证书
-     */
-    async DownloadUserCert(req, cb) {
-        return this.request("DownloadUserCert", req, cb);
-    }
-    /**
-     * 接口已废弃，请通过控制台查询或操作
-
-创建并安装合约
-     */
-    async CreateChaincodeAndInstallForUser(req, cb) {
-        return this.request("CreateChaincodeAndInstallForUser", req, cb);
-    }
-    /**
-     * 获取最新交易列表（已废弃）
-     */
-    async GetLatesdTransactionList(req, cb) {
-        return this.request("GetLatesdTransactionList", req, cb);
-    }
-    /**
-     * 申请用户证书
-     */
-    async ApplyUserCert(req, cb) {
-        return this.request("ApplyUserCert", req, cb);
-    }
-    /**
-     * 调用长安链合约执行交易
-     */
-    async InvokeChainMakerContract(req, cb) {
-        return this.request("InvokeChainMakerContract", req, cb);
-    }
-    /**
-     * Invoke异步调用结果查询
-     */
-    async GetInvokeTx(req, cb) {
-        return this.request("GetInvokeTx", req, cb);
-    }
-    /**
-     * 接口已废弃，请通过控制台查询或操作
-
-实例化结果查询
-     */
-    async GetChaincodeInitializeResultForUser(req, cb) {
-        return this.request("GetChaincodeInitializeResultForUser", req, cb);
-    }
-    /**
-     * 接口已废弃，请通过控制台查询或操作
-
-获取通道列表
-     */
-    async GetChannelListForUser(req, cb) {
-        return this.request("GetChannelListForUser", req, cb);
-    }
-    /**
      * 查询长安链指定高度区块的交易
      */
     async QueryChainMakerBlockTransaction(req, cb) {
         return this.request("QueryChainMakerBlockTransaction", req, cb);
-    }
-    /**
-     * 接口已废弃，请通过控制台查询或操作
-
-实例化合约
-     */
-    async InitializeChaincodeForUser(req, cb) {
-        return this.request("InitializeChaincodeForUser", req, cb);
     }
     /**
      * 调用长安链体验网络合约查询
@@ -174,16 +76,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("QueryChainMakerDemoContract", req, cb);
     }
     /**
-     * 获取交易详情
+     * 通过交易ID查询长安链体验网络交易
      */
-    async GetTransactionDetailForUser(req, cb) {
-        return this.request("GetTransactionDetailForUser", req, cb);
+    async QueryChainMakerDemoTransaction(req, cb) {
+        return this.request("QueryChainMakerDemoTransaction", req, cb);
     }
     /**
-     * trustsql服务统一接口
+     * Invoke异步调用结果查询
      */
-    async SrvInvoke(req, cb) {
-        return this.request("SrvInvoke", req, cb);
+    async GetInvokeTx(req, cb) {
+        return this.request("GetInvokeTx", req, cb);
+    }
+    /**
+     * 获取fabric最新交易列表
+     */
+    async GetLatestTransactionList(req, cb) {
+        return this.request("GetLatestTransactionList", req, cb);
     }
     /**
      * 调用长安链体验网络合约执行交易
@@ -192,18 +100,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("InvokeChainMakerDemoContract", req, cb);
     }
     /**
-     * 接口已废弃，请通过控制台查询或操作
-
-获取合约编译日志
+     * 下载用户证书
      */
-    async GetChaincodeCompileLogForUser(req, cb) {
-        return this.request("GetChaincodeCompileLogForUser", req, cb);
+    async DownloadUserCert(req, cb) {
+        return this.request("DownloadUserCert", req, cb);
     }
     /**
      * 获取区块内的交易列表
      */
     async GetBlockTransactionListForUser(req, cb) {
         return this.request("GetBlockTransactionListForUser", req, cb);
+    }
+    /**
+     * 调用长安链合约执行交易
+     */
+    async InvokeChainMakerContract(req, cb) {
+        return this.request("InvokeChainMakerContract", req, cb);
     }
     /**
      * 查看当前网络下的所有区块列表，分页展示
@@ -216,6 +128,30 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async Query(req, cb) {
         return this.request("Query", req, cb);
+    }
+    /**
+     * 获取交易详情
+     */
+    async GetTransactionDetailForUser(req, cb) {
+        return this.request("GetTransactionDetailForUser", req, cb);
+    }
+    /**
+     * 查询长安链体验网络指定高度区块的交易
+     */
+    async QueryChainMakerDemoBlockTransaction(req, cb) {
+        return this.request("QueryChainMakerDemoBlockTransaction", req, cb);
+    }
+    /**
+     * 调用长安链合约查询
+     */
+    async QueryChainMakerContract(req, cb) {
+        return this.request("QueryChainMakerContract", req, cb);
+    }
+    /**
+     * 获取最新交易列表（已废弃）
+     */
+    async GetLatesdTransactionList(req, cb) {
+        return this.request("GetLatesdTransactionList", req, cb);
     }
 }
 exports.Client = Client;

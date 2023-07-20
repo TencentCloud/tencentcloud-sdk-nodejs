@@ -74,7 +74,6 @@ import {
   ErrlogItem,
   ProxyGroupInfo,
   AssociateSecurityGroupsResponse,
-  ModifyCDBProxyDescRequest,
   BackupConfig,
   DescribeCDBProxyResponse,
   Rule,
@@ -302,7 +301,6 @@ import {
   CreateBackupRequest,
   AccountInfo,
   DescribeRemoteBackupConfigResponse,
-  ModifyCDBProxyDescResponse,
   AdjustCdbProxyAddressResponse,
   ModifyDBInstanceVipVportRequest,
   DescribeDBImportRecordsRequest,
@@ -628,18 +626,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: OpenDBInstanceGTIDResponse) => void
   ): Promise<OpenDBInstanceGTIDResponse> {
     return this.request("OpenDBInstanceGTID", req, cb)
-  }
-
-  /**
-     * 当前接口已经废弃，请使用+ModifyCdbProxyAddressDesc+进行替代。
-
-修改数据库代理描述
-     */
-  async ModifyCDBProxyDesc(
-    req: ModifyCDBProxyDescRequest,
-    cb?: (error: string, rep: ModifyCDBProxyDescResponse) => void
-  ): Promise<ModifyCDBProxyDescResponse> {
-    return this.request("ModifyCDBProxyDesc", req, cb)
   }
 
   /**

@@ -9320,13 +9320,13 @@ export interface ModifyQualityInspectTemplateRequest {
    */
   QRCodeConfigure?: QRCodeConfigureInfoForUpdate
   /**
-   * 视频画面质量评价的控制参数。
-   */
-  QualityEvaluationConfigure?: QualityEvaluationConfigureInfoForUpdate
-  /**
    * 音频（静音、低音、爆音）检测的控制参数。
    */
   VoiceConfigure?: VoiceConfigureInfoForUpdate
+  /**
+   * 视频画面质量评价的控制参数。
+   */
+  QualityEvaluationConfigure?: QualityEvaluationConfigureInfoForUpdate
 }
 
 /**
@@ -11563,13 +11563,13 @@ export interface CreateQualityInspectTemplateRequest {
    */
   QRCodeConfigure?: QRCodeConfigureInfo
   /**
-   * 视频画面质量评价的控制参数。
-   */
-  QualityEvaluationConfigure?: QualityEvaluationConfigureInfo
-  /**
    * 音频（静音、低音、爆音）检测的控制参数。
    */
   VoiceConfigure?: VoiceConfigureInfo
+  /**
+   * 视频画面质量评价的控制参数。
+   */
+  QualityEvaluationConfigure?: QualityEvaluationConfigureInfo
 }
 
 /**
@@ -18548,15 +18548,6 @@ export interface MediaAiAnalysisFrameTagItem {
  */
 export interface QualityInspectItem {
   /**
-   * 置信度，取值范围：[0, 100]。
-<font color=red>注意：</font> 仅当 Type 取值为下列之一时，本字段取值有效：
-<li>Mosaic：马赛克；</li>
-<li>QRCode：二维码；</li>
-<li>AppletCode：小程序码；</li>
-<li>BarCode：条形码。</li>
-   */
-  Confidence?: number
-  /**
    * 异常片段起始的偏移时间，单位：秒。
    */
   StartTimeOffset?: number
@@ -18574,6 +18565,15 @@ export interface QualityInspectItem {
 <li>BarCode：条形码。</li>
    */
   AreaCoordSet?: Array<number>
+  /**
+   * 置信度，取值范围：[0, 100]。
+<font color=red>注意：</font> 仅当 Type 取值为下列之一时，本字段取值有效：
+<li>Mosaic：马赛克；</li>
+<li>QRCode：二维码；</li>
+<li>AppletCode：小程序码；</li>
+<li>BarCode：条形码。</li>
+   */
+  Confidence?: number
 }
 
 /**

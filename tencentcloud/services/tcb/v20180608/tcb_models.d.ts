@@ -3787,27 +3787,27 @@ export interface StaticStorageInfo {
      * 静态CDN域名
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    StaticDomain: string;
+    StaticDomain?: string;
     /**
      * 静态CDN默认文件夹，当前为根目录
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DefaultDirName: string;
+    DefaultDirName?: string;
     /**
      * 资源状态(process/online/offline/init)
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Status: string;
+    Status?: string;
     /**
      * cos所属区域
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Region: string;
+    Region?: string;
     /**
      * bucket信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Bucket: string;
+    Bucket?: string;
 }
 /**
  * DescribeCloudBaseRunResourceForExtend返回参数结构体

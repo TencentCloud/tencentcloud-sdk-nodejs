@@ -150,12 +150,12 @@ export interface Hat {
    * 帽子佩戴状态信息。
 AttributeItem对应的Type为 —— 0：不戴帽子，1：普通帽子，2：头盔，3：保安帽。
    */
-  Style: AttributeItem
+  Style?: AttributeItem
   /**
    * 帽子颜色。
-AttributeItem对应的Type为 —— 0：不戴帽子，1：红色系，2：黄色系，3：蓝色系，4：黑色系，5：灰白色系，6：混色系子。
+AttributeItem对应的Type为 —— 0：不戴帽子，1：红色系，2：黄色系，3：蓝色系，4：黑色系，5：灰白色系，6：混色系。
    */
-  Color: AttributeItem
+  Color?: AttributeItem
 }
 
 /**
@@ -234,31 +234,31 @@ export interface CreateFaceResponse {
   /**
    * 加入成功的人脸数量
    */
-  SucFaceNum: number
+  SucFaceNum?: number
   /**
    * 加入成功的人脸ID列表
    */
-  SucFaceIds: Array<string>
+  SucFaceIds?: Array<string>
   /**
    * 每张人脸图片添加结果，-1101 代表未检测到人脸，-1102 代表图片解码失败， 
 -1601代表不符合图片质量控制要求, -1604 代表人脸相似度没有超过FaceMatchThreshold。 
 其他非 0 值代表算法服务异常。 
 RetCode的顺序和入参中 Images 或 Urls 的顺序一致。
    */
-  RetCode: Array<number>
+  RetCode?: Array<number>
   /**
    * 加入成功的人脸索引。索引顺序和入参中 Images 或 Urls 的顺序一致。 
-例， Urls 中 有 3 个 url，第二个 url 失败，则 SucIndexes 值为 [0,2] 。
+例如， Urls 中 有 3 个 url，第二个 url 失败，则 SucIndexes 值为 [0,2] 。
    */
-  SucIndexes: Array<number>
+  SucIndexes?: Array<number>
   /**
    * 加入成功的人脸框位置。顺序和入参中 Images 或 Urls 的顺序一致。
    */
-  SucFaceRects: Array<FaceRect>
+  SucFaceRects?: Array<FaceRect>
   /**
    * 人脸识别所用的算法模型版本。
    */
-  FaceModelVersion: string
+  FaceModelVersion?: string
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -654,15 +654,15 @@ export interface SearchFacesResponse {
   /**
    * 识别结果。
    */
-  Results: Array<Result>
+  Results?: Array<Result>
   /**
    * 搜索的人员库中包含的人脸数。
    */
-  FaceNum: number
+  FaceNum?: number
   /**
    * 人脸识别所用的算法模型版本。
    */
-  FaceModelVersion: string
+  FaceModelVersion?: string
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1787,7 +1787,7 @@ Url、Image必须提供一个，如果都提供，只使用 Url。
   /**
    * 最多识别的人脸数目。默认值为1（仅检测图片中面积最大的那张人脸），最大值为10。 
 MaxFaceNum用于，当输入的待识别图片包含多张人脸时，设定要搜索的人脸的数量。 
-例：输入的Image或Url中的图片包含多张人脸，设MaxFaceNum=5，则会识别图片中面积最大的5张人脸。
+例如：输入的Image或Url中的图片包含多张人脸，设MaxFaceNum=5，则会识别图片中面积最大的5张人脸。
    */
   MaxFaceNum?: number
   /**
@@ -1796,7 +1796,7 @@ MaxFaceNum用于，当输入的待识别图片包含多张人脸时，设定要�
   MinFaceSize?: number
   /**
    * 单张被识别的人脸返回的最相似人员数量。默认值为5，最大值为100。 
-例，设MaxFaceNum为1，MaxPersonNum为8，则返回Top8相似的人员信息。
+例如，设MaxFaceNum为1，MaxPersonNum为8，则返回Top8相似的人员信息。
 值越大，需要处理的时间越长。建议不要超过10。
    */
   MaxPersonNum?: number
@@ -2548,91 +2548,91 @@ export interface GetPersonListRequest {
 export interface FaceDetailAttributesInfo {
   /**
    * 年龄 [0,65]，其中65代表“65岁及以上”。 
-FaceAttributesType 不为含Age 或检测超过 5 张人脸时，此参数仍返回，但不具备参考意义。
+FaceAttributesType 不含Age 或检测超过 5 张人脸时，此参数仍返回，但不具备参考意义。
    */
-  Age: number
+  Age?: number
   /**
    * 美丑打分[0,100]。 
 FaceAttributesType 不含 Beauty 或检测超过 5 张人脸时，此参数仍返回，但不具备参考意义。
    */
-  Beauty: number
+  Beauty?: number
   /**
    * 情绪，可识别自然、高兴、惊讶、生气、悲伤、厌恶、害怕。 
 AttributeItem对应的Type为 —— 0：自然，1：高兴，2：惊讶，3：生气，4：悲伤，5：厌恶，6：害怕
 FaceAttributesType 不含Emotion 或检测超过 5 张人脸时，此参数仍返回，但不具备参考意义。
    */
-  Emotion: AttributeItem
+  Emotion?: AttributeItem
   /**
    * 眼睛相关信息，可识别是否戴眼镜、是否闭眼、是否双眼皮和眼睛大小。 
 FaceAttributesType 不含Eye 或检测超过 5 张人脸时，此参数仍返回，但不具备参考意义。
    */
-  Eye: Eye
+  Eye?: Eye
   /**
    * 眉毛相关信息，可识别眉毛浓密、弯曲、长短信息。 
 FaceAttributesType 不含Eyebrow 或检测超过 5 张人脸时，此参数仍返回，但不具备参考意义。
    */
-  Eyebrow: Eyebrow
+  Eyebrow?: Eyebrow
   /**
    * 性别信息。 
 AttributeItem对应的Type为 —— 	0：男性，1：女性。
 FaceAttributesType 不含Gender 或检测超过 5 张人脸时，此参数仍返回，但不具备参考意义。
    */
-  Gender: AttributeItem
+  Gender?: AttributeItem
   /**
    * 头发信息，包含头发长度、有无刘海、头发颜色。 
 FaceAttributesType 不含Hair 或检测超过 5 张人脸时，此参数仍返回，但不具备参考意义。
    */
-  Hair: Hair
+  Hair?: Hair
   /**
    * 帽子信息，可识别是否佩戴帽子、帽子款式、帽子颜色。 
 FaceAttributesType 不含Hat 或检测超过 5 张人脸时，此参数仍返回，但不具备参考意义。
    */
-  Hat: Hat
+  Hat?: Hat
   /**
    * 姿态信息，包含人脸的上下偏移、左右偏移、平面旋转信息。 
 FaceAttributesType 不含Headpose 或检测超过 5 张人脸时，此参数仍返回，但不具备参考意义。
    */
-  HeadPose: HeadPose
+  HeadPose?: HeadPose
   /**
    * 口罩佩戴信息。 
 AttributeItem对应的Type为 —— 0: 无口罩， 1: 有口罩不遮脸，2: 有口罩遮下巴，3: 有口罩遮嘴，4: 正确佩戴口罩。
 FaceAttributesType 不含Mask 或检测超过 5 张人脸时，此参数仍返回，但不具备参考意义。
    */
-  Mask: AttributeItem
+  Mask?: AttributeItem
   /**
    * 嘴巴信息，可识别是否张嘴、嘴唇厚度。 
 FaceAttributesType 不含 Mouth 或检测超过 5 张人脸时，此参数仍返回，但不具备参考意义。
    */
-  Mouth: Mouth
+  Mouth?: Mouth
   /**
    * 胡子信息。
 AttributeItem对应的Type为 —— 0：无胡子，1：有胡子。 
 FaceAttributesType 不含 Moustache 或检测超过 5 张人脸时，此参数仍返回，但不具备参考意义。
    */
-  Moustache: AttributeItem
+  Moustache?: AttributeItem
   /**
    * 鼻子信息。 
 AttributeItem对应的Type为 —— 0：朝天鼻，1：鹰钩鼻，2：普通，3：圆鼻头
 FaceAttributesType 不含 Nose 或检测超过 5 张人脸时，此参数仍返回，但不具备参考意义。
    */
-  Nose: AttributeItem
+  Nose?: AttributeItem
   /**
    * 脸型信息。 
 AttributeItem对应的Type为 —— 0：方脸，1：三角脸，2：鹅蛋脸，3：心形脸，4：圆脸。
 FaceAttributesType 不含 Shape 或检测超过 5 张人脸时，此参数仍返回，但不具备参考意义。
    */
-  Shape: AttributeItem
+  Shape?: AttributeItem
   /**
    * 肤色信息。 
 AttributeItem对应的Type为 —— 0：黄色皮肤，1：棕色皮肤，2：黑色皮肤，3：白色皮肤。
 FaceAttributesType 不含 Skin 或检测超过 5 张人脸时，此参数仍返回，但不具备参考意义。
    */
-  Skin: AttributeItem
+  Skin?: AttributeItem
   /**
    * 微笑程度，[0,100]。 
 FaceAttributesType 不含 Smile 或检测超过 5 张人脸时，此参数仍返回，但不具备参考意义。
    */
-  Smile: number
+  Smile?: number
 }
 
 /**

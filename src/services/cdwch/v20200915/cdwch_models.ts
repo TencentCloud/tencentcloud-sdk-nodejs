@@ -458,42 +458,47 @@ export interface InstanceStateInfo {
    * 集群状态，例如：Serving
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  InstanceState: string
+  InstanceState?: string
   /**
    * 集群操作创建时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  FlowCreateTime: string
+  FlowCreateTime?: string
   /**
    * 集群操作名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  FlowName: string
+  FlowName?: string
   /**
    * 集群操作进度
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  FlowProgress: number
+  FlowProgress?: number
   /**
    * 集群状态描述，例如：运行中
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  InstanceStateDesc: string
+  InstanceStateDesc?: string
   /**
    * 集群流程错误信息，例如：“创建失败，资源不足”
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  FlowMsg: string
+  FlowMsg?: string
   /**
    * 当前步骤的名称，例如：”购买资源中“
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ProcessName: string
+  ProcessName?: string
   /**
    * 请求id
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RequestId?: string
+  /**
+   * 流程的二级名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProcessSubName?: string
 }
 
 /**
@@ -580,12 +585,12 @@ export interface InstanceInfo {
    * 集群实例ID, "cdw-xxxx" 字符串类型
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  InstanceId: string
+  InstanceId?: string
   /**
    * 集群实例名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  InstanceName: string
+  InstanceName?: string
   /**
    * 状态,
 Init 创建中; Serving 运行中； 
@@ -593,162 +598,162 @@ Deleted已销毁；Deleting 销毁中；
 Modify 集群变更中；
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Status: string
+  Status?: string
   /**
    * 版本
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Version: string
+  Version?: string
   /**
    * 地域, ap-guangzhou
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Region: string
+  Region?: string
   /**
    * 可用区， ap-guangzhou-3
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Zone: string
+  Zone?: string
   /**
    * 私有网络名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  VpcId: string
+  VpcId?: string
   /**
    * 子网名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SubnetId: string
+  SubnetId?: string
   /**
    * 付费类型，"hour", "prepay"
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  PayMode: string
+  PayMode?: string
   /**
    * 创建时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CreateTime: string
+  CreateTime?: string
   /**
    * 过期时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ExpireTime: string
+  ExpireTime?: string
   /**
    * 数据节点描述信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  MasterSummary: NodesSummary
+  MasterSummary?: NodesSummary
   /**
    * zookeeper节点描述信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CommonSummary: NodesSummary
+  CommonSummary?: NodesSummary
   /**
    * 高可用，“true" "false"
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  HA: string
+  HA?: string
   /**
    * 访问地址，例如 "10.0.0.1:9000"
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  AccessInfo: string
+  AccessInfo?: string
   /**
    * 记录ID，数值型
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Id: number
+  Id?: number
   /**
    * regionId, 表示地域
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RegionId: number
+  RegionId?: number
   /**
    * 可用区说明，例如 "广州二区"
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ZoneDesc: string
+  ZoneDesc?: string
   /**
    * 错误流程说明信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  FlowMsg: string
+  FlowMsg?: string
   /**
    * 状态描述，例如“运行中”等
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  StatusDesc: string
+  StatusDesc?: string
   /**
    * 自动续费标记
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RenewFlag: boolean
+  RenewFlag?: boolean
   /**
    * 标签列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Tags: Array<Tag>
+  Tags?: Array<Tag>
   /**
    * 监控信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Monitor: string
+  Monitor?: string
   /**
    * 是否开通日志
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  HasClsTopic: boolean
+  HasClsTopic?: boolean
   /**
    * 日志主题ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ClsTopicId: string
+  ClsTopicId?: string
   /**
    * 日志集ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ClsLogSetId: string
+  ClsLogSetId?: string
   /**
    * 是否支持xml配置管理
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  EnableXMLConfig: number
+  EnableXMLConfig?: number
   /**
    * 区域
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RegionDesc: string
+  RegionDesc?: string
   /**
    * 弹性网卡地址
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Eip: string
+  Eip?: string
   /**
    * 冷热分层系数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CosMoveFactor: number
+  CosMoveFactor?: number
   /**
    * external/local/yunti
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Kind: string
+  Kind?: string
   /**
    * 是否弹性ck
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  IsElastic: boolean
+  IsElastic?: boolean
   /**
    * 集群详细状态
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  InstanceStateInfo: InstanceStateInfo
+  InstanceStateInfo?: InstanceStateInfo
   /**
    * ZK高可用
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  HAZk: boolean
+  HAZk?: boolean
   /**
    * 挂载盘,默认0:没有类型；1:裸盘;2:lvm
 注意：此字段可能返回 null，表示取不到有效值。
@@ -789,6 +794,26 @@ Modify 集群变更中；
 注意：此字段可能返回 null，表示取不到有效值。
    */
   UpgradeVersions?: string
+  /**
+   * ex-index
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EsIndexId?: string
+  /**
+   * username
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EsIndexUsername?: string
+  /**
+   * password
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EsIndexPassword?: string
+  /**
+   * true
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HasEsIndex?: boolean
 }
 
 /**

@@ -157,7 +157,7 @@ API 网关可绑定自定义域名到服务，并且可以对自定义域名的�
         return this.request("DescribeApiAppsStatus", req, cb);
     }
     /**
-     * 本接口（DescribeApiApp）用于根据应用ID搜索应用。
+     * 本接口（DescribeApiApp）用于根据应用ID搜索应用。此接口已下线，如需使用功能请使用DescribeApiAppsStatus接口。
      */
     async DescribeApiApp(req, cb) {
         return this.request("DescribeApiApp", req, cb);

@@ -75,7 +75,7 @@ export interface CreateWorkspaceTokenRequest {
     /**
      * 工作空间 SpaceKey
      */
-    SpaceKey?: string;
+    SpaceKey: string;
     /**
      * token过期时间，单位是秒，默认 3600
      */

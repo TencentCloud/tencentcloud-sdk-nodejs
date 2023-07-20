@@ -6791,11 +6791,11 @@ export interface DescribeBandwidthPackageResourcesResponse {
     /**
      * 符合条件的 共享带宽包内资源 数量。
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 共享带宽包内资源 详细信息列表。
      */
-    ResourceSet: Array<Resource>;
+    ResourceSet?: Array<Resource>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */

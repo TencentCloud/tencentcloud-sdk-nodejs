@@ -150,14 +150,6 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("OpenDBInstanceGTID", req, cb);
     }
     /**
-     * 当前接口已经废弃，请使用+ModifyCdbProxyAddressDesc+进行替代。
-
-修改数据库代理描述
-     */
-    async ModifyCDBProxyDesc(req, cb) {
-        return this.request("ModifyCDBProxyDesc", req, cb);
-    }
-    /**
      * 本接口(VerifyRootAccount)用于校验云数据库实例的 ROOT 账号是否有足够的权限进行授权操作。
      */
     async VerifyRootAccount(req, cb) {

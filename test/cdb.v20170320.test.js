@@ -208,16 +208,6 @@ it("cdb.v20170320.OpenDBInstanceGTID", async function () {
     }
 })
 
-it("cdb.v20170320.ModifyCDBProxyDesc", async function () {
-    try {
-       const data = await client.ModifyCDBProxyDesc({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("cdb.v20170320.VerifyRootAccount", async function () {
     try {
        const data = await client.VerifyRootAccount({})

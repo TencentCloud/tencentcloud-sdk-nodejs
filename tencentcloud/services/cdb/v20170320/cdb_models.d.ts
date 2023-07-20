@@ -1330,23 +1330,6 @@ export interface AssociateSecurityGroupsResponse {
     RequestId?: string;
 }
 /**
- * ModifyCDBProxyDesc请求参数结构体
- */
-export interface ModifyCDBProxyDescRequest {
-    /**
-     * 实例ID
-     */
-    InstanceId: string;
-    /**
-     * 数据库代理ID
-     */
-    ProxyGroupId: string;
-    /**
-     * 数据库代理描述
-     */
-    Desc: string;
-}
-/**
  * ECDB第二个从库的配置信息，只有ECDB实例才有这个字段
  */
 export interface BackupConfig {
@@ -1600,7 +1583,7 @@ export interface UpgradeDBInstanceRequest {
      */
     DeviceType?: string;
     /**
-     * 升级后的实例cpu核数，如果不传将根据 Memory 指定的内存值自动填充对应的cpu值。
+     * 升级后的实例cpu核数，如果不传将根据 Memory 指定的内存值自动填充最小允许规格的cpu值。
      */
     Cpu?: number;
     /**
@@ -6631,15 +6614,6 @@ export interface DescribeRemoteBackupConfigResponse {
      * 用户可设置异地备份地域列表
      */
     RegionList?: Array<string>;
-    /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
-/**
- * ModifyCDBProxyDesc返回参数结构体
- */
-export interface ModifyCDBProxyDescResponse {
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */

@@ -157,10 +157,12 @@ export interface OverrideTranscodeParameter {
     AudioTemplate?: AudioTemplateInfoForUpdate;
     /**
      * 极速高清转码参数。
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     TEHDConfig?: TEHDConfigForUpdate;
     /**
      * 字幕流配置参数。
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     SubtitleTemplate?: SubtitleTemplate;
     /**
@@ -9197,7 +9199,7 @@ export interface VideoTemplateInfoForUpdate {
      */
     Codec?: string;
     /**
-     * 视频帧率，取值范围：[0, 100]，单位：Hz。
+     * 视频帧率，取值范围：[0, 120]，单位：Hz。
   当取值为 0，表示帧率和原始视频保持一致。
      */
     Fps?: number;

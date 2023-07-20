@@ -347,17 +347,17 @@ export interface KafkaRechargeInfo {
      * 主键ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Id: string;
+    Id?: string;
     /**
      * 日志主题ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TopicId: string;
+    TopicId?: string;
     /**
      * Kafka导入任务名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Name: string;
+    Name?: string;
     /**
      * 导入Kafka类型，0: 腾讯云CKafka，1: 用户自建Kafka
   注意：此字段可能返回 null，表示取不到有效值。
@@ -372,7 +372,7 @@ export interface KafkaRechargeInfo {
      * 服务地址
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ServerAddr: string;
+    ServerAddr?: string;
     /**
      * ServerAddr是否为加密连接
   注意：此字段可能返回 null，表示取不到有效值。
@@ -386,19 +386,19 @@ export interface KafkaRechargeInfo {
      * 用户需要导入的Kafka相关topic列表，多个topic之间使用半角逗号隔开
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    UserKafkaTopics: string;
+    UserKafkaTopics?: string;
     /**
      * 用户Kafka消费组名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ConsumerGroupName: string;
+    ConsumerGroupName?: string;
     /**
      * 状态   status 1: 运行中, 2: 暂停 ...
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Status: number;
+    Status?: number;
     /**
-     * 导入数据位置，-1:最早（默认），-2：最晚，大于等于0: 指定offset
+     * 导入数据位置，-2:最早（默认），-1：最晚
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Offset?: number;
@@ -406,17 +406,17 @@ export interface KafkaRechargeInfo {
      * 创建时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CreateTime: string;
+    CreateTime?: string;
     /**
      * 更新时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    UpdateTime: string;
+    UpdateTime?: string;
     /**
      * 日志导入规则
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    LogRechargeRule: LogRechargeRuleInfo;
+    LogRechargeRule?: LogRechargeRuleInfo;
 }
 /**
  * ModifyLogset请求参数结构体

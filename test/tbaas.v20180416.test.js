@@ -28,6 +28,16 @@ it("tbaas.v20180416.QueryChainMakerTransaction", async function () {
     }
 })
 
+it("tbaas.v20180416.ApplyUserCert", async function () {
+    try {
+       const data = await client.ApplyUserCert({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tbaas.v20180416.ApplyChainMakerBatchUserCert", async function () {
     try {
        const data = await client.ApplyChainMakerBatchUserCert({})
@@ -38,49 +48,9 @@ it("tbaas.v20180416.ApplyChainMakerBatchUserCert", async function () {
     }
 })
 
-it("tbaas.v20180416.GetChaincodeLogForUser", async function () {
+it("tbaas.v20180416.SrvInvoke", async function () {
     try {
-       const data = await client.GetChaincodeLogForUser({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("tbaas.v20180416.QueryChainMakerDemoTransaction", async function () {
-    try {
-       const data = await client.QueryChainMakerDemoTransaction({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("tbaas.v20180416.GetClusterListForUser", async function () {
-    try {
-       const data = await client.GetClusterListForUser({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("tbaas.v20180416.QueryChainMakerContract", async function () {
-    try {
-       const data = await client.QueryChainMakerContract({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("tbaas.v20180416.QueryChainMakerDemoBlockTransaction", async function () {
-    try {
-       const data = await client.QueryChainMakerDemoBlockTransaction({})
+       const data = await client.SrvInvoke({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -108,119 +78,9 @@ it("tbaas.v20180416.GetClusterSummary", async function () {
     }
 })
 
-it("tbaas.v20180416.GetPeerLogForUser", async function () {
-    try {
-       const data = await client.GetPeerLogForUser({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("tbaas.v20180416.GetLatestTransactionList", async function () {
-    try {
-       const data = await client.GetLatestTransactionList({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("tbaas.v20180416.DownloadUserCert", async function () {
-    try {
-       const data = await client.DownloadUserCert({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("tbaas.v20180416.CreateChaincodeAndInstallForUser", async function () {
-    try {
-       const data = await client.CreateChaincodeAndInstallForUser({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("tbaas.v20180416.GetLatesdTransactionList", async function () {
-    try {
-       const data = await client.GetLatesdTransactionList({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("tbaas.v20180416.ApplyUserCert", async function () {
-    try {
-       const data = await client.ApplyUserCert({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("tbaas.v20180416.InvokeChainMakerContract", async function () {
-    try {
-       const data = await client.InvokeChainMakerContract({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("tbaas.v20180416.GetInvokeTx", async function () {
-    try {
-       const data = await client.GetInvokeTx({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("tbaas.v20180416.GetChaincodeInitializeResultForUser", async function () {
-    try {
-       const data = await client.GetChaincodeInitializeResultForUser({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("tbaas.v20180416.GetChannelListForUser", async function () {
-    try {
-       const data = await client.GetChannelListForUser({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("tbaas.v20180416.QueryChainMakerBlockTransaction", async function () {
     try {
        const data = await client.QueryChainMakerBlockTransaction({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("tbaas.v20180416.InitializeChaincodeForUser", async function () {
-    try {
-       const data = await client.InitializeChaincodeForUser({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -238,9 +98,9 @@ it("tbaas.v20180416.QueryChainMakerDemoContract", async function () {
     }
 })
 
-it("tbaas.v20180416.GetTransactionDetailForUser", async function () {
+it("tbaas.v20180416.QueryChainMakerDemoTransaction", async function () {
     try {
-       const data = await client.GetTransactionDetailForUser({})
+       const data = await client.QueryChainMakerDemoTransaction({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -248,9 +108,19 @@ it("tbaas.v20180416.GetTransactionDetailForUser", async function () {
     }
 })
 
-it("tbaas.v20180416.SrvInvoke", async function () {
+it("tbaas.v20180416.GetInvokeTx", async function () {
     try {
-       const data = await client.SrvInvoke({})
+       const data = await client.GetInvokeTx({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tbaas.v20180416.GetLatestTransactionList", async function () {
+    try {
+       const data = await client.GetLatestTransactionList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -268,9 +138,9 @@ it("tbaas.v20180416.InvokeChainMakerDemoContract", async function () {
     }
 })
 
-it("tbaas.v20180416.GetChaincodeCompileLogForUser", async function () {
+it("tbaas.v20180416.DownloadUserCert", async function () {
     try {
-       const data = await client.GetChaincodeCompileLogForUser({})
+       const data = await client.DownloadUserCert({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -281,6 +151,16 @@ it("tbaas.v20180416.GetChaincodeCompileLogForUser", async function () {
 it("tbaas.v20180416.GetBlockTransactionListForUser", async function () {
     try {
        const data = await client.GetBlockTransactionListForUser({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tbaas.v20180416.InvokeChainMakerContract", async function () {
+    try {
+       const data = await client.InvokeChainMakerContract({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -301,6 +181,46 @@ it("tbaas.v20180416.GetBlockList", async function () {
 it("tbaas.v20180416.Query", async function () {
     try {
        const data = await client.Query({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tbaas.v20180416.GetTransactionDetailForUser", async function () {
+    try {
+       const data = await client.GetTransactionDetailForUser({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tbaas.v20180416.QueryChainMakerDemoBlockTransaction", async function () {
+    try {
+       const data = await client.QueryChainMakerDemoBlockTransaction({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tbaas.v20180416.QueryChainMakerContract", async function () {
+    try {
+       const data = await client.QueryChainMakerContract({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tbaas.v20180416.GetLatesdTransactionList", async function () {
+    try {
+       const data = await client.GetLatesdTransactionList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -4504,7 +4504,7 @@ export interface DescribeApiAppResponse {
      * 应用详情。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Result: ApiAppInfos;
+    Result?: ApiAppInfos;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -5580,36 +5580,38 @@ export interface ApiAppInfo {
      * 应用名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ApiAppName: string;
+    ApiAppName?: string;
     /**
      * 应用ID
      */
-    ApiAppId: string;
+    ApiAppId?: string;
     /**
      * 应用SECRET
+  注意:此字段可能返回null，表示取不到有效值
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ApiAppSecret: string;
+    ApiAppSecret?: string;
     /**
      * 应用描述
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ApiAppDesc: string;
+    ApiAppDesc?: string;
     /**
      * 创建时间，按照 ISO8601 标准表示，并且使用 UTC 时间。格式为：YYYY-MM-DDThh:mm:ssZ。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CreatedTime: string;
+    CreatedTime?: string;
     /**
      * 修改时间，按照 ISO8601 标准表示，并且使用 UTC 时间。格式为：YYYY-MM-DDThh:mm:ssZ。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ModifiedTime: string;
+    ModifiedTime?: string;
     /**
      * 应用KEY
+  注意:此字段可能返回null，表示取不到有效值
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ApiAppKey: string;
+    ApiAppKey?: string;
 }
 /**
  * DeleteIPStrategy返回参数结构体

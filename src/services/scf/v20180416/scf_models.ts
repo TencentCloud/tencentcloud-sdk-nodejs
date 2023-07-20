@@ -121,21 +121,21 @@ export interface Trigger {
 }
 
 /**
- * GetProvisionedConcurrencyConfig请求参数结构体
+ * ListTriggers返回参数结构体
  */
-export interface GetProvisionedConcurrencyConfigRequest {
+export interface ListTriggersResponse {
   /**
-   * 需要获取预置并发详情的函数名称。
+   * 触发器总数
    */
-  FunctionName: string
+  TotalCount?: number
   /**
-   * 函数所在的命名空间，默认为default。
+   * 触发器列表
    */
-  Namespace?: string
+  Triggers?: Array<TriggerInfo>
   /**
-   * 函数版本号，不传则返回函数所有版本的预置并发信息。
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  Qualifier?: string
+  RequestId?: string
 }
 
 /**
@@ -345,6 +345,44 @@ export interface UsageInfo {
    * 用户实际配置的账号并发配额
    */
   UserConcurrencyMemLimit: number
+}
+
+/**
+ * 基于TKE的资源池选项
+ */
+export interface NamespaceResourceEnvTKE {
+  /**
+   * 集群ID
+   */
+  ClusterID: string
+  /**
+   * 子网ID
+   */
+  SubnetID: string
+  /**
+   * 命名空间
+   */
+  Namespace: string
+  /**
+   * 数据存储地址
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DataPath?: string
+  /**
+   * node选择器
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NodeSelector?: Array<K8SLabel>
+  /**
+   * 污点容忍
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Tolerations?: Array<K8SToleration>
+  /**
+   * scf组件将占用的节点端口起始号
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Port?: number
 }
 
 /**
@@ -1022,21 +1060,21 @@ export interface GetFunctionEventInvokeConfigResponse {
 }
 
 /**
- * ListTriggers返回参数结构体
+ * GetProvisionedConcurrencyConfig请求参数结构体
  */
-export interface ListTriggersResponse {
+export interface GetProvisionedConcurrencyConfigRequest {
   /**
-   * 触发器总数
+   * 需要获取预置并发详情的函数名称。
    */
-  TotalCount?: number
+  FunctionName: string
   /**
-   * 触发器列表
+   * 函数所在的命名空间，默认为default。
    */
-  Triggers?: Array<TriggerInfo>
+  Namespace?: string
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 函数版本号，不传则返回函数所有版本的预置并发信息。
    */
-  RequestId?: string
+  Qualifier?: string
 }
 
 /**
@@ -1619,6 +1657,37 @@ export interface RequestStatus {
 }
 
 /**
+ * Kubernetes污点容忍，使用时请注意您的Kubernetes版本所支持的字段情况。
+可参考 https://kubernetes.io/zh-cn/docs/concepts/scheduling-eviction/taint-and-toleration/
+ */
+export interface K8SToleration {
+  /**
+   * 匹配的污点名
+   */
+  Key: string
+  /**
+   * 匹配方式，默认值为: Equal
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Operator?: string
+  /**
+   * 执行策略
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Effect?: string
+  /**
+   * 匹配的污点值，当Operator为Equal时必填
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Value?: string
+  /**
+   * 当污点不被容忍时，Pod还能在节点上运行多久
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TolerationSeconds?: number
+}
+
+/**
  * CreateFunction请求参数结构体
  */
 export interface CreateFunctionRequest {
@@ -2087,6 +2156,10 @@ export interface CreateNamespaceRequest {
    * 命名空间描述
    */
   Description?: string
+  /**
+   * 资源池配置
+   */
+  ResourceEnv?: NamespaceResourceEnv
 }
 
 /**
@@ -2359,6 +2432,20 @@ export interface GetFunctionResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * k8s label
+ */
+export interface K8SLabel {
+  /**
+   * label的名称
+   */
+  Key: string
+  /**
+   * label的值
+   */
+  Value: string
 }
 
 /**
@@ -3468,6 +3555,17 @@ export interface EipConfigOut {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   EipAddress: Array<string>
+}
+
+/**
+ * 命名空间资源池配置
+ */
+export interface NamespaceResourceEnv {
+  /**
+   * 基于TKE集群的资源池
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TKE?: NamespaceResourceEnvTKE
 }
 
 /**

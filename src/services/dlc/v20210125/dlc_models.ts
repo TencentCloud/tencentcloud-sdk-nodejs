@@ -692,149 +692,149 @@ export interface SparkJobInfo {
   /**
    * spark作业ID
    */
-  JobId: string
+  JobId?: string
   /**
    * spark作业名
    */
-  JobName: string
+  JobName?: string
   /**
    * spark作业类型，可去1或者2，1表示batch作业， 2表示streaming作业
    */
-  JobType: number
+  JobType?: number
   /**
    * 引擎名
    */
-  DataEngine: string
+  DataEngine?: string
   /**
    * 该字段已下线，请使用字段Datasource
    */
-  Eni: string
+  Eni?: string
   /**
    * 程序包是否本地上传，cos或者lakefs
    */
-  IsLocal: string
+  IsLocal?: string
   /**
    * 程序包路径
    */
-  JobFile: string
+  JobFile?: string
   /**
    * 角色ID
    */
-  RoleArn: number
+  RoleArn?: number
   /**
    * spark作业运行主类
    */
-  MainClass: string
+  MainClass?: string
   /**
    * 命令行参数，spark作业命令行参数，空格分隔
    */
-  CmdArgs: string
+  CmdArgs?: string
   /**
    * spark原生配置，换行符分隔
    */
-  JobConf: string
+  JobConf?: string
   /**
    * 依赖jars是否本地上传，cos或者lakefs
    */
-  IsLocalJars: string
+  IsLocalJars?: string
   /**
    * spark作业依赖jars，逗号分隔
    */
-  JobJars: string
+  JobJars?: string
   /**
    * 依赖文件是否本地上传，cos或者lakefs
    */
-  IsLocalFiles: string
+  IsLocalFiles?: string
   /**
    * spark作业依赖文件，逗号分隔
    */
-  JobFiles: string
+  JobFiles?: string
   /**
    * spark作业driver资源大小
    */
-  JobDriverSize: string
+  JobDriverSize?: string
   /**
    * spark作业executor资源大小
    */
-  JobExecutorSize: string
+  JobExecutorSize?: string
   /**
    * spark作业executor个数
    */
-  JobExecutorNums: number
+  JobExecutorNums?: number
   /**
    * spark流任务最大重试次数
    */
-  JobMaxAttempts: number
+  JobMaxAttempts?: number
   /**
    * spark作业创建者
    */
-  JobCreator: string
+  JobCreator?: string
   /**
    * spark作业创建时间
    */
-  JobCreateTime: number
+  JobCreateTime?: number
   /**
    * spark作业更新时间
    */
-  JobUpdateTime: number
+  JobUpdateTime?: number
   /**
    * spark作业最近任务ID
    */
-  CurrentTaskId: string
+  CurrentTaskId?: string
   /**
    * spark作业最近运行状态
    */
-  JobStatus: number
+  JobStatus?: number
   /**
    * spark流作业统计
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  StreamingStat: StreamingStatistics
+  StreamingStat?: StreamingStatistics
   /**
    * 数据源名
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DataSource: string
+  DataSource?: string
   /**
    * pyspark：依赖上传方式，1、cos；2、lakefs（控制台使用，该方式不支持直接接口调用）
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  IsLocalPythonFiles: string
+  IsLocalPythonFiles?: string
   /**
    * 注：该返回值已废弃
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  AppPythonFiles: string
+  AppPythonFiles?: string
   /**
    * archives：依赖上传方式，1、cos；2、lakefs（控制台使用，该方式不支持直接接口调用）
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  IsLocalArchives: string
+  IsLocalArchives?: string
   /**
    * archives：依赖资源
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  JobArchives: string
+  JobArchives?: string
   /**
    * Spark Image 版本
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SparkImage: string
+  SparkImage?: string
   /**
    * pyspark：python依赖, 除py文件外，还支持zip/egg等归档格式，多文件以逗号分隔
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  JobPythonFiles: string
+  JobPythonFiles?: string
   /**
    * 当前job正在运行或准备运行的任务个数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TaskNum: number
+  TaskNum?: number
   /**
    * 引擎状态：-100（默认：未知状态），-2~11：引擎正常状态；
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DataEngineStatus: number
+  DataEngineStatus?: number
   /**
    * 指定的Executor数量（最大值），默认为1，当开启动态分配有效，若未开启，则该值等于JobExecutorNums
 注意：此字段可能返回 null，表示取不到有效值。
@@ -865,6 +865,11 @@ export interface SparkJobInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IsInherit?: number
+  /**
+   * 是否使用session脚本的sql运行任务：false：否，true：是
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsSessionStarted?: boolean
 }
 
 /**

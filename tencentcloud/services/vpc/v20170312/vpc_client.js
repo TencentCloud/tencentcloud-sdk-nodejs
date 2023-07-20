@@ -962,7 +962,6 @@ class Client extends abstract_client_1.AbstractClient {
     }
     /**
      * 本接口 (DescribeBandwidthPackageResources) 用于根据共享带宽包唯一ID查询共享带宽包内的资源列表，支持按条件过滤查询结果和分页查询。
-
      */
     async DescribeBandwidthPackageResources(req, cb) {
         return this.request("DescribeBandwidthPackageResources", req, cb);

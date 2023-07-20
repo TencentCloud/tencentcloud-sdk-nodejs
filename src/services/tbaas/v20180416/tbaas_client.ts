@@ -18,73 +18,52 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
-  PeerDetailForUser,
   QueryChainMakerDemoBlockTransactionResponse,
   QueryChainMakerContractRequest,
   QueryChainMakerBlockTransactionRequest,
-  GetClusterListForUserResponse,
   GetBlockTransactionListForUserResponse,
   ApplyChainMakerBatchUserCertResponse,
   ApplyUserCertRequest,
-  SrvInvokeResponse,
-  GetChaincodeInitializeResultForUserRequest,
-  InitializeChaincodeForUserRequest,
   GetTransactionDetailForUserResponse,
   SrvInvokeRequest,
   ApplyUserCertResponse,
-  GetChaincodeCompileLogForUserRequest,
-  GetInvokeTxRequest,
+  GetLatesdTransactionListRequest,
   InvokeResponse,
   SignCertCsr,
   DownloadUserCertResponse,
-  GetChaincodeLogForUserRequest,
-  GetLatesdTransactionListRequest,
-  LogDetailForUser,
-  DownloadUserCertRequest,
   GetTransactionDetailForUserRequest,
   GetBlockListResponse,
   GetBlockTransactionListForUserRequest,
-  QueryChainMakerBlockTransactionResponse,
   InvokeChainMakerDemoContractRequest,
-  GetClusterSummaryRequest,
   InvokeChainMakerContractResponse,
-  QueryChainMakerTransactionRequest,
-  ClusterDetailForUser,
-  GetPeerLogForUserRequest,
+  SrvInvokeResponse,
+  GetInvokeTxRequest,
   GetLatesdTransactionListResponse,
   QueryChainMakerTransactionResponse,
-  GetChaincodeInitializeResultForUserResponse,
+  GetLatestTransactionListResponse,
   GetClusterSummaryResponse,
   PeerSet,
   ChainMakerTransactionResult,
-  CreateChaincodeAndInstallForUserRequest,
   GetLatestTransactionListRequest,
   QueryChainMakerDemoTransactionResponse,
   ApplyChainMakerBatchUserCertRequest,
-  GetChaincodeLogForUserResponse,
   QueryChainMakerDemoTransactionRequest,
-  InitializeChaincodeForUserResponse,
-  GroupDetailForUser,
   QueryChainMakerDemoContractRequest,
   ChainMakerContractResult,
-  GetClusterListForUserRequest,
+  GetClusterSummaryRequest,
   Block,
   QueryChainMakerDemoContractResponse,
   GetBlockListRequest,
-  GetPeerLogForUserResponse,
   InvokeRequest,
   GetInvokeTxResponse,
-  GetChannelListForUserResponse,
   QueryChainMakerContractResponse,
-  GetChaincodeCompileLogForUserResponse,
+  DownloadUserCertRequest,
   InvokeChainMakerContractRequest,
   TransactionItem,
-  GetLatestTransactionListResponse,
+  QueryChainMakerTransactionRequest,
   QueryChainMakerDemoBlockTransactionRequest,
-  ChannelDetailForUser,
   QueryRequest,
-  CreateChaincodeAndInstallForUserResponse,
-  GetChannelListForUserRequest,
+  QueryChainMakerBlockTransactionResponse,
   InvokeChainMakerDemoContractResponse,
   QueryResponse,
   EndorserGroup,
@@ -110,6 +89,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 申请用户证书
+   */
+  async ApplyUserCert(
+    req: ApplyUserCertRequest,
+    cb?: (error: string, rep: ApplyUserCertResponse) => void
+  ): Promise<ApplyUserCertResponse> {
+    return this.request("ApplyUserCert", req, cb)
+  }
+
+  /**
    * 批量申请长安链用户签名证书
    */
   async ApplyChainMakerBatchUserCert(
@@ -120,57 +109,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 接口已废弃，请通过控制台查询或操作
-
-获取合约容器日志
-     */
-  async GetChaincodeLogForUser(
-    req: GetChaincodeLogForUserRequest,
-    cb?: (error: string, rep: GetChaincodeLogForUserResponse) => void
-  ): Promise<GetChaincodeLogForUserResponse> {
-    return this.request("GetChaincodeLogForUser", req, cb)
-  }
-
-  /**
-   * 通过交易ID查询长安链体验网络交易
+   * trustsql服务统一接口
    */
-  async QueryChainMakerDemoTransaction(
-    req: QueryChainMakerDemoTransactionRequest,
-    cb?: (error: string, rep: QueryChainMakerDemoTransactionResponse) => void
-  ): Promise<QueryChainMakerDemoTransactionResponse> {
-    return this.request("QueryChainMakerDemoTransaction", req, cb)
-  }
-
-  /**
-     * 接口已废弃，请通过控制台查询或操作
-
-获取该用户的网络列表。网络信息中包含组织信息，但仅包含该用户所在组织的信息。
-     */
-  async GetClusterListForUser(
-    req: GetClusterListForUserRequest,
-    cb?: (error: string, rep: GetClusterListForUserResponse) => void
-  ): Promise<GetClusterListForUserResponse> {
-    return this.request("GetClusterListForUser", req, cb)
-  }
-
-  /**
-   * 调用长安链合约查询
-   */
-  async QueryChainMakerContract(
-    req: QueryChainMakerContractRequest,
-    cb?: (error: string, rep: QueryChainMakerContractResponse) => void
-  ): Promise<QueryChainMakerContractResponse> {
-    return this.request("QueryChainMakerContract", req, cb)
-  }
-
-  /**
-   * 查询长安链体验网络指定高度区块的交易
-   */
-  async QueryChainMakerDemoBlockTransaction(
-    req: QueryChainMakerDemoBlockTransactionRequest,
-    cb?: (error: string, rep: QueryChainMakerDemoBlockTransactionResponse) => void
-  ): Promise<QueryChainMakerDemoBlockTransactionResponse> {
-    return this.request("QueryChainMakerDemoBlockTransaction", req, cb)
+  async SrvInvoke(
+    req: SrvInvokeRequest,
+    cb?: (error: string, rep: SrvInvokeResponse) => void
+  ): Promise<SrvInvokeResponse> {
+    return this.request("SrvInvoke", req, cb)
   }
 
   /**
@@ -194,114 +139,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 接口已废弃，请通过控制台查询或操作
-
-获取节点日志
-     */
-  async GetPeerLogForUser(
-    req: GetPeerLogForUserRequest,
-    cb?: (error: string, rep: GetPeerLogForUserResponse) => void
-  ): Promise<GetPeerLogForUserResponse> {
-    return this.request("GetPeerLogForUser", req, cb)
-  }
-
-  /**
-   * 获取fabric最新交易列表
-   */
-  async GetLatestTransactionList(
-    req: GetLatestTransactionListRequest,
-    cb?: (error: string, rep: GetLatestTransactionListResponse) => void
-  ): Promise<GetLatestTransactionListResponse> {
-    return this.request("GetLatestTransactionList", req, cb)
-  }
-
-  /**
-   * 下载用户证书
-   */
-  async DownloadUserCert(
-    req: DownloadUserCertRequest,
-    cb?: (error: string, rep: DownloadUserCertResponse) => void
-  ): Promise<DownloadUserCertResponse> {
-    return this.request("DownloadUserCert", req, cb)
-  }
-
-  /**
-     * 接口已废弃，请通过控制台查询或操作
-
-创建并安装合约
-     */
-  async CreateChaincodeAndInstallForUser(
-    req: CreateChaincodeAndInstallForUserRequest,
-    cb?: (error: string, rep: CreateChaincodeAndInstallForUserResponse) => void
-  ): Promise<CreateChaincodeAndInstallForUserResponse> {
-    return this.request("CreateChaincodeAndInstallForUser", req, cb)
-  }
-
-  /**
-   * 获取最新交易列表（已废弃）
-   */
-  async GetLatesdTransactionList(
-    req: GetLatesdTransactionListRequest,
-    cb?: (error: string, rep: GetLatesdTransactionListResponse) => void
-  ): Promise<GetLatesdTransactionListResponse> {
-    return this.request("GetLatesdTransactionList", req, cb)
-  }
-
-  /**
-   * 申请用户证书
-   */
-  async ApplyUserCert(
-    req: ApplyUserCertRequest,
-    cb?: (error: string, rep: ApplyUserCertResponse) => void
-  ): Promise<ApplyUserCertResponse> {
-    return this.request("ApplyUserCert", req, cb)
-  }
-
-  /**
-   * 调用长安链合约执行交易
-   */
-  async InvokeChainMakerContract(
-    req: InvokeChainMakerContractRequest,
-    cb?: (error: string, rep: InvokeChainMakerContractResponse) => void
-  ): Promise<InvokeChainMakerContractResponse> {
-    return this.request("InvokeChainMakerContract", req, cb)
-  }
-
-  /**
-   * Invoke异步调用结果查询
-   */
-  async GetInvokeTx(
-    req: GetInvokeTxRequest,
-    cb?: (error: string, rep: GetInvokeTxResponse) => void
-  ): Promise<GetInvokeTxResponse> {
-    return this.request("GetInvokeTx", req, cb)
-  }
-
-  /**
-     * 接口已废弃，请通过控制台查询或操作
-
-实例化结果查询
-     */
-  async GetChaincodeInitializeResultForUser(
-    req: GetChaincodeInitializeResultForUserRequest,
-    cb?: (error: string, rep: GetChaincodeInitializeResultForUserResponse) => void
-  ): Promise<GetChaincodeInitializeResultForUserResponse> {
-    return this.request("GetChaincodeInitializeResultForUser", req, cb)
-  }
-
-  /**
-     * 接口已废弃，请通过控制台查询或操作
-
-获取通道列表
-     */
-  async GetChannelListForUser(
-    req: GetChannelListForUserRequest,
-    cb?: (error: string, rep: GetChannelListForUserResponse) => void
-  ): Promise<GetChannelListForUserResponse> {
-    return this.request("GetChannelListForUser", req, cb)
-  }
-
-  /**
    * 查询长安链指定高度区块的交易
    */
   async QueryChainMakerBlockTransaction(
@@ -309,18 +146,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: QueryChainMakerBlockTransactionResponse) => void
   ): Promise<QueryChainMakerBlockTransactionResponse> {
     return this.request("QueryChainMakerBlockTransaction", req, cb)
-  }
-
-  /**
-     * 接口已废弃，请通过控制台查询或操作
-
-实例化合约
-     */
-  async InitializeChaincodeForUser(
-    req: InitializeChaincodeForUserRequest,
-    cb?: (error: string, rep: InitializeChaincodeForUserResponse) => void
-  ): Promise<InitializeChaincodeForUserResponse> {
-    return this.request("InitializeChaincodeForUser", req, cb)
   }
 
   /**
@@ -334,23 +159,33 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取交易详情
+   * 通过交易ID查询长安链体验网络交易
    */
-  async GetTransactionDetailForUser(
-    req: GetTransactionDetailForUserRequest,
-    cb?: (error: string, rep: GetTransactionDetailForUserResponse) => void
-  ): Promise<GetTransactionDetailForUserResponse> {
-    return this.request("GetTransactionDetailForUser", req, cb)
+  async QueryChainMakerDemoTransaction(
+    req: QueryChainMakerDemoTransactionRequest,
+    cb?: (error: string, rep: QueryChainMakerDemoTransactionResponse) => void
+  ): Promise<QueryChainMakerDemoTransactionResponse> {
+    return this.request("QueryChainMakerDemoTransaction", req, cb)
   }
 
   /**
-   * trustsql服务统一接口
+   * Invoke异步调用结果查询
    */
-  async SrvInvoke(
-    req: SrvInvokeRequest,
-    cb?: (error: string, rep: SrvInvokeResponse) => void
-  ): Promise<SrvInvokeResponse> {
-    return this.request("SrvInvoke", req, cb)
+  async GetInvokeTx(
+    req: GetInvokeTxRequest,
+    cb?: (error: string, rep: GetInvokeTxResponse) => void
+  ): Promise<GetInvokeTxResponse> {
+    return this.request("GetInvokeTx", req, cb)
+  }
+
+  /**
+   * 获取fabric最新交易列表
+   */
+  async GetLatestTransactionList(
+    req: GetLatestTransactionListRequest,
+    cb?: (error: string, rep: GetLatestTransactionListResponse) => void
+  ): Promise<GetLatestTransactionListResponse> {
+    return this.request("GetLatestTransactionList", req, cb)
   }
 
   /**
@@ -364,15 +199,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 接口已废弃，请通过控制台查询或操作
-
-获取合约编译日志
-     */
-  async GetChaincodeCompileLogForUser(
-    req: GetChaincodeCompileLogForUserRequest,
-    cb?: (error: string, rep: GetChaincodeCompileLogForUserResponse) => void
-  ): Promise<GetChaincodeCompileLogForUserResponse> {
-    return this.request("GetChaincodeCompileLogForUser", req, cb)
+   * 下载用户证书
+   */
+  async DownloadUserCert(
+    req: DownloadUserCertRequest,
+    cb?: (error: string, rep: DownloadUserCertResponse) => void
+  ): Promise<DownloadUserCertResponse> {
+    return this.request("DownloadUserCert", req, cb)
   }
 
   /**
@@ -383,6 +216,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: GetBlockTransactionListForUserResponse) => void
   ): Promise<GetBlockTransactionListForUserResponse> {
     return this.request("GetBlockTransactionListForUser", req, cb)
+  }
+
+  /**
+   * 调用长安链合约执行交易
+   */
+  async InvokeChainMakerContract(
+    req: InvokeChainMakerContractRequest,
+    cb?: (error: string, rep: InvokeChainMakerContractResponse) => void
+  ): Promise<InvokeChainMakerContractResponse> {
+    return this.request("InvokeChainMakerContract", req, cb)
   }
 
   /**
@@ -403,5 +246,45 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: QueryResponse) => void
   ): Promise<QueryResponse> {
     return this.request("Query", req, cb)
+  }
+
+  /**
+   * 获取交易详情
+   */
+  async GetTransactionDetailForUser(
+    req: GetTransactionDetailForUserRequest,
+    cb?: (error: string, rep: GetTransactionDetailForUserResponse) => void
+  ): Promise<GetTransactionDetailForUserResponse> {
+    return this.request("GetTransactionDetailForUser", req, cb)
+  }
+
+  /**
+   * 查询长安链体验网络指定高度区块的交易
+   */
+  async QueryChainMakerDemoBlockTransaction(
+    req: QueryChainMakerDemoBlockTransactionRequest,
+    cb?: (error: string, rep: QueryChainMakerDemoBlockTransactionResponse) => void
+  ): Promise<QueryChainMakerDemoBlockTransactionResponse> {
+    return this.request("QueryChainMakerDemoBlockTransaction", req, cb)
+  }
+
+  /**
+   * 调用长安链合约查询
+   */
+  async QueryChainMakerContract(
+    req: QueryChainMakerContractRequest,
+    cb?: (error: string, rep: QueryChainMakerContractResponse) => void
+  ): Promise<QueryChainMakerContractResponse> {
+    return this.request("QueryChainMakerContract", req, cb)
+  }
+
+  /**
+   * 获取最新交易列表（已废弃）
+   */
+  async GetLatesdTransactionList(
+    req: GetLatesdTransactionListRequest,
+    cb?: (error: string, rep: GetLatesdTransactionListResponse) => void
+  ): Promise<GetLatesdTransactionListResponse> {
+    return this.request("GetLatesdTransactionList", req, cb)
   }
 }

@@ -2251,9 +2251,8 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 本接口 (DescribeBandwidthPackageResources) 用于根据共享带宽包唯一ID查询共享带宽包内的资源列表，支持按条件过滤查询结果和分页查询。
-
-     */
+   * 本接口 (DescribeBandwidthPackageResources) 用于根据共享带宽包唯一ID查询共享带宽包内的资源列表，支持按条件过滤查询结果和分页查询。
+   */
   async DescribeBandwidthPackageResources(
     req: DescribeBandwidthPackageResourcesRequest,
     cb?: (error: string, rep: DescribeBandwidthPackageResourcesResponse) => void

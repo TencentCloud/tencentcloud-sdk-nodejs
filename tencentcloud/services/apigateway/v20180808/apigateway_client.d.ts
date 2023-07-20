@@ -95,7 +95,7 @@ API 网关可绑定自定义域名到服务，并且可以对自定义域名的�
      */
     DescribeApiAppsStatus(req: DescribeApiAppsStatusRequest, cb?: (error: string, rep: DescribeApiAppsStatusResponse) => void): Promise<DescribeApiAppsStatusResponse>;
     /**
-     * 本接口（DescribeApiApp）用于根据应用ID搜索应用。
+     * 本接口（DescribeApiApp）用于根据应用ID搜索应用。此接口已下线，如需使用功能请使用DescribeApiAppsStatus接口。
      */
     DescribeApiApp(req: DescribeApiAppRequest, cb?: (error: string, rep: DescribeApiAppResponse) => void): Promise<DescribeApiAppResponse>;
     /**
