@@ -69,14 +69,6 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateTDid", req, cb);
     }
     /**
-     * 下线已有内测接口，待上线正式版本的接口
-
-凭证颁发按机构排行
-     */
-    async GetCredentialCptRank(req, cb) {
-        return this.request("GetCredentialCptRank", req, cb);
-    }
-    /**
      * 该接口不再使用
 
 创建凭证
@@ -93,12 +85,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateTDidByPublicKey", req, cb);
     }
     /**
-     * 下线已有内测接口，待上线正式版本的接口
+     * 该接口不再使用
 
-获取联盟列表
+获取凭证链上状态信息
      */
-    async GetConsortiumList(req, cb) {
-        return this.request("GetConsortiumList", req, cb);
+    async GetCredentialStatus(req, cb) {
+        return this.request("GetCredentialStatus", req, cb);
     }
     /**
      * 该接口已废弃
@@ -128,18 +120,10 @@ DID添加标签
     /**
      * 该接口不再使用
 
-获取凭证链上状态信息
+凭证模版新建
      */
-    async GetCredentialStatus(req, cb) {
-        return this.request("GetCredentialStatus", req, cb);
-    }
-    /**
-     * 下线已有内测接口，待上线正式版本的接口
-
-获取联盟bcos网络列表
-     */
-    async GetConsortiumClusterList(req, cb) {
-        return this.request("GetConsortiumClusterList", req, cb);
+    async RegisterCpt(req, cb) {
+        return this.request("RegisterCpt", req, cb);
     }
     /**
      * 该接口不再使用
@@ -164,14 +148,6 @@ DID添加标签
      */
     async SetCredentialStatus(req, cb) {
         return this.request("SetCredentialStatus", req, cb);
-    }
-    /**
-     * 该接口不再使用
-
-凭证模版新建
-     */
-    async RegisterCpt(req, cb) {
-        return this.request("RegisterCpt", req, cb);
     }
 }
 exports.Client = Client;

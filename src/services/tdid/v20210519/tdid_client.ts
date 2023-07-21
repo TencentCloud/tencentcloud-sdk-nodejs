@@ -23,26 +23,20 @@ import {
   CreateSelectiveCredentialRequest,
   CreateTDidByPrivateKeyResponse,
   CheckChainResponse,
-  TransactionArg,
   CreateTDidByPublicKeyRequest,
   CreateCredentialResponse,
   CheckChainRequest,
   GetAuthorityIssuerRequest,
-  VerifyFunctionArg,
-  GetConsortiumListRequest,
   CreateCredentialRequest,
   GetDidDocumentRequest,
-  GetConsortiumListResponse,
-  ConsortiumItem,
   GetCredentialStatusRequest,
   GetAgencyTDidResponse,
   AddLabelResponse,
   VerifyCredentialResponse,
   SetCredentialStatusResponse,
   GetCptInfoResponse,
-  CptIssueRank,
-  GetCredentialCptRankResponse,
-  GetConsortiumClusterListResponse,
+  Identity,
+  TransactionArg,
   AddLabelRequest,
   GetAuthorityIssuerResponse,
   GetDidDocumentResponse,
@@ -50,17 +44,14 @@ import {
   CreateSelectiveCredentialResponse,
   GetAgencyTDidRequest,
   CreateTDidByPublicKeyResponse,
-  GetCredentialCptRankRequest,
   RegisterCptRequest,
   Proof,
-  VerifyCredentialRequest,
-  GetConsortiumClusterListRequest,
+  VerifyFunctionArg,
   FunctionArg,
   CreateTDidByPrivateKeyRequest,
-  BcosClusterItem,
+  VerifyCredentialRequest,
   SetCredentialStatusRequest,
   GetCptInfoRequest,
-  Identity,
   GetCredentialStatusResponse,
   RegisterCptResponse,
 } from "./tdid_models"
@@ -136,18 +127,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 下线已有内测接口，待上线正式版本的接口
-
-凭证颁发按机构排行
-     */
-  async GetCredentialCptRank(
-    req: GetCredentialCptRankRequest,
-    cb?: (error: string, rep: GetCredentialCptRankResponse) => void
-  ): Promise<GetCredentialCptRankResponse> {
-    return this.request("GetCredentialCptRank", req, cb)
-  }
-
-  /**
      * 该接口不再使用
 
 创建凭证
@@ -172,15 +151,15 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 下线已有内测接口，待上线正式版本的接口
+     * 该接口不再使用
 
-获取联盟列表
+获取凭证链上状态信息
      */
-  async GetConsortiumList(
-    req?: GetConsortiumListRequest,
-    cb?: (error: string, rep: GetConsortiumListResponse) => void
-  ): Promise<GetConsortiumListResponse> {
-    return this.request("GetConsortiumList", req, cb)
+  async GetCredentialStatus(
+    req: GetCredentialStatusRequest,
+    cb?: (error: string, rep: GetCredentialStatusResponse) => void
+  ): Promise<GetCredentialStatusResponse> {
+    return this.request("GetCredentialStatus", req, cb)
   }
 
   /**
@@ -223,25 +202,13 @@ DID添加标签
   /**
      * 该接口不再使用
 
-获取凭证链上状态信息
+凭证模版新建
      */
-  async GetCredentialStatus(
-    req: GetCredentialStatusRequest,
-    cb?: (error: string, rep: GetCredentialStatusResponse) => void
-  ): Promise<GetCredentialStatusResponse> {
-    return this.request("GetCredentialStatus", req, cb)
-  }
-
-  /**
-     * 下线已有内测接口，待上线正式版本的接口
-
-获取联盟bcos网络列表
-     */
-  async GetConsortiumClusterList(
-    req: GetConsortiumClusterListRequest,
-    cb?: (error: string, rep: GetConsortiumClusterListResponse) => void
-  ): Promise<GetConsortiumClusterListResponse> {
-    return this.request("GetConsortiumClusterList", req, cb)
+  async RegisterCpt(
+    req: RegisterCptRequest,
+    cb?: (error: string, rep: RegisterCptResponse) => void
+  ): Promise<RegisterCptResponse> {
+    return this.request("RegisterCpt", req, cb)
   }
 
   /**
@@ -278,17 +245,5 @@ DID添加标签
     cb?: (error: string, rep: SetCredentialStatusResponse) => void
   ): Promise<SetCredentialStatusResponse> {
     return this.request("SetCredentialStatus", req, cb)
-  }
-
-  /**
-     * 该接口不再使用
-
-凭证模版新建
-     */
-  async RegisterCpt(
-    req: RegisterCptRequest,
-    cb?: (error: string, rep: RegisterCptResponse) => void
-  ): Promise<RegisterCptResponse> {
-    return this.request("RegisterCpt", req, cb)
   }
 }

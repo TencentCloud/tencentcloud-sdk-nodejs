@@ -165,6 +165,7 @@ export interface CreateAsyncRecognitionTaskRequest {
 • 16k_pt：葡萄牙语；
 • 16k_tr：土耳其语；
 • 16k_ar：阿拉伯语；
+• 16k_es：西班牙语；
    */
   EngineType: string
   /**
@@ -273,6 +274,7 @@ export interface SentenceRecognitionRequest {
 • 16k_pt：葡萄牙语；
 • 16k_tr：土耳其语；
 • 16k_ar：阿拉伯语；
+• 16k_es：西班牙语；
 • 16k_zh_dialect：多方言，支持23种方言（上海话、四川话、武汉话、贵阳话、昆明话、西安话、郑州话、太原话、兰州话、银川话、西宁话、南京话、合肥话、南昌话、长沙话、苏州话、杭州话、济南话、天津话、石家庄话、黑龙江话、吉林话、辽宁话）；
    */
   EngSerViceType: string
@@ -598,6 +600,7 @@ export interface CreateRecTaskRequest {
 • 16k_pt：葡萄牙语；
 • 16k_tr：土耳其语；
 • 16k_ar：阿拉伯语；
+• 16k_es：西班牙语；
 • 16k_zh_dialect：多方言，支持23种方言（上海话、四川话、武汉话、贵阳话、昆明话、西安话、郑州话、太原话、兰州话、银川话、西宁话、南京话、合肥话、南昌话、长沙话、苏州话、杭州话、济南话、天津话、石家庄话、黑龙江话、吉林话、辽宁话）；
    */
   EngineModelType: string

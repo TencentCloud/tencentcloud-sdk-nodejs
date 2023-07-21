@@ -100,6 +100,10 @@ export interface CreateRoomRequest {
      * 横竖屏。0：横屏开播（默认值）; 1：竖屏开播，当前仅支持移动端的纯视频类型
      */
     VideoOrientation?: number;
+    /**
+     * 开启课后评分。 0：不开启(默认)  1：开启
+     */
+    IsGradingRequiredPostClass?: number;
 }
 /**
  * DescribeQuestionList请求参数结构体
@@ -1802,6 +1806,10 @@ export interface DescribeRoomResponse {
      */
     VideoOrientation?: number;
     /**
+     * 开启课后评分。 0：不开启(默认)  1：开启
+     */
+    IsGradingRequiredPostClass?: number;
+    /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
@@ -2311,6 +2319,10 @@ export interface ModifyRoomRequest {
      * 横竖屏。0：横屏开播（默认值）; 1：竖屏开播，当前仅支持移动端的纯视频类型
      */
     VideoOrientation?: number;
+    /**
+     * 开启课后评分。 0：不开启(默认)  1：开启
+     */
+    IsGradingRequiredPostClass?: number;
 }
 /**
  * 房间问答答案详情

@@ -266,11 +266,11 @@ export interface DescribeCustomWhiteRuleResponse {
   /**
    * 规则详情
    */
-  RuleList: Array<DescribeCustomRulesRspRuleListItem>
+  RuleList?: Array<DescribeCustomRulesRspRuleListItem>
   /**
    * 规则条数
    */
-  TotalCount: string
+  TotalCount?: string
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -887,7 +887,7 @@ export interface DescribeCustomWhiteRuleRequest {
    */
   Domain: string
   /**
-   * 偏移
+   * 偏移量
    */
   Offset: number
   /**
@@ -1141,11 +1141,12 @@ export interface SwitchDomainRulesRequest {
    */
   Ids?: Array<number>
   /**
-   * 开关状态
+   * 开关状态，0表示关闭，1表示开启，2表示只观察
    */
   Status?: number
   /**
-   * 设置为观察模式原因
+   * 设置为观察模式原因，
+1表示业务自身原因观察，2表示系统规则误报上报，3表示核心业务灰度观察，4表示其他
    */
   Reason?: number
 }
@@ -2945,7 +2946,7 @@ export interface ModifyWafAutoDenyRulesRequest {
    */
   DenyTimeThreshold: number
   /**
-   * 自动封禁状态
+   * 自动封禁状态，0表示关闭，1表示打开
    */
   DefenseStatus: number
 }
@@ -3443,7 +3444,7 @@ export interface AddDomainWhiteRuleRequest {
    */
   Function?: string
   /**
-   * 规则的开关
+   * 规则的开关，0表示规则关闭，1表示规则打开
    */
   Status?: number
 }

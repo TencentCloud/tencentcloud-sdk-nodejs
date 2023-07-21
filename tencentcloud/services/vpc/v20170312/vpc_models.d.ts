@@ -1844,11 +1844,11 @@ export interface DescribeNatGatewaySourceIpTranslationNatRulesRequest {
  */
 export interface DescribeNatGatewaysRequest {
     /**
-     * NAT网关统一 ID，形如：`nat-123xx454`。
+     * NAT网关统一 ID，形如：`nat-123xx454`。每次请求的实例上限为100。参数不支持同时指定NatGatewayIds和Filters。
      */
     NatGatewayIds?: Array<string>;
     /**
-     * 过滤条件，参数不支持同时指定NatGatewayIds和Filters。
+     * 过滤条件，参数不支持同时指定NatGatewayIds和Filters。每次请求的Filters的上限为10，Filter.Values的上限为5。
   <li>nat-gateway-id - String - （过滤条件）协议端口模板实例ID，形如：`nat-123xx454`。</li>
   <li>vpc-id - String - （过滤条件）私有网络 唯一ID，形如：`vpc-123xx454`。</li>
   <li>nat-gateway-name - String - （过滤条件）协议端口模板实例ID，形如：`test_nat`。</li>
@@ -2705,7 +2705,7 @@ export interface DescribeNatGatewayDestinationIpPortTranslationNatRulesRequest {
     NatGatewayIds?: Array<string>;
     /**
      * 过滤条件:
-  参数不支持同时指定NatGatewayIds和Filters。
+  参数不支持同时指定NatGatewayIds和Filters。每次请求的Filters的上限为10，Filter.Values的上限为5
   <li> nat-gateway-id，NAT网关的ID，如`nat-0yi4hekt`</li>
   <li> vpc-id，私有网络VPC的ID，如`vpc-0yi4hekt`</li>
   <li> public-ip-address， 弹性IP，如`139.199.232.238`。</li>
@@ -4096,11 +4096,11 @@ export interface DescribeNatGatewayDestinationIpPortTranslationNatRulesResponse 
     /**
      * NAT网关端口转发规则对象数组。
      */
-    NatGatewayDestinationIpPortTranslationNatRuleSet: Array<NatGatewayDestinationIpPortTranslationNatRule>;
+    NatGatewayDestinationIpPortTranslationNatRuleSet?: Array<NatGatewayDestinationIpPortTranslationNatRule>;
     /**
      * 符合条件的NAT网关端口转发规则对象数目。
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -12264,11 +12264,11 @@ export interface DescribeNatGatewaysResponse {
     /**
      * NAT网关对象数组。
      */
-    NatGatewaySet: Array<NatGateway>;
+    NatGatewaySet?: Array<NatGateway>;
     /**
      * 符合条件的NAT网关对象个数。
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */

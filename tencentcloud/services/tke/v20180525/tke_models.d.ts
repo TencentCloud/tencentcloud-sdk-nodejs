@@ -5555,7 +5555,7 @@ export interface CreateClusterNodePoolResponse {
     /**
      * 节点池id
      */
-    NodePoolId: string;
+    NodePoolId?: string;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -8301,7 +8301,7 @@ export interface InstanceAdvancedSettings {
      */
     DesiredPodNumber: number;
     /**
-     * GPU驱动相关参数
+     * GPU驱动相关参数,相关的GPU参数获取:https://cloud.tencent.com/document/api/213/15715
   注意：此字段可能返回 null，表示取不到有效值。
      */
     GPUArgs: GPUArgs;

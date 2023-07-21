@@ -493,144 +493,149 @@ export interface AgentDealNewElem {
     /**
      * 订单自增 ID【请勿依赖该字段作为唯一标识】
      */
-    DealId: string;
+    DealId?: string;
     /**
      * 订单号【订单唯一键】
      */
-    DealName: string;
+    DealName?: string;
     /**
      * 商品类型 ID
      */
-    GoodsCategoryId: string;
+    GoodsCategoryId?: string;
     /**
      * 订单所有者
      */
-    OwnerUin: string;
+    OwnerUin?: string;
     /**
      * 订单所有者对应 appId
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    AppId: string;
+    AppId?: string;
     /**
      * 商品数量
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    GoodsNum: string;
+    GoodsNum?: string;
     /**
      * 价格详情
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    GoodsPrice: DealGoodsPriceNewElem;
+    GoodsPrice?: DealGoodsPriceNewElem;
     /**
      * 下单人
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Creater: string;
+    Creater?: string;
     /**
      * 下单时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CreatTime: string;
+    CreatTime?: string;
     /**
      * 支付结束时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    PayEndTime: string;
+    PayEndTime?: string;
     /**
      * 扣费流水号
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    BillId: string;
+    BillId?: string;
     /**
      * 支付人
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Payer: string;
+    Payer?: string;
     /**
      * 订单状态，中文描述
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DealStatus: string;
+    DealStatus?: string;
     /**
      * 订单的状态(1：未支付;2：已支付;3：发货中;4：已发货;5：发货失败;6：已退款;7：已关单;8：订单过期;9：订单已失效;10：产品已失效;11：代付拒绝;12：支付中)
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Status: string;
+    Status?: string;
     /**
      * 产品名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    GoodsName: string;
+    GoodsName?: string;
     /**
      * 客户备注
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ClientRemark: string;
+    ClientRemark?: string;
     /**
      * 订单操作类型，"purchase":"新购","upgrade":"升配","upConvertExpire":"升配","downgrade":"降配","downConvertExpire":"降配","renew":"续费","refund":"退货","modifyNetworkMode":"调整带宽模式","modifyNetworkSize":"调整带宽大小","preMoveOut":"资源迁出","preMoveIn":"资源迁入","preToPost":"包年包月转按量","modify":"变配","postMoveOut":"资源迁出","postMoveIn":"资源迁入","recoverRefundForward":"调账补偿","recoverPayReserve":"调账补偿","recoverPayForward":"调账扣费","recoverRefundReserve":"调账扣费"
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ActionType: string;
+    ActionType?: string;
     /**
      * 代金券抵扣金额，单位分
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    VoucherDecline: string;
+    VoucherDecline?: string;
     /**
      * 大订单号
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    BigDealId: string;
+    BigDealId?: string;
     /**
      * 客户类型（new：自拓；old：官网；assign：指派；direct：直销；direct_newopp：直销(新商机)）
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ClientType: string;
+    ClientType?: string;
     /**
      * 项目类型（self：自拓；repeat：直销；platform：官网合作）
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ProjectType: string;
+    ProjectType?: string;
     /**
      * 业务员账号ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SalesUin: string;
+    SalesUin?: string;
     /**
      * 支付方式，0：自付；1：代付
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    PayerMode: string;
+    PayerMode?: string;
     /**
      * 活动ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ActivityId: string;
+    ActivityId?: string;
     /**
      * 订单过期时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    OverdueTime: string;
+    OverdueTime?: string;
     /**
      * 产品详情
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ProductInfo: Array<ProductInfoElem>;
+    ProductInfo?: Array<ProductInfoElem>;
     /**
      * 付款方式
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    PaymentMethod: string;
+    PaymentMethod?: string;
     /**
      * 订单更新时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    UpdateTime: string;
+    UpdateTime?: string;
     /**
      * 资源id
   注意：此字段可能返回 null，表示取不到有效值。
      */
     ResourceIds?: Array<string>;
+    /**
+     * 退款单的原订单信息。当前仅 DescribeClientDealsByCache 接口会返回该字段
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RefundMap?: Array<RefundMap>;
 }
 /**
  * DescribeAgentClients请求参数结构体
@@ -1088,6 +1093,21 @@ export interface AgentPayDealsResponse {
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * 退款单关联的原始订单信息
+ */
+export interface RefundMap {
+    /**
+     * 退款单关联的原始子订单号
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DealName?: string;
+    /**
+     * 退款金额，单位分
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RefundAmount?: number;
 }
 /**
  * 代理商业务员信息

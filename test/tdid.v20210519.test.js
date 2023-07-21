@@ -68,16 +68,6 @@ it("tdid.v20210519.CreateTDid", async function () {
     }
 })
 
-it("tdid.v20210519.GetCredentialCptRank", async function () {
-    try {
-       const data = await client.GetCredentialCptRank({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("tdid.v20210519.CreateCredential", async function () {
     try {
        const data = await client.CreateCredential({})
@@ -98,9 +88,9 @@ it("tdid.v20210519.CreateTDidByPublicKey", async function () {
     }
 })
 
-it("tdid.v20210519.GetConsortiumList", async function () {
+it("tdid.v20210519.GetCredentialStatus", async function () {
     try {
-       const data = await client.GetConsortiumList({})
+       const data = await client.GetCredentialStatus({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -138,19 +128,9 @@ it("tdid.v20210519.AddLabel", async function () {
     }
 })
 
-it("tdid.v20210519.GetCredentialStatus", async function () {
+it("tdid.v20210519.RegisterCpt", async function () {
     try {
-       const data = await client.GetCredentialStatus({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("tdid.v20210519.GetConsortiumClusterList", async function () {
-    try {
-       const data = await client.GetConsortiumClusterList({})
+       const data = await client.RegisterCpt({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -181,16 +161,6 @@ it("tdid.v20210519.GetAuthorityIssuer", async function () {
 it("tdid.v20210519.SetCredentialStatus", async function () {
     try {
        const data = await client.SetCredentialStatus({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("tdid.v20210519.RegisterCpt", async function () {
-    try {
-       const data = await client.RegisterCpt({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

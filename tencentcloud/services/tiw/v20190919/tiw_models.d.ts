@@ -2224,6 +2224,21 @@ export interface DescribeTranscodeResponse {
      */
     Ext?: string;
     /**
+     * 文档转码任务创建时间，单位s
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CreateTime?: number;
+    /**
+     * 文档转码任务分配时间，单位s
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AssignTime?: number;
+    /**
+     * 文档转码任务完成时间，单位s
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    FinishedTime?: number;
+    /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;

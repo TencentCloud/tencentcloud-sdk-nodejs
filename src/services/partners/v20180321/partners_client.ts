@@ -58,6 +58,7 @@ import {
   AuditApplyClientResponse,
   DescribeAgentBillsRequest,
   AgentPayDealsResponse,
+  RefundMap,
   AgentSalesmanElem,
   DescribeClientBalanceNewRequest,
   DealGoodsPriceNewElem,

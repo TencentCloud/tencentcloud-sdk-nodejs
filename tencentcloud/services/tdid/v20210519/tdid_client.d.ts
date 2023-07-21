@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { CreateTDidRequest, CreateSelectiveCredentialRequest, CreateTDidByPrivateKeyResponse, CheckChainResponse, CreateTDidByPublicKeyRequest, CreateCredentialResponse, CheckChainRequest, GetAuthorityIssuerRequest, GetConsortiumListRequest, CreateCredentialRequest, GetDidDocumentRequest, GetConsortiumListResponse, GetCredentialStatusRequest, GetAgencyTDidResponse, AddLabelResponse, VerifyCredentialResponse, SetCredentialStatusResponse, GetCptInfoResponse, GetCredentialCptRankResponse, GetConsortiumClusterListResponse, AddLabelRequest, GetAuthorityIssuerResponse, GetDidDocumentResponse, CreateTDidResponse, CreateSelectiveCredentialResponse, GetAgencyTDidRequest, CreateTDidByPublicKeyResponse, GetCredentialCptRankRequest, RegisterCptRequest, VerifyCredentialRequest, GetConsortiumClusterListRequest, CreateTDidByPrivateKeyRequest, SetCredentialStatusRequest, GetCptInfoRequest, GetCredentialStatusResponse, RegisterCptResponse } from "./tdid_models";
+import { CreateTDidRequest, CreateSelectiveCredentialRequest, CreateTDidByPrivateKeyResponse, CheckChainResponse, CreateTDidByPublicKeyRequest, CreateCredentialResponse, CheckChainRequest, GetAuthorityIssuerRequest, CreateCredentialRequest, GetDidDocumentRequest, GetCredentialStatusRequest, GetAgencyTDidResponse, AddLabelResponse, VerifyCredentialResponse, SetCredentialStatusResponse, GetCptInfoResponse, AddLabelRequest, GetAuthorityIssuerResponse, GetDidDocumentResponse, CreateTDidResponse, CreateSelectiveCredentialResponse, GetAgencyTDidRequest, CreateTDidByPublicKeyResponse, RegisterCptRequest, CreateTDidByPrivateKeyRequest, VerifyCredentialRequest, SetCredentialStatusRequest, GetCptInfoRequest, GetCredentialStatusResponse, RegisterCptResponse } from "./tdid_models";
 /**
  * tdid client
  * @class
@@ -39,12 +39,6 @@ export declare class Client extends AbstractClient {
      */
     CreateTDid(req: CreateTDidRequest, cb?: (error: string, rep: CreateTDidResponse) => void): Promise<CreateTDidResponse>;
     /**
-     * 下线已有内测接口，待上线正式版本的接口
-
-凭证颁发按机构排行
-     */
-    GetCredentialCptRank(req: GetCredentialCptRankRequest, cb?: (error: string, rep: GetCredentialCptRankResponse) => void): Promise<GetCredentialCptRankResponse>;
-    /**
      * 该接口不再使用
 
 创建凭证
@@ -57,11 +51,11 @@ export declare class Client extends AbstractClient {
      */
     CreateTDidByPublicKey(req: CreateTDidByPublicKeyRequest, cb?: (error: string, rep: CreateTDidByPublicKeyResponse) => void): Promise<CreateTDidByPublicKeyResponse>;
     /**
-     * 下线已有内测接口，待上线正式版本的接口
+     * 该接口不再使用
 
-获取联盟列表
+获取凭证链上状态信息
      */
-    GetConsortiumList(req?: GetConsortiumListRequest, cb?: (error: string, rep: GetConsortiumListResponse) => void): Promise<GetConsortiumListResponse>;
+    GetCredentialStatus(req: GetCredentialStatusRequest, cb?: (error: string, rep: GetCredentialStatusResponse) => void): Promise<GetCredentialStatusResponse>;
     /**
      * 该接口已废弃
 
@@ -84,15 +78,9 @@ DID添加标签
     /**
      * 该接口不再使用
 
-获取凭证链上状态信息
+凭证模版新建
      */
-    GetCredentialStatus(req: GetCredentialStatusRequest, cb?: (error: string, rep: GetCredentialStatusResponse) => void): Promise<GetCredentialStatusResponse>;
-    /**
-     * 下线已有内测接口，待上线正式版本的接口
-
-获取联盟bcos网络列表
-     */
-    GetConsortiumClusterList(req: GetConsortiumClusterListRequest, cb?: (error: string, rep: GetConsortiumClusterListResponse) => void): Promise<GetConsortiumClusterListResponse>;
+    RegisterCpt(req: RegisterCptRequest, cb?: (error: string, rep: RegisterCptResponse) => void): Promise<RegisterCptResponse>;
     /**
      * 该接口不再使用
 
@@ -111,10 +99,4 @@ DID添加标签
 设置凭证链上状态
      */
     SetCredentialStatus(req: SetCredentialStatusRequest, cb?: (error: string, rep: SetCredentialStatusResponse) => void): Promise<SetCredentialStatusResponse>;
-    /**
-     * 该接口不再使用
-
-凭证模版新建
-     */
-    RegisterCpt(req: RegisterCptRequest, cb?: (error: string, rep: RegisterCptResponse) => void): Promise<RegisterCptResponse>;
 }

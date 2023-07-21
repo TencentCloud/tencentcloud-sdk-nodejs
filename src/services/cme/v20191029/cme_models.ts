@@ -3426,6 +3426,10 @@ export interface MediaCastProjectInfo {
    * 项目结束时间。采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。如果项目还在运行中，该字段为空。
    */
   StopTime?: string
+  /**
+   * 推流时长，单位：秒。项目结束后，返回上次项目运行时的推流时长。如果项目是 Working 状态，返回的时长是0。
+   */
+  Duration?: number
 }
 
 /**

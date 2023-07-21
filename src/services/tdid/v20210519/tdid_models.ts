@@ -117,16 +117,6 @@ export interface CheckChainResponse {
 }
 
 /**
- * 创建凭证第二个
- */
-export interface TransactionArg {
-  /**
-   * 凭证did
-   */
-  InvokerTDid: string
-}
-
-/**
  * CreateTDidByPublicKey请求参数结构体
  */
 export interface CreateTDidByPublicKeyRequest {
@@ -191,53 +181,6 @@ export interface GetAuthorityIssuerRequest {
 }
 
 /**
- * 验证凭证参数值
- */
-export interface VerifyFunctionArg {
-  /**
-   * CPT ID
-   */
-  CptId: number
-  /**
-   * issuer did
-   */
-  Issuer: string
-  /**
-   * 过期时间
-   */
-  ExpirationDate: number
-  /**
-   * 声明
-   */
-  ClaimJson: string
-  /**
-   * 颁发时间
-   */
-  IssuanceDate: number
-  /**
-   * context值
-   */
-  Context: string
-  /**
-   * id值
-   */
-  Id: string
-  /**
-   * 签名值
-   */
-  Proof: Proof
-  /**
-   * type值
-   */
-  Type: Array<string>
-}
-
-/**
- * GetConsortiumList请求参数结构体
- */
-export type GetConsortiumListRequest = null
-
-/**
  * CreateCredential请求参数结构体
  */
 export interface CreateCredentialRequest {
@@ -267,34 +210,6 @@ export interface GetDidDocumentRequest {
    * tdid
    */
   Did: string
-}
-
-/**
- * GetConsortiumList返回参数结构体
- */
-export interface GetConsortiumListResponse {
-  /**
-   * 联盟列表
-   */
-  ConsortiumList: Array<ConsortiumItem>
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * 联盟信息
- */
-export interface ConsortiumItem {
-  /**
-   * 联盟id
-   */
-  Id: number
-  /**
-   * 联盟名称
-   */
-  Name: string
 }
 
 /**
@@ -382,57 +297,39 @@ export interface GetCptInfoResponse {
 }
 
 /**
- * 模板颁发量排名
+ * did详情
  */
-export interface CptIssueRank {
+export interface Identity {
   /**
-   * 模板名称
+   * 账户标识符
    */
-  CptName: string
+  AccountIdentifier: string
   /**
-   * 名次
+   * 链ID
    */
-  Rank: number
+  ChainID: string
   /**
-   * 颁发量
+   * 完整tdid
    */
-  Count: number
+  Did: string
   /**
-   * 应用名称
+   * 群组ID
    */
-  ApplyName: string
+  GroupId: number
   /**
-   * 应用ID
+   * 群组名称
    */
-  ApplyId: number
+  GroupName: string
 }
 
 /**
- * GetCredentialCptRank返回参数结构体
+ * 创建凭证第二个
  */
-export interface GetCredentialCptRankResponse {
+export interface TransactionArg {
   /**
-   * Rank集合
+   * 凭证did
    */
-  RankIssueResult: Array<CptIssueRank>
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * GetConsortiumClusterList返回参数结构体
- */
-export interface GetConsortiumClusterListResponse {
-  /**
-   * 网络列表
-   */
-  ClusterList: Array<BcosClusterItem>
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  InvokerTDid: string
 }
 
 /**
@@ -558,24 +455,6 @@ export interface CreateTDidByPublicKeyResponse {
 }
 
 /**
- * GetCredentialCptRank请求参数结构体
- */
-export interface GetCredentialCptRankRequest {
-  /**
-   * 开始时间（支持到天 2021-4-23）
-   */
-  StartTime: string
-  /**
-   * 结束时间（支持到天 2021-4-23）
-   */
-  EndTime: string
-  /**
-   * 网络ID
-   */
-  ClusterId?: string
-}
-
-/**
  * RegisterCpt请求参数结构体
  */
 export interface RegisterCptRequest {
@@ -624,23 +503,45 @@ export interface Proof {
 }
 
 /**
- * VerifyCredential请求参数结构体
+ * 验证凭证参数值
  */
-export interface VerifyCredentialRequest {
+export interface VerifyFunctionArg {
   /**
-   * 参数集合
+   * CPT ID
    */
-  FunctionArg: VerifyFunctionArg
-}
-
-/**
- * GetConsortiumClusterList请求参数结构体
- */
-export interface GetConsortiumClusterListRequest {
+  CptId: number
   /**
-   * 联盟id
+   * issuer did
    */
-  ConsortiumId: number
+  Issuer: string
+  /**
+   * 过期时间
+   */
+  ExpirationDate: number
+  /**
+   * 声明
+   */
+  ClaimJson: string
+  /**
+   * 颁发时间
+   */
+  IssuanceDate: number
+  /**
+   * context值
+   */
+  Context: string
+  /**
+   * id值
+   */
+  Id: string
+  /**
+   * 签名值
+   */
+  Proof: Proof
+  /**
+   * type值
+   */
+  Type: Array<string>
 }
 
 /**
@@ -684,69 +585,13 @@ export interface CreateTDidByPrivateKeyRequest {
 }
 
 /**
- * bcos网络信息
+ * VerifyCredential请求参数结构体
  */
-export interface BcosClusterItem {
+export interface VerifyCredentialRequest {
   /**
-   * 网络索引id
+   * 参数集合
    */
-  ChainId: number
-  /**
-   * 网络名称
-   */
-  ChainName: string
-  /**
-   * 机构数量
-   */
-  AgencyCount: number
-  /**
-   * 联盟id
-   */
-  ConsortiumId: number
-  /**
-   * 创建时间
-   */
-  CreateTime: string
-  /**
-   * 过期时间
-   */
-  ExpireTime: string
-  /**
-   * 网络状态
-   */
-  ChainStatus: number
-  /**
-   * 资源 id
-   */
-  ResourceId: string
-  /**
-   * 集群id
-   */
-  ClusterId: string
-  /**
-   * 组织名称
-   */
-  ConsortiumName: string
-  /**
-   * 机构id
-   */
-  AgencyId: number
-  /**
-   * 续费状态
-   */
-  AutoRenewFlag: number
-  /**
-   * 网络模式
-   */
-  TotalNetworkNode: number
-  /**
-   * 创建节点数
-   */
-  TotalCreateNode: number
-  /**
-   * 总群组数量
-   */
-  TotalGroups: number
+  FunctionArg: VerifyFunctionArg
 }
 
 /**
@@ -767,32 +612,6 @@ export interface GetCptInfoRequest {
    * Cpt索引
    */
   CptIndex: number
-}
-
-/**
- * did详情
- */
-export interface Identity {
-  /**
-   * 账户标识符
-   */
-  AccountIdentifier: string
-  /**
-   * 链ID
-   */
-  ChainID: string
-  /**
-   * 完整tdid
-   */
-  Did: string
-  /**
-   * 群组ID
-   */
-  GroupId: number
-  /**
-   * 群组名称
-   */
-  GroupName: string
 }
 
 /**

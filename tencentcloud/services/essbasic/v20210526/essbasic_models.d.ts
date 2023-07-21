@@ -2236,6 +2236,15 @@ export interface CreateSignUrlsRequest {
      * @deprecated
      */
     Operator?: UserInfo;
+    /**
+     * 生成的签署链接在签署过程隐藏的按钮列表, 可以设置隐藏的按钮列表如下
+  
+  0:合同签署页面更多操作按钮
+  1:合同签署页面更多操作的拒绝签署按钮
+  2:合同签署页面更多操作的转他人处理按钮
+  3:签署成功页的查看详情按钮
+     */
+    Hides?: Array<number>;
 }
 /**
  * ChannelCreateMultiFlowSignQRCode请求参数结构体

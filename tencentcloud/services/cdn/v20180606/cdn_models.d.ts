@@ -5819,12 +5819,12 @@ export interface DescribePushTasksResponse {
      * 预热历史记录
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    PushLogs: Array<PushTask>;
+    PushLogs?: Array<PushTask>;
     /**
      * 任务总数，用于分页
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -9339,7 +9339,7 @@ export interface DescribePushTasksRequest {
      */
     Limit?: number;
     /**
-     * 指定地区查询预热纪录
+     * 指定地区查询预热记录
   mainland：境内
   overseas：境外
   global：全球
