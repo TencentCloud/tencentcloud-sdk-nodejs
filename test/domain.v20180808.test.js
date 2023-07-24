@@ -118,6 +118,16 @@ it("domain.v20180808.DeleteTemplate", async function () {
     }
 })
 
+it("domain.v20180808.CreateDomainRedemption", async function () {
+    try {
+       const data = await client.CreateDomainRedemption({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("domain.v20180808.CheckDomain", async function () {
     try {
        const data = await client.CheckDomain({})

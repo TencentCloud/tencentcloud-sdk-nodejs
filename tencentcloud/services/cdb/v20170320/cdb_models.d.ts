@@ -256,52 +256,6 @@ export interface CreateCdbProxyResponse {
     RequestId?: string;
 }
 /**
- * proxy读写分离信息
- */
-export interface RWInfo {
-    /**
-     * 代理实例数量
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    InstCount: number;
-    /**
-     * 权重分配模式；
-  系统自动分配："system"， 自定义："custom"
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    WeightMode: string;
-    /**
-     * 是否开启延迟剔除
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    IsKickOut: boolean;
-    /**
-     * 最小保留数
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    MinCount: number;
-    /**
-     * 延迟剔除阈值
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    MaxDelay: number;
-    /**
-     * 是否开启故障转移
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    FailOver: boolean;
-    /**
-     * 是否自动添加RO
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    AutoAddRo: boolean;
-    /**
-     * 代理实例信息
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    RWInstInfo: RWInstanceInfo;
-}
-/**
  * 实例可回档时间范围
  */
 export interface InstanceRollbackRangeTime {
@@ -659,10 +613,6 @@ export interface DescribeSupportedPrivilegesRequest {
      */
     InstanceId: string;
 }
-/**
- * 代理实例信息
- */
-export declare type RWInstanceInfo = null;
 /**
  * DescribeParamTemplateInfo请求参数结构体
  */
@@ -1351,50 +1301,6 @@ export interface BackupConfig {
     Vport: number;
 }
 /**
- * DescribeCDBProxy返回参数结构体
- */
-export interface DescribeCDBProxyResponse {
-    /**
-     * 代理组基本信息
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    BaseGroup: BaseGroupInfo;
-    /**
-     * 代理组地址信息
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Address: Address;
-    /**
-     * 代理组节点信息
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ProxyNode: ProxyNodeInfo;
-    /**
-     * 读写分析信息
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    RWInstInfo: RWInfo;
-    /**
-     * 连接池信息
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ConnectionPoolInfo: ConnectionPoolInfo;
-    /**
-     * 代理数量
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Count: number;
-    /**
-     * 代理信息
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ProxyGroup: Array<ProxyGroup>;
-    /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
-/**
  * 权重分配规则
  */
 export interface Rule {
@@ -1638,35 +1544,6 @@ export interface OpenAuditServiceResponse {
     RequestId?: string;
 }
 /**
- * ModifyCDBProxyVipVPort请求参数结构体
- */
-export interface ModifyCDBProxyVipVPortRequest {
-    /**
-     * 代理组ID
-     */
-    ProxyGroupId: string;
-    /**
-     * 私有网络ID
-     */
-    UniqVpcId: string;
-    /**
-     * 私有网络子网ID
-     */
-    UniqSubnetId: string;
-    /**
-     * 目标IP
-     */
-    DstIp?: string;
-    /**
-     * 目标端口
-     */
-    DstPort?: number;
-    /**
-     * 旧IP回收时间 单位小时
-     */
-    ReleaseDuration?: number;
-}
-/**
  * DescribeBinlogBackupOverview返回参数结构体
  */
 export interface DescribeBinlogBackupOverviewResponse {
@@ -1727,29 +1604,6 @@ export interface SwitchDBInstanceMasterSlaveRequest {
      * 是否时间窗内切换。默认为 False，即不在时间窗内切换。注意，如果设置了 ForceSwitch 参数为 True，则该参数不生效。
      */
     WaitSwitch?: boolean;
-}
-/**
- * ModifyCDBProxyConnectionPool请求参数结构体
- */
-export interface ModifyCDBProxyConnectionPoolRequest {
-    /**
-     * 数据库代理ID
-     */
-    ProxyGroupId: string;
-    /**
-     * 是否开启连接池，true：开启连接池；
-                               false：关闭连接池。
-     */
-    OpenConnectionPool: boolean;
-    /**
-     * 连接池类型，
-  通过DescribeProxyConnectionPoolConf获取连接池类型值
-     */
-    ConnectionPoolType?: string;
-    /**
-     * 连接保留阈值：单位（秒）
-     */
-    PoolConnectionTimeOut?: number;
 }
 /**
  * ModifyCdbProxyAddressVipAndVPort请求参数结构体
@@ -2107,34 +1961,40 @@ export interface ReleaseResult {
     Message: string;
 }
 /**
- * 数据代理组信息
+ * CreateAuditLogFile请求参数结构体
  */
-export interface ProxyGroups {
+export interface CreateAuditLogFileRequest {
     /**
-     * 代理基本信息
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 实例 ID，与云数据库控制台页面中显示的实例 ID 相同。
      */
-    BaseGroup: BaseGroupInfo;
+    InstanceId: string;
     /**
-     * 代理地址信息
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 开始时间。
      */
-    Address: Array<Address>;
+    StartTime: string;
     /**
-     * 代理连接池信息
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 结束时间。
      */
-    ConnectionPoolInfo: ConnectionPoolInfo;
+    EndTime: string;
     /**
-     * 代理节点信息
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 排序方式。支持值包括："ASC" - 升序，"DESC" - 降序。
      */
-    ProxyNode: Array<ProxyNodeInfo>;
+    Order?: string;
     /**
-     * 代理路由信息
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 排序字段。支持值包括：
+  "timestamp" - 时间戳；
+  "affectRows" - 影响行数；
+  "execTime" - 执行时间。
      */
-    RWInstInfo: RWInfos;
+    OrderBy?: string;
+    /**
+     * 已废弃。
+     */
+    Filter?: AuditLogFilter;
+    /**
+     * 过滤条件。可按设置的过滤条件过滤日志。
+     */
+    LogFilter?: Array<InstanceAuditLogFilters>;
 }
 /**
  * 审计规则
@@ -2433,36 +2293,6 @@ export interface DescribeDefaultParamsRequest {
      * 参数模板引擎，默认值：InnoDB
      */
     EngineType?: string;
-}
-/**
- * 地址
- */
-export interface Address {
-    /**
-     * 地址
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Vip: string;
-    /**
-     * 端口
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    VPort: number;
-    /**
-     * 私有网络ID
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    UniqVpcId: string;
-    /**
-     * 私有网络子网ID
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    UniqSubnet: string;
-    /**
-     * 描述
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Desc: string;
 }
 /**
  * proxy配置
@@ -2910,20 +2740,6 @@ export interface DescribeDBSwitchRecordsResponse {
     RequestId?: string;
 }
 /**
- * ModifyCDBProxyConnectionPool返回参数结构体
- */
-export interface ModifyCDBProxyConnectionPoolResponse {
-    /**
-     * 异步处理ID
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    AsyncRequestId: string;
-    /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
-/**
  * 标签结构
  */
 export interface Tag {
@@ -3344,13 +3160,17 @@ export interface CreateCloneInstanceResponse {
  */
 export declare type DescribeCdbZoneConfigRequest = null;
 /**
- * OpenDBInstanceGTID请求参数结构体
+ *  CPU负载
  */
-export interface OpenDBInstanceGTIDRequest {
+export interface DeviceCpuInfo {
     /**
-     * 实例 ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。
+     * 实例CPU平均使用率
      */
-    InstanceId: string;
+    Rate: Array<DeviceCpuRateInfo>;
+    /**
+     * 实例CPU监控数据
+     */
+    Load: Array<number>;
 }
 /**
  * DescribeAsyncRequestInfo请求参数结构体
@@ -3369,19 +3189,6 @@ export interface BalanceRoGroupLoadRequest {
      * RO 组的 ID，格式如：cdbrg-c1nl9rpv。
      */
     RoGroupId: string;
-}
-/**
- * QueryCDBProxy请求参数结构体
- */
-export interface QueryCDBProxyRequest {
-    /**
-     * 实例ID
-     */
-    InstanceId: string;
-    /**
-     * 代理ID
-     */
-    ProxyGroupId?: string;
 }
 /**
  * DescribeBackupOverview返回参数结构体
@@ -3433,23 +3240,17 @@ export interface DescribeLocalBinlogConfigRequest {
     InstanceId: string;
 }
 /**
- * QueryCDBProxy返回参数结构体
+ * 实例的标签信息
  */
-export interface QueryCDBProxyResponse {
+export interface TagsInfoOfInstance {
     /**
-     * 代理数量
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 实例Id
      */
-    Count: number;
+    InstanceId: string;
     /**
-     * 代理信息
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 标签信息
      */
-    ProxyGroup: Array<ProxyGroups>;
-    /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
+    Tags: Array<TagInfoUnit>;
 }
 /**
  * DescribeDeviceMonitorInfo请求参数结构体
@@ -3591,19 +3392,6 @@ export interface DescribeDeviceMonitorInfoResponse {
     RequestId?: string;
 }
 /**
- * 实例的标签信息
- */
-export interface TagsInfoOfInstance {
-    /**
-     * 实例Id
-     */
-    InstanceId: string;
-    /**
-     * 标签信息
-     */
-    Tags: Array<TagInfoUnit>;
-}
-/**
  * ResetRootAccount请求参数结构体
  */
 export interface ResetRootAccountRequest {
@@ -3688,26 +3476,6 @@ export interface VerifyRootAccountRequest {
      * 实例 ROOT 账号的密码。
      */
     Password: string;
-}
-/**
- * 数据库代理连接池规格配置
- */
-export interface PoolConf {
-    /**
-     * 连接池类型：SessionConnectionPool（会话级别连接池
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ConnectionPoolType: string;
-    /**
-     * 最大可保持连接阈值：单位（秒）
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    MaxPoolConnectionTimeOut: number;
-    /**
-     * 最小可保持连接阈值：单位（秒）
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    MinPoolConnectionTimeOut: number;
 }
 /**
  * DescribeCloneList返回参数结构体
@@ -4404,23 +4172,6 @@ export interface CreateDBInstanceRequest {
     Vips?: Array<string>;
 }
 /**
- * DescribeProxyConnectionPoolConf请求参数结构体
- */
-export interface DescribeProxyConnectionPoolConfRequest {
-    /**
-     * 实例ID
-     */
-    InstanceId: string;
-    /**
-     * 分页查询偏移量
-     */
-    Offset?: number;
-    /**
-     * 分页查询限制
-     */
-    Limit?: number;
-}
-/**
  * DescribeParamTemplates请求参数结构体
  */
 export interface DescribeParamTemplatesRequest {
@@ -4766,42 +4517,6 @@ export interface ResetRootAccountResponse {
     RequestId?: string;
 }
 /**
- * 代理节点信息
- */
-export interface ProxyNodeInfo {
-    /**
-     * 代理节点ID
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ProxyNodeId: string;
-    /**
-     * 节点当前连接数
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ProxyNodeConnections: number;
-    /**
-     * cup
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ProxyNodeCpu: number;
-    /**
-     * 内存
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ProxyNodeMem: number;
-    /**
-     * 节点状态：
-  init（申请中）
-  online（运行中）
-  offline（离线中）
-  destroy（已销毁）
-  recovering（故障恢复中）
-  error（节点故障）
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ProxyStatus: string;
-}
-/**
  * 数据库账号信息
  */
 export interface Account {
@@ -4928,26 +4643,6 @@ export interface AuditLogFilter {
      * mysql错误码
      */
     ErrCode?: Array<number>;
-}
-/**
- * 连接池信息
- */
-export interface ConnectionPoolInfo {
-    /**
-     * 是否开启了连接池
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ConnectionPool: boolean;
-    /**
-     * 连接池类型：SessionConnectionPool（会话级别连接池）
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ConnectionPoolType: string;
-    /**
-     * 连接池保持阈值：单位（秒）
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    PoolConnectionTimeOut: number;
 }
 /**
  * OpenDBInstanceGTID返回参数结构体
@@ -5145,15 +4840,6 @@ export interface ParameterDetail {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     IsNotSupportEdit?: boolean;
-}
-/**
- * ModifyCDBProxyVipVPort返回参数结构体
- */
-export interface ModifyCDBProxyVipVPortResponse {
-    /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
 }
 /**
  * SwitchForUpgrade请求参数结构体
@@ -6429,42 +6115,6 @@ export interface ModifyAccountHostRequest {
     NewHost: string;
 }
 /**
- * CreateAuditLogFile请求参数结构体
- */
-export interface CreateAuditLogFileRequest {
-    /**
-     * 实例 ID，与云数据库控制台页面中显示的实例 ID 相同。
-     */
-    InstanceId: string;
-    /**
-     * 开始时间。
-     */
-    StartTime: string;
-    /**
-     * 结束时间。
-     */
-    EndTime: string;
-    /**
-     * 排序方式。支持值包括："ASC" - 升序，"DESC" - 降序。
-     */
-    Order?: string;
-    /**
-     * 排序字段。支持值包括：
-  "timestamp" - 时间戳；
-  "affectRows" - 影响行数；
-  "execTime" - 执行时间。
-     */
-    OrderBy?: string;
-    /**
-     * 已废弃。
-     */
-    Filter?: AuditLogFilter;
-    /**
-     * 过滤条件。可按设置的过滤条件过滤日志。
-     */
-    LogFilter?: Array<InstanceAuditLogFilters>;
-}
-/**
  * CreateAuditRule请求参数结构体
  */
 export interface CreateAuditRuleRequest {
@@ -6718,52 +6368,6 @@ export interface DescribeTagsOfInstanceIdsRequest {
     Limit?: number;
 }
 /**
- * proxy读写分离信息
- */
-export interface RWInfos {
-    /**
-     * 代理实例数量
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    InstCount: number;
-    /**
-     * 权重分配模式；
-  系统自动分配："system"， 自定义："custom"
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    WeightMode: string;
-    /**
-     * 是否开启延迟剔除
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    IsKickOut: boolean;
-    /**
-     * 最小保留数
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    MinCount: number;
-    /**
-     * 延迟剔除阈值
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    MaxDelay: number;
-    /**
-     * 是否开启故障转移
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    FailOver: boolean;
-    /**
-     * 是否自动添加RO
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    AutoAddRo: boolean;
-    /**
-     * 代理实例信息
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    RWInstInfo: Array<RWInstanceInfo>;
-}
-/**
  * CloseCDBProxy返回参数结构体
  */
 export interface CloseCDBProxyResponse {
@@ -6877,19 +6481,6 @@ export interface SwitchForUpgradeResponse {
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
-}
-/**
- * DescribeCDBProxy请求参数结构体
- */
-export interface DescribeCDBProxyRequest {
-    /**
-     * 实例ID
-     */
-    InstanceId: string;
-    /**
-     * 代理组ID
-     */
-    ProxyGroupId?: string;
 }
 /**
  * DescribeAccountPrivileges请求参数结构体
@@ -7625,36 +7216,6 @@ export interface ModifyAccountMaxUserConnectionsRequest {
     MaxUserConnections: number;
 }
 /**
- * 数据代理组信息
- */
-export interface ProxyGroup {
-    /**
-     * 代理基本信息
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    BaseGroup: BaseGroupInfo;
-    /**
-     * 代理地址信息
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Address: Array<Address>;
-    /**
-     * 代理连接池信息
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ConnectionPoolInfo: ConnectionPoolInfo;
-    /**
-     * 代理节点信息
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ProxyNode: Array<ProxyNodeInfo>;
-    /**
-     * 代理路由信息
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    RWInstInfo: RWInfo;
-}
-/**
  * DeleteDeployGroups返回参数结构体
  */
 export interface DeleteDeployGroupsResponse {
@@ -8347,25 +7908,6 @@ export interface SecurityGroup {
     SecurityGroupRemark: string;
 }
 /**
- * DescribeProxyConnectionPoolConf返回参数结构体
- */
-export interface DescribeProxyConnectionPoolConfResponse {
-    /**
-     * 配置规格数量
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Count: number;
-    /**
-     * 连接池配置规格
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    PoolConf: PoolConf;
-    /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
-/**
  * OfflineIsolatedInstances请求参数结构体
  */
 export interface OfflineIsolatedInstancesRequest {
@@ -8493,17 +8035,13 @@ export interface CreateBackupResponse {
     RequestId?: string;
 }
 /**
- *  CPU负载
+ * OpenDBInstanceGTID请求参数结构体
  */
-export interface DeviceCpuInfo {
+export interface OpenDBInstanceGTIDRequest {
     /**
-     * 实例CPU平均使用率
+     * 实例 ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。
      */
-    Rate: Array<DeviceCpuRateInfo>;
-    /**
-     * 实例CPU监控数据
-     */
-    Load: Array<number>;
+    InstanceId: string;
 }
 /**
  * OpenDBInstanceEncryption返回参数结构体
@@ -8684,51 +8222,6 @@ export interface AddTimeWindowResponse {
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
-}
-/**
- * proxy代理组信息
- */
-export interface BaseGroupInfo {
-    /**
-     * 代理组ID
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ProxyGroupId: string;
-    /**
-     * 代理节点数
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    NodeCount: number;
-    /**
-     * 状态：发货中（init）运行中（online）下线中（offline）销毁中（destroy）
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Status: string;
-    /**
-     * 地域
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Region: string;
-    /**
-     * 可用区
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Zone: string;
-    /**
-     * 是否开启读写分离
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    OpenRW: boolean;
-    /**
-     * 当前代理版本
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    CurrentProxyVersion: string;
-    /**
-     * 支持升级版本
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    SupportUpgradeProxyVersion: string;
 }
 /**
  * AdjustCdbProxy返回参数结构体

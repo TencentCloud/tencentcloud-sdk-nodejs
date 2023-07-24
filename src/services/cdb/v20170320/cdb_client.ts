@@ -24,7 +24,6 @@ import {
   DescribeDatabasesRequest,
   CreateCdbProxyRequest,
   CreateCdbProxyResponse,
-  RWInfo,
   InstanceRollbackRangeTime,
   DescribeTablesResponse,
   ModifyBackupDownloadRestrictionResponse,
@@ -42,7 +41,6 @@ import {
   ModifyInstanceParamRequest,
   CreateParamTemplateRequest,
   DescribeSupportedPrivilegesRequest,
-  RWInstanceInfo,
   DescribeParamTemplateInfoRequest,
   ModifyCdbProxyAddressVipAndVPortResponse,
   DescribeDBInstancesRequest,
@@ -75,7 +73,6 @@ import {
   ProxyGroupInfo,
   AssociateSecurityGroupsResponse,
   BackupConfig,
-  DescribeCDBProxyResponse,
   Rule,
   AuditPolicy,
   ProxyNode,
@@ -84,10 +81,8 @@ import {
   UpgradeDBInstanceRequest,
   ModifyParamTemplateRequest,
   OpenAuditServiceResponse,
-  ModifyCDBProxyVipVPortRequest,
   DescribeBinlogBackupOverviewResponse,
   SwitchDBInstanceMasterSlaveRequest,
-  ModifyCDBProxyConnectionPoolRequest,
   ModifyCdbProxyAddressVipAndVPortRequest,
   ModifyAutoRenewFlagRequest,
   DeleteDeployGroupsRequest,
@@ -107,7 +102,7 @@ import {
   DescribeRollbackRangeTimeResponse,
   ModifyRoGroupInfoRequest,
   ReleaseResult,
-  ProxyGroups,
+  CreateAuditLogFileRequest,
   AuditRule,
   DescribeBinlogsRequest,
   DescribeCdbProxyInfoRequest,
@@ -122,7 +117,6 @@ import {
   DescribeBinlogsResponse,
   DescribeRoMinScaleRequest,
   DescribeDefaultParamsRequest,
-  Address,
   CustomConfig,
   SwitchDBInstanceMasterSlaveResponse,
   DescribeBackupsRequest,
@@ -144,7 +138,6 @@ import {
   SlaveInfo,
   DescribeDBSecurityGroupsRequest,
   DescribeDBSwitchRecordsResponse,
-  ModifyCDBProxyConnectionPoolResponse,
   Tag,
   CreateAuditLogFileResponse,
   ModifyCdbProxyParamResponse,
@@ -168,13 +161,12 @@ import {
   StopReplicationRequest,
   CreateCloneInstanceResponse,
   DescribeCdbZoneConfigRequest,
-  OpenDBInstanceGTIDRequest,
+  DeviceCpuInfo,
   DescribeAsyncRequestInfoRequest,
   BalanceRoGroupLoadRequest,
-  QueryCDBProxyRequest,
   DescribeBackupOverviewResponse,
   DescribeLocalBinlogConfigRequest,
-  QueryCDBProxyResponse,
+  TagsInfoOfInstance,
   DescribeDeviceMonitorInfoRequest,
   StopDBImportJobRequest,
   DescribeDBPriceRequest,
@@ -182,7 +174,6 @@ import {
   ModifyAccountPrivilegesResponse,
   StopRollbackRequest,
   DescribeDeviceMonitorInfoResponse,
-  TagsInfoOfInstance,
   ResetRootAccountRequest,
   DescribeDBInstanceConfigRequest,
   DescribeProxyCustomConfResponse,
@@ -190,7 +181,6 @@ import {
   SwitchDrInstanceToMasterResponse,
   ModifyDBInstanceNameResponse,
   VerifyRootAccountRequest,
-  PoolConf,
   DescribeCloneListResponse,
   DescribeDBInstanceConfigResponse,
   StartBatchRollbackRequest,
@@ -217,7 +207,6 @@ import {
   LocalBinlogConfig,
   InquiryPriceUpgradeInstancesResponse,
   CreateDBInstanceRequest,
-  DescribeProxyConnectionPoolConfRequest,
   DescribeParamTemplatesRequest,
   DescribeAccountPrivilegesResponse,
   DescribeAuditLogsRequest,
@@ -232,12 +221,10 @@ import {
   CreateDeployGroupResponse,
   MasterInfo,
   ResetRootAccountResponse,
-  ProxyNodeInfo,
   Account,
   ModifyNameOrDescByDpIdResponse,
   DescribeDBPriceResponse,
   AuditLogFilter,
-  ConnectionPoolInfo,
   OpenDBInstanceGTIDResponse,
   VerifyRootAccountResponse,
   DescribeDBInstanceRebootTimeResponse,
@@ -245,7 +232,6 @@ import {
   ModifyCdbProxyParamRequest,
   RoGroup,
   ParameterDetail,
-  ModifyCDBProxyVipVPortResponse,
   SwitchForUpgradeRequest,
   CreateDBInstanceHourResponse,
   DescribeBackupDownloadRestrictionResponse,
@@ -294,7 +280,6 @@ import {
   DescribeAuditRulesResponse,
   RoInstanceInfo,
   ModifyAccountHostRequest,
-  CreateAuditLogFileRequest,
   CreateAuditRuleRequest,
   DeviceCpuRateInfo,
   ModifyAccountPrivilegesRequest,
@@ -306,7 +291,6 @@ import {
   DescribeDBImportRecordsRequest,
   CreateDBImportJobResponse,
   DescribeTagsOfInstanceIdsRequest,
-  RWInfos,
   CloseCDBProxyResponse,
   StopReplicationResponse,
   UpgradeDBInstanceEngineVersionRequest,
@@ -316,7 +300,6 @@ import {
   ModifyDBInstanceProjectRequest,
   Bucket,
   SwitchForUpgradeResponse,
-  DescribeCDBProxyRequest,
   DescribeAccountPrivilegesRequest,
   CdbSellConfig,
   DescribeSupportedPrivilegesResponse,
@@ -351,7 +334,6 @@ import {
   ProxyAddress,
   CommonTimeWindow,
   ModifyAccountMaxUserConnectionsRequest,
-  ProxyGroup,
   DeleteDeployGroupsResponse,
   CdbSellType,
   DescribeTasksRequest,
@@ -377,7 +359,6 @@ import {
   ParamInfo,
   DescribeBackupDecryptionKeyResponse,
   SecurityGroup,
-  DescribeProxyConnectionPoolConfResponse,
   OfflineIsolatedInstancesRequest,
   InquiryPriceUpgradeInstancesRequest,
   ModifyInstanceParamResponse,
@@ -385,7 +366,7 @@ import {
   DescribeUploadedFilesResponse,
   InitDBInstancesRequest,
   CreateBackupResponse,
-  DeviceCpuInfo,
+  OpenDBInstanceGTIDRequest,
   OpenDBInstanceEncryptionResponse,
   CdbZoneDataResult,
   SqlFileInfo,
@@ -397,7 +378,6 @@ import {
   RenewDBInstanceResponse,
   TablePrivilege,
   AddTimeWindowResponse,
-  BaseGroupInfo,
   AdjustCdbProxyResponse,
   DescribeBackupEncryptionStatusRequest,
   IsolateDBInstanceRequest,
@@ -1038,18 +1018,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 当前接口已经废弃，请使用+AdjustCdbProxyAddress+进行替代。
-
-请求该接口配置数据库连接池；支持的连接池配置请求DescribeProxyConnectionPoolConf接口获取。
-     */
-  async ModifyCDBProxyConnectionPool(
-    req: ModifyCDBProxyConnectionPoolRequest,
-    cb?: (error: string, rep: ModifyCDBProxyConnectionPoolResponse) => void
-  ): Promise<ModifyCDBProxyConnectionPoolResponse> {
-    return this.request("ModifyCDBProxyConnectionPool", req, cb)
-  }
-
-  /**
    * 本接口(DescribeSlowLogs)用于获取云数据库实例的慢查询日志。
    */
   async DescribeSlowLogs(
@@ -1316,18 +1284,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteBackupResponse) => void
   ): Promise<DeleteBackupResponse> {
     return this.request("DeleteBackup", req, cb)
-  }
-
-  /**
-     * 当前接口已经废弃，请使用+ModifyCdbProxyAddressVipAndVPort+进行替代。
-
-修改数据库代理VIP或端口
-     */
-  async ModifyCDBProxyVipVPort(
-    req: ModifyCDBProxyVipVPortRequest,
-    cb?: (error: string, rep: ModifyCDBProxyVipVPortResponse) => void
-  ): Promise<ModifyCDBProxyVipVPortResponse> {
-    return this.request("ModifyCDBProxyVipVPort", req, cb)
   }
 
   /**
@@ -1638,18 +1594,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 接口已经废弃，请使用+DescribeCdbProxyInfo+进行替换。
-
-查询数据库代理（待下线，替换接口QueryCDBProxy）
-     */
-  async DescribeCDBProxy(
-    req: DescribeCDBProxyRequest,
-    cb?: (error: string, rep: DescribeCDBProxyResponse) => void
-  ): Promise<DescribeCDBProxyResponse> {
-    return this.request("DescribeCDBProxy", req, cb)
-  }
-
-  /**
    * 本接口(ModifyAccountDescription)用于修改云数据库账户的备注信息。
    */
   async ModifyAccountDescription(
@@ -1839,18 +1783,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 当前接口已经废弃，请使用+DescribeCdbProxyInfo+进行替代。
-
-查询代理详情
-     */
-  async QueryCDBProxy(
-    req: QueryCDBProxyRequest,
-    cb?: (error: string, rep: QueryCDBProxyResponse) => void
-  ): Promise<QueryCDBProxyResponse> {
-    return this.request("QueryCDBProxy", req, cb)
-  }
-
-  /**
    * 修改数据库代理地址VPC信息
    */
   async ModifyCdbProxyAddressVipAndVPort(
@@ -1868,18 +1800,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteAuditRuleResponse) => void
   ): Promise<DeleteAuditRuleResponse> {
     return this.request("DeleteAuditRule", req, cb)
-  }
-
-  /**
-     * 当前接口已经废弃，请使用+DescribeCdbProxyInfo+替代。
-
-获取数据库代理连接池相关规格配置
-     */
-  async DescribeProxyConnectionPoolConf(
-    req: DescribeProxyConnectionPoolConfRequest,
-    cb?: (error: string, rep: DescribeProxyConnectionPoolConfResponse) => void
-  ): Promise<DescribeProxyConnectionPoolConfResponse> {
-    return this.request("DescribeProxyConnectionPoolConf", req, cb)
   }
 
   /**

@@ -25,26 +25,21 @@ import {
   CheckChainResponse,
   CreateTDidByPublicKeyRequest,
   CreateCredentialResponse,
-  CheckChainRequest,
   GetAuthorityIssuerRequest,
   CreateCredentialRequest,
   GetDidDocumentRequest,
   GetCredentialStatusRequest,
-  GetAgencyTDidResponse,
-  AddLabelResponse,
   VerifyCredentialResponse,
   SetCredentialStatusResponse,
   GetCptInfoResponse,
-  Identity,
   TransactionArg,
-  AddLabelRequest,
+  CheckChainRequest,
   GetAuthorityIssuerResponse,
   GetDidDocumentResponse,
   CreateTDidResponse,
   CreateSelectiveCredentialResponse,
-  GetAgencyTDidRequest,
-  CreateTDidByPublicKeyResponse,
   RegisterCptRequest,
+  CreateTDidByPublicKeyResponse,
   Proof,
   VerifyFunctionArg,
   FunctionArg,
@@ -63,18 +58,6 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("tdid.tencentcloudapi.com", "2021-05-19", clientConfig)
-  }
-
-  /**
-     * 该接口不再使用
-
-检查区块链信息
-     */
-  async CheckChain(
-    req: CheckChainRequest,
-    cb?: (error: string, rep: CheckChainResponse) => void
-  ): Promise<CheckChainResponse> {
-    return this.request("CheckChain", req, cb)
   }
 
   /**
@@ -163,18 +146,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 该接口已废弃
-
-本机构DID详情
-     */
-  async GetAgencyTDid(
-    req: GetAgencyTDidRequest,
-    cb?: (error: string, rep: GetAgencyTDidResponse) => void
-  ): Promise<GetAgencyTDidResponse> {
-    return this.request("GetAgencyTDid", req, cb)
-  }
-
-  /**
      * 该接口不再使用
 
 新建DID根据私钥生成Tdid
@@ -187,16 +158,15 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 下线已有内测接口，待上线正式版本的接口
+     * 该接口不再使用
 
-DID添加标签
-
+检查区块链信息
      */
-  async AddLabel(
-    req: AddLabelRequest,
-    cb?: (error: string, rep: AddLabelResponse) => void
-  ): Promise<AddLabelResponse> {
-    return this.request("AddLabel", req, cb)
+  async CheckChain(
+    req: CheckChainRequest,
+    cb?: (error: string, rep: CheckChainResponse) => void
+  ): Promise<CheckChainResponse> {
+    return this.request("CheckChain", req, cb)
   }
 
   /**

@@ -18,14 +18,12 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
-  SnapshotOperationLog,
   ModifyDiskExtraPerformanceRequest,
   ModifyDiskAttributesResponse,
   DescribeDiskBackupsRequest,
   AutoSnapshotPolicy,
   DetailPrice,
-  DescribeSnapshotOperationLogsRequest,
-  ModifySnapshotsSharePermissionRequest,
+  CreateDiskBackupRequest,
   CopySnapshotCrossRegionsResponse,
   ModifyAutoSnapshotPolicyAttributeResponse,
   ModifyDiskBackupQuotaRequest,
@@ -36,7 +34,6 @@ import {
   ModifySnapshotsSharePermissionResponse,
   DeleteDiskBackupsRequest,
   InitializeDisksResponse,
-  DeleteDiskBackupsResponse,
   DescribeDiskStoragePoolRequest,
   DescribeDiskBackupsResponse,
   SnapshotCopyResult,
@@ -65,7 +62,7 @@ import {
   InquiryPriceRenewDisksRequest,
   DescribeSnapshotSharePermissionRequest,
   InquirePriceModifyDiskBackupQuotaRequest,
-  DescribeSnapshotOperationLogsResponse,
+  DeleteDiskBackupsResponse,
   DeleteSnapshotsRequest,
   ModifyDisksRenewFlagResponse,
   DeleteAutoSnapshotPoliciesResponse,
@@ -80,7 +77,6 @@ import {
   TerminateDisksRequest,
   CdcSize,
   DescribeInstancesDiskNumResponse,
-  DescribeDiskOperationLogsResponse,
   ResizeDiskRequest,
   ApplyDiskBackupRequest,
   ModifyDisksChargeTypeRequest,
@@ -99,10 +95,8 @@ import {
   Snapshot,
   CreateDisksResponse,
   AttachDisksResponse,
-  CreateDiskBackupRequest,
-  DiskOperationLog,
+  ModifySnapshotsSharePermissionRequest,
   BindAutoSnapshotPolicyResponse,
-  DescribeDiskOperationLogsRequest,
   DiskBackup,
   DescribeDisksRequest,
   DetachDisksResponse,
@@ -314,18 +308,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDiskBackupsResponse) => void
   ): Promise<DescribeDiskBackupsResponse> {
     return this.request("DescribeDiskBackups", req, cb)
-  }
-
-  /**
-     * 接口已废弃，切换至云审计接口。见https://tapd.woa.com/pro/prong/stories/view/1010114221880719007
-
-查询云盘操作日志功能已迁移至LookUpEvents接口（https://cloud.tencent.com/document/product/629/12359），本接口（DescribeDiskOperationLogs）即将下线，后续不再提供调用，请知悉。
-     */
-  async DescribeDiskOperationLogs(
-    req: DescribeDiskOperationLogsRequest,
-    cb?: (error: string, rep: DescribeDiskOperationLogsResponse) => void
-  ): Promise<DescribeDiskOperationLogsResponse> {
-    return this.request("DescribeDiskOperationLogs", req, cb)
   }
 
   /**
@@ -576,19 +558,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 接口已废弃，切换至云审计接口。见https://tapd.woa.com/pro/prong/stories/view/1010114221880719007
-
-查询快照操作日志功能已迁移至LookUpEvents接口（https://cloud.tencent.com/document/product/629/12359），本接口（DescribeSnapshotOperationLogs）即将下线，后续不再提供调用，请知悉。
-
-     */
-  async DescribeSnapshotOperationLogs(
-    req: DescribeSnapshotOperationLogsRequest,
-    cb?: (error: string, rep: DescribeSnapshotOperationLogsResponse) => void
-  ): Promise<DescribeSnapshotOperationLogsResponse> {
-    return this.request("DescribeSnapshotOperationLogs", req, cb)
-  }
-
-  /**
      * 本接口（ModifySnapshotsSharePermission）用于修改快照分享信息。
 
 分享快照后，被分享账户可以通过该快照创建云硬盘。
@@ -605,16 +574,17 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 本接口（DetachDisks）用于卸载云硬盘。
+     * 本接口（CreateSnapshot）用于对指定云盘创建快照。
 
-* 支持批量操作，卸载挂载在同一主机上的多块云盘。如果多块云盘中存在不允许卸载的云盘，则操作不执行，返回特定的错误码。
-* 本接口为异步接口，当请求成功返回时，云盘并未立即从主机卸载，可通过接口[DescribeDisks](/document/product/362/16315)来查询对应云盘的状态，如果云盘的状态由“ATTACHED”变为“UNATTACHED”，则为卸载成功。
+* 只有具有快照能力的云硬盘才能创建快照。云硬盘是否具有快照能力可由[DescribeDisks](/document/product/362/16315)接口查询，见SnapshotAbility字段。
+* 可创建快照数量限制见[产品使用限制](https://cloud.tencent.com/doc/product/362/5145)。
+* 当前支持将备份点转化为普通快照，转化之后可能会收取快照使用费用，备份点不保留，其占用的备份点配额也将被释放。
      */
-  async DetachDisks(
-    req: DetachDisksRequest,
-    cb?: (error: string, rep: DetachDisksResponse) => void
-  ): Promise<DetachDisksResponse> {
-    return this.request("DetachDisks", req, cb)
+  async CreateSnapshot(
+    req: CreateSnapshotRequest,
+    cb?: (error: string, rep: CreateSnapshotResponse) => void
+  ): Promise<CreateSnapshotResponse> {
+    return this.request("CreateSnapshot", req, cb)
   }
 
   /**
@@ -641,17 +611,16 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 本接口（CreateSnapshot）用于对指定云盘创建快照。
+     * 本接口（DetachDisks）用于卸载云硬盘。
 
-* 只有具有快照能力的云硬盘才能创建快照。云硬盘是否具有快照能力可由[DescribeDisks](/document/product/362/16315)接口查询，见SnapshotAbility字段。
-* 可创建快照数量限制见[产品使用限制](https://cloud.tencent.com/doc/product/362/5145)。
-* 当前支持将备份点转化为普通快照，转化之后可能会收取快照使用费用，备份点不保留，其占用的备份点配额也将被释放。
+* 支持批量操作，卸载挂载在同一主机上的多块云盘。如果多块云盘中存在不允许卸载的云盘，则操作不执行，返回特定的错误码。
+* 本接口为异步接口，当请求成功返回时，云盘并未立即从主机卸载，可通过接口[DescribeDisks](/document/product/362/16315)来查询对应云盘的状态，如果云盘的状态由“ATTACHED”变为“UNATTACHED”，则为卸载成功。
      */
-  async CreateSnapshot(
-    req: CreateSnapshotRequest,
-    cb?: (error: string, rep: CreateSnapshotResponse) => void
-  ): Promise<CreateSnapshotResponse> {
-    return this.request("CreateSnapshot", req, cb)
+  async DetachDisks(
+    req: DetachDisksRequest,
+    cb?: (error: string, rep: DetachDisksResponse) => void
+  ): Promise<DetachDisksResponse> {
+    return this.request("DetachDisks", req, cb)
   }
 
   /**

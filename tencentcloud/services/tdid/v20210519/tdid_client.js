@@ -30,14 +30,6 @@ class Client extends abstract_client_1.AbstractClient {
     /**
      * 该接口不再使用
 
-检查区块链信息
-     */
-    async CheckChain(req, cb) {
-        return this.request("CheckChain", req, cb);
-    }
-    /**
-     * 该接口不再使用
-
 凭证模版详情
      */
     async GetCptInfo(req, cb) {
@@ -93,14 +85,6 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("GetCredentialStatus", req, cb);
     }
     /**
-     * 该接口已废弃
-
-本机构DID详情
-     */
-    async GetAgencyTDid(req, cb) {
-        return this.request("GetAgencyTDid", req, cb);
-    }
-    /**
      * 该接口不再使用
 
 新建DID根据私钥生成Tdid
@@ -109,13 +93,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateTDidByPrivateKey", req, cb);
     }
     /**
-     * 下线已有内测接口，待上线正式版本的接口
+     * 该接口不再使用
 
-DID添加标签
-
+检查区块链信息
      */
-    async AddLabel(req, cb) {
-        return this.request("AddLabel", req, cb);
+    async CheckChain(req, cb) {
+        return this.request("CheckChain", req, cb);
     }
     /**
      * 该接口不再使用

@@ -1,18 +1,12 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { CreateTDidRequest, CreateSelectiveCredentialRequest, CreateTDidByPrivateKeyResponse, CheckChainResponse, CreateTDidByPublicKeyRequest, CreateCredentialResponse, CheckChainRequest, GetAuthorityIssuerRequest, CreateCredentialRequest, GetDidDocumentRequest, GetCredentialStatusRequest, GetAgencyTDidResponse, AddLabelResponse, VerifyCredentialResponse, SetCredentialStatusResponse, GetCptInfoResponse, AddLabelRequest, GetAuthorityIssuerResponse, GetDidDocumentResponse, CreateTDidResponse, CreateSelectiveCredentialResponse, GetAgencyTDidRequest, CreateTDidByPublicKeyResponse, RegisterCptRequest, CreateTDidByPrivateKeyRequest, VerifyCredentialRequest, SetCredentialStatusRequest, GetCptInfoRequest, GetCredentialStatusResponse, RegisterCptResponse } from "./tdid_models";
+import { CreateTDidRequest, CreateSelectiveCredentialRequest, CreateTDidByPrivateKeyResponse, CheckChainResponse, CreateTDidByPublicKeyRequest, CreateCredentialResponse, GetAuthorityIssuerRequest, CreateCredentialRequest, GetDidDocumentRequest, GetCredentialStatusRequest, VerifyCredentialResponse, SetCredentialStatusResponse, GetCptInfoResponse, CheckChainRequest, GetAuthorityIssuerResponse, GetDidDocumentResponse, CreateTDidResponse, CreateSelectiveCredentialResponse, RegisterCptRequest, CreateTDidByPublicKeyResponse, CreateTDidByPrivateKeyRequest, VerifyCredentialRequest, SetCredentialStatusRequest, GetCptInfoRequest, GetCredentialStatusResponse, RegisterCptResponse } from "./tdid_models";
 /**
  * tdid client
  * @class
  */
 export declare class Client extends AbstractClient {
     constructor(clientConfig: ClientConfig);
-    /**
-     * 该接口不再使用
-
-检查区块链信息
-     */
-    CheckChain(req: CheckChainRequest, cb?: (error: string, rep: CheckChainResponse) => void): Promise<CheckChainResponse>;
     /**
      * 该接口不再使用
 
@@ -57,24 +51,17 @@ export declare class Client extends AbstractClient {
      */
     GetCredentialStatus(req: GetCredentialStatusRequest, cb?: (error: string, rep: GetCredentialStatusResponse) => void): Promise<GetCredentialStatusResponse>;
     /**
-     * 该接口已废弃
-
-本机构DID详情
-     */
-    GetAgencyTDid(req: GetAgencyTDidRequest, cb?: (error: string, rep: GetAgencyTDidResponse) => void): Promise<GetAgencyTDidResponse>;
-    /**
      * 该接口不再使用
 
 新建DID根据私钥生成Tdid
      */
     CreateTDidByPrivateKey(req: CreateTDidByPrivateKeyRequest, cb?: (error: string, rep: CreateTDidByPrivateKeyResponse) => void): Promise<CreateTDidByPrivateKeyResponse>;
     /**
-     * 下线已有内测接口，待上线正式版本的接口
+     * 该接口不再使用
 
-DID添加标签
-
+检查区块链信息
      */
-    AddLabel(req: AddLabelRequest, cb?: (error: string, rep: AddLabelResponse) => void): Promise<AddLabelResponse>;
+    CheckChain(req: CheckChainRequest, cb?: (error: string, rep: CheckChainResponse) => void): Promise<CheckChainResponse>;
     /**
      * 该接口不再使用
 

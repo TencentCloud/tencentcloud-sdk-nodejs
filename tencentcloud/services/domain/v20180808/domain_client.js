@@ -90,6 +90,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteTemplate", req, cb);
     }
     /**
+     * 创建赎回订单。
+     */
+    async CreateDomainRedemption(req, cb) {
+        return this.request("CreateDomainRedemption", req, cb);
+    }
+    /**
      * 检查域名是否可以注册。
      */
     async CheckDomain(req, cb) {

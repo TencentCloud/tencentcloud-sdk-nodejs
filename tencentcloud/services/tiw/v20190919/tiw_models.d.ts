@@ -719,13 +719,60 @@ export interface DescribeRunningTasksResponse {
     RequestId?: string;
 }
 /**
- * DescribeApplicationUsage返回参数结构体
+ * DescribeWhiteboardPush返回参数结构体
  */
-export interface DescribeApplicationUsageResponse {
+export interface DescribeWhiteboardPushResponse {
     /**
-     * 画图所需的用量数据
+     * 推流结束原因，
+  - AUTO: 房间内长时间没有音视频上行及白板操作导致自动停止推流
+  - USER_CALL: 主动调用了停止推流接口
+  - EXCEPTION: 推流异常结束
      */
-    Data: Array<DataItem>;
+    FinishReason?: string;
+    /**
+     * 需要查询结果的白板推流任务Id
+     */
+    TaskId?: string;
+    /**
+     * 推流任务状态
+  - PREPARED: 表示推流正在准备中（进房/启动推流服务等操作）
+  - PUSHING: 表示推流已开始
+  - STOPPED: 表示推流已停止
+     */
+    Status?: string;
+    /**
+     * 房间号
+     */
+    RoomId?: number;
+    /**
+     * 白板的群组 Id
+     */
+    GroupId?: string;
+    /**
+     * 推流用户Id
+     */
+    PushUserId?: string;
+    /**
+     * 实际开始推流时间，Unix 时间戳，单位秒
+     */
+    PushStartTime?: number;
+    /**
+     * 实际停止推流时间，Unix 时间戳，单位秒
+     */
+    PushStopTime?: number;
+    /**
+     * 推流过程中出现异常的次数
+     */
+    ExceptionCnt?: number;
+    /**
+     * 白板推流首帧对应的IM时间戳，可用于录制回放时IM聊天消息与白板推流视频进行同步对时。
+     */
+    IMSyncTime?: number;
+    /**
+     * 备份推流任务结果信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Backup?: string;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1852,13 +1899,13 @@ export interface RecordTaskSearchResult {
     Result: RecordTaskResult;
 }
 /**
- * ModifyWhiteboardApplicationConfig返回参数结构体
+ * DescribeWarningCallback请求参数结构体
  */
-export interface ModifyWhiteboardApplicationConfigResponse {
+export interface DescribeWarningCallbackRequest {
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     * 应用的SdkAppId
      */
-    RequestId?: string;
+    SdkAppId: number;
 }
 /**
  * SetTranscodeCallback返回参数结构体
@@ -1926,13 +1973,29 @@ export interface ApplicationItem {
     TagList: Array<Tag>;
 }
 /**
- * DescribeWarningCallback请求参数结构体
+ * DescribeTranscodeByUrl返回参数结构体
  */
-export interface DescribeWarningCallbackRequest {
+export interface DescribeTranscodeByUrlResponse {
     /**
-     * 应用的SdkAppId
+     * 转码的当前进度,取值范围为0~100
      */
-    SdkAppId: number;
+    Progress?: number;
+    /**
+     * 任务的当前状态
+  - QUEUED: 正在排队等待转换
+  - PROCESSING: 转换中
+  - FINISHED: 转换完成
+  - EXCEPTION: 转换异常
+     */
+    Status?: string;
+    /**
+     * 转码任务的唯一标识Id
+     */
+    TaskId?: string;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * CreatePPTCheckTask请求参数结构体
@@ -2117,9 +2180,9 @@ export interface PauseOnlineRecordResponse {
     RequestId?: string;
 }
 /**
- * ModifyWhiteboardBucketConfig返回参数结构体
+ * ModifyWhiteboardApplicationConfig返回参数结构体
  */
-export interface ModifyWhiteboardBucketConfigResponse {
+export interface ModifyWhiteboardApplicationConfigResponse {
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2482,6 +2545,19 @@ export interface StopWhiteboardPushResponse {
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * DescribeTranscodeByUrl请求参数结构体
+ */
+export interface DescribeTranscodeByUrlRequest {
+    /**
+     * 客户的SdkAppId
+     */
+    SdkAppId: number;
+    /**
+     * 经过URL编码后的转码文件地址。URL 编码会将字符转换为可通过因特网传输的格式，比如文档地址为http://example.com/测试.pdf，经过URL编码之后为http://example.com/%E6%B5%8B%E8%AF%95.pdf。为了提高URL解析的成功率，请对URL进行编码。
+     */
+    Url: string;
 }
 /**
  * SetWarningCallback请求参数结构体
@@ -2852,60 +2928,13 @@ export interface SetPPTCheckCallbackRequest {
     Callback: string;
 }
 /**
- * DescribeWhiteboardPush返回参数结构体
+ * DescribeApplicationUsage返回参数结构体
  */
-export interface DescribeWhiteboardPushResponse {
+export interface DescribeApplicationUsageResponse {
     /**
-     * 推流结束原因，
-  - AUTO: 房间内长时间没有音视频上行及白板操作导致自动停止推流
-  - USER_CALL: 主动调用了停止推流接口
-  - EXCEPTION: 推流异常结束
+     * 画图所需的用量数据
      */
-    FinishReason?: string;
-    /**
-     * 需要查询结果的白板推流任务Id
-     */
-    TaskId?: string;
-    /**
-     * 推流任务状态
-  - PREPARED: 表示推流正在准备中（进房/启动推流服务等操作）
-  - PUSHING: 表示推流已开始
-  - STOPPED: 表示推流已停止
-     */
-    Status?: string;
-    /**
-     * 房间号
-     */
-    RoomId?: number;
-    /**
-     * 白板的群组 Id
-     */
-    GroupId?: string;
-    /**
-     * 推流用户Id
-     */
-    PushUserId?: string;
-    /**
-     * 实际开始推流时间，Unix 时间戳，单位秒
-     */
-    PushStartTime?: number;
-    /**
-     * 实际停止推流时间，Unix 时间戳，单位秒
-     */
-    PushStopTime?: number;
-    /**
-     * 推流过程中出现异常的次数
-     */
-    ExceptionCnt?: number;
-    /**
-     * 白板推流首帧对应的IM时间戳，可用于录制回放时IM聊天消息与白板推流视频进行同步对时。
-     */
-    IMSyncTime?: number;
-    /**
-     * 备份推流任务结果信息
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Backup?: string;
+    Data: Array<DataItem>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2984,6 +3013,15 @@ export interface CreatePPTCheckTaskResponse {
      * 检测任务的唯一标识Id，用于查询该任务的进度以及检测结果
      */
     TaskId?: string;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * ModifyWhiteboardBucketConfig返回参数结构体
+ */
+export interface ModifyWhiteboardBucketConfigResponse {
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */

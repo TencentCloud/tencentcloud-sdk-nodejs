@@ -169,6 +169,15 @@ export interface DomainSimpleInfo {
     RegistrantName: string;
 }
 /**
+ * CreateDomainRedemption返回参数结构体
+ */
+export interface CreateDomainRedemptionResponse {
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * UpdateProhibitionBatch请求参数结构体
  */
 export interface UpdateProhibitionBatchRequest {
@@ -659,6 +668,31 @@ export interface TransferProhibitionBatchRequest {
   False：关闭禁止域名转移状态。
      */
     Status: boolean;
+}
+/**
+ * DescribeTemplateList请求参数结构体
+ */
+export interface DescribeTemplateListRequest {
+    /**
+     * 偏移量，默认为0。
+     */
+    Offset?: number;
+    /**
+     * 返回数量，默认为20，最大值为100。
+     */
+    Limit?: number;
+    /**
+     * 用户注册类型，默认:all , 个人：I ,企业: E
+     */
+    Type?: string;
+    /**
+     * 认证状态：未实名审核:NotUpload, 实名审核中:InAudit，已实名审核:Approved，实名审核失败:Reject，更新手机邮箱:NotVerified。
+     */
+    Status?: string;
+    /**
+     * 关键字，用于域名所有者筛选
+     */
+    Keyword?: string;
 }
 /**
  * DescribeBatchOperationLogDetails请求参数结构体
@@ -1389,29 +1423,13 @@ export interface DeletePhoneEmailResponse {
     RequestId?: string;
 }
 /**
- * DescribeTemplateList请求参数结构体
+ * CreateDomainRedemption请求参数结构体
  */
-export interface DescribeTemplateListRequest {
+export interface CreateDomainRedemptionRequest {
     /**
-     * 偏移量，默认为0。
+     * 域名 ID
      */
-    Offset?: number;
-    /**
-     * 返回数量，默认为20，最大值为100。
-     */
-    Limit?: number;
-    /**
-     * 用户注册类型，默认:all , 个人：I ,企业: E
-     */
-    Type?: string;
-    /**
-     * 认证状态：未实名审核:NotUpload, 实名审核中:InAudit，已实名审核:Approved，实名审核失败:Reject，更新手机邮箱:NotVerified。
-     */
-    Status?: string;
-    /**
-     * 关键字，用于域名所有者筛选
-     */
-    Keyword?: string;
+    DomainId: string;
 }
 /**
  * CreatePhoneEmail返回参数结构体

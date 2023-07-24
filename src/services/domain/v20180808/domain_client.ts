@@ -22,6 +22,7 @@ import {
   RenewDomainBatchResponse,
   BatchModifyDomainInfoRequest,
   DomainSimpleInfo,
+  CreateDomainRedemptionResponse,
   UpdateProhibitionBatchRequest,
   TransferInDomainBatchResponse,
   DeleteTemplateResponse,
@@ -45,6 +46,7 @@ import {
   DescribeDomainBaseInfoResponse,
   DescribeTemplateListResponse,
   TransferProhibitionBatchRequest,
+  DescribeTemplateListRequest,
   DescribeBatchOperationLogDetailsRequest,
   DescribeDomainNameListResponse,
   PhoneEmailData,
@@ -75,7 +77,7 @@ import {
   DescribePhoneEmailListResponse,
   CheckBatchStatusResponse,
   DeletePhoneEmailResponse,
-  DescribeTemplateListRequest,
+  CreateDomainRedemptionRequest,
   CreatePhoneEmailResponse,
   SetDomainAutoRenewRequest,
   ModifyDomainOwnerBatchRequest,
@@ -192,6 +194,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteTemplateResponse) => void
   ): Promise<DeleteTemplateResponse> {
     return this.request("DeleteTemplate", req, cb)
+  }
+
+  /**
+   * 创建赎回订单。
+   */
+  async CreateDomainRedemption(
+    req: CreateDomainRedemptionRequest,
+    cb?: (error: string, rep: CreateDomainRedemptionResponse) => void
+  ): Promise<CreateDomainRedemptionResponse> {
+    return this.request("CreateDomainRedemption", req, cb)
   }
 
   /**

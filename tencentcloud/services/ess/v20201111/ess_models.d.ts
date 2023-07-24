@@ -1263,6 +1263,14 @@ export interface DescribeThirdPartyAuthCodeRequest {
      * 电子签小程序跳转客户小程序时携带的授权查看码
      */
     AuthCode: string;
+    /**
+     * 操作人信息
+     */
+    Operator?: UserInfo;
+    /**
+     * 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填
+     */
+    Agent?: Agent;
 }
 /**
  * UnbindEmployeeUserIdWithClientOpenId返回参数结构体
@@ -1307,6 +1315,10 @@ export interface BindEmployeeUserIdWithClientOpenIdRequest {
      * 客户系统OpenId
      */
     OpenId: string;
+    /**
+     * 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填
+     */
+    Agent?: Agent;
 }
 /**
  * DescribeIntegrationDepartments请求参数结构体
@@ -1454,6 +1466,9 @@ export interface DescribeUserAutoSignStatusResponse {
 }
 /**
  * 补充签署人信息
+- RecipientId 必须指定
+-  通过企业自定义账号ID补充签署人时，ApproverSource 和 CustomUserId 必填
+- 通过二要素（姓名/手机号）补充签署人时，ApproverName 和 ApproverMobile 必填
  */
 export interface FillApproverInfo {
     /**
@@ -1464,12 +1479,20 @@ export interface FillApproverInfo {
      * 签署人来源
   WEWORKAPP: 企业微信
      */
-    ApproverSource: string;
+    ApproverSource?: string;
     /**
      * 企业自定义账号ID
   WEWORKAPP场景下指企业自有应用获取企微明文的userid
      */
-    CustomUserId: string;
+    CustomUserId?: string;
+    /**
+     * 补充签署人姓名
+     */
+    ApproverName?: string;
+    /**
+     * 补充签署人手机号
+     */
+    ApproverMobile?: string;
 }
 /**
  * 持有的电子印章信息
@@ -1686,6 +1709,10 @@ export interface DisableUserAutoSignRequest {
      * 关闭自动签的个人的三要素
      */
     UserInfo: UserThreeFactor;
+    /**
+     * 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填
+     */
+    Agent?: Agent;
 }
 /**
  * DescribeIntegrationEmployees返回参数结构体
@@ -1804,6 +1831,10 @@ export interface UnbindEmployeeUserIdWithClientOpenIdRequest {
      * 客户系统OpenId
      */
     OpenId: string;
+    /**
+     * 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填
+     */
+    Agent?: Agent;
 }
 /**
  * CreateSchemeUrl返回参数结构体
@@ -2173,6 +2204,12 @@ export interface CreateFlowApproversRequest {
      * 企微消息中的发起人
      */
     Initiator?: string;
+    /**
+     * 代理相关应用信息，如集团主企业代子企业操作
+  
+  
+     */
+    Agent?: Agent;
 }
 /**
  * 企业员工信息
@@ -3189,6 +3226,10 @@ export interface CreateUserAutoSignEnableUrlRequest {
      * 链接的过期时间，格式为Unix时间戳，不能早于当前时间，且最大为30天。如果不传，默认有效期为7天。
      */
     ExpiredTime?: number;
+    /**
+     * 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填
+     */
+    Agent?: Agent;
 }
 /**
  * DescribeIntegrationMainOrganizationUser返回参数结构体
@@ -4536,6 +4577,10 @@ export interface DescribeUserAutoSignStatusRequest {
      * 查询开启状态的用户信息
      */
     UserInfo: UserThreeFactor;
+    /**
+     * 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填
+     */
+    Agent?: Agent;
 }
 /**
  * 文档内的填充控件返回结构体，返回控件的基本信息和填写内容值

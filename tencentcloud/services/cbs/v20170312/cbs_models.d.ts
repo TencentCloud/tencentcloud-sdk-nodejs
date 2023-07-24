@@ -1,44 +1,4 @@
 /**
- * 快照操作日志，已废弃。
- */
-export interface SnapshotOperationLog {
-    /**
-     * 操作的状态。取值范围：
-  SUCCESS :表示操作成功
-  FAILED :表示操作失败
-  PROCESSING :表示操作中。
-     */
-    OperationState: string;
-    /**
-     * 开始时间。
-     */
-    StartTime: string;
-    /**
-     * 操作者的UIN。
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Operator: string;
-    /**
-     * 操作的快照ID。
-     */
-    SnapshotId: string;
-    /**
-     * 操作类型。取值范围：
-  SNAP_OPERATION_DELETE：删除快照
-  SNAP_OPERATION_ROLLBACK：回滚快照
-  SNAP_OPERATION_MODIFY：修改快照属性
-  SNAP_OPERATION_CREATE：创建快照
-  SNAP_OPERATION_COPY：跨地域复制快照
-  ASP_OPERATION_CREATE_SNAP：由定期快照策略创建快照
-  ASP_OPERATION_DELETE_SNAP：由定期快照策略删除快照
-     */
-    Operation: string;
-    /**
-     * 结束时间。
-     */
-    EndTime: string;
-}
-/**
  * ModifyDiskExtraPerformance请求参数结构体
  */
 export interface ModifyDiskExtraPerformanceRequest {
@@ -236,39 +196,17 @@ export interface DetailPrice {
     UnitPriceDiscountHigh?: string;
 }
 /**
- * DescribeSnapshotOperationLogs请求参数结构体
+ * CreateDiskBackup请求参数结构体
  */
-export interface DescribeSnapshotOperationLogsRequest {
+export interface CreateDiskBackupRequest {
     /**
-     * 过滤条件。支持以下条件：
-  <li>snapshot-id - Array of String - 是否必填：是 - 按快照ID过滤，每个请求最多可指定10个快照ID。
+     * 要创建备份点的云硬盘名称。
      */
-    Filters: Array<Filter>;
+    DiskId: string;
     /**
-     * 要查询的操作日志的截止时间，例如：“2019-11-22 23:59:59"
+     * 云硬盘备份点名称。长度不能超过100个字符。
      */
-    EndTime?: string;
-    /**
-     * 要查询的操作日志的起始时间，例如：“2019-11-22 00:00:00"
-     */
-    BeginTime?: string;
-}
-/**
- * ModifySnapshotsSharePermission请求参数结构体
- */
-export interface ModifySnapshotsSharePermissionRequest {
-    /**
-     * 快照ID, 可通过[DescribeSnapshots](https://cloud.tencent.com/document/api/362/15647)查询获取。
-     */
-    SnapshotIds: Array<string>;
-    /**
-     * 接收分享快照的账号Id列表，array型参数的格式可以参考[API简介](https://cloud.tencent.com/document/api/213/568)。帐号ID不同于QQ号，查询用户帐号ID请查看[帐号信息](https://console.cloud.tencent.com/developer)中的帐号ID栏。
-     */
-    AccountIds: Array<string>;
-    /**
-     * 操作，包括 SHARE，CANCEL。其中SHARE代表分享操作，CANCEL代表取消分享操作。
-     */
-    Permission: string;
+    DiskBackupName?: string;
 }
 /**
  * CopySnapshotCrossRegions返回参数结构体
@@ -396,15 +334,6 @@ export interface DeleteDiskBackupsRequest {
  * InitializeDisks返回参数结构体
  */
 export interface InitializeDisksResponse {
-    /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
-/**
- * DeleteDiskBackups返回参数结构体
- */
-export interface DeleteDiskBackupsResponse {
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1069,13 +998,9 @@ export interface InquirePriceModifyDiskBackupQuotaRequest {
     DiskBackupQuota: number;
 }
 /**
- * DescribeSnapshotOperationLogs返回参数结构体
+ * DeleteDiskBackups返回参数结构体
  */
-export interface DescribeSnapshotOperationLogsResponse {
-    /**
-     * 快照操作日志列表。
-     */
-    SnapshotOperationLogSet: Array<SnapshotOperationLog>;
+export interface DeleteDiskBackupsResponse {
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1281,19 +1206,6 @@ export interface DescribeInstancesDiskNumResponse {
      * 各个云服务器已挂载和可挂载弹性云盘的数量。
      */
     AttachDetail?: Array<AttachDetail>;
-    /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
-/**
- * DescribeDiskOperationLogs返回参数结构体
- */
-export interface DescribeDiskOperationLogsResponse {
-    /**
-     * 云盘的操作日志列表。
-     */
-    DiskOperationLogSet: Array<DiskOperationLog>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1688,58 +1600,21 @@ export interface AttachDisksResponse {
     RequestId?: string;
 }
 /**
- * CreateDiskBackup请求参数结构体
+ * ModifySnapshotsSharePermission请求参数结构体
  */
-export interface CreateDiskBackupRequest {
+export interface ModifySnapshotsSharePermissionRequest {
     /**
-     * 要创建备份点的云硬盘名称。
+     * 快照ID, 可通过[DescribeSnapshots](https://cloud.tencent.com/document/api/362/15647)查询获取。
      */
-    DiskId: string;
+    SnapshotIds: Array<string>;
     /**
-     * 云硬盘备份点名称。长度不能超过100个字符。
+     * 接收分享快照的账号Id列表，array型参数的格式可以参考[API简介](https://cloud.tencent.com/document/api/213/568)。帐号ID不同于QQ号，查询用户帐号ID请查看[帐号信息](https://console.cloud.tencent.com/developer)中的帐号ID栏。
      */
-    DiskBackupName?: string;
-}
-/**
- * 云盘操作日志。
- */
-export interface DiskOperationLog {
+    AccountIds: Array<string>;
     /**
-     * 操作的状态。取值范围：
-  SUCCESS :表示操作成功
-  FAILED :表示操作失败
-  PROCESSING :表示操作中。
+     * 操作，包括 SHARE，CANCEL。其中SHARE代表分享操作，CANCEL代表取消分享操作。
      */
-    OperationState: string;
-    /**
-     * 开始时间。
-     */
-    StartTime: string;
-    /**
-     * 操作者的UIN。
-     */
-    Operator: string;
-    /**
-     * 操作类型。取值范围：
-  CBS_OPERATION_ATTACH：挂载云硬盘
-  CBS_OPERATION_DETACH：解挂云硬盘
-  CBS_OPERATION_RENEW：续费
-  CBS_OPERATION_EXPAND：扩容
-  CBS_OPERATION_CREATE：创建
-  CBS_OPERATION_ISOLATE：隔离
-  CBS_OPERATION_MODIFY：修改云硬盘属性
-  ASP_OPERATION_BIND：关联定期快照策略
-  ASP_OPERATION_UNBIND：取消关联定期快照策略
-     */
-    Operation: string;
-    /**
-     * 结束时间。
-     */
-    EndTime: string;
-    /**
-     * 操作的云盘ID。
-     */
-    DiskId: string;
+    Permission: string;
 }
 /**
  * BindAutoSnapshotPolicy返回参数结构体
@@ -1749,24 +1624,6 @@ export interface BindAutoSnapshotPolicyResponse {
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
-}
-/**
- * DescribeDiskOperationLogs请求参数结构体
- */
-export interface DescribeDiskOperationLogsRequest {
-    /**
-     * 过滤条件。支持以下条件：
-  <li>disk-id - Array of String - 是否必填：是 - 按云盘ID过滤，每个请求最多可指定10个云盘ID。
-     */
-    Filters: Array<Filter>;
-    /**
-     * 要查询的操作日志的截止时间，例如：“2019-11-22 23:59:59"
-     */
-    EndTime?: string;
-    /**
-     * 要查询的操作日志的起始时间，例如：“2019-11-22 00:00:00"
-     */
-    BeginTime?: string;
 }
 /**
  * 云硬盘备份点。

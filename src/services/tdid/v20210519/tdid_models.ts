@@ -153,24 +153,6 @@ export interface CreateCredentialResponse {
 }
 
 /**
- * CheckChain请求参数结构体
- */
-export interface CheckChainRequest {
-  /**
-   * 群组ID
-   */
-  GroupId: number
-  /**
-   * 网络ID
-   */
-  ClusterId: string
-  /**
-   * did服务机构名称
-   */
-  AgencyName: string
-}
-
-/**
  * GetAuthorityIssuer请求参数结构体
  */
 export interface GetAuthorityIssuerRequest {
@@ -223,34 +205,6 @@ export interface GetCredentialStatusRequest {
 }
 
 /**
- * GetAgencyTDid返回参数结构体
- */
-export interface GetAgencyTDidResponse {
-  /**
-   * 固定前缀
-   */
-  Prefix: string
-  /**
-   * did详情
-   */
-  Identity: Array<Identity>
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * AddLabel返回参数结构体
- */
-export interface AddLabelResponse {
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * VerifyCredential返回参数结构体
  */
 export interface VerifyCredentialResponse {
@@ -297,32 +251,6 @@ export interface GetCptInfoResponse {
 }
 
 /**
- * did详情
- */
-export interface Identity {
-  /**
-   * 账户标识符
-   */
-  AccountIdentifier: string
-  /**
-   * 链ID
-   */
-  ChainID: string
-  /**
-   * 完整tdid
-   */
-  Did: string
-  /**
-   * 群组ID
-   */
-  GroupId: number
-  /**
-   * 群组名称
-   */
-  GroupName: string
-}
-
-/**
  * 创建凭证第二个
  */
 export interface TransactionArg {
@@ -333,17 +261,21 @@ export interface TransactionArg {
 }
 
 /**
- * AddLabel请求参数结构体
+ * CheckChain请求参数结构体
  */
-export interface AddLabelRequest {
+export interface CheckChainRequest {
   /**
-   * 标签ID
+   * 群组ID
    */
-  LabelId: number
+  GroupId: number
   /**
-   * tdid
+   * 网络ID
    */
-  Did: string
+  ClusterId: string
+  /**
+   * did服务机构名称
+   */
+  AgencyName: string
 }
 
 /**
@@ -431,30 +363,6 @@ export interface CreateSelectiveCredentialResponse {
 }
 
 /**
- * GetAgencyTDid请求参数结构体
- */
-export interface GetAgencyTDidRequest {
-  /**
-   * 网络ID
-   */
-  ClusterId: string
-}
-
-/**
- * CreateTDidByPublicKey返回参数结构体
- */
-export interface CreateTDidByPublicKeyResponse {
-  /**
-   * did具体信息
-   */
-  Did: string
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * RegisterCpt请求参数结构体
  */
 export interface RegisterCptRequest {
@@ -474,6 +382,20 @@ export interface RegisterCptRequest {
    * cptId 不填默认自增
    */
   CptId?: number
+}
+
+/**
+ * CreateTDidByPublicKey返回参数结构体
+ */
+export interface CreateTDidByPublicKeyResponse {
+  /**
+   * did具体信息
+   */
+  Did: string
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

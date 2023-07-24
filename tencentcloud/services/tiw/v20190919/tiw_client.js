@@ -157,6 +157,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("SetPPTCheckCallback", req, cb);
     }
     /**
+     * 通过文档URL查询转码任务，返回最近的一次转码结果
+     */
+    async DescribeTranscodeByUrl(req, cb) {
+        return this.request("DescribeTranscodeByUrl", req, cb);
+    }
+    /**
      * 查询录制视频生成回调地址
      */
     async DescribeVideoGenerationTaskCallback(req, cb) {

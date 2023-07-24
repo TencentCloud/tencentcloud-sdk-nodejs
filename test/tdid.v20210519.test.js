@@ -18,16 +18,6 @@ const client = new tencentcloud.tdid.v20210519.Client({
 })
 describe("tdid.v20210519.test.js", function () {
 
-it("tdid.v20210519.CheckChain", async function () {
-    try {
-       const data = await client.CheckChain({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("tdid.v20210519.GetCptInfo", async function () {
     try {
        const data = await client.GetCptInfo({})
@@ -98,16 +88,6 @@ it("tdid.v20210519.GetCredentialStatus", async function () {
     }
 })
 
-it("tdid.v20210519.GetAgencyTDid", async function () {
-    try {
-       const data = await client.GetAgencyTDid({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("tdid.v20210519.CreateTDidByPrivateKey", async function () {
     try {
        const data = await client.CreateTDidByPrivateKey({})
@@ -118,9 +98,9 @@ it("tdid.v20210519.CreateTDidByPrivateKey", async function () {
     }
 })
 
-it("tdid.v20210519.AddLabel", async function () {
+it("tdid.v20210519.CheckChain", async function () {
     try {
-       const data = await client.AddLabel({})
+       const data = await client.CheckChain({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

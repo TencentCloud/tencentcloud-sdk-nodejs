@@ -58,7 +58,7 @@ import {
   PPTErrSlide,
   PauseOnlineRecordRequest,
   DescribeRunningTasksResponse,
-  DescribeApplicationUsageResponse,
+  DescribeWhiteboardPushResponse,
   DescribeAPIServiceResponse,
   TimeValue,
   DescribeWarningCallbackResponse,
@@ -109,13 +109,13 @@ import {
   DescribeUserStatusRequest,
   DescribeOnlineRecordCallbackRequest,
   RecordTaskSearchResult,
-  ModifyWhiteboardApplicationConfigResponse,
+  DescribeWarningCallbackRequest,
   SetTranscodeCallbackResponse,
   StopOnlineRecordRequest,
   SetOfflineRecordCallbackRequest,
   SetVideoGenerationTaskCallbackResponse,
   ApplicationItem,
-  DescribeWarningCallbackRequest,
+  DescribeTranscodeByUrlResponse,
   CreatePPTCheckTaskRequest,
   SetWhiteboardPushCallbackRequest,
   DescribeTIWDailyUsageResponse,
@@ -127,7 +127,7 @@ import {
   DescribePPTCheckCallbackRequest,
   Whiteboard,
   PauseOnlineRecordResponse,
-  ModifyWhiteboardBucketConfigResponse,
+  ModifyWhiteboardApplicationConfigResponse,
   CreateSnapshotTaskRequest,
   DescribeTranscodeResponse,
   SetOnlineRecordCallbackKeyRequest,
@@ -144,6 +144,7 @@ import {
   SetPPTCheckCallbackResponse,
   DescribeOnlineRecordRequest,
   StopWhiteboardPushResponse,
+  DescribeTranscodeByUrlRequest,
   SetWarningCallbackRequest,
   DescribePostpaidUsageRequest,
   LayoutParams,
@@ -162,12 +163,13 @@ import {
   RunningTaskItem,
   SetTranscodeCallbackKeyResponse,
   SetPPTCheckCallbackRequest,
-  DescribeWhiteboardPushResponse,
+  DescribeApplicationUsageResponse,
   StartOnlineRecordResponse,
   Tag,
   DescribeUsageSummaryRequest,
   SnapshotWhiteboard,
   CreatePPTCheckTaskResponse,
+  ModifyWhiteboardBucketConfigResponse,
   CreateTranscodeRequest,
   SetTranscodeCallbackKeyRequest,
   SetTranscodeCallbackRequest,
@@ -402,6 +404,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: SetPPTCheckCallbackResponse) => void
   ): Promise<SetPPTCheckCallbackResponse> {
     return this.request("SetPPTCheckCallback", req, cb)
+  }
+
+  /**
+   * 通过文档URL查询转码任务，返回最近的一次转码结果
+   */
+  async DescribeTranscodeByUrl(
+    req: DescribeTranscodeByUrlRequest,
+    cb?: (error: string, rep: DescribeTranscodeByUrlResponse) => void
+  ): Promise<DescribeTranscodeByUrlResponse> {
+    return this.request("DescribeTranscodeByUrl", req, cb)
   }
 
   /**

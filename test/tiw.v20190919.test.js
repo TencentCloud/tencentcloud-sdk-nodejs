@@ -228,6 +228,16 @@ it("tiw.v20190919.SetPPTCheckCallback", async function () {
     }
 })
 
+it("tiw.v20190919.DescribeTranscodeByUrl", async function () {
+    try {
+       const data = await client.DescribeTranscodeByUrl({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tiw.v20190919.DescribeVideoGenerationTaskCallback", async function () {
     try {
        const data = await client.DescribeVideoGenerationTaskCallback({})

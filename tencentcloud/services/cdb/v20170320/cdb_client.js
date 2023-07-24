@@ -403,14 +403,6 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeProjectSecurityGroups", req, cb);
     }
     /**
-     * 当前接口已经废弃，请使用+AdjustCdbProxyAddress+进行替代。
-
-请求该接口配置数据库连接池；支持的连接池配置请求DescribeProxyConnectionPoolConf接口获取。
-     */
-    async ModifyCDBProxyConnectionPool(req, cb) {
-        return this.request("ModifyCDBProxyConnectionPool", req, cb);
-    }
-    /**
      * 本接口(DescribeSlowLogs)用于获取云数据库实例的慢查询日志。
      */
     async DescribeSlowLogs(req, cb) {
@@ -574,14 +566,6 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DeleteBackup(req, cb) {
         return this.request("DeleteBackup", req, cb);
-    }
-    /**
-     * 当前接口已经废弃，请使用+ModifyCdbProxyAddressVipAndVPort+进行替代。
-
-修改数据库代理VIP或端口
-     */
-    async ModifyCDBProxyVipVPort(req, cb) {
-        return this.request("ModifyCDBProxyVipVPort", req, cb);
     }
     /**
      * 本接口(DescribeRoMinScale)用于获取只读实例购买、升级时的最小规格。
@@ -771,14 +755,6 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeUploadedFiles", req, cb);
     }
     /**
-     * 接口已经废弃，请使用+DescribeCdbProxyInfo+进行替换。
-
-查询数据库代理（待下线，替换接口QueryCDBProxy）
-     */
-    async DescribeCDBProxy(req, cb) {
-        return this.request("DescribeCDBProxy", req, cb);
-    }
-    /**
      * 本接口(ModifyAccountDescription)用于修改云数据库账户的备注信息。
      */
     async ModifyAccountDescription(req, cb) {
@@ -896,14 +872,6 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyAuditRule", req, cb);
     }
     /**
-     * 当前接口已经废弃，请使用+DescribeCdbProxyInfo+进行替代。
-
-查询代理详情
-     */
-    async QueryCDBProxy(req, cb) {
-        return this.request("QueryCDBProxy", req, cb);
-    }
-    /**
      * 修改数据库代理地址VPC信息
      */
     async ModifyCdbProxyAddressVipAndVPort(req, cb) {
@@ -914,14 +882,6 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DeleteAuditRule(req, cb) {
         return this.request("DeleteAuditRule", req, cb);
-    }
-    /**
-     * 当前接口已经废弃，请使用+DescribeCdbProxyInfo+替代。
-
-获取数据库代理连接池相关规格配置
-     */
-    async DescribeProxyConnectionPoolConf(req, cb) {
-        return this.request("DescribeProxyConnectionPoolConf", req, cb);
     }
     /**
      * 本接口(DescribeSupportedPrivileges)用于查询云数据库的支持的权限信息，包括全局权限，数据库权限，表权限以及列权限。

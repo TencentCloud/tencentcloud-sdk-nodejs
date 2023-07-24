@@ -598,16 +598,6 @@ it("cdb.v20170320.DescribeProjectSecurityGroups", async function () {
     }
 })
 
-it("cdb.v20170320.ModifyCDBProxyConnectionPool", async function () {
-    try {
-       const data = await client.ModifyCDBProxyConnectionPool({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("cdb.v20170320.DescribeSlowLogs", async function () {
     try {
        const data = await client.DescribeSlowLogs({})
@@ -861,16 +851,6 @@ it("cdb.v20170320.CloseCdbProxyAddress", async function () {
 it("cdb.v20170320.DeleteBackup", async function () {
     try {
        const data = await client.DeleteBackup({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("cdb.v20170320.ModifyCDBProxyVipVPort", async function () {
-    try {
-       const data = await client.ModifyCDBProxyVipVPort({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1178,16 +1158,6 @@ it("cdb.v20170320.DescribeUploadedFiles", async function () {
     }
 })
 
-it("cdb.v20170320.DescribeCDBProxy", async function () {
-    try {
-       const data = await client.DescribeCDBProxy({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("cdb.v20170320.ModifyAccountDescription", async function () {
     try {
        const data = await client.ModifyAccountDescription({})
@@ -1368,16 +1338,6 @@ it("cdb.v20170320.ModifyAuditRule", async function () {
     }
 })
 
-it("cdb.v20170320.QueryCDBProxy", async function () {
-    try {
-       const data = await client.QueryCDBProxy({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("cdb.v20170320.ModifyCdbProxyAddressVipAndVPort", async function () {
     try {
        const data = await client.ModifyCdbProxyAddressVipAndVPort({})
@@ -1391,16 +1351,6 @@ it("cdb.v20170320.ModifyCdbProxyAddressVipAndVPort", async function () {
 it("cdb.v20170320.DeleteAuditRule", async function () {
     try {
        const data = await client.DeleteAuditRule({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("cdb.v20170320.DescribeProxyConnectionPoolConf", async function () {
-    try {
-       const data = await client.DescribeProxyConnectionPoolConf({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
