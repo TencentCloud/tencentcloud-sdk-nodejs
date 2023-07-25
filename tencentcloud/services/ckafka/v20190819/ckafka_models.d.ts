@@ -1310,6 +1310,32 @@ export interface GroupInfoTopics {
     Partitions: Array<number>;
 }
 /**
+ * InstanceScalingDown请求参数结构体
+ */
+export interface InstanceScalingDownRequest {
+    /**
+     * 实例id
+     */
+    InstanceId: string;
+    /**
+     * 缩容模式  1:稳定变配
+  2.高速变配
+     */
+    UpgradeStrategy: number;
+    /**
+     * 磁盘大小 单位 GB
+     */
+    DiskSize?: number;
+    /**
+     * 峰值带宽 单位 MB/s
+     */
+    BandWidth?: number;
+    /**
+     * 分区上限
+     */
+    Partition?: number;
+}
+/**
  * FetchMessageListByOffset请求参数结构体
  */
 export interface FetchMessageListByOffsetRequest {
@@ -1918,6 +1944,19 @@ export interface DorisConnectParam {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     BePort?: number;
+}
+/**
+ * SendMessage请求参数结构体
+ */
+export interface SendMessageRequest {
+    /**
+     * DataHub接入ID
+     */
+    DataHubId: string;
+    /**
+     * 发送消息内容(单次请求最多500条)
+     */
+    Message: Array<BatchContent>;
 }
 /**
  * topic 流量排行
@@ -6106,6 +6145,16 @@ export interface InquiryDiskParam {
  */
 export declare type LowercaseParam = null;
 /**
+ * 实例缩容应答
+ */
+export interface ScalingDownResp {
+    /**
+     * 订单号
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DealNames?: Array<string>;
+}
+/**
  * SendMessage返回参数结构体
  */
 export interface SendMessageResponse {
@@ -6932,17 +6981,18 @@ export interface ClsParam {
     TimeField?: string;
 }
 /**
- * SendMessage请求参数结构体
+ * InstanceScalingDown返回参数结构体
  */
-export interface SendMessageRequest {
+export interface InstanceScalingDownResponse {
     /**
-     * DataHub接入ID
+     * 缩容应答
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    DataHubId: string;
+    Result?: ScalingDownResp;
     /**
-     * 发送消息内容(单次请求最多500条)
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
-    Message: Array<BatchContent>;
+    RequestId?: string;
 }
 /**
  * 消息记录

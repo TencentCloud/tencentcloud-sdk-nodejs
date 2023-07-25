@@ -3,7 +3,9 @@
  */
 export interface ImageToImageResponse {
     /**
-     * 返回的生成图 Base64 编码。
+     * 根据入参 RspImgType 填入不同，返回不同的内容。
+  如果传入 base64 则返回生成图 Base64 编码。
+  如果传入 url 则返回的生成图 URL , 有效期1小时，请及时保存。
      */
     ResultImage?: string;
     /**
@@ -48,21 +50,20 @@ export interface ImageToImageRequest {
     InputUrl?: string;
     /**
      * 文本描述。
-  用于在输入图的基础上引导生成图效果，建议详细描述画面主体、细节、场景等，文本描述越丰富，生成效果越精美。推荐使用中文。最多支持512个 utf-8 字符。
-  注意：如果不输入任何文本描述，可能导致较差的效果，建议根据期望的效果输入相应的文本描述。
+  用于在输入图的基础上引导生成图效果，增加生成结果中出现描述内容的可能。
+  推荐使用中文。最多支持256个 utf-8 字符。
      */
     Prompt?: string;
     /**
      * 反向文本描述。
   用于一定程度上从反面引导模型生成的走向，减少生成结果中出现描述内容的可能，但不能完全杜绝。
-  推荐使用中文。最多可传512个 utf-8 字符。
+  推荐使用中文。最多可传256个 utf-8 字符。
      */
     NegativePrompt?: string;
     /**
      * 绘画风格。
   请在  [智能图生图风格列表](https://cloud.tencent.com/document/product/1668/86250) 中选择期望的风格，传入风格编号。
   推荐使用且只使用一种风格。不传默认使用201（日系动漫风格）。
-  如果想要探索风格列表之外的风格，也可以尝试在 Prompt 中输入其他的风格描述。
      */
     Styles?: Array<string>;
     /**
@@ -84,9 +85,13 @@ export interface ImageToImageRequest {
     LogoParam?: LogoParam;
     /**
      * 生成自由度。
-  Strength 值越小，生成图和原图越接近。取值范围0~1，不传默认为0.65。
+  Strength 值越小，生成图和原图越接近。取值范围0~1，不传默认为0.75。
      */
     Strength?: number;
+    /**
+     * 返回图像方式（base64 或 url) ，二选一，默认为 base64。url 有效期为1小时。
+     */
+    RspImgType?: string;
 }
 /**
  * 输入框
@@ -130,20 +135,19 @@ export interface TextToImageRequest {
     /**
      * 文本描述。
   算法将根据输入的文本智能生成与之相关的图像。建议详细描述画面主体、细节、场景等，文本描述越丰富，生成效果越精美。
-  不能为空，推荐使用中文。最多可传512个 utf-8 字符。
+  不能为空，推荐使用中文。最多可传256个 utf-8 字符。
      */
     Prompt: string;
     /**
      * 反向文本描述。
   用于一定程度上从反面引导模型生成的走向，减少生成结果中出现描述内容的可能，但不能完全杜绝。
-  推荐使用中文。最多可传512个 utf-8 字符。
+  推荐使用中文。最多可传256个 utf-8 字符。
      */
     NegativePrompt?: string;
     /**
      * 绘画风格。
   请在 [智能文生图风格列表](https://cloud.tencent.com/document/product/1668/86249) 中选择期望的风格，传入风格编号。
   推荐使用且只使用一种风格。不传默认使用201（日系动漫风格）。
-  如果想要探索风格列表之外的风格，也可以尝试在 Prompt 中输入其他的风格描述。
      */
     Styles?: Array<string>;
     /**
@@ -163,13 +167,19 @@ export interface TextToImageRequest {
   默认在生成结果图右下角添加“图片由 AI 生成”字样，您可根据自身需要替换为其他的标识图片。
      */
     LogoParam?: LogoParam;
+    /**
+     * 返回图像方式（base64 或 url) ，二选一，默认为 base64。url 有效期为1小时。
+     */
+    RspImgType?: string;
 }
 /**
  * TextToImage返回参数结构体
  */
 export interface TextToImageResponse {
     /**
-     * 返回的生成图 Base64 编码。
+     * 根据入参 RspImgType 填入不同，返回不同的内容。
+  如果传入 base64 则返回生成图 Base64 编码。
+  如果传入 url 则返回的生成图 URL , 有效期1小时，请及时保存。
      */
     ResultImage?: string;
     /**

@@ -2613,7 +2613,7 @@ export interface DescribeYarnApplicationsRequest {
    */
   StartTime: number
   /**
-   * 结束时间秒，EndTime-StartTime不得超过31天秒数31243600
+   * 结束时间秒，EndTime-StartTime不得超过1天秒数86400
    */
   EndTime: number
   /**
@@ -3007,7 +3007,7 @@ export interface DescribeHiveQueriesRequest {
    */
   StartTime: number
   /**
-   * 结束时间秒，EndTime-StartTime不得超过31天秒数31*24*3600
+   * 结束时间秒，EndTime-StartTime不得超过1天秒数86400
    */
   EndTime: number
   /**
@@ -3307,7 +3307,7 @@ export interface DescribeImpalaQueriesRequest {
    */
   StartTime: number
   /**
-   * 结束时间秒，EndTime-StartTime不得超过31天秒数31243600
+   * 结束时间秒，EndTime-StartTime不得超过1天秒数86400
    */
   EndTime: number
   /**
@@ -4711,7 +4711,7 @@ export interface DescribeEmrApplicationStaticsResponse {
  */
 export interface InquirePriceRenewEmrRequest {
   /**
-   * 实例续费的时长。需要结合TimeUnit一起使用。1表示续费1一个月
+   * 实例续费的时长。需要结合TimeUnit一起使用。1表示续费一个月
    */
   TimeSpan: number
   /**

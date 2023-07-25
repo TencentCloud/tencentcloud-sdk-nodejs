@@ -352,6 +352,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeAppInfo", req, cb);
     }
     /**
+     * 按量实例缩容
+     */
+    async InstanceScalingDown(req, cb) {
+        return this.request("InstanceScalingDown", req, cb);
+    }
+    /**
      * 获取主题属性
 
      */

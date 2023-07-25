@@ -88,7 +88,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeAccessFastAnalysis(req: DescribeAccessFastAnalysisRequest, cb?: (error: string, rep: DescribeAccessFastAnalysisResponse) => void): Promise<DescribeAccessFastAnalysisResponse>;
     /**
-     * 描述WAF自动封禁IP详情,对齐自动封堵状态
+     * 接口已废弃
+
+描述WAF自动封禁IP详情,对齐自动封堵状态
      */
     DescribeAutoDenyIP(req: DescribeAutoDenyIPRequest, cb?: (error: string, rep: DescribeAutoDenyIPResponse) => void): Promise<DescribeAutoDenyIPResponse>;
     /**

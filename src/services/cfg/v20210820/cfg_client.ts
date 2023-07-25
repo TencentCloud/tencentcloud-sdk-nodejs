@@ -32,6 +32,7 @@ import {
   ModifyTaskRunStatusRequest,
   DescribeTemplateResponse,
   DescribePolicy,
+  ActionFilter,
   DescribeTemplateRequest,
   ExecuteTaskInstanceRequest,
   TaskGroupInstance,

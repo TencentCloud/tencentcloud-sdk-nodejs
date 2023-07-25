@@ -68,6 +68,7 @@ import {
   EsRecordMapping,
   ModifyDatahubTaskResponse,
   GroupInfoTopics,
+  InstanceScalingDownRequest,
   FetchMessageListByOffsetRequest,
   Region,
   ModifyInstancePreRequest,
@@ -88,6 +89,7 @@ import {
   DynamicDiskConfig,
   TopicMessageHeapRanking,
   DorisConnectParam,
+  SendMessageRequest,
   TopicFlowRanking,
   DescribeTopicSubscribeGroupResponse,
   DeleteAclRuleRequest,
@@ -265,6 +267,7 @@ import {
   DescribeDatahubTasksResponse,
   InquiryDiskParam,
   LowercaseParam,
+  ScalingDownResp,
   SendMessageResponse,
   DescribeDatahubGroupOffsetsRequest,
   InquiryBasePrice,
@@ -298,7 +301,7 @@ import {
   DescribeTopicDetailRequest,
   DescribeGroupOffsetsResponse,
   ClsParam,
-  SendMessageRequest,
+  InstanceScalingDownResponse,
   ConsumerRecord,
   PostgreSQLConnectParam,
   KVParam,
@@ -889,6 +892,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAppInfoResponse) => void
   ): Promise<DescribeAppInfoResponse> {
     return this.request("DescribeAppInfo", req, cb)
+  }
+
+  /**
+   * 按量实例缩容
+   */
+  async InstanceScalingDown(
+    req: InstanceScalingDownRequest,
+    cb?: (error: string, rep: InstanceScalingDownResponse) => void
+  ): Promise<InstanceScalingDownResponse> {
+    return this.request("InstanceScalingDown", req, cb)
   }
 
   /**

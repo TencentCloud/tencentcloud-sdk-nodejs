@@ -488,37 +488,37 @@ export interface GetDetectInfoEnhancedResponse {
    * 文本类信息。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Text: DetectInfoText
+  Text?: DetectInfoText
   /**
    * 身份证照片信息。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  IdCardData: DetectInfoIdCardData
+  IdCardData?: DetectInfoIdCardData
   /**
    * 最佳帧信息。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  BestFrame: DetectInfoBestFrame
+  BestFrame?: DetectInfoBestFrame
   /**
    * 视频信息。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  VideoData: DetectInfoVideoData
+  VideoData?: DetectInfoVideoData
   /**
    * 敏感数据加密信息。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Encryption: Encryption
+  Encryption?: Encryption
   /**
-   * 意愿核身相关信息。若未使用意愿核身功能，该字段返回值可以不处理。
+   * 意愿核身朗读模式结果信息。若未使用意愿核身功能，该字段返回值可以不处理。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  IntentionVerifyData: IntentionVerifyData
+  IntentionVerifyData?: IntentionVerifyData
   /**
    * 意愿核身问答模式结果。若未使用该意愿核身功能，该字段返回值可以不处理。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  IntentionQuestionResult: IntentionQuestionResult
+  IntentionQuestionResult?: IntentionQuestionResult
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

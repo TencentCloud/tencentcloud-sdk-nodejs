@@ -420,6 +420,19 @@ export interface DescribePolicy {
     TaskPolicyDealType: number;
 }
 /**
+ * 动作库筛选栏位
+ */
+export interface ActionFilter {
+    /**
+     * 关键字
+     */
+    Keyword: string;
+    /**
+     * 搜索内容值
+     */
+    Values: Array<string>;
+}
+/**
  * DescribeTemplate请求参数结构体
  */
 export interface DescribeTemplateRequest {
@@ -888,6 +901,10 @@ export interface DescribeTaskListRequest {
      * 标签对
      */
     Tags?: Array<TagWithDescribe>;
+    /**
+     * 筛选条件
+     */
+    Filters?: Array<ActionFilter>;
 }
 /**
  * 任务列表信息
@@ -1094,6 +1111,10 @@ export interface DescribeTemplateListRequest {
      * 经验ID
      */
     TemplateIdList?: Array<number>;
+    /**
+     * 过滤参数
+     */
+    Filters?: Array<ActionFilter>;
 }
 /**
  * 经验库列表信息

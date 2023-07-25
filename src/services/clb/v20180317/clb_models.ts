@@ -4467,7 +4467,7 @@ export interface RuleInput {
    */
   Scheduler?: string
   /**
-   * 负载均衡与后端服务之间的转发协议，目前支持 HTTP/HTTPS/TRPC，TRPC暂未对外开放。
+   * 负载均衡与后端服务之间的转发协议，目前支持 HTTP/HTTPS/GRPC/TRPC，TRPC暂未对外开放，默认HTTP。
    */
   ForwardType?: string
   /**

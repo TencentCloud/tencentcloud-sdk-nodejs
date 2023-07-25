@@ -676,7 +676,7 @@ export interface SearchAttackLogRequest {
      */
     EndTime: string;
     /**
-     * 查询的游标。第一次请求使用空字符串即可，后续请求使用上一次请求返回的最后一条记录的context的值即可。
+     * 接口升级，这个字段传空字符串,翻页使用Page字段
      */
     Context: string;
     /**
@@ -983,7 +983,7 @@ export interface SwitchDomainRulesResponse {
  */
 export interface SearchAccessLogResponse {
     /**
-     * 加载后续内容的Context
+     * 新接口此字段失效，默认返回空字符串
      */
     Context?: string;
     /**
@@ -2261,7 +2261,7 @@ export interface SearchAttackLogResponse {
      */
     Count?: number;
     /**
-     * 翻页游标，如果没有下一页了，这个参数为空""
+     * 接口升级，此字段无效，默认返回空字符串
      */
     Context?: string;
     /**
@@ -3531,8 +3531,7 @@ export interface SearchAccessLogRequest {
      */
     Limit?: number;
     /**
-     * 加载更多日志时使用，透传上次返回的Context值，获取后续的日志内容。
-  新版本此字段填空填
+     * 新版本此字段失效，填空字符串，翻页使用Page
      */
     Context?: string;
     /**

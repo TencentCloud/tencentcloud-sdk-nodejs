@@ -1,4 +1,45 @@
 /**
+ * DescribeDockerContainers请求参数结构体
+ */
+export interface DescribeDockerContainersRequest {
+    /**
+     * 实例ID。
+     */
+    InstanceId: string;
+    /**
+     * 容器ID列表。
+     */
+    ContainerIds?: Array<string>;
+    /**
+     * 返回数量，默认为 20，最大值为 100。
+     */
+    Limit?: number;
+    /**
+     * 偏移量，默认为 0。
+     */
+    Offset?: number;
+    /**
+     * 过滤器列表。
+  <li>container-id</li>按照【容器ID】进行过滤。
+  类型：String
+  必选：否
+  <li>container-name</li>按照【容器名称】进行过滤。
+  类型：String
+  必选：否
+  每次请求的 Filters 的上限为 10，Filter.Values 的上限为 5。参数不支持同时指定 ContainerIds 和 Filters。
+     */
+    Filters?: Array<Filter>;
+}
+/**
+ * AssociateInstancesKeyPairs返回参数结构体
+ */
+export interface AssociateInstancesKeyPairsResponse {
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * DescribeInstancesTrafficPackages请求参数结构体
  */
 export interface DescribeInstancesTrafficPackagesRequest {
@@ -16,42 +57,6 @@ export interface DescribeInstancesTrafficPackagesRequest {
     Limit?: number;
 }
 /**
- * AssociateInstancesKeyPairs返回参数结构体
- */
-export interface AssociateInstancesKeyPairsResponse {
-    /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
-/**
- * RenewInstances请求参数结构体
- */
-export interface RenewInstancesRequest {
-    /**
-     * 实例ID列表。一个或多个待操作的实例ID。可通过[DescribeInstances](https://cloud.tencent.com/document/api/1207/47573)接口返回值中的InstanceId获取。每次请求批量实例的上限为100。
-     */
-    InstanceIds: Array<string>;
-    /**
-     * 预付费模式，即包年包月相关参数设置。通过该参数可以指定包年包月实例的购买时长、是否设置自动续费等属性。若指定实例的付费模式为预付费则该参数必传。
-     */
-    InstanceChargePrepaid: InstanceChargePrepaid;
-    /**
-     * 是否续费弹性数据盘。取值范围：
-  TRUE：表示续费实例同时续费其挂载的数据盘
-  FALSE：表示续费实例同时不再续费其挂载的数据盘
-  默认取值：TRUE。
-     */
-    RenewDataDisk?: boolean;
-    /**
-     * 是否自动抵扣代金券。取值范围：
-  TRUE：表示自动抵扣代金券
-  FALSE：表示不自动抵扣代金券
-  默认取值：FALSE。
-     */
-    AutoVoucher?: boolean;
-}
-/**
  * DescribeDisksDeniedActions请求参数结构体
  */
 export interface DescribeDisksDeniedActionsRequest {
@@ -59,6 +64,29 @@ export interface DescribeDisksDeniedActionsRequest {
      * 云硬盘ID列表。
      */
     DiskIds: Array<string>;
+}
+/**
+ * Docker容器映射的端口
+ */
+export interface DockerContainerPublishPort {
+    /**
+     * 主机端口
+     */
+    HostPort: number;
+    /**
+     * 容器端口
+     */
+    ContainerPort: number;
+    /**
+     * 对外绑定IP，默认0.0.0.0
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Ip?: string;
+    /**
+     * 协议，默认tcp，支持tcp/udp/sctp
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Protocol?: string;
 }
 /**
  * InquirePriceCreateBlueprint请求参数结构体
@@ -203,6 +231,15 @@ export interface DescribeZonesRequest {
   默认按升序排列。
      */
     Order?: string;
+}
+/**
+ * RebootInstances返回参数结构体
+ */
+export interface RebootInstancesResponse {
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * 描述地域信息。
@@ -403,6 +440,19 @@ export interface ModifyInstancesAttributeRequest {
     InstanceName?: string;
 }
 /**
+ * DescribeDockerContainerDetail请求参数结构体
+ */
+export interface DescribeDockerContainerDetailRequest {
+    /**
+     * 实例ID。
+     */
+    InstanceId: string;
+    /**
+     * 容器ID。
+     */
+    ContainerId: string;
+}
+/**
  * DescribeGeneralResourceQuotas请求参数结构体
  */
 export interface DescribeGeneralResourceQuotasRequest {
@@ -432,24 +482,17 @@ export interface DeleteKeyPairsRequest {
     KeyIds: Array<string>;
 }
 /**
- * 描述了操作系统所在块设备即系统盘的信息。
+ * RerunDockerContainer返回参数结构体
  */
-export interface SystemDisk {
+export interface RerunDockerContainerResponse {
     /**
-     * 系统盘类型。
-  取值范围：
-  <li> LOCAL_BASIC：本地硬盘</li><li> LOCAL_SSD：本地 SSD 硬盘</li><li> CLOUD_BASIC：普通云硬盘</li><li> CLOUD_SSD：SSD 云硬盘</li><li> CLOUD_PREMIUM：高性能云硬盘</li>
+     * Docker活动ID。
      */
-    DiskType: string;
+    DockerActivityId: string;
     /**
-     * 系统盘大小，单位：GB。
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
-    DiskSize: number;
-    /**
-     * 系统盘ID。
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    DiskId: string;
+    RequestId?: string;
 }
 /**
  * 描述了镜像重置信息
@@ -726,6 +769,47 @@ export interface AttachDisksRequest {
     RenewFlag?: string;
 }
 /**
+ * Docker容器信息
+ */
+export interface DockerContainer {
+    /**
+     * 容器ID
+     */
+    ContainerId: string;
+    /**
+     * 容器名称
+     */
+    ContainerName: string;
+    /**
+     * 容器镜像地址
+     */
+    ContainerImage: string;
+    /**
+     * 容器Command
+     */
+    Command: string;
+    /**
+     * 容器状态描述
+     */
+    Status: string;
+    /**
+     * 容器状态，和docker的容器状态保持一致，当前取值有：created, restarting, running, removing, paused, exited, or dead
+     */
+    State: string;
+    /**
+     * 容器端口主机端口映射列表
+     */
+    PublishPortSet: Array<DockerContainerPublishPort>;
+    /**
+     * 容器挂载本地卷列表
+     */
+    VolumeSet: Array<DockerContainerVolume>;
+    /**
+     * 创建时间。按照 ISO8601 标准表示，并且使用 UTC 时间。
+     */
+    CreatedTime: string;
+}
+/**
  * ImportKeyPair返回参数结构体
  */
 export interface ImportKeyPairResponse {
@@ -902,21 +986,17 @@ export interface KeyPair {
  */
 export declare type DescribeFirewallRulesTemplateRequest = null;
 /**
- * DescribeKeyPairs返回参数结构体
+ * DescribeDockerContainerConfiguration请求参数结构体
  */
-export interface DescribeKeyPairsResponse {
+export interface DescribeDockerContainerConfigurationRequest {
     /**
-     * 符合条件的密钥对数量。
+     * 实例ID。
      */
-    TotalCount: number;
+    InstanceId: string;
     /**
-     * 密钥对详细信息列表。
+     * 容器ID。
      */
-    KeyPairSet: Array<KeyPair>;
-    /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
+    ContainerId: string;
 }
 /**
  * ModifyBlueprintAttribute请求参数结构体
@@ -1050,6 +1130,15 @@ export interface Disk {
     DiskBackupQuota: number;
 }
 /**
+ * ModifyFirewallRules返回参数结构体
+ */
+export interface ModifyFirewallRulesResponse {
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * 可用区详细信息
  */
 export interface ZoneInfo {
@@ -1152,6 +1241,23 @@ export interface DeleteFirewallRulesRequest {
      * 防火墙当前版本。用户每次更新防火墙规则时版本会自动加1，防止规则已过期，不填不考虑冲突。
      */
     FirewallVersion?: number;
+}
+/**
+ * RerunDockerContainer请求参数结构体
+ */
+export interface RerunDockerContainerRequest {
+    /**
+     * 实例ID。
+     */
+    InstanceId: string;
+    /**
+     * 重新创建的容器配置。
+     */
+    ContainerConfiguration: DockerContainerConfiguration;
+    /**
+     * 容器ID。
+     */
+    ContainerId: string;
 }
 /**
  * DescribeInstanceVncUrl请求参数结构体
@@ -1300,6 +1406,19 @@ export interface DetailPrice {
     DiscountPrice: number;
 }
 /**
+ * StopDockerContainers返回参数结构体
+ */
+export interface StopDockerContainersResponse {
+    /**
+     * Docker活动ID。
+     */
+    DockerActivityId: string;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * ApplyDiskBackup返回参数结构体
  */
 export interface ApplyDiskBackupResponse {
@@ -1386,6 +1505,32 @@ export interface DescribeInstancesDeniedActionsResponse {
     RequestId?: string;
 }
 /**
+ * RestartDockerContainers返回参数结构体
+ */
+export interface RestartDockerContainersResponse {
+    /**
+     * Docker活动ID。
+     */
+    DockerActivityId: string;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * RemoveDockerContainers请求参数结构体
+ */
+export interface RemoveDockerContainersRequest {
+    /**
+     * 实例ID。
+     */
+    InstanceId: string;
+    /**
+     * 容器ID列表。
+     */
+    ContainerIds: Array<string>;
+}
+/**
  * RenewDisks请求参数结构体
  */
 export interface RenewDisksRequest {
@@ -1416,27 +1561,34 @@ export interface ModifyDisksAttributeRequest {
     DiskName: string;
 }
 /**
- * Docker容器映射的端口
+ * DescribeKeyPairs返回参数结构体
  */
-export interface DockerContainerPublishPort {
+export interface DescribeKeyPairsResponse {
     /**
-     * 主机端口
+     * 符合条件的密钥对数量。
      */
-    HostPort: number;
+    TotalCount: number;
     /**
-     * 容器端口
+     * 密钥对详细信息列表。
      */
-    ContainerPort: number;
+    KeyPairSet: Array<KeyPair>;
     /**
-     * 对外绑定IP，默认0.0.0.0
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
-    Ip?: string;
+    RequestId?: string;
+}
+/**
+ * RestartDockerContainers请求参数结构体
+ */
+export interface RestartDockerContainersRequest {
     /**
-     * 协议，默认tcp，支持tcp/udp/sctp
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 实例ID。
      */
-    Protocol?: string;
+    InstanceId: string;
+    /**
+     * 容器ID列表。
+     */
+    ContainerIds: Array<string>;
 }
 /**
  * DescribeSnapshotsDeniedActions返回参数结构体
@@ -1591,6 +1743,19 @@ export interface ModifyDisksRenewFlagRequest {
     RenewFlag: string;
 }
 /**
+ * StartDockerContainers返回参数结构体
+ */
+export interface StartDockerContainersResponse {
+    /**
+     * Docker活动ID。
+     */
+    DockerActivityId: string;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * DisassociateInstancesKeyPairs请求参数结构体
  */
 export interface DisassociateInstancesKeyPairsRequest {
@@ -1664,6 +1829,35 @@ export interface ImportKeyPairRequest {
     PublicKey: string;
 }
 /**
+ * DescribeDockerActivities请求参数结构体
+ */
+export interface DescribeDockerActivitiesRequest {
+    /**
+     * 实例ID。
+     */
+    InstanceId: string;
+    /**
+     * Docker活动ID列表。
+     */
+    ActivityIds?: Array<string>;
+    /**
+     * 偏移量，默认为 0。
+     */
+    Offset?: number;
+    /**
+     * 返回数量，默认为 20，最大值为 100。
+     */
+    Limit?: number;
+    /**
+     * 活动创建时间的起始值，时间戳秒数。
+     */
+    CreatedTimeBegin?: number;
+    /**
+     * 活动创建时间的结束值，时间戳秒数。
+     */
+    CreatedTimeEnd?: number;
+}
+/**
  * DeleteBlueprints返回参数结构体
  */
 export interface DeleteBlueprintsResponse {
@@ -1733,6 +1927,19 @@ export interface ModifyBlueprintAttributeResponse {
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * StopDockerContainers请求参数结构体
+ */
+export interface StopDockerContainersRequest {
+    /**
+     * 实例ID。
+     */
+    InstanceId: string;
+    /**
+     * 容器ID列表。
+     */
+    ContainerIds: Array<string>;
 }
 /**
  * DescribeModifyInstanceBundles请求参数结构体
@@ -1933,79 +2140,92 @@ export interface LoginSettings {
     KeyIds: Array<string>;
 }
 /**
+ * DescribeDockerContainerConfiguration返回参数结构体
+ */
+export interface DescribeDockerContainerConfigurationResponse {
+    /**
+     * Docker容器配置信息。
+     */
+    ContainerConfiguration?: DockerContainerConfiguration;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * 描述了实例信息。
  */
 export interface Instance {
     /**
      * 实例 ID。
      */
-    InstanceId: string;
+    InstanceId?: string;
     /**
      * 套餐 ID。
      */
-    BundleId: string;
+    BundleId?: string;
     /**
      * 镜像 ID。
      */
-    BlueprintId: string;
+    BlueprintId?: string;
     /**
      * 实例的 CPU 核数，单位：核。
      */
-    CPU: number;
+    CPU?: number;
     /**
      * 实例内存容量，单位：GB 。
      */
-    Memory: number;
+    Memory?: number;
     /**
      * 实例名称。
      */
-    InstanceName: string;
+    InstanceName?: string;
     /**
      * 实例计费模式。取值范围：
   PREPAID：表示预付费，即包年包月。
      */
-    InstanceChargeType: string;
+    InstanceChargeType?: string;
     /**
      * 实例系统盘信息。
      */
-    SystemDisk: SystemDisk;
+    SystemDisk?: SystemDisk;
     /**
      * 实例主网卡的内网 IP。
   注意：此字段可能返回 空，表示取不到有效值。
      */
-    PrivateAddresses: Array<string>;
+    PrivateAddresses?: Array<string>;
     /**
      * 实例主网卡的公网 IP。
   注意：此字段可能返回 空，表示取不到有效值。
      */
-    PublicAddresses: Array<string>;
+    PublicAddresses?: Array<string>;
     /**
      * 实例带宽信息。
      */
-    InternetAccessible: InternetAccessible;
+    InternetAccessible?: InternetAccessible;
     /**
      * 自动续费标识。取值范围：
   NOTIFY_AND_MANUAL_RENEW：表示通知即将过期，但不自动续费
   NOTIFY_AND_AUTO_RENEW：表示通知即将过期，而且自动续费 。
      */
-    RenewFlag: string;
+    RenewFlag?: string;
     /**
      * 实例登录设置。
      */
-    LoginSettings: LoginSettings;
+    LoginSettings?: LoginSettings;
     /**
      * 实例状态。取值范围：
   <li>PENDING：表示创建中</li><li>LAUNCH_FAILED：表示创建失败</li><li>RUNNING：表示运行中</li><li>STOPPED：表示关机</li><li>STARTING：表示开机中</li><li>STOPPING：表示关机中</li><li>REBOOTING：表示重启中</li><li>SHUTDOWN：表示停止待销毁</li><li>TERMINATING：表示销毁中</li><li>DELETING：表示删除中</li><li>FREEZING：表示冻结中</li><li>ENTER_RESCUE_MODE：表示进入救援模式中</li><li>RESCUE_MODE：表示救援模式</li><li>EXIT_RESCUE_MODE：表示退出救援模式中</li>
      */
-    InstanceState: string;
+    InstanceState?: string;
     /**
      * 实例全局唯一 ID。
      */
-    Uuid: string;
+    Uuid?: string;
     /**
      * 实例的最新操作。例：StopInstances、ResetInstance。注意：此字段可能返回 空值，表示取不到有效值。
      */
-    LatestOperation: string;
+    LatestOperation?: string;
     /**
      * 实例的最新操作状态。取值范围：
   SUCCESS：表示操作成功
@@ -2013,55 +2233,55 @@ export interface Instance {
   FAILED：表示操作失败
   注意：此字段可能返回 空值，表示取不到有效值。
      */
-    LatestOperationState: string;
+    LatestOperationState?: string;
     /**
      * 实例最新操作的唯一请求 ID。
   注意：此字段可能返回 空值，表示取不到有效值。
      */
-    LatestOperationRequestId: string;
+    LatestOperationRequestId?: string;
     /**
      * 隔离时间。按照 ISO8601 标准表示，并且使用 UTC 时间。
   格式为： YYYY-MM-DDThh:mm:ssZ。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    IsolatedTime: string;
+    IsolatedTime?: string;
     /**
      * 创建时间。按照 ISO8601 标准表示，并且使用 UTC 时间。
   格式为： YYYY-MM-DDThh:mm:ssZ。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CreatedTime: string;
+    CreatedTime?: string;
     /**
      * 到期时间。按照 ISO8601 标准表示，并且使用 UTC 时间。
   格式为： YYYY-MM-DDThh:mm:ssZ 。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ExpiredTime: string;
+    ExpiredTime?: string;
     /**
      * 操作系统平台类型，如 LINUX_UNIX、WINDOWS。
      */
-    PlatformType: string;
+    PlatformType?: string;
     /**
      * 操作系统平台。
      */
-    Platform: string;
+    Platform?: string;
     /**
      * 操作系统名称。
      */
-    OsName: string;
+    OsName?: string;
     /**
      * 可用区。
      */
-    Zone: string;
+    Zone?: string;
     /**
      * 实例绑定的标签列表。
      */
-    Tags: Array<Tag>;
+    Tags?: Array<Tag>;
     /**
      * 实例封禁状态。取值范围：
   <li>NORMAL实例正常。</li><li>NETWORK_RESTRICT：网络封禁。</li>
      */
-    InstanceRestrictState: string;
+    InstanceRestrictState?: string;
 }
 /**
  * Docker容器挂载卷
@@ -2075,6 +2295,15 @@ export interface DockerContainerVolume {
      * 主机路径
      */
     HostPath?: string;
+}
+/**
+ * StopInstances请求参数结构体
+ */
+export interface StopInstancesRequest {
+    /**
+     * 实例 ID 列表。每次请求批量实例的上限为 100。可通过[DescribeInstances](https://cloud.tencent.com/document/api/1207/47573)接口返回值中的InstanceId获取。
+     */
+    InstanceIds: Array<string>;
 }
 /**
  * IsolateInstances返回参数结构体
@@ -2112,9 +2341,17 @@ export interface DescribeInstanceVncUrlResponse {
     RequestId?: string;
 }
 /**
- * ModifyFirewallRules返回参数结构体
+ * DescribeDockerActivities返回参数结构体
  */
-export interface ModifyFirewallRulesResponse {
+export interface DescribeDockerActivitiesResponse {
+    /**
+     * 总数量。
+     */
+    TotalCount: number;
+    /**
+     * Docker活动列表。
+     */
+    DockerActivitySet: Array<DockerActivity>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2525,23 +2762,43 @@ export interface DescribeDiskDiscountResponse {
     RequestId?: string;
 }
 /**
- * ResetInstancesPassword请求参数结构体
+ * ModifyDockerContainer请求参数结构体
  */
-export interface ResetInstancesPasswordRequest {
+export interface ModifyDockerContainerRequest {
     /**
-     * 实例 ID 列表。每次请求批量实例的上限为 100。
+     * 实例ID。
      */
-    InstanceIds: Array<string>;
+    InstanceId: string;
     /**
-     * 实例登录密码。不同操作系统类型密码复杂度限制不一样，具体如下：
-  `LINUX_UNIX` 实例密码必须 8-30 位，推荐使用 12 位以上密码，不能以“/”开头，至少包含以下字符中的三种不同字符，字符种类：<br><li>小写字母：[a-z]<br><li>大写字母：[A-Z]<br><li>数字：0-9<br><li>特殊字符： ()\`\~!@#$%^&\*-+=\_|{}[]:;' <>,.?/</li>
-  `WINDOWS` 实例密码必须 12-30 位，不能以“/”开头且不包括用户名，至少包含以下字符中的三种不同字符<br><li>小写字母：[a-z]<br><li>大写字母：[A-Z]<br><li>数字： 0-9<br><li>特殊字符：()\`~!@#$%^&\*-+=\_|{}[]:;' <>,.?/<br><li>如果实例即包含 `LINUX_UNIX` 实例又包含 `WINDOWS` 实例，则密码复杂度限制按照 `WINDOWS` 实例的限制。
+     * 容器ID。
      */
-    Password: string;
+    ContainerId: string;
     /**
-     * 待重置密码的实例操作系统用户名。不得超过 64 个字符。
+     * 环境变量列表
      */
-    UserName?: string;
+    Envs?: Array<ContainerEnv>;
+    /**
+     * 容器端口主机端口映射列表
+     */
+    PublishPorts?: Array<DockerContainerPublishPort>;
+    /**
+     * 容器加载本地卷列表
+     */
+    Volumes?: Array<DockerContainerVolume>;
+    /**
+     * 运行的命令
+     */
+    Command?: string;
+    /**
+     * 容器重启策略，对应docker "--restart"参数。
+  
+  枚举值:
+  no: 不自动重启。默认策略。
+  on-failure[:max-retries]: 当容器退出码非0时重启容器。使用max-retries限制重启次数，比如on-failure:10，限制最多重启10次。
+  always: 只要容器退出就重启。
+  unless-stopped: 始终重新启动容器，包括在守护进程启动时，除非容器在 Docker 守护进程停止之前进入停止状态。
+     */
+    RestartPolicy?: string;
 }
 /**
  * 云硬盘包年包月相关参数设置
@@ -2567,6 +2824,19 @@ export interface DiskChargePrepaid {
     TimeUnit?: string;
 }
 /**
+ * RunDockerContainers返回参数结构体
+ */
+export interface RunDockerContainersResponse {
+    /**
+     * Docker活动ID列表。
+     */
+    DockerActivitySet: Array<string>;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * CreateKeyPair请求参数结构体
  */
 export interface CreateKeyPairRequest {
@@ -2574,6 +2844,25 @@ export interface CreateKeyPairRequest {
      * 密钥对名称，可由数字，字母和下划线组成，长度不超过 25 个字符。
      */
     KeyName: string;
+}
+/**
+ * ResetInstancesPassword请求参数结构体
+ */
+export interface ResetInstancesPasswordRequest {
+    /**
+     * 实例 ID 列表。每次请求批量实例的上限为 100。
+     */
+    InstanceIds: Array<string>;
+    /**
+     * 实例登录密码。不同操作系统类型密码复杂度限制不一样，具体如下：
+  `LINUX_UNIX` 实例密码必须 8-30 位，推荐使用 12 位以上密码，不能以“/”开头，至少包含以下字符中的三种不同字符，字符种类：<br><li>小写字母：[a-z]<br><li>大写字母：[A-Z]<br><li>数字：0-9<br><li>特殊字符： ()\`\~!@#$%^&\*-+=\_|{}[]:;' <>,.?/</li>
+  `WINDOWS` 实例密码必须 12-30 位，不能以“/”开头且不包括用户名，至少包含以下字符中的三种不同字符<br><li>小写字母：[a-z]<br><li>大写字母：[A-Z]<br><li>数字： 0-9<br><li>特殊字符：()\`~!@#$%^&\*-+=\_|{}[]:;' <>,.?/<br><li>如果实例即包含 `LINUX_UNIX` 实例又包含 `WINDOWS` 实例，则密码复杂度限制按照 `WINDOWS` 实例的限制。
+     */
+    Password: string;
+    /**
+     * 待重置密码的实例操作系统用户名。不得超过 64 个字符。
+     */
+    UserName?: string;
 }
 /**
  * DescribeInstances请求参数结构体
@@ -2629,6 +2918,57 @@ export interface DetachCcnRequest {
      * 云联网实例ID。
      */
     CcnId: string;
+}
+/**
+ * RenameDockerContainer返回参数结构体
+ */
+export interface RenameDockerContainerResponse {
+    /**
+     * Docker活动ID。
+     */
+    DockerActivityId: string;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * Docker活动信息
+ */
+export interface DockerActivity {
+    /**
+     * 活动ID。
+     */
+    ActivityId: string;
+    /**
+     * 活动名称。
+     */
+    ActivityName: string;
+    /**
+     * 活动状态。取值范围：
+  <li>INIT：表示初始化，活动尚未执行</li>
+  <li>OPERATING：表示活动执行中</li>
+  <li>SUCCESS：表示活动执行成功</li>
+  <li>FAILED：表示活动执行失败</li>
+     */
+    ActivityState: string;
+    /**
+     * 活动执行的命令输出，以base64编码。
+     */
+    ActivityCommandOutput: string;
+    /**
+     * 容器ID列表。
+     */
+    ContainerIds: Array<string>;
+    /**
+     * 创建时间。按照 ISO8601 标准表示，并且使用 UTC 时间。
+     */
+    CreatedTime: string;
+    /**
+     * 结束时间。按照 ISO8601 标准表示，并且使用 UTC 时间。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    EndTime: string;
 }
 /**
  * >描述键值对过滤器，用于条件过滤查询。例如过滤名称等
@@ -3127,6 +3467,10 @@ export interface LoginConfiguration {
   `WINDOWS` 实例密码必须 12-30 位，不能包含空格, 不能以“/”开头且不包括用户名，至少包含以下字符中的三种不同字符<br><li>小写字母：[a-z]<br><li>大写字母：[A-Z]<br><li>数字： 0-9<br><li>特殊字符：()\`~!@#$%^&\*-+=\_|{}[]:;' <>,.?/
      */
     Password?: string;
+    /**
+     * 密钥ID列表，最多同时指定5个密钥。关联密钥后，就可以通过对应的私钥来访问实例。密钥与密码不能同时指定，同时WINDOWS操作系统不支持指定密钥。密钥ID列表可以通过[DescribeKeyPairs](https://cloud.tencent.com/document/product/1207/55540)接口获取。
+     */
+    KeyIds?: Array<string>;
 }
 /**
  * DescribeResetInstanceBlueprints请求参数结构体
@@ -3167,6 +3511,19 @@ export interface DescribeResetInstanceBlueprintsRequest {
   每次请求的 Filters 的上限为 10，Filter.Values 的上限为 5。参数不支持同时指定 BlueprintIds 和 Filters 。
      */
     Filters?: Array<Filter>;
+}
+/**
+ * RemoveDockerContainers返回参数结构体
+ */
+export interface RemoveDockerContainersResponse {
+    /**
+     * Docker活动ID。
+     */
+    DockerActivityId: string;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * Docker容器创建时的配置
@@ -3276,6 +3633,26 @@ export interface RenewDiskChargePrepaid {
     CurInstanceDeadline?: string;
 }
 /**
+ * 描述了操作系统所在块设备即系统盘的信息。
+ */
+export interface SystemDisk {
+    /**
+     * 系统盘类型。
+  取值范围：
+  <li> LOCAL_BASIC：本地硬盘</li><li> LOCAL_SSD：本地 SSD 硬盘</li><li> CLOUD_BASIC：普通云硬盘</li><li> CLOUD_SSD：SSD 云硬盘</li><li> CLOUD_PREMIUM：高性能云硬盘</li>
+     */
+    DiskType: string;
+    /**
+     * 系统盘大小，单位：GB。
+     */
+    DiskSize: number;
+    /**
+     * 系统盘ID。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DiskId: string;
+}
+/**
  * TerminateDisks请求参数结构体
  */
 export interface TerminateDisksRequest {
@@ -3359,9 +3736,30 @@ export interface InstancePriceDetail {
     DiscountDetail?: Array<DiscountDetail>;
 }
 /**
- * RebootInstances返回参数结构体
+ * DescribeDockerContainers返回参数结构体
  */
-export interface RebootInstancesResponse {
+export interface DescribeDockerContainersResponse {
+    /**
+     * 总数量。
+     */
+    TotalCount?: number;
+    /**
+     * 容器列表。
+     */
+    DockerContainerSet?: Array<DockerContainer>;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * ModifyDockerContainer返回参数结构体
+ */
+export interface ModifyDockerContainerResponse {
+    /**
+     * Docker活动ID。
+     */
+    DockerActivityId?: string;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -3388,6 +3786,19 @@ export interface DescribeInstanceLoginKeyPairAttributeRequest {
      * 实例ID。
      */
     InstanceId: string;
+}
+/**
+ * DescribeDockerContainerDetail返回参数结构体
+ */
+export interface DescribeDockerContainerDetailResponse {
+    /**
+     * Docker容器详情，json字符串base64编码。
+     */
+    ContainerDetail?: string;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * DescribeBundleDiscount请求参数结构体
@@ -3626,13 +4037,44 @@ export interface ModifyInstancesRenewFlagRequest {
     RenewFlag: string;
 }
 /**
- * StopInstances请求参数结构体
+ * StartDockerContainers请求参数结构体
  */
-export interface StopInstancesRequest {
+export interface StartDockerContainersRequest {
     /**
-     * 实例 ID 列表。每次请求批量实例的上限为 100。可通过[DescribeInstances](https://cloud.tencent.com/document/api/1207/47573)接口返回值中的InstanceId获取。
+     * 实例ID。
+     */
+    InstanceId: string;
+    /**
+     * 容器ID列表。
+     */
+    ContainerIds: Array<string>;
+}
+/**
+ * RenewInstances请求参数结构体
+ */
+export interface RenewInstancesRequest {
+    /**
+     * 实例ID列表。一个或多个待操作的实例ID。可通过[DescribeInstances](https://cloud.tencent.com/document/api/1207/47573)接口返回值中的InstanceId获取。每次请求批量实例的上限为100。
      */
     InstanceIds: Array<string>;
+    /**
+     * 预付费模式，即包年包月相关参数设置。通过该参数可以指定包年包月实例的购买时长、是否设置自动续费等属性。若指定实例的付费模式为预付费则该参数必传。
+     */
+    InstanceChargePrepaid: InstanceChargePrepaid;
+    /**
+     * 是否续费弹性数据盘。取值范围：
+  TRUE：表示续费实例同时续费其挂载的数据盘
+  FALSE：表示续费实例同时不再续费其挂载的数据盘
+  默认取值：TRUE。
+     */
+    RenewDataDisk?: boolean;
+    /**
+     * 是否自动抵扣代金券。取值范围：
+  TRUE：表示自动抵扣代金券
+  FALSE：表示不自动抵扣代金券
+  默认取值：FALSE。
+     */
+    AutoVoucher?: boolean;
 }
 /**
  * DescribeFirewallRulesTemplate返回参数结构体
@@ -3659,6 +4101,23 @@ export interface RenewInstancesResponse {
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * RenameDockerContainer请求参数结构体
+ */
+export interface RenameDockerContainerRequest {
+    /**
+     * 实例ID。
+     */
+    InstanceId: string;
+    /**
+     * 容器ID。
+     */
+    ContainerId: string;
+    /**
+     * 容器新的名称。
+     */
+    ContainerName: string;
 }
 /**
  * DescribeDisksDeniedActions返回参数结构体
@@ -3707,6 +4166,19 @@ export interface DescribeFirewallRulesRequest {
      * 返回数量，默认为 20，最大值为 100。
      */
     Limit?: number;
+}
+/**
+ * RunDockerContainers请求参数结构体
+ */
+export interface RunDockerContainersRequest {
+    /**
+     * 实例ID。
+     */
+    InstanceId: string;
+    /**
+     * 要创建的容器列表。
+     */
+    Containers: Array<DockerContainerConfiguration>;
 }
 /**
  * 磁盘操作限制列表详细信息

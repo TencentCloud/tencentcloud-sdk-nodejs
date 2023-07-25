@@ -375,8 +375,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 描述WAF自动封禁IP详情,对齐自动封堵状态
-   */
+     * 接口已废弃
+
+描述WAF自动封禁IP详情,对齐自动封堵状态
+     */
   async DescribeAutoDenyIP(
     req: DescribeAutoDenyIPRequest,
     cb?: (error: string, rep: DescribeAutoDenyIPResponse) => void
