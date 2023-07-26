@@ -3197,34 +3197,34 @@ export interface DescribeBackupOverviewResponse {
     /**
      * 用户在当前地域备份的总个数（包含数据备份和日志备份）。
      */
-    BackupCount: number;
+    BackupCount?: number;
     /**
      * 用户在当前地域备份的总容量
      */
-    BackupVolume: number;
+    BackupVolume?: number;
     /**
      * 用户在当前地域备份的计费容量，即超出赠送容量的部分。
      */
-    BillingVolume: number;
+    BillingVolume?: number;
     /**
      * 用户在当前地域获得的赠送备份容量。
      */
-    FreeVolume: number;
+    FreeVolume?: number;
     /**
      * 用户在当前地域的异地备份总容量。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    RemoteBackupVolume: number;
+    RemoteBackupVolume?: number;
     /**
      * 归档备份容量，包含数据备份以及日志备份。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    BackupArchiveVolume: number;
+    BackupArchiveVolume?: number;
     /**
      * 标准存储备份容量，包含数据备份以及日志备份。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    BackupStandbyVolume: number;
+    BackupStandbyVolume?: number;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */

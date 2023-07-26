@@ -122,6 +122,42 @@ export interface CreateShieldPlanInstanceResponse {
 }
 
 /**
+ * DescribeEncryptInstances返回参数结构体
+ */
+export interface DescribeEncryptInstancesResponse {
+  /**
+   * 总记录数
+   */
+  TotalCount?: number
+  /**
+   * 渠道合作加固信息数组
+   */
+  EncryptResults?: Array<EncryptResults>
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 资源服务信息
+ */
+export interface ResourceServiceInfo {
+  /**
+   * 创建时间戳
+   */
+  CreateTime: number
+  /**
+   * 到期时间戳
+   */
+  ExpireTime: number
+  /**
+   * 资源名称，如应用加固，源码混淆
+   */
+  ResourceName: string
+}
+
+/**
  * CreateResourceInstances请求参数结构体
  */
 export interface CreateResourceInstancesRequest {
@@ -196,6 +232,16 @@ export interface ShieldInfo {
 }
 
 /**
+ * 渠道合作sdk加固策略配置
+ */
+export interface SDKPlan {
+  /**
+   * 策略id
+   */
+  PlanId?: number
+}
+
+/**
  * DescribeShieldResult请求参数结构体
  */
 export interface DescribeShieldResultRequest {
@@ -206,17 +252,35 @@ export interface DescribeShieldResultRequest {
 }
 
 /**
- * CreateShieldInstance请求参数结构体
+ * CancelEncryptTask返回参数结构体
  */
-export interface CreateShieldInstanceRequest {
+export interface CancelEncryptTaskResponse {
   /**
-   * 待加固的应用信息
+   * 1: 取消任务成功 ； -1 ：取消任务失败，原因为任务进程已结束，不能取消。
    */
-  AppInfo: AppInfo
+  State?: number
   /**
-   * 加固服务信息
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  ServiceInfo: ServiceInfo
+  RequestId?: string
+}
+
+/**
+ * DescribeOrderInstances返回参数结构体
+ */
+export interface DescribeOrderInstancesResponse {
+  /**
+   * 总记录数
+   */
+  TotalCount?: number
+  /**
+   * 订单信息
+   */
+  Orders?: Array<Orders>
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -231,6 +295,16 @@ export interface CreateCosSecKeyInstanceRequest {
    * 密钥有效时间，默认为1小时。
    */
   Duration?: number
+}
+
+/**
+ * 渠道合作IOS源码混淆配置
+ */
+export interface IOSPlan {
+  /**
+   * 策略id
+   */
+  PlanId?: number
 }
 
 /**
@@ -256,6 +330,20 @@ export interface DescribeUserBaseInfoInstanceResponse {
 }
 
 /**
+ * 筛选数据结构
+ */
+export interface Filter {
+  /**
+   * 需要过滤的字段
+   */
+  Name: string
+  /**
+   * 需要过滤字段的值
+   */
+  Value?: string
+}
+
+/**
  * CreateShieldPlanInstance请求参数结构体
  */
 export interface CreateShieldPlanInstanceRequest {
@@ -271,6 +359,30 @@ export interface CreateShieldPlanInstanceRequest {
    * 策略具体信息
    */
   PlanInfo: PlanInfo
+}
+
+/**
+ * CreateEncryptInstance返回参数结构体
+ */
+export interface CreateEncryptInstanceResponse {
+  /**
+   * 加固任务Id
+   */
+  ResultId?: string
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 渠道合作加固sdk加固结果
+ */
+export interface SDKResult {
+  /**
+   * 加固任务结果Id
+   */
+  ResultId?: string
 }
 
 /**
@@ -311,6 +423,22 @@ export interface CreateShieldInstanceResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 小程序加固配置
+ */
+export interface AppletPlan {
+  /**
+   * 策略Id
+   */
+  PlanId?: number
+  /**
+   * 1 - 开启代码混淆、代码压缩、代码反调试保护。
+2 - 开启字符串编码和代码变换，代码膨胀，随机插入冗余代码，开启代码控制流平坦化，保证业务逻辑正常前提下，扁平化代码逻辑分支，破坏代码简单的线性结构。
+3 - 开启代码加密，对字符串、函数、变量、属性、类、数组等结构进行加密保护，更多得代码控制流平坦化，扁平化逻辑分支。
+   */
+  AppletLevel?: number
 }
 
 /**
@@ -358,6 +486,141 @@ export interface ResourceInfo {
 }
 
 /**
+ * 安卓加固结果
+ */
+export interface AndroidResult {
+  /**
+   * 结果Id,用于查询加固结果
+   */
+  ResultId?: string
+  /**
+   * 与当前任务关联的订单id
+   */
+  OrderId?: string
+  /**
+   * 与当前任务关联的资源Id
+   */
+  ResourceId?: string
+  /**
+   * 本次任务发起者
+   */
+  OpUin?: number
+  /**
+   * 应用类型：安卓-apk; 安卓-aab;
+   */
+  AppType?: string
+  /**
+   * 应用包名
+   */
+  AppPkgName?: string
+  /**
+   * 后台资源绑定的包名
+   */
+  BindAppPkgName?: string
+  /**
+   * 加固结果
+   */
+  EncryptState?: number
+  /**
+   * 加固结果描述
+   */
+  EncryptStateDesc?: string
+  /**
+   * 加固失败错误码
+   */
+  EncryptErrCode?: number
+  /**
+   * 加固失败原因
+   */
+  EncryptErrDesc?: string
+  /**
+   * 加固失败解决方案
+   */
+  EncryptErrRef?: string
+  /**
+   * 任务创建时间
+   */
+  CreatTime?: string
+  /**
+   * 任务开始处理时间
+   */
+  StartTime?: string
+  /**
+   * 任务处理结束时间
+   */
+  EndTime?: string
+  /**
+   * 加固耗时（秒单位）
+   */
+  CostTime?: number
+  /**
+   * 在线加固-安卓应用原包下载链接
+   */
+  AppUrl?: string
+  /**
+   * 在线加固-安卓应用文件MD5算法值
+   */
+  AppMd5?: string
+  /**
+   * 在线加固-安卓应用应用名称
+   */
+  AppName?: string
+  /**
+   * 在线加固-安卓应用版本；
+   */
+  AppVersion?: string
+  /**
+   * 在线加固-安卓应用大小
+   */
+  AppSize?: number
+  /**
+   * 在线加固-安卓加固-腾讯云应用加固工具版本
+   */
+  OnlineToolVersion?: string
+  /**
+   * 在线加固-安卓加固，加固成功后文件md5算法值
+   */
+  EncryptAppMd5?: string
+  /**
+   * 在线加固-安卓加固，加固成功后应用大小
+   */
+  EncryptAppSize?: number
+  /**
+   * 在线加固-安卓加固，加固包下载链接。
+   */
+  EncryptPkgUrl?: string
+  /**
+   * 输出工具-安卓加固-腾讯云输出工具版本
+   */
+  OutputToolVersion?: string
+  /**
+   * 输出工具-安卓加固-工具大小
+   */
+  OutputToolSize?: number
+  /**
+   * 输出工具-安卓加固-工具输出时间
+   */
+  ToolOutputTime?: string
+  /**
+   * 输出工具-安卓加固-工具到期时间
+   */
+  ToolExpireTime?: string
+  /**
+   * 输出工具-安卓加固-输出工具下载链接
+   */
+  OutputToolUrl?: string
+  /**
+   * 本次安卓加固策略信息
+   */
+  AndroidPlan?: AndroidPlan
+}
+
+/**
+ * DescribeUserBaseInfoInstance请求参数结构体
+ */
+export type DescribeUserBaseInfoInstanceRequest = null
+
+/**
  * DescribeShieldInstances请求参数结构体
  */
 export interface DescribeShieldInstancesRequest {
@@ -385,6 +648,171 @@ export interface DescribeShieldInstancesRequest {
    * 升序（asc）还是降序（desc），默认：desc。
    */
   OrderDirection?: string
+}
+
+/**
+ * 小程序加固信息
+ */
+export interface AppletInfo {
+  /**
+   * 客户JS包
+   */
+  AppletJsUrl?: string
+  /**
+   * 小程序加固等级配置
+1 - 开启代码混淆、代码压缩、代码反调试保护。 2 - 开启字符串编码和代码变换，代码膨胀，随机插入冗余代码，开启代码控制流平坦化，保证业务逻辑正常前提下，扁平化代码逻辑分支，破坏代码简单的线性结构。 3 - 开启代码加密，对字符串、函数、变量、属性、类、数组等结构进行加密保护，更多得代码控制流平坦化，扁平化逻辑分支。
+   */
+  AppletLevel?: number
+  /**
+   * 本次加固输出产物名称，如”test.zip“,非空必须是 ”.zip“结尾
+   */
+  Name?: string
+}
+
+/**
+ * 渠道合作安卓加固策略信息
+ */
+export interface AndroidPlan {
+  /**
+   * 非必输字段，PlanId 是指本次加固使用的配置策略Id，可通过载入上次配置接口获取。其值非0时，代表引用对应的策略。
+   */
+  PlanId?: number
+  /**
+   * 本次操作的包名。
+当收费模式是安卓按年收费和安卓免费试用的在线加固和输出工具加固时，要求该字段必输，且与AndroidAppInfo.AppPkgName值相等。
+   */
+  AppPkgName?: string
+  /**
+   * 安卓app的文件类型，本次加固操作的应用类型 。 
+安卓在线加固和输出工具加固必输，其值需等于“apk”或“aab”，且与AndroidAppInfo.AppType值相等。
+
+   */
+  AppType?: string
+  /**
+   * 安卓加固必输字段。
+加固策略，json格式字符串。
+字段说明（0-关闭，1-开启）：
+        "enable"=1 #DEX整体加固;
+        "antiprotect"=1 #反调试;
+        "antirepack"=1 #防重打包、防篡改;
+        "dexsig"=1       #签名校验;
+        "antimonitor"=1 #防模拟器运行保护;
+        "ptrace"=1 #防动态注入、动态调试;
+        "so"."enable" = 1 #文件加密;
+        "vmp"."enable" = 1 #VMP虚拟化保护;
+        "respro"."assets"."enable" = 1 #assets资源文件加密
+       "respro"."res"."enable" = 1 #res资源文件加密
+
+so文件加密：
+支持5种架构:
+apk 格式: /lib/armeabi/libxxx.so,/lib/arm64-v8a/libxxx.so,/lib/armeabi-v7a/libxxx.so,/lib/x86/libxxx.so,/lib/x86_64/libxxx.so
+aab格式: /base/lib/armeabi/libxxx.so,/base/lib/arm64-v8a/libxxx.so,/base/lib/armeabi-v7a/libxxx.so,/base/lib/x86/libxxx.so,/base/lib/x86_64/libxxx.so
+请列举 SO 库在 apk 文件解压后的完整有效路径，如:/lib/armeabi/libxxx.so；
+需要加固的 SO 库需确认为自研的 SO 库，不要加固第三方 SO 库，否则会增加 crash 风险
+
+res资源文件加密注意事项：
+请指定需要加密的文件全路径，如：res/layout/1.xml;
+res资源文件加密不能加密APP图标
+res目录文件，不能加密以下后缀规则的文件".wav", ".mp2", ".mp3", ".ogg", ".aac", ".mpg",".mpeg", ".mid", ".midi", ".smf", ".jet", ".rtttl", ".imy", ".xmf", ".mp4", ".m4a", ".m4v", ".3gp",".3gpp", ".3g2", ".3gpp2", ".amr", ".awb", ".wma", ".wmv"
+
+assets资源文件加密注意事项:
+请指定需要加密的文件全路径，如：assets/main.js；可以完整路径，也可以相对路径。
+如果有通配符需要完整路径 ":all"或者"*"代表所有文件
+assets资源文件加密不能加密APP图标
+assets目录文件，不能加密以下后缀规则的文件".wav", ".mp2", ".mp3", ".ogg", ".aac", ".mpg",".mpeg", ".mid", ".midi", ".smf", ".jet", ".rtttl", ".imy", ".xmf", ".mp4", ".m4a", ".m4v", ".3gp",".3gpp", ".3g2", ".3gpp2", ".amr", ".awb", ".wma", ".wmv"
+
+
+apk[dex+so+vmp+res+assets]加固参数示例：
+‘{
+    "dex": {
+        "enable": 1,
+        "antiprotect": 1,
+        "antirepack": 1,
+        "dexsig": 1,
+        "antimonitor": 1,
+        "ptrace": 1
+    },
+    "so": {
+        "enable": 1,
+        "ver": "1.3.3",
+        "file": [
+            "/lib/armeabi/libtest.so"
+        ]
+    },
+    "vmp": {
+        "enable": 1,
+        "ndkpath": "/xxx/android-ndk-r10e",
+        "profile": "/xxx/vmpprofile.txt",
+        "mapping": "/xxx/mapping.txt"
+    },
+    "respro": {
+        "assets": {
+            "enable": 1,
+            "file": [
+                "assets/1.js",
+                "assets/2.jpg"
+            ]
+        },
+        "res": {
+            "enable": 1,
+            "file": [
+                "res/layout/1.xml",
+                "res/layout/2.xml"
+            ]
+        }
+    }
+}’
+
+aab加固方案一 
+[dex+res+assets]加固json字符串：
+‘{
+    "dex": {
+        "enable": 1,
+        "antiprotect": 1,
+        "antimonitor": 1
+    },
+    "respro": {
+        "assets": {
+            "enable": 1,
+            "file": [
+                "assets/1.js",
+                "assets/2.jpg"
+            ]
+        },
+        "res": {
+            "enable": 1,
+            "file": [
+                "res/layout/1.xml",
+                "res/layout/2.xml"
+            ]
+        }
+    }
+}’
+
+aab加固方案二
+单独vmp加固：
+‘{
+    "vmp": {
+        "enable": 1,
+        "ndkpath": "/xxx/android-ndk-r10e",
+        "profile": "/xxx/vmpprofile.txt",
+        "mapping": "/xxx/mapping.txt",
+        "antiprotect": 1,
+        "antimonitor": 1
+    }
+}’
+   */
+  EncryptParam?: string
+}
+
+/**
+ * 渠道合作ios源码混淆加固结果
+ */
+export interface IOSResult {
+  /**
+   * 加固任务结果Id
+   */
+  ResultId?: string
 }
 
 /**
@@ -458,25 +886,97 @@ export interface DescribeShieldPlanInstanceResponse {
 }
 
 /**
- * 提交app加固的服务信息
+ * DescribeEncryptPlan请求参数结构体
  */
-export interface ServiceInfo {
+export interface DescribeEncryptPlanRequest {
   /**
-   * 服务版本，基础版basic，专业版professional，企业版enterprise。
+   * 平台类型  1.android安卓加固   2.ios源码混淆  3.sdk加固  4.applet小程序加固
    */
-  ServiceEdition: string
+  PlatformType: number
   /**
-   * 任务处理完成后的反向通知回调地址，如果不需要通知请传递空字符串。通知为POST请求，post包体数据示例{"Response":{"ItemId":"4cdad8fb86f036b06bccb3f58971c306","ShieldCode":0,"ShieldMd5":"78701576793c4a5f04e1c9660de0aa0b","ShieldSize":11997354,"TaskStatus":1,"TaskTime":1539148141}}，调用方需要返回如下信息，{"Result":"ok","Reason":"xxxxx"}，如果Result字段值不等于ok会继续回调。
+   * 订单采购类型 1-免费试用 2-按年收费 3-按次收费
    */
-  CallbackUrl: string
+  OrderType: number
   /**
-   * 提交来源 YYB-应用宝 RDM-rdm MC-控制台 MAC_TOOL-mac工具 WIN_TOOL-window工具。
+   * 1-在线加固；2-输出工具
    */
-  SubmitSource: string
+  EncryptOpType: number
   /**
-   * 加固策略编号，如果不传则使用系统默认加固策略。如果指定的plan不存在会返回错误。
+   * 本次加固使用的资源id
    */
-  PlanId?: number
+  ResourceId: string
+  /**
+   * （条件过滤字段）安卓加固查询时，根据包名查询
+   */
+  AppPkgName?: string
+  /**
+   * （条件过滤字段）安卓加固查询时，根据应用格式查询，枚举值：“apk”、“aab”
+   */
+  AppType?: string
+}
+
+/**
+ * DescribeEncryptInstances请求参数结构体
+ */
+export interface DescribeEncryptInstancesRequest {
+  /**
+   * 多记录查询时使用，页码
+   */
+  PageNumber?: number
+  /**
+   * 多记录每页展示数量
+   */
+  PageSize?: number
+  /**
+   * 多记录查询时排序使用  仅支持CreateTime 任务创建时间排序
+   */
+  OrderField?: string
+  /**
+   * 升序（asc）还是降序（desc），默认：desc。
+   */
+  OrderDirection?: string
+  /**
+   * (条件过滤字段) 平台类型  1.android安卓加固   2.ios源码混淆  3.sdk加固  4.applet小程序加固
+   */
+  PlatformType?: number
+  /**
+   * (条件过滤字段) 订单采购类型 1-免费试用 2-按年收费 3-按次收费
+   */
+  OrderType?: number
+  /**
+   * (条件过滤字段) 1-在线加固 或 2-输出工具加固
+   */
+  EncryptOpType?: number
+  /**
+   * (条件过滤字段) 单记录查询时使用，结果ID该字段非空时，结构会根据结果ID进行单记录查询，符合查询条件时，只返回一条记录。
+   */
+  ResultId?: string
+  /**
+   * (条件过滤字段) 查询与订单Id关联的任务
+   */
+  OrderId?: string
+  /**
+   * (条件过滤字段) 查询与资源Id关联的任务
+   */
+  ResourceId?: string
+  /**
+   * (条件过滤字段) 安卓应用类型：安卓-apk; 安卓-aab;
+   */
+  AppType?: string
+  /**
+   * （条件过滤字段）安卓应用的包名
+   */
+  AppPkgName?: string
+  /**
+   * 加固结果，
+0：正在排队；
+1：加固成功；
+2：加固中；
+3：加固失败；
+5：重试；
+多记录查询时，根据查询结果进行检索使用。
+   */
+  EncryptState?: Array<number>
 }
 
 /**
@@ -622,149 +1122,6 @@ export interface ResultListItem {
 }
 
 /**
- * 资源服务信息
- */
-export interface ResourceServiceInfo {
-  /**
-   * 创建时间戳
-   */
-  CreateTime: number
-  /**
-   * 到期时间戳
-   */
-  ExpireTime: number
-  /**
-   * 资源名称，如应用加固，源码混淆
-   */
-  ResourceName: string
-}
-
-/**
- * DescribeResourceInstances请求参数结构体
- */
-export interface DescribeResourceInstancesRequest {
-  /**
-   * 支持CreateTime、ExpireTime、AppName、AppPkgName、BindValue、IsBind过滤
-   */
-  Filters?: Array<Filter>
-  /**
-   * 偏移量，默认为0
-   */
-  Offset?: number
-  /**
-   * 数量限制，默认为20，最大值为100。
-   */
-  Limit?: number
-  /**
-   * 资源类别id数组，13624：加固专业版，12750：企业版。空数组表示返回全部资源。
-   */
-  Pids?: Array<number>
-  /**
-   * 按某个字段排序，目前支持CreateTime、ExpireTime其中的一个排序。
-   */
-  OrderField?: string
-  /**
-   * 升序（asc）还是降序（desc），默认：desc。
-   */
-  OrderDirection?: string
-}
-
-/**
- * DescribeShieldPlanInstance请求参数结构体
- */
-export interface DescribeShieldPlanInstanceRequest {
-  /**
-   * 资源id
-   */
-  ResourceId: string
-  /**
-   * 服务类别id
-   */
-  Pid: number
-}
-
-/**
- * DescribeUserBaseInfoInstance请求参数结构体
- */
-export type DescribeUserBaseInfoInstanceRequest = null
-
-/**
- * CreateResourceInstances返回参数结构体
- */
-export interface CreateResourceInstancesResponse {
-  /**
-   * 新创建的资源列表。
-   */
-  ResourceSet?: Array<string>
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * app的详细基础信息
- */
-export interface AppDetailInfo {
-  /**
-   * app的名称
-   */
-  AppName: string
-  /**
-   * app的包名
-   */
-  AppPkgName: string
-  /**
-   * app的版本号
-   */
-  AppVersion: string
-  /**
-   * app的大小
-   */
-  AppSize: number
-  /**
-   * app的md5
-   */
-  AppMd5: string
-  /**
-   * app的图标url
-   */
-  AppIconUrl: string
-  /**
-   * app的文件名称
-   */
-  FileName: string
-}
-
-/**
- * 加固策略信息
- */
-export interface ShieldPlanInfo {
-  /**
-   * 加固策略数量
-   */
-  TotalCount: number
-  /**
-   * 加固策略具体信息数组
-   */
-  PlanSet: Array<PlanDetailInfo>
-}
-
-/**
- * 筛选数据结构
- */
-export interface Filter {
-  /**
-   * 需要过滤的字段
-   */
-  Name: string
-  /**
-   * 需要过滤字段的值
-   */
-  Value?: string
-}
-
-/**
  * DeleteShieldInstances返回参数结构体
  */
 export interface DeleteShieldInstancesResponse {
@@ -776,6 +1133,49 @@ export interface DeleteShieldInstancesResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 渠道合作安卓加固App信息
+ */
+export interface AndroidAppInfo {
+  /**
+   * app文件的md5算法值，需要正确传递，在线加固必输。
+例如linux环境下执行算法命令md5sum ：
+#md5sum test.apk 
+d40cc11e4bddd643ecdf29cde729a12b
+   */
+  AppMd5?: string
+  /**
+   * app的大小，非必输。
+   */
+  AppSize?: number
+  /**
+   * app下载链接，在线加固必输。
+   */
+  AppUrl?: string
+  /**
+   * app名称，非必输
+   */
+  AppName?: string
+  /**
+   * app的包名，本次操作的包名。
+当安卓是按年收费、免费试用加固时，在线加固和输出工具要求该字段必输，且与AndroidPlan.AppPkgName值相等。
+   */
+  AppPkgName?: string
+  /**
+   * app的文件名，非必输。
+   */
+  AppFileName?: string
+  /**
+   * app版本号，非必输。
+   */
+  AppVersion?: string
+  /**
+   * 安卓app的文件类型，本次加固操作的应用类型 。
+安卓在线加固和输出工具加固必输，其值需等于“apk”或“aab”，且与AndroidAppInfo.AppType值相等。
+   */
+  AppType?: string
 }
 
 /**
@@ -854,6 +1254,320 @@ export interface DescribeUrlDetectionResultResponse {
 }
 
 /**
+ * CreateShieldInstance请求参数结构体
+ */
+export interface CreateShieldInstanceRequest {
+  /**
+   * 待加固的应用信息
+   */
+  AppInfo: AppInfo
+  /**
+   * 加固服务信息
+   */
+  ServiceInfo: ServiceInfo
+}
+
+/**
+ * DescribeShieldPlanInstance请求参数结构体
+ */
+export interface DescribeShieldPlanInstanceRequest {
+  /**
+   * 资源id
+   */
+  ResourceId: string
+  /**
+   * 服务类别id
+   */
+  Pid: number
+}
+
+/**
+ * DescribeEncryptPlan返回参数结构体
+ */
+export interface DescribeEncryptPlanResponse {
+  /**
+   * 平台类型整型值
+   */
+  PlatformType?: number
+  /**
+   * 平台类型描述 1.android安卓加固   2.ios源码混淆  3.sdk加固  4.applet小程序加固
+   */
+  PlatformTypeDesc?: string
+  /**
+   * 1- 在线加固 2-输出工具加固
+   */
+  EncryptOpType?: number
+  /**
+   * 1- 在线加固 2-输出工具加固
+   */
+  EncryptOpTypeDesc?: string
+  /**
+   * 订单收费类型枚举值
+   */
+  OrderType?: number
+  /**
+   * 订单收费类型描述
+   */
+  OrderTypeDesc?: string
+  /**
+   * 资源id
+   */
+  ResourceId?: string
+  /**
+   * 上次安卓加固策略
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AndroidPlan?: AndroidPlan
+  /**
+   * 上次小程序加固策略
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AppletPlan?: AppletPlan
+  /**
+   * 上次ios源码混淆加固配置
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IOSPlan?: IOSPlan
+  /**
+   * 上次sdk加固配置
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SDKPlan?: SDKPlan
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateResourceInstances返回参数结构体
+ */
+export interface CreateResourceInstancesResponse {
+  /**
+   * 新创建的资源列表。
+   */
+  ResourceSet?: Array<string>
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * app的详细基础信息
+ */
+export interface AppDetailInfo {
+  /**
+   * app的名称
+   */
+  AppName: string
+  /**
+   * app的包名
+   */
+  AppPkgName: string
+  /**
+   * app的版本号
+   */
+  AppVersion: string
+  /**
+   * app的大小
+   */
+  AppSize: number
+  /**
+   * app的md5
+   */
+  AppMd5: string
+  /**
+   * app的图标url
+   */
+  AppIconUrl: string
+  /**
+   * app的文件名称
+   */
+  FileName: string
+}
+
+/**
+ * 加固策略信息
+ */
+export interface ShieldPlanInfo {
+  /**
+   * 加固策略数量
+   */
+  TotalCount: number
+  /**
+   * 加固策略具体信息数组
+   */
+  PlanSet: Array<PlanDetailInfo>
+}
+
+/**
+ * DescribeOrderInstances请求参数结构体
+ */
+export interface DescribeOrderInstancesRequest {
+  /**
+   * 页码
+   */
+  PageNumber?: number
+  /**
+   * 每页展示数量
+   */
+  PageSize?: number
+  /**
+   * 按某个字段排序，目前仅支持CreateTime排序。
+   */
+  OrderField?: string
+  /**
+   * 升序（asc）还是降序（desc），默认：desc。
+   */
+  OrderDirection?: string
+  /**
+   * （条件过滤字段）平台类型  1.android安卓加固   2.ios源码混淆  3.sdk加固  4.applet小程序加固
+   */
+  PlatformType?: number
+  /**
+   * （条件过滤字段）订单采购类型 1-免费试用 2-按年收费 3-按次收费
+   */
+  OrderType?: number
+  /**
+   * （条件过滤字段）订单审批状态：
+   */
+  ApprovalStatus?: number
+  /**
+   * （条件过滤字段）资源状态：
+   */
+  ResourceStatus?: number
+  /**
+   * （条件过滤字段）订单ID
+   */
+  OrderId?: string
+  /**
+   * （条件过滤字段）资源ID
+   */
+  ResourceId?: string
+  /**
+   * （条件过滤字段）安卓包名，查询android安卓加固订单时使用
+   */
+  AppPkgName?: string
+}
+
+/**
+ * DescribeResourceInstances请求参数结构体
+ */
+export interface DescribeResourceInstancesRequest {
+  /**
+   * 支持CreateTime、ExpireTime、AppName、AppPkgName、BindValue、IsBind过滤
+   */
+  Filters?: Array<Filter>
+  /**
+   * 偏移量，默认为0
+   */
+  Offset?: number
+  /**
+   * 数量限制，默认为20，最大值为100。
+   */
+  Limit?: number
+  /**
+   * 资源类别id数组，13624：加固专业版，12750：企业版。空数组表示返回全部资源。
+   */
+  Pids?: Array<number>
+  /**
+   * 按某个字段排序，目前支持CreateTime、ExpireTime其中的一个排序。
+   */
+  OrderField?: string
+  /**
+   * 升序（asc）还是降序（desc），默认：desc。
+   */
+  OrderDirection?: string
+}
+
+/**
+ * CreateOrderInstance请求参数结构体
+ */
+export interface CreateOrderInstanceRequest {
+  /**
+   * 平台类型枚举值：1-android安卓加固  ；2-ios源码混淆 ； 3-sdk加固 ； 4-applet小程序加固
+   */
+  PlatformType: number
+  /**
+   * 订单采购类型 1-免费试用 ；2-按年收费 ；3-按次收费
+   */
+  OrderType: number
+  /**
+   * 代表应用包名列表，值为单个包名（例如：“a.b.xxx”）或多个包名用逗号隔开(例如：“a.b.xxx,b.c.xxx”)。
+当安卓按年收费加固或安卓免费试用加固时，该字段要求非空，即PlatformType=1 并且 OrderType=2时，AppPkgNameList必传值。
+
+   */
+  AppPkgNameList?: string
+}
+
+/**
+ * 渠道合作加固小程序加固结果
+ */
+export interface AppletResult {
+  /**
+   * 加固任务结果id
+   */
+  ResultId?: string
+  /**
+   * 资源id
+   */
+  ResourceId?: string
+  /**
+   * 订单id
+   */
+  OrderId?: string
+  /**
+   * 操作账号
+   */
+  OpUin?: number
+  /**
+   * 加固结果
+   */
+  EncryptState?: number
+  /**
+   * 加固结果描述
+   */
+  EncryptStateDesc?: string
+  /**
+   * 失败错误码
+   */
+  EncryptErrCode?: number
+  /**
+   * 失败原因
+   */
+  EncryptErrDesc?: string
+  /**
+   * 解决方案
+   */
+  EncryptErrRef?: string
+  /**
+   * 任务创建时间
+   */
+  CreatTime?: string
+  /**
+   * 任务开始处理时间
+   */
+  StartTime?: string
+  /**
+   * 任务处理结束时间
+   */
+  EndTime?: string
+  /**
+   * 加固耗时（秒单位）
+   */
+  CostTime?: number
+  /**
+   * 在线加固成功下载包
+   */
+  EncryptPkgUrl?: string
+  /**
+   * 本次加固配置
+   */
+  AppletInfo?: AppletInfo
+}
+
+/**
  * DescribeApkDetectionResult返回参数结构体
  */
 export interface DescribeApkDetectionResultResponse {
@@ -891,6 +1605,56 @@ export interface DescribeResourceInstancesResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * CreateOrderInstance返回参数结构体
+ */
+export interface CreateOrderInstanceResponse {
+  /**
+   * 订单Id
+   */
+  OrderId?: string
+  /**
+   * 与订单关联的资源id
+   */
+  ResourceId?: Array<string>
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 提交app加固的服务信息
+ */
+export interface ServiceInfo {
+  /**
+   * 服务版本，基础版basic，专业版professional，企业版enterprise。
+   */
+  ServiceEdition: string
+  /**
+   * 任务处理完成后的反向通知回调地址，如果不需要通知请传递空字符串。通知为POST请求，post包体数据示例{"Response":{"ItemId":"4cdad8fb86f036b06bccb3f58971c306","ShieldCode":0,"ShieldMd5":"78701576793c4a5f04e1c9660de0aa0b","ShieldSize":11997354,"TaskStatus":1,"TaskTime":1539148141}}，调用方需要返回如下信息，{"Result":"ok","Reason":"xxxxx"}，如果Result字段值不等于ok会继续回调。
+   */
+  CallbackUrl: string
+  /**
+   * 提交来源 YYB-应用宝 RDM-rdm MC-控制台 MAC_TOOL-mac工具 WIN_TOOL-window工具。
+   */
+  SubmitSource: string
+  /**
+   * 加固策略编号，如果不传则使用系统默认加固策略。如果指定的plan不存在会返回错误。
+   */
+  PlanId?: number
+}
+
+/**
+ * CancelEncryptTask请求参数结构体
+ */
+export interface CancelEncryptTaskRequest {
+  /**
+   * 加固任务结果Id
+   */
+  ResultId: string
 }
 
 /**
@@ -938,6 +1702,127 @@ export interface CreateCosSecKeyInstanceResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 渠道合作加固订单资源信息
+ */
+export interface Orders {
+  /**
+   * 订单号
+   */
+  OrderId?: string
+  /**
+   * 平台类型整型值
+   */
+  PlatformType?: number
+  /**
+   * 平台类型描述：  1.android安卓加固   2.ios源码混淆  3.sdk加固  4.applet小程序加固
+   */
+  PlatformTypeDesc?: string
+  /**
+   * 订单采购类型整型值
+   */
+  OrderType?: number
+  /**
+   * 订单采购类型描述： 1-免费试用 2-按年收费 3-按次收费
+   */
+  OrderTypeDesc?: string
+  /**
+   * 安卓包年收费加固的包名
+   */
+  AppPkgName?: string
+  /**
+   * 资源号
+   */
+  ResourceId?: string
+  /**
+   * 资源状态整型值
+   */
+  ResourceStatus?: number
+  /**
+   * 资源状态描述
+0-未生效、1-生效中、2-已失效。
+   */
+  ResourceStatusDesc?: string
+  /**
+   * 订单类型为免费试用时的免费加固次数。
+   */
+  TestTimes?: number
+  /**
+   * 资源生效时间
+   */
+  ValidTime?: string
+  /**
+   * 资源过期时间
+   */
+  ExpireTime?: string
+  /**
+   * 资源创建时间
+   */
+  CreateTime?: string
+  /**
+   * 订单审批人
+   */
+  Approver?: string
+  /**
+   * 订单审批状态整型值
+   */
+  ApprovalStatus?: number
+  /**
+   * 订单审批状态整型值描述：0-未审批、1-审批通过、2-驳回。
+   */
+  ApprovalStatusDesc?: string
+  /**
+   * 订单审批时间
+   */
+  ApprovalTime?: string
+  /**
+   * 按次收费加固资源，其关联的总任务数
+   */
+  TimesTaskTotalCount?: number
+  /**
+   * 按次收费加固资源，其关联的任务成功数
+   */
+  TimesTaskSuccessCount?: number
+  /**
+   * 按次收费加固资源，其关联的任务失败数
+   */
+  TimesTaskFailCount?: number
+}
+
+/**
+ * CreateEncryptInstance请求参数结构体
+ */
+export interface CreateEncryptInstanceRequest {
+  /**
+   * 平台类型  1.android安卓加固   2.ios源码混淆  3.sdk加固  4.applet小程序加固
+   */
+  PlatformType: number
+  /**
+   * 订单采购类型 1-免费试用 2-按年收费 3-按次收费
+   */
+  OrderType: number
+  /**
+   * 1-在线加固、  2-输出工具加固
+   */
+  EncryptOpType: number
+  /**
+   * 本次加固使用的资源id
+   */
+  ResourceId: string
+  /**
+   * 渠道合作安卓加固App信息
+   */
+  AndroidAppInfo?: AndroidAppInfo
+  /**
+   * 渠道合作安卓加固策略信息
+   */
+  AndroidPlan?: AndroidPlan
+  /**
+   * 小程序加固信息
+   */
+  AppletInfo?: AppletInfo
 }
 
 /**
@@ -1088,4 +1973,62 @@ export interface OptPluginListItem {
    * 非广告插件描述
    */
   PluginDesc: string
+}
+
+/**
+ * 渠道合作加固结果信息
+ */
+export interface EncryptResults {
+  /**
+   * 平台类型枚举值  1-android安卓加固   2-ios源码混淆  3-sdk加固  4-applet小程序加固
+   */
+  PlatformType?: number
+  /**
+   * 平台类型描述  1-android安卓加固   2-ios源码混淆  3-sdk加固  4-applet小程序加固
+   */
+  PlatformDesc?: string
+  /**
+   * 订单采购类型枚举值， 1-免费试用 2-按年收费 3-按次收费
+   */
+  OrderType?: number
+  /**
+   * 订单采购类型 描述：1-免费试用 2-按年收费 3-按次收费
+   */
+  OrderTypeDesc?: string
+  /**
+   * 枚举值：1-在线加固 或 2-输出工具加固
+   */
+  EncryptOpType?: number
+  /**
+   * 描述：1-在线加固 或 2-输出工具加固
+   */
+  EncryptOpTypeDesc?: string
+  /**
+   * 与当前任务关联的资源Id
+   */
+  ResourceId?: string
+  /**
+   * 与当前任务关联的订单Id
+   */
+  OrderId?: string
+  /**
+   * 对应PlatformType平台类型值   1-android安卓加固结果
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AndroidResult?: AndroidResult
+  /**
+   * 对应PlatformType平台类型值   2-ios源码混淆加固结果
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IOSResult?: IOSResult
+  /**
+   * 对应PlatformType平台类型值   3-sdk加固结果
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SDKResult?: SDKResult
+  /**
+   * 对应PlatformType平台类型值   4-applet小程序加固结果
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AppletResult?: AppletResult
 }

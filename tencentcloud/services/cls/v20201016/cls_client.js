@@ -273,6 +273,12 @@ cls.pb.cc cls.pb.h cls.proto
         return this.request("CreateIndex", req, cb);
     }
     /**
+     * 本接口用于获取ScheduledSql任务列表
+     */
+    async DescribeScheduledSqlInfo(req, cb) {
+        return this.request("DescribeScheduledSqlInfo", req, cb);
+    }
+    /**
      * 删除采集规则配置
      */
     async DeleteConfig(req, cb) {
@@ -453,10 +459,10 @@ cls.pb.cc cls.pb.h cls.proto
         return this.request("SearchLog", req, cb);
     }
     /**
-     * 该接口用于修改通知渠道组
+     * 本接口用于删除ScheduledSql任务
      */
-    async ModifyAlarmNotice(req, cb) {
-        return this.request("ModifyAlarmNotice", req, cb);
+    async DeleteScheduledSql(req, cb) {
+        return this.request("DeleteScheduledSql", req, cb);
     }
     /**
      * 获取制定机器组下的机器状态
@@ -555,6 +561,12 @@ cls.pb.cc cls.pb.h cls.proto
         return this.request("DescribeConsumer", req, cb);
     }
     /**
+     * 该接口用于修改通知渠道组
+     */
+    async ModifyAlarmNotice(req, cb) {
+        return this.request("ModifyAlarmNotice", req, cb);
+    }
+    /**
      * 获取采集规则配置
      */
     async DescribeConfigs(req, cb) {
@@ -631,6 +643,12 @@ cls.pb.cc cls.pb.h cls.proto
      */
     async CreateExport(req, cb) {
         return this.request("CreateExport", req, cb);
+    }
+    /**
+     * 本接口用于修改ScheduledSql任务
+     */
+    async ModifyScheduledSql(req, cb) {
+        return this.request("ModifyScheduledSql", req, cb);
     }
     /**
      * 关闭Kafka协议消费

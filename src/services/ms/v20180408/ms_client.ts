@@ -21,45 +21,69 @@ import {
   PlanDetailInfo,
   AppSetInfo,
   CreateShieldPlanInstanceResponse,
+  DescribeEncryptInstancesResponse,
+  ResourceServiceInfo,
   CreateResourceInstancesRequest,
   DescribeShieldInstancesResponse,
   ShieldInfo,
+  SDKPlan,
   DescribeShieldResultRequest,
-  CreateShieldInstanceRequest,
+  CancelEncryptTaskResponse,
+  DescribeOrderInstancesResponse,
   CreateCosSecKeyInstanceRequest,
+  IOSPlan,
   DescribeUserBaseInfoInstanceResponse,
+  Filter,
   CreateShieldPlanInstanceRequest,
+  CreateEncryptInstanceResponse,
+  SDKResult,
   CreateBindInstanceRequest,
   CreateShieldInstanceResponse,
+  AppletPlan,
   DeleteShieldInstancesRequest,
   ResourceInfo,
+  AndroidResult,
+  DescribeUserBaseInfoInstanceRequest,
   DescribeShieldInstancesRequest,
+  AppletInfo,
+  AndroidPlan,
+  IOSResult,
   DescribeUrlDetectionResultRequest,
   AppInfo,
   DescribeShieldPlanInstanceResponse,
-  ServiceInfo,
+  DescribeEncryptPlanRequest,
+  DescribeEncryptInstancesRequest,
   SoInfo,
   PluginListItem,
   DescribeApkDetectionResultRequest,
   ResultListItem,
-  ResourceServiceInfo,
-  DescribeResourceInstancesRequest,
+  DeleteShieldInstancesResponse,
+  AndroidAppInfo,
+  DescribeUrlDetectionResultResponse,
+  CreateShieldInstanceRequest,
   DescribeShieldPlanInstanceRequest,
-  DescribeUserBaseInfoInstanceRequest,
+  DescribeEncryptPlanResponse,
   CreateResourceInstancesResponse,
   AppDetailInfo,
   ShieldPlanInfo,
-  Filter,
-  DeleteShieldInstancesResponse,
-  DescribeUrlDetectionResultResponse,
+  DescribeOrderInstancesRequest,
+  DescribeResourceInstancesRequest,
+  CreateOrderInstanceRequest,
+  AppletResult,
   DescribeApkDetectionResultResponse,
   DescribeResourceInstancesResponse,
+  CreateOrderInstanceResponse,
+  ServiceInfo,
+  CancelEncryptTaskRequest,
   CreateCosSecKeyInstanceResponse,
+  Orders,
+  CreateEncryptInstanceRequest,
   PlanInfo,
   DescribeShieldResultResponse,
   CreateBindInstanceResponse,
   BindInfo,
   OptPluginListItem,
+  EncryptResults,
 } from "./ms_models"
 
 /**
@@ -72,13 +96,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 通过唯一标识获取加固的结果。（注意：根据国家互联网用户实名制相关要求，使用该产品前，需先完成实名认证。）
+   * 对资源进行策略新增。（注意：根据国家互联网用户实名制相关要求，使用该产品前，需先完成实名认证。）
    */
-  async DescribeShieldResult(
-    req: DescribeShieldResultRequest,
-    cb?: (error: string, rep: DescribeShieldResultResponse) => void
-  ): Promise<DescribeShieldResultResponse> {
-    return this.request("DescribeShieldResult", req, cb)
+  async CreateShieldPlanInstance(
+    req: CreateShieldPlanInstanceRequest,
+    cb?: (error: string, rep: CreateShieldPlanInstanceResponse) => void
+  ): Promise<CreateShieldPlanInstanceResponse> {
+    return this.request("CreateShieldPlanInstance", req, cb)
+  }
+
+  /**
+   * 删除一个或者多个app加固信息。（注意：根据国家互联网用户实名制相关要求，使用该产品前，需先完成实名认证。）
+   */
+  async DeleteShieldInstances(
+    req: DeleteShieldInstancesRequest,
+    cb?: (error: string, rep: DeleteShieldInstancesResponse) => void
+  ): Promise<DeleteShieldInstancesResponse> {
+    return this.request("DeleteShieldInstances", req, cb)
   }
 
   /**
@@ -132,6 +166,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 通过唯一标识获取加固的结果。（注意：根据国家互联网用户实名制相关要求，使用该产品前，需先完成实名认证。）
+   */
+  async DescribeShieldResult(
+    req: DescribeShieldResultRequest,
+    cb?: (error: string, rep: DescribeShieldResultResponse) => void
+  ): Promise<DescribeShieldResultResponse> {
+    return this.request("DescribeShieldResult", req, cb)
+  }
+
+  /**
    * 用户通过该接口提交应用进行应用加固，加固后需通过DescribeShieldResult接口查询加固结果。（注意：根据国家互联网用户实名制相关要求，使用该产品前，需先完成实名认证。）
    */
   async CreateShieldInstance(
@@ -164,13 +208,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 对资源进行策略新增。（注意：根据国家互联网用户实名制相关要求，使用该产品前，需先完成实名认证。）
+   * 该接口供渠道合作应用加固使用，接口调用有白名单用户限制，取消渠道合作加固中的任务。
    */
-  async CreateShieldPlanInstance(
-    req: CreateShieldPlanInstanceRequest,
-    cb?: (error: string, rep: CreateShieldPlanInstanceResponse) => void
-  ): Promise<CreateShieldPlanInstanceResponse> {
-    return this.request("CreateShieldPlanInstance", req, cb)
+  async CancelEncryptTask(
+    req: CancelEncryptTaskRequest,
+    cb?: (error: string, rep: CancelEncryptTaskResponse) => void
+  ): Promise<CancelEncryptTaskResponse> {
+    return this.request("CancelEncryptTask", req, cb)
   }
 
   /**
@@ -194,12 +238,58 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除一个或者多个app加固信息。（注意：根据国家互联网用户实名制相关要求，使用该产品前，需先完成实名认证。）
+   * 该接口供渠道合作应用加固使用，接口调用有白名单用户限制，用于查询加固任务，入参中的条件过滤字段均为精准匹配。支持功能点：1. 多任务分页查询  2.根据任务Id唯一值查询单记录
    */
-  async DeleteShieldInstances(
-    req: DeleteShieldInstancesRequest,
-    cb?: (error: string, rep: DeleteShieldInstancesResponse) => void
-  ): Promise<DeleteShieldInstancesResponse> {
-    return this.request("DeleteShieldInstances", req, cb)
+  async DescribeEncryptInstances(
+    req: DescribeEncryptInstancesRequest,
+    cb?: (error: string, rep: DescribeEncryptInstancesResponse) => void
+  ): Promise<DescribeEncryptInstancesResponse> {
+    return this.request("DescribeEncryptInstances", req, cb)
+  }
+
+  /**
+   * 该接口供渠道合作应用加固使用，接口调用有白名单用户限制，用于创建加固任务。
+   */
+  async CreateEncryptInstance(
+    req: CreateEncryptInstanceRequest,
+    cb?: (error: string, rep: CreateEncryptInstanceResponse) => void
+  ): Promise<CreateEncryptInstanceResponse> {
+    return this.request("CreateEncryptInstance", req, cb)
+  }
+
+  /**
+   * 该接口供渠道合作应用加固使用，接口调用有白名单用户限制。入参中的条件过滤字段均为精准匹配。
+   */
+  async DescribeEncryptPlan(
+    req: DescribeEncryptPlanRequest,
+    cb?: (error: string, rep: DescribeEncryptPlanResponse) => void
+  ): Promise<DescribeEncryptPlanResponse> {
+    return this.request("DescribeEncryptPlan", req, cb)
+  }
+
+  /**
+     * 该接口供渠道合作应用加固使用，接口调用有白名单用户限制。 接口返回的结果为：创建订单后，订单审批状态信息，以及与订单关联的资源状态等信息，入参中的条件过滤字段均为精准匹配。
+接口功能点：
+1.支持多订单分页查询；
+2.支持唯一订单号精准匹配查询；
+3.支持唯一资源号精准匹配查询；
+     */
+  async DescribeOrderInstances(
+    req: DescribeOrderInstancesRequest,
+    cb?: (error: string, rep: DescribeOrderInstancesResponse) => void
+  ): Promise<DescribeOrderInstancesResponse> {
+    return this.request("DescribeOrderInstances", req, cb)
+  }
+
+  /**
+     * 该接口供渠道合作应用加固使用，接口调用有白名单用户限制。
+订单类型有：免费试用、按年收费、按次收费。
+应用加固支持的平台类型有：android安卓加固 、ios源码混淆 、sdk加固、applet小程序加固。
+     */
+  async CreateOrderInstance(
+    req: CreateOrderInstanceRequest,
+    cb?: (error: string, rep: CreateOrderInstanceResponse) => void
+  ): Promise<CreateOrderInstanceResponse> {
+    return this.request("CreateOrderInstance", req, cb)
   }
 }

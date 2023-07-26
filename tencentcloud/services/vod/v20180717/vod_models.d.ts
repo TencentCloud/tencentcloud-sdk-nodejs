@@ -7489,7 +7489,7 @@ export interface ManageTaskRequest {
     SubAppId?: number;
 }
 /**
- * 加权轮播媒体文件信息
+ * 轮播媒体文件信息
  */
 export interface RoundPlayListItemInfo {
     /**
@@ -16507,6 +16507,7 @@ export interface MediaTranscodeItem {
     Url?: string;
     /**
      * 转码规格 ID，参见[转码参数模板](https://cloud.tencent.com/document/product/266/33476)。
+  <font color=red>注意：取值 0 表示原始文件。</font>
      */
     Definition?: number;
     /**
@@ -16674,11 +16675,11 @@ export interface SplitMediaResponse {
  */
 export interface RestoreMediaRequest {
     /**
-     * 媒体文件唯一标识列表。
+     * 媒体文件唯一标识列表，最大长度：100。
      */
     FileIds: Array<string>;
     /**
-     * 解冻出的临时媒体文件的可访问持续时长，单位为“天”。
+     * 解冻出的临时媒体文件的可访问持续时长，必须大于0，单位为“天”。
      */
     RestoreDay?: number;
     /**

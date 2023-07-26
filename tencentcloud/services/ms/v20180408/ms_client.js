@@ -28,10 +28,16 @@ class Client extends abstract_client_1.AbstractClient {
         super("ms.tencentcloudapi.com", "2018-04-08", clientConfig);
     }
     /**
-     * 通过唯一标识获取加固的结果。（注意：根据国家互联网用户实名制相关要求，使用该产品前，需先完成实名认证。）
+     * 对资源进行策略新增。（注意：根据国家互联网用户实名制相关要求，使用该产品前，需先完成实名认证。）
      */
-    async DescribeShieldResult(req, cb) {
-        return this.request("DescribeShieldResult", req, cb);
+    async CreateShieldPlanInstance(req, cb) {
+        return this.request("CreateShieldPlanInstance", req, cb);
+    }
+    /**
+     * 删除一个或者多个app加固信息。（注意：根据国家互联网用户实名制相关要求，使用该产品前，需先完成实名认证。）
+     */
+    async DeleteShieldInstances(req, cb) {
+        return this.request("DeleteShieldInstances", req, cb);
     }
     /**
      * 用户可以使用该接口自建资源，只支持白名单用户
@@ -64,6 +70,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeShieldPlanInstance", req, cb);
     }
     /**
+     * 通过唯一标识获取加固的结果。（注意：根据国家互联网用户实名制相关要求，使用该产品前，需先完成实名认证。）
+     */
+    async DescribeShieldResult(req, cb) {
+        return this.request("DescribeShieldResult", req, cb);
+    }
+    /**
      * 用户通过该接口提交应用进行应用加固，加固后需通过DescribeShieldResult接口查询加固结果。（注意：根据国家互联网用户实名制相关要求，使用该产品前，需先完成实名认证。）
      */
     async CreateShieldInstance(req, cb) {
@@ -84,10 +96,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeUrlDetectionResult", req, cb);
     }
     /**
-     * 对资源进行策略新增。（注意：根据国家互联网用户实名制相关要求，使用该产品前，需先完成实名认证。）
+     * 该接口供渠道合作应用加固使用，接口调用有白名单用户限制，取消渠道合作加固中的任务。
      */
-    async CreateShieldPlanInstance(req, cb) {
-        return this.request("CreateShieldPlanInstance", req, cb);
+    async CancelEncryptTask(req, cb) {
+        return this.request("CancelEncryptTask", req, cb);
     }
     /**
      * 获取用户基础信息
@@ -102,10 +114,40 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeApkDetectionResult", req, cb);
     }
     /**
-     * 删除一个或者多个app加固信息。（注意：根据国家互联网用户实名制相关要求，使用该产品前，需先完成实名认证。）
+     * 该接口供渠道合作应用加固使用，接口调用有白名单用户限制，用于查询加固任务，入参中的条件过滤字段均为精准匹配。支持功能点：1. 多任务分页查询  2.根据任务Id唯一值查询单记录
      */
-    async DeleteShieldInstances(req, cb) {
-        return this.request("DeleteShieldInstances", req, cb);
+    async DescribeEncryptInstances(req, cb) {
+        return this.request("DescribeEncryptInstances", req, cb);
+    }
+    /**
+     * 该接口供渠道合作应用加固使用，接口调用有白名单用户限制，用于创建加固任务。
+     */
+    async CreateEncryptInstance(req, cb) {
+        return this.request("CreateEncryptInstance", req, cb);
+    }
+    /**
+     * 该接口供渠道合作应用加固使用，接口调用有白名单用户限制。入参中的条件过滤字段均为精准匹配。
+     */
+    async DescribeEncryptPlan(req, cb) {
+        return this.request("DescribeEncryptPlan", req, cb);
+    }
+    /**
+     * 该接口供渠道合作应用加固使用，接口调用有白名单用户限制。 接口返回的结果为：创建订单后，订单审批状态信息，以及与订单关联的资源状态等信息，入参中的条件过滤字段均为精准匹配。
+接口功能点：
+1.支持多订单分页查询；
+2.支持唯一订单号精准匹配查询；
+3.支持唯一资源号精准匹配查询；
+     */
+    async DescribeOrderInstances(req, cb) {
+        return this.request("DescribeOrderInstances", req, cb);
+    }
+    /**
+     * 该接口供渠道合作应用加固使用，接口调用有白名单用户限制。
+订单类型有：免费试用、按年收费、按次收费。
+应用加固支持的平台类型有：android安卓加固 、ios源码混淆 、sdk加固、applet小程序加固。
+     */
+    async CreateOrderInstance(req, cb) {
+        return this.request("CreateOrderInstance", req, cb);
     }
 }
 exports.Client = Client;

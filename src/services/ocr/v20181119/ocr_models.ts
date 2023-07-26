@@ -1793,6 +1793,10 @@ export interface VatInvoiceItemInfo {
    * 车辆类型
    */
   VehicleType?: string
+  /**
+   * 序号
+   */
+  SerialNumber?: string
 }
 
 /**
@@ -3021,6 +3025,10 @@ export interface OtherInvoice {
    * 表格
    */
   OtherInvoiceTableItems?: Array<OtherInvoiceList>
+  /**
+   * 发票日期
+   */
+  Date?: string
 }
 
 /**
@@ -3569,17 +3577,17 @@ export interface SingleInvoiceItem {
    * 增值税专用发票
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  VatSpecialInvoice: VatInvoiceInfo
+  VatSpecialInvoice?: VatInvoiceInfo
   /**
    * 增值税普通发票
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  VatCommonInvoice: VatInvoiceInfo
+  VatCommonInvoice?: VatInvoiceInfo
   /**
    * 增值税电子普通发票
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  VatElectronicCommonInvoice: VatInvoiceInfo
+  VatElectronicCommonInvoice?: VatInvoiceInfo
   /**
    * 增值税电子专用发票
 注意：此字段可能返回 null，表示取不到有效值。
@@ -3685,6 +3693,11 @@ export interface SingleInvoiceItem {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   MedicalHospitalizedInvoice?: MedicalInvoice
+  /**
+   * 增值税销货清单
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VatSalesList?: VatInvoiceInfo
 }
 
 /**
@@ -3917,6 +3930,22 @@ export interface VatInvoiceInfo {
    * 发票联名
    */
   FormName?: string
+  /**
+   * 是否有区块链标记（0：没有，1：有）
+   */
+  BlockChainMark?: number
+  /**
+   * 是否有收购标记（0：没有，1：有）
+   */
+  AcquisitionMark?: number
+  /**
+   * 小计金额
+   */
+  SubTotal?: string
+  /**
+   * 小计税额
+   */
+  SubTax?: string
 }
 
 /**

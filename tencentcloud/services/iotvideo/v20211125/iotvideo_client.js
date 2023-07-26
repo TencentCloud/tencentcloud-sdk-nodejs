@@ -34,6 +34,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CallTRTCDevice", req, cb);
     }
     /**
+     * 根据设备信息拉取有效套餐列表
+     */
+    async DescribeDevicePackages(req, cb) {
+        return this.request("DescribeDevicePackages", req, cb);
+    }
+    /**
      * 发起AI推理请求
      */
     async CreateAIDetection(req, cb) {
@@ -476,6 +482,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async TransferCloudStorage(req, cb) {
         return this.request("TransferCloudStorage", req, cb);
+    }
+    /**
+     * 删除云存事件
+     */
+    async DeleteCloudStorageEvent(req, cb) {
+        return this.request("DeleteCloudStorageEvent", req, cb);
     }
     /**
      * 拉取账户流水

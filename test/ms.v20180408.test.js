@@ -18,9 +18,19 @@ const client = new tencentcloud.ms.v20180408.Client({
 })
 describe("ms.v20180408.test.js", function () {
 
-it("ms.v20180408.DescribeShieldResult", async function () {
+it("ms.v20180408.CreateShieldPlanInstance", async function () {
     try {
-       const data = await client.DescribeShieldResult({})
+       const data = await client.CreateShieldPlanInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ms.v20180408.DeleteShieldInstances", async function () {
+    try {
+       const data = await client.DeleteShieldInstances({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -78,6 +88,16 @@ it("ms.v20180408.DescribeShieldPlanInstance", async function () {
     }
 })
 
+it("ms.v20180408.DescribeShieldResult", async function () {
+    try {
+       const data = await client.DescribeShieldResult({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ms.v20180408.CreateShieldInstance", async function () {
     try {
        const data = await client.CreateShieldInstance({})
@@ -108,9 +128,9 @@ it("ms.v20180408.DescribeUrlDetectionResult", async function () {
     }
 })
 
-it("ms.v20180408.CreateShieldPlanInstance", async function () {
+it("ms.v20180408.CancelEncryptTask", async function () {
     try {
-       const data = await client.CreateShieldPlanInstance({})
+       const data = await client.CancelEncryptTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -138,9 +158,49 @@ it("ms.v20180408.DescribeApkDetectionResult", async function () {
     }
 })
 
-it("ms.v20180408.DeleteShieldInstances", async function () {
+it("ms.v20180408.DescribeEncryptInstances", async function () {
     try {
-       const data = await client.DeleteShieldInstances({})
+       const data = await client.DescribeEncryptInstances({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ms.v20180408.CreateEncryptInstance", async function () {
+    try {
+       const data = await client.CreateEncryptInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ms.v20180408.DescribeEncryptPlan", async function () {
+    try {
+       const data = await client.DescribeEncryptPlan({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ms.v20180408.DescribeOrderInstances", async function () {
+    try {
+       const data = await client.DescribeOrderInstances({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ms.v20180408.CreateOrderInstance", async function () {
+    try {
+       const data = await client.CreateOrderInstance({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

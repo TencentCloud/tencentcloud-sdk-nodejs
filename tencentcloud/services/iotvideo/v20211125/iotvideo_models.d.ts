@@ -233,6 +233,15 @@ export interface CreateBatchRequest {
     DevPre: string;
 }
 /**
+ * DeleteCloudStorageEvent返回参数结构体
+ */
+export interface DeleteCloudStorageEventResponse {
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * ModifyProductDynamicRegister返回参数结构体
  */
 export interface ModifyProductDynamicRegisterResponse {
@@ -305,13 +314,25 @@ export interface DescribeDeviceStatusLogResponse {
     RequestId?: string;
 }
 /**
- * DescribePackageConsumeTask请求参数结构体
+ * DescribeDevicePackages请求参数结构体
  */
-export interface DescribePackageConsumeTaskRequest {
+export interface DescribeDevicePackagesRequest {
     /**
-     * 任务id
+     * 产品ID
      */
-    TaskId: number;
+    ProductId: string;
+    /**
+     * 设备名称
+     */
+    DeviceName: string;
+    /**
+     * 分页拉取数量
+     */
+    Limit: number;
+    /**
+     * 分页拉取偏移
+     */
+    Offset: number;
 }
 /**
  * ReportAliveDevice请求参数结构体
@@ -445,6 +466,23 @@ export interface ModifyDataForwardRequest {
      * 1-数据信息转发 2-设备上下线状态转发 3-数据信息转发&设备上下线状态转发
      */
     DataChose?: number;
+}
+/**
+ * DescribeCloudStorageThumbnail请求参数结构体
+ */
+export interface DescribeCloudStorageThumbnailRequest {
+    /**
+     * 产品ID
+     */
+    ProductId: string;
+    /**
+     * 设备名称
+     */
+    DeviceName: string;
+    /**
+     * 缩略图文件名
+     */
+    Thumbnail: string;
 }
 /**
  * DescribeDevices返回参数结构体
@@ -893,6 +931,28 @@ export interface DescribeCloudStoragePackageConsumeStatsResponse {
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * 结构体（PackageInfo）记录了设备拥有的有效套餐信息，包括云存开启状态、云存类型、云存回看时长、云存套餐过期时间
+ */
+export interface PackageInfo {
+    /**
+     * 云存开启状态，0为未开启，2为正在生效，1为已过期
+  注：这里只返回状态为0的数据
+     */
+    Status?: number;
+    /**
+     * 云存类型，1为全时云存，2为事件云存
+     */
+    CSType?: number;
+    /**
+     * 云存回看时长
+     */
+    CSShiftDuration?: number;
+    /**
+     * 云存套餐过期时间
+     */
+    CSExpiredTime?: number;
 }
 /**
  * DescribeFirmware请求参数结构体
@@ -1820,25 +1880,30 @@ export interface DescribeAIModelUsageResponse {
     RequestId?: string;
 }
 /**
- * DescribeBalanceTransactions请求参数结构体
+ * DescribePackageConsumeTask请求参数结构体
  */
-export interface DescribeBalanceTransactionsRequest {
+export interface DescribePackageConsumeTaskRequest {
     /**
-     * 账户类型：1-设备接入；2-云存。
+     * 任务id
      */
-    AccountType: number;
+    TaskId: number;
+}
+/**
+ * AI模型申请信息
+ */
+export interface AIModelApplication {
     /**
-     * 分页游标开始，默认为0开始拉取第一条。
+     * 产品ID
      */
-    Offset: number;
+    ProductId: string;
     /**
-     * 分页每页数量。
+     * 产品名称
      */
-    Limit: number;
+    ProductName: string;
     /**
-     * 流水类型：All-全部类型；Recharge-充值；CreateOrder-新购。默认为All
+     * 申请状态：1-已申请；2-已取消；3-已拒绝；4-已通过
      */
-    Operation?: string;
+    Status: number;
 }
 /**
  * BindCloudStorageUser请求参数结构体
@@ -2731,23 +2796,6 @@ export interface DescribeProductDynamicRegisterRequest {
     ProductId: string;
 }
 /**
- * AI模型申请信息
- */
-export interface AIModelApplication {
-    /**
-     * 产品ID
-     */
-    ProductId: string;
-    /**
-     * 产品名称
-     */
-    ProductName: string;
-    /**
-     * 申请状态：1-已申请；2-已取消；3-已拒绝；4-已通过
-     */
-    Status: number;
-}
-/**
  * DescribeFirmwareTaskDistribution返回参数结构体
  */
 export interface DescribeFirmwareTaskDistributionResponse {
@@ -2953,6 +3001,24 @@ export interface DescribeCloudStorageEventsResponse {
      * 视频播放URL
      */
     VideoURL: string;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * DescribeDevicePackages返回参数结构体
+ */
+export interface DescribeDevicePackagesResponse {
+    /**
+     * 有效云存套餐数量
+     */
+    TotalCount?: number;
+    /**
+     * 有效云存套餐列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Packages?: Array<PackageInfo>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -3435,6 +3501,23 @@ export interface SetForwardAuthRequest {
     QueueType: number;
 }
 /**
+ * DescribeCloudStorage请求参数结构体
+ */
+export interface DescribeCloudStorageRequest {
+    /**
+     * 产品ID
+     */
+    ProductId: string;
+    /**
+     * 设备名称
+     */
+    DeviceName: string;
+    /**
+     * 云存用户ID
+     */
+    UserId?: string;
+}
+/**
  * DescribeBalanceTransactions返回参数结构体
  */
 export interface DescribeBalanceTransactionsResponse {
@@ -3634,9 +3717,9 @@ export interface DescribePushChannelRequest {
     ProductId: string;
 }
 /**
- * DescribeCloudStorageThumbnail请求参数结构体
+ * DeleteCloudStorageEvent请求参数结构体
  */
-export interface DescribeCloudStorageThumbnailRequest {
+export interface DeleteCloudStorageEventRequest {
     /**
      * 产品ID
      */
@@ -3646,9 +3729,21 @@ export interface DescribeCloudStorageThumbnailRequest {
      */
     DeviceName: string;
     /**
-     * 缩略图文件名
+     * 事件id
      */
-    Thumbnail: string;
+    EventId: string;
+    /**
+     * 开始时间，unix时间
+     */
+    StartTime: number;
+    /**
+     * 结束时间，unix时间
+     */
+    EndTime: number;
+    /**
+     * 用户ID
+     */
+    UserId?: string;
 }
 /**
  * DescribeMessageDataStats请求参数结构体
@@ -3885,21 +3980,25 @@ export interface DeleteFirmwareRequest {
     FirmwareVersion: string;
 }
 /**
- * DescribeCloudStorage请求参数结构体
+ * DescribeBalanceTransactions请求参数结构体
  */
-export interface DescribeCloudStorageRequest {
+export interface DescribeBalanceTransactionsRequest {
     /**
-     * 产品ID
+     * 账户类型：1-设备接入；2-云存。
      */
-    ProductId: string;
+    AccountType: number;
     /**
-     * 设备名称
+     * 分页游标开始，默认为0开始拉取第一条。
      */
-    DeviceName: string;
+    Offset: number;
     /**
-     * 云存用户ID
+     * 分页每页数量。
      */
-    UserId?: string;
+    Limit: number;
+    /**
+     * 流水类型：All-全部类型；Recharge-充值；CreateOrder-新购。默认为All
+     */
+    Operation?: string;
 }
 /**
  * GetAllFirmwareVersion返回参数结构体
@@ -3954,7 +4053,11 @@ export interface DescribeCloudStorageThumbnailResponse {
     /**
      * 缩略图访问地址
      */
-    ThumbnailURL: string;
+    ThumbnailURL?: string;
+    /**
+     * 缩略图访问地址的过期时间
+     */
+    ExpireTime?: number;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */

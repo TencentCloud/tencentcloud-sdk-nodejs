@@ -168,6 +168,16 @@ it("cls.v20201016.CreateIndex", async function () {
     }
 })
 
+it("cls.v20201016.DescribeScheduledSqlInfo", async function () {
+    try {
+       const data = await client.DescribeScheduledSqlInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cls.v20201016.DeleteConfig", async function () {
     try {
        const data = await client.DeleteConfig({})
@@ -468,9 +478,9 @@ it("cls.v20201016.SearchLog", async function () {
     }
 })
 
-it("cls.v20201016.ModifyAlarmNotice", async function () {
+it("cls.v20201016.DeleteScheduledSql", async function () {
     try {
-       const data = await client.ModifyAlarmNotice({})
+       const data = await client.DeleteScheduledSql({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -638,6 +648,16 @@ it("cls.v20201016.DescribeConsumer", async function () {
     }
 })
 
+it("cls.v20201016.ModifyAlarmNotice", async function () {
+    try {
+       const data = await client.ModifyAlarmNotice({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cls.v20201016.DescribeConfigs", async function () {
     try {
        const data = await client.DescribeConfigs({})
@@ -761,6 +781,16 @@ it("cls.v20201016.CreateScheduledSql", async function () {
 it("cls.v20201016.CreateExport", async function () {
     try {
        const data = await client.CreateExport({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cls.v20201016.ModifyScheduledSql", async function () {
+    try {
+       const data = await client.ModifyScheduledSql({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

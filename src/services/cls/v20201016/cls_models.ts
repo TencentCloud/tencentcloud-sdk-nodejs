@@ -241,17 +241,17 @@ export interface DeleteShipperRequest {
 }
 
 /**
- * ScheduledSql的资源信息
+ * DeleteScheduledSql请求参数结构体
  */
-export interface ScheduledSqlResouceInfo {
+export interface DeleteScheduledSqlRequest {
   /**
-   * 目标主题id
+   * 任务ID
    */
-  TopicId: string
+  TaskId: string
   /**
-   * topic的地域信息
+   * 源日志主题ID
    */
-  Region?: string
+  SrcTopicId: string
 }
 
 /**
@@ -857,6 +857,24 @@ export interface ModifyDataTransformRequest {
 }
 
 /**
+ * DescribeScheduledSqlInfo返回参数结构体
+ */
+export interface DescribeScheduledSqlInfoResponse {
+  /**
+   * ScheduledSQL任务列表信息
+   */
+  ScheduledSqlTaskInfos: Array<ScheduledSqlTaskInfo>
+  /**
+   * 任务总次数
+   */
+  TotalCount: number
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 回调配置
  */
 export interface CallBackInfo {
@@ -924,6 +942,20 @@ export interface AlarmTargetInfo {
 }
 
 /**
+ * ScheduledSql的资源信息
+ */
+export interface ScheduledSqlResouceInfo {
+  /**
+   * 目标主题id
+   */
+  TopicId: string
+  /**
+   * topic的地域信息
+   */
+  Region?: string
+}
+
+/**
  * DescribeIndex请求参数结构体
  */
 export interface DescribeIndexRequest {
@@ -931,6 +963,16 @@ export interface DescribeIndexRequest {
    * 日志主题ID
    */
   TopicId: string
+}
+
+/**
+ * ModifyScheduledSql返回参数结构体
+ */
+export interface ModifyScheduledSqlResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1015,6 +1057,87 @@ export interface KafkaProtocolInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Password?: string
+}
+
+/**
+ * ScheduledSql任务详情
+ */
+export interface ScheduledSqlTaskInfo {
+  /**
+   * ScheduledSql任务id
+   */
+  TaskId?: string
+  /**
+   * ScheduledSql任务名称
+   */
+  Name?: string
+  /**
+   * 源日志主题id
+   */
+  SrcTopicId?: string
+  /**
+   * 源日志主题名称
+   */
+  SrcTopicName?: string
+  /**
+   * 定时SQL分析目标主题
+   */
+  DstResource?: ScheduledSqlResouceInfo
+  /**
+   * 任务创建时间
+   */
+  CreateTime?: string
+  /**
+   * 任务更新时间
+   */
+  UpdateTime?: string
+  /**
+   * 任务状态，1:运行 2:停止 3:异常-找不到源日志主题 4:异常-找不到目标主题
+
+5: 访问权限问题 6:内部故障 7:其他故障
+   */
+  Status?: number
+  /**
+   * 任务启用状态，1开启,  2关闭
+   */
+  EnableFlag?: number
+  /**
+   * 查询语句
+   */
+  ScheduledSqlContent?: string
+  /**
+   * 调度开始时间
+   */
+  ProcessStartTime?: string
+  /**
+   * 调度类型，1:持续运行 2:指定调度结束时间
+   */
+  ProcessType?: number
+  /**
+   * 调度结束时间，当process_type=2时为必传字段
+   */
+  ProcessEndTime?: string
+  /**
+   * 调度周期(分钟)
+   */
+  ProcessPeriod?: number
+  /**
+   * 查询的时间窗口. @m-15m, @m，意为近15分钟
+   */
+  ProcessTimeWindow?: string
+  /**
+   * 执行延迟(秒)
+   */
+  ProcessDelay?: number
+  /**
+   * 源topicId的地域信息
+   */
+  SrcTopicRegion?: string
+  /**
+   * 语法规则，0：Lucene语法，1：CQL语法
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SyntaxRule?: number
 }
 
 /**
@@ -1649,6 +1772,16 @@ export interface PartitionInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   LastWriteTime: string
+}
+
+/**
+ * DeleteScheduledSql返回参数结构体
+ */
+export interface DeleteScheduledSqlResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2304,21 +2437,53 @@ export interface CreateKafkaRechargeResponse {
 }
 
 /**
- * OpenKafkaConsumer请求参数结构体
+ * ModifyScheduledSql请求参数结构体
  */
-export interface OpenKafkaConsumerRequest {
+export interface ModifyScheduledSqlRequest {
   /**
-   * CLS控制台创建的TopicId
+   * 任务ID
    */
-  FromTopicId: string
+  TaskId: string
   /**
-   * 压缩方式[0:NONE；2:SNAPPY；3:LZ4]
+   * 源日志主题
    */
-  Compression?: number
+  SrcTopicId?: string
   /**
-   * kafka协议消费数据格式
+   * 任务启动状态.   1正常开启,  2关闭
    */
-  ConsumerContent?: KafkaConsumerContent
+  EnableFlag?: number
+  /**
+   * 定时SQL分析的目标日志主题
+   */
+  DstResource?: ScheduledSqlResouceInfo
+  /**
+   * 查询语句
+   */
+  ScheduledSqlContent?: string
+  /**
+   * 调度周期(分钟)
+   */
+  ProcessPeriod?: number
+  /**
+   * 单次查询的时间窗口. 例子中为近15分钟
+   */
+  ProcessTimeWindow?: string
+  /**
+   * 执行延迟(秒)
+   */
+  ProcessDelay?: number
+  /**
+   * 源topicId的地域信息
+   */
+  SrcTopicRegion?: string
+  /**
+   * 任务名称
+   */
+  Name?: string
+  /**
+   * 语法规则。 默认值为0。 0：Lucene语法，1：CQL语法
+   */
+  SyntaxRule?: number
 }
 
 /**
@@ -3946,6 +4111,24 @@ export interface ModifyConfigResponse {
 }
 
 /**
+ * OpenKafkaConsumer请求参数结构体
+ */
+export interface OpenKafkaConsumerRequest {
+  /**
+   * CLS控制台创建的TopicId
+   */
+  FromTopicId: string
+  /**
+   * 压缩方式[0:NONE；2:SNAPPY；3:LZ4]
+   */
+  Compression?: number
+  /**
+   * kafka协议消费数据格式
+   */
+  ConsumerContent?: KafkaConsumerContent
+}
+
+/**
  * ModifyKafkaRecharge返回参数结构体
  */
 export interface ModifyKafkaRechargeResponse {
@@ -4552,6 +4735,28 @@ export interface DeleteAlarmNoticeRequest {
    * 通知渠道组ID
    */
   AlarmNoticeId: string
+}
+
+/**
+ * DescribeScheduledSqlInfo请求参数结构体
+ */
+export interface DescribeScheduledSqlInfoRequest {
+  /**
+   * 分页的偏移量，默认值为0。
+   */
+  Offset?: number
+  /**
+   * 分页单页限制数目，默认值为20，最大值100。
+   */
+  Limit?: number
+  /**
+   * 任务名称
+   */
+  Name?: string
+  /**
+   * 任务id
+   */
+  TaskId?: string
 }
 
 /**
@@ -5498,11 +5703,11 @@ export interface CreateScheduledSqlRequest {
    */
   EnableFlag: number
   /**
-   * 加工任务目的topic_id以及别名
+   * 定时SQL分析目标日志主题
    */
   DstResource: ScheduledSqlResouceInfo
   /**
-   * ScheduledSQL语句
+   * 查询语句
    */
   ScheduledSqlContent: string
   /**
@@ -5518,7 +5723,7 @@ export interface CreateScheduledSqlRequest {
    */
   ProcessPeriod: number
   /**
-   * 调度时间窗口
+   * 单次查询的时间窗口
    */
   ProcessTimeWindow: string
   /**

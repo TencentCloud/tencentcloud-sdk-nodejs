@@ -923,6 +923,24 @@ export interface DescribeListProtectThresholdConfigRequest {
 }
 
 /**
+ * DescribeListWaterPrintConfig返回参数结构体
+ */
+export interface DescribeListWaterPrintConfigResponse {
+  /**
+   * 总数
+   */
+  Total: number
+  /**
+   * 水印配置列表
+   */
+  ConfigList: Array<WaterPrintRelation>
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyNewDomainRules返回参数结构体
  */
 export interface ModifyNewDomainRulesResponse {
@@ -5160,6 +5178,29 @@ export interface BGPInstance {
 }
 
 /**
+ * DescribeBizMonitorTrend返回参数结构体
+ */
+export interface DescribeBizMonitorTrendResponse {
+  /**
+   * 曲线图各个时间点的值
+   */
+  DataList?: Array<number>
+  /**
+   * 统计纬度
+   */
+  MetricName?: string
+  /**
+   * 返回DataList中的最大值
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MaxData?: number
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeListPortAclList返回参数结构体
  */
 export interface DescribeListPortAclListResponse {
@@ -5352,21 +5393,33 @@ export interface DescribeCCLevelPolicyResponse {
 }
 
 /**
- * DescribeListWaterPrintConfig返回参数结构体
+ * DescribeBizMonitorTrend请求参数结构体
  */
-export interface DescribeListWaterPrintConfigResponse {
+export interface DescribeBizMonitorTrendRequest {
   /**
-   * 总数
+   * 大禹子产品代号（bgpip表示高防IP）
    */
-  Total: number
+  Business: string
   /**
-   * 水印配置列表
+   * 统计开始时间。 例：“2020-09-22 00:00:00”
    */
-  ConfigList: Array<WaterPrintRelation>
+  StartTime: string
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 统计结束时间。 例：“2020-09-22 00:00:00”
    */
-  RequestId?: string
+  EndTime: string
+  /**
+   * 资源实例ID
+   */
+  Id: string
+  /**
+   * 统计纬度，可取值intraffic outtraffic inpkg outpkg
+   */
+  MetricName: string
+  /**
+   * 时间粒度 60 300 3600 21600 86400
+   */
+  Period: number
 }
 
 /**

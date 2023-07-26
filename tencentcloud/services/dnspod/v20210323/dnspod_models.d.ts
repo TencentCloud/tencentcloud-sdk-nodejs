@@ -48,58 +48,17 @@ export interface CreateRecordRequest {
     Status?: string;
 }
 /**
- * DescribeSnapshotRollbackResult返回参数结构体
+ * DescribeRecordFilterList返回参数结构体
  */
-export interface DescribeSnapshotRollbackResultResponse {
+export interface DescribeRecordFilterListResponse {
     /**
-     * 快照所属域名
+     * 记录的数量统计信息
      */
-    Domain?: string;
+    RecordCountInfo?: RecordCountInfo;
     /**
-     * 回滚剩余时间（分钟）
+     * 获取的记录列表
      */
-    LeftMinutes?: number;
-    /**
-     * 回滚进度百分比
-     */
-    Progress?: number;
-    /**
-     * 快照 ID
-     */
-    SnapshotId?: string;
-    /**
-     * 回滚状态
-     */
-    Status?: string;
-    /**
-     * 快照回滚任务 ID
-     */
-    TaskId?: number;
-    /**
-     * 成功数量
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Success?: number;
-    /**
-     * 失败数量
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Failed?: number;
-    /**
-     * 总数量
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Total?: number;
-    /**
-     * 失败详细信息
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    FailedRecordList?: Array<SnapshotRecord>;
-    /**
-     * 快照的下载地址
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    CosUrl?: string;
+    RecordList?: Array<RecordListItem>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -874,6 +833,64 @@ export interface DeleteDomainBatchRequest {
      * 域名数组
      */
     DomainList: Array<string>;
+}
+/**
+ * DescribeSnapshotRollbackResult返回参数结构体
+ */
+export interface DescribeSnapshotRollbackResultResponse {
+    /**
+     * 快照所属域名
+     */
+    Domain?: string;
+    /**
+     * 回滚剩余时间（分钟）
+     */
+    LeftMinutes?: number;
+    /**
+     * 回滚进度百分比
+     */
+    Progress?: number;
+    /**
+     * 快照 ID
+     */
+    SnapshotId?: string;
+    /**
+     * 回滚状态
+     */
+    Status?: string;
+    /**
+     * 快照回滚任务 ID
+     */
+    TaskId?: number;
+    /**
+     * 成功数量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Success?: number;
+    /**
+     * 失败数量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Failed?: number;
+    /**
+     * 总数量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Total?: number;
+    /**
+     * 失败详细信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    FailedRecordList?: Array<SnapshotRecord>;
+    /**
+     * 快照的下载地址
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CosUrl?: string;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * 标签过滤条件
@@ -1876,21 +1893,13 @@ export interface WhoisContact {
     Tech: WhoisContactAddress;
 }
 /**
- * DescribeSubdomainAnalytics返回参数结构体
+ * DescribeRecord返回参数结构体
  */
-export interface DescribeSubdomainAnalyticsResponse {
+export interface DescribeRecordResponse {
     /**
-     * 当前统计维度解析量小计
+     * 记录信息
      */
-    Data?: Array<DomainAnalyticsDetail>;
-    /**
-     * 子域名解析量统计查询信息
-     */
-    Info?: SubdomainAnalyticsInfo;
-    /**
-     * 子域名别名解析量统计信息
-     */
-    AliasData?: Array<SubdomainAliasAnalyticsItem>;
+    RecordInfo?: RecordInfo;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2616,6 +2625,27 @@ export interface SubdomainAnalyticsInfo {
     Subdomain: string;
 }
 /**
+ * DescribeSubdomainAnalytics返回参数结构体
+ */
+export interface DescribeSubdomainAnalyticsResponse {
+    /**
+     * 当前统计维度解析量小计
+     */
+    Data?: Array<DomainAnalyticsDetail>;
+    /**
+     * 子域名解析量统计查询信息
+     */
+    Info?: SubdomainAnalyticsInfo;
+    /**
+     * 子域名别名解析量统计信息
+     */
+    AliasData?: Array<SubdomainAliasAnalyticsItem>;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * 批量添加记录返回结构
  */
 export interface ModifyRecordBatchDetail {
@@ -2859,17 +2889,116 @@ export interface PayOrderWithBalanceRequest {
  */
 export declare type DescribePackageDetailRequest = null;
 /**
- * DescribeRecord返回参数结构体
+ * DescribeRecordFilterList请求参数结构体
  */
-export interface DescribeRecordResponse {
+export interface DescribeRecordFilterListRequest {
     /**
-     * 记录信息
+     * 要获取的解析记录所属的域名。
      */
-    RecordInfo?: RecordInfo;
+    Domain: string;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     * 要获取的解析记录所属的域名 Id，如果传了 DomainId，系统将会忽略 Domain 参数。 可以通过接口 DescribeDomainList 查到所有的 Domain 以及 DomainId。
      */
-    RequestId?: string;
+    DomainId?: number;
+    /**
+     * 根据解析记录的主机头获取解析记录。默认模糊匹配。可以通过设置 IsExactSubdomain 参数为 true 进行精确查找。
+     */
+    SubDomain?: string;
+    /**
+     * 获取某些类型的解析记录，如 A，CNAME，NS，AAAA，显性URL，隐性URL，CAA，SPF等。
+     */
+    RecordType?: Array<string>;
+    /**
+     * 获取某些线路ID的解析记录。可以通过接口 DescribeRecordLineList 查看当前域名允许的线路信息。
+     */
+    RecordLine?: Array<string>;
+    /**
+     * 获取某些分组下的解析记录时，传这个分组 Id。可以通过接口 DescribeRecordGroupList 接口 GroupId 字段获取。
+     */
+    GroupId?: Array<number>;
+    /**
+     * 通过关键字搜索解析记录，当前支持搜索主机头和记录值
+     */
+    Keyword?: string;
+    /**
+     * 排序字段，支持 NAME，LINE，TYPE，VALUE，WEIGHT，MX，TTL，UPDATED_ON 几个字段。
+  NAME：解析记录的主机头
+  LINE：解析记录线路
+  TYPE：解析记录类型
+  VALUE：解析记录值
+  WEIGHT：权重
+  MX：MX 优先级
+  TTL：解析记录缓存时间
+  UPDATED_ON：解析记录更新时间
+  
+     */
+    SortField?: string;
+    /**
+     * 排序方式，升序：ASC，降序：DESC。默认值为ASC。
+     */
+    SortType?: string;
+    /**
+     * 偏移量，默认值为0。
+     */
+    Offset?: number;
+    /**
+     * 限制数量，当前Limit最大支持3000。默认值为100。
+     */
+    Limit?: number;
+    /**
+     * 根据解析记录的值获取解析记录
+     */
+    RecordValue?: string;
+    /**
+     * 根据解析记录的状态获取解析记录。可取值为 ENABLE，DISABLE。
+  ENABLE：正常
+  DISABLE：暂停
+     */
+    RecordStatus?: Array<string>;
+    /**
+     * 要获取解析记录权重查询区间起点。
+     */
+    WeightBegin?: number;
+    /**
+     * 要获取解析记录权重查询区间终点。
+     */
+    WeightEnd?: number;
+    /**
+     * 要获取解析记录 MX 优先级查询区间起点。
+     */
+    MXBegin?: number;
+    /**
+     * 要获取解析记录 MX 优先级查询区间终点。
+     */
+    MXEnd?: number;
+    /**
+     * 要获取解析记录 TTL 查询区间起点。
+     */
+    TTLBegin?: number;
+    /**
+     * 要获取解析记录 TTL 查询区间终点。
+     */
+    TTLEnd?: number;
+    /**
+     * 要获取解析记录更新时间查询区间起点。
+     */
+    UpdatedAtBegin?: string;
+    /**
+     * 要获取解析记录更新时间查询区间终点。
+     */
+    UpdatedAtEnd?: string;
+    /**
+     * 根据解析记录的备注获取解析记录。
+     */
+    Remark?: string;
+    /**
+     * 是否根据 Subdomain 参数进行精确查找。
+     */
+    IsExactSubDomain?: boolean;
+    /**
+     * 项目ID
+     */
+    ProjectId?: number;
 }
 /**
  * ModifyRecordFields请求参数结构体

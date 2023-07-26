@@ -104,6 +104,10 @@ export interface CreateRoomRequest {
      * 开启课后评分。 0：不开启(默认)  1：开启
      */
     IsGradingRequiredPostClass?: number;
+    /**
+     * 房间类型: 0 小班课（默认值）; 1 大班课; 2 1V1 (后续扩展)
+     */
+    RoomType?: number;
 }
 /**
  * DescribeQuestionList请求参数结构体
@@ -1810,6 +1814,10 @@ export interface DescribeRoomResponse {
      */
     IsGradingRequiredPostClass?: number;
     /**
+     * 房间类型: 0 小班课（默认值）; 1 大班课; 2 1V1 (后续扩展)
+     */
+    RoomType?: number;
+    /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
@@ -2227,6 +2235,14 @@ export interface RoomInfo {
      * 横竖屏。0：横屏开播（默认值）; 1：竖屏开播，当前仅支持移动端的纯视频类型
      */
     VideoOrientation?: number;
+    /**
+     * 开启课后评分。 0：不开启(默认)  1：开启
+     */
+    IsGradingRequiredPostClass?: number;
+    /**
+     * 房间类型: 0 小班课（默认值）; 1 大班课; 2 1V1 (后续扩展)
+     */
+    RoomType?: number;
 }
 /**
  * ModifyRoom请求参数结构体
@@ -2323,6 +2339,10 @@ export interface ModifyRoomRequest {
      * 开启课后评分。 0：不开启(默认)  1：开启
      */
     IsGradingRequiredPostClass?: number;
+    /**
+     * 房间类型: 0 小班课（默认值）; 1 大班课; 2 1V1 (后续扩展)
+     */
+    RoomType?: number;
 }
 /**
  * 房间问答答案详情

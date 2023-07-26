@@ -3113,22 +3113,22 @@ export interface ConcernInfo {
    * 关注点类型
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ConcernType: number
+  ConcernType?: number
   /**
-   * 实体类型
+   * 实体类型 1: 非云上IP，2: 云上IP，3: 域名，4: IP，5: 文件，6: 进程
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  EntityType: number
+  EntityType?: number
   /**
    * 关注点
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Concern: string
+  Concern?: string
   /**
    * 最近数量
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  StatisticsCount: number
+  StatisticsCount?: number
   /**
    * IP国家
 注意：此字段可能返回 null，表示取不到有效值。
@@ -3263,27 +3263,27 @@ export interface ConcernInfo {
    * 可疑关注点字段
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SearchData: string
+  SearchData?: string
   /**
    * 可疑关注点字段
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  IpCountryIso: string
+  IpCountryIso?: string
   /**
    * 可疑关注点字段
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  IpProvinceIso: string
+  IpProvinceIso?: string
   /**
    * 可疑关注点字段
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  IpCity: string
+  IpCity?: string
   /**
    * 可疑关注点字段
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  EventSubType: string
+  EventSubType?: string
 }
 
 /**

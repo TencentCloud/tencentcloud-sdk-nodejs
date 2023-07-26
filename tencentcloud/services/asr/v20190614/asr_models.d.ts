@@ -190,10 +190,12 @@ export interface CreateAsyncRecognitionTaskRequest {
 export interface HotWord {
     /**
      * 热词
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     Word: string;
     /**
      * 权重
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     Weight: number;
 }
@@ -526,7 +528,7 @@ export interface DownloadCustomizationResponse {
     /**
      * 下载地址
      */
-    DownloadUrl: string;
+    DownloadUrl?: string;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -889,7 +891,7 @@ export interface UpdateAsrVocabResponse {
     /**
      * 热词表ID
      */
-    VocabId: string;
+    VocabId?: string;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1140,7 +1142,7 @@ export interface ModifyCustomizationStateResponse {
     /**
      * 自学习模型ID
      */
-    ModelId: string;
+    ModelId?: string;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */

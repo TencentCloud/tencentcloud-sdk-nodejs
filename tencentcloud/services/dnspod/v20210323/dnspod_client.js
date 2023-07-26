@@ -172,6 +172,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateDeal", req, cb);
     }
     /**
+     * 获取某个域名下的解析记录列表
+     */
+    async DescribeRecordFilterList(req, cb) {
+        return this.request("DescribeRecordFilterList", req, cb);
+    }
+    /**
      * 查询解析快照配置
      */
     async DescribeSnapshotConfig(req, cb) {

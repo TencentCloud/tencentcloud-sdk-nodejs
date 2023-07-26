@@ -28,6 +28,16 @@ it("iotvideo.v20211125.CallTRTCDevice", async function () {
     }
 })
 
+it("iotvideo.v20211125.DescribeDevicePackages", async function () {
+    try {
+       const data = await client.DescribeDevicePackages({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotvideo.v20211125.CreateAIDetection", async function () {
     try {
        const data = await client.CreateAIDetection({})
@@ -761,6 +771,16 @@ it("iotvideo.v20211125.DescribeMessageDataStats", async function () {
 it("iotvideo.v20211125.TransferCloudStorage", async function () {
     try {
        const data = await client.TransferCloudStorage({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotvideo.v20211125.DeleteCloudStorageEvent", async function () {
+    try {
+       const data = await client.DeleteCloudStorageEvent({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

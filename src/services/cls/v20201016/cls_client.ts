@@ -26,7 +26,7 @@ import {
   DescribeLogHistogramRequest,
   DescribeLogContextRequest,
   DeleteShipperRequest,
-  ScheduledSqlResouceInfo,
+  DeleteScheduledSqlRequest,
   DynamicIndex,
   DeleteLogsetResponse,
   ParquetKeyInfo,
@@ -57,15 +57,19 @@ import {
   ContainerWorkLoadInfo,
   DescribeConfigExtrasResponse,
   ModifyDataTransformRequest,
+  DescribeScheduledSqlInfoResponse,
   CallBackInfo,
   OpenKafkaConsumerResponse,
   AlarmTargetInfo,
+  ScheduledSqlResouceInfo,
   DescribeIndexRequest,
+  ModifyScheduledSqlResponse,
   DescribeConfigsResponse,
   DeleteMachineGroupInfoRequest,
   CreateLogsetResponse,
   DeleteMachineGroupResponse,
   KafkaProtocolInfo,
+  ScheduledSqlTaskInfo,
   DescribeCosRechargesRequest,
   MetaTagInfo,
   CreateCosRechargeRequest,
@@ -91,6 +95,7 @@ import {
   CreateAlarmRequest,
   DeleteExportResponse,
   PartitionInfo,
+  DeleteScheduledSqlResponse,
   AlertHistoryRecord,
   ExcludePathInfo,
   FilterRuleInfo,
@@ -112,7 +117,7 @@ import {
   DescribeExportsRequest,
   AlarmTarget,
   CreateKafkaRechargeResponse,
-  OpenKafkaConsumerRequest,
+  ModifyScheduledSqlRequest,
   DeleteConfigResponse,
   ModifyIndexResponse,
   DeleteConsumerRequest,
@@ -177,6 +182,7 @@ import {
   MultiTopicSearchInformation,
   AlarmNotice,
   ModifyConfigResponse,
+  OpenKafkaConsumerRequest,
   ModifyKafkaRechargeResponse,
   ModifyAlarmNoticeResponse,
   DataTransformTaskInfo,
@@ -202,6 +208,7 @@ import {
   Ckafka,
   DescribeMachinesRequest,
   DeleteAlarmNoticeRequest,
+  DescribeScheduledSqlInfoRequest,
   DeleteLogsetRequest,
   MachineInfo,
   ModifyLogsetResponse,
@@ -555,6 +562,16 @@ cls.pb.cc cls.pb.h cls.proto
   }
 
   /**
+   * 本接口用于获取ScheduledSql任务列表
+   */
+  async DescribeScheduledSqlInfo(
+    req: DescribeScheduledSqlInfoRequest,
+    cb?: (error: string, rep: DescribeScheduledSqlInfoResponse) => void
+  ): Promise<DescribeScheduledSqlInfoResponse> {
+    return this.request("DescribeScheduledSqlInfo", req, cb)
+  }
+
+  /**
    * 删除采集规则配置
    */
   async DeleteConfig(
@@ -855,13 +872,13 @@ cls.pb.cc cls.pb.h cls.proto
   }
 
   /**
-   * 该接口用于修改通知渠道组
+   * 本接口用于删除ScheduledSql任务
    */
-  async ModifyAlarmNotice(
-    req: ModifyAlarmNoticeRequest,
-    cb?: (error: string, rep: ModifyAlarmNoticeResponse) => void
-  ): Promise<ModifyAlarmNoticeResponse> {
-    return this.request("ModifyAlarmNotice", req, cb)
+  async DeleteScheduledSql(
+    req: DeleteScheduledSqlRequest,
+    cb?: (error: string, rep: DeleteScheduledSqlResponse) => void
+  ): Promise<DeleteScheduledSqlResponse> {
+    return this.request("DeleteScheduledSql", req, cb)
   }
 
   /**
@@ -1025,6 +1042,16 @@ cls.pb.cc cls.pb.h cls.proto
   }
 
   /**
+   * 该接口用于修改通知渠道组
+   */
+  async ModifyAlarmNotice(
+    req: ModifyAlarmNoticeRequest,
+    cb?: (error: string, rep: ModifyAlarmNoticeResponse) => void
+  ): Promise<ModifyAlarmNoticeResponse> {
+    return this.request("ModifyAlarmNotice", req, cb)
+  }
+
+  /**
    * 获取采集规则配置
    */
   async DescribeConfigs(
@@ -1152,6 +1179,16 @@ cls.pb.cc cls.pb.h cls.proto
     cb?: (error: string, rep: CreateExportResponse) => void
   ): Promise<CreateExportResponse> {
     return this.request("CreateExport", req, cb)
+  }
+
+  /**
+   * 本接口用于修改ScheduledSql任务
+   */
+  async ModifyScheduledSql(
+    req: ModifyScheduledSqlRequest,
+    cb?: (error: string, rep: ModifyScheduledSqlResponse) => void
+  ): Promise<ModifyScheduledSqlResponse> {
+    return this.request("ModifyScheduledSql", req, cb)
   }
 
   /**

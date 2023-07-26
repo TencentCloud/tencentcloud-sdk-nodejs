@@ -32,7 +32,11 @@ export interface CreateSealRequest {
    */
   Agent?: Agent
   /**
-   * 电子印章类型，PERSONAL-个人私章,OFFICIAL-公章,SPECIAL_FINANCIAL-财务专用章,CONTRACT-合同专用章,LEGAL_REPRESENTATIVE-法定代表人章,SPECIAL_NATIONWIDE_INVOICE-发票专用章
+   * 本接口支持上传图片印章及系统直接生成印章；如果要使用系统生成印章，此值传：SealGenerateSourceSystem；如果要使用图片上传请传字段 Image
+   */
+  GenerateSource?: string
+  /**
+   * 电子印章类型，OFFICIAL-公章,CONTRACT-合同专用章
    */
   SealType?: string
   /**
@@ -61,16 +65,15 @@ export interface CreateSealRequest {
    */
   Color?: string
   /**
-   * 电子印章生成时的横向文字。
+   * 暂时不支持横向文字设置
    */
   SealHorizontalText?: string
   /**
-   * 电子印章下弦文字
+   * 暂时不支持下弦文字设置
    */
   SealChordText?: string
   /**
-   * 电子印章中心图案类型,STAR-圆形有五角星,NONE-圆形无五角星
-系统生成的印章只支持STAR
+   * 系统生成的印章只支持STAR
    */
   SealCentralType?: string
   /**
@@ -78,12 +81,6 @@ export interface CreateSealRequest {
 
    */
   FileToken?: string
-  /**
-   * 印章生成来源方式
-取值：
-SealGenerateSourceSystem 表示系统生成企业印章
-   */
-  GenerateSource?: string
 }
 
 /**
@@ -380,7 +377,7 @@ HONGKONG_MACAO_AND_TAIWAN 港澳台居民居住证(格式同居民身份证)
    */
   ApproverSource?: string
   /**
-   * 客户自定义签署人标识，64位长度，保证唯一。用于发起含有或签签署人的合同。或签参与人必须有此字段。不同或签参与人CustomApproverTag需要保证唯一。如果或签签署人为本方企微参与人，ApproverSource参数需要指定WEWORKAPP
+   * 企业签署方或签标识，客户自定义，64位长度。用于发起含有或签签署人的合同。或签参与人必须有此字段。合同内不同或签参与人CustomApproverTag需要保证唯一。如果或签签署人为本方企微参与人，ApproverSource参数需要指定WEWORKAPP
    */
   CustomApproverTag?: string
   /**
@@ -3229,7 +3226,7 @@ HONGKONG_MACAO_AND_TAIWAN 港澳台居民居住证(格式同居民身份证)
    */
   ApproverSource?: string
   /**
-   * 客户自定义签署人标识，64位长度，保证唯一，非企微场景不使用此字段
+   * 企业签署方或签标识，客户自定义，64位长度。用于发起含有或签签署人的合同。或签参与人必须有此字段。合同内不同或签参与人CustomApproverTag需要保证唯一。如果或签签署人为本方企微参与人，ApproverSource参数需要指定WEWORKAPP
    */
   CustomApproverTag?: string
   /**

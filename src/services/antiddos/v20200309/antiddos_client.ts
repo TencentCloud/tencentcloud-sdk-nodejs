@@ -60,6 +60,7 @@ import {
   CreateNewL7RulesResponse,
   CreateDDoSAIRequest,
   DescribeListProtectThresholdConfigRequest,
+  DescribeListWaterPrintConfigResponse,
   ModifyNewDomainRulesResponse,
   CcBlackWhiteIpPolicy,
   DescribeDDoSConnectLimitListResponse,
@@ -243,6 +244,7 @@ import {
   DeleteCCRequestLimitPolicyResponse,
   CreateCcBlackWhiteIpListRequest,
   BGPInstance,
+  DescribeBizMonitorTrendResponse,
   DescribeListPortAclListResponse,
   CCPrecisionPlyRecord,
   DescribeCCPrecisionPlyListResponse,
@@ -250,7 +252,7 @@ import {
   DescribeListPortAclListRequest,
   OverviewDDoSEvent,
   DescribeCCLevelPolicyResponse,
-  DescribeListWaterPrintConfigResponse,
+  DescribeBizMonitorTrendRequest,
   DescribeOverviewDDoSTrendResponse,
   BGPInstanceUsages,
   DeleteDDoSSpeedLimitConfigResponse,
@@ -863,6 +865,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyCcBlackWhiteIpListResponse) => void
   ): Promise<ModifyCcBlackWhiteIpListResponse> {
     return this.request("ModifyCcBlackWhiteIpList", req, cb)
+  }
+
+  /**
+   * 获取高防IP业务监控流量曲线
+   */
+  async DescribeBizMonitorTrend(
+    req: DescribeBizMonitorTrendRequest,
+    cb?: (error: string, rep: DescribeBizMonitorTrendResponse) => void
+  ): Promise<DescribeBizMonitorTrendResponse> {
+    return this.request("DescribeBizMonitorTrend", req, cb)
   }
 
   /**

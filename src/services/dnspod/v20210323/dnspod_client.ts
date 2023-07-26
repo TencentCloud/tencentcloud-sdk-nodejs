@@ -19,7 +19,7 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   CreateRecordRequest,
-  DescribeSnapshotRollbackResultResponse,
+  DescribeRecordFilterListResponse,
   DownloadSnapshotRequest,
   DescribeBatchTaskDetail,
   ModifyVasAutoRenewStatusResponse,
@@ -53,6 +53,7 @@ import {
   DescribeDomainShareInfoRequest,
   DomainListItem,
   DeleteDomainBatchRequest,
+  DescribeSnapshotRollbackResultResponse,
   TagItemFilter,
   DescribeRecordTypeResponse,
   ModifyDomainRemarkResponse,
@@ -101,7 +102,7 @@ import {
   DescribeDomainPreviewRequest,
   CreateRecordBatchDetail,
   WhoisContact,
-  DescribeSubdomainAnalyticsResponse,
+  DescribeRecordResponse,
   ModifyRecordResponse,
   ModifyRecordToGroupResponse,
   SnapshotRecord,
@@ -129,6 +130,7 @@ import {
   LockInfo,
   ModifyDomainOwnerResponse,
   SubdomainAnalyticsInfo,
+  DescribeSubdomainAnalyticsResponse,
   ModifyRecordBatchDetail,
   DescribeUserDetailResponse,
   DeleteDomainBatchDetail,
@@ -141,7 +143,7 @@ import {
   DescribeRecordListRequest,
   PayOrderWithBalanceRequest,
   DescribePackageDetailRequest,
-  DescribeRecordResponse,
+  DescribeRecordFilterListRequest,
   ModifyRecordFieldsRequest,
   DeleteSnapshotResponse,
   DescribeDomainPurviewResponse,
@@ -446,6 +448,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateDealResponse) => void
   ): Promise<CreateDealResponse> {
     return this.request("CreateDeal", req, cb)
+  }
+
+  /**
+   * 获取某个域名下的解析记录列表
+   */
+  async DescribeRecordFilterList(
+    req: DescribeRecordFilterListRequest,
+    cb?: (error: string, rep: DescribeRecordFilterListResponse) => void
+  ): Promise<DescribeRecordFilterListResponse> {
+    return this.request("DescribeRecordFilterList", req, cb)
   }
 
   /**

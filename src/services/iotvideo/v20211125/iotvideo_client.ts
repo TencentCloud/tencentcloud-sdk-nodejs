@@ -29,17 +29,19 @@ import {
   ImportModelDefinitionResponse,
   ApplyAIModelRequest,
   CreateBatchRequest,
+  DeleteCloudStorageEventResponse,
   ModifyProductDynamicRegisterResponse,
   CancelAIModelApplicationResponse,
   DescribeCloudStorageTimeResponse,
   DescribeDeviceStatusLogResponse,
-  DescribePackageConsumeTaskRequest,
+  DescribeDevicePackagesRequest,
   ReportAliveDeviceRequest,
   DescribeProductsRequest,
   DescribeAIModelChannelResponse,
   DescribeMessageDataStatsResponse,
   DescribeDeviceActionHistoryRequest,
   ModifyDataForwardRequest,
+  DescribeCloudStorageThumbnailRequest,
   DescribeDevicesResponse,
   ModifyProductResponse,
   ModifyProductRequest,
@@ -61,6 +63,7 @@ import {
   CreateDataForwardResponse,
   UploadFirmwareRequest,
   DescribeCloudStoragePackageConsumeStatsResponse,
+  PackageInfo,
   DescribeFirmwareRequest,
   DescribeCloudStorageUsersResponse,
   DescribeProductRequest,
@@ -109,7 +112,8 @@ import {
   UpdateAIModelChannelResponse,
   DeviceUpdateStatus,
   DescribeAIModelUsageResponse,
-  DescribeBalanceTransactionsRequest,
+  DescribePackageConsumeTaskRequest,
+  AIModelApplication,
   BindCloudStorageUserRequest,
   ModifyPushChannelResponse,
   CallDeviceActionSyncResponse,
@@ -153,7 +157,6 @@ import {
   BalanceTransaction,
   FirmwareTaskInfo,
   DescribeProductDynamicRegisterRequest,
-  AIModelApplication,
   DescribeFirmwareTaskDistributionResponse,
   DescribeBatchResponse,
   DeviceSignatureInfo,
@@ -164,6 +167,7 @@ import {
   ModifyForwardRuleRequest,
   CreateAIDetectionResponse,
   DescribeCloudStorageEventsResponse,
+  DescribeDevicePackagesResponse,
   VideoProduct,
   CloudStorageEvent,
   DeviceDataHistoryItem,
@@ -188,6 +192,7 @@ import {
   CreateForwardRuleRequest,
   DeviceInfo,
   SetForwardAuthRequest,
+  DescribeCloudStorageRequest,
   DescribeBalanceTransactionsResponse,
   ImportModelDefinitionRequest,
   CreateTaskFileUrlRequest,
@@ -200,7 +205,7 @@ import {
   DescribeDeviceDataStatsResponse,
   DescribeAccountResponse,
   DescribePushChannelRequest,
-  DescribeCloudStorageThumbnailRequest,
+  DeleteCloudStorageEventRequest,
   DescribeMessageDataStatsRequest,
   GetFirmwareURLRequest,
   CreateAIDetectionRequest,
@@ -214,7 +219,7 @@ import {
   DescribeAIModelUsageRequest,
   DescribeBonusesRequest,
   DeleteFirmwareRequest,
-  DescribeCloudStorageRequest,
+  DescribeBalanceTransactionsRequest,
   GetAllFirmwareVersionResponse,
   AIModelInfo,
   DescribeCloudStorageThumbnailResponse,
@@ -259,6 +264,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CallTRTCDeviceResponse) => void
   ): Promise<CallTRTCDeviceResponse> {
     return this.request("CallTRTCDevice", req, cb)
+  }
+
+  /**
+   * 根据设备信息拉取有效套餐列表
+   */
+  async DescribeDevicePackages(
+    req: DescribeDevicePackagesRequest,
+    cb?: (error: string, rep: DescribeDevicePackagesResponse) => void
+  ): Promise<DescribeDevicePackagesResponse> {
+    return this.request("DescribeDevicePackages", req, cb)
   }
 
   /**
@@ -999,6 +1014,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: TransferCloudStorageResponse) => void
   ): Promise<TransferCloudStorageResponse> {
     return this.request("TransferCloudStorage", req, cb)
+  }
+
+  /**
+   * 删除云存事件
+   */
+  async DeleteCloudStorageEvent(
+    req: DeleteCloudStorageEventRequest,
+    cb?: (error: string, rep: DeleteCloudStorageEventResponse) => void
+  ): Promise<DeleteCloudStorageEventResponse> {
+    return this.request("DeleteCloudStorageEvent", req, cb)
   }
 
   /**

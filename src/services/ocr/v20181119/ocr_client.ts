@@ -781,7 +781,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 支持查询智能表单录入任务的状态。本产品免费公测中，您可以点击demo（超连接：https://ocr.smartform.cloud.tencent.com/）试用，如需购买请与商务团队联系。
+   * 支持查询智能表单录入任务的状态。本产品免费公测中，您可以点击demo（超链接：https://ocr.smartform.cloud.tencent.com/）试用，如需购买请与商务团队联系。
    */
   async GetTaskState(
     req: GetTaskStateRequest,
@@ -1570,6 +1570,11 @@ export class Client extends AbstractClient {
         <tr>
           <td> VatElectronicInvoiceToll</td>
           <td> 增值税电子普通发票(通行费)</td>
+          <td> 3 </td>
+        </tr>
+        <tr>
+          <td> VatSalesList</td>
+          <td> 增值税销货清单</td>
           <td> 3 </td>
         </tr>
         <tr>
