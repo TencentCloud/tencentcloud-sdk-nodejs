@@ -91,10 +91,10 @@ callbackinfo包含： 回调地址和签名key
         return this.request("CreateSealPolicy", req, cb);
     }
     /**
-     * 此API接口用户查询加入集团的成员企业
+     * 本接口（CreateEmbedWebUrl）用于创建嵌入web的链接 本接口支持创建：创建印章，创建模板，修改模板，预览模板，预览合同流程的web链接 进入web连接后与当前控制台操作保持一致
      */
-    async DescribeOrganizationGroupOrganizations(req, cb) {
-        return this.request("DescribeOrganizationGroupOrganizations", req, cb);
+    async CreateEmbedWebUrl(req, cb) {
+        return this.request("CreateEmbedWebUrl", req, cb);
     }
     /**
      * 对流程的合同文件进行验证，判断文件是否合法。
@@ -350,10 +350,11 @@ httpProfile.setEndpoint("file.test.ess.tencent.cn");<br/>
         return this.request("UploadFiles", req, cb);
     }
     /**
-     * 查询流程填写控件内容，可以根据流程Id查询该流程相关联的填写控件信息
+     * 通过此接口，创建企业批量签署链接，企业员工点击链接即可跳转控制台进行批量签署。
+如果没有UserId，Name和Mobile必填，对应的员工必须在企业下已经实名，且该员工为批量签署合同中的签署方。
      */
-    async DescribeFlowComponents(req, cb) {
-        return this.request("DescribeFlowComponents", req, cb);
+    async CreateOrganizationBatchSignUrl(req, cb) {
+        return this.request("CreateOrganizationBatchSignUrl", req, cb);
     }
     /**
      * 指定需要批量催办的签署流程Id，批量催办合同，最多100个; 接口失败后返回错误信息
@@ -364,6 +365,12 @@ httpProfile.setEndpoint("file.test.ess.tencent.cn");<br/>
      */
     async CreateFlowReminds(req, cb) {
         return this.request("CreateFlowReminds", req, cb);
+    }
+    /**
+     * 查询流程填写控件内容，可以根据流程Id查询该流程相关联的填写控件信息
+     */
+    async DescribeFlowComponents(req, cb) {
+        return this.request("DescribeFlowComponents", req, cb);
     }
     /**
      * 集团企业统一使用主代子进行操作，无需根据子企业账号进行转化查询，该接口需要屏蔽下线
@@ -378,6 +385,12 @@ httpProfile.setEndpoint("file.test.ess.tencent.cn");<br/>
      */
     async DescribeThirdPartyAuthCode(req, cb) {
         return this.request("DescribeThirdPartyAuthCode", req, cb);
+    }
+    /**
+     * 用来创建页面主题配置
+     */
+    async CreateWebThemeConfig(req, cb) {
+        return this.request("CreateWebThemeConfig", req, cb);
     }
     /**
      * 查询企业印章的列表，需要操作者具有查询印章权限
@@ -427,6 +440,12 @@ PDF资源Id 通过上传文件接口获取
      */
     async CreateFlowGroupByFiles(req, cb) {
         return this.request("CreateFlowGroupByFiles", req, cb);
+    }
+    /**
+     * 此API接口用户查询加入集团的成员企业
+     */
+    async DescribeOrganizationGroupOrganizations(req, cb) {
+        return this.request("DescribeOrganizationGroupOrganizations", req, cb);
     }
     /**
      * 创建员工,此接口会发送提醒员工实名的短信

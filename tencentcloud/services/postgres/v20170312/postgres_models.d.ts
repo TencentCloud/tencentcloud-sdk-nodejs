@@ -3775,7 +3775,16 @@ export interface DescribeBackupDownloadRestrictionResponse {
  */
 export interface CreateReadOnlyDBInstanceRequest {
     /**
-     * 售卖规格ID。该参数可以通过调用DescribeClasses的返回值中的SpecCode字段来获取。
+     * 实例所属主可用区， 如：ap-guangzhou-3；
+  可用区信息可以通过调用 [DescribeZones](https://cloud.tencent.com/document/api/409/16769) 接口的返回值中的Zone字段来获取。
+     */
+    Zone: string;
+    /**
+     * 只读实例的主实例ID。
+     */
+    MasterDBInstanceId: string;
+    /**
+     * 售卖规格码。该参数可以通过调用[DescribeClasses](https://cloud.tencent.com/document/api/409/89019)的返回值中的SpecCode字段来获取。
      */
     SpecCode: string;
     /**
@@ -3783,35 +3792,35 @@ export interface CreateReadOnlyDBInstanceRequest {
      */
     Storage: number;
     /**
-     * 一次性购买的实例数量。取值1-100
+     * 购买实例数量，取值范围：[1-10]。一次性购买支持最大数量10个，若超过该数量，可进行多次调用进行购买。
      */
     InstanceCount: number;
     /**
-     * 购买时长，单位：月。目前只支持1,2,3,4,5,6,7,8,9,10,11,12,24,36这些值，按量计费模式下该参数传1。
+     * 购买时长，单位：月。
+  <li>预付费：支持1,2,3,4,5,6,7,8,9,10,11,12,24,36
+  <li>后付费：只支持1
      */
     Period: number;
     /**
-     * 只读实例的主实例ID
+     * 私有网络ID，形如vpc-xxxxxxxx。有效的VpcId可通过登录控制台查询；也可以调用接口 [DescribeVpcEx](https://cloud.tencent.com/document/api/215/1372) ，从接口返回中的unVpcId字段获取。
      */
-    MasterDBInstanceId: string;
+    VpcId?: string;
     /**
-     * 可用区ID。该参数可以通过调用 DescribeZones 接口的返回值中的Zone字段来获取。
+     * 私有网络子网ID，形如subnet-xxxxxxxx。有效的私有网络子网ID可通过登录控制台查询；也可以调用接口 [DescribeSubnets ](https://cloud.tencent.com/document/api/215/15784)，从接口返回中的unSubnetId字段获取。
      */
-    Zone: string;
+    SubnetId?: string;
     /**
-     * 项目ID。
-     */
-    ProjectId?: number;
-    /**
-     * 【废弃】不再需要指定，内核版本号与主实例保持一致
-     */
-    DBVersion?: string;
-    /**
-     * 实例计费类型。目前支持：PREPAID（预付费，即包年包月），POSTPAID_BY_HOUR（后付费，即按量计费）。默认值：PREPAID。如果主实例为后付费，只读实例必须也为后付费。
+     * 实例计费类型，目前支持：
+  <li>PREPAID：预付费，即包年包月。
+  <li>POSTPAID_BY_HOUR：后付费，即按量计费。
+  默认值：PREPAID。如果主实例为后付费，只读实例必须也为后付费。
      */
     InstanceChargeType?: string;
     /**
-     * 是否自动使用代金券。1（是），0（否），默认不使用。
+     * 是否自动使用代金券：
+  <li>0：否
+  <li>1：是
+  默认值：0
      */
     AutoVoucher?: number;
     /**
@@ -3819,41 +3828,48 @@ export interface CreateReadOnlyDBInstanceRequest {
      */
     VoucherIds?: Array<string>;
     /**
-     * 续费标记：0-正常续费（默认）；1-自动续费；
+     * 续费标记：
+  <li>0：手动续费
+  <li>1：自动续费
+  默认值：0
      */
     AutoRenewFlag?: number;
     /**
-     * 私有网络ID。
+     * 项目ID。
      */
-    VpcId?: string;
-    /**
-     * 私有网络子网ID。
-     */
-    SubnetId?: string;
+    ProjectId?: number;
     /**
      * 优惠活动ID
      */
     ActivityId?: number;
     /**
-     * 实例名(后续支持)
-     */
-    Name?: string;
-    /**
-     * 是否需要支持Ipv6，1：是，0：否
-     */
-    NeedSupportIpv6?: number;
-    /**
      * 只读组ID。
      */
     ReadOnlyGroupId?: string;
     /**
-     * 实例需要绑定的Tag信息，默认为空（该类型为Tag数组类型）
+     * 实例需要绑定的Tag信息，默认为空；可以通过调用 [DescribeTags](https://cloud.tencent.com/document/api/651/35316) 返回值中的 Tags 字段来获取。
      */
     TagList?: Tag;
     /**
-     * 安全组id
+     * 实例所属安全组，该参数可以通过调用 [DescribeSecurityGroups](https://cloud.tencent.com/document/api/215/15808) 的返回值中的sgId字段来获取。若不指定该参数，则绑定默认安全组。
+  
      */
     SecurityGroupIds?: Array<string>;
+    /**
+     * 是否需要支持Ipv6：
+  <li>0：否
+  <li>1：是
+  默认值：0
+     */
+    NeedSupportIpv6?: number;
+    /**
+     * 实例名(后续支持)
+     */
+    Name?: string;
+    /**
+     * 【废弃】不再需要指定，内核版本号与主实例保持一致
+     */
+    DBVersion?: string;
 }
 /**
  * DescribeCloneDBInstanceSpec返回参数结构体

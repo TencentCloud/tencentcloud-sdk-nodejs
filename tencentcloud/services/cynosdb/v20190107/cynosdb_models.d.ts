@@ -5209,6 +5209,14 @@ export interface ExportInstanceSlowQueriesRequest {
      * 文件类型，可选值：csv, original
      */
     FileType?: string;
+    /**
+     * 排序字段，可选值： QueryTime,LockTime,RowsExamined,RowsSent
+     */
+    OrderBy?: string;
+    /**
+     * 排序类型，可选值：asc,desc
+     */
+    OrderByType?: string;
 }
 /**
  * ModifyAccountDescription请求参数结构体
@@ -6791,7 +6799,7 @@ export interface ExportInstanceSlowQueriesResponse {
     /**
      * 慢查询导出内容
      */
-    FileContent: string;
+    FileContent?: string;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */

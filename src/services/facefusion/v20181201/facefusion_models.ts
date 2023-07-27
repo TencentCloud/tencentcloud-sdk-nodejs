@@ -90,11 +90,11 @@ export interface FaceFusionResponse {
   /**
    * RspImgType 为 url 时，返回结果的 url， RspImgType 为 base64 时返回 base64 数据。
    */
-  Image: string
+  Image?: string
   /**
    * 不适宜内容识别结果
    */
-  ReviewResultSet: Array<FuseFaceReviewResult>
+  ReviewResultSet?: Array<FuseFaceReviewResult>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -166,6 +166,10 @@ export interface FaceFusionRequest {
    * 图片Url地址
    */
   Url?: string
+  /**
+   * 融合参数
+   */
+  FuseParam?: FuseParam
 }
 
 /**
@@ -185,6 +189,28 @@ export interface FaceFusionLiteResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 人脸图片和待被融合的素材模板图的人脸位置信息。
+ */
+export interface MergeInfo {
+  /**
+   * 输入图片base64
+   */
+  Image?: string
+  /**
+   * 输入图片url
+   */
+  Url?: string
+  /**
+   * 上传的图片人脸位置信息（人脸框）
+   */
+  InputImageFaceRect?: FaceRect
+  /**
+   * 控制台上传的素材人脸ID，不填默认取最大人脸
+   */
+  TemplateFaceID?: string
 }
 
 /**
@@ -216,25 +242,13 @@ BLOCK：违规
 }
 
 /**
- * 人脸图片和待被融合的素材模板图的人脸位置信息。
+ * 图片编码参数
  */
-export interface MergeInfo {
+export interface ImageCodecParam {
   /**
-   * 输入图片base64
+   * 元数据
    */
-  Image?: string
-  /**
-   * 输入图片url
-   */
-  Url?: string
-  /**
-   * 上传的图片人脸位置信息（人脸框）
-   */
-  InputImageFaceRect?: FaceRect
-  /**
-   * 控制台上传的素材人脸ID，不填默认取最大人脸
-   */
-  TemplateFaceID?: string
+  MetaData?: Array<MetaData>
 }
 
 /**
@@ -304,12 +318,12 @@ export interface FuseFaceResponse {
   /**
    * RspImgType 为 url 时，返回结果的 url， RspImgType 为 base64 时返回 base64 数据。
    */
-  FusedImage: string
+  FusedImage?: string
   /**
    * 不适宜内容识别结果。该数组的顺序和请求中mergeinfo的顺序一致，一一对应
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ReviewResultSet: Array<FuseFaceReviewResult>
+  ReviewResultSet?: Array<FuseFaceReviewResult>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -351,6 +365,10 @@ export interface FuseFaceRequest {
 请注意，不适宜内容识别服务开启后，您需要根据返回结果自行判断是否调整您的业务逻辑。例如提示您的用户图片非法，请更换图片。
    */
   CelebrityIdentify?: number
+  /**
+   * 融合参数
+   */
+  FuseParam?: FuseParam
 }
 
 /**
@@ -376,6 +394,16 @@ export interface FaceRect {
 }
 
 /**
+ * 融合参数
+ */
+export interface FuseParam {
+  /**
+   * 图片编码参数
+   */
+  ImageCodecParam?: ImageCodecParam
+}
+
+/**
  * DescribeMaterialList请求参数结构体
  */
 export interface DescribeMaterialListRequest {
@@ -395,4 +423,18 @@ export interface DescribeMaterialListRequest {
    * 偏移量
    */
   Offset?: number
+}
+
+/**
+ * MetaData数据结构，Key/Value格式
+ */
+export interface MetaData {
+  /**
+   * MetaData的Key
+   */
+  MetaKey: string
+  /**
+   * MetaData的Value
+   */
+  MetaValue: string
 }

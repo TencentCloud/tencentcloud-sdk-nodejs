@@ -22,10 +22,13 @@ import {
   DescribeMaterialListResponse,
   FaceInfo,
   MaterialFaces,
+  FuseParam,
+  ImageCodecParam,
   MergeInfo,
   FuseFaceResponse,
   FuseFaceRequest,
   FaceRect,
+  MetaData,
   DescribeMaterialListRequest,
   LogoParam,
 } from "./facefusion_models"

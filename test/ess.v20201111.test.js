@@ -108,9 +108,9 @@ it("ess.v20201111.CreateSealPolicy", async function () {
     }
 })
 
-it("ess.v20201111.DescribeOrganizationGroupOrganizations", async function () {
+it("ess.v20201111.CreateEmbedWebUrl", async function () {
     try {
-       const data = await client.DescribeOrganizationGroupOrganizations({})
+       const data = await client.CreateEmbedWebUrl({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -458,9 +458,9 @@ it("ess.v20201111.UploadFiles", async function () {
     }
 })
 
-it("ess.v20201111.DescribeFlowComponents", async function () {
+it("ess.v20201111.CreateOrganizationBatchSignUrl", async function () {
     try {
-       const data = await client.DescribeFlowComponents({})
+       const data = await client.CreateOrganizationBatchSignUrl({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -471,6 +471,16 @@ it("ess.v20201111.DescribeFlowComponents", async function () {
 it("ess.v20201111.CreateFlowReminds", async function () {
     try {
        const data = await client.CreateFlowReminds({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ess.v20201111.DescribeFlowComponents", async function () {
+    try {
+       const data = await client.DescribeFlowComponents({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -491,6 +501,16 @@ it("ess.v20201111.DescribeIntegrationMainOrganizationUser", async function () {
 it("ess.v20201111.DescribeThirdPartyAuthCode", async function () {
     try {
        const data = await client.DescribeThirdPartyAuthCode({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ess.v20201111.CreateWebThemeConfig", async function () {
+    try {
+       const data = await client.CreateWebThemeConfig({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -551,6 +571,16 @@ it("ess.v20201111.DescribeIntegrationDepartments", async function () {
 it("ess.v20201111.CreateFlowGroupByFiles", async function () {
     try {
        const data = await client.CreateFlowGroupByFiles({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ess.v20201111.DescribeOrganizationGroupOrganizations", async function () {
+    try {
+       const data = await client.DescribeOrganizationGroupOrganizations({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

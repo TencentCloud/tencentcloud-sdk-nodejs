@@ -258,16 +258,6 @@ it("apigateway.v20180808.DescribeApi", async function () {
     }
 })
 
-it("apigateway.v20180808.GenerateApiDocument", async function () {
-    try {
-       const data = await client.GenerateApiDocument({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("apigateway.v20180808.UnbindApiApp", async function () {
     try {
        const data = await client.UnbindApiApp({})

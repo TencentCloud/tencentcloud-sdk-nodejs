@@ -419,6 +419,28 @@ HONGKONG_MACAO_AND_TAIWAN 港澳台居民居住证(格式同居民身份证)
 	SYSTEM_ESIGN -- 系统签名（该类型可以在用户签署时根据用户姓名一键生成一个签名来进行签署）
    */
   ComponentLimitType?: Array<string>
+  /**
+   * 合同查看方式<br/>默认1 -实名查看 <br/>2-短信验证码查看(企业签署方暂不支持该方式)
+   */
+  ApproverVerifyTypes?: Array<number>
+  /**
+   * 合同签署方式(默认1,2) <br/>1-人脸认证 <br/>2-签署密码 <br/>3-运营商三要素
+   */
+  ApproverSignTypes?: Array<number>
+}
+
+/**
+ * 关注方信息
+ */
+export interface ReviewerInfo {
+  /**
+   * 姓名
+   */
+  Name?: string
+  /**
+   * 手机号
+   */
+  Mobile?: string
 }
 
 /**
@@ -1357,6 +1379,16 @@ export interface CreateReleaseFlowResponse {
 
    */
   FlowId?: string
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateWebThemeConfig返回参数结构体
+ */
+export interface CreateWebThemeConfigResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2720,6 +2752,38 @@ export interface DescribeOrganizationSealsResponse {
 }
 
 /**
+ * CreateEmbedWebUrl请求参数结构体
+ */
+export interface CreateEmbedWebUrlRequest {
+  /**
+   * 操作者信息
+   */
+  Operator: UserInfo
+  /**
+   * WEB嵌入资源类型。
+<br/>CREATE_SEAL: 创建印章
+<br/>PREVIEW_SEAL_LIST：预览印章列表
+<br/>PREVIEW_SEAL_DETAIL：预览印章详情
+<br/>EXTEND_SERVICE：拓展服务
+
+   */
+  EmbedType: string
+  /**
+   * WEB嵌入的业务资源ID
+<br/>PREVIEW_SEAL_DETAIL，必填，取值为印章id
+   */
+  BusinessId?: string
+  /**
+   * 代理相关应用信息，如集团主企业代子企业操作
+   */
+  Agent?: Agent
+  /**
+   * 抄送方信息
+   */
+  Reviewer?: ReviewerInfo
+}
+
+/**
  * DeleteIntegrationEmployees请求参数结构体
  */
 export interface DeleteIntegrationEmployeesRequest {
@@ -2883,6 +2947,110 @@ export interface DeleteIntegrationRoleUsersRequest {
    * 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填
    */
   Agent?: Agent
+}
+
+/**
+ * CreateFlowByFiles请求参数结构体
+ */
+export interface CreateFlowByFilesRequest {
+  /**
+   * 调用方用户信息，userId 必填。支持填入集团子公司经办人 userId 代发合同
+   */
+  Operator: UserInfo
+  /**
+   * 签署流程名称,最大长度200个字符
+   */
+  FlowName: string
+  /**
+   * 签署参与者信息，最大限制50方
+   */
+  Approvers: Array<ApproverInfo>
+  /**
+   * 签署pdf文件的资源编号列表，通过UploadFiles接口获取，暂时仅支持单文件发起
+   */
+  FileIds: Array<string>
+  /**
+   * 签署流程的类型(如销售合同/入职合同等)，最大长度200个字符
+   */
+  FlowType?: string
+  /**
+   * 经办人内容控件配置
+   */
+  Components?: Array<Component>
+  /**
+   * 被抄送人的信息列表。
+注:此功能为白名单功能，若有需要，请联系电子签客服开白使用
+   */
+  CcInfos?: Array<CcInfo>
+  /**
+   * 是否需要预览，true：预览模式，false：非预览（默认）；
+预览链接有效期300秒；
+
+注：如果使用“预览模式”，出参会返回合同预览链接 PreviewUrl，不会正式发起合同，且出参不会返回签署流程编号 FlowId；如果使用“非预览”，则会正常返回签署流程编号 FlowId，不会生成合同预览链接 PreviewUrl。
+   */
+  NeedPreview?: boolean
+  /**
+   * 预览链接类型 默认:0-文件流, 1- H5链接 注意:此参数在NeedPreview 为true 时有效,
+   */
+  PreviewType?: number
+  /**
+   * 签署流程的签署截止时间。
+值为unix时间戳,精确到秒,不传默认为当前时间一年后
+   */
+  Deadline?: number
+  /**
+   * 合同到期提醒时间戳，单位秒。设定该值后，可以提前进行到期通知，方便客户处理合同到期事务，如合同续签等。该值支持的范围是从发起时间起到往后的10年内。仅合同发起方企业的发起人可以编辑修改。
+   */
+  RemindedOn?: number
+  /**
+   * 发送类型：
+true：无序签
+false：有序签
+注：默认为false（有序签）
+   */
+  Unordered?: boolean
+  /**
+   * 合同显示的页卡模板，说明：只支持{合同名称}, {发起方企业}, {发起方姓名}, {签署方N企业}, {签署方N姓名}，且N不能超过签署人的数量，N从1开始
+   */
+  CustomShowMap?: string
+  /**
+   * 发起方企业的签署人进行签署操作是否需要企业内部审批。使用此功能需要发起方企业有参与签署。
+若设置为true，审核结果需通过接口 CreateFlowSignReview 通知电子签，审核通过后，发起方企业签署人方可进行签署操作，否则会阻塞其签署操作。
+
+注：企业可以通过此功能与企业内部的审批流程进行关联，支持手动、静默签署合同。
+   */
+  NeedSignReview?: boolean
+  /**
+   * 用户自定义字段，回调的时候会进行透传，长度需要小于20480
+   */
+  UserData?: string
+  /**
+   * 签署人校验方式
+VerifyCheck: 人脸识别（默认）
+MobileCheck：手机号验证
+参数说明：可选人脸识别或手机号验证两种方式，若选择后者，未实名个人签署方在签署合同时，无需经过实名认证和意愿确认两次人脸识别，该能力仅适用于个人签署方。
+   */
+  ApproverVerifyType?: string
+  /**
+   * 签署流程描述,最大长度1000个字符
+   */
+  FlowDescription?: string
+  /**
+   * 标识是否允许发起后添加控件。0为不允许1为允许。如果为1，创建的时候不能有签署控件，只能创建后添加。注意发起后添加控件功能不支持添加骑缝章和签批控件
+   */
+  SignBeanTag?: number
+  /**
+   * 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填
+   */
+  Agent?: Agent
+  /**
+   * 给关注人发送短信通知的类型，0-合同发起时通知 1-签署完成后通知
+   */
+  CcNotifyType?: number
+  /**
+   * 个人自动签场景。发起自动签署时，需设置对应自动签署场景，目前仅支持场景：处方单-E_PRESCRIPTION_AUTO_SIGN
+   */
+  AutoSignScene?: string
 }
 
 /**
@@ -3363,6 +3531,24 @@ E_PRESCRIPTION_AUTO_SIGN 电子处方
 }
 
 /**
+ * CreateOrganizationBatchSignUrl返回参数结构体
+ */
+export interface CreateOrganizationBatchSignUrlResponse {
+  /**
+   * 批量签署入口链接
+   */
+  SignUrl?: string
+  /**
+   * 链接过期时间戳
+   */
+  ExpiredTime?: number
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeIntegrationMainOrganizationUser返回参数结构体
  */
 export interface DescribeIntegrationMainOrganizationUserResponse {
@@ -3459,6 +3645,26 @@ export interface ApproverRestriction {
 }
 
 /**
+ * CreateWebThemeConfig请求参数结构体
+ */
+export interface CreateWebThemeConfigRequest {
+  /**
+   * 操作人信息
+   */
+  Operator: UserInfo
+  /**
+   * 主题类型
+<br/>EMBED_WEB_THEME：嵌入式主题
+<br/>目前只支持EMBED_WEB_THEME，web页面嵌入的主题风格配置
+   */
+  ThemeType: string
+  /**
+   * 主题配置
+   */
+  WebThemeConfig: WebThemeConfig
+}
+
+/**
  * DeleteSealPolicies请求参数结构体
  */
 export interface DeleteSealPoliciesRequest {
@@ -3485,107 +3691,33 @@ export interface DeleteSealPoliciesRequest {
 }
 
 /**
- * CreateFlowByFiles请求参数结构体
+ * CreateOrganizationBatchSignUrl请求参数结构体
  */
-export interface CreateFlowByFilesRequest {
+export interface CreateOrganizationBatchSignUrlRequest {
   /**
-   * 调用方用户信息，userId 必填。支持填入集团子公司经办人 userId 代发合同
+   * 调用方用户信息，UserId 必填，支持填入集团子公司经办人UserId。
    */
   Operator: UserInfo
   /**
-   * 签署流程名称,最大长度200个字符
+   * 指定需要进行批量签署的流程id，数量1-100，填写后用户将通过链接对这些合同进行批量签署。
    */
-  FlowName: string
+  FlowIds: Array<string>
   /**
-   * 签署参与者信息，最大限制50方
-   */
-  Approvers: Array<ApproverInfo>
-  /**
-   * 签署pdf文件的资源编号列表，通过UploadFiles接口获取，暂时仅支持单文件发起
-   */
-  FileIds: Array<string>
-  /**
-   * 签署流程的类型(如销售合同/入职合同等)，最大长度200个字符
-   */
-  FlowType?: string
-  /**
-   * 经办人内容控件配置
-   */
-  Components?: Array<Component>
-  /**
-   * 被抄送人的信息列表。
-注:此功能为白名单功能，若有需要，请联系电子签客服开白使用
-   */
-  CcInfos?: Array<CcInfo>
-  /**
-   * 是否需要预览，true：预览模式，false：非预览（默认）；
-预览链接有效期300秒；
-
-注：如果使用“预览模式”，出参会返回合同预览链接 PreviewUrl，不会正式发起合同，且出参不会返回签署流程编号 FlowId；如果使用“非预览”，则会正常返回签署流程编号 FlowId，不会生成合同预览链接 PreviewUrl。
-   */
-  NeedPreview?: boolean
-  /**
-   * 预览链接类型 默认:0-文件流, 1- H5链接 注意:此参数在NeedPreview 为true 时有效,
-   */
-  PreviewType?: number
-  /**
-   * 签署流程的签署截止时间。
-值为unix时间戳,精确到秒,不传默认为当前时间一年后
-   */
-  Deadline?: number
-  /**
-   * 合同到期提醒时间戳，单位秒。设定该值后，可以提前进行到期通知，方便客户处理合同到期事务，如合同续签等。该值支持的范围是从发起时间起到往后的10年内。仅合同发起方企业的发起人可以编辑修改。
-   */
-  RemindedOn?: number
-  /**
-   * 发送类型：
-true：无序签
-false：有序签
-注：默认为false（有序签）
-   */
-  Unordered?: boolean
-  /**
-   * 合同显示的页卡模板，说明：只支持{合同名称}, {发起方企业}, {发起方姓名}, {签署方N企业}, {签署方N姓名}，且N不能超过签署人的数量，N从1开始
-   */
-  CustomShowMap?: string
-  /**
-   * 发起方企业的签署人进行签署操作是否需要企业内部审批。使用此功能需要发起方企业有参与签署。
-若设置为true，审核结果需通过接口 CreateFlowSignReview 通知电子签，审核通过后，发起方企业签署人方可进行签署操作，否则会阻塞其签署操作。
-
-注：企业可以通过此功能与企业内部的审批流程进行关联，支持手动、静默签署合同。
-   */
-  NeedSignReview?: boolean
-  /**
-   * 用户自定义字段，回调的时候会进行透传，长度需要小于20480
-   */
-  UserData?: string
-  /**
-   * 签署人校验方式
-VerifyCheck: 人脸识别（默认）
-MobileCheck：手机号验证
-参数说明：可选人脸识别或手机号验证两种方式，若选择后者，未实名个人签署方在签署合同时，无需经过实名认证和意愿确认两次人脸识别，该能力仅适用于个人签署方。
-   */
-  ApproverVerifyType?: string
-  /**
-   * 签署流程描述,最大长度1000个字符
-   */
-  FlowDescription?: string
-  /**
-   * 标识是否允许发起后添加控件。0为不允许1为允许。如果为1，创建的时候不能有签署控件，只能创建后添加。注意发起后添加控件功能不支持添加骑缝章和签批控件
-   */
-  SignBeanTag?: number
-  /**
-   * 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填
+   * 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填。
    */
   Agent?: Agent
   /**
-   * 给关注人发送短信通知的类型，0-合同发起时通知 1-签署完成后通知
+   * 员工的UserId，该UserId对应的员工必须已经加入企业并实名，Name和Mobile为空时该字段不能为空。（优先使用UserId对应的员工）
    */
-  CcNotifyType?: number
+  UserId?: string
   /**
-   * 个人自动签场景。发起自动签署时，需设置对应自动签署场景，目前仅支持场景：处方单-E_PRESCRIPTION_AUTO_SIGN
+   * 员工姓名，该字段需要与Mobile组合使用，UserId为空时该字段不能为空。（UserId为空时，使用Name和Mbile对应的员工）
    */
-  AutoSignScene?: string
+  Name?: string
+  /**
+   * 员工手机号码，该字段需要与Name组合使用，UserId为空时该字段不能为空。（UserId为空时，使用Name和Mbile对应的员工）
+   */
+  Mobile?: string
 }
 
 /**
@@ -3708,6 +3840,24 @@ export interface DeleteIntegrationDepartmentRequest {
 }
 
 /**
+ * 页面主题配置
+ */
+export interface WebThemeConfig {
+  /**
+   * 是否页面底部显示电子签logo
+<br/>true：允许在页面底部隐藏电子签logo
+<br/>false：不允许允许在页面底部隐藏电子签logo
+<br/>默认false，不隐藏logo
+   */
+  DisplaySignBrandLogo?: boolean
+  /**
+   * 主题颜色
+<br/>支持十六进制颜色值以及RGB格式颜色值，例如：#D54941，rgb(213, 73, 65)
+   */
+  WebEmbedThemeColor?: string
+}
+
+/**
  * ModifyApplicationCallbackInfo请求参数结构体
  */
 export interface ModifyApplicationCallbackInfoRequest {
@@ -3827,6 +3977,10 @@ export interface CreatePrepareFlowRequest {
    * 打开智能添加填写区(默认开启，打开:"OPEN" 关闭："CLOSE")
    */
   IntelligentStatus?: string
+  /**
+   * 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填
+   */
+  Agent?: Agent
 }
 
 /**
@@ -3844,18 +3998,18 @@ export interface ApproverOption {
 }
 
 /**
- * 下载文件的URL信息
+ * CreateEmbedWebUrl返回参数结构体
  */
-export interface FileUrl {
+export interface CreateEmbedWebUrlResponse {
   /**
-   * 下载文件的URL，有效期为输入的UrlTtl，默认5分钟
+   * 嵌入的web链接，有效期：5分钟
+EmbedType=PREVIEW_CC_FLOW，该url为h5链接
    */
-  Url: string
+  WebUrl?: string
   /**
-   * 下载文件的附加信息。如果是pdf文件，会返回pdf文件每页的有效高宽
-注意：此字段可能返回 null，表示取不到有效值。
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  Option: string
+  RequestId?: string
 }
 
 /**
@@ -4799,6 +4953,21 @@ export interface FilledComponent {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ImageUrl?: string
+}
+
+/**
+ * 下载文件的URL信息
+ */
+export interface FileUrl {
+  /**
+   * 下载文件的URL，有效期为输入的UrlTtl，默认5分钟
+   */
+  Url: string
+  /**
+   * 下载文件的附加信息。如果是pdf文件，会返回pdf文件每页的有效高宽
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Option: string
 }
 
 /**

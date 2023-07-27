@@ -4350,7 +4350,7 @@ export interface MachineGroupTypeInfo {
   /**
    * 机器描述列表
    */
-  Values: Array<string>
+  Values?: Array<string>
 }
 
 /**

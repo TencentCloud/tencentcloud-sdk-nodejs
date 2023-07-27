@@ -4157,7 +4157,7 @@ export interface MachineGroupTypeInfo {
     /**
      * 机器描述列表
      */
-    Values: Array<string>;
+    Values?: Array<string>;
 }
 /**
  * DeleteConfigFromMachineGroup请求参数结构体

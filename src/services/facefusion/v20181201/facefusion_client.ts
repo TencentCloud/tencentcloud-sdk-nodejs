@@ -25,14 +25,17 @@ import {
   MaterialFaceList,
   FaceFusionRequest,
   FaceFusionLiteResponse,
-  FuseFaceReviewDetail,
   MergeInfo,
+  FuseFaceReviewDetail,
+  ImageCodecParam,
   FaceFusionLiteRequest,
   FuseFaceReviewResult,
   FuseFaceResponse,
   FuseFaceRequest,
   FaceRect,
+  FuseParam,
   DescribeMaterialListRequest,
+  MetaData,
 } from "./facefusion_models"
 
 /**

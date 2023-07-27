@@ -953,6 +953,16 @@ export interface PackageInfo {
      * 云存套餐过期时间
      */
     CSExpiredTime?: number;
+    /**
+     * 云存套餐创建时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CreatedAt?: number;
+    /**
+     * 云存套餐更新时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    UpdatedAt?: number;
 }
 /**
  * DescribeFirmware请求参数结构体

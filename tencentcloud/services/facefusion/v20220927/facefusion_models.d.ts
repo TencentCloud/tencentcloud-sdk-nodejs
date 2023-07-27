@@ -84,6 +84,24 @@ export interface MaterialFaces {
     FaceInfo?: FaceInfo;
 }
 /**
+ * 融合参数
+ */
+export interface FuseParam {
+    /**
+     * 图片编码参数
+     */
+    ImageCodecParam?: ImageCodecParam;
+}
+/**
+ * 图片编码参数
+ */
+export interface ImageCodecParam {
+    /**
+     * 元数据
+     */
+    MetaData?: Array<MetaData>;
+}
+/**
  * 人脸图片和待被融合的素材模板图的人脸位置信息。
  */
 export interface MergeInfo {
@@ -111,7 +129,7 @@ export interface FuseFaceResponse {
     /**
      * RspImgType 为 url 时，返回结果的 url， RspImgType 为 base64 时返回 base64 数据。
      */
-    FusedImage: string;
+    FusedImage?: string;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -160,6 +178,10 @@ export interface FuseFaceRequest {
   默认在融合结果图右下角添加“本图片为AI合成图片”字样，您可根据自身需要替换为其他的Logo图片。
      */
     LogoParam?: LogoParam;
+    /**
+     * 融合参数。
+     */
+    FuseParam?: FuseParam;
 }
 /**
  * 人脸框信息
@@ -181,6 +203,19 @@ export interface FaceRect {
      * 人脸框高度。
      */
     Height: number;
+}
+/**
+ * MetaData数据结构，Key/Value格式
+ */
+export interface MetaData {
+    /**
+     * MetaData的Key
+     */
+    MetaKey: string;
+    /**
+     * MetaData的Value
+     */
+    MetaValue: string;
 }
 /**
  * DescribeMaterialList请求参数结构体

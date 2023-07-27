@@ -32,6 +32,7 @@ import {
   ModifyApplicationCallbackInfoResponse,
   CreateMultiFlowSignQRCodeResponse,
   FlowCreateApprover,
+  ReviewerInfo,
   DescribeThirdPartyAuthCodeResponse,
   HasAuthUser,
   DisableUserAutoSignResponse,
@@ -68,6 +69,7 @@ import {
   DescribeThirdPartyAuthCodeRequest,
   UnbindEmployeeUserIdWithClientOpenIdResponse,
   CreateReleaseFlowResponse,
+  CreateWebThemeConfigResponse,
   BindEmployeeUserIdWithClientOpenIdRequest,
   DescribeIntegrationDepartmentsRequest,
   CreateIntegrationDepartmentResponse,
@@ -110,6 +112,7 @@ import {
   FlowDetailInfo,
   CreatePreparedPersonalEsignResponse,
   DescribeOrganizationSealsResponse,
+  CreateEmbedWebUrlRequest,
   DeleteIntegrationEmployeesRequest,
   FailedUpdateStaffData,
   GetTaskResultApiRequest,
@@ -118,6 +121,7 @@ import {
   CreateFlowGroupByFilesResponse,
   CreateIntegrationEmployeesResponse,
   DeleteIntegrationRoleUsersRequest,
+  CreateFlowByFilesRequest,
   CreateFlowSignUrlRequest,
   CreateReleaseFlowRequest,
   CreateIntegrationUserRolesRequest,
@@ -135,25 +139,28 @@ import {
   Filter,
   CreateStaffResult,
   CreateUserAutoSignEnableUrlRequest,
+  CreateOrganizationBatchSignUrlResponse,
   DescribeIntegrationMainOrganizationUserResponse,
   RemindFlowRecords,
   CancelUserAutoSignEnableUrlRequest,
   FailedCreateStaffData,
   ApproverRestriction,
+  CreateWebThemeConfigRequest,
   DeleteSealPoliciesRequest,
-  CreateFlowByFilesRequest,
+  CreateOrganizationBatchSignUrlRequest,
   IntegrateRole,
   CreatePrepareFlowResponse,
   GetTaskResultApiResponse,
   CancelMultiFlowSignQRCodeRequest,
   DeleteIntegrationDepartmentRequest,
+  WebThemeConfig,
   ModifyApplicationCallbackInfoRequest,
   IntegrationMainOrganizationUser,
   StartFlowRequest,
   CreateSealResponse,
   CreatePrepareFlowRequest,
   ApproverOption,
-  FileUrl,
+  CreateEmbedWebUrlResponse,
   CreateSealPolicyRequest,
   DescribeOrganizationSealsRequest,
   CancelFlowRequest,
@@ -184,6 +191,7 @@ import {
   CreateFlowResponse,
   DescribeUserAutoSignStatusRequest,
   FilledComponent,
+  FileUrl,
   FlowBrief,
   DescribeOrganizationGroupOrganizationsResponse,
   DescribeExtendedServiceAuthInfosResponse,
@@ -299,13 +307,13 @@ callbackinfo包含： 回调地址和签名key
   }
 
   /**
-   * 此API接口用户查询加入集团的成员企业
+   * 本接口（CreateEmbedWebUrl）用于创建嵌入web的链接 本接口支持创建：创建印章，创建模板，修改模板，预览模板，预览合同流程的web链接 进入web连接后与当前控制台操作保持一致
    */
-  async DescribeOrganizationGroupOrganizations(
-    req: DescribeOrganizationGroupOrganizationsRequest,
-    cb?: (error: string, rep: DescribeOrganizationGroupOrganizationsResponse) => void
-  ): Promise<DescribeOrganizationGroupOrganizationsResponse> {
-    return this.request("DescribeOrganizationGroupOrganizations", req, cb)
+  async CreateEmbedWebUrl(
+    req: CreateEmbedWebUrlRequest,
+    cb?: (error: string, rep: CreateEmbedWebUrlResponse) => void
+  ): Promise<CreateEmbedWebUrlResponse> {
+    return this.request("CreateEmbedWebUrl", req, cb)
   }
 
   /**
@@ -698,13 +706,14 @@ httpProfile.setEndpoint("file.test.ess.tencent.cn");<br/>
   }
 
   /**
-   * 查询流程填写控件内容，可以根据流程Id查询该流程相关联的填写控件信息
-   */
-  async DescribeFlowComponents(
-    req: DescribeFlowComponentsRequest,
-    cb?: (error: string, rep: DescribeFlowComponentsResponse) => void
-  ): Promise<DescribeFlowComponentsResponse> {
-    return this.request("DescribeFlowComponents", req, cb)
+     * 通过此接口，创建企业批量签署链接，企业员工点击链接即可跳转控制台进行批量签署。
+如果没有UserId，Name和Mobile必填，对应的员工必须在企业下已经实名，且该员工为批量签署合同中的签署方。
+     */
+  async CreateOrganizationBatchSignUrl(
+    req: CreateOrganizationBatchSignUrlRequest,
+    cb?: (error: string, rep: CreateOrganizationBatchSignUrlResponse) => void
+  ): Promise<CreateOrganizationBatchSignUrlResponse> {
+    return this.request("CreateOrganizationBatchSignUrl", req, cb)
   }
 
   /**
@@ -719,6 +728,16 @@ httpProfile.setEndpoint("file.test.ess.tencent.cn");<br/>
     cb?: (error: string, rep: CreateFlowRemindsResponse) => void
   ): Promise<CreateFlowRemindsResponse> {
     return this.request("CreateFlowReminds", req, cb)
+  }
+
+  /**
+   * 查询流程填写控件内容，可以根据流程Id查询该流程相关联的填写控件信息
+   */
+  async DescribeFlowComponents(
+    req: DescribeFlowComponentsRequest,
+    cb?: (error: string, rep: DescribeFlowComponentsResponse) => void
+  ): Promise<DescribeFlowComponentsResponse> {
+    return this.request("DescribeFlowComponents", req, cb)
   }
 
   /**
@@ -741,6 +760,16 @@ httpProfile.setEndpoint("file.test.ess.tencent.cn");<br/>
     cb?: (error: string, rep: DescribeThirdPartyAuthCodeResponse) => void
   ): Promise<DescribeThirdPartyAuthCodeResponse> {
     return this.request("DescribeThirdPartyAuthCode", req, cb)
+  }
+
+  /**
+   * 用来创建页面主题配置
+   */
+  async CreateWebThemeConfig(
+    req: CreateWebThemeConfigRequest,
+    cb?: (error: string, rep: CreateWebThemeConfigResponse) => void
+  ): Promise<CreateWebThemeConfigResponse> {
+    return this.request("CreateWebThemeConfig", req, cb)
   }
 
   /**
@@ -814,6 +843,16 @@ PDF资源Id 通过上传文件接口获取
     cb?: (error: string, rep: CreateFlowGroupByFilesResponse) => void
   ): Promise<CreateFlowGroupByFilesResponse> {
     return this.request("CreateFlowGroupByFiles", req, cb)
+  }
+
+  /**
+   * 此API接口用户查询加入集团的成员企业
+   */
+  async DescribeOrganizationGroupOrganizations(
+    req: DescribeOrganizationGroupOrganizationsRequest,
+    cb?: (error: string, rep: DescribeOrganizationGroupOrganizationsResponse) => void
+  ): Promise<DescribeOrganizationGroupOrganizationsResponse> {
+    return this.request("DescribeOrganizationGroupOrganizations", req, cb)
   }
 
   /**

@@ -4358,24 +4358,6 @@ export interface ModifyApiIncrementRequest {
 }
 
 /**
- * GenerateApiDocument请求参数结构体
- */
-export interface GenerateApiDocumentRequest {
-  /**
-   * 待创建文档的服务唯一 ID。
-   */
-  ServiceId: string
-  /**
-   * 待创建 SDK 的服务所在环境。
-   */
-  GenEnvironment: string
-  /**
-   * 待创建 SDK 的语言。当前只支持 Python 和 JavaScript。
-   */
-  GenLanguage: string
-}
-
-/**
  * 服务绑定使用计划列表
  */
 export interface ServiceUsagePlanSet {
@@ -5257,20 +5239,6 @@ export interface ModifyServiceEnvironmentStrategyRequest {
 }
 
 /**
- * api文档下载
- */
-export interface DocumentSDK {
-  /**
-   * 生成的 document 会存放到 COS 中，此出参返回产生文件的下载链接。
-   */
-  DocumentURL: string
-  /**
-   * 生成的 SDK 会存放到 COS 中，此出参返回产生 SDK 文件的下载链接。
-   */
-  SdkURL: string
-}
-
-/**
  * CreateAPIDoc请求参数结构体
  */
 export interface CreateAPIDocRequest {
@@ -5344,17 +5312,19 @@ export interface ModifyApiAppRequest {
 }
 
 /**
- * GenerateApiDocument返回参数结构体
+ * 发布服务返回
  */
-export interface GenerateApiDocumentResponse {
+export interface ReleaseService {
   /**
-   * api文档&sdk链接。
+   * 发布时的备注信息填写。
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Result: DocumentSDK
+  ReleaseDesc: string
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 发布的版本id。
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  RequestId?: string
+  ReleaseVersion: string
 }
 
 /**
@@ -6456,22 +6426,6 @@ export interface UnbindApiAppRequest {
    * 待绑定的API唯一ID。
    */
   ApiId: string
-}
-
-/**
- * 发布服务返回
- */
-export interface ReleaseService {
-  /**
-   * 发布时的备注信息填写。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ReleaseDesc: string
-  /**
-   * 发布的版本id。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ReleaseVersion: string
 }
 
 /**

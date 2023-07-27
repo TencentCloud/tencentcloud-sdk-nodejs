@@ -21,6 +21,7 @@ import {
   SyncProxyOrganizationResponse,
   ChannelCreateConvertTaskApiResponse,
   ChannelCreateFlowRemindsResponse,
+  Component,
   ChannelDeleteSealPoliciesRequest,
   ChannelBatchCancelFlowsResponse,
   Department,
@@ -34,6 +35,7 @@ import {
   RemindFlowRecords,
   ChannelCreateFlowSignUrlResponse,
   CreateSealByImageResponse,
+  WebThemeConfig,
   OperateChannelTemplateResponse,
   FlowFileInfo,
   CreateFlowOption,
@@ -49,6 +51,7 @@ import {
   ChannelCancelFlowResponse,
   DownloadFlowInfo,
   FlowApproverUrlInfo,
+  ChannelCreateWebThemeConfigRequest,
   ChannelCreateConvertTaskApiRequest,
   ChannelCreateFlowByFilesRequest,
   ChannelRole,
@@ -128,7 +131,7 @@ import {
   ChannelGetTaskResultApiResponse,
   ChannelCreateOrganizationModifyQrCodeResponse,
   ChannelDeleteSealPoliciesResponse,
-  Component,
+  ChannelCreateWebThemeConfigResponse,
   GetDownloadFlowUrlRequest,
   ChannelCreateEmbedWebUrlResponse,
   ChannelBatchCancelFlowsRequest,
@@ -291,6 +294,18 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ChannelCancelFlowResponse) => void
   ): Promise<ChannelCancelFlowResponse> {
     return this.request("ChannelCancelFlow", req, cb)
+  }
+
+  /**
+     * 此接口（GetDownloadFlowUrl）用于创建电子签批量下载地址，让合作企业进入控制台直接下载，支持客户合同（流程）按照自定义文件夹形式 分类下载。
+当前接口限制最多合同（流程）50个.
+返回的链接只能使用一次
+     */
+  async GetDownloadFlowUrl(
+    req: GetDownloadFlowUrlRequest,
+    cb?: (error: string, rep: GetDownloadFlowUrlResponse) => void
+  ): Promise<GetDownloadFlowUrlResponse> {
+    return this.request("GetDownloadFlowUrl", req, cb)
   }
 
   /**
@@ -470,15 +485,13 @@ https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/launchAp
   }
 
   /**
-     * 此接口（GetDownloadFlowUrl）用于创建电子签批量下载地址，让合作企业进入控制台直接下载，支持客户合同（流程）按照自定义文件夹形式 分类下载。
-当前接口限制最多合同（流程）50个.
-返回的链接只能使用一次
-     */
-  async GetDownloadFlowUrl(
-    req: GetDownloadFlowUrlRequest,
-    cb?: (error: string, rep: GetDownloadFlowUrlResponse) => void
-  ): Promise<GetDownloadFlowUrlResponse> {
-    return this.request("GetDownloadFlowUrl", req, cb)
+   * 生成页面主题配置
+   */
+  async ChannelCreateWebThemeConfig(
+    req: ChannelCreateWebThemeConfigRequest,
+    cb?: (error: string, rep: ChannelCreateWebThemeConfigResponse) => void
+  ): Promise<ChannelCreateWebThemeConfigResponse> {
+    return this.request("ChannelCreateWebThemeConfig", req, cb)
   }
 
   /**

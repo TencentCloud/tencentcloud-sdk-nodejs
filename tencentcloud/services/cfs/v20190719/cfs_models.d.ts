@@ -1388,6 +1388,14 @@ export interface DescribeCfsFileSystemsRequest {
      * 子网 ID
      */
     SubnetId?: string;
+    /**
+     * Offset 分页码
+     */
+    Offset?: number;
+    /**
+     * Limit 页面大小
+     */
+    Limit?: number;
 }
 /**
  * 版本控制-区域数组

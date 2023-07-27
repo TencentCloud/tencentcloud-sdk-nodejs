@@ -171,7 +171,7 @@ export interface CreateTtsTaskRequest {
    */
   VoiceType?: number
   /**
-   * 主语言类型：<li>1-中文（默认）</li><li>2-英文</li>
+   * 主语言类型：<li>1-中文（默认）</li><li>2-英文</li><li>3-日文</li>
    */
   PrimaryLanguage?: number
   /**
@@ -226,7 +226,7 @@ export interface TextToVoiceRequest {
    */
   VoiceType?: number
   /**
-   * 主语言类型：<li>1-中文（默认）</li><li>2-英文</li>
+   * 主语言类型：<li>1-中文（默认）</li><li>2-英文</li><li>3-日文</li>
    */
   PrimaryLanguage?: number
   /**

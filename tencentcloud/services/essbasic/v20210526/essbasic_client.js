@@ -109,6 +109,14 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ChannelCancelFlow", req, cb);
     }
     /**
+     * 此接口（GetDownloadFlowUrl）用于创建电子签批量下载地址，让合作企业进入控制台直接下载，支持客户合同（流程）按照自定义文件夹形式 分类下载。
+当前接口限制最多合同（流程）50个.
+返回的链接只能使用一次
+     */
+    async GetDownloadFlowUrl(req, cb) {
+        return this.request("GetDownloadFlowUrl", req, cb);
+    }
+    /**
      * 将指定印章授权给第三方平台子客企业下的某些员工
      */
     async ChannelCreateSealPolicy(req, cb) {
@@ -229,12 +237,10 @@ https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/launchAp
         return this.request("ChannelVerifyPdf", req, cb);
     }
     /**
-     * 此接口（GetDownloadFlowUrl）用于创建电子签批量下载地址，让合作企业进入控制台直接下载，支持客户合同（流程）按照自定义文件夹形式 分类下载。
-当前接口限制最多合同（流程）50个.
-返回的链接只能使用一次
+     * 生成页面主题配置
      */
-    async GetDownloadFlowUrl(req, cb) {
-        return this.request("GetDownloadFlowUrl", req, cb);
+    async ChannelCreateWebThemeConfig(req, cb) {
+        return this.request("ChannelCreateWebThemeConfig", req, cb);
     }
     /**
      * 创建个人签署H5签署链接，请联系客户经理申请使用<br/>

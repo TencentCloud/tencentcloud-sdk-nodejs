@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { CreateSealRequest, ModifyIntegrationDepartmentResponse, CancelFlowResponse, DescribeFlowEvidenceReportRequest, UpdateIntegrationEmployeesResponse, CreatePreparedPersonalEsignRequest, DescribeIntegrationDepartmentsResponse, CreateFlowApproversResponse, DescribeIntegrationMainOrganizationUserRequest, ModifyApplicationCallbackInfoResponse, CreateMultiFlowSignQRCodeResponse, DescribeThirdPartyAuthCodeResponse, DisableUserAutoSignResponse, CancelUserAutoSignEnableUrlResponse, BindEmployeeUserIdWithClientOpenIdResponse, CreateIntegrationEmployeesRequest, DescribeIntegrationRolesRequest, CreateFlowEvidenceReportRequest, StartFlowResponse, CreateConvertTaskApiRequest, DeleteIntegrationEmployeesResponse, CreateFlowRemindsResponse, DescribeOrganizationGroupOrganizationsRequest, CreateFlowGroupByFilesRequest, DescribeFlowComponentsResponse, DescribeFlowEvidenceReportResponse, CreateFlowGroupByTemplatesResponse, CreateDocumentResponse, DescribeIntegrationEmployeesRequest, CreateIntegrationUserRolesResponse, CreateFlowRequest, CreateSchemeUrlRequest, DeleteIntegrationDepartmentResponse, DescribeThirdPartyAuthCodeRequest, UnbindEmployeeUserIdWithClientOpenIdResponse, CreateReleaseFlowResponse, BindEmployeeUserIdWithClientOpenIdRequest, DescribeIntegrationDepartmentsRequest, CreateIntegrationDepartmentResponse, DescribeFlowTemplatesRequest, DeleteSealPoliciesResponse, DescribeUserAutoSignStatusResponse, CreateBatchCancelFlowUrlResponse, CreateSealPolicyResponse, DisableUserAutoSignRequest, DescribeIntegrationEmployeesResponse, CreateConvertTaskApiResponse, CreateFlowSignReviewRequest, UnbindEmployeeUserIdWithClientOpenIdRequest, CreateSchemeUrlResponse, CreateUserAutoSignEnableUrlResponse, CreateFlowSignUrlResponse, DescribeFileUrlsRequest, CreateChannelSubOrganizationModifyQrCodeRequest, CreateFlowApproversRequest, CreateFlowEvidenceReportResponse, DescribeFileUrlsResponse, DescribeFlowComponentsRequest, CreateIntegrationDepartmentRequest, DeleteIntegrationRoleUsersResponse, CreateDocumentRequest, CreatePreparedPersonalEsignResponse, DescribeOrganizationSealsResponse, DeleteIntegrationEmployeesRequest, GetTaskResultApiRequest, CreateFlowGroupByFilesResponse, CreateIntegrationEmployeesResponse, DeleteIntegrationRoleUsersRequest, CreateFlowSignUrlRequest, CreateReleaseFlowRequest, CreateIntegrationUserRolesRequest, CreateChannelSubOrganizationModifyQrCodeResponse, CreateFlowByFilesResponse, UploadFilesResponse, VerifyPdfRequest, CreateFlowSignReviewResponse, ModifyIntegrationDepartmentRequest, CreateUserAutoSignEnableUrlRequest, DescribeIntegrationMainOrganizationUserResponse, CancelUserAutoSignEnableUrlRequest, DeleteSealPoliciesRequest, CreateFlowByFilesRequest, CreatePrepareFlowResponse, GetTaskResultApiResponse, CancelMultiFlowSignQRCodeRequest, DeleteIntegrationDepartmentRequest, ModifyApplicationCallbackInfoRequest, StartFlowRequest, CreateSealResponse, CreatePrepareFlowRequest, CreateSealPolicyRequest, DescribeOrganizationSealsRequest, CancelFlowRequest, DescribeExtendedServiceAuthInfosRequest, DescribeIntegrationRolesResponse, CreateFlowRemindsRequest, UpdateIntegrationEmployeesRequest, DescribeFlowBriefsRequest, CreateFlowGroupByTemplatesRequest, VerifyPdfResponse, DescribeFlowBriefsResponse, DescribeFlowTemplatesResponse, UploadFilesRequest, CreateBatchCancelFlowUrlRequest, CreateMultiFlowSignQRCodeRequest, DescribeFlowInfoRequest, DescribeFlowInfoResponse, CancelMultiFlowSignQRCodeResponse, CreateFlowResponse, DescribeUserAutoSignStatusRequest, DescribeOrganizationGroupOrganizationsResponse, DescribeExtendedServiceAuthInfosResponse } from "./ess_models";
+import { CreateSealRequest, ModifyIntegrationDepartmentResponse, CancelFlowResponse, DescribeFlowEvidenceReportRequest, UpdateIntegrationEmployeesResponse, CreatePreparedPersonalEsignRequest, DescribeIntegrationDepartmentsResponse, CreateFlowApproversResponse, DescribeIntegrationMainOrganizationUserRequest, ModifyApplicationCallbackInfoResponse, CreateMultiFlowSignQRCodeResponse, DescribeThirdPartyAuthCodeResponse, DisableUserAutoSignResponse, CancelUserAutoSignEnableUrlResponse, BindEmployeeUserIdWithClientOpenIdResponse, CreateIntegrationEmployeesRequest, DescribeIntegrationRolesRequest, CreateFlowEvidenceReportRequest, StartFlowResponse, CreateConvertTaskApiRequest, DeleteIntegrationEmployeesResponse, CreateFlowRemindsResponse, DescribeOrganizationGroupOrganizationsRequest, CreateFlowGroupByFilesRequest, DescribeFlowComponentsResponse, DescribeFlowEvidenceReportResponse, CreateFlowGroupByTemplatesResponse, CreateDocumentResponse, DescribeIntegrationEmployeesRequest, CreateIntegrationUserRolesResponse, CreateFlowRequest, CreateSchemeUrlRequest, DeleteIntegrationDepartmentResponse, DescribeThirdPartyAuthCodeRequest, UnbindEmployeeUserIdWithClientOpenIdResponse, CreateReleaseFlowResponse, CreateWebThemeConfigResponse, BindEmployeeUserIdWithClientOpenIdRequest, DescribeIntegrationDepartmentsRequest, CreateIntegrationDepartmentResponse, DescribeFlowTemplatesRequest, DeleteSealPoliciesResponse, DescribeUserAutoSignStatusResponse, CreateBatchCancelFlowUrlResponse, CreateSealPolicyResponse, DisableUserAutoSignRequest, DescribeIntegrationEmployeesResponse, CreateConvertTaskApiResponse, CreateFlowSignReviewRequest, UnbindEmployeeUserIdWithClientOpenIdRequest, CreateSchemeUrlResponse, CreateUserAutoSignEnableUrlResponse, CreateFlowSignUrlResponse, DescribeFileUrlsRequest, CreateChannelSubOrganizationModifyQrCodeRequest, CreateFlowApproversRequest, CreateFlowEvidenceReportResponse, DescribeFileUrlsResponse, DescribeFlowComponentsRequest, CreateIntegrationDepartmentRequest, DeleteIntegrationRoleUsersResponse, CreateDocumentRequest, CreatePreparedPersonalEsignResponse, DescribeOrganizationSealsResponse, CreateEmbedWebUrlRequest, DeleteIntegrationEmployeesRequest, GetTaskResultApiRequest, CreateFlowGroupByFilesResponse, CreateIntegrationEmployeesResponse, DeleteIntegrationRoleUsersRequest, CreateFlowByFilesRequest, CreateFlowSignUrlRequest, CreateReleaseFlowRequest, CreateIntegrationUserRolesRequest, CreateChannelSubOrganizationModifyQrCodeResponse, CreateFlowByFilesResponse, UploadFilesResponse, VerifyPdfRequest, CreateFlowSignReviewResponse, ModifyIntegrationDepartmentRequest, CreateUserAutoSignEnableUrlRequest, CreateOrganizationBatchSignUrlResponse, DescribeIntegrationMainOrganizationUserResponse, CancelUserAutoSignEnableUrlRequest, CreateWebThemeConfigRequest, DeleteSealPoliciesRequest, CreateOrganizationBatchSignUrlRequest, CreatePrepareFlowResponse, GetTaskResultApiResponse, CancelMultiFlowSignQRCodeRequest, DeleteIntegrationDepartmentRequest, ModifyApplicationCallbackInfoRequest, StartFlowRequest, CreateSealResponse, CreatePrepareFlowRequest, CreateEmbedWebUrlResponse, CreateSealPolicyRequest, DescribeOrganizationSealsRequest, CancelFlowRequest, DescribeExtendedServiceAuthInfosRequest, DescribeIntegrationRolesResponse, CreateFlowRemindsRequest, UpdateIntegrationEmployeesRequest, DescribeFlowBriefsRequest, CreateFlowGroupByTemplatesRequest, VerifyPdfResponse, DescribeFlowBriefsResponse, DescribeFlowTemplatesResponse, UploadFilesRequest, CreateBatchCancelFlowUrlRequest, CreateMultiFlowSignQRCodeRequest, DescribeFlowInfoRequest, DescribeFlowInfoResponse, CancelMultiFlowSignQRCodeResponse, CreateFlowResponse, DescribeUserAutoSignStatusRequest, DescribeOrganizationGroupOrganizationsResponse, DescribeExtendedServiceAuthInfosResponse } from "./ess_models";
 /**
  * ess client
  * @class
@@ -53,9 +53,9 @@ callbackinfo包含： 回调地址和签名key
      */
     CreateSealPolicy(req: CreateSealPolicyRequest, cb?: (error: string, rep: CreateSealPolicyResponse) => void): Promise<CreateSealPolicyResponse>;
     /**
-     * 此API接口用户查询加入集团的成员企业
+     * 本接口（CreateEmbedWebUrl）用于创建嵌入web的链接 本接口支持创建：创建印章，创建模板，修改模板，预览模板，预览合同流程的web链接 进入web连接后与当前控制台操作保持一致
      */
-    DescribeOrganizationGroupOrganizations(req: DescribeOrganizationGroupOrganizationsRequest, cb?: (error: string, rep: DescribeOrganizationGroupOrganizationsResponse) => void): Promise<DescribeOrganizationGroupOrganizationsResponse>;
+    CreateEmbedWebUrl(req: CreateEmbedWebUrlRequest, cb?: (error: string, rep: CreateEmbedWebUrlResponse) => void): Promise<CreateEmbedWebUrlResponse>;
     /**
      * 对流程的合同文件进行验证，判断文件是否合法。
      */
@@ -242,9 +242,10 @@ httpProfile.setEndpoint("file.test.ess.tencent.cn");<br/>
      */
     UploadFiles(req: UploadFilesRequest, cb?: (error: string, rep: UploadFilesResponse) => void): Promise<UploadFilesResponse>;
     /**
-     * 查询流程填写控件内容，可以根据流程Id查询该流程相关联的填写控件信息
+     * 通过此接口，创建企业批量签署链接，企业员工点击链接即可跳转控制台进行批量签署。
+如果没有UserId，Name和Mobile必填，对应的员工必须在企业下已经实名，且该员工为批量签署合同中的签署方。
      */
-    DescribeFlowComponents(req: DescribeFlowComponentsRequest, cb?: (error: string, rep: DescribeFlowComponentsResponse) => void): Promise<DescribeFlowComponentsResponse>;
+    CreateOrganizationBatchSignUrl(req: CreateOrganizationBatchSignUrlRequest, cb?: (error: string, rep: CreateOrganizationBatchSignUrlResponse) => void): Promise<CreateOrganizationBatchSignUrlResponse>;
     /**
      * 指定需要批量催办的签署流程Id，批量催办合同，最多100个; 接口失败后返回错误信息
 注意:
@@ -253,6 +254,10 @@ httpProfile.setEndpoint("file.test.ess.tencent.cn");<br/>
 发起合同时，签署人的NotifyType需设置为sms，否则无法催办
      */
     CreateFlowReminds(req: CreateFlowRemindsRequest, cb?: (error: string, rep: CreateFlowRemindsResponse) => void): Promise<CreateFlowRemindsResponse>;
+    /**
+     * 查询流程填写控件内容，可以根据流程Id查询该流程相关联的填写控件信息
+     */
+    DescribeFlowComponents(req: DescribeFlowComponentsRequest, cb?: (error: string, rep: DescribeFlowComponentsResponse) => void): Promise<DescribeFlowComponentsResponse>;
     /**
      * 集团企业统一使用主代子进行操作，无需根据子企业账号进行转化查询，该接口需要屏蔽下线
 
@@ -263,6 +268,10 @@ httpProfile.setEndpoint("file.test.ess.tencent.cn");<br/>
      * 通过AuthCode查询用户是否实名
      */
     DescribeThirdPartyAuthCode(req: DescribeThirdPartyAuthCodeRequest, cb?: (error: string, rep: DescribeThirdPartyAuthCodeResponse) => void): Promise<DescribeThirdPartyAuthCodeResponse>;
+    /**
+     * 用来创建页面主题配置
+     */
+    CreateWebThemeConfig(req: CreateWebThemeConfigRequest, cb?: (error: string, rep: CreateWebThemeConfigResponse) => void): Promise<CreateWebThemeConfigResponse>;
     /**
      * 查询企业印章的列表，需要操作者具有查询印章权限
 客户指定需要获取的印章数量和偏移量，数量最多100，超过100按100处理；入参InfoType控制印章是否携带授权人信息，为1则携带，为0则返回的授权人信息为空数组。接口调用成功返回印章的信息列表还有企业印章的总数。
@@ -300,6 +309,10 @@ PDF资源Id 通过上传文件接口获取
 此接口合同组中的子合同必须都是文件发起的合同
      */
     CreateFlowGroupByFiles(req: CreateFlowGroupByFilesRequest, cb?: (error: string, rep: CreateFlowGroupByFilesResponse) => void): Promise<CreateFlowGroupByFilesResponse>;
+    /**
+     * 此API接口用户查询加入集团的成员企业
+     */
+    DescribeOrganizationGroupOrganizations(req: DescribeOrganizationGroupOrganizationsRequest, cb?: (error: string, rep: DescribeOrganizationGroupOrganizationsResponse) => void): Promise<DescribeOrganizationGroupOrganizationsResponse>;
     /**
      * 创建员工,此接口会发送提醒员工实名的短信
      */
