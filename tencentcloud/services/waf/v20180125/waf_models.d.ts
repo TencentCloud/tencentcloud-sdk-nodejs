@@ -1658,6 +1658,35 @@ export interface PeakPointsItem {
     UpstreamRedirect: number;
 }
 /**
+ * ip封堵状态数据
+ */
+export interface IpHitItem {
+    /**
+     * 动作
+     */
+    Action: number;
+    /**
+     * 类别
+     */
+    Category: string;
+    /**
+     * ip
+     */
+    Ip: string;
+    /**
+     * 规则名称
+     */
+    Name: string;
+    /**
+     * 时间戳
+     */
+    TsVersion: number;
+    /**
+     * 有效截止时间戳
+     */
+    ValidTs: number;
+}
+/**
  * PostAttackDownloadTask请求参数结构体
  */
 export interface PostAttackDownloadTaskRequest {
@@ -2123,6 +2152,19 @@ export interface DescribePeakPointsResponse {
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * 用于接口DescribeAccessHistogram 的出参
+ */
+export interface AccessHistogramItem {
+    /**
+     * 时间，单位ms
+     */
+    BTime?: number;
+    /**
+     * 日志条数
+     */
+    Count?: number;
 }
 /**
  * DeleteDownloadRecord返回参数结构体
@@ -3241,6 +3283,28 @@ export interface DescribeWafThreatenIntelligenceResponse {
     RequestId?: string;
 }
 /**
+ * DescribeAccessHistogram返回参数结构体
+ */
+export interface DescribeAccessHistogramResponse {
+    /**
+     * 柱状图间隔时间差，单位ms
+     */
+    Interval?: number;
+    /**
+     * 满足条件的日志条数
+     */
+    TotalCount?: number;
+    /**
+     * 注意：此字段可能返回 null，表示取不到有效值
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    HistogramInfos?: Array<AccessHistogramItem>;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * DeleteAttackDownloadRecord请求参数结构体
  */
 export interface DeleteAttackDownloadRecordRequest {
@@ -3323,33 +3387,29 @@ export interface UpsertIpAccessControlResponse {
     RequestId?: string;
 }
 /**
- * ip封堵状态数据
+ * DescribeAccessHistogram请求参数结构体
  */
-export interface IpHitItem {
+export interface DescribeAccessHistogramRequest {
     /**
-     * 动作
+     * 老版本查询的日志主题ID，新版本传空字符串即可
      */
-    Action: number;
+    TopicId: string;
     /**
-     * 类别
+     * 要查询的日志的起始时间，Unix时间戳，单位ms
      */
-    Category: string;
+    From: number;
     /**
-     * ip
+     * 要查询的日志的结束时间，Unix时间戳，单位ms
      */
-    Ip: string;
+    To: number;
     /**
-     * 规则名称
+     * 查询语句，语句长度最大为4096
      */
-    Name: string;
+    Query: string;
     /**
-     * 时间戳
+     * 柱状图间隔时间差，单位ms
      */
-    TsVersion: number;
-    /**
-     * 有效截止时间戳
-     */
-    ValidTs: number;
+    Interval?: number;
 }
 /**
  * DeleteSession返回参数结构体

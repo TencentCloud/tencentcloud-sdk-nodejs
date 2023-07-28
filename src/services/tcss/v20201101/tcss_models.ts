@@ -710,17 +710,17 @@ export interface AddAssetImageRegistryRegistryDetailResponse {
    * 连接错误信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  HealthCheckErr: string
+  HealthCheckErr?: string
   /**
    * 名称错误信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  NameRepeatErr: string
+  NameRepeatErr?: string
   /**
    * 仓库唯一id
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RegistryId: number
+  RegistryId?: number
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -841,6 +841,10 @@ export interface AddAssetImageRegistryRegistryDetailRequest {
    * 安全模式（证书校验）：0（默认） 非安全模式（跳过证书校验）：1
    */
   Insecure?: number
+  /**
+   * 联通性检测的记录ID
+   */
+  ConnDetectConfig?: Array<ConnDetectConfig>
 }
 
 /**
@@ -1325,47 +1329,55 @@ export interface DescribeAssetImageRegistryRegistryDetailResponse {
   /**
    * 仓库名
    */
-  Name: string
+  Name?: string
   /**
    * 用户名
    */
-  Username: string
+  Username?: string
   /**
    * 密码
    */
-  Password: string
+  Password?: string
   /**
    * 仓库url
    */
-  Url: string
+  Url?: string
   /**
    * 仓库类型，列表：harbor
    */
-  RegistryType: string
+  RegistryType?: string
   /**
    * 仓库版本
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RegistryVersion: string
+  RegistryVersion?: string
   /**
-   * 网络类型，列表：public（公网）
+   * 网络类型，列表：public（公网）,private（私网）
    */
-  NetType: string
+  NetType?: string
   /**
    * 区域，列表:default（默认）
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RegistryRegion: string
+  RegistryRegion?: string
   /**
    * 限速
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SpeedLimit: number
+  SpeedLimit?: number
   /**
    * 安全模式（证书校验）：0（默认） 非安全模式（跳过证书校验）：1
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Insecure: number
+  Insecure?: number
+  /**
+   * 联通性检测结果详情
+   */
+  ConnDetectDetail?: Array<RegistryConnDetectResult>
+  /**
+   * tcr情况下instance_id
+   */
+  InstanceID?: string
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2755,17 +2767,17 @@ export interface UpdateAssetImageRegistryRegistryDetailResponse {
    * 连接错误信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  HealthCheckErr: string
+  HealthCheckErr?: string
   /**
    * 名称错误信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  NameRepeatErr: string
+  NameRepeatErr?: string
   /**
    * 仓库唯一id
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RegistryId: number
+  RegistryId?: number
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5515,6 +5527,20 @@ export interface DescribeNetworkFirewallPolicyStatusResponse {
 }
 
 /**
+ * 联通性检测配置
+ */
+export interface ConnDetectConfig {
+  /**
+   * 主机quuid
+   */
+  Quuid?: string
+  /**
+   * 主机uuid
+   */
+  Uuid?: string
+}
+
+/**
  * DescribeAssetContainerList返回参数结构体
  */
 export interface DescribeAssetContainerListResponse {
@@ -7025,6 +7051,10 @@ export interface ModifyAssetImageRegistryScanStopOneKeyRequest {
    * 扫描的镜像列表Id
    */
   Id?: Array<number>
+  /**
+   * 停止的任务ID
+   */
+  TaskID?: number
 }
 
 /**
@@ -8279,6 +8309,10 @@ export interface DescribeAssetImageDetailResponse {
  */
 export interface CreateAssetImageRegistryScanTaskOneKeyResponse {
   /**
+   * 扫描任务id
+   */
+  TaskID?: number
+  /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -8723,6 +8757,10 @@ export interface ImageRepoInfo {
  * CreateAssetImageRegistryScanTask返回参数结构体
  */
 export interface CreateAssetImageRegistryScanTaskResponse {
+  /**
+   * 返回的任务ID
+   */
+  TaskID?: number
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -10232,6 +10270,36 @@ export interface DescribeVulDetailResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 镜像仓库联通性检测结果
+ */
+export interface RegistryConnDetectResult {
+  /**
+   * 联通性检测的主机quuid 或者 backend
+   */
+  Quuid?: string
+  /**
+   * 联通性检测的主机uuid 或者 backend
+   */
+  Uuid?: string
+  /**
+   * 检测结果状态
+   */
+  ConnDetectStatus?: string
+  /**
+   * 检测结果信息
+   */
+  ConnDetectMessage?: string
+  /**
+   * 失败的解决方案
+   */
+  Solution?: string
+  /**
+   * 失败原因
+   */
+  FailReason?: string
 }
 
 /**
@@ -16803,6 +16871,10 @@ export interface DescribeAssetImageRegistryScanStatusOneKeyRequest {
    * 需要获取进度的镜像列表Id
    */
   Id?: Array<number>
+  /**
+   * 获取进度的任务ID
+   */
+  TaskID?: number
 }
 
 /**
@@ -19518,6 +19590,10 @@ export interface ModifyAssetImageRegistryScanStopRequest {
    * 是否仅扫描各repository最新版本的镜像
    */
   OnlyScanLatest?: boolean
+  /**
+   * 停止的任务ID
+   */
+  TaskID?: number
 }
 
 /**
@@ -20070,37 +20146,37 @@ export interface DescribeAssetImageRegistryScanStatusOneKeyResponse {
   /**
    * 镜像个数
    */
-  ImageTotal: number
+  ImageTotal?: number
   /**
    * 扫描镜像个数
    */
-  ImageScanCnt: number
+  ImageScanCnt?: number
   /**
    * 扫描进度列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ImageStatus: Array<ImageProgress>
+  ImageStatus?: Array<ImageProgress>
   /**
    * 安全个数
    */
-  SuccessCount: number
+  SuccessCount?: number
   /**
    * 风险个数
    */
-  RiskCount: number
+  RiskCount?: number
   /**
    * 总的扫描进度
    */
-  Schedule: number
+  Schedule?: number
   /**
    * 总的扫描状态
    */
-  Status: string
+  Status?: string
   /**
    * 扫描剩余时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ScanRemainTime: number
+  ScanRemainTime?: number
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -20209,6 +20285,10 @@ export interface UpdateAssetImageRegistryRegistryDetailRequest {
    * 安全模式（证书校验）：0（默认） 非安全模式（跳过证书校验）：1
    */
   Insecure?: number
+  /**
+   * 联通性检测的配置
+   */
+  ConnDetectConfig?: Array<ConnDetectConfig>
 }
 
 /**

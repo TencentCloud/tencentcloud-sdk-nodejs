@@ -2327,6 +2327,11 @@ export interface SdkAppIdBuyInfo {
      * 号码购买列表
      */
     PhoneNumBuyList: Array<PhoneNumBuyInfo>;
+    /**
+     * 办公电话购买数（还在有效期内）
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SipBuyNum?: number;
 }
 /**
  * DescribePSTNActiveSessionList返回参数结构体
@@ -2630,6 +2635,11 @@ export interface StaffBuyInfo {
      * 截止时间戳
      */
     EndTime: number;
+    /**
+     * 购买办公电话数量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SipNum?: number;
 }
 /**
  * DescribeCallInMetrics请求参数结构体

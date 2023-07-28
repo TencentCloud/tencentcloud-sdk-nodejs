@@ -6515,57 +6515,57 @@ export interface JvmMonitorData {
    * 堆内存监控图,三条线
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  HeapMemory: MemoryPicture
+  HeapMemory?: MemoryPicture
   /**
    * 非堆内存监控图,三条线
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  NonHeapMemory: MemoryPicture
+  NonHeapMemory?: MemoryPicture
   /**
    * 伊甸园区监控图,三条线
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  EdenSpace: MemoryPicture
+  EdenSpace?: MemoryPicture
   /**
    * 幸存者区监控图,三条线
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SurvivorSpace: MemoryPicture
+  SurvivorSpace?: MemoryPicture
   /**
    * 老年代监控图,三条线
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  OldSpace: MemoryPicture
+  OldSpace?: MemoryPicture
   /**
    * 元空间监控图,三条线
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  MetaSpace: MemoryPicture
+  MetaSpace?: MemoryPicture
   /**
    * 线程监控图,三条线
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ThreadPicture: ThreadPicture
+  ThreadPicture?: ThreadPicture
   /**
    * youngGC增量监控图,一条线
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  YoungGC: Array<CurvePoint>
+  YoungGC?: Array<CurvePoint>
   /**
    * fullGC增量监控图,一条线
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  FullGC: Array<CurvePoint>
+  FullGC?: Array<CurvePoint>
   /**
    * cpu使用率,一条线
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CpuUsage: Array<CurvePoint>
+  CpuUsage?: Array<CurvePoint>
   /**
    * 加载类数,一条线
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ClassCount: Array<CurvePoint>
+  ClassCount?: Array<CurvePoint>
 }
 
 /**

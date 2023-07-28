@@ -458,6 +458,16 @@ it("cls.v20201016.DeleteAlarmNotice", async function () {
     }
 })
 
+it("cls.v20201016.DescribeDashboards", async function () {
+    try {
+       const data = await client.DescribeDashboards({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cls.v20201016.DescribeLogHistogram", async function () {
     try {
        const data = await client.DescribeLogHistogram({})

@@ -41,6 +41,7 @@ import {
   CreateLogsetRequest,
   DescribeShippersRequest,
   CreateScheduledSqlResponse,
+  DescribeDashboardsRequest,
   LogItem,
   SearchLogResponse,
   DeleteTopicRequest,
@@ -51,6 +52,7 @@ import {
   DescribeAlarmsRequest,
   MergePartitionRequest,
   DescribeShippersResponse,
+  TopicIdAndRegion,
   CreateConfigExtraResponse,
   ModifyShipperResponse,
   DeleteKafkaRechargeResponse,
@@ -108,6 +110,7 @@ import {
   DescribeLogHistogramResponse,
   CloseKafkaConsumerResponse,
   DescribeMachineGroupsRequest,
+  DescribeConsumerRequest,
   CreateIndexRequest,
   DescribeLogsetsResponse,
   DeleteConsumerResponse,
@@ -129,7 +132,7 @@ import {
   DescribeConfigsRequest,
   KafkaConsumerContent,
   LogsetInfo,
-  DescribeConsumerRequest,
+  DashboardTopicInfo,
   DeleteConfigRequest,
   AnalysisDimensional,
   LogRechargeRuleInfo,
@@ -158,6 +161,7 @@ import {
   DescribeKafkaRechargesResponse,
   DeleteIndexResponse,
   AlarmAnalysisConfig,
+  PreviewLogStatistic,
   ModifyIndexRequest,
   Column,
   ContentInfo,
@@ -185,10 +189,11 @@ import {
   OpenKafkaConsumerRequest,
   ModifyKafkaRechargeResponse,
   ModifyAlarmNoticeResponse,
+  DashboardInfo,
   DataTransformTaskInfo,
   DescribeMachinesResponse,
   ModifyCosRechargeResponse,
-  PreviewLogStatistic,
+  DescribeDashboardsResponse,
   CompressInfo,
   ApplyConfigToMachineGroupResponse,
   AlertHistoryNotice,
@@ -849,6 +854,16 @@ cls.pb.cc cls.pb.h cls.proto
     cb?: (error: string, rep: DeleteAlarmNoticeResponse) => void
   ): Promise<DeleteAlarmNoticeResponse> {
     return this.request("DeleteAlarmNotice", req, cb)
+  }
+
+  /**
+   * 本接口用于获取仪表盘
+   */
+  async DescribeDashboards(
+    req: DescribeDashboardsRequest,
+    cb?: (error: string, rep: DescribeDashboardsResponse) => void
+  ): Promise<DescribeDashboardsResponse> {
+    return this.request("DescribeDashboards", req, cb)
   }
 
   /**

@@ -88,10 +88,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("SearchAttackLog", req, cb);
     }
     /**
-     * 查询单个saas域名详情
+     * 本接口用于访问日志柱状趋势图
      */
-    async DescribeDomainDetailsSaas(req, cb) {
-        return this.request("DescribeDomainDetailsSaas", req, cb);
+    async DescribeAccessHistogram(req, cb) {
+        return this.request("DescribeAccessHistogram", req, cb);
     }
     /**
      * 查询用户所有实例的详细信息
@@ -196,6 +196,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async PostAttackDownloadTask(req, cb) {
         return this.request("PostAttackDownloadTask", req, cb);
+    }
+    /**
+     * 查询单个saas域名详情
+     */
+    async DescribeDomainDetailsSaas(req, cb) {
+        return this.request("DescribeDomainDetailsSaas", req, cb);
     }
     /**
      * 开启或禁用访问控制（自定义策略）

@@ -7510,7 +7510,7 @@ export interface Machine {
    * 备注信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Remark: string
+  Remark?: string
 }
 
 /**
@@ -12697,65 +12697,70 @@ export interface LicenseDetail {
   /**
    * 授权ID
    */
-  LicenseId: number
+  LicenseId?: number
   /**
    * 授权类型,0 专业版-按量计费, 1专业版-包年包月 , 2 旗舰版-包年包月
    */
-  LicenseType: number
+  LicenseType?: number
   /**
    * 授权状态 0 未使用,1 部分使用, 2 已用完, 3 不可用
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  LicenseStatus: number
+  LicenseStatus?: number
   /**
    * 总授权数
    */
-  LicenseCnt: number
+  LicenseCnt?: number
   /**
    * 已使用授权数
    */
-  UsedLicenseCnt: number
+  UsedLicenseCnt?: number
   /**
    * 订单状态 1 正常 2隔离, 3销毁
    */
-  OrderStatus: number
+  OrderStatus?: number
   /**
    * 截止日期
    */
-  Deadline: string
+  Deadline?: string
   /**
    * 订单资源ID
    */
-  ResourceId: string
+  ResourceId?: string
   /**
    * 0 初始化,1 自动续费,2 不自动续费
    */
-  AutoRenewFlag: number
+  AutoRenewFlag?: number
   /**
    * 项目ID
    */
-  ProjectId: number
+  ProjectId?: number
   /**
    * 任务ID ,默认0 ,查询绑定进度用
    */
-  TaskId: number
+  TaskId?: number
   /**
    * 购买时间
    */
-  BuyTime: string
+  BuyTime?: string
   /**
    * 是否试用订单.
    */
-  SourceType: number
+  SourceType?: number
   /**
    * 资源别名
    */
-  Alias: string
+  Alias?: string
   /**
    * 平台标签
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Tags: Array<Tags>
+  Tags?: Array<Tags>
+  /**
+   * 冻结数,当为0时 为未冻结,非0 则表示冻结授权数额
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FreezeNum?: number
 }
 
 /**
@@ -13427,12 +13432,12 @@ export interface DescribeImportMachineInfoResponse {
    * 有效的机器信息列表：机器名称、机器公网/内网ip、机器标签
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  EffectiveMachineInfoList: Array<EffectiveMachineInfo>
+  EffectiveMachineInfoList?: Array<EffectiveMachineInfo>
   /**
    * 用户批量导入失败的机器列表（例如机器不存在等...）
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  InvalidMachineList: Array<string>
+  InvalidMachineList?: Array<string>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -17336,62 +17341,62 @@ export interface DescribeGeneralStatResponse {
   /**
    * 云主机总数
    */
-  MachinesAll: number
+  MachinesAll?: number
   /**
    * 云主机没有安装主机安全客户端的总数
    */
-  MachinesUninstalled: number
+  MachinesUninstalled?: number
   /**
    * 主机安全客户端总数的总数
    */
-  AgentsAll: number
+  AgentsAll?: number
   /**
    * 主机安全客户端在线的总数
    */
-  AgentsOnline: number
+  AgentsOnline?: number
   /**
    * 主机安全客户端 离线+关机 的总数
    */
-  AgentsOffline: number
+  AgentsOffline?: number
   /**
    * 主机安全客户端专业版的总数
    */
-  AgentsPro: number
+  AgentsPro?: number
   /**
    * 主机安全客户端基础版的总数
    */
-  AgentsBasic: number
+  AgentsBasic?: number
   /**
    * 7天内到期的预付费专业版总数
    */
-  AgentsProExpireWithInSevenDays: number
+  AgentsProExpireWithInSevenDays?: number
   /**
    * 风险主机总数
    */
-  RiskMachine: number
+  RiskMachine?: number
   /**
    * 已关机总数
    */
-  Shutdown: number
+  Shutdown?: number
   /**
    * 已离线总数
    */
-  Offline: number
+  Offline?: number
   /**
    * 旗舰版主机数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  FlagshipMachineCnt: number
+  FlagshipMachineCnt?: number
   /**
    * 保护天数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ProtectDays: number
+  ProtectDays?: number
   /**
    * 15天内新增的主机数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  AddedOnTheFifteen: number
+  AddedOnTheFifteen?: number
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

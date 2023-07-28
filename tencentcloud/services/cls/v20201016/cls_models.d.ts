@@ -483,6 +483,64 @@ export interface CreateScheduledSqlResponse {
     RequestId?: string;
 }
 /**
+ * DescribeDashboards请求参数结构体
+ */
+export interface DescribeDashboardsRequest {
+    /**
+     * 分页的偏移量，默认值为0。
+     */
+    Offset?: number;
+    /**
+     * 分页单页限制数目，默认值为20，最大值100。
+     */
+    Limit?: number;
+    /**
+     * <br><li> dashboardId
+  
+  按照【仪表盘id】进行过滤。
+  类型：String
+  
+  必选：否
+  
+  <br><li> dashboardName
+  
+  按照【仪表盘名字】进行模糊搜索过滤。
+  类型：String
+  
+  必选：否
+  
+  <br><li> dashboardRegion
+  
+  按照【仪表盘地域】进行过滤，为了兼容老的仪表盘，通过云API创建的仪表盘没有地域属性
+  类型：String
+  
+  必选：否
+  
+  <br><li> tagKey
+  
+  按照【标签键】进行过滤。
+  
+  类型：String
+  
+  必选：否
+  
+  <br><li> tag:tagKey
+  
+  按照【标签键值对】进行过滤。tag-key使用具体的标签键进行替换。使用请参考示例2。
+  
+  类型：String
+  
+  必选：否
+  
+  每次请求的Filters的上限为10，Filter.Values的上限为100。
+     */
+    Filters?: Array<Filter>;
+    /**
+     * 按照topicId和regionId过滤。
+     */
+    TopicIdRegionFilter?: Array<TopicIdAndRegion>;
+}
+/**
  * 日志中的KV对
  */
 export interface LogItem {
@@ -704,6 +762,20 @@ export interface DescribeShippersResponse {
     RequestId?: string;
 }
 /**
+ * 仪表盘 topic与地域信息
+ */
+export interface TopicIdAndRegion {
+    /**
+     * 日志主题id
+     */
+    TopicId: string;
+    /**
+     * 日志主题id 所在的地域id
+  地域ID - 访问链接查看详情：https://iwiki.woa.com/pages/viewpage.action?pageId=780556968#id-地域码表-一.region大区（标准地域）
+     */
+    RegionId: number;
+}
+/**
  * CreateConfigExtra返回参数结构体
  */
 export interface CreateConfigExtraResponse {
@@ -890,9 +962,17 @@ export interface ScheduledSqlResouceInfo {
      */
     TopicId: string;
     /**
-     * topic的地域信息
+     * 主题的的地域信息
      */
     Region?: string;
+    /**
+     * 主题类型：0为日志主题，1为指标主题
+     */
+    BizType?: number;
+    /**
+     * 指标名称
+     */
+    MetricName?: string;
 }
 /**
  * DescribeIndex请求参数结构体
@@ -2072,6 +2152,15 @@ export interface DescribeMachineGroupsRequest {
     Limit?: number;
 }
 /**
+ * DescribeConsumer请求参数结构体
+ */
+export interface DescribeConsumerRequest {
+    /**
+     * 投递任务绑定的日志主题 ID
+     */
+    TopicId: string;
+}
+/**
  * CreateIndex请求参数结构体
  */
 export interface CreateIndexRequest {
@@ -2593,13 +2682,17 @@ export interface LogsetInfo {
     RoleName: string;
 }
 /**
- * DescribeConsumer请求参数结构体
+ * 仪表盘关联的topic信息
  */
-export interface DescribeConsumerRequest {
+export interface DashboardTopicInfo {
     /**
-     * 投递任务绑定的日志主题 ID
+     * 主题id
      */
     TopicId: string;
+    /**
+     * topic所在的地域
+     */
+    Region: string;
 }
 /**
  * DeleteConfig请求参数结构体
@@ -3206,6 +3299,36 @@ export interface AlarmAnalysisConfig {
      * 值
      */
     Value: string;
+}
+/**
+ * 预览数据详情
+ */
+export interface PreviewLogStatistic {
+    /**
+     * 日志内容
+     */
+    LogContent: string;
+    /**
+     * 行号
+     */
+    LineNum: number;
+    /**
+     * 目标日志主题
+     */
+    DstTopicId?: string;
+    /**
+     * 失败错误码， 空字符串""表示正常
+     */
+    FailReason?: string;
+    /**
+     * 日志时间戳
+     */
+    Time?: string;
+    /**
+     * 目标topic-name
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DstTopicName?: string;
 }
 /**
  * ModifyIndex请求参数结构体
@@ -3965,6 +4088,63 @@ export interface ModifyAlarmNoticeResponse {
     RequestId?: string;
 }
 /**
+ * 仪表盘信息
+ */
+export interface DashboardInfo {
+    /**
+     * 仪表盘id
+     */
+    DashboardId: string;
+    /**
+     * 仪表盘名字
+     */
+    DashboardName: string;
+    /**
+     * 仪表盘数据
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Data: string;
+    /**
+     * 创建仪表盘的时间
+     */
+    CreateTime: string;
+    /**
+     * AssumerUin非空则表示创建该日志主题的服务方Uin
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AssumerUin: number;
+    /**
+     * RoleName非空则表示创建该日志主题的服务方使用的角色
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RoleName: string;
+    /**
+     * AssumerName非空则表示创建该日志主题的服务方名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AssumerName: string;
+    /**
+     * 日志主题绑定的标签信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Tags: Array<Tag>;
+    /**
+     * 仪表盘所在地域： 为了兼容老的地域。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DashboardRegion: string;
+    /**
+     * 修改仪表盘的时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    UpdateTime: string;
+    /**
+     * 仪表盘对应的topic相关信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DashboardTopicInfos: Array<DashboardTopicInfo>;
+}
+/**
  * 数据加工任务基本详情
  */
 export interface DataTransformTaskInfo {
@@ -4064,34 +4244,21 @@ export interface ModifyCosRechargeResponse {
     RequestId?: string;
 }
 /**
- * 预览数据详情
+ * DescribeDashboards返回参数结构体
  */
-export interface PreviewLogStatistic {
+export interface DescribeDashboardsResponse {
     /**
-     * 日志内容
+     * 仪表盘的数量
      */
-    LogContent: string;
+    TotalCount: number;
     /**
-     * 行号
+     * 仪表盘详细明细
      */
-    LineNum: number;
+    DashboardInfos: Array<DashboardInfo>;
     /**
-     * 目标日志主题
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
-    DstTopicId?: string;
-    /**
-     * 失败错误码， 空字符串""表示正常
-     */
-    FailReason?: string;
-    /**
-     * 日志时间戳
-     */
-    Time?: string;
-    /**
-     * 目标topic-name
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    DstTopicName?: string;
+    RequestId?: string;
 }
 /**
  * 投递日志的压缩配置

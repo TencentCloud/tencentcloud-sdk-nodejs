@@ -481,12 +481,12 @@ export interface FakeURLData {
    */
   Heat?: number
   /**
-   * 协助处置状态：0-未处置 1-处置中 2-处置成功 3-处置失败
+   * 拦截处置状态：0-未处置 1-处置中 2-处置成功 3-处置失败
 注意：此字段可能返回 null，表示取不到有效值。
    */
   BlockStatus?: number
   /**
-   * 协助处置状态说明
+   * 拦截处置状态说明
 注意：此字段可能返回 null，表示取不到有效值。
    */
   BlockNote?: string
@@ -560,6 +560,11 @@ export interface FakeURLData {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AccountStatus?: number
+  /**
+   * 审核状态：0-未审核 1-审核中 2-审核成功 3-审核失败
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AuditStatus?: number
 }
 
 /**

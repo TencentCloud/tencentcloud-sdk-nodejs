@@ -668,6 +668,16 @@ it("vpc.v20170312.SetCcnRegionBandwidthLimits", async function () {
     }
 })
 
+it("vpc.v20170312.DescribeSpecificTrafficPackageUsedDetails", async function () {
+    try {
+       const data = await client.DescribeSpecificTrafficPackageUsedDetails({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vpc.v20170312.GenerateVpnConnectionDefaultHealthCheckIp", async function () {
     try {
        const data = await client.GenerateVpnConnectionDefaultHealthCheckIp({})

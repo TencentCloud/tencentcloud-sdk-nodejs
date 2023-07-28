@@ -455,6 +455,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("SetCcnRegionBandwidthLimits", req, cb);
     }
     /**
+     * 本接口 (DescribeSpecificTrafficPackageUsedDetails) 用于查询指定 共享流量包 的用量明细。
+     */
+    async DescribeSpecificTrafficPackageUsedDetails(req, cb) {
+        return this.request("DescribeSpecificTrafficPackageUsedDetails", req, cb);
+    }
+    /**
      * 本接口（GenerateVpnConnectionDefaultHealthCheckIp）用于获取一对VPN通道健康检查地址。
      */
     async GenerateVpnConnectionDefaultHealthCheckIp(req, cb) {

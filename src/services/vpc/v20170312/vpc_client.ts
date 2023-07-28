@@ -117,7 +117,7 @@ import {
   DescribeBandwidthPackagesResponse,
   ReplaceSecurityGroupPoliciesResponse,
   DescribeDirectConnectGatewaysRequest,
-  DisableVpnGatewaySslClientCertRequest,
+  DescribeSpecificTrafficPackageUsedDetailsResponse,
   AttachSnapshotInstancesRequest,
   ModifyIp6TranslatorResponse,
   CreateVpcEndPointServiceWhiteListResponse,
@@ -160,6 +160,7 @@ import {
   DescribeFlowLogRequest,
   DescribeTenantCcnsRequest,
   DescribeIp6AddressesRequest,
+  TrafficFlow,
   AddIp6RulesRequest,
   DescribeAccountAttributesResponse,
   AssignPrivateIpAddressesResponse,
@@ -347,6 +348,7 @@ import {
   DescribeSnapshotPoliciesResponse,
   DisableGatewayFlowMonitorRequest,
   EnableRoutesResponse,
+  DescribeSpecificTrafficPackageUsedDetailsRequest,
   DeleteVpnConnectionRequest,
   NetworkAclEntry,
   DescribeDhcpIpsRequest,
@@ -485,6 +487,7 @@ import {
   ModifyNatGatewaySourceIpTranslationNatRuleResponse,
   CreateNatGatewayDestinationIpPortTranslationNatRuleRequest,
   CreateFlowLogRequest,
+  UsedDetail,
   InquirePriceCreateDirectConnectGatewayRequest,
   AttachNetworkInterfaceResponse,
   DisassociateNatGatewayAddressRequest,
@@ -640,6 +643,7 @@ import {
   CcnBandwidthInfo,
   DescribeCrossBorderCcnRegionBandwidthLimitsResponse,
   DeleteSecurityGroupResponse,
+  DisableVpnGatewaySslClientCertRequest,
   CreateNetworkInterfaceResponse,
   DescribeAddressQuotaRequest,
   LockCcnsResponse,
@@ -1454,6 +1458,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: SetCcnRegionBandwidthLimitsResponse) => void
   ): Promise<SetCcnRegionBandwidthLimitsResponse> {
     return this.request("SetCcnRegionBandwidthLimits", req, cb)
+  }
+
+  /**
+   * 本接口 (DescribeSpecificTrafficPackageUsedDetails) 用于查询指定 共享流量包 的用量明细。
+   */
+  async DescribeSpecificTrafficPackageUsedDetails(
+    req: DescribeSpecificTrafficPackageUsedDetailsRequest,
+    cb?: (error: string, rep: DescribeSpecificTrafficPackageUsedDetailsResponse) => void
+  ): Promise<DescribeSpecificTrafficPackageUsedDetailsResponse> {
+    return this.request("DescribeSpecificTrafficPackageUsedDetails", req, cb)
   }
 
   /**

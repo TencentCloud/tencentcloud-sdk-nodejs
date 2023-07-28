@@ -79,6 +79,7 @@ import {
   SpartaProtectionPort,
   AddSpartaProtectionRequest,
   PeakPointsItem,
+  IpHitItem,
   PostAttackDownloadTaskRequest,
   ModifyCustomWhiteRuleResponse,
   DescribePolicyStatusRequest,
@@ -103,6 +104,7 @@ import {
   DescribeDomainWhiteRulesRequest,
   ModifyCustomRuleStatusRequest,
   DescribePeakPointsResponse,
+  AccessHistogramItem,
   DeleteDownloadRecordResponse,
   ModifyAccessPeriodRequest,
   DescribeAttackOverviewRequest,
@@ -144,11 +146,12 @@ import {
   DescribeUserClbWafRegionsRequest,
   DescribeDomainWhiteRulesResponse,
   DescribeWafThreatenIntelligenceResponse,
+  DescribeAccessHistogramResponse,
   DeleteAttackDownloadRecordRequest,
   AddCustomWhiteRuleRequest,
   AddDomainWhiteRuleRequest,
   UpsertIpAccessControlResponse,
-  IpHitItem,
+  DescribeAccessHistogramRequest,
   DeleteSessionResponse,
   DownloadAttackRecordInfo,
   DescribeRuleLimitResponse,
@@ -275,13 +278,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询单个saas域名详情
+   * 本接口用于访问日志柱状趋势图
    */
-  async DescribeDomainDetailsSaas(
-    req: DescribeDomainDetailsSaasRequest,
-    cb?: (error: string, rep: DescribeDomainDetailsSaasResponse) => void
-  ): Promise<DescribeDomainDetailsSaasResponse> {
-    return this.request("DescribeDomainDetailsSaas", req, cb)
+  async DescribeAccessHistogram(
+    req: DescribeAccessHistogramRequest,
+    cb?: (error: string, rep: DescribeAccessHistogramResponse) => void
+  ): Promise<DescribeAccessHistogramResponse> {
+    return this.request("DescribeAccessHistogram", req, cb)
   }
 
   /**
@@ -454,6 +457,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: PostAttackDownloadTaskResponse) => void
   ): Promise<PostAttackDownloadTaskResponse> {
     return this.request("PostAttackDownloadTask", req, cb)
+  }
+
+  /**
+   * 查询单个saas域名详情
+   */
+  async DescribeDomainDetailsSaas(
+    req: DescribeDomainDetailsSaasRequest,
+    cb?: (error: string, rep: DescribeDomainDetailsSaasResponse) => void
+  ): Promise<DescribeDomainDetailsSaasResponse> {
+    return this.request("DescribeDomainDetailsSaas", req, cb)
   }
 
   /**

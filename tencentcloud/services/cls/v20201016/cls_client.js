@@ -447,6 +447,12 @@ cls.pb.cc cls.pb.h cls.proto
         return this.request("DeleteAlarmNotice", req, cb);
     }
     /**
+     * 本接口用于获取仪表盘
+     */
+    async DescribeDashboards(req, cb) {
+        return this.request("DescribeDashboards", req, cb);
+    }
+    /**
      * 本接口用于构建日志数量直方图
      */
     async DescribeLogHistogram(req, cb) {

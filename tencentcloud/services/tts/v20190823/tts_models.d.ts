@@ -163,7 +163,7 @@ export interface CreateTtsTaskRequest {
      */
     CallbackUrl?: string;
     /**
-     * 旁白与对白文本解析，分别合成相应风格（仅适用于旁对白音色），默认 false
+     * 旁白与对白文本解析，分别合成相应风格（仅适用于旁对白音色10510000、100510000），默认 false
      */
     VoiceoverDialogueSplit?: boolean;
 }
@@ -224,7 +224,7 @@ export interface TextToVoiceRequest {
      */
     SegmentRate?: number;
     /**
-     * 控制合成音频的情感，仅支持多情感音色使用。取值: neutral(中性)、sad(悲伤)、happy(高兴)、angry(生气)、fear(恐惧)、news(新闻)、story(故事)、radio(广播)、poetry(诗歌)、call(客服)、撒娇(sajiao)、厌恶(disgusted)、震惊(amaze)、平静(peaceful)、兴奋(exciting)
+     * 控制合成音频的情感，仅支持多情感音色使用。取值: neutral(中性)、sad(悲伤)、happy(高兴)、angry(生气)、fear(恐惧)、news(新闻)、story(故事)、radio(广播)、poetry(诗歌)、call(客服)、撒娇(sajiao)、厌恶(disgusted)、震惊(amaze)、平静(peaceful)、兴奋(exciting)、傲娇(aojiao)、解说(jieshuo)
      */
     EmotionCategory?: string;
     /**

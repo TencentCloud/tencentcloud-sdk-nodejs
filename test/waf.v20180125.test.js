@@ -118,9 +118,9 @@ it("waf.v20180125.SearchAttackLog", async function () {
     }
 })
 
-it("waf.v20180125.DescribeDomainDetailsSaas", async function () {
+it("waf.v20180125.DescribeAccessHistogram", async function () {
     try {
-       const data = await client.DescribeDomainDetailsSaas({})
+       const data = await client.DescribeAccessHistogram({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -291,6 +291,16 @@ it("waf.v20180125.DescribeIpAccessControl", async function () {
 it("waf.v20180125.PostAttackDownloadTask", async function () {
     try {
        const data = await client.PostAttackDownloadTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("waf.v20180125.DescribeDomainDetailsSaas", async function () {
+    try {
+       const data = await client.DescribeDomainDetailsSaas({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

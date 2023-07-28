@@ -147,6 +147,10 @@ export interface McuVideoParams {
      * 混流布局的水印参数。
      */
     WaterMarkList?: Array<McuWaterMarkParams>;
+    /**
+     * 背景图在输出时的显示模式：0为裁剪，1为缩放并显示黑底，2为变比例伸缩。后台默认为变比例伸缩。
+     */
+    BackgroundRenderMode?: number;
 }
 /**
  * RemoveUserByStrRoomId返回参数结构体
@@ -1167,7 +1171,7 @@ export interface McuLayout {
      */
     ZOrder?: number;
     /**
-     * 子画面在输出时的显示模式：0为裁剪，1为缩放，2为缩放并显示黑底。不填默认为0。
+     * 子画面在输出时的显示模式：0为裁剪，1为缩放并显示背景，2为缩放并显示黑底。不填默认为0。
      */
     RenderMode?: number;
     /**
@@ -1189,6 +1193,10 @@ export interface McuLayout {
      * 客户自定义裁剪，针对原始输入流裁剪
      */
     CustomCrop?: McuCustomCrop;
+    /**
+     * 子背景图在输出时的显示模式：0为裁剪，1为缩放并显示背景，2为缩放并显示黑底，3为变比例伸缩。不填默认为3。
+     */
+    BackgroundRenderMode?: number;
 }
 /**
  * DescribeUserInfo返回参数结构体
