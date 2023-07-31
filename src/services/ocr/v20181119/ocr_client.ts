@@ -74,7 +74,6 @@ import {
   VatInvoiceItemInfo,
   QrcodeOCRResponse,
   WaybillObj,
-  WordCoordPoint,
   InvoiceDetectInfo,
   MainlandPermitOCRRequest,
   VatElectronicItemInfo,
@@ -156,7 +155,7 @@ import {
   VerifyBasicBizLicenseResponse,
   TextDetectRequest,
   RecognizeTravelCardOCRResponse,
-  ProductDataRecord,
+  WordCoordPoint,
   LicensePlateOCRRequest,
   GeneralBasicOCRRequest,
   TextVehicleBack,
@@ -165,7 +164,7 @@ import {
   RecognizePhilippinesUMIDOCRResponse,
   AdvertiseOCRRequest,
   RideHailingDriverLicenseOCRResponse,
-  Detail,
+  ImageEnhancementRequest,
   EnglishOCRRequest,
   VatInvoiceVerifyResponse,
   VatElectronicInfo,
@@ -186,7 +185,6 @@ import {
   AdvertiseTextDetection,
   FinanBillSliceInfo,
   RideHailingDriverLicenseOCRRequest,
-  QueryBarCodeResponse,
   ArithmeticOCRRequest,
   NonTaxIncomeBill,
   VerifyOfdVatInvoiceOCRRequest,
@@ -194,7 +192,6 @@ import {
   MLIDPassportOCRResponse,
   VatRollInvoiceOCRRequest,
   AirTransport,
-  VerifyEnterpriseFourFactorsRequest,
   TableTitle,
   RecognizeTableAccurateOCRRequest,
   Coord,
@@ -214,7 +211,6 @@ import {
   DutyPaidProofOCRRequest,
   RecognizeHealthCodeOCRResponse,
   LineInfo,
-  QueryBarCodeRequest,
   TollInvoice,
   ItemCoord,
   CreateAIFormTaskResponse,
@@ -258,7 +254,6 @@ import {
   EnterpriseLicenseInfo,
   QuotaInvoice,
   InsuranceBillOCRRequest,
-  ImageEnhancementRequest,
   GeneralHandwritingOCRResponse,
   TableCell,
   TableOCRResponse,
@@ -287,7 +282,6 @@ import {
   RecognizePhilippinesDrivingLicenseOCRResponse,
   FinanBillOCRRequest,
   UsedCarPurchaseInvoice,
-  VerifyEnterpriseFourFactorsResponse,
   GeneralFastOCRResponse,
   QrcodePositionObj,
 } from "./ocr_models"
@@ -337,20 +331,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ImageEnhancementResponse) => void
   ): Promise<ImageEnhancementResponse> {
     return this.request("ImageEnhancement", req, cb)
-  }
-
-  /**
-     * 库源服务调整，该接口在2023年6月1日将正式下线。
-
-本接口支持条形码备案信息查询，返回条形码查询结果的相关信息，包括产品名称、产品英文名称、品牌名称、规格型号、宽度、高度、深度、关键字、产品描述、厂家名称、厂家地址、企业社会信用代码13个字段信息。
-
-产品优势：直联中国物品编码中心，查询结果更加准确、可靠。
-     */
-  async QueryBarCode(
-    req: QueryBarCodeRequest,
-    cb?: (error: string, rep: QueryBarCodeResponse) => void
-  ): Promise<QueryBarCodeResponse> {
-    return this.request("QueryBarCode", req, cb)
   }
 
   /**
@@ -976,18 +956,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: FinanBillSliceOCRResponse) => void
   ): Promise<FinanBillSliceOCRResponse> {
     return this.request("FinanBillSliceOCR", req, cb)
-  }
-
-  /**
-     * 库源服务调整，该接口在2023年6月1日将正式下线。
-
-此接口基于企业四要素授权“姓名、证件号码、企业标识、企业全称”，验证企业信息是否一致。
-     */
-  async VerifyEnterpriseFourFactors(
-    req: VerifyEnterpriseFourFactorsRequest,
-    cb?: (error: string, rep: VerifyEnterpriseFourFactorsResponse) => void
-  ): Promise<VerifyEnterpriseFourFactorsResponse> {
-    return this.request("VerifyEnterpriseFourFactors", req, cb)
   }
 
   /**

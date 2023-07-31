@@ -54,6 +54,7 @@ import {
   ModifySpartaProtectionResponse,
   DeleteDownloadRecordRequest,
   DescribeUserCdcClbWafRegionsResponse,
+  GetAttackHistogramRequest,
   DeleteAccessExportResponse,
   DescribeAccessExportsRequest,
   DescribeCustomWhiteRuleRequest,
@@ -63,6 +64,7 @@ import {
   ModifyWafAutoDenyStatusRequest,
   ModifyAccessPeriodResponse,
   DescribeVipInfoRequest,
+  GetAttackHistogramResponse,
   FiltersItemNew,
   DescribeAutoDenyIPResponse,
   SwitchDomainRulesResponse,
@@ -90,6 +92,7 @@ import {
   DescribeAttackOverviewResponse,
   ModifyWafAutoDenyStatusResponse,
   DescribeWafAutoDenyStatusResponse,
+  LogHistogramInfo,
   DeleteDomainWhiteRulesRequest,
   DomainPackageNew,
   RuleList,
@@ -305,6 +308,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteIpAccessControlResponse) => void
   ): Promise<DeleteIpAccessControlResponse> {
     return this.request("DeleteIpAccessControl", req, cb)
+  }
+
+  /**
+   * 生成攻击日志的产生时间柱状图
+   */
+  async GetAttackHistogram(
+    req: GetAttackHistogramRequest,
+    cb?: (error: string, rep: GetAttackHistogramResponse) => void
+  ): Promise<GetAttackHistogramResponse> {
+    return this.request("GetAttackHistogram", req, cb)
   }
 
   /**

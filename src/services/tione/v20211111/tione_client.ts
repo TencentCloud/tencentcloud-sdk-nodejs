@@ -19,16 +19,20 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   CreateModelServiceRequest,
+  CreateNotebookImageResponse,
   ModelInfo,
   DescribeLogsRequest,
   StopModelAccelerateTaskRequest,
-  DeleteTrainingModelVersionResponse,
+  DescribeDatasetDetailUnstructuredRequest,
   BatchTaskDetail,
+  DeleteNotebookImageRecordRequest,
+  NotebookSetItem,
   StartTrainingTaskRequest,
   DescribeDatasetDetailStructuredResponse,
   ModifyServiceGroupWeightsResponse,
   RestartModelAccelerateTaskRequest,
   DescribeBillingResourceGroupsRequest,
+  DeleteNotebookRequest,
   DescribeTrainingFrameworksResponse,
   DescribeModelServiceGroupRequest,
   RDMAConfig,
@@ -41,25 +45,32 @@ import {
   ModifyServiceGroupWeightsRequest,
   DescribeTrainingTasksRequest,
   DescribeBatchTaskRequest,
-  DescribeDatasetDetailUnstructuredRequest,
-  VolumeMount,
+  DescribeNotebookImageKernelsRequest,
+  DeleteTrainingModelVersionResponse,
+  TrainingTaskDetail,
   StopBatchTaskResponse,
-  ServiceCallInfo,
+  ModifyNotebookTagsResponse,
+  DescribeNotebookImageRecordsResponse,
   CosPathInfo,
   DescribeBillingResourceGroupsResponse,
   SpecPrice,
-  DescribeTrainingMetricsRequest,
+  StartNotebookResponse,
+  CreateBatchModelAccTasksRequest,
   CFSTurbo,
+  RowValue,
   CreateBatchTaskRequest,
   DescribeLatestTrainingMetricsResponse,
   DescribeDatasetDetailUnstructuredResponse,
   FilterLabelInfo,
   WorkloadStatus,
   CFSConfig,
+  CreateNotebookImageRequest,
   APIConfigDetail,
   InferTemplate,
+  ModifyNotebookTagsRequest,
   StopBatchTaskRequest,
   ContainerStatus,
+  TextLabelDistributionDetailInfoThirdClass,
   ModifyModelServiceRequest,
   FrameworkVersion,
   ModifyModelServicePartialConfigResponse,
@@ -75,18 +86,24 @@ import {
   DeleteBatchTaskRequest,
   DescribeTrainingModelsResponse,
   DescribeBatchTaskInstancesResponse,
+  CreateNotebookRequest,
+  ModifyNotebookRequest,
   DescribeModelServicesRequest,
+  StopCreatingImageResponse,
   ModelAccEngineVersion,
   ResourceConfigInfo,
   Spec,
   GooseFS,
   TextLabelDistributionInfo,
   Option,
+  DescribeNotebookImageRecordsRequest,
+  StopCreatingImageRequest,
   ResourceGroup,
   DescribeBatchTaskInstancesRequest,
   DescribeModelServiceHistoryRequest,
   Tag,
   DescribeDatasetsRequest,
+  StartNotebookRequest,
   DeleteTrainingModelResponse,
   DescribeInferTemplatesResponse,
   DescribeBillingSpecsRequest,
@@ -108,16 +125,19 @@ import {
   ImageInfo,
   ServiceInfo,
   TrainingTaskSetItem,
+  StopNotebookResponse,
   DescribeModelServiceRequest,
   CreateTrainingTaskResponse,
+  NotebookImageRecord,
   DeleteModelServiceRequest,
   DeleteModelAccelerateTaskRequest,
   CreateTrainingTaskRequest,
   StatefulSetCondition,
+  ModifyNotebookResponse,
   DescribeModelServiceResponse,
   DescribeDatasetsResponse,
   RestartModelAccelerateTaskResponse,
-  CreateBatchModelAccTasksRequest,
+  CreateNotebookResponse,
   DescribeBillingSpecsPriceRequest,
   WeightEntry,
   Instance,
@@ -126,6 +146,7 @@ import {
   TextLabelDistributionDetailInfoFifthClass,
   BatchTaskInstance,
   CreateBatchTaskResponse,
+  DescribeNotebooksResponse,
   DeleteModelServiceResponse,
   DatasetGroup,
   DescribeTrainingModelsRequest,
@@ -138,9 +159,12 @@ import {
   DescribeModelServiceCallInfoResponse,
   DataSetConfig,
   ScheduledAction,
+  DescribeNotebooksRequest,
+  DeleteNotebookResponse,
   DeleteTrainingTaskRequest,
   DescribeModelServiceHistoryResponse,
   BatchModelAccTask,
+  DescribeNotebookImageKernelsResponse,
   Filter,
   ModifyModelServiceResponse,
   PodInfo,
@@ -148,13 +172,16 @@ import {
   EngineVersion,
   DescribeBatchTasksRequest,
   CreateDatasetRequest,
+  VolumeMount,
+  DeleteNotebookImageRecordResponse,
   CreateModelServiceResponse,
   DescribeModelServiceGroupResponse,
   ServiceGroup,
   TrainingModelDTO,
   ServiceLimit,
+  ServiceHistory,
   DeleteModelAccelerateTaskResponse,
-  TextLabelDistributionDetailInfoThirdClass,
+  DescribeNotebookResponse,
   CustomTrainingData,
   RowItem,
   CreateTrainingModelResponse,
@@ -169,20 +196,22 @@ import {
   DescribeModelAccelerateTasksResponse,
   DeleteDatasetResponse,
   HorizontalPodAutoscaler,
+  ServiceCallInfo,
   CreateBatchModelAccTasksResponse,
   CustomTrainingPoint,
-  ServiceHistory,
-  TrainingTaskDetail,
+  DescribeNotebookRequest,
+  NotebookDetail,
   DescribeTrainingTasksResponse,
   CronInfo,
   FrameworkInfo,
   DescribeLogsResponse,
   CreateOptimizedModelRequest,
+  StopNotebookRequest,
   DeleteModelServiceGroupRequest,
   TrainingModelVersionDTO,
   PushTrainingMetricsRequest,
   DescribeTrainingTaskRequest,
-  RowValue,
+  DescribeTrainingMetricsRequest,
   DescribeTrainingTaskPodsRequest,
   DescribeTrainingModelVersionsResponse,
   ModelInputInfo,
@@ -190,6 +219,7 @@ import {
   CustomTrainingMetric,
   DataConfig,
   DescribeTrainingModelVersionRequest,
+  ResourceConf,
   DescribeModelAccelerateTasksRequest,
   PushTrainingMetricsResponse,
   StopTrainingTaskResponse,
@@ -308,13 +338,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 训练任务列表
+   * 训练任务详情
    */
-  async DescribeTrainingTasks(
-    req: DescribeTrainingTasksRequest,
-    cb?: (error: string, rep: DescribeTrainingTasksResponse) => void
-  ): Promise<DescribeTrainingTasksResponse> {
-    return this.request("DescribeTrainingTasks", req, cb)
+  async DescribeTrainingTask(
+    req: DescribeTrainingTaskRequest,
+    cb?: (error: string, rep: DescribeTrainingTaskResponse) => void
+  ): Promise<DescribeTrainingTaskResponse> {
+    return this.request("DescribeTrainingTask", req, cb)
   }
 
   /**
@@ -325,6 +355,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeModelServiceGroupResponse) => void
   ): Promise<DescribeModelServiceGroupResponse> {
     return this.request("DescribeModelServiceGroup", req, cb)
+  }
+
+  /**
+   * 启动Notebook
+   */
+  async StartNotebook(
+    req: StartNotebookRequest,
+    cb?: (error: string, rep: StartNotebookResponse) => void
+  ): Promise<StartNotebookResponse> {
+    return this.request("StartNotebook", req, cb)
   }
 
   /**
@@ -388,6 +428,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 删除Notebook
+   */
+  async DeleteNotebook(
+    req: DeleteNotebookRequest,
+    cb?: (error: string, rep: DeleteNotebookResponse) => void
+  ): Promise<DeleteNotebookResponse> {
+    return this.request("DeleteNotebook", req, cb)
+  }
+
+  /**
    * 模型列表
    */
   async DescribeTrainingModels(
@@ -438,6 +488,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 修改Notebook标签
+   */
+  async ModifyNotebookTags(
+    req: ModifyNotebookTagsRequest,
+    cb?: (error: string, rep: ModifyNotebookTagsResponse) => void
+  ): Promise<ModifyNotebookTagsResponse> {
+    return this.request("ModifyNotebookTags", req, cb)
+  }
+
+  /**
    * 删除模型
    */
   async DeleteTrainingModel(
@@ -475,6 +535,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeBatchTaskInstancesResponse) => void
   ): Promise<DescribeBatchTaskInstancesResponse> {
     return this.request("DescribeBatchTaskInstances", req, cb)
+  }
+
+  /**
+   * 创建Notebook
+   */
+  async CreateNotebook(
+    req: CreateNotebookRequest,
+    cb?: (error: string, rep: CreateNotebookResponse) => void
+  ): Promise<CreateNotebookResponse> {
+    return this.request("CreateNotebook", req, cb)
   }
 
   /**
@@ -568,6 +638,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 保存镜像
+   */
+  async CreateNotebookImage(
+    req: CreateNotebookImageRequest,
+    cb?: (error: string, rep: CreateNotebookImageResponse) => void
+  ): Promise<CreateNotebookImageResponse> {
+    return this.request("CreateNotebookImage", req, cb)
+  }
+
+  /**
    * 查询模型加速任务列表
    */
   async DescribeModelAccelerateTasks(
@@ -648,6 +728,26 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 训练任务列表
+   */
+  async DescribeTrainingTasks(
+    req: DescribeTrainingTasksRequest,
+    cb?: (error: string, rep: DescribeTrainingTasksResponse) => void
+  ): Promise<DescribeTrainingTasksResponse> {
+    return this.request("DescribeTrainingTasks", req, cb)
+  }
+
+  /**
+   * 删除notebook镜像保存记录
+   */
+  async DeleteNotebookImageRecord(
+    req: DeleteNotebookImageRecordRequest,
+    cb?: (error: string, rep: DeleteNotebookImageRecordResponse) => void
+  ): Promise<DeleteNotebookImageRecordResponse> {
+    return this.request("DeleteNotebookImageRecord", req, cb)
+  }
+
+  /**
    * 用于更新模型服务
    */
   async ModifyModelService(
@@ -658,13 +758,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 训练任务详情
+   * Notebook列表
    */
-  async DescribeTrainingTask(
-    req: DescribeTrainingTaskRequest,
-    cb?: (error: string, rep: DescribeTrainingTaskResponse) => void
-  ): Promise<DescribeTrainingTaskResponse> {
-    return this.request("DescribeTrainingTask", req, cb)
+  async DescribeNotebooks(
+    req: DescribeNotebooksRequest,
+    cb?: (error: string, rep: DescribeNotebooksResponse) => void
+  ): Promise<DescribeNotebooksResponse> {
+    return this.request("DescribeNotebooks", req, cb)
   }
 
   /**
@@ -678,6 +778,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 停止保存镜像
+   */
+  async StopCreatingImage(
+    req: StopCreatingImageRequest,
+    cb?: (error: string, rep: StopCreatingImageResponse) => void
+  ): Promise<StopCreatingImageResponse> {
+    return this.request("StopCreatingImage", req, cb)
+  }
+
+  /**
    * 删除训练任务
    */
   async DeleteTrainingTask(
@@ -685,6 +795,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteTrainingTaskResponse) => void
   ): Promise<DeleteTrainingTaskResponse> {
     return this.request("DeleteTrainingTask", req, cb)
+  }
+
+  /**
+   * 查看notebook镜像保存记录
+   */
+  async DescribeNotebookImageRecords(
+    req: DescribeNotebookImageRecordsRequest,
+    cb?: (error: string, rep: DescribeNotebookImageRecordsResponse) => void
+  ): Promise<DescribeNotebookImageRecordsResponse> {
+    return this.request("DescribeNotebookImageRecords", req, cb)
   }
 
   /**
@@ -715,6 +835,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeLatestTrainingMetricsResponse) => void
   ): Promise<DescribeLatestTrainingMetricsResponse> {
     return this.request("DescribeLatestTrainingMetrics", req, cb)
+  }
+
+  /**
+   * 查询镜像kernel
+   */
+  async DescribeNotebookImageKernels(
+    req: DescribeNotebookImageKernelsRequest,
+    cb?: (error: string, rep: DescribeNotebookImageKernelsResponse) => void
+  ): Promise<DescribeNotebookImageKernelsResponse> {
+    return this.request("DescribeNotebookImageKernels", req, cb)
+  }
+
+  /**
+   * Notebook详情
+   */
+  async DescribeNotebook(
+    req: DescribeNotebookRequest,
+    cb?: (error: string, rep: DescribeNotebookResponse) => void
+  ): Promise<DescribeNotebookResponse> {
+    return this.request("DescribeNotebook", req, cb)
   }
 
   /**
@@ -768,6 +908,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 修改Notebook
+   */
+  async ModifyNotebook(
+    req: ModifyNotebookRequest,
+    cb?: (error: string, rep: ModifyNotebookResponse) => void
+  ): Promise<ModifyNotebookResponse> {
+    return this.request("ModifyNotebook", req, cb)
+  }
+
+  /**
    * 停止模型加速任务
    */
   async StopModelAccelerateTask(
@@ -775,5 +925,15 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: StopModelAccelerateTaskResponse) => void
   ): Promise<StopModelAccelerateTaskResponse> {
     return this.request("StopModelAccelerateTask", req, cb)
+  }
+
+  /**
+   * 停止Notebook
+   */
+  async StopNotebook(
+    req: StopNotebookRequest,
+    cb?: (error: string, rep: StopNotebookResponse) => void
+  ): Promise<StopNotebookResponse> {
+    return this.request("StopNotebook", req, cb)
   }
 }

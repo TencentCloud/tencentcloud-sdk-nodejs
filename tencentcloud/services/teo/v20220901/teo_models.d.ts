@@ -4900,11 +4900,11 @@ export interface ApplicationProxy {
     /**
      * 站点ID。
      */
-    ZoneId: string;
+    ZoneId?: string;
     /**
      * 站点名称。
      */
-    ZoneName: string;
+    ZoneName?: string;
     /**
      * 代理ID。
      */
@@ -4913,42 +4913,42 @@ export interface ApplicationProxy {
      * 当ProxyType=hostname时，表示域名或子域名；
   当ProxyType=instance时，表示代理名称。
      */
-    ProxyName: string;
+    ProxyName?: string;
     /**
      * 四层代理模式，取值有：
   <li>hostname：表示子域名模式；</li>
   <li>instance：表示实例模式。</li>
      */
-    ProxyType: string;
+    ProxyType?: string;
     /**
      * 调度模式，取值有：
   <li>ip：表示Anycast IP调度；</li>
   <li>domain：表示CNAME调度。</li>
      */
-    PlatType: string;
+    PlatType?: string;
     /**
      * 加速区域，取值有：
   <li>mainland：中国大陆境内;</li>
   <li>overseas：全球（不含中国大陆）。</li>
   默认值：overseas
      */
-    Area: string;
+    Area?: string;
     /**
      * 是否开启安全，取值有：
   <li>0：关闭安全；</li>
   <li>1：开启安全。</li>
      */
-    SecurityType: number;
+    SecurityType?: number;
     /**
      * 是否开启加速，取值有：
   <li>0：关闭加速；</li>
   <li>1：开启加速。</li>
      */
-    AccelerateType: number;
+    AccelerateType?: number;
     /**
      * 会话保持时间。
      */
-    SessionPersistTime: number;
+    SessionPersistTime?: number;
     /**
      * 状态，取值有：
   <li>online：启用；</li>
@@ -4957,7 +4957,7 @@ export interface ApplicationProxy {
   <li>stopping：停用中；</li>
   <li>fail：部署失败/停用失败。</li>
      */
-    Status: string;
+    Status?: string;
     /**
      * 封禁状态，取值有：
   <li>banned：已封禁;</li>
@@ -4965,28 +4965,28 @@ export interface ApplicationProxy {
   <li>recover：已解封；</li>
   <li>recovering：解封禁中。</li>
      */
-    BanStatus: string;
+    BanStatus?: string;
     /**
      * 调度信息。
      */
-    ScheduleValue: Array<string>;
+    ScheduleValue?: Array<string>;
     /**
      * 当ProxyType=hostname时：
   表示代理加速唯一标识。
      */
-    HostId: string;
+    HostId?: string;
     /**
      * Ipv6访问配置。
      */
-    Ipv6: Ipv6;
+    Ipv6?: Ipv6;
     /**
      * 更新时间。
      */
-    UpdateTime: string;
+    UpdateTime?: string;
     /**
      * 规则列表。
      */
-    ApplicationProxyRules: Array<ApplicationProxyRule>;
+    ApplicationProxyRules?: Array<ApplicationProxyRule>;
     /**
      * 中国大陆加速优化配置。
      */

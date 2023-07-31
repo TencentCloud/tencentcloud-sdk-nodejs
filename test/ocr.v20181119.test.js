@@ -48,16 +48,6 @@ it("ocr.v20181119.ImageEnhancement", async function () {
     }
 })
 
-it("ocr.v20181119.QueryBarCode", async function () {
-    try {
-       const data = await client.QueryBarCode({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("ocr.v20181119.SmartStructuralOCRV2", async function () {
     try {
        const data = await client.SmartStructuralOCRV2({})
@@ -441,16 +431,6 @@ it("ocr.v20181119.TextDetect", async function () {
 it("ocr.v20181119.FinanBillSliceOCR", async function () {
     try {
        const data = await client.FinanBillSliceOCR({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("ocr.v20181119.VerifyEnterpriseFourFactors", async function () {
-    try {
-       const data = await client.VerifyEnterpriseFourFactors({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

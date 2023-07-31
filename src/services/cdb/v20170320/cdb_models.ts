@@ -4268,7 +4268,7 @@ export interface CreateDBInstanceRequest {
    */
   MasterInstanceId?: string
   /**
-   * MySQL 版本，值包括：5.5、5.6 和 5.7，请使用 [获取云数据库可售卖规格](https://cloud.tencent.com/document/api/236/17229) 接口获取可创建的实例版本。
+   * MySQL 版本，值包括：5.5、5.6 、5.7和8.0，请使用 [获取云数据库可售卖规格](https://cloud.tencent.com/document/api/236/17229) 接口获取可创建的实例版本。
    */
   EngineVersion?: string
   /**
@@ -6280,95 +6280,95 @@ export interface RoInstanceInfo {
   /**
    * RO组对应的主实例的ID
    */
-  MasterInstanceId: string
+  MasterInstanceId?: string
   /**
    * RO实例在RO组内的状态，可能的值：online-在线，offline-下线
    */
-  RoStatus: string
+  RoStatus?: string
   /**
    * RO实例在RO组内上一次下线的时间
    */
-  OfflineTime: string
+  OfflineTime?: string
   /**
    * RO实例在RO组内的权重
    */
-  Weight: number
+  Weight?: number
   /**
    * RO实例所在区域名称，如ap-shanghai
    */
-  Region: string
+  Region?: string
   /**
    * RO可用区的正式名称，如ap-shanghai-1
    */
-  Zone: string
+  Zone?: string
   /**
    * RO实例ID，格式如：cdbro-c1nl9rpv
    */
-  InstanceId: string
+  InstanceId?: string
   /**
    * RO实例状态，可能返回值：0-创建中，1-运行中，3-异地RO（仅在使用DescribeDBInstances查询主实例信息时，返回值中异地RO的状态恒等于3，其他场景下无此值），4-删除中
    */
-  Status: number
+  Status?: number
   /**
    * 实例类型，可能返回值：1-主实例，2-灾备实例，3-只读实例
    */
-  InstanceType: number
+  InstanceType?: number
   /**
    * RO实例名称
    */
-  InstanceName: string
+  InstanceName?: string
   /**
    * 按量计费状态，可能的取值：1-正常，2-欠费
    */
-  HourFeeStatus: number
+  HourFeeStatus?: number
   /**
    * RO实例任务状态，可能返回值：<br>0-没有任务<br>1-升级中<br>2-数据导入中<br>3-开放Slave中<br>4-外网访问开通中<br>5-批量操作执行中<br>6-回档中<br>7-外网访问关闭中<br>8-密码修改中<br>9-实例名修改中<br>10-重启中<br>12-自建迁移中<br>13-删除库表中<br>14-灾备实例创建同步中
    */
-  TaskStatus: number
+  TaskStatus?: number
   /**
    * RO实例内存大小，单位：MB
    */
-  Memory: number
+  Memory?: number
   /**
    * RO实例硬盘大小，单位：GB
    */
-  Volume: number
+  Volume?: number
   /**
    * 每次查询数量
    */
-  Qps: number
+  Qps?: number
   /**
    * RO实例的内网IP地址
    */
-  Vip: string
+  Vip?: string
   /**
    * RO实例访问端口
    */
-  Vport: number
+  Vport?: number
   /**
    * RO实例所在私有网络ID
    */
-  VpcId: number
+  VpcId?: number
   /**
    * RO实例所在私有网络子网ID
    */
-  SubnetId: number
+  SubnetId?: number
   /**
    * RO实例规格描述，目前可取值 CUSTOM
    */
-  DeviceType: string
+  DeviceType?: string
   /**
    * RO实例数据库引擎版本，可能返回值：5.1、5.5、5.6、5.7、8.0
    */
-  EngineVersion: string
+  EngineVersion?: string
   /**
    * RO实例到期时间，时间格式：yyyy-mm-dd hh:mm:ss，如实例为按量计费模式，则此字段值为0000-00-00 00:00:00
    */
-  DeadlineTime: string
+  DeadlineTime?: string
   /**
    * RO实例计费类型，可能返回值：0-包年包月，1-按量计费，2-后付费月结
    */
-  PayType: number
+  PayType?: number
 }
 
 /**
@@ -8037,13 +8037,13 @@ export interface AnalyzeAuditLogsResponse {
  */
 export interface CreateDBInstanceResponse {
   /**
-   * 短订单 ID。
+   * 计费子订单 ID。
    */
-  DealIds: Array<string>
+  DealIds?: Array<string>
   /**
    * 实例 ID 列表。
    */
-  InstanceIds: Array<string>
+  InstanceIds?: Array<string>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

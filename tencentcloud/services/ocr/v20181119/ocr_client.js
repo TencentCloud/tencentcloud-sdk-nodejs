@@ -54,16 +54,6 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ImageEnhancement", req, cb);
     }
     /**
-     * 库源服务调整，该接口在2023年6月1日将正式下线。
-
-本接口支持条形码备案信息查询，返回条形码查询结果的相关信息，包括产品名称、产品英文名称、品牌名称、规格型号、宽度、高度、深度、关键字、产品描述、厂家名称、厂家地址、企业社会信用代码13个字段信息。
-
-产品优势：直联中国物品编码中心，查询结果更加准确、可靠。
-     */
-    async QueryBarCode(req, cb) {
-        return this.request("QueryBarCode", req, cb);
-    }
-    /**
      * 本接口支持智能提取各类证照、票据、表单、合同等结构化场景的key:value字段信息，并支持提取表格信息的key:value组的结构化，灵活高效，适用于各类非标准材料的信息录入场景，点击[立即体验](https://cloud.tencent.com/product/smart-ocr)。
 
 默认接口请求频率限制：10次/秒。
@@ -531,14 +521,6 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async FinanBillSliceOCR(req, cb) {
         return this.request("FinanBillSliceOCR", req, cb);
-    }
-    /**
-     * 库源服务调整，该接口在2023年6月1日将正式下线。
-
-此接口基于企业四要素授权“姓名、证件号码、企业标识、企业全称”，验证企业信息是否一致。
-     */
-    async VerifyEnterpriseFourFactors(req, cb) {
-        return this.request("VerifyEnterpriseFourFactors", req, cb);
     }
     /**
      * 本接口支持识别公路汽车客票关键字段的识别，包括发票代码、发票号码、日期、票价、始发地、目的地、姓名、时间、发票消费类型、身份证号、省、市、开票日期、乘车地点、检票口、客票类型、车型、座位号、车次等。

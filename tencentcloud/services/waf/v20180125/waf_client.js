@@ -106,6 +106,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteIpAccessControl", req, cb);
     }
     /**
+     * 生成攻击日志的产生时间柱状图
+     */
+    async GetAttackHistogram(req, cb) {
+        return this.request("GetAttackHistogram", req, cb);
+    }
+    /**
      * 配置WAF自动封禁模块状态
      */
     async ModifyWafAutoDenyStatus(req, cb) {

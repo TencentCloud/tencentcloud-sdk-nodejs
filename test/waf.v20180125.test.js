@@ -148,6 +148,16 @@ it("waf.v20180125.DeleteIpAccessControl", async function () {
     }
 })
 
+it("waf.v20180125.GetAttackHistogram", async function () {
+    try {
+       const data = await client.GetAttackHistogram({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("waf.v20180125.ModifyWafAutoDenyStatus", async function () {
     try {
        const data = await client.ModifyWafAutoDenyStatus({})

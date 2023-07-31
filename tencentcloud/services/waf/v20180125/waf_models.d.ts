@@ -798,6 +798,27 @@ export interface DescribeUserCdcClbWafRegionsResponse {
     RequestId?: string;
 }
 /**
+ * GetAttackHistogram请求参数结构体
+ */
+export interface GetAttackHistogramRequest {
+    /**
+     * 查询的域名，所有域名使用all
+     */
+    Domain: string;
+    /**
+     * 查询起始时间
+     */
+    StartTime: string;
+    /**
+     * 查询结束时间
+     */
+    EndTime: string;
+    /**
+     * Lucene语法
+     */
+    QueryString: string;
+}
+/**
  * DeleteAccessExport返回参数结构体
  */
 export interface DeleteAccessExportResponse {
@@ -938,6 +959,27 @@ export interface DescribeVipInfoRequest {
      * waf实例id列表
      */
     InstanceIds: Array<string>;
+}
+/**
+ * GetAttackHistogram返回参数结构体
+ */
+export interface GetAttackHistogramResponse {
+    /**
+     * 统计详情
+     */
+    Data?: Array<LogHistogramInfo>;
+    /**
+     * 时间段大小
+     */
+    Period?: number;
+    /**
+     * 统计的条目数
+     */
+    TotalCount?: number;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * 过滤数组
@@ -1884,6 +1926,19 @@ export interface DescribeWafAutoDenyStatusResponse {
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * 攻击日志统计详情
+ */
+export interface LogHistogramInfo {
+    /**
+     * 日志条数
+     */
+    Count: number;
+    /**
+     * 时间戳
+     */
+    TimeStamp: number;
 }
 /**
  * DeleteDomainWhiteRules请求参数结构体

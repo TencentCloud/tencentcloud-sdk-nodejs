@@ -937,11 +937,11 @@ export interface DescribeScheduledSqlInfoResponse {
   /**
    * ScheduledSQL任务列表信息
    */
-  ScheduledSqlTaskInfos: Array<ScheduledSqlTaskInfo>
+  ScheduledSqlTaskInfos?: Array<ScheduledSqlTaskInfo>
   /**
    * 任务总次数
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1192,7 +1192,7 @@ export interface ScheduledSqlTaskInfo {
    */
   ProcessStartTime?: string
   /**
-   * 调度类型，1:持续运行 2:指定调度结束时间
+   * 调度类型，1:持续运行 2:指定时间范围
    */
   ProcessType?: number
   /**
@@ -2541,7 +2541,7 @@ export interface ModifyScheduledSqlRequest {
    */
   SrcTopicId?: string
   /**
-   * 任务启动状态.   1正常开启,  2关闭
+   * 任务启动状态.   1开启,  2关闭
    */
   EnableFlag?: number
   /**
@@ -3349,7 +3349,7 @@ export interface CreateAlarmNoticeResponse {
   /**
    * 告警模板ID
    */
-  AlarmNoticeId: string
+  AlarmNoticeId?: string
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4192,39 +4192,39 @@ export interface AlarmNotice {
   /**
    * 告警通知模板名称。
    */
-  Name: string
+  Name?: string
   /**
    * 告警模板的类型。可选值：
 <br><li> Trigger - 告警触发
 <br><li> Recovery - 告警恢复
 <br><li> All - 告警触发和告警恢复
    */
-  Type: string
+  Type?: string
   /**
    * 告警通知模板接收者信息。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  NoticeReceivers: Array<NoticeReceiver>
+  NoticeReceivers?: Array<NoticeReceiver>
   /**
    * 告警通知模板回调信息。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  WebCallbacks: Array<WebCallback>
+  WebCallbacks?: Array<WebCallback>
   /**
    * 告警通知模板ID。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  AlarmNoticeId: string
+  AlarmNoticeId?: string
   /**
    * 创建时间。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CreateTime: string
+  CreateTime?: string
   /**
    * 最近更新时间。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  UpdateTime: string
+  UpdateTime?: string
 }
 
 /**
@@ -5871,7 +5871,7 @@ export interface CreateScheduledSqlRequest {
    */
   Name: string
   /**
-   * 任务启动状态.  1正常开启,  2关闭
+   * 任务启动状态.  1开启,  2关闭
    */
   EnableFlag: number
   /**
@@ -5887,7 +5887,7 @@ export interface CreateScheduledSqlRequest {
    */
   ProcessStartTime: number
   /**
-   * 调度类型，1:持续运行 2:指定调度结束时间
+   * 调度类型，1:持续运行 2:指定时间范围
    */
   ProcessType: number
   /**
@@ -5911,7 +5911,7 @@ export interface CreateScheduledSqlRequest {
    */
   ProcessEndTime?: number
   /**
-   * 语法规则。 默认值为0。0：Lucene语法，1：CQL语法
+   * 查询语法规则。 默认值为0。0：Lucene语法，1：CQL语法
    */
   SyntaxRule?: number
 }

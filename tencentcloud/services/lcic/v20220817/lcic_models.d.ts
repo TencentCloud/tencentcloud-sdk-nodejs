@@ -1758,6 +1758,10 @@ export interface DescribeRoomResponse {
      */
     SdkAppId?: number;
     /**
+     * 观看类型。互动观看 （默认）
+     */
+    AudienceType?: number;
+    /**
      * 分辨率。可以有如下取值：
   1 标清
   2 高清

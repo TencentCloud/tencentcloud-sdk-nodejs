@@ -1755,15 +1755,6 @@ export interface WaybillObj {
     Text: string;
 }
 /**
- * 英文OCR识别出的单词在原图中的四点坐标数组
- */
-export interface WordCoordPoint {
-    /**
-     * 英文OCR识别出的每个单词在原图中的四点坐标。
-     */
-    WordCoordinate: Array<Coord>;
-}
-/**
  * 票据检测结果
  */
 export interface InvoiceDetectInfo {
@@ -4840,88 +4831,13 @@ export interface RecognizeTravelCardOCRResponse {
     RequestId?: string;
 }
 /**
- * 商品码信息
+ * 英文OCR识别出的单词在原图中的四点坐标数组
  */
-export interface ProductDataRecord {
+export interface WordCoordPoint {
     /**
-     * 产品名称
+     * 英文OCR识别出的每个单词在原图中的四点坐标。
      */
-    ProductName: string;
-    /**
-     * 产品名称(英文)
-     */
-    EnName: string;
-    /**
-     * 品牌名称
-     */
-    BrandName: string;
-    /**
-     * 规格型号
-     */
-    Type: string;
-    /**
-     * 宽度，单位毫米
-     */
-    Width: string;
-    /**
-     * 高度，单位毫米
-     */
-    Height: string;
-    /**
-     * 深度，单位毫米
-     */
-    Depth: string;
-    /**
-     * 关键字
-     */
-    KeyWord: string;
-    /**
-     * 简短描述
-     */
-    Description: string;
-    /**
-     * 图片链接
-     */
-    ImageLink: Array<string>;
-    /**
-     * 厂家名称
-     */
-    ManufacturerName: string;
-    /**
-     * 厂家地址
-     */
-    ManufacturerAddress: string;
-    /**
-     * 企业社会信用代码
-     */
-    FirmCode: string;
-    /**
-     * 表示数据查询状态
-  checkResult	状态说明
-  1	 经查，该商品条码已在中国物品编码中心注册
-  2	经查，该厂商识别代码已在中国物品编码中心注册，但编码信息未按规定通报。
-  3	经查，该厂商识别代码已于xxxxx注销，请关注产品生产日期。
-  4	经查，该企业以及条码未经条码中心注册，属于违法使用
-  -1	经查，该商品条码被冒用
-  -2	经查，该厂商识别代码已在中国物品编码中心注册，但该产品已经下市
-  S001                未找到该厂商识别代码的注册信息。
-  S002		该厂商识别代码已经在GS1注册，但编码信息未通报
-  S003		该商品条码已在GS1通报
-  S004		该商品条码已注销
-  S005		数字不正确。GS1前缀（3位国家/地区代码）用于特殊用途。
-  E001		完整性失败：此GTIN的长度无效。
-  E002		完整性失败：校验位不正确。
-  E003		完整性失败：字符串包含字母数字字符。
-  E004		数字不正确。GS1前缀（3位国家/地区代码）不存在。
-  E005		数字不正确。GS1前缀（3位国家/地区代码）用于特殊用途。
-  E006		数字不正确。尚未分配该GS1公司前缀。
-  E008	        经查，该企业厂商识别代码以及条码尚未通报
-     */
-    CheckResult: string;
-    /**
-     * UNSPSC分类码
-     */
-    CategoryCode: string;
+    WordCoordinate: Array<Coord>;
 }
 /**
  * LicensePlateOCR请求参数结构体
@@ -5251,17 +5167,47 @@ export interface RideHailingDriverLicenseOCRResponse {
     RequestId?: string;
 }
 /**
- * 企业四要素核验结果
+ * ImageEnhancement请求参数结构体
  */
-export interface Detail {
+export interface ImageEnhancementRequest {
     /**
-     * 企业四要素核验结果状态码
+     * 图片的 Base64 值。
+  支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
+  支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。
+  图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
      */
-    Result: number;
+    ImageBase64?: string;
     /**
-     * 企业四要素核验结果描述
+     * 图片的 Url 地址。
+  支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
+  支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。
+  图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
+  非腾讯云存储的 Url 速度和稳定性可能受一定影响。
      */
-    Desc: string;
+    ImageUrl?: string;
+    /**
+     * 默认为空，ReturnImage的取值以及含义如下：
+  “preprocess”: 返回预处理后的图片数据
+  “origin”：返回原图片数据
+  " ":不返回图片数据
+     */
+    ReturnImage?: string;
+    /**
+     * 默认值为1，指定图像增强方法：
+  1：切边增强
+  2：弯曲矫正
+  202：黑白模式
+  204：提亮模式
+  205：灰度模式
+  207：省墨模式
+  208：文字锐化（适合非彩色图片）
+  300:自动增强（自动从301～304选择任务类型）
+  301：去摩尔纹
+  302：去除阴影
+  303：去除模糊
+  304：去除过曝
+     */
+    TaskType?: number;
 }
 /**
  * EnglishOCR请求参数结构体
@@ -5752,23 +5698,6 @@ export interface RideHailingDriverLicenseOCRRequest {
     ImageUrl?: string;
 }
 /**
- * QueryBarCode返回参数结构体
- */
-export interface QueryBarCodeResponse {
-    /**
-     * 条码
-     */
-    BarCode?: string;
-    /**
-     * 条码信息数组
-     */
-    ProductDataRecords?: Array<ProductDataRecord>;
-    /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
-/**
  * ArithmeticOCR请求参数结构体
  */
 export interface ArithmeticOCRRequest {
@@ -6157,27 +6086,6 @@ export interface AirTransport {
      * 条目
      */
     FlightItems?: Array<FlightItem>;
-}
-/**
- * VerifyEnterpriseFourFactors请求参数结构体
- */
-export interface VerifyEnterpriseFourFactorsRequest {
-    /**
-     * 姓名
-     */
-    RealName: string;
-    /**
-     * 证件号码（公司注册证件号）
-     */
-    IdCard: string;
-    /**
-     * 企业全称
-     */
-    EnterpriseName: string;
-    /**
-     * 企业标识（注册号，统一社会信用代码）
-     */
-    EnterpriseMark: string;
 }
 /**
  * 表格标题
@@ -6596,15 +6504,6 @@ export interface LineInfo {
      * 每行的一个元素
      */
     Lines?: Array<ItemInfo>;
-}
-/**
- * QueryBarCode请求参数结构体
- */
-export interface QueryBarCodeRequest {
-    /**
-     * 条形码
-     */
-    BarCode: string;
 }
 /**
  * 过路过桥费发票
@@ -8120,49 +8019,6 @@ export interface InsuranceBillOCRRequest {
     ImageUrl?: string;
 }
 /**
- * ImageEnhancement请求参数结构体
- */
-export interface ImageEnhancementRequest {
-    /**
-     * 图片的 Base64 值。
-  支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-  支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。
-  图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
-     */
-    ImageBase64?: string;
-    /**
-     * 图片的 Url 地址。
-  支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-  支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。
-  图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
-  非腾讯云存储的 Url 速度和稳定性可能受一定影响。
-     */
-    ImageUrl?: string;
-    /**
-     * 默认为空，ReturnImage的取值以及含义如下：
-  “preprocess”: 返回预处理后的图片数据
-  “origin”：返回原图片数据
-  " ":不返回图片数据
-     */
-    ReturnImage?: string;
-    /**
-     * 默认值为1，指定图像增强方法：
-  1：切边增强
-  2：弯曲矫正
-  202：黑白模式
-  204：提亮模式
-  205：灰度模式
-  207：省墨模式
-  208：文字锐化（适合非彩色图片）
-  300:自动增强（自动从301～304选择任务类型）
-  301：去摩尔纹
-  302：去除阴影
-  303：去除模糊
-  304：去除过曝
-     */
-    TaskType?: number;
-}
-/**
  * GeneralHandwritingOCR返回参数结构体
  */
 export interface GeneralHandwritingOCRResponse {
@@ -9123,25 +8979,6 @@ export interface UsedCarPurchaseInvoice {
      * 是否有公司印章（0：没有，1：有）
      */
     CompanySealMark?: number;
-}
-/**
- * VerifyEnterpriseFourFactors返回参数结构体
- */
-export interface VerifyEnterpriseFourFactorsResponse {
-    /**
-     * 核验一致性（1:一致，2:不一致，3:查询无记录）
-     */
-    State?: number;
-    /**
-     * 核验结果明细，7：企业法人/负责人，6：企业股东，5：企
-  业管理人员，-21：企业名称与企业标识不符，-22：姓名不一致，-23：证件号码不一致，-24：企业名称不一致，-25：企业标识不一致
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Detail?: Detail;
-    /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
 }
 /**
  * GeneralFastOCR返回参数结构体

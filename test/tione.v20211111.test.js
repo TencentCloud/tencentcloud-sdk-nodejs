@@ -98,9 +98,9 @@ it("tione.v20211111.CreateOptimizedModel", async function () {
     }
 })
 
-it("tione.v20211111.DescribeTrainingTasks", async function () {
+it("tione.v20211111.DescribeTrainingTask", async function () {
     try {
-       const data = await client.DescribeTrainingTasks({})
+       const data = await client.DescribeTrainingTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -111,6 +111,16 @@ it("tione.v20211111.DescribeTrainingTasks", async function () {
 it("tione.v20211111.DescribeModelServiceGroup", async function () {
     try {
        const data = await client.DescribeModelServiceGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tione.v20211111.StartNotebook", async function () {
+    try {
+       const data = await client.StartNotebook({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -178,6 +188,16 @@ it("tione.v20211111.DescribeDatasetDetailUnstructured", async function () {
     }
 })
 
+it("tione.v20211111.DeleteNotebook", async function () {
+    try {
+       const data = await client.DeleteNotebook({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tione.v20211111.DescribeTrainingModels", async function () {
     try {
        const data = await client.DescribeTrainingModels({})
@@ -228,6 +248,16 @@ it("tione.v20211111.DescribeTrainingMetrics", async function () {
     }
 })
 
+it("tione.v20211111.ModifyNotebookTags", async function () {
+    try {
+       const data = await client.ModifyNotebookTags({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tione.v20211111.DeleteTrainingModel", async function () {
     try {
        const data = await client.DeleteTrainingModel({})
@@ -261,6 +291,16 @@ it("tione.v20211111.CreateDataset", async function () {
 it("tione.v20211111.DescribeBatchTaskInstances", async function () {
     try {
        const data = await client.DescribeBatchTaskInstances({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tione.v20211111.CreateNotebook", async function () {
+    try {
+       const data = await client.CreateNotebook({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -358,6 +398,16 @@ it("tione.v20211111.DescribeTrainingModelVersions", async function () {
     }
 })
 
+it("tione.v20211111.CreateNotebookImage", async function () {
+    try {
+       const data = await client.CreateNotebookImage({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tione.v20211111.DescribeModelAccelerateTasks", async function () {
     try {
        const data = await client.DescribeModelAccelerateTasks({})
@@ -438,6 +488,26 @@ it("tione.v20211111.DescribeModelServices", async function () {
     }
 })
 
+it("tione.v20211111.DescribeTrainingTasks", async function () {
+    try {
+       const data = await client.DescribeTrainingTasks({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tione.v20211111.DeleteNotebookImageRecord", async function () {
+    try {
+       const data = await client.DeleteNotebookImageRecord({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tione.v20211111.ModifyModelService", async function () {
     try {
        const data = await client.ModifyModelService({})
@@ -448,9 +518,9 @@ it("tione.v20211111.ModifyModelService", async function () {
     }
 })
 
-it("tione.v20211111.DescribeTrainingTask", async function () {
+it("tione.v20211111.DescribeNotebooks", async function () {
     try {
-       const data = await client.DescribeTrainingTask({})
+       const data = await client.DescribeNotebooks({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -468,9 +538,29 @@ it("tione.v20211111.CreateBatchTask", async function () {
     }
 })
 
+it("tione.v20211111.StopCreatingImage", async function () {
+    try {
+       const data = await client.StopCreatingImage({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tione.v20211111.DeleteTrainingTask", async function () {
     try {
        const data = await client.DeleteTrainingTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tione.v20211111.DescribeNotebookImageRecords", async function () {
+    try {
+       const data = await client.DescribeNotebookImageRecords({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -501,6 +591,26 @@ it("tione.v20211111.DescribeBatchTask", async function () {
 it("tione.v20211111.DescribeLatestTrainingMetrics", async function () {
     try {
        const data = await client.DescribeLatestTrainingMetrics({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tione.v20211111.DescribeNotebookImageKernels", async function () {
+    try {
+       const data = await client.DescribeNotebookImageKernels({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tione.v20211111.DescribeNotebook", async function () {
+    try {
+       const data = await client.DescribeNotebook({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -558,9 +668,29 @@ it("tione.v20211111.DescribeModelServiceGroups", async function () {
     }
 })
 
+it("tione.v20211111.ModifyNotebook", async function () {
+    try {
+       const data = await client.ModifyNotebook({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tione.v20211111.StopModelAccelerateTask", async function () {
     try {
        const data = await client.StopModelAccelerateTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tione.v20211111.StopNotebook", async function () {
+    try {
+       const data = await client.StopNotebook({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

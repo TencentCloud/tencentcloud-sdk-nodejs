@@ -524,7 +524,7 @@ export interface ReleasedApprover {
      */
     ApproverSignComponentType?: string;
     /**
-     * 签署方自定义控件别名，最大长度20个字符
+     * 参与方在合同中的角色是按照创建合同的时候来排序的; 解除协议会将第一个参与人叫甲方, 第二个叫乙方,第三个叫丙方, 依次类推.  如果想改动参与人的角色名字, 可以设置此签署方自定义控件别名字段，最大20个字符
      */
     ApproverSignRole?: string;
 }
@@ -880,14 +880,16 @@ export interface DescribeFlowComponentsResponse {
  */
 export interface DescribeFlowEvidenceReportResponse {
     /**
-     * 报告 URL
+     * 出证报告PDF的下载 URL
   注意：此字段可能返回 null，表示取不到有效值。
      */
     ReportUrl?: string;
     /**
-     * 执行中：EvidenceStatusExecuting
-  成功：EvidenceStatusSuccess
-  失败：EvidenceStatusFailed
+     * 出证任务执行的状态, 分布表示下面的含义
+  
+  EvidenceStatusExecuting  出证任务在执行中
+  EvidenceStatusSuccess  出证任务执行成功
+  EvidenceStatusFailed  出征任务执行失败
      */
     Status?: string;
     /**
@@ -1218,7 +1220,10 @@ export interface CreateSchemeUrlRequest {
      */
     PathType?: number;
     /**
-     * 是否自动回跳 true：是， false：否。该参数只针对"APP" 类型的签署链接有效
+     * 是否自动回跳
+  true：是，
+  false：否。
+  该参数只针对"APP" 类型的签署链接有效
      */
     AutoJumpBack?: boolean;
     /**
@@ -1253,23 +1258,40 @@ export interface AutoSignConfig {
      */
     UserInfo: UserThreeFactor;
     /**
-     * 接受自动签开启的回调地址。需要保证post返回200
+     * 接受回调URL地址。支持http://或者https://协议
+  
+  Post数据到此地址后后返回httpcode200表示接受回调成功, 返回其他httpcode表示接受回调失败
      */
     CallbackUrl: string;
     /**
-     * 是否回调证书信息，默认false-不需要
+     * 是否回调证书信息
+  false-不需要 (默认值)
+  true-需要
      */
     CertInfoCallback?: boolean;
     /**
-     * 是否支持用户自定义签名印章，默认false-不需要
+     * 是否支持用户自定义签名印章
+  false-不需要(默认)
+  true-需要
      */
     UserDefineSeal?: boolean;
     /**
-     * 是否需要回调的时候返回印章(签名) 图片的 base64，默认false-不需要
+     * 是否需要回调的时候返回印章(签名) 图片的 base64
+  
+  false-不需要(默认)
+  true-需要(
      */
     SealImgCallback?: boolean;
     /**
-     * 开通时候的验证方式，取值：WEIXINAPP（微信人脸识别），INSIGHT（慧眼人脸认别），TELECOM（运营商三要素验证）。如果是小程序开通链接，支持传 WEIXINAPP / TELECOM。如果是 H5 开通链接，支持传 INSIGHT / TELECOM。默认值 WEIXINAPP / INSIGHT。
+     * 开通时候的验证方式, 分布为
+  
+  WEIXINAPP : 微信人脸识别
+  INSIGHT : 慧眼人脸认别
+  TELECOM : 运营商三要素验证
+  
+  如果是小程序开通链接，支持传 WEIXINAPP / TELECOM。
+  
+  如果是 H5 开通链接，支持传 INSIGHT / TELECOM。默认值 WEIXINAPP / INSIGHT。
      */
     VerifyChannels?: Array<string>;
 }
@@ -1483,15 +1505,18 @@ export interface OrganizationInfo {
  */
 export interface DescribeUserAutoSignStatusResponse {
     /**
-     * 是否已开通自动签
+     * 查询用户是否已开通自动签
      */
     IsOpen?: boolean;
     /**
      * 自动签许可生效时间。当且仅当已开通自动签时有值。
+  
+  值为unix时间戳,单位为秒。
      */
     LicenseFrom?: number;
     /**
      * 自动签许可到期时间。当且仅当已开通自动签时有值。
+  值为unix时间戳,单位为秒。
      */
     LicenseTo?: number;
     /**
@@ -1666,10 +1691,13 @@ export interface CreateBatchCancelFlowUrlResponse {
     BatchCancelFlowUrl?: string;
     /**
      * 签署流程撤回失败信息
+  数组里边的错误原因与传进来的FlowIds一一对应,如果是空字符串则标识没有出错
      */
     FailMessages?: Array<string>;
     /**
      * 签署连接过期时间字符串：年月日-时分秒
+  
+  例如:2023-07-28 17:25:59
      */
     UrlExpireOn?: string;
     /**
@@ -1846,7 +1874,7 @@ export interface CreateFlowSignReviewRequest {
   默认：SignReview；SignReview:签署审核
   
   该字段不传或者为空，则默认为SignReview签署审核，走签署审核流程
-  若发起个人审核，则指定该字段为：SignReview（注意，给个人审核时，需联系客户经理开白使用）
+  若发起个人审核，则指定该字段为：SignReview
      */
     OperateType?: string;
 }
@@ -1905,7 +1933,7 @@ export interface CreateUserAutoSignEnableUrlResponse {
      */
     Path?: string;
     /**
-     * base64格式跳转二维码
+     * base64格式跳转二维码,可以通过微信扫描后跳转到业务界面
      */
     QrCode?: string;
     /**
@@ -2726,7 +2754,7 @@ export interface FailedUpdateStaffData {
  */
 export interface GetTaskResultApiRequest {
     /**
-     * 任务Id，通过CreateConvertTaskApi得到
+     * 任务Id，通过接口CreateConvertTaskApi或CreateMergeFileTask得到的返回任务id
      */
     TaskId: string;
     /**
@@ -3382,15 +3410,20 @@ export interface CreateUserAutoSignEnableUrlRequest {
      */
     AutoSignConfig: AutoSignConfig;
     /**
-     * 链接类型，空-默认小程序端链接，H5SIGN-h5端链接
+     * 链接类型，
+  空-默认小程序端链接
+  H5SIGN-h5端链接
      */
     UrlType?: string;
     /**
-     * 通知类型，默认不填为不通知开通方，填写 SMS 为短信通知。
+     * 通知类型
+  
+  默认不设置为不通知开通方，
+  SMS 为短信通知 , 此种方式需要NotifyAddress填写手机号。
      */
     NotifyType?: string;
     /**
-     * 若上方填写为 SMS，则此处为手机号
+     * 如果通知类型NotifyType选择为SMS，则此处为手机号, 其他通知类型不需要设置此项
      */
     NotifyAddress?: string;
     /**
@@ -3655,7 +3688,7 @@ export interface GetTaskResultApiResponse {
      */
     TaskMessage?: string;
     /**
-     * 资源Id，也是FileId，用于文件发起使用
+     * 资源Id，也是FileId，用于文件发起时使用
      */
     ResourceId?: string;
     /**
@@ -4591,7 +4624,8 @@ export interface CreateBatchCancelFlowUrlRequest {
      */
     Operator: UserInfo;
     /**
-     * 需要执行撤回的签署流程id数组，最多100个
+     * 需要执行撤回的流程(合同)的编号列表，最多100个.
+  列表中的流程(合同)编号不要重复.
      */
     FlowIds: Array<string>;
     /**
@@ -4664,6 +4698,8 @@ export interface DescribeFlowInfoRequest {
     Operator?: UserInfo;
     /**
      * 需要查询的流程ID列表，限制最大100个
+  
+  如果查询合同组的信息,不要传此参数
      */
     FlowIds?: Array<string>;
     /**
@@ -4671,7 +4707,9 @@ export interface DescribeFlowInfoRequest {
      */
     Agent?: Agent;
     /**
-     * 合同组ID
+     * 合同组ID, 如果传此参数会忽略FlowIds入参
+   所以如传此参数不要传FlowIds参数
+  
      */
     FlowGroupId?: string;
 }
@@ -4732,7 +4770,7 @@ export interface DescribeUserAutoSignStatusRequest {
      */
     SceneKey: string;
     /**
-     * 查询开启状态的用户信息
+     * 要查询开启状态的用户信息
      */
     UserInfo: UserThreeFactor;
     /**
@@ -4796,20 +4834,20 @@ export interface FlowBrief {
     /**
      * 流程的编号ID
      */
-    FlowId: string;
+    FlowId?: string;
     /**
      * 流程的名称
      */
-    FlowName: string;
+    FlowName?: string;
     /**
      * 流程的描述信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    FlowDescription: string;
+    FlowDescription?: string;
     /**
      * 流程的类型
      */
-    FlowType: string;
+    FlowType?: string;
     /**
      * 流程状态
   - 0 还没有发起
@@ -4826,17 +4864,19 @@ export interface FlowBrief {
   - 21 已解除
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    FlowStatus: number;
+    FlowStatus?: number;
     /**
      * 流程创建的时间戳，单位秒
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CreatedOn: number;
+    CreatedOn?: number;
     /**
-     * 拒签或者取消的原因描述
+     * 当合同被拒签或者取消后(当FlowStatus=3或者FlowStatus=6的时候)
+  此字段展示拒签或者取消的原因描述
+  
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    FlowMessage: string;
+    FlowMessage?: string;
     /**
      *  合同发起人userId
   注意：此字段可能返回 null，表示取不到有效值。

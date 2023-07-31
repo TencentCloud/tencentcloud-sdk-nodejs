@@ -3225,7 +3225,7 @@ export interface CreateAclRequest {
    */
   ResourceName?: string
   /**
-   * 默认为\*，表示任何host都可以访问，当前ckafka不支持host为\*，但是后面开源kafka的产品化会直接支持
+   * 默认为*，表示任何host都可以访问。支持填写IP或网段，支持“;”分隔。
    */
   Host?: string
   /**
@@ -3581,7 +3581,7 @@ export interface CreateAclResponse {
   /**
    * 返回结果
    */
-  Result: JgwOperateResponse
+  Result?: JgwOperateResponse
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
