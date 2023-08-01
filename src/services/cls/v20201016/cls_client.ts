@@ -53,6 +53,7 @@ import {
   MergePartitionRequest,
   DescribeShippersResponse,
   TopicIdAndRegion,
+  DescribeKafkaConsumerResponse,
   CreateConfigExtraResponse,
   ModifyShipperResponse,
   DeleteKafkaRechargeResponse,
@@ -168,6 +169,7 @@ import {
   ValueInfo,
   DescribeDataTransformInfoRequest,
   DeleteShipperResponse,
+  ModifyKafkaConsumerRequest,
   ExportInfo,
   GroupTriggerConditionInfo,
   DescribeLogContextResponse,
@@ -199,6 +201,7 @@ import {
   AlertHistoryNotice,
   DeleteAlarmRequest,
   CreateConfigResponse,
+  ModifyKafkaConsumerResponse,
   MachineGroupTypeInfo,
   DeleteConfigFromMachineGroupRequest,
   ShipperInfo,
@@ -241,6 +244,7 @@ import {
   ParquetInfo,
   DeleteTopicResponse,
   CosRechargeInfo,
+  DescribeKafkaConsumerRequest,
   ModifyDataTransformResponse,
   DescribeDataTransformInfoResponse,
   ConsumerContent,
@@ -987,6 +991,16 @@ cls.pb.cc cls.pb.h cls.proto
   }
 
   /**
+   * 修改Kafka协议消费信息
+   */
+  async ModifyKafkaConsumer(
+    req: ModifyKafkaConsumerRequest,
+    cb?: (error: string, rep: ModifyKafkaConsumerResponse) => void
+  ): Promise<ModifyKafkaConsumerResponse> {
+    return this.request("ModifyKafkaConsumer", req, cb)
+  }
+
+  /**
    * 删除投递COS任务
    */
   async DeleteShipper(
@@ -1034,6 +1048,16 @@ cls.pb.cc cls.pb.h cls.proto
     cb?: (error: string, rep: DeleteAlarmResponse) => void
   ): Promise<DeleteAlarmResponse> {
     return this.request("DeleteAlarm", req, cb)
+  }
+
+  /**
+   * 获取Kafka协议消费信息
+   */
+  async DescribeKafkaConsumer(
+    req: DescribeKafkaConsumerRequest,
+    cb?: (error: string, rep: DescribeKafkaConsumerResponse) => void
+  ): Promise<DescribeKafkaConsumerResponse> {
+    return this.request("DescribeKafkaConsumer", req, cb)
   }
 
   /**

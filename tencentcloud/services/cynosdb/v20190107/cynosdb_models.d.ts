@@ -338,6 +338,10 @@ export interface DescribeAccountsRequest {
      * 偏移量
      */
     Offset?: number;
+    /**
+     * 模糊匹配关键字(同时匹配AccountName和AccountHost，返回并集结果，支持正则)
+     */
+    AccountRegular?: string;
 }
 /**
  * ModifyMaintainPeriodConfig请求参数结构体
@@ -766,39 +770,54 @@ export interface ClusterInstanceDetail {
     /**
      * 实例ID
      */
-    InstanceId: string;
+    InstanceId?: string;
     /**
      * 实例名称
      */
-    InstanceName: string;
+    InstanceName?: string;
     /**
      * 引擎类型
      */
-    InstanceType: string;
+    InstanceType?: string;
     /**
      * 实例状态
      */
-    InstanceStatus: string;
+    InstanceStatus?: string;
     /**
      * 实例状态描述
      */
-    InstanceStatusDesc: string;
+    InstanceStatusDesc?: string;
     /**
      * cpu核数
      */
-    InstanceCpu: number;
+    InstanceCpu?: number;
     /**
      * 内存
      */
-    InstanceMemory: number;
+    InstanceMemory?: number;
     /**
      * 硬盘
      */
-    InstanceStorage: number;
+    InstanceStorage?: number;
     /**
      * 实例角色
      */
-    InstanceRole: string;
+    InstanceRole?: string;
+    /**
+     * 执行开始时间(距离0点的秒数)
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MaintainStartTime?: number;
+    /**
+     * 持续的时间(单位：秒)
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MaintainDuration?: number;
+    /**
+     * 可以执行的时间，枚举值：["Mon","Tue","Wed","Thu","Fri", "Sat", "Sun"]
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MaintainWeekDays?: Array<string>;
 }
 /**
  * AddClusterSlaveZone返回参数结构体
@@ -3655,10 +3674,12 @@ export interface CreateClustersRequest {
 export interface RollbackTableInfo {
     /**
      * 旧表名称
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     OldTable: string;
     /**
      * 新表名称
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     NewTable: string;
 }
@@ -7319,11 +7340,11 @@ export interface DescribeAccountsResponse {
      * 数据库账号列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    AccountSet: Array<Account>;
+    AccountSet?: Array<Account>;
     /**
      * 账号总数量
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -7715,7 +7736,7 @@ export interface DescribeClusterDetailResponse {
     /**
      * 集群详细信息
      */
-    Detail: CynosdbClusterDetail;
+    Detail?: CynosdbClusterDetail;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */

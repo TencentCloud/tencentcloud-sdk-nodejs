@@ -39,6 +39,7 @@ import {
   CancelUserAutoSignEnableUrlResponse,
   BindEmployeeUserIdWithClientOpenIdResponse,
   CreateIntegrationEmployeesRequest,
+  CreateFlowOption,
   ReleasedApprover,
   DescribeIntegrationRolesRequest,
   CreateFlowEvidenceReportRequest,
@@ -183,6 +184,7 @@ import {
   UploadFilesRequest,
   ExtendAuthInfo,
   RelieveInfo,
+  EmbedUrlOption,
   CreateBatchCancelFlowUrlRequest,
   CreateMultiFlowSignQRCodeRequest,
   DescribeFlowInfoRequest,
@@ -449,8 +451,8 @@ callbackinfo包含： 回调地址和签名key
 
   /**
      * 创建快速发起流程
-适用场景：用户通过API 合同文件及签署信息，并可通过我们返回的URL在页面完成签署控件等信息的编辑与确认，快速发起合同.
-注：该接口文件的resourceId 是通过上传文件之后获取的。
+<br/>适用场景：用户通过API 合同文件及签署信息，并可通过我们返回的URL在页面完成签署控件等信息的编辑与确认，快速发起合同.
+<br/>注：该接口文件的resourceId 是通过上传文件之后获取的。
      */
   async CreatePrepareFlow(
     req: CreatePrepareFlowRequest,
@@ -879,8 +881,9 @@ PDF资源Id 通过上传文件接口获取
   }
 
   /**
-   * 更新员工信息(姓名，手机号，邮件、部门)，用户实名后无法更改姓名与手机号
-   */
+     * 更新员工信息(姓名，手机号，邮件、部门)，用户实名后无法更改姓名与手机号。
+可进行批量操作，Employees中的userID与openID二选一必填
+     */
   async UpdateIntegrationEmployees(
     req: UpdateIntegrationEmployeesRequest,
     cb?: (error: string, rep: UpdateIntegrationEmployeesResponse) => void

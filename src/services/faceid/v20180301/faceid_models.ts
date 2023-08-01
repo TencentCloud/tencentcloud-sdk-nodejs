@@ -824,12 +824,13 @@ export interface BankCard4EVerificationResponse {
 '-4': '银行卡号码有误'
 '-5': '手机号码不合法'
 '-18': '验证中心服务繁忙'
+'-19': '验证次数超限，请次日重试'
    */
-  Result: string
+  Result?: string
   /**
    * 业务结果描述。
    */
-  Description: string
+  Description?: string
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1982,6 +1983,7 @@ export interface BankCardVerificationResponse {
 '-3': '身份证号码有误'
 '-4': '银行卡号码有误'
 '-17': '验证中心服务繁忙'
+'-18': '验证次数超限，请次日重试'
    */
   Result?: string
   /**
@@ -2209,12 +2211,14 @@ export interface BankCard2EVerificationResponse {
   '-2': '姓名校验不通过'
   '-3': '银行卡号码有误'
   '-16': '验证中心服务繁忙'
+  '-17': '验证次数超限，请次日重试'
+
    */
-  Result: string
+  Result?: string
   /**
    * 业务结果描述。
    */
-  Description: string
+  Description?: string
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

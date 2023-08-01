@@ -588,6 +588,16 @@ it("cls.v20201016.DescribeMachineGroupConfigs", async function () {
     }
 })
 
+it("cls.v20201016.ModifyKafkaConsumer", async function () {
+    try {
+       const data = await client.ModifyKafkaConsumer({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cls.v20201016.DeleteShipper", async function () {
     try {
        const data = await client.DeleteShipper({})
@@ -631,6 +641,16 @@ it("cls.v20201016.ModifyShipper", async function () {
 it("cls.v20201016.DeleteAlarm", async function () {
     try {
        const data = await client.DeleteAlarm({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cls.v20201016.DescribeKafkaConsumer", async function () {
+    try {
+       const data = await client.DescribeKafkaConsumer({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

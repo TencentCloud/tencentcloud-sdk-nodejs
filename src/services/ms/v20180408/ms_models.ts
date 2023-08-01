@@ -890,7 +890,7 @@ export interface DescribeShieldPlanInstanceResponse {
  */
 export interface DescribeEncryptPlanRequest {
   /**
-   * 平台类型  1.android安卓加固   2.ios源码混淆  3.sdk加固  4.applet小程序加固
+   * 平台类型  1.android加固   2.ios源码混淆  3.sdk加固  4.applet小程序加固
    */
   PlatformType: number
   /**
@@ -906,11 +906,11 @@ export interface DescribeEncryptPlanRequest {
    */
   ResourceId: string
   /**
-   * （条件过滤字段）安卓加固查询时，根据包名查询
+   * （条件过滤字段）加固查询时，根据包名查询
    */
   AppPkgName?: string
   /**
-   * （条件过滤字段）安卓加固查询时，根据应用格式查询，枚举值：“apk”、“aab”
+   * （条件过滤字段）加固查询时，根据应用格式查询，枚举值：“apk”、“aab”
    */
   AppType?: string
 }
@@ -936,7 +936,7 @@ export interface DescribeEncryptInstancesRequest {
    */
   OrderDirection?: string
   /**
-   * (条件过滤字段) 平台类型  1.android安卓加固   2.ios源码混淆  3.sdk加固  4.applet小程序加固
+   * (条件过滤字段) 平台类型  1.android加固   2.ios源码混淆  3.sdk加固  4.applet小程序加固
    */
   PlatformType?: number
   /**
@@ -960,11 +960,11 @@ export interface DescribeEncryptInstancesRequest {
    */
   ResourceId?: string
   /**
-   * (条件过滤字段) 安卓应用类型：安卓-apk; 安卓-aab;
+   * (条件过滤字段) 应用类型：android-apk; android-aab;
    */
   AppType?: string
   /**
-   * （条件过滤字段）安卓应用的包名
+   * （条件过滤字段）应用的包名
    */
   AppPkgName?: string
   /**
@@ -1136,7 +1136,7 @@ export interface DeleteShieldInstancesResponse {
 }
 
 /**
- * 渠道合作安卓加固App信息
+ * 渠道合作Android加固App信息
  */
 export interface AndroidAppInfo {
   /**
@@ -1160,7 +1160,7 @@ d40cc11e4bddd643ecdf29cde729a12b
   AppName?: string
   /**
    * app的包名，本次操作的包名。
-当安卓是按年收费、免费试用加固时，在线加固和输出工具要求该字段必输，且与AndroidPlan.AppPkgName值相等。
+当Android是按年收费、免费试用加固时，在线加固和输出工具要求该字段必输，且与AndroidPlan.AppPkgName值相等。
    */
   AppPkgName?: string
   /**
@@ -1172,8 +1172,8 @@ d40cc11e4bddd643ecdf29cde729a12b
    */
   AppVersion?: string
   /**
-   * 安卓app的文件类型，本次加固操作的应用类型 。
-安卓在线加固和输出工具加固必输，其值需等于“apk”或“aab”，且与AndroidAppInfo.AppType值相等。
+   * Android app的文件类型，本次加固操作的应用类型 。
+Android在线加固和输出工具加固必输，其值需等于“apk”或“aab”，且与AndroidAppInfo.AppType值相等。
    */
   AppType?: string
 }
@@ -1290,7 +1290,7 @@ export interface DescribeEncryptPlanResponse {
    */
   PlatformType?: number
   /**
-   * 平台类型描述 1.android安卓加固   2.ios源码混淆  3.sdk加固  4.applet小程序加固
+   * 平台类型描述 1.android加固   2.ios源码混淆  3.sdk加固  4.applet小程序加固
    */
   PlatformTypeDesc?: string
   /**
@@ -1314,7 +1314,7 @@ export interface DescribeEncryptPlanResponse {
    */
   ResourceId?: string
   /**
-   * 上次安卓加固策略
+   * 上次加固策略
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AndroidPlan?: AndroidPlan
@@ -1422,7 +1422,7 @@ export interface DescribeOrderInstancesRequest {
    */
   OrderDirection?: string
   /**
-   * （条件过滤字段）平台类型  1.android安卓加固   2.ios源码混淆  3.sdk加固  4.applet小程序加固
+   * （条件过滤字段）平台类型  1.android加固   2.ios源码混淆  3.sdk加固  4.applet小程序加固
    */
   PlatformType?: number
   /**
@@ -1446,7 +1446,7 @@ export interface DescribeOrderInstancesRequest {
    */
   ResourceId?: string
   /**
-   * （条件过滤字段）安卓包名，查询android安卓加固订单时使用
+   * （条件过滤字段）包名，查询android加固订单时使用
    */
   AppPkgName?: string
 }
@@ -1486,7 +1486,7 @@ export interface DescribeResourceInstancesRequest {
  */
 export interface CreateOrderInstanceRequest {
   /**
-   * 平台类型枚举值：1-android安卓加固  ；2-ios源码混淆 ； 3-sdk加固 ； 4-applet小程序加固
+   * 平台类型枚举值：1-android加固  ；2-ios源码混淆 ； 3-sdk加固 ； 4-applet小程序加固
    */
   PlatformType: number
   /**
@@ -1495,7 +1495,7 @@ export interface CreateOrderInstanceRequest {
   OrderType: number
   /**
    * 代表应用包名列表，值为单个包名（例如：“a.b.xxx”）或多个包名用逗号隔开(例如：“a.b.xxx,b.c.xxx”)。
-当安卓按年收费加固或安卓免费试用加固时，该字段要求非空，即PlatformType=1 并且 OrderType=2时，AppPkgNameList必传值。
+当android按年收费加固或android免费试用加固时，该字段要求非空，即PlatformType=1 并且 OrderType=2时，AppPkgNameList必传值。
 
    */
   AppPkgNameList?: string
@@ -1796,7 +1796,7 @@ export interface Orders {
  */
 export interface CreateEncryptInstanceRequest {
   /**
-   * 平台类型  1.android安卓加固   2.ios源码混淆  3.sdk加固  4.applet小程序加固
+   * 平台类型  1.android加固   2.ios源码混淆  3.sdk加固  4.applet小程序加固
    */
   PlatformType: number
   /**
@@ -1812,11 +1812,11 @@ export interface CreateEncryptInstanceRequest {
    */
   ResourceId: string
   /**
-   * 渠道合作安卓加固App信息
+   * 渠道合作android加固App信息
    */
   AndroidAppInfo?: AndroidAppInfo
   /**
-   * 渠道合作安卓加固策略信息
+   * 渠道合作android加固策略信息
    */
   AndroidPlan?: AndroidPlan
   /**

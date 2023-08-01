@@ -4731,7 +4731,7 @@ export interface DescribeApiAppsStatusResponse {
    * 应用列表。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Result: ApiAppInfos
+  Result?: ApiAppInfos
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6624,7 +6624,7 @@ export interface DescribeApiKeysStatusResponse {
    * 密钥列表。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Result: ApiKeysStatus
+  Result?: ApiKeysStatus
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -7157,7 +7157,7 @@ export interface DescribeServicesStatusResponse {
    * 服务列表查询结果。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Result: ServicesStatus
+  Result?: ServicesStatus
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

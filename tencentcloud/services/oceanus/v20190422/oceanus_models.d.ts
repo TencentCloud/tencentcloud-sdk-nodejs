@@ -1,41 +1,4 @@
 /**
- * DescribeJobSubmissionLog返回参数结构体
- */
-export interface DescribeJobSubmissionLogResponse {
-    /**
-     * 日志搜索的游标，需要搜索更多时透传这个值
-     */
-    Cursor: string;
-    /**
-     * 是否返回了所有的日志记录
-     */
-    ListOver: boolean;
-    /**
-     * 作业启动的requestId
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    JobRequestId: string;
-    /**
-     * 该时间段内符合关键字的所有的作业实例列表
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    JobInstanceList: Array<JobInstanceForSubmissionLog>;
-    /**
-     * 废弃，请使用LogContentList
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    LogList: Array<string>;
-    /**
-     * 日志列表
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    LogContentList: Array<LogContent>;
-    /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
-/**
  * 复制作业单条明细结果
  */
 export interface CopyJobResult {
@@ -119,185 +82,41 @@ export interface CreateResourceRequest {
     WorkSpaceId?: string;
 }
 /**
- * CheckSavepoint请求参数结构体
+ * DescribeJobSubmissionLog返回参数结构体
  */
-export interface CheckSavepointRequest {
+export interface DescribeJobSubmissionLogResponse {
     /**
-     * 作业 id
+     * 日志搜索的游标，需要搜索更多时透传这个值
      */
-    JobId: string;
+    Cursor: string;
     /**
-     * 快照资源 id
+     * 是否返回了所有的日志记录
      */
-    SerialId: string;
+    ListOver: boolean;
     /**
-     * 快照类型 1: savepoint；2: checkpoint；3: cancelWithSavepoint
+     * 作业启动的requestId
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    RecordType: number;
+    JobRequestId: string;
     /**
-     * 快照路径，目前只支持 cos 路径
+     * 该时间段内符合关键字的所有的作业实例列表
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    SavepointPath: string;
+    JobInstanceList: Array<JobInstanceForSubmissionLog>;
     /**
-     * 工作空间 id
+     * 废弃，请使用LogContentList
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    WorkSpaceId: string;
-}
-/**
- * CreateJob请求参数结构体
- */
-export interface CreateJobRequest {
+    LogList: Array<string>;
     /**
-     * 作业名称，允许输入长度小于等于50个字符的中文、英文、数字、-（横线）、_（下划线）、.（点），且符号必须半角字符。注意作业名不能和现有作业同名
+     * 日志列表
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Name: string;
-    /**
-     * 作业的类型，1 表示 SQL 作业，2 表示 JAR 作业
-     */
-    JobType: number;
-    /**
-     * 集群的类型，1 表示共享集群，2 表示独享集群
-     */
-    ClusterType: number;
-    /**
-     * 当 ClusterType=2 时，必选，用来指定该作业提交的独享集群 ID
-     */
-    ClusterId?: string;
-    /**
-     * 设置每 CU 的内存规格，单位为 GB，支持 2、4、8、16（需申请开通白名单后使用）。默认为 4，即 1 CU 对应 4 GB 的运行内存
-     */
-    CuMem?: number;
-    /**
-     * 作业的备注信息，可以随意设置
-     */
-    Remark?: string;
-    /**
-     * 作业名所属文件夹ID，根目录为"root"
-     */
-    FolderId?: string;
-    /**
-     * 作业运行的Flink版本
-     */
-    FlinkVersion?: string;
-    /**
-     * 工作空间 SerialId
-     */
-    WorkSpaceId?: string;
-    /**
-     * 作业标签
-     */
-    Tags?: Array<Tag>;
-}
-/**
- * JobConfig引用资源信息
- */
-export interface ResourceRefDetail {
-    /**
-     * 资源id
-     */
-    ResourceId: string;
-    /**
-     * 资源版本，-1表示使用最新版本
-     */
-    Version: number;
-    /**
-     * 资源名称
-     */
-    Name: string;
-    /**
-     * 1: 主资源
-     */
-    Type: number;
-    /**
-     * 1: 系统内置资源
-     */
-    SystemProvide: number;
-}
-/**
- * 搜索启动日志时返回的作业实例
- */
-export interface JobInstanceForSubmissionLog {
-    /**
-     * 实例的Id, 按照启动的时间顺序，从1开始
-     */
-    RunningOrderId: number;
-    /**
-     * 作业实例的启动时间
-     */
-    JobInstanceStartTime: string;
-    /**
-     * 作业实例启动的时间（毫秒）
-     */
-    StartingMillis: number;
-}
-/**
- * StopJobs请求参数结构体
- */
-export interface StopJobsRequest {
-    /**
-     * 批量停止作业的描述信息
-     */
-    StopJobDescriptions: Array<StopJobDescription>;
-    /**
-     * 工作空间 SerialId
-     */
-    WorkSpaceId?: string;
-}
-/**
- * CreateJob返回参数结构体
- */
-export interface CreateJobResponse {
-    /**
-     * 作业Id
-     */
-    JobId?: string;
+    LogContentList: Array<LogContent>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
-}
-/**
- * 资源位置描述
- */
-export interface ResourceLoc {
-    /**
-     * 资源位置的存储类型，目前只支持1:COS
-     */
-    StorageType: number;
-    /**
-     * 描述资源位置的json
-     */
-    Param: ResourceLocParam;
-}
-/**
- * RunJobs请求参数结构体
- */
-export interface RunJobsRequest {
-    /**
-     * 批量启动作业的描述信息
-     */
-    RunJobDescriptions: Array<RunJobDescription>;
-    /**
-     * 工作空间 SerialId
-     */
-    WorkSpaceId?: string;
-}
-/**
- * 云联网描述信息
- */
-export interface CCN {
-    /**
-     * 私有网络 ID
-     */
-    VpcId: string;
-    /**
-     * 子网 ID
-     */
-    SubnetId: string;
-    /**
-     * 云联网 ID，如 ccn-rahigzjd
-     */
-    CcnId: string;
 }
 /**
  * DeleteJobs请求参数结构体
@@ -313,88 +132,13 @@ export interface DeleteJobsRequest {
     WorkSpaceId?: string;
 }
 /**
- * 停止作业的描述信息
- */
-export interface StopJobDescription {
-    /**
-     * 作业Id
-     */
-    JobId: string;
-    /**
-     * 停止类型，1 停止 2 暂停
-     */
-    StopType: number;
-}
-/**
- * CreateFolder请求参数结构体
- */
-export interface CreateFolderRequest {
-    /**
-     * 新建文件夹名
-     */
-    FolderName: string;
-    /**
-     * 新建文件夹的父目录ID
-     */
-    ParentId: string;
-    /**
-     * 文件夹类型，0是任务文件夹，1是依赖文件夹
-     */
-    FolderType?: number;
-    /**
-     * 工作空间 SerialId
-     */
-    WorkSpaceId?: string;
-}
-/**
- * TriggerJobSavepoint返回参数结构体
- */
-export interface TriggerJobSavepointResponse {
-    /**
-     * 是否成功
-     */
-    SavepointTrigger: boolean;
-    /**
-     * 错误消息
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ErrorMsg: string;
-    /**
-     * 快照路径
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    FinalSavepointPath: string;
-    /**
-     * 快照 ID
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    SavepointId: string;
-    /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
-/**
- * ModifyJob返回参数结构体
- */
-export interface ModifyJobResponse {
-    /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
-/**
- * session集群信息
- */
-export declare type ClusterSession = null;
-/**
  * CreateJobConfig返回参数结构体
  */
 export interface CreateJobConfigResponse {
     /**
      * 作业配置版本号
      */
-    Version: number;
+    Version?: number;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -493,65 +237,18 @@ export interface CreateJobConfigRequest {
      * Oceanus 平台恢复作业开关 1:开启 -1: 关闭
      */
     AutoRecover?: number;
-}
-/**
- * TriggerJobSavepoint请求参数结构体
- */
-export interface TriggerJobSavepointRequest {
     /**
-     * 作业 SerialId
+     * 类日志级别
      */
-    JobId: string;
+    ClazzLevels?: Array<ClazzLevel>;
     /**
-     * 描述
+     * 是否打开专家模式
      */
-    Description?: string;
+    ExpertModeOn?: boolean;
     /**
-     * 工作空间 SerialId
+     * 专家模式的配置
      */
-    WorkSpaceId?: string;
-}
-/**
- * CreateResourceConfig请求参数结构体
- */
-export interface CreateResourceConfigRequest {
-    /**
-     * 资源ID
-     */
-    ResourceId: string;
-    /**
-     * 位置信息
-     */
-    ResourceLoc: ResourceLoc;
-    /**
-     * 资源描述信息
-     */
-    Remark?: string;
-    /**
-     * 1： 资源版本达到上限，自动删除最早可删除的版本
-     */
-    AutoDelete?: number;
-    /**
-     * 工作空间 SerialId
-     */
-    WorkSpaceId?: string;
-}
-/**
- * DescribeSystemResources返回参数结构体
- */
-export interface DescribeSystemResourcesResponse {
-    /**
-     * 资源详细信息集合
-     */
-    ResourceSet: Array<SystemResourceItem>;
-    /**
-     * 总数量
-     */
-    TotalCount: number;
-    /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
+    ExpertModeConfiguration?: ExpertModeConfiguration;
 }
 /**
  * 集群的版本相关信息
@@ -569,35 +266,6 @@ export interface ClusterVersion {
     SupportedFlink: Array<string>;
 }
 /**
- * DescribeClusters请求参数结构体
- */
-export interface DescribeClustersRequest {
-    /**
-     * 按照一个或者多个集群 ID 查询，每次请求的集群上限为 100
-     */
-    ClusterIds?: Array<string>;
-    /**
-     * 偏移量，默认 0
-     */
-    Offset?: number;
-    /**
-     * 请求的集群数量，默认 20，最大值 100
-     */
-    Limit?: number;
-    /**
-     * 集群信息结果排序规则，1 按时间降序，2 按照时间升序，3  按照状态排序
-     */
-    OrderType?: number;
-    /**
-     * 过滤规则
-     */
-    Filters?: Array<Filter>;
-    /**
-     * 工作空间 SerialId
-     */
-    WorkSpaceId?: string;
-}
-/**
  * DescribeTreeJobs返回参数结构体
  */
 export interface DescribeTreeJobsResponse {
@@ -605,27 +273,6 @@ export interface DescribeTreeJobsResponse {
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
-}
-/**
- * DeleteTableConfig请求参数结构体
- */
-export interface DeleteTableConfigRequest {
-    /**
-     * 作业ID
-     */
-    JobId: string;
-    /**
-     * 调试作业ID
-     */
-    DebugId: number;
-    /**
-     * 表名
-     */
-    TableName: string;
-    /**
-     * 工作空间 SerialId
-     */
-    WorkSpaceId?: string;
 }
 /**
  * CopyJobs请求参数结构体
@@ -663,6 +310,918 @@ export interface CopyJobsResponse {
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * TriggerJobSavepoint请求参数结构体
+ */
+export interface TriggerJobSavepointRequest {
+    /**
+     * 作业 SerialId
+     */
+    JobId: string;
+    /**
+     * 描述
+     */
+    Description?: string;
+    /**
+     * 工作空间 SerialId
+     */
+    WorkSpaceId?: string;
+}
+/**
+ * 依赖作业分状态计数信息
+ */
+export interface RefJobStatusCountItem {
+    /**
+     * 作业状态
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    JobStatus?: number;
+    /**
+     * 作业数量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Count?: number;
+}
+/**
+ * 资源参数描述
+ */
+export interface ResourceLocParam {
+    /**
+     * 资源bucket
+     */
+    Bucket: string;
+    /**
+     * 资源路径
+     */
+    Path: string;
+    /**
+     * 资源所在地域，如果不填，则使用Resource的Region
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Region?: string;
+}
+/**
+ * 工作空间详情
+ */
+export interface WorkSpaceSetItem {
+    /**
+     * 工作空间 SerialId
+     */
+    SerialId: string;
+    /**
+     * 用户 APPID
+     */
+    AppId: number;
+    /**
+     * 主账号 UIN
+     */
+    OwnerUin: string;
+    /**
+     * 创建者 UIN
+     */
+    CreatorUin: string;
+    /**
+     * 工作空间名称
+     */
+    WorkSpaceName: string;
+    /**
+     * 区域
+     */
+    Region: string;
+    /**
+     * 创建时间
+     */
+    CreateTime: string;
+    /**
+     * 更新时间
+     */
+    UpdateTime: string;
+    /**
+     * 1 未初始化 2 可用  -1 已删除
+     */
+    Status: number;
+    /**
+     * 工作空间描述
+     */
+    Description: string;
+    /**
+     * 工作空间包含集群信息
+     */
+    ClusterGroupSetItem: Array<ClusterGroupSetItem>;
+    /**
+     * 工作空间角色的信息
+     */
+    RoleAuth: Array<RoleAuth>;
+    /**
+     * 工作空间成员数量
+     */
+    RoleAuthCount: number;
+    /**
+     * 工作空间 SerialId
+     */
+    WorkSpaceId: string;
+    /**
+     * 1
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    JobsCount: number;
+}
+/**
+ * DescribeJobSavepoint请求参数结构体
+ */
+export interface DescribeJobSavepointRequest {
+    /**
+     * 作业 SerialId
+     */
+    JobId: string;
+    /**
+     * 分页参数，单页总数
+     */
+    Limit: number;
+    /**
+     * 分页参数，偏移量
+     */
+    Offset: number;
+    /**
+     * 工作空间 SerialId
+     */
+    WorkSpaceId?: string;
+}
+/**
+ * 资源详细描述
+ */
+export interface ResourceItem {
+    /**
+     * 资源ID
+     */
+    ResourceId?: string;
+    /**
+     * 资源名称
+     */
+    Name?: string;
+    /**
+     * 资源类型
+     */
+    ResourceType?: number;
+    /**
+     * 资源位置
+     */
+    ResourceLoc?: ResourceLoc;
+    /**
+     * 资源地域
+     */
+    Region?: string;
+    /**
+     * 应用ID
+     */
+    AppId?: number;
+    /**
+     * 主账号Uin
+     */
+    OwnerUin?: string;
+    /**
+     * 子账号Uin
+     */
+    CreatorUin?: string;
+    /**
+     * 资源创建时间
+     */
+    CreateTime?: string;
+    /**
+     * 资源最后更新时间
+     */
+    UpdateTime?: string;
+    /**
+     * 资源的资源版本ID
+     */
+    LatestResourceConfigVersion?: number;
+    /**
+     * 资源备注
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Remark?: string;
+    /**
+     * 版本个数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    VersionCount?: number;
+    /**
+     * 关联作业数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RefJobCount?: number;
+    /**
+     * 作业运行状态
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IsJobRun?: number;
+    /**
+     * 文件名
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    FileName?: string;
+    /**
+     * 工作空间ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    WorkSpaceId?: number;
+    /**
+     * 分状态统计关联作业数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RefJobStatusCountSet?: Array<RefJobStatusCountItem>;
+}
+/**
+ * 资源位置描述
+ */
+export interface ResourceLoc {
+    /**
+     * 资源位置的存储类型，目前只支持1:COS
+     */
+    StorageType: number;
+    /**
+     * 描述资源位置的json
+     */
+    Param: ResourceLocParam;
+}
+/**
+ * 云联网描述信息
+ */
+export interface CCN {
+    /**
+     * 私有网络 ID
+     */
+    VpcId: string;
+    /**
+     * 子网 ID
+     */
+    SubnetId: string;
+    /**
+     * 云联网 ID，如 ccn-rahigzjd
+     */
+    CcnId: string;
+}
+/**
+ * DescribeWorkSpaces请求参数结构体
+ */
+export interface DescribeWorkSpacesRequest {
+    /**
+     * 偏移量，默认 0
+     */
+    Offset?: number;
+    /**
+     * 1 按照创建时间降序排序(默认) 2.按照创建时间升序排序，3. 按照状态降序排序 4. 按照状态升序排序 默认为0
+     */
+    OrderType?: number;
+    /**
+     * 请求的集群数量，默认 20
+     */
+    Limit?: number;
+    /**
+     * 过滤规则
+     */
+    Filters?: Array<Filter>;
+}
+/**
+ * 资源被Job 引用信息
+ */
+export interface ResourceRefJobInfo {
+    /**
+     * Job id
+     */
+    JobId: string;
+    /**
+     * Job配置版本
+     */
+    JobConfigVersion: number;
+    /**
+     * 资源版本
+     */
+    ResourceVersion: number;
+}
+/**
+ * DescribeTreeResources请求参数结构体
+ */
+export interface DescribeTreeResourcesRequest {
+    /**
+     * 工作空间 SerialId
+     */
+    WorkSpaceId?: string;
+}
+/**
+ * DescribeResourceConfigs返回参数结构体
+ */
+export interface DescribeResourceConfigsResponse {
+    /**
+     * 资源配置描述数组
+     */
+    ResourceConfigSet: Array<ResourceConfigItem>;
+    /**
+     * 资源配置数量
+     */
+    TotalCount: number;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * DescribeClusters请求参数结构体
+ */
+export interface DescribeClustersRequest {
+    /**
+     * 按照一个或者多个集群 ID 查询，每次请求的集群上限为 100
+     */
+    ClusterIds?: Array<string>;
+    /**
+     * 偏移量，默认 0
+     */
+    Offset?: number;
+    /**
+     * 请求的集群数量，默认 20，最大值 100
+     */
+    Limit?: number;
+    /**
+     * 集群信息结果排序规则，1 按时间降序，2 按照时间升序，3  按照状态排序
+     */
+    OrderType?: number;
+    /**
+     * 过滤规则
+     */
+    Filters?: Array<Filter>;
+    /**
+     * 工作空间 SerialId
+     */
+    WorkSpaceId?: string;
+}
+/**
+ * JobConfig引用资源信息
+ */
+export interface ResourceRefDetail {
+    /**
+     * 资源id
+     */
+    ResourceId: string;
+    /**
+     * 资源版本，-1表示使用最新版本
+     */
+    Version: number;
+    /**
+     * 资源名称
+     */
+    Name: string;
+    /**
+     * 1: 主资源
+     */
+    Type: number;
+    /**
+     * 1: 系统内置资源
+     */
+    SystemProvide: number;
+}
+/**
+ * CreateJob返回参数结构体
+ */
+export interface CreateJobResponse {
+    /**
+     * 作业Id
+     */
+    JobId?: string;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * 作业运行图
+ */
+export interface JobGraph {
+    /**
+     * 运行图的点集合
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Nodes?: Array<JobGraphNode>;
+    /**
+     * 运行图的边集合
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Edges?: Array<JobGraphEdge>;
+}
+/**
+ * 停止作业的描述信息
+ */
+export interface StopJobDescription {
+    /**
+     * 作业Id
+     */
+    JobId: string;
+    /**
+     * 停止类型，1 停止 2 暂停
+     */
+    StopType: number;
+}
+/**
+ * CreateFolder请求参数结构体
+ */
+export interface CreateFolderRequest {
+    /**
+     * 新建文件夹名
+     */
+    FolderName: string;
+    /**
+     * 新建文件夹的父目录ID
+     */
+    ParentId: string;
+    /**
+     * 文件夹类型，0是任务文件夹，1是依赖文件夹
+     */
+    FolderType?: number;
+    /**
+     * 工作空间 SerialId
+     */
+    WorkSpaceId?: string;
+}
+/**
+ * DeleteTableConfig请求参数结构体
+ */
+export interface DeleteTableConfigRequest {
+    /**
+     * 作业ID
+     */
+    JobId: string;
+    /**
+     * 调试作业ID
+     */
+    DebugId: number;
+    /**
+     * 表名
+     */
+    TableName: string;
+    /**
+     * 工作空间 SerialId
+     */
+    WorkSpaceId?: string;
+}
+/**
+ * DeleteResources返回参数结构体
+ */
+export interface DeleteResourcesResponse {
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * ModifyJob返回参数结构体
+ */
+export interface ModifyJobResponse {
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * CheckSavepoint返回参数结构体
+ */
+export interface CheckSavepointResponse {
+    /**
+     * 资源 id
+     */
+    SerialId: string;
+    /**
+     * 1=可用，2=不可用
+     */
+    SavepointStatus: number;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * 标签
+ */
+export interface Tag {
+    /**
+     * 标签键
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TagKey?: string;
+    /**
+     * 标签值
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TagValue?: string;
+}
+/**
+ * Flink Job 运行图的点信息
+ */
+export interface JobGraphNode {
+    /**
+     * 节点ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Id: number;
+    /**
+     * 节点描述
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Description: string;
+    /**
+     * 节点名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Name: string;
+    /**
+     * 节点并行度
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Parallelism: number;
+}
+/**
+ * DeleteResourceConfigs请求参数结构体
+ */
+export interface DeleteResourceConfigsRequest {
+    /**
+     * 资源ID
+     */
+    ResourceId: string;
+    /**
+     * 资源版本数组
+     */
+    ResourceConfigVersions: Array<number>;
+    /**
+     * 工作空间 SerialId
+     */
+    WorkSpaceId?: string;
+}
+/**
+ * DescribeJobSavepoint返回参数结构体
+ */
+export interface DescribeJobSavepointResponse {
+    /**
+     * 快照列表总数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TotalNumber: number;
+    /**
+     * 快照列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Savepoint: Array<Savepoint>;
+    /**
+     * 进行中的快照列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RunningSavepoint: Array<Savepoint>;
+    /**
+     * 进行中的快照列表总数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RunningTotalNumber: number;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * DescribeWorkSpaces返回参数结构体
+ */
+export interface DescribeWorkSpacesResponse {
+    /**
+     * 空间详情列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    WorkSpaceSetItem?: Array<WorkSpaceSetItem>;
+    /**
+     * 空间总数
+     */
+    TotalCount?: number;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * 空间和集群绑定关系
+ */
+export interface WorkSpaceClusterItem {
+    /**
+     * 集群 ID
+     */
+    ClusterGroupId: number;
+    /**
+     * 集群 SerialId
+     */
+    ClusterGroupSerialId: string;
+    /**
+     * 集群名称
+     */
+    ClusterName: string;
+    /**
+     * 工作空间 SerialId
+     */
+    WorkSpaceId: string;
+    /**
+     * 工作空间名称
+     */
+    WorkSpaceName: string;
+    /**
+     * 绑定状态  2 绑定 1  解除绑定
+     */
+    Status: number;
+    /**
+     * 项目ID
+     */
+    ProjectId: number;
+    /**
+     * 项目ID string类型
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ProjectIdStr: string;
+}
+/**
+ * CreateResource返回参数结构体
+ */
+export interface CreateResourceResponse {
+    /**
+     * 资源ID
+     */
+    ResourceId: string;
+    /**
+     * 资源版本
+     */
+    Version: number;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * DescribeSystemResources请求参数结构体
+ */
+export interface DescribeSystemResourcesRequest {
+    /**
+     * 需要查询的资源ID数组
+     */
+    ResourceIds?: Array<string>;
+    /**
+     * 偏移量，仅当设置 Limit 参数时有效
+     */
+    Offset?: number;
+    /**
+     * 条数限制，默认返回 20 条
+     */
+    Limit?: number;
+    /**
+     * 查询资源配置列表， 如果不填写，返回该 ResourceIds.N 下所有作业配置列表
+     */
+    Filters?: Array<Filter>;
+    /**
+     * 集群ID
+     */
+    ClusterId?: string;
+    /**
+     * 查询对应Flink版本的内置connector
+     */
+    FlinkVersion?: string;
+}
+/**
+ * CreateFolder返回参数结构体
+ */
+export interface CreateFolderResponse {
+    /**
+     * 新建文件夹的唯一ID
+     */
+    FolderId: string;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * DescribeResources返回参数结构体
+ */
+export interface DescribeResourcesResponse {
+    /**
+     * 资源详细信息集合
+     */
+    ResourceSet: Array<ResourceItem>;
+    /**
+     * 总数量
+     */
+    TotalCount: number;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * 作业启动详情
+ */
+export interface RunJobDescription {
+    /**
+     * 作业Id
+     */
+    JobId: string;
+    /**
+     * 运行类型，1：启动，2：恢复
+     */
+    RunType: number;
+    /**
+     * 兼容旧版 SQL 类型作业启动参数：指定数据源消费起始时间点（例:T1557394288000）
+     */
+    StartMode?: string;
+    /**
+     * 当前作业的某个版本
+     */
+    JobConfigVersion?: number;
+    /**
+     * Savepoint路径
+     */
+    SavepointPath?: string;
+    /**
+     * Savepoint的Id
+     */
+    SavepointId?: string;
+    /**
+     * 使用历史版本系统依赖
+     */
+    UseOldSystemConnector?: boolean;
+}
+/**
+ * DescribeResourceRelatedJobs返回参数结构体
+ */
+export interface DescribeResourceRelatedJobsResponse {
+    /**
+     * 总数
+     */
+    TotalCount: number;
+    /**
+     * 关联作业信息
+     */
+    RefJobInfos: Array<ResourceRefJobInfo>;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * DescribeClusters返回参数结构体
+ */
+export interface DescribeClustersResponse {
+    /**
+     * 集群总数
+     */
+    TotalCount: number;
+    /**
+     * 集群列表
+     */
+    ClusterSet: Array<Cluster>;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * 资源引用参数
+ */
+export interface ResourceRef {
+    /**
+     * 资源ID
+     */
+    ResourceId: string;
+    /**
+     * 资源版本ID，-1表示使用最新版本
+     */
+    Version: number;
+    /**
+     * 引用资源类型，例如主资源设置为1，代表main class所在的jar包
+     */
+    Type: number;
+}
+/**
+ * DescribeSystemResources返回参数结构体
+ */
+export interface DescribeSystemResourcesResponse {
+    /**
+     * 资源详细信息集合
+     */
+    ResourceSet: Array<SystemResourceItem>;
+    /**
+     * 总数量
+     */
+    TotalCount: number;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * {
+"Clazz": "c1", // java类全路径
+"Level": "WARN" // 日志级别  TRACE，DEBUG、INFO、WARN、ERROR
+}
+ */
+export interface ClazzLevel {
+    /**
+     * java类全路径
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Clazz: string;
+    /**
+     * 日志级别  TRACE，DEBUG、INFO、WARN、ERROR
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Level: string;
+}
+/**
+ * CheckSavepoint请求参数结构体
+ */
+export interface CheckSavepointRequest {
+    /**
+     * 作业 id
+     */
+    JobId: string;
+    /**
+     * 快照资源 id
+     */
+    SerialId: string;
+    /**
+     * 快照类型 1: savepoint；2: checkpoint；3: cancelWithSavepoint
+     */
+    RecordType: number;
+    /**
+     * 快照路径，目前只支持 cos 路径
+     */
+    SavepointPath: string;
+    /**
+     * 工作空间 id
+     */
+    WorkSpaceId: string;
+}
+/**
+ * StopJobs请求参数结构体
+ */
+export interface StopJobsRequest {
+    /**
+     * 批量停止作业的描述信息
+     */
+    StopJobDescriptions: Array<StopJobDescription>;
+    /**
+     * 工作空间 SerialId
+     */
+    WorkSpaceId?: string;
+}
+/**
+ * RunJobs请求参数结构体
+ */
+export interface RunJobsRequest {
+    /**
+     * 批量启动作业的描述信息
+     */
+    RunJobDescriptions: Array<RunJobDescription>;
+    /**
+     * 工作空间 SerialId
+     */
+    WorkSpaceId?: string;
+}
+/**
+ * DeleteJobs返回参数结构体
+ */
+export interface DeleteJobsResponse {
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * 系统配置属性
+ */
+export interface Property {
+    /**
+     * 系统配置的Key
+     */
+    Key: string;
+    /**
+     * 系统配置的Value
+     */
+    Value: string;
+}
+/**
+ * Flink Job 运行图的边信息
+ */
+export interface JobGraphEdge {
+    /**
+     * 边的起始节点ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Source: number;
+    /**
+     * 边的目标节点ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Target: number;
 }
 /**
  * 描述Savepoint信息
@@ -798,24 +1357,6 @@ export interface DescribeResourceRelatedJobsRequest {
     WorkSpaceId?: string;
 }
 /**
- * DeleteResources返回参数结构体
- */
-export interface DeleteResourcesResponse {
-    /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
-/**
- * DeleteTableConfig返回参数结构体
- */
-export interface DeleteTableConfigResponse {
-    /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
-/**
  * 描述资源配置的返回参数
  */
 export interface ResourceConfigItem {
@@ -932,35 +1473,6 @@ export interface RoleAuth {
     RoleName?: string;
 }
 /**
- * 日志查询的每行日志信息
- */
-export interface LogContent {
-    /**
-     * 日志内容
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Log: string;
-    /**
-     * 毫秒级时间戳
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Time: number;
-    /**
-     * 日志组Id
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    PkgId: string;
-    /**
-     * 日志Id，在日志组范围里唯一
-     */
-    PkgLogId: number;
-    /**
-     * 日志所属的容器名
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ContainerName: string;
-}
-/**
  * 树状结构资源列表对象
  */
 export interface DescribeTreeResourcesRsp {
@@ -991,32 +1503,6 @@ export interface DescribeTreeResourcesRsp {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     TotalCount?: number;
-}
-/**
- * DescribeResources请求参数结构体
- */
-export interface DescribeResourcesRequest {
-    /**
-     * 需要查询的资源ID数组，数量不超过100个。如果填写了该参数则忽略Filters参数。
-     */
-    ResourceIds?: Array<string>;
-    /**
-     * 偏移量，仅当设置 Limit 参数时有效
-     */
-    Offset?: number;
-    /**
-     * 条数限制。如果不填，默认返回 20 条
-     */
-    Limit?: number;
-    /**
-     * <li><strong>ResourceName</strong></li>
-  <p style="padding-left: 30px;">按照资源名字过滤，支持模糊过滤。传入的过滤名字不超过5个</p><p style="padding-left: 30px;">类型: String</p><p style="padding-left: 30px;">必选: 否</p>
-     */
-    Filters?: Array<Filter>;
-    /**
-     * 工作空间 SerialId
-     */
-    WorkSpaceId?: string;
 }
 /**
  * 树状结构资源对象
@@ -1055,242 +1541,6 @@ export interface TreeResourceItem {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     RefJobStatusCountSet?: Array<RefJobStatusCountItem>;
-}
-/**
- * 依赖作业分状态计数信息
- */
-export interface RefJobStatusCountItem {
-    /**
-     * 作业状态
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    JobStatus?: number;
-    /**
-     * 作业数量
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Count?: number;
-}
-/**
- * 资源参数描述
- */
-export interface ResourceLocParam {
-    /**
-     * 资源bucket
-     */
-    Bucket: string;
-    /**
-     * 资源路径
-     */
-    Path: string;
-    /**
-     * 资源所在地域，如果不填，则使用Resource的Region
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Region?: string;
-}
-/**
- * 标签
- */
-export interface Tag {
-    /**
-     * 标签键
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    TagKey?: string;
-    /**
-     * 标签值
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    TagValue?: string;
-}
-/**
- * 工作空间详情
- */
-export interface WorkSpaceSetItem {
-    /**
-     * 工作空间 SerialId
-     */
-    SerialId: string;
-    /**
-     * 用户 APPID
-     */
-    AppId: number;
-    /**
-     * 主账号 UIN
-     */
-    OwnerUin: string;
-    /**
-     * 创建者 UIN
-     */
-    CreatorUin: string;
-    /**
-     * 工作空间名称
-     */
-    WorkSpaceName: string;
-    /**
-     * 区域
-     */
-    Region: string;
-    /**
-     * 创建时间
-     */
-    CreateTime: string;
-    /**
-     * 更新时间
-     */
-    UpdateTime: string;
-    /**
-     * 1 未初始化 2 可用  -1 已删除
-     */
-    Status: number;
-    /**
-     * 工作空间描述
-     */
-    Description: string;
-    /**
-     * 工作空间包含集群信息
-     */
-    ClusterGroupSetItem: Array<ClusterGroupSetItem>;
-    /**
-     * 工作空间角色的信息
-     */
-    RoleAuth: Array<RoleAuth>;
-    /**
-     * 工作空间成员数量
-     */
-    RoleAuthCount: number;
-    /**
-     * 工作空间 SerialId
-     */
-    WorkSpaceId: string;
-    /**
-     * 1
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    JobsCount: number;
-}
-/**
- * 资源被Job 引用信息
- */
-export interface ResourceRefJobInfo {
-    /**
-     * Job id
-     */
-    JobId: string;
-    /**
-     * Job配置版本
-     */
-    JobConfigVersion: number;
-    /**
-     * 资源版本
-     */
-    ResourceVersion: number;
-}
-/**
- * DescribeJobConfigs请求参数结构体
- */
-export interface DescribeJobConfigsRequest {
-    /**
-     * 作业Id
-     */
-    JobId: string;
-    /**
-     * 作业配置版本
-     */
-    JobConfigVersions?: Array<number>;
-    /**
-     * 偏移量，默认0
-     */
-    Offset?: number;
-    /**
-     * 分页大小，默认20，最大100
-     */
-    Limit?: number;
-    /**
-     * 过滤条件
-     */
-    Filters?: Array<Filter>;
-    /**
-     * true 表示只展示草稿
-     */
-    OnlyDraft?: boolean;
-    /**
-     * 工作空间 SerialId
-     */
-    WorkSpaceId?: string;
-}
-/**
- * CheckSavepoint返回参数结构体
- */
-export interface CheckSavepointResponse {
-    /**
-     * 资源 id
-     */
-    SerialId: string;
-    /**
-     * 1=可用，2=不可用
-     */
-    SavepointStatus: number;
-    /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
-/**
- * DeleteResourceConfigs请求参数结构体
- */
-export interface DeleteResourceConfigsRequest {
-    /**
-     * 资源ID
-     */
-    ResourceId: string;
-    /**
-     * 资源版本数组
-     */
-    ResourceConfigVersions: Array<number>;
-    /**
-     * 工作空间 SerialId
-     */
-    WorkSpaceId?: string;
-}
-/**
- * DescribeJobSavepoint返回参数结构体
- */
-export interface DescribeJobSavepointResponse {
-    /**
-     * 快照列表总数
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    TotalNumber: number;
-    /**
-     * 快照列表
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Savepoint: Array<Savepoint>;
-    /**
-     * 进行中的快照列表
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    RunningSavepoint: Array<Savepoint>;
-    /**
-     * 进行中的快照列表总数
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    RunningTotalNumber: number;
-    /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
-/**
- * DeleteJobs返回参数结构体
- */
-export interface DeleteJobsResponse {
-    /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
 }
 /**
  * DescribeTreeResources返回参数结构体
@@ -1365,227 +1615,6 @@ export interface DeleteResourcesRequest {
      * 工作空间 SerialId
      */
     WorkSpaceId?: string;
-}
-/**
- * DescribeJobs返回参数结构体
- */
-export interface DescribeJobsResponse {
-    /**
-     * 作业总数
-     */
-    TotalCount: number;
-    /**
-     * 作业列表
-     */
-    JobSet: Array<JobV1>;
-    /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
-/**
- * DescribeWorkSpaces返回参数结构体
- */
-export interface DescribeWorkSpacesResponse {
-    /**
-     * 空间详情列表
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    WorkSpaceSetItem?: Array<WorkSpaceSetItem>;
-    /**
-     * 空间总数
-     */
-    TotalCount?: number;
-    /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
-/**
- * 资源详细描述
- */
-export interface ResourceItem {
-    /**
-     * 资源ID
-     */
-    ResourceId?: string;
-    /**
-     * 资源名称
-     */
-    Name?: string;
-    /**
-     * 资源类型
-     */
-    ResourceType?: number;
-    /**
-     * 资源位置
-     */
-    ResourceLoc?: ResourceLoc;
-    /**
-     * 资源地域
-     */
-    Region?: string;
-    /**
-     * 应用ID
-     */
-    AppId?: number;
-    /**
-     * 主账号Uin
-     */
-    OwnerUin?: string;
-    /**
-     * 子账号Uin
-     */
-    CreatorUin?: string;
-    /**
-     * 资源创建时间
-     */
-    CreateTime?: string;
-    /**
-     * 资源最后更新时间
-     */
-    UpdateTime?: string;
-    /**
-     * 资源的资源版本ID
-     */
-    LatestResourceConfigVersion?: number;
-    /**
-     * 资源备注
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Remark?: string;
-    /**
-     * 版本个数
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    VersionCount?: number;
-    /**
-     * 关联作业数
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    RefJobCount?: number;
-    /**
-     * 作业运行状态
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    IsJobRun?: number;
-    /**
-     * 文件名
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    FileName?: string;
-    /**
-     * 工作空间ID
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    WorkSpaceId?: number;
-    /**
-     * 分状态统计关联作业数
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    RefJobStatusCountSet?: Array<RefJobStatusCountItem>;
-}
-/**
- * 空间和集群绑定关系
- */
-export interface WorkSpaceClusterItem {
-    /**
-     * 集群 ID
-     */
-    ClusterGroupId: number;
-    /**
-     * 集群 SerialId
-     */
-    ClusterGroupSerialId: string;
-    /**
-     * 集群名称
-     */
-    ClusterName: string;
-    /**
-     * 工作空间 SerialId
-     */
-    WorkSpaceId: string;
-    /**
-     * 工作空间名称
-     */
-    WorkSpaceName: string;
-    /**
-     * 绑定状态  2 绑定 1  解除绑定
-     */
-    Status: number;
-    /**
-     * 项目ID
-     */
-    ProjectId: number;
-    /**
-     * 项目ID string类型
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ProjectIdStr: string;
-}
-/**
- * DescribeResourceConfigs返回参数结构体
- */
-export interface DescribeResourceConfigsResponse {
-    /**
-     * 资源配置描述数组
-     */
-    ResourceConfigSet: Array<ResourceConfigItem>;
-    /**
-     * 资源配置数量
-     */
-    TotalCount: number;
-    /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
-/**
- * StopJobs返回参数结构体
- */
-export interface StopJobsResponse {
-    /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
-/**
- * DescribeJobSavepoint请求参数结构体
- */
-export interface DescribeJobSavepointRequest {
-    /**
-     * 作业 SerialId
-     */
-    JobId: string;
-    /**
-     * 分页参数，单页总数
-     */
-    Limit: number;
-    /**
-     * 分页参数，偏移量
-     */
-    Offset: number;
-    /**
-     * 工作空间 SerialId
-     */
-    WorkSpaceId?: string;
-}
-/**
- * CreateResource返回参数结构体
- */
-export interface CreateResourceResponse {
-    /**
-     * 资源ID
-     */
-    ResourceId: string;
-    /**
-     * 资源版本
-     */
-    Version: number;
-    /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
 }
 /**
  * 工作空间集群组信息
@@ -1669,108 +1698,37 @@ export interface ClusterGroupSetItem {
     PayMode?: number;
 }
 /**
- * DescribeSystemResources请求参数结构体
+ * DescribeJobConfigs请求参数结构体
  */
-export interface DescribeSystemResourcesRequest {
-    /**
-     * 需要查询的资源ID数组
-     */
-    ResourceIds?: Array<string>;
-    /**
-     * 偏移量，仅当设置 Limit 参数时有效
-     */
-    Offset?: number;
-    /**
-     * 条数限制，默认返回 20 条
-     */
-    Limit?: number;
-    /**
-     * 查询资源配置列表， 如果不填写，返回该 ResourceIds.N 下所有作业配置列表
-     */
-    Filters?: Array<Filter>;
-    /**
-     * 集群ID
-     */
-    ClusterId?: string;
-    /**
-     * 查询对应Flink版本的内置connector
-     */
-    FlinkVersion?: string;
-}
-/**
- * CreateFolder返回参数结构体
- */
-export interface CreateFolderResponse {
-    /**
-     * 新建文件夹的唯一ID
-     */
-    FolderId: string;
-    /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
-/**
- * 复制作业单条明细
- */
-export interface CopyJobItem {
-    /**
-     * 需要复制的作业serial id
-     */
-    SourceId: string;
-    /**
-     * 目标集群的cluster serial id
-     */
-    TargetClusterId: string;
-    /**
-     * 需要复制的作业名称
-     */
-    SourceName?: string;
-    /**
-     * 新作业的名称
-     */
-    TargetName?: string;
-    /**
-     * 新作业的目录id
-     */
-    TargetFolderId?: string;
-    /**
-     * 源作业类型
-     */
-    JobType?: number;
-}
-/**
- * 作业启动详情
- */
-export interface RunJobDescription {
+export interface DescribeJobConfigsRequest {
     /**
      * 作业Id
      */
     JobId: string;
     /**
-     * 运行类型，1：启动，2：恢复
+     * 作业配置版本
      */
-    RunType: number;
+    JobConfigVersions?: Array<number>;
     /**
-     * 兼容旧版 SQL 类型作业启动参数：指定数据源消费起始时间点（例:T1557394288000）
+     * 偏移量，默认0
      */
-    StartMode?: string;
+    Offset?: number;
     /**
-     * 当前作业的某个版本
+     * 分页大小，默认20，最大100
      */
-    JobConfigVersion?: number;
+    Limit?: number;
     /**
-     * Savepoint路径
+     * 过滤条件
      */
-    SavepointPath?: string;
+    Filters?: Array<Filter>;
     /**
-     * Savepoint的Id
+     * true 表示只展示草稿
      */
-    SavepointId?: string;
+    OnlyDraft?: boolean;
     /**
-     * 使用历史版本系统依赖
+     * 工作空间 SerialId
      */
-    UseOldSystemConnector?: boolean;
+    WorkSpaceId?: string;
 }
 /**
  * ModifyJob请求参数结构体
@@ -1798,82 +1756,9 @@ export interface ModifyJobRequest {
     WorkSpaceId?: string;
 }
 /**
- * DescribeTreeJobs请求参数结构体
- */
-export interface DescribeTreeJobsRequest {
-    /**
-     * 工作空间 Serialid
-     */
-    WorkSpaceId?: string;
-}
-/**
- * DescribeJobConfigs返回参数结构体
- */
-export interface DescribeJobConfigsResponse {
-    /**
-     * 总的配置版本数量
-     */
-    TotalCount: number;
-    /**
-     * 作业配置列表
-     */
-    JobConfigSet: Array<JobConfig>;
-    /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
-/**
- * 系统配置属性
- */
-export interface Property {
-    /**
-     * 系统配置的Key
-     */
-    Key: string;
-    /**
-     * 系统配置的Value
-     */
-    Value: string;
-}
-/**
  * DeleteResourceConfigs返回参数结构体
  */
 export interface DeleteResourceConfigsResponse {
-    /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
-/**
- * DescribeResourceRelatedJobs返回参数结构体
- */
-export interface DescribeResourceRelatedJobsResponse {
-    /**
-     * 总数
-     */
-    TotalCount: number;
-    /**
-     * 关联作业信息
-     */
-    RefJobInfos: Array<ResourceRefJobInfo>;
-    /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
-/**
- * DescribeResources返回参数结构体
- */
-export interface DescribeResourcesResponse {
-    /**
-     * 资源详细信息集合
-     */
-    ResourceSet: Array<ResourceItem>;
-    /**
-     * 总数量
-     */
-    TotalCount: number;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2048,44 +1933,6 @@ export interface Cluster {
     ClusterSessions?: Array<ClusterSession>;
 }
 /**
- * DescribeClusters返回参数结构体
- */
-export interface DescribeClustersResponse {
-    /**
-     * 集群总数
-     */
-    TotalCount: number;
-    /**
-     * 集群列表
-     */
-    ClusterSet: Array<Cluster>;
-    /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
-/**
- * DescribeWorkSpaces请求参数结构体
- */
-export interface DescribeWorkSpacesRequest {
-    /**
-     * 偏移量，默认 0
-     */
-    Offset?: number;
-    /**
-     * 1 按照创建时间降序排序(默认) 2.按照创建时间升序排序，3. 按照状态降序排序 4. 按照状态升序排序 默认为0
-     */
-    OrderType?: number;
-    /**
-     * 请求的集群数量，默认 20
-     */
-    Limit?: number;
-    /**
-     * 过滤规则
-     */
-    Filters?: Array<Filter>;
-}
-/**
  * DescribeJobSubmissionLog请求参数结构体
  */
 export interface DescribeJobSubmissionLogRequest {
@@ -2121,23 +1968,6 @@ export interface DescribeJobSubmissionLogRequest {
      * 搜索的日志条数上限值，最大为100
      */
     Limit?: number;
-}
-/**
- * 资源引用参数
- */
-export interface ResourceRef {
-    /**
-     * 资源ID
-     */
-    ResourceId: string;
-    /**
-     * 资源版本ID，-1表示使用最新版本
-     */
-    Version: number;
-    /**
-     * 引用资源类型，例如主资源设置为1，代表main class所在的jar包
-     */
-    Type: number;
 }
 /**
  * DescribeJobs请求参数结构体
@@ -2435,6 +2265,21 @@ export interface JobConfig {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     LogLevel: string;
+    /**
+     * 类日志级别
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ClazzLevels?: Array<ClazzLevel>;
+    /**
+     * 是否开启专家模式
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ExpertModeOn?: boolean;
+    /**
+     * 专家模式的配置
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ExpertModeConfiguration?: ExpertModeConfiguration;
 }
 /**
  * DescribeResourceConfigs请求参数结构体
@@ -2470,11 +2315,361 @@ export interface DescribeResourceConfigsRequest {
     WorkSpaceId?: string;
 }
 /**
- * DescribeTreeResources请求参数结构体
+ * SlotSharingGroup 描述
  */
-export interface DescribeTreeResourcesRequest {
+export interface SlotSharingGroup {
+    /**
+     * SlotSharingGroup的名字
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Name: string;
+    /**
+     * SlotSharingGroup的规格
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Spec: SlotSharingGroupSpec;
+    /**
+     * SlotSharingGroup的描述
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Description?: string;
+}
+/**
+ * CreateJob请求参数结构体
+ */
+export interface CreateJobRequest {
+    /**
+     * 作业名称，允许输入长度小于等于50个字符的中文、英文、数字、-（横线）、_（下划线）、.（点），且符号必须半角字符。注意作业名不能和现有作业同名
+     */
+    Name: string;
+    /**
+     * 作业的类型，1 表示 SQL 作业，2 表示 JAR 作业
+     */
+    JobType: number;
+    /**
+     * 集群的类型，1 表示共享集群，2 表示独享集群
+     */
+    ClusterType: number;
+    /**
+     * 当 ClusterType=2 时，必选，用来指定该作业提交的独享集群 ID
+     */
+    ClusterId?: string;
+    /**
+     * 设置每 CU 的内存规格，单位为 GB，支持 2、4、8、16（需申请开通白名单后使用）。默认为 4，即 1 CU 对应 4 GB 的运行内存
+     */
+    CuMem?: number;
+    /**
+     * 作业的备注信息，可以随意设置
+     */
+    Remark?: string;
+    /**
+     * 作业名所属文件夹ID，根目录为"root"
+     */
+    FolderId?: string;
+    /**
+     * 作业运行的Flink版本
+     */
+    FlinkVersion?: string;
     /**
      * 工作空间 SerialId
      */
     WorkSpaceId?: string;
+    /**
+     * 作业标签
+     */
+    Tags?: Array<Tag>;
+}
+/**
+ * 搜索启动日志时返回的作业实例
+ */
+export interface JobInstanceForSubmissionLog {
+    /**
+     * 实例的Id, 按照启动的时间顺序，从1开始
+     */
+    RunningOrderId: number;
+    /**
+     * 作业实例的启动时间
+     */
+    JobInstanceStartTime: string;
+    /**
+     * 作业实例启动的时间（毫秒）
+     */
+    StartingMillis: number;
+}
+/**
+ * DeleteTableConfig返回参数结构体
+ */
+export interface DeleteTableConfigResponse {
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * 专家模式  计算节点的配置信息
+ */
+export interface NodeConfig {
+    /**
+     * Node ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Id: number;
+    /**
+     * Node parallelism
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Parallelism?: number;
+    /**
+     * Slot sharing group
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SlotSharingGroup?: string;
+    /**
+     * Configuration properties
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Configuration?: Array<Property>;
+    /**
+     * 节点的状态ttl配置, 多个用 ; 分割
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    StateTTL?: string;
+}
+/**
+ * TriggerJobSavepoint返回参数结构体
+ */
+export interface TriggerJobSavepointResponse {
+    /**
+     * 是否成功
+     */
+    SavepointTrigger: boolean;
+    /**
+     * 错误消息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ErrorMsg: string;
+    /**
+     * 快照路径
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    FinalSavepointPath: string;
+    /**
+     * 快照 ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SavepointId: string;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * session集群信息
+ */
+export declare type ClusterSession = null;
+/**
+ * CreateResourceConfig请求参数结构体
+ */
+export interface CreateResourceConfigRequest {
+    /**
+     * 资源ID
+     */
+    ResourceId: string;
+    /**
+     * 位置信息
+     */
+    ResourceLoc: ResourceLoc;
+    /**
+     * 资源描述信息
+     */
+    Remark?: string;
+    /**
+     * 1： 资源版本达到上限，自动删除最早可删除的版本
+     */
+    AutoDelete?: number;
+    /**
+     * 工作空间 SerialId
+     */
+    WorkSpaceId?: string;
+}
+/**
+ * StopJobs返回参数结构体
+ */
+export interface StopJobsResponse {
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * 日志查询的每行日志信息
+ */
+export interface LogContent {
+    /**
+     * 日志内容
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Log: string;
+    /**
+     * 毫秒级时间戳
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Time: number;
+    /**
+     * 日志组Id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PkgId: string;
+    /**
+     * 日志Id，在日志组范围里唯一
+     */
+    PkgLogId: number;
+    /**
+     * 日志所属的容器名
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ContainerName: string;
+}
+/**
+ * DescribeResources请求参数结构体
+ */
+export interface DescribeResourcesRequest {
+    /**
+     * 需要查询的资源ID数组，数量不超过100个。如果填写了该参数则忽略Filters参数。
+     */
+    ResourceIds?: Array<string>;
+    /**
+     * 偏移量，仅当设置 Limit 参数时有效
+     */
+    Offset?: number;
+    /**
+     * 条数限制。如果不填，默认返回 20 条
+     */
+    Limit?: number;
+    /**
+     * <li><strong>ResourceName</strong></li>
+  <p style="padding-left: 30px;">按照资源名字过滤，支持模糊过滤。传入的过滤名字不超过5个</p><p style="padding-left: 30px;">类型: String</p><p style="padding-left: 30px;">必选: 否</p>
+     */
+    Filters?: Array<Filter>;
+    /**
+     * 工作空间 SerialId
+     */
+    WorkSpaceId?: string;
+}
+/**
+ * SlotSharingGroup的规格描述
+ */
+export interface SlotSharingGroupSpec {
+    /**
+     * 适用的cpu
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CPU: number;
+    /**
+     * 默认为b, 支持单位有 b, kb, mb, gb
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    HeapMemory: string;
+    /**
+     * 默认为b, 支持单位有 b, kb, mb, gb
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    OffHeapMemory?: string;
+    /**
+     * 默认为b, 支持单位有 b, kb, mb, gb
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ManagedMemory?: string;
+}
+/**
+ * DescribeJobs返回参数结构体
+ */
+export interface DescribeJobsResponse {
+    /**
+     * 作业总数
+     */
+    TotalCount: number;
+    /**
+     * 作业列表
+     */
+    JobSet: Array<JobV1>;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * 作业配置 -- 专家模式的详细配置
+ */
+export interface ExpertModeConfiguration {
+    /**
+     * Job graph
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    JobGraph?: JobGraph;
+    /**
+     * Node configuration
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    NodeConfig?: Array<NodeConfig>;
+    /**
+     * Slot sharing groups
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SlotSharingGroups?: Array<SlotSharingGroup>;
+}
+/**
+ * 复制作业单条明细
+ */
+export interface CopyJobItem {
+    /**
+     * 需要复制的作业serial id
+     */
+    SourceId: string;
+    /**
+     * 目标集群的cluster serial id
+     */
+    TargetClusterId: string;
+    /**
+     * 需要复制的作业名称
+     */
+    SourceName?: string;
+    /**
+     * 新作业的名称
+     */
+    TargetName?: string;
+    /**
+     * 新作业的目录id
+     */
+    TargetFolderId?: string;
+    /**
+     * 源作业类型
+     */
+    JobType?: number;
+}
+/**
+ * DescribeTreeJobs请求参数结构体
+ */
+export interface DescribeTreeJobsRequest {
+    /**
+     * 工作空间 Serialid
+     */
+    WorkSpaceId?: string;
+}
+/**
+ * DescribeJobConfigs返回参数结构体
+ */
+export interface DescribeJobConfigsResponse {
+    /**
+     * 总的配置版本数量
+     */
+    TotalCount: number;
+    /**
+     * 作业配置列表
+     */
+    JobConfigSet: Array<JobConfig>;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }

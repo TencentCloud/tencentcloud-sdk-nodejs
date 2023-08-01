@@ -1152,6 +1152,19 @@ export interface RocketMQGroup {
     RetryMaxTimes?: number;
 }
 /**
+ * vpc信息（由UniqVpcId和UniqSubnetId组成）
+ */
+export interface VpcInfo {
+    /**
+     * vpc信息
+     */
+    VpcId: string;
+    /**
+     * 子网信息
+     */
+    SubnetId: string;
+}
+/**
  * ModifyRabbitMQUser请求参数结构体
  */
 export interface ModifyRabbitMQUserRequest {
@@ -2332,9 +2345,13 @@ export interface ModifyRocketMQClusterRequest {
     PublicAccessEnabled?: boolean;
 }
 /**
- * DeleteRabbitMQVirtualHost返回参数结构体
+ * CreateRocketMQVipInstance返回参数结构体
  */
-export interface DeleteRabbitMQVirtualHostResponse {
+export interface CreateRocketMQVipInstanceResponse {
+    /**
+     * 集群ID
+     */
+    ClusterId?: string;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -3464,6 +3481,24 @@ export interface DescribeEnvironmentRolesRequest {
     Filters?: Array<Filter>;
 }
 /**
+ * DescribeRocketMQClusters返回参数结构体
+ */
+export interface DescribeRocketMQClustersResponse {
+    /**
+     * 集群信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ClusterList: Array<RocketMQClusterDetail>;
+    /**
+     * 总条数
+     */
+    TotalCount: number;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * DeleteRoles返回参数结构体
  */
 export interface DeleteRolesResponse {
@@ -4322,6 +4357,23 @@ export interface ModifyRocketMQInstanceSpecResponse {
     RequestId?: string;
 }
 /**
+ * DescribePulsarProInstances请求参数结构体
+ */
+export interface DescribePulsarProInstancesRequest {
+    /**
+     * 查询条件过滤器
+     */
+    Filters?: Array<Filter>;
+    /**
+     * 查询数目上限，默认20
+     */
+    Limit?: number;
+    /**
+     * 查询起始位置
+     */
+    Offset?: number;
+}
+/**
  * DescribeRocketMQVipInstances请求参数结构体
  */
 export interface DescribeRocketMQVipInstancesRequest {
@@ -4350,17 +4402,41 @@ export interface DescribeRocketMQVipInstanceDetailRequest {
     ClusterId: string;
 }
 /**
- * DeleteRabbitMQVirtualHost请求参数结构体
+ * CreateRocketMQVipInstance请求参数结构体
  */
-export interface DeleteRabbitMQVirtualHostRequest {
+export interface CreateRocketMQVipInstanceRequest {
     /**
-     * 集群实例Id
+     * 实例名称
      */
-    InstanceId: string;
+    Name: string;
     /**
-     * vhost名
+     * 实例规格：
+  基础型，rocket-vip-basic-1
+  标准型，rocket-vip-basic-2
+  高阶Ⅰ型，rocket-vip-basic-3
+  高阶Ⅱ型，rocket-vip-basic-4
      */
-    VirtualHost: string;
+    Spec: string;
+    /**
+     * 节点数量，最小2，最大20
+     */
+    NodeCount: number;
+    /**
+     * 单节点存储空间，GB为单位，最低200GB
+     */
+    StorageSize: number;
+    /**
+     * 节点部署的区域ID列表，如广州一区，则是100001，具体可查询腾讯云官网
+     */
+    ZoneIds: Array<string>;
+    /**
+     * VPC信息
+     */
+    VpcInfo: VpcInfo;
+    /**
+     * 购买时长，月为单位
+     */
+    TimeSpan: number;
 }
 /**
  * DeleteRocketMQCluster返回参数结构体
@@ -5273,21 +5349,17 @@ export interface DescribeCmqQueueDetailRequest {
     QueueName: string;
 }
 /**
- * DescribePulsarProInstances请求参数结构体
+ * DeleteRabbitMQVirtualHost请求参数结构体
  */
-export interface DescribePulsarProInstancesRequest {
+export interface DeleteRabbitMQVirtualHostRequest {
     /**
-     * 查询条件过滤器
+     * 集群实例Id
      */
-    Filters?: Array<Filter>;
+    InstanceId: string;
     /**
-     * 查询数目上限，默认20
+     * vhost名
      */
-    Limit?: number;
-    /**
-     * 查询起始位置
-     */
-    Offset?: number;
+    VirtualHost: string;
 }
 /**
  * CreateRocketMQTopic请求参数结构体
@@ -5430,9 +5502,14 @@ export interface DescribeNodeHealthOptRequest {
     InstanceId: string;
 }
 /**
- * DescribeBindClusters请求参数结构体
+ * DeleteRabbitMQVirtualHost返回参数结构体
  */
-export declare type DescribeBindClustersRequest = null;
+export interface DeleteRabbitMQVirtualHostResponse {
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
 /**
  * CreateRocketMQTopic返回参数结构体
  */
@@ -5611,23 +5688,9 @@ export interface DescribeRabbitMQVirtualHostListResponse {
     RequestId?: string;
 }
 /**
- * DescribeRocketMQClusters返回参数结构体
+ * DescribeBindClusters请求参数结构体
  */
-export interface DescribeRocketMQClustersResponse {
-    /**
-     * 集群信息
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ClusterList: Array<RocketMQClusterDetail>;
-    /**
-     * 总条数
-     */
-    TotalCount: number;
-    /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
+export declare type DescribeBindClustersRequest = null;
 /**
  * DescribePulsarProInstanceDetail请求参数结构体
  */

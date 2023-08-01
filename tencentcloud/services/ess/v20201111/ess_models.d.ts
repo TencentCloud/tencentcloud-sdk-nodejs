@@ -125,11 +125,11 @@ export interface Department {
     /**
      * 部门id
      */
-    DepartmentId: string;
+    DepartmentId?: string;
     /**
      * 部门名称
      */
-    DepartmentName: string;
+    DepartmentName?: string;
 }
 /**
  * CreatePreparedPersonalEsign请求参数结构体
@@ -220,7 +220,7 @@ export interface DescribeIntegrationDepartmentsResponse {
  */
 export interface FileInfo {
     /**
-     * 文件Id
+     * 文件ID
      */
     FileId?: string;
     /**
@@ -232,7 +232,7 @@ export interface FileInfo {
      */
     FileSize?: number;
     /**
-     * 文件上传时间，10位时间戳（精确到秒）
+     * 文件上传时间，格式为Unix标准时间戳（秒）
      */
     CreatedOn?: number;
 }
@@ -293,15 +293,21 @@ export interface FlowCreateApprover {
      */
     ApproverType: number;
     /**
-     * 如果签署方为企业，需要填入企业全称
+     * 签署人企业名称
+  <br/>当approverType=1 或 approverType=3时，必须指定
+  
+  
      */
     OrganizationName?: string;
     /**
      * 签署方经办人姓名
+  <br/>在未指定签署人电子签UserId情况下，为必填参数
      */
     ApproverName?: string;
     /**
      * 签署方经办人手机号码
+  <br/>在未指定签署人电子签UserId情况下，为必填参数
+  
      */
     ApproverMobile?: string;
     /**
@@ -316,6 +322,9 @@ export interface FlowCreateApprover {
     ApproverIdCardNumber?: string;
     /**
      * 签署方经办人在模板中的参与方ID
+  <br/>模版发起合同时，该参数为必填项
+  <br/>文件发起合同是，该参数无序传值
+  
      */
     RecipientId?: string;
     /**
@@ -323,7 +332,11 @@ export interface FlowCreateApprover {
      */
     VerifyChannel?: Array<string>;
     /**
-     * 是否发送短信，sms--短信通知，none--不通知，默认为sms；发起方=签署方时不发送短信
+     * 是否发送短信
+  <br/>sms--短信通知
+  <br/>none--不通知
+  <br/>默认为sms
+  <br/>发起方=签署方时不发送短信
      */
     NotifyType?: string;
     /**
@@ -335,7 +348,9 @@ export interface FlowCreateApprover {
      */
     PreReadTime?: number;
     /**
-     * 签署方经办人的用户ID,和签署方经办人姓名+手机号+证件必须有一个。
+     * 签署方经办人的电子签用户ID
+  <br/>当未指定签署人姓名+手机号的情况下，该字段毕传
+  
      */
     UserId?: string;
     /**
@@ -343,11 +358,15 @@ export interface FlowCreateApprover {
      */
     Required?: boolean;
     /**
-     * 签署人用户来源,企微侧用户请传入：WEWORKAPP
+     * 签署人用户来源
+  <br/>企微侧用户请传入：WEWORKAPP
      */
     ApproverSource?: string;
     /**
-     * 企业签署方或签标识，客户自定义，64位长度。用于发起含有或签签署人的合同。或签参与人必须有此字段。合同内不同或签参与人CustomApproverTag需要保证唯一。如果或签签署人为本方企微参与人，ApproverSource参数需要指定WEWORKAPP
+     * 企业签署方或签标识，客户自定义，64位长度
+  <br>用于发起含有或签签署人的合同。或签参与人必须有此字段。
+  <br/>合同内不同或签参与人CustomApproverTag需要保证唯一。
+  <br/>如果或签签署人为本方企微参与人，ApproverSource参数需要指定WEWORKAPP
      */
     CustomApproverTag?: string;
     /**
@@ -370,15 +389,20 @@ export interface FlowCreateApprover {
      */
     SignId?: string;
     /**
-     * 当前签署方进行签署操作是否需要企业内部审批，true 则为需要。为个人签署方时则由发起方企业审核。
+     * 当前签署方进行签署操作是否需要企业内部审批
+  <br>true 则为需要
+  <br/>false,无序企业内部审批（默认）
+  <br/>为个人签署方时则由发起方企业审核。
      */
     ApproverNeedSignReview?: boolean;
     /**
      * 签署人签署控件
+  <br/>文件发起时，可通过该参数为签署人指定签署控件类型以及位置
      */
     SignComponents?: Array<Component>;
     /**
      * 签署人填写控件
+  <br/>文件发起时，可通过该参数为签署人指定填写控件类型以及位置
      */
     Components?: Array<Component>;
     /**
@@ -492,6 +516,72 @@ export interface CreateIntegrationEmployeesRequest {
     Agent?: Agent;
 }
 /**
+ * 创建合同个性化参数
+ */
+export interface CreateFlowOption {
+    /**
+     * 是否允许修改发起合同时确认弹窗的合同信息（合同名称、合同类型、签署截止时间），若不允许编辑，则表单字段将被禁止输入。
+  <br/>true：允许编辑（默认），<br/>false：不允许编辑<br/>默认：false：不允许编辑
+     */
+    CanEditFlow?: boolean;
+    /**
+     * 是否允许编辑模版控件
+  <br/>true:允许编辑模版控件信息
+  <br/>false:不允许编辑模版控件信息
+  <br/>默认false:不允许编辑模版控件信息
+     */
+    CanEditFormField?: boolean;
+    /**
+     * 发起页面隐藏合同名称展示
+  <br/>true:发起页面隐藏合同名称展示
+  <br/>false:发起页面不隐藏合同名称展示
+  <br/>默认false:发起页面不隐藏合同名称展示
+     */
+    HideShowFlowName?: boolean;
+    /**
+     * 发起页面隐藏合同类型展示
+  <br/>true:发起页面隐藏合同类型展示
+  <br/>false:发起页面不隐藏合同类型展示
+  <br/>默认false:发起页面不隐藏合同类型展示
+  
+     */
+    HideShowFlowType?: boolean;
+    /**
+     * 发起页面隐藏合同截止日期展示
+  <br/>true:发起页面隐藏合同截止日期展示
+  <br/>false:发起页面不隐藏合同截止日期展示
+  <br/>默认false:发起页面不隐藏合同截止日期展示
+     */
+    HideShowDeadline?: boolean;
+    /**
+     * 发起页面允许跳过添加签署人环节
+  <br/>true:发起页面允许跳过添加签署人环节
+  <br/>false:发起页面不允许跳过添加签署人环节
+  <br/>默认false:发起页面不允许跳过添加签署人环节
+  
+     */
+    CanSkipAddApprover?: boolean;
+    /**
+     * 文件发起页面跳过文件上传步骤
+  <br/>true:文件发起页面跳过文件上传步骤
+  <br/>false:文件发起页面不跳过文件上传步骤
+  <br/>默认false:文件发起页面不跳过文件上传步骤
+     */
+    SkipUploadFile?: boolean;
+    /**
+     * 禁止编辑填写控件
+  <br/>true:禁止编辑填写控件
+  <br/>false:允许编辑填写控件
+  <br/>默认false:允许编辑填写控件
+     */
+    ForbidEditFillComponent?: boolean;
+    /**
+     * 定制化发起合同弹窗的描述信息，描述信息最长500
+  
+     */
+    CustomCreateFlowDescription?: string;
+}
+/**
  * 解除协议的签署人，如不指定，默认使用待解除流程（即原流程）中的签署人。
 注意：不支持更换C端（个人身份类型）签署人，如果原流程中含有C端签署人，默认使用原流程中的该C端签署人。
 注意：目前不支持替换C端（个人身份类型）签署人，但是可以指定C端签署人的签署方自定义控件别名，具体见参数ApproverSignRole描述。
@@ -588,9 +678,28 @@ export interface StartFlowResponse {
     RequestId?: string;
 }
 /**
- * 模板结构体中的印章信息
+ * 模板中指定的印章信息
  */
-export declare type SealInfo = null;
+export interface SealInfo {
+    /**
+     * 印章ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SealId?: string;
+    /**
+     * 印章类型。LEGAL_PERSON_SEAL: 法定代表人章；
+  ORGANIZATIONSEAL：企业印章；
+  OFFICIAL：企业公章；
+  CONTRACT：合同专用章
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SealType?: string;
+    /**
+     * 印章名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SealName?: string;
+}
 /**
  * 集成版企业角色信息
  */
@@ -599,12 +708,12 @@ export interface StaffRole {
      * 角色id
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    RoleId: string;
+    RoleId?: string;
     /**
      * 角色名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    RoleName: string;
+    RoleName?: string;
 }
 /**
  * 签署链接信息
@@ -939,15 +1048,24 @@ export interface CreateFlowGroupByTemplatesResponse {
     RequestId?: string;
 }
 /**
- * 企业模板的信息结构
+ * 此结构体 (TemplateInfo) 用于描述模板的信息。
+
+> **模板组成**
+>
+>  一个模板通常会包含以下结构信息
+>- 模板基本信息
+>- 发起方参与信息Promoter、签署参与方 Recipients，后者会在模板发起合同时用于指定参与方
+>- 填写控件 Components
+>- 签署控件 SignComponents
+>- 生成模板的文件基础信息 FileInfos
  */
 export interface TemplateInfo {
     /**
-     * 模板ID
+     * 模板ID，模板的唯一标识
      */
     TemplateId?: string;
     /**
-     * 模板名字
+     * 模板名
      */
     TemplateName?: string;
     /**
@@ -959,7 +1077,7 @@ export interface TemplateInfo {
      */
     DocumentResourceIds?: Array<string>;
     /**
-     * 返回的文件信息结构
+     * 生成模板的文件基础信息
      */
     FileInfos?: Array<FileInfo>;
     /**
@@ -968,49 +1086,55 @@ export interface TemplateInfo {
     AttachmentResourceIds?: Array<string>;
     /**
      * 签署顺序
+  无序 -1
+  有序为序列数字 0,1,2
      */
     SignOrder?: Array<number>;
     /**
-     * 签署参与者的信息
+     * 模板中的签署参与方列表
      */
     Recipients?: Array<Recipient>;
     /**
-     * 模板信息结构
+     * 模板的填充控件列表
      */
     Components?: Array<Component>;
     /**
-     * 签署区模板信息结构
+     * 模板中的签署控件列表
      */
     SignComponents?: Array<Component>;
     /**
-     * 模板状态(-1:不可用；0:草稿态；1:正式态)
+     * 模板状态
+  -1:不可用
+  0:草稿态
+  1:正式态，可以正常使用
      */
     Status?: number;
     /**
-     * 模板的创建人UserId
+     * 模板的创建者信息，电子签系统用户ID
      */
     Creator?: string;
     /**
-     * 模板创建的时间戳，单位秒
+     * 模板创建的时间戳，格式为Unix标准时间戳（秒）
      */
     CreatedOn?: number;
     /**
-     * 发起人角色信息
+     * 发起方参与信息Promoter
      */
     Promoter?: Recipient;
     /**
-     * 模板类型
-  取值：
+     * 模板类型：
   1  静默签,
   3  普通模板
      */
     TemplateType?: number;
     /**
-     * 模板可用状态，取值：1启用（默认），2停用
+     * 模板可用状态：
+  1 启用（默认）
+  2 停用
      */
     Available?: number;
     /**
-     * 创建模板的机构id
+     * 创建模板的企业ID，电子签的机构ID
      */
     OrganizationId?: string;
     /**
@@ -1024,7 +1148,9 @@ export interface TemplateInfo {
      */
     TemplateVersion?: string;
     /**
-     * 模板是否已发布。true-已发布；false-未发布
+     * 模板是否已发布：
+  true-已发布
+  false-未发布
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Published?: boolean;
@@ -1410,7 +1536,7 @@ export interface DescribeFlowTemplatesRequest {
     /**
      * 调用方员工/经办人信息
   UserId 必填，在企业控制台组织架构中可以查到员工的UserId
-  注：请保证对应
+  注：请保证员工有相关的角色权限
      */
     Operator: UserInfo;
     /**
@@ -1527,8 +1653,8 @@ export interface DescribeUserAutoSignStatusResponse {
 /**
  * 补充签署人信息
 - RecipientId 必须指定
--  通过企业自定义账号ID补充签署人时，ApproverSource 和 CustomUserId 必填
-- 通过二要素（姓名/手机号）补充签署人时，ApproverName 和 ApproverMobile 必填
+-  通过企业自定义账号ID补充签署人时，ApproverSource 和 CustomUserId 必填，ApproverSource取值：WEWORKAPP
+- 通过二要素（姓名/手机号）补充签署人时，ApproverName 和 ApproverMobile 必填，ApproverSource设置为空
  */
 export interface FillApproverInfo {
     /**
@@ -1538,11 +1664,12 @@ export interface FillApproverInfo {
     /**
      * 签署人来源
   WEWORKAPP: 企业微信
+  <br/>仅【企微或签】时指定WEWORKAPP
      */
     ApproverSource?: string;
     /**
      * 企业自定义账号ID
-  WEWORKAPP场景下指企业自有应用获取企微明文的userid
+  <br/>当ApproverSource为WEWORKAPP的企微或签场景下，必须指企业自有应用获取企微明文的userid
      */
     CustomUserId?: string;
     /**
@@ -1631,55 +1758,55 @@ export interface PdfVerifyResult {
     /**
      * 验签结果。0-签名域未签名；1-验签成功； 3-验签失败；4-未找到签名域：文件内没有签名域；5-签名值格式不正确。
      */
-    VerifyResult: number;
+    VerifyResult?: number;
     /**
      * 签署平台，如果文件是在腾讯电子签平台签署，则返回腾讯电子签，如果文件不在腾讯电子签平台签署，则返回其他平台。
      */
-    SignPlatform: string;
+    SignPlatform?: string;
     /**
      * 签署人名称
      */
-    SignerName: string;
+    SignerName?: string;
     /**
      * 签署时间戳，单位秒
      */
-    SignTime: number;
+    SignTime?: number;
     /**
      * 签名算法
      */
-    SignAlgorithm: string;
+    SignAlgorithm?: string;
     /**
      * 签名证书序列号
      */
-    CertSn: string;
+    CertSn?: string;
     /**
-     * 证书起始时间戳，单位秒
+     * 证书起始时间戳，单位毫秒
      */
-    CertNotBefore: number;
+    CertNotBefore?: number;
     /**
-     * 证书过期时间戳，单位秒
+     * 证书过期时间戳，单位毫秒
      */
-    CertNotAfter: number;
+    CertNotAfter?: number;
     /**
      * 签名域横坐标，单位pt
      */
-    ComponentPosX: number;
+    ComponentPosX?: number;
     /**
      * 签名域纵坐标，单位pt
      */
-    ComponentPosY: number;
+    ComponentPosY?: number;
     /**
      * 签名域宽度，单位pt
      */
-    ComponentWidth: number;
+    ComponentWidth?: number;
     /**
      * 签名域高度，单位pt
      */
-    ComponentHeight: number;
+    ComponentHeight?: number;
     /**
      * 签名域所在页码，1～N
      */
-    ComponentPage: number;
+    ComponentPage?: number;
 }
 /**
  * CreateBatchCancelFlowUrl返回参数结构体
@@ -2690,7 +2817,8 @@ export interface CreateEmbedWebUrlRequest {
   <br/>PREVIEW_SEAL_LIST：预览印章列表
   <br/>PREVIEW_SEAL_DETAIL：预览印章详情
   <br/>EXTEND_SERVICE：拓展服务
-  
+  <br/>PREVIEW_FLOW：预览合同
+  <br/>PREVIEW_FLOW_DETAIL：查看合同详情
      */
     EmbedType: string;
     /**
@@ -2706,6 +2834,10 @@ export interface CreateEmbedWebUrlRequest {
      * 抄送方信息
      */
     Reviewer?: ReviewerInfo;
+    /**
+     * 个性化参数
+     */
+    Option?: EmbedUrlOption;
 }
 /**
  * DeleteIntegrationEmployees请求参数结构体
@@ -3152,15 +3284,19 @@ export interface SuccessCreateStaffData {
     WeworkOpenId?: string;
 }
 /**
- * 签署参与者信息
+ * 流程中参与方的信息结构
  */
 export interface Recipient {
     /**
-     * 签署参与者ID
+     * 签署参与者ID，唯一标识
      */
     RecipientId?: string;
     /**
-     * 参与者类型。默认为空。ENTERPRISE-企业；INDIVIDUAL-个人；PROMOTER-发起方
+     * 参与者类型。
+  默认为空。
+  ENTERPRISE-企业；
+  INDIVIDUAL-个人；
+  PROMOTER-发起方
      */
     RecipientType?: string;
     /**
@@ -3172,19 +3308,22 @@ export interface Recipient {
      */
     RoleName?: string;
     /**
-     * 是否需要验证，默认为false
+     * 是否需要验证，
+  默认为false-不需要验证
      */
     RequireValidation?: boolean;
     /**
-     * 是否需要签署，默认为true
+     * 是否需要签署，
+  默认为true-需要签署
      */
     RequireSign?: boolean;
     /**
-     * 添加序列，0～N
+     * 此参与方添加的顺序，从0～N
      */
     RoutingOrder?: number;
     /**
-     * 是否需要发送，默认为true
+     * 是否需要发送，
+  默认为true-需要发送
      */
     RequireDelivery?: boolean;
     /**
@@ -3196,15 +3335,18 @@ export interface Recipient {
      */
     Mobile?: string;
     /**
-     * 关联的用户ID
+     * 关联的用户ID，电子签系统的用户ID
      */
     UserId?: string;
     /**
-     * 发送方式。默认为EMAIL。EMAIL-邮件；MOBILE-手机短信；WECHAT-微信通知
+     * 发送方式，默认为EMAIL。
+  EMAIL-邮件；
+  MOBILE-手机短信；
+  WECHAT-微信通知
      */
     DeliveryMethod?: string;
     /**
-     * 附属信息
+     * 参与方的一些附属信息，json格式
      */
     RecipientExtra?: string;
 }
@@ -3843,16 +3985,20 @@ export interface CreatePrepareFlowRequest {
      */
     FlowName: string;
     /**
-     * 是否顺序签署(true:无序签,false:顺序签)
+     * 是否顺序签署
+  true:无序签
+  false:顺序签
      */
     Unordered?: boolean;
     /**
      * 签署流程的签署截止时间。
-  值为unix时间戳,精确到秒,不传默认为当前时间一年后
+  值为unix时间戳,精确到秒
+  不传默认为当前时间一年后
      */
     Deadline?: number;
     /**
-     * 用户自定义合同类型
+     * 用户自定义合同类型Id
+  该id为电子签企业内的合同类型id
      */
     UserFlowTypeId?: string;
     /**
@@ -3860,9 +4006,58 @@ export interface CreatePrepareFlowRequest {
      */
     Approvers?: Array<FlowCreateApprover>;
     /**
-     * 打开智能添加填写区(默认开启，打开:"OPEN" 关闭："CLOSE")
+     * 打开智能添加填写区
+  (默认开启，打开:"OPEN"
+   关闭："CLOSE"
      */
     IntelligentStatus?: string;
+    /**
+     * 资源类型，
+  1：文件，
+  2：模板
+  不传默认为1：文件
+  目前仅支持文件
+     */
+    ResourceType?: number;
+    /**
+     * 发起方填写控件
+  该类型控件由发起方完成填写
+     */
+    Components?: Component;
+    /**
+     * 发起合同个性化参数
+  用于满足创建及页面操作过程中的个性化要求
+  具体定制化内容详见数据接口说明
+     */
+    FlowOption?: CreateFlowOption;
+    /**
+     * 是否开启发起方签署审核
+  true:开启发起方签署审核
+  false:不开启发起方签署审核
+  默认false:不开启发起方签署审核
+     */
+    NeedSignReview?: boolean;
+    /**
+     * 开启发起方发起合同审核
+  true:开启发起方发起合同审核
+  false:不开启发起方发起合同审核
+  默认false:不开启发起方发起合同审核
+     */
+    NeedCreateReview?: boolean;
+    /**
+     * 用户自定义参数
+     */
+    UserData?: string;
+    /**
+     * 合同id,用于通过已web页面发起的合同id快速生成一个web发起合同链接
+     */
+    FlowId?: string;
+    /**
+     * 合同类型名称
+  该字段用于客户自定义合同类型
+  建议使用时指定合同类型，便于之后合同分类以及查看
+     */
+    FlowType?: string;
     /**
      * 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填
      */
@@ -4002,7 +4197,7 @@ export interface UploadFile {
     FileName?: string;
 }
 /**
- * 模板控件信息
+ * 模板/流程中控件信息，可以是填充控件或签署控件
  */
 export interface Component {
     /**
@@ -4030,7 +4225,8 @@ export interface Component {
      */
     ComponentType: string;
     /**
-     * 控件所属文件的序号（取值为：0-N）。目前单文件的情况下，值是0
+     * 控件所属文件的序号（取值为：0-N）。
+  目前单文件的情况下，值是0
      */
     FileIndex: number;
     /**
@@ -4054,19 +4250,21 @@ export interface Component {
      */
     ComponentPosY: number;
     /**
-     * 查询时返回控件唯一Id。使用文件发起合同时用于GenerateMode==KEYWORD 指定关键字
+     * 控件唯一ID。
+  或使用文件发起合同时用于GenerateMode==KEYWORD 指定关键字
      */
     ComponentId?: string;
     /**
-     * 查询时返回控件名。使用文件发起合同时用于GenerateMode==FIELD 指定表单域名称
+     * 控件名。
+  或使用文件发起合同时用于GenerateMode==FIELD 指定表单域名称
      */
     ComponentName?: string;
     /**
-     * 是否必选，默认为false
+     * 是否必选，默认为false-非必选
      */
     ComponentRequired?: boolean;
     /**
-     * 控件关联的签署人ID
+     * 控件关联的参与方ID，对应Recipient结构体中的RecipientId
      */
     ComponentRecipientId?: string;
     /**
@@ -4102,7 +4300,7 @@ export interface Component {
      */
     ComponentExtra?: string;
     /**
-     * 是否是表单域类型，默认不false-不是
+     * 是否是表单域类型，默认false-不是
   注意：此字段可能返回 null，表示取不到有效值。
      */
     IsFormType?: boolean;
@@ -4196,7 +4394,7 @@ export interface Component {
      */
     ComponentDateFontSize?: number;
     /**
-     * 第三方应用集成平台模板控件 id 标识
+     * 第三方应用集成平台模板控件 ID 标识
      */
     ChannelComponentId?: string;
     /**
@@ -4210,26 +4408,50 @@ export interface Component {
      */
     OffsetY?: number;
     /**
-     * 第三方应用集成中子客企业控件来源。0-平台指定；1-用户自定义
+     * 第三方应用集成中子客企业控件来源。
+  0-平台指定；
+  1-用户自定义
      */
     ChannelComponentSource?: number;
     /**
-     * 指定关键字排序规则，Positive-正序，Reverse-倒序。传入Positive时会根据关键字在PDF文件内的顺序进行排列。在指定KeywordIndexes时，0代表在PDF内查找内容时，查找到的第一个关键字。
+     * 指定关键字排序规则，Positive-正序，Reverse-倒序。
+  传入Positive时会根据关键字在PDF文件内的顺序进行排列。在指定KeywordIndexes时，0代表在PDF内查找内容时，查找到的第一个关键字。
   传入Reverse时会根据关键字在PDF文件内的反序进行排列。在指定KeywordIndexes时，0代表在PDF内查找内容时，查找到的最后一个关键字。
      */
     KeywordOrder?: string;
     /**
-     * 指定关键字页码，可选参数，指定页码后，将只在指定的页码内查找关键字，非该页码的关键字将不会查询出来
+     * 指定关键字页码。
+  指定页码后，将只在指定的页码内查找关键字，非该页码的关键字将不会查询出来
      */
     KeywordPage?: number;
     /**
-     * 关键字位置模式，Middle-居中，Below-正下方，Right-正右方，LowerRight-右上角，UpperRight-右下角。示例：如果设置Middle的关键字盖章，则印章的中心会和关键字的中心重合，如果设置Below，则印章在关键字的正下方
+     * 关键字位置模式，
+  Middle-居中，
+  Below-正下方，
+  Right-正右方，
+  LowerRight-右上角，
+  UpperRight-右下角。
+  示例：如果设置Middle的关键字盖章，则印章的中心会和关键字的中心重合，如果设置Below，则印章在关键字的正下方
      */
     RelativeLocation?: string;
     /**
-     * 关键字索引，可选参数，如果一个关键字在PDF文件中存在多个，可以通过关键字索引指定使用第几个关键字作为最后的结果，可指定多个索引。示例：[0,2]，说明使用PDF文件内第1个和第3个关键字位置。
+     * 关键字索引。
+  如果一个关键字在PDF文件中存在多个，可以通过关键字索引指定使用第几个关键字作为最后的结果，可指定多个索引。
+  示例：[0,2]，说明使用PDF文件内第1个和第3个关键字位置。
      */
     KeywordIndexes?: Array<number>;
+    /**
+     * 是否锁定控件值不允许编辑（嵌入式发起使用）
+  <br/>默认false：不锁定控件值，允许在页面编辑控件值
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    LockComponentValue?: boolean;
+    /**
+     * 是否禁止移动和删除控件
+  <br/>默认false，不禁止移动和删除控件
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ForbidMoveAndDelete?: boolean;
 }
 /**
  * 部门信息
@@ -4330,7 +4552,7 @@ export interface CreateFlowRemindsRequest {
  */
 export interface UpdateIntegrationEmployeesRequest {
     /**
-     * 操作人信息，userId必填
+     * 当前用户信息，OpenId与UserId二选一必填一个，OpenId是第三方客户ID，userId是用户实名后的电子签生成的ID,当传入客户系统openId，传入的openId需与电子签员工userId绑定，且参数Channel必填，Channel值为YUFU；
      */
     Operator: UserInfo;
     /**
@@ -4614,6 +4836,25 @@ export interface RelieveInfo {
   
      */
     OtherDeals?: string;
+}
+/**
+ * 个性化参数
+ */
+export interface EmbedUrlOption {
+    /**
+     * 合同详情预览，允许展示控件信息
+  <br/>true：允许在合同详情页展示控件
+  <br/>false：不允许在合同详情页展示控件
+  <br/>默认false，合同详情页不展示控件
+     */
+    ShowFlowDetailComponent?: boolean;
+    /**
+     * 模版预览，允许展示模版控件信息
+  <br/>true：允许在模版预览页展示控件
+  <br/>false：不允许在模版预览页展示控件
+  <br/>默认false，模版预览页不展示控件
+     */
+    ShowTemplateComponent?: boolean;
 }
 /**
  * CreateBatchCancelFlowUrl请求参数结构体

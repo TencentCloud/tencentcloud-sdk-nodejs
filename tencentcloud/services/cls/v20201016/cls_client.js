@@ -525,6 +525,12 @@ cls.pb.cc cls.pb.h cls.proto
         return this.request("DescribeMachineGroupConfigs", req, cb);
     }
     /**
+     * 修改Kafka协议消费信息
+     */
+    async ModifyKafkaConsumer(req, cb) {
+        return this.request("ModifyKafkaConsumer", req, cb);
+    }
+    /**
      * 删除投递COS任务
      */
     async DeleteShipper(req, cb) {
@@ -553,6 +559,12 @@ cls.pb.cc cls.pb.h cls.proto
      */
     async DeleteAlarm(req, cb) {
         return this.request("DeleteAlarm", req, cb);
+    }
+    /**
+     * 获取Kafka协议消费信息
+     */
+    async DescribeKafkaConsumer(req, cb) {
+        return this.request("DescribeKafkaConsumer", req, cb);
     }
     /**
      * 本接口用于搜索日志上下文附近的内容

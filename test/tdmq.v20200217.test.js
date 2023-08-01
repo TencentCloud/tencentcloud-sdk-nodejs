@@ -778,6 +778,16 @@ it("tdmq.v20200217.ModifyEnvironmentRole", async function () {
     }
 })
 
+it("tdmq.v20200217.DescribeRabbitMQVirtualHostList", async function () {
+    try {
+       const data = await client.DescribeRabbitMQVirtualHostList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tdmq.v20200217.DescribeRocketMQClusters", async function () {
     try {
        const data = await client.DescribeRocketMQClusters({})
@@ -988,9 +998,9 @@ it("tdmq.v20200217.ModifyRole", async function () {
     }
 })
 
-it("tdmq.v20200217.DescribeRabbitMQVirtualHostList", async function () {
+it("tdmq.v20200217.CreateRocketMQVipInstance", async function () {
     try {
-       const data = await client.DescribeRabbitMQVirtualHostList({})
+       const data = await client.CreateRocketMQVipInstance({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

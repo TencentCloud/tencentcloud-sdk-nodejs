@@ -776,6 +776,27 @@ export interface TopicIdAndRegion {
     RegionId: number;
 }
 /**
+ * DescribeKafkaConsumer返回参数结构体
+ */
+export interface DescribeKafkaConsumerResponse {
+    /**
+     * Kafka协议消费是否打开
+     */
+    Status?: boolean;
+    /**
+     * KafkaConsumer 消费时使用的Topic参数
+     */
+    TopicID?: string;
+    /**
+     * 压缩方式[0:NONE；2:SNAPPY；3:LZ4]
+     */
+    Compression?: number;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * CreateConfigExtra返回参数结构体
  */
 export interface CreateConfigExtraResponse {
@@ -908,7 +929,7 @@ export interface CallBackInfo {
  */
 export interface OpenKafkaConsumerResponse {
     /**
-     * 待消费TopicId
+     * KafkaConsumer 消费时使用的Topic参数
      */
     TopicID?: string;
     /**
@@ -1879,91 +1900,100 @@ export interface ConfigExtraInfo {
     /**
      * 采集规则扩展配置ID
      */
-    ConfigExtraId: string;
+    ConfigExtraId?: string;
     /**
      * 采集规则名称
      */
-    Name: string;
+    Name?: string;
     /**
      * 日志主题ID
      */
-    TopicId: string;
+    TopicId?: string;
     /**
      * 类型：container_stdout、container_file、host_file
      */
-    Type: string;
+    Type?: string;
     /**
      * 节点文件配置信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    HostFile: HostFileInfo;
+    HostFile?: HostFileInfo;
     /**
      * 容器文件路径信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ContainerFile: ContainerFileInfo;
+    ContainerFile?: ContainerFileInfo;
     /**
      * 容器标准输出信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ContainerStdout: ContainerStdoutInfo;
+    ContainerStdout?: ContainerStdoutInfo;
     /**
      * 日志格式化方式
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    LogFormat: string;
+    LogFormat?: string;
     /**
      * 采集的日志类型，json_log代表json格式日志，delimiter_log代表分隔符格式日志，minimalist_log代表极简日志，multiline_log代表多行日志，fullregex_log代表完整正则，默认为minimalist_log
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    LogType: string;
+    LogType?: string;
     /**
      * 提取规则，如果设置了ExtractRule，则必须设置LogType
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ExtractRule: ExtractRuleInfo;
+    ExtractRule?: ExtractRuleInfo;
     /**
      * 采集黑名单路径列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ExcludePaths: Array<ExcludePathInfo>;
+    ExcludePaths?: Array<ExcludePathInfo>;
     /**
      * 更新时间
      */
-    UpdateTime: string;
+    UpdateTime?: string;
     /**
      * 创建时间
      */
-    CreateTime: string;
+    CreateTime?: string;
     /**
      * 用户自定义解析字符串
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    UserDefineRule: string;
+    UserDefineRule?: string;
     /**
      * 机器组ID
      */
-    GroupId: string;
+    GroupId?: string;
     /**
      * 自建采集配置标
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ConfigFlag: string;
+    ConfigFlag?: string;
     /**
      * 日志集ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    LogsetId: string;
+    LogsetId?: string;
     /**
      * 日志集name
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    LogsetName: string;
+    LogsetName?: string;
     /**
      * 日志主题name
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TopicName: string;
+    TopicName?: string;
+    /**
+     * 高级采集配置。 Json字符串， Key/Value定义为如下：
+  - ClsAgentFileTimeout(超时属性), 取值范围: 大于等于0的整数， 0为不超时
+  - ClsAgentMaxDepth(最大目录深度)，取值范围: 大于等于0的整数
+  - ClsAgentParseFailMerge(合并解析失败日志)，取值范围: true或false
+  样例：{"ClsAgentFileTimeout":0,"ClsAgentMaxDepth":10,"ClsAgentParseFailMerge":true}
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AdvancedConfig?: string;
 }
 /**
  * RetryShipperTask返回参数结构体
@@ -2845,7 +2875,7 @@ export interface ShipperTaskInfo {
  */
 export interface CloseKafkaConsumerRequest {
     /**
-     * CLS对应的topic标识
+     * 日志主题ID
      */
     FromTopicId: string;
 }
@@ -2985,6 +3015,14 @@ export interface ModifyConfigRequest {
      * 用户自定义解析字符串，Json格式序列化的字符串
      */
     UserDefineRule?: string;
+    /**
+     * 高级采集配置。 Json字符串， Key/Value定义为如下：
+  - ClsAgentFileTimeout(超时属性), 取值范围: 大于等于0的整数， 0为不超时
+  - ClsAgentMaxDepth(最大目录深度)，取值范围: 大于等于0的整数
+  - ClsAgentParseFailMerge(合并解析失败日志)，取值范围: true或false
+  样例：{"ClsAgentFileTimeout":0,"ClsAgentMaxDepth":10,"ClsAgentParseFailMerge":true}
+     */
+    AdvancedConfig?: string;
 }
 /**
  * AddMachineGroupInfo请求参数结构体
@@ -3244,7 +3282,11 @@ export interface CreateConfigRequest {
      */
     UserDefineRule?: string;
     /**
-     * 高级采集配置
+     * 高级采集配置。 Json字符串， Key/Value定义为如下：
+  - ClsAgentFileTimeout(超时属性), 取值范围: 大于等于0的整数， 0为不超时
+  - ClsAgentMaxDepth(最大目录深度)，取值范围: 大于等于0的整数
+  - ClsAgentParseFailMerge(合并解析失败日志)，取值范围: true或false
+  样例：{"ClsAgentFileTimeout":0,"ClsAgentMaxDepth":10,"ClsAgentParseFailMerge":true}
      */
     AdvancedConfig?: string;
 }
@@ -3478,6 +3520,19 @@ export interface DeleteShipperResponse {
     RequestId?: string;
 }
 /**
+ * ModifyKafkaConsumer请求参数结构体
+ */
+export interface ModifyKafkaConsumerRequest {
+    /**
+     * 日志主题ID
+     */
+    FromTopicId: string;
+    /**
+     * 压缩方式[0:NONE；2:SNAPPY；3:LZ4]
+     */
+    Compression?: number;
+}
+/**
  * 日志导出信息
  */
 export interface ExportInfo {
@@ -3575,55 +3630,64 @@ export interface ConfigInfo {
     /**
      * 采集规则配置ID
      */
-    ConfigId: string;
+    ConfigId?: string;
     /**
      * 采集规则配置名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Name: string;
+    Name?: string;
     /**
      * 日志格式化方式
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    LogFormat: string;
+    LogFormat?: string;
     /**
      * 日志采集路径
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Path: string;
+    Path?: string;
     /**
      * 采集的日志类型，json_log代表json格式日志，delimiter_log代表分隔符格式日志，minimalist_log代表极简日志，multiline_log代表多行日志，fullregex_log代表完整正则，默认为minimalist_log
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    LogType: string;
+    LogType?: string;
     /**
      * 提取规则，如果设置了ExtractRule，则必须设置LogType
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ExtractRule: ExtractRuleInfo;
+    ExtractRule?: ExtractRuleInfo;
     /**
      * 采集黑名单路径列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ExcludePaths: Array<ExcludePathInfo>;
+    ExcludePaths?: Array<ExcludePathInfo>;
     /**
      * 采集配置所属日志主题ID即TopicId
      */
-    Output: string;
+    Output?: string;
     /**
      * 更新时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    UpdateTime: string;
+    UpdateTime?: string;
     /**
      * 创建时间
      */
-    CreateTime: string;
+    CreateTime?: string;
     /**
      * 用户自定义解析字符串
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    UserDefineRule: string;
+    UserDefineRule?: string;
+    /**
+     * 高级采集配置。 Json字符串， Key/Value定义为如下：
+  - ClsAgentFileTimeout(超时属性), 取值范围: 大于等于0的整数， 0为不超时
+  - ClsAgentMaxDepth(最大目录深度)，取值范围: 大于等于0的整数
+  - ClsAgentParseFailMerge(合并解析失败日志)，取值范围: true或false
+  样例：{"ClsAgentFileTimeout":0,"ClsAgentMaxDepth":10,"ClsAgentParseFailMerge":true}
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AdvancedConfig?: string;
 }
 /**
  * DeleteExport请求参数结构体
@@ -3963,6 +4027,14 @@ export interface CreateConfigExtraRequest {
      * 绑定的机器组id列表
      */
     GroupIds?: Array<string>;
+    /**
+     * 高级采集配置。 Json字符串， Key/Value定义为如下：
+  - ClsAgentFileTimeout(超时属性), 取值范围: 大于等于0的整数， 0为不超时
+  - ClsAgentMaxDepth(最大目录深度)，取值范围: 大于等于0的整数
+  - ClsAgentParseFailMerge(合并解析失败日志)，取值范围: true或false
+  样例：{"ClsAgentFileTimeout":0,"ClsAgentMaxDepth":10,"ClsAgentParseFailMerge":true}
+     */
+    AdvancedConfig?: string;
 }
 /**
  * CreateConsumer请求参数结构体
@@ -4057,7 +4129,7 @@ export interface ModifyConfigResponse {
  */
 export interface OpenKafkaConsumerRequest {
     /**
-     * CLS控制台创建的TopicId
+     * 日志主题ID
      */
     FromTopicId: string;
     /**
@@ -4308,6 +4380,15 @@ export interface CreateConfigResponse {
      * 采集配置ID
      */
     ConfigId?: string;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * ModifyKafkaConsumer返回参数结构体
+ */
+export interface ModifyKafkaConsumerResponse {
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -5218,6 +5299,14 @@ export interface ModifyConfigExtraRequest {
      * 日志主题name
      */
     TopicName?: string;
+    /**
+     * 高级采集配置。 Json字符串， Key/Value定义为如下：
+  - ClsAgentFileTimeout(超时属性), 取值范围: 大于等于0的整数， 0为不超时
+  - ClsAgentMaxDepth(最大目录深度)，取值范围: 大于等于0的整数
+  - ClsAgentParseFailMerge(合并解析失败日志)，取值范围: true或false
+  样例：{"ClsAgentFileTimeout":0,"ClsAgentMaxDepth":10,"ClsAgentParseFailMerge":true}
+     */
+    AdvancedConfig?: string;
 }
 /**
  * ModifyKafkaRecharge请求参数结构体
@@ -5488,6 +5577,15 @@ export interface CosRechargeInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     ExtractRuleInfo: ExtractRuleInfo;
+}
+/**
+ * DescribeKafkaConsumer请求参数结构体
+ */
+export interface DescribeKafkaConsumerRequest {
+    /**
+     * 日志主题ID
+     */
+    FromTopicId: string;
 }
 /**
  * ModifyDataTransform返回参数结构体

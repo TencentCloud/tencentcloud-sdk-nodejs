@@ -696,15 +696,15 @@ export interface GetDevicesResponse {
   /**
    * 设备信息列表
    */
-  DeviceInfos: Array<DeviceBaseInfo>
+  DeviceInfos?: Array<DeviceBaseInfo>
   /**
    * 设备总记录条数
    */
-  Length: number
+  Length?: number
   /**
    * 总页数
    */
-  TotalPage: number
+  TotalPage?: number
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -823,6 +823,13 @@ export interface GetDevicesRequest {
    * 搜索设备的关键字（ID或者设备名），为空时匹配所有设备
    */
   Keyword?: string
+  /**
+   * DeviceType
+不传：返回所有设备；
+1:自有设备；
+2:三方设备
+   */
+  DeviceType?: number
 }
 
 /**

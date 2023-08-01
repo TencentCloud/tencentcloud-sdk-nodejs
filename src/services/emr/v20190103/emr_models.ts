@@ -5227,6 +5227,11 @@ export interface NodeHardwareInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TradeVersion?: number
+  /**
+   * 各组件状态，Zookeeper:STARTED,ResourceManager:STARTED，STARTED已启动，STOPED已停止
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ServicesStatus?: string
 }
 
 /**

@@ -173,7 +173,7 @@ export interface CreateLoadBalancerRequest {
      */
     SubnetId?: string;
     /**
-     * 负载均衡实例所属的项目 ID，可以通过 [DescribeProject](https://cloud.tencent.com/document/product/378/4400) 接口获取。不填此参数则视为默认项目。
+     * 负载均衡实例所属的项目 ID，可以通过 [DescribeProject](https://cloud.tencent.com/document/api/651/78725) 接口获取。不填此参数则视为默认项目。
      */
     ProjectId?: number;
     /**
@@ -198,7 +198,7 @@ export interface CreateLoadBalancerRequest {
      */
     InternetAccessible?: InternetAccessible;
     /**
-     * 仅适用于公网负载均衡。CMCC | CTCC | CUCC，分别对应 移动 | 电信 | 联通，如果不指定本参数，则默认使用BGP。可通过 DescribeSingleIsp 接口查询一个地域所支持的Isp。如果指定运营商，则网络计费式只能使用按带宽包计费(BANDWIDTH_PACKAGE)。
+     * 仅适用于公网负载均衡。CMCC | CTCC | CUCC，分别对应 移动 | 电信 | 联通，如果不指定本参数，则默认使用BGP。可通过 [DescribeResources](https://cloud.tencent.com/document/api/214/70213)  接口查询一个地域所支持的Isp。如果指定运营商，则网络计费式只能使用按带宽包计费(BANDWIDTH_PACKAGE)。
      */
     VipIsp?: string;
     /**
@@ -348,7 +348,7 @@ export interface CloneLoadBalancerRequest {
      */
     InternetAccessible?: InternetAccessible;
     /**
-     * 仅适用于公网负载均衡。CMCC | CTCC | CUCC，分别对应 移动 | 电信 | 联通，如果不指定本参数，则默认使用BGP。可通过 DescribeSingleIsp 接口查询一个地域所支持的Isp。如果指定运营商，则网络计费式只能使用按带宽包计费(BANDWIDTH_PACKAGE)。
+     * 仅适用于公网负载均衡。CMCC | CTCC | CUCC，分别对应 移动 | 电信 | 联通，如果不指定本参数，则默认使用BGP。可通过 [DescribeResources](https://cloud.tencent.com/document/api/214/70213)  接口查询一个地域所支持的Isp。如果指定运营商，则网络计费式只能使用按带宽包计费(BANDWIDTH_PACKAGE)。
      */
     VipIsp?: string;
     /**
@@ -622,7 +622,7 @@ export interface DescribeLoadBalancersRequest {
      */
     LoadBalancerName?: string;
     /**
-     * 腾讯云为负载均衡实例分配的域名，本参数仅对传统型公网负载均衡才有意义。
+     * 腾讯云为负载均衡实例分配的域名。
      */
     Domain?: string;
     /**
@@ -1901,11 +1901,11 @@ export interface ModifyListenerRequest {
      */
     SessionExpireTime?: number;
     /**
-     * 健康检查相关参数，此参数仅适用于TCP/UDP/TCP_SSL监听器。
+     * 健康检查相关参数，此参数仅适用于TCP/UDP/TCP_SSL/QUIC监听器。
      */
     HealthCheck?: HealthCheck;
     /**
-     * 证书相关信息，此参数仅适用于HTTPS/TCP_SSL监听器；此参数和MultiCertInfo不能同时传入。
+     * 证书相关信息，此参数仅适用于HTTPS/TCP_SSL/QUIC监听器；此参数和MultiCertInfo不能同时传入。
      */
     Certificate?: CertificateInput;
     /**
@@ -2060,17 +2060,17 @@ export interface HealthCheck {
      */
     RecvContext?: string;
     /**
-     * 自定义探测相关参数。健康检查使用的协议：TCP | HTTP | CUSTOM（仅适用于TCP/UDP监听器，其中UDP监听器只支持CUSTOM；如果使用自定义健康检查功能，则必传）。
+     * 健康检查使用的协议。取值 TCP | HTTP | HTTPS | GRPC | PING | CUSTOM，UDP监听器支持PING/CUSTOM，TCP监听器支持TCP/HTTP/CUSTOM，TCP_SSL/QUIC监听器支持TCP/HTTP，HTTP规则支持HTTP/GRPC，HTTPS规则支持HTTP/HTTPS/GRPC。
   注意：此字段可能返回 null，表示取不到有效值。
      */
     CheckType?: string;
     /**
-     * 自定义探测相关参数。健康检查协议CheckType的值取HTTP时，必传此字段，代表后端服务的HTTP版本：HTTP/1.0、HTTP/1.1；（仅适用于TCP监听器）
+     * HTTP版本。健康检查协议CheckType的值取HTTP时，必传此字段，代表后端服务的HTTP版本：HTTP/1.0、HTTP/1.1；（仅适用于TCP监听器）
   注意：此字段可能返回 null，表示取不到有效值。
      */
     HttpVersion?: string;
     /**
-     * 自定义探测相关参数。健康检查源IP类型：0（使用LB的VIP作为源IP），1（使用100.64网段IP作为源IP），默认值：0
+     * 健康检查源IP类型：0（使用LB的VIP作为源IP），1（使用100.64网段IP作为源IP），默认值：0
   注意：此字段可能返回 null，表示取不到有效值。
      */
     SourceIpType?: number;
@@ -2537,7 +2537,7 @@ export interface DescribeListenersRequest {
      */
     ListenerIds?: Array<string>;
     /**
-     * 要查询的监听器协议类型，取值 TCP | UDP | HTTP | HTTPS | TCP_SSL。
+     * 要查询的监听器协议类型，取值 TCP | UDP | HTTP | HTTPS | TCP_SSL | QUIC。
      */
     Protocol?: string;
     /**
@@ -2837,12 +2837,12 @@ export interface DescribeListenersResponse {
     /**
      * 监听器列表。
      */
-    Listeners: Array<Listener>;
+    Listeners?: Array<Listener>;
     /**
      * 总的监听器个数（根据端口、协议、监听器ID过滤后）。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -3246,7 +3246,7 @@ export interface CreateListenerRequest {
      */
     ListenerNames?: Array<string>;
     /**
-     * 健康检查相关参数，此参数仅适用于TCP/UDP/TCP_SSL监听器。
+     * 健康检查相关参数，此参数仅适用于TCP/UDP/TCP_SSL/QUIC监听器。
      */
     HealthCheck?: HealthCheck;
     /**
@@ -3259,7 +3259,7 @@ export interface CreateListenerRequest {
     SessionExpireTime?: number;
     /**
      * 监听器转发的方式。可选值：WRR、LEAST_CONN
-  分别表示按权重轮询、最小连接数， 默认为 WRR。此参数仅适用于TCP/UDP/TCP_SSL监听器。
+  分别表示按权重轮询、最小连接数， 默认为 WRR。此参数仅适用于TCP/UDP/TCP_SSL/QUIC监听器。
      */
     Scheduler?: string;
     /**
@@ -4727,11 +4727,11 @@ export interface DescribeLoadBalancersResponse {
     /**
      * 满足过滤条件的负载均衡实例总数。此数值与入参中的Limit无关。
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 返回的负载均衡实例数组。
      */
-    LoadBalancerSet: Array<LoadBalancer>;
+    LoadBalancerSet?: Array<LoadBalancer>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */

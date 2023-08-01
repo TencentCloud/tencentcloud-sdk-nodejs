@@ -505,6 +505,12 @@ BatchReceivePolicy 的接口会一次性返回多条消息：
         return this.request("ModifyEnvironmentRole", req, cb);
     }
     /**
+     * RabbitMQ专享版查询虚拟主机列表
+     */
+    async DescribeRabbitMQVirtualHostList(req, cb) {
+        return this.request("DescribeRabbitMQVirtualHostList", req, cb);
+    }
+    /**
      * 获取RocketMQ集群列表
      */
     async DescribeRocketMQClusters(req, cb) {
@@ -633,10 +639,10 @@ BatchReceivePolicy 的接口会一次性返回多条消息：
         return this.request("ModifyRole", req, cb);
     }
     /**
-     * RabbitMQ专享版查询虚拟主机列表
+     * 创建RocketMQ专享实例
      */
-    async DescribeRabbitMQVirtualHostList(req, cb) {
-        return this.request("DescribeRabbitMQVirtualHostList", req, cb);
+    async CreateRocketMQVipInstance(req, cb) {
+        return this.request("CreateRocketMQVipInstance", req, cb);
     }
     /**
      * 获取某个租户的虚拟集群列表

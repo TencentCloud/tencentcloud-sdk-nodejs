@@ -372,6 +372,7 @@ import {
   DescribeRecordTaskResponse,
   DescribeAreaBillBandwidthAndFluxListResponse,
   ForbidLiveDomainRequest,
+  MixPortraitSegmentParams,
   RecordParam,
   ModifyLiveRecordTemplateRequest,
   DescribeLiveDomainRefererRequest,

@@ -340,8 +340,18 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 通过此接口（DescribeTemplates）查询该第三方平台子客企业在电子签拥有的有效模板，不包括第三方平台模板
-   */
+     * 通过此接口（DescribeTemplates）查询该第三方平台子客企业在电子签拥有的有效模板，不包括第三方平台模板。
+
+> **适用场景** 
+>
+>  该接口常用来配合“使用模板创建签署流程”接口作为前置的接口使用。 
+>  一个模板通常会包含以下结构信息
+>- 模板基本信息
+>- 发起方参与信息Promoter、签署参与方 Recipients，后者会在模板发起合同时用于指定参与方
+>- 填写控件 Components
+>- 签署控件 SignComponents
+>- 生成模板的文件基础信息 FileInfos
+     */
   async DescribeTemplates(
     req: DescribeTemplatesRequest,
     cb?: (error: string, rep: DescribeTemplatesResponse) => void
@@ -437,8 +447,9 @@ https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/launchAp
   }
 
   /**
-   * 通过发起转换任务接口（ChannelCreateConvertTaskApi）返回的任务Id查询转换任务状态，通过本接口确认转换任务是否完成。大文件转换所需的时间可能会比较长。
-   */
+     * 查询转换任务的状态。转换任务Id通过发起转换任务接口（ChannelCreateConvertTaskApi）获取。
+注意：大文件转换所需的时间可能会比较长。
+     */
   async ChannelGetTaskResultApi(
     req: ChannelGetTaskResultApiRequest,
     cb?: (error: string, rep: ChannelGetTaskResultApiResponse) => void

@@ -59,6 +59,7 @@ import {
   CmqSubscription,
   DeleteRocketMQGroupRequest,
   RocketMQGroup,
+  VpcInfo,
   ModifyRabbitMQUserRequest,
   RabbitMQClusterWhiteListInfo,
   DeleteCmqTopicResponse,
@@ -99,7 +100,7 @@ import {
   ModifyClusterRequest,
   DescribeEnvironmentAttributesRequest,
   ModifyRocketMQClusterRequest,
-  DeleteRabbitMQVirtualHostResponse,
+  CreateRocketMQVipInstanceResponse,
   AcknowledgeMessageRequest,
   ResetRocketMQConsumerOffSetResponse,
   DescribeRocketMQVipInstanceDetailResponse,
@@ -153,6 +154,7 @@ import {
   CreateRocketMQGroupResponse,
   ModifyRocketMQNamespaceRequest,
   DescribeEnvironmentRolesRequest,
+  DescribeRocketMQClustersResponse,
   DeleteRolesResponse,
   EnvironmentRoleSet,
   RocketMQClusterRecentStats,
@@ -185,9 +187,10 @@ import {
   VirtualHostQuota,
   AMQPClusterInfo,
   ModifyRocketMQInstanceSpecResponse,
+  DescribePulsarProInstancesRequest,
   DescribeRocketMQVipInstancesRequest,
   DescribeRocketMQVipInstanceDetailRequest,
-  DeleteRabbitMQVirtualHostRequest,
+  CreateRocketMQVipInstanceRequest,
   DeleteRocketMQClusterResponse,
   RabbitMQClusterInfo,
   CreateCmqTopicResponse,
@@ -225,7 +228,7 @@ import {
   SendMsgRequest,
   ResetRocketMQConsumerOffSetRequest,
   DescribeCmqQueueDetailRequest,
-  DescribePulsarProInstancesRequest,
+  DeleteRabbitMQVirtualHostRequest,
   CreateRocketMQTopicRequest,
   QueueQuota,
   CreateRoleResponse,
@@ -235,7 +238,7 @@ import {
   ClearCmqQueueResponse,
   ModifyRabbitMQUserResponse,
   DescribeNodeHealthOptRequest,
-  DescribeBindClustersRequest,
+  DeleteRabbitMQVirtualHostResponse,
   CreateRocketMQTopicResponse,
   CreateRabbitMQVirtualHostRequest,
   EnvironmentRole,
@@ -244,7 +247,7 @@ import {
   DeleteCmqQueueRequest,
   DeleteRabbitMQUserResponse,
   DescribeRabbitMQVirtualHostListResponse,
-  DescribeRocketMQClustersResponse,
+  DescribeBindClustersRequest,
   DescribePulsarProInstanceDetailRequest,
   CreateRabbitMQUserRequest,
   CreateRoleRequest,
@@ -1076,6 +1079,16 @@ BatchReceivePolicy 的接口会一次性返回多条消息：
   }
 
   /**
+   * RabbitMQ专享版查询虚拟主机列表
+   */
+  async DescribeRabbitMQVirtualHostList(
+    req: DescribeRabbitMQVirtualHostListRequest,
+    cb?: (error: string, rep: DescribeRabbitMQVirtualHostListResponse) => void
+  ): Promise<DescribeRabbitMQVirtualHostListResponse> {
+    return this.request("DescribeRabbitMQVirtualHostList", req, cb)
+  }
+
+  /**
    * 获取RocketMQ集群列表
    */
   async DescribeRocketMQClusters(
@@ -1288,13 +1301,13 @@ BatchReceivePolicy 的接口会一次性返回多条消息：
   }
 
   /**
-   * RabbitMQ专享版查询虚拟主机列表
+   * 创建RocketMQ专享实例
    */
-  async DescribeRabbitMQVirtualHostList(
-    req: DescribeRabbitMQVirtualHostListRequest,
-    cb?: (error: string, rep: DescribeRabbitMQVirtualHostListResponse) => void
-  ): Promise<DescribeRabbitMQVirtualHostListResponse> {
-    return this.request("DescribeRabbitMQVirtualHostList", req, cb)
+  async CreateRocketMQVipInstance(
+    req: CreateRocketMQVipInstanceRequest,
+    cb?: (error: string, rep: CreateRocketMQVipInstanceResponse) => void
+  ): Promise<CreateRocketMQVipInstanceResponse> {
+    return this.request("CreateRocketMQVipInstance", req, cb)
   }
 
   /**
