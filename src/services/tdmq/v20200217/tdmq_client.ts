@@ -40,7 +40,7 @@ import {
   DescribeRocketMQNamespacesResponse,
   ModifyRocketMQInstanceSpecRequest,
   BindCluster,
-  Sort,
+  ModifyRoleResponse,
   ModifyClusterResponse,
   SendRocketMQMessageRequest,
   RabbitMQPrivateVirtualHost,
@@ -65,6 +65,7 @@ import {
   DeleteCmqTopicResponse,
   CreateSubscriptionRequest,
   CreateRocketMQNamespaceRequest,
+  Topic,
   RabbitMQVirtualHostInfo,
   InstanceNodeDistribution,
   ExchangeQuota,
@@ -77,7 +78,7 @@ import {
   SendMsgResponse,
   ModifyCmqTopicAttributeResponse,
   DescribeCmqSubscriptionDetailRequest,
-  Topic,
+  DescribePublisherSummaryResponse,
   DescribeEnvironmentsRequest,
   DescribeRocketMQNamespacesRequest,
   DescribeRocketMQTopicsRequest,
@@ -85,13 +86,13 @@ import {
   Subscription,
   DescribeCmqQueueDetailResponse,
   CreateEnvironmentRequest,
-  DeleteTopicsResponse,
+  ClearCmqQueueRequest,
   ModifyEnvironmentAttributesResponse,
   DescribeClustersRequest,
   SubscriptionTopic,
   RocketMQTopic,
   DescribeRocketMQClusterResponse,
-  DescribePublisherSummaryResponse,
+  DeleteRocketMQVipInstanceResponse,
   DescribeCmqSubscriptionDetailResponse,
   VpcBindRecord,
   RewindCmqQueueRequest,
@@ -111,7 +112,7 @@ import {
   AcknowledgeMessageResponse,
   DeleteEnvironmentRolesResponse,
   DescribeClusterDetailRequest,
-  ModifyRoleResponse,
+  ModifyRoleRequest,
   Tag,
   DeleteCmqQueueResponse,
   DescribeRocketMQClusterRequest,
@@ -125,7 +126,7 @@ import {
   Publisher,
   DescribeSubscriptionsResponse,
   RocketMQMessageTrack,
-  ModifyRoleRequest,
+  DeleteRocketMQVipInstanceRequest,
   DescribeRocketMQMsgRequest,
   SendMessagesResponse,
   ReceiveMessageRequest,
@@ -134,7 +135,6 @@ import {
   DeleteEnvironmentsResponse,
   ModifyAMQPClusterRequest,
   DescribeEnvironmentRolesResponse,
-  ClearCmqQueueRequest,
   ModifyRocketMQGroupRequest,
   FilterSubscription,
   DescribeCmqTopicsResponse,
@@ -143,7 +143,7 @@ import {
   UnbindCmqDeadLetterResponse,
   ModifyRocketMQNamespaceResponse,
   InternalTenant,
-  SendCmqMsgRequest,
+  DescribePulsarProInstancesRequest,
   DeleteEnvironmentsRequest,
   DescribeRocketMQClustersRequest,
   DescribeBindVpcsRequest,
@@ -157,6 +157,7 @@ import {
   DescribeRocketMQClustersResponse,
   DeleteRolesResponse,
   EnvironmentRoleSet,
+  VpcConfig,
   RocketMQClusterRecentStats,
   ModifyRocketMQTopicRequest,
   RocketMQClusterInfo,
@@ -187,7 +188,7 @@ import {
   VirtualHostQuota,
   AMQPClusterInfo,
   ModifyRocketMQInstanceSpecResponse,
-  DescribePulsarProInstancesRequest,
+  DeleteTopicsResponse,
   DescribeRocketMQVipInstancesRequest,
   DescribeRocketMQVipInstanceDetailRequest,
   CreateRocketMQVipInstanceRequest,
@@ -201,6 +202,7 @@ import {
   PulsarProClusterSpecInfo,
   DescribeCmqTopicsRequest,
   Filter,
+  Sort,
   DeleteTopicsRequest,
   CmqTransactionPolicy,
   BundleSetOpt,
@@ -274,7 +276,7 @@ import {
   DeleteRabbitMQVipInstanceRequest,
   DescribePublisherSummaryRequest,
   DeleteSubscriptionsRequest,
-  VpcConfig,
+  SendCmqMsgRequest,
   PulsarProClusterInfo,
   ModifyRocketMQGroupResponse,
   DescribeRocketMQVipInstancesResponse,
@@ -1258,6 +1260,16 @@ BatchReceivePolicy 的接口会一次性返回多条消息：
     cb?: (error: string, rep: SendMsgResponse) => void
   ): Promise<SendMsgResponse> {
     return this.request("SendMsg", req, cb)
+  }
+
+  /**
+   * 删除RocketMQ专享实例
+   */
+  async DeleteRocketMQVipInstance(
+    req: DeleteRocketMQVipInstanceRequest,
+    cb?: (error: string, rep: DeleteRocketMQVipInstanceResponse) => void
+  ): Promise<DeleteRocketMQVipInstanceResponse> {
+    return this.request("DeleteRocketMQVipInstance", req, cb)
   }
 
   /**

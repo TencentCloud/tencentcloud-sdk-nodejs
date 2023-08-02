@@ -54,7 +54,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeUrlDetectionResult(req: DescribeUrlDetectionResultRequest, cb?: (error: string, rep: DescribeUrlDetectionResultResponse) => void): Promise<DescribeUrlDetectionResultResponse>;
     /**
-     * 该接口供渠道合作应用加固使用，接口调用有白名单用户限制，取消渠道合作加固中的任务。
+     * 上错服务器了
+
+该接口供渠道合作应用加固使用，接口调用有白名单用户限制，取消渠道合作加固中的任务。
      */
     CancelEncryptTask(req: CancelEncryptTaskRequest, cb?: (error: string, rep: CancelEncryptTaskResponse) => void): Promise<CancelEncryptTaskResponse>;
     /**
@@ -66,11 +68,15 @@ export declare class Client extends AbstractClient {
      */
     DescribeApkDetectionResult(req: DescribeApkDetectionResultRequest, cb?: (error: string, rep: DescribeApkDetectionResultResponse) => void): Promise<DescribeApkDetectionResultResponse>;
     /**
-     * 该接口供渠道合作应用加固使用，接口调用有白名单用户限制，用于查询加固任务，入参中的条件过滤字段均为精准匹配。支持功能点：1. 多任务分页查询  2.根据任务Id唯一值查询单记录
+     * 上错服务器了
+
+该接口供渠道合作应用加固使用，接口调用有白名单用户限制，用于查询加固任务，入参中的条件过滤字段均为精准匹配。支持功能点：1. 多任务分页查询  2.根据任务Id唯一值查询单记录
      */
     DescribeEncryptInstances(req: DescribeEncryptInstancesRequest, cb?: (error: string, rep: DescribeEncryptInstancesResponse) => void): Promise<DescribeEncryptInstancesResponse>;
     /**
-     * 该接口供渠道合作应用加固使用，接口调用有白名单用户限制，用于创建加固任务。
+     * 上错服务器了
+
+该接口供渠道合作应用加固使用，接口调用有白名单用户限制，用于创建加固任务。
      */
     CreateEncryptInstance(req: CreateEncryptInstanceRequest, cb?: (error: string, rep: CreateEncryptInstanceResponse) => void): Promise<CreateEncryptInstanceResponse>;
     /**
@@ -78,7 +84,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeEncryptPlan(req: DescribeEncryptPlanRequest, cb?: (error: string, rep: DescribeEncryptPlanResponse) => void): Promise<DescribeEncryptPlanResponse>;
     /**
-     * 该接口供渠道合作应用加固使用，接口调用有白名单用户限制。 接口返回的结果为：创建订单后，订单审批状态信息，以及与订单关联的资源状态等信息，入参中的条件过滤字段均为精准匹配。
+     * 上错服务器了
+
+该接口供渠道合作应用加固使用，接口调用有白名单用户限制。 接口返回的结果为：创建订单后，订单审批状态信息，以及与订单关联的资源状态等信息，入参中的条件过滤字段均为精准匹配。
 接口功能点：
 1.支持多订单分页查询；
 2.支持唯一订单号精准匹配查询；
@@ -86,7 +94,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeOrderInstances(req: DescribeOrderInstancesRequest, cb?: (error: string, rep: DescribeOrderInstancesResponse) => void): Promise<DescribeOrderInstancesResponse>;
     /**
-     * 该接口供渠道合作应用加固使用，接口调用有白名单用户限制。
+     * 上错服务器了
+
+该接口供渠道合作应用加固使用，接口调用有白名单用户限制。
 订单类型有：免费试用、按年收费、按次收费。
 应用加固支持的平台类型有：android加固 、ios源码混淆 、sdk加固、applet小程序加固。
      */

@@ -34,16 +34,106 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeClusterRoles", req, cb);
     }
     /**
-     * 查询GooseFS集群客户端凭证
+     * 删除文件系统
      */
-    async DescribeClusterClientToken(req, cb) {
-        return this.request("DescribeClusterClientToken", req, cb);
+    async DeleteFileSystem(req, cb) {
+        return this.request("DeleteFileSystem", req, cb);
+    }
+    /**
+     * 为客户端节点添加跨vpc或子网访问能力
+     */
+    async AddCrossVpcSubnetSupportForClientNode(req, cb) {
+        return this.request("AddCrossVpcSubnetSupportForClientNode", req, cb);
+    }
+    /**
+     * 批量添加客户端节点
+     */
+    async BatchAddClientNodes(req, cb) {
+        return this.request("BatchAddClientNodes", req, cb);
+    }
+    /**
+     * 解绑文件系统与Bucket的映射
+     */
+    async DetachFileSystemBucket(req, cb) {
+        return this.request("DetachFileSystemBucket", req, cb);
+    }
+    /**
+     * 列出所有的文件系统
+     */
+    async DescribeFileSystems(req, cb) {
+        return this.request("DescribeFileSystems", req, cb);
+    }
+    /**
+     * 查询数据流动带宽
+     */
+    async QueryDataRepositoryBandwidth(req, cb) {
+        return this.request("QueryDataRepositoryBandwidth", req, cb);
+    }
+    /**
+     * 罗列文件系统关联的Bucket映射
+     */
+    async DescribeFileSystemBuckets(req, cb) {
+        return this.request("DescribeFileSystemBuckets", req, cb);
+    }
+    /**
+     * 列出集群中所有的客户端节点
+     */
+    async DescribeClientNodes(req, cb) {
+        return this.request("DescribeClientNodes", req, cb);
     }
     /**
      * 获取数据流通任务实时状态，用作客户端控制
      */
     async DescribeDataRepositoryTaskStatus(req, cb) {
         return this.request("DescribeDataRepositoryTaskStatus", req, cb);
+    }
+    /**
+     * 为客户端节点删除跨vpc子网访问能力
+     */
+    async DeleteCrossVpcSubnetSupportForClientNode(req, cb) {
+        return this.request("DeleteCrossVpcSubnetSupportForClientNode", req, cb);
+    }
+    /**
+     * 修改数据流动带宽
+     */
+    async ModifyDataRepositoryBandwidth(req, cb) {
+        return this.request("ModifyDataRepositoryBandwidth", req, cb);
+    }
+    /**
+     * 为文件系统关联Bucket
+     */
+    async AttachFileSystemBucket(req, cb) {
+        return this.request("AttachFileSystemBucket", req, cb);
+    }
+    /**
+     * 批量删除客户端节点
+     */
+    async BatchDeleteClientNodes(req, cb) {
+        return this.request("BatchDeleteClientNodes", req, cb);
+    }
+    /**
+     * 查询客户端节点跨vpc子网访问能力
+     */
+    async QueryCrossVpcSubnetSupportForClientNode(req, cb) {
+        return this.request("QueryCrossVpcSubnetSupportForClientNode", req, cb);
+    }
+    /**
+     * 查询GooseFS集群客户端凭证
+     */
+    async DescribeClusterClientToken(req, cb) {
+        return this.request("DescribeClusterClientToken", req, cb);
+    }
+    /**
+     * 创建文件系统
+     */
+    async CreateFileSystem(req, cb) {
+        return this.request("CreateFileSystem", req, cb);
+    }
+    /**
+     * 扩展文件系统容量
+     */
+    async ExpandCapacity(req, cb) {
+        return this.request("ExpandCapacity", req, cb);
     }
     /**
      * 查询GooseFS集群角色凭证

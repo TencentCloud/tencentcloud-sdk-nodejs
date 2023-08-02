@@ -400,6 +400,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("RevokeAccountPrivileges", req, cb);
     }
     /**
+     * 开启只读实例组接入
+     */
+    async OpenClusterReadOnlyInstanceGroupAccess(req, cb) {
+        return this.request("OpenClusterReadOnlyInstanceGroupAccess", req, cb);
+    }
+    /**
      * 本接口(SearchClusterTables)搜索集群数据表列表
      */
     async SearchClusterTables(req, cb) {

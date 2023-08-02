@@ -1305,17 +1305,77 @@ export interface DescribeFlowResponse {
     RequestId?: string;
 }
 /**
- * SetRenewFlag返回参数结构体
+ * 实例参数详细描述
  */
-export interface SetRenewFlagResponse {
+export interface ParamDetail {
     /**
-     * 操作成功实例数
+     * 参数名称
      */
-    Count: number;
+    ParamName: string;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     * 参数类型：integer，enum，float，string，func
      */
-    RequestId?: string;
+    ParamType: string;
+    /**
+     * true-支持"func"，false-不支持公式
+     */
+    SupportFunc: boolean;
+    /**
+     * 默认值
+     */
+    Default: string;
+    /**
+     * 参数描述
+     */
+    Description: string;
+    /**
+     * 参数当前值
+     */
+    CurrentValue: string;
+    /**
+     * 修改参数后，是否需要重启数据库以使参数生效。0-不需要重启，1-需要重启。
+     */
+    NeedReboot: number;
+    /**
+     * 参数容许的最大值
+     */
+    Max: string;
+    /**
+     * 参数容许的最小值
+     */
+    Min: string;
+    /**
+     * 参数的可选枚举值。如果为非枚举值，则为空
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    EnumValue: Array<string>;
+    /**
+     * 1：全局参数，0：非全局参数
+     */
+    IsGlobal: number;
+    /**
+     * 匹配类型，multiVal
+     */
+    MatchType: string;
+    /**
+     * 匹配目标值，当multiVal时，各个key用，分割
+     */
+    MatchValue: string;
+    /**
+     * true-为公式，false-非公式
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IsFunc: boolean;
+    /**
+     * 参数设置为公式时，Func返回设置的公式内容
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Func: string;
+    /**
+     * 参数是否可修改
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ModifiableInfo: ModifiableInfo;
 }
 /**
  * DescribeResourcePackageSaleSpec请求参数结构体
@@ -2400,13 +2460,13 @@ export interface IsolateInstanceRequest {
     DbType?: string;
 }
 /**
- * SwitchClusterVpc返回参数结构体
+ * SetRenewFlag返回参数结构体
  */
-export interface SwitchClusterVpcResponse {
+export interface SetRenewFlagResponse {
     /**
-     * 异步任务id。
+     * 操作成功实例数
      */
-    FlowId: number;
+    Count: number;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2420,6 +2480,19 @@ export interface DescribeClusterDetailRequest {
      * 集群Id
      */
     ClusterId: string;
+}
+/**
+ * SwitchClusterVpc返回参数结构体
+ */
+export interface SwitchClusterVpcResponse {
+    /**
+     * 异步任务id。
+     */
+    FlowId: number;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * SearchClusterTables请求参数结构体
@@ -2549,77 +2622,13 @@ export interface PauseServerlessResponse {
     RequestId?: string;
 }
 /**
- * 实例参数详细描述
+ * OpenClusterReadOnlyInstanceGroupAccess返回参数结构体
  */
-export interface ParamDetail {
+export interface OpenClusterReadOnlyInstanceGroupAccessResponse {
     /**
-     * 参数名称
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
-    ParamName: string;
-    /**
-     * 参数类型：integer，enum，float，string，func
-     */
-    ParamType: string;
-    /**
-     * true-支持"func"，false-不支持公式
-     */
-    SupportFunc: boolean;
-    /**
-     * 默认值
-     */
-    Default: string;
-    /**
-     * 参数描述
-     */
-    Description: string;
-    /**
-     * 参数当前值
-     */
-    CurrentValue: string;
-    /**
-     * 修改参数后，是否需要重启数据库以使参数生效。0-不需要重启，1-需要重启。
-     */
-    NeedReboot: number;
-    /**
-     * 参数容许的最大值
-     */
-    Max: string;
-    /**
-     * 参数容许的最小值
-     */
-    Min: string;
-    /**
-     * 参数的可选枚举值。如果为非枚举值，则为空
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    EnumValue: Array<string>;
-    /**
-     * 1：全局参数，0：非全局参数
-     */
-    IsGlobal: number;
-    /**
-     * 匹配类型，multiVal
-     */
-    MatchType: string;
-    /**
-     * 匹配目标值，当multiVal时，各个key用，分割
-     */
-    MatchValue: string;
-    /**
-     * true-为公式，false-非公式
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    IsFunc: boolean;
-    /**
-     * 参数设置为公式时，Func返回设置的公式内容
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Func: string;
-    /**
-     * 参数是否可修改
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ModifiableInfo: ModifiableInfo;
+    RequestId?: string;
 }
 /**
  * DescribeAuditRuleWithInstanceIds返回参数结构体
@@ -5842,6 +5851,10 @@ export interface CreateParamTemplateRequest {
      */
     ParamList?: Array<ParamItem>;
 }
+/**
+ * OpenClusterReadOnlyInstanceGroupAccess请求参数结构体
+ */
+export declare type OpenClusterReadOnlyInstanceGroupAccessRequest = null;
 /**
  * DescribeAuditRuleTemplates请求参数结构体
  */

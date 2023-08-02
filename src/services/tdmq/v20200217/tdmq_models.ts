@@ -576,17 +576,21 @@ export interface BindCluster {
 }
 
 /**
- * 排序器
+ * ModifyRole返回参数结构体
  */
-export interface Sort {
+export interface ModifyRoleResponse {
   /**
-   * 排序字段
+   * 角色名称
    */
-  Name: string
+  RoleName: string
   /**
-   * 升序ASC，降序DESC
+   * 备注说明
    */
-  Order: string
+  Remark: string
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1058,66 +1062,71 @@ export interface CmqSubscription {
    * 订阅名字，在单个地域同一帐号的同一主题下唯一。订阅名称是一个不超过64个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-)。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SubscriptionName: string
+  SubscriptionName?: string
   /**
    * 订阅 ID。订阅 ID 在拉取监控数据时会用到。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SubscriptionId: string
+  SubscriptionId?: string
   /**
    * 订阅拥有者的 APPID。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TopicOwner: number
+  TopicOwner?: number
   /**
    * 该订阅待投递的消息数。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  MsgCount: number
+  MsgCount?: number
   /**
    * 最后一次修改订阅属性的时间。返回 Unix 时间戳，精确到毫秒。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  LastModifyTime: number
+  LastModifyTime?: number
   /**
    * 订阅的创建时间。返回 Unix 时间戳，精确到毫秒。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CreateTime: number
+  CreateTime?: number
   /**
    * 表示订阅接收消息的过滤策略。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  BindingKey: Array<string>
+  BindingKey?: Array<string>
   /**
    * 接收通知的 endpoint，根据协议 protocol 区分：对于 HTTP，endpoint 必须以http://开头，host 可以是域名或 IP；对于 queue，则填 queueName。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Endpoint: string
+  Endpoint?: string
   /**
    * 描述用户创建订阅时选择的过滤策略：
 filterType = 1表示用户使用 filterTag 标签过滤
 filterType = 2表示用户使用 bindingKey 过滤。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  FilterTags: Array<string>
+  FilterTags?: Array<string>
   /**
    * 订阅的协议，目前支持两种协议：HTTP、queue。使用 HTTP 协议，用户需自己搭建接受消息的 Web Server。使用 queue，消息会自动推送到 CMQ queue，用户可以并发地拉取消息。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Protocol: string
+  Protocol?: string
   /**
    * 向 endpoint 推送消息出现错误时，CMQ 推送服务器的重试策略。取值有：
 （1）BACKOFF_RETRY，退避重试。每隔一定时间重试一次，重试够一定次数后，就把该消息丢弃，继续推送下一条消息；
 （2）EXPONENTIAL_DECAY_RETRY，指数衰退重试。每次重试的间隔是指数递增的，例如开始 1s，后面是 2s，4s，8s...由于 Topic 消息的周期是一天，所以最多重试一天就把消息丢弃。默认值是 EXPONENTIAL_DECAY_RETRY。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  NotifyStrategy: string
+  NotifyStrategy?: string
   /**
    * 推送内容的格式。取值：（1）JSON；（2）SIMPLIFIED，即 raw 格式。如果 protocol 是 queue，则取值必须为 SIMPLIFIED。如果 protocol 是 HTTP，两个值均可以，默认值是 JSON。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  NotifyContentFormat: string
+  NotifyContentFormat?: string
+  /**
+   * 订阅所属的主题名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TopicName?: string
 }
 
 /**
@@ -1360,6 +1369,131 @@ export interface CreateRocketMQNamespaceRequest {
    * 说明，最大128个字符
    */
   Remark?: string
+}
+
+/**
+ * 主题实例
+ */
+export interface Topic {
+  /**
+   * 最后一次间隔内发布消息的平均byte大小。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AverageMsgSize: string
+  /**
+   * 消费者数量。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ConsumerCount: string
+  /**
+   * 被记录下来的消息总数。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LastConfirmedEntry: string
+  /**
+   * 最后一个ledger创建的时间。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LastLedgerCreatedTimestamp: string
+  /**
+   * 本地和复制的发布者每秒发布消息的速率。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MsgRateIn: string
+  /**
+   * 本地和复制的消费者每秒分发消息的数量之和。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MsgRateOut: string
+  /**
+   * 本地和复制的发布者每秒发布消息的byte。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MsgThroughputIn: string
+  /**
+   * 本地和复制的消费者每秒分发消息的byte。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MsgThroughputOut: string
+  /**
+   * 被记录下来的消息总数。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NumberOfEntries: string
+  /**
+   * 分区数<=0：topic下无子分区。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Partitions: number
+  /**
+   * 生产者数量。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProducerCount: string
+  /**
+   * 以byte计算的所有消息存储总量。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalSize: string
+  /**
+   * 分区topic里面的子分区。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SubTopicSets: Array<PartitionsTopic>
+  /**
+   * topic类型描述：
+0：普通消息；
+1：全局顺序消息；
+2：局部顺序消息；
+3：重试队列；
+4：死信队列；
+5：事务消息。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TopicType: number
+  /**
+   * 环境（命名空间）名称。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EnvironmentId: string
+  /**
+   * 主题名称。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TopicName: string
+  /**
+   * 说明，128个字符以内。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Remark: string
+  /**
+   * 创建时间。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateTime: string
+  /**
+   * 最近修改时间。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UpdateTime: string
+  /**
+   * 生产者上限。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProducerLimit: string
+  /**
+   * 消费者上限。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ConsumerLimit: string
+  /**
+   * 0: 非持久非分区
+1: 非持久分区
+2: 持久非分区
+3: 持久分区
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PulsarTopicType: number
 }
 
 /**
@@ -1710,7 +1844,7 @@ export interface DescribeCmqSubscriptionDetailRequest {
   /**
    * 主题名字，在单个地域同一帐号下唯一。主题名称是一个不超过64个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线（-）。
    */
-  TopicName: string
+  TopicName?: string
   /**
    * 分页时本页获取主题列表的起始位置。如果填写了该值，必须也要填写 limit 。该值缺省时，后台取默认值 0
    */
@@ -1723,131 +1857,45 @@ export interface DescribeCmqSubscriptionDetailRequest {
    * 根据SubscriptionName进行模糊搜索
    */
   SubscriptionName?: string
+  /**
+   * 队列名称，订阅绑定的endpoint
+   */
+  QueueName?: string
+  /**
+   * 查询类型。取值：（1）topic；（2）queue。
+默认值是topic。如果 queryType 是 topic，则查询主题下的订阅列表；如果 queryType 是 queue，则查询队列绑定的订阅列表。
+   */
+  QueryType?: string
 }
 
 /**
- * 主题实例
+ * DescribePublisherSummary返回参数结构体
  */
-export interface Topic {
+export interface DescribePublisherSummaryResponse {
   /**
-   * 最后一次间隔内发布消息的平均byte大小。
+   * 生产速率（条/秒）
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  AverageMsgSize: string
+  MsgRateIn: number
   /**
-   * 消费者数量。
+   * 生产速率（字节/秒）
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ConsumerCount: string
+  MsgThroughputIn: number
   /**
-   * 被记录下来的消息总数。
+   * 生产者数量
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  LastConfirmedEntry: string
+  PublisherCount: number
   /**
-   * 最后一个ledger创建的时间。
+   * 消息存储大小，以字节为单位
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  LastLedgerCreatedTimestamp: string
+  StorageSize: number
   /**
-   * 本地和复制的发布者每秒发布消息的速率。
-注意：此字段可能返回 null，表示取不到有效值。
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  MsgRateIn: string
-  /**
-   * 本地和复制的消费者每秒分发消息的数量之和。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  MsgRateOut: string
-  /**
-   * 本地和复制的发布者每秒发布消息的byte。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  MsgThroughputIn: string
-  /**
-   * 本地和复制的消费者每秒分发消息的byte。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  MsgThroughputOut: string
-  /**
-   * 被记录下来的消息总数。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  NumberOfEntries: string
-  /**
-   * 分区数<=0：topic下无子分区。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Partitions: number
-  /**
-   * 生产者数量。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ProducerCount: string
-  /**
-   * 以byte计算的所有消息存储总量。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TotalSize: string
-  /**
-   * 分区topic里面的子分区。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SubTopicSets: Array<PartitionsTopic>
-  /**
-   * topic类型描述：
-0：普通消息；
-1：全局顺序消息；
-2：局部顺序消息；
-3：重试队列；
-4：死信队列；
-5：事务消息。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TopicType: number
-  /**
-   * 环境（命名空间）名称。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  EnvironmentId: string
-  /**
-   * 主题名称。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TopicName: string
-  /**
-   * 说明，128个字符以内。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Remark: string
-  /**
-   * 创建时间。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CreateTime: string
-  /**
-   * 最近修改时间。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  UpdateTime: string
-  /**
-   * 生产者上限。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ProducerLimit: string
-  /**
-   * 消费者上限。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ConsumerLimit: string
-  /**
-   * 0: 非持久非分区
-1: 非持久分区
-2: 持久非分区
-3: 持久分区
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  PulsarTopicType: number
+  RequestId?: string
 }
 
 /**
@@ -2090,17 +2138,13 @@ export interface CreateEnvironmentRequest {
 }
 
 /**
- * DeleteTopics返回参数结构体
+ * ClearCmqQueue请求参数结构体
  */
-export interface DeleteTopicsResponse {
+export interface ClearCmqQueueRequest {
   /**
-   * 被删除的主题数组。
+   * 队列名字，在单个地域同一帐号下唯一。队列名称是一个不超过64个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-)。
    */
-  TopicSets: Array<TopicRecord>
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  QueueName: string
 }
 
 /**
@@ -2234,29 +2278,9 @@ export interface DescribeRocketMQClusterResponse {
 }
 
 /**
- * DescribePublisherSummary返回参数结构体
+ * DeleteRocketMQVipInstance返回参数结构体
  */
-export interface DescribePublisherSummaryResponse {
-  /**
-   * 生产速率（条/秒）
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  MsgRateIn: number
-  /**
-   * 生产速率（字节/秒）
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  MsgThroughputIn: number
-  /**
-   * 生产者数量
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  PublisherCount: number
-  /**
-   * 消息存储大小，以字节为单位
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  StorageSize: number
+export interface DeleteRocketMQVipInstanceResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2270,12 +2294,12 @@ export interface DescribeCmqSubscriptionDetailResponse {
   /**
    * 总数
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * Subscription属性集合
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SubscriptionSet: Array<CmqSubscription>
+  SubscriptionSet?: Array<CmqSubscription>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2619,21 +2643,21 @@ export interface DescribeClusterDetailRequest {
 }
 
 /**
- * ModifyRole返回参数结构体
+ * ModifyRole请求参数结构体
  */
-export interface ModifyRoleResponse {
+export interface ModifyRoleRequest {
   /**
-   * 角色名称
+   * 角色名称，不支持中字以及除了短线和下划线外的特殊字符且长度必须大于0且小等于32。
    */
   RoleName: string
   /**
-   * 备注说明
+   * 备注说明，长度必须大等于0且小等于128。
    */
-  Remark: string
+  Remark?: string
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 必填字段，集群Id
    */
-  RequestId?: string
+  ClusterId?: string
 }
 
 /**
@@ -2870,21 +2894,13 @@ export interface RocketMQMessageTrack {
 }
 
 /**
- * ModifyRole请求参数结构体
+ * DeleteRocketMQVipInstance请求参数结构体
  */
-export interface ModifyRoleRequest {
+export interface DeleteRocketMQVipInstanceRequest {
   /**
-   * 角色名称，不支持中字以及除了短线和下划线外的特殊字符且长度必须大于0且小等于32。
+   * 实例的集群ID
    */
-  RoleName: string
-  /**
-   * 备注说明，长度必须大等于0且小等于128。
-   */
-  Remark?: string
-  /**
-   * 必填字段，集群Id
-   */
-  ClusterId?: string
+  ClusterId: string
 }
 
 /**
@@ -3112,16 +3128,6 @@ export interface DescribeEnvironmentRolesResponse {
 }
 
 /**
- * ClearCmqQueue请求参数结构体
- */
-export interface ClearCmqQueueRequest {
-  /**
-   * 队列名字，在单个地域同一帐号下唯一。队列名称是一个不超过64个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-)。
-   */
-  QueueName: string
-}
-
-/**
  * ModifyRocketMQGroup请求参数结构体
  */
 export interface ModifyRocketMQGroupRequest {
@@ -3214,84 +3220,89 @@ export interface CmqTopic {
    * 主题的 ID。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TopicId: string
+  TopicId?: string
   /**
    * 主题名称。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TopicName: string
+  TopicName?: string
   /**
    * 消息在主题中最长存活时间，从发送到该主题开始经过此参数指定的时间后，不论消息是否被成功推送给用户都将被删除，单位为秒。固定为一天（86400秒），该属性不能修改。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  MsgRetentionSeconds: number
+  MsgRetentionSeconds?: number
   /**
    * 消息最大长度。取值范围1024 - 1048576Byte（即1 - 1024K），默认值为65536。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  MaxMsgSize: number
+  MaxMsgSize?: number
   /**
    * 每秒钟发布消息的条数。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Qps: number
+  Qps?: number
   /**
    * 描述用户创建订阅时选择的过滤策略：
 FilterType = 1表示用户使用 FilterTag 标签过滤;
 FilterType = 2表示用户使用 BindingKey 过滤。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  FilterType: number
+  FilterType?: number
   /**
    * 主题的创建时间。返回 Unix 时间戳，精确到毫秒。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CreateTime: number
+  CreateTime?: number
   /**
    * 最后一次修改主题属性的时间。返回 Unix 时间戳，精确到毫秒。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  LastModifyTime: number
+  LastModifyTime?: number
   /**
    * 当前该主题中消息数目（消息堆积数）。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  MsgCount: number
+  MsgCount?: number
   /**
    * 创建者 Uin，CAM 鉴权 resource 由该字段组合而成。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CreateUin: number
+  CreateUin?: number
   /**
    * 关联的标签。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Tags: Array<Tag>
+  Tags?: Array<Tag>
   /**
    * 消息轨迹。true表示开启，false表示不开启。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Trace: boolean
+  Trace?: boolean
   /**
    * 租户id
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TenantId: string
+  TenantId?: string
   /**
    * 命名空间名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  NamespaceName: string
+  NamespaceName?: string
   /**
    * 集群状态，0:创建中，1:正常，2:销毁中，3:已删除，4: 隔离中，5:创建失败，6: 删除失败
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Status: number
+  Status?: number
   /**
    * 0表示pulsar，1表示rocketmq
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  BrokerType: number
+  BrokerType?: number
+  /**
+   * 订阅数量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SubscriptionCount?: number
 }
 
 /**
@@ -3413,21 +3424,21 @@ export interface InternalTenant {
 }
 
 /**
- * SendCmqMsg请求参数结构体
+ * DescribePulsarProInstances请求参数结构体
  */
-export interface SendCmqMsgRequest {
+export interface DescribePulsarProInstancesRequest {
   /**
-   * 队列名
+   * 查询条件过滤器
    */
-  QueueName: string
+  Filters?: Array<Filter>
   /**
-   * 消息内容
+   * 查询数目上限，默认20
    */
-  MsgContent: string
+  Limit?: number
   /**
-   * 延迟时间
+   * 查询起始位置
    */
-  DelaySeconds: number
+  Offset?: number
 }
 
 /**
@@ -3681,6 +3692,20 @@ export interface EnvironmentRoleSet {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Permissions: Array<string>
+}
+
+/**
+ * VPC配置信息
+ */
+export interface VpcConfig {
+  /**
+   * vpc的id
+   */
+  VpcId: string
+  /**
+   * 子网id
+   */
+  SubnetId: string
 }
 
 /**
@@ -4543,21 +4568,17 @@ export interface ModifyRocketMQInstanceSpecResponse {
 }
 
 /**
- * DescribePulsarProInstances请求参数结构体
+ * DeleteTopics返回参数结构体
  */
-export interface DescribePulsarProInstancesRequest {
+export interface DeleteTopicsResponse {
   /**
-   * 查询条件过滤器
+   * 被删除的主题数组。
    */
-  Filters?: Array<Filter>
+  TopicSets: Array<TopicRecord>
   /**
-   * 查询数目上限，默认20
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  Limit?: number
-  /**
-   * 查询起始位置
-   */
-  Offset?: number
+  RequestId?: string
 }
 
 /**
@@ -4862,6 +4883,20 @@ export interface Filter {
    * 数值
    */
   Values?: Array<string>
+}
+
+/**
+ * 排序器
+ */
+export interface Sort {
+  /**
+   * 排序字段
+   */
+  Name: string
+  /**
+   * 升序ASC，降序DESC
+   */
+  Order: string
 }
 
 /**
@@ -6564,17 +6599,21 @@ export interface DeleteSubscriptionsRequest {
 }
 
 /**
- * VPC配置信息
+ * SendCmqMsg请求参数结构体
  */
-export interface VpcConfig {
+export interface SendCmqMsgRequest {
   /**
-   * vpc的id
+   * 队列名
    */
-  VpcId: string
+  QueueName: string
   /**
-   * 子网id
+   * 消息内容
    */
-  SubnetId: string
+  MsgContent: string
+  /**
+   * 延迟时间
+   */
+  DelaySeconds: number
 }
 
 /**

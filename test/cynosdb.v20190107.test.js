@@ -638,6 +638,16 @@ it("cynosdb.v20190107.RevokeAccountPrivileges", async function () {
     }
 })
 
+it("cynosdb.v20190107.OpenClusterReadOnlyInstanceGroupAccess", async function () {
+    try {
+       const data = await client.OpenClusterReadOnlyInstanceGroupAccess({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cynosdb.v20190107.SearchClusterTables", async function () {
     try {
        const data = await client.SearchClusterTables({})

@@ -1320,6 +1320,16 @@ export interface CreateCosRechargeRequest {
 }
 
 /**
+ * DescribeKafkaUser请求参数结构体
+ */
+export interface DescribeKafkaUserRequest {
+  /**
+   * kafka消费用户名
+   */
+  UserName: string
+}
+
+/**
  * 日志提取规则
  */
 export interface ExtractRuleInfo {
@@ -5717,6 +5727,20 @@ tag:tagKey
    * 分页单页的限制数目，默认值为20，最大值100
    */
   Limit?: number
+}
+
+/**
+ * DescribeKafkaUser返回参数结构体
+ */
+export interface DescribeKafkaUserResponse {
+  /**
+   * kafka消费用户名
+   */
+  UserName: string
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

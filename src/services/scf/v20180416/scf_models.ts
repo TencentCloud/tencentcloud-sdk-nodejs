@@ -1664,7 +1664,7 @@ export interface K8SToleration {
   /**
    * 匹配的污点名
    */
-  Key: string
+  Key?: string
   /**
    * 匹配方式，默认值为: Equal
 注意：此字段可能返回 null，表示取不到有效值。

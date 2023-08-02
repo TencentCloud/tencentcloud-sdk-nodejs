@@ -480,6 +480,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyBackupName", req, cb);
     }
     /**
+     * 本接口（DescribeInstanceByOrders）用于根据订单号查询资源ID
+     */
+    async DescribeInstanceByOrders(req, cb) {
+        return this.request("DescribeInstanceByOrders", req, cb);
+    }
+    /**
      * 本接口（DescribeAccounts）用于拉取实例账户列表。
      */
     async DescribeAccounts(req, cb) {

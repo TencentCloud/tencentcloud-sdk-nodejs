@@ -212,6 +212,12 @@ cls.pb.cc cls.pb.h cls.proto
         return this.request("CreateConsumer", req, cb);
     }
     /**
+     * 本接口用于获取kafka用户信息
+     */
+    async DescribeKafkaUser(req, cb) {
+        return this.request("DescribeKafkaUser", req, cb);
+    }
+    /**
      * 本接口用于修改日志主题。
      */
     async ModifyTopic(req, cb) {

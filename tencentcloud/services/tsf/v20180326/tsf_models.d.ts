@@ -4242,146 +4242,146 @@ export interface ServiceStatisticsResult {
      * 请求模版路径:type为接口时返回，服务时不返回
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Path: string;
+    Path?: string;
     /**
      * 请求方法:type为接口时返回，服务时不返回
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Method: string;
+    Method?: string;
     /**
      * 微服务Id
      */
-    MicroserviceId: string;
+    MicroserviceId?: string;
     /**
      * 微服务名称
      */
-    MicroserviceName: string;
+    MicroserviceName?: string;
     /**
      * 请求数
      */
-    RequestCount: number;
+    RequestCount?: number;
     /**
      * 请求错误率，不带百分号
      */
-    ErrorRate: number;
+    ErrorRate?: number;
     /**
      * 平均响应耗时ms
      */
-    AvgTimeConsuming: number;
+    AvgTimeConsuming?: number;
     /**
      * 响应耗时曲线
      */
-    MetricDataCurves: Array<MetricDataCurve>;
+    MetricDataCurves?: Array<MetricDataCurve>;
     /**
      * 实例id
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    InstanceId: string;
+    InstanceId?: string;
     /**
      * 实例name
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    InstanceName: string;
+    InstanceName?: string;
     /**
      * 部署组id
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    GroupId: string;
+    GroupId?: string;
     /**
      * 部署组name
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    GroupName: string;
+    GroupName?: string;
     /**
      * 部署组类型
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ClusterType: string;
+    ClusterType?: string;
     /**
      * 部署组是否存在
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    GroupExist: number;
+    GroupExist?: number;
     /**
      * 实例是否存在，仅限cvm
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    InstanceExist: number;
+    InstanceExist?: number;
     /**
      * 应用id
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ApplicationId: string;
+    ApplicationId?: string;
     /**
      * 微服务类型
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    MicroserviceType: string;
+    MicroserviceType?: string;
     /**
      * cpu使用率
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CpuPercent: number;
+    CpuPercent?: number;
     /**
      * 已用堆大小,单位KB
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    HeapUsed: number;
+    HeapUsed?: number;
     /**
      * 数据库
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DbName: string;
+    DbName?: string;
     /**
      * Script值
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Script: string;
+    Script?: string;
     /**
      * 数据库类型
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DbType: string;
+    DbType?: string;
     /**
      * Apdex值
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Apdex: number;
+    Apdex?: number;
     /**
      * Qps值
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Qps: number;
+    Qps?: number;
     /**
      * 实例在线数
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    InstanceOnlineCount: number;
+    InstanceOnlineCount?: number;
     /**
      * 实例总数
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    InstanceTotalCount: number;
+    InstanceTotalCount?: number;
     /**
      * normal/error
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Status: string;
+    Status?: string;
     /**
      * normal/warn/error
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ErrorRateLevel: string;
+    ErrorRateLevel?: string;
     /**
      * normal/warn/error
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    AvgTimeConsumingLevel: string;
+    AvgTimeConsumingLevel?: string;
     /**
      * normal/warn/error
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ApdexLevel: string;
+    ApdexLevel?: string;
 }
 /**
  * CreateContainGroup返回参数结构体
@@ -7366,6 +7366,10 @@ export interface DeployGroupRequest {
      * 预热参数配置
      */
     WarmupSetting?: WarmupSetting;
+    /**
+     * 开启分批健康检查
+     */
+    EnableBatchHealthCheck?: boolean;
 }
 /**
  * 泳道分页查询
@@ -7582,7 +7586,7 @@ export interface DeployGroupResponse {
      * 任务ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Result: TaskId;
+    Result?: TaskId;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -8161,6 +8165,11 @@ export interface VmGroup {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     GatewayConfig?: GatewayConfig;
+    /**
+     * 批次是否开启健康检查
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    EnableBatchHealthCheck?: boolean;
 }
 /**
  * DescribeApiUseDetail返回参数结构体

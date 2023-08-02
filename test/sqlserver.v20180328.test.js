@@ -768,6 +768,16 @@ it("sqlserver.v20180328.ModifyBackupName", async function () {
     }
 })
 
+it("sqlserver.v20180328.DescribeInstanceByOrders", async function () {
+    try {
+       const data = await client.DescribeInstanceByOrders({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("sqlserver.v20180328.DescribeAccounts", async function () {
     try {
        const data = await client.DescribeAccounts({})

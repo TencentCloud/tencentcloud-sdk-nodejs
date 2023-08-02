@@ -288,8 +288,11 @@ export interface FlowCreateApprover {
      * 参与者类型：
   0：企业
   1：个人
-  3：企业静默签署
-  注：类型为3（企业静默签署）时，会默认完成该签署方的签署。静默签署仅进行盖章操作，不能是手写签名。
+  3：企业自动签署
+  注：类型为3（企业自动签署）时，会自动完成该签署方的签署。
+  自动签署仅进行盖章操作，不能是手写签名。
+  本方企业自动签署的签署人会默认是当前的发起人
+  他方企业自动签署的签署人是自动签模板的他方企业授权人
      */
     ApproverType: number;
     /**
@@ -1237,6 +1240,7 @@ export interface CreateFlowRequest {
     FlowName: string;
     /**
      * 签署流程参与者信息，最大限制50方
+  注意 approver中的顺序需要和模板中的顺序保持一致， 否则会导致模板中配置的信息无效。
      */
     Approvers: Array<FlowCreateApprover>;
     /**
@@ -1733,6 +1737,19 @@ export interface OccupiedSeal {
     AuthorizedUsers: Array<AuthorizedUser>;
 }
 /**
+ * CreatePersonAuthCertificateImage返回参数结构体
+ */
+export interface CreatePersonAuthCertificateImageResponse {
+    /**
+     * 个人用户证明证书的下载链接
+     */
+    AuthCertUrl?: string;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * 删除员工失败数据
  */
 export interface FailedDeleteStaffData {
@@ -2202,8 +2219,72 @@ export interface DescribeFileUrlsRequest {
 /**
  * 电子文档的控件填充信息。按照控件类型进行相应的填充。
 
+当控件的 ComponentType='TEXT'时，FormField.ComponentValue填入文本内容
+```
+FormFiled输入示例：
+{
+    "ComponentId": "componentId1",
+    "ComponentValue": "文本内容"
+}
+```
+当控件的 ComponentType='MULTI_LINE_TEXT'时，FormField.ComponentValue填入文本内容，支持自动换行。
+```
+FormFiled输入示例：
+{
+    "ComponentId": "componentId1",
+    "ComponentValue": "多行文本内容"
+}
+```
+当控件的 ComponentType='CHECK_BOX'时，FormField.ComponentValue填入true或false文本
+```
+FormFiled输入示例：
+{
+    "ComponentId": "componentId1",
+    "ComponentValue": "true"
+}
+```
+当控件的 ComponentType='FILL_IMAGE'时，FormField.ComponentValue填入图片的资源ID
+```
+FormFiled输入示例：
+{
+    "ComponentId": "componentId1",
+    "ComponentValue": "yDwhsxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+}
+```
+当控件的 ComponentType='ATTACHMENT'时，FormField.ComponentValue填入附件图片的资源ID列表，以逗号分隔，单个附件控件最多支持6个资源ID；
+```
+FormFiled输入示例：
+{
+    "ComponentId": "componentId1",
+    "ComponentValue": "yDwhsxxxxxxxxxxxxxxxxxxxxxxxxxx1,yDwhsxxxxxxxxxxxxxxxxxxxxxxxxxx2,yDwhsxxxxxxxxxxxxxxxxxxxxxxxxxx3"
+}
+```
+当控件的 ComponentType='SELECTOR'时，FormField.ComponentValue填入选择的选项内容；
+```
+FormFiled输入示例：
+{
+    "ComponentId": "componentId1",
+    "ComponentValue": "选择的内容"
+}
+```
+当控件的 ComponentType='DATE'时，FormField.ComponentValue填入日期内容；
+```
+FormFiled输入示例：
+{
+    "ComponentId": "componentId1",
+    "ComponentValue": "2023年01月01日"
+}
+```
+当控件的 ComponentType='DISTRICT'时，FormField.ComponentValue填入省市区内容；
+```
+FormFiled输入示例：
+{
+    "ComponentId": "componentId1",
+    "ComponentValue": "广东省深圳市福田区"
+}
+```
 【数据表格传参说明】
-当模板的 ComponentType='DYNAMIC_TABLE'时，FormField.ComponentValue需要传递json格式的字符串参数，用于确定表头&填充数据表格（支持内容的单元格合并）
+当控件的 ComponentType='DYNAMIC_TABLE'时，FormField.ComponentValue需要传递json格式的字符串参数，用于确定表头&填充数据表格（支持内容的单元格合并）
 输入示例1：
 
 ```
@@ -3217,6 +3298,32 @@ export interface SuccessUpdateStaffData {
      * 用户Id
      */
     UserId?: string;
+}
+/**
+ * CreatePersonAuthCertificateImage请求参数结构体
+ */
+export interface CreatePersonAuthCertificateImageRequest {
+    /**
+     * 操作人信息
+     */
+    Operator: UserInfo;
+    /**
+     * 个人用户名称
+     */
+    UserName: string;
+    /**
+     * 身份证件类型取值：
+  ID_CARD 身居民身份证
+  PASSPORT 护照
+  HONGKONG_AND_MACAO 港澳居民来往内地通行证
+  FOREIGN_ID_CARD 外国人永久居留身份证
+  HONGKONG_MACAO_AND_TAIWAN 港澳台居民居住证(格式同居民身份证)
+     */
+    IdCardType: string;
+    /**
+     * 身份证件号码
+     */
+    IdCardNumber: string;
 }
 /**
  * CreateFlowByFiles返回参数结构体
@@ -4893,11 +5000,13 @@ export interface CreateMultiFlowSignQRCodeRequest {
     FlowName: string;
     /**
      * 最大可发起签署流程份数，默认5份
-  发起流程数量超过此上限后二维码自动失效
+  <br/>发起流程数量超过此上限后二维码自动失效
      */
     MaxFlowNum?: number;
     /**
-     * 签署流程有效天数 默认7天 最高设置不超过30天
+     * 签署流程有效天数
+  <br/>默认7天
+  <br/>最高设置不超过30天
      */
     FlowEffectiveDay?: number;
     /**
@@ -4905,17 +5014,18 @@ export interface CreateMultiFlowSignQRCodeRequest {
      */
     QrEffectiveDay?: number;
     /**
-     * 限制二维码用户条件
+     * 指定的签署人信息
+  <br/>指定后，则只允许指定的签署人扫码签署
      */
     Restrictions?: Array<ApproverRestriction>;
     /**
-     * 用户自定义字段，回调的时候会进行透传，长度需要小于20480
+     * 用户自定义字段
+  <br/>回调的时候会进行透传，长度需要小于20480
      */
     UserData?: string;
     /**
      * 回调地址,最大长度1000字符串
-  回调时机：
-  用户通过签署二维码发起签署流程时，企业额度不足导致失败
+  <br/>回调时机：用户通过签署二维码发起签署流程时，企业额度不足导致失败
      */
     CallbackUrl?: string;
     /**

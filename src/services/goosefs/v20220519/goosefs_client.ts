@@ -18,19 +18,58 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
-  DescribeDataRepositoryTaskStatusResponse,
+  CreateFileSystemResponse,
+  GooseFSxAttribute,
+  ClientNodeAttribute,
+  ModifyDataRepositoryBandwidthResponse,
   DescribeClusterRoleTokenRequest,
-  ClientToken,
-  RoleToken,
+  DescribeFileSystemsResponse,
+  ExpandCapacityResponse,
+  FSAttribute,
   DescribeClusterRoleTokenResponse,
-  DescribeClusterRolesRequest,
-  CreateDataRepositoryTaskRequest,
+  BatchDeleteClientNodesResponse,
+  QueryCrossVpcSubnetSupportForClientNodeRequest,
+  DeleteCrossVpcSubnetSupportForClientNodeRequest,
+  AttachFileSystemBucketRequest,
+  DeleteFileSystemRequest,
+  DescribeFileSystemBucketsRequest,
+  BatchAddClientNodesResponse,
+  AttachFileSystemBucketResponse,
+  GooseFSxBuildElement,
+  CreateFileSystemRequest,
+  ClusterRole,
+  DeleteFileSystemResponse,
+  ExpandCapacityRequest,
+  DetachFileSystemBucketRequest,
+  ClientToken,
+  QueryDataRepositoryBandwidthResponse,
+  QueryDataRepositoryBandwidthRequest,
+  ClientClusterManagerNodeInfo,
+  LinuxNodeAttribute,
+  BatchDeleteClientNodesRequest,
+  SubnetInfo,
+  QueryCrossVpcSubnetSupportForClientNodeResponse,
+  DescribeFileSystemsRequest,
   DescribeClusterClientTokenRequest,
+  AddCrossVpcSubnetSupportForClientNodeResponse,
   CreateDataRepositoryTaskResponse,
   DescribeClusterRolesResponse,
+  DeleteCrossVpcSubnetSupportForClientNodeResponse,
+  DescribeDataRepositoryTaskStatusResponse,
+  BatchAddClientNodesRequest,
+  AddCrossVpcSubnetSupportForClientNodeRequest,
+  DetachFileSystemBucketResponse,
+  RoleToken,
+  DescribeFileSystemBucketsResponse,
+  DescribeClientNodesRequest,
+  Tag,
+  ModifyDataRepositoryBandwidthRequest,
+  DescribeClusterRolesRequest,
+  CreateDataRepositoryTaskRequest,
+  DescribeClientNodesResponse,
   DescribeDataRepositoryTaskStatusRequest,
-  ClusterRole,
   DescribeClusterClientTokenResponse,
+  MappedBucket,
 } from "./goosefs_models"
 
 /**
@@ -53,13 +92,83 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询GooseFS集群客户端凭证
+   * 删除文件系统
    */
-  async DescribeClusterClientToken(
-    req: DescribeClusterClientTokenRequest,
-    cb?: (error: string, rep: DescribeClusterClientTokenResponse) => void
-  ): Promise<DescribeClusterClientTokenResponse> {
-    return this.request("DescribeClusterClientToken", req, cb)
+  async DeleteFileSystem(
+    req: DeleteFileSystemRequest,
+    cb?: (error: string, rep: DeleteFileSystemResponse) => void
+  ): Promise<DeleteFileSystemResponse> {
+    return this.request("DeleteFileSystem", req, cb)
+  }
+
+  /**
+   * 为客户端节点添加跨vpc或子网访问能力
+   */
+  async AddCrossVpcSubnetSupportForClientNode(
+    req: AddCrossVpcSubnetSupportForClientNodeRequest,
+    cb?: (error: string, rep: AddCrossVpcSubnetSupportForClientNodeResponse) => void
+  ): Promise<AddCrossVpcSubnetSupportForClientNodeResponse> {
+    return this.request("AddCrossVpcSubnetSupportForClientNode", req, cb)
+  }
+
+  /**
+   * 批量添加客户端节点
+   */
+  async BatchAddClientNodes(
+    req: BatchAddClientNodesRequest,
+    cb?: (error: string, rep: BatchAddClientNodesResponse) => void
+  ): Promise<BatchAddClientNodesResponse> {
+    return this.request("BatchAddClientNodes", req, cb)
+  }
+
+  /**
+   * 解绑文件系统与Bucket的映射
+   */
+  async DetachFileSystemBucket(
+    req: DetachFileSystemBucketRequest,
+    cb?: (error: string, rep: DetachFileSystemBucketResponse) => void
+  ): Promise<DetachFileSystemBucketResponse> {
+    return this.request("DetachFileSystemBucket", req, cb)
+  }
+
+  /**
+   * 列出所有的文件系统
+   */
+  async DescribeFileSystems(
+    req: DescribeFileSystemsRequest,
+    cb?: (error: string, rep: DescribeFileSystemsResponse) => void
+  ): Promise<DescribeFileSystemsResponse> {
+    return this.request("DescribeFileSystems", req, cb)
+  }
+
+  /**
+   * 查询数据流动带宽
+   */
+  async QueryDataRepositoryBandwidth(
+    req: QueryDataRepositoryBandwidthRequest,
+    cb?: (error: string, rep: QueryDataRepositoryBandwidthResponse) => void
+  ): Promise<QueryDataRepositoryBandwidthResponse> {
+    return this.request("QueryDataRepositoryBandwidth", req, cb)
+  }
+
+  /**
+   * 罗列文件系统关联的Bucket映射
+   */
+  async DescribeFileSystemBuckets(
+    req: DescribeFileSystemBucketsRequest,
+    cb?: (error: string, rep: DescribeFileSystemBucketsResponse) => void
+  ): Promise<DescribeFileSystemBucketsResponse> {
+    return this.request("DescribeFileSystemBuckets", req, cb)
+  }
+
+  /**
+   * 列出集群中所有的客户端节点
+   */
+  async DescribeClientNodes(
+    req: DescribeClientNodesRequest,
+    cb?: (error: string, rep: DescribeClientNodesResponse) => void
+  ): Promise<DescribeClientNodesResponse> {
+    return this.request("DescribeClientNodes", req, cb)
   }
 
   /**
@@ -70,6 +179,86 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDataRepositoryTaskStatusResponse) => void
   ): Promise<DescribeDataRepositoryTaskStatusResponse> {
     return this.request("DescribeDataRepositoryTaskStatus", req, cb)
+  }
+
+  /**
+   * 为客户端节点删除跨vpc子网访问能力
+   */
+  async DeleteCrossVpcSubnetSupportForClientNode(
+    req: DeleteCrossVpcSubnetSupportForClientNodeRequest,
+    cb?: (error: string, rep: DeleteCrossVpcSubnetSupportForClientNodeResponse) => void
+  ): Promise<DeleteCrossVpcSubnetSupportForClientNodeResponse> {
+    return this.request("DeleteCrossVpcSubnetSupportForClientNode", req, cb)
+  }
+
+  /**
+   * 修改数据流动带宽
+   */
+  async ModifyDataRepositoryBandwidth(
+    req: ModifyDataRepositoryBandwidthRequest,
+    cb?: (error: string, rep: ModifyDataRepositoryBandwidthResponse) => void
+  ): Promise<ModifyDataRepositoryBandwidthResponse> {
+    return this.request("ModifyDataRepositoryBandwidth", req, cb)
+  }
+
+  /**
+   * 为文件系统关联Bucket
+   */
+  async AttachFileSystemBucket(
+    req: AttachFileSystemBucketRequest,
+    cb?: (error: string, rep: AttachFileSystemBucketResponse) => void
+  ): Promise<AttachFileSystemBucketResponse> {
+    return this.request("AttachFileSystemBucket", req, cb)
+  }
+
+  /**
+   * 批量删除客户端节点
+   */
+  async BatchDeleteClientNodes(
+    req: BatchDeleteClientNodesRequest,
+    cb?: (error: string, rep: BatchDeleteClientNodesResponse) => void
+  ): Promise<BatchDeleteClientNodesResponse> {
+    return this.request("BatchDeleteClientNodes", req, cb)
+  }
+
+  /**
+   * 查询客户端节点跨vpc子网访问能力
+   */
+  async QueryCrossVpcSubnetSupportForClientNode(
+    req: QueryCrossVpcSubnetSupportForClientNodeRequest,
+    cb?: (error: string, rep: QueryCrossVpcSubnetSupportForClientNodeResponse) => void
+  ): Promise<QueryCrossVpcSubnetSupportForClientNodeResponse> {
+    return this.request("QueryCrossVpcSubnetSupportForClientNode", req, cb)
+  }
+
+  /**
+   * 查询GooseFS集群客户端凭证
+   */
+  async DescribeClusterClientToken(
+    req: DescribeClusterClientTokenRequest,
+    cb?: (error: string, rep: DescribeClusterClientTokenResponse) => void
+  ): Promise<DescribeClusterClientTokenResponse> {
+    return this.request("DescribeClusterClientToken", req, cb)
+  }
+
+  /**
+   * 创建文件系统
+   */
+  async CreateFileSystem(
+    req: CreateFileSystemRequest,
+    cb?: (error: string, rep: CreateFileSystemResponse) => void
+  ): Promise<CreateFileSystemResponse> {
+    return this.request("CreateFileSystem", req, cb)
+  }
+
+  /**
+   * 扩展文件系统容量
+   */
+  async ExpandCapacity(
+    req: ExpandCapacityRequest,
+    cb?: (error: string, rep: ExpandCapacityResponse) => void
+  ): Promise<ExpandCapacityResponse> {
+    return this.request("ExpandCapacity", req, cb)
   }
 
   /**

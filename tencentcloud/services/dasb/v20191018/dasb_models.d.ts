@@ -1819,65 +1819,70 @@ export interface Device {
     /**
      * 资产ID
      */
-    Id: number;
+    Id?: number;
     /**
      * 实例ID，对应CVM、CDB等实例ID
      */
-    InstanceId: string;
+    InstanceId?: string;
     /**
      * 资产名
      */
-    Name: string;
+    Name?: string;
     /**
      * 公网IP
      */
-    PublicIp: string;
+    PublicIp?: string;
     /**
      * 内网IP
      */
-    PrivateIp: string;
+    PrivateIp?: string;
     /**
      * 地域编码
      */
-    ApCode: string;
+    ApCode?: string;
     /**
      * 操作系统名称
      */
-    OsName: string;
+    OsName?: string;
     /**
      * 资产类型 1 - Linux, 2 - Windows, 3 - MySQL, 4 - SQLServer
      */
-    Kind: number;
+    Kind?: number;
     /**
      * 管理端口
      */
-    Port: number;
+    Port?: number;
     /**
      * 所属资产组列表
      */
-    GroupSet: Array<Group>;
+    GroupSet?: Array<Group>;
     /**
      * 资产绑定的账号数
      */
-    AccountCount: number;
+    AccountCount?: number;
     /**
      * VPC ID
      */
-    VpcId: string;
+    VpcId?: string;
     /**
      * 子网ID
      */
-    SubnetId: string;
+    SubnetId?: string;
     /**
      * 堡垒机服务信息，注意没有绑定服务时为null
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Resource: Resource;
+    Resource?: Resource;
     /**
      * 资产所属部门
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Department: Department;
+    Department?: Department;
+    /**
+     * 数据库资产的多节点
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IpPortSet?: Array<string>;
 }
 /**
  * DescribeDasbImageIds请求参数结构体
@@ -2406,115 +2411,115 @@ export interface Resource {
     /**
      * 服务实例ID，如bh-saas-s3ed4r5e
      */
-    ResourceId: string;
+    ResourceId?: string;
     /**
      * 地域编码
      */
-    ApCode: string;
+    ApCode?: string;
     /**
      * 服务实例规格信息
      */
-    SvArgs: string;
+    SvArgs?: string;
     /**
      * VPC ID
      */
-    VpcId: string;
+    VpcId?: string;
     /**
      * 服务规格对应的资产数
      */
-    Nodes: number;
+    Nodes?: number;
     /**
      * 自动续费标记，0 - 表示默认状态，1 - 表示自动续费，2 - 表示明确不自动续费
      */
-    RenewFlag: number;
+    RenewFlag?: number;
     /**
      * 过期时间
      */
-    ExpireTime: string;
+    ExpireTime?: string;
     /**
      * 资源状态，0 - 未初始化，1 - 正常，2 - 隔离，3 - 销毁，4 - 初始化失败，5 - 初始化中
      */
-    Status: number;
+    Status?: number;
     /**
      * 服务实例名，如T-Sec-堡垒机（SaaS型）
      */
-    ResourceName: string;
+    ResourceName?: string;
     /**
      * 定价模型ID
      */
-    Pid: number;
+    Pid?: number;
     /**
      * 资源创建时间
      */
-    CreateTime: string;
+    CreateTime?: string;
     /**
      * 商品码, p_cds_dasb
      */
-    ProductCode: string;
+    ProductCode?: string;
     /**
      * 子商品码, sp_cds_dasb_bh_saas
      */
-    SubProductCode: string;
+    SubProductCode?: string;
     /**
      * 可用区
      */
-    Zone: string;
+    Zone?: string;
     /**
      * 是否过期，true-过期，false-未过期
      */
-    Expired: boolean;
+    Expired?: boolean;
     /**
      * 是否开通，true-开通，false-未开通
      */
-    Deployed: boolean;
+    Deployed?: boolean;
     /**
      * 开通服务的 VPC 名称
      */
-    VpcName: string;
+    VpcName?: string;
     /**
      * 开通服务的 VPC 对应的网段
      */
-    VpcCidrBlock: string;
+    VpcCidrBlock?: string;
     /**
      * 开通服务的子网ID
      */
-    SubnetId: string;
+    SubnetId?: string;
     /**
      * 开通服务的子网名称
      */
-    SubnetName: string;
+    SubnetName?: string;
     /**
      * 开通服务的子网网段
      */
-    CidrBlock: string;
+    CidrBlock?: string;
     /**
      * 外部IP
      */
-    PublicIpSet: Array<string>;
+    PublicIpSet?: Array<string>;
     /**
      * 内部IP
      */
-    PrivateIpSet: Array<string>;
+    PrivateIpSet?: Array<string>;
     /**
      * 服务开通的高级功能列表，如:[DB]
      */
-    ModuleSet: Array<string>;
+    ModuleSet?: Array<string>;
     /**
      * 已使用的授权点数
      */
-    UsedNodes: number;
+    UsedNodes?: number;
     /**
      * 扩展点数
      */
-    ExtendPoints: number;
+    ExtendPoints?: number;
     /**
      * 带宽扩展包个数(4M)
      */
-    PackageBandwidth: number;
+    PackageBandwidth?: number;
     /**
      * 授权点数扩展包个数(50点)
      */
-    PackageNode: number;
+    PackageNode?: number;
     /**
      * 日志投递规格信息
   注意：此字段可能返回 null，表示取不到有效值。
@@ -2837,6 +2842,10 @@ export interface ExternalDevice {
      * 资产所属的部门ID
      */
     DepartmentId?: string;
+    /**
+     * 资产多节点：字段ip和端口
+     */
+    IpPortSet?: Array<string>;
 }
 /**
  * 文件传输检索结果

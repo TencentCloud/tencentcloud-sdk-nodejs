@@ -80,6 +80,7 @@ import {
   DescribeUserAutoSignStatusResponse,
   FillApproverInfo,
   OccupiedSeal,
+  CreatePersonAuthCertificateImageResponse,
   FailedDeleteStaffData,
   PdfVerifyResult,
   CreateBatchCancelFlowUrlResponse,
@@ -128,6 +129,7 @@ import {
   CreateIntegrationUserRolesRequest,
   CreateChannelSubOrganizationModifyQrCodeResponse,
   SuccessUpdateStaffData,
+  CreatePersonAuthCertificateImageRequest,
   CreateFlowByFilesResponse,
   UploadFilesResponse,
   SuccessCreateStaffData,
@@ -670,6 +672,16 @@ callbackinfo包含： 回调地址和签名key
     cb?: (error: string, rep: CreateFlowSignUrlResponse) => void
   ): Promise<CreateFlowSignUrlResponse> {
     return this.request("CreateFlowSignUrl", req, cb)
+  }
+
+  /**
+   * 本接口（CreatePersonAuthCertificateImage）用于创建个人用户证书证明图片
+   */
+  async CreatePersonAuthCertificateImage(
+    req: CreatePersonAuthCertificateImageRequest,
+    cb?: (error: string, rep: CreatePersonAuthCertificateImageResponse) => void
+  ): Promise<CreatePersonAuthCertificateImageResponse> {
+    return this.request("CreatePersonAuthCertificateImage", req, cb)
   }
 
   /**

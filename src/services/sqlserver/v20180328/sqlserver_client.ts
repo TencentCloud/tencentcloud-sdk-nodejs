@@ -78,6 +78,7 @@ import {
   SecurityGroupPolicy,
   StepDetail,
   ParameterDetail,
+  DescribeInstanceByOrdersRequest,
   DescribeBusinessIntelligenceFileResponse,
   ZoneInfo,
   ModifyMaintenanceSpanResponse,
@@ -139,6 +140,7 @@ import {
   DescribeXEventsResponse,
   DescribeDBsNormalResponse,
   DescribeMigrationsRequest,
+  DealInstance,
   DescribeDBCharsetsRequest,
   DescribeInstanceParamRecordsRequest,
   DescribeFlowStatusRequest,
@@ -183,6 +185,7 @@ import {
   DescribeUploadIncrementalInfoRequest,
   DescribeBackupUploadSizeResponse,
   ModifyDatabaseCDCRequest,
+  DescribeInstanceByOrdersResponse,
   ModifyInstanceParamResponse,
   InquiryPriceRenewDBInstanceRequest,
   StartIncrementalMigrationResponse,
@@ -1060,6 +1063,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyBackupNameResponse) => void
   ): Promise<ModifyBackupNameResponse> {
     return this.request("ModifyBackupName", req, cb)
+  }
+
+  /**
+   * 本接口（DescribeInstanceByOrders）用于根据订单号查询资源ID
+   */
+  async DescribeInstanceByOrders(
+    req: DescribeInstanceByOrdersRequest,
+    cb?: (error: string, rep: DescribeInstanceByOrdersResponse) => void
+  ): Promise<DescribeInstanceByOrdersResponse> {
+    return this.request("DescribeInstanceByOrders", req, cb)
   }
 
   /**

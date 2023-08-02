@@ -418,6 +418,16 @@ it("ess.v20201111.CreateFlowSignUrl", async function () {
     }
 })
 
+it("ess.v20201111.CreatePersonAuthCertificateImage", async function () {
+    try {
+       const data = await client.CreatePersonAuthCertificateImage({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ess.v20201111.CreateConvertTaskApi", async function () {
     try {
        const data = await client.CreateConvertTaskApi({})

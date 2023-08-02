@@ -615,6 +615,12 @@ BatchReceivePolicy 的接口会一次性返回多条消息：
         return this.request("SendMsg", req, cb);
     }
     /**
+     * 删除RocketMQ专享实例
+     */
+    async DeleteRocketMQVipInstance(req, cb) {
+        return this.request("DeleteRocketMQVipInstance", req, cb);
+    }
+    /**
      * 发送RocketMQ消息
      */
     async SendRocketMQMessage(req, cb) {

@@ -486,7 +486,7 @@ export interface ResourceInfo {
 }
 
 /**
- * 安卓加固结果
+ * Android加固结果
  */
 export interface AndroidResult {
   /**
@@ -506,7 +506,7 @@ export interface AndroidResult {
    */
   OpUin?: number
   /**
-   * 应用类型：安卓-apk; 安卓-aab;
+   * 应用类型：android-apk; android-aab;
    */
   AppType?: string
   /**
@@ -554,63 +554,63 @@ export interface AndroidResult {
    */
   CostTime?: number
   /**
-   * 在线加固-安卓应用原包下载链接
+   * 在线加固-android应用原包下载链接
    */
   AppUrl?: string
   /**
-   * 在线加固-安卓应用文件MD5算法值
+   * 在线加固-android应用文件MD5算法值
    */
   AppMd5?: string
   /**
-   * 在线加固-安卓应用应用名称
+   * 在线加固-android应用应用名称
    */
   AppName?: string
   /**
-   * 在线加固-安卓应用版本；
+   * 在线加固-android应用版本；
    */
   AppVersion?: string
   /**
-   * 在线加固-安卓应用大小
+   * 在线加固-android应用大小
    */
   AppSize?: number
   /**
-   * 在线加固-安卓加固-腾讯云应用加固工具版本
+   * 在线加固-android加固-腾讯云应用加固工具版本
    */
   OnlineToolVersion?: string
   /**
-   * 在线加固-安卓加固，加固成功后文件md5算法值
+   * 在线加固-android加固，加固成功后文件md5算法值
    */
   EncryptAppMd5?: string
   /**
-   * 在线加固-安卓加固，加固成功后应用大小
+   * 在线加固-android加固，加固成功后应用大小
    */
   EncryptAppSize?: number
   /**
-   * 在线加固-安卓加固，加固包下载链接。
+   * 在线加固-android加固，加固包下载链接。
    */
   EncryptPkgUrl?: string
   /**
-   * 输出工具-安卓加固-腾讯云输出工具版本
+   * 输出工具-android加固-腾讯云输出工具版本
    */
   OutputToolVersion?: string
   /**
-   * 输出工具-安卓加固-工具大小
+   * 输出工具-android加固-工具大小
    */
   OutputToolSize?: number
   /**
-   * 输出工具-安卓加固-工具输出时间
+   * 输出工具-android加固-工具输出时间
    */
   ToolOutputTime?: string
   /**
-   * 输出工具-安卓加固-工具到期时间
+   * 输出工具-android加固-工具到期时间
    */
   ToolExpireTime?: string
   /**
-   * 输出工具-安卓加固-输出工具下载链接
+   * 输出工具-android加固-输出工具下载链接
    */
   OutputToolUrl?: string
   /**
-   * 本次安卓加固策略信息
+   * 本次android加固策略信息
    */
   AndroidPlan?: AndroidPlan
 }
@@ -670,7 +670,7 @@ export interface AppletInfo {
 }
 
 /**
- * 渠道合作安卓加固策略信息
+ * 渠道合作Android加固策略信息
  */
 export interface AndroidPlan {
   /**
@@ -679,17 +679,17 @@ export interface AndroidPlan {
   PlanId?: number
   /**
    * 本次操作的包名。
-当收费模式是安卓按年收费和安卓免费试用的在线加固和输出工具加固时，要求该字段必输，且与AndroidAppInfo.AppPkgName值相等。
+当收费模式是android按年收费和android免费试用的在线加固和输出工具加固时，要求该字段必输，且与AndroidAppInfo.AppPkgName值相等。
    */
   AppPkgName?: string
   /**
-   * 安卓app的文件类型，本次加固操作的应用类型 。 
-安卓在线加固和输出工具加固必输，其值需等于“apk”或“aab”，且与AndroidAppInfo.AppType值相等。
+   * android app的文件类型，本次加固操作的应用类型 。 
+android在线加固和输出工具加固必输，其值需等于“apk”或“aab”，且与AndroidAppInfo.AppType值相等。
 
    */
   AppType?: string
   /**
-   * 安卓加固必输字段。
+   * android加固必输字段。
 加固策略，json格式字符串。
 字段说明（0-关闭，1-开启）：
         "enable"=1 #DEX整体加固;
@@ -1717,7 +1717,7 @@ export interface Orders {
    */
   PlatformType?: number
   /**
-   * 平台类型描述：  1.android安卓加固   2.ios源码混淆  3.sdk加固  4.applet小程序加固
+   * 平台类型描述：  1.android加固   2.ios源码混淆  3.sdk加固  4.applet小程序加固
    */
   PlatformTypeDesc?: string
   /**
@@ -1729,7 +1729,7 @@ export interface Orders {
    */
   OrderTypeDesc?: string
   /**
-   * 安卓包年收费加固的包名
+   * android包年收费加固的包名
    */
   AppPkgName?: string
   /**
@@ -1980,11 +1980,11 @@ export interface OptPluginListItem {
  */
 export interface EncryptResults {
   /**
-   * 平台类型枚举值  1-android安卓加固   2-ios源码混淆  3-sdk加固  4-applet小程序加固
+   * 平台类型枚举值  1-android加固   2-ios源码混淆  3-sdk加固  4-applet小程序加固
    */
   PlatformType?: number
   /**
-   * 平台类型描述  1-android安卓加固   2-ios源码混淆  3-sdk加固  4-applet小程序加固
+   * 平台类型描述  1-android加固   2-ios源码混淆  3-sdk加固  4-applet小程序加固
    */
   PlatformDesc?: string
   /**
@@ -2012,7 +2012,7 @@ export interface EncryptResults {
    */
   OrderId?: string
   /**
-   * 对应PlatformType平台类型值   1-android安卓加固结果
+   * 对应PlatformType平台类型值   1-android加固结果
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AndroidResult?: AndroidResult

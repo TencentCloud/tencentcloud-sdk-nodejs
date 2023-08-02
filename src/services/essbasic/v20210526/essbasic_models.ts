@@ -482,11 +482,12 @@ export interface DescribeFlowDetailInfoRequest {
   Agent: Agent
   /**
    * 合同(流程)编号数组，最多支持100个。
-（备注：该参数和合同组编号必须二选一, 如果填写FlowGroupId则忽略此FlowIds的入参）
+<br/>备注：该参数和合同组编号必须二选一, 如果填写FlowGroupId则忽略此FlowIds的入参
    */
   FlowIds?: Array<string>
   /**
-   * 合同组编号（备注：该参数和合同(流程)编号数组必须二选一）
+   * 合同组编号
+<br/>备注：该参数和合同(流程)编号数组必须二选一
    */
   FlowGroupId?: string
   /**
@@ -1254,66 +1255,67 @@ export interface FlowApproverDetail {
   /**
    * 模板配置时候的签署人id,与控件绑定
    */
-  ReceiptId: string
+  ReceiptId?: string
   /**
    * 平台企业的第三方id
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ProxyOrganizationOpenId: string
+  ProxyOrganizationOpenId?: string
   /**
    * 平台企业操作人的第三方id
    */
-  ProxyOperatorOpenId: string
+  ProxyOperatorOpenId?: string
   /**
    * 平台企业名称
    */
-  ProxyOrganizationName: string
+  ProxyOrganizationName?: string
   /**
    * 签署人手机号
    */
-  Mobile: string
+  Mobile?: string
   /**
    * 签署人签署顺序
    */
-  SignOrder: number
+  SignOrder?: number
   /**
    * 签署人姓名
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ApproveName: string
+  ApproveName?: string
   /**
    * 当前签署人的状态, 状态如下
-
-PENDING 待签署	
-FILLPENDING 待填写
-FILLACCEPT 填写完成	
-FILLREJECT 拒绝填写	
-WAITPICKUP 待领取	
-ACCEPT 已签署	
-REJECT 拒签 
-DEADLINE 过期没人处理 
-CANCEL 流程已撤回	
-FORWARD 已经转他人处理
-STOP 流程已终止	
-RELIEVED 解除协议（已解除）
+<br/>PENDING 待签署	
+<br/>FILLPENDING 待填写
+<br/>FILLACCEPT 填写完成	
+<br/>FILLREJECT 拒绝填写	
+<br/>WAITPICKUP 待领取	
+<br/>ACCEPT 已签署	
+<br/>REJECT 拒签 
+<br/>DEADLINE 过期没人处理 
+<br/>CANCEL 流程已撤回	
+<br/>FORWARD 已经转他人处理
+<br/>STOP 流程已终止	
+<br/>RELIEVED 解除协议（已解除）
 
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ApproveStatus: string
+  ApproveStatus?: string
   /**
-   * 签署人信息
+   * 签署人自定义信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ApproveMessage: string
+  ApproveMessage?: string
   /**
    * 签署人签署时间戳，单位秒
    */
-  ApproveTime: number
+  ApproveTime?: number
   /**
-   * 参与者类型 (ORGANIZATION企业/PERSON个人)
+   * 参与者类型 
+<br/>ORGANIZATION：企业签署人
+<br/>PERSON：个人签署人
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ApproveType: string
+  ApproveType?: string
 }
 
 /**
@@ -2704,7 +2706,9 @@ export interface ChannelCreateMultiFlowSignQRCodeRequest {
    */
   FlowName: string
   /**
-   * 最大可发起签署流程份数，默认5份；发起签署流程数量超过此上限后，二维码自动失效。
+   * 最大可发起签署流程份数
+<br/>默认5份
+<br/>备注：发起签署流程数量超过此上限后，二维码自动失效。
    */
   MaxFlowNum?: number
   /**
@@ -2716,7 +2720,8 @@ export interface ChannelCreateMultiFlowSignQRCodeRequest {
    */
   QrEffectiveDay?: number
   /**
-   * 限制二维码用户条件
+   * 指定的签署二维码签署人
+<br/>指定后，只允许知道的人操作和签署
    */
   Restrictions?: Array<ApproverRestriction>
   /**

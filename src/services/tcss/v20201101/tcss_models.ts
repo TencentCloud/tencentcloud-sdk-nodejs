@@ -1299,7 +1299,7 @@ export interface SoftQuotaDayInfo {
    */
   PayTime: string
   /**
-   * 计费核数
+   * 计费核数(已废弃)
    */
   CoresCnt: number
 }

@@ -81,7 +81,7 @@ import {
   DeleteParamTemplateRequest,
   DbInfo,
   DescribeFlowResponse,
-  SetRenewFlagResponse,
+  ParamDetail,
   DescribeResourcePackageSaleSpecRequest,
   ExportInstanceErrorLogsRequest,
   SearchClusterTablesResponse,
@@ -131,8 +131,9 @@ import {
   UpgradeInstanceRequest,
   ModifyMaintainPeriodConfigResponse,
   IsolateInstanceRequest,
-  SwitchClusterVpcResponse,
+  SetRenewFlagResponse,
   DescribeClusterDetailRequest,
+  SwitchClusterVpcResponse,
   SearchClusterTablesRequest,
   DeleteBackupResponse,
   ModifyInstanceParamRequest,
@@ -141,7 +142,7 @@ import {
   CreateAuditLogFileResponse,
   OpenWanResponse,
   PauseServerlessResponse,
-  ParamDetail,
+  OpenClusterReadOnlyInstanceGroupAccessResponse,
   DescribeAuditRuleWithInstanceIdsResponse,
   UpgradeProxyVersionResponse,
   ResetAccountPasswordResponse,
@@ -263,6 +264,7 @@ import {
   DescribeParamTemplateDetailRequest,
   ModifyAccountHostRequest,
   CreateParamTemplateRequest,
+  OpenClusterReadOnlyInstanceGroupAccessRequest,
   DescribeAuditRuleTemplatesRequest,
   InstanceSpec,
   DescribeFlowRequest,
@@ -978,6 +980,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: RevokeAccountPrivilegesResponse) => void
   ): Promise<RevokeAccountPrivilegesResponse> {
     return this.request("RevokeAccountPrivileges", req, cb)
+  }
+
+  /**
+   * 开启只读实例组接入
+   */
+  async OpenClusterReadOnlyInstanceGroupAccess(
+    req?: OpenClusterReadOnlyInstanceGroupAccessRequest,
+    cb?: (error: string, rep: OpenClusterReadOnlyInstanceGroupAccessResponse) => void
+  ): Promise<OpenClusterReadOnlyInstanceGroupAccessResponse> {
+    return this.request("OpenClusterReadOnlyInstanceGroupAccess", req, cb)
   }
 
   /**

@@ -1278,6 +1278,16 @@ export interface ParameterDetail {
 }
 
 /**
+ * DescribeInstanceByOrders请求参数结构体
+ */
+export interface DescribeInstanceByOrdersRequest {
+  /**
+   * 订单号集合
+   */
+  DealNames: Array<string>
+}
+
+/**
  * DescribeBusinessIntelligenceFile返回参数结构体
  */
 export interface DescribeBusinessIntelligenceFileResponse {
@@ -2928,6 +2938,20 @@ export interface DescribeMigrationsRequest {
 }
 
 /**
+ * 订单号对应的资源ID列表
+ */
+export interface DealInstance {
+  /**
+   * 实例ID
+   */
+  InstanceId?: Array<string>
+  /**
+   * 订单号
+   */
+  DealName?: string
+}
+
+/**
  * DescribeDBCharsets请求参数结构体
  */
 export interface DescribeDBCharsetsRequest {
@@ -3759,6 +3783,20 @@ export interface ModifyDatabaseCDCRequest {
    * 实例ID
    */
   InstanceId: string
+}
+
+/**
+ * DescribeInstanceByOrders返回参数结构体
+ */
+export interface DescribeInstanceByOrdersResponse {
+  /**
+   * 资源ID集合
+   */
+  DealInstance?: Array<DealInstance>
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

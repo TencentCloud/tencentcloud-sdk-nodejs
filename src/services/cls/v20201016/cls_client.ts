@@ -76,6 +76,7 @@ import {
   DescribeCosRechargesRequest,
   MetaTagInfo,
   CreateCosRechargeRequest,
+  DescribeKafkaUserRequest,
   ExtractRuleInfo,
   TopicInfo,
   DeleteDataTransformResponse,
@@ -241,6 +242,7 @@ import {
   CheckRechargeKafkaServerResponse,
   ModifyCosRechargeRequest,
   DescribeLogsetsRequest,
+  DescribeKafkaUserResponse,
   ParquetInfo,
   DeleteTopicResponse,
   CosRechargeInfo,
@@ -467,6 +469,16 @@ cls.pb.cc cls.pb.h cls.proto
     cb?: (error: string, rep: CreateConsumerResponse) => void
   ): Promise<CreateConsumerResponse> {
     return this.request("CreateConsumer", req, cb)
+  }
+
+  /**
+   * 本接口用于获取kafka用户信息
+   */
+  async DescribeKafkaUser(
+    req: DescribeKafkaUserRequest,
+    cb?: (error: string, rep: DescribeKafkaUserResponse) => void
+  ): Promise<DescribeKafkaUserResponse> {
+    return this.request("DescribeKafkaUser", req, cb)
   }
 
   /**

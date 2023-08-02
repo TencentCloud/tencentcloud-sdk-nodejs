@@ -68,6 +68,16 @@ it("cls.v20201016.CreateConsumer", async function () {
     }
 })
 
+it("cls.v20201016.DescribeKafkaUser", async function () {
+    try {
+       const data = await client.DescribeKafkaUser({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cls.v20201016.ModifyTopic", async function () {
     try {
        const data = await client.ModifyTopic({})

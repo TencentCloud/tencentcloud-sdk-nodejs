@@ -331,6 +331,12 @@ callbackinfo包含： 回调地址和签名key
         return this.request("CreateFlowSignUrl", req, cb);
     }
     /**
+     * 本接口（CreatePersonAuthCertificateImage）用于创建个人用户证书证明图片
+     */
+    async CreatePersonAuthCertificateImage(req, cb) {
+        return this.request("CreatePersonAuthCertificateImage", req, cb);
+    }
+    /**
      * 上传了word、excel、图片文件后，通过该接口发起文件转换任务，将word、excel、图片文件转换为pdf文件。
      */
     async CreateConvertTaskApi(req, cb) {
