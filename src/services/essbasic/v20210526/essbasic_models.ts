@@ -4096,7 +4096,7 @@ export interface OperateChannelTemplateRequest {
    */
   AuthTag?: string
   /**
-   * 当OperateType=UPADATE时，可以通过设置此字段对模板启停用状态进行操作。
+   * 当OperateType=UPDATE时，可以通过设置此字段对模板启停用状态进行操作。
 若此字段值为0，则不会修改模板Available，
 1为启用模板，
 2为停用模板。

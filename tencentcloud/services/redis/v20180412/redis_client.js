@@ -370,7 +370,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateReplicationGroup", req, cb);
     }
     /**
-     * 查询实例访问来源信息
+     * 该接口已下线，请使用数据库智能管家 DBbrain 接口 [DescribeProxyProcessStatistics] (https://cloud.tencent.com/document/product/1130/84544) 获取实例访问来源。
      */
     async DescribeInstanceMonitorSIP(req, cb) {
         return this.request("DescribeInstanceMonitorSIP", req, cb);

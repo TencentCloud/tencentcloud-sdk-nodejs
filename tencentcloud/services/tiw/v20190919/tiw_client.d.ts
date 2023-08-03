@@ -95,7 +95,7 @@ export declare class Client extends AbstractClient {
      */
     SetPPTCheckCallback(req: SetPPTCheckCallbackRequest, cb?: (error: string, rep: SetPPTCheckCallbackResponse) => void): Promise<SetPPTCheckCallbackResponse>;
     /**
-     * 通过文档URL查询转码任务，返回最近的一次转码结果
+     * 通过文档URL查询转码任务，返回最近一次的转码任务状态
      */
     DescribeTranscodeByUrl(req: DescribeTranscodeByUrlRequest, cb?: (error: string, rep: DescribeTranscodeByUrlResponse) => void): Promise<DescribeTranscodeByUrlResponse>;
     /**

@@ -150,9 +150,9 @@ export interface ExceptUserRuleCondition {
  */
 export interface CheckCnameStatusResponse {
   /**
-   * 域名Cname状态信息列表。
+   * 加速域名 CNAME 状态信息列表。
    */
-  CnameStatus: Array<CnameStatus>
+  CnameStatus?: Array<CnameStatus>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6003,11 +6003,11 @@ export interface RewriteAction {
  */
 export interface CheckCnameStatusRequest {
   /**
-   * 站点ID。
+   * 站点 ID。
    */
   ZoneId: string
   /**
-   * 记录名称列表。
+   * 加速域名列表。
    */
   RecordNames: Array<string>
 }

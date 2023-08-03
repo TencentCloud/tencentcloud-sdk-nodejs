@@ -166,15 +166,15 @@ export interface BusinessCardOCRResponse {
     /**
      * 名片识别结果，具体内容请点击左侧链接。
      */
-    BusinessCardInfos: Array<BusinessCardInfo>;
+    BusinessCardInfos?: Array<BusinessCardInfo>;
     /**
      * 返回图像预处理后的图片，图像预处理未开启时返回内容为空。
      */
-    RetImageBase64: string;
+    RetImageBase64?: string;
     /**
      * 图片旋转角度（角度制），文本的水平方向为0°；顺时针为正，逆时针为负。点击查看<a href="https://cloud.tencent.com/document/product/866/45139">如何纠正倾斜文本</a>
      */
-    Angle: number;
+    Angle?: number;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */

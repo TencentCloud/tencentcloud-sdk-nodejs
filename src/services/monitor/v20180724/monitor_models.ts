@@ -2319,36 +2319,36 @@ export interface RecordingRuleSet {
   /**
    * 规则 ID
    */
-  RuleId: string
+  RuleId?: string
   /**
    * 规则状态码
    */
-  RuleState: number
+  RuleState?: number
   /**
    * 分组名称
    */
-  Name: string
+  Name?: string
   /**
    * 规则内容组
    */
-  Group: string
+  Group?: string
   /**
    * 规则数量
    */
-  Total: number
+  Total?: number
   /**
    * 规则创建时间
    */
-  CreatedAt: string
+  CreatedAt?: string
   /**
    * 规则最近更新时间
    */
-  UpdatedAt: string
+  UpdatedAt?: string
   /**
    * 规则名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RuleName: string
+  RuleName?: string
 }
 
 /**
@@ -2497,7 +2497,7 @@ export interface CreateRecordingRuleResponse {
    * 规则 ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RuleId: string
+  RuleId?: string
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

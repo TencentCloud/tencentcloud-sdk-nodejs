@@ -792,6 +792,10 @@ export interface DescribeKafkaConsumerResponse {
      */
     Compression?: number;
     /**
+     * kafka协议消费数据格式
+     */
+    ConsumerContent?: KafkaConsumerContent;
+    /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
@@ -983,7 +987,7 @@ export interface ScheduledSqlResouceInfo {
      */
     TopicId: string;
     /**
-     * 主题的的地域信息
+     * 主题的地域信息
      */
     Region?: string;
     /**
@@ -3540,6 +3544,10 @@ export interface ModifyKafkaConsumerRequest {
      * 压缩方式[0:NONE；2:SNAPPY；3:LZ4]
      */
     Compression?: number;
+    /**
+     * kafka协议消费数据格式
+     */
+    ConsumerContent?: KafkaConsumerContent;
 }
 /**
  * 日志导出信息

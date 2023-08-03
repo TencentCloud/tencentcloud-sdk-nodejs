@@ -638,19 +638,19 @@ export interface SendRocketMQMessageRequest {
 }
 
 /**
- * RabbitMQ专享版虚拟机
+ * RabbitMQ专享版云服务器
  */
 export interface RabbitMQPrivateVirtualHost {
   /**
    * 虚拟主机的名字
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  VirtualHostName: string
+  VirtualHostName?: string
   /**
    * 虚拟主机的描述
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Description: string
+  Description?: string
 }
 
 /**

@@ -223,7 +223,7 @@ export interface DescribeOverviewCCTrendRequest {
      */
     MetricName: string;
     /**
-     * 大禹子产品代号（bgpip表示高防IP；bgp-multip表示共享包；basic表示DDoS基础防护）
+     * DDoS防护子产品代号（bgpip表示高防IP；bgp-multip表示共享包；basic表示DDoS基础防护）
      */
     Business?: string;
     /**
@@ -277,7 +277,7 @@ export interface ProxyTypeInfo {
  */
 export interface CreateBoundIPRequest {
     /**
-     * 大禹子产品代号（bgp表示独享包；bgp-multip表示共享包）
+     * DDoS防护子产品代号（bgp表示独享包；bgp-multip表示共享包）
      */
     Business: string;
     /**
@@ -490,7 +490,7 @@ export interface InstanceRelation {
  */
 export interface ModifyNewDomainRulesRequest {
     /**
-     * 大禹子产品代号（bgpip表示高防IP）
+     * DDoS防护子产品代号（bgpip表示高防IP）
      */
     Business: string;
     /**
@@ -755,11 +755,11 @@ export interface DescribeCcBlackWhiteIpListResponse {
     /**
      * CC四层黑白名单策略列表总数
      */
-    Total: number;
+    Total?: number;
     /**
      * CC四层黑白名单策略列表详情
      */
-    CcBlackWhiteIpList: Array<CcBlackWhiteIpPolicy>;
+    CcBlackWhiteIpList?: Array<CcBlackWhiteIpPolicy>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -812,7 +812,7 @@ export interface CreateNewL7RulesResponse {
     /**
      * 成功码
      */
-    Success: SuccessCode;
+    Success?: SuccessCode;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -887,7 +887,7 @@ export interface ModifyNewDomainRulesResponse {
     /**
      * 成功码
      */
-    Success: SuccessCode;
+    Success?: SuccessCode;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1234,11 +1234,11 @@ export interface DescribeCCThresholdListResponse {
     /**
      * 清洗阈值策略列表总数
      */
-    Total: number;
+    Total?: number;
     /**
      * 清洗阈值策略列表详情
      */
-    ThresholdList: Array<CCThresholdPolicy>;
+    ThresholdList?: Array<CCThresholdPolicy>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1400,7 +1400,7 @@ export interface DescribeOverviewDDoSTrendRequest {
      */
     MetricName: string;
     /**
-     * 大禹子产品代号（bgpip表示高防IP；bgp-multip表示高防包；basic表示DDoS基础防护）
+     * DDoS防护子产品代号（bgpip表示高防IP；bgp-multip表示高防包；basic表示DDoS基础防护）
      */
     Business?: string;
     /**
@@ -1426,7 +1426,7 @@ export interface DisassociateDDoSEipAddressResponse {
  */
 export interface DescribeBgpBizTrendRequest {
     /**
-     * 大禹子产品代号（bgp-multip表示高防包）
+     * DDoS防护子产品代号（bgp-multip表示高防包）
      */
     Business: string;
     /**
@@ -1468,7 +1468,7 @@ export interface DescribeBizHttpStatusRequest {
      */
     Statistics: string;
     /**
-     * 大禹子产品代号（bgpip表示高防IP）
+     * DDoS防护子产品代号（bgpip表示高防IP）
      */
     Business: string;
     /**
@@ -1745,7 +1745,7 @@ export interface ModifyCcBlackWhiteIpListResponse {
  */
 export interface DescribeNewL7RulesRequest {
     /**
-     * 大禹子产品代号（bgpip表示高防IP）
+     * DDoS防护子产品代号（bgpip表示高防IP）
      */
     Business: string;
     /**
@@ -2074,11 +2074,11 @@ export interface DescribeCCLevelListResponse {
     /**
      * 分级策略列表总数
      */
-    Total: number;
+    Total?: number;
     /**
      * 分级策略列表总数
      */
-    LevelList: Array<CCLevelPolicy>;
+    LevelList?: Array<CCLevelPolicy>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2252,11 +2252,11 @@ export interface DescribeNewL7RulesErrHealthResponse {
     /**
      * 异常规则列表，返回值说明: Key值为规则ID，Value值为异常IP及错误信息，多个IP用","分割
      */
-    ErrHealths: Array<KeyValue>;
+    ErrHealths?: Array<KeyValue>;
     /**
      * 异常规则的总数
      */
-    Total: number;
+    Total?: number;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2320,19 +2320,19 @@ export interface DescribeBgpBizTrendResponse {
     /**
      * 曲线图各个时间点的值
      */
-    DataList: Array<number>;
+    DataList?: Array<number>;
     /**
      * 曲线图取值个数
      */
-    Total: number;
+    Total?: number;
     /**
      * 统计纬度
      */
-    MetricName: string;
+    MetricName?: string;
     /**
      * 返回数组最大值
      */
-    MaxData: number;
+    MaxData?: number;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2761,7 +2761,7 @@ export interface DDoSAIRelation {
  */
 export interface DescribeCCReqLimitPolicyListRequest {
     /**
-     * 大禹子产品代号（bgp-multip表示高防包，bgpip表示高防IP）
+     * DDoS防护子产品代号（bgp-multip表示高防包，bgpip表示高防IP）
      */
     Business: string;
     /**
@@ -2826,7 +2826,7 @@ export interface ModifyDDoSThresholdResponse {
     /**
      * 成功码
      */
-    Success: SuccessCode;
+    Success?: SuccessCode;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -3050,7 +3050,7 @@ export interface IPLineInfo {
  */
 export interface DescribeCcBlackWhiteIpListRequest {
     /**
-     * 大禹子产品代号（bgp-multip：表示高防包；bgpip：表示高防IP）
+     * DDoS防护子产品代号（bgp-multip：表示高防包；bgpip：表示高防IP）
      */
     Business: string;
     /**
@@ -3136,11 +3136,11 @@ export interface ModifyDDoSLevelResponse {
     /**
      * 防护等级，取值[low,middle,high]
      */
-    DDoSLevel: string;
+    DDoSLevel?: string;
     /**
      * 资源ID
      */
-    Id: string;
+    Id?: string;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -3452,7 +3452,7 @@ export interface ModifyDDoSThresholdRequest {
      */
     Id: string;
     /**
-     * 大禹子产品代号（bgpip表示高防IP；bgp表示独享包；bgp-multip表示共享包；net表示高防IP专业版）
+     * DDoS防护子产品代号（bgpip表示高防IP；bgp表示独享包；bgp-multip表示共享包；net表示高防IP专业版）
      */
     Business: string;
     /**
@@ -3509,7 +3509,7 @@ export interface ModifyDDoSLevelRequest {
      */
     Id: string;
     /**
-     * 大禹子产品代号（bgpip表示高防IP；bgp表示独享包；bgp-multip表示共享包；net表示高防IP专业版）
+     * DDoS防护子产品代号（bgpip表示高防IP；bgp表示独享包；bgp-multip表示共享包；net表示高防IP专业版）
      */
     Business: string;
     /**
@@ -3651,7 +3651,7 @@ export interface CCReqLimitPolicy {
  */
 export interface DescribeCCPrecisionPlyListRequest {
     /**
-     * 大禹子产品代号（bgpip-multip：表示高防包；bgpip：表示高防IP）
+     * DDoS防护子产品代号（bgpip-multip：表示高防包；bgpip：表示高防IP）
      */
     Business: string;
     /**
@@ -3697,7 +3697,7 @@ export interface ProtocolPort {
  */
 export interface DescribeCCLevelListRequest {
     /**
-     * 大禹子产品代号（bgp-multip表示高防包）
+     * DDoS防护子产品代号（bgp-multip表示高防包）
      */
     Business: string;
     /**
@@ -3822,7 +3822,7 @@ export interface CreateNewL7RulesRequest {
      */
     Rules: Array<L7RuleEntry>;
     /**
-     * 大禹子产品代号（bgpip表示高防IP）
+     * DDoS防护子产品代号（bgpip表示高防IP）
      */
     Business: string;
     /**
@@ -3997,7 +3997,7 @@ export interface DescribeBizHttpStatusResponse {
     /**
      * 业务流量http状态码统计数据
      */
-    HttpStatusMap: HttpStatusMap;
+    HttpStatusMap?: HttpStatusMap;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -4044,11 +4044,11 @@ export interface DescribeCCReqLimitPolicyListResponse {
     /**
      * 频率限制列表总数
      */
-    Total: number;
+    Total?: number;
     /**
      * 频率限制列表详情
      */
-    RequestLimitPolicyList: Array<CCReqLimitPolicy>;
+    RequestLimitPolicyList?: Array<CCReqLimitPolicy>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -4076,7 +4076,7 @@ export interface DescribeListDDoSAIResponse {
  */
 export interface DescribeNewL7RulesErrHealthRequest {
     /**
-     * 大禹子产品代号(bgpip表示高防IP)
+     * DDoS防护子产品代号(bgpip表示高防IP)
      */
     Business: string;
     /**
@@ -4169,7 +4169,7 @@ export interface AssociateDDoSEipLoadBalancerResponse {
  */
 export interface DescribeCCThresholdListRequest {
     /**
-     * 大禹子产品代号（bgp-multip表示高防包）
+     * DDoS防护子产品代号（bgp-multip表示高防包）
      */
     Business: string;
     /**
@@ -4568,40 +4568,40 @@ export interface DescribeCCTrendResponse {
     /**
      * 值个数
      */
-    Count: number;
+    Count?: number;
     /**
      * 大禹子产品代号（bgpip表示高防IP；bgp表示独享包；bgp-multip表示共享包；net表示高防IP专业版；basic表示DDoS基础防护）
      */
-    Business: string;
+    Business?: string;
     /**
      * 资源的IP
      */
-    Ip: string;
+    Ip?: string;
     /**
      * 统计粒度，取值[300(5分钟)，3600(小时)，86400(天)]
      */
-    Period: number;
+    Period?: number;
     /**
      * 统计开始时间
      */
-    StartTime: string;
+    StartTime?: string;
     /**
      * 统计结束时间
      */
-    EndTime: string;
+    EndTime?: string;
     /**
      * 值数组
      */
-    Data: Array<number>;
+    Data?: Array<number>;
     /**
      * 资源ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Id: string;
+    Id?: string;
     /**
      * 指标，取值[inqps(总请求峰值，dropqps(攻击请求峰值))，incount(请求次数), dropcount(攻击次数)]
      */
-    MetricName: string;
+    MetricName?: string;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -4676,11 +4676,11 @@ export interface DescribeCcGeoIPBlockConfigListResponse {
     /**
      * CC地域封禁策略列表总数
      */
-    Total: number;
+    Total?: number;
     /**
      * CC地域封禁策略列表详情
      */
-    CcGeoIpPolicyList: Array<CcGeoIpPolicyNew>;
+    CcGeoIpPolicyList?: Array<CcGeoIpPolicyNew>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -5001,11 +5001,11 @@ export interface DescribeCCPrecisionPlyListResponse {
     /**
      * 策略列表总数
      */
-    Total: number;
+    Total?: number;
     /**
      * 策略列表详情
      */
-    PrecisionPolicyList: Array<CCPrecisionPolicy>;
+    PrecisionPolicyList?: Array<CCPrecisionPolicy>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -5020,7 +5020,7 @@ export interface DescribeBizTrendRequest {
      */
     Statistics: string;
     /**
-     * 大禹子产品代号（bgpip表示高防IP）
+     * DDoS防护子产品代号（bgpip表示高防IP）
      */
     Business: string;
     /**
@@ -5146,7 +5146,7 @@ export interface DescribeCCLevelPolicyResponse {
  */
 export interface DescribeBizMonitorTrendRequest {
     /**
-     * 大禹子产品代号（bgpip表示高防IP）
+     * DDoS防护子产品代号（bgpip表示高防IP）
      */
     Business: string;
     /**
@@ -5581,7 +5581,7 @@ export interface ModifyCCLevelPolicyRequest {
  */
 export interface DescribeCcGeoIPBlockConfigListRequest {
     /**
-     * 大禹子产品代号（bgpip-multip：表示高防包；bgpip：表示高防IP）
+     * DDoS防护子产品代号（bgpip-multip：表示高防包；bgpip：表示高防IP）
      */
     Business: string;
     /**
@@ -5661,7 +5661,7 @@ export interface CreatePacketFilterConfigRequest {
  */
 export interface DescribeCCTrendRequest {
     /**
-     * 大禹子产品代号（bgpip表示高防IP；bgp表示独享包；bgp-multip表示共享包；net表示高防IP专业版；basic表示DDoS基础防护）
+     * DDoS防护子产品代号（bgpip表示高防IP；bgp表示独享包；bgp-multip表示共享包；net表示高防IP专业版；basic表示DDoS基础防护）
      */
     Business: string;
     /**

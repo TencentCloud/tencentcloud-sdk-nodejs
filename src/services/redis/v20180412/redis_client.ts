@@ -833,7 +833,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询实例访问来源信息
+   * 该接口已下线，请使用数据库智能管家 DBbrain 接口 [DescribeProxyProcessStatistics] (https://cloud.tencent.com/document/product/1130/84544) 获取实例访问来源。
    */
   async DescribeInstanceMonitorSIP(
     req: DescribeInstanceMonitorSIPRequest,

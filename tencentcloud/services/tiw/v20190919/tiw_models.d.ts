@@ -2111,7 +2111,7 @@ export interface RoomUsageDataItem {
  */
 export interface SnapshotCOS {
     /**
-     * cos所在腾讯云帐号uin
+     * cos所在腾讯云账号uin
      */
     Uin: number;
     /**
