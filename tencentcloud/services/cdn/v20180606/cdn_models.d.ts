@@ -4505,7 +4505,7 @@ export interface ListTopDataResponse {
     /**
      * 各个资源的Top 访问数据详情。
      */
-    Data: Array<TopData>;
+    Data?: Array<TopData>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -5197,16 +5197,14 @@ export interface DescribePayTypeResponse {
  */
 export interface ListTopDataRequest {
     /**
-     * 查询起始日期：yyyy-MM-dd HH:mm:ss
-  仅支持按天粒度的数据查询，取入参中的天信息作为起始日期
-  返回大于等于起始日期当天 00:00:00 点产生的数据，如 StartTime为2018-09-04 10:40:00，返回数据的起始时间为2018-09-04 00:00:00
+     * 查询起始时间：yyyy-MM-dd HH:mm:ss
+  仅支持按分钟粒度的数据查询，按入参抹去秒位作为起始时间，如 StartTime为2018-09-04 10:40:23，返回数据的起始时间为2018-09-04 10:40:00
   仅支持 90 天内数据查询
      */
     StartTime: string;
     /**
-     * 查询结束日期：yyyy-MM-dd HH:mm:ss
-  仅支持按天粒度的数据查询，取入参中的天信息作为结束日期
-  返回小于等于结束日期当天 23:59:59 产生的数据，如EndTime为2018-09-05 22:40:00，返回数据的结束时间为2018-09-05 23:59:59
+     * 查询结束时间：yyyy-MM-dd HH:mm:ss
+  仅支持按天粒度的数据查询，取入参中的天信息作为结束日期 返回小于等于结束日期当天 23:59:59 产生的数据，如EndTime为2018-09-05 22:40:00，返回数据的结束时间为2018-09-05 23:59:59
   EndTime 需要大于等于 StartTime
      */
     EndTime: string;

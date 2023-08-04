@@ -35,7 +35,9 @@ import {
   ModifyDBInstanceReadOnlyGroupResponse,
   ClassInfo,
   DescribeCloneDBInstanceSpecRequest,
+  DescribeDBInstanceSecurityGroupsResponse,
   BackupPlan,
+  SwitchDBInstancePrimaryRequest,
   OpenServerlessDBExtranetAccessRequest,
   RenewInstanceResponse,
   DeleteServerlessDBInstanceResponse,
@@ -102,6 +104,8 @@ import {
   ModifyDBInstancesProjectResponse,
   DescribeParameterTemplatesResponse,
   ParamSpecRelation,
+  SwitchDBInstancePrimaryResponse,
+  ModifyDBInstanceHAConfigRequest,
   PgDeal,
   DeleteReadOnlyGroupNetworkAccessResponse,
   DescribeBackupSummariesResponse,
@@ -127,7 +131,7 @@ import {
   CloseServerlessDBExtranetAccessResponse,
   EventItem,
   RestartDBInstanceRequest,
-  DescribeDBInstanceSecurityGroupsResponse,
+  DescribeDBInstanceHAConfigRequest,
   CreateParameterTemplateResponse,
   ParamInfo,
   DescribeLogBackupsResponse,
@@ -136,6 +140,7 @@ import {
   IsolateDBInstancesResponse,
   OpenDBExtranetAccessResponse,
   InquiryPriceUpgradeDBInstanceRequest,
+  DescribeDBInstanceHAConfigResponse,
   IsolateDBInstancesRequest,
   ModifyDBInstanceNameRequest,
   EncryptionKey,
@@ -205,12 +210,13 @@ import {
   DescribeDBInstancesResponse,
   DescribeDBInstanceSecurityGroupsRequest,
   DescribeBackupPlansRequest,
+  ModifyDBInstanceHAConfigResponse,
   RebalanceReadOnlyGroupResponse,
   ResetAccountPasswordRequest,
   DescribeSlowQueryAnalysisResponse,
   ModifyDBInstanceParametersRequest,
   RawSlowQuery,
-  CreateReadOnlyGroupNetworkAccessResponse,
+  DescribeDBSlowlogsResponse,
   DescribeAccountsResponse,
   ModifyDBInstanceChargeTypeRequest,
   DescribeParameterTemplateAttributesResponse,
@@ -229,7 +235,7 @@ import {
   UpgradeDBInstanceKernelVersionRequest,
   DescribeBaseBackupsRequest,
   DescribeEncryptionKeysResponse,
-  DescribeDBSlowlogsResponse,
+  CreateReadOnlyGroupNetworkAccessResponse,
   CreateDBInstancesResponse,
   ModifyDBInstanceChargeTypeResponse,
 } from "./postgres_models"
@@ -271,6 +277,18 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDBErrlogsResponse) => void
   ): Promise<DescribeDBErrlogsResponse> {
     return this.request("DescribeDBErrlogs", req, cb)
+  }
+
+  /**
+     * 本接口（DescribeDBInstanceHAConfig）用于查询实例HA配置信息。其中HA配置信息包括：
+<li>允许备节点切换为主节点的条件配置
+<li>半同步实例使用同步复制或异步复制的条件配置
+     */
+  async DescribeDBInstanceHAConfig(
+    req: DescribeDBInstanceHAConfigRequest,
+    cb?: (error: string, rep: DescribeDBInstanceHAConfigResponse) => void
+  ): Promise<DescribeDBInstanceHAConfigResponse> {
+    return this.request("DescribeDBInstanceHAConfig", req, cb)
   }
 
   /**
@@ -744,13 +762,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（RestartDBInstance）用于重启实例。
+   * 本接口 (DescribeDBInstanceAttribute) 用于查询某个实例的详情信息。
    */
-  async RestartDBInstance(
-    req: RestartDBInstanceRequest,
-    cb?: (error: string, rep: RestartDBInstanceResponse) => void
-  ): Promise<RestartDBInstanceResponse> {
-    return this.request("RestartDBInstance", req, cb)
+  async DescribeDBInstanceAttribute(
+    req: DescribeDBInstanceAttributeRequest,
+    cb?: (error: string, rep: DescribeDBInstanceAttributeResponse) => void
+  ): Promise<DescribeDBInstanceAttributeResponse> {
+    return this.request("DescribeDBInstanceAttribute", req, cb)
   }
 
   /**
@@ -784,13 +802,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口 (DescribeDBInstanceAttribute) 用于查询某个实例的详情信息。
+   * 本接口（RestartDBInstance）用于重启实例。
    */
-  async DescribeDBInstanceAttribute(
-    req: DescribeDBInstanceAttributeRequest,
-    cb?: (error: string, rep: DescribeDBInstanceAttributeResponse) => void
-  ): Promise<DescribeDBInstanceAttributeResponse> {
-    return this.request("DescribeDBInstanceAttribute", req, cb)
+  async RestartDBInstance(
+    req: RestartDBInstanceRequest,
+    cb?: (error: string, rep: RestartDBInstanceResponse) => void
+  ): Promise<RestartDBInstanceResponse> {
+    return this.request("RestartDBInstance", req, cb)
   }
 
   /**
@@ -801,6 +819,18 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateDBInstancesResponse) => void
   ): Promise<CreateDBInstancesResponse> {
     return this.request("CreateDBInstances", req, cb)
+  }
+
+  /**
+     * 本接口（ModifyDBInstanceHAConfig）用于修改实例HA配置信息。其中HA配置信息包括：
+<li>允许备节点切换为主节点的条件配置
+<li>半同步实例使用同步复制或异步复制的条件配置
+     */
+  async ModifyDBInstanceHAConfig(
+    req: ModifyDBInstanceHAConfigRequest,
+    cb?: (error: string, rep: ModifyDBInstanceHAConfigResponse) => void
+  ): Promise<ModifyDBInstanceHAConfigResponse> {
+    return this.request("ModifyDBInstanceHAConfig", req, cb)
   }
 
   /**
@@ -971,6 +1001,19 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeOrdersResponse) => void
   ): Promise<DescribeOrdersResponse> {
     return this.request("DescribeOrders", req, cb)
+  }
+
+  /**
+     * 本接口（SwitchDBInstancePrimary）用于切换实例主备关系。
+<li>通过主动发起切换，可以验证业务能否正确处理实例主备切换的场景
+<li>通过使用强制切换，可以在备节点延迟不满足切换条件时，强制发起主从切换
+<li>只有主实例可以执行该操作
+     */
+  async SwitchDBInstancePrimary(
+    req: SwitchDBInstancePrimaryRequest,
+    cb?: (error: string, rep: SwitchDBInstancePrimaryResponse) => void
+  ): Promise<SwitchDBInstancePrimaryResponse> {
+    return this.request("SwitchDBInstancePrimary", req, cb)
   }
 
   /**

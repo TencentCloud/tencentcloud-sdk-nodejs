@@ -2228,7 +2228,7 @@ export interface FlowGroupInfo {
    */
   Unordered?: boolean
   /**
-   * 合同（流程）发起方的填写控件，用户
+   * 合同（流程）发起方的填写控件, 由发起方进行在发起时进行填充
    */
   Components?: Array<Component>
   /**

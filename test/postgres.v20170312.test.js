@@ -48,6 +48,16 @@ it("postgres.v20170312.DescribeDBErrlogs", async function () {
     }
 })
 
+it("postgres.v20170312.DescribeDBInstanceHAConfig", async function () {
+    try {
+       const data = await client.DescribeDBInstanceHAConfig({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("postgres.v20170312.RebalanceReadOnlyGroup", async function () {
     try {
        const data = await client.RebalanceReadOnlyGroup({})
@@ -518,9 +528,9 @@ it("postgres.v20170312.ResetAccountPassword", async function () {
     }
 })
 
-it("postgres.v20170312.RestartDBInstance", async function () {
+it("postgres.v20170312.DescribeDBInstanceAttribute", async function () {
     try {
-       const data = await client.RestartDBInstance({})
+       const data = await client.DescribeDBInstanceAttribute({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -558,9 +568,9 @@ it("postgres.v20170312.DescribeDBXlogs", async function () {
     }
 })
 
-it("postgres.v20170312.DescribeDBInstanceAttribute", async function () {
+it("postgres.v20170312.RestartDBInstance", async function () {
     try {
-       const data = await client.DescribeDBInstanceAttribute({})
+       const data = await client.RestartDBInstance({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -571,6 +581,16 @@ it("postgres.v20170312.DescribeDBInstanceAttribute", async function () {
 it("postgres.v20170312.CreateDBInstances", async function () {
     try {
        const data = await client.CreateDBInstances({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("postgres.v20170312.ModifyDBInstanceHAConfig", async function () {
+    try {
+       const data = await client.ModifyDBInstanceHAConfig({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -741,6 +761,16 @@ it("postgres.v20170312.DescribeClasses", async function () {
 it("postgres.v20170312.DescribeOrders", async function () {
     try {
        const data = await client.DescribeOrders({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("postgres.v20170312.SwitchDBInstancePrimary", async function () {
+    try {
+       const data = await client.SwitchDBInstancePrimary({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

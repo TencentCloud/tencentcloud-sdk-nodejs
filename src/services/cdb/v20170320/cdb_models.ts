@@ -271,7 +271,7 @@ export interface CreateCdbProxyResponse {
    * 异步任务ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  AsyncRequestId: string
+  AsyncRequestId?: string
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2295,39 +2295,39 @@ export interface DescribeDBFeaturesResponse {
   /**
    * 是否支持数据库审计功能。
    */
-  IsSupportAudit: boolean
+  IsSupportAudit?: boolean
   /**
    * 开启审计是否需要升级内核版本。
    */
-  AuditNeedUpgrade: boolean
+  AuditNeedUpgrade?: boolean
   /**
    * 是否支持数据库加密功能。
    */
-  IsSupportEncryption: boolean
+  IsSupportEncryption?: boolean
   /**
    * 开启加密是否需要升级内核版本。
    */
-  EncryptionNeedUpgrade: boolean
+  EncryptionNeedUpgrade?: boolean
   /**
    * 是否为异地只读实例。
    */
-  IsRemoteRo: boolean
+  IsRemoteRo?: boolean
   /**
    * 主实例所在地域。
    */
-  MasterRegion: string
+  MasterRegion?: string
   /**
    * 是否支持小版本升级。
    */
-  IsSupportUpdateSubVersion: boolean
+  IsSupportUpdateSubVersion?: boolean
   /**
    * 当前内核版本。
    */
-  CurrentSubVersion: string
+  CurrentSubVersion?: string
   /**
    * 可供升级的内核版本。
    */
-  TargetSubVersion: string
+  TargetSubVersion?: string
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6562,7 +6562,7 @@ export interface AdjustCdbProxyAddressResponse {
    * 异步任务ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  AsyncRequestId: string
+  AsyncRequestId?: string
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

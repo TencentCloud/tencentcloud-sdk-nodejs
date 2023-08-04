@@ -46,6 +46,14 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDBErrlogs", req, cb);
     }
     /**
+     * 本接口（DescribeDBInstanceHAConfig）用于查询实例HA配置信息。其中HA配置信息包括：
+<li>允许备节点切换为主节点的条件配置
+<li>半同步实例使用同步复制或异步复制的条件配置
+     */
+    async DescribeDBInstanceHAConfig(req, cb) {
+        return this.request("DescribeDBInstanceHAConfig", req, cb);
+    }
+    /**
      * 本接口(RebalanceReadOnlyGroup)用于重新均衡 RO 组内实例的负载。注意，RO 组内 RO 实例会有一次数据库连接瞬断，请确保应用程序能重连数据库，谨慎操作。
      */
     async RebalanceReadOnlyGroup(req, cb) {
@@ -328,10 +336,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ResetAccountPassword", req, cb);
     }
     /**
-     * 本接口（RestartDBInstance）用于重启实例。
+     * 本接口 (DescribeDBInstanceAttribute) 用于查询某个实例的详情信息。
      */
-    async RestartDBInstance(req, cb) {
-        return this.request("RestartDBInstance", req, cb);
+    async DescribeDBInstanceAttribute(req, cb) {
+        return this.request("DescribeDBInstanceAttribute", req, cb);
     }
     /**
      * 可对实例进行网络的删除操作。
@@ -352,16 +360,24 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDBXlogs", req, cb);
     }
     /**
-     * 本接口 (DescribeDBInstanceAttribute) 用于查询某个实例的详情信息。
+     * 本接口（RestartDBInstance）用于重启实例。
      */
-    async DescribeDBInstanceAttribute(req, cb) {
-        return this.request("DescribeDBInstanceAttribute", req, cb);
+    async RestartDBInstance(req, cb) {
+        return this.request("RestartDBInstance", req, cb);
     }
     /**
      * 本接口（CreateDBInstances）用于创建一个或者多个PostgreSQL实例,仅发货实例不会进行初始化。本接口已废弃，推荐使用接口[CreateInstances](https://cloud.tencent.com/document/api/409/56107)替代。
      */
     async CreateDBInstances(req, cb) {
         return this.request("CreateDBInstances", req, cb);
+    }
+    /**
+     * 本接口（ModifyDBInstanceHAConfig）用于修改实例HA配置信息。其中HA配置信息包括：
+<li>允许备节点切换为主节点的条件配置
+<li>半同步实例使用同步复制或异步复制的条件配置
+     */
+    async ModifyDBInstanceHAConfig(req, cb) {
+        return this.request("ModifyDBInstanceHAConfig", req, cb);
     }
     /**
      * 本接口（DeleteLogBackup）用于删除实例指定日志备份。
@@ -464,6 +480,15 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeOrders(req, cb) {
         return this.request("DescribeOrders", req, cb);
+    }
+    /**
+     * 本接口（SwitchDBInstancePrimary）用于切换实例主备关系。
+<li>通过主动发起切换，可以验证业务能否正确处理实例主备切换的场景
+<li>通过使用强制切换，可以在备节点延迟不满足切换条件时，强制发起主从切换
+<li>只有主实例可以执行该操作
+     */
+    async SwitchDBInstancePrimary(req, cb) {
+        return this.request("SwitchDBInstancePrimary", req, cb);
     }
     /**
      * 本接口 (DescribeBackupPlans) 用于实例所有的备份计划查询

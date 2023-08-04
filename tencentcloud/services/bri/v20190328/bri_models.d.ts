@@ -49,7 +49,6 @@ export interface BRIRequest {
     Scene?: string;
     /**
      * 电话号码 (业务名为bri_num时必填)
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     PhoneNumber?: string;
     /**
@@ -72,6 +71,10 @@ export interface BRIRequest {
      * 微信号的可疑标签
      */
     WechatTag?: string;
+    /**
+     * 子客户ID
+     */
+    SubAppid?: string;
 }
 /**
  * DescribeBRI返回参数结构体

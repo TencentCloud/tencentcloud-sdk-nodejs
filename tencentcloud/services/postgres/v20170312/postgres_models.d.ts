@@ -573,6 +573,19 @@ export interface DescribeCloneDBInstanceSpecRequest {
     RecoveryTargetTime?: string;
 }
 /**
+ * DescribeDBInstanceSecurityGroups返回参数结构体
+ */
+export interface DescribeDBInstanceSecurityGroupsResponse {
+    /**
+     * 安全组信息数组
+     */
+    SecurityGroupSet?: Array<SecurityGroup>;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * 备份计划
  */
 export interface BackupPlan {
@@ -592,6 +605,36 @@ export interface BackupPlan {
      * 开始备份的最晚时间
      */
     MaxBackupStartTime: string;
+}
+/**
+ * SwitchDBInstancePrimary请求参数结构体
+ */
+export interface SwitchDBInstancePrimaryRequest {
+    /**
+     * 实例ID
+     */
+    DBInstanceId: string;
+    /**
+     * 是否强制切换。强制切换时只要备节点可访问，无论主备延迟多大都会发起切换。只有SwitchTag为0时，才可使用立即切换。
+  <li>默认：false
+     */
+    Force?: boolean;
+    /**
+     * 指定实例配置完成变更后的切换时间。
+  <li>0：立即切换
+  <li>1：指定时间切换
+  <li>2：维护时间窗口内切换
+  <li>默认值：0
+     */
+    SwitchTag?: number;
+    /**
+     * 切换开始时间，时间格式：HH:MM:SS，例如：01:00:00。当SwitchTag为0或2时，该参数失效。
+     */
+    SwitchStartTime?: string;
+    /**
+     * 切换截止时间，时间格式：HH:MM:SS，例如：01:30:00。当SwitchTag为0或2时，该参数失效。SwitchStartTime和SwitchEndTime时间窗口不能小于30分钟。
+     */
+    SwitchEndTime?: string;
 }
 /**
  * OpenServerlessDBExtranetAccess请求参数结构体
@@ -2059,6 +2102,57 @@ export interface ParamSpecRelation {
     EnumValue: Array<string>;
 }
 /**
+ * SwitchDBInstancePrimary返回参数结构体
+ */
+export interface SwitchDBInstancePrimaryResponse {
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * ModifyDBInstanceHAConfig请求参数结构体
+ */
+export interface ModifyDBInstanceHAConfigRequest {
+    /**
+     * 实例ID
+     */
+    DBInstanceId: string;
+    /**
+     * 主从同步方式：
+  <li>Semi-sync：半同步
+  <li>Async：异步
+  
+     */
+    SyncMode: string;
+    /**
+     * 高可用备机最大延迟数据量。备节点延迟数据量小于等于该值，且备节点延迟时间小于等于MaxStandbyLag时，可以切换为主节点。
+  <li>单位：byte
+  <li>参数范围：[1073741824, 322122547200]
+     */
+    MaxStandbyLatency: number;
+    /**
+     * 高可用备机最大延迟时间。备节点延迟时间小于等于该值，且备节点延迟数据量小于等于MaxStandbyLatency时，可以切换为主节点。
+  <li>单位：s
+  <li>参数范围：[5, 10]
+     */
+    MaxStandbyLag: number;
+    /**
+     * 同步备机最大延迟数据量。备机延迟数据量小于等于该值，且该备机延迟时间小于等于MaxSyncStandbyLag时，则该备机采用同步复制；否则，采用异步复制。
+  该参数值针对SyncMode设置为Semi-sync的实例有效。
+  半同步实例禁止退化为异步复制时，不设置MaxSyncStandbyLatency、MaxSyncStandbyLag。
+  半同步实例允许退化异步复制时，PostgreSQL 9版本的实例须设置MaxSyncStandbyLatency且不设置MaxSyncStandbyLag，PostgreSQL 10及以上版本的实例须设置MaxSyncStandbyLatency、MaxSyncStandbyLag。
+     */
+    MaxSyncStandbyLatency?: number;
+    /**
+     * 同步备机最大延迟时间。备机延迟时间小于等于该值，且该备机延迟数据量小于等于MaxSyncStandbyLatency时，则该备机采用同步复制；否则，采用异步复制。
+  该参数值针对SyncMode设置为Semi-sync的实例有效。
+  半同步实例禁止退化为异步复制时，不设置MaxSyncStandbyLatency、MaxSyncStandbyLag。
+  半同步实例允许退化异步复制时，PostgreSQL 9版本的实例须设置MaxSyncStandbyLatency且不设置MaxSyncStandbyLag，PostgreSQL 10及以上版本的实例须设置MaxSyncStandbyLatency、MaxSyncStandbyLag，
+     */
+    MaxSyncStandbyLag?: number;
+}
+/**
  * 订单详情
  */
 export interface PgDeal {
@@ -2795,17 +2889,13 @@ export interface RestartDBInstanceRequest {
     DBInstanceId: string;
 }
 /**
- * DescribeDBInstanceSecurityGroups返回参数结构体
+ * DescribeDBInstanceHAConfig请求参数结构体
  */
-export interface DescribeDBInstanceSecurityGroupsResponse {
+export interface DescribeDBInstanceHAConfigRequest {
     /**
-     * 安全组信息数组
+     * 实例ID
      */
-    SecurityGroupSet?: Array<SecurityGroup>;
-    /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
+    DBInstanceId: string;
 }
 /**
  * CreateParameterTemplate返回参数结构体
@@ -3038,6 +3128,49 @@ export interface InquiryPriceUpgradeDBInstanceRequest {
      * 【废弃参数，不再生效】，实例计费类型。
      */
     InstanceChargeType?: string;
+}
+/**
+ * DescribeDBInstanceHAConfig返回参数结构体
+ */
+export interface DescribeDBInstanceHAConfigResponse {
+    /**
+     * 主从同步方式：
+  <li>Semi-sync：半同步
+  <li>Async：异步
+     */
+    SyncMode?: string;
+    /**
+     * 高可用备机最大延迟数据量。备节点延迟数据量小于等于该值，且备节点延迟时间小于等于MaxStandbyLag时，可以切换为主节点。
+  <li>单位：byte
+  <li>参数范围：[1073741824, 322122547200]
+     */
+    MaxStandbyLatency?: number;
+    /**
+     * 高可用备机最大延迟时间。备节点延迟时间小于等于该值，且备节点延迟数据量小于等于MaxStandbyLatency时，可以切换为主节点。
+  <li>单位：s
+  <li>参数范围：[5, 10]
+     */
+    MaxStandbyLag?: number;
+    /**
+     * 同步备机最大延迟数据量。备机延迟数据量小于等于该值，且该备机延迟时间小于等于MaxSyncStandbyLag时，则该备机采用同步复制；否则，采用异步复制。
+  该参数值针对SyncMode设置为Semi-sync的实例有效。
+  异步实例该字段返回null。
+  半同步实例禁止退化为异步复制时，该字段返回null。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MaxSyncStandbyLatency?: number;
+    /**
+     * 同步备机最大延迟时间。备机延迟时间小于等于该值，且该备机延迟数据量小于等于MaxSyncStandbyLatency时，则该备机采用同步复制；否则，采用异步复制。
+  该参数值针对SyncMode设置为Semi-sync的实例有效。
+  异步实例不返回该字段。
+  半同步实例禁止退化为异步复制时，不返回该字段。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MaxSyncStandbyLag?: number;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * IsolateDBInstances请求参数结构体
@@ -4523,6 +4656,15 @@ export interface DescribeBackupPlansRequest {
     DBInstanceId: string;
 }
 /**
+ * ModifyDBInstanceHAConfig返回参数结构体
+ */
+export interface ModifyDBInstanceHAConfigResponse {
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * RebalanceReadOnlyGroup返回参数结构体
  */
 export interface RebalanceReadOnlyGroupResponse {
@@ -4608,14 +4750,17 @@ export interface RawSlowQuery {
     SessionStartTime: string;
 }
 /**
- * CreateReadOnlyGroupNetworkAccess返回参数结构体
+ * DescribeDBSlowlogs返回参数结构体
  */
-export interface CreateReadOnlyGroupNetworkAccessResponse {
+export interface DescribeDBSlowlogsResponse {
     /**
-     * 流程ID。
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 本次返回多少条数据
      */
-    FlowId?: number;
+    TotalCount?: number;
+    /**
+     * 慢查询日志详情
+     */
+    Detail?: SlowlogDetail;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -4998,17 +5143,14 @@ export interface DescribeEncryptionKeysResponse {
     RequestId?: string;
 }
 /**
- * DescribeDBSlowlogs返回参数结构体
+ * CreateReadOnlyGroupNetworkAccess返回参数结构体
  */
-export interface DescribeDBSlowlogsResponse {
+export interface CreateReadOnlyGroupNetworkAccessResponse {
     /**
-     * 本次返回多少条数据
+     * 流程ID。
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    TotalCount?: number;
-    /**
-     * 慢查询日志详情
-     */
-    Detail?: SlowlogDetail;
+    FlowId?: number;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */

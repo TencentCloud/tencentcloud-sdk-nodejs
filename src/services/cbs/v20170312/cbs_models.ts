@@ -1517,13 +1517,13 @@ export interface DiskChargePrepaid {
  */
 export interface Filter {
   /**
-   * 一个或者多个过滤值。
-   */
-  Values: Array<string>
-  /**
    * 过滤键的名称。
    */
   Name: string
+  /**
+   * 一个或者多个过滤值。
+   */
+  Values: Array<string>
 }
 
 /**

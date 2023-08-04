@@ -425,6 +425,24 @@ export interface LogContentInfo {
 }
 
 /**
+ * ModifyIntegrationTask请求参数结构体
+ */
+export interface ModifyIntegrationTaskRequest {
+  /**
+   * 任务信息
+   */
+  TaskInfo: IntegrationTaskInfo
+  /**
+   * 项目id
+   */
+  ProjectId: string
+  /**
+   * 默认false . 为true时表示走回滚节点逻辑
+   */
+  RollbackFlag?: boolean
+}
+
+/**
  * DescribeScheduleInstance返回参数结构体
  */
 export interface DescribeScheduleInstanceResponse {
@@ -3644,17 +3662,17 @@ export interface BatchDeleteIntegrationTasksResponse {
    * 操作成功的任务数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SuccessCount: number
+  SuccessCount?: number
   /**
    * 操作失败的任务数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  FailedCount: number
+  FailedCount?: number
   /**
    * 任务总数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4187,21 +4205,24 @@ export interface DescribeDataSourceListResponse {
 }
 
 /**
- * ModifyIntegrationTask请求参数结构体
+ * Agent采集器状态统计
  */
-export interface ModifyIntegrationTaskRequest {
+export interface AgentStatus {
   /**
-   * 任务信息
+   * 运行中的数量
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  TaskInfo: IntegrationTaskInfo
+  Running?: number
   /**
-   * 项目id
+   * 异常的数量
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  ProjectId: string
+  Abnormal?: number
   /**
-   * 默认false . 为true时表示走回滚节点逻辑
+   * 操作中的数量
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  RollbackFlag?: boolean
+  InOperation?: number
 }
 
 /**
@@ -6332,6 +6353,14 @@ export interface CommitIntegrationTaskRequest {
    * 额外参数
    */
   ExtConfig?: Array<RecordField>
+  /**
+   * 提交版本描述
+   */
+  VersionDesc?: string
+  /**
+   * 提交版本号
+   */
+  InstanceVersion?: number
 }
 
 /**
@@ -6740,6 +6769,21 @@ export interface IntegrationTaskInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskAlarmRegularList?: Array<string>
+  /**
+   * 资源分层情况： 0：进行中,1：成功 ,2：失败
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SwitchResource?: number
+  /**
+   * 读取阶段：0：全部全量,1：部分全量,2：全部增量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ReadPhase?: number
+  /**
+   * 版本号
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceVersion?: number
 }
 
 /**
@@ -7564,6 +7608,10 @@ export interface BatchDeleteIntegrationTasksRequest {
    * 项目id
    */
   ProjectId: string
+  /**
+   * 是否删除开发态任务。默认不删除开发态，为 0 不删除 , 为 1 删除
+   */
+  DeleteKFFlag?: number
 }
 
 /**
@@ -10503,6 +10551,42 @@ export interface DescribeOpsMakePlanTasksRequest {
    * 分页大小，默认值10
    */
   PageSize?: number
+}
+
+/**
+ * 任务实例基本信息
+ */
+export interface TaskVersionInstance {
+  /**
+   * 实例版本号
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceVersion?: number
+  /**
+   * 实例描述
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VersionDesc?: string
+  /**
+   * 0, "新增"，1, "修改"
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ChangeType?: number
+  /**
+   * 版本提交人UIN
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SubmitterUin?: string
+  /**
+   * 提交日期
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceDate?: string
+  /**
+   * 0, "未启用"，1, "启用(生产态)"
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceStatus?: number
 }
 
 /**
@@ -13849,6 +13933,10 @@ export interface DescribeIntegrationTaskRequest {
    * 任务类型：201. stream,   202. offline
    */
   TaskType?: number
+  /**
+   * 提交版本号
+   */
+  InstanceVersion?: number
 }
 
 /**
@@ -21647,7 +21735,20 @@ export interface DeleteIntegrationTaskResponse {
   /**
    * 任务删除成功与否标识
    */
-  Data: boolean
+  Data?: boolean
+  /**
+   * 任务删除成功与否标识
+0表示删除成功
+1 表示失败，失败原因见 DeleteErrInfo
+100 表示running or suspend task can't be deleted失败，失败原因也会写到DeleteErrInfo里面
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DeleteFlag?: number
+  /**
+   * 删除失败原因
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DeleteErrInfo?: string
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -21887,7 +21988,17 @@ export interface DescribeIntegrationTaskResponse {
    * 任务信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TaskInfo: IntegrationTaskInfo
+  TaskInfo?: IntegrationTaskInfo
+  /**
+   * 采集器统计信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AgentStatus?: AgentStatus
+  /**
+   * 任务版本信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskVersion?: TaskVersionInstance
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

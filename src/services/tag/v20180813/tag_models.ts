@@ -755,15 +755,15 @@ export interface DescribeResourcesByTagsResponse {
  */
 export interface AddResourceTagRequest {
   /**
-   * 标签键
+   * 需要绑定的标签键，取值规范参考：https://cloud.tencent.com/document/product/651/13354
    */
   TagKey: string
   /**
-   * 标签值
+   * 需要绑定的标签值，取值规范参考：https://cloud.tencent.com/document/product/651/13354
    */
   TagValue: string
   /**
-   * [ 资源六段式描述 ](https://cloud.tencent.com/document/product/598/10606)
+   * 待关联的资源，用标准的资源六段式表示。正确的资源六段式请参考：https://cloud.tencent.com/document/product/651/89122
    */
   Resource: string
 }
@@ -969,7 +969,7 @@ export interface Tag {
  */
 export interface AttachResourcesTagRequest {
   /**
-   * 资源所属业务名称（资源六段式中的第三段）
+   * 业务的英文简称，即资源六段式第三段。资源六段式的描述方式参考：https://cloud.tencent.com/document/product/651/89122
    */
   ServiceType: string
   /**
@@ -977,15 +977,15 @@ export interface AttachResourcesTagRequest {
    */
   ResourceIds: Array<string>
   /**
-   * 标签键
+   * 需要绑定的标签键，取值规范参考：https://cloud.tencent.com/document/product/651/13354
    */
   TagKey: string
   /**
-   * 标签值
+   * 需要绑定的标签值，取值规范参考：https://cloud.tencent.com/document/product/651/13354
    */
   TagValue: string
   /**
-   * 资源所在地域，不区分地域的资源不需要传入该字段，区分地域的资源必填
+   * 资源所在地域，区分地域的资源必填，不区分地域的资源不需要传入该字段。注意该地域必须为资源ID参数ResourceIds对应的地域
    */
   ResourceRegion?: string
   /**

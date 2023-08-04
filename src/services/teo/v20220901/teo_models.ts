@@ -46,7 +46,7 @@ export interface DownloadL7LogsRequest {
    */
   EndTime: string
   /**
-   * 站点集合，不填默认选择全部站点。
+   * 站点集合，此参数必填，不填默认查询为空。
    */
   ZoneIds?: Array<string>
   /**
@@ -54,11 +54,11 @@ export interface DownloadL7LogsRequest {
    */
   Domains?: Array<string>
   /**
-   * 分页查询的限制数目，默认值为20，最大查询条目为1000。
+   * 分页查询的限制数目，默认值为 20，最大查询条目为 1000。
    */
   Limit?: number
   /**
-   * 分页的偏移量，默认值为0。
+   * 分页的偏移量，默认值为 0。
    */
   Offset?: number
 }
@@ -398,32 +398,39 @@ export interface DescribeZonesRequest {
  */
 export interface L4OfflineLog {
   /**
-   * 日志打包开始时间。
+   * 四层代理实例 ID。
    */
-  LogTime: number
+  ProxyId?: string
   /**
-   * 四层实例ID。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ProxyId: string
-  /**
-   * 原始大小 单位byte。
-   */
-  Size: number
-  /**
-   * 下载地址。
-   */
-  Url: string
-  /**
-   * 日志数据包名。
-   */
-  LogPacketName: string
-  /**
-   * 加速区域，取值有：
+   * 日志所属区域，取值有：
 <li>mainland：中国大陆境内;</li>
 <li>overseas：全球（不含中国大陆）。</li>
    */
-  Area: string
+  Area?: string
+  /**
+   * 离线日志数据包名。
+   */
+  LogPacketName?: string
+  /**
+   * 离线日志下载地址。
+   */
+  Url?: string
+  /**
+   * 日志打包时间，此参数已经废弃。
+   */
+  LogTime?: number
+  /**
+   * 日志打包开始时间。
+   */
+  LogStartTime?: string
+  /**
+   * 日志打包结束时间。
+   */
+  LogEndTime?: string
+  /**
+   * 日志大小，单位为 Byte。
+   */
+  Size?: number
 }
 
 /**
@@ -1505,7 +1512,8 @@ export interface AclCondition {
 <li>idcid：IDC 规则，仅bot自定义规则可用；</li>
 <li>sipbot：搜索引擎规则，仅bot自定义规则可用；</li>
 <li>portrait：画像分析，仅bot自定义规则可用；</li>
-<li>header_seq：请求头顺序，仅bot自定义规则可用。</li>
+<li>header_seq：请求头顺序，仅bot自定义规则可用；</li>
+<li>hdr：请求正文，仅Web防护自定义规则可用。</li>
    */
   MatchFrom: string
   /**
@@ -1666,35 +1674,43 @@ export interface IpTableRule {
 }
 
 /**
- * 离线日志详细信息
+ * 七层离线日志详细信息。
  */
 export interface L7OfflineLog {
   /**
-   * 日志打包开始时间。
+   * 离线日志域名。
    */
-  LogTime: number
+  Domain?: string
   /**
-   * 子域名。
-   */
-  Domain: string
-  /**
-   * 原始大小，单位byte。
-   */
-  Size: number
-  /**
-   * 下载地址。
-   */
-  Url: string
-  /**
-   * 日志数据包名。
-   */
-  LogPacketName: string
-  /**
-   * 加速区域，取值有：
+   * 日志所属区域，取值有：
 <li>mainland：中国大陆境内; </li>
 <li>overseas：全球（不含中国大陆）。</li>
    */
-  Area: string
+  Area?: string
+  /**
+   * 离线日志数据包名。
+   */
+  LogPacketName?: string
+  /**
+   * 离线日志下载地址。
+   */
+  Url?: string
+  /**
+   * 日志打包时间，此参数已经废弃。
+   */
+  LogTime?: number
+  /**
+   * 日志打包开始时间。
+   */
+  LogStartTime?: string
+  /**
+   * 日志打包结束时间。
+   */
+  LogEndTime?: string
+  /**
+   * 日志原始大小，单位 Byte。
+   */
+  Size?: number
 }
 
 /**
@@ -3921,19 +3937,19 @@ export interface DownloadL4LogsRequest {
    */
   EndTime: string
   /**
-   * 站点集合，不填默认选择全部站点。
+   * 站点集合，此参数必填，不填默认查询为空。
    */
   ZoneIds?: Array<string>
   /**
-   * 四层实例ID集合。
+   * 四层实例 ID 集合。
    */
   ProxyIds?: Array<string>
   /**
-   * 分页查询的限制数目，默认值为20，最大查询条目为1000。
+   * 分页查询的限制数目，默认值为 20，最大查询条目为 1000。
    */
   Limit?: number
   /**
-   * 分页的偏移量，默认值为0。
+   * 分页的偏移量，默认值为 0。
    */
   Offset?: number
 }
@@ -4669,10 +4685,7 @@ export interface RateLimitUserRule {
    */
   RuleName: string
   /**
-   * 处置动作，取值有：
-<li>monitor：观察；</li>
-<li>drop：拦截；</li>
-<li>alg：JavaScript挑战。</li>
+   * 处置动作，取值有： <li>monitor：观察；</li> <li>drop：拦截；</li> <li>alg：JavaScript挑战。</li>
    */
   Action: string
   /**
@@ -4701,7 +4714,7 @@ export interface RateLimitUserRule {
    */
   RulePriority: number
   /**
-   * 规则id。仅出参使用。
+   * 规则 Id。仅出参使用。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RuleID?: number
@@ -4717,7 +4730,7 @@ export interface RateLimitUserRule {
    */
   UpdateTime?: string
   /**
-   * 统计范围，字段为null时，代表source_to_eo。取值有：
+   * 统计范围，字段为 null 时，代表 source_to_eo。取值有：
 <li>source_to_eo：（响应）源站到EdgeOne。</li>
 <li>client_to_eo：（请求）客户端到EdgeOne；</li>
 注意：此字段可能返回 null，表示取不到有效值。
@@ -5285,14 +5298,13 @@ export interface ModifyOriginGroupRequest {
  */
 export interface DownloadL4LogsResponse {
   /**
-   * 四层离线日志数据列表。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Data: Array<L4OfflineLog>
-  /**
    * 查询结果的总条数。
    */
-  TotalCount: number
+  TotalCount?: number
+  /**
+   * 四层离线日志数据列表。
+   */
+  Data?: Array<L4OfflineLog>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6151,53 +6163,53 @@ export interface Resource {
   /**
    * 资源 ID。
    */
-  Id: string
+  Id?: string
   /**
    * 付费模式，取值有：
 <li>0：后付费。</li>
    */
-  PayMode: number
+  PayMode?: number
   /**
    * 创建时间。
    */
-  CreateTime: string
+  CreateTime?: string
   /**
    * 生效时间。
    */
-  EnableTime: string
+  EnableTime?: string
   /**
    * 失效时间。
    */
-  ExpireTime: string
+  ExpireTime?: string
   /**
    * 套餐状态，取值有：
 <li>normal：正常；</li>
 <li>isolated：隔离；</li>
 <li>destroyed：销毁。</li>
    */
-  Status: string
+  Status?: string
   /**
    * 询价参数。
    */
-  Sv: Array<Sv>
+  Sv?: Array<Sv>
   /**
    * 是否自动续费，取值有：
 <li>0：默认状态；</li>
 <li>1：自动续费；</li>
 <li>2：不自动续费。</li>
    */
-  AutoRenewFlag: number
+  AutoRenewFlag?: number
   /**
    * 套餐关联资源 ID。
    */
-  PlanId: string
+  PlanId?: string
   /**
    * 地域，取值有：
 <li>mainland：国内；</li>
 <li>overseas：海外。</li>
 <li>global：全球。</li>
    */
-  Area: string
+  Area?: string
   /**
    * 资源类型，取值有：
 <li>plan：套餐类型；</li>
@@ -6234,14 +6246,13 @@ export interface PrivateParameter {
  */
 export interface DownloadL7LogsResponse {
   /**
-   * 七层离线日志数据列表。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Data: Array<L7OfflineLog>
-  /**
    * 查询结果的总条数。
    */
-  TotalCount: number
+  TotalCount?: number
+  /**
+   * 七层离线日志数据列表。
+   */
+  Data?: Array<L7OfflineLog>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

@@ -349,6 +349,14 @@ export interface NamespaceResourceEnvTKE {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Port?: number;
+    /**
+     * yaml格式的pod patch内容，例如
+  metadata:
+    labels:
+      key: value
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PodTemplatePatch?: string;
 }
 /**
  * 公网访问配置
