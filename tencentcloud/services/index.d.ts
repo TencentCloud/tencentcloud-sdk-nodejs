@@ -212,6 +212,7 @@ export { tms } from "./tms";
 export { tmt } from "./tmt";
 export { tourism } from "./tourism";
 export { trdp } from "./trdp";
+export { trocket } from "./trocket";
 export { trp } from "./trp";
 export { trro } from "./trro";
 export { trtc } from "./trtc";

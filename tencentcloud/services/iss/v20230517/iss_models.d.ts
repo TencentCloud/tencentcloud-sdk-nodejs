@@ -83,6 +83,61 @@ export interface DeleteRecordBackupPlanResponse {
     RequestId?: string;
 }
 /**
+ * 查询设备通道信息返回结果
+ */
+export interface DescribeDeviceChannelData {
+    /**
+     * 设备 ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DeviceId?: string;
+    /**
+     * 通道 ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ChannelId?: string;
+    /**
+     * 通道编码
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ChannelCode?: string;
+    /**
+     * 通道名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Name?: string;
+    /**
+     * 流状态（0:未传输,1:传输中）
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Status?: number;
+    /**
+     * 是否可控 Ptz（0:不可控,1:可控）
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PTZType?: number;
+    /**
+     * 通道厂商
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Manufacturer?: string;
+    /**
+     * 通道支持分辨率（分辨率列表由‘/’隔开，国标协议样例（6/3），自定义样例（12800960/640480））
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Resolution?: string;
+    /**
+     * 通道在离线状态（0:离线,1:在线）
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    State?: number;
+    /**
+     * 所在地域
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Region?: string;
+}
+/**
  * ListOrganizationChannels请求参数结构体
  */
 export interface ListOrganizationChannelsRequest {
@@ -108,6 +163,21 @@ export interface ListOrganizationChannelsRequest {
   查询条件同时只有一个生效。长度不超过32字节
      */
     ChannelName?: string;
+}
+/**
+ * 查询设备预置位返回数据
+ */
+export interface DescribeDevicePresetData {
+    /**
+     * 预置位索引    只支持1-10的索引
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Index?: number;
+    /**
+     * 预置位名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Name?: string;
 }
 /**
  * 查询网关监控信息返回结果
@@ -160,45 +230,41 @@ export interface DescribeGatewayMonitor {
     ChannelUnPull?: number;
 }
 /**
- * 新增录像上云计划返回数据
+ * DescribeAITaskResult请求参数结构体
  */
-export interface AddRecordBackupPlanResponse {
+export interface DescribeAITaskResultRequest {
     /**
-     * 录像上云计划ID
+     * AI 任务 ID
      */
-    PlanId?: string;
+    TaskId: string;
     /**
-     * 录像上云计划名称
+     * 通道ID
      */
-    PlanName?: string;
+    ChannelId: string;
     /**
-     * 录像上云模板ID
+     * 桶内文件的路径。
      */
-    TemplateId?: string;
+    Object?: string;
     /**
-     * 录像上云计划描述
+     * AI 任务识别类型。可选值为 Facemask(口罩识别)、Chefhat(厨师帽识别)、Smoking(抽烟检测)、Chefcloth(厨师服识别)、PhoneCall(接打电话识别)、Pet(宠物识别)、Body(人体识别)和 Car(车辆车牌识别)
      */
-    Describe?: string;
+    DetectType?: string;
     /**
-     * 云文件生命周期
+     * 开始时间时间。秒级时间戳。开始时间和结束时间跨度小于等于30天
      */
-    LifeCycle?: LifeCycleData;
+    BeginTime?: string;
     /**
-     * 录像上云计划状态，1:正常使用中，0:删除中，无法使用
+     * 结束时间时间。秒级时间戳。开始时间和结束时间跨度小于等于30天
      */
-    Status?: number;
+    EndTime?: string;
     /**
-     * 通道数量
+     * 页码。默认为1
      */
-    ChannelCount?: number;
+    PageNumber?: number;
     /**
-     * 创建时间
+     * 每页 AI 识别结果数量。可选值1～100，默认为10（按时间倒序显示识别结果）
      */
-    CreateAt?: string;
-    /**
-     * 修改时间
-     */
-    UpdateAt?: string;
+    PageSize?: number;
 }
 /**
  * DescribeCNAME请求参数结构体
@@ -281,7 +347,7 @@ export interface UpdateOrganizationResponse {
     /**
      * 返回结果
      */
-    Data?: UpdateOrgResponse;
+    Data?: UpdateOrgData;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -290,7 +356,7 @@ export interface UpdateOrganizationResponse {
 /**
  * 增加组织接口返回数据
  */
-export interface AddOrgResponse {
+export interface AddOrgData {
     /**
      * 组织 ID
   注意：此字段可能返回 null，表示取不到有效值。
@@ -396,7 +462,7 @@ export interface AddOrganizationResponse {
     /**
      * 增加组织接口返回数据
      */
-    Data?: AddOrgResponse;
+    Data?: AddOrgData;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -433,73 +499,130 @@ export interface DescribeDeviceRegionResponse {
     RequestId?: string;
 }
 /**
- * 查询域名详情数据
+ * 用户下所有实时上云计划中的通道id列表返回数据
+ */
+export interface ListRecordPlanChannelsData {
+    /**
+     * 用户所有计划下通道id，存在通道是为数组格式，不存在时，字段数据为空
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    List?: Array<string>;
+}
+/**
+ * DescribeDomain返回参数结构体
  */
 export interface DescribeDomainResponse {
     /**
-     * 域名ID
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 返回数据
      */
-    Id?: string;
+    Data?: Array<DescribeDomainData>;
     /**
-     * 播放域名
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
-    PlayDomain?: string;
-    /**
-     * CNAME 记录值
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    InternalDomain?: string;
-    /**
-     * 是否上传证书（0：否，1：是）
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    HaveCert?: number;
-    /**
-     * 服务节点 ID
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ClusterId?: string;
-    /**
-     * 服务节点名称
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ClusterName?: string;
-    /**
-     * 用户ID
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    AppId?: number;
+    RequestId?: string;
 }
 /**
- * DescribeRecordBackupTemplate请求参数结构体
+ * 查询云录像取回任务详情返回数据
  */
-export interface DescribeRecordBackupTemplateRequest {
+export interface DescribeRecordRetrieveTaskData {
     /**
-     * 模板ID（从查询录像上云模板列表接口ListRecordBackupTemplates中获取）
+     * 取回任务ID
      */
-    TemplateId: string;
+    TaskId?: string;
+    /**
+     * 取回任务名称
+     */
+    TaskName?: string;
+    /**
+     * 取回录像的开始时间
+     */
+    StartTime?: number;
+    /**
+     * 取回录像的结束时间
+     */
+    EndTime?: number;
+    /**
+     * 取回模式，1:极速模式，其他暂不支持
+     */
+    Mode?: number;
+    /**
+     * 副本有效期
+     */
+    Expiration?: number;
+    /**
+     * 任务状态，0:已取回，1:取回中，2:待取回
+     */
+    Status?: number;
+    /**
+     * 取回容量，单位MB
+     */
+    Capacity?: number;
+    /**
+     * 任务的设备通道id
+     */
+    Channels?: Array<RecordRetrieveTaskChannelInfo>;
+    /**
+     * 任务描述
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Describe?: string;
+    /**
+     * 任务通道数量
+     */
+    ChannelCount?: number;
 }
 /**
- * 获取开流地址返回数据
+ * 查询录像上云模版返回数据
+ */
+export interface DescribeRecordBackupTemplateData {
+    /**
+     * 模板ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TemplateId?: string;
+    /**
+     * 模板名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TemplateName?: string;
+    /**
+     * 上云时间段（按周进行设置，支持一天设置多个时间段，每个时间段不小于10分钟）
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TimeSections?: Array<RecordTemplateTimeSections>;
+    /**
+     * 录像时间段（按周进行设置，支持一天设置多个时间段，每个时间段不小于10分钟）
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DevTimeSections?: Array<RecordTemplateTimeSections>;
+    /**
+     * 上云倍速（支持1，2，4倍速）
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Scale?: number;
+    /**
+     * 创建时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CreateAt?: string;
+    /**
+     * 更新时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    UpdateAt?: string;
+}
+/**
+ * ControlDeviceStream返回参数结构体
  */
 export interface ControlDeviceStreamResponse {
     /**
-     * flv 流地址
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 返回数据
      */
-    Flv?: string;
+    Data?: ControlDeviceStreamData;
     /**
-     * hls 流地址
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
-    Hls?: string;
-    /**
-     * rtmp 流地址
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Rtmp?: string;
+    RequestId?: string;
 }
 /**
  * DeleteRecordRetrieveTask返回参数结构体
@@ -517,7 +640,7 @@ export interface DescribeUserDeviceResponse {
     /**
      * 返回结果
      */
-    Data?: DescribeDeviceResponse;
+    Data?: DescribeDeviceData;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -533,49 +656,17 @@ export interface DeleteRecordPlanResponse {
     RequestId?: string;
 }
 /**
- * 查询组织数据返回结果
+ * DescribeOrganization返回参数结构体
  */
 export interface DescribeOrganizationResponse {
     /**
-     * 组织 ID
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 返回数据
      */
-    OrganizationId?: string;
+    Data?: Array<DescribeOrganizationData>;
     /**
-     * 组织名称
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
-    Name?: string;
-    /**
-     * 组织父节点 ID
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ParentId?: string;
-    /**
-     * 组织层级
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Level?: number;
-    /**
-     * 用户id
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    AppId?: number;
-    /**
-     * 组织结构
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ParentIds?: string;
-    /**
-     * 设备总数
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Total?: number;
-    /**
-     * 设备在线数量
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Online?: number;
+    RequestId?: string;
 }
 /**
  * UpdateUserDevice请求参数结构体
@@ -615,59 +706,17 @@ export interface UpdateUserDeviceRequest {
     Username?: string;
 }
 /**
- * 查询设备通道信息返回结果
+ * DescribeDeviceChannel返回参数结构体
  */
 export interface DescribeDeviceChannelResponse {
     /**
-     * 设备 ID
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 返回结果
      */
-    DeviceId?: string;
+    Data?: Array<DescribeDeviceChannelData>;
     /**
-     * 通道 ID
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
-    ChannelId?: string;
-    /**
-     * 通道编码
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ChannelCode?: string;
-    /**
-     * 通道名称
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Name?: string;
-    /**
-     * 流状态（0:未传输,1:传输中）
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Status?: number;
-    /**
-     * 是否可控 Ptz（0:不可控,1:可控）
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    PTZType?: number;
-    /**
-     * 通道厂商
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Manufacturer?: string;
-    /**
-     * 通道支持分辨率（分辨率列表由‘/’隔开，国标协议样例（6/3），自定义样例（12800960/640480））
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Resolution?: string;
-    /**
-     * 通道在离线状态（0:离线,1:在线）
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    State?: number;
-    /**
-     * 所在地域
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Region?: string;
+    RequestId?: string;
 }
 /**
  * AddRecordBackupTemplate请求参数结构体
@@ -717,59 +766,17 @@ export interface ChefHatAIResultInfo {
     ChefHatInfo?: Array<BaseAIResultInfo>;
 }
 /**
- * 修改网关信息返回结果
+ * UpdateGateway返回参数结构体
  */
 export interface UpdateGatewayResponse {
     /**
-     * 网关索引ID
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 返回数据
      */
-    GatewayId?: string;
+    Data?: UpdateGatewayData;
     /**
-     * 网关编码
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
-    GwId?: string;
-    /**
-     * 网关名称，仅支持中文、英文、数字、_、-，长度不超过32个字符
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Name?: string;
-    /**
-     * 网关描述，仅支持中文、英文、数字、_、-，长度不超过128个字符
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Description?: string;
-    /**
-     * 服务节点ID
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ClusterId?: string;
-    /**
-     * 服务节点名称
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ClusterName?: string;
-    /**
-     * 网关状态，0：离线，1:在线
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Status?: number;
-    /**
-     * 激活时间
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    CreatedAt?: number;
-    /**
-     * 网关密钥
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Secret?: string;
-    /**
-     * 网关版本信息
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Version?: string;
+    RequestId?: string;
 }
 /**
  * DescribeRecordRetrieveTask请求参数结构体
@@ -843,9 +850,118 @@ export interface DeleteRecordTemplateRequest {
     TemplateId: string;
 }
 /**
- * 查询网关信息返回结果
+ * DescribeGateway返回参数结构体
  */
 export interface DescribeGatewayResponse {
+    /**
+     * 返回数据
+     */
+    Data?: DescribeGatewayData;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * 查询录像上云计划关联通道的返回数据
+ */
+export interface ListRecordBackupPlanDevicesData {
+    /**
+     * 第几页
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PageNumber?: number;
+    /**
+     * 当前页的设备数量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PageSize?: number;
+    /**
+     * 本次查询的设备通道总数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TotalCount?: number;
+    /**
+     * 设备通道信息列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    List?: RecordPlanChannelInfo;
+}
+/**
+ * DescribeGateway请求参数结构体
+ */
+export interface DescribeGatewayRequest {
+    /**
+     * 网关索引ID（从获取网关列表接口ListGateways中获取）
+     */
+    GatewayId: string;
+}
+/**
+ * 新增录像上云模版返回数据
+ */
+export interface AddRecordBackupTemplateData {
+    /**
+     * 模板ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TemplateId?: string;
+    /**
+     * 模板名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TemplateName?: string;
+    /**
+     * 上云时间段（按周进行设置，支持一天设置多个时间段，每个时间段不小于10分钟）
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TimeSections?: Array<RecordTemplateTimeSections>;
+    /**
+     * 录像时间段（按周进行设置，支持一天设置多个时间段，每个时间段不小于10分钟）
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DevTimeSections?: Array<RecordTemplateTimeSections>;
+    /**
+     * 上云倍速（支持1，2，4倍速）
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Scale?: number;
+    /**
+     * 创建时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CreateAt?: string;
+    /**
+     * 更新时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    UpdateAt?: string;
+}
+/**
+ * DeleteUserDevice请求参数结构体
+ */
+export interface DeleteUserDeviceRequest {
+    /**
+     * 设备ID（从获取设备列表ListDevices接口中获取）
+     */
+    DeviceId: string;
+}
+/**
+ * AddRecordPlan返回参数结构体
+ */
+export interface AddRecordPlanResponse {
+    /**
+     * 返回结果
+     */
+    Data?: RecordPlanOptData;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * 查询网关信息返回结果
+ */
+export interface DescribeGatewayData {
     /**
      * 网关索引ID，用于网关查询，更新，删除操作
   注意：此字段可能返回 null，表示取不到有效值。
@@ -901,37 +1017,6 @@ export interface DescribeGatewayResponse {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Region?: string;
-}
-/**
- * DescribeGateway请求参数结构体
- */
-export interface DescribeGatewayRequest {
-    /**
-     * 网关索引ID（从获取网关列表接口ListGateways中获取）
-     */
-    GatewayId: string;
-}
-/**
- * DeleteUserDevice请求参数结构体
- */
-export interface DeleteUserDeviceRequest {
-    /**
-     * 设备ID（从获取设备列表ListDevices接口中获取）
-     */
-    DeviceId: string;
-}
-/**
- * AddRecordPlan返回参数结构体
- */
-export interface AddRecordPlanResponse {
-    /**
-     * 返回结果
-     */
-    Data?: RecordPlanOptResponse;
-    /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
 }
 /**
  * ListOrganizationChannelNumbers请求参数结构体
@@ -1101,6 +1186,51 @@ export interface AITaskResultInfo {
     PhoneCall?: Array<PhoneCallAIResultInfo>;
 }
 /**
+ * 查询推拉流鉴权返回数据结构
+ */
+export interface DescribeStreamAuthData {
+    /**
+     * 鉴权配置ID（uuid）
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Id?: string;
+    /**
+     * 是否开播放鉴权（1:开启,0:关闭）
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PullState?: number;
+    /**
+     * 播放密钥（仅支持字母数字，长度0-10位）
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PullSecret?: string;
+    /**
+     * 播放过期时间（单位：分钟）
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PullExpired?: number;
+    /**
+     * 是否开启推流鉴权（1:开启,0:关闭）
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PushState?: number;
+    /**
+     * 推流密钥（仅支持字母数字，长度0-10位）
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PushSecret?: string;
+    /**
+     * 推流过期时间（单位：分钟）
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PushExpired?: number;
+    /**
+     * 用户ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AppId?: number;
+}
+/**
  * AddRecordTemplate返回参数结构体
  */
 export interface AddRecordTemplateResponse {
@@ -1118,41 +1248,17 @@ export interface AddRecordTemplateResponse {
  */
 export declare type ListRecordPlansRequest = null;
 /**
- * DescribeAITaskResult请求参数结构体
+ * AddRecordBackupPlan返回参数结构体
  */
-export interface DescribeAITaskResultRequest {
+export interface AddRecordBackupPlanResponse {
     /**
-     * AI 任务 ID
+     * 返回数据
      */
-    TaskId: string;
+    Data?: AddRecordBackupPlanData;
     /**
-     * 通道ID
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
-    ChannelId: string;
-    /**
-     * 桶内文件的路径。
-     */
-    Object?: string;
-    /**
-     * AI 任务识别类型。可选值为 Facemask(口罩识别)、Chefhat(厨师帽识别)、Smoking(抽烟检测)、Chefcloth(厨师服识别)、PhoneCall(接打电话识别)、Pet(宠物识别)、Body(人体识别)和 Car(车辆车牌识别)
-     */
-    DetectType?: string;
-    /**
-     * 开始时间时间。秒级时间戳。开始时间和结束时间跨度小于等于30天
-     */
-    BeginTime?: string;
-    /**
-     * 结束时间时间。秒级时间戳。开始时间和结束时间跨度小于等于30天
-     */
-    EndTime?: string;
-    /**
-     * 页码。默认为1
-     */
-    PageNumber?: number;
-    /**
-     * 每页 AI 识别结果数量。可选值1～100，默认为10（按时间倒序显示识别结果）
-     */
-    PageSize?: number;
+    RequestId?: string;
 }
 /**
  * 截图配置
@@ -1262,6 +1368,102 @@ export interface ControlRecordResponse {
     RequestId?: string;
 }
 /**
+ * 修改设备接口返回数据
+ */
+export interface UpdateDeviceData {
+    /**
+     * 设备ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DeviceId?: string;
+    /**
+     * 设备编码（即我们为设备生成的20位国标编码）
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Code?: string;
+    /**
+     * 设备名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Name?: string;
+    /**
+     * 设备接入协议，1:RTMP,2:GB,3:GW
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AccessProtocol?: number;
+    /**
+     * 设备类型，1:IPC,2:NVR
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Type?: number;
+    /**
+     * 设备接入服务节点ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ClusterId?: string;
+    /**
+     * 设备接入服务节点名称
+  
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ClusterName?: string;
+    /**
+     * 设备流传输协议，1:UDP,2:TCP
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TransportProtocol?: number;
+    /**
+     * 设备密码
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Password?: string;
+    /**
+     * 设备描述
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Description?: string;
+    /**
+     * 设备状态，0:未注册,1:在线,2:离线,3:禁用
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Status?: number;
+    /**
+     * 设备所属组织ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    OrganizationId?: number;
+    /**
+     * 设备接入网关ID，从查询网关列表接口中获取（仅网关接入需要）
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    GatewayId?: string;
+    /**
+     * 网关接入协议类型，1.海康SDK，2.大华SDK，3.宇视SDK，4.Onvif（仅网关接入需要）
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ProtocolType?: number;
+    /**
+     * 设备接入IP
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Ip?: string;
+    /**
+     * 设备Port
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Port?: number;
+    /**
+     * 设备用户名
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Username?: string;
+    /**
+     * 用户Id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AppId?: number;
+}
+/**
  * AddRecordPlan请求参数结构体
  */
 export interface AddRecordPlanRequest {
@@ -1299,45 +1501,9 @@ export interface AddRecordPlanRequest {
  */
 export declare type ListRecordTemplatesRequest = null;
 /**
- * 获取云录像下载URL返回的数据
+ * 查询组织数据返回结果
  */
-export interface DescribeVideoDownloadUrlResponse {
-    /**
-     * 录像文件下载 URL
-  注意：
-  URL 有效期是10分钟，过期后将拒绝访问，若需再用请重新获取
-  录像文件下载采用分块传输编码，响应头Transfer-Encoding:chunked
-  下载文件命名格式为{ChannelId}-{BeginTime}-{EndTime}.{FileType}
-     */
-    Url?: string;
-    /**
-     * 实际下载录像的开始时间
-  注意：当请求中指定IsRespActualTime参数为true时，才有该字段
-     */
-    ActualBeginTime?: string;
-    /**
-     * 实际下载录像的结束时间
-  注意：当请求中指定IsRespActualTime参数为true时，才有该字段
-     */
-    ActualEndTime?: string;
-}
-/**
- * DescribeRecordPlan返回参数结构体
- */
-export interface DescribeRecordPlanResponse {
-    /**
-     * 返回结果
-     */
-    Data?: RecordPlanBaseInfo;
-    /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
-/**
- * 修改组织接口返回数据
- */
-export interface UpdateOrgResponse {
+export interface DescribeOrganizationData {
     /**
      * 组织 ID
   注意：此字段可能返回 null，表示取不到有效值。
@@ -1359,7 +1525,7 @@ export interface UpdateOrgResponse {
      */
     Level?: number;
     /**
-     * 用户ID
+     * 用户id
   注意：此字段可能返回 null，表示取不到有效值。
      */
     AppId?: number;
@@ -1378,6 +1544,96 @@ export interface UpdateOrgResponse {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Online?: number;
+}
+/**
+ * DescribeVideoDownloadUrl返回参数结构体
+ */
+export interface DescribeVideoDownloadUrlResponse {
+    /**
+     * 返回的数据结构
+     */
+    Data?: DescribeVideoDownloadUrlData;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * 实时上云计划添加和修改的返回数据
+ */
+export interface RecordPlanOptData {
+    /**
+     * 上云计划ID
+     */
+    PlanId?: string;
+    /**
+     * 上云计划名称
+     */
+    PlanName?: string;
+    /**
+     * 上云模板ID
+     */
+    TemplateId?: string;
+    /**
+     * 上云计划描述
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Describe?: string;
+    /**
+     * 云文件生命周期
+     */
+    LifeCycle?: LifeCycleData;
+    /**
+     * 码流类型，default:设备默认码流类型，main:主码流，sub:子码流，其他根据设备能力集自定义
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    StreamType?: string;
+}
+/**
+ * DescribeRecordPlan返回参数结构体
+ */
+export interface DescribeRecordPlanResponse {
+    /**
+     * 返回结果
+     */
+    Data?: RecordPlanBaseInfo;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * 修改录像上云计划数据结构
+ */
+export interface UpdateRecordBackupPlanModify {
+    /**
+     * 录像计划名称（仅支持中文、英文、数字、_、-，长度不超过32个字符，计划名称全局唯一，不能为空，不能重复，不修改名称时，不需要该字段）
+     */
+    PlanName?: string;
+    /**
+     * 录制模板ID（从查询录像上云模板列表接口ListRecordBackupTemplates中获取，不修改模板ID时，不需要该字段）
+     */
+    TemplateId?: string;
+    /**
+     * 录像计划描述（仅支持中文、英文、数字、_、-，长度不超过128个字符， 不修改描述时，不需要该字段）
+     */
+    Describe?: string;
+    /**
+     * 生命周期（录像文件生命周期设置，管理文件冷、热存储的时间，不修改生命周期时，不需要该字段）
+     */
+    LifeCycle?: LifeCycleData;
+    /**
+     * 要新增的设备通道（Json数组，没有新增时，不需要该字段，一次添加通道总数不超过5000个，包括组织目录下的通道数量）
+     */
+    Add?: string;
+    /**
+     * 要删除的设备通道（Json数组，内容为要删除的设备通道id，没有删除设备通道时，不需要该字段）
+     */
+    Del?: string;
+    /**
+     * 添加组织目录下所有设备通道（Json数组，可以为空，并且通道总数量不超过5000个（包括Add字段通道数量））
+     */
+    OrganizationId?: string;
 }
 /**
  * AddRecordRetrieveTask请求参数结构体
@@ -1437,7 +1693,7 @@ export interface ListRecordBackupPlansResponse {
     /**
      * 返回数据
      */
-    Data?: Array<ListRecordBackupPlanResponse>;
+    Data?: Array<ListRecordBackupPlanData>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1522,9 +1778,85 @@ export interface RecordPlaybackUrl {
     Hls?: string;
 }
 /**
- * 设置推拉流鉴权返回数据结构
+ * 组织目录下的未添加到实时上云计划中的通道数量返回数据
+ */
+export interface ListOrganizationChannelNumbersData {
+    /**
+     * 组织下通道总数
+     */
+    TotalCount?: number;
+    /**
+     * 组织下未添加到计划的通道总数
+     */
+    NotInPlanCount?: number;
+}
+/**
+ * ListRecordPlanDevices请求参数结构体
+ */
+export interface ListRecordPlanDevicesRequest {
+    /**
+     * 上云计划ID
+     */
+    PlanId: string;
+    /**
+     * 每页最大数量
+     */
+    PageSize: number;
+    /**
+     * 第几页
+     */
+    PageNumber: number;
+    /**
+     * 按照设备名称查询，为空时，不参考该参数
+  通道名称、设备名称、组织名称同时只有一个有效，如果同时多个字段有值，按照通道名称、设备名称、组织名称的优先级顺序查询，如果都为空，则全量查询。长度不超过32字节
+     */
+    DeviceName?: string;
+    /**
+     * 按照通道名称查询，为空时，不参考该参数
+  通道名称、设备名称、组织名称同时只有一个有效，如果同时多个字段有值，按照通道名称、设备名称、组织名称的优先级顺序查询，如果都为空，则全量查询。长度不超过32字节
+     */
+    ChannelName?: string;
+    /**
+     * 按照组织名称查询|，为空时，不参考该参数
+  通道名称、设备名称、组织名称同时只有一个有效，如果同时多个字段有值，按照通道名称、设备名称、组织名称的优先级顺序查询，如果都为空，则全量查询。长度不超过32字节
+     */
+    OrganizationName?: string;
+}
+/**
+ * AddStreamAuth返回参数结构体
  */
 export interface AddStreamAuthResponse {
+    /**
+     * 设置推拉流鉴权返回数据
+     */
+    Data?: AddStreamAuthData;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * ListDevices返回参数结构体
+ */
+export interface ListDevicesResponse {
+    /**
+     * 设备列表详情
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Data?: Array<ListDeviceInfo>;
+    /**
+     * 设备总数
+     */
+    TotalCount?: number;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * 设置推拉流鉴权返回数据结构
+ */
+export interface AddStreamAuthData {
     /**
      * 鉴权配置ID（uuid）
   注意：此字段可能返回 null，表示取不到有效值。
@@ -1567,24 +1899,6 @@ export interface AddStreamAuthResponse {
     AppId?: number;
 }
 /**
- * ListDevices返回参数结构体
- */
-export interface ListDevicesResponse {
-    /**
-     * 设备列表详情
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Data?: Array<ListDeviceInfo>;
-    /**
-     * 设备总数
-     */
-    TotalCount?: number;
-    /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
-/**
  * DescribeGatewayMonitor请求参数结构体
  */
 export interface DescribeGatewayMonitorRequest {
@@ -1601,19 +1915,6 @@ export interface DeleteGatewayRequest {
      * 网关索引ID（从获取网关列表接口ListGateways中获取）
      */
     GatewayId: string;
-}
-/**
- * UpdateOrganization请求参数结构体
- */
-export interface UpdateOrganizationRequest {
-    /**
-     * 组织ID（从查询组织接口DescribeOrganization中获取）
-     */
-    OrganizationId: string;
-    /**
-     * 组织名称
-     */
-    Name: string;
 }
 /**
  * 获取设备列表的响应
@@ -1686,57 +1987,83 @@ export interface LifeCycleData {
     Expiration: number;
 }
 /**
- * 组织目录下的未添加到实时上云计划中的通道数量返回数据
+ * ListOrganizationChannelNumbers返回参数结构体
  */
 export interface ListOrganizationChannelNumbersResponse {
     /**
-     * 组织下通道总数
+     * 返回结果
      */
-    TotalCount: number;
+    Data?: ListOrganizationChannelNumbersData;
     /**
-     * 组织下未添加到计划的通道总数
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
-    NotInPlanCount?: number;
+    RequestId?: string;
 }
 /**
- * 查询录像上云模板列表返回数据
+ * 查询域名详情数据
+ */
+export interface DescribeDomainData {
+    /**
+     * 域名ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Id?: string;
+    /**
+     * 播放域名
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PlayDomain?: string;
+    /**
+     * CNAME 记录值
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InternalDomain?: string;
+    /**
+     * 是否上传证书（0：否，1：是）
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    HaveCert?: number;
+    /**
+     * 服务节点 ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ClusterId?: string;
+    /**
+     * 服务节点名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ClusterName?: string;
+    /**
+     * 用户ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AppId?: number;
+}
+/**
+ * ListRecordBackupTemplates返回参数结构体
  */
 export interface ListRecordBackupTemplatesResponse {
     /**
-     * 模板ID
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 返回数据
      */
-    TemplateId?: string;
+    Data?: Array<ListRecordBackupTemplatesData>;
     /**
-     * 模板名称
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
-    TemplateName?: string;
+    RequestId?: string;
+}
+/**
+ * ListRecordPlanChannels返回参数结构体
+ */
+export interface ListRecordPlanChannelsResponse {
     /**
-     * 上云时间段（按周进行设置，支持一天设置多个时间段，每个时间段不小于10分钟）
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 返回结果
      */
-    TimeSections?: Array<RecordTemplateTimeSections>;
+    Data?: ListRecordPlanChannelsData;
     /**
-     * 录像时间段（按周进行设置，支持一天设置多个时间段，每个时间段不小于10分钟）
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
-    DevTimeSections?: Array<RecordTemplateTimeSections>;
-    /**
-     * 上云倍速（支持1，2，4倍速）
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Scale?: number;
-    /**
-     * 创建时间
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    CreateAt?: string;
-    /**
-     * 更新时间
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    UpdateAt?: string;
+    RequestId?: string;
 }
 /**
  * 车辆车牌识别结果信息
@@ -1827,7 +2154,7 @@ export interface DescribeAITaskResultResponse {
      * AI识别结果
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Data?: AITaskResultResponse;
+    Data?: AITaskResultData;
     /**
      * AI识别结果数量
      */
@@ -1838,24 +2165,109 @@ export interface DescribeAITaskResultResponse {
     RequestId?: string;
 }
 /**
- * 查询设备预置位返回数据
+ * ListRecordPlanDevices返回参数结构体
+ */
+export interface ListRecordPlanDevicesResponse {
+    /**
+     * 返回结果
+     */
+    Data?: ListRecordPlanDevicesData;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * DescribeDevicePreset返回参数结构体
  */
 export interface DescribeDevicePresetResponse {
     /**
-     * 预置位索引    只支持1-10的索引
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 返回数据
      */
-    Index?: number;
+    Data?: Array<DescribeDevicePresetData>;
     /**
-     * 预置位名称
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * UpdateRecordBackupPlan请求参数结构体
+ */
+export interface UpdateRecordBackupPlanRequest {
+    /**
+     * 计划ID
+     */
+    PlanId: string;
+    /**
+     * 修改的内容
+     */
+    Mod: UpdateRecordBackupPlanModify;
+}
+/**
+ * 云录像时间片段
+ */
+export interface RecordTimeLine {
+    /**
+     * 时间片段开始时间，UTC秒数，例如：1662114146
+     */
+    Begin?: number;
+    /**
+     * 时间片段结束时间，UTC秒数，例如：1662114146
+     */
+    End?: number;
+}
+/**
+ * 查询网关服务版本信息返回数据
+ */
+export interface DescribeGatewayVersionData {
+    /**
+     * 网关服务列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Name?: string;
+    Services?: Array<DescribeGatewayVersion>;
 }
+/**
+ * ControlRecord请求参数结构体
+ */
+export interface ControlRecordRequest {
+    /**
+     * 通道ID（录像播放地址格式 https://${domain}/live/${ChannelId}@${Session}）
+     */
+    ChannelId: string;
+    /**
+     * 录像会话 ID （ 录像播放地址格式 https://${domain}/live/${ChannelId}@${Session}）
+     */
+    Session: string;
+    /**
+     * 录像操作类型 （play:播放；pause:暂停 ；stop:关闭）
+     */
+    ControlAction: string;
+    /**
+     * 跳转进度 （ 参数应大于等于0，跳转到录像开始时间的相对时间（单位秒），例如0就是跳转到录像开始的时间,不可以和 Scale 参数同时出现）
+     */
+    Position?: number;
+    /**
+     * 速度 （ 范围（0.25,0.5,1,2,4,8），不可以和 Pos 参数同时出现）
+     */
+    Scale?: number;
+}
+/**
+ * ControlDevicePTZ返回参数结构体
+ */
+export interface ControlDevicePTZResponse {
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * ListRecordBackupPlans请求参数结构体
+ */
+export declare type ListRecordBackupPlansRequest = null;
 /**
  * 查询设备接口返回数据
  */
-export interface DescribeDeviceResponse {
+export interface DescribeDeviceData {
     /**
      * 设备ID
   注意：此字段可能返回 null，表示取不到有效值。
@@ -1989,79 +2401,6 @@ export interface DescribeDeviceResponse {
     Manufacturer?: string;
 }
 /**
- * UpdateRecordBackupPlan请求参数结构体
- */
-export interface UpdateRecordBackupPlanRequest {
-    /**
-     * 计划ID
-     */
-    PlanId: string;
-    /**
-     * 修改的内容
-     */
-    Mod: UpdateRecordBackupPlanModify;
-}
-/**
- * 云录像时间片段
- */
-export interface RecordTimeLine {
-    /**
-     * 时间片段开始时间，UTC秒数，例如：1662114146
-     */
-    Begin?: number;
-    /**
-     * 时间片段结束时间，UTC秒数，例如：1662114146
-     */
-    End?: number;
-}
-/**
- * ControlRecord请求参数结构体
- */
-export interface ControlRecordRequest {
-    /**
-     * 通道ID（录像播放地址格式 https://${domain}/live/${ChannelId}@${Session}）
-     */
-    ChannelId: string;
-    /**
-     * 录像会话 ID （ 录像播放地址格式 https://${domain}/live/${ChannelId}@${Session}）
-     */
-    Session: string;
-    /**
-     * 录像操作类型 （play:播放；pause:暂停 ；stop:关闭）
-     */
-    ControlAction: string;
-    /**
-     * 跳转进度 （ 参数应大于等于0，跳转到录像开始时间的相对时间（单位秒），例如0就是跳转到录像开始的时间,不可以和 Scale 参数同时出现）
-     */
-    Position?: number;
-    /**
-     * 速度 （ 范围（0.25,0.5,1,2,4,8），不可以和 Pos 参数同时出现）
-     */
-    Scale?: number;
-}
-/**
- * ControlDevicePTZ返回参数结构体
- */
-export interface ControlDevicePTZResponse {
-    /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
-/**
- * 修改实时上云模板的请求数据结构
- */
-export interface UpdateRecordTemplateData {
-    /**
-     * 模板名称， 不修改名称时，不需要带该字段
-     */
-    TemplateName?: string;
-    /**
-     * 上云时间段，不修改名称时，不需要带该字段
-     */
-    TimeSections?: Array<RecordTemplateTimeSections>;
-}
-/**
  * AddUserDevice请求参数结构体
  */
 export interface AddUserDeviceRequest {
@@ -2119,29 +2458,17 @@ export interface AddUserDeviceRequest {
     Username?: string;
 }
 /**
- * 查询录像上云计划关联通道的返回数据
+ * ListRecordBackupPlanDevices返回参数结构体
  */
 export interface ListRecordBackupPlanDevicesResponse {
     /**
-     * 第几页
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 返回数据
      */
-    PageNumber?: number;
+    Data?: ListRecordBackupPlanDevicesData;
     /**
-     * 当前页的设备数量
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
-    PageSize?: number;
-    /**
-     * 本次查询的设备通道总数
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    TotalCount?: number;
-    /**
-     * 设备通道信息列表
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    List?: RecordPlanChannelInfo;
+    RequestId?: string;
 }
 /**
  * ControlDevicePTZ请求参数结构体
@@ -2174,45 +2501,17 @@ export interface DescribeRecordBackupPlanRequest {
     PlanId: string;
 }
 /**
- * 查询录像上云计划返回数据
+ * DescribeRecordBackupPlan返回参数结构体
  */
 export interface DescribeRecordBackupPlanResponse {
     /**
-     * 录像上云计划ID
+     * 返回数据
      */
-    PlanId?: string;
+    Data?: DescribeRecordBackupPlanData;
     /**
-     * 录像上云计划名称
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
-    PlanName?: string;
-    /**
-     * 录像上云模板ID
-     */
-    TemplateId?: string;
-    /**
-     * 录像上云计划描述
-     */
-    Describe?: string;
-    /**
-     * 云文件生命周期
-     */
-    LifeCycle?: LifeCycleData;
-    /**
-     * 录像上云计划状态，1:正常使用中，0:删除中，无法使用
-     */
-    Status?: number;
-    /**
-     * 通道数量
-     */
-    ChannelCount?: number;
-    /**
-     * 创建时间
-     */
-    CreateAt?: string;
-    /**
-     * 修改时间
-     */
-    UpdateAt?: string;
+    RequestId?: string;
 }
 /**
  * DescribeDeviceChannel请求参数结构体
@@ -2230,7 +2529,7 @@ export interface UpdateUserDeviceResponse {
     /**
      * 返回数据
      */
-    Data?: UpdateDeviceResponse;
+    Data?: UpdateDeviceData;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2292,51 +2591,9 @@ export interface GatewaysData {
     DeviceNum?: number;
 }
 /**
- * 修改录像上云计划数据结构
- */
-export interface UpdateRecordBackupPlanModify {
-    /**
-     * 录像计划名称（仅支持中文、英文、数字、_、-，长度不超过32个字符，计划名称全局唯一，不能为空，不能重复，不修改名称时，不需要该字段）
-     */
-    PlanName?: string;
-    /**
-     * 录制模板ID（从查询录像上云模板列表接口ListRecordBackupTemplates中获取，不修改模板ID时，不需要该字段）
-     */
-    TemplateId?: string;
-    /**
-     * 录像计划描述（仅支持中文、英文、数字、_、-，长度不超过128个字符， 不修改描述时，不需要该字段）
-     */
-    Describe?: string;
-    /**
-     * 生命周期（录像文件生命周期设置，管理文件冷、热存储的时间，不修改生命周期时，不需要该字段）
-     */
-    LifeCycle?: LifeCycleData;
-    /**
-     * 要新增的设备通道（Json数组，没有新增时，不需要该字段，一次添加通道总数不超过5000个，包括组织目录下的通道数量）
-     */
-    Add?: string;
-    /**
-     * 要删除的设备通道（Json数组，内容为要删除的设备通道id，没有删除设备通道时，不需要该字段）
-     */
-    Del?: string;
-    /**
-     * 添加组织目录下所有设备通道（Json数组，可以为空，并且通道总数量不超过5000个（包括Add字段通道数量））
-     */
-    OrganizationId?: string;
-}
-/**
- * DescribeDevicePreset请求参数结构体
- */
-export interface DescribeDevicePresetRequest {
-    /**
-     * 通道ID（从通道查询接口DescribeDeviceChannel中获取）
-     */
-    ChannelId: string;
-}
-/**
  * 查询网关列表返回结果
  */
-export interface ListGatewaysResponse {
+export interface ListGatewaysData {
     /**
      * 网关列表
   注意：此字段可能返回 null，表示取不到有效值。
@@ -2349,56 +2606,80 @@ export interface ListGatewaysResponse {
     TotalCount?: number;
 }
 /**
- * ListRecordPlanDevices请求参数结构体
+ * DescribeDevicePreset请求参数结构体
  */
-export interface ListRecordPlanDevicesRequest {
+export interface DescribeDevicePresetRequest {
     /**
-     * 上云计划ID
+     * 通道ID（从通道查询接口DescribeDeviceChannel中获取）
      */
-    PlanId: string;
-    /**
-     * 每页最大数量
-     */
-    PageSize: number;
-    /**
-     * 第几页
-     */
-    PageNumber: number;
-    /**
-     * 按照设备名称查询，为空时，不参考该参数
-  通道名称、设备名称、组织名称同时只有一个有效，如果同时多个字段有值，按照通道名称、设备名称、组织名称的优先级顺序查询，如果都为空，则全量查询。长度不超过32字节
-     */
-    DeviceName?: string;
-    /**
-     * 按照通道名称查询，为空时，不参考该参数
-  通道名称、设备名称、组织名称同时只有一个有效，如果同时多个字段有值，按照通道名称、设备名称、组织名称的优先级顺序查询，如果都为空，则全量查询。长度不超过32字节
-     */
-    ChannelName?: string;
-    /**
-     * 按照组织名称查询|，为空时，不参考该参数
-  通道名称、设备名称、组织名称同时只有一个有效，如果同时多个字段有值，按照通道名称、设备名称、组织名称的优先级顺序查询，如果都为空，则全量查询。长度不超过32字节
-     */
-    OrganizationName?: string;
+    ChannelId: string;
 }
 /**
- * 查询网关所支持的接入协议
+ * ListGateways返回参数结构体
+ */
+export interface ListGatewaysResponse {
+    /**
+     * 返回数据
+     */
+    Data?: ListGatewaysData;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * 新增录像上云计划返回数据
+ */
+export interface AddRecordBackupPlanData {
+    /**
+     * 录像上云计划ID
+     */
+    PlanId?: string;
+    /**
+     * 录像上云计划名称
+     */
+    PlanName?: string;
+    /**
+     * 录像上云模板ID
+     */
+    TemplateId?: string;
+    /**
+     * 录像上云计划描述
+     */
+    Describe?: string;
+    /**
+     * 云文件生命周期
+     */
+    LifeCycle?: LifeCycleData;
+    /**
+     * 录像上云计划状态，1:正常使用中，0:删除中，无法使用
+     */
+    Status?: number;
+    /**
+     * 通道数量
+     */
+    ChannelCount?: number;
+    /**
+     * 创建时间
+     */
+    CreateAt?: string;
+    /**
+     * 修改时间
+     */
+    UpdateAt?: string;
+}
+/**
+ * DescribeGatewayProtocol返回参数结构体
  */
 export interface DescribeGatewayProtocolResponse {
     /**
-     * 接入协议的字典码
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 返回数据
      */
-    TypeCode?: string;
+    Data?: Array<DescribeGatewayProtocolData>;
     /**
-     * 接入协议类型值
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
-    Value?: number;
-    /**
-     * 接入协议的类型描述
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Label?: string;
+    RequestId?: string;
 }
 /**
  * 时间片段结构体
@@ -2424,6 +2705,19 @@ export interface ListAITaskData {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     List?: Array<AITaskInfo>;
+}
+/**
+ * 修改实时上云模板的请求数据结构
+ */
+export interface UpdateRecordTemplateData {
+    /**
+     * 模板名称， 不修改名称时，不需要带该字段
+     */
+    TemplateName?: string;
+    /**
+     * 上云时间段，不修改名称时，不需要带该字段
+     */
+    TimeSections?: Array<RecordTemplateTimeSections>;
 }
 /**
  * DescribeDomainRegion请求参数结构体
@@ -2476,6 +2770,26 @@ export interface AddAITaskRequest {
     IsStartTheTask?: boolean;
 }
 /**
+ * 查询网关所支持的接入协议
+ */
+export interface DescribeGatewayProtocolData {
+    /**
+     * 接入协议的字典码
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TypeCode?: string;
+    /**
+     * 接入协议类型值
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Value?: number;
+    /**
+     * 接入协议的类型描述
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Label?: string;
+}
+/**
  * DescribeVideoDownloadUrl请求参数结构体
  */
 export interface DescribeVideoDownloadUrlRequest {
@@ -2501,14 +2815,17 @@ export interface DescribeVideoDownloadUrlRequest {
     IsRespActualTime?: boolean;
 }
 /**
- * 查询网关服务版本信息返回数据
+ * DescribeGatewayVersion返回参数结构体
  */
 export interface DescribeGatewayVersionResponse {
     /**
-     * 网关服务列表
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 返回数据
      */
-    Services?: Array<DescribeGatewayVersion>;
+    Data?: DescribeGatewayVersionData;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * ListGateways请求参数结构体
@@ -2582,6 +2899,15 @@ export interface DescribeGatewayVersionRequest {
      * 网关索引ID（从获取网关列表接口ListGateways中获取）
      */
     GatewayId: string;
+}
+/**
+ * DescribeRecordBackupTemplate请求参数结构体
+ */
+export interface DescribeRecordBackupTemplateRequest {
+    /**
+     * 模板ID（从查询录像上云模板列表接口ListRecordBackupTemplates中获取）
+     */
+    TemplateId: string;
 }
 /**
  * DescribeUserDevice请求参数结构体
@@ -2783,18 +3109,17 @@ export interface UpgradeGatewayRequest {
     GatewayId: string;
 }
 /**
- * 用于查询设备云端录像时间轴信息返回数据
+ * DescribeRecordFile返回参数结构体
  */
 export interface DescribeRecordFileResponse {
     /**
-     * 提示类型，0:时间段内无归档录像，1:时间段内有归档录像
+     * 返回结果
      */
-    Tips: number;
+    Data?: DescribeRecordFileData;
     /**
-     * 存在为数组格式，不存在字段内容为空
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
-    List?: Array<RecordTimeLine>;
+    RequestId?: string;
 }
 /**
  * ControlDevicePreset请求参数结构体
@@ -2892,9 +3217,148 @@ export interface DeleteDomainResponse {
     RequestId?: string;
 }
 /**
- * 查询取回任务详情返回数据
+ * AddRecordRetrieveTask返回参数结构体
  */
 export interface AddRecordRetrieveTaskResponse {
+    /**
+     * 返回结果
+     */
+    Data?: AddRecordRetrieveTaskData;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * DeleteRecordTemplate返回参数结构体
+ */
+export interface DeleteRecordTemplateResponse {
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * 云计划下的设备通道列表返回数据
+ */
+export interface ListRecordPlanDevicesData {
+    /**
+     * 第几页
+     */
+    PageNumber?: number;
+    /**
+     * 当前页的设备数量
+     */
+    PageSize?: number;
+    /**
+     * 本次查询的设备通道总数
+     */
+    TotalCount?: number;
+    /**
+     * 设备通道信息列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    List?: Array<RecordPlanChannelInfo>;
+}
+/**
+ * 查询录像上云模板列表返回数据
+ */
+export interface ListRecordBackupTemplatesData {
+    /**
+     * 模板ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TemplateId?: string;
+    /**
+     * 模板名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TemplateName?: string;
+    /**
+     * 上云时间段（按周进行设置，支持一天设置多个时间段，每个时间段不小于10分钟）
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TimeSections?: Array<RecordTemplateTimeSections>;
+    /**
+     * 录像时间段（按周进行设置，支持一天设置多个时间段，每个时间段不小于10分钟）
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DevTimeSections?: Array<RecordTemplateTimeSections>;
+    /**
+     * 上云倍速（支持1，2，4倍速）
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Scale?: number;
+    /**
+     * 创建时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CreateAt?: string;
+    /**
+     * 更新时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    UpdateAt?: string;
+}
+/**
+ * ListRecordTemplates返回参数结构体
+ */
+export interface ListRecordTemplatesResponse {
+    /**
+     * 返回结果，存在模板时，为Json数组格式，不存在模板时，字段数据为空
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Data?: Array<RecordTemplateInfo>;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * DescribeAITask返回参数结构体
+ */
+export interface DescribeAITaskResponse {
+    /**
+     * AI任务详情
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Data?: AITaskInfo;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * UpdateRecordBackupTemplate返回参数结构体
+ */
+export interface UpdateRecordBackupTemplateResponse {
+    /**
+     * 返回数据
+     */
+    Data?: UpdateRecordBackupTemplateData;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * ControlRecordTimeline返回参数结构体
+ */
+export interface ControlRecordTimelineResponse {
+    /**
+     * 返回数据
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Data?: Array<Timeline>;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * 查询取回任务详情返回数据
+ */
+export interface AddRecordRetrieveTaskData {
     /**
      * 任务ID
      */
@@ -2934,122 +3398,9 @@ export interface AddRecordRetrieveTaskResponse {
     Describe?: string;
 }
 /**
- * DeleteRecordTemplate返回参数结构体
- */
-export interface DeleteRecordTemplateResponse {
-    /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
-/**
- * 云计划下的设备通道列表返回数据
- */
-export interface ListRecordPlanDevicesResponse {
-    /**
-     * 第几页
-     */
-    PageNumber?: number;
-    /**
-     * 当前页的设备数量
-     */
-    PageSize?: number;
-    /**
-     * 本次查询的设备通道总数
-     */
-    TotalCount?: number;
-    /**
-     * 设备通道信息列表
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    List?: Array<RecordPlanChannelInfo>;
-}
-/**
- * ListRecordTemplates返回参数结构体
- */
-export interface ListRecordTemplatesResponse {
-    /**
-     * 返回结果，存在模板时，为Json数组格式，不存在模板时，字段数据为空
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Data?: Array<RecordTemplateInfo>;
-    /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
-/**
- * DescribeAITask返回参数结构体
- */
-export interface DescribeAITaskResponse {
-    /**
-     * AI任务详情
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Data?: AITaskInfo;
-    /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
-/**
- * 修改录像上云模版返回数据
- */
-export interface UpdateRecordBackupTemplateResponse {
-    /**
-     * 模板ID
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    TemplateId?: string;
-    /**
-     * 模板名称
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    TemplateName?: string;
-    /**
-     * 上云时间段（按周进行设置，支持一天设置多个时间段，每个时间段不小于10分钟）
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    TimeSections?: Array<RecordTemplateTimeSections>;
-    /**
-     * 录像时间段（按周进行设置，支持一天设置多个时间段，每个时间段不小于10分钟）
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    DevTimeSections?: Array<RecordTemplateTimeSections>;
-    /**
-     * 上云倍速（支持1，2，4倍速）
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Scale?: number;
-    /**
-     * 创建时间
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    CreateAt?: string;
-    /**
-     * 更新时间
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    UpdateAt?: string;
-}
-/**
- * ControlRecordTimeline返回参数结构体
- */
-export interface ControlRecordTimelineResponse {
-    /**
-     * 返回数据
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Data?: Array<Timeline>;
-    /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
-/**
  * AI识别结果
  */
-export interface AITaskResultResponse {
+export interface AITaskResultData {
     /**
      * AI 任务 ID
      */
@@ -3074,13 +3425,54 @@ export interface DeleteRecordRetrieveTaskRequest {
     TaskId: string;
 }
 /**
+ * 查询录像上云计划返回数据
+ */
+export interface DescribeRecordBackupPlanData {
+    /**
+     * 录像上云计划ID
+     */
+    PlanId?: string;
+    /**
+     * 录像上云计划名称
+     */
+    PlanName?: string;
+    /**
+     * 录像上云模板ID
+     */
+    TemplateId?: string;
+    /**
+     * 录像上云计划描述
+     */
+    Describe?: string;
+    /**
+     * 云文件生命周期
+     */
+    LifeCycle?: LifeCycleData;
+    /**
+     * 录像上云计划状态，1:正常使用中，0:删除中，无法使用
+     */
+    Status?: number;
+    /**
+     * 通道数量
+     */
+    ChannelCount?: number;
+    /**
+     * 创建时间
+     */
+    CreateAt?: string;
+    /**
+     * 修改时间
+     */
+    UpdateAt?: string;
+}
+/**
  * UpdateRecordPlan返回参数结构体
  */
 export interface UpdateRecordPlanResponse {
     /**
      * 返回结果
      */
-    Data?: RecordPlanOptResponse;
+    Data?: RecordPlanOptData;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -3124,6 +3516,61 @@ export interface DeleteRecordBackupPlanRequest {
      * 录像上云计划ID（从查询录像上云计划列表接口ListRecordBackupPlans中获取）
      */
     PlanId: string;
+}
+/**
+ * 修改网关信息返回结果
+ */
+export interface UpdateGatewayData {
+    /**
+     * 网关索引ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    GatewayId?: string;
+    /**
+     * 网关编码
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    GwId?: string;
+    /**
+     * 网关名称，仅支持中文、英文、数字、_、-，长度不超过32个字符
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Name?: string;
+    /**
+     * 网关描述，仅支持中文、英文、数字、_、-，长度不超过128个字符
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Description?: string;
+    /**
+     * 服务节点ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ClusterId?: string;
+    /**
+     * 服务节点名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ClusterName?: string;
+    /**
+     * 网关状态，0：离线，1:在线
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Status?: number;
+    /**
+     * 激活时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CreatedAt?: number;
+    /**
+     * 网关密钥
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Secret?: string;
+    /**
+     * 网关版本信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Version?: string;
 }
 /**
  * ListRecordBackupTemplates请求参数结构体
@@ -3269,6 +3716,126 @@ export interface DeleteAITaskResponse {
     RequestId?: string;
 }
 /**
+ * 获取云录像下载URL返回的数据
+ */
+export interface DescribeVideoDownloadUrlData {
+    /**
+     * 录像文件下载 URL
+  注意：
+  URL 有效期是10分钟，过期后将拒绝访问，若需再用请重新获取
+  录像文件下载采用分块传输编码，响应头Transfer-Encoding:chunked
+  下载文件命名格式为{ChannelId}-{BeginTime}-{EndTime}.{FileType}
+     */
+    Url?: string;
+    /**
+     * 实际下载录像的开始时间
+  注意：当请求中指定IsRespActualTime参数为true时，才有该字段
+     */
+    ActualBeginTime?: string;
+    /**
+     * 实际下载录像的结束时间
+  注意：当请求中指定IsRespActualTime参数为true时，才有该字段
+     */
+    ActualEndTime?: string;
+}
+/**
+ * AddRecordBackupTemplate返回参数结构体
+ */
+export interface AddRecordBackupTemplateResponse {
+    /**
+     * 返回数据
+     */
+    Data?: AddRecordBackupTemplateData;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * PlayRecord返回参数结构体
+ */
+export interface PlayRecordResponse {
+    /**
+     * 返回结果
+     */
+    Data?: PlayRecordData;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * DescribeGatewayMonitor返回参数结构体
+ */
+export interface DescribeGatewayMonitorResponse {
+    /**
+     * 返回数据
+     */
+    Data?: DescribeGatewayMonitor;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * DescribeRecordBackupTemplate返回参数结构体
+ */
+export interface DescribeRecordBackupTemplateResponse {
+    /**
+     * 返回数据
+     */
+    Data?: DescribeRecordBackupTemplateData;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * AddUserDevice返回参数结构体
+ */
+export interface AddUserDeviceResponse {
+    /**
+     * 增加设备返回数据
+     */
+    Data?: AddDeviceData;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * 本地录像播放url数据结构
+ */
+export interface PlayRecordData {
+    /**
+     * 录像播放地址
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Flv?: string;
+}
+/**
+ * DeleteGateway返回参数结构体
+ */
+export interface DeleteGatewayResponse {
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * DescribeRecordPlaybackUrl返回参数结构体
+ */
+export interface DescribeRecordPlaybackUrlResponse {
+    /**
+     * 返回结果
+     */
+    Data?: RecordPlaybackUrl;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * 修改实时上云录像计划的数据
  */
 export interface UpdateRecordPlanData {
@@ -3306,240 +3873,6 @@ export interface UpdateRecordPlanData {
     OrganizationId?: Array<string>;
 }
 /**
- * 修改设备接口返回数据
- */
-export interface UpdateDeviceResponse {
-    /**
-     * 设备ID
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    DeviceId?: string;
-    /**
-     * 设备编码（即我们为设备生成的20位国标编码）
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Code?: string;
-    /**
-     * 设备名称
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Name?: string;
-    /**
-     * 设备接入协议，1:RTMP,2:GB,3:GW
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    AccessProtocol?: number;
-    /**
-     * 设备类型，1:IPC,2:NVR
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Type?: number;
-    /**
-     * 设备接入服务节点ID
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ClusterId?: string;
-    /**
-     * 设备接入服务节点名称
-  
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ClusterName?: string;
-    /**
-     * 设备流传输协议，1:UDP,2:TCP
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    TransportProtocol?: number;
-    /**
-     * 设备密码
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Password?: string;
-    /**
-     * 设备描述
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Description?: string;
-    /**
-     * 设备状态，0:未注册,1:在线,2:离线,3:禁用
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Status?: number;
-    /**
-     * 设备所属组织ID
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    OrganizationId?: number;
-    /**
-     * 设备接入网关ID，从查询网关列表接口中获取（仅网关接入需要）
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    GatewayId?: string;
-    /**
-     * 网关接入协议类型，1.海康SDK，2.大华SDK，3.宇视SDK，4.Onvif（仅网关接入需要）
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ProtocolType?: number;
-    /**
-     * 设备接入IP
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Ip?: string;
-    /**
-     * 设备Port
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Port?: number;
-    /**
-     * 设备用户名
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Username?: string;
-    /**
-     * 用户Id
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    AppId?: number;
-}
-/**
- * 新增录像上云模版返回数据
- */
-export interface AddRecordBackupTemplateResponse {
-    /**
-     * 模板ID
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    TemplateId?: string;
-    /**
-     * 模板名称
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    TemplateName?: string;
-    /**
-     * 上云时间段（按周进行设置，支持一天设置多个时间段，每个时间段不小于10分钟）
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    TimeSections?: Array<RecordTemplateTimeSections>;
-    /**
-     * 录像时间段（按周进行设置，支持一天设置多个时间段，每个时间段不小于10分钟）
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    DevTimeSections?: Array<RecordTemplateTimeSections>;
-    /**
-     * 上云倍速（支持1，2，4倍速）
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Scale?: number;
-    /**
-     * 创建时间
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    CreateAt?: string;
-    /**
-     * 更新时间
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    UpdateAt?: string;
-}
-/**
- * 本地录像播放url数据结构
- */
-export interface PlayRecordResponse {
-    /**
-     * 录像播放地址
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Flv?: string;
-}
-/**
- * DescribeGatewayMonitor返回参数结构体
- */
-export interface DescribeGatewayMonitorResponse {
-    /**
-     * 返回数据
-     */
-    Data?: DescribeGatewayMonitor;
-    /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
-/**
- * 查询录像上云模版返回数据
- */
-export interface DescribeRecordBackupTemplateResponse {
-    /**
-     * 模板ID
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    TemplateId?: string;
-    /**
-     * 模板名称
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    TemplateName?: string;
-    /**
-     * 上云时间段（按周进行设置，支持一天设置多个时间段，每个时间段不小于10分钟）
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    TimeSections?: Array<RecordTemplateTimeSections>;
-    /**
-     * 录像时间段（按周进行设置，支持一天设置多个时间段，每个时间段不小于10分钟）
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    DevTimeSections?: Array<RecordTemplateTimeSections>;
-    /**
-     * 上云倍速（支持1，2，4倍速）
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Scale?: number;
-    /**
-     * 创建时间
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    CreateAt?: string;
-    /**
-     * 更新时间
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    UpdateAt?: string;
-}
-/**
- * AddUserDevice返回参数结构体
- */
-export interface AddUserDeviceResponse {
-    /**
-     * 增加设备返回数据
-     */
-    Data?: AddDeviceResponse;
-    /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
-/**
- * DeleteGateway返回参数结构体
- */
-export interface DeleteGatewayResponse {
-    /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
-/**
- * DescribeRecordPlaybackUrl返回参数结构体
- */
-export interface DescribeRecordPlaybackUrlResponse {
-    /**
-     * 返回结果
-     */
-    Data?: RecordPlaybackUrl;
-    /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
-/**
  * 抽烟识别结果详情
  */
 export interface SmokingAIResultInfo {
@@ -3561,57 +3894,30 @@ export interface SmokingAIResultInfo {
  */
 export declare type ListRecordPlanChannelsRequest = null;
 /**
- * 查询组织目录下的通道列表返回数据
+ * ListOrganizationChannels返回参数结构体
  */
 export interface ListOrganizationChannelsResponse {
     /**
-     * 第几页
+     * 返回结果
      */
-    PageNumber?: number;
+    Data?: ListOrganizationChannelsData;
     /**
-     * 当前页的设备数量
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
-    PageSize?: number;
-    /**
-     * 本次查询的设备通道总数
-     */
-    TotalCount?: number;
-    /**
-     * 设备通道信息列表
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    List?: Array<OrganizationChannelInfo>;
+    RequestId?: string;
 }
 /**
- * 实时上云计划添加和修改的返回数据
+ * UpdateOrganization请求参数结构体
  */
-export interface RecordPlanOptResponse {
+export interface UpdateOrganizationRequest {
     /**
-     * 上云计划ID
+     * 组织ID（从查询组织接口DescribeOrganization中获取）
      */
-    PlanId?: string;
+    OrganizationId: string;
     /**
-     * 上云计划名称
+     * 组织名称
      */
-    PlanName?: string;
-    /**
-     * 上云模板ID
-     */
-    TemplateId?: string;
-    /**
-     * 上云计划描述
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Describe?: string;
-    /**
-     * 云文件生命周期
-     */
-    LifeCycle?: LifeCycleData;
-    /**
-     * 码流类型，default:设备默认码流类型，main:主码流，sub:子码流，其他根据设备能力集自定义
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    StreamType?: string;
+    Name: string;
 }
 /**
  * UpdateAITaskStatus请求参数结构体
@@ -3699,34 +4005,138 @@ export interface UpdateAITaskResponse {
     RequestId?: string;
 }
 /**
- * 查询域名可绑定集群数据
+ * 用于查询设备云端录像时间轴信息返回数据
+ */
+export interface DescribeRecordFileData {
+    /**
+     * 提示类型，0:时间段内无归档录像，1:时间段内有归档录像
+     */
+    Tips?: number;
+    /**
+     * 存在为数组格式，不存在字段内容为空
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    List?: Array<RecordTimeLine>;
+}
+/**
+ * 修改组织接口返回数据
+ */
+export interface UpdateOrgData {
+    /**
+     * 组织 ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    OrganizationId?: string;
+    /**
+     * 组织名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Name?: string;
+    /**
+     * 组织父节点 ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ParentId?: string;
+    /**
+     * 组织层级
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Level?: number;
+    /**
+     * 用户ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AppId?: number;
+    /**
+     * 组织结构
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ParentIds?: string;
+    /**
+     * 设备总数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Total?: number;
+    /**
+     * 设备在线数量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Online?: number;
+}
+/**
+ * DescribeDomainRegion返回参数结构体
  */
 export interface DescribeDomainRegionResponse {
     /**
-     * 服务节点描述
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 返回数据
      */
-    Label?: string;
+    Data?: Array<DescribeDomainRegionData>;
     /**
-     * 服务节点 ID（对应为其他接口中所需的 ClusterId）
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
-    Value?: string;
-    /**
-     * 地域信息
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Region?: string;
+    RequestId?: string;
 }
 /**
- * 用户下所有实时上云计划中的通道id列表返回数据
+ * 修改录像上云模版返回数据
  */
-export interface ListRecordPlanChannelsResponse {
+export interface UpdateRecordBackupTemplateData {
     /**
-     * 用户所有计划下通道id，存在通道是为数组格式，不存在时，字段数据为空
+     * 模板ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    List?: Array<string>;
+    TemplateId?: string;
+    /**
+     * 模板名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TemplateName?: string;
+    /**
+     * 上云时间段（按周进行设置，支持一天设置多个时间段，每个时间段不小于10分钟）
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TimeSections?: Array<RecordTemplateTimeSections>;
+    /**
+     * 录像时间段（按周进行设置，支持一天设置多个时间段，每个时间段不小于10分钟）
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DevTimeSections?: Array<RecordTemplateTimeSections>;
+    /**
+     * 上云倍速（支持1，2，4倍速）
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Scale?: number;
+    /**
+     * 创建时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CreateAt?: string;
+    /**
+     * 更新时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    UpdateAt?: string;
+}
+/**
+ * 查询组织目录下的通道列表返回数据
+ */
+export interface ListOrganizationChannelsData {
+    /**
+     * 第几页
+     */
+    PageNumber?: number;
+    /**
+     * 当前页的设备数量
+     */
+    PageSize?: number;
+    /**
+     * 本次查询的设备通道总数
+     */
+    TotalCount?: number;
+    /**
+     * 设备通道信息列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    List?: Array<OrganizationChannelInfo>;
 }
 /**
  * AddRecordBackupPlan请求参数结构体
@@ -3758,13 +4168,257 @@ export interface AddRecordBackupPlanRequest {
     OrganizationId?: Array<string>;
 }
 /**
- * ListRecordBackupPlans请求参数结构体
+ * 获取开流地址返回数据
  */
-export declare type ListRecordBackupPlansRequest = null;
+export interface ControlDeviceStreamData {
+    /**
+     * flv 流地址
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Flv?: string;
+    /**
+     * hls 流地址
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Hls?: string;
+    /**
+     * rtmp 流地址
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Rtmp?: string;
+}
+/**
+ * UpdateRecordBackupTemplate请求参数结构体
+ */
+export interface UpdateRecordBackupTemplateRequest {
+    /**
+     * 模板ID（从查询录像上云模板列表接口ListRecordBackupTemplates中获取）
+     */
+    TemplateId: string;
+    /**
+     * 修改录像上云模板数据
+     */
+    Mod: UpdateRecordBackupTemplateModify;
+}
+/**
+ * UpdateDeviceStatus返回参数结构体
+ */
+export interface UpdateDeviceStatusResponse {
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * DeleteUserDevice返回参数结构体
+ */
+export interface DeleteUserDeviceResponse {
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * UpdateRecordBackupPlan返回参数结构体
+ */
+export interface UpdateRecordBackupPlanResponse {
+    /**
+     * 返回数据
+     */
+    Data?: UpdateRecordBackupPlanData;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * 查询域名可绑定集群数据
+ */
+export interface DescribeDomainRegionData {
+    /**
+     * 服务节点描述
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Label?: string;
+    /**
+     * 服务节点 ID（对应为其他接口中所需的 ClusterId）
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Value?: string;
+    /**
+     * 地域信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Region?: string;
+}
+/**
+ * AddOrganization请求参数结构体
+ */
+export interface AddOrganizationRequest {
+    /**
+     * 组织名称（仅支持中文、英文、数字、_、-的组合，长度不超过16个字符，且组织名称不能重复）
+     */
+    Name: string;
+    /**
+     * 组织父节点 ID（从查询组织接口DescribeOrganization中获取，填0代表根组织）
+     */
+    ParentId: string;
+}
+/**
+ * 厨师服识别结果详情
+ */
+export interface ChefClothAIResultInfo {
+    /**
+     * 时间字符串
+     */
+    Time?: string;
+    /**
+     * 截图 URL
+     */
+    Url?: string;
+    /**
+     * 厨师服信息
+     */
+    ChefClothInfoInfo?: Array<BaseAIResultInfo>;
+}
+/**
+ * DescribeStreamAuth返回参数结构体
+ */
+export interface DescribeStreamAuthResponse {
+    /**
+     * 返回结果
+     */
+    Data?: DescribeStreamAuthData;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * 查询录像上云计划列表返回数据
+ */
+export interface ListRecordBackupPlanData {
+    /**
+     * 录像上云计划ID
+     */
+    PlanId?: string;
+    /**
+     * 录像上云计划名称
+     */
+    PlanName?: string;
+    /**
+     * 录像上云模板ID
+     */
+    TemplateId?: string;
+    /**
+     * 录像上云计划描述
+     */
+    Describe?: string;
+    /**
+     * 云文件生命周期
+     */
+    LifeCycle?: LifeCycleData;
+    /**
+     * 录像上云计划状态，1:正常使用中，0:删除中，无法使用
+     */
+    Status?: number;
+    /**
+     * 通道数量
+     */
+    ChannelCount?: number;
+    /**
+     * 创建时间
+     */
+    CreateAt?: string;
+    /**
+     * 修改时间
+     */
+    UpdateAt?: string;
+}
+/**
+ * DeleteRecordBackupTemplate返回参数结构体
+ */
+export interface DeleteRecordBackupTemplateResponse {
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * UpdateRecordTemplate返回参数结构体
+ */
+export interface UpdateRecordTemplateResponse {
+    /**
+     * 返回结果
+     */
+    Data?: RecordTemplateInfo;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * DescribeRecordRetrieveTask返回参数结构体
+ */
+export interface DescribeRecordRetrieveTaskResponse {
+    /**
+     * 返回结果
+     */
+    Data?: DescribeRecordRetrieveTaskData;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * DescribeStreamAuth请求参数结构体
+ */
+export declare type DescribeStreamAuthRequest = null;
+/**
+ * 修改录像上云计划返回数据
+ */
+export interface UpdateRecordBackupPlanData {
+    /**
+     * 录像上云计划ID
+     */
+    PlanId?: string;
+    /**
+     * 录像上云计划名称
+     */
+    PlanName?: string;
+    /**
+     * 录像上云模板ID
+     */
+    TemplateId?: string;
+    /**
+     * 录像上云计划描述
+     */
+    Describe?: string;
+    /**
+     * 云文件生命周期
+     */
+    LifeCycle?: LifeCycleData;
+    /**
+     * 录像上云计划状态，1:正常使用中，0:删除中，无法使用
+     */
+    Status?: number;
+    /**
+     * 通道数量
+     */
+    ChannelCount?: number;
+    /**
+     * 创建时间
+     */
+    CreateAt?: string;
+    /**
+     * 修改时间
+     */
+    UpdateAt?: string;
+}
 /**
  * 增加设备接口返回数据
  */
-export interface AddDeviceResponse {
+export interface AddDeviceData {
     /**
      * 设备iD
   注意：此字段可能返回 null，表示取不到有效值。
@@ -3857,267 +4511,3 @@ export interface AddDeviceResponse {
      */
     AppId?: number;
 }
-/**
- * 查询录像上云计划列表返回数据
- */
-export interface ListRecordBackupPlanResponse {
-    /**
-     * 录像上云计划ID
-     */
-    PlanId?: string;
-    /**
-     * 录像上云计划名称
-     */
-    PlanName?: string;
-    /**
-     * 录像上云模板ID
-     */
-    TemplateId?: string;
-    /**
-     * 录像上云计划描述
-     */
-    Describe?: string;
-    /**
-     * 云文件生命周期
-     */
-    LifeCycle?: LifeCycleData;
-    /**
-     * 录像上云计划状态，1:正常使用中，0:删除中，无法使用
-     */
-    Status?: number;
-    /**
-     * 通道数量
-     */
-    ChannelCount?: number;
-    /**
-     * 创建时间
-     */
-    CreateAt?: string;
-    /**
-     * 修改时间
-     */
-    UpdateAt?: string;
-}
-/**
- * UpdateRecordBackupTemplate请求参数结构体
- */
-export interface UpdateRecordBackupTemplateRequest {
-    /**
-     * 模板ID（从查询录像上云模板列表接口ListRecordBackupTemplates中获取）
-     */
-    TemplateId: string;
-    /**
-     * 修改录像上云模板数据
-     */
-    Mod: UpdateRecordBackupTemplateModify;
-}
-/**
- * UpdateDeviceStatus返回参数结构体
- */
-export interface UpdateDeviceStatusResponse {
-    /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
-/**
- * DeleteUserDevice返回参数结构体
- */
-export interface DeleteUserDeviceResponse {
-    /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
-/**
- * 修改录像上云计划返回数据
- */
-export interface UpdateRecordBackupPlanResponse {
-    /**
-     * 录像上云计划ID
-     */
-    PlanId?: string;
-    /**
-     * 录像上云计划名称
-     */
-    PlanName?: string;
-    /**
-     * 录像上云模板ID
-     */
-    TemplateId?: string;
-    /**
-     * 录像上云计划描述
-     */
-    Describe?: string;
-    /**
-     * 云文件生命周期
-     */
-    LifeCycle?: LifeCycleData;
-    /**
-     * 录像上云计划状态，1:正常使用中，0:删除中，无法使用
-     */
-    Status?: number;
-    /**
-     * 通道数量
-     */
-    ChannelCount?: number;
-    /**
-     * 创建时间
-     */
-    CreateAt?: string;
-    /**
-     * 修改时间
-     */
-    UpdateAt?: string;
-}
-/**
- * AddOrganization请求参数结构体
- */
-export interface AddOrganizationRequest {
-    /**
-     * 组织名称（仅支持中文、英文、数字、_、-的组合，长度不超过16个字符，且组织名称不能重复）
-     */
-    Name: string;
-    /**
-     * 组织父节点 ID（从查询组织接口DescribeOrganization中获取，填0代表根组织）
-     */
-    ParentId: string;
-}
-/**
- * 厨师服识别结果详情
- */
-export interface ChefClothAIResultInfo {
-    /**
-     * 时间字符串
-     */
-    Time?: string;
-    /**
-     * 截图 URL
-     */
-    Url?: string;
-    /**
-     * 厨师服信息
-     */
-    ChefClothInfoInfo?: Array<BaseAIResultInfo>;
-}
-/**
- * 查询推拉流鉴权返回数据结构
- */
-export interface DescribeStreamAuthResponse {
-    /**
-     * 鉴权配置ID（uuid）
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Id?: string;
-    /**
-     * 是否开播放鉴权（1:开启,0:关闭）
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    PullState?: number;
-    /**
-     * 播放密钥（仅支持字母数字，长度0-10位）
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    PullSecret?: string;
-    /**
-     * 播放过期时间（单位：分钟）
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    PullExpired?: number;
-    /**
-     * 是否开启推流鉴权（1:开启,0:关闭）
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    PushState?: number;
-    /**
-     * 推流密钥（仅支持字母数字，长度0-10位）
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    PushSecret?: string;
-    /**
-     * 推流过期时间（单位：分钟）
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    PushExpired?: number;
-    /**
-     * 用户ID
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    AppId?: number;
-}
-/**
- * DeleteRecordBackupTemplate返回参数结构体
- */
-export interface DeleteRecordBackupTemplateResponse {
-    /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
-/**
- * UpdateRecordTemplate返回参数结构体
- */
-export interface UpdateRecordTemplateResponse {
-    /**
-     * 返回结果
-     */
-    Data?: RecordTemplateInfo;
-    /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
-/**
- * 查询云录像取回任务详情返回数据
- */
-export interface DescribeRecordRetrieveTaskResponse {
-    /**
-     * 取回任务ID
-     */
-    TaskId?: string;
-    /**
-     * 取回任务名称
-     */
-    TaskName?: string;
-    /**
-     * 取回录像的开始时间
-     */
-    StartTime?: number;
-    /**
-     * 取回录像的结束时间
-     */
-    EndTime?: number;
-    /**
-     * 取回模式，1:极速模式，其他暂不支持
-     */
-    Mode?: number;
-    /**
-     * 副本有效期
-     */
-    Expiration?: number;
-    /**
-     * 任务状态，0:已取回，1:取回中，2:待取回
-     */
-    Status?: number;
-    /**
-     * 取回容量，单位MB
-     */
-    Capacity?: number;
-    /**
-     * 任务的设备通道id
-     */
-    Channels?: Array<RecordRetrieveTaskChannelInfo>;
-    /**
-     * 任务描述
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Describe?: string;
-    /**
-     * 任务通道数量
-     */
-    ChannelCount?: number;
-}
-/**
- * DescribeStreamAuth请求参数结构体
- */
-export declare type DescribeStreamAuthRequest = null;

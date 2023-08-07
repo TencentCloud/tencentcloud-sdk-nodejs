@@ -428,6 +428,8 @@ var tourism_1 = require("./tourism");
 Object.defineProperty(exports, "tourism", { enumerable: true, get: function () { return tourism_1.tourism; } });
 var trdp_1 = require("./trdp");
 Object.defineProperty(exports, "trdp", { enumerable: true, get: function () { return trdp_1.trdp; } });
+var trocket_1 = require("./trocket");
+Object.defineProperty(exports, "trocket", { enumerable: true, get: function () { return trocket_1.trocket; } });
 var trp_1 = require("./trp");
 Object.defineProperty(exports, "trp", { enumerable: true, get: function () { return trp_1.trp; } });
 var trro_1 = require("./trro");
