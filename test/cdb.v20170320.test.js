@@ -138,6 +138,16 @@ it("cdb.v20170320.StopReplication", async function () {
     }
 })
 
+it("cdb.v20170320.StopCpuExpand", async function () {
+    try {
+       const data = await client.StopCpuExpand({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cdb.v20170320.ModifyDBInstanceName", async function () {
     try {
        const data = await client.ModifyDBInstanceName({})
@@ -1098,6 +1108,16 @@ it("cdb.v20170320.DescribeAccounts", async function () {
     }
 })
 
+it("cdb.v20170320.DescribeCpuExpandStrategy", async function () {
+    try {
+       const data = await client.DescribeCpuExpandStrategy({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cdb.v20170320.ReloadBalanceProxyNode", async function () {
     try {
        const data = await client.ReloadBalanceProxyNode({})
@@ -1351,6 +1371,16 @@ it("cdb.v20170320.ModifyCdbProxyAddressVipAndVPort", async function () {
 it("cdb.v20170320.DeleteAuditRule", async function () {
     try {
        const data = await client.DeleteAuditRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cdb.v20170320.StartCpuExpand", async function () {
+    try {
+       const data = await client.StartCpuExpand({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

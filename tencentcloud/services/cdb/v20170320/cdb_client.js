@@ -104,6 +104,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("StopReplication", req, cb);
     }
     /**
+     * 通过该API，可以关闭 CPU 弹性扩容。
+     */
+    async StopCpuExpand(req, cb) {
+        return this.request("StopCpuExpand", req, cb);
+    }
+    /**
      * 本接口(ModifyDBInstanceName)用于修改云数据库实例的名称。
      */
     async ModifyDBInstanceName(req, cb) {
@@ -719,6 +725,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeAccounts", req, cb);
     }
     /**
+     * 通过该 API 可以查询实例的 CPU 弹性扩容策略
+     */
+    async DescribeCpuExpandStrategy(req, cb) {
+        return this.request("DescribeCpuExpandStrategy", req, cb);
+    }
+    /**
      * 重新负载均衡数据库代理
      */
     async ReloadBalanceProxyNode(req, cb) {
@@ -882,6 +894,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DeleteAuditRule(req, cb) {
         return this.request("DeleteAuditRule", req, cb);
+    }
+    /**
+     * 通过该API，可以开启CPU弹性扩容，包括一次性的手动扩容以及自动弹性扩容。
+     */
+    async StartCpuExpand(req, cb) {
+        return this.request("StartCpuExpand", req, cb);
     }
     /**
      * 本接口(DescribeSupportedPrivileges)用于查询云数据库的支持的权限信息，包括全局权限，数据库权限，表权限以及列权限。

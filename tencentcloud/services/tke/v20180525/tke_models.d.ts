@@ -863,6 +863,10 @@ export interface ModifyClusterAttributeRequest {
      * 是否开启QGPU共享
      */
     QGPUShareEnable?: boolean;
+    /**
+     * 集群属性
+     */
+    ClusterProperty?: ClusterProperty;
 }
 /**
  * DescribeClusterRoutes返回参数结构体
@@ -1870,32 +1874,37 @@ export interface ModifyClusterAttributeResponse {
      * 集群所属项目
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ProjectId: number;
+    ProjectId?: number;
     /**
      * 集群名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ClusterName: string;
+    ClusterName?: string;
     /**
      * 集群描述
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ClusterDesc: string;
+    ClusterDesc?: string;
     /**
      * 集群等级
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ClusterLevel: string;
+    ClusterLevel?: string;
     /**
      * 自动变配集群等级
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    AutoUpgradeClusterLevel: AutoUpgradeClusterLevel;
+    AutoUpgradeClusterLevel?: AutoUpgradeClusterLevel;
     /**
      * 是否开启QGPU共享
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    QGPUShareEnable: boolean;
+    QGPUShareEnable?: boolean;
+    /**
+     * 集群属性
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ClusterProperty?: ClusterProperty;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -10427,6 +10436,16 @@ export interface CreateClusterReleaseResponse {
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * 集群属性
+ */
+export interface ClusterProperty {
+    /**
+     * 节点hostname命名模式
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    NodeNameType?: string;
 }
 /**
  * 边缘容器集群master自定义参数

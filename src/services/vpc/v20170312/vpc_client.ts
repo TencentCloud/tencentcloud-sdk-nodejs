@@ -30,10 +30,11 @@ import {
   SecurityGroupAssociationStatistics,
   DeleteServiceTemplateResponse,
   CreateServiceTemplateRequest,
-  DescribeIp6TranslatorQuotaResponse,
+  CreateVpcPeeringConnectionRequest,
   CreateCcnResponse,
   DescribeVpnConnectionsRequest,
   CreateAssistantCidrRequest,
+  RejectVpcPeeringConnectionRequest,
   DescribeNetworkInterfacesRequest,
   DescribeVpcLimitsRequest,
   ReleaseIp6AddressesBandwidthResponse,
@@ -57,6 +58,7 @@ import {
   DescribeServiceTemplateGroupsResponse,
   DescribeVpcEndPointRequest,
   ResourceStatisticsItem,
+  ModifyVpcPeeringConnectionRequest,
   DetachClassicLinkVpcRequest,
   DescribeBandwidthPackageBillUsageResponse,
   DeleteBandwidthPackageResponse,
@@ -73,7 +75,7 @@ import {
   ModifyNetworkAclEntriesRequest,
   DescribeVpcPrivateIpAddressesRequest,
   AddressTemplate,
-  IKEOptionsSpecification,
+  DescribeIp6TranslatorQuotaResponse,
   VpnGatewayQuota,
   DescribeBandwidthPackageBillUsageRequest,
   UnassignIpv6AddressesResponse,
@@ -136,6 +138,7 @@ import {
   DescribeSnapshotFilesRequest,
   HaVipDisassociateAddressIpResponse,
   DisassociateVpcEndPointSecurityGroupsRequest,
+  IKEOptionsSpecification,
   DescribeTaskResultRequest,
   ModifyAddressInternetChargeTypeResponse,
   UnassignIpv6SubnetCidrBlockRequest,
@@ -196,6 +199,7 @@ import {
   CreateNatGatewayResponse,
   DescribeVpnGatewaySslClientsRequest,
   VpcEndPointServiceUser,
+  RejectVpcPeeringConnectionResponse,
   DescribeIp6TranslatorQuotaRequest,
   CreateTrafficPackagesResponse,
   ModifySecurityGroupAttributeRequest,
@@ -478,7 +482,7 @@ import {
   ModifyVpnConnectionAttributeResponse,
   PrivateIpAddressSpecification,
   AlgType,
-  MigratePrivateIpAddressResponse,
+  DestinationIpPortTranslationNatRule,
   DescribeUsedIpAddressRequest,
   DeleteRouteTableResponse,
   DescribeVpcInstancesResponse,
@@ -494,7 +498,7 @@ import {
   DescribeTrafficPackagesResponse,
   CreateSnapshotPoliciesRequest,
   DescribeRouteTablesRequest,
-  ResetAttachCcnInstancesRequest,
+  DescribeVpcPeeringConnectionsResponse,
   CreateHaVipResponse,
   DescribeSecurityGroupReferencesRequest,
   DescribeTemplateLimitsResponse,
@@ -546,6 +550,7 @@ import {
   DescribeHaVipsRequest,
   SnapshotPolicy,
   UnassignPrivateIpAddressesResponse,
+  DescribeVpcPeeringConnectionsRequest,
   Address,
   VpnGateway,
   EnableVpcEndPointConnectRequest,
@@ -558,6 +563,7 @@ import {
   ModifyVpcAttributeRequest,
   DescribeIp6TranslatorsResponse,
   CreateSecurityGroupPoliciesRequest,
+  DeleteVpcPeeringConnectionRequest,
   ModifyVpnGatewayRoutesResponse,
   CrossBorderFlowMonitorData,
   ModifyRouteTableAttributeResponse,
@@ -575,6 +581,7 @@ import {
   DescribeTaskResultResponse,
   DisassociateNetworkAclSubnetsRequest,
   ModifyAddressTemplateGroupAttributeRequest,
+  ModifyVpcPeeringConnectionResponse,
   ModifyServiceTemplateGroupAttributeRequest,
   DeleteVpcEndPointRequest,
   UnassignIpv6CidrBlockRequest,
@@ -585,7 +592,7 @@ import {
   Ip6Translator,
   CheckAssistantCidrRequest,
   RemoveBandwidthPackageResourcesResponse,
-  DestinationIpPortTranslationNatRule,
+  DeleteVpcPeeringConnectionResponse,
   DeleteSnapshotPoliciesRequest,
   CreateDefaultVpcRequest,
   DescribeSubnetsResponse,
@@ -600,6 +607,7 @@ import {
   DeleteNetworkAclQuintupleEntriesRequest,
   DeleteSubnetRequest,
   DescribeAddressTemplateGroupsRequest,
+  MigratePrivateIpAddressResponse,
   CheckNetDetectStateResponse,
   DisassociateVpcEndPointSecurityGroupsResponse,
   DeleteSnapshotPoliciesResponse,
@@ -628,6 +636,7 @@ import {
   DescribeVpcInstancesRequest,
   DeleteVpcEndPointServiceWhiteListResponse,
   DescribeServiceTemplatesResponse,
+  AcceptVpcPeeringConnectionResponse,
   DescribeSgSnapshotFileContentRequest,
   CreateBandwidthPackageResponse,
   ResetVpnConnectionRequest,
@@ -641,6 +650,7 @@ import {
   ReplaceRoutesResponse,
   ModifyHaVipAttributeResponse,
   CcnBandwidthInfo,
+  CreateVpcPeeringConnectionResponse,
   DescribeCrossBorderCcnRegionBandwidthLimitsResponse,
   DeleteSecurityGroupResponse,
   DisableVpnGatewaySslClientCertRequest,
@@ -681,6 +691,7 @@ import {
   DeleteRoutesRequest,
   AssociateAddressRequest,
   CcnRegionBandwidthLimit,
+  ResetAttachCcnInstancesRequest,
   UnlockCcnBandwidthsResponse,
   CreateDefaultSecurityGroupResponse,
   ClassicLinkInstance,
@@ -733,6 +744,7 @@ import {
   DescribeAddressTemplatesResponse,
   Quota,
   WithdrawNotifyRoutesResponse,
+  AcceptVpcPeeringConnectionRequest,
   DescribeNetworkInterfacesResponse,
   DeleteNetworkAclResponse,
   DeleteNetworkAclQuintupleEntriesResponse,
@@ -1063,13 +1075,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（ModifyNetworkAclQuintupleEntries）用于修改网络ACL五元组的入站规则和出站规则。在NetworkAclQuintupleEntrySet参数中：NetworkAclQuintupleEntry需要提供NetworkAclQuintupleEntryId。
+   * 本接口（AcceptVpcPeeringConnection）用于接受对等连接请求。
    */
-  async ModifyNetworkAclQuintupleEntries(
-    req: ModifyNetworkAclQuintupleEntriesRequest,
-    cb?: (error: string, rep: ModifyNetworkAclQuintupleEntriesResponse) => void
-  ): Promise<ModifyNetworkAclQuintupleEntriesResponse> {
-    return this.request("ModifyNetworkAclQuintupleEntries", req, cb)
+  async AcceptVpcPeeringConnection(
+    req?: AcceptVpcPeeringConnectionRequest,
+    cb?: (error: string, rep: AcceptVpcPeeringConnectionResponse) => void
+  ): Promise<AcceptVpcPeeringConnectionResponse> {
+    return this.request("AcceptVpcPeeringConnection", req, cb)
   }
 
   /**
@@ -1238,6 +1250,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DetachCcnInstancesResponse) => void
   ): Promise<DetachCcnInstancesResponse> {
     return this.request("DetachCcnInstances", req, cb)
+  }
+
+  /**
+   * 刷新专线直连nat路由，更新nat到专线的路由表
+   */
+  async RefreshDirectConnectGatewayRouteToNatGateway(
+    req: RefreshDirectConnectGatewayRouteToNatGatewayRequest,
+    cb?: (error: string, rep: RefreshDirectConnectGatewayRouteToNatGatewayResponse) => void
+  ): Promise<RefreshDirectConnectGatewayRouteToNatGatewayResponse> {
+    return this.request("RefreshDirectConnectGatewayRouteToNatGateway", req, cb)
   }
 
   /**
@@ -1451,13 +1473,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（SetCcnRegionBandwidthLimits）用于设置云联网（CCN）各地域出带宽上限，或者地域间带宽上限。
+   * 本接口（CreateVpcPeeringConnection）用于创建私有网络对等连接。
    */
-  async SetCcnRegionBandwidthLimits(
-    req: SetCcnRegionBandwidthLimitsRequest,
-    cb?: (error: string, rep: SetCcnRegionBandwidthLimitsResponse) => void
-  ): Promise<SetCcnRegionBandwidthLimitsResponse> {
-    return this.request("SetCcnRegionBandwidthLimits", req, cb)
+  async CreateVpcPeeringConnection(
+    req?: CreateVpcPeeringConnectionRequest,
+    cb?: (error: string, rep: CreateVpcPeeringConnectionResponse) => void
+  ): Promise<CreateVpcPeeringConnectionResponse> {
+    return this.request("CreateVpcPeeringConnection", req, cb)
   }
 
   /**
@@ -2000,13 +2022,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 刷新专线直连nat路由，更新nat到专线的路由表
+   * 本接口（DeleteVpcPeeringConnection）用于删除私有网络对等连接。
    */
-  async RefreshDirectConnectGatewayRouteToNatGateway(
-    req: RefreshDirectConnectGatewayRouteToNatGatewayRequest,
-    cb?: (error: string, rep: RefreshDirectConnectGatewayRouteToNatGatewayResponse) => void
-  ): Promise<RefreshDirectConnectGatewayRouteToNatGatewayResponse> {
-    return this.request("RefreshDirectConnectGatewayRouteToNatGateway", req, cb)
+  async DeleteVpcPeeringConnection(
+    req?: DeleteVpcPeeringConnectionRequest,
+    cb?: (error: string, rep: DeleteVpcPeeringConnectionResponse) => void
+  ): Promise<DeleteVpcPeeringConnectionResponse> {
+    return this.request("DeleteVpcPeeringConnection", req, cb)
   }
 
   /**
@@ -2215,6 +2237,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口（ModifyNetworkAclQuintupleEntries）用于修改网络ACL五元组的入站规则和出站规则。在NetworkAclQuintupleEntrySet参数中：NetworkAclQuintupleEntry需要提供NetworkAclQuintupleEntryId。
+   */
+  async ModifyNetworkAclQuintupleEntries(
+    req: ModifyNetworkAclQuintupleEntriesRequest,
+    cb?: (error: string, rep: ModifyNetworkAclQuintupleEntriesResponse) => void
+  ): Promise<ModifyNetworkAclQuintupleEntriesResponse> {
+    return this.request("ModifyNetworkAclQuintupleEntries", req, cb)
+  }
+
+  /**
    * 本接口（ModifyServiceTemplateGroupAttribute）用于修改协议端口模板集合。
    */
   async ModifyServiceTemplateGroupAttribute(
@@ -2252,6 +2284,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyDhcpIpAttributeResponse) => void
   ): Promise<ModifyDhcpIpAttributeResponse> {
     return this.request("ModifyDhcpIpAttribute", req, cb)
+  }
+
+  /**
+   * 本接口（ModifyVpcPeeringConnection）用于修改私有网络对等连接属性。
+   */
+  async ModifyVpcPeeringConnection(
+    req?: ModifyVpcPeeringConnectionRequest,
+    cb?: (error: string, rep: ModifyVpcPeeringConnectionResponse) => void
+  ): Promise<ModifyVpcPeeringConnectionResponse> {
+    return this.request("ModifyVpcPeeringConnection", req, cb)
   }
 
   /**
@@ -2830,6 +2872,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口（RejectVpcPeeringConnection）用于驳回对等连接请求。
+   */
+  async RejectVpcPeeringConnection(
+    req?: RejectVpcPeeringConnectionRequest,
+    cb?: (error: string, rep: RejectVpcPeeringConnectionResponse) => void
+  ): Promise<RejectVpcPeeringConnectionResponse> {
+    return this.request("RejectVpcPeeringConnection", req, cb)
+  }
+
+  /**
    * 本接口（ResetVpnConnection）用于重置VPN通道。
    */
   async ResetVpnConnection(
@@ -3339,6 +3391,16 @@ LimitTypes取值范围：
     cb?: (error: string, rep: DescribeProductQuotaResponse) => void
   ): Promise<DescribeProductQuotaResponse> {
     return this.request("DescribeProductQuota", req, cb)
+  }
+
+  /**
+   * 查询私有网络对等连接。
+   */
+  async DescribeVpcPeeringConnections(
+    req: DescribeVpcPeeringConnectionsRequest,
+    cb?: (error: string, rep: DescribeVpcPeeringConnectionsResponse) => void
+  ): Promise<DescribeVpcPeeringConnectionsResponse> {
+    return this.request("DescribeVpcPeeringConnections", req, cb)
   }
 
   /**
@@ -4042,6 +4104,16 @@ LimitTypes取值范围：
     cb?: (error: string, rep: ModifyNetworkAclAttributeResponse) => void
   ): Promise<ModifyNetworkAclAttributeResponse> {
     return this.request("ModifyNetworkAclAttribute", req, cb)
+  }
+
+  /**
+   * 本接口（SetCcnRegionBandwidthLimits）用于设置云联网（CCN）各地域出带宽上限，或者地域间带宽上限。
+   */
+  async SetCcnRegionBandwidthLimits(
+    req: SetCcnRegionBandwidthLimitsRequest,
+    cb?: (error: string, rep: SetCcnRegionBandwidthLimitsResponse) => void
+  ): Promise<SetCcnRegionBandwidthLimitsResponse> {
+    return this.request("SetCcnRegionBandwidthLimits", req, cb)
   }
 
   /**

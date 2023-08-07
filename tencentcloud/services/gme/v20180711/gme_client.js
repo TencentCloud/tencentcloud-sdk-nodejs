@@ -41,13 +41,14 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("StopRecord", req, cb);
     }
     /**
-     * 删除自定义送检用户
+     * 删除自定义送检用户。**接口使用前提**：目前 DeleteScanUser 接口通过白名单开放，如需使用，需要 [提交工单申请](https://console.cloud.tencent.com/workorder/category?level1_id=438&level2_id=445&source=0&data_title=%E6%B8%B8%E6%88%8F%E5%A4%9A%E5%AA%92%E4%BD%93%E5%BC%95%E6%93%8EGME&step=1)。
      */
     async DeleteScanUser(req, cb) {
         return this.request("DeleteScanUser", req, cb);
     }
     /**
-     * 更新自定义送检用户号
+     * 更新自定义送检用户号。
+**接口使用前提**：目前 UpdateScanUsers 接口通过白名单开放，如需使用，需要 [提交工单申请](https://console.cloud.tencent.com/workorder/category?level1_id=438&level2_id=445&source=0&data_title=%E6%B8%B8%E6%88%8F%E5%A4%9A%E5%AA%92%E4%BD%93%E5%BC%95%E6%93%8EGME&step=1)。
      */
     async UpdateScanUsers(req, cb) {
         return this.request("UpdateScanUsers", req, cb);
@@ -65,7 +66,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeUserInAndOutTime", req, cb);
     }
     /**
-     * 更新自定义送检房间号
+     * 更新自定义送检房间号。**接口使用前提**：目前 UpdateScanRooms 接口通过白名单开放，如需使用，需要 [提交工单申请](https://console.cloud.tencent.com/workorder/category?level1_id=438&level2_id=445&source=0&data_title=%E6%B8%B8%E6%88%8F%E5%A4%9A%E5%AA%92%E4%BD%93%E5%BC%95%E6%93%8EGME&step=1)。
      */
     async UpdateScanRooms(req, cb) {
         return this.request("UpdateScanRooms", req, cb);
@@ -252,7 +253,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ScanVoice", req, cb);
     }
     /**
-     * 新增自定义送检用户
+     * 新增自定义送检用户。**接口使用前提**：目前 CreateScanUser 接口通过白名单开放，如需使用，需要 [提交工单申请](https://console.cloud.tencent.com/workorder/category?level1_id=438&level2_id=445&source=0&data_title=%E6%B8%B8%E6%88%8F%E5%A4%9A%E5%AA%92%E4%BD%93%E5%BC%95%E6%93%8EGME&step=1)。
      */
     async CreateScanUser(req, cb) {
         return this.request("CreateScanUser", req, cb);
@@ -270,7 +271,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyCustomization", req, cb);
     }
     /**
-     * 获取用户自定义送检信息
+     * 获取用户自定义送检信息。**接口使用前提**：目前 DescribeRealtimeScanConfig 接口通过白名单开放，如需使用，需要 [提交工单申请](https://console.cloud.tencent.com/workorder/category?level1_id=438&level2_id=445&source=0&data_title=%E6%B8%B8%E6%88%8F%E5%A4%9A%E5%AA%92%E4%BD%93%E5%BC%95%E6%93%8EGME&step=1)。
      */
     async DescribeRealtimeScanConfig(req, cb) {
         return this.request("DescribeRealtimeScanConfig", req, cb);

@@ -2750,11 +2750,11 @@ export interface DescribeAttackLogsResponse {
    * 日志列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  AttackLogs: Array<DefendAttackLog>
+  AttackLogs?: Array<DefendAttackLog>
   /**
    * 总条数
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

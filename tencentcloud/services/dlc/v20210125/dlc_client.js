@@ -52,6 +52,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeForbiddenTablePro", req, cb);
     }
     /**
+     * 列举用户角色信息
+     */
+    async DescribeUserRoles(req, cb) {
+        return this.request("DescribeUserRoles", req, cb);
+    }
+    /**
      * 本接口（DescribeNotebookSession）用于查询交互式 session详情信息
      */
     async DescribeNotebookSession(req, cb) {

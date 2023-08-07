@@ -64,6 +64,7 @@ import {
   DescribeRoMinScaleResponse,
   StopDBImportJobResponse,
   ProxyAllocation,
+  StopCpuExpandRequest,
   ModifyDBInstanceNameRequest,
   TagInfoUnit,
   ModifyAuditRuleResponse,
@@ -153,12 +154,14 @@ import {
   CreateAuditPolicyRequest,
   CreateRoInstanceIpRequest,
   OpenWanServiceRequest,
+  StopCpuExpandResponse,
   DescribeBackupConfigResponse,
   DescribeParamTemplatesResponse,
   ZoneConf,
   SlaveInstanceInfo,
   DescribeProjectSecurityGroupsRequest,
   StopReplicationRequest,
+  StartCpuExpandResponse,
   CreateCloneInstanceResponse,
   DescribeCdbZoneConfigRequest,
   DeviceCpuInfo,
@@ -291,6 +294,8 @@ import {
   DescribeDBImportRecordsRequest,
   CreateDBImportJobResponse,
   DescribeTagsOfInstanceIdsRequest,
+  StartCpuExpandRequest,
+  DescribeCpuExpandStrategyRequest,
   CloseCDBProxyResponse,
   StopReplicationResponse,
   UpgradeDBInstanceEngineVersionRequest,
@@ -374,6 +379,7 @@ import {
   UpgradeCDBProxyVersionResponse,
   ModifyAccountDescriptionRequest,
   ModifyAccountPasswordRequest,
+  DescribeCpuExpandStrategyResponse,
   InstanceRebootTime,
   RenewDBInstanceResponse,
   TablePrivilege,
@@ -532,6 +538,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: StopReplicationResponse) => void
   ): Promise<StopReplicationResponse> {
     return this.request("StopReplication", req, cb)
+  }
+
+  /**
+   * 通过该API，可以关闭 CPU 弹性扩容。
+   */
+  async StopCpuExpand(
+    req: StopCpuExpandRequest,
+    cb?: (error: string, rep: StopCpuExpandResponse) => void
+  ): Promise<StopCpuExpandResponse> {
+    return this.request("StopCpuExpand", req, cb)
   }
 
   /**
@@ -1534,6 +1550,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 通过该 API 可以查询实例的 CPU 弹性扩容策略
+   */
+  async DescribeCpuExpandStrategy(
+    req: DescribeCpuExpandStrategyRequest,
+    cb?: (error: string, rep: DescribeCpuExpandStrategyResponse) => void
+  ): Promise<DescribeCpuExpandStrategyResponse> {
+    return this.request("DescribeCpuExpandStrategy", req, cb)
+  }
+
+  /**
    * 重新负载均衡数据库代理
    */
   async ReloadBalanceProxyNode(
@@ -1800,6 +1826,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteAuditRuleResponse) => void
   ): Promise<DeleteAuditRuleResponse> {
     return this.request("DeleteAuditRule", req, cb)
+  }
+
+  /**
+   * 通过该API，可以开启CPU弹性扩容，包括一次性的手动扩容以及自动弹性扩容。
+   */
+  async StartCpuExpand(
+    req?: StartCpuExpandRequest,
+    cb?: (error: string, rep: StartCpuExpandResponse) => void
+  ): Promise<StartCpuExpandResponse> {
+    return this.request("StartCpuExpand", req, cb)
   }
 
   /**

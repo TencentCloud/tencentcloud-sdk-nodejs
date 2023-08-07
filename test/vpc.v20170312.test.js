@@ -298,9 +298,9 @@ it("vpc.v20170312.DescribeNetDetects", async function () {
     }
 })
 
-it("vpc.v20170312.ModifyNetworkAclQuintupleEntries", async function () {
+it("vpc.v20170312.AcceptVpcPeeringConnection", async function () {
     try {
-       const data = await client.ModifyNetworkAclQuintupleEntries({})
+       const data = await client.AcceptVpcPeeringConnection({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -461,6 +461,16 @@ it("vpc.v20170312.ModifyNetworkAclEntries", async function () {
 it("vpc.v20170312.DetachCcnInstances", async function () {
     try {
        const data = await client.DetachCcnInstances({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("vpc.v20170312.RefreshDirectConnectGatewayRouteToNatGateway", async function () {
+    try {
+       const data = await client.RefreshDirectConnectGatewayRouteToNatGateway({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -658,9 +668,9 @@ it("vpc.v20170312.CreateSubnets", async function () {
     }
 })
 
-it("vpc.v20170312.SetCcnRegionBandwidthLimits", async function () {
+it("vpc.v20170312.CreateVpcPeeringConnection", async function () {
     try {
-       const data = await client.SetCcnRegionBandwidthLimits({})
+       const data = await client.CreateVpcPeeringConnection({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1168,9 +1178,9 @@ it("vpc.v20170312.DescribeLocalGateway", async function () {
     }
 })
 
-it("vpc.v20170312.RefreshDirectConnectGatewayRouteToNatGateway", async function () {
+it("vpc.v20170312.DeleteVpcPeeringConnection", async function () {
     try {
-       const data = await client.RefreshDirectConnectGatewayRouteToNatGateway({})
+       const data = await client.DeleteVpcPeeringConnection({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1348,6 +1358,16 @@ it("vpc.v20170312.RejectAttachCcnInstances", async function () {
     }
 })
 
+it("vpc.v20170312.ModifyNetworkAclQuintupleEntries", async function () {
+    try {
+       const data = await client.ModifyNetworkAclQuintupleEntries({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vpc.v20170312.ModifyServiceTemplateGroupAttribute", async function () {
     try {
        const data = await client.ModifyServiceTemplateGroupAttribute({})
@@ -1381,6 +1401,16 @@ it("vpc.v20170312.DeleteVpnGatewayRoutes", async function () {
 it("vpc.v20170312.ModifyDhcpIpAttribute", async function () {
     try {
        const data = await client.ModifyDhcpIpAttribute({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("vpc.v20170312.ModifyVpcPeeringConnection", async function () {
+    try {
+       const data = await client.ModifyVpcPeeringConnection({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1928,6 +1958,16 @@ it("vpc.v20170312.DescribeVpcEndPointServiceWhiteList", async function () {
     }
 })
 
+it("vpc.v20170312.RejectVpcPeeringConnection", async function () {
+    try {
+       const data = await client.RejectVpcPeeringConnection({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vpc.v20170312.ResetVpnConnection", async function () {
     try {
        const data = await client.ResetVpnConnection({})
@@ -2371,6 +2411,16 @@ it("vpc.v20170312.DeleteHaVip", async function () {
 it("vpc.v20170312.DescribeProductQuota", async function () {
     try {
        const data = await client.DescribeProductQuota({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("vpc.v20170312.DescribeVpcPeeringConnections", async function () {
+    try {
+       const data = await client.DescribeVpcPeeringConnections({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -3031,6 +3081,16 @@ it("vpc.v20170312.CreateSecurityGroupPolicies", async function () {
 it("vpc.v20170312.ModifyNetworkAclAttribute", async function () {
     try {
        const data = await client.ModifyNetworkAclAttribute({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("vpc.v20170312.SetCcnRegionBandwidthLimits", async function () {
+    try {
+       const data = await client.SetCcnRegionBandwidthLimits({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

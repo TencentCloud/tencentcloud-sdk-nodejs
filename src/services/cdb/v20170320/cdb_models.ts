@@ -1196,6 +1196,16 @@ export interface ProxyAllocation {
 }
 
 /**
+ * StopCpuExpand请求参数结构体
+ */
+export interface StopCpuExpandRequest {
+  /**
+   * 实例 ID 。
+   */
+  InstanceId: string
+}
+
+/**
  * ModifyDBInstanceName请求参数结构体
  */
 export interface ModifyDBInstanceNameRequest {
@@ -3133,6 +3143,20 @@ export interface OpenWanServiceRequest {
 }
 
 /**
+ * StopCpuExpand返回参数结构体
+ */
+export interface StopCpuExpandResponse {
+  /**
+   * 异步任务 ID 。可以调用DescribeAsyncRequest 传入该 ID ，进行任务执行进度的查询
+   */
+  AsyncRequestId?: string
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeBackupConfig返回参数结构体
  */
 export interface DescribeBackupConfigResponse {
@@ -3298,6 +3322,20 @@ export interface StopReplicationRequest {
    * 实例 ID。仅支持只读实例。
    */
   InstanceId: string
+}
+
+/**
+ * StartCpuExpand返回参数结构体
+ */
+export interface StartCpuExpandResponse {
+  /**
+   * 异步任务 ID 。可以调用DescribeAsyncRequest 传入该 ID ，进行任务执行进度的查询
+   */
+  AsyncRequestId?: string
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -4272,7 +4310,7 @@ export interface CreateDBInstanceRequest {
    */
   EngineVersion?: string
   /**
-   * 设置 root 帐号密码，密码规则：8 - 64 个字符，至少包含字母、数字、字符（支持的字符：_+-&=!@#$%^*()）中的两种，购买主实例时可指定该参数，购买只读实例或者灾备实例时指定该参数无意义。
+   * 设置 root 账号密码，密码规则：8 - 64 个字符，至少包含字母、数字、字符（支持的字符：_+-&=!@#$%^*()）中的两种，购买主实例时可指定该参数，购买只读实例或者灾备实例时指定该参数无意义。
    */
   Password?: string
   /**
@@ -4336,7 +4374,7 @@ export interface CreateDBInstanceRequest {
    */
   ParamTemplateId?: number
   /**
-   * 告警策略id数组。云监控DescribeAlarmPolicy接口返回的OriginId。
+   * 告警策略id数组。腾讯云可观测平台DescribeAlarmPolicy接口返回的OriginId。
    */
   AlarmPolicyList?: Array<number>
   /**
@@ -6658,6 +6696,21 @@ export interface DescribeTagsOfInstanceIdsRequest {
 }
 
 /**
+ * StartCpuExpand请求参数结构体
+ */
+export type StartCpuExpandRequest = null
+
+/**
+ * DescribeCpuExpandStrategy请求参数结构体
+ */
+export interface DescribeCpuExpandStrategyRequest {
+  /**
+   * 实例 ID 。
+   */
+  InstanceId: string
+}
+
+/**
  * CloseCDBProxy返回参数结构体
  */
 export interface CloseCDBProxyResponse {
@@ -8542,6 +8595,31 @@ export interface ModifyAccountPasswordRequest {
    * 云数据库账号。
    */
   Accounts: Array<Account>
+}
+
+/**
+ * DescribeCpuExpandStrategy返回参数结构体
+ */
+export interface DescribeCpuExpandStrategyResponse {
+  /**
+   * 策略类型。可选值 auto、manual。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Type?: string
+  /**
+   * 手动扩容的 CPU 。Type为 manual 时有效。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExpandCpu?: string
+  /**
+   * 自动扩容策略。Type 为 auto 时有效
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AutoStrategy?: string
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

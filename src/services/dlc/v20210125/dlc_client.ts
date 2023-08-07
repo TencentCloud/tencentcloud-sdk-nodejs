@@ -31,7 +31,7 @@ import {
   Asset,
   SparkSessionBatchLogOperate,
   DetachUserPolicyResponse,
-  TaskResultInfo,
+  CosPermission,
   CreateResultDownloadResponse,
   ModifyGovernEventRuleResponse,
   DescribeNotebookSessionsRequest,
@@ -56,6 +56,7 @@ import {
   CrontabResumeSuspendStrategy,
   AlterDMSTableResponse,
   DescribeEngineUsageInfoRequest,
+  TaskResultInfo,
   DescribeDMSTableResponse,
   DropDMSPartitionsRequest,
   NotebookSessions,
@@ -130,7 +131,7 @@ import {
   DescribeStoreLocationRequest,
   AddUsersToWorkGroupResponse,
   DescribeNotebookSessionLogRequest,
-  UserInfo,
+  DescribeUserRolesResponse,
   CreateExportTaskRequest,
   DescribeNotebookSessionStatementResponse,
   ReportHeartbeatMetaDataResponse,
@@ -155,6 +156,7 @@ import {
   AddDMSPartitionsRequest,
   Script,
   NotebookSessionStatementBatchInformation,
+  DescribeUserRolesRequest,
   DescribeNotebookSessionStatementSqlResultRequest,
   ModifySparkAppResponse,
   AlterDMSTableRequest,
@@ -227,6 +229,7 @@ import {
   TasksOverview,
   UnbindWorkGroupsFromUserRequest,
   UpdateRowFilterResponse,
+  UserInfo,
   CreateTasksResponse,
   CreateNotebookSessionResponse,
   DescribeViewsResponse,
@@ -260,6 +263,7 @@ import {
   UpdateRowFilterRequest,
   TColumn,
   DescribeResultDownloadRequest,
+  UserRole,
 } from "./dlc_models"
 
 /**
@@ -309,6 +313,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeForbiddenTableProResponse) => void
   ): Promise<DescribeForbiddenTableProResponse> {
     return this.request("DescribeForbiddenTablePro", req, cb)
+  }
+
+  /**
+   * 列举用户角色信息
+   */
+  async DescribeUserRoles(
+    req: DescribeUserRolesRequest,
+    cb?: (error: string, rep: DescribeUserRolesResponse) => void
+  ): Promise<DescribeUserRolesResponse> {
+    return this.request("DescribeUserRoles", req, cb)
   }
 
   /**

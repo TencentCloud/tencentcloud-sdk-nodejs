@@ -205,10 +205,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeNetDetects", req, cb);
     }
     /**
-     * 本接口（ModifyNetworkAclQuintupleEntries）用于修改网络ACL五元组的入站规则和出站规则。在NetworkAclQuintupleEntrySet参数中：NetworkAclQuintupleEntry需要提供NetworkAclQuintupleEntryId。
+     * 本接口（AcceptVpcPeeringConnection）用于接受对等连接请求。
      */
-    async ModifyNetworkAclQuintupleEntries(req, cb) {
-        return this.request("ModifyNetworkAclQuintupleEntries", req, cb);
+    async AcceptVpcPeeringConnection(req, cb) {
+        return this.request("AcceptVpcPeeringConnection", req, cb);
     }
     /**
      * 本接口（DescribeVpcPrivateIpAddresses）用于查询VPC内网IP信息。<br />
@@ -313,6 +313,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DetachCcnInstances(req, cb) {
         return this.request("DetachCcnInstances", req, cb);
+    }
+    /**
+     * 刷新专线直连nat路由，更新nat到专线的路由表
+     */
+    async RefreshDirectConnectGatewayRouteToNatGateway(req, cb) {
+        return this.request("RefreshDirectConnectGatewayRouteToNatGateway", req, cb);
     }
     /**
      * 本接口(AssociateNatGatewayAddress)用于NAT网关绑定弹性IP（EIP）。
@@ -449,10 +455,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateSubnets", req, cb);
     }
     /**
-     * 本接口（SetCcnRegionBandwidthLimits）用于设置云联网（CCN）各地域出带宽上限，或者地域间带宽上限。
+     * 本接口（CreateVpcPeeringConnection）用于创建私有网络对等连接。
      */
-    async SetCcnRegionBandwidthLimits(req, cb) {
-        return this.request("SetCcnRegionBandwidthLimits", req, cb);
+    async CreateVpcPeeringConnection(req, cb) {
+        return this.request("CreateVpcPeeringConnection", req, cb);
     }
     /**
      * 本接口 (DescribeSpecificTrafficPackageUsedDetails) 用于查询指定 共享流量包 的用量明细。
@@ -794,10 +800,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeLocalGateway", req, cb);
     }
     /**
-     * 刷新专线直连nat路由，更新nat到专线的路由表
+     * 本接口（DeleteVpcPeeringConnection）用于删除私有网络对等连接。
      */
-    async RefreshDirectConnectGatewayRouteToNatGateway(req, cb) {
-        return this.request("RefreshDirectConnectGatewayRouteToNatGateway", req, cb);
+    async DeleteVpcPeeringConnection(req, cb) {
+        return this.request("DeleteVpcPeeringConnection", req, cb);
     }
     /**
      * 本接口（MigratePrivateIpAddress）用于弹性网卡内网IP迁移。
@@ -937,6 +943,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("RejectAttachCcnInstances", req, cb);
     }
     /**
+     * 本接口（ModifyNetworkAclQuintupleEntries）用于修改网络ACL五元组的入站规则和出站规则。在NetworkAclQuintupleEntrySet参数中：NetworkAclQuintupleEntry需要提供NetworkAclQuintupleEntryId。
+     */
+    async ModifyNetworkAclQuintupleEntries(req, cb) {
+        return this.request("ModifyNetworkAclQuintupleEntries", req, cb);
+    }
+    /**
      * 本接口（ModifyServiceTemplateGroupAttribute）用于修改协议端口模板集合。
      */
     async ModifyServiceTemplateGroupAttribute(req, cb) {
@@ -959,6 +971,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ModifyDhcpIpAttribute(req, cb) {
         return this.request("ModifyDhcpIpAttribute", req, cb);
+    }
+    /**
+     * 本接口（ModifyVpcPeeringConnection）用于修改私有网络对等连接属性。
+     */
+    async ModifyVpcPeeringConnection(req, cb) {
+        return this.request("ModifyVpcPeeringConnection", req, cb);
     }
     /**
      * 本接口（ModifyCcnRegionBandwidthLimitsType）用于修改后付费云联网实例修改带宽限速策略。
@@ -1320,6 +1338,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeVpcEndPointServiceWhiteList", req, cb);
     }
     /**
+     * 本接口（RejectVpcPeeringConnection）用于驳回对等连接请求。
+     */
+    async RejectVpcPeeringConnection(req, cb) {
+        return this.request("RejectVpcPeeringConnection", req, cb);
+    }
+    /**
      * 本接口（ResetVpnConnection）用于重置VPN通道。
      */
     async ResetVpnConnection(req, cb) {
@@ -1650,6 +1674,12 @@ LimitTypes取值范围：
      */
     async DescribeProductQuota(req, cb) {
         return this.request("DescribeProductQuota", req, cb);
+    }
+    /**
+     * 查询私有网络对等连接。
+     */
+    async DescribeVpcPeeringConnections(req, cb) {
+        return this.request("DescribeVpcPeeringConnections", req, cb);
     }
     /**
      * 本接口（InquiryPriceCreateVpnGateway）用于创建VPN网关询价。
@@ -2089,6 +2119,12 @@ LimitTypes取值范围：
      */
     async ModifyNetworkAclAttribute(req, cb) {
         return this.request("ModifyNetworkAclAttribute", req, cb);
+    }
+    /**
+     * 本接口（SetCcnRegionBandwidthLimits）用于设置云联网（CCN）各地域出带宽上限，或者地域间带宽上限。
+     */
+    async SetCcnRegionBandwidthLimits(req, cb) {
+        return this.request("SetCcnRegionBandwidthLimits", req, cb);
     }
     /**
      * 本接口（ResetNatGatewayConnection）用来NAT网关并发连接上限。

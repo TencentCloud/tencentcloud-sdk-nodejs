@@ -530,6 +530,7 @@ import {
   DescribePrometheusInstanceRequest,
   DeletePrometheusAlertRuleRequest,
   CreateClusterReleaseResponse,
+  ClusterProperty,
   EdgeClusterExtraArgs,
   DescribePrometheusTargetsResponse,
   DescribeEnableVpcCniProgressResponse,

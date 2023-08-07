@@ -214,19 +214,9 @@ export interface CreateServiceTemplateRequest {
     ServicesExtra?: Array<ServicesInfo>;
 }
 /**
- * DescribeIp6TranslatorQuota返回参数结构体
+ * CreateVpcPeeringConnection请求参数结构体
  */
-export interface DescribeIp6TranslatorQuotaResponse {
-    /**
-     * 账户在指定地域的IPV6转换实例及规则配额信息
-  QUOTAID属性是TOTAL_TRANSLATOR_QUOTA，表示账户在指定地域的IPV6转换实例配额信息；QUOTAID属性是IPV6转换实例唯一ID（形如ip6-xxxxxxxx），表示账户在该转换实例允许创建的转换规则配额
-     */
-    QuotaSet?: Array<Quota>;
-    /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
+export declare type CreateVpcPeeringConnectionRequest = null;
 /**
  * CreateCcn返回参数结构体
  */
@@ -279,6 +269,10 @@ export interface CreateAssistantCidrRequest {
      */
     CidrBlocks: Array<string>;
 }
+/**
+ * RejectVpcPeeringConnection请求参数结构体
+ */
+export declare type RejectVpcPeeringConnectionRequest = null;
 /**
  * DescribeNetworkInterfaces请求参数结构体
  */
@@ -701,6 +695,10 @@ export interface ResourceStatisticsItem {
     ResourceCount: number;
 }
 /**
+ * ModifyVpcPeeringConnection请求参数结构体
+ */
+export declare type ModifyVpcPeeringConnectionRequest = null;
+/**
  * DetachClassicLinkVpc请求参数结构体
  */
 export interface DetachClassicLinkVpcRequest {
@@ -1038,57 +1036,18 @@ export interface AddressTemplate {
     AddressExtraSet: Array<AddressInfo>;
 }
 /**
- * IKE配置（Internet Key Exchange，因特网密钥交换），IKE具有一套自我保护机制，用户配置网络安全协议
+ * DescribeIp6TranslatorQuota返回参数结构体
  */
-export interface IKEOptionsSpecification {
+export interface DescribeIp6TranslatorQuotaResponse {
     /**
-     * 加密算法，可选值：'3DES-CBC', 'AES-CBC-128', 'AES-CBS-192', 'AES-CBC-256', 'DES-CBC'，'SM4', 默认为3DES-CBC
+     * 账户在指定地域的IPV6转换实例及规则配额信息
+  QUOTAID属性是TOTAL_TRANSLATOR_QUOTA，表示账户在指定地域的IPV6转换实例配额信息；QUOTAID属性是IPV6转换实例唯一ID（形如ip6-xxxxxxxx），表示账户在该转换实例允许创建的转换规则配额
      */
-    PropoEncryAlgorithm?: string;
+    QuotaSet?: Array<Quota>;
     /**
-     * 认证算法：可选值：'MD5', 'SHA1'，'SHA-256' 默认为MD5
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
-    PropoAuthenAlgorithm?: string;
-    /**
-     * 协商模式：可选值：'AGGRESSIVE', 'MAIN'，默认为MAIN
-     */
-    ExchangeMode?: string;
-    /**
-     * 本端标识类型：可选值：'ADDRESS', 'FQDN'，默认为ADDRESS
-     */
-    LocalIdentity?: string;
-    /**
-     * 对端标识类型：可选值：'ADDRESS', 'FQDN'，默认为ADDRESS
-     */
-    RemoteIdentity?: string;
-    /**
-     * 本端标识，当LocalIdentity选为ADDRESS时，LocalAddress必填。localAddress默认为vpn网关公网IP
-     */
-    LocalAddress?: string;
-    /**
-     * 对端标识，当RemoteIdentity选为ADDRESS时，RemoteAddress必填
-     */
-    RemoteAddress?: string;
-    /**
-     * 本端标识，当LocalIdentity选为FQDN时，LocalFqdnName必填
-     */
-    LocalFqdnName?: string;
-    /**
-     * 对端标识，当remoteIdentity选为FQDN时，RemoteFqdnName必填
-     */
-    RemoteFqdnName?: string;
-    /**
-     * DH group，指定IKE交换密钥时使用的DH组，可选值：'GROUP1', 'GROUP2', 'GROUP5', 'GROUP14', 'GROUP24'，
-     */
-    DhGroupName?: string;
-    /**
-     * IKE SA Lifetime，单位：秒，设置IKE SA的生存周期，取值范围：60-604800
-     */
-    IKESaLifetimeSeconds?: number;
-    /**
-     * IKE版本
-     */
-    IKEVersion?: string;
+    RequestId?: string;
 }
 /**
  * VPN网关配额对象
@@ -2239,6 +2198,59 @@ export interface DisassociateVpcEndPointSecurityGroupsRequest {
     EndPointId: string;
 }
 /**
+ * IKE配置（Internet Key Exchange，因特网密钥交换），IKE具有一套自我保护机制，用户配置网络安全协议
+ */
+export interface IKEOptionsSpecification {
+    /**
+     * 加密算法，可选值：'3DES-CBC', 'AES-CBC-128', 'AES-CBS-192', 'AES-CBC-256', 'DES-CBC'，'SM4', 默认为3DES-CBC
+     */
+    PropoEncryAlgorithm?: string;
+    /**
+     * 认证算法：可选值：'MD5', 'SHA1'，'SHA-256' 默认为MD5
+     */
+    PropoAuthenAlgorithm?: string;
+    /**
+     * 协商模式：可选值：'AGGRESSIVE', 'MAIN'，默认为MAIN
+     */
+    ExchangeMode?: string;
+    /**
+     * 本端标识类型：可选值：'ADDRESS', 'FQDN'，默认为ADDRESS
+     */
+    LocalIdentity?: string;
+    /**
+     * 对端标识类型：可选值：'ADDRESS', 'FQDN'，默认为ADDRESS
+     */
+    RemoteIdentity?: string;
+    /**
+     * 本端标识，当LocalIdentity选为ADDRESS时，LocalAddress必填。localAddress默认为vpn网关公网IP
+     */
+    LocalAddress?: string;
+    /**
+     * 对端标识，当RemoteIdentity选为ADDRESS时，RemoteAddress必填
+     */
+    RemoteAddress?: string;
+    /**
+     * 本端标识，当LocalIdentity选为FQDN时，LocalFqdnName必填
+     */
+    LocalFqdnName?: string;
+    /**
+     * 对端标识，当remoteIdentity选为FQDN时，RemoteFqdnName必填
+     */
+    RemoteFqdnName?: string;
+    /**
+     * DH group，指定IKE交换密钥时使用的DH组，可选值：'GROUP1', 'GROUP2', 'GROUP5', 'GROUP14', 'GROUP24'，
+     */
+    DhGroupName?: string;
+    /**
+     * IKE SA Lifetime，单位：秒，设置IKE SA的生存周期，取值范围：60-604800
+     */
+    IKESaLifetimeSeconds?: number;
+    /**
+     * IKE版本
+     */
+    IKEVersion?: string;
+}
+/**
  * DescribeTaskResult请求参数结构体
  */
 export interface DescribeTaskResultRequest {
@@ -3243,6 +3255,15 @@ export interface VpcEndPointServiceUser {
      * 终端节点服务ID。
      */
     EndPointServiceId: string;
+}
+/**
+ * RejectVpcPeeringConnection返回参数结构体
+ */
+export interface RejectVpcPeeringConnectionResponse {
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * DescribeIp6TranslatorQuota请求参数结构体
@@ -9067,13 +9088,33 @@ export interface AlgType {
     Sip: boolean;
 }
 /**
- * MigratePrivateIpAddress返回参数结构体
+ * NAT网关的端口转发规则
  */
-export interface MigratePrivateIpAddressResponse {
+export interface DestinationIpPortTranslationNatRule {
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     * 网络协议，可选值：`TCP`、`UDP`。
      */
-    RequestId?: string;
+    IpProtocol: string;
+    /**
+     * 弹性IP。
+     */
+    PublicIpAddress: string;
+    /**
+     * 公网端口。
+     */
+    PublicPort: number;
+    /**
+     * 内网地址。
+     */
+    PrivateIpAddress: string;
+    /**
+     * 内网端口。
+     */
+    PrivatePort: number;
+    /**
+     * NAT网关转发规则描述。
+     */
+    Description: string;
 }
 /**
  * DescribeUsedIpAddress请求参数结构体
@@ -9363,21 +9404,13 @@ export interface DescribeRouteTablesRequest {
     Limit?: string;
 }
 /**
- * ResetAttachCcnInstances请求参数结构体
+ * DescribeVpcPeeringConnections返回参数结构体
  */
-export interface ResetAttachCcnInstancesRequest {
+export interface DescribeVpcPeeringConnectionsResponse {
     /**
-     * CCN实例ID。形如：ccn-f49l6u0z。
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
-    CcnId: string;
-    /**
-     * CCN所属UIN（根账号）。
-     */
-    CcnUin: string;
-    /**
-     * 重新申请关联网络实例列表。
-     */
-    Instances: Array<CcnInstance>;
+    RequestId?: string;
 }
 /**
  * CreateHaVip返回参数结构体
@@ -10216,6 +10249,38 @@ export interface UnassignPrivateIpAddressesResponse {
     RequestId?: string;
 }
 /**
+ * DescribeVpcPeeringConnections请求参数结构体
+ */
+export interface DescribeVpcPeeringConnectionsRequest {
+    /**
+     * 对等连接唯一ID数组。
+     */
+    PeeringConnectionIds?: Array<string>;
+    /**
+     * 过滤条件，参数不支持同时指定PeeringConnectionIds和Filters。
+  <li>vpc-id - String - （过滤条件）VPC实例ID，形如：vpc-f49l6u0z。</li>
+  <li>state String - （过滤条件）对等连接状态，可选值有：PENDING，投放中；ACTIVE，使用中；EXPIRED，已过期；REJECTED，拒绝。</li>
+  <li>peering-connection-name - String - （过滤条件）对等连接名称。</li>
+     */
+    Filters?: Array<Filter>;
+    /**
+     * 偏移量。
+     */
+    Offset?: number;
+    /**
+     * 请求对象个数。
+     */
+    Limit?: number;
+    /**
+     * 排序字段，可选值有：CreatedTime，PeeringConnectionName。
+     */
+    OrderField?: string;
+    /**
+     * 排序方式：DESC，降序；ASC，升序。
+     */
+    OrderDirection?: string;
+}
+/**
  * 描述 EIP 信息
  */
 export interface Address {
@@ -10592,6 +10657,10 @@ export interface CreateSecurityGroupPoliciesRequest {
     SecurityGroupPolicySet: SecurityGroupPolicySet;
 }
 /**
+ * DeleteVpcPeeringConnection请求参数结构体
+ */
+export declare type DeleteVpcPeeringConnectionRequest = null;
+/**
  * ModifyVpnGatewayRoutes返回参数结构体
  */
 export interface ModifyVpnGatewayRoutesResponse {
@@ -10836,6 +10905,15 @@ export interface ModifyAddressTemplateGroupAttributeRequest {
      * IP地址模板实例ID， 例如：ipm-mdunqeb6。
      */
     AddressTemplateIds?: Array<string>;
+}
+/**
+ * ModifyVpcPeeringConnection返回参数结构体
+ */
+export interface ModifyVpcPeeringConnectionResponse {
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * ModifyServiceTemplateGroupAttribute请求参数结构体
@@ -11088,33 +11166,13 @@ export interface RemoveBandwidthPackageResourcesResponse {
     RequestId?: string;
 }
 /**
- * NAT网关的端口转发规则
+ * DeleteVpcPeeringConnection返回参数结构体
  */
-export interface DestinationIpPortTranslationNatRule {
+export interface DeleteVpcPeeringConnectionResponse {
     /**
-     * 网络协议，可选值：`TCP`、`UDP`。
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
-    IpProtocol: string;
-    /**
-     * 弹性IP。
-     */
-    PublicIpAddress: string;
-    /**
-     * 公网端口。
-     */
-    PublicPort: number;
-    /**
-     * 内网地址。
-     */
-    PrivateIpAddress: string;
-    /**
-     * 内网端口。
-     */
-    PrivatePort: number;
-    /**
-     * NAT网关转发规则描述。
-     */
-    Description: string;
+    RequestId?: string;
 }
 /**
  * DeleteSnapshotPolicies请求参数结构体
@@ -11296,6 +11354,15 @@ export interface DescribeAddressTemplateGroupsRequest {
      * 返回数量，默认为20，最大值为100。
      */
     Limit?: string;
+}
+/**
+ * MigratePrivateIpAddress返回参数结构体
+ */
+export interface MigratePrivateIpAddressResponse {
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * CheckNetDetectState返回参数结构体
@@ -11819,6 +11886,15 @@ export interface DescribeServiceTemplatesResponse {
     RequestId?: string;
 }
 /**
+ * AcceptVpcPeeringConnection返回参数结构体
+ */
+export interface AcceptVpcPeeringConnectionResponse {
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * DescribeSgSnapshotFileContent请求参数结构体
  */
 export interface DescribeSgSnapshotFileContentRequest {
@@ -12009,6 +12085,15 @@ export interface CcnBandwidthInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     TagSet?: Array<Tag>;
+}
+/**
+ * CreateVpcPeeringConnection返回参数结构体
+ */
+export interface CreateVpcPeeringConnectionResponse {
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * DescribeCrossBorderCcnRegionBandwidthLimits返回参数结构体
@@ -12659,6 +12744,23 @@ export interface CcnRegionBandwidthLimit {
      * 目的地域是否为黑石地域，默认`false`。
      */
     DstIsBm?: boolean;
+}
+/**
+ * ResetAttachCcnInstances请求参数结构体
+ */
+export interface ResetAttachCcnInstancesRequest {
+    /**
+     * CCN实例ID。形如：ccn-f49l6u0z。
+     */
+    CcnId: string;
+    /**
+     * CCN所属UIN（根账号）。
+     */
+    CcnUin: string;
+    /**
+     * 重新申请关联网络实例列表。
+     */
+    Instances: Array<CcnInstance>;
 }
 /**
  * UnlockCcnBandwidths返回参数结构体
@@ -13385,6 +13487,10 @@ export interface WithdrawNotifyRoutesResponse {
      */
     RequestId?: string;
 }
+/**
+ * AcceptVpcPeeringConnection请求参数结构体
+ */
+export declare type AcceptVpcPeeringConnectionRequest = null;
 /**
  * DescribeNetworkInterfaces返回参数结构体
  */

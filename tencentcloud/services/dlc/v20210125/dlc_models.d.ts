@@ -378,89 +378,19 @@ export interface DetachUserPolicyResponse {
     RequestId?: string;
 }
 /**
- * 任务结果信息。
+ * cos权限描述
  */
-export interface TaskResultInfo {
+export interface CosPermission {
     /**
-     * 任务唯一ID
-     */
-    TaskId: string;
-    /**
-     * 数据源名称，当前任务执行时候选中的默认数据源
+     * cos路径
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DatasourceConnectionName: string;
+    CosPath?: string;
     /**
-     * 数据库名称，当前任务执行时候选中的默认数据库
+     * 权限【"read","write"】
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DatabaseName: string;
-    /**
-     * 当前执行的SQL，一个任务包含一个SQL
-     */
-    SQL: string;
-    /**
-     * 执行任务的类型，现在分为DDL、DML、DQL
-     */
-    SQLType: string;
-    /**
-     * 任务当前的状态，0：初始化 1：任务运行中 2：任务执行成功 -1：任务执行失败 -3：用户手动终止。只有任务执行成功的情况下，才会返回任务执行的结果
-     */
-    State: number;
-    /**
-     * 扫描的数据量，单位byte
-     */
-    DataAmount: number;
-    /**
-     * 计算耗时，单位： ms
-     */
-    UsedTime: number;
-    /**
-     * 任务结果输出的COS桶地址
-     */
-    OutputPath: string;
-    /**
-     * 任务创建时间，时间戳
-     */
-    CreateTime: string;
-    /**
-     * 任务执行信息，成功时返回success，失败时返回失败原因
-     */
-    OutputMessage: string;
-    /**
-     * 被影响的行数
-     */
-    RowAffectInfo: string;
-    /**
-     * 结果的schema信息
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ResultSchema: Array<Column>;
-    /**
-     * 结果信息，反转义后，外层数组的每个元素为一行数据
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ResultSet: string;
-    /**
-     * 分页信息，如果没有更多结果数据，nextToken为空
-     */
-    NextToken: string;
-    /**
-     * 任务执行进度num/100(%)
-     */
-    Percentage: number;
-    /**
-     * 任务进度明细
-     */
-    ProgressDetail: string;
-    /**
-     * 控制台展示格式。table：表格展示 text：文本展示
-     */
-    DisplayFormat: string;
-    /**
-     * 任务耗时，单位： ms
-     */
-    TotalTime: number;
+    Permissions?: Array<string>;
 }
 /**
  * CreateResultDownload返回参数结构体
@@ -973,6 +903,91 @@ export interface DescribeEngineUsageInfoRequest {
      * 数据引擎ID
      */
     DataEngineId: string;
+}
+/**
+ * 任务结果信息。
+ */
+export interface TaskResultInfo {
+    /**
+     * 任务唯一ID
+     */
+    TaskId: string;
+    /**
+     * 数据源名称，当前任务执行时候选中的默认数据源
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DatasourceConnectionName: string;
+    /**
+     * 数据库名称，当前任务执行时候选中的默认数据库
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DatabaseName: string;
+    /**
+     * 当前执行的SQL，一个任务包含一个SQL
+     */
+    SQL: string;
+    /**
+     * 执行任务的类型，现在分为DDL、DML、DQL
+     */
+    SQLType: string;
+    /**
+     * 任务当前的状态，0：初始化 1：任务运行中 2：任务执行成功 -1：任务执行失败 -3：用户手动终止。只有任务执行成功的情况下，才会返回任务执行的结果
+     */
+    State: number;
+    /**
+     * 扫描的数据量，单位byte
+     */
+    DataAmount: number;
+    /**
+     * 计算耗时，单位： ms
+     */
+    UsedTime: number;
+    /**
+     * 任务结果输出的COS桶地址
+     */
+    OutputPath: string;
+    /**
+     * 任务创建时间，时间戳
+     */
+    CreateTime: string;
+    /**
+     * 任务执行信息，成功时返回success，失败时返回失败原因
+     */
+    OutputMessage: string;
+    /**
+     * 被影响的行数
+     */
+    RowAffectInfo: string;
+    /**
+     * 结果的schema信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ResultSchema: Array<Column>;
+    /**
+     * 结果信息，反转义后，外层数组的每个元素为一行数据
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ResultSet: string;
+    /**
+     * 分页信息，如果没有更多结果数据，nextToken为空
+     */
+    NextToken: string;
+    /**
+     * 任务执行进度num/100(%)
+     */
+    Percentage: number;
+    /**
+     * 任务进度明细
+     */
+    ProgressDetail: string;
+    /**
+     * 控制台展示格式。table：表格展示 text：文本展示
+     */
+    DisplayFormat: string;
+    /**
+     * 任务耗时，单位： ms
+     */
+    TotalTime: number;
 }
 /**
  * DescribeDMSTable返回参数结构体
@@ -2845,51 +2860,21 @@ export interface DescribeNotebookSessionLogRequest {
     Offset?: number;
 }
 /**
- * 授权用户信息
+ * DescribeUserRoles返回参数结构体
  */
-export interface UserInfo {
+export interface DescribeUserRolesResponse {
     /**
-     * 用户Id，和子用户uin相同
+     * 符合列举条件的总数量
      */
-    UserId: string;
+    Total?: number;
     /**
-     * 用户描述信息，方便区分不同用户
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 用户角色信息
      */
-    UserDescription: string;
+    UserRoles?: Array<UserRole>;
     /**
-     * 单独给用户绑定的权限集合
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
-    PolicySet: Array<Policy>;
-    /**
-     * 当前用户的创建者
-     */
-    Creator: string;
-    /**
-     * 创建时间，格式如2021-07-28 16:19:32
-     */
-    CreateTime: string;
-    /**
-     * 关联的工作组集合
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    WorkGroupSet: Array<WorkGroupMessage>;
-    /**
-     * 是否是主账号
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    IsOwner: boolean;
-    /**
-     * 用户类型。ADMIN：管理员 COMMON：普通用户。
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    UserType: string;
-    /**
-     * 用户别名
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    UserAlias: string;
+    RequestId?: string;
 }
 /**
  * CreateExportTask请求参数结构体
@@ -3629,6 +3614,31 @@ export interface NotebookSessionStatementBatchInformation {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     BatchId?: string;
+}
+/**
+ * DescribeUserRoles请求参数结构体
+ */
+export interface DescribeUserRolesRequest {
+    /**
+     * 列举的数量限制
+     */
+    Limit: number;
+    /**
+     * 列举的偏移位置
+     */
+    Offset: number;
+    /**
+     * 按照arn模糊列举
+     */
+    Fuzzy?: string;
+    /**
+     * 返回结果按照该字段排序
+     */
+    SortBy?: string;
+    /**
+     * 正序或者倒序，例如：desc
+     */
+    Sorting?: string;
 }
 /**
  * DescribeNotebookSessionStatementSqlResult请求参数结构体
@@ -5154,6 +5164,53 @@ export interface UpdateRowFilterResponse {
     RequestId?: string;
 }
 /**
+ * 授权用户信息
+ */
+export interface UserInfo {
+    /**
+     * 用户Id，和子用户uin相同
+     */
+    UserId: string;
+    /**
+     * 用户描述信息，方便区分不同用户
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    UserDescription: string;
+    /**
+     * 单独给用户绑定的权限集合
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PolicySet: Array<Policy>;
+    /**
+     * 当前用户的创建者
+     */
+    Creator: string;
+    /**
+     * 创建时间，格式如2021-07-28 16:19:32
+     */
+    CreateTime: string;
+    /**
+     * 关联的工作组集合
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    WorkGroupSet: Array<WorkGroupMessage>;
+    /**
+     * 是否是主账号
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IsOwner: boolean;
+    /**
+     * 用户类型。ADMIN：管理员 COMMON：普通用户。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    UserType: string;
+    /**
+     * 用户别名
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    UserAlias: string;
+}
+/**
  * CreateTasks返回参数结构体
  */
 export interface CreateTasksResponse {
@@ -6156,4 +6213,53 @@ export interface DescribeResultDownloadRequest {
      * 查询任务Id
      */
     DownloadId: string;
+}
+/**
+ * 用户角色
+ */
+export interface UserRole {
+    /**
+     * 角色ID
+     */
+    RoleId?: number;
+    /**
+     * 用户app ID
+     */
+    AppId?: string;
+    /**
+     * 用户ID
+     */
+    Uin?: string;
+    /**
+     * 角色权限
+     */
+    Arn?: string;
+    /**
+     * 最近修改时间戳
+     */
+    ModifyTime?: number;
+    /**
+     * 角色描述信息
+     */
+    Desc?: string;
+    /**
+     * 角色名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RoleName?: string;
+    /**
+     * 创建者UIN
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Creator?: string;
+    /**
+     * cos授权路径列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CosPermissionList?: Array<CosPermission>;
+    /**
+     * cam策略json
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PermissionJson?: string;
 }

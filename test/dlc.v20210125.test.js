@@ -58,6 +58,16 @@ it("dlc.v20210125.DescribeForbiddenTablePro", async function () {
     }
 })
 
+it("dlc.v20210125.DescribeUserRoles", async function () {
+    try {
+       const data = await client.DescribeUserRoles({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dlc.v20210125.DescribeNotebookSession", async function () {
     try {
        const data = await client.DescribeNotebookSession({})
