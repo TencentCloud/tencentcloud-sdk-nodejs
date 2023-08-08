@@ -40,10 +40,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeExtensions", req, cb);
     }
     /**
-     * 创建话机账号
+     * 批量查询自动任务外呼
      */
-    async CreateExtension(req, cb) {
-        return this.request("CreateExtension", req, cb);
+    async DescribeAutoCalloutTasks(req, cb) {
+        return this.request("DescribeAutoCalloutTasks", req, cb);
     }
     /**
      * 获取坐席信息列表
@@ -100,10 +100,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyStaff", req, cb);
     }
     /**
-     * 批量查询自动任务外呼
+     * 创建话机账号
      */
-    async DescribeAutoCalloutTasks(req, cb) {
-        return this.request("DescribeAutoCalloutTasks", req, cb);
+    async CreateExtension(req, cb) {
+        return this.request("CreateExtension", req, cb);
     }
     /**
      * 重置话机注册密码
@@ -232,6 +232,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CreateUserSig(req, cb) {
         return this.request("CreateUserSig", req, cb);
+    }
+    /**
+     * 创建管理端访问链接
+     */
+    async CreateAdminURL(req, cb) {
+        return this.request("CreateAdminURL", req, cb);
     }
     /**
      * 获取主被叫受保护的电话服务记录与录音

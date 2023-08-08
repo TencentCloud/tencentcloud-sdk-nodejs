@@ -60,23 +60,26 @@ import {
   GetCustomizationListRequest,
   UpdateAsrVocabResponse,
   VoicePrintEnrollRequest,
+  VoicePrintVerifyResponse,
   CreateAsrVocabResponse,
   Model,
   CreateAsrVocabRequest,
   GetModelInfoResponse,
   UpdateAsrVocabRequest,
-  VoicePrintVerifyResponse,
+  VoicePrintCountRequest,
   DescribeTaskStatusRequest,
   SentenceRecognitionResponse,
   VoicePrintUpdateResponse,
   VoicePrintBaseData,
   DeleteCustomizationRequest,
+  VoicePrintCountResponse,
   AsyncRecognitionTaskInfo,
   ModifyCustomizationStateResponse,
   DescribeAsyncRecognitionTasksResponse,
   GetAsrVocabListResponse,
   SentenceWord,
   SentenceWords,
+  VoicePrintCountData,
   DownloadCustomizationRequest,
 } from "./asr_models"
 
@@ -122,6 +125,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: GetCustomizationListResponse) => void
   ): Promise<GetCustomizationListResponse> {
     return this.request("GetCustomizationList", req, cb)
+  }
+
+  /**
+   * 统计并返回注册的说话人id总数
+   */
+  async VoicePrintCount(
+    req?: VoicePrintCountRequest,
+    cb?: (error: string, rep: VoicePrintCountResponse) => void
+  ): Promise<VoicePrintCountResponse> {
+    return this.request("VoicePrintCount", req, cb)
   }
 
   /**

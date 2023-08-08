@@ -78,7 +78,7 @@ export declare class Client extends AbstractClient {
     ChannelCreateSealPolicy(req: ChannelCreateSealPolicyRequest, cb?: (error: string, rep: ChannelCreateSealPolicyResponse) => void): Promise<ChannelCreateSealPolicyResponse>;
     /**
      * 查询子客企业电子印章，需要操作者具有管理印章权限
-客户指定需要获取的印章数量和偏移量，数量最多100，超过100按100处理；入参InfoType控制印章是否携带授权人信息，为1则携带，为0则返回的授权人信息为空数组。接口调用成功返回印章的信息列表还有企业印章的总数。
+客户指定需要获取的印章数量和偏移量，数量最多100，超过100按100处理；入参InfoType控制印章是否携带授权人信息，为1则携带，为0则返回的授权人信息为空数组。接口调用成功返回印章的信息列表还有企业印章的总数，只返回启用的印章。
      */
     ChannelDescribeOrganizationSeals(req: ChannelDescribeOrganizationSealsRequest, cb?: (error: string, rep: ChannelDescribeOrganizationSealsResponse) => void): Promise<ChannelDescribeOrganizationSealsResponse>;
     /**
@@ -175,7 +175,7 @@ https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/launchAp
      */
     ChannelCreateBoundFlows(req: ChannelCreateBoundFlowsRequest, cb?: (error: string, rep: ChannelCreateBoundFlowsResponse) => void): Promise<ChannelCreateBoundFlowsResponse>;
     /**
-     * 对流程的合同文件进行验证，判断文件是否合法。
+     * 对流程的合同文件进行数字签名验证，判断文件是否被篡改。
      */
     ChannelVerifyPdf(req: ChannelVerifyPdfRequest, cb?: (error: string, rep: ChannelVerifyPdfResponse) => void): Promise<ChannelVerifyPdfResponse>;
     /**
@@ -307,7 +307,7 @@ httpProfile.setEndpoint("file.test.ess.tencent.cn");
      */
     DescribeFlowDetailInfo(req: DescribeFlowDetailInfoRequest, cb?: (error: string, rep: DescribeFlowDetailInfoResponse) => void): Promise<DescribeFlowDetailInfoResponse>;
     /**
-     * 查询流程填写控件内容，可以根据流程Id查询该流程相关联的填写控件信息
+     * 查询流程填写控件内容，可以根据流程Id查询该流程相关联的填写控件信息和填写内容。 注意：使用此接口前，需要在【企业应用管理】-【应用集成】-【第三方应用管理】中开通【下载应用内全量合同文件及内容数据】功能。
      */
     ChannelDescribeFlowComponents(req: ChannelDescribeFlowComponentsRequest, cb?: (error: string, rep: ChannelDescribeFlowComponentsResponse) => void): Promise<ChannelDescribeFlowComponentsResponse>;
 }

@@ -860,7 +860,7 @@ export interface ChannelDeleteRoleUsersRequest {
      */
     RoleId: string;
     /**
-     * 电子签用户ID列表，与OpenIds参数二选一,优先UserIds参数
+     * 电子签用户ID列表，与OpenIds参数二选一,优先UserIds参数，最多两百
      */
     UserIds?: Array<string>;
     /**
@@ -869,7 +869,7 @@ export interface ChannelDeleteRoleUsersRequest {
      */
     Operator?: UserInfo;
     /**
-     * 客户系统用户ID列表，与UserIds参数二选一,优先UserIds参数
+     * 客户系统用户ID列表，与UserIds参数二选一,优先UserIds参数，最多两百
      */
     OpenIds?: Array<string>;
 }
@@ -1385,11 +1385,11 @@ export interface ChannelDescribeRolesRequest {
      */
     Agent: Agent;
     /**
-     * 查询起始偏移，最大2000
+     * 查询结果分页返回，此处指定第几页，如果不传默认从第一页返回。页码从 0 开始，即首页为 0，最大2000
      */
     Offset: number;
     /**
-     * 查询数量，最大200
+     * 指定每页多少条数据，单页最大200
      */
     Limit: string;
     /**
@@ -2454,13 +2454,13 @@ export interface ChannelCreateBoundFlowsRequest {
  */
 export interface ChannelDescribeEmployeesRequest {
     /**
-     * 返回最大数量，最大为20
-     */
-    Limit: number;
-    /**
      * 应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 必填。
      */
-    Agent?: Agent;
+    Agent: Agent;
+    /**
+     * 指定每页多少条数据，单页最大20
+     */
+    Limit: number;
     /**
      * 查询过滤实名用户，Key为Status，Values为["IsVerified"]
   根据第三方系统openId过滤查询员工时,Key为StaffOpenId,Values为["OpenId","OpenId",...]
@@ -2468,7 +2468,7 @@ export interface ChannelDescribeEmployeesRequest {
      */
     Filters?: Array<Filter>;
     /**
-     * 偏移量，默认为0，最大为20000
+     * 查询结果分页返回，此处指定第几页，如果不传默认从第一页返回。页码从 0 开始，即首页为 0,最大为20000
      */
     Offset?: number;
     /**
@@ -3227,11 +3227,11 @@ export interface ChannelCancelMultiFlowSignQRCodeResponse {
  */
 export interface ChannelDescribeRolesResponse {
     /**
-     * 页面偏移量，最大2000
+     * 查询结果分页返回，此处指定第几页，如果不传默认从第一页返回。页码从 0 开始，即首页为 0，最大2000
      */
     Offset?: number;
     /**
-     * 查询数量，最大200
+     * 指定每页多少条数据，单页最大200
      */
     Limit?: number;
     /**
@@ -3292,7 +3292,7 @@ export interface ChannelCreateReleaseFlowRequest {
  */
 export interface ChannelDescribeFlowComponentsResponse {
     /**
-     * 流程关联的填写控件信息
+     * 流程关联的填写控件信息，控件会按照参与方进行分类。
   注意：此字段可能返回 null，表示取不到有效值。
      */
     RecipientComponentInfos?: Array<RecipientComponentInfo>;
@@ -3407,15 +3407,15 @@ export interface ChannelCreateUserRolesRequest {
      */
     Agent: Agent;
     /**
-     * 绑定角色的角色id列表
+     * 绑定角色的角色id列表，最多 100 个
      */
     RoleIds: Array<string>;
     /**
-     * 电子签用户ID列表，与OpenIds参数二选一,优先UserIds参数
+     * 电子签用户ID列表，与OpenIds参数二选一,优先UserIds参数，最多 100 个
      */
     UserIds?: Array<string>;
     /**
-     * 客户系统用户ID列表，与UserIds参数二选一,优先UserIds参数
+     * 客户系统用户ID列表，与UserIds参数二选一,优先UserIds参数，最多 100 个
      */
     OpenIds?: Array<string>;
     /**
@@ -4016,12 +4016,12 @@ export interface ChannelDescribeEmployeesResponse {
      */
     Employees?: Array<Staff>;
     /**
-     * 偏移量，默认为0，最大为20000
+     * 查询结果分页返回，此处指定第几页，如果不传默认从第一页返回。页码从 0 开始，即首页为 0，最大20000
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Offset?: number;
     /**
-     * 返回最大数量，最大为20
+     * 指定每页多少条数据，单页最大20
      */
     Limit?: number;
     /**

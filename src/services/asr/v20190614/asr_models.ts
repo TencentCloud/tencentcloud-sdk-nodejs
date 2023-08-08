@@ -983,6 +983,20 @@ export interface VoicePrintEnrollRequest {
 }
 
 /**
+ * VoicePrintVerify返回参数结构体
+ */
+export interface VoicePrintVerifyResponse {
+  /**
+   * 说话人验证数据
+   */
+  Data?: VoicePrintVerifyData
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateAsrVocab返回参数结构体
  */
 export interface CreateAsrVocabResponse {
@@ -1106,18 +1120,9 @@ export interface UpdateAsrVocabRequest {
 }
 
 /**
- * VoicePrintVerify返回参数结构体
+ * VoicePrintCount请求参数结构体
  */
-export interface VoicePrintVerifyResponse {
-  /**
-   * 说话人验证数据
-   */
-  Data?: VoicePrintVerifyData
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
+export type VoicePrintCountRequest = null
 
 /**
  * DescribeTaskStatus请求参数结构体
@@ -1195,6 +1200,20 @@ export interface DeleteCustomizationRequest {
    * 要删除的模型ID
    */
   ModelId: string
+}
+
+/**
+ * VoicePrintCount返回参数结构体
+ */
+export interface VoicePrintCountResponse {
+  /**
+   * 统计数据
+   */
+  Data?: VoicePrintCountData
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1295,6 +1314,17 @@ export interface SentenceWords {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   OffsetEndMs: number
+}
+
+/**
+ * 统计返回注册数量结构
+ */
+export interface VoicePrintCountData {
+  /**
+   * 总数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Total?: number
 }
 
 /**

@@ -38,9 +38,9 @@ it("ccc.v20200210.DescribeExtensions", async function () {
     }
 })
 
-it("ccc.v20200210.CreateExtension", async function () {
+it("ccc.v20200210.DescribeAutoCalloutTasks", async function () {
     try {
-       const data = await client.CreateExtension({})
+       const data = await client.DescribeAutoCalloutTasks({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -138,9 +138,9 @@ it("ccc.v20200210.ModifyStaff", async function () {
     }
 })
 
-it("ccc.v20200210.DescribeAutoCalloutTasks", async function () {
+it("ccc.v20200210.CreateExtension", async function () {
     try {
-       const data = await client.DescribeAutoCalloutTasks({})
+       const data = await client.CreateExtension({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -351,6 +351,16 @@ it("ccc.v20200210.ModifyExtension", async function () {
 it("ccc.v20200210.CreateUserSig", async function () {
     try {
        const data = await client.CreateUserSig({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ccc.v20200210.CreateAdminURL", async function () {
+    try {
+       const data = await client.CreateAdminURL({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -83,7 +83,7 @@ export interface CreateRiskCenterScanTaskRequest {
    */
   ScanAssetType: number
   /**
-   * 扫描项目；port/poc/weakpass/webcontent/configrisk
+   * 扫描项目；port/poc/weakpass/webcontent/configrisk/exposedserver
    */
   ScanItem: Array<string>
   /**
@@ -330,6 +330,26 @@ export interface DomainAssetVO {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ServiceRisk?: number
+  /**
+   * 是否新资产 1新
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsNewAsset?: number
+  /**
+   * 待确认资产的随机三级域名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VerifyDomain?: string
+  /**
+   * 待确认资产的TXT记录内容
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VerifyTXTRecord?: string
+  /**
+   * 待确认资产的认证状态，0-待认证，1-认证成功，2-认证中，3-txt认证失败，4-人工认证失败
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VerifyStatus?: number
 }
 
 /**
@@ -672,6 +692,11 @@ export interface CVMAssetVO {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   BASAgentStatus?: number
+  /**
+   * 1新资产；0 非新资产
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsNewAsset?: number
 }
 
 /**
@@ -845,6 +870,16 @@ export interface Vpc {
    * 昵称
    */
   Nick?: string
+  /**
+   * 是否新资产 1新
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsNewAsset?: number
+  /**
+   * 是否核心资产1是 2不是
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsCore?: number
 }
 
 /**
@@ -1027,6 +1062,11 @@ export interface DBAssetVO {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IsCore?: number
+  /**
+   * 是否新资产: 1新
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsNewAsset?: number
 }
 
 /**
@@ -1173,6 +1213,11 @@ export interface SubnetAsset {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IsCore?: number
+  /**
+   * 是否新资产 1新
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsNewAsset?: number
 }
 
 /**
@@ -1183,6 +1228,14 @@ export interface CreateRiskCenterScanTaskResponse {
    * 任务id
    */
   TaskId?: string
+  /**
+   * 0,任务创建成功；小于0失败；-1为存在资产未认证
+   */
+  Status?: number
+  /**
+   * 未认证资产列表
+   */
+  UnAuthAsset?: Array<string>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1664,6 +1717,16 @@ export interface IpAssetListVO {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RiskExposure?: number
+  /**
+   * 是否新资产 1新
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsNewAsset?: number
+  /**
+   * 资产认证状态，0-待认证，1-认证成功，2-认证中，3+-认证失败
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VerifyStatus?: number
 }
 
 /**
@@ -2204,6 +2267,11 @@ export interface AssetClusterPod {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IsCore?: number
+  /**
+   * 是否新资产 1新
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsNewAsset?: number
 }
 
 /**
@@ -2283,7 +2351,10 @@ export interface WhereFilter {
    */
   Values: Array<string>
   /**
-   * 精确匹配填 7 模糊匹配填9 ， 兼容 中台定的结构
+   * 中台定义：
+1等于 2大于 3小于 4大于等于 5小于等于 6不等于 9模糊匹配 13非模糊匹配 14按位与
+精确匹配填 7 模糊匹配填9 兼容 中台定的结构
+
    */
   OperatorType?: number
 }

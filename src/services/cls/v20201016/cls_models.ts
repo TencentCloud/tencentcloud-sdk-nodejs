@@ -1430,6 +1430,10 @@ auto：自动匹配rfc3164或者rfc5424其中一种协议
    * 用户自定义元数据信息，MetadataType为2时必填
    */
   MetaTags?: Array<MetaTagInfo>
+  /**
+   * windows事件日志采集
+   */
+  EventLogRules?: Array<EventLog>
 }
 
 /**
@@ -1788,17 +1792,26 @@ export interface ModifyAlarmNoticeRequest {
 }
 
 /**
- * 键值索引配置
+ * Windows事件日志采集配置
  */
-export interface RuleKeyValueInfo {
+export interface EventLog {
   /**
-   * 是否大小写敏感
+   * 事件通道，支持Application，Security，Setup，System，ALL
+
    */
-  CaseSensitive: boolean
+  EventChannel: string
   /**
-   * 需要建立索引的键值对信息
+   * 时间类型，1:用户自定义，2:当前时间
    */
-  KeyValues?: Array<KeyValueInfo>
+  TimeType: number
+  /**
+   * 时间，用户选择自定义时间类型时，需要指定时间
+   */
+  Timestamp?: number
+  /**
+   * 事件ID过滤列表
+   */
+  EventIDs?: Array<string>
 }
 
 /**
@@ -2233,6 +2246,10 @@ export interface MachineGroupInfo {
    * 机器组元数据信息列表
    */
   MetaTags?: Array<MetaTagInfo>
+  /**
+   * 操作系统类型，0: Linux，1: windows
+   */
+  OSType?: number
 }
 
 /**
@@ -2280,6 +2297,11 @@ export interface DescribeMachineGroupsRequest {
 machineGroupId
 - 按照【机器组ID】进行过滤。
 - 类型：String
+- 必选：否
+
+osType
+- 按照【操作系统类型】进行过滤。
+- 类型：Int
 - 必选：否
 
 tagKey
@@ -5216,6 +5238,10 @@ export interface CreateMachineGroupRequest {
    * 机器组元数据信息列表
    */
   MetaTags?: Array<MetaTagInfo>
+  /**
+   * 系统类型，默认0，0：Linux，1: windows
+   */
+  OSType?: number
 }
 
 /**
@@ -5851,6 +5877,20 @@ export interface CosRechargeInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ExtractRuleInfo: ExtractRuleInfo
+}
+
+/**
+ * 键值索引配置
+ */
+export interface RuleKeyValueInfo {
+  /**
+   * 是否大小写敏感
+   */
+  CaseSensitive: boolean
+  /**
+   * 需要建立索引的键值对信息
+   */
+  KeyValues?: Array<KeyValueInfo>
 }
 
 /**

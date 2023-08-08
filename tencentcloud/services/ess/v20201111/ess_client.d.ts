@@ -200,7 +200,7 @@ callbackinfo包含： 回调地址和签名key
      */
     CreateSeal(req: CreateSealRequest, cb?: (error: string, rep: CreateSealResponse) => void): Promise<CreateSealResponse>;
     /**
-     * 查询企业角色列表
+     * 分页查询企业角色列表，法人的角色是系统保留角色，不会返回，按照角色创建时间升序排列
      */
     DescribeIntegrationRoles(req: DescribeIntegrationRolesRequest, cb?: (error: string, rep: DescribeIntegrationRolesResponse) => void): Promise<DescribeIntegrationRolesResponse>;
     /**
@@ -236,6 +236,7 @@ callbackinfo包含： 回调地址和签名key
     CreatePersonAuthCertificateImage(req: CreatePersonAuthCertificateImageRequest, cb?: (error: string, rep: CreatePersonAuthCertificateImageResponse) => void): Promise<CreatePersonAuthCertificateImageResponse>;
     /**
      * 上传了word、excel、图片文件后，通过该接口发起文件转换任务，将word、excel、图片文件转换为pdf文件。
+注：如果是集团代子企业发起任务场景，可以通过对Agent参数（未列在入参列表）设置代理的相关应用信息来支持，Agent参数设置可以参考CreateFlow接口的Agent相关说明。
      */
     CreateConvertTaskApi(req: CreateConvertTaskApiRequest, cb?: (error: string, rep: CreateConvertTaskApiResponse) => void): Promise<CreateConvertTaskApiResponse>;
     /**
@@ -272,7 +273,8 @@ httpProfile.setEndpoint("file.test.ess.tencent.cn");<br/>
      */
     CreateFlowReminds(req: CreateFlowRemindsRequest, cb?: (error: string, rep: CreateFlowRemindsResponse) => void): Promise<CreateFlowRemindsResponse>;
     /**
-     * 查询流程填写控件内容，可以根据流程Id查询该流程相关联的填写控件信息
+     * 查询流程填写控件内容，可以根据流程Id查询该流程相关联的填写控件信息和填写内容。
+注意：使用此接口前，需要在【企业应用管理】-【应用集成】-【第三方应用管理】中开通【下载应用内全量合同文件及内容数据】功能。
      */
     DescribeFlowComponents(req: DescribeFlowComponentsRequest, cb?: (error: string, rep: DescribeFlowComponentsResponse) => void): Promise<DescribeFlowComponentsResponse>;
     /**
@@ -296,6 +298,9 @@ httpProfile.setEndpoint("file.test.ess.tencent.cn");<br/>
     DescribeOrganizationSeals(req: DescribeOrganizationSealsRequest, cb?: (error: string, rep: DescribeOrganizationSealsResponse) => void): Promise<DescribeOrganizationSealsResponse>;
     /**
      * 移除员工
+这里分两个场景
+如果不传交接人的ReceiveUserId或者ReceiveOpenId，则会直接把这个人进行离职
+如果传了交接人，会把离职人未处理完的合同交接给交接人后再离职
      */
     DeleteIntegrationEmployees(req: DeleteIntegrationEmployeesRequest, cb?: (error: string, rep: DeleteIntegrationEmployeesResponse) => void): Promise<DeleteIntegrationEmployeesResponse>;
     /**
@@ -331,7 +336,8 @@ PDF资源Id 通过上传文件接口获取
      */
     DescribeOrganizationGroupOrganizations(req: DescribeOrganizationGroupOrganizationsRequest, cb?: (error: string, rep: DescribeOrganizationGroupOrganizationsResponse) => void): Promise<DescribeOrganizationGroupOrganizationsResponse>;
     /**
-     * 创建员工,此接口会发送提醒员工实名的短信
+     * 创建员工,此接口会发送提醒员工实名的短信，如果通过手机号发现员工已经创建，则不会重新创建，会发送短信提醒员工实名
+注意：此接口支持企微组织架构的 openid 创建员工，这种场景下传递明文的企微 openid 到WeworkOpenId字段即可（企微明文的 openid 一定要在应用的可见范围内才行），通过企微创建的员工，会发送企微消息去提醒实名
      */
     CreateIntegrationEmployees(req: CreateIntegrationEmployeesRequest, cb?: (error: string, rep: CreateIntegrationEmployeesResponse) => void): Promise<CreateIntegrationEmployeesResponse>;
     /**

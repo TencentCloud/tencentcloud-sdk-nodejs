@@ -29,6 +29,7 @@ import {
   DescribeAutoCalloutTaskRequest,
   CreateUserSigResponse,
   DescribeIMCdrsResponse,
+  CreateAdminURLResponse,
   CreateCallOutSessionResponse,
   DescribeCarrierPrivilegeNumberApplicantsRequest,
   DisableCCCPhoneNumberRequest,
@@ -66,6 +67,7 @@ import {
   AutoCalloutTaskInfo,
   SkillGroupInfoItem,
   ResetExtensionPasswordResponse,
+  ModifyStaffResponse,
   ModifyExtensionRequest,
   PSTNSessionInfo,
   Message,
@@ -116,7 +118,7 @@ import {
   DescribeAutoCalloutTasksRequest,
   DescribeChatMessagesRequest,
   DescribeTelSessionResponse,
-  ModifyStaffResponse,
+  CreateAdminURLRequest,
   DescribeStaffStatusMetricsResponse,
   DescribeCarrierPrivilegeNumberApplicantsResponse,
   HangUpCallResponse,
@@ -160,13 +162,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建话机账号
+   * 批量查询自动任务外呼
    */
-  async CreateExtension(
-    req: CreateExtensionRequest,
-    cb?: (error: string, rep: CreateExtensionResponse) => void
-  ): Promise<CreateExtensionResponse> {
-    return this.request("CreateExtension", req, cb)
+  async DescribeAutoCalloutTasks(
+    req: DescribeAutoCalloutTasksRequest,
+    cb?: (error: string, rep: DescribeAutoCalloutTasksResponse) => void
+  ): Promise<DescribeAutoCalloutTasksResponse> {
+    return this.request("DescribeAutoCalloutTasks", req, cb)
   }
 
   /**
@@ -260,13 +262,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 批量查询自动任务外呼
+   * 创建话机账号
    */
-  async DescribeAutoCalloutTasks(
-    req: DescribeAutoCalloutTasksRequest,
-    cb?: (error: string, rep: DescribeAutoCalloutTasksResponse) => void
-  ): Promise<DescribeAutoCalloutTasksResponse> {
-    return this.request("DescribeAutoCalloutTasks", req, cb)
+  async CreateExtension(
+    req: CreateExtensionRequest,
+    cb?: (error: string, rep: CreateExtensionResponse) => void
+  ): Promise<CreateExtensionResponse> {
+    return this.request("CreateExtension", req, cb)
   }
 
   /**
@@ -479,6 +481,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateUserSigResponse) => void
   ): Promise<CreateUserSigResponse> {
     return this.request("CreateUserSig", req, cb)
+  }
+
+  /**
+   * 创建管理端访问链接
+   */
+  async CreateAdminURL(
+    req: CreateAdminURLRequest,
+    cb?: (error: string, rep: CreateAdminURLResponse) => void
+  ): Promise<CreateAdminURLResponse> {
+    return this.request("CreateAdminURL", req, cb)
   }
 
   /**

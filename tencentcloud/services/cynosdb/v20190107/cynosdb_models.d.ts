@@ -2488,7 +2488,7 @@ export interface SwitchClusterVpcResponse {
     /**
      * 异步任务id。
      */
-    FlowId: number;
+    FlowId?: number;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -3524,12 +3524,12 @@ export interface CreateClustersRequest {
     Cpu?: number;
     /**
      * 当DbMode为NORMAL或不填时必选
-  普通实例内存,单位G
+  普通实例内存,单位GB
      */
     Memory?: number;
     /**
      * 该参数无实际意义，已废弃。
-  存储大小，单位G。
+  存储大小，单位GB。
      */
     Storage?: number;
     /**
@@ -3917,13 +3917,13 @@ export interface AddInstancesResponse {
  */
 export interface Addr {
     /**
-     * IP
+     * IP地址
      */
-    IP: string;
+    IP?: string;
     /**
      * 端口
      */
-    Port: number;
+    Port?: number;
 }
 /**
  * 资源包明细说明
@@ -6336,7 +6336,7 @@ export interface ActivateInstanceResponse {
     /**
      * 任务流id
      */
-    FlowId: number;
+    FlowId?: number;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -6868,32 +6868,32 @@ export interface CynosdbClusterDetail {
     /**
      * 集群ID
      */
-    ClusterId: string;
+    ClusterId?: string;
     /**
      * 集群名称
      */
-    ClusterName: string;
+    ClusterName?: string;
     /**
      * 地域
      */
-    Region: string;
+    Region?: string;
     /**
      * 可用区
      */
-    Zone: string;
+    Zone?: string;
     /**
      * 物理可用区
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    PhysicalZone: string;
+    PhysicalZone?: string;
     /**
      * 状态
      */
-    Status: string;
+    Status?: string;
     /**
      * 状态描述
      */
-    StatusDesc: string;
+    StatusDesc?: string;
     /**
      * 当Db类型为SERVERLESS时，serverless集群状态，可选值:
   resume
@@ -6901,180 +6901,180 @@ export interface CynosdbClusterDetail {
   pause
   pausing
      */
-    ServerlessStatus: string;
+    ServerlessStatus?: string;
     /**
      * 存储Id
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    StorageId: string;
+    StorageId?: string;
     /**
      * 存储大小，单位为G
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Storage: number;
+    Storage?: number;
     /**
      * 最大存储规格，单位为G
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    MaxStorageSize: number;
+    MaxStorageSize?: number;
     /**
      * 最小存储规格，单位为G
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    MinStorageSize: number;
+    MinStorageSize?: number;
     /**
      * 存储付费类型，1为包年包月，0为按量计费
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    StoragePayMode: number;
+    StoragePayMode?: number;
     /**
      * VPC名称
      */
-    VpcName: string;
+    VpcName?: string;
     /**
      * vpc唯一id
      */
-    VpcId: string;
+    VpcId?: string;
     /**
      * 子网名称
      */
-    SubnetName: string;
+    SubnetName?: string;
     /**
      * 子网ID
      */
-    SubnetId: string;
+    SubnetId?: string;
     /**
      * 字符集
      */
-    Charset: string;
+    Charset?: string;
     /**
      * 创建时间
      */
-    CreateTime: string;
+    CreateTime?: string;
     /**
      * 数据库类型
      */
-    DbType: string;
+    DbType?: string;
     /**
      * 数据库类型，normal，serverless
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DbMode: string;
+    DbMode?: string;
     /**
      * 数据库版本
      */
-    DbVersion: string;
+    DbVersion?: string;
     /**
      * 存储空间上限
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    StorageLimit: number;
+    StorageLimit?: number;
     /**
      * 使用容量
      */
-    UsedStorage: number;
+    UsedStorage?: number;
     /**
      * vip地址
      */
-    Vip: string;
+    Vip?: string;
     /**
      * vport端口
      */
-    Vport: number;
+    Vport?: number;
     /**
-     * 读写分离Vport
+     * 集群只读实例的vip地址和vport端口
      */
-    RoAddr: Array<Addr>;
+    RoAddr?: Array<Addr>;
     /**
      * 集群支持的功能
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Ability: Ability;
+    Ability?: Ability;
     /**
      * cynos版本
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CynosVersion: string;
+    CynosVersion?: string;
     /**
      * 商业类型
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    BusinessType: string;
+    BusinessType?: string;
     /**
      * 是否有从可用区
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    HasSlaveZone: string;
+    HasSlaveZone?: string;
     /**
      * 是否冻结
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    IsFreeze: string;
+    IsFreeze?: string;
     /**
      * 任务列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Tasks: Array<ObjectTask>;
+    Tasks?: Array<ObjectTask>;
     /**
      * 主可用区
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    MasterZone: string;
+    MasterZone?: string;
     /**
      * 从可用区列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SlaveZones: Array<string>;
+    SlaveZones?: Array<string>;
     /**
      * 实例信息
      */
-    InstanceSet: Array<ClusterInstanceDetail>;
+    InstanceSet?: Array<ClusterInstanceDetail>;
     /**
      * 付费模式
      */
-    PayMode: number;
+    PayMode?: number;
     /**
      * 到期时间
      */
-    PeriodEndTime: string;
+    PeriodEndTime?: string;
     /**
      * 项目id
      */
-    ProjectID: number;
+    ProjectID?: number;
     /**
      * 实例绑定的tag数组信息
      */
-    ResourceTags: Array<Tag>;
+    ResourceTags?: Array<Tag>;
     /**
      * Proxy状态
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ProxyStatus: string;
+    ProxyStatus?: string;
     /**
      * binlog开关，可选值：ON, OFF
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    LogBin: string;
+    LogBin?: string;
     /**
      * 是否跳过交易
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    IsSkipTrade: string;
+    IsSkipTrade?: string;
     /**
      * pitr类型，可选值：normal, redo_pitr
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    PitrType: string;
+    PitrType?: string;
     /**
      * 是否打开密码复杂度
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    IsOpenPasswordComplexity: string;
+    IsOpenPasswordComplexity?: string;
     /**
      * 网络类型
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    NetworkStatus: string;
+    NetworkStatus?: string;
     /**
      * 集群绑定的资源包信息
   注意：此字段可能返回 null，表示取不到有效值。

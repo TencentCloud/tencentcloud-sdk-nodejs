@@ -5498,6 +5498,26 @@ export interface DescribeBatchOperateTaskDTO {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     CreateTime?: string;
+    /**
+     * 周期类型
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CycleUnit?: string;
+    /**
+     * 调度计划
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ScheduleDesc?: string;
+    /**
+     * 数据源ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DatasourceId?: string;
+    /**
+     * 数据源类型
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DatasourceType?: string;
 }
 /**
  * ModifyTaskLinks请求参数结构体
@@ -18655,6 +18675,22 @@ export interface DescribeBatchOperateTaskRequest {
      * 1
      */
     TenantId?: string;
+    /**
+     * 数据源ID列表
+     */
+    DatasourceIdList?: Array<string>;
+    /**
+     * 数据源类型列表
+     */
+    DatasourceTypeList?: Array<string>;
+    /**
+     * 调度单位类型列表
+     */
+    CycleUnitList?: Array<string>;
+    /**
+     * 是否筛选出可提交的任务
+     */
+    CanSubmit?: boolean;
 }
 /**
  * MakeUpWorkflowNew请求参数结构体

@@ -48,6 +48,16 @@ it("asr.v20190614.GetCustomizationList", async function () {
     }
 })
 
+it("asr.v20190614.VoicePrintCount", async function () {
+    try {
+       const data = await client.VoicePrintCount({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("asr.v20190614.GetAsrVocabList", async function () {
     try {
        const data = await client.GetAsrVocabList({})

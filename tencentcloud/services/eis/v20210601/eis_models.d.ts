@@ -106,7 +106,7 @@ export interface RuntimeMC {
      */
     RuntimeType: number;
     /**
-     * 环境运行类型：0:运行时类型、1:api类型
+     * 环境运行类型：0:运行时类型、1:api类型、2:etl环境
   注意：此字段可能返回 null，表示取不到有效值。
      */
     RuntimeClass: number;
@@ -187,33 +187,33 @@ export interface ListRuntimeDeployedInstancesMCRequest {
  */
 export interface RuntimeExtensionMC {
     /**
-     * 扩展组件类型：0:cdc
+     * 扩展组件类型：0:cdc 1:dataway-java
      */
     Type: number;
     /**
      * 部署规格vcore数
      */
-    Size: number;
+    Size?: number;
     /**
      * 副本数
      */
-    Replica: number;
+    Replica?: number;
     /**
      * 扩展组件名称
      */
-    Name: string;
+    Name?: string;
     /**
      * 状态 1:未启用 2:已启用
      */
-    Status: number;
+    Status?: number;
     /**
      * 创建时间
      */
-    CreatedAt: number;
+    CreatedAt?: number;
     /**
      * 修改时间
      */
-    UpdatedAt: number;
+    UpdatedAt?: number;
 }
 /**
  * ListDeployableRuntimesMC返回参数结构体
@@ -257,6 +257,10 @@ export interface ListDeployableRuntimesMCRequest {
      * 版本类型 0-pro 1-lite
      */
     PlanType?: number;
+    /**
+     * 0：应用集成，1：API，2：ETL
+     */
+    RuntimeClass?: number;
 }
 /**
  * ListRuntimesMC请求参数结构体
@@ -381,6 +385,11 @@ export interface AbstractRuntimeMC {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Deployed: boolean;
+    /**
+     * 环境扩展组件是否满足应用要求：0=true, 1=false 表示该应用需要扩展组件0(cdc)以及1(java)，但是独立环境有cdc无java，不满足发布要求
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MatchExtensions?: string;
 }
 /**
  * ListRuntimeDeployedInstancesMC返回参数结构体

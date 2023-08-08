@@ -201,6 +201,10 @@ export interface CreatePreparedPersonalEsignRequest {
   填写的FileId通过UploadFiles接口上传文件获取。
      */
     FileId?: string;
+    /**
+     * 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填
+     */
+    Agent?: Agent;
 }
 /**
  * DescribeIntegrationDepartments返回参数结构体
@@ -630,7 +634,7 @@ export interface DescribeIntegrationRolesRequest {
      */
     Operator: UserInfo;
     /**
-     * 返回最大数量，最大为200
+     * 指定每页多少条数据，单页最大200
      */
     Limit: number;
     /**
@@ -645,7 +649,7 @@ export interface DescribeIntegrationRolesRequest {
      */
     Filters?: Array<Filter>;
     /**
-     * 偏移量，默认为0，最大为2000
+     * 查询结果分页返回，此处指定第几页，如果不传默认从第一页返回。页码从 0 开始，即首页为 0，最大2000
      */
     Offset?: number;
 }
@@ -823,11 +827,11 @@ export interface DescribeOrganizationGroupOrganizationsRequest {
      */
     Operator: UserInfo;
     /**
-     * 单次查询成员企业最大返回数量
+     * 指定每页多少条数据，单页最大1000
      */
     Limit: number;
     /**
-     * 页面偏移量
+     * 查询结果分页返回，此处指定第几页，如果不传默认从第一页返回。页码从 0 开始，即首页为 0
      */
     Offset: number;
     /**
@@ -843,7 +847,7 @@ export interface DescribeOrganizationGroupOrganizationsRequest {
      */
     Export?: boolean;
     /**
-     * 成员企业id
+     * 成员企业机构 ID，在PC控制台 集团管理可获取
      */
     Id?: string;
 }
@@ -978,7 +982,7 @@ export interface CreateFlowGroupByFilesRequest {
  */
 export interface DescribeFlowComponentsResponse {
     /**
-     * 流程关联的填写控件信息
+     * 流程关联的填写控件信息，按照参与方进行分类返回。
   注意：此字段可能返回 null，表示取不到有效值。
      */
     RecipientComponentInfos?: Array<RecipientComponentInfo>;
@@ -1196,7 +1200,7 @@ export interface DescribeIntegrationEmployeesRequest {
      */
     Operator: UserInfo;
     /**
-     * 返回最大数量，最大为20
+     * 指定每页多少条数据，单页最大20
      */
     Limit: number;
     /**
@@ -1209,7 +1213,7 @@ export interface DescribeIntegrationEmployeesRequest {
      */
     Filters?: Array<Filter>;
     /**
-     * 偏移量，默认为0，最大为20000
+     * 查询结果分页返回，此处指定第几页，如果不传默认从第一页返回。页码从 0 开始，即首页为 0，最大20000
      */
     Offset?: number;
 }
@@ -1331,10 +1335,11 @@ export interface CreateSchemeUrlRequest {
      */
     Mobile?: string;
     /**
-     * 链接类型
-  HTTP：跳转电子签小程序的http_url，
-  APP：第三方APP或小程序跳转电子签小程序的path。
-  默认为HTTP类型
+     * 要跳转的链接类型
+  
+  - HTTP：跳转电子签小程序的http_url, 短信通知或者H5跳转适合此类型  (默认)
+  - APP： 第三方APP或小程序跳转电子签小程序的path,  APP或者小程序跳转适合此类型
+  
      */
     EndPoint?: string;
     /**
@@ -1346,7 +1351,12 @@ export interface CreateSchemeUrlRequest {
      */
     FlowGroupId?: string;
     /**
-     * 跳转页面 1: 小程序合同详情 2: 小程序合同列表页 0: 不传, 默认主页
+     * 要跳转到的页面类型
+  
+  - 0: 不传, 主页 (默认)
+  - 1: 小程序合同详情
+  - 2: 小程序合同列表页
+  
      */
     PathType?: number;
     /**
@@ -1363,10 +1373,10 @@ export interface CreateSchemeUrlRequest {
     /**
      * 生成的签署链接在签署过程隐藏的按钮列表, 可以设置隐藏的按钮列表如下
   
-  0:合同签署页面更多操作按钮
-  1:合同签署页面更多操作的拒绝签署按钮
-  2:合同签署页面更多操作的转他人处理按钮
-  3:签署成功页的查看详情按钮
+  - 0:合同签署页面更多操作按钮
+  - 1:合同签署页面更多操作的拒绝签署按钮
+  - 2:合同签署页面更多操作的转他人处理按钮
+  - 3:签署成功页的查看详情按钮
      */
     Hides?: Array<number>;
 }
@@ -1931,12 +1941,12 @@ export interface DescribeIntegrationEmployeesResponse {
      */
     Employees?: Array<Staff>;
     /**
-     * 偏移量，默认为0，最大为20000
+     * 查询结果分页返回，此处指定第几页，如果不传默认从第一页返回。页码从 0 开始，即首页为 0，最大20000
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Offset?: number;
     /**
-     * 返回最大数量，最大为20
+     * 指定每页多少条数据，单页最大20
      */
     Limit?: number;
     /**
@@ -2570,16 +2580,18 @@ export interface RecipientComponentInfo {
     RecipientId?: string;
     /**
      * 参与方填写状态
+  0-未填写
+  1-已填写
   注意：此字段可能返回 null，表示取不到有效值。
      */
     RecipientFillStatus?: string;
     /**
-     * 是否发起方
+     * 是否为发起方
   注意：此字段可能返回 null，表示取不到有效值。
      */
     IsPromoter?: boolean;
     /**
-     * 填写控件内容
+     * 填写控件列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Components?: Array<FilledComponent>;
@@ -2636,11 +2648,11 @@ export interface DescribeFlowComponentsRequest {
      */
     Operator: UserInfo;
     /**
-     * 电子签流程的Id
+     * 流程(合同)的编号
      */
     FlowId: string;
     /**
-     * 应用相关信息
+     * 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填
      */
     Agent?: Agent;
 }
@@ -2733,7 +2745,7 @@ export interface GroupOrganization {
      */
     JoinTime?: number;
     /**
-     * 是否使用审批流引擎，true-是，false-否
+     * 是否使用自建审批流引擎（即不是企微审批流引擎），true-是，false-否
   注意：此字段可能返回 null，表示取不到有效值。
      */
     FlowEngineEnable?: boolean;
@@ -2935,7 +2947,7 @@ export interface DeleteIntegrationEmployeesRequest {
      */
     Operator: UserInfo;
     /**
-     * 待移除员工的信息，userId和openId二选一，必填一个
+     * 待移除员工的信息，userId和openId二选一，必填一个，如果需要指定交接人的话，ReceiveUserId或者ReceiveOpenId字段二选一
      */
     Employees: Array<Staff>;
     /**
@@ -3076,7 +3088,7 @@ export interface DeleteIntegrationRoleUsersRequest {
      */
     RoleId: string;
     /**
-     * 用户信息
+     * 用户信息,最多 200 个用户，并且 UserId 和 OpenId 二选一，其他字段不需要传
      */
     Users: Array<UserInfo>;
     /**
@@ -3259,11 +3271,11 @@ export interface CreateIntegrationUserRolesRequest {
      */
     Operator: UserInfo;
     /**
-     * 绑定角色的用户id列表
+     * 绑定角色的用户id列表，不能重复，不能大于 100 个
      */
     UserIds: Array<string>;
     /**
-     * 绑定角色的角色id列表
+     * 绑定角色的角色id列表，不能重复，不能大于 100，可以通过DescribeIntegrationRoles接口获取
      */
     RoleIds: Array<string>;
     /**
@@ -3599,11 +3611,11 @@ export interface ModifyIntegrationDepartmentRequest {
      */
     Operator: UserInfo;
     /**
-     * 电子签部门ID
+     * 电子签部门ID,通过DescribeIntegrationDepartments接口可以获取
      */
     DeptId: string;
     /**
-     * 电子签父部门ID
+     * 电子签父部门ID，通过DescribeIntegrationDepartments接口可以获取
      */
     ParentDeptId?: string;
     /**
@@ -3977,7 +3989,7 @@ export interface DeleteIntegrationDepartmentRequest {
      */
     Operator: UserInfo;
     /**
-     * 电子签中的部门id
+     * 电子签中的部门id,通过DescribeIntegrationDepartments接口可获得
      */
     DeptId: string;
     /**
@@ -4623,11 +4635,11 @@ export interface DescribeExtendedServiceAuthInfosRequest {
  */
 export interface DescribeIntegrationRolesResponse {
     /**
-     * 偏移量，默认为0，最大为2000
+     * 查询结果分页返回，此处指定第几页，如果不传默认从第一页返回。页码从 0 开始，即首页为 0，最大2000
      */
     Offset?: number;
     /**
-     * 返回最大数量，最大为200
+     * 指定每页多少条数据，单页最大200
      */
     Limit?: number;
     /**
@@ -4665,7 +4677,7 @@ export interface CreateFlowRemindsRequest {
  */
 export interface UpdateIntegrationEmployeesRequest {
     /**
-     * 当前用户信息，OpenId与UserId二选一必填一个，OpenId是第三方客户ID，userId是用户实名后的电子签生成的ID,当传入客户系统openId，传入的openId需与电子签员工userId绑定，且参数Channel必填，Channel值为YUFU；
+     * 当前用户信息，UserId必填
      */
     Operator: UserInfo;
     /**
@@ -5266,7 +5278,7 @@ export interface DescribeOrganizationGroupOrganizationsResponse {
      */
     ActivedTotal?: number;
     /**
-     * 导出文件的url
+     * 如果入参Export为 true 时使用，表示导出Excel的url
   注意：此字段可能返回 null，表示取不到有效值。
      */
     ExportUrl?: string;

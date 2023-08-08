@@ -51,6 +51,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("GetCustomizationList", req, cb);
     }
     /**
+     * 统计并返回注册的说话人id总数
+     */
+    async VoicePrintCount(req, cb) {
+        return this.request("VoicePrintCount", req, cb);
+    }
+    /**
      * 用户通过该接口，可获得所有的热词表及其信息。
      */
     async GetAsrVocabList(req, cb) {

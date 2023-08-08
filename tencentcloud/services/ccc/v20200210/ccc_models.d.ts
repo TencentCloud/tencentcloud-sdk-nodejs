@@ -178,6 +178,19 @@ export interface DescribeIMCdrsResponse {
     RequestId?: string;
 }
 /**
+ * CreateAdminURL返回参数结构体
+ */
+export interface CreateAdminURLResponse {
+    /**
+     * 登录链接
+     */
+    URL?: string;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * CreateCallOutSession返回参数结构体
  */
 export interface CreateCallOutSessionResponse {
@@ -1165,6 +1178,15 @@ export interface ResetExtensionPasswordResponse {
      * 重置后密码
      */
     Password: string;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * ModifyStaff返回参数结构体
+ */
+export interface ModifyStaffResponse {
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2475,13 +2497,17 @@ export interface DescribeTelSessionResponse {
     RequestId?: string;
 }
 /**
- * ModifyStaff返回参数结构体
+ * CreateAdminURL请求参数结构体
  */
-export interface ModifyStaffResponse {
+export interface CreateAdminURLRequest {
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
      */
-    RequestId?: string;
+    SdkAppId: number;
+    /**
+     * 管理员账号
+     */
+    SeatUserId: string;
 }
 /**
  * DescribeStaffStatusMetrics返回参数结构体

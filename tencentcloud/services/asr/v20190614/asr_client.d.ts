@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { SetVocabStateResponse, CreateCustomizationResponse, VoicePrintDeleteRequest, DescribeAsyncRecognitionTasksRequest, ModifyCustomizationStateRequest, GetAsrVocabResponse, VoicePrintEnrollResponse, VoicePrintUpdateRequest, CreateAsyncRecognitionTaskRequest, GetAsrVocabRequest, DescribeTaskStatusResponse, SentenceRecognitionRequest, CloseAsyncRecognitionTaskResponse, CreateCustomizationRequest, DownloadAsrVocabResponse, CreateRecTaskResponse, ModifyCustomizationResponse, GetModelInfoRequest, CreateAsyncRecognitionTaskResponse, VoicePrintDeleteResponse, DeleteAsrVocabResponse, DownloadCustomizationResponse, CreateRecTaskRequest, GetAsrVocabListRequest, GetCustomizationListResponse, VoicePrintVerifyRequest, DownloadAsrVocabRequest, SetVocabStateRequest, CloseAsyncRecognitionTaskRequest, ModifyCustomizationRequest, DeleteCustomizationResponse, DeleteAsrVocabRequest, GetCustomizationListRequest, UpdateAsrVocabResponse, VoicePrintEnrollRequest, CreateAsrVocabResponse, CreateAsrVocabRequest, GetModelInfoResponse, UpdateAsrVocabRequest, VoicePrintVerifyResponse, DescribeTaskStatusRequest, SentenceRecognitionResponse, VoicePrintUpdateResponse, DeleteCustomizationRequest, ModifyCustomizationStateResponse, DescribeAsyncRecognitionTasksResponse, GetAsrVocabListResponse, DownloadCustomizationRequest } from "./asr_models";
+import { SetVocabStateResponse, CreateCustomizationResponse, VoicePrintDeleteRequest, DescribeAsyncRecognitionTasksRequest, ModifyCustomizationStateRequest, GetAsrVocabResponse, VoicePrintEnrollResponse, VoicePrintUpdateRequest, CreateAsyncRecognitionTaskRequest, GetAsrVocabRequest, DescribeTaskStatusResponse, SentenceRecognitionRequest, CloseAsyncRecognitionTaskResponse, CreateCustomizationRequest, DownloadAsrVocabResponse, CreateRecTaskResponse, ModifyCustomizationResponse, GetModelInfoRequest, CreateAsyncRecognitionTaskResponse, VoicePrintDeleteResponse, DeleteAsrVocabResponse, DownloadCustomizationResponse, CreateRecTaskRequest, GetAsrVocabListRequest, GetCustomizationListResponse, VoicePrintVerifyRequest, DownloadAsrVocabRequest, SetVocabStateRequest, CloseAsyncRecognitionTaskRequest, ModifyCustomizationRequest, DeleteCustomizationResponse, DeleteAsrVocabRequest, GetCustomizationListRequest, UpdateAsrVocabResponse, VoicePrintEnrollRequest, VoicePrintVerifyResponse, CreateAsrVocabResponse, CreateAsrVocabRequest, GetModelInfoResponse, UpdateAsrVocabRequest, VoicePrintCountRequest, DescribeTaskStatusRequest, SentenceRecognitionResponse, VoicePrintUpdateResponse, DeleteCustomizationRequest, VoicePrintCountResponse, ModifyCustomizationStateResponse, DescribeAsyncRecognitionTasksResponse, GetAsrVocabListResponse, DownloadCustomizationRequest } from "./asr_models";
 /**
  * asr client
  * @class
@@ -24,6 +24,10 @@ export declare class Client extends AbstractClient {
      * 查询自学习模型列表
      */
     GetCustomizationList(req: GetCustomizationListRequest, cb?: (error: string, rep: GetCustomizationListResponse) => void): Promise<GetCustomizationListResponse>;
+    /**
+     * 统计并返回注册的说话人id总数
+     */
+    VoicePrintCount(req?: VoicePrintCountRequest, cb?: (error: string, rep: VoicePrintCountResponse) => void): Promise<VoicePrintCountResponse>;
     /**
      * 用户通过该接口，可获得所有的热词表及其信息。
      */

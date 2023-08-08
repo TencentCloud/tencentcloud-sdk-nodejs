@@ -225,11 +225,11 @@ export interface DescribeDevicesResponse {
   /**
    * 资产总数
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 资产信息列表
    */
-  DeviceSet: Array<Device>
+  DeviceSet?: Array<Device>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2827,6 +2827,10 @@ export interface DescribeDevicesRequest {
    * 可提供按照多种类型过滤, 1 - Linux, 2 - Windows, 3 - MySQL, 4 - SQLServer
    */
   KindSet?: Array<number>
+  /**
+   * 资产是否包含托管账号。1，包含；0，不包含
+   */
+  ManagedAccount?: string
   /**
    * 过滤条件，可按照部门ID进行过滤
    */
