@@ -39,13 +39,11 @@ import {
   SmartStructuralOCRV2Request,
   TextDetectResponse,
   TollInvoiceOCRResponse,
-  VerifyBizLicenseResponse,
   FinanBillSliceOCRResponse,
   DriverLicenseOCRResponse,
   WaybillOCRResponse,
   CreateAIFormTaskRequest,
   Words,
-  VerifyBizLicenseRequest,
   TextDetectionEn,
   PermitOCRResponse,
   InvoiceGeneralOCRRequest,
@@ -67,7 +65,7 @@ import {
   InstitutionOCRResponse,
   VehicleInvoiceInfo,
   DriverLicenseOCRRequest,
-  BizLicenseVerifyResult,
+  OtherInvoiceItem,
   TextDetection,
   RecognizeTableOCRResponse,
   TextEduPaper,
@@ -99,7 +97,7 @@ import {
   MixedInvoiceDetectResponse,
   RecognizePhilippinesVoteIDOCRResponse,
   VatInvoiceUserInfo,
-  GeneralMachineItem,
+  InsuranceBillOCRResponse,
   GeneralAccurateOCRResponse,
   HmtResidentPermitOCRRequest,
   BusInvoice,
@@ -152,7 +150,6 @@ import {
   ImageEnhancementResponse,
   QrcodeImgSize,
   PassportOCRResponse,
-  VerifyBasicBizLicenseResponse,
   TextDetectRequest,
   RecognizeTravelCardOCRResponse,
   WordCoordPoint,
@@ -228,7 +225,7 @@ import {
   InsuranceBillInfo,
   GetTaskStateRequest,
   RecognizeMedicalInvoiceOCRRequest,
-  InsuranceBillOCRResponse,
+  GeneralMachineItem,
   ClassifyDetectInfo,
   GeneralEfficientOCRResponse,
   ShipInvoiceOCRRequest,
@@ -243,7 +240,6 @@ import {
   MainlandPermitOCRResponse,
   VatInvoice,
   MLIDCardOCRRequest,
-  OtherInvoiceItem,
   TaxiTicket,
   EnglishOCRResponse,
   BusInvoiceOCRRequest,
@@ -273,7 +269,6 @@ import {
   RecognizePhilippinesTinIDOCRRequest,
   RecognizeTableOCRRequest,
   EstateCertOCRRequest,
-  VerifyBasicBizLicenseRequest,
   BizLicenseOCRResponse,
   VatInvoiceOCRResponse,
   QuotaInvoiceOCRRequest,
@@ -305,20 +300,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: InsuranceBillOCRResponse) => void
   ): Promise<InsuranceBillOCRResponse> {
     return this.request("InsuranceBillOCR", req, cb)
-  }
-
-  /**
-     * 库源服务调整，该接口在2023年6月1日将正式下线。
-
-本接口支持营业执照信息的识别与准确性核验。
-
-您可以通过输入营业执照注册号或营业执照图片（若两者都输入则只用注册号做查询）进行核验，接口返回查询到的工商照面信息，并比对要校验的字段与查询结果的一致性。查询到工商信息包括：统一社会信用代码、经营期限、法人姓名、经营状态、经营业务范围、注册资本等。
-     */
-  async VerifyBasicBizLicense(
-    req: VerifyBasicBizLicenseRequest,
-    cb?: (error: string, rep: VerifyBasicBizLicenseResponse) => void
-  ): Promise<VerifyBasicBizLicenseResponse> {
-    return this.request("VerifyBasicBizLicense", req, cb)
   }
 
   /**
@@ -1376,22 +1357,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: PassportOCRResponse) => void
   ): Promise<PassportOCRResponse> {
     return this.request("PassportOCR", req, cb)
-  }
-
-  /**
-     * 库源服务调整，该接口在2023年6月1日将正式下线。
-
-本接口支持营业执照信息的识别与准确性核验，返回的真实工商照面信息比营业执照识别及核验（基础版）接口更详细。
-
-您可以输入营业执照注册号或营业执照图片（若两者都输入则只用注册号做查询），接口返回查询到的工商照面信息，并比对要校验的字段与查询结果的一致性。
-
-查询到工商信息包括：统一社会信用代码、组织机构代码、经营期限、法人姓名、经营状态、经营业务范围及方式、注册资金、注册币种、登记机关、开业日期、企业（机构）类型、注销日期、吊销日期、许可经营项目、一般经营项目、核准时间、省、地级市、区/县、住所所在行政区划代码、行业门类代码、行业门类名称、国民经济行业代码、国民经济行业名称、经营（业务）范围等。
-     */
-  async VerifyBizLicense(
-    req: VerifyBizLicenseRequest,
-    cb?: (error: string, rep: VerifyBizLicenseResponse) => void
-  ): Promise<VerifyBizLicenseResponse> {
-    return this.request("VerifyBizLicense", req, cb)
   }
 
   /**

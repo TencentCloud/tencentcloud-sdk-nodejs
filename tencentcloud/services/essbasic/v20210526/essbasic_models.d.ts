@@ -2683,14 +2683,15 @@ export interface FlowApproverInfo {
      */
     Name?: string;
     /**
-     * 签署人身份证件类型
+     * 签署人的证件类型
   1.ID_CARD 居民身份证
   2.HONGKONG_MACAO_AND_TAIWAN 港澳台居民居住证
   3.HONGKONG_AND_MACAO 港澳居民来往内地通行证
+  4.OTHER_CARD_TYPE 其他（需要使用该类型请先联系运营经理）
      */
     IdCardType?: string;
     /**
-     * 签署人证件号
+     * 签署人证件号（长度不超过18位）
      */
     IdCardNumber?: string;
     /**

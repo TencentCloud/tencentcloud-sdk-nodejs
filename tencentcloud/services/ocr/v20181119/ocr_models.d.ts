@@ -609,151 +609,6 @@ export interface TollInvoiceOCRResponse {
     RequestId?: string;
 }
 /**
- * VerifyBizLicense返回参数结构体
- */
-export interface VerifyBizLicenseResponse {
-    /**
-     * 状态码
-     */
-    ErrorCode?: number;
-    /**
-     * 统一社会信用代码
-     */
-    CreditCode?: string;
-    /**
-     * 组织机构代码
-     */
-    OrgCode?: string;
-    /**
-     * 经营期限自（YYYY-MM-DD）
-     */
-    OpenFrom?: string;
-    /**
-     * 经营期限至（YYYY-MM-DD）
-     */
-    OpenTo?: string;
-    /**
-     * 法人姓名
-     */
-    FrName?: string;
-    /**
-     * 经营状态，包括：成立、筹建、存续、在营、开业、在册、正常经营、开业登记中、登记成立、撤销、撤销登记、非正常户、告解、个体暂时吊销、个体转企业、吊销（未注销）、拟注销、已注销、（待）迁入、（待）迁出、停业、歇业、清算等。
-     */
-    EnterpriseStatus?: string;
-    /**
-     * 经营（业务）范围及方式
-     */
-    OperateScopeAndForm?: string;
-    /**
-     * 注册资金（单位:万元）
-     */
-    RegCap?: string;
-    /**
-     * 注册币种
-     */
-    RegCapCur?: string;
-    /**
-     * 登记机关
-     */
-    RegOrg?: string;
-    /**
-     * 开业日期（YYYY-MM-DD）
-     */
-    EsDate?: string;
-    /**
-     * 企业（机构）类型
-     */
-    EnterpriseType?: string;
-    /**
-     * 注销日期
-     */
-    CancelDate?: string;
-    /**
-     * 吊销日期
-     */
-    RevokeDate?: string;
-    /**
-     * 许可经营项目
-     */
-    AbuItem?: string;
-    /**
-     * 一般经营项目
-     */
-    CbuItem?: string;
-    /**
-     * 核准时间
-     */
-    ApprDate?: string;
-    /**
-     * 省（返回空值）
-     */
-    Province?: string;
-    /**
-     * 地级市（返回空值）
-     */
-    City?: string;
-    /**
-     * 区\县（返回空值）
-     */
-    County?: string;
-    /**
-     * 住所所在行政区划代码（返回空值）
-     */
-    AreaCode?: string;
-    /**
-     * 行业门类代码（返回空值）
-     */
-    IndustryPhyCode?: string;
-    /**
-     * 行业门类名称（返回空值）
-     */
-    IndustryPhyName?: string;
-    /**
-     * 国民经济行业代码（返回空值）
-     */
-    IndustryCode?: string;
-    /**
-     * 国民经济行业名称（返回空值）
-     */
-    IndustryName?: string;
-    /**
-     * 经营（业务）范围
-     */
-    OperateScope?: string;
-    /**
-     * 要核验的工商注册号
-     */
-    VerifyRegNo?: string;
-    /**
-     * 工商注册号
-     */
-    RegNo?: string;
-    /**
-     * 要核验的企业名称
-     */
-    VerifyEnterpriseName?: string;
-    /**
-     * 企业名称
-     */
-    EnterpriseName?: string;
-    /**
-     * 要核验的注册地址
-     */
-    VerifyAddress?: string;
-    /**
-     * 注册地址
-     */
-    Address?: string;
-    /**
-     * 验证结果
-     */
-    RegNumResult?: BizLicenseVerifyResult;
-    /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
-/**
  * FinanBillSliceOCR返回参数结构体
  */
 export interface FinanBillSliceOCRResponse {
@@ -896,45 +751,6 @@ export interface Words {
      * 候选字Character
      */
     Character: string;
-}
-/**
- * VerifyBizLicense请求参数结构体
- */
-export interface VerifyBizLicenseRequest {
-    /**
-     * 用于入参是营业执照图片的场景，ImageBase64和ImageUrl必须提供一个，如果都提供，只使用 ImageUrl。
-  支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-  支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。
-     */
-    ImageBase64?: string;
-    /**
-     * 用于入参是营业执照图片的场景，ImageBase64和ImageUrl必须提供一个，如果都提供，只使用 ImageUrl。
-  支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-  支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。
-     */
-    ImageUrl?: string;
-    /**
-     * 用于入参是营业执照图片的场景，表示需要校验的参数：RegNum（注册号或者统一社会信用代码），Name（企业名称），Address（经营地址）。选择后会返回相关参数校验结果。RegNum为必选，Name和Address可选。
-  格式为{RegNum: true, Name:true/false, Address:true/false}
-  
-  设置方式参考：
-  Config = Json.stringify({"Name":true,"Address":true})
-  API 3.0 Explorer 设置方式参考：
-  Config = {"Name":true,"Address":true}
-     */
-    ImageConfig?: string;
-    /**
-     * 用于入参是文本的场景，RegNum表示注册号或者统一社会信用代码。若没有传入营业执照图片，则RegNum为必选项，若图片和RegNum都传入，则只使用RegNum。
-     */
-    RegNum?: string;
-    /**
-     * 用于入参是文本的场景，Name表示企业名称。Name为可选项，填写后会返回Name的校验结果。
-     */
-    Name?: string;
-    /**
-     * 用于入参是文本的场景，Address表示经营地址，填写后会返回Address的校验结果。
-     */
-    Address?: string;
 }
 /**
  * 英文识别结果
@@ -1573,26 +1389,17 @@ export interface DriverLicenseOCRRequest {
     CardSide?: string;
 }
 /**
- * 验真接口
+ * OtherInvoiceItem
  */
-export interface BizLicenseVerifyResult {
+export interface OtherInvoiceItem {
     /**
-     * “0“：一致
-  “-1”：不一致
+     * 票面key值
      */
-    RegNum: string;
+    Name?: string;
     /**
-     * “0“：一致
-  “-1”：不一致
-  “”：不验真
+     * 票面value值
      */
-    Name: string;
-    /**
-     * “0“：一致
-  “-1”：不一致
-  “”：不验真
-     */
-    Address: string;
+    Value?: string;
 }
 /**
  * 文字识别结果
@@ -2509,41 +2316,17 @@ export interface VatInvoiceUserInfo {
     FinancialAccount: string;
 }
 /**
- * 通用机打发票条目
+ * InsuranceBillOCR返回参数结构体
  */
-export interface GeneralMachineItem {
+export interface InsuranceBillOCRResponse {
     /**
-     * 项目名称
+     * 保险单据识别结果，具体内容请点击左侧链接。
      */
-    Name?: string;
+    InsuranceBillInfos: Array<InsuranceBillInfo>;
     /**
-     * 规格型号
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
-    Specification?: string;
-    /**
-     * 单位
-     */
-    Unit?: string;
-    /**
-     * 数量
-     */
-    Quantity?: string;
-    /**
-     * 单价
-     */
-    Price?: string;
-    /**
-     * 金额
-     */
-    Total?: string;
-    /**
-     * 税率
-     */
-    TaxRate?: string;
-    /**
-     * 税额
-     */
-    Tax?: string;
+    RequestId?: string;
 }
 /**
  * GeneralAccurateOCR返回参数结构体
@@ -4695,87 +4478,6 @@ export interface PassportOCRResponse {
      * 名
      */
     FirstName?: string;
-    /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
-/**
- * VerifyBasicBizLicense返回参数结构体
- */
-export interface VerifyBasicBizLicenseResponse {
-    /**
-     * 状态码，成功时返回0
-     */
-    ErrorCode?: number;
-    /**
-     * 统一社会信用代码
-     */
-    CreditCode?: string;
-    /**
-     * 经营期限自（YYYY-MM-DD）
-     */
-    Opfrom?: string;
-    /**
-     * 经营期限至（YYYY-MM-DD）
-     */
-    Opto?: string;
-    /**
-     * 法人姓名
-     */
-    Frname?: string;
-    /**
-     * 经营状态，包括：成立、筹建、存续、在营、开业、在册、正常经营、开业登记中、登记成立、撤销、撤销登记、非正常户、告解、个体暂时吊销、个体转企业、吊销（未注销）、拟注销、已注销、（待）迁入、（待）迁出、停业、歇业、清算等。
-     */
-    Entstatus?: string;
-    /**
-     * 经营业务范围
-     */
-    Zsopscope?: string;
-    /**
-     * 查询的状态信息
-     */
-    Reason?: string;
-    /**
-     * 原注册号
-     */
-    Oriregno?: string;
-    /**
-     * 要核验的工商注册号
-     */
-    VerifyRegno?: string;
-    /**
-     * 工商注册号
-     */
-    Regno?: string;
-    /**
-     * 要核验的企业名称
-     */
-    VerifyEntname?: string;
-    /**
-     * 企业名称
-     */
-    Entname?: string;
-    /**
-     * 要核验的住址
-     */
-    VerifyDom?: string;
-    /**
-     * 住址
-     */
-    Dom?: string;
-    /**
-     * 验证结果
-     */
-    RegNumResult?: BizLicenseVerifyResult;
-    /**
-     * 注册资本（单位：万元）,只有输入参数regCapital为1的时候才输出
-     */
-    RegCapital?: string;
-    /**
-     * 成立/注册日期，只有输入参数EstablishTime为true时展示，默认为空
-     */
-    EstablishTime?: string;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -7133,17 +6835,41 @@ export interface RecognizeMedicalInvoiceOCRRequest {
     PdfPageNumber?: number;
 }
 /**
- * InsuranceBillOCR返回参数结构体
+ * 通用机打发票条目
  */
-export interface InsuranceBillOCRResponse {
+export interface GeneralMachineItem {
     /**
-     * 保险单据识别结果，具体内容请点击左侧链接。
+     * 项目名称
      */
-    InsuranceBillInfos: Array<InsuranceBillInfo>;
+    Name?: string;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     * 规格型号
      */
-    RequestId?: string;
+    Specification?: string;
+    /**
+     * 单位
+     */
+    Unit?: string;
+    /**
+     * 数量
+     */
+    Quantity?: string;
+    /**
+     * 单价
+     */
+    Price?: string;
+    /**
+     * 金额
+     */
+    Total?: string;
+    /**
+     * 税率
+     */
+    TaxRate?: string;
+    /**
+     * 税额
+     */
+    Tax?: string;
 }
 /**
  * 卡证智能分类结果
@@ -7662,19 +7388,6 @@ export interface MLIDCardOCRRequest {
      * 是否返回图片，默认false
      */
     RetImage?: boolean;
-}
-/**
- * OtherInvoiceItem
- */
-export interface OtherInvoiceItem {
-    /**
-     * 票面key值
-     */
-    Name?: string;
-    /**
-     * 票面value值
-     */
-    Value?: string;
 }
 /**
  * 出租车发票
@@ -8511,53 +8224,6 @@ export interface EstateCertOCRRequest {
   非腾讯云存储的 Url 速度和稳定性可能受一定影响。
      */
     ImageUrl?: string;
-}
-/**
- * VerifyBasicBizLicense请求参数结构体
- */
-export interface VerifyBasicBizLicenseRequest {
-    /**
-     * 用于入参是营业执照图片的场景，ImageBase64和ImageUrl必须提供一个，如果都提供，只使用 ImageUrl。
-  支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-  支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。
-     */
-    ImageBase64?: string;
-    /**
-     * 用于入参是营业执照图片的场景，ImageBase64和ImageUrl必须提供一个，如果都提供，只使用 ImageUrl。
-  支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-  支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。
-     */
-    ImageUrl?: string;
-    /**
-     * 用于入参是营业执照图片的场景，表示需要校验的参数：RegNum（注册号或者统一社会信用代码），Name（企业名称），Address（经营地址）。选择后会返回相关参数校验结果。RegNum为必选，Name和Address可选。
-  格式为{RegNum: true, Name:true/false, Address:true/false}
-  
-  设置方式参考：
-  Config = Json.stringify({"Name":true,"Address":true})
-  API 3.0 Explorer 设置方式参考：
-  Config = {"Name":true,"Address":true}
-     */
-    ImageConfig?: string;
-    /**
-     * 用于入参是文本的场景，RegNum表示注册号或者统一社会信用代码。若没有传入营业执照图片，则RegNum为必选项，若图片和RegNum都传入，则只使用RegNum。
-     */
-    RegNum?: string;
-    /**
-     * 用于入参是文本的场景，Name表示企业名称。Name为可选项，填写后会返回Name的校验结果。
-     */
-    Name?: string;
-    /**
-     * 用于入参是文本的场景，Address表示经营地址。Address为可选项，填写后会返回Address的校验结果。
-     */
-    Address?: string;
-    /**
-     * 1表示输出注册资本字段（单位：万元），其他值表示不输出。默认不输出。
-     */
-    RegCapital?: number;
-    /**
-     * true表示展示成立/注册日期
-     */
-    EstablishTime?: boolean;
 }
 /**
  * BizLicenseOCR返回参数结构体

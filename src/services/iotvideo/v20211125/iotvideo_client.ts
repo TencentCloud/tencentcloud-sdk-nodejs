@@ -157,6 +157,7 @@ import {
   BalanceTransaction,
   FirmwareTaskInfo,
   DescribeProductDynamicRegisterRequest,
+  ResetCloudStorageEventRequest,
   DescribeFirmwareTaskDistributionResponse,
   DescribeBatchResponse,
   DeviceSignatureInfo,
@@ -200,6 +201,7 @@ import {
   CallTRTCDeviceResponse,
   ModifyDeviceLogLevelResponse,
   CreateDataForwardRequest,
+  ResetCloudStorageEventResponse,
   BatchUpdateFirmwareRequest,
   ModifyProductDynamicRegisterRequest,
   DescribeDeviceDataStatsResponse,
@@ -534,6 +536,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeCloudStorageDateResponse) => void
   ): Promise<DescribeCloudStorageDateResponse> {
     return this.request("DescribeCloudStorageDate", req, cb)
+  }
+
+  /**
+   * 设置转发权限
+   */
+  async SetForwardAuth(
+    req: SetForwardAuthRequest,
+    cb?: (error: string, rep: SetForwardAuthResponse) => void
+  ): Promise<SetForwardAuthResponse> {
+    return this.request("SetForwardAuth", req, cb)
   }
 
   /**
@@ -1087,13 +1099,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 设置转发权限
+   * 重置云存事件
    */
-  async SetForwardAuth(
-    req: SetForwardAuthRequest,
-    cb?: (error: string, rep: SetForwardAuthResponse) => void
-  ): Promise<SetForwardAuthResponse> {
-    return this.request("SetForwardAuth", req, cb)
+  async ResetCloudStorageEvent(
+    req: ResetCloudStorageEventRequest,
+    cb?: (error: string, rep: ResetCloudStorageEventResponse) => void
+  ): Promise<ResetCloudStorageEventResponse> {
+    return this.request("ResetCloudStorageEvent", req, cb)
   }
 
   /**

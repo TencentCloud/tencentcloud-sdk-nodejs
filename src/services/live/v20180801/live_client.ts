@@ -535,7 +535,8 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 查询某段时间内5分钟粒度的各播放http状态码的个数。
+     * 该接口为监控数据接口，数据采集及统计方式与计费数据不同，仅供运营分析使用，不能用于计费对账参考。
+查询某段时间内5分钟粒度的各播放http状态码的个数。
 备注：数据延迟1小时，如10:00-10:59点的数据12点才能查到。
      */
   async DescribeHttpStatusInfoList(
@@ -546,8 +547,9 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询某省份某运营商下行播放数据，包括带宽，流量，请求数，并发连接数信息。
-   */
+     * 该接口为监控数据接口，数据采集及统计方式与计费数据不同，仅供运营分析使用，不能用于计费对账参考。
+查询某省份某运营商下行播放数据，包括带宽，流量，请求数，并发连接数信息。
+     */
   async DescribeProvinceIspPlayInfoList(
     req: DescribeProvinceIspPlayInfoListRequest,
     cb?: (error: string, rep: DescribeProvinceIspPlayInfoListResponse) => void
@@ -566,8 +568,9 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询流id的上行推流质量数据，包括音视频的帧率，码率，流逝时间，编码格式等。
-   */
+     * 该接口为监控数据接口，数据采集及统计方式与计费数据不同，仅供运营分析使用，不能用于计费对账参考。
+查询流id的上行推流质量数据，包括音视频的帧率，码率，流逝时间，编码格式等。
+     */
   async DescribeStreamPushInfoList(
     req: DescribeStreamPushInfoListRequest,
     cb?: (error: string, rep: DescribeStreamPushInfoListResponse) => void
@@ -647,8 +650,9 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询某段时间top n客户端ip汇总信息（暂支持top 1000）
-   */
+     * 该接口为监控数据接口，数据采集及统计方式与计费数据不同，仅供运营分析使用，不能用于计费对账参考。
+查询某段时间top n客户端ip汇总信息（暂支持top 1000）
+     */
   async DescribeTopClientIpSumInfoList(
     req: DescribeTopClientIpSumInfoListRequest,
     cb?: (error: string, rep: DescribeTopClientIpSumInfoListResponse) => void
@@ -949,8 +953,9 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询下行播放错误码信息。
-   */
+     * 该接口为监控数据接口，数据采集及统计方式与计费数据不同，仅供运营分析使用，不能用于计费对账参考。
+查询下行播放错误码信息。
+     */
   async DescribePlayErrorCodeSumInfoList(
     req: DescribePlayErrorCodeSumInfoListRequest,
     cb?: (error: string, rep: DescribePlayErrorCodeSumInfoListResponse) => void
@@ -981,8 +986,9 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询天维度每条流的播放数据，包括总流量等。
-   */
+     * 该接口为监控数据接口，数据采集及统计方式与计费数据不同，仅供运营分析使用，不能用于计费对账参考。
+查询天维度每条流的播放数据，包括总流量等。
+     */
   async DescribeStreamDayPlayInfoList(
     req: DescribeStreamDayPlayInfoListRequest,
     cb?: (error: string, rep: DescribeStreamDayPlayInfoListResponse) => void
@@ -1196,8 +1202,9 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
   }
 
   /**
-   * 查询按省份和运营商分组的下行播放数据。
-   */
+     * 该接口为监控数据接口，数据采集及统计方式与计费数据不同，仅供运营分析使用，不能用于计费对账参考。
+查询按省份和运营商分组的下行播放数据。
+     */
   async DescribeGroupProIspPlayInfoList(
     req: DescribeGroupProIspPlayInfoListRequest,
     cb?: (error: string, rep: DescribeGroupProIspPlayInfoListResponse) => void
@@ -1206,8 +1213,9 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
   }
 
   /**
-   * 查询播放数据，支持按流名称查询详细播放数据，也可按播放域名查询详细总数据，数据延迟4分钟左右。
-   */
+     * 该接口为监控数据接口，数据采集及统计方式与计费数据不同，仅供运营分析使用，不能用于计费对账参考。
+查询播放数据，支持按流名称查询详细播放数据，也可按播放域名查询详细总数据，数据延迟4分钟左右。
+     */
   async DescribeStreamPlayInfoList(
     req: DescribeStreamPlayInfoListRequest,
     cb?: (error: string, rep: DescribeStreamPlayInfoListResponse) => void
@@ -1346,8 +1354,9 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
   }
 
   /**
-   * 支持查询某天或某段时间的转码详细信息。由于转码数据量较大，如果查询时间跨度太长可能会拉不到数据，可以尝试将查询时间范围缩小些再重试。
-   */
+     * 该接口为监控数据接口，数据采集及统计方式与计费数据不同，仅供运营分析使用，不能用于计费对账参考。
+支持查询某天或某段时间的转码详细信息。由于转码数据量较大，如果查询时间跨度太长可能会拉不到数据，可以尝试将查询时间范围缩小些再重试。
+     */
   async DescribeLiveTranscodeDetailInfo(
     req: DescribeLiveTranscodeDetailInfoRequest,
     cb?: (error: string, rep: DescribeLiveTranscodeDetailInfoResponse) => void
@@ -1467,9 +1476,8 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
   }
 
   /**
-     * 查询下行播放错误码信息，某段时间内1分钟粒度的各http错误码出现的次数，包括4xx，5xx。
-
-
+     * 该接口为监控数据接口，数据采集及统计方式与计费数据不同，仅供运营分析使用，不能用于计费对账参考。
+查询下行播放错误码信息，某段时间内1分钟粒度的各http错误码出现的次数，包括4xx，5xx。
      */
   async DescribePlayErrorCodeDetailInfoList(
     req: DescribePlayErrorCodeDetailInfoListRequest,
@@ -1568,8 +1576,9 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
   }
 
   /**
-   * 查询实时的域名维度下行播放数据，由于数据处理有耗时，接口默认查询4分钟前的准实时数据。
-   */
+     * 该接口为监控数据接口，数据采集及统计方式与计费数据不同，仅供运营分析使用，不能用于计费对账参考。
+查询实时的域名维度下行播放数据，由于数据处理有耗时，接口默认查询4分钟前的准实时数据。
+     */
   async DescribeLiveDomainPlayInfoList(
     req: DescribeLiveDomainPlayInfoListRequest,
     cb?: (error: string, rep: DescribeLiveDomainPlayInfoListResponse) => void
@@ -1589,8 +1598,9 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
   }
 
   /**
-   * 用于查询回调事件。
-   */
+     * 该接口为监控数据接口，数据采集及统计方式与计费数据不同，仅供运营分析使用，不能用于计费对账参考。
+用于查询回调事件。
+     */
   async DescribeCallbackRecordsList(
     req: DescribeCallbackRecordsListRequest,
     cb?: (error: string, rep: DescribeCallbackRecordsListResponse) => void
@@ -1799,8 +1809,9 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
   }
 
   /**
-   * 查询某段时间内每个国家地区每个省份每个运营商的平均每秒流量，总流量，总请求数信息。
-   */
+     * 该接口为监控数据接口，数据采集及统计方式与计费数据不同，仅供运营分析使用，不能用于计费对账参考。
+查询某段时间内每个国家地区每个省份每个运营商的平均每秒流量，总流量，总请求数信息。
+     */
   async DescribeProIspPlaySumInfoList(
     req: DescribeProIspPlaySumInfoListRequest,
     cb?: (error: string, rep: DescribeProIspPlaySumInfoListResponse) => void
@@ -1809,8 +1820,9 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
   }
 
   /**
-   * 输入某个时间点（1分钟维度），查询该时间点所有流的下行信息。
-   */
+     * 该接口为监控数据接口，数据采集及统计方式与计费数据不同，仅供运营分析使用，不能用于计费对账参考。
+输入某个时间点（1分钟维度），查询该时间点所有流的下行信息。
+     */
   async DescribeAllStreamPlayInfoList(
     req: DescribeAllStreamPlayInfoListRequest,
     cb?: (error: string, rep: DescribeAllStreamPlayInfoListResponse) => void
@@ -1989,8 +2001,9 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
   }
 
   /**
-   * 查询所有实时流的推流信息，包括客户端IP，服务端IP，帧率，码率，域名，开始推流时间。
-   */
+     * 该接口为监控数据接口，数据采集及统计方式与计费数据不同，仅供运营分析使用，不能用于计费对账参考。
+查询所有实时流的推流信息，包括客户端IP，服务端IP，帧率，码率，域名，开始推流时间。
+     */
   async DescribeLiveStreamPushInfoList(
     req: DescribeLiveStreamPushInfoListRequest,
     cb?: (error: string, rep: DescribeLiveStreamPushInfoListResponse) => void

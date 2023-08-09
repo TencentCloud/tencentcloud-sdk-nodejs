@@ -131,7 +131,7 @@ export declare class Client extends AbstractClient {
     /**
      * 本接口（AcceptVpcPeeringConnection）用于接受对等连接请求。
      */
-    AcceptVpcPeeringConnection(req?: AcceptVpcPeeringConnectionRequest, cb?: (error: string, rep: AcceptVpcPeeringConnectionResponse) => void): Promise<AcceptVpcPeeringConnectionResponse>;
+    AcceptVpcPeeringConnection(req: AcceptVpcPeeringConnectionRequest, cb?: (error: string, rep: AcceptVpcPeeringConnectionResponse) => void): Promise<AcceptVpcPeeringConnectionResponse>;
     /**
      * 本接口（DescribeVpcPrivateIpAddresses）用于查询VPC内网IP信息。<br />
 只能查询已使用的IP信息，当查询未使用的IP时，本接口不会报错，但不会出现在返回结果里。
@@ -550,7 +550,7 @@ export declare class Client extends AbstractClient {
     /**
      * 本接口（DeleteVpcPeeringConnection）用于删除私有网络对等连接。
      */
-    DeleteVpcPeeringConnection(req?: DeleteVpcPeeringConnectionRequest, cb?: (error: string, rep: DeleteVpcPeeringConnectionResponse) => void): Promise<DeleteVpcPeeringConnectionResponse>;
+    DeleteVpcPeeringConnection(req: DeleteVpcPeeringConnectionRequest, cb?: (error: string, rep: DeleteVpcPeeringConnectionResponse) => void): Promise<DeleteVpcPeeringConnectionResponse>;
     /**
      * 本接口（MigratePrivateIpAddress）用于弹性网卡内网IP迁移。
 * 该接口用于将一个内网IP从一个弹性网卡上迁移到另外一个弹性网卡，主IP地址不支持迁移。

@@ -164,27 +164,27 @@ export interface DescribeHostDeployRecordDetailResponse {
    * 总数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 证书部署记录列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DeployRecordDetailList: Array<DeployRecordDetail>
+  DeployRecordDetailList?: Array<DeployRecordDetail>
   /**
    * 成功总数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SuccessTotalCount: number
+  SuccessTotalCount?: number
   /**
    * 失败总数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  FailedTotalCount: number
+  FailedTotalCount?: number
   /**
    * 部署中总数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RunningTotalCount: number
+  RunningTotalCount?: number
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -198,83 +198,98 @@ export interface DeployRecordDetail {
   /**
    * 部署记录详情ID
    */
-  Id: number
+  Id?: number
   /**
    * 部署证书ID
    */
-  CertId: string
+  CertId?: string
   /**
    * 原绑定证书ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  OldCertId: string
+  OldCertId?: string
   /**
    * 部署实例ID
    */
-  InstanceId: string
+  InstanceId?: string
   /**
    * 部署实例名称
    */
-  InstanceName: string
+  InstanceName?: string
   /**
    * 部署监听器ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ListenerId: string
+  ListenerId?: string
   /**
    * 部署域名列表
    */
-  Domains: Array<string>
+  Domains?: Array<string>
   /**
    * 部署监听器协议
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Protocol: string
+  Protocol?: string
   /**
    * 部署状态
    */
-  Status: number
+  Status?: number
   /**
    * 部署错误信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ErrorMsg: string
+  ErrorMsg?: string
   /**
    * 部署记录详情创建时间
    */
-  CreateTime: string
+  CreateTime?: string
   /**
    * 部署记录详情最后一次更新时间
    */
-  UpdateTime: string
+  UpdateTime?: string
   /**
    * 部署监听器名称
    */
-  ListenerName: string
+  ListenerName?: string
   /**
    * 是否开启SNI
    */
-  SniSwitch: number
+  SniSwitch?: number
   /**
    * COS存储桶名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Bucket: string
+  Bucket?: string
   /**
    * 命名空间名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Namespace: string
+  Namespace?: string
   /**
    * secret名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SecretName: string
+  SecretName?: string
   /**
    * 端口
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Port?: number
+  /**
+   * TCB环境ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EnvId?: string
+  /**
+   * 部署的TCB类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TCBType?: string
+  /**
+   * 部署的TCB地域
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Region?: string
 }
 
 /**
@@ -1329,81 +1344,81 @@ export interface UpdateRecordDetail {
   /**
    * 详情记录id
    */
-  Id: number
+  Id?: number
   /**
    * 新证书ID
    */
-  CertId: string
+  CertId?: string
   /**
    * 旧证书ID
    */
-  OldCertId: string
+  OldCertId?: string
   /**
    * 部署域名列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Domains: Array<string>
+  Domains?: Array<string>
   /**
    * 部署资源类型
    */
-  ResourceType: string
+  ResourceType?: string
   /**
    * 部署地域
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Region: string
+  Region?: string
   /**
    * 部署状态
    */
-  Status: number
+  Status?: number
   /**
    * 部署错误信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ErrorMsg: string
+  ErrorMsg?: string
   /**
    * 部署时间
    */
-  CreateTime: string
+  CreateTime?: string
   /**
    * 最后一次更新时间
    */
-  UpdateTime: string
+  UpdateTime?: string
   /**
    * 部署实例ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  InstanceId: string
+  InstanceId?: string
   /**
    * 部署实例名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  InstanceName: string
+  InstanceName?: string
   /**
    * 部署监听器ID（CLB专用）
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ListenerId: string
+  ListenerId?: string
   /**
    * 部署监听器名称（CLB专用）
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ListenerName: string
+  ListenerName?: string
   /**
    * 协议
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Protocol: string
+  Protocol?: string
   /**
    * 是否开启SNI（CLB专用）
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SniSwitch: number
+  SniSwitch?: number
   /**
    * bucket名称（COS专用）
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Bucket: string
+  Bucket?: string
   /**
    * 端口
 注意：此字段可能返回 null，表示取不到有效值。
@@ -1419,6 +1434,16 @@ export interface UpdateRecordDetail {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SecretName?: string
+  /**
+   * 环境ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EnvId?: string
+  /**
+   * TCB部署类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TCBType?: string
 }
 
 /**
@@ -1510,7 +1535,7 @@ export interface UploadConfirmLetterResponse {
  */
 export interface DescribeHostUpdateRecordDetailRequest {
   /**
-   * 待部署的证书ID
+   * 一键更新记录ID
    */
   DeployRecordId: string
   /**
@@ -2326,6 +2351,10 @@ export interface DescribeCertificatesRequest {
    * 筛选证书是否即将过期，传1是筛选，0不筛选
    */
   FilterExpiring?: number
+  /**
+   * 是否可托管，可选值：1 = 可托管，0 =  不可托管。
+   */
+  Hostable?: number
 }
 
 /**
@@ -2654,7 +2683,7 @@ export interface SubmitAuditManagerResponse {
  */
 export interface DescribeHostDeployRecordDetailRequest {
   /**
-   * 待部署的证书ID
+   * 部署记录ID
    */
   DeployRecordId: string
   /**
@@ -2680,11 +2709,12 @@ export interface UpdateCertificateInstanceRequest {
    */
   OldCertificateId: string
   /**
-   * 需要部署的资源类型
+   * 需要部署的资源类型，参数值可选：clb、cdn、waf、live、ddos、teo、apigateway、vod、tke、tcb
    */
   ResourceTypes: Array<string>
   /**
    * 需要部署的地域列表（废弃）
+   * @deprecated
    */
   Regions?: Array<string>
   /**
@@ -3669,6 +3699,10 @@ export interface UploadCertificateRequest {
    * 证书用途/证书来源。“CLB，CDN，WAF，LIVE，DDOS”
    */
   CertificateUse?: string
+  /**
+   * 标签列表
+   */
+  Tags?: Array<Tags>
   /**
    * 相同的证书是否允许重复上传
    */

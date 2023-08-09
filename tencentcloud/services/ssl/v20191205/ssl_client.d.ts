@@ -88,7 +88,7 @@ export declare class Client extends AbstractClient {
      */
     CompleteCertificate(req: CompleteCertificateRequest, cb?: (error: string, rep: CompleteCertificateResponse) => void): Promise<CompleteCertificateResponse>;
     /**
-     * 一键更新旧证书资源
+     * 一键更新旧证书资源，本接口为异步接口， 调用之后DeployRecordId为0表示任务进行中， 当返回DeployRecordId大于0则表示任务创建成功。 未创建成功则会抛出异常
      */
     UpdateCertificateInstance(req: UpdateCertificateInstanceRequest, cb?: (error: string, rep: UpdateCertificateInstanceResponse) => void): Promise<UpdateCertificateInstanceResponse>;
     /**

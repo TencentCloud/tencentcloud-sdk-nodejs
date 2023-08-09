@@ -931,6 +931,26 @@ export interface DescribeCVMAssetsRequest {
 }
 
 /**
+ * DescribeListenerList返回参数结构体
+ */
+export interface DescribeListenerListResponse {
+  /**
+   * 总数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Total?: number
+  /**
+   * 监听器列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Data?: Array<ClbListenerListInfo>
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 任务高级配置
  */
 export interface TaskAdvanceCFG {
@@ -1332,6 +1352,72 @@ export interface DescribeRiskCenterAssetViewPortRiskListRequest {
    * 过滤内容
    */
   Filter?: Filter
+}
+
+/**
+ * clb实例和监听器信息
+ */
+export interface ClbListenerListInfo {
+  /**
+   * 监听器id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ListenerId?: string
+  /**
+   * 监听器名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ListenerName?: string
+  /**
+   * 负载均衡Id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LoadBalancerId?: string
+  /**
+   * 负载均衡名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LoadBalancerName?: string
+  /**
+   * 协议
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Protocol?: string
+  /**
+   * 地域
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Region?: string
+  /**
+   * 负载均衡ip
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Vip?: string
+  /**
+   * 端口
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VPort?: number
+  /**
+   * 区域
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Zone?: string
+  /**
+   * 私有网络id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NumericalVpcId?: number
+  /**
+   * 负载均衡类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LoadBalancerType?: string
+  /**
+   * 监听器域名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Domain?: string
 }
 
 /**
@@ -2137,6 +2223,16 @@ export interface AssetViewPortRisk {
    * 来源
    */
   From?: string
+}
+
+/**
+ * DescribeListenerList请求参数结构体
+ */
+export interface DescribeListenerListRequest {
+  /**
+   * -
+   */
+  Filter?: Filter
 }
 
 /**

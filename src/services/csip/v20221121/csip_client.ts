@@ -41,6 +41,7 @@ import {
   Vpc,
   DescribeRiskCenterAssetViewVULRiskListResponse,
   DescribeCVMAssetsRequest,
+  DescribeListenerListResponse,
   TaskAdvanceCFG,
   DBAssetVO,
   ScanTaskInfo,
@@ -50,6 +51,7 @@ import {
   DescribeSubnetAssetsResponse,
   DescribeDbAssetInfoRequest,
   DescribeRiskCenterAssetViewPortRiskListRequest,
+  ClbListenerListInfo,
   DescribeCVMAssetsResponse,
   DescribeVpcAssetsRequest,
   TaskAssetObject,
@@ -61,6 +63,7 @@ import {
   DescribeClusterPodAssetsResponse,
   AssetBaseInfoResponse,
   AssetViewPortRisk,
+  DescribeListenerListRequest,
   DescribeDomainAssetsRequest,
   CreateDomainAndIpResponse,
   DescribePublicIpAssetsRequest,
@@ -198,6 +201,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeRiskCenterAssetViewPortRiskListResponse) => void
   ): Promise<DescribeRiskCenterAssetViewPortRiskListResponse> {
     return this.request("DescribeRiskCenterAssetViewPortRiskList", req, cb)
+  }
+
+  /**
+   * 查询clb监听器列表
+   */
+  async DescribeListenerList(
+    req: DescribeListenerListRequest,
+    cb?: (error: string, rep: DescribeListenerListResponse) => void
+  ): Promise<DescribeListenerListResponse> {
+    return this.request("DescribeListenerList", req, cb)
   }
 
   /**

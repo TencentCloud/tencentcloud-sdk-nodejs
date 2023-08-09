@@ -136,6 +136,16 @@ export interface SkipCheckItemResponse {
 }
 
 /**
+ * IsolateMigrateJob请求参数结构体
+ */
+export interface IsolateMigrateJobRequest {
+  /**
+   * 任务id
+   */
+  JobId: string
+}
+
+/**
  * ResizeSyncJob返回参数结构体
  */
 export interface ResizeSyncJobResponse {
@@ -292,13 +302,144 @@ export interface DescribeCompareReportResponse {
 }
 
 /**
- * IsolateMigrateJob请求参数结构体
+ * 数据同步中的描述源端和目的端的信息
  */
-export interface IsolateMigrateJobRequest {
+export interface Endpoint {
   /**
-   * 任务id
+   * 地域英文名，如：ap-guangzhou
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  JobId: string
+  Region?: string
+  /**
+   * tdsql mysql版的节点类型，枚举值为proxy、set
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Role?: string
+  /**
+   * 数据库内核类型，tdsql中用于区分不同内核：percona,mariadb,mysql
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DbKernel?: string
+  /**
+   * 数据库实例ID，格式如：cdb-powiqx8q
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceId?: string
+  /**
+   * 实例的IP地址，接入类型为非cdb时此项必填
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Ip?: string
+  /**
+   * 实例端口，接入类型为非cdb时此项必填
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Port?: number
+  /**
+   * 用户名，对于访问需要用户名密码认证的实例必填
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  User?: string
+  /**
+   * 密码，对于访问需要用户名密码认证的实例必填
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Password?: string
+  /**
+   * 数据库名，数据库为cdwpg时，需要提供
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DbName?: string
+  /**
+   * 私有网络ID，对于私有网络、专线、VPN的接入方式此项必填，格式如：vpc-92jblxto
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VpcId?: string
+  /**
+   * 私有网络下的子网ID，对于私有网络、专线、VPN的接入方式此项必填，格式如：subnet-3paxmkdz
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SubnetId?: string
+  /**
+   * CVM实例短ID，格式如：ins-olgl39y8，与云服务器控制台页面显示的实例ID相同。如果是CVM自建实例，需要传递此字段
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CvmInstanceId?: string
+  /**
+   * 专线网关ID，对于专线接入类型此项必填，格式如：dcg-0rxtqqxb
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UniqDcgId?: string
+  /**
+   * VPN网关ID，对于vpn接入类型此项必填，格式如：vpngw-9ghexg7q
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UniqVpnGwId?: string
+  /**
+   * 云联网ID，对于云联网接入类型此项必填，如：ccn-afp6kltc
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CcnId?: string
+  /**
+   * 云厂商类型，当实例为RDS实例时，填写为aliyun, 其他情况均填写others，默认为others
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Supplier?: string
+  /**
+   * 数据库版本，当实例为RDS实例时才有效，其他实例忽略，格式如：5.6或者5.7，默认为5.6
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EngineVersion?: string
+  /**
+   * 实例所属账号，如果为跨账号实例此项必填
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Account?: string
+  /**
+   * 资源所属账号 为空或self(表示本账号内资源)、other(表示跨账号资源)
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AccountMode?: string
+  /**
+   * 跨账号同步时的角色，只允许[a-zA-Z0-9\-\_]+，如果为跨账号实例此项必填
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AccountRole?: string
+  /**
+   * 外部角色id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RoleExternalId?: string
+  /**
+   * 临时密钥Id，如果为跨账号实例此项必填
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TmpSecretId?: string
+  /**
+   * 临时密钥Key，如果为跨账号实例此项必填
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TmpSecretKey?: string
+  /**
+   * 临时Token，如果为跨账号实例此项必填
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TmpToken?: string
+  /**
+   * 是否走加密传输、UnEncrypted表示不走加密传输，Encrypted表示走加密传输，默认UnEncrypted
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EncryptConn?: string
+  /**
+   * 数据库所属网络环境，AccessType为云联网(ccn)时必填， UserIDC表示用户IDC、TencentVPC表示腾讯云VPC；
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DatabaseNetEnv?: string
+  /**
+   * 数据库为跨账号云联网下的实例时、表示云联网所属主账号
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CcnOwnerUin?: string
 }
 
 /**
@@ -845,36 +986,6 @@ export interface DBEndpointInfo {
 }
 
 /**
- * 单topic和自定义topic的描述
- */
-export interface TopicRule {
-  /**
-   * topic名
-   */
-  TopicName?: string
-  /**
-   * topic分区策略，如 自定义topic：Random（随机投递），集中投递到单Topic：AllInPartitionZero（全部投递至partition0）、PartitionByTable(按表名分区)、PartitionByTableAndKey(按表名加主键分区)
-   */
-  PartitionType?: string
-  /**
-   * 库名匹配规则，仅“自定义topic”生效，如Regular（正则匹配）, Default(不符合匹配规则的剩余库)，数组中必须有一项为‘Default’
-   */
-  DbMatchMode?: string
-  /**
-   * 库名，仅“自定义topic”时，DbMatchMode=Regular生效
-   */
-  DbName?: string
-  /**
-   * 表名匹配规则，仅“自定义topic”生效，如Regular（正则匹配）, Default(不符合匹配规则的剩余表)，数组中必须有一项为‘Default’
-   */
-  TableMatchMode?: string
-  /**
-   * 表名，仅“自定义topic”时，TableMatchMode=Regular生效
-   */
-  TableName?: string
-}
-
-/**
  * ContinueSyncJob返回参数结构体
  */
 export interface ContinueSyncJobResponse {
@@ -928,6 +1039,16 @@ export interface Options {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   KafkaOption?: KafkaOption
+  /**
+   * 任务限速信息、该字段仅用作出参、入参该字段无效
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RateLimitOption?: RateLimitOption
+  /**
+   * 自动重试的时间窗口设置
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AutoRetryTimeRangeMinutes?: number
 }
 
 /**
@@ -1160,7 +1281,7 @@ export interface ModifyMigrationJobRequest {
    */
   RunMode: string
   /**
-   * 迁移任务配置选项，描述任务如何执行迁移等一系列配置信息
+   * 迁移任务配置选项，描述任务如何执行迁移等一系列配置信息；字段下的RateLimitOption不可配置、如果需要修改任务的限速信息、请在任务运行后通过ModifyMigrateRateLimit接口修改
    */
   MigrateOption: MigrateOption
   /**
@@ -1187,6 +1308,16 @@ export interface ModifyMigrationJobRequest {
    * 自动重试的时间段、可设置5至720分钟、0表示不重试
    */
   AutoRetryTimeRangeMinutes?: number
+}
+
+/**
+ * StopCompare返回参数结构体
+ */
+export interface StopCompareResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1558,139 +1689,33 @@ export interface DBInfo {
 }
 
 /**
- * 数据同步中的描述源端和目的端的信息
+ * 单topic和自定义topic的描述
  */
-export interface Endpoint {
+export interface TopicRule {
   /**
-   * 地域英文名，如：ap-guangzhou
-注意：此字段可能返回 null，表示取不到有效值。
+   * topic名
    */
-  Region?: string
+  TopicName?: string
   /**
-   * tdsql mysql版的节点类型，枚举值为proxy、set
-注意：此字段可能返回 null，表示取不到有效值。
+   * topic分区策略，如 自定义topic：Random（随机投递），集中投递到单Topic：AllInPartitionZero（全部投递至partition0）、PartitionByTable(按表名分区)、PartitionByTableAndKey(按表名加主键分区)
    */
-  Role?: string
+  PartitionType?: string
   /**
-   * 数据库内核类型，tdsql中用于区分不同内核：percona,mariadb,mysql
-注意：此字段可能返回 null，表示取不到有效值。
+   * 库名匹配规则，仅“自定义topic”生效，如Regular（正则匹配）, Default(不符合匹配规则的剩余库)，数组中必须有一项为‘Default’
    */
-  DbKernel?: string
+  DbMatchMode?: string
   /**
-   * 数据库实例ID，格式如：cdb-powiqx8q
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  InstanceId?: string
-  /**
-   * 实例的IP地址，接入类型为非cdb时此项必填
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Ip?: string
-  /**
-   * 实例端口，接入类型为非cdb时此项必填
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Port?: number
-  /**
-   * 用户名，对于访问需要用户名密码认证的实例必填
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  User?: string
-  /**
-   * 密码，对于访问需要用户名密码认证的实例必填
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Password?: string
-  /**
-   * 数据库名，数据库为cdwpg时，需要提供
-注意：此字段可能返回 null，表示取不到有效值。
+   * 库名，仅“自定义topic”时，DbMatchMode=Regular生效
    */
   DbName?: string
   /**
-   * 私有网络ID，对于私有网络、专线、VPN的接入方式此项必填，格式如：vpc-92jblxto
-注意：此字段可能返回 null，表示取不到有效值。
+   * 表名匹配规则，仅“自定义topic”生效，如Regular（正则匹配）, Default(不符合匹配规则的剩余表)，数组中必须有一项为‘Default’
    */
-  VpcId?: string
+  TableMatchMode?: string
   /**
-   * 私有网络下的子网ID，对于私有网络、专线、VPN的接入方式此项必填，格式如：subnet-3paxmkdz
-注意：此字段可能返回 null，表示取不到有效值。
+   * 表名，仅“自定义topic”时，TableMatchMode=Regular生效
    */
-  SubnetId?: string
-  /**
-   * CVM实例短ID，格式如：ins-olgl39y8，与云服务器控制台页面显示的实例ID相同。如果是CVM自建实例，需要传递此字段
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CvmInstanceId?: string
-  /**
-   * 专线网关ID，对于专线接入类型此项必填，格式如：dcg-0rxtqqxb
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  UniqDcgId?: string
-  /**
-   * VPN网关ID，对于vpn接入类型此项必填，格式如：vpngw-9ghexg7q
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  UniqVpnGwId?: string
-  /**
-   * 云联网ID，对于云联网接入类型此项必填，如：ccn-afp6kltc
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CcnId?: string
-  /**
-   * 云厂商类型，当实例为RDS实例时，填写为aliyun, 其他情况均填写others，默认为others
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Supplier?: string
-  /**
-   * 数据库版本，当实例为RDS实例时才有效，其他实例忽略，格式如：5.6或者5.7，默认为5.6
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  EngineVersion?: string
-  /**
-   * 实例所属账号，如果为跨账号实例此项必填
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Account?: string
-  /**
-   * 资源所属账号 为空或self(表示本账号内资源)、other(表示跨账号资源)
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  AccountMode?: string
-  /**
-   * 跨账号同步时的角色，只允许[a-zA-Z0-9\-\_]+，如果为跨账号实例此项必填
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  AccountRole?: string
-  /**
-   * 外部角色id
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  RoleExternalId?: string
-  /**
-   * 临时密钥Id，如果为跨账号实例此项必填
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TmpSecretId?: string
-  /**
-   * 临时密钥Key，如果为跨账号实例此项必填
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TmpSecretKey?: string
-  /**
-   * 临时Token，如果为跨账号实例此项必填
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TmpToken?: string
-  /**
-   * 是否走加密传输、UnEncrypted表示不走加密传输，Encrypted表示走加密传输，默认UnEncrypted
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  EncryptConn?: string
-  /**
-   * 数据库所属网络环境，AccessType为云联网(ccn)时必填， UserIDC表示用户IDC、TencentVPC表示腾讯云VPC；
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  DatabaseNetEnv?: string
+  TableName?: string
 }
 
 /**
@@ -1821,7 +1846,7 @@ export interface ConfigureSyncJobRequest {
    */
   DstNodeType?: string
   /**
-   * 同步任务选项
+   * 同步任务选项；该字段下的RateLimitOption暂时无法生效、如果需要修改限速、可通过ModifySyncRateLimit接口完成限速
    */
   Options?: Options
   /**
@@ -2185,6 +2210,11 @@ manualPaused(已暂停)
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AutoRetryTimeRangeMinutes: number
+  /**
+   * 全量导出可重入标识：enum::"yes"/"no"。yes表示当前任务可重入、no表示当前任务处于全量导出且不可重入阶段；如果在该值为no时重启任务导出流程不支持断点续传
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DumperResumeCtrl?: string
 }
 
 /**
@@ -2245,47 +2275,52 @@ export interface SyncDetailInfo {
    * 总步骤数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  StepAll: number
+  StepAll?: number
   /**
    * 当前步骤
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  StepNow: number
+  StepNow?: number
   /**
    * 总体进度
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Progress: number
+  Progress?: number
   /**
-   * 当前步骤进度
+   * 当前步骤进度，范围为[0-100]，若为-1表示当前步骤不支持查看进度
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CurrentStepProgress: number
+  CurrentStepProgress?: number
   /**
    * 同步两端数据量差距
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  MasterSlaveDistance: number
+  MasterSlaveDistance?: number
   /**
    * 同步两端时间差距
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SecondsBehindMaster: number
+  SecondsBehindMaster?: number
   /**
    * 总体描述信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Message: string
+  Message?: string
   /**
    * 详细步骤信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  StepInfos: Array<StepInfo>
+  StepInfos?: Array<StepInfo>
   /**
    * 不能发起一致性校验的原因
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CauseOfCompareDisable?: string
+  /**
+   * 任务的错误和解决方案信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ErrInfo?: ErrInfo
 }
 
 /**
@@ -2513,13 +2548,64 @@ export interface CreateCompareTaskResponse {
 }
 
 /**
- * StopCompare返回参数结构体
+ * 迁移和同步任务限速的详细信息
  */
-export interface StopCompareResponse {
+export interface RateLimitOption {
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 当前生效的全量导出线程数
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  RequestId?: string
+  CurrentDumpThread: number
+  /**
+   * 默认的全量导出线程数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DefaultDumpThread: number
+  /**
+   * 当前生效的全量导出Rps	
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CurrentDumpRps: number
+  /**
+   * 默认的全量导出Rps	
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DefaultDumpRps: number
+  /**
+   * 当前生效的全量导入线程数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CurrentLoadThread: number
+  /**
+   * 默认的全量导入线程数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DefaultLoadThread: number
+  /**
+   * 当前生效的全量导入Rps	
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CurrentLoadRps: number
+  /**
+   * 默认的全量导入Rps	
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DefaultLoadRps: number
+  /**
+   * 当前生效的增量导入线程数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CurrentSinkerThread: number
+  /**
+   * 默认的增量导入线程数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DefaultSinkerThread: number
+  /**
+   * enum:"no"/"yes"、no表示用户未设置过限速、yes表示设置过限速
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HasUserSetRateLimit: string
 }
 
 /**
@@ -2784,6 +2870,26 @@ export interface CreateCompareTaskRequest {
 }
 
 /**
+ * 错误信息及其解决方案
+ */
+export interface ErrInfo {
+  /**
+   * 错误原因
+   */
+  Reason?: string
+  /**
+   * 错误信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Message?: string
+  /**
+   * 解决方案
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Solution?: string
+}
+
+/**
  * StartCompare请求参数结构体
  */
 export interface StartCompareRequest {
@@ -2913,6 +3019,15 @@ manualPaused(已暂停)
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ErrorInfo?: Array<ErrorInfoItem>
+  /**
+   * 全量导出可重入标识：enum::"yes"/"no"。yes表示当前任务可重入、no表示当前任务处于全量导出且不可重入阶段；如果在该值为no时重启任务导出流程不支持断点续传
+   */
+  DumperResumeCtrl?: string
+  /**
+   * 任务的限速信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RateLimitOption?: RateLimitOption
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3240,6 +3355,16 @@ export interface SyncJobInfo {
    */
   SrcInfo: Endpoint
   /**
+   * 枚举值：cluster、single。源库为单节点数据库使用single，多节点使用cluster
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SrcNodeType?: string
+  /**
+   * 源端信息，多节点数据库使用
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SrcInfos?: SyncDBEndpointInfos
+  /**
    * 目标端地域，如：ap-guangzhou等
 注意：此字段可能返回 null，表示取不到有效值。
    */
@@ -3259,6 +3384,16 @@ export interface SyncJobInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DstInfo: Endpoint
+  /**
+   * 枚举值：cluster、single。目标库为单节点数据库使用single，多节点使用cluster
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DstNodeType?: string
+  /**
+   * 目标端信息，多节点数据库使用
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DstInfos?: SyncDBEndpointInfos
   /**
    * 创建时间，格式为 yyyy-mm-dd hh:mm:ss
 注意：此字段可能返回 null，表示取不到有效值。
@@ -3314,6 +3449,11 @@ export interface SyncJobInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AutoRetryTimeRangeMinutes: number
+  /**
+   * 全量导出可重入标识：enum::"yes"/"no"。yes表示当前任务可重入、no表示当前任务处于全量导出且不可重入阶段；如果在该值为no时重启任务导出流程不支持断点续传
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DumperResumeCtrl?: string
 }
 
 /**

@@ -238,6 +238,16 @@ it("tione.v20211111.DescribeModelAccelerateTask", async function () {
     }
 })
 
+it("tione.v20211111.ChatCompletion", async function () {
+    try {
+       const data = await client.ChatCompletion({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tione.v20211111.DescribeTrainingMetrics", async function () {
     try {
        const data = await client.DescribeTrainingMetrics({})

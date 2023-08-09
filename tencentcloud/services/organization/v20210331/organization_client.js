@@ -52,10 +52,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UpdateOrganizationMember", req, cb);
     }
     /**
-     * 获取已设置管理员的互信主体关系列表
+     * 获取组织成员被绑定授权关系的子账号列表
      */
-    async DescribeOrganizationAuthNode(req, cb) {
-        return this.request("DescribeOrganizationAuthNode", req, cb);
+    async DescribeOrganizationMemberAuthAccounts(req, cb) {
+        return this.request("DescribeOrganizationMemberAuthAccounts", req, cb);
+    }
+    /**
+     * 删除组织成员访问策略
+     */
+    async DeleteOrganizationMembersPolicy(req, cb) {
+        return this.request("DeleteOrganizationMembersPolicy", req, cb);
     }
     /**
      * 添加企业组织节点
@@ -74,6 +80,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeOrganizationMemberAuthIdentities(req, cb) {
         return this.request("DescribeOrganizationMemberAuthIdentities", req, cb);
+    }
+    /**
+     * 添加组织成员访问授权
+     */
+    async CreateOrganizationMemberAuthIdentity(req, cb) {
+        return this.request("CreateOrganizationMemberAuthIdentity", req, cb);
     }
     /**
      * 批量删除企业组织成员
@@ -155,10 +167,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeOrganizationFinancialByProduct", req, cb);
     }
     /**
-     * 获取组织成员被绑定授权关系的子账号列表
+     * 获取已设置管理员的互信主体关系列表
      */
-    async DescribeOrganizationMemberAuthAccounts(req, cb) {
-        return this.request("DescribeOrganizationMemberAuthAccounts", req, cb);
+    async DescribeOrganizationAuthNode(req, cb) {
+        return this.request("DescribeOrganizationAuthNode", req, cb);
     }
     /**
      * 获取组织节点列表

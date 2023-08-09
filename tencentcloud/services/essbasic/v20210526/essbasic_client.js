@@ -95,7 +95,7 @@ class Client extends abstract_client_1.AbstractClient {
     }
     /**
      * 此接口（DescribeUsage）用于获取第三方平台所有合作企业流量消耗情况。
- 注: 此接口每日限频2次，若要扩大限制次数,请提前与客服经理或邮件至e-contract@tencent.com进行联系。
+ 注: 此接口每日限频50次，若要扩大限制次数,请提前与客服经理或邮件至e-contract@tencent.com进行联系。
      */
     async DescribeUsage(req, cb) {
         return this.request("DescribeUsage", req, cb);

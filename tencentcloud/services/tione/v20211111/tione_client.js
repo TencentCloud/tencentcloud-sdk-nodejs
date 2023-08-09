@@ -160,6 +160,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeModelAccelerateTask", req, cb);
     }
     /**
+     * 与大模型聊天
+     */
+    async ChatCompletion(req, cb) {
+        return this.request("ChatCompletion", req, cb);
+    }
+    /**
      * 查询训练自定义指标
      */
     async DescribeTrainingMetrics(req, cb) {

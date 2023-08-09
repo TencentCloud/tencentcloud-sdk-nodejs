@@ -10659,7 +10659,12 @@ export interface CreateSecurityGroupPoliciesRequest {
 /**
  * DeleteVpcPeeringConnection请求参数结构体
  */
-export declare type DeleteVpcPeeringConnectionRequest = null;
+export interface DeleteVpcPeeringConnectionRequest {
+    /**
+     * 对等连接唯一ID。
+     */
+    PeeringConnectionId: string;
+}
 /**
  * ModifyVpnGatewayRoutes返回参数结构体
  */
@@ -13490,7 +13495,12 @@ export interface WithdrawNotifyRoutesResponse {
 /**
  * AcceptVpcPeeringConnection请求参数结构体
  */
-export declare type AcceptVpcPeeringConnectionRequest = null;
+export interface AcceptVpcPeeringConnectionRequest {
+    /**
+     * 对等连接唯一ID。
+     */
+    PeeringConnectionId: string;
+}
 /**
  * DescribeNetworkInterfaces返回参数结构体
  */

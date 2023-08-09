@@ -298,6 +298,16 @@ it("iotvideo.v20211125.DescribeCloudStorageDate", async function () {
     }
 })
 
+it("iotvideo.v20211125.SetForwardAuth", async function () {
+    try {
+       const data = await client.SetForwardAuth({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotvideo.v20211125.DescribeCloudStorageUsers", async function () {
     try {
        const data = await client.DescribeCloudStorageUsers({})
@@ -848,9 +858,9 @@ it("iotvideo.v20211125.DescribePackageConsumeTask", async function () {
     }
 })
 
-it("iotvideo.v20211125.SetForwardAuth", async function () {
+it("iotvideo.v20211125.ResetCloudStorageEvent", async function () {
     try {
-       const data = await client.SetForwardAuth({})
+       const data = await client.ResetCloudStorageEvent({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

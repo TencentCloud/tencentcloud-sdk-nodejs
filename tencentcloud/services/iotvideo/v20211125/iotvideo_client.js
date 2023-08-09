@@ -196,6 +196,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeCloudStorageDate", req, cb);
     }
     /**
+     * 设置转发权限
+     */
+    async SetForwardAuth(req, cb) {
+        return this.request("SetForwardAuth", req, cb);
+    }
+    /**
      * 拉取云存用户列表
      */
     async DescribeCloudStorageUsers(req, cb) {
@@ -526,10 +532,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribePackageConsumeTask", req, cb);
     }
     /**
-     * 设置转发权限
+     * 重置云存事件
      */
-    async SetForwardAuth(req, cb) {
-        return this.request("SetForwardAuth", req, cb);
+    async ResetCloudStorageEvent(req, cb) {
+        return this.request("ResetCloudStorageEvent", req, cb);
     }
     /**
      * 本接口用于查询固件升级任务状态分布

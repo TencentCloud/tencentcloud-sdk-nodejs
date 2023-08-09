@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeOrganizationAuthNodeResponse, BindOrganizationMemberAuthAccountRequest, UpdateOrganizationMemberEmailBindResponse, DeleteOrganizationMembersResponse, DescribeOrganizationFinancialByMemberRequest, DescribeOrganizationFinancialByMonthRequest, DescribeOrganizationMemberAuthIdentitiesRequest, AddOrganizationMemberEmailResponse, UpdateOrganizationNodeResponse, CreateOrganizationMemberPolicyRequest, DescribeOrganizationRequest, DescribeOrganizationNodesRequest, BindOrganizationMemberAuthAccountResponse, CreateOrganizationMemberResponse, MoveOrganizationNodeMembersRequest, ListOrganizationIdentityRequest, DescribeOrganizationMemberEmailBindResponse, DeleteOrganizationMembersRequest, DescribeOrganizationMemberPoliciesResponse, DeleteOrganizationNodesRequest, AddOrganizationNodeResponse, DescribeOrganizationFinancialByMonthResponse, DescribeOrganizationFinancialByProductResponse, AddOrganizationMemberEmailRequest, DescribeOrganizationFinancialByProductRequest, ListOrganizationIdentityResponse, DescribeOrganizationNodesResponse, DescribeOrganizationMembersResponse, CreateOrganizationMemberPolicyResponse, CancelOrganizationMemberAuthAccountResponse, UpdateOrganizationMemberRequest, DescribeOrganizationResponse, DescribeOrganizationMemberPoliciesRequest, DescribeOrganizationMemberEmailBindRequest, AddOrganizationNodeRequest, DescribeOrganizationMemberAuthIdentitiesResponse, DescribeOrganizationAuthNodeRequest, UpdateOrganizationNodeRequest, DescribeOrganizationMemberAuthAccountsRequest, CancelOrganizationMemberAuthAccountRequest, UpdateOrganizationMemberResponse, DeleteOrganizationNodesResponse, DescribeOrganizationFinancialByMemberResponse, DescribeOrganizationMemberAuthAccountsResponse, CreateOrganizationMemberRequest, MoveOrganizationNodeMembersResponse, DescribeOrganizationMembersRequest, UpdateOrganizationMemberEmailBindRequest } from "./organization_models";
+import { DescribeOrganizationAuthNodeResponse, BindOrganizationMemberAuthAccountRequest, CreateOrganizationMemberAuthIdentityRequest, DeleteOrganizationMembersResponse, DescribeOrganizationFinancialByMemberRequest, DescribeOrganizationFinancialByMonthRequest, DescribeOrganizationMemberAuthIdentitiesRequest, AddOrganizationMemberEmailResponse, CreateOrganizationMemberAuthIdentityResponse, UpdateOrganizationNodeResponse, CreateOrganizationMemberPolicyRequest, DescribeOrganizationRequest, DescribeOrganizationNodesRequest, BindOrganizationMemberAuthAccountResponse, CreateOrganizationMemberResponse, MoveOrganizationNodeMembersRequest, ListOrganizationIdentityRequest, DescribeOrganizationMemberEmailBindResponse, DeleteOrganizationMembersRequest, DescribeOrganizationMemberPoliciesResponse, DeleteOrganizationNodesRequest, AddOrganizationNodeResponse, DescribeOrganizationFinancialByMonthResponse, DescribeOrganizationFinancialByProductResponse, AddOrganizationMemberEmailRequest, DescribeOrganizationFinancialByProductRequest, ListOrganizationIdentityResponse, DescribeOrganizationNodesResponse, DeleteOrganizationMembersPolicyRequest, DescribeOrganizationMembersResponse, CreateOrganizationMemberPolicyResponse, CancelOrganizationMemberAuthAccountResponse, UpdateOrganizationMemberRequest, DescribeOrganizationResponse, DescribeOrganizationMemberPoliciesRequest, DescribeOrganizationMemberEmailBindRequest, UpdateOrganizationMemberEmailBindResponse, DeleteOrganizationMembersPolicyResponse, DescribeOrganizationMemberAuthIdentitiesResponse, DescribeOrganizationAuthNodeRequest, UpdateOrganizationNodeRequest, DescribeOrganizationMemberAuthAccountsRequest, CancelOrganizationMemberAuthAccountRequest, UpdateOrganizationMemberResponse, DeleteOrganizationNodesResponse, DescribeOrganizationFinancialByMemberResponse, DescribeOrganizationMemberAuthAccountsResponse, AddOrganizationNodeRequest, CreateOrganizationMemberRequest, MoveOrganizationNodeMembersResponse, DescribeOrganizationMembersRequest, UpdateOrganizationMemberEmailBindRequest } from "./organization_models";
 /**
  * organization client
  * @class
@@ -24,9 +24,13 @@ export declare class Client extends AbstractClient {
      */
     UpdateOrganizationMember(req: UpdateOrganizationMemberRequest, cb?: (error: string, rep: UpdateOrganizationMemberResponse) => void): Promise<UpdateOrganizationMemberResponse>;
     /**
-     * 获取已设置管理员的互信主体关系列表
+     * 获取组织成员被绑定授权关系的子账号列表
      */
-    DescribeOrganizationAuthNode(req: DescribeOrganizationAuthNodeRequest, cb?: (error: string, rep: DescribeOrganizationAuthNodeResponse) => void): Promise<DescribeOrganizationAuthNodeResponse>;
+    DescribeOrganizationMemberAuthAccounts(req: DescribeOrganizationMemberAuthAccountsRequest, cb?: (error: string, rep: DescribeOrganizationMemberAuthAccountsResponse) => void): Promise<DescribeOrganizationMemberAuthAccountsResponse>;
+    /**
+     * 删除组织成员访问策略
+     */
+    DeleteOrganizationMembersPolicy(req: DeleteOrganizationMembersPolicyRequest, cb?: (error: string, rep: DeleteOrganizationMembersPolicyResponse) => void): Promise<DeleteOrganizationMembersPolicyResponse>;
     /**
      * 添加企业组织节点
      */
@@ -39,6 +43,10 @@ export declare class Client extends AbstractClient {
      * 获取组织成员可被管理的身份列表
      */
     DescribeOrganizationMemberAuthIdentities(req: DescribeOrganizationMemberAuthIdentitiesRequest, cb?: (error: string, rep: DescribeOrganizationMemberAuthIdentitiesResponse) => void): Promise<DescribeOrganizationMemberAuthIdentitiesResponse>;
+    /**
+     * 添加组织成员访问授权
+     */
+    CreateOrganizationMemberAuthIdentity(req: CreateOrganizationMemberAuthIdentityRequest, cb?: (error: string, rep: CreateOrganizationMemberAuthIdentityResponse) => void): Promise<CreateOrganizationMemberAuthIdentityResponse>;
     /**
      * 批量删除企业组织成员
      */
@@ -93,9 +101,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeOrganizationFinancialByProduct(req: DescribeOrganizationFinancialByProductRequest, cb?: (error: string, rep: DescribeOrganizationFinancialByProductResponse) => void): Promise<DescribeOrganizationFinancialByProductResponse>;
     /**
-     * 获取组织成员被绑定授权关系的子账号列表
+     * 获取已设置管理员的互信主体关系列表
      */
-    DescribeOrganizationMemberAuthAccounts(req: DescribeOrganizationMemberAuthAccountsRequest, cb?: (error: string, rep: DescribeOrganizationMemberAuthAccountsResponse) => void): Promise<DescribeOrganizationMemberAuthAccountsResponse>;
+    DescribeOrganizationAuthNode(req: DescribeOrganizationAuthNodeRequest, cb?: (error: string, rep: DescribeOrganizationAuthNodeResponse) => void): Promise<DescribeOrganizationAuthNodeResponse>;
     /**
      * 获取组织节点列表
      */

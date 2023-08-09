@@ -18,18 +18,19 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
-  OrgMemberAuthAccount,
+  OrgMember,
   DescribeOrganizationAuthNodeResponse,
   OrgPermission,
   OrgMemberPolicy,
   OrgProductFinancial,
   BindOrganizationMemberAuthAccountRequest,
-  UpdateOrganizationMemberEmailBindResponse,
+  CreateOrganizationMemberAuthIdentityRequest,
   DeleteOrganizationMembersResponse,
   DescribeOrganizationFinancialByMemberRequest,
   DescribeOrganizationFinancialByMonthRequest,
   DescribeOrganizationMemberAuthIdentitiesRequest,
   AddOrganizationMemberEmailResponse,
+  CreateOrganizationMemberAuthIdentityResponse,
   UpdateOrganizationNodeResponse,
   CreateOrganizationMemberPolicyRequest,
   DescribeOrganizationRequest,
@@ -53,14 +54,17 @@ import {
   DescribeOrganizationFinancialByProductRequest,
   ListOrganizationIdentityResponse,
   DescribeOrganizationNodesResponse,
+  DeleteOrganizationMembersPolicyRequest,
   DescribeOrganizationMembersResponse,
   CreateOrganizationMemberPolicyResponse,
   CancelOrganizationMemberAuthAccountResponse,
+  OrgMemberAuthAccount,
   UpdateOrganizationMemberRequest,
   DescribeOrganizationResponse,
   DescribeOrganizationMemberPoliciesRequest,
   DescribeOrganizationMemberEmailBindRequest,
-  AddOrganizationNodeRequest,
+  UpdateOrganizationMemberEmailBindResponse,
+  DeleteOrganizationMembersPolicyResponse,
   DescribeOrganizationMemberAuthIdentitiesResponse,
   OrgMemberFinancial,
   DescribeOrganizationAuthNodeRequest,
@@ -71,7 +75,7 @@ import {
   DeleteOrganizationNodesResponse,
   DescribeOrganizationFinancialByMemberResponse,
   DescribeOrganizationMemberAuthAccountsResponse,
-  OrgMember,
+  AddOrganizationNodeRequest,
   OrgMemberAuthIdentity,
   MemberMainInfo,
   CreateOrganizationMemberRequest,
@@ -132,13 +136,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取已设置管理员的互信主体关系列表
+   * 获取组织成员被绑定授权关系的子账号列表
    */
-  async DescribeOrganizationAuthNode(
-    req: DescribeOrganizationAuthNodeRequest,
-    cb?: (error: string, rep: DescribeOrganizationAuthNodeResponse) => void
-  ): Promise<DescribeOrganizationAuthNodeResponse> {
-    return this.request("DescribeOrganizationAuthNode", req, cb)
+  async DescribeOrganizationMemberAuthAccounts(
+    req: DescribeOrganizationMemberAuthAccountsRequest,
+    cb?: (error: string, rep: DescribeOrganizationMemberAuthAccountsResponse) => void
+  ): Promise<DescribeOrganizationMemberAuthAccountsResponse> {
+    return this.request("DescribeOrganizationMemberAuthAccounts", req, cb)
+  }
+
+  /**
+   * 删除组织成员访问策略
+   */
+  async DeleteOrganizationMembersPolicy(
+    req: DeleteOrganizationMembersPolicyRequest,
+    cb?: (error: string, rep: DeleteOrganizationMembersPolicyResponse) => void
+  ): Promise<DeleteOrganizationMembersPolicyResponse> {
+    return this.request("DeleteOrganizationMembersPolicy", req, cb)
   }
 
   /**
@@ -169,6 +183,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeOrganizationMemberAuthIdentitiesResponse) => void
   ): Promise<DescribeOrganizationMemberAuthIdentitiesResponse> {
     return this.request("DescribeOrganizationMemberAuthIdentities", req, cb)
+  }
+
+  /**
+   * 添加组织成员访问授权
+   */
+  async CreateOrganizationMemberAuthIdentity(
+    req: CreateOrganizationMemberAuthIdentityRequest,
+    cb?: (error: string, rep: CreateOrganizationMemberAuthIdentityResponse) => void
+  ): Promise<CreateOrganizationMemberAuthIdentityResponse> {
+    return this.request("CreateOrganizationMemberAuthIdentity", req, cb)
   }
 
   /**
@@ -303,13 +327,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取组织成员被绑定授权关系的子账号列表
+   * 获取已设置管理员的互信主体关系列表
    */
-  async DescribeOrganizationMemberAuthAccounts(
-    req: DescribeOrganizationMemberAuthAccountsRequest,
-    cb?: (error: string, rep: DescribeOrganizationMemberAuthAccountsResponse) => void
-  ): Promise<DescribeOrganizationMemberAuthAccountsResponse> {
-    return this.request("DescribeOrganizationMemberAuthAccounts", req, cb)
+  async DescribeOrganizationAuthNode(
+    req: DescribeOrganizationAuthNodeRequest,
+    cb?: (error: string, rep: DescribeOrganizationAuthNodeResponse) => void
+  ): Promise<DescribeOrganizationAuthNodeResponse> {
+    return this.request("DescribeOrganizationAuthNode", req, cb)
   }
 
   /**

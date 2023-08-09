@@ -1533,6 +1533,26 @@ export interface RabbitMQVirtualHostInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   VirtualHostStatistics?: RabbitMQVirtualHostStatistics
+  /**
+   * vhost状态，与原生控制台对应，有running、partial、stopped、unknown
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status?: string
+  /**
+   * 消息堆积数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MessageHeapCount?: number
+  /**
+   * 输入消息速率
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MessageRateIn?: number
+  /**
+   * 输出消息速率
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MessageRateOut?: number
 }
 
 /**
@@ -6879,4 +6899,16 @@ export interface DescribeRabbitMQVirtualHostRequest {
    * search-virtual-host：vhost名称模糊查询，之前前缀和后缀匹配
    */
   Filters?: Filter
+  /**
+   * 排序依据的字段：
+MessageHeapCount - 消息堆积数；
+MessageRateInOut - 生产消费速率之和；
+MessageRateIn - 生产速率；
+MessageRateOut - 消费速率；
+   */
+  SortElement?: string
+  /**
+   * 排序顺序，ascend 或 descend
+   */
+  SortOrder?: string
 }

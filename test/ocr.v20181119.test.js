@@ -28,16 +28,6 @@ it("ocr.v20181119.InsuranceBillOCR", async function () {
     }
 })
 
-it("ocr.v20181119.VerifyBasicBizLicense", async function () {
-    try {
-       const data = await client.VerifyBasicBizLicense({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("ocr.v20181119.ImageEnhancement", async function () {
     try {
        const data = await client.ImageEnhancement({})
@@ -721,16 +711,6 @@ it("ocr.v20181119.FormulaOCR", async function () {
 it("ocr.v20181119.PassportOCR", async function () {
     try {
        const data = await client.PassportOCR({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("ocr.v20181119.VerifyBizLicense", async function () {
-    try {
-       const data = await client.VerifyBizLicense({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

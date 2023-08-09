@@ -58,9 +58,19 @@ it("organization.v20210331.UpdateOrganizationMember", async function () {
     }
 })
 
-it("organization.v20210331.DescribeOrganizationAuthNode", async function () {
+it("organization.v20210331.DescribeOrganizationMemberAuthAccounts", async function () {
     try {
-       const data = await client.DescribeOrganizationAuthNode({})
+       const data = await client.DescribeOrganizationMemberAuthAccounts({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("organization.v20210331.DeleteOrganizationMembersPolicy", async function () {
+    try {
+       const data = await client.DeleteOrganizationMembersPolicy({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -91,6 +101,16 @@ it("organization.v20210331.UpdateOrganizationMemberEmailBind", async function ()
 it("organization.v20210331.DescribeOrganizationMemberAuthIdentities", async function () {
     try {
        const data = await client.DescribeOrganizationMemberAuthIdentities({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("organization.v20210331.CreateOrganizationMemberAuthIdentity", async function () {
+    try {
+       const data = await client.CreateOrganizationMemberAuthIdentity({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -228,9 +248,9 @@ it("organization.v20210331.DescribeOrganizationFinancialByProduct", async functi
     }
 })
 
-it("organization.v20210331.DescribeOrganizationMemberAuthAccounts", async function () {
+it("organization.v20210331.DescribeOrganizationAuthNode", async function () {
     try {
-       const data = await client.DescribeOrganizationMemberAuthAccounts({})
+       const data = await client.DescribeOrganizationAuthNode({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -102,13 +102,17 @@ export interface DescribeLiveSnapshotTemplateRequest {
  */
 export interface DescribePlayErrorCodeDetailInfoListRequest {
   /**
-   * 起始时间，北京时间，
-格式：yyyy-mm-dd HH:MM:SS。
+   * 起始时间，
+使用UTC格式时间，
+例如：2019-01-08T10:00:00Z。
+注意：北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。
    */
   StartTime: string
   /**
-   * 结束时间，北京时间，
-格式：yyyy-mm-dd HH:MM:SS。
+   * 结束时间，
+使用UTC格式时间，
+例如：2019-01-08T10:00:00Z。
+注意：北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。
 注：EndTime 和 StartTime 只支持最近1天的数据查询。
    */
   EndTime: string
@@ -246,23 +250,23 @@ export interface DescribeLiveTranscodeDetailInfoResponse {
   /**
    * 统计数据列表。
    */
-  DataInfoList: Array<TranscodeDetailInfo>
+  DataInfoList?: Array<TranscodeDetailInfo>
   /**
    * 页码。
    */
-  PageNum: number
+  PageNum?: number
   /**
    * 每页个数。
    */
-  PageSize: number
+  PageSize?: number
   /**
    * 总个数。
    */
-  TotalNum: number
+  TotalNum?: number
   /**
    * 总页数。
    */
-  TotalPage: number
+  TotalPage?: number
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -319,7 +323,7 @@ export interface DescribeGroupProIspPlayInfoListResponse {
   /**
    * 数据内容。
    */
-  DataInfoList: Array<GroupProIspDataInfo>
+  DataInfoList?: Array<GroupProIspDataInfo>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -782,27 +786,27 @@ export interface DescribeTopClientIpSumInfoListResponse {
   /**
    * 页号，范围是[1,1000]，默认值是1。
    */
-  PageNum: number
+  PageNum?: number
   /**
    * 每页个数，范围是[1,1000]，默认值是20。
    */
-  PageSize: number
+  PageSize?: number
   /**
    * 排序指标，可选值包括”TotalRequest”，”FailedRequest”,“TotalFlux”。
    */
-  OrderParam: string
+  OrderParam?: string
   /**
    * 记录总数。
    */
-  TotalNum: number
+  TotalNum?: number
   /**
    * 记录总页数。
    */
-  TotalPage: number
+  TotalPage?: number
   /**
    * 数据内容。
    */
-  DataInfoList: Array<ClientIpPlaySumInfo>
+  DataInfoList?: Array<ClientIpPlaySumInfo>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1161,7 +1165,7 @@ export interface DescribeStreamPushInfoListResponse {
   /**
    * 返回的数据列表。
    */
-  DataInfoList: Array<PushQualityData>
+  DataInfoList?: Array<PushQualityData>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1941,27 +1945,27 @@ export interface DescribeLiveDomainPlayInfoListResponse {
   /**
    * 数据时间，格式为yyyy-mm-dd HH:MM:SS。
    */
-  Time: string
+  Time?: string
   /**
    * 实时总带宽。
    */
-  TotalBandwidth: number
+  TotalBandwidth?: number
   /**
    * 实时总流量。
    */
-  TotalFlux: number
+  TotalFlux?: number
   /**
    * 总请求数。
    */
-  TotalRequest: number
+  TotalRequest?: number
   /**
    * 实时总连接数。
    */
-  TotalOnline: number
+  TotalOnline?: number
   /**
    * 分域名的数据情况。
    */
-  DomainInfoList: Array<DomainInfoList>
+  DomainInfoList?: Array<DomainInfoList>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1973,7 +1977,10 @@ export interface DescribeLiveDomainPlayInfoListResponse {
  */
 export interface HttpCodeValue {
   /**
-   * 时间，格式：yyyy-mm-dd HH:MM:SS。
+   * 时间，
+使用UTC格式时间，
+例如：2019-01-08T10:00:00Z。
+注意：北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。
    */
   Time: string
   /**
@@ -2208,23 +2215,23 @@ export interface DescribeStreamDayPlayInfoListResponse {
   /**
    * 播放数据信息列表。
    */
-  DataInfoList: Array<PlayDataInfoByStream>
+  DataInfoList?: Array<PlayDataInfoByStream>
   /**
    * 总数量。
    */
-  TotalNum: number
+  TotalNum?: number
   /**
    * 总页数。
    */
-  TotalPage: number
+  TotalPage?: number
   /**
    * 当前数据所处页码。
    */
-  PageNum: number
+  PageNum?: number
   /**
    * 每页个数。
    */
-  PageSize: number
+  PageSize?: number
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3408,11 +3415,17 @@ URL中禁止包含的字符：
  */
 export interface DescribeGroupProIspPlayInfoListRequest {
   /**
-   * 起始时间点，格式为yyyy-mm-dd HH:MM:SS。
+   * 起始时间点，
+使用UTC格式时间，
+例如：2019-01-08T10:00:00Z。
+注意：北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。
    */
   StartTime: string
   /**
-   * 结束时间点，格式为yyyy-mm-dd HH:MM:SS
+   * 结束时间点，
+使用UTC格式时间，
+例如：2019-01-08T10:00:00Z。
+注意：北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。
 时间跨度在（0,3小时]，支持最近1个月数据查询。
    */
   EndTime: string
@@ -3467,11 +3480,18 @@ export interface DescribeStreamPushInfoListRequest {
    */
   StreamName: string
   /**
-   * 起始时间点，北京时间，格式为yyyy-mm-dd HH:MM:SS。
+   * 起始时间点，
+使用UTC格式时间，
+例如：2019-01-08T10:00:00Z。
+注意：北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。
    */
   StartTime: string
   /**
-   * 结束时间点，北京时间，格式为yyyy-mm-dd HH:MM:SS，支持查询最近7天数据，建议查询时间跨度在3小时之内。
+   * 结束时间点，
+使用UTC格式时间，
+例如：2019-01-08T10:00:00Z。
+注意：北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。
+支持查询最近7天数据，建议查询时间跨度在3小时之内。
    */
   EndTime: string
   /**
@@ -3553,11 +3573,17 @@ export interface ModifyLivePadTemplateResponse {
  */
 export interface DescribeTopClientIpSumInfoListRequest {
   /**
-   * 起始时间点，格式为yyyy-mm-dd HH:MM:SS。
+   * 起始时间点，
+使用UTC格式时间，
+例如：2019-01-08T10:00:00Z。
+注意：北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。
    */
   StartTime: string
   /**
-   * 结束时间点，格式为yyyy-mm-dd HH:MM:SS
+   * 结束时间点，
+使用UTC格式时间，
+例如：2019-01-08T10:00:00Z。
+注意：北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。
 时间跨度在[0,4小时]，支持最近1天数据查询。
    */
   EndTime: string
@@ -3870,23 +3896,23 @@ export interface DescribeLiveStreamPushInfoListResponse {
   /**
    * 直播流的统计信息列表。
    */
-  DataInfoList: Array<PushDataInfo>
+  DataInfoList?: Array<PushDataInfo>
   /**
    * 所有在线流的总数量。
    */
-  TotalNum: number
+  TotalNum?: number
   /**
    * 总页数。
    */
-  TotalPage: number
+  TotalPage?: number
   /**
    * 当前数据所在页码。
    */
-  PageNum: number
+  PageNum?: number
   /**
    * 每页的在线流的个数。
    */
-  PageSize: number
+  PageSize?: number
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3977,13 +4003,17 @@ export interface CreateLiveSnapshotTemplateResponse {
  */
 export interface DescribeProIspPlaySumInfoListRequest {
   /**
-   * 起始时间，北京时间，
-格式：yyyy-mm-dd HH:MM:SS。
+   * 起始时间，
+使用UTC格式时间，
+例如：2019-01-08T10:00:00Z。
+注意：北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。
    */
   StartTime: string
   /**
-   * 结束时间，北京时间，
-格式：yyyy-mm-dd HH:MM:SS。
+   * 结束时间，
+使用UTC格式时间，
+例如：2019-01-08T10:00:00Z。
+注意：北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。
 注：EndTime 和 StartTime 只支持最近1天的数据查询。
    */
   EndTime: string
@@ -4061,11 +4091,11 @@ export interface DescribePlayErrorCodeDetailInfoListResponse {
   /**
    * 统计信息列表。
    */
-  HttpCodeList: Array<HttpCodeInfo>
+  HttpCodeList?: Array<HttpCodeInfo>
   /**
    * 统计类型。
    */
-  StatType: string
+  StatType?: string
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5161,39 +5191,39 @@ export interface DescribeProIspPlaySumInfoListResponse {
   /**
    * 总流量。
    */
-  TotalFlux: number
+  TotalFlux?: number
   /**
    * 总请求数。
    */
-  TotalRequest: number
+  TotalRequest?: number
   /**
    * 统计的类型。
    */
-  StatType: string
+  StatType?: string
   /**
    * 每页的记录数。
    */
-  PageSize: number
+  PageSize?: number
   /**
    * 页号。
    */
-  PageNum: number
+  PageNum?: number
   /**
    * 总记录数。
    */
-  TotalNum: number
+  TotalNum?: number
   /**
    * 总页数。
    */
-  TotalPage: number
+  TotalPage?: number
   /**
    * 省份，运营商，国家或地区汇总数据列表。
    */
-  DataInfoList: Array<ProIspPlaySumInfo>
+  DataInfoList?: Array<ProIspPlaySumInfo>
   /**
    * 下载速度，单位：MB/s，计算方式：总流量/总时长。
    */
-  AvgFluxPerSecond: number
+  AvgFluxPerSecond?: number
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6022,14 +6052,17 @@ export interface DescribeLiveDomainRefererResponse {
  */
 export interface DescribeHttpStatusInfoListRequest {
   /**
-   * 起始时间，北京时间，
-格式：yyyy-mm-dd HH:MM:SS。
+   * 起始时间，
+使用UTC格式时间，
+例如：2019-01-08T10:00:00Z。
+注意：北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。
    */
   StartTime: string
   /**
-   * 结束时间，北京时间，
-格式：yyyy-mm-dd HH:MM:SS。
-注：最大时间跨度支持1天，支持最近3个月的数据查询。
+   * 结束时间，
+使用UTC格式时间，
+例如：2019-01-08T10:00:00Z。
+注意：北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。
    */
   EndTime: string
   /**
@@ -6170,11 +6203,11 @@ export interface DescribeProvinceIspPlayInfoListResponse {
   /**
    * 播放信息列表。
    */
-  DataInfoList: Array<PlayStatInfo>
+  DataInfoList?: Array<PlayStatInfo>
   /**
    * 统计的类型，和输入参数保持一致。
    */
-  StatType: string
+  StatType?: string
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6565,11 +6598,11 @@ export interface DescribeAllStreamPlayInfoListResponse {
   /**
    * 查询时间点，回传的输入参数中的查询时间。
    */
-  QueryTime: string
+  QueryTime?: string
   /**
    * 数据信息列表。
    */
-  DataInfoList: Array<MonitorStreamPlayInfo>
+  DataInfoList?: Array<MonitorStreamPlayInfo>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -7282,7 +7315,7 @@ export interface DescribeHttpStatusInfoListResponse {
   /**
    * 播放状态码列表。
    */
-  DataInfoList: Array<HttpStatusData>
+  DataInfoList?: Array<HttpStatusData>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -7677,47 +7710,47 @@ export interface DescribePlayErrorCodeSumInfoListResponse {
   /**
    * 分省份分运营商错误码为2或3或4或5开头的状态码数据信息。
    */
-  ProIspInfoList: Array<ProIspPlayCodeDataInfo>
+  ProIspInfoList?: Array<ProIspPlayCodeDataInfo>
   /**
    * 所有状态码的加和的次数。
    */
-  TotalCodeAll: number
+  TotalCodeAll?: number
   /**
    * 状态码为4开头的总次数。
    */
-  TotalCode4xx: number
+  TotalCode4xx?: number
   /**
    * 状态码为5开头的总次数。
    */
-  TotalCode5xx: number
+  TotalCode5xx?: number
   /**
    * 各状态码的总次数。
    */
-  TotalCodeList: Array<PlayCodeTotalInfo>
+  TotalCodeList?: Array<PlayCodeTotalInfo>
   /**
    * 页号。
    */
-  PageNum: number
+  PageNum?: number
   /**
    * 每页大小。
    */
-  PageSize: number
+  PageSize?: number
   /**
    * 总页数。
    */
-  TotalPage: number
+  TotalPage?: number
   /**
    * 总记录数。
    */
-  TotalNum: number
+  TotalNum?: number
   /**
    * 状态码为2开头的总次数。
    */
-  TotalCode2xx: number
+  TotalCode2xx?: number
   /**
    * 状态码为3开头的总次数。
    */
-  TotalCode3xx: number
+  TotalCode3xx?: number
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -7902,7 +7935,9 @@ export interface DescribeLiveTimeShiftBillInfoListRequest {
  */
 export interface PushQualityData {
   /**
-   * 数据时间，格式: %Y-%m-%d %H:%M:%S.%ms，精确到毫秒级。
+   * 数据时间，使用UTC格式时间，
+例如：2019-01-08T10:00:00Z。
+注意：北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。
    */
   Time: string
   /**
@@ -8328,13 +8363,17 @@ export interface ModifyPullStreamConfigResponse {
  */
 export interface DescribeProvinceIspPlayInfoListRequest {
   /**
-   * 起始时间点，当前使用北京时间，
-例：2019-02-21 10:00:00。
+   * 起始时间点，
+使用UTC格式时间，
+例如：2019-01-08T10:00:00Z。
+注意：北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。
    */
   StartTime: string
   /**
-   * 结束时间点，当前使用北京时间，
-例：2019-02-21 12:00:00。
+   * 结束时间点，
+使用UTC格式时间，
+例如：2019-01-08T10:00:00Z。
+注意：北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。
 注：EndTime 和 StartTime 只支持最近1天的数据查询。
    */
   EndTime: string
@@ -8914,7 +8953,9 @@ export interface DescribeLiveDomainRefererRequest {
 export interface HttpStatusData {
   /**
    * 数据时间点，
-格式：yyyy-mm-dd HH:MM:SS。
+使用UTC格式时间，
+例如：2019-01-08T10:00:00Z。
+注意：北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。
    */
   Time: string
   /**

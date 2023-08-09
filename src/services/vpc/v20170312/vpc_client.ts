@@ -1078,7 +1078,7 @@ export class Client extends AbstractClient {
    * 本接口（AcceptVpcPeeringConnection）用于接受对等连接请求。
    */
   async AcceptVpcPeeringConnection(
-    req?: AcceptVpcPeeringConnectionRequest,
+    req: AcceptVpcPeeringConnectionRequest,
     cb?: (error: string, rep: AcceptVpcPeeringConnectionResponse) => void
   ): Promise<AcceptVpcPeeringConnectionResponse> {
     return this.request("AcceptVpcPeeringConnection", req, cb)
@@ -2025,7 +2025,7 @@ export class Client extends AbstractClient {
    * 本接口（DeleteVpcPeeringConnection）用于删除私有网络对等连接。
    */
   async DeleteVpcPeeringConnection(
-    req?: DeleteVpcPeeringConnectionRequest,
+    req: DeleteVpcPeeringConnectionRequest,
     cb?: (error: string, rep: DeleteVpcPeeringConnectionResponse) => void
   ): Promise<DeleteVpcPeeringConnectionResponse> {
     return this.request("DeleteVpcPeeringConnection", req, cb)

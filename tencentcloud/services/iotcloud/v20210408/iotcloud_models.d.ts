@@ -673,6 +673,7 @@ export interface ProductProperties {
     Platform?: string;
     /**
      * LoRa产品运营侧APPEUI，只有LoRa产品需要填写
+     * @deprecated
      */
     Appeui?: string;
     /**
@@ -719,6 +720,10 @@ export interface ProductProperties {
      * 产品禁用状态
      */
     ForbiddenStatus?: number;
+    /**
+     * LoRa产品运营侧APPEUI，只有LoRa产品需要填写
+     */
+    AppEUI?: string;
 }
 /**
  * 设备固件更新状态
@@ -950,35 +955,40 @@ export interface CLSLogItem {
     /**
      * 日志内容
      */
-    Content: string;
+    Content?: string;
     /**
      * 设备名称
      */
-    DeviceName: string;
+    DeviceName?: string;
     /**
      * 产品ID
      */
-    ProductId: string;
+    ProductId?: string;
     /**
      * 请求ID
      */
-    RequestId: string;
+    RequestId?: string;
     /**
      * 结果
      */
-    Result: string;
+    Result?: string;
     /**
      * 模块
      */
-    Scene: string;
+    Scene?: string;
     /**
      * 日志时间
      */
-    Time: string;
+    Time?: string;
+    /**
+     * 腾讯云账号
+     * @deprecated
+     */
+    Userid?: string;
     /**
      * 腾讯云账号
      */
-    Userid: string;
+    UserId?: string;
 }
 /**
  * DeleteDevice请求参数结构体
@@ -1661,113 +1671,118 @@ export interface DescribeDeviceResponse {
     /**
      * 设备名
      */
-    DeviceName: string;
+    DeviceName?: string;
     /**
-     * 设备是否在线，0不在线，1在线
+     * 设备是否在线，0不在线，1在线，3未激活
      */
-    Online: number;
+    Online?: number;
     /**
      * 设备登录时间
      */
-    LoginTime: number;
+    LoginTime?: number;
     /**
      * 设备固件版本
      */
-    Version: string;
+    Version?: string;
     /**
      * 设备最后更新时间
      */
-    LastUpdateTime: number;
+    LastUpdateTime?: number;
     /**
      * 设备证书
      */
-    DeviceCert: string;
+    DeviceCert?: string;
     /**
      * 设备密钥
      */
-    DevicePsk: string;
+    DevicePsk?: string;
     /**
      * 设备属性
      */
-    Tags: Array<DeviceTag>;
+    Tags?: Array<DeviceTag>;
     /**
      * 设备类型
      */
-    DeviceType: number;
+    DeviceType?: number;
     /**
      * 国际移动设备识别码 IMEI
      */
-    Imei: string;
+    Imei?: string;
     /**
      * 运营商类型
      */
-    Isp: number;
+    Isp?: number;
     /**
      * IP地址
      */
-    ConnIP: number;
+    ConnIP?: number;
     /**
      * NB IoT运营商处的DeviceID
+     * @deprecated
      */
-    NbiotDeviceID: string;
+    NbiotDeviceID?: string;
     /**
      * Lora设备的dev eui
      */
-    LoraDevEui: string;
+    LoraDevEui?: string;
     /**
      * Lora设备的mote type
      */
-    LoraMoteType: number;
+    LoraMoteType?: number;
     /**
      * 设备的sdk日志等级
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    LogLevel: number;
+    LogLevel?: number;
     /**
      * 首次上线时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    FirstOnlineTime: number;
+    FirstOnlineTime?: number;
     /**
      * 最近下线时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    LastOfflineTime: number;
+    LastOfflineTime?: number;
     /**
      * 设备创建时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CreateTime: number;
+    CreateTime?: number;
     /**
      * 设备证书获取状态，0 未获取过设备密钥, 1 已获取过设备密钥
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CertState: number;
+    CertState?: number;
     /**
      * 设备启用状态
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    EnableState: number;
+    EnableState?: number;
     /**
      * 设备标签
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Labels: Array<DeviceLabel>;
+    Labels?: Array<DeviceLabel>;
     /**
      * MQTT客户端IP地址
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ClientIP: string;
+    ClientIP?: string;
     /**
      * 设备固件更新时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    FirmwareUpdateTime: number;
+    FirmwareUpdateTime?: number;
     /**
      * 创建者账号ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CreateUserId: number;
+    CreateUserId?: number;
+    /**
+     * NB IoT运营商处的DeviceID
+     */
+    NBIoTDeviceID?: string;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2577,113 +2592,118 @@ export interface DeviceInfo {
     /**
      * 设备名
      */
-    DeviceName: string;
+    DeviceName?: string;
     /**
      * 设备是否在线，0不在线，1在线
      */
-    Online: number;
+    Online?: number;
     /**
      * 设备登录时间
      */
-    LoginTime: number;
+    LoginTime?: number;
     /**
      * 设备版本
      */
-    Version: string;
+    Version?: string;
     /**
      * 设备证书，证书加密的设备返回
      */
-    DeviceCert: string;
+    DeviceCert?: string;
     /**
      * 设备密钥，密钥加密的设备返回
      */
-    DevicePsk: string;
+    DevicePsk?: string;
     /**
      * 设备属性
      */
-    Tags: Array<DeviceTag>;
+    Tags?: Array<DeviceTag>;
     /**
      * 设备类型
      */
-    DeviceType: number;
+    DeviceType?: number;
     /**
      * 国际移动设备识别码 IMEI
      */
-    Imei: string;
+    Imei?: string;
     /**
      * 运营商类型
      */
-    Isp: number;
+    Isp?: number;
     /**
      * NB IOT运营商处的DeviceID
+     * @deprecated
      */
-    NbiotDeviceID: string;
+    NbiotDeviceID?: string;
     /**
      * IP地址
      */
-    ConnIP: number;
+    ConnIP?: number;
     /**
      * 设备最后更新时间
      */
-    LastUpdateTime: number;
+    LastUpdateTime?: number;
     /**
      * LoRa设备的dev eui
      */
-    LoraDevEui: string;
+    LoraDevEui?: string;
     /**
      * LoRa设备的Mote type
      */
-    LoraMoteType: number;
+    LoraMoteType?: number;
     /**
      * 首次上线时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    FirstOnlineTime: number;
+    FirstOnlineTime?: number;
     /**
      * 最近下线时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    LastOfflineTime: number;
+    LastOfflineTime?: number;
     /**
      * 设备创建时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CreateTime: number;
+    CreateTime?: number;
     /**
      * 设备日志级别
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    LogLevel: number;
+    LogLevel?: number;
     /**
      * 设备证书获取状态, 1 已获取过设备密钥，0 未获取过设备密钥
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CertState: number;
+    CertState?: number;
     /**
      * 设备可用状态，0禁用，1启用
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    EnableState: number;
+    EnableState?: number;
     /**
      * 设备标签
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Labels: Array<DeviceLabel>;
+    Labels?: Array<DeviceLabel>;
     /**
      * MQTT客户端IP地址
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ClientIP: string;
+    ClientIP?: string;
     /**
      * ota最后更新时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    FirmwareUpdateTime: number;
+    FirmwareUpdateTime?: number;
     /**
      * 创建者 Uin
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CreateUserId: number;
+    CreateUserId?: number;
+    /**
+     * NB IOT运营商处的DeviceID
+     */
+    NBIoTDeviceID?: string;
 }
 /**
  * CreateTaskFileUrl请求参数结构体

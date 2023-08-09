@@ -3009,6 +3009,10 @@ export interface DescribeSchedulerTaskTypeCntRequest {
      * 项目ID
      */
     ProjectId: string;
+    /**
+     * 1
+     */
+    InCharge?: string;
 }
 /**
  * TKE集群信息详情
@@ -11747,25 +11751,35 @@ export interface InstanceStatisticInfo {
      * 实例状态趋势状态统计
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CountList: Array<number>;
+    CountList?: Array<number>;
     /**
      * 实例状态趋势时间分割
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TimeList: Array<string>;
+    TimeList?: Array<string>;
     /**
      * 实例状态标识：WAITING_RUNNING、KILLING、FAILED、FAILED_TRYING、SUCCEED 分别表示等待执行、正在终止、失败、失败重试、成功，用于实例状态分布和实例状态趋势
      */
-    InstanceStatus: string;
+    InstanceStatus?: string;
     /**
      * 用于实例状态分布计数
      */
-    InstanceCount: number;
+    InstanceCount?: number;
     /**
      * 当前展示时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ShowTime: string;
+    ShowTime?: string;
+    /**
+     * 1
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ReportTime?: string;
+    /**
+     * 1
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Count?: number;
 }
 /**
  * DescribeRelatedInstances返回参数结构体
@@ -14702,6 +14716,22 @@ export interface DescribeTaskByStatusReportRequest {
      * 结束时间
      */
     EndTime?: string;
+    /**
+     * 无
+     */
+    AggregationUnit?: string;
+    /**
+     * 无
+     */
+    CycleUnit?: string;
+    /**
+     * 无
+     */
+    Status?: string;
+    /**
+     * 无
+     */
+    InCharge?: string;
 }
 /**
  * 质量评分趋势
@@ -15164,6 +15194,10 @@ export interface DescribeSchedulerTaskCntByStatusRequest {
      * 111
      */
     ProjectId?: string;
+    /**
+     * 1
+     */
+    InCharge?: string;
 }
 /**
  * DescribeInstances请求参数结构体
@@ -19084,6 +19118,26 @@ export interface DescribeStatisticInstanceStatusTrendOpsRequest {
      * 资源组名称
      */
     ExecutionGroupName?: string;
+    /**
+     * 1
+     */
+    InCharge?: string;
+    /**
+     * 1
+     */
+    TaskType?: number;
+    /**
+     * 1
+     */
+    StateList?: Array<number>;
+    /**
+     * D代表天，H代表小时
+     */
+    AggregationUnit?: string;
+    /**
+     * 1
+     */
+    AverageWindowSize?: number;
 }
 /**
  * DescribeEventCases返回参数结构体
@@ -19368,6 +19422,14 @@ export interface TaskByStatus {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     CycleUnit?: string;
+    /**
+     * 1
+     */
+    ReportTime?: string;
+    /**
+     * 1
+     */
+    Count?: number;
 }
 /**
  * DescribeFolderWorkflowList返回参数结构体
@@ -19901,6 +19963,18 @@ export interface DescribeSchedulerInstanceStatusRequest {
      * 执行资源组名字
      */
     ExecutionGroupName?: string;
+    /**
+     * 开始时间
+     */
+    StartTime?: string;
+    /**
+     * 结束时间
+     */
+    EndTime?: string;
+    /**
+     * 责任人
+     */
+    InCharge?: string;
 }
 /**
  * DescribeScheduleInstances请求参数结构体
@@ -20104,6 +20178,14 @@ export interface DescribeSchedulerRunTimeInstanceCntByStatusRequest {
      * 结束日前：2023-03-20
      */
     EndTime?: string;
+    /**
+     * 1
+     */
+    TaskType?: number;
+    /**
+     * 1
+     */
+    InCharge?: string;
 }
 /**
  * map
@@ -20788,6 +20870,10 @@ export interface DescribeTaskByCycleRequest {
      * 项目ID
      */
     ProjectId: string;
+    /**
+     * 1
+     */
+    InCharge?: string;
 }
 /**
  * Id包装对象

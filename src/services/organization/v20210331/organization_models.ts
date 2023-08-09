@@ -16,54 +16,94 @@
  */
 
 /**
- * 成员和子账号的授权关系
+ * 企业组织成员
  */
-export interface OrgMemberAuthAccount {
+export interface OrgMember {
   /**
-   * 组织子账号Uin。
+   * 成员Uin
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  OrgSubAccountUin: number
+  MemberUin: number
   /**
-   * 策略ID。
+   * 成员名
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  PolicyId: number
+  Name: string
   /**
-   * 策略名。
+   * 成员类型，邀请：Invite， 创建：Create
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  PolicyName: string
+  MemberType: string
   /**
-   * 身份ID。
+   * 关系策略类型
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  IdentityId: number
+  OrgPolicyType: string
   /**
-   * 身份角色名。
+   * 关系策略名
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  IdentityRoleName: string
+  OrgPolicyName: string
   /**
-   * 身份角色别名。
+   * 关系策略权限
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  IdentityRoleAliasName: string
+  OrgPermission: Array<OrgPermission>
   /**
-   * 创建时间。
+   * 所属节点ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NodeId: number
+  /**
+   * 所属节点名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NodeName: string
+  /**
+   * 备注
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Remark: string
+  /**
+   * 创建时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateTime: string
   /**
-   * 更新时间。
+   * 更新时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
   UpdateTime: string
   /**
-   * 子账号名称
+   * 是否允许成员退出。允许：Allow，不允许：Denied。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  OrgSubAccountName: string
+  IsAllowQuit: string
+  /**
+   * 代付者Uin
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PayUin: string
+  /**
+   * 代付者名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PayName: string
+  /**
+   * 管理身份
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OrgIdentity: Array<MemberIdentity>
+  /**
+   * 安全信息绑定状态  未绑定：Unbound，待激活：Valid，绑定成功：Success，绑定失败：Failed
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BindStatus: string
+  /**
+   * 成员权限状态 已确认：Confirmed ，待确认：UnConfirmed
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PermissionStatus: string
 }
 
 /**
@@ -191,13 +231,17 @@ export interface BindOrganizationMemberAuthAccountRequest {
 }
 
 /**
- * UpdateOrganizationMemberEmailBind返回参数结构体
+ * CreateOrganizationMemberAuthIdentity请求参数结构体
  */
-export interface UpdateOrganizationMemberEmailBindResponse {
+export interface CreateOrganizationMemberAuthIdentityRequest {
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 成员uin列表。最多10个
    */
-  RequestId?: string
+  MemberUins: Array<number>
+  /**
+   * 身份Id列表。最多5个
+   */
+  IdentityIds: Array<number>
 }
 
 /**
@@ -284,6 +328,16 @@ export interface DescribeOrganizationMemberAuthIdentitiesRequest {
  * AddOrganizationMemberEmail返回参数结构体
  */
 export interface AddOrganizationMemberEmailResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateOrganizationMemberAuthIdentity返回参数结构体
+ */
+export interface CreateOrganizationMemberAuthIdentityResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -754,6 +808,16 @@ export interface DescribeOrganizationNodesResponse {
 }
 
 /**
+ * DeleteOrganizationMembersPolicy请求参数结构体
+ */
+export interface DeleteOrganizationMembersPolicyRequest {
+  /**
+   * 访问策略ID。
+   */
+  PolicyId: number
+}
+
+/**
  * DescribeOrganizationMembers返回参数结构体
  */
 export interface DescribeOrganizationMembersResponse {
@@ -794,6 +858,57 @@ export interface CancelOrganizationMemberAuthAccountResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 成员和子账号的授权关系
+ */
+export interface OrgMemberAuthAccount {
+  /**
+   * 组织子账号Uin。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OrgSubAccountUin: number
+  /**
+   * 策略ID。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PolicyId: number
+  /**
+   * 策略名。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PolicyName: string
+  /**
+   * 身份ID。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IdentityId: number
+  /**
+   * 身份角色名。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IdentityRoleName: string
+  /**
+   * 身份角色别名。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IdentityRoleAliasName: string
+  /**
+   * 创建时间。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateTime: string
+  /**
+   * 更新时间。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UpdateTime: string
+  /**
+   * 子账号名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OrgSubAccountName: string
 }
 
 /**
@@ -954,21 +1069,23 @@ export interface DescribeOrganizationMemberEmailBindRequest {
 }
 
 /**
- * AddOrganizationNode请求参数结构体
+ * UpdateOrganizationMemberEmailBind返回参数结构体
  */
-export interface AddOrganizationNodeRequest {
+export interface UpdateOrganizationMemberEmailBindResponse {
   /**
-   * 父节点ID。可以调用DescribeOrganizationNodes获取
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  ParentNodeId: number
+  RequestId?: string
+}
+
+/**
+ * DeleteOrganizationMembersPolicy返回参数结构体
+ */
+export interface DeleteOrganizationMembersPolicyResponse {
   /**
-   * 节点名称。最大长度为40个字符，支持英文字母、数字、汉字、符号+@、&._[]-
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  Name: string
-  /**
-   * 备注。
-   */
-  Remark?: string
+  RequestId?: string
 }
 
 /**
@@ -1159,94 +1276,21 @@ export interface DescribeOrganizationMemberAuthAccountsResponse {
 }
 
 /**
- * 企业组织成员
+ * AddOrganizationNode请求参数结构体
  */
-export interface OrgMember {
+export interface AddOrganizationNodeRequest {
   /**
-   * 成员Uin
-注意：此字段可能返回 null，表示取不到有效值。
+   * 父节点ID。可以调用DescribeOrganizationNodes获取
    */
-  MemberUin: number
+  ParentNodeId: number
   /**
-   * 成员名
-注意：此字段可能返回 null，表示取不到有效值。
+   * 节点名称。最大长度为40个字符，支持英文字母、数字、汉字、符号+@、&._[]-
    */
   Name: string
   /**
-   * 成员类型，邀请：Invite， 创建：Create
-注意：此字段可能返回 null，表示取不到有效值。
+   * 备注。
    */
-  MemberType: string
-  /**
-   * 关系策略类型
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  OrgPolicyType: string
-  /**
-   * 关系策略名
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  OrgPolicyName: string
-  /**
-   * 关系策略权限
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  OrgPermission: Array<OrgPermission>
-  /**
-   * 所属节点ID
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  NodeId: number
-  /**
-   * 所属节点名
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  NodeName: string
-  /**
-   * 备注
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Remark: string
-  /**
-   * 创建时间
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CreateTime: string
-  /**
-   * 更新时间
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  UpdateTime: string
-  /**
-   * 是否允许成员退出。允许：Allow，不允许：Denied。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  IsAllowQuit: string
-  /**
-   * 代付者Uin
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  PayUin: string
-  /**
-   * 代付者名称
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  PayName: string
-  /**
-   * 管理身份
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  OrgIdentity: Array<MemberIdentity>
-  /**
-   * 安全信息绑定状态  未绑定：Unbound，待激活：Valid，绑定成功：Success，绑定失败：Failed
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  BindStatus: string
-  /**
-   * 成员权限状态 已确认：Confirmed ，待确认：UnConfirmed
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  PermissionStatus: string
+  Remark?: string
 }
 
 /**

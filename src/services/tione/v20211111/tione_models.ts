@@ -273,41 +273,13 @@ export interface StopModelAccelerateTaskRequest {
 }
 
 /**
- * DescribeDatasetDetailUnstructured请求参数结构体
+ * DeleteTrainingModelVersion返回参数结构体
  */
-export interface DescribeDatasetDetailUnstructuredRequest {
+export interface DeleteTrainingModelVersionResponse {
   /**
-   * 数据集ID
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  DatasetId?: string
-  /**
-   * 偏移量
-   */
-  Offset?: number
-  /**
-   * 返回个数，默认20，目前最大支持2000条数据
-   */
-  Limit?: number
-  /**
-   * 标签过滤参数，对应标签值
-   */
-  LabelList?: Array<string>
-  /**
-   * 标注状态过滤参数:
-STATUS_ANNOTATED，已标注
-STATUS_NON_ANNOTATED，未标注
-STATUS_ALL，全部
-默认为STATUS_ALL
-   */
-  AnnotationStatus?: string
-  /**
-   * 数据集ID列表
-   */
-  DatasetIds?: Array<string>
-  /**
-   * 要筛选的文本分类场景标签信息
-   */
-  TextClassificationLabels?: Array<TextLabelDistributionInfo>
+  RequestId?: string
 }
 
 /**
@@ -744,6 +716,27 @@ export interface RestartModelAccelerateTaskRequest {
    * 加速引擎对应的框架版本
    */
   FrameworkVersion?: string
+}
+
+/**
+ * 大模型生成Token统计
+ */
+export interface Usage {
+  /**
+   * 生成的token数目
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CompletionTokens?: number
+  /**
+   * 输入的token数目
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PromptTokens?: number
+  /**
+   * 总共token数目
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalTokens?: number
 }
 
 /**
@@ -1193,13 +1186,41 @@ export interface DescribeNotebookImageKernelsRequest {
 }
 
 /**
- * DeleteTrainingModelVersion返回参数结构体
+ * DescribeDatasetDetailUnstructured请求参数结构体
  */
-export interface DeleteTrainingModelVersionResponse {
+export interface DescribeDatasetDetailUnstructuredRequest {
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 数据集ID
    */
-  RequestId?: string
+  DatasetId?: string
+  /**
+   * 偏移量
+   */
+  Offset?: number
+  /**
+   * 返回个数，默认20，目前最大支持2000条数据
+   */
+  Limit?: number
+  /**
+   * 标签过滤参数，对应标签值
+   */
+  LabelList?: Array<string>
+  /**
+   * 标注状态过滤参数:
+STATUS_ANNOTATED，已标注
+STATUS_NON_ANNOTATED，未标注
+STATUS_ALL，全部
+默认为STATUS_ALL
+   */
+  AnnotationStatus?: string
+  /**
+   * 数据集ID列表
+   */
+  DatasetIds?: Array<string>
+  /**
+   * 要筛选的文本分类场景标签信息
+   */
+  TextClassificationLabels?: Array<TextLabelDistributionInfo>
 }
 
 /**
@@ -1499,37 +1520,17 @@ export interface StartNotebookResponse {
 }
 
 /**
- * CreateBatchModelAccTasks请求参数结构体
+ * CreateNotebook返回参数结构体
  */
-export interface CreateBatchModelAccTasksRequest {
+export interface CreateNotebookResponse {
   /**
-   * 模型加速任务名称
+   * notebook标志
    */
-  ModelAccTaskName: string
+  Id?: string
   /**
-   * 批量模型加速任务
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  BatchModelAccTasks: Array<BatchModelAccTask>
-  /**
-   * 模型加速保存路径
-   */
-  ModelOutputPath: CosPathInfo
-  /**
-   * 标签
-   */
-  Tags?: Array<Tag>
-  /**
-   * 优化级别(NO_LOSS/FP16/INT8)，默认FP16
-   */
-  OptimizationLevel?: string
-  /**
-   * GPU卡类型(T4/V100/A10)，默认T4
-   */
-  GPUType?: string
-  /**
-   * 专业参数设置
-   */
-  HyperParameter?: HyperParameter
+  RequestId?: string
 }
 
 /**
@@ -1863,6 +1864,16 @@ export interface CFSConfig {
 }
 
 /**
+ * DescribeTrainingMetrics请求参数结构体
+ */
+export interface DescribeTrainingMetricsRequest {
+  /**
+   * 任务ID
+   */
+  TaskId: string
+}
+
+/**
  * CreateNotebookImage请求参数结构体
  */
 export interface CreateNotebookImageRequest {
@@ -2170,6 +2181,32 @@ export interface FrameworkVersion {
    * 框架运行环境
    */
   Environment?: string
+}
+
+/**
+ * ChatCompletion请求参数结构体
+ */
+export interface ChatCompletionRequest {
+  /**
+   * 部署好的模型服务Id。
+   */
+  Model: string
+  /**
+   * 输入对话历史。旧的对话在前，数组中最后一项应该为这次的问题。
+   */
+  Messages: Array<Message>
+  /**
+   * 采样随机值，默认值为1.0，取值范围[0,2]。较高的值(如0.8)将使输出更加随机，而较低的值(如0.2)将使输出更加确定。建议仅修改此参数或TopP，但不建议两者都修改。
+   */
+  Temperature?: number
+  /**
+   * 核采样，默认值为1，取值范围[0,1]。指的是预先设置一个概率界限 p，然后将所有可能生成的token，根据概率大小从高到低排列，依次选取。当这些选取的token的累积概率大于或等于 p 值时停止，然后从已经选取的token中进行采样，生成下一个token。例如top_p为0.1时意味着模型只考虑累积概率为10%的token。建议仅修改此参数或Temperature，不建议两者都修改。
+   */
+  TopP?: number
+  /**
+   * 最大生成的token数目。默认为无限大。
+   */
+  MaxTokens?: number
 }
 
 /**
@@ -2911,6 +2948,25 @@ export interface StopCreatingImageRequest {
    * 镜像保存记录ID
    */
   RecordId: string
+}
+
+/**
+ * 对话结果
+ */
+export interface Choice {
+  /**
+   * 对话结果
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Message?: Message
+  /**
+   * 结束理由: stop, length, content_filter, null
+   */
+  FinishReason?: string
+  /**
+   * 序号
+   */
+  Index?: number
 }
 
 /**
@@ -4039,6 +4095,22 @@ POSTPAID_BY_HOUR 按量计费
 }
 
 /**
+ * 对话输入内容
+ */
+export interface Message {
+  /**
+   * 角色名。支持三个角色：system、user、assistant，其中system仅开头可出现一次，也可忽略。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Role: string
+  /**
+   * 对话输入内容。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Content: string
+}
+
+/**
  * 实例状况
  */
 export interface StatefulSetCondition {
@@ -4129,17 +4201,37 @@ export interface RestartModelAccelerateTaskResponse {
 }
 
 /**
- * CreateNotebook返回参数结构体
+ * CreateBatchModelAccTasks请求参数结构体
  */
-export interface CreateNotebookResponse {
+export interface CreateBatchModelAccTasksRequest {
   /**
-   * notebook标志
+   * 模型加速任务名称
    */
-  Id?: string
+  ModelAccTaskName: string
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 批量模型加速任务
    */
-  RequestId?: string
+  BatchModelAccTasks: Array<BatchModelAccTask>
+  /**
+   * 模型加速保存路径
+   */
+  ModelOutputPath: CosPathInfo
+  /**
+   * 标签
+   */
+  Tags?: Array<Tag>
+  /**
+   * 优化级别(NO_LOSS/FP16/INT8)，默认FP16
+   */
+  OptimizationLevel?: string
+  /**
+   * GPU卡类型(T4/V100/A10)，默认T4
+   */
+  GPUType?: string
+  /**
+   * 专业参数设置
+   */
+  HyperParameter?: HyperParameter
 }
 
 /**
@@ -6109,13 +6201,31 @@ export interface DescribeTrainingTaskRequest {
 }
 
 /**
- * DescribeTrainingMetrics请求参数结构体
+ * ChatCompletion返回参数结构体
  */
-export interface DescribeTrainingMetricsRequest {
+export interface ChatCompletionResponse {
   /**
-   * 任务ID
+   * 部署好的服务Id
    */
-  TaskId: string
+  Model?: string
+  /**
+   * 本次问答的答案。
+   */
+  Choices?: Array<Choice>
+  /**
+   * 会话Id。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Id?: string
+  /**
+   * token统计
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Usage?: Usage
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

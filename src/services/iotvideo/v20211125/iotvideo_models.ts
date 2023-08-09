@@ -2962,6 +2962,24 @@ export interface DescribeProductDynamicRegisterRequest {
 }
 
 /**
+ * ResetCloudStorageEvent请求参数结构体
+ */
+export interface ResetCloudStorageEventRequest {
+  /**
+   * 产品ID
+   */
+  ProductId: string
+  /**
+   * 设备名称
+   */
+  DeviceName: string
+  /**
+   * 用户ID
+   */
+  UserId?: string
+}
+
+/**
  * DescribeFirmwareTaskDistribution返回参数结构体
  */
 export interface DescribeFirmwareTaskDistributionResponse {
@@ -3811,6 +3829,16 @@ export interface CreateDataForwardRequest {
    * 1-数据信息转发 2-设备上下线状态转发 3-数据信息转发&设备上下线状态转发
    */
   DataChose?: number
+}
+
+/**
+ * ResetCloudStorageEvent返回参数结构体
+ */
+export interface ResetCloudStorageEventResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

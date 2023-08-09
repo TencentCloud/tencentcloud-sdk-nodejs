@@ -23,7 +23,7 @@ import {
   ModelInfo,
   DescribeLogsRequest,
   StopModelAccelerateTaskRequest,
-  DescribeDatasetDetailUnstructuredRequest,
+  DeleteTrainingModelVersionResponse,
   BatchTaskDetail,
   DeleteNotebookImageRecordRequest,
   NotebookSetItem,
@@ -31,6 +31,7 @@ import {
   DescribeDatasetDetailStructuredResponse,
   ModifyServiceGroupWeightsResponse,
   RestartModelAccelerateTaskRequest,
+  Usage,
   DescribeBillingResourceGroupsRequest,
   DeleteNotebookRequest,
   DescribeTrainingFrameworksResponse,
@@ -46,7 +47,7 @@ import {
   DescribeTrainingTasksRequest,
   DescribeBatchTaskRequest,
   DescribeNotebookImageKernelsRequest,
-  DeleteTrainingModelVersionResponse,
+  DescribeDatasetDetailUnstructuredRequest,
   TrainingTaskDetail,
   StopBatchTaskResponse,
   ModifyNotebookTagsResponse,
@@ -55,7 +56,7 @@ import {
   DescribeBillingResourceGroupsResponse,
   SpecPrice,
   StartNotebookResponse,
-  CreateBatchModelAccTasksRequest,
+  CreateNotebookResponse,
   CFSTurbo,
   RowValue,
   CreateBatchTaskRequest,
@@ -64,6 +65,7 @@ import {
   FilterLabelInfo,
   WorkloadStatus,
   CFSConfig,
+  DescribeTrainingMetricsRequest,
   CreateNotebookImageRequest,
   APIConfigDetail,
   InferTemplate,
@@ -73,6 +75,7 @@ import {
   TextLabelDistributionDetailInfoThirdClass,
   ModifyModelServiceRequest,
   FrameworkVersion,
+  ChatCompletionRequest,
   ModifyModelServicePartialConfigResponse,
   DescribeModelAccEngineVersionsResponse,
   DescribeModelServiceCallInfoRequest,
@@ -98,6 +101,7 @@ import {
   Option,
   DescribeNotebookImageRecordsRequest,
   StopCreatingImageRequest,
+  Choice,
   ResourceGroup,
   DescribeBatchTaskInstancesRequest,
   DescribeModelServiceHistoryRequest,
@@ -132,12 +136,13 @@ import {
   DeleteModelServiceRequest,
   DeleteModelAccelerateTaskRequest,
   CreateTrainingTaskRequest,
+  Message,
   StatefulSetCondition,
   ModifyNotebookResponse,
   DescribeModelServiceResponse,
   DescribeDatasetsResponse,
   RestartModelAccelerateTaskResponse,
-  CreateNotebookResponse,
+  CreateBatchModelAccTasksRequest,
   DescribeBillingSpecsPriceRequest,
   WeightEntry,
   Instance,
@@ -211,7 +216,7 @@ import {
   TrainingModelVersionDTO,
   PushTrainingMetricsRequest,
   DescribeTrainingTaskRequest,
-  DescribeTrainingMetricsRequest,
+  ChatCompletionResponse,
   DescribeTrainingTaskPodsRequest,
   DescribeTrainingModelVersionsResponse,
   ModelInputInfo,
@@ -475,6 +480,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeModelAccelerateTaskResponse) => void
   ): Promise<DescribeModelAccelerateTaskResponse> {
     return this.request("DescribeModelAccelerateTask", req, cb)
+  }
+
+  /**
+   * 与大模型聊天
+   */
+  async ChatCompletion(
+    req: ChatCompletionRequest,
+    cb?: (error: string, rep: ChatCompletionResponse) => void
+  ): Promise<ChatCompletionResponse> {
+    return this.request("ChatCompletion", req, cb)
   }
 
   /**
