@@ -23,17 +23,17 @@ export interface CreateEmbedTokenResponse {
    * 额外信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Extra: string
+  Extra?: string
   /**
    * 数据
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Data: EmbedTokenInfo
+  Data?: EmbedTokenInfo
   /**
    * 结果描述
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Msg: string
+  Msg?: string
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -107,7 +107,7 @@ export interface ApplyEmbedIntervalResponse {
  */
 export interface CreateEmbedTokenRequest {
   /**
-   * 分享项目id，必选
+   * 分享项目id
    */
   ProjectId?: number
   /**
@@ -181,10 +181,10 @@ export interface EmbedTokenInfo {
    * 嵌出类型
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Scope: string
+  Scope?: string
   /**
    * 过期时间，分钟为单位，最大240
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ExpireTime: number
+  ExpireTime?: number
 }

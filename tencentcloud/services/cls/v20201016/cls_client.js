@@ -279,7 +279,7 @@ cls.pb.cc cls.pb.h cls.proto
         return this.request("CreateIndex", req, cb);
     }
     /**
-     * 本接口用于获取ScheduledSql任务列表
+     * 本接口用于获取定时SQL分析任务列表
      */
     async DescribeScheduledSqlInfo(req, cb) {
         return this.request("DescribeScheduledSqlInfo", req, cb);
@@ -471,7 +471,7 @@ cls.pb.cc cls.pb.h cls.proto
         return this.request("SearchLog", req, cb);
     }
     /**
-     * 本接口用于删除ScheduledSql任务
+     * 本接口用于删除定时SQL分析任务
      */
     async DeleteScheduledSql(req, cb) {
         return this.request("DeleteScheduledSql", req, cb);
@@ -657,7 +657,7 @@ cls.pb.cc cls.pb.h cls.proto
         return this.request("CreateAlarm", req, cb);
     }
     /**
-     * 本接口用于创建ScheduledSql任务
+     * 本接口用于创建定时SQL分析任务
      */
     async CreateScheduledSql(req, cb) {
         return this.request("CreateScheduledSql", req, cb);
@@ -669,7 +669,7 @@ cls.pb.cc cls.pb.h cls.proto
         return this.request("CreateExport", req, cb);
     }
     /**
-     * 本接口用于修改ScheduledSql任务
+     * 本接口用于修改定时SQL分析任务
      */
     async ModifyScheduledSql(req, cb) {
         return this.request("ModifyScheduledSql", req, cb);

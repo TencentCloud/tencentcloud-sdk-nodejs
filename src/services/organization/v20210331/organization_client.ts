@@ -43,6 +43,7 @@ import {
   AuthNode,
   DescribeOrganizationMemberEmailBindResponse,
   DeleteOrganizationMembersRequest,
+  DeleteOrganizationMemberAuthIdentityRequest,
   DescribeOrganizationMemberPoliciesResponse,
   DeleteOrganizationNodesRequest,
   IdentityPolicy,
@@ -82,6 +83,7 @@ import {
   MoveOrganizationNodeMembersResponse,
   DescribeOrganizationMembersRequest,
   MemberIdentity,
+  DeleteOrganizationMemberAuthIdentityResponse,
   UpdateOrganizationMemberEmailBindRequest,
   OrgNode,
 } from "./organization_models"
@@ -354,5 +356,15 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateOrganizationMemberPolicyResponse) => void
   ): Promise<CreateOrganizationMemberPolicyResponse> {
     return this.request("CreateOrganizationMemberPolicy", req, cb)
+  }
+
+  /**
+   * 删除组织成员访问授权
+   */
+  async DeleteOrganizationMemberAuthIdentity(
+    req: DeleteOrganizationMemberAuthIdentityRequest,
+    cb?: (error: string, rep: DeleteOrganizationMemberAuthIdentityResponse) => void
+  ): Promise<DeleteOrganizationMemberAuthIdentityResponse> {
+    return this.request("DeleteOrganizationMemberAuthIdentity", req, cb)
   }
 }

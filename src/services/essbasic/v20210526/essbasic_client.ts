@@ -24,17 +24,19 @@ import {
   Component,
   ChannelDeleteSealPoliciesRequest,
   ChannelBatchCancelFlowsResponse,
+  ChannelDisableUserAutoSignResponse,
   Department,
   CommonApproverOption,
   ChannelCreateFlowGroupByTemplatesResponse,
   ChannelCreateFlowSignReviewRequest,
   AuthFailMessage,
   DescribeFlowDetailInfoRequest,
+  ChannelCancelUserAutoSignEnableUrlResponse,
   ModifyExtendedServiceRequest,
   DescribeResourceUrlsByFlowsRequest,
   RemindFlowRecords,
   ChannelCreateFlowSignUrlResponse,
-  CreateSealByImageResponse,
+  ChannelCreatePrepareFlowResponse,
   WebThemeConfig,
   OperateChannelTemplateResponse,
   FlowFileInfo,
@@ -68,15 +70,19 @@ import {
   Agent,
   Recipient,
   DescribeTemplatesResponse,
+  AutoSignConfig,
   StaffRole,
   ChannelVerifyPdfRequest,
   CreateChannelFlowEvidenceReportRequest,
+  ChannelCancelUserAutoSignEnableUrlRequest,
   ChannelVerifyPdfResponse,
   CreateConsoleLoginUrlRequest,
   OrganizationInfo,
   SignUrlInfo,
   CommonFlowApprover,
   PdfVerifyResult,
+  UserThreeFactor,
+  ChannelCreateUserAutoSignEnableUrlRequest,
   ChannelCancelMultiFlowSignQRCodeRequest,
   UploadFilesRequest,
   ChannelDescribeOrganizationSealsRequest,
@@ -98,12 +104,14 @@ import {
   ChannelCreateMultiFlowSignQRCodeRequest,
   SignQrCode,
   FlowApproverInfo,
+  ChannelCreateUserAutoSignEnableUrlResponse,
   ChannelGetTaskResultApiRequest,
   FlowDetailInfo,
   CreateFlowsByTemplatesResponse,
   DescribeChannelFlowEvidenceReportRequest,
   SyncProxyOrganizationOperatorsResponse,
   FailedCreateRoleData,
+  ChannelDescribeUserAutoSignStatusRequest,
   FlowResourceUrlInfo,
   UploadFile,
   ExtentServiceAuthInfo,
@@ -116,8 +124,9 @@ import {
   PrepareFlowsRequest,
   ChannelCreateFlowByFilesResponse,
   ChannelCreateFlowSignReviewResponse,
+  ChannelDisableUserAutoSignRequest,
   ChannelDescribeOrganizationSealsResponse,
-  ChannelCreatePrepareFlowResponse,
+  CreateSealByImageResponse,
   ChannelCancelMultiFlowSignQRCodeResponse,
   ChannelDescribeRolesResponse,
   ChannelCreateReleaseFlowRequest,
@@ -154,6 +163,7 @@ import {
   ChannelCreateReleaseFlowResponse,
   DescribeChannelFlowEvidenceReportResponse,
   CreateSealByImageRequest,
+  ChannelDescribeUserAutoSignStatusResponse,
   ChannelUpdateSealStatusResponse,
   ChannelCreateFlowSignUrlRequest,
   DescribeExtendedServiceAuthInfoResponse,
@@ -316,6 +326,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ChannelCreateSealPolicyResponse) => void
   ): Promise<ChannelCreateSealPolicyResponse> {
     return this.request("ChannelCreateSealPolicy", req, cb)
+  }
+
+  /**
+   * 企业方可以通过此接口关闭个人的自动签功能
+   */
+  async ChannelDisableUserAutoSign(
+    req: ChannelDisableUserAutoSignRequest,
+    cb?: (error: string, rep: ChannelDisableUserAutoSignResponse) => void
+  ): Promise<ChannelDisableUserAutoSignResponse> {
+    return this.request("ChannelDisableUserAutoSign", req, cb)
   }
 
   /**
@@ -489,6 +509,16 @@ https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/launchAp
   }
 
   /**
+   * 企业方可以通过此接口查询个人用户自动签开启状态
+   */
+  async ChannelDescribeUserAutoSignStatus(
+    req: ChannelDescribeUserAutoSignStatusRequest,
+    cb?: (error: string, rep: ChannelDescribeUserAutoSignStatusResponse) => void
+  ): Promise<ChannelDescribeUserAutoSignStatusResponse> {
+    return this.request("ChannelDescribeUserAutoSignStatus", req, cb)
+  }
+
+  /**
    * 对流程的合同文件进行数字签名验证，判断文件是否被篡改。
    */
   async ChannelVerifyPdf(
@@ -620,6 +650,16 @@ https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/launchAp
   }
 
   /**
+   * 此接口（ChannelCancelUserAutoSignEnableUrl）用来撤销发送给个人用户的自动签开通链接，撤销后对应的个人用户开通链接失效。若个人用户已经完成开通，将无法撤销。（处方单场景专用，使用此接口请与客户经理确认）
+   */
+  async ChannelCancelUserAutoSignEnableUrl(
+    req: ChannelCancelUserAutoSignEnableUrlRequest,
+    cb?: (error: string, rep: ChannelCancelUserAutoSignEnableUrlResponse) => void
+  ): Promise<ChannelCancelUserAutoSignEnableUrlResponse> {
+    return this.request("ChannelCancelUserAutoSignEnableUrl", req, cb)
+  }
+
+  /**
      * 此接口（UploadFiles）用于文件上传。
 其中上传的文件，图片类型(png/jpg/jpeg)大小限制为5M，其他大小限制为60M。
 调用时需要设置Domain, 正式环境为 file.ess.tencent.cn。
@@ -744,6 +784,16 @@ httpProfile.setEndpoint("file.test.ess.tencent.cn");
     cb?: (error: string, rep: DescribeFlowDetailInfoResponse) => void
   ): Promise<DescribeFlowDetailInfoResponse> {
     return this.request("DescribeFlowDetailInfo", req, cb)
+  }
+
+  /**
+   * 企业方可以通过此接口获取个人用户开启自动签的跳转链接
+   */
+  async ChannelCreateUserAutoSignEnableUrl(
+    req: ChannelCreateUserAutoSignEnableUrlRequest,
+    cb?: (error: string, rep: ChannelCreateUserAutoSignEnableUrlResponse) => void
+  ): Promise<ChannelCreateUserAutoSignEnableUrlResponse> {
+    return this.request("ChannelCreateUserAutoSignEnableUrl", req, cb)
   }
 
   /**

@@ -584,7 +584,7 @@ cls.pb.cc cls.pb.h cls.proto
   }
 
   /**
-   * 本接口用于获取ScheduledSql任务列表
+   * 本接口用于获取定时SQL分析任务列表
    */
   async DescribeScheduledSqlInfo(
     req: DescribeScheduledSqlInfoRequest,
@@ -904,7 +904,7 @@ cls.pb.cc cls.pb.h cls.proto
   }
 
   /**
-   * 本接口用于删除ScheduledSql任务
+   * 本接口用于删除定时SQL分析任务
    */
   async DeleteScheduledSql(
     req: DeleteScheduledSqlRequest,
@@ -1214,7 +1214,7 @@ cls.pb.cc cls.pb.h cls.proto
   }
 
   /**
-   * 本接口用于创建ScheduledSql任务
+   * 本接口用于创建定时SQL分析任务
    */
   async CreateScheduledSql(
     req: CreateScheduledSqlRequest,
@@ -1234,7 +1234,7 @@ cls.pb.cc cls.pb.h cls.proto
   }
 
   /**
-   * 本接口用于修改ScheduledSql任务
+   * 本接口用于修改定时SQL分析任务
    */
   async ModifyScheduledSql(
     req: ModifyScheduledSqlRequest,

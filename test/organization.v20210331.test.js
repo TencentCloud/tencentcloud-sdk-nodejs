@@ -278,4 +278,14 @@ it("organization.v20210331.CreateOrganizationMemberPolicy", async function () {
     }
 })
 
+it("organization.v20210331.DeleteOrganizationMemberAuthIdentity", async function () {
+    try {
+       const data = await client.DeleteOrganizationMemberAuthIdentity({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 })

@@ -2076,23 +2076,23 @@ export interface DescribeInLongTkeClusterListResponse {
     /**
      * TKE集群信息
      */
-    Items: Array<InLongTkeDetail>;
+    Items?: Array<InLongTkeDetail>;
     /**
      * 页码
      */
-    PageIndex: number;
+    PageIndex?: number;
     /**
      * 每页记录数
      */
-    PageSize: number;
+    PageSize?: number;
     /**
      * 总记录数
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 总页数
      */
-    TotalPage: number;
+    TotalPage?: number;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -8090,7 +8090,7 @@ export interface DescribeInstanceListRequest {
      */
     PageIndex: number;
     /**
-     * 页大小
+     * 一页展示的条数
      */
     PageSize: number;
     /**
@@ -8114,7 +8114,11 @@ export interface DescribeInstanceListRequest {
      */
     SortCol: string;
     /**
-     * 类型列表（如35 shell任务），可选
+     * 类型列表（如python任务类型：30
+  pyspark任务类型：31
+  hivesql任务类型：34
+  shell任务类型：35
+  sparksql任务类型：36 jdbcsql任务类型：21 dlc任务类型：32），可选
      */
     TaskTypeList: Array<number>;
     /**
@@ -13951,7 +13955,7 @@ export interface CreateHiveTableResponse {
     /**
      * 建表是否成功
      */
-    IsSuccess: boolean;
+    IsSuccess?: boolean;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -20426,7 +20430,7 @@ export interface DescribeInstanceLastLogResponse {
     /**
      * 日志
      */
-    Data: string;
+    Data?: string;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -20558,7 +20562,7 @@ export interface CreateHiveTableRequest {
      */
     Database: string;
     /**
-     * 建hive表ddl
+     * base64转码之后的建表语句
      */
     DDLSql: string;
     /**
@@ -21272,7 +21276,7 @@ export interface DescribeInLongTkeClusterListRequest {
      */
     ClusterName?: string;
     /**
-     * TKE集群状态 (Running 运行中 Creating 创建中 Idling 闲置中 Abnormal 异常 Failed 异常 Deleting 删除中 Scaling 规模调整中 Upgrading 升级中 Isolated 欠费隔离中 NodeUpgrading 节点升级中 Recovering 唤醒中 Activating 激活中 MasterScaling Master扩缩容中 Waiting 等待注册 ClusterLevelUpgrading 调整规格中 ResourceIsolate 隔离中 ResourceIsolated 已隔离 ResourceReverse 冲正中 Trading 集群开通中 ResourceReversal 集群冲正 ClusterLevelTrading 集群变配交易中)
+     * TKE集群状态 (Running 运行中 Creating 创建中 Idling 闲置中 Abnormal 异常 Failed 失败 Deleting 删除中 Scaling 规模调整中 Upgrading 升级中 Isolated 欠费隔离中 NodeUpgrading 节点升级中 Recovering 唤醒中 Activating 激活中 MasterScaling Master扩缩容中 Waiting 等待注册 ClusterLevelUpgrading 调整规格中 ResourceIsolate 隔离中 ResourceIsolated 已隔离 ResourceReverse 冲正中 Trading 集群开通中 ResourceReversal 集群冲正 ClusterLevelTrading 集群变配交易中)
   多个状态用逗号连接。
      */
     Status?: string;

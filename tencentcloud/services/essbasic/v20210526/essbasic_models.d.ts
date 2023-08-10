@@ -349,6 +349,15 @@ export interface ChannelBatchCancelFlowsResponse {
     RequestId?: string;
 }
 /**
+ * ChannelDisableUserAutoSign返回参数结构体
+ */
+export interface ChannelDisableUserAutoSignResponse {
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * 第三方应用集成员工部门信息
  */
 export interface Department {
@@ -469,6 +478,15 @@ export interface DescribeFlowDetailInfoRequest {
     Operator?: UserInfo;
 }
 /**
+ * ChannelCancelUserAutoSignEnableUrl返回参数结构体
+ */
+export interface ChannelCancelUserAutoSignEnableUrlResponse {
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * ModifyExtendedService请求参数结构体
  */
 export interface ModifyExtendedServiceRequest {
@@ -544,13 +562,17 @@ export interface ChannelCreateFlowSignUrlResponse {
     RequestId?: string;
 }
 /**
- * CreateSealByImage返回参数结构体
+ * ChannelCreatePrepareFlow返回参数结构体
  */
-export interface CreateSealByImageResponse {
+export interface ChannelCreatePrepareFlowResponse {
     /**
-     * 印章id
+     * 预发起的合同链接
      */
-    SealId?: string;
+    PrepareFlowUrl?: string;
+    /**
+     * 合同发起后预览链接
+     */
+    PreviewFlowUrl?: string;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1102,6 +1124,10 @@ export interface ChannelCreateFlowByFilesRequest {
      */
     FlowName?: string;
     /**
+     * 签署流程的描述，长度不超过1000个字符
+     */
+    FlowDescription?: string;
+    /**
      * 签署流程签约方列表，最多不超过50个参与方
      */
     FlowApprovers?: Array<FlowApproverInfo>;
@@ -1114,25 +1140,28 @@ export interface ChannelCreateFlowByFilesRequest {
      */
     Components?: Array<Component>;
     /**
-     * 签署流程截止时间，十位数时间戳，最大值为33162419560，即3020年
+     * 签署流程的签署截止时间。
+  值为unix时间戳,精确到秒,不传默认为当前时间一年后
+  不能早于当前时间
      */
     Deadline?: number;
     /**
      * 签署流程回调地址，长度不超过255个字符
+  如果不传递回调地址， 则默认是配置应用号时候使用的回调地址
      */
     CallbackUrl?: string;
     /**
-     * 合同签署顺序类型(无序签,顺序签)，默认为false，即有序签署。有序签署时以传入FlowApprovers数组的顺序作为签署顺序
+     * 合同签署顺序类型
+  true - 无序签,
+  false - 顺序签，
+  默认为false，即有序签署。
+  有序签署时以传入FlowApprovers数组的顺序作为签署顺序
      */
     Unordered?: boolean;
     /**
      * 签署流程的类型，长度不超过255个字符
      */
     FlowType?: string;
-    /**
-     * 签署流程的描述，长度不超过1000个字符
-     */
-    FlowDescription?: string;
     /**
      * 合同显示的页卡模板，说明：只支持{合同名称}, {发起方企业}, {发起方姓名}, {签署方N企业}, {签署方N姓名}，且N不能超过签署人的数量，N从1开始
      */
@@ -1153,7 +1182,10 @@ export interface ChannelCreateFlowByFilesRequest {
      */
     ApproverVerifyType?: string;
     /**
-     * 标识是否允许发起后添加控件。0为不允许1为允许。如果为1，创建的时候不能有签署控件，只能创建后添加。注意发起后添加控件功能不支持添加骑缝章和签批控件
+     * 标识是否允许发起后添加控件。
+  0为不允许
+  1为允许。
+  如果为1，创建的时候不能有签署控件，只能创建后添加。注意发起后添加控件功能不支持添加骑缝章和签批控件
      */
     SignBeanTag?: number;
     /**
@@ -1161,7 +1193,9 @@ export interface ChannelCreateFlowByFilesRequest {
      */
     CcInfos?: Array<CcInfo>;
     /**
-     * 给关注人发送短信通知的类型，0-合同发起时通知 1-签署完成后通知
+     * 给关注人发送短信通知的类型，
+  0-合同发起时通知
+  1-签署完成后通知
      */
     CcNotifyType?: number;
     /**
@@ -1628,6 +1662,35 @@ export interface DescribeTemplatesResponse {
     RequestId?: string;
 }
 /**
+ * 自动签开启、签署相关配置
+ */
+export interface AutoSignConfig {
+    /**
+     * 自动签开通个人用户的三要素
+     */
+    UserInfo: UserThreeFactor;
+    /**
+     * 是否回调证书信息
+     */
+    CertInfoCallback?: boolean;
+    /**
+     * 是否支持用户自定义签名印章
+     */
+    UserDefineSeal?: boolean;
+    /**
+     * 是否需要回调的时候返回印章(签名) 图片的 base64
+     */
+    SealImgCallback?: boolean;
+    /**
+     * 回调链接，如果渠道已经配置了，可以不传
+     */
+    CallbackUrl?: string;
+    /**
+     * 开通时候的验证方式，取值：WEIXINAPP（微信人脸识别），INSIGHT（慧眼人脸认别），TELECOM（运营商三要素验证）。如果是小程序开通链接，支持传 WEIXINAPP / TELECOM。如果是 H5 开通链接，支持传 INSIGHT / TELECOM。默认值 WEIXINAPP / INSIGHT。
+     */
+    VerifyChannels?: Array<string>;
+}
+/**
  * 第三方应用集成员工角色信息
  */
 export interface StaffRole {
@@ -1677,6 +1740,27 @@ export interface CreateChannelFlowEvidenceReportRequest {
      * @deprecated
      */
     Operator?: UserInfo;
+}
+/**
+ * ChannelCancelUserAutoSignEnableUrl请求参数结构体
+ */
+export interface ChannelCancelUserAutoSignEnableUrlRequest {
+    /**
+     * 渠道应用相关信息
+     */
+    Agent: Agent;
+    /**
+     * 操作人信息
+     */
+    Operator: UserInfo;
+    /**
+     * 自动签场景: E_PRESCRIPTION_AUTO_SIGN 电子处方
+     */
+    SceneKey: string;
+    /**
+     * 指定撤销链接的用户信息，包含姓名、证件类型、证件号码。
+     */
+    UserInfo: UserThreeFactor;
 }
 /**
  * ChannelVerifyPdf返回参数结构体
@@ -1969,6 +2053,64 @@ export interface PdfVerifyResult {
      * 签名域所在页码，1～N
      */
     ComponentPage: number;
+}
+/**
+ * 用户的三要素：姓名，证件号，证件类型
+ */
+export interface UserThreeFactor {
+    /**
+     * 姓名
+     */
+    Name: string;
+    /**
+     * 证件类型:
+  ID_CARD 身份证
+  HONGKONG_AND_MACAO 港澳居民来往内地通行证
+  HONGKONG_MACAO_AND_TAIWAN 港澳台居民居住证(格式同居民身份证)
+     */
+    IdCardType: string;
+    /**
+     * 证件号，如果有 X 请大写
+     */
+    IdCardNumber: string;
+}
+/**
+ * ChannelCreateUserAutoSignEnableUrl请求参数结构体
+ */
+export interface ChannelCreateUserAutoSignEnableUrlRequest {
+    /**
+     * 渠道应用相关信息
+     */
+    Agent: Agent;
+    /**
+     * 自动签场景:
+  E_PRESCRIPTION_AUTO_SIGN 电子处方
+     */
+    SceneKey: string;
+    /**
+     * 操作人信息
+     */
+    Operator?: UserInfo;
+    /**
+     * 自动签开通，签署相关配置
+     */
+    AutoSignConfig?: AutoSignConfig;
+    /**
+     * 链接类型，空-默认小程序端链接，H5SIGN-h5端链接
+     */
+    UrlType?: string;
+    /**
+     * 通知类型，默认不填为不通知开通方，填写 SMS 为短信通知。
+     */
+    NotifyType?: string;
+    /**
+     * 若上方填写为 SMS，则此处为手机号
+     */
+    NotifyAddress?: string;
+    /**
+     * 链接的过期时间，格式为Unix时间戳，不能早于当前时间，且最大为30天。如果不传，默认有效期为7天。
+     */
+    ExpiredTime?: number;
 }
 /**
  * ChannelCancelMultiFlowSignQRCode请求参数结构体
@@ -2788,6 +2930,39 @@ export interface FlowApproverInfo {
     NotifyType?: string;
 }
 /**
+ * ChannelCreateUserAutoSignEnableUrl返回参数结构体
+ */
+export interface ChannelCreateUserAutoSignEnableUrlResponse {
+    /**
+     * 跳转短链
+     */
+    Url?: string;
+    /**
+     * 小程序AppId
+     */
+    AppId?: string;
+    /**
+     * 小程序 原始 Id
+     */
+    AppOriginalId?: string;
+    /**
+     * 跳转路径
+     */
+    Path?: string;
+    /**
+     * base64格式跳转二维码
+     */
+    QrCode?: string;
+    /**
+     * 链接类型，空-默认小程序端链接，H5SIGN-h5端链接
+     */
+    UrlType?: string;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * ChannelGetTaskResultApi请求参数结构体
  */
 export interface ChannelGetTaskResultApiRequest {
@@ -2952,6 +3127,28 @@ export interface FailedCreateRoleData {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     RoleIds?: Array<string>;
+}
+/**
+ * ChannelDescribeUserAutoSignStatus请求参数结构体
+ */
+export interface ChannelDescribeUserAutoSignStatusRequest {
+    /**
+     * 渠道应用相关信息
+     */
+    Agent: Agent;
+    /**
+     * 自动签场景:
+  E_PRESCRIPTION_AUTO_SIGN 电子处方
+     */
+    SceneKey: string;
+    /**
+     * 查询开启状态的用户信息
+     */
+    UserInfo: UserThreeFactor;
+    /**
+     * 操作人信息
+     */
+    Operator?: UserInfo;
 }
 /**
  * 流程对应资源链接信息
@@ -3181,6 +3378,28 @@ export interface ChannelCreateFlowSignReviewResponse {
     RequestId?: string;
 }
 /**
+ * ChannelDisableUserAutoSign请求参数结构体
+ */
+export interface ChannelDisableUserAutoSignRequest {
+    /**
+     * 渠道应用相关信息
+     */
+    Agent: Agent;
+    /**
+     * 自动签场景:
+  E_PRESCRIPTION_AUTO_SIGN 电子处方
+     */
+    SceneKey: string;
+    /**
+     * 关闭自动签的个人的三要素
+     */
+    UserInfo: UserThreeFactor;
+    /**
+     * 操作人信息
+     */
+    Operator?: UserInfo;
+}
+/**
  * ChannelDescribeOrganizationSeals返回参数结构体
  */
 export interface ChannelDescribeOrganizationSealsResponse {
@@ -3198,17 +3417,13 @@ export interface ChannelDescribeOrganizationSealsResponse {
     RequestId?: string;
 }
 /**
- * ChannelCreatePrepareFlow返回参数结构体
+ * CreateSealByImage返回参数结构体
  */
-export interface ChannelCreatePrepareFlowResponse {
+export interface CreateSealByImageResponse {
     /**
-     * 预发起的合同链接
+     * 印章id
      */
-    PrepareFlowUrl?: string;
-    /**
-     * 合同发起后预览链接
-     */
-    PreviewFlowUrl?: string;
+    SealId?: string;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -4090,6 +4305,27 @@ export interface CreateSealByImageRequest {
      * @deprecated
      */
     Operator?: UserInfo;
+}
+/**
+ * ChannelDescribeUserAutoSignStatus返回参数结构体
+ */
+export interface ChannelDescribeUserAutoSignStatusResponse {
+    /**
+     * 是否开通
+     */
+    IsOpen?: boolean;
+    /**
+     * 自动签许可生效时间。当且仅当已开通自动签时有值。
+     */
+    LicenseFrom?: number;
+    /**
+     * 自动签许可到期时间。当且仅当已开通自动签时有值。
+     */
+    LicenseTo?: number;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * ChannelUpdateSealStatus返回参数结构体

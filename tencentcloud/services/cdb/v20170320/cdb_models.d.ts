@@ -4288,7 +4288,7 @@ export interface DescribeAuditLogsRequest {
      */
     OrderBy?: string;
     /**
-     * 过滤条件。可按设置的过滤条件过滤日志。
+     * 过滤条件。多个值之前是且的关系。
      */
     LogFilter?: Array<InstanceAuditLogFilters>;
 }
@@ -5546,7 +5546,10 @@ export interface DeleteAuditRuleResponse {
  */
 export interface InstanceAuditLogFilters {
     /**
-     * 过滤项。sql 暂时不支持搜索。目前支持以下搜索条件：
+     * 过滤项。目前支持以下搜索条件：
+  
+  包含、不包含、包含（分词维度）、不包含（分词维度）:
+  sql - SQL详情
   
   等于、不等于、包含、不包含：
   host - 客户端地址；
@@ -5571,6 +5574,8 @@ export interface InstanceAuditLogFilters {
     Type?: string;
     /**
      * 过滤条件。支持以下条件：
+  WINC-包含（分词维度），
+  WEXC-不包含（分词维度）,
   INC - 包含,
   EXC - 不包含,
   EQS - 等于,
@@ -5579,7 +5584,7 @@ export interface InstanceAuditLogFilters {
      */
     Compare?: string;
     /**
-     * 过滤的值。
+     * 过滤的值。反向查询时，多个值之前是且的关系，正向查询多个值是或的关系
      */
     Value?: Array<string>;
 }

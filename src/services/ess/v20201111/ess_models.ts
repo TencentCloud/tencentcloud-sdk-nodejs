@@ -720,7 +720,13 @@ export interface CreateFlowEvidenceReportRequest {
  */
 export interface StartFlowResponse {
   /**
-   * 返回描述，START-发起成功， REVIEW-提交审核成功，EXECUTING-已提交发起任务
+   * 发起成功之后返回状态，
+
+START-发起成功， 
+
+REVIEW-提交审核成功，
+
+EXECUTING-已提交发起任务
    */
   Status?: string
   /**
@@ -4237,7 +4243,11 @@ export interface StartFlowRequest {
    */
   Agent?: Agent
   /**
-   * 给关注人发送短信通知的类型，0-合同发起时通知 1-签署完成后通知
+   * 给关注人发送短信通知的类型，
+
+0-合同发起时通知 
+
+1-签署完成后通知
    */
   CcNotifyType?: number
 }

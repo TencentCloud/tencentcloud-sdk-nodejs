@@ -550,6 +550,19 @@ export interface DeleteOrganizationMembersRequest {
     MemberUin: Array<number>;
 }
 /**
+ * DeleteOrganizationMemberAuthIdentity请求参数结构体
+ */
+export interface DeleteOrganizationMemberAuthIdentityRequest {
+    /**
+     * 成员uin。
+     */
+    MemberUin: number;
+    /**
+     * 身份Id。
+     */
+    IdentityId: number;
+}
+/**
  * DescribeOrganizationMemberPolicies返回参数结构体
  */
 export interface DescribeOrganizationMemberPoliciesResponse {
@@ -1370,6 +1383,15 @@ export interface MemberIdentity {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     IdentityAliasName: string;
+}
+/**
+ * DeleteOrganizationMemberAuthIdentity返回参数结构体
+ */
+export interface DeleteOrganizationMemberAuthIdentityResponse {
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * UpdateOrganizationMemberEmailBind请求参数结构体

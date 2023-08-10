@@ -486,6 +486,15 @@ export interface TRTCJoinRoomInput {
      * 用户唯一标识。
      */
     UserId: string;
+    /**
+     * TRTC房间号的类型：
+  
+  Integer：数字类型
+  String：字符串类型
+  默认为：Integer 。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RoomIdType?: string;
 }
 /**
  * 其它片段时间（可用于抢唱）

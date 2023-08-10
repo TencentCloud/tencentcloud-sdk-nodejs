@@ -302,7 +302,7 @@ export interface DescribeAuditLogsRequest {
    */
   Offset?: number
   /**
-   * 审计日志过滤条件。
+   * 过滤条件。多个值之前是且的关系。
    */
   LogFilter?: Array<InstanceAuditLogFilter>
 }
@@ -8178,7 +8178,10 @@ export interface DisassociateSecurityGroupsResponse {
  */
 export interface InstanceAuditLogFilter {
   /**
-   * 过滤项。支持以下搜索条件:
+   * 过滤项。目前支持以下搜索条件：
+
+包含、不包含、包含（分词维度）、不包含（分词维度）:
+sql - SQL详情
 
 等于、不等于、包含、不包含：
 host - 客户端地址；
@@ -8192,27 +8195,28 @@ threadId - 线程ID；
 
 范围搜索（时间类型统一为微妙）：
 execTime - 执行时间；
-lockWaitTime - 执行时间；
+lockWaitTime - 锁等待时间；
 ioWaitTime - IO等待时间；
 trxLivingTime - 事物持续时间；
 cpuTime - cpu时间；
 checkRows - 扫描行数；
 affectRows - 影响行数；
 sentRows - 返回行数。
-
    */
   Type: string
   /**
-   * 过滤条件。支持以下选项:
+   * 过滤条件。支持以下条件：
+WINC-包含（分词维度），
+WEXC-不包含（分词维度）,
 INC - 包含,
 EXC - 不包含,
 EQS - 等于,
 NEQ - 不等于,
-RA - 范围.
+RA - 范围。
    */
   Compare: string
   /**
-   * 过滤的值。
+   * 过滤的值。反向查询时，多个值之前是且的关系，正向查询多个值是或的关系。
    */
   Value: Array<string>
 }

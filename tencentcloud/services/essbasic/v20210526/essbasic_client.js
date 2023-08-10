@@ -123,6 +123,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ChannelCreateSealPolicy", req, cb);
     }
     /**
+     * 企业方可以通过此接口关闭个人的自动签功能
+     */
+    async ChannelDisableUserAutoSign(req, cb) {
+        return this.request("ChannelDisableUserAutoSign", req, cb);
+    }
+    /**
      * 查询子客企业电子印章，需要操作者具有管理印章权限
 客户指定需要获取的印章数量和偏移量，数量最多100，超过100按100处理；入参InfoType控制印章是否携带授权人信息，为1则携带，为0则返回的授权人信息为空数组。接口调用成功返回印章的信息列表还有企业印章的总数，只返回启用的印章。
      */
@@ -245,6 +251,12 @@ https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/launchAp
         return this.request("ChannelCreateBoundFlows", req, cb);
     }
     /**
+     * 企业方可以通过此接口查询个人用户自动签开启状态
+     */
+    async ChannelDescribeUserAutoSignStatus(req, cb) {
+        return this.request("ChannelDescribeUserAutoSignStatus", req, cb);
+    }
+    /**
      * 对流程的合同文件进行数字签名验证，判断文件是否被篡改。
      */
     async ChannelVerifyPdf(req, cb) {
@@ -332,6 +344,12 @@ https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/launchAp
         return this.request("ChannelCreateUserRoles", req, cb);
     }
     /**
+     * 此接口（ChannelCancelUserAutoSignEnableUrl）用来撤销发送给个人用户的自动签开通链接，撤销后对应的个人用户开通链接失效。若个人用户已经完成开通，将无法撤销。（处方单场景专用，使用此接口请与客户经理确认）
+     */
+    async ChannelCancelUserAutoSignEnableUrl(req, cb) {
+        return this.request("ChannelCancelUserAutoSignEnableUrl", req, cb);
+    }
+    /**
      * 此接口（UploadFiles）用于文件上传。
 其中上传的文件，图片类型(png/jpg/jpeg)大小限制为5M，其他大小限制为60M。
 调用时需要设置Domain, 正式环境为 file.ess.tencent.cn。
@@ -417,6 +435,12 @@ httpProfile.setEndpoint("file.test.ess.tencent.cn");
      */
     async DescribeFlowDetailInfo(req, cb) {
         return this.request("DescribeFlowDetailInfo", req, cb);
+    }
+    /**
+     * 企业方可以通过此接口获取个人用户开启自动签的跳转链接
+     */
+    async ChannelCreateUserAutoSignEnableUrl(req, cb) {
+        return this.request("ChannelCreateUserAutoSignEnableUrl", req, cb);
     }
     /**
      * 查询流程填写控件内容，可以根据流程Id查询该流程相关联的填写控件信息和填写内容。 注意：使用此接口前，需要在【企业应用管理】-【应用集成】-【第三方应用管理】中开通【下载应用内全量合同文件及内容数据】功能。

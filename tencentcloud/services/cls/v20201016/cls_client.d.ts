@@ -227,7 +227,7 @@ cls.pb.cc cls.pb.h cls.proto
      */
     CreateIndex(req: CreateIndexRequest, cb?: (error: string, rep: CreateIndexResponse) => void): Promise<CreateIndexResponse>;
     /**
-     * 本接口用于获取ScheduledSql任务列表
+     * 本接口用于获取定时SQL分析任务列表
      */
     DescribeScheduledSqlInfo(req: DescribeScheduledSqlInfoRequest, cb?: (error: string, rep: DescribeScheduledSqlInfoResponse) => void): Promise<DescribeScheduledSqlInfoResponse>;
     /**
@@ -355,7 +355,7 @@ cls.pb.cc cls.pb.h cls.proto
      */
     SearchLog(req: SearchLogRequest, cb?: (error: string, rep: SearchLogResponse) => void): Promise<SearchLogResponse>;
     /**
-     * 本接口用于删除ScheduledSql任务
+     * 本接口用于删除定时SQL分析任务
      */
     DeleteScheduledSql(req: DeleteScheduledSqlRequest, cb?: (error: string, rep: DeleteScheduledSqlResponse) => void): Promise<DeleteScheduledSqlResponse>;
     /**
@@ -479,7 +479,7 @@ cls.pb.cc cls.pb.h cls.proto
      */
     CreateAlarm(req: CreateAlarmRequest, cb?: (error: string, rep: CreateAlarmResponse) => void): Promise<CreateAlarmResponse>;
     /**
-     * 本接口用于创建ScheduledSql任务
+     * 本接口用于创建定时SQL分析任务
      */
     CreateScheduledSql(req: CreateScheduledSqlRequest, cb?: (error: string, rep: CreateScheduledSqlResponse) => void): Promise<CreateScheduledSqlResponse>;
     /**
@@ -487,7 +487,7 @@ cls.pb.cc cls.pb.h cls.proto
      */
     CreateExport(req: CreateExportRequest, cb?: (error: string, rep: CreateExportResponse) => void): Promise<CreateExportResponse>;
     /**
-     * 本接口用于修改ScheduledSql任务
+     * 本接口用于修改定时SQL分析任务
      */
     ModifyScheduledSql(req: ModifyScheduledSqlRequest, cb?: (error: string, rep: ModifyScheduledSqlResponse) => void): Promise<ModifyScheduledSqlResponse>;
     /**

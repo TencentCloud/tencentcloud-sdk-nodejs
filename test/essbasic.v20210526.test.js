@@ -148,6 +148,16 @@ it("essbasic.v20210526.ChannelCreateSealPolicy", async function () {
     }
 })
 
+it("essbasic.v20210526.ChannelDisableUserAutoSign", async function () {
+    try {
+       const data = await client.ChannelDisableUserAutoSign({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("essbasic.v20210526.ChannelDescribeOrganizationSeals", async function () {
     try {
        const data = await client.ChannelDescribeOrganizationSeals({})
@@ -268,6 +278,16 @@ it("essbasic.v20210526.ChannelCreateBoundFlows", async function () {
     }
 })
 
+it("essbasic.v20210526.ChannelDescribeUserAutoSignStatus", async function () {
+    try {
+       const data = await client.ChannelDescribeUserAutoSignStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("essbasic.v20210526.ChannelVerifyPdf", async function () {
     try {
        const data = await client.ChannelVerifyPdf({})
@@ -378,6 +398,16 @@ it("essbasic.v20210526.ChannelCreateUserRoles", async function () {
     }
 })
 
+it("essbasic.v20210526.ChannelCancelUserAutoSignEnableUrl", async function () {
+    try {
+       const data = await client.ChannelCancelUserAutoSignEnableUrl({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("essbasic.v20210526.UploadFiles", async function () {
     try {
        const data = await client.UploadFiles({})
@@ -471,6 +501,16 @@ it("essbasic.v20210526.ChannelCreateEmbedWebUrl", async function () {
 it("essbasic.v20210526.DescribeFlowDetailInfo", async function () {
     try {
        const data = await client.DescribeFlowDetailInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("essbasic.v20210526.ChannelCreateUserAutoSignEnableUrl", async function () {
+    try {
+       const data = await client.ChannelCreateUserAutoSignEnableUrl({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
