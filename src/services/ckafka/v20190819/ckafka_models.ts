@@ -822,6 +822,10 @@ export interface EsParam {
    * 消息要映射为 es 索引中 @timestamp 的字段，如果当前配置为空，则使用消息的时间戳进行映射
    */
   DateField?: string
+  /**
+   * 用来区分当前索引映射，属于新建索引还是存量索引。"EXIST_MAPPING"：从存量索引中选择；"NEW_MAPPING"：新建索引
+   */
+  RecordMappingMode?: string
 }
 
 /**
@@ -2805,6 +2809,22 @@ export interface AuthorizeTokenRequest {
 }
 
 /**
+ * RenewCkafkaInstance接口出参bigDealIds
+ */
+export interface RenewCkafkaInstanceResp {
+  /**
+   * 订单号
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BigDealId?: string
+  /**
+   * 子订单号
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DealName?: string
+}
+
+/**
  * 操作类型返回的Data结构
  */
 export interface OperateResponseData {
@@ -2821,19 +2841,17 @@ export interface OperateResponseData {
 }
 
 /**
- * RenewCkafkaInstance接口出参bigDealIds
+ * RenewCkafkaInstance返回参数结构体
  */
 export interface RenewCkafkaInstanceResponse {
   /**
-   * 订单号
-注意：此字段可能返回 null，表示取不到有效值。
+   * 返回值
    */
-  BigDealId?: string
+  Result?: RenewCkafkaInstanceResp
   /**
-   * 子订单号
-注意：此字段可能返回 null，表示取不到有效值。
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  DealName?: string
+  RequestId?: string
 }
 
 /**
@@ -5558,6 +5576,11 @@ export interface InstanceAttributesResponse {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DynamicDiskConfig: DynamicDiskConfig
+  /**
+   * 实例计费类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceChargeType?: string
 }
 
 /**

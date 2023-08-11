@@ -1371,12 +1371,12 @@ export interface DescribeLaunchTemplatesResponse {
    * 符合条件的实例模板数量。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 实例详细信息列表。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  LaunchTemplateSet: Array<LaunchTemplateInfo>
+  LaunchTemplateSet?: Array<LaunchTemplateInfo>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

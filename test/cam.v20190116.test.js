@@ -148,6 +148,16 @@ it("cam.v20190116.DescribeUserOIDCConfig", async function () {
     }
 })
 
+it("cam.v20190116.UpdateUserSAMLConfig", async function () {
+    try {
+       const data = await client.UpdateUserSAMLConfig({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cam.v20190116.CreateAccessKey", async function () {
     try {
        const data = await client.CreateAccessKey({})
@@ -238,9 +248,9 @@ it("cam.v20190116.ListUsersForGroup", async function () {
     }
 })
 
-it("cam.v20190116.UpdateUserSAMLConfig", async function () {
+it("cam.v20190116.GetGroup", async function () {
     try {
-       const data = await client.UpdateUserSAMLConfig({})
+       const data = await client.GetGroup({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -548,9 +558,9 @@ it("cam.v20190116.DeleteGroup", async function () {
     }
 })
 
-it("cam.v20190116.GetGroup", async function () {
+it("cam.v20190116.CreateMessageReceiver", async function () {
     try {
-       const data = await client.GetGroup({})
+       const data = await client.CreateMessageReceiver({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

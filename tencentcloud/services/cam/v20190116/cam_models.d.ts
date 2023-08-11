@@ -55,33 +55,29 @@ export interface ListAttachedRolePoliciesResponse {
     RequestId?: string;
 }
 /**
- * 登录和敏感操作flag
+ * CreateMessageReceiver请求参数结构体
  */
-export interface LoginActionFlagIntl {
+export interface CreateMessageReceiverRequest {
     /**
-     * 手机
+     * 消息接收人的用户名
      */
-    Phone?: number;
+    Name: string;
     /**
-     * 硬token
+     * 手机号国际区号，国内为86
      */
-    Token?: number;
+    CountryCode: string;
     /**
-     * 软token
+     * 手机号码, 例如：132****2492
      */
-    Stoken?: number;
+    PhoneNumber: string;
     /**
-     * 微信
+     * 邮箱，例如：57*****@qq.com
      */
-    Wechat?: number;
+    Email: string;
     /**
-     * 自定义
+     * 消息接收人的备注，选填
      */
-    Custom?: number;
-    /**
-     * 邮件
-     */
-    Mail?: number;
+    Remark?: string;
 }
 /**
  * UpdateUserOIDCConfig返回参数结构体
@@ -202,6 +198,35 @@ export interface TagRoleResponse {
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * 登录和敏感操作flag
+ */
+export interface LoginActionFlagIntl {
+    /**
+     * 手机
+     */
+    Phone?: number;
+    /**
+     * 硬token
+     */
+    Token?: number;
+    /**
+     * 软token
+     */
+    Stoken?: number;
+    /**
+     * 微信
+     */
+    Wechat?: number;
+    /**
+     * 自定义
+     */
+    Custom?: number;
+    /**
+     * 邮件
+     */
+    Mail?: number;
 }
 /**
  * GetRole请求参数结构体
@@ -2163,6 +2188,23 @@ export interface UpdateOIDCConfigResponse {
     RequestId?: string;
 }
 /**
+ * UntagRole请求参数结构体
+ */
+export interface UntagRoleRequest {
+    /**
+     * 标签键
+     */
+    TagKeys: Array<string>;
+    /**
+     * 角色名，与角色ID至少输入一个
+     */
+    RoleName?: string;
+    /**
+     * 角色ID，与角色名至少输入一个
+     */
+    RoleId?: string;
+}
+/**
  * AttachGroupPolicy请求参数结构体
  */
 export interface AttachGroupPolicyRequest {
@@ -3432,21 +3474,13 @@ export interface DeleteOIDCConfigRequest {
     Name: string;
 }
 /**
- * UntagRole请求参数结构体
+ * CreateMessageReceiver返回参数结构体
  */
-export interface UntagRoleRequest {
+export interface CreateMessageReceiverResponse {
     /**
-     * 标签键
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
-    TagKeys: Array<string>;
-    /**
-     * 角色名，与角色ID至少输入一个
-     */
-    RoleName?: string;
-    /**
-     * 角色ID，与角色名至少输入一个
-     */
-    RoleId?: string;
+    RequestId?: string;
 }
 /**
  * CreateGroup返回参数结构体

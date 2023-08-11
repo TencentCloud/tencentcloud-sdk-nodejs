@@ -297,6 +297,8 @@ export interface FlowCreateApprover {
   自动签署仅进行盖章操作，不能是手写签名。
   本方企业自动签署的签署人会默认是当前的发起人
   他方企业自动签署的签署人是自动签模板的他方企业授权人
+  7: 个人自动签署，适用于个人自动签场景。
+  注: 个人自动签场景为白名单功能, 使用前请联系对接的客户经理沟通。
      */
     ApproverType: number;
     /**
@@ -357,9 +359,9 @@ export interface FlowCreateApprover {
      */
     PreReadTime?: number;
     /**
-     * 签署方经办人的电子签用户ID
-  <br/>当未指定签署人姓名+手机号的情况下，该字段毕传
+     * 签署人userId，仅支持本企业的员工userid， 可在控制台组织管理处获得
   
+  若传此字段 则以userid的信息为主，会覆盖传递过来的签署人基本信息， 包括姓名，手机号，证件类型等信息
      */
     UserId?: string;
     /**
@@ -367,8 +369,9 @@ export interface FlowCreateApprover {
      */
     Required?: boolean;
     /**
-     * 签署人用户来源
-  <br/>企微侧用户请传入：WEWORKAPP
+     * 签署人用户来源，此参数仅针对企微用户开放
+  
+  企微侧用户请传入：WEWORKAPP
      */
     ApproverSource?: string;
     /**
@@ -405,12 +408,12 @@ export interface FlowCreateApprover {
      */
     ApproverNeedSignReview?: boolean;
     /**
-     * 签署人签署控件
+     * 签署人签署控件， 此参数仅针对文件发起（CreateFlowByFiles）生效
   <br/>文件发起时，可通过该参数为签署人指定签署控件类型以及位置
      */
     SignComponents?: Array<Component>;
     /**
-     * 签署人填写控件
+     * 签署人填写控件 此参数仅针对文件发起（CreateFlowByFiles）生效
   <br/>文件发起时，可通过该参数为签署人指定填写控件类型以及位置
      */
     Components?: Array<Component>;
@@ -3521,6 +3524,8 @@ export interface ApproverInfo {
   1：个人
   3：企业静默签署
   注：类型为3（企业静默签署）时，此接口会默认完成该签署方的签署。静默签署仅进行盖章操作，不能自动签名。
+  7: 个人自动签署，适用于个人自动签场景。
+  注: 个人自动签场景为白名单功能, 使用前请联系对接的客户经理沟通。
      */
     ApproverType: number;
     /**
@@ -3532,7 +3537,9 @@ export interface ApproverInfo {
      */
     ApproverMobile: string;
     /**
-     * 如果签署方是企业签署方，则为企业名
+     * 如果签署方是企业签署方(approverType = 1 或者 approverType = 3)，
+  
+  则企业名称必填
      */
     OrganizationName?: string;
     /**
@@ -3568,11 +3575,15 @@ export interface ApproverInfo {
      */
     PreReadTime?: number;
     /**
-     * 签署人userId，传此字段则不用传姓名、手机号
+     * 签署人userId，仅支持本企业的员工userid， 可在控制台组织管理处获得
+  
+  若传此字段 则以userid的信息为主，会覆盖传递过来的签署人基本信息， 包括姓名，手机号，证件类型等信息
      */
     UserId?: string;
     /**
-     * 签署人用户来源，企微侧用户请传入：WEWORKAPP
+     * 签署人用户来源，此参数仅针对企微用户开放
+  
+  企微侧用户请传入：WEWORKAPP
      */
     ApproverSource?: string;
     /**

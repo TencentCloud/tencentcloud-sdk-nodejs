@@ -106,6 +106,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeUserOIDCConfig", req, cb);
     }
     /**
+     * 修改用户SAML配置
+     */
+    async UpdateUserSAMLConfig(req, cb) {
+        return this.request("UpdateUserSAMLConfig", req, cb);
+    }
+    /**
      * 为CAM用户创建访问密钥
      */
     async CreateAccessKey(req, cb) {
@@ -160,10 +166,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ListUsersForGroup", req, cb);
     }
     /**
-     * 修改用户SAML配置
+     * 查询用户组详情
      */
-    async UpdateUserSAMLConfig(req, cb) {
-        return this.request("UpdateUserSAMLConfig", req, cb);
+    async GetGroup(req, cb) {
+        return this.request("GetGroup", req, cb);
     }
     /**
      * 创建用户OIDC配置。只能创建一个用户OIDC身份提供商，并且创建用户OIDC配置之后会自动关闭用户SAML SSO身份提供商。
@@ -348,10 +354,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteGroup", req, cb);
     }
     /**
-     * 查询用户组详情
+     * 创建消息接收人接口：仅允许已完成实名认证的用户访问消息接收人接口，并对每个用户限制每天最多请求10次。
      */
-    async GetGroup(req, cb) {
-        return this.request("GetGroup", req, cb);
+    async CreateMessageReceiver(req, cb) {
+        return this.request("CreateMessageReceiver", req, cb);
     }
     /**
      * 创建角色OIDC配置

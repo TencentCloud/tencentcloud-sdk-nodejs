@@ -124,6 +124,7 @@ import {
   ModifyInstanceAttributesConfig,
   DescribeTaskStatusResponse,
   AuthorizeTokenRequest,
+  RenewCkafkaInstanceResp,
   OperateResponseData,
   RenewCkafkaInstanceResponse,
   DescribeACLRequest,

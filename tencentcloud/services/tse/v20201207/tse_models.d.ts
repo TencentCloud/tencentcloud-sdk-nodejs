@@ -980,7 +980,7 @@ export interface KongRoutePreview {
      * 路由的Headers
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Headers?: KVMapping;
+    Headers?: Array<KVMapping>;
 }
 /**
  * 云原生网关Tse 限流插件配置
