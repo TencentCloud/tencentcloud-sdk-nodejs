@@ -473,6 +473,24 @@ export interface ModifyLogsetRequest {
 }
 
 /**
+ * UploadLog请求参数结构体
+ */
+export interface UploadLogRequest {
+  /**
+   * 主题id
+   */
+  TopicId: string
+  /**
+   * 根据 hashkey 写入相应范围的主题分区
+   */
+  HashKey?: string
+  /**
+   * 压缩方法
+   */
+  CompressType?: string
+}
+
+/**
  * CreateLogset请求参数结构体
  */
 export interface CreateLogsetRequest {
@@ -600,7 +618,9 @@ export interface LogItem {
  */
 export interface SearchLogResponse {
   /**
-   * 透传本次接口返回的Context值，可获取后续更多日志，过期时间1小时
+   * 透传本次接口返回的Context值，可获取后续更多日志，过期时间1小时。
+注意：
+* 仅适用于单日志主题检索，检索多个日志主题时，请使用Topics中的Context
    */
   Context?: string
   /**
@@ -646,6 +666,11 @@ export interface SearchLogResponse {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SamplingRate?: number
+  /**
+   * 使用多日志主题检索时，各个日志主题的基本信息，例如报错信息。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Topics?: SearchLogTopics
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1875,6 +1900,25 @@ export interface DeleteExportResponse {
 }
 
 /**
+ * 多日志主题检索topic信息
+ */
+export interface SearchLogInfos {
+  /**
+   * 日志主题ID
+   */
+  TopicId?: string
+  /**
+   * 日志存储生命周期
+   */
+  Period?: number
+  /**
+   * 透传本次接口返回的Context值，可获取后续更多日志，过期时间1小时
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Context?: string
+}
+
+/**
  * 日志主题分区信息
  */
 export interface PartitionInfo {
@@ -2718,21 +2762,19 @@ export interface DescribeConsumerResponse {
 }
 
 /**
- * UploadLog请求参数结构体
+ * 多主题检索返回信息
  */
-export interface UploadLogRequest {
+export interface SearchLogTopics {
   /**
-   * 主题id
+   * 多日志主题检索对应的错误信息
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  TopicId: string
+  Errors?: Array<SearchLogErrors>
   /**
-   * 根据 hashkey 写入相应范围的主题分区
+   * 多日志主题检索各日志主题信息
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  HashKey?: string
-  /**
-   * 压缩方法
-   */
-  CompressType?: string
+  Infos?: Array<SearchLogInfos>
 }
 
 /**
@@ -3568,6 +3610,27 @@ export interface PreviewLogStatistic {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DstTopicName?: string
+}
+
+/**
+ * 多日志主题检索错误信息
+ */
+export interface SearchLogErrors {
+  /**
+   * 日志主题ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TopicId?: string
+  /**
+   * 错误信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ErrorMsg?: string
+  /**
+   * 错误码
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ErrorCodeStr?: string
 }
 
 /**
@@ -5160,11 +5223,11 @@ export interface SearchLogRequest {
    */
   Limit?: number
   /**
-   * 透传上次接口返回的Context值，可获取后续更多日志，总计最多可获取1万条原始日志，过期时间1小时
+   * 透传上次接口返回的Context值，可获取后续更多日志，总计最多可获取1万条原始日志，过期时间1小时。
 注意：
 * 透传该参数时，请勿修改除该参数外的其它参数
-* 仅当检索分析语句(Query)不包含SQL时有效
-* SQL获取后续结果参考<a href="https://cloud.tencent.com/document/product/614/58977" target="_blank">SQL LIMIT语法</a>
+* 仅适用于单日志主题检索，检索多个日志主题时，请使用Topics中的Context
+* 仅当检索分析语句(Query)不包含SQL时有效，SQL获取后续结果参考<a href="https://cloud.tencent.com/document/product/614/58977" target="_blank">SQL LIMIT语法</a>
    */
   Context?: string
   /**

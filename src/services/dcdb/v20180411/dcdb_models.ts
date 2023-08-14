@@ -1826,6 +1826,56 @@ export interface DescribeDBEncryptAttributesResponse {
 }
 
 /**
+ * 项目信息描述
+ */
+export interface Project {
+  /**
+   * 项目ID
+   */
+  ProjectId: number
+  /**
+   * 资源拥有者（主账号）uin
+   */
+  OwnerUin: number
+  /**
+   * 应用Id
+   */
+  AppId: number
+  /**
+   * 项目名称
+   */
+  Name: string
+  /**
+   * 创建者uin
+   */
+  CreatorUin: number
+  /**
+   * 来源平台
+   */
+  SrcPlat: string
+  /**
+   * 来源AppId
+   */
+  SrcAppId: number
+  /**
+   * 项目状态,0正常，-1关闭。默认项目为3
+   */
+  Status: number
+  /**
+   * 创建时间
+   */
+  CreateTime: string
+  /**
+   * 是否默认项目，1 是，0 不是
+   */
+  IsDefault: number
+  /**
+   * 描述信息
+   */
+  Info: string
+}
+
+/**
  * CreateTmpDCDBInstance请求参数结构体
  */
 export interface CreateTmpDCDBInstanceRequest {
@@ -4087,6 +4137,24 @@ export interface IsolateDedicatedDBInstanceResponse {
 }
 
 /**
+ * DescribeLogFileRetentionPeriod返回参数结构体
+ */
+export interface DescribeLogFileRetentionPeriodResponse {
+  /**
+   * 实例 ID，形如：tdsql-ow728lmc。
+   */
+  InstanceId: string
+  /**
+   * 日志备份天数
+   */
+  Days: number
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 售卖可用区信息
  */
 export interface RegionInfo {
@@ -4576,53 +4644,13 @@ export interface DescribeDCDBInstancesRequest {
 }
 
 /**
- * 项目信息描述
+ * DescribeLogFileRetentionPeriod请求参数结构体
  */
-export interface Project {
+export interface DescribeLogFileRetentionPeriodRequest {
   /**
-   * 项目ID
+   * 实例 ID，形如：tdsql-ow728lmc。
    */
-  ProjectId: number
-  /**
-   * 资源拥有者（主账号）uin
-   */
-  OwnerUin: number
-  /**
-   * 应用Id
-   */
-  AppId: number
-  /**
-   * 项目名称
-   */
-  Name: string
-  /**
-   * 创建者uin
-   */
-  CreatorUin: number
-  /**
-   * 来源平台
-   */
-  SrcPlat: string
-  /**
-   * 来源AppId
-   */
-  SrcAppId: number
-  /**
-   * 项目状态,0正常，-1关闭。默认项目为3
-   */
-  Status: number
-  /**
-   * 创建时间
-   */
-  CreateTime: string
-  /**
-   * 是否默认项目，1 是，0 不是
-   */
-  IsDefault: number
-  /**
-   * 描述信息
-   */
-  Info: string
+  InstanceId: string
 }
 
 /**

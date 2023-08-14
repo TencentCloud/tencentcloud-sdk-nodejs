@@ -478,6 +478,16 @@ it("essbasic.v20210526.OperateChannelTemplate", async function () {
     }
 })
 
+it("essbasic.v20210526.ChannelCreatePreparedPersonalEsign", async function () {
+    try {
+       const data = await client.ChannelCreatePreparedPersonalEsign({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("essbasic.v20210526.ChannelCreateFlowGroupByFiles", async function () {
     try {
        const data = await client.ChannelCreateFlowGroupByFiles({})

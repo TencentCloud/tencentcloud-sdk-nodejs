@@ -96,6 +96,7 @@ import {
   ShardZoneChooseInfo,
   RenewDCDBInstanceRequest,
   DescribeDBEncryptAttributesResponse,
+  Project,
   CreateTmpDCDBInstanceRequest,
   DatabaseTable,
   DescribeDBEncryptAttributesRequest,
@@ -183,6 +184,7 @@ import {
   CreateTmpDCDBInstanceResponse,
   CreateAccountResponse,
   IsolateDedicatedDBInstanceResponse,
+  DescribeLogFileRetentionPeriodResponse,
   RegionInfo,
   DescribeDatabaseObjectsRequest,
   UpgradeDCDBInstanceRequest,
@@ -200,7 +202,7 @@ import {
   DescribeDBSlowLogsResponse,
   DescribeDCDBRenewalPriceRequest,
   DescribeDCDBInstancesRequest,
-  Project,
+  DescribeLogFileRetentionPeriodRequest,
   ModifyInstanceVportRequest,
   ModifyDBInstanceSecurityGroupsResponse,
   DestroyHourDCDBInstanceRequest,
@@ -677,13 +679,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（DescribeProjects）用于查询项目列表
+   * 本接口(DescribeLogFileRetentionPeriod)用于查看数据库备份日志的备份天数的设置情况。
    */
-  async DescribeProjects(
-    req?: DescribeProjectsRequest,
-    cb?: (error: string, rep: DescribeProjectsResponse) => void
-  ): Promise<DescribeProjectsResponse> {
-    return this.request("DescribeProjects", req, cb)
+  async DescribeLogFileRetentionPeriod(
+    req: DescribeLogFileRetentionPeriodRequest,
+    cb?: (error: string, rep: DescribeLogFileRetentionPeriodResponse) => void
+  ): Promise<DescribeLogFileRetentionPeriodResponse> {
+    return this.request("DescribeLogFileRetentionPeriod", req, cb)
   }
 
   /**
@@ -714,6 +716,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyDBEncryptAttributesResponse) => void
   ): Promise<ModifyDBEncryptAttributesResponse> {
     return this.request("ModifyDBEncryptAttributes", req, cb)
+  }
+
+  /**
+   * 本接口（DestroyHourDCDBInstance）用于TDSQL销毁按量计费实例。
+   */
+  async DestroyHourDCDBInstance(
+    req: DestroyHourDCDBInstanceRequest,
+    cb?: (error: string, rep: DestroyHourDCDBInstanceResponse) => void
+  ): Promise<DestroyHourDCDBInstanceResponse> {
+    return this.request("DestroyHourDCDBInstance", req, cb)
   }
 
   /**
@@ -809,13 +821,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（DestroyHourDCDBInstance）用于TDSQL销毁按量计费实例。
+   * 本接口（DescribeProjects）用于查询项目列表
    */
-  async DestroyHourDCDBInstance(
-    req: DestroyHourDCDBInstanceRequest,
-    cb?: (error: string, rep: DestroyHourDCDBInstanceResponse) => void
-  ): Promise<DestroyHourDCDBInstanceResponse> {
-    return this.request("DestroyHourDCDBInstance", req, cb)
+  async DescribeProjects(
+    req?: DescribeProjectsRequest,
+    cb?: (error: string, rep: DescribeProjectsResponse) => void
+  ): Promise<DescribeProjectsResponse> {
+    return this.request("DescribeProjects", req, cb)
   }
 
   /**

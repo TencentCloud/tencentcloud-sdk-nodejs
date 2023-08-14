@@ -1285,6 +1285,20 @@ export interface ChannelRole {
 }
 
 /**
+ * ChannelCreatePreparedPersonalEsign返回参数结构体
+ */
+export interface ChannelCreatePreparedPersonalEsignResponse {
+  /**
+   * 导入的印章 ID
+   */
+  SealId?: string
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 签署人的流程信息明细
  */
 export interface FlowApproverDetail {
@@ -3089,6 +3103,48 @@ export interface ChannelGetTaskResultApiRequest {
    * @deprecated
    */
   Organization?: OrganizationInfo
+}
+
+/**
+ * ChannelCreatePreparedPersonalEsign请求参数结构体
+ */
+export interface ChannelCreatePreparedPersonalEsignRequest {
+  /**
+   * 应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 必填。
+   */
+  Agent: Agent
+  /**
+   * 个人用户名称
+   */
+  UserName: string
+  /**
+   * 身份证件号码
+   */
+  IdCardNumber: string
+  /**
+   * 印章图片的base64
+   */
+  SealImage: string
+  /**
+   * 印章名称
+   */
+  SealName: string
+  /**
+   * 操作者信息
+   */
+  Operator?: UserInfo
+  /**
+   * 身份证件类型
+   */
+  IdCardType?: string
+  /**
+   * 手机号码；当需要开通自动签时，该参数必传
+   */
+  Mobile?: string
+  /**
+   * 是否开通自动签，该功能需联系运营工作人员开通后使用
+   */
+  EnableAutoSign?: boolean
 }
 
 /**

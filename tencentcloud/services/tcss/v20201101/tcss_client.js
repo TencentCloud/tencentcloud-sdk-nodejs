@@ -268,10 +268,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeAccessControlEvents", req, cb);
     }
     /**
-     * 编辑本地镜像自动授权开关
+     * 查询恶意请求事件列表
      */
-    async SwitchImageAutoAuthorizedRule(req, cb) {
-        return this.request("SwitchImageAutoAuthorizedRule", req, cb);
+    async DescribeRiskDnsList(req, cb) {
+        return this.request("DescribeRiskDnsList", req, cb);
     }
     /**
      * 运行时更新文件查杀设置
@@ -1513,6 +1513,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeK8sApiAbnormalRuleInfo", req, cb);
     }
     /**
+     * 查询恶意请求事件详情
+     */
+    async DescribeRiskDnsEventDetail(req, cb) {
+        return this.request("DescribeRiskDnsEventDetail", req, cb);
+    }
+    /**
      * 从白名单中删除将指定的检测项。
      */
     async DeleteCompliancePolicyItemFromWhitelist(req, cb) {
@@ -1571,6 +1577,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeSecLogKafkaUIN(req, cb) {
         return this.request("DescribeSecLogKafkaUIN", req, cb);
+    }
+    /**
+     * 编辑本地镜像自动授权开关
+     */
+    async SwitchImageAutoAuthorizedRule(req, cb) {
+        return this.request("SwitchImageAutoAuthorizedRule", req, cb);
     }
     /**
      * 查询运行时异常进程事件详细信息

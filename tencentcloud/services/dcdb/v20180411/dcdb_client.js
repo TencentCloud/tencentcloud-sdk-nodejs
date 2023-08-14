@@ -308,10 +308,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyDBSyncMode", req, cb);
     }
     /**
-     * 本接口（DescribeProjects）用于查询项目列表
+     * 本接口(DescribeLogFileRetentionPeriod)用于查看数据库备份日志的备份天数的设置情况。
      */
-    async DescribeProjects(req, cb) {
-        return this.request("DescribeProjects", req, cb);
+    async DescribeLogFileRetentionPeriod(req, cb) {
+        return this.request("DescribeLogFileRetentionPeriod", req, cb);
     }
     /**
      * 本接口(CloseDBExtranetAccess)用于关闭云数据库实例的外网访问。关闭外网访问后，外网地址将不可访问，查询实例列表接口将不返回对应实例的外网域名和端口信息。
@@ -330,6 +330,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ModifyDBEncryptAttributes(req, cb) {
         return this.request("ModifyDBEncryptAttributes", req, cb);
+    }
+    /**
+     * 本接口（DestroyHourDCDBInstance）用于TDSQL销毁按量计费实例。
+     */
+    async DestroyHourDCDBInstance(req, cb) {
+        return this.request("DestroyHourDCDBInstance", req, cb);
     }
     /**
      * 本接口（DescribeAccounts）用于查询指定云数据库实例的账号列表。
@@ -388,10 +394,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateDCDBInstance", req, cb);
     }
     /**
-     * 本接口（DestroyHourDCDBInstance）用于TDSQL销毁按量计费实例。
+     * 本接口（DescribeProjects）用于查询项目列表
      */
-    async DestroyHourDCDBInstance(req, cb) {
-        return this.request("DestroyHourDCDBInstance", req, cb);
+    async DescribeProjects(req, cb) {
+        return this.request("DescribeProjects", req, cb);
     }
     /**
      * 本接口(IsolateDCDBInstance)用于隔离分布式数据库TDSQL实例（包年包月），隔离后不能通过IP和端口访问数据库。隔离的实例可在回收站中进行开机。若为欠费隔离，请尽快进行充值。

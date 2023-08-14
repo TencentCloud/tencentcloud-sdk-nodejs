@@ -458,9 +458,9 @@ it("dcdb.v20180411.ModifyDBSyncMode", async function () {
     }
 })
 
-it("dcdb.v20180411.DescribeProjects", async function () {
+it("dcdb.v20180411.DescribeLogFileRetentionPeriod", async function () {
     try {
-       const data = await client.DescribeProjects({})
+       const data = await client.DescribeLogFileRetentionPeriod({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -491,6 +491,16 @@ it("dcdb.v20180411.DescribeBackupFiles", async function () {
 it("dcdb.v20180411.ModifyDBEncryptAttributes", async function () {
     try {
        const data = await client.ModifyDBEncryptAttributes({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dcdb.v20180411.DestroyHourDCDBInstance", async function () {
+    try {
+       const data = await client.DestroyHourDCDBInstance({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -588,9 +598,9 @@ it("dcdb.v20180411.CreateDCDBInstance", async function () {
     }
 })
 
-it("dcdb.v20180411.DestroyHourDCDBInstance", async function () {
+it("dcdb.v20180411.DescribeProjects", async function () {
     try {
-       const data = await client.DestroyHourDCDBInstance({})
+       const data = await client.DescribeProjects({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

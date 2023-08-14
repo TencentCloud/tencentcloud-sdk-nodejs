@@ -57,6 +57,7 @@ import {
   ChannelCreateConvertTaskApiRequest,
   ChannelCreateFlowByFilesRequest,
   ChannelRole,
+  ChannelCreatePreparedPersonalEsignResponse,
   FlowApproverDetail,
   DescribeResourceUrlsByFlowsResponse,
   ChannelCreateFlowGroupByFilesRequest,
@@ -106,6 +107,7 @@ import {
   FlowApproverInfo,
   ChannelCreateUserAutoSignEnableUrlResponse,
   ChannelGetTaskResultApiRequest,
+  ChannelCreatePreparedPersonalEsignRequest,
   FlowDetailInfo,
   CreateFlowsByTemplatesResponse,
   DescribeChannelFlowEvidenceReportRequest,
@@ -752,6 +754,16 @@ httpProfile.setEndpoint("file.test.ess.tencent.cn");
     cb?: (error: string, rep: OperateChannelTemplateResponse) => void
   ): Promise<OperateChannelTemplateResponse> {
     return this.request("OperateChannelTemplate", req, cb)
+  }
+
+  /**
+   * 本接口（ChannelCreatePreparedPersonalEsign）用于创建导入个人印章
+   */
+  async ChannelCreatePreparedPersonalEsign(
+    req: ChannelCreatePreparedPersonalEsignRequest,
+    cb?: (error: string, rep: ChannelCreatePreparedPersonalEsignResponse) => void
+  ): Promise<ChannelCreatePreparedPersonalEsignResponse> {
+    return this.request("ChannelCreatePreparedPersonalEsign", req, cb)
   }
 
   /**

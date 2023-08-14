@@ -147,6 +147,7 @@ import {
   DescribeReverseShellDetailRequest,
   ModifyReverseShellStatusRequest,
   DescribePublicKeyResponse,
+  DescribeRiskDnsListRequest,
   SetCheckModeRequest,
   DescribeAssetImageRiskListExportRequest,
   DescribeAffectedWorkloadListRequest,
@@ -476,7 +477,9 @@ import {
   DescribeAccessControlRuleDetailResponse,
   CreateNetworkFirewallPublishRequest,
   CreateHostExportJobResponse,
+  DescribeRiskDnsListResponse,
   DescribeNetworkFirewallPolicyDiscoverRequest,
+  RiskDnsEventInfo,
   DescribeNetworkFirewallPolicyYamlDetailResponse,
   CreateOrModifyPostPayCoresRequest,
   ModifyImageAuthorizedRequest,
@@ -489,6 +492,7 @@ import {
   DescribeNetworkFirewallAuditRecordRequest,
   DescribeAssetProcessListRequest,
   DescribeAssetProcessListResponse,
+  SecTendencyEventInfo,
   EscapeEventInfo,
   ModifyVirusScanTimeoutSettingResponse,
   CreateAssetImageVirusExportJobRequest,
@@ -509,7 +513,7 @@ import {
   ResetSecLogTopicConfigRequest,
   DescribeAssetImageVirusListExportResponse,
   DescribeVirusScanSettingRequest,
-  SecTendencyEventInfo,
+  DescribeRiskDnsEventDetailRequest,
   CreateAccessControlsRuleExportJobRequest,
   VirusAutoIsolateSampleInfo,
   DescribeExportJobDownloadURLRequest,
@@ -677,6 +681,7 @@ import {
   DescribeImageAutoAuthorizedTaskListRequest,
   DescribeVirusSampleDownloadUrlRequest,
   AddAndPublishNetworkFirewallPolicyYamlDetailResponse,
+  DescribeRiskDnsEventDetailResponse,
   AddAndPublishNetworkFirewallPolicyDetailRequest,
   DescribeEscapeEventInfoRequest,
   UpdateAndPublishNetworkFirewallPolicyYamlDetailResponse,
@@ -1247,13 +1252,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 编辑本地镜像自动授权开关
+   * 查询恶意请求事件列表
    */
-  async SwitchImageAutoAuthorizedRule(
-    req: SwitchImageAutoAuthorizedRuleRequest,
-    cb?: (error: string, rep: SwitchImageAutoAuthorizedRuleResponse) => void
-  ): Promise<SwitchImageAutoAuthorizedRuleResponse> {
-    return this.request("SwitchImageAutoAuthorizedRule", req, cb)
+  async DescribeRiskDnsList(
+    req: DescribeRiskDnsListRequest,
+    cb?: (error: string, rep: DescribeRiskDnsListResponse) => void
+  ): Promise<DescribeRiskDnsListResponse> {
+    return this.request("DescribeRiskDnsList", req, cb)
   }
 
   /**
@@ -3320,6 +3325,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询恶意请求事件详情
+   */
+  async DescribeRiskDnsEventDetail(
+    req: DescribeRiskDnsEventDetailRequest,
+    cb?: (error: string, rep: DescribeRiskDnsEventDetailResponse) => void
+  ): Promise<DescribeRiskDnsEventDetailResponse> {
+    return this.request("DescribeRiskDnsEventDetail", req, cb)
+  }
+
+  /**
    * 从白名单中删除将指定的检测项。
    */
   async DeleteCompliancePolicyItemFromWhitelist(
@@ -3417,6 +3432,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeSecLogKafkaUINResponse) => void
   ): Promise<DescribeSecLogKafkaUINResponse> {
     return this.request("DescribeSecLogKafkaUIN", req, cb)
+  }
+
+  /**
+   * 编辑本地镜像自动授权开关
+   */
+  async SwitchImageAutoAuthorizedRule(
+    req: SwitchImageAutoAuthorizedRuleRequest,
+    cb?: (error: string, rep: SwitchImageAutoAuthorizedRuleResponse) => void
+  ): Promise<SwitchImageAutoAuthorizedRuleResponse> {
+    return this.request("SwitchImageAutoAuthorizedRule", req, cb)
   }
 
   /**

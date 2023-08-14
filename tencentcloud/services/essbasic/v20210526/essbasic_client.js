@@ -417,6 +417,12 @@ httpProfile.setEndpoint("file.test.ess.tencent.cn");
         return this.request("OperateChannelTemplate", req, cb);
     }
     /**
+     * 本接口（ChannelCreatePreparedPersonalEsign）用于创建导入个人印章
+     */
+    async ChannelCreatePreparedPersonalEsign(req, cb) {
+        return this.request("ChannelCreatePreparedPersonalEsign", req, cb);
+    }
+    /**
      * 接口（ChannelCreateFlowGroupByFiles）用于通过多文件创建合同组签署流程。
      */
     async ChannelCreateFlowGroupByFiles(req, cb) {

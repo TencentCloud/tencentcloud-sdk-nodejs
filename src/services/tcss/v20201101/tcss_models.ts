@@ -3002,6 +3002,46 @@ export interface DescribePublicKeyResponse {
 }
 
 /**
+ * DescribeRiskDnsList请求参数结构体
+ */
+export interface DescribeRiskDnsListRequest {
+  /**
+   * 需要返回的数量，默认为10，最大值为100
+   */
+  Limit?: number
+  /**
+   * 偏移量，默认为0。
+   */
+  Offset?: number
+  /**
+   * 过滤条件。
+<li>EventStatus- String - 是否必填：否 - 事件状态，待处理：EVENT_UNDEAL，EVENT_DEALED：已处理，已忽略：EVENT_IGNORE， EVENT_ADD_WHITE：已加白</li>
+<li>ContainerStatus- String - 是否必填：否 - 容器运行状态筛选，已创建：CREATED,正常运行：RUNNING, 暂定运行：PAUSED, 停止运行：	STOPPED，重启中：RESTARTING, 迁移中：REMOVING, 销毁：DESTROYED </li>
+<li>ContainerNetStatus- String -是否必填: 否 -  容器网络状态筛选 未隔离：NORMAL，已隔离：ISOLATED，隔离失败：ISOLATE_FAILED，解除隔离失败：RESTORE_FAILED，解除隔离中：RESTORING，隔离中：ISOLATING</li>
+<li>EventType - String -是否必填: 否 -  事件类型，恶意域名请求：DOMAIN，恶意IP请求：IP</li>
+<li>TimeRange- String -是否必填: 否 -  时间范围，第一个值表示开始时间，第二个值表示结束时间 </li>
+<li>RiskDns- string - 是否必填：否 - 恶意域名。</li>
+<li>RiskIP- string - 是否必填：否 - 恶意IP。</li>
+<li>ContainerName- string - 是否必填：否 - 容器名称。</li>
+<li>ContainerID- string - 是否必填：否 - 容器ID。</li>
+<li>ImageName- string - 是否必填：否 - 镜像名称。</li>
+<li>ImageID- string - 是否必填：否 - 镜像ID。</li>
+<li>HostName- string - 是否必填：否 - 主机名称。</li>
+<li>HostIP- string - 是否必填：否 - 内网IP。</li>
+<li>PublicIP- string - 是否必填：否 - 外网IP。</li>
+   */
+  Filters?: Array<RunTimeFilters>
+  /**
+   * 排序方式：asc/desc
+   */
+  Order?: string
+  /**
+   * 排序字段：告警数量：EventCount，最近生成时间：LatestFoundTime
+   */
+  By?: string
+}
+
+/**
  * SetCheckMode请求参数结构体
  */
 export interface SetCheckModeRequest {
@@ -11315,6 +11355,24 @@ export interface CreateHostExportJobResponse {
 }
 
 /**
+ * DescribeRiskDnsList返回参数结构体
+ */
+export interface DescribeRiskDnsListResponse {
+  /**
+   * 恶意请求事件列表
+   */
+  List?: Array<RiskDnsEventInfo>
+  /**
+   * 总数量
+   */
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeNetworkFirewallPolicyDiscover请求参数结构体
  */
 export interface DescribeNetworkFirewallPolicyDiscoverRequest {
@@ -11322,6 +11380,156 @@ export interface DescribeNetworkFirewallPolicyDiscoverRequest {
    * 任务ID
    */
   TaskId: number
+}
+
+/**
+ * 恶意请求事件信息
+ */
+export interface RiskDnsEventInfo {
+  /**
+   * 事件ID
+   */
+  EventID: number
+  /**
+   * 事件类型，恶意域名请求：DOMAIN，恶意IP请求：IP
+   */
+  EventType: string
+  /**
+   * 恶意请求域名/IP
+   */
+  Address: string
+  /**
+   * 容器ID
+   */
+  ContainerID: string
+  /**
+   * 容器名称
+   */
+  ContainerName: string
+  /**
+   * 隔离状态
+未隔离  	NORMAL
+已隔离		ISOLATED
+隔离中		ISOLATING
+隔离失败	ISOLATE_FAILED
+解除隔离中  RESTORING
+解除隔离失败 RESTORE_FAILED
+   */
+  ContainerNetStatus: string
+  /**
+   * 容器状态
+正在运行: RUNNING
+暂停: PAUSED
+停止: STOPPED
+已经创建: CREATED
+已经销毁: DESTROYED
+正在重启中: RESTARTING
+迁移中: REMOVING
+   */
+  ContainerStatus: string
+  /**
+   * 容器子状态
+"AGENT_OFFLINE"       //Agent离线
+"NODE_DESTROYED"      //节点已销毁
+"CONTAINER_EXITED"    //容器已退出
+"CONTAINER_DESTROYED" //容器已销毁
+"SHARED_HOST"         // 容器与主机共享网络
+"RESOURCE_LIMIT"      //隔离操作资源超限
+"UNKNOW"              // 原因未知
+   */
+  ContainerNetSubStatus: string
+  /**
+   * 容器隔离操作来源
+   */
+  ContainerIsolateOperationSrc: string
+  /**
+   * 镜像ID
+   */
+  ImageID: string
+  /**
+   * 镜像名称
+   */
+  ImageName: string
+  /**
+   * 首次发现时间
+   */
+  FoundTime: string
+  /**
+   * 最近生成时间
+   */
+  LatestFoundTime: string
+  /**
+   * 事件状态
+EVENT_UNDEAL： 待处理
+EVENT_DEALED：已处理
+EVENT_IGNORE： 已忽略
+EVENT_ADD_WHITE：已加白
+   */
+  EventStatus: string
+  /**
+   * 恶意请求次数
+   */
+  EventCount: number
+  /**
+   * 事件描述
+   */
+  Description: string
+  /**
+   * 解决方案
+   */
+  Solution: string
+  /**
+   * 恶意IP所属城市
+   */
+  City: string
+  /**
+   * 主机名称
+   */
+  HostName: string
+  /**
+   * 主机ID
+   */
+  HostID: string
+  /**
+   * 内网IP
+   */
+  HostIP: string
+  /**
+   * 外网IP
+   */
+  PublicIP: string
+  /**
+   * 节点类型：NORMAL普通节点、SUPER超级节点
+   */
+  NodeType?: string
+  /**
+   * 节点名称
+   */
+  NodeName?: string
+  /**
+   * pod ip
+   */
+  PodIP?: string
+  /**
+   * pod 名称
+   */
+  PodName?: string
+  /**
+   * 集群ID
+   */
+  ClusterID?: string
+  /**
+   * 节点id
+   */
+  NodeID?: string
+  /**
+   * 节点唯一id
+   */
+  NodeUniqueID?: string
+  /**
+   * 集群名称
+   */
+  ClusterName?: string
 }
 
 /**
@@ -11588,6 +11796,27 @@ export interface DescribeAssetProcessListResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 运行时安全事件趋势信息
+ */
+export interface SecTendencyEventInfo {
+  /**
+   * 趋势列表
+   */
+  EventSet: Array<RunTimeTendencyInfo>
+  /**
+   * 事件类型：
+ET_ESCAPE : 容器逃逸
+ET_REVERSE_SHELL: 反弹shell
+ET_RISK_SYSCALL:高危系统调用
+ET_ABNORMAL_PROCESS: 异常进程
+ET_ACCESS_CONTROL 文件篡改
+ET_VIRUS 木马事件
+ET_MALICIOUS_CONNECTION 恶意外连事件
+   */
+  EventType: string
 }
 
 /**
@@ -12401,24 +12630,13 @@ export interface DescribeAssetImageVirusListExportResponse {
 export type DescribeVirusScanSettingRequest = null
 
 /**
- * 运行时安全事件趋势信息
+ * DescribeRiskDnsEventDetail请求参数结构体
  */
-export interface SecTendencyEventInfo {
+export interface DescribeRiskDnsEventDetailRequest {
   /**
-   * 趋势列表
+   * 事件ID
    */
-  EventSet: Array<RunTimeTendencyInfo>
-  /**
-   * 事件类型：
-ET_ESCAPE : 容器逃逸
-ET_REVERSE_SHELL: 反弹shell
-ET_RISK_SYSCALL:高危系统调用
-ET_ABNORMAL_PROCESS: 异常进程
-ET_ACCESS_CONTROL 文件篡改
-ET_VIRUS 木马事件
-ET_MALICIOUS_CONNECTION 恶意外连事件
-   */
-  EventType: string
+  EventID: number
 }
 
 /**
@@ -16658,6 +16876,261 @@ export interface AddAndPublishNetworkFirewallPolicyYamlDetailResponse {
    * 创建任务的结果，"Succ"为成功，"Failed"为失败
    */
   Result: string
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeRiskDnsEventDetail返回参数结构体
+ */
+export interface DescribeRiskDnsEventDetailResponse {
+  /**
+   * 事件ID
+   */
+  EventID?: number
+  /**
+   * 事件类型，恶意域名请求：DOMAIN，恶意IP请求：IP
+   */
+  EventType?: string
+  /**
+   * 恶意请求次数
+   */
+  EventCount?: number
+  /**
+   * 首次发现时间
+   */
+  FoundTime?: string
+  /**
+   * 最近生成时间
+   */
+  LatestFoundTime?: string
+  /**
+   * 容器ID
+   */
+  ContainerID?: string
+  /**
+   * 容器名称
+   */
+  ContainerName?: string
+  /**
+   * 隔离状态
+未隔离  	NORMAL
+已隔离		ISOLATED
+隔离中		ISOLATING
+隔离失败	ISOLATE_FAILED
+解除隔离中  RESTORING
+解除隔离失败 RESTORE_FAILED
+   */
+  ContainerNetStatus?: string
+  /**
+   * 容器状态
+正在运行: RUNNING
+暂停: PAUSED
+停止: STOPPED
+已经创建: CREATED
+已经销毁: DESTROYED
+正在重启中: RESTARTING
+迁移中: REMOVING
+   */
+  ContainerStatus?: string
+  /**
+   * 容器子状态
+"AGENT_OFFLINE"       //Agent离线
+"NODE_DESTROYED"      //节点已销毁
+"CONTAINER_EXITED"    //容器已退出
+"CONTAINER_DESTROYED" //容器已销毁
+"SHARED_HOST"         // 容器与主机共享网络
+"RESOURCE_LIMIT"      //隔离操作资源超限
+"UNKNOW"              // 原因未知
+   */
+  ContainerNetSubStatus?: string
+  /**
+   * 容器隔离操作来源
+   */
+  ContainerIsolateOperationSrc?: string
+  /**
+   * 镜像ID
+   */
+  ImageID?: string
+  /**
+   * 镜像名称
+   */
+  ImageName?: string
+  /**
+   * 主机名称
+   */
+  HostName?: string
+  /**
+   * 内网IP
+   */
+  HostIP?: string
+  /**
+   * 外网IP
+   */
+  PublicIP?: string
+  /**
+   * 节点名称
+   */
+  PodName?: string
+  /**
+   * 事件描述
+   */
+  Description?: string
+  /**
+   * 解决方案
+   */
+  Solution?: string
+  /**
+   * 参考链接
+   */
+  Reference?: Array<string>
+  /**
+   * 恶意域名或IP
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Address?: string
+  /**
+   * 恶意IP所属城市
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  City?: string
+  /**
+   * 命中规则类型
+SYSTEM：系统规则
+ USER：用户自定义
+   */
+  MatchRuleType?: string
+  /**
+   * 标签特征
+   */
+  FeatureLabel?: string
+  /**
+   * 进程权限
+   */
+  ProcessAuthority?: string
+  /**
+   * 进程md5
+   */
+  ProcessMd5?: string
+  /**
+   * 进程启动用户
+   */
+  ProcessStartUser?: string
+  /**
+   * 进程用户组
+   */
+  ProcessUserGroup?: string
+  /**
+   * 进程路径
+   */
+  ProcessPath?: string
+  /**
+   * 进程树
+   */
+  ProcessTree?: string
+  /**
+   * 进程命令行参数
+   */
+  ProcessParam?: string
+  /**
+   * 父进程启动用户
+   */
+  ParentProcessStartUser?: string
+  /**
+   * 父进程用户组
+   */
+  ParentProcessUserGroup?: string
+  /**
+   * 父进程路径
+   */
+  ParentProcessPath?: string
+  /**
+   * 父进程命令行参数
+   */
+  ParentProcessParam?: string
+  /**
+   * 祖先进程启动用户
+   */
+  AncestorProcessStartUser?: string
+  /**
+   * 祖先进程用户组
+   */
+  AncestorProcessUserGroup?: string
+  /**
+   * 祖先进程路径
+   */
+  AncestorProcessPath?: string
+  /**
+   * 祖先进程命令行参数
+   */
+  AncestorProcessParam?: string
+  /**
+   * 主机ID
+   */
+  HostID?: string
+  /**
+   * 事件状态
+EVENT_UNDEAL： 待处理
+EVENT_DEALED：已处理
+EVENT_IGNORE： 已忽略
+EVENT_ADD_WHITE：已加白
+   */
+  EventStatus?: string
+  /**
+   * 操作时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OperationTime?: string
+  /**
+   * 备注
+   */
+  Remark?: string
+  /**
+   * 节点类型
+   */
+  NodeType?: string
+  /**
+   * 节点名称
+   */
+  NodeName?: string
+  /**
+   * 节点子网ID
+   */
+  NodeSubNetID?: string
+  /**
+   * 节点子网名称
+   */
+  NodeSubNetName?: string
+  /**
+   * 节点子网网段
+   */
+  NodeSubNetCIDR?: string
+  /**
+   * 集群ID
+   */
+  ClusterID?: string
+  /**
+   * podip
+   */
+  PodIP?: string
+  /**
+   * pod状态
+   */
+  PodStatus?: string
+  /**
+   * 节点唯一id
+   */
+  NodeUniqueID?: string
+  /**
+   * 节点ID名称
+   */
+  NodeID?: string
+  /**
+   * 集群名称
+   */
+  ClusterName?: string
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

@@ -402,11 +402,11 @@ export interface SslVpnClient {
   /**
    * VPC实例ID。
    */
-  VpcId: string
+  VpcId?: string
   /**
    * SSL-VPN-SERVER 实例ID。
    */
-  SslVpnServerId: string
+  SslVpnServerId?: string
   /**
    * 证书状态。
 0:创建中
@@ -415,23 +415,23 @@ export interface SslVpnClient {
 3.已过期
 4.创建出错
    */
-  CertStatus: number
+  CertStatus?: number
   /**
    * SSL-VPN-CLIENT 实例ID。
    */
-  SslVpnClientId: string
+  SslVpnClientId?: string
   /**
    * 证书开始时间。
    */
-  CertBeginTime: string
+  CertBeginTime?: string
   /**
    * 证书到期时间。
    */
-  CertEndTime: string
+  CertEndTime?: string
   /**
    * CLIENT NAME。
    */
-  Name: string
+  Name?: string
   /**
    * 创建CLIENT 状态。
 0 创建中
@@ -439,11 +439,11 @@ export interface SslVpnClient {
 2 更新中
 3 更新出错
 4 销毁中
-5 销毁出粗
+5 销毁出错
 6 已连通
 7 未知
    */
-  State: string
+  State?: string
 }
 
 /**
@@ -8359,66 +8359,66 @@ export interface DeleteDhcpIpResponse {
 }
 
 /**
- * SSL-VPN-SERVER 信息 SET
+ * SSL-VPN-SERVER 出参
  */
 export interface SslVpnSever {
   /**
    * VPC实例ID.
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  VpcId: string
+  VpcId?: string
   /**
    * SSL-VPN-SERVER 实例ID。
    */
-  SslVpnServerId: string
+  SslVpnServerId?: string
   /**
    * VPN 实例ID。
    */
-  VpnGatewayId: string
+  VpnGatewayId?: string
   /**
    * SSL-VPN-SERVER name。
    */
-  SslVpnServerName: string
+  SslVpnServerName?: string
   /**
    * 本端地址段。
    */
-  LocalAddress: Array<string>
+  LocalAddress?: Array<string>
   /**
    * 客户端地址段。
    */
-  RemoteAddress: string
+  RemoteAddress?: string
   /**
    * 客户端最大连接数。
    */
-  MaxConnection: number
+  MaxConnection?: number
   /**
    * SSL-VPN 网关公网IP。
    */
-  WanIp: string
+  WanIp?: string
   /**
    * SSL VPN服务端监听协议
    */
-  SslVpnProtocol: string
+  SslVpnProtocol?: string
   /**
    * SSL VPN服务端监听协议端口
    */
-  SslVpnPort: number
+  SslVpnPort?: number
   /**
    * 加密算法。
    */
-  EncryptAlgorithm: string
+  EncryptAlgorithm?: string
   /**
    * 认证算法。
    */
-  IntegrityAlgorithm: string
+  IntegrityAlgorithm?: string
   /**
    * 是否支持压缩。
    */
-  Compress: number
+  Compress?: number
   /**
    * 创建时间。
    */
-  CreateTime: string
+  CreateTime?: string
   /**
    * SSL-VPN-SERVER 创建状态。
 0 创建中
@@ -8426,27 +8426,27 @@ export interface SslVpnSever {
 2 更新中
 3 更新出错
 4 销毁中
-5 销毁出粗
+5 销毁出错
 6 已连通
 7 未知
    */
-  State: number
+  State?: number
   /**
    * 是否开启SSO认证。1：开启  0： 不开启
    */
-  SsoEnabled: number
+  SsoEnabled?: number
   /**
    * EIAM应用ID
    */
-  EiamApplicationId: string
+  EiamApplicationId?: string
   /**
    * 是否开启策略控制。0：不开启 1： 开启
    */
-  AccessPolicyEnabled: number
+  AccessPolicyEnabled?: number
   /**
    * 策略信息
    */
-  AccessPolicy: Array<AccessPolicy>
+  AccessPolicy?: Array<AccessPolicy>
 }
 
 /**

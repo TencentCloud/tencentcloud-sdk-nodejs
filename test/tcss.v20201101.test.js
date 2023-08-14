@@ -418,9 +418,9 @@ it("tcss.v20201101.DescribeAccessControlEvents", async function () {
     }
 })
 
-it("tcss.v20201101.SwitchImageAutoAuthorizedRule", async function () {
+it("tcss.v20201101.DescribeRiskDnsList", async function () {
     try {
-       const data = await client.SwitchImageAutoAuthorizedRule({})
+       const data = await client.DescribeRiskDnsList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -2488,6 +2488,16 @@ it("tcss.v20201101.DescribeK8sApiAbnormalRuleInfo", async function () {
     }
 })
 
+it("tcss.v20201101.DescribeRiskDnsEventDetail", async function () {
+    try {
+       const data = await client.DescribeRiskDnsEventDetail({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcss.v20201101.DeleteCompliancePolicyItemFromWhitelist", async function () {
     try {
        const data = await client.DeleteCompliancePolicyItemFromWhitelist({})
@@ -2581,6 +2591,16 @@ it("tcss.v20201101.ModifyVirusAutoIsolateSetting", async function () {
 it("tcss.v20201101.DescribeSecLogKafkaUIN", async function () {
     try {
        const data = await client.DescribeSecLogKafkaUIN({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcss.v20201101.SwitchImageAutoAuthorizedRule", async function () {
+    try {
+       const data = await client.SwitchImageAutoAuthorizedRule({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
