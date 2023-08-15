@@ -3470,9 +3470,9 @@ export interface DescribeWebhookTriggerLogRequest {
     Offset?: number;
 }
 /**
- * ManageReplication返回参数结构体
+ * DuplicateImage返回参数结构体
  */
-export interface ManageReplicationResponse {
+export interface DuplicateImageResponse {
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -3821,6 +3821,15 @@ export interface CreateSecurityPolicyRequest {
      * 备注
      */
     Description: string;
+}
+/**
+ * ManageReplication返回参数结构体
+ */
+export interface ManageReplicationResponse {
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * 自定义账户
@@ -5019,6 +5028,43 @@ export interface CreateInternalEndpointDnsResponse {
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * DuplicateImage请求参数结构体
+ */
+export interface DuplicateImageRequest {
+    /**
+     * 实例id
+     */
+    RegistryId: string;
+    /**
+     * 源命名空间名称
+     */
+    SourceNamespace: string;
+    /**
+     * 源镜像仓库名称
+     */
+    SourceRepo: string;
+    /**
+     * 源镜像tag或digest值，目前仅支持tag
+     */
+    SourceReference: string;
+    /**
+     * 目标镜像版本
+     */
+    DestinationTag: string;
+    /**
+     * 目标命名空间，不填默认与源一致
+     */
+    DestinationNamespace?: string;
+    /**
+     * 目标镜像仓库，不填默认与源一致
+     */
+    DestinationRepo?: string;
+    /**
+     * 是否覆盖
+     */
+    Override?: boolean;
 }
 /**
  * CreateTagRetentionExecution请求参数结构体

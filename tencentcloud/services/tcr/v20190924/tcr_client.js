@@ -648,6 +648,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ManageInternalEndpoint", req, cb);
     }
     /**
+     * 用于在企业版镜像仓库中复制镜像版本
+     */
+    async DuplicateImage(req, cb) {
+        return this.request("DuplicateImage", req, cb);
+    }
+    /**
      * 查询实例当前状态以及过程信息
      */
     async DescribeInstanceStatus(req, cb) {

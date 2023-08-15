@@ -3763,38 +3763,47 @@ export interface DatahubTopicResp {
 export interface RecordMapping {
     /**
      * 消息的 key 名称
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     JsonKey?: string;
     /**
      * 消息类型
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     Type?: string;
     /**
      * 消息是否允许为空
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     AllowNull?: boolean;
     /**
      * 对应映射列名称
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     ColumnName?: string;
     /**
      * 数据库表额外字段
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     ExtraInfo?: string;
     /**
      * 当前列大小
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     ColumnSize?: string;
     /**
      * 当前列精度
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     DecimalDigits?: string;
     /**
      * 是否为自增列
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     AutoIncrement?: boolean;
     /**
      * 数据库表默认参数
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     DefaultValue?: string;
 }

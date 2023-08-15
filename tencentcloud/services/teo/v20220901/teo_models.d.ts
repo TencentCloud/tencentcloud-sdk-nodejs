@@ -5698,6 +5698,10 @@ export interface ModifyApplicationProxyRuleRequest {
   <li>端口段：81-90，81至90端口。</li>
      */
     OriginPort?: string;
+    /**
+     * 规则标签。不填保持原有值。
+     */
+    RuleTag?: string;
 }
 /**
  * ModifyAccelerationDomain返回参数结构体

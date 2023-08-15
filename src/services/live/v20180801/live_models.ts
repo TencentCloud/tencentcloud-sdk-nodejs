@@ -750,33 +750,37 @@ export interface DescribeCallbackRecordsListRequest {
  */
 export interface CallbackEventInfo {
   /**
-   * 事件时间
+   * 事件时间。
+数据时间点，接口返回支持两种时间格式：
+1）YYYY-MM-DDThh:mm:ssZ：UTC时间格式，详见ISO日期格式说明文档: https://cloud.tencent.com/document/product/266/11732#I
+2）yyyy-MM-dd HH:mm:ss：使用此格式时，默认代表北京时间。
+接口返回的时间格式和查询请求传入的时间格式一致。
    */
-  EventTime: string
+  EventTime?: string
   /**
    * 事件类型
    */
-  EventType: number
+  EventType?: number
   /**
    * 回调请求
    */
-  Request: string
+  Request?: string
   /**
    * 回调响应
    */
-  Response: string
+  Response?: string
   /**
    * 客户接口响应时间
    */
-  ResponseTime: string
+  ResponseTime?: string
   /**
    * 回调结果
    */
-  ResultCode: number
+  ResultCode?: number
   /**
    * 流名称
    */
-  StreamId: string
+  StreamId?: string
 }
 
 /**
@@ -3189,27 +3193,27 @@ export interface StopLiveStreamMonitorResponse {
 export interface DayStreamPlayInfo {
   /**
    * 数据时间点，接口返回支持两种时间格式：
-1）YYYY-MM-DDThh:mm:ssZ：UTC时间格式，详见IOS日期格式说明文档: https://cloud.tencent.com/document/product/266/11732#I
+1）YYYY-MM-DDThh:mm:ssZ：UTC时间格式，详见ISO日期格式说明文档: https://cloud.tencent.com/document/product/266/11732#I
 2）yyyy-MM-dd HH:mm:ss：使用此格式时，默认代表北京时间。
 接口返回的时间格式和查询请求传入的时间格式一致。
    */
-  Time: string
+  Time?: string
   /**
    * 带宽（单位Mbps）。
    */
-  Bandwidth: number
+  Bandwidth?: number
   /**
    * 流量 （单位MB）。
    */
-  Flux: number
+  Flux?: number
   /**
    * 请求数。
    */
-  Request: number
+  Request?: number
   /**
    * 在线人数。
    */
-  Online: number
+  Online?: number
 }
 
 /**

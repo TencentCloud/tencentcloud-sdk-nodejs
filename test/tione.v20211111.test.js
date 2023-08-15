@@ -488,6 +488,16 @@ it("tione.v20211111.RestartModelAccelerateTask", async function () {
     }
 })
 
+it("tione.v20211111.SendChatMessage", async function () {
+    try {
+       const data = await client.SendChatMessage({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tione.v20211111.DescribeModelServices", async function () {
     try {
        const data = await client.DescribeModelServices({})

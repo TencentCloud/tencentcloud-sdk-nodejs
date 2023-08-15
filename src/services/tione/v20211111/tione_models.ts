@@ -1410,9 +1410,17 @@ export interface TrainingTaskDetail {
 }
 
 /**
- * StopBatchTask返回参数结构体
+ * SendChatMessage返回参数结构体
  */
-export interface StopBatchTaskResponse {
+export interface SendChatMessageResponse {
+  /**
+   * 答案
+   */
+  Answer?: string
+  /**
+   * 会话id,返回请求的会话id
+   */
+  SessionId?: string
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5531,6 +5539,33 @@ export interface DescribeDatasetDetailStructuredRequest {
 }
 
 /**
+ * SendChatMessage请求参数结构体
+ */
+export interface SendChatMessageRequest {
+  /**
+   * 会话id，标识一组对话的唯一id，id变更则重置会话
+   */
+  SessionId: string
+  /**
+   * 问题描述
+   */
+  Question: string
+  /**
+   * 会话模型版本，不同的会话模型调用到不同的模型后台。
+注: 多行业多场景大模型填写 tj_llm_clm-v1
+   */
+  ModelVersion?: string
+  /**
+   * 使用模式(仅部分模型支持)。General 通用问答；WithSearchPlugin 搜索增强问答
+   */
+  Mode?: string
+  /**
+   * 搜索来源。仅当Mode未WithSearchPlugin时生效。Preset 预置文稿库；Custom 自定义。
+   */
+  SearchSource?: string
+}
+
+/**
  * DescribeModelAccelerateTask请求参数结构体
  */
 export interface DescribeModelAccelerateTaskRequest {
@@ -6178,6 +6213,16 @@ STATUS_SUCCESS：导入成功，STATUS_FAILED：导入失败 ，STATUS_RUNNING�
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IsQAT?: boolean
+}
+
+/**
+ * StopBatchTask返回参数结构体
+ */
+export interface StopBatchTaskResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

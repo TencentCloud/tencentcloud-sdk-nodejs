@@ -2815,6 +2815,20 @@ export interface DeleteLoadBalancerRequest {
 }
 
 /**
+ * ModifyLoadBalancersProject请求参数结构体
+ */
+export interface ModifyLoadBalancersProjectRequest {
+  /**
+   * 一个或多个待操作的负载均衡实例ID。
+   */
+  LoadBalancerIds: Array<string>
+  /**
+   * 项目ID。
+   */
+  ProjectId: number
+}
+
+/**
  * 证书信息
  */
 export interface CertificateInput {
@@ -4945,6 +4959,16 @@ export interface ModifyTargetPortRequest {
    * 目标规则的URL，提供LocationId参数时本参数不生效。
    */
   Url?: string
+}
+
+/**
+ * ModifyLoadBalancersProject返回参数结构体
+ */
+export interface ModifyLoadBalancersProjectResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

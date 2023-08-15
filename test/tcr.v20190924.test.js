@@ -1048,6 +1048,16 @@ it("tcr.v20190924.ManageInternalEndpoint", async function () {
     }
 })
 
+it("tcr.v20190924.DuplicateImage", async function () {
+    try {
+       const data = await client.DuplicateImage({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcr.v20190924.DescribeInstanceStatus", async function () {
     try {
        const data = await client.DescribeInstanceStatus({})

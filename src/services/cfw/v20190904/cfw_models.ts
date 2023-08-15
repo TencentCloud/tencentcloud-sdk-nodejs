@@ -1251,6 +1251,16 @@ export interface VpcDnsInfo {
    * 0：开关关闭 ， 1: 开关打开
    */
   SwitchStatus: number
+  /**
+   * 0：未防护， 1: 已防护，2：忽略此字段
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProtectedStatus?: number
+  /**
+   * 是否支持DNS FW，0-不支持、1-支持
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SupportDNSFW?: number
 }
 
 /**
@@ -3302,70 +3312,70 @@ export interface NatInstanceInfo {
   /**
    * nat实例id
    */
-  NatinsId: string
+  NatinsId?: string
   /**
    * nat实例名称
    */
-  NatinsName: string
+  NatinsName?: string
   /**
    * 实例所在地域
    */
-  Region: string
+  Region?: string
   /**
    * 0: 新增模式，1:接入模式
    */
-  FwMode: number
+  FwMode?: number
   /**
    * 实例带宽大小 Mbps
    */
-  BandWidth: number
+  BandWidth?: number
   /**
    * 入向带宽峰值 bps
    */
-  InFlowMax: number
+  InFlowMax?: number
   /**
    * 出向带宽峰值 bps
    */
-  OutFlowMax: number
+  OutFlowMax?: number
   /**
    * 地域中文信息
    */
-  RegionZh: string
+  RegionZh?: string
   /**
    * 公网ip数组
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  EipAddress: Array<string>
+  EipAddress?: Array<string>
   /**
    * 内外使用ip数组
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  VpcIp: Array<string>
+  VpcIp?: Array<string>
   /**
    * 实例关联子网数组
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Subnets: Array<string>
+  Subnets?: Array<string>
   /**
    * 0 :正常 1：正在初始化
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Status: number
+  Status?: number
   /**
    * 地域区域信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RegionDetail: string
+  RegionDetail?: string
   /**
    * 实例所在可用区
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ZoneZh: string
+  ZoneZh?: string
   /**
    * 实例所在可用区
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ZoneZhBak: string
+  ZoneZhBak?: string
   /**
    * 已使用规则数
 注意：此字段可能返回 null，表示取不到有效值。
@@ -3376,6 +3386,16 @@ export interface NatInstanceInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RuleMax?: number
+  /**
+   * 实例引擎版本
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EngineVersion?: string
+  /**
+   * 引擎是否可升级：0，不可升级；1，可升级
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UpdateEnable?: number
 }
 
 /**
@@ -3755,100 +3775,100 @@ export interface DescAcItem {
    * 访问源
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SourceContent: string
+  SourceContent?: string
   /**
    * 访问目的
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TargetContent: string
+  TargetContent?: string
   /**
    * 协议
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Protocol: string
+  Protocol?: string
   /**
    * 端口
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Port: string
+  Port?: string
   /**
    * 访问控制策略中设置的流量通过云防火墙的方式。取值： accept：放行 drop：拒绝 log：观察
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RuleAction: string
+  RuleAction?: string
   /**
    * 描述
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Description: string
+  Description?: string
   /**
    * 命中次数
    */
-  Count: number
+  Count?: number
   /**
    * 执行顺序
    */
-  OrderIndex: number
+  OrderIndex?: number
   /**
    * 访问源类型：入向规则时类型可以为 ip,net,template,location；出向规则时可以为 ip,net,template,instance,group,tag
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SourceType: string
+  SourceType?: string
   /**
    * 访问目的类型：入向规则时类型可以为ip,net,template,instance,group,tag；出向规则时可以为 ip,net,domain,template,location
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TargetType: string
+  TargetType?: string
   /**
    * 规则对应的唯一id
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Uuid: number
+  Uuid?: number
   /**
    * 规则有效性
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Invalid: number
+  Invalid?: number
   /**
    * 0为正常规则,1为地域规则
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  IsRegion: number
+  IsRegion?: number
   /**
    * 国家id
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CountryCode: number
+  CountryCode?: number
   /**
    * 城市id
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CityCode: number
+  CityCode?: number
   /**
    * 国家名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CountryName: string
+  CountryName?: string
   /**
    * 省名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CityName: string
+  CityName?: string
   /**
    * 云厂商code
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CloudCode: string
+  CloudCode?: string
   /**
    * 0为正常规则,1为云厂商规则
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  IsCloud: number
+  IsCloud?: number
   /**
    * 规则状态，true表示启用，false表示禁用
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Enable: string
+  Enable?: string
   /**
    * 规则方向：1，入向；0，出向
 注意：此字段可能返回 null，表示取不到有效值。
@@ -3874,6 +3894,16 @@ export interface DescAcItem {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   BetaList?: Array<BetaInfoByACL>
+  /**
+   * 生效范围：serial，串行；side，旁路；all，全局
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Scope?: string
+  /**
+   * 互联网边界防火墙使用的内部规则id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InternetBorderUuid?: string
 }
 
 /**

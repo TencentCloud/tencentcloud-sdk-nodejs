@@ -49,7 +49,7 @@ import {
   DescribeNotebookImageKernelsRequest,
   DescribeDatasetDetailUnstructuredRequest,
   TrainingTaskDetail,
-  StopBatchTaskResponse,
+  SendChatMessageResponse,
   ModifyNotebookTagsResponse,
   DescribeNotebookImageRecordsResponse,
   CosPathInfo,
@@ -194,6 +194,7 @@ import {
   StopModelAccelerateTaskResponse,
   DescribeAPIConfigsResponse,
   DescribeDatasetDetailStructuredRequest,
+  SendChatMessageRequest,
   DescribeModelAccelerateTaskRequest,
   Container,
   SegmentationInfo,
@@ -214,6 +215,7 @@ import {
   StopNotebookRequest,
   DeleteModelServiceGroupRequest,
   TrainingModelVersionDTO,
+  StopBatchTaskResponse,
   PushTrainingMetricsRequest,
   DescribeTrainingTaskRequest,
   ChatCompletionResponse,
@@ -730,6 +732,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: RestartModelAccelerateTaskResponse) => void
   ): Promise<RestartModelAccelerateTaskResponse> {
     return this.request("RestartModelAccelerateTask", req, cb)
+  }
+
+  /**
+   * LLM模型的对话请求发送接口
+   */
+  async SendChatMessage(
+    req: SendChatMessageRequest,
+    cb?: (error: string, rep: SendChatMessageResponse) => void
+  ): Promise<SendChatMessageResponse> {
+    return this.request("SendChatMessage", req, cb)
   }
 
   /**

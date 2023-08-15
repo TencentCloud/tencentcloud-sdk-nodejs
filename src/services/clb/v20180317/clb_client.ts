@@ -135,6 +135,7 @@ import {
   LBChargePrepaid,
   ClassicalListener,
   DeleteLoadBalancerRequest,
+  ModifyLoadBalancersProjectRequest,
   CertificateInput,
   ResourceAvailability,
   DescribeCustomizedConfigAssociateListResponse,
@@ -228,6 +229,7 @@ import {
   DescribeClassicalLBTargetsResponse,
   RewriteLocationMap,
   ModifyTargetPortRequest,
+  ModifyLoadBalancersProjectResponse,
   DescribeLoadBalancersResponse,
   DescribeLBListenersResponse,
   TargetGroupInfo,
@@ -628,6 +630,18 @@ export class Client extends AbstractClient {
   }
 
   /**
+     * SetLoadBalancerSecurityGroups 接口支持对一个公网负载均衡实例执行设置（绑定、解绑）安全组操作。查询一个负载均衡实例目前已绑定的安全组，可使用 DescribeLoadBalancers 接口。本接口是set语义，
+绑定操作时，入参需要传入负载均衡实例要绑定的所有安全组（已绑定的+新增绑定的）。
+解绑操作时，入参需要传入负载均衡实例执行解绑后所绑定的所有安全组；如果要解绑所有安全组，可不传此参数，或传入空数组。注意：内网负载均衡不支持绑定安全组。
+     */
+  async SetLoadBalancerSecurityGroups(
+    req: SetLoadBalancerSecurityGroupsRequest,
+    cb?: (error: string, rep: SetLoadBalancerSecurityGroupsResponse) => void
+  ): Promise<SetLoadBalancerSecurityGroupsResponse> {
+    return this.request("SetLoadBalancerSecurityGroups", req, cb)
+  }
+
+  /**
    * 查询后端云主机或弹性网卡绑定的负载均衡，支持弹性网卡和cvm查询。
    */
   async DescribeLBListeners(
@@ -762,15 +776,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * SetLoadBalancerSecurityGroups 接口支持对一个公网负载均衡实例执行设置（绑定、解绑）安全组操作。查询一个负载均衡实例目前已绑定的安全组，可使用 DescribeLoadBalancers 接口。本接口是set语义，
-绑定操作时，入参需要传入负载均衡实例要绑定的所有安全组（已绑定的+新增绑定的）。
-解绑操作时，入参需要传入负载均衡实例执行解绑后所绑定的所有安全组；如果要解绑所有安全组，可不传此参数，或传入空数组。注意：内网负载均衡不支持绑定安全组。
-     */
-  async SetLoadBalancerSecurityGroups(
-    req: SetLoadBalancerSecurityGroupsRequest,
-    cb?: (error: string, rep: SetLoadBalancerSecurityGroupsResponse) => void
-  ): Promise<SetLoadBalancerSecurityGroupsResponse> {
-    return this.request("SetLoadBalancerSecurityGroups", req, cb)
+   * 修改一个或多个负载均衡实例所属项目。
+   */
+  async ModifyLoadBalancersProject(
+    req: ModifyLoadBalancersProjectRequest,
+    cb?: (error: string, rep: ModifyLoadBalancersProjectResponse) => void
+  ): Promise<ModifyLoadBalancersProjectResponse> {
+    return this.request("ModifyLoadBalancersProject", req, cb)
   }
 
   /**

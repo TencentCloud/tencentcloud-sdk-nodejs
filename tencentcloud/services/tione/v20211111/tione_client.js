@@ -310,6 +310,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("RestartModelAccelerateTask", req, cb);
     }
     /**
+     * LLM模型的对话请求发送接口
+     */
+    async SendChatMessage(req, cb) {
+        return this.request("SendChatMessage", req, cb);
+    }
+    /**
      * 查询多个服务
      */
     async DescribeModelServices(req, cb) {

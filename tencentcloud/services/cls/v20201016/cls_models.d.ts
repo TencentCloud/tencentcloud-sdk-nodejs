@@ -5493,7 +5493,7 @@ export interface CreateDataTransformRequest {
      */
     EnableFlag?: number;
     /**
-     * 加工任务目的topic_id以及别名
+     * 加工任务目的topic_id以及别名,当FuncType=1时，该参数必填，当FuncType=2时，无需填写
      */
     DstResources?: Array<DataTransformResouceInfo>;
     /**

@@ -1325,6 +1325,11 @@ export interface DomainsPartInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IpHeaders: Array<string>
+  /**
+   * 0:关闭xff重置；1:开启xff重置
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  XFFReset?: number
 }
 
 /**
@@ -1597,11 +1602,11 @@ export interface AddSpartaProtectionRequest {
    */
   IsWebsocket: number
   /**
-   * 负载均衡策略，0表示轮徇，1表示IP hash
+   * 负载均衡策略，0表示轮询，1表示IP hash
    */
   LoadBalance: string
   /**
-   * CertType=1时，需要填次参数，表示证书内容
+   * 值为1时，需要填次参数，表示证书内容
    */
   Cert?: string
   /**
@@ -1708,6 +1713,10 @@ export interface AddSpartaProtectionRequest {
    * is_cdn=3时，需要填此参数，表示自定义header
    */
   IpHeaders?: Array<string>
+  /**
+   * 0:关闭xff重置；1:开启xff重置
+   */
+  XFFReset?: number
 }
 
 /**
@@ -2052,22 +2061,27 @@ export interface DeleteDomainWhiteRulesRequest {
 export interface DomainPackageNew {
   /**
    * 资源ID
+注意：此字段可能返回 null，表示取不到有效值。
    */
   ResourceIds: string
   /**
    * 过期时间
+注意：此字段可能返回 null，表示取不到有效值。
    */
   ValidTime: string
   /**
    * 是否自动续费，1：自动续费，0：不自动续费
+注意：此字段可能返回 null，表示取不到有效值。
    */
   RenewFlag: number
   /**
    * 套餐购买个数
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Count: number
   /**
    * 套餐购买地域，clb-waf暂时没有用到
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Region: string
 }
@@ -2122,26 +2136,32 @@ export interface PostAttackDownloadTaskResponse {
 export interface QPSPackageNew {
   /**
    * 资源ID
+注意：此字段可能返回 null，表示取不到有效值。
    */
   ResourceIds: string
   /**
    * 过期时间
+注意：此字段可能返回 null，表示取不到有效值。
    */
   ValidTime: string
   /**
    * 是否自动续费，1：自动续费，0：不自动续费
+注意：此字段可能返回 null，表示取不到有效值。
    */
   RenewFlag: number
   /**
    * 套餐购买个数
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Count: number
   /**
    * 套餐购买地域，clb-waf暂时没有用到
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Region: string
   /**
    * 计费项
+注意：此字段可能返回 null，表示取不到有效值。
    */
   BillingItem?: string
 }
@@ -2515,7 +2535,7 @@ export interface DescribePolicyStatusResponse {
  */
 export interface DescribeInstancesRequest {
   /**
-   * 偏移
+   * 偏移量
    */
   Offset: number
   /**
@@ -2743,7 +2763,7 @@ export interface InstanceInfo {
    */
   AttackLogPost?: number
   /**
-   * 带宽峰值
+   * 带宽峰值，单位为B/s(字节每秒)
 注意：此字段可能返回 null，表示取不到有效值。
    */
   MaxBandwidth?: number
@@ -2771,6 +2791,11 @@ export interface InstanceInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SandboxQps?: number
+  /**
+   * 是否api 安全试用
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsAPISecurityTrial?: number
 }
 
 /**
@@ -3423,7 +3448,7 @@ export interface ModifySpartaProtectionRequest {
    */
   Ciphers?: Array<number>
   /**
-   * 0:不支持选择：默认模版  1:通用型模版 2:安全型模版 3:自定义模版
+   * 0:不支持选择：默认模板  1:通用型模板 2:安全型模板 3:自定义模板
    */
   CipherTemplate?: number
   /**
@@ -3446,6 +3471,10 @@ export interface ModifySpartaProtectionRequest {
    * IsCdn=3时，需要填此参数，表示自定义header
    */
   IpHeaders?: Array<string>
+  /**
+   * 0:关闭xff重置；1:开启xff重置
+   */
+  XFFReset?: number
 }
 
 /**

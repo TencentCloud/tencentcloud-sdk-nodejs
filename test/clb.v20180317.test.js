@@ -368,6 +368,16 @@ it("clb.v20180317.AssociateTargetGroups", async function () {
     }
 })
 
+it("clb.v20180317.SetLoadBalancerSecurityGroups", async function () {
+    try {
+       const data = await client.SetLoadBalancerSecurityGroups({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("clb.v20180317.DescribeLBListeners", async function () {
     try {
        const data = await client.DescribeLBListeners({})
@@ -488,9 +498,9 @@ it("clb.v20180317.DescribeClsLogSet", async function () {
     }
 })
 
-it("clb.v20180317.SetLoadBalancerSecurityGroups", async function () {
+it("clb.v20180317.ModifyLoadBalancersProject", async function () {
     try {
-       const data = await client.SetLoadBalancerSecurityGroups({})
+       const data = await client.ModifyLoadBalancersProject({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

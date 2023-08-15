@@ -208,7 +208,7 @@ import {
   Filter,
   RetentionExecution,
   DescribeWebhookTriggerLogRequest,
-  ManageReplicationResponse,
+  DuplicateImageResponse,
   DescribeReplicationInstanceCreateTasksRequest,
   ModifyWebhookTriggerResponse,
   RepoInfo,
@@ -228,6 +228,7 @@ import {
   Header,
   DescribeReplicationInstancesResponse,
   CreateSecurityPolicyRequest,
+  ManageReplicationResponse,
   CustomAccount,
   DeleteImageAccelerateServiceResponse,
   CVEWhitelistItem,
@@ -298,6 +299,7 @@ import {
   ModifyUserPasswordPersonalRequest,
   DeleteRepositoryRequest,
   CreateInternalEndpointDnsResponse,
+  DuplicateImageRequest,
   CreateTagRetentionExecutionRequest,
   DeleteCustomAccountRequest,
   DescribeInstanceAllNamespacesResponse,
@@ -1347,6 +1349,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ManageInternalEndpointResponse) => void
   ): Promise<ManageInternalEndpointResponse> {
     return this.request("ManageInternalEndpoint", req, cb)
+  }
+
+  /**
+   * 用于在企业版镜像仓库中复制镜像版本
+   */
+  async DuplicateImage(
+    req: DuplicateImageRequest,
+    cb?: (error: string, rep: DuplicateImageResponse) => void
+  ): Promise<DuplicateImageResponse> {
+    return this.request("DuplicateImage", req, cb)
   }
 
   /**

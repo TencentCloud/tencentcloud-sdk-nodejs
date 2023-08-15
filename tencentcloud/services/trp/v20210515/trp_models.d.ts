@@ -1736,26 +1736,32 @@ export interface ChainData {
 export interface PhaseData {
     /**
      * 启用头
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     HeadEnabled?: boolean;
     /**
      * 标题
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     HeadTitle?: string;
     /**
      * 标识符
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     Key?: string;
     /**
      * 小程序AppId
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     AppId?: string;
     /**
      * 小程序AppPath
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     AppPath?: string;
     /**
      * 小程序名称AppName
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     AppName?: string;
 }
@@ -2115,12 +2121,12 @@ export interface DescribeCodePacksResponse {
      * 码列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CodePacks: Array<CodePack>;
+    CodePacks?: Array<CodePack>;
     /**
      * 总数
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2917,6 +2923,14 @@ export interface DescribeCodePacksRequest {
      * 是否有流水码 0:无 1:有
      */
     SerialType?: number;
+    /**
+     * 资源类型 batch:批次, order_in 入库, order_out: 出入
+     */
+    ResType?: string;
+    /**
+     * 资源ID ResType是 batch 时对应是批次ID, 是 order_in, order_out时，则是订单ID
+     */
+    ResId?: string;
 }
 /**
  * DescribeJobFileUrl返回参数结构体
