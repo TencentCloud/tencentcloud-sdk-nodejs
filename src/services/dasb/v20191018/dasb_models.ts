@@ -156,6 +156,11 @@ export interface Department {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Managers?: Array<string>
+  /**
+   * 管理员用户
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ManagerUsers?: Array<DepartmentManagerUser>
 }
 
 /**
@@ -312,16 +317,6 @@ export interface DeleteUserGroupMembersRequest {
    * 需删除的成员用户ID集合
    */
   MemberIdSet: Array<number>
-}
-
-/**
- * DeleteAcls返回参数结构体
- */
-export interface DeleteAclsResponse {
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**
@@ -1086,6 +1081,10 @@ export interface CreateAclRequest {
    * 访问权限所属部门的ID
    */
   DepartmentId?: string
+  /**
+   * 是否允许使用访问串，默认允许
+   */
+  AllowAccessCredential?: boolean
 }
 
 /**
@@ -1371,6 +1370,10 @@ export interface ModifyAclRequest {
    * 权限所属部门的ID，如：1.2.3
    */
   DepartmentId?: string
+  /**
+   * 是否允许使用访问串
+   */
+  AllowAccessCredential?: boolean
 }
 
 /**
@@ -1518,6 +1521,11 @@ export interface DescribeUsersRequest {
    * 部门ID，用于过滤属于某个部门的用户
    */
   DepartmentId?: string
+  /**
+   * 参数过滤数组
+
+   */
+  Filters?: Array<Filter>
 }
 
 /**
@@ -1658,6 +1666,32 @@ export interface ResetDeviceAccountPrivateKeyRequest {
    * ID集合
    */
   IdSet: Array<number>
+}
+
+/**
+ * DescribeDeviceGroups请求参数结构体
+ */
+export interface DescribeDeviceGroupsRequest {
+  /**
+   * 资产组ID集合
+   */
+  IdSet?: Array<number>
+  /**
+   * 资产组名，最长64个字符，模糊查询
+   */
+  Name?: string
+  /**
+   * 分页偏移位置，默认值为0
+   */
+  Offset?: number
+  /**
+   * 每页条目数量，缺省20，最大500
+   */
+  Limit?: number
+  /**
+   * 部门ID，用于过滤属于某个部门的资产组
+   */
+  DepartmentId?: string
 }
 
 /**
@@ -1894,6 +1928,21 @@ export interface User {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DepartmentId?: string
+  /**
+   * 激活状态 0 - 未激活 1 - 激活
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ActiveStatus?: number
+  /**
+   * 锁定状态 0 - 未锁定 1 - 锁定
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LockStatus?: number
+  /**
+   * 状态 与Filter中一致
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status?: string
 }
 
 /**
@@ -2336,33 +2385,13 @@ export interface DescribeCmdTemplatesRequest {
 }
 
 /**
- * 登录日志
+ * DeleteAcls返回参数结构体
  */
-export interface LoginEvent {
+export interface DeleteAclsResponse {
   /**
-   * 用户名
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  UserName: string
-  /**
-   * 姓名
-   */
-  RealName: string
-  /**
-   * 操作时间
-   */
-  Time: string
-  /**
-   * 来源IP
-   */
-  SourceIp: string
-  /**
-   * 登录入口：1-字符界面,2-图形界面，3-web页面, 4-API
-   */
-  Entry: number
-  /**
-   * 操作结果，1-成功，2-失败
-   */
-  Result: number
+  RequestId?: string
 }
 
 /**
@@ -2673,114 +2702,124 @@ export interface Acl {
   /**
    * 访问权限ID
    */
-  Id: number
+  Id?: number
   /**
    * 访问权限名称
    */
-  Name: string
+  Name?: string
   /**
    * 是否开启磁盘映射
    */
-  AllowDiskRedirect: boolean
+  AllowDiskRedirect?: boolean
   /**
    * 是否开启剪贴板文件上行
    */
-  AllowClipFileUp: boolean
+  AllowClipFileUp?: boolean
   /**
    * 是否开启剪贴板文件下行
    */
-  AllowClipFileDown: boolean
+  AllowClipFileDown?: boolean
   /**
    * 是否开启剪贴板文本（目前含图片）上行
    */
-  AllowClipTextUp: boolean
+  AllowClipTextUp?: boolean
   /**
    * 是否开启剪贴板文本（目前含图片）下行
    */
-  AllowClipTextDown: boolean
+  AllowClipTextDown?: boolean
   /**
    * 是否开启文件传输上传
    */
-  AllowFileUp: boolean
+  AllowFileUp?: boolean
   /**
    * 文件传输上传大小限制（预留参数，暂未启用）
    */
-  MaxFileUpSize: number
+  MaxFileUpSize?: number
   /**
    * 是否开启文件传输下载
    */
-  AllowFileDown: boolean
+  AllowFileDown?: boolean
   /**
    * 文件传输下载大小限制（预留参数，暂未启用）
    */
-  MaxFileDownSize: number
+  MaxFileDownSize?: number
   /**
    * 是否允许任意账号登录
    */
-  AllowAnyAccount: boolean
+  AllowAnyAccount?: boolean
   /**
    * 关联的用户列表
    */
-  UserSet: Array<User>
+  UserSet?: Array<User>
   /**
    * 关联的用户组列表
    */
-  UserGroupSet: Array<Group>
+  UserGroupSet?: Array<Group>
   /**
    * 关联的资产列表
    */
-  DeviceSet: Array<Device>
+  DeviceSet?: Array<Device>
   /**
    * 关联的资产组列表
    */
-  DeviceGroupSet: Array<Group>
+  DeviceGroupSet?: Array<Group>
   /**
    * 关联的账号列表
    */
-  AccountSet: Array<string>
+  AccountSet?: Array<string>
   /**
    * 关联的高危命令模板列表
    */
-  CmdTemplateSet: Array<CmdTemplate>
+  CmdTemplateSet?: Array<CmdTemplate>
   /**
    * 是否开启 RDP 磁盘映射文件上传
    */
-  AllowDiskFileUp: boolean
+  AllowDiskFileUp?: boolean
   /**
    * 是否开启 RDP 磁盘映射文件下载
    */
-  AllowDiskFileDown: boolean
+  AllowDiskFileDown?: boolean
   /**
    * 是否开启 rz sz 文件上传
    */
-  AllowShellFileUp: boolean
+  AllowShellFileUp?: boolean
   /**
    * 是否开启 rz sz 文件下载
    */
-  AllowShellFileDown: boolean
+  AllowShellFileDown?: boolean
   /**
    * 是否开启 SFTP 文件删除
    */
-  AllowFileDel: boolean
+  AllowFileDel?: boolean
   /**
    * 访问权限生效时间，如:"2021-09-22T00:00:00+00:00"
 生效、失效时间不填则访问权限长期有效
    */
-  ValidateFrom: string
+  ValidateFrom?: string
   /**
    * 访问权限失效时间，如:"2021-09-23T00:00:00+00:00"
 生效、失效时间不填则访问权限长期有效
    */
-  ValidateTo: string
+  ValidateTo?: string
   /**
    * 访问权限状态，1 - 已生效，2 - 未生效，3 - 已过期
    */
-  Status: number
+  Status?: number
   /**
    * 所属部门的信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Department: Department
+  Department?: Department
+  /**
+   * 是否允许使用访问串，默认允许
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AllowAccessCredential?: boolean
+  /**
+   * 关联的数据库高危命令列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ACTemplateSet?: Array<ACTemplate>
 }
 
 /**
@@ -2847,29 +2886,40 @@ BindingStatus 绑定状态
 }
 
 /**
- * DescribeDeviceGroups请求参数结构体
+ * 部门管理员信息
  */
-export interface DescribeDeviceGroupsRequest {
+export interface DepartmentManagerUser {
   /**
-   * 资产组ID集合
+   * 管理员Id
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  IdSet?: Array<number>
+  ManagerId?: string
   /**
-   * 资产组名，最长64个字符，模糊查询
+   * 管理员姓名
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Name?: string
+  ManagerName?: string
+}
+
+/**
+ * 权限控制模版对象
+ */
+export interface ACTemplate {
   /**
-   * 分页偏移位置，默认值为0
+   * 模版id
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Offset?: number
+  TemplateId?: string
   /**
-   * 每页条目数量，缺省20，最大500
+   * 模版名称
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Limit?: number
+  TemplateName?: string
   /**
-   * 部门ID，用于过滤属于某个部门的资产组
+   * 模版描述
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  DepartmentId?: string
+  Description?: string
 }
 
 /**
@@ -3033,6 +3083,36 @@ export interface SearchFileResult {
    * 上传或新建文件（夹）路径及名称
    */
   FileNew: string
+}
+
+/**
+ * 登录日志
+ */
+export interface LoginEvent {
+  /**
+   * 用户名
+   */
+  UserName: string
+  /**
+   * 姓名
+   */
+  RealName: string
+  /**
+   * 操作时间
+   */
+  Time: string
+  /**
+   * 来源IP
+   */
+  SourceIp: string
+  /**
+   * 登录入口：1-字符界面,2-图形界面，3-web页面, 4-API
+   */
+  Entry: number
+  /**
+   * 操作结果，1-成功，2-失败
+   */
+  Result: number
 }
 
 /**

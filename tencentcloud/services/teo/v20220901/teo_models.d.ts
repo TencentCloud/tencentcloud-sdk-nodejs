@@ -1721,6 +1721,11 @@ export interface ApplicationProxyRule {
   <li>端口段：81-82，表示81，82两个端口。</li>
      */
     OriginPort?: string;
+    /**
+     * 规则标签。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RuleTag?: string;
 }
 /**
  * 智能加速配置
@@ -2597,11 +2602,11 @@ export interface DescribeApplicationProxiesResponse {
     /**
      * 应用代理列表。
      */
-    ApplicationProxies: Array<ApplicationProxy>;
+    ApplicationProxies?: Array<ApplicationProxy>;
     /**
      * 记录总数。
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -3692,6 +3697,10 @@ export interface CreateApplicationProxyRuleRequest {
   <li>端口段：81-90，81至90端口。</li>
      */
     OriginPort?: string;
+    /**
+     * 规则标签。默认值为空字符串。
+     */
+    RuleTag?: string;
 }
 /**
  * 缓存时间设置
@@ -4088,7 +4097,7 @@ export interface DescribeApplicationProxiesRequest {
      */
     Limit?: number;
     /**
-     * 过滤条件，Filters.Values的上限为20。详细的过滤条件如下：<li>proxy-id<br>   按照【<strong>代理ID</strong>】进行过滤。代理ID形如：proxy-ev2sawbwfd。<br>   类型：String<br>   必选：否</li><li>zone-id<br>   按照【<strong>站点ID</strong>】进行过滤。站点ID形如：zone-vawer2vadg。<br>   类型：String<br>   必选：否</li>
+     * 过滤条件，Filters.Values的上限为20。详细的过滤条件如下：<li>proxy-id<br>   按照【<strong>代理ID</strong>】进行过滤。代理ID形如：proxy-ev2sawbwfd。<br>   类型：String<br>   必选：否</li><li>zone-id<br>   按照【<strong>站点ID</strong>】进行过滤。站点ID形如：zone-vawer2vadg。<br>   类型：String<br>   必选：否</li><li>rule-tag<br>   按照【<strong>规则标签</strong>】对应用代理下的规则进行过滤。规则标签形如：rule-service-1。<br>   类型：String<br>   必选：否</li>
      */
     Filters?: Array<Filter>;
 }

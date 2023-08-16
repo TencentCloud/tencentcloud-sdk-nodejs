@@ -28,9 +28,9 @@ it("emr.v20190103.DescribeYarnApplications", async function () {
     }
 })
 
-it("emr.v20190103.TerminateInstance", async function () {
+it("emr.v20190103.ModifyResourcesTags", async function () {
     try {
-       const data = await client.TerminateInstance({})
+       const data = await client.ModifyResourcesTags({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -121,6 +121,16 @@ it("emr.v20190103.DescribeCvmQuota", async function () {
 it("emr.v20190103.ScaleOutInstance", async function () {
     try {
        const data = await client.ScaleOutInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("emr.v20190103.TerminateInstance", async function () {
+    try {
+       const data = await client.TerminateInstance({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

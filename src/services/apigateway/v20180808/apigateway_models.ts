@@ -3762,7 +3762,7 @@ export interface CreateApiRequest {
    */
   ServiceId: string
   /**
-   * API 的后端服务类型。支持HTTP、MOCK、TSF、SCF、WEBSOCKET、TARGET（内测）。
+   * API 的后端服务类型。支持HTTP、MOCK、TSF、SCF、EB、TARGET、VPC、UPSTREAM、GRPC、COS、WEBSOCKET。
    */
   ServiceType: string
   /**
@@ -6041,7 +6041,7 @@ export interface AttachPluginResponse {
   /**
    * 绑定操作是否成功。
    */
-  Result: boolean
+  Result?: boolean
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

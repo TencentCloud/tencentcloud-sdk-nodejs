@@ -34,10 +34,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeYarnApplications", req, cb);
     }
     /**
-     * 销毁EMR实例。此接口仅支持弹性MapReduce正式计费版本。
+     * 强制修改标签
      */
-    async TerminateInstance(req, cb) {
-        return this.request("TerminateInstance", req, cb);
+    async ModifyResourcesTags(req, cb) {
+        return this.request("ModifyResourcesTags", req, cb);
     }
     /**
      * 变配询价
@@ -92,6 +92,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ScaleOutInstance(req, cb) {
         return this.request("ScaleOutInstance", req, cb);
+    }
+    /**
+     * 销毁EMR实例。此接口仅支持弹性MapReduce正式计费版本。
+     */
+    async TerminateInstance(req, cb) {
+        return this.request("TerminateInstance", req, cb);
     }
     /**
      * 查询集群实例信息

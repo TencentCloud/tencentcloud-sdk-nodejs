@@ -2578,26 +2578,57 @@ export interface DescribeInstanceRenewNodesResponse {
 }
 
 /**
- * 各个可用区的参数信息
+ * ModifyResourcesTags返回参数结构体
  */
-export interface MultiZoneSetting {
+export interface ModifyResourcesTagsResponse {
   /**
-   * "master"、"standby"、"third-party"
+   * 成功的资源id列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ZoneTag?: string
+  SuccessList?: Array<string>
   /**
-   * 无
+   * 失败的资源id列表
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  VPCSettings?: VPCSettings
+  FailList?: Array<string>
   /**
-   * 无
+   * 部分成功的资源id列表
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Placement?: Placement
+  PartSuccessList?: Array<string>
   /**
-   * 无
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  ResourceSpec?: NewResourceSpec
+  RequestId?: string
+}
+
+/**
+ * DescribeClusterNodes返回参数结构体
+ */
+export interface DescribeClusterNodesResponse {
+  /**
+   * 查询到的节点总数
+   */
+  TotalCnt: number
+  /**
+   * 节点详细信息列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NodeList: Array<NodeHardwareInfo>
+  /**
+   * 用户所有的标签键列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TagKeys: Array<string>
+  /**
+   * 资源类型列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HardwareResourceTypeList: Array<string>
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2734,29 +2765,63 @@ export interface ScaleOutNodeConfig {
 }
 
 /**
- * DeleteUserManagerUserList请求参数结构体
+ * 强制修改标签
  */
-export interface DeleteUserManagerUserListRequest {
+export interface ModifyResourceTags {
   /**
-   * 集群实例ID
+   * 集群id 或者 cvm id
    */
-  InstanceId: string
+  ResourceId: string
   /**
-   * 集群用户名列表
+   * 资源6段式表达式
    */
-  UserNameList?: Array<string>
+  Resource: string
   /**
-   * tke/eks集群id，容器集群传
+   * 资源前缀
    */
-  TkeClusterId?: string
+  ResourcePrefix: string
   /**
-   * 默认空，容器版传"native"
+   * ap-beijing
    */
-  DisplayStrategy?: string
+  ResourceRegion: string
   /**
-   * 用户组
+   * emr
    */
-  UserGroupList?: Array<UserAndGroup>
+  ServiceType: string
+  /**
+   * 删除的标签列表
+   */
+  DeleteTags?: Array<Tag>
+  /**
+   * 添加的标签列表
+   */
+  AddTags?: Array<Tag>
+  /**
+   * 修改的标签列表
+   */
+  ModifyTags?: Array<Tag>
+}
+
+/**
+ * 价格详情
+ */
+export interface PriceDetail {
+  /**
+   * 节点ID
+   */
+  ResourceId: string
+  /**
+   * 价格计算公式
+   */
+  Formula: string
+  /**
+   * 原价
+   */
+  OriginalCost: number
+  /**
+   * 折扣价
+   */
+  DiscountCost: number
 }
 
 /**
@@ -4016,25 +4081,17 @@ export interface CdbInfo {
 }
 
 /**
- * 价格详情
+ * ModifyResourcesTags请求参数结构体
  */
-export interface PriceDetail {
+export interface ModifyResourcesTagsRequest {
   /**
-   * 节点ID
+   * 标签类型，取值Cluster或者Node
    */
-  ResourceId: string
+  ModifyType: string
   /**
-   * 价格计算公式
+   * 标签信息
    */
-  Formula: string
-  /**
-   * 原价
-   */
-  OriginalCost: number
-  /**
-   * 折扣价
-   */
-  DiscountCost: number
+  ModifyResourceTagsInfoList: Array<ModifyResourceTags>
 }
 
 /**
@@ -4297,32 +4354,26 @@ Hadoop-Hbase
 }
 
 /**
- * DescribeClusterNodes返回参数结构体
+ * 各个可用区的参数信息
  */
-export interface DescribeClusterNodesResponse {
+export interface MultiZoneSetting {
   /**
-   * 查询到的节点总数
-   */
-  TotalCnt: number
-  /**
-   * 节点详细信息列表
+   * "master"、"standby"、"third-party"
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  NodeList: Array<NodeHardwareInfo>
+  ZoneTag?: string
   /**
-   * 用户所有的标签键列表
-注意：此字段可能返回 null，表示取不到有效值。
+   * 无
    */
-  TagKeys: Array<string>
+  VPCSettings?: VPCSettings
   /**
-   * 资源类型列表
-注意：此字段可能返回 null，表示取不到有效值。
+   * 无
    */
-  HardwareResourceTypeList: Array<string>
+  Placement?: Placement
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 无
    */
-  RequestId?: string
+  ResourceSpec?: NewResourceSpec
 }
 
 /**
@@ -4736,6 +4787,32 @@ export interface InquirePriceRenewEmrRequest {
 <li>CNY：表示人民币。</li>
    */
   Currency?: string
+}
+
+/**
+ * DeleteUserManagerUserList请求参数结构体
+ */
+export interface DeleteUserManagerUserListRequest {
+  /**
+   * 集群实例ID
+   */
+  InstanceId: string
+  /**
+   * 集群用户名列表
+   */
+  UserNameList?: Array<string>
+  /**
+   * tke/eks集群id，容器集群传
+   */
+  TkeClusterId?: string
+  /**
+   * 默认空，容器版传"native"
+   */
+  DisplayStrategy?: string
+  /**
+   * 用户组
+   */
+  UserGroupList?: Array<UserAndGroup>
 }
 
 /**

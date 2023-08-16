@@ -414,7 +414,7 @@ export interface DescribeRollbackRangeTimeRequest {
    */
   InstanceIds: Array<string>
   /**
-   * 克隆实例与源实例是否在同一可用区，是:"false"，否:"true"
+   * 克隆实例与源实例是否在异地可用区，是:"true"，否:"false"
    */
   IsRemoteZone?: string
   /**
@@ -2016,11 +2016,11 @@ export interface DescribeRollbackRangeTimeResponse {
   /**
    * 符合查询条件的实例总数。
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 返回的参数信息。
    */
-  Items: Array<InstanceRollbackRangeTime>
+  Items?: Array<InstanceRollbackRangeTime>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

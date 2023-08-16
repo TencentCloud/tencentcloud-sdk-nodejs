@@ -77,13 +77,15 @@ import {
   DescribeHiveQueriesResponse,
   PodNewParameter,
   DescribeInstanceRenewNodesResponse,
-  MultiZoneSetting,
+  ModifyResourcesTagsResponse,
+  DescribeClusterNodesResponse,
   DescribeYarnApplicationsRequest,
   InquiryPriceUpdateInstanceResponse,
   NewResourceSpec,
   DiskGroup,
   ScaleOutNodeConfig,
-  DeleteUserManagerUserListRequest,
+  ModifyResourceTags,
+  PriceDetail,
   DescribeResourceScheduleResponse,
   MultiDisk,
   TerminateClusterNodesResponse,
@@ -122,7 +124,7 @@ import {
   DescribeUsersForUserManagerResponse,
   InquiryPriceRenewInstanceRequest,
   CdbInfo,
-  PriceDetail,
+  ModifyResourcesTagsRequest,
   InquirePriceRenewEmrResponse,
   MultiDiskMC,
   AddUsersForUserManagerRequest,
@@ -131,7 +133,7 @@ import {
   CustomMetaInfo,
   ApplicationStatics,
   InquiryPriceCreateInstanceRequest,
-  DescribeClusterNodesResponse,
+  MultiZoneSetting,
   ModifyResourceScheduleConfigRequest,
   UserInfoForUserManager,
   DynamicPodSpec,
@@ -145,6 +147,7 @@ import {
   Filters,
   DescribeEmrApplicationStaticsResponse,
   InquirePriceRenewEmrRequest,
+  DeleteUserManagerUserListRequest,
   DescribeImpalaQueriesResponse,
   CustomMetaDBInfo,
   UserManagerUserBriefInfo,
@@ -185,13 +188,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 销毁EMR实例。此接口仅支持弹性MapReduce正式计费版本。
+   * 强制修改标签
    */
-  async TerminateInstance(
-    req: TerminateInstanceRequest,
-    cb?: (error: string, rep: TerminateInstanceResponse) => void
-  ): Promise<TerminateInstanceResponse> {
-    return this.request("TerminateInstance", req, cb)
+  async ModifyResourcesTags(
+    req: ModifyResourcesTagsRequest,
+    cb?: (error: string, rep: ModifyResourcesTagsResponse) => void
+  ): Promise<ModifyResourcesTagsResponse> {
+    return this.request("ModifyResourcesTags", req, cb)
   }
 
   /**
@@ -282,6 +285,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ScaleOutInstanceResponse) => void
   ): Promise<ScaleOutInstanceResponse> {
     return this.request("ScaleOutInstance", req, cb)
+  }
+
+  /**
+   * 销毁EMR实例。此接口仅支持弹性MapReduce正式计费版本。
+   */
+  async TerminateInstance(
+    req: TerminateInstanceRequest,
+    cb?: (error: string, rep: TerminateInstanceResponse) => void
+  ): Promise<TerminateInstanceResponse> {
+    return this.request("TerminateInstance", req, cb)
   }
 
   /**

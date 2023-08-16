@@ -2651,6 +2651,15 @@ export interface ReplaceCertificateRequest {
      * 重颁发原因。
      */
     Reason?: string;
+    /**
+     * CSR加密方式，可选：RSA、ECC、SM2
+  （CsrType为Online才可选）， 默认为RSA
+     */
+    CertCSREncryptAlgo?: string;
+    /**
+     * CSR加密参数，CsrEncryptAlgo为RSA时， 可选2048、4096等默认为2048；CsrEncryptAlgo为ECC时，可选prime256v1，secp384r1等，默认为prime256v1;
+     */
+    CertCSRKeyParameter?: string;
 }
 /**
  * 公司信息

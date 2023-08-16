@@ -572,7 +572,7 @@ export interface ProxyConnectionPoolInfo {
  */
 export interface DescribeResourcePackageDetailResponse {
     /**
-     * 总使用明细数
+     * 资源包抵扣总数
      */
     Total?: number;
     /**
@@ -818,6 +818,11 @@ export interface ClusterInstanceDetail {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     MaintainWeekDays?: Array<string>;
+    /**
+     * serverless实例子状态
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ServerlessStatus?: string;
 }
 /**
  * AddClusterSlaveZone返回参数结构体
@@ -2346,6 +2351,22 @@ export interface InstanceInitInfo {
      * 实例个数,范围[1,15]
      */
     InstanceCount: number;
+    /**
+     * Serverless实例个数最小值，范围[1,15]
+     */
+    MinRoCount?: number;
+    /**
+     * Serverless实例个数最大值，范围[1,15]
+     */
+    MaxRoCount?: number;
+    /**
+     * Serverless实例最小规格
+     */
+    MinRoCpu?: number;
+    /**
+     * Serverless实例最大规格
+     */
+    MaxRoCpu?: number;
 }
 /**
  * 资源包明细说明
@@ -2848,7 +2869,7 @@ export interface DescribeBinlogDownloadUrlResponse {
  */
 export interface BindInstanceInfo {
     /**
-     * 绑定的实例ID
+     * 绑定的集群ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceId?: string;
@@ -2862,6 +2883,11 @@ export interface BindInstanceInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceType?: string;
+    /**
+     * 绑定集群下的实例ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ExtendIds?: Array<string>;
 }
 /**
  * DeleteAccounts返回参数结构体
@@ -6271,7 +6297,7 @@ export interface DescribeResourcePackageDetailRequest {
      */
     PackageId: string;
     /**
-     * 实例ID
+     * 集群ID
      */
     ClusterIds?: Array<string>;
     /**
@@ -6290,6 +6316,10 @@ export interface DescribeResourcePackageDetailRequest {
      * 限制
      */
     Limit?: string;
+    /**
+     * 实例D
+     */
+    InstanceIds?: Array<string>;
 }
 /**
  * DescribeBinlogSaveDays请求参数结构体
