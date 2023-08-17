@@ -24,7 +24,7 @@ export declare class Client extends AbstractClient {
      */
     CreateTrainingModel(req: CreateTrainingModelRequest, cb?: (error: string, rep: CreateTrainingModelResponse) => void): Promise<CreateTrainingModelResponse>;
     /**
-     * 本接口(DescribeBillingSpecsPrice)用于查询计费项价格。
+     * 本接口(DescribeBillingSpecsPrice)用于查询按量计费计费项价格。
      */
     DescribeBillingSpecsPrice(req: DescribeBillingSpecsPriceRequest, cb?: (error: string, rep: DescribeBillingSpecsPriceResponse) => void): Promise<DescribeBillingSpecsPriceResponse>;
     /**

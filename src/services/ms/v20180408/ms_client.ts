@@ -26,6 +26,7 @@ import {
   CreateResourceInstancesRequest,
   DescribeShieldInstancesResponse,
   ShieldInfo,
+  UpdateClientStateRequest,
   SDKPlan,
   DescribeShieldResultRequest,
   CancelEncryptTaskResponse,
@@ -33,10 +34,14 @@ import {
   CreateCosSecKeyInstanceRequest,
   IOSPlan,
   DescribeUserBaseInfoInstanceResponse,
+  UpdateLocalTaskResultResponse,
   Filter,
   CreateShieldPlanInstanceRequest,
   CreateEncryptInstanceResponse,
   SDKResult,
+  RequestLocalTaskResponse,
+  UpdateLocalTaskResultRequest,
+  ShieldPlanInfo,
   CreateBindInstanceRequest,
   CreateShieldInstanceResponse,
   AppletPlan,
@@ -65,7 +70,7 @@ import {
   DescribeEncryptPlanResponse,
   CreateResourceInstancesResponse,
   AppDetailInfo,
-  ShieldPlanInfo,
+  RequestLocalTaskRequest,
   DescribeOrderInstancesRequest,
   DescribeResourceInstancesRequest,
   CreateOrderInstanceRequest,
@@ -82,6 +87,7 @@ import {
   DescribeShieldResultResponse,
   CreateBindInstanceResponse,
   BindInfo,
+  UpdateClientStateResponse,
   OptPluginListItem,
   EncryptResults,
 } from "./ms_models"
@@ -96,53 +102,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 对资源进行策略新增。（注意：根据国家互联网用户实名制相关要求，使用该产品前，需先完成实名认证。）
+   * client任务请求地址
    */
-  async CreateShieldPlanInstance(
-    req: CreateShieldPlanInstanceRequest,
-    cb?: (error: string, rep: CreateShieldPlanInstanceResponse) => void
-  ): Promise<CreateShieldPlanInstanceResponse> {
-    return this.request("CreateShieldPlanInstance", req, cb)
-  }
-
-  /**
-   * 删除一个或者多个app加固信息。（注意：根据国家互联网用户实名制相关要求，使用该产品前，需先完成实名认证。）
-   */
-  async DeleteShieldInstances(
-    req: DeleteShieldInstancesRequest,
-    cb?: (error: string, rep: DeleteShieldInstancesResponse) => void
-  ): Promise<DeleteShieldInstancesResponse> {
-    return this.request("DeleteShieldInstances", req, cb)
-  }
-
-  /**
-   * 用户可以使用该接口自建资源，只支持白名单用户
-   */
-  async CreateResourceInstances(
-    req: CreateResourceInstancesRequest,
-    cb?: (error: string, rep: CreateResourceInstancesResponse) => void
-  ): Promise<CreateResourceInstancesResponse> {
-    return this.request("CreateResourceInstances", req, cb)
-  }
-
-  /**
-   * 将应用和资源进行绑定。（注意：根据国家互联网用户实名制相关要求，使用该产品前，需先完成实名认证。）
-   */
-  async CreateBindInstance(
-    req: CreateBindInstanceRequest,
-    cb?: (error: string, rep: CreateBindInstanceResponse) => void
-  ): Promise<CreateBindInstanceResponse> {
-    return this.request("CreateBindInstance", req, cb)
-  }
-
-  /**
-   * 获取云COS文件存储临时密钥，密钥仅限于临时上传文件，有访问限制和时效性，请保管好临时密钥。
-   */
-  async CreateCosSecKeyInstance(
-    req: CreateCosSecKeyInstanceRequest,
-    cb?: (error: string, rep: CreateCosSecKeyInstanceResponse) => void
-  ): Promise<CreateCosSecKeyInstanceResponse> {
-    return this.request("CreateCosSecKeyInstance", req, cb)
+  async RequestLocalTask(
+    req: RequestLocalTaskRequest,
+    cb?: (error: string, rep: RequestLocalTaskResponse) => void
+  ): Promise<RequestLocalTaskResponse> {
+    return this.request("RequestLocalTask", req, cb)
   }
 
   /**
@@ -166,26 +132,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 通过唯一标识获取加固的结果。（注意：根据国家互联网用户实名制相关要求，使用该产品前，需先完成实名认证。）
-   */
-  async DescribeShieldResult(
-    req: DescribeShieldResultRequest,
-    cb?: (error: string, rep: DescribeShieldResultResponse) => void
-  ): Promise<DescribeShieldResultResponse> {
-    return this.request("DescribeShieldResult", req, cb)
-  }
-
-  /**
-   * 用户通过该接口提交应用进行应用加固，加固后需通过DescribeShieldResult接口查询加固结果。（注意：根据国家互联网用户实名制相关要求，使用该产品前，需先完成实名认证。）
-   */
-  async CreateShieldInstance(
-    req: CreateShieldInstanceRequest,
-    cb?: (error: string, rep: CreateShieldInstanceResponse) => void
-  ): Promise<CreateShieldInstanceResponse> {
-    return this.request("CreateShieldInstance", req, cb)
-  }
-
-  /**
      * 本接口用于查看app列表。
 可以通过指定任务唯一标识ItemId来查询指定app的详细信息，或通过设定过滤器来查询满足过滤条件的app的详细信息。 指定偏移(Offset)和限制(Limit)来选择结果中的一部分，默认返回满足条件的前20个app信息。（注意：根据国家互联网用户实名制相关要求，使用该产品前，需先完成实名认证。）
 
@@ -205,6 +151,130 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeUrlDetectionResultResponse) => void
   ): Promise<DescribeUrlDetectionResultResponse> {
     return this.request("DescribeUrlDetectionResult", req, cb)
+  }
+
+  /**
+   * 该接口供渠道合作应用加固使用，接口调用有白名单用户限制，用于创建加固任务。
+   */
+  async CreateEncryptInstance(
+    req: CreateEncryptInstanceRequest,
+    cb?: (error: string, rep: CreateEncryptInstanceResponse) => void
+  ): Promise<CreateEncryptInstanceResponse> {
+    return this.request("CreateEncryptInstance", req, cb)
+  }
+
+  /**
+   * 该接口供渠道合作应用加固使用，接口调用有白名单用户限制。入参中的条件过滤字段均为精准匹配。
+   */
+  async DescribeEncryptPlan(
+    req: DescribeEncryptPlanRequest,
+    cb?: (error: string, rep: DescribeEncryptPlanResponse) => void
+  ): Promise<DescribeEncryptPlanResponse> {
+    return this.request("DescribeEncryptPlan", req, cb)
+  }
+
+  /**
+     * 该接口供渠道合作应用加固使用，接口调用有白名单用户限制。 接口返回的结果为：创建订单后，订单审批状态信息，以及与订单关联的资源状态等信息，入参中的条件过滤字段均为精准匹配。
+接口功能点：
+1.支持多订单分页查询；
+2.支持唯一订单号精准匹配查询；
+3.支持唯一资源号精准匹配查询；
+     */
+  async DescribeOrderInstances(
+    req: DescribeOrderInstancesRequest,
+    cb?: (error: string, rep: DescribeOrderInstancesResponse) => void
+  ): Promise<DescribeOrderInstancesResponse> {
+    return this.request("DescribeOrderInstances", req, cb)
+  }
+
+  /**
+   * 更新本地任务结果
+   */
+  async UpdateLocalTaskResult(
+    req: UpdateLocalTaskResultRequest,
+    cb?: (error: string, rep: UpdateLocalTaskResultResponse) => void
+  ): Promise<UpdateLocalTaskResultResponse> {
+    return this.request("UpdateLocalTaskResult", req, cb)
+  }
+
+  /**
+   * 对资源进行策略新增。（注意：根据国家互联网用户实名制相关要求，使用该产品前，需先完成实名认证。）
+   */
+  async CreateShieldPlanInstance(
+    req: CreateShieldPlanInstanceRequest,
+    cb?: (error: string, rep: CreateShieldPlanInstanceResponse) => void
+  ): Promise<CreateShieldPlanInstanceResponse> {
+    return this.request("CreateShieldPlanInstance", req, cb)
+  }
+
+  /**
+   * 用户可以使用该接口自建资源，只支持白名单用户
+   */
+  async CreateResourceInstances(
+    req: CreateResourceInstancesRequest,
+    cb?: (error: string, rep: CreateResourceInstancesResponse) => void
+  ): Promise<CreateResourceInstancesResponse> {
+    return this.request("CreateResourceInstances", req, cb)
+  }
+
+  /**
+   * 将应用和资源进行绑定。（注意：根据国家互联网用户实名制相关要求，使用该产品前，需先完成实名认证。）
+   */
+  async CreateBindInstance(
+    req: CreateBindInstanceRequest,
+    cb?: (error: string, rep: CreateBindInstanceResponse) => void
+  ): Promise<CreateBindInstanceResponse> {
+    return this.request("CreateBindInstance", req, cb)
+  }
+
+  /**
+   * 用户通过该接口提交应用进行应用加固，加固后需通过DescribeShieldResult接口查询加固结果。（注意：根据国家互联网用户实名制相关要求，使用该产品前，需先完成实名认证。）
+   */
+  async CreateShieldInstance(
+    req: CreateShieldInstanceRequest,
+    cb?: (error: string, rep: CreateShieldInstanceResponse) => void
+  ): Promise<CreateShieldInstanceResponse> {
+    return this.request("CreateShieldInstance", req, cb)
+  }
+
+  /**
+   * 删除一个或者多个app加固信息。（注意：根据国家互联网用户实名制相关要求，使用该产品前，需先完成实名认证。）
+   */
+  async DeleteShieldInstances(
+    req: DeleteShieldInstancesRequest,
+    cb?: (error: string, rep: DeleteShieldInstancesResponse) => void
+  ): Promise<DeleteShieldInstancesResponse> {
+    return this.request("DeleteShieldInstances", req, cb)
+  }
+
+  /**
+   * 通过唯一标识获取加固的结果。（注意：根据国家互联网用户实名制相关要求，使用该产品前，需先完成实名认证。）
+   */
+  async DescribeShieldResult(
+    req: DescribeShieldResultRequest,
+    cb?: (error: string, rep: DescribeShieldResultResponse) => void
+  ): Promise<DescribeShieldResultResponse> {
+    return this.request("DescribeShieldResult", req, cb)
+  }
+
+  /**
+   * 更新client状态
+   */
+  async UpdateClientState(
+    req: UpdateClientStateRequest,
+    cb?: (error: string, rep: UpdateClientStateResponse) => void
+  ): Promise<UpdateClientStateResponse> {
+    return this.request("UpdateClientState", req, cb)
+  }
+
+  /**
+   * 获取云COS文件存储临时密钥，密钥仅限于临时上传文件，有访问限制和时效性，请保管好临时密钥。
+   */
+  async CreateCosSecKeyInstance(
+    req: CreateCosSecKeyInstanceRequest,
+    cb?: (error: string, rep: CreateCosSecKeyInstanceResponse) => void
+  ): Promise<CreateCosSecKeyInstanceResponse> {
+    return this.request("CreateCosSecKeyInstance", req, cb)
   }
 
   /**
@@ -245,40 +315,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeEncryptInstancesResponse) => void
   ): Promise<DescribeEncryptInstancesResponse> {
     return this.request("DescribeEncryptInstances", req, cb)
-  }
-
-  /**
-   * 该接口供渠道合作应用加固使用，接口调用有白名单用户限制，用于创建加固任务。
-   */
-  async CreateEncryptInstance(
-    req: CreateEncryptInstanceRequest,
-    cb?: (error: string, rep: CreateEncryptInstanceResponse) => void
-  ): Promise<CreateEncryptInstanceResponse> {
-    return this.request("CreateEncryptInstance", req, cb)
-  }
-
-  /**
-   * 该接口供渠道合作应用加固使用，接口调用有白名单用户限制。入参中的条件过滤字段均为精准匹配。
-   */
-  async DescribeEncryptPlan(
-    req: DescribeEncryptPlanRequest,
-    cb?: (error: string, rep: DescribeEncryptPlanResponse) => void
-  ): Promise<DescribeEncryptPlanResponse> {
-    return this.request("DescribeEncryptPlan", req, cb)
-  }
-
-  /**
-     * 该接口供渠道合作应用加固使用，接口调用有白名单用户限制。 接口返回的结果为：创建订单后，订单审批状态信息，以及与订单关联的资源状态等信息，入参中的条件过滤字段均为精准匹配。
-接口功能点：
-1.支持多订单分页查询；
-2.支持唯一订单号精准匹配查询；
-3.支持唯一资源号精准匹配查询；
-     */
-  async DescribeOrderInstances(
-    req: DescribeOrderInstancesRequest,
-    cb?: (error: string, rep: DescribeOrderInstancesResponse) => void
-  ): Promise<DescribeOrderInstancesResponse> {
-    return this.request("DescribeOrderInstances", req, cb)
   }
 
   /**

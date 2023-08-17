@@ -127,6 +127,10 @@ lye1y30d：低功耗事件30天年套餐。
    * 套餐列表顺序：PackageQueue=front会立即使用新购买的套餐，新购套餐结束后，列表中下一个未过期的套餐继续生效；PackageQueue=end会等设备当前所有已购买套餐过期后才会生效新购套餐。与Override参数不能同时使用。
    */
   PackageQueue?: string
+  /**
+   * 订单id
+   */
+  OrderId?: string
 }
 
 /**
@@ -1025,6 +1029,16 @@ export interface PackageInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   UpdatedAt?: number
+  /**
+   * 套餐id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PackageId?: string
+  /**
+   * 订单id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OrderId?: string
 }
 
 /**

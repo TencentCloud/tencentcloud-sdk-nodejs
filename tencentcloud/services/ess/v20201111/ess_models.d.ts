@@ -2069,7 +2069,7 @@ export interface UnbindEmployeeUserIdWithClientOpenIdRequest {
  */
 export interface CreateSchemeUrlResponse {
     /**
-     * 小程序链接地址，有效期5分钟
+     * 小程序链接地址，有效期30天
      */
     SchemeUrl?: string;
     /**

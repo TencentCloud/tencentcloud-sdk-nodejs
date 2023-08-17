@@ -305,7 +305,7 @@ httpProfile.setEndpoint("file.test.ess.tencent.cn");
      */
     OperateChannelTemplate(req: OperateChannelTemplateRequest, cb?: (error: string, rep: OperateChannelTemplateResponse) => void): Promise<OperateChannelTemplateResponse>;
     /**
-     * 本接口（ChannelCreatePreparedPersonalEsign）用于创建导入个人印章
+     * 本接口（ChannelCreatePreparedPersonalEsign）用于创建导入个人印章（处方单场景专用，使用此接口请与客户经理确认）。
      */
     ChannelCreatePreparedPersonalEsign(req: ChannelCreatePreparedPersonalEsignRequest, cb?: (error: string, rep: ChannelCreatePreparedPersonalEsignResponse) => void): Promise<ChannelCreatePreparedPersonalEsignResponse>;
     /**

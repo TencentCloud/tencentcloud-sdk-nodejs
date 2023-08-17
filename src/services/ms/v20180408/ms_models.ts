@@ -232,6 +232,36 @@ export interface ShieldInfo {
 }
 
 /**
+ * UpdateClientState请求参数结构体
+ */
+export interface UpdateClientStateRequest {
+  /**
+   * Client Id
+   */
+  ClientId: string
+  /**
+   * Ip addr
+   */
+  Ip: string
+  /**
+   * 内部分组
+   */
+  Internal: number
+  /**
+   * Client  Version
+   */
+  ServerVersion: string
+  /**
+   * 主机
+   */
+  Hostname: string
+  /**
+   * 系统
+   */
+  Os: string
+}
+
+/**
  * 渠道合作sdk加固策略配置
  */
 export interface SDKPlan {
@@ -330,6 +360,20 @@ export interface DescribeUserBaseInfoInstanceResponse {
 }
 
 /**
+ * UpdateLocalTaskResult返回参数结构体
+ */
+export interface UpdateLocalTaskResultResponse {
+  /**
+   * 标记成功
+   */
+  ResultCode?: string
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 筛选数据结构
  */
 export interface Filter {
@@ -383,6 +427,89 @@ export interface SDKResult {
    * 加固任务结果Id
    */
   ResultId?: string
+}
+
+/**
+ * RequestLocalTask返回参数结构体
+ */
+export interface RequestLocalTaskResponse {
+  /**
+   * 返回的任务id
+   */
+  Sid?: string
+  /**
+   * 任务文件的mk5
+   */
+  SrcFileMd5?: string
+  /**
+   * 文件大小，可不传
+   */
+  SrcFileSize?: number
+  /**
+   * 任务文件的下载地址，必须无鉴权可下载
+   */
+  SrcFileUrl?: string
+  /**
+   * release: 需要INFO-PLIST文件，会生成工具部署安装包，并带有license文件，绑定机器；nobind不需要INFO-PLIST文件，不绑定机器
+   */
+  SrcFileType?: string
+  /**
+   * enterprise
+trial
+   */
+  SrcFileVersion?: string
+  /**
+   * 补充字段
+   */
+  EncryptParam?: string
+  /**
+   * 任务状态
+   */
+  EncryptState?: number
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * UpdateLocalTaskResult请求参数结构体
+ */
+export interface UpdateLocalTaskResultRequest {
+  /**
+   * 任务id
+   */
+  Sid: string
+  /**
+   * 一级任务code。标记任务状态
+   */
+  ResultCode: number
+  /**
+   * 二级错误码
+   */
+  SubCode: number
+  /**
+   * 二级错误信息
+   */
+  ErrMsg: string
+  /**
+   * 结果
+   */
+  Result: string
+}
+
+/**
+ * 加固策略信息
+ */
+export interface ShieldPlanInfo {
+  /**
+   * 加固策略数量
+   */
+  TotalCount: number
+  /**
+   * 加固策略具体信息数组
+   */
+  PlanSet: Array<PlanDetailInfo>
 }
 
 /**
@@ -1388,17 +1515,13 @@ export interface AppDetailInfo {
 }
 
 /**
- * 加固策略信息
+ * RequestLocalTask请求参数结构体
  */
-export interface ShieldPlanInfo {
+export interface RequestLocalTaskRequest {
   /**
-   * 加固策略数量
+   * Client Id
    */
-  TotalCount: number
-  /**
-   * 加固策略具体信息数组
-   */
-  PlanSet: Array<PlanDetailInfo>
+  ClientId: string
 }
 
 /**
@@ -1955,6 +2078,20 @@ export interface BindInfo {
    * app的包名
    */
   AppPkgName: string
+}
+
+/**
+ * UpdateClientState返回参数结构体
+ */
+export interface UpdateClientStateResponse {
+  /**
+   * 返回值
+   */
+  ResultCode?: string
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

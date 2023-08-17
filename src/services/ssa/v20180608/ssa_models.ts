@@ -528,7 +528,7 @@ export interface DescribeSocAlertListRequest {
    */
   Sorter?: Array<QuerySort>
   /**
-   * 是否导出
+   * 是否导出；默认为否，如量级超过1000，则使用单独的导出接口
    */
   ExportFlag?: boolean
 }
@@ -3319,7 +3319,7 @@ export interface DescribeSocAlertListResponse {
   /**
    * 业务数据
    */
-  Data: AlertListData
+  Data?: AlertListData
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

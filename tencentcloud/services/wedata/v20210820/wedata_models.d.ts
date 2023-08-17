@@ -1486,6 +1486,10 @@ export interface DescribeTableLineageRequest {
      * 是否过滤临时表,默认true
      */
     IgnoreTemp?: boolean;
+    /**
+     * 是否递归查询二级节点数目，默认为true
+     */
+    RecursiveSecond?: boolean;
 }
 /**
  * KillOpsMakePlanInstances请求参数结构体
@@ -4001,7 +4005,7 @@ export interface DescribeTableLineageResponse {
      * 表血缘信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TableLineage: TableLineageInfo;
+    TableLineage?: TableLineageInfo;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */

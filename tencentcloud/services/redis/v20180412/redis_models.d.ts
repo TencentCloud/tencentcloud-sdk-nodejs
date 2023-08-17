@@ -3506,11 +3506,18 @@ export interface DescribeInstancesRequest {
      */
     InstanceId?: string;
     /**
-     * 实例列表排序依据，枚举值如下所示：<ul><li>projectId：依据项目ID排序。</li><li>createtime：依据实例创建时间排序。</li><li>instancename：依据实例名称排序。</li><li>type：依据实例类型排序。</li><li>curDeadline：依据实例到期时间排序。</li></ul>
+     * 实例列表排序依据，枚举值如下所示：
+  - projectId：依据项目ID排序。
+  - createtime：依据实例创建时间排序。
+  - instancename：依据实例名称排序。
+  - type：依据实例类型排序。
+  - curDeadline：依据实例到期时间排序。
      */
     OrderBy?: string;
     /**
-     * 实例排序方式，默认为倒序排序。<ul><li>1：倒序。</li><li>0：顺序。</li></ul>
+     * 实例排序方式，默认为倒序排序。
+  - 1：倒序。
+  - 0：顺序。
      */
     OrderType?: number;
     /**
@@ -3522,7 +3529,7 @@ export interface DescribeInstancesRequest {
      */
     SubnetIds?: Array<string>;
     /**
-     * 设置模糊查询关键字，支持根据实例名称或实例ID模糊查询实例。
+     * 设置模糊查询关键字段，仅实例名称支持模糊查询。
      */
     SearchKey?: string;
     /**
@@ -3546,11 +3553,19 @@ export interface DescribeInstancesRequest {
      */
     RegionIds?: Array<number>;
     /**
-     * 实例状态。<ul><li>0：待初始化。</li><li>1：流程中。</li><li>2：运行中。</li><li>-2：已隔离。</li><li>-3：待删除。</li></ul>
+     * 实例状态。
+  - 0：待初始化。
+  - 1：流程中。
+  - 2：运行中。
+  - -2：已隔离。
+  - -3：待删除。
      */
     Status?: Array<number>;
     /**
-     * 实例架构版本。<ul><li>1：单机版。</li><li>2：主从版。</li><li>3：集群版。</li></ul>
+     * 实例架构版本。
+  - 1：单机版。
+  - 2：主从版。
+  - 3：集群版。
      */
     TypeVersion?: number;
     /**
@@ -3558,11 +3573,16 @@ export interface DescribeInstancesRequest {
      */
     EngineName?: string;
     /**
-     * 续费模式。<ul><li>0：手动续费。</li><li>1：自动续费。</li><li>2：到期不再续费。</ul>
+     * 续费模式。
+  - 0：手动续费。
+  - 1：自动续费。
+  - 2：到期不再续费。
      */
     AutoRenew?: Array<number>;
     /**
-     * 计费模式。<ul><li>postpaid：按量计费。</li><li>prepaid：包年包月。</li></ul>
+     * 计费模式。
+  - postpaid：按量计费。
+  - prepaid：包年包月。
      */
     BillingMode?: string;
     /**
@@ -3580,7 +3600,7 @@ export interface DescribeInstancesRequest {
      */
     Type?: number;
     /**
-     * 设置搜索关键字数组，可根据实例ID、实例名称、完整IP地址查询实例。
+     * 设置搜索关键字数组，可根据实例ID、实例名称、完整IP地址搜索实例。
      */
     SearchKeys?: Array<string>;
     /**
@@ -3600,7 +3620,9 @@ export interface DescribeInstancesRequest {
      */
     TagKeys?: Array<string>;
     /**
-     * 实例的产品版本。如果该参数不配置或者数组设置为空值，则默认不依据此参数过滤实例。<ul><li>local：本地盘版。</li><li>cdc：独享集群版。</li></ul>
+     * 实例的产品版本。如果该参数不配置或者数组设置为空值，则默认不依据此参数过滤实例。
+  - local：本地盘版。
+  - cdc：独享集群版。
      */
     ProductVersions?: Array<string>;
     /**
@@ -3608,7 +3630,9 @@ export interface DescribeInstancesRequest {
      */
     InstanceIds?: Array<string>;
     /**
-     * 可用区模式。<ul><li>singleaz：单可用区。</li><li>multiaz：多可用区。</li></ul>
+     * 可用区模式。
+  - singleaz：单可用区。
+  - multiaz：多可用区。
      */
     AzMode?: string;
 }
@@ -3889,60 +3913,60 @@ export interface InstanceSet {
     /**
      * 实例名称。
      */
-    InstanceName: string;
+    InstanceName?: string;
     /**
      * 实例 ID。
      */
-    InstanceId: string;
+    InstanceId?: string;
     /**
      * 用户APPID。APPID是与账号ID有唯一对应关系的应用 ID，部分腾讯云产品会使用此 APPID。
   
      */
-    Appid: number;
+    Appid?: number;
     /**
      * 项目 ID。
      */
-    ProjectId: number;
+    ProjectId?: number;
     /**
      * 地域 ID。<ul><li>1：广州。</li><li>4：上海。</li><li>5：中国香港。</li><li>6：多伦多。</li> <li>7：上海金融。</li> <li>8：北京。</li> <li>9：新加坡。</li> <li>11：深圳金融。</li> <li>15：美西（硅谷）。</li><li>16：成都。</li><li>17：法兰克福。</li><li>18：首尔。</li><li>19：重庆。</li><li>21：孟买。</li><li>22：美东（弗吉尼亚）。</li><li>23：曼谷。</li><li>24：莫斯科。</li><li>25：东京。</li></ul>
      */
-    RegionId: number;
+    RegionId?: number;
     /**
      * 区域 ID。
      */
-    ZoneId: number;
+    ZoneId?: number;
     /**
      * vpc网络 ID，例如75101。
      */
-    VpcId: number;
+    VpcId?: number;
     /**
      * vpc网络下子网ID，如：46315。
      */
-    SubnetId: number;
+    SubnetId?: number;
     /**
      * 实例当前状态。<ul><li>0：待初始化。</li><li>1：实例在流程中。</li><li>2：实例运行中。</li><li>-2：实例已隔离。</li><li>-3：实例待删除。</li></ul>
      */
-    Status: number;
+    Status?: number;
     /**
      * 实例 VIP。
      */
-    WanIp: string;
+    WanIp?: string;
     /**
      * 实例端口号。
      */
-    Port: number;
+    Port?: number;
     /**
      * 实例创建时间。格式如：2020-01-15 10:20:00。
      */
-    Createtime: string;
+    Createtime?: string;
     /**
      * 实例内存容量大小。单位：MB，1MB=1024KB。
      */
-    Size: number;
+    Size?: number;
     /**
      * 该字段已废弃。请使用腾讯云可观测平台API 接口 [GetMonitorData](https://cloud.tencent.com/document/product/248/31014) 获取实例已使用的内存容量。
      */
-    SizeUsed: number;
+    SizeUsed?: number;
     /**
      * 实例类型。
   - 2：Redis 2.8内存版（标准架构）。
@@ -3956,189 +3980,189 @@ export interface InstanceSet {
   - 15：Redis 6.2内存版（标准架构）。
   - 16：Redis 6.2内存版（集群架构）。
      */
-    Type: number;
+    Type?: number;
     /**
      * 实例是否设置自动续费标识。<ul><li>1：设置自动续费。</li><li>0：未设置自动续费。</li></ul>
      */
-    AutoRenewFlag: number;
+    AutoRenewFlag?: number;
     /**
      * 包年包月计费实例到期的时间。
      */
-    DeadlineTime: string;
+    DeadlineTime?: string;
     /**
      * 引擎：社区版Redis、腾讯云CKV。
      */
-    Engine: string;
+    Engine?: string;
     /**
      * 产品类型。<ul><li>standalone：标准版。</li><li>cluster ：集群版。</li></ul>
      */
-    ProductType: string;
+    ProductType?: string;
     /**
      * vpc网络id，例如vpc-fk33jsf43kgv。
      */
-    UniqVpcId: string;
+    UniqVpcId?: string;
     /**
      * vpc网络下子网id，例如：subnet-fd3j6l35mm0。
      */
-    UniqSubnetId: string;
+    UniqSubnetId?: string;
     /**
      * 计费模式。<ul><li>0：按量计费。</li><li>1：包年包月。</li></ul>
      */
-    BillingMode: number;
+    BillingMode?: number;
     /**
      * 实例运行状态描述：如”实例运行中“。
      */
-    InstanceTitle: string;
+    InstanceTitle?: string;
     /**
      * 已隔离实例默认下线时间。按量计费实例隔离后默认两小时后下线，包年包月默认7天后下线。格式如：2020-02-15 10:20:00。
      */
-    OfflineTime: string;
+    OfflineTime?: string;
     /**
      * 流程中的实例，返回子状态。
      */
-    SubStatus: number;
+    SubStatus?: number;
     /**
      * 反亲和性标签。
      */
-    Tags: Array<string>;
+    Tags?: Array<string>;
     /**
      * 实例节点信息。
      */
-    InstanceNode: Array<InstanceNode>;
+    InstanceNode?: Array<InstanceNode>;
     /**
      * 分片大小。
      */
-    RedisShardSize: number;
+    RedisShardSize?: number;
     /**
      * 分片数量。
      */
-    RedisShardNum: number;
+    RedisShardNum?: number;
     /**
      * 副本数量。
      */
-    RedisReplicasNum: number;
+    RedisReplicasNum?: number;
     /**
      * 计费 ID。
      */
-    PriceId: number;
+    PriceId?: number;
     /**
      * 实例隔离开始的时间。
      */
-    CloseTime: string;
+    CloseTime?: string;
     /**
      * 从节点读取权重。
      */
-    SlaveReadWeight: number;
+    SlaveReadWeight?: number;
     /**
      * 实例关联的标签信息。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    InstanceTags: Array<InstanceTagInfo>;
+    InstanceTags?: Array<InstanceTagInfo>;
     /**
      * 项目名称。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ProjectName: string;
+    ProjectName?: string;
     /**
      * 是否为免密实例。<ul><li>true：免密实例。</li><li>false：非免密实例。</li></ul>
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    NoAuth: boolean;
+    NoAuth?: boolean;
     /**
      * 客户端连接数。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ClientLimit: number;
+    ClientLimit?: number;
     /**
      * DTS状态（内部参数，用户可忽略）。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DtsStatus: number;
+    DtsStatus?: number;
     /**
      * 分片带宽上限，单位MB。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    NetLimit: number;
+    NetLimit?: number;
     /**
      * 免密实例标识（内部参数，用户可忽略）。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    PasswordFree: number;
+    PasswordFree?: number;
     /**
      * 内部参数，用户可忽略。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Vip6: string;
+    Vip6?: string;
     /**
      * 实例只读标识（内部参数，用户可忽略）。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ReadOnly: number;
+    ReadOnly?: number;
     /**
      * 内部参数，用户可忽略。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    RemainBandwidthDuration: string;
+    RemainBandwidthDuration?: string;
     /**
      * Redis实例请忽略该参数。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DiskSize: number;
+    DiskSize?: number;
     /**
      * 监控版本。<ul><li>1m：1分钟粒度监控。目前该监控粒度已下线，具体信息，请参见[云数据库 Redis 1分钟粒度下线公告](https://cloud.tencent.com/document/product/239/80653)。</li><li>5s：5秒粒度监控。</li></ul>
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    MonitorVersion: string;
+    MonitorVersion?: string;
     /**
      * 客户端最大连接数可设置的最小值。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ClientLimitMin: number;
+    ClientLimitMin?: number;
     /**
      * 客户端最大连接数可设置的最大值。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ClientLimitMax: number;
+    ClientLimitMax?: number;
     /**
      * 实例的节点详细信息。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    NodeSet: Array<RedisNodeInfo>;
+    NodeSet?: Array<RedisNodeInfo>;
     /**
      * 实例所在的地域信息，比如ap-guangzhou。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Region: string;
+    Region?: string;
     /**
      * 外网地址。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    WanAddress: string;
+    WanAddress?: string;
     /**
      * 北极星服务地址，内部使用。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    PolarisServer: string;
+    PolarisServer?: string;
     /**
      * 实例当前Proxy版本。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CurrentProxyVersion: string;
+    CurrentProxyVersion?: string;
     /**
      * 实例当前Cache小版本。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CurrentRedisVersion: string;
+    CurrentRedisVersion?: string;
     /**
      * 实例可升级Proxy版本。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    UpgradeProxyVersion: string;
+    UpgradeProxyVersion?: string;
     /**
      * 实例可升级Cache小版本。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    UpgradeRedisVersion: string;
+    UpgradeRedisVersion?: string;
 }
 /**
  * ReleaseWanAddress请求参数结构体

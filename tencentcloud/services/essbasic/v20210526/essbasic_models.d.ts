@@ -3008,7 +3008,7 @@ export interface ChannelCreatePreparedPersonalEsignRequest {
      */
     Agent: Agent;
     /**
-     * 个人用户名称
+     * 个人用户姓名
      */
     UserName: string;
     /**
@@ -3016,13 +3016,13 @@ export interface ChannelCreatePreparedPersonalEsignRequest {
      */
     IdCardNumber: string;
     /**
-     * 印章图片的base64
-     */
-    SealImage: string;
-    /**
      * 印章名称
      */
     SealName: string;
+    /**
+     * 印章图片的base64，最大不超过 8M
+     */
+    SealImage: string;
     /**
      * 操作者信息
      */
@@ -3031,6 +3031,10 @@ export interface ChannelCreatePreparedPersonalEsignRequest {
      * 身份证件类型
      */
     IdCardType?: string;
+    /**
+     * 是否开启印章图片压缩处理，默认不开启，如需开启请设置为 true。当印章超过 2M 时建议开启，开启后图片的 hash 将发生变化。
+     */
+    SealImageCompress?: boolean;
     /**
      * 手机号码；当需要开通自动签时，该参数必传
      */
@@ -3107,7 +3111,7 @@ export interface CreateFlowsByTemplatesResponse {
      */
     FlowIds?: Array<string>;
     /**
-     * 业务信息，限制1024字符
+     * 第三方应用平台的业务信息, 与创建合同的FlowInfos数组中的CustomerData一一对应
      */
     CustomerData?: Array<string>;
     /**
@@ -4098,7 +4102,7 @@ export interface CreateFlowsByTemplatesRequest {
      */
     Agent: Agent;
     /**
-     * 多个合同（签署流程）信息，最多支持20个
+     * 要创建的合同信息列表，最多支持一次创建20个合同
      */
     FlowInfos: Array<FlowInfo>;
     /**

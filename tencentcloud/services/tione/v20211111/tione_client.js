@@ -52,7 +52,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateTrainingModel", req, cb);
     }
     /**
-     * 本接口(DescribeBillingSpecsPrice)用于查询计费项价格。
+     * 本接口(DescribeBillingSpecsPrice)用于查询按量计费计费项价格。
      */
     async DescribeBillingSpecsPrice(req, cb) {
         return this.request("DescribeBillingSpecsPrice", req, cb);
