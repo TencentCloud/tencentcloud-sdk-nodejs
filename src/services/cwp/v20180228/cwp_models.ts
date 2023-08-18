@@ -11849,11 +11849,11 @@ export interface DescribeLicenseBindListResponse {
   /**
    * 总条数
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 绑定机器列表信息
    */
-  List: Array<LicenseBindDetail>
+  List?: Array<LicenseBindDetail>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -16716,7 +16716,9 @@ export interface DescribeLicenseBindListRequest {
    */
   ResourceId: string
   /**
-   * <li>Keywords 机器别名/公私IP 模糊查询</li>
+   * <li>InstanceID、IP、
+
+MachineName 模糊查询</li>
    */
   Filters?: Array<Filters>
   /**

@@ -488,9 +488,9 @@ it("iotvideo.v20211125.DescribeDataForwardList", async function () {
     }
 })
 
-it("iotvideo.v20211125.DescribeProductDynamicRegister", async function () {
+it("iotvideo.v20211125.DescribeCloudStorageTime", async function () {
     try {
-       const data = await client.DescribeProductDynamicRegister({})
+       const data = await client.DescribeCloudStorageTime({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -668,9 +668,9 @@ it("iotvideo.v20211125.CreateCloudStorage", async function () {
     }
 })
 
-it("iotvideo.v20211125.DescribeCloudStorageTime", async function () {
+it("iotvideo.v20211125.DescribeProductDynamicRegister", async function () {
     try {
-       const data = await client.DescribeCloudStorageTime({})
+       const data = await client.DescribeProductDynamicRegister({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -791,6 +791,16 @@ it("iotvideo.v20211125.TransferCloudStorage", async function () {
 it("iotvideo.v20211125.DeleteCloudStorageEvent", async function () {
     try {
        const data = await client.DeleteCloudStorageEvent({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotvideo.v20211125.DescribeCloudStorageOrder", async function () {
+    try {
+       const data = await client.DescribeCloudStorageOrder({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { TextEmbellishRequest, EvaluateWordSimilarityResponse, RetrieveSimilarWordsRequest, ClassifyContentResponse, ParseWordsResponse, ComposePoetryResponse, ClassifyContentRequest, RetrieveSimilarWordsResponse, EvaluateSentenceSimilarityResponse, EvaluateWordSimilarityRequest, TextWritingResponse, AnalyzeSentimentResponse, ParseWordsRequest, SentenceCorrectionResponse, ComposeCoupletRequest, EvaluateSentenceSimilarityRequest, TextWritingRequest, GenerateKeywordSentenceResponse, ComposePoetryRequest, SentenceCorrectionRequest, TextEmbellishResponse, AnalyzeSentimentRequest, GenerateKeywordSentenceRequest, ComposeCoupletResponse } from "./nlp_models";
+import { TextEmbellishRequest, EvaluateWordSimilarityResponse, RetrieveSimilarWordsRequest, ClassifyContentResponse, ParseWordsResponse, ComposePoetryResponse, ClassifyContentRequest, RetrieveSimilarWordsResponse, EvaluateSentenceSimilarityResponse, TestingTextGenerationResponse, EvaluateWordSimilarityRequest, TestingTextGenerationRequest, TextWritingResponse, AnalyzeSentimentResponse, ParseWordsRequest, SentenceCorrectionResponse, ComposeCoupletRequest, EvaluateSentenceSimilarityRequest, TextWritingRequest, GenerateKeywordSentenceResponse, ComposePoetryRequest, SentenceCorrectionRequest, TextEmbellishResponse, AnalyzeSentimentRequest, GenerateKeywordSentenceRequest, ComposeCoupletResponse } from "./nlp_models";
 /**
  * nlp client
  * @class
@@ -55,4 +55,8 @@ export declare class Client extends AbstractClient {
      * 通过精准地对文本进行分词、词性标注、命名实体识别等功能，助您更好地理解文本内容，挖掘出潜在的价值信息。
      */
     ParseWords(req: ParseWordsRequest, cb?: (error: string, rep: ParseWordsResponse) => void): Promise<ParseWordsResponse>;
+    /**
+     * 基于腾讯大模型能力，用户可以通过传入不同的参数控制生成内容的类型，并通过自然语言给模型以内容生成的指令，可以满足多种场景的文本生成需求，包括但不限于文章写作、营销文案、视频脚本、电商文案、纪要整理等（注意：当前接口为内测体验专用接口，非正式服务接口，内测期结束接口会下线或停服，届时请接入正式服务接口）
+     */
+    TestingTextGeneration(req: TestingTextGenerationRequest, cb?: (error: string, rep: TestingTextGenerationResponse) => void): Promise<TestingTextGenerationResponse>;
 }

@@ -601,11 +601,11 @@ export interface ChannelCreateFlowSignUrlResponse {
  */
 export interface ChannelCreatePrepareFlowResponse {
   /**
-   * 预发起的合同链接
+   * 预发起的合同链接， 可以直接点击进入进行合同发起
    */
   PrepareFlowUrl?: string
   /**
-   * 合同发起后预览链接
+   * 合同发起后预览链接， 注意此时合同并未发起，仅只是展示效果
    */
   PreviewFlowUrl?: string
   /**
@@ -1150,7 +1150,7 @@ export interface ChannelCreateConvertTaskApiRequest {
    */
   ResourceName: string
   /**
-   * 资源Id，通过UploadFiles获取
+   * 文件Id，通过UploadFiles获取
    */
   ResourceId: string
   /**
@@ -1410,6 +1410,10 @@ MobileCheck：手机号验证
 参数说明：若选择后者，未实名的个人签署方查看合同时，无需进行人脸识别实名认证（但签署合同时仍然需要人脸实名），该能力仅适用于个人签署方。
    */
   ApproverVerifyType?: string
+  /**
+   * 合同组的配置项信息包括：在合同组签署过程中，是否需要对每个子合同进行独立的意愿确认。
+   */
+  FlowGroupOptions?: FlowGroupOptions
   /**
    * 操作者的信息，此参数不用传
    * @deprecated
@@ -2228,28 +2232,23 @@ export interface ChannelCancelMultiFlowSignQRCodeRequest {
 }
 
 /**
- * UploadFiles请求参数结构体
+ * 合同组的配置项信息包括：在合同组签署过程中，是否需要对每个子合同进行独立的意愿确认。
  */
-export interface UploadFilesRequest {
+export interface FlowGroupOptions {
   /**
-   * 应用相关信息，若是第三方应用集成调用 若是第三方应用集成调用,Agent.AppId 和 Agent.ProxyOrganizationOpenId 必填
+   * 发起方企业经办人（即签署人为发起方企业员工）是否需要对子合同进行独立的意愿确认：
+fasle：发起方企业经办人签署时对所有子合同进行统一的意愿确认
+true：发起方企业经办人签署时需要对子合同进行独立的意愿确认
+默认为fasle。
    */
-  Agent: Agent
+  SelfOrganizationApproverSignEach?: boolean
   /**
-   * 文件对应业务类型
-1. TEMPLATE - 模板； 文件类型：.pdf/.doc/.docx/.html
-2. DOCUMENT - 签署过程及签署后的合同文档/图片控件 文件类型：.pdf/.doc/.docx/.jpg/.png/.xls.xlsx/.html
+   * 非发起方企业经办人（即：签署人为个人或者不为发起方企业的员工）是否需要对子合同进行独立的意愿确认：
+fasle：非发起方企业经办人签署时对所有子合同进行统一的意愿确认
+true：非发起方企业经办人签署时需要对子合同进行独立的意愿确认
+默认为false。
    */
-  BusinessType: string
-  /**
-   * 上传文件内容数组，最多支持20个文件
-   */
-  FileInfos?: Array<UploadFile>
-  /**
-   * 操作者的信息
-   * @deprecated
-   */
-  Operator?: UserInfo
+  OtherApproverSignEach?: boolean
 }
 
 /**
@@ -4270,6 +4269,31 @@ export interface CreateFlowsByTemplatesRequest {
   PreviewType?: number
   /**
    * 操作者的信息，不用传
+   * @deprecated
+   */
+  Operator?: UserInfo
+}
+
+/**
+ * UploadFiles请求参数结构体
+ */
+export interface UploadFilesRequest {
+  /**
+   * 应用相关信息，若是第三方应用集成调用 若是第三方应用集成调用,Agent.AppId 和 Agent.ProxyOrganizationOpenId 必填
+   */
+  Agent: Agent
+  /**
+   * 文件对应业务类型
+1. TEMPLATE - 模板； 文件类型：.pdf/.doc/.docx/.html
+2. DOCUMENT - 签署过程及签署后的合同文档/图片控件 文件类型：.pdf/.doc/.docx/.jpg/.png/.xls.xlsx/.html
+   */
+  BusinessType: string
+  /**
+   * 上传文件内容数组，最多支持20个文件
+   */
+  FileInfos?: Array<UploadFile>
+  /**
+   * 操作者的信息
    * @deprecated
    */
   Operator?: UserInfo

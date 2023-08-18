@@ -1056,51 +1056,51 @@ export interface RoleInfo {
     /**
      * 角色ID
      */
-    RoleId: string;
+    RoleId?: string;
     /**
      * 角色名称
      */
-    RoleName: string;
+    RoleName?: string;
     /**
      * 角色的策略文档
      */
-    PolicyDocument: string;
+    PolicyDocument?: string;
     /**
      * 角色描述
      */
-    Description: string;
+    Description?: string;
     /**
      * 角色的创建时间
      */
-    AddTime: string;
+    AddTime?: string;
     /**
      * 角色的最近一次时间
      */
-    UpdateTime: string;
+    UpdateTime?: string;
     /**
      * 角色是否允许登录
      */
-    ConsoleLogin: number;
+    ConsoleLogin?: number;
     /**
      * 角色类型，取user、system或service_linked
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    RoleType: string;
+    RoleType?: string;
     /**
      * 有效时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SessionDuration: number;
+    SessionDuration?: number;
     /**
      * 服务相关角色删除TaskId
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DeletionTaskId: string;
+    DeletionTaskId?: string;
     /**
      * 标签
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Tags: Array<RoleTags>;
+    Tags?: Array<RoleTags>;
 }
 /**
  * DescribeSafeAuthFlag返回参数结构体

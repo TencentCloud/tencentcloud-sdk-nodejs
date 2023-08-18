@@ -186,6 +186,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("GetRoomEvent", req, cb);
     }
     /**
+     * 删除已注册用户。注：如果该成员已被添加到群组，请先在群组中删除该成员。
+     */
+    async DeleteUser(req, cb) {
+        return this.request("DeleteUser", req, cb);
+    }
+    /**
      * 获取房间信息
      */
     async DescribeRoom(req, cb) {

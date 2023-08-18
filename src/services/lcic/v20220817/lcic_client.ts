@@ -23,8 +23,9 @@ import {
   ModifyRoomResponse,
   DescribeAppDetailResponse,
   DeleteSupervisorRequest,
+  DeleteUserRequest,
   DescribeSupervisorsResponse,
-  KickUserFromRoomResponse,
+  DeleteUserResponse,
   BatchDeleteRecordRequest,
   ModifyAppResponse,
   BatchRegisterRequest,
@@ -57,6 +58,7 @@ import {
   LoginUserResponse,
   ModifyGroupRequest,
   DescribeAppDetailRequest,
+  KickUserFromRoomResponse,
   DeleteGroupRequest,
   StartRoomRequest,
   AddGroupMemberRequest,
@@ -104,7 +106,7 @@ import {
   DeleteDocumentRequest,
   DescribeSupervisorsRequest,
   MessageList,
-  DeleteGroupMemberRequest,
+  DescribeGroupRequest,
   EndRoomResponse,
   GetWatermarkRequest,
   CreateGroupWithMembersResponse,
@@ -138,7 +140,7 @@ import {
   SceneItem,
   DeleteRoomRequest,
   BatchCreateGroupWithMembersRequest,
-  DescribeGroupRequest,
+  DeleteGroupMemberRequest,
   CreateSupervisorRequest,
   BackgroundPictureConfig,
   DeleteAppCustomContentResponse,
@@ -419,6 +421,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: GetRoomEventResponse) => void
   ): Promise<GetRoomEventResponse> {
     return this.request("GetRoomEvent", req, cb)
+  }
+
+  /**
+   * 删除已注册用户。注：如果该成员已被添加到群组，请先在群组中删除该成员。
+   */
+  async DeleteUser(
+    req: DeleteUserRequest,
+    cb?: (error: string, rep: DeleteUserResponse) => void
+  ): Promise<DeleteUserResponse> {
+    return this.request("DeleteUser", req, cb)
   }
 
   /**

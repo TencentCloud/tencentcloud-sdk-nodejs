@@ -1130,16 +1130,6 @@ export interface ModifyBackupEncryptionStatusResponse {
 }
 
 /**
- * 数据库表名
- */
-export interface DatabaseName {
-  /**
-   * 数据库表名
-   */
-  DatabaseName: string
-}
-
-/**
  * DescribeInstanceParams请求参数结构体
  */
 export interface DescribeInstanceParamsRequest {
@@ -5608,24 +5598,6 @@ export interface DescribeDBImportRecordsResponse {
 }
 
 /**
- * DescribeBackupDatabases返回参数结构体
- */
-export interface DescribeBackupDatabasesResponse {
-  /**
-   * 返回的数据个数。
-   */
-  TotalCount: number
-  /**
-   * 符合查询条件的数据库数组。
-   */
-  Items: Array<DatabaseName>
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * 创建备份时，指定需要备份的库表信息
  */
 export interface BackupItem {
@@ -8778,32 +8750,6 @@ export interface RollbackTables {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Table: Array<RollbackTableName>
-}
-
-/**
- * DescribeBackupDatabases请求参数结构体
- */
-export interface DescribeBackupDatabasesRequest {
-  /**
-   * 实例 ID，格式如：cdb-c1nl9rpv。与云数据库控制台页面中显示的实例 ID 相同。
-   */
-  InstanceId: string
-  /**
-   * 开始时间，格式为：2017-07-12 10:29:20。
-   */
-  StartTime: string
-  /**
-   * 要查询的数据库名前缀。
-   */
-  SearchDatabase?: string
-  /**
-   * 分页偏移量。
-   */
-  Offset?: number
-  /**
-   * 分页大小，最小值为1，最大值为2000。
-   */
-  Limit?: number
 }
 
 /**

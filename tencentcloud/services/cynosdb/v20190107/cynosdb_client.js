@@ -160,7 +160,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ActivateInstance", req, cb);
     }
     /**
-     * 本接口（DescribeProxyNodes）用于查询代理接口列表。
+     * 本接口（DescribeProxyNodes）用于查询代理节点列表。
      */
     async DescribeProxyNodes(req, cb) {
         return this.request("DescribeProxyNodes", req, cb);

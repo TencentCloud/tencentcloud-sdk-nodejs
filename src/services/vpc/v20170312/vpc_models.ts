@@ -14579,9 +14579,13 @@ export interface AddTemplateMemberRequest {
  */
 export interface DescribeVpcEndPointServiceWhiteListResponse {
   /**
-   * 白名单对象数组。
+   * 白名单对象数组。已废弃
    */
   VpcEndpointServiceUserSet?: Array<VpcEndPointServiceUser>
+  /**
+   * 白名单对象数组。
+   */
+  VpcEndPointServiceUserSet?: Array<VpcEndPointServiceUser>
   /**
    * 符合条件的白名单个数。
    */

@@ -138,4 +138,14 @@ it("nlp.v20190408.ParseWords", async function () {
     }
 })
 
+it("nlp.v20190408.TestingTextGeneration", async function () {
+    try {
+       const data = await client.TestingTextGeneration({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 })

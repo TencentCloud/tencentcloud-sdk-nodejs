@@ -310,10 +310,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDataForwardList", req, cb);
     }
     /**
-     * 获取产品动态注册详情
+     * 获取某一天云存时间轴
      */
-    async DescribeProductDynamicRegister(req, cb) {
-        return this.request("DescribeProductDynamicRegister", req, cb);
+    async DescribeCloudStorageTime(req, cb) {
+        return this.request("DescribeCloudStorageTime", req, cb);
     }
     /**
      * 更新AI推理结果推送配置
@@ -418,10 +418,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateCloudStorage", req, cb);
     }
     /**
-     * 获取某一天云存时间轴
+     * 获取产品动态注册详情
      */
-    async DescribeCloudStorageTime(req, cb) {
-        return this.request("DescribeCloudStorageTime", req, cb);
+    async DescribeProductDynamicRegister(req, cb) {
+        return this.request("DescribeProductDynamicRegister", req, cb);
     }
     /**
      * 查询设备数据统计
@@ -494,6 +494,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DeleteCloudStorageEvent(req, cb) {
         return this.request("DeleteCloudStorageEvent", req, cb);
+    }
+    /**
+     * 查询云存服务详情
+     */
+    async DescribeCloudStorageOrder(req, cb) {
+        return this.request("DescribeCloudStorageOrder", req, cb);
     }
     /**
      * 拉取账户流水

@@ -759,9 +759,8 @@ httpProfile.setEndpoint("file.test.ess.tencent.cn");<br/>
   }
 
   /**
-     * 查询流程填写控件内容，可以根据流程Id查询该流程相关联的填写控件信息和填写内容。
-注意：使用此接口前，需要在【企业应用管理】-【应用集成】-【第三方应用管理】中开通【下载应用内全量合同文件及内容数据】功能。
-     */
+   * 查询流程填写控件内容，可以根据流程Id查询该流程相关联的填写控件信息和填写内容。
+   */
   async DescribeFlowComponents(
     req: DescribeFlowComponentsRequest,
     cb?: (error: string, rep: DescribeFlowComponentsResponse) => void

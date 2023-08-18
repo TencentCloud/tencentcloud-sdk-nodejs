@@ -122,12 +122,6 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeCdbZoneConfig", req, cb);
     }
     /**
-     * 本接口(ModifyDBInstanceSecurityGroups)用于修改实例绑定的安全组。
-     */
-    async ModifyDBInstanceSecurityGroups(req, cb) {
-        return this.request("ModifyDBInstanceSecurityGroups", req, cb);
-    }
-    /**
      * 本接口(StopRollback) 用于撤销实例正在进行的回档任务，该接口返回一个异步任务id。 撤销结果可以通过 DescribeAsyncRequestInfo 查询任务的执行情况。
      */
     async StopRollback(req, cb) {
@@ -810,14 +804,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeRemoteBackupConfig", req, cb);
     }
     /**
-     * 接口已废弃，需要下线
-
-本接口(DescribeBackupDatabases)用于查询备份文件包含的库 (已废弃)。
-旧版本支持全量备份后，用户如果分库表下载逻辑备份文件，需要用到此接口。
-新版本支持(CreateBackup)创建逻辑备份的时候，直接发起指定库表备份，用户直接下载该备份文件即可。
+     * 修改数据库代理地址VPC信息
      */
-    async DescribeBackupDatabases(req, cb) {
-        return this.request("DescribeBackupDatabases", req, cb);
+    async ModifyCdbProxyAddressVipAndVPort(req, cb) {
+        return this.request("ModifyCdbProxyAddressVipAndVPort", req, cb);
     }
     /**
      * 该接口不再维护，参考CreateDBInstance+API文档，在发货时即可完成初始化。
@@ -884,10 +874,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyAuditRule", req, cb);
     }
     /**
-     * 修改数据库代理地址VPC信息
+     * 本接口(ModifyDBInstanceSecurityGroups)用于修改实例绑定的安全组。
      */
-    async ModifyCdbProxyAddressVipAndVPort(req, cb) {
-        return this.request("ModifyCdbProxyAddressVipAndVPort", req, cb);
+    async ModifyDBInstanceSecurityGroups(req, cb) {
+        return this.request("ModifyDBInstanceSecurityGroups", req, cb);
     }
     /**
      * 本接口(DeleteAuditRule)用于删除用户的审计规则。

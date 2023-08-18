@@ -571,11 +571,11 @@ export interface CreatePrivateZoneResponse {
     /**
      * 私有域ID, zone-xxxxxx
      */
-    ZoneId: string;
+    ZoneId?: string;
     /**
      * 私有域名
      */
-    Domain: string;
+    Domain?: string;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1030,15 +1030,15 @@ export interface ModifyPrivateZoneVpcResponse {
     /**
      * 私有域ID, zone-xxxxxx
      */
-    ZoneId: string;
+    ZoneId?: string;
     /**
      * 解析域关联的VPC列表
      */
-    VpcSet: Array<VpcInfo>;
+    VpcSet?: Array<VpcInfo>;
     /**
      * 私有域账号关联的全部VPC列表
      */
-    AccountVpcSet: Array<AccountVpcInfoOutput>;
+    AccountVpcSet?: Array<AccountVpcInfoOutput>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */

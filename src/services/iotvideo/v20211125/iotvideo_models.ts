@@ -3417,6 +3417,16 @@ export interface UploadFirmwareResponse {
 }
 
 /**
+ * DescribeCloudStorageOrder请求参数结构体
+ */
+export interface DescribeCloudStorageOrderRequest {
+  /**
+   * 订单id
+   */
+  OrderId: string
+}
+
+/**
  * UpdateAIModelChannel请求参数结构体
  */
 export interface UpdateAIModelChannelRequest {
@@ -4507,6 +4517,38 @@ export interface DescribeDeviceDataResponse {
    * 设备数据
    */
   Data: string
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeCloudStorageOrder返回参数结构体
+ */
+export interface DescribeCloudStorageOrderResponse {
+  /**
+   * 云存套餐开始时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StartTime?: number
+  /**
+   * 云存套餐过期时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExpireTime?: number
+  /**
+   * 套餐id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PackageId?: string
+  /**
+   * 套餐状态
+0：等待生效
+1: 已过期
+2:生效
+   */
+  Status?: number
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

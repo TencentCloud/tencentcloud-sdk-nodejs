@@ -191,6 +191,22 @@ export interface ComposePoetryResponse {
 }
 
 /**
+ * TextGenerationMessage
+ */
+export interface TextGenerationMessage {
+  /**
+   * 角色支持 system, user, assistant。默认为user。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Role?: string
+  /**
+   * 消息的内容。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Content?: string
+}
+
+/**
  * ClassifyContent请求参数结构体
  */
 export interface ClassifyContentRequest {
@@ -255,6 +271,36 @@ translation_a2m：从古文改写为现代文
 }
 
 /**
+ * TestingTextGeneration返回参数结构体
+ */
+export interface TestingTextGenerationResponse {
+  /**
+   * 结果
+   */
+  Choices?: Array<TextGenerationChoices>
+  /**
+   * unix时间戳的字符串
+   */
+  Created?: number
+  /**
+   * 会话id
+   */
+  Id?: string
+  /**
+   * 模型名
+   */
+  Model?: string
+  /**
+   * token数量
+   */
+  Usage?: TextGenerationUsage
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * EvaluateWordSimilarity请求参数结构体
  */
 export interface EvaluateWordSimilarityRequest {
@@ -290,6 +336,48 @@ export interface CompoundParticiple {
    * 词性。
    */
   Pos?: string
+}
+
+/**
+ * TestingTextGeneration请求参数结构体
+ */
+export interface TestingTextGenerationRequest {
+  /**
+   * 会话内容,按对话时间从旧到新在数组中排列。
+   */
+  Messages: Array<TextGenerationMessage>
+  /**
+   * 模型名称，当前固定为TestingModel
+   */
+  Model?: string
+  /**
+   * 会话id。
+   */
+  QueryId?: string
+  /**
+   * 超参数temperature, 该参数用于控制生成文本中重复内容。取值区间为[0.0, 2.0], 非必要不建议使用, 不合理的取值会影响效果。默认为1.0。
+   */
+  Temperature?: number
+  /**
+   * 超参数top_p, 该参数用于控制生成文本的多样性。较小的"top_p"值会限制模型的选择范围，使生成的文本更加一致和确定性。较大的"top_p"值会扩大选择范围，使生成的文本更加多样化和随机。取值区间为[0.0, 1.0], 非必要不建议使用, 不合理的取值会影响效果。默认值为1.0。
+   */
+  TopP?: number
+  /**
+   * 超参数top_k,该参数用于控制生成文本的多样性和可控性，较小的"top_k"值会限制模型的选择范围，使生成的文本更加一致和确定性。较大的"top_k"值会扩大选择范围，使生成的文本更加多样化和随机。取值区间为[1, 100]，默认值 40。
+   */
+  TopK?: number
+  /**
+   * 重复惩罚项,该参数用于用于控制生成文本中重复内容。建议范围[1.0, 1.05]非必要不建议使用, 不合理的取值会影响效果。默认为1。
+   */
+  RepetitionPenalty?: number
+  /**
+   * 输出结果最大tokens数量。取值区间为(0, 1024]。默认值为768。
+   */
+  OutputSeqLen?: number
+  /**
+   * 输入文本的最大 tokens 数量。取值区间为(0, 1024]。默认值为256。
+   */
+  MaxInputSeqLen?: number
 }
 
 /**
@@ -333,6 +421,24 @@ neutral：中性、无情感
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * TextGenerationUsage
+ */
+export interface TextGenerationUsage {
+  /**
+   * 输入tokens数量
+   */
+  PromptTokens?: number
+  /**
+   * 输出tokens数量
+   */
+  CompletionTokens?: number
+  /**
+   * 总token数量
+   */
+  TotalTokens?: number
 }
 
 /**
@@ -421,6 +527,17 @@ export interface EvaluateSentenceSimilarityRequest {
    * 待分析的句子对数组。句子对应不超过1对，仅支持中文文本，原句子与目标句子均应不超过500字符。
    */
   SentencePairList: Array<SentencePair>
+}
+
+/**
+ * TextGenerationChoices
+ */
+export interface TextGenerationChoices {
+  /**
+   * 内容
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Message?: TextGenerationMessage
 }
 
 /**

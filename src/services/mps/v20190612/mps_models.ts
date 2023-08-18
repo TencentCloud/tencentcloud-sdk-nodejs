@@ -199,6 +199,11 @@ export interface OverrideTranscodeParameter {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   StdExtInfo?: string
+  /**
+   * 要插入的字幕文件。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AddOnSubtitles?: Array<AddOnSubtitle>
 }
 
 /**
@@ -8735,18 +8740,22 @@ export interface UserDefineConfigureInfoForUpdate {
 export interface S3OutputStorage {
   /**
    * S3 bucket。
+注意：此字段可能返回 null，表示取不到有效值。
    */
   S3Bucket: string
   /**
    * S3 bucket 对应的区域。
+注意：此字段可能返回 null，表示取不到有效值。
    */
   S3Region: string
   /**
    * AWS 内网上传 媒体资源的秘钥id。
+注意：此字段可能返回 null，表示取不到有效值。
    */
   S3SecretId?: string
   /**
    * AWS 内网上传 媒体资源的秘钥key。
+注意：此字段可能返回 null，表示取不到有效值。
    */
   S3SecretKey?: string
 }
@@ -9801,6 +9810,11 @@ export interface AdaptiveDynamicStreamingTaskInput {
    * 转自适应码流（仅 HLS）后，分片文件的输出路径，只能为相对路径。如果不填，则默认为相对路径：`{inputName}_adaptiveDynamicStreaming_{definition}_{subStreamNumber}_{segmentNumber}.{format}`。
    */
   SegmentObjectName?: string
+  /**
+   * 要插入的字幕文件。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AddOnSubtitles?: Array<AddOnSubtitle>
 }
 
 /**
@@ -10618,43 +10632,43 @@ export interface MediaVideoStreamItem {
   /**
    * 视频流的码率，单位：bps。
    */
-  Bitrate: number
+  Bitrate?: number
   /**
    * 视频流的高度，单位：px。
    */
-  Height: number
+  Height?: number
   /**
    * 视频流的宽度，单位：px。
    */
-  Width: number
+  Width?: number
   /**
    * 视频流的编码格式，例如 h264。
    */
-  Codec: string
+  Codec?: string
   /**
    * 帧率，单位：hz。
    */
-  Fps: number
+  Fps?: number
   /**
    * 色彩空间。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ColorPrimaries: string
+  ColorPrimaries?: string
   /**
    * 色彩空间。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ColorSpace: string
+  ColorSpace?: string
   /**
    * 色彩空间。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ColorTransfer: string
+  ColorTransfer?: string
   /**
    * HDR类型。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  HdrType: string
+  HdrType?: string
   /**
    * 视频Codecs。
 注意：此字段可能返回 null，表示取不到有效值。
@@ -10993,20 +11007,20 @@ export interface MediaAudioStreamItem {
   /**
    * 音频流的码率，单位：bps。
    */
-  Bitrate: number
+  Bitrate?: number
   /**
    * 音频流的采样率，单位：hz。
    */
-  SamplingRate: number
+  SamplingRate?: number
   /**
    * 音频流的编码格式，例如 aac。
    */
-  Codec: string
+  Codec?: string
   /**
    * 音频声道数，例如 2。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Channel: number
+  Channel?: number
   /**
    * 音频Codecs。
 注意：此字段可能返回 null，表示取不到有效值。
@@ -11237,6 +11251,24 @@ export interface DescribeWordSamplesRequest {
    * 返回记录条数，默认值：100，最大值：100。
    */
   Limit?: number
+}
+
+/**
+ * 外挂字幕。
+ */
+export interface AddOnSubtitle {
+  /**
+   * 插入形式，可选值：
+<li>subtitle-stream：插入字幕轨道</li>
+<li>close-caption：编码到SEI帧</li>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Type?: string
+  /**
+   * 字幕文件。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Subtitle?: MediaInputInfo
 }
 
 /**

@@ -59,7 +59,6 @@ import {
   CreateCdbProxyAddressRequest,
   AnalyzeAuditLogsRequest,
   ModifyBackupEncryptionStatusResponse,
-  DatabaseName,
   DescribeInstanceParamsRequest,
   DescribeRoMinScaleResponse,
   StopDBImportJobResponse,
@@ -257,7 +256,6 @@ import {
   ReloadBalanceProxyNodeResponse,
   DescribeTimeWindowRequest,
   DescribeDBImportRecordsResponse,
-  DescribeBackupDatabasesResponse,
   BackupItem,
   AuditFilter,
   DescribeProxySupportParamResponse,
@@ -390,7 +388,6 @@ import {
   AuditLogFile,
   CloseCdbProxyAddressResponse,
   RollbackTables,
-  DescribeBackupDatabasesRequest,
   LocalBinlogConfigDefault,
   DescribeSlowLogDataRequest,
   ReleaseIsolatedDBInstancesResponse,
@@ -568,16 +565,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeCdbZoneConfigResponse) => void
   ): Promise<DescribeCdbZoneConfigResponse> {
     return this.request("DescribeCdbZoneConfig", req, cb)
-  }
-
-  /**
-   * 本接口(ModifyDBInstanceSecurityGroups)用于修改实例绑定的安全组。
-   */
-  async ModifyDBInstanceSecurityGroups(
-    req: ModifyDBInstanceSecurityGroupsRequest,
-    cb?: (error: string, rep: ModifyDBInstanceSecurityGroupsResponse) => void
-  ): Promise<ModifyDBInstanceSecurityGroupsResponse> {
-    return this.request("ModifyDBInstanceSecurityGroups", req, cb)
   }
 
   /**
@@ -1691,17 +1678,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 接口已废弃，需要下线
-
-本接口(DescribeBackupDatabases)用于查询备份文件包含的库 (已废弃)。
-旧版本支持全量备份后，用户如果分库表下载逻辑备份文件，需要用到此接口。
-新版本支持(CreateBackup)创建逻辑备份的时候，直接发起指定库表备份，用户直接下载该备份文件即可。
-     */
-  async DescribeBackupDatabases(
-    req: DescribeBackupDatabasesRequest,
-    cb?: (error: string, rep: DescribeBackupDatabasesResponse) => void
-  ): Promise<DescribeBackupDatabasesResponse> {
-    return this.request("DescribeBackupDatabases", req, cb)
+   * 修改数据库代理地址VPC信息
+   */
+  async ModifyCdbProxyAddressVipAndVPort(
+    req: ModifyCdbProxyAddressVipAndVPortRequest,
+    cb?: (error: string, rep: ModifyCdbProxyAddressVipAndVPortResponse) => void
+  ): Promise<ModifyCdbProxyAddressVipAndVPortResponse> {
+    return this.request("ModifyCdbProxyAddressVipAndVPort", req, cb)
   }
 
   /**
@@ -1809,13 +1792,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改数据库代理地址VPC信息
+   * 本接口(ModifyDBInstanceSecurityGroups)用于修改实例绑定的安全组。
    */
-  async ModifyCdbProxyAddressVipAndVPort(
-    req: ModifyCdbProxyAddressVipAndVPortRequest,
-    cb?: (error: string, rep: ModifyCdbProxyAddressVipAndVPortResponse) => void
-  ): Promise<ModifyCdbProxyAddressVipAndVPortResponse> {
-    return this.request("ModifyCdbProxyAddressVipAndVPort", req, cb)
+  async ModifyDBInstanceSecurityGroups(
+    req: ModifyDBInstanceSecurityGroupsRequest,
+    cb?: (error: string, rep: ModifyDBInstanceSecurityGroupsResponse) => void
+  ): Promise<ModifyDBInstanceSecurityGroupsResponse> {
+    return this.request("ModifyDBInstanceSecurityGroups", req, cb)
   }
 
   /**

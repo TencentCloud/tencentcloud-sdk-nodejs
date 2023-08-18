@@ -179,6 +179,7 @@ import {
   ModifyDeviceResponse,
   DescribeCloudStoragePackageConsumeDetailsRequest,
   UploadFirmwareResponse,
+  DescribeCloudStorageOrderRequest,
   UpdateAIModelChannelRequest,
   CreateCloudStorageResponse,
   BindCloudStorageUserResponse,
@@ -233,6 +234,7 @@ import {
   CheckForwardAuthResponse,
   DescribeDeviceResponse,
   DescribeDeviceDataResponse,
+  DescribeCloudStorageOrderResponse,
   DeleteForwardRuleResponse,
   DeviceStatusLogItem,
   ListFirmwaresResponse,
@@ -729,13 +731,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取产品动态注册详情
+   * 获取某一天云存时间轴
    */
-  async DescribeProductDynamicRegister(
-    req: DescribeProductDynamicRegisterRequest,
-    cb?: (error: string, rep: DescribeProductDynamicRegisterResponse) => void
-  ): Promise<DescribeProductDynamicRegisterResponse> {
-    return this.request("DescribeProductDynamicRegister", req, cb)
+  async DescribeCloudStorageTime(
+    req: DescribeCloudStorageTimeRequest,
+    cb?: (error: string, rep: DescribeCloudStorageTimeResponse) => void
+  ): Promise<DescribeCloudStorageTimeResponse> {
+    return this.request("DescribeCloudStorageTime", req, cb)
   }
 
   /**
@@ -909,13 +911,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取某一天云存时间轴
+   * 获取产品动态注册详情
    */
-  async DescribeCloudStorageTime(
-    req: DescribeCloudStorageTimeRequest,
-    cb?: (error: string, rep: DescribeCloudStorageTimeResponse) => void
-  ): Promise<DescribeCloudStorageTimeResponse> {
-    return this.request("DescribeCloudStorageTime", req, cb)
+  async DescribeProductDynamicRegister(
+    req: DescribeProductDynamicRegisterRequest,
+    cb?: (error: string, rep: DescribeProductDynamicRegisterResponse) => void
+  ): Promise<DescribeProductDynamicRegisterResponse> {
+    return this.request("DescribeProductDynamicRegister", req, cb)
   }
 
   /**
@@ -1036,6 +1038,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteCloudStorageEventResponse) => void
   ): Promise<DeleteCloudStorageEventResponse> {
     return this.request("DeleteCloudStorageEvent", req, cb)
+  }
+
+  /**
+   * 查询云存服务详情
+   */
+  async DescribeCloudStorageOrder(
+    req: DescribeCloudStorageOrderRequest,
+    cb?: (error: string, rep: DescribeCloudStorageOrderResponse) => void
+  ): Promise<DescribeCloudStorageOrderResponse> {
+    return this.request("DescribeCloudStorageOrder", req, cb)
   }
 
   /**

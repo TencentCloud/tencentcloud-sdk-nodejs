@@ -192,6 +192,16 @@ export interface DeleteSupervisorRequest {
 }
 
 /**
+ * DeleteUser请求参数结构体
+ */
+export interface DeleteUserRequest {
+  /**
+   * 待删除用户的ID
+   */
+  UserId: string
+}
+
+/**
  * DescribeSupervisors返回参数结构体
  */
 export interface DescribeSupervisorsResponse {
@@ -218,9 +228,9 @@ export interface DescribeSupervisorsResponse {
 }
 
 /**
- * KickUserFromRoom返回参数结构体
+ * DeleteUser返回参数结构体
  */
-export interface KickUserFromRoomResponse {
+export interface DeleteUserResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -969,6 +979,16 @@ export interface DescribeAppDetailRequest {
    * 开发商ID
    */
   DeveloperId: string
+}
+
+/**
+ * KickUserFromRoom返回参数结构体
+ */
+export interface KickUserFromRoomResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2115,21 +2135,17 @@ export interface MessageList {
 }
 
 /**
- * DeleteGroupMember请求参数结构体
+ * DescribeGroup请求参数结构体
  */
-export interface DeleteGroupMemberRequest {
+export interface DescribeGroupRequest {
   /**
-   * 群组ID，联合群组无法删除群组成员
+   * 群组ID
    */
   GroupId: string
   /**
    * 低代码平台应用ID
    */
   SdkAppId: number
-  /**
-   * 成员列表，最大值200
-   */
-  MemberIds: Array<string>
 }
 
 /**
@@ -2824,17 +2840,21 @@ export interface BatchCreateGroupWithMembersRequest {
 }
 
 /**
- * DescribeGroup请求参数结构体
+ * DeleteGroupMember请求参数结构体
  */
-export interface DescribeGroupRequest {
+export interface DeleteGroupMemberRequest {
   /**
-   * 群组ID
+   * 群组ID，联合群组无法删除群组成员
    */
   GroupId: string
   /**
    * 低代码平台应用ID
    */
   SdkAppId: number
+  /**
+   * 成员列表，最大值200
+   */
+  MemberIds: Array<string>
 }
 
 /**

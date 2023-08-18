@@ -96,7 +96,7 @@ export declare class Client extends AbstractClient {
      */
     ActivateInstance(req: ActivateInstanceRequest, cb?: (error: string, rep: ActivateInstanceResponse) => void): Promise<ActivateInstanceResponse>;
     /**
-     * 本接口（DescribeProxyNodes）用于查询代理接口列表。
+     * 本接口（DescribeProxyNodes）用于查询代理节点列表。
      */
     DescribeProxyNodes(req: DescribeProxyNodesRequest, cb?: (error: string, rep: DescribeProxyNodesResponse) => void): Promise<DescribeProxyNodesResponse>;
     /**

@@ -482,6 +482,7 @@ import {
   AiReviewProhibitedOcrTaskInput,
   DeleteWatermarkTemplateRequest,
   DescribeWordSamplesRequest,
+  AddOnSubtitle,
   AwsSQS,
   LiveStreamProcessTask,
   QualityControlData,

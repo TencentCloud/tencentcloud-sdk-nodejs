@@ -278,6 +278,16 @@ it("lcic.v20220817.GetRoomEvent", async function () {
     }
 })
 
+it("lcic.v20220817.DeleteUser", async function () {
+    try {
+       const data = await client.DeleteUser({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("lcic.v20220817.DescribeRoom", async function () {
     try {
        const data = await client.DescribeRoom({})
