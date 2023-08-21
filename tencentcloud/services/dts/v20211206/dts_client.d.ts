@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { ModifyCompareTaskResponse, DescribeSyncJobsResponse, ModifyMigrationJobResponse, ModifyMigrateJobSpecRequest, StartMigrateJobRequest, DestroyMigrateJobRequest, SkipCheckItemResponse, IsolateMigrateJobRequest, ResizeSyncJobResponse, ResumeMigrateJobResponse, CreateModifyCheckSyncJobRequest, IsolateSyncJobRequest, PauseMigrateJobRequest, ContinueMigrateJobRequest, DescribeCheckSyncJobResultRequest, DestroySyncJobResponse, DescribeCompareReportResponse, StopMigrateJobResponse, ModifyCompareTaskNameRequest, CompleteMigrateJobResponse, DescribeMigrateDBInstancesResponse, CreateCheckSyncJobRequest, DescribeModifyCheckSyncJobResultResponse, StopSyncJobRequest, DescribeMigrationDetailRequest, DestroySyncJobRequest, ResizeSyncJobRequest, ResumeSyncJobResponse, ModifyCompareTaskNameResponse, StartSyncJobRequest, PauseSyncJobRequest, CreateMigrateCheckJobResponse, ModifySyncJobConfigRequest, ContinueMigrateJobResponse, CreateMigrationServiceRequest, DescribeCompareTasksRequest, RecoverSyncJobResponse, DeleteCompareTaskResponse, ContinueSyncJobResponse, CompleteMigrateJobRequest, DescribeCompareTasksResponse, StopCompareRequest, StartModifySyncJobRequest, DescribeCheckSyncJobResultResponse, StopSyncJobResponse, ModifyMigrateNameResponse, DescribeMigrationJobsResponse, ModifyMigrationJobRequest, StopCompareResponse, DestroyMigrateJobResponse, SkipSyncCheckItemRequest, DescribeModifyCheckSyncJobResultRequest, SkipSyncCheckItemResponse, IsolateSyncJobResponse, CreateMigrateCheckJobRequest, DescribeMigrationJobsRequest, ContinueSyncJobRequest, CreateMigrationServiceResponse, DescribeMigrationCheckJobResponse, CreateCheckSyncJobResponse, ConfigureSyncJobRequest, StartModifySyncJobResponse, DescribeMigrateDBInstancesRequest, ModifyCompareTaskRequest, RecoverSyncJobRequest, DescribeSyncJobsRequest, ResumeSyncJobRequest, ConfigureSyncJobResponse, ResumeMigrateJobRequest, PauseSyncJobResponse, StartCompareResponse, CreateCompareTaskResponse, SkipCheckItemRequest, ModifyMigrateJobSpecResponse, CreateSyncJobResponse, CreateCompareTaskRequest, StartCompareRequest, DescribeMigrationCheckJobRequest, DescribeMigrationDetailResponse, CreateModifyCheckSyncJobResponse, ModifyMigrateNameRequest, StartSyncJobResponse, RecoverMigrateJobResponse, DeleteCompareTaskRequest, StopMigrateJobRequest, IsolateMigrateJobResponse, ModifySyncJobConfigResponse, CreateSyncJobRequest, DescribeCompareReportRequest, RecoverMigrateJobRequest, PauseMigrateJobResponse, StartMigrateJobResponse } from "./dts_models";
+import { ModifyCompareTaskResponse, DescribeSyncJobsResponse, ModifyMigrationJobResponse, ModifyMigrateRateLimitResponse, ModifyMigrateJobSpecRequest, StartMigrateJobRequest, ModifySyncRateLimitResponse, DestroyMigrateJobRequest, SkipCheckItemResponse, IsolateMigrateJobRequest, ResizeSyncJobResponse, ResumeMigrateJobResponse, CreateModifyCheckSyncJobRequest, IsolateSyncJobRequest, PauseMigrateJobRequest, ContinueMigrateJobRequest, ModifySyncRateLimitRequest, DescribeCheckSyncJobResultRequest, DestroySyncJobResponse, DescribeCompareReportResponse, StopMigrateJobResponse, ModifyCompareTaskNameRequest, CompleteMigrateJobResponse, DescribeMigrateDBInstancesResponse, CreateCheckSyncJobRequest, DescribeModifyCheckSyncJobResultResponse, StopSyncJobRequest, DescribeMigrationDetailRequest, DestroySyncJobRequest, ResizeSyncJobRequest, ResumeSyncJobResponse, ModifyCompareTaskNameResponse, StartSyncJobRequest, PauseSyncJobRequest, CreateMigrateCheckJobResponse, ModifySyncJobConfigRequest, ContinueMigrateJobResponse, CreateMigrationServiceRequest, DescribeCompareTasksRequest, RecoverSyncJobResponse, DeleteCompareTaskResponse, ContinueSyncJobResponse, CompleteMigrateJobRequest, DescribeCompareTasksResponse, StopCompareRequest, StartModifySyncJobRequest, DescribeCheckSyncJobResultResponse, StopSyncJobResponse, ModifyMigrateNameResponse, DescribeMigrationJobsResponse, ModifyMigrationJobRequest, StopCompareResponse, DestroyMigrateJobResponse, SkipSyncCheckItemRequest, DescribeModifyCheckSyncJobResultRequest, SkipSyncCheckItemResponse, IsolateSyncJobResponse, CreateMigrateCheckJobRequest, DescribeMigrationJobsRequest, ContinueSyncJobRequest, CreateMigrationServiceResponse, DescribeMigrationCheckJobResponse, CreateCheckSyncJobResponse, ConfigureSyncJobRequest, StartModifySyncJobResponse, DescribeMigrateDBInstancesRequest, ModifyCompareTaskRequest, RecoverSyncJobRequest, DescribeSyncJobsRequest, ResumeSyncJobRequest, ModifyMigrateRateLimitRequest, ConfigureSyncJobResponse, ResumeMigrateJobRequest, PauseSyncJobResponse, StartCompareResponse, CreateCompareTaskResponse, SkipCheckItemRequest, ModifyMigrateJobSpecResponse, CreateSyncJobResponse, CreateCompareTaskRequest, StartCompareRequest, DescribeMigrationCheckJobRequest, DescribeMigrationDetailResponse, CreateModifyCheckSyncJobResponse, ModifyMigrateNameRequest, StartSyncJobResponse, RecoverMigrateJobResponse, DeleteCompareTaskRequest, StopMigrateJobRequest, IsolateMigrateJobResponse, ModifySyncJobConfigResponse, CreateSyncJobRequest, DescribeCompareReportRequest, RecoverMigrateJobRequest, PauseMigrateJobResponse, StartMigrateJobResponse } from "./dts_models";
 /**
  * dts client
  * @class
@@ -23,6 +23,10 @@ export declare class Client extends AbstractClient {
      * 购买迁移任务。购买成功后会返回随机生成的迁移任务id列表，也可以通过查询迁移任务任务列表接口`DescribeMigrationJobs`看到购买成功的实例Id。注意，一旦购买成功后源及目标数据库类型，源及目标实例地域不可修改。
      */
     CreateMigrationService(req: CreateMigrationServiceRequest, cb?: (error: string, rep: CreateMigrationServiceResponse) => void): Promise<CreateMigrationServiceResponse>;
+    /**
+     * 用户在发现迁移任务对用户的数据库的负载影响较大时、可通过该接口限制任务的传输速率
+     */
+    ModifyMigrateRateLimit(req: ModifyMigrateRateLimitRequest, cb?: (error: string, rep: ModifyMigrateRateLimitResponse) => void): Promise<ModifyMigrateRateLimitResponse>;
     /**
      * 隔离同步任务，隔离后可通过查询同步任务信息接口DescribeSyncJobs获取隔离后状态。在任务隔离后可进行解除隔离(RecoverSyncJob)操作或直接进行下线操作。对于不计费任务，调用此接口后会直接删除任务，无法进行恢复操作。
      */
@@ -72,6 +76,10 @@ export declare class Client extends AbstractClient {
      */
     ConfigureSyncJob(req: ConfigureSyncJobRequest, cb?: (error: string, rep: ConfigureSyncJobResponse) => void): Promise<ConfigureSyncJobResponse>;
     /**
+     * 在查询修改对象的校验任务的结果中的status为success后、通过该接口开始修改配置流程
+     */
+    StartModifySyncJob(req: StartModifySyncJobRequest, cb?: (error: string, rep: StartModifySyncJobResponse) => void): Promise<StartModifySyncJobResponse>;
+    /**
      * 调整同步任务规格，此接口只支持按量计费任务的调整，调用此接口后不会立即生效，后台调整时间大概为3~5分钟。调用此接口后可通过查询同步任务信息接口DescribeSyncJobs，获取变配后的状态。
      */
     ResizeSyncJob(req: ResizeSyncJobRequest, cb?: (error: string, rep: ResizeSyncJobResponse) => void): Promise<ResizeSyncJobResponse>;
@@ -94,9 +102,9 @@ export declare class Client extends AbstractClient {
      */
     PauseSyncJob(req: PauseSyncJobRequest, cb?: (error: string, rep: PauseSyncJobResponse) => void): Promise<PauseSyncJobResponse>;
     /**
-     * 在查询修改对象的校验任务的结果中的status为success后、通过该接口开始修改配置流程
+     * 用户在发现同步任务对用户的数据库的负载影响较大时、可通过该接口限制任务的传输速率
      */
-    StartModifySyncJob(req: StartModifySyncJobRequest, cb?: (error: string, rep: StartModifySyncJobResponse) => void): Promise<StartModifySyncJobResponse>;
+    ModifySyncRateLimit(req: ModifySyncRateLimitRequest, cb?: (error: string, rep: ModifySyncRateLimitResponse) => void): Promise<ModifySyncRateLimitResponse>;
     /**
      * 启动一致性校验任务，启动之前需要先通过接口`CreateCompareTask` 创建一致性校验任务，启动后可通过接口`DescribeCompareTasks` 查询一致性校验任务列表来获得启动后的状态
      */

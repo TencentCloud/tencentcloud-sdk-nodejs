@@ -21,9 +21,11 @@ import {
   ModifyCompareTaskResponse,
   DescribeSyncJobsResponse,
   ModifyMigrationJobResponse,
+  ModifyMigrateRateLimitResponse,
   ModifyMigrateJobSpecRequest,
   StartMigrateJobRequest,
   StepTip,
+  ModifySyncRateLimitResponse,
   DestroyMigrateJobRequest,
   SkipCheckItemResponse,
   IsolateMigrateJobRequest,
@@ -34,6 +36,7 @@ import {
   IsolateSyncJobRequest,
   PauseMigrateJobRequest,
   ContinueMigrateJobRequest,
+  ModifySyncRateLimitRequest,
   DescribeCheckSyncJobResultRequest,
   DestroySyncJobResponse,
   DescribeCompareReportResponse,
@@ -114,6 +117,7 @@ import {
   DescribeSyncJobsRequest,
   SyncDetailInfo,
   ResumeSyncJobRequest,
+  ModifyMigrateRateLimitRequest,
   CompareTableItem,
   ConfigureSyncJobResponse,
   CompareViewItem,
@@ -215,6 +219,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateMigrationServiceResponse) => void
   ): Promise<CreateMigrationServiceResponse> {
     return this.request("CreateMigrationService", req, cb)
+  }
+
+  /**
+   * 用户在发现迁移任务对用户的数据库的负载影响较大时、可通过该接口限制任务的传输速率
+   */
+  async ModifyMigrateRateLimit(
+    req: ModifyMigrateRateLimitRequest,
+    cb?: (error: string, rep: ModifyMigrateRateLimitResponse) => void
+  ): Promise<ModifyMigrateRateLimitResponse> {
+    return this.request("ModifyMigrateRateLimit", req, cb)
   }
 
   /**
@@ -338,6 +352,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 在查询修改对象的校验任务的结果中的status为success后、通过该接口开始修改配置流程
+   */
+  async StartModifySyncJob(
+    req: StartModifySyncJobRequest,
+    cb?: (error: string, rep: StartModifySyncJobResponse) => void
+  ): Promise<StartModifySyncJobResponse> {
+    return this.request("StartModifySyncJob", req, cb)
+  }
+
+  /**
    * 调整同步任务规格，此接口只支持按量计费任务的调整，调用此接口后不会立即生效，后台调整时间大概为3~5分钟。调用此接口后可通过查询同步任务信息接口DescribeSyncJobs，获取变配后的状态。
    */
   async ResizeSyncJob(
@@ -390,13 +414,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 在查询修改对象的校验任务的结果中的status为success后、通过该接口开始修改配置流程
+   * 用户在发现同步任务对用户的数据库的负载影响较大时、可通过该接口限制任务的传输速率
    */
-  async StartModifySyncJob(
-    req: StartModifySyncJobRequest,
-    cb?: (error: string, rep: StartModifySyncJobResponse) => void
-  ): Promise<StartModifySyncJobResponse> {
-    return this.request("StartModifySyncJob", req, cb)
+  async ModifySyncRateLimit(
+    req: ModifySyncRateLimitRequest,
+    cb?: (error: string, rep: ModifySyncRateLimitResponse) => void
+  ): Promise<ModifySyncRateLimitResponse> {
+    return this.request("ModifySyncRateLimit", req, cb)
   }
 
   /**

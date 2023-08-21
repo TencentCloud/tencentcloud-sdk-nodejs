@@ -5243,72 +5243,77 @@ export interface WxGatewayRountItem {
     /**
      * 安全网关路由名称
      */
-    GatewayRouteName: string;
+    GatewayRouteName?: string;
     /**
      * 安全网关路由协议
      */
-    GatewayRouteProtocol: string;
+    GatewayRouteProtocol?: string;
     /**
      * 安全网关路由地址
      */
-    GatewayRouteAddr: string;
+    GatewayRouteAddr?: string;
     /**
      * 安全网关路由描述
      */
-    GatewayRouteDesc: string;
+    GatewayRouteDesc?: string;
     /**
      * 安全网关后端集群id，如果是外网服务，该id与GatewayRountName相同
      */
-    GatewayRouteClusterId: string;
+    GatewayRouteClusterId?: string;
     /**
      * 安全网关创建时间
      */
-    GatewayRouteCreateTime: string;
+    GatewayRouteCreateTime?: string;
     /**
      * 安全网关路由限制
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    FrequencyLimitConfig: Array<FrequencyLimitConfig>;
+    FrequencyLimitConfig?: Array<FrequencyLimitConfig>;
     /**
      * ip代表绑定后端ip。cbr代表云托管服务
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    GatewayRouteServerType: string;
+    GatewayRouteServerType?: string;
     /**
      * 服务名
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    GatewayRouteServerName: string;
+    GatewayRouteServerName?: string;
     /**
      * ip
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    GatewayRewriteHost: string;
+    GatewayRewriteHost?: string;
     /**
      * 网关版本
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    GatewayVersion: string;
+    GatewayVersion?: string;
     /**
      * 请求路径
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    GatewayRoutePath: string;
+    GatewayRoutePath?: string;
     /**
      * 请求模式
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    GatewayRouteMethod: string;
+    GatewayRouteMethod?: string;
     /**
      * 4层端口
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    GatewayRoutePort: number;
+    GatewayRoutePort?: number;
     /**
      * 路由环境ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
     GatewayRouteEnvId?: string;
+    /**
+     * 路径匹配类型，支持prefix(前缀匹配)，regex(正则匹配)， 默认prefix
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    GatewayRoutePathMatchType?: string;
 }
 /**
  * DescribeSmsQuotas请求参数结构体

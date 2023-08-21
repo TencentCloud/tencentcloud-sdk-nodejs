@@ -52,6 +52,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateMigrationService", req, cb);
     }
     /**
+     * 用户在发现迁移任务对用户的数据库的负载影响较大时、可通过该接口限制任务的传输速率
+     */
+    async ModifyMigrateRateLimit(req, cb) {
+        return this.request("ModifyMigrateRateLimit", req, cb);
+    }
+    /**
      * 隔离同步任务，隔离后可通过查询同步任务信息接口DescribeSyncJobs获取隔离后状态。在任务隔离后可进行解除隔离(RecoverSyncJob)操作或直接进行下线操作。对于不计费任务，调用此接口后会直接删除任务，无法进行恢复操作。
      */
     async IsolateSyncJob(req, cb) {
@@ -124,6 +130,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ConfigureSyncJob", req, cb);
     }
     /**
+     * 在查询修改对象的校验任务的结果中的status为success后、通过该接口开始修改配置流程
+     */
+    async StartModifySyncJob(req, cb) {
+        return this.request("StartModifySyncJob", req, cb);
+    }
+    /**
      * 调整同步任务规格，此接口只支持按量计费任务的调整，调用此接口后不会立即生效，后台调整时间大概为3~5分钟。调用此接口后可通过查询同步任务信息接口DescribeSyncJobs，获取变配后的状态。
      */
     async ResizeSyncJob(req, cb) {
@@ -156,10 +168,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("PauseSyncJob", req, cb);
     }
     /**
-     * 在查询修改对象的校验任务的结果中的status为success后、通过该接口开始修改配置流程
+     * 用户在发现同步任务对用户的数据库的负载影响较大时、可通过该接口限制任务的传输速率
      */
-    async StartModifySyncJob(req, cb) {
-        return this.request("StartModifySyncJob", req, cb);
+    async ModifySyncRateLimit(req, cb) {
+        return this.request("ModifySyncRateLimit", req, cb);
     }
     /**
      * 启动一致性校验任务，启动之前需要先通过接口`CreateCompareTask` 创建一致性校验任务，启动后可通过接口`DescribeCompareTasks` 查询一致性校验任务列表来获得启动后的状态

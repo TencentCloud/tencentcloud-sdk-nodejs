@@ -1,19 +1,28 @@
 /**
- * DescribeNacosReplicas请求参数结构体
+ * 获取云原生API网关实例列表响应结果。
  */
-export interface DescribeNacosReplicasRequest {
+export interface ListCloudNativeAPIGatewayResult {
     /**
-     * 引擎实例ID
+     * 总数。
      */
-    InstanceId: string;
+    TotalCount: number;
     /**
-     * 副本列表Limit
+     * 云原生API网关实例列表。
      */
-    Limit?: number;
+    GatewayList: Array<DescribeCloudNativeAPIGatewayResult>;
+}
+/**
+ * DescribeCloudNativeAPIGateway返回参数结构体
+ */
+export interface DescribeCloudNativeAPIGatewayResponse {
     /**
-     * 副本列表Offset
+     * 获取云原生API网关基础信息响应结果。
      */
-    Offset?: number;
+    Result: DescribeCloudNativeAPIGatewayResult;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * CreateCloudNativeAPIGatewayService返回参数结构体
@@ -83,29 +92,72 @@ export interface DescribeCloudNativeAPIGatewayServiceRateLimitRequest {
     Name: string;
 }
 /**
- * 含百分比流量配置的服务
+ * CreateCloudNativeAPIGateway请求参数结构体
  */
-export interface CloudNativeAPIGatewayBalancedService {
+export interface CreateCloudNativeAPIGatewayRequest {
     /**
-     * 服务 ID，作为入参时，必填
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 云原生API网关名字, 最多支持60个字符。
      */
-    ServiceID?: string;
+    Name: string;
     /**
-     * 服务名称，作为入参时，无意义
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 云原生API网关类型, 目前只支持kong。
      */
-    ServiceName?: string;
+    Type: string;
     /**
-     * Upstream 名称，作为入参时，无意义
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 云原生API网关版本。参考值：
+  - 2.4.1
+  - 2.5.1
      */
-    UpstreamName?: string;
+    GatewayVersion: string;
     /**
-     * 百分比，10 即 10%，范围0-100
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 云原生API网关节点配置。
      */
-    Percent?: number;
+    NodeConfig: CloudNativeAPIGatewayNodeConfig;
+    /**
+     * 云原生API网关vpc配置。
+     */
+    VpcConfig: CloudNativeAPIGatewayVpcConfig;
+    /**
+     * 云原生API网关描述信息, 最多支持120个字符。
+     */
+    Description?: string;
+    /**
+     * 标签列表
+     */
+    Tags?: Array<InstanceTagInfo>;
+    /**
+     * 是否开启 CLS 日志。默认值：fasle
+     */
+    EnableCls?: boolean;
+    /**
+     * 产品版本。参考值：
+  - TRIAL：开发版
+  - STANDARD：标准版 （默认值）
+  - PROFESSIONAL：专业版
+     */
+    FeatureVersion?: string;
+    /**
+     * 公网出流量带宽，[1,2048]Mbps
+     */
+    InternetMaxBandwidthOut?: number;
+    /**
+     * 实例实际的地域信息，默认值：ap-guangzhou
+     */
+    EngineRegion?: string;
+    /**
+     * ingress Class名称
+     */
+    IngressClassName?: string;
+    /**
+     * 付费类型。参考值：
+  0：后付费（默认值）
+  1：预付费（接口暂不支持创建预付费实例）
+     */
+    TradeType?: number;
+    /**
+     * 公网相关配置
+     */
+    InternetConfig?: InternetConfig;
 }
 /**
  * DescribeCloudNativeAPIGatewayNodes请求参数结构体
@@ -209,6 +261,19 @@ export interface ModifyCloudNativeAPIGatewayRouteRequest {
     Headers?: Array<KVMapping>;
 }
 /**
+ * DeleteNativeGatewayServerGroup返回参数结构体
+ */
+export interface DeleteNativeGatewayServerGroupResponse {
+    /**
+     * 删除信息
+     */
+    Result?: DeleteNativeGatewayServerGroupResult;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * DescribeSREInstanceAccessAddress返回参数结构体
  */
 export interface DescribeSREInstanceAccessAddressResponse {
@@ -255,50 +320,75 @@ export interface DescribeSREInstanceAccessAddressResponse {
     RequestId?: string;
 }
 /**
- * DeleteCloudNativeAPIGatewayCanaryRule请求参数结构体
+ * ModifyCloudNativeAPIGatewayCanaryRule返回参数结构体
  */
-export interface DeleteCloudNativeAPIGatewayCanaryRuleRequest {
-    /**
-     * 网关 ID
-     */
-    GatewayId: string;
-    /**
-     * 服务 ID
-     */
-    ServiceId: string;
-    /**
-     * 优先级
-     */
-    Priority: number;
-}
-/**
- * DescribeCloudNativeAPIGatewayServices返回参数结构体
- */
-export interface DescribeCloudNativeAPIGatewayServicesResponse {
-    /**
-     * 无
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Result?: KongServices;
+export interface ModifyCloudNativeAPIGatewayCanaryRuleResponse {
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
 }
 /**
- * 网关实例协议端口列表
+ * 云原生API网关节点配置。
  */
-export interface GatewayInstanceSchemeAndPorts {
+export interface CloudNativeAPIGatewayNodeConfig {
     /**
-     * 端口协议，可选HTTP、HTTPS、TCP和UDP
+     * 节点配置, 1c2g|2c4g|4c8g|8c16g。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Scheme?: string;
+    Specification: string;
     /**
-     * 端口列表
+     * 节点数量，2-9。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    PortList?: Array<number>;
+    Number: number;
+}
+/**
+ * CreateNativeGatewayServerGroup请求参数结构体
+ */
+export interface CreateNativeGatewayServerGroupRequest {
+    /**
+     * 网关实例id。
+  只支持后付费实例
+     */
+    GatewayId: string;
+    /**
+     * 网关分组名
+     */
+    Name: string;
+    /**
+     * 节点配置
+     */
+    NodeConfig: CloudNativeAPIGatewayNodeConfig;
+    /**
+     * 子网id
+     */
+    SubnetId: string;
+    /**
+     * 描述信息
+     */
+    Description?: string;
+    /**
+     * 公网带宽信息
+     */
+    InternetMaxBandwidthOut?: number;
+    /**
+     * 公网配置。
+     */
+    InternetConfig?: InternetConfig;
+}
+/**
+ * 删除云原生API网关响应结果。
+ */
+export interface DeleteCloudNativeAPIGatewayResult {
+    /**
+     * 云原生网关ID。
+     */
+    GatewayId: string;
+    /**
+     * 云原生网关状态。
+     */
+    Status: string;
 }
 /**
  * 云原生网关限流插件Qps阈值
@@ -336,71 +426,49 @@ export interface DescribeCloudNativeAPIGatewayNodesResponse {
     RequestId?: string;
 }
 /**
- * 私有网络信息
+ * CreateCloudNativeAPIGateway返回参数结构体
  */
-export interface VpcInfo {
+export interface CreateCloudNativeAPIGatewayResponse {
     /**
-     * Vpc Id
+     * 创建云原生API网关实例响应结果。
      */
-    VpcId: string;
-    /**
-     * 子网ID
-     */
-    SubnetId: string;
-    /**
-     * 内网访问地址
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    IntranetAddress?: string;
-}
-/**
- * ModifyCloudNativeAPIGatewayCanaryRule返回参数结构体
- */
-export interface ModifyCloudNativeAPIGatewayCanaryRuleResponse {
+    Result?: CreateCloudNativeAPIGatewayResult;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
 }
 /**
- * 云原生网关服务预览信息
+ * DeleteCloudNativeAPIGatewayCanaryRule请求参数结构体
  */
-export interface KongServicePreview {
+export interface DeleteCloudNativeAPIGatewayCanaryRuleRequest {
     /**
-     * 服务ID
+     * 网关 ID
+     */
+    GatewayId: string;
+    /**
+     * 服务 ID
+     */
+    ServiceId: string;
+    /**
+     * 优先级
+     */
+    Priority: number;
+}
+/**
+ * 网关实例协议端口列表
+ */
+export interface GatewayInstanceSchemeAndPorts {
+    /**
+     * 端口协议，可选HTTP、HTTPS、TCP和UDP
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ID: string;
+    Scheme?: string;
     /**
-     * 服务名字
+     * 端口列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Name?: string;
-    /**
-     * 标签
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Tags?: Array<string>;
-    /**
-     * 后端配置
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    UpstreamInfo?: KongUpstreamInfo;
-    /**
-     * 后端类型
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    UpstreamType?: string;
-    /**
-     * 创建时间
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    CreatedTime?: string;
-    /**
-     * 是否可编辑
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Editable?: boolean;
+    PortList?: Array<number>;
 }
 /**
  * ModifyCloudNativeAPIGatewayRouteRateLimit请求参数结构体
@@ -429,6 +497,23 @@ export interface NacosServerInterface {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Interface: string;
+}
+/**
+ * DescribeNacosReplicas请求参数结构体
+ */
+export interface DescribeNacosReplicasRequest {
+    /**
+     * 引擎实例ID
+     */
+    InstanceId: string;
+    /**
+     * 副本列表Limit
+     */
+    Limit?: number;
+    /**
+     * 副本列表Offset
+     */
+    Offset?: number;
 }
 /**
  * CreateCloudNativeAPIGatewayService请求参数结构体
@@ -475,6 +560,31 @@ export interface CreateCloudNativeAPIGatewayServiceRequest {
      * 服务配置信息
      */
     UpstreamInfo: KongUpstreamInfo;
+}
+/**
+ * 含百分比流量配置的服务
+ */
+export interface CloudNativeAPIGatewayBalancedService {
+    /**
+     * 服务 ID，作为入参时，必填
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ServiceID?: string;
+    /**
+     * 服务名称，作为入参时，无意义
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ServiceName?: string;
+    /**
+     * Upstream 名称，作为入参时，无意义
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    UpstreamName?: string;
+    /**
+     * 百分比，10 即 10%，范围0-100
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Percent?: number;
 }
 /**
  * 云原生网关限流插件外部redis配置
@@ -769,6 +879,145 @@ export interface DeleteCloudNativeAPIGatewayServiceResponse {
     RequestId?: string;
 }
 /**
+ * 实例监听端口信息
+ */
+export interface InstancePort {
+    /**
+     * 监听的 http 端口范围。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    HttpPort?: string;
+    /**
+     * 监听的 https 端口范围。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    HttpsPort?: string;
+}
+/**
+ * 获取云原生API网关基础信息响应结果。
+ */
+export interface DescribeCloudNativeAPIGatewayResult {
+    /**
+     * 云原生API网关ID。
+     */
+    GatewayId?: string;
+    /**
+     * 云原生API网关状态。
+     */
+    Status?: string;
+    /**
+     * 云原生API网关名。
+     */
+    Name?: string;
+    /**
+     * 云原生API网关类型。
+     */
+    Type?: string;
+    /**
+     * 实例版本：
+  - 2.4.1
+  - 2.5.1
+     */
+    GatewayVersion?: string;
+    /**
+     * 云原生API网关节点信息。
+     */
+    NodeConfig?: CloudNativeAPIGatewayNodeConfig;
+    /**
+     * 云原生API网关vpc配置。
+     */
+    VpcConfig?: CloudNativeAPIGatewayVpcConfig;
+    /**
+     * 云原生API网关描述。
+     */
+    Description?: string;
+    /**
+     * 云原生API网关创建时间。
+     */
+    CreateTime?: string;
+    /**
+     * 实例的标签信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Tags?: Array<InstanceTagInfo>;
+    /**
+     * 是否开启 cls 日志
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    EnableCls?: boolean;
+    /**
+     * 付费模式，0表示后付费，1预付费
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TradeType?: number;
+    /**
+     * 实例版本，当前支持开发版、标准版、专业版【TRIAL、STANDARD、PROFESSIONAL】
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    FeatureVersion?: string;
+    /**
+     * 公网出流量带宽，[1,2048]Mbps
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InternetMaxBandwidthOut?: number;
+    /**
+     * 自动续费标记，0表示默认状态(用户未设置，即初始状态)；
+  1表示自动续费，2表示明确不自动续费(用户设置)，若业务无续费概念或无需自动续费，需要设置为0
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AutoRenewFlag?: number;
+    /**
+     * 到期时间，预付费时使用
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CurDeadline?: string;
+    /**
+     * 隔离时间，实例隔离时使用
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IsolateTime?: string;
+    /**
+     * 是否开启客户端公网。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    EnableInternet?: boolean;
+    /**
+     * 实例实际的地域信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    EngineRegion?: string;
+    /**
+     * Ingress class名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IngressClassName?: string;
+    /**
+     * 公网计费方式。可选取值 BANDWIDTH | TRAFFIC ，表示按带宽和按流量计费。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InternetPayMode?: string;
+    /**
+     * 云原生API网关小版本号
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    GatewayMinorVersion?: string;
+    /**
+     * 实例监听的端口信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InstancePort?: InstancePort;
+    /**
+     * 公网CLB默认类型
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    LoadBalancerType?: string;
+    /**
+     * 公网IP地址列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PublicIpAddresses?: Array<string>;
+}
+/**
  * DeleteCloudNativeAPIGatewayRoute返回参数结构体
  */
 export interface DeleteCloudNativeAPIGatewayRouteResponse {
@@ -810,6 +1059,20 @@ export interface CreateCloudNativeAPIGatewayRouteRateLimitRequest {
     LimitDetail: CloudNativeAPIGatewayRateLimitDetail;
 }
 /**
+ * DeleteNativeGatewayServerGroup请求参数结构体
+ */
+export interface DeleteNativeGatewayServerGroupRequest {
+    /**
+     * 网关实例id。
+  只支持后付费实例
+     */
+    GatewayId: string;
+    /**
+     * 网关分组id
+     */
+    GroupId: string;
+}
+/**
  * ModifyCloudNativeAPIGatewayRoute返回参数结构体
  */
 export interface ModifyCloudNativeAPIGatewayRouteResponse {
@@ -817,6 +1080,28 @@ export interface ModifyCloudNativeAPIGatewayRouteResponse {
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * 删除网关实例结果
+ */
+export interface DeleteNativeGatewayServerGroupResult {
+    /**
+     * 网关实例id
+     */
+    GatewayId?: string;
+    /**
+     * 网关分组id
+     */
+    GroupId?: string;
+    /**
+     * 删除状态
+     */
+    Status?: string;
+    /**
+     * 任务ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TaskId?: string;
 }
 /**
  * 服务治理相关的信息
@@ -885,6 +1170,21 @@ export interface DeleteCloudNativeAPIGatewayServiceRateLimitRequest {
      * 服务名称，或服务ID
      */
     Name: string;
+}
+/**
+ * 云原生API网关vpc配置。
+ */
+export interface CloudNativeAPIGatewayVpcConfig {
+    /**
+     * 私有网络ID。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    VpcId?: string;
+    /**
+     * 子网ID。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SubnetId?: string;
 }
 /**
  * 灰度规则列表
@@ -1285,6 +1585,27 @@ export interface EnvInfo {
     EnableConfigIntranet?: boolean;
 }
 /**
+ * ModifyNativeGatewayServerGroup请求参数结构体
+ */
+export interface ModifyNativeGatewayServerGroupRequest {
+    /**
+     * 云原生API网关实例ID。
+     */
+    GatewayId: string;
+    /**
+     * 网关分组 id
+     */
+    GroupId: string;
+    /**
+     * 云原生API网关名字, 最多支持60个字符。
+     */
+    Name?: string;
+    /**
+     * 云原生API网关描述信息, 最多支持120个字符。
+     */
+    Description?: string;
+}
+/**
  * DescribeCloudNativeAPIGatewayRouteRateLimit请求参数结构体
  */
 export interface DescribeCloudNativeAPIGatewayRouteRateLimitRequest {
@@ -1321,9 +1642,54 @@ export interface CreateCloudNativeAPIGatewayRouteRateLimitResponse {
     RequestId?: string;
 }
 /**
+ * DescribeCloudNativeAPIGateways返回参数结构体
+ */
+export interface DescribeCloudNativeAPIGatewaysResponse {
+    /**
+     * 获取云原生API网关实例列表响应结果。
+     */
+    Result: ListCloudNativeAPIGatewayResult;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * UpdateEngineInternetAccess返回参数结构体
  */
 export interface UpdateEngineInternetAccessResponse {
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * UpdateCloudNativeAPIGatewaySpec请求参数结构体
+ */
+export interface UpdateCloudNativeAPIGatewaySpecRequest {
+    /**
+     * 云原生API网关实例ID。
+  只支持后付费实例
+     */
+    GatewayId: string;
+    /**
+     * 网关分组id
+     */
+    GroupId: string;
+    /**
+     * 网关分组节点规格配置。
+     */
+    NodeConfig: CloudNativeAPIGatewayNodeConfig;
+}
+/**
+ * DescribeCloudNativeAPIGatewayServices返回参数结构体
+ */
+export interface DescribeCloudNativeAPIGatewayServicesResponse {
+    /**
+     * 无
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Result?: KongServices;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1406,6 +1772,31 @@ export interface ZookeeperReplica {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     VpcId?: string;
+}
+/**
+ * DescribeSREInstanceAccessAddress请求参数结构体
+ */
+export interface DescribeSREInstanceAccessAddressRequest {
+    /**
+     * 注册引擎实例Id
+     */
+    InstanceId?: string;
+    /**
+     * VPC ID
+     */
+    VpcId?: string;
+    /**
+     * 子网ID
+     */
+    SubnetId?: string;
+    /**
+     * 引擎其他组件名称（pushgateway、polaris-limiter）
+     */
+    Workload?: string;
+    /**
+     * 部署地域
+     */
+    EngineRegion?: string;
 }
 /**
  * DescribeCloudNativeAPIGatewayCanaryRules返回参数结构体
@@ -1647,6 +2038,19 @@ export interface CloudNativeAPIGatewayNode {
     Status?: string;
 }
 /**
+ * UpdateCloudNativeAPIGatewaySpec返回参数结构体
+ */
+export interface UpdateCloudNativeAPIGatewaySpecResponse {
+    /**
+     * 更新云原生API网关实例规格的响应结果。
+     */
+    Result?: UpdateCloudNativeAPIGatewayResult;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * 获取云原生API网关实例协议端口列表响应结果
  */
 export interface DescribeGatewayInstancePortResult {
@@ -1679,17 +2083,34 @@ export interface DescribeZookeeperServerInterfacesResponse {
     RequestId?: string;
 }
 /**
- * 查询过滤通用对象
+ * DeleteCloudNativeAPIGateway请求参数结构体
  */
-export interface Filter {
+export interface DeleteCloudNativeAPIGatewayRequest {
     /**
-     * 过滤参数名
+     * 云原生API网关实例ID。
      */
-    Name: string;
+    GatewayId: string;
     /**
-     * 过滤参数值
+     * 是否删除实例关联的 CLS 日志主题。
      */
-    Values: Array<string>;
+    DeleteClsTopic?: boolean;
+}
+/**
+ * 引擎的初始管理帐号
+ */
+export interface EngineAdmin {
+    /**
+     * 控制台初始用户名
+     */
+    Name?: string;
+    /**
+     * 控制台初始密码
+     */
+    Password?: string;
+    /**
+     * 引擎接口的管理员 Token
+     */
+    Token?: string;
 }
 /**
  * 查询Limiter的接入地址
@@ -1765,6 +2186,19 @@ export interface ModifyCloudNativeAPIGatewayServiceRequest {
     ID: string;
 }
 /**
+ * DeleteCloudNativeAPIGateway返回参数结构体
+ */
+export interface DeleteCloudNativeAPIGatewayResponse {
+    /**
+     * 删除云原生API网关实例响应结果。
+     */
+    Result: DeleteCloudNativeAPIGatewayResult;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * kong实例的服务列表
  */
 export interface KongServices {
@@ -1778,6 +2212,15 @@ export interface KongServices {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     TotalCount?: number;
+}
+/**
+ * ModifyCloudNativeAPIGateway返回参数结构体
+ */
+export interface ModifyCloudNativeAPIGatewayResponse {
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * DescribeZookeeperServerInterfaces请求参数结构体
@@ -1810,6 +2253,33 @@ export interface DescribeCloudNativeAPIGatewayRouteRateLimitResponse {
     RequestId?: string;
 }
 /**
+ * 更新云原生API网关响应结果。
+ */
+export interface UpdateCloudNativeAPIGatewayResult {
+    /**
+     * 云原生API网关ID。
+     */
+    GatewayId?: string;
+    /**
+     * 云原生网关状态。
+     */
+    Status?: string;
+    /**
+     * 任务ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TaskId?: string;
+}
+/**
+ * DescribeCloudNativeAPIGateway请求参数结构体
+ */
+export interface DescribeCloudNativeAPIGatewayRequest {
+    /**
+     * 云原生API网关实例ID
+     */
+    GatewayId: string;
+}
+/**
  * CreateCloudNativeAPIGatewayCanaryRule请求参数结构体
  */
 export interface CreateCloudNativeAPIGatewayCanaryRuleRequest {
@@ -1838,6 +2308,60 @@ export interface DeleteCloudNativeAPIGatewayRouteRequest {
      * 路由的ID或名字，不支持名称“未命名”
      */
     Name: string;
+}
+/**
+ * DescribeCloudNativeAPIGateways请求参数结构体
+ */
+export interface DescribeCloudNativeAPIGatewaysRequest {
+    /**
+     * 返回数量，默认为 20，最大值为 100。
+     */
+    Limit?: number;
+    /**
+     * 偏移量，默认为 0。
+     */
+    Offset?: number;
+    /**
+     * 请求过滤参数，支持按照实例名称、ID和标签键值（Name、GatewayId、Tag）筛选
+     */
+    Filters?: Array<Filter>;
+}
+/**
+ * 公网负载均衡配置
+ */
+export interface InternetConfig {
+    /**
+     * 公网地址版本，可选："IPV4" | "IPV6-NAT64" 。不填默认 IPV4 。
+     */
+    InternetAddressVersion?: string;
+    /**
+     * 公网付费类型，当前仅可选："BANDWIDTH"。不填默认为 "BANDWIDTH"
+     */
+    InternetPayMode?: string;
+    /**
+     * 公网带宽。
+     */
+    InternetMaxBandwidthOut?: number;
+    /**
+     * 负载均衡描述
+     */
+    Description?: string;
+    /**
+     * 负载均衡的规格类型，传 "SLA" 表示性能容量型，不传为共享型。
+     */
+    SlaType?: string;
+    /**
+     * 负载均衡是否多可用区
+     */
+    MultiZoneFlag?: boolean;
+    /**
+     * 主可用区
+     */
+    MasterZoneId?: string;
+    /**
+     * 备可用区
+     */
+    SlaveZoneId?: string;
 }
 /**
  * DescribeCloudNativeAPIGatewayRoutes请求参数结构体
@@ -1946,6 +2470,29 @@ export interface ModifyCloudNativeAPIGatewayServiceRateLimitResponse {
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * 创建网关分组信息
+ */
+export interface CreateCloudNativeAPIGatewayServerGroupResult {
+    /**
+     * 网关实例id
+     */
+    GatewayId?: string;
+    /**
+     * 分组id
+     */
+    GroupId?: string;
+    /**
+     * 状态
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Status?: string;
+    /**
+     * 任务ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TaskId?: string;
 }
 /**
  * DescribeNacosServerInterfaces请求参数结构体
@@ -2157,6 +2704,20 @@ export interface DescribeSREInstancesRequest {
     QuerySource?: string;
 }
 /**
+ * CreateNativeGatewayServerGroup返回参数结构体
+ */
+export interface CreateNativeGatewayServerGroupResponse {
+    /**
+     * 网关分组创建信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Result?: CreateCloudNativeAPIGatewayServerGroupResult;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * CreateCloudNativeAPIGatewayServiceRateLimit请求参数结构体
  */
 export interface CreateCloudNativeAPIGatewayServiceRateLimitRequest {
@@ -2338,6 +2899,24 @@ export interface ModifyCloudNativeAPIGatewayCanaryRuleRequest {
     CanaryRule: CloudNativeAPIGatewayCanaryRule;
 }
 /**
+ * 私有网络信息
+ */
+export interface VpcInfo {
+    /**
+     * Vpc Id
+     */
+    VpcId: string;
+    /**
+     * 子网ID
+     */
+    SubnetId: string;
+    /**
+     * 内网访问地址
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IntranetAddress?: string;
+}
+/**
  * kong服务路由列表
  */
 export interface KongServiceRouteList {
@@ -2353,29 +2932,87 @@ export interface KongServiceRouteList {
     TotalCount?: number;
 }
 /**
- * DescribeSREInstanceAccessAddress请求参数结构体
+ * 创建云原生API网关响应结果。
  */
-export interface DescribeSREInstanceAccessAddressRequest {
+export interface CreateCloudNativeAPIGatewayResult {
     /**
-     * 注册引擎实例Id
+     * 云原生API网关ID。
      */
-    InstanceId?: string;
+    GatewayId: string;
     /**
-     * VPC ID
+     * 云原生网关状态。
      */
-    VpcId?: string;
+    Status: string;
     /**
-     * 子网ID
+     * 任务ID
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    SubnetId?: string;
+    TaskId?: string;
+}
+/**
+ * ModifyCloudNativeAPIGateway请求参数结构体
+ */
+export interface ModifyCloudNativeAPIGatewayRequest {
     /**
-     * 引擎其他组件名称（pushgateway、polaris-limiter）
+     * 云原生API网关实例ID。
      */
-    Workload?: string;
+    GatewayId: string;
     /**
-     * 部署地域
+     * 云原生API网关名字, 最多支持60个字符。
      */
-    EngineRegion?: string;
+    Name?: string;
+    /**
+     * 云原生API网关描述信息, 最多支持120个字符。
+     */
+    Description?: string;
+    /**
+     * 是否开启 CLS 日志。暂时取值只能是 true，即只能从关闭状态变成开启状态。
+     */
+    EnableCls?: boolean;
+    /**
+     * 公网计费模式。可选取值 BANDWIDTH | TRAFFIC ，表示按带宽和按流量计费。
+     */
+    InternetPayMode?: string;
+}
+/**
+ * 云原生网关服务预览信息
+ */
+export interface KongServicePreview {
+    /**
+     * 服务ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ID: string;
+    /**
+     * 服务名字
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Name?: string;
+    /**
+     * 标签
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Tags?: Array<string>;
+    /**
+     * 后端配置
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    UpstreamInfo?: KongUpstreamInfo;
+    /**
+     * 后端类型
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    UpstreamType?: string;
+    /**
+     * 创建时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CreatedTime?: string;
+    /**
+     * 是否可编辑
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Editable?: boolean;
 }
 /**
  * ModifyCloudNativeAPIGatewayRouteRateLimit返回参数结构体
@@ -2387,21 +3024,17 @@ export interface ModifyCloudNativeAPIGatewayRouteRateLimitResponse {
     RequestId?: string;
 }
 /**
- * 引擎的初始管理帐号
+ * 查询过滤通用对象
  */
-export interface EngineAdmin {
+export interface Filter {
     /**
-     * 控制台初始用户名
+     * 过滤参数名
      */
-    Name?: string;
+    Name: string;
     /**
-     * 控制台初始密码
+     * 过滤参数值
      */
-    Password?: string;
-    /**
-     * 引擎接口的管理员 Token
-     */
-    Token?: string;
+    Values: Array<string>;
 }
 /**
  * DescribeCloudNativeAPIGatewayCanaryRules请求参数结构体
@@ -2441,6 +3074,15 @@ export interface DescribeCloudNativeAPIGatewayPortsRequest {
      * 云原生API网关实例ID
      */
     GatewayId: string;
+}
+/**
+ * ModifyNativeGatewayServerGroup返回参数结构体
+ */
+export interface ModifyNativeGatewayServerGroupResponse {
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * 云原生网关服务详细信息

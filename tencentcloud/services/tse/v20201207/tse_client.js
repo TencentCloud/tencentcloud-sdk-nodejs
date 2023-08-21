@@ -28,10 +28,16 @@ class Client extends abstract_client_1.AbstractClient {
         super("tse.tencentcloudapi.com", "2020-12-07", clientConfig);
     }
     /**
-     * 获取云原生网关服务详情
+     * 查询Nacos类型引擎实例副本信息
      */
-    async DescribeOneCloudNativeAPIGatewayService(req, cb) {
-        return this.request("DescribeOneCloudNativeAPIGatewayService", req, cb);
+    async DescribeNacosReplicas(req, cb) {
+        return this.request("DescribeNacosReplicas", req, cb);
+    }
+    /**
+     * 修改云原生API网关实例分组基础信息
+     */
+    async ModifyNativeGatewayServerGroup(req, cb) {
+        return this.request("ModifyNativeGatewayServerGroup", req, cb);
     }
     /**
      * 删除云原生网关的限流插件(服务)
@@ -46,6 +52,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeZookeeperServerInterfaces", req, cb);
     }
     /**
+     * 获取云原生网关服务详情
+     */
+    async DescribeOneCloudNativeAPIGatewayService(req, cb) {
+        return this.request("DescribeOneCloudNativeAPIGatewayService", req, cb);
+    }
+    /**
      * 修改云原生网关限流插件(服务)
      */
     async ModifyCloudNativeAPIGatewayServiceRateLimit(req, cb) {
@@ -56,6 +68,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CreateEngine(req, cb) {
         return this.request("CreateEngine", req, cb);
+    }
+    /**
+     * 修改云原生网关的灰度规则
+     */
+    async ModifyCloudNativeAPIGatewayCanaryRule(req, cb) {
+        return this.request("ModifyCloudNativeAPIGatewayCanaryRule", req, cb);
     }
     /**
      * 删除云原生网关服务
@@ -74,6 +92,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeCloudNativeAPIGatewayRoutes(req, cb) {
         return this.request("DescribeCloudNativeAPIGatewayRoutes", req, cb);
+    }
+    /**
+     * 获取云原生API网关实例信息
+     */
+    async DescribeCloudNativeAPIGateway(req, cb) {
+        return this.request("DescribeCloudNativeAPIGateway", req, cb);
     }
     /**
      * 获取云原生API网关实例端口信息
@@ -100,6 +124,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteCloudNativeAPIGatewayCanaryRule", req, cb);
     }
     /**
+     * 获取云原生API网关实例列表
+     */
+    async DescribeCloudNativeAPIGateways(req, cb) {
+        return this.request("DescribeCloudNativeAPIGateways", req, cb);
+    }
+    /**
      * 查询云原生网关服务列表
      */
     async DescribeCloudNativeAPIGatewayServices(req, cb) {
@@ -118,10 +148,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeNacosServerInterfaces", req, cb);
     }
     /**
+     * 修改云原生API网关实例的节点规格信息，比如节点扩缩容或者升降配
+     */
+    async UpdateCloudNativeAPIGatewaySpec(req, cb) {
+        return this.request("UpdateCloudNativeAPIGatewaySpec", req, cb);
+    }
+    /**
      * 查询Zookeeper类型注册引擎实例副本信息
      */
     async DescribeZookeeperReplicas(req, cb) {
         return this.request("DescribeZookeeperReplicas", req, cb);
+    }
+    /**
+     * 创建云原生API网关实例
+     */
+    async CreateCloudNativeAPIGateway(req, cb) {
+        return this.request("CreateCloudNativeAPIGateway", req, cb);
     }
     /**
      * 用于查询引擎实例列表
@@ -166,10 +208,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UpdateEngineInternetAccess", req, cb);
     }
     /**
-     * 修改云原生网关的灰度规则
+     * 修改云原生API网关实例基础信息
      */
-    async ModifyCloudNativeAPIGatewayCanaryRule(req, cb) {
-        return this.request("ModifyCloudNativeAPIGatewayCanaryRule", req, cb);
+    async ModifyCloudNativeAPIGateway(req, cb) {
+        return this.request("ModifyCloudNativeAPIGateway", req, cb);
     }
     /**
      * 创建云原生网关限流插件(服务)
@@ -178,10 +220,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateCloudNativeAPIGatewayServiceRateLimit", req, cb);
     }
     /**
+     * 删除云原生API网关实例
+     */
+    async DeleteCloudNativeAPIGateway(req, cb) {
+        return this.request("DeleteCloudNativeAPIGateway", req, cb);
+    }
+    /**
      * 创建云原生网关路由
      */
     async CreateCloudNativeAPIGatewayRoute(req, cb) {
         return this.request("CreateCloudNativeAPIGatewayRoute", req, cb);
+    }
+    /**
+     * 创建云原生网关引擎分组
+     */
+    async CreateNativeGatewayServerGroup(req, cb) {
+        return this.request("CreateNativeGatewayServerGroup", req, cb);
     }
     /**
      * 删除云原生网关的限流插件(路由)
@@ -196,16 +250,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateCloudNativeAPIGatewayRouteRateLimit", req, cb);
     }
     /**
-     * 查询Nacos类型引擎实例副本信息
-     */
-    async DescribeNacosReplicas(req, cb) {
-        return this.request("DescribeNacosReplicas", req, cb);
-    }
-    /**
      * 修改云原生网关路由
      */
     async ModifyCloudNativeAPIGatewayRoute(req, cb) {
         return this.request("ModifyCloudNativeAPIGatewayRoute", req, cb);
+    }
+    /**
+     * 删除网关实例分组
+     */
+    async DeleteNativeGatewayServerGroup(req, cb) {
+        return this.request("DeleteNativeGatewayServerGroup", req, cb);
     }
     /**
      * 查询云原生网关灰度规则列表

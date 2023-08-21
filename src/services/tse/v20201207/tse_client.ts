@@ -18,27 +18,32 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
-  DescribeNacosReplicasRequest,
+  ListCloudNativeAPIGatewayResult,
+  DescribeCloudNativeAPIGatewayResponse,
   CreateCloudNativeAPIGatewayServiceResponse,
   DeleteCloudNativeAPIGatewayRouteRateLimitResponse,
   ApolloEnvParam,
   DescribeCloudNativeAPIGatewayServiceRateLimitRequest,
-  CloudNativeAPIGatewayBalancedService,
+  CreateCloudNativeAPIGatewayRequest,
   DescribeCloudNativeAPIGatewayNodesRequest,
   ModifyCloudNativeAPIGatewayRouteRequest,
+  DeleteNativeGatewayServerGroupResponse,
   DescribeSREInstanceAccessAddressResponse,
-  DeleteCloudNativeAPIGatewayCanaryRuleRequest,
-  DescribeCloudNativeAPIGatewayServicesResponse,
-  GatewayInstanceSchemeAndPorts,
+  ModifyCloudNativeAPIGatewayCanaryRuleResponse,
+  CloudNativeAPIGatewayNodeConfig,
+  CreateNativeGatewayServerGroupRequest,
+  DeleteCloudNativeAPIGatewayResult,
   QpsThreshold,
   ModifyCloudNativeAPIGatewayServiceResponse,
   DescribeCloudNativeAPIGatewayNodesResponse,
-  VpcInfo,
-  ModifyCloudNativeAPIGatewayCanaryRuleResponse,
-  KongServicePreview,
+  CreateCloudNativeAPIGatewayResponse,
+  DeleteCloudNativeAPIGatewayCanaryRuleRequest,
+  GatewayInstanceSchemeAndPorts,
   ModifyCloudNativeAPIGatewayRouteRateLimitRequest,
   NacosServerInterface,
+  DescribeNacosReplicasRequest,
   CreateCloudNativeAPIGatewayServiceRequest,
+  CloudNativeAPIGatewayBalancedService,
   ExternalRedis,
   EnvAddressInfo,
   InstanceTagInfo,
@@ -52,13 +57,18 @@ import {
   DescribeCloudNativeAPIGatewayRoutesResponse,
   DescribeZookeeperReplicasRequest,
   DeleteCloudNativeAPIGatewayServiceResponse,
+  InstancePort,
+  DescribeCloudNativeAPIGatewayResult,
   DeleteCloudNativeAPIGatewayRouteResponse,
   DescribeCloudNativeAPIGatewayPortsResponse,
   CreateCloudNativeAPIGatewayRouteRateLimitRequest,
+  DeleteNativeGatewayServerGroupRequest,
   ModifyCloudNativeAPIGatewayRouteResponse,
+  DeleteNativeGatewayServerGroupResult,
   ServiceGovernanceInfo,
   DescribeNacosReplicasResponse,
   DeleteCloudNativeAPIGatewayServiceRateLimitRequest,
+  CloudNativeAPIGatewayVpcConfig,
   CloudAPIGatewayCanaryRuleList,
   KongRoutePreview,
   CloudNativeAPIGatewayRateLimitDetail,
@@ -72,36 +82,50 @@ import {
   DescribeCloudNativeAPIGatewayServiceRateLimitResponse,
   DeleteCloudNativeAPIGatewayServiceRequest,
   EnvInfo,
+  ModifyNativeGatewayServerGroupRequest,
   DescribeCloudNativeAPIGatewayRouteRateLimitRequest,
   DescribeOneCloudNativeAPIGatewayServiceRequest,
   CreateCloudNativeAPIGatewayRouteRateLimitResponse,
+  DescribeCloudNativeAPIGatewaysResponse,
   UpdateEngineInternetAccessResponse,
+  UpdateCloudNativeAPIGatewaySpecRequest,
+  DescribeCloudNativeAPIGatewayServicesResponse,
   DeleteCloudNativeAPIGatewayRouteRateLimitRequest,
   ListFilter,
   DeleteEngineRequest,
   ZookeeperReplica,
+  DescribeSREInstanceAccessAddressRequest,
   DescribeCloudNativeAPIGatewayCanaryRulesResponse,
   SREInstance,
   DeleteCloudNativeAPIGatewayServiceRateLimitResponse,
   ModifyCloudNativeAPIGatewayServiceRateLimitRequest,
   CloudNativeAPIGatewayNode,
+  UpdateCloudNativeAPIGatewaySpecResponse,
   DescribeGatewayInstancePortResult,
   DescribeZookeeperServerInterfacesResponse,
-  Filter,
+  DeleteCloudNativeAPIGatewayRequest,
+  EngineAdmin,
   PolarisLimiterAddress,
   DescribeOneCloudNativeAPIGatewayServiceResponse,
   ModifyCloudNativeAPIGatewayServiceRequest,
+  DeleteCloudNativeAPIGatewayResponse,
   KongServices,
+  ModifyCloudNativeAPIGatewayResponse,
   DescribeZookeeperServerInterfacesRequest,
   DescribeCloudNativeAPIGatewayRouteRateLimitResponse,
+  UpdateCloudNativeAPIGatewayResult,
+  DescribeCloudNativeAPIGatewayRequest,
   CreateCloudNativeAPIGatewayCanaryRuleRequest,
   DeleteCloudNativeAPIGatewayRouteRequest,
+  DescribeCloudNativeAPIGatewaysRequest,
+  InternetConfig,
   DescribeCloudNativeAPIGatewayRoutesRequest,
   CreateEngineResponse,
   CreateCloudNativeAPIGatewayServiceRateLimitResponse,
   DescribeCloudNativeAPIGatewayNodesResult,
   CloudNativeAPIGatewayCanaryRule,
   ModifyCloudNativeAPIGatewayServiceRateLimitResponse,
+  CreateCloudNativeAPIGatewayServerGroupResult,
   DescribeNacosServerInterfacesRequest,
   CloudNativeAPIGatewayCanaryRuleCondition,
   DescribeSREInstancesResponse,
@@ -109,17 +133,22 @@ import {
   BoundK8SInfo,
   KongUpstreamInfo,
   DescribeSREInstancesRequest,
+  CreateNativeGatewayServerGroupResponse,
   CreateCloudNativeAPIGatewayServiceRateLimitRequest,
   DescribeZookeeperReplicasResponse,
   CreateEngineRequest,
   ModifyCloudNativeAPIGatewayCanaryRuleRequest,
+  VpcInfo,
   KongServiceRouteList,
-  DescribeSREInstanceAccessAddressRequest,
+  CreateCloudNativeAPIGatewayResult,
+  ModifyCloudNativeAPIGatewayRequest,
+  KongServicePreview,
   ModifyCloudNativeAPIGatewayRouteRateLimitResponse,
-  EngineAdmin,
+  Filter,
   DescribeCloudNativeAPIGatewayCanaryRulesRequest,
   DeleteCloudNativeAPIGatewayCanaryRuleResponse,
   DescribeCloudNativeAPIGatewayPortsRequest,
+  ModifyNativeGatewayServerGroupResponse,
   KongServiceDetail,
 } from "./tse_models"
 
@@ -133,13 +162,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取云原生网关服务详情
+   * 查询Nacos类型引擎实例副本信息
    */
-  async DescribeOneCloudNativeAPIGatewayService(
-    req: DescribeOneCloudNativeAPIGatewayServiceRequest,
-    cb?: (error: string, rep: DescribeOneCloudNativeAPIGatewayServiceResponse) => void
-  ): Promise<DescribeOneCloudNativeAPIGatewayServiceResponse> {
-    return this.request("DescribeOneCloudNativeAPIGatewayService", req, cb)
+  async DescribeNacosReplicas(
+    req: DescribeNacosReplicasRequest,
+    cb?: (error: string, rep: DescribeNacosReplicasResponse) => void
+  ): Promise<DescribeNacosReplicasResponse> {
+    return this.request("DescribeNacosReplicas", req, cb)
+  }
+
+  /**
+   * 修改云原生API网关实例分组基础信息
+   */
+  async ModifyNativeGatewayServerGroup(
+    req: ModifyNativeGatewayServerGroupRequest,
+    cb?: (error: string, rep: ModifyNativeGatewayServerGroupResponse) => void
+  ): Promise<ModifyNativeGatewayServerGroupResponse> {
+    return this.request("ModifyNativeGatewayServerGroup", req, cb)
   }
 
   /**
@@ -163,6 +202,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取云原生网关服务详情
+   */
+  async DescribeOneCloudNativeAPIGatewayService(
+    req: DescribeOneCloudNativeAPIGatewayServiceRequest,
+    cb?: (error: string, rep: DescribeOneCloudNativeAPIGatewayServiceResponse) => void
+  ): Promise<DescribeOneCloudNativeAPIGatewayServiceResponse> {
+    return this.request("DescribeOneCloudNativeAPIGatewayService", req, cb)
+  }
+
+  /**
    * 修改云原生网关限流插件(服务)
    */
   async ModifyCloudNativeAPIGatewayServiceRateLimit(
@@ -180,6 +229,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateEngineResponse) => void
   ): Promise<CreateEngineResponse> {
     return this.request("CreateEngine", req, cb)
+  }
+
+  /**
+   * 修改云原生网关的灰度规则
+   */
+  async ModifyCloudNativeAPIGatewayCanaryRule(
+    req: ModifyCloudNativeAPIGatewayCanaryRuleRequest,
+    cb?: (error: string, rep: ModifyCloudNativeAPIGatewayCanaryRuleResponse) => void
+  ): Promise<ModifyCloudNativeAPIGatewayCanaryRuleResponse> {
+    return this.request("ModifyCloudNativeAPIGatewayCanaryRule", req, cb)
   }
 
   /**
@@ -210,6 +269,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeCloudNativeAPIGatewayRoutesResponse) => void
   ): Promise<DescribeCloudNativeAPIGatewayRoutesResponse> {
     return this.request("DescribeCloudNativeAPIGatewayRoutes", req, cb)
+  }
+
+  /**
+   * 获取云原生API网关实例信息
+   */
+  async DescribeCloudNativeAPIGateway(
+    req: DescribeCloudNativeAPIGatewayRequest,
+    cb?: (error: string, rep: DescribeCloudNativeAPIGatewayResponse) => void
+  ): Promise<DescribeCloudNativeAPIGatewayResponse> {
+    return this.request("DescribeCloudNativeAPIGateway", req, cb)
   }
 
   /**
@@ -253,6 +322,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取云原生API网关实例列表
+   */
+  async DescribeCloudNativeAPIGateways(
+    req: DescribeCloudNativeAPIGatewaysRequest,
+    cb?: (error: string, rep: DescribeCloudNativeAPIGatewaysResponse) => void
+  ): Promise<DescribeCloudNativeAPIGatewaysResponse> {
+    return this.request("DescribeCloudNativeAPIGateways", req, cb)
+  }
+
+  /**
    * 查询云原生网关服务列表
    */
   async DescribeCloudNativeAPIGatewayServices(
@@ -283,6 +362,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 修改云原生API网关实例的节点规格信息，比如节点扩缩容或者升降配
+   */
+  async UpdateCloudNativeAPIGatewaySpec(
+    req: UpdateCloudNativeAPIGatewaySpecRequest,
+    cb?: (error: string, rep: UpdateCloudNativeAPIGatewaySpecResponse) => void
+  ): Promise<UpdateCloudNativeAPIGatewaySpecResponse> {
+    return this.request("UpdateCloudNativeAPIGatewaySpec", req, cb)
+  }
+
+  /**
    * 查询Zookeeper类型注册引擎实例副本信息
    */
   async DescribeZookeeperReplicas(
@@ -290,6 +379,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeZookeeperReplicasResponse) => void
   ): Promise<DescribeZookeeperReplicasResponse> {
     return this.request("DescribeZookeeperReplicas", req, cb)
+  }
+
+  /**
+   * 创建云原生API网关实例
+   */
+  async CreateCloudNativeAPIGateway(
+    req: CreateCloudNativeAPIGatewayRequest,
+    cb?: (error: string, rep: CreateCloudNativeAPIGatewayResponse) => void
+  ): Promise<CreateCloudNativeAPIGatewayResponse> {
+    return this.request("CreateCloudNativeAPIGateway", req, cb)
   }
 
   /**
@@ -363,13 +462,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改云原生网关的灰度规则
+   * 修改云原生API网关实例基础信息
    */
-  async ModifyCloudNativeAPIGatewayCanaryRule(
-    req: ModifyCloudNativeAPIGatewayCanaryRuleRequest,
-    cb?: (error: string, rep: ModifyCloudNativeAPIGatewayCanaryRuleResponse) => void
-  ): Promise<ModifyCloudNativeAPIGatewayCanaryRuleResponse> {
-    return this.request("ModifyCloudNativeAPIGatewayCanaryRule", req, cb)
+  async ModifyCloudNativeAPIGateway(
+    req: ModifyCloudNativeAPIGatewayRequest,
+    cb?: (error: string, rep: ModifyCloudNativeAPIGatewayResponse) => void
+  ): Promise<ModifyCloudNativeAPIGatewayResponse> {
+    return this.request("ModifyCloudNativeAPIGateway", req, cb)
   }
 
   /**
@@ -383,6 +482,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 删除云原生API网关实例
+   */
+  async DeleteCloudNativeAPIGateway(
+    req: DeleteCloudNativeAPIGatewayRequest,
+    cb?: (error: string, rep: DeleteCloudNativeAPIGatewayResponse) => void
+  ): Promise<DeleteCloudNativeAPIGatewayResponse> {
+    return this.request("DeleteCloudNativeAPIGateway", req, cb)
+  }
+
+  /**
    * 创建云原生网关路由
    */
   async CreateCloudNativeAPIGatewayRoute(
@@ -390,6 +499,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateCloudNativeAPIGatewayRouteResponse) => void
   ): Promise<CreateCloudNativeAPIGatewayRouteResponse> {
     return this.request("CreateCloudNativeAPIGatewayRoute", req, cb)
+  }
+
+  /**
+   * 创建云原生网关引擎分组
+   */
+  async CreateNativeGatewayServerGroup(
+    req: CreateNativeGatewayServerGroupRequest,
+    cb?: (error: string, rep: CreateNativeGatewayServerGroupResponse) => void
+  ): Promise<CreateNativeGatewayServerGroupResponse> {
+    return this.request("CreateNativeGatewayServerGroup", req, cb)
   }
 
   /**
@@ -413,16 +532,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询Nacos类型引擎实例副本信息
-   */
-  async DescribeNacosReplicas(
-    req: DescribeNacosReplicasRequest,
-    cb?: (error: string, rep: DescribeNacosReplicasResponse) => void
-  ): Promise<DescribeNacosReplicasResponse> {
-    return this.request("DescribeNacosReplicas", req, cb)
-  }
-
-  /**
    * 修改云原生网关路由
    */
   async ModifyCloudNativeAPIGatewayRoute(
@@ -430,6 +539,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyCloudNativeAPIGatewayRouteResponse) => void
   ): Promise<ModifyCloudNativeAPIGatewayRouteResponse> {
     return this.request("ModifyCloudNativeAPIGatewayRoute", req, cb)
+  }
+
+  /**
+   * 删除网关实例分组
+   */
+  async DeleteNativeGatewayServerGroup(
+    req: DeleteNativeGatewayServerGroupRequest,
+    cb?: (error: string, rep: DeleteNativeGatewayServerGroupResponse) => void
+  ): Promise<DeleteNativeGatewayServerGroupResponse> {
+    return this.request("DeleteNativeGatewayServerGroup", req, cb)
   }
 
   /**

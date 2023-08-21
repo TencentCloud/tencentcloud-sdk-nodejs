@@ -18,9 +18,19 @@ const client = new tencentcloud.tse.v20201207.Client({
 })
 describe("tse.v20201207.test.js", function () {
 
-it("tse.v20201207.DescribeOneCloudNativeAPIGatewayService", async function () {
+it("tse.v20201207.DescribeNacosReplicas", async function () {
     try {
-       const data = await client.DescribeOneCloudNativeAPIGatewayService({})
+       const data = await client.DescribeNacosReplicas({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tse.v20201207.ModifyNativeGatewayServerGroup", async function () {
+    try {
+       const data = await client.ModifyNativeGatewayServerGroup({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -48,6 +58,16 @@ it("tse.v20201207.DescribeZookeeperServerInterfaces", async function () {
     }
 })
 
+it("tse.v20201207.DescribeOneCloudNativeAPIGatewayService", async function () {
+    try {
+       const data = await client.DescribeOneCloudNativeAPIGatewayService({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tse.v20201207.ModifyCloudNativeAPIGatewayServiceRateLimit", async function () {
     try {
        const data = await client.ModifyCloudNativeAPIGatewayServiceRateLimit({})
@@ -61,6 +81,16 @@ it("tse.v20201207.ModifyCloudNativeAPIGatewayServiceRateLimit", async function (
 it("tse.v20201207.CreateEngine", async function () {
     try {
        const data = await client.CreateEngine({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tse.v20201207.ModifyCloudNativeAPIGatewayCanaryRule", async function () {
+    try {
+       const data = await client.ModifyCloudNativeAPIGatewayCanaryRule({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -91,6 +121,16 @@ it("tse.v20201207.CreateCloudNativeAPIGatewayService", async function () {
 it("tse.v20201207.DescribeCloudNativeAPIGatewayRoutes", async function () {
     try {
        const data = await client.DescribeCloudNativeAPIGatewayRoutes({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tse.v20201207.DescribeCloudNativeAPIGateway", async function () {
+    try {
+       const data = await client.DescribeCloudNativeAPIGateway({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -138,6 +178,16 @@ it("tse.v20201207.DeleteCloudNativeAPIGatewayCanaryRule", async function () {
     }
 })
 
+it("tse.v20201207.DescribeCloudNativeAPIGateways", async function () {
+    try {
+       const data = await client.DescribeCloudNativeAPIGateways({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tse.v20201207.DescribeCloudNativeAPIGatewayServices", async function () {
     try {
        const data = await client.DescribeCloudNativeAPIGatewayServices({})
@@ -168,9 +218,29 @@ it("tse.v20201207.DescribeNacosServerInterfaces", async function () {
     }
 })
 
+it("tse.v20201207.UpdateCloudNativeAPIGatewaySpec", async function () {
+    try {
+       const data = await client.UpdateCloudNativeAPIGatewaySpec({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tse.v20201207.DescribeZookeeperReplicas", async function () {
     try {
        const data = await client.DescribeZookeeperReplicas({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tse.v20201207.CreateCloudNativeAPIGateway", async function () {
+    try {
+       const data = await client.CreateCloudNativeAPIGateway({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -248,9 +318,9 @@ it("tse.v20201207.UpdateEngineInternetAccess", async function () {
     }
 })
 
-it("tse.v20201207.ModifyCloudNativeAPIGatewayCanaryRule", async function () {
+it("tse.v20201207.ModifyCloudNativeAPIGateway", async function () {
     try {
-       const data = await client.ModifyCloudNativeAPIGatewayCanaryRule({})
+       const data = await client.ModifyCloudNativeAPIGateway({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -268,9 +338,29 @@ it("tse.v20201207.CreateCloudNativeAPIGatewayServiceRateLimit", async function (
     }
 })
 
+it("tse.v20201207.DeleteCloudNativeAPIGateway", async function () {
+    try {
+       const data = await client.DeleteCloudNativeAPIGateway({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tse.v20201207.CreateCloudNativeAPIGatewayRoute", async function () {
     try {
        const data = await client.CreateCloudNativeAPIGatewayRoute({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tse.v20201207.CreateNativeGatewayServerGroup", async function () {
+    try {
+       const data = await client.CreateNativeGatewayServerGroup({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -298,9 +388,9 @@ it("tse.v20201207.CreateCloudNativeAPIGatewayRouteRateLimit", async function () 
     }
 })
 
-it("tse.v20201207.DescribeNacosReplicas", async function () {
+it("tse.v20201207.ModifyCloudNativeAPIGatewayRoute", async function () {
     try {
-       const data = await client.DescribeNacosReplicas({})
+       const data = await client.ModifyCloudNativeAPIGatewayRoute({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -308,9 +398,9 @@ it("tse.v20201207.DescribeNacosReplicas", async function () {
     }
 })
 
-it("tse.v20201207.ModifyCloudNativeAPIGatewayRoute", async function () {
+it("tse.v20201207.DeleteNativeGatewayServerGroup", async function () {
     try {
-       const data = await client.ModifyCloudNativeAPIGatewayRoute({})
+       const data = await client.DeleteNativeGatewayServerGroup({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

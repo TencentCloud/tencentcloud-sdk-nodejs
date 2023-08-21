@@ -56,6 +56,16 @@ export interface ModifyMigrationJobResponse {
 }
 
 /**
+ * ModifyMigrateRateLimit返回参数结构体
+ */
+export interface ModifyMigrateRateLimitResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyMigrateJobSpec请求参数结构体
  */
 export interface ModifyMigrateJobSpecRequest {
@@ -108,6 +118,16 @@ export interface StepTip {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SkipInfo?: string
+}
+
+/**
+ * ModifySyncRateLimit返回参数结构体
+ */
+export interface ModifySyncRateLimitResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -259,6 +279,36 @@ export interface ContinueMigrateJobRequest {
    * 数据迁移任务ID
    */
   JobId: string
+}
+
+/**
+ * ModifySyncRateLimit请求参数结构体
+ */
+export interface ModifySyncRateLimitRequest {
+  /**
+   * 迁移任务ID
+   */
+  JobId: string
+  /**
+   * 同步任务全量导出线程数、有效值为 1-16
+   */
+  DumpThread?: number
+  /**
+   * 同步任务全量导出的 Rps 限制、需要大于 0
+   */
+  DumpRps?: number
+  /**
+   * 同步任务全量导入线程数、有效值为 1-16
+   */
+  LoadThread?: number
+  /**
+   * 同步任务增量导入线程数、有效值为 1-128
+   */
+  SinkerThread?: number
+  /**
+   * 同步任务全量导入的Rps
+   */
+  LoadRps?: number
 }
 
 /**
@@ -2331,6 +2381,36 @@ export interface ResumeSyncJobRequest {
    * 同步任务id
    */
   JobId: string
+}
+
+/**
+ * ModifyMigrateRateLimit请求参数结构体
+ */
+export interface ModifyMigrateRateLimitRequest {
+  /**
+   * 迁移任务ID
+   */
+  JobId: string
+  /**
+   * 迁移任务全量导出线程数、有效值为 1-16
+   */
+  DumpThread?: number
+  /**
+   * 迁移全量导出的 Rps 限制、需要大于 0
+   */
+  DumpRps?: number
+  /**
+   * 迁移任务全量导入线程数、有效值为 1-16
+   */
+  LoadThread?: number
+  /**
+   * 迁移任务增量导入线程数、有效值为 1-128
+   */
+  SinkerThread?: number
+  /**
+   * 全量导入Rps限制
+   */
+  LoadRps?: number
 }
 
 /**

@@ -58,6 +58,16 @@ it("dts.v20211206.CreateMigrationService", async function () {
     }
 })
 
+it("dts.v20211206.ModifyMigrateRateLimit", async function () {
+    try {
+       const data = await client.ModifyMigrateRateLimit({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dts.v20211206.IsolateSyncJob", async function () {
     try {
        const data = await client.IsolateSyncJob({})
@@ -178,6 +188,16 @@ it("dts.v20211206.ConfigureSyncJob", async function () {
     }
 })
 
+it("dts.v20211206.StartModifySyncJob", async function () {
+    try {
+       const data = await client.StartModifySyncJob({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dts.v20211206.ResizeSyncJob", async function () {
     try {
        const data = await client.ResizeSyncJob({})
@@ -228,9 +248,9 @@ it("dts.v20211206.PauseSyncJob", async function () {
     }
 })
 
-it("dts.v20211206.StartModifySyncJob", async function () {
+it("dts.v20211206.ModifySyncRateLimit", async function () {
     try {
-       const data = await client.StartModifySyncJob({})
+       const data = await client.ModifySyncRateLimit({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -2060,7 +2060,7 @@ export interface DescribeResourcesByDealNameResponse {
     /**
      * 计费资源id信息数组
      */
-    BillingResourceInfos: Array<BillingResourceInfo>;
+    BillingResourceInfos?: Array<BillingResourceInfo>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -5758,43 +5758,47 @@ export interface ProxyNodeInfo {
     /**
      * 数据库代理节点ID
      */
-    ProxyNodeId: string;
+    ProxyNodeId?: string;
     /**
      * 节点当前连接数, DescribeProxyNodes接口此字段值不返回
      */
-    ProxyNodeConnections: number;
+    ProxyNodeConnections?: number;
     /**
      * 数据库代理节点cpu
      */
-    Cpu: number;
+    Cpu?: number;
     /**
      * 数据库代理节点内存
      */
-    Mem: number;
+    Mem?: number;
     /**
      * 数据库代理节点状态
      */
-    Status: string;
+    Status?: string;
     /**
      * 数据库代理组ID
      */
-    ProxyGroupId: string;
+    ProxyGroupId?: string;
     /**
      * 集群ID
      */
-    ClusterId: string;
+    ClusterId?: string;
     /**
      * 用户AppID
      */
-    AppId: number;
+    AppId?: number;
     /**
      * 地域
      */
-    Region: string;
+    Region?: string;
     /**
      * 可用区
      */
-    Zone: string;
+    Zone?: string;
+    /**
+     * 数据库代理节点名字
+     */
+    OssProxyNodeName?: string;
 }
 /**
  * OfflineCluster返回参数结构体
