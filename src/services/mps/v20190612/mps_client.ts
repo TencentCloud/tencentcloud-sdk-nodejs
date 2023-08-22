@@ -293,6 +293,7 @@ import {
   OutputSRTSourceAddressResp,
   DeleteAdaptiveDynamicStreamingTemplateResponse,
   StreamLinkRegionInfo,
+  LiveStreamTagRecognitionResult,
   FlowRealtimeStatusRTP,
   AnimatedGraphicTaskInput,
   OutputAddress,

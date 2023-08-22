@@ -514,6 +514,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("GenSingleDeviceSignatureOfPublic", req, cb);
     }
     /**
+     * 公共实例过期时间 0001-01-01T00:00:00Z，公共实例是永久有效
+     */
+    async DescribeInstance(req, cb) {
+        return this.request("DescribeInstance", req, cb);
+    }
+    /**
      * 修改LoRa自定义频点
      */
     async ModifyLoRaFrequency(req, cb) {

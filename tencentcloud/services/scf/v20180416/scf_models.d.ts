@@ -2956,6 +2956,15 @@ export interface ListTriggersRequest {
     Filters?: Array<Filter>;
 }
 /**
+ * UpdateTrigger返回参数结构体
+ */
+export interface UpdateTriggerResponse {
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * CreateFunction返回参数结构体
  */
 export interface CreateFunctionResponse {
@@ -3425,4 +3434,45 @@ export interface UpdateFunctionCodeResponse {
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * UpdateTrigger请求参数结构体
+ */
+export interface UpdateTriggerRequest {
+    /**
+     * 函数名称
+     */
+    FunctionName: string;
+    /**
+     * 触发器名称
+     */
+    TriggerName: string;
+    /**
+     * 触发器类型
+     */
+    Type: string;
+    /**
+     * 触发器开启或关闭，传参为OPEN为开启，CLOSE为关闭
+     */
+    Enable?: string;
+    /**
+     * 函数的版本，默认为 $LATEST，建议填写 [$DEFAULT](https://cloud.tencent.com/document/product/583/36149#.E9.BB.98.E8.AE.A4.E5.88.AB.E5.90.8D)方便后续进行版本的灰度发布。
+     */
+    Qualifier?: string;
+    /**
+     * 函数的命名空间
+     */
+    Namespace?: string;
+    /**
+     * TriggerDesc参数
+     */
+    TriggerDesc?: string;
+    /**
+     * 触发器描述
+     */
+    Description?: string;
+    /**
+     * 用户附加信息
+     */
+    CustomArgument?: string;
 }

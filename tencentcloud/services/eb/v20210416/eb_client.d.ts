@@ -34,7 +34,7 @@ export declare class Client extends AbstractClient {
     /**
      * 检验规则
      */
-    CheckRule(req?: CheckRuleRequest, cb?: (error: string, rep: CheckRuleResponse) => void): Promise<CheckRuleResponse>;
+    CheckRule(req: CheckRuleRequest, cb?: (error: string, rep: CheckRuleResponse) => void): Promise<CheckRuleResponse>;
     /**
      * （已废弃）用于Event事件投递
      */

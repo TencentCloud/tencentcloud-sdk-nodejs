@@ -6832,12 +6832,12 @@ export interface DescribeSupportProxyVersionResponse {
      * 支持的数据库代理版本集合
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SupportProxyVersions: Array<string>;
+    SupportProxyVersions?: Array<string>;
     /**
      * 当前proxy版本号
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CurrentProxyVersion: string;
+    CurrentProxyVersion?: string;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */

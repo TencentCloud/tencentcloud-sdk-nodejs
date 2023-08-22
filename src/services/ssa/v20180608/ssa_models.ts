@@ -472,7 +472,7 @@ export interface SaEventPubResponse {
  */
 export interface DescribeVulListRequest {
   /**
-   * 查询过滤参数
+   * 查询过滤参数:(json序列化的结果）
    */
   Params: string
 }
@@ -2392,7 +2392,7 @@ export interface DescribeVulListResponse {
   /**
    * 漏洞列表
    */
-  Data: VulList
+  Data?: VulList
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

@@ -228,6 +228,10 @@ true：做透明化处理和颜色增强。
    * 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填
    */
   Agent?: Agent
+  /**
+   * 设置用户开通自动签时是否绑定个人自动签账号许可。一旦绑定后，将扣减购买的个人自动签账号许可一次（1年有效期），不可解绑释放。不传默认为绑定自动签账号许可。 0-绑定个人自动签账号许可，开通后将扣减购买的个人自动签账号许可一次 1-不绑定，发起合同时将按标准合同套餐进行扣减
+   */
+  LicenseType?: number
 }
 
 /**
@@ -1411,7 +1415,8 @@ export interface CreateSchemeUrlRequest {
   /**
    * 要跳转的链接类型
 
-- HTTP：跳转电子签小程序的http_url, 短信通知或者H5跳转适合此类型  (默认)
+- HTTP：跳转电子签小程序的http_url, 短信通知或者H5跳转适合此类型  (默认)，此时返回长链
+- HTTP_SHORT_URL：跳转电子签小程序的http_url, 短信通知或者H5跳转适合此类型，此时返回短链
 - APP： 第三方APP或小程序跳转电子签小程序的path,  APP或者小程序跳转适合此类型
 
    */
@@ -1510,6 +1515,13 @@ TELECOM : 运营商三要素验证
 如果是 H5 开通链接，支持传 INSIGHT / TELECOM。默认值 WEIXINAPP / INSIGHT。
    */
   VerifyChannels?: Array<string>
+  /**
+   * 设置用户开通自动签时是否绑定个人自动签账号许可。一旦绑定后，将扣减购买的个人自动签账号许可一次（1年有效期），不可解绑释放。不传默认为绑定自动签账号许可。
+0-绑定个人自动签账号许可，开通后将扣减购买的个人自动签账号许可一次
+1-不绑定，发起合同时将按标准合同套餐进行扣减
+
+   */
+  LicenseType?: number
 }
 
 /**
@@ -1752,6 +1764,12 @@ export interface DescribeUserAutoSignStatusResponse {
 值为unix时间戳,单位为秒。
    */
   LicenseTo?: number
+  /**
+   * 设置用户开通自动签时是否绑定个人自动签账号许可。一旦绑定后，将扣减购买的个人自动签账号许可一次（1年有效期），不可解绑释放。不传默认为绑定自动签账号许可。
+0-绑定个人自动签账号许可，开通后将扣减购买的个人自动签账号许可一次
+1-不绑定，发起合同时将按标准合同套餐进行扣减
+   */
+  LicenseType?: number
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2167,7 +2185,7 @@ export interface UnbindEmployeeUserIdWithClientOpenIdRequest {
  */
 export interface CreateSchemeUrlResponse {
   /**
-   * 小程序链接地址，有效期30天
+   * 小程序链接地址，有效期90天。如果EndPoint是App，得到的链接Path如’weixin://dl/business/?t= *TICKET*‘，用于客户APP、小程序直接拉起电子签小程序；其他EndPoint得到的https链接如'https://essurl.cn/xxx'，点击链接会打开一个H5页面，然后拉起电子签小程序。
    */
   SchemeUrl?: string
   /**
@@ -4100,6 +4118,10 @@ export interface CreateWebThemeConfigRequest {
    * 主题配置
    */
   WebThemeConfig: WebThemeConfig
+  /**
+   * 代理企业和员工的信息。 在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。
+   */
+  Agent?: Agent
 }
 
 /**

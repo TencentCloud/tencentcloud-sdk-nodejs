@@ -158,6 +158,7 @@ import {
   AssociateConfigWithGroupResponse,
   UpdateRepositoryResponse,
   DisassociateKafkaConfigRequest,
+  TsfConfigCenter,
   RollbackConfigResponse,
   RevocationConfigRequest,
   StartContainerGroupResponse,

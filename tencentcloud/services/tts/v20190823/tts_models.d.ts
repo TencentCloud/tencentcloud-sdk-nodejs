@@ -39,7 +39,7 @@ export interface DescribeTtsTaskStatusResponse {
     /**
      * 任务状态返回
      */
-    Data: DescribeTtsTaskStatusRespData;
+    Data?: DescribeTtsTaskStatusRespData;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -61,23 +61,27 @@ export interface DescribeTtsTaskStatusRespData {
     /**
      * 任务标识。
      */
-    TaskId: string;
+    TaskId?: string;
     /**
      * 任务状态码，0：任务等待，1：任务执行中，2：任务成功，3：任务失败。
      */
-    Status: number;
+    Status?: number;
     /**
      * 任务状态，waiting：任务等待，doing：任务执行中，success：任务成功，failed：任务失败。
      */
-    StatusStr: string;
+    StatusStr?: string;
     /**
      * 合成音频COS地址（链接有效期1天）。
      */
-    ResultUrl: string;
+    ResultUrl?: string;
+    /**
+     * 时间戳信息，若未开启时间戳，则返回空数组。
+     */
+    Subtitles?: Array<Subtitle>;
     /**
      * 失败原因说明。
      */
-    ErrorMsg: string;
+    ErrorMsg?: string;
 }
 /**
  * 时间戳信息。
@@ -162,6 +166,10 @@ export interface CreateTtsTaskRequest {
      * 回调 URL，用户自行搭建的用于接收识别结果的服务URL。如果用户使用轮询方式获取识别结果，则无需提交该参数。[回调说明](https://cloud.tencent.com/document/product/1073/55746)
      */
     CallbackUrl?: string;
+    /**
+     * 是否开启时间戳功能，默认为false。
+     */
+    EnableSubtitle?: boolean;
     /**
      * 旁白与对白文本解析，分别合成相应风格（仅适用于旁对白音色10510000、100510000），默认 false
      */

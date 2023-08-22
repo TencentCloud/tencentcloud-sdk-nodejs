@@ -82,6 +82,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateAccessExport", req, cb);
     }
     /**
+     * 按照条件查询展示攻击总次数
+     */
+    async GetAttackTotalCount(req, cb) {
+        return this.request("GetAttackTotalCount", req, cb);
+    }
+    /**
      * 新版本CLS接口存在参数变化，query改成了query_string支持lucence语法接口搜索查询。
      */
     async SearchAttackLog(req, cb) {

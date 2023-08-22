@@ -684,7 +684,7 @@ export interface RoomItem {
    */
   RecordUrl?: string
   /**
-   * 最高房间内人数（包括老师），0表示不限制，默认为0
+   * 最高房间内人数（不包括老师），0表示不限制，默认为0
 注意：此字段可能返回 null，表示取不到有效值。
    */
   MaxMicNumber?: number
@@ -2014,6 +2014,26 @@ export interface EventDataInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   UserId?: string
+  /**
+   * 用户设备类型。0: Unknown; 1: Windows; 2: macOS; 3: Android; 4: iOS; 5: Web; 6: Mobile webpage; 7: Weixin Mini Program.
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Device?: number
+  /**
+   * 录制时长。单位：秒
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Duration?: number
+  /**
+   * 录制文件大小
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RecordSize?: number
+  /**
+   * 录制url
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RecordUrl?: string
 }
 
 /**

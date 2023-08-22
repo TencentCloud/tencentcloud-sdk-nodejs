@@ -19,6 +19,7 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   CostComponentSet,
+  DescribeDosageDetailByDateResponse,
   VoucherInfos,
   DescribeBillSummaryResponse,
   DescribeCostSummaryByProductRequest,
@@ -32,6 +33,7 @@ import {
   DetailPoint,
   CostDetail,
   DescribeBillSummaryByPayModeResponse,
+  SummaryTotal,
   BillResourceSummary,
   DescribeBillSummaryByTagRequest,
   Conditions,
@@ -49,7 +51,7 @@ import {
   RegionSummaryOverviewItem,
   DescribeCostSummaryByProductResponse,
   DescribeBillSummaryByTagResponse,
-  DescribeDosageDetailByDateResponse,
+  BillDetailAssociatedOrder,
   DescribeBillListResponse,
   DescribeAccountBalanceResponse,
   DescribeCostSummaryByRegionRequest,
@@ -76,7 +78,7 @@ import {
   PayDealsRequest,
   DescribeBillListRequest,
   PayDealsResponse,
-  SummaryTotal,
+  BillDetailComponentConfig,
   BillDetail,
   BusinessSummaryInfo,
   TagSummaryOverviewItem,

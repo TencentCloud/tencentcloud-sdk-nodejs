@@ -3232,6 +3232,37 @@ export interface DisassociateKafkaConfigRequest {
 }
 
 /**
+ * 配置中心
+ */
+export interface TsfConfigCenter {
+  /**
+   * 配置中心类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ConfigType?: string
+  /**
+   * 配置中心实例id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ConfigCenterInstanceId?: string
+  /**
+   * 配置中心实例名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ConfigCenterInstanceName?: string
+  /**
+   * 实例地域id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RegionId?: string
+  /**
+   * 命名空间id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NamespaceId?: string
+}
+
+/**
  * RollbackConfig返回参数结构体
  */
 export interface RollbackConfigResponse {
@@ -10211,87 +10242,95 @@ export interface ConfigReleaseLog {
    * 配置项发布日志ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ConfigReleaseLogId: string
+  ConfigReleaseLogId?: string
   /**
    * 配置项ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ConfigId: string
+  ConfigId?: string
   /**
    * 配置项名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ConfigName: string
+  ConfigName?: string
   /**
    * 配置项版本
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ConfigVersion: string
+  ConfigVersion?: string
   /**
    * 部署组ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  GroupId: string
+  GroupId?: string
   /**
    * 部署组名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  GroupName: string
+  GroupName?: string
   /**
    * 命名空间ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  NamespaceId: string
+  NamespaceId?: string
   /**
    * 命名空间名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  NamespaceName: string
+  NamespaceName?: string
   /**
    * 集群ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ClusterId: string
+  ClusterId?: string
   /**
    * 集群名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ClusterName: string
+  ClusterName?: string
   /**
    * 发布时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ReleaseTime: string
+  ReleaseTime?: string
   /**
    * 发布描述
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ReleaseDesc: string
+  ReleaseDesc?: string
   /**
    * 发布状态
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ReleaseStatus: string
+  ReleaseStatus?: string
   /**
    * 上次发布的配置项ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  LastConfigId: string
+  LastConfigId?: string
   /**
    * 上次发布的配置项名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  LastConfigName: string
+  LastConfigName?: string
   /**
    * 上次发布的配置项版本
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  LastConfigVersion: string
+  LastConfigVersion?: string
   /**
    * 回滚标识
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RollbackFlag: boolean
+  RollbackFlag?: boolean
+  /**
+   * 发布成功的配置中心
+ ALL/EXCLUSIVE/SHARE/NONE
+
+全部发布成功，独占发布成功，共享发布成功，全部发布失败
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ReleasedConfigCenter?: string
 }
 
 /**
@@ -13430,67 +13469,72 @@ export interface ConfigRelease {
    * 配置项发布ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ConfigReleaseId: string
+  ConfigReleaseId?: string
   /**
    * 配置项ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ConfigId: string
+  ConfigId?: string
   /**
    * 配置项名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ConfigName: string
+  ConfigName?: string
   /**
    * 配置项版本
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ConfigVersion: string
+  ConfigVersion?: string
   /**
    * 发布时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ReleaseTime: string
+  ReleaseTime?: string
   /**
    * 部署组ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  GroupId: string
+  GroupId?: string
   /**
    * 部署组名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  GroupName: string
+  GroupName?: string
   /**
    * 命名空间ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  NamespaceId: string
+  NamespaceId?: string
   /**
    * 命名空间名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  NamespaceName: string
+  NamespaceName?: string
   /**
    * 集群ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ClusterId: string
+  ClusterId?: string
   /**
    * 集群名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ClusterName: string
+  ClusterName?: string
   /**
    * 发布描述
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ReleaseDesc: string
+  ReleaseDesc?: string
   /**
    * 应用ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ApplicationId: string
+  ApplicationId?: string
+  /**
+   * 配置中心发布情况
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ConfigCenters?: Array<TsfConfigCenter>
 }
 
 /**

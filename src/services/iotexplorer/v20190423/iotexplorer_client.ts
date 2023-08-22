@@ -98,6 +98,7 @@ import {
   LoRaFrequencyEntry,
   ModifyTopicPolicyResponse,
   GetPositionSpaceListRequest,
+  ProductEntry,
   SearchTopicRuleResponse,
   DescribeFenceEventListResponse,
   UpdateDevicesEnableStateRequest,
@@ -165,7 +166,7 @@ import {
   GetFamilyDeviceUserListRequest,
   DescribeBindedProductsRequest,
   DescribeLoRaFrequencyResponse,
-  ProductEntry,
+  DescribeInstanceResponse,
   DescribeGatewaySubDeviceListResponse,
   DescribeSpaceFenceEventListRequest,
   GetLoRaGatewayListRequest,
@@ -173,6 +174,7 @@ import {
   DescribeProjectRequest,
   UnbindDevicesResponse,
   ModifyLoRaFrequencyRequest,
+  ModifyModelDefinitionResponse,
   UploadFirmwareResponse,
   ModifyTopicPolicyRequest,
   DeleteTopicRuleRequest,
@@ -189,7 +191,7 @@ import {
   DescribeStudioProductRequest,
   CreatePositionSpaceResponse,
   CreateBatchProductionResponse,
-  ModifyModelDefinitionResponse,
+  ModifyLoRaFrequencyResponse,
   DeletePositionFenceRequest,
   GetProjectListRequest,
   DeletePositionSpaceResponse,
@@ -227,7 +229,8 @@ import {
   GetBatchProductionsListRequest,
   DeleteDeviceResponse,
   DeviceInfo,
-  ModifyLoRaFrequencyResponse,
+  DescribeInstanceRequest,
+  InstanceDetail,
   ModifyLoRaGatewayRequest,
   ListEventHistoryResponse,
   GetBatchProductionsListResponse,
@@ -1053,6 +1056,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: GenSingleDeviceSignatureOfPublicResponse) => void
   ): Promise<GenSingleDeviceSignatureOfPublicResponse> {
     return this.request("GenSingleDeviceSignatureOfPublic", req, cb)
+  }
+
+  /**
+   * 公共实例过期时间 0001-01-01T00:00:00Z，公共实例是永久有效
+   */
+  async DescribeInstance(
+    req: DescribeInstanceRequest,
+    cb?: (error: string, rep: DescribeInstanceResponse) => void
+  ): Promise<DescribeInstanceResponse> {
+    return this.request("DescribeInstance", req, cb)
   }
 
   /**

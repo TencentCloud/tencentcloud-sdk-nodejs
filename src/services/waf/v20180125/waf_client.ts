@@ -85,6 +85,7 @@ import {
   PostAttackDownloadTaskRequest,
   ModifyCustomWhiteRuleResponse,
   DescribePolicyStatusRequest,
+  GetAttackTotalCountRequest,
   DescribeAccessFastAnalysisRequest,
   DeleteIpAccessControlRequest,
   AttackLogInfo,
@@ -120,6 +121,7 @@ import {
   CdcRegion,
   AccessValueInfo,
   DeleteIpAccessControlResponse,
+  GetAttackTotalCountResponse,
   AccessLogInfo,
   InstanceInfo,
   PortInfo,
@@ -268,6 +270,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateAccessExportResponse) => void
   ): Promise<CreateAccessExportResponse> {
     return this.request("CreateAccessExport", req, cb)
+  }
+
+  /**
+   * 按照条件查询展示攻击总次数
+   */
+  async GetAttackTotalCount(
+    req: GetAttackTotalCountRequest,
+    cb?: (error: string, rep: GetAttackTotalCountResponse) => void
+  ): Promise<GetAttackTotalCountResponse> {
+    return this.request("GetAttackTotalCount", req, cb)
   }
 
   /**

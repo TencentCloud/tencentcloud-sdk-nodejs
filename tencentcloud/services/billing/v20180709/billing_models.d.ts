@@ -52,6 +52,35 @@ export interface CostComponentSet {
     IncentivePayAmount: string;
 }
 /**
+ * DescribeDosageDetailByDate返回参数结构体
+ */
+export interface DescribeDosageDetailByDateResponse {
+    /**
+     * 计量单位
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Unit: string;
+    /**
+     * 用量数组
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DetailSets: Array<DetailSet>;
+    /**
+     * 错误码
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RetCode: number;
+    /**
+     * 错误信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RetMsg: string;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * 代金券相关信息
  */
 export interface VoucherInfos {
@@ -475,6 +504,21 @@ export interface DescribeBillSummaryByPayModeResponse {
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * 总数
+ */
+export interface SummaryTotal {
+    /**
+     * 优惠后总价
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RealTotalCost: string;
+    /**
+     * 原价，单位为元。TotalCost字段自账单3.0（即2021-05）之后开始生效，账单3.0之前返回"-"。合同价的情况下，TotalCost字段与官网价格存在差异，也返回“-”。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TotalCost: string;
 }
 /**
  * 账单资源汇总数据对象
@@ -1012,11 +1056,11 @@ export interface DescribeBillDetailRequest {
      */
     Month?: string;
     /**
-     * 周期开始时间，格式为yyyy-mm-dd hh:ii:ss，Month和BeginTime&EndTime必传一个，如果有该字段则Month字段无效。BeginTime和EndTime必须一起传。不能早于开通账单2.0的月份，最多可拉取18个月内的数据。(不支持跨月查询)
+     * 周期开始时间，格式为yyyy-mm-dd hh:ii:ss，Month和BeginTime&EndTime必传一个，如果有该字段则Month字段无效。BeginTime和EndTime必须一起传，且为相同月份，不支持跨月查询，查询结果是整月数据。不能早于开通账单2.0的月份，最多可拉取18个月内的数据。
      */
     BeginTime?: string;
     /**
-     * 周期结束时间，格式为yyyy-mm-dd hh:ii:ss，Month和BeginTime&EndTime必传一个，如果有该字段则Month字段无效。BeginTime和EndTime必须一起传。不能早于开通账单2.0的月份，最多可拉取18个月内的数据。（不支持跨月查询）
+     * 周期结束时间，格式为yyyy-mm-dd hh:ii:ss，Month和BeginTime&EndTime必传一个，如果有该字段则Month字段无效。BeginTime和EndTime必须一起传，且为相同月份，不支持跨月查询，查询结果是整月数据。不能早于开通账单2.0的月份，最多可拉取18个月内的数据。
      */
     EndTime?: string;
     /**
@@ -1029,7 +1073,7 @@ export interface DescribeBillDetailRequest {
      */
     ProductCode?: string;
     /**
-     * 付费模式 prePay/postPay
+     * 付费模式 prePay(表示包年包月)/postPay(表示按时按量)
      */
     PayMode?: string;
     /**
@@ -1241,33 +1285,39 @@ export interface DescribeBillSummaryByTagResponse {
     RequestId?: string;
 }
 /**
- * DescribeDosageDetailByDate返回参数结构体
+ * 明细账单关联单据信息
  */
-export interface DescribeDosageDetailByDateResponse {
+export interface BillDetailAssociatedOrder {
     /**
-     * 计量单位
+     * 新购订单
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Unit: string;
+    PrepayPurchase?: string;
     /**
-     * 用量数组
+     * 续费订单
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DetailSets: Array<DetailSet>;
+    PrepayRenew?: string;
     /**
-     * 错误码
+     * 升配订单
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    RetCode: number;
+    PrepayModifyUp?: string;
     /**
-     * 错误信息
+     * 冲销订单
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    RetMsg: string;
+    ReverseOrder?: string;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     * 优惠调整后订单
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    RequestId?: string;
+    NewOrder?: string;
+    /**
+     * 优惠调整前订单
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Original?: string;
 }
 /**
  * DescribeBillList返回参数结构体
@@ -1597,6 +1647,11 @@ export interface BillDetailComponent {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     BlendedDiscount?: string;
+    /**
+     * 配置描述：资源配置规格信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ComponentConfig?: Array<BillDetailComponentConfig>;
 }
 /**
  * 消耗费用趋势
@@ -2207,19 +2262,19 @@ export interface PayDealsResponse {
     RequestId?: string;
 }
 /**
- * 总数
+ * 明细账单配置描述结构
  */
-export interface SummaryTotal {
+export interface BillDetailComponentConfig {
     /**
-     * 优惠后总价
+     * 配置描述名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    RealTotalCost: string;
+    Name?: string;
     /**
-     * 原价，单位为元。TotalCost字段自账单3.0（即2021-05）之后开始生效，账单3.0之前返回"-"。合同价的情况下，TotalCost字段与官网价格存在差异，也返回“-”。
+     * 配置描述值
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TotalCost: string;
+    Value?: string;
 }
 /**
  * 账单明细数据对象
@@ -2228,109 +2283,124 @@ export interface BillDetail {
     /**
      * 产品名称：用户所采购的各类云产品，例如：云服务器 CVM
      */
-    BusinessCodeName: string;
+    BusinessCodeName?: string;
     /**
      * 子产品名称：用户采购的具体产品细分类型，例如：云服务器 CVM-标准型 S1
      */
-    ProductCodeName: string;
+    ProductCodeName?: string;
     /**
      * 计费模式：资源的计费模式，区分为包年包月和按量计费
      */
-    PayModeName: string;
+    PayModeName?: string;
     /**
      * 项目名称：资源归属的项目，用户在控制台给资源自主分配项目，未分配则是默认项目
      */
-    ProjectName: string;
+    ProjectName?: string;
     /**
      * 地域：资源所属地域，如华南地区（广州）
      */
-    RegionName: string;
+    RegionName?: string;
     /**
      * 可用区：资源所属可用区，如广州三区
      */
-    ZoneName: string;
+    ZoneName?: string;
     /**
      * 资源 ID：账单中出账对象 ID，不同产品因资源形态不同，资源内容不完全相同，如云服务器 CVM 为对应的实例 ID
      */
-    ResourceId: string;
+    ResourceId?: string;
     /**
      * 资源别名：用户在控制台为资源设置的名称，如果未设置，则默认为空
      */
-    ResourceName: string;
+    ResourceName?: string;
     /**
      * 交易类型，如包年包月新购、包年包月续费、按量计费扣费等类型
      */
-    ActionTypeName: string;
+    ActionTypeName?: string;
     /**
      * 订单ID：包年包月计费模式下订购的订单号
      */
-    OrderId: string;
+    OrderId?: string;
     /**
      * 交易ID：结算扣费单号
      */
-    BillId: string;
+    BillId?: string;
     /**
      * 扣费时间：结算扣费时间
      */
-    PayTime: string;
+    PayTime?: string;
     /**
      * 开始使用时间：产品服务开始使用时间
      */
-    FeeBeginTime: string;
+    FeeBeginTime?: string;
     /**
      * 结束使用时间：产品服务结束使用时间
      */
-    FeeEndTime: string;
+    FeeEndTime?: string;
     /**
      * 组件列表
      */
-    ComponentSet: Array<BillDetailComponent>;
+    ComponentSet?: Array<BillDetailComponent>;
     /**
      * 支付者UIN：支付者的账号 ID，账号 ID 是用户在腾讯云的唯一账号标识
      */
-    PayerUin: string;
+    PayerUin?: string;
     /**
      * 使用者UIN：实际使用资源的账号 ID
      */
-    OwnerUin: string;
+    OwnerUin?: string;
     /**
      * 操作者UIN：操作者账号 ID（预付费资源下单或后付费操作开通资源账号的 ID 或者角色 ID ）
      */
-    OperateUin: string;
+    OperateUin?: string;
     /**
      * 标签信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Tags: Array<BillTagInfo>;
+    Tags?: Array<BillTagInfo>;
     /**
      * 产品编码
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    BusinessCode: string;
+    BusinessCode?: string;
     /**
      * 子产品编码
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ProductCode: string;
+    ProductCode?: string;
     /**
      * 交易类型编码
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ActionType: string;
+    ActionType?: string;
     /**
      * 地域ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    RegionId: string;
+    RegionId?: string;
     /**
      * 项目ID
      */
-    ProjectId: number;
+    ProjectId?: number;
     /**
-     * 价格属性
+     * 价格属性：该组件除单价、时长外的其他影响折扣定价的属性信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
     PriceInfo?: Array<string>;
+    /**
+     * 关联交易单据ID：和本笔交易关联单据 ID，如，冲销订单，记录原订单、重结订单，退费单记录对应的原购买订单号
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AssociatedOrder?: BillDetailAssociatedOrder;
+    /**
+     * 计算说明：特殊交易类型计费结算的详细计算说明，如退费及变配
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Formula?: string;
+    /**
+     * 计费规则：各产品详细的计费规则官网说明链接
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    FormulaUrl?: string;
 }
 /**
  * 产品汇总信息

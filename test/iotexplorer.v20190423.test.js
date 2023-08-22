@@ -828,6 +828,16 @@ it("iotexplorer.v20190423.GenSingleDeviceSignatureOfPublic", async function () {
     }
 })
 
+it("iotexplorer.v20190423.DescribeInstance", async function () {
+    try {
+       const data = await client.DescribeInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotexplorer.v20190423.ModifyLoRaFrequency", async function () {
     try {
        const data = await client.ModifyLoRaFrequency({})

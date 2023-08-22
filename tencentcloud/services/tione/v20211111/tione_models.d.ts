@@ -1821,10 +1821,6 @@ export interface DescribeTrainingMetricsRequest {
  */
 export interface CreateNotebookImageRequest {
     /**
-     * 要保存的kernel数组
-     */
-    Kernels: Array<string>;
-    /**
      * 镜像信息
      */
     ImageInfo: ImageInfo;
@@ -1832,6 +1828,10 @@ export interface CreateNotebookImageRequest {
      * notebook id
      */
     NotebookId: string;
+    /**
+     * 要保存的kernel数组
+     */
+    Kernels?: Array<string>;
 }
 /**
  * 接口描述信息
@@ -3526,6 +3526,16 @@ export interface ImageInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     RegistryId?: string;
+    /**
+     * 是否允许导出全部内容
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AllowSaveAllContent?: boolean;
+    /**
+     * 镜像名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ImageName?: string;
 }
 /**
  * 推理服务在集群中的信息

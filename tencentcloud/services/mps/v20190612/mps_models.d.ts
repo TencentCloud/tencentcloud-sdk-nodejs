@@ -6152,6 +6152,27 @@ export interface StreamLinkRegionInfo {
     Regions: Array<RegionInfo>;
 }
 /**
+ * 直播 AI 打点识别结果
+ */
+export interface LiveStreamTagRecognitionResult {
+    /**
+     * 打点事件。
+     */
+    Id?: string;
+    /**
+     * 识别片段起始的 PTS 时间，单位：秒。
+     */
+    StartPtsTime?: number;
+    /**
+     * 识别片段终止的 PTS 时间，单位：秒。
+     */
+    EndPtsTime?: number;
+    /**
+     * 识别片段置信度。取值：0~100。
+     */
+    Confidence?: number;
+}
+/**
  * 流状态实时查询接口的RTP流状态信息
  */
 export interface FlowRealtimeStatusRTP {
@@ -9654,37 +9675,43 @@ export interface LiveStreamAiRecognitionResultItem {
   <li>AsrFullTextRecognition：语音全文识别，</li>
   <li>OcrFullTextRecognition：文本全文识别。</li>
   <li>TransTextRecognition：语音翻译。</li>
+  <li>TagRecognition：精彩打点。</li>
      */
-    Type: string;
+    Type?: string;
     /**
      * 人脸识别结果，当 Type 为
   FaceRecognition 时有效。
      */
-    FaceRecognitionResultSet: Array<LiveStreamFaceRecognitionResult>;
+    FaceRecognitionResultSet?: Array<LiveStreamFaceRecognitionResult>;
     /**
      * 语音关键词识别结果，当 Type 为
   AsrWordsRecognition 时有效。
      */
-    AsrWordsRecognitionResultSet: Array<LiveStreamAsrWordsRecognitionResult>;
+    AsrWordsRecognitionResultSet?: Array<LiveStreamAsrWordsRecognitionResult>;
     /**
      * 文本关键词识别结果，当 Type 为
   OcrWordsRecognition 时有效。
      */
-    OcrWordsRecognitionResultSet: Array<LiveStreamOcrWordsRecognitionResult>;
+    OcrWordsRecognitionResultSet?: Array<LiveStreamOcrWordsRecognitionResult>;
     /**
      * 语音全文识别结果，当 Type 为
   AsrFullTextRecognition 时有效。
      */
-    AsrFullTextRecognitionResultSet: Array<LiveStreamAsrFullTextRecognitionResult>;
+    AsrFullTextRecognitionResultSet?: Array<LiveStreamAsrFullTextRecognitionResult>;
     /**
      * 文本全文识别结果，当 Type 为
   OcrFullTextRecognition 时有效。
      */
-    OcrFullTextRecognitionResultSet: Array<LiveStreamOcrFullTextRecognitionResult>;
+    OcrFullTextRecognitionResultSet?: Array<LiveStreamOcrFullTextRecognitionResult>;
     /**
      * 翻译结果，当Type 为 TransTextRecognition 时有效。
      */
-    TransTextRecognitionResultSet: Array<LiveStreamTransTextRecognitionResult>;
+    TransTextRecognitionResultSet?: Array<LiveStreamTransTextRecognitionResult>;
+    /**
+     * 打点结果，当Type 为 TagRecognition 时有效。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TagRecognitionResultSet?: Array<LiveStreamTagRecognitionResult>;
 }
 /**
  * DeleteImageSpriteTemplate请求参数结构体
@@ -10779,7 +10806,8 @@ export interface AddOnSubtitle {
     /**
      * 插入形式，可选值：
   <li>subtitle-stream：插入字幕轨道</li>
-  <li>close-caption：编码到SEI帧</li>
+  <li>close-caption-708：CEA-708字幕编码到SEI帧</li>
+  <li>close-caption-608：CEA-608字幕编码到SEI帧</li>
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Type?: string;

@@ -334,7 +334,16 @@ export interface CreateTargetResponse {
 /**
  * CheckRule请求参数结构体
  */
-export declare type CheckRuleRequest = null;
+export interface CheckRuleRequest {
+    /**
+     * Event信息
+     */
+    Event: string;
+    /**
+     * EventPattern信息
+     */
+    EventPattern: string;
+}
 /**
  * GetRule返回参数结构体
  */

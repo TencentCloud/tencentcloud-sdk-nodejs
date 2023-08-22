@@ -1517,6 +1517,88 @@ export interface GetPositionSpaceListRequest {
     Limit: number;
 }
 /**
+ * 产品详情
+ */
+export interface ProductEntry {
+    /**
+     * 产品ID
+     */
+    ProductId: string;
+    /**
+     * 产品名称
+     */
+    ProductName: string;
+    /**
+     * 产品分组模板ID
+     */
+    CategoryId: number;
+    /**
+     * 加密类型。1表示证书认证，2表示秘钥认证，21表示TID认证-SE方式，22表示TID认证-软加固方式
+     */
+    EncryptionType: string;
+    /**
+     * 连接类型。如：
+  wifi、wifi-ble、cellular、5g、lorawan、ble、ethernet、wifi-ethernet、else、sub_zigbee、sub_ble、sub_433mhz、sub_else、sub_blemesh
+     */
+    NetType: string;
+    /**
+     * 数据协议 (1 使用物模型 2 为自定义类型)
+     */
+    DataProtocol: number;
+    /**
+     * 产品描述
+     */
+    ProductDesc: string;
+    /**
+     * 状态 如：all 全部, dev 开发中, audit 审核中 released 已发布
+     */
+    DevStatus: string;
+    /**
+     * 创建时间
+     */
+    CreateTime: number;
+    /**
+     * 更新时间
+     */
+    UpdateTime: number;
+    /**
+     * 区域
+     */
+    Region: string;
+    /**
+     * 产品类型。如： 0 普通产品 ， 5 网关产品
+     */
+    ProductType: number;
+    /**
+     * 项目ID
+     */
+    ProjectId: string;
+    /**
+     * 产品ModuleId
+     */
+    ModuleId: number;
+    /**
+     * 是否使用脚本进行二进制转json功能 可以取值 true / false
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    EnableProductScript: string;
+    /**
+     * 创建人 UinId
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CreateUserId: number;
+    /**
+     * 创建者昵称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CreatorNickName: string;
+    /**
+     * 绑定策略（1：强踢；2：非强踢；0：表示无意义）
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    BindStrategy: number;
+}
+/**
  * SearchTopicRule返回参数结构体
  */
 export interface SearchTopicRuleResponse {
@@ -2850,86 +2932,18 @@ export interface DescribeLoRaFrequencyResponse {
     RequestId?: string;
 }
 /**
- * 产品详情
+ * DescribeInstance返回参数结构体
  */
-export interface ProductEntry {
+export interface DescribeInstanceResponse {
     /**
-     * 产品ID
-     */
-    ProductId: string;
-    /**
-     * 产品名称
-     */
-    ProductName: string;
-    /**
-     * 产品分组模板ID
-     */
-    CategoryId: number;
-    /**
-     * 加密类型。1表示证书认证，2表示秘钥认证，21表示TID认证-SE方式，22表示TID认证-软加固方式
-     */
-    EncryptionType: string;
-    /**
-     * 连接类型。如：
-  wifi、wifi-ble、cellular、5g、lorawan、ble、ethernet、wifi-ethernet、else、sub_zigbee、sub_ble、sub_433mhz、sub_else、sub_blemesh
-     */
-    NetType: string;
-    /**
-     * 数据协议 (1 使用物模型 2 为自定义类型)
-     */
-    DataProtocol: number;
-    /**
-     * 产品描述
-     */
-    ProductDesc: string;
-    /**
-     * 状态 如：all 全部, dev 开发中, audit 审核中 released 已发布
-     */
-    DevStatus: string;
-    /**
-     * 创建时间
-     */
-    CreateTime: number;
-    /**
-     * 更新时间
-     */
-    UpdateTime: number;
-    /**
-     * 区域
-     */
-    Region: string;
-    /**
-     * 产品类型。如： 0 普通产品 ， 5 网关产品
-     */
-    ProductType: number;
-    /**
-     * 项目ID
-     */
-    ProjectId: string;
-    /**
-     * 产品ModuleId
-     */
-    ModuleId: number;
-    /**
-     * 是否使用脚本进行二进制转json功能 可以取值 true / false
+     * 实例信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    EnableProductScript: string;
+    Data: InstanceDetail;
     /**
-     * 创建人 UinId
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
-    CreateUserId: number;
-    /**
-     * 创建者昵称
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    CreatorNickName: string;
-    /**
-     * 绑定策略（1：强踢；2：非强踢；0：表示无意义）
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    BindStrategy: number;
+    RequestId?: string;
 }
 /**
  * DescribeGatewaySubDeviceList返回参数结构体
@@ -3075,6 +3089,15 @@ export interface ModifyLoRaFrequencyRequest {
      * 入网下行信道RX2
      */
     ChannelsJoinRX2?: Array<number>;
+}
+/**
+ * ModifyModelDefinition返回参数结构体
+ */
+export interface ModifyModelDefinitionResponse {
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * UploadFirmware返回参数结构体
@@ -3410,9 +3433,13 @@ export interface CreateBatchProductionResponse {
     RequestId?: string;
 }
 /**
- * ModifyModelDefinition返回参数结构体
+ * ModifyLoRaFrequency返回参数结构体
  */
-export interface ModifyModelDefinitionResponse {
+export interface ModifyLoRaFrequencyResponse {
+    /**
+     * 频点信息
+     */
+    Data: LoRaFrequencyEntry;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -4093,17 +4120,85 @@ export interface DeviceInfo {
     IsLora: boolean;
 }
 /**
- * ModifyLoRaFrequency返回参数结构体
+ * DescribeInstance请求参数结构体
  */
-export interface ModifyLoRaFrequencyResponse {
+export interface DescribeInstanceRequest {
     /**
-     * 频点信息
+     * 实例ID
      */
-    Data: LoRaFrequencyEntry;
+    InstanceId: string;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     * 附加查询返回包含字段值，不传返回0，有效值 ProductNum、ProjectNum、UsedDeviceNum、TotalDevice、ActivateDevice
      */
-    RequestId?: string;
+    Include?: Array<string>;
+    /**
+     * 项目ID
+     */
+    ProjectId?: string;
+    /**
+     * 产品ID，-1 代表全部产品
+     */
+    ProductId?: string;
+}
+/**
+ * 实例信息
+公共实例过期时间 0001-01-01T00:00:00Z，公共实例是永久有效
+ */
+export interface InstanceDetail {
+    /**
+     * 实例ID
+     */
+    InstanceId: string;
+    /**
+     * 实例类型（0 公共实例 1 标准企业实例 2专享企业实例）
+     */
+    InstanceType: number;
+    /**
+     * 地域字母缩写
+     */
+    Region: string;
+    /**
+     * 区域全拼
+     */
+    ZoneId: string;
+    /**
+     * 支持设备总数
+     */
+    TotalDeviceNum: number;
+    /**
+     * 以注册设备数
+     */
+    UsedDeviceNum: number;
+    /**
+     * 项目数
+     */
+    ProjectNum: number;
+    /**
+     * 产品数
+     */
+    ProductNum: number;
+    /**
+     * 创建时间
+     */
+    CreateTime: string;
+    /**
+     * 更新时间
+     */
+    UpdateTime: string;
+    /**
+     * 过期时间，公共实例过期时间 0001-01-01T00:00:00Z，公共实例是永久有效
+     */
+    ExpireTime: string;
+    /**
+     * 总设备数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TotalDevice: number;
+    /**
+     * 激活设备数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ActivateDevice: number;
 }
 /**
  * ModifyLoRaGateway请求参数结构体

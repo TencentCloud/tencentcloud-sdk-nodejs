@@ -328,6 +328,16 @@ it("scf.v20180416.ListLayerVersions", async function () {
     }
 })
 
+it("scf.v20180416.UpdateTrigger", async function () {
+    try {
+       const data = await client.UpdateTrigger({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("scf.v20180416.GetReservedConcurrencyConfig", async function () {
     try {
        const data = await client.GetReservedConcurrencyConfig({})

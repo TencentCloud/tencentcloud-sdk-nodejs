@@ -1315,67 +1315,67 @@ export interface Topic {
      * 最后一次间隔内发布消息的平均byte大小。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    AverageMsgSize: string;
+    AverageMsgSize?: string;
     /**
      * 消费者数量。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ConsumerCount: string;
+    ConsumerCount?: string;
     /**
      * 被记录下来的消息总数。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    LastConfirmedEntry: string;
+    LastConfirmedEntry?: string;
     /**
      * 最后一个ledger创建的时间。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    LastLedgerCreatedTimestamp: string;
+    LastLedgerCreatedTimestamp?: string;
     /**
      * 本地和复制的发布者每秒发布消息的速率。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    MsgRateIn: string;
+    MsgRateIn?: string;
     /**
      * 本地和复制的消费者每秒分发消息的数量之和。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    MsgRateOut: string;
+    MsgRateOut?: string;
     /**
      * 本地和复制的发布者每秒发布消息的byte。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    MsgThroughputIn: string;
+    MsgThroughputIn?: string;
     /**
      * 本地和复制的消费者每秒分发消息的byte。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    MsgThroughputOut: string;
+    MsgThroughputOut?: string;
     /**
      * 被记录下来的消息总数。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    NumberOfEntries: string;
+    NumberOfEntries?: string;
     /**
      * 分区数<=0：topic下无子分区。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Partitions: number;
+    Partitions?: number;
     /**
      * 生产者数量。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ProducerCount: string;
+    ProducerCount?: string;
     /**
      * 以byte计算的所有消息存储总量。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TotalSize: string;
+    TotalSize?: string;
     /**
      * 分区topic里面的子分区。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SubTopicSets: Array<PartitionsTopic>;
+    SubTopicSets?: Array<PartitionsTopic>;
     /**
      * topic类型描述：
   0：普通消息；
@@ -1386,42 +1386,42 @@ export interface Topic {
   5：事务消息。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TopicType: number;
+    TopicType?: number;
     /**
      * 环境（命名空间）名称。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    EnvironmentId: string;
+    EnvironmentId?: string;
     /**
      * 主题名称。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TopicName: string;
+    TopicName?: string;
     /**
      * 说明，128个字符以内。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Remark: string;
+    Remark?: string;
     /**
      * 创建时间。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CreateTime: string;
+    CreateTime?: string;
     /**
      * 最近修改时间。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    UpdateTime: string;
+    UpdateTime?: string;
     /**
      * 生产者上限。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ProducerLimit: string;
+    ProducerLimit?: string;
     /**
      * 消费者上限。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ConsumerLimit: string;
+    ConsumerLimit?: string;
     /**
      * 0: 非持久非分区
   1: 非持久分区
@@ -1429,7 +1429,13 @@ export interface Topic {
   3: 持久分区
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    PulsarTopicType: number;
+    PulsarTopicType?: number;
+    /**
+     * 未消费消息过期时间，单位：秒
+  
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MsgTTL?: number;
 }
 /**
  * RabbitMQ的vhost详情
@@ -2919,6 +2925,10 @@ export interface CreateTopicRequest {
   3: 持久分区
      */
     PulsarTopicType?: number;
+    /**
+     * 未消费消息过期时间，单位：秒，取值范围：60秒~15天。
+     */
+    MsgTTL?: number;
 }
 /**
  * DescribeTopics请求参数结构体
@@ -4326,11 +4336,11 @@ export interface ModifyTopicResponse {
     /**
      * 分区数
      */
-    Partitions: number;
+    Partitions?: number;
     /**
      * 备注，128字符以内。
      */
-    Remark: string;
+    Remark?: string;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -4781,6 +4791,11 @@ export interface ModifyTopicRequest {
      * Pulsar 集群的ID
      */
     ClusterId?: string;
+    /**
+     * 未消费消息过期时间，单位：秒，取值范围：60秒~15天。
+  
+     */
+    MsgTTL?: number;
 }
 /**
  * ResetMsgSubOffsetByTimestamp请求参数结构体

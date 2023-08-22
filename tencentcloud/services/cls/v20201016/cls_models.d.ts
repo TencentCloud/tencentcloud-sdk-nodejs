@@ -27,62 +27,68 @@ export interface AlarmInfo {
     /**
      * 告警策略名称。
      */
-    Name: string;
+    Name?: string;
     /**
      * 监控对象列表。
      */
-    AlarmTargets: Array<AlarmTargetInfo>;
+    AlarmTargets?: Array<AlarmTargetInfo>;
     /**
      * 监控任务运行时间点。
      */
-    MonitorTime: MonitorTime;
+    MonitorTime?: MonitorTime;
     /**
      * 触发条件。
      */
-    Condition: string;
+    Condition?: string;
     /**
      * 持续周期。持续满足触发条件TriggerCount个周期后，再进行告警；最小值为1，最大值为10。
      */
-    TriggerCount: number;
+    TriggerCount?: number;
     /**
      * 告警重复的周期。单位是min。取值范围是0~1440。
      */
-    AlarmPeriod: number;
+    AlarmPeriod?: number;
     /**
      * 关联的告警通知模板列表。
      */
-    AlarmNoticeIds: Array<string>;
+    AlarmNoticeIds?: Array<string>;
     /**
      * 开启状态。
      */
-    Status: boolean;
+    Status?: boolean;
     /**
      * 告警策略ID。
      */
-    AlarmId: string;
+    AlarmId?: string;
     /**
      * 创建时间。
      */
-    CreateTime: string;
+    CreateTime?: string;
     /**
      * 最近更新时间。
      */
-    UpdateTime: string;
+    UpdateTime?: string;
     /**
      * 自定义通知模板
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    MessageTemplate: string;
+    MessageTemplate?: string;
     /**
      * 自定义回调模板
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CallBack: CallBackInfo;
+    CallBack?: CallBackInfo;
     /**
      * 多维分析设置
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Analysis: Array<AnalysisDimensional>;
+    Analysis?: Array<AnalysisDimensional>;
+    /**
+     * 多触发条件。
+  
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MultiConditions?: Array<MultiCondition>;
 }
 /**
  * 日志结果信息
@@ -689,6 +695,11 @@ export interface ContainerStdoutInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     ExcludeLabels?: Array<string>;
+    /**
+     * metadata信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CustomLabels?: Array<string>;
 }
 /**
  * ModifyAlarm返回参数结构体
@@ -972,35 +983,35 @@ export interface AlarmTargetInfo {
     /**
      * 日志集ID。
      */
-    LogsetId: string;
+    LogsetId?: string;
     /**
      * 日志集名称。
      */
-    LogsetName: string;
+    LogsetName?: string;
     /**
      * 日志主题ID。
      */
-    TopicId: string;
+    TopicId?: string;
     /**
      * 日志主题名称。
      */
-    TopicName: string;
+    TopicName?: string;
     /**
      * 查询语句。
      */
-    Query: string;
+    Query?: string;
     /**
      * 告警对象序号。
      */
-    Number: number;
+    Number?: number;
     /**
      * 查询范围起始时间相对于告警执行时间的偏移，单位为分钟，取值为非正，最大值为0，最小值为-1440。
      */
-    StartTimeOffset: number;
+    StartTimeOffset?: number;
     /**
      * 查询范围终止时间相对于告警执行时间的偏移，单位为分钟，取值为非正，须大于StartTimeOffset，最大值为0，最小值为-1440。
      */
-    EndTimeOffset: number;
+    EndTimeOffset?: number;
 }
 /**
  * ScheduledSql的资源信息
@@ -1022,6 +1033,19 @@ export interface ScheduledSqlResouceInfo {
      * 指标名称
      */
     MetricName?: string;
+}
+/**
+ * 文件路径信息
+ */
+export interface FilePathInfo {
+    /**
+     * 文件路径
+     */
+    Path?: string;
+    /**
+     * 文件名称
+     */
+    File?: string;
 }
 /**
  * DescribeIndex请求参数结构体
@@ -1085,6 +1109,26 @@ export interface CreateLogsetResponse {
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * 通知规则
+ */
+export interface NoticeRule {
+    /**
+     * 告警通知模板接收者信息。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    NoticeReceivers?: Array<NoticeReceiver>;
+    /**
+     * 告警通知模板回调信息。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    WebCallbacks?: Array<WebCallback>;
+    /**
+     * 匹配规则。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Rule?: string;
 }
 /**
  * DeleteMachineGroup返回参数结构体
@@ -1632,8 +1676,27 @@ export interface ModifyAlarmRequest {
     MonitorTime?: MonitorTime;
     /**
      * 触发条件。
+  
+  注意:
+  - Condition和AlarmLevel是一组配置，MultiConditions是另一组配置，2组配置互斥。
      */
     Condition?: string;
+    /**
+     * 告警级别。
+  
+  0:警告(Warn);1:提醒(Info);2:紧急 (Critical)
+  
+  注意:
+  - Condition和AlarmLevel是一组配置，MultiConditions是另一组配置，2组配置互斥。
+     */
+    AlarmLevel?: number;
+    /**
+     * 多触发条件。
+  
+  注意:
+  - Condition和AlarmLevel是一组配置，MultiConditions是另一组配置，2组配置互斥。
+     */
+    MultiConditions?: Array<MultiCondition>;
     /**
      * 持续周期。持续满足触发条件TriggerCount个周期后，再进行告警；最小值为1，最大值为10。
      */
@@ -1720,6 +1783,15 @@ export interface ModifyAlarmNoticeRequest {
      * 接口回调信息（包括企业微信）。
      */
     WebCallbacks?: Array<WebCallback>;
+    /**
+     * 通知规则。
+  
+  注意:
+  
+  - Type、NoticeReceivers和WebCallbacks是一组配置，NoticeRules是另一组配置，2组配置互斥。
+  - 传其中一组数据，则另一组数据置空。
+     */
+    NoticeRules?: Array<NoticeRule>;
 }
 /**
  * Windows事件日志采集配置
@@ -1760,10 +1832,6 @@ export interface CreateAlarmRequest {
      */
     MonitorTime: MonitorTime;
     /**
-     * 触发条件。
-     */
-    Condition: string;
-    /**
      * 持续周期。持续满足触发条件TriggerCount个周期后，再进行告警；最小值为1，最大值为10。
      */
     TriggerCount: number;
@@ -1775,6 +1843,25 @@ export interface CreateAlarmRequest {
      * 关联的告警通知模板列表。
      */
     AlarmNoticeIds: Array<string>;
+    /**
+     * 触发条件。
+  
+   注意:
+  
+  - Condition和AlarmLevel是一组配置，MultiConditions是另一组配置，2组配置互斥。
+  
+     */
+    Condition?: string;
+    /**
+     * 多触发条件。
+  
+   注意:
+  - Condition和AlarmLevel是一组配置，MultiConditions是另一组配置，2组配置互斥。</li>
+  
+  
+  
+     */
+    MultiConditions?: Array<MultiCondition>;
     /**
      * 是否开启告警策略。默认值为true
      */
@@ -2474,32 +2561,39 @@ export interface DescribeExportsRequest {
 export interface AlarmTarget {
     /**
      * 日志主题ID。
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     TopicId: string;
     /**
      * 查询语句。
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     Query: string;
     /**
      * 告警对象序号；从1开始递增。
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     Number: number;
     /**
      * 查询范围起始时间相对于告警执行时间的偏移，单位为分钟，取值为非正，最大值为0，最小值为-1440。
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     StartTimeOffset: number;
     /**
      * 查询范围终止时间相对于告警执行时间的偏移，单位为分钟，取值为非正，须大于StartTimeOffset，最大值为0，最小值为-1440。
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     EndTimeOffset: number;
     /**
      * 日志集ID。
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     LogsetId: string;
     /**
      * 检索语法规则，默认值为0。
   0：Lucene语法，1：CQL语法。
   详细说明参见<a href="https://cloud.tencent.com/document/product/614/47044#RetrievesConditionalRules" target="_blank">检索条件语法规则</a>
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     SyntaxRule?: number;
 }
@@ -3410,10 +3504,12 @@ export interface DeleteIndexResponse {
 export interface AlarmAnalysisConfig {
     /**
      * 键
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     Key: string;
     /**
      * 值
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     Value: string;
 }
@@ -4213,6 +4309,11 @@ export interface AlarmNotice {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     UpdateTime?: string;
+    /**
+     * 通知规则。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    NoticeRules?: Array<NoticeRule>;
 }
 /**
  * ModifyConfig返回参数结构体
@@ -4869,6 +4970,22 @@ export interface DescribeMachinesRequest {
     GroupId: string;
 }
 /**
+ * 多触发条件。
+ */
+export interface MultiCondition {
+    /**
+     * 触发条件。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Condition?: string;
+    /**
+     * 告警级别。0:警告(Warn); 1:提醒(Info); 2:紧急 (Critical)。
+  <li> 不填则默认为0。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AlarmLevel?: number;
+}
+/**
  * DeleteAlarmNotice请求参数结构体
  */
 export interface DeleteAlarmNoticeRequest {
@@ -5180,6 +5297,10 @@ export interface ContainerFileInfo {
      */
     FilePattern: string;
     /**
+     * 日志文件信息
+     */
+    FilePaths?: Array<FilePathInfo>;
+    /**
      * pod标签信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
@@ -5199,6 +5320,11 @@ export interface ContainerFileInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     ExcludeLabels?: Array<string>;
+    /**
+     * metadata信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CustomLabels?: Array<string>;
 }
 /**
  * csv内容描述
@@ -5257,7 +5383,7 @@ export interface CreateAlarmNoticeRequest {
   <li> Recovery - 告警恢复
   <li> All - 告警触发和告警恢复
      */
-    Type: string;
+    Type?: string;
     /**
      * 通知接收对象。
      */
@@ -5266,6 +5392,16 @@ export interface CreateAlarmNoticeRequest {
      * 接口回调信息（包括企业微信）。
      */
     WebCallbacks?: Array<WebCallback>;
+    /**
+     * 通知规则。
+  
+   注意:
+  
+  - Type、NoticeReceivers和WebCallbacks是一组配置，NoticeRules是另一组配置，2组配置互斥。
+  
+  
+     */
+    NoticeRules?: Array<NoticeRule>;
 }
 /**
  * DescribeIndex返回参数结构体

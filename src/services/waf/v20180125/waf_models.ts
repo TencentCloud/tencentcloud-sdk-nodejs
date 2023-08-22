@@ -962,7 +962,7 @@ export interface ModifyCustomWhiteRuleRequest {
    */
   RuleName: string
   /**
-   * 放行时是否继续执行其它检查逻辑，继续执行地域封禁防护：geoip、继续执行CC策略防护：cc、继续执行WEB应用防护：owasp、继续执行AI引擎防护：ai、继续执行信息防泄漏防护：antileakage。如果多个勾选那么以,串接。
+   * 放行时是否继续执行其它检查逻辑，继续执行地域封禁防护：geoip、继续执行CC策略防护：cc、继续执行WEB应用防护：owasp、继续执行AI引擎防护：ai、继续执行信息防泄漏防护：antileakage。如果勾选多个，则以“，”串接。
    */
   Bypass: string
   /**
@@ -1202,119 +1202,119 @@ export interface DomainsPartInfo {
   /**
    * 是否开启httpRewrite
    */
-  HttpsRewrite: number
+  HttpsRewrite?: number
   /**
    * https回源端口
    */
-  HttpsUpstreamPort: string
+  HttpsUpstreamPort?: string
   /**
    * 是否是cdn
    */
-  IsCdn: number
+  IsCdn?: number
   /**
    * 是否开启gray
    */
-  IsGray: number
+  IsGray?: number
   /**
    * 是否是http2
    */
-  IsHttp2: number
+  IsHttp2?: number
   /**
    * 是否开启websocket
    */
-  IsWebsocket: number
+  IsWebsocket?: number
   /**
    * 负载均衡
    */
-  LoadBalance: number
+  LoadBalance?: number
   /**
    * 防御模式
    */
-  Mode: number
+  Mode?: number
   /**
    * 私钥
    */
-  PrivateKey: string
+  PrivateKey?: string
   /**
    * ssl id
    */
-  SSLId: string
+  SSLId?: string
   /**
    * 回源域名
    */
-  UpstreamDomain: string
+  UpstreamDomain?: string
   /**
    * 回源类型
    */
-  UpstreamType: number
+  UpstreamType?: number
   /**
    * 回源ip
    */
-  SrcList: Array<string>
+  SrcList?: Array<string>
   /**
    * 服务端口配置
    */
-  Ports: Array<PortInfo>
+  Ports?: Array<PortInfo>
   /**
    * 证书类型
    */
-  CertType: number
+  CertType?: number
   /**
    * 回源方式
    */
-  UpstreamScheme: string
+  UpstreamScheme?: string
   /**
    * 日志包
    */
-  Cls: number
+  Cls?: number
   /**
    * 一级cname
    */
-  Cname: string
+  Cname?: string
   /**
    * 是否长连接
    */
-  IsKeepAlive: number
+  IsKeepAlive?: number
   /**
    * 是否开启主动健康检测，1表示开启，0表示不开启
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ActiveCheck: number
+  ActiveCheck?: number
   /**
    * TLS版本信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TLSVersion: number
+  TLSVersion?: number
   /**
    * 加密套件信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Ciphers: Array<number>
+  Ciphers?: Array<number>
   /**
-   * 模版
+   * 模板
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CipherTemplate: number
-  /**
-   * 300s
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ProxyReadTimeout: number
+  CipherTemplate?: number
   /**
    * 300s
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ProxySendTimeout: number
+  ProxyReadTimeout?: number
+  /**
+   * 300s
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProxySendTimeout?: number
   /**
    * 0:关闭SNI；1:开启SNI，SNI=源请求host；2:开启SNI，SNI=修改为源站host；3：开启SNI，自定义host，SNI=SniHost；
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SniType: number
+  SniType?: number
   /**
    * SniType=3时，需要填此参数，表示自定义的host；
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SniHost: string
+  SniHost?: string
   /**
    * 无
 注意：此字段可能返回 null，表示取不到有效值。
@@ -1324,7 +1324,7 @@ export interface DomainsPartInfo {
    * IsCdn=3时，表示自定义header
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  IpHeaders: Array<string>
+  IpHeaders?: Array<string>
   /**
    * 0:关闭xff重置；1:开启xff重置
 注意：此字段可能返回 null，表示取不到有效值。
@@ -1542,7 +1542,7 @@ export interface CreateHostRequest {
  */
 export interface ModifyAreaBanStatusRequest {
   /**
-   * 修要修改的域名
+   * 需要修改的域名
    */
   Domain: string
   /**
@@ -1859,7 +1859,7 @@ export interface ModifyCustomWhiteRuleResponse {
   /**
    * 操作的状态码，如果所有的资源操作成功则返回的是成功的状态码，如果有资源操作失败则需要解析Message的内容来查看哪个资源失败
    */
-  Success: ResponseCode
+  Success?: ResponseCode
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1878,6 +1878,28 @@ export interface DescribePolicyStatusRequest {
    * clb-waf或者saas-waf
    */
   Edition: string
+}
+
+/**
+ * GetAttackTotalCount请求参数结构体
+ */
+export interface GetAttackTotalCountRequest {
+  /**
+   * 起始时间
+   */
+  StartTime: string
+  /**
+   * 结束时间
+   */
+  EndTime: string
+  /**
+   * 查询的域名，全部域名不指定
+   */
+  Domain: string
+  /**
+   * 查询条件，默认为""
+   */
+  QueryString: string
 }
 
 /**
@@ -2604,6 +2626,20 @@ export interface DeleteIpAccessControlResponse {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   FailedCount?: number
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * GetAttackTotalCount返回参数结构体
+ */
+export interface GetAttackTotalCountResponse {
+  /**
+   * 攻击总次数
+   */
+  TotalCount: number
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

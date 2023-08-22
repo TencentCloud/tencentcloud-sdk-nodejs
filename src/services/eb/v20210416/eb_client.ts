@@ -177,7 +177,7 @@ export class Client extends AbstractClient {
    * 检验规则
    */
   async CheckRule(
-    req?: CheckRuleRequest,
+    req: CheckRuleRequest,
     cb?: (error: string, rep: CheckRuleResponse) => void
   ): Promise<CheckRuleResponse> {
     return this.request("CheckRule", req, cb)
