@@ -642,31 +642,36 @@ export interface DescribeTemplateListResponse {
  */
 export interface TaskMonitor {
     /**
-     * 监控指标ID
+     * 演练监控指标ID
      */
-    TaskMonitorId: number;
+    TaskMonitorId?: number;
+    /**
+     * 监控指标ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MetricId?: number;
     /**
      * 监控指标对象类型ID
      */
-    TaskMonitorObjectTypeId: number;
+    TaskMonitorObjectTypeId?: number;
     /**
      * 指标名称
      */
-    MetricName: string;
+    MetricName?: string;
     /**
      * 实例ID列表
      */
-    InstancesIds: Array<string>;
+    InstancesIds?: Array<string>;
     /**
      * 中文指标
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    MetricChineseName: string;
+    MetricChineseName?: string;
     /**
      * 单位
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Unit: string;
+    Unit?: string;
 }
 /**
  * 展示标签列表
@@ -982,22 +987,27 @@ export interface DescribeTaskExecuteLogsResponse {
  */
 export interface TemplateMonitor {
     /**
-     * 监控指标ID
+     * pk
      */
-    MonitorId: number;
+    MonitorId?: number;
+    /**
+     * 监控指标ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MetricId?: number;
     /**
      * 监控指标对象类型ID
      */
-    ObjectTypeId: number;
+    ObjectTypeId?: number;
     /**
      * 指标名称
      */
-    MetricName: string;
+    MetricName?: string;
     /**
      * 中文指标
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    MetricChineseName: string;
+    MetricChineseName?: string;
 }
 /**
  * 任务分组

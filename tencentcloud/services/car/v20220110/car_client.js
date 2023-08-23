@@ -28,7 +28,7 @@ class Client extends abstract_client_1.AbstractClient {
         super("car.tencentcloudapi.com", "2022-01-10", clientConfig);
     }
     /**
-     * 申请并发
+     * 本接口用于申请并发。接口超时时间：20秒。
      */
     async ApplyConcurrent(req, cb) {
         return this.request("ApplyConcurrent", req, cb);
@@ -46,7 +46,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DestroySession", req, cb);
     }
     /**
-     * 创建会话
+     * 本接口用于创建会话。接口超时时间：5秒。
      */
     async CreateSession(req, cb) {
         return this.request("CreateSession", req, cb);

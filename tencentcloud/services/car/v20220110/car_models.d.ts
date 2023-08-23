@@ -98,6 +98,10 @@ export interface StartPublishStreamRequest {
      * 唯一用户身份标识，由业务方自定义，平台不予理解。（UserId将作为StreamId进行推流，比如绑定推流域名为abc.livepush.myqcloud.com，那么推流地址为rtmp://abc.livepush.myqcloud.com/live/UserId?txSecret=xxx&txTime=xxx）
      */
     UserId: string;
+    /**
+     * 推流参数，推流时携带自定义参数。
+     */
+    PublishStreamArgs?: string;
 }
 /**
  * CreateSession请求参数结构体
@@ -126,6 +130,9 @@ export interface CreateSessionRequest {
   如果请求的是多应用共享项目，此参数生效；
   如果请求的是关闭预启动的单应用独享项目，此参数生效；
   如果请求的是开启预启动的单应用独享项目，此参数失效。
+  
+  注意：在此参数生效的情况下，将会被追加到控制台应用或项目配置的启动参数的后面。
+  例如，对于某关闭预启动的单应用独享项目，若在控制台中项目配置的启动参数为bar=0，而ApplicationParameters参数为foo=1，则实际应用启动参数为bar=0 foo=1。
      */
     ApplicationParameters?: string;
     /**

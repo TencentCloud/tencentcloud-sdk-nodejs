@@ -211,12 +211,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDCDBInstanceDetail", req, cb);
     }
     /**
-     * 已废弃接口
-
-本接口（DescribeSqlLogs）用于获取实例SQL日志。
+     * 本接口（KillSession）用于杀死指定会话。
      */
-    async DescribeSqlLogs(req, cb) {
-        return this.request("DescribeSqlLogs", req, cb);
+    async KillSession(req, cb) {
+        return this.request("KillSession", req, cb);
     }
     /**
      * 本接口(DescribeDBLogFiles)用于获取数据库的各种日志列表，包括冷备、binlog、errlog和slowlog。
@@ -265,12 +263,6 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ModifyInstanceNetwork(req, cb) {
         return this.request("ModifyInstanceNetwork", req, cb);
-    }
-    /**
-     * 本接口（KillSession）用于杀死指定会话。
-     */
-    async KillSession(req, cb) {
-        return this.request("KillSession", req, cb);
     }
     /**
      * 本接口（OpenDBExtranetAccess）用于开通云数据库实例的外网访问。开通外网访问后，您可通过外网域名和端口访问实例，可使用查询实例列表接口获取外网域名和端口信息。

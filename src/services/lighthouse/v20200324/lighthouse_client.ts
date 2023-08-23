@@ -18,6 +18,7 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  RunDockerContainersRequest,
   DescribeDockerContainersRequest,
   AssociateInstancesKeyPairsResponse,
   DescribeInstancesTrafficPackagesRequest,
@@ -27,6 +28,7 @@ import {
   DescribeDiskBackupsRequest,
   DescribeInstancesDeniedActionsRequest,
   DeleteKeyPairsResponse,
+  DescribeFirewallTemplateRulesRequest,
   AttachCcnRequest,
   CreateInstancesRequest,
   DescribeZonesRequest,
@@ -44,24 +46,29 @@ import {
   ModifyInstancesAttributeRequest,
   DescribeDockerContainerDetailRequest,
   DescribeGeneralResourceQuotasRequest,
+  RestartDockerContainersRequest,
   DeleteKeyPairsRequest,
   RerunDockerContainerResponse,
   ResetInstanceBlueprint,
   DescribeBundlesResponse,
+  DeleteFirewallTemplateRulesResponse,
+  DescribeFirewallTemplatesRequest,
   ModifyInstancesBundleRequest,
   DeleteDiskBackupsRequest,
   InquirePriceRenewInstancesRequest,
   DiscountDetail,
   DescribeDiskConfigsRequest,
+  DescribeFirewallTemplateQuotaResponse,
   DescribeRegionsResponse,
+  DescribeFirewallTemplateApplyRecordsRequest,
   DescribeDiskBackupsResponse,
-  AssociateInstancesKeyPairsRequest,
+  AttachDisksRequest,
   ModifyDiskBackupsAttributeRequest,
   AttachCcnResponse,
   RebootInstancesRequest,
   ResetAttachCcnRequest,
   CreateDisksRequest,
-  AttachDisksRequest,
+  AssociateInstancesKeyPairsRequest,
   DockerContainer,
   ImportKeyPairResponse,
   DescribeSnapshotsRequest,
@@ -74,6 +81,8 @@ import {
   DescribeDockerContainerConfigurationRequest,
   ModifyBlueprintAttributeRequest,
   InquirePriceRenewDisksRequest,
+  TrafficPackage,
+  FirewallTemplateRuleInfo,
   Disk,
   ModifyFirewallRulesResponse,
   ZoneInfo,
@@ -89,7 +98,7 @@ import {
   InstanceTrafficPackage,
   SnapshotDeniedActions,
   TerminateInstancesResponse,
-  TrafficPackage,
+  FirewallTemplateApplyRecordDetail,
   DescribeInstancesDiskNumRequest,
   DetailPrice,
   StopDockerContainersResponse,
@@ -98,25 +107,29 @@ import {
   InstanceReturnable,
   DescribeInstancesDeniedActionsResponse,
   RestartDockerContainersResponse,
+  CreateFirewallTemplateRequest,
   RemoveDockerContainersRequest,
   RenewDisksRequest,
   ModifyDisksAttributeRequest,
   DescribeKeyPairsResponse,
-  RestartDockerContainersRequest,
+  FirewallTemplate,
   DescribeSnapshotsDeniedActionsResponse,
   DescribeScenesRequest,
-  StartInstancesRequest,
+  SoftwareDetail,
   DeleteDiskBackupsResponse,
   DeleteSnapshotsRequest,
   ModifyDisksRenewFlagResponse,
   ModifySnapshotAttributeRequest,
   DeleteSnapshotsResponse,
+  ReplaceFirewallTemplateRuleResponse,
   DescribeDisksResponse,
+  StartInstancesRequest,
   DescribeBundleDiscountResponse,
   DescribeAllScenesRequest,
   ModifyDisksRenewFlagRequest,
   StartDockerContainersResponse,
   DisassociateInstancesKeyPairsRequest,
+  DescribeFirewallTemplateQuotaRequest,
   DataDiskPrice,
   SceneInfo,
   ImportKeyPairRequest,
@@ -124,14 +137,18 @@ import {
   DeleteBlueprintsResponse,
   ModifyInstancesLoginKeyPairAttributeRequest,
   IsolateInstancesRequest,
-  StopInstancesResponse,
+  DeleteFirewallTemplateResponse,
   CreateInstancesResponse,
   ModifyBlueprintAttributeResponse,
+  ModifyFirewallTemplateRequest,
   StopDockerContainersRequest,
   DescribeModifyInstanceBundlesRequest,
   DescribeRegionsRequest,
+  InstanceIdentifier,
   DescribeInstancesDiskNumResponse,
   InquirePriceCreateBlueprintResponse,
+  ResetFirewallTemplateRulesRequest,
+  ModifyFirewallTemplateResponse,
   DescribeInstancesReturnableRequest,
   DiskReturnable,
   DescribeBlueprintsResponse,
@@ -149,7 +166,8 @@ import {
   CreateKeyPairResponse,
   DescribeInstanceVncUrlResponse,
   DescribeDockerActivitiesResponse,
-  DiskPrice,
+  DescribeFirewallTemplateRuleQuotaRequest,
+  CreateFirewallTemplateResponse,
   DescribeCcnAttachedInstancesResponse,
   DescribeBundlesRequest,
   Blueprint,
@@ -164,18 +182,24 @@ import {
   CreateDiskBackupResponse,
   DescribeSnapshotsDeniedActionsRequest,
   DescribeDiskDiscountResponse,
+  CreateFirewallTemplateRulesResponse,
   ModifyDockerContainerRequest,
   DiskChargePrepaid,
   RunDockerContainersResponse,
   CreateKeyPairRequest,
+  StopInstancesResponse,
   ResetInstancesPasswordRequest,
+  DiskPrice,
   DescribeInstancesRequest,
+  DescribeFirewallTemplateRuleQuotaResponse,
   DetachCcnRequest,
   RenameDockerContainerResponse,
   DockerActivity,
+  DescribeFirewallTemplateApplyRecordsResponse,
   Filter,
   DescribeSnapshotsResponse,
   Snapshot,
+  ApplyFirewallTemplateRequest,
   ModifyFirewallRuleDescriptionResponse,
   DescribeDiskDiscountRequest,
   CreateDisksResponse,
@@ -195,6 +219,7 @@ import {
   DescribeInstancesResponse,
   DescribeZonesResponse,
   CreateBlueprintResponse,
+  DescribeFirewallTemplatesResponse,
   PolicyDetail,
   DetachDisksResponse,
   LoginConfiguration,
@@ -208,28 +233,33 @@ import {
   TerminateInstancesRequest,
   RenewDiskChargePrepaid,
   SystemDisk,
+  ApplyFirewallTemplateResponse,
   TerminateDisksRequest,
+  RenewDisksResponse,
   ResetInstanceRequest,
   DescribeDiskConfigsResponse,
-  RenewDisksResponse,
+  CreateFirewallTemplateRulesRequest,
   InternetAccessible,
+  ReplaceFirewallTemplateRuleRequest,
   InstancePriceDetail,
   DescribeDockerContainersResponse,
   ModifyDockerContainerResponse,
   DescribeDiskBackupsDeniedActionsResponse,
   DescribeInstanceLoginKeyPairAttributeRequest,
+  FirewallTemplateApplyRecord,
   DescribeDockerContainerDetailResponse,
   DescribeBundleDiscountRequest,
-  Price,
+  DescribeFirewallTemplateRulesResponse,
   DescribeDisksReturnableResponse,
   ModifyDiskBackupsAttributeResponse,
+  DeleteFirewallTemplateRequest,
   IsolateDisksRequest,
   CreateInstanceSnapshotResponse,
   ModifyInstancesBundleResponse,
   GeneralResourceQuota,
   DescribeResetInstanceBlueprintsResponse,
   DescribeDisksReturnableRequest,
-  SoftwareDetail,
+  ResetFirewallTemplateRulesResponse,
   AutoMountConfiguration,
   InstancePrice,
   Tag,
@@ -245,7 +275,7 @@ import {
   ResetInstanceResponse,
   IsolateDisksResponse,
   DescribeFirewallRulesRequest,
-  RunDockerContainersRequest,
+  FirewallTemplateRule,
   DiskDeniedActions,
   InquirePriceCreateInstancesRequest,
   Scene,
@@ -258,7 +288,9 @@ import {
   InquirePriceCreateDisksResponse,
   InstanceChargePrepaid,
   ModifyInstancesAttributeResponse,
+  Price,
   DescribeInstanceLoginKeyPairAttributeResponse,
+  DeleteFirewallTemplateRulesRequest,
 } from "./lighthouse_models"
 
 /**
@@ -268,6 +300,16 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("lighthouse.tencentcloudapi.com", "2020-03-24", clientConfig)
+  }
+
+  /**
+   * 本接口 (ModifyFirewallTemplate) 用于修改防火墙模板。
+   */
+  async ModifyFirewallTemplate(
+    req: ModifyFirewallTemplateRequest,
+    cb?: (error: string, rep: ModifyFirewallTemplateResponse) => void
+  ): Promise<ModifyFirewallTemplateResponse> {
+    return this.request("ModifyFirewallTemplate", req, cb)
   }
 
   /**
@@ -417,6 +459,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口 (DescribeFirewallTemplateRules) 用于查询防火墙模板规则列表。
+   */
+  async DescribeFirewallTemplateRules(
+    req: DescribeFirewallTemplateRulesRequest,
+    cb?: (error: string, rep: DescribeFirewallTemplateRulesResponse) => void
+  ): Promise<DescribeFirewallTemplateRulesResponse> {
+    return this.request("DescribeFirewallTemplateRules", req, cb)
+  }
+
+  /**
    * 本接口 (ModifyDiskBackupsAttribute) 用于修改云硬盘备份点属性。
    */
   async ModifyDiskBackupsAttribute(
@@ -530,6 +582,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口 (DescribeFirewallTemplateQuota) 用于查询防火墙模板配额。
+   */
+  async DescribeFirewallTemplateQuota(
+    req?: DescribeFirewallTemplateQuotaRequest,
+    cb?: (error: string, rep: DescribeFirewallTemplateQuotaResponse) => void
+  ): Promise<DescribeFirewallTemplateQuotaResponse> {
+    return this.request("DescribeFirewallTemplateQuota", req, cb)
+  }
+
+  /**
    * 本接口(DescribeAllScenes)用于查询全地域使用场景列表。
    */
   async DescribeAllScenes(
@@ -537,6 +599,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAllScenesResponse) => void
   ): Promise<DescribeAllScenesResponse> {
     return this.request("DescribeAllScenes", req, cb)
+  }
+
+  /**
+   * 本接口 (CreateFirewallTemplate) 用于创建防火墙模板。
+   */
+  async CreateFirewallTemplate(
+    req: CreateFirewallTemplateRequest,
+    cb?: (error: string, rep: CreateFirewallTemplateResponse) => void
+  ): Promise<CreateFirewallTemplateResponse> {
+    return this.request("CreateFirewallTemplate", req, cb)
   }
 
   /**
@@ -574,6 +646,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: AssociateInstancesKeyPairsResponse) => void
   ): Promise<AssociateInstancesKeyPairsResponse> {
     return this.request("AssociateInstancesKeyPairs", req, cb)
+  }
+
+  /**
+   * 本接口 (DeleteFirewallTemplate) 用于删除防火墙模板。
+   */
+  async DeleteFirewallTemplate(
+    req: DeleteFirewallTemplateRequest,
+    cb?: (error: string, rep: DeleteFirewallTemplateResponse) => void
+  ): Promise<DeleteFirewallTemplateResponse> {
+    return this.request("DeleteFirewallTemplate", req, cb)
   }
 
   /**
@@ -624,13 +706,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（CreateInstanceSnapshot）用于创建指定实例的系统盘快照。
+   * 本接口（DescribeInstancesDeniedActions）用于查询一个或多个实例的操作限制列表信息。
    */
-  async CreateInstanceSnapshot(
-    req: CreateInstanceSnapshotRequest,
-    cb?: (error: string, rep: CreateInstanceSnapshotResponse) => void
-  ): Promise<CreateInstanceSnapshotResponse> {
-    return this.request("CreateInstanceSnapshot", req, cb)
+  async DescribeInstancesDeniedActions(
+    req: DescribeInstancesDeniedActionsRequest,
+    cb?: (error: string, rep: DescribeInstancesDeniedActionsResponse) => void
+  ): Promise<DescribeInstancesDeniedActionsResponse> {
+    return this.request("DescribeInstancesDeniedActions", req, cb)
   }
 
   /**
@@ -644,13 +726,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（DescribeInstancesDeniedActions）用于查询一个或多个实例的操作限制列表信息。
+   * 本接口（CreateInstanceSnapshot）用于创建指定实例的系统盘快照。
    */
-  async DescribeInstancesDeniedActions(
-    req: DescribeInstancesDeniedActionsRequest,
-    cb?: (error: string, rep: DescribeInstancesDeniedActionsResponse) => void
-  ): Promise<DescribeInstancesDeniedActionsResponse> {
-    return this.request("DescribeInstancesDeniedActions", req, cb)
+  async CreateInstanceSnapshot(
+    req: CreateInstanceSnapshotRequest,
+    cb?: (error: string, rep: CreateInstanceSnapshotResponse) => void
+  ): Promise<CreateInstanceSnapshotResponse> {
+    return this.request("CreateInstanceSnapshot", req, cb)
   }
 
   /**
@@ -715,13 +797,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口 (ResetAttachCcn) 用于关联云联网实例申请过期时，重新申请关联操作。
+   * 本接口 (CreateFirewallTemplateRules) 用于创建防火墙模板规则。
    */
-  async ResetAttachCcn(
-    req: ResetAttachCcnRequest,
-    cb?: (error: string, rep: ResetAttachCcnResponse) => void
-  ): Promise<ResetAttachCcnResponse> {
-    return this.request("ResetAttachCcn", req, cb)
+  async CreateFirewallTemplateRules(
+    req: CreateFirewallTemplateRulesRequest,
+    cb?: (error: string, rep: CreateFirewallTemplateRulesResponse) => void
+  ): Promise<CreateFirewallTemplateRulesResponse> {
+    return this.request("CreateFirewallTemplateRules", req, cb)
   }
 
   /**
@@ -907,6 +989,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口 (ApplyFirewallTemplate) 用于应用防火墙模板到多个实例。
+   */
+  async ApplyFirewallTemplate(
+    req: ApplyFirewallTemplateRequest,
+    cb?: (error: string, rep: ApplyFirewallTemplateResponse) => void
+  ): Promise<ApplyFirewallTemplateResponse> {
+    return this.request("ApplyFirewallTemplate", req, cb)
+  }
+
+  /**
    * 本接口（DescribeSnapshots）用于查询快照的详细信息。
    */
   async DescribeSnapshots(
@@ -924,6 +1016,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDiskBackupsDeniedActionsResponse) => void
   ): Promise<DescribeDiskBackupsDeniedActionsResponse> {
     return this.request("DescribeDiskBackupsDeniedActions", req, cb)
+  }
+
+  /**
+   * 创建并运行多个Docker容器，之后可以通过返回的ActivityIds调用DescribeDockerActivities接口查询创建情况。
+   */
+  async RunDockerContainers(
+    req: RunDockerContainersRequest,
+    cb?: (error: string, rep: RunDockerContainersResponse) => void
+  ): Promise<RunDockerContainersResponse> {
+    return this.request("RunDockerContainers", req, cb)
   }
 
   /**
@@ -1001,6 +1103,16 @@ https://img.qcloud.com/qcloud/app/active_vnc/index.html?InstanceVncUrl=wss%3A%2F
     cb?: (error: string, rep: ModifyFirewallRuleDescriptionResponse) => void
   ): Promise<ModifyFirewallRuleDescriptionResponse> {
     return this.request("ModifyFirewallRuleDescription", req, cb)
+  }
+
+  /**
+   * 本接口 (ResetAttachCcn) 用于关联云联网实例申请过期时，重新申请关联操作。
+   */
+  async ResetAttachCcn(
+    req: ResetAttachCcnRequest,
+    cb?: (error: string, rep: ResetAttachCcnResponse) => void
+  ): Promise<ResetAttachCcnResponse> {
+    return this.request("ResetAttachCcn", req, cb)
   }
 
   /**
@@ -1082,13 +1194,23 @@ https://img.qcloud.com/qcloud/app/active_vnc/index.html?InstanceVncUrl=wss%3A%2F
   }
 
   /**
-   * 创建并运行多个Docker容器，之后可以通过返回的ActivityIds调用DescribeDockerActivities接口查询创建情况。
+   * 本接口 (DeleteFirewallTemplateRules) 用于删除防火墙模板规则。
    */
-  async RunDockerContainers(
-    req: RunDockerContainersRequest,
-    cb?: (error: string, rep: RunDockerContainersResponse) => void
-  ): Promise<RunDockerContainersResponse> {
-    return this.request("RunDockerContainers", req, cb)
+  async DeleteFirewallTemplateRules(
+    req: DeleteFirewallTemplateRulesRequest,
+    cb?: (error: string, rep: DeleteFirewallTemplateRulesResponse) => void
+  ): Promise<DeleteFirewallTemplateRulesResponse> {
+    return this.request("DeleteFirewallTemplateRules", req, cb)
+  }
+
+  /**
+   * 本接口 (DescribeFirewallTemplateRuleQuota) 用于查询防火墙模板规则配额。
+   */
+  async DescribeFirewallTemplateRuleQuota(
+    req: DescribeFirewallTemplateRuleQuotaRequest,
+    cb?: (error: string, rep: DescribeFirewallTemplateRuleQuotaResponse) => void
+  ): Promise<DescribeFirewallTemplateRuleQuotaResponse> {
+    return this.request("DescribeFirewallTemplateRuleQuota", req, cb)
   }
 
   /**
@@ -1247,6 +1369,26 @@ https://img.qcloud.com/qcloud/app/active_vnc/index.html?InstanceVncUrl=wss%3A%2F
   }
 
   /**
+   * 本接口 (DescribeFirewallTemplateApplyRecords) 用于查询防火墙模板应用记录列表。
+   */
+  async DescribeFirewallTemplateApplyRecords(
+    req: DescribeFirewallTemplateApplyRecordsRequest,
+    cb?: (error: string, rep: DescribeFirewallTemplateApplyRecordsResponse) => void
+  ): Promise<DescribeFirewallTemplateApplyRecordsResponse> {
+    return this.request("DescribeFirewallTemplateApplyRecords", req, cb)
+  }
+
+  /**
+   * 本接口 (ResetFirewallTemplateRules) 用于重置防火墙模板下所有规则。
+   */
+  async ResetFirewallTemplateRules(
+    req: ResetFirewallTemplateRulesRequest,
+    cb?: (error: string, rep: ResetFirewallTemplateRulesResponse) => void
+  ): Promise<ResetFirewallTemplateRulesResponse> {
+    return this.request("ResetFirewallTemplateRules", req, cb)
+  }
+
+  /**
    * 本接口（DescribeResetInstanceBlueprints）查询重置实例的镜像信息。
    */
   async DescribeResetInstanceBlueprints(
@@ -1324,5 +1466,25 @@ https://img.qcloud.com/qcloud/app/active_vnc/index.html?InstanceVncUrl=wss%3A%2F
     cb?: (error: string, rep: CreateInstancesResponse) => void
   ): Promise<CreateInstancesResponse> {
     return this.request("CreateInstances", req, cb)
+  }
+
+  /**
+   * 本接口 (ReplaceFirewallTemplateRules) 用于替换防火墙模板规则。
+   */
+  async ReplaceFirewallTemplateRule(
+    req: ReplaceFirewallTemplateRuleRequest,
+    cb?: (error: string, rep: ReplaceFirewallTemplateRuleResponse) => void
+  ): Promise<ReplaceFirewallTemplateRuleResponse> {
+    return this.request("ReplaceFirewallTemplateRule", req, cb)
+  }
+
+  /**
+   * 本接口 (DescribeFirewallTemplates) 用于查询防火墙模板列表。
+   */
+  async DescribeFirewallTemplates(
+    req: DescribeFirewallTemplatesRequest,
+    cb?: (error: string, rep: DescribeFirewallTemplatesResponse) => void
+  ): Promise<DescribeFirewallTemplatesResponse> {
+    return this.request("DescribeFirewallTemplates", req, cb)
   }
 }

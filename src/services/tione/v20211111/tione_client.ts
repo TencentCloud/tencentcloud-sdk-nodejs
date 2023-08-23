@@ -101,6 +101,7 @@ import {
   Option,
   DescribeNotebookImageRecordsRequest,
   StopCreatingImageRequest,
+  SSHConfig,
   Choice,
   ResourceGroup,
   DescribeBatchTaskInstancesRequest,

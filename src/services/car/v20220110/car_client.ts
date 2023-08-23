@@ -40,7 +40,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 申请并发
+   * 本接口用于申请并发。接口超时时间：20秒。
    */
   async ApplyConcurrent(
     req: ApplyConcurrentRequest,
@@ -70,7 +70,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建会话
+   * 本接口用于创建会话。接口超时时间：5秒。
    */
   async CreateSession(
     req: CreateSessionRequest,

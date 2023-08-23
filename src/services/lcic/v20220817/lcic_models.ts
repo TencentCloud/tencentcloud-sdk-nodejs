@@ -2522,6 +2522,10 @@ video 纯视频
    * 房间类型: 0 小班课（默认值）; 1 大班课; 2 1V1 (后续扩展)
    */
   RoomType?: number
+  /**
+   * 录制模板。仅可修改还未开始的房间。录制模板枚举值参考：https://cloud.tencent.com/document/product/1639/89744
+   */
+  RecordLayout?: number
 }
 
 /**

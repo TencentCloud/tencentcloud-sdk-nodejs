@@ -81,6 +81,7 @@ export { dnspod } from "./dnspod";
 export { domain } from "./domain";
 export { drm } from "./drm";
 export { ds } from "./ds";
+export { dsgc } from "./dsgc";
 export { dtf } from "./dtf";
 export { dts } from "./dts";
 export { eb } from "./eb";

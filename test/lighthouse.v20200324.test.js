@@ -18,6 +18,16 @@ const client = new tencentcloud.lighthouse.v20200324.Client({
 })
 describe("lighthouse.v20200324.test.js", function () {
 
+it("lighthouse.v20200324.ModifyFirewallTemplate", async function () {
+    try {
+       const data = await client.ModifyFirewallTemplate({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("lighthouse.v20200324.DeleteBlueprints", async function () {
     try {
        const data = await client.DeleteBlueprints({})
@@ -148,6 +158,16 @@ it("lighthouse.v20200324.RestartDockerContainers", async function () {
     }
 })
 
+it("lighthouse.v20200324.DescribeFirewallTemplateRules", async function () {
+    try {
+       const data = await client.DescribeFirewallTemplateRules({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("lighthouse.v20200324.ModifyDiskBackupsAttribute", async function () {
     try {
        const data = await client.ModifyDiskBackupsAttribute({})
@@ -248,9 +268,29 @@ it("lighthouse.v20200324.DescribeDiskDiscount", async function () {
     }
 })
 
+it("lighthouse.v20200324.DescribeFirewallTemplateQuota", async function () {
+    try {
+       const data = await client.DescribeFirewallTemplateQuota({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("lighthouse.v20200324.DescribeAllScenes", async function () {
     try {
        const data = await client.DescribeAllScenes({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("lighthouse.v20200324.CreateFirewallTemplate", async function () {
+    try {
+       const data = await client.CreateFirewallTemplate({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -281,6 +321,16 @@ it("lighthouse.v20200324.DeleteDiskBackups", async function () {
 it("lighthouse.v20200324.AssociateInstancesKeyPairs", async function () {
     try {
        const data = await client.AssociateInstancesKeyPairs({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("lighthouse.v20200324.DeleteFirewallTemplate", async function () {
+    try {
+       const data = await client.DeleteFirewallTemplate({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -328,9 +378,9 @@ it("lighthouse.v20200324.DescribeInstanceLoginKeyPairAttribute", async function 
     }
 })
 
-it("lighthouse.v20200324.CreateInstanceSnapshot", async function () {
+it("lighthouse.v20200324.DescribeInstancesDeniedActions", async function () {
     try {
-       const data = await client.CreateInstanceSnapshot({})
+       const data = await client.DescribeInstancesDeniedActions({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -348,9 +398,9 @@ it("lighthouse.v20200324.InquirePriceCreateInstances", async function () {
     }
 })
 
-it("lighthouse.v20200324.DescribeInstancesDeniedActions", async function () {
+it("lighthouse.v20200324.CreateInstanceSnapshot", async function () {
     try {
-       const data = await client.DescribeInstancesDeniedActions({})
+       const data = await client.CreateInstanceSnapshot({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -418,9 +468,9 @@ it("lighthouse.v20200324.TerminateDisks", async function () {
     }
 })
 
-it("lighthouse.v20200324.ResetAttachCcn", async function () {
+it("lighthouse.v20200324.CreateFirewallTemplateRules", async function () {
     try {
-       const data = await client.ResetAttachCcn({})
+       const data = await client.CreateFirewallTemplateRules({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -598,6 +648,16 @@ it("lighthouse.v20200324.CreateDisks", async function () {
     }
 })
 
+it("lighthouse.v20200324.ApplyFirewallTemplate", async function () {
+    try {
+       const data = await client.ApplyFirewallTemplate({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("lighthouse.v20200324.DescribeSnapshots", async function () {
     try {
        const data = await client.DescribeSnapshots({})
@@ -611,6 +671,16 @@ it("lighthouse.v20200324.DescribeSnapshots", async function () {
 it("lighthouse.v20200324.DescribeDiskBackupsDeniedActions", async function () {
     try {
        const data = await client.DescribeDiskBackupsDeniedActions({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("lighthouse.v20200324.RunDockerContainers", async function () {
+    try {
+       const data = await client.RunDockerContainers({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -661,6 +731,16 @@ it("lighthouse.v20200324.DescribeDiskConfigs", async function () {
 it("lighthouse.v20200324.ModifyFirewallRuleDescription", async function () {
     try {
        const data = await client.ModifyFirewallRuleDescription({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("lighthouse.v20200324.ResetAttachCcn", async function () {
+    try {
+       const data = await client.ResetAttachCcn({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -728,9 +808,19 @@ it("lighthouse.v20200324.DescribeInstancesDiskNum", async function () {
     }
 })
 
-it("lighthouse.v20200324.RunDockerContainers", async function () {
+it("lighthouse.v20200324.DeleteFirewallTemplateRules", async function () {
     try {
-       const data = await client.RunDockerContainers({})
+       const data = await client.DeleteFirewallTemplateRules({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("lighthouse.v20200324.DescribeFirewallTemplateRuleQuota", async function () {
+    try {
+       const data = await client.DescribeFirewallTemplateRuleQuota({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -868,6 +958,26 @@ it("lighthouse.v20200324.DeleteSnapshots", async function () {
     }
 })
 
+it("lighthouse.v20200324.DescribeFirewallTemplateApplyRecords", async function () {
+    try {
+       const data = await client.DescribeFirewallTemplateApplyRecords({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("lighthouse.v20200324.ResetFirewallTemplateRules", async function () {
+    try {
+       const data = await client.ResetFirewallTemplateRules({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("lighthouse.v20200324.DescribeResetInstanceBlueprints", async function () {
     try {
        const data = await client.DescribeResetInstanceBlueprints({})
@@ -931,6 +1041,26 @@ it("lighthouse.v20200324.DescribeScenes", async function () {
 it("lighthouse.v20200324.CreateInstances", async function () {
     try {
        const data = await client.CreateInstances({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("lighthouse.v20200324.ReplaceFirewallTemplateRule", async function () {
+    try {
+       const data = await client.ReplaceFirewallTemplateRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("lighthouse.v20200324.DescribeFirewallTemplates", async function () {
+    try {
+       const data = await client.DescribeFirewallTemplates({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

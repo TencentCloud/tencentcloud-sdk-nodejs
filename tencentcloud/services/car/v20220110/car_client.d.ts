@@ -8,7 +8,7 @@ import { CreateSessionResponse, StopPublishStreamRequest, StopPublishStreamRespo
 export declare class Client extends AbstractClient {
     constructor(clientConfig: ClientConfig);
     /**
-     * 申请并发
+     * 本接口用于申请并发。接口超时时间：20秒。
      */
     ApplyConcurrent(req: ApplyConcurrentRequest, cb?: (error: string, rep: ApplyConcurrentResponse) => void): Promise<ApplyConcurrentResponse>;
     /**
@@ -20,7 +20,7 @@ export declare class Client extends AbstractClient {
      */
     DestroySession(req: DestroySessionRequest, cb?: (error: string, rep: DestroySessionResponse) => void): Promise<DestroySessionResponse>;
     /**
-     * 创建会话
+     * 本接口用于创建会话。接口超时时间：5秒。
      */
     CreateSession(req: CreateSessionRequest, cb?: (error: string, rep: CreateSessionResponse) => void): Promise<CreateSessionResponse>;
     /**

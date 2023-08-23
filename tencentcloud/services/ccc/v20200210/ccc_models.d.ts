@@ -2623,6 +2623,10 @@ export interface CreateSDKLoginTokenRequest {
      * 座席账号。
      */
     SeatUserId: string;
+    /**
+     * 生成的token是否一次性校验
+     */
+    OnlyOnce?: boolean;
 }
 /**
  * DescribeActiveCarrierPrivilegeNumber请求参数结构体

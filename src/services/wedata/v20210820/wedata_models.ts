@@ -4637,97 +4637,97 @@ export interface UserFileDTO {
    * 资源ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ResourceId: string
+  ResourceId?: string
   /**
    * 文件名
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  FileName: string
+  FileName?: string
   /**
    * 文件类型，如 jar zip 等
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  FileExtensionType: string
+  FileExtensionType?: string
   /**
    * 文件上传类型，资源管理为 resource
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  FileUploadType: string
+  FileUploadType?: string
   /**
    * 文件MD5值
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Md5Value: string
+  Md5Value?: string
   /**
-   * 创建时间，秒级别的时间戳
+   * 创建时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CreateTime: number
+  CreateTime?: string
   /**
-   * 更新时间，秒级别的时间戳
+   * 更新时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  UpdateTime: number
+  UpdateTime?: string
   /**
    * 文件大小，单位为字节
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Size: number
+  Size?: number
   /**
    * 本地路径
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  LocalPath: string
+  LocalPath?: string
   /**
    * 本地临时路径
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  LocalTmpPath: string
+  LocalTmpPath?: string
   /**
    * 远程路径
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RemotePath: string
+  RemotePath?: string
   /**
    * 文件拥有者名字
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  OwnerName: string
+  OwnerName?: string
   /**
    * 文件拥有者uin
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Owner: string
+  Owner?: string
   /**
    * 文件深度
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  PathDepth: string
+  PathDepth?: string
   /**
    * 项目ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ProjectId: string
+  ProjectId?: string
   /**
    * 附加信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ExtraInfo: string
+  ExtraInfo?: string
   /**
    * 本地临时压缩文件绝对路径
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ZipPath: string
+  ZipPath?: string
   /**
    * 文件所属存储桶
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Bucket: string
+  Bucket?: string
   /**
    * 文件所属存储桶的地域
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Region: string
+  Region?: string
 }
 
 /**

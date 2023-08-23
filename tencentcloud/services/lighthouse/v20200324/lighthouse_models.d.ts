@@ -1,4 +1,17 @@
 /**
+ * RunDockerContainers请求参数结构体
+ */
+export interface RunDockerContainersRequest {
+    /**
+     * 实例ID。
+     */
+    InstanceId: string;
+    /**
+     * 要创建的容器列表。
+     */
+    Containers: Array<DockerContainerConfiguration>;
+}
+/**
  * DescribeDockerContainers请求参数结构体
  */
 export interface DescribeDockerContainersRequest {
@@ -152,6 +165,27 @@ export interface DeleteKeyPairsResponse {
     RequestId?: string;
 }
 /**
+ * DescribeFirewallTemplateRules请求参数结构体
+ */
+export interface DescribeFirewallTemplateRulesRequest {
+    /**
+     * 防火墙模板ID。
+     */
+    TemplateId: string;
+    /**
+     * 防火墙模板规则ID列表。
+     */
+    TemplateRuleIds?: Array<string>;
+    /**
+     * 偏移量，默认为 0。
+     */
+    Offset?: number;
+    /**
+     * 返回数量，默认为 20，最大值为 100。
+     */
+    Limit?: number;
+}
+/**
  * AttachCcn请求参数结构体
  */
 export interface AttachCcnRequest {
@@ -212,6 +246,10 @@ export interface CreateInstancesRequest {
      * 是否自动使用代金券。默认不使用。
      */
     AutoVoucher?: boolean;
+    /**
+     * 防火墙模版ID。若不指定该参数，则使用默认防火墙策略。
+     */
+    FirewallTemplateId?: string;
 }
 /**
  * DescribeZones请求参数结构体
@@ -473,6 +511,19 @@ export interface DescribeGeneralResourceQuotasRequest {
     ResourceNames: Array<string>;
 }
 /**
+ * RestartDockerContainers请求参数结构体
+ */
+export interface RestartDockerContainersRequest {
+    /**
+     * 实例ID。
+     */
+    InstanceId: string;
+    /**
+     * 容器ID列表。
+     */
+    ContainerIds: Array<string>;
+}
+/**
  * DeleteKeyPairs请求参数结构体
  */
 export interface DeleteKeyPairsRequest {
@@ -527,6 +578,46 @@ export interface DescribeBundlesResponse {
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * DeleteFirewallTemplateRules返回参数结构体
+ */
+export interface DeleteFirewallTemplateRulesResponse {
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * DescribeFirewallTemplates请求参数结构体
+ */
+export interface DescribeFirewallTemplatesRequest {
+    /**
+     * 防火墙模板ID列表。
+     */
+    TemplateIds?: Array<string>;
+    /**
+     * 过滤器列表。
+  <li>template-id</li>按照【防火墙模版所属的ID】进行过滤。
+  类型：String
+  必选：否
+  <li>template-name</li>按照【防火墙模版所属的名称】进行过滤。
+  类型：String
+  必选：否
+  <li>template-type</li>按照【防火墙模版的类型】进行过滤。
+  类型：String
+  必选：否
+  每次请求的 Filters 的上限为 10，Filter.Values 的上限为 100。参数不支持同时指定 TemplateIds 和 Filters。
+     */
+    Filters?: Array<Filter>;
+    /**
+     * 偏移量，默认为 0。
+     */
+    Offset?: number;
+    /**
+     * 返回数量，默认为 20，最大值为 100。
+     */
+    Limit?: number;
 }
 /**
  * ModifyInstancesBundle请求参数结构体
@@ -620,6 +711,23 @@ export interface DescribeDiskConfigsRequest {
     Filters?: Array<Filter>;
 }
 /**
+ * DescribeFirewallTemplateQuota返回参数结构体
+ */
+export interface DescribeFirewallTemplateQuotaResponse {
+    /**
+     * 当前可用配额。
+     */
+    Available?: number;
+    /**
+     * 总配额。
+     */
+    Total?: number;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * DescribeRegions返回参数结构体
  */
 export interface DescribeRegionsResponse {
@@ -635,6 +743,19 @@ export interface DescribeRegionsResponse {
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * DescribeFirewallTemplateApplyRecords请求参数结构体
+ */
+export interface DescribeFirewallTemplateApplyRecordsRequest {
+    /**
+     * 防火墙模板ID。
+     */
+    TemplateId: string;
+    /**
+     * 应用任务ID列表。
+     */
+    TaskIds?: Array<string>;
 }
 /**
  * DescribeDiskBackups返回参数结构体
@@ -654,17 +775,25 @@ export interface DescribeDiskBackupsResponse {
     RequestId?: string;
 }
 /**
- * AssociateInstancesKeyPairs请求参数结构体
+ * AttachDisks请求参数结构体
  */
-export interface AssociateInstancesKeyPairsRequest {
+export interface AttachDisksRequest {
     /**
-     * 密钥对 ID 列表。每次请求批量密钥对的上限为 100。
+     * 云硬盘ID列表。
      */
-    KeyIds: Array<string>;
+    DiskIds: Array<string>;
     /**
-     * 实例 ID 列表。每次请求批量实例的上限为 100。可通过[DescribeInstances](https://cloud.tencent.com/document/api/1207/47573)接口返回值中的InstanceId获取。
+     * 实例ID。
      */
-    InstanceIds: Array<string>;
+    InstanceId: string;
+    /**
+     * 自动续费标识。取值范围：
+  
+  NOTIFY_AND_AUTO_RENEW：通知过期且自动续费。 NOTIFY_AND_MANUAL_RENEW：通知过期不自动续费，用户需要手动续费。 DISABLE_NOTIFY_AND_AUTO_RENEW：不自动续费，且不通知。
+  
+  默认取值：NOTIFY_AND_MANUAL_RENEW。若该参数指定为NOTIFY_AND_AUTO_RENEW，在账户余额充足的情况下，云盘到期后将按月自动续费。
+     */
+    RenewFlag?: string;
 }
 /**
  * ModifyDiskBackupsAttribute请求参数结构体
@@ -748,25 +877,17 @@ export interface CreateDisksRequest {
     AutoMountConfiguration?: AutoMountConfiguration;
 }
 /**
- * AttachDisks请求参数结构体
+ * AssociateInstancesKeyPairs请求参数结构体
  */
-export interface AttachDisksRequest {
+export interface AssociateInstancesKeyPairsRequest {
     /**
-     * 云硬盘ID列表。
+     * 密钥对 ID 列表。每次请求批量密钥对的上限为 100。
      */
-    DiskIds: Array<string>;
+    KeyIds: Array<string>;
     /**
-     * 实例ID。
+     * 实例 ID 列表。每次请求批量实例的上限为 100。可通过[DescribeInstances](https://cloud.tencent.com/document/api/1207/47573)接口返回值中的InstanceId获取。
      */
-    InstanceId: string;
-    /**
-     * 自动续费标识。取值范围：
-  
-  NOTIFY_AND_AUTO_RENEW：通知过期且自动续费。 NOTIFY_AND_MANUAL_RENEW：通知过期不自动续费，用户需要手动续费。 DISABLE_NOTIFY_AND_AUTO_RENEW：不自动续费，且不通知。
-  
-  默认取值：NOTIFY_AND_MANUAL_RENEW。若该参数指定为NOTIFY_AND_AUTO_RENEW，在账户余额充足的情况下，云盘到期后将按月自动续费。
-     */
-    RenewFlag?: string;
+    InstanceIds: Array<string>;
 }
 /**
  * Docker容器信息
@@ -1027,6 +1148,68 @@ export interface InquirePriceRenewDisksRequest {
      * 续费云硬盘包年包月相关参数设置。
      */
     RenewDiskChargePrepaid: RenewDiskChargePrepaid;
+}
+/**
+ * 流量包详情
+ */
+export interface TrafficPackage {
+    /**
+     * 流量包ID。
+     */
+    TrafficPackageId: string;
+    /**
+     * 流量包生效周期内已使用流量，单位字节。
+     */
+    TrafficUsed: number;
+    /**
+     * 流量包生效周期内的总流量，单位字节。
+     */
+    TrafficPackageTotal: number;
+    /**
+     * 流量包生效周期内的剩余流量，单位字节。
+     */
+    TrafficPackageRemaining: number;
+    /**
+     * 流量包生效周期内超出流量包额度的流量，单位字节。
+     */
+    TrafficOverflow: number;
+    /**
+     * 流量包生效周期开始时间。按照 ISO8601 标准表示，并且使用 UTC 时间。
+  格式为： YYYY-MM-DDThh:mm:ssZ。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    StartTime: string;
+    /**
+     * 流量包生效周期结束时间。按照 ISO8601 标准表示，并且使用 UTC 时间。
+  格式为： YYYY-MM-DDThh:mm:ssZ。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    EndTime: string;
+    /**
+     * 流量包到期时间。按照 ISO8601 标准表示，并且使用 UTC 时间。
+  格式为： YYYY-MM-DDThh:mm:ssZ。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Deadline: string;
+    /**
+     * 流量包状态：
+  <li>NETWORK_NORMAL：正常</li>
+  <li>OVERDUE_NETWORK_DISABLED：欠费断网</li>
+     */
+    Status: string;
+}
+/**
+ * 防火墙模板规则信息
+ */
+export interface FirewallTemplateRuleInfo {
+    /**
+     * 防火墙模板规则ID。
+     */
+    TemplateRuleId?: string;
+    /**
+     * 防火墙规则信息。
+     */
+    FirewallRuleInfo?: FirewallRuleInfo;
 }
 /**
  * 磁盘信息
@@ -1321,53 +1504,21 @@ export interface TerminateInstancesResponse {
     RequestId?: string;
 }
 /**
- * 流量包详情
+ * 防火墙模板应用记录详情。
  */
-export interface TrafficPackage {
+export interface FirewallTemplateApplyRecordDetail {
     /**
-     * 流量包ID。
+     * 实例标识信息。
      */
-    TrafficPackageId: string;
+    Instance?: InstanceIdentifier;
     /**
-     * 流量包生效周期内已使用流量，单位字节。
+     * 防火墙模板应用状态。
      */
-    TrafficUsed: number;
+    ApplyState?: string;
     /**
-     * 流量包生效周期内的总流量，单位字节。
+     * 防火墙模板应用错误信息。
      */
-    TrafficPackageTotal: number;
-    /**
-     * 流量包生效周期内的剩余流量，单位字节。
-     */
-    TrafficPackageRemaining: number;
-    /**
-     * 流量包生效周期内超出流量包额度的流量，单位字节。
-     */
-    TrafficOverflow: number;
-    /**
-     * 流量包生效周期开始时间。按照 ISO8601 标准表示，并且使用 UTC 时间。
-  格式为： YYYY-MM-DDThh:mm:ssZ。
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    StartTime: string;
-    /**
-     * 流量包生效周期结束时间。按照 ISO8601 标准表示，并且使用 UTC 时间。
-  格式为： YYYY-MM-DDThh:mm:ssZ。
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    EndTime: string;
-    /**
-     * 流量包到期时间。按照 ISO8601 标准表示，并且使用 UTC 时间。
-  格式为： YYYY-MM-DDThh:mm:ssZ。
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Deadline: string;
-    /**
-     * 流量包状态：
-  <li>NETWORK_NORMAL：正常</li>
-  <li>OVERDUE_NETWORK_DISABLED：欠费断网</li>
-     */
-    Status: string;
+    ErrorMessage?: string;
 }
 /**
  * DescribeInstancesDiskNum请求参数结构体
@@ -1518,6 +1669,19 @@ export interface RestartDockerContainersResponse {
     RequestId?: string;
 }
 /**
+ * CreateFirewallTemplate请求参数结构体
+ */
+export interface CreateFirewallTemplateRequest {
+    /**
+     * 模板名称。
+     */
+    TemplateName: string;
+    /**
+     * 防火墙规则列表。
+     */
+    TemplateRules?: Array<FirewallRule>;
+}
+/**
  * RemoveDockerContainers请求参数结构体
  */
 export interface RemoveDockerContainersRequest {
@@ -1578,17 +1742,29 @@ export interface DescribeKeyPairsResponse {
     RequestId?: string;
 }
 /**
- * RestartDockerContainers请求参数结构体
+ * 防火墙模板信息。
  */
-export interface RestartDockerContainersRequest {
+export interface FirewallTemplate {
     /**
-     * 实例ID。
+     * 模板Id。
      */
-    InstanceId: string;
+    TemplateId?: string;
     /**
-     * 容器ID列表。
+     * 模板名称。
      */
-    ContainerIds: Array<string>;
+    TemplateName?: string;
+    /**
+     * 模板类型。
+     */
+    TemplateType?: string;
+    /**
+     * 模板状态。
+     */
+    TemplateState?: string;
+    /**
+     * 模板创建时间。
+     */
+    CreatedTime?: string;
 }
 /**
  * DescribeSnapshotsDeniedActions返回参数结构体
@@ -1621,13 +1797,21 @@ export interface DescribeScenesRequest {
     Limit?: number;
 }
 /**
- * StartInstances请求参数结构体
+ * 描述镜像软件详细信息。
  */
-export interface StartInstancesRequest {
+export interface SoftwareDetail {
     /**
-     * 实例 ID 列表。每次请求批量实例的上限为 100。可通过[DescribeInstances](https://cloud.tencent.com/document/api/1207/47573)接口返回值中的InstanceId获取。
+     * 详情唯一键。
      */
-    InstanceIds: Array<string>;
+    Key: string;
+    /**
+     * 详情标题。
+     */
+    Title: string;
+    /**
+     * 详情值。
+     */
+    Value: string;
 }
 /**
  * DeleteDiskBackups返回参数结构体
@@ -1679,6 +1863,15 @@ export interface DeleteSnapshotsResponse {
     RequestId?: string;
 }
 /**
+ * ReplaceFirewallTemplateRule返回参数结构体
+ */
+export interface ReplaceFirewallTemplateRuleResponse {
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * DescribeDisks返回参数结构体
  */
 export interface DescribeDisksResponse {
@@ -1694,6 +1887,15 @@ export interface DescribeDisksResponse {
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * StartInstances请求参数结构体
+ */
+export interface StartInstancesRequest {
+    /**
+     * 实例 ID 列表。每次请求批量实例的上限为 100。可通过[DescribeInstances](https://cloud.tencent.com/document/api/1207/47573)接口返回值中的InstanceId获取。
+     */
+    InstanceIds: Array<string>;
 }
 /**
  * DescribeBundleDiscount返回参数结构体
@@ -1768,6 +1970,10 @@ export interface DisassociateInstancesKeyPairsRequest {
      */
     InstanceIds: Array<string>;
 }
+/**
+ * DescribeFirewallTemplateQuota请求参数结构体
+ */
+export declare type DescribeFirewallTemplateQuotaRequest = null;
 /**
  * 数据盘价格
  */
@@ -1896,9 +2102,9 @@ export interface IsolateInstancesRequest {
     IsolateDataDisk?: boolean;
 }
 /**
- * StopInstances返回参数结构体
+ * DeleteFirewallTemplate返回参数结构体
  */
-export interface StopInstancesResponse {
+export interface DeleteFirewallTemplateResponse {
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1927,6 +2133,19 @@ export interface ModifyBlueprintAttributeResponse {
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * ModifyFirewallTemplate请求参数结构体
+ */
+export interface ModifyFirewallTemplateRequest {
+    /**
+     * 防火墙模板ID。
+     */
+    TemplateId: string;
+    /**
+     * 模板名称。
+     */
+    TemplateName?: string;
 }
 /**
  * StopDockerContainers请求参数结构体
@@ -1983,6 +2202,19 @@ export interface DescribeModifyInstanceBundlesRequest {
  */
 export declare type DescribeRegionsRequest = null;
 /**
+ * 实例标识信息。
+ */
+export interface InstanceIdentifier {
+    /**
+     * 实例ID。
+     */
+    InstanceId: string;
+    /**
+     * 实例地域。
+     */
+    Region: string;
+}
+/**
  * DescribeInstancesDiskNum返回参数结构体
  */
 export interface DescribeInstancesDiskNumResponse {
@@ -2007,6 +2239,28 @@ export interface InquirePriceCreateBlueprintResponse {
      * 自定义镜像的价格参数。
      */
     BlueprintPrice: BlueprintPrice;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * ResetFirewallTemplateRules请求参数结构体
+ */
+export interface ResetFirewallTemplateRulesRequest {
+    /**
+     * 模板ID。
+     */
+    TemplateId: string;
+    /**
+     * 重置后的防火墙模板规则列表。
+     */
+    TemplateRules: Array<FirewallRule>;
+}
+/**
+ * ModifyFirewallTemplate返回参数结构体
+ */
+export interface ModifyFirewallTemplateResponse {
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2358,29 +2612,26 @@ export interface DescribeDockerActivitiesResponse {
     RequestId?: string;
 }
 /**
- * 云硬盘价格
+ * DescribeFirewallTemplateRuleQuota请求参数结构体
  */
-export interface DiskPrice {
+export interface DescribeFirewallTemplateRuleQuotaRequest {
     /**
-     * 云硬盘单价。
+     * 防火墙模板ID。
      */
-    OriginalDiskPrice: number;
+    TemplateId: string;
+}
+/**
+ * CreateFirewallTemplate返回参数结构体
+ */
+export interface CreateFirewallTemplateResponse {
     /**
-     * 云硬盘总价。
+     * 防火墙模板ID。
      */
-    OriginalPrice: number;
+    TemplateId?: string;
     /**
-     * 折扣。
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
-    Discount: number;
-    /**
-     * 折后总价。
-     */
-    DiscountPrice: number;
-    /**
-     * 计费项目明细列表。
-     */
-    DetailPrices: Array<DetailPrice>;
+    RequestId?: string;
 }
 /**
  * DescribeCcnAttachedInstances返回参数结构体
@@ -2762,6 +3013,19 @@ export interface DescribeDiskDiscountResponse {
     RequestId?: string;
 }
 /**
+ * CreateFirewallTemplateRules返回参数结构体
+ */
+export interface CreateFirewallTemplateRulesResponse {
+    /**
+     * 规则ID列表。
+     */
+    TemplateRuleIdSet?: Array<string>;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * ModifyDockerContainer请求参数结构体
  */
 export interface ModifyDockerContainerRequest {
@@ -2846,6 +3110,15 @@ export interface CreateKeyPairRequest {
     KeyName: string;
 }
 /**
+ * StopInstances返回参数结构体
+ */
+export interface StopInstancesResponse {
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * ResetInstancesPassword请求参数结构体
  */
 export interface ResetInstancesPasswordRequest {
@@ -2863,6 +3136,31 @@ export interface ResetInstancesPasswordRequest {
      * 待重置密码的实例操作系统用户名。不得超过 64 个字符。
      */
     UserName?: string;
+}
+/**
+ * 云硬盘价格
+ */
+export interface DiskPrice {
+    /**
+     * 云硬盘单价。
+     */
+    OriginalDiskPrice: number;
+    /**
+     * 云硬盘总价。
+     */
+    OriginalPrice: number;
+    /**
+     * 折扣。
+     */
+    Discount: number;
+    /**
+     * 折后总价。
+     */
+    DiscountPrice: number;
+    /**
+     * 计费项目明细列表。
+     */
+    DetailPrices: Array<DetailPrice>;
 }
 /**
  * DescribeInstances请求参数结构体
@@ -2909,6 +3207,23 @@ export interface DescribeInstancesRequest {
      * 返回数量，默认为 20，最大值为 100。关于`Limit`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/product/1207/47578)中的相关小节。
      */
     Limit?: number;
+}
+/**
+ * DescribeFirewallTemplateRuleQuota返回参数结构体
+ */
+export interface DescribeFirewallTemplateRuleQuotaResponse {
+    /**
+     * 当前可用配额。
+     */
+    Available?: number;
+    /**
+     * 总配额。
+     */
+    Total?: number;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * DetachCcn请求参数结构体
@@ -2969,6 +3284,19 @@ export interface DockerActivity {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     EndTime: string;
+}
+/**
+ * DescribeFirewallTemplateApplyRecords返回参数结构体
+ */
+export interface DescribeFirewallTemplateApplyRecordsResponse {
+    /**
+     * 防火墙模板应用记录列表。
+     */
+    ApplyRecordSet?: Array<FirewallTemplateApplyRecord>;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * >描述键值对过滤器，用于条件过滤查询。例如过滤名称等
@@ -3070,6 +3398,19 @@ export interface Snapshot {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     CreatedTime: string;
+}
+/**
+ * ApplyFirewallTemplate请求参数结构体
+ */
+export interface ApplyFirewallTemplateRequest {
+    /**
+     * 模板ID。
+     */
+    TemplateId: string;
+    /**
+     * 应用防火墙模板的实例列表。
+     */
+    ApplyInstances: Array<InstanceIdentifier>;
 }
 /**
  * ModifyFirewallRuleDescription返回参数结构体
@@ -3416,6 +3757,23 @@ export interface CreateBlueprintResponse {
     RequestId?: string;
 }
 /**
+ * DescribeFirewallTemplates返回参数结构体
+ */
+export interface DescribeFirewallTemplatesResponse {
+    /**
+     * 模板总数量。
+     */
+    TotalCount?: number;
+    /**
+     * 防火墙模板列表。
+     */
+    TemplateSet?: Array<FirewallTemplate>;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * 折扣详情信息。
  */
 export interface PolicyDetail {
@@ -3653,6 +4011,19 @@ export interface SystemDisk {
     DiskId: string;
 }
 /**
+ * ApplyFirewallTemplate返回参数结构体
+ */
+export interface ApplyFirewallTemplateResponse {
+    /**
+     * 任务ID。
+     */
+    TaskId?: string;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * TerminateDisks请求参数结构体
  */
 export interface TerminateDisksRequest {
@@ -3660,6 +4031,15 @@ export interface TerminateDisksRequest {
      * 云硬盘ID列表。
      */
     DiskIds: Array<string>;
+}
+/**
+ * RenewDisks返回参数结构体
+ */
+export interface RenewDisksResponse {
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * ResetInstance请求参数结构体
@@ -3688,13 +4068,17 @@ export interface DescribeDiskConfigsResponse {
     RequestId?: string;
 }
 /**
- * RenewDisks返回参数结构体
+ * CreateFirewallTemplateRules请求参数结构体
  */
-export interface RenewDisksResponse {
+export interface CreateFirewallTemplateRulesRequest {
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     * 防火墙模板ID。
      */
-    RequestId?: string;
+    TemplateId: string;
+    /**
+     * 防火墙模板规则列表。
+     */
+    TemplateRules: Array<FirewallRule>;
 }
 /**
  * 描述了启动配置创建实例的公网可访问性，声明了实例的公网使用计费模式，最大带宽等。
@@ -3714,6 +4098,23 @@ export interface InternetAccessible {
      * 是否分配公网 IP。
      */
     PublicIpAssigned: boolean;
+}
+/**
+ * ReplaceFirewallTemplateRule请求参数结构体
+ */
+export interface ReplaceFirewallTemplateRuleRequest {
+    /**
+     * 防火墙模板ID。
+     */
+    TemplateId: string;
+    /**
+     * 防火墙模板规则ID。
+     */
+    TemplateRuleId: string;
+    /**
+     * 替换后的防火墙模板规则。
+     */
+    TemplateRule: FirewallRule;
 }
 /**
  * 实例价格详细信息
@@ -3788,6 +4189,43 @@ export interface DescribeInstanceLoginKeyPairAttributeRequest {
     InstanceId: string;
 }
 /**
+ * 防火墙模板应用记录。
+ */
+export interface FirewallTemplateApplyRecord {
+    /**
+     * 任务ID。
+     */
+    TaskId?: string;
+    /**
+     * 应用模板的时间。
+     */
+    ApplyTime?: string;
+    /**
+     * 模板规则列表。
+     */
+    TemplateRuleSet?: Array<FirewallTemplateRule>;
+    /**
+     * 应用模板的执行状态。
+     */
+    ApplyState?: string;
+    /**
+     * 应用成功的实例数量。
+     */
+    SuccessCount?: number;
+    /**
+     * 应用失败的实例数量。
+     */
+    FailedCount?: number;
+    /**
+     * 正在应用中的实例数量。
+     */
+    RunningCount?: number;
+    /**
+     * 应用模板的执行细节。
+     */
+    ApplyDetailSet?: Array<FirewallTemplateApplyRecordDetail>;
+}
+/**
  * DescribeDockerContainerDetail返回参数结构体
  */
 export interface DescribeDockerContainerDetailResponse {
@@ -3810,13 +4248,21 @@ export interface DescribeBundleDiscountRequest {
     BundleId: string;
 }
 /**
- * 价格信息
+ * DescribeFirewallTemplateRules返回参数结构体
  */
-export interface Price {
+export interface DescribeFirewallTemplateRulesResponse {
     /**
-     * 实例价格。
+     * 防火墙模板规则总数量。
      */
-    InstancePrice: InstancePrice;
+    TotalCount?: number;
+    /**
+     * 防火墙模板规则信息列表。
+     */
+    TemplateRuleSet?: Array<FirewallTemplateRuleInfo>;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * DescribeDisksReturnable返回参数结构体
@@ -3843,6 +4289,15 @@ export interface ModifyDiskBackupsAttributeResponse {
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * DeleteFirewallTemplate请求参数结构体
+ */
+export interface DeleteFirewallTemplateRequest {
+    /**
+     * 防火墙模板ID。
+     */
+    TemplateId: string;
 }
 /**
  * IsolateDisks请求参数结构体
@@ -3929,21 +4384,17 @@ export interface DescribeDisksReturnableRequest {
     Offset?: number;
 }
 /**
- * 描述镜像软件详细信息。
+ * ResetFirewallTemplateRules返回参数结构体
  */
-export interface SoftwareDetail {
+export interface ResetFirewallTemplateRulesResponse {
     /**
-     * 详情唯一键。
+     * 重置后的规则ID列表。
      */
-    Key: string;
+    TemplateRuleIdSet?: Array<string>;
     /**
-     * 详情标题。
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
-    Title: string;
-    /**
-     * 详情值。
-     */
-    Value: string;
+    RequestId?: string;
 }
 /**
  * 自动挂载并初始化该数据盘。
@@ -4168,17 +4619,17 @@ export interface DescribeFirewallRulesRequest {
     Limit?: number;
 }
 /**
- * RunDockerContainers请求参数结构体
+ * 防火墙模板规则信息
  */
-export interface RunDockerContainersRequest {
+export interface FirewallTemplateRule {
     /**
-     * 实例ID。
+     * 防火墙模板规则ID。
      */
-    InstanceId: string;
+    TemplateRuleId?: string;
     /**
-     * 要创建的容器列表。
+     * 防火墙规则。
      */
-    Containers: Array<DockerContainerConfiguration>;
+    FirewallRule?: FirewallRule;
 }
 /**
  * 磁盘操作限制列表详细信息
@@ -4376,6 +4827,15 @@ export interface ModifyInstancesAttributeResponse {
     RequestId?: string;
 }
 /**
+ * 价格信息
+ */
+export interface Price {
+    /**
+     * 实例价格。
+     */
+    InstancePrice: InstancePrice;
+}
+/**
  * DescribeInstanceLoginKeyPairAttribute返回参数结构体
  */
 export interface DescribeInstanceLoginKeyPairAttributeResponse {
@@ -4387,4 +4847,17 @@ export interface DescribeInstanceLoginKeyPairAttributeResponse {
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * DeleteFirewallTemplateRules请求参数结构体
+ */
+export interface DeleteFirewallTemplateRulesRequest {
+    /**
+     * 防火墙模板ID。
+     */
+    TemplateId: string;
+    /**
+     * 防火墙模板规则ID列表。
+     */
+    TemplateRuleIds: Array<string>;
 }

@@ -308,9 +308,9 @@ it("dcdb.v20180411.DescribeDCDBInstanceDetail", async function () {
     }
 })
 
-it("dcdb.v20180411.DescribeSqlLogs", async function () {
+it("dcdb.v20180411.KillSession", async function () {
     try {
-       const data = await client.DescribeSqlLogs({})
+       const data = await client.KillSession({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -391,16 +391,6 @@ it("dcdb.v20180411.CreateAccount", async function () {
 it("dcdb.v20180411.ModifyInstanceNetwork", async function () {
     try {
        const data = await client.ModifyInstanceNetwork({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("dcdb.v20180411.KillSession", async function () {
-    try {
-       const data = await client.KillSession({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

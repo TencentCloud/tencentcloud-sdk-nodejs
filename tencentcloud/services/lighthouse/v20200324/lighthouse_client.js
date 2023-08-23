@@ -28,6 +28,12 @@ class Client extends abstract_client_1.AbstractClient {
         super("lighthouse.tencentcloudapi.com", "2020-03-24", clientConfig);
     }
     /**
+     * 本接口 (ModifyFirewallTemplate) 用于修改防火墙模板。
+     */
+    async ModifyFirewallTemplate(req, cb) {
+        return this.request("ModifyFirewallTemplate", req, cb);
+    }
+    /**
      * 本接口 (DeleteBlueprints) 用于删除镜像。
      */
     async DeleteBlueprints(req, cb) {
@@ -122,6 +128,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("RestartDockerContainers", req, cb);
     }
     /**
+     * 本接口 (DescribeFirewallTemplateRules) 用于查询防火墙模板规则列表。
+     */
+    async DescribeFirewallTemplateRules(req, cb) {
+        return this.request("DescribeFirewallTemplateRules", req, cb);
+    }
+    /**
      * 本接口 (ModifyDiskBackupsAttribute) 用于修改云硬盘备份点属性。
      */
     async ModifyDiskBackupsAttribute(req, cb) {
@@ -195,10 +207,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDiskDiscount", req, cb);
     }
     /**
+     * 本接口 (DescribeFirewallTemplateQuota) 用于查询防火墙模板配额。
+     */
+    async DescribeFirewallTemplateQuota(req, cb) {
+        return this.request("DescribeFirewallTemplateQuota", req, cb);
+    }
+    /**
      * 本接口(DescribeAllScenes)用于查询全地域使用场景列表。
      */
     async DescribeAllScenes(req, cb) {
         return this.request("DescribeAllScenes", req, cb);
+    }
+    /**
+     * 本接口 (CreateFirewallTemplate) 用于创建防火墙模板。
+     */
+    async CreateFirewallTemplate(req, cb) {
+        return this.request("CreateFirewallTemplate", req, cb);
     }
     /**
      * 本接口（AttachDisks）用于挂载一个或多个云硬盘。
@@ -224,6 +248,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async AssociateInstancesKeyPairs(req, cb) {
         return this.request("AssociateInstancesKeyPairs", req, cb);
+    }
+    /**
+     * 本接口 (DeleteFirewallTemplate) 用于删除防火墙模板。
+     */
+    async DeleteFirewallTemplate(req, cb) {
+        return this.request("DeleteFirewallTemplate", req, cb);
     }
     /**
      * 本接口（DisassociateInstancesKeyPairs）用于解除实例与指定密钥对的绑定关系。
@@ -257,10 +287,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeInstanceLoginKeyPairAttribute", req, cb);
     }
     /**
-     * 本接口（CreateInstanceSnapshot）用于创建指定实例的系统盘快照。
+     * 本接口（DescribeInstancesDeniedActions）用于查询一个或多个实例的操作限制列表信息。
      */
-    async CreateInstanceSnapshot(req, cb) {
-        return this.request("CreateInstanceSnapshot", req, cb);
+    async DescribeInstancesDeniedActions(req, cb) {
+        return this.request("DescribeInstancesDeniedActions", req, cb);
     }
     /**
      * 本接口（InquiryPriceCreateInstances）用于创建实例询价。
@@ -269,10 +299,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("InquirePriceCreateInstances", req, cb);
     }
     /**
-     * 本接口（DescribeInstancesDeniedActions）用于查询一个或多个实例的操作限制列表信息。
+     * 本接口（CreateInstanceSnapshot）用于创建指定实例的系统盘快照。
      */
-    async DescribeInstancesDeniedActions(req, cb) {
-        return this.request("DescribeInstancesDeniedActions", req, cb);
+    async CreateInstanceSnapshot(req, cb) {
+        return this.request("CreateInstanceSnapshot", req, cb);
     }
     /**
      * 本接口（DescribeRegions）用于查询地域信息。
@@ -312,10 +342,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("TerminateDisks", req, cb);
     }
     /**
-     * 本接口 (ResetAttachCcn) 用于关联云联网实例申请过期时，重新申请关联操作。
+     * 本接口 (CreateFirewallTemplateRules) 用于创建防火墙模板规则。
      */
-    async ResetAttachCcn(req, cb) {
-        return this.request("ResetAttachCcn", req, cb);
+    async CreateFirewallTemplateRules(req, cb) {
+        return this.request("CreateFirewallTemplateRules", req, cb);
     }
     /**
      * 本接口（DescribeSnapshotsDeniedActions）用于查询一个或多个快照的操作限制列表信息。
@@ -432,6 +462,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateDisks", req, cb);
     }
     /**
+     * 本接口 (ApplyFirewallTemplate) 用于应用防火墙模板到多个实例。
+     */
+    async ApplyFirewallTemplate(req, cb) {
+        return this.request("ApplyFirewallTemplate", req, cb);
+    }
+    /**
      * 本接口（DescribeSnapshots）用于查询快照的详细信息。
      */
     async DescribeSnapshots(req, cb) {
@@ -442,6 +478,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeDiskBackupsDeniedActions(req, cb) {
         return this.request("DescribeDiskBackupsDeniedActions", req, cb);
+    }
+    /**
+     * 创建并运行多个Docker容器，之后可以通过返回的ActivityIds调用DescribeDockerActivities接口查询创建情况。
+     */
+    async RunDockerContainers(req, cb) {
+        return this.request("RunDockerContainers", req, cb);
     }
     /**
      * 本接口 ( DescribeInstanceVncUrl ) 用于查询实例管理终端地址，获取的地址可用于实例的 VNC 登录。
@@ -501,6 +543,12 @@ https://img.qcloud.com/qcloud/app/active_vnc/index.html?InstanceVncUrl=wss%3A%2F
         return this.request("ModifyFirewallRuleDescription", req, cb);
     }
     /**
+     * 本接口 (ResetAttachCcn) 用于关联云联网实例申请过期时，重新申请关联操作。
+     */
+    async ResetAttachCcn(req, cb) {
+        return this.request("ResetAttachCcn", req, cb);
+    }
+    /**
      * 本接口（RebootInstances）用于重启实例。
 
 * 只有状态为 RUNNING 的实例才可以进行此操作。
@@ -555,10 +603,16 @@ https://img.qcloud.com/qcloud/app/active_vnc/index.html?InstanceVncUrl=wss%3A%2F
         return this.request("DescribeInstancesDiskNum", req, cb);
     }
     /**
-     * 创建并运行多个Docker容器，之后可以通过返回的ActivityIds调用DescribeDockerActivities接口查询创建情况。
+     * 本接口 (DeleteFirewallTemplateRules) 用于删除防火墙模板规则。
      */
-    async RunDockerContainers(req, cb) {
-        return this.request("RunDockerContainers", req, cb);
+    async DeleteFirewallTemplateRules(req, cb) {
+        return this.request("DeleteFirewallTemplateRules", req, cb);
+    }
+    /**
+     * 本接口 (DescribeFirewallTemplateRuleQuota) 用于查询防火墙模板规则配额。
+     */
+    async DescribeFirewallTemplateRuleQuota(req, cb) {
+        return this.request("DescribeFirewallTemplateRuleQuota", req, cb);
     }
     /**
      * 本接口（DescribeInstancesReturnable）用于查询实例是否可退还。
@@ -664,6 +718,18 @@ https://img.qcloud.com/qcloud/app/active_vnc/index.html?InstanceVncUrl=wss%3A%2F
         return this.request("DeleteSnapshots", req, cb);
     }
     /**
+     * 本接口 (DescribeFirewallTemplateApplyRecords) 用于查询防火墙模板应用记录列表。
+     */
+    async DescribeFirewallTemplateApplyRecords(req, cb) {
+        return this.request("DescribeFirewallTemplateApplyRecords", req, cb);
+    }
+    /**
+     * 本接口 (ResetFirewallTemplateRules) 用于重置防火墙模板下所有规则。
+     */
+    async ResetFirewallTemplateRules(req, cb) {
+        return this.request("ResetFirewallTemplateRules", req, cb);
+    }
+    /**
      * 本接口（DescribeResetInstanceBlueprints）查询重置实例的镜像信息。
      */
     async DescribeResetInstanceBlueprints(req, cb) {
@@ -714,6 +780,18 @@ https://img.qcloud.com/qcloud/app/active_vnc/index.html?InstanceVncUrl=wss%3A%2F
      */
     async CreateInstances(req, cb) {
         return this.request("CreateInstances", req, cb);
+    }
+    /**
+     * 本接口 (ReplaceFirewallTemplateRules) 用于替换防火墙模板规则。
+     */
+    async ReplaceFirewallTemplateRule(req, cb) {
+        return this.request("ReplaceFirewallTemplateRule", req, cb);
+    }
+    /**
+     * 本接口 (DescribeFirewallTemplates) 用于查询防火墙模板列表。
+     */
+    async DescribeFirewallTemplates(req, cb) {
+        return this.request("DescribeFirewallTemplates", req, cb);
     }
 }
 exports.Client = Client;

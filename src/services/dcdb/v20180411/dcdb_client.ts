@@ -86,7 +86,6 @@ import {
   TablePrivilege,
   DescribeProjectSecurityGroupsResponse,
   DatabaseFunction,
-  DescribeSqlLogsRequest,
   ParamConstraint,
   ResetAccountPasswordResponse,
   DescribeDCDBSaleInfoRequest,
@@ -162,7 +161,6 @@ import {
   CloseDBExtranetAccessRequest,
   InitDCDBInstancesRequest,
   ResourceTag,
-  DescribeSqlLogsResponse,
   DeleteAccountRequest,
   DescribeDCDBInstancesResponse,
   ModifyAccountPrivilegesResponse,
@@ -197,7 +195,6 @@ import {
   DBAccount,
   DescribeDatabaseTableResponse,
   DescribeAccountPrivilegesRequest,
-  SqlLogItem,
   DescribeAccountsResponse,
   DescribeDBSlowLogsResponse,
   DescribeDCDBRenewalPriceRequest,
@@ -522,15 +519,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 已废弃接口
-
-本接口（DescribeSqlLogs）用于获取实例SQL日志。
-     */
-  async DescribeSqlLogs(
-    req: DescribeSqlLogsRequest,
-    cb?: (error: string, rep: DescribeSqlLogsResponse) => void
-  ): Promise<DescribeSqlLogsResponse> {
-    return this.request("DescribeSqlLogs", req, cb)
+   * 本接口（KillSession）用于杀死指定会话。
+   */
+  async KillSession(
+    req: KillSessionRequest,
+    cb?: (error: string, rep: KillSessionResponse) => void
+  ): Promise<KillSessionResponse> {
+    return this.request("KillSession", req, cb)
   }
 
   /**
@@ -611,16 +606,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyInstanceNetworkResponse) => void
   ): Promise<ModifyInstanceNetworkResponse> {
     return this.request("ModifyInstanceNetwork", req, cb)
-  }
-
-  /**
-   * 本接口（KillSession）用于杀死指定会话。
-   */
-  async KillSession(
-    req: KillSessionRequest,
-    cb?: (error: string, rep: KillSessionResponse) => void
-  ): Promise<KillSessionResponse> {
-    return this.request("KillSession", req, cb)
   }
 
   /**

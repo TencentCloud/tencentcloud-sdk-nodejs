@@ -686,6 +686,10 @@ export interface UpdateScenarioRequest {
    * 创建人名
    */
   Owner?: string
+  /**
+   * 环境ID
+   */
+  EnvId?: string
 }
 
 /**

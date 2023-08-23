@@ -432,100 +432,100 @@ export interface NotebookSetItem {
     /**
      * notebook ID
      */
-    Id: string;
+    Id?: string;
     /**
      * notebook 名称
      */
-    Name: string;
+    Name?: string;
     /**
      * 计费模式
      */
-    ChargeType: string;
+    ChargeType?: string;
     /**
      * 资源配置
      */
-    ResourceConf: ResourceConf;
+    ResourceConf?: ResourceConf;
     /**
      * 预付费资源组
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ResourceGroupId: string;
+    ResourceGroupId?: string;
     /**
      * 存储卷大小
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    VolumeSizeInGB: number;
+    VolumeSizeInGB?: number;
     /**
      * 计费金额信息，eg：2.00元/小时 (for后付费)
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    BillingInfos: Array<string>;
+    BillingInfos?: Array<string>;
     /**
      * 标签配置
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Tags: Array<Tag>;
+    Tags?: Array<Tag>;
     /**
      * 创建时间
      */
-    CreateTime: string;
+    CreateTime?: string;
     /**
      * 启动时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    StartTime: string;
+    StartTime?: string;
     /**
      * 更新时间
      */
-    UpdateTime: string;
+    UpdateTime?: string;
     /**
      * 运行时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    RuntimeInSeconds: number;
+    RuntimeInSeconds?: number;
     /**
      * 计费状态
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ChargeStatus: string;
+    ChargeStatus?: string;
     /**
      * 状态
      */
-    Status: string;
+    Status?: string;
     /**
      * 错误原因
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    FailureReason: string;
+    FailureReason?: string;
     /**
      * 结束时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    EndTime: string;
+    EndTime?: string;
     /**
      * Pod名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    PodName: string;
+    PodName?: string;
     /**
      * 后付费资源规格名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    InstanceTypeAlias: string;
+    InstanceTypeAlias?: string;
     /**
      * 预付费资源组名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ResourceGroupName: string;
+    ResourceGroupName?: string;
     /**
      * 是否自动终止
      */
-    AutoStopping: boolean;
+    AutoStopping?: boolean;
     /**
      * 自动停止时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    AutomaticStopTime: number;
+    AutomaticStopTime?: number;
     /**
      * 存储的类型。取值包含：
       FREE:        预付费的免费存储
@@ -534,22 +534,27 @@ export interface NotebookSetItem {
       CFS:     CFS存储，包含NFS和turbo
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    VolumeSourceType: string;
+    VolumeSourceType?: string;
     /**
      * CFS存储的配置
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    VolumeSourceCFS: CFSConfig;
+    VolumeSourceCFS?: CFSConfig;
     /**
      * notebook 信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Message: string;
+    Message?: string;
     /**
      * notebook用户类型
   注意：此字段可能返回 null，表示取不到有效值。
      */
     UserTypes?: Array<string>;
+    /**
+     * SSH配置
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SSHConfig?: SSHConfig;
 }
 /**
  * StartTrainingTask请求参数结构体
@@ -1183,183 +1188,183 @@ export interface TrainingTaskDetail {
     /**
      * 训练任务ID
      */
-    Id: string;
+    Id?: string;
     /**
      * 训练任务名称
      */
-    Name: string;
+    Name?: string;
     /**
      * 主账号uin
      */
-    Uin: string;
+    Uin?: string;
     /**
      * 子账号uin
      */
-    SubUin: string;
+    SubUin?: string;
     /**
      * 地域
      */
-    Region: string;
+    Region?: string;
     /**
      * 训练框架名称，eg：SPARK、PYSARK、TENSORFLOW、PYTORCH
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    FrameworkName: string;
+    FrameworkName?: string;
     /**
      * 训练框架版本
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    FrameworkVersion: string;
+    FrameworkVersion?: string;
     /**
      * 框架运行环境
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    FrameworkEnvironment: string;
+    FrameworkEnvironment?: string;
     /**
      * 计费模式
      */
-    ChargeType: string;
+    ChargeType?: string;
     /**
      * 预付费专用资源组
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ResourceGroupId: string;
+    ResourceGroupId?: string;
     /**
      * 资源配置
      */
-    ResourceConfigInfos: Array<ResourceConfigInfo>;
+    ResourceConfigInfos?: Array<ResourceConfigInfo>;
     /**
      * 标签
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Tags: Array<Tag>;
+    Tags?: Array<Tag>;
     /**
      * 训练模式，eg：PS_WORKER、DDP、MPI、HOROVOD
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TrainingMode: string;
+    TrainingMode?: string;
     /**
      * 代码包
      */
-    CodePackagePath: CosPathInfo;
+    CodePackagePath?: CosPathInfo;
     /**
      * 启动命令信息
      */
-    StartCmdInfo: StartCmdInfo;
+    StartCmdInfo?: StartCmdInfo;
     /**
      * 数据来源，eg：DATASET、COS
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DataSource: string;
+    DataSource?: string;
     /**
      * 数据配置
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DataConfigs: Array<DataConfig>;
+    DataConfigs?: Array<DataConfig>;
     /**
      * 调优参数
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TuningParameters: string;
+    TuningParameters?: string;
     /**
      * 训练输出
      */
-    Output: CosPathInfo;
+    Output?: CosPathInfo;
     /**
      * 是否上报日志
      */
-    LogEnable: boolean;
+    LogEnable?: boolean;
     /**
      * 日志配置
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    LogConfig: LogConfig;
+    LogConfig?: LogConfig;
     /**
      * VPC ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    VpcId: string;
+    VpcId?: string;
     /**
      * 子网ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SubnetId: string;
+    SubnetId?: string;
     /**
      * 自定义镜像信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ImageInfo: ImageInfo;
+    ImageInfo?: ImageInfo;
     /**
      * 运行时长
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    RuntimeInSeconds: number;
+    RuntimeInSeconds?: number;
     /**
      * 创建时间
      */
-    CreateTime: string;
+    CreateTime?: string;
     /**
      * 训练开始时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    StartTime: string;
+    StartTime?: string;
     /**
      * 计费状态，eg：BILLING计费中，ARREARS_STOP欠费停止，NOT_BILLING不在计费中
      */
-    ChargeStatus: string;
+    ChargeStatus?: string;
     /**
      * 最近一次实例ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    LatestInstanceId: string;
+    LatestInstanceId?: string;
     /**
      * TensorBoard ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TensorBoardId: string;
+    TensorBoardId?: string;
     /**
      * 备注
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Remark: string;
+    Remark?: string;
     /**
      * 失败原因
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    FailureReason: string;
+    FailureReason?: string;
     /**
      * 更新时间
      */
-    UpdateTime: string;
+    UpdateTime?: string;
     /**
      * 训练结束时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    EndTime: string;
+    EndTime?: string;
     /**
      * 计费金额信息，eg：2.00元/小时 (按量计费)
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    BillingInfo: string;
+    BillingInfo?: string;
     /**
      * 预付费专用资源组名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ResourceGroupName: string;
+    ResourceGroupName?: string;
     /**
      * 任务信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Message: string;
+    Message?: string;
     /**
      * 任务状态，eg：STARTING启动中、RUNNING运行中、STOPPING停止中、STOPPED已停止、FAILED异常、SUCCEED已完成
      */
-    Status: string;
+    Status?: string;
     /**
      * 回调地址
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CallbackUrl: string;
+    CallbackUrl?: string;
 }
 /**
  * SendChatMessage返回参数结构体
@@ -2531,6 +2536,10 @@ export interface CreateNotebookRequest {
      * 镜像类型
      */
     ImageType?: string;
+    /**
+     * SSH配置信息
+     */
+    SSHConfig?: SSHConfig;
 }
 /**
  * ModifyNotebook请求参数结构体
@@ -2634,6 +2643,10 @@ export interface ModifyNotebookRequest {
      * 镜像类型
      */
     ImageType?: string;
+    /**
+     * SSH配置
+     */
+    SSHConfig?: SSHConfig;
 }
 /**
  * DescribeModelServices请求参数结构体
@@ -2857,6 +2870,31 @@ export interface StopCreatingImageRequest {
      * 镜像保存记录ID
      */
     RecordId: string;
+}
+/**
+ * notebook ssh端口配置
+ */
+export interface SSHConfig {
+    /**
+     * 是否开启ssh
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Enable?: boolean;
+    /**
+     * 公钥信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PublicKey?: string;
+    /**
+     * 端口号
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Port?: number;
+    /**
+     * 登录命令
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    LoginCommand?: string;
 }
 /**
  * 对话结果
@@ -3687,112 +3725,112 @@ export interface TrainingTaskSetItem {
     /**
      * 训练任务ID
      */
-    Id: string;
+    Id?: string;
     /**
      * 训练任务名称
      */
-    Name: string;
+    Name?: string;
     /**
      * 框架名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    FrameworkName: string;
+    FrameworkName?: string;
     /**
      * 训练框架版本
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    FrameworkVersion: string;
+    FrameworkVersion?: string;
     /**
      * 框架运行环境
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    FrameworkEnvironment: string;
+    FrameworkEnvironment?: string;
     /**
      * 计费模式
      */
-    ChargeType: string;
+    ChargeType?: string;
     /**
      * 计费状态，eg：BILLING计费中，ARREARS_STOP欠费停止，NOT_BILLING不在计费中
      */
-    ChargeStatus: string;
+    ChargeStatus?: string;
     /**
      * 预付费专用资源组
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ResourceGroupId: string;
+    ResourceGroupId?: string;
     /**
      * 资源配置
      */
-    ResourceConfigInfos: Array<ResourceConfigInfo>;
+    ResourceConfigInfos?: Array<ResourceConfigInfo>;
     /**
      * 训练模式eg：PS_WORKER、DDP、MPI、HOROVOD
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TrainingMode: string;
+    TrainingMode?: string;
     /**
      * 任务状态，eg：STARTING启动中、RUNNING运行中、STOPPING停止中、STOPPED已停止、FAILED异常、SUCCEED已完成
      */
-    Status: string;
+    Status?: string;
     /**
      * 运行时长
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    RuntimeInSeconds: number;
+    RuntimeInSeconds?: number;
     /**
      * 创建时间
      */
-    CreateTime: string;
+    CreateTime?: string;
     /**
      * 训练开始时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    StartTime: string;
+    StartTime?: string;
     /**
      * 训练结束时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    EndTime: string;
+    EndTime?: string;
     /**
      * 训练输出
      */
-    Output: CosPathInfo;
+    Output?: CosPathInfo;
     /**
      * 失败原因
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    FailureReason: string;
+    FailureReason?: string;
     /**
      * 更新时间
      */
-    UpdateTime: string;
+    UpdateTime?: string;
     /**
      * 计费金额信息，eg：2.00元/小时 (按量计费)
      */
-    BillingInfo: string;
+    BillingInfo?: string;
     /**
      * 预付费专用资源组名称
      */
-    ResourceGroupName: string;
+    ResourceGroupName?: string;
     /**
      * 自定义镜像信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ImageInfo: ImageInfo;
+    ImageInfo?: ImageInfo;
     /**
      * 任务信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Message: string;
+    Message?: string;
     /**
      * 标签配置
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Tags: Array<Tag>;
+    Tags?: Array<Tag>;
     /**
      * 回调地址
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CallbackUrl: string;
+    CallbackUrl?: string;
 }
 /**
  * StopNotebook返回参数结构体
@@ -3901,22 +3939,6 @@ export interface CreateTrainingTaskRequest {
      */
     ResourceConfigInfos: Array<ResourceConfigInfo>;
     /**
-     * COS代码包路径
-     */
-    CodePackagePath: CosPathInfo;
-    /**
-     * 训练模式，通过DescribeTrainingFrameworks接口查询，eg：PS_WORKER、DDP、MPI、HOROVOD
-     */
-    TrainingMode: string;
-    /**
-     * COS训练输出路径
-     */
-    Output: CosPathInfo;
-    /**
-     * 是否上报日志
-     */
-    LogEnable: boolean;
-    /**
      * 训练框架名称，通过DescribeTrainingFrameworks接口查询，eg：SPARK、PYSPARK、TENSORFLOW、PYTORCH
      */
     FrameworkName?: string;
@@ -3941,9 +3963,17 @@ export interface CreateTrainingTaskRequest {
      */
     ImageInfo?: ImageInfo;
     /**
+     * COS代码包路径
+     */
+    CodePackagePath?: CosPathInfo;
+    /**
      * 启动命令信息，默认为sh start.sh
      */
     StartCmdInfo?: StartCmdInfo;
+    /**
+     * 训练模式，通过DescribeTrainingFrameworks接口查询，eg：PS_WORKER、DDP、MPI、HOROVOD
+     */
+    TrainingMode?: string;
     /**
      * 数据配置，依赖DataSource字段
      */
@@ -3957,6 +3987,10 @@ export interface CreateTrainingTaskRequest {
      */
     SubnetId?: string;
     /**
+     * COS训练输出路径
+     */
+    Output?: CosPathInfo;
+    /**
      * CLS日志配置
      */
     LogConfig?: LogConfig;
@@ -3964,6 +3998,10 @@ export interface CreateTrainingTaskRequest {
      * 调优参数
      */
     TuningParameters?: string;
+    /**
+     * 是否上报日志
+     */
+    LogEnable?: boolean;
     /**
      * 备注，最多500个字
      */
@@ -4860,6 +4898,11 @@ export interface PodInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     IP?: string;
+    /**
+     * pod状态
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Status?: string;
 }
 /**
  * DeleteBatchTask返回参数结构体
@@ -6617,7 +6660,7 @@ export interface DescribeTrainingTaskResponse {
     /**
      * 训练任务详情
      */
-    TrainingTaskDetail: TrainingTaskDetail;
+    TrainingTaskDetail?: TrainingTaskDetail;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */

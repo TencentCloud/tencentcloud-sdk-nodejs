@@ -8851,11 +8851,11 @@ export interface DescribeSlowLogsResponse {
   /**
    * 符合查询条件的慢查询日志总数。
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 符合查询条件的慢查询日志详情。
    */
-  Items: Array<SlowLogInfo>
+  Items?: Array<SlowLogInfo>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

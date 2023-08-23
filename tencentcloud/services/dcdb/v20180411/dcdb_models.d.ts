@@ -1569,23 +1569,6 @@ export interface DatabaseFunction {
     Func: string;
 }
 /**
- * DescribeSqlLogs请求参数结构体
- */
-export interface DescribeSqlLogsRequest {
-    /**
-     * 实例 ID，形如：dcdbt-ow728lmc，可以通过 DescribeDCDBInstances 查询实例详情获得。
-     */
-    InstanceId: string;
-    /**
-     * SQL日志偏移。
-     */
-    Offset?: number;
-    /**
-     * 拉取数量（0-10000，为0时拉取总数信息）。
-     */
-    Limit?: number;
-}
-/**
  * 参数约束
  */
 export interface ParamConstraint {
@@ -3466,39 +3449,6 @@ export interface ResourceTag {
     TagValue: string;
 }
 /**
- * DescribeSqlLogs返回参数结构体
- */
-export interface DescribeSqlLogsResponse {
-    /**
-     * 当前消息队列中的sql日志条目数。
-     */
-    TotalCount: number;
-    /**
-     * 消息队列中的sql日志起始偏移。
-     */
-    StartOffset: number;
-    /**
-     * 消息队列中的sql日志结束偏移。
-     */
-    EndOffset: number;
-    /**
-     * 返回的第一条sql日志的偏移。
-     */
-    Offset: number;
-    /**
-     * 返回的sql日志数量。
-     */
-    Count: number;
-    /**
-     * Sql日志列表。
-     */
-    SqlItems: Array<SqlLogItem>;
-    /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
-/**
  * DeleteAccount请求参数结构体
  */
 export interface DeleteAccountRequest {
@@ -4253,51 +4203,6 @@ export interface DescribeAccountPrivilegesRequest {
      * 当 Type=table 时，ColName 为 \* 表示查询表的权限，如果为具体字段名，表示查询对应字段的权限
      */
     ColName?: string;
-}
-/**
- * 描述一条sql日志的详细信息。
- */
-export interface SqlLogItem {
-    /**
-     * 本条日志在消息队列中的偏移量。
-     */
-    Offset: number;
-    /**
-     * 执行本条sql的用户。
-     */
-    User: string;
-    /**
-     * 执行本条sql的客户端IP+端口。
-     */
-    Client: string;
-    /**
-     * 数据库名称。
-     */
-    DbName: string;
-    /**
-     * 执行的sql语句。
-     */
-    Sql: string;
-    /**
-     * 返回的数据行数。
-     */
-    SelectRowNum: number;
-    /**
-     * 影响行数。
-     */
-    AffectRowNum: number;
-    /**
-     * Sql执行时间戳。
-     */
-    Timestamp: number;
-    /**
-     * Sql耗时，单位为毫秒。
-     */
-    TimeCostMs: number;
-    /**
-     * Sql返回码，0为成功。
-     */
-    ResultCode: number;
 }
 /**
  * DescribeAccounts返回参数结构体
