@@ -26,6 +26,7 @@
     "get-stream": "^6.0.0",
     "https-proxy-agent": "^5.0.0",
     "is-stream": "^2.0.0",
+    "json-bigint": "^1.0.0",
     "node-fetch": "^2.2.0",
     "tslib": "1.13.0"
   },
@@ -38,15 +39,16 @@
     "url": "https://github.com/tencentcloud/tencentcloud-sdk-nodejs"
   },
   "devDependencies": {
-    "babel-eslint": "^10.0.2",
-    "eslint-plugin-react": "^7.17.0",
     "@types/form-data": "^2.5.0",
+    "@types/json-bigint": "^1.0.1",
     "@types/node": "^14.0.26",
     "@types/node-fetch": "^2.5.7",
     "@typescript-eslint/eslint-plugin": "^2.34.0",
     "@typescript-eslint/parser": "^2.34.0",
+    "babel-eslint": "^10.0.2",
     "chai": "^4.2.0",
     "eslint": "^6.8.0",
+    "eslint-plugin-react": "^7.17.0",
     "mocha": "^8.1.1",
     "prettier": "^2.3.0",
     "ts-node": "^8.10.2",

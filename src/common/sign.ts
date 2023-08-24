@@ -1,6 +1,9 @@
 import TencentCloudSDKHttpException from "./exception/tencent_cloud_sdk_exception"
 import * as crypto from "crypto"
 import { URL } from "url"
+import * as JSONBigInt from "json-bigint"
+
+const JSONbigNative = JSONBigInt({ useNativeBigInt: true })
 
 /**
  * @inner
@@ -87,7 +90,7 @@ export default class Sign {
       hash.update(`--\r\n`)
       payload_hash = hash.digest("hex")
     } else {
-      payload_hash = payload ? getHash(JSON.stringify(payload)) : getHash("")
+      payload_hash = payload ? getHash(JSONbigNative.stringify(payload)) : getHash("")
     }
 
     const canonicalRequest =

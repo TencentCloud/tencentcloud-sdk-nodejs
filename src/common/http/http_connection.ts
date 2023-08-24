@@ -7,6 +7,9 @@ import Sign from "../sign"
 import fetch, { FetchOptions } from "./fetch"
 import { Response, RequestInit } from "node-fetch"
 import { Agent } from "http"
+import * as JSONBigInt from "json-bigint"
+
+const JSONbigNative = JSONBigInt({ useNativeBigInt: true })
 /**
  * @inner
  */
@@ -139,7 +142,7 @@ export class HttpConnection {
       config.headers["Content-Type"] = "application/x-www-form-urlencoded"
     }
     if (method === "POST" && !multipart) {
-      config.body = JSON.stringify(data)
+      config.body = JSONbigNative.stringify(data)
       config.headers["Content-Type"] = "application/json"
     }
     if (method === "POST" && multipart) {
