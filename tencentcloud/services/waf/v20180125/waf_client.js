@@ -28,10 +28,22 @@ class Client extends abstract_client_1.AbstractClient {
         super("waf.tencentcloudapi.com", "2018-01-25", clientConfig);
     }
     /**
+     * clb-waf编辑防护域名配置
+     */
+    async ModifyHost(req, cb) {
+        return this.request("ModifyHost", req, cb);
+    }
+    /**
      * 本接口用于获取访问日志导出列表
      */
     async DescribeAccessExports(req, cb) {
         return this.request("DescribeAccessExports", req, cb);
+    }
+    /**
+     * 获取发现域名列表接口
+     */
+    async DescribeFindDomainList(req, cb) {
+        return this.request("DescribeFindDomainList", req, cb);
     }
     /**
      * 查询业务和攻击概要趋势
@@ -40,10 +52,28 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribePeakPoints", req, cb);
     }
     /**
+     * waf斯巴达-waf开关
+     */
+    async ModifyProtectionStatus(req, cb) {
+        return this.request("ModifyProtectionStatus", req, cb);
+    }
+    /**
+     * 添加域名的首先验证是否购买了套餐，是否没有达到购买套餐的限制，域名是否已经添加
+     */
+    async DescribeHostLimit(req, cb) {
+        return this.request("DescribeHostLimit", req, cb);
+    }
+    /**
      * 本接口用于删除访问日志导出
      */
     async DeleteAccessExport(req, cb) {
         return this.request("DeleteAccessExport", req, cb);
+    }
+    /**
+     * 获取一个clb域名详情
+     */
+    async DescribeDomainDetailsClb(req, cb) {
+        return this.request("DescribeDomainDetailsClb", req, cb);
     }
     /**
      * 删除域名规则白名单
@@ -56,6 +86,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ModifyAreaBanStatus(req, cb) {
         return this.request("ModifyAreaBanStatus", req, cb);
+    }
+    /**
+     * 切换域名的规则开关
+     */
+    async SwitchDomainRules(req, cb) {
+        return this.request("SwitchDomainRules", req, cb);
     }
     /**
      * 查询用户所有域名的详细信息
@@ -74,6 +110,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeAccessIndex(req, cb) {
         return this.request("DescribeAccessIndex", req, cb);
+    }
+    /**
+     * clb-waf 设置防护域名的流量模式
+     */
+    async ModifyHostFlowMode(req, cb) {
+        return this.request("ModifyHostFlowMode", req, cb);
     }
     /**
      * 本接口用于创建访问日志导出
@@ -106,10 +148,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeInstances", req, cb);
     }
     /**
+     * 设置waf防护状态
+     */
+    async ModifySpartaProtectionMode(req, cb) {
+        return this.request("ModifySpartaProtectionMode", req, cb);
+    }
+    /**
      * Waf IP黑白名单Delete接口
      */
     async DeleteIpAccessControl(req, cb) {
         return this.request("DeleteIpAccessControl", req, cb);
+    }
+    /**
+     * 本接口用于修改访问日志保存期限及大字段是否存储
+     */
+    async ModifyAccessPeriod(req, cb) {
+        return this.request("ModifyAccessPeriod", req, cb);
     }
     /**
      * 生成攻击日志的产生时间柱状图
@@ -124,10 +178,35 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyWafAutoDenyStatus", req, cb);
     }
     /**
-     * 本接口用于修改访问日志保存期限及大字段是否存储
+     * 查询用户TLS版本
      */
-    async ModifyAccessPeriod(req, cb) {
-        return this.request("ModifyAccessPeriod", req, cb);
+    async DescribeTlsVersion(req, cb) {
+        return this.request("DescribeTlsVersion", req, cb);
+    }
+    /**
+     * clb-waf 设置防护域名WAF开关
+支持批量操作。
+     */
+    async ModifyHostStatus(req, cb) {
+        return this.request("ModifyHostStatus", req, cb);
+    }
+    /**
+     * 查询加密套件信息
+     */
+    async DescribeCiphersDetail(req, cb) {
+        return this.request("DescribeCiphersDetail", req, cb);
+    }
+    /**
+     * 批量添加域名
+     */
+    async AddSpartaProtectionsAuto(req, cb) {
+        return this.request("AddSpartaProtectionsAuto", req, cb);
+    }
+    /**
+     * 修改域名列表的访问日志开关
+     */
+    async ModifyDomainsCLSStatus(req, cb) {
+        return this.request("ModifyDomainsCLSStatus", req, cb);
     }
     /**
      * 获取waf流量访问趋势
@@ -142,10 +221,23 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeVipInfo", req, cb);
     }
     /**
+     * 查询saas和clb的域名信息
+     */
+    async DescribeUserDomainInfo(req, cb) {
+        return this.request("DescribeUserDomainInfo", req, cb);
+    }
+    /**
      * 在CDC场景下，负载均衡型WAF的添加、编辑域名配置的时候，需要展示CDC负载均衡型WAF（cdc-clb-waf)支持的地域列表，通过DescribeUserCdcClbWafRegions既可以获得当前对客户已经开放的地域列表
      */
     async DescribeUserCdcClbWafRegions(req, cb) {
         return this.request("DescribeUserCdcClbWafRegions", req, cb);
+    }
+    /**
+     * 删除CLB-WAF防护域名
+支持批量操作
+     */
+    async DeleteHost(req, cb) {
+        return this.request("DeleteHost", req, cb);
     }
     /**
      * 更改某一条规则
@@ -222,6 +314,18 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyCustomRuleStatus", req, cb);
     }
     /**
+     * 获取域名概况
+     */
+    async DescribeDomainCountInfo(req, cb) {
+        return this.request("DescribeDomainCountInfo", req, cb);
+    }
+    /**
+     * waf斯巴达-删除防护域名
+     */
+    async DeleteSpartaProtection(req, cb) {
+        return this.request("DeleteSpartaProtection", req, cb);
+    }
+    /**
      * 获取业务和攻击概览峰值
      */
     async DescribePeakValue(req, cb) {
@@ -232,6 +336,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ModifyWafThreatenIntelligence(req, cb) {
         return this.request("ModifyWafThreatenIntelligence", req, cb);
+    }
+    /**
+     * clb-waf设置防护域名防护状态
+     */
+    async ModifyHostMode(req, cb) {
+        return this.request("ModifyHostMode", req, cb);
     }
     /**
      * 修改域名配置
@@ -294,16 +404,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteSession", req, cb);
     }
     /**
-     * 获取域名的规则白名单
+     * 一键接入
      */
-    async DescribeDomainWhiteRules(req, cb) {
-        return this.request("DescribeDomainWhiteRules", req, cb);
+    async AddSpartaProtectionAuto(req, cb) {
+        return this.request("AddSpartaProtectionAuto", req, cb);
     }
     /**
      * 获取各个模块具体的规格限制
      */
     async DescribeRuleLimit(req, cb) {
         return this.request("DescribeRuleLimit", req, cb);
+    }
+    /**
+     * clb-waf中获取防护域名列表
+     */
+    async DescribeHosts(req, cb) {
+        return this.request("DescribeHosts", req, cb);
     }
     /**
      * 添加Spart防护域名
@@ -318,10 +434,25 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeWafThreatenIntelligence", req, cb);
     }
     /**
+     * 获取负载均衡绑定的WAF信息，可以根据租户负载均衡实例ID、负载均衡监听器ID、负载均衡的域名信息来查询对应绑定的 Waf的状态信息。
+查询的范围：负载均衡实例ID、负载均衡实例ID+监听器ID、负载均衡实例ID+监听器ID+域名。
+可能的错误码：ResourceNotFound（没有找到对应的资源）、UnsupportedRegion（目前clb-waf只支持北京、广州、上海、成都、重庆、香港地域）。
+
+     */
+    async DescribeWafInfo(req, cb) {
+        return this.request("DescribeWafInfo", req, cb);
+    }
+    /**
      * 获取防护状态以及生效的实例id
      */
     async DescribePolicyStatus(req, cb) {
         return this.request("DescribePolicyStatus", req, cb);
+    }
+    /**
+     * 刷新接入检查的结果，后台会生成接入检查任务
+     */
+    async RefreshAccessCheckResult(req, cb) {
+        return this.request("RefreshAccessCheckResult", req, cb);
     }
     /**
      * Waf  IP封堵状态查询
@@ -336,16 +467,28 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("AddDomainWhiteRule", req, cb);
     }
     /**
-     * 切换域名的规则开关
+     * 修改ipv6开关
      */
-    async SwitchDomainRules(req, cb) {
-        return this.request("SwitchDomainRules", req, cb);
+    async ModifyDomainIpv6Status(req, cb) {
+        return this.request("ModifyDomainIpv6Status", req, cb);
+    }
+    /**
+     * 获取域名的规则白名单
+     */
+    async DescribeDomainWhiteRules(req, cb) {
+        return this.request("DescribeDomainWhiteRules", req, cb);
     }
     /**
      * 获取防护配置中的精准白名单策略列表
      */
     async DescribeCustomWhiteRule(req, cb) {
         return this.request("DescribeCustomWhiteRule", req, cb);
+    }
+    /**
+     * clb-waf获取防护域名详情
+     */
+    async DescribeHost(req, cb) {
+        return this.request("DescribeHost", req, cb);
     }
     /**
      * Waf IP黑白名单Upsert接口

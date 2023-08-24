@@ -258,8 +258,14 @@ export interface DeleteScanUserRequest {
     BizId: number;
     /**
      * 需要删除送检的用户号。示例：1234
+  (若UserId不填，则UserIdString必填；两者选其一；两者都填以UserIdString为准)
      */
     UserId?: number;
+    /**
+     * 需要删除送检的用户号。示例："1234"
+  (若UserIdString不填，则UserId必填；两者选其一；两者都填以UserIdString为准)
+     */
+    UserIdString?: string;
 }
 /**
  * ModifyUserMicStatus请求参数结构体
@@ -1447,8 +1453,20 @@ export interface CreateScanUserRequest {
     BizId: number;
     /**
      * 需要新增送检的用户号。示例：1234
+  (若UserId不填，则UserIdString必填；两者选其一；两者都填以UserIdString为准)
      */
     UserId?: number;
+    /**
+     * 需要新增送检的用户号。示例："1234"
+  (若UserIdString不填，则UserId必填；两者选其一；两者都填以UserIdString为准)
+     */
+    UserIdString?: string;
+    /**
+     * 当前用户送检过期时间，单位：秒。
+  若参数不为0，则在过期时间之后，用户不会被送检。
+  若参数为0，则送检配置不会自动失效。
+     */
+    ExpirationTime?: number;
 }
 /**
  * 流式转文本用量数据

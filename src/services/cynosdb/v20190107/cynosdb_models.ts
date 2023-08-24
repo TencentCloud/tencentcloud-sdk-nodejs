@@ -62,11 +62,11 @@ export interface ModifyClusterNameRequest {
  */
 export interface ModifyProxyRwSplitRequest {
   /**
-   * 集群ID
+   * 集群ID，例如cynosdbmysql-asd123
    */
   ClusterId: string
   /**
-   * 数据库代理组ID
+   * 数据库代理组ID，例如cynosdbmysql-proxy-qwe123
    */
   ProxyGroupId: string
   /**
@@ -181,7 +181,7 @@ export interface DescribeAccountPrivilegesResponse {
   /**
    * 权限列表，示例值为：["select","update","delete","create","drop","references","index","alter","show_db","create_tmp_table","lock_tables","execute","create_view","show_view","create_routine","alter_routine","event","trigger"]
    */
-  Privileges: Array<string>
+  Privileges?: Array<string>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -711,7 +711,7 @@ export interface UpgradeClusterVersionResponse {
   /**
    * 异步任务id
    */
-  FlowId: number
+  FlowId?: number
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1042,12 +1042,12 @@ export interface IsolateInstanceResponse {
   /**
    * 任务流id
    */
-  FlowId: number
+  FlowId?: number
   /**
    * 隔离实例的订单id（预付费实例）
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DealNames: Array<string>
+  DealNames?: Array<string>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1169,7 +1169,7 @@ export interface CopyClusterPasswordComplexityResponse {
   /**
    * 任务流ID
    */
-  FlowId: number
+  FlowId?: number
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1546,7 +1546,7 @@ export interface SearchClusterTablesResponse {
    * 数据表列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Tables: Array<DatabaseTables>
+  Tables?: Array<DatabaseTables>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2601,7 +2601,7 @@ export interface IsolateInstanceRequest {
    */
   ClusterId: string
   /**
-   * 实例ID数组
+   * 实例ID数组，例如["cynosdbbmysql-ins-asd","cynosdbmysql-ins-zxc"]
    */
   InstanceIdList: Array<string>
   /**
@@ -2845,7 +2845,7 @@ export interface ResetAccountPasswordResponse {
  */
 export interface NewAccount {
   /**
-   * 账户名，包含字母数字_,以字母开头，字母或数字结尾，长度1-16
+   * 账户名，包含字母数字_,以字母开头，字母或数字结尾，长度1-30
    */
   AccountName: string
   /**
@@ -2853,7 +2853,7 @@ export interface NewAccount {
    */
   AccountPassword: string
   /**
-   * 主机
+   * 主机(%或ipv4地址)
    */
   Host: string
   /**
@@ -4766,7 +4766,7 @@ export interface RestartInstanceResponse {
   /**
    * 异步任务id
    */
-  FlowId: number
+  FlowId?: number
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4778,11 +4778,11 @@ export interface RestartInstanceResponse {
  */
 export interface CopyClusterPasswordComplexityRequest {
   /**
-   * 复制集群ID数组
+   * 复制集群ID数组，例如["cynosdbmysql-bzxxrmtq","cynosdbmysql-qwer"]
    */
   ClusterIds: Array<string>
   /**
-   * 集群id
+   * 集群id，例如"cynosdbmysql-bzxxrmtq"
    */
   SourceClusterId: string
 }
@@ -5838,12 +5838,12 @@ export interface IsolateClusterResponse {
    * 任务流ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  FlowId: number
+  FlowId?: number
   /**
    * 退款订单号
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DealNames: Array<string>
+  DealNames?: Array<string>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6079,7 +6079,7 @@ export interface SwitchProxyVpcResponse {
   /**
    * 异步任务id。
    */
-  FlowId: number
+  FlowId?: number
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -8108,7 +8108,7 @@ export interface ModifyVipVportResponse {
   /**
    * 异步任务id
    */
-  FlowId: number
+  FlowId?: number
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -8280,23 +8280,23 @@ export interface InquirePriceRenewResponse {
   /**
    * 集群ID
    */
-  ClusterId: string
+  ClusterId?: string
   /**
    * 实例ID列表
    */
-  InstanceIds: Array<string>
+  InstanceIds?: Array<string>
   /**
    * 对应的询价结果数组
    */
-  Prices: Array<TradePrice>
+  Prices?: Array<TradePrice>
   /**
    * 续费计算节点的总价格
    */
-  InstanceRealTotalPrice: number
+  InstanceRealTotalPrice?: number
   /**
    * 续费存储节点的总价格
    */
-  StorageRealTotalPrice: number
+  StorageRealTotalPrice?: number
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

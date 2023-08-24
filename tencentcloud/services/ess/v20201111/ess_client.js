@@ -282,7 +282,7 @@ callbackinfo包含： 回调地址和签名key
         return this.request("CreateFlowByFiles", req, cb);
     }
     /**
-     * 创建电子印章
+     * 本接口（CreateSeal）用于创建企业电子印章，支持创建企业公章，合同章，财务专用章和人事专用章创建。
      */
     async CreateSeal(req, cb) {
         return this.request("CreateSeal", req, cb);

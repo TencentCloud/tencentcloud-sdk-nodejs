@@ -18,9 +18,29 @@ const client = new tencentcloud.waf.v20180125.Client({
 })
 describe("waf.v20180125.test.js", function () {
 
+it("waf.v20180125.ModifyHost", async function () {
+    try {
+       const data = await client.ModifyHost({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("waf.v20180125.DescribeAccessExports", async function () {
     try {
        const data = await client.DescribeAccessExports({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("waf.v20180125.DescribeFindDomainList", async function () {
+    try {
+       const data = await client.DescribeFindDomainList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -38,9 +58,39 @@ it("waf.v20180125.DescribePeakPoints", async function () {
     }
 })
 
+it("waf.v20180125.ModifyProtectionStatus", async function () {
+    try {
+       const data = await client.ModifyProtectionStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("waf.v20180125.DescribeHostLimit", async function () {
+    try {
+       const data = await client.DescribeHostLimit({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("waf.v20180125.DeleteAccessExport", async function () {
     try {
        const data = await client.DeleteAccessExport({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("waf.v20180125.DescribeDomainDetailsClb", async function () {
+    try {
+       const data = await client.DescribeDomainDetailsClb({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -61,6 +111,16 @@ it("waf.v20180125.DeleteDomainWhiteRules", async function () {
 it("waf.v20180125.ModifyAreaBanStatus", async function () {
     try {
        const data = await client.ModifyAreaBanStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("waf.v20180125.SwitchDomainRules", async function () {
+    try {
+       const data = await client.SwitchDomainRules({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -91,6 +151,16 @@ it("waf.v20180125.SearchAccessLog", async function () {
 it("waf.v20180125.DescribeAccessIndex", async function () {
     try {
        const data = await client.DescribeAccessIndex({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("waf.v20180125.ModifyHostFlowMode", async function () {
+    try {
+       const data = await client.ModifyHostFlowMode({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -148,9 +218,29 @@ it("waf.v20180125.DescribeInstances", async function () {
     }
 })
 
+it("waf.v20180125.ModifySpartaProtectionMode", async function () {
+    try {
+       const data = await client.ModifySpartaProtectionMode({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("waf.v20180125.DeleteIpAccessControl", async function () {
     try {
        const data = await client.DeleteIpAccessControl({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("waf.v20180125.ModifyAccessPeriod", async function () {
+    try {
+       const data = await client.ModifyAccessPeriod({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -178,9 +268,49 @@ it("waf.v20180125.ModifyWafAutoDenyStatus", async function () {
     }
 })
 
-it("waf.v20180125.ModifyAccessPeriod", async function () {
+it("waf.v20180125.DescribeTlsVersion", async function () {
     try {
-       const data = await client.ModifyAccessPeriod({})
+       const data = await client.DescribeTlsVersion({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("waf.v20180125.ModifyHostStatus", async function () {
+    try {
+       const data = await client.ModifyHostStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("waf.v20180125.DescribeCiphersDetail", async function () {
+    try {
+       const data = await client.DescribeCiphersDetail({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("waf.v20180125.AddSpartaProtectionsAuto", async function () {
+    try {
+       const data = await client.AddSpartaProtectionsAuto({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("waf.v20180125.ModifyDomainsCLSStatus", async function () {
+    try {
+       const data = await client.ModifyDomainsCLSStatus({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -208,9 +338,29 @@ it("waf.v20180125.DescribeVipInfo", async function () {
     }
 })
 
+it("waf.v20180125.DescribeUserDomainInfo", async function () {
+    try {
+       const data = await client.DescribeUserDomainInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("waf.v20180125.DescribeUserCdcClbWafRegions", async function () {
     try {
        const data = await client.DescribeUserCdcClbWafRegions({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("waf.v20180125.DeleteHost", async function () {
+    try {
+       const data = await client.DeleteHost({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -338,6 +488,26 @@ it("waf.v20180125.ModifyCustomRuleStatus", async function () {
     }
 })
 
+it("waf.v20180125.DescribeDomainCountInfo", async function () {
+    try {
+       const data = await client.DescribeDomainCountInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("waf.v20180125.DeleteSpartaProtection", async function () {
+    try {
+       const data = await client.DeleteSpartaProtection({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("waf.v20180125.DescribePeakValue", async function () {
     try {
        const data = await client.DescribePeakValue({})
@@ -351,6 +521,16 @@ it("waf.v20180125.DescribePeakValue", async function () {
 it("waf.v20180125.ModifyWafThreatenIntelligence", async function () {
     try {
        const data = await client.ModifyWafThreatenIntelligence({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("waf.v20180125.ModifyHostMode", async function () {
+    try {
+       const data = await client.ModifyHostMode({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -458,9 +638,9 @@ it("waf.v20180125.DeleteSession", async function () {
     }
 })
 
-it("waf.v20180125.DescribeDomainWhiteRules", async function () {
+it("waf.v20180125.AddSpartaProtectionAuto", async function () {
     try {
-       const data = await client.DescribeDomainWhiteRules({})
+       const data = await client.AddSpartaProtectionAuto({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -471,6 +651,16 @@ it("waf.v20180125.DescribeDomainWhiteRules", async function () {
 it("waf.v20180125.DescribeRuleLimit", async function () {
     try {
        const data = await client.DescribeRuleLimit({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("waf.v20180125.DescribeHosts", async function () {
+    try {
+       const data = await client.DescribeHosts({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -498,9 +688,29 @@ it("waf.v20180125.DescribeWafThreatenIntelligence", async function () {
     }
 })
 
+it("waf.v20180125.DescribeWafInfo", async function () {
+    try {
+       const data = await client.DescribeWafInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("waf.v20180125.DescribePolicyStatus", async function () {
     try {
        const data = await client.DescribePolicyStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("waf.v20180125.RefreshAccessCheckResult", async function () {
+    try {
+       const data = await client.RefreshAccessCheckResult({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -528,9 +738,19 @@ it("waf.v20180125.AddDomainWhiteRule", async function () {
     }
 })
 
-it("waf.v20180125.SwitchDomainRules", async function () {
+it("waf.v20180125.ModifyDomainIpv6Status", async function () {
     try {
-       const data = await client.SwitchDomainRules({})
+       const data = await client.ModifyDomainIpv6Status({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("waf.v20180125.DescribeDomainWhiteRules", async function () {
+    try {
+       const data = await client.DescribeDomainWhiteRules({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -541,6 +761,16 @@ it("waf.v20180125.SwitchDomainRules", async function () {
 it("waf.v20180125.DescribeCustomWhiteRule", async function () {
     try {
        const data = await client.DescribeCustomWhiteRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("waf.v20180125.DescribeHost", async function () {
+    try {
+       const data = await client.DescribeHost({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

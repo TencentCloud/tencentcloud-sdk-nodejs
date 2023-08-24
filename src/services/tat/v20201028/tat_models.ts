@@ -36,34 +36,21 @@ export interface ScheduleSettings {
 }
 
 /**
- * 执行活动任务简介。
+ * CreateRegisterCode返回参数结构体
  */
-export interface InvocationTaskBasicInfo {
+export interface CreateRegisterCodeResponse {
   /**
-   * 执行任务ID。
+   * 注册码ID。
    */
-  InvocationTaskId: string
+  RegisterCodeId?: string
   /**
-   * 执行任务状态。取值范围：
-<li> PENDING：等待下发 
-<li> DELIVERING：下发中
-<li> DELIVER_DELAYED：延时下发 
-<li> DELIVER_FAILED：下发失败
-<li> START_FAILED：命令启动失败
-<li> RUNNING：命令运行中
-<li> SUCCESS：命令成功
-<li> FAILED：命令执行失败，执行完退出码不为 0
-<li> TIMEOUT：命令超时
-<li> TASK_TIMEOUT：执行任务超时
-<li> CANCELLING：取消中
-<li> CANCELLED：已取消（命令启动前就被取消）
-<li> TERMINATED：已中止（命令执行期间被取消）
+   * 注册码值。
    */
-  TaskStatus: string
+  RegisterCodeValue?: string
   /**
-   * 实例ID。
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  InstanceId: string
+  RequestId?: string
 }
 
 /**
@@ -105,6 +92,67 @@ export interface DisableInvokerRequest {
 }
 
 /**
+ * 注册实例信息。
+ */
+export interface RegisterInstanceInfo {
+  /**
+   * 注册码ID。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RegisterCodeId?: string
+  /**
+   * 实例ID。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceId?: string
+  /**
+   * 实例名。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceName?: string
+  /**
+   * 机器ID。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MachineId?: string
+  /**
+   * 系统名。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SystemName?: string
+  /**
+   * 主机IP。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HostName?: string
+  /**
+   * 内网IP。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LocalIp?: string
+  /**
+   * 公钥。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PublicKey?: string
+  /**
+   * 托管状态。
+返回Online表示实例正在托管，返回Offline表示实例未托管。
+   */
+  Status?: string
+  /**
+   * 创建时间。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreatedTime?: string
+  /**
+   * 上次更新时间。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UpdatedTime?: string
+}
+
+/**
  * 自动化助手客户端信息
  */
 export interface AutomationAgentInfo {
@@ -139,165 +187,63 @@ export interface AutomationAgentInfo {
 }
 
 /**
- * RunCommand请求参数结构体
+ * DisableRegisterCodes请求参数结构体
  */
-export interface RunCommandRequest {
+export interface DisableRegisterCodesRequest {
   /**
-   * Base64编码后的命令内容，长度不可超过64KB。
+   * 注册码ID。
    */
-  Content: string
-  /**
-   * 待执行命令的实例ID列表，上限100。支持实例类型：
-<li> CVM
-<li> LIGHTHOUSE
-   */
-  InstanceIds: Array<string>
-  /**
-   * 命令名称。名称仅支持中文、英文、数字、下划线、分隔符"-"、小数点，最大长度不能超60个字节。
-   */
-  CommandName?: string
-  /**
-   * 命令描述。不超过120字符。
-   */
-  Description?: string
-  /**
-   * 命令类型，目前支持取值：SHELL、POWERSHELL。默认：SHELL。
-   */
-  CommandType?: string
-  /**
-   * 命令执行路径，对于 SHELL 命令默认为 /root，对于 POWERSHELL 命令默认为 C:\Program Files\qcloud\tat_agent\workdir。
-   */
-  WorkingDirectory?: string
-  /**
-   * 命令超时时间，默认60秒。取值范围[1, 86400]。
-   */
-  Timeout?: number
-  /**
-   * 是否保存命令，取值范围：
-<li> True：保存
-<li> False：不保存
-默认为 False。
-   */
-  SaveCommand?: boolean
-  /**
-   * 是否启用自定义参数功能。
-一旦创建，此值不提供修改。
-默认值：false。
-   */
-  EnableParameter?: boolean
-  /**
-   * 启用自定义参数功能时，自定义参数的默认取值。字段类型为json encoded string。如：{\"varA\": \"222\"}。
-key为自定义参数名称，value为该参数的默认取值。kv均为字符串型。
-如果 Parameters 未提供，将使用这里的默认值进行替换。
-自定义参数最多20个。
-自定义参数名称需符合以下规范：字符数目上限64，可选范围【a-zA-Z0-9-_】。
-   */
-  DefaultParameters?: string
-  /**
-   * Command 的自定义参数。字段类型为json encoded string。如：{\"varA\": \"222\"}。
-key为自定义参数名称，value为该参数的默认取值。kv均为字符串型。
-如果未提供该参数取值，将使用 DefaultParameters 进行替换。
-自定义参数最多20个。
-自定义参数名称需符合以下规范：字符数目上限64，可选范围【a-zA-Z0-9-_】。
-   */
-  Parameters?: string
-  /**
-   * 如果保存命令，可为命令设置标签。列表长度不超过10。
-   */
-  Tags?: Array<Tag>
-  /**
-   * 在 CVM 或 Lighthouse 实例中执行命令的用户名称。
-使用最小权限执行命令是权限管理的最佳实践，建议您以普通用户身份执行云助手命令。默认情况下，在 Linux 实例中以 root 用户执行命令；在Windows 实例中以 System 用户执行命令。
-   */
-  Username?: string
-  /**
-   * 指定日志上传的cos bucket 地址，必须以https开头，如 https://BucketName-123454321.cos.ap-beijing.myqcloud.com。
-   */
-  OutputCOSBucketUrl?: string
-  /**
-   * 指定日志在cos bucket中的目录，目录命名有如下规则：
-1. 可用数字、中英文和可见字符的组合，长度最多为60。
-2. 用 / 分割路径，可快速创建子目录。
-3. 不允许连续 / ；不允许以 / 开头；不允许以..作为文件夹名称。
-   */
-  OutputCOSKeyPrefix?: string
+  RegisterCodeIds: Array<string>
 }
 
 /**
- * 执行器信息。
+ * DescribeRegisterInstances请求参数结构体
  */
-export interface Invoker {
+export interface DescribeRegisterInstancesRequest {
   /**
-   * 执行器ID。
+   * 实例id。
    */
-  InvokerId: string
+  InstanceIds?: Array<string>
   /**
-   * 执行器名称。
-   */
-  Name: string
-  /**
-   * 执行器类型。
-   */
-  Type: string
-  /**
-   * 命令ID。
-   */
-  CommandId: string
-  /**
-   * 用户名。
-   */
-  Username: string
-  /**
-   * 自定义参数。
-   */
-  Parameters: string
-  /**
-   * 实例ID列表。
-   */
-  InstanceIds: Array<string>
-  /**
-   * 执行器是否启用。
-   */
-  Enable: boolean
-  /**
-   * 执行器周期计划。周期执行器会返回此字段。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ScheduleSettings: ScheduleSettings
-  /**
-   * 创建时间。
-   */
-  CreatedTime: string
-  /**
-   * 修改时间。
-   */
-  UpdatedTime: string
-}
+   * 过滤器列表。
 
-/**
- * DescribeInvocationTasks请求参数结构体
- */
-export interface DescribeInvocationTasksRequest {
-  /**
-   * 执行任务ID列表，每次请求的上限为100。参数不支持同时指定 `InvocationTaskIds` 和 `Filters`。
-   */
-  InvocationTaskIds?: Array<string>
-  /**
-   * 过滤条件。<br> <li> invocation-id - String - 是否必填：否 -（过滤条件）按照执行活动ID过滤。<br> <li> invocation-task-id - String - 是否必填：否 -（过滤条件）按照执行任务ID过滤。<br> <li> instance-id - String - 是否必填：否 -（过滤条件）按照实例ID过滤。 <br> <li> command-id - String - 是否必填：否 -（过滤条件）按照命令ID过滤。 <br>每次请求的 `Filters` 的上限为10， `Filter.Values` 的上限为5。参数不支持同时指定 `InvocationTaskIds` 和 `Filters` 。
+- instance-name
+
+按照【实例名称】进行过滤。
+类型：String
+必选：否
+
+- instance-id
+
+按照【实例ID】进行过滤。
+类型：String
+必选：否
+
+- register-code-id
+
+按照【注册码ID】进行过滤。
+类型：String
+必选：否
    */
   Filters?: Array<Filter>
   /**
-   * 返回数量，默认为20，最大值为100。关于 `Limit` 的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。
-   */
-  Limit?: number
-  /**
-   * 偏移量，默认为0。关于 `Offset` 的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。
+   * 偏移量，默认为 0。
    */
   Offset?: number
   /**
-   * 是否隐藏输出，取值范围：<br><li>True：隐藏输出 <br><li>False：不隐藏 <br>默认为 True。
+   * 返回数量，默认为 20，最大值为 100。
    */
-  HideOutput?: boolean
+  Limit?: number
+}
+
+/**
+ * DeleteRegisterCodes请求参数结构体
+ */
+export interface DeleteRegisterCodesRequest {
+  /**
+   * 注册码ID列表。限制输入的注册码ID数量大于0小于100。
+   */
+  RegisterCodeIds: Array<string>
 }
 
 /**
@@ -390,6 +336,173 @@ export interface Invocation {
    * 日志在cos bucket中的目录。
    */
   OutputCOSKeyPrefix: string
+}
+
+/**
+ * RunCommand请求参数结构体
+ */
+export interface RunCommandRequest {
+  /**
+   * Base64编码后的命令内容，长度不可超过64KB。
+   */
+  Content: string
+  /**
+   * 待执行命令的实例ID列表，上限100。支持实例类型：
+<li> CVM
+<li> LIGHTHOUSE
+   */
+  InstanceIds: Array<string>
+  /**
+   * 命令名称。名称仅支持中文、英文、数字、下划线、分隔符"-"、小数点，最大长度不能超60个字节。
+   */
+  CommandName?: string
+  /**
+   * 命令描述。不超过120字符。
+   */
+  Description?: string
+  /**
+   * 命令类型，目前支持取值：SHELL、POWERSHELL。默认：SHELL。
+   */
+  CommandType?: string
+  /**
+   * 命令执行路径，对于 SHELL 命令默认为 /root，对于 POWERSHELL 命令默认为 C:\Program Files\qcloud\tat_agent\workdir。
+   */
+  WorkingDirectory?: string
+  /**
+   * 命令超时时间，默认60秒。取值范围[1, 86400]。
+   */
+  Timeout?: number
+  /**
+   * 是否保存命令，取值范围：
+<li> True：保存
+<li> False：不保存
+默认为 False。
+   */
+  SaveCommand?: boolean
+  /**
+   * 是否启用自定义参数功能。
+一旦创建，此值不提供修改。
+默认值：false。
+   */
+  EnableParameter?: boolean
+  /**
+   * 启用自定义参数功能时，自定义参数的默认取值。字段类型为json encoded string。如：{\"varA\": \"222\"}。
+key为自定义参数名称，value为该参数的默认取值。kv均为字符串型。
+如果 Parameters 未提供，将使用这里的默认值进行替换。
+自定义参数最多20个。
+自定义参数名称需符合以下规范：字符数目上限64，可选范围【a-zA-Z0-9-_】。
+   */
+  DefaultParameters?: string
+  /**
+   * Command 的自定义参数。字段类型为json encoded string。如：{\"varA\": \"222\"}。
+key为自定义参数名称，value为该参数的默认取值。kv均为字符串型。
+如果未提供该参数取值，将使用 DefaultParameters 进行替换。
+自定义参数最多20个。
+自定义参数名称需符合以下规范：字符数目上限64，可选范围【a-zA-Z0-9-_】。
+   */
+  Parameters?: string
+  /**
+   * 如果保存命令，可为命令设置标签。列表长度不超过10。
+   */
+  Tags?: Array<Tag>
+  /**
+   * 在 CVM 或 Lighthouse 实例中执行命令的用户名称。
+使用最小权限执行命令是权限管理的最佳实践，建议您以普通用户身份执行云助手命令。默认情况下，在 Linux 实例中以 root 用户执行命令；在Windows 实例中以 System 用户执行命令。
+   */
+  Username?: string
+  /**
+   * 指定日志上传的cos bucket 地址，必须以https开头，如 https://BucketName-123454321.cos.ap-beijing.myqcloud.com。
+   */
+  OutputCOSBucketUrl?: string
+  /**
+   * 指定日志在cos bucket中的目录，目录命名有如下规则：
+1. 可用数字、中英文和可见字符的组合，长度最多为60。
+2. 用 / 分割路径，可快速创建子目录。
+3. 不允许连续 / ；不允许以 / 开头；不允许以..作为文件夹名称。
+   */
+  OutputCOSKeyPrefix?: string
+}
+
+/**
+ * InvokeCommand请求参数结构体
+ */
+export interface InvokeCommandRequest {
+  /**
+   * 待触发的命令ID。
+   */
+  CommandId: string
+  /**
+   * 待执行命令的实例ID列表，上限100。
+   */
+  InstanceIds: Array<string>
+  /**
+   * Command 的自定义参数。字段类型为json encoded string。如：{\"varA\": \"222\"}。
+key为自定义参数名称，value为该参数的默认取值。kv均为字符串型。
+如果未提供该参数取值，将使用 Command 的 DefaultParameters 进行替换。
+自定义参数最多20个。
+自定义参数名称需符合以下规范：字符数目上限64，可选范围【a-zA-Z0-9-_】。
+   */
+  Parameters?: string
+  /**
+   * 在 CVM 或 Lighthouse 实例中执行命令的用户名称。
+使用最小权限执行命令是权限管理的最佳实践，建议您以普通用户身份执行云助手命令。若不填，默认以 Command 配置的 Username 执行。
+   */
+  Username?: string
+  /**
+   * 命令执行路径, 默认以Command配置的WorkingDirectory执行。
+   */
+  WorkingDirectory?: string
+  /**
+   * 命令超时时间，取值范围[1, 86400]。默认以Command配置的Timeout执行。
+   */
+  Timeout?: number
+  /**
+   * 指定日志上传的cos bucket 地址，必须以https开头，如 https://BucketName-123454321.cos.ap-beijing.myqcloud.com。
+   */
+  OutputCOSBucketUrl?: string
+  /**
+   * 指定日志在cos bucket中的目录，目录命名有如下规则：
+1. 可用数字、中英文和可见字符的组合，长度最多为60。
+2. 用 / 分割路径，可快速创建子目录。
+3. 不允许连续 / ；不允许以 / 开头；不允许以..作为文件夹名称。
+   */
+  OutputCOSKeyPrefix?: string
+}
+
+/**
+ * DescribeInvocationTasks请求参数结构体
+ */
+export interface DescribeInvocationTasksRequest {
+  /**
+   * 执行任务ID列表，每次请求的上限为100。参数不支持同时指定 `InvocationTaskIds` 和 `Filters`。
+   */
+  InvocationTaskIds?: Array<string>
+  /**
+   * 过滤条件。<br> <li> invocation-id - String - 是否必填：否 -（过滤条件）按照执行活动ID过滤。<br> <li> invocation-task-id - String - 是否必填：否 -（过滤条件）按照执行任务ID过滤。<br> <li> instance-id - String - 是否必填：否 -（过滤条件）按照实例ID过滤。 <br> <li> command-id - String - 是否必填：否 -（过滤条件）按照命令ID过滤。 <br>每次请求的 `Filters` 的上限为10， `Filter.Values` 的上限为5。参数不支持同时指定 `InvocationTaskIds` 和 `Filters` 。
+   */
+  Filters?: Array<Filter>
+  /**
+   * 返回数量，默认为20，最大值为100。关于 `Limit` 的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。
+   */
+  Limit?: number
+  /**
+   * 偏移量，默认为0。关于 `Offset` 的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。
+   */
+  Offset?: number
+  /**
+   * 是否隐藏输出，取值范围：<br><li>True：隐藏输出 <br><li>False：不隐藏 <br>默认为 True。
+   */
+  HideOutput?: boolean
+}
+
+/**
+ * DeleteRegisterInstance返回参数结构体
+ */
+export interface DeleteRegisterInstanceResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -522,6 +635,37 @@ export interface ModifyInvokerRequest {
 }
 
 /**
+ * 执行活动任务简介。
+ */
+export interface InvocationTaskBasicInfo {
+  /**
+   * 执行任务ID。
+   */
+  InvocationTaskId: string
+  /**
+   * 执行任务状态。取值范围：
+<li> PENDING：等待下发 
+<li> DELIVERING：下发中
+<li> DELIVER_DELAYED：延时下发 
+<li> DELIVER_FAILED：下发失败
+<li> START_FAILED：命令启动失败
+<li> RUNNING：命令运行中
+<li> SUCCESS：命令成功
+<li> FAILED：命令执行失败，执行完退出码不为 0
+<li> TIMEOUT：命令超时
+<li> TASK_TIMEOUT：执行任务超时
+<li> CANCELLING：取消中
+<li> CANCELLED：已取消（命令启动前就被取消）
+<li> TERMINATED：已中止（命令执行期间被取消）
+   */
+  TaskStatus: string
+  /**
+   * 实例ID。
+   */
+  InstanceId: string
+}
+
+/**
  * EnableInvoker返回参数结构体
  */
 export interface EnableInvokerResponse {
@@ -539,6 +683,45 @@ export interface EnableInvokerRequest {
    * 待启用的执行器ID。
    */
   InvokerId: string
+}
+
+/**
+ * 自定义参数。
+ */
+export interface DefaultParameterConf {
+  /**
+   * 参数名。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ParameterName: string
+  /**
+   * 参数默认值。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ParameterValue: string
+  /**
+   * 参数描述。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ParameterDescription?: string
+}
+
+/**
+ * DescribeRegisterInstances返回参数结构体
+ */
+export interface DescribeRegisterInstancesResponse {
+  /**
+   * 该实例注册过的注册码总数。
+   */
+  TotalCount?: number
+  /**
+   * 被托管的实例信息的列表。
+   */
+  RegisterInstanceSet?: Array<RegisterInstanceInfo>
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -598,6 +781,16 @@ export interface CancelInvocationResponse {
 }
 
 /**
+ * DeleteRegisterInstance请求参数结构体
+ */
+export interface DeleteRegisterInstanceRequest {
+  /**
+   * 实例ID。
+   */
+  InstanceId: string
+}
+
+/**
  * DeleteCommand返回参数结构体
  */
 export interface DeleteCommandResponse {
@@ -633,6 +826,32 @@ export interface DescribeCommandsResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * CreateRegisterCode请求参数结构体
+ */
+export interface CreateRegisterCodeRequest {
+  /**
+   * 注册码描述。
+   */
+  Description?: string
+  /**
+   * 注册实列名称前缀。
+   */
+  InstanceNamePrefix?: string
+  /**
+   * 该注册码允许注册的实列数目。默认限制为10个。
+   */
+  RegisterLimit?: number
+  /**
+   * 该注册码的有效时间，单位为小时。默认为4小时。
+   */
+  EffectiveTime?: number
+  /**
+   * 该注册码限制tat_agent只能从IpAddressRange所描述公网出口进行注册。默认不做限制。
+   */
+  IpAddressRange?: string
 }
 
 /**
@@ -925,71 +1144,76 @@ export interface Command {
   /**
    * 命令ID。
    */
-  CommandId: string
+  CommandId?: string
   /**
    * 命令名称。
    */
-  CommandName: string
+  CommandName?: string
   /**
    * 命令描述。
    */
-  Description: string
+  Description?: string
   /**
    * Base64编码后的命令内容。
    */
-  Content: string
+  Content?: string
   /**
    * 命令类型。
    */
-  CommandType: string
+  CommandType?: string
   /**
    * 命令执行路径。
    */
-  WorkingDirectory: string
+  WorkingDirectory?: string
   /**
    * 命令超时时间。
    */
-  Timeout: number
+  Timeout?: number
   /**
    * 命令创建时间。
    */
-  CreatedTime: string
+  CreatedTime?: string
   /**
    * 命令更新时间。
    */
-  UpdatedTime: string
+  UpdatedTime?: string
   /**
    * 是否启用自定义参数功能。
    */
-  EnableParameter: boolean
+  EnableParameter?: boolean
   /**
    * 自定义参数的默认取值。
    */
-  DefaultParameters: string
+  DefaultParameters?: string
+  /**
+   * 自定义参数的默认取值。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DefaultParameterConfs?: Array<DefaultParameterConf>
   /**
    * 命令的结构化描述。公共命令有值，用户命令为空字符串。
    */
-  FormattedDescription: string
+  FormattedDescription?: string
   /**
    * 命令创建者。TAT 代表公共命令，USER 代表个人命令。
    */
-  CreatedBy: string
+  CreatedBy?: string
   /**
    * 命令关联的标签列表。
    */
-  Tags: Array<Tag>
+  Tags?: Array<Tag>
   /**
    * 在实例上执行命令的用户名。
    */
-  Username: string
+  Username?: string
   /**
    * 日志上传的cos bucket 地址。
    */
-  OutputCOSBucketUrl: string
+  OutputCOSBucketUrl?: string
   /**
    * 日志在cos bucket中的目录。
    */
-  OutputCOSKeyPrefix: string
+  OutputCOSKeyPrefix?: string
 }
 
 /**
@@ -1098,6 +1322,16 @@ export interface ModifyInvokerResponse {
 }
 
 /**
+ * ModifyRegisterInstance返回参数结构体
+ */
+export interface ModifyRegisterInstanceResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 执行器执行记录。
  */
 export interface InvokerRecord {
@@ -1121,6 +1355,25 @@ export interface InvokerRecord {
    * 触发结果。
    */
   Result: string
+}
+
+/**
+ * DescribeRegisterCodes返回参数结构体
+ */
+export interface DescribeRegisterCodesResponse {
+  /**
+   * 查询到的注册码总数。
+   */
+  TotalCount?: number
+  /**
+   * 注册码信息列表。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RegisterCodeSet?: Array<RegisterCodeInfo>
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1172,6 +1425,24 @@ export interface CancelInvocationRequest {
 }
 
 /**
+ * DescribeRegisterCodes请求参数结构体
+ */
+export interface DescribeRegisterCodesRequest {
+  /**
+   * 注册码ID。
+   */
+  RegisterCodeIds?: Array<string>
+  /**
+   * 偏移量，默认为 0。
+   */
+  Offset?: number
+  /**
+   * 返回数量，默认为 20，最大值为 100。
+   */
+  Limit?: number
+}
+
+/**
  * DeleteCommand请求参数结构体
  */
 export interface DeleteCommandRequest {
@@ -1192,49 +1463,13 @@ export interface DeleteInvokerRequest {
 }
 
 /**
- * InvokeCommand请求参数结构体
+ * DeleteRegisterCodes返回参数结构体
  */
-export interface InvokeCommandRequest {
+export interface DeleteRegisterCodesResponse {
   /**
-   * 待触发的命令ID。
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  CommandId: string
-  /**
-   * 待执行命令的实例ID列表，上限100。
-   */
-  InstanceIds: Array<string>
-  /**
-   * Command 的自定义参数。字段类型为json encoded string。如：{\"varA\": \"222\"}。
-key为自定义参数名称，value为该参数的默认取值。kv均为字符串型。
-如果未提供该参数取值，将使用 Command 的 DefaultParameters 进行替换。
-自定义参数最多20个。
-自定义参数名称需符合以下规范：字符数目上限64，可选范围【a-zA-Z0-9-_】。
-   */
-  Parameters?: string
-  /**
-   * 在 CVM 或 Lighthouse 实例中执行命令的用户名称。
-使用最小权限执行命令是权限管理的最佳实践，建议您以普通用户身份执行云助手命令。若不填，默认以 Command 配置的 Username 执行。
-   */
-  Username?: string
-  /**
-   * 命令执行路径, 默认以Command配置的WorkingDirectory执行。
-   */
-  WorkingDirectory?: string
-  /**
-   * 命令超时时间，取值范围[1, 86400]。默认以Command配置的Timeout执行。
-   */
-  Timeout?: number
-  /**
-   * 指定日志上传的cos bucket 地址，必须以https开头，如 https://BucketName-123454321.cos.ap-beijing.myqcloud.com。
-   */
-  OutputCOSBucketUrl?: string
-  /**
-   * 指定日志在cos bucket中的目录，目录命名有如下规则：
-1. 可用数字、中英文和可见字符的组合，长度最多为60。
-2. 用 / 分割路径，可快速创建子目录。
-3. 不允许连续 / ；不允许以 / 开头；不允许以..作为文件夹名称。
-   */
-  OutputCOSKeyPrefix?: string
+  RequestId?: string
 }
 
 /**
@@ -1253,6 +1488,20 @@ export interface DescribeInvokerRecordsRequest {
    * 偏移量，默认为0。
    */
   Offset?: number
+}
+
+/**
+ * ModifyRegisterInstance请求参数结构体
+ */
+export interface ModifyRegisterInstanceRequest {
+  /**
+   * 实例ID。
+   */
+  InstanceId: string
+  /**
+   * 实例名。
+   */
+  InstanceName: string
 }
 
 /**
@@ -1285,6 +1534,78 @@ export interface RunCommandResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DisableRegisterCodes返回参数结构体
+ */
+export interface DisableRegisterCodesResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 注册码信息。
+ */
+export interface RegisterCodeInfo {
+  /**
+   * 注册码ID。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RegisterCodeId?: string
+  /**
+   * 注册码描述。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Description?: string
+  /**
+   * 注册实例名称前缀。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceNamePrefix?: string
+  /**
+   * 该注册码允许注册的实列数目。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RegisterLimit?: number
+  /**
+   * 该注册码的过期时间，按照 ISO8601 标准表示，并且使用 UTC 时间。 
+格式为： YYYY-MM-DDThh:mm:ssZ。
+注意：此字段可能返回 null，表示取不到有效值。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExpiredTime?: string
+  /**
+   * 该注册码限制tat_agent只能从IpAddressRange所描述公网出口进行注册。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IpAddressRange?: string
+  /**
+   * 该注册码是否可用。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Enabled?: boolean
+  /**
+   * 该注册码已注册数目。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RegisteredCount?: number
+  /**
+   * 注册码创建时间，按照 ISO8601 标准表示，并且使用 UTC 时间。 
+格式为： YYYY-MM-DDThh:mm:ssZ。
+注意：此字段可能返回 null，表示取不到有效值。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreatedTime?: string
+  /**
+   * 注册码最近一次更新时间，按照 ISO8601 标准表示，并且使用 UTC 时间。 
+格式为： YYYY-MM-DDThh:mm:ssZ。
+注意：此字段可能返回 null，表示取不到有效值。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UpdatedTime?: string
 }
 
 /**
@@ -1367,4 +1688,55 @@ key为自定义参数名称，value为该参数的默认取值。kv均为字符�
 3. 不允许连续 / ；不允许以 / 开头；不允许以..作为文件夹名称
    */
   OutputCOSKeyPrefix?: string
+}
+
+/**
+ * 执行器信息。
+ */
+export interface Invoker {
+  /**
+   * 执行器ID。
+   */
+  InvokerId: string
+  /**
+   * 执行器名称。
+   */
+  Name: string
+  /**
+   * 执行器类型。
+   */
+  Type: string
+  /**
+   * 命令ID。
+   */
+  CommandId: string
+  /**
+   * 用户名。
+   */
+  Username: string
+  /**
+   * 自定义参数。
+   */
+  Parameters: string
+  /**
+   * 实例ID列表。
+   */
+  InstanceIds: Array<string>
+  /**
+   * 执行器是否启用。
+   */
+  Enable: boolean
+  /**
+   * 执行器周期计划。周期执行器会返回此字段。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ScheduleSettings: ScheduleSettings
+  /**
+   * 创建时间。
+   */
+  CreatedTime: string
+  /**
+   * 修改时间。
+   */
+  UpdatedTime: string
 }

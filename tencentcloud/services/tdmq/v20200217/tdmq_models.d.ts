@@ -2062,13 +2062,13 @@ export interface CreateEnvironmentRequest {
      */
     MsgTTL: number;
     /**
+     * Pulsar 集群的ID
+     */
+    ClusterId: string;
+    /**
      * 说明，128个字符以内。
      */
     Remark?: string;
-    /**
-     * Pulsar 集群的ID
-     */
-    ClusterId?: string;
     /**
      * 消息保留策略
      */

@@ -19,29 +19,39 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   ScheduleSettings,
-  InvocationTaskBasicInfo,
+  CreateRegisterCodeResponse,
   PreviewReplacedCommandContentResponse,
   CreateCommandResponse,
   DisableInvokerRequest,
+  RegisterInstanceInfo,
   AutomationAgentInfo,
-  RunCommandRequest,
-  Invoker,
-  DescribeInvocationTasksRequest,
+  DisableRegisterCodesRequest,
+  DescribeRegisterInstancesRequest,
+  DeleteRegisterCodesRequest,
   Invocation,
+  RunCommandRequest,
+  InvokeCommandRequest,
+  DescribeInvocationTasksRequest,
+  DeleteRegisterInstanceResponse,
   DescribeRegionsRequest,
   CommandDocument,
   DescribeInvokerRecordsResponse,
   TaskResult,
   ModifyInvokerRequest,
+  InvocationTaskBasicInfo,
   EnableInvokerResponse,
   EnableInvokerRequest,
+  DefaultParameterConf,
+  DescribeRegisterInstancesResponse,
   ModifyCommandResponse,
   RegionInfo,
   DescribeInvokersResponse,
   CancelInvocationResponse,
+  DeleteRegisterInstanceRequest,
   DeleteCommandResponse,
   DisableInvokerResponse,
   DescribeCommandsResponse,
+  CreateRegisterCodeRequest,
   CreateInvokerRequest,
   DescribeAutomationAgentStatusRequest,
   InvokeCommandResponse,
@@ -57,18 +67,25 @@ import {
   PreviewReplacedCommandContentRequest,
   InvocationTask,
   ModifyInvokerResponse,
+  ModifyRegisterInstanceResponse,
   InvokerRecord,
+  DescribeRegisterCodesResponse,
   DescribeAutomationAgentStatusResponse,
   CreateInvokerResponse,
   CancelInvocationRequest,
+  DescribeRegisterCodesRequest,
   DeleteCommandRequest,
   DeleteInvokerRequest,
-  InvokeCommandRequest,
+  DeleteRegisterCodesResponse,
   DescribeInvokerRecordsRequest,
+  ModifyRegisterInstanceRequest,
   Tag,
   RunCommandResponse,
+  DisableRegisterCodesResponse,
+  RegisterCodeInfo,
   DescribeRegionsResponse,
   CreateCommandRequest,
+  Invoker,
 } from "./tat_models"
 
 /**
@@ -78,6 +95,60 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("tat.tencentcloudapi.com", "2020-10-28", clientConfig)
+  }
+
+  /**
+     * 取消一台或多台CVM实例执行的命令
+
+* 如果命令还未下发到agent，任务状态处于处于PENDING、DELIVERING、DELIVER_DELAYED，取消后任务状态是CANCELLED
+* 如果命令已下发到agent，任务状态处于RUNNING， 取消后任务状态是TERMINATED
+     */
+  async CancelInvocation(
+    req: CancelInvocationRequest,
+    cb?: (error: string, rep: CancelInvocationResponse) => void
+  ): Promise<CancelInvocationResponse> {
+    return this.request("CancelInvocation", req, cb)
+  }
+
+  /**
+   * 接口用于修改托管实例信息。
+   */
+  async ModifyRegisterInstance(
+    req: ModifyRegisterInstanceRequest,
+    cb?: (error: string, rep: ModifyRegisterInstanceResponse) => void
+  ): Promise<ModifyRegisterInstanceResponse> {
+    return this.request("ModifyRegisterInstance", req, cb)
+  }
+
+  /**
+   * 此接口用于创建执行器。
+   */
+  async CreateInvoker(
+    req: CreateInvokerRequest,
+    cb?: (error: string, rep: CreateInvokerResponse) => void
+  ): Promise<CreateInvokerResponse> {
+    return this.request("CreateInvoker", req, cb)
+  }
+
+  /**
+     * 此接口用于删除命令。
+如果命令与执行器关联，则无法被删除。
+     */
+  async DeleteCommand(
+    req: DeleteCommandRequest,
+    cb?: (error: string, rep: DeleteCommandResponse) => void
+  ): Promise<DeleteCommandResponse> {
+    return this.request("DeleteCommand", req, cb)
+  }
+
+  /**
+   * 接口用于创建注册码。
+   */
+  async CreateRegisterCode(
+    req: CreateRegisterCodeRequest,
+    cb?: (error: string, rep: CreateRegisterCodeResponse) => void
+  ): Promise<CreateRegisterCodeResponse> {
+    return this.request("CreateRegisterCode", req, cb)
   }
 
   /**
@@ -121,19 +192,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 取消一台或多台CVM实例执行的命令
-
-* 如果命令还未下发到agent，任务状态处于处于PENDING、DELIVERING、DELIVER_DELAYED，取消后任务状态是CANCELLED
-* 如果命令已下发到agent，任务状态处于RUNNING， 取消后任务状态是TERMINATED
-     */
-  async CancelInvocation(
-    req: CancelInvocationRequest,
-    cb?: (error: string, rep: CancelInvocationResponse) => void
-  ): Promise<CancelInvocationResponse> {
-    return this.request("CancelInvocation", req, cb)
-  }
-
-  /**
    * 此接口用于查询执行任务详情。
    */
   async DescribeInvocationTasks(
@@ -141,98 +199,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeInvocationTasksResponse) => void
   ): Promise<DescribeInvocationTasksResponse> {
     return this.request("DescribeInvocationTasks", req, cb)
-  }
-
-  /**
-   * 此接口用于创建执行器。
-   */
-  async CreateInvoker(
-    req: CreateInvokerRequest,
-    cb?: (error: string, rep: CreateInvokerResponse) => void
-  ): Promise<CreateInvokerResponse> {
-    return this.request("CreateInvoker", req, cb)
-  }
-
-  /**
-   * 此接口用于查询执行器的执行记录。
-   */
-  async DescribeInvokerRecords(
-    req: DescribeInvokerRecordsRequest,
-    cb?: (error: string, rep: DescribeInvokerRecordsResponse) => void
-  ): Promise<DescribeInvokerRecordsResponse> {
-    return this.request("DescribeInvokerRecords", req, cb)
-  }
-
-  /**
-     * 此接口用于查询 TAT 产品后台地域列表。
-RegionState 为 AVAILABLE，代表该地域的 TAT 后台服务已经可用；未返回，代表该地域的 TAT 后台服务尚不可用。
-     */
-  async DescribeRegions(
-    req?: DescribeRegionsRequest,
-    cb?: (error: string, rep: DescribeRegionsResponse) => void
-  ): Promise<DescribeRegionsResponse> {
-    return this.request("DescribeRegions", req, cb)
-  }
-
-  /**
-   * 此接口用于停止执行器。
-   */
-  async DisableInvoker(
-    req: DisableInvokerRequest,
-    cb?: (error: string, rep: DisableInvokerResponse) => void
-  ): Promise<DisableInvokerResponse> {
-    return this.request("DisableInvoker", req, cb)
-  }
-
-  /**
-   * 此接口用于修改执行器。
-   */
-  async ModifyInvoker(
-    req: ModifyInvokerRequest,
-    cb?: (error: string, rep: ModifyInvokerResponse) => void
-  ): Promise<ModifyInvokerResponse> {
-    return this.request("ModifyInvoker", req, cb)
-  }
-
-  /**
-   * 此接口用于创建命令。
-   */
-  async CreateCommand(
-    req: CreateCommandRequest,
-    cb?: (error: string, rep: CreateCommandResponse) => void
-  ): Promise<CreateCommandResponse> {
-    return this.request("CreateCommand", req, cb)
-  }
-
-  /**
-     * 此接口用于删除命令。
-如果命令与执行器关联，则无法被删除。
-     */
-  async DeleteCommand(
-    req: DeleteCommandRequest,
-    cb?: (error: string, rep: DeleteCommandResponse) => void
-  ): Promise<DeleteCommandResponse> {
-    return this.request("DeleteCommand", req, cb)
-  }
-
-  /**
-   * 此接口用于修改命令。
-   */
-  async ModifyCommand(
-    req: ModifyCommandRequest,
-    cb?: (error: string, rep: ModifyCommandResponse) => void
-  ): Promise<ModifyCommandResponse> {
-    return this.request("ModifyCommand", req, cb)
-  }
-
-  /**
-   * 此接口用于查询自动化助手客户端的状态。
-   */
-  async DescribeAutomationAgentStatus(
-    req: DescribeAutomationAgentStatusRequest,
-    cb?: (error: string, rep: DescribeAutomationAgentStatusResponse) => void
-  ): Promise<DescribeAutomationAgentStatusResponse> {
-    return this.request("DescribeAutomationAgentStatus", req, cb)
   }
 
   /**
@@ -246,29 +212,33 @@ RegionState 为 AVAILABLE，代表该地域的 TAT 后台服务已经可用；�
   }
 
   /**
-     * 执行命令，调用成功返回执行活动ID（inv-xxxxxxxx），每个执行活动内部有一个或多个执行任务（invt-xxxxxxxx），每个执行任务代表命令在一台 CVM 或一台 Lighthouse 上的执行记录。
-
-* 如果指定实例未安装 agent，或 agent 不在线，返回失败
-* 如果命令类型与 agent 运行环境不符，返回失败
-* 指定的实例需要处于 VPC 网络
-* 指定的实例需要处于 `RUNNING` 状态
-* 不可同时指定 CVM 和 Lighthouse
-     */
-  async RunCommand(
-    req: RunCommandRequest,
-    cb?: (error: string, rep: RunCommandResponse) => void
-  ): Promise<RunCommandResponse> {
-    return this.request("RunCommand", req, cb)
+   * 此接口用于停止执行器。
+   */
+  async DisableInvoker(
+    req: DisableInvokerRequest,
+    cb?: (error: string, rep: DisableInvokerResponse) => void
+  ): Promise<DisableInvokerResponse> {
+    return this.request("DisableInvoker", req, cb)
   }
 
   /**
-   * 此接口用于查询执行器信息。
+   * 接口用于删除托管实例。
    */
-  async DescribeInvokers(
-    req: DescribeInvokersRequest,
-    cb?: (error: string, rep: DescribeInvokersResponse) => void
-  ): Promise<DescribeInvokersResponse> {
-    return this.request("DescribeInvokers", req, cb)
+  async DeleteRegisterInstance(
+    req: DeleteRegisterInstanceRequest,
+    cb?: (error: string, rep: DeleteRegisterInstanceResponse) => void
+  ): Promise<DeleteRegisterInstanceResponse> {
+    return this.request("DeleteRegisterInstance", req, cb)
+  }
+
+  /**
+   * 此接口用于修改命令。
+   */
+  async ModifyCommand(
+    req: ModifyCommandRequest,
+    cb?: (error: string, rep: ModifyCommandResponse) => void
+  ): Promise<ModifyCommandResponse> {
+    return this.request("ModifyCommand", req, cb)
   }
 
   /**
@@ -285,5 +255,122 @@ RegionState 为 AVAILABLE，代表该地域的 TAT 后台服务已经可用；�
     cb?: (error: string, rep: InvokeCommandResponse) => void
   ): Promise<InvokeCommandResponse> {
     return this.request("InvokeCommand", req, cb)
+  }
+
+  /**
+   * 接口用于查询被托管的实例信息。
+   */
+  async DescribeRegisterInstances(
+    req: DescribeRegisterInstancesRequest,
+    cb?: (error: string, rep: DescribeRegisterInstancesResponse) => void
+  ): Promise<DescribeRegisterInstancesResponse> {
+    return this.request("DescribeRegisterInstances", req, cb)
+  }
+
+  /**
+     * 此接口用于查询 TAT 产品后台地域列表。
+RegionState 为 AVAILABLE，代表该地域的 TAT 后台服务已经可用；未返回，代表该地域的 TAT 后台服务尚不可用。
+     */
+  async DescribeRegions(
+    req?: DescribeRegionsRequest,
+    cb?: (error: string, rep: DescribeRegionsResponse) => void
+  ): Promise<DescribeRegionsResponse> {
+    return this.request("DescribeRegions", req, cb)
+  }
+
+  /**
+   * 此接口用于创建命令。
+   */
+  async CreateCommand(
+    req: CreateCommandRequest,
+    cb?: (error: string, rep: CreateCommandResponse) => void
+  ): Promise<CreateCommandResponse> {
+    return this.request("CreateCommand", req, cb)
+  }
+
+  /**
+   * 此接口用于批量删除注册码。
+   */
+  async DeleteRegisterCodes(
+    req: DeleteRegisterCodesRequest,
+    cb?: (error: string, rep: DeleteRegisterCodesResponse) => void
+  ): Promise<DeleteRegisterCodesResponse> {
+    return this.request("DeleteRegisterCodes", req, cb)
+  }
+
+  /**
+   * 接口用于查询注册码信息。
+   */
+  async DescribeRegisterCodes(
+    req: DescribeRegisterCodesRequest,
+    cb?: (error: string, rep: DescribeRegisterCodesResponse) => void
+  ): Promise<DescribeRegisterCodesResponse> {
+    return this.request("DescribeRegisterCodes", req, cb)
+  }
+
+  /**
+   * 此接口用于查询自动化助手客户端的状态。
+   */
+  async DescribeAutomationAgentStatus(
+    req: DescribeAutomationAgentStatusRequest,
+    cb?: (error: string, rep: DescribeAutomationAgentStatusResponse) => void
+  ): Promise<DescribeAutomationAgentStatusResponse> {
+    return this.request("DescribeAutomationAgentStatus", req, cb)
+  }
+
+  /**
+   * 此接口用于批量禁用注册码。
+   */
+  async DisableRegisterCodes(
+    req: DisableRegisterCodesRequest,
+    cb?: (error: string, rep: DisableRegisterCodesResponse) => void
+  ): Promise<DisableRegisterCodesResponse> {
+    return this.request("DisableRegisterCodes", req, cb)
+  }
+
+  /**
+   * 此接口用于查询执行器的执行记录。
+   */
+  async DescribeInvokerRecords(
+    req: DescribeInvokerRecordsRequest,
+    cb?: (error: string, rep: DescribeInvokerRecordsResponse) => void
+  ): Promise<DescribeInvokerRecordsResponse> {
+    return this.request("DescribeInvokerRecords", req, cb)
+  }
+
+  /**
+   * 此接口用于修改执行器。
+   */
+  async ModifyInvoker(
+    req: ModifyInvokerRequest,
+    cb?: (error: string, rep: ModifyInvokerResponse) => void
+  ): Promise<ModifyInvokerResponse> {
+    return this.request("ModifyInvoker", req, cb)
+  }
+
+  /**
+   * 此接口用于查询执行器信息。
+   */
+  async DescribeInvokers(
+    req: DescribeInvokersRequest,
+    cb?: (error: string, rep: DescribeInvokersResponse) => void
+  ): Promise<DescribeInvokersResponse> {
+    return this.request("DescribeInvokers", req, cb)
+  }
+
+  /**
+     * 执行命令，调用成功返回执行活动ID（inv-xxxxxxxx），每个执行活动内部有一个或多个执行任务（invt-xxxxxxxx），每个执行任务代表命令在一台 CVM 或一台 Lighthouse 上的执行记录。
+
+* 如果指定实例未安装 agent，或 agent 不在线，返回失败
+* 如果命令类型与 agent 运行环境不符，返回失败
+* 指定的实例需要处于 VPC 网络
+* 指定的实例需要处于 `RUNNING` 状态
+* 不可同时指定 CVM 和 Lighthouse
+     */
+  async RunCommand(
+    req: RunCommandRequest,
+    cb?: (error: string, rep: RunCommandResponse) => void
+  ): Promise<RunCommandResponse> {
+    return this.request("RunCommand", req, cb)
   }
 }

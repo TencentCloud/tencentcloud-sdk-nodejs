@@ -19,9 +19,11 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   CreateAccessExportRequest,
+  ModifyHostRequest,
   CdcCluster,
   DescribeIpHitItemsResponse,
   DescribeCustomRulesRspRuleListItem,
+  RefreshAccessCheckResultRequest,
   WafRuleLimit,
   DescribeUserCdcClbWafRegionsRequest,
   IpHitItemsData,
@@ -29,83 +31,115 @@ import {
   DescribeFlowTrendRequest,
   DescribeWafAutoDenyStatusRequest,
   AddCustomWhiteRuleResponse,
+  SearchAttackLogRequest,
+  DomainPackageNew,
   DescribeCustomWhiteRuleResponse,
   AccessLogItems,
   DescribePeakValueResponse,
+  HostDel,
+  DeleteCustomWhiteRuleResponse,
   AddDomainWhiteRuleResponse,
   DescribeIpAccessControlResponse,
+  ModifyHostModeResponse,
   LoadBalancerPackageNew,
   DescribeInstancesResponse,
   ModifyDomainWhiteRuleRequest,
-  VipInfo,
+  DescribeTlsVersionResponse,
+  DescribeHostsResponse,
   AccessRuleTagInfo,
   DescribePeakPointsRequest,
   DescribeAccessIndexRequest,
+  DeleteHostRequest,
   DomainInfo,
-  AccessLogItem,
+  VipInfo,
+  DescribeDomainsResponse,
+  SwitchDomainRulesRequest,
   DeleteSessionRequest,
   DescribeWafAutoDenyRulesRequest,
-  SearchAttackLogRequest,
-  DeleteCustomWhiteRuleResponse,
+  DescribeUserClbWafRegionsRequest,
+  ModifyHostResponse,
+  DescribeCiphersDetailRequest,
   AddCustomRuleResponse,
   DescribeFlowTrendResponse,
   GetAttackDownloadRecordsRequest,
+  ModifyDomainIpv6StatusRequest,
   UpsertIpAccessControlRequest,
+  GetAttackTotalCountResponse,
   ModifySpartaProtectionResponse,
+  ModifyHostFlowModeRequest,
   DeleteDownloadRecordRequest,
   DescribeUserCdcClbWafRegionsResponse,
   GetAttackHistogramRequest,
   DeleteAccessExportResponse,
+  AddSpartaProtectionsAutoResponse,
   DescribeAccessExportsRequest,
+  UserDomainInfo,
   DescribeCustomWhiteRuleRequest,
   DescribeUserClbWafRegionsResponse,
   ModifyCustomWhiteRuleRequest,
   DeleteCustomWhiteRuleRequest,
+  FailedInfo,
+  TLSCiphers,
+  ModifyProtectionStatusResponse,
   ModifyWafAutoDenyStatusRequest,
+  BotStatPointItem,
   ModifyAccessPeriodResponse,
+  ClbHostResult,
   DescribeVipInfoRequest,
   GetAttackHistogramResponse,
   FiltersItemNew,
+  DeleteSpartaProtectionResponse,
   DescribeAutoDenyIPResponse,
   SwitchDomainRulesResponse,
   SearchAccessLogResponse,
   CreateHostResponse,
   IpAccessControlItem,
-  SwitchDomainRulesRequest,
+  DeleteHostResponse,
+  DeleteSpartaProtectionRequest,
   DomainsPartInfo,
   DescribeAutoDenyIPRequest,
-  DescribeIpAccessControlRequest,
+  AccessRuleInfo,
   HostRecord,
   CreateHostRequest,
   ModifyAreaBanStatusRequest,
+  DescribeWafInfoRequest,
   SpartaProtectionPort,
   AddSpartaProtectionRequest,
   PeakPointsItem,
   IpHitItem,
   PostAttackDownloadTaskRequest,
   ModifyCustomWhiteRuleResponse,
+  SearchItem,
   DescribePolicyStatusRequest,
   GetAttackTotalCountRequest,
   DescribeAccessFastAnalysisRequest,
   DeleteIpAccessControlRequest,
   AttackLogInfo,
   DeleteDomainWhiteRulesResponse,
-  DescribeAttackOverviewResponse,
-  ModifyWafAutoDenyStatusResponse,
-  DescribeWafAutoDenyStatusResponse,
-  LogHistogramInfo,
-  DeleteDomainWhiteRulesRequest,
-  DomainPackageNew,
   RuleList,
+  DescribeAttackOverviewResponse,
+  DescribeDomainCountInfoResponse,
+  ModifyWafAutoDenyStatusResponse,
+  ModifyHostModeRequest,
+  DescribeWafAutoDenyStatusResponse,
+  DescribeDomainDetailsClbRequest,
+  DeleteDomainWhiteRulesRequest,
+  DescribeTlsVersionRequest,
+  DescribeCiphersDetailResponse,
+  ModifyDomainsCLSStatusResponse,
+  DescribeHostLimitResponse,
   PostAttackDownloadTaskResponse,
+  ModifySpartaProtectionModeResponse,
   QPSPackageNew,
   DescribeDomainDetailsSaasRequest,
   ModifyCustomRuleStatusResponse,
   AddSpartaProtectionResponse,
+  DescribeUserDomainInfoRequest,
   IpAccessControlData,
   PortItem,
   WafThreatenIntelligenceDetails,
   DescribeDomainWhiteRulesRequest,
+  ModifyHostStatusResponse,
   ModifyCustomRuleStatusRequest,
   DescribePeakPointsResponse,
   AccessHistogramItem,
@@ -114,6 +148,10 @@ import {
   DescribeAttackOverviewRequest,
   DescribePeakValueRequest,
   BotQPS,
+  ClbHostsParams,
+  DescribeDomainDetailsClbResponse,
+  HostStatus,
+  ModifyProtectionStatusRequest,
   ModifyWafAutoDenyRulesResponse,
   SearchAttackLogResponse,
   DescribePolicyStatusResponse,
@@ -121,56 +159,76 @@ import {
   CdcRegion,
   AccessValueInfo,
   DeleteIpAccessControlResponse,
-  GetAttackTotalCountResponse,
+  DescribeWafInfoResponse,
   AccessLogInfo,
   InstanceInfo,
   PortInfo,
   DescribeDomainDetailsSaasResponse,
   AccessKeyValueInfo,
+  AddSpartaProtectionsAutoRequest,
   AddCustomRuleRequest,
   DescribeWafAutoDenyRulesResponse,
   FraudPkg,
+  DescribeHostRequest,
   ModifyAreaBanStatusResponse,
+  FindAllDomainDetail,
+  AddSpartaProtectionAutoResponse,
   ModifyDomainWhiteRuleResponse,
   ExportAccessInfo,
   ModifyWafAutoDenyRulesRequest,
   DescribeAccessFastAnalysisResponse,
-  DescribeDomainsResponse,
+  ModifyDomainIpv6StatusResponse,
+  DescribeHostsRequest,
   AutoDenyDetail,
   ResponseCode,
   ModifyWafThreatenIntelligenceRequest,
   Strategy,
+  AddSpartaProtectionAutoRequest,
   AccessFullTextInfo,
+  DescribeFindDomainListRequest,
   DescribeIpHitItemsRequest,
   DescribeVipInfoResponse,
+  ModifyDomainsCLSStatusRequest,
   DescribeRuleLimitRequest,
-  AccessRuleInfo,
+  DescribeDomainCountInfoRequest,
   GetAttackDownloadRecordsResponse,
   DeleteAccessExportRequest,
   ModifySpartaProtectionRequest,
-  DescribeUserClbWafRegionsRequest,
+  DescribeIpAccessControlRequest,
   DescribeDomainWhiteRulesResponse,
   DescribeWafThreatenIntelligenceResponse,
   DescribeAccessHistogramResponse,
+  ModifyHostFlowModeResponse,
   DeleteAttackDownloadRecordRequest,
+  DescribeAccessIndexResponse,
   AddCustomWhiteRuleRequest,
   AddDomainWhiteRuleRequest,
   UpsertIpAccessControlResponse,
+  DescribeFindDomainListResponse,
   DescribeAccessHistogramRequest,
   DeleteSessionResponse,
   DownloadAttackRecordInfo,
   DescribeRuleLimitResponse,
   DescribeWafThreatenIntelligenceRequest,
-  DescribeAccessIndexResponse,
+  DescribeHostLimitRequest,
   DescribeAccessExportsResponse,
   CreateAccessExportResponse,
-  BotStatPointItem,
+  AccessLogItem,
+  ClbDomainsInfo,
+  DescribeHostResponse,
+  LogHistogramInfo,
+  DomainURI,
   SearchAccessLogRequest,
+  ModifySpartaProtectionModeRequest,
   AccessRuleKeyValueInfo,
   DescribeDomainsRequest,
   BotPkg,
   ModifyWafThreatenIntelligenceResponse,
+  DescribeUserDomainInfoResponse,
+  ModifyHostStatusRequest,
+  TLSVersion,
   LoadBalancer,
+  RefreshAccessCheckResultResponse,
 } from "./waf_models"
 
 /**
@@ -180,6 +238,16 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("waf.tencentcloudapi.com", "2018-01-25", clientConfig)
+  }
+
+  /**
+   * clb-waf编辑防护域名配置
+   */
+  async ModifyHost(
+    req: ModifyHostRequest,
+    cb?: (error: string, rep: ModifyHostResponse) => void
+  ): Promise<ModifyHostResponse> {
+    return this.request("ModifyHost", req, cb)
   }
 
   /**
@@ -193,6 +261,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取发现域名列表接口
+   */
+  async DescribeFindDomainList(
+    req: DescribeFindDomainListRequest,
+    cb?: (error: string, rep: DescribeFindDomainListResponse) => void
+  ): Promise<DescribeFindDomainListResponse> {
+    return this.request("DescribeFindDomainList", req, cb)
+  }
+
+  /**
    * 查询业务和攻击概要趋势
    */
   async DescribePeakPoints(
@@ -203,6 +281,26 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * waf斯巴达-waf开关
+   */
+  async ModifyProtectionStatus(
+    req: ModifyProtectionStatusRequest,
+    cb?: (error: string, rep: ModifyProtectionStatusResponse) => void
+  ): Promise<ModifyProtectionStatusResponse> {
+    return this.request("ModifyProtectionStatus", req, cb)
+  }
+
+  /**
+   * 添加域名的首先验证是否购买了套餐，是否没有达到购买套餐的限制，域名是否已经添加
+   */
+  async DescribeHostLimit(
+    req: DescribeHostLimitRequest,
+    cb?: (error: string, rep: DescribeHostLimitResponse) => void
+  ): Promise<DescribeHostLimitResponse> {
+    return this.request("DescribeHostLimit", req, cb)
+  }
+
+  /**
    * 本接口用于删除访问日志导出
    */
   async DeleteAccessExport(
@@ -210,6 +308,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteAccessExportResponse) => void
   ): Promise<DeleteAccessExportResponse> {
     return this.request("DeleteAccessExport", req, cb)
+  }
+
+  /**
+   * 获取一个clb域名详情
+   */
+  async DescribeDomainDetailsClb(
+    req: DescribeDomainDetailsClbRequest,
+    cb?: (error: string, rep: DescribeDomainDetailsClbResponse) => void
+  ): Promise<DescribeDomainDetailsClbResponse> {
+    return this.request("DescribeDomainDetailsClb", req, cb)
   }
 
   /**
@@ -230,6 +338,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyAreaBanStatusResponse) => void
   ): Promise<ModifyAreaBanStatusResponse> {
     return this.request("ModifyAreaBanStatus", req, cb)
+  }
+
+  /**
+   * 切换域名的规则开关
+   */
+  async SwitchDomainRules(
+    req: SwitchDomainRulesRequest,
+    cb?: (error: string, rep: SwitchDomainRulesResponse) => void
+  ): Promise<SwitchDomainRulesResponse> {
+    return this.request("SwitchDomainRules", req, cb)
   }
 
   /**
@@ -260,6 +378,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAccessIndexResponse) => void
   ): Promise<DescribeAccessIndexResponse> {
     return this.request("DescribeAccessIndex", req, cb)
+  }
+
+  /**
+   * clb-waf 设置防护域名的流量模式
+   */
+  async ModifyHostFlowMode(
+    req: ModifyHostFlowModeRequest,
+    cb?: (error: string, rep: ModifyHostFlowModeResponse) => void
+  ): Promise<ModifyHostFlowModeResponse> {
+    return this.request("ModifyHostFlowMode", req, cb)
   }
 
   /**
@@ -313,6 +441,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 设置waf防护状态
+   */
+  async ModifySpartaProtectionMode(
+    req: ModifySpartaProtectionModeRequest,
+    cb?: (error: string, rep: ModifySpartaProtectionModeResponse) => void
+  ): Promise<ModifySpartaProtectionModeResponse> {
+    return this.request("ModifySpartaProtectionMode", req, cb)
+  }
+
+  /**
    * Waf IP黑白名单Delete接口
    */
   async DeleteIpAccessControl(
@@ -320,6 +458,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteIpAccessControlResponse) => void
   ): Promise<DeleteIpAccessControlResponse> {
     return this.request("DeleteIpAccessControl", req, cb)
+  }
+
+  /**
+   * 本接口用于修改访问日志保存期限及大字段是否存储
+   */
+  async ModifyAccessPeriod(
+    req: ModifyAccessPeriodRequest,
+    cb?: (error: string, rep: ModifyAccessPeriodResponse) => void
+  ): Promise<ModifyAccessPeriodResponse> {
+    return this.request("ModifyAccessPeriod", req, cb)
   }
 
   /**
@@ -343,13 +491,54 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口用于修改访问日志保存期限及大字段是否存储
+   * 查询用户TLS版本
    */
-  async ModifyAccessPeriod(
-    req: ModifyAccessPeriodRequest,
-    cb?: (error: string, rep: ModifyAccessPeriodResponse) => void
-  ): Promise<ModifyAccessPeriodResponse> {
-    return this.request("ModifyAccessPeriod", req, cb)
+  async DescribeTlsVersion(
+    req?: DescribeTlsVersionRequest,
+    cb?: (error: string, rep: DescribeTlsVersionResponse) => void
+  ): Promise<DescribeTlsVersionResponse> {
+    return this.request("DescribeTlsVersion", req, cb)
+  }
+
+  /**
+     * clb-waf 设置防护域名WAF开关
+支持批量操作。
+     */
+  async ModifyHostStatus(
+    req: ModifyHostStatusRequest,
+    cb?: (error: string, rep: ModifyHostStatusResponse) => void
+  ): Promise<ModifyHostStatusResponse> {
+    return this.request("ModifyHostStatus", req, cb)
+  }
+
+  /**
+   * 查询加密套件信息
+   */
+  async DescribeCiphersDetail(
+    req?: DescribeCiphersDetailRequest,
+    cb?: (error: string, rep: DescribeCiphersDetailResponse) => void
+  ): Promise<DescribeCiphersDetailResponse> {
+    return this.request("DescribeCiphersDetail", req, cb)
+  }
+
+  /**
+   * 批量添加域名
+   */
+  async AddSpartaProtectionsAuto(
+    req: AddSpartaProtectionsAutoRequest,
+    cb?: (error: string, rep: AddSpartaProtectionsAutoResponse) => void
+  ): Promise<AddSpartaProtectionsAutoResponse> {
+    return this.request("AddSpartaProtectionsAuto", req, cb)
+  }
+
+  /**
+   * 修改域名列表的访问日志开关
+   */
+  async ModifyDomainsCLSStatus(
+    req: ModifyDomainsCLSStatusRequest,
+    cb?: (error: string, rep: ModifyDomainsCLSStatusResponse) => void
+  ): Promise<ModifyDomainsCLSStatusResponse> {
+    return this.request("ModifyDomainsCLSStatus", req, cb)
   }
 
   /**
@@ -373,6 +562,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询saas和clb的域名信息
+   */
+  async DescribeUserDomainInfo(
+    req?: DescribeUserDomainInfoRequest,
+    cb?: (error: string, rep: DescribeUserDomainInfoResponse) => void
+  ): Promise<DescribeUserDomainInfoResponse> {
+    return this.request("DescribeUserDomainInfo", req, cb)
+  }
+
+  /**
    * 在CDC场景下，负载均衡型WAF的添加、编辑域名配置的时候，需要展示CDC负载均衡型WAF（cdc-clb-waf)支持的地域列表，通过DescribeUserCdcClbWafRegions既可以获得当前对客户已经开放的地域列表
    */
   async DescribeUserCdcClbWafRegions(
@@ -380,6 +579,17 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeUserCdcClbWafRegionsResponse) => void
   ): Promise<DescribeUserCdcClbWafRegionsResponse> {
     return this.request("DescribeUserCdcClbWafRegions", req, cb)
+  }
+
+  /**
+     * 删除CLB-WAF防护域名
+支持批量操作
+     */
+  async DeleteHost(
+    req: DeleteHostRequest,
+    cb?: (error: string, rep: DeleteHostResponse) => void
+  ): Promise<DeleteHostResponse> {
+    return this.request("DeleteHost", req, cb)
   }
 
   /**
@@ -505,6 +715,26 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取域名概况
+   */
+  async DescribeDomainCountInfo(
+    req?: DescribeDomainCountInfoRequest,
+    cb?: (error: string, rep: DescribeDomainCountInfoResponse) => void
+  ): Promise<DescribeDomainCountInfoResponse> {
+    return this.request("DescribeDomainCountInfo", req, cb)
+  }
+
+  /**
+   * waf斯巴达-删除防护域名
+   */
+  async DeleteSpartaProtection(
+    req: DeleteSpartaProtectionRequest,
+    cb?: (error: string, rep: DeleteSpartaProtectionResponse) => void
+  ): Promise<DeleteSpartaProtectionResponse> {
+    return this.request("DeleteSpartaProtection", req, cb)
+  }
+
+  /**
    * 获取业务和攻击概览峰值
    */
   async DescribePeakValue(
@@ -522,6 +752,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyWafThreatenIntelligenceResponse) => void
   ): Promise<ModifyWafThreatenIntelligenceResponse> {
     return this.request("ModifyWafThreatenIntelligence", req, cb)
+  }
+
+  /**
+   * clb-waf设置防护域名防护状态
+   */
+  async ModifyHostMode(
+    req: ModifyHostModeRequest,
+    cb?: (error: string, rep: ModifyHostModeResponse) => void
+  ): Promise<ModifyHostModeResponse> {
+    return this.request("ModifyHostMode", req, cb)
   }
 
   /**
@@ -625,13 +865,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取域名的规则白名单
+   * 一键接入
    */
-  async DescribeDomainWhiteRules(
-    req: DescribeDomainWhiteRulesRequest,
-    cb?: (error: string, rep: DescribeDomainWhiteRulesResponse) => void
-  ): Promise<DescribeDomainWhiteRulesResponse> {
-    return this.request("DescribeDomainWhiteRules", req, cb)
+  async AddSpartaProtectionAuto(
+    req: AddSpartaProtectionAutoRequest,
+    cb?: (error: string, rep: AddSpartaProtectionAutoResponse) => void
+  ): Promise<AddSpartaProtectionAutoResponse> {
+    return this.request("AddSpartaProtectionAuto", req, cb)
   }
 
   /**
@@ -642,6 +882,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeRuleLimitResponse) => void
   ): Promise<DescribeRuleLimitResponse> {
     return this.request("DescribeRuleLimit", req, cb)
+  }
+
+  /**
+   * clb-waf中获取防护域名列表
+   */
+  async DescribeHosts(
+    req: DescribeHostsRequest,
+    cb?: (error: string, rep: DescribeHostsResponse) => void
+  ): Promise<DescribeHostsResponse> {
+    return this.request("DescribeHosts", req, cb)
   }
 
   /**
@@ -665,6 +915,19 @@ export class Client extends AbstractClient {
   }
 
   /**
+     * 获取负载均衡绑定的WAF信息，可以根据租户负载均衡实例ID、负载均衡监听器ID、负载均衡的域名信息来查询对应绑定的 Waf的状态信息。
+查询的范围：负载均衡实例ID、负载均衡实例ID+监听器ID、负载均衡实例ID+监听器ID+域名。
+可能的错误码：ResourceNotFound（没有找到对应的资源）、UnsupportedRegion（目前clb-waf只支持北京、广州、上海、成都、重庆、香港地域）。
+
+     */
+  async DescribeWafInfo(
+    req: DescribeWafInfoRequest,
+    cb?: (error: string, rep: DescribeWafInfoResponse) => void
+  ): Promise<DescribeWafInfoResponse> {
+    return this.request("DescribeWafInfo", req, cb)
+  }
+
+  /**
    * 获取防护状态以及生效的实例id
    */
   async DescribePolicyStatus(
@@ -672,6 +935,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribePolicyStatusResponse) => void
   ): Promise<DescribePolicyStatusResponse> {
     return this.request("DescribePolicyStatus", req, cb)
+  }
+
+  /**
+   * 刷新接入检查的结果，后台会生成接入检查任务
+   */
+  async RefreshAccessCheckResult(
+    req: RefreshAccessCheckResultRequest,
+    cb?: (error: string, rep: RefreshAccessCheckResultResponse) => void
+  ): Promise<RefreshAccessCheckResultResponse> {
+    return this.request("RefreshAccessCheckResult", req, cb)
   }
 
   /**
@@ -695,13 +968,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 切换域名的规则开关
+   * 修改ipv6开关
    */
-  async SwitchDomainRules(
-    req: SwitchDomainRulesRequest,
-    cb?: (error: string, rep: SwitchDomainRulesResponse) => void
-  ): Promise<SwitchDomainRulesResponse> {
-    return this.request("SwitchDomainRules", req, cb)
+  async ModifyDomainIpv6Status(
+    req: ModifyDomainIpv6StatusRequest,
+    cb?: (error: string, rep: ModifyDomainIpv6StatusResponse) => void
+  ): Promise<ModifyDomainIpv6StatusResponse> {
+    return this.request("ModifyDomainIpv6Status", req, cb)
+  }
+
+  /**
+   * 获取域名的规则白名单
+   */
+  async DescribeDomainWhiteRules(
+    req: DescribeDomainWhiteRulesRequest,
+    cb?: (error: string, rep: DescribeDomainWhiteRulesResponse) => void
+  ): Promise<DescribeDomainWhiteRulesResponse> {
+    return this.request("DescribeDomainWhiteRules", req, cb)
   }
 
   /**
@@ -712,6 +995,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeCustomWhiteRuleResponse) => void
   ): Promise<DescribeCustomWhiteRuleResponse> {
     return this.request("DescribeCustomWhiteRule", req, cb)
+  }
+
+  /**
+   * clb-waf获取防护域名详情
+   */
+  async DescribeHost(
+    req: DescribeHostRequest,
+    cb?: (error: string, rep: DescribeHostResponse) => void
+  ): Promise<DescribeHostResponse> {
+    return this.request("DescribeHost", req, cb)
   }
 
   /**
