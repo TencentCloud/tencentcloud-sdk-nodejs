@@ -516,7 +516,7 @@ export interface DescribeEipsRequest {
   /**
    * 状态列表, 默认所有
    */
-  Status?: Array<number>
+  Status?: Array<number | bigint>
   /**
    * 偏移量，默认为0
    */
@@ -544,7 +544,7 @@ export interface DescribeEipsRequest {
   /**
    * 绑定类型，-1：未绑定，0：物理机，1：nat网关，2：虚拟IP, 3:托管机器
    */
-  BindTypes?: Array<number>
+  BindTypes?: Array<number | bigint>
   /**
    * 独占标志，0：共享，1：独占
    */

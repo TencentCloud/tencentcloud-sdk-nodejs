@@ -417,7 +417,7 @@ PicUrlExpireTime 时间点后图片将被删除）。
    * 涉政人物、违规图标出现的区域坐标 (像素级)，[x1, y1, x2, y2]，即左上角坐标、右下角坐标。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  AreaCoordSet: Array<number>
+  AreaCoordSet: Array<number | bigint>
 }
 
 /**
@@ -648,7 +648,7 @@ block。
    * 嫌疑文字出现的区域坐标 (像素级)，[x1, y1, x2, y2]，即左上角坐标、右下角坐标。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  AreaCoordSet: Array<number>
+  AreaCoordSet: Array<number | bigint>
 }
 
 /**

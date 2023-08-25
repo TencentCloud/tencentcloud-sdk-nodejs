@@ -263,7 +263,7 @@ export interface ProxyTypeInfo {
     /**
      * 转发监听端口列表，端口取值1~65535
      */
-    ProxyPorts: Array<number>;
+    ProxyPorts: Array<number | bigint>;
     /**
      * 转发协议，取值[
   http(HTTP协议)
@@ -398,7 +398,7 @@ export interface DDoSGeoIPBlockConfig {
     /**
      * 当RegionType为customized时，必须填写AreaList，且最多填写128个；
      */
-    AreaList?: Array<number>;
+    AreaList?: Array<number | bigint>;
 }
 /**
  * CreateBlackWhiteIpList返回参数结构体
@@ -1751,7 +1751,7 @@ export interface DescribeNewL7RulesRequest {
     /**
      * 状态搜索，选填，取值[0(规则配置成功)，1(规则配置生效中)，2(规则配置失败)，3(规则删除生效中)，5(规则删除失败)，6(规则等待配置)，7(规则等待删除)，8(规则待配置证书)]
      */
-    StatusList?: Array<number>;
+    StatusList?: Array<number | bigint>;
     /**
      * 域名搜索，选填，当需要搜索域名请填写
      */
@@ -1940,7 +1940,7 @@ export interface DescribeOverviewAttackTrendResponse {
     /**
      * 每个周期点的攻击次数
      */
-    Data: Array<number>;
+    Data: Array<number | bigint>;
     /**
      * 包含的周期点数
      */
@@ -2320,7 +2320,7 @@ export interface DescribeBgpBizTrendResponse {
     /**
      * 曲线图各个时间点的值
      */
-    DataList?: Array<number>;
+    DataList?: Array<number | bigint>;
     /**
      * 曲线图取值个数
      */
@@ -3590,7 +3590,7 @@ export interface CcGeoIpPolicyNew {
     /**
      * 用户选择封禁的地域ID列表
      */
-    AreaList: Array<number>;
+    AreaList: Array<number | bigint>;
     /**
      * 创建时间
      */
@@ -3845,7 +3845,7 @@ export interface DescribeOverviewCCTrendResponse {
     /**
      * 值数组
      */
-    Data?: Array<number>;
+    Data?: Array<number | bigint>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -4119,7 +4119,7 @@ export interface CcGeoIPBlockConfig {
     /**
      * 当RegionType为customized时，必须填写AreaList；当RegionType为china或oversea时，AreaList为空
      */
-    AreaList?: Array<number>;
+    AreaList?: Array<number | bigint>;
 }
 /**
  * ModifyDDoSSpeedLimitConfig请求参数结构体
@@ -4592,7 +4592,7 @@ export interface DescribeCCTrendResponse {
     /**
      * 值数组
      */
-    Data?: Array<number>;
+    Data?: Array<number | bigint>;
     /**
      * 资源ID
   注意：此字段可能返回 null，表示取不到有效值。
@@ -5181,7 +5181,7 @@ export interface DescribeOverviewDDoSTrendResponse {
     /**
      * 值数组，攻击流量带宽单位为Mbps，包速率单位为pps
      */
-    Data?: Array<number>;
+    Data?: Array<number | bigint>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -5391,7 +5391,7 @@ export interface DescribeDDoSTrendResponse {
     /**
      * 值数组，攻击流量带宽单位为Mbps，包速率单位为pps
      */
-    Data: Array<number>;
+    Data: Array<number | bigint>;
     /**
      * 资源ID
   注意：此字段可能返回 null，表示取不到有效值。

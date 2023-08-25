@@ -615,7 +615,7 @@ export interface DescribeSmsSignListRequest {
      * 签名 ID 数组。
   注：默认数组最大长度100。
      */
-    SignIdSet: Array<number>;
+    SignIdSet: Array<number | bigint>;
     /**
      * 是否国际/港澳台短信：
   0：表示国内短信。
@@ -747,7 +747,7 @@ export interface DescribeSmsTemplateListRequest {
      * 模板 ID 数组。数组为空时默认查询模板列表信息，请使用 Limit 和 Offset 字段设置查询范围。
   <dx-alert infotype="notice" title="注意">默认数组长度最大100</dx-alert>
      */
-    TemplateIdSet?: Array<number>;
+    TemplateIdSet?: Array<number | bigint>;
     /**
      * 最大上限，最多100。
   注：默认为0，TemplateIdSet 为空时启用。

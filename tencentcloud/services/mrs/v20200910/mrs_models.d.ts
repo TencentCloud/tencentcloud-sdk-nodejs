@@ -156,7 +156,7 @@ export interface IHCBlock {
      * 索引
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Index?: Array<number>;
+    Index?: Array<number | bigint>;
     /**
      * 原文
   注意：此字段可能返回 null，表示取不到有效值。
@@ -269,7 +269,7 @@ export interface Molecular {
      * 索引
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Index?: Array<number>;
+    Index?: Array<number | bigint>;
     /**
      * 原文
   注意：此字段可能返回 null，表示取不到有效值。
@@ -404,7 +404,7 @@ export interface TuberInfo {
      * 原文位置
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Index?: Array<number>;
+    Index?: Array<number | bigint>;
     /**
      * 大小状态
   注意：此字段可能返回 null，表示取不到有效值。
@@ -554,7 +554,7 @@ export interface Multiple {
      * 原文位置
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Index: Array<number>;
+    Index: Array<number | bigint>;
     /**
      * 原文
   注意：此字段可能返回 null，表示取不到有效值。
@@ -669,7 +669,7 @@ export interface Report {
      * 索引
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Index?: Array<number>;
+    Index?: Array<number | bigint>;
     /**
      * 原文
   注意：此字段可能返回 null，表示取不到有效值。
@@ -719,7 +719,7 @@ export interface PTNM {
      * 索引
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Index?: Array<number>;
+    Index?: Array<number | bigint>;
     /**
      * 原文
   注意：此字段可能返回 null，表示取不到有效值。
@@ -779,7 +779,7 @@ export interface HistologyClass {
      * 索引
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Index?: Array<number>;
+    Index?: Array<number | bigint>;
     /**
      * 原文
   注意：此字段可能返回 null，表示取不到有效值。
@@ -804,7 +804,7 @@ export interface BlockInfoV2 {
      * 原文位置
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Index?: Array<number>;
+    Index?: Array<number | bigint>;
     /**
      * 原文
   注意：此字段可能返回 null，表示取不到有效值。
@@ -874,7 +874,7 @@ export interface Lymph {
      * 原文位置
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Index: Array<number>;
+    Index: Array<number | bigint>;
     /**
      * 部位
   注意：此字段可能返回 null，表示取不到有效值。
@@ -1079,7 +1079,7 @@ export interface Organ {
      * 原文位置
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Index?: Array<number>;
+    Index?: Array<number | bigint>;
     /**
      * 透声度
   注意：此字段可能返回 null，表示取不到有效值。
@@ -1454,7 +1454,7 @@ export interface HistologyLevel {
      * 原文位置
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Index: Array<number>;
+    Index: Array<number | bigint>;
     /**
      * 原文
   注意：此字段可能返回 null，表示取不到有效值。
@@ -2322,7 +2322,7 @@ export interface AspectRatio {
      * 原文位置
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Index: Array<number>;
+    Index: Array<number | bigint>;
     /**
      * 数值
   注意：此字段可能返回 null，表示取不到有效值。
@@ -2437,7 +2437,7 @@ export interface Part {
      * 原文位置
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Index?: Array<number>;
+    Index?: Array<number | bigint>;
     /**
      * 部位
   注意：此字段可能返回 null，表示取不到有效值。
@@ -2486,7 +2486,7 @@ export interface Invas {
      * 原文位置
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Index: Array<number>;
+    Index: Array<number | bigint>;
     /**
      * 部位
   注意：此字段可能返回 null，表示取不到有效值。
@@ -2691,7 +2691,7 @@ export interface EndoscopyOrgan {
      * 原文位置
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Index?: Array<number>;
+    Index?: Array<number | bigint>;
     /**
      * 原文
   注意：此字段可能返回 null，表示取不到有效值。
@@ -3160,7 +3160,7 @@ export interface HistologyType {
      * 原文位置
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Index: Array<number>;
+    Index: Array<number | bigint>;
     /**
      * 原文
   注意：此字段可能返回 null，表示取不到有效值。
@@ -3180,7 +3180,7 @@ export interface BlockInfo {
      * 原文位置
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Index?: Array<number>;
+    Index?: Array<number | bigint>;
     /**
      * 阳性
   注意：此字段可能返回 null，表示取不到有效值。
@@ -3631,7 +3631,7 @@ export interface Elastic {
      * 原文位置
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Index: Array<number>;
+    Index: Array<number | bigint>;
     /**
      * 分数
   注意：此字段可能返回 null，表示取不到有效值。
@@ -3661,7 +3661,7 @@ export interface IHCInfo {
      * 原文位置
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Index: Array<number>;
+    Index: Array<number | bigint>;
     /**
      * 原文
   注意：此字段可能返回 null，表示取不到有效值。
@@ -3820,7 +3820,7 @@ export interface IHCV2 {
      * 索引
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Index?: Array<number>;
+    Index?: Array<number | bigint>;
     /**
      * 原文
   注意：此字段可能返回 null，表示取不到有效值。
@@ -4376,7 +4376,7 @@ export interface InvasiveV2 {
      * 索引
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Index?: Array<number>;
+    Index?: Array<number | bigint>;
     /**
      * 部位
   注意：此字段可能返回 null，表示取不到有效值。
@@ -4432,7 +4432,7 @@ export interface BaseInfo {
      * 索引
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Index?: Array<number>;
+    Index?: Array<number | bigint>;
     /**
      * 原文
   注意：此字段可能返回 null，表示取不到有效值。
@@ -4485,7 +4485,7 @@ export interface Size {
      * 原文位置
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Index?: Array<number>;
+    Index?: Array<number | bigint>;
     /**
      * 标准大小
   注意：此字段可能返回 null，表示取不到有效值。
@@ -4560,7 +4560,7 @@ export interface LymphTotal {
      * 索引
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Index?: Array<number>;
+    Index?: Array<number | bigint>;
     /**
      * 原文对应坐标
   注意：此字段可能返回 null，表示取不到有效值。
@@ -4685,7 +4685,7 @@ export interface SymptomInfo {
      * 原文位置
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Index?: Array<number>;
+    Index?: Array<number | bigint>;
     /**
      * 病变
   注意：此字段可能返回 null，表示取不到有效值。
@@ -4720,7 +4720,7 @@ export interface LymphNode {
      * 索引
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Index?: Array<number>;
+    Index?: Array<number | bigint>;
     /**
      * 部位
   注意：此字段可能返回 null，表示取不到有效值。
@@ -4745,7 +4745,7 @@ export interface LymphNode {
      * 淋巴结大小
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Sizes?: Array<number>;
+    Sizes?: Array<number | bigint>;
     /**
      * 原文对应坐标
   注意：此字段可能返回 null，表示取不到有效值。
@@ -5195,7 +5195,7 @@ export interface HistologyTypeV2 {
      * 索引
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Index?: Array<number>;
+    Index?: Array<number | bigint>;
     /**
      * 原文
   注意：此字段可能返回 null，表示取不到有效值。

@@ -1295,7 +1295,7 @@ export interface EksService {
     /**
      * 可用端口
      */
-    Ports?: Array<number>;
+    Ports?: Array<number | bigint>;
     /**
      * yaml 内容
      */

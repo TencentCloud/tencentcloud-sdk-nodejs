@@ -70,7 +70,7 @@ export interface CreatePsaRegulationRequest {
   /**
    * 关联的故障类型ID列表
    */
-  TaskTypeIds: Array<number>
+  TaskTypeIds: Array<number | bigint>
   /**
    * 维修实例上限，默认为5
    */
@@ -192,7 +192,7 @@ export interface DescribeCustomImagesRequest {
 <li>4：删除中</li>
 </ul>
    */
-  ImageStatus?: Array<number>
+  ImageStatus?: Array<number | bigint>
 }
 
 /**
@@ -371,7 +371,7 @@ export interface CpuInfo {
   /**
    * 支持的RAID方式，0：有RAID卡，1：没有RAID卡
    */
-  ContainRaidCard: Array<number>
+  ContainRaidCard: Array<number | bigint>
 }
 
 /**
@@ -563,7 +563,7 @@ export interface ModifyPsaRegulationRequest {
   /**
    * 预授权规则关联故障类型ID列表
    */
-  TaskTypeIds?: Array<number>
+  TaskTypeIds?: Array<number | bigint>
 }
 
 /**
@@ -943,7 +943,7 @@ export interface PsaRegulation {
   /**
    * 关联故障类型id
    */
-  TaskTypeIds: Array<number>
+  TaskTypeIds: Array<number | bigint>
 }
 
 /**
@@ -1546,7 +1546,7 @@ export interface DescribeTaskInfoRequest {
   /**
    * 任务状态ID过滤
    */
-  TaskStatus?: Array<number>
+  TaskStatus?: Array<number | bigint>
   /**
    * 排序字段，目前支持：CreateTime，AuthTime，EndTime
    */
@@ -1570,7 +1570,7 @@ export interface DescribeTaskInfoRequest {
   /**
    * 故障类型ID过滤
    */
-  TaskTypeIds?: Array<number>
+  TaskTypeIds?: Array<number | bigint>
 }
 
 /**
@@ -2934,7 +2934,7 @@ export interface DescribeHardwareSpecificationResponse {
   /**
    * 内存的取值，单位为G
    */
-  MemSet?: Array<number>
+  MemSet?: Array<number | bigint>
   /**
    * 硬盘型号列表
    */

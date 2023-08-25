@@ -3417,7 +3417,7 @@ export interface DescribeDeviceDataHistoryRequest {
     /**
      * 返回条数
      */
-    Limit?: Array<number>;
+    Limit?: Array<number | bigint>;
     /**
      * 检索上下文
      */

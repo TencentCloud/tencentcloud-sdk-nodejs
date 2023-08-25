@@ -1464,27 +1464,27 @@ export interface LoRaFrequencyEntry {
     /**
      * 数据上行信道
      */
-    ChannelsDataUp: Array<number>;
+    ChannelsDataUp: Array<number | bigint>;
     /**
      * 数据下行信道RX1
      */
-    ChannelsDataRX1: Array<number>;
+    ChannelsDataRX1: Array<number | bigint>;
     /**
      * 数据下行信道RX2
      */
-    ChannelsDataRX2: Array<number>;
+    ChannelsDataRX2: Array<number | bigint>;
     /**
      * 入网上行信道
      */
-    ChannelsJoinUp: Array<number>;
+    ChannelsJoinUp: Array<number | bigint>;
     /**
      * 入网下行RX1信道
      */
-    ChannelsJoinRX1: Array<number>;
+    ChannelsJoinRX1: Array<number | bigint>;
     /**
      * 入网下行RX2信道
      */
-    ChannelsJoinRX2: Array<number>;
+    ChannelsJoinRX2: Array<number | bigint>;
     /**
      * 创建时间
      */
@@ -3068,27 +3068,27 @@ export interface ModifyLoRaFrequencyRequest {
     /**
      * 数据上行信道
      */
-    ChannelsDataUp?: Array<number>;
+    ChannelsDataUp?: Array<number | bigint>;
     /**
      * 数据下行信道RX1
      */
-    ChannelsDataRX1?: Array<number>;
+    ChannelsDataRX1?: Array<number | bigint>;
     /**
      * 数据下行信道RX2
      */
-    ChannelsDataRX2?: Array<number>;
+    ChannelsDataRX2?: Array<number | bigint>;
     /**
      * 入网上行信道
      */
-    ChannelsJoinUp?: Array<number>;
+    ChannelsJoinUp?: Array<number | bigint>;
     /**
      * 入网下行信道RX1
      */
-    ChannelsJoinRX1?: Array<number>;
+    ChannelsJoinRX1?: Array<number | bigint>;
     /**
      * 入网下行信道RX2
      */
-    ChannelsJoinRX2?: Array<number>;
+    ChannelsJoinRX2?: Array<number | bigint>;
 }
 /**
  * ModifyModelDefinition返回参数结构体
@@ -3180,27 +3180,27 @@ export interface CreateLoRaFrequencyRequest {
     /**
      * 数据上行信道
      */
-    ChannelsDataUp?: Array<number>;
+    ChannelsDataUp?: Array<number | bigint>;
     /**
      * 数据下行RX1信道
      */
-    ChannelsDataRX1?: Array<number>;
+    ChannelsDataRX1?: Array<number | bigint>;
     /**
      * 数据下行RX2信道
      */
-    ChannelsDataRX2?: Array<number>;
+    ChannelsDataRX2?: Array<number | bigint>;
     /**
      * 入网上行信道
      */
-    ChannelsJoinUp?: Array<number>;
+    ChannelsJoinUp?: Array<number | bigint>;
     /**
      * 入网下行RX1信道
      */
-    ChannelsJoinRX1?: Array<number>;
+    ChannelsJoinRX1?: Array<number | bigint>;
     /**
      * 入网下行RX2信道
      */
-    ChannelsJoinRX2?: Array<number>;
+    ChannelsJoinRX2?: Array<number | bigint>;
     /**
      * 频点配置描述
      */

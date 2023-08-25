@@ -52,6 +52,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribePeakPoints", req, cb);
     }
     /**
+     * Bot_V2 bot总开关更新
+     */
+    async ModifyBotStatus(req, cb) {
+        return this.request("ModifyBotStatus", req, cb);
+    }
+    /**
      * waf斯巴达-waf开关
      */
     async ModifyProtectionStatus(req, cb) {
@@ -354,6 +360,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async AddCustomWhiteRule(req, cb) {
         return this.request("AddCustomWhiteRule", req, cb);
+    }
+    /**
+     * api分析页面开关
+     */
+    async ModifyApiAnalyzeStatus(req, cb) {
+        return this.request("ModifyApiAnalyzeStatus", req, cb);
     }
     /**
      * 修改ip惩罚规则

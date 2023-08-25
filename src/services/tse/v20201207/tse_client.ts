@@ -25,13 +25,16 @@ import {
   ApolloEnvParam,
   DescribeCloudNativeAPIGatewayServiceRateLimitRequest,
   CreateCloudNativeAPIGatewayRequest,
+  CloudNativeAPIGatewayStrategyCronScalerConfig,
   DescribeCloudNativeAPIGatewayNodesRequest,
   ModifyCloudNativeAPIGatewayRouteRequest,
   DeleteNativeGatewayServerGroupResponse,
+  CloudNativeAPIGatewayStrategy,
   DescribeSREInstanceAccessAddressResponse,
   ModifyCloudNativeAPIGatewayCanaryRuleResponse,
   CloudNativeAPIGatewayNodeConfig,
   CreateNativeGatewayServerGroupRequest,
+  EngineRegionInfo,
   DeleteCloudNativeAPIGatewayResult,
   QpsThreshold,
   ModifyCloudNativeAPIGatewayServiceResponse,
@@ -75,12 +78,13 @@ import {
   CreateCloudNativeAPIGatewayRouteResponse,
   DescribeInstanceRegionInfo,
   KongTarget,
-  EngineRegionInfo,
+  DescribeCloudNativeAPIGatewaysRequest,
   DescribeNacosServerInterfacesResponse,
   KVMapping,
   RateLimitResponse,
   DescribeCloudNativeAPIGatewayServiceRateLimitResponse,
   DeleteCloudNativeAPIGatewayServiceRequest,
+  CloudNativeAPIGatewayStrategyCronScalerConfigParam,
   EnvInfo,
   ModifyNativeGatewayServerGroupRequest,
   DescribeCloudNativeAPIGatewayRouteRateLimitRequest,
@@ -94,15 +98,18 @@ import {
   ListFilter,
   DeleteEngineRequest,
   ZookeeperReplica,
+  ModifyCloudNativeAPIGatewayServiceRateLimitRequest,
   DescribeSREInstanceAccessAddressRequest,
   DescribeCloudNativeAPIGatewayCanaryRulesResponse,
   SREInstance,
+  NativeGatewayServerGroup,
   DeleteCloudNativeAPIGatewayServiceRateLimitResponse,
-  ModifyCloudNativeAPIGatewayServiceRateLimitRequest,
+  CloudNativeAPIGatewayStrategyAutoScalerConfigMetric,
   CloudNativeAPIGatewayNode,
   UpdateCloudNativeAPIGatewaySpecResponse,
   DescribeGatewayInstancePortResult,
   DescribeZookeeperServerInterfacesResponse,
+  DescribeNativeGatewayServerGroupsRequest,
   DeleteCloudNativeAPIGatewayRequest,
   EngineAdmin,
   PolarisLimiterAddress,
@@ -115,9 +122,9 @@ import {
   DescribeCloudNativeAPIGatewayRouteRateLimitResponse,
   UpdateCloudNativeAPIGatewayResult,
   DescribeCloudNativeAPIGatewayRequest,
+  DeleteCloudNativeAPIGatewayCanaryRuleResponse,
   CreateCloudNativeAPIGatewayCanaryRuleRequest,
   DeleteCloudNativeAPIGatewayRouteRequest,
-  DescribeCloudNativeAPIGatewaysRequest,
   InternetConfig,
   DescribeCloudNativeAPIGatewayRoutesRequest,
   CreateEngineResponse,
@@ -125,17 +132,19 @@ import {
   DescribeCloudNativeAPIGatewayNodesResult,
   CloudNativeAPIGatewayCanaryRule,
   ModifyCloudNativeAPIGatewayServiceRateLimitResponse,
-  CreateCloudNativeAPIGatewayServerGroupResult,
+  CloudNativeAPIGatewayStrategyAutoScalerConfig,
   DescribeNacosServerInterfacesRequest,
   CloudNativeAPIGatewayCanaryRuleCondition,
   DescribeSREInstancesResponse,
   ZookeeperServerInterface,
+  CreateCloudNativeAPIGatewayServerGroupResult,
   BoundK8SInfo,
   KongUpstreamInfo,
   DescribeSREInstancesRequest,
   CreateNativeGatewayServerGroupResponse,
   CreateCloudNativeAPIGatewayServiceRateLimitRequest,
   DescribeZookeeperReplicasResponse,
+  NativeGatewayServerGroups,
   CreateEngineRequest,
   ModifyCloudNativeAPIGatewayCanaryRuleRequest,
   VpcInfo,
@@ -146,7 +155,7 @@ import {
   ModifyCloudNativeAPIGatewayRouteRateLimitResponse,
   Filter,
   DescribeCloudNativeAPIGatewayCanaryRulesRequest,
-  DeleteCloudNativeAPIGatewayCanaryRuleResponse,
+  DescribeNativeGatewayServerGroupsResponse,
   DescribeCloudNativeAPIGatewayPortsRequest,
   ModifyNativeGatewayServerGroupResponse,
   KongServiceDetail,
@@ -529,6 +538,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateCloudNativeAPIGatewayRouteRateLimitResponse) => void
   ): Promise<CreateCloudNativeAPIGatewayRouteRateLimitResponse> {
     return this.request("CreateCloudNativeAPIGatewayRouteRateLimit", req, cb)
+  }
+
+  /**
+   * 查询云原生网关分组信息
+   */
+  async DescribeNativeGatewayServerGroups(
+    req: DescribeNativeGatewayServerGroupsRequest,
+    cb?: (error: string, rep: DescribeNativeGatewayServerGroupsResponse) => void
+  ): Promise<DescribeNativeGatewayServerGroupsResponse> {
+    return this.request("DescribeNativeGatewayServerGroups", req, cb)
   }
 
   /**

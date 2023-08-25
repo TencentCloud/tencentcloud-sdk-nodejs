@@ -85,7 +85,7 @@ export interface ModifyStaffRequest {
     /**
      * 绑定技能组ID列表
      */
-    SkillGroupIds?: Array<number>;
+    SkillGroupIds?: Array<number | bigint>;
     /**
      * 是否开启手机外呼开关
      */
@@ -685,7 +685,7 @@ export interface UnbindNumberCallOutSkillGroupRequest {
     /**
      * 待解绑的技能组Id列表
      */
-    SkillGroupIds: Array<number>;
+    SkillGroupIds: Array<number | bigint>;
 }
 /**
  * CreateCarrierPrivilegeNumberApplicant请求参数结构体
@@ -1211,7 +1211,7 @@ export interface ModifyExtensionRequest {
     /**
      * 所属技能组列表
      */
-    SkillGroupIds?: Array<number>;
+    SkillGroupIds?: Array<number | bigint>;
     /**
      * 绑定坐席邮箱账号
      */
@@ -1368,7 +1368,7 @@ export interface BindNumberCallOutSkillGroupRequest {
     /**
      * 待绑定的技能组Id列表
      */
-    SkillGroupIds: Array<number>;
+    SkillGroupIds: Array<number | bigint>;
 }
 /**
  * ivr 按键信息
@@ -1705,7 +1705,7 @@ export interface NumberInfo {
     /**
      * 绑定的外呼技能组
      */
-    CallOutSkillGroupIds?: Array<number>;
+    CallOutSkillGroupIds?: Array<number | bigint>;
 }
 /**
  * DeleteStaff请求参数结构体
@@ -1776,7 +1776,7 @@ export interface DescribeCCCBuyInfoListRequest {
     /**
      * 应用ID列表，不传时查询所有应用
      */
-    SdkAppIds?: Array<number>;
+    SdkAppIds?: Array<number | bigint>;
 }
 /**
  * DescribeTelCallInfo请求参数结构体
@@ -1793,7 +1793,7 @@ export interface DescribeTelCallInfoRequest {
     /**
      * 应用ID列表，多个ID时，返回值为多个ID使用总和
      */
-    SdkAppIdList: Array<number>;
+    SdkAppIdList: Array<number | bigint>;
 }
 /**
  * 变量
@@ -1844,7 +1844,7 @@ export interface CreateExtensionRequest {
     /**
      * 绑定的技能组列表
      */
-    SkillGroupIds?: Array<number>;
+    SkillGroupIds?: Array<number | bigint>;
     /**
      * 绑定的坐席邮箱
      */
@@ -1931,7 +1931,7 @@ export interface UnbindStaffSkillGroupListRequest {
     /**
      * 解绑技能组列表
      */
-    SkillGroupList: Array<number>;
+    SkillGroupList: Array<number | bigint>;
 }
 /**
  * BindNumberCallOutSkillGroup返回参数结构体
@@ -2126,7 +2126,7 @@ export interface BindStaffSkillGroupListRequest {
     /**
      * 绑定技能组列表
      */
-    SkillGroupList: Array<number>;
+    SkillGroupList: Array<number | bigint>;
 }
 /**
  * DescribePSTNActiveSessionList请求参数结构体
@@ -2187,7 +2187,7 @@ export interface DescribeActiveCarrierPrivilegeNumberResponse {
     /**
      * 待审核单号
      */
-    PendingApplicantIds?: Array<number>;
+    PendingApplicantIds?: Array<number | bigint>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2240,7 +2240,7 @@ export interface DescribeStaffStatusMetricsRequest {
     /**
      * 筛选技能组ID列表
      */
-    GroupIdList?: Array<number>;
+    GroupIdList?: Array<number | bigint>;
     /**
      * 筛选坐席状态列表
      */
@@ -2690,7 +2690,7 @@ export interface DescribeCallInMetricsRequest {
     /**
      * 筛选技能组列表
      */
-    GroupIdList?: Array<number>;
+    GroupIdList?: Array<number | bigint>;
 }
 /**
  * DescribeExtension返回参数结构体

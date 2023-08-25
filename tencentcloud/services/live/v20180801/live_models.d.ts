@@ -1160,7 +1160,7 @@ export interface TimeShiftTemplate {
      * 转码流id列表。
   此参数仅在 RemoveWatermark为false时生效。
      */
-    TranscodeTemplateIds?: Array<number>;
+    TranscodeTemplateIds?: Array<number | bigint>;
 }
 /**
  * 水印信息。
@@ -1984,12 +1984,12 @@ export interface CreateLiveStreamMonitorRequest {
      * 智能语音识别的输入列表，若开启语音识别则必填。
   （第1条输入流index为1）
      */
-    AiAsrInputIndexList?: Array<number>;
+    AiAsrInputIndexList?: Array<number | bigint>;
     /**
      * 智能文字识别的输入列表，若开启文字识别则必填。
   （第1条输入流index为1）
      */
-    AiOcrInputIndexList?: Array<number>;
+    AiOcrInputIndexList?: Array<number | bigint>;
     /**
      * 是否开启断流检测。
      */
@@ -2206,16 +2206,15 @@ export interface DescribeLiveStreamEventListResponse {
  */
 export interface DescribeLiveTranscodeTotalInfoRequest {
     /**
-     * 结束时间点，接口查询支持两种时间格式：
+     * 开始时间，支持最近三个月的数据查询，起始时间和结束时间跨度不能超过三个月。接口查询支持两种时间格式：
   1）YYYY-MM-DDThh:mm:ssZ：UTC时间格式，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/267/38543#:~:text=I-,ISO,-%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F)
   2）YYYY-MM-DD hh:mm:ss：使用此格式时，默认代表北京时间。
      */
     StartTime: string;
     /**
-     * 结束时间，
-  使用UTC格式时间，
-  例如：2019-01-08T10:00:00Z。
-  注意：北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见  [ISO 日期格式说明](https://cloud.tencent.com/document/product/267/38543#:~:text=I-,ISO,-%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F)。
+     * 结束时间，支持最近三个月的数据查询，起始时间和结束时间跨度不能超过三个月。接口查询支持两种时间格式：
+  1）YYYY-MM-DDThh:mm:ssZ：UTC时间格式，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/267/38543#:~:text=I-,ISO,-%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F)
+  2）YYYY-MM-DD hh:mm:ss：使用此格式时，默认代表北京时间。
      */
     EndTime: string;
     /**
@@ -2535,7 +2534,7 @@ export interface DescribeLiveTranscodeRulesRequest {
     /**
      * 要筛选的模板ID数组。
      */
-    TemplateIds?: Array<number>;
+    TemplateIds?: Array<number | bigint>;
     /**
      * 要筛选的域名数组。
      */
@@ -5211,11 +5210,11 @@ export interface ModifyLiveStreamMonitorRequest {
     /**
      * 语音识别输入流列表，1代表第一条输入流。
      */
-    AiAsrInputIndexList?: Array<number>;
+    AiAsrInputIndexList?: Array<number | bigint>;
     /**
      * 文字识别输入流列表，1代表第一条输入流。
      */
-    AiOcrInputIndexList?: Array<number>;
+    AiOcrInputIndexList?: Array<number | bigint>;
     /**
      * 是否开启断流检测。
      */
@@ -5328,7 +5327,7 @@ export interface DescribeLiveDomainsResponse {
      * 启用的播放域名加速区域统计，数组元素分别为：中国大陆（境内），全球地区，国际/港澳台（境外）域名数量。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    PlayTypeCount?: Array<number>;
+    PlayTypeCount?: Array<number | bigint>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -5375,7 +5374,7 @@ export interface ModifyLiveTimeShiftTemplateRequest {
      * 转码流id列表。
   此参数仅在 RemoveWatermark为false时生效。
      */
-    TranscodeTemplateIds?: Array<number>;
+    TranscodeTemplateIds?: Array<number | bigint>;
     /**
      * 地域。
   Mainland：中国大陆。
@@ -5785,7 +5784,7 @@ export interface CreateLiveTimeShiftTemplateRequest {
      * 转码流id列表。
   此参数仅在 RemoveWatermark为false时生效。
      */
-    TranscodeTemplateIds?: Array<number>;
+    TranscodeTemplateIds?: Array<number | bigint>;
 }
 /**
  * DescribeLiveDomainReferer返回参数结构体
@@ -5836,7 +5835,7 @@ export interface StartLiveStreamMonitorRequest {
   取值范围 InputIndex必须已经存在。
   不填默认无声音输出。
      */
-    AudibleInputIndexList?: Array<number>;
+    AudibleInputIndexList?: Array<number | bigint>;
 }
 /**
  * AuthenticateDomainOwner请求参数结构体
@@ -8312,12 +8311,12 @@ export interface LiveStreamMonitorInfo {
      * 输出音频的输入Index列表。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    AudibleInputIndexList?: Array<number>;
+    AudibleInputIndexList?: Array<number | bigint>;
     /**
      * 开启智能语音识别的输入Index列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    AiAsrInputIndexList?: Array<number>;
+    AiAsrInputIndexList?: Array<number | bigint>;
     /**
      * 是否开启断流检测
   注意：此字段可能返回 null，表示取不到有效值。
@@ -8344,7 +8343,7 @@ export interface LiveStreamMonitorInfo {
      * 开启智能文字识别的输入Index列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    AiOcrInputIndexList?: Array<number>;
+    AiOcrInputIndexList?: Array<number | bigint>;
     /**
      * 是否存储监播事件到监播报告，以及是否允许查询监播报告
   注意：此字段可能返回 null，表示取不到有效值。

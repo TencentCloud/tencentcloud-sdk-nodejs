@@ -52,6 +52,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ListRecordRetrieveTasks", req, cb);
     }
     /**
+     * 用于修改录像上云模板。
+     */
+    async UpdateRecordBackupTemplate(req, cb) {
+        return this.request("UpdateRecordBackupTemplate", req, cb);
+    }
+    /**
      * 用于删除已添加的设备。
      */
     async DeleteUserDevice(req, cb) {
@@ -454,10 +460,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteGateway", req, cb);
     }
     /**
-     * 用于获取设备本地录像 URL 地址。
+     * 用于查询网关下挂载的设备列表。
      */
-    async PlayRecord(req, cb) {
-        return this.request("PlayRecord", req, cb);
+    async ListGatewayDevices(req, cb) {
+        return this.request("ListGatewayDevices", req, cb);
     }
     /**
      * 用于删除域名。
@@ -466,10 +472,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteDomain", req, cb);
     }
     /**
-     * 用于修改录像上云模板。
+     * 用于获取设备本地录像 URL 地址。
      */
-    async UpdateRecordBackupTemplate(req, cb) {
-        return this.request("UpdateRecordBackupTemplate", req, cb);
+    async PlayRecord(req, cb) {
+        return this.request("PlayRecord", req, cb);
     }
     /**
      * 用于新增录像上云模板。

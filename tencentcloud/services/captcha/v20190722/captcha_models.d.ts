@@ -259,7 +259,7 @@ export interface OutputManageMarketingRiskValue {
       非公网有效 ip 	205	传进来的 IP 地址为内网 ip 地址或者 ip 保留地
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    RiskType: Array<number>;
+    RiskType: Array<number | bigint>;
 }
 /**
  * DescribeCaptchaOperData 接口 返回数据类型集合
@@ -1264,24 +1264,24 @@ export interface CaptchaTicketDataRes {
  */
 export interface DescribeCaptchaMiniResultResponse {
     /**
-     * 1       ticket verification succeeded     票据验证成功
-  7       CaptchaAppId does not match     票据与验证码应用APPID不匹配
-  8       ticket expired     票据超时
-  10     ticket format error     票据格式不正确
-  15     ticket decryption failed     票据解密失败
-  16     CaptchaAppId wrong format     检查验证码应用APPID错误
-  21     ticket error     票据验证错误
-  25     invalid ticket     无效票据
-  26     system internal error     系统内部错误
-  31 	   UnauthorizedOperation.Unauthorized	无有效套餐包/账户已欠费
+     * 1     ticket verification succeeded     票据验证成功
+  7     CaptchaAppId does not match     票据与验证码应用APPID不匹配
+  8     ticket expired     票据超时
+  10    ticket format error     票据格式不正确
+  15    ticket decryption failed     票据解密失败
+  16    CaptchaAppId wrong format     检查验证码应用APPID错误
+  21    (1)ticket error     票据验证错误 (2)diff 一般是由于用户网络较差，导致前端自动容灾，而生成了容灾票据，业务侧可根据需要进行跳过或二次处理
+  25    invalid ticket     无效票据
+  26    system internal error     系统内部错误
+  31    UnauthorizedOperation.Unauthorized   无有效套餐包/账户已欠费
   100   param err     参数校验错误
      */
-    CaptchaCode: number;
+    CaptchaCode?: number;
     /**
      * 状态描述及验证错误信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CaptchaMsg: string;
+    CaptchaMsg?: string;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */

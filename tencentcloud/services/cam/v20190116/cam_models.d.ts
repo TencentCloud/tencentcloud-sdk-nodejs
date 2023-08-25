@@ -701,7 +701,7 @@ export interface DescribeSubAccountsRequest {
     /**
      * 子用户UIN列表，最多支持50个UIN
      */
-    FilterSubAccountUin: Array<number>;
+    FilterSubAccountUin: Array<number | bigint>;
 }
 /**
  * DeleteUserPermissionsBoundary请求参数结构体
@@ -1435,7 +1435,7 @@ export interface DeletePolicyRequest {
     /**
      * 数组，数组成员是策略 id，支持批量删除策略
      */
-    PolicyId: Array<number>;
+    PolicyId: Array<number | bigint>;
 }
 /**
  * 用户组信息
@@ -2550,7 +2550,7 @@ export interface DeletePolicyVersionRequest {
     /**
      * 策略版本号
      */
-    VersionId: Array<number>;
+    VersionId: Array<number | bigint>;
 }
 /**
  * CreateUserSAMLConfig请求参数结构体

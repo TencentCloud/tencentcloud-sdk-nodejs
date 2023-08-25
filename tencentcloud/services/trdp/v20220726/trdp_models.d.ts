@@ -466,5 +466,5 @@ export interface EvaluationResult {
   40003 疑似模拟器 来源于小程序
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    RiskLabels: Array<number>;
+    RiskLabels: Array<number | bigint>;
 }

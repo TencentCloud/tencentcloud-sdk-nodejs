@@ -570,7 +570,7 @@ export interface DescribeProbeTasksRequest {
   <li> 9 = 任务删除</li>
   <li> 10 = 定时任务暂停中 </li>
      */
-    TaskStatus?: Array<number>;
+    TaskStatus?: Array<number | bigint>;
     /**
      * 偏移量，默认为0
      */
@@ -602,11 +602,11 @@ export interface DescribeProbeTasksRequest {
   
   即使拨测只支持页面浏览，网络质量，文件下载
      */
-    TaskType?: Array<number>;
+    TaskType?: Array<number | bigint>;
     /**
      * 节点类型
      */
-    TaskCategory?: Array<number>;
+    TaskCategory?: Array<number | bigint>;
     /**
      * 排序的列
      */
@@ -743,7 +743,7 @@ export interface NodeDefineExt {
      * 节点支持的任务类型。1: 页面性能 2: 文件上传 3: 文件下载 4: 端口性能 5: 网络质量 6: 音视频体验
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TaskTypes: Array<number>;
+    TaskTypes: Array<number | bigint>;
 }
 /**
  * DescribeProbeNodes请求参数结构体

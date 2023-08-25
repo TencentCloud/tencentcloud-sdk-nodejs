@@ -58,6 +58,16 @@ it("waf.v20180125.DescribePeakPoints", async function () {
     }
 })
 
+it("waf.v20180125.ModifyBotStatus", async function () {
+    try {
+       const data = await client.ModifyBotStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("waf.v20180125.ModifyProtectionStatus", async function () {
     try {
        const data = await client.ModifyProtectionStatus({})
@@ -551,6 +561,16 @@ it("waf.v20180125.ModifySpartaProtection", async function () {
 it("waf.v20180125.AddCustomWhiteRule", async function () {
     try {
        const data = await client.AddCustomWhiteRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("waf.v20180125.ModifyApiAnalyzeStatus", async function () {
+    try {
+       const data = await client.ModifyApiAnalyzeStatus({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

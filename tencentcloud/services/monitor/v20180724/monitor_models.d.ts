@@ -1897,7 +1897,7 @@ export interface PolicyGroupReceiverInfo {
      * 消息接收组列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ReceiverGroupList: Array<number>;
+    ReceiverGroupList: Array<number | bigint>;
     /**
      * 接受者类型
      */
@@ -1906,7 +1906,7 @@ export interface PolicyGroupReceiverInfo {
      * 接收人列表。通过平台接口查询到的接收人id列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ReceiverUserList: Array<number>;
+    ReceiverUserList: Array<number | bigint>;
     /**
      * 告警恢复通知方式
   注意：此字段可能返回 null，表示取不到有效值。
@@ -1933,7 +1933,7 @@ export interface PolicyGroupReceiverInfo {
      * 电话告警接收者uid
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    UIDList: Array<number>;
+    UIDList: Array<number | bigint>;
 }
 /**
  * 指标，可用于设置告警、查询数据
@@ -1996,7 +1996,7 @@ export interface Metric {
      * 指标触发
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Periods?: Array<number>;
+    Periods?: Array<number | bigint>;
 }
 /**
  * DescribeMidDimensionValueList的查询条件
@@ -2075,7 +2075,7 @@ export interface URLNotice {
      * 通知周期 1-7表示周一到周日
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Weekday?: Array<number>;
+    Weekday?: Array<number | bigint>;
 }
 /**
  * DescribeProductList返回参数结构体
@@ -2149,11 +2149,11 @@ export interface DescribePolicyGroupInfoReceiverInfo {
     /**
      * 告警接收组id列表
      */
-    ReceiverGroupList: Array<number>;
+    ReceiverGroupList: Array<number | bigint>;
     /**
      * 告警接收人id列表
      */
-    ReceiverUserList: Array<number>;
+    ReceiverUserList: Array<number | bigint>;
     /**
      * 告警时间段开始时间。范围[0,86400)，作为 UNIX 时间戳转成北京时间后去掉日期，例如7200表示"10:0:0"
      */
@@ -2174,7 +2174,7 @@ export interface DescribePolicyGroupInfoReceiverInfo {
      * 电话告警接收者uid
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    UidList: Array<number>;
+    UidList: Array<number | bigint>;
     /**
      * 电话告警轮数
      */
@@ -2274,7 +2274,7 @@ export interface DescribeBasicAlarmListRequest {
     /**
      * 根据项目ID过滤
      */
-    ProjectIds?: Array<number>;
+    ProjectIds?: Array<number | bigint>;
     /**
      * 根据策略类型过滤
      */
@@ -2282,7 +2282,7 @@ export interface DescribeBasicAlarmListRequest {
     /**
      * 根据告警状态过滤
      */
-    AlarmStatus?: Array<number>;
+    AlarmStatus?: Array<number | bigint>;
     /**
      * 根据告警对象过滤
      */
@@ -2290,7 +2290,7 @@ export interface DescribeBasicAlarmListRequest {
     /**
      * 根据实例组ID过滤
      */
-    InstanceGroupIds?: Array<number>;
+    InstanceGroupIds?: Array<number | bigint>;
     /**
      * 根据指标名过滤
      */
@@ -2328,7 +2328,7 @@ export interface DescribeGrafanaInstancesRequest {
     /**
      * 查询状态
      */
-    InstanceStatus?: Array<number>;
+    InstanceStatus?: Array<number | bigint>;
     /**
      * 标签过滤数组
      */
@@ -2650,7 +2650,7 @@ export interface DescribePolicyGroupListRequest {
     /**
      * 项目id列表
      */
-    ProjectIds?: Array<number>;
+    ProjectIds?: Array<number | bigint>;
     /**
      * 告警策略类型列表
      */
@@ -2772,7 +2772,7 @@ export interface DescribePrometheusInstancesRequest {
   <li>9：欠费已停服</li>
   </ul>
      */
-    InstanceStatus?: Array<number>;
+    InstanceStatus?: Array<number | bigint>;
     /**
      * 按照【实例名称】进行过滤。
      */
@@ -3066,15 +3066,15 @@ export interface DescribeAccidentEventListRequest {
     /**
      * 根据事件类型过滤，1表示服务问题，2表示其他订阅
      */
-    AccidentType?: Array<number>;
+    AccidentType?: Array<number | bigint>;
     /**
      * 根据事件过滤，1表示云服务器存储问题，2表示云服务器网络连接问题，3表示云服务器运行异常，202表示运营商网络抖动
      */
-    AccidentEvent?: Array<number>;
+    AccidentEvent?: Array<number | bigint>;
     /**
      * 根据事件状态过滤，0表示已恢复，1表示未恢复
      */
-    AccidentStatus?: Array<number>;
+    AccidentStatus?: Array<number | bigint>;
     /**
      * 根据事件地域过滤，gz表示广州，sh表示上海等
      */
@@ -3405,7 +3405,7 @@ export interface DescribePolicyConditionListConfigManualPeriod {
      * 可选周期，单位：秒
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Keys: Array<number>;
+    Keys: Array<number | bigint>;
     /**
      * 是否必须
      */
@@ -4239,7 +4239,7 @@ export interface DescribePolicyConditionListConfigManualCalcType {
      * CalcType 取值
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Keys: Array<number>;
+    Keys: Array<number | bigint>;
     /**
      * 是否必须
      */
@@ -5027,17 +5027,17 @@ export interface UserNotice {
      * 用户 uid 列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    UserIds?: Array<number>;
+    UserIds?: Array<number | bigint>;
     /**
      * 用户组 group id 列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    GroupIds?: Array<number>;
+    GroupIds?: Array<number | bigint>;
     /**
      * 电话轮询列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    PhoneOrder?: Array<number>;
+    PhoneOrder?: Array<number | bigint>;
     /**
      * 电话轮询次数 （取值范围1-5）
   注意：此字段可能返回 null，表示取不到有效值。
@@ -5067,7 +5067,7 @@ export interface UserNotice {
      * 通知周期 1-7表示周一到周日
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Weekday?: Array<number>;
+    Weekday?: Array<number | bigint>;
     /**
      * 值班表id列表
   注意：此字段可能返回 null，表示取不到有效值。
@@ -5821,7 +5821,7 @@ export interface MetricSet {
     /**
      * 指标支持的统计周期，单位是秒，如60、300
      */
-    Period: Array<number>;
+    Period: Array<number | bigint>;
     /**
      * 统计周期内指标方式
      */
@@ -6162,7 +6162,7 @@ export interface PrometheusNotificationItem {
   注：NotifyWay选择CALL，采用该参数。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    PhoneNotifyOrder?: Array<number>;
+    PhoneNotifyOrder?: Array<number | bigint>;
     /**
      * 电话告警次数。
   注：NotifyWay选择CALL，采用该参数。
@@ -6321,11 +6321,11 @@ export interface DescribeAlarmHistoriesRequest {
      * 根据项目ID过滤，-1=无项目 0=默认项目
   可在此页面查询 [项目管理](https://console.cloud.tencent.com/project)
      */
-    ProjectIds?: Array<number>;
+    ProjectIds?: Array<number | bigint>;
     /**
      * 根据实例组ID过滤
      */
-    InstanceGroupIds?: Array<number>;
+    InstanceGroupIds?: Array<number | bigint>;
     /**
      * 根据策略类型过滤，策略类型是监控类型之下的概念，在这里两者都需要传入，例如 `[{"MonitorType": "MT_QCE", "Namespace": "cvm_device"}]`
   可使用 [查询所有名字空间 DescribeAllNamespaces](https://cloud.tencent.com/document/product/248/48683) 接口查询
@@ -6346,11 +6346,11 @@ export interface DescribeAlarmHistoriesRequest {
     /**
      * 根据接收人搜索，可以使用“访问管理”的 [拉取子用户 ListUsers](https://cloud.tencent.com/document/product/598/34587) 接口获取用户列表 或 [查询子用户 GetUser](https://cloud.tencent.com/document/product/598/34590) 接口查询子用户详情，此处填入返回结果中的 `Uid` 字段
      */
-    ReceiverUids?: Array<number>;
+    ReceiverUids?: Array<number | bigint>;
     /**
      * 根据接收组搜索，可以使用“访问管理”的 [查询用户组列表 ListGroups](https://cloud.tencent.com/document/product/598/34589) 接口获取用户组列表 或 [列出用户关联的用户组 ListGroupsForUser](https://cloud.tencent.com/document/product/598/34588) 查询某个子用户所在的用户组列表 ，此处填入返回结果中的 `GroupId ` 字段
      */
-    ReceiverGroups?: Array<number>;
+    ReceiverGroups?: Array<number | bigint>;
     /**
      * 根据告警策略 Id 列表搜索
      */
@@ -6376,7 +6376,7 @@ export interface DeletePolicyGroupRequest {
     /**
      * 策略组id
      */
-    GroupId: Array<number>;
+    GroupId: Array<number | bigint>;
 }
 /**
  * EnableSSOCamCheck请求参数结构体
@@ -6679,7 +6679,7 @@ export interface DescribePolicyConditionListConfigManualPeriodNum {
      * 可选周期数
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Keys: Array<number>;
+    Keys: Array<number | bigint>;
     /**
      * 是否必须
      */
@@ -6895,11 +6895,11 @@ export interface MetricConfig {
     /**
      * 允许配置的数据周期，以秒为单位
      */
-    Period: Array<number>;
+    Period: Array<number | bigint>;
     /**
      * 允许配置的持续周期个数
      */
-    ContinuePeriod: Array<number>;
+    ContinuePeriod: Array<number | bigint>;
 }
 /**
  * 抓取目标数
@@ -7102,11 +7102,11 @@ export interface AlarmHistory {
     /**
      * 接收人列表
      */
-    ReceiverUids: Array<number>;
+    ReceiverUids: Array<number | bigint>;
     /**
      * 接收组列表
      */
-    ReceiverGroups: Array<number>;
+    ReceiverGroups: Array<number | bigint>;
     /**
      * 告警渠道列表 SMS=短信 EMAIL=邮件 CALL=电话 WECHAT=微信
      */
@@ -7344,11 +7344,11 @@ export interface DescribeAlarmNoticesRequest {
     /**
      * 接收对象列表
      */
-    UserIds?: Array<number>;
+    UserIds?: Array<number | bigint>;
     /**
      * 接收组列表
      */
-    GroupIds?: Array<number>;
+    GroupIds?: Array<number | bigint>;
     /**
      * 根据通知模板 id 过滤，空数组/不传则不过滤
      */
@@ -7506,7 +7506,7 @@ export interface ReceiverInfo {
     /**
      * 电话告警接收者 UID
      */
-    UidList?: Array<number>;
+    UidList?: Array<number | bigint>;
     /**
      * 电话告警轮数
      */
@@ -7530,11 +7530,11 @@ export interface ReceiverInfo {
     /**
      * 接收组列表。通过平台接口查询到的接收组 ID 列表
      */
-    ReceiverGroupList?: Array<number>;
+    ReceiverGroupList?: Array<number | bigint>;
     /**
      * 接收人列表。通过平台接口查询到的接收人 ID 列表
      */
-    ReceiverUserList?: Array<number>;
+    ReceiverUserList?: Array<number | bigint>;
     /**
      * 告警接收语言，枚举值（zh-CN，en-US）
      */
@@ -8046,7 +8046,7 @@ export interface DescribePolicyConditionListConfigManualContinueTime {
      * 可选持续时间，单位：秒
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Keys: Array<number>;
+    Keys: Array<number | bigint>;
     /**
      * 是否必须
      */
@@ -9218,11 +9218,11 @@ export interface DescribeAlarmPoliciesRequest {
     /**
      * 根据接收人搜索，可以使用“访问管理”的 [拉取子用户 ListUsers](https://cloud.tencent.com/document/product/598/34587) 接口获取用户列表 或 [查询子用户 GetUser](https://cloud.tencent.com/document/product/598/34590) 接口查询子用户详情，此处填入返回结果中的 `Uid` 字段
      */
-    ReceiverUids?: Array<number>;
+    ReceiverUids?: Array<number | bigint>;
     /**
      * 根据接收组搜索，可以使用“访问管理”的 [查询用户组列表 ListGroups](https://cloud.tencent.com/document/product/598/34589) 接口获取用户组列表 或 [列出用户关联的用户组 ListGroupsForUser](https://cloud.tencent.com/document/product/598/34588) 查询某个子用户所在的用户组列表 ，此处填入返回结果中的 `GroupId ` 字段
      */
-    ReceiverGroups?: Array<number>;
+    ReceiverGroups?: Array<number | bigint>;
     /**
      * 根据默认策略筛选 不传展示全部策略 DEFAULT=展示默认策略 NOT_DEFAULT=展示非默认策略
      */
@@ -9239,7 +9239,7 @@ export interface DescribeAlarmPoliciesRequest {
      * 策略所属项目的id数组，可在此页面查看
   [项目管理](https://console.cloud.tencent.com/project)
      */
-    ProjectIds?: Array<number>;
+    ProjectIds?: Array<number | bigint>;
     /**
      * 通知模板的id列表，可查询通知模板列表获取。
   可使用 [查询通知模板列表](https://cloud.tencent.com/document/product/248/51280) 接口查询。
@@ -9252,7 +9252,7 @@ export interface DescribeAlarmPoliciesRequest {
     /**
      * 告警启停筛选，[1]：启用   [0]：停止，全部[0, 1]
      */
-    Enable?: Array<number>;
+    Enable?: Array<number | bigint>;
     /**
      * 传 1 查询未配置通知规则的告警策略；不传或传其他数值，查询所有策略。
      */

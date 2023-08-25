@@ -3446,13 +3446,13 @@ export interface PrometheusNotification {
    * 告警接收组（用户组）
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ReceiverGroups?: Array<number>
+  ReceiverGroups?: Array<number | bigint>
   /**
    * 电话告警顺序。
 注：NotifyWay选择CALL，采用该参数。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  PhoneNotifyOrder?: Array<number>
+  PhoneNotifyOrder?: Array<number | bigint>
   /**
    * 电话告警次数。
 注：NotifyWay选择CALL，采用该参数。
@@ -10442,7 +10442,7 @@ alertmanager
 注：NotifyWay选择CALL，采用该参数。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  PhoneNotifyOrder?: Array<number>
+  PhoneNotifyOrder?: Array<number | bigint>
   /**
    * 电话告警次数。
 注：NotifyWay选择CALL，采用该参数。
@@ -11606,7 +11606,7 @@ export interface ExistedInstancesForNode {
   /**
    * 自定义模式集群，可指定每个节点的pod数量
    */
-  DesiredPodNumbers?: Array<number>
+  DesiredPodNumbers?: Array<number | bigint>
 }
 
 /**

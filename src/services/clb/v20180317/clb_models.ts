@@ -1425,7 +1425,7 @@ export interface AutoRewriteRequest {
   /**
    * 重定向状态码，可取值301,302,307。
    */
-  RewriteCodes?: Array<number>
+  RewriteCodes?: Array<number | bigint>
   /**
    * 重定向是否携带匹配的URL。
    */
@@ -3410,7 +3410,7 @@ export interface CreateListenerRequest {
   /**
    * 要将监听器创建到哪些端口，每个端口对应一个新的监听器。
    */
-  Ports: Array<number>
+  Ports: Array<number | bigint>
   /**
    * 监听器协议： TCP | UDP | HTTP | HTTPS | TCP_SSL | QUIC。
    */

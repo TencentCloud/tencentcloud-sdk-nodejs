@@ -607,7 +607,7 @@ export interface DescribeSmsSignListRequest {
   /**
    * 签名 ID 数组。
    */
-  SignIdSet: Array<number>
+  SignIdSet: Array<number | bigint>
   /**
    * 是否国际/港澳台短信：
 0：表示国内短信。
@@ -740,7 +740,7 @@ export interface DescribeSmsTemplateListRequest {
   /**
    * 模板 ID 数组。
    */
-  TemplateIdSet: Array<number>
+  TemplateIdSet: Array<number | bigint>
   /**
    * 是否国际/港澳台短信：
 0：表示国内短信。

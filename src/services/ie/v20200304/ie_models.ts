@@ -1885,7 +1885,7 @@ export interface QualityControlItem {
    * 区域坐标(px)，即左上角坐标、右下角坐标
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  AreaCoordsSet: Array<number>
+  AreaCoordsSet: Array<number | bigint>
 }
 
 /**
@@ -2094,7 +2094,7 @@ SectionSet：时间片段集合。
   /**
    * 截取时间点集合，单位毫秒，Type=PointSet时必选。
    */
-  PointSet?: Array<number>
+  PointSet?: Array<number | bigint>
   /**
    * 周期采样点信息，Type=IntervalPoint时必选。
    */

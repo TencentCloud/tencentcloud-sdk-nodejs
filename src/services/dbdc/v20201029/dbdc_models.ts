@@ -312,7 +312,7 @@ export interface DescribeDBInstancesRequest {
   /**
    * 实例类型,0:mariadb, 1:tdsql
    */
-  ShardType?: Array<number>
+  ShardType?: Array<number | bigint>
 }
 
 /**
@@ -460,11 +460,11 @@ export interface DescribeInstancesRequest {
   /**
    * 集群类型: 0 一主一备, 1 一主两备...N-1 一主N备
    */
-  InstanceTypes?: Array<number>
+  InstanceTypes?: Array<number | bigint>
   /**
    * 产品ID:  0 MYSQL，1 TDSQL
    */
-  ProductIds?: Array<number>
+  ProductIds?: Array<number | bigint>
   /**
    * 集群uuid: 如 dbdc-q810131s
    */
@@ -772,7 +772,7 @@ export interface DescribeHostListRequest {
   /**
    * 分配状态过滤，0-可分配，1-禁止分配
    */
-  AssignStatus?: Array<number>
+  AssignStatus?: Array<number | bigint>
 }
 
 /**
@@ -816,7 +816,7 @@ export interface DescribeInstanceListRequest {
   /**
    * 按产品过滤，0:CDB, 1:TDSQL
    */
-  ProductId?: Array<number>
+  ProductId?: Array<number | bigint>
   /**
    * 按实例ID过滤
    */
@@ -832,7 +832,7 @@ export interface DescribeInstanceListRequest {
   /**
    * 按实例状态过滤, -1:已隔离, 0:创建中, 1:运行中, 2:扩容中, 3:删除中
    */
-  Status?: Array<number>
+  Status?: Array<number | bigint>
   /**
    * 按所属集群ID过滤
    */

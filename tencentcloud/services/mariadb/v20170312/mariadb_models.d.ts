@@ -1122,7 +1122,7 @@ export interface DescribeDBInstancesRequest {
     /**
      * 按项目 ID 查询
      */
-    ProjectIds?: Array<number>;
+    ProjectIds?: Array<number | bigint>;
     /**
      * 是否根据 VPC 网络来搜索
      */
@@ -1178,11 +1178,11 @@ export interface DescribeDBInstancesRequest {
     /**
      * 按照实例状态进行筛选
      */
-    Status?: Array<number>;
+    Status?: Array<number | bigint>;
     /**
      * 排除实例状态
      */
-    ExcludeStatus?: Array<number>;
+    ExcludeStatus?: Array<number | bigint>;
 }
 /**
  * DescribeDBSecurityGroups请求参数结构体
@@ -2319,7 +2319,7 @@ export interface KillSessionRequest {
     /**
      * 会话ID列表
      */
-    SessionId: Array<number>;
+    SessionId: Array<number | bigint>;
 }
 /**
  * TerminateDedicatedDBInstance请求参数结构体
@@ -2908,7 +2908,7 @@ export interface ReservedNetResource {
     /**
      * Vip下的端口
      */
-    Vports?: Array<number>;
+    Vports?: Array<number | bigint>;
     /**
      * vip的回收时间
      */

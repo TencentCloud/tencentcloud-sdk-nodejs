@@ -250,6 +250,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateCloudNativeAPIGatewayRouteRateLimit", req, cb);
     }
     /**
+     * 查询云原生网关分组信息
+     */
+    async DescribeNativeGatewayServerGroups(req, cb) {
+        return this.request("DescribeNativeGatewayServerGroups", req, cb);
+    }
+    /**
      * 修改云原生网关路由
      */
     async ModifyCloudNativeAPIGatewayRoute(req, cb) {

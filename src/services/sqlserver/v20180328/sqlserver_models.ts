@@ -92,7 +92,7 @@ export interface CreateDBInstancesRequest {
   /**
    * 可维护时间窗配置，以周为单位，表示周几允许维护，1-7分别代表周一到周末
    */
-  Weekly?: Array<number>
+  Weekly?: Array<number | bigint>
   /**
    * 可维护时间窗配置，每天可维护的开始时间
    */
@@ -222,7 +222,7 @@ export interface ModifyBackupStrategyRequest {
   /**
    * BackupType取值为weekly时，表示每周的星期N做备份。（如果数据备份保留时间<7天，则取值[1,2,3,4,5,6,7]。如果数据备份保留时间>=7天，则备份周期取值至少是一周的任意2天）
    */
-  BackupCycle?: Array<number>
+  BackupCycle?: Array<number | bigint>
   /**
    * 数据(日志)备份保留时间，取值[3-1830]天，默认7天
    */
@@ -334,7 +334,7 @@ export interface DescribeMaintenanceSpanResponse {
   /**
    * 以周为单位，表示周几允许维护，例如：[1,2,3,4,5,6,7]表示周一到周日均为可维护日。
    */
-  Weekly: Array<number>
+  Weekly: Array<number | bigint>
   /**
    * 每天可维护的开始时间，例如：10:24标识可维护时间窗10点24分开始。
    */
@@ -520,7 +520,7 @@ export interface ModifyMaintenanceSpanRequest {
   /**
    * 以周为单位，表示允许周几维护，例如：[1,2,3,4,5,6,7]表示周一到周日均为可维护日，本参数不填，则不修改此值。
    */
-  Weekly?: Array<number>
+  Weekly?: Array<number | bigint>
   /**
    * 每天可维护的开始时间，例如：10:24标识可维护时间窗10点24分开始，本参数不填，则不修改此值。
    */
@@ -1092,7 +1092,7 @@ export interface DescribeIncrementalMigrationRequest {
   /**
    * 导入任务状态集合
    */
-  StatusSet?: Array<number>
+  StatusSet?: Array<number | bigint>
   /**
    * 分页，页大小，默认值：100
    */
@@ -1829,7 +1829,7 @@ export interface SpecInfo {
    * 此规格对应的按量计费Pid列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  PostPid: Array<number>
+  PostPid: Array<number | bigint>
   /**
    * 此规格下支持的付费模式，POST-仅支持按量计费 PRE-仅支持包年包月 ALL-支持所有
    */
@@ -2914,7 +2914,7 @@ export interface DescribeMigrationsRequest {
   /**
    * 状态集合。只要符合集合中某一状态的迁移任务，就会查出来
    */
-  StatusSet?: Array<number>
+  StatusSet?: Array<number | bigint>
   /**
    * 迁移任务的名称，模糊匹配
    */
@@ -3584,7 +3584,7 @@ export interface DescribeBusinessIntelligenceFileRequest {
   /**
    * 迁移任务状态集合,1-初始化待部署 2-部署中 3-部署成功 4-部署失败
    */
-  StatusSet?: Array<number>
+  StatusSet?: Array<number | bigint>
   /**
    * 文件类型 FLAT-平面文件，SSIS商业智能服务项目文件
    */
@@ -3694,7 +3694,7 @@ export interface DescribeBackupMigrationRequest {
   /**
    * 导入任务状态集合
    */
-  StatusSet?: Array<number>
+  StatusSet?: Array<number | bigint>
   /**
    * 导入任务恢复类型，FULL,FULL_LOG,FULL_DIFF
    */
@@ -4173,7 +4173,7 @@ export interface DBInstance {
   /**
    * 备份周期
    */
-  BackupCycle?: Array<number>
+  BackupCycle?: Array<number | bigint>
   /**
    * 备份周期类型，[daily、weekly、monthly]
    */
@@ -4528,7 +4528,7 @@ export interface CreateBasicDBInstancesRequest {
   /**
    * 可维护时间窗配置，以周为单位，表示周几允许维护，1-7分别代表周一到周末
    */
-  Weekly?: Array<number>
+  Weekly?: Array<number | bigint>
   /**
    * 可维护时间窗配置，每天可维护的开始时间
    */
@@ -5831,7 +5831,7 @@ export interface CreateBusinessDBInstancesRequest {
   /**
    * 可维护时间窗配置，以周为单位，表示周几允许维护，1-7分别代表周一到周末
    */
-  Weekly?: Array<number>
+  Weekly?: Array<number | bigint>
   /**
    * 可维护时间窗配置，每天可维护的开始时间
    */
@@ -6336,7 +6336,7 @@ export interface CreateCloudDBInstancesRequest {
   /**
    * 可维护时间窗配置，以周为单位，表示周几允许维护，1-7分别代表周一到周末
    */
-  Weekly?: Array<number>
+  Weekly?: Array<number | bigint>
   /**
    * 可维护时间窗配置，每天可维护的开始时间
    */

@@ -2068,7 +2068,7 @@ export interface DescribeDDoSAttackTopDataRequest {
     /**
      * DDoS策略组ID集合，不填默认选择全部策略ID。
      */
-    PolicyIds?: Array<number>;
+    PolicyIds?: Array<number | bigint>;
     /**
      * 攻击类型，取值有：
   <li>flood：洪泛攻击；</li>
@@ -2453,7 +2453,7 @@ export interface ServerCertInfo {
     Alias?: string;
     /**
      * 证书类型，取值有：
-  <li>default：默认证书；</lil>
+  <li>default：默认证书；</li>
   <li>upload：用户上传；</li>
   <li>managed：腾讯云托管。</li>
   注意：此字段可能返回 null，表示取不到有效值。
@@ -3059,11 +3059,11 @@ export interface WafRule {
     /**
      * 黑名单ID列表，将规则ID加入本参数列表中代表该ID关闭，即该规则ID不再生效。
      */
-    BlockRuleIDs: Array<number>;
+    BlockRuleIDs: Array<number | bigint>;
     /**
      * 观察模式ID列表，将规则ID加入本参数列表中代表该ID使用观察模式生效，即该规则ID进入观察模式。
      */
-    ObserveRuleIDs: Array<number>;
+    ObserveRuleIDs: Array<number | bigint>;
 }
 /**
  * 安全配置
@@ -3993,7 +3993,7 @@ export interface DescribeDDoSAttackDataRequest {
     /**
      * DDoS策略组ID列表，不填默认选择全部策略ID。
      */
-    PolicyIds?: Array<number>;
+    PolicyIds?: Array<number | bigint>;
     /**
      * 查询时间粒度，取值有：
   <li>min：1分钟；</li>
@@ -4128,22 +4128,22 @@ export interface BotPortraitRule {
      * JS挑战的规则ID。默认所有规则不配置JS挑战。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    AlgManagedIds?: Array<number>;
+    AlgManagedIds?: Array<number | bigint>;
     /**
      * 数字验证码的规则ID。默认所有规则不配置数字验证码。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CapManagedIds?: Array<number>;
+    CapManagedIds?: Array<number | bigint>;
     /**
      * 观察的规则ID。默认所有规则不配置观察。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    MonManagedIds?: Array<number>;
+    MonManagedIds?: Array<number | bigint>;
     /**
      * 拦截的规则ID。默认所有规则不配置拦截。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DropManagedIds?: Array<number>;
+    DropManagedIds?: Array<number | bigint>;
 }
 /**
  * 规则引擎条件参数
@@ -5301,7 +5301,7 @@ export interface PartialModule {
      * 模块下的需要例外的具体规则ID列表。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Include?: Array<number>;
+    Include?: Array<number | bigint>;
 }
 /**
  * CreateOriginGroup返回参数结构体
@@ -5435,27 +5435,27 @@ export interface BotManagedRule {
      * 放行的规则ID。默认所有规则不配置放行。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TransManagedIds?: Array<number>;
+    TransManagedIds?: Array<number | bigint>;
     /**
      * JS挑战的规则ID。默认所有规则不配置JS挑战。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    AlgManagedIds?: Array<number>;
+    AlgManagedIds?: Array<number | bigint>;
     /**
      * 数字验证码的规则ID。默认所有规则不配置数字验证码。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CapManagedIds?: Array<number>;
+    CapManagedIds?: Array<number | bigint>;
     /**
      * 观察的规则ID。默认所有规则不配置观察。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    MonManagedIds?: Array<number>;
+    MonManagedIds?: Array<number | bigint>;
     /**
      * 拦截的规则ID。默认所有规则不配置拦截。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DropManagedIds?: Array<number>;
+    DropManagedIds?: Array<number | bigint>;
 }
 /**
  * 规则引擎常规类型的动作
@@ -6300,7 +6300,7 @@ export interface DescribeDDoSAttackEventRequest {
     /**
      * ddos策略组集合，不填默认选择全部策略。
      */
-    PolicyIds?: Array<number>;
+    PolicyIds?: Array<number | bigint>;
     /**
      * 站点集合，此参数必填，不填默认查询为空。
      */

@@ -489,7 +489,7 @@ export interface ExecuteTaskInstanceRequest {
   /**
    * 任务动作实例ID
    */
-  TaskInstanceIds: Array<number>
+  TaskInstanceIds: Array<number | bigint>
   /**
    * 是否操作整个任务
    */
@@ -1175,7 +1175,7 @@ export interface DescribeTemplateListRequest {
   /**
    * 经验ID
    */
-  TemplateIdList?: Array<number>
+  TemplateIdList?: Array<number | bigint>
   /**
    * 过滤参数
    */

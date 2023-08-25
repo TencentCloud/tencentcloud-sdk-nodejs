@@ -300,7 +300,7 @@ export interface Component {
      * 关键字索引，如果一个关键字在PDF文件中存在多个，可以通过关键字索引指定使用第几个关键字作为最后的结果，可指定多个索引。
   示例[0,2]，说明使用PDF文件内第1个和第3个关键字位置。
      */
-    KeywordIndexes?: Array<number>;
+    KeywordIndexes?: Array<number | bigint>;
     /**
      * 填写提示的内容
   注意：此字段可能返回 null，表示取不到有效值。
@@ -1894,7 +1894,7 @@ export interface CreateConsoleLoginUrlRequest {
   未选择信任第三方认证源时，如果是法人进行企业激活，仅支持法人扫脸直接授权，该配置不生效；选择信任第三方认证源时，请先通过“同步企业信息”接口同步信息。
   该参数仅在企业激活场景生效
      */
-    AuthorizationTypes?: Array<number>;
+    AuthorizationTypes?: Array<number | bigint>;
     /**
      * 暂未开放
      * @deprecated
@@ -2800,7 +2800,7 @@ export interface CreateSignUrlsRequest {
   2:合同签署页面更多操作的转他人处理按钮
   3:签署成功页的查看详情按钮
      */
-    Hides?: Array<number>;
+    Hides?: Array<number | bigint>;
 }
 /**
  * ChannelCreateMultiFlowSignQRCode请求参数结构体
@@ -2979,12 +2979,12 @@ export interface FlowApproverInfo {
   查看合同的认证方式 Flow层级的优先于approver层级的
   （当手写签名方式为OCR_ESIGN时，合同认证方式2无效，因为这种签名方式依赖实名认证）
      */
-    ApproverVerifyTypes?: Array<number>;
+    ApproverVerifyTypes?: Array<number | bigint>;
     /**
      * 签署人签署合同时的认证方式
   1-人脸认证 2-签署密码 3-运营商三要素(默认为1,2)
      */
-    ApproverSignTypes?: Array<number>;
+    ApproverSignTypes?: Array<number | bigint>;
     /**
      * 签署ID
   - 发起流程时系统自动补充

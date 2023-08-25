@@ -2495,7 +2495,7 @@ export interface WorkGroupIdSetOfUserId {
   /**
    * 工作组Id集合
    */
-  WorkGroupIds: Array<number>
+  WorkGroupIds: Array<number | bigint>
 }
 
 /**
@@ -4193,7 +4193,7 @@ export interface DeleteWorkGroupRequest {
   /**
    * 要删除的工作组Id集合
    */
-  WorkGroupIds: Array<number>
+  WorkGroupIds: Array<number | bigint>
 }
 
 /**
@@ -4357,7 +4357,7 @@ export interface CreateUserRequest {
   /**
    * 绑定到用户的工作组ID集合。
    */
-  WorkGroupIds?: Array<number>
+  WorkGroupIds?: Array<number | bigint>
   /**
    * 用户别名，字符长度小50
    */

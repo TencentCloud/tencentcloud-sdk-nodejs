@@ -563,7 +563,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 升级预付费存储
+   * 调整包年包月存储容量
    */
   async ModifyClusterStorage(
     req: ModifyClusterStorageRequest,
@@ -663,7 +663,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 下线集群
+   * 销毁集群
    */
   async OfflineCluster(
     req: OfflineClusterRequest,
@@ -773,7 +773,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 下线实例
+   * 销毁实例
    */
   async OfflineInstance(
     req: OfflineInstanceRequest,
@@ -893,7 +893,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建集群
+   * 购买新集群
    */
   async CreateClusters(
     req: CreateClustersRequest,
@@ -1373,7 +1373,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 更新集群Cynos内核版本
+   * 更新内核小版本
    */
   async UpgradeClusterVersion(
     req: UpgradeClusterVersionRequest,
@@ -1563,7 +1563,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 升级实例
+   * 实例变配
    */
   async UpgradeInstance(
     req: UpgradeInstanceRequest,
@@ -1603,7 +1603,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（OpenClusterPasswordComplexity）用于开启集群密码复杂度
+   * 本接口（OpenClusterPasswordComplexity）用于开启自定义密码复杂度功能
    */
   async OpenClusterPasswordComplexity(
     req: OpenClusterPasswordComplexityRequest,

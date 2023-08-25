@@ -1809,12 +1809,12 @@ export interface DescribeDistrictIspDataRequest {
      * 指定省份查询，不填充表示查询所有省份
   省份、国家/地区编码可以查看 [省份编码映射](https://cloud.tencent.com/document/product/228/6316#.E5.8C.BA.E5.9F.9F-.2F-.E8.BF.90.E8.90.A5.E5.95.86.E6.98.A0.E5.B0.84.E8.A1.A8)
      */
-    Districts?: Array<number>;
+    Districts?: Array<number | bigint>;
     /**
      * 指定运营商查询，不填充表示查询所有运营商
   运营商编码可以查看 [运营商编码映射](https://cloud.tencent.com/document/product/228/6316#.E5.8C.BA.E5.9F.9F-.2F-.E8.BF.90.E8.90.A5.E5.95.86.E6.98.A0.E5.B0.84.E8.A1.A8)
      */
-    Isps?: Array<number>;
+    Isps?: Array<number | bigint>;
     /**
      * 指定协议查询，不填充表示查询所有协议
   all：所有协议
@@ -5928,7 +5928,7 @@ export interface DistrictIspInfo {
     /**
      * 指标数据点
      */
-    DataPoints: Array<number>;
+    DataPoints: Array<number | bigint>;
     /**
      * 地区名称
      */
@@ -6252,7 +6252,7 @@ export interface DetailDomain {
      * 访问端口配置
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    AccessPort?: Array<number>;
+    AccessPort?: Array<number | bigint>;
     /**
      * 标签配置
   注意：此字段可能返回 null，表示取不到有效值。
@@ -7400,7 +7400,7 @@ export interface RegionMapRelation {
     /**
      * 子区域ID列表
      */
-    SubRegionIdList: Array<number>;
+    SubRegionIdList: Array<number | bigint>;
 }
 /**
  * DescribeDiagnoseReport返回参数结构体
@@ -7830,7 +7830,7 @@ export interface UpdateDomainConfigRequest {
     /**
      * 访问端口配置
      */
-    AccessPort?: Array<number>;
+    AccessPort?: Array<number | bigint>;
     /**
      * 时间戳防盗链高级版配置，白名单功能
      */
@@ -7956,7 +7956,7 @@ export interface WafSubRuleStatus {
     /**
      * 规则id列表
      */
-    SubIds: Array<number>;
+    SubIds: Array<number | bigint>;
 }
 /**
  * SCDN访问控制

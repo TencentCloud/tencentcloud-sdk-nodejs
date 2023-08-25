@@ -219,7 +219,7 @@ export interface BatchDeleteRecordRequest {
     /**
      * 房间ID列表
      */
-    RoomIds: Array<number>;
+    RoomIds: Array<number | bigint>;
     /**
      * 低代码互动课堂的SdkAppId。
      */
@@ -318,7 +318,7 @@ export interface DescribeDocumentsByRoomRequest {
   [2]：获取owner的私有课件和所有人(包括owner)的公开课件。
   默认值为[2]
      */
-    Permission?: Array<number>;
+    Permission?: Array<number | bigint>;
     /**
      * 文档所有者的user_id，不填默认获取SdkAppId下所有课件
      */
@@ -362,7 +362,7 @@ export interface BatchCreateRoomResponse {
     /**
      * 创建成功课堂ID，与传入课堂信息顺序一致
      */
-    RoomIds?: Array<number>;
+    RoomIds?: Array<number | bigint>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -760,7 +760,7 @@ export interface BatchDescribeDocumentRequest {
     /**
      * 课件权限。[0]：获取owner的私有课件；[1]：获取owner的公开课件; [0,1]：则获取owner的私有课件和公开课件；[2]：获取owner的私有课件和所有人(包括owner)的公开课件
      */
-    Permission: Array<number>;
+    Permission: Array<number | bigint>;
     /**
      * 课件所有者的user_id，不填默认获取SdkAppId下所有课件
      */
@@ -1195,7 +1195,7 @@ export interface DescribeDocumentsRequest {
     /**
      * 课件权限。[0]：获取owner的私有课件；[1]：获取owner的公开课件; [0,1]：则获取owner的私有课件和公开课件；[2]：获取owner的私有课件和所有人(包括owner)的公开课件
      */
-    Permission: Array<number>;
+    Permission: Array<number | bigint>;
     /**
      * 课件所有者的user_id，不填默认获取school_id下所有课件
      */
@@ -1557,7 +1557,7 @@ export interface BatchDeleteRecordResponse {
      * 本次操作删除成功的房间ID列表。如果入参列表中某个房间ID的录制文件已经删除，则出参列表中无对应的房间ID。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    RoomIds?: Array<number>;
+    RoomIds?: Array<number | bigint>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2601,7 +2601,7 @@ export interface GetRoomsRequest {
     /**
      * 课堂状态。默认展示所有课堂，0为未开始，1为正在上课，2为已结束，3为已过期
      */
-    Status?: Array<number>;
+    Status?: Array<number | bigint>;
 }
 /**
  * DescribeDeveloper请求参数结构体

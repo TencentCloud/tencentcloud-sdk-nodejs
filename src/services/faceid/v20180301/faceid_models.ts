@@ -2375,7 +2375,7 @@ export interface DetectInfoIdCardData {
 -9107 身份证反光告警。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  WarnInfos?: Array<number>
+  WarnInfos?: Array<number | bigint>
   /**
    * 身份证国徽面告警码，开启身份证告警功能后才会返回，返回数组中可能出现的告警码如下：
 -9100 身份证有效日期不合法告警，
@@ -2388,7 +2388,7 @@ export interface DetectInfoIdCardData {
 -9107 身份证反光告警。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  BackWarnInfos?: Array<number>
+  BackWarnInfos?: Array<number | bigint>
 }
 
 /**

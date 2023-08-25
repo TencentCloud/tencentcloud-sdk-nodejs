@@ -390,7 +390,7 @@ export interface VodPoliticalReviewSegmentItem {
      * 涉政人物、违规图标出现的区域坐标 (像素级)，[x1, y1, x2, y2]，即左上角坐标、右下角坐标。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    AreaCoordSet: Array<number>;
+    AreaCoordSet: Array<number | bigint>;
 }
 /**
  * 内容审核鉴黄任务结果类型
@@ -615,7 +615,7 @@ export interface VodOcrTextSegmentItem {
      * 嫌疑文字出现的区域坐标 (像素级)，[x1, y1, x2, y2]，即左上角坐标、右下角坐标。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    AreaCoordSet: Array<number>;
+    AreaCoordSet: Array<number | bigint>;
 }
 /**
  * 政治敏感识别结果。

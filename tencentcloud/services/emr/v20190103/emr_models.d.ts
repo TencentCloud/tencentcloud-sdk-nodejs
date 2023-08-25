@@ -363,11 +363,11 @@ export interface ScaleOutClusterRequest {
     /**
      * 扩容部署服务，新增节点将默认继承当前节点类型中所部署服务，部署服务含默认可选服务，该参数仅支持可选服务填写，如：存量task节点已部署HDFS、YARN、impala；使用api扩容task节不部署impala时，此参数仅填写HDFS、YARN
      */
-    SoftDeployInfo?: Array<number>;
+    SoftDeployInfo?: Array<number | bigint>;
     /**
      * 部署进程，默认部署扩容服务的全部进程，支持修改部署进程，如：当前task节点部署服务为：HDFS、YARN、impala，默认部署服务为：DataNode,NodeManager,ImpalaServer，若用户需修改部署进程信息，此参数信息可填写：	DataNode,NodeManager,ImpalaServerCoordinator或DataNode,NodeManager,ImpalaServerExecutor
      */
-    ServiceNodeInfo?: Array<number>;
+    ServiceNodeInfo?: Array<number | bigint>;
     /**
      * 分散置放群组ID列表，当前只支持指定一个。
   该参数可以通过调用 [DescribeDisasterRecoverGroups](https://cloud.tencent.com/document/product/213/17810)的返回值中的DisasterRecoverGroupId字段来获取。
@@ -923,7 +923,7 @@ export interface ScaleOutInstanceRequest {
     /**
      * 扩容时不需要安装的进程。
      */
-    UnNecessaryNodeList?: Array<number>;
+    UnNecessaryNodeList?: Array<number | bigint>;
     /**
      * 扩容的Router节点数量。
      */
@@ -933,11 +933,11 @@ export interface ScaleOutInstanceRequest {
   <li>SoftDeployInfo和ServiceNodeInfo是同组参数，和UnNecessaryNodeList参数互斥。</li>
   <li>建议使用SoftDeployInfo和ServiceNodeInfo组合。</li>
      */
-    SoftDeployInfo?: Array<number>;
+    SoftDeployInfo?: Array<number | bigint>;
     /**
      * 启动的进程。
      */
-    ServiceNodeInfo?: Array<number>;
+    ServiceNodeInfo?: Array<number | bigint>;
     /**
      * 分散置放群组ID列表，当前仅支持指定一个。
      */

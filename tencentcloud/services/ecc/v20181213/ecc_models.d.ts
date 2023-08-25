@@ -80,7 +80,7 @@ export interface ErrorCoordinate {
     /**
      * 维度单词坐标
      */
-    Coordinate: Array<number>;
+    Coordinate: Array<number | bigint>;
 }
 /**
  * ECC请求参数结构体
@@ -163,7 +163,7 @@ export interface SentenceSuggest {
     /**
      * 维度单词位置，在句子的第几个到第几个单词之间
      */
-    ErrorPosition: Array<number>;
+    ErrorPosition: Array<number | bigint>;
     /**
      * 维度单词坐标，错误单词在图片中的坐标，只有传图片时正常返回，传文字时返回[ ]
      */

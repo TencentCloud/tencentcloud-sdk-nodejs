@@ -95,7 +95,7 @@ export interface InputRecognizeTargetAudience {
     /**
      * 模型ID列表
      */
-    ModelIdList: Array<number>;
+    ModelIdList: Array<number | bigint>;
     /**
      * 设备ID，AccountType指定的类型
      */

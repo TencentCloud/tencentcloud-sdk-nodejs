@@ -2137,7 +2137,7 @@ export interface ModifyRecordBatchRequest {
   /**
    * 记录ID数组。可以通过接口DescribeRecordList查到所有的解析记录列表以及对应的RecordId
    */
-  RecordIdList: Array<number>
+  RecordIdList: Array<number | bigint>
   /**
    * 要修改的字段，可选值为 [“sub_domain”、”record_type”、”area”、”value”、”mx”、”ttl”、”status”] 中的某一个。
    */
@@ -3061,7 +3061,7 @@ export interface DescribeRecordFilterListRequest {
   /**
    * 获取某些分组下的解析记录时，传这个分组 Id。可以通过接口 DescribeRecordGroupList 接口 GroupId 字段获取。
    */
-  GroupId?: Array<number>
+  GroupId?: Array<number | bigint>
   /**
    * 通过关键字搜索解析记录，当前支持搜索主机头和记录值
    */
@@ -3594,7 +3594,7 @@ RECENT：最近操作过的域名
   /**
    * 根据域名分组 id 获取域名，可通过 DescribeDomain 或 DescribeDomainList 接口 GroupId 字段获取。
    */
-  GroupId?: Array<number>
+  GroupId?: Array<number | bigint>
   /**
    * 根据关键字获取域名。
    */
@@ -3806,7 +3806,7 @@ export interface DeleteRecordBatchRequest {
   /**
    * 解析记录 ID 数组
    */
-  RecordIdList: Array<number>
+  RecordIdList: Array<number | bigint>
 }
 
 /**

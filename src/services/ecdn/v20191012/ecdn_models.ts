@@ -70,7 +70,7 @@ request：请求数，单位为 次
    * 指定要查询的项目 ID，[前往查看项目 ID](https://console.cloud.tencent.com/project)
 未填充域名情况下，指定项目查询，若填充了具体域名信息，以域名为主
    */
-  Projects?: Array<number>
+  Projects?: Array<number | bigint>
   /**
    * 统计区域:
 mainland: 境内
@@ -1228,7 +1228,7 @@ request：请求数，单位为 次
    * 指定要查询的项目 ID，[前往查看项目 ID](https://console.cloud.tencent.com/project)
 未填充域名情况下，指定项目查询，若填充了具体域名信息，以域名为主
    */
-  Projects?: Array<number>
+  Projects?: Array<number | bigint>
   /**
    * 列表分页起始地址，默认0。
    */

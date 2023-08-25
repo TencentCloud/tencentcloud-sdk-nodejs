@@ -1050,7 +1050,7 @@ export interface CreateChannelCodeRequest {
   /**
    * 使用成员用户id集
    */
-  UseUserId: Array<number>
+  UseUserId: Array<number | bigint>
   /**
    * 使用成员企微账号id集
    */
@@ -1349,7 +1349,7 @@ export interface FollowUserPro {
   /**
    * 企业成员的归属部门id列表
    */
-  DepartmentIdList?: Array<number>
+  DepartmentIdList?: Array<number | bigint>
 }
 
 /**
@@ -2103,7 +2103,7 @@ export interface ChannelCodeInnerDetail {
   /**
    * 使用成员用户id集
    */
-  UseUserIdList: Array<number>
+  UseUserIdList: Array<number | bigint>
   /**
    * 使用成员企微账号id集
    */
@@ -2261,7 +2261,7 @@ export interface ExternalContactSimpleInfo {
   /**
    * 添加了此外部联系人的企业成员的归属部门id列表
    */
-  DepartmentIdList: Array<number>
+  DepartmentIdList: Array<number | bigint>
 }
 
 /**

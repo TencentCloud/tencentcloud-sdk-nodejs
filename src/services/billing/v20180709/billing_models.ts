@@ -779,11 +779,11 @@ export interface Conditions {
   /**
    * 地域ID
    */
-  RegionIds?: Array<number>
+  RegionIds?: Array<number | bigint>
   /**
    * 项目ID
    */
-  ProjectIds?: Array<number>
+  ProjectIds?: Array<number | bigint>
   /**
    * 付费模式，可选prePay和postPay
    */
@@ -819,7 +819,7 @@ export interface Conditions {
   /**
    * 状态
    */
-  Status?: Array<number>
+  Status?: Array<number | bigint>
 }
 
 /**

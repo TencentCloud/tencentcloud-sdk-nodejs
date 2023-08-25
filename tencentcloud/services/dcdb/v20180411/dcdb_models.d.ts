@@ -22,7 +22,7 @@ export interface InitDCDBInstancesResponse {
     /**
      * 异步任务ID，可通过 DescribeFlow 查询任务状态。
      */
-    FlowIds: Array<number>;
+    FlowIds: Array<number | bigint>;
     /**
      * 透传入参。
      */
@@ -2544,7 +2544,7 @@ export interface KillSessionRequest {
     /**
      * 会话ID列表
      */
-    SessionId: Array<number>;
+    SessionId: Array<number | bigint>;
     /**
      * 分片ID，与ShardSerialId设置一个
      */
@@ -3048,7 +3048,7 @@ export interface ReservedNetResource {
     /**
      * Vip下的端口
      */
-    Vports?: Array<number>;
+    Vports?: Array<number | bigint>;
     /**
      * Vip的回收时间
      */
@@ -4289,7 +4289,7 @@ export interface DescribeDCDBInstancesRequest {
     /**
      * 按项目 ID 查询
      */
-    ProjectIds?: Array<number>;
+    ProjectIds?: Array<number | bigint>;
     /**
      * 是否根据 VPC 网络来搜索
      */
@@ -4341,11 +4341,11 @@ export interface DescribeDCDBInstancesRequest {
     /**
      * 按实例状态筛选
      */
-    Status?: Array<number>;
+    Status?: Array<number | bigint>;
     /**
      * 排除实例状态
      */
-    ExcludeStatus?: Array<number>;
+    ExcludeStatus?: Array<number | bigint>;
 }
 /**
  * DescribeLogFileRetentionPeriod请求参数结构体
@@ -4425,7 +4425,7 @@ export interface DescribeUserTasksRequest {
     /**
      * 任务的状态列表。0-任务启动中；1-任务运行中；2-任务成功；3-任务失败
      */
-    Statuses?: Array<number>;
+    Statuses?: Array<number | bigint>;
     /**
      * 实例ID列表
      */
@@ -4433,7 +4433,7 @@ export interface DescribeUserTasksRequest {
     /**
      * 任务类型列表，当前支持的任务类型有：0-回档任务；1-创建实例任务；2-扩容任务；3-迁移任务；4-删除实例任务；5-重启任务
      */
-    FlowTypes?: Array<number>;
+    FlowTypes?: Array<number | bigint>;
     /**
      * 任务的创建时间
      */
@@ -4445,7 +4445,7 @@ export interface DescribeUserTasksRequest {
     /**
      * 任务ID的数组
      */
-    UTaskIds?: Array<number>;
+    UTaskIds?: Array<number | bigint>;
     /**
      * 每次最多返回多少条任务，取值范围为(0,100]，不传的话默认值为20
      */

@@ -42,7 +42,7 @@ export interface DescribeCronJobsRequest {
   /**
    * 定时任务状态数组
    */
-  CronJobStatus?: Array<number>
+  CronJobStatus?: Array<number | bigint>
   /**
    * 排序的列
    */
@@ -2887,7 +2887,7 @@ export interface DescribeJobsRequest {
   /**
    * 任务的状态
    */
-  Status?: Array<number>
+  Status?: Array<number | bigint>
 }
 
 /**
@@ -3415,7 +3415,7 @@ export interface DescribeScenariosRequest {
   /**
    * 场景状态数组
    */
-  ScenarioStatus?: Array<number>
+  ScenarioStatus?: Array<number | bigint>
   /**
    * 偏移量，默认为0
    */

@@ -849,7 +849,7 @@ export interface DeleteResourceConfigsRequest {
     /**
      * 资源版本数组
      */
-    ResourceConfigVersions: Array<number>;
+    ResourceConfigVersions: Array<number | bigint>;
     /**
      * 工作空间 SerialId
      */
@@ -1708,7 +1708,7 @@ export interface DescribeJobConfigsRequest {
     /**
      * 作业配置版本
      */
-    JobConfigVersions?: Array<number>;
+    JobConfigVersions?: Array<number | bigint>;
     /**
      * 偏移量，默认0
      */
@@ -2300,7 +2300,7 @@ export interface DescribeResourceConfigsRequest {
     /**
      * 资源配置Versions集合
      */
-    ResourceConfigVersions?: Array<number>;
+    ResourceConfigVersions?: Array<number | bigint>;
     /**
      * 作业配置版本
      */

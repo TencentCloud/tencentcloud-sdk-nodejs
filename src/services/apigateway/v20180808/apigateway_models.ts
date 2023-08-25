@@ -787,7 +787,7 @@ export interface ApiInfo {
    * 微服务信息详情。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  MicroServicesInfo?: Array<number>
+  MicroServicesInfo?: Array<number | bigint>
   /**
    * 微服务的负载均衡配置。
 注意：此字段可能返回 null，表示取不到有效值。

@@ -163,11 +163,11 @@ export interface CreateDBDiagReportTaskRequest {
     /**
      * 接收邮件的联系人ID数组。
      */
-    ContactPerson?: Array<number>;
+    ContactPerson?: Array<number | bigint>;
     /**
      * 接收邮件的联系组ID数组。
      */
-    ContactGroup?: Array<number>;
+    ContactGroup?: Array<number | bigint>;
     /**
      * 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 CynosDB  for MySQL，默认值为"mysql"。
      */
@@ -264,7 +264,7 @@ export interface DescribeSlowLogsRequest {
     /**
      * 耗时区间,耗时区间的左右边界分别对应数组的第0个元素和第一个元素
      */
-    Time?: Array<number>;
+    Time?: Array<number | bigint>;
 }
 /**
  * DescribeTopSpaceTables请求参数结构体
@@ -348,7 +348,7 @@ export interface CreateSecurityAuditLogExportTaskRequest {
     /**
      * 日志风险等级列表，支持值包括：0 无风险；1 低风险；2 中风险；3 高风险。
      */
-    DangerLevels?: Array<number>;
+    DangerLevels?: Array<number | bigint>;
 }
 /**
  * DescribeDBDiagEvent返回参数结构体
@@ -771,7 +771,7 @@ export interface DescribeProxySessionKillTasksRequest {
     /**
      * kill 会话异步任务 ID,  接口 CreateProxySessionKillTask 调用成功后获取。
      */
-    AsyncRequestIds: Array<number>;
+    AsyncRequestIds: Array<number | bigint>;
     /**
      * 服务产品类型，支持值包括： "redis" - 云数据库 Redis。
      */
@@ -792,7 +792,7 @@ export interface CreateRedisBigKeyAnalysisTaskRequest {
     /**
      * 分片节点序号列表。当列表为空时，选择所有分片节点。
      */
-    ShardIds?: Array<number>;
+    ShardIds?: Array<number | bigint>;
     /**
      * Top Key前缀的分隔符列表。
   目前仅支持以下分割符：[",", ";", ":", "_", "-", "+", "@", "=", "|", "#", "."]，当列表为空时，默认选择所有分隔符。
@@ -933,7 +933,7 @@ export interface KillMySqlThreadsResponse {
     /**
      * kill完成的sql会话ID列表。
      */
-    Threads?: Array<number>;
+    Threads?: Array<number | bigint>;
     /**
      * 执行ID， Prepare阶段的任务输出，用于Commit阶段中指定执行kill操作的会话ID。
   注意：此字段可能返回 null，表示取不到有效值。
@@ -951,7 +951,7 @@ export interface CreateSchedulerMailProfileRequest {
     /**
      * 取值范围1-7，分别代表周一至周日。
      */
-    WeekConfiguration: Array<number>;
+    WeekConfiguration: Array<number | bigint>;
     /**
      * 邮件配置内容。
      */
@@ -1032,7 +1032,7 @@ export interface DeleteDBDiagReportTasksRequest {
     /**
      * 需要删除的任务id列表
      */
-    AsyncRequestIds: Array<number>;
+    AsyncRequestIds: Array<number | bigint>;
     /**
      * 实例ID
      */
@@ -1315,7 +1315,7 @@ export interface DescribeDBDiagEventsRequest {
     /**
      * 风险等级列表，取值按影响程度从高至低分别为：1 - 致命、2 -严重、3 - 告警、4 - 提示、5 -健康。
      */
-    Severities?: Array<number>;
+    Severities?: Array<number | bigint>;
     /**
      * 实例ID列表。
      */
@@ -1489,7 +1489,7 @@ export interface MonitorFloatMetricSeriesData {
     /**
      * 监控指标对应的时间戳。
      */
-    Timestamp: Array<number>;
+    Timestamp: Array<number | bigint>;
 }
 /**
  * 邮件发送配置
@@ -1510,11 +1510,11 @@ export interface MailConfiguration {
     /**
      * 联系人id, 联系人/联系组不能都为空。
      */
-    ContactPerson?: Array<number>;
+    ContactPerson?: Array<number | bigint>;
     /**
      * 联系组id, 联系人/联系组不能都为空。
      */
-    ContactGroup?: Array<number>;
+    ContactGroup?: Array<number | bigint>;
 }
 /**
  * VerifyUserAccount请求参数结构体
@@ -1710,7 +1710,7 @@ export interface KillMySqlThreadsRequest {
     /**
      * 需要kill的sql会话ID列表，此参数用于Prepare阶段。
      */
-    Threads?: Array<number>;
+    Threads?: Array<number | bigint>;
     /**
      * 执行ID，此参数用于Commit阶段。
      */
@@ -1914,7 +1914,7 @@ export interface ModifySqlFiltersRequest {
     /**
      * SQL限流任务ID列表。
      */
-    FilterIds: Array<number>;
+    FilterIds: Array<number | bigint>;
     /**
      * 限流任务状态，取值支持TERMINATED - 终止。
      */
@@ -2388,7 +2388,7 @@ export interface DescribeSqlFiltersRequest {
     /**
      * 任务ID列表，用于筛选任务列表。
      */
-    FilterIds?: Array<number>;
+    FilterIds?: Array<number | bigint>;
     /**
      * 任务状态列表，用于筛选任务列表，取值包括RUNNING - 运行中, FINISHED - 已完成, TERMINATED - 已终止。
      */
@@ -2421,7 +2421,7 @@ export interface DescribeSecurityAuditLogExportTasksRequest {
     /**
      * 日志导出任务Id列表。
      */
-    AsyncRequestIds?: Array<number>;
+    AsyncRequestIds?: Array<number | bigint>;
     /**
      * 偏移量，默认0。
      */
@@ -2442,7 +2442,7 @@ export interface DeleteSecurityAuditLogExportTasksRequest {
     /**
      * 日志导出任务Id列表，接口会忽略不存在或已删除的任务Id。
      */
-    AsyncRequestIds: Array<number>;
+    AsyncRequestIds: Array<number | bigint>;
     /**
      * 服务产品类型，支持值： "mysql" - 云数据库 MySQL。
      */
@@ -3263,7 +3263,7 @@ export interface MonitorMetricSeriesData {
     /**
      * 监控指标对应的时间戳。
      */
-    Timestamp: Array<number>;
+    Timestamp: Array<number | bigint>;
 }
 /**
  * 慢日志详细信息
@@ -3360,7 +3360,7 @@ export interface SecLogExportTaskInfo {
      * 风险等级列表。0 无风险；1 低风险；2 中风险；3 高风险。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DangerLevels: Array<number>;
+    DangerLevels: Array<number | bigint>;
 }
 /**
  * DescribeHealthScore返回参数结构体
@@ -3491,7 +3491,7 @@ export interface DeleteSqlFiltersRequest {
     /**
      * 限流任务ID列表。
      */
-    FilterIds: Array<number>;
+    FilterIds: Array<number | bigint>;
     /**
      * 通过VerifyUserAccount获取有效期为5分钟的会话token，使用后会自动延长token有效期至五分钟后。
      */

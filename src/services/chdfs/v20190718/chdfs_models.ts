@@ -486,7 +486,7 @@ export interface DeleteLifeCycleRulesRequest {
   /**
    * 多个生命周期规则ID，上限为10
    */
-  LifeCycleRuleIds: Array<number>
+  LifeCycleRuleIds: Array<number | bigint>
 }
 
 /**
@@ -666,7 +666,7 @@ export interface DeleteAccessRulesRequest {
   /**
    * 多个权限规则ID，上限为10
    */
-  AccessRuleIds: Array<number>
+  AccessRuleIds: Array<number | bigint>
 }
 
 /**

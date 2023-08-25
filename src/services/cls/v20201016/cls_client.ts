@@ -36,6 +36,7 @@ import {
   Filter,
   DescribeConfigMachineGroupsRequest,
   ModifyConfigExtraResponse,
+  SearchCosRechargeInfoRequest,
   KafkaRechargeInfo,
   ModifyLogsetRequest,
   UploadLogRequest,
@@ -210,6 +211,7 @@ import {
   ModifyKafkaConsumerResponse,
   MachineGroupTypeInfo,
   DeleteConfigFromMachineGroupRequest,
+  SearchCosRechargeInfoResponse,
   ShipperInfo,
   CreateCosRechargeResponse,
   DescribeAlertRecordHistoryResponse,
@@ -496,6 +498,16 @@ cls.pb.cc cls.pb.h cls.proto
     cb?: (error: string, rep: ModifyTopicResponse) => void
   ): Promise<ModifyTopicResponse> {
     return this.request("ModifyTopic", req, cb)
+  }
+
+  /**
+   * 本接口用于预览cos导入信息
+   */
+  async SearchCosRechargeInfo(
+    req: SearchCosRechargeInfoRequest,
+    cb?: (error: string, rep: SearchCosRechargeInfoResponse) => void
+  ): Promise<SearchCosRechargeInfoResponse> {
+    return this.request("SearchCosRechargeInfo", req, cb)
   }
 
   /**

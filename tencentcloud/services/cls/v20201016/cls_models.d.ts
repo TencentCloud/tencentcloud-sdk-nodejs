@@ -346,6 +346,39 @@ export interface ModifyConfigExtraResponse {
     RequestId?: string;
 }
 /**
+ * SearchCosRechargeInfo请求参数结构体
+ */
+export interface SearchCosRechargeInfoRequest {
+    /**
+     * 日志主题 ID
+     */
+    TopicId: string;
+    /**
+     * 日志集ID
+     */
+    LogsetId: string;
+    /**
+     * 投递任务名称
+     */
+    Name: string;
+    /**
+     * 存储桶
+     */
+    Bucket: string;
+    /**
+     * 存储桶所在地域
+     */
+    BucketRegion: string;
+    /**
+     * cos文件所在文件夹的前缀
+     */
+    Prefix: string;
+    /**
+     * 压缩模式:   "", "gzip", "lzop", "snappy”;   默认""
+     */
+    Compress?: string;
+}
+/**
  * Kafka导入配置信息
  */
 export interface KafkaRechargeInfo {
@@ -4621,6 +4654,38 @@ export interface DeleteConfigFromMachineGroupRequest {
     ConfigId: string;
 }
 /**
+ * SearchCosRechargeInfo返回参数结构体
+ */
+export interface SearchCosRechargeInfoResponse {
+    /**
+     * 匹配到的存储桶下的某个文件的前几行数据
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Data: Array<string>;
+    /**
+     * 匹配到的存储桶下的文件个数
+     */
+    Sum: number;
+    /**
+     * 当前预览文件路径
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Path: string;
+    /**
+     * 预览获取数据失败原因
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Msg: string;
+    /**
+     * 状态
+     */
+    Status: number;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * 投递规则
  */
 export interface ShipperInfo {
@@ -4863,7 +4928,7 @@ export interface NoticeReceiver {
     /**
      * 接收者。
      */
-    ReceiverIds: Array<number>;
+    ReceiverIds: Array<number | bigint>;
     /**
      * 通知接收渠道。
   <br><li> Email - 邮件

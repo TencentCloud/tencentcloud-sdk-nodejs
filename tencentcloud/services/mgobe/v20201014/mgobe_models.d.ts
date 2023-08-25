@@ -43,7 +43,7 @@ export interface ModifyRoomRequest {
     /**
      * 需要修改的房间选项，0表示房间名称，1表示房主，2表示是否允许观战，3表示是否支持邀请码/密码，4表示是否私有，5表示是否自定义房间属性，6表示是否禁止加人。
      */
-    ChangeRoomOptionList: Array<number>;
+    ChangeRoomOptionList: Array<number | bigint>;
     /**
      * 房间名称。
      */

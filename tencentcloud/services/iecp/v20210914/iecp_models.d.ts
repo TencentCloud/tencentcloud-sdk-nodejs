@@ -20,7 +20,7 @@ export interface OperationLogsCondition {
      * 状态列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Status?: Array<number>;
+    Status?: Array<number | bigint>;
 }
 /**
  * RedeployEdgeUnitApplication返回参数结构体
@@ -90,7 +90,7 @@ export interface CreateEdgeNodeGroupRequest {
     /**
      * 模版ID数组
      */
-    NodeUnitTemplateIDs?: Array<number>;
+    NodeUnitTemplateIDs?: Array<number | bigint>;
 }
 /**
  * CreateEdgeUnitApplicationVisualization请求参数结构体
@@ -1167,7 +1167,7 @@ export interface DeleteEdgeUnitApplicationsRequest {
     /**
      * 应用ID列表
      */
-    ApplicationIDs: Array<number>;
+    ApplicationIDs: Array<number | bigint>;
 }
 /**
  * DeleteApplications请求参数结构体
@@ -1176,7 +1176,7 @@ export interface DeleteApplicationsRequest {
     /**
      * 应用模板ID列表
      */
-    ApplicationIds: Array<number>;
+    ApplicationIds: Array<number | bigint>;
 }
 /**
  * DescribeEdgeUnitApplicationPodContainers请求参数结构体
@@ -1608,7 +1608,7 @@ export interface CreateUpdateNodeUnitRequest {
     /**
      * NodeUnit模版ID列表
      */
-    NodeUnitTemplateIDs?: Array<number>;
+    NodeUnitTemplateIDs?: Array<number | bigint>;
 }
 /**
  * DescribeIotDevice请求参数结构体
@@ -2050,7 +2050,7 @@ export interface DeleteEdgeNodeUnitTemplatesRequest {
     /**
      * 删除的NodeUnit模板ID列表
      */
-    NodeUnitTemplateIDs: Array<number>;
+    NodeUnitTemplateIDs: Array<number | bigint>;
 }
 /**
  * ModifyEdgeNodeLabels返回参数结构体
@@ -3503,7 +3503,7 @@ export interface DeleteIotDeviceBatchRequest {
     /**
      * 无
      */
-    DeviceIDList: Array<number>;
+    DeviceIDList: Array<number | bigint>;
 }
 /**
  * DescribeEdgeAgentNodeInstaller请求参数结构体
@@ -4687,7 +4687,7 @@ export interface DescribeEdgeUnitDeployGridItemYamlResponse {
      * 对应类型的副本数
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Replicas: Array<number>;
+    Replicas: Array<number | bigint>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -5257,7 +5257,7 @@ export interface DeleteEdgeNodesRequest {
     /**
      * IECP边缘节点ID列表
      */
-    NodeIds: Array<number>;
+    NodeIds: Array<number | bigint>;
 }
 /**
  * DescribeApplicationYamlError请求参数结构体

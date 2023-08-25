@@ -954,7 +954,7 @@ export interface CheckBatchStatusRequest {
     /**
      * 操作日志 ID数组，最多 200 个
      */
-    LogIds: Array<number>;
+    LogIds: Array<number | bigint>;
 }
 /**
  * SetDomainAutoRenew返回参数结构体
@@ -1064,7 +1064,7 @@ export interface DescribeDomainPriceListRequest {
     /**
      * 查询购买的年份，默认会列出所有年份的价格
      */
-    Year?: Array<number>;
+    Year?: Array<number | bigint>;
     /**
      * 域名的购买类型：new  新购，renew 续费，redem 赎回，tran 转入
      */

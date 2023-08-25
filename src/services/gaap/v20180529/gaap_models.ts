@@ -380,7 +380,7 @@ export interface DomainErrorPageInfo {
   /**
    * 原始错误码
    */
-  ErrorNos: Array<number>
+  ErrorNos: Array<number | bigint>
   /**
    * 新的错误码
 注意：此字段可能返回 null，表示取不到有效值。
@@ -563,7 +563,7 @@ export interface BandwidthPriceGradient {
   /**
    * 带宽范围。
    */
-  BandwidthRange: Array<number>
+  BandwidthRange: Array<number | bigint>
   /**
    * 在对应带宽范围内的单宽单价，单位：元/Mbps/天。
    */
@@ -1057,7 +1057,7 @@ export interface CreateTCPListenersRequest {
   /**
    * 监听器端口列表。
    */
-  Ports: Array<number>
+  Ports: Array<number | bigint>
   /**
    * 监听器源站访问策略，其中：rr表示轮询；wrr表示加权轮询；lc表示最小连接数；lrtt表示最小时延。
    */
@@ -1089,7 +1089,7 @@ export interface CreateTCPListenersRequest {
   /**
    * 源站端口列表，该参数仅支持v1版本监听器和通道组监听器。
    */
-  RealServerPorts?: Array<number>
+  RealServerPorts?: Array<number | bigint>
   /**
    * 监听器获取客户端 IP 的方式，0表示 TOA, 1表示Proxy Protocol
    */
@@ -1949,7 +1949,7 @@ export interface CreateUDPListenersRequest {
   /**
    * 监听器端口列表
    */
-  Ports: Array<number>
+  Ports: Array<number | bigint>
   /**
    * 监听器源站访问策略，其中：rr表示轮询；wrr表示加权轮询；lc表示最小连接数；lrtt表示最小时延。
    */
@@ -1969,7 +1969,7 @@ export interface CreateUDPListenersRequest {
   /**
    * 源站端口列表，该参数仅支持v1版本监听器和通道组监听器
    */
-  RealServerPorts?: Array<number>
+  RealServerPorts?: Array<number | bigint>
   /**
    * 源站健康检查时间间隔，单位：秒。时间间隔取值在[5，300]之间。
    */
@@ -3370,7 +3370,7 @@ export interface ProxyGroupDetail {
    * 通道获取客户端IP的方式，0表示TOA，1表示Proxy Protocol
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ClientIPMethod: Array<number>
+  ClientIPMethod: Array<number | bigint>
   /**
    * IP版本，可取值：IPv4、IPv6，默认值IPv4
 注意：此字段可能返回 null，表示取不到有效值。
@@ -4040,7 +4040,7 @@ export interface RuleCheckParams {
   /**
    * 确认源站正常的返回码，可选范围[100, 200, 300, 400, 500]
    */
-  StatusCode: Array<number>
+  StatusCode: Array<number | bigint>
   /**
    * 健康检查的检查域名。
 当调用ModifyRuleAttribute时，不支持修改该参数。
@@ -4106,11 +4106,11 @@ export interface AccessRegionDetial {
   /**
    * 可选的并发量取值数组
    */
-  ConcurrentList: Array<number>
+  ConcurrentList: Array<number | bigint>
   /**
    * 可选的带宽取值数组
    */
-  BandwidthList: Array<number>
+  BandwidthList: Array<number | bigint>
   /**
    * 机房所属大区
    */
@@ -5727,7 +5727,7 @@ MOVING表示迁移中。
    * 通道获取客户端IP的方式，0表示TOA，1表示Proxy Protocol
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ClientIPMethod?: Array<number>
+  ClientIPMethod?: Array<number | bigint>
   /**
    * IP版本：IPv4、IPv6
 注意：此字段可能返回 null，表示取不到有效值。
@@ -5911,7 +5911,7 @@ export interface CreateDomainErrorPageInfoRequest {
   /**
    * 原始错误码
    */
-  ErrorNos: Array<number>
+  ErrorNos: Array<number | bigint>
   /**
    * 新的响应包体
    */

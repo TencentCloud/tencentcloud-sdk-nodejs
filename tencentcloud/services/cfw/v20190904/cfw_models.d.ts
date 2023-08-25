@@ -60,7 +60,7 @@ export interface ModifyNatAcRuleResponse {
     /**
      * 编辑成功后返回新策略ID列表
      */
-    RuleUuid?: Array<number>;
+    RuleUuid?: Array<number | bigint>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1960,7 +1960,7 @@ export interface RemoveNatAcRuleResponse {
     /**
      * 删除成功后返回被删除策略的uuid列表
      */
-    RuleUuid?: Array<number>;
+    RuleUuid?: Array<number | bigint>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2016,7 +2016,7 @@ export interface RemoveNatAcRuleRequest {
     /**
      * 规则的uuid列表，可通过查询规则列表获取，注意：如果传入的是[-1]将删除所有规则
      */
-    RuleUuid: Array<number>;
+    RuleUuid: Array<number | bigint>;
     /**
      * 规则方向：1，入站；0，出站
      */
@@ -4220,7 +4220,7 @@ export interface AddNatAcRuleResponse {
     /**
      * 创建成功后返回新策略ID列表
      */
-    RuleUuid?: Array<number>;
+    RuleUuid?: Array<number | bigint>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */

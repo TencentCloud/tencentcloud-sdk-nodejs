@@ -261,7 +261,7 @@ export interface SetBashEventsStatusRequest {
   /**
    * ID数组，最大100条。
    */
-  Ids: Array<number>
+  Ids: Array<number | bigint>
   /**
    * 新状态(0-待处理 1-高危 2-正常)
    */
@@ -625,7 +625,7 @@ export interface CreateBaselineStrategyRequest {
   /**
    * 该策略下选择的基线id数组. 示例: [1,3,5,7]
    */
-  CategoryIds: Array<number>
+  CategoryIds: Array<number | bigint>
   /**
    * 扫描范围是否全部服务器, 1:是  0:否, 为1则为全部专业版主机
    */
@@ -1204,7 +1204,7 @@ export interface UntrustMalwaresRequest {
   /**
    * 木马ID数组，单次最大处理不能超过200条。
    */
-  Ids: Array<number>
+  Ids: Array<number | bigint>
 }
 
 /**
@@ -1560,7 +1560,7 @@ export interface DeleteLoginWhiteListRequest {
   /**
    * 白名单ID
    */
-  Ids: Array<number>
+  Ids: Array<number | bigint>
 }
 
 /**
@@ -1752,7 +1752,7 @@ export interface RecoverMalwaresRequest {
   /**
    * 木马Id数组,单次最大删除不能超过200条
    */
-  Ids: Array<number>
+  Ids: Array<number | bigint>
 }
 
 /**
@@ -1914,7 +1914,7 @@ export interface DeleteReverseShellRulesRequest {
   /**
    * ID数组，最大100条。
    */
-  Ids: Array<number>
+  Ids: Array<number | bigint>
 }
 
 /**
@@ -2031,7 +2031,7 @@ export interface DeleteTagsRequest {
   /**
    * 标签ID
    */
-  Ids: Array<number>
+  Ids: Array<number | bigint>
 }
 
 /**
@@ -2480,7 +2480,7 @@ export interface MisAlarmNonlocalLoginPlacesRequest {
   /**
    * 异地登录事件Id数组。
    */
-  Ids: Array<number>
+  Ids: Array<number | bigint>
 }
 
 /**
@@ -2766,7 +2766,7 @@ export interface DeleteBruteAttacksRequest {
   /**
    * 暴力破解事件Id数组。
    */
-  Ids: Array<number>
+  Ids: Array<number | bigint>
 }
 
 /**
@@ -2894,7 +2894,7 @@ export interface SeparateMalwaresRequest {
   /**
    * 木马事件ID数组。
    */
-  Ids: Array<number>
+  Ids: Array<number | bigint>
 }
 
 /**
@@ -3141,7 +3141,7 @@ export interface DeletePrivilegeEventsRequest {
   /**
    * ID数组，最大100条。
    */
-  Ids: Array<number>
+  Ids: Array<number | bigint>
 }
 
 /**
@@ -3151,7 +3151,7 @@ export interface DeleteBashRulesRequest {
   /**
    * ID数组，最大100条。
    */
-  Ids: Array<number>
+  Ids: Array<number | bigint>
 }
 
 /**
@@ -3171,7 +3171,7 @@ export interface DeleteAttackLogsRequest {
   /**
    * 日志ID数组，最大100条。
    */
-  Ids: Array<number>
+  Ids: Array<number | bigint>
 }
 
 /**
@@ -3286,7 +3286,7 @@ export interface DeleteUsualLoginPlacesRequest {
   /**
    * 已添加常用登录地城市ID数组
    */
-  CityIds: Array<number>
+  CityIds: Array<number | bigint>
 }
 
 /**
@@ -3460,11 +3460,11 @@ export interface SeparateMalwaresResponse {
   /**
    * 隔离成功的id数组。
    */
-  SuccessIds?: Array<number>
+  SuccessIds?: Array<number | bigint>
   /**
    * 隔离失败的id数组。
    */
-  FailedIds?: Array<number>
+  FailedIds?: Array<number | bigint>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3713,7 +3713,7 @@ export interface DeleteNonlocalLoginPlacesRequest {
   /**
    * 异地登录事件ID数组。
    */
-  Ids: Array<number>
+  Ids: Array<number | bigint>
 }
 
 /**
@@ -3912,7 +3912,7 @@ export interface TrustMalwaresRequest {
   /**
    * 木马ID数组。
    */
-  Ids: Array<number>
+  Ids: Array<number | bigint>
 }
 
 /**
@@ -4472,7 +4472,7 @@ export interface DeleteBashEventsRequest {
   /**
    * ID数组，最大100条。
    */
-  Ids: Array<number>
+  Ids: Array<number | bigint>
 }
 
 /**
@@ -4618,7 +4618,7 @@ export interface DeleteReverseShellEventsRequest {
   /**
    * ID数组，最大100条。
    */
-  Ids: Array<number>
+  Ids: Array<number | bigint>
 }
 
 /**
@@ -4661,11 +4661,11 @@ export interface RecoverMalwaresResponse {
   /**
    * 恢复成功id数组
    */
-  SuccessIds?: Array<number>
+  SuccessIds?: Array<number | bigint>
   /**
    * 恢复失败id数组
    */
-  FailedIds?: Array<number>
+  FailedIds?: Array<number | bigint>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4689,7 +4689,7 @@ export interface IgnoreImpactedHostsRequest {
   /**
    * 漏洞ID数组。
    */
-  Ids: Array<number>
+  Ids: Array<number | bigint>
 }
 
 /**
@@ -4739,7 +4739,7 @@ export interface DeleteMaliciousRequestsRequest {
   /**
    * 恶意请求记录ID数组，最大100条。
    */
-  Ids: Array<number>
+  Ids: Array<number | bigint>
 }
 
 /**
@@ -4849,7 +4849,7 @@ export interface DeleteMalwaresRequest {
   /**
    * 木马记录ID数组
    */
-  Ids: Array<number>
+  Ids: Array<number | bigint>
 }
 
 /**
@@ -4877,5 +4877,5 @@ export interface DeletePrivilegeRulesRequest {
   /**
    * ID数组，最大100条。
    */
-  Ids: Array<number>
+  Ids: Array<number | bigint>
 }

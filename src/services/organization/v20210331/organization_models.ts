@@ -227,7 +227,7 @@ export interface BindOrganizationMemberAuthAccountRequest {
   /**
    * 组织管理员子账号Uin列表。最大5个
    */
-  OrgSubAccountUins: Array<number>
+  OrgSubAccountUins: Array<number | bigint>
 }
 
 /**
@@ -237,11 +237,11 @@ export interface CreateOrganizationMemberAuthIdentityRequest {
   /**
    * 成员uin列表。最多10个
    */
-  MemberUins: Array<number>
+  MemberUins: Array<number | bigint>
   /**
    * 身份Id列表。最多5个
    */
-  IdentityIds: Array<number>
+  IdentityIds: Array<number | bigint>
 }
 
 /**
@@ -277,7 +277,7 @@ export interface DescribeOrganizationFinancialByMemberRequest {
   /**
    * 查询成员列表。 最大100个
    */
-  MemberUins?: Array<number>
+  MemberUins?: Array<number | bigint>
   /**
    * 查询产品列表。 最大100个
    */
@@ -299,7 +299,7 @@ export interface DescribeOrganizationFinancialByMonthRequest {
   /**
    * 查询成员列表。 最大100个
    */
-  MemberUins?: Array<number>
+  MemberUins?: Array<number | bigint>
   /**
    * 查询产品列表。 最大100个
    */
@@ -476,7 +476,7 @@ export interface MoveOrganizationNodeMembersRequest {
   /**
    * 成员UIN列表。
    */
-  MemberUin: Array<number>
+  MemberUin: Array<number | bigint>
 }
 
 /**
@@ -588,7 +588,7 @@ export interface DeleteOrganizationMembersRequest {
   /**
    * 被删除成员的UIN列表。
    */
-  MemberUin: Array<number>
+  MemberUin: Array<number | bigint>
 }
 
 /**
@@ -632,7 +632,7 @@ export interface DeleteOrganizationNodesRequest {
   /**
    * 节点ID列表。
    */
-  NodeId: Array<number>
+  NodeId: Array<number | bigint>
 }
 
 /**
@@ -774,7 +774,7 @@ export interface DescribeOrganizationFinancialByProductRequest {
   /**
    * 查询成员列表。 最大100个
    */
-  MemberUins?: Array<number>
+  MemberUins?: Array<number | bigint>
   /**
    * 查询产品列表。 最大100个
    */
@@ -949,7 +949,7 @@ export interface UpdateOrganizationMemberRequest {
    * 成员财务权限ID列表。PermissionIds不为空，PolicyType不能为空。
 取值：1-查看账单、2-查看余额、3-资金划拨、4-合并出账、5-开票、6-优惠继承、7-代付费、8-成本分析，如果有值，1、2 默认必须
    */
-  PermissionIds?: Array<number>
+  PermissionIds?: Array<number | bigint>
   /**
    * 是否允许成员退出组织。取值：Allow-允许、Denied-不允许
    */
@@ -1379,7 +1379,7 @@ export interface CreateOrganizationMemberRequest {
   /**
    * 成员财务权限ID列表。取值：1-查看账单、2-查看余额、3-资金划拨、4-合并出账、5-开票、6-优惠继承、7-代付费，1、2 默认必须
    */
-  PermissionIds: Array<number>
+  PermissionIds: Array<number | bigint>
   /**
    * 成员所属部门的节点ID。可以调用DescribeOrganizationNodes获取
    */
@@ -1403,7 +1403,7 @@ export interface CreateOrganizationMemberRequest {
   /**
    * 成员访问身份ID列表。可以调用ListOrganizationIdentity获取，1默认支持
    */
-  IdentityRoleID?: Array<number>
+  IdentityRoleID?: Array<number | bigint>
   /**
    * 认证主体关系ID。给不同主体创建成员时需要，可以调用DescribeOrganizationAuthNode获取
    */

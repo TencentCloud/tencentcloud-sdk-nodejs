@@ -124,7 +124,7 @@ export interface RoomUser {
      * 房间里用户uin列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Uins: Array<number>;
+    Uins: Array<number | bigint>;
     /**
      * 字符串房间id
   注意：此字段可能返回 null，表示取不到有效值。
@@ -601,7 +601,7 @@ export interface DescribeRoomInfoRequest {
     /**
      * 房间号列表，最大不能超过10个（RoomIds、StrRoomIds必须填一个）
      */
-    RoomIds?: Array<number>;
+    RoomIds?: Array<number | bigint>;
     /**
      * 字符串类型房间号列表，最大不能超过10个（RoomIds、StrRoomIds必须填一个）
      */

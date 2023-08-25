@@ -9,7 +9,7 @@ export interface MoveOrganizationMembersToNodeRequest {
     /**
      * 成员UIN列表
      */
-    Uins: Array<number>;
+    Uins: Array<number | bigint>;
 }
 /**
  * GetOrganization请求参数结构体
@@ -146,7 +146,7 @@ export interface DeleteOrganizationMembersRequest {
     /**
      * 被删除成员的UIN列表
      */
-    Uins: Array<number>;
+    Uins: Array<number | bigint>;
 }
 /**
  * CreateOrganization返回参数结构体
@@ -180,7 +180,7 @@ export interface DeleteOrganizationNodesRequest {
     /**
      * 组织单元ID列表
      */
-    NodeIds: Array<number>;
+    NodeIds: Array<number | bigint>;
 }
 /**
  * AddOrganizationNode返回参数结构体

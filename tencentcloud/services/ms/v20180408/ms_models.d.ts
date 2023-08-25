@@ -1047,7 +1047,7 @@ export interface DescribeEncryptInstancesRequest {
   5：重试；
   多记录查询时，根据查询结果进行检索使用。
      */
-    EncryptState?: Array<number>;
+    EncryptState?: Array<number | bigint>;
 }
 /**
  * so加固信息
@@ -1522,7 +1522,7 @@ export interface DescribeResourceInstancesRequest {
     /**
      * 资源类别id数组，13624：加固专业版，12750：企业版。空数组表示返回全部资源。
      */
-    Pids?: Array<number>;
+    Pids?: Array<number | bigint>;
     /**
      * 按某个字段排序，目前支持CreateTime、ExpireTime其中的一个排序。
      */

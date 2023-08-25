@@ -388,6 +388,16 @@ it("tse.v20201207.CreateCloudNativeAPIGatewayRouteRateLimit", async function () 
     }
 })
 
+it("tse.v20201207.DescribeNativeGatewayServerGroups", async function () {
+    try {
+       const data = await client.DescribeNativeGatewayServerGroups({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tse.v20201207.ModifyCloudNativeAPIGatewayRoute", async function () {
     try {
        const data = await client.ModifyCloudNativeAPIGatewayRoute({})

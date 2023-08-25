@@ -370,7 +370,7 @@ export interface ModifyInstanceRequest {
   /**
    * 包年包月计费的续费模式。<b>InstanceIds</b>数组和<b>AutoRenews</b>数组中的修改值对应。<ul><li>0：默认状态，指手动续费。</li><li>1：自动续费。</li><li>2：到期不再续费。</ul>
    */
-  AutoRenews?: Array<number>
+  AutoRenews?: Array<number | bigint>
 }
 
 /**
@@ -1056,7 +1056,7 @@ export interface DescribeTaskListRequest {
   /**
    * 项目ID。
    */
-  ProjectIds?: Array<number>
+  ProjectIds?: Array<number | bigint>
   /**
    * 任务类型。可设置为：FLOW_CREATE、FLOW_SETPWD、FLOW_CLOSE等。
    */
@@ -1072,7 +1072,7 @@ export interface DescribeTaskListRequest {
   /**
    * 任务状态。
    */
-  TaskStatus?: Array<number>
+  TaskStatus?: Array<number | bigint>
 }
 
 /**
@@ -1896,7 +1896,7 @@ export interface DescribeInstancesRequest {
   /**
    * 项目ID 组成的数组，数组下标从0开始
    */
-  ProjectIds?: Array<number>
+  ProjectIds?: Array<number | bigint>
   /**
    * 查找关键字，可输入实例的ID或者实例名称。
    */
@@ -1916,11 +1916,11 @@ export interface DescribeInstancesRequest {
   /**
    * 实例状态。<ul><li>0：待初始化。</li><li>1：流程中。</li><li>2：运行中。</li><li>-2：已隔离。</li><li>-3：待删除。</li></ul>
    */
-  Status?: Array<number>
+  Status?: Array<number | bigint>
   /**
    * 包年包月计费的续费模式。<ul><li>0：默认状态，指手动续费。</li><li>1：自动续费。</li><li>2：到期不再续费。</ul>
    */
-  AutoRenew?: Array<number>
+  AutoRenew?: Array<number | bigint>
   /**
    * 计费模式。<ul><li>postpaid：按量计费。</li><li>prepaid：包年包月。</li></ul>
    */
@@ -1936,7 +1936,7 @@ export interface DescribeInstancesRequest {
   /**
    * 内部参数，用户可忽略。
    */
-  TypeList?: Array<number>
+  TypeList?: Array<number | bigint>
   /**
    * 内部参数，用户可忽略。
    */
@@ -2392,7 +2392,7 @@ export interface DescribeInstanceBackupsRequest {
   /**
    * 备份任务状态。<ul><li>1：备份在流程中。</li><li>2：备份正常。</li><li>3：备份转RDB文件处理中。</li><li>4：已完成RDB转换。</li><li>-1：备份已过期。</li><li>-2：备份已删除。</li></ul>
    */
-  Status?: Array<number>
+  Status?: Array<number | bigint>
 }
 
 /**

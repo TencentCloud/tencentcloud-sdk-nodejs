@@ -1600,7 +1600,7 @@ export interface ServicePortMapping {
      * 暴露端口列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Ports?: Array<number>;
+    Ports?: Array<number | bigint>;
     /**
      * 端口映射数组
   注意：此字段可能返回 null，表示取不到有效值。
@@ -4162,7 +4162,7 @@ export interface EksService {
     /**
      * 可用端口
      */
-    Ports?: Array<number>;
+    Ports?: Array<number | bigint>;
     /**
      * yaml 内容
      */

@@ -370,7 +370,7 @@ export interface DescribeLibSamplesRequest {
     /**
      * 违规类型列表过滤
      */
-    EvilTypeList?: Array<number>;
+    EvilTypeList?: Array<number | bigint>;
     /**
      * 样本词ID列表过滤
      */

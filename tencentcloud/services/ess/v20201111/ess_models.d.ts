@@ -455,11 +455,11 @@ export interface FlowCreateApprover {
     /**
      * 合同查看方式<br/>默认1 -实名查看 <br/>2-短信验证码查看(企业签署方暂不支持该方式)
      */
-    ApproverVerifyTypes?: Array<number>;
+    ApproverVerifyTypes?: Array<number | bigint>;
     /**
      * 合同签署方式(默认1,2) <br/>1-人脸认证 <br/>2-签署密码 <br/>3-运营商三要素
      */
-    ApproverSignTypes?: Array<number>;
+    ApproverSignTypes?: Array<number | bigint>;
 }
 /**
  * 关注方信息
@@ -1134,7 +1134,7 @@ export interface TemplateInfo {
   无序 -1
   有序为序列数字 0,1,2
      */
-    SignOrder?: Array<number>;
+    SignOrder?: Array<number | bigint>;
     /**
      * 模板中的签署参与方列表
      */
@@ -1417,7 +1417,7 @@ export interface CreateSchemeUrlRequest {
   - 2:合同签署页面更多操作的转他人处理按钮
   - 3:签署成功页的查看详情按钮
      */
-    Hides?: Array<number>;
+    Hides?: Array<number | bigint>;
 }
 /**
  * DeleteIntegrationDepartment返回参数结构体
@@ -3732,7 +3732,7 @@ export interface ApproverInfo {
   <ul><li>如果合同流程设置ApproverVerifyType查看合同的校验方式,    则忽略此签署人的查看合同的校验方式</li>
   <li>此字段不可传多个校验方式</li></ul>
      */
-    ApproverVerifyTypes?: Array<number>;
+    ApproverVerifyTypes?: Array<number | bigint>;
     /**
      * 您可以指定签署方签署合同的认证校验方式，可传递以下值：
   <ul><li>**1**：人脸认证，需进行人脸识别成功后才能签署合同；</li>
@@ -3742,7 +3742,7 @@ export interface ApproverInfo {
   <ul><li>默认情况下，认证校验方式为人脸认证和签署密码两种形式；</li>
   <li>您可以传递多种值，表示可用多种认证校验方式。</li></ul>
      */
-    ApproverSignTypes?: Array<number>;
+    ApproverSignTypes?: Array<number | bigint>;
     /**
      * 发起方企业的签署人进行签署操作前，是否需要企业内部走审批流程，取值如下：
   <ul><li>**false**：（默认）不需要审批，直接签署。</li>
@@ -4752,7 +4752,7 @@ export interface Component {
   如果一个关键字在PDF文件中存在多个，可以通过关键字索引指定使用第几个关键字作为最后的结果，可指定多个索引。
   示例：[0,2]，说明使用PDF文件内第1个和第3个关键字位置。
      */
-    KeywordIndexes?: Array<number>;
+    KeywordIndexes?: Array<number | bigint>;
     /**
      * 是否锁定控件值不允许编辑（嵌入式发起使用）
   <br/>默认false：不锁定控件值，允许在页面编辑控件值

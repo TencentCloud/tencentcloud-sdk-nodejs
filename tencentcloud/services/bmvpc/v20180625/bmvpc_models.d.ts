@@ -623,7 +623,7 @@ export interface DescribeVpcQuotaRequest {
     /**
      * 类型
      */
-    TypeIds: Array<number>;
+    TypeIds: Array<number | bigint>;
 }
 /**
  * CreateDockerSubnetWithVlan返回参数结构体
@@ -838,7 +838,7 @@ export interface DescribeSubnetByHostedDeviceRequest {
     /**
      * 子网类型。0: 物理机子网; 7: DOCKER子网 8: 虚拟子网
      */
-    Types?: Array<number>;
+    Types?: Array<number | bigint>;
     /**
      * 查询的起始位置。
      */
@@ -1998,7 +1998,7 @@ export interface DescribeSubnetByDeviceRequest {
     /**
      * 子网类型。0: 物理机子网; 7: DOCKER子网 8: 虚拟子网
      */
-    Types?: Array<number>;
+    Types?: Array<number | bigint>;
     /**
      * 查询的起始位置。
      */

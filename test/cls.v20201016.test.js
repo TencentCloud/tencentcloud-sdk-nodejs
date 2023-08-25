@@ -88,6 +88,16 @@ it("cls.v20201016.ModifyTopic", async function () {
     }
 })
 
+it("cls.v20201016.SearchCosRechargeInfo", async function () {
+    try {
+       const data = await client.SearchCosRechargeInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cls.v20201016.DescribeCosRecharges", async function () {
     try {
        const data = await client.DescribeCosRecharges({})

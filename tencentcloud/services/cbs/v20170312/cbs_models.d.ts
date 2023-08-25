@@ -1348,7 +1348,7 @@ export interface DiskConfig {
      * 额外的性能区间。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ExtraPerformanceRange: Array<number>;
+    ExtraPerformanceRange: Array<number | bigint>;
     /**
      * 实例机型。
   注意：此字段可能返回 null，表示取不到有效值。
@@ -1762,15 +1762,15 @@ export interface Policy {
     /**
      * 指定定期快照策略的触发时间。单位为小时，取值范围：[0, 23]。00:00 ~ 23:00 共 24 个时间点可选，1表示 01:00，依此类推。
      */
-    Hour: Array<number>;
+    Hour: Array<number | bigint>;
     /**
      * 指定每周从周一到周日需要触发定期快照的日期，取值范围：[0, 6]。0表示周日触发，1-6分别表示周一至周六。
      */
-    DayOfWeek?: Array<number>;
+    DayOfWeek?: Array<number | bigint>;
     /**
      * 指定每月从月初到月底需要触发定期快照的日期,取值范围：[1, 31]，1-31分别表示每月的具体日期，比如5表示每月的5号。注：若设置29、30、31等部分月份不存在的日期，则对应不存在日期的月份会跳过不打定期快照。
      */
-    DayOfMonth?: Array<number>;
+    DayOfMonth?: Array<number | bigint>;
     /**
      * 指定创建定期快照的间隔天数，取值范围：[1, 365]，例如设置为5，则间隔5天即触发定期快照创建。注：当选择按天备份时，理论上第一次备份的时间为备份策略创建当天。如果当天备份策略创建的时间已经晚于设置的备份时间，那么将会等到第二个备份周期再进行第一次备份。
      */

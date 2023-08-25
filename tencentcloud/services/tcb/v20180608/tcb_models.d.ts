@@ -463,7 +463,7 @@ export interface DescribeGraphDataResponse {
     /**
      * 时间数据, 标识监控数据Values中的点是哪个时间段上报的.
      */
-    Time?: Array<number>;
+    Time?: Array<number | bigint>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -942,11 +942,11 @@ export interface DescribeCurveDataResponse {
     /**
      * 有效的监控数据, 每个有效监控数据的上报时间可以从时间数组中的对应位置上获取到.
      */
-    Values?: Array<number>;
+    Values?: Array<number | bigint>;
     /**
      * 时间数据, 标识监控数据Values中的点是哪个时间段上报的.
      */
-    Time?: Array<number>;
+    Time?: Array<number | bigint>;
     /**
      * 有效的监控数据, 每个有效监控数据的上报时间可以从时间数组中的对应位置上获取到.
      */
@@ -1762,7 +1762,7 @@ export interface DescribeGatewayCurveDataResponse {
     /**
      * 监控时间
      */
-    Time?: Array<number>;
+    Time?: Array<number | bigint>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -3028,7 +3028,7 @@ export interface DescribeActivityRecordRequest {
     /**
      * 活动id列表
      */
-    ActivityIdList?: Array<number>;
+    ActivityIdList?: Array<number | bigint>;
     /**
      * 过滤状态码，已废弃
      */
@@ -3036,11 +3036,11 @@ export interface DescribeActivityRecordRequest {
     /**
      * 状态码过滤数组，空数组时不过滤
      */
-    Statuses?: Array<number>;
+    Statuses?: Array<number | bigint>;
     /**
      * 根据是否软删除进行过滤，[0]未删除, [1] 删除，不传不过滤
      */
-    IsDeletedList?: Array<number>;
+    IsDeletedList?: Array<number | bigint>;
 }
 /**
  * CreateWxCloudBaseRunEnv返回参数结构体
@@ -4503,7 +4503,7 @@ export interface DescribeActivityInfoRequest {
     /**
      * 活动id列表
      */
-    ActivityIdList?: Array<number>;
+    ActivityIdList?: Array<number | bigint>;
 }
 /**
  * BindEnvGateway请求参数结构体

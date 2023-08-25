@@ -228,7 +228,7 @@ export interface DescribeDBInstancesRequest {
   /**
    * 实例状态，取值范围：0-待初始化，1-流程执行中，2-实例有效，-2-实例已过期
    */
-  Status?: Array<number>
+  Status?: Array<number | bigint>
   /**
    * 私有网络的ID，基础网络则不传该参数
    */
@@ -561,7 +561,7 @@ export interface AssignProjectResponse {
   /**
    * 返回的异步任务ID列表
    */
-  FlowIds?: Array<number>
+  FlowIds?: Array<number | bigint>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

@@ -184,6 +184,37 @@ export interface CreateCloudNativeAPIGatewayRequest {
 }
 
 /**
+ * 定时伸缩策略配置
+ */
+export interface CloudNativeAPIGatewayStrategyCronScalerConfig {
+  /**
+   * 是否开启定时伸缩
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Enabled?: boolean
+  /**
+   * 定时伸缩配置参数列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Params?: Array<CloudNativeAPIGatewayStrategyCronScalerConfigParam>
+  /**
+   * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateTime?: string
+  /**
+   * 修改时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ModifyTime?: string
+  /**
+   * 弹性策略ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StrategyId?: string
+}
+
+/**
  * DescribeCloudNativeAPIGatewayNodes请求参数结构体
  */
 export interface DescribeCloudNativeAPIGatewayNodesRequest {
@@ -279,7 +310,7 @@ export interface ModifyCloudNativeAPIGatewayRouteRequest {
   /**
    * 四层匹配的目的端口
    */
-  DestinationPorts?: Array<number>
+  DestinationPorts?: Array<number | bigint>
   /**
    * 路由的Headers
    */
@@ -298,6 +329,56 @@ export interface DeleteNativeGatewayServerGroupResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 网关实例策略
+ */
+export interface CloudNativeAPIGatewayStrategy {
+  /**
+   * 策略ID
+   */
+  StrategyId: string
+  /**
+   * 策略名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StrategyName: string
+  /**
+   * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateTime: string
+  /**
+   * 更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ModifyTime: string
+  /**
+   * 策略描述
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Description: string
+  /**
+   * 弹性伸缩配置
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Config: CloudNativeAPIGatewayStrategyAutoScalerConfig
+  /**
+   * 网关实例ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  GatewayId: string
+  /**
+   * 定时伸缩配置
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CronConfig?: CloudNativeAPIGatewayStrategyCronScalerConfig
+  /**
+   * 最大节点数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MaxReplicas?: number
 }
 
 /**
@@ -409,6 +490,24 @@ export interface CreateNativeGatewayServerGroupRequest {
 }
 
 /**
+ * 引擎地域配置详情
+ */
+export interface EngineRegionInfo {
+  /**
+   * 引擎节点所在地域
+   */
+  EngineRegion: string
+  /**
+   * 此地域节点分配数量
+   */
+  Replica: number
+  /**
+   * 集群网络信息
+   */
+  VpcInfos: Array<VpcInfo>
+}
+
+/**
  * 删除云原生API网关响应结果。
  */
 export interface DeleteCloudNativeAPIGatewayResult {
@@ -505,7 +604,7 @@ export interface GatewayInstanceSchemeAndPorts {
    * 端口列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  PortList?: Array<number>
+  PortList?: Array<number | bigint>
 }
 
 /**
@@ -860,7 +959,7 @@ export interface CreateCloudNativeAPIGatewayRouteRequest {
   /**
    * 四层匹配的目的端口
    */
-  DestinationPorts?: Array<number>
+  DestinationPorts?: Array<number | bigint>
   /**
    * 路由的Headers
    */
@@ -1344,7 +1443,7 @@ export interface KongRoutePreview {
    * 目的端口
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DestinationPorts?: Array<number>
+  DestinationPorts?: Array<number | bigint>
   /**
    * 路由的Headers
 注意：此字段可能返回 null，表示取不到有效值。
@@ -1498,21 +1597,21 @@ export interface KongTarget {
 }
 
 /**
- * 引擎地域配置详情
+ * DescribeCloudNativeAPIGateways请求参数结构体
  */
-export interface EngineRegionInfo {
+export interface DescribeCloudNativeAPIGatewaysRequest {
   /**
-   * 引擎节点所在地域
+   * 返回数量，默认为 20，最大值为 100。
    */
-  EngineRegion: string
+  Limit?: number
   /**
-   * 此地域节点分配数量
+   * 偏移量，默认为 0。
    */
-  Replica: number
+  Offset?: number
   /**
-   * 集群网络信息
+   * 请求过滤参数，支持按照实例名称、ID和标签键值（Name、GatewayId、Tag）筛选
    */
-  VpcInfos: Array<VpcInfo>
+  Filters?: Array<Filter>
 }
 
 /**
@@ -1596,6 +1695,32 @@ export interface DeleteCloudNativeAPIGatewayServiceRequest {
    * 服务名字，服务ID
    */
   Name: string
+}
+
+/**
+ * 定时伸缩配置参数
+ */
+export interface CloudNativeAPIGatewayStrategyCronScalerConfigParam {
+  /**
+   * 定时伸缩周期
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Period?: string
+  /**
+   * 定时伸缩开始时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StartAt?: string
+  /**
+   * 定时伸缩目标节点数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TargetReplicas?: number
+  /**
+   * 定时伸缩cron表达式
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Crontab?: string
 }
 
 /**
@@ -1867,6 +1992,24 @@ export interface ZookeeperReplica {
 }
 
 /**
+ * ModifyCloudNativeAPIGatewayServiceRateLimit请求参数结构体
+ */
+export interface ModifyCloudNativeAPIGatewayServiceRateLimitRequest {
+  /**
+   * 网关ID
+   */
+  GatewayId: string
+  /**
+   * 服务名称，或服务ID
+   */
+  Name: string
+  /**
+   * 限流配置
+   */
+  LimitDetail: CloudNativeAPIGatewayRateLimitDetail
+}
+
+/**
  * DescribeSREInstanceAccessAddress请求参数结构体
  */
 export interface DescribeSREInstanceAccessAddressRequest {
@@ -2070,6 +2213,67 @@ export interface SREInstance {
 }
 
 /**
+ * 云原生网关分组信息
+ */
+export interface NativeGatewayServerGroup {
+  /**
+   * 云原生网关分组唯一id
+   */
+  GroupId?: string
+  /**
+   * 分组名
+   */
+  Name?: string
+  /**
+   * 描述信息
+   */
+  Description?: string
+  /**
+   * 节点规格、节点数信息
+   */
+  NodeConfig?: CloudNativeAPIGatewayNodeConfig
+  /**
+   * 网关分组状态。
+   */
+  Status?: string
+  /**
+   * 创建时间
+   */
+  CreateTime?: string
+  /**
+   * 是否是默认分组。
+0：否。
+1：是。
+   */
+  IsFirstGroup?: number
+  /**
+   * 关联策略信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BindingStrategy?: CloudNativeAPIGatewayStrategy
+  /**
+   * 网关实例 id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  GatewayId?: string
+  /**
+   * 带宽
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InternetMaxBandwidthOut?: number
+  /**
+   * 修改时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ModifyTime?: string
+  /**
+   * 子网id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SubnetIds?: string
+}
+
+/**
  * DeleteCloudNativeAPIGatewayServiceRateLimit返回参数结构体
  */
 export interface DeleteCloudNativeAPIGatewayServiceRateLimitResponse {
@@ -2080,21 +2284,29 @@ export interface DeleteCloudNativeAPIGatewayServiceRateLimitResponse {
 }
 
 /**
- * ModifyCloudNativeAPIGatewayServiceRateLimit请求参数结构体
+ * 弹性伸缩配置指标
  */
-export interface ModifyCloudNativeAPIGatewayServiceRateLimitRequest {
+export interface CloudNativeAPIGatewayStrategyAutoScalerConfigMetric {
   /**
-   * 网关ID
+   * 指标类型
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  GatewayId: string
+  Type?: string
   /**
-   * 服务名称，或服务ID
+   * 指标资源名称
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Name: string
+  ResourceName?: string
   /**
-   * 限流配置
+   * 指标目标类型
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  LimitDetail: CloudNativeAPIGatewayRateLimitDetail
+  TargetType?: string
+  /**
+   * 指标目标值
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TargetValue?: number
 }
 
 /**
@@ -2182,6 +2394,28 @@ export interface DescribeZookeeperServerInterfacesResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeNativeGatewayServerGroups请求参数结构体
+ */
+export interface DescribeNativeGatewayServerGroupsRequest {
+  /**
+   * 云原生API网关实例ID。
+   */
+  GatewayId: string
+  /**
+   * 翻页从第几个开始获取
+   */
+  Offset?: number
+  /**
+   * 翻页获取多少个
+   */
+  Limit?: number
+  /**
+   * 过滤参数
+   */
+  Filters?: Array<Filter>
 }
 
 /**
@@ -2394,6 +2628,16 @@ export interface DescribeCloudNativeAPIGatewayRequest {
 }
 
 /**
+ * DeleteCloudNativeAPIGatewayCanaryRule返回参数结构体
+ */
+export interface DeleteCloudNativeAPIGatewayCanaryRuleResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateCloudNativeAPIGatewayCanaryRule请求参数结构体
  */
 export interface CreateCloudNativeAPIGatewayCanaryRuleRequest {
@@ -2423,24 +2667,6 @@ export interface DeleteCloudNativeAPIGatewayRouteRequest {
    * 路由的ID或名字，不支持名称“未命名”
    */
   Name: string
-}
-
-/**
- * DescribeCloudNativeAPIGateways请求参数结构体
- */
-export interface DescribeCloudNativeAPIGatewaysRequest {
-  /**
-   * 返回数量，默认为 20，最大值为 100。
-   */
-  Limit?: number
-  /**
-   * 偏移量，默认为 0。
-   */
-  Offset?: number
-  /**
-   * 请求过滤参数，支持按照实例名称、ID和标签键值（Name、GatewayId、Tag）筛选
-   */
-  Filters?: Array<Filter>
 }
 
 /**
@@ -2596,27 +2822,44 @@ export interface ModifyCloudNativeAPIGatewayServiceRateLimitResponse {
 }
 
 /**
- * 创建网关分组信息
+ * 弹性伸缩策略
  */
-export interface CreateCloudNativeAPIGatewayServerGroupResult {
+export interface CloudNativeAPIGatewayStrategyAutoScalerConfig {
   /**
-   * 网关实例id
-   */
-  GatewayId?: string
-  /**
-   * 分组id
-   */
-  GroupId?: string
-  /**
-   * 状态
+   * 最大副本数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Status?: string
+  MaxReplicas?: number
   /**
-   * 任务ID
+   * 指标列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TaskId?: string
+  Metrics?: Array<CloudNativeAPIGatewayStrategyAutoScalerConfigMetric>
+  /**
+   * 是否开启指标伸缩
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Enabled?: boolean
+  /**
+   * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateTime?: string
+  /**
+   * 修改时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ModifyTime?: string
+  /**
+   * 弹性策略ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StrategyId?: string
+  /**
+   * 指标配置ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AutoScalerId?: string
 }
 
 /**
@@ -2705,6 +2948,30 @@ export interface ZookeeperServerInterface {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Interface: string
+}
+
+/**
+ * 创建网关分组信息
+ */
+export interface CreateCloudNativeAPIGatewayServerGroupResult {
+  /**
+   * 网关实例id
+   */
+  GatewayId?: string
+  /**
+   * 分组id
+   */
+  GroupId?: string
+  /**
+   * 状态
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status?: string
+  /**
+   * 任务ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskId?: string
 }
 
 /**
@@ -2885,6 +3152,20 @@ export interface DescribeZookeeperReplicasResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 网关分组列表
+ */
+export interface NativeGatewayServerGroups {
+  /**
+   * 总数
+   */
+  TotalCount: number
+  /**
+   * 分组信息数组。
+   */
+  GatewayGroupList: Array<NativeGatewayServerGroup>
 }
 
 /**
@@ -3203,9 +3484,13 @@ export interface DescribeCloudNativeAPIGatewayCanaryRulesRequest {
 }
 
 /**
- * DeleteCloudNativeAPIGatewayCanaryRule返回参数结构体
+ * DescribeNativeGatewayServerGroups返回参数结构体
  */
-export interface DeleteCloudNativeAPIGatewayCanaryRuleResponse {
+export interface DescribeNativeGatewayServerGroupsResponse {
+  /**
+   * 分组列表信息
+   */
+  Result: NativeGatewayServerGroups
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

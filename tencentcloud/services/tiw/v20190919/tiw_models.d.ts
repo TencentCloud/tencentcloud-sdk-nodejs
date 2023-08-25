@@ -67,7 +67,7 @@ export interface DescribeTIWRoomDailyUsageRequest {
     /**
      * 需要查询的房间ID列表，不填默认查询全部房间
      */
-    RoomIDs?: Array<number>;
+    RoomIDs?: Array<number | bigint>;
     /**
      * 查询偏移量，默认为0
      */
@@ -628,7 +628,7 @@ export interface DescribeRoomListRequest {
     /**
      * 查询时间段，Unix时间戳，单位毫秒，第一个值为开始时间戳，第二个值为结束时间
      */
-    TimeRange: Array<number>;
+    TimeRange: Array<number | bigint>;
     /**
      * 额外的查询条件
      */
@@ -1398,7 +1398,7 @@ export interface DescribeBoardSDKLogRequest {
     /**
      * 查询时间段，Unix时间戳，单位毫秒，第一个值为开始时间戳，第二个值为结束时间
      */
-    TimeRange: Array<number>;
+    TimeRange: Array<number | bigint>;
     /**
      * 聚合日志条数查询的桶的时间范围，如5m, 1h, 4h等
      */
@@ -2076,7 +2076,7 @@ export interface DescribeWhiteboardApplicationConfigRequest {
     /**
      * 需要查询配置的SdkAppId列表
      */
-    SdkAppIds?: Array<number>;
+    SdkAppIds?: Array<number | bigint>;
 }
 /**
  * 互动白板房间用量信息
@@ -2496,7 +2496,7 @@ export interface DescribeUserListRequest {
     /**
      * 查询时间段，Unix时间戳，单位毫秒，第一个值为开始时间戳，第二个值为结束时间
      */
-    TimeRange: Array<number>;
+    TimeRange: Array<number | bigint>;
     /**
      * 额外的查询条件
      */

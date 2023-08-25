@@ -5265,7 +5265,7 @@ export interface DisableRoutesRequest {
   /**
    * 路由策略ID。
    */
-  RouteIds: Array<number>
+  RouteIds: Array<number | bigint>
 }
 
 /**
@@ -5351,7 +5351,7 @@ export interface CreateListenerRequest {
   /**
    * 要将监听器创建到哪些端口，每个端口对应一个新的监听器
    */
-  Ports: Array<number>
+  Ports: Array<number | bigint>
   /**
    * 监听器协议： TCP | UDP
    */
@@ -5380,7 +5380,7 @@ export interface CreateListenerRequest {
   /**
    * 批量端口段的结束端口，必须和Ports长度一样。
    */
-  EndPorts?: Array<number>
+  EndPorts?: Array<number | bigint>
 }
 
 /**
@@ -7608,7 +7608,7 @@ export interface EnableRoutesRequest {
   /**
    * 路由策略ID。
    */
-  RouteIds: Array<number>
+  RouteIds: Array<number | bigint>
 }
 
 /**

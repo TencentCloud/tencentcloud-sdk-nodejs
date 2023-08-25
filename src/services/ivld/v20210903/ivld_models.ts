@@ -137,7 +137,7 @@ export interface MediaFilter {
   /**
    * 媒资状态数组，媒资状态可选值参见MediaInfo
    */
-  StatusSet?: Array<number>
+  StatusSet?: Array<number | bigint>
   /**
    * 媒资ID数组
    */
@@ -613,11 +613,11 @@ export interface TaskFilter {
   /**
    * 媒资文件类型
    */
-  MediaTypeSet?: Array<number>
+  MediaTypeSet?: Array<number | bigint>
   /**
    * 待筛选的任务状态列表
    */
-  TaskStatusSet?: Array<number>
+  TaskStatusSet?: Array<number | bigint>
   /**
    * 待筛选的任务名称数组
    */
@@ -633,11 +633,11 @@ export interface TaskFilter {
   /**
    * 媒资语言类型
    */
-  MediaLangSet?: Array<number>
+  MediaLangSet?: Array<number | bigint>
   /**
    * 媒资素材一级类型
    */
-  MediaLabelSet?: Array<number>
+  MediaLabelSet?: Array<number | bigint>
   /**
    * 媒资自定义标签数组
    */

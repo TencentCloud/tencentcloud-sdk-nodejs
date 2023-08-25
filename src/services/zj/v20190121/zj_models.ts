@@ -323,11 +323,11 @@ export interface AddSmsTemplateRequest {
   /**
    * 发送短信活动时用于展示人群包动态参数模板占位符序号或接口发送时变量占位符序号
    */
-  CommonParams?: Array<number>
+  CommonParams?: Array<number | bigint>
   /**
    * 发送短信活动时用于展示短连接模板占位符序号,仅用作短信活动
    */
-  UrlParams?: Array<number>
+  UrlParams?: Array<number | bigint>
 }
 
 /**
@@ -614,11 +614,11 @@ export interface ModifySmsTemplateRequest {
   /**
    * 发送短信活动时用于展示人群包动态参数模板占位符序号,仅用作短信活动
    */
-  CommonParams?: Array<number>
+  CommonParams?: Array<number | bigint>
   /**
    * 发送短信活动时用于展示短连接模板占位符序号,仅用作短信活动
    */
-  UrlParams?: Array<number>
+  UrlParams?: Array<number | bigint>
 }
 
 /**
@@ -720,7 +720,7 @@ export interface DescribeSmsSignListRequest {
   /**
    * 签名ID数组
    */
-  SignIdSet: Array<number>
+  SignIdSet: Array<number | bigint>
   /**
    * 是否国际/港澳台短信：
 0：表示国内短信。
@@ -946,7 +946,7 @@ export interface DescribeSmsTemplateListRequest {
   /**
    * 短信模板id数组
    */
-  TemplateIdSet: Array<number>
+  TemplateIdSet: Array<number | bigint>
   /**
    * 是否国际/港澳台短信：
 0：表示国内短信。
@@ -1197,17 +1197,17 @@ export interface MmsInstanceInfo {
    * 机型列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  PhoneType: Array<number>
+  PhoneType: Array<number | bigint>
   /**
    * 普通参数序号数组
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CommonParams: Array<number>
+  CommonParams: Array<number | bigint>
   /**
    * 链接参数序号数组
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  UrlParams: Array<number>
+  UrlParams: Array<number | bigint>
 }
 
 /**
@@ -1281,15 +1281,15 @@ export interface CreateMmsInstanceRequest {
   /**
    * 机型列表
    */
-  PhoneType?: Array<number>
+  PhoneType?: Array<number | bigint>
   /**
    * 发送超短活动时用于展示人群包动态参数模板占位符序号或接口发送时变量占位符序号
    */
-  CommonParams?: Array<number>
+  CommonParams?: Array<number | bigint>
   /**
    * 发送超短活动时用于展示短连接模板占位符序号,仅用作超短活动
    */
-  UrlParams?: Array<number>
+  UrlParams?: Array<number | bigint>
 }
 
 /**

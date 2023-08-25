@@ -1115,6 +1115,40 @@ export interface GatewayVersion {
 }
 
 /**
+ * 修改录像上云计划数据结构
+ */
+export interface UpdateRecordBackupPlanModify {
+  /**
+   * 录像计划名称（仅支持中文、英文、数字、_、-，长度不超过32个字符，计划名称全局唯一，不能为空，不能重复，不修改名称时，不需要该字段）
+   */
+  PlanName?: string
+  /**
+   * 录制模板ID（从查询录像上云模板列表接口ListRecordBackupTemplates中获取，不修改模板ID时，不需要该字段）
+   */
+  TemplateId?: string
+  /**
+   * 录像计划描述（仅支持中文、英文、数字、_、-，长度不超过128个字符， 不修改描述时，不需要该字段）
+   */
+  Describe?: string
+  /**
+   * 生命周期（录像文件生命周期设置，管理文件冷、热存储的时间，不修改生命周期时，不需要该字段）
+   */
+  LifeCycle?: LifeCycleData
+  /**
+   * 要新增的设备通道（Json数组，没有新增时，不需要该字段，一次添加通道总数不超过5000个，包括组织目录下的通道数量）
+   */
+  Add?: string
+  /**
+   * 要删除的设备通道（Json数组，内容为要删除的设备通道id，没有删除设备通道时，不需要该字段）
+   */
+  Del?: string
+  /**
+   * 添加组织目录下所有设备通道（Json数组，可以为空，并且通道总数量不超过5000个（包括Add字段通道数量））
+   */
+  OrganizationId?: string
+}
+
+/**
  * UpdateAITask请求参数结构体
  */
 export interface UpdateAITaskRequest {
@@ -1702,37 +1736,19 @@ export interface DescribeRecordPlanResponse {
 }
 
 /**
- * 修改录像上云计划数据结构
+ * 查询网关列表返回结果
  */
-export interface UpdateRecordBackupPlanModify {
+export interface ListGatewaysData {
   /**
-   * 录像计划名称（仅支持中文、英文、数字、_、-，长度不超过32个字符，计划名称全局唯一，不能为空，不能重复，不修改名称时，不需要该字段）
+   * 网关列表
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  PlanName?: string
+  List?: Array<GatewaysData>
   /**
-   * 录制模板ID（从查询录像上云模板列表接口ListRecordBackupTemplates中获取，不修改模板ID时，不需要该字段）
+   * 网关数量
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  TemplateId?: string
-  /**
-   * 录像计划描述（仅支持中文、英文、数字、_、-，长度不超过128个字符， 不修改描述时，不需要该字段）
-   */
-  Describe?: string
-  /**
-   * 生命周期（录像文件生命周期设置，管理文件冷、热存储的时间，不修改生命周期时，不需要该字段）
-   */
-  LifeCycle?: LifeCycleData
-  /**
-   * 要新增的设备通道（Json数组，没有新增时，不需要该字段，一次添加通道总数不超过5000个，包括组织目录下的通道数量）
-   */
-  Add?: string
-  /**
-   * 要删除的设备通道（Json数组，内容为要删除的设备通道id，没有删除设备通道时，不需要该字段）
-   */
-  Del?: string
-  /**
-   * 添加组织目录下所有设备通道（Json数组，可以为空，并且通道总数量不超过5000个（包括Add字段通道数量））
-   */
-  OrganizationId?: string
+  TotalCount?: number
 }
 
 /**
@@ -2112,6 +2128,20 @@ export interface ListOrganizationChannelNumbersResponse {
    * 返回结果
    */
   Data?: ListOrganizationChannelNumbersData
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ListGatewayDevices返回参数结构体
+ */
+export interface ListGatewayDevicesResponse {
+  /**
+   * 返回数据
+   */
+  Data?: ListGatewayDevicesData
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2609,6 +2639,57 @@ export interface ListRecordBackupPlanDevicesResponse {
 }
 
 /**
+ * 网关设备数据
+ */
+export interface GatewayDevice {
+  /**
+   * 设备ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DeviceId?: string
+  /**
+   * 网关接入协议类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProtocolType?: number
+  /**
+   * 网关接入协议名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProtocolTypeName?: string
+  /**
+   * 设备名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name?: string
+  /**
+   * 设备类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Type?: number
+  /**
+   * 设备内网IP
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Ip?: string
+  /**
+   * 设备端口
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Port?: number
+  /**
+   * 设备下通道数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ChannelNum?: number
+  /**
+   * 设备状态
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status?: number
+}
+
+/**
  * ControlDevicePTZ请求参数结构体
  */
 export interface ControlDevicePTZRequest {
@@ -2735,16 +2816,16 @@ export interface GatewaysData {
 }
 
 /**
- * 查询网关列表返回结果
+ * 查询网关设备列表返回数据
  */
-export interface ListGatewaysData {
+export interface ListGatewayDevicesData {
   /**
-   * 网关列表
+   * 网关下设备列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  List?: Array<GatewaysData>
+  List?: Array<GatewayDevice>
   /**
-   * 网关数量
+   * 网关下设备总数
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalCount?: number
@@ -3704,6 +3785,53 @@ export interface DescribeGatewayVersion {
 }
 
 /**
+ * 录像取回任务详情基础信息
+ */
+export interface RecordRetrieveTaskDetailsInfo {
+  /**
+   * 任务ID
+   */
+  TaskId?: string
+  /**
+   * 任务名称
+   */
+  TaskName?: string
+  /**
+   * 取回录像的开始时间
+   */
+  StartTime?: number
+  /**
+   * 取回录像的结束时间
+   */
+  EndTime?: number
+  /**
+   * 取回模式，1:极速模式，其他暂不支持
+   */
+  Mode?: number
+  /**
+   * 副本有效期
+   */
+  Expiration?: number
+  /**
+   * 任务状态， 0:已取回，1:取回中，2:待取回
+   */
+  Status?: number
+  /**
+   * 取回容量，单位MB
+   */
+  Capacity?: number
+  /**
+   * 任务描述
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Describe?: string
+  /**
+   * 任务通道数量
+   */
+  ChannelCount?: number
+}
+
+/**
  * DeleteRecordBackupPlan请求参数结构体
  */
 export interface DeleteRecordBackupPlanRequest {
@@ -3864,50 +3992,13 @@ export interface DeleteRecordBackupTemplateRequest {
 }
 
 /**
- * 录像取回任务详情基础信息
+ * ListGatewayDevices请求参数结构体
  */
-export interface RecordRetrieveTaskDetailsInfo {
+export interface ListGatewayDevicesRequest {
   /**
-   * 任务ID
+   * 网关索引ID（从获取网关列表接口ListGateways中获取）
    */
-  TaskId?: string
-  /**
-   * 任务名称
-   */
-  TaskName?: string
-  /**
-   * 取回录像的开始时间
-   */
-  StartTime?: number
-  /**
-   * 取回录像的结束时间
-   */
-  EndTime?: number
-  /**
-   * 取回模式，1:极速模式，其他暂不支持
-   */
-  Mode?: number
-  /**
-   * 副本有效期
-   */
-  Expiration?: number
-  /**
-   * 任务状态， 0:已取回，1:取回中，2:待取回
-   */
-  Status?: number
-  /**
-   * 取回容量，单位MB
-   */
-  Capacity?: number
-  /**
-   * 任务描述
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Describe?: string
-  /**
-   * 任务通道数量
-   */
-  ChannelCount?: number
+  GatewayId: string
 }
 
 /**

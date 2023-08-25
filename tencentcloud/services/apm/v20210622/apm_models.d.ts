@@ -440,7 +440,7 @@ export interface Line {
     /**
      * 时间序列
      */
-    TimeSerial: Array<number>;
+    TimeSerial: Array<number | bigint>;
     /**
      * 数据序列
   注意：此字段可能返回 null，表示取不到有效值。

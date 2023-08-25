@@ -1176,7 +1176,7 @@ export interface TrustMalwaresRequest {
   /**
    * 木马ID数组（单次不超过的最大条数：100）
    */
-  Ids: Array<number>
+  Ids: Array<number | bigint>
 }
 
 /**
@@ -1242,7 +1242,7 @@ export interface DescribeVulCountByDatesRequest {
   /**
    * 需要查询最近几天的数据，需要都 -1后传入
    */
-  LastDays?: Array<number>
+  LastDays?: Array<number | bigint>
   /**
    * 漏洞的分类: 1: web-cms漏洞 2:应用漏洞  4: Linux软件漏洞 5: Windows系统漏洞
    */
@@ -1792,11 +1792,11 @@ export interface ChangeRuleEventsIgnoreStatusRequest {
   /**
    * 检测项id数组
    */
-  RuleIdList?: Array<number>
+  RuleIdList?: Array<number | bigint>
   /**
    * 事件id数组
    */
-  EventIdList?: Array<number>
+  EventIdList?: Array<number | bigint>
 }
 
 /**
@@ -2317,7 +2317,7 @@ export interface DeletePrivilegeEventsRequest {
   /**
    * ID数组. (最大100条)
    */
-  Ids: Array<number>
+  Ids: Array<number | bigint>
 }
 
 /**
@@ -2885,11 +2885,11 @@ export interface SeparateMalwaresResponse {
   /**
    * 隔离成功的id数组，若无则返回空数组
    */
-  SuccessIds: Array<number>
+  SuccessIds: Array<number | bigint>
   /**
    * 隔离失败的id数组，若无则返回空数组
    */
-  FailedIds: Array<number>
+  FailedIds: Array<number | bigint>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3519,7 +3519,7 @@ export interface DescribeBaselineRuleRequest {
   /**
    * 危害等级
    */
-  Level?: Array<number>
+  Level?: Array<number | bigint>
   /**
    * 状态
    */
@@ -3701,7 +3701,7 @@ export interface DeleteReverseShellEventsRequest {
   /**
    * ID数组. (最大100条)
    */
-  Ids: Array<number>
+  Ids: Array<number | bigint>
 }
 
 /**
@@ -3749,7 +3749,7 @@ export interface IgnoreImpactedHostsRequest {
   /**
    * 漏洞ID数组。
    */
-  Ids: Array<number>
+  Ids: Array<number | bigint>
 }
 
 /**
@@ -3973,7 +3973,7 @@ Other 混合云专区
   /**
    * 机器所属业务ID列表
    */
-  ProjectIds?: Array<number>
+  ProjectIds?: Array<number | bigint>
 }
 
 /**
@@ -4057,7 +4057,7 @@ export interface DeletePrivilegeRulesRequest {
   /**
    * ID数组，最大100条。
    */
-  Ids: Array<number>
+  Ids: Array<number | bigint>
 }
 
 /**
@@ -4263,7 +4263,7 @@ export interface DeleteBaselinePolicyRequest {
   /**
    * 策略Id
    */
-  PolicyIds: Array<number>
+  PolicyIds: Array<number | bigint>
 }
 
 /**
@@ -4840,7 +4840,7 @@ export interface UntrustMalwaresRequest {
   /**
    * 木马ID数组 (最大100条)
    */
-  Ids: Array<number>
+  Ids: Array<number | bigint>
 }
 
 /**
@@ -4960,7 +4960,7 @@ export interface DeleteBaselineWeakPasswordRequest {
   /**
    * 弱口令Id
    */
-  PasswordIds: Array<number>
+  PasswordIds: Array<number | bigint>
 }
 
 /**
@@ -4970,7 +4970,7 @@ export interface ScanAssetRequest {
   /**
    * 资产指纹类型id列表
    */
-  AssetTypeIds?: Array<number>
+  AssetTypeIds?: Array<number | bigint>
   /**
    * Quuid列表
    */
@@ -5240,7 +5240,7 @@ export interface ScanVulRequest {
   /**
    * 需要扫描的漏洞id
    */
-  VulIds?: Array<number>
+  VulIds?: Array<number | bigint>
 }
 
 /**
@@ -5412,7 +5412,7 @@ export interface RecoverMalwaresRequest {
   /**
    * 木马Id数组（最大100条）
    */
-  Ids: Array<number>
+  Ids: Array<number | bigint>
 }
 
 /**
@@ -5549,15 +5549,15 @@ export interface BaselineDetectParam {
   /**
    * 检测的策略集合
    */
-  PolicyIds?: Array<number>
+  PolicyIds?: Array<number | bigint>
   /**
    * 检测的规则集合
    */
-  RuleIds?: Array<number>
+  RuleIds?: Array<number | bigint>
   /**
    * 检测项集合
    */
-  ItemIds?: Array<number>
+  ItemIds?: Array<number | bigint>
   /**
    * 检测的主机ID集合
    */
@@ -5593,7 +5593,7 @@ export interface DescribeEventByTableRequest {
   /**
    * 事件表id号
    */
-  Ids: Array<number>
+  Ids: Array<number | bigint>
 }
 
 /**
@@ -6769,11 +6769,11 @@ export interface DescribeVulCountByDatesResponse {
    * 批量获得对应天数的漏洞数量
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  VulCount: Array<number>
+  VulCount: Array<number | bigint>
   /**
    * 批量获得对应天数的主机数量
    */
-  HostCount: Array<number>
+  HostCount: Array<number | bigint>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6911,7 +6911,7 @@ export interface DeleteBashRulesRequest {
   /**
    * ID数组，最大100条。
    */
-  Ids: Array<number>
+  Ids: Array<number | bigint>
 }
 
 /**
@@ -7560,7 +7560,7 @@ export interface DeleteLoginWhiteListRequest {
   /**
    * 白名单ID (最大 100 条)
    */
-  Ids: Array<number>
+  Ids: Array<number | bigint>
 }
 
 /**
@@ -7654,7 +7654,7 @@ export interface DeleteMaliciousRequestsRequest {
   /**
    * 恶意请求记录ID数组，(最大100条)
    */
-  Ids: Array<number>
+  Ids: Array<number | bigint>
 }
 
 /**
@@ -7827,7 +7827,7 @@ export interface BaselinePolicy {
   /**
    * 规则Id
    */
-  RuleIds?: Array<number>
+  RuleIds?: Array<number | bigint>
   /**
    * 主机Id
    */
@@ -8054,7 +8054,7 @@ export interface ModifyBaselineRuleIgnoreRequest {
   /**
    * 关联项
    */
-  ItemIds?: Array<number>
+  ItemIds?: Array<number | bigint>
   /**
    * 主机Id
    */
@@ -8334,7 +8334,7 @@ export interface DeleteMalwaresRequest {
   /**
    * 木马记录ID数组 (最大100条)
    */
-  Ids: Array<number>
+  Ids: Array<number | bigint>
 }
 
 /**
@@ -8344,11 +8344,11 @@ export interface RecoverMalwaresResponse {
   /**
    * 恢复成功id数组，若无则返回空数组
    */
-  SuccessIds: Array<number>
+  SuccessIds: Array<number | bigint>
   /**
    * 恢复失败id数组，若无则返回空数组
    */
-  FailedIds: Array<number>
+  FailedIds: Array<number | bigint>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -8521,7 +8521,7 @@ export interface SetBashEventsStatusRequest {
   /**
    * ID数组，最大100条。
    */
-  Ids: Array<number>
+  Ids: Array<number | bigint>
   /**
    * 新状态(0-待处理 1-高危 2-正常)
    */
@@ -9201,7 +9201,7 @@ export interface StopBaselineDetectRequest {
   /**
    * 取消任务ID集合
    */
-  TaskIds: Array<number>
+  TaskIds: Array<number | bigint>
 }
 
 /**
@@ -9995,7 +9995,7 @@ export interface DescribeScanStateResponse {
   /**
    * 任务扫描的漏洞id
    */
-  VulId: Array<number>
+  VulId: Array<number | bigint>
   /**
    * 0一键检测 1定时检测
    */
@@ -10102,7 +10102,7 @@ export interface DeleteReverseShellRulesRequest {
   /**
    * ID数组. (最大100条)
    */
-  Ids: Array<number>
+  Ids: Array<number | bigint>
 }
 
 /**
@@ -12079,7 +12079,7 @@ export interface DeleteBaselineRuleIgnoreRequest {
   /**
    * 规则Id
    */
-  RuleIds: Array<number>
+  RuleIds: Array<number | bigint>
 }
 
 /**
@@ -12093,7 +12093,7 @@ export interface DeleteNonlocalLoginPlacesRequest {
   /**
    * 异地登录事件ID数组。DelType为Ids或DelType未填时此项必填
    */
-  Ids?: Array<number>
+  Ids?: Array<number | bigint>
   /**
    * 异地登录事件的Ip。DelType为Ip时必填
    */
@@ -13886,7 +13886,7 @@ export interface CreateBaselineStrategyRequest {
   /**
    * 该策略下选择的基线id数组. 示例: [1,3,5,7]
    */
-  CategoryIds: Array<number>
+  CategoryIds: Array<number | bigint>
   /**
    * 扫描范围是否全部服务器, 1:是  0:否, 为1则为全部专业版主机
    */
@@ -14117,7 +14117,7 @@ export interface DescribeExportMachinesRequest {
   /**
    * 机器所属业务ID列表
    */
-  ProjectIds?: Array<number>
+  ProjectIds?: Array<number | bigint>
 }
 
 /**
@@ -14572,7 +14572,7 @@ export interface BaselineRuleDetect {
    * ItemID集合
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ItemIds: Array<number>
+  ItemIds: Array<number | bigint>
 }
 
 /**
@@ -14788,11 +14788,11 @@ export interface ScanVulSettingRequest {
   /**
    * 漏洞类型：1: web-cms漏洞 2:应用漏洞  4: Linux软件漏洞 5: Windows系统漏洞, 以数组方式传参[1,2]
    */
-  VulCategories?: Array<number>
+  VulCategories?: Array<number | bigint>
   /**
    * 危害等级：1-低危；2-中危；3-高危；4-严重,以数组方式传参[1,2,3]
    */
-  VulLevels?: Array<number>
+  VulLevels?: Array<number | bigint>
   /**
    * 定期检测时间，如：02:10:50
    */
@@ -15043,7 +15043,7 @@ export interface DeleteBruteAttacksRequest {
   /**
    * 暴力破解事件Id数组。(最大 100条)
    */
-  Ids: Array<number>
+  Ids: Array<number | bigint>
 }
 
 /**
@@ -15181,7 +15181,7 @@ export interface DeleteTagsRequest {
   /**
    * 标签ID (最大100 条)
    */
-  Ids: Array<number>
+  Ids: Array<number | bigint>
 }
 
 /**
@@ -15230,7 +15230,7 @@ export interface SyncBaselineDetectSummaryResponse {
   /**
    * 正在检测的任务ID
    */
-  DetectingTaskIds: Array<number>
+  DetectingTaskIds: Array<number | bigint>
   /**
    * 扫描中剩余时间(分钟)
    */
@@ -16210,7 +16210,7 @@ export interface DeleteBashEventsRequest {
   /**
    * ID数组，最大100条。
    */
-  Ids: Array<number>
+  Ids: Array<number | bigint>
 }
 
 /**
@@ -16297,7 +16297,7 @@ export interface SeparateMalwaresRequest {
   /**
    * 木马事件ID数组。(最大100条)
    */
-  Ids: Array<number>
+  Ids: Array<number | bigint>
   /**
    * 是否杀掉进程
    */
@@ -16529,7 +16529,7 @@ export interface DeleteAttackLogsRequest {
   /**
    * 日志ID数组，最大100条。
    */
-  Ids?: Array<number>
+  Ids?: Array<number | bigint>
   /**
    * 是否全部删除
    */
@@ -17600,7 +17600,7 @@ export interface UpdateMachineTagsRequest {
   /**
    * 标签ID，该操作会覆盖原有的标签列表
    */
-  TagIds?: Array<number>
+  TagIds?: Array<number | bigint>
   /**
    * 服务器地区 如: ap-guangzhou
    */

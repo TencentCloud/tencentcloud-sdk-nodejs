@@ -50,7 +50,7 @@ export interface SetTrafficMirrorHealthSwitchRequest {
   /**
    * 健康检查中认为健康的HTTP返回码的组合。可选值为1~5的集合，1表示HTTP返回码为1xx认为健康。2表示HTTP返回码为2xx认为健康。3表示HTTP返回码为3xx认为健康。4表示HTTP返回码为4xx认为健康。5表示HTTP返回码为5xx认为健康。
    */
-  HttpCodes?: Array<number>
+  HttpCodes?: Array<number | bigint>
 }
 
 /**
@@ -499,7 +499,7 @@ export interface DescribeTrafficMirrorListenersRequest {
   /**
    * 待搜索的端口。
    */
-  SearchLoadBalancerPorts?: Array<number>
+  SearchLoadBalancerPorts?: Array<number | bigint>
 }
 
 /**
@@ -1645,7 +1645,7 @@ export interface CreateL7Rule {
   /**
    * 健康检查中认为健康的HTTP返回码的组合。可选值为1~5的集合，1表示HTTP返回码为1xx认为健康。2表示HTTP返回码为2xx认为健康。3表示HTTP返回码为3xx认为健康。4表示HTTP返回码为4xx认为健康。5表示HTTP返回码为5xx认为健康。
    */
-  HttpCodes?: Array<number>
+  HttpCodes?: Array<number | bigint>
   /**
    * 健康检查检查路径。
    */
@@ -2005,7 +2005,7 @@ export interface TrafficMirror {
   /**
    * 健康检查返回码。 1：1xx，2：2xx，3：3xx，4：4xx，5：5xx。
    */
-  HttpCodes?: Array<number>
+  HttpCodes?: Array<number | bigint>
   /**
    * 创建时间。
    */
@@ -2487,7 +2487,7 @@ export interface L7ListenerInfoLocation {
   /**
    * 健康检查中认为健康的HTTP返回码的组合。可选值为1~5的集合，1表示HTTP返回码为1xx认为健康。2表示HTTP返回码为2xx认为健康。3表示HTTP返回码为3xx认为健康。4表示HTTP返回码为4xx认为健康。5表示HTTP返回码为5xx认为健康。
    */
-  HttpCodes?: Array<number>
+  HttpCodes?: Array<number | bigint>
   /**
    * 均衡方式。
    */
@@ -2549,7 +2549,7 @@ export interface L7RulesLocation {
   /**
    * 健康检查中认为健康的HTTP返回码的组合。可选值为1~5的集合，1表示HTTP返回码为1xx认为健康。2表示HTTP返回码为2xx认为健康。3表示HTTP返回码为3xx认为健康。4表示HTTP返回码为4xx认为健康。5表示HTTP返回码为5xx认为健康。
    */
-  HttpCodes?: Array<number>
+  HttpCodes?: Array<number | bigint>
   /**
    * 均衡方式。
    */
@@ -2879,7 +2879,7 @@ export interface ModifyL7LocationRule {
   /**
    * 健康检查中认为健康的HTTP返回码的组合。可选值为1~5的集合，1表示HTTP返回码为1xx认为健康。2表示HTTP返回码为2xx认为健康。3表示HTTP返回码为3xx认为健康。4表示HTTP返回码为4xx认为健康。5表示HTTP返回码为5xx认为健康。
    */
-  HttpCodes?: Array<number>
+  HttpCodes?: Array<number | bigint>
   /**
    * 健康检查检查路径。
    */
@@ -3334,11 +3334,11 @@ export interface DescribeTrafficMirrorReceiversRequest {
   /**
    * 接收机接收端口数组。
    */
-  Ports?: Array<number>
+  Ports?: Array<number | bigint>
   /**
    * 接收机实例权重数组。
    */
-  Weights?: Array<number>
+  Weights?: Array<number | bigint>
   /**
    * 分页的偏移量，也即从第几条记录开始查询
    */

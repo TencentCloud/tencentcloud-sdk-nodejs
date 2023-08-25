@@ -216,11 +216,11 @@ export interface DescribeTawInstancesRequest {
     /**
      * 计费状态
      */
-    ChargeStatuses?: Array<number>;
+    ChargeStatuses?: Array<number | bigint>;
     /**
      * 计费类型
      */
-    ChargeTypes?: Array<number>;
+    ChargeTypes?: Array<number | bigint>;
     /**
      * 分页Limit
      */
@@ -232,11 +232,11 @@ export interface DescribeTawInstancesRequest {
     /**
      * 片区Id
      */
-    AreaIds?: Array<number>;
+    AreaIds?: Array<number | bigint>;
     /**
      * 实例状态(1=创建中，2=运行中，3=异常，4=重启中，5=停止中，6=已停止，7=销毁中，8=已销毁), 该参数已废弃，请在Filters内注明
      */
-    InstanceStatuses?: Array<number>;
+    InstanceStatuses?: Array<number | bigint>;
     /**
      * 实例Id, 该参数已废弃，请在Filters内注明
      */
@@ -2255,7 +2255,7 @@ export interface DescribeTawAreasRequest {
     /**
      * 片区Id
      */
-    AreaIds?: Array<number>;
+    AreaIds?: Array<number | bigint>;
     /**
      * 片区Key
      */
@@ -2267,7 +2267,7 @@ export interface DescribeTawAreasRequest {
     /**
      * 片区状态(1=有效，2=无效)
      */
-    AreaStatuses?: Array<number>;
+    AreaStatuses?: Array<number | bigint>;
     /**
      * 分页Offset
      */

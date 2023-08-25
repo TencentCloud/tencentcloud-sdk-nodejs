@@ -684,7 +684,7 @@ export interface DescribeDBInstancesRequest {
   /**
    * 实例类型，可取值：1 - 主实例，2 - 灾备实例，3 - 只读实例。
    */
-  InstanceTypes?: Array<number>
+  InstanceTypes?: Array<number | bigint>
   /**
    * 实例的内网 IP 地址。
    */
@@ -692,7 +692,7 @@ export interface DescribeDBInstancesRequest {
   /**
    * 实例状态，可取值：<br>0 - 创建中<br>1 - 运行中<br>4 - 正在进行隔离操作<br>5 - 已隔离（可在回收站恢复开机）
    */
-  Status?: Array<number>
+  Status?: Array<number | bigint>
   /**
    * 偏移量，默认值为 0。
    */
@@ -708,7 +708,7 @@ export interface DescribeDBInstancesRequest {
   /**
    * 付费类型，可取值：0 - 包年包月，1 - 小时计费。
    */
-  PayTypes?: Array<number>
+  PayTypes?: Array<number | bigint>
   /**
    * 实例名称。
    */
@@ -716,7 +716,7 @@ export interface DescribeDBInstancesRequest {
   /**
    * 实例任务状态，可能取值：<br>0 - 没有任务<br>1 - 升级中<br>2 - 数据导入中<br>3 - 开放Slave中<br>4 - 外网访问开通中<br>5 - 批量操作执行中<br>6 - 回档中<br>7 - 外网访问关闭中<br>8 - 密码修改中<br>9 - 实例名修改中<br>10 - 重启中<br>12 - 自建迁移中<br>13 - 删除库表中<br>14 - 灾备实例创建同步中<br>15 - 升级待切换<br>16 - 升级切换中<br>17 - 升级切换完成<br>19 - 参数设置待执行
    */
-  TaskStatus?: Array<number>
+  TaskStatus?: Array<number | bigint>
   /**
    * 实例数据库引擎版本，可能取值：5.1、5.5、5.6 和 5.7。
    */
@@ -724,19 +724,19 @@ export interface DescribeDBInstancesRequest {
   /**
    * 私有网络的 ID。
    */
-  VpcIds?: Array<number>
+  VpcIds?: Array<number | bigint>
   /**
    * 可用区的 ID。
    */
-  ZoneIds?: Array<number>
+  ZoneIds?: Array<number | bigint>
   /**
    * 子网 ID。
    */
-  SubnetIds?: Array<number>
+  SubnetIds?: Array<number | bigint>
   /**
    * 是否锁定标记，可选值：0 - 不锁定，1 - 锁定，默认为0。
    */
-  CdbErrors?: Array<number>
+  CdbErrors?: Array<number | bigint>
   /**
    * 返回结果集排序的字段，目前支持："InstanceId"，"InstanceName"，"CreateTime"，"DeadlineTime"。
    */
@@ -3257,7 +3257,7 @@ export interface ZoneConf {
   /**
    * 可用区部署方式，可能的值为：0-单可用区；1-多可用区
    */
-  DeployMode: Array<number>
+  DeployMode: Array<number | bigint>
   /**
    * 主实例所在的可用区
    */
@@ -3358,7 +3358,7 @@ export interface DeviceCpuInfo {
   /**
    * 实例CPU监控数据
    */
-  Load: Array<number>
+  Load: Array<number | bigint>
 }
 
 /**
@@ -3798,11 +3798,11 @@ export interface DeviceMemInfo {
   /**
    * 总内存大小。free命令中Mem:一行total的值,单位：KB
    */
-  Total: Array<number>
+  Total: Array<number | bigint>
   /**
    * 已使用内存。free命令中Mem:一行used的值,单位：KB
    */
-  Used: Array<number>
+  Used: Array<number | bigint>
 }
 
 /**
@@ -3897,7 +3897,7 @@ export interface CreateDeployGroupRequest {
   /**
    * 置放群组的亲和性策略，目前仅支持取值为1，策略1表示同台物理机上限制实例的个数。
    */
-  Affinity?: Array<number>
+  Affinity?: Array<number | bigint>
   /**
    * 置放群组亲和性策略1中同台物理机上实例的限制个数。
    */
@@ -4366,7 +4366,7 @@ export interface CreateDBInstanceRequest {
   /**
    * 告警策略id数组。腾讯云可观测平台DescribeAlarmPolicy接口返回的OriginId。
    */
-  AlarmPolicyList?: Array<number>
+  AlarmPolicyList?: Array<number | bigint>
   /**
    * 实例节点数。对于 RO 和 基础版实例， 该值默认为1。 如果需要购买三节点实例， 请将该值设置为3 或指定 BackupZone 参数。当购买主实例，且未指定该参数和 BackupZone 参数时，该值默认是 2， 即购买两节点实例。
    */
@@ -4424,7 +4424,7 @@ export interface DescribeParamTemplatesRequest {
   /**
    * 模板id，缺省则查询所有
    */
-  TemplateIds?: Array<number>
+  TemplateIds?: Array<number | bigint>
 }
 
 /**
@@ -4893,7 +4893,7 @@ export interface AuditLogFilter {
   /**
    * mysql错误码
    */
-  ErrCode?: Array<number>
+  ErrCode?: Array<number | bigint>
 }
 
 /**
@@ -5735,23 +5735,23 @@ export interface DeviceNetInfo {
   /**
    * tcp连接数
    */
-  Conn: Array<number>
+  Conn: Array<number | bigint>
   /**
    * 网卡入包量，单位：个/秒
    */
-  PackageIn: Array<number>
+  PackageIn: Array<number | bigint>
   /**
    * 网卡出包量，单位：个/秒
    */
-  PackageOut: Array<number>
+  PackageOut: Array<number | bigint>
   /**
    * 入流量，单位：kbps
    */
-  FlowIn: Array<number>
+  FlowIn: Array<number | bigint>
   /**
    * 出流量，单位：kbps
    */
-  FlowOut: Array<number>
+  FlowOut: Array<number | bigint>
 }
 
 /**
@@ -6441,7 +6441,7 @@ export interface DeviceCpuRateInfo {
   /**
    * Cpu使用率
    */
-  Rate: Array<number>
+  Rate: Array<number | bigint>
 }
 
 /**
@@ -7100,23 +7100,23 @@ export interface DeviceDiskInfo {
   /**
    * 平均每秒有百分之几的时间用于IO操作
    */
-  IoRatioPerSec: Array<number>
+  IoRatioPerSec: Array<number | bigint>
   /**
    * 平均每次设备I/O操作的等待时间*100，单位为毫秒。例如：该值为201，表示平均每次I/O操作等待时间为：201/100=2.1毫秒
    */
-  IoWaitTime: Array<number>
+  IoWaitTime: Array<number | bigint>
   /**
    * 磁盘平均每秒完成的读操作次数总和*100。例如：该值为2002，表示磁盘平均每秒完成读操作为：2002/100=20.2次
    */
-  Read: Array<number>
+  Read: Array<number | bigint>
   /**
    * 磁盘平均每秒完成的写操作次数总和*100。例如：该值为30001，表示磁盘平均每秒完成写操作为：30001/100=300.01次
    */
-  Write: Array<number>
+  Write: Array<number | bigint>
   /**
    * 磁盘空间容量，每两个一组，第一个为已使用容量，第二个为磁盘总容量
    */
-  CapacityRatio: Array<number>
+  CapacityRatio: Array<number | bigint>
 }
 
 /**
@@ -7553,7 +7553,7 @@ export interface CommonTimeWindow {
   /**
    * 如果设置为按月备份，需填入每月具体备份日期，相邻备份天数不得超过两天。例[1,4,7,9,11,14,17,19,22,25,28,30,31]
    */
-  Days?: Array<number>
+  Days?: Array<number | bigint>
   /**
    * 月度备份时间窗，BackupPeriodStrategy为monthly时必填。格式如： 02:00-06:00
    */
@@ -7603,7 +7603,7 @@ export interface CdbSellType {
   /**
    * 售卖规格Id
    */
-  ConfigIds: Array<number>
+  ConfigIds: Array<number | bigint>
 }
 
 /**
@@ -7633,7 +7633,7 @@ export interface DescribeTasksRequest {
 12 - 删除云数据库库表；
 13 - 灾备实例提升为主。
    */
-  TaskTypes?: Array<number>
+  TaskTypes?: Array<number | bigint>
   /**
    * 任务状态，不传值则查询所有任务状态，支持的值包括：
 -1 - 未定义；
@@ -7645,7 +7645,7 @@ export interface DescribeTasksRequest {
 5 - 已删除；
 6 - 已暂停。
    */
-  TaskStatus?: Array<number>
+  TaskStatus?: Array<number | bigint>
   /**
    * 第一个任务的开始时间，用于范围查询，时间格式如：2017-12-31 10:40:01。
    */
@@ -7812,7 +7812,7 @@ export interface CreateDBInstanceHourRequest {
   /**
    * 告警策略id数组。腾讯云可观测平台DescribeAlarmPolicy接口返回的OriginId。
    */
-  AlarmPolicyList?: Array<number>
+  AlarmPolicyList?: Array<number | bigint>
   /**
    * 实例节点数。对于 RO 和 基础版实例， 该值默认为1。 如果需要购买三节点实例， 请将该值设置为3 或指定 BackupZone 参数。当购买主实例，且未指定该参数和 BackupZone 参数时，该值默认是 2， 即购买两节点实例。
    */

@@ -2847,7 +2847,7 @@ export interface DescribeResourceListRequest {
   /**
    * 线路搜索，可选，只有当获取高防IP资源列表是可以选填，取值为[1（BGP线路），2（南京电信），3（南京联通），99（第三方合作线路）]，当获取其他产品时请填空数组；
    */
-  Line?: Array<number>
+  Line?: Array<number | bigint>
   /**
    * 资源ID搜索，可选，当不为空数组时表示获取指定资源的资源列表；
    */
@@ -2863,7 +2863,7 @@ export interface DescribeResourceListRequest {
   /**
    * 资源状态搜索列表，可选，取值为[0（运行中）, 1（清洗中）, 2（封堵中）]，当填空数组时不进行状态搜索；
    */
-  Status?: Array<number>
+  Status?: Array<number | bigint>
   /**
    * 即将到期搜索；可选，取值为[0（不搜索），1（搜索即将到期的资源）]
    */
@@ -2931,7 +2931,7 @@ export interface DescribleNewL7RulesRequest {
   /**
    * 状态搜索，选填，取值[0(规则配置成功)，1(规则配置生效中)，2(规则配置失败)，3(规则删除生效中)，5(规则删除失败)，6(规则等待配置)，7(规则等待删除)，8(规则待配置证书)]
    */
-  StatusList?: Array<number>
+  StatusList?: Array<number | bigint>
   /**
    * IP搜索，选填，当需要搜索IP请填写
    */
@@ -4160,7 +4160,7 @@ export interface DescribleRegionCountRequest {
   /**
    * 根据线路统计，取值为[1（BGP线路），2（南京电信），3（南京联通），99（第三方合作线路）]；只对高防IP产品有效，其他产品此字段忽略
    */
-  LineList?: Array<number>
+  LineList?: Array<number | bigint>
 }
 
 /**
@@ -5194,7 +5194,7 @@ export interface DescribeCCTrendResponse {
   /**
    * 值数组
    */
-  Data?: Array<number>
+  Data?: Array<number | bigint>
   /**
    * 值个数
    */
@@ -5809,7 +5809,7 @@ export interface DescribeDDoSNetTrendResponse {
   /**
    * 值数组
    */
-  Data?: Array<number>
+  Data?: Array<number | bigint>
   /**
    * 值个数
    */
@@ -5881,7 +5881,7 @@ export interface DescribleL7RulesRequest {
   /**
    * 状态搜索，选填，取值[0(规则配置成功)，1(规则配置生效中)，2(规则配置失败)，3(规则删除生效中)，5(规则删除失败)，6(规则等待配置)，7(规则等待删除)，8(规则待配置证书)]
    */
-  StatusList?: Array<number>
+  StatusList?: Array<number | bigint>
 }
 
 /**
@@ -6315,7 +6315,7 @@ export interface DescribeDDoSTrendResponse {
   /**
    * 值数组，攻击流量带宽单位为Mbps，包速率单位为pps
    */
-  Data?: Array<number>
+  Data?: Array<number | bigint>
   /**
    * 值个数
    */

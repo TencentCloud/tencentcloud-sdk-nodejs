@@ -659,7 +659,7 @@ export interface DeleteLaunchTemplateVersionsRequest {
   /**
    * 实例启动模板版本列表。
    */
-  LaunchTemplateVersions: Array<number>
+  LaunchTemplateVersions: Array<number | bigint>
 }
 
 /**
@@ -1505,7 +1505,7 @@ export interface DescribeLaunchTemplateVersionsRequest {
   /**
    * 实例启动模板列表。
    */
-  LaunchTemplateVersions?: Array<number>
+  LaunchTemplateVersions?: Array<number | bigint>
   /**
    * 通过范围指定版本时的最小版本号，默认为0。
    */
@@ -2167,7 +2167,7 @@ export interface DescribeTaskInfoRequest {
 
 各任务状态的具体含义，可参考 [任务状态](https://cloud.tencent.com/document/product/213/67789#.E4.BB.BB.E5.8A.A1.E7.8A.B6.E6.80.81)。
    */
-  TaskStatus?: Array<number>
+  TaskStatus?: Array<number | bigint>
   /**
    * 按照一个或多个任务类型ID进行过滤。
 
@@ -2183,7 +2183,7 @@ export interface DescribeTaskInfoRequest {
 
 各任务类型的具体含义，可参考 [维修任务分类](https://cloud.tencent.com/document/product/213/67789#.E7.BB.B4.E4.BF.AE.E4.BB.BB.E5.8A.A1.E5.88.86.E7.B1.BB)。
    */
-  TaskTypeIds?: Array<number>
+  TaskTypeIds?: Array<number | bigint>
   /**
    * 按照一个或者多个任务ID查询。任务ID形如：`rep-xxxxxxxx`。
    */

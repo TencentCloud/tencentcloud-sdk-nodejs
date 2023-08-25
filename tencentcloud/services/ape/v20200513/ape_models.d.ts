@@ -25,7 +25,7 @@ export interface DescribeImagesRequest {
     /**
      * 分层图库id数组，可选以下数值：1(基础)，2(精选)，3(高级)
      */
-    LayeredGalleryIds?: Array<number>;
+    LayeredGalleryIds?: Array<number | bigint>;
 }
 /**
  * BatchDescribeOrderCertificate请求参数结构体
@@ -452,7 +452,7 @@ export interface DescribeDownloadInfosRequest {
     /**
      * 无效值，过滤结果为空
      */
-    ImageIds?: Array<number>;
+    ImageIds?: Array<number | bigint>;
 }
 /**
  * CreateOrderAndPay请求参数结构体

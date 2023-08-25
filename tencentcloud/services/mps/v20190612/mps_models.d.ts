@@ -434,7 +434,7 @@ export interface DescribeAnimatedGraphicsTemplatesRequest {
     /**
      * 转动图模板唯一标识过滤条件，数组长度限制：100。
      */
-    Definitions?: Array<number>;
+    Definitions?: Array<number | bigint>;
     /**
      * 分页偏移量，默认值：0。
      */
@@ -1254,7 +1254,7 @@ export interface MediaSnapshotByTimePicInfoItem {
     /**
      * 截图如果被打上了水印，被打水印的模板 ID 列表。
      */
-    WaterMarkDefinition: Array<number>;
+    WaterMarkDefinition: Array<number | bigint>;
 }
 /**
  * 用户自定义人物审核任务控制参数
@@ -1585,7 +1585,7 @@ export interface AudioTemplateInfoForUpdate {
      * 指定输出要保留的音频轨道。默认是全部保留源的。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    StreamSelects?: Array<number>;
+    StreamSelects?: Array<number | bigint>;
 }
 /**
  * 超分配置
@@ -3088,7 +3088,7 @@ export interface DescribeSnapshotByTimeOffsetTemplatesRequest {
     /**
      * 指定时间点截图模板唯一标识过滤条件，数组长度限制：100。
      */
-    Definitions?: Array<number>;
+    Definitions?: Array<number | bigint>;
     /**
      * 分页偏移量，默认值：0。
      */
@@ -3983,7 +3983,7 @@ export interface MediaContentReviewOcrTextSegmentItem {
     /**
      * 嫌疑文字出现的区域坐标 (像素级)，[x1, y1, x2, y2]，即左上角坐标、右下角坐标。
      */
-    AreaCoordSet: Array<number>;
+    AreaCoordSet: Array<number | bigint>;
     /**
      * 嫌疑图片 URL （图片不会永久存储，到达
   PicUrlExpireTime 时间点后图片将被删除）。
@@ -4010,7 +4010,7 @@ export interface DescribeAdaptiveDynamicStreamingTemplatesRequest {
     /**
      * 转自适应码流模板唯一标识过滤条件，数组长度限制：100。
      */
-    Definitions?: Array<number>;
+    Definitions?: Array<number | bigint>;
     /**
      * 分页偏移量，默认值：0。
      */
@@ -4150,7 +4150,7 @@ export interface MediaSampleSnapshotItem {
     /**
      * 截图如果被打上了水印，被打水印的模板 ID 列表。
      */
-    WaterMarkDefinition: Array<number>;
+    WaterMarkDefinition: Array<number | bigint>;
 }
 /**
  * 智能标签任务控制参数
@@ -4431,7 +4431,7 @@ export interface DescribeWatermarkTemplatesRequest {
     /**
      * 水印模板唯一标识过滤条件，数组长度限制：100。
      */
-    Definitions?: Array<number>;
+    Definitions?: Array<number | bigint>;
     /**
      * 水印类型过滤条件，可选值：
   <li>image：图片水印；</li>
@@ -4874,7 +4874,7 @@ export interface AiRecognitionTaskFaceSegmentItem {
     /**
      * 识别结果的区域坐标。数组包含 4 个元素 [x1,y1,x2,y2]，依次表示区域左上点、右下点的横纵坐标。
      */
-    AreaCoordSet: Array<number>;
+    AreaCoordSet: Array<number | bigint>;
 }
 /**
  * 智能标签结果类型
@@ -5281,7 +5281,7 @@ export interface LiveStreamOcrWordsRecognitionResult {
     /**
      * 识别结果的区域坐标。数组包含 4 个元素 [x1,y1,x2,y2]，依次表示区域左上点、右下点的横纵坐标。
      */
-    AreaCoords: Array<number>;
+    AreaCoords: Array<number | bigint>;
 }
 /**
  * 直播流处理错误信息
@@ -6374,7 +6374,7 @@ export interface LiveStreamAiReviewImagePoliticalResult {
     /**
      * 敏感人物、违规图标出现的区域坐标 (像素级)，[x1, y1, x2, y2]，即左上角坐标、右下角坐标。
      */
-    AreaCoordSet: Array<number>;
+    AreaCoordSet: Array<number | bigint>;
     /**
      * 嫌疑图片 URL （图片不会永久存储，到达
   PicUrlExpireTime 时间点后图片将被删除）。
@@ -6422,7 +6422,7 @@ export interface DescribeImageSpriteTemplatesRequest {
     /**
      * 雪碧图模板唯一标识过滤条件，数组长度限制：100。
      */
-    Definitions?: Array<number>;
+    Definitions?: Array<number | bigint>;
     /**
      * 分页偏移量，默认值：0。
      */
@@ -6724,7 +6724,7 @@ export interface DescribeAIAnalysisTemplatesRequest {
     /**
      * 视频内容分析模板唯一标识过滤条件，数组长度限制：10。
      */
-    Definitions?: Array<number>;
+    Definitions?: Array<number | bigint>;
     /**
      * 分页偏移量，默认值：0。
      */
@@ -7061,7 +7061,7 @@ export interface MediaContentReviewPoliticalSegmentItem {
     /**
      * 涉敏人物、违规图标出现的区域坐标 (像素级)，[x1, y1, x2, y2]，即左上角坐标、右下角坐标。
      */
-    AreaCoordSet: Array<number>;
+    AreaCoordSet: Array<number | bigint>;
     /**
      * 嫌疑图片 URL 失效时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。
      */
@@ -7322,7 +7322,7 @@ export interface AiRecognitionTaskOcrFullTextSegmentTextItem {
     /**
      * 识别结果的区域坐标。数组包含 4 个元素 [x1,y1,x2,y2]，依次表示区域左上点、右下点的横纵坐标。
      */
-    AreaCoordSet: Array<number>;
+    AreaCoordSet: Array<number | bigint>;
     /**
      * 识别文本。
      */
@@ -7349,7 +7349,7 @@ export interface QualityControlItem {
      * 区域坐标(px)，即左上角坐标、右下角坐标。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    AreaCoordSet: Array<number>;
+    AreaCoordSet: Array<number | bigint>;
 }
 /**
  * DeleteStreamLinkFlow返回参数结构体
@@ -7923,7 +7923,7 @@ export interface LiveStreamFaceRecognitionResult {
     /**
      * 识别结果的区域坐标。数组包含 4 个元素 [x1,y1,x2,y2]，依次表示区域左上点、右下点的横纵坐标。
      */
-    AreaCoordSet: Array<number>;
+    AreaCoordSet: Array<number | bigint>;
 }
 /**
  * 流的音频数据。
@@ -8874,7 +8874,7 @@ export interface AiRecognitionTaskOcrWordsSegmentItem {
     /**
      * 识别结果的区域坐标。数组包含 4 个元素 [x1,y1,x2,y2]，依次表示区域左上点、右下点的横纵坐标。
      */
-    AreaCoordSet: Array<number>;
+    AreaCoordSet: Array<number | bigint>;
 }
 /**
  * 传输流日志信息。
@@ -9011,7 +9011,7 @@ export interface Activity {
      * 后驱节点索引数组
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ReardriveIndex?: Array<number>;
+    ReardriveIndex?: Array<number | bigint>;
     /**
      * 原子任务参数
   注意：此字段可能返回 null，表示取不到有效值。
@@ -9097,7 +9097,7 @@ export interface LiveStreamOcrFullTextRecognitionResult {
     /**
      * 识别结果的区域坐标。数组包含 4 个元素 [x1,y1,x2,y2]，依次表示区域左上点、右下点的横纵坐标。
      */
-    AreaCoordSet: Array<number>;
+    AreaCoordSet: Array<number | bigint>;
 }
 /**
  * ModifyStreamLinkInput请求参数结构体
@@ -9358,7 +9358,7 @@ export interface DescribeContentReviewTemplatesRequest {
     /**
      * 智能审核模板唯一标识过滤条件，数组长度限制：50。
      */
-    Definitions?: Array<number>;
+    Definitions?: Array<number | bigint>;
     /**
      * 分页偏移量，默认值：0。
      */
@@ -10505,7 +10505,7 @@ export interface DescribeWorkflowsRequest {
     /**
      * 工作流 ID 过滤条件，数组长度限制：100。
      */
-    WorkflowIds?: Array<number>;
+    WorkflowIds?: Array<number | bigint>;
     /**
      * 工作流状态，取值范围：
   <li>Enabled：已启用，</li>
@@ -10529,7 +10529,7 @@ export interface DescribeSchedulesRequest {
     /**
      * 编排 ID 过滤条件，数组长度限制：100。
      */
-    ScheduleIds?: Array<number>;
+    ScheduleIds?: Array<number | bigint>;
     /**
      * 编排触发类型，可选值：
   <li>CosFileUpload： 腾讯云 COS 文件上传触发</li>
@@ -11040,7 +11040,7 @@ export interface DescribeTranscodeTemplatesRequest {
     /**
      * 转码模板唯一标识过滤条件，数组长度限制：100。
      */
-    Definitions?: Array<number>;
+    Definitions?: Array<number | bigint>;
     /**
      * 模板类型过滤条件，可选值：
   <li>Preset：系统预置模板；</li>
@@ -12017,7 +12017,7 @@ export interface DescribeSampleSnapshotTemplatesRequest {
     /**
      * 采样截图模板唯一标识过滤条件，数组长度限制：100。
      */
-    Definitions?: Array<number>;
+    Definitions?: Array<number | bigint>;
     /**
      * 分页偏移量，默认值：0。
      */
@@ -12659,7 +12659,7 @@ export interface DescribeAIRecognitionTemplatesRequest {
     /**
      * 视频内容识别模板唯一标识过滤条件，数组长度限制：10。
      */
-    Definitions?: Array<number>;
+    Definitions?: Array<number | bigint>;
     /**
      * 分页偏移量，默认值：0。
      */

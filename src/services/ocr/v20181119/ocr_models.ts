@@ -719,7 +719,7 @@ export interface DriverLicenseOCRResponse {
 -9103  翻拍件告警
 注：告警码可以同时存在多个
    */
-  RecognizeWarnCode?: Array<number>
+  RecognizeWarnCode?: Array<number | bigint>
   /**
    * 告警码说明：
 WARN_DRIVER_LICENSE_COPY_CARD 复印件告警
@@ -2676,7 +2676,7 @@ export interface RecognizeGeneralInvoiceRequest {
 17：医疗发票
 -1：其他发票
    */
-  Types?: Array<number>
+  Types?: Array<number | bigint>
   /**
    * 是否开启其他票识别，默认值为true，开启后可支持其他发票的智能识别。
    */
@@ -2928,7 +2928,7 @@ export interface VehicleLicenseOCRResponse {
 -9103 翻拍件告警
 注：告警码可以同时存在多个
    */
-  RecognizeWarnCode?: Array<number>
+  RecognizeWarnCode?: Array<number | bigint>
   /**
    * 告警码说明：
 WARN_DRIVER_LICENSE_COPY_CARD 复印件告警
@@ -3228,7 +3228,7 @@ export interface HKIDCardOCRResponse {
 -9102：证照复印件告警
 -9103：证照翻拍告警
    */
-  WarningCode?: Array<number>
+  WarningCode?: Array<number | bigint>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5805,7 +5805,7 @@ export interface MLIDPassportOCRResponse {
 -9102	证照复印件告警（包括黑白复印件、彩色复印件）
 -9106       证件遮挡告警
    */
-  Warn?: Array<number>
+  Warn?: Array<number | bigint>
   /**
    * 证件图片
    */
@@ -6543,7 +6543,7 @@ export interface MixedInvoiceOCRRequest {
 ----------------------
 -1：其他发票,（只传入此类型时，图片均采用其他票类型进行识别）
    */
-  Types?: Array<number>
+  Types?: Array<number | bigint>
   /**
    * 是否识别其他类型发票，默认为Yes
 Yes：识别其他类型发票
@@ -7883,7 +7883,7 @@ export interface RecognizeContainerOCRResponse {
 -9926	集装箱箱号不完整或者不清晰
 -9927	集装箱类型不完整或者不清晰
    */
-  Warn?: Array<number>
+  Warn?: Array<number | bigint>
   /**
    * 集装箱自身重量，单位：千克（KG）
    */
@@ -8381,7 +8381,7 @@ export interface MLIDCardOCRResponse {
 -9106       证件遮挡告警
 -9107       模糊图片告警
    */
-  Warn: Array<number>
+  Warn: Array<number | bigint>
   /**
    * 证件图片
    */
@@ -8541,7 +8541,7 @@ export interface BizLicenseOCRResponse {
    * Code 告警码列表和释义：
 -9102 黑白复印件告警
    */
-  RecognizeWarnCode?: Array<number>
+  RecognizeWarnCode?: Array<number | bigint>
   /**
    * 告警码说明：
 WARN_COPY_CARD 黑白复印件告警
@@ -8660,7 +8660,7 @@ export interface BankCardOCRResponse {
 （告警码可以同时存在多个）
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  WarningCode: Array<number>
+  WarningCode: Array<number | bigint>
   /**
    * 图片质量分数，请求EnableQualityValue时返回（取值范围：0-100，分数越低越模糊，建议阈值≥50）。
 注意：此字段可能返回 null，表示取不到有效值。

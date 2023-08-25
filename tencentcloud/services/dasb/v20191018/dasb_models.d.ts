@@ -68,7 +68,7 @@ export interface DeleteAclsRequest {
     /**
      * 待删除的权限ID集合
      */
-    IdSet: Array<number>;
+    IdSet: Array<number | bigint>;
 }
 /**
  * DeleteDeviceGroups返回参数结构体
@@ -178,7 +178,7 @@ export interface ResetDeviceAccountPasswordRequest {
     /**
      * ID集合
      */
-    IdSet: Array<number>;
+    IdSet: Array<number | bigint>;
 }
 /**
  * AddUserGroupMembers请求参数结构体
@@ -191,7 +191,7 @@ export interface AddUserGroupMembersRequest {
     /**
      * 成员用户ID集合
      */
-    MemberIdSet: Array<number>;
+    MemberIdSet: Array<number | bigint>;
 }
 /**
  * DescribeDevices返回参数结构体
@@ -283,7 +283,7 @@ export interface DeleteUserGroupMembersRequest {
     /**
      * 需删除的成员用户ID集合
      */
-    MemberIdSet: Array<number>;
+    MemberIdSet: Array<number | bigint>;
 }
 /**
  * DeleteUserGroups返回参数结构体
@@ -309,7 +309,7 @@ export interface ModifyDeviceRequest {
     /**
      * 资产所属组ID集合
      */
-    GroupIdSet?: Array<number>;
+    GroupIdSet?: Array<number | bigint>;
     /**
      * 资产所属部门ID
      */
@@ -354,7 +354,7 @@ export interface SearchFileRequest {
     /**
      * 操作类型：1 - 文件上传，2 - 文件下载，3 - 文件删除，4 - 文件(夹)移动，5 - 文件(夹)重命名，6 - 新建文件夹，9 - 删除文件夹
      */
-    Method?: Array<number>;
+    Method?: Array<number | bigint>;
     /**
      * 可填写路径名或文件（夹）名
      */
@@ -362,7 +362,7 @@ export interface SearchFileRequest {
     /**
      * 1-已执行，  2-被阻断
      */
-    AuditAction?: Array<number>;
+    AuditAction?: Array<number | bigint>;
     /**
      * 分页的页内记录数，默认为20，最大200
      */
@@ -455,7 +455,7 @@ export interface SearchCommandRequest {
     /**
      * 根据拦截状态进行过滤：1 - 已执行，2 - 被阻断
      */
-    AuditAction?: Array<number>;
+    AuditAction?: Array<number | bigint>;
     /**
      * 每页容量，默认20，最大200
      */
@@ -696,7 +696,7 @@ export interface SearchFileTypeFilter {
     /**
      * 在当前指定的protocol下进一步过滤具体操作类型,如剪贴板文件上传，剪贴板文件下载等
      */
-    Method?: Array<number>;
+    Method?: Array<number | bigint>;
 }
 /**
  * BindDeviceAccountPrivateKey返回参数结构体
@@ -735,7 +735,7 @@ export interface SearchCommandBySidRequest {
     /**
      * 根据拦截状态进行过滤
      */
-    AuditAction?: Array<number>;
+    AuditAction?: Array<number | bigint>;
 }
 /**
  * CreateDeviceGroup返回参数结构体
@@ -966,19 +966,19 @@ export interface CreateAclRequest {
     /**
      * 关联的用户ID集合
      */
-    UserIdSet?: Array<number>;
+    UserIdSet?: Array<number | bigint>;
     /**
      * 关联的用户组ID
      */
-    UserGroupIdSet?: Array<number>;
+    UserGroupIdSet?: Array<number | bigint>;
     /**
      * 关联的资产ID集合
      */
-    DeviceIdSet?: Array<number>;
+    DeviceIdSet?: Array<number | bigint>;
     /**
      * 关联的资产组ID
      */
-    DeviceGroupIdSet?: Array<number>;
+    DeviceGroupIdSet?: Array<number | bigint>;
     /**
      * 关联的账号
      */
@@ -986,7 +986,7 @@ export interface CreateAclRequest {
     /**
      * 关联的高危命令模板ID
      */
-    CmdTemplateIdSet?: Array<number>;
+    CmdTemplateIdSet?: Array<number | bigint>;
     /**
      * 关联高危DB模板ID
      */
@@ -1058,7 +1058,7 @@ export interface DeleteDeviceGroupMembersRequest {
     /**
      * 需要删除的资产ID集合
      */
-    MemberIdSet: Array<number>;
+    MemberIdSet: Array<number | bigint>;
 }
 /**
  * CreateDeviceGroup请求参数结构体
@@ -1247,19 +1247,19 @@ export interface ModifyAclRequest {
     /**
      * 关联的用户ID
      */
-    UserIdSet?: Array<number>;
+    UserIdSet?: Array<number | bigint>;
     /**
      * 关联的用户组ID
      */
-    UserGroupIdSet?: Array<number>;
+    UserGroupIdSet?: Array<number | bigint>;
     /**
      * 关联的资产ID
      */
-    DeviceIdSet?: Array<number>;
+    DeviceIdSet?: Array<number | bigint>;
     /**
      * 关联的资产组ID
      */
-    DeviceGroupIdSet?: Array<number>;
+    DeviceGroupIdSet?: Array<number | bigint>;
     /**
      * 关联的账号
      */
@@ -1267,7 +1267,7 @@ export interface ModifyAclRequest {
     /**
      * 关联的高危命令模板ID
      */
-    CmdTemplateIdSet?: Array<number>;
+    CmdTemplateIdSet?: Array<number | bigint>;
     /**
      * 关联高危DB模板ID
      */
@@ -1412,7 +1412,7 @@ export interface DescribeUsersRequest {
     /**
      * 如果IdSet不为空，则忽略其他参数
      */
-    IdSet?: Array<number>;
+    IdSet?: Array<number | bigint>;
     /**
      * 模糊查询，IdSet、UserName、Phone为空时才生效，对用户名和姓名进行模糊查询
      */
@@ -1441,11 +1441,11 @@ export interface DescribeUsersRequest {
     /**
      * 查询具有指定资产ID访问权限的用户
      */
-    AuthorizedDeviceIdSet?: Array<number>;
+    AuthorizedDeviceIdSet?: Array<number | bigint>;
     /**
      * 认证方式，0 - 本地, 1 - LDAP, 2 - OAuth, 不传为全部
      */
-    AuthTypeSet?: Array<number>;
+    AuthTypeSet?: Array<number | bigint>;
     /**
      * 部门ID，用于过滤属于某个部门的用户
      */
@@ -1589,7 +1589,7 @@ export interface ResetDeviceAccountPrivateKeyRequest {
     /**
      * ID集合
      */
-    IdSet: Array<number>;
+    IdSet: Array<number | bigint>;
 }
 /**
  * DescribeDeviceGroups请求参数结构体
@@ -1598,7 +1598,7 @@ export interface DescribeDeviceGroupsRequest {
     /**
      * 资产组ID集合
      */
-    IdSet?: Array<number>;
+    IdSet?: Array<number | bigint>;
     /**
      * 资产组名，最长64个字符，模糊查询
      */
@@ -1699,7 +1699,7 @@ export interface DeleteUsersRequest {
     /**
      * 待删除的用户ID集合
      */
-    IdSet: Array<number>;
+    IdSet: Array<number | bigint>;
 }
 /**
  * DeleteDeviceAccounts请求参数结构体
@@ -1708,7 +1708,7 @@ export interface DeleteDeviceAccountsRequest {
     /**
      * 待删除的ID集合
      */
-    IdSet: Array<number>;
+    IdSet: Array<number | bigint>;
 }
 /**
  * DeleteDeviceGroupMembers返回参数结构体
@@ -1778,7 +1778,7 @@ export interface DeleteUserGroupsRequest {
     /**
      * 待删除的用户组ID集合
      */
-    IdSet: Array<number>;
+    IdSet: Array<number | bigint>;
 }
 /**
  * 用户信息
@@ -1859,7 +1859,7 @@ export interface ResetUserRequest {
     /**
      * 用户ID集合
      */
-    IdSet: Array<number>;
+    IdSet: Array<number | bigint>;
 }
 /**
  * 资产信息
@@ -2041,7 +2041,7 @@ export interface CreateUserRequest {
     /**
      * 所属用户组ID集合
      */
-    GroupIdSet?: Array<number>;
+    GroupIdSet?: Array<number | bigint>;
     /**
      * 认证方式，0 - 本地， 1 - LDAP， 2 - OAuth 不传则默认为0
      */
@@ -2178,7 +2178,7 @@ export interface DeleteCmdTemplatesRequest {
     /**
      * 待删除的ID集合
      */
-    IdSet: Array<number>;
+    IdSet: Array<number | bigint>;
 }
 /**
  * DescribeUserGroups返回参数结构体
@@ -2213,7 +2213,7 @@ export interface DescribeDeviceAccountsRequest {
     /**
      * 主机账号ID集合，非必需，如果使用IdSet则忽略其他过滤参数
      */
-    IdSet?: Array<number>;
+    IdSet?: Array<number | bigint>;
     /**
      * 主机账号名，模糊查询，不能单独出现，必须于DeviceId一起提交
      */
@@ -2255,7 +2255,7 @@ export interface DescribeCmdTemplatesRequest {
     /**
      * 命令模板ID集合，非必需
      */
-    IdSet?: Array<number>;
+    IdSet?: Array<number | bigint>;
     /**
      * 命令模板名，模糊查询，最大长度64字符
      */
@@ -2298,7 +2298,7 @@ export interface DeleteDevicesRequest {
     /**
      * 待删除的ID集合
      */
-    IdSet: Array<number>;
+    IdSet: Array<number | bigint>;
 }
 /**
  * DescribeDeviceAccounts返回参数结构体
@@ -2350,7 +2350,7 @@ export interface ModifyUserRequest {
     /**
      * 所属用户组ID集合
      */
-    GroupIdSet?: Array<number>;
+    GroupIdSet?: Array<number | bigint>;
     /**
      * 认证方式，0 - 本地，1 - LDAP，2 - OAuth 不传则默认为0
      */
@@ -2397,7 +2397,7 @@ export interface DeleteDeviceGroupsRequest {
     /**
      * 待删除的资产组ID集合
      */
-    IdSet: Array<number>;
+    IdSet: Array<number | bigint>;
 }
 /**
  * DescribeDeviceGroupMembers返回参数结构体
@@ -2562,7 +2562,7 @@ export interface BindDeviceResourceRequest {
     /**
      * 资产ID集合
      */
-    DeviceIdSet: Array<number>;
+    DeviceIdSet: Array<number | bigint>;
     /**
      * 堡垒机服务ID
      */
@@ -2701,7 +2701,7 @@ export interface DescribeDevicesRequest {
     /**
      * 资产ID集合
      */
-    IdSet?: Array<number>;
+    IdSet?: Array<number | bigint>;
     /**
      * 资产名或资产IP，模糊查询
      */
@@ -2729,7 +2729,7 @@ export interface DescribeDevicesRequest {
     /**
      * 有该资产访问权限的用户ID集合
      */
-    AuthorizedUserIdSet?: Array<number>;
+    AuthorizedUserIdSet?: Array<number | bigint>;
     /**
      * 过滤条件，资产绑定的堡垒机服务ID集合
      */
@@ -2737,7 +2737,7 @@ export interface DescribeDevicesRequest {
     /**
      * 可提供按照多种类型过滤, 1 - Linux, 2 - Windows, 3 - MySQL, 4 - SQLServer
      */
-    KindSet?: Array<number>;
+    KindSet?: Array<number | bigint>;
     /**
      * 资产是否包含托管账号。1，包含；0，不包含
      */
@@ -2985,7 +2985,7 @@ export interface DescribeUserGroupsRequest {
     /**
      * 用户组ID集合
      */
-    IdSet?: Array<number>;
+    IdSet?: Array<number | bigint>;
     /**
      * 用户组名，模糊查询,长度：0-64字符
      */
@@ -3047,7 +3047,7 @@ export interface DescribeAclsRequest {
     /**
      * 访问权限ID集合
      */
-    IdSet?: Array<number>;
+    IdSet?: Array<number | bigint>;
     /**
      * 访问权限名称，模糊查询，最长64字符
      */
@@ -3067,11 +3067,11 @@ export interface DescribeAclsRequest {
     /**
      * 有访问权限的用户ID集合
      */
-    AuthorizedUserIdSet?: Array<number>;
+    AuthorizedUserIdSet?: Array<number | bigint>;
     /**
      * 有访问权限的资产ID集合
      */
-    AuthorizedDeviceIdSet?: Array<number>;
+    AuthorizedDeviceIdSet?: Array<number | bigint>;
     /**
      * 访问权限状态，1 - 已生效，2 - 未生效，3 - 已过期
      */
@@ -3092,7 +3092,7 @@ export interface AddDeviceGroupMembersRequest {
     /**
      * 需要添加到资产组的资产ID集合
      */
-    MemberIdSet: Array<number>;
+    MemberIdSet: Array<number | bigint>;
 }
 /**
  * DeleteDeviceAccounts返回参数结构体

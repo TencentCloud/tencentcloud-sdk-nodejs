@@ -120,7 +120,7 @@ export interface DescribeRollbackTimeRangeRequest {
  */
 export interface DescribeResourcePackageListResponse {
     /**
-     * 总配置数
+     * 资源包总数
      */
     Total?: number;
     /**
@@ -409,7 +409,7 @@ export interface BillingResourceInfo {
  */
 export interface DescribeProxiesRequest {
     /**
-     * 集群ID
+     * 集群ID（该参数必传，例如cynosdbmysql-xxxxxx）
      */
     ClusterId?: string;
     /**
@@ -1058,7 +1058,7 @@ export interface DescribeParamTemplatesRequest {
     /**
      * 模板ID
      */
-    TemplateIds?: Array<number>;
+    TemplateIds?: Array<number | bigint>;
     /**
      * 数据库类型，可选值：NORMAL，SERVERLESS
      */
@@ -1979,17 +1979,17 @@ export interface ModifyClusterStorageResponse {
      * 冻结流水ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TranId: string;
+    TranId?: string;
     /**
      * 大订单号
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    BigDealIds: Array<string>;
+    BigDealIds?: Array<string>;
     /**
      * 订单号
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DealNames: Array<string>;
+    DealNames?: Array<string>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2219,7 +2219,7 @@ export interface Package {
      */
     PackageUsedSpec?: number;
     /**
-     * 资源包已使用量
+     * 是否还有库存余量
   注意：此字段可能返回 null，表示取不到有效值。
      */
     HasQuota?: boolean;
@@ -2931,7 +2931,7 @@ export interface DescribeBackupListRequest {
     /**
      * 备份ID
      */
-    BackupIds?: Array<number>;
+    BackupIds?: Array<number | bigint>;
     /**
      * 备份类型，可选值：snapshot，快照备份； logic，逻辑备份
      */
@@ -2963,7 +2963,7 @@ export interface DescribeBackupListRequest {
     /**
      * 快照备份Id列表
      */
-    SnapshotIdList?: Array<number>;
+    SnapshotIdList?: Array<number | bigint>;
 }
 /**
  * CloseProxy请求参数结构体
@@ -4195,7 +4195,7 @@ export interface SearchClusterDatabasesResponse {
      * 数据库列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Databases: Array<string>;
+    Databases?: Array<string>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -4363,7 +4363,7 @@ export interface OpenClusterPasswordComplexityResponse {
     /**
      * 任务流ID
      */
-    FlowId: number;
+    FlowId?: number;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -4415,7 +4415,7 @@ export interface OfflineInstanceResponse {
     /**
      * 任务流ID
      */
-    FlowId: number;
+    FlowId?: number;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -5031,16 +5031,16 @@ export interface UpgradeInstanceResponse {
      * 冻结流水ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TranId: string;
+    TranId?: string;
     /**
      * 大订单号
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    BigDealIds: Array<string>;
+    BigDealIds?: Array<string>;
     /**
      * 订单号
      */
-    DealNames: Array<string>;
+    DealNames?: Array<string>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -5807,7 +5807,7 @@ export interface OfflineClusterResponse {
     /**
      * 任务流ID
      */
-    FlowId: number;
+    FlowId?: number;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -7446,11 +7446,11 @@ export interface DeleteBackupRequest {
     /**
      * 备份文件ID，旧版本使用的字段，不推荐使用
      */
-    SnapshotIdList?: Array<number>;
+    SnapshotIdList?: Array<number | bigint>;
     /**
      * 备份文件ID，推荐使用
      */
-    BackupIds?: Array<number>;
+    BackupIds?: Array<number | bigint>;
 }
 /**
  * 计费询价结果

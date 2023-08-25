@@ -108,7 +108,7 @@ export interface EntityRelationObject {
     /**
      * object对应popular值
      */
-    Popular?: Array<number>;
+    Popular?: Array<number | bigint>;
 }
 /**
  * DescribeEntity返回参数结构体
@@ -138,5 +138,5 @@ export interface EntityRelationSubject {
     /**
      * Subject对应popular
      */
-    Popular?: Array<number>;
+    Popular?: Array<number | bigint>;
 }

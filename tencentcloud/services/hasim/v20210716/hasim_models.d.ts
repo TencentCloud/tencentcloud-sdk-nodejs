@@ -429,7 +429,7 @@ export interface DescribeRulesRequest {
     /**
      * 自动化规则ID
      */
-    RuleIDs?: Array<number>;
+    RuleIDs?: Array<number | bigint>;
     /**
      * 名称
      */
@@ -528,7 +528,7 @@ export interface ModifyRuleRequest {
     /**
      * 标签ID集合
      */
-    TagIDs?: Array<number>;
+    TagIDs?: Array<number | bigint>;
     /**
      * 资费计划
      */
@@ -626,7 +626,7 @@ export interface CreateRuleRequest {
     /**
      * 标签ID集合
      */
-    TagIDs?: Array<number>;
+    TagIDs?: Array<number | bigint>;
     /**
      * 资费计划
      */
@@ -995,7 +995,7 @@ export interface Rule {
      * 绑定的标签ID集合
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TagIDs: Array<number>;
+    TagIDs: Array<number | bigint>;
     /**
      * 绑定的资费计划
   注意：此字段可能返回 null，表示取不到有效值。
@@ -1050,7 +1050,7 @@ export interface DescribeLinksRequest {
     /**
      * 标签ID 集合
      */
-    TagIDs?: Array<number>;
+    TagIDs?: Array<number | bigint>;
     /**
      * 翻页大小, 默认翻页大小为10，最大数量为500
      */
@@ -1150,7 +1150,7 @@ export interface RuleDetail {
      * 标签ID集合
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TagIDs: Array<number>;
+    TagIDs: Array<number | bigint>;
     /**
      * 资费信息
   注意：此字段可能返回 null，表示取不到有效值。

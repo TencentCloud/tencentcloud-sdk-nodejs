@@ -37,7 +37,7 @@ export interface StatusNode {
      * 审批节点审批人
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ApprovedUin: Array<number>;
+    ApprovedUin: Array<number | bigint>;
     /**
      * 审批时间
   注意：此字段可能返回 null，表示取不到有效值。

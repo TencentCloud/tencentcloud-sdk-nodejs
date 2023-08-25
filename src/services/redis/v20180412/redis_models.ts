@@ -590,7 +590,7 @@ export interface ModifyInstanceRequest {
   /**
    * 自动续费标识。0 - 默认状态（手动续费）；1 - 自动续费；2 - 明确不自动续费
    */
-  AutoRenews?: Array<number>
+  AutoRenews?: Array<number | bigint>
   /**
    * 已经废弃
    */
@@ -658,11 +658,11 @@ export interface DescribeCommonDBInstancesRequest {
   /**
    * vpc网络ID信息列表
    */
-  VpcIds?: Array<number>
+  VpcIds?: Array<number | bigint>
   /**
    * 子网ID信息列表
    */
-  SubnetIds?: Array<number>
+  SubnetIds?: Array<number | bigint>
   /**
    * 计费类型过滤列表；0表示包年包月，1表示按量计费
    */
@@ -1094,7 +1094,7 @@ export interface DescribeParamTemplatesRequest {
   /**
    * 产品类型数组。产品类型：1 – Redis2.8内存版（集群架构），2 – Redis2.8内存版（标准架构），3 – CKV 3.2内存版(标准架构)，4 – CKV 3.2内存版(集群架构)，5 – Redis2.8内存版（单机），6 – Redis4.0内存版（标准架构），7 – Redis4.0内存版（集群架构），8 – Redis5.0内存版（标准架构），9 – Redis5.0内存版（集群架构）
    */
-  ProductTypes?: Array<number>
+  ProductTypes?: Array<number | bigint>
   /**
    * 模板名称数组。
    */
@@ -2299,7 +2299,7 @@ export interface KillMasterGroupRequest {
   /**
    * 分片集群的分片 ID。
    */
-  ShardIds?: Array<number>
+  ShardIds?: Array<number | bigint>
 }
 
 /**
@@ -2491,7 +2491,7 @@ export interface DescribeTaskListRequest {
   /**
    * 项目 ID。登录 [Redis 控制台](https://console.cloud.tencent.com/redis)，在右上角的账号信息下拉菜单中，选择**项目管理**，即可获取对应的项目 ID。
    */
-  ProjectIds?: Array<number>
+  ProjectIds?: Array<number | bigint>
   /**
    * 任务类型。
 - FLOW_CREATE：创建实例。
@@ -2526,7 +2526,7 @@ export interface DescribeTaskListRequest {
   /**
    * 该参数为内部使用，请忽略。
    */
-  TaskStatus?: Array<number>
+  TaskStatus?: Array<number | bigint>
   /**
    * 任务执行状态。
 - 0：任务初始化。
@@ -2534,11 +2534,11 @@ export interface DescribeTaskListRequest {
 - 2：完成。
 - 4：失败。
    */
-  Result?: Array<number>
+  Result?: Array<number | bigint>
   /**
    * 该字段已废弃，使用OperateUin代替，请忽略。
    */
-  OperatorUin?: Array<number>
+  OperatorUin?: Array<number | bigint>
   /**
    * 操作者账号 ID，UIN。
    */
@@ -2680,7 +2680,7 @@ export interface ApplyParamsTemplateResponse {
   /**
    * 任务ID
    */
-  TaskIds: Array<number>
+  TaskIds: Array<number | bigint>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3708,7 +3708,7 @@ export interface DescribeInstancesRequest {
   /**
    * 项目 ID 组成的数组。
    */
-  ProjectIds?: Array<number>
+  ProjectIds?: Array<number | bigint>
   /**
    * 实例名称。
    */
@@ -3724,7 +3724,7 @@ export interface DescribeInstancesRequest {
   /**
    * 地域 ID 数组，该参数已经弃用，可通过公共参数Region查询对应地域。
    */
-  RegionIds?: Array<number>
+  RegionIds?: Array<number | bigint>
   /**
    * 实例状态。
 - 0：待初始化。
@@ -3733,7 +3733,7 @@ export interface DescribeInstancesRequest {
 - -2：已隔离。
 - -3：待删除。
    */
-  Status?: Array<number>
+  Status?: Array<number | bigint>
   /**
    * 实例架构版本。
 - 1：单机版。
@@ -3751,7 +3751,7 @@ export interface DescribeInstancesRequest {
 - 1：自动续费。
 - 2：到期不再续费。
    */
-  AutoRenew?: Array<number>
+  AutoRenew?: Array<number | bigint>
   /**
    * 计费模式。
 - postpaid：按量计费。
@@ -3779,7 +3779,7 @@ export interface DescribeInstancesRequest {
   /**
    * 内部参数，用户可忽略。
    */
-  TypeList?: Array<number>
+  TypeList?: Array<number | bigint>
   /**
    * 内部参数，用户可忽略。
    */
@@ -5133,7 +5133,7 @@ export interface DescribeInstanceBackupsRequest {
 -1：备份已过期。
 -2：备份已删除。
    */
-  Status?: Array<number>
+  Status?: Array<number | bigint>
   /**
    * 实例名称，支持根据实例名称模糊搜索。
    */

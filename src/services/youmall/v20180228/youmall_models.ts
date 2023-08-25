@@ -924,7 +924,7 @@ export interface ModifyPersonFeatureInfoResponse {
   /**
    * 与请求的person_id类型相同、与请求图片特征相似的一个或多个person_id，需要额外确认这些id是否是同一个人
    */
-  SimilarPersonIds?: Array<number>
+  SimilarPersonIds?: Array<number | bigint>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

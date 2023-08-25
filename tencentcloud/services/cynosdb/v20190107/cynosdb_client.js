@@ -148,7 +148,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeResourcesByDealName", req, cb);
     }
     /**
-     * 升级预付费存储
+     * 调整包年包月存储容量
      */
     async ModifyClusterStorage(req, cb) {
         return this.request("ModifyClusterStorage", req, cb);
@@ -208,7 +208,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeClusterInstanceGrps", req, cb);
     }
     /**
-     * 下线集群
+     * 销毁集群
      */
     async OfflineCluster(req, cb) {
         return this.request("OfflineCluster", req, cb);
@@ -274,7 +274,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateBackup", req, cb);
     }
     /**
-     * 下线实例
+     * 销毁实例
      */
     async OfflineInstance(req, cb) {
         return this.request("OfflineInstance", req, cb);
@@ -346,7 +346,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyClusterParam", req, cb);
     }
     /**
-     * 创建集群
+     * 购买新集群
      */
     async CreateClusters(req, cb) {
         return this.request("CreateClusters", req, cb);
@@ -634,7 +634,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeInstances", req, cb);
     }
     /**
-     * 更新集群Cynos内核版本
+     * 更新内核小版本
      */
     async UpgradeClusterVersion(req, cb) {
         return this.request("UpgradeClusterVersion", req, cb);
@@ -748,7 +748,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteParamTemplate", req, cb);
     }
     /**
-     * 升级实例
+     * 实例变配
      */
     async UpgradeInstance(req, cb) {
         return this.request("UpgradeInstance", req, cb);
@@ -772,7 +772,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDBSecurityGroups", req, cb);
     }
     /**
-     * 本接口（OpenClusterPasswordComplexity）用于开启集群密码复杂度
+     * 本接口（OpenClusterPasswordComplexity）用于开启自定义密码复杂度功能
      */
     async OpenClusterPasswordComplexity(req, cb) {
         return this.request("OpenClusterPasswordComplexity", req, cb);

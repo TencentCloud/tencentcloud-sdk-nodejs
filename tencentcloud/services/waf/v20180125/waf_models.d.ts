@@ -539,7 +539,7 @@ export interface ModifyDomainWhiteRuleRequest {
     /**
      * 规则的id列表
      */
-    Rules?: Array<number>;
+    Rules?: Array<number | bigint>;
     /**
      * 规则匹配路径
      */
@@ -824,7 +824,7 @@ export interface SwitchDomainRulesRequest {
     /**
      * 规则列表
      */
-    Ids?: Array<number>;
+    Ids?: Array<number | bigint>;
     /**
      * 开关状态，0表示关闭，1表示开启，2表示只观察
      */
@@ -1082,48 +1082,28 @@ export interface DescribeAccessExportsRequest {
     Limit?: number;
 }
 /**
- * saas和clb信息
+ * ModifyApiAnalyzeStatus返回参数结构体
  */
-export interface UserDomainInfo {
+export interface ModifyApiAnalyzeStatusResponse {
     /**
-     * 用户id
-     */
-    Appid: number;
-    /**
-     * 域名
-     */
-    Domain: string;
-    /**
-     * 域名id
-     */
-    DomainId: string;
-    /**
-     * 实例id
-     */
-    InstanceId: string;
-    /**
-     * 实例名
-     */
-    InstanceName: string;
-    /**
-     * waf类型
-     */
-    Edition: string;
-    /**
-     * 版本
+     * 已经开启的数量,如果返回值为3（大于支持的域名开启数量），则表示开启失败
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Level: string;
+    Count?: number;
     /**
-     * 指定域名访问日志字段的开关
+     * 不支持开启的域名列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    WriteConfig: string;
+    UnSupportedList?: Array<string>;
     /**
-     * 指定域名是否写cls的开关 1:写 0:不写
+     * 开启/关闭失败的域名列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Cls: number;
+    FailDomainList?: Array<string>;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * DescribeCustomWhiteRule请求参数结构体
@@ -1496,6 +1476,35 @@ export interface DeleteHostResponse {
     RequestId?: string;
 }
 /**
+ * ModifyBotStatus请求参数结构体
+ */
+export interface ModifyBotStatusRequest {
+    /**
+     * 域名
+     */
+    Domain: string;
+    /**
+     * 类别
+     */
+    Category: string;
+    /**
+     * 状态
+     */
+    Status: string;
+    /**
+     * 实例id
+     */
+    InstanceID?: string;
+    /**
+     * 是否是bot4.0版本
+     */
+    IsVersionFour?: boolean;
+    /**
+     * 传入Bot版本号，场景化版本为"4.1.0"
+     */
+    BotVersion?: string;
+}
+/**
  * DeleteSpartaProtection请求参数结构体
  */
 export interface DeleteSpartaProtectionRequest {
@@ -1606,7 +1615,7 @@ export interface DomainsPartInfo {
      * 加密套件信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Ciphers?: Array<number>;
+    Ciphers?: Array<number | bigint>;
     /**
      * 模板
   注意：此字段可能返回 null，表示取不到有效值。
@@ -1820,6 +1829,50 @@ export interface CreateHostRequest {
     InstanceID?: string;
 }
 /**
+ * saas和clb信息
+ */
+export interface UserDomainInfo {
+    /**
+     * 用户id
+     */
+    Appid: number;
+    /**
+     * 域名
+     */
+    Domain: string;
+    /**
+     * 域名id
+     */
+    DomainId: string;
+    /**
+     * 实例id
+     */
+    InstanceId: string;
+    /**
+     * 实例名
+     */
+    InstanceName: string;
+    /**
+     * waf类型
+     */
+    Edition: string;
+    /**
+     * 版本
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Level: string;
+    /**
+     * 指定域名访问日志字段的开关
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    WriteConfig: string;
+    /**
+     * 指定域名是否写cls的开关 1:写 0:不写
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Cls: number;
+}
+/**
  * ModifyAreaBanStatus请求参数结构体
  */
 export interface ModifyAreaBanStatusRequest {
@@ -1965,7 +2018,7 @@ export interface AddSpartaProtectionRequest {
     /**
      * src权重
      */
-    Weights?: Array<number>;
+    Weights?: Array<number | bigint>;
     /**
      * 是否开启主动健康检测，1表示开启，0表示不开启
      */
@@ -1977,7 +2030,7 @@ export interface AddSpartaProtectionRequest {
     /**
      * 加密套件信息
      */
-    Ciphers?: Array<number>;
+    Ciphers?: Array<number | bigint>;
     /**
      * 0:不支持选择：默认模版  1:通用型模版 2:安全型模版 3:自定义模版
      */
@@ -2293,7 +2346,7 @@ export interface RuleList {
     /**
      * 规则列表的id
      */
-    Rules: Array<number>;
+    Rules: Array<number | bigint>;
     /**
      * 请求url
      */
@@ -2339,6 +2392,11 @@ export interface DescribeAttackOverviewResponse {
      * api资产总数
      */
     ApiAssetsCount?: number;
+    /**
+     * api风险事件数量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ApiRiskEventCount?: number;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2458,7 +2516,7 @@ export interface DeleteDomainWhiteRulesRequest {
     /**
      * 需要删除的白名单规则
      */
-    Ids?: Array<number>;
+    Ids?: Array<number | bigint>;
 }
 /**
  * DescribeTlsVersion请求参数结构体
@@ -2524,39 +2582,18 @@ export interface ModifySpartaProtectionModeResponse {
     RequestId?: string;
 }
 /**
- * clb-waf QPS套餐 New
+ * ModifyBotStatus返回参数结构体
  */
-export interface QPSPackageNew {
+export interface ModifyBotStatusResponse {
     /**
-     * 资源ID
+     * 正常情况为null
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ResourceIds: string;
+    Data: string;
     /**
-     * 过期时间
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
-    ValidTime: string;
-    /**
-     * 是否自动续费，1：自动续费，0：不自动续费
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    RenewFlag: number;
-    /**
-     * 套餐购买个数
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Count: number;
-    /**
-     * 套餐购买地域，clb-waf暂时没有用到
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Region: string;
-    /**
-     * 计费项
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    BillingItem?: string;
+    RequestId?: string;
 }
 /**
  * DescribeDomainDetailsSaas请求参数结构体
@@ -2797,6 +2834,41 @@ export interface DescribeAttackOverviewRequest {
      * WAF实例ID，不传则不过滤
      */
     InstanceID?: string;
+}
+/**
+ * clb-waf QPS套餐 New
+ */
+export interface QPSPackageNew {
+    /**
+     * 资源ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ResourceIds: string;
+    /**
+     * 过期时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ValidTime: string;
+    /**
+     * 是否自动续费，1：自动续费，0：不自动续费
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RenewFlag: number;
+    /**
+     * 套餐购买个数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Count: number;
+    /**
+     * 套餐购买地域，clb-waf暂时没有用到
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Region: string;
+    /**
+     * 计费项
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    BillingItem?: string;
 }
 /**
  * DescribePeakValue请求参数结构体
@@ -3320,6 +3392,27 @@ export interface AccessKeyValueInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Value: AccessValueInfo;
+}
+/**
+ * ModifyApiAnalyzeStatus请求参数结构体
+ */
+export interface ModifyApiAnalyzeStatusRequest {
+    /**
+     * 开关状态
+     */
+    Status: number;
+    /**
+     * 域名
+     */
+    Domain?: string;
+    /**
+     * 实例id
+     */
+    InstanceId?: string;
+    /**
+     * 需要批量开启的实体列表
+     */
+    TargetList?: Array<TargetEntity>;
 }
 /**
  * AddSpartaProtectionsAuto请求参数结构体
@@ -3881,6 +3974,19 @@ export interface DescribeRuleLimitRequest {
     Domain: string;
 }
 /**
+ * 需要开启/关闭API安全的 实例+域名 组合实体
+ */
+export interface TargetEntity {
+    /**
+     * 实例ID
+     */
+    InstanceId?: string;
+    /**
+     * 域名
+     */
+    Domain?: string;
+}
+/**
  * DescribeDomainCountInfo请求参数结构体
  */
 export declare type DescribeDomainCountInfoRequest = null;
@@ -4005,7 +4111,7 @@ export interface ModifySpartaProtectionRequest {
     /**
      * src的权重
      */
-    Weights?: Array<number>;
+    Weights?: Array<number | bigint>;
     /**
      * 是否开启源站的主动健康检测，1表示开启，0表示不开启
      */
@@ -4017,7 +4123,7 @@ export interface ModifySpartaProtectionRequest {
     /**
      * 加密套件信息
      */
-    Ciphers?: Array<number>;
+    Ciphers?: Array<number | bigint>;
     /**
      * 0:不支持选择：默认模板  1:通用型模板 2:安全型模板 3:自定义模板
      */
@@ -4237,7 +4343,7 @@ export interface AddDomainWhiteRuleRequest {
     /**
      * 需要添加的规则
      */
-    Rules?: Array<number>;
+    Rules?: Array<number | bigint>;
     /**
      * 需要添加的规则url
      */
@@ -4631,7 +4737,7 @@ export interface AccessRuleKeyValueInfo {
  */
 export interface DescribeDomainsRequest {
     /**
-     * 数据偏移量，从1开始。
+     * 分页偏移量，取Limit整数倍。最小值为0，最大值= Total/Limit向上取整
      */
     Offset: number;
     /**

@@ -2502,7 +2502,7 @@ export interface TimerValue {
      * 重复周期-按周，周几（多个值,取值周一(1,2,3,4,5,6,7)周日）
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    WeekDays?: Array<number>;
+    WeekDays?: Array<number | bigint>;
 }
 /**
  * CopyFleet返回参数结构体

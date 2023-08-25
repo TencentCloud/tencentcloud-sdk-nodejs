@@ -9987,7 +9987,7 @@ export interface DisableRoutesRequest {
   /**
    * 路由策略ID。不能和RouteItemIds同时使用，但至少输入一个。该参数取值可通过查询路由列表（[DescribeRouteTables](https://cloud.tencent.com/document/product/215/15763)）获取。
    */
-  RouteIds?: Array<number>
+  RouteIds?: Array<number | bigint>
   /**
    * 路由策略唯一ID。不能和RouteIds同时使用，但至少输入一个。该参数取值可通过查询路由列表（[DescribeRouteTables](https://cloud.tencent.com/document/product/215/15763)）获取。
    */
@@ -10023,7 +10023,7 @@ export interface EnableRoutesRequest {
   /**
    * 路由策略ID。不能和RouteItemIds同时使用，但至少输入一个。该参数取值可通过查询路由列表（[DescribeRouteTables](https://cloud.tencent.com/document/product/215/15763)）获取。
    */
-  RouteIds?: Array<number>
+  RouteIds?: Array<number | bigint>
   /**
    * 路由策略唯一ID。不能和RouteIds同时使用，但至少输入一个。该参数取值可通过查询路由列表（[DescribeRouteTables](https://cloud.tencent.com/document/product/215/15763)）获取。
    */
@@ -11250,19 +11250,19 @@ export interface CrossBorderFlowMonitorData {
   /**
    * 入带宽，单位：`bps`。
    */
-  InBandwidth: Array<number>
+  InBandwidth: Array<number | bigint>
   /**
    * 出带宽，单位：`bps`。
    */
-  OutBandwidth: Array<number>
+  OutBandwidth: Array<number | bigint>
   /**
    * 入包，单位：`pps`。
    */
-  InPkg: Array<number>
+  InPkg: Array<number | bigint>
   /**
    * 出包，单位：`pps`。
    */
-  OutPkg: Array<number>
+  OutPkg: Array<number | bigint>
 }
 
 /**

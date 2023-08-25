@@ -290,7 +290,7 @@ export interface SubmitTaskTestRunResponse {
   /**
    * 无
    */
-  RecordId?: Array<number>
+  RecordId?: Array<number | bigint>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3565,7 +3565,7 @@ export interface RuleTemplate {
    * 源数据适用类型
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SourceEngineTypes: Array<number>
+  SourceEngineTypes: Array<number | bigint>
   /**
    * 规则所属质量维度（1：准确性，2：唯一性，3：完整性，4：一致性，5：及时性，6：有效性）
 注意：此字段可能返回 null，表示取不到有效值。
@@ -3659,7 +3659,7 @@ export interface DescribeDataBasesRequest {
   /**
    * 数据源类型
    */
-  DsTypes?: Array<number>
+  DsTypes?: Array<number | bigint>
 }
 
 /**
@@ -4141,7 +4141,7 @@ export interface Rule {
    * 源端对应的引擎类型
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SourceEngineTypes?: Array<number>
+  SourceEngineTypes?: Array<number | bigint>
 }
 
 /**
@@ -4174,7 +4174,7 @@ export interface ModifyRuleGroupSubscriptionRequest {
   /**
    * 订阅类型
    */
-  SubscribeType?: Array<number>
+  SubscribeType?: Array<number | bigint>
   /**
    * 项目ID
    */
@@ -5844,7 +5844,7 @@ export interface DeleteDataSourcesRequest {
   /**
    * id列表
    */
-  Ids: Array<number>
+  Ids: Array<number | bigint>
 }
 
 /**
@@ -7373,7 +7373,7 @@ export interface ModifyRuleRequest {
   /**
    * 该规则适配的执行引擎
    */
-  SourceEngineTypes?: Array<number>
+  SourceEngineTypes?: Array<number | bigint>
 }
 
 /**
@@ -8421,11 +8421,11 @@ hivesql任务类型：34
 shell任务类型：35
 sparksql任务类型：36 jdbcsql任务类型：21 dlc任务类型：32），可选
    */
-  TaskTypeList: Array<number>
+  TaskTypeList: Array<number | bigint>
   /**
    * 状态列表（如成功 2，正在执行 1），可选
    */
-  StateList: Array<number>
+  StateList: Array<number | bigint>
   /**
    * 任务名称
    */
@@ -9651,7 +9651,7 @@ export interface ModifyRuleTemplateRequest {
   /**
    * 源端对应的引擎类型
    */
-  SourceEngineTypes?: Array<number>
+  SourceEngineTypes?: Array<number | bigint>
   /**
    * 是否关联其它库表
    */
@@ -10565,7 +10565,7 @@ export interface DeleteRuleTemplateRequest {
   /**
    * 模版Id列表
    */
-  Ids?: Array<number>
+  Ids?: Array<number | bigint>
 }
 
 /**
@@ -11711,7 +11711,7 @@ export interface DescribeTaskInstancesRequest {
   /**
    * 任务类型码列表，26离线同步，30Python，31PySpark，32DLC，33Impala，34Hive SQL，35Shell，36Spark SQL，39Spark，40CDW PG，92MapReduce
    */
-  TaskTypeIdList?: Array<number>
+  TaskTypeIdList?: Array<number | bigint>
   /**
    * 实例状态列表，0等待事件，1等待上游，2等待运行，3运行中，4正在终止，5失败重试，6失败，7成功
    */
@@ -12182,7 +12182,7 @@ export interface InstanceStatisticInfo {
    * 实例状态趋势状态统计
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CountList?: Array<number>
+  CountList?: Array<number | bigint>
   /**
    * 实例状态趋势时间分割
 注意：此字段可能返回 null，表示取不到有效值。
@@ -14655,11 +14655,11 @@ export interface InstanceApiOpsRequest {
   /**
    * 实例状态列表
    */
-  StateList?: Array<number>
+  StateList?: Array<number | bigint>
   /**
    * 实例类型列表
    */
-  TaskTypeList?: Array<number>
+  TaskTypeList?: Array<number | bigint>
   /**
    * 周期类型
    */
@@ -15213,7 +15213,7 @@ export interface CreateRuleRequest {
   /**
    * 该规则支持的执行引擎列表
    */
-  SourceEngineTypes?: Array<number>
+  SourceEngineTypes?: Array<number | bigint>
 }
 
 /**
@@ -15803,7 +15803,7 @@ export interface DescribeRuleDataSourcesRequest {
   /**
    * 数据源类型
    */
-  DsTypes?: Array<number>
+  DsTypes?: Array<number | bigint>
 }
 
 /**
@@ -16103,7 +16103,7 @@ export interface DescribeRuleTemplatesRequest {
   /**
    * 源端对应的引擎类型
    */
-  SourceEngineTypes?: Array<number>
+  SourceEngineTypes?: Array<number | bigint>
 }
 
 /**
@@ -17644,7 +17644,7 @@ export interface RuleGroupSubscribe {
    * 订阅方式 1.邮件email  2.短信sms
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SubscribeType?: Array<number>
+  SubscribeType?: Array<number | bigint>
   /**
    * 群机器人配置的webhook信息
 注意：此字段可能返回 null，表示取不到有效值。
@@ -18097,7 +18097,7 @@ export interface IntegrationStatisticsTrendResult {
    * 统计值
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  StatisticValue: Array<number>
+  StatisticValue: Array<number | bigint>
   /**
    * 统计项目
 注意：此字段可能返回 null，表示取不到有效值。
@@ -19677,6 +19677,11 @@ export interface IntegrationNodeSchema {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Alias?: string
+  /**
+   * 字段备注
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Comment?: string
 }
 
 /**
@@ -19828,7 +19833,7 @@ export interface DescribeStatisticInstanceStatusTrendOpsRequest {
   /**
    * 1
    */
-  StateList?: Array<number>
+  StateList?: Array<number | bigint>
   /**
    * D代表天，H代表小时
    */
@@ -21699,7 +21704,7 @@ export interface CreateRuleTemplateRequest {
   /**
    * 源端对应的引擎类型
    */
-  SourceEngineTypes?: Array<number>
+  SourceEngineTypes?: Array<number | bigint>
   /**
    * 是否关联其它库表
    */
@@ -23087,12 +23092,12 @@ export interface OrganizationalFunction {
    * 操作人 ID 列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  OperatorUserIds: Array<number>
+  OperatorUserIds: Array<number | bigint>
   /**
    * 公有云 Owner ID 列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  OwnerUserIds: Array<number>
+  OwnerUserIds: Array<number | bigint>
   /**
    * 数据库名称
 注意：此字段可能返回 null，表示取不到有效值。

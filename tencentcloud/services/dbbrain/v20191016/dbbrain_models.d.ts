@@ -141,7 +141,7 @@ export interface CreateSchedulerMailProfileRequest {
     /**
      * 取值范围1-7，分别代表周一至周日。
      */
-    WeekConfiguration: Array<number>;
+    WeekConfiguration: Array<number | bigint>;
     /**
      * 邮件配置内容。
      */
@@ -390,7 +390,7 @@ export interface MonitorMetric {
      * 指标值。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Values: Array<number>;
+    Values: Array<number | bigint>;
 }
 /**
  * CreateDBDiagReportTask请求参数结构体
@@ -415,11 +415,11 @@ export interface CreateDBDiagReportTaskRequest {
     /**
      * 接收邮件的联系人ID数组。
      */
-    ContactPerson?: Array<number>;
+    ContactPerson?: Array<number | bigint>;
     /**
      * 接收邮件的联系组ID数组。
      */
-    ContactGroup?: Array<number>;
+    ContactGroup?: Array<number | bigint>;
     /**
      * 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 CynosDB  for MySQL，默认值为"mysql"。
      */
@@ -475,7 +475,7 @@ export interface DescribeSecurityAuditLogExportTasksRequest {
     /**
      * 日志导出任务Id列表。
      */
-    AsyncRequestIds?: Array<number>;
+    AsyncRequestIds?: Array<number | bigint>;
     /**
      * 偏移量，默认0。
      */
@@ -654,7 +654,7 @@ export interface CreateSecurityAuditLogExportTaskRequest {
     /**
      * 日志风险等级列表，支持值包括：0 无风险；1 低风险；2 中风险；3 高风险。
      */
-    DangerLevels?: Array<number>;
+    DangerLevels?: Array<number | bigint>;
 }
 /**
  * DescribeDBSpaceStatus返回参数结构体
@@ -1141,7 +1141,7 @@ export interface MonitorMetricSeriesData {
     /**
      * 监控指标对应的时间戳。
      */
-    Timestamp: Array<number>;
+    Timestamp: Array<number | bigint>;
 }
 /**
  * ModifyDiagDBInstanceConf返回参数结构体
@@ -1215,7 +1215,7 @@ export interface DeleteSecurityAuditLogExportTasksRequest {
     /**
      * 日志导出任务Id列表，接口会忽略不存在或已删除的任务Id。
      */
-    AsyncRequestIds: Array<number>;
+    AsyncRequestIds: Array<number | bigint>;
     /**
      * 服务产品类型，支持值： "mysql" - 云数据库 MySQL。
      */
@@ -1418,7 +1418,7 @@ export interface SecLogExportTaskInfo {
      * 风险等级列表。0 无风险；1 低风险；2 中风险；3 高风险。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DangerLevels: Array<number>;
+    DangerLevels: Array<number | bigint>;
 }
 /**
  * CreateMailProfile请求参数结构体
@@ -1489,7 +1489,7 @@ export interface MonitorFloatMetricSeriesData {
     /**
      * 监控指标对应的时间戳。
      */
-    Timestamp: Array<number>;
+    Timestamp: Array<number | bigint>;
 }
 /**
  * 邮件发送配置
@@ -1510,11 +1510,11 @@ export interface MailConfiguration {
     /**
      * 联系人id, 联系人/联系组不能都为空。
      */
-    ContactPerson?: Array<number>;
+    ContactPerson?: Array<number | bigint>;
     /**
      * 联系组id, 联系人/联系组不能都为空。
      */
-    ContactGroup?: Array<number>;
+    ContactGroup?: Array<number | bigint>;
 }
 /**
  * DescribeTopSpaceTableTimeSeries请求参数结构体

@@ -4381,7 +4381,7 @@ export interface DescribeVideoEncodingPresetsRequest {
   /**
    * 要查询的配置 ID 列表。填写该参数则按照配置 ID 进行查询。
    */
-  Ids?: Array<number>
+  Ids?: Array<number | bigint>
   /**
    * 分页大小，默认20。最大值50。
    */

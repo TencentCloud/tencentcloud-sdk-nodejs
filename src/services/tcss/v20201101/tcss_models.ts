@@ -129,7 +129,7 @@ export interface ModifyVulDefenceEventStatusRequest {
   /**
    * 事件IDs数组
    */
-  EventIDs: Array<number>
+  EventIDs: Array<number | bigint>
   /**
    * 操作状态：
 EVENT_DEALED：已处理，EVENT_IGNORE：忽略，EVENT_ISOLATE_CONTAINER：隔离容器，EVENT_DEL：删除
@@ -262,7 +262,7 @@ export interface CreateNetworkFirewallUndoPublishRequest {
   /**
    * 策略Id数组
    */
-  Id: Array<number>
+  Id: Array<number | bigint>
 }
 
 /**
@@ -739,7 +739,7 @@ export interface DeleteCompliancePolicyItemFromWhitelistRequest {
   /**
    * 指定的白名单项的ID的列表
    */
-  WhitelistIdSet: Array<number>
+  WhitelistIdSet: Array<number | bigint>
 }
 
 /**
@@ -1427,7 +1427,7 @@ export interface DeleteEscapeWhiteListRequest {
   /**
    * 白名单记录ID数组
    */
-  IDSet: Array<number>
+  IDSet: Array<number | bigint>
 }
 
 /**
@@ -1639,7 +1639,7 @@ export interface ScanCompliancePolicyItemsRequest {
   /**
    * 要重新扫描的客户检测项的列表。
    */
-  CustomerPolicyItemIdSet: Array<number>
+  CustomerPolicyItemIdSet: Array<number | bigint>
 }
 
 /**
@@ -1766,7 +1766,7 @@ export interface CreateVulScanTaskRequest {
   /**
    * 根据已授权的仓库镜像IDs扫描，优先权高于根据满足条件的已授权的仓库镜像。
    */
-  RegistryImageIDs?: Array<number>
+  RegistryImageIDs?: Array<number | bigint>
   /**
    * 本地镜像重新漏洞扫描时的任务ID
    */
@@ -2472,7 +2472,7 @@ export interface AddCompliancePolicyItemToWhitelistRequest {
   /**
    * 要忽略的检测项的ID的列表
    */
-  CustomerPolicyItemIdSet: Array<number>
+  CustomerPolicyItemIdSet: Array<number | bigint>
 }
 
 /**
@@ -3749,7 +3749,7 @@ export interface ScanComplianceAssetsByPolicyItemRequest {
   /**
    * 要重新扫描的客户资产项ID的列表。
    */
-  CustomerAssetIdSet: Array<number>
+  CustomerAssetIdSet: Array<number | bigint>
 }
 
 /**
@@ -5381,7 +5381,7 @@ export interface CreateAssetImageRegistryScanTaskOneKeyRequest {
   /**
    * 扫描的镜像列表Id
    */
-  Id?: Array<number>
+  Id?: Array<number | bigint>
 }
 
 /**
@@ -5435,7 +5435,7 @@ export interface DeleteNetworkFirewallPolicyDetailRequest {
   /**
    * 策略Id数组
    */
-  Id: Array<number>
+  Id: Array<number | bigint>
 }
 
 /**
@@ -6037,7 +6037,7 @@ export interface ModifyEscapeWhiteListRequest {
   /**
    * 白名单记录ID
    */
-  IDSet: Array<number>
+  IDSet: Array<number | bigint>
 }
 
 /**
@@ -6202,7 +6202,7 @@ export interface DescribeImageRegistryTimingScanTaskResponse {
    * 自动以扫描镜像Id
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Id?: Array<number>
+  Id?: Array<number | bigint>
   /**
    * 是否扫描最新版本镜像
 注意：此字段可能返回 null，表示取不到有效值。
@@ -6375,7 +6375,7 @@ export interface AddCompliancePolicyAssetSetToWhitelistRequest {
   /**
    * 需要忽略指定检查项内的资产ID列表
    */
-  CustomerAssetItemIdSet?: Array<number>
+  CustomerAssetItemIdSet?: Array<number | bigint>
 }
 
 /**
@@ -7135,7 +7135,7 @@ export interface ModifyAssetImageRegistryScanStopOneKeyRequest {
   /**
    * 扫描的镜像列表Id
    */
-  Id?: Array<number>
+  Id?: Array<number | bigint>
   /**
    * 停止的任务ID
    */
@@ -7943,7 +7943,7 @@ export interface ScanComplianceScanFailedAssetsRequest {
   /**
    * 要重新扫描的客户资产项ID的列表。
    */
-  CustomerAssetIdSet: Array<number>
+  CustomerAssetIdSet: Array<number | bigint>
 }
 
 /**
@@ -8657,7 +8657,7 @@ export interface StopVulScanTaskRequest {
   /**
    * 仓库镜像ID，无则全部
    */
-  RegistryImageIDs?: Array<number>
+  RegistryImageIDs?: Array<number | bigint>
   /**
    * 仓库镜像漏洞扫描任务ID
    */
@@ -8969,19 +8969,19 @@ export interface DescribeTaskResultSummaryResponse {
   /**
    * 严重风险影响的节点数量,返回7天数据
    */
-  SeriousRiskNodeCount: Array<number>
+  SeriousRiskNodeCount: Array<number | bigint>
   /**
    * 高风险影响的节点的数量,返回7天数据
    */
-  HighRiskNodeCount: Array<number>
+  HighRiskNodeCount: Array<number | bigint>
   /**
    * 中风险检查项的节点数量,返回7天数据
    */
-  MiddleRiskNodeCount: Array<number>
+  MiddleRiskNodeCount: Array<number | bigint>
   /**
    * 提示风险检查项的节点数量,返回7天数据
    */
-  HintRiskNodeCount: Array<number>
+  HintRiskNodeCount: Array<number | bigint>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -10137,7 +10137,7 @@ export interface UpdateImageRegistryTimingScanTaskRequest {
   /**
    * 扫描镜像Id
    */
-  Id?: Array<number>
+  Id?: Array<number | bigint>
   /**
    * 是否扫描最新版本
    */
@@ -10956,7 +10956,7 @@ export interface ScanComplianceAssetsRequest {
   /**
    * 要重新扫描的客户资产项ID的列表。
    */
-  CustomerAssetIdSet: Array<number>
+  CustomerAssetIdSet: Array<number | bigint>
 }
 
 /**
@@ -11402,7 +11402,7 @@ export interface CreateNetworkFirewallPublishRequest {
   /**
    * 策略Id数组
    */
-  Id: Array<number>
+  Id: Array<number | bigint>
 }
 
 /**
@@ -12121,7 +12121,7 @@ export interface CreateAssetImageRegistryScanTaskRequest {
   /**
    * 扫描的镜像列表
    */
-  Id?: Array<number>
+  Id?: Array<number | bigint>
   /**
    * 过滤条件
    */
@@ -12129,7 +12129,7 @@ export interface CreateAssetImageRegistryScanTaskRequest {
   /**
    * 不需要扫描的镜像列表, 与Filters配合使用
    */
-  ExcludeImageList?: Array<number>
+  ExcludeImageList?: Array<number | bigint>
   /**
    * 是否仅扫描各repository最新版的镜像, 与Filters配合使用
    */
@@ -12654,7 +12654,7 @@ export interface DescribeAgentInstallCommandRequest {
   /**
    * 标签ID列表，IsCloud=false时才会生效
    */
-  TagIds?: Array<number>
+  TagIds?: Array<number | bigint>
 }
 
 /**
@@ -13130,7 +13130,7 @@ export interface CompliancePolicyAssetSetItem {
   /**
    * 需要忽略指定检查项内的资产ID列表，为空表示所有
    */
-  CustomerAssetItemIdSet?: Array<number>
+  CustomerAssetItemIdSet?: Array<number | bigint>
 }
 
 /**
@@ -15084,7 +15084,7 @@ export interface ConfirmNetworkFirewallPolicyRequest {
   /**
    * 策略Id数组
    */
-  Id: Array<number>
+  Id: Array<number | bigint>
 }
 
 /**
@@ -15591,7 +15591,7 @@ export interface ModifyK8sApiAbnormalEventStatusRequest {
   /**
    * 事件ID集合
    */
-  EventIDSet: Array<number>
+  EventIDSet: Array<number | bigint>
   /**
    * 状态
    */
@@ -16896,7 +16896,7 @@ export interface CreateExportComplianceStatusListJobRequest {
   /**
    * 要导出的资产ID列表或检测项ID列表，由ExportByAsset的取值决定。
    */
-  IdList?: Array<number>
+  IdList?: Array<number | bigint>
 }
 
 /**
@@ -17417,7 +17417,7 @@ export interface DescribeAssetImageRegistryScanStatusOneKeyRequest {
   /**
    * 需要获取进度的镜像列表Id
    */
-  Id?: Array<number>
+  Id?: Array<number | bigint>
   /**
    * 获取进度的任务ID
    */
@@ -17573,7 +17573,7 @@ export interface DeleteComplianceAssetPolicySetFromWhitelistRequest {
   /**
    * 需要忽略指定资产内的检查项ID列表
    */
-  CustomerPolicyItemIdSet?: Array<number>
+  CustomerPolicyItemIdSet?: Array<number | bigint>
 }
 
 /**
@@ -18308,7 +18308,7 @@ export interface ComplianceAssetPolicySetItem {
   /**
    * 需要忽略指定资产内的检查项ID列表，为空表示所有
    */
-  CustomerPolicyItemIdSet?: Array<number>
+  CustomerPolicyItemIdSet?: Array<number | bigint>
 }
 
 /**
@@ -20124,7 +20124,7 @@ export interface ModifyAssetImageRegistryScanStopRequest {
   /**
    * 扫描的镜像列表
    */
-  Id?: Array<number>
+  Id?: Array<number | bigint>
   /**
    * 过滤条件
    */
@@ -20132,7 +20132,7 @@ export interface ModifyAssetImageRegistryScanStopRequest {
   /**
    * 不要扫描的镜像列表，与Filters配合使用
    */
-  ExcludeImageList?: Array<number>
+  ExcludeImageList?: Array<number | bigint>
   /**
    * 是否仅扫描各repository最新版本的镜像
    */
@@ -20925,7 +20925,7 @@ export interface ServiceInfo {
   /**
    * 关联的进程id
    */
-  Pids: Array<number>
+  Pids: Array<number | bigint>
   /**
    * 服务类型 app,web,db
    */

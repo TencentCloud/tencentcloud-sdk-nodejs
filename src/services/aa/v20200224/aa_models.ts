@@ -55,7 +55,7 @@ export interface QueryActivityAntiRushResponse {
 205，非公网有效ip，传进来的IP地址为内网ip地址或者ip保留地址；
 206，设备异常，该设备存在异常的使用行为
    */
-  RiskType: Array<number>
+  RiskType: Array<number | bigint>
   /**
    * accountType是QQ或微信开放账号时，用于标识QQ或微信用户登录后关联业务自身的账号ID
 注意：此字段可能返回 null，表示取不到有效值。

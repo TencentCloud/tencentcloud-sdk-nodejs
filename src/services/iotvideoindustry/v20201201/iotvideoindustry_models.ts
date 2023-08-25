@@ -264,7 +264,7 @@ export interface DescribeChannelsRequest {
   /**
    * 通道类型  0: 未知类型 1: 视频通道 2:  音频通道 3: 告警通道
    */
-  ChannelTypes?: Array<number>
+  ChannelTypes?: Array<number | bigint>
   /**
    * 录制计划ID， 当为"null"值时未绑定录制计划
    */
@@ -654,7 +654,7 @@ export interface DescribeDeviceEventRequest {
   /**
    * 默认为全部 事件类型 1:注册 2:心跳 4:录制异常 5:播放异常 6:流中断
    */
-  EventTypes?: Array<number>
+  EventTypes?: Array<number | bigint>
   /**
    * 偏移值
    */
@@ -773,7 +773,7 @@ export interface DescribeDeviceListRequest {
   /**
    * 设备类型，1：国标VMS设备(公有云不支持此类型)，2：国标IPC设备，3：国标NVR设备，9：智能告警设备(公有云不支持此类型)
    */
-  DeviceTypes?: Array<number>
+  DeviceTypes?: Array<number | bigint>
 }
 
 /**
@@ -981,7 +981,7 @@ export interface DescribeIPCChannelsRequest {
   /**
    * 通道类型  0: 未知类型 1: 视频通道 2:  音频通道 3: 告警通道
    */
-  ChannelTypes?: Array<number>
+  ChannelTypes?: Array<number | bigint>
 }
 
 /**
@@ -1697,7 +1697,7 @@ export interface DescribeAllDeviceListRequest {
   /**
    * 设备类型过滤，设备类型，1：国标VMS设备(公有云不支持此类型)，2：国标IPC设备，3：国标NVR设备，9：智能告警设备(公有云不支持此类型)
    */
-  DeviceTypes?: Array<number>
+  DeviceTypes?: Array<number | bigint>
 }
 
 /**
@@ -1800,7 +1800,7 @@ export interface DeleteVideoListRequest {
   /**
    * 视频ID列表长度限制100内
    */
-  InitIDs: Array<number>
+  InitIDs: Array<number | bigint>
 }
 
 /**
@@ -2683,7 +2683,7 @@ export interface DescribeGroupDevicesRequest {
    * 当Group是普通组的时候，支持根据DeviceTypes筛选类型，
  设备类型，1：国标VMS设备(公有云不支持此类型)，2：国标IPC设备，3：国标NVR设备，9：智能告警设备(公有云不支持此类型)
    */
-  DeviceTypes?: Array<number>
+  DeviceTypes?: Array<number | bigint>
 }
 
 /**
@@ -2908,11 +2908,11 @@ export interface DescribeWarningsRequest {
   /**
    * 如果不传则查询所有，取值参见配置
    */
-  WarnLevelArray?: Array<number>
+  WarnLevelArray?: Array<number | bigint>
   /**
    * 如果不传则查询所有，取值参见配置
    */
-  WarnModeArray?: Array<number>
+  WarnModeArray?: Array<number | bigint>
   /**
    * 不传认为是0
    */
@@ -4020,7 +4020,7 @@ export interface ModifyVideoInfoRequest {
   /**
    * 视频ID列表长度限制100内
    */
-  InitIDs: Array<number>
+  InitIDs: Array<number | bigint>
   /**
    * 过期时间 时间戳 -1: 永不过期 0: 无效值
    */
@@ -4221,7 +4221,7 @@ export interface DeleteLiveVideoListRequest {
   /**
    * 视频ID 列表, 大小限制(100)
    */
-  IntIDs: Array<number>
+  IntIDs: Array<number | bigint>
 }
 
 /**
@@ -4513,7 +4513,7 @@ export interface DescribeVideoListRequest {
   /**
    * 录制类型 1: 联动计划录制 2: 告警录制
    */
-  RecordType?: Array<number>
+  RecordType?: Array<number | bigint>
 }
 
 /**
@@ -4626,7 +4626,7 @@ export interface ModifyLiveVideoRequest {
   /**
    * 视频ID 列表, 大小限制(100)
    */
-  IntIDs: Array<number>
+  IntIDs: Array<number | bigint>
   /**
    * 过期时间 秒 (-1: 为永不过期)
    */

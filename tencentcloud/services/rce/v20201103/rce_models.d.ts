@@ -491,7 +491,7 @@ export interface OutputManageMarketingRiskValue {
   2063 疑似 群控设备 请求设备为猫池、手机墙等群控设备
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    RiskType: Array<number>;
+    RiskType: Array<number | bigint>;
     /**
      * 唯一ID
   注意：此字段可能返回 null，表示取不到有效值。

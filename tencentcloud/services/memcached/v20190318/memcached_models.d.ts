@@ -33,7 +33,7 @@ export interface DescribeInstancesRequest {
     /**
      * 项目ID列表
      */
-    ProjectIds?: Array<number>;
+    ProjectIds?: Array<number | bigint>;
     /**
      * 偏移量，取Limit整数倍
      */

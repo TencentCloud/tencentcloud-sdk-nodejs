@@ -73,7 +73,7 @@ import {
   DeleteAccessExportResponse,
   AddSpartaProtectionsAutoResponse,
   DescribeAccessExportsRequest,
-  UserDomainInfo,
+  ModifyApiAnalyzeStatusResponse,
   DescribeCustomWhiteRuleRequest,
   DescribeUserClbWafRegionsResponse,
   ModifyCustomWhiteRuleRequest,
@@ -95,12 +95,14 @@ import {
   CreateHostResponse,
   IpAccessControlItem,
   DeleteHostResponse,
+  ModifyBotStatusRequest,
   DeleteSpartaProtectionRequest,
   DomainsPartInfo,
   DescribeAutoDenyIPRequest,
   AccessRuleInfo,
   HostRecord,
   CreateHostRequest,
+  UserDomainInfo,
   ModifyAreaBanStatusRequest,
   DescribeWafInfoRequest,
   SpartaProtectionPort,
@@ -130,7 +132,7 @@ import {
   DescribeHostLimitResponse,
   PostAttackDownloadTaskResponse,
   ModifySpartaProtectionModeResponse,
-  QPSPackageNew,
+  ModifyBotStatusResponse,
   DescribeDomainDetailsSaasRequest,
   ModifyCustomRuleStatusResponse,
   AddSpartaProtectionResponse,
@@ -146,6 +148,7 @@ import {
   DeleteDownloadRecordResponse,
   ModifyAccessPeriodRequest,
   DescribeAttackOverviewRequest,
+  QPSPackageNew,
   DescribePeakValueRequest,
   BotQPS,
   ClbHostsParams,
@@ -165,6 +168,7 @@ import {
   PortInfo,
   DescribeDomainDetailsSaasResponse,
   AccessKeyValueInfo,
+  ModifyApiAnalyzeStatusRequest,
   AddSpartaProtectionsAutoRequest,
   AddCustomRuleRequest,
   DescribeWafAutoDenyRulesResponse,
@@ -190,6 +194,7 @@ import {
   DescribeVipInfoResponse,
   ModifyDomainsCLSStatusRequest,
   DescribeRuleLimitRequest,
+  TargetEntity,
   DescribeDomainCountInfoRequest,
   GetAttackDownloadRecordsResponse,
   DeleteAccessExportRequest,
@@ -278,6 +283,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribePeakPointsResponse) => void
   ): Promise<DescribePeakPointsResponse> {
     return this.request("DescribePeakPoints", req, cb)
+  }
+
+  /**
+   * Bot_V2 bot总开关更新
+   */
+  async ModifyBotStatus(
+    req: ModifyBotStatusRequest,
+    cb?: (error: string, rep: ModifyBotStatusResponse) => void
+  ): Promise<ModifyBotStatusResponse> {
+    return this.request("ModifyBotStatus", req, cb)
   }
 
   /**
@@ -782,6 +797,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: AddCustomWhiteRuleResponse) => void
   ): Promise<AddCustomWhiteRuleResponse> {
     return this.request("AddCustomWhiteRule", req, cb)
+  }
+
+  /**
+   * api分析页面开关
+   */
+  async ModifyApiAnalyzeStatus(
+    req: ModifyApiAnalyzeStatusRequest,
+    cb?: (error: string, rep: ModifyApiAnalyzeStatusResponse) => void
+  ): Promise<ModifyApiAnalyzeStatusResponse> {
+    return this.request("ModifyApiAnalyzeStatus", req, cb)
   }
 
   /**

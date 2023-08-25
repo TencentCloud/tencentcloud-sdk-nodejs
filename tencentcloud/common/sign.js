@@ -3,6 +3,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const tencent_cloud_sdk_exception_1 = require("./exception/tencent_cloud_sdk_exception");
 const crypto = require("crypto");
 const url_1 = require("url");
+const JSONBigInt = require("json-bigint");
+const JSONbigNative = JSONBigInt({ useNativeBigInt: true });
 /**
  * @inner
  */
@@ -61,7 +63,7 @@ class Sign {
             payload_hash = hash.digest("hex");
         }
         else {
-            payload_hash = payload ? getHash(JSON.stringify(payload)) : getHash("");
+            payload_hash = payload ? getHash(JSONbigNative.stringify(payload)) : getHash("");
         }
         const canonicalRequest = method +
             "\n" +

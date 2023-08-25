@@ -154,7 +154,7 @@ export interface DedicatedClusterType {
     /**
      * 支持的上连交换机的链路传输速率
      */
-    SupportedUplinkGiB: Array<number>;
+    SupportedUplinkGiB: Array<number | bigint>;
     /**
      * 支持的实例族列表
      */
@@ -419,7 +419,7 @@ export interface DedicatedClusterOrderItem {
     /**
      * 支持的上连交换机的链路传输速率(GiB)
      */
-    SupportedUplinkSpeed: Array<number>;
+    SupportedUplinkSpeed: Array<number | bigint>;
     /**
      * 支持的实例族列表
      */
@@ -600,7 +600,7 @@ export interface DescribeDedicatedSupportedZonesRequest {
     /**
      * 传入region列表
      */
-    Regions?: Array<number>;
+    Regions?: Array<number | bigint>;
 }
 /**
  * DedicatedClusterType => (Id, Count)
@@ -705,7 +705,7 @@ export interface DedicatedClusterOrder {
     /**
      * 支持的上连交换机的链路传输速率(GiB)（移到下一层级，已经废弃，后续将删除）
      */
-    SupportedUplinkSpeed: Array<number>;
+    SupportedUplinkSpeed: Array<number | bigint>;
     /**
      * 支持的实例族列表（移到下一层级，已经废弃，后续将删除）
      */

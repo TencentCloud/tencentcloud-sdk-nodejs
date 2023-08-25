@@ -1140,7 +1140,7 @@ export interface NormalQueryItem {
   /**
    * 粒度点
    */
-  CallsGrids: Array<number>
+  CallsGrids: Array<number | bigint>
   /**
    * 花费总时间
    */

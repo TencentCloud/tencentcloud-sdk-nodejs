@@ -224,6 +224,12 @@ cls.pb.cc cls.pb.h cls.proto
         return this.request("ModifyTopic", req, cb);
     }
     /**
+     * 本接口用于预览cos导入信息
+     */
+    async SearchCosRechargeInfo(req, cb) {
+        return this.request("SearchCosRechargeInfo", req, cb);
+    }
+    /**
      * 本接口用于获取cos导入配置
      */
     async DescribeCosRecharges(req, cb) {

@@ -22,11 +22,11 @@ export interface DescribeRolesResponse {
   /**
    * 记录数。
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 角色数组。
    */
-  RoleSets: Array<Role>
+  RoleSets?: Array<Role>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -258,6 +258,10 @@ export interface DescribeSubscriptionsRequest {
    */
   TopicName: string
   /**
+   * Pulsar 集群的ID
+   */
+  ClusterId: string
+  /**
    * 起始下标，不填默认为0。
    */
   Offset?: number
@@ -273,10 +277,6 @@ export interface DescribeSubscriptionsRequest {
    * 数据过滤条件。
    */
   Filters?: Array<FilterSubscription>
-  /**
-   * Pulsar 集群的ID
-   */
-  ClusterId?: string
 }
 
 /**
@@ -398,13 +398,13 @@ export interface ModifyEnvironmentAttributesRequest {
    */
   MsgTTL: number
   /**
+   * 集群ID
+   */
+  ClusterId: string
+  /**
    * 备注，字符串最长不超过128。
    */
   Remark?: string
-  /**
-   * 集群ID
-   */
-  ClusterId?: string
   /**
    * 消息保留策略
    */
@@ -582,11 +582,11 @@ export interface ModifyRoleResponse {
   /**
    * 角色名称
    */
-  RoleName: string
+  RoleName?: string
   /**
    * 备注说明
    */
-  Remark: string
+  Remark?: string
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -832,7 +832,7 @@ export interface CreateRabbitMQVipInstanceRequest {
   /**
    * 可用区
    */
-  ZoneIds: Array<number>
+  ZoneIds: Array<number | bigint>
   /**
    * 私有网络VpcId
    */
@@ -1328,13 +1328,13 @@ export interface CreateSubscriptionRequest {
    */
   IsIdempotent: boolean
   /**
+   * Pulsar 集群的ID
+   */
+  ClusterId: string
+  /**
    * 备注，128个字符以内。
    */
   Remark?: string
-  /**
-   * Pulsar 集群的ID
-   */
-  ClusterId?: string
   /**
    * 是否自动创建死信和重试主题，True 表示创建，False表示不创建，默认自动创建死信和重试主题。
    */
@@ -1836,7 +1836,7 @@ export interface CreateSubscriptionResponse {
   /**
    * 创建结果。
    */
-  Result: boolean
+  Result?: boolean
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1929,6 +1929,10 @@ export interface DescribePublisherSummaryResponse {
  */
 export interface DescribeEnvironmentsRequest {
   /**
+   * Pulsar 集群的ID
+   */
+  ClusterId: string
+  /**
    * 命名空间名称，模糊搜索。
    */
   EnvironmentId?: string
@@ -1940,10 +1944,6 @@ export interface DescribeEnvironmentsRequest {
    * 返回数量，不填则默认为10，最大值为20。
    */
   Limit?: number
-  /**
-   * Pulsar 集群的ID
-   */
-  ClusterId?: string
   /**
    * * EnvironmentId
 按照名称空间进行过滤，精确查询。
@@ -2468,7 +2468,7 @@ export interface DescribeEnvironmentAttributesRequest {
   /**
    * Pulsar 集群的ID
    */
-  ClusterId?: string
+  ClusterId: string
 }
 
 /**
@@ -2677,13 +2677,21 @@ export interface ModifyRoleRequest {
    */
   RoleName: string
   /**
+   * 必填字段，集群Id
+   */
+  ClusterId: string
+  /**
    * 备注说明，长度必须大等于0且小等于128。
    */
   Remark?: string
   /**
-   * 必填字段，集群Id
+   * 批量绑定名字空间信息
    */
-  ClusterId?: string
+  EnvironmentRoleSets?: Array<EnvironmentRoleSet>
+  /**
+   * 全部解绑名字空间，设置为 true
+   */
+  UnbindAllEnvironment?: boolean
 }
 
 /**
@@ -2800,7 +2808,7 @@ export interface DeleteRolesRequest {
   /**
    * 必填字段，集群Id
    */
-  ClusterId?: string
+  ClusterId: string
 }
 
 /**
@@ -2885,11 +2893,11 @@ export interface DescribeSubscriptionsResponse {
   /**
    * 订阅者集合数组。
    */
-  SubscriptionSets: Array<Subscription>
+  SubscriptionSets?: Array<Subscription>
   /**
    * 数量。
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3030,6 +3038,10 @@ export interface CreateTopicRequest {
    */
   Partitions: number
   /**
+   * Pulsar 集群的ID
+   */
+  ClusterId: string
+  /**
    * 备注，128字符以内。
    */
   Remark?: string
@@ -3042,10 +3054,6 @@ export interface CreateTopicRequest {
 4 ：死信队列。
    */
   TopicType?: number
-  /**
-   * Pulsar 集群的ID
-   */
-  ClusterId?: string
   /**
    * Pulsar 主题类型
 0: 非持久非分区
@@ -3114,7 +3122,7 @@ export interface DeleteEnvironmentsResponse {
   /**
    * 成功删除的环境（命名空间）数组。
    */
-  EnvironmentIds: Array<string>
+  EnvironmentIds?: Array<string>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3482,7 +3490,7 @@ export interface DeleteEnvironmentsRequest {
   /**
    * Pulsar 集群的ID
    */
-  ClusterId?: string
+  ClusterId: string
 }
 
 /**
@@ -3700,7 +3708,7 @@ export interface DeleteRolesResponse {
   /**
    * 成功删除的角色名称数组。
    */
-  RoleNames: Array<string>
+  RoleNames?: Array<string>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4244,6 +4252,10 @@ export interface DeleteRocketMQNamespaceRequest {
  */
 export interface DescribeRolesRequest {
   /**
+   * 必填字段，集群Id
+   */
+  ClusterId: string
+  /**
    * 角色名称，模糊查询
    */
   RoleName?: string
@@ -4255,10 +4267,6 @@ export interface DescribeRolesRequest {
    * 返回数量，不填则默认为10，最大值为20。
    */
   Limit?: number
-  /**
-   * 必填字段，集群Id
-   */
-  ClusterId?: string
   /**
    * * RoleName
 按照角色名进行过滤，精确查询。
@@ -4429,11 +4437,11 @@ export interface DescribeEnvironmentsResponse {
   /**
    * 命名空间记录数。
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 命名空间集合数组。
    */
-  EnvironmentSet: Array<Environment>
+  EnvironmentSet?: Array<Environment>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4604,7 +4612,7 @@ export interface DeleteTopicsResponse {
   /**
    * 被删除的主题数组。
    */
-  TopicSets: Array<TopicRecord>
+  TopicSets?: Array<TopicRecord>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4722,7 +4730,7 @@ export interface RabbitMQClusterInfo {
    * 可用区信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ZoneIds?: Array<number>
+  ZoneIds?: Array<number | bigint>
   /**
    * 虚拟主机数量
    */
@@ -4940,7 +4948,7 @@ export interface DeleteTopicsRequest {
   /**
    * pulsar集群Id。
    */
-  ClusterId?: string
+  ClusterId: string
   /**
    * 环境（命名空间）名称。
    */
@@ -4989,13 +4997,13 @@ export interface ModifyTopicRequest {
    */
   Partitions: number
   /**
+   * Pulsar 集群的ID
+   */
+  ClusterId: string
+  /**
    * 备注，128字符以内。
    */
   Remark?: string
-  /**
-   * Pulsar 集群的ID
-   */
-  ClusterId?: string
   /**
    * 未消费消息过期时间，单位：秒，取值范围：60秒~15天。
 
@@ -5775,7 +5783,7 @@ export interface DeleteEnvironmentRolesRequest {
   /**
    * 必填字段，集群的ID
    */
-  ClusterId?: string
+  ClusterId: string
 }
 
 /**
@@ -6121,7 +6129,7 @@ export interface ModifyEnvironmentRoleRequest {
   /**
    * 必填字段，集群的ID
    */
-  ClusterId?: string
+  ClusterId: string
 }
 
 /**
@@ -6131,35 +6139,35 @@ export interface DescribeEnvironmentAttributesResponse {
   /**
    * 未消费消息过期时间，单位：秒，最大1296000（15天）。
    */
-  MsgTTL: number
+  MsgTTL?: number
   /**
    * 消费速率限制，单位：byte/秒，0：不限速。
    */
-  RateInByte: number
+  RateInByte?: number
   /**
    * 消费速率限制，单位：个数/秒，0：不限速。
    */
-  RateInSize: number
+  RateInSize?: number
   /**
    * 已消费消息保存策略，单位：小时，0：消费完马上删除。
    */
-  RetentionHours: number
+  RetentionHours?: number
   /**
    * 已消费消息保存策略，单位：G，0：消费完马上删除。
    */
-  RetentionSize: number
+  RetentionSize?: number
   /**
    * 环境（命名空间）名称。
    */
-  EnvironmentId: string
+  EnvironmentId?: string
   /**
    * 副本数。
    */
-  Replicas: number
+  Replicas?: number
   /**
    * 备注。
    */
-  Remark: string
+  Remark?: string
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6829,7 +6837,7 @@ export interface CreateEnvironmentRoleRequest {
   /**
    * 必填字段，集群的ID
    */
-  ClusterId?: string
+  ClusterId: string
 }
 
 /**

@@ -471,7 +471,7 @@ export interface SubscribedInfo {
      * 订阅的分区
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Partition: Array<number>;
+    Partition: Array<number | bigint>;
     /**
      * 分区offset信息
   注意：此字段可能返回 null，表示取不到有效值。
@@ -1344,7 +1344,7 @@ export interface GroupInfoTopics {
      * 分配的 partition 信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Partitions: Array<number>;
+    Partitions: Array<number | bigint>;
 }
 /**
  * InstanceScalingDown请求参数结构体
@@ -2495,7 +2495,7 @@ export interface ModifyGroupOffsetsRequest {
     /**
      * 需要重新设置的partition的列表，如果没有指定Topics参数。则重置全部topics的对应的Partition列表里的partition。指定Topics时则重置指定的topic列表的对应的Partitions列表的partition。
      */
-    Partitions?: Array<number>;
+    Partitions?: Array<number | bigint>;
 }
 /**
  * DescribeDatahubTopic返回参数结构体
@@ -2612,7 +2612,7 @@ export interface CreatePostPaidInstanceRequest {
     /**
      * 当实例为多可用区实例时，多可用区 id 列表。注意参数 ZoneId 对应的多可用区需要包含在该参数数组中
      */
-    ZoneIds?: Array<number>;
+    ZoneIds?: Array<number | bigint>;
     /**
      * 购买实例数量。非必填，默认值为 1。当传入该参数时，会创建多个 instanceName 加后缀区分的实例
      */
@@ -3037,7 +3037,7 @@ export interface ClusterInfo {
      * 集群节点所在的可用区，若该集群为跨可用区集群，则包含该集群节点所在的多个可用区。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ZoneIds: Array<number>;
+    ZoneIds: Array<number | bigint>;
 }
 /**
  * DeleteGroup请求参数结构体
@@ -4303,7 +4303,7 @@ export interface AppIdResponse {
      * 符合要求的App Id列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    AppIdList: Array<number>;
+    AppIdList: Array<number | bigint>;
 }
 /**
  * DescribeTopic请求参数结构体
@@ -5211,7 +5211,7 @@ export interface DescribeInstancesRequest {
     /**
      * （过滤条件）实例的状态。0：创建中，1：运行中，2：删除中，不填默认返回全部
      */
-    Status?: Array<number>;
+    Status?: Array<number | bigint>;
     /**
      * 偏移量，不填默认为0
      */
@@ -5327,7 +5327,7 @@ export interface InstanceAttributesResponse {
      * 跨可用区
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ZoneIds: Array<number>;
+    ZoneIds: Array<number | bigint>;
     /**
      * kafka版本信息
   注意：此字段可能返回 null，表示取不到有效值。
@@ -5461,7 +5461,7 @@ export interface CreateInstancePostRequest {
     /**
      * 当实例为多可用区实例时，多可用区 id 列表。注意参数 ZoneId 对应的多可用区需要包含在该参数数组中
      */
-    ZoneIds?: Array<number>;
+    ZoneIds?: Array<number | bigint>;
     /**
      * 购买实例数量。非必填，默认值为 1。当传入该参数时，会创建多个 instanceName 加后缀区分的实例
      */
@@ -5869,7 +5869,7 @@ export interface DescribeInstancesDetailRequest {
     /**
      * （过滤条件）实例的状态。0：创建中，1：运行中，2：删除中，不填默认返回全部
      */
-    Status?: Array<number>;
+    Status?: Array<number | bigint>;
     /**
      * 偏移量，不填默认为0。
      */
@@ -6065,7 +6065,7 @@ export interface InquireCkafkaPriceRequest {
     /**
      * 购买地域, 可通过查看DescribeCkafkaZone这个接口获取ZoneId
      */
-    ZoneIds?: Array<number>;
+    ZoneIds?: Array<number | bigint>;
     /**
      * 标记操作, 新购填写purchase, 续费填写renew, (不填时, 默认为purchase)
      */
@@ -7663,7 +7663,7 @@ export interface CreateInstancePreRequest {
     /**
      * 可用区列表，购买多可用区实例时为必填项
      */
-    ZoneIds?: Array<number>;
+    ZoneIds?: Array<number | bigint>;
     /**
      * 公网带宽大小，单位 Mbps。默认是没有加上免费 3Mbps 带宽。例如总共需要 3Mbps 公网带宽，此处传 0；总共需要 6Mbps 公网带宽，此处传 3。默认值为 0。需要保证传入参数为 3 的整数倍
      */
@@ -8164,7 +8164,7 @@ export interface InstanceDetail {
      * 跨可用区
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ZoneIds?: Array<number>;
+    ZoneIds?: Array<number | bigint>;
     /**
      * ckafka售卖类型
   注意：此字段可能返回 null，表示取不到有效值。

@@ -34,6 +34,7 @@ import {
   SystemDisk,
   Task,
   InstanceTypeConfig,
+  CommandLine,
   LoginSettings,
   TerminateComputeNodesResponse,
   DescribeComputeEnvActivitiesResponse,

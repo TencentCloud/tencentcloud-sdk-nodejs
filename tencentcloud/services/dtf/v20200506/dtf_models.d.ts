@@ -119,7 +119,7 @@ export interface DescribeTransactionsRequest {
     /**
      * 主事务ID列表，不传入时查询全量，低优先级
      */
-    TransactionIdList?: Array<number>;
+    TransactionIdList?: Array<number | bigint>;
     /**
      * 每页数量
      */

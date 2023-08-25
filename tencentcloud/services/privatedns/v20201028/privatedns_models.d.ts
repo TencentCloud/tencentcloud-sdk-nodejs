@@ -167,7 +167,7 @@ export interface ModifyRecordsStatusResponse {
     /**
      * 解析记录ID列表
      */
-    RecordIds?: Array<number>;
+    RecordIds?: Array<number | bigint>;
     /**
      * enabled：生效，disabled：失效
      */
@@ -776,7 +776,7 @@ export interface ModifyRecordsStatusRequest {
     /**
      * 解析记录ID列表
      */
-    RecordIds: Array<number>;
+    RecordIds: Array<number | bigint>;
     /**
      * enabled：生效，disabled：失效
      */

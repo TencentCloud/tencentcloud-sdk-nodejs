@@ -1610,7 +1610,7 @@ export interface OperationDuration {
    * 维护周期，表示周一到周日，可取值[0, 6]
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Periods: Array<number>
+  Periods: Array<number | bigint>
   /**
    * 维护开始时间
    */
@@ -1650,7 +1650,7 @@ export interface OperationDurationUpdated {
   /**
    * 维护周期，表示周一到周日，可取值[0, 6]
    */
-  Periods: Array<number>
+  Periods: Array<number | bigint>
   /**
    * 维护开始时间
    */
@@ -2354,7 +2354,7 @@ export interface DescribeInstancesRequest {
   /**
    * 健康状态筛列表:0表示绿色，1表示黄色，2表示红色,-1表示未知
    */
-  HealthStatus?: Array<number>
+  HealthStatus?: Array<number | bigint>
   /**
    * Vpc列表 筛选项
    */

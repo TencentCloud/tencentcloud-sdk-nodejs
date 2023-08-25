@@ -1352,7 +1352,7 @@ export interface CreateCRRightFileResponse {
   /**
    * 权属文件Id，按提交顺序排序
    */
-  FileIds: Array<number>
+  FileIds: Array<number | bigint>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

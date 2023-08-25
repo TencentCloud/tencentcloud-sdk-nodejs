@@ -1739,7 +1739,7 @@ export interface StringData {
     /**
      * 长度范围
      */
-    Range: Array<number>;
+    Range: Array<number | bigint>;
 }
 /**
  * AppGetDeviceStatuses返回参数结构体

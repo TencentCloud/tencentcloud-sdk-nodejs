@@ -121,7 +121,7 @@ export interface DescribeTaskLogsRequest {
     /**
      * 任务实例集合
      */
-    TaskInstanceIndexes?: Array<number>;
+    TaskInstanceIndexes?: Array<number | bigint>;
     /**
      * 起始任务实例
      */
@@ -380,6 +380,16 @@ export interface InstanceTypeConfig {
      * 实例机型系列。
      */
     InstanceFamily: string;
+}
+/**
+ * 任务执行信息描述。
+ */
+export interface CommandLine {
+    /**
+     * 任务执行命令。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Command: string;
 }
 /**
  * 描述了实例登录相关配置与信息。
@@ -716,6 +726,11 @@ export interface Application {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Docker?: Docker;
+    /**
+     * 任务执行命令信息。与Command不能同时指定。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Commands?: Array<CommandLine>;
 }
 /**
  * 黑石计算环境数据

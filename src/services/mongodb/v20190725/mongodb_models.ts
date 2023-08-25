@@ -376,7 +376,7 @@ export interface AssignProjectResponse {
   /**
    * 返回的异步任务ID列表
    */
-  FlowIds: Array<number>
+  FlowIds: Array<number | bigint>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -858,7 +858,7 @@ export interface DescribeDBInstancesRequest {
   /**
    * 实例状态，取值范围如下所示：<ul><li>0：待初始化。</li><li>1：流程执行中。</li><li>2：实例有效。</li><li>-2：已隔离（包年包月实例）。</li><li>-3：已隔离（按量计费实例）。</li></ul>
    */
-  Status?: Array<number>
+  Status?: Array<number | bigint>
   /**
    * 私有网络的 ID。
 - 基础网络则无需配置该参数。
@@ -896,7 +896,7 @@ export interface DescribeDBInstancesRequest {
   /**
    * 项目 ID。请登录 [MongoDB 控制台](https://console.cloud.tencent.com/mongodb)，在右上角的账户信息下拉菜单中，选择项目管理查询项目。
    */
-  ProjectIds?: Array<number>
+  ProjectIds?: Array<number | bigint>
   /**
    * 配置查询搜索的关键词。支持配置为实例ID、实例名称或者内网 IP 地址。
    */
@@ -1256,7 +1256,7 @@ export interface DescribeBackupDownloadTaskRequest {
   /**
    * 根据任务状态过滤。0-等待执行，1-正在下载，2-下载完成，3-下载失败，4-等待重试。不填默认返回所有类型
    */
-  Status?: Array<number>
+  Status?: Array<number | bigint>
 }
 
 /**
@@ -1392,7 +1392,7 @@ export interface InquirePriceCreateDBInstancesResponse {
   /**
    * 价格
    */
-  Price: DBInstancePrice
+  Price?: DBInstancePrice
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2302,23 +2302,37 @@ export interface InquirePriceCreateDBInstancesRequest {
    */
   Zone: string
   /**
-   * 每个分片的主从节点数量。<br>取值范围：请通过接口<a href="https://cloud.tencent.com/document/product/240/38567">DescribeSpecInfo</a>查询，其返回的数据结构SpecItems中的参数MinNodeNum与MaxNodeNum分别对应其最小值与最大值。</li></ul>
+   * 每个分片的主从节点数量。
+取值范围：请通过接口[DescribeSpecInfo](https://cloud.tencent.com/document/product/240/38567)查询，其返回的数据结构SpecItems中的参数MinNodeNum与MaxNodeNum分别对应其最小值与最大值。
    */
   NodeNum: number
   /**
-   * 实例内存大小。<ul><li>单位：GB。</li><li>取值范围：请通过接口<a href="https://cloud.tencent.com/document/product/240/38567">DescribeSpecInfo</a>查询，其返回的数据结构SpecItems中的参数CPU与Memory分别对应CPU核数与内存规格。</li></ul>
+   * 实例内存大小。
+- 单位：GB。
+- 取值范围：请通过接口[DescribeSpecInfo](https://cloud.tencent.com/document/product/240/38567)查询，其返回的数据结构SpecItems中的参数CPU与Memory分别对应CPU核数与内存规格。
    */
   Memory: number
   /**
-   * 实例硬盘大小。<ul><li>单位：GB。</li><li>取值范围：请通过接口<a href="https://cloud.tencent.com/document/product/240/38567">DescribeSpecInfo</a>查询，其返回的数据结构SpecItems中的参数MinStorage与MaxStorage分别对应其最小磁盘规格与最大磁盘规格。</br>
+   * 实例硬盘大小。
+- 单位：GB。
+- 取值范围：请通过接口[DescribeSpecInfo](https://cloud.tencent.com/document/product/240/38567)查询，其返回的数据结构SpecItems中的参数MinStorage与MaxStorage分别对应其最小磁盘规格与最大磁盘规格。
    */
   Volume: number
   /**
-   * 实例版本信息。<ul><li>具体支持的版本，请通过接口<a href="https://cloud.tencent.com/document/product/240/38567">DescribeSpecInfo</a>查询，其返回的数据结构SpecItems中的参数MongoVersionCode为实例所支持的版本信息。</li><li>版本信息与版本号对应关系如下：<ul><li>MONGO_3_WT：MongoDB 3.2 WiredTiger存储引擎版本。</li><li>MONGO_3_ROCKS：MongoDB 3.2 RocksDB存储引擎版本。</li><li>MONGO_36_WT：MongoDB 3.6 WiredTiger存储引擎版本。</li><li>MONGO_40_WT：MongoDB 4.0 WiredTiger存储引擎版本。</li><li>MONGO_42_WT：MongoDB 4.2 WiredTiger存储引擎版本。</li><li>MONGO_44_WT：MongoDB 4.4 WiredTiger存储引擎版本。</li></ul>
+   * 实例版本信息。具体支持的版本，请通过接口[DescribeSpecInfo](https://cloud.tencent.com/document/product/240/38567)查询，其返回的数据结构SpecItems中的参数MongoVersionCode为实例所支持的版本信息。版本信息与版本号对应关系如下：
+- MONGO_3_WT：MongoDB 3.2 WiredTiger存储引擎版本。
+- MONGO_3_ROCKS：MongoDB 3.2 RocksDB存储引擎版本。
+- MONGO_36_WT：MongoDB 3.6 WiredTiger存储引擎版本。
+- MONGO_40_WT：MongoDB 4.0 WiredTiger存储引擎版本。
+- MONGO_42_WT：MongoDB 4.2 WiredTiger存储引擎版本。
+- MONGO_44_WT：MongoDB 4.4 WiredTiger存储引擎版本。
+- MONGO_50_WT：MongoDB 5.0 WiredTiger存储引擎版本。
    */
   MongoVersion: string
   /**
-   * 机器类型。<ul><li>HIO：高IO型。</li><li>HIO10G：高IO万兆型。</li></ul>
+   * 机器类型。
+- HIO：高IO型。
+- HIO10G：高IO万兆型。
    */
   MachineCode: string
   /**
@@ -2326,19 +2340,29 @@ export interface InquirePriceCreateDBInstancesRequest {
    */
   GoodsNum: number
   /**
-   * 实例类型。<ul><li>REPLSET：副本集。</li><li>SHARD：分片集群。</li><li>STANDALONE：单节点。</li></ul>
+   * 实例类型。
+- REPLSET：副本集。
+- SHARD：分片集群。
+- STANDALONE：单节点。
    */
   ClusterType: string
   /**
-   * 副本集个数。<ul><li>创建副本集实例时，该参数固定设置为1。</li><li>创建分片集群时，指分片数量，请通过接口<a href="https://cloud.tencent.com/document/product/240/38567">DescribeSpecInfo</a>查询，其返回的数据结构SpecItems中的参数MinReplicateSetNum与MaxReplicateSetNum分别对应其最小值与最大值。</li><li>若为单节点实例，该参数固定设置为0。</li></ul>
+   * 副本集个数。
+- 创建副本集实例时，该参数固定设置为1。
+- 创建分片集群时，指分片数量，请通过接口[DescribeSpecInfo](https://cloud.tencent.com/document/product/240/38567)查询，其返回的数据结构SpecItems中的参数MinReplicateSetNum与MaxReplicateSetNum分别对应其最小值与最大值。
+- 若为单节点实例，该参数固定设置为0。
    */
   ReplicateSetNum: number
   /**
-   * 选择包年包月计费模式时，您需要设定购买实例的时长。即<b>InstanceChargeType</b>设定为<b>PREPAID</b>时，该参数必须配置。<ul><li>单位：月。</li><li>可选值包括[1,2,3,4,5,6,7,8,9,10,11,12,24,36]。</li></ul>
+   * 选择包年包月计费模式时，您需要设定购买实例的时长。即<b>InstanceChargeType</b>设定为<b>PREPAID</b>时，该参数必须配置。
+- 单位：月。
+- 可选值包括[1,2,3,4,5,6,7,8,9,10,11,12,24,36]。
    */
   Period?: number
   /**
-   * 实例付费方式。<ul><li>PREPAID：包年包月计费。</li><li>POSTPAID_BY_HOUR：按量计费。</li></ul>
+   * 实例付费方式。
+- PREPAID：包年包月计费。
+- POSTPAID_BY_HOUR：按量计费。
    */
   InstanceChargeType?: string
   /**

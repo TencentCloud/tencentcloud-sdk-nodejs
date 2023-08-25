@@ -73,6 +73,7 @@ import {
   DescribeGatewayData,
   ListOrganizationChannelNumbersRequest,
   GatewayVersion,
+  UpdateRecordBackupPlanModify,
   UpdateAITaskRequest,
   FaceMaskAIResultInfo,
   UpgradeGatewayResponse,
@@ -100,7 +101,7 @@ import {
   DescribeVideoDownloadUrlResponse,
   RecordPlanOptData,
   DescribeRecordPlanResponse,
-  UpdateRecordBackupPlanModify,
+  ListGatewaysData,
   AddRecordRetrieveTaskRequest,
   DescribeRecordPlanRequest,
   ControlDevicePresetResponse,
@@ -120,6 +121,7 @@ import {
   ListDeviceInfo,
   LifeCycleData,
   ListOrganizationChannelNumbersResponse,
+  ListGatewayDevicesResponse,
   DescribeDomainData,
   ListRecordBackupTemplatesResponse,
   ListRecordPlanChannelsResponse,
@@ -139,13 +141,14 @@ import {
   DescribeDeviceData,
   AddUserDeviceRequest,
   ListRecordBackupPlanDevicesResponse,
+  GatewayDevice,
   ControlDevicePTZRequest,
   DescribeRecordBackupPlanRequest,
   DescribeRecordBackupPlanResponse,
   DescribeDeviceChannelRequest,
   UpdateUserDeviceResponse,
   GatewaysData,
-  ListGatewaysData,
+  ListGatewayDevicesData,
   DescribeDevicePresetRequest,
   ListGatewaysResponse,
   AddRecordBackupPlanData,
@@ -196,6 +199,7 @@ import {
   DescribeRecordBackupPlanData,
   UpdateRecordPlanResponse,
   DescribeGatewayVersion,
+  RecordRetrieveTaskDetailsInfo,
   DeleteRecordBackupPlanRequest,
   UpdateGatewayData,
   ListRecordBackupTemplatesRequest,
@@ -204,7 +208,7 @@ import {
   RecordPlanChannelInfo,
   UpdateRecordTemplateRequest,
   DeleteRecordBackupTemplateRequest,
-  RecordRetrieveTaskDetailsInfo,
+  ListGatewayDevicesRequest,
   DeleteAITaskResponse,
   DescribeVideoDownloadUrlData,
   AddRecordBackupTemplateResponse,
@@ -295,6 +299,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ListRecordRetrieveTasksResponse) => void
   ): Promise<ListRecordRetrieveTasksResponse> {
     return this.request("ListRecordRetrieveTasks", req, cb)
+  }
+
+  /**
+   * 用于修改录像上云模板。
+   */
+  async UpdateRecordBackupTemplate(
+    req: UpdateRecordBackupTemplateRequest,
+    cb?: (error: string, rep: UpdateRecordBackupTemplateResponse) => void
+  ): Promise<UpdateRecordBackupTemplateResponse> {
+    return this.request("UpdateRecordBackupTemplate", req, cb)
   }
 
   /**
@@ -968,13 +982,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 用于获取设备本地录像 URL 地址。
+   * 用于查询网关下挂载的设备列表。
    */
-  async PlayRecord(
-    req: PlayRecordRequest,
-    cb?: (error: string, rep: PlayRecordResponse) => void
-  ): Promise<PlayRecordResponse> {
-    return this.request("PlayRecord", req, cb)
+  async ListGatewayDevices(
+    req: ListGatewayDevicesRequest,
+    cb?: (error: string, rep: ListGatewayDevicesResponse) => void
+  ): Promise<ListGatewayDevicesResponse> {
+    return this.request("ListGatewayDevices", req, cb)
   }
 
   /**
@@ -988,13 +1002,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 用于修改录像上云模板。
+   * 用于获取设备本地录像 URL 地址。
    */
-  async UpdateRecordBackupTemplate(
-    req: UpdateRecordBackupTemplateRequest,
-    cb?: (error: string, rep: UpdateRecordBackupTemplateResponse) => void
-  ): Promise<UpdateRecordBackupTemplateResponse> {
-    return this.request("UpdateRecordBackupTemplate", req, cb)
+  async PlayRecord(
+    req: PlayRecordRequest,
+    cb?: (error: string, rep: PlayRecordResponse) => void
+  ): Promise<PlayRecordResponse> {
+    return this.request("PlayRecord", req, cb)
   }
 
   /**

@@ -125,7 +125,7 @@ export interface DeleteSitesRequest {
     /**
      * 站点ID列表
      */
-    SiteIds: Array<number>;
+    SiteIds: Array<number | bigint>;
 }
 /**
  * DescribeConfig请求参数结构体
@@ -348,7 +348,7 @@ export interface CreateVulsMisinformationRequest {
     /**
      * 漏洞ID列表
      */
-    VulIds: Array<number>;
+    VulIds: Array<number | bigint>;
 }
 /**
  * DescribeVulsNumberTimeline请求参数结构体
@@ -374,7 +374,7 @@ export interface CreateSitesScansRequest {
     /**
      * 站点的ID列表
      */
-    SiteIds: Array<number>;
+    SiteIds: Array<number | bigint>;
     /**
      * 扫描模式，normal-正常扫描；deep-深度扫描
      */
@@ -803,7 +803,7 @@ export interface DescribeMonitorsRequest {
     /**
      * 监控任务ID列表
      */
-    MonitorIds?: Array<number>;
+    MonitorIds?: Array<number | bigint>;
     /**
      * 过滤条件
      */
@@ -833,7 +833,7 @@ export interface DeleteMonitorsRequest {
     /**
      * 监控任务ID列表
      */
-    MonitorIds: Array<number>;
+    MonitorIds: Array<number | bigint>;
 }
 /**
  * DescribeSitesVerification返回参数结构体
@@ -1033,7 +1033,7 @@ export interface DescribeSitesRequest {
     /**
      * 站点ID列表
      */
-    SiteIds?: Array<number>;
+    SiteIds?: Array<number | bigint>;
     /**
      * 过滤条件
      */

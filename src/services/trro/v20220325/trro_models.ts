@@ -833,11 +833,11 @@ export interface SessionDeviceDetail {
   /**
    * 码率，单位：kbps
    */
-  Rate?: Array<number>
+  Rate?: Array<number | bigint>
   /**
    * 帧率
    */
-  Fps?: Array<number>
+  Fps?: Array<number | bigint>
   /**
    * 丢包率，单位：%
    */
@@ -845,11 +845,11 @@ export interface SessionDeviceDetail {
   /**
    * 网络时延，单位：ms
    */
-  NetworkLatency?: Array<number>
+  NetworkLatency?: Array<number | bigint>
   /**
    * 视频时延，单位：ms
    */
-  VideoLatency?: Array<number>
+  VideoLatency?: Array<number | bigint>
   /**
    * CPU使用率，单位：%
    */
@@ -861,7 +861,7 @@ export interface SessionDeviceDetail {
   /**
    * 时间偏移量，单位：秒
    */
-  TimeOffset?: Array<number>
+  TimeOffset?: Array<number | bigint>
   /**
    * 项目ID
    */
@@ -884,12 +884,12 @@ export interface SessionDeviceDetail {
    * 解码耗时，单位：ms
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DecodeCost?: Array<number>
+  DecodeCost?: Array<number | bigint>
   /**
    * 渲染耗时，单位：ms
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RenderConst?: Array<number>
+  RenderConst?: Array<number | bigint>
   /**
    * 卡顿k100
 注意：此字段可能返回 null，表示取不到有效值。
@@ -904,12 +904,12 @@ export interface SessionDeviceDetail {
    * nack请求数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  NACK?: Array<number>
+  NACK?: Array<number | bigint>
   /**
    * 服务端调控码率,单位：kbps
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  BitRateEstimate?: Array<number>
+  BitRateEstimate?: Array<number | bigint>
   /**
    * 宽度
 注意：此字段可能返回 null，表示取不到有效值。
@@ -924,12 +924,12 @@ export interface SessionDeviceDetail {
    * 编码耗时，单位：ms
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  EncodeCost?: Array<number>
+  EncodeCost?: Array<number | bigint>
   /**
    * 采集耗时，单位：ms
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CaptureCost?: Array<number>
+  CaptureCost?: Array<number | bigint>
 }
 
 /**

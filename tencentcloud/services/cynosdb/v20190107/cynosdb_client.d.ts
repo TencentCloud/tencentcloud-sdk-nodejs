@@ -88,7 +88,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeResourcesByDealName(req: DescribeResourcesByDealNameRequest, cb?: (error: string, rep: DescribeResourcesByDealNameResponse) => void): Promise<DescribeResourcesByDealNameResponse>;
     /**
-     * 升级预付费存储
+     * 调整包年包月存储容量
      */
     ModifyClusterStorage(req: ModifyClusterStorageRequest, cb?: (error: string, rep: ModifyClusterStorageResponse) => void): Promise<ModifyClusterStorageResponse>;
     /**
@@ -128,7 +128,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeClusterInstanceGrps(req: DescribeClusterInstanceGrpsRequest, cb?: (error: string, rep: DescribeClusterInstanceGrpsResponse) => void): Promise<DescribeClusterInstanceGrpsResponse>;
     /**
-     * 下线集群
+     * 销毁集群
      */
     OfflineCluster(req: OfflineClusterRequest, cb?: (error: string, rep: OfflineClusterResponse) => void): Promise<OfflineClusterResponse>;
     /**
@@ -172,7 +172,7 @@ export declare class Client extends AbstractClient {
      */
     CreateBackup(req: CreateBackupRequest, cb?: (error: string, rep: CreateBackupResponse) => void): Promise<CreateBackupResponse>;
     /**
-     * 下线实例
+     * 销毁实例
      */
     OfflineInstance(req: OfflineInstanceRequest, cb?: (error: string, rep: OfflineInstanceResponse) => void): Promise<OfflineInstanceResponse>;
     /**
@@ -220,7 +220,7 @@ export declare class Client extends AbstractClient {
      */
     ModifyClusterParam(req: ModifyClusterParamRequest, cb?: (error: string, rep: ModifyClusterParamResponse) => void): Promise<ModifyClusterParamResponse>;
     /**
-     * 创建集群
+     * 购买新集群
      */
     CreateClusters(req: CreateClustersRequest, cb?: (error: string, rep: CreateClustersResponse) => void): Promise<CreateClustersResponse>;
     /**
@@ -412,7 +412,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeInstances(req: DescribeInstancesRequest, cb?: (error: string, rep: DescribeInstancesResponse) => void): Promise<DescribeInstancesResponse>;
     /**
-     * 更新集群Cynos内核版本
+     * 更新内核小版本
      */
     UpgradeClusterVersion(req: UpgradeClusterVersionRequest, cb?: (error: string, rep: UpgradeClusterVersionResponse) => void): Promise<UpgradeClusterVersionResponse>;
     /**
@@ -488,7 +488,7 @@ export declare class Client extends AbstractClient {
      */
     DeleteParamTemplate(req: DeleteParamTemplateRequest, cb?: (error: string, rep: DeleteParamTemplateResponse) => void): Promise<DeleteParamTemplateResponse>;
     /**
-     * 升级实例
+     * 实例变配
      */
     UpgradeInstance(req: UpgradeInstanceRequest, cb?: (error: string, rep: UpgradeInstanceResponse) => void): Promise<UpgradeInstanceResponse>;
     /**
@@ -504,7 +504,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeDBSecurityGroups(req: DescribeDBSecurityGroupsRequest, cb?: (error: string, rep: DescribeDBSecurityGroupsResponse) => void): Promise<DescribeDBSecurityGroupsResponse>;
     /**
-     * 本接口（OpenClusterPasswordComplexity）用于开启集群密码复杂度
+     * 本接口（OpenClusterPasswordComplexity）用于开启自定义密码复杂度功能
      */
     OpenClusterPasswordComplexity(req: OpenClusterPasswordComplexityRequest, cb?: (error: string, rep: OpenClusterPasswordComplexityResponse) => void): Promise<OpenClusterPasswordComplexityResponse>;
     /**

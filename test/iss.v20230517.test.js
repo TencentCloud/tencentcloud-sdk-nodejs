@@ -58,6 +58,16 @@ it("iss.v20230517.ListRecordRetrieveTasks", async function () {
     }
 })
 
+it("iss.v20230517.UpdateRecordBackupTemplate", async function () {
+    try {
+       const data = await client.UpdateRecordBackupTemplate({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iss.v20230517.DeleteUserDevice", async function () {
     try {
        const data = await client.DeleteUserDevice({})
@@ -728,9 +738,9 @@ it("iss.v20230517.DeleteGateway", async function () {
     }
 })
 
-it("iss.v20230517.PlayRecord", async function () {
+it("iss.v20230517.ListGatewayDevices", async function () {
     try {
-       const data = await client.PlayRecord({})
+       const data = await client.ListGatewayDevices({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -748,9 +758,9 @@ it("iss.v20230517.DeleteDomain", async function () {
     }
 })
 
-it("iss.v20230517.UpdateRecordBackupTemplate", async function () {
+it("iss.v20230517.PlayRecord", async function () {
     try {
-       const data = await client.UpdateRecordBackupTemplate({})
+       const data = await client.PlayRecord({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
