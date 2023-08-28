@@ -25,6 +25,7 @@ import {
   DescribeDeviceChannelData,
   ListOrganizationChannelsRequest,
   DescribeDevicePresetData,
+  ListSubTasksRequest,
   DescribeGatewayMonitor,
   DescribeAITaskResultRequest,
   DescribeCNAMERequest,
@@ -32,6 +33,7 @@ import {
   DeleteOrganizationRequest,
   OperTimeSlot,
   CheckDomainResponse,
+  SubTaskData,
   DescribeCNAMEResponse,
   UpdateOrganizationResponse,
   AddOrgData,
@@ -40,7 +42,7 @@ import {
   UpdateDeviceOrganizationRequest,
   UpdateDeviceOrganizationResponse,
   AddOrganizationResponse,
-  RecordTemplateInfo,
+  BatchOperateDeviceResponse,
   DescribeDeviceRegionResponse,
   ListRecordPlanChannelsData,
   DescribeDomainResponse,
@@ -51,6 +53,7 @@ import {
   DescribeUserDeviceResponse,
   DeleteRecordPlanResponse,
   DescribeOrganizationResponse,
+  UpgradeGatewayResponse,
   UpdateUserDeviceRequest,
   DescribeDeviceChannelResponse,
   AddRecordBackupTemplateRequest,
@@ -66,6 +69,7 @@ import {
   DeleteRecordTemplateRequest,
   DescribeGatewayResponse,
   ListRecordBackupPlanDevicesData,
+  TaskData,
   DescribeGatewayRequest,
   AddRecordBackupTemplateData,
   DeleteUserDeviceRequest,
@@ -76,7 +80,7 @@ import {
   UpdateRecordBackupPlanModify,
   UpdateAITaskRequest,
   FaceMaskAIResultInfo,
-  UpgradeGatewayResponse,
+  SmokingAIResultInfo,
   BaseAIResultInfo,
   DeleteDomainRequest,
   ListRecordRetrieveTasksRequest,
@@ -87,6 +91,7 @@ import {
   ListRecordPlansRequest,
   AddRecordBackupPlanResponse,
   SnapshotConfig,
+  ListSubTasksResponse,
   ListAITasksRequest,
   UpdateRecordPlanRequest,
   Location,
@@ -110,9 +115,12 @@ import {
   ChannelInfo,
   RecordRetrieveTaskChannelInfo,
   DescribeDomainRequest,
+  BatchOperateDeviceData,
   RecordPlaybackUrl,
   ListOrganizationChannelNumbersData,
+  ListSubTasksData,
   ListRecordPlanDevicesRequest,
+  ListTasksResponse,
   AddStreamAuthResponse,
   ListDevicesResponse,
   AddStreamAuthData,
@@ -164,7 +172,7 @@ import {
   DescribeVideoDownloadUrlRequest,
   DescribeGatewayVersionResponse,
   ListGatewaysRequest,
-  RecordPlanBaseInfo,
+  ListTasksRequest,
   DescribeGatewayVersionRequest,
   DescribeRecordBackupTemplateRequest,
   DescribeUserDeviceRequest,
@@ -183,6 +191,7 @@ import {
   ControlDevicePresetRequest,
   ControlDeviceStreamRequest,
   ListRecordRetrieveTasksResponse,
+  RecordPlanBaseInfo,
   ListRecordBackupPlanDevicesRequest,
   DeleteDomainResponse,
   AddRecordRetrieveTaskResponse,
@@ -198,6 +207,7 @@ import {
   DeleteRecordRetrieveTaskRequest,
   DescribeRecordBackupPlanData,
   UpdateRecordPlanResponse,
+  DescribeTaskResponse,
   DescribeGatewayVersion,
   RecordRetrieveTaskDetailsInfo,
   DeleteRecordBackupPlanRequest,
@@ -220,7 +230,7 @@ import {
   DeleteGatewayResponse,
   DescribeRecordPlaybackUrlResponse,
   UpdateRecordPlanData,
-  SmokingAIResultInfo,
+  DescribeTaskRequest,
   ListRecordPlanChannelsRequest,
   ListOrganizationChannelsResponse,
   UpdateOrganizationRequest,
@@ -231,10 +241,12 @@ import {
   DescribeRecordFileData,
   UpdateOrgData,
   DescribeDomainRegionResponse,
-  UpdateRecordBackupTemplateData,
+  BatchOperateDeviceRequest,
   ListOrganizationChannelsData,
   AddRecordBackupPlanRequest,
+  ListTasksData,
   ControlDeviceStreamData,
+  RecordTemplateInfo,
   UpdateRecordBackupTemplateRequest,
   UpdateDeviceStatusResponse,
   DeleteUserDeviceResponse,
@@ -248,6 +260,7 @@ import {
   UpdateRecordTemplateResponse,
   DescribeRecordRetrieveTaskResponse,
   DescribeStreamAuthRequest,
+  UpdateRecordBackupTemplateData,
   UpdateRecordBackupPlanData,
   AddDeviceData,
 } from "./iss_models"
@@ -432,6 +445,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 用于查询任务的子任务列表
+   */
+  async ListSubTasks(
+    req: ListSubTasksRequest,
+    cb?: (error: string, rep: ListSubTasksResponse) => void
+  ): Promise<ListSubTasksResponse> {
+    return this.request("ListSubTasks", req, cb)
+  }
+
+  /**
    * 用于查询用户下所有实时上云计划中的通道列表
    */
   async ListRecordPlanChannels(
@@ -542,6 +565,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 用于修改实时上云模板
+   */
+  async UpdateRecordTemplate(
+    req: UpdateRecordTemplateRequest,
+    cb?: (error: string, rep: UpdateRecordTemplateResponse) => void
+  ): Promise<UpdateRecordTemplateResponse> {
+    return this.request("UpdateRecordTemplate", req, cb)
+  }
+
+  /**
    * 用于新建取回任务
    */
   async AddRecordRetrieveTask(
@@ -569,6 +602,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: AddUserDeviceResponse) => void
   ): Promise<AddUserDeviceResponse> {
     return this.request("AddUserDevice", req, cb)
+  }
+
+  /**
+   * 用于查询任务详情
+   */
+  async DescribeTask(
+    req: DescribeTaskRequest,
+    cb?: (error: string, rep: DescribeTaskResponse) => void
+  ): Promise<DescribeTaskResponse> {
+    return this.request("DescribeTask", req, cb)
   }
 
   /**
@@ -659,6 +702,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ControlDevicePresetResponse) => void
   ): Promise<ControlDevicePresetResponse> {
     return this.request("ControlDevicePreset", req, cb)
+  }
+
+  /**
+   * 用于批量操作（启用，禁用，删除）设备
+   */
+  async BatchOperateDevice(
+    req: BatchOperateDeviceRequest,
+    cb?: (error: string, rep: BatchOperateDeviceResponse) => void
+  ): Promise<BatchOperateDeviceResponse> {
+    return this.request("BatchOperateDevice", req, cb)
   }
 
   /**
@@ -902,13 +955,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 用于修改实时上云模板
+   * 用于查询批量任务和简单任务列表
    */
-  async UpdateRecordTemplate(
-    req: UpdateRecordTemplateRequest,
-    cb?: (error: string, rep: UpdateRecordTemplateResponse) => void
-  ): Promise<UpdateRecordTemplateResponse> {
-    return this.request("UpdateRecordTemplate", req, cb)
+  async ListTasks(
+    req: ListTasksRequest,
+    cb?: (error: string, rep: ListTasksResponse) => void
+  ): Promise<ListTasksResponse> {
+    return this.request("ListTasks", req, cb)
   }
 
   /**

@@ -372,16 +372,16 @@ export interface DescribeRollbackTimeRangeResponse {
      * 有效回归时间范围开始时间点（已废弃）
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TimeRangeStart: string;
+    TimeRangeStart?: string;
     /**
      * 有效回归时间范围结束时间点（已废弃）
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TimeRangeEnd: string;
+    TimeRangeEnd?: string;
     /**
      * 可回档时间范围
      */
-    RollbackTimeRanges: Array<RollbackTimeRange>;
+    RollbackTimeRanges?: Array<RollbackTimeRange>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -541,7 +541,7 @@ export interface SwitchClusterZoneResponse {
     /**
      * 异步FlowId
      */
-    FlowId: number;
+    FlowId?: number;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -831,7 +831,7 @@ export interface AddClusterSlaveZoneResponse {
     /**
      * 异步FlowId
      */
-    FlowId: number;
+    FlowId?: number;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1797,7 +1797,7 @@ export interface RemoveClusterSlaveZoneResponse {
     /**
      * 异步FlowId
      */
-    FlowId: number;
+    FlowId?: number;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1831,22 +1831,22 @@ export interface DescribeAccountAllGrantPrivilegesResponse {
      * 权限语句
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    PrivilegeStatements: Array<string>;
+    PrivilegeStatements?: Array<string>;
     /**
      * 全局权限
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    GlobalPrivileges: Array<string>;
+    GlobalPrivileges?: Array<string>;
     /**
      * 数据库权限
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DatabasePrivileges: Array<DatabasePrivileges>;
+    DatabasePrivileges?: Array<DatabasePrivileges>;
     /**
      * 数据库表权限
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TablePrivileges: Array<TablePrivileges>;
+    TablePrivileges?: Array<TablePrivileges>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1901,10 +1901,12 @@ export interface ModifyVipVportRequest {
 export interface DatabasePrivileges {
     /**
      * 数据库
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     Db: string;
     /**
      * 权限列表
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     Privileges: Array<string>;
 }
@@ -2033,12 +2035,12 @@ export interface DescribeClusterParamLogsResponse {
     /**
      * 记录总数
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 参数修改记录
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ClusterParamLogs: Array<ClusterParamModifyLog>;
+    ClusterParamLogs?: Array<ClusterParamModifyLog>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2782,14 +2784,17 @@ export interface BackupFileInfo {
 export interface TablePrivileges {
     /**
      * 数据库名
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     Db: string;
     /**
      * 表名
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     TableName: string;
     /**
      * 权限列表
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     Privileges: Array<string>;
 }
@@ -3342,7 +3347,7 @@ export interface ModifyClusterSlaveZoneResponse {
     /**
      * 异步FlowId
      */
-    FlowId: number;
+    FlowId?: number;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -4892,11 +4897,11 @@ export interface DescribeInstanceSlowQueriesResponse {
     /**
      * 总条数
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 慢查询记录
      */
-    SlowQueries: Array<SlowQueriesItem>;
+    SlowQueries?: Array<SlowQueriesItem>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -6286,7 +6291,7 @@ export interface RollBackClusterResponse {
     /**
      * 任务流ID
      */
-    FlowId: number;
+    FlowId?: number;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -7206,7 +7211,7 @@ export interface DescribeInstanceParamsResponse {
     /**
      * 实例参数列表
      */
-    Items: Array<InstanceParamItem>;
+    Items?: Array<InstanceParamItem>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */

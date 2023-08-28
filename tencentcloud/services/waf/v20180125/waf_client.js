@@ -326,6 +326,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDomainCountInfo", req, cb);
     }
     /**
+     * 删除自定义规则
+     */
+    async DeleteCustomRule(req, cb) {
+        return this.request("DeleteCustomRule", req, cb);
+    }
+    /**
      * waf斯巴达-删除防护域名
      */
     async DeleteSpartaProtection(req, cb) {
@@ -390,6 +396,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeWafAutoDenyRules(req, cb) {
         return this.request("DescribeWafAutoDenyRules", req, cb);
+    }
+    /**
+     * 获取防护配置中的访问控制策略列表
+     */
+    async DescribeCustomRuleList(req, cb) {
+        return this.request("DescribeCustomRuleList", req, cb);
     }
     /**
      * 攻击总览
@@ -459,6 +471,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribePolicyStatus(req, cb) {
         return this.request("DescribePolicyStatus", req, cb);
+    }
+    /**
+     * 编辑自定义规则
+     */
+    async ModifyCustomRule(req, cb) {
+        return this.request("ModifyCustomRule", req, cb);
     }
     /**
      * 刷新接入检查的结果，后台会生成接入检查任务

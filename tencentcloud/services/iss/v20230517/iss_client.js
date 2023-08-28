@@ -130,6 +130,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UpdateAITask", req, cb);
     }
     /**
+     * 用于查询任务的子任务列表
+     */
+    async ListSubTasks(req, cb) {
+        return this.request("ListSubTasks", req, cb);
+    }
+    /**
      * 用于查询用户下所有实时上云计划中的通道列表
      */
     async ListRecordPlanChannels(req, cb) {
@@ -196,6 +202,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeRecordTemplate", req, cb);
     }
     /**
+     * 用于修改实时上云模板
+     */
+    async UpdateRecordTemplate(req, cb) {
+        return this.request("UpdateRecordTemplate", req, cb);
+    }
+    /**
      * 用于新建取回任务
      */
     async AddRecordRetrieveTask(req, cb) {
@@ -212,6 +224,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async AddUserDevice(req, cb) {
         return this.request("AddUserDevice", req, cb);
+    }
+    /**
+     * 用于查询任务详情
+     */
+    async DescribeTask(req, cb) {
+        return this.request("DescribeTask", req, cb);
     }
     /**
      * 添加AI任务
@@ -266,6 +284,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ControlDevicePreset(req, cb) {
         return this.request("ControlDevicePreset", req, cb);
+    }
+    /**
+     * 用于批量操作（启用，禁用，删除）设备
+     */
+    async BatchOperateDevice(req, cb) {
+        return this.request("BatchOperateDevice", req, cb);
     }
     /**
      * 用于修改组织。
@@ -412,10 +436,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("AddStreamAuth", req, cb);
     }
     /**
-     * 用于修改实时上云模板
+     * 用于查询批量任务和简单任务列表
      */
-    async UpdateRecordTemplate(req, cb) {
-        return this.request("UpdateRecordTemplate", req, cb);
+    async ListTasks(req, cb) {
+        return this.request("ListTasks", req, cb);
     }
     /**
      * 用于删除取回任务

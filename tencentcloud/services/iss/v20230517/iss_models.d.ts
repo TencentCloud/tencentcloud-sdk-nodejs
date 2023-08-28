@@ -180,6 +180,27 @@ export interface DescribeDevicePresetData {
     Name?: string;
 }
 /**
+ * ListSubTasks请求参数结构体
+ */
+export interface ListSubTasksRequest {
+    /**
+     * 复杂任务ID
+     */
+    TaskId: string;
+    /**
+     * 页码，默认为1
+     */
+    PageNumber?: number;
+    /**
+     * 每页数量，默认为10
+     */
+    PageSize?: number;
+    /**
+     * 默认不对该字段进行筛选，否则根据任务状态进行筛选。状态码：1-NEW，2-RUNNING，3-COMPLETED，4-FAILED
+     */
+    Status?: number;
+}
+/**
  * 查询网关监控信息返回结果
  */
 export interface DescribeGatewayMonitor {
@@ -328,6 +349,56 @@ export interface CheckDomainResponse {
     RequestId?: string;
 }
 /**
+ * 子任务详情
+ */
+export interface SubTaskData {
+    /**
+     * 子任务ID
+     */
+    SubTaskId?: string;
+    /**
+     * 任务状态1:NEW,2:RUNNING,3:COMPLETED ,4:FAILED
+     */
+    Status?: number;
+    /**
+     * 任务失败原因
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    FailReason?: string;
+    /**
+     * 任务进度
+     */
+    Progress?: number;
+    /**
+     * 操作类型
+     */
+    Action?: string;
+    /**
+     * 操作类型中文描述
+     */
+    ActionZhDesc?: string;
+    /**
+     * 资源ID
+     */
+    ResourceId?: string;
+    /**
+     * 启动任务时间
+     */
+    StartedAt?: string;
+    /**
+     * 创建任务时间
+     */
+    CreatedAt?: string;
+    /**
+     * 更新任务时间
+     */
+    UpdatedAt?: string;
+    /**
+     * 任务运行时间，单位ms
+     */
+    Runtime?: number;
+}
+/**
  * DescribeCNAME返回参数结构体
  */
 export interface DescribeCNAMEResponse {
@@ -469,21 +540,17 @@ export interface AddOrganizationResponse {
     RequestId?: string;
 }
 /**
- * 实时上云模板信息数据
+ * BatchOperateDevice返回参数结构体
  */
-export interface RecordTemplateInfo {
+export interface BatchOperateDeviceResponse {
     /**
-     * 模板ID
+     * 返回结果
      */
-    TemplateId?: string;
+    Data?: BatchOperateDeviceData;
     /**
-     * 模板名称
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
-    TemplateName?: string;
-    /**
-     * 上云时间段，按周进行设置，支持一天设置多个时间段，每个时间段不小于10分钟
-     */
-    TimeSections?: Array<RecordTemplateTimeSections>;
+    RequestId?: string;
 }
 /**
  * DescribeDeviceRegion返回参数结构体
@@ -663,6 +730,15 @@ export interface DescribeOrganizationResponse {
      * 返回数据
      */
     Data?: Array<DescribeOrganizationData>;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * UpgradeGateway返回参数结构体
+ */
+export interface UpgradeGatewayResponse {
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -886,6 +962,76 @@ export interface ListRecordBackupPlanDevicesData {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     List?: RecordPlanChannelInfo;
+}
+/**
+ * 查询复杂任务详情返回结果
+ */
+export interface TaskData {
+    /**
+     * 任务ID
+     */
+    TaskId?: string;
+    /**
+     * 任务状态1:NEW,2:RUNNING,3:COMPLETED ,4:FAILED
+     */
+    Status?: number;
+    /**
+     * 失败原因
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    FailReason?: string;
+    /**
+     * 进度（0-1）
+     */
+    Progress?: number;
+    /**
+     * 任务操作类型，批量任务类型以Batch开头
+     */
+    Action?: string;
+    /**
+     * 操作类型中文描述
+     */
+    ActionZhDesc?: string;
+    /**
+     * 任务类型 1.简单 2.复杂 3.子任务
+     */
+    TaskType?: number;
+    /**
+     * 任务资源id（复杂任务该字段无效）
+     */
+    ResourceId?: string;
+    /**
+     * 总任务数（仅复杂任务有效）
+     */
+    Total?: number;
+    /**
+     * 成功任务数（仅复杂任务有效）
+     */
+    SuccessCount?: number;
+    /**
+     * 失败任务数（仅复杂任务有效）
+     */
+    FailCount?: number;
+    /**
+     * 运行任务数（仅复杂任务有效）
+     */
+    RunningCount?: number;
+    /**
+     * 启动任务时间
+     */
+    StartedAt?: string;
+    /**
+     * 创建任务时间
+     */
+    CreatedAt?: string;
+    /**
+     * 更新任务时间
+     */
+    UpdatedAt?: string;
+    /**
+     * 任务运行时间，单位ms
+     */
+    Runtime?: number;
 }
 /**
  * DescribeGateway请求参数结构体
@@ -1126,13 +1272,21 @@ export interface FaceMaskAIResultInfo {
     FaceMaskInfo?: Array<BaseAIResultInfo>;
 }
 /**
- * UpgradeGateway返回参数结构体
+ * 抽烟识别结果详情
  */
-export interface UpgradeGatewayResponse {
+export interface SmokingAIResultInfo {
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     * 时间字符串
      */
-    RequestId?: string;
+    Time?: string;
+    /**
+     * 截图 URL
+     */
+    Url?: string;
+    /**
+     * 抽烟信息
+     */
+    SmokingInfo?: Array<BaseAIResultInfo>;
 }
 /**
  * 通用AI识别结果信息
@@ -1305,6 +1459,19 @@ export interface SnapshotConfig {
      * 模板生效的时间段。最多包含5组时间段
      */
     OperTimeSlot: Array<OperTimeSlot>;
+}
+/**
+ * ListSubTasks返回参数结构体
+ */
+export interface ListSubTasksResponse {
+    /**
+     * 返回数据
+     */
+    Data?: ListSubTasksData;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * ListAITasks请求参数结构体
@@ -1784,6 +1951,16 @@ export interface RecordRetrieveTaskChannelInfo {
  */
 export declare type DescribeDomainRequest = null;
 /**
+ * 批量操作设备返回结果
+ */
+export interface BatchOperateDeviceData {
+    /**
+     * 任务 ID（用于在查询任务的子任务列表接口ListSubTasks中查询任务进度）
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TaskId?: string;
+}
+/**
  * 云录像回放url
  */
 export interface RecordPlaybackUrl {
@@ -1804,6 +1981,19 @@ export interface ListOrganizationChannelNumbersData {
      * 组织下未添加到计划的通道总数
      */
     NotInPlanCount?: number;
+}
+/**
+ * 列举子任务列表
+ */
+export interface ListSubTasksData {
+    /**
+     * 子任务列表
+     */
+    List?: Array<SubTaskData>;
+    /**
+     * 子任务数量
+     */
+    TotalCount?: number;
 }
 /**
  * ListRecordPlanDevices请求参数结构体
@@ -1836,6 +2026,19 @@ export interface ListRecordPlanDevicesRequest {
   通道名称、设备名称、组织名称同时只有一个有效，如果同时多个字段有值，按照通道名称、设备名称、组织名称的优先级顺序查询，如果都为空，则全量查询。长度不超过32字节
      */
     OrganizationName?: string;
+}
+/**
+ * ListTasks返回参数结构体
+ */
+export interface ListTasksResponse {
+    /**
+     * 返回数据
+     */
+    Data?: ListTasksData;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * AddStreamAuth返回参数结构体
@@ -2931,43 +3134,25 @@ export interface ListGatewaysRequest {
     Status?: number;
 }
 /**
- * 实时上云计划基础信息
+ * ListTasks请求参数结构体
  */
-export interface RecordPlanBaseInfo {
+export interface ListTasksRequest {
     /**
-     * 上云计划ID
+     * 页码，默认为1
      */
-    PlanId?: string;
+    PageNumber?: number;
     /**
-     * 上云计划名称
+     * 每页数量，默认为10
      */
-    PlanName?: string;
+    PageSize?: number;
     /**
-     * 上云模板ID
+     * 默认不根据该字段进行筛选，否则根据设备操作类型进行筛选，对应任务的Action字段，批量任务操作类型以Batch开头。目前值有：BatchDeleteUserDevice，BatchDisableDevice，BatchEnableDevice，DeleteUserDevice，DisableDevice，EnableDevice
      */
-    TemplateId?: string;
+    Operation?: string;
     /**
-     * 上云计划描述
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Describe?: string;
-    /**
-     * 码流类型，default:设备默认码流类型，main:主码流，sub:子码流，其他根据设备能力集自定义
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    StreamType?: string;
-    /**
-     * 云文件生命周期
-     */
-    LifeCycle?: LifeCycleData;
-    /**
-     * 录像计划状态，1:正常使用中，0:删除中，无法使用
+     * 默认不根据该字段进行筛选，否则根据任务状态进行筛选。状态码：1-NEW，2-RUNNING，3-COMPLETED，4-FAILED
      */
     Status?: number;
-    /**
-     * 通道总数
-     */
-    ChannelCount?: number;
 }
 /**
  * DescribeGatewayVersion请求参数结构体
@@ -3255,6 +3440,45 @@ export interface ListRecordRetrieveTasksResponse {
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * 实时上云计划基础信息
+ */
+export interface RecordPlanBaseInfo {
+    /**
+     * 上云计划ID
+     */
+    PlanId?: string;
+    /**
+     * 上云计划名称
+     */
+    PlanName?: string;
+    /**
+     * 上云模板ID
+     */
+    TemplateId?: string;
+    /**
+     * 上云计划描述
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Describe?: string;
+    /**
+     * 码流类型，default:设备默认码流类型，main:主码流，sub:子码流，其他根据设备能力集自定义
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    StreamType?: string;
+    /**
+     * 云文件生命周期
+     */
+    LifeCycle?: LifeCycleData;
+    /**
+     * 录像计划状态，1:正常使用中，0:删除中，无法使用
+     */
+    Status?: number;
+    /**
+     * 通道总数
+     */
+    ChannelCount?: number;
 }
 /**
  * ListRecordBackupPlanDevices请求参数结构体
@@ -3557,6 +3781,19 @@ export interface UpdateRecordPlanResponse {
     RequestId?: string;
 }
 /**
+ * DescribeTask返回参数结构体
+ */
+export interface DescribeTaskResponse {
+    /**
+     * 任务详情
+     */
+    Data?: TaskData;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * 查询网关服务版本信息返回数据
  */
 export interface DescribeGatewayVersion {
@@ -3792,6 +4029,14 @@ export interface ListGatewayDevicesRequest {
      * 网关索引ID（从获取网关列表接口ListGateways中获取）
      */
     GatewayId: string;
+    /**
+     * 分页页数
+     */
+    PageNumber?: number;
+    /**
+     * 分页大小
+     */
+    PageSize?: number;
 }
 /**
  * DeleteAITask返回参数结构体
@@ -3960,21 +4205,13 @@ export interface UpdateRecordPlanData {
     OrganizationId?: Array<string>;
 }
 /**
- * 抽烟识别结果详情
+ * DescribeTask请求参数结构体
  */
-export interface SmokingAIResultInfo {
+export interface DescribeTaskRequest {
     /**
-     * 时间字符串
+     * 简单任务或复杂任务ID
      */
-    Time?: string;
-    /**
-     * 截图 URL
-     */
-    Url?: string;
-    /**
-     * 抽烟信息
-     */
-    SmokingInfo?: Array<BaseAIResultInfo>;
+    TaskId: string;
 }
 /**
  * ListRecordPlanChannels请求参数结构体
@@ -4164,44 +4401,17 @@ export interface DescribeDomainRegionResponse {
     RequestId?: string;
 }
 /**
- * 修改录像上云模版返回数据
+ * BatchOperateDevice请求参数结构体
  */
-export interface UpdateRecordBackupTemplateData {
+export interface BatchOperateDeviceRequest {
     /**
-     * 模板ID
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 设备 ID 数组（从获取设备列表接口ListDevices中获取）
      */
-    TemplateId?: string;
+    DeviceIds: Array<string>;
     /**
-     * 模板名称
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 操作命令（enable：启用；disable：禁用；delete：删除）
      */
-    TemplateName?: string;
-    /**
-     * 上云时间段（按周进行设置，支持一天设置多个时间段，每个时间段不小于10分钟）
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    TimeSections?: Array<RecordTemplateTimeSections>;
-    /**
-     * 录像时间段（按周进行设置，支持一天设置多个时间段，每个时间段不小于10分钟）
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    DevTimeSections?: Array<RecordTemplateTimeSections>;
-    /**
-     * 上云倍速（支持1，2，4倍速）
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Scale?: number;
-    /**
-     * 创建时间
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    CreateAt?: string;
-    /**
-     * 更新时间
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    UpdateAt?: string;
+    Cmd: string;
 }
 /**
  * 查询组织目录下的通道列表返回数据
@@ -4255,6 +4465,21 @@ export interface AddRecordBackupPlanRequest {
     OrganizationId?: Array<string>;
 }
 /**
+ * 查询任务列表
+ */
+export interface ListTasksData {
+    /**
+     * 任务列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    List?: Array<TaskData>;
+    /**
+     * 任务数量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TotalCount?: number;
+}
+/**
  * 获取开流地址返回数据
  */
 export interface ControlDeviceStreamData {
@@ -4273,6 +4498,23 @@ export interface ControlDeviceStreamData {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Rtmp?: string;
+}
+/**
+ * 实时上云模板信息数据
+ */
+export interface RecordTemplateInfo {
+    /**
+     * 模板ID
+     */
+    TemplateId?: string;
+    /**
+     * 模板名称
+     */
+    TemplateName?: string;
+    /**
+     * 上云时间段，按周进行设置，支持一天设置多个时间段，每个时间段不小于10分钟
+     */
+    TimeSections?: Array<RecordTemplateTimeSections>;
 }
 /**
  * UpdateRecordBackupTemplate请求参数结构体
@@ -4461,6 +4703,46 @@ export interface DescribeRecordRetrieveTaskResponse {
  * DescribeStreamAuth请求参数结构体
  */
 export declare type DescribeStreamAuthRequest = null;
+/**
+ * 修改录像上云模版返回数据
+ */
+export interface UpdateRecordBackupTemplateData {
+    /**
+     * 模板ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TemplateId?: string;
+    /**
+     * 模板名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TemplateName?: string;
+    /**
+     * 上云时间段（按周进行设置，支持一天设置多个时间段，每个时间段不小于10分钟）
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TimeSections?: Array<RecordTemplateTimeSections>;
+    /**
+     * 录像时间段（按周进行设置，支持一天设置多个时间段，每个时间段不小于10分钟）
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DevTimeSections?: Array<RecordTemplateTimeSections>;
+    /**
+     * 上云倍速（支持1，2，4倍速）
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Scale?: number;
+    /**
+     * 创建时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CreateAt?: string;
+    /**
+     * 更新时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    UpdateAt?: string;
+}
 /**
  * 修改录像上云计划返回数据
  */

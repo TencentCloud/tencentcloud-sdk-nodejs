@@ -39,6 +39,7 @@ import {
   HostDel,
   DeleteCustomWhiteRuleResponse,
   AddDomainWhiteRuleResponse,
+  DescribeHostLimitRequest,
   DescribeIpAccessControlResponse,
   ModifyHostModeResponse,
   LoadBalancerPackageNew,
@@ -76,13 +77,16 @@ import {
   ModifyApiAnalyzeStatusResponse,
   DescribeCustomWhiteRuleRequest,
   DescribeUserClbWafRegionsResponse,
-  ModifyCustomWhiteRuleRequest,
+  ModifyCustomRuleRequest,
   DeleteCustomWhiteRuleRequest,
   FailedInfo,
   TLSCiphers,
   ModifyProtectionStatusResponse,
+  AddSpartaProtectionAutoResponse,
   ModifyWafAutoDenyStatusRequest,
+  DescribeCustomRuleListResponse,
   BotStatPointItem,
+  ModifyDomainsCLSStatusResponse,
   ModifyAccessPeriodResponse,
   ClbHostResult,
   DescribeVipInfoRequest,
@@ -128,7 +132,7 @@ import {
   DeleteDomainWhiteRulesRequest,
   DescribeTlsVersionRequest,
   DescribeCiphersDetailResponse,
-  ModifyDomainsCLSStatusResponse,
+  DescribeCustomRuleListRequest,
   DescribeHostLimitResponse,
   PostAttackDownloadTaskResponse,
   ModifySpartaProtectionModeResponse,
@@ -140,6 +144,7 @@ import {
   IpAccessControlData,
   PortItem,
   WafThreatenIntelligenceDetails,
+  CreateAccessExportResponse,
   DescribeDomainWhiteRulesRequest,
   ModifyHostStatusResponse,
   ModifyCustomRuleStatusRequest,
@@ -162,6 +167,7 @@ import {
   CdcRegion,
   AccessValueInfo,
   DeleteIpAccessControlResponse,
+  ModifyCustomWhiteRuleRequest,
   DescribeWafInfoResponse,
   AccessLogInfo,
   InstanceInfo,
@@ -176,7 +182,7 @@ import {
   DescribeHostRequest,
   ModifyAreaBanStatusResponse,
   FindAllDomainDetail,
-  AddSpartaProtectionAutoResponse,
+  DeleteCustomRuleRequest,
   ModifyDomainWhiteRuleResponse,
   ExportAccessInfo,
   ModifyWafAutoDenyRulesRequest,
@@ -205,7 +211,6 @@ import {
   DescribeAccessHistogramResponse,
   ModifyHostFlowModeResponse,
   DeleteAttackDownloadRecordRequest,
-  DescribeAccessIndexResponse,
   AddCustomWhiteRuleRequest,
   AddDomainWhiteRuleRequest,
   UpsertIpAccessControlResponse,
@@ -215,9 +220,9 @@ import {
   DownloadAttackRecordInfo,
   DescribeRuleLimitResponse,
   DescribeWafThreatenIntelligenceRequest,
-  DescribeHostLimitRequest,
+  DescribeAccessIndexResponse,
   DescribeAccessExportsResponse,
-  CreateAccessExportResponse,
+  DeleteCustomRuleResponse,
   AccessLogItem,
   ClbDomainsInfo,
   DescribeHostResponse,
@@ -232,6 +237,7 @@ import {
   DescribeUserDomainInfoResponse,
   ModifyHostStatusRequest,
   TLSVersion,
+  ModifyCustomRuleResponse,
   LoadBalancer,
   RefreshAccessCheckResultResponse,
 } from "./waf_models"
@@ -740,6 +746,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 删除自定义规则
+   */
+  async DeleteCustomRule(
+    req: DeleteCustomRuleRequest,
+    cb?: (error: string, rep: DeleteCustomRuleResponse) => void
+  ): Promise<DeleteCustomRuleResponse> {
+    return this.request("DeleteCustomRule", req, cb)
+  }
+
+  /**
    * waf斯巴达-删除防护域名
    */
   async DeleteSpartaProtection(
@@ -847,6 +863,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeWafAutoDenyRulesResponse) => void
   ): Promise<DescribeWafAutoDenyRulesResponse> {
     return this.request("DescribeWafAutoDenyRules", req, cb)
+  }
+
+  /**
+   * 获取防护配置中的访问控制策略列表
+   */
+  async DescribeCustomRuleList(
+    req: DescribeCustomRuleListRequest,
+    cb?: (error: string, rep: DescribeCustomRuleListResponse) => void
+  ): Promise<DescribeCustomRuleListResponse> {
+    return this.request("DescribeCustomRuleList", req, cb)
   }
 
   /**
@@ -960,6 +986,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribePolicyStatusResponse) => void
   ): Promise<DescribePolicyStatusResponse> {
     return this.request("DescribePolicyStatus", req, cb)
+  }
+
+  /**
+   * 编辑自定义规则
+   */
+  async ModifyCustomRule(
+    req: ModifyCustomRuleRequest,
+    cb?: (error: string, rep: ModifyCustomRuleResponse) => void
+  ): Promise<ModifyCustomRuleResponse> {
+    return this.request("ModifyCustomRule", req, cb)
   }
 
   /**

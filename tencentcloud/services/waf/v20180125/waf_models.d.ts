@@ -420,6 +420,23 @@ export interface AddDomainWhiteRuleResponse {
     RequestId?: string;
 }
 /**
+ * DescribeHostLimit请求参数结构体
+ */
+export interface DescribeHostLimitRequest {
+    /**
+     * 添加的域名
+     */
+    Domain: string;
+    /**
+     * 实例id
+     */
+    InstanceID?: string;
+    /**
+     * 流量来源
+     */
+    AlbType?: string;
+}
+/**
  * DescribeIpAccessControl返回参数结构体
  */
 export interface DescribeIpAccessControlResponse {
@@ -1149,9 +1166,9 @@ export interface DescribeUserClbWafRegionsResponse {
     RequestId?: string;
 }
 /**
- * ModifyCustomWhiteRule请求参数结构体
+ * ModifyCustomRule请求参数结构体
  */
-export interface ModifyCustomWhiteRuleRequest {
+export interface ModifyCustomRuleRequest {
     /**
      * 编辑的域名
      */
@@ -1165,21 +1182,36 @@ export interface ModifyCustomWhiteRuleRequest {
      */
     RuleName: string;
     /**
-     * 放行时是否继续执行其它检查逻辑，继续执行地域封禁防护：geoip、继续执行CC策略防护：cc、继续执行WEB应用防护：owasp、继续执行AI引擎防护：ai、继续执行信息防泄漏防护：antileakage。如果勾选多个，则以“，”串接。
+     * 执行动作，0：放行、1：阻断、2：人机识别、3：观察、4：重定向
      */
-    Bypass: string;
-    /**
-     * 优先级，1~100的整数，数字越小，代表这条规则的执行优先级越高。
-     */
-    SortId: number;
-    /**
-     * 规则生效截止时间，0：永久生效，其它值为对应时间的时间戳。
-     */
-    ExpireTime: number;
+    RuleAction: string;
     /**
      * 匹配条件数组
      */
     Strategies: Array<Strategy>;
+    /**
+     * WAF的版本，clb-waf代表负载均衡WAF、sparta-waf代表SaaS WAF，默认是sparta-waf。
+     */
+    Edition?: string;
+    /**
+     * 动作为重定向的时候重定向URL，默认为"/"
+     */
+    Redirect?: string;
+    /**
+     * 放行时是否继续执行其它检查逻辑，继续执行地域封禁防护：geoip、继续执行CC策略防护：cc、继续执行WEB应用防护：owasp、继续执行AI引擎防护：ai、继续执行信息防泄漏防护：antileakage。如果多个勾选那么以,串接。
+  默认是"geoip,cc,owasp,ai,antileakage"
+     */
+    Bypass?: string;
+    /**
+     * 优先级，1~100的整数，数字越小，代表这条规则的执行优先级越高。
+  默认是100
+     */
+    SortId?: number;
+    /**
+     * 规则生效截止时间，0：永久生效，其它值为对应时间的时间戳。
+  默认是0
+     */
+    ExpireTime?: number;
 }
 /**
  * DeleteCustomWhiteRule请求参数结构体
@@ -1239,6 +1271,15 @@ export interface ModifyProtectionStatusResponse {
     RequestId?: string;
 }
 /**
+ * AddSpartaProtectionAuto返回参数结构体
+ */
+export interface AddSpartaProtectionAutoResponse {
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * ModifyWafAutoDenyStatus请求参数结构体
  */
 export interface ModifyWafAutoDenyStatusRequest {
@@ -1246,6 +1287,23 @@ export interface ModifyWafAutoDenyStatusRequest {
      * WAF 自动封禁配置项
      */
     WafAutoDenyDetails: AutoDenyDetail;
+}
+/**
+ * DescribeCustomRuleList返回参数结构体
+ */
+export interface DescribeCustomRuleListResponse {
+    /**
+     * 规则详情
+     */
+    RuleList: Array<DescribeCustomRulesRspRuleListItem>;
+    /**
+     * 规则条数
+     */
+    TotalCount: string;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * bot的趋势图对象
@@ -1267,6 +1325,15 @@ export interface BotStatPointItem {
      * Key对应的页面展示内容
      */
     Label: string;
+}
+/**
+ * ModifyDomainsCLSStatus返回参数结构体
+ */
+export interface ModifyDomainsCLSStatusResponse {
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * ModifyAccessPeriod返回参数结构体
@@ -2537,13 +2604,33 @@ export interface DescribeCiphersDetailResponse {
     RequestId?: string;
 }
 /**
- * ModifyDomainsCLSStatus返回参数结构体
+ * DescribeCustomRuleList请求参数结构体
  */
-export interface ModifyDomainsCLSStatusResponse {
+export interface DescribeCustomRuleListRequest {
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     * 域名
      */
-    RequestId?: string;
+    Domain: string;
+    /**
+     * 偏移
+     */
+    Offset: number;
+    /**
+     * 容量
+     */
+    Limit: number;
+    /**
+     * 过滤数组,name可以是如下的值： RuleID,RuleName,Match
+     */
+    Filters?: Array<FiltersItemNew>;
+    /**
+     * asc或者desc
+     */
+    Order?: string;
+    /**
+     * exp_ts或者mod_ts
+     */
+    By?: string;
 }
 /**
  * DescribeHostLimit返回参数结构体
@@ -2694,6 +2781,19 @@ export interface WafThreatenIntelligenceDetails {
      * 最后更新时间
      */
     LastUpdateTime?: string;
+}
+/**
+ * CreateAccessExport返回参数结构体
+ */
+export interface CreateAccessExportResponse {
+    /**
+     * 日志导出ID。
+     */
+    ExportId: string;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * DescribeDomainWhiteRules请求参数结构体
@@ -3136,6 +3236,39 @@ export interface DeleteIpAccessControlResponse {
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * ModifyCustomWhiteRule请求参数结构体
+ */
+export interface ModifyCustomWhiteRuleRequest {
+    /**
+     * 编辑的域名
+     */
+    Domain: string;
+    /**
+     * 编辑的规则ID
+     */
+    RuleId: number;
+    /**
+     * 编辑的规则名称
+     */
+    RuleName: string;
+    /**
+     * 放行时是否继续执行其它检查逻辑，继续执行地域封禁防护：geoip、继续执行CC策略防护：cc、继续执行WEB应用防护：owasp、继续执行AI引擎防护：ai、继续执行信息防泄漏防护：antileakage。如果勾选多个，则以“，”串接。
+     */
+    Bypass: string;
+    /**
+     * 优先级，1~100的整数，数字越小，代表这条规则的执行优先级越高。
+     */
+    SortId: number;
+    /**
+     * 规则生效截止时间，0：永久生效，其它值为对应时间的时间戳。
+     */
+    ExpireTime: number;
+    /**
+     * 匹配条件数组
+     */
+    Strategies: Array<Strategy>;
 }
 /**
  * DescribeWafInfo返回参数结构体
@@ -3602,13 +3735,21 @@ export interface FindAllDomainDetail {
     IsWafDomain: number;
 }
 /**
- * AddSpartaProtectionAuto返回参数结构体
+ * DeleteCustomRule请求参数结构体
  */
-export interface AddSpartaProtectionAutoResponse {
+export interface DeleteCustomRuleRequest {
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     * 删除的域名
      */
-    RequestId?: string;
+    Domain: string;
+    /**
+     * 删除的规则ID
+     */
+    RuleId: string;
+    /**
+     * WAF的版本，clb-waf代表负载均衡WAF、sparta-waf代表SaaS WAF，默认是sparta-waf。
+     */
+    Edition?: string;
 }
 /**
  * ModifyDomainWhiteRule返回参数结构体
@@ -4281,29 +4422,6 @@ export interface DeleteAttackDownloadRecordRequest {
     Id: number;
 }
 /**
- * DescribeAccessIndex返回参数结构体
- */
-export interface DescribeAccessIndexResponse {
-    /**
-     * 是否生效，true表示生效，false表示未生效
-     */
-    Status?: boolean;
-    /**
-     * 索引配置信息
-  注意：此字段可能返回 null，表示取不到有效值。
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Rule?: AccessRuleInfo;
-    /**
-     * 索引修改时间，初始值为索引创建时间。
-     */
-    ModifyTime?: string;
-    /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
-/**
  * AddCustomWhiteRule请求参数结构体
  */
 export interface AddCustomWhiteRuleRequest {
@@ -4499,21 +4617,27 @@ export interface DescribeRuleLimitResponse {
  */
 export declare type DescribeWafThreatenIntelligenceRequest = null;
 /**
- * DescribeHostLimit请求参数结构体
+ * DescribeAccessIndex返回参数结构体
  */
-export interface DescribeHostLimitRequest {
+export interface DescribeAccessIndexResponse {
     /**
-     * 添加的域名
+     * 是否生效，true表示生效，false表示未生效
      */
-    Domain: string;
+    Status?: boolean;
     /**
-     * 实例id
+     * 索引配置信息
+  注意：此字段可能返回 null，表示取不到有效值。
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    InstanceID?: string;
+    Rule?: AccessRuleInfo;
     /**
-     * 流量来源
+     * 索引修改时间，初始值为索引创建时间。
      */
-    AlbType?: string;
+    ModifyTime?: string;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * DescribeAccessExports返回参数结构体
@@ -4534,13 +4658,9 @@ export interface DescribeAccessExportsResponse {
     RequestId?: string;
 }
 /**
- * CreateAccessExport返回参数结构体
+ * DeleteCustomRule返回参数结构体
  */
-export interface CreateAccessExportResponse {
-    /**
-     * 日志导出ID。
-     */
-    ExportId: string;
+export interface DeleteCustomRuleResponse {
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -4848,6 +4968,15 @@ export interface TLSVersion {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     VersionName: string;
+}
+/**
+ * ModifyCustomRule返回参数结构体
+ */
+export interface ModifyCustomRuleResponse {
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * 负载均衡的监听器

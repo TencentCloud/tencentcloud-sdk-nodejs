@@ -158,6 +158,10 @@ HYBRID_PAID:
    * 服务分类
    */
   ServiceCategory?: string
+  /**
+   * 服务的启动命令
+   */
+  Command?: string
 }
 
 /**
@@ -917,115 +921,115 @@ export interface Service {
   /**
    * 服务组id
    */
-  ServiceGroupId: string
+  ServiceGroupId?: string
   /**
    * 服务id
    */
-  ServiceId: string
+  ServiceId?: string
   /**
    * 服务组名
    */
-  ServiceGroupName: string
+  ServiceGroupName?: string
   /**
    * 服务描述
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ServiceDescription: string
+  ServiceDescription?: string
   /**
    * 服务的详细信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ServiceInfo: ServiceInfo
+  ServiceInfo?: ServiceInfo
   /**
    * 集群id
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ClusterId: string
+  ClusterId?: string
   /**
    * 地域
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Region: string
+  Region?: string
   /**
    * 命名空间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Namespace: string
+  Namespace?: string
   /**
    * 付费类型
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ChargeType: string
+  ChargeType?: string
   /**
    * 包年包月服务的资源组id，按量计费的服务为空
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ResourceGroupId: string
+  ResourceGroupId?: string
   /**
    * 包年包月服务对应的资源组名字
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ResourceGroupName: string
+  ResourceGroupName?: string
   /**
    * 服务的标签
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Tags: Array<Tag>
+  Tags?: Array<Tag>
   /**
    * 服务所在的 ingress 的 name
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  IngressName: string
+  IngressName?: string
   /**
    * 创建者
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CreatedBy: string
+  CreatedBy?: string
   /**
    * 创建时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CreateTime: string
+  CreateTime?: string
   /**
    * 更新时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  UpdateTime: string
+  UpdateTime?: string
   /**
    * 主账号
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Uin: string
+  Uin?: string
   /**
    * 子账号
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SubUin: string
+  SubUin?: string
   /**
    * app_id
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  AppId: number
+  AppId?: number
   /**
    * 服务的业务状态
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  BusinessStatus: string
+  BusinessStatus?: string
   /**
    * 已废弃
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ServiceLimit: ServiceLimit
+  ServiceLimit?: ServiceLimit
   /**
    * 已废弃
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ScheduledAction: ScheduledAction
+  ScheduledAction?: ScheduledAction
   /**
    * 服务创建失败的原因，创建成功后该字段为默认值 CREATE_SUCCEED
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CreateFailedReason: string
+  CreateFailedReason?: string
   /**
    * 服务状态
 CREATING 创建中
@@ -1038,34 +1042,34 @@ Pending 启动中
 Waiting 就绪中
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Status: string
+  Status?: string
   /**
    * 费用信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  BillingInfo: string
+  BillingInfo?: string
   /**
    * 模型权重
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Weight: number
+  Weight?: number
   /**
    * 服务的创建来源
 AUTO_ML: 来自自动学习的一键发布
 DEFAULT: 其他来源
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CreateSource: string
+  CreateSource?: string
   /**
    * 版本号
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Version: string
+  Version?: string
   /**
    * 服务组下服务的最高版本号
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  LatestVersion: string
+  LatestVersion?: string
 }
 
 /**
@@ -1839,6 +1843,7 @@ Stopping 停止中
   Status: string
   /**
    * 工作负载的状况信息
+   * @deprecated
    */
   StatefulSetCondition?: Array<StatefulSetCondition>
   /**
@@ -2176,6 +2181,10 @@ HYBRID_PAID:
    * 是否开启模型的加速, 仅对StableDiffusion(动态加速)格式的模型有效。默认不开启
    */
   ModelTurboEnable?: boolean
+  /**
+   * 服务的启动命令
+   */
+  Command?: string
 }
 
 /**
@@ -2491,6 +2500,37 @@ export interface DeleteBatchTaskRequest {
    * 跑批任务ID
    */
   BatchTaskId: string
+}
+
+/**
+ * 服务的调用信息，服务组下唯一
+ */
+export interface InferGatewayCallInfo {
+  /**
+   * 内网http调用地址
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VpcHttpAddr: string
+  /**
+   * 内网https调用地址
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VpcHttpsAddr: string
+  /**
+   * 内网grpc调用地址
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VpcGrpcTlsAddr: string
+  /**
+   * 可访问的vpcid
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VpcId: string
+  /**
+   * 后端ip对应的子网
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SubnetId: string
 }
 
 /**
@@ -3184,34 +3224,14 @@ export interface DescribeBillingSpecsRequest {
 }
 
 /**
- * 服务的调用信息，服务组下唯一
+ * 推理代码的信息
  */
-export interface InferGatewayCallInfo {
+export interface InferCodeInfo {
   /**
-   * 内网http调用地址
+   * 推理代码所在的cos详情
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  VpcHttpAddr: string
-  /**
-   * 内网https调用地址
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  VpcHttpsAddr: string
-  /**
-   * 内网grpc调用地址
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  VpcGrpcTlsAddr: string
-  /**
-   * 可访问的vpcid
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  VpcId: string
-  /**
-   * 后端ip对应的子网
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SubnetId: string
+  CosPathInfo?: CosPathInfo
 }
 
 /**
@@ -3844,6 +3864,21 @@ HYBRID_PAID:
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ModelTurboEnable?: boolean
+  /**
+   * 挂载
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VolumeMount?: VolumeMount
+  /**
+   * 推理代码信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InferCodeInfo?: InferCodeInfo
+  /**
+   * 服务的启动命令
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Command?: string
 }
 
 /**
@@ -4196,6 +4231,11 @@ export interface StatefulSetCondition {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   LastTransitionTime: string
+  /**
+   * 上次更新的时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LastUpdateTime?: string
 }
 
 /**
@@ -5223,7 +5263,7 @@ export interface VolumeMount {
    */
   CFSConfig: CFSConfig
   /**
-   * 挂载源类型
+   * 挂载源类型，CFS、COS，默认为CFS
    */
   VolumeSourceType?: string
 }

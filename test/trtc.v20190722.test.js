@@ -128,6 +128,16 @@ it("trtc.v20190722.CreatePicture", async function () {
     }
 })
 
+it("trtc.v20190722.DescribeTRTCRealTimeScaleData", async function () {
+    try {
+       const data = await client.DescribeTRTCRealTimeScaleData({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("trtc.v20190722.RemoveUser", async function () {
     try {
        const data = await client.RemoveUser({})
@@ -161,6 +171,16 @@ it("trtc.v20190722.DescribeUserEvent", async function () {
 it("trtc.v20190722.StartMCUMixTranscode", async function () {
     try {
        const data = await client.StartMCUMixTranscode({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("trtc.v20190722.DescribeTRTCMarketScaleData", async function () {
+    try {
+       const data = await client.DescribeTRTCMarketScaleData({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -328,6 +348,16 @@ it("trtc.v20190722.UpdatePublishCdnStream", async function () {
     }
 })
 
+it("trtc.v20190722.DescribeTRTCRealTimeQualityData", async function () {
+    try {
+       const data = await client.DescribeTRTCRealTimeQualityData({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("trtc.v20190722.DeleteCloudRecording", async function () {
     try {
        const data = await client.DeleteCloudRecording({})
@@ -341,6 +371,16 @@ it("trtc.v20190722.DeleteCloudRecording", async function () {
 it("trtc.v20190722.DescribePicture", async function () {
     try {
        const data = await client.DescribePicture({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("trtc.v20190722.DescribeTRTCMarketQualityData", async function () {
+    try {
+       const data = await client.DescribeTRTCMarketQualityData({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

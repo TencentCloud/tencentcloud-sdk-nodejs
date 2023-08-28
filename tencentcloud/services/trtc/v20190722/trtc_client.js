@@ -240,6 +240,19 @@ TRTC 的一个房间中可能会同时存在多路音视频流，您可以通过
         return this.request("CreatePicture", req, cb);
     }
     /**
+     * 查询TRTC监控仪表盘-实时监控规模指标（会返回下列指标）
+-userCount（在线用户数）
+-roomCount（在线房间数）
+注意：
+1.调用接口需开通监控仪表盘【基础版】和【进阶版】，监控仪表盘【免费版】不支持调用，监控仪表盘版本功能和计费说明：https://cloud.tencent.com/document/product/647/81331。
+2.查询时间范围根据监控仪表盘功能版本而定，基础版可查近3小时，进阶版可查近12小时。
+xa0
+3.除此之外您也可以通过订阅TRTC包月套餐(https://buy.cloud.tencent.com/trtc)尊享版或旗舰版解锁此接口的调用能力，请在开通包月套餐后，请提交工单联系售后解锁调用能力https://console.cloud.tencent.com/workorder/category
+     */
+    async DescribeTRTCRealTimeScaleData(req, cb) {
+        return this.request("DescribeTRTCRealTimeScaleData", req, cb);
+    }
+    /**
      * 接口说明：将用户从房间移出，适用于主播/房主/管理员踢人等场景。支持所有平台，Android、iOS、Windows 和 macOS 需升级到 TRTC SDK 6.6及以上版本。
      */
     async RemoveUser(req, cb) {
@@ -282,6 +295,19 @@ TRTC 的一个房间中可能会同时存在多路音视频流，您可以通过
      */
     async StartMCUMixTranscode(req, cb) {
         return this.request("StartMCUMixTranscode", req, cb);
+    }
+    /**
+     * 查询TRTC监控仪表盘-数据大盘规模指标（会返回通话人数，通话房间数，峰值同时在线人数，峰值同时在线频道数）
+userCount：通话人数，
+roomCount：通话房间数，从有用户加入频道到所有用户离开频道计为一个通话频道。
+peakCurrentChannels：峰值同时在线频道数。
+peakCurrentUsers：峰值同时在线人数。
+注意：
+1.调用接口需开通监控仪表盘【基础版】和【进阶版】，监控仪表盘【免费版】不支持调用，监控仪表盘版本功能和计费说明：https://cloud.tencent.com/document/product/647/81331。
+2.查询时间范围根据监控仪表盘功能版本而定，【基础版】可查近30天，【进阶版】可查近60天。
+     */
+    async DescribeTRTCMarketScaleData(req, cb) {
+        return this.request("DescribeTRTCMarketScaleData", req, cb);
     }
     /**
      * 接口说明：
@@ -424,6 +450,17 @@ TRTC 的一个房间中可能会同时存在多路音视频流，您可以通过
         return this.request("UpdatePublishCdnStream", req, cb);
     }
     /**
+     * 查询TRTC监控仪表盘-实时监控质量指标（会返回下列指标）
+-视频卡顿率
+-音频卡顿率
+注意：
+1.调用接口需开通监控仪表盘【基础版】和【进阶版】，监控仪表盘【免费版】不支持调用，监控仪表盘版本功能和计费说明：https://cloud.tencent.com/document/product/647/81331。
+2.查询时间范围根据监控仪表盘功能版本而定，基础版可查近3小时，进阶版可查近12小时。
+     */
+    async DescribeTRTCRealTimeQualityData(req, cb) {
+        return this.request("DescribeTRTCRealTimeQualityData", req, cb);
+    }
+    /**
      * 成功开启录制后，可以使用此接口来停止录制任务。停止录制成功后不代表文件全部传输完成，如果未完成后台将会继续上传文件，成功后通过事件回调通知客户文件全部传输完成状态。
      */
     async DeleteCloudRecording(req, cb) {
@@ -434,6 +471,20 @@ TRTC 的一个房间中可能会同时存在多路音视频流，您可以通过
      */
     async DescribePicture(req, cb) {
         return this.request("DescribePicture", req, cb);
+    }
+    /**
+     * 查询TRTC监控仪表盘-数据大盘质量指标（包括下列指标）
+joinSuccessRate：加入频道成功率。
+joinSuccessIn5sRate：5s内加入频道成功率。
+audioFreezeRate：音频卡顿率。
+videoFreezeRate：视频卡顿率。
+networkDelay ：网络延迟率。
+注意：
+1.调用接口需开通监控仪表盘【基础版】和【进阶版】，监控仪表盘【免费版】不支持调用，监控仪表盘版本功能和计费说明：https://cloud.tencent.com/document/product/647/81331。
+2.查询时间范围根据监控仪表盘功能版本而定，【基础版】可查近30天，【进阶版】可查近60天。
+     */
+    async DescribeTRTCMarketQualityData(req, cb) {
+        return this.request("DescribeTRTCMarketQualityData", req, cb);
     }
     /**
      * 停止转推任务。

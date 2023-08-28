@@ -153,13 +153,48 @@ export interface McuVideoParams {
     BackgroundRenderMode?: number;
 }
 /**
- * RemoveUserByStrRoomId返回参数结构体
+ * DescribeTRTCRealTimeScaleData请求参数结构体
  */
-export interface RemoveUserByStrRoomIdResponse {
+export interface DescribeTRTCRealTimeScaleDataRequest {
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     * 用户SdkAppId（如：1400xxxxxx）
      */
-    RequestId?: string;
+    SdkAppId: string;
+    /**
+     * 开始时间，unix时间戳，单位：秒（查询时间范围根据监控仪表盘功能版本而定，基础版可查近3小时，进阶版可查近12小时）
+     */
+    StartTime: number;
+    /**
+     * 结束时间，unix时间戳，单位：秒
+     */
+    EndTime: number;
+    /**
+     * 房间ID
+     */
+    RoomId?: string;
+}
+/**
+ * DescribeTRTCMarketScaleData请求参数结构体
+ */
+export interface DescribeTRTCMarketScaleDataRequest {
+    /**
+     * 用户SdkAppId
+     */
+    SdkAppId: string;
+    /**
+     * 查询开始时间，格式为YYYY-MM-DD。（查询时间范围根据监控仪表盘功能版本而定，【基础版】可查近30天，【进阶版】可查近60天）
+     */
+    StartTime: string;
+    /**
+     * 查询结束时间，格式为YYYY-MM-DD。
+     */
+    EndTime: string;
+    /**
+     * 返回数据的粒度，支持设为以下值：
+  d：按天。此时返回查询时间范围内 UTC 时间为零点的数据。
+  h：按小时。此时返回查询时间范围内 UTC 时间为整小时的数据。
+     */
+    Period: string;
 }
 /**
  * 音量布局SEI参数，可以自定义AppData和PayloadType类型。
@@ -375,6 +410,55 @@ export interface VideoEncode {
     Gop: number;
 }
 /**
+ * MCU混流布局参数
+ */
+export interface LayoutParams {
+    /**
+     * 混流布局模板ID，0为悬浮模板(默认);1为九宫格模板;2为屏幕分享模板;3为画中画模板;4为自定义模板。
+     */
+    Template?: number;
+    /**
+     * 屏幕分享模板、悬浮模板、画中画模板中有效，代表大画面对应的用户ID。
+     */
+    MainVideoUserId?: string;
+    /**
+     * 屏幕分享模板、悬浮模板、画中画模板中有效，代表大画面对应的流类型，0为摄像头，1为屏幕分享。左侧大画面为web用户时此值填0。
+     */
+    MainVideoStreamType?: number;
+    /**
+     * 画中画模板中有效，代表小画面的布局参数。
+     */
+    SmallVideoLayoutParams?: SmallVideoLayoutParams;
+    /**
+     * 屏幕分享模板有效。设置为1时代表大画面居右，小画面居左布局。默认为0。
+     */
+    MainVideoRightAlign?: number;
+    /**
+     * 指定混视频的用户ID列表。设置此参数后，输出流混合此参数中包含用户的音视频，以及其他用户的纯音频。悬浮模板、九宫格、屏幕分享模板有效，最多可设置16个用户。
+     */
+    MixVideoUids?: Array<string>;
+    /**
+     * 自定义模板中有效，指定用户视频在混合画面中的位置。
+     */
+    PresetLayoutConfig?: Array<PresetLayoutConfig>;
+    /**
+     * 自定义模板中有效，设置为1时代表启用占位图功能，0时代表不启用占位图功能，默认为0。启用占位图功能时，在预设位置的用户没有上行视频时可显示对应的占位图。
+     */
+    PlaceHolderMode?: number;
+    /**
+     * 悬浮模板、九宫格、屏幕分享模板生效，用于控制纯音频上行是否占用画面布局位置。设置为0是代表后台默认处理方式，悬浮小画面占布局位置，九宫格画面占布局位置、屏幕分享小画面不占布局位置；设置为1时代表纯音频上行占布局位置；设置为2时代表纯音频上行不占布局位置。默认为0。
+     */
+    PureAudioHoldPlaceMode?: number;
+    /**
+     * 水印参数。
+     */
+    WaterMarkParams?: WaterMarkParams;
+    /**
+     * 屏幕分享模板、悬浮模板、九宫格模板、画中画模版有效，画面在输出时的显示模式：0为裁剪，1为缩放，2为缩放并显示黑底，不填采用后台的默认渲染方式（屏幕分享大画面为缩放，其他为裁剪）。若此参数不生效，请提交工单寻求帮助。
+     */
+    RenderMode?: number;
+}
+/**
  * StopMCUMixTranscodeByStrRoomId返回参数结构体
  */
 export interface StopMCUMixTranscodeByStrRoomIdResponse {
@@ -467,6 +551,20 @@ export interface DescribeCallDetailInfoRequest {
   DataType 为null，UserIds长度不超过100，PageSize最大不超过100。
      */
     PageSize?: number;
+}
+/**
+ * DescribeTRTCMarketScaleData返回参数结构体
+ */
+export interface DescribeTRTCMarketScaleDataResponse {
+    /**
+     * TRTC监控数据出参
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Data?: TRTCDataResult;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * ModifyPicture请求参数结构体
@@ -685,33 +783,18 @@ export interface DescribeTRTCMarketQualityMetricDataRequest {
     Period: string;
 }
 /**
- * 事件信息，包括，事件时间戳，事件ID,
+ * DescribeTRTCRealTimeScaleData返回参数结构体
  */
-export interface EventMessage {
+export interface DescribeTRTCRealTimeScaleDataResponse {
     /**
-     * 视频流类型：
-  0：与视频无关的事件；
-  2：视频为大画面；
-  3：视频为小画面；
-  7：视频为旁路画面；
+     * TRTC监控数据出参
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Type: number;
+    Data?: TRTCDataResult;
     /**
-     * 事件上报的时间戳，unix时间（1589891188801ms)
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
-    Time: number;
-    /**
-     * 事件Id：分为sdk的事件和webrtc的事件，详情见：附录/事件 ID 映射表：https://cloud.tencent.com/document/product/647/44916
-     */
-    EventId: number;
-    /**
-     * 事件的第一个参数，如视频分辨率宽
-     */
-    ParamOne: number;
-    /**
-     * 事件的第二个参数，如视频分辨率高
-     */
-    ParamTwo: number;
+    RequestId?: string;
 }
 /**
  * DescribeRecordStatistic请求参数结构体
@@ -870,6 +953,20 @@ export interface DescribeCallDetailInfoResponse {
     RequestId?: string;
 }
 /**
+ * DescribeTRTCRealTimeQualityData返回参数结构体
+ */
+export interface DescribeTRTCRealTimeQualityDataResponse {
+    /**
+     * TRTC监控数据出参
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Data?: TRTCDataResult;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * 混流自定义裁剪参数
  */
 export interface McuCustomCrop {
@@ -920,6 +1017,20 @@ export interface MixTranscodeParams {
      * 录制音频转码参数，注意如果设置了这个参数，那么里面的字段都是必填的，没有默认值，如果不填这个参数，那么取值为默认值。
      */
     AudioParams?: AudioParams;
+}
+/**
+ * DescribeTRTCMarketQualityData返回参数结构体
+ */
+export interface DescribeTRTCMarketQualityDataResponse {
+    /**
+     * TRTC监控数据出参
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Data?: TRTCDataResult;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * 画中画模板中有效，代表小画面的布局参数
@@ -1067,29 +1178,17 @@ export interface DescribeRoomInfoResponse {
     RequestId?: string;
 }
 /**
- * 混流布局参数。
+ * DismissRoom请求参数结构体
  */
-export interface McuLayoutParams {
+export interface DismissRoomRequest {
     /**
-     * 布局模式：动态布局（1：悬浮布局（默认），2：屏幕分享布局，3：九宫格布局），静态布局（4：自定义布局）。
+     * TRTC的SDKAppId。
      */
-    MixLayoutMode?: number;
+    SdkAppId: number;
     /**
-     * 纯音频上行是否占布局位置，只在动态布局中有效。0表示纯音频不占布局位置，1表示纯音频占布局位置，不填默认为0。
+     * 房间号。
      */
-    PureAudioHoldPlaceMode?: number;
-    /**
-     * 自定义模板中有效，指定用户视频在混合画面中的位置。
-     */
-    MixLayoutList?: Array<McuLayout>;
-    /**
-     * 指定动态布局中悬浮布局和屏幕分享布局的大画面信息，只在悬浮布局和屏幕分享布局有效。
-     */
-    MaxVideoUser?: MaxVideoUser;
-    /**
-     * 屏幕分享模板、悬浮模板、九宫格模版有效，画面在输出时的显示模式：0为裁剪，1为缩放，2为缩放并显示黑底
-     */
-    RenderMode?: number;
+    RoomId: number;
 }
 /**
  * DescribeTRTCRealTimeQualityMetricData请求参数结构体
@@ -1211,6 +1310,15 @@ export interface DescribeUserInfoResponse {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     UserList: Array<UserInformation>;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * RemoveUserByStrRoomId返回参数结构体
+ */
+export interface RemoveUserByStrRoomIdResponse {
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1647,17 +1755,49 @@ export interface RemoveUserRequest {
     UserIds: Array<string>;
 }
 /**
- * DismissRoom请求参数结构体
+ * TRTC数据大盘/实时监控 API接口数据出参
  */
-export interface DismissRoomRequest {
+export interface TRTCDataResult {
     /**
-     * TRTC的SDKAppId。
+     * StatementID值，监控仪表盘下固定为0。
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    SdkAppId: number;
+    StatementID?: number;
     /**
-     * 房间号。
+     * 查询结果数据，以Columns-Values形式返回。
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    RoomId: number;
+    Series?: Array<SeriesInfos>;
+    /**
+     * Total值，监控仪表盘功能下固定为1。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Total?: number;
+}
+/**
+ * 混流布局参数。
+ */
+export interface McuLayoutParams {
+    /**
+     * 布局模式：动态布局（1：悬浮布局（默认），2：屏幕分享布局，3：九宫格布局），静态布局（4：自定义布局）。
+     */
+    MixLayoutMode?: number;
+    /**
+     * 纯音频上行是否占布局位置，只在动态布局中有效。0表示纯音频不占布局位置，1表示纯音频占布局位置，不填默认为0。
+     */
+    PureAudioHoldPlaceMode?: number;
+    /**
+     * 自定义模板中有效，指定用户视频在混合画面中的位置。
+     */
+    MixLayoutList?: Array<McuLayout>;
+    /**
+     * 指定动态布局中悬浮布局和屏幕分享布局的大画面信息，只在悬浮布局和屏幕分享布局有效。
+     */
+    MaxVideoUser?: MaxVideoUser;
+    /**
+     * 屏幕分享模板、悬浮模板、九宫格模版有效，画面在输出时的显示模式：0为裁剪，1为缩放，2为缩放并显示黑底
+     */
+    RenderMode?: number;
 }
 /**
  * DescribeUnusualEvent请求参数结构体
@@ -1776,53 +1916,25 @@ export interface DescribeTRTCRealTimeQualityMetricDataResponse {
     RequestId?: string;
 }
 /**
- * MCU混流布局参数
+ * DescribeTRTCRealTimeQualityData请求参数结构体
  */
-export interface LayoutParams {
+export interface DescribeTRTCRealTimeQualityDataRequest {
     /**
-     * 混流布局模板ID，0为悬浮模板(默认);1为九宫格模板;2为屏幕分享模板;3为画中画模板;4为自定义模板。
+     * 用户SdkAppId（如：1400xxxxxx）
      */
-    Template?: number;
+    SdkAppId: string;
     /**
-     * 屏幕分享模板、悬浮模板、画中画模板中有效，代表大画面对应的用户ID。
+     * 开始时间，unix时间戳，单位：秒（查询时间范围根据监控仪表盘功能版本而定，基础版可查近3小时，进阶版可查近12小时）
      */
-    MainVideoUserId?: string;
+    StartTime: number;
     /**
-     * 屏幕分享模板、悬浮模板、画中画模板中有效，代表大画面对应的流类型，0为摄像头，1为屏幕分享。左侧大画面为web用户时此值填0。
+     * 结束时间，unix时间戳，单位：秒
      */
-    MainVideoStreamType?: number;
+    EndTime: number;
     /**
-     * 画中画模板中有效，代表小画面的布局参数。
+     * 房间ID
      */
-    SmallVideoLayoutParams?: SmallVideoLayoutParams;
-    /**
-     * 屏幕分享模板有效。设置为1时代表大画面居右，小画面居左布局。默认为0。
-     */
-    MainVideoRightAlign?: number;
-    /**
-     * 指定混视频的用户ID列表。设置此参数后，输出流混合此参数中包含用户的音视频，以及其他用户的纯音频。悬浮模板、九宫格、屏幕分享模板有效，最多可设置16个用户。
-     */
-    MixVideoUids?: Array<string>;
-    /**
-     * 自定义模板中有效，指定用户视频在混合画面中的位置。
-     */
-    PresetLayoutConfig?: Array<PresetLayoutConfig>;
-    /**
-     * 自定义模板中有效，设置为1时代表启用占位图功能，0时代表不启用占位图功能，默认为0。启用占位图功能时，在预设位置的用户没有上行视频时可显示对应的占位图。
-     */
-    PlaceHolderMode?: number;
-    /**
-     * 悬浮模板、九宫格、屏幕分享模板生效，用于控制纯音频上行是否占用画面布局位置。设置为0是代表后台默认处理方式，悬浮小画面占布局位置，九宫格画面占布局位置、屏幕分享小画面不占布局位置；设置为1时代表纯音频上行占布局位置；设置为2时代表纯音频上行不占布局位置。默认为0。
-     */
-    PureAudioHoldPlaceMode?: number;
-    /**
-     * 水印参数。
-     */
-    WaterMarkParams?: WaterMarkParams;
-    /**
-     * 屏幕分享模板、悬浮模板、九宫格模板、画中画模版有效，画面在输出时的显示模式：0为裁剪，1为缩放，2为缩放并显示黑底，不填采用后台的默认渲染方式（屏幕分享大画面为缩放，其他为裁剪）。若此参数不生效，请提交工单寻求帮助。
-     */
-    RenderMode?: number;
+    RoomId?: string;
 }
 /**
  * 录制的使用信息。
@@ -2086,6 +2198,16 @@ export interface StartPublishCdnStreamRequest {
      * 回推房间信息，和转推CDN参数必须要有一个。注：回推房间需使用特殊的SDK版本，如您有需求，请联系腾讯云技术支持。
      */
     FeedBackRoomParams?: Array<McuFeedBackRoomParams>;
+}
+/**
+ * SeriesInfo类型的二维数组
+ */
+export interface RowValues {
+    /**
+     * 数据值
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RowValue?: Array<number | bigint>;
 }
 /**
  * 旁路转码时长的查询结果
@@ -2396,6 +2518,15 @@ export interface DescribeCloudRecordingResponse {
     RequestId?: string;
 }
 /**
+ * DismissRoom返回参数结构体
+ */
+export interface DismissRoomResponse {
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * TRTC用户参数。
  */
 export interface MixUserInfo {
@@ -2413,13 +2544,56 @@ export interface MixUserInfo {
     RoomIdType?: number;
 }
 /**
- * DismissRoom返回参数结构体
+ * 事件信息，包括，事件时间戳，事件ID,
  */
-export interface DismissRoomResponse {
+export interface EventMessage {
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     * 视频流类型：
+  0：与视频无关的事件；
+  2：视频为大画面；
+  3：视频为小画面；
+  7：视频为旁路画面；
      */
-    RequestId?: string;
+    Type: number;
+    /**
+     * 事件上报的时间戳，unix时间（1589891188801ms)
+     */
+    Time: number;
+    /**
+     * 事件Id：分为sdk的事件和webrtc的事件，详情见：附录/事件 ID 映射表：https://cloud.tencent.com/document/product/647/44916
+     */
+    EventId: number;
+    /**
+     * 事件的第一个参数，如视频分辨率宽
+     */
+    ParamOne: number;
+    /**
+     * 事件的第二个参数，如视频分辨率高
+     */
+    ParamTwo: number;
+}
+/**
+ * DescribeTRTCMarketQualityData请求参数结构体
+ */
+export interface DescribeTRTCMarketQualityDataRequest {
+    /**
+     * 用户SdkAppId（如：1400xxxxxx）
+     */
+    SdkAppId: string;
+    /**
+     * 查询开始时间，格式为YYYY-MM-DD。（查询时间范围根据监控仪表盘功能版本而定，【基础版】可查近30天，【进阶版】可查近60天）
+     */
+    StartTime: string;
+    /**
+     * 查询结束时间，格式为YYYY-MM-DD。
+     */
+    EndTime: string;
+    /**
+     * 返回数据的粒度，支持设为以下值：
+  d：按天。此时返回查询时间范围内 UTC 时间为零点的数据。
+  h：按小时。此时返回查询时间范围内 UTC 时间为整小时的数据。
+     */
+    Period: string;
 }
 /**
  * UpdatePublishCdnStream请求参数结构体
@@ -2567,6 +2741,21 @@ export interface McuWaterMarkText {
      * 字体背景色，不配置默认为透明。常用的颜色有： 红色：0xcc0033。 黄色：0xcc9900。 绿色：0xcccc33。 蓝色：0x99CCFF。 黑色：0x000000。 白色：0xFFFFFF。 灰色：0x999999。
      */
     BackGroundColor?: string;
+}
+/**
+ * SeriesInfos类型
+ */
+export interface SeriesInfos {
+    /**
+     * 数据列
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Columns?: Array<string>;
+    /**
+     * 数据值
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Values?: Array<RowValues>;
 }
 /**
  * RemoveUserByStrRoomId请求参数结构体

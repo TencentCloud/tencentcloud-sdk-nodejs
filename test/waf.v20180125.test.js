@@ -508,6 +508,16 @@ it("waf.v20180125.DescribeDomainCountInfo", async function () {
     }
 })
 
+it("waf.v20180125.DeleteCustomRule", async function () {
+    try {
+       const data = await client.DeleteCustomRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("waf.v20180125.DeleteSpartaProtection", async function () {
     try {
        const data = await client.DeleteSpartaProtection({})
@@ -618,6 +628,16 @@ it("waf.v20180125.DescribeWafAutoDenyRules", async function () {
     }
 })
 
+it("waf.v20180125.DescribeCustomRuleList", async function () {
+    try {
+       const data = await client.DescribeCustomRuleList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("waf.v20180125.DescribeAttackOverview", async function () {
     try {
        const data = await client.DescribeAttackOverview({})
@@ -721,6 +741,16 @@ it("waf.v20180125.DescribeWafInfo", async function () {
 it("waf.v20180125.DescribePolicyStatus", async function () {
     try {
        const data = await client.DescribePolicyStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("waf.v20180125.ModifyCustomRule", async function () {
+    try {
+       const data = await client.ModifyCustomRule({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

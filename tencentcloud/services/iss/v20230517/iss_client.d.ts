@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { UpdateDeviceStatusRequest, ListDevicesRequest, DeleteRecordBackupPlanResponse, ListOrganizationChannelsRequest, DescribeAITaskResultRequest, DescribeCNAMERequest, ControlRecordTimelineRequest, DeleteOrganizationRequest, CheckDomainResponse, DescribeCNAMEResponse, UpdateOrganizationResponse, ListAITasksResponse, UpdateDeviceOrganizationRequest, UpdateDeviceOrganizationResponse, AddOrganizationResponse, DescribeDeviceRegionResponse, DescribeDomainResponse, ControlDeviceStreamResponse, DeleteRecordRetrieveTaskResponse, DescribeUserDeviceResponse, DeleteRecordPlanResponse, DescribeOrganizationResponse, UpdateUserDeviceRequest, DescribeDeviceChannelResponse, AddRecordBackupTemplateRequest, DeleteAITaskRequest, UpdateGatewayResponse, DescribeRecordRetrieveTaskRequest, DescribeAITaskRequest, RefreshDeviceChannelResponse, DeleteOrganizationResponse, DescribeRecordTemplateRequest, DeleteRecordTemplateRequest, DescribeGatewayResponse, DescribeGatewayRequest, DeleteUserDeviceRequest, AddRecordPlanResponse, ListOrganizationChannelNumbersRequest, UpdateAITaskRequest, UpgradeGatewayResponse, DeleteDomainRequest, ListRecordRetrieveTasksRequest, DeleteRecordPlanRequest, AddRecordTemplateResponse, ListRecordPlansRequest, AddRecordBackupPlanResponse, ListAITasksRequest, UpdateRecordPlanRequest, DescribeOrganizationRequest, UpdateAITaskStatusResponse, ControlRecordResponse, AddRecordPlanRequest, ListRecordTemplatesRequest, DescribeVideoDownloadUrlResponse, DescribeRecordPlanResponse, AddRecordRetrieveTaskRequest, DescribeRecordPlanRequest, ControlDevicePresetResponse, ListRecordBackupPlansResponse, DescribeDomainRequest, ListRecordPlanDevicesRequest, AddStreamAuthResponse, ListDevicesResponse, DescribeGatewayMonitorRequest, DeleteGatewayRequest, ListOrganizationChannelNumbersResponse, ListGatewayDevicesResponse, ListRecordBackupTemplatesResponse, ListRecordPlanChannelsResponse, DescribeRecordPlaybackUrlRequest, ListRecordPlansResponse, DescribeRecordTemplateResponse, DescribeAITaskResultResponse, ListRecordPlanDevicesResponse, DescribeDevicePresetResponse, UpdateRecordBackupPlanRequest, ControlRecordRequest, ControlDevicePTZResponse, ListRecordBackupPlansRequest, AddUserDeviceRequest, ListRecordBackupPlanDevicesResponse, ControlDevicePTZRequest, DescribeRecordBackupPlanRequest, DescribeRecordBackupPlanResponse, DescribeDeviceChannelRequest, UpdateUserDeviceResponse, DescribeDevicePresetRequest, ListGatewaysResponse, DescribeGatewayProtocolResponse, DescribeDomainRegionRequest, AddRecordTemplateRequest, DescribeGatewayProtocolRequest, AddAITaskRequest, DescribeVideoDownloadUrlRequest, DescribeGatewayVersionResponse, ListGatewaysRequest, DescribeGatewayVersionRequest, DescribeRecordBackupTemplateRequest, DescribeUserDeviceRequest, DescribeDeviceRegionRequest, RefreshDeviceChannelRequest, DescribeRecordFileRequest, AddStreamAuthRequest, PlayRecordRequest, CheckDomainRequest, UpgradeGatewayRequest, DescribeRecordFileResponse, ControlDevicePresetRequest, ControlDeviceStreamRequest, ListRecordRetrieveTasksResponse, ListRecordBackupPlanDevicesRequest, DeleteDomainResponse, AddRecordRetrieveTaskResponse, DeleteRecordTemplateResponse, ListRecordTemplatesResponse, DescribeAITaskResponse, UpdateRecordBackupTemplateResponse, ControlRecordTimelineResponse, DeleteRecordRetrieveTaskRequest, UpdateRecordPlanResponse, DeleteRecordBackupPlanRequest, ListRecordBackupTemplatesRequest, AddAITaskResponse, UpdateRecordTemplateRequest, DeleteRecordBackupTemplateRequest, ListGatewayDevicesRequest, DeleteAITaskResponse, AddRecordBackupTemplateResponse, PlayRecordResponse, DescribeGatewayMonitorResponse, DescribeRecordBackupTemplateResponse, AddUserDeviceResponse, DeleteGatewayResponse, DescribeRecordPlaybackUrlResponse, ListRecordPlanChannelsRequest, ListOrganizationChannelsResponse, UpdateOrganizationRequest, UpdateAITaskStatusRequest, UpdateGatewayRequest, UpdateAITaskResponse, DescribeDomainRegionResponse, AddRecordBackupPlanRequest, UpdateRecordBackupTemplateRequest, UpdateDeviceStatusResponse, DeleteUserDeviceResponse, UpdateRecordBackupPlanResponse, AddOrganizationRequest, DescribeStreamAuthResponse, DeleteRecordBackupTemplateResponse, UpdateRecordTemplateResponse, DescribeRecordRetrieveTaskResponse, DescribeStreamAuthRequest } from "./iss_models";
+import { UpdateDeviceStatusRequest, ListDevicesRequest, DeleteRecordBackupPlanResponse, ListOrganizationChannelsRequest, ListSubTasksRequest, DescribeAITaskResultRequest, DescribeCNAMERequest, ControlRecordTimelineRequest, DeleteOrganizationRequest, CheckDomainResponse, DescribeCNAMEResponse, UpdateOrganizationResponse, ListAITasksResponse, UpdateDeviceOrganizationRequest, UpdateDeviceOrganizationResponse, AddOrganizationResponse, BatchOperateDeviceResponse, DescribeDeviceRegionResponse, DescribeDomainResponse, ControlDeviceStreamResponse, DeleteRecordRetrieveTaskResponse, DescribeUserDeviceResponse, DeleteRecordPlanResponse, DescribeOrganizationResponse, UpgradeGatewayResponse, UpdateUserDeviceRequest, DescribeDeviceChannelResponse, AddRecordBackupTemplateRequest, DeleteAITaskRequest, UpdateGatewayResponse, DescribeRecordRetrieveTaskRequest, DescribeAITaskRequest, RefreshDeviceChannelResponse, DeleteOrganizationResponse, DescribeRecordTemplateRequest, DeleteRecordTemplateRequest, DescribeGatewayResponse, DescribeGatewayRequest, DeleteUserDeviceRequest, AddRecordPlanResponse, ListOrganizationChannelNumbersRequest, UpdateAITaskRequest, DeleteDomainRequest, ListRecordRetrieveTasksRequest, DeleteRecordPlanRequest, AddRecordTemplateResponse, ListRecordPlansRequest, AddRecordBackupPlanResponse, ListSubTasksResponse, ListAITasksRequest, UpdateRecordPlanRequest, DescribeOrganizationRequest, UpdateAITaskStatusResponse, ControlRecordResponse, AddRecordPlanRequest, ListRecordTemplatesRequest, DescribeVideoDownloadUrlResponse, DescribeRecordPlanResponse, AddRecordRetrieveTaskRequest, DescribeRecordPlanRequest, ControlDevicePresetResponse, ListRecordBackupPlansResponse, DescribeDomainRequest, ListRecordPlanDevicesRequest, ListTasksResponse, AddStreamAuthResponse, ListDevicesResponse, DescribeGatewayMonitorRequest, DeleteGatewayRequest, ListOrganizationChannelNumbersResponse, ListGatewayDevicesResponse, ListRecordBackupTemplatesResponse, ListRecordPlanChannelsResponse, DescribeRecordPlaybackUrlRequest, ListRecordPlansResponse, DescribeRecordTemplateResponse, DescribeAITaskResultResponse, ListRecordPlanDevicesResponse, DescribeDevicePresetResponse, UpdateRecordBackupPlanRequest, ControlRecordRequest, ControlDevicePTZResponse, ListRecordBackupPlansRequest, AddUserDeviceRequest, ListRecordBackupPlanDevicesResponse, ControlDevicePTZRequest, DescribeRecordBackupPlanRequest, DescribeRecordBackupPlanResponse, DescribeDeviceChannelRequest, UpdateUserDeviceResponse, DescribeDevicePresetRequest, ListGatewaysResponse, DescribeGatewayProtocolResponse, DescribeDomainRegionRequest, AddRecordTemplateRequest, DescribeGatewayProtocolRequest, AddAITaskRequest, DescribeVideoDownloadUrlRequest, DescribeGatewayVersionResponse, ListGatewaysRequest, ListTasksRequest, DescribeGatewayVersionRequest, DescribeRecordBackupTemplateRequest, DescribeUserDeviceRequest, DescribeDeviceRegionRequest, RefreshDeviceChannelRequest, DescribeRecordFileRequest, AddStreamAuthRequest, PlayRecordRequest, CheckDomainRequest, UpgradeGatewayRequest, DescribeRecordFileResponse, ControlDevicePresetRequest, ControlDeviceStreamRequest, ListRecordRetrieveTasksResponse, ListRecordBackupPlanDevicesRequest, DeleteDomainResponse, AddRecordRetrieveTaskResponse, DeleteRecordTemplateResponse, ListRecordTemplatesResponse, DescribeAITaskResponse, UpdateRecordBackupTemplateResponse, ControlRecordTimelineResponse, DeleteRecordRetrieveTaskRequest, UpdateRecordPlanResponse, DescribeTaskResponse, DeleteRecordBackupPlanRequest, ListRecordBackupTemplatesRequest, AddAITaskResponse, UpdateRecordTemplateRequest, DeleteRecordBackupTemplateRequest, ListGatewayDevicesRequest, DeleteAITaskResponse, AddRecordBackupTemplateResponse, PlayRecordResponse, DescribeGatewayMonitorResponse, DescribeRecordBackupTemplateResponse, AddUserDeviceResponse, DeleteGatewayResponse, DescribeRecordPlaybackUrlResponse, DescribeTaskRequest, ListRecordPlanChannelsRequest, ListOrganizationChannelsResponse, UpdateOrganizationRequest, UpdateAITaskStatusRequest, UpdateGatewayRequest, UpdateAITaskResponse, DescribeDomainRegionResponse, BatchOperateDeviceRequest, AddRecordBackupPlanRequest, UpdateRecordBackupTemplateRequest, UpdateDeviceStatusResponse, DeleteUserDeviceResponse, UpdateRecordBackupPlanResponse, AddOrganizationRequest, DescribeStreamAuthResponse, DeleteRecordBackupTemplateResponse, UpdateRecordTemplateResponse, DescribeRecordRetrieveTaskResponse, DescribeStreamAuthRequest } from "./iss_models";
 /**
  * iss client
  * @class
@@ -76,6 +76,10 @@ export declare class Client extends AbstractClient {
      */
     UpdateAITask(req: UpdateAITaskRequest, cb?: (error: string, rep: UpdateAITaskResponse) => void): Promise<UpdateAITaskResponse>;
     /**
+     * 用于查询任务的子任务列表
+     */
+    ListSubTasks(req: ListSubTasksRequest, cb?: (error: string, rep: ListSubTasksResponse) => void): Promise<ListSubTasksResponse>;
+    /**
      * 用于查询用户下所有实时上云计划中的通道列表
      */
     ListRecordPlanChannels(req?: ListRecordPlanChannelsRequest, cb?: (error: string, rep: ListRecordPlanChannelsResponse) => void): Promise<ListRecordPlanChannelsResponse>;
@@ -120,6 +124,10 @@ export declare class Client extends AbstractClient {
      */
     DescribeRecordTemplate(req: DescribeRecordTemplateRequest, cb?: (error: string, rep: DescribeRecordTemplateResponse) => void): Promise<DescribeRecordTemplateResponse>;
     /**
+     * 用于修改实时上云模板
+     */
+    UpdateRecordTemplate(req: UpdateRecordTemplateRequest, cb?: (error: string, rep: UpdateRecordTemplateResponse) => void): Promise<UpdateRecordTemplateResponse>;
+    /**
      * 用于新建取回任务
      */
     AddRecordRetrieveTask(req: AddRecordRetrieveTaskRequest, cb?: (error: string, rep: AddRecordRetrieveTaskResponse) => void): Promise<AddRecordRetrieveTaskResponse>;
@@ -131,6 +139,10 @@ export declare class Client extends AbstractClient {
      * 用于新增单个设备。添加设备之后，可根据返回结果到设备上进行配置，配置后等待设备注册/推流。
      */
     AddUserDevice(req: AddUserDeviceRequest, cb?: (error: string, rep: AddUserDeviceResponse) => void): Promise<AddUserDeviceResponse>;
+    /**
+     * 用于查询任务详情
+     */
+    DescribeTask(req: DescribeTaskRequest, cb?: (error: string, rep: DescribeTaskResponse) => void): Promise<DescribeTaskResponse>;
     /**
      * 添加AI任务
      */
@@ -167,6 +179,10 @@ export declare class Client extends AbstractClient {
      * 用于操作设备预置位，包括设置、删除、调用。
      */
     ControlDevicePreset(req: ControlDevicePresetRequest, cb?: (error: string, rep: ControlDevicePresetResponse) => void): Promise<ControlDevicePresetResponse>;
+    /**
+     * 用于批量操作（启用，禁用，删除）设备
+     */
+    BatchOperateDevice(req: BatchOperateDeviceRequest, cb?: (error: string, rep: BatchOperateDeviceResponse) => void): Promise<BatchOperateDeviceResponse>;
     /**
      * 用于修改组织。
      */
@@ -264,9 +280,9 @@ export declare class Client extends AbstractClient {
      */
     AddStreamAuth(req: AddStreamAuthRequest, cb?: (error: string, rep: AddStreamAuthResponse) => void): Promise<AddStreamAuthResponse>;
     /**
-     * 用于修改实时上云模板
+     * 用于查询批量任务和简单任务列表
      */
-    UpdateRecordTemplate(req: UpdateRecordTemplateRequest, cb?: (error: string, rep: UpdateRecordTemplateResponse) => void): Promise<UpdateRecordTemplateResponse>;
+    ListTasks(req: ListTasksRequest, cb?: (error: string, rep: ListTasksResponse) => void): Promise<ListTasksResponse>;
     /**
      * 用于删除取回任务
      */

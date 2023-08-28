@@ -36,7 +36,7 @@ export declare class Client extends AbstractClient {
      */
     GrantAccountPrivileges(req: GrantAccountPrivilegesRequest, cb?: (error: string, rep: GrantAccountPrivilegesResponse) => void): Promise<GrantAccountPrivilegesResponse>;
     /**
-     * 本接口（DescribeClusterParamLogs）查询参数修改日志
+     * 本接口（DescribeClusterParamLogs）查询参数修改记录
      */
     DescribeClusterParamLogs(req: DescribeClusterParamLogsRequest, cb?: (error: string, rep: DescribeClusterParamLogsResponse) => void): Promise<DescribeClusterParamLogsResponse>;
     /**
@@ -84,7 +84,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeBinlogDownloadUrl(req: DescribeBinlogDownloadUrlRequest, cb?: (error: string, rep: DescribeBinlogDownloadUrlResponse) => void): Promise<DescribeBinlogDownloadUrlResponse>;
     /**
-     * 根据计费订单id查询资源列表
+     * 查询订单关联实例
      */
     DescribeResourcesByDealName(req: DescribeResourcesByDealNameRequest, cb?: (error: string, rep: DescribeResourcesByDealNameResponse) => void): Promise<DescribeResourcesByDealNameResponse>;
     /**
@@ -116,7 +116,7 @@ export declare class Client extends AbstractClient {
      */
     CloseClusterPasswordComplexity(req: CloseClusterPasswordComplexityRequest, cb?: (error: string, rep: CloseClusterPasswordComplexityResponse) => void): Promise<CloseClusterPasswordComplexityResponse>;
     /**
-     * 本接口（RollBackCluster）用于回档集群
+     * 本接口（RollBackCluster）用于集群回档
      */
     RollBackCluster(req: RollBackClusterRequest, cb?: (error: string, rep: RollBackClusterResponse) => void): Promise<RollBackClusterResponse>;
     /**
@@ -156,11 +156,11 @@ export declare class Client extends AbstractClient {
      */
     CreateParamTemplate(req: CreateParamTemplateRequest, cb?: (error: string, rep: CreateParamTemplateResponse) => void): Promise<CreateParamTemplateResponse>;
     /**
-     * 修改从可用区
+     * 变更备可用区
      */
     ModifyClusterSlaveZone(req: ModifyClusterSlaveZoneRequest, cb?: (error: string, rep: ModifyClusterSlaveZoneResponse) => void): Promise<ModifyClusterSlaveZoneResponse>;
     /**
-     * 修改账号参数
+     * 修改账号配置
      */
     ModifyAccountParams(req: ModifyAccountParamsRequest, cb?: (error: string, rep: ModifyAccountParamsResponse) => void): Promise<ModifyAccountParamsResponse>;
     /**
@@ -208,11 +208,11 @@ export declare class Client extends AbstractClient {
      */
     ModifyParamTemplate(req: ModifyParamTemplateRequest, cb?: (error: string, rep: ModifyParamTemplateResponse) => void): Promise<ModifyParamTemplateResponse>;
     /**
-     * 该接口(DescribeInstanceParams)查询实例参数列表
+     * 该接口(DescribeInstanceParams)查询实例参数
      */
     DescribeInstanceParams(req: DescribeInstanceParamsRequest, cb?: (error: string, rep: DescribeInstanceParamsResponse) => void): Promise<DescribeInstanceParamsResponse>;
     /**
-     * 此接口（DescribeInstanceSlowQueries）用于查询实例慢查询日志。
+     * 此接口（DescribeInstanceSlowQueries）用于查询实例慢日志详情。
      */
     DescribeInstanceSlowQueries(req: DescribeInstanceSlowQueriesRequest, cb?: (error: string, rep: DescribeInstanceSlowQueriesResponse) => void): Promise<DescribeInstanceSlowQueriesResponse>;
     /**
@@ -224,7 +224,7 @@ export declare class Client extends AbstractClient {
      */
     CreateClusters(req: CreateClustersRequest, cb?: (error: string, rep: CreateClustersResponse) => void): Promise<CreateClustersResponse>;
     /**
-     * 创建账号
+     * 创建用户账号
      */
     CreateAccounts(req: CreateAccountsRequest, cb?: (error: string, rep: CreateAccountsResponse) => void): Promise<CreateAccountsResponse>;
     /**
@@ -240,7 +240,7 @@ export declare class Client extends AbstractClient {
      */
     DeleteClusterDatabase(req: DeleteClusterDatabaseRequest, cb?: (error: string, rep: DeleteClusterDatabaseResponse) => void): Promise<DeleteClusterDatabaseResponse>;
     /**
-     * 切换到从可用区
+     * 主备可用区切换
      */
     SwitchClusterZone(req: SwitchClusterZoneRequest, cb?: (error: string, rep: SwitchClusterZoneResponse) => void): Promise<SwitchClusterZoneResponse>;
     /**
@@ -248,7 +248,7 @@ export declare class Client extends AbstractClient {
      */
     AddInstances(req: AddInstancesRequest, cb?: (error: string, rep: AddInstancesResponse) => void): Promise<AddInstancesResponse>;
     /**
-     * 删除账号
+     * 删除用户账号
      */
     DeleteAccounts(req: DeleteAccountsRequest, cb?: (error: string, rep: DeleteAccountsResponse) => void): Promise<DeleteAccountsResponse>;
     /**
@@ -280,7 +280,7 @@ export declare class Client extends AbstractClient {
      */
     ModifyAccountHost(req: ModifyAccountHostRequest, cb?: (error: string, rep: ModifyAccountHostResponse) => void): Promise<ModifyAccountHostResponse>;
     /**
-     * 本接口(ResetAccountPassword)用于重置实例的数据库账号密码。
+     * 本接口(ResetAccountPassword)用于修改数据库账号密码
      */
     ResetAccountPassword(req: ResetAccountPasswordRequest, cb?: (error: string, rep: ResetAccountPasswordResponse) => void): Promise<ResetAccountPasswordResponse>;
     /**
@@ -288,7 +288,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeInstanceDetail(req: DescribeInstanceDetailRequest, cb?: (error: string, rep: DescribeInstanceDetailResponse) => void): Promise<DescribeInstanceDetailResponse>;
     /**
-     * 查询指定集群有效回滚时间范围
+     * 查询回档时间范围
      */
     DescribeRollbackTimeRange(req: DescribeRollbackTimeRangeRequest, cb?: (error: string, rep: DescribeRollbackTimeRangeResponse) => void): Promise<DescribeRollbackTimeRangeResponse>;
     /**
@@ -332,7 +332,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeResourcePackageSaleSpec(req: DescribeResourcePackageSaleSpecRequest, cb?: (error: string, rep: DescribeResourcePackageSaleSpecResponse) => void): Promise<DescribeResourcePackageSaleSpecResponse>;
     /**
-     * 修改账号权限
+     * 修改账号库表权限
      */
     ModifyAccountPrivileges(req: ModifyAccountPrivilegesRequest, cb?: (error: string, rep: ModifyAccountPrivilegesResponse) => void): Promise<ModifyAccountPrivilegesResponse>;
     /**
@@ -344,7 +344,7 @@ export declare class Client extends AbstractClient {
      */
     IsolateInstance(req: IsolateInstanceRequest, cb?: (error: string, rep: IsolateInstanceResponse) => void): Promise<IsolateInstanceResponse>;
     /**
-     * 增加从可用区
+     * 开启多可用区部署
      */
     AddClusterSlaveZone(req: AddClusterSlaveZoneRequest, cb?: (error: string, rep: AddClusterSlaveZoneResponse) => void): Promise<AddClusterSlaveZoneResponse>;
     /**
@@ -352,7 +352,7 @@ export declare class Client extends AbstractClient {
      */
     ModifyBackupName(req: ModifyBackupNameRequest, cb?: (error: string, rep: ModifyBackupNameResponse) => void): Promise<ModifyBackupNameResponse>;
     /**
-     * 本接口(DescribeAccounts)用于查询数据库管理账号。
+     * 本接口(DescribeAccounts)用于查询数据库账号列表
      */
     DescribeAccounts(req: DescribeAccountsRequest, cb?: (error: string, rep: DescribeAccountsResponse) => void): Promise<DescribeAccountsResponse>;
     /**
@@ -472,7 +472,7 @@ export declare class Client extends AbstractClient {
      */
     ModifyBinlogSaveDays(req: ModifyBinlogSaveDaysRequest, cb?: (error: string, rep: ModifyBinlogSaveDaysResponse) => void): Promise<ModifyBinlogSaveDaysResponse>;
     /**
-     * 账号所有权限
+     * 查询账号所有可授予权限
      */
     DescribeAccountAllGrantPrivileges(req: DescribeAccountAllGrantPrivilegesRequest, cb?: (error: string, rep: DescribeAccountAllGrantPrivilegesResponse) => void): Promise<DescribeAccountAllGrantPrivilegesResponse>;
     /**
@@ -512,7 +512,7 @@ export declare class Client extends AbstractClient {
      */
     ModifyResourcePackageName(req: ModifyResourcePackageNameRequest, cb?: (error: string, rep: ModifyResourcePackageNameResponse) => void): Promise<ModifyResourcePackageNameResponse>;
     /**
-     * 删除从可用区
+     * 关闭多可用区部署
      */
     RemoveClusterSlaveZone(req: RemoveClusterSlaveZoneRequest, cb?: (error: string, rep: RemoveClusterSlaveZoneResponse) => void): Promise<RemoveClusterSlaveZoneResponse>;
     /**

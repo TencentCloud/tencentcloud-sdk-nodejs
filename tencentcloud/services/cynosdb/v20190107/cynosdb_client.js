@@ -70,7 +70,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("GrantAccountPrivileges", req, cb);
     }
     /**
-     * 本接口（DescribeClusterParamLogs）查询参数修改日志
+     * 本接口（DescribeClusterParamLogs）查询参数修改记录
      */
     async DescribeClusterParamLogs(req, cb) {
         return this.request("DescribeClusterParamLogs", req, cb);
@@ -142,7 +142,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeBinlogDownloadUrl", req, cb);
     }
     /**
-     * 根据计费订单id查询资源列表
+     * 查询订单关联实例
      */
     async DescribeResourcesByDealName(req, cb) {
         return this.request("DescribeResourcesByDealName", req, cb);
@@ -190,7 +190,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CloseClusterPasswordComplexity", req, cb);
     }
     /**
-     * 本接口（RollBackCluster）用于回档集群
+     * 本接口（RollBackCluster）用于集群回档
      */
     async RollBackCluster(req, cb) {
         return this.request("RollBackCluster", req, cb);
@@ -250,13 +250,13 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateParamTemplate", req, cb);
     }
     /**
-     * 修改从可用区
+     * 变更备可用区
      */
     async ModifyClusterSlaveZone(req, cb) {
         return this.request("ModifyClusterSlaveZone", req, cb);
     }
     /**
-     * 修改账号参数
+     * 修改账号配置
      */
     async ModifyAccountParams(req, cb) {
         return this.request("ModifyAccountParams", req, cb);
@@ -328,13 +328,13 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyParamTemplate", req, cb);
     }
     /**
-     * 该接口(DescribeInstanceParams)查询实例参数列表
+     * 该接口(DescribeInstanceParams)查询实例参数
      */
     async DescribeInstanceParams(req, cb) {
         return this.request("DescribeInstanceParams", req, cb);
     }
     /**
-     * 此接口（DescribeInstanceSlowQueries）用于查询实例慢查询日志。
+     * 此接口（DescribeInstanceSlowQueries）用于查询实例慢日志详情。
      */
     async DescribeInstanceSlowQueries(req, cb) {
         return this.request("DescribeInstanceSlowQueries", req, cb);
@@ -352,7 +352,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateClusters", req, cb);
     }
     /**
-     * 创建账号
+     * 创建用户账号
      */
     async CreateAccounts(req, cb) {
         return this.request("CreateAccounts", req, cb);
@@ -376,7 +376,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteClusterDatabase", req, cb);
     }
     /**
-     * 切换到从可用区
+     * 主备可用区切换
      */
     async SwitchClusterZone(req, cb) {
         return this.request("SwitchClusterZone", req, cb);
@@ -388,7 +388,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("AddInstances", req, cb);
     }
     /**
-     * 删除账号
+     * 删除用户账号
      */
     async DeleteAccounts(req, cb) {
         return this.request("DeleteAccounts", req, cb);
@@ -436,7 +436,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyAccountHost", req, cb);
     }
     /**
-     * 本接口(ResetAccountPassword)用于重置实例的数据库账号密码。
+     * 本接口(ResetAccountPassword)用于修改数据库账号密码
      */
     async ResetAccountPassword(req, cb) {
         return this.request("ResetAccountPassword", req, cb);
@@ -448,7 +448,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeInstanceDetail", req, cb);
     }
     /**
-     * 查询指定集群有效回滚时间范围
+     * 查询回档时间范围
      */
     async DescribeRollbackTimeRange(req, cb) {
         return this.request("DescribeRollbackTimeRange", req, cb);
@@ -514,7 +514,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeResourcePackageSaleSpec", req, cb);
     }
     /**
-     * 修改账号权限
+     * 修改账号库表权限
      */
     async ModifyAccountPrivileges(req, cb) {
         return this.request("ModifyAccountPrivileges", req, cb);
@@ -532,7 +532,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("IsolateInstance", req, cb);
     }
     /**
-     * 增加从可用区
+     * 开启多可用区部署
      */
     async AddClusterSlaveZone(req, cb) {
         return this.request("AddClusterSlaveZone", req, cb);
@@ -544,7 +544,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyBackupName", req, cb);
     }
     /**
-     * 本接口(DescribeAccounts)用于查询数据库管理账号。
+     * 本接口(DescribeAccounts)用于查询数据库账号列表
      */
     async DescribeAccounts(req, cb) {
         return this.request("DescribeAccounts", req, cb);
@@ -724,7 +724,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyBinlogSaveDays", req, cb);
     }
     /**
-     * 账号所有权限
+     * 查询账号所有可授予权限
      */
     async DescribeAccountAllGrantPrivileges(req, cb) {
         return this.request("DescribeAccountAllGrantPrivileges", req, cb);
@@ -784,7 +784,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyResourcePackageName", req, cb);
     }
     /**
-     * 删除从可用区
+     * 关闭多可用区部署
      */
     async RemoveClusterSlaveZone(req, cb) {
         return this.request("RemoveClusterSlaveZone", req, cb);

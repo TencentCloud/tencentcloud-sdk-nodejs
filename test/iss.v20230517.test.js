@@ -188,6 +188,16 @@ it("iss.v20230517.UpdateAITask", async function () {
     }
 })
 
+it("iss.v20230517.ListSubTasks", async function () {
+    try {
+       const data = await client.ListSubTasks({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iss.v20230517.ListRecordPlanChannels", async function () {
     try {
        const data = await client.ListRecordPlanChannels({})
@@ -298,6 +308,16 @@ it("iss.v20230517.DescribeRecordTemplate", async function () {
     }
 })
 
+it("iss.v20230517.UpdateRecordTemplate", async function () {
+    try {
+       const data = await client.UpdateRecordTemplate({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iss.v20230517.AddRecordRetrieveTask", async function () {
     try {
        const data = await client.AddRecordRetrieveTask({})
@@ -321,6 +341,16 @@ it("iss.v20230517.DescribeCNAME", async function () {
 it("iss.v20230517.AddUserDevice", async function () {
     try {
        const data = await client.AddUserDevice({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iss.v20230517.DescribeTask", async function () {
+    try {
+       const data = await client.DescribeTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -411,6 +441,16 @@ it("iss.v20230517.RefreshDeviceChannel", async function () {
 it("iss.v20230517.ControlDevicePreset", async function () {
     try {
        const data = await client.ControlDevicePreset({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iss.v20230517.BatchOperateDevice", async function () {
+    try {
+       const data = await client.BatchOperateDevice({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -658,9 +698,9 @@ it("iss.v20230517.AddStreamAuth", async function () {
     }
 })
 
-it("iss.v20230517.UpdateRecordTemplate", async function () {
+it("iss.v20230517.ListTasks", async function () {
     try {
-       const data = await client.UpdateRecordTemplate({})
+       const data = await client.ListTasks({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
