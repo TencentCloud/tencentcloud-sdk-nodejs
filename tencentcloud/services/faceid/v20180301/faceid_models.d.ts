@@ -2343,32 +2343,33 @@ export interface IntentionVerifyData {
      * 意愿确认环节中录制的视频（base64）。若不存在则为空字符串。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    IntentionVerifyVideo: string;
+    IntentionVerifyVideo?: string;
     /**
      * 意愿确认环节中用户语音转文字的识别结果。若不存在则为空字符串。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    AsrResult: string;
+    AsrResult?: string;
     /**
      * 意愿确认环节的结果码。当该结果码为0时，语音朗读的视频与语音识别结果才会返回。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ErrorCode: number;
+    ErrorCode?: number;
     /**
      * 意愿确认环节的结果信息。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ErrorMessage: string;
+    ErrorMessage?: string;
     /**
      * 意愿确认环节中录制视频的最佳帧（base64）。若不存在则为空字符串。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    IntentionVerifyBestFrame: string;
+    IntentionVerifyBestFrame?: string;
     /**
      * 本次流程用户语音与传入文本比对的相似度分值，取值范围 [0.00, 100.00]。只有配置了相似度阈值后才进行语音校验并返回相似度分值。
   注意：此字段可能返回 null，表示取不到有效值。
+     * @deprecated
      */
-    AsrResultSimilarity: string;
+    AsrResultSimilarity?: string;
 }
 /**
  * LivenessCompare请求参数结构体

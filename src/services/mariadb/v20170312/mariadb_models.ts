@@ -3873,7 +3873,7 @@ export interface DBAccount {
  */
 export interface CreateHourDBInstanceRequest {
   /**
-   * 节点可用区分布，最多可填两个可用区。
+   * 节点可用区分布，可填写多个可用区。
    */
   Zones: Array<string>
   /**
@@ -3946,6 +3946,10 @@ innodb_page_size（innodb数据页，默认16K），sync_mode（同步模式：0
    * 回档时间
    */
   RollbackTime?: string
+  /**
+   * DCN同步模式，0：普通DCN同步，1：一致性同步
+   */
+  DcnSyncMode?: number
 }
 
 /**

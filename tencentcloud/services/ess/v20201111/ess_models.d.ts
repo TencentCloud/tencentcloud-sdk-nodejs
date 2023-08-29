@@ -677,7 +677,8 @@ export interface DescribeIntegrationRolesRequest {
      * 查询的关键字段:
   Key:"RoleType",Values:["1"]查询系统角色，Values:["2"]查询自定义角色
   Key:"RoleStatus",Values:["1"]查询启用角色，Values:["2"]查询禁用角色
-  Key:"IsGroupRole"，Values:["0"],查询非集团角色，Values:["1"]表示查询集团角色
+  Key:"IsGroupRole"，Values:["0"]:查询非集团角色，Values:["1"]表示查询集团角色
+  Key:"IsReturnPermissionGroup"，Values:["0"]:表示接口不返回角色对应的权限树字段，Values:["1"]表示接口返回角色对应的权限树字段
      */
     Filters?: Array<Filter>;
     /**
@@ -820,8 +821,7 @@ export interface CreateConvertTaskApiRequest {
      */
     Operator?: UserInfo;
     /**
-     * 应用号信息
-     * @deprecated
+     * 代理企业和员工的信息。 在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。
      */
     Agent?: Agent;
     /**
@@ -1583,6 +1583,66 @@ export interface DescribeIntegrationDepartmentsRequest {
     DeptOpenId?: string;
 }
 /**
+ * 权限树节点权限
+ */
+export interface Permission {
+    /**
+     * 权限名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Name?: string;
+    /**
+     * 权限key
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Key?: string;
+    /**
+     * 权限类型 1前端，2后端
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Type?: number;
+    /**
+     * 是否隐藏
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Hide?: number;
+    /**
+     * 数据权限标签 1:表示根节点，2:表示叶子结点
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DataLabel?: number;
+    /**
+     * 数据权限独有，1:关联其他模块鉴权，2:表示关联自己模块鉴权
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DataType?: number;
+    /**
+     * 数据权限独有，表示数据范围，1：全公司，2:部门及下级部门，3:自己
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DataRange?: number;
+    /**
+     * 关联权限, 表示这个功能权限要受哪个数据权限管控
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DataTo?: string;
+    /**
+     * 父级权限key
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ParentKey?: string;
+    /**
+     * 是否选中
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IsChecked?: boolean;
+    /**
+     * 子权限集合
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Children?: Array<Permission>;
+}
+/**
  * CreateIntegrationDepartment返回参数结构体
  */
 export interface CreateIntegrationDepartmentResponse {
@@ -2279,8 +2339,8 @@ export interface DescribeFileUrlsRequest {
      */
     Scene?: string;
     /**
-     * 应用相关信息
-     * @deprecated
+     * 代理企业和员工的信息。
+  在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。
      */
     Agent?: Agent;
 }
@@ -3057,8 +3117,7 @@ export interface GetTaskResultApiRequest {
      */
     Operator?: UserInfo;
     /**
-     * 应用号信息
-     * @deprecated
+     * 代理企业和员工的信息。 在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。
      */
     Agent?: Agent;
     /**
@@ -3451,6 +3510,10 @@ export interface CreatePersonAuthCertificateImageRequest {
      * 身份证件号码
      */
     IdCardNumber: string;
+    /**
+     * 代理企业和员工的信息。 在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。
+     */
+    Agent?: Agent;
 }
 /**
  * CreateFlowByFiles返回参数结构体
@@ -3615,7 +3678,7 @@ export interface FailedCreateRoleData {
     RoleIds?: Array<string>;
 }
 /**
- * 参与者信息
+ * 参与者信息。
  */
 export interface ApproverInfo {
     /**
@@ -4084,6 +4147,11 @@ export interface IntegrateRole {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     SubOrgIdList?: Array<string>;
+    /**
+     * 权限树
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PermissionGroups?: Array<PermissionGroup>;
 }
 /**
  * CreatePrepareFlow返回参数结构体
@@ -4474,6 +4542,45 @@ export interface DescribeOrganizationSealsRequest {
      * 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填
      */
     Agent?: Agent;
+    /**
+     * 查询的印章状态列表。
+  取值为空，只查询启用状态的印章；
+  取值ALL，查询所有状态的印章；
+  取值CHECKING，查询待审核的印章；
+  取值SUCCESS，查询启用状态的印章；
+  取值FAIL，查询印章审核拒绝的印章；
+  取值DISABLE，查询已停用的印章；
+  取值STOPPED，查询已终止的印章；
+  取值VOID，查询已作废的印章；
+  取值INVALID，查询以失效的印章；
+  
+     */
+    SealStatuses?: Array<string>;
+}
+/**
+ * 权限树中的权限组
+ */
+export interface PermissionGroup {
+    /**
+     * 权限组名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    GroupName?: string;
+    /**
+     * 权限组key
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    GroupKey?: string;
+    /**
+     * 是否隐藏分组，0否1是
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Hide?: number;
+    /**
+     * 权限集合
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Permissions?: Array<Permission>;
 }
 /**
  * CancelFlow请求参数结构体
@@ -4947,7 +5054,7 @@ export interface VerifyPdfResponse {
      */
     VerifyResult?: number;
     /**
-     * 验签结果详情,内部状态1-验签成功，在电子签签署；2-验签成功，在其他平台签署；3-验签失败；4-pdf文件没有签名域；5-文件签名格式错误
+     * 验签结果详情，每个签名域对应的验签结果。状态值：1-验签成功，在电子签签署；2-验签成功，在其他平台签署；3-验签失败；4-pdf文件没有签名域；5-文件签名格式错误
      */
     PdfVerifyResults?: Array<PdfVerifyResult>;
     /**
@@ -5230,13 +5337,15 @@ export interface CreateMultiFlowSignQRCodeRequest {
      */
     UserData?: string;
     /**
-     * 回调地址,最大长度1000字符串
-  <br/>回调时机：用户通过签署二维码发起签署流程时，企业额度不足导致失败
+     * 已废弃，回调配置统一使用企业应用管理-应用集成-企业版应用中的配置
+  <br/> 通过一码多扫二维码发起的合同，回调消息可参考文档 https://qian.tencent.com/developers/company/callback_types_contracts_sign
+  <br/> 用户通过签署二维码发起合同时，因企业额度不足导致失败 会触发签署二维码相关回调,具体参考文档 https://qian.tencent.com/developers/company/callback_types_commons#%E7%AD%BE%E7%BD%B2%E4%BA%8C%E7%BB%B4%E7%A0%81%E7%9B%B8%E5%85%B3%E5%9B%9E%E8%B0%83
+  
+     * @deprecated
      */
     CallbackUrl?: string;
     /**
-     * 应用信息
-     * @deprecated
+     * 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填
      */
     Agent?: Agent;
     /**
@@ -5385,62 +5494,60 @@ export interface FileUrl {
     Option: string;
 }
 /**
- * 流程信息摘要
+ * 合同流程的基础信息
  */
 export interface FlowBrief {
     /**
-     * 流程的编号ID
+     * 合同流程ID，为32位字符串。
      */
     FlowId?: string;
     /**
-     * 流程的名称
+     * 合同流程的名称。
      */
     FlowName?: string;
     /**
-     * 流程的描述信息
+     * 合同流程描述信息。
   注意：此字段可能返回 null，表示取不到有效值。
      */
     FlowDescription?: string;
     /**
-     * 流程的类型
+     * 合同流程的类别分类（如销售合同/入职合同等）。
      */
     FlowType?: string;
     /**
-     * 流程状态
-  - 0 还没有发起
-  - 1 待签署
-  - 2 部分签署
-  - 3 已拒签
-  - 4 已签署
-  - 5 已过期
-  - 6 已撤销
-  - 7 还没有预发起
-  - 8 等待填写
-  - 9 部分填写
-  - 10 拒填
-  - 21 已解除
+     * 合同流程当前的签署状态, 会存在下列的状态值
+  <ul><li> **0** : 未开启流程(合同中不存在填写环节)</li>
+  <li> **1** : 待签署</li>
+  <li> **2** : 部分签署</li>
+  <li> **3** : 已拒签</li>
+  <li> **4** : 已签署</li>
+  <li> **5** : 已过期</li>
+  <li> **6** : 已撤销</li>
+  <li> **7** : 未开启流程(合同中存在填写环节)</li>
+  <li> **8** : 等待填写</li>
+  <li> **9** : 部分填写</li>
+  <li> **10** : 已拒填</li>
+  <li> **21** : 已解除</li></ul>
   注意：此字段可能返回 null，表示取不到有效值。
      */
     FlowStatus?: number;
     /**
-     * 流程创建的时间戳，单位秒
+     * 合同流程创建时间，格式为Unix标准时间戳（秒）。
   注意：此字段可能返回 null，表示取不到有效值。
      */
     CreatedOn?: number;
     /**
-     * 当合同被拒签或者取消后(当FlowStatus=3或者FlowStatus=6的时候)
-  此字段展示拒签或者取消的原因描述
-  
+     * 当合同流程状态为已拒签（即 FlowStatus=3）或已撤销（即 FlowStatus=6）时，此字段 FlowMessage 为拒签或撤销原因。
   注意：此字段可能返回 null，表示取不到有效值。
      */
     FlowMessage?: string;
     /**
-     *  合同发起人userId
+     *  合同流程发起方的员工编号, 即员工在腾讯电子签平台的唯一身份标识。
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Creator?: string;
     /**
-     * 合同过期时间，时间戳，单位秒
+     * 合同流程的签署截止时间，格式为Unix标准时间戳（秒）。
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Deadline?: number;

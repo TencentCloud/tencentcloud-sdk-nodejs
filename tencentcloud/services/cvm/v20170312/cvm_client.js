@@ -161,7 +161,7 @@ class Client extends abstract_client_1.AbstractClient {
 
 * 该接口每次调用只支持同步一个镜像。
 * 该接口支持多个同步地域。
-* 单个账号在每个地域最多支持存在10个自定义镜像。
+* 单个账号在每个地域最多支持存在50个自定义镜像。
      */
     async SyncImages(req, cb) {
         return this.request("SyncImages", req, cb);
@@ -656,7 +656,7 @@ https://img.qcloud.com/qcloud/app/active_vnc/index.html?InstanceVncUrl=wss%3A%2F
      * 本接口（DeleteImages）用于删除一个或多个镜像。
 
 * 当[镜像状态](https://cloud.tencent.com/document/product/213/15753#Image)为`创建中`和`使用中`时, 不允许删除。镜像状态可以通过[DescribeImages](https://cloud.tencent.com/document/api/213/9418)获取。
-* 每个地域最多只支持创建10个自定义镜像，删除镜像可以释放账户的配额。
+* 每个地域最多只支持创建50个自定义镜像，删除镜像可以释放账户的配额。
 * 当镜像正在被其它账户分享时，不允许删除。
      */
     async DeleteImages(req, cb) {

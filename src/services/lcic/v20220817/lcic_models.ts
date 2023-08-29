@@ -1596,6 +1596,11 @@ export interface UserInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Avatar?: string
+  /**
+   * 用户在客户系统的Id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OriginId?: string
 }
 
 /**
@@ -1605,19 +1610,24 @@ export interface DescribeUserResponse {
   /**
    * 应用Id。
    */
-  SdkAppId: number
+  SdkAppId?: number
   /**
    * 用户Id。
    */
-  UserId: string
+  UserId?: string
   /**
    * 用户昵称。
    */
-  Name: string
+  Name?: string
   /**
    * 用户头像Url。
    */
-  Avatar: string
+  Avatar?: string
+  /**
+   * 用户在客户系统的Id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OriginId?: string
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

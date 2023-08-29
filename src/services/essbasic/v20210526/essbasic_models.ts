@@ -816,6 +816,10 @@ export interface BaseFlowInfo {
 <br/>当指定NeedCreateReview=true，则提交审核后，需要使用接口：ChannelCreateFlowSignReview，来完成发起前审核，审核通过后，可以继续查看，签署合同
    */
   NeedCreateReview?: boolean
+  /**
+   * 填写控件：文件发起使用
+   */
+  Components?: Array<Component>
 }
 
 /**
@@ -1006,7 +1010,7 @@ export interface ChannelCreatePrepareFlowRequest {
    */
   ResourceId: string
   /**
-   * 资源类型，1：模板，目前仅支持模板，与ResourceId对应
+   * 资源类型，与ResourceId对应1：模板   2: 文件
    */
   ResourceType: number
   /**
@@ -2142,6 +2146,10 @@ export interface CommonFlowApprover {
    * 签署人配置
    */
   ApproverOption?: CommonApproverOption
+  /**
+   * 签署控件：文件发起使用
+   */
+  SignComponents?: Array<Component>
 }
 
 /**
@@ -2940,9 +2948,10 @@ export interface ChannelCreateMultiFlowSignQRCodeRequest {
    */
   Restrictions?: Array<ApproverRestriction>
   /**
-   * 回调地址，最大长度1000个字符
-不传默认使用第三方应用号配置的回调地址
-回调时机:用户通过签署二维码发起合同时，企业额度不足导致失败
+   * 已废弃，回调配置统一使用企业应用管理-应用集成-第三方应用中的配置
+<br/> 通过一码多扫二维码发起的合同，回调消息可参考文档 https://qian.tencent.com/developers/partner/callback_types_contracts_sign
+<br/> 用户通过签署二维码发起合同时，因企业额度不足导致失败 会触发签署二维码相关回调,具体参考文档 https://qian.tencent.com/developers/partner/callback_types_commons#%E7%AD%BE%E7%BD%B2%E4%BA%8C%E7%BB%B4%E7%A0%81%E7%9B%B8%E5%85%B3%E5%9B%9E%E8%B0%83
+   * @deprecated
    */
   CallbackUrl?: string
   /**
@@ -2986,7 +2995,7 @@ export interface SignQrCode {
 4-非第三方平台子客企业：Name、Mobile必传，OrgName必传，且NotChannelOrganization=True。
 
 RecipientId参数：
-从DescribeTemplates接口中，可以得到模板下的签署方Recipient列表，根据模板自定义的Rolename在此结构体中确定其RecipientId
+从DescribeTemplates接口中，可以得到模板下的签署方Recipient列表，根据模板自定义的Rolename在此结构体中确定其RecipientId。
  */
 export interface FlowApproverInfo {
   /**

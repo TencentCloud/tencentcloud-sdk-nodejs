@@ -1578,7 +1578,7 @@ export interface RateLimitResponse {
      */
     Body?: string;
     /**
-     * headrs
+     * Headers
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Headers?: Array<KVMapping>;
@@ -2550,7 +2550,7 @@ export interface DeleteCloudNativeAPIGatewayRouteRequest {
  */
 export interface InternetConfig {
     /**
-     * 公网地址版本，可选："IPV4" | "IPV6-NAT64" 。不填默认 IPV4 。
+     * 公网地址版本，可选："IPV4" | "IPV6" 。不填默认 IPV4 。
      */
     InternetAddressVersion?: string;
     /**

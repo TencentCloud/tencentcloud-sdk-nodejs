@@ -32,7 +32,7 @@ export declare class Client extends AbstractClient {
      */
     EvaluateSentenceSimilarity(req: EvaluateSentenceSimilarityRequest, cb?: (error: string, rep: EvaluateSentenceSimilarityResponse) => void): Promise<EvaluateSentenceSimilarityResponse>;
     /**
-     * 提取文本中的关键信息，生成简洁明了的关键句子，便于用户快速获取核心观点。
+     * 根据提供的关键词，生成简洁明了的关键句子，便于用户快速获取核心观点。
      */
     GenerateKeywordSentence(req: GenerateKeywordSentenceRequest, cb?: (error: string, rep: GenerateKeywordSentenceResponse) => void): Promise<GenerateKeywordSentenceResponse>;
     /**
