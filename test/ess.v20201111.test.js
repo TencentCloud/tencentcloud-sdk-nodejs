@@ -98,9 +98,9 @@ it("ess.v20201111.CreateUserAutoSignEnableUrl", async function () {
     }
 })
 
-it("ess.v20201111.CreateSealPolicy", async function () {
+it("ess.v20201111.CreateIntegrationRole", async function () {
     try {
-       const data = await client.CreateSealPolicy({})
+       const data = await client.CreateIntegrationRole({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -328,6 +328,16 @@ it("ess.v20201111.CreateChannelSubOrganizationModifyQrCode", async function () {
     }
 })
 
+it("ess.v20201111.UploadFiles", async function () {
+    try {
+       const data = await client.UploadFiles({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ess.v20201111.DescribeFlowEvidenceReport", async function () {
     try {
        const data = await client.DescribeFlowEvidenceReport({})
@@ -458,9 +468,19 @@ it("ess.v20201111.CreateIntegrationUserRoles", async function () {
     }
 })
 
-it("ess.v20201111.UploadFiles", async function () {
+it("ess.v20201111.ModifyIntegrationRole", async function () {
     try {
-       const data = await client.UploadFiles({})
+       const data = await client.ModifyIntegrationRole({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ess.v20201111.CreateSealPolicy", async function () {
+    try {
+       const data = await client.CreateSealPolicy({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

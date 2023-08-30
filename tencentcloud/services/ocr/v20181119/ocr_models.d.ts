@@ -8272,11 +8272,13 @@ export interface BizLicenseOCRResponse {
     /**
      * Code 告警码列表和释义：
   -9102 黑白复印件告警
+  -9104 翻拍件告警
      */
     RecognizeWarnCode?: Array<number | bigint>;
     /**
      * 告警码说明：
   WARN_COPY_CARD 黑白复印件告警
+  WARN_RESHOOT_SCREENED_CARD 翻拍件告警
      */
     RecognizeWarnMsg?: Array<string>;
     /**

@@ -18,88 +18,95 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
-  CostComponentSet,
-  DescribeDosageDetailByDateResponse,
-  VoucherInfos,
-  DescribeBillSummaryResponse,
   DescribeCostSummaryByProductRequest,
-  CosDetailSets,
-  DescribeCostSummaryByProjectResponse,
-  DescribeDosageDetailByDateRequest,
-  ProjectSummaryOverviewItem,
-  ConditionRegion,
-  DescribeBillSummaryByProductRequest,
   ConsumptionBusinessSummaryDataItem,
-  DetailPoint,
-  CostDetail,
-  DescribeBillSummaryByPayModeResponse,
-  SummaryTotal,
-  BillResourceSummary,
-  DescribeBillSummaryByTagRequest,
-  Conditions,
-  DescribeBillSummaryByProductResponse,
   BillTagInfo,
-  DescribeBillSummaryByRegionResponse,
-  DetailSet,
   BillTransactionInfo,
-  DescribeVoucherInfoResponse,
+  ConditionBusiness,
+  RegionSummaryOverviewItem,
+  ProductInfo,
+  DescribeDosageDetailByDateResponse,
+  BillDetailComponent,
+  DescribeCostSummaryByResourceResponse,
+  DescribeBillSummaryByRegionRequest,
+  DescribeCostSummaryByProjectRequest,
+  ConsumptionRegionSummaryDataItem,
+  DescribeBillSummaryRequest,
+  DescribeBillResourceSummaryResponse,
+  DescribeDosageCosDetailByDateRequest,
+  DeleteAllocationTagRequest,
+  DescribeBillListRequest,
+  BusinessSummaryInfo,
+  DescribeBillSummaryByProductRequest,
+  DescribeVoucherUsageDetailsResponse,
+  ConsumptionSummaryTotal,
+  DescribeCostDetailResponse,
+  VoucherInfos,
+  DescribeCostSummaryByProjectResponse,
+  DescribeBillSummaryByTagResponse,
+  DescribeBillSummaryByPayModeResponse,
+  DescribeBillSummaryByTagRequest,
+  SummaryDetail,
+  DescribeCostSummaryByRegionRequest,
+  ConsumptionSummaryTrend,
+  DescribeBillSummaryByPayModeRequest,
+  ApplicableProducts,
+  ConditionPayMode,
+  PayDealsResponse,
+  BillDetail,
+  DetailSet,
+  Deal,
+  DescribeDealsByCondResponse,
+  DescribeBillSummaryByProjectRequest,
+  DescribeBillSummaryByProjectResponse,
+  TagDataInfo,
+  PayDealsRequest,
+  SummaryTotal,
+  BusinessSummaryTotal,
+  CostComponentSet,
+  DetailPoint,
+  DescribeBillSummaryResponse,
+  BillResourceSummary,
+  Conditions,
+  DescribeCostSummaryByProductResponse,
+  ConsumptionProjectSummaryDataItem,
+  DeleteAllocationTagResponse,
+  ActionSummaryOverviewItem,
+  DescribeVoucherInfoRequest,
+  DescribeVoucherUsageDetailsRequest,
+  DescribeBillResourceSummaryRequest,
+  DescribeBillDetailResponse,
+  BillDetailComponentConfig,
+  TagSummaryOverviewItem,
+  ConsumptionResourceSummaryConditionValue,
+  DescribeCostDetailRequest,
+  DescribeTagListRequest,
+  DescribeCostSummaryByResourceRequest,
+  CreateAllocationTagRequest,
+  ExcludedProducts,
+  PayModeSummaryOverviewItem,
+  UsageDetails,
+  DescribeDosageDetailByDateRequest,
+  ConditionRegion,
+  CostDetail,
+  DescribeBillSummaryByProductResponse,
+  DescribeBillSummaryByRegionResponse,
+  CreateAllocationTagResponse,
   ConsumptionResourceSummaryDataItem,
   DescribeAccountBalanceRequest,
   DescribeBillDetailRequest,
-  ProductInfo,
-  ConsumptionProjectSummaryDataItem,
-  RegionSummaryOverviewItem,
-  DescribeCostSummaryByProductResponse,
-  DescribeBillSummaryByTagResponse,
+  DescribeVoucherInfoResponse,
   BillDetailAssociatedOrder,
   DescribeBillListResponse,
   DescribeAccountBalanceResponse,
-  DescribeCostSummaryByRegionRequest,
   BusinessSummaryOverviewItem,
-  BillDetailComponent,
-  ConsumptionSummaryTrend,
-  DescribeBillSummaryByRegionRequest,
-  DescribeBillSummaryByPayModeRequest,
-  DescribeCostSummaryByProjectRequest,
-  SummaryDetail,
-  UsageDetails,
   UsageRecords,
-  ConsumptionRegionSummaryDataItem,
-  DescribeDosageCosDetailByDateResponse,
-  DescribeBillSummaryRequest,
-  DescribeBillResourceSummaryResponse,
-  ActionSummaryOverviewItem,
-  DescribeVoucherInfoRequest,
-  ApplicableProducts,
-  ConditionPayMode,
-  DescribeVoucherUsageDetailsRequest,
   DescribeDealsByCondRequest,
-  DescribeBillResourceSummaryRequest,
-  PayDealsRequest,
-  DescribeBillListRequest,
-  PayDealsResponse,
-  BillDetailComponentConfig,
-  BillDetail,
-  BusinessSummaryInfo,
-  TagSummaryOverviewItem,
-  DescribeCostSummaryByResourceResponse,
-  DescribeBillDetailResponse,
-  ConsumptionResourceSummaryConditionValue,
-  Deal,
-  DescribeCostDetailRequest,
-  DescribeVoucherUsageDetailsResponse,
-  DescribeDealsByCondResponse,
+  DescribeDosageCosDetailByDateResponse,
   ConditionProject,
-  ConsumptionSummaryTotal,
-  DescribeBillSummaryByProjectRequest,
-  DescribeBillSummaryByProjectResponse,
-  ConditionBusiness,
-  DescribeCostSummaryByResourceRequest,
-  DescribeCostDetailResponse,
-  DescribeDosageCosDetailByDateRequest,
-  ExcludedProducts,
-  PayModeSummaryOverviewItem,
-  BusinessSummaryTotal,
+  DescribeTagListResponse,
+  CosDetailSets,
+  ProjectSummaryOverviewItem,
   DescribeCostSummaryByRegionResponse,
 } from "./billing_models"
 
@@ -113,36 +120,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取云账户余额信息。
-   */
-  async DescribeAccountBalance(
-    req?: DescribeAccountBalanceRequest,
-    cb?: (error: string, rep: DescribeAccountBalanceResponse) => void
-  ): Promise<DescribeAccountBalanceResponse> {
-    return this.request("DescribeAccountBalance", req, cb)
-  }
-
-  /**
-   * 获取代金券相关信息
-   */
-  async DescribeVoucherInfo(
-    req: DescribeVoucherInfoRequest,
-    cb?: (error: string, rep: DescribeVoucherInfoResponse) => void
-  ): Promise<DescribeVoucherInfoResponse> {
-    return this.request("DescribeVoucherInfo", req, cb)
-  }
-
-  /**
-   * 按日期获取产品用量明细
-   */
-  async DescribeDosageDetailByDate(
-    req: DescribeDosageDetailByDateRequest,
-    cb?: (error: string, rep: DescribeDosageDetailByDateResponse) => void
-  ): Promise<DescribeDosageDetailByDateResponse> {
-    return this.request("DescribeDosageDetailByDate", req, cb)
-  }
-
-  /**
    * 获取按资源汇总消耗详情
    */
   async DescribeCostSummaryByResource(
@@ -153,16 +130,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取代金券使用记录
-   */
-  async DescribeVoucherUsageDetails(
-    req: DescribeVoucherUsageDetailsRequest,
-    cb?: (error: string, rep: DescribeVoucherUsageDetailsResponse) => void
-  ): Promise<DescribeVoucherUsageDetailsResponse> {
-    return this.request("DescribeVoucherUsageDetails", req, cb)
-  }
-
-  /**
    * 获取收支明细列表，支持翻页和参数过滤
    */
   async DescribeBillList(
@@ -170,6 +137,56 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeBillListResponse) => void
   ): Promise<DescribeBillListResponse> {
     return this.request("DescribeBillList", req, cb)
+  }
+
+  /**
+   * 查询账单资源汇总数据
+   */
+  async DescribeBillResourceSummary(
+    req: DescribeBillResourceSummaryRequest,
+    cb?: (error: string, rep: DescribeBillResourceSummaryResponse) => void
+  ): Promise<DescribeBillResourceSummaryResponse> {
+    return this.request("DescribeBillResourceSummary", req, cb)
+  }
+
+  /**
+   * 批量设置分账标签
+   */
+  async CreateAllocationTag(
+    req: CreateAllocationTagRequest,
+    cb?: (error: string, rep: CreateAllocationTagResponse) => void
+  ): Promise<CreateAllocationTagResponse> {
+    return this.request("CreateAllocationTag", req, cb)
+  }
+
+  /**
+   * 支付订单
+   */
+  async PayDeals(
+    req: PayDealsRequest,
+    cb?: (error: string, rep: PayDealsResponse) => void
+  ): Promise<PayDealsResponse> {
+    return this.request("PayDeals", req, cb)
+  }
+
+  /**
+   * 获取按项目汇总消耗详情
+   */
+  async DescribeCostSummaryByProject(
+    req: DescribeCostSummaryByProjectRequest,
+    cb?: (error: string, rep: DescribeCostSummaryByProjectResponse) => void
+  ): Promise<DescribeCostSummaryByProjectResponse> {
+    return this.request("DescribeCostSummaryByProject", req, cb)
+  }
+
+  /**
+   * 获取代金券相关信息
+   */
+  async DescribeVoucherInfo(
+    req: DescribeVoucherInfoRequest,
+    cb?: (error: string, rep: DescribeVoucherInfoResponse) => void
+  ): Promise<DescribeVoucherInfoResponse> {
+    return this.request("DescribeVoucherInfo", req, cb)
   }
 
   /**
@@ -196,26 +213,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询订单
-   */
-  async DescribeDealsByCond(
-    req: DescribeDealsByCondRequest,
-    cb?: (error: string, rep: DescribeDealsByCondResponse) => void
-  ): Promise<DescribeDealsByCondResponse> {
-    return this.request("DescribeDealsByCond", req, cb)
-  }
-
-  /**
-   * 获取按项目汇总消耗详情
-   */
-  async DescribeCostSummaryByProject(
-    req: DescribeCostSummaryByProjectRequest,
-    cb?: (error: string, rep: DescribeCostSummaryByProjectResponse) => void
-  ): Promise<DescribeCostSummaryByProjectResponse> {
-    return this.request("DescribeCostSummaryByProject", req, cb)
-  }
-
-  /**
    * 获取按计费模式汇总费用分布
    */
   async DescribeBillSummaryByPayMode(
@@ -226,16 +223,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询账单资源汇总数据
-   */
-  async DescribeBillResourceSummary(
-    req: DescribeBillResourceSummaryRequest,
-    cb?: (error: string, rep: DescribeBillResourceSummaryResponse) => void
-  ): Promise<DescribeBillResourceSummaryResponse> {
-    return this.request("DescribeBillResourceSummary", req, cb)
-  }
-
-  /**
    * 获取按地域汇总消耗详情
    */
   async DescribeCostSummaryByRegion(
@@ -243,6 +230,56 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeCostSummaryByRegionResponse) => void
   ): Promise<DescribeCostSummaryByRegionResponse> {
     return this.request("DescribeCostSummaryByRegion", req, cb)
+  }
+
+  /**
+   * 获取按产品汇总消耗详情
+   */
+  async DescribeCostSummaryByProduct(
+    req: DescribeCostSummaryByProductRequest,
+    cb?: (error: string, rep: DescribeCostSummaryByProductResponse) => void
+  ): Promise<DescribeCostSummaryByProductResponse> {
+    return this.request("DescribeCostSummaryByProduct", req, cb)
+  }
+
+  /**
+   * 获取COS产品用量明细
+   */
+  async DescribeDosageCosDetailByDate(
+    req: DescribeDosageCosDetailByDateRequest,
+    cb?: (error: string, rep: DescribeDosageCosDetailByDateResponse) => void
+  ): Promise<DescribeDosageCosDetailByDateResponse> {
+    return this.request("DescribeDosageCosDetailByDate", req, cb)
+  }
+
+  /**
+   * 获取云账户余额信息。
+   */
+  async DescribeAccountBalance(
+    req?: DescribeAccountBalanceRequest,
+    cb?: (error: string, rep: DescribeAccountBalanceResponse) => void
+  ): Promise<DescribeAccountBalanceResponse> {
+    return this.request("DescribeAccountBalance", req, cb)
+  }
+
+  /**
+   * 按日期获取产品用量明细
+   */
+  async DescribeDosageDetailByDate(
+    req: DescribeDosageDetailByDateRequest,
+    cb?: (error: string, rep: DescribeDosageDetailByDateResponse) => void
+  ): Promise<DescribeDosageDetailByDateResponse> {
+    return this.request("DescribeDosageDetailByDate", req, cb)
+  }
+
+  /**
+   * 获取代金券使用记录
+   */
+  async DescribeVoucherUsageDetails(
+    req: DescribeVoucherUsageDetailsRequest,
+    cb?: (error: string, rep: DescribeVoucherUsageDetailsResponse) => void
+  ): Promise<DescribeVoucherUsageDetailsResponse> {
+    return this.request("DescribeVoucherUsageDetails", req, cb)
   }
 
   /**
@@ -266,16 +303,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取产品汇总费用分布
-   */
-  async DescribeBillSummaryByProduct(
-    req: DescribeBillSummaryByProductRequest,
-    cb?: (error: string, rep: DescribeBillSummaryByProductResponse) => void
-  ): Promise<DescribeBillSummaryByProductResponse> {
-    return this.request("DescribeBillSummaryByProduct", req, cb)
-  }
-
-  /**
    * 获取按标签汇总费用分布
    */
   async DescribeBillSummaryByTag(
@@ -286,13 +313,43 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取按产品汇总消耗详情
+   * 获取分账标签
    */
-  async DescribeCostSummaryByProduct(
-    req: DescribeCostSummaryByProductRequest,
-    cb?: (error: string, rep: DescribeCostSummaryByProductResponse) => void
-  ): Promise<DescribeCostSummaryByProductResponse> {
-    return this.request("DescribeCostSummaryByProduct", req, cb)
+  async DescribeTagList(
+    req: DescribeTagListRequest,
+    cb?: (error: string, rep: DescribeTagListResponse) => void
+  ): Promise<DescribeTagListResponse> {
+    return this.request("DescribeTagList", req, cb)
+  }
+
+  /**
+   * 批量取消设置分账标签
+   */
+  async DeleteAllocationTag(
+    req: DeleteAllocationTagRequest,
+    cb?: (error: string, rep: DeleteAllocationTagResponse) => void
+  ): Promise<DeleteAllocationTagResponse> {
+    return this.request("DeleteAllocationTag", req, cb)
+  }
+
+  /**
+   * 查询订单
+   */
+  async DescribeDealsByCond(
+    req: DescribeDealsByCondRequest,
+    cb?: (error: string, rep: DescribeDealsByCondResponse) => void
+  ): Promise<DescribeDealsByCondResponse> {
+    return this.request("DescribeDealsByCond", req, cb)
+  }
+
+  /**
+   * 获取产品汇总费用分布
+   */
+  async DescribeBillSummaryByProduct(
+    req: DescribeBillSummaryByProductRequest,
+    cb?: (error: string, rep: DescribeBillSummaryByProductResponse) => void
+  ): Promise<DescribeBillSummaryByProductResponse> {
+    return this.request("DescribeBillSummaryByProduct", req, cb)
   }
 
   /**
@@ -303,25 +360,5 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeCostDetailResponse) => void
   ): Promise<DescribeCostDetailResponse> {
     return this.request("DescribeCostDetail", req, cb)
-  }
-
-  /**
-   * 获取COS产品用量明细
-   */
-  async DescribeDosageCosDetailByDate(
-    req: DescribeDosageCosDetailByDateRequest,
-    cb?: (error: string, rep: DescribeDosageCosDetailByDateResponse) => void
-  ): Promise<DescribeDosageCosDetailByDateResponse> {
-    return this.request("DescribeDosageCosDetailByDate", req, cb)
-  }
-
-  /**
-   * 支付订单
-   */
-  async PayDeals(
-    req: PayDealsRequest,
-    cb?: (error: string, rep: PayDealsResponse) => void
-  ): Promise<PayDealsResponse> {
-    return this.request("PayDeals", req, cb)
   }
 }

@@ -127,7 +127,7 @@ export interface GetFlowStatisticRequest {
 }
 
 /**
- * 移动网络加速目标地址结构体
+ * 多网聚合加速目标地址结构体
  */
 export interface DestAddressInfo {
   /**

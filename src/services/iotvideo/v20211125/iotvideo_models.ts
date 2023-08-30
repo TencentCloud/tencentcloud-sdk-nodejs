@@ -31,6 +31,10 @@ export interface DescribeCloudStorageDateRequest {
    * 用户ID
    */
   UserId?: string
+  /**
+   * 通道ID
+   */
+  ChannelId?: number
 }
 
 /**
@@ -131,6 +135,10 @@ lye1y30d：低功耗事件30天年套餐。
    * 订单id
    */
   OrderId?: string
+  /**
+   * 通道ID
+   */
+  ChannelId?: number
 }
 
 /**
@@ -313,7 +321,7 @@ export interface DescribeCloudStorageTimeResponse {
   /**
    * 接口返回数据
    */
-  Data: CloudStorageTimeData
+  Data?: CloudStorageTimeData
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3191,23 +3199,23 @@ export interface DescribeCloudStorageEventsResponse {
   /**
    * 云存事件列表
    */
-  Events: Array<CloudStorageEvent>
+  Events?: Array<CloudStorageEvent>
   /**
    * 请求上下文, 用作查询游标
    */
-  Context: string
+  Context?: string
   /**
    * 拉取结果是否已经结束
    */
-  Listover: boolean
+  Listover?: boolean
   /**
    * 内部结果数量，并不等同于事件总数。
    */
-  Total: number
+  Total?: number
   /**
    * 视频播放URL
    */
-  VideoURL: string
+  VideoURL?: string
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3341,7 +3349,7 @@ export interface DescribeCloudStorageDateResponse {
   /**
    * 云存日期数组，["2021-01-05","2021-01-06"]
    */
-  Data: Array<string>
+  Data?: Array<string>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4802,6 +4810,10 @@ export interface DescribeCloudStorageTimeRequest {
    * 用户ID
    */
   UserId?: string
+  /**
+   * 通道ID
+   */
+  ChannelId?: number
 }
 
 /**

@@ -162,7 +162,7 @@ export interface HostResource {
     /**
      * 专用宿主机实例磁盘类型
      */
-    DiskType: string;
+    DiskType?: string;
     /**
      * 专用宿主机实例总GPU卡数
      */
@@ -171,6 +171,11 @@ export interface HostResource {
      * 专用宿主机实例可用GPU卡数
      */
     GpuAvailable?: number;
+    /**
+     * CDH owner
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ExclusiveOwner?: string;
 }
 /**
  * DeleteDisasterRecoverGroups请求参数结构体

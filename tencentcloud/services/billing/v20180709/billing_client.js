@@ -28,40 +28,46 @@ class Client extends abstract_client_1.AbstractClient {
         super("billing.tencentcloudapi.com", "2018-07-09", clientConfig);
     }
     /**
-     * 获取云账户余额信息。
-     */
-    async DescribeAccountBalance(req, cb) {
-        return this.request("DescribeAccountBalance", req, cb);
-    }
-    /**
-     * 获取代金券相关信息
-     */
-    async DescribeVoucherInfo(req, cb) {
-        return this.request("DescribeVoucherInfo", req, cb);
-    }
-    /**
-     * 按日期获取产品用量明细
-     */
-    async DescribeDosageDetailByDate(req, cb) {
-        return this.request("DescribeDosageDetailByDate", req, cb);
-    }
-    /**
      * 获取按资源汇总消耗详情
      */
     async DescribeCostSummaryByResource(req, cb) {
         return this.request("DescribeCostSummaryByResource", req, cb);
     }
     /**
-     * 获取代金券使用记录
-     */
-    async DescribeVoucherUsageDetails(req, cb) {
-        return this.request("DescribeVoucherUsageDetails", req, cb);
-    }
-    /**
      * 获取收支明细列表，支持翻页和参数过滤
      */
     async DescribeBillList(req, cb) {
         return this.request("DescribeBillList", req, cb);
+    }
+    /**
+     * 查询账单资源汇总数据
+     */
+    async DescribeBillResourceSummary(req, cb) {
+        return this.request("DescribeBillResourceSummary", req, cb);
+    }
+    /**
+     * 批量设置分账标签
+     */
+    async CreateAllocationTag(req, cb) {
+        return this.request("CreateAllocationTag", req, cb);
+    }
+    /**
+     * 支付订单
+     */
+    async PayDeals(req, cb) {
+        return this.request("PayDeals", req, cb);
+    }
+    /**
+     * 获取按项目汇总消耗详情
+     */
+    async DescribeCostSummaryByProject(req, cb) {
+        return this.request("DescribeCostSummaryByProject", req, cb);
+    }
+    /**
+     * 获取代金券相关信息
+     */
+    async DescribeVoucherInfo(req, cb) {
+        return this.request("DescribeVoucherInfo", req, cb);
     }
     /**
      * 查询账单明细数据。
@@ -79,34 +85,46 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeBillSummary", req, cb);
     }
     /**
-     * 查询订单
-     */
-    async DescribeDealsByCond(req, cb) {
-        return this.request("DescribeDealsByCond", req, cb);
-    }
-    /**
-     * 获取按项目汇总消耗详情
-     */
-    async DescribeCostSummaryByProject(req, cb) {
-        return this.request("DescribeCostSummaryByProject", req, cb);
-    }
-    /**
      * 获取按计费模式汇总费用分布
      */
     async DescribeBillSummaryByPayMode(req, cb) {
         return this.request("DescribeBillSummaryByPayMode", req, cb);
     }
     /**
-     * 查询账单资源汇总数据
-     */
-    async DescribeBillResourceSummary(req, cb) {
-        return this.request("DescribeBillResourceSummary", req, cb);
-    }
-    /**
      * 获取按地域汇总消耗详情
      */
     async DescribeCostSummaryByRegion(req, cb) {
         return this.request("DescribeCostSummaryByRegion", req, cb);
+    }
+    /**
+     * 获取按产品汇总消耗详情
+     */
+    async DescribeCostSummaryByProduct(req, cb) {
+        return this.request("DescribeCostSummaryByProduct", req, cb);
+    }
+    /**
+     * 获取COS产品用量明细
+     */
+    async DescribeDosageCosDetailByDate(req, cb) {
+        return this.request("DescribeDosageCosDetailByDate", req, cb);
+    }
+    /**
+     * 获取云账户余额信息。
+     */
+    async DescribeAccountBalance(req, cb) {
+        return this.request("DescribeAccountBalance", req, cb);
+    }
+    /**
+     * 按日期获取产品用量明细
+     */
+    async DescribeDosageDetailByDate(req, cb) {
+        return this.request("DescribeDosageDetailByDate", req, cb);
+    }
+    /**
+     * 获取代金券使用记录
+     */
+    async DescribeVoucherUsageDetails(req, cb) {
+        return this.request("DescribeVoucherUsageDetails", req, cb);
     }
     /**
      * 获取按地域汇总费用分布
@@ -121,40 +139,40 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeBillSummaryByProject", req, cb);
     }
     /**
-     * 获取产品汇总费用分布
-     */
-    async DescribeBillSummaryByProduct(req, cb) {
-        return this.request("DescribeBillSummaryByProduct", req, cb);
-    }
-    /**
      * 获取按标签汇总费用分布
      */
     async DescribeBillSummaryByTag(req, cb) {
         return this.request("DescribeBillSummaryByTag", req, cb);
     }
     /**
-     * 获取按产品汇总消耗详情
+     * 获取分账标签
      */
-    async DescribeCostSummaryByProduct(req, cb) {
-        return this.request("DescribeCostSummaryByProduct", req, cb);
+    async DescribeTagList(req, cb) {
+        return this.request("DescribeTagList", req, cb);
+    }
+    /**
+     * 批量取消设置分账标签
+     */
+    async DeleteAllocationTag(req, cb) {
+        return this.request("DeleteAllocationTag", req, cb);
+    }
+    /**
+     * 查询订单
+     */
+    async DescribeDealsByCond(req, cb) {
+        return this.request("DescribeDealsByCond", req, cb);
+    }
+    /**
+     * 获取产品汇总费用分布
+     */
+    async DescribeBillSummaryByProduct(req, cb) {
+        return this.request("DescribeBillSummaryByProduct", req, cb);
     }
     /**
      * 查询消耗明细
      */
     async DescribeCostDetail(req, cb) {
         return this.request("DescribeCostDetail", req, cb);
-    }
-    /**
-     * 获取COS产品用量明细
-     */
-    async DescribeDosageCosDetailByDate(req, cb) {
-        return this.request("DescribeDosageCosDetailByDate", req, cb);
-    }
-    /**
-     * 支付订单
-     */
-    async PayDeals(req, cb) {
-        return this.request("PayDeals", req, cb);
     }
 }
 exports.Client = Client;

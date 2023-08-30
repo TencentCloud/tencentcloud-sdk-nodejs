@@ -96,10 +96,19 @@ callbackinfo包含： 回调地址和签名key
         return this.request("CreateUserAutoSignEnableUrl", req, cb);
     }
     /**
-     * 对企业员工进行印章授权
+     * 此接口（CreateIntegrationRole）用来创建企业自定义的SaaS角色或集团角色。
+
+适用场景1：创建当前企业的自定义SaaS角色或集团角色，并且创建时不进行权限的设置（PermissionGroups 参数不传），角色中的权限内容可通过控制台编辑角色或通过接口 ModifyIntegrationRole 完成更新。
+
+适用场景2：创建当前企业的自定义SaaS角色或集团角色，并且创建时进行权限的设置（PermissionGroups 参数要传），权限树内容 PermissionGroups 可参考接口 DescribeIntegrationRoles 的输出。
+适用场景3：创建集团角色时可同时设置角色管理的子企业列表，可通过设置 SubOrganizationIds 参数达到此效果。
+
+适用场景4：主企业代理子企业操作的场景，需要设置Agent参数，并且ProxyOrganizationId设置为子企业的id即可。
+
+注意事项：SaaS角色和集团角色对应的权限树是不一样的。
      */
-    async CreateSealPolicy(req, cb) {
-        return this.request("CreateSealPolicy", req, cb);
+    async CreateIntegrationRole(req, cb) {
+        return this.request("CreateIntegrationRole", req, cb);
     }
     /**
      * 本接口（CreateEmbedWebUrl）用于创建嵌入web的链接 本接口支持创建：创建印章，创建模板，修改模板，预览模板，预览合同流程的web链接 进入web连接后与当前控制台操作保持一致
@@ -271,6 +280,18 @@ callbackinfo包含： 回调地址和签名key
         return this.request("CreateChannelSubOrganizationModifyQrCode", req, cb);
     }
     /**
+     * 此接口（UploadFiles）用于文件上传。<br/>
+适用场景：用于生成pdf资源编号（FileIds）来配合“用PDF创建流程”接口使用，使用场景可详见“用PDF创建流程”接口说明。<br/>
+
+其中上传的文件，图片类型(png/jpg/jpeg)大小限制为5M，其他大小限制为60M。<br/>
+调用时需要设置Domain/接口请求域名为 file.ess.tencent.cn,代码示例：<br/>
+HttpProfile httpProfile = new HttpProfile();<br/>
+httpProfile.setEndpoint("file.test.ess.tencent.cn");<br/>
+     */
+    async UploadFiles(req, cb) {
+        return this.request("UploadFiles", req, cb);
+    }
+    /**
      * 查询出证报告，返回报告 URL。出证报告编号通过CreateFlowEvidenceReport接口获取。
      */
     async DescribeFlowEvidenceReport(req, cb) {
@@ -361,16 +382,25 @@ callbackinfo包含： 回调地址和签名key
         return this.request("CreateIntegrationUserRoles", req, cb);
     }
     /**
-     * 此接口（UploadFiles）用于文件上传。<br/>
-适用场景：用于生成pdf资源编号（FileIds）来配合“用PDF创建流程”接口使用，使用场景可详见“用PDF创建流程”接口说明。<br/>
+     * 此接口（ModifyIntegrationRole）用来更新企业自定义的SaaS角色或集团角色。
 
-其中上传的文件，图片类型(png/jpg/jpeg)大小限制为5M，其他大小限制为60M。<br/>
-调用时需要设置Domain/接口请求域名为 file.ess.tencent.cn,代码示例：<br/>
-HttpProfile httpProfile = new HttpProfile();<br/>
-httpProfile.setEndpoint("file.test.ess.tencent.cn");<br/>
+适用场景1：更新当前企业的自定义SaaS角色或集团角色，并且更新时不进行角色中权限的更新（PermissionGroups 参数不传）。
+
+适用场景2：更新当前企业的自定义SaaS角色或集团角色，并且更新时进行角色中权限的设置（PermissionGroups 参数要传），权限树内容 PermissionGroups 可参考接口 DescribeIntegrationRoles 的输出。
+适用场景3：更新集团角色管理的子企业列表，可通过设置 SubOrganizationIds 参数达到此效果。
+
+适用场景4：主企业代理子企业操作的场景，需要设置Agent参数，并且ProxyOrganizationId设置为子企业的id即可。
+
+注意事项：SaaS角色和集团角色对应的权限树是不一样的。
      */
-    async UploadFiles(req, cb) {
-        return this.request("UploadFiles", req, cb);
+    async ModifyIntegrationRole(req, cb) {
+        return this.request("ModifyIntegrationRole", req, cb);
+    }
+    /**
+     * 对企业员工进行印章授权
+     */
+    async CreateSealPolicy(req, cb) {
+        return this.request("CreateSealPolicy", req, cb);
     }
     /**
      * 通过此接口，创建企业批量签署链接，企业员工点击链接即可跳转控制台进行批量签署。

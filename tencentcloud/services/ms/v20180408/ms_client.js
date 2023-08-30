@@ -28,7 +28,7 @@ class Client extends abstract_client_1.AbstractClient {
         super("ms.tencentcloudapi.com", "2018-04-08", clientConfig);
     }
     /**
-     * client任务请求地址
+     * client任务请求
      */
     async RequestLocalTask(req, cb) {
         return this.request("RequestLocalTask", req, cb);
@@ -82,7 +82,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeOrderInstances", req, cb);
     }
     /**
-     * 更新本地任务结果
+     * 更新本地任务执行结果
      */
     async UpdateLocalTaskResult(req, cb) {
         return this.request("UpdateLocalTaskResult", req, cb);
@@ -124,7 +124,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeShieldResult", req, cb);
     }
     /**
-     * 更新client状态
+     * 更新client状态，需要白名单
      */
     async UpdateClientState(req, cb) {
         return this.request("UpdateClientState", req, cb);

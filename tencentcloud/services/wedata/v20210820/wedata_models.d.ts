@@ -10914,47 +10914,47 @@ export interface LinkOpsDto {
      * 边的id
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Id?: string;
+    Id: string;
     /**
      * 边的key
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    LinkKey?: string;
+    LinkKey: string;
     /**
      * 边的源节点
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TaskFrom?: string;
+    TaskFrom: string;
     /**
      * 边的目标节点
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TaskTo?: string;
+    TaskTo: string;
     /**
      * 责任人
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    InCharge?: string;
+    InCharge: string;
     /**
      * 父子任务之间的依赖关系
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    LinkDependencyType?: string;
+    LinkDependencyType: string;
     /**
      * 父子任务之间依赖偏移量
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Offset?: string;
+    Offset: string;
     /**
      * 边的类型
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    LinkType?: string;
+    LinkType: string;
     /**
      * 工作流id
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    WorkflowId?: string;
+    WorkflowId: string;
 }
 /**
  * DescribeOpsMakePlanTasks返回参数结构体
@@ -12932,7 +12932,7 @@ export interface DescribeTaskRunHistoryRequest {
     /**
      * 分页页码
      */
-    PageNumber: string;
+    PageNumber: number;
 }
 /**
  * BatchMakeUpIntegrationTasks请求参数结构体
@@ -16577,402 +16577,402 @@ export interface TaskOpsDto {
      * 任务ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TaskId?: string;
+    TaskId: string;
     /**
      * 虚拟任务id
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    VirtualTaskId?: string;
+    VirtualTaskId: string;
     /**
      * 虚拟任务标记
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    VirtualFlag?: boolean;
+    VirtualFlag: boolean;
     /**
      * 任务名
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TaskName?: string;
+    TaskName: string;
     /**
      * 工作流id
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    WorkflowId?: string;
+    WorkflowId: string;
     /**
      * 任务为虚拟任务时，任务所在的真实工作流Id
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    RealWorkflowId?: string;
+    RealWorkflowId: string;
     /**
      * 工作流名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    WorkflowName?: string;
+    WorkflowName: string;
     /**
      * 文件夹id
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    FolderId?: string;
+    FolderId: string;
     /**
      * 文件夹名字
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    FolderName?: string;
+    FolderName: string;
     /**
      * 创建时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CreateTime?: string;
+    CreateTime: string;
     /**
      * 最近更新时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    LastUpdate?: string;
+    LastUpdate: string;
     /**
      * 任务状态
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Status?: string;
+    Status: string;
     /**
      * 责任人
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    InCharge?: string;
+    InCharge: string;
     /**
      * 责任人用户id
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    InChargeId?: string;
+    InChargeId: string;
     /**
      * 调度生效日期
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    StartTime?: string;
+    StartTime: string;
     /**
      * 调度结束日期
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    EndTime?: string;
+    EndTime: string;
     /**
      * 执行时间左闭区间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ExecutionStartTime?: string;
+    ExecutionStartTime: string;
     /**
      * 执行时间右闭区间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ExecutionEndTime?: string;
+    ExecutionEndTime: string;
     /**
      * 周期类型
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CycleType?: string;
+    CycleType: string;
     /**
      * 步长
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CycleStep?: number;
+    CycleStep: number;
     /**
      * 调度cron表达式
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CrontabExpression?: string;
+    CrontabExpression: string;
     /**
      * 延时执行时间，unit=分钟
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DelayTime?: number;
+    DelayTime: number;
     /**
      * 开始执行时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    StartupTime?: number;
+    StartupTime: number;
     /**
      * 重试等待时间, unit=分钟
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    RetryWait?: number;
+    RetryWait: number;
     /**
      * 是否可重试，1 代表可以重试
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    RetryAble?: number;
+    RetryAble: number;
     /**
      * 调度配置-弹性周期配置，小时/周/月/年调度才有，小时任务指定每天的0点3点4点跑，则为'0,3,4'
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TaskAction?: string;
+    TaskAction: string;
     /**
      * 运行次数限制
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TryLimit?: number;
+    TryLimit: number;
     /**
      * 运行优先级
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    RunPriority?: number;
+    RunPriority: number;
     /**
      * 任务类型
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TaskType?: TaskTypeOpsDto;
+    TaskType: TaskTypeOpsDto;
     /**
      * 指定的运行节点
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    BrokerIp?: string;
+    BrokerIp: string;
     /**
      * 集群name
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ClusterId?: string;
+    ClusterId: string;
     /**
      * 最小数据时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    MinDateTime?: string;
+    MinDateTime: string;
     /**
      * 最大数据时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    MaxDateTime?: string;
+    MaxDateTime: string;
     /**
      * 运行耗时超时时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ExecutionTTL?: number;
+    ExecutionTTL: number;
     /**
      * 自依赖类型
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SelfDepend?: string;
+    SelfDepend: string;
     /**
      * 左侧坐标
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    LeftCoordinate?: number;
+    LeftCoordinate: number;
     /**
      * 顶部坐标
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TopCoordinate?: number;
+    TopCoordinate: number;
     /**
      * 任务备注
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Notes?: string;
+    Notes: string;
     /**
      * 任务初始化策略
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    InstanceInitStrategy?: string;
+    InstanceInitStrategy: string;
     /**
      * 计算队列
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    YarnQueue?: string;
+    YarnQueue: string;
     /**
      * 最新调度提交时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    LastSchedulerCommitTime?: string;
+    LastSchedulerCommitTime: string;
     /**
      * 按cron表达式计算的任务开始执行时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    NormalizedJobStartTime?: string;
+    NormalizedJobStartTime: string;
     /**
      * 调度计划描述
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SchedulerDesc?: string;
+    SchedulerDesc: string;
     /**
      * 计算资源组
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ResourceGroup?: string;
+    ResourceGroup: string;
     /**
      * 任务创建人
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Creator?: string;
+    Creator: string;
     /**
      * 任务依赖类型 and、or
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DependencyRel?: string;
+    DependencyRel: string;
     /**
      * 任务工作流依赖 yes、no
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DependencyWorkflow?: string;
+    DependencyWorkflow: string;
     /**
      * 事件监听配置
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    EventListenerConfig?: string;
+    EventListenerConfig: string;
     /**
      * 事件驱动配置
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    EventPublisherConfig?: string;
+    EventPublisherConfig: string;
     /**
      * 虚拟任务状态
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    VirtualTaskStatus?: string;
+    VirtualTaskStatus: string;
     /**
      * 任务依赖边详情
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TaskLinkInfo?: LinkOpsDto;
+    TaskLinkInfo: LinkOpsDto;
     /**
      * 任务产品类型
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ProductName?: string;
+    ProductName: string;
     /**
      * 项目id
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ProjectId?: string;
+    ProjectId: string;
     /**
      * 项目标识
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ProjectIdent?: string;
+    ProjectIdent: string;
     /**
      * 项目名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ProjectName?: string;
+    ProjectName: string;
     /**
      * 主账户userId
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    OwnId?: string;
+    OwnId: string;
     /**
      * 用户userId
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    UserId?: string;
+    UserId: string;
     /**
      * 租户id
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TenantId?: string;
+    TenantId: string;
     /**
      * 更新人昵称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    UpdateUser?: string;
+    UpdateUser: string;
     /**
      * 更新时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    UpdateTime?: string;
+    UpdateTime: string;
     /**
      * 更新人userId
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    UpdateUserId?: string;
+    UpdateUserId: string;
     /**
      * 任务类型id
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TaskTypeId?: number;
+    TaskTypeId: number;
     /**
      * 任务类型描述
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TaskTypeDesc?: string;
+    TaskTypeDesc: string;
     /**
      * 是否展示工作流
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ShowWorkflow?: boolean;
+    ShowWorkflow: boolean;
     /**
      * 首次提交时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    FirstSubmitTime?: string;
+    FirstSubmitTime: string;
     /**
      * 首次运行时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    FirstRunTime?: string;
+    FirstRunTime: string;
     /**
      * 调度描述
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ScheduleDesc?: string;
+    ScheduleDesc: string;
     /**
      * 周期
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CycleNum?: number;
+    CycleNum: number;
     /**
      * 表达式
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Crontab?: string;
+    Crontab: string;
     /**
      * 开始日期
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    StartDate?: string;
+    StartDate: string;
     /**
      * 结束日期
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    EndDate?: string;
+    EndDate: string;
     /**
      * 周期单位
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CycleUnit?: string;
+    CycleUnit: string;
     /**
      * 初始化策略
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    InitStrategy?: string;
+    InitStrategy: string;
     /**
      * 层级
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Layer?: string;
+    Layer: string;
     /**
      * 来源数据源ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SourceServiceId?: string;
+    SourceServiceId: string;
     /**
      * 来源数据源类型
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SourceServiceType?: string;
+    SourceServiceType: string;
     /**
      * 目标数据源ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TargetServiceId?: string;
+    TargetServiceId: string;
     /**
      * 目标数据源类型
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TargetServiceType?: string;
+    TargetServiceType: string;
     /**
      * 子任务列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TasksStr?: string;
+    TasksStr: string;
     /**
      * 任务版本是否已提交
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Submit?: boolean;
+    Submit: boolean;
 }
 /**
  * DescribeOfflineTaskToken请求参数结构体

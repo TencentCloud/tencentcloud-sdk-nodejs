@@ -8,7 +8,7 @@ import { CreateShieldPlanInstanceResponse, DescribeEncryptInstancesResponse, Cre
 export declare class Client extends AbstractClient {
     constructor(clientConfig: ClientConfig);
     /**
-     * client任务请求地址
+     * client任务请求
      */
     RequestLocalTask(req: RequestLocalTaskRequest, cb?: (error: string, rep: RequestLocalTaskResponse) => void): Promise<RequestLocalTaskResponse>;
     /**
@@ -46,7 +46,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeOrderInstances(req: DescribeOrderInstancesRequest, cb?: (error: string, rep: DescribeOrderInstancesResponse) => void): Promise<DescribeOrderInstancesResponse>;
     /**
-     * 更新本地任务结果
+     * 更新本地任务执行结果
      */
     UpdateLocalTaskResult(req: UpdateLocalTaskResultRequest, cb?: (error: string, rep: UpdateLocalTaskResultResponse) => void): Promise<UpdateLocalTaskResultResponse>;
     /**
@@ -74,7 +74,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeShieldResult(req: DescribeShieldResultRequest, cb?: (error: string, rep: DescribeShieldResultResponse) => void): Promise<DescribeShieldResultResponse>;
     /**
-     * 更新client状态
+     * 更新client状态，需要白名单
      */
     UpdateClientState(req: UpdateClientStateRequest, cb?: (error: string, rep: UpdateClientStateResponse) => void): Promise<UpdateClientStateResponse>;
     /**

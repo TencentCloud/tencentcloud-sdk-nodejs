@@ -102,7 +102,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * client任务请求地址
+   * client任务请求
    */
   async RequestLocalTask(
     req: RequestLocalTaskRequest,
@@ -188,7 +188,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 更新本地任务结果
+   * 更新本地任务执行结果
    */
   async UpdateLocalTaskResult(
     req: UpdateLocalTaskResultRequest,
@@ -258,7 +258,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 更新client状态
+   * 更新client状态，需要白名单
    */
   async UpdateClientState(
     req: UpdateClientStateRequest,

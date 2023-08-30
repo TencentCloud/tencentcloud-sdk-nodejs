@@ -342,7 +342,7 @@ export interface DeleteApplicationResponse {
     /**
      * 返回结果
      */
-    Result: boolean;
+    Result?: boolean;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -464,7 +464,7 @@ export interface StopApplicationRequest {
      */
     SourceChannel?: number;
     /**
-     * 环境ID
+     * 环境ID/命名空间ID
      */
     EnvironmentId?: string;
 }
@@ -1848,7 +1848,7 @@ export interface RestartApplicationResponse {
     /**
      * 返回结果
      */
-    Result: boolean;
+    Result?: boolean;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2049,7 +2049,7 @@ export interface RestartApplicationRequest {
      */
     SourceChannel?: number;
     /**
-     * 环境ID
+     * 环境ID/命名空间ID
      */
     EnvironmentId?: string;
 }
@@ -2108,7 +2108,7 @@ export interface StopApplicationResponse {
     /**
      * 返回结果
      */
-    Result: boolean;
+    Result?: boolean;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2174,7 +2174,7 @@ export interface DeleteApplicationRequest {
      */
     EnvironmentId: string;
     /**
-     * 来源渠道
+     * 来源渠道(用户不需要关心此参数)
      */
     SourceChannel?: number;
     /**
@@ -3602,7 +3602,7 @@ export interface ModifyApplicationReplicasResponse {
      * 是否成功
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Result: boolean;
+    Result?: boolean;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -4076,7 +4076,7 @@ export interface ModifyEnvironmentResponse {
  */
 export interface ModifyApplicationReplicasRequest {
     /**
-     * 服务id
+     * 应用id
      */
     ApplicationId: string;
     /**

@@ -555,15 +555,19 @@ export interface CdnInstanceDetail {
     /**
      * 域名
      */
-    Domain: string;
+    Domain?: string;
     /**
      * 已部署证书ID
      */
-    CertId: string;
+    CertId?: string;
     /**
      * 域名状态
      */
-    Status: string;
+    Status?: string;
+    /**
+     * 域名计费状态
+     */
+    HttpsBillingSwitch?: string;
 }
 /**
  * VerifyManager返回参数结构体
@@ -2475,11 +2479,21 @@ export interface Certificate {
     /**
      * 证书ID
      */
-    CertId: string;
+    CertId?: string;
     /**
      * 证书绑定的域名
      */
-    DnsNames: Array<string>;
+    DnsNames?: Array<string>;
+    /**
+     * 根证书ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CertCaId?: string;
+    /**
+     * 证书认证模式：UNIDIRECTIONAL单向认证，MUTUAL双向认证
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SSLMode?: string;
 }
 /**
  * CreateCertificateByPackage请求参数结构体
@@ -3818,15 +3832,23 @@ export interface TkeInstanceDetail {
     /**
      * 集群ID
      */
-    ClusterId: string;
+    ClusterId?: string;
     /**
      * 集群名称
      */
-    ClusterName: string;
+    ClusterName?: string;
     /**
      * 集群命名空间列表
      */
-    NamespaceList: Array<TkeNameSpaceDetail>;
+    NamespaceList?: Array<TkeNameSpaceDetail>;
+    /**
+     * 集群类型
+     */
+    ClusterType?: string;
+    /**
+     * 集群版本
+     */
+    ClusterVersion?: string;
 }
 /**
  * UploadConfirmLetter请求参数结构体

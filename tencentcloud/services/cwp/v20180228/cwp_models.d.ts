@@ -10603,66 +10603,72 @@ export interface BashRule {
     /**
      * 规则ID
      */
-    Id: number;
+    Id?: number;
     /**
      * 客户端ID
      */
-    Uuid: string;
+    Uuid?: string;
     /**
      * 规则名称
      */
-    Name: string;
+    Name?: string;
     /**
      * 危险等级(0 ：无 1: 高危 2:中危 3: 低危)
      */
-    Level: number;
+    Level?: number;
     /**
      * 正则表达式
      */
-    Rule: string;
+    Rule?: string;
     /**
      * 规则描述
+     * @deprecated
      */
-    Decription: string;
+    Decription?: string;
     /**
      * 操作人
      */
-    Operator: string;
+    Operator?: string;
     /**
      * 是否全局规则
      */
-    IsGlobal: number;
+    IsGlobal?: number;
     /**
      * 状态 (0: 有效 1: 无效)
      */
-    Status: number;
+    Status?: number;
     /**
      * 创建时间
      */
-    CreateTime: string;
+    CreateTime?: string;
     /**
      * 修改时间
      */
-    ModifyTime: string;
+    ModifyTime?: string;
     /**
      * 主机IP
      */
-    Hostip: string;
+    Hostip?: string;
     /**
      * 生效服务器的uuid数组
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Uuids: Array<string>;
+    Uuids?: Array<string>;
     /**
      * 0=黑名单 1=白名单
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    White: number;
+    White?: number;
     /**
      * 是否处理之前的事件 0: 不处理 1:处理
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DealOldEvents: number;
+    DealOldEvents?: number;
+    /**
+     * 规则描述
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Description?: string;
 }
 /**
  * 平台标签

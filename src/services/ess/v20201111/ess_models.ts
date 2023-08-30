@@ -304,13 +304,22 @@ export interface CreateFlowApproversResponse {
 }
 
 /**
- * DescribeIntegrationMainOrganizationUser请求参数结构体
+ * DescribeFileUrls返回参数结构体
  */
-export interface DescribeIntegrationMainOrganizationUserRequest {
+export interface DescribeFileUrlsResponse {
   /**
-   * 操作人信息，userId必填
+   * 文件URL信息；
+链接不是永久链接，有效期5分钟后链接失效。
    */
-  Operator: UserInfo
+  FileUrls?: Array<FileUrl>
+  /**
+   * URL数量
+   */
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -342,154 +351,34 @@ export interface CreateMultiFlowSignQRCodeResponse {
 }
 
 /**
- * 创建流程的签署方信息
+ * 签署链接信息
  */
-export interface FlowCreateApprover {
+export interface FlowApproverUrlInfo {
   /**
-   * 参与者类型：
-0：企业
-1：个人
-3：企业自动签署
-注：类型为3（企业自动签署）时，会自动完成该签署方的签署。
-自动签署仅进行盖章操作，不能是手写签名。
-本方企业自动签署的签署人会默认是当前的发起人
-他方企业自动签署的签署人是自动签模板的他方企业授权人
-7: 个人自动签署，适用于个人自动签场景。
-注: 个人自动签场景为白名单功能, 使用前请联系对接的客户经理沟通。
+   * 签署链接。注意该链接有效期为30分钟，同时需要注意保密，不要外泄给无关用户。
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  ApproverType: number
+  SignUrl?: string
   /**
-   * 签署人企业名称
-<br/>当approverType=1 或 approverType=3时，必须指定
-
-
+   * 签署人类型 1-个人
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  OrganizationName?: string
+  ApproverType?: number
   /**
-   * 签署方经办人姓名
-<br/>在未指定签署人电子签UserId情况下，为必填参数
+   * 签署人姓名
+注意：此字段可能返回 null，表示取不到有效值。
    */
   ApproverName?: string
   /**
-   * 签署方经办人手机号码
-<br/>在未指定签署人电子签UserId情况下，为必填参数
-
+   * 签署人手机号
+注意：此字段可能返回 null，表示取不到有效值。
    */
   ApproverMobile?: string
   /**
-   * 签署人的证件类型
-ID_CARD 身份证
-HONGKONG_AND_MACAO 港澳居民来往内地通行证
-HONGKONG_MACAO_AND_TAIWAN 港澳台居民居住证(格式同居民身份证)
-OTHER_CARD_TYPE 其他（需要使用该类型请先联系运营经理）
+   * 签署长链接。注意该链接有效期为30分钟，同时需要注意保密，不要外泄给无关用户。
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  ApproverIdCardType?: string
-  /**
-   * 签署人证件号（长度不超过18位）
-   */
-  ApproverIdCardNumber?: string
-  /**
-   * 签署方经办人在模板中的参与方ID
-<br/>模板发起合同时，该参数为必填项
-<br/>文件发起合同是，该参数无序传值
-
-   */
-  RecipientId?: string
-  /**
-   * 签署意愿确认渠道,WEIXINAPP:人脸识别
-   */
-  VerifyChannel?: Array<string>
-  /**
-   * 是否发送短信
-<br/>sms--短信通知
-<br/>none--不通知
-<br/>默认为sms
-<br/>发起方=签署方时不发送短信
-   */
-  NotifyType?: string
-  /**
-   * 合同强制需要阅读全文，无需传此参数
-   */
-  IsFullText?: boolean
-  /**
-   * 合同的强制预览时间：3~300s，未指定则按合同页数计算
-   */
-  PreReadTime?: number
-  /**
-   * 签署人userId，仅支持本企业的员工userid， 可在控制台组织管理处获得
-
-若传此字段 则以userid的信息为主，会覆盖传递过来的签署人基本信息， 包括姓名，手机号，证件类型等信息
-   */
-  UserId?: string
-  /**
-   * 当前只支持true，默认为true
-   */
-  Required?: boolean
-  /**
-   * 签署人用户来源，此参数仅针对企微用户开放
-
-企微侧用户请传入：WEWORKAPP
-   */
-  ApproverSource?: string
-  /**
-   * 企业签署方或签标识，客户自定义，64位长度
-<br>用于发起含有或签签署人的合同。或签参与人必须有此字段。
-<br/>合同内不同或签参与人CustomApproverTag需要保证唯一。
-<br/>如果或签签署人为本方企微参与人，ApproverSource参数需要指定WEWORKAPP
-   */
-  CustomApproverTag?: string
-  /**
-   * 快速注册相关信息，目前暂未开放！
-   */
-  RegisterInfo?: RegisterInfo
-  /**
-   * 签署人个性化能力值
-   */
-  ApproverOption?: ApproverOption
-  /**
-   * 签署完前端跳转的url，暂未使用
-   * @deprecated
-   */
-  JumpUrl?: string
-  /**
-   * 签署ID
-- 发起流程时系统自动补充
-- 创建签署链接时，可以通过查询详情接口获得签署人的SignId，然后可传入此值为该签署人创建签署链接，无需再传姓名、手机号、证件号等其他信息
-   */
-  SignId?: string
-  /**
-   * 当前签署方进行签署操作是否需要企业内部审批
-<br>true 则为需要
-<br/>false,无序企业内部审批（默认）
-<br/>为个人签署方时则由发起方企业审核。
-   */
-  ApproverNeedSignReview?: boolean
-  /**
-   * 签署人签署控件， 此参数仅针对文件发起（CreateFlowByFiles）生效
-<br/>文件发起时，可通过该参数为签署人指定签署控件类型以及位置
-   */
-  SignComponents?: Array<Component>
-  /**
-   * 签署人填写控件 此参数仅针对文件发起（CreateFlowByFiles）生效
-<br/>文件发起时，可通过该参数为签署人指定填写控件类型以及位置
-   */
-  Components?: Array<Component>
-  /**
-   * 签署方控件类型为 SIGN_SIGNATURE时，可以指定签署方签名方式
-	HANDWRITE – 手写签名
-	OCR_ESIGN -- AI智能识别手写签名
-	ESIGN -- 个人印章类型
-	SYSTEM_ESIGN -- 系统签名（该类型可以在用户签署时根据用户姓名一键生成一个签名来进行签署）
-   */
-  ComponentLimitType?: Array<string>
-  /**
-   * 合同查看方式<br/>默认1 -实名查看 <br/>2-短信验证码查看(企业签署方暂不支持该方式)
-   */
-  ApproverVerifyTypes?: Array<number | bigint>
-  /**
-   * 合同签署方式(默认1,2) <br/>1-人脸认证 <br/>2-签署密码 <br/>3-运营商三要素
-   */
-  ApproverSignTypes?: Array<number | bigint>
+  LongUrl?: string
 }
 
 /**
@@ -807,34 +696,42 @@ export interface StaffRole {
 }
 
 /**
- * 签署链接信息
+ * CreateIntegrationRole请求参数结构体
  */
-export interface FlowApproverUrlInfo {
+export interface CreateIntegrationRoleRequest {
   /**
-   * 签署链接。注意该链接有效期为30分钟，同时需要注意保密，不要外泄给无关用户。
-注意：此字段可能返回 null，表示取不到有效值。
+   * 角色名称，最大长度为20个字符，仅限中文、字母、数字和下划线组成。
    */
-  SignUrl?: string
+  Name: string
   /**
-   * 签署人类型 1-个人
-注意：此字段可能返回 null，表示取不到有效值。
+   * 执行本接口操作的员工信息。使用此接口时，必须填写userId。
+支持填入集团子公司经办人 userId 代发合同。
+
+注: 在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。
    */
-  ApproverType?: number
+  Operator: UserInfo
   /**
-   * 签署人姓名
-注意：此字段可能返回 null，表示取不到有效值。
+   * 角色描述，最大长度为50个字符
    */
-  ApproverName?: string
+  Description?: string
   /**
-   * 签署人手机号
-注意：此字段可能返回 null，表示取不到有效值。
+   * 角色类型，0:saas角色，1:集团角色
+默认0，saas角色
    */
-  ApproverMobile?: string
+  IsGroupRole?: number
   /**
-   * 签署长链接。注意该链接有效期为30分钟，同时需要注意保密，不要外泄给无关用户。
-注意：此字段可能返回 null，表示取不到有效值。
+   * 权限树
    */
-  LongUrl?: string
+  PermissionGroups?: Array<PermissionGroup>
+  /**
+   * 集团角色的话，需要传递集团子企业列表，如果是全选，则传1
+   */
+  SubOrganizationIds?: string
+  /**
+   * 代理企业和员工的信息。
+在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。
+   */
+  Agent?: Agent
 }
 
 /**
@@ -1317,6 +1214,20 @@ export interface DescribeIntegrationEmployeesRequest {
 }
 
 /**
+ * UnbindEmployeeUserIdWithClientOpenId返回参数结构体
+ */
+export interface UnbindEmployeeUserIdWithClientOpenIdResponse {
+  /**
+   * 解绑是否成功，1表示成功，0表示失败
+   */
+  Status?: number
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateIntegrationUserRoles返回参数结构体
  */
 export interface CreateIntegrationUserRolesResponse {
@@ -1566,17 +1477,13 @@ export interface DescribeThirdPartyAuthCodeRequest {
 }
 
 /**
- * UnbindEmployeeUserIdWithClientOpenId返回参数结构体
+ * DescribeIntegrationMainOrganizationUser请求参数结构体
  */
-export interface UnbindEmployeeUserIdWithClientOpenIdResponse {
+export interface DescribeIntegrationMainOrganizationUserRequest {
   /**
-   * 解绑是否成功，1表示成功，0表示失败
+   * 操作人信息，userId必填
    */
-  Status?: number
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  Operator: UserInfo
 }
 
 /**
@@ -1952,6 +1859,26 @@ export interface CreatePersonAuthCertificateImageResponse {
    * 个人用户证明证书的下载链接
    */
   AuthCertUrl?: string
+  /**
+   * 证书图片上的证书编号，20位数字
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ImageCertId?: string
+  /**
+   * 图片证明对应的CA证书序列号
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SerialNumber?: string
+  /**
+   * CA证书颁发时间戳
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ValidFrom?: number
+  /**
+   * CA证书有效截止时间戳
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ValidTo?: number
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2385,6 +2312,25 @@ export interface CreateFlowSignUrlResponse {
 }
 
 /**
+ * 发起流程快速注册相关信息
+ */
+export interface RegisterInfo {
+  /**
+   * 法人姓名
+   */
+  LegalName: string
+  /**
+   * 社会统一信用代码
+   * @deprecated
+   */
+  Uscc?: string
+  /**
+   * 社会统一信用代码
+   */
+  UnifiedSocialCreditCode?: string
+}
+
+/**
  * DescribeFileUrls请求参数结构体
  */
 export interface DescribeFileUrlsRequest {
@@ -2713,6 +2659,175 @@ export interface CreateFlowApproversRequest {
 }
 
 /**
+ * ModifyIntegrationRole返回参数结构体
+ */
+export interface ModifyIntegrationRoleResponse {
+  /**
+   * 角色id
+   */
+  RoleId?: string
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 创建流程的签署方信息
+ */
+export interface FlowCreateApprover {
+  /**
+   * 参与者类型：
+0：企业
+1：个人
+3：企业自动签署
+注：类型为3（企业自动签署）时，会自动完成该签署方的签署。
+自动签署仅进行盖章操作，不能是手写签名。
+本方企业自动签署的签署人会默认是当前的发起人
+他方企业自动签署的签署人是自动签模板的他方企业授权人
+7: 个人自动签署，适用于个人自动签场景。
+注: 个人自动签场景为白名单功能, 使用前请联系对接的客户经理沟通。
+   */
+  ApproverType: number
+  /**
+   * 签署人企业名称
+当approverType=0 或 approverType=3时，必须指定
+
+
+   */
+  OrganizationName?: string
+  /**
+   * 签署方经办人姓名
+<br/>在未指定签署人电子签UserId情况下，为必填参数
+   */
+  ApproverName?: string
+  /**
+   * 签署方经办人手机号码
+<br/>在未指定签署人电子签UserId情况下，为必填参数
+
+   */
+  ApproverMobile?: string
+  /**
+   * 签署人的证件类型
+ID_CARD 身份证
+HONGKONG_AND_MACAO 港澳居民来往内地通行证
+HONGKONG_MACAO_AND_TAIWAN 港澳台居民居住证(格式同居民身份证)
+OTHER_CARD_TYPE 其他（需要使用该类型请先联系运营经理）
+   */
+  ApproverIdCardType?: string
+  /**
+   * 签署人证件号（长度不超过18位）
+   */
+  ApproverIdCardNumber?: string
+  /**
+   * 签署方经办人在模板中的参与方ID
+<br/>模板发起合同时，该参数为必填项
+<br/>文件发起合同是，该参数无序传值
+
+   */
+  RecipientId?: string
+  /**
+   * 签署意愿确认渠道,WEIXINAPP:人脸识别
+   */
+  VerifyChannel?: Array<string>
+  /**
+   * 是否发送短信
+<br/>sms--短信通知
+<br/>none--不通知
+<br/>默认为sms
+<br/>发起方=签署方时不发送短信
+   */
+  NotifyType?: string
+  /**
+   * 合同强制需要阅读全文，无需传此参数
+   */
+  IsFullText?: boolean
+  /**
+   * 合同的强制预览时间：3~300s，未指定则按合同页数计算
+   */
+  PreReadTime?: number
+  /**
+   * 签署人userId，仅支持本企业的员工userid， 可在控制台组织管理处获得
+
+若传此字段 则以userid的信息为主，会覆盖传递过来的签署人基本信息， 包括姓名，手机号，证件类型等信息
+   */
+  UserId?: string
+  /**
+   * 当前只支持true，默认为true
+   */
+  Required?: boolean
+  /**
+   * 签署人用户来源，此参数仅针对企微用户开放
+
+企微侧用户请传入：WEWORKAPP
+   */
+  ApproverSource?: string
+  /**
+   * 企业签署方或签标识，客户自定义，64位长度
+<br>用于发起含有或签签署人的合同。或签参与人必须有此字段。
+<br/>合同内不同或签参与人CustomApproverTag需要保证唯一。
+<br/>如果或签签署人为本方企微参与人，ApproverSource参数需要指定WEWORKAPP
+   */
+  CustomApproverTag?: string
+  /**
+   * 快速注册相关信息，目前暂未开放！
+   */
+  RegisterInfo?: RegisterInfo
+  /**
+   * 签署人个性化能力值
+   */
+  ApproverOption?: ApproverOption
+  /**
+   * 签署完前端跳转的url，暂未使用
+   * @deprecated
+   */
+  JumpUrl?: string
+  /**
+   * 签署ID
+- 发起流程时系统自动补充
+- 创建签署链接时，可以通过查询详情接口获得签署人的SignId，然后可传入此值为该签署人创建签署链接，无需再传姓名、手机号、证件号等其他信息
+   */
+  SignId?: string
+  /**
+   * 当前签署方进行签署操作是否需要企业内部审批
+<br>true 则为需要
+<br/>false,无序企业内部审批（默认）
+<br/>为个人签署方时则由发起方企业审核。
+   */
+  ApproverNeedSignReview?: boolean
+  /**
+   * 签署人签署控件， 此参数仅针对文件发起（CreateFlowByFiles）生效
+<br/>文件发起时，可通过该参数为签署人指定签署控件类型以及位置
+   */
+  SignComponents?: Array<Component>
+  /**
+   * 签署人填写控件 此参数仅针对文件发起（CreateFlowByFiles）生效
+<br/>文件发起时，可通过该参数为签署人指定填写控件类型以及位置
+   */
+  Components?: Array<Component>
+  /**
+   * 签署方控件类型为 SIGN_SIGNATURE时，可以指定签署方签名方式
+	HANDWRITE – 手写签名
+	OCR_ESIGN -- AI智能识别手写签名
+	ESIGN -- 个人印章类型
+	SYSTEM_ESIGN -- 系统签名（该类型可以在用户签署时根据用户姓名一键生成一个签名来进行签署）
+   */
+  ComponentLimitType?: Array<string>
+  /**
+   * 合同查看方式<br/>默认1 -实名查看 <br/>2-短信验证码查看(企业签署方暂不支持该方式)
+
+> 注意:此参数仅针对文件发起设置生效,模板发起合同签署流程, 请以模板配置为主.
+   */
+  ApproverVerifyTypes?: Array<number | bigint>
+  /**
+   * 合同签署方式(默认1,2) <br/>1-人脸认证 <br/>2-签署密码 <br/>3-运营商三要素
+
+> 注意:此参数仅针对文件发起设置生效,模板发起合同签署流程, 请以模板配置为主.
+   */
+  ApproverSignTypes?: Array<number | bigint>
+}
+
+/**
  * 企业员工信息
  */
 export interface Staff {
@@ -2845,18 +2960,13 @@ export interface CreateFlowEvidenceReportResponse {
 }
 
 /**
- * DescribeFileUrls返回参数结构体
+ * CreateIntegrationRole返回参数结构体
  */
-export interface DescribeFileUrlsResponse {
+export interface CreateIntegrationRoleResponse {
   /**
-   * 文件URL信息；
-链接不是永久链接，有效期5分钟后链接失效。
+   * 角色id
    */
-  FileUrls?: Array<FileUrl>
-  /**
-   * URL数量
-   */
-  TotalCount?: number
+  RoleId?: string
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3268,22 +3378,41 @@ MobileCheck：手机号验证
 }
 
 /**
- * 发起流程快速注册相关信息
+ * ModifyIntegrationRole请求参数结构体
  */
-export interface RegisterInfo {
+export interface ModifyIntegrationRoleRequest {
   /**
-   * 法人姓名
+   * 角色Id，可通过接口 DescribeIntegrationRoles 查询获取
    */
-  LegalName: string
+  RoleId: string
   /**
-   * 社会统一信用代码
-   * @deprecated
+   * 角色名称，最大长度为20个字符，仅限中文、字母、数字和下划线组成。
    */
-  Uscc?: string
+  Name: string
   /**
-   * 社会统一信用代码
+   * 执行本接口操作的员工信息。使用此接口时，必须填写userId。
+支持填入集团子公司经办人 userId 代发合同。
+
+注: 在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。
    */
-  UnifiedSocialCreditCode?: string
+  Operator: UserInfo
+  /**
+   * 角色描述，最大长度为50个字符
+   */
+  Description?: string
+  /**
+   * 权限树
+   */
+  PermissionGroups?: Array<PermissionGroup>
+  /**
+   * 集团角色的话，需要传递集团子企业列表，如果是全选，则传1
+   */
+  SubOrganizationIds?: Array<string>
+  /**
+   * 代理企业和员工的信息。
+在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。
+   */
+  Agent?: Agent
 }
 
 /**
@@ -3833,10 +3962,8 @@ export interface ApproverInfo {
    */
   ApproverName: string
   /**
-   * 本企业的签署方经办人的员工UserId
-可登录腾讯电子签控制台，在 "更多能力"->"组织管理" 中查看某位员工的UserId(在页面中展示为用户ID)。
-
-注: `若传该字段，则签署方经办人的其他信息（如签署方经办人的姓名、证件号码、手机号码等）将被忽略。`
+   * 签署方经办人手机号码， 支持国内手机号11位数字(无需加+86前缀或其他字符)。
+请确认手机号所有方为此合同签署方。
    */
   ApproverMobile: string
   /**
@@ -4513,7 +4640,7 @@ export interface CreatePrepareFlowRequest {
    */
   Operator: UserInfo
   /**
-   * 资源Id，通过多文件上传（UploadFiles）接口获得
+   * 资源id，与ResourceType对应
    */
   ResourceId: string
   /**
@@ -4534,25 +4661,32 @@ false:顺序签
   Deadline?: number
   /**
    * 用户自定义合同类型Id
-该id为电子签企业内的合同类型id
+
+该id为电子签企业内的合同类型id， 可以在自定义合同类型处获取
    */
   UserFlowTypeId?: string
+  /**
+   * 合同类型名称
+该字段用于客户自定义合同类型
+建议使用时指定合同类型，便于之后合同分类以及查看
+如果合同类型与自定义的合同类型描述一致，会自动归类到自定义的合同类型处，如果不一致，则会创建一个新的自定义合同类型
+   */
+  FlowType?: string
   /**
    * 签署流程参与者信息，最大限制50方
    */
   Approvers?: Array<FlowCreateApprover>
   /**
    * 打开智能添加填写区
-(默认开启，打开:"OPEN"
+默认开启，打开:"OPEN"
  关闭："CLOSE"
    */
   IntelligentStatus?: string
   /**
    * 资源类型，
-1：文件，
-2：模板
-不传默认为1：文件
-目前仅支持文件
+1：模板
+2：文件，
+不传默认为2：文件
    */
   ResourceType?: number
   /**
@@ -4588,12 +4722,6 @@ false:不开启发起方发起合同审核
    * 合同id,用于通过已web页面发起的合同id快速生成一个web发起合同链接
    */
   FlowId?: string
-  /**
-   * 合同类型名称
-该字段用于客户自定义合同类型
-建议使用时指定合同类型，便于之后合同分类以及查看
-   */
-  FlowType?: string
   /**
    * 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填
    */

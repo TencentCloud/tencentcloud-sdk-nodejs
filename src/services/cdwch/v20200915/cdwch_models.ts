@@ -1181,6 +1181,10 @@ export interface SearchTags {
  */
 export interface CreateBackUpScheduleResponse {
   /**
+   * 错误描述
+   */
+  ErrorMsg?: string
+  /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -1378,6 +1382,22 @@ export interface InstanceConfigInfo {
  * CreateBackUpSchedule请求参数结构体
  */
 export interface CreateBackUpScheduleRequest {
+  /**
+   * 集群id
+   */
+  InstanceId: string
+  /**
+   * 策略类型 meta(元数据)  data (表数据)
+   */
+  ScheduleType: string
+  /**
+   * 操作类型 create(创建) update(编辑修改)
+   */
+  OperationType: string
+  /**
+   * 保留天数 例如7
+   */
+  RetainDays?: number
   /**
    * 编辑时需要传
    */

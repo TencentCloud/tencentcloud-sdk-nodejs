@@ -1028,7 +1028,7 @@ export interface ListRecordBackupPlanDevicesData {
    * 设备通道信息列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  List?: RecordPlanChannelInfo
+  List?: Array<RecordPlanChannelInfo>
 }
 
 /**
@@ -3694,11 +3694,11 @@ export interface ListRecordBackupPlanDevicesRequest {
   /**
    * 每页最大数量
    */
-  PageSize?: string
+  PageSize?: number
   /**
-   * 第几页
+   * 分页页数
    */
-  PageNumber?: string
+  PageNumber?: number
 }
 
 /**
