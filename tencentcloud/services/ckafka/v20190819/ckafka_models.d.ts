@@ -832,34 +832,17 @@ export interface DtsParam {
     TranSql?: boolean;
 }
 /**
- * 组偏移量分区对象
+ * DescribeTopicSubscribeGroup返回参数结构体
  */
-export interface GroupOffsetPartition {
+export interface DescribeTopicSubscribeGroupResponse {
     /**
-     * topic 的 partitionId
+     * 返回结果
      */
-    Partition: number;
+    Result: TopicSubscribeGroup;
     /**
-     * consumer 提交的 offset 位置
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
-    Offset: number;
-    /**
-     * 支持消费者提交消息时，传入 metadata 作为它用，当前一般为空字符串
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Metadata: string;
-    /**
-     * 错误码
-     */
-    ErrorCode: number;
-    /**
-     * 当前 partition 最新的 offset
-     */
-    LogEndOffset: number;
-    /**
-     * 未消费的消息个数
-     */
-    Lag: number;
+    RequestId?: string;
 }
 /**
  * CancelAuthorizationToken请求参数结构体
@@ -2025,17 +2008,24 @@ export interface TopicFlowRanking {
     MessageHeap: number;
 }
 /**
- * DescribeTopicSubscribeGroup返回参数结构体
+ * broker维度topic 流量排行指标
  */
-export interface DescribeTopicSubscribeGroupResponse {
+export interface BrokerTopicFlowData {
     /**
-     * 返回结果
+     * Topic 名称
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Result: TopicSubscribeGroup;
+    TopicName?: string;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     * Topic Id
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    RequestId?: string;
+    TopicId?: string;
+    /**
+     * Topic 流量(MB)
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TopicTraffic?: string;
 }
 /**
  * DeleteAclRule请求参数结构体
@@ -5187,6 +5177,31 @@ export interface DeleteConnectResourceRequest {
     ResourceId: string;
 }
 /**
+ * 标准版销售信息
+ */
+export interface SaleInfo {
+    /**
+     * 手动设置的flag标志
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Flag: boolean;
+    /**
+     * ckakfa版本号(1.1.1/2.4.2/0.10.2)
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Version: string;
+    /**
+     * 专业版、标准版标志
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Platform: string;
+    /**
+     * 售罄标志：true售罄
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SoldOut: boolean;
+}
+/**
  * DeleteDatahubTask返回参数结构体
  */
 export interface DeleteDatahubTaskResponse {
@@ -5579,40 +5594,45 @@ export interface ZoneInfo {
     /**
      * zone的id
      */
-    ZoneId: string;
+    ZoneId?: string;
     /**
      * 是否内部APP
      */
-    IsInternalApp: number;
+    IsInternalApp?: number;
     /**
      * app id
      */
-    AppId: number;
+    AppId?: number;
     /**
      * 标识
      */
-    Flag: boolean;
+    Flag?: boolean;
     /**
      * zone名称
      */
-    ZoneName: string;
+    ZoneName?: string;
     /**
      * zone状态
      */
-    ZoneStatus: number;
+    ZoneStatus?: number;
     /**
      * 额外标识
+     * @deprecated
      */
-    Exflag: string;
+    Exflag?: string;
     /**
      * json对象，key为机型，value true为售罄，false为未售罄
      */
-    SoldOut: string;
+    SoldOut?: string;
     /**
      * 标准版售罄信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SalesInfo: Array<SaleInfo>;
+    SalesInfo?: Array<SaleInfo>;
+    /**
+     * 额外标识
+     */
+    ExtraFlag?: string;
 }
 /**
  * ModifyInstancePre返回参数结构体
@@ -5936,16 +5956,16 @@ export interface TopicFlowRankingResult {
     /**
      * Topic 流量数组
      */
-    TopicFlow: Array<TopicFlowRanking>;
+    TopicFlow?: Array<TopicFlowRanking>;
     /**
      * 消费者组消费速度排行速度
      */
-    ConsumeSpeed: Array<ConsumerGroupSpeed>;
+    ConsumeSpeed?: Array<ConsumerGroupSpeed>;
     /**
      * Topic 消息堆积/占用磁盘排行
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TopicMessageHeap: Array<TopicMessageHeapRanking>;
+    TopicMessageHeap?: Array<TopicMessageHeapRanking>;
     /**
      * Broker Ip 列表
   注意：此字段可能返回 null，表示取不到有效值。
@@ -5956,6 +5976,10 @@ export interface TopicFlowRankingResult {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     BrokerTopicData?: Array<BrokerTopicData>;
+    /**
+     * 单个Broker 节点Topic 流量的大小(单位MB)
+     */
+    BrokerTopicFlowData?: Array<BrokerTopicFlowData>;
 }
 /**
  * FetchMessageByOffset返回参数结构体
@@ -6623,17 +6647,30 @@ export interface DescribeGroup {
     Protocol: string;
 }
 /**
- * Ctsdb类型入参
+ * Cls类型入参
  */
-export interface CtsdbParam {
+export interface ClsParam {
     /**
-     * 连接管理实例资源
+     * 生产的信息是否为json格式
      */
-    Resource?: string;
+    DecodeJson: boolean;
     /**
-     * Ctsdb的metric
+     * cls日志主题id
      */
-    CtsdbMetric?: string;
+    Resource: string;
+    /**
+     * cls日志集id
+     */
+    LogSet?: string;
+    /**
+     * 当DecodeJson为false时必填
+     */
+    ContentKey?: string;
+    /**
+     * 指定消息中的某字段内容作为cls日志的时间。
+  字段内容格式需要是秒级时间戳
+     */
+    TimeField?: string;
 }
 /**
  * EventBus配置
@@ -7023,30 +7060,17 @@ export interface DescribeGroupOffsetsResponse {
     RequestId?: string;
 }
 /**
- * Cls类型入参
+ * Ctsdb类型入参
  */
-export interface ClsParam {
+export interface CtsdbParam {
     /**
-     * 生产的信息是否为json格式
+     * 连接管理实例资源
      */
-    DecodeJson: boolean;
+    Resource?: string;
     /**
-     * cls日志主题id
+     * Ctsdb的metric
      */
-    Resource: string;
-    /**
-     * cls日志集id
-     */
-    LogSet?: string;
-    /**
-     * 当DecodeJson为false时必填
-     */
-    ContentKey?: string;
-    /**
-     * 指定消息中的某字段内容作为cls日志的时间。
-  字段内容格式需要是秒级时间戳
-     */
-    TimeField?: string;
+    CtsdbMetric?: string;
 }
 /**
  * InstanceScalingDown返回参数结构体
@@ -7676,6 +7700,10 @@ export interface CreateInstancePreRequest {
      * 购买实例数量。非必填，默认值为 1。当传入该参数时，会创建多个 instanceName 加后缀区分的实例
      */
     InstanceNum?: number;
+    /**
+     * 是否自动选择代金券:1-是;0否。默认为0
+     */
+    AutoVoucher?: number;
 }
 /**
  * DeleteTopicIpWhiteList请求参数结构体
@@ -7695,29 +7723,34 @@ export interface DeleteTopicIpWhiteListRequest {
     IpWhiteList: Array<string>;
 }
 /**
- * 标准版销售信息
+ * 组偏移量分区对象
  */
-export interface SaleInfo {
+export interface GroupOffsetPartition {
     /**
-     * 手动设置的flag标志
+     * topic 的 partitionId
+     */
+    Partition: number;
+    /**
+     * consumer 提交的 offset 位置
+     */
+    Offset: number;
+    /**
+     * 支持消费者提交消息时，传入 metadata 作为它用，当前一般为空字符串
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Flag: boolean;
+    Metadata: string;
     /**
-     * ckakfa版本号(1.1.1/2.4.2/0.10.2)
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 错误码
      */
-    Version: string;
+    ErrorCode: number;
     /**
-     * 专业版、标准版标志
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 当前 partition 最新的 offset
      */
-    Platform: string;
+    LogEndOffset: number;
     /**
-     * 售罄标志：true售罄
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 未消费的消息个数
      */
-    SoldOut: boolean;
+    Lag: number;
 }
 /**
  * DeleteTopic返回参数结构体

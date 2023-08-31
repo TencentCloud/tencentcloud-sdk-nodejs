@@ -6765,7 +6765,7 @@ export interface UnitRuleItem {
    */
   UnitRuleTagList?: Array<UnitRuleTag>
   /**
-   * 项目id
+   * 规则项索引
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ItemIndex?: number
@@ -11150,7 +11150,7 @@ export interface DescribeContainerEventsResponse {
  */
 export interface UnitRuleTag {
   /**
-   * 标签类型 : U(用户标签)
+   * 标签类型 : U(用户标签)/S(系统标签)
    */
   TagType: string
   /**

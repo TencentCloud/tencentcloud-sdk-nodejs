@@ -522,45 +522,50 @@ export interface AssessmentTemplate {
   /**
    * 评估模版Id
    */
-  TemplateId: string
+  TemplateId?: string
   /**
    * 评估模版名称
    */
-  TemplateName: string
+  TemplateName?: string
   /**
    * 描述信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Description: string
+  Description?: string
   /**
    * 模版来源，内置/用户自定，取值（system，user）
    */
-  Source: string
+  Source?: string
   /**
    * 模版类型，自动化/半自动化/问卷，取值（auto，semi-auto，law）等
    */
-  UseType: string
+  UseType?: string
   /**
    * 评估模版创建时间
    */
-  CreatedTime: string
+  CreatedTime?: string
   /**
    * 模版关联的评估项数量
    */
-  ControlItemCount: number
+  ControlItemCount?: number
   /**
    * 模版已启用的评估项数量
    */
-  AppliedItemCount: number
+  AppliedItemCount?: number
   /**
    * 模版启用状态，草稿/已启用，取值draft / launched
    */
-  Status: string
+  Status?: string
   /**
    * 支持的数据源类型
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SupportDataSource?: Array<string>
+  /**
+   * 是否包含攻击面风险
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsASMTemplate?: boolean
 }
 
 /**
@@ -2039,6 +2044,16 @@ export interface HighRiskAssetsDetail {
    */
   InstanceId?: string
   /**
+   * 数据源类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DataSourceType?: string
+  /**
+   * 数据源名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DataSourceName?: string
+  /**
    * 资产对象名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
@@ -2058,6 +2073,16 @@ export interface HighRiskAssetsDetail {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalRiskCount?: number
+  /**
+   * 风险面
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RiskSide?: string
+  /**
+   * 地域
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResourceRegion?: string
 }
 
 /**
@@ -2889,6 +2914,11 @@ export interface ESTaskResultDetail {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   LevelName?: string
+  /**
+   * 分级分数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LevelRiskScore?: number
 }
 
 /**
@@ -3066,6 +3096,10 @@ export interface DescribeDSPAESDiscoveryTaskResultDetailRequest {
    * 敏感数据分级ID
    */
   LevelId?: number
+  /**
+   * 索引名称
+   */
+  DbName?: string
 }
 
 /**
@@ -3443,6 +3477,22 @@ export interface StopDSPADiscoveryTaskRequest {
 }
 
 /**
+ * 风险面的分布
+ */
+export interface RiskSideDistributed {
+  /**
+   * 风险面
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AssessmentRiskSide?: Note
+  /**
+   * 风险类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AssessmentRisk?: Array<Note>
+}
+
+/**
  * 分级单项信息
  */
 export interface LevelItem {
@@ -3579,6 +3629,11 @@ export interface RiskItemInfo {
    */
   DataSourceType?: string
   /**
+   * 资源地域
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResourceRegion?: string
+  /**
    * 资产名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
@@ -3638,6 +3693,11 @@ export interface RiskItemInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ItemSubType?: string
+  /**
+   * 风险面
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RiskSide?: string
 }
 
 /**
@@ -3737,6 +3797,11 @@ export interface DescribeDSPAAssessmentRiskDistributionOverviewRequest {
    * 评估模版id
    */
   TemplateId: number
+  /**
+   * 风险资产分布的过滤条件
+（rdb，cos，不传就筛选全部）
+   */
+  Filter?: string
 }
 
 /**
@@ -4503,6 +4568,21 @@ export interface CosAsset {
 }
 
 /**
+ * DescribeDSPAAssessmentRiskSideList返回参数结构体
+ */
+export interface DescribeDSPAAssessmentRiskSideListResponse {
+  /**
+   * 风险面列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RiskSideItmeList?: Array<Note>
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 敏感等级分布
  */
 export interface SensitiveLevel {
@@ -4613,66 +4693,66 @@ export interface AssessmentRisk {
   /**
    * 风险项Id
    */
-  RiskId: string
+  RiskId?: string
   /**
    * 风险项描述
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RiskDescription: string
+  RiskDescription?: string
   /**
    * 评估模版Id
    */
-  TemplateId: string
+  TemplateId?: string
   /**
    * 评估模版名称
    */
-  TemplateName: string
+  TemplateName?: string
   /**
    * 评估项Id
    */
-  ControlItemId: string
+  ControlItemId?: string
   /**
    * 评估项名称
    */
-  ControlItemName: string
+  ControlItemName?: string
   /**
    * 评估描述
    */
-  ControlItemDesc: string
+  ControlItemDesc?: string
   /**
    * 风险等级，取值（high，medium，low）
    */
-  RiskLevel: string
+  RiskLevel?: string
   /**
    * 风险缓解措施
    */
-  RiskMitigation: string
+  RiskMitigation?: string
   /**
    * 风险处理状态。(waiting待处理, processing处理中, finished已处理)
    */
-  Status: string
+  Status?: string
   /**
    * 风险生成时间
    */
-  CreatedTime: string
+  CreatedTime?: string
   /**
    * 风险负责人
    */
-  RiskOwner: string
+  RiskOwner?: string
   /**
    * 风险涉及资产
    */
-  RelatedAsset: string
+  RelatedAsset?: string
   /**
    * 风险涉及资产id
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DataSourceId: string
+  DataSourceId?: string
   /**
    * 风险涉及资产名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DataSourceName: string
+  DataSourceName?: string
   /**
    * 资产名称
 注意：此字段可能返回 null，表示取不到有效值。
@@ -4688,6 +4768,11 @@ export interface AssessmentRisk {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RiskType?: string
+  /**
+   * 风险面
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RiskSide?: string
 }
 
 /**
@@ -4886,6 +4971,10 @@ export interface DescribeDSPAAssessmentRiskTemplateVulnerableListRequest {
    * 风险名称
    */
   RiskName?: string
+  /**
+   * 风险面
+   */
+  RiskSide?: string
 }
 
 /**
@@ -5523,6 +5612,22 @@ export interface CreateDSPAAssessmentRiskTemplateRequest {
 }
 
 /**
+ * 评估模版的详情数据
+ */
+export interface TemplateInfo {
+  /**
+   * 模版id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TemplateId?: number
+  /**
+   * 模版名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TemplateName?: string
+}
+
+/**
  * DescribeDSPACOSDiscoveryTaskFiles返回参数结构体
  */
 export interface DescribeDSPACOSDiscoveryTaskFilesResponse {
@@ -5581,6 +5686,20 @@ export interface CreateDSPACosMetaResourcesRequest {
    * COS桶列表
    */
   Buckets: Array<string>
+}
+
+/**
+ * DescribeDSPAAssessmentRiskSideList请求参数结构体
+ */
+export interface DescribeDSPAAssessmentRiskSideListRequest {
+  /**
+   * DSPA实例ID
+   */
+  DspaId: string
+  /**
+   * 评估模版id
+   */
+  TemplateId: number
 }
 
 /**
@@ -5950,6 +6069,10 @@ export interface DescribeDSPAAssessmentLatestRiskListRequest {
    * 风险等级筛选
    */
   RiskLevel?: string
+  /**
+   * 风险面筛选
+   */
+  RiskSide?: Array<string>
 }
 
 /**
@@ -6011,6 +6134,16 @@ export interface AssessmentRiskItem {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SupportDataSource?: Array<string>
+  /**
+   * 风险面
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RiskSide?: string
+  /**
+   * 关联模版列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ReferTemplateList?: Array<TemplateInfo>
 }
 
 /**
@@ -6580,6 +6713,11 @@ export interface DescribeDSPAAssessmentHighRiskTop10OverviewRequest {
    * 评估模版id
    */
   TemplateId: number
+  /**
+   * 过滤条件， rdb（数据库）cos（对象存储）
+不传就是全部
+   */
+  Filter?: string
 }
 
 /**
@@ -7095,6 +7233,7 @@ export interface ModifyDSPAAssessmentRiskLatestRequest {
   DspaId: string
   /**
    * 最新风险项Id
+   * @deprecated
    */
   RiskLatestTableId: number
   /**
@@ -7109,6 +7248,10 @@ export interface ModifyDSPAAssessmentRiskLatestRequest {
    * 处置人
    */
   ProcessPeople?: string
+  /**
+   * 批量处理的列表
+   */
+  BathRiskIdList?: Array<number | bigint>
 }
 
 /**
@@ -7524,6 +7667,20 @@ export interface DescribeDSPADiscoveryTaskTablesRequest {
 }
 
 /**
+ * DescribeDSPAAssessmentRiskSideDistributed请求参数结构体
+ */
+export interface DescribeDSPAAssessmentRiskSideDistributedRequest {
+  /**
+   * DSPA实例ID
+   */
+  DspaId: string
+  /**
+   * 评估模版id
+   */
+  TemplateId: number
+}
+
+/**
  * DescribeDSPAAssessmentNewDiscoveredRiskOverview返回参数结构体
  */
 export interface DescribeDSPAAssessmentNewDiscoveredRiskOverviewResponse {
@@ -7815,11 +7972,16 @@ export interface RiskCountInfo {
   /**
    * 风险等级
    */
-  RiskLevel: string
+  RiskLevel?: string
   /**
    * 该等级风险项数量
    */
-  Count: number
+  Count?: number
+  /**
+   * 风险等级名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RiskLevelName?: string
 }
 
 /**
@@ -7839,10 +8001,6 @@ export interface CreateDSPAAssessmentTaskRequest {
    */
   TemplateId: string
   /**
-   * 敏感数据扫描数据源条件。
-   */
-  DiscoveryCondition: DiscoveryCondition
-  /**
    * 评估业务名称。1-60个字符，仅允许输入中文、英文字母、数字、'_'、'-'，并且开头和结尾需为中文、英文字母或者数字
    * @deprecated
    */
@@ -7861,6 +8019,10 @@ export interface CreateDSPAAssessmentTaskRequest {
    * 分类分级模版Id
    */
   ComplianceId?: number
+  /**
+   * 敏感数据扫描数据源条件。
+   */
+  DiscoveryCondition?: DiscoveryCondition
   /**
    * 说明
    */
@@ -9035,6 +9197,21 @@ export interface DescribeDSPALevelDetailResponse {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalCount: number
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeDSPAAssessmentRiskSideDistributed返回参数结构体
+ */
+export interface DescribeDSPAAssessmentRiskSideDistributedResponse {
+  /**
+   * 风险面的分布
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RiskSideDistributed?: Array<RiskSideDistributed>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

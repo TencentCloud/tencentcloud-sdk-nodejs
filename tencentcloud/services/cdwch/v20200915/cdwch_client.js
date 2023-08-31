@@ -28,16 +28,16 @@ class Client extends abstract_client_1.AbstractClient {
         super("cdwch.tencentcloudapi.com", "2020-09-15", clientConfig);
     }
     /**
-     * 查询备份策略信息
-     */
-    async DescribeBackUpSchedule(req, cb) {
-        return this.request("DescribeBackUpSchedule", req, cb);
-    }
-    /**
      * 创建或者修改备份策略
      */
     async CreateBackUpSchedule(req, cb) {
         return this.request("CreateBackUpSchedule", req, cb);
+    }
+    /**
+     * 查询备份任务列表
+     */
+    async DescribeBackUpJob(req, cb) {
+        return this.request("DescribeBackUpJob", req, cb);
     }
     /**
      * 销毁集群 open api
@@ -46,16 +46,52 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DestroyInstance", req, cb);
     }
     /**
+     * 在集群详情页面获取所有参数列表
+     */
+    async DescribeInstanceKeyValConfigs(req, cb) {
+        return this.request("DescribeInstanceKeyValConfigs", req, cb);
+    }
+    /**
+     * KV模式修改配置接口
+     */
+    async ModifyInstanceKeyValConfigs(req, cb) {
+        return this.request("ModifyInstanceKeyValConfigs", req, cb);
+    }
+    /**
      * 垂直扩缩容节点规格，修改节点cvm的规格cpu，内存。 规格变化阶段，服务不可用。
      */
     async ScaleUpInstance(req, cb) {
         return this.request("ScaleUpInstance", req, cb);
     }
     /**
-     * 查询集群用户、集群表，数据库等相关信息
+     * 调整clickhouse节点数量
      */
-    async DescribeCkSqlApis(req, cb) {
-        return this.request("DescribeCkSqlApis", req, cb);
+    async ScaleOutInstance(req, cb) {
+        return this.request("ScaleOutInstance", req, cb);
+    }
+    /**
+     * 备份恢复
+     */
+    async RecoverBackUpJob(req, cb) {
+        return this.request("RecoverBackUpJob", req, cb);
+    }
+    /**
+     * 获取实例列表，供外部sdk使用
+     */
+    async DescribeInstancesNew(req, cb) {
+        return this.request("DescribeInstancesNew", req, cb);
+    }
+    /**
+     * 删除备份数据
+     */
+    async DeleteBackUpData(req, cb) {
+        return this.request("DeleteBackUpData", req, cb);
+    }
+    /**
+     * 在集群配置页面修改集群配置文件接口，xml模式
+     */
+    async ModifyClusterConfigs(req, cb) {
+        return this.request("ModifyClusterConfigs", req, cb);
     }
     /**
      * 新增和修改用户接口
@@ -70,22 +106,28 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeInstanceState", req, cb);
     }
     /**
+     * 获取集群的最新的几个配置文件（config.xml、metrika.xml、user.xml）的内容，显示给用户
+     */
+    async DescribeClusterConfigs(req, cb) {
+        return this.request("DescribeClusterConfigs", req, cb);
+    }
+    /**
      * 开启或者关闭策略
      */
     async OpenBackUp(req, cb) {
         return this.request("OpenBackUp", req, cb);
     }
     /**
-     * 集群vcluster列表
+     * 获取实例shard信息列表
      */
-    async DescribeInstanceClusters(req, cb) {
-        return this.request("DescribeInstanceClusters", req, cb);
+    async DescribeInstanceShards(req, cb) {
+        return this.request("DescribeInstanceShards", req, cb);
     }
     /**
-     * 在集群详情页面获取所有参数列表
+     * 查询集群用户、集群表，数据库等相关信息
      */
-    async DescribeInstanceKeyValConfigs(req, cb) {
-        return this.request("DescribeInstanceKeyValConfigs", req, cb);
+    async DescribeCkSqlApis(req, cb) {
+        return this.request("DescribeCkSqlApis", req, cb);
     }
     /**
      * 购买页拉取集群的数据节点和zookeeper节点的规格列表
@@ -94,16 +136,28 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeSpec", req, cb);
     }
     /**
-     * 获取集群的最新的几个配置文件（config.xml、metrika.xml、user.xml）的内容，显示给用户
+     * 创建集群
      */
-    async DescribeClusterConfigs(req, cb) {
-        return this.request("DescribeClusterConfigs", req, cb);
+    async CreateInstanceNew(req, cb) {
+        return this.request("CreateInstanceNew", req, cb);
     }
     /**
-     * 获取实例列表，供外部sdk使用
+     * 查询备份策略信息
      */
-    async DescribeInstancesNew(req, cb) {
-        return this.request("DescribeInstancesNew", req, cb);
+    async DescribeBackUpSchedule(req, cb) {
+        return this.request("DescribeBackUpSchedule", req, cb);
+    }
+    /**
+     * 查询备份任务详情
+     */
+    async DescribeBackUpJobDetail(req, cb) {
+        return this.request("DescribeBackUpJobDetail", req, cb);
+    }
+    /**
+     * 集群vcluster列表
+     */
+    async DescribeInstanceClusters(req, cb) {
+        return this.request("DescribeInstanceClusters", req, cb);
     }
     /**
      * 根据实例ID查询某个实例的具体信息
@@ -112,46 +166,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeInstance", req, cb);
     }
     /**
-     * 在集群配置页面修改集群配置文件接口，xml模式
-     */
-    async ModifyClusterConfigs(req, cb) {
-        return this.request("ModifyClusterConfigs", req, cb);
-    }
-    /**
-     * 创建集群
-     */
-    async CreateInstanceNew(req, cb) {
-        return this.request("CreateInstanceNew", req, cb);
-    }
-    /**
-     * KV模式修改配置接口
-     */
-    async ModifyInstanceKeyValConfigs(req, cb) {
-        return this.request("ModifyInstanceKeyValConfigs", req, cb);
-    }
-    /**
      * 针对ck账号的权限做管控（新版）
      */
     async ModifyUserNewPrivilege(req, cb) {
         return this.request("ModifyUserNewPrivilege", req, cb);
     }
     /**
-     * 调整clickhouse节点数量
-     */
-    async ScaleOutInstance(req, cb) {
-        return this.request("ScaleOutInstance", req, cb);
-    }
-    /**
      * 扩容磁盘，包含扩容数据节点，zk节点
      */
     async ResizeDisk(req, cb) {
         return this.request("ResizeDisk", req, cb);
-    }
-    /**
-     * 获取实例shard信息列表
-     */
-    async DescribeInstanceShards(req, cb) {
-        return this.request("DescribeInstanceShards", req, cb);
     }
 }
 exports.Client = Client;

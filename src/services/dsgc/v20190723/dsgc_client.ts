@@ -166,6 +166,7 @@ import {
   DescribeDSPADiscoveryRulesResponse,
   ModifyLevelStateResponse,
   StopDSPADiscoveryTaskRequest,
+  RiskSideDistributed,
   LevelItem,
   DecribeSuggestRiskLevelMatrixRequest,
   AssetCosDetail,
@@ -213,6 +214,7 @@ import {
   DataRules,
   DescribeDSPAAssessmentProcessingRiskOverviewRequest,
   CosAsset,
+  DescribeDSPAAssessmentRiskSideListResponse,
   SensitiveLevel,
   CreateAssetSortingReportRetryTaskRequest,
   CreateDSPADiscoveryRuleResponse,
@@ -259,10 +261,12 @@ import {
   DescribeSensitiveCOSDataDistributionResponse,
   DescribeCOSAssetSensitiveDistributionRequest,
   CreateDSPAAssessmentRiskTemplateRequest,
+  TemplateInfo,
   DescribeDSPACOSDiscoveryTaskFilesResponse,
   BindDSPAResourceCosBucketsRequest,
   ModifyDSPAESTaskResultResponse,
   CreateDSPACosMetaResourcesRequest,
+  DescribeDSPAAssessmentRiskSideListRequest,
   ModifyNewClassificationRequest,
   DspaUserResourceMeta,
   DataCategory,
@@ -347,6 +351,7 @@ import {
   CreateComplianceRules,
   EnableTrialVersionRequest,
   DescribeDSPADiscoveryTaskTablesRequest,
+  DescribeDSPAAssessmentRiskSideDistributedRequest,
   DescribeDSPAAssessmentNewDiscoveredRiskOverviewResponse,
   DescribeDSPAAssessmentRiskAmountOverviewRequest,
   DescribeDSPADiscoveryTaskDetailResponse,
@@ -415,6 +420,7 @@ import {
   ESDataAssetDetail,
   DescribeDSPACOSTaskResultDetailRequest,
   DescribeDSPALevelDetailResponse,
+  DescribeDSPAAssessmentRiskSideDistributedResponse,
   DescribeDSPACOSDiscoveryTasksRequest,
   ModifyMergeClassificationRequest,
   DescribeDSPAAssessmentPendingRiskOverviewResponse,
@@ -743,6 +749,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAssetDetailDataExportResultResponse) => void
   ): Promise<DescribeAssetDetailDataExportResultResponse> {
     return this.request("DescribeAssetDetailDataExportResult", req, cb)
+  }
+
+  /**
+   * 风险评估概览页，查询风险面的分布
+   */
+  async DescribeDSPAAssessmentRiskSideDistributed(
+    req: DescribeDSPAAssessmentRiskSideDistributedRequest,
+    cb?: (error: string, rep: DescribeDSPAAssessmentRiskSideDistributedResponse) => void
+  ): Promise<DescribeDSPAAssessmentRiskSideDistributedResponse> {
+    return this.request("DescribeDSPAAssessmentRiskSideDistributed", req, cb)
   }
 
   /**
@@ -1903,6 +1919,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteDSPADiscoveryTaskResultResponse) => void
   ): Promise<DeleteDSPADiscoveryTaskResultResponse> {
     return this.request("DeleteDSPADiscoveryTaskResult", req, cb)
+  }
+
+  /**
+   * 风险评估概览页，查询风险面的分布
+   */
+  async DescribeDSPAAssessmentRiskSideList(
+    req: DescribeDSPAAssessmentRiskSideListRequest,
+    cb?: (error: string, rep: DescribeDSPAAssessmentRiskSideListResponse) => void
+  ): Promise<DescribeDSPAAssessmentRiskSideListResponse> {
+    return this.request("DescribeDSPAAssessmentRiskSideList", req, cb)
   }
 
   /**

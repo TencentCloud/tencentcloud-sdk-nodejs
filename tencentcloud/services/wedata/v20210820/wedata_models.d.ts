@@ -16380,152 +16380,157 @@ export interface DataSourceInfo {
      * 若数据源列表为绑定数据库，则为db名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DatabaseName: string;
+    DatabaseName?: string;
     /**
      * 数据源描述信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Description: string;
+    Description?: string;
     /**
      * 数据源ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ID: number;
+    ID?: number;
     /**
      * 数据源引擎的实例ID，如CDB实例ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Instance: string;
+    Instance?: string;
     /**
      * 数据源名称，在相同SpaceName下，数据源名称不能为空
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Name: string;
+    Name?: string;
     /**
      * 数据源引擎所属区域
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Region: string;
+    Region?: string;
     /**
      * 数据源类型:枚举值
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Type: string;
+    Type?: string;
     /**
      * 数据源所属的集群id
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ClusterId: string;
+    ClusterId?: string;
     /**
      * 应用ID AppId
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    AppId: number;
+    AppId?: number;
     /**
      * 业务侧数据源的配置信息扩展
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    BizParams: string;
+    BizParams?: string;
     /**
      * 数据源类别：绑定引擎、绑定数据库
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Category: string;
+    Category?: string;
     /**
      * 数据源展示名，为了可视化查看
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Display: string;
+    Display?: string;
     /**
      * 数据源责任人账号ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    OwnerAccount: string;
+    OwnerAccount?: string;
     /**
      * 数据源的配置信息，以JSON KV存储，根据每个数据源类型不同，而KV存储信息不同
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Params: string;
+    Params?: string;
     /**
      * 数据源数据源的可见性，1为可见、0为不可见。默认为1
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Status: number;
+    Status?: number;
     /**
      * 数据源责任人账号名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    OwnerAccountName: string;
+    OwnerAccountName?: string;
     /**
      * 集群名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ClusterName: string;
+    ClusterName?: string;
     /**
      * 归属项目ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    OwnerProjectId: string;
+    OwnerProjectId?: string;
     /**
      * 归属项目Name
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    OwnerProjectName: string;
+    OwnerProjectName?: string;
     /**
      * 归属项目标识
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    OwnerProjectIdent: string;
+    OwnerProjectIdent?: string;
     /**
      * 授权项目
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    AuthorityProjectName: string;
+    AuthorityProjectName?: string;
     /**
      * 授权用户
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    AuthorityUserName: string;
+    AuthorityUserName?: string;
     /**
      * 是否有编辑权限
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Edit: boolean;
+    Edit?: boolean;
     /**
      * 是否有授权权限
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Author: boolean;
+    Author?: boolean;
     /**
      * 是否有转交权限
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Deliver: boolean;
+    Deliver?: boolean;
     /**
      * 数据源状态
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DataSourceStatus: string;
+    DataSourceStatus?: string;
     /**
      * 时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CreateTime: number;
+    CreateTime?: number;
     /**
      * Params json字符串
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ParamsString: string;
+    ParamsString?: string;
     /**
      * BizParams json字符串
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    BizParamsString: string;
+    BizParamsString?: string;
     /**
      * 修改时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
     ModifiedTime?: number;
+    /**
+     * 数据源页面展示类型，与Type对应
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ShowType?: string;
 }
 /**
  * 比较条件

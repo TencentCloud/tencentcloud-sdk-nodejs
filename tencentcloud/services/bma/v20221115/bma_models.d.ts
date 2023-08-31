@@ -234,6 +234,11 @@ export interface WhiteListData {
      */
     WhiteList?: string;
     /**
+     * 白名单备注
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Remark?: string;
+    /**
      * 新增时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
@@ -720,6 +725,10 @@ export interface CreateBPWhiteListRequest {
      * 白名单名称
      */
     WhiteLists: Array<string>;
+    /**
+     * 白名单备注
+     */
+    Remark?: string;
 }
 /**
  * CreateBPFakeURLs请求参数结构体

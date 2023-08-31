@@ -355,7 +355,7 @@ export interface GetEidTokenConfig {
      */
     UseIntentionVerify?: boolean;
     /**
-     * 意愿核身模式。枚举值：1( 朗读模式)，2（问答模式） 。默认值1
+     * 意愿核身模式。枚举值：1( 语音朗读模式)，2（语音问答模式） ，3（点头确认模式）。默认值为1。
      */
     IntentionMode?: string;
     /**
@@ -366,6 +366,10 @@ export interface GetEidTokenConfig {
      * 意愿核身问答模式的配置列表。当前仅支持一个问答。
      */
     IntentionQuestions?: Array<IntentionQuestion>;
+    /**
+     * 意愿核身（点头确认模式）使用的文案，若未使用意愿核身（点头确认模式），则该字段无需传入。默认为空，最长可接受150的字符串长度。
+     */
+    IntentionActions?: Array<IntentionActionConfig>;
     /**
      * 意愿核身过程中识别用户的回答意图，开启后除了IntentionQuestions的Answers列表中的标准回答会通过，近似意图的回答也会通过，默认不开启。
      */
@@ -1761,32 +1765,37 @@ export interface GetEidResultResponse {
      * 文本类信息。（基于对敏感信息的保护，验证使用的姓名和身份证号统一通过加密后从Eidinfo参数中返回，如需获取请在控制台申请返回身份信息，详见[E证通获取实名信息指引](https://cloud.tencent.com/document/product/1007/63370)）
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Text: DetectInfoText;
+    Text?: DetectInfoText;
     /**
      * 身份证照片信息。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    IdCardData: DetectInfoIdCardData;
+    IdCardData?: DetectInfoIdCardData;
     /**
      * 最佳帧信息。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    BestFrame: DetectInfoBestFrame;
+    BestFrame?: DetectInfoBestFrame;
     /**
      * Eid信息。（包括商户下用户唯一标识以及加密后的姓名、身份证号信息。解密方式详见[E证通获取实名信息指引](https://cloud.tencent.com/document/product/1007/63370)）
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    EidInfo: EidInfo;
+    EidInfo?: EidInfo;
     /**
      * 意愿核身朗读模式相关信息。若未使用意愿核身朗读功能，该字段返回值可以不处理。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    IntentionVerifyData: IntentionVerifyData;
+    IntentionVerifyData?: IntentionVerifyData;
     /**
      * 意愿核身问答模式相关信息。若未使用意愿核身问答模式功能，该字段返回值可以不处理。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    IntentionQuestionResult: IntentionQuestionResult;
+    IntentionQuestionResult?: IntentionQuestionResult;
+    /**
+     * 意愿核身点头确认模式的结果信息，若未使用该意愿核身功能，该字段返回值可以不处理。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IntentionActionResult?: IntentionActionResult;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */

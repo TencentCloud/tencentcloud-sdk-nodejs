@@ -220,6 +220,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeAssetDetailDataExportResult", req, cb);
     }
     /**
+     * 风险评估概览页，查询风险面的分布
+     */
+    async DescribeDSPAAssessmentRiskSideDistributed(req, cb) {
+        return this.request("DescribeDSPAAssessmentRiskSideDistributed", req, cb);
+    }
+    /**
      * 获取分类分级任务结果详情，该接口只有在任务状态为时才支持结果正确查询：
 3 扫描成功
      */
@@ -926,6 +932,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DeleteDSPADiscoveryTaskResult(req, cb) {
         return this.request("DeleteDSPADiscoveryTaskResult", req, cb);
+    }
+    /**
+     * 风险评估概览页，查询风险面的分布
+     */
+    async DescribeDSPAAssessmentRiskSideList(req, cb) {
+        return this.request("DescribeDSPAAssessmentRiskSideList", req, cb);
     }
     /**
      * 获取COS敏感数据资产桶列表

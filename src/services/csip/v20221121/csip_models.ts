@@ -1418,6 +1418,11 @@ export interface ClbListenerListInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Domain?: string
+  /**
+   * 负载均衡域名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LoadBalancerDomain?: string
 }
 
 /**

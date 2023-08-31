@@ -2201,115 +2201,115 @@ export interface InstanceInfo {
     /**
      * 实例ID。
      */
-    InstanceId: string;
+    InstanceId?: string;
     /**
      * 实例名称。
      */
-    InstanceName: string;
+    InstanceName?: string;
     /**
      * 实例所属地域。
      */
-    Region: string;
+    Region?: string;
     /**
      * 健康得分。
      */
-    HealthScore: number;
+    HealthScore?: number;
     /**
      * 所属产品。
      */
-    Product: string;
+    Product?: string;
     /**
      * 异常事件数量。
      */
-    EventCount: number;
+    EventCount?: number;
     /**
      * 实例类型：1:MASTER；2:DR，3：RO，4:SDR。
      */
-    InstanceType: number;
+    InstanceType?: number;
     /**
      * 核心数。
      */
-    Cpu: number;
+    Cpu?: number;
     /**
      * 内存，单位MB。
      */
-    Memory: number;
+    Memory?: number;
     /**
      * 硬盘存储，单位GB。
      */
-    Volume: number;
+    Volume?: number;
     /**
      * 数据库版本。
      */
-    EngineVersion: string;
+    EngineVersion?: string;
     /**
      * 内网地址。
      */
-    Vip: string;
+    Vip?: string;
     /**
      * 内网端口。
      */
-    Vport: number;
+    Vport?: number;
     /**
      * 接入来源。
      */
-    Source: string;
+    Source?: string;
     /**
      * 分组ID。
      */
-    GroupId: string;
+    GroupId?: string;
     /**
      * 分组组名。
      */
-    GroupName: string;
+    GroupName?: string;
     /**
      * 实例状态：0：发货中；1：运行正常；4：销毁中；5：隔离中。
      */
-    Status: number;
+    Status?: number;
     /**
      * 子网统一ID。
      */
-    UniqSubnetId: string;
+    UniqSubnetId?: string;
     /**
      * cdb类型。
      */
-    DeployMode: string;
+    DeployMode?: string;
     /**
      * cdb实例初始化标志：0：未初始化；1：已初始化。
      */
-    InitFlag: number;
+    InitFlag?: number;
     /**
      * 任务状态。
      */
-    TaskStatus: number;
+    TaskStatus?: number;
     /**
      * 私有网络统一ID。
      */
-    UniqVpcId: string;
+    UniqVpcId?: string;
     /**
      * 实例巡检/概览的状态。
      */
-    InstanceConf: InstanceConfs;
+    InstanceConf?: InstanceConfs;
     /**
      * 资源到期时间。
      */
-    DeadlineTime: string;
+    DeadlineTime?: string;
     /**
      * 是否是DBbrain支持的实例。
      */
-    IsSupported: boolean;
+    IsSupported?: boolean;
     /**
      * 实例安全审计日志开启状态：ON： 安全审计开启；OFF： 未开启安全审计。
      */
-    SecAuditStatus: string;
+    SecAuditStatus?: string;
     /**
      * 实例审计日志开启状态，ALL_AUDIT： 开启全审计；RULE_AUDIT： 开启规则审计；UNBOUND： 未开启审计。
      */
-    AuditPolicyStatus: string;
+    AuditPolicyStatus?: string;
     /**
      * 实例审计日志运行状态：normal： 运行中； paused： 欠费暂停。
      */
-    AuditRunningStatus: string;
+    AuditRunningStatus?: string;
     /**
      * 内网vip。
   注意：此字段可能返回 null，表示取不到有效值。
@@ -2334,6 +2334,14 @@ export interface InstanceInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     ClusterName?: string;
+    /**
+     * 自建MySQL的Agent状态，"not_deployed" - 未部署，"deploying" - 部署中，"connected" - 连接正常，"deploy_failed" - 连接失败，"monitoring" - 连接正常，"stopped" - 暂停连接，"connect_failed" - 连接失败，unknown - 未知。
+     */
+    AgentStatus?: string;
+    /**
+     * 自建MySQL的实例状态，"not_attached" - 未连接，"attached" - 连接正常，"failed" - 连接失败，"stopped" - 停止监控，unknown- 未知。
+     */
+    InstanceStatus?: string;
 }
 /**
  * DescribeAuditInstanceList请求参数结构体

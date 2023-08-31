@@ -108,6 +108,7 @@ import {
   SlotSharingGroupSpec,
   DescribeJobsResponse,
   ExpertModeConfiguration,
+  Order,
   CopyJobItem,
   DescribeTreeJobsRequest,
   DescribeJobConfigsResponse,

@@ -698,6 +698,7 @@ import {
   DescribeRebuildMediaTemplatesResponse,
   AudioVolumeParam,
   AiReviewTaskPornAsrResult,
+  ProductInstanceResource,
   ModifyClassResponse,
   BlackWhiteEdgeConfigureInfoForUpdate,
   EditMediaFileInfo,

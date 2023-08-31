@@ -996,6 +996,10 @@ export interface ModifyNetworkAclEntriesRequest {
      * 网络ACL五元组规则集。NetworkAclEntrySet和NetworkAclQuintupleSet只能输入一个。
      */
     NetworkAclQuintupleSet?: NetworkAclQuintupleEntries;
+    /**
+     * 三元组的增量更新。该接口的默认语义为全量覆盖。当需要实现增量更新语义时，设置该参数为True。
+     */
+    EnableUpdateAclEntries?: boolean;
 }
 /**
  * DescribeVpcPrivateIpAddresses请求参数结构体
@@ -5855,6 +5859,9 @@ export interface CreateBandwidthPackageRequest {
   <li>TOP5_POSTPAID_BY_MONTH: 按月后付费TOP5计费</li>
   <li>PERCENT95_POSTPAID_BY_MONTH: 按月后付费月95计费</li>
   <li>FIXED_PREPAID_BY_MONTH: 包月预付费计费</li>
+  <li>ENHANCED95_POSTPAID_BY_MONTH: 按月后付费增强型95计费</li>
+  <li>PEAK_BANDWIDTH_POSTPAID_BY_DAY: 后付费日结按带宽计费</li>
+  
      */
     ChargeType?: string;
     /**
@@ -6507,10 +6514,6 @@ export interface DeleteVpnConnectionRequest {
  */
 export interface NetworkAclEntry {
     /**
-     * 修改时间。
-     */
-    ModifyTime: string;
-    /**
      * 协议, 取值: TCP,UDP, ICMP, ALL。
      */
     Protocol?: string;
@@ -6519,7 +6522,7 @@ export interface NetworkAclEntry {
      */
     Port?: string;
     /**
-     * 网段或IP(互斥)。
+     * 网段或IP(互斥)。增量创建ACL规则时，CidrBlock和Ipv6CidrBlock至少提供一个。
      */
     CidrBlock?: string;
     /**
@@ -6534,6 +6537,24 @@ export interface NetworkAclEntry {
      * 规则描述，最大长度100。
      */
     Description?: string;
+    /**
+     * 修改时间。
+     */
+    ModifyTime?: string;
+    /**
+     * 优先级，从1开始。
+     */
+    Priority?: number;
+    /**
+     * IPv4网络ACL条目唯一ID。当修改ACL条目时，NetworkAclIpv4EntryId和NetworkAclIpv6EntryID至少提供一个。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    NetworkAclIpv4EntryId?: string;
+    /**
+     * IPv6网络ACL条目唯一ID。当修改ACL条目时，NetworkAclIpv4EntryId和NetworkAclIpv6EntryId至少提供一个。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    NetworkAclIpv6EntryId?: string;
 }
 /**
  * DescribeDhcpIps请求参数结构体

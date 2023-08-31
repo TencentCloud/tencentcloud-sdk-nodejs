@@ -19,6 +19,7 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   DescribeInstanceShardsRequest,
+  ScaleOutInstanceRequest,
   ScaleOutInstanceResponse,
   ResizeDiskRequest,
   DestroyInstanceResponse,
@@ -36,48 +37,56 @@ import {
   ModifyUserNewPrivilegeRequest,
   DescribeCkSqlApisRequest,
   ClusterConfigsInfoFromEMR,
-  DescribeInstanceClustersRequest,
+  ClusterInfo,
   OpenBackUpRequest,
   BackupTableContent,
   CreateInstanceNewResponse,
   ConfigSubmitContext,
   InstanceStateInfo,
+  Tag,
   DescribeInstanceClustersResponse,
   CreateInstanceNewRequest,
   InstanceInfo,
+  NodeSpec,
+  DescribeBackUpJobDetailResponse,
   ModifyClusterConfigsRequest,
   ScaleUpInstanceRequest,
   DescribeInstanceKeyValConfigsResponse,
   ServiceInfo,
   MapConfigItem,
   ModifyClusterConfigsResponse,
+  RecoverBackUpJobRequest,
   DiskSpec,
   DescribeInstancesNewRequest,
-  DescribeClusterConfigsRequest,
+  DeleteBackUpDataResponse,
   ModifyInstanceKeyValConfigsRequest,
   DescribeInstancesNewResponse,
-  AttachCBSSpec,
-  ScaleOutInstanceRequest,
+  BackUpJobDisplay,
+  DescribeClusterConfigsRequest,
   ResourceSpec,
   SearchTags,
   CreateBackUpScheduleResponse,
   InstanceConfigItem,
+  RecoverBackUpJobResponse,
   DescribeInstanceResponse,
-  ClusterInfo,
+  DescribeBackUpJobResponse,
+  DescribeInstanceClustersRequest,
   DescribeInstanceStateRequest,
   NodesSummary,
   DescribeInstanceShardsResponse,
   InstanceConfigInfo,
+  DescribeBackUpJobDetailRequest,
   CreateBackUpScheduleRequest,
-  NodeSpec,
+  DeleteBackUpDataRequest,
   DescribeInstanceRequest,
   ActionAlterCkUserResponse,
-  Tag,
+  AttachCBSSpec,
   ScheduleStrategy,
   DescribeInstanceStateResponse,
   ResizeDiskResponse,
   DescribeBackUpScheduleResponse,
   DescribeCkSqlApisResponse,
+  DescribeBackUpJobRequest,
   ScaleUpInstanceResponse,
   ModifyUserNewPrivilegeResponse,
 } from "./cdwch_models"
@@ -92,16 +101,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询备份策略信息
-   */
-  async DescribeBackUpSchedule(
-    req: DescribeBackUpScheduleRequest,
-    cb?: (error: string, rep: DescribeBackUpScheduleResponse) => void
-  ): Promise<DescribeBackUpScheduleResponse> {
-    return this.request("DescribeBackUpSchedule", req, cb)
-  }
-
-  /**
    * 创建或者修改备份策略
    */
   async CreateBackUpSchedule(
@@ -109,6 +108,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateBackUpScheduleResponse) => void
   ): Promise<CreateBackUpScheduleResponse> {
     return this.request("CreateBackUpSchedule", req, cb)
+  }
+
+  /**
+   * 查询备份任务列表
+   */
+  async DescribeBackUpJob(
+    req: DescribeBackUpJobRequest,
+    cb?: (error: string, rep: DescribeBackUpJobResponse) => void
+  ): Promise<DescribeBackUpJobResponse> {
+    return this.request("DescribeBackUpJob", req, cb)
   }
 
   /**
@@ -122,6 +131,26 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 在集群详情页面获取所有参数列表
+   */
+  async DescribeInstanceKeyValConfigs(
+    req: DescribeInstanceKeyValConfigsRequest,
+    cb?: (error: string, rep: DescribeInstanceKeyValConfigsResponse) => void
+  ): Promise<DescribeInstanceKeyValConfigsResponse> {
+    return this.request("DescribeInstanceKeyValConfigs", req, cb)
+  }
+
+  /**
+   * KV模式修改配置接口
+   */
+  async ModifyInstanceKeyValConfigs(
+    req: ModifyInstanceKeyValConfigsRequest,
+    cb?: (error: string, rep: ModifyInstanceKeyValConfigsResponse) => void
+  ): Promise<ModifyInstanceKeyValConfigsResponse> {
+    return this.request("ModifyInstanceKeyValConfigs", req, cb)
+  }
+
+  /**
    * 垂直扩缩容节点规格，修改节点cvm的规格cpu，内存。 规格变化阶段，服务不可用。
    */
   async ScaleUpInstance(
@@ -132,13 +161,53 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询集群用户、集群表，数据库等相关信息
+   * 调整clickhouse节点数量
    */
-  async DescribeCkSqlApis(
-    req: DescribeCkSqlApisRequest,
-    cb?: (error: string, rep: DescribeCkSqlApisResponse) => void
-  ): Promise<DescribeCkSqlApisResponse> {
-    return this.request("DescribeCkSqlApis", req, cb)
+  async ScaleOutInstance(
+    req: ScaleOutInstanceRequest,
+    cb?: (error: string, rep: ScaleOutInstanceResponse) => void
+  ): Promise<ScaleOutInstanceResponse> {
+    return this.request("ScaleOutInstance", req, cb)
+  }
+
+  /**
+   * 备份恢复
+   */
+  async RecoverBackUpJob(
+    req: RecoverBackUpJobRequest,
+    cb?: (error: string, rep: RecoverBackUpJobResponse) => void
+  ): Promise<RecoverBackUpJobResponse> {
+    return this.request("RecoverBackUpJob", req, cb)
+  }
+
+  /**
+   * 获取实例列表，供外部sdk使用
+   */
+  async DescribeInstancesNew(
+    req: DescribeInstancesNewRequest,
+    cb?: (error: string, rep: DescribeInstancesNewResponse) => void
+  ): Promise<DescribeInstancesNewResponse> {
+    return this.request("DescribeInstancesNew", req, cb)
+  }
+
+  /**
+   * 删除备份数据
+   */
+  async DeleteBackUpData(
+    req: DeleteBackUpDataRequest,
+    cb?: (error: string, rep: DeleteBackUpDataResponse) => void
+  ): Promise<DeleteBackUpDataResponse> {
+    return this.request("DeleteBackUpData", req, cb)
+  }
+
+  /**
+   * 在集群配置页面修改集群配置文件接口，xml模式
+   */
+  async ModifyClusterConfigs(
+    req: ModifyClusterConfigsRequest,
+    cb?: (error: string, rep: ModifyClusterConfigsResponse) => void
+  ): Promise<ModifyClusterConfigsResponse> {
+    return this.request("ModifyClusterConfigs", req, cb)
   }
 
   /**
@@ -162,6 +231,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取集群的最新的几个配置文件（config.xml、metrika.xml、user.xml）的内容，显示给用户
+   */
+  async DescribeClusterConfigs(
+    req: DescribeClusterConfigsRequest,
+    cb?: (error: string, rep: DescribeClusterConfigsResponse) => void
+  ): Promise<DescribeClusterConfigsResponse> {
+    return this.request("DescribeClusterConfigs", req, cb)
+  }
+
+  /**
    * 开启或者关闭策略
    */
   async OpenBackUp(
@@ -172,23 +251,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 集群vcluster列表
+   * 获取实例shard信息列表
    */
-  async DescribeInstanceClusters(
-    req: DescribeInstanceClustersRequest,
-    cb?: (error: string, rep: DescribeInstanceClustersResponse) => void
-  ): Promise<DescribeInstanceClustersResponse> {
-    return this.request("DescribeInstanceClusters", req, cb)
+  async DescribeInstanceShards(
+    req: DescribeInstanceShardsRequest,
+    cb?: (error: string, rep: DescribeInstanceShardsResponse) => void
+  ): Promise<DescribeInstanceShardsResponse> {
+    return this.request("DescribeInstanceShards", req, cb)
   }
 
   /**
-   * 在集群详情页面获取所有参数列表
+   * 查询集群用户、集群表，数据库等相关信息
    */
-  async DescribeInstanceKeyValConfigs(
-    req: DescribeInstanceKeyValConfigsRequest,
-    cb?: (error: string, rep: DescribeInstanceKeyValConfigsResponse) => void
-  ): Promise<DescribeInstanceKeyValConfigsResponse> {
-    return this.request("DescribeInstanceKeyValConfigs", req, cb)
+  async DescribeCkSqlApis(
+    req: DescribeCkSqlApisRequest,
+    cb?: (error: string, rep: DescribeCkSqlApisResponse) => void
+  ): Promise<DescribeCkSqlApisResponse> {
+    return this.request("DescribeCkSqlApis", req, cb)
   }
 
   /**
@@ -202,23 +281,43 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取集群的最新的几个配置文件（config.xml、metrika.xml、user.xml）的内容，显示给用户
+   * 创建集群
    */
-  async DescribeClusterConfigs(
-    req: DescribeClusterConfigsRequest,
-    cb?: (error: string, rep: DescribeClusterConfigsResponse) => void
-  ): Promise<DescribeClusterConfigsResponse> {
-    return this.request("DescribeClusterConfigs", req, cb)
+  async CreateInstanceNew(
+    req: CreateInstanceNewRequest,
+    cb?: (error: string, rep: CreateInstanceNewResponse) => void
+  ): Promise<CreateInstanceNewResponse> {
+    return this.request("CreateInstanceNew", req, cb)
   }
 
   /**
-   * 获取实例列表，供外部sdk使用
+   * 查询备份策略信息
    */
-  async DescribeInstancesNew(
-    req: DescribeInstancesNewRequest,
-    cb?: (error: string, rep: DescribeInstancesNewResponse) => void
-  ): Promise<DescribeInstancesNewResponse> {
-    return this.request("DescribeInstancesNew", req, cb)
+  async DescribeBackUpSchedule(
+    req: DescribeBackUpScheduleRequest,
+    cb?: (error: string, rep: DescribeBackUpScheduleResponse) => void
+  ): Promise<DescribeBackUpScheduleResponse> {
+    return this.request("DescribeBackUpSchedule", req, cb)
+  }
+
+  /**
+   * 查询备份任务详情
+   */
+  async DescribeBackUpJobDetail(
+    req: DescribeBackUpJobDetailRequest,
+    cb?: (error: string, rep: DescribeBackUpJobDetailResponse) => void
+  ): Promise<DescribeBackUpJobDetailResponse> {
+    return this.request("DescribeBackUpJobDetail", req, cb)
+  }
+
+  /**
+   * 集群vcluster列表
+   */
+  async DescribeInstanceClusters(
+    req: DescribeInstanceClustersRequest,
+    cb?: (error: string, rep: DescribeInstanceClustersResponse) => void
+  ): Promise<DescribeInstanceClustersResponse> {
+    return this.request("DescribeInstanceClusters", req, cb)
   }
 
   /**
@@ -232,36 +331,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 在集群配置页面修改集群配置文件接口，xml模式
-   */
-  async ModifyClusterConfigs(
-    req: ModifyClusterConfigsRequest,
-    cb?: (error: string, rep: ModifyClusterConfigsResponse) => void
-  ): Promise<ModifyClusterConfigsResponse> {
-    return this.request("ModifyClusterConfigs", req, cb)
-  }
-
-  /**
-   * 创建集群
-   */
-  async CreateInstanceNew(
-    req: CreateInstanceNewRequest,
-    cb?: (error: string, rep: CreateInstanceNewResponse) => void
-  ): Promise<CreateInstanceNewResponse> {
-    return this.request("CreateInstanceNew", req, cb)
-  }
-
-  /**
-   * KV模式修改配置接口
-   */
-  async ModifyInstanceKeyValConfigs(
-    req: ModifyInstanceKeyValConfigsRequest,
-    cb?: (error: string, rep: ModifyInstanceKeyValConfigsResponse) => void
-  ): Promise<ModifyInstanceKeyValConfigsResponse> {
-    return this.request("ModifyInstanceKeyValConfigs", req, cb)
-  }
-
-  /**
    * 针对ck账号的权限做管控（新版）
    */
   async ModifyUserNewPrivilege(
@@ -272,16 +341,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 调整clickhouse节点数量
-   */
-  async ScaleOutInstance(
-    req: ScaleOutInstanceRequest,
-    cb?: (error: string, rep: ScaleOutInstanceResponse) => void
-  ): Promise<ScaleOutInstanceResponse> {
-    return this.request("ScaleOutInstance", req, cb)
-  }
-
-  /**
    * 扩容磁盘，包含扩容数据节点，zk节点
    */
   async ResizeDisk(
@@ -289,15 +348,5 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ResizeDiskResponse) => void
   ): Promise<ResizeDiskResponse> {
     return this.request("ResizeDisk", req, cb)
-  }
-
-  /**
-   * 获取实例shard信息列表
-   */
-  async DescribeInstanceShards(
-    req: DescribeInstanceShardsRequest,
-    cb?: (error: string, rep: DescribeInstanceShardsResponse) => void
-  ): Promise<DescribeInstanceShardsResponse> {
-    return this.request("DescribeInstanceShards", req, cb)
   }
 }

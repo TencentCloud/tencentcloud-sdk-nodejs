@@ -4177,45 +4177,50 @@ export interface ProductInstance {
 <li>MiniProgramPlugin：点播小程序插件。</li>
 <li>ResourcePackage：点播资源包。</li>
    */
-  ProductType: string
+  ProductType?: string
   /**
    * 资源包实例起始日期。使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。
    */
-  StartTime: string
+  StartTime?: string
   /**
    * 资源包实例过期日期。使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。
    */
-  ExpireTime: string
+  ExpireTime?: string
   /**
    * 资源包实例ID。对应每个资源包，系统会分配相应的资源。续费或者升级资源包时，需要带上这个资源ID。
    */
-  ProductInstanceId: string
+  ProductInstanceId?: string
   /**
    * 系统最近一次扣除资源包的日期。使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。
    */
-  LastConsumeDate: string
+  LastConsumeDate?: string
   /**
    * 资源包绑定 License 状态，取值有：
 <li>0：未绑定。</li>
 <li>1：已绑定。</li>
    */
-  BindStatus: number
+  BindStatus?: number
+  /**
+   * 预付费资源包实例中包含的资源包列表。
+   * @deprecated
+   */
+  ProductInstanceResourceSet?: Array<ProductInstanceRecource>
   /**
    * 预付费资源包实例中包含的资源包列表。
    */
-  ProductInstanceResourceSet: Array<ProductInstanceRecource>
+  ResourceSet?: Array<ProductInstanceResource>
   /**
    * 资源包实例的状态，取值有：
 <li>Effective：生效，可用于计费抵扣。</li>
 <li>Isolated：隔离，不可用于计费抵扣。</li>
    */
-  ProductInstanceStatus: string
+  ProductInstanceStatus?: string
   /**
    * 资源包实例的可退还状态，取值有：
 <li>FullRefund：可全额退款。</li>
 <li>Denied：不可退款。</li>
    */
-  RefundStatus: string
+  RefundStatus?: string
   /**
    * 自动续费状态，取值有：
 <li>Never：不自动续费。</li>
@@ -4223,7 +4228,7 @@ export interface ProductInstance {
 <li>ExpireOrUseOut：到期或用完自动续费。</li>
 <li>NotSupport：不支持。</li>
    */
-  RenewStatus: string
+  RenewStatus?: string
 }
 
 /**
@@ -17999,6 +18004,42 @@ export interface AiReviewTaskPornAsrResult {
    * 音视频审核 Asr 文字涉及令人反感的信息的任务进度，取值范围 [0-100] 。
    */
   Progress: number
+}
+
+/**
+ * 资源包中包含的资源。
+ */
+export interface ProductInstanceResource {
+  /**
+   * 资源类型。
+<li>Storage：存储资源包。</li>
+<li>Traffic：流量资源包。</li>
+<li>Transcode：普通转码资源包。</li>
+<li>TESHD：极速高清转码资源包。</li>
+<li>Review：音视频审核转码资源包。</li>
+<li>MediaProcess：媒体处理时长资源包。</li>
+   */
+  ResourceType?: string
+  /**
+   * 资源包额度。
+<li>音视频存储资源包，单位为字节。</li>
+<li>音视频转码资源包，单位为秒。</li>
+<li>音视频审核资源包，单位为秒。</li>
+<li>音视频极速高清资源包，单位为秒。</li>
+<li>音视频加速资源包，单位为字节。</li>
+<li>媒体处理时长资源包，单位为秒。</li>
+   */
+  Amount?: number
+  /**
+   * 资源包余量。
+<li>音视频存储资源包，单位为字节。</li>
+<li>音视频转码资源包，单位为秒。</li>
+<li>音视频审核资源包，单位为秒。</li>
+<li>音视频极速高清资源包，单位为秒。</li>
+<li>音视频加速资源包，单位为字节。</li>
+<li>媒体处理时长资源包，单位为秒。</li>
+   */
+  Left?: number
 }
 
 /**

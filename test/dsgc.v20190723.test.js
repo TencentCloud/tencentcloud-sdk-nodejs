@@ -318,6 +318,16 @@ it("dsgc.v20190723.DescribeAssetDetailDataExportResult", async function () {
     }
 })
 
+it("dsgc.v20190723.DescribeDSPAAssessmentRiskSideDistributed", async function () {
+    try {
+       const data = await client.DescribeDSPAAssessmentRiskSideDistributed({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dsgc.v20190723.DescribeDSPADiscoveryTaskResultDetail", async function () {
     try {
        const data = await client.DescribeDSPADiscoveryTaskResultDetail({})
@@ -1441,6 +1451,16 @@ it("dsgc.v20190723.ModifyDSPADiscoveryRule", async function () {
 it("dsgc.v20190723.DeleteDSPADiscoveryTaskResult", async function () {
     try {
        const data = await client.DeleteDSPADiscoveryTaskResult({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dsgc.v20190723.DescribeDSPAAssessmentRiskSideList", async function () {
+    try {
+       const data = await client.DescribeDSPAAssessmentRiskSideList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

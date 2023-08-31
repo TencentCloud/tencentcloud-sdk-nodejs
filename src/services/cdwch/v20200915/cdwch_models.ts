@@ -26,6 +26,41 @@ export interface DescribeInstanceShardsRequest {
 }
 
 /**
+ * ScaleOutInstance请求参数结构体
+ */
+export interface ScaleOutInstanceRequest {
+  /**
+   * 实例唯一ID
+   */
+  InstanceId: string
+  /**
+   * 节点类型，DATA：clickhouse节点，COMMON：为zookeeper节点
+   */
+  Type: string
+  /**
+   * 调整clickhouse节点数量
+   */
+  NodeCount: number
+  /**
+   * v_cluster分组，	
+新增扩容节点将加入到已选择的v_cluster分组中，提交同步VIP生效.
+   */
+  ScaleOutCluster?: string
+  /**
+   * 子网剩余ip数量，用于判断当前实例子网剩余ip数是否能扩容。需要根据实际填写
+   */
+  UserSubnetIPNum?: number
+  /**
+   * 同步元数据节点IP （uip），扩容的时候必填
+   */
+  ScaleOutNodeIp?: string
+  /**
+   * 缩容节点shard的节点IP （uip），其中ha集群需要主副节点ip都传入以逗号分隔，缩容的时候必填
+   */
+  ReduceShardInfo?: Array<string>
+}
+
+/**
  * ScaleOutInstance返回参数结构体
  */
 export interface ScaleOutInstanceResponse {
@@ -301,6 +336,10 @@ GET_USER_CONFIGS:获取用户配置列表  QUOTA、PROFILE、POLICY
    * 用户名称，api与user相关的必填
    */
   UserName?: string
+  /**
+   * 账户的类型
+   */
+  UserType?: string
 }
 
 /**
@@ -335,13 +374,19 @@ export interface ClusterConfigsInfoFromEMR {
 }
 
 /**
- * DescribeInstanceClusters请求参数结构体
+ * clickhouse vcluster信息
  */
-export interface DescribeInstanceClustersRequest {
+export interface ClusterInfo {
   /**
-   * 实例ID
+   * vcluster名字
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  InstanceId: string
+  ClusterName: string
+  /**
+   * 当前cluster的IP列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NodeIps: Array<string>
 }
 
 /**
@@ -499,6 +544,20 @@ export interface InstanceStateInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ProcessSubName?: string
+}
+
+/**
+ * 标签描述
+ */
+export interface Tag {
+  /**
+   * 标签的键
+   */
+  TagKey: string
+  /**
+   * 标签的值
+   */
+  TagValue: string
 }
 
 /**
@@ -817,6 +876,39 @@ Modify 集群变更中；
 }
 
 /**
+ * 创建集群时的规格
+ */
+export interface NodeSpec {
+  /**
+   * 规格名称
+   */
+  SpecName: string
+  /**
+   * 数量
+   */
+  Count: number
+  /**
+   * 云盘大小
+   */
+  DiskSize: number
+}
+
+/**
+ * DescribeBackUpJobDetail返回参数结构体
+ */
+export interface DescribeBackUpJobDetailResponse {
+  /**
+   * 备份表详情
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TableContents: Array<BackupTableContent>
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyClusterConfigs请求参数结构体
  */
 export interface ModifyClusterConfigsRequest {
@@ -934,6 +1026,20 @@ export interface ModifyClusterConfigsResponse {
 }
 
 /**
+ * RecoverBackUpJob请求参数结构体
+ */
+export interface RecoverBackUpJobRequest {
+  /**
+   * 集群id
+   */
+  InstanceId: string
+  /**
+   * 任务id
+   */
+  BackUpJobId: number
+}
+
+/**
  * 磁盘规格描述
  */
 export interface DiskSpec {
@@ -990,13 +1096,13 @@ export interface DescribeInstancesNewRequest {
 }
 
 /**
- * DescribeClusterConfigs请求参数结构体
+ * DeleteBackUpData返回参数结构体
  */
-export interface DescribeClusterConfigsRequest {
+export interface DeleteBackUpDataResponse {
   /**
-   * 集群实例ID
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  InstanceId: string
+  RequestId?: string
 }
 
 /**
@@ -1048,60 +1154,47 @@ export interface DescribeInstancesNewResponse {
 }
 
 /**
- * 集群内节点的规格磁盘规格描述
+ * 备份任务详情
  */
-export interface AttachCBSSpec {
+export interface BackUpJobDisplay {
   /**
-   * 节点磁盘类型，例如“CLOUD_SSD”\"CLOUD_PREMIUM"
+   * 备份任务id
    */
-  DiskType?: string
+  JobId: number
   /**
-   * 磁盘容量，单位G
+   * 备份任务名
    */
-  DiskSize?: number
+  Snapshot: string
   /**
-   * 磁盘总数
+   * 任务类型(元数据),(数据)
    */
-  DiskCount?: number
+  BackUpType: string
   /**
-   * 描述
+   * 备份数据量
    */
-  DiskDesc?: string
+  BackUpSize: number
+  /**
+   * 任务创建时间
+   */
+  BackUpTime: string
+  /**
+   * 任务过期时间
+   */
+  ExpireTime: string
+  /**
+   * 任务状态
+   */
+  JobStatus: string
 }
 
 /**
- * ScaleOutInstance请求参数结构体
+ * DescribeClusterConfigs请求参数结构体
  */
-export interface ScaleOutInstanceRequest {
+export interface DescribeClusterConfigsRequest {
   /**
-   * 实例唯一ID
+   * 集群实例ID
    */
   InstanceId: string
-  /**
-   * 节点类型，DATA：clickhouse节点，COMMON：为zookeeper节点
-   */
-  Type: string
-  /**
-   * 调整clickhouse节点数量
-   */
-  NodeCount: number
-  /**
-   * v_cluster分组，	
-新增扩容节点将加入到已选择的v_cluster分组中，提交同步VIP生效.
-   */
-  ScaleOutCluster?: string
-  /**
-   * 子网剩余ip数量，用于判断当前实例子网剩余ip数是否能扩容。需要根据实际填写
-   */
-  UserSubnetIPNum?: number
-  /**
-   * 同步元数据节点IP （uip），扩容的时候必填
-   */
-  ScaleOutNodeIp?: string
-  /**
-   * 缩容节点shard的节点IP （uip），其中ha集群需要主副节点ip都传入以逗号分隔，缩容的时候必填
-   */
-  ReduceShardInfo?: Array<string>
 }
 
 /**
@@ -1205,6 +1298,16 @@ export interface InstanceConfigItem {
 }
 
 /**
+ * RecoverBackUpJob返回参数结构体
+ */
+export interface RecoverBackUpJobResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeInstance返回参数结构体
  */
 export interface DescribeInstanceResponse {
@@ -1219,19 +1322,28 @@ export interface DescribeInstanceResponse {
 }
 
 /**
- * clickhouse vcluster信息
+ * DescribeBackUpJob返回参数结构体
  */
-export interface ClusterInfo {
+export interface DescribeBackUpJobResponse {
   /**
-   * vcluster名字
+   * 任务列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ClusterName: string
+  BackUpJobs: Array<BackUpJobDisplay>
   /**
-   * 当前cluster的IP列表
-注意：此字段可能返回 null，表示取不到有效值。
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  NodeIps: Array<string>
+  RequestId?: string
+}
+
+/**
+ * DescribeInstanceClusters请求参数结构体
+ */
+export interface DescribeInstanceClustersRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
 }
 
 /**
@@ -1379,6 +1491,20 @@ export interface InstanceConfigInfo {
 }
 
 /**
+ * DescribeBackUpJobDetail请求参数结构体
+ */
+export interface DescribeBackUpJobDetailRequest {
+  /**
+   * 集群id
+   */
+  InstanceId: string
+  /**
+   * 任务id
+   */
+  BackUpJobId: number
+}
+
+/**
  * CreateBackUpSchedule请求参数结构体
  */
 export interface CreateBackUpScheduleRequest {
@@ -1417,21 +1543,21 @@ export interface CreateBackUpScheduleRequest {
 }
 
 /**
- * 创建集群时的规格
+ * DeleteBackUpData请求参数结构体
  */
-export interface NodeSpec {
+export interface DeleteBackUpDataRequest {
   /**
-   * 规格名称
+   * 集群id
    */
-  SpecName: string
+  InstanceId: string
   /**
-   * 数量
+   * 任务id
    */
-  Count: number
+  BackUpJobId?: number
   /**
-   * 云盘大小
+   * 是否删除所有数据
    */
-  DiskSize: number
+  IsDeleteAll?: boolean
 }
 
 /**
@@ -1464,17 +1590,25 @@ export interface ActionAlterCkUserResponse {
 }
 
 /**
- * 标签描述
+ * 集群内节点的规格磁盘规格描述
  */
-export interface Tag {
+export interface AttachCBSSpec {
   /**
-   * 标签的键
+   * 节点磁盘类型，例如“CLOUD_SSD”\"CLOUD_PREMIUM"
    */
-  TagKey: string
+  DiskType?: string
   /**
-   * 标签的值
+   * 磁盘容量，单位G
    */
-  TagValue: string
+  DiskSize?: number
+  /**
+   * 磁盘总数
+   */
+  DiskCount?: number
+  /**
+   * 描述
+   */
+  DiskDesc?: string
 }
 
 /**
@@ -1619,11 +1753,37 @@ export interface DescribeCkSqlApisResponse {
    * 返回的查询数据，大部分情况是list，也可能是bool
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ReturnData: string
+  ReturnData?: string
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeBackUpJob请求参数结构体
+ */
+export interface DescribeBackUpJobRequest {
+  /**
+   * 集群id
+   */
+  InstanceId: string
+  /**
+   * 分页大小
+   */
+  PageSize?: number
+  /**
+   * 页号
+   */
+  PageNum?: number
+  /**
+   * 开始时间
+   */
+  BeginTime?: string
+  /**
+   * 结束时间
+   */
+  EndTime?: string
 }
 
 /**

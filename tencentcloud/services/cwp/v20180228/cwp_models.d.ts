@@ -10404,6 +10404,14 @@ export interface DescribeMaliciousRequestWhiteListRequest {
   <li>Domain  - String - 基线名称</li>
      */
     Filters?: Array<Filters>;
+    /**
+     * 排序方式 [asc:升序|desc:降序]
+     */
+    Order?: string;
+    /**
+     * 排序字段
+     */
+    By?: string;
 }
 /**
  * ModifyBanStatus返回参数结构体
@@ -12697,12 +12705,12 @@ export interface DescribeMaliciousRequestWhiteListResponse {
      * 白名单信息列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    List: Array<MaliciousRequestWhiteListInfo>;
+    List?: Array<MaliciousRequestWhiteListInfo>;
     /**
      * 分页查询记录总数
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */

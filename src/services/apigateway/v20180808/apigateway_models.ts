@@ -1633,6 +1633,11 @@ export interface DescribeServiceResponse {
    */
   SpecialUse?: string
   /**
+   * vpc属性，存量可能为空字符串
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UniqVpcId?: string
+  /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -2796,7 +2801,7 @@ export interface CreateServiceRequest {
    */
   InstanceId?: string
   /**
-   * vpc属性
+   * vpc属性，选择VPC后不可修改，为服务选择VPC后，可对接该VPC下的后端资源
    */
   UniqVpcId?: string
 }
@@ -3634,6 +3639,10 @@ export interface ModifyServiceRequest {
    * 网络类型列表，用于指定支持的访问类型，INNER为内网访问，OUTER为外网访问。默认为OUTER。
    */
   NetTypes?: Array<string>
+  /**
+   * vpc属性，选择VPC后不可修改。为服务选择VPC后，可对接该VPC下的后端资源
+   */
+  UniqVpcId?: string
 }
 
 /**
@@ -4378,7 +4387,7 @@ export interface ServiceUsagePlanSet {
  */
 export interface CreateUpstreamRequest {
   /**
-   * 后端协议，取值范围：HTTP, HTTPS
+   * 后端协议，取值范围：HTTP, HTTPS,gRPC，gRPCs
    */
   Scheme: string
   /**
