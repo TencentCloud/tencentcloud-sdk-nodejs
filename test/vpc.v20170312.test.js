@@ -288,9 +288,9 @@ it("vpc.v20170312.EnableSnapshotPolicies", async function () {
     }
 })
 
-it("vpc.v20170312.DescribeNetDetects", async function () {
+it("vpc.v20170312.DeleteNetworkAclEntries", async function () {
     try {
-       const data = await client.DescribeNetDetects({})
+       const data = await client.DeleteNetworkAclEntries({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -338,9 +338,9 @@ it("vpc.v20170312.AttachSnapshotInstances", async function () {
     }
 })
 
-it("vpc.v20170312.UnassignIpv6Addresses", async function () {
+it("vpc.v20170312.ModifySubnetAttribute", async function () {
     try {
-       const data = await client.UnassignIpv6Addresses({})
+       const data = await client.ModifySubnetAttribute({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -408,6 +408,16 @@ it("vpc.v20170312.DescribeCustomerGatewayVendors", async function () {
     }
 })
 
+it("vpc.v20170312.DescribeNetDetects", async function () {
+    try {
+       const data = await client.DescribeNetDetects({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vpc.v20170312.DescribeAddresses", async function () {
     try {
        const data = await client.DescribeAddresses({})
@@ -451,6 +461,16 @@ it("vpc.v20170312.DeleteLocalGateway", async function () {
 it("vpc.v20170312.ModifyNetworkAclEntries", async function () {
     try {
        const data = await client.ModifyNetworkAclEntries({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("vpc.v20170312.UnassignIpv6Addresses", async function () {
+    try {
+       const data = await client.UnassignIpv6Addresses({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1238,9 +1258,9 @@ it("vpc.v20170312.DescribeDirectConnectGatewayCcnRoutes", async function () {
     }
 })
 
-it("vpc.v20170312.CreateNetworkInterface", async function () {
+it("vpc.v20170312.CreateNetworkAclEntries", async function () {
     try {
-       const data = await client.CreateNetworkInterface({})
+       const data = await client.CreateNetworkAclEntries({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1258,9 +1278,9 @@ it("vpc.v20170312.DeleteBandwidthPackage", async function () {
     }
 })
 
-it("vpc.v20170312.ModifySecurityGroupPolicies", async function () {
+it("vpc.v20170312.CreateNetworkInterface", async function () {
     try {
-       const data = await client.ModifySecurityGroupPolicies({})
+       const data = await client.CreateNetworkInterface({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -2068,9 +2088,9 @@ it("vpc.v20170312.DescribeVpnGateways", async function () {
     }
 })
 
-it("vpc.v20170312.ModifySubnetAttribute", async function () {
+it("vpc.v20170312.ModifySecurityGroupPolicies", async function () {
     try {
-       const data = await client.ModifySubnetAttribute({})
+       const data = await client.ModifySecurityGroupPolicies({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -1500,6 +1500,20 @@ export interface DisassociateNetworkInterfaceSecurityGroupsRequest {
 }
 
 /**
+ * DeleteNetworkAclEntries请求参数结构体
+ */
+export interface DeleteNetworkAclEntriesRequest {
+  /**
+   * 三元组网络ACL实例ID。例如：acl-12345678。
+   */
+  NetworkAclId: string
+  /**
+   * 三元组网络ACL规则集。
+   */
+  NetworkAclEntrySet?: NetworkAclEntrySet
+}
+
+/**
  * 安全组规则集合
  */
 export interface SecurityGroupPolicySet {
@@ -4020,17 +4034,21 @@ export interface DescribeTrafficPackagesRequest {
 }
 
 /**
- * DeleteSecurityGroupPolicies请求参数结构体
+ * DescribeLocalGateway返回参数结构体
  */
-export interface DeleteSecurityGroupPoliciesRequest {
+export interface DescribeLocalGatewayResponse {
   /**
-   * 安全组实例ID，例如sg-33ocnj9n，可通过DescribeSecurityGroups获取。
+   * 本地网关信息集合。
    */
-  SecurityGroupId: string
+  LocalGatewaySet?: Array<LocalGateway>
   /**
-   * 安全组规则集合。一个请求中只能删除单个方向的一条或多条规则。支持指定索引（PolicyIndex） 匹配删除和安全组规则匹配删除两种方式，一个请求中只能使用一种匹配方式。
+   * 本地网关总数。
    */
-  SecurityGroupPolicySet: SecurityGroupPolicySet
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -6019,13 +6037,17 @@ export interface DescribeCcnAttachedInstancesResponse {
 }
 
 /**
- * HaVipAssociateAddressIp返回参数结构体
+ * CreateNetworkAclEntries请求参数结构体
  */
-export interface HaVipAssociateAddressIpResponse {
+export interface CreateNetworkAclEntriesRequest {
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 网络ACL实例ID。例如：acl-12345678。
    */
-  RequestId?: string
+  NetworkAclId: string
+  /**
+   * 网络三元组ACL规则集。
+   */
+  NetworkAclEntrySet: NetworkAclEntrySet
 }
 
 /**
@@ -6811,6 +6833,16 @@ export interface EnableRoutesResponse {
 }
 
 /**
+ * HaVipAssociateAddressIp返回参数结构体
+ */
+export interface HaVipAssociateAddressIpResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeSpecificTrafficPackageUsedDetails请求参数结构体
  */
 export interface DescribeSpecificTrafficPackageUsedDetailsRequest {
@@ -7073,6 +7105,16 @@ export interface EndPoint {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ServiceName: string
+}
+
+/**
+ * RemoveIp6Rules返回参数结构体
+ */
+export interface RemoveIp6RulesResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -9066,21 +9108,17 @@ export interface CcnInstance {
 }
 
 /**
- * DescribeLocalGateway返回参数结构体
+ * DeleteSecurityGroupPolicies请求参数结构体
  */
-export interface DescribeLocalGatewayResponse {
+export interface DeleteSecurityGroupPoliciesRequest {
   /**
-   * 本地网关信息集合。
+   * 安全组实例ID，例如sg-33ocnj9n，可通过DescribeSecurityGroups获取。
    */
-  LocalGatewaySet?: Array<LocalGateway>
+  SecurityGroupId: string
   /**
-   * 本地网关总数。
+   * 安全组规则集合。一个请求中只能删除单个方向的一条或多条规则。支持指定索引（PolicyIndex） 匹配删除和安全组规则匹配删除两种方式，一个请求中只能使用一种匹配方式。
    */
-  TotalCount?: number
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  SecurityGroupPolicySet: SecurityGroupPolicySet
 }
 
 /**
@@ -10330,13 +10368,17 @@ export interface DeleteAssistantCidrRequest {
 }
 
 /**
- * ModifyTemplateMember返回参数结构体
+ * DisableVpnGatewaySslClientCert请求参数结构体
  */
-export interface ModifyTemplateMemberResponse {
+export interface DisableVpnGatewaySslClientCertRequest {
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * SSL-VPN-CLIENT 实例ID。不可和SslVpnClientIds同时使用。
    */
-  RequestId?: string
+  SslVpnClientId?: string
+  /**
+   * SSL-VPN-CLIENT 实例ID列表。批量禁用时使用。不可和SslVpnClientId同时使用。
+   */
+  SslVpnClientIds?: Array<string>
 }
 
 /**
@@ -12593,6 +12635,16 @@ export interface CreateBandwidthPackageResponse {
 }
 
 /**
+ * CreateNetworkAclEntries返回参数结构体
+ */
+export interface CreateNetworkAclEntriesResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ResetVpnConnection请求参数结构体
  */
 export interface ResetVpnConnectionRequest {
@@ -12800,17 +12852,13 @@ export interface DeleteSecurityGroupResponse {
 }
 
 /**
- * DisableVpnGatewaySslClientCert请求参数结构体
+ * DeleteNetworkAclEntries返回参数结构体
  */
-export interface DisableVpnGatewaySslClientCertRequest {
+export interface DeleteNetworkAclEntriesResponse {
   /**
-   * SSL-VPN-CLIENT 实例ID。不可和SslVpnClientIds同时使用。
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  SslVpnClientId?: string
-  /**
-   * SSL-VPN-CLIENT 实例ID列表。批量禁用时使用。不可和SslVpnClientId同时使用。
-   */
-  SslVpnClientIds?: Array<string>
+  RequestId?: string
 }
 
 /**
@@ -13602,9 +13650,9 @@ export interface ModifyNetworkInterfaceAttributeRequest {
 }
 
 /**
- * RemoveIp6Rules返回参数结构体
+ * ModifyTemplateMember返回参数结构体
  */
-export interface RemoveIp6RulesResponse {
+export interface ModifyTemplateMemberResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

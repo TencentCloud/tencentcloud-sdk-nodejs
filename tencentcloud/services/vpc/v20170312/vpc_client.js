@@ -199,10 +199,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("EnableSnapshotPolicies", req, cb);
     }
     /**
-     * 本接口（DescribeNetDetects）用于查询网络探测列表。
+     * 本接口（DeleteNetworkAclEntries）用于删除三元组网络ACL的入站规则和出站规则。在NetworkAclEntrySet参数中：
+* 删除IPv4规则，需要传入NetworkAclIpv4EntryId。
+* 删除IPv6规则，需要传入NetworkAclIpv6EntryId。
      */
-    async DescribeNetDetects(req, cb) {
-        return this.request("DescribeNetDetects", req, cb);
+    async DeleteNetworkAclEntries(req, cb) {
+        return this.request("DeleteNetworkAclEntries", req, cb);
     }
     /**
      * 本接口（AcceptVpcPeeringConnection）用于接受对等连接请求。
@@ -232,11 +234,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("AttachSnapshotInstances", req, cb);
     }
     /**
-     * 本接口（UnassignIpv6Addresses）用于释放弹性网卡`IPv6`地址。<br />
-本接口是异步完成，如需查询异步任务执行结果，请使用本接口返回的`RequestId`轮询`DescribeVpcTaskResult`接口。
+     * 本接口（ModifySubnetAttribute）用于修改子网属性。
      */
-    async UnassignIpv6Addresses(req, cb) {
-        return this.request("UnassignIpv6Addresses", req, cb);
+    async ModifySubnetAttribute(req, cb) {
+        return this.request("ModifySubnetAttribute", req, cb);
     }
     /**
      * 将专线网关与NAT网关绑定，专线网关默认路由指向NAT网关
@@ -275,6 +276,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeCustomerGatewayVendors", req, cb);
     }
     /**
+     * 本接口（DescribeNetDetects）用于查询网络探测列表。
+     */
+    async DescribeNetDetects(req, cb) {
+        return this.request("DescribeNetDetects", req, cb);
+    }
+    /**
      * 本接口 (DescribeAddresses) 用于查询一个或多个[弹性公网IP](https://cloud.tencent.com/document/product/213/1941)（简称 EIP）的详细信息。
 * 如果参数为空，返回当前用户一定数量（Limit所指定的数量，默认为20）的 EIP。
      */
@@ -306,6 +313,13 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ModifyNetworkAclEntries(req, cb) {
         return this.request("ModifyNetworkAclEntries", req, cb);
+    }
+    /**
+     * 本接口（UnassignIpv6Addresses）用于释放弹性网卡`IPv6`地址。<br />
+本接口是异步完成，如需查询异步任务执行结果，请使用本接口返回的`RequestId`轮询`DescribeVpcTaskResult`接口。
+     */
+    async UnassignIpv6Addresses(req, cb) {
+        return this.request("UnassignIpv6Addresses", req, cb);
     }
     /**
      * 本接口（DetachCcnInstances）用于从云联网实例中解关联指定的网络实例。<br />
@@ -843,6 +857,18 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDirectConnectGatewayCcnRoutes", req, cb);
     }
     /**
+     * 本接口（CreateNetworkAclEntries）用于增量添加网络ACL三元组的入站规则和出站规则。
+     */
+    async CreateNetworkAclEntries(req, cb) {
+        return this.request("CreateNetworkAclEntries", req, cb);
+    }
+    /**
+     * 接口支持删除共享带宽包，包括[设备带宽包](https://cloud.tencent.com/document/product/684/15246#.E8.AE.BE.E5.A4.87.E5.B8.A6.E5.AE.BD.E5.8C.85)和[IP带宽包](https://cloud.tencent.com/document/product/684/15246#ip-.E5.B8.A6.E5.AE.BD.E5.8C.85)
+     */
+    async DeleteBandwidthPackage(req, cb) {
+        return this.request("DeleteBandwidthPackage", req, cb);
+    }
+    /**
      * 本接口（CreateNetworkInterface）用于创建弹性网卡。
 * 创建弹性网卡时可以指定内网IP，并且可以指定一个主IP，指定的内网IP必须在弹性网卡所在子网内，而且不能被占用。
 * 创建弹性网卡时可以指定需要申请的内网IP数量，系统会随机生成内网IP地址。
@@ -854,33 +880,6 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CreateNetworkInterface(req, cb) {
         return this.request("CreateNetworkInterface", req, cb);
-    }
-    /**
-     * 接口支持删除共享带宽包，包括[设备带宽包](https://cloud.tencent.com/document/product/684/15246#.E8.AE.BE.E5.A4.87.E5.B8.A6.E5.AE.BD.E5.8C.85)和[IP带宽包](https://cloud.tencent.com/document/product/684/15246#ip-.E5.B8.A6.E5.AE.BD.E5.8C.85)
-     */
-    async DeleteBandwidthPackage(req, cb) {
-        return this.request("DeleteBandwidthPackage", req, cb);
-    }
-    /**
-     * 本接口（ModifySecurityGroupPolicies）用于重置安全组出站和入站规则（SecurityGroupPolicy）。
-
-<ul>
-<li>该接口不支持自定义索引 PolicyIndex。</li>
-<li>在 SecurityGroupPolicySet 参数中：<ul>
-    <li> 如果指定 SecurityGroupPolicySet.Version 为0, 表示清空所有规则，并忽略 Egress 和 Ingress。</li>
-    <li> 如果指定 SecurityGroupPolicySet.Version 不为0, 在添加出站和入站规则（Egress 和 Ingress）时：<ul>
-        <li>Protocol 字段支持输入 TCP, UDP, ICMP, ICMPV6, GRE, ALL。</li>
-        <li>CidrBlock 字段允许输入符合 cidr 格式标准的任意字符串。(展开)在基础网络中，如果 CidrBlock 包含您的账户内的云服务器之外的设备在腾讯云的内网 IP，并不代表此规则允许您访问这些设备，租户之间网络隔离规则优先于安全组中的内网规则。</li>
-        <li>Ipv6CidrBlock 字段允许输入符合 IPv6 cidr 格式标准的任意字符串。(展开)在基础网络中，如果Ipv6CidrBlock 包含您的账户内的云服务器之外的设备在腾讯云的内网 IPv6，并不代表此规则允许您访问这些设备，租户之间网络隔离规则优先于安全组中的内网规则。</li>
-        <li>SecurityGroupId 字段允许输入与待修改的安全组位于相同项目中的安全组 ID，包括这个安全组 ID 本身，代表安全组下所有云服务器的内网 IP。使用这个字段时，这条规则用来匹配网络报文的过程中会随着被使用的这个ID所关联的云服务器变化而变化，不需要重新修改。</li>
-        <li>Port 字段允许输入一个单独端口号，或者用减号分隔的两个端口号代表端口范围，例如80或8000-8010。只有当 Protocol 字段是 TCP 或 UDP 时，Port 字段才被接受。</li>
-        <li>Action 字段只允许输入 ACCEPT 或 DROP。</li>
-        <li>CidrBlock, Ipv6CidrBlock, SecurityGroupId, AddressTemplate 四者是排他关系，不允许同时输入，Protocol + Port 和 ServiceTemplate 二者是排他关系，不允许同时输入。</li>
-</ul></li></ul></li>
-</ul>
-     */
-    async ModifySecurityGroupPolicies(req, cb) {
-        return this.request("ModifySecurityGroupPolicies", req, cb);
     }
     /**
      * 本接口(DescribeNetDetectStates)用于查询网络探测验证结果列表。
@@ -1412,10 +1411,25 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeVpnGateways", req, cb);
     }
     /**
-     * 本接口（ModifySubnetAttribute）用于修改子网属性。
+     * 本接口（ModifySecurityGroupPolicies）用于重置安全组出站和入站规则（SecurityGroupPolicy）。
+
+<ul>
+<li>该接口不支持自定义索引 PolicyIndex。</li>
+<li>在 SecurityGroupPolicySet 参数中：<ul>
+    <li> 如果指定 SecurityGroupPolicySet.Version 为0, 表示清空所有规则，并忽略 Egress 和 Ingress。</li>
+    <li> 如果指定 SecurityGroupPolicySet.Version 不为0, 在添加出站和入站规则（Egress 和 Ingress）时：<ul>
+        <li>Protocol 字段支持输入 TCP, UDP, ICMP, ICMPV6, GRE, ALL。</li>
+        <li>CidrBlock 字段允许输入符合 cidr 格式标准的任意字符串。(展开)在基础网络中，如果 CidrBlock 包含您的账户内的云服务器之外的设备在腾讯云的内网 IP，并不代表此规则允许您访问这些设备，租户之间网络隔离规则优先于安全组中的内网规则。</li>
+        <li>Ipv6CidrBlock 字段允许输入符合 IPv6 cidr 格式标准的任意字符串。(展开)在基础网络中，如果Ipv6CidrBlock 包含您的账户内的云服务器之外的设备在腾讯云的内网 IPv6，并不代表此规则允许您访问这些设备，租户之间网络隔离规则优先于安全组中的内网规则。</li>
+        <li>SecurityGroupId 字段允许输入与待修改的安全组位于相同项目中的安全组 ID，包括这个安全组 ID 本身，代表安全组下所有云服务器的内网 IP。使用这个字段时，这条规则用来匹配网络报文的过程中会随着被使用的这个ID所关联的云服务器变化而变化，不需要重新修改。</li>
+        <li>Port 字段允许输入一个单独端口号，或者用减号分隔的两个端口号代表端口范围，例如80或8000-8010。只有当 Protocol 字段是 TCP 或 UDP 时，Port 字段才被接受。</li>
+        <li>Action 字段只允许输入 ACCEPT 或 DROP。</li>
+        <li>CidrBlock, Ipv6CidrBlock, SecurityGroupId, AddressTemplate 四者是排他关系，不允许同时输入，Protocol + Port 和 ServiceTemplate 二者是排他关系，不允许同时输入。</li>
+</ul></li></ul></li>
+</ul>
      */
-    async ModifySubnetAttribute(req, cb) {
-        return this.request("ModifySubnetAttribute", req, cb);
+    async ModifySecurityGroupPolicies(req, cb) {
+        return this.request("ModifySecurityGroupPolicies", req, cb);
     }
     /**
      * 本接口（DownloadCustomerGatewayConfiguration）用于下载VPN通道配置。
