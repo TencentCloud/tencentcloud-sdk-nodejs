@@ -19,31 +19,44 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   DescribeDomainAssetsResponse,
+  ScanTaskInfoList,
   DescribeDbAssetInfoResponse,
   CreateRiskCenterScanTaskRequest,
+  ReportItemKey,
   DescribeScanReportListRequest,
+  TaskLogURL,
   DescribeRiskCenterAssetViewVULRiskListRequest,
+  TaskCenterCFGRiskInputParam,
   TaskCenterWeakPwdRiskInputParam,
+  TaskLogInfo,
   CreateDomainAndIpRequest,
   DomainAssetVO,
-  TaskCenterCFGRiskInputParam,
+  DescribeSearchBugInfoResponse,
   TaskCenterVulRiskInputParam,
+  DescribeScanTaskListResponse,
+  DescribeScanTaskListRequest,
   DescribeVpcAssetsResponse,
   FilterDataObject,
   DescribeDbAssetsRequest,
   CVMAssetVO,
+  DescribeTaskLogListResponse,
   DescribeScanReportListResponse,
+  DescribeSearchBugInfoRequest,
+  BugInfoDetail,
   DescribeClusterPodAssetsRequest,
   DescribeSubnetAssetsRequest,
   AddNewBindRoleUserRequest,
   DescribeCVMAssetInfoResponse,
   DescribePublicIpAssetsResponse,
+  DescribeTaskLogListRequest,
   Vpc,
   DescribeRiskCenterAssetViewVULRiskListResponse,
   DescribeCVMAssetsRequest,
   DescribeListenerListResponse,
-  TaskAdvanceCFG,
+  DescribeTaskLogURLResponse,
   DBAssetVO,
+  DataSearchBug,
+  AssetInfoDetail,
   ScanTaskInfo,
   SubnetAsset,
   CreateRiskCenterScanTaskResponse,
@@ -67,11 +80,13 @@ import {
   DescribeDomainAssetsRequest,
   CreateDomainAndIpResponse,
   DescribePublicIpAssetsRequest,
+  TaskAdvanceCFG,
   AssetClusterPod,
   DescribeDbAssetsResponse,
   AddNewBindRoleUserResponse,
   DescribeCVMAssetInfoRequest,
   WhereFilter,
+  DescribeTaskLogURLRequest,
 } from "./csip_models"
 
 /**
@@ -81,6 +96,26 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("csip.tencentcloudapi.com", "2022-11-21", clientConfig)
+  }
+
+  /**
+   * 获取报告下载的临时链接
+   */
+  async DescribeTaskLogURL(
+    req: DescribeTaskLogURLRequest,
+    cb?: (error: string, rep: DescribeTaskLogURLResponse) => void
+  ): Promise<DescribeTaskLogURLResponse> {
+    return this.request("DescribeTaskLogURL", req, cb)
+  }
+
+  /**
+   * 获取任务扫描报告列表
+   */
+  async DescribeTaskLogList(
+    req: DescribeTaskLogListRequest,
+    cb?: (error: string, rep: DescribeTaskLogListResponse) => void
+  ): Promise<DescribeTaskLogListResponse> {
+    return this.request("DescribeTaskLogList", req, cb)
   }
 
   /**
@@ -154,6 +189,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 立体防护中心查询漏洞信息
+   */
+  async DescribeSearchBugInfo(
+    req: DescribeSearchBugInfoRequest,
+    cb?: (error: string, rep: DescribeSearchBugInfoResponse) => void
+  ): Promise<DescribeSearchBugInfoResponse> {
+    return this.request("DescribeSearchBugInfo", req, cb)
+  }
+
+  /**
    * ip公网列表
    */
   async DescribePublicIpAssets(
@@ -221,6 +266,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateRiskCenterScanTaskResponse) => void
   ): Promise<CreateRiskCenterScanTaskResponse> {
     return this.request("CreateRiskCenterScanTask", req, cb)
+  }
+
+  /**
+   * 获取扫描任务列表
+   */
+  async DescribeScanTaskList(
+    req: DescribeScanTaskListRequest,
+    cb?: (error: string, rep: DescribeScanTaskListResponse) => void
+  ): Promise<DescribeScanTaskListResponse> {
+    return this.request("DescribeScanTaskList", req, cb)
   }
 
   /**

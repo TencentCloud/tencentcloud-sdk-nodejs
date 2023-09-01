@@ -9837,6 +9837,11 @@ export interface AdaptiveDynamicStreamingTaskInput {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AddOnSubtitles?: Array<AddOnSubtitle>
+  /**
+   * Drm信息。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DrmInfo?: DrmInfo
 }
 
 /**
@@ -9855,6 +9860,27 @@ export interface DescribeImageSpriteTemplatesResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * SimpleAes 加密信息。
+ */
+export interface SimpleAesDrm {
+  /**
+   * 请求解密秘钥uri地址。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Uri: string
+  /**
+   * 加密key(32字节字符串)。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Key: string
+  /**
+   * 加密初始化向量(32字节字符串)。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Vector?: string
 }
 
 /**
@@ -11374,6 +11400,23 @@ export interface QualityControlData {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   QualityControlResultSet: Array<QualityControlResult>
+}
+
+/**
+ * Drm 加密信息。
+ */
+export interface DrmInfo {
+  /**
+   * 加密类型：
+<li> simpleaes: aes-128 加密</li>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Type: string
+  /**
+   * SimpleAes 加密信息。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SimpleAesDrm?: SimpleAesDrm
 }
 
 /**

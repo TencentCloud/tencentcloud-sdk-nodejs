@@ -887,7 +887,11 @@ export interface DescribeCfsFileSystemClientsResponse {
   /**
    * 客户端列表
    */
-  ClientList: Array<FileSystemClient>
+  ClientList?: Array<FileSystemClient>
+  /**
+   * 文件系统总数
+   */
+  TotalCount?: number
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1437,6 +1441,14 @@ export interface DescribeCfsFileSystemClientsRequest {
    * 文件系统 ID。
    */
   FileSystemId: string
+  /**
+   * Offset 分页码
+   */
+  Offset?: number
+  /**
+   * Limit 页面大小
+   */
+  Limit?: number
 }
 
 /**

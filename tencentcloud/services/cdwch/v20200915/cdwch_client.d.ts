@@ -100,7 +100,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeInstance(req: DescribeInstanceRequest, cb?: (error: string, rep: DescribeInstanceResponse) => void): Promise<DescribeInstanceResponse>;
     /**
-     * 针对ck账号的权限做管控（新版）
+     * 针对集群账号的权限做管控（新版）
      */
     ModifyUserNewPrivilege(req?: ModifyUserNewPrivilegeRequest, cb?: (error: string, rep: ModifyUserNewPrivilegeResponse) => void): Promise<ModifyUserNewPrivilegeResponse>;
     /**

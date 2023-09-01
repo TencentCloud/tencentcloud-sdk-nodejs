@@ -3511,7 +3511,7 @@ export interface CreateTrafficPackagesResponse {
  */
 export interface ModifySecurityGroupAttributeRequest {
   /**
-   * 安全组实例ID，例如sg-33ocnj9n，可通过DescribeSecurityGroups获取。
+   * 安全组实例ID，例如sg-33ocnj9n，可通过<a href="https://cloud.tencent.com/document/product/215/15808">DescribeSecurityGroups</a>获取。
    */
   SecurityGroupId: string
   /**
@@ -4845,7 +4845,7 @@ export interface DescribeGatewayFlowQosResponse {
  */
 export interface ModifySecurityGroupPoliciesRequest {
   /**
-   * 安全组实例ID，例如sg-33ocnj9n，可通过DescribeSecurityGroups获取。
+   * 安全组实例ID，例如sg-33ocnj9n，可通过<a href="https://cloud.tencent.com/document/product/215/15808">DescribeSecurityGroups</a>获取。
    */
   SecurityGroupId: string
   /**
@@ -5674,35 +5674,35 @@ export interface NetDetect {
   /**
    * `VPC`实例`ID`。形如：`vpc-12345678`
    */
-  VpcId: string
+  VpcId?: string
   /**
    * `VPC`实例名称。
    */
-  VpcName: string
+  VpcName?: string
   /**
    * 子网实例ID。形如：subnet-12345678。
    */
-  SubnetId: string
+  SubnetId?: string
   /**
    * 子网实例名称。
    */
-  SubnetName: string
+  SubnetName?: string
   /**
    * 网络探测实例ID。形如：netd-12345678。
    */
-  NetDetectId: string
+  NetDetectId?: string
   /**
    * 网络探测名称，最大长度不能超过60个字节。
    */
-  NetDetectName: string
+  NetDetectName?: string
   /**
    * 探测目的IPv4地址数组，最多两个。
    */
-  DetectDestinationIp: Array<string>
+  DetectDestinationIp?: Array<string>
   /**
    * 系统自动分配的探测源IPv4数组。长度为2。
    */
-  DetectSourceIp: Array<string>
+  DetectSourceIp?: Array<string>
   /**
    * 下一跳类型，目前我们支持的类型有：
 VPN：VPN网关；
@@ -5713,7 +5713,7 @@ NORMAL_CVM：普通云服务器；
 CCN：云联网网关；
 NONEXTHOP：无下一跳；
    */
-  NextHopType: string
+  NextHopType?: string
   /**
    * 下一跳目的网关，取值与“下一跳类型”相关：
 下一跳类型为VPN，取值VPN网关ID，形如：vpngw-12345678；
@@ -5722,24 +5722,24 @@ NONEXTHOP：无下一跳；
 下一跳类型为NAT，取值Nat网关，形如：nat-12345678；
 下一跳类型为NORMAL_CVM，取值云服务器IPv4地址，形如：10.0.0.12；
 下一跳类型为CCN，取值云联网ID，形如：ccn-12345678；
-下一跳类型为NONEXTHOP，指定网络探测为无下一跳的网络探测；
+下一跳类型为NONEXTHOP，指定网络探测为无下一跳的网络探测，添加和修改时，不需要指定值，查询时值为空字符串；
    */
-  NextHopDestination: string
+  NextHopDestination?: string
   /**
    * 下一跳网关名称。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  NextHopName: string
+  NextHopName?: string
   /**
    * 网络探测描述。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  NetDetectDescription: string
+  NetDetectDescription?: string
   /**
    * 创建时间。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CreateTime: string
+  CreateTime?: string
 }
 
 /**
@@ -5803,7 +5803,7 @@ export interface ResumeSnapshotInstanceRequest {
  */
 export interface ReplaceSecurityGroupPolicyRequest {
   /**
-   * 安全组实例ID，例如sg-33ocnj9n，可通过DescribeSecurityGroups获取。
+   * 安全组实例ID，例如sg-33ocnj9n，可通过<a href="https://cloud.tencent.com/document/product/215/15808">DescribeSecurityGroups</a>获取。
    */
   SecurityGroupId: string
   /**
@@ -7854,6 +7854,10 @@ export interface CreateNetworkInterfaceRequest {
    * 网卡trunking模式设置，Enable-开启，Disable--关闭，默认关闭。
    */
   TrunkingFlag?: string
+  /**
+   * 用于保证请求幂等性的字符串。该字符串由客户生成，需保证不同请求之间唯一，最大值不超过64个ASCII字符。若不指定该参数，则无法保证请求的幂等性。
+   */
+  ClientToken?: string
 }
 
 /**
@@ -8399,6 +8403,10 @@ export interface CreateAndAttachNetworkInterfaceRequest {
    * 绑定类型：0 标准型 1 扩展型。
    */
   AttachType?: number
+  /**
+   * 用于保证请求幂等性的字符串。该字符串由客户生成，需保证不同请求之间唯一，最大值不超过64个ASCII字符。若不指定该参数，则无法保证请求的幂等性。
+   */
+  ClientToken?: string
 }
 
 /**
@@ -9112,7 +9120,7 @@ export interface CcnInstance {
  */
 export interface DeleteSecurityGroupPoliciesRequest {
   /**
-   * 安全组实例ID，例如sg-33ocnj9n，可通过DescribeSecurityGroups获取。
+   * 安全组实例ID，例如sg-33ocnj9n，可通过<a href="https://cloud.tencent.com/document/product/215/15808">DescribeSecurityGroups</a>获取。
    */
   SecurityGroupId: string
   /**
@@ -9954,7 +9962,7 @@ LOCAL_GATEWAY：本地网关。
    */
   Offset?: string
   /**
-   * 请求对象个数。
+   * 返回数量，默认为20，最大值为100。
    */
   Limit?: string
 }
@@ -11272,7 +11280,7 @@ export interface DescribeIp6TranslatorsResponse {
  */
 export interface CreateSecurityGroupPoliciesRequest {
   /**
-   * 安全组实例ID，例如sg-33ocnj9n，可通过DescribeSecurityGroups获取。
+   * 安全组实例ID，例如sg-33ocnj9n，可通过<a href="https://cloud.tencent.com/document/product/215/15808">DescribeSecurityGroups</a>获取。
    */
   SecurityGroupId: string
   /**
@@ -12214,27 +12222,27 @@ export interface RouteTable {
   /**
    * VPC实例ID。
    */
-  VpcId: string
+  VpcId?: string
   /**
    * 路由表实例ID，例如：rtb-azd4dt1c。
    */
-  RouteTableId: string
+  RouteTableId?: string
   /**
    * 路由表名称。
    */
-  RouteTableName: string
+  RouteTableName?: string
   /**
    * 路由表关联关系。
    */
-  AssociationSet: Array<RouteTableAssociation>
+  AssociationSet?: Array<RouteTableAssociation>
   /**
    * IPv4路由策略集合。
    */
-  RouteSet: Array<Route>
+  RouteSet?: Array<Route>
   /**
    * 是否默认路由表。
    */
-  Main: boolean
+  Main?: boolean
   /**
    * 创建时间。
    */
@@ -12242,12 +12250,12 @@ export interface RouteTable {
   /**
    * 标签键值对。
    */
-  TagSet: Array<Tag>
+  TagSet?: Array<Tag>
   /**
    * local路由是否发布云联网。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  LocalCidrForCcn: Array<CidrForCcn>
+  LocalCidrForCcn?: Array<CidrForCcn>
 }
 
 /**
@@ -12423,6 +12431,10 @@ export interface AssignPrivateIpAddressesRequest {
    * IP服务质量等级，和SecondaryPrivateIpAddressCount配合使用，可选值：PT、AU、AG、DEFAULT，分别代表云金、云银、云铜、默认四个等级。
    */
   QosLevel?: string
+  /**
+   * 用于保证请求幂等性的字符串。该字符串由客户生成，需保证不同请求之间唯一，最大值不超过64个ASCII字符。若不指定该参数，则无法保证请求的幂等性。
+   */
+  ClientToken?: string
 }
 
 /**
@@ -13119,6 +13131,10 @@ export interface DetachNetworkInterfaceRequest {
    * CVM实例ID。形如：ins-r8hr2upy。
    */
   InstanceId: string
+  /**
+   * 用于保证请求幂等性的字符串。该字符串由客户生成，需保证不同请求之间唯一，最大值不超过64个ASCII字符。若不指定该参数，则无法保证请求的幂等性。
+   */
+  ClientToken?: string
 }
 
 /**
@@ -13288,6 +13304,10 @@ export interface AttachNetworkInterfaceRequest {
    * 网卡的挂载类型：0 标准型，1扩展型，默认值0。
    */
   AttachType?: number
+  /**
+   * 用于保证请求幂等性的字符串。该字符串由客户生成，需保证不同请求之间唯一，最大值不超过64个ASCII字符。若不指定该参数，则无法保证请求的幂等性。
+   */
+  ClientToken?: string
 }
 
 /**
@@ -13856,7 +13876,7 @@ export interface CreateCustomerGatewayRequest {
  */
 export interface DeleteSecurityGroupRequest {
   /**
-   * 安全组实例ID，例如sg-33ocnj9n，可通过DescribeSecurityGroups获取。
+   * 安全组实例ID，例如sg-33ocnj9n，可通过<a href="https://cloud.tencent.com/document/product/215/15808">DescribeSecurityGroups</a>获取。
    */
   SecurityGroupId: string
 }
@@ -14016,7 +14036,7 @@ export interface CreateSecurityGroupRequest {
    */
   GroupDescription: string
   /**
-   * 项目ID，默认0。可在qcloud控制台项目管理页面查询到。
+   * 项目ID，默认0。可在<a href="https://console.cloud.tencent.com/project">控制台项目管理页面</a>查询到。
    */
   ProjectId?: string
   /**
@@ -14385,7 +14405,7 @@ export interface CreateSecurityGroupWithPoliciesRequest {
    */
   GroupDescription: string
   /**
-   * 项目ID，默认0。可在<a href="https://console.cloud.tencent.com/project">qcloud控制台项目管理页面</a>查询到。
+   * 项目ID，默认0。可在<a href="https://console.cloud.tencent.com/project">控制台项目管理页面</a>查询到。
    */
   ProjectId?: string
   /**
@@ -14453,7 +14473,7 @@ export interface DeleteServiceTemplateRequest {
  */
 export interface DescribeSecurityGroupAssociationStatisticsRequest {
   /**
-   * 安全实例ID，例如sg-33ocnj9n，可通过DescribeSecurityGroups获取。
+   * 安全实例ID，例如sg-33ocnj9n，可通过<a href="https://cloud.tencent.com/document/product/215/15808">DescribeSecurityGroups</a>获取。
    */
   SecurityGroupIds: Array<string>
 }

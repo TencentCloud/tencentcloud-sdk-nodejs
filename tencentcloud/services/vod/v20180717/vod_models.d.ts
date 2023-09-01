@@ -871,11 +871,11 @@ export interface MediaSnapshotByTimeOffsetItem {
     /**
      * 指定时间点截图规格，参见[指定时间点截图参数模板](https://cloud.tencent.com/document/product/266/33480#.E6.97.B6.E9.97.B4.E7.82.B9.E6.88.AA.E5.9B.BE.E6.A8.A1.E6.9D.BF)。
      */
-    Definition: number;
+    Definition?: number;
     /**
      * 同一规格的截图信息集合，每个元素代表一张截图。
      */
-    PicInfoSet: Array<MediaSnapshotByTimePicInfoItem>;
+    PicInfoSet?: Array<MediaSnapshotByTimePicInfoItem>;
 }
 /**
  * 画质重生目标参数
@@ -3241,27 +3241,27 @@ export interface MediaImageSpriteItem {
     /**
      * 雪碧图规格，参见[雪碧图参数模板](https://cloud.tencent.com/document/product/266/33480#.E9.9B.AA.E7.A2.A7.E5.9B.BE.E6.A8.A1.E6.9D.BF)。
      */
-    Definition: number;
+    Definition?: number;
     /**
      * 雪碧图小图的高度。
      */
-    Height: number;
+    Height?: number;
     /**
      * 雪碧图小图的宽度。
      */
-    Width: number;
+    Width?: number;
     /**
      * 每一张雪碧图大图里小图的数量。
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 每一张雪碧图大图的地址。
      */
-    ImageUrlSet: Array<string>;
+    ImageUrlSet?: Array<string>;
     /**
      * 雪碧图子图位置与时间关系的 WebVtt 文件地址。WebVtt 文件表明了各个雪碧图小图对应的时间点，以及在雪碧大图里的坐标位置，一般被播放器用于实现预览。
      */
-    WebVttUrl: string;
+    WebVttUrl?: string;
 }
 /**
  * 音画质检测任务信息。
@@ -4172,7 +4172,7 @@ export interface MediaMiniProgramReviewInfoItem {
     /**
      * 模板id。小程序视频发布的视频所对应的转码模板ID，为0代表原始视频。
      */
-    Definition: number;
+    Definition?: number;
     /**
      * 视频元信息。
      */
@@ -4180,17 +4180,17 @@ export interface MediaMiniProgramReviewInfoItem {
     /**
      * 小程序音视频审核视频播放地址。
      */
-    Url: string;
+    Url?: string;
     /**
      * 小程序视频发布状态：
   <li>Pass：成功。</li>
   <li>Rejected：未通过。</li>
      */
-    ReviewResult: string;
+    ReviewResult?: string;
     /**
      * 小程序音视频审核元素。
      */
-    ReviewSummary: Array<MediaMiniProgramReviewElem>;
+    ReviewSummary?: Array<MediaMiniProgramReviewElem>;
 }
 /**
  * 视频处理任务统计数据。
@@ -5921,27 +5921,27 @@ export interface MediaSampleSnapshotItem {
     /**
      * 采样截图规格 ID，参见[采样截图参数模板](https://cloud.tencent.com/document/product/266/33480#.E9.87.87.E6.A0.B7.E6.88.AA.E5.9B.BE.E6.A8.A1.E6.9D.BF)。
      */
-    Definition: number;
+    Definition?: number;
     /**
      * 采样方式，取值范围：
   <li>Percent：根据百分比间隔采样。</li>
   <li>Time：根据时间间隔采样。</li>
      */
-    SampleType: string;
+    SampleType?: string;
     /**
      * 采样间隔
   <li>当 SampleType 为 Percent 时，该值表示多少百分比一张图。</li>
   <li>当 SampleType 为 Time 时，该值表示多少时间间隔一张图，单位秒， 第一张图均为视频首帧。</li>
      */
-    Interval: number;
+    Interval?: number;
     /**
      * 生成的截图 url 列表。
      */
-    ImageUrlSet: Array<string>;
+    ImageUrlSet?: Array<string>;
     /**
      * 截图如果被打上了水印，被打水印的模板 ID 列表。
      */
-    WaterMarkDefinition: Array<number | bigint>;
+    WaterMarkDefinition?: Array<number | bigint>;
 }
 /**
  * 智能标签任务控制参数
@@ -6637,43 +6637,43 @@ export interface MediaAnimatedGraphicsItem {
     /**
      * 转动图的文件地址。
      */
-    Url: string;
+    Url?: string;
     /**
      * 转动图模板 ID，参见[转动图参数模板](https://cloud.tencent.com/document/product/266/33481#.3Cspan-id-.3D-.22zdt.22.3E.3C.2Fspan.3E.E8.BD.AC.E5.8A.A8.E5.9B.BE.E6.A8.A1.E6.9D.BF)。
      */
-    Definition: number;
+    Definition?: number;
     /**
      * 动图格式，如 gif。
      */
-    Container: string;
+    Container?: string;
     /**
      * 动图的高度，单位：px。
      */
-    Height: number;
+    Height?: number;
     /**
      * 动图的宽度，单位：px。
      */
-    Width: number;
+    Width?: number;
     /**
      * 动图码率，单位：bps。
      */
-    Bitrate: number;
+    Bitrate?: number;
     /**
      * 动图大小，单位：字节。
      */
-    Size: number;
+    Size?: number;
     /**
      * 动图的md5值。
      */
-    Md5: string;
+    Md5?: string;
     /**
      * 动图在视频中的起始时间偏移，单位：秒。
      */
-    StartTimeOffset: number;
+    StartTimeOffset?: number;
     /**
      * 动图在视频中的结束时间偏移，单位：秒。
      */
-    EndTimeOffset: number;
+    EndTimeOffset?: number;
 }
 /**
  * 全景录制信息

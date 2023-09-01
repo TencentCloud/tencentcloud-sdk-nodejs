@@ -81,6 +81,7 @@ import {
   DescribeModelServiceCallInfoRequest,
   DataPoint,
   TagFilter,
+  TJCallInfo,
   CreateTrainingModelRequest,
   SchemaInfo,
   StartCmdInfo,
@@ -126,6 +127,7 @@ import {
   DescribeModelAccelerateTaskResponse,
   DetectionLabelInfo,
   DescribeModelServiceGroupsRequest,
+  ServiceEIPInfo,
   TextLabelDistributionDetailInfoSecondClass,
   BatchTaskSetItem,
   ImageInfo,
@@ -145,6 +147,7 @@ import {
   DescribeDatasetsResponse,
   RestartModelAccelerateTaskResponse,
   CreateBatchModelAccTasksRequest,
+  IntranetCallInfo,
   DescribeBillingSpecsPriceRequest,
   WeightEntry,
   Instance,
@@ -182,6 +185,7 @@ import {
   VolumeMount,
   DeleteNotebookImageRecordResponse,
   CreateModelServiceResponse,
+  ServiceEIP,
   DescribeModelServiceGroupResponse,
   ServiceGroup,
   TrainingModelDTO,
@@ -194,6 +198,7 @@ import {
   CreateTrainingModelResponse,
   LogIdentity,
   StopModelAccelerateTaskResponse,
+  IngressPrivateLinkInfo,
   DescribeAPIConfigsResponse,
   DescribeDatasetDetailStructuredRequest,
   SendChatMessageRequest,
@@ -487,8 +492,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 与大模型聊天
-   */
+     * 该接口支持与两种类型大模型的聊天。
+1. 与多行业多场景大模型的在线体验聊天
+2. 与自行部署的开源大模型的聊天
+     */
   async ChatCompletion(
     req: ChatCompletionRequest,
     cb?: (error: string, rep: ChatCompletionResponse) => void
@@ -697,7 +704,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取训练、推理、Notebook服务的日志
+   * 获取训练、推理、Notebook服务的日志 API
    */
   async DescribeLogs(
     req: DescribeLogsRequest,
@@ -737,7 +744,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * LLM模型的对话请求发送接口
+   * 这是一个供您体验大模型聊天的接口。
    */
   async SendChatMessage(
     req: SendChatMessageRequest,

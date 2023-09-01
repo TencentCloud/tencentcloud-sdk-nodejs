@@ -200,16 +200,19 @@ export interface CloudNativeAPIGatewayStrategyCronScalerConfig {
   /**
    * 创建时间
 注意：此字段可能返回 null，表示取不到有效值。
+   * @deprecated
    */
   CreateTime?: string
   /**
    * 修改时间
 注意：此字段可能返回 null，表示取不到有效值。
+   * @deprecated
    */
   ModifyTime?: string
   /**
    * 弹性策略ID
 注意：此字段可能返回 null，表示取不到有效值。
+   * @deprecated
    */
   StrategyId?: string
 }
@@ -332,53 +335,13 @@ export interface DeleteNativeGatewayServerGroupResponse {
 }
 
 /**
- * 网关实例策略
+ * CreateCloudNativeAPIGatewayRouteRateLimit返回参数结构体
  */
-export interface CloudNativeAPIGatewayStrategy {
+export interface CreateCloudNativeAPIGatewayRouteRateLimitResponse {
   /**
-   * 策略ID
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  StrategyId: string
-  /**
-   * 策略名称
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  StrategyName: string
-  /**
-   * 创建时间
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CreateTime: string
-  /**
-   * 更新时间
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ModifyTime: string
-  /**
-   * 策略描述
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Description: string
-  /**
-   * 弹性伸缩配置
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Config: CloudNativeAPIGatewayStrategyAutoScalerConfig
-  /**
-   * 网关实例ID
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  GatewayId: string
-  /**
-   * 定时伸缩配置
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CronConfig?: CloudNativeAPIGatewayStrategyCronScalerConfig
-  /**
-   * 最大节点数
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  MaxReplicas?: number
+  RequestId?: string
 }
 
 /**
@@ -890,80 +853,29 @@ export interface CreateCloudNativeAPIGatewayCanaryRuleResponse {
 }
 
 /**
- * CreateCloudNativeAPIGatewayRoute请求参数结构体
+ * DescribeSREInstances请求参数结构体
  */
-export interface CreateCloudNativeAPIGatewayRouteRequest {
+export interface DescribeSREInstancesRequest {
   /**
-   * 网关ID
+   * 请求过滤参数
    */
-  GatewayId: string
+  Filters?: Array<Filter>
   /**
-   * 所属服务的ID
+   * 翻页单页查询限制数量[0,1000], 默认值0
    */
-  ServiceID: string
+  Limit?: number
   /**
-   * 路由的名字，实例级别唯一，可以不提供
+   * 翻页单页偏移量，默认值0
    */
-  RouteName?: string
+  Offset?: number
   /**
-   * 路由的方法，其中方法可选值：
-- GET
-- POST
-- DELETE
-- PUT
-- OPTIONS
-- PATCH
-- HEAD
-- ANY
-- TRACE
-- COPY
-- MOVE
-- PROPFIND
-- PROPPATCH
-- MKCOL
-- LOCK
-- UNLOCK
+   * 查询类型
    */
-  Methods?: Array<string>
+  QueryType?: string
   /**
-   * 路由的域名
+   * 调用方来源
    */
-  Hosts?: Array<string>
-  /**
-   * 路由的路径
-   */
-  Paths?: Array<string>
-  /**
-   * 路由的协议，可选
-- https
-- http
-   */
-  Protocols?: Array<string>
-  /**
-   * 转发到后端时是否保留Host
-   */
-  PreserveHost?: boolean
-  /**
-   * https重定向状态码
-   */
-  HttpsRedirectStatusCode?: number
-  /**
-   * 转发到后端时是否StripPath
-   */
-  StripPath?: boolean
-  /**
-   * 是否开启强制HTTPS
-   * @deprecated
-   */
-  ForceHttps?: boolean
-  /**
-   * 四层匹配的目的端口
-   */
-  DestinationPorts?: Array<number | bigint>
-  /**
-   * 路由的Headers
-   */
-  Headers?: Array<KVMapping>
+  QuerySource?: string
 }
 
 /**
@@ -1615,6 +1527,27 @@ export interface DescribeCloudNativeAPIGatewaysRequest {
 }
 
 /**
+ * 扩容策略
+ */
+export interface AutoScalerPolicy {
+  /**
+   * 类型，Pods或Percent
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Type?: string
+  /**
+   * 数量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Value?: number
+  /**
+   * 扩容周期
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PeriodSeconds?: number
+}
+
+/**
  * DescribeNacosServerInterfaces返回参数结构体
  */
 export interface DescribeNacosServerInterfacesResponse {
@@ -1842,13 +1775,54 @@ export interface DescribeOneCloudNativeAPIGatewayServiceRequest {
 }
 
 /**
- * CreateCloudNativeAPIGatewayRouteRateLimit返回参数结构体
+ * 网关实例策略
  */
-export interface CreateCloudNativeAPIGatewayRouteRateLimitResponse {
+export interface CloudNativeAPIGatewayStrategy {
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 策略ID
    */
-  RequestId?: string
+  StrategyId?: string
+  /**
+   * 策略名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StrategyName?: string
+  /**
+   * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateTime?: string
+  /**
+   * 更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ModifyTime?: string
+  /**
+   * 策略描述
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Description?: string
+  /**
+   * 弹性伸缩配置
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Config?: CloudNativeAPIGatewayStrategyAutoScalerConfig
+  /**
+   * 网关实例ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  GatewayId?: string
+  /**
+   * 定时伸缩配置
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CronConfig?: CloudNativeAPIGatewayStrategyCronScalerConfig
+  /**
+   * 最大节点数
+注意：此字段可能返回 null，表示取不到有效值。
+   * @deprecated
+   */
+  MaxReplicas?: number
 }
 
 /**
@@ -1922,6 +1896,22 @@ export interface DeleteCloudNativeAPIGatewayRouteRateLimitRequest {
 不支持“未命名”
    */
   Id: string
+}
+
+/**
+ * 指标伸缩行为
+ */
+export interface AutoScalerBehavior {
+  /**
+   * 扩容行为配置
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ScaleUp?: AutoScalerRules
+  /**
+   * 缩容行为配置
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ScaleDown?: AutoScalerRules
 }
 
 /**
@@ -2843,23 +2833,32 @@ export interface CloudNativeAPIGatewayStrategyAutoScalerConfig {
   /**
    * 创建时间
 注意：此字段可能返回 null，表示取不到有效值。
+   * @deprecated
    */
   CreateTime?: string
   /**
    * 修改时间
 注意：此字段可能返回 null，表示取不到有效值。
+   * @deprecated
    */
   ModifyTime?: string
   /**
    * 弹性策略ID
 注意：此字段可能返回 null，表示取不到有效值。
+   * @deprecated
    */
   StrategyId?: string
   /**
    * 指标配置ID
 注意：此字段可能返回 null，表示取不到有效值。
+   * @deprecated
    */
   AutoScalerId?: string
+  /**
+   * 指标伸缩行为配置
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Behavior?: AutoScalerBehavior
 }
 
 /**
@@ -2995,6 +2994,27 @@ export interface BoundK8SInfo {
 }
 
 /**
+ * 指标伸缩的规则
+ */
+export interface AutoScalerRules {
+  /**
+   * 稳定窗口时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StabilizationWindowSeconds?: number
+  /**
+   * 选择策略依据
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SelectPolicy?: string
+  /**
+   * 扩容策略
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Policies?: Array<AutoScalerPolicy>
+}
+
+/**
  * 服务的后端配置
  */
 export interface KongUpstreamInfo {
@@ -3077,29 +3097,80 @@ export interface KongUpstreamInfo {
 }
 
 /**
- * DescribeSREInstances请求参数结构体
+ * CreateCloudNativeAPIGatewayRoute请求参数结构体
  */
-export interface DescribeSREInstancesRequest {
+export interface CreateCloudNativeAPIGatewayRouteRequest {
   /**
-   * 请求过滤参数
+   * 网关ID
    */
-  Filters?: Array<Filter>
+  GatewayId: string
   /**
-   * 翻页单页查询限制数量[0,1000], 默认值0
+   * 所属服务的ID
    */
-  Limit?: number
+  ServiceID: string
   /**
-   * 翻页单页偏移量，默认值0
+   * 路由的名字，实例级别唯一，可以不提供
    */
-  Offset?: number
+  RouteName?: string
   /**
-   * 查询类型
+   * 路由的方法，其中方法可选值：
+- GET
+- POST
+- DELETE
+- PUT
+- OPTIONS
+- PATCH
+- HEAD
+- ANY
+- TRACE
+- COPY
+- MOVE
+- PROPFIND
+- PROPPATCH
+- MKCOL
+- LOCK
+- UNLOCK
    */
-  QueryType?: string
+  Methods?: Array<string>
   /**
-   * 调用方来源
+   * 路由的域名
    */
-  QuerySource?: string
+  Hosts?: Array<string>
+  /**
+   * 路由的路径
+   */
+  Paths?: Array<string>
+  /**
+   * 路由的协议，可选
+- https
+- http
+   */
+  Protocols?: Array<string>
+  /**
+   * 转发到后端时是否保留Host
+   */
+  PreserveHost?: boolean
+  /**
+   * https重定向状态码
+   */
+  HttpsRedirectStatusCode?: number
+  /**
+   * 转发到后端时是否StripPath
+   */
+  StripPath?: boolean
+  /**
+   * 是否开启强制HTTPS
+   * @deprecated
+   */
+  ForceHttps?: boolean
+  /**
+   * 四层匹配的目的端口
+   */
+  DestinationPorts?: Array<number | bigint>
+  /**
+   * 路由的Headers
+   */
+  Headers?: Array<KVMapping>
 }
 
 /**

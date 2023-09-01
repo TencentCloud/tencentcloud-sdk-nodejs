@@ -82,6 +82,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDBDiagReportTasks", req, cb);
     }
     /**
+     * 更新Agent实例状态（停止或重连实例）
+     */
+    async UpdateMonitorSwitch(req, cb) {
+        return this.request("UpdateMonitorSwitch", req, cb);
+    }
+    /**
      * 修改实例巡检开关。
      */
     async ModifyDiagDBInstanceConf(req, cb) {
@@ -296,6 +302,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CreateKillTask(req, cb) {
         return this.request("CreateKillTask", req, cb);
+    }
+    /**
+     * 更新agent状态（停止或重连Agent）
+     */
+    async UpdateAgentSwitch(req, cb) {
+        return this.request("UpdateAgentSwitch", req, cb);
     }
     /**
      * 查询实例无主键表。

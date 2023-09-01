@@ -6638,9 +6638,13 @@ CMCC：中国移动
    */
   PrivateIpAddresses?: Array<string>
   /**
-   * 为弹性网卡指定随机生成的IPv6地址数量，目前数量不能大于1。
+   * 为弹性网卡指定随机生成的IPv6地址数量，单网情况下是1，单网需要ISP 只能为单网运营商，三网情况3
    */
   Ipv6AddressCount?: number
+  /**
+   * 指定创建三网ipv6地址，使用的subnet数组，单独ipv4和单网ipv6子网依然使用SubnetId字段
+   */
+  Ipv6SubnetIds?: Array<string>
 }
 
 /**

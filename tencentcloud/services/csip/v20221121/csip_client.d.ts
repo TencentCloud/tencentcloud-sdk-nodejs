@@ -1,12 +1,20 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeDomainAssetsResponse, DescribeDbAssetInfoResponse, CreateRiskCenterScanTaskRequest, DescribeScanReportListRequest, DescribeRiskCenterAssetViewVULRiskListRequest, CreateDomainAndIpRequest, DescribeVpcAssetsResponse, DescribeDbAssetsRequest, DescribeScanReportListResponse, DescribeClusterPodAssetsRequest, DescribeSubnetAssetsRequest, AddNewBindRoleUserRequest, DescribeCVMAssetInfoResponse, DescribePublicIpAssetsResponse, DescribeRiskCenterAssetViewVULRiskListResponse, DescribeCVMAssetsRequest, DescribeListenerListResponse, CreateRiskCenterScanTaskResponse, DescribeRiskCenterAssetViewPortRiskListResponse, DescribeSubnetAssetsResponse, DescribeDbAssetInfoRequest, DescribeRiskCenterAssetViewPortRiskListRequest, DescribeCVMAssetsResponse, DescribeVpcAssetsRequest, DescribeClusterPodAssetsResponse, DescribeListenerListRequest, DescribeDomainAssetsRequest, CreateDomainAndIpResponse, DescribePublicIpAssetsRequest, DescribeDbAssetsResponse, AddNewBindRoleUserResponse, DescribeCVMAssetInfoRequest } from "./csip_models";
+import { DescribeDomainAssetsResponse, DescribeDbAssetInfoResponse, CreateRiskCenterScanTaskRequest, DescribeScanReportListRequest, DescribeRiskCenterAssetViewVULRiskListRequest, CreateDomainAndIpRequest, DescribeSearchBugInfoResponse, DescribeScanTaskListResponse, DescribeScanTaskListRequest, DescribeVpcAssetsResponse, DescribeDbAssetsRequest, DescribeTaskLogListResponse, DescribeScanReportListResponse, DescribeSearchBugInfoRequest, DescribeClusterPodAssetsRequest, DescribeSubnetAssetsRequest, AddNewBindRoleUserRequest, DescribeCVMAssetInfoResponse, DescribePublicIpAssetsResponse, DescribeTaskLogListRequest, DescribeRiskCenterAssetViewVULRiskListResponse, DescribeCVMAssetsRequest, DescribeListenerListResponse, DescribeTaskLogURLResponse, CreateRiskCenterScanTaskResponse, DescribeRiskCenterAssetViewPortRiskListResponse, DescribeSubnetAssetsResponse, DescribeDbAssetInfoRequest, DescribeRiskCenterAssetViewPortRiskListRequest, DescribeCVMAssetsResponse, DescribeVpcAssetsRequest, DescribeClusterPodAssetsResponse, DescribeListenerListRequest, DescribeDomainAssetsRequest, CreateDomainAndIpResponse, DescribePublicIpAssetsRequest, DescribeDbAssetsResponse, AddNewBindRoleUserResponse, DescribeCVMAssetInfoRequest, DescribeTaskLogURLRequest } from "./csip_models";
 /**
  * csip client
  * @class
  */
 export declare class Client extends AbstractClient {
     constructor(clientConfig: ClientConfig);
+    /**
+     * 获取报告下载的临时链接
+     */
+    DescribeTaskLogURL(req: DescribeTaskLogURLRequest, cb?: (error: string, rep: DescribeTaskLogURLResponse) => void): Promise<DescribeTaskLogURLResponse>;
+    /**
+     * 获取任务扫描报告列表
+     */
+    DescribeTaskLogList(req: DescribeTaskLogListRequest, cb?: (error: string, rep: DescribeTaskLogListResponse) => void): Promise<DescribeTaskLogListResponse>;
     /**
      * 获取资产视角的漏洞风险列表
      */
@@ -36,6 +44,10 @@ export declare class Client extends AbstractClient {
      */
     DescribeDomainAssets(req: DescribeDomainAssetsRequest, cb?: (error: string, rep: DescribeDomainAssetsResponse) => void): Promise<DescribeDomainAssetsResponse>;
     /**
+     * 立体防护中心查询漏洞信息
+     */
+    DescribeSearchBugInfo(req: DescribeSearchBugInfoRequest, cb?: (error: string, rep: DescribeSearchBugInfoResponse) => void): Promise<DescribeSearchBugInfoResponse>;
+    /**
      * ip公网列表
      */
     DescribePublicIpAssets(req: DescribePublicIpAssetsRequest, cb?: (error: string, rep: DescribePublicIpAssetsResponse) => void): Promise<DescribePublicIpAssetsResponse>;
@@ -63,6 +75,10 @@ export declare class Client extends AbstractClient {
      * 创建风险中心扫描任务
      */
     CreateRiskCenterScanTask(req: CreateRiskCenterScanTaskRequest, cb?: (error: string, rep: CreateRiskCenterScanTaskResponse) => void): Promise<CreateRiskCenterScanTaskResponse>;
+    /**
+     * 获取扫描任务列表
+     */
+    DescribeScanTaskList(req: DescribeScanTaskListRequest, cb?: (error: string, rep: DescribeScanTaskListResponse) => void): Promise<DescribeScanTaskListResponse>;
     /**
      * 资产列表
      */

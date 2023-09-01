@@ -160,7 +160,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeModelAccelerateTask", req, cb);
     }
     /**
-     * 与大模型聊天
+     * 该接口支持与两种类型大模型的聊天。
+1. 与多行业多场景大模型的在线体验聊天
+2. 与自行部署的开源大模型的聊天
      */
     async ChatCompletion(req, cb) {
         return this.request("ChatCompletion", req, cb);
@@ -286,7 +288,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDatasets", req, cb);
     }
     /**
-     * 获取训练、推理、Notebook服务的日志
+     * 获取训练、推理、Notebook服务的日志 API
      */
     async DescribeLogs(req, cb) {
         return this.request("DescribeLogs", req, cb);
@@ -310,7 +312,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("RestartModelAccelerateTask", req, cb);
     }
     /**
-     * LLM模型的对话请求发送接口
+     * 这是一个供您体验大模型聊天的接口。
      */
     async SendChatMessage(req, cb) {
         return this.request("SendChatMessage", req, cb);

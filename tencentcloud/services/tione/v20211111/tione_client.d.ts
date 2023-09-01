@@ -96,7 +96,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeModelAccelerateTask(req: DescribeModelAccelerateTaskRequest, cb?: (error: string, rep: DescribeModelAccelerateTaskResponse) => void): Promise<DescribeModelAccelerateTaskResponse>;
     /**
-     * 与大模型聊天
+     * 该接口支持与两种类型大模型的聊天。
+1. 与多行业多场景大模型的在线体验聊天
+2. 与自行部署的开源大模型的聊天
      */
     ChatCompletion(req: ChatCompletionRequest, cb?: (error: string, rep: ChatCompletionResponse) => void): Promise<ChatCompletionResponse>;
     /**
@@ -180,7 +182,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeDatasets(req: DescribeDatasetsRequest, cb?: (error: string, rep: DescribeDatasetsResponse) => void): Promise<DescribeDatasetsResponse>;
     /**
-     * 获取训练、推理、Notebook服务的日志
+     * 获取训练、推理、Notebook服务的日志 API
      */
     DescribeLogs(req: DescribeLogsRequest, cb?: (error: string, rep: DescribeLogsResponse) => void): Promise<DescribeLogsResponse>;
     /**
@@ -196,7 +198,7 @@ export declare class Client extends AbstractClient {
      */
     RestartModelAccelerateTask(req: RestartModelAccelerateTaskRequest, cb?: (error: string, rep: RestartModelAccelerateTaskResponse) => void): Promise<RestartModelAccelerateTaskResponse>;
     /**
-     * LLM模型的对话请求发送接口
+     * 这是一个供您体验大模型聊天的接口。
      */
     SendChatMessage(req: SendChatMessageRequest, cb?: (error: string, rep: SendChatMessageResponse) => void): Promise<SendChatMessageResponse>;
     /**

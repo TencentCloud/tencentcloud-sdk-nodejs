@@ -79,7 +79,9 @@ export declare class Client extends AbstractClient {
      */
     SetTranscodeCallbackKey(req: SetTranscodeCallbackKeyRequest, cb?: (error: string, rep: SetTranscodeCallbackKeyResponse) => void): Promise<SetTranscodeCallbackKeyResponse>;
     /**
-     * 设置课后录制回调地址
+     * 课后录制服务已下线
+
+设置课后录制回调地址
      */
     SetOfflineRecordCallback(req: SetOfflineRecordCallbackRequest, cb?: (error: string, rep: SetOfflineRecordCallbackResponse) => void): Promise<SetOfflineRecordCallbackResponse>;
     /**
@@ -167,7 +169,9 @@ export declare class Client extends AbstractClient {
      */
     SetWhiteboardPushCallback(req: SetWhiteboardPushCallbackRequest, cb?: (error: string, rep: SetWhiteboardPushCallbackResponse) => void): Promise<SetWhiteboardPushCallbackResponse>;
     /**
-     * 查询课后录制回调地址
+     * 课后录制服务已下线
+
+查询课后录制回调地址
      */
     DescribeOfflineRecordCallback(req: DescribeOfflineRecordCallbackRequest, cb?: (error: string, rep: DescribeOfflineRecordCallbackResponse) => void): Promise<DescribeOfflineRecordCallbackResponse>;
     /**
@@ -179,7 +183,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeTranscode(req: DescribeTranscodeRequest, cb?: (error: string, rep: DescribeTranscodeResponse) => void): Promise<DescribeTranscodeResponse>;
     /**
-     * 创建课后录制任务
+     * 课后录制服务已下线
+
+创建课后录制任务
      */
     CreateOfflineRecord(req: CreateOfflineRecordRequest, cb?: (error: string, rep: CreateOfflineRecordResponse) => void): Promise<CreateOfflineRecordResponse>;
     /**
@@ -226,7 +232,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeQualityMetrics(req: DescribeQualityMetricsRequest, cb?: (error: string, rep: DescribeQualityMetricsResponse) => void): Promise<DescribeQualityMetricsResponse>;
     /**
-     * 查询课后录制任务的进度与录制结果等相关信息
+     * 课后录制服务已下线
+
+查询课后录制任务的进度与录制结果等相关信息
      */
     DescribeOfflineRecord(req: DescribeOfflineRecordRequest, cb?: (error: string, rep: DescribeOfflineRecordResponse) => void): Promise<DescribeOfflineRecordResponse>;
     /**

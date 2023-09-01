@@ -18,6 +18,26 @@ const client = new tencentcloud.csip.v20221121.Client({
 })
 describe("csip.v20221121.test.js", function () {
 
+it("csip.v20221121.DescribeTaskLogURL", async function () {
+    try {
+       const data = await client.DescribeTaskLogURL({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("csip.v20221121.DescribeTaskLogList", async function () {
+    try {
+       const data = await client.DescribeTaskLogList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("csip.v20221121.DescribeRiskCenterAssetViewVULRiskList", async function () {
     try {
        const data = await client.DescribeRiskCenterAssetViewVULRiskList({})
@@ -88,6 +108,16 @@ it("csip.v20221121.DescribeDomainAssets", async function () {
     }
 })
 
+it("csip.v20221121.DescribeSearchBugInfo", async function () {
+    try {
+       const data = await client.DescribeSearchBugInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("csip.v20221121.DescribePublicIpAssets", async function () {
     try {
        const data = await client.DescribePublicIpAssets({})
@@ -151,6 +181,16 @@ it("csip.v20221121.DescribeListenerList", async function () {
 it("csip.v20221121.CreateRiskCenterScanTask", async function () {
     try {
        const data = await client.CreateRiskCenterScanTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("csip.v20221121.DescribeScanTaskList", async function () {
+    try {
+       const data = await client.DescribeScanTaskList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

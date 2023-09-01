@@ -580,16 +580,18 @@ export interface DescribeIntegrationRolesRequest {
  */
 export interface CreateFlowEvidenceReportRequest {
     /**
-     * 调用方用户信息，userId 必填
+     * 执行本接口操作的员工信息。
+  注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。`
      */
     Operator: UserInfo;
     /**
-     * 签署流程编号
+     * 合同流程ID，为32位字符串。
+  可登录腾讯电子签控制台，在 "合同"->"合同中心" 中查看某个合同的FlowId(在页面中展示为合同ID)。
      */
     FlowId: string;
     /**
-     * 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填
-  
+     * 代理企业和员工的信息。
+  在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。
      */
     Agent?: Agent;
 }
@@ -745,7 +747,7 @@ export interface DeleteIntegrationEmployeesResponse {
  */
 export interface CreateFlowRemindsResponse {
     /**
-     * 催办合同详情列表
+     * 合同催办结果的详细信息列表。
      */
     RemindFlowRecords?: Array<RemindFlowRecords>;
     /**
@@ -1196,6 +1198,10 @@ export interface CreateFlowRequest {
      */
     Approvers: Array<FlowCreateApprover>;
     /**
+     * 签署流程描述,最大长度1000个字符
+     */
+    FlowDescription?: string;
+    /**
      * 签署流程的类型(如销售合同/入职合同等)，最大长度200个字符
      */
     FlowType?: string;
@@ -1205,6 +1211,7 @@ export interface CreateFlowRequest {
     ClientToken?: string;
     /**
      * 签署流程的签署截止时间。
+  
   值为unix时间戳,精确到秒,不传默认为当前时间一年后
      */
     DeadLine?: number;
@@ -1216,10 +1223,6 @@ export interface CreateFlowRequest {
      * 用户自定义字段，回调的时候会进行透传，长度需要小于20480
      */
     UserData?: string;
-    /**
-     * 签署流程描述,最大长度1000个字符
-     */
-    FlowDescription?: string;
     /**
      * 发送类型：
   true：无序签
@@ -2830,19 +2833,23 @@ export interface RecipientComponentInfo {
  */
 export interface CreateFlowEvidenceReportResponse {
     /**
-     * 出证报告 ID，用于查询出证报告DescribeFlowEvidenceReport接口时用到
+     * 出证报告 ID，可用于DescribeFlowEvidenceReport接口查询出证PDF的下载地址
   注意：此字段可能返回 null，表示取不到有效值。
      */
     ReportId?: string;
     /**
-     * 执行中：EvidenceStatusExecuting
-  成功：EvidenceStatusSuccess
-  失败：EvidenceStatusFailed
+     * 出证任务执行的状态, 可能会有以下状态：
+  
+  <ul><li>EvidenceStatusExecuting：  出证任务在执行中</li>
+  <li>EvidenceStatusSuccess：  出证任务执行成功</li>
+  <li>EvidenceStatusFailed ： 出征任务执行失败</li></ul>
      */
     Status?: string;
     /**
-     * 废除，字段无效
+     * 此字段已经废除,不再使用.
+  出证的PDF下载地址请调用DescribeChannelFlowEvidenceReport接口获取
   注意：此字段可能返回 null，表示取不到有效值。
+     * @deprecated
      */
     ReportUrl?: string;
     /**
@@ -4088,21 +4095,23 @@ export interface DescribeIntegrationMainOrganizationUserResponse {
     RequestId?: string;
 }
 /**
- * 催办接口返回详细信息
+ * 催办接口返回的详细信息。
  */
 export interface RemindFlowRecords {
     /**
-     * 是否能够催办，true-是，false-否
+     * 合同流程是否可以催办：
+  true - 可以，false - 不可以。
+  若无法催办，将返回RemindMessage以解释原因。
      */
-    CanRemind: boolean;
+    CanRemind?: boolean;
     /**
-     * 合同id
+     * 合同流程ID，为32位字符串。
      */
-    FlowId: string;
+    FlowId?: string;
     /**
-     * 催办详情信息
+     * 在合同流程无法催办的情况下，系统将返回RemindMessage以阐述原因。
      */
-    RemindMessage: string;
+    RemindMessage?: string;
 }
 /**
  * CancelUserAutoSignEnableUrl请求参数结构体
@@ -5079,15 +5088,17 @@ export interface DescribeIntegrationRolesResponse {
  */
 export interface CreateFlowRemindsRequest {
     /**
-     * 调用方用户信息，userId 必填
+     * 执行本接口操作的员工信息。
+  注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。`
      */
     Operator: UserInfo;
     /**
-     * 需要执行催办的签署流程id数组，最多100个
+     * 需执行催办的签署流程ID数组，最多包含100个。
      */
     FlowIds: Array<string>;
     /**
-     * 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填
+     * 代理企业和员工的信息。
+  在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。
      */
     Agent?: Agent;
 }
@@ -5538,7 +5549,11 @@ export interface CancelMultiFlowSignQRCodeResponse {
  */
 export interface CreateFlowResponse {
     /**
-     * 签署流程编号
+     * 签署流程编号，
+  
+  返回的流程编号，需要在CreateDocument，StartFlow中使用，
+  
+  注意：这三个接口（CreateFlow，CreateDocument，StartFlow）要一并调用，才算发起成功
      */
     FlowId?: string;
     /**

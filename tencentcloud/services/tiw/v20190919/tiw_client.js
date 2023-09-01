@@ -133,7 +133,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("SetTranscodeCallbackKey", req, cb);
     }
     /**
-     * 设置课后录制回调地址
+     * 课后录制服务已下线
+
+设置课后录制回调地址
      */
     async SetOfflineRecordCallback(req, cb) {
         return this.request("SetOfflineRecordCallback", req, cb);
@@ -265,7 +267,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("SetWhiteboardPushCallback", req, cb);
     }
     /**
-     * 查询课后录制回调地址
+     * 课后录制服务已下线
+
+查询课后录制回调地址
      */
     async DescribeOfflineRecordCallback(req, cb) {
         return this.request("DescribeOfflineRecordCallback", req, cb);
@@ -283,7 +287,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeTranscode", req, cb);
     }
     /**
-     * 创建课后录制任务
+     * 课后录制服务已下线
+
+创建课后录制任务
      */
     async CreateOfflineRecord(req, cb) {
         return this.request("CreateOfflineRecord", req, cb);
@@ -352,7 +358,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeQualityMetrics", req, cb);
     }
     /**
-     * 查询课后录制任务的进度与录制结果等相关信息
+     * 课后录制服务已下线
+
+查询课后录制任务的进度与录制结果等相关信息
      */
     async DescribeOfflineRecord(req, cb) {
         return this.request("DescribeOfflineRecord", req, cb);

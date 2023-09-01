@@ -108,6 +108,16 @@ it("dbbrain.v20210527.DescribeDBDiagReportTasks", async function () {
     }
 })
 
+it("dbbrain.v20210527.UpdateMonitorSwitch", async function () {
+    try {
+       const data = await client.UpdateMonitorSwitch({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dbbrain.v20210527.ModifyDiagDBInstanceConf", async function () {
     try {
        const data = await client.ModifyDiagDBInstanceConf({})
@@ -461,6 +471,16 @@ it("dbbrain.v20210527.DescribeTopSpaceSchemaTimeSeries", async function () {
 it("dbbrain.v20210527.CreateKillTask", async function () {
     try {
        const data = await client.CreateKillTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dbbrain.v20210527.UpdateAgentSwitch", async function () {
+    try {
+       const data = await client.UpdateAgentSwitch({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

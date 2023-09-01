@@ -28,6 +28,18 @@ class Client extends abstract_client_1.AbstractClient {
         super("csip.tencentcloudapi.com", "2022-11-21", clientConfig);
     }
     /**
+     * 获取报告下载的临时链接
+     */
+    async DescribeTaskLogURL(req, cb) {
+        return this.request("DescribeTaskLogURL", req, cb);
+    }
+    /**
+     * 获取任务扫描报告列表
+     */
+    async DescribeTaskLogList(req, cb) {
+        return this.request("DescribeTaskLogList", req, cb);
+    }
+    /**
      * 获取资产视角的漏洞风险列表
      */
     async DescribeRiskCenterAssetViewVULRiskList(req, cb) {
@@ -70,6 +82,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDomainAssets", req, cb);
     }
     /**
+     * 立体防护中心查询漏洞信息
+     */
+    async DescribeSearchBugInfo(req, cb) {
+        return this.request("DescribeSearchBugInfo", req, cb);
+    }
+    /**
      * ip公网列表
      */
     async DescribePublicIpAssets(req, cb) {
@@ -110,6 +128,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CreateRiskCenterScanTask(req, cb) {
         return this.request("CreateRiskCenterScanTask", req, cb);
+    }
+    /**
+     * 获取扫描任务列表
+     */
+    async DescribeScanTaskList(req, cb) {
+        return this.request("DescribeScanTaskList", req, cb);
     }
     /**
      * 资产列表

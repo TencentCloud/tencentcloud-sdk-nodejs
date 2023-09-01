@@ -209,10 +209,6 @@ export interface DescribeLogsRequest {
      */
     Service: string;
     /**
-     * 查询哪个Pod的日志（支持结尾通配符*)
-     */
-    PodName: string;
-    /**
      * 日志查询开始时间（RFC3339格式的时间字符串），默认值为当前时间的前一个小时
      */
     StartTime?: string;
@@ -224,6 +220,10 @@ export interface DescribeLogsRequest {
      * 日志查询条数，默认值100，最大值100
      */
     Limit?: number;
+    /**
+     * 查询哪个Pod的日志（支持结尾通配符*)
+     */
+    PodName?: string;
     /**
      * 排序方向（可选值为ASC, DESC ），默认为DESC
      */
@@ -786,6 +786,10 @@ export interface DescribeModelServiceGroupRequest {
      * 服务组ID
      */
     ServiceGroupId: string;
+    /**
+     * 服务分类
+     */
+    ServiceCategory?: string;
 }
 /**
  * RDMA配置
@@ -2136,7 +2140,9 @@ export interface FrameworkVersion {
  */
 export interface ChatCompletionRequest {
     /**
-     * 部署好的模型服务Id。
+     * 对话的目标模型ID。
+  多行业多场景大模型在线体验聊天：tj_llm_clm-v1。
+  自行部署的开源大模型聊天：部署的模型服务组ID，形如ms-xxyyzz。
      */
     Model: string;
     /**
@@ -2144,15 +2150,15 @@ export interface ChatCompletionRequest {
      */
     Messages: Array<Message>;
     /**
-     * 采样随机值，默认值为1.0，取值范围[0,2]。较高的值(如0.8)将使输出更加随机，而较低的值(如0.2)将使输出更加确定。建议仅修改此参数或TopP，但不建议两者都修改。
+     * 仅当模型为自行部署的开源大模型时生效。采样随机值，默认值为1.0，取值范围[0,2]。较高的值(如0.8)将使输出更加随机，而较低的值(如0.2)将使输出更加确定。建议仅修改此参数或TopP，但不建议两者都修改。
      */
     Temperature?: number;
     /**
-     * 核采样，默认值为1，取值范围[0,1]。指的是预先设置一个概率界限 p，然后将所有可能生成的token，根据概率大小从高到低排列，依次选取。当这些选取的token的累积概率大于或等于 p 值时停止，然后从已经选取的token中进行采样，生成下一个token。例如top_p为0.1时意味着模型只考虑累积概率为10%的token。建议仅修改此参数或Temperature，不建议两者都修改。
+     * 仅当模型为自行部署的开源大模型时生效。核采样，默认值为1，取值范围[0,1]。指的是预先设置一个概率界限 p，然后将所有可能生成的token，根据概率大小从高到低排列，依次选取。当这些选取的token的累积概率大于或等于 p 值时停止，然后从已经选取的token中进行采样，生成下一个token。例如top_p为0.1时意味着模型只考虑累积概率为10%的token。建议仅修改此参数或Temperature，不建议两者都修改。
      */
     TopP?: number;
     /**
-     * 最大生成的token数目。默认为无限大。
+     * 仅当模型为自行部署的开源大模型时生效。最大生成的token数目。默认为无限大。
      */
     MaxTokens?: number;
 }
@@ -2191,6 +2197,10 @@ export interface DescribeModelServiceCallInfoRequest {
      * 服务组id
      */
     ServiceGroupId: string;
+    /**
+     * 服务分类
+     */
+    ServiceCategory?: string;
 }
 /**
  * 数据点
@@ -2219,6 +2229,26 @@ export interface TagFilter {
     TagValues?: Array<string>;
 }
 /**
+ * 太极服务的调用信息
+ */
+export interface TJCallInfo {
+    /**
+     * 调用地址
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    HttpAddr?: string;
+    /**
+     * token
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Token?: string;
+    /**
+     * 调用示例
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CallExample?: string;
+}
+/**
  * CreateTrainingModel请求参数结构体
  */
 export interface CreateTrainingModelRequest {
@@ -2229,10 +2259,6 @@ export interface CreateTrainingModelRequest {
   EXIST：导入现有版本
      */
     ImportMethod: string;
-    /**
-     * 模型来源cos目录，以/结尾
-     */
-    TrainingModelCosPath: CosPathInfo;
     /**
      * 推理环境来源（SYSTEM/CUSTOM）
      */
@@ -2249,6 +2275,10 @@ export interface CreateTrainingModelRequest {
      * 训练任务名称
      */
     TrainingJobName?: string;
+    /**
+     * 模型来源cos目录，以/结尾
+     */
+    TrainingModelCosPath?: CosPathInfo;
     /**
      * 算法框架 （PYTORCH/TENSORFLOW/DETECTRON2/PMML/MMDETECTION)
      */
@@ -2396,12 +2426,12 @@ export interface DescribeModelServiceGroupsResponse {
      * 推理服务组数量。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 服务组信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ServiceGroups: Array<ServiceGroup>;
+    ServiceGroups?: Array<ServiceGroup>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -3446,6 +3476,30 @@ export interface DescribeModelServiceGroupsRequest {
      * 标签过滤参数
      */
     TagFilters?: Array<TagFilter>;
+    /**
+     * 服务分类
+     */
+    ServiceCategory?: string;
+}
+/**
+ * 共享弹性网卡信息
+ */
+export interface ServiceEIPInfo {
+    /**
+     * 服务ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ServiceId?: string;
+    /**
+     * 用户VpcId
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    VpcId?: string;
+    /**
+     * 用户子网Id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SubnetId?: string;
 }
 /**
  * 二级标签
@@ -3751,6 +3805,11 @@ export interface ServiceInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Command?: string;
+    /**
+     * 开启TIONE内网访问外部设置
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ServiceEIP?: ServiceEIP;
 }
 /**
  * 出参类型
@@ -3883,6 +3942,10 @@ export interface DescribeModelServiceRequest {
      * 服务id
      */
     ServiceId: string;
+    /**
+     * 服务分类
+     */
+    ServiceCategory?: string;
 }
 /**
  * CreateTrainingTask返回参数结构体
@@ -3945,6 +4008,10 @@ export interface DeleteModelServiceRequest {
      * 服务id
      */
     ServiceId: string;
+    /**
+     * 服务分类
+     */
+    ServiceCategory?: string;
 }
 /**
  * DeleteModelAccelerateTask请求参数结构体
@@ -4115,7 +4182,7 @@ export interface DescribeModelServiceResponse {
     /**
      * 服务信息
      */
-    Service: Service;
+    Service?: Service;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -4186,6 +4253,21 @@ export interface CreateBatchModelAccTasksRequest {
      * 专业参数设置
      */
     HyperParameter?: HyperParameter;
+}
+/**
+ * 内网调用信息
+ */
+export interface IntranetCallInfo {
+    /**
+     * 私有连接通道信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IngressPrivateLinkInfo?: IngressPrivateLinkInfo;
+    /**
+     * 共享弹性网卡信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ServiceEIPInfo?: Array<ServiceEIPInfo>;
 }
 /**
  * DescribeBillingSpecsPrice请求参数结构体
@@ -4728,6 +4810,16 @@ export interface DescribeModelServiceCallInfoResponse {
      */
     DefaultNginxGatewayCallInfo?: DefaultNginxGatewayCallInfo;
     /**
+     * 太极服务的调用信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TJCallInfo?: TJCallInfo;
+    /**
+     * 内网调用信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IntranetCallInfo?: IntranetCallInfo;
+    /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
@@ -5113,6 +5205,26 @@ export interface CreateModelServiceResponse {
     RequestId?: string;
 }
 /**
+ * 服务共享弹性网卡设置
+ */
+export interface ServiceEIP {
+    /**
+     * 是否开启TIONE内网到外部的访问
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    EnableEIP?: boolean;
+    /**
+     * 用户VpcId
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    VpcId?: string;
+    /**
+     * 用户subnetId
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SubnetId?: string;
+}
+/**
  * DescribeModelServiceGroup返回参数结构体
  */
 export interface DescribeModelServiceGroupResponse {
@@ -5120,7 +5232,7 @@ export interface DescribeModelServiceGroupResponse {
      * 服务组信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ServiceGroup: ServiceGroup;
+    ServiceGroup?: ServiceGroup;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -5229,21 +5341,21 @@ export interface TrainingModelDTO {
     /**
      * 模型id
      */
-    TrainingModelId: string;
+    TrainingModelId?: string;
     /**
      * 模型名称
      */
-    TrainingModelName: string;
+    TrainingModelName?: string;
     /**
      * 标签
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Tags: Array<Tag>;
+    Tags?: Array<Tag>;
     /**
      * 模型创建时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CreateTime: string;
+    CreateTime?: string;
     /**
      * 模型版本列表。默认不返回，仅在指定请求参数开启时返回。
   注意：此字段可能返回 null，表示取不到有效值。
@@ -5347,11 +5459,11 @@ export interface CreateTrainingModelResponse {
     /**
      * 模型ID，TrainingModel ID
      */
-    Id: string;
+    Id?: string;
     /**
      * 模型版本ID
      */
-    TrainingModelVersionId: string;
+    TrainingModelVersionId?: string;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -5402,6 +5514,31 @@ export interface StopModelAccelerateTaskResponse {
     RequestId?: string;
 }
 /**
+ * 私有连接通道信息
+ */
+export interface IngressPrivateLinkInfo {
+    /**
+     * 用户VpcId
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    VpcId?: string;
+    /**
+     * 用户子网ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SubnetId?: string;
+    /**
+     * 内网http调用地址
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InnerHttpAddr?: Array<string>;
+    /**
+     * 内网https调用地址
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InnerHttpsAddr?: Array<string>;
+}
+/**
  * DescribeAPIConfigs返回参数结构体
  */
 export interface DescribeAPIConfigsResponse {
@@ -5450,16 +5587,22 @@ export interface SendChatMessageRequest {
      */
     Question: string;
     /**
-     * 会话模型版本，不同的会话模型调用到不同的模型后台。
-  注: 多行业多场景大模型填写 tj_llm_clm-v1
+     * 会话模型版本。
+  多行业多场景大模型：填写 tj_llm_clm-v1。
+  多行业客服大模型：填写demo_big_model_version_id。
+  默认为demo_big_model_version_id，即多行业客服大模型。
      */
     ModelVersion?: string;
     /**
-     * 使用模式(仅部分模型支持)。General 通用问答；WithSearchPlugin 搜索增强问答
+     * 使用模式(仅多场景客服大模型支持)。
+  通用问答：填写General。
+  搜索增强问答：填写WithSearchPlugin。
+  默认为General，即通用问答。
      */
     Mode?: string;
     /**
-     * 搜索来源。仅当Mode未WithSearchPlugin时生效。Preset 预置文稿库；Custom 自定义。
+     * 搜索来源。仅当Mode为WithSearchPlugin时生效。
+  预置文稿库：填写Preset。自定义：填写Custom。
      */
     SearchSource?: string;
 }
@@ -5906,12 +6049,12 @@ export interface DescribeLogsResponse {
      * 分页的游标
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Context: string;
+    Context?: string;
     /**
      * 日志数组
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Content: Array<LogIdentity>;
+    Content?: Array<LogIdentity>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -5955,118 +6098,118 @@ export interface TrainingModelVersionDTO {
     /**
      * 模型id
      */
-    TrainingModelId: string;
+    TrainingModelId?: string;
     /**
      * 模型版本id
      */
-    TrainingModelVersionId: string;
+    TrainingModelVersionId?: string;
     /**
      * 模型版本
      */
-    TrainingModelVersion: string;
+    TrainingModelVersion?: string;
     /**
      * 模型来源
      */
-    TrainingModelSource: string;
+    TrainingModelSource?: string;
     /**
      * 创建时间
      */
-    TrainingModelCreateTime: string;
+    TrainingModelCreateTime?: string;
     /**
      * 创建人uin
      */
-    TrainingModelCreator: string;
+    TrainingModelCreator?: string;
     /**
      * 算法框架
      */
-    AlgorithmFramework: string;
+    AlgorithmFramework?: string;
     /**
      * 推理环境
      */
-    ReasoningEnvironment: string;
+    ReasoningEnvironment?: string;
     /**
      * 推理环境来源
      */
-    ReasoningEnvironmentSource: string;
+    ReasoningEnvironmentSource?: string;
     /**
      * 模型指标
      */
-    TrainingModelIndex: string;
+    TrainingModelIndex?: string;
     /**
      * 训练任务名称
      */
-    TrainingJobName: string;
+    TrainingJobName?: string;
     /**
      * 模型cos路径
      */
-    TrainingModelCosPath: CosPathInfo;
+    TrainingModelCosPath?: CosPathInfo;
     /**
      * 模型名称
      */
-    TrainingModelName: string;
+    TrainingModelName?: string;
     /**
      * 训练任务id
      */
-    TrainingJobId: string;
+    TrainingJobId?: string;
     /**
      * 自定义推理环境
      */
-    ReasoningImageInfo: ImageInfo;
+    ReasoningImageInfo?: ImageInfo;
     /**
      * 模型版本创建时间
      */
-    CreateTime: string;
+    CreateTime?: string;
     /**
      * 模型处理状态
   STATUS_SUCCESS：导入成功，STATUS_FAILED：导入失败 ，STATUS_RUNNING：导入中
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TrainingModelStatus: string;
+    TrainingModelStatus?: string;
     /**
      * 模型处理进度
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TrainingModelProgress: number;
+    TrainingModelProgress?: number;
     /**
      * 模型错误信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TrainingModelErrorMsg: string;
+    TrainingModelErrorMsg?: string;
     /**
      * 模型格式
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TrainingModelFormat: string;
+    TrainingModelFormat?: string;
     /**
      * 模型版本类型
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    VersionType: string;
+    VersionType?: string;
     /**
      * GPU类型
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    GPUType: string;
+    GPUType?: string;
     /**
      * 模型自动清理开关
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    AutoClean: string;
+    AutoClean?: string;
     /**
      * 模型清理周期
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ModelCleanPeriod: number;
+    ModelCleanPeriod?: number;
     /**
      * 模型数量保留上限
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    MaxReservedModels: number;
+    MaxReservedModels?: number;
     /**
      * 模型热更新目录
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ModelHotUpdatePath: CosPathInfo;
+    ModelHotUpdatePath?: CosPathInfo;
     /**
      * 推理环境id
   注意：此字段可能返回 null，表示取不到有效值。
@@ -6163,7 +6306,7 @@ export interface DescribeTrainingModelVersionsResponse {
     /**
      * 模型版本列表
      */
-    TrainingModelVersions: Array<TrainingModelVersionDTO>;
+    TrainingModelVersions?: Array<TrainingModelVersionDTO>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */

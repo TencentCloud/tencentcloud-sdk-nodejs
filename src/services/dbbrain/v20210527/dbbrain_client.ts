@@ -49,6 +49,7 @@ import {
   DescribeProxySessionKillTasksRequest,
   CreateRedisBigKeyAnalysisTaskRequest,
   DescribeMySqlProcessListResponse,
+  UpdateMonitorSwitchRequest,
   SessionItem,
   HealthStatus,
   DescribeTopSpaceTablesResponse,
@@ -63,6 +64,7 @@ import {
   DeleteDBDiagReportTasksRequest,
   ModifyDiagDBInstanceConfRequest,
   DescribeSlowLogsResponse,
+  UpdateAgentSwitchRequest,
   DescribeSecurityAuditLogDownloadUrlsRequest,
   CreateDBDiagReportTaskResponse,
   ProcessStatistic,
@@ -85,6 +87,7 @@ import {
   CreateMailProfileRequest,
   MonitorFloatMetricSeriesData,
   MailConfiguration,
+  UpdateAgentSwitchResponse,
   VerifyUserAccountRequest,
   DescribeSlowLogUserHostStatsResponse,
   TableSpaceData,
@@ -145,6 +148,7 @@ import {
   MonitorFloatMetric,
   DescribeRedisTopKeyPrefixListResponse,
   DescribeAllUserGroupResponse,
+  UpdateMonitorSwitchResponse,
   CreateAuditLogFileRequest,
   DeleteAuditLogFileRequest,
   ModifyDiagDBInstanceConfResponse,
@@ -269,6 +273,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDBDiagReportTasksResponse) => void
   ): Promise<DescribeDBDiagReportTasksResponse> {
     return this.request("DescribeDBDiagReportTasks", req, cb)
+  }
+
+  /**
+   * 更新Agent实例状态（停止或重连实例）
+   */
+  async UpdateMonitorSwitch(
+    req: UpdateMonitorSwitchRequest,
+    cb?: (error: string, rep: UpdateMonitorSwitchResponse) => void
+  ): Promise<UpdateMonitorSwitchResponse> {
+    return this.request("UpdateMonitorSwitch", req, cb)
   }
 
   /**
@@ -629,6 +643,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateKillTaskResponse) => void
   ): Promise<CreateKillTaskResponse> {
     return this.request("CreateKillTask", req, cb)
+  }
+
+  /**
+   * 更新agent状态（停止或重连Agent）
+   */
+  async UpdateAgentSwitch(
+    req: UpdateAgentSwitchRequest,
+    cb?: (error: string, rep: UpdateAgentSwitchResponse) => void
+  ): Promise<UpdateAgentSwitchResponse> {
+    return this.request("UpdateAgentSwitch", req, cb)
   }
 
   /**

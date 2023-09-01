@@ -166,7 +166,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeInstance", req, cb);
     }
     /**
-     * 针对ck账号的权限做管控（新版）
+     * 针对集群账号的权限做管控（新版）
      */
     async ModifyUserNewPrivilege(req, cb) {
         return this.request("ModifyUserNewPrivilege", req, cb);

@@ -813,6 +813,23 @@ export interface DescribeMySqlProcessListResponse {
     RequestId?: string;
 }
 /**
+ * UpdateMonitorSwitch请求参数结构体
+ */
+export interface UpdateMonitorSwitchRequest {
+    /**
+     * 停止或重连Agent实例，支持值包括："on" - 重连实例， "off" - 停止实例。
+     */
+    Switch: string;
+    /**
+     * 实例ID。
+     */
+    InstanceId: string;
+    /**
+     * 服务产品类型，仅支持 "dbbrain-mysql" - 自建MySQL。
+     */
+    Product: string;
+}
+/**
  * 实时会话访问来源详情。
  */
 export interface SessionItem {
@@ -1079,6 +1096,23 @@ export interface DescribeSlowLogsResponse {
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * UpdateAgentSwitch请求参数结构体
+ */
+export interface UpdateAgentSwitchRequest {
+    /**
+     * Agent标识。
+     */
+    AgentId: string;
+    /**
+     * 停止或重连Agent，支持值包括："on" - 重连Agent， "off" - 停止Agent。
+     */
+    Switch: string;
+    /**
+     * 服务产品类型，仅支持 "dbbrain-mysql" - 自建MySQL。
+     */
+    Product: string;
 }
 /**
  * DescribeSecurityAuditLogDownloadUrls请求参数结构体
@@ -1515,6 +1549,15 @@ export interface MailConfiguration {
      * 联系组id, 联系人/联系组不能都为空。
      */
     ContactGroup?: Array<number | bigint>;
+}
+/**
+ * UpdateAgentSwitch返回参数结构体
+ */
+export interface UpdateAgentSwitchResponse {
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * VerifyUserAccount请求参数结构体
@@ -2145,7 +2188,7 @@ export interface DescribeDiagDBInstancesRequest {
      */
     IsSupported: boolean;
     /**
-     * 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 TDSQL-C for MySQL，默认为"mysql"。
+     * 服务产品类型，支持值包括："mysql" - 云数据库 MySQL，"cynosdb" - 云数据库 TDSQL-C for MySQL，"dbbrain-mysql" - 自建 MySQL，默认为"mysql"。
      */
     Product: string;
     /**
@@ -2662,15 +2705,15 @@ export interface DescribeDiagDBInstancesResponse {
     /**
      * 实例总数。
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 全实例巡检状态：0：开启全实例巡检；1：未开启全实例巡检。
      */
-    DbScanStatus: number;
+    DbScanStatus?: number;
     /**
      * 实例相关信息。
      */
-    Items: Array<InstanceInfo>;
+    Items?: Array<InstanceInfo>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2969,6 +3012,15 @@ export interface DescribeAllUserGroupResponse {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Groups: Array<GroupItem>;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * UpdateMonitorSwitch返回参数结构体
+ */
+export interface UpdateMonitorSwitchResponse {
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
