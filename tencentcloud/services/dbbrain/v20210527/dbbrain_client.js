@@ -28,6 +28,12 @@ class Client extends abstract_client_1.AbstractClient {
         super("dbbrain.tencentcloudapi.com", "2021-05-27", clientConfig);
     }
     /**
+     * 获取实例占用空间最大的前几张表在指定时间段内的每日由DBbrain定时采集的空间数据，默认返回按大小排序。
+     */
+    async DescribeTopSpaceTableTimeSeries(req, cb) {
+        return this.request("DescribeTopSpaceTableTimeSeries", req, cb);
+    }
+    /**
      * 查询安全审计日志导出文件下载链接。目前日志文件下载仅提供腾讯云内网地址，请通过广州地域的腾讯云服务器进行下载。
      */
     async DescribeSecurityAuditLogDownloadUrls(req, cb) {
@@ -280,6 +286,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteSqlFilters", req, cb);
     }
     /**
+     * 修改告警策略
+     */
+    async ModifyAlarmPolicy(req, cb) {
+        return this.request("ModifyAlarmPolicy", req, cb);
+    }
+    /**
      * 开启数据库审计服务
      */
     async OpenAuditService(req, cb) {
@@ -328,10 +340,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeSqlFilters", req, cb);
     }
     /**
-     * 获取实例占用空间最大的前几张表在指定时间段内的每日由DBbrain定时采集的空间数据，默认返回按大小排序。
+     * 通知模板查询
      */
-    async DescribeTopSpaceTableTimeSeries(req, cb) {
-        return this.request("DescribeTopSpaceTableTimeSeries", req, cb);
+    async DescribeAlarmTemplate(req, cb) {
+        return this.request("DescribeAlarmTemplate", req, cb);
     }
     /**
      * 用于创建云数据库实例的审计日志文件

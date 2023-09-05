@@ -437,21 +437,45 @@ export interface DescribeDBDiagEventResponse {
 }
 
 /**
- * DescribeDBDiagEvents返回参数结构体
+ * DescribeSlowLogTopSqls请求参数结构体
  */
-export interface DescribeDBDiagEventsResponse {
+export interface DescribeSlowLogTopSqlsRequest {
   /**
-   * 诊断事件的总数目。
+   * 实例 ID 。
    */
-  TotalCount: number
+  InstanceId: string
   /**
-   * 诊断事件的列表。
+   * 开始时间，如“2019-09-10 12:13:14”。
    */
-  Items: Array<DiagHistoryEventItem>
+  StartTime: string
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 截止时间，如“2019-09-11 10:13:14”，截止时间与开始时间的间隔小于7天。
    */
-  RequestId?: string
+  EndTime: string
+  /**
+   * 排序键，目前支持 QueryTime,ExecTimes,RowsSent,LockTime以及RowsExamined 等排序键，默认为QueryTime。
+   */
+  SortBy?: string
+  /**
+   * 排序方式，支持ASC（升序）以及DESC（降序），默认为DESC。
+   */
+  OrderBy?: string
+  /**
+   * 返回数量，默认为20，最大值为100。
+   */
+  Limit?: number
+  /**
+   * 偏移量，默认为0。
+   */
+  Offset?: number
+  /**
+   * 数据库名称数组。
+   */
+  SchemaList?: Array<SchemaItem>
+  /**
+   * 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 CynosDB  for MySQL，默认为"mysql"。
+   */
+  Product?: string
 }
 
 /**
@@ -824,6 +848,16 @@ export interface DescribeProxySessionKillTasksRequest {
 }
 
 /**
+ * ModifyAlarmPolicy返回参数结构体
+ */
+export interface ModifyAlarmPolicyResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateRedisBigKeyAnalysisTask请求参数结构体
  */
 export interface CreateRedisBigKeyAnalysisTaskRequest {
@@ -1089,6 +1123,41 @@ export interface DescribeDBSpaceStatusRequest {
 }
 
 /**
+ * 告警规则
+ */
+export interface AlarmsRules {
+  /**
+   * 间隔
+   */
+  Interval: number
+  /**
+   * 告警名
+   */
+  Name: string
+  /**
+   * 指标
+   */
+  Metric: string
+  /**
+   * 操作符
+   */
+  Operator: string
+  /**
+   * 等级 
+fatal-致命
+critical-严重
+warning-告警
+information-通知
+
+   */
+  Severity: string
+  /**
+   * 指标值
+   */
+  Value?: number
+}
+
+/**
  * 单位时间间隔内的慢日志统计
  */
 export interface TimeSlice {
@@ -1276,41 +1345,13 @@ export interface CancelKillTaskRequest {
 }
 
 /**
- * 关系型数据库线程
+ * 实例id
  */
-export interface MySqlProcess {
+export interface InstanceID {
   /**
-   * 线程ID。
+   * 实例id
    */
-  ID: string
-  /**
-   * 线程的操作账号名。
-   */
-  User: string
-  /**
-   * 线程的操作主机地址。
-   */
-  Host: string
-  /**
-   * 线程的操作数据库。
-   */
-  DB: string
-  /**
-   * 线程的操作状态。
-   */
-  State: string
-  /**
-   * 线程的执行类型。
-   */
-  Command: string
-  /**
-   * 线程的操作时长，单位秒。
-   */
-  Time: string
-  /**
-   * 线程的操作语句。
-   */
-  Info: string
+  InstanceId?: string
 }
 
 /**
@@ -1954,6 +1995,42 @@ export interface InstanceConfs {
 }
 
 /**
+ * 接收组信息
+ */
+export interface ReceiveInfo {
+  /**
+   * 接收组
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ReceiveGroup?: Array<number | bigint>
+  /**
+   * 最后接收时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EndReceiveTime?: string
+  /**
+   * 接收名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ReceiveName?: string
+  /**
+   * 推送渠道
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SendChannel?: Array<number | bigint>
+  /**
+   * 开始时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StartReceiveTime?: string
+  /**
+   * 接收用户列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ReceiveUin?: Array<ReceiveUin>
+}
+
+/**
  * DescribeSqlTemplate返回参数结构体
  */
 export interface DescribeSqlTemplateResponse {
@@ -2034,21 +2111,37 @@ export interface DescribeDBDiagHistoryResponse {
 }
 
 /**
- * DescribeDBDiagEvent请求参数结构体
+ * DescribeDiagDBInstances请求参数结构体
  */
-export interface DescribeDBDiagEventRequest {
+export interface DescribeDiagDBInstancesRequest {
   /**
-   * 实例 ID 。
+   * 是否是DBbrain支持的实例，固定传 true。
    */
-  InstanceId: string
+  IsSupported: boolean
   /**
-   * 事件 ID 。通过“获取实例诊断历史DescribeDBDiagHistory”获取。
+   * 服务产品类型，支持值包括："mysql" - 云数据库 MySQL，"cynosdb" - 云数据库 TDSQL-C for MySQL，"dbbrain-mysql" - 自建 MySQL，默认为"mysql"。
    */
-  EventId?: number
+  Product: string
   /**
-   * 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 CynosDB  for MySQL，默认为"mysql"。
+   * 分页参数，偏移量。
    */
-  Product?: string
+  Offset: number
+  /**
+   * 分页参数，分页值，最大值为100。
+   */
+  Limit: number
+  /**
+   * 根据实例名称条件查询。
+   */
+  InstanceNames?: Array<string>
+  /**
+   * 根据实例ID条件查询。
+   */
+  InstanceIds?: Array<string>
+  /**
+   * 根据地域条件查询。
+   */
+  Regions?: Array<string>
 }
 
 /**
@@ -2242,6 +2335,22 @@ export interface InstanceBasicInfo {
 }
 
 /**
+ * 接收用户
+ */
+export interface ReceiveUin {
+  /**
+   * 用户名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UinName?: string
+  /**
+   * 用户id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Uin?: string
+}
+
+/**
  * 库空间统计数据。
  */
 export interface SchemaSpaceData {
@@ -2295,37 +2404,59 @@ export interface DescribeAllUserContactRequest {
 }
 
 /**
- * DescribeDiagDBInstances请求参数结构体
+ * 关系型数据库线程
  */
-export interface DescribeDiagDBInstancesRequest {
+export interface MySqlProcess {
   /**
-   * 是否是DBbrain支持的实例，固定传 true。
+   * 线程ID。
    */
-  IsSupported: boolean
+  ID: string
   /**
-   * 服务产品类型，支持值包括："mysql" - 云数据库 MySQL，"cynosdb" - 云数据库 TDSQL-C for MySQL，"dbbrain-mysql" - 自建 MySQL，默认为"mysql"。
+   * 线程的操作账号名。
    */
-  Product: string
+  User: string
   /**
-   * 分页参数，偏移量。
+   * 线程的操作主机地址。
    */
-  Offset: number
+  Host: string
   /**
-   * 分页参数，分页值，最大值为100。
+   * 线程的操作数据库。
    */
-  Limit: number
+  DB: string
   /**
-   * 根据实例名称条件查询。
+   * 线程的操作状态。
    */
-  InstanceNames?: Array<string>
+  State: string
   /**
-   * 根据实例ID条件查询。
+   * 线程的执行类型。
    */
-  InstanceIds?: Array<string>
+  Command: string
   /**
-   * 根据地域条件查询。
+   * 线程的操作时长，单位秒。
    */
-  Regions?: Array<string>
+  Time: string
+  /**
+   * 线程的操作语句。
+   */
+  Info: string
+}
+
+/**
+ * DescribeDBDiagEvent请求参数结构体
+ */
+export interface DescribeDBDiagEventRequest {
+  /**
+   * 实例 ID 。
+   */
+  InstanceId: string
+  /**
+   * 事件 ID 。通过“获取实例诊断历史DescribeDBDiagHistory”获取。
+   */
+  EventId?: number
+  /**
+   * 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 CynosDB  for MySQL，默认为"mysql"。
+   */
+  Product?: string
 }
 
 /**
@@ -2352,6 +2483,82 @@ export interface DescribeNoPrimaryKeyTablesRequest {
    * 服务产品类型，支持值："mysql" - 云数据库 MySQL，默认为"mysql"。
    */
   Product?: string
+}
+
+/**
+ * 通知模板
+ */
+export interface AlarmProfileList {
+  /**
+   * 0-不是 1-是
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsWebHook?: number
+  /**
+   * 接收告警用户数量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ReceiveUinCount?: number
+  /**
+   * 语言
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Lang?: string
+  /**
+   * 模板类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TemplateType?: string
+  /**
+   * 备注
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Remark?: string
+  /**
+   * 接收组数量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ReceiveGroupCount?: number
+  /**
+   * 更新用户的uin
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UpdateUin?: number
+  /**
+   * 接收类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ReceiveType?: Array<number | bigint>
+  /**
+   * 接收用户信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ReceiveInfo?: Array<ReceiveInfo>
+  /**
+   * 更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UpdateTime?: string
+  /**
+   * 模板名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TemplateName?: string
+  /**
+   * 发送渠道
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SendChannel?: Array<number | bigint>
+  /**
+   * 模板id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TemplateId?: number
+  /**
+   * webhook数量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WebHookCount?: number
 }
 
 /**
@@ -2505,6 +2712,20 @@ export interface InstanceInfo {
 }
 
 /**
+ * 通知模板
+ */
+export interface TemplateInfo {
+  /**
+   * 模板id
+   */
+  TemplateId: string
+  /**
+   * 模板名
+   */
+  TemplateName: string
+}
+
+/**
  * DescribeAuditInstanceList请求参数结构体
  */
 export interface DescribeAuditInstanceListRequest {
@@ -2633,6 +2854,24 @@ export interface CreateSchedulerMailProfileResponse {
 }
 
 /**
+ * DescribeAlarmTemplate返回参数结构体
+ */
+export interface DescribeAlarmTemplateResponse {
+  /**
+   * 模板列表
+   */
+  ProfileList?: Array<AlarmProfileList>
+  /**
+   * 模板总数
+   */
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeTopSpaceSchemaTimeSeries请求参数结构体
  */
 export interface DescribeTopSpaceSchemaTimeSeriesRequest {
@@ -2689,45 +2928,21 @@ export interface ModifyAuditServiceRequest {
 }
 
 /**
- * DescribeSlowLogTopSqls请求参数结构体
+ * DescribeDBDiagEvents返回参数结构体
  */
-export interface DescribeSlowLogTopSqlsRequest {
+export interface DescribeDBDiagEventsResponse {
   /**
-   * 实例 ID 。
+   * 诊断事件的总数目。
    */
-  InstanceId: string
+  TotalCount: number
   /**
-   * 开始时间，如“2019-09-10 12:13:14”。
+   * 诊断事件的列表。
    */
-  StartTime: string
+  Items: Array<DiagHistoryEventItem>
   /**
-   * 截止时间，如“2019-09-11 10:13:14”，截止时间与开始时间的间隔小于7天。
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  EndTime: string
-  /**
-   * 排序键，目前支持 QueryTime,ExecTimes,RowsSent,LockTime以及RowsExamined 等排序键，默认为QueryTime。
-   */
-  SortBy?: string
-  /**
-   * 排序方式，支持ASC（升序）以及DESC（降序），默认为DESC。
-   */
-  OrderBy?: string
-  /**
-   * 返回数量，默认为20，最大值为100。
-   */
-  Limit?: number
-  /**
-   * 偏移量，默认为0。
-   */
-  Offset?: number
-  /**
-   * 数据库名称数组。
-   */
-  SchemaList?: Array<SchemaItem>
-  /**
-   * 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 CynosDB  for MySQL，默认为"mysql"。
-   */
-  Product?: string
+  RequestId?: string
 }
 
 /**
@@ -3053,6 +3268,29 @@ export interface AuditLogFile {
 }
 
 /**
+ * DescribeAlarmTemplate请求参数结构体
+ */
+export interface DescribeAlarmTemplateRequest {
+  /**
+   * 搜索字段
+   */
+  TemplateNameRegexp: string
+  /**
+   * 返回限制长度
+   */
+  Limit: number
+  /**
+   * 偏置
+   */
+  Offset: number
+  /**
+   * mysql -  mysql
+cynosdb -  tdsql-c
+   */
+  Product?: string
+}
+
+/**
  * DescribeSlowLogTimeSeriesStats返回参数结构体
  */
 export interface DescribeSlowLogTimeSeriesStatsResponse {
@@ -3125,6 +3363,63 @@ export interface MonitorFloatMetric {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Values: Array<number>
+}
+
+/**
+ * ModifyAlarmPolicy请求参数结构体
+ */
+export interface ModifyAlarmPolicyRequest {
+  /**
+   * 类型
+   */
+  ApplyType: string
+  /**
+   * 开启策略
+   */
+  Enable: number
+  /**
+   * 列表
+   */
+  InstanceIds: Array<InstanceID>
+  /**
+   * User-动态关联该用户所有实例
+Instance-关联实例列表的实例
+   */
+  NewProfileLevel: string
+  /**
+   * 新策略名
+   */
+  NewProfileName: string
+  /**
+   * 旧策略名
+   */
+  ProfileName: string
+  /**
+   * 策略类型
+   */
+  ProfileType: string
+  /**
+   * 备注
+   */
+  Remark: string
+  /**
+   * 规则类型 0-快速，1-自定义 若值为0，则QuickRule不能为空，若值为1，则Rules 不能为空
+   */
+  RuleType: number
+  /**
+   * 接受模板
+   */
+  TemplateInfo: Array<TemplateInfo>
+  /**
+   * 快速规则  支持包括fatal-致命, critical-严重,
+warning-告警,
+information-通知
+   */
+  QuickRule?: string
+  /**
+   * 自定义规则
+   */
+  Rules?: Array<AlarmsRules>
 }
 
 /**

@@ -1268,7 +1268,7 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
   }
 
   /**
-   * 手动执行一次任务。
+   * 手动执行一次任务
    */
   async ExecuteTask(
     req: ExecuteTaskRequest,

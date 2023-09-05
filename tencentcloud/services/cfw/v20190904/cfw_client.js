@@ -115,6 +115,13 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteAllAccessControlRule", req, cb);
     }
     /**
+     * 启用停用VPC间规则或Nat边界规则
+VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction。
+     */
+    async ModifyEWRuleStatus(req, cb) {
+        return this.request("ModifyEWRuleStatus", req, cb);
+    }
+    /**
      * 查询安全组规则列表
      */
     async DescribeSecurityGroupList(req, cb) {
@@ -376,6 +383,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeResourceGroup(req, cb) {
         return this.request("DescribeResourceGroup", req, cb);
+    }
+    /**
+     * 批量添加入侵防御封禁列表、放通列表规则
+     */
+    async CreateBlockIgnoreRuleList(req, cb) {
+        return this.request("CreateBlockIgnoreRuleList", req, cb);
     }
     /**
      * 查询新版安全组下发进度

@@ -18,6 +18,7 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  ModifyEWRuleStatusResponse,
   DescribeNatFwInstanceRequest,
   DescribeLogsRequest,
   ModifyNatFwVpcDnsSwitchResponse,
@@ -49,7 +50,7 @@ import {
   DescribeUnHandleEventTabListRequest,
   DescribeAssociatedInstanceListResponse,
   AssociatedInstanceInfo,
-  ModifyStorageSettingResponse,
+  CreateBlockIgnoreRuleListRequest,
   RemoveAcRuleResponse,
   NatFwInstance,
   CreateSecurityGroupRulesResponse,
@@ -76,6 +77,7 @@ import {
   AcListsData,
   ModifyPublicIPSwitchStatusRequest,
   CreateNatRuleItem,
+  ModifyStorageSettingResponse,
   ModifySecurityGroupItemRuleStatusRequest,
   DescribeSourceAssetRequest,
   SecurityGroupOrderIndexData,
@@ -84,6 +86,7 @@ import {
   DescribeEnterpriseSGRuleProgressRequest,
   AssetZone,
   RuleChangeItem,
+  IntrusionDefenseRule,
   DescribeTLogIpListRequest,
   CommonFilter,
   DescribeNatFwInstancesInfoRequest,
@@ -148,7 +151,8 @@ import {
   DescribeAcListsRequest,
   DescribeGuideScanInfoRequest,
   UnHandleEvent,
-  DescribeAssociatedInstanceListRequest,
+  DescribeBlockIgnoreListResponse,
+  ModifyEWRuleStatusRequest,
   DeleteAcRuleRequest,
   DeleteAllAccessControlRuleResponse,
   ModifyNatFwSwitchRequest,
@@ -183,6 +187,7 @@ import {
   CreateNatFwInstanceWithDomainRequest,
   DescribeResourceGroupResponse,
   DeleteAddressTemplateResponse,
+  CreateBlockIgnoreRuleListResponse,
   DescribeCfwEipsResponse,
   ModifyResourceGroupResponse,
   DeleteResourceGroupResponse,
@@ -203,7 +208,7 @@ import {
   DescribeResourceGroupRequest,
   CreateAcRulesRequest,
   ModifyEnterpriseSecurityDispatchStatusRequest,
-  DescribeBlockIgnoreListResponse,
+  DescribeAssociatedInstanceListRequest,
   ModifyTableStatusRequest,
   ModifyTableStatusResponse,
   DescribeGuideScanInfoResponse,
@@ -359,6 +364,17 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteAllAccessControlRuleResponse) => void
   ): Promise<DeleteAllAccessControlRuleResponse> {
     return this.request("DeleteAllAccessControlRule", req, cb)
+  }
+
+  /**
+     * 启用停用VPC间规则或Nat边界规则
+VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction。
+     */
+  async ModifyEWRuleStatus(
+    req: ModifyEWRuleStatusRequest,
+    cb?: (error: string, rep: ModifyEWRuleStatusResponse) => void
+  ): Promise<ModifyEWRuleStatusResponse> {
+    return this.request("ModifyEWRuleStatus", req, cb)
   }
 
   /**
@@ -794,6 +810,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeResourceGroupResponse) => void
   ): Promise<DescribeResourceGroupResponse> {
     return this.request("DescribeResourceGroup", req, cb)
+  }
+
+  /**
+   * 批量添加入侵防御封禁列表、放通列表规则
+   */
+  async CreateBlockIgnoreRuleList(
+    req: CreateBlockIgnoreRuleListRequest,
+    cb?: (error: string, rep: CreateBlockIgnoreRuleListResponse) => void
+  ): Promise<CreateBlockIgnoreRuleListResponse> {
+    return this.request("CreateBlockIgnoreRuleList", req, cb)
   }
 
   /**

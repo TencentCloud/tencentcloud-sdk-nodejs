@@ -18,6 +18,16 @@ const client = new tencentcloud.dbbrain.v20210527.Client({
 })
 describe("dbbrain.v20210527.test.js", function () {
 
+it("dbbrain.v20210527.DescribeTopSpaceTableTimeSeries", async function () {
+    try {
+       const data = await client.DescribeTopSpaceTableTimeSeries({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dbbrain.v20210527.DescribeSecurityAuditLogDownloadUrls", async function () {
     try {
        const data = await client.DescribeSecurityAuditLogDownloadUrls({})
@@ -438,6 +448,16 @@ it("dbbrain.v20210527.DeleteSqlFilters", async function () {
     }
 })
 
+it("dbbrain.v20210527.ModifyAlarmPolicy", async function () {
+    try {
+       const data = await client.ModifyAlarmPolicy({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dbbrain.v20210527.OpenAuditService", async function () {
     try {
        const data = await client.OpenAuditService({})
@@ -518,9 +538,9 @@ it("dbbrain.v20210527.DescribeSqlFilters", async function () {
     }
 })
 
-it("dbbrain.v20210527.DescribeTopSpaceTableTimeSeries", async function () {
+it("dbbrain.v20210527.DescribeAlarmTemplate", async function () {
     try {
-       const data = await client.DescribeTopSpaceTableTimeSeries({})
+       const data = await client.DescribeAlarmTemplate({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

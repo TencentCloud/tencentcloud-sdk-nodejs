@@ -931,6 +931,11 @@ export interface EnhanceConfig {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     VideoEnhance?: VideoEnhanceConfig;
+    /**
+     * 音频增强配置。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AudioEnhance?: AudioEnhanceConfig;
 }
 /**
  * 媒体处理的输入对象信息。
@@ -2493,6 +2498,34 @@ export interface FlowStatisticsArray {
     FlowStatistics: Array<FlowStatistics>;
 }
 /**
+ * 音频分离配置
+ */
+export interface AudioSeparateConfig {
+    /**
+     * 能力配置开关，可选值：
+  <li>ON：开启；</li>
+  <li>OFF：关闭。</li>
+  默认值：ON。
+     */
+    Switch?: string;
+    /**
+     * 场景类型，可选值：
+  <li>normal：人声背景声场景</li>
+  <li>music：演唱伴奏场景</li>
+  默认值：normal。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Type?: string;
+    /**
+     * 输出音轨，可选值：
+  <li>vocal：输出人声</li>
+  <li>background：应用场景为normal时输出背景声，应用场景为music时输出伴奏</li>
+  默认值：vocal。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Track?: string;
+}
+/**
  * DeleteAIRecognitionTemplate请求参数结构体
  */
 export interface DeleteAIRecognitionTemplateRequest {
@@ -2573,6 +2606,26 @@ export interface AiAnalysisTaskCoverResult {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Output: AiAnalysisTaskCoverOutput;
+}
+/**
+ * 音量美化配置
+ */
+export interface AudioBeautifyConfig {
+    /**
+     * 能力配置开关，可选值：
+  <li>ON：开启；</li>
+  <li>OFF：关闭。</li>
+  默认值：ON。
+     */
+    Switch?: string;
+    /**
+     * 类型，可多选，可选值：
+  <li>declick：杂音去除</li>
+  <li>deesser：齿音压制</li>
+  默认值：declick。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Types?: Array<string>;
 }
 /**
  * DescribeStreamLinkEvent返回参数结构体
@@ -3061,6 +3114,18 @@ export interface CreateOutputRtmpSettingsDestinations {
      * 转推的StreamKey，格式如：stream?key=value。
      */
     StreamKey: string;
+}
+/**
+ * 音频降噪配置
+ */
+export interface AudioDenoiseConfig {
+    /**
+     * 能力配置开关，可选值：
+  <li>ON：开启；</li>
+  <li>OFF：关闭。</li>
+  默认值：ON。
+     */
+    Switch?: string;
 }
 /**
  * 语音鉴黄任务控制参数。
@@ -6112,6 +6177,40 @@ export interface TerrorismConfigureInfoForUpdate {
     OcrReviewInfo?: TerrorismOcrReviewTemplateInfoForUpdate;
 }
 /**
+ * DescribePersonSamples请求参数结构体
+ */
+export interface DescribePersonSamplesRequest {
+    /**
+     * 拉取的素材类型，可选值：
+  <li>UserDefine：用户自定义素材库；</li>
+  <li>Default：系统默认素材库。</li>
+  
+  默认值：UserDefine，拉取用户自定义素材库素材。
+  说明：如果是拉取系统默认素材库，只能使用素材名字或者素材 ID + 素材名字的方式进行拉取，且人脸图片只返回一张。
+     */
+    Type?: string;
+    /**
+     * 素材 ID，数组长度限制：100。
+     */
+    PersonIds?: Array<string>;
+    /**
+     * 素材名称，数组长度限制：20。
+     */
+    Names?: Array<string>;
+    /**
+     * 素材标签，数组长度限制：20。
+     */
+    Tags?: Array<string>;
+    /**
+     * 分页偏移量，默认值：0。
+     */
+    Offset?: number;
+    /**
+     * 返回记录条数，默认值：100，最大值：100。
+     */
+    Limit?: number;
+}
+/**
  * EnableSchedule返回参数结构体
  */
 export interface EnableScheduleResponse {
@@ -7542,69 +7641,69 @@ export interface TranscodeTemplate {
     /**
      * 转码模板唯一标识。
      */
-    Definition: string;
+    Definition?: string;
     /**
      * 封装格式，取值：mp4、flv、hls、mp3、flac、ogg。
      */
-    Container: string;
+    Container?: string;
     /**
      * 转码模板名称。
      */
-    Name: string;
+    Name?: string;
     /**
      * 模板描述信息。
      */
-    Comment: string;
+    Comment?: string;
     /**
      * 模板类型，取值：
   <li>Preset：系统预置模板；</li>
   <li>Custom：用户自定义模板。</li>
      */
-    Type: string;
+    Type?: string;
     /**
      * 是否去除视频数据，取值：
   <li>0：保留；</li>
   <li>1：去除。</li>
      */
-    RemoveVideo: number;
+    RemoveVideo?: number;
     /**
      * 是否去除音频数据，取值：
   <li>0：保留；</li>
   <li>1：去除。</li>
      */
-    RemoveAudio: number;
+    RemoveAudio?: number;
     /**
      * 视频流配置参数，仅当 RemoveVideo 为 0，该字段有效。
      */
-    VideoTemplate: VideoTemplateInfo;
+    VideoTemplate?: VideoTemplateInfo;
     /**
      * 音频流配置参数，仅当 RemoveAudio 为 0，该字段有效 。
      */
-    AudioTemplate: AudioTemplateInfo;
+    AudioTemplate?: AudioTemplateInfo;
     /**
      * 极速高清转码参数。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TEHDConfig: TEHDConfig;
+    TEHDConfig?: TEHDConfig;
     /**
      * 封装格式过滤条件，可选值：
   <li>Video：视频格式，可以同时包含视频流和音频流的封装格式；</li>
   <li>PureAudio：纯音频格式，只能包含音频流的封装格式板。</li>
      */
-    ContainerType: string;
+    ContainerType?: string;
     /**
      * 模板创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。
      */
-    CreateTime: string;
+    CreateTime?: string;
     /**
      * 模板最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。
      */
-    UpdateTime: string;
+    UpdateTime?: string;
     /**
      * 音视频增强配置。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    EnhanceConfig: EnhanceConfig;
+    EnhanceConfig?: EnhanceConfig;
 }
 /**
  * DescribeStreamLinkFlowMediaStatistics返回参数结构体
@@ -9979,6 +10078,26 @@ export interface AiRecognitionTaskFaceResultInput {
     Definition: number;
 }
 /**
+ * 音量均衡配置
+ */
+export interface VolumeBalanceConfig {
+    /**
+     * 能力配置开关，可选值：
+  <li>ON：开启；</li>
+  <li>OFF：关闭。</li>
+  默认值：ON。
+     */
+    Switch?: string;
+    /**
+     * 类型，可选值：
+  <li>loudNorm：响度标准化</li>
+  <li>gainControl：减小突变</li>
+  默认值：loudNorm。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Type?: string;
+}
+/**
  * 涉敏信息
  */
 export interface AiReviewPoliticalTaskOutput {
@@ -10421,7 +10540,7 @@ export interface CreateTranscodeTemplateResponse {
     /**
      * 转码模板唯一标识。
      */
-    Definition: number;
+    Definition?: number;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -12345,38 +12464,29 @@ export interface MediaImageSpriteItem {
     Storage: TaskOutputStorage;
 }
 /**
- * DescribePersonSamples请求参数结构体
+ * 音频增强配置
  */
-export interface DescribePersonSamplesRequest {
+export interface AudioEnhanceConfig {
     /**
-     * 拉取的素材类型，可选值：
-  <li>UserDefine：用户自定义素材库；</li>
-  <li>Default：系统默认素材库。</li>
-  
-  默认值：UserDefine，拉取用户自定义素材库素材。
-  说明：如果是拉取系统默认素材库，只能使用素材名字或者素材 ID + 素材名字的方式进行拉取，且人脸图片只返回一张。
+     * 音频降噪配置。
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Type?: string;
+    Denoise?: AudioDenoiseConfig;
     /**
-     * 素材 ID，数组长度限制：100。
+     * 音频分离配置。
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    PersonIds?: Array<string>;
+    Separate?: AudioSeparateConfig;
     /**
-     * 素材名称，数组长度限制：20。
+     * 音量均衡配置。
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Names?: Array<string>;
+    VolumeBalance?: VolumeBalanceConfig;
     /**
-     * 素材标签，数组长度限制：20。
+     * 音频美化配置。
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Tags?: Array<string>;
-    /**
-     * 分页偏移量，默认值：0。
-     */
-    Offset?: number;
-    /**
-     * 返回记录条数，默认值：100，最大值：100。
-     */
-    Limit?: number;
+    Beautify?: AudioBeautifyConfig;
 }
 /**
  * 人脸识别结果

@@ -180,7 +180,7 @@ export interface CreateUserSigResponse {
   /**
    * 签名结果
    */
-  UserSig: string
+  UserSig?: string
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -793,7 +793,7 @@ export interface CreateUserSigRequest {
    */
   SdkAppId: number
   /**
-   * 用户 ID
+   * 用户 ID，该值必须与 ClientData 字段中 Uid 的值一致
    */
   Uid: string
   /**
@@ -801,7 +801,7 @@ export interface CreateUserSigRequest {
    */
   ExpiredTime: number
   /**
-   * 用户签名数据
+   * 用户签名数据，必填字段，为标准 JSON 格式
    */
   ClientData?: string
 }

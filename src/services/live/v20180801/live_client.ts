@@ -141,8 +141,10 @@ import {
   DescribeLiveStreamEventListRequest,
   CallBackTemplateInfo,
   DeleteLiveRecordResponse,
+  DescribeDeliverLogDownListResponse,
   ModifyLivePullStreamTaskRequest,
   PullStreamConfig,
+  DescribeDeliverLogDownListRequest,
   DescribeLiveStreamPushInfoListRequest,
   DescribeLiveTimeShiftTemplatesRequest,
   StopLiveStreamMonitorResponse,
@@ -318,6 +320,7 @@ import {
   ModifyLivePlayAuthKeyRequest,
   DescribeLiveDelayInfoListRequest,
   DescribeLiveTranscodeTemplateResponse,
+  PushLogInfo,
   DescribeScreenShotSheetNumListResponse,
   CreateLiveRecordRuleResponse,
   ModifyLivePullStreamTaskResponse,
@@ -1114,6 +1117,16 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
     cb?: (error: string, rep: ModifyLiveDomainCertBindingsResponse) => void
   ): Promise<ModifyLiveDomainCertBindingsResponse> {
     return this.request("ModifyLiveDomainCertBindings", req, cb)
+  }
+
+  /**
+   * 批量获取转推日志的URL。
+   */
+  async DescribeDeliverLogDownList(
+    req?: DescribeDeliverLogDownListRequest,
+    cb?: (error: string, rep: DescribeDeliverLogDownListResponse) => void
+  ): Promise<DescribeDeliverLogDownListResponse> {
+    return this.request("DescribeDeliverLogDownList", req, cb)
   }
 
   /**

@@ -2980,6 +2980,24 @@ export interface DeleteLiveRecordResponse {
 }
 
 /**
+ * DescribeDeliverLogDownList返回参数结构体
+ */
+export interface DescribeDeliverLogDownListResponse {
+  /**
+   * 日志信息列表。
+   */
+  LogInfoList?: Array<PushLogInfo>
+  /**
+   * 总条数。
+   */
+  TotalNum?: number
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyLivePullStreamTask请求参数结构体
  */
 export interface ModifyLivePullStreamTaskRequest {
@@ -3148,6 +3166,11 @@ UTC格式时间，例如：2019-01-08T10:00:00Z。
    */
   Status: string
 }
+
+/**
+ * DescribeDeliverLogDownList请求参数结构体
+ */
+export type DescribeDeliverLogDownListRequest = null
 
 /**
  * DescribeLiveStreamPushInfoList请求参数结构体
@@ -7491,6 +7514,30 @@ export interface DescribeLiveTranscodeTemplateResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 推流域名日志信息。
+ */
+export interface PushLogInfo {
+  /**
+   * 日志名称。
+   */
+  LogName: string
+  /**
+   * 日志下载地址。
+   */
+  LogUrl: string
+  /**
+   * 日志时间。UTC 格式，例如：2018-11-29T19:00:00Z。
+注意：
+1. 北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。
+   */
+  LogTime: string
+  /**
+   * 文件大小，单位字节。
+   */
+  FileSize: number
 }
 
 /**

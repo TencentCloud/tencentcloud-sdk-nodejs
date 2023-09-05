@@ -257,7 +257,7 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
      */
     DescribeTaskRecords(req: DescribeTaskRecordsRequest, cb?: (error: string, rep: DescribeTaskRecordsResponse) => void): Promise<DescribeTaskRecordsResponse>;
     /**
-     * 手动执行一次任务。
+     * 手动执行一次任务
      */
     ExecuteTask(req: ExecuteTaskRequest, cb?: (error: string, rep: ExecuteTaskResponse) => void): Promise<ExecuteTaskResponse>;
     /**

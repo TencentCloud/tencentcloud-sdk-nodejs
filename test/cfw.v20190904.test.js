@@ -158,6 +158,16 @@ it("cfw.v20190904.DeleteAllAccessControlRule", async function () {
     }
 })
 
+it("cfw.v20190904.ModifyEWRuleStatus", async function () {
+    try {
+       const data = await client.ModifyEWRuleStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cfw.v20190904.DescribeSecurityGroupList", async function () {
     try {
        const data = await client.DescribeSecurityGroupList({})
@@ -581,6 +591,16 @@ it("cfw.v20190904.ModifyNatFwReSelect", async function () {
 it("cfw.v20190904.DescribeResourceGroup", async function () {
     try {
        const data = await client.DescribeResourceGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cfw.v20190904.CreateBlockIgnoreRuleList", async function () {
+    try {
+       const data = await client.CreateBlockIgnoreRuleList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -7288,7 +7288,7 @@ export interface RemoveWaterMarkTaskOutput {
  */
 export interface ModifyMediaStorageClassRequest {
   /**
-   * 媒体文件唯一标识列表。
+   * 媒体文件唯一标识列表，最大长度：100。
    */
   FileIds: Array<string>
   /**

@@ -16,6 +16,24 @@
  */
 
 /**
+ * ModifyEWRuleStatus返回参数结构体
+ */
+export interface ModifyEWRuleStatusResponse {
+  /**
+   * 状态值，0：修改成功，非0：修改失败
+   */
+  ReturnCode: number
+  /**
+   * 状态信息，success：查询成功，fail：查询失败
+   */
+  ReturnMsg: string
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeNatFwInstance请求参数结构体
  */
 export type DescribeNatFwInstanceRequest = null
@@ -806,13 +824,17 @@ export interface AssociatedInstanceInfo {
 }
 
 /**
- * ModifyStorageSetting返回参数结构体
+ * CreateBlockIgnoreRuleList请求参数结构体
  */
-export interface ModifyStorageSettingResponse {
+export interface CreateBlockIgnoreRuleListRequest {
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 规则列表
    */
-  RequestId?: string
+  Rules: Array<IntrusionDefenseRule>
+  /**
+   * 规则类型，1封禁，2放通，不支持域名封禁
+   */
+  RuleType: number
 }
 
 /**
@@ -1034,10 +1056,10 @@ export interface SecurityGroupRule {
   /**
    * 访问源示例：
 net：IP/CIDR(192.168.0.2)
-template：参数模板(ipm-dyodhpby)
-instance：资产实例(ins-123456)
-resourcegroup：资产分组(/全部分组/分组1/子分组1)
-tag：资源标签({"Key":"标签key值","Value":"标签Value值"})
+template：参数模板id(ipm-dyodhpby)
+instance：资产实例id(ins-123456)
+resourcegroup：资产分组id(cfwrg-xxxx)
+tag：资源标签({\"Key\":\"标签key值\",\"Value\":\"标签Value值\"})
 region：地域(ap-gaungzhou)
    */
   SourceContent: string
@@ -1048,10 +1070,10 @@ region：地域(ap-gaungzhou)
   /**
    * 访问目的示例：
 net：IP/CIDR(192.168.0.2)
-template：参数模板(ipm-dyodhpby)
-instance：资产实例(ins-123456)
-resourcegroup：资产分组(/全部分组/分组1/子分组1)
-tag：资源标签({"Key":"标签key值","Value":"标签Value值"})
+template：参数模板id(ipm-dyodhpby)
+instance：资产实例id(ins-123456)
+resourcegroup：资产分组id(cfwrg-xxxx)
+tag：资源标签({\"Key\":\"标签key值\",\"Value\":\"标签Value值\"})
 region：地域(ap-gaungzhou)
    */
   DestContent: string
@@ -1070,7 +1092,7 @@ drop：拒绝
    */
   Description: string
   /**
-   * 规则顺序，-1表示最低，1表示最高
+   * 规则顺序，-1表示最低，1表示最高，请勿和外层Type冲突（和外层的Type配合使用，当中间插入时，指定添加位置）
    */
   OrderIndex: string
   /**
@@ -1091,11 +1113,12 @@ drop：拒绝
    */
   ServiceTemplateId?: string
   /**
-   * 规则对应的唯一id
+   * （入参时无需填写，自动生成）规则对应的唯一id
    */
   Id?: string
   /**
-   * 规则状态，true表示启用，false表示禁用
+   * （入参时、Enable已弃用；由通用配置中新增规则启用状态控制）
+规则状态，true表示启用，false表示禁用
    */
   Enable?: string
 }
@@ -1534,6 +1557,16 @@ export interface CreateNatRuleItem {
 }
 
 /**
+ * ModifyStorageSetting返回参数结构体
+ */
+export interface ModifyStorageSettingResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifySecurityGroupItemRuleStatus请求参数结构体
  */
 export interface ModifySecurityGroupItemRuleStatusRequest {
@@ -1670,6 +1703,36 @@ export interface RuleChangeItem {
    * 新的sequence 值
    */
   NewOrderIndex: number
+}
+
+/**
+ * 入侵防御封禁列表、放通列表添加规则入参
+ */
+export interface IntrusionDefenseRule {
+  /**
+   * 规则方向，0出站，1入站，3内网间
+   */
+  Direction: number
+  /**
+   * 规则结束时间，格式：2006-01-02 15:04:05，必须大于当前时间
+   */
+  EndTime: string
+  /**
+   * 规则IP地址，IP与Domain必填其中之一
+   */
+  IP?: string
+  /**
+   * 规则域名，IP与Domain必填其中之一
+   */
+  Domain?: string
+  /**
+   * 备注信息，长度不能超过50
+   */
+  Comment?: string
+  /**
+   * 规则开始时间
+   */
+  StartTime?: string
 }
 
 /**
@@ -2245,6 +2308,10 @@ export interface RuleInfoData {
    * 国家名
    */
   CountryName?: string
+  /**
+   * 国家二位iso代码或者省份缩写代码
+   */
+  RegionIso?: string
 }
 
 /**
@@ -3173,41 +3240,59 @@ export interface UnHandleEvent {
 }
 
 /**
- * DescribeAssociatedInstanceList请求参数结构体
+ * DescribeBlockIgnoreList返回参数结构体
  */
-export interface DescribeAssociatedInstanceListRequest {
+export interface DescribeBlockIgnoreListResponse {
   /**
-   * 列表偏移量
+   * 列表数据
    */
-  Offset: number
+  Data?: Array<BlockIgnoreRule>
   /**
-   * 每页记录条数
+   * 查询结果总数，用于分页
    */
-  Limit: number
+  Total?: number
   /**
-   * 地域代码（例：ap-guangzhou）,支持腾讯云全地域
+   * 状态值，0：查询成功，非0：查询失败
    */
-  Area: string
+  ReturnCode?: number
   /**
-   * 额外检索条件（JSON字符串）
+   * 状态信息，success：查询成功，fail：查询失败
    */
-  SearchValue?: string
+  ReturnMsg?: string
   /**
-   * 排序字段
+   * 安全事件来源下拉框
    */
-  By?: string
+  SourceList?: Array<string>
   /**
-   * 排序方式（asc:升序,desc:降序）
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  Order?: string
+  RequestId?: string
+}
+
+/**
+ * ModifyEWRuleStatus请求参数结构体
+ */
+export interface ModifyEWRuleStatusRequest {
   /**
-   * 安全组ID
+   * vpc规则必填，边id
    */
-  SecurityGroupId?: string
+  EdgeId: string
   /**
-   * 实例类型,'3'是cvm实例,'4'是clb实例,'5'是eni实例,'6'是云数据库
+   * 是否开关开启，0：未开启，1：开启
    */
-  Type?: string
+  Status: number
+  /**
+   * 规则方向，0：出站，1：入站，默认1
+   */
+  Direction: number
+  /**
+   * 更改的规则当前执行顺序
+   */
+  RuleSequence: number
+  /**
+   * 规则类型，vpc：VPC间规则、nat：Nat边界规则
+   */
+  RuleType: string
 }
 
 /**
@@ -4199,6 +4284,16 @@ export interface DeleteAddressTemplateResponse {
 }
 
 /**
+ * CreateBlockIgnoreRuleList返回参数结构体
+ */
+export interface CreateBlockIgnoreRuleListResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeCfwEips返回参数结构体
  */
 export interface DescribeCfwEipsResponse {
@@ -4552,33 +4647,41 @@ export interface ModifyEnterpriseSecurityDispatchStatusRequest {
 }
 
 /**
- * DescribeBlockIgnoreList返回参数结构体
+ * DescribeAssociatedInstanceList请求参数结构体
  */
-export interface DescribeBlockIgnoreListResponse {
+export interface DescribeAssociatedInstanceListRequest {
   /**
-   * 列表数据
+   * 列表偏移量
    */
-  Data?: Array<BlockIgnoreRule>
+  Offset: number
   /**
-   * 查询结果总数，用于分页
+   * 每页记录条数
    */
-  Total?: number
+  Limit: number
   /**
-   * 状态值，0：查询成功，非0：查询失败
+   * 地域代码（例：ap-guangzhou）,支持腾讯云全地域
    */
-  ReturnCode?: number
+  Area: string
   /**
-   * 状态信息，success：查询成功，fail：查询失败
+   * 额外检索条件（JSON字符串）
    */
-  ReturnMsg?: string
+  SearchValue?: string
   /**
-   * 安全事件来源下拉框
+   * 排序字段
    */
-  SourceList?: Array<string>
+  By?: string
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 排序方式（asc:升序,desc:降序）
    */
-  RequestId?: string
+  Order?: string
+  /**
+   * 安全组ID
+   */
+  SecurityGroupId?: string
+  /**
+   * 实例类型,'3'是cvm实例,'4'是clb实例,'5'是eni实例,'6'是云数据库
+   */
+  Type?: string
 }
 
 /**

@@ -33,7 +33,7 @@ import {
   CreateRedisBigKeyAnalysisTaskResponse,
   CreateSecurityAuditLogExportTaskRequest,
   DescribeDBDiagEventResponse,
-  DescribeDBDiagEventsResponse,
+  DescribeSlowLogTopSqlsRequest,
   DescribeDBDiagReportTasksResponse,
   AddUserContactResponse,
   AuditInstanceInfo,
@@ -47,6 +47,7 @@ import {
   DescribeAuditInstanceListResponse,
   DiagHistoryEventItem,
   DescribeProxySessionKillTasksRequest,
+  ModifyAlarmPolicyResponse,
   CreateRedisBigKeyAnalysisTaskRequest,
   DescribeMySqlProcessListResponse,
   UpdateMonitorSwitchRequest,
@@ -60,6 +61,7 @@ import {
   ContactItem,
   DeleteAuditLogFileResponse,
   DescribeDBSpaceStatusRequest,
+  AlarmsRules,
   TimeSlice,
   DeleteDBDiagReportTasksRequest,
   ModifyDiagDBInstanceConfRequest,
@@ -71,7 +73,7 @@ import {
   CreateMailProfileResponse,
   DescribeSlowLogTimeSeriesStatsRequest,
   CancelKillTaskRequest,
-  MySqlProcess,
+  InstanceID,
   DescribeDBDiagHistoryRequest,
   CreateAuditLogFileResponse,
   AuditInstance,
@@ -101,11 +103,12 @@ import {
   DescribeSecurityAuditLogExportTasksResponse,
   CloseAuditServiceRequest,
   InstanceConfs,
+  ReceiveInfo,
   DescribeSqlTemplateResponse,
   HealthScoreInfo,
   DescribeTopSpaceTableTimeSeriesResponse,
   DescribeDBDiagHistoryResponse,
-  DescribeDBDiagEventRequest,
+  DescribeDiagDBInstancesRequest,
   ModifySqlFiltersRequest,
   DescribeAllUserContactResponse,
   MonitorMetric,
@@ -114,20 +117,25 @@ import {
   AddUserContactRequest,
   CreateSqlFilterRequest,
   InstanceBasicInfo,
+  ReceiveUin,
   SchemaSpaceData,
   DescribeAllUserContactRequest,
-  DescribeDiagDBInstancesRequest,
+  MySqlProcess,
+  DescribeDBDiagEventRequest,
   DescribeNoPrimaryKeyTablesRequest,
+  AlarmProfileList,
   InstanceInfo,
+  TemplateInfo,
   DescribeAuditInstanceListRequest,
   VerifyUserAccountResponse,
   DescribeSqlFiltersRequest,
   DescribeSecurityAuditLogExportTasksRequest,
   DeleteSecurityAuditLogExportTasksRequest,
   CreateSchedulerMailProfileResponse,
+  DescribeAlarmTemplateResponse,
   DescribeTopSpaceSchemaTimeSeriesRequest,
   ModifyAuditServiceRequest,
-  DescribeSlowLogTopSqlsRequest,
+  DescribeDBDiagEventsResponse,
   DescribeMailProfileResponse,
   DescribeRedisTopBigKeysRequest,
   ModifyAuditServiceResponse,
@@ -143,9 +151,11 @@ import {
   DescribeTopSpaceSchemasResponse,
   CreateProxySessionKillTaskResponse,
   AuditLogFile,
+  DescribeAlarmTemplateRequest,
   DescribeSlowLogTimeSeriesStatsResponse,
   DescribeProxyProcessStatisticsRequest,
   MonitorFloatMetric,
+  ModifyAlarmPolicyRequest,
   DescribeRedisTopKeyPrefixListResponse,
   DescribeAllUserGroupResponse,
   UpdateMonitorSwitchResponse,
@@ -183,6 +193,16 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("dbbrain.tencentcloudapi.com", "2021-05-27", clientConfig)
+  }
+
+  /**
+   * 获取实例占用空间最大的前几张表在指定时间段内的每日由DBbrain定时采集的空间数据，默认返回按大小排序。
+   */
+  async DescribeTopSpaceTableTimeSeries(
+    req: DescribeTopSpaceTableTimeSeriesRequest,
+    cb?: (error: string, rep: DescribeTopSpaceTableTimeSeriesResponse) => void
+  ): Promise<DescribeTopSpaceTableTimeSeriesResponse> {
+    return this.request("DescribeTopSpaceTableTimeSeries", req, cb)
   }
 
   /**
@@ -606,6 +626,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 修改告警策略
+   */
+  async ModifyAlarmPolicy(
+    req: ModifyAlarmPolicyRequest,
+    cb?: (error: string, rep: ModifyAlarmPolicyResponse) => void
+  ): Promise<ModifyAlarmPolicyResponse> {
+    return this.request("ModifyAlarmPolicy", req, cb)
+  }
+
+  /**
    * 开启数据库审计服务
    */
   async OpenAuditService(
@@ -686,13 +716,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取实例占用空间最大的前几张表在指定时间段内的每日由DBbrain定时采集的空间数据，默认返回按大小排序。
+   * 通知模板查询
    */
-  async DescribeTopSpaceTableTimeSeries(
-    req: DescribeTopSpaceTableTimeSeriesRequest,
-    cb?: (error: string, rep: DescribeTopSpaceTableTimeSeriesResponse) => void
-  ): Promise<DescribeTopSpaceTableTimeSeriesResponse> {
-    return this.request("DescribeTopSpaceTableTimeSeries", req, cb)
+  async DescribeAlarmTemplate(
+    req: DescribeAlarmTemplateRequest,
+    cb?: (error: string, rep: DescribeAlarmTemplateResponse) => void
+  ): Promise<DescribeAlarmTemplateResponse> {
+    return this.request("DescribeAlarmTemplate", req, cb)
   }
 
   /**

@@ -559,98 +559,98 @@ export interface DomainInfo {
     /**
      * 域名ID
      */
-    DomainId: number;
+    DomainId?: number;
     /**
      * 域名状态
      */
-    Status: string;
+    Status?: string;
     /**
      * 域名套餐等级
      */
-    Grade: string;
+    Grade?: string;
     /**
      * 域名分组ID
      */
-    GroupId: number;
+    GroupId?: number;
     /**
      * 是否星标域名
      */
-    IsMark: string;
+    IsMark?: string;
     /**
      * TTL(DNS记录缓存时间)
      */
-    TTL: number;
+    TTL?: number;
     /**
      * cname加速启用状态
      */
-    CnameSpeedup: string;
+    CnameSpeedup?: string;
     /**
      * 域名备注
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Remark: string;
+    Remark?: string;
     /**
      * 域名Punycode
      */
-    Punycode: string;
+    Punycode?: string;
     /**
      * 域名DNS状态
      */
-    DnsStatus: string;
+    DnsStatus?: string;
     /**
      * 域名的NS列表
      */
-    DnspodNsList: Array<string>;
+    DnspodNsList?: Array<string>;
     /**
      * 域名
      */
-    Domain: string;
+    Domain?: string;
     /**
      * 域名等级代号
      */
-    GradeLevel: number;
+    GradeLevel?: number;
     /**
      * 域名所属的用户ID
      */
-    UserId: number;
+    UserId?: number;
     /**
      * 是否为付费域名
      */
-    IsVip: string;
+    IsVip?: string;
     /**
      * 域名所有者的账号
      */
-    Owner: string;
+    Owner?: string;
     /**
      * 域名等级的描述
      */
-    GradeTitle: string;
+    GradeTitle?: string;
     /**
      * 域名创建时间
      */
-    CreatedOn: string;
+    CreatedOn?: string;
     /**
      * 最后操作时间
      */
-    UpdatedOn: string;
+    UpdatedOn?: string;
     /**
      * 腾讯云账户Uin
      */
-    Uin: string;
+    Uin?: string;
     /**
      * 域名实际使用的NS列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ActualNsList: Array<string>;
+    ActualNsList?: Array<string>;
     /**
      * 域名的记录数量
      */
-    RecordCount: number;
+    RecordCount?: number;
     /**
      * 域名所有者的账户昵称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    OwnerNick: string;
+    OwnerNick?: string;
     /**
      * 是否在付费套餐宽限期
   注意：此字段可能返回 null，表示取不到有效值。
@@ -691,6 +691,10 @@ export interface DomainInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     TagList?: Array<TagItem>;
+    /**
+     * 是否启用搜索引擎推送
+     */
+    SearchEnginePush?: string;
 }
 /**
  * CreateDomainBatch请求参数结构体

@@ -476,6 +476,12 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
         return this.request("ModifyLiveDomainCertBindings", req, cb);
     }
     /**
+     * 批量获取转推日志的URL。
+     */
+    async DescribeDeliverLogDownList(req, cb) {
+        return this.request("DescribeDeliverLogDownList", req, cb);
+    }
+    /**
      * 根据域名状态、类型等信息查询用户的域名信息。
      */
     async DescribeLiveDomains(req, cb) {
