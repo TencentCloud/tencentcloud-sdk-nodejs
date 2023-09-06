@@ -40,6 +40,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteOriginGroup", req, cb);
     }
     /**
+     * 创建共享 CNAME
+     */
+    async CreateSharedCNAME(req, cb) {
+        return this.request("CreateSharedCNAME", req, cb);
+    }
+    /**
      * 删除站点。
      */
     async DeleteZone(req, cb) {

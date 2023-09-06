@@ -4021,52 +4021,52 @@ export interface WhoisInfo {
    * 联系信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Contacts: WhoisContact
+  Contacts?: WhoisContact
   /**
    * 域名注册时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CreationDate: string
+  CreationDate?: string
   /**
    * 域名到期时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ExpirationDate: string
+  ExpirationDate?: string
   /**
    * 是否是在腾讯云注册的域名
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  IsQcloud: boolean
+  IsQcloud?: boolean
   /**
-   * 是否当前操作帐号注册的域名
+   * 是否当前操作账号注册的域名
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  IsQcloudOwner: boolean
+  IsQcloudOwner?: boolean
   /**
    * 域名配置的NS
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  NameServers: Array<string>
+  NameServers?: Array<string>
   /**
    * Whois原始信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Raw: Array<string>
+  Raw?: Array<string>
   /**
    * 域名注册商
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Registrar: Array<string>
+  Registrar?: Array<string>
   /**
    * 状态
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Status: Array<string>
+  Status?: Array<string>
   /**
    * 更新日期
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  UpdatedDate: string
+  UpdatedDate?: string
 }
 
 /**

@@ -52,6 +52,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyAMQPCluster", req, cb);
     }
     /**
+     * 查询消息轨迹
+     */
+    async DescribeRocketMQMsgTrace(req, cb) {
+        return this.request("DescribeRocketMQMsgTrace", req, cb);
+    }
+    /**
      * 创建cmq主题
      */
     async CreateCmqTopic(req, cb) {
@@ -165,6 +171,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ModifyRocketMQTopic(req, cb) {
         return this.request("ModifyRocketMQTopic", req, cb);
+    }
+    /**
+     * rocketmq 消息查询
+     */
+    async DescribeRocketMQTopicMsgs(req, cb) {
+        return this.request("DescribeRocketMQTopicMsgs", req, cb);
     }
     /**
      * 获取指定命名空间的属性

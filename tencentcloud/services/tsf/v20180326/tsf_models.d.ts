@@ -2027,7 +2027,7 @@ export interface UpdateHealthCheckSettingsRequest {
      */
     GroupId: string;
     /**
-     * 是否能使健康检查
+     * 是否开启健康检查
      */
     EnableHealthCheck?: boolean;
     /**
@@ -7361,7 +7361,7 @@ export interface DeployGroupRequest {
      */
     DeployBatch?: Array<number>;
     /**
-     * 滚动发布的执行方式
+     * 滚动发布的执行方式，auto表示自动， manual表示手动
      */
     DeployExeMode?: string;
     /**
@@ -7385,7 +7385,8 @@ export interface DeployGroupRequest {
      */
     JdkName?: string;
     /**
-     * JDK版本: 8或11 (openJDK只支持8)
+     * konaJDK版本：8、11和17
+  openJDK版本：8、17
      */
     JdkVersion?: string;
     /**

@@ -108,6 +108,10 @@ export interface CreateRoomRequest {
      * 房间类型: 0 小班课（默认值）; 1 大班课; 2 1V1 (后续扩展)
      */
     RoomType?: number;
+    /**
+     * 拖堂时间：单位分钟，0为不限制(默认值), -1为不能拖堂，大于0为拖堂的时间，最大值120分钟
+     */
+    EndDelayTime?: number;
 }
 /**
  * DescribeQuestionList请求参数结构体
@@ -669,6 +673,11 @@ export interface RoomItem {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     RoomType?: number;
+    /**
+     * 拖堂时间：单位分钟，0为不限制(默认值), -1为不能拖堂，大于0为拖堂的时间，最大值120分钟
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    EndDelayTime?: number;
 }
 /**
  * SetWatermark请求参数结构体
@@ -1130,6 +1139,11 @@ export interface DocumentInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Cover?: string;
+    /**
+     * 课件预览地址
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Preview?: string;
 }
 /**
  * DeleteDocument返回参数结构体
@@ -1872,6 +1886,10 @@ export interface DescribeRoomResponse {
      */
     VideoDuration?: number;
     /**
+     * 拖堂时间：单位分钟，0为不限制(默认值), -1为不能拖堂，大于0为拖堂的时间，最大值120分钟
+     */
+    EndDelayTime?: number;
+    /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
@@ -2313,6 +2331,10 @@ export interface RoomInfo {
      * 房间类型: 0 小班课（默认值）; 1 大班课; 2 1V1 (后续扩展)
      */
     RoomType?: number;
+    /**
+     * 拖堂时间：单位分钟，0为不限制(默认值), -1为不能拖堂，大于0为拖堂的时间，最大值120分钟
+     */
+    EndDelayTime?: number;
 }
 /**
  * ModifyRoom请求参数结构体
@@ -2417,6 +2439,10 @@ export interface ModifyRoomRequest {
      * 录制模板。仅可修改还未开始的房间。录制模板枚举值参考：https://cloud.tencent.com/document/product/1639/89744
      */
     RecordLayout?: number;
+    /**
+     * 拖堂时间：单位分钟，0为不限制(默认值), -1为不能拖堂，大于0为拖堂的时间，最大值120分钟
+     */
+    EndDelayTime?: number;
 }
 /**
  * 房间问答答案详情

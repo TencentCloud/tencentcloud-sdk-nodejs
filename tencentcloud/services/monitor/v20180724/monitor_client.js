@@ -739,6 +739,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribePrometheusTargetsTMP", req, cb);
     }
     /**
+     * 列出 Prometheus 服务所有可用的地域
+     */
+    async DescribePrometheusRegions(req, cb) {
+        return this.request("DescribePrometheusRegions", req, cb);
+    }
+    /**
      * 列出 Grafana 白名单
      */
     async DescribeGrafanaWhiteList(req, cb) {

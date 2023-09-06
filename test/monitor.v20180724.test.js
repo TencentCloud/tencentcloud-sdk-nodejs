@@ -1178,6 +1178,16 @@ it("monitor.v20180724.DescribePrometheusTargetsTMP", async function () {
     }
 })
 
+it("monitor.v20180724.DescribePrometheusRegions", async function () {
+    try {
+       const data = await client.DescribePrometheusRegions({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("monitor.v20180724.DescribeGrafanaWhiteList", async function () {
     try {
        const data = await client.DescribeGrafanaWhiteList({})

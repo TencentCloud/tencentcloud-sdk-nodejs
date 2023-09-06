@@ -22,7 +22,7 @@ import {
   ScaleOutInstanceRequest,
   ScaleOutInstanceResponse,
   ResizeDiskRequest,
-  DestroyInstanceResponse,
+  DatabasePrivilegeInfo,
   DescribeInstanceKeyValConfigsRequest,
   OpenBackUpResponse,
   Charge,
@@ -43,7 +43,7 @@ import {
   CreateInstanceNewResponse,
   ConfigSubmitContext,
   InstanceStateInfo,
-  Tag,
+  TablePrivilegeInfo,
   DescribeInstanceClustersResponse,
   CreateInstanceNewRequest,
   InstanceInfo,
@@ -61,6 +61,7 @@ import {
   DeleteBackUpDataResponse,
   ModifyInstanceKeyValConfigsRequest,
   DescribeInstancesNewResponse,
+  Tag,
   BackUpJobDisplay,
   DescribeClusterConfigsRequest,
   ResourceSpec,
@@ -83,6 +84,7 @@ import {
   AttachCBSSpec,
   ScheduleStrategy,
   DescribeInstanceStateResponse,
+  DestroyInstanceResponse,
   ResizeDiskResponse,
   DescribeBackUpScheduleResponse,
   DescribeCkSqlApisResponse,
@@ -334,7 +336,7 @@ export class Client extends AbstractClient {
    * 针对集群账号的权限做管控（新版）
    */
   async ModifyUserNewPrivilege(
-    req?: ModifyUserNewPrivilegeRequest,
+    req: ModifyUserNewPrivilegeRequest,
     cb?: (error: string, rep: ModifyUserNewPrivilegeResponse) => void
   ): Promise<ModifyUserNewPrivilegeResponse> {
     return this.request("ModifyUserNewPrivilege", req, cb)

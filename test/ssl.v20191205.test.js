@@ -58,6 +58,16 @@ it("ssl.v20191205.DescribeHostTkeInstanceList", async function () {
     }
 })
 
+it("ssl.v20191205.DescribeHostUpdateRecord", async function () {
+    try {
+       const data = await client.DescribeHostUpdateRecord({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ssl.v20191205.UploadRevokeLetter", async function () {
     try {
        const data = await client.UploadRevokeLetter({})
@@ -348,9 +358,9 @@ it("ssl.v20191205.DeployCertificateRecordRetry", async function () {
     }
 })
 
-it("ssl.v20191205.DescribeHostUpdateRecord", async function () {
+it("ssl.v20191205.DescribeCertificateBindResourceTaskResult", async function () {
     try {
-       const data = await client.DescribeHostUpdateRecord({})
+       const data = await client.DescribeCertificateBindResourceTaskResult({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -488,6 +498,16 @@ it("ssl.v20191205.CreateCertificateByPackage", async function () {
     }
 })
 
+it("ssl.v20191205.CreateCertificateBindResourceSyncTask", async function () {
+    try {
+       const data = await client.CreateCertificateBindResourceSyncTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ssl.v20191205.ModifyCertificatesExpiringNotificationSwitch", async function () {
     try {
        const data = await client.ModifyCertificatesExpiringNotificationSwitch({})
@@ -531,6 +551,16 @@ it("ssl.v20191205.RevokeCertificate", async function () {
 it("ssl.v20191205.DescribeManagers", async function () {
     try {
        const data = await client.DescribeManagers({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ssl.v20191205.DescribeCertificateBindResourceTaskDetail", async function () {
+    try {
+       const data = await client.DescribeCertificateBindResourceTaskDetail({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

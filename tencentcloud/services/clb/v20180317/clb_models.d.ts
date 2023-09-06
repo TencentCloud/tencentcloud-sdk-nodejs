@@ -874,37 +874,42 @@ export interface ZoneResource {
     /**
      * 主可用区，如"ap-guangzhou-1"。
      */
-    MasterZone: string;
+    MasterZone?: string;
     /**
      * 资源列表。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ResourceSet: Array<Resource>;
+    ResourceSet?: Array<Resource>;
     /**
      * 备可用区，如"ap-guangzhou-2"，单可用区时，备可用区为null。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SlaveZone: string;
+    SlaveZone?: string;
     /**
      * IP版本，如IPv4，IPv6，IPv6_Nat。
      */
-    IPVersion: string;
+    IPVersion?: string;
     /**
      * 可用区所属地域，如：ap-guangzhou
      */
-    ZoneRegion: string;
+    ZoneRegion?: string;
     /**
      * 可用区是否是LocalZone可用区，如：false
      */
-    LocalZone: boolean;
+    LocalZone?: boolean;
     /**
      * 可用区资源的类型，SHARED表示共享资源，EXCLUSIVE表示独占资源。
      */
-    ZoneResourceType: string;
+    ZoneResourceType?: string;
     /**
      * 可用区是否是EdgeZone可用区，如：false
      */
-    EdgeZone: boolean;
+    EdgeZone?: boolean;
+    /**
+     * 网络出口
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Egress?: string;
 }
 /**
  * DescribeTaskStatus请求参数结构体
@@ -3527,112 +3532,117 @@ export interface Cluster {
     /**
      * 集群唯一ID
      */
-    ClusterId: string;
+    ClusterId?: string;
     /**
      * 集群名称
      */
-    ClusterName: string;
+    ClusterName?: string;
     /**
      * 集群类型，如TGW，STGW，VPCGW
      */
-    ClusterType: string;
+    ClusterType?: string;
     /**
      * 集群标签，只有STGW集群有标签
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ClusterTag: string;
+    ClusterTag?: string;
     /**
      * 集群所在可用区，如ap-guangzhou-1
      */
-    Zone: string;
+    Zone?: string;
     /**
      * 集群网络类型，如Public，Private
      */
-    Network: string;
+    Network?: string;
     /**
      * 最大连接数
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    MaxConn: number;
+    MaxConn?: number;
     /**
      * 最大入带宽
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    MaxInFlow: number;
+    MaxInFlow?: number;
     /**
      * 最大入包量
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    MaxInPkg: number;
+    MaxInPkg?: number;
     /**
      * 最大出带宽
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    MaxOutFlow: number;
+    MaxOutFlow?: number;
     /**
      * 最大出包量
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    MaxOutPkg: number;
+    MaxOutPkg?: number;
     /**
      * 最大新建连接数
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    MaxNewConn: number;
+    MaxNewConn?: number;
     /**
      * http最大新建连接数
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    HTTPMaxNewConn: number;
+    HTTPMaxNewConn?: number;
     /**
      * https最大新建连接数
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    HTTPSMaxNewConn: number;
+    HTTPSMaxNewConn?: number;
     /**
      * http QPS
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    HTTPQps: number;
+    HTTPQps?: number;
     /**
      * https QPS
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    HTTPSQps: number;
+    HTTPSQps?: number;
     /**
      * 集群内资源总数目
      */
-    ResourceCount: number;
+    ResourceCount?: number;
     /**
      * 集群内空闲资源数目
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    IdleResourceCount: number;
+    IdleResourceCount?: number;
     /**
      * 集群内转发机的数目
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    LoadBalanceDirectorCount: number;
+    LoadBalanceDirectorCount?: number;
     /**
      * 集群的Isp属性，如："BGP","CMCC","CUCC","CTCC","INTERNAL"。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Isp: string;
+    Isp?: string;
     /**
      * 集群所在的可用区
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ClustersZone: ClustersZone;
+    ClustersZone?: ClustersZone;
     /**
      * 集群版本
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ClustersVersion: string;
+    ClustersVersion?: string;
     /**
      * 集群容灾类型，如SINGLE-ZONE，DISASTER-RECOVERY，MUTUAL-DISASTER-RECOVERY
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DisasterRecoveryType: string;
+    DisasterRecoveryType?: string;
+    /**
+     * 网络出口
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Egress?: string;
 }
 /**
  * ModifyTargetWeight请求参数结构体
@@ -3692,193 +3702,198 @@ export interface LoadBalancerDetail {
     /**
      * 负载均衡实例 ID。
      */
-    LoadBalancerId: string;
+    LoadBalancerId?: string;
     /**
      * 负载均衡实例的名称。
      */
-    LoadBalancerName: string;
+    LoadBalancerName?: string;
     /**
      * 负载均衡实例的网络类型：
   Public：公网属性， Private：内网属性。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    LoadBalancerType: string;
+    LoadBalancerType?: string;
     /**
      * 负载均衡实例的状态，包括
   0：创建中，1：正常运行。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Status: number;
+    Status?: number;
     /**
      * 负载均衡实例的 VIP 。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Address: string;
+    Address?: string;
     /**
      * 负载均衡实例 VIP 的IPv6地址。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    AddressIPv6: string;
+    AddressIPv6?: string;
     /**
      * 负载均衡实例IP版本，IPv4 | IPv6。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    AddressIPVersion: string;
+    AddressIPVersion?: string;
     /**
      * 负载均衡实例IPv6地址类型，IPv6Nat64 | IPv6FullChain。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    IPv6Mode: string;
+    IPv6Mode?: string;
     /**
      * 负载均衡实例所在可用区。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Zone: string;
+    Zone?: string;
     /**
      * 负载均衡实例IP地址所属的ISP。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    AddressIsp: string;
+    AddressIsp?: string;
     /**
      * 负载均衡实例所属私有网络的 ID。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    VpcId: string;
+    VpcId?: string;
     /**
      * 负载均衡实例所属的项目 ID， 0 表示默认项目。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ProjectId: number;
+    ProjectId?: number;
     /**
      * 负载均衡实例的创建时间。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CreateTime: string;
+    CreateTime?: string;
     /**
      * 负载均衡实例的计费类型。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ChargeType: string;
+    ChargeType?: string;
     /**
      * 负载均衡实例的网络属性。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    NetworkAttributes: InternetAccessible;
+    NetworkAttributes?: InternetAccessible;
     /**
      * 负载均衡实例的预付费相关属性。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    PrepaidAttributes: LBChargePrepaid;
+    PrepaidAttributes?: LBChargePrepaid;
     /**
      * 暂做保留，一般用户无需关注。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ExtraInfo: ExtraInfo;
+    ExtraInfo?: ExtraInfo;
     /**
      * 负载均衡维度的个性化配置ID，多个配置用逗号隔开。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ConfigId: string;
+    ConfigId?: string;
     /**
      * 负载均衡实例的标签信息。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Tags: Array<TagInfo>;
+    Tags?: Array<TagInfo>;
     /**
      * 负载均衡监听器 ID。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ListenerId: string;
+    ListenerId?: string;
     /**
      * 监听器协议。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Protocol: string;
+    Protocol?: string;
     /**
      * 监听器端口。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Port: number;
+    Port?: number;
     /**
      * 转发规则的 ID。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    LocationId: string;
+    LocationId?: string;
     /**
      * 转发规则的域名。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Domain: string;
+    Domain?: string;
     /**
      * 转发规则的路径。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Url: string;
+    Url?: string;
     /**
      * 后端目标ID。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TargetId: string;
+    TargetId?: string;
     /**
      * 后端目标的IP地址。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TargetAddress: string;
+    TargetAddress?: string;
     /**
      * 后端目标监听端口。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TargetPort: number;
+    TargetPort?: number;
     /**
      * 后端目标转发权重。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TargetWeight: number;
+    TargetWeight?: number;
     /**
      * 0：表示未被隔离，1：表示被隔离。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Isolation: number;
+    Isolation?: number;
     /**
      * 负载均衡绑定的安全组列表。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SecurityGroup: Array<string>;
+    SecurityGroup?: Array<string>;
     /**
      * 负载均衡安全组上移特性是否开启标识。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    LoadBalancerPassToTarget: number;
+    LoadBalancerPassToTarget?: number;
     /**
      * 后端目标健康状态。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TargetHealth: string;
+    TargetHealth?: string;
     /**
      * 转发规则的域名列表。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Domains: string;
+    Domains?: string;
     /**
      * 多可用区负载均衡实例所选备区
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SlaveZone: Array<string>;
+    SlaveZone?: Array<string>;
     /**
      * 内网负载均衡实例所在可用区，由白名单CLB_Internal_Zone控制
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Zones: Array<string>;
+    Zones?: Array<string>;
     /**
      * 是否开启SNI特性（本参数仅对于HTTPS监听器有意义）。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SniSwitch: number;
+    SniSwitch?: number;
     /**
      * 负载均衡实例的域名。
   注意：此字段可能返回 null，表示取不到有效值。
      */
     LoadBalancerDomain?: string;
+    /**
+     * 网络出口
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Egress?: string;
 }
 /**
  * 反查结果数据类型。
@@ -5344,4 +5359,9 @@ export interface LoadBalancer {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     LoadBalancerDomain?: string;
+    /**
+     * 网络出口
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Egress?: string;
 }

@@ -1937,25 +1937,25 @@ export interface OrganizationInfo {
  */
 export interface SignUrlInfo {
     /**
-     * 签署链接，过期时间为30天
+     * 签署链接，过期时间为90天
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SignUrl: string;
+    SignUrl?: string;
     /**
      * 合同过期时间戳，单位秒
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Deadline: number;
+    Deadline?: number;
     /**
      * 当流程为顺序签署此参数有效时，数字越小优先级越高，暂不支持并行签署 可选
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SignOrder: number;
+    SignOrder?: number;
     /**
      * 签署人编号
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SignId: string;
+    SignId?: string;
     /**
      * 自定义用户编号
   注意：此字段可能返回 null，表示取不到有效值。
@@ -1966,44 +1966,44 @@ export interface SignUrlInfo {
      * 用户姓名
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Name: string;
+    Name?: string;
     /**
      * 用户手机号码
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Mobile: string;
+    Mobile?: string;
     /**
      * 签署参与者机构名字
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    OrganizationName: string;
+    OrganizationName?: string;
     /**
      * 参与者类型:
   ORGANIZATION 企业经办人
   PERSON 自然人
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ApproverType: string;
+    ApproverType?: string;
     /**
      * 经办人身份证号
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    IdCardNumber: string;
+    IdCardNumber?: string;
     /**
      * 签署链接对应流程Id
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    FlowId: string;
+    FlowId?: string;
     /**
      * 企业经办人 用户在渠道的编号
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    OpenId: string;
+    OpenId?: string;
     /**
      * 合同组签署链接对应的合同组id
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    FlowGroupId: string;
+    FlowGroupId?: string;
 }
 /**
  * 通用签署人信息
@@ -2746,7 +2746,7 @@ export interface CreateSignUrlsRequest {
      */
     Agent: Agent;
     /**
-     * 签署流程编号数组，最多支持100个。(备注：该参数和合同组编号必须二选一)
+     * 流程(合同)的编号列表，最多支持100个。(备注：该参数和合同组编号必须二选一)
      */
     FlowIds?: Array<string>;
     /**
@@ -2754,16 +2754,22 @@ export interface CreateSignUrlsRequest {
      */
     FlowGroupId?: string;
     /**
-     * 签署链接类型：“WEIXINAPP”-短链直接跳小程序；“CHANNEL”-跳转H5页面；“APP”-第三方APP或小程序跳转电子签小程序；"LONGURL2WEIXINAPP"-长链接跳转小程序；默认“WEIXINAPP”类型，即跳转至小程序；
+     * 签署链接类型,可以设置的参数如下
+  
+  - WEIXINAPP:短链直接跳小程序 (默认类型)
+  - CHANNEL:跳转H5页面
+  - APP:第三方APP或小程序跳转电子签小程序
+  - LONGURL2WEIXINAPP:长链接跳转小程序
      */
     Endpoint?: string;
     /**
-     * 签署链接生成类型，默认是 "ALL"；
-  "ALL"：全部签署方签署链接，此时不会给自动签署的签署方创建签署链接；
-  "CHANNEL"：第三方平台子客企业企业；
-  "NOT_CHANNEL"：非第三方平台子客企业企业；
-  "PERSON"：个人；
-  "FOLLOWER"：关注方，目前是合同抄送方；
+     * 签署链接生成类型，可以选择的类型如下
+  
+  - ALL：全部签署方签署链接，此时不会给自动签署的签署方创建签署链接(默认类型)
+  - CHANNEL：第三方平台子客企业企业
+  - NOT_CHANNEL：非第三方平台子客企业企业
+  - PERSON：个人
+  - FOLLOWER：关注方，目前是合同抄送方
      */
     GenerateType?: string;
     /**
@@ -2771,11 +2777,12 @@ export interface CreateSignUrlsRequest {
      */
     OrganizationName?: string;
     /**
-     * 参与人姓名，GenerateType为"PERSON"时必填
+     * 参与人姓名
+  GenerateType为"PERSON"(即个人签署方)时必填
      */
     Name?: string;
     /**
-     * 参与人手机号；
+     * 参与人手机号
   GenerateType为"PERSON"或"FOLLOWER"时必填
      */
     Mobile?: string;
@@ -2803,10 +2810,10 @@ export interface CreateSignUrlsRequest {
     /**
      * 生成的签署链接在签署过程隐藏的按钮列表, 可以设置隐藏的按钮列表如下
   
-  0:合同签署页面更多操作按钮
-  1:合同签署页面更多操作的拒绝签署按钮
-  2:合同签署页面更多操作的转他人处理按钮
-  3:签署成功页的查看详情按钮
+  - 0:合同签署页面更多操作按钮
+  - 1:合同签署页面更多操作的拒绝签署按钮
+  - 2:合同签署页面更多操作的转他人处理按钮
+  - 3:签署成功页的查看详情按钮
      */
     Hides?: Array<number | bigint>;
 }

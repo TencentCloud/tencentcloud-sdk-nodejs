@@ -35,6 +35,19 @@ export interface AlarmPolicyTriggerTask {
     TaskConfig: string;
 }
 /**
+ * DescribePrometheusRegions返回参数结构体
+ */
+export interface DescribePrometheusRegionsResponse {
+    /**
+     * 区域列表
+     */
+    RegionSet: Array<PrometheusRegionItem>;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * DescribePolicyGroupList返回参数结构体
  */
 export interface DescribePolicyGroupListResponse {
@@ -1456,80 +1469,80 @@ export interface GrafanaInstanceInfo {
     /**
      * 实例名
      */
-    InstanceName: string;
+    InstanceName?: string;
     /**
      * 实例 ID
      */
-    InstanceId: string;
+    InstanceId?: string;
     /**
      * 地域
      */
-    Region: string;
+    Region?: string;
     /**
      * VPC ID
      */
-    VpcId: string;
+    VpcId?: string;
     /**
      * 子网 ID 数组
      */
-    SubnetIds: Array<string>;
-    /**
-     * Grafana 内网地址
-     */
-    InternetUrl: string;
+    SubnetIds?: Array<string>;
     /**
      * Grafana 公网地址
      */
-    InternalUrl: string;
+    InternetUrl?: string;
+    /**
+     * Grafana 内网地址
+     */
+    InternalUrl?: string;
     /**
      * 创建时间
      */
-    CreatedAt: string;
+    CreatedAt?: string;
     /**
      * 运行状态（1:正在创建；2:运行中；3:异常；4:重启中；5:停机中； 6:已停机； 7: 已删除）
      */
-    InstanceStatus: number;
+    InstanceStatus?: number;
     /**
      * 实例的标签
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TagSpecification: Array<PrometheusTag>;
+    TagSpecification?: Array<PrometheusTag>;
     /**
      * 实例的可用区
      */
-    Zone: string;
+    Zone?: string;
     /**
      * 计费模式（1:包年包月）
      */
-    InstanceChargeType: number;
+    InstanceChargeType?: number;
     /**
      * VPC 名称
      */
-    VpcName: string;
+    VpcName?: string;
     /**
      * 子网名称
      */
-    SubnetName: string;
+    SubnetName?: string;
     /**
      * 地域 ID
      */
-    RegionId: number;
+    RegionId?: number;
     /**
      * 可访问此实例的完整 URL
      */
-    RootUrl: string;
+    RootUrl?: string;
     /**
      * 是否开启 SSO
      */
-    EnableSSO: boolean;
+    EnableSSO?: boolean;
     /**
      * 版本号
      */
-    Version: string;
+    Version?: string;
     /**
      * SSO登录时是否开启cam鉴权
      */
-    EnableSSOCamCheck: boolean;
+    EnableSSOCamCheck?: boolean;
 }
 /**
  * DeletePrometheusConfig返回参数结构体
@@ -4510,6 +4523,15 @@ export interface GrafanaAccountInfo {
     Uin: string;
 }
 /**
+ * DescribePrometheusRegions请求参数结构体
+ */
+export interface DescribePrometheusRegionsRequest {
+    /**
+     * 1-预付费，2-后付费，3-全地域（不填默认全地域）
+     */
+    PayMode?: number;
+}
+/**
  * DescribeBindingPolicyObjectList返回的是实例分组信息
  */
 export interface DescribeBindingPolicyObjectListInstanceGroup {
@@ -5846,33 +5868,13 @@ export interface MetricSet {
     MetricEName: string;
 }
 /**
- * 实例的授权信息
+ * DescribePrometheusRecordRuleYaml返回参数结构体
  */
-export interface PrometheusInstanceGrantInfo {
+export interface DescribePrometheusRecordRuleYamlResponse {
     /**
-     * 是否有计费操作权限(1=有，2=无)
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
-    HasChargeOperation: number;
-    /**
-     * 是否显示VPC信息的权限(1=有，2=无)
-     */
-    HasVpcDisplay: number;
-    /**
-     * 是否可修改Grafana的状态(1=有，2=无)
-     */
-    HasGrafanaStatusChange: number;
-    /**
-     * 是否有管理agent的权限(1=有，2=无)
-     */
-    HasAgentManage: number;
-    /**
-     * 是否有管理TKE集成的权限(1=有，2=无)
-     */
-    HasTkeManage: number;
-    /**
-     * 是否显示API等信息(1=有, 2=无)
-     */
-    HasApiOperation: number;
+    RequestId?: string;
 }
 /**
  * 模板列表
@@ -6357,13 +6359,33 @@ export interface DescribeAlarmHistoriesRequest {
     PolicyIds?: Array<string>;
 }
 /**
- * DescribePrometheusRecordRuleYaml返回参数结构体
+ * 实例的授权信息
  */
-export interface DescribePrometheusRecordRuleYamlResponse {
+export interface PrometheusInstanceGrantInfo {
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     * 是否有计费操作权限(1=有，2=无)
      */
-    RequestId?: string;
+    HasChargeOperation: number;
+    /**
+     * 是否显示VPC信息的权限(1=有，2=无)
+     */
+    HasVpcDisplay: number;
+    /**
+     * 是否可修改Grafana的状态(1=有，2=无)
+     */
+    HasGrafanaStatusChange: number;
+    /**
+     * 是否有管理agent的权限(1=有，2=无)
+     */
+    HasAgentManage: number;
+    /**
+     * 是否有管理TKE集成的权限(1=有，2=无)
+     */
+    HasTkeManage: number;
+    /**
+     * 是否显示API等信息(1=有, 2=无)
+     */
+    HasApiOperation: number;
 }
 /**
  * DeletePolicyGroup请求参数结构体
@@ -7652,6 +7674,39 @@ export interface UpdateGrafanaConfigResponse {
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * DescribePrometheusRegions 响应结构体
+ */
+export interface PrometheusRegionItem {
+    /**
+     * 区域
+     */
+    Region: string;
+    /**
+     * 区域 ID
+     */
+    RegionId: number;
+    /**
+     * 区域状态( 0: 不可用；1: 可用)
+     */
+    RegionState: number;
+    /**
+     * 区域名(中文)
+     */
+    RegionName: string;
+    /**
+     * 区域名(英文缩写)
+     */
+    RegionShortName: string;
+    /**
+     * 区域所在大区名
+     */
+    Area: string;
+    /**
+     * 1-仅支持预付费，2-仅支持后付费，3-支持两种计费模式实例
+     */
+    RegionPayMode: number;
 }
 /**
  * ModifyPrometheusInstanceAttributes请求参数结构体

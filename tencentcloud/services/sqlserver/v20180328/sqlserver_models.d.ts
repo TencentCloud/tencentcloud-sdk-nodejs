@@ -1902,7 +1902,7 @@ export interface InquiryPriceCreateDBInstancesRequest {
      */
     Cpu?: number;
     /**
-     * 购买实例的类型 HA-高可用型(包括双机高可用，alwaysOn集群)，RO-只读副本型，SI-单节点型,cvmHA-新版高可用,cvmRO-新版只读
+     * 购买实例的类型 HA-高可用型(包括双机高可用，alwaysOn集群)，RO-只读副本型，SI-单节点型,cvmHA-虚拟机双机高可用,cvmRO-虚拟机只读
      */
     InstanceType?: string;
     /**
@@ -2113,7 +2113,7 @@ export interface CreateCloudReadOnlyDBInstancesRequest {
      */
     InstanceChargeType?: string;
     /**
-     * 本次购买几个只读实例，默认值为2。
+     * 本次即将购买的实例数量，默认取值2。
      */
     GoodsNum?: number;
     /**
@@ -4076,7 +4076,7 @@ export interface DBTDEEncrypt {
      */
     DBName?: string;
     /**
-     * enable-开启加密，disable-关闭加密
+     * enable-开启数据库TDE加密，disable-关闭数据库TDE加密
      */
     Encryption?: string;
 }

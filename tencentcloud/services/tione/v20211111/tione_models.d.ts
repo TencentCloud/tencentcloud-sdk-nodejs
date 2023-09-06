@@ -145,6 +145,10 @@ export interface CreateModelServiceRequest {
      * 服务的启动命令
      */
     Command?: string;
+    /**
+     * 是否开启TIONE内网访问外部
+     */
+    ServiceEIP?: ServiceEIP;
 }
 /**
  * CreateNotebookImage返回参数结构体
@@ -2117,6 +2121,10 @@ export interface ModifyModelServiceRequest {
      * 服务的启动命令
      */
     Command?: string;
+    /**
+     * 是否开启TIONE内网访问外部
+     */
+    ServiceEIP?: ServiceEIP;
 }
 /**
  * 框架版本以及对应的训练模式
@@ -2854,23 +2862,43 @@ export interface Spec {
     /**
      * 计费项标签
      */
-    SpecId: string;
+    SpecId?: string;
     /**
      * 计费项名称
      */
-    SpecName: string;
+    SpecName?: string;
     /**
      * 计费项显示名称
      */
-    SpecAlias: string;
+    SpecAlias?: string;
     /**
      * 是否售罄
      */
-    Available: boolean;
+    Available?: boolean;
     /**
      * 当前资源售罄时，可用的区域有哪些
      */
-    AvailableRegion: Array<string>;
+    AvailableRegion?: Array<string>;
+    /**
+     * 当前计费项支持的特性
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SpecFeatures?: Array<string>;
+    /**
+     * 计费项类型
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SpecType?: string;
+    /**
+     * GPU类型
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    GpuType?: string;
+    /**
+     * 计费项CategoryId
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CategoryId?: string;
 }
 /**
  * 配置GooseFS参数
@@ -5034,6 +5062,21 @@ export interface PodInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Status?: string;
+    /**
+     * pod启动时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    StartTime?: string;
+    /**
+     * pod结束时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    EndTime?: string;
+    /**
+     * pod资源配置
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ResourceConfigInfo?: ResourceConfigInfo;
 }
 /**
  * DeleteBatchTask返回参数结构体

@@ -58,6 +58,16 @@ it("tdmq.v20200217.ModifyAMQPCluster", async function () {
     }
 })
 
+it("tdmq.v20200217.DescribeRocketMQMsgTrace", async function () {
+    try {
+       const data = await client.DescribeRocketMQMsgTrace({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tdmq.v20200217.CreateCmqTopic", async function () {
     try {
        const data = await client.CreateCmqTopic({})
@@ -241,6 +251,16 @@ it("tdmq.v20200217.SendMessages", async function () {
 it("tdmq.v20200217.ModifyRocketMQTopic", async function () {
     try {
        const data = await client.ModifyRocketMQTopic({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tdmq.v20200217.DescribeRocketMQTopicMsgs", async function () {
+    try {
+       const data = await client.DescribeRocketMQTopicMsgs({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

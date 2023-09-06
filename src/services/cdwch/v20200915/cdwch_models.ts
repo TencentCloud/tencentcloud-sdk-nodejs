@@ -104,26 +104,23 @@ export interface ResizeDiskRequest {
 }
 
 /**
- * DestroyInstance返回参数结构体
+ * 数据库权限信息
  */
-export interface DestroyInstanceResponse {
+export interface DatabasePrivilegeInfo {
   /**
-   * 作业id
+   * 数据库名称
+   */
+  DatabaseName: string
+  /**
+   * //库表权限，SELECT、INSERT_ALL、ALTER、TRUNCATE、DROP_TABLE、CREATE_TABLE、DROP_DATABASE
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  FlowID?: string
+  DatabasePrivileges?: Array<string>
   /**
-   * 集群id
+   * // 库下面的表权限
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  InstanceID?: string
-  /**
-   * 错误信息
-   */
-  ErrorMsg?: string
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  TablePrivilegeList?: Array<TablePrivilegeInfo>
 }
 
 /**
@@ -303,7 +300,32 @@ export interface DestroyInstanceRequest {
 /**
  * ModifyUserNewPrivilege请求参数结构体
  */
-export type ModifyUserNewPrivilegeRequest = null
+export interface ModifyUserNewPrivilegeRequest {
+  /**
+   * 实例id
+   */
+  InstanceId: string
+  /**
+   * cluster名称
+   */
+  Cluster: string
+  /**
+   * 用户名
+   */
+  UserName: string
+  /**
+   * 是否所有数据库表
+   */
+  AllDatabase: boolean
+  /**
+   * 全局权限
+   */
+  GlobalPrivileges?: Array<string>
+  /**
+   * 数据库表权限
+   */
+  DatabasePrivilegeList?: Array<DatabasePrivilegeInfo>
+}
 
 /**
  * DescribeCkSqlApis请求参数结构体
@@ -547,17 +569,17 @@ export interface InstanceStateInfo {
 }
 
 /**
- * 标签描述
+ * 表权限
  */
-export interface Tag {
+export interface TablePrivilegeInfo {
   /**
-   * 标签的键
+   * 表名称
    */
-  TagKey: string
+  TableName: string
   /**
-   * 标签的值
+   * 表权限列表 SELECT、INSERT_ALL、ALTER、TRUNCATE、DROP_TABLE 查询、插入、设置、清空表、删除表
    */
-  TagValue: string
+  TablePrivileges: Array<string>
 }
 
 /**
@@ -1154,6 +1176,20 @@ export interface DescribeInstancesNewResponse {
 }
 
 /**
+ * 标签描述
+ */
+export interface Tag {
+  /**
+   * 标签的键
+   */
+  TagKey: string
+  /**
+   * 标签的值
+   */
+  TagValue: string
+}
+
+/**
  * 备份任务详情
  */
 export interface BackUpJobDisplay {
@@ -1676,6 +1712,29 @@ export interface DescribeInstanceStateResponse {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   FlowMsg?: string
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DestroyInstance返回参数结构体
+ */
+export interface DestroyInstanceResponse {
+  /**
+   * 作业id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FlowID?: string
+  /**
+   * 集群id
+   */
+  InstanceID?: string
+  /**
+   * 错误信息
+   */
+  ErrorMsg?: string
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

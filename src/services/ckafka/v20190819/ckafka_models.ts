@@ -978,7 +978,7 @@ export interface CreateRouteRequest {
    */
   SubnetId?: string
   /**
-   * 访问类型
+   * 访问类型：0-plaintext；1-sasl_plaintext；2-ssl；3-sasl_ssl
    */
   AccessType?: number
   /**
@@ -5817,9 +5817,9 @@ export interface Connection {
  */
 export interface BatchCreateAclResponse {
   /**
-   * 状态码
+   * 状态码：0-修改成功，否则修改失败
    */
-  Result: number
+  Result?: number
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6839,7 +6839,7 @@ export interface CreateRouteResponse {
   /**
    * 返回结果
    */
-  Result: JgwOperateResponse
+  Result?: JgwOperateResponse
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

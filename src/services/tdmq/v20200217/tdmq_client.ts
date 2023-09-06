@@ -41,8 +41,9 @@ import {
   ModifyRocketMQInstanceSpecRequest,
   BindCluster,
   ModifyRoleResponse,
-  ModifyClusterResponse,
+  DescribeRocketMQTopicMsgsResponse,
   SendRocketMQMessageRequest,
+  DescribeRocketMQMsgTraceResponse,
   RabbitMQPrivateVirtualHost,
   RocketMQVipInstance,
   RabbitMQVipInstance,
@@ -113,7 +114,7 @@ import {
   DeleteEnvironmentRolesResponse,
   DescribeClusterDetailRequest,
   ModifyRoleRequest,
-  Tag,
+  RocketMQMsgLog,
   DeleteCmqQueueResponse,
   DescribeRocketMQClusterRequest,
   DeleteRocketMQTopicResponse,
@@ -135,6 +136,7 @@ import {
   DeleteEnvironmentsResponse,
   ModifyAMQPClusterRequest,
   DescribeEnvironmentRolesResponse,
+  DescribeRocketMQMsgTraceRequest,
   ModifyRocketMQGroupRequest,
   FilterSubscription,
   DescribeCmqTopicsResponse,
@@ -146,6 +148,7 @@ import {
   DescribePulsarProInstancesRequest,
   DeleteEnvironmentsRequest,
   DescribeRocketMQClustersRequest,
+  ModifyClusterResponse,
   DescribeBindVpcsRequest,
   DescribeClustersResponse,
   ClearCmqSubscriptionFilterTagsRequest,
@@ -240,7 +243,9 @@ import {
   ClearCmqQueueResponse,
   ModifyRabbitMQUserResponse,
   DescribeNodeHealthOptRequest,
+  TraceResult,
   DeleteRabbitMQVirtualHostResponse,
+  PulsarNetworkAccessPointInfo,
   CreateRocketMQTopicResponse,
   CreateRabbitMQVirtualHostRequest,
   EnvironmentRole,
@@ -253,13 +258,14 @@ import {
   DescribePulsarProInstanceDetailRequest,
   CreateRabbitMQUserRequest,
   CreateRoleRequest,
-  PulsarNetworkAccessPointInfo,
+  DescribeRocketMQTopicMsgsRequest,
   ModifyEnvironmentRoleRequest,
   DescribeEnvironmentAttributesResponse,
   Role,
   ModifyAMQPClusterResponse,
   DescribeTopicsResponse,
   AMQPClusterConfig,
+  Tag,
   CreateRocketMQNamespaceResponse,
   SendBatchMessagesRequest,
   DeleteCmqTopicRequest,
@@ -337,6 +343,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyAMQPClusterResponse) => void
   ): Promise<ModifyAMQPClusterResponse> {
     return this.request("ModifyAMQPCluster", req, cb)
+  }
+
+  /**
+   * 查询消息轨迹
+   */
+  async DescribeRocketMQMsgTrace(
+    req: DescribeRocketMQMsgTraceRequest,
+    cb?: (error: string, rep: DescribeRocketMQMsgTraceResponse) => void
+  ): Promise<DescribeRocketMQMsgTraceResponse> {
+    return this.request("DescribeRocketMQMsgTrace", req, cb)
   }
 
   /**
@@ -528,6 +544,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyRocketMQTopicResponse) => void
   ): Promise<ModifyRocketMQTopicResponse> {
     return this.request("ModifyRocketMQTopic", req, cb)
+  }
+
+  /**
+   * rocketmq 消息查询
+   */
+  async DescribeRocketMQTopicMsgs(
+    req: DescribeRocketMQTopicMsgsRequest,
+    cb?: (error: string, rep: DescribeRocketMQTopicMsgsResponse) => void
+  ): Promise<DescribeRocketMQTopicMsgsResponse> {
+    return this.request("DescribeRocketMQTopicMsgs", req, cb)
   }
 
   /**

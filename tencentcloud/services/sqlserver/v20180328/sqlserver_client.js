@@ -620,7 +620,6 @@ class Client extends abstract_client_1.AbstractClient {
     }
     /**
      * 本接口（InquiryPriceUpgradeDBInstance）用于查询包年包月实例升级变配的价格。
-按量计费实例变配后的价格参考InquiryPriceCreateDBInstances接口。
      */
     async InquiryPriceUpgradeDBInstance(req, cb) {
         return this.request("InquiryPriceUpgradeDBInstance", req, cb);

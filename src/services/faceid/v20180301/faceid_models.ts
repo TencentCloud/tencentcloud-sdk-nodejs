@@ -1439,39 +1439,44 @@ export interface ChargeDetail {
   /**
    * 一比一时间时间戳，13位。
    */
-  ReqTime: string
+  ReqTime?: string
   /**
    * 一比一请求的唯一标记。
    */
-  Seq: string
+  Seq?: string
   /**
    * 一比一时使用的、脱敏后的身份证号。
    */
-  Idcard: string
+  IdCard?: string
+  /**
+   * 已废弃。请使用“IdCard”字段
+   * @deprecated
+   */
+  Idcard?: string
   /**
    * 一比一时使用的、脱敏后的姓名。
    */
-  Name: string
+  Name?: string
   /**
    * 一比一的相似度。0-100，保留2位小数。
    */
-  Sim: string
+  Sim?: string
   /**
    * 本次详情是否收费。
    */
-  IsNeedCharge: boolean
+  IsNeedCharge?: boolean
   /**
    * 收费类型，比对、核身、混合部署。
    */
-  ChargeType: string
+  ChargeType?: string
   /**
    * 本次活体一比一最终结果。
    */
-  ErrorCode: string
+  ErrorCode?: string
   /**
    * 本次活体一比一最终结果描述。
    */
-  ErrorMessage: string
+  ErrorMessage?: string
 }
 
 /**

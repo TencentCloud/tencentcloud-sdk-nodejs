@@ -38,6 +38,16 @@ it("teo.v20220901.DeleteOriginGroup", async function () {
     }
 })
 
+it("teo.v20220901.CreateSharedCNAME", async function () {
+    try {
+       const data = await client.CreateSharedCNAME({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("teo.v20220901.DeleteZone", async function () {
     try {
        const data = await client.DeleteZone({})

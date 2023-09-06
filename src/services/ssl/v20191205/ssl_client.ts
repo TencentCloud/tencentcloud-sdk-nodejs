@@ -18,23 +18,29 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  DescribeCertificateBindResourceTaskDetailRequest,
   ResourceTypeRegions,
   DescribeHostDdosInstanceListRequest,
   CompleteCertificateRequest,
   DownloadCertificateResponse,
   ManagerInfo,
   DescribeHostDeployRecordDetailResponse,
+  TCBAccessInstance,
   DeployRecordDetail,
   CancelCertificateOrderRequest,
   ModifyCertificateProjectResponse,
   Certificates,
   CertificateExtra,
+  TeoInstanceList,
   RootCertificates,
   CdnInstanceDetail,
   VerifyManagerResponse,
   DescribeCertificateDetailRequest,
   TkeNameSpaceDetail,
+  CreateCertificateBindResourceSyncTaskResponse,
+  TkeInstanceList,
   DescribeDeployedResourcesRequest,
+  TCBHostInstance,
   UploadRevokeLetterRequest,
   ClbListener,
   DescribeCompaniesResponse,
@@ -56,13 +62,17 @@ import {
   DescribeCertificateDetailResponse,
   DownloadCertificateRequest,
   DescribeHostTkeInstanceListResponse,
+  DescribeCertificateBindResourceTaskResultRequest,
   UpdateRecordDetail,
+  BindResourceResult,
   ApplyCertificateResponse,
   DescribeHostDeployRecordRequest,
+  CreateCertificateBindResourceSyncTaskRequest,
   CosInstanceDetail,
   UploadConfirmLetterResponse,
   DescribeHostUpdateRecordDetailRequest,
   ReplaceCertificateResponse,
+  SyncTaskBindResourceResult,
   ClbInstanceDetail,
   DescribeManagersResponse,
   VodInstanceDetail,
@@ -72,8 +82,10 @@ import {
   DescribeHostUpdateRecordResponse,
   UpdateCertificateRecordRollbackResponse,
   DescribeHostVodInstanceListRequest,
+  DescribeCertificateBindResourceTaskDetailResponse,
   DeployCertificateRecordRetryResponse,
   DvAuthDetail,
+  CdnInstanceList,
   UpdateCertificateRecordRetryRequest,
   DdosInstanceDetail,
   DescribeHostWafInstanceListResponse,
@@ -87,8 +99,11 @@ import {
   DeployCertificateInstanceResponse,
   LiveInstanceDetail,
   SubmitCertificateInformationRequest,
+  TCBEnvironment,
+  WafInstanceDetail,
   DescribeCertificatesRequest,
   UpdateCertificateRecordRollbackRequest,
+  ApiGatewayInstanceList,
   TeoInstanceDetail,
   DescribeHostClbInstanceListResponse,
   RevokeCertificateRequest,
@@ -115,6 +130,7 @@ import {
   ModifyCertificateProjectRequest,
   DescribeCertificateRequest,
   DescribeHostVodInstanceListResponse,
+  WafInstanceList,
   ModifyCertificatesExpiringNotificationSwitchRequest,
   Filter,
   RevokeDomainValidateAuths,
@@ -122,16 +138,21 @@ import {
   DescribeHostUpdateRecordRequest,
   DescribeHostClbInstanceListRequest,
   VerifyManagerRequest,
+  CertTaskId,
   DescribeHostLiveInstanceListResponse,
   DescribeHostApiGatewayInstanceListRequest,
+  TCBAccessService,
+  DdosInstanceList,
   SubmittedData,
   DescribeCompaniesRequest,
+  TCBInstanceList,
   DescribeHostCosInstanceListRequest,
   DescribeHostCdnInstanceListResponse,
   HostCertificateRequest,
   TkeIngressDetail,
   DeployCertificateInstanceRequest,
   ApiGatewayInstanceDetail,
+  LiveInstanceList,
   DeleteCertificateRequest,
   DescribeCertificateOperateLogsResponse,
   DescribeHostLighthouseInstanceListRequest,
@@ -145,16 +166,22 @@ import {
   ModifyCertificateAliasResponse,
   ApplyCertificateRequest,
   CreateCertificateResponse,
+  Error,
   UpdateRecordInfo,
   DescribeHostApiGatewayInstanceListResponse,
   DeployCertificateRecordRetryRequest,
+  DescribeCertificateBindResourceTaskResultResponse,
   ProjectInfo,
   DescribeHostTeoInstanceListRequest,
+  BindResourceRegionResult,
   TkeInstanceDetail,
   UploadConfirmLetterRequest,
   SubmitCertificateInformationResponse,
+  TCBEnvironments,
+  ClbInstanceList,
   UpdateCertificateRecordRetryResponse,
   DescribePackagesRequest,
+  TCBHostService,
   CheckCertificateChainRequest,
   DeployCertificateRecordRollbackResponse,
   ManagerStatusInfo,
@@ -163,6 +190,7 @@ import {
   DescribeManagersRequest,
   DescribeHostLighthouseInstanceListResponse,
   CompleteCertificateResponse,
+  VODInstanceList,
 } from "./ssl_models"
 
 /**
@@ -212,6 +240,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeHostTkeInstanceListResponse) => void
   ): Promise<DescribeHostTkeInstanceListResponse> {
     return this.request("DescribeHostTkeInstanceList", req, cb)
+  }
+
+  /**
+   * 查询证书云资源更新记录列表
+   */
+  async DescribeHostUpdateRecord(
+    req: DescribeHostUpdateRecordRequest,
+    cb?: (error: string, rep: DescribeHostUpdateRecordResponse) => void
+  ): Promise<DescribeHostUpdateRecordResponse> {
+    return this.request("DescribeHostUpdateRecord", req, cb)
   }
 
   /**
@@ -505,13 +543,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询证书云资源更新记录列表
+   * 查询CreateCertificateBindResourceSyncTask任务结果， 返回证书关联云资源异步任务结果， 支持以下云资源：clb、cdn、waf、live、vod、ddos、tke、apigateway、tcb、teo（edgeOne）
    */
-  async DescribeHostUpdateRecord(
-    req: DescribeHostUpdateRecordRequest,
-    cb?: (error: string, rep: DescribeHostUpdateRecordResponse) => void
-  ): Promise<DescribeHostUpdateRecordResponse> {
-    return this.request("DescribeHostUpdateRecord", req, cb)
+  async DescribeCertificateBindResourceTaskResult(
+    req: DescribeCertificateBindResourceTaskResultRequest,
+    cb?: (error: string, rep: DescribeCertificateBindResourceTaskResultResponse) => void
+  ): Promise<DescribeCertificateBindResourceTaskResultResponse> {
+    return this.request("DescribeCertificateBindResourceTaskResult", req, cb)
   }
 
   /**
@@ -645,6 +683,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 创建证书绑定关联云资源异步任务， 该接口用于查询证书关联云资源。 若证书ID已存在查询云资源任务，则结果返回该任务ID。关联云资源类型，支持以下云资源：clb、cdn、waf、live、vod、ddos、tke、apigateway、tcb、teo（edgeOne）。查询关联云资源结果使用DescribeCertificateBindResourceTaskResult接口
+   */
+  async CreateCertificateBindResourceSyncTask(
+    req: CreateCertificateBindResourceSyncTaskRequest,
+    cb?: (error: string, rep: CreateCertificateBindResourceSyncTaskResponse) => void
+  ): Promise<CreateCertificateBindResourceSyncTaskResponse> {
+    return this.request("CreateCertificateBindResourceSyncTask", req, cb)
+  }
+
+  /**
    * 修改忽略证书到期通知。打开或关闭证书到期通知。
    */
   async ModifyCertificatesExpiringNotificationSwitch(
@@ -692,5 +740,15 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeManagersResponse) => void
   ): Promise<DescribeManagersResponse> {
     return this.request("DescribeManagers", req, cb)
+  }
+
+  /**
+   * 查询CreateCertificateBindResourceSyncTask任务结果， 返回证书关联云资源异步任务结果， 支持以下云资源：clb、cdn、waf、live、vod、ddos、tke、apigateway、tcb、teo（edgeOne）
+   */
+  async DescribeCertificateBindResourceTaskDetail(
+    req: DescribeCertificateBindResourceTaskDetailRequest,
+    cb?: (error: string, rep: DescribeCertificateBindResourceTaskDetailResponse) => void
+  ): Promise<DescribeCertificateBindResourceTaskDetailResponse> {
+    return this.request("DescribeCertificateBindResourceTaskDetail", req, cb)
   }
 }

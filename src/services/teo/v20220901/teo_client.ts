@@ -265,6 +265,7 @@ import {
   DescribeHostsSettingRequest,
   SubRuleItem,
   CreateSecurityIPGroupResponse,
+  CreateSharedCNAMEResponse,
   DescribePurgeTasksResponse,
   DescribeAvailablePlansResponse,
   DescribeDDoSAttackEventRequest,
@@ -273,6 +274,7 @@ import {
   AlgDetectResult,
   QueryString,
   DefaultServerCertInfo,
+  CreateSharedCNAMERequest,
   DescribeAccelerationDomainsRequest,
   UpstreamHttp2,
   TopEntryValue,
@@ -311,6 +313,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteOriginGroupResponse) => void
   ): Promise<DeleteOriginGroupResponse> {
     return this.request("DeleteOriginGroup", req, cb)
+  }
+
+  /**
+   * 创建共享 CNAME
+   */
+  async CreateSharedCNAME(
+    req: CreateSharedCNAMERequest,
+    cb?: (error: string, rep: CreateSharedCNAMEResponse) => void
+  ): Promise<CreateSharedCNAMEResponse> {
+    return this.request("CreateSharedCNAME", req, cb)
   }
 
   /**

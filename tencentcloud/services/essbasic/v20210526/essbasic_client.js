@@ -186,6 +186,13 @@ https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/launchAp
 （https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/openEmbeddedMiniProgram.html）
 其中小程序的原始Id，请联系<对接技术人员>获取，或者查看小程序信息自助获取。
 使用CreateSignUrls，设置EndPoint为APP，得到path。
+
+其中小程序的原始Id如下，或者查看小程序信息自助获取。
+
+| 小程序 | AppID | 原始ID |
+| ------------ | ------------ | ------------ |
+| 腾讯电子签（正式版） | wxa023b292fd19d41d | gh_da88f6188665 |
+| 腾讯电子签Demo | wx371151823f6f3edf | gh_39a5d3de69fa |
      */
     async CreateSignUrls(req, cb) {
         return this.request("CreateSignUrls", req, cb);

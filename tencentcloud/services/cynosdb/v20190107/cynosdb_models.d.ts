@@ -155,7 +155,7 @@ export interface InquirePriceRenewRequest {
  */
 export interface DescribeAccountPrivilegesResponse {
     /**
-     * 权限列表，示例值为：["select","update","delete","create","drop","references","index","alter","show_db","create_tmp_table","lock_tables","execute","create_view","show_view","create_routine","alter_routine","event","trigger"]
+     * 权限列表，示例值为：["","select","update","delete","create","drop","references","index","alter","show_db","create_tmp_table","lock_tables","execute","create_view","show_view","create_routine","alter_routine","event","trigger"]
      */
     Privileges?: Array<string>;
     /**
@@ -2563,7 +2563,7 @@ export interface ModifyInstanceParamRequest {
      */
     InstanceIds?: Array<string>;
     /**
-     * 集群参数列表，例如 [{           "CurrentValue":"2",        "ParamName":"innodb_stats_transient_sample_pages"}]
+     * 集群参数列表，例如 [{           "CurrentValue":"2",        "ParamName":"auto_increment_increment"}]
      */
     ClusterParamList?: Array<ModifyParamItem>;
     /**
@@ -3625,7 +3625,8 @@ export interface CreateClustersRequest {
      */
     TimeUnit?: string;
     /**
-     * 包年包月购买是否自动续费，默认为0
+     * 包年包月购买是否自动续费，默认为0。
+  0标识默认续费方式，1表示自动续费，2表示手不自动续费。
      */
     AutoRenewFlag?: number;
     /**
@@ -4114,7 +4115,7 @@ export interface ModifyClusterParamResponse {
     /**
      * 异步请求Id，用于查询结果
      */
-    AsyncRequestId: string;
+    AsyncRequestId?: string;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -4696,11 +4697,13 @@ export interface AssociateSecurityGroupsResponse {
  */
 export interface DescribeResourcesByDealNameRequest {
     /**
-     * 计费订单ID（如果计费还没回调业务发货，可能出现错误码InvalidParameterValue.DealNameNotFound，这种情况需要业务重试DescribeResourcesByDealName接口直到成功）
+     * 计费订单ID（如果计费还没回调业务发货，可能出现错误码InvalidParameterValue.DealNameNotFound，这种情况需要业务重试DescribeResourcesByDealName接口直到成功）。
+  DealName与DealNames至少应输入一项，两者都传时以DealName为准。
      */
     DealName?: string;
     /**
-     * 计费订单ID列表，可以一次查询若干条订单ID对应资源信息（如果计费还没回调业务发货，可能出现错误码InvalidParameterValue.DealNameNotFound，这种情况需要业务重试DescribeResourcesByDealName接口直到成功）
+     * 计费订单ID列表，可以一次查询若干条订单ID对应资源信息（如果计费还没回调业务发货，可能出现错误码InvalidParameterValue.DealNameNotFound，这种情况需要业务重试DescribeResourcesByDealName接口直到成功）。
+  DealName与DealNames至少应输入一项，两者都传时以DealName为准。
      */
     DealNames?: Array<string>;
 }
@@ -6473,7 +6476,7 @@ export interface AddInstancesRequest {
      */
     Memory: number;
     /**
-     * 新增只读实例数，取值范围为[0,4]
+     * 新增只读实例数，取值范围为(0,15]
      */
     ReadOnlyCount: number;
     /**

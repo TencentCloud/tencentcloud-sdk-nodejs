@@ -3353,6 +3353,11 @@ export interface KongServicePreview {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Editable?: boolean;
+    /**
+     * 请求路径
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Path?: string;
 }
 /**
  * ModifyCloudNativeAPIGatewayRouteRateLimit返回参数结构体

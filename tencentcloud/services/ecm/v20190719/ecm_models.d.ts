@@ -3957,6 +3957,10 @@ export interface CreateSubnetRequest {
      * 指定绑定的标签列表，例如：[{"Key": "city", "Value": "shanghai"}]
      */
     Tags?: Array<Tag>;
+    /**
+     * IPv6 CIDR
+     */
+    IPv6CidrBlock?: string;
 }
 /**
  * HAVIP对象。

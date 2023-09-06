@@ -1,4 +1,29 @@
 /**
+ * DescribeCertificateBindResourceTaskDetail请求参数结构体
+ */
+export interface DescribeCertificateBindResourceTaskDetailRequest {
+    /**
+     * 任务ID，根据任务ID查询绑定云资源结果
+     */
+    TaskId: string;
+    /**
+     * 每页展示数量， 默认10，最大值100; 分页总数为云资源地域下实例总数， 即第一页会拉群每个云资源的地域下面Limit数量实例
+     */
+    Limit?: string;
+    /**
+     * 当前偏移量
+     */
+    Offset?: string;
+    /**
+     * 查询资源类型的结果详情， 不传则查询所有
+     */
+    ResourceTypes?: Array<string>;
+    /**
+     * 查询地域列表的数据，CLB、TKE、WAF、APIGATEWAY、TCB支持地域查询， 其他资源类型不支持
+     */
+    Regions?: Array<string>;
+}
+/**
  * 云资源地域列表
  */
 export interface ResourceTypeRegions {
@@ -167,6 +192,44 @@ export interface DescribeHostDeployRecordDetailResponse {
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * TCB访问服务实例
+ */
+export interface TCBAccessInstance {
+    /**
+     * 域名
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Domain?: string;
+    /**
+     * 状态
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Status?: number;
+    /**
+     * 统一域名状态
+  
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    UnionStatus?: number;
+    /**
+     * 是否被抢占, 被抢占表示域名被其他环境绑定了，需要解绑或者重新绑定。
+  
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IsPreempted?: boolean;
+    /**
+     * icp黑名单封禁状态，0-未封禁，1-封禁
+  
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ICPStatus?: number;
+    /**
+     * 已绑定证书ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    OldCertificateId?: string;
 }
 /**
  * 部署记录详情
@@ -529,6 +592,20 @@ export interface CertificateExtra {
     SMCert?: number;
 }
 /**
+ * edgeone实例详情 - 异步关联云资源数据结构
+ */
+export interface TeoInstanceList {
+    /**
+     * edgeone实例详情
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InstanceList?: Array<TeoInstanceDetail>;
+    /**
+     * edgeone实例总数
+     */
+    TotalCount?: number;
+}
+/**
  * 根证书
  */
 export interface RootCertificates {
@@ -605,6 +682,37 @@ export interface TkeNameSpaceDetail {
     SecretList: Array<TkeSecretDetail>;
 }
 /**
+ * CreateCertificateBindResourceSyncTask返回参数结构体
+ */
+export interface CreateCertificateBindResourceSyncTaskResponse {
+    /**
+     * 证书关联云资源异步任务ID列表
+     */
+    CertTaskIds?: Array<CertTaskId>;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * tke实例详情 - 异步关联云资源数据结构
+ */
+export interface TkeInstanceList {
+    /**
+     * 地域
+     */
+    Region?: string;
+    /**
+     * tke实例详情
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InstanceList?: Array<TkeInstanceDetail>;
+    /**
+     * 该地域下tke实例总数
+     */
+    TotalCount?: number;
+}
+/**
  * DescribeDeployedResources请求参数结构体
  */
 export interface DescribeDeployedResourcesRequest {
@@ -616,6 +724,31 @@ export interface DescribeDeployedResourcesRequest {
      * 资源类型:clb,cdn,live,waf,antiddos
      */
     ResourceType: string;
+}
+/**
+ * TCB静态托管服务实例
+ */
+export interface TCBHostInstance {
+    /**
+     * 域名
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Domain?: string;
+    /**
+     * 状态
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Status?: string;
+    /**
+     * 解析状态
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DNSStatus?: string;
+    /**
+     * 已绑定证书ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    OldCertificateId?: string;
 }
 /**
  * UploadRevokeLetter请求参数结构体
@@ -1287,6 +1420,15 @@ export interface DescribeHostTkeInstanceListResponse {
     RequestId?: string;
 }
 /**
+ * DescribeCertificateBindResourceTaskResult请求参数结构体
+ */
+export interface DescribeCertificateBindResourceTaskResultRequest {
+    /**
+     * 任务ID，根据任务ID查询绑定云资源结果， 最大支持100个
+     */
+    TaskIds: Array<string>;
+}
+/**
  * 更新记录详情
  */
 export interface UpdateRecordDetail {
@@ -1395,6 +1537,19 @@ export interface UpdateRecordDetail {
     TCBType?: string;
 }
 /**
+ * 绑定资源结果
+ */
+export interface BindResourceResult {
+    /**
+     * 资源类型：clb、cdn、waf、live、vod、ddos、tke、apigateway、tcb、teo（edgeOne）
+     */
+    ResourceType?: string;
+    /**
+     * 绑定资源地域结果
+     */
+    BindResourceRegionResult?: Array<BindResourceRegionResult>;
+}
+/**
  * ApplyCertificate返回参数结构体
  */
 export interface ApplyCertificateResponse {
@@ -1427,6 +1582,19 @@ export interface DescribeHostDeployRecordRequest {
      * 资源类型
      */
     ResourceType?: string;
+}
+/**
+ * CreateCertificateBindResourceSyncTask请求参数结构体
+ */
+export interface CreateCertificateBindResourceSyncTaskRequest {
+    /**
+     * 证书ID列表，总数不能超过100
+     */
+    CertificateIds: Array<string>;
+    /**
+     * 是否使用缓存， 1使用缓存，0不使用缓存； 默认为1使用缓存； 若当前证书ID存在半小时已完成的任务， 则使用缓存的情况下， 会读取半小时内离当前时间最近的查询结果
+     */
+    IsCache: number;
 }
 /**
  * COS实例详情
@@ -1503,6 +1671,33 @@ export interface ReplaceCertificateResponse {
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * 异步任务证书关联云资源结果
+ */
+export interface SyncTaskBindResourceResult {
+    /**
+     * 任务ID
+     */
+    TaskId?: string;
+    /**
+     * 关联云资源结果
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    BindResourceResult?: Array<BindResourceResult>;
+    /**
+     * 关联云资源异步查询结果： 0表示查询中， 1表示查询成功。 2表示查询异常； 若状态为1，则查看BindResourceResult结果；若状态为2，则查看Error原因
+     */
+    Status?: number;
+    /**
+     * 关联云资源错误信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Error?: Error;
+    /**
+     * 当前结果缓存时间
+     */
+    CacheTime?: string;
 }
 /**
  * clb实例详情
@@ -1856,6 +2051,73 @@ export interface DescribeHostVodInstanceListRequest {
     OldCertificateId?: string;
 }
 /**
+ * DescribeCertificateBindResourceTaskDetail返回参数结构体
+ */
+export interface DescribeCertificateBindResourceTaskDetailResponse {
+    /**
+     * 关联clb资源详情
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CLB?: Array<ClbInstanceList>;
+    /**
+     * 关联cdn资源详情
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CDN?: Array<CdnInstanceList>;
+    /**
+     * 关联waf资源详情
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    WAF?: Array<WafInstanceList>;
+    /**
+     * 关联ddos资源详情
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DDOS?: Array<DdosInstanceList>;
+    /**
+     * 关联live资源详情
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    LIVE?: Array<LiveInstanceList>;
+    /**
+     * 关联vod资源详情
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    VOD?: Array<VODInstanceList>;
+    /**
+     * 关联tke资源详情
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TKE?: Array<TkeInstanceList>;
+    /**
+     * 关联apigateway资源详情
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    APIGATEWAY?: Array<ApiGatewayInstanceList>;
+    /**
+     * 关联tcb资源详情
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TCB?: Array<TCBInstanceList>;
+    /**
+     * 关联teo资源详情
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TEO?: Array<TeoInstanceList>;
+    /**
+     * 关联云资源异步查询结果： 0表示查询中， 1表示查询成功。 2表示查询异常； 若状态为1，则查看BindResourceResult结果；若状态为2，则查看Error原因
+     */
+    Status?: number;
+    /**
+     * 当前结果缓存时间
+     */
+    CacheTime?: string;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * DeployCertificateRecordRetry返回参数结构体
  */
 export interface DeployCertificateRecordRetryResponse {
@@ -1898,6 +2160,20 @@ export interface DvAuthDetail {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     DvAuths: Array<DvAuths>;
+}
+/**
+ * cdn实例详情 - 异步关联云资源数据结构
+ */
+export interface CdnInstanceList {
+    /**
+     * 该地域下CDN域名总数
+     */
+    TotalCount?: number;
+    /**
+     * cdn域名详情
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InstanceList?: Array<CdnInstanceDetail>;
 }
 /**
  * UpdateCertificateRecordRetry请求参数结构体
@@ -2214,6 +2490,50 @@ export interface SubmitCertificateInformationRequest {
     ContactPosition?: string;
 }
 /**
+ * TCB环境
+ */
+export interface TCBEnvironment {
+    /**
+     * 唯一ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ID?: string;
+    /**
+     * 来源
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Source?: string;
+    /**
+     * 名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Name?: string;
+    /**
+     * 状态
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Status?: string;
+}
+/**
+ * waf实例详情
+ */
+export interface WafInstanceDetail {
+    /**
+     * 域名
+     */
+    Domain?: string;
+    /**
+     * 证书ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CertId?: string;
+    /**
+     * 是否保持长连接，1是，0 否
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Keepalive?: number;
+}
+/**
  * DescribeCertificates请求参数结构体
  */
 export interface DescribeCertificatesRequest {
@@ -2282,6 +2602,24 @@ export interface UpdateCertificateRecordRollbackRequest {
      * 待重试部署记录ID
      */
     DeployRecordId?: number;
+}
+/**
+ * apigateway实例详情 - 异步关联云资源数据结构
+ */
+export interface ApiGatewayInstanceList {
+    /**
+     * 地域
+     */
+    Region?: string;
+    /**
+     * apigateway实例详情
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InstanceList?: Array<ApiGatewayInstanceDetail>;
+    /**
+     * 该地域下apigateway实例总数
+     */
+    TotalCount?: number;
 }
 /**
  * teo实例详情
@@ -2919,6 +3257,24 @@ export interface DescribeHostVodInstanceListResponse {
     RequestId?: string;
 }
 /**
+ * waf实例详情 - 异步关联云资源数据结构
+ */
+export interface WafInstanceList {
+    /**
+     * 地域
+     */
+    Region?: string;
+    /**
+     * waf实例详情
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InstanceList?: Array<WafInstanceDetail>;
+    /**
+     * 该地域下waf实例总数
+     */
+    TotalCount?: number;
+}
+/**
  * ModifyCertificatesExpiringNotificationSwitch请求参数结构体
  */
 export interface ModifyCertificatesExpiringNotificationSwitchRequest {
@@ -3067,6 +3423,19 @@ export interface VerifyManagerRequest {
     ManagerId: number;
 }
 /**
+ * 证书异步任务ID
+ */
+export interface CertTaskId {
+    /**
+     * 证书ID
+     */
+    CertId?: string;
+    /**
+     * 异步任务ID
+     */
+    TaskId?: string;
+}
+/**
  * DescribeHostLiveInstanceList返回参数结构体
  */
 export interface DescribeHostLiveInstanceListResponse {
@@ -3104,6 +3473,35 @@ export interface DescribeHostApiGatewayInstanceListRequest {
      * 已部署的证书ID
      */
     OldCertificateId?: string;
+}
+/**
+ * TCB访问服务列表
+ */
+export interface TCBAccessService {
+    /**
+     * 实例列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InstanceList?: Array<TCBAccessInstance>;
+    /**
+     * 数量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TotalCount?: number;
+}
+/**
+ * ddos实例详情 - 异步关联云资源数据结构
+ */
+export interface DdosInstanceList {
+    /**
+     * 该地域下ddos域名总数
+     */
+    TotalCount?: number;
+    /**
+     * ddos实例详情
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InstanceList?: Array<DdosInstanceDetail>;
 }
 /**
  * 获取证书列表（DescribeCertificate）返回参数键为 SubmittedData 的内容。
@@ -3253,6 +3651,20 @@ export interface DescribeCompaniesRequest {
     CompanyId?: number;
 }
 /**
+ * tcb地域实例详情 - 异步关联云资源数据结构
+ */
+export interface TCBInstanceList {
+    /**
+     * 地域
+     */
+    Region?: string;
+    /**
+     * tcb环境实例详情
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Environments?: Array<TCBEnvironments>;
+}
+/**
  * DescribeHostCosInstanceList请求参数结构体
  */
 export interface DescribeHostCosInstanceListRequest {
@@ -3387,6 +3799,20 @@ export interface ApiGatewayInstanceDetail {
      * 使用协议
      */
     Protocol: string;
+}
+/**
+ * live实例详情 - 异步关联云资源数据结构
+ */
+export interface LiveInstanceList {
+    /**
+     * 该地域下live实例总数
+     */
+    TotalCount?: number;
+    /**
+     * live实例详情
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InstanceList?: Array<LiveInstanceDetail>;
 }
 /**
  * DeleteCertificate请求参数结构体
@@ -3697,6 +4123,21 @@ export interface CreateCertificateResponse {
     RequestId?: string;
 }
 /**
+ * 错误异常
+ */
+export interface Error {
+    /**
+     * 异常错误码
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Code?: string;
+    /**
+     * 异常错误信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Message?: string;
+}
+/**
  * 部署记录信息
  */
 export interface UpdateRecordInfo {
@@ -3766,6 +4207,20 @@ export interface DeployCertificateRecordRetryRequest {
     DeployRecordDetailId?: number;
 }
 /**
+ * DescribeCertificateBindResourceTaskResult返回参数结构体
+ */
+export interface DescribeCertificateBindResourceTaskResultResponse {
+    /**
+     * 异步任务绑定关联云资源结果列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SyncTaskBindResourceResult?: Array<SyncTaskBindResourceResult>;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * 获取证书列表（DescribeCertificates）返回参数键为 Certificates 下，key为 ProjectInfo 的内容。
  */
 export interface ProjectInfo {
@@ -3826,6 +4281,20 @@ export interface DescribeHostTeoInstanceListRequest {
     OldCertificateId?: string;
 }
 /**
+ * 绑定资源地域结果
+ */
+export interface BindResourceRegionResult {
+    /**
+     * 地域
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Region?: string;
+    /**
+     * 关联资源总数
+     */
+    TotalCount?: number;
+}
+/**
  * tke实例详情
  */
 export interface TkeInstanceDetail {
@@ -3877,6 +4346,44 @@ export interface SubmitCertificateInformationResponse {
     RequestId?: string;
 }
 /**
+ * tcb环境实例详情 - 异步关联云资源数据结构
+ */
+export interface TCBEnvironments {
+    /**
+     * tcb环境
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Environment?: TCBEnvironment;
+    /**
+     * 访问服务
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AccessService?: TCBAccessService;
+    /**
+     * 静态托管
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    HostService?: TCBHostService;
+}
+/**
+ * clb实例详情 - 异步关联云资源数据结构
+ */
+export interface ClbInstanceList {
+    /**
+     * 地域
+     */
+    Region?: string;
+    /**
+     * clb实例详情
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InstanceList?: Array<ClbInstanceDetail>;
+    /**
+     * 该地域下Clb实例总数
+     */
+    TotalCount?: number;
+}
+/**
  * UpdateCertificateRecordRetry返回参数结构体
  */
 export interface UpdateCertificateRecordRetryResponse {
@@ -3917,6 +4424,21 @@ export interface DescribePackagesRequest {
      * 子产品编号
      */
     Pid?: number;
+}
+/**
+ * TCB静态托管服务列表
+ */
+export interface TCBHostService {
+    /**
+     * 实例列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InstanceList?: Array<TCBHostInstance>;
+    /**
+     * 数量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TotalCount?: number;
 }
 /**
  * CheckCertificateChain请求参数结构体
@@ -4069,4 +4591,18 @@ export interface CompleteCertificateResponse {
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * vod实例详情 - 异步关联云资源数据结构
+ */
+export interface VODInstanceList {
+    /**
+     * vod实例详情
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InstanceList?: Array<VodInstanceDetail>;
+    /**
+     * 该地域下vod实例总数
+     */
+    TotalCount?: number;
 }

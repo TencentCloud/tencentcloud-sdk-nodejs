@@ -3943,55 +3943,60 @@ export interface ExportInfo {
   /**
    * 日志主题ID
    */
-  TopicId: string
+  TopicId?: string
   /**
    * 日志导出任务ID
    */
-  ExportId: string
+  ExportId?: string
   /**
    * 日志导出查询语句
    */
-  Query: string
+  Query?: string
   /**
    * 日志导出文件名
    */
-  FileName: string
+  FileName?: string
   /**
    * 日志文件大小
    */
-  FileSize: number
+  FileSize?: number
   /**
    * 日志导出时间排序
    */
-  Order: string
+  Order?: string
   /**
    * 日志导出格式
    */
-  Format: string
+  Format?: string
   /**
    * 日志导出数量
    */
-  Count: number
+  Count?: number
   /**
    * 日志下载状态。Processing:导出正在进行中，Completed:导出完成，Failed:导出失败，Expired:日志导出已过期(三天有效期), Queuing 排队中
    */
-  Status: string
+  Status?: string
   /**
    * 日志导出起始时间
    */
-  From: number
+  From?: number
   /**
    * 日志导出结束时间
    */
-  To: number
+  To?: number
   /**
    * 日志导出路径
    */
-  CosPath: string
+  CosPath?: string
   /**
    * 日志导出创建时间
    */
-  CreateTime: string
+  CreateTime?: string
+  /**
+   * 语法规则。 默认值为0。
+0：Lucene语法，1：CQL语法。
+   */
+  SyntaxRule?: number
 }
 
 /**
@@ -5322,35 +5327,40 @@ export interface MachineInfo {
   /**
    * 机器的IP
    */
-  Ip: string
+  Ip?: string
+  /**
+   * 机器实例ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceID?: string
   /**
    * 机器状态，0:异常，1:正常
    */
-  Status: number
+  Status?: number
   /**
    * 机器离线时间，空为正常，异常返回具体时间
    */
-  OfflineTime: string
+  OfflineTime?: string
   /**
    * 机器是否开启自动升级。0:关闭，1:开启
    */
-  AutoUpdate: number
+  AutoUpdate?: number
   /**
    * 机器当前版本号。
    */
-  Version: string
+  Version?: string
   /**
    * 机器升级功能状态。
    */
-  UpdateStatus: number
+  UpdateStatus?: number
   /**
    * 机器升级结果标识。
    */
-  ErrCode: number
+  ErrCode?: number
   /**
    * 机器升级结果信息。
    */
-  ErrMsg: string
+  ErrMsg?: string
 }
 
 /**

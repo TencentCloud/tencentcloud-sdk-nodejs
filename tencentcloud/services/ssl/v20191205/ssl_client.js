@@ -52,6 +52,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeHostTkeInstanceList", req, cb);
     }
     /**
+     * 查询证书云资源更新记录列表
+     */
+    async DescribeHostUpdateRecord(req, cb) {
+        return this.request("DescribeHostUpdateRecord", req, cb);
+    }
+    /**
      * 本接口（UploadRevokeLetter）用于上传证书吊销确认函。
      */
     async UploadRevokeLetter(req, cb) {
@@ -226,10 +232,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeployCertificateRecordRetry", req, cb);
     }
     /**
-     * 查询证书云资源更新记录列表
+     * 查询CreateCertificateBindResourceSyncTask任务结果， 返回证书关联云资源异步任务结果， 支持以下云资源：clb、cdn、waf、live、vod、ddos、tke、apigateway、tcb、teo（edgeOne）
      */
-    async DescribeHostUpdateRecord(req, cb) {
-        return this.request("DescribeHostUpdateRecord", req, cb);
+    async DescribeCertificateBindResourceTaskResult(req, cb) {
+        return this.request("DescribeCertificateBindResourceTaskResult", req, cb);
     }
     /**
      * 查询证书云资源部署记录列表
@@ -310,6 +316,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateCertificateByPackage", req, cb);
     }
     /**
+     * 创建证书绑定关联云资源异步任务， 该接口用于查询证书关联云资源。 若证书ID已存在查询云资源任务，则结果返回该任务ID。关联云资源类型，支持以下云资源：clb、cdn、waf、live、vod、ddos、tke、apigateway、tcb、teo（edgeOne）。查询关联云资源结果使用DescribeCertificateBindResourceTaskResult接口
+     */
+    async CreateCertificateBindResourceSyncTask(req, cb) {
+        return this.request("CreateCertificateBindResourceSyncTask", req, cb);
+    }
+    /**
      * 修改忽略证书到期通知。打开或关闭证书到期通知。
      */
     async ModifyCertificatesExpiringNotificationSwitch(req, cb) {
@@ -338,6 +350,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeManagers(req, cb) {
         return this.request("DescribeManagers", req, cb);
+    }
+    /**
+     * 查询CreateCertificateBindResourceSyncTask任务结果， 返回证书关联云资源异步任务结果， 支持以下云资源：clb、cdn、waf、live、vod、ddos、tke、apigateway、tcb、teo（edgeOne）
+     */
+    async DescribeCertificateBindResourceTaskDetail(req, cb) {
+        return this.request("DescribeCertificateBindResourceTaskDetail", req, cb);
     }
 }
 exports.Client = Client;

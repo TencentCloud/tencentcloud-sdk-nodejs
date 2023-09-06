@@ -20,6 +20,7 @@ import { ClientConfig } from "../../../common/interface"
 import {
   ModifyAlarmPolicyInfoRequest,
   AlarmPolicyTriggerTask,
+  DescribePrometheusRegionsResponse,
   DescribePolicyGroupListResponse,
   DescribePrometheusInstancesOverviewRequest,
   ModifyGrafanaInstanceResponse,
@@ -217,6 +218,7 @@ import {
   DeleteSSOAccountResponse,
   DescribePolicyGroupListGroup,
   GrafanaAccountInfo,
+  DescribePrometheusRegionsRequest,
   DescribeBindingPolicyObjectListInstanceGroup,
   ModifyAlarmPolicyTasksRequest,
   GetPrometheusAgentManagementCommandRequest,
@@ -273,7 +275,7 @@ import {
   ModifyAlarmPolicyConditionResponse,
   DescribePrometheusInstancesOverviewResponse,
   MetricSet,
-  PrometheusInstanceGrantInfo,
+  DescribePrometheusRecordRuleYamlResponse,
   TemplateGroup,
   DescribeBindingPolicyObjectListInstance,
   UpdateGrafanaIntegrationResponse,
@@ -292,7 +294,7 @@ import {
   DescribeAccidentEventListAlarms,
   CreatePrometheusGlobalNotificationResponse,
   DescribeAlarmHistoriesRequest,
-  DescribePrometheusRecordRuleYamlResponse,
+  PrometheusInstanceGrantInfo,
   DeletePolicyGroupRequest,
   EnableSSOCamCheckRequest,
   DeleteGrafanaIntegrationResponse,
@@ -344,6 +346,7 @@ import {
   DeleteServiceDiscoveryRequest,
   DescribeInstalledPluginsResponse,
   UpdateGrafanaConfigResponse,
+  PrometheusRegionItem,
   ModifyPrometheusInstanceAttributesRequest,
   DescribePrometheusConfigResponse,
   UpdateGrafanaEnvironmentsResponse,
@@ -1623,6 +1626,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribePrometheusTargetsTMPResponse) => void
   ): Promise<DescribePrometheusTargetsTMPResponse> {
     return this.request("DescribePrometheusTargetsTMP", req, cb)
+  }
+
+  /**
+   * 列出 Prometheus 服务所有可用的地域
+   */
+  async DescribePrometheusRegions(
+    req: DescribePrometheusRegionsRequest,
+    cb?: (error: string, rep: DescribePrometheusRegionsResponse) => void
+  ): Promise<DescribePrometheusRegionsResponse> {
+    return this.request("DescribePrometheusRegions", req, cb)
   }
 
   /**

@@ -2302,93 +2302,93 @@ export interface InstanceTypeQuotaItem {
   /**
    * 可用区。
    */
-  Zone: string
+  Zone?: string
   /**
    * 实例机型。
    */
-  InstanceType: string
+  InstanceType?: string
   /**
    * 实例计费模式。取值范围： <br><li>PREPAID：表示预付费，即包年包月<br><li>POSTPAID_BY_HOUR：表示后付费，即按量计费<br><li>CDHPAID：表示[专用宿主机](https://cloud.tencent.com/document/product/416)付费，即只对`专用宿主机`计费，不对`专用宿主机`上的实例计费。<br><li>`SPOTPAID`：表示竞价实例付费。
    */
-  InstanceChargeType: string
+  InstanceChargeType?: string
   /**
    * 网卡类型，例如：25代表25G网卡
    */
-  NetworkCard: number
+  NetworkCard?: number
   /**
    * 扩展属性。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Externals: Externals
+  Externals?: Externals
   /**
    * 实例的CPU核数，单位：核。
    */
-  Cpu: number
+  Cpu?: number
   /**
    * 实例内存容量，单位：`GB`。
    */
-  Memory: number
+  Memory?: number
   /**
    * 实例机型系列。
    */
-  InstanceFamily: string
+  InstanceFamily?: string
   /**
    * 机型名称。
    */
-  TypeName: string
+  TypeName?: string
   /**
    * 本地磁盘规格列表。当该参数返回为空值时，表示当前情况下无法创建本地盘。
    */
-  LocalDiskTypeList: Array<LocalDiskType>
+  LocalDiskTypeList?: Array<LocalDiskType>
   /**
    * 实例是否售卖。取值范围： <br><li>SELL：表示实例可购买<br><li>SOLD_OUT：表示实例已售罄。
    */
-  Status: string
+  Status?: string
   /**
    * 实例的售卖价格。
    */
-  Price: ItemPrice
+  Price?: ItemPrice
   /**
    * 售罄原因。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SoldOutReason: string
+  SoldOutReason?: string
   /**
    * 内网带宽，单位Gbps。
    */
-  InstanceBandwidth: number
+  InstanceBandwidth?: number
   /**
    * 网络收发包能力，单位万PPS。
    */
-  InstancePps: number
+  InstancePps?: number
   /**
    * 本地存储块数量。
    */
-  StorageBlockAmount: number
+  StorageBlockAmount?: number
   /**
    * 处理器型号。
    */
-  CpuType: string
+  CpuType?: string
   /**
    * 实例的GPU数量。
    */
-  Gpu: number
+  Gpu?: number
   /**
    * 实例的FPGA数量。
    */
-  Fpga: number
+  Fpga?: number
   /**
    * 实例备注信息。
    */
-  Remark: string
+  Remark?: string
   /**
    * 实例机型映射的物理GPU卡数，单位：卡。vGPU卡型小于1，直通卡型大于等于1。vGPU是通过分片虚拟化技术，将物理GPU卡重新划分，同一块GPU卡经虚拟化分割后可分配至不同的实例使用。直通卡型会将GPU设备直接挂载给实例使用。
    */
-  GpuCount: number
+  GpuCount?: number
   /**
    * 实例的CPU主频信息
    */
-  Frequency: string
+  Frequency?: string
 }
 
 /**
