@@ -111,16 +111,17 @@ export interface CancelFlowResponse {
  */
 export interface DescribeFlowEvidenceReportRequest {
     /**
-     * 调用方用户信息，userId 必填
+     * 执行本接口操作的员工信息。
+  注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。`
      */
     Operator: UserInfo;
     /**
-     * 出证报告编号
+     * 签署报告编号
      */
     ReportId: string;
     /**
-     * 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填
-  
+     * 代理企业和员工的信息。
+  在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。
      */
     Agent?: Agent;
 }
@@ -325,12 +326,16 @@ export interface CreateMultiFlowSignQRCodeResponse {
  */
 export interface FlowApproverUrlInfo {
     /**
-     * 签署链接。注意该链接有效期为30分钟，同时需要注意保密，不要外泄给无关用户。
+     * 签署链接(短链形式呈现)。请注意保密，不要将其外泄给无关用户。
+  注: `注意该链接有效期为30分钟`
   注意：此字段可能返回 null，表示取不到有效值。
      */
     SignUrl?: string;
     /**
-     * 签署人类型 1-个人
+     * 签署参与人类型
+  <ul><li> **1** :个人参与方</li></ul>
+  
+  注: `现在仅支持个人参与方`
   注意：此字段可能返回 null，表示取不到有效值。
      */
     ApproverType?: number;
@@ -345,7 +350,8 @@ export interface FlowApproverUrlInfo {
      */
     ApproverMobile?: string;
     /**
-     * 签署长链接。注意该链接有效期为30分钟，同时需要注意保密，不要外泄给无关用户。
+     * 签署链接(长链形式呈现)。请注意保密，不要将其外泄给无关用户。
+  注: `注意该链接有效期为30分钟`
   注意：此字段可能返回 null，表示取不到有效值。
      */
     LongUrl?: string;
@@ -940,11 +946,12 @@ export interface DescribeFlowEvidenceReportResponse {
      */
     ReportUrl?: string;
     /**
-     * 出证任务执行的状态, 分布表示下面的含义
-  
-  EvidenceStatusExecuting  出证任务在执行中
-  EvidenceStatusSuccess  出证任务执行成功
-  EvidenceStatusFailed  出证任务执行失败
+     * 签署报告出证任务的状态
+  <ul>
+  <li>EvidenceStatusExecuting : 出证任务在执行中</li>
+  <li>EvidenceStatusSuccess : 出证任务执行成功</li>
+  <li>EvidenceStatusFailed : 出证任务执行失败</li>
+  </ul>
      */
     Status?: string;
     /**
@@ -1432,6 +1439,7 @@ export interface DescribeIntegrationMainOrganizationUserRequest {
 export interface CreateReleaseFlowResponse {
     /**
      * 解除协议流程编号
+  `注意：这里的流程编号对应的合同是本次发起的解除协议。`
   
      */
     FlowId?: string;
@@ -1917,18 +1925,22 @@ export interface CreateBatchCancelFlowUrlResponse {
  */
 export interface UserThreeFactor {
     /**
-     * 姓名
+     * 签署方经办人的姓名。
+  经办人的姓名将用于身份认证和电子签名，请确保填写的姓名为签署方的真实姓名，而非昵称等代名。
      */
     Name: string;
     /**
-     * 证件类型:
-  ID_CARD 身份证
-  HONGKONG_AND_MACAO 港澳居民来往内地通行证
-  HONGKONG_MACAO_AND_TAIWAN 港澳台居民居住证(格式同居民身份证)
+     * 证件类型，支持以下类型
+  <ul><li>ID_CARD : 居民身份证 (默认值)</li>
+  <li>HONGKONG_AND_MACAO : 港澳居民来往内地通行证</li>
+  <li>HONGKONG_MACAO_AND_TAIWAN : 港澳台居民居住证(格式同居民身份证)</li></ul>
      */
     IdCardType: string;
     /**
-     * 证件号，如果有 X 请大写
+     * 证件号码，应符合以下规则
+  <ul><li>居民身份证号码应为18位字符串，由数字和大写字母X组成（如存在X，请大写）。</li>
+  <li>港澳居民来往内地通行证号码应为9位字符串，第1位为“C”，第2位为英文字母（但“I”、“O”除外），后7位为阿拉伯数字。</li>
+  <li>港澳台居民居住证号码编码规则与中国大陆身份证相同，应为18位字符串。</li></ul>
      */
     IdCardNumber: string;
 }
@@ -3515,21 +3527,27 @@ export interface CreateFlowByFilesRequest {
  */
 export interface CreateFlowSignUrlRequest {
     /**
-     * 流程编号
+     * 合同流程ID，为32位字符串。
+  建议开发者妥善保存此流程ID，以便于顺利进行后续操作。
+  可登录腾讯电子签控制台，在 "合同"->"合同中心" 中查看某个合同的FlowId(在页面中展示为合同ID)。
      */
     FlowId: string;
     /**
-     * 流程签署人列表，其中结构体的ApproverName，ApproverMobile和ApproverType必传，其他可不传，ApproverType目前只支持个人类型的签署人。
+     * 流程签署人列表，其中结构体的ApproverName，ApproverMobile和ApproverType必传，其他可不传，
   
-  签署人只能有手写签名和时间类型的签署控件，其他类型的填写控件和签署控件暂时都未支持。
+  注:
+  `1. ApproverType目前只支持个人类型的签署人。`
+  `2. 签署人只能有手写签名和时间类型的签署控件，其他类型的填写控件和签署控件暂时都未支持。`
      */
     FlowApproverInfos: Array<FlowCreateApprover>;
     /**
-     * 用户信息，此结构体UserId必填
+     * 执行本接口操作的员工信息。
+  注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。`
      */
     Operator?: UserInfo;
     /**
-     * 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填
+     * 代理企业和员工的信息。
+  在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。
      */
     Agent?: Agent;
     /**
@@ -3538,7 +3556,7 @@ export interface CreateFlowSignUrlRequest {
      */
     Organization?: OrganizationInfo;
     /**
-     * 签署完之后的H5页面的跳转链接，此链接支持http://和https://，最大长度1000个字符。
+     * 签署完之后的H5页面的跳转链接，此链接及支持http://和https://，最大长度1000个字符。(建议https协议)
      */
     JumpUrl?: string;
 }
@@ -3547,31 +3565,42 @@ export interface CreateFlowSignUrlRequest {
  */
 export interface CreateReleaseFlowRequest {
     /**
-     * 调用方用户信息，userId 必填
+     * 执行本接口操作的员工信息。
+  注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。`
      */
     Operator: UserInfo;
     /**
-     * 待解除的签署流程编号（即原签署流程的编号）
+     * 待解除的签署流程编号（即原签署流程的编号）。
      */
     NeedRelievedFlowId: string;
     /**
-     * 解除协议内容
+     * 解除协议内容。
      */
     ReliveInfo: RelieveInfo;
     /**
-     * 非必须，解除协议的本企业签署人列表，
-  默认使用原流程的签署人列表,当解除协议的签署人与原流程的签署人不能相同时（例如原流程签署人离职了），需要指定本企业其他已实名员工来替换原流程中的原签署人，注意需要指明原签署人的编号(ReceiptId,通过DescribeFlowInfo接口获取)来代表需要替换哪一个签署人
-  解除协议的签署人数量不能多于原流程的签署人数量
+     * 关于渠道应用的相关信息，包括子客企业及应用编、号等详细内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。
+     */
+    Agent?: Agent;
+    /**
+     * 解除协议的签署人列表(如不指定该参数，默认使用原流程的签署人列表)。 <br/>
+  如需更换原合同中的签署人，可通过指定该签署人的RecipientId编号更换此签署人。(可通过接口<a href="https://qian.tencent.com/developers/companyApis/queryFlows/DescribeFlowInfo/">DescribeFlowInfo</a>查询签署人的RecipientId编号)<br/>
+  解除协议的签署人数量不能多于原流程的签署人数量。<br/>
+  
+  `注意：只能更换同企业的签署人。`<br/>
+  `注意：不支持更换个人类型的签署人。`<br/>
      */
     ReleasedApprovers?: Array<ReleasedApprover>;
     /**
-     * 签署流程的签署截止时间。 值为unix时间戳,精确到秒,不传默认为当前时间七天后
+     * 合同流程的签署截止时间，格式为Unix标准时间戳（秒），如果未设置签署截止时间，则默认为合同流程创建后的7天时截止。
+  如果在签署截止时间前未完成签署，则合同状态会变为已过期，导致合同作废。
      */
     Deadline?: number;
     /**
-     * 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填
+     * 调用方自定义的个性化字段(可自定义此字段的值)，并以base64方式编码，支持的最大数据大小为 20480长度。
+  在合同状态变更的回调信息等场景中，该字段的信息将原封不动地透传给贵方。
+  回调的相关说明可参考开发者中心的<a href="https://qian.tencent.com/developers/company/callback_types_v2" target="_blank">回调通知</a>模块。
      */
-    Agent?: Agent;
+    UserData?: string;
 }
 /**
  * CreateIntegrationUserRoles请求参数结构体
@@ -4129,11 +4158,15 @@ export interface RemindFlowRecords {
  */
 export interface CancelUserAutoSignEnableUrlRequest {
     /**
-     * 操作人信息，UseId必填
+     * 执行本接口操作的员工信息。
+  注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。`
      */
     Operator: UserInfo;
     /**
-     * 自动签场景: E_PRESCRIPTION_AUTO_SIGN 电子处方
+     * 企业开通用户自动签场景，例如电子处方。
+  <ul>
+  <li>E_PRESCRIPTION_AUTO_SIGN : 电子处方</li>
+  </ul>
      */
     SceneKey: string;
     /**
@@ -4141,6 +4174,11 @@ export interface CancelUserAutoSignEnableUrlRequest {
   
      */
     UserInfo: UserThreeFactor;
+    /**
+     * 代理企业和员工的信息。
+  在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。
+     */
+    Agent?: Agent;
 }
 /**
  * 创建员工的失败数据
@@ -4351,15 +4389,17 @@ export interface GetTaskResultApiResponse {
  */
 export interface CancelMultiFlowSignQRCodeRequest {
     /**
-     * 调用方用户信息，userId 必填
+     * 执行本接口操作的员工信息。
+  注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。
      */
     Operator: UserInfo;
     /**
-     * 二维码id
+     * 二维码ID，为32位字符串。
      */
     QrCodeId: string;
     /**
-     * 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填
+     * 代理企业和员工的信息。
+  在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。
      */
     Agent?: Agent;
 }
@@ -4737,19 +4777,22 @@ export interface PermissionGroup {
  */
 export interface CancelFlowRequest {
     /**
-     * 调用方用户信息，userId 必填
+     * 执行本接口操作的员工信息。
+  注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。`
      */
     Operator: UserInfo;
     /**
-     * 签署流程id
+     * 合同流程ID, 为32位字符串。
+  建议开发者保存此流程ID方便后续其他操作。
      */
     FlowId: string;
     /**
-     * 撤销原因，最长200个字符；
+     * 撤销此合同(流程)的原因，最长200个字。
      */
     CancelMessage: string;
     /**
-     * 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填
+     * 代理企业和员工的信息。
+  在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。
      */
     Agent?: Agent;
 }

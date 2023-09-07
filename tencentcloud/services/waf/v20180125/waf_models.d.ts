@@ -1763,6 +1763,19 @@ export interface DeleteHostResponse {
     RequestId?: string;
 }
 /**
+ * FreshAntiFakeUrl返回参数结构体
+ */
+export interface FreshAntiFakeUrlResponse {
+    /**
+     * 结果成功与否
+     */
+    Result?: string;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * ModifyBotStatus请求参数结构体
  */
 export interface ModifyBotStatusRequest {
@@ -2144,6 +2157,19 @@ export interface UserDomainInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Cls: number;
+}
+/**
+ * FreshAntiFakeUrl请求参数结构体
+ */
+export interface FreshAntiFakeUrlRequest {
+    /**
+     * 域名
+     */
+    Domain: string;
+    /**
+     * Id
+     */
+    Id: number;
 }
 /**
  * DescribeFindDomainList返回参数结构体

@@ -36,7 +36,7 @@ export declare class Client extends AbstractClient {
      */
     DeleteExtension(req: DeleteExtensionRequest, cb?: (error: string, rep: DeleteExtensionResponse) => void): Promise<DeleteExtensionResponse>;
     /**
-     * 绑定坐席所属技能组
+     * 绑定座席所属技能组
      */
     BindStaffSkillGroupList(req: BindStaffSkillGroupListRequest, cb?: (error: string, rep: BindStaffSkillGroupListResponse) => void): Promise<BindStaffSkillGroupListResponse>;
     /**

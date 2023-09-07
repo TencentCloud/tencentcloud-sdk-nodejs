@@ -70,7 +70,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteExtension", req, cb);
     }
     /**
-     * 绑定坐席所属技能组
+     * 绑定座席所属技能组
      */
     async BindStaffSkillGroupList(req, cb) {
         return this.request("BindStaffSkillGroupList", req, cb);

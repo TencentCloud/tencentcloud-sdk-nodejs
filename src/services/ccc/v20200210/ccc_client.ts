@@ -87,6 +87,7 @@ import {
   Variable,
   CallInNumberMetrics,
   CreateExtensionRequest,
+  StaffSkillGroupList,
   CreateAutoCalloutTaskRequest,
   Filter,
   UnbindStaffSkillGroupListRequest,
@@ -212,7 +213,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 绑定坐席所属技能组
+   * 绑定座席所属技能组
    */
   async BindStaffSkillGroupList(
     req: BindStaffSkillGroupListRequest,

@@ -115,6 +115,7 @@ import {
   CreateHostResponse,
   IpAccessControlItem,
   DeleteHostResponse,
+  FreshAntiFakeUrlResponse,
   ModifyBotStatusRequest,
   DeleteSpartaProtectionRequest,
   DomainsPartInfo,
@@ -124,6 +125,7 @@ import {
   HostRecord,
   CreateHostRequest,
   UserDomainInfo,
+  FreshAntiFakeUrlRequest,
   DescribeFindDomainListResponse,
   DescribeWafInfoRequest,
   SpartaProtectionPort,
@@ -1311,6 +1313,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: UpsertSessionResponse) => void
   ): Promise<UpsertSessionResponse> {
     return this.request("UpsertSession", req, cb)
+  }
+
+  /**
+   * 刷新防篡改url
+   */
+  async FreshAntiFakeUrl(
+    req: FreshAntiFakeUrlRequest,
+    cb?: (error: string, rep: FreshAntiFakeUrlResponse) => void
+  ): Promise<FreshAntiFakeUrlResponse> {
+    return this.request("FreshAntiFakeUrl", req, cb)
   }
 
   /**

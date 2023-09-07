@@ -1018,6 +1018,16 @@ it("waf.v20180125.UpsertSession", async function () {
     }
 })
 
+it("waf.v20180125.FreshAntiFakeUrl", async function () {
+    try {
+       const data = await client.FreshAntiFakeUrl({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("waf.v20180125.AddDomainWhiteRule", async function () {
     try {
        const data = await client.AddDomainWhiteRule({})

@@ -479,6 +479,7 @@ export interface TuberInfo {
   /**
    * 峡部厚度
 注意：此字段可能返回 null，表示取不到有效值。
+   * @deprecated
    */
   IsthmusThicknese?: Size
   /**
@@ -546,6 +547,11 @@ export interface TuberInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Coords?: Array<Coord>
+  /**
+   * 峡部厚度
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsthmusThickness?: Size
 }
 
 /**
@@ -1105,6 +1111,7 @@ export interface Organ {
   /**
    * 峡部厚度
 注意：此字段可能返回 null，表示取不到有效值。
+   * @deprecated
    */
   IsthmusThicknese?: Size
   /**
@@ -1197,6 +1204,11 @@ export interface Organ {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Coords?: Array<Coord>
+  /**
+   * 峡部厚度
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsthmusThickness?: Size
 }
 
 /**
@@ -2097,127 +2109,132 @@ export interface ReportInfo {
    * 医院名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Hospital: string
+  Hospital?: string
   /**
    * 科室名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DepartmentName: string
+  DepartmentName?: string
   /**
    * 申请时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  BillingTime: string
+  BillingTime?: string
   /**
    * 报告时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ReportTime: string
+  ReportTime?: string
   /**
    * 检查时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  InspectTime: string
+  InspectTime?: string
   /**
    * 检查号
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CheckNum: string
+  CheckNum?: string
   /**
    * 影像号
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ImageNum: string
+  ImageNum?: string
   /**
    * 放射号
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RadiationNum: string
+  RadiationNum?: string
   /**
    * 检验号
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TestNum: string
+  TestNum?: string
   /**
    * 门诊号
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  OutpatientNum: string
+  OutpatientNum?: string
   /**
    * 病理号
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  PathologyNum: string
+  PathologyNum?: string
   /**
    * 住院号
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  InHospitalNum: string
+  InHospitalNum?: string
   /**
    * 样本号
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SampleNum: string
+  SampleNum?: string
   /**
    * 标本种类
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SampleType: string
+  SampleType?: string
   /**
    * 病历号
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  MedicalRecordNum: string
+  MedicalRecordNum?: string
   /**
    * 报告名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ReportName: string
+  ReportName?: string
   /**
    * 超声号
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  UltraNum: string
+  UltraNum?: string
   /**
    * 临床诊断
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Diagnose: string
+  Diagnose?: string
   /**
    * 检查项目
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CheckItem: string
+  CheckItem?: string
   /**
    * 检查方法
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CheckMethod: string
+  CheckMethod?: string
   /**
    * 诊断时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DiagnoseTime: string
+  DiagnoseTime?: string
   /**
    * 体检号
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  HealthCheckupNum: string
+  HealthCheckupNum?: string
   /**
    * 其它时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  OtherTime: string
+  OtherTime?: string
   /**
    * 打印时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  PrintTime: string
+  PrintTime?: string
   /**
    * 未归类时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Times: Array<Time>
+  Times?: Array<Time>
+  /**
+   * 床号
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BedNo?: string
 }
 
 /**
@@ -4157,6 +4174,7 @@ export interface ParagraphBlock {
   /**
    * 月经史
 注意：此字段可能返回 null，表示取不到有效值。
+   * @deprecated
    */
   MenstruallHistoryText?: string
   /**
@@ -4199,6 +4217,11 @@ export interface ParagraphBlock {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TreatmentResultText?: string
+  /**
+   * 月经史
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MenstrualHistoryText?: string
 }
 
 /**

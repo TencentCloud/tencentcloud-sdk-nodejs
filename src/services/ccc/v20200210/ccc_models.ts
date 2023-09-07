@@ -1937,6 +1937,20 @@ export interface CreateExtensionRequest {
 }
 
 /**
+ * 座席绑定技能组列表
+ */
+export interface StaffSkillGroupList {
+  /**
+   * 技能组ID
+   */
+  SkillGroupId: number
+  /**
+   * 座席在技能组中的优先级（1为最高，5最低，默认3）
+   */
+  Priority?: number
+}
+
+/**
  * CreateAutoCalloutTask请求参数结构体
  */
 export interface CreateAutoCalloutTaskRequest {
@@ -2219,13 +2233,18 @@ export interface BindStaffSkillGroupListRequest {
    */
   SdkAppId: number
   /**
-   * 坐席邮箱
+   * 座席邮箱
    */
   StaffEmail: string
   /**
    * 绑定技能组列表
+   * @deprecated
    */
-  SkillGroupList: Array<number | bigint>
+  SkillGroupList?: Array<number | bigint>
+  /**
+   * 绑定技能组列表(必填)
+   */
+  StaffSkillGroupList?: Array<StaffSkillGroupList>
 }
 
 /**

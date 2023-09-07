@@ -637,6 +637,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UpsertSession", req, cb);
     }
     /**
+     * 刷新防篡改url
+     */
+    async FreshAntiFakeUrl(req, cb) {
+        return this.request("FreshAntiFakeUrl", req, cb);
+    }
+    /**
      * 增加域名规则白名单
      */
     async AddDomainWhiteRule(req, cb) {
