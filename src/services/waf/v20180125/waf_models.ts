@@ -974,26 +974,21 @@ export interface AccessLogItem {
 }
 
 /**
- * SwitchDomainRules请求参数结构体
+ * DescribeDomainVerifyResult返回参数结构体
  */
-export interface SwitchDomainRulesRequest {
+export interface DescribeDomainVerifyResultResponse {
   /**
-   * 域名
+   * 结果描述；如果可以添加返回空字符串
    */
-  Domain?: string
+  Msg?: string
   /**
-   * 规则列表
+   * 检验状态：0表示可以添加，大于0为不能添加
    */
-  Ids?: Array<number | bigint>
+  VerifyCode?: number
   /**
-   * 开关状态，0表示关闭，1表示开启，2表示只观察
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  Status?: number
-  /**
-   * 设置为观察模式原因，
-1表示业务自身原因观察，2表示系统规则误报上报，3表示核心业务灰度观察，4表示其他
-   */
-  Reason?: number
+  RequestId?: string
 }
 
 /**
@@ -1318,20 +1313,6 @@ export interface DeleteAccessExportResponse {
 }
 
 /**
- * AddSpartaProtectionsAuto返回参数结构体
- */
-export interface AddSpartaProtectionsAutoResponse {
-  /**
-   * 失败原因
-   */
-  FailedInfos?: Array<FailedInfo>
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * DescribeAccessExports请求参数结构体
  */
 export interface DescribeAccessExportsRequest {
@@ -1505,22 +1486,6 @@ export interface ModifyHostModeResponse {
 }
 
 /**
- * 失败描述
- */
-export interface FailedInfo {
-  /**
-   * 域名
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Domain?: string
-  /**
-   * 失败信息
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Message?: string
-}
-
-/**
  * DescribeCCRuleList请求参数结构体
  */
 export type DescribeCCRuleListRequest = null
@@ -1590,16 +1555,6 @@ export interface DescribeAutoDenyIPRequest {
 }
 
 /**
- * AddSpartaProtectionAuto返回参数结构体
- */
-export interface AddSpartaProtectionAutoResponse {
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * ModifyWafAutoDenyStatus请求参数结构体
  */
 export interface ModifyWafAutoDenyStatusRequest {
@@ -1635,6 +1590,29 @@ export interface ModifyDomainsCLSStatusResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * SwitchDomainRules请求参数结构体
+ */
+export interface SwitchDomainRulesRequest {
+  /**
+   * 域名
+   */
+  Domain?: string
+  /**
+   * 规则列表
+   */
+  Ids?: Array<number | bigint>
+  /**
+   * 开关状态，0表示关闭，1表示开启，2表示只观察
+   */
+  Status?: number
+  /**
+   * 设置为观察模式原因，
+1表示业务自身原因观察，2表示系统规则误报上报，3表示核心业务灰度观察，4表示其他
+   */
+  Reason?: number
 }
 
 /**
@@ -3090,6 +3068,20 @@ export interface DeleteDomainWhiteRulesRequest {
 }
 
 /**
+ * DescribeDomainVerifyResult请求参数结构体
+ */
+export interface DescribeDomainVerifyResultRequest {
+  /**
+   * 域名
+   */
+  Domain: string
+  /**
+   * 实例id
+   */
+  InstanceID: string
+}
+
+/**
  * DescribeTlsVersion请求参数结构体
  */
 export type DescribeTlsVersionRequest = null
@@ -4342,16 +4334,6 @@ export interface ModifyApiAnalyzeStatusRequest {
 }
 
 /**
- * AddSpartaProtectionsAuto请求参数结构体
- */
-export interface AddSpartaProtectionsAutoRequest {
-  /**
-   * 多域名
-   */
-  Domain: string
-}
-
-/**
  * AddCustomRule请求参数结构体
  */
 export interface AddCustomRuleRequest {
@@ -4999,16 +4981,6 @@ export interface Strategy {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Arg: string
-}
-
-/**
- * AddSpartaProtectionAuto请求参数结构体
- */
-export interface AddSpartaProtectionAutoRequest {
-  /**
-   * 域名
-   */
-  Domain: string
 }
 
 /**

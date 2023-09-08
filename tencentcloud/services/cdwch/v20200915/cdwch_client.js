@@ -64,16 +64,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ScaleUpInstance", req, cb);
     }
     /**
+     * 获取可备份表信息
+     */
+    async DescribeBackUpTables(req, cb) {
+        return this.request("DescribeBackUpTables", req, cb);
+    }
+    /**
      * 调整clickhouse节点数量
      */
     async ScaleOutInstance(req, cb) {
         return this.request("ScaleOutInstance", req, cb);
     }
     /**
-     * 备份恢复
+     * 获取实例shard信息列表
      */
-    async RecoverBackUpJob(req, cb) {
-        return this.request("RecoverBackUpJob", req, cb);
+    async DescribeInstanceShards(req, cb) {
+        return this.request("DescribeInstanceShards", req, cb);
     }
     /**
      * 获取实例列表，供外部sdk使用
@@ -118,10 +124,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("OpenBackUp", req, cb);
     }
     /**
-     * 获取实例shard信息列表
+     * 备份恢复
      */
-    async DescribeInstanceShards(req, cb) {
-        return this.request("DescribeInstanceShards", req, cb);
+    async RecoverBackUpJob(req, cb) {
+        return this.request("RecoverBackUpJob", req, cb);
     }
     /**
      * 查询集群用户、集群表，数据库等相关信息

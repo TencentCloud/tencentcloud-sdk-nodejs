@@ -28,6 +28,16 @@ it("eb.v20210416.DeleteEventBus", async function () {
     }
 })
 
+it("eb.v20210416.GetPlatformEventTemplate", async function () {
+    try {
+       const data = await client.GetPlatformEventTemplate({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("eb.v20210416.CreateTransformation", async function () {
     try {
        const data = await client.CreateTransformation({})
@@ -68,6 +78,16 @@ it("eb.v20210416.DeleteTarget", async function () {
     }
 })
 
+it("eb.v20210416.ListPlatformEventPatterns", async function () {
+    try {
+       const data = await client.ListPlatformEventPatterns({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("eb.v20210416.ListTargets", async function () {
     try {
        const data = await client.ListTargets({})
@@ -81,6 +101,16 @@ it("eb.v20210416.ListTargets", async function () {
 it("eb.v20210416.CheckRule", async function () {
     try {
        const data = await client.CheckRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("eb.v20210416.ListPlatformProducts", async function () {
+    try {
+       const data = await client.ListPlatformProducts({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -141,6 +171,16 @@ it("eb.v20210416.ListRules", async function () {
 it("eb.v20210416.DeleteRule", async function () {
     try {
        const data = await client.DeleteRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("eb.v20210416.ListPlatformEventNames", async function () {
+    try {
+       const data = await client.ListPlatformEventNames({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

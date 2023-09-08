@@ -84,8 +84,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 人脸融合活动专用版，不推荐使用。人脸融合接口建议使用[人脸融合](https://cloud.tencent.com/document/product/670/31061)或[选脸融合](https://cloud.tencent.com/document/product/670/37736)接口
-   */
+     * 接口不再使用
+
+人脸融合活动专用版，不推荐使用。人脸融合接口建议使用[人脸融合](https://cloud.tencent.com/document/product/670/31061)或[选脸融合](https://cloud.tencent.com/document/product/670/37736)接口
+     */
   async FaceFusionLite(
     req: FaceFusionLiteRequest,
     cb?: (error: string, rep: FaceFusionLiteResponse) => void

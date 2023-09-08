@@ -34,6 +34,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteEventBus", req, cb);
     }
     /**
+     * 获取平台产品事件模板
+     */
+    async GetPlatformEventTemplate(req, cb) {
+        return this.request("GetPlatformEventTemplate", req, cb);
+    }
+    /**
      * 用于创建转换器
      */
     async CreateTransformation(req, cb) {
@@ -58,6 +64,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteTarget", req, cb);
     }
     /**
+     * 获取平台产品事件匹配规则
+     */
+    async ListPlatformEventPatterns(req, cb) {
+        return this.request("ListPlatformEventPatterns", req, cb);
+    }
+    /**
      * 获取事件目标列表
      */
     async ListTargets(req, cb) {
@@ -68,6 +80,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CheckRule(req, cb) {
         return this.request("CheckRule", req, cb);
+    }
+    /**
+     * 获取平台产品列表
+     */
+    async ListPlatformProducts(req, cb) {
+        return this.request("ListPlatformProducts", req, cb);
     }
     /**
      * （已废弃）用于Event事件投递
@@ -104,6 +122,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DeleteRule(req, cb) {
         return this.request("DeleteRule", req, cb);
+    }
+    /**
+     * 获取平台产品事件名称
+     */
+    async ListPlatformEventNames(req, cb) {
+        return this.request("ListPlatformEventNames", req, cb);
     }
     /**
      * 更新事件集

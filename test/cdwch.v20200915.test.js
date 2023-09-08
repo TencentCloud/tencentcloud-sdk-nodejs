@@ -78,6 +78,16 @@ it("cdwch.v20200915.ScaleUpInstance", async function () {
     }
 })
 
+it("cdwch.v20200915.DescribeBackUpTables", async function () {
+    try {
+       const data = await client.DescribeBackUpTables({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cdwch.v20200915.ScaleOutInstance", async function () {
     try {
        const data = await client.ScaleOutInstance({})
@@ -88,9 +98,9 @@ it("cdwch.v20200915.ScaleOutInstance", async function () {
     }
 })
 
-it("cdwch.v20200915.RecoverBackUpJob", async function () {
+it("cdwch.v20200915.DescribeInstanceShards", async function () {
     try {
-       const data = await client.RecoverBackUpJob({})
+       const data = await client.DescribeInstanceShards({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -168,9 +178,9 @@ it("cdwch.v20200915.OpenBackUp", async function () {
     }
 })
 
-it("cdwch.v20200915.DescribeInstanceShards", async function () {
+it("cdwch.v20200915.RecoverBackUpJob", async function () {
     try {
-       const data = await client.DescribeInstanceShards({})
+       const data = await client.RecoverBackUpJob({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

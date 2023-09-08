@@ -28,15 +28,6 @@ class Client extends abstract_client_1.AbstractClient {
         super("trocket.tencentcloudapi.com", "2023-03-08", clientConfig);
     }
     /**
-     * 获取主题列表，Filter参数使用说明如下：
-
-1. TopicName，主题名称模糊搜索
-2. TopicType，主题类型查询，支持多选，可选值：Normal,Order,Transaction,DelayScheduled
-     */
-    async DescribeTopicList(req, cb) {
-        return this.request("DescribeTopicList", req, cb);
-    }
-    /**
      * 获取实例列表，Filters参数使用说明如下：
 1. InstanceName, 名称模糊查询
 2. InstanceId，实例ID查询
@@ -47,6 +38,39 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeInstanceList(req, cb) {
         return this.request("DescribeInstanceList", req, cb);
+    }
+    /**
+     * 购买新实例
+     */
+    async CreateInstance(req, cb) {
+        return this.request("CreateInstance", req, cb);
+    }
+    /**
+     * 查询实例信息
+     */
+    async DescribeInstance(req, cb) {
+        return this.request("DescribeInstance", req, cb);
+    }
+    /**
+     * 删除实例
+     */
+    async DeleteInstance(req, cb) {
+        return this.request("DeleteInstance", req, cb);
+    }
+    /**
+     * 获取主题列表，Filter参数使用说明如下：
+
+1. TopicName，主题名称模糊搜索
+2. TopicType，主题类型查询，支持多选，可选值：Normal,Order,Transaction,DelayScheduled
+     */
+    async DescribeTopicList(req, cb) {
+        return this.request("DescribeTopicList", req, cb);
+    }
+    /**
+     * 修改实例属性
+     */
+    async ModifyInstance(req, cb) {
+        return this.request("ModifyInstance", req, cb);
     }
 }
 exports.Client = Client;

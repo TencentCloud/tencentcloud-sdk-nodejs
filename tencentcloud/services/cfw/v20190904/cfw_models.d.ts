@@ -53,6 +53,46 @@ export interface DescribeLogsRequest {
     Filters?: Array<CommonFilter>;
 }
 /**
+ * ModifyFwGroupSwitch请求参数结构体
+ */
+export interface ModifyFwGroupSwitchRequest {
+    /**
+     * 打开或关闭开关
+  0：关闭开关
+  1：打开开关
+     */
+    Enable: number;
+    /**
+     * 是否操作全部开关 0 不操作全部开关，1 操作全部开关
+     */
+    AllSwitch: number;
+    /**
+     * 开关列表
+     */
+    SwitchList?: Array<FwGroupSwitch>;
+}
+/**
+ * ModifySecurityGroupRule请求参数结构体
+ */
+export interface ModifySecurityGroupRuleRequest {
+    /**
+     * 方向，0：出站，1：入站，默认1
+     */
+    Direction: number;
+    /**
+     * 编辑后是否启用规则，0：不启用，1：启用，默认1
+     */
+    Enable: number;
+    /**
+     * 编辑的企业安全组规则数据
+     */
+    Data: Array<SecurityGroupListData>;
+    /**
+     * 编辑的企业安全组规则的原始执行顺序
+     */
+    SgRuleOriginSequence: number;
+}
+/**
  * ModifyNatFwVpcDnsSwitch返回参数结构体
  */
 export interface ModifyNatFwVpcDnsSwitchResponse {
@@ -147,6 +187,44 @@ export interface CfwNatDnatRule {
     Description: string;
 }
 /**
+ * 新手引导扫描信息
+ */
+export interface ScanInfo {
+    /**
+     * 扫描结果信息
+     */
+    ScanResultInfo: ScanResultInfo;
+    /**
+     * 扫描状态 0扫描中 1完成  2未勾选自动扫描
+     */
+    ScanStatus: number;
+    /**
+     * 进度
+     */
+    ScanPercent: number;
+    /**
+     * 预计完成时间
+     */
+    ScanTime: string;
+}
+/**
+ * ModifyEnterpriseSecurityGroupRule返回参数结构体
+ */
+export interface ModifyEnterpriseSecurityGroupRuleResponse {
+    /**
+     * 状态值，0：编辑成功，非0：编辑失败
+     */
+    Status: number;
+    /**
+     * 编辑后新生成规则的Id
+     */
+    NewRuleUuid: number;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * 防火墙网段信息
  */
 export interface FwCidrInfo {
@@ -234,6 +312,81 @@ export interface ModifyPublicIPSwitchStatusResponse {
     RequestId?: string;
 }
 /**
+ * AddAclRule请求参数结构体
+ */
+export interface AddAclRuleRequest {
+    /**
+     * 需要添加的访问控制规则列表
+     */
+    Rules: Array<CreateRuleItem>;
+    /**
+     * 添加规则的来源，一般不需要使用，值insert_rule 表示插入指定位置的规则；值batch_import 表示批量导入规则；为空时表示添加规则
+     */
+    From?: string;
+}
+/**
+ * DescribeVpcFwGroupSwitch请求参数结构体
+ */
+export interface DescribeVpcFwGroupSwitchRequest {
+    /**
+     * 每页条数
+     */
+    Limit: number;
+    /**
+     * 偏移值
+     */
+    Offset: number;
+    /**
+     * 过滤条件组合
+     */
+    Filters?: Array<CommonFilter>;
+    /**
+     * 检索的起始时间，可不传
+     */
+    StartTime?: string;
+    /**
+     * 检索的截止时间，可不传
+     */
+    EndTime?: string;
+    /**
+     * desc：降序；asc：升序。根据By字段的值进行排序，这里传参的话则By也必须有值
+     */
+    Order?: string;
+    /**
+     * 排序所用到的字段
+     */
+    By?: string;
+}
+/**
+ * 防火墙部署输入参数列表
+ */
+export interface FwDeploy {
+    /**
+     * 防火墙部署地域
+     */
+    DeployRegion: string;
+    /**
+     * 带宽，单位：Mbps
+     */
+    Width: number;
+    /**
+     * 异地灾备 1：使用异地灾备；0：不使用异地灾备；为空则默认不使用异地灾备
+     */
+    CrossAZone?: number;
+    /**
+     * 主可用区，为空则选择默认可用区
+     */
+    Zone?: string;
+    /**
+     * 备可用区，为空则选择默认可用区
+     */
+    ZoneBak?: string;
+    /**
+     * 若为cdc防火墙时填充该id
+     */
+    CdcId?: string;
+}
+/**
  * ModifyNatAcRule请求参数结构体
  */
 export interface ModifyNatAcRuleRequest {
@@ -241,6 +394,15 @@ export interface ModifyNatAcRuleRequest {
      * 需要编辑的规则数组
      */
     Rules: Array<CreateNatRuleItem>;
+}
+/**
+ * ModifyAclRule请求参数结构体
+ */
+export interface ModifyAclRuleRequest {
+    /**
+     * 需要编辑的规则数组
+     */
+    Rules: Array<CreateRuleItem>;
 }
 /**
  * ModifyAcRule返回参数结构体
@@ -274,14 +436,22 @@ export interface ModifyNatSequenceRulesRequest {
     Direction: number;
 }
 /**
- * DescribeTableStatus返回参数结构体
+ * DescribeAclRule返回参数结构体
  */
-export interface DescribeTableStatusResponse {
+export interface DescribeAclRuleResponse {
     /**
-     * 0：正常，其它：不正常
+     * 总条数
+     */
+    Total?: number;
+    /**
+     * nat访问控制列表数据
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Status: number;
+    Data?: Array<DescAcItem>;
+    /**
+     * 未过滤的总条数
+     */
+    AllTotal?: number;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -391,17 +561,25 @@ export interface AddAcRuleRequest {
     Enable?: string;
 }
 /**
- * ip防护状态
+ * DescribeTLogInfo请求参数结构体
  */
-export interface IPDefendStatus {
+export interface DescribeTLogInfoRequest {
     /**
-     * ip地址
+     * 开始时间
      */
-    IP: string;
+    StartTime: string;
     /**
-     * 防护状态   1:防护打开; -1:地址错误; 其他:未防护
+     * 结束时间
      */
-    Status: number;
+    EndTime: string;
+    /**
+     * 类型 1 告警 2阻断
+     */
+    QueryType: string;
+    /**
+     * 查询条件
+     */
+    SearchValue?: string;
 }
 /**
  * 入侵防御放通封禁规则
@@ -528,25 +706,29 @@ export interface DeleteAllAccessControlRuleRequest {
     Area?: string;
 }
 /**
- * ModifySecurityGroupRule请求参数结构体
+ * ModifyBlockIgnoreList请求参数结构体
  */
-export interface ModifySecurityGroupRuleRequest {
+export interface ModifyBlockIgnoreListRequest {
     /**
-     * 方向，0：出站，1：入站，默认1
+     * 1封禁列表 2 放通列表
      */
-    Direction: number;
+    RuleType: number;
     /**
-     * 编辑后是否启用规则，0：不启用，1：启用，默认1
+     * IP、Domain二选一（注：封禁列表，只能填写IP），不能同时为空
      */
-    Enable: number;
+    IOC: Array<IocListData>;
     /**
-     * 编辑的企业安全组规则数据
+     * 可选值：delete（删除）、edit（编辑）、add（添加）  其他值无效
      */
-    Data: Array<SecurityGroupListData>;
+    IocAction: string;
     /**
-     * 编辑的企业安全组规则的原始执行顺序
+     * 时间格式：yyyy-MM-dd HH:mm:ss，IocAction 为edit或add时必填
      */
-    SgRuleOriginSequence: number;
+    StartTime?: string;
+    /**
+     * 时间格式：yyyy-MM-dd HH:mm:ss，IocAction 为edit或add时必填，必须大于当前时间且大于StartTime
+     */
+    EndTime?: string;
 }
 /**
  * ModifyAllVPCSwitchStatus返回参数结构体
@@ -844,6 +1026,43 @@ export interface NatFwInstance {
     NatIp: string;
 }
 /**
+ * DescribeAclRule请求参数结构体
+ */
+export interface DescribeAclRuleRequest {
+    /**
+     * 每页条数
+     */
+    Limit: number;
+    /**
+     * 偏移值
+     */
+    Offset: number;
+    /**
+     * 需要查询的索引，特定场景使用，可不填
+     */
+    Index?: string;
+    /**
+     * 过滤条件组合
+     */
+    Filters?: Array<CommonFilter>;
+    /**
+     * 检索的起始时间，可不传
+     */
+    StartTime?: string;
+    /**
+     * 检索的截止时间，可不传
+     */
+    EndTime?: string;
+    /**
+     * desc：降序；asc：升序。根据By字段的值进行排序，这里传参的话则By也必须有值
+     */
+    Order?: string;
+    /**
+     * 排序所用到的字段
+     */
+    By?: string;
+}
+/**
  * CreateSecurityGroupRules返回参数结构体
  */
 export interface CreateSecurityGroupRulesResponse {
@@ -931,29 +1150,17 @@ export interface ModifyAssetScanRequest {
     ScanType?: number;
 }
 /**
- * ModifyBlockIgnoreList请求参数结构体
+ * 设置nat防火墙的vpc dns 接入开关
  */
-export interface ModifyBlockIgnoreListRequest {
+export interface DnsVpcSwitch {
     /**
-     * 1封禁列表 2 放通列表
+     * vpc id
      */
-    RuleType: number;
+    VpcId: string;
     /**
-     * IP、Domain二选一（注：封禁列表，只能填写IP），不能同时为空
+     * 0：设置为关闭 1:设置为打开
      */
-    IOC: Array<IocListData>;
-    /**
-     * 可选值：delete（删除）、edit（编辑）、add（添加）  其他值无效
-     */
-    IocAction: string;
-    /**
-     * 时间格式：yyyy-MM-dd HH:mm:ss，IocAction 为edit或add时必填
-     */
-    StartTime?: string;
-    /**
-     * 时间格式：yyyy-MM-dd HH:mm:ss，IocAction 为edit或add时必填，必须大于当前时间且大于StartTime
-     */
-    EndTime?: string;
+    Status: number;
 }
 /**
  * AddEnterpriseSecurityGroupRules请求参数结构体
@@ -975,6 +1182,25 @@ export interface AddEnterpriseSecurityGroupRulesRequest {
      * 是否延迟下发，1则延迟下发，否则立即下发
      */
     IsDelay?: number;
+}
+/**
+ * 防火墙引流网关信息
+ */
+export interface FwGateway {
+    /**
+     * 防火墙网关id
+     */
+    GatewayId: string;
+    /**
+     * 网关所属vpc id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    VpcId: string;
+    /**
+     * 网关ip地址
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IpAddress: string;
 }
 /**
  * ModifySecurityGroupSequenceRules返回参数结构体
@@ -1102,6 +1328,19 @@ export interface ModifySequenceRulesRequest {
     Direction?: number;
 }
 /**
+ * ModifyAclRule返回参数结构体
+ */
+export interface ModifyAclRuleResponse {
+    /**
+     * 编辑成功后返回新策略ID列表
+     */
+    RuleUuid?: Array<number | bigint>;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * 执行顺序对象
  */
 export interface SequenceData {
@@ -1170,53 +1409,145 @@ export interface DescribeEnterpriseSecurityGroupRuleResponse {
     RequestId?: string;
 }
 /**
- * nat防火墙 vpc dns 开关信息
+ * VPC防火墙(组)及防火墙实例详情信息
  */
-export interface VpcDnsInfo {
+export interface VpcFwGroupInfo {
     /**
-     * vpc id
-     */
-    VpcId: string;
-    /**
-     * vpc 名称
-     */
-    VpcName: string;
-    /**
-     * nat 防火墙模式 0：新增模式， 1: 接入模式
-     */
-    FwMode: number;
-    /**
-     * vpc ipv4网段范围 CIDR（Classless Inter-Domain Routing，无类域间路由选择）
-     */
-    VpcIpv4Cidr: string;
-    /**
-     * 外网弹性ip，防火墙 dns解析地址
-     */
-    DNSEip: string;
-    /**
-     * nat网关id
+     * 防火墙(组)ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    NatInsId: string;
+    FwGroupId?: string;
     /**
-     * nat网关名称
+     * 防火墙(组)名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    NatInsName: string;
+    FwGroupName?: string;
     /**
-     * 0：开关关闭 ， 1: 开关打开
-     */
-    SwitchStatus: number;
-    /**
-     * 0：未防护， 1: 已防护，2：忽略此字段
+     * 防火墙组涉及到的开关个数
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ProtectedStatus?: number;
+    FwSwitchNum?: number;
     /**
-     * 是否支持DNS FW，0-不支持、1-支持
+     * 防火墙(组)部署的地域
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SupportDNSFW?: number;
+    RegionLst?: Array<string>;
+    /**
+     * 模式 1：CCN云联网模式；0：私有网络模式 2: sase 模式 3：ccn 高级模式 4: 私有网络(跨租户单边模式)
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Mode?: number;
+    /**
+     * 防火墙实例的开关模式 1: 单点互通 2: 多点互通 3: 全互通 4: 自定义路由
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SwitchMode?: number;
+    /**
+     * VPC防火墙实例卡片信息数组
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    FwInstanceLst?: Array<VpcFwInstanceInfo>;
+    /**
+     * 防火墙(状态) 0：正常 1: 初始化或操作中
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Status?: number;
+    /**
+     * auto :自动选择
+  如果为网段，则为用户自定义 192.168.0.0/20
+     */
+    FwVpcCidr?: string;
+    /**
+     * cdc专用集群场景时表示部署所属的cdc
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CdcId?: string;
+    /**
+     * cdc专用集群场景时表示cdc名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CdcName?: string;
+    /**
+     * 跨租户模式 1管理员 2单边 0 非跨租户
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CrossUserMode?: string;
+}
+/**
+ * DeleteBlockIgnoreRuleList返回参数结构体
+ */
+export interface DeleteBlockIgnoreRuleListResponse {
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * 统计折线图通用结构体
+ */
+export interface IpStatic {
+    /**
+     * 值
+     */
+    Num: number;
+    /**
+     * 折线图横坐标时间
+     */
+    StatTime: string;
+}
+/**
+ * CreateVpcFwGroup返回参数结构体
+ */
+export interface CreateVpcFwGroupResponse {
+    /**
+     * 防火墙组ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    FwGroupId?: string;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * VPC防火墙实例的CVM信息
+ */
+export interface VpcFwCvmInsInfo {
+    /**
+     * VPC防火墙实例ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    FwInsId: string;
+    /**
+     * CVM所在地域
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Region?: string;
+    /**
+     * CVM所在地域中文
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RegionZh?: string;
+    /**
+     * CVM所在地域详情
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RegionDetail?: string;
+    /**
+     * 主机所在可用区
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ZoneZh?: string;
+    /**
+     * 备机所在可用区
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ZoneZhBack?: string;
+    /**
+     * 防火墙CVM带宽值
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    BandWidth?: number;
 }
 /**
  * DescribeEnterpriseSecurityGroupRule请求参数结构体
@@ -1291,6 +1622,113 @@ export interface DescribeEnterpriseSecurityGroupRuleRequest {
     RuleUuid?: number;
 }
 /**
+ * VPC内网间规则
+ */
+export interface VpcRuleItem {
+    /**
+     * 访问源示例：
+  net：IP/CIDR(192.168.0.2)
+     */
+    SourceContent: string;
+    /**
+     * 访问源类型，类型可以为：net
+     */
+    SourceType: string;
+    /**
+     * 访问目的示例：
+  net：IP/CIDR(192.168.0.2)
+  domain：域名规则，例如*.qq.com
+     */
+    DestContent: string;
+    /**
+     * 访问目的类型，类型可以为：net，domain
+     */
+    DestType: string;
+    /**
+     * 协议，可选的值：
+  TCP
+  UDP
+  ICMP
+  ANY
+  HTTP
+  HTTPS
+  HTTP/HTTPS
+  SMTP
+  SMTPS
+  SMTP/SMTPS
+  FTP
+  DNS
+  TLS/SSL
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Protocol: string;
+    /**
+     * 访问控制策略中设置的流量通过云防火墙的方式。取值：
+  accept：放行
+  drop：拒绝
+  log：观察
+     */
+    RuleAction: string;
+    /**
+     * 访问控制策略的端口。取值：
+  -1/-1：全部端口
+  80：80端口
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Port: string;
+    /**
+     * 描述
+     */
+    Description: string;
+    /**
+     * 规则顺序，-1表示最低，1表示最高
+     */
+    OrderIndex: number;
+    /**
+     * 规则对应的唯一id
+     */
+    Uuid: number;
+    /**
+     * 规则状态，true表示启用，false表示禁用
+     */
+    Enable: string;
+    /**
+     * 规则生效的范围，是在哪对vpc之间还是针对所有vpc间生效
+     */
+    EdgeId: string;
+    /**
+     * 规则的命中次数，增删改查规则时无需传入此参数，主要用于返回查询结果数据
+     */
+    DetectedTimes?: number;
+    /**
+     * EdgeId对应的这对VPC间防火墙的描述
+     */
+    EdgeName?: string;
+    /**
+     * 内部使用的uuid，一般情况下不会使用到该字段
+     */
+    InternalUuid?: number;
+    /**
+     * 规则被删除：1，已删除；0，未删除
+     */
+    Deleted?: number;
+    /**
+     * 规则生效的防火墙实例ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    FwGroupId?: string;
+    /**
+     * 防火墙名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    FwGroupName?: string;
+    /**
+     * beta任务详情
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    BetaList?: Array<BetaInfoByACL>;
+}
+/**
  * ModifyNatFwReSelect返回参数结构体
  */
 export interface ModifyNatFwReSelectResponse {
@@ -1298,6 +1736,162 @@ export interface ModifyNatFwReSelectResponse {
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * DescribeVpcAcRule请求参数结构体
+ */
+export interface DescribeVpcAcRuleRequest {
+    /**
+     * 每页条数
+     */
+    Limit: number;
+    /**
+     * 偏移值
+     */
+    Offset: number;
+    /**
+     * 需要查询的索引，特定场景使用，可不填
+     */
+    Index?: string;
+    /**
+     * 过滤条件组合
+     */
+    Filters?: Array<CommonFilter>;
+    /**
+     * 检索的起始时间，可不传
+     */
+    StartTime?: string;
+    /**
+     * 检索的截止时间，可不传
+     */
+    EndTime?: string;
+    /**
+     * desc：降序；asc：升序。根据By字段的值进行排序，这里传参的话则By也必须有值
+     */
+    Order?: string;
+    /**
+     * 排序所用到的字段
+     */
+    By?: string;
+}
+/**
+ * VPC防火墙实例卡片信息
+ */
+export interface VpcFwInstanceInfo {
+    /**
+     * VPC防火墙实例名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    FwInsName: string;
+    /**
+     * VPC防火墙实例ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    FwInsId: string;
+    /**
+     * VPC防火墙实例模式 0: 旧VPC模式防火墙 1: CCN模式防火墙
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    FwMode: number;
+    /**
+     * VPC防火墙接入网络实例个数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    JoinInsNum: number;
+    /**
+     * VPC防火墙开关个数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    FwSwitchNum: number;
+    /**
+     * VPC防火墙状态 0:正常 ， 1：创建中 2: 变更中
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Status: number;
+    /**
+     * VPC防火墙创建时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Time: string;
+    /**
+     * VPC 相关云联网ID列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CcnId?: Array<string>;
+    /**
+     * VPC 相关云联网名称列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CcnName?: Array<string>;
+    /**
+     * VPC 相关对等连接ID列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PeerConnectionId?: Array<string>;
+    /**
+     * VPC 相关对等连接名称列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PeerConnectionName?: Array<string>;
+    /**
+     * VPC防火墙CVM的列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    FwCvmLst?: Array<VpcFwCvmInsInfo>;
+    /**
+     * VPC防火墙接入网络实例类型列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    JoinInsLst?: Array<VpcFwJoinInstanceType>;
+    /**
+     * 防火墙网关信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    FwGateway?: Array<FwGateway>;
+    /**
+     * 防火墙(组)ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    FwGroupId?: string;
+    /**
+     * 已使用规则数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RuleUsed?: number;
+    /**
+     * 最大规则数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RuleMax?: number;
+    /**
+     * 防火墙实例带宽
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Width?: number;
+    /**
+     * 用户VPC墙总带宽
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    UserVpcWidth?: number;
+    /**
+     * 接入的vpc列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    JoinInsIdLst?: Array<string>;
+    /**
+     * 内网间峰值带宽 (单位 bps )
+     */
+    FlowMax?: number;
+    /**
+     * 实例引擎版本
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    EngineVersion?: string;
+    /**
+     * 引擎是否可升级：0，不可升级；1，可升级
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    UpdateEnable?: number;
 }
 /**
  * DescribeSwitchLists请求参数结构体
@@ -1337,21 +1931,128 @@ export interface DescribeSwitchListsRequest {
     By?: string;
 }
 /**
- * SetNatFwEip请求参数结构体
+ * Nat防火墙弹性公网ip列表
  */
-export interface SetNatFwEipRequest {
+export interface NatFwEipsInfo {
     /**
-     * bind：绑定eip；unbind：解绑eip；newAdd：新增防火墙弹性公网ip
+     * 弹性公网ip
      */
-    OperationType: string;
+    Eip: string;
     /**
-     * 防火墙实例id
+     * 所属的Nat网关Id
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    CfwInstance: string;
+    NatGatewayId: string;
     /**
-     * 当OperationType 为bind或unbind操作时，使用该字段。
+     * Nat网关名称
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    EipList?: Array<string>;
+    NatGatewayName: string;
+}
+/**
+ * AddAclRule返回参数结构体
+ */
+export interface AddAclRuleResponse {
+    /**
+     * 创建成功后返回新策略ID列表
+     */
+    RuleUuid?: Array<number | bigint>;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * Nat实例卡片详细信息
+ */
+export interface NatInstanceInfo {
+    /**
+     * nat实例id
+     */
+    NatinsId?: string;
+    /**
+     * nat实例名称
+     */
+    NatinsName?: string;
+    /**
+     * 实例所在地域
+     */
+    Region?: string;
+    /**
+     * 0: 新增模式，1:接入模式
+     */
+    FwMode?: number;
+    /**
+     * 实例带宽大小 Mbps
+     */
+    BandWidth?: number;
+    /**
+     * 入向带宽峰值 bps
+     */
+    InFlowMax?: number;
+    /**
+     * 出向带宽峰值 bps
+     */
+    OutFlowMax?: number;
+    /**
+     * 地域中文信息
+     */
+    RegionZh?: string;
+    /**
+     * 公网ip数组
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    EipAddress?: Array<string>;
+    /**
+     * 内外使用ip数组
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    VpcIp?: Array<string>;
+    /**
+     * 实例关联子网数组
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Subnets?: Array<string>;
+    /**
+     * 0 :正常 1：正在初始化
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Status?: number;
+    /**
+     * 地域区域信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RegionDetail?: string;
+    /**
+     * 实例所在可用区
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ZoneZh?: string;
+    /**
+     * 实例所在可用区
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ZoneZhBak?: string;
+    /**
+     * 已使用规则数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RuleUsed?: number;
+    /**
+     * 实例的规则限制最大规格数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RuleMax?: number;
+    /**
+     * 实例引擎版本
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    EngineVersion?: string;
+    /**
+     * 引擎是否可升级：0，不可升级；1，可升级
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    UpdateEnable?: number;
 }
 /**
  * SetNatFwEip返回参数结构体
@@ -1507,6 +2208,21 @@ export interface ModifySecurityGroupItemRuleStatusRequest {
     RuleSequence: number;
 }
 /**
+ * VPC防火墙接入的网络实例类型及数量
+ */
+export interface VpcFwJoinInstanceType {
+    /**
+     * 接入实例类型，VPC、DIRECTCONNECT、 VPNGW 等
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    JoinType: string;
+    /**
+     * 接入的对应网络实例类型的数量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Num: number;
+}
+/**
  * DescribeSourceAsset请求参数结构体
  */
 export interface DescribeSourceAssetRequest {
@@ -1549,6 +2265,19 @@ export interface SecurityGroupOrderIndexData {
     NewOrderIndex: number;
 }
 /**
+ * AddVpcAcRule请求参数结构体
+ */
+export interface AddVpcAcRuleRequest {
+    /**
+     * 需要添加的vpc内网间规则列表
+     */
+    Rules: Array<VpcRuleItem>;
+    /**
+     * 添加规则的来源，一般不需要使用，值insert_rule 表示插入指定位置的规则；值batch_import 表示批量导入规则；为空时表示添加规则
+     */
+    From?: string;
+}
+/**
  * DescribeSourceAsset返回参数结构体
  */
 export interface DescribeSourceAssetResponse {
@@ -1570,30 +2299,173 @@ export interface DescribeSourceAssetResponse {
     RequestId?: string;
 }
 /**
- * DescribeTLogInfo请求参数结构体
+ * DescribeFwGroupInstanceInfo请求参数结构体
  */
-export interface DescribeTLogInfoRequest {
+export interface DescribeFwGroupInstanceInfoRequest {
     /**
-     * 开始时间
+     * 每页条数
      */
-    StartTime: string;
+    Limit: number;
     /**
-     * 结束时间
+     * 偏移值
      */
-    EndTime: string;
+    Offset: number;
     /**
-     * 类型 1 告警 2阻断
+     * 过滤条件组合
      */
-    QueryType: string;
+    Filters?: Array<CommonFilter>;
     /**
-     * 查询条件
+     * 检索的起始时间，可不传
      */
-    SearchValue?: string;
+    StartTime?: string;
+    /**
+     * 检索的截止时间，可不传
+     */
+    EndTime?: string;
+    /**
+     * desc：降序；asc：升序。根据By字段的值进行排序，这里传参的话则By也必须有值
+     */
+    Order?: string;
+    /**
+     * 排序所用到的字段
+     */
+    By?: string;
+}
+/**
+ * ModifyBlockIgnoreRule请求参数结构体
+ */
+export interface ModifyBlockIgnoreRuleRequest {
+    /**
+     * 规则
+     */
+    Rule: IntrusionDefenseRule;
+    /**
+     * 规则类型，1封禁，2放通
+     */
+    RuleType: number;
 }
 /**
  * DescribeEnterpriseSGRuleProgress请求参数结构体
  */
 export declare type DescribeEnterpriseSGRuleProgressRequest = null;
+/**
+ * 边界防火墙公网IP开关列表
+ */
+export interface EdgeIpInfo {
+    /**
+     * 公网IP
+     */
+    PublicIp?: string;
+    /**
+     * 公网 IP 类型
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PublicIpType?: number;
+    /**
+     * 实例ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InstanceId?: string;
+    /**
+     * 实例名
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InstanceName?: string;
+    /**
+     * 内网IP
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IntranetIp?: string;
+    /**
+     * 资产类型
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AssetType?: string;
+    /**
+     * 地域
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Region?: string;
+    /**
+     * 风险端口数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PortRiskCount?: number;
+    /**
+     * 最近扫描时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    LastScanTime?: string;
+    /**
+     * 是否为region eip
+  0 不为region eip，不能选择串行
+  1 为region eip 可以选择串行
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IsRegionEip?: number;
+    /**
+     * EIP 所关联的VPC
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    VpcId?: string;
+    /**
+     * 0: 该地域暂未支持串行
+  1: 该用户未在该地域配置串行带宽
+  2: 该用户已在该地域配置串行带宽，可以开启串行开关
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IsSerialRegion?: number;
+    /**
+     * 0: 不是公网CLB 可以开启串行开关
+  1: 是公网CLB 不可以开启串行开关
+  
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IsPublicClb?: number;
+    /**
+     * 0: 开启开关时提示要创建私有连接。
+  1: 关闭该开关是提示删除私有连接。
+  如果大于 1: 关闭开关 、开启开关不需提示创建删除私有连接。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    EndpointBindEipNum?: number;
+    /**
+     * 扫描深度
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ScanMode?: string;
+    /**
+     * 扫描状态
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ScanStatus?: number;
+    /**
+     * 开关状态
+  0 : 关闭
+  1 : 开启
+  2 : 开启中
+  3 : 关闭中
+  4 : 异常
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Status?: number;
+    /**
+     * 私有连接ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    EndpointId?: string;
+    /**
+     * 私有连接IP
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    EndpointIp?: string;
+    /**
+     * 0 : 旁路
+  1 : 串行
+  2 : 正在模式切换
+     */
+    SwitchMode?: number;
+}
 /**
  * AssetZone
  */
@@ -1725,6 +2597,25 @@ export interface DescribeNatFwInstancesInfoRequest {
      * 每页长度
      */
     Limit?: number;
+}
+/**
+ * DescribeFwGroupInstanceInfo返回参数结构体
+ */
+export interface DescribeFwGroupInstanceInfoResponse {
+    /**
+     * 防火墙(组)
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    VpcFwGroupLst?: Array<VpcFwGroupInfo>;
+    /**
+     * 防火墙(组)个数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Total?: number;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * ModifyNatSequenceRules返回参数结构体
@@ -1870,6 +2761,27 @@ export interface DescribeNatFwInfoCountResponse {
  */
 export declare type DescribeDefenseSwitchRequest = null;
 /**
+ * ModifyVpcFwGroup请求参数结构体
+ */
+export interface ModifyVpcFwGroupRequest {
+    /**
+     * 编辑的防火墙(组)ID
+     */
+    FwGroupId: string;
+    /**
+     * 修改防火墙(组)名称
+     */
+    Name?: string;
+    /**
+     * 编辑的防火墙实例列表
+     */
+    VpcFwInstances?: Array<VpcFwInstance>;
+    /**
+     * 指定防火墙使用网段信息
+     */
+    FwCidrInfo?: FwCidrInfo;
+}
+/**
  * ModifyEnterpriseSecurityDispatchStatus返回参数结构体
  */
 export interface ModifyEnterpriseSecurityDispatchStatusResponse {
@@ -2014,17 +2926,47 @@ export interface SecurityGroupListData {
     ParameterName?: string;
 }
 /**
- * RemoveNatAcRule返回参数结构体
+ * 开启、关闭 防火墙互联网边界开关
  */
-export interface RemoveNatAcRuleResponse {
+export interface EdgeIpSwitch {
     /**
-     * 删除成功后返回被删除策略的uuid列表
+     * 公网IP
      */
-    RuleUuid?: Array<number | bigint>;
+    PublicIp: string;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     * vpc 中第一个EIP开关打开，需要指定子网创建私有连接
      */
-    RequestId?: string;
+    SubnetId?: string;
+    /**
+     * 创建私有连接指定IP
+     */
+    EndpointIp?: string;
+    /**
+     * 0 : 旁路 1 : 串行
+     */
+    SwitchMode?: number;
+}
+/**
+ * ModifySequenceAclRules请求参数结构体
+ */
+export interface ModifySequenceAclRulesRequest {
+    /**
+     * 规则快速排序：OrderIndex，原始序号；NewOrderIndex：新序号
+     */
+    RuleChangeItems: Array<RuleChangeItem>;
+    /**
+     * 规则方向：1，入站；0，出站
+     */
+    Direction: number;
+}
+/**
+ * ModifyVpcAcRule请求参数结构体
+ */
+export interface ModifyVpcAcRuleRequest {
+    /**
+     * 需要编辑的规则数组
+     */
+    Rules: Array<VpcRuleItem>;
 }
 /**
  * CreateNatFwInstanceWithDomain返回参数结构体
@@ -2048,6 +2990,27 @@ export interface RemoveAcRuleRequest {
      * 规则的uuid，可通过查询规则列表获取
      */
     RuleUuid: number;
+}
+/**
+ * ModifyEnterpriseSecurityGroupRule请求参数结构体
+ */
+export interface ModifyEnterpriseSecurityGroupRuleRequest {
+    /**
+     * 规则的uuid，可通过查询规则列表获取
+     */
+    RuleUuid: number;
+    /**
+     * 修改类型，0：修改规则内容；1：修改单条规则开关状态；2：修改所有规则开关状态
+     */
+    ModifyType: number;
+    /**
+     * 编辑后的企业安全组规则数据；修改规则状态不用填该字段
+     */
+    Data?: SecurityGroupRule;
+    /**
+     * 0是关闭,1是开启
+     */
+    Enable?: number;
 }
 /**
  * 规则关联的beta任务
@@ -2106,25 +3069,36 @@ export interface ModifyAssetScanResponse {
     RequestId?: string;
 }
 /**
- * ModifyAllRuleStatus请求参数结构体
+ * DeleteVpcFwGroup请求参数结构体
  */
-export interface ModifyAllRuleStatusRequest {
+export interface DeleteVpcFwGroupRequest {
     /**
-     * 状态，0：全部停用，1：全部启用
+     * 防火墙(组)Id
+     */
+    FwGroupId?: string;
+    /**
+     * 是否删除整个防火墙(组)
+  0：不删除防火墙(组)，只删除单独实例
+  1：删除整个防火墙(组)
+     */
+    DeleteFwGroup?: number;
+    /**
+     * 待删除的防火墙实例数组
+     */
+    VpcFwInsList?: Array<string>;
+}
+/**
+ * ip防护状态
+ */
+export interface IPDefendStatus {
+    /**
+     * ip地址
+     */
+    IP: string;
+    /**
+     * 防护状态   1:防护打开; -1:地址错误; 其他:未防护
      */
     Status: number;
-    /**
-     * 方向，0：出站，1：入站
-     */
-    Direction?: number;
-    /**
-     * Edge ID值
-     */
-    EdgeId?: string;
-    /**
-     * NAT地域
-     */
-    Area?: string;
 }
 /**
  * 规则输入对象
@@ -2247,6 +3221,15 @@ export interface ModifyAllPublicIPSwitchStatusRequest {
     FireWallPublicIPs?: Array<string>;
 }
 /**
+ * ModifySequenceAclRules返回参数结构体
+ */
+export interface ModifySequenceAclRulesResponse {
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * CreateAddressTemplate请求参数结构体
  */
 export interface CreateAddressTemplateRequest {
@@ -2322,25 +3305,26 @@ export interface CreateDatabaseWhiteListRulesResponse {
     RequestId?: string;
 }
 /**
- * 新手引导扫描信息
+ * DeleteBlockIgnoreRuleList请求参数结构体
  */
-export interface ScanInfo {
+export interface DeleteBlockIgnoreRuleListRequest {
     /**
-     * 扫描结果信息
+     * 规则列表
      */
-    ScanResultInfo: ScanResultInfo;
+    Rules: Array<IocListData>;
     /**
-     * 扫描状态 0扫描中 1完成  2未勾选自动扫描
+     * 规则类型，1封禁，2放通，不支持域名封禁
      */
-    ScanStatus: number;
+    RuleType: number;
+}
+/**
+ * DeleteVpcFwGroup返回参数结构体
+ */
+export interface DeleteVpcFwGroupResponse {
     /**
-     * 进度
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
-    ScanPercent: number;
-    /**
-     * 预计完成时间
-     */
-    ScanTime: string;
+    RequestId?: string;
 }
 /**
  * CreateChooseVpcs返回参数结构体
@@ -2434,17 +3418,13 @@ export interface ModifyRunSyncAssetResponse {
     RequestId?: string;
 }
 /**
- * ModifyEnterpriseSecurityGroupRule返回参数结构体
+ * AddVpcAcRule返回参数结构体
  */
-export interface ModifyEnterpriseSecurityGroupRuleResponse {
+export interface AddVpcAcRuleResponse {
     /**
-     * 状态值，0：编辑成功，非0：编辑失败
+     * 创建成功后返回新策略ID列表
      */
-    Status: number;
-    /**
-     * 编辑后新生成规则的Id
-     */
-    NewRuleUuid: number;
+    RuleUuids?: Array<number | bigint>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2477,17 +3457,21 @@ export interface DescribeSecurityGroupListResponse {
     RequestId?: string;
 }
 /**
- * 统计折线图通用结构体
+ * DescribeVpcAcRule返回参数结构体
  */
-export interface IpStatic {
+export interface DescribeVpcAcRuleResponse {
     /**
-     * 值
+     * 总条数
      */
-    Num: number;
+    Total?: number;
     /**
-     * 折线图横坐标时间
+     * 内网间访问控制列表数据
      */
-    StatTime: string;
+    Data?: Array<VpcRuleItem>;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * AddEnterpriseSecurityGroupRules返回参数结构体
@@ -2639,6 +3623,77 @@ export interface RemoveEnterpriseSecurityGroupRuleResponse {
     RequestId?: string;
 }
 /**
+ * 网络实例信息
+ */
+export interface NetInstancesInfo {
+    /**
+     * 网络实例ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InstanceId: string;
+    /**
+     * 网络实例名称
+     */
+    InstanceName?: string;
+    /**
+     * 网络cidr (多段以逗号分隔)
+     */
+    InstanceCidr?: string;
+    /**
+     * 网络实例所在地域
+     */
+    Region?: string;
+}
+/**
+ * nat防火墙 vpc dns 开关信息
+ */
+export interface VpcDnsInfo {
+    /**
+     * vpc id
+     */
+    VpcId: string;
+    /**
+     * vpc 名称
+     */
+    VpcName: string;
+    /**
+     * nat 防火墙模式 0：新增模式， 1: 接入模式
+     */
+    FwMode: number;
+    /**
+     * vpc ipv4网段范围 CIDR（Classless Inter-Domain Routing，无类域间路由选择）
+     */
+    VpcIpv4Cidr: string;
+    /**
+     * 外网弹性ip，防火墙 dns解析地址
+     */
+    DNSEip: string;
+    /**
+     * nat网关id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    NatInsId: string;
+    /**
+     * nat网关名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    NatInsName: string;
+    /**
+     * 0：开关关闭 ， 1: 开关打开
+     */
+    SwitchStatus: number;
+    /**
+     * 0：未防护， 1: 已防护，2：忽略此字段
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ProtectedStatus?: number;
+    /**
+     * 是否支持DNS FW，0-不支持、1-支持
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SupportDNSFW?: number;
+}
+/**
  * CreateAddressTemplate返回参数结构体
  */
 export interface CreateAddressTemplateResponse {
@@ -2647,30 +3702,27 @@ export interface CreateAddressTemplateResponse {
      */
     Status?: number;
     /**
+     * 唯一Id
+     */
+    Uuid?: string;
+    /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
 }
 /**
- * ModifyEnterpriseSecurityGroupRule请求参数结构体
+ * DescribeTableStatus返回参数结构体
  */
-export interface ModifyEnterpriseSecurityGroupRuleRequest {
+export interface DescribeTableStatusResponse {
     /**
-     * 规则的uuid，可通过查询规则列表获取
+     * 0：正常，其它：不正常
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    RuleUuid: number;
+    Status: number;
     /**
-     * 修改类型，0：修改规则内容；1：修改单条规则开关状态；2：修改所有规则开关状态
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
-    ModifyType: number;
-    /**
-     * 编辑后的企业安全组规则数据；修改规则状态不用填该字段
-     */
-    Data?: SecurityGroupRule;
-    /**
-     * 0是关闭,1是开启
-     */
-    Enable?: number;
+    RequestId?: string;
 }
 /**
  * ModifySequenceRules返回参数结构体
@@ -2756,6 +3808,19 @@ export interface ModifyBlockTopRequest {
     OpeType: string;
 }
 /**
+ * RemoveAclRule请求参数结构体
+ */
+export interface RemoveAclRuleRequest {
+    /**
+     * 规则的uuid列表，可通过查询规则列表获取，注意：如果传入的是[-1]将删除所有规则
+     */
+    RuleUuid: Array<number | bigint>;
+    /**
+     * 规则方向：1，入站；0，出站
+     */
+    Direction?: number;
+}
+/**
  * DeleteAcRule返回参数结构体
  */
 export interface DeleteAcRuleResponse {
@@ -2821,19 +3886,22 @@ export interface SecurityGroupSimplifyRule {
     Sequence?: number;
 }
 /**
- * 黑白名单IOC列表
+ * 封禁放通IOC列表
  */
 export interface IocListData {
     /**
      * 待处置IP地址，IP/Domain字段二选一
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     IP: string;
     /**
      * 只能为0或者1   0代表出站 1代表入站
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     Direction: number;
     /**
      * 待处置域名，IP/Domain字段二选一
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     Domain?: string;
 }
@@ -2947,6 +4015,101 @@ export interface ModifyNatFwSwitchResponse {
     RequestId?: string;
 }
 /**
+ * VPC防火墙(组)四种开关展示
+ */
+export interface FwGroupSwitchShow {
+    /**
+     * 防火墙开关ID
+     */
+    SwitchId: string;
+    /**
+     * 防火墙开关NAME
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SwitchName?: string;
+    /**
+     * 互通模式
+     */
+    SwitchMode?: number;
+    /**
+     * 开关边连接类型 0：对等连接， 1：云连网
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ConnectType?: number;
+    /**
+     * 连接ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ConnectId?: string;
+    /**
+     * 连接名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ConnectName?: string;
+    /**
+     * 源实例信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SrcInstancesInfo?: Array<NetInstancesInfo>;
+    /**
+     * 目的实例信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DstInstancesInfo?: Array<NetInstancesInfo>;
+    /**
+     * 防火墙(组)数据
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    FwGroupId?: string;
+    /**
+     * 防火墙(组)名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    FwGroupName?: string;
+    /**
+     * 开关状态 0：关 ， 1：开
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Enable?: number;
+    /**
+     * 开关的状态 0：正常， 1：转换中
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Status?: number;
+    /**
+     * 0-非sase实例，忽略，1-未绑定状态，2-已绑定
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AttachWithEdge?: number;
+    /**
+     * 对等防火墙和开关状态 0：正常， 1：对等未创建防火墙，2：对等已创建防火墙，未打开开关
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CrossEdgeStatus?: number;
+    /**
+     * 网络经过VPC防火墙CVM所在地域
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    FwInsRegion?: Array<string>;
+    /**
+     * 0 观察 1 拦截 2 严格 3 关闭
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IpsAction?: number;
+    /**
+     * 开关关联的防火墙实例列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    FwInsLst?: Array<VpcFwInstanceShow>;
+    /**
+     * 开关是否处于bypass状态
+  0：正常状态
+  1：bypass状态
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    BypassStatus?: number;
+}
+/**
  * DescribeBlockByIpTimesList返回参数结构体
  */
 export interface DescribeBlockByIpTimesListResponse {
@@ -2960,6 +4123,27 @@ export interface DescribeBlockByIpTimesListResponse {
     RequestId?: string;
 }
 /**
+ * ModifyAllRuleStatus请求参数结构体
+ */
+export interface ModifyAllRuleStatusRequest {
+    /**
+     * 状态，0：全部停用，1：全部启用
+     */
+    Status: number;
+    /**
+     * 方向，0：出站，1：入站
+     */
+    Direction?: number;
+    /**
+     * Edge ID值
+     */
+    EdgeId?: string;
+    /**
+     * NAT地域
+     */
+    Area?: string;
+}
+/**
  * SetNatFwDnatRule返回参数结构体
  */
 export interface SetNatFwDnatRuleResponse {
@@ -2967,6 +4151,25 @@ export interface SetNatFwDnatRuleResponse {
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * VPC防火墙实例信息
+ */
+export interface VpcFwInstanceShow {
+    /**
+     * VPC防火墙实例ID
+     */
+    FwInsId?: string;
+    /**
+     * VPC防火墙实例名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    FwInsName?: string;
+    /**
+     * 网络经过VPC防火墙CVM所在地域
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    FwInsRegion?: string;
 }
 /**
  * DescribeRuleOverview请求参数结构体
@@ -3119,6 +4322,28 @@ export interface DescribeBlockIgnoreListResponse {
     RequestId?: string;
 }
 /**
+ * ModifyVpcAcRule返回参数结构体
+ */
+export interface ModifyVpcAcRuleResponse {
+    /**
+     * 编辑成功后返回新策略ID列表
+     */
+    RuleUuids?: Array<number | bigint>;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * ModifyEdgeIpSwitch返回参数结构体
+ */
+export interface ModifyEdgeIpSwitchResponse {
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * ModifyEWRuleStatus请求参数结构体
  */
 export interface ModifyEWRuleStatusRequest {
@@ -3204,6 +4429,57 @@ export interface ModifyNatFwSwitchRequest {
     RouteTableIdList?: Array<string>;
 }
 /**
+ * ModifyFwGroupSwitch返回参数结构体
+ */
+export interface ModifyFwGroupSwitchResponse {
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * RemoveNatAcRule返回参数结构体
+ */
+export interface RemoveNatAcRuleResponse {
+    /**
+     * 删除成功后返回被删除策略的uuid列表
+     */
+    RuleUuid?: Array<number | bigint>;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * DescribeFwEdgeIps返回参数结构体
+ */
+export interface DescribeFwEdgeIpsResponse {
+    /**
+     * ip 开关列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Data?: Array<EdgeIpInfo>;
+    /**
+     * ip 开关列表个数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Total?: number;
+    /**
+     * 地域列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RegionLst?: Array<string>;
+    /**
+     * 实例类型列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InstanceTypeLst?: Array<string>;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * DescribeIPStatusList返回参数结构体
  */
 export interface DescribeIPStatusListResponse {
@@ -3234,115 +4510,49 @@ export interface CreateDatabaseWhiteListRulesRequest {
     DatabaseWhiteListRuleData: Array<DatabaseWhiteListRuleData>;
 }
 /**
- * Nat实例卡片详细信息
+ * 多种VPC墙模式开关结构
  */
-export interface NatInstanceInfo {
+export interface FwGroupSwitch {
     /**
-     * nat实例id
+     * 防火墙实例的开关模式 1: 单点互通 2: 多点互通 3: 全互通 4: 自定义路由
      */
-    NatinsId?: string;
+    SwitchMode?: number;
     /**
-     * nat实例名称
+     * 防火墙开关ID
+  支持三种类型
+  1. 边开关(单点互通)
+  2. 点开关(多点互通)
+  3. 全开关(全互通)
      */
-    NatinsName?: string;
-    /**
-     * 实例所在地域
-     */
-    Region?: string;
-    /**
-     * 0: 新增模式，1:接入模式
-     */
-    FwMode?: number;
-    /**
-     * 实例带宽大小 Mbps
-     */
-    BandWidth?: number;
-    /**
-     * 入向带宽峰值 bps
-     */
-    InFlowMax?: number;
-    /**
-     * 出向带宽峰值 bps
-     */
-    OutFlowMax?: number;
-    /**
-     * 地域中文信息
-     */
-    RegionZh?: string;
-    /**
-     * 公网ip数组
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    EipAddress?: Array<string>;
-    /**
-     * 内外使用ip数组
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    VpcIp?: Array<string>;
-    /**
-     * 实例关联子网数组
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Subnets?: Array<string>;
-    /**
-     * 0 :正常 1：正在初始化
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Status?: number;
-    /**
-     * 地域区域信息
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    RegionDetail?: string;
-    /**
-     * 实例所在可用区
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ZoneZh?: string;
-    /**
-     * 实例所在可用区
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ZoneZhBak?: string;
-    /**
-     * 已使用规则数
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    RuleUsed?: number;
-    /**
-     * 实例的规则限制最大规格数
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    RuleMax?: number;
-    /**
-     * 实例引擎版本
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    EngineVersion?: string;
-    /**
-     * 引擎是否可升级：0，不可升级；1，可升级
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    UpdateEnable?: number;
+    SwitchId?: string;
 }
 /**
- * Nat防火墙弹性公网ip列表
+ * DescribeVpcFwGroupSwitch返回参数结构体
  */
-export interface NatFwEipsInfo {
+export interface DescribeVpcFwGroupSwitchResponse {
     /**
-     * 弹性公网ip
-     */
-    Eip: string;
-    /**
-     * 所属的Nat网关Id
+     * 开关列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    NatGatewayId: string;
+    SwitchList?: Array<FwGroupSwitchShow>;
     /**
-     * Nat网关名称
+     * 开关总个数
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    NatGatewayName: string;
+    Total?: number;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * ModifyBlockIgnoreRule返回参数结构体
+ */
+export interface ModifyBlockIgnoreRuleResponse {
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * DescribeTLogIpList返回参数结构体
@@ -3397,6 +4607,20 @@ export interface AddAcRuleResponse {
     RequestId?: string;
 }
 /**
+ * ModifyEdgeIpSwitch请求参数结构体
+ */
+export interface ModifyEdgeIpSwitchRequest {
+    /**
+     * 0 关闭开关
+  1 打开开关
+     */
+    Enable: number;
+    /**
+     * 操作开关详情
+     */
+    EdgeIpSwitchLst?: Array<EdgeIpSwitch>;
+}
+/**
  * ModifyNatFwReSelect请求参数结构体
  */
 export interface ModifyNatFwReSelectRequest {
@@ -3420,6 +4644,15 @@ export interface ModifyNatFwReSelectRequest {
      * 指定防火墙使用网段信息
      */
     FwCidrInfo?: FwCidrInfo;
+}
+/**
+ * ModifyVpcFwSequenceRules返回参数结构体
+ */
+export interface ModifyVpcFwSequenceRulesResponse {
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * SetNatFwDnatRule请求参数结构体
@@ -3600,6 +4833,23 @@ export interface StopSecurityGroupRuleDispatchRequest {
     StopType?: number;
 }
 /**
+ * SetNatFwEip请求参数结构体
+ */
+export interface SetNatFwEipRequest {
+    /**
+     * bind：绑定eip；unbind：解绑eip；newAdd：新增防火墙弹性公网ip
+     */
+    OperationType: string;
+    /**
+     * 防火墙实例id
+     */
+    CfwInstance: string;
+    /**
+     * 当OperationType 为bind或unbind操作时，使用该字段。
+     */
+    EipList?: Array<string>;
+}
+/**
  * DescribeBlockIgnoreList请求参数结构体
  */
 export interface DescribeBlockIgnoreListRequest {
@@ -3642,6 +4892,19 @@ export interface ModifyBlockTopResponse {
     RequestId?: string;
 }
 /**
+ * RemoveAclRule返回参数结构体
+ */
+export interface RemoveAclRuleResponse {
+    /**
+     * 删除成功后返回被删除策略的uuid列表
+     */
+    RuleUuid?: Array<number | bigint>;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * DeleteNatFwInstance请求参数结构体
  */
 export interface DeleteNatFwInstanceRequest {
@@ -3649,6 +4912,15 @@ export interface DeleteNatFwInstanceRequest {
      * 防火墙实例id
      */
     CfwInstance: string;
+}
+/**
+ * ModifyVpcFwSequenceRules请求参数结构体
+ */
+export interface ModifyVpcFwSequenceRulesRequest {
+    /**
+     * 规则快速排序：OrderIndex，原始序号；NewOrderIndex：新序号
+     */
+    RuleChangeItems?: Array<RuleChangeItem>;
 }
 /**
  * ModifyStorageSetting请求参数结构体
@@ -3839,41 +5111,29 @@ export interface ExpandCfwVerticalResponse {
     RequestId?: string;
 }
 /**
- * DescribeNatAcRule请求参数结构体
+ * DescribeBlockStaticList请求参数结构体
  */
-export interface DescribeNatAcRuleRequest {
+export interface DescribeBlockStaticListRequest {
     /**
-     * 每页条数
+     * 开始时间
      */
-    Limit: number;
+    StartTime: string;
     /**
-     * 偏移值
+     * 结束时间
      */
-    Offset: number;
+    EndTime: string;
     /**
-     * 需要查询的索引，特定场景使用，可不填
+     * 列表类型，只能是下面三种之一：port、address、ip
      */
-    Index?: string;
+    QueryType: string;
     /**
-     * 过滤条件组合
+     * top数
      */
-    Filters?: Array<CommonFilter>;
+    Top: number;
     /**
-     * 检索的起始时间，可不传
+     * 查询条件
      */
-    StartTime?: string;
-    /**
-     * 检索的截止时间，可不传
-     */
-    EndTime?: string;
-    /**
-     * desc：降序；asc：升序。根据By字段的值进行排序，这里传参的话则By也必须有值
-     */
-    Order?: string;
-    /**
-     * 排序所用到的字段
-     */
-    By?: string;
+    SearchValue?: string;
 }
 /**
  * 告警中心概览数据
@@ -4023,6 +5283,48 @@ export interface SwitchListsData {
     ScanStatus: number;
 }
 /**
+ * CreateVpcFwGroup请求参数结构体
+ */
+export interface CreateVpcFwGroupRequest {
+    /**
+     * VPC防火墙(组)名称
+     */
+    Name: string;
+    /**
+     * 模式 1：CCN云联网模式；0：私有网络模式 2: sase 模式 3：ccn 高级模式 4: 私有网络(跨租户单边模式)
+     */
+    Mode: number;
+    /**
+     * 防火墙(组)下的防火墙实例列表
+     */
+    VpcFwInstances: Array<VpcFwInstance>;
+    /**
+     * 防火墙实例的开关模式
+  1: 单点互通
+  2: 多点互通
+  3: 全互通
+  4: 自定义路由
+     */
+    SwitchMode: number;
+    /**
+     * auto 自动选择防火墙网段
+  10.10.10.0/24 用户输入的防火墙网段
+     */
+    FwVpcCidr: string;
+    /**
+     * 云联网id ，适用于云联网模式
+     */
+    CcnId?: string;
+    /**
+     * 指定防火墙使用网段信息
+     */
+    FwCidrInfo?: FwCidrInfo;
+    /**
+     * 跨租户管理员模式  1管理员 2多账号
+     */
+    CrossUserMode?: string;
+}
+/**
  * CreateNatFwInstanceWithDomain请求参数结构体
  */
 export interface CreateNatFwInstanceWithDomainRequest {
@@ -4072,6 +5374,15 @@ export interface CreateNatFwInstanceWithDomainRequest {
     FwCidrInfo?: FwCidrInfo;
 }
 /**
+ * RemoveVpcAcRule请求参数结构体
+ */
+export interface RemoveVpcAcRuleRequest {
+    /**
+     * 规则的uuid列表，可通过查询规则列表获取，注意：如果传入的是[-1]将删除所有规则
+     */
+    RuleUuids: Array<number | bigint>;
+}
+/**
  * DescribeResourceGroup返回参数结构体
  */
 export interface DescribeResourceGroupResponse {
@@ -4102,6 +5413,10 @@ export interface DeleteAddressTemplateResponse {
  */
 export interface CreateBlockIgnoreRuleListResponse {
     /**
+     * 成功返回
+     */
+    List?: Array<IocListData>;
+    /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
@@ -4123,6 +5438,15 @@ export interface DescribeCfwEipsResponse {
  * ModifyResourceGroup返回参数结构体
  */
 export interface ModifyResourceGroupResponse {
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * ModifyVpcFwGroup返回参数结构体
+ */
+export interface ModifyVpcFwGroupResponse {
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -4159,29 +5483,41 @@ export interface DeleteSecurityGroupRuleRequest {
     IsDelReverse?: number;
 }
 /**
- * DescribeBlockStaticList请求参数结构体
+ * DescribeNatAcRule请求参数结构体
  */
-export interface DescribeBlockStaticListRequest {
+export interface DescribeNatAcRuleRequest {
     /**
-     * 开始时间
+     * 每页条数
      */
-    StartTime: string;
+    Limit: number;
     /**
-     * 结束时间
+     * 偏移值
      */
-    EndTime: string;
+    Offset: number;
     /**
-     * 列表类型，只能是下面三种之一：port、address、ip
+     * 需要查询的索引，特定场景使用，可不填
      */
-    QueryType: string;
+    Index?: string;
     /**
-     * top数
+     * 过滤条件组合
      */
-    Top: number;
+    Filters?: Array<CommonFilter>;
     /**
-     * 查询条件
+     * 检索的起始时间，可不传
      */
-    SearchValue?: string;
+    StartTime?: string;
+    /**
+     * 检索的截止时间，可不传
+     */
+    EndTime?: string;
+    /**
+     * desc：降序；asc：升序。根据By字段的值进行排序，这里传参的话则By也必须有值
+     */
+    Order?: string;
+    /**
+     * 排序所用到的字段
+     */
+    By?: string;
 }
 /**
  * vpc的防火墙网段
@@ -4285,6 +5621,19 @@ export interface ModifyAcRuleRequest {
     Area?: string;
 }
 /**
+ * RemoveVpcAcRule返回参数结构体
+ */
+export interface RemoveVpcAcRuleResponse {
+    /**
+     * 删除成功后返回被删除策略的uuid列表
+     */
+    RuleUuids: Array<number | bigint>;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * DescribeNatFwInstancesInfo返回参数结构体
  */
 export interface DescribeNatFwInstancesInfoResponse {
@@ -4364,17 +5713,102 @@ export interface ModifySecurityGroupRuleResponse {
     RequestId?: string;
 }
 /**
- * 设置nat防火墙的vpc dns 接入开关
+ * DescribeFwEdgeIps请求参数结构体
  */
-export interface DnsVpcSwitch {
+export interface DescribeFwEdgeIpsRequest {
     /**
-     * vpc id
+     * 过滤条件组合
      */
-    VpcId: string;
+    Filters?: Array<CommonFilter>;
     /**
-     * 0：设置为关闭 1:设置为打开
+     * 每页条数
      */
-    Status: number;
+    Limit?: number;
+    /**
+     * 偏移值
+     */
+    Offset?: number;
+    /**
+     * 检索的起始时间，可不传
+     */
+    StartTime?: string;
+    /**
+     * 检索的截止时间，可不传
+     */
+    EndTime?: string;
+    /**
+     * desc：降序；asc：升序。根据By字段的值进行排序，这里传参的话则By也必须有值
+     */
+    Order?: string;
+    /**
+     * 排序所用到的字段
+     */
+    By?: string;
+}
+/**
+ * 创建互联网边界规则参数结构
+ */
+export interface CreateRuleItem {
+    /**
+     * 访问源示例： net：IP/CIDR(192.168.0.2)
+     */
+    SourceContent: string;
+    /**
+     * 访问源类型：入向规则时类型可以为 ip,net,template,location；出向规则时可以为 ip,net,template,instance,group,tag
+     */
+    SourceType: string;
+    /**
+     * 访问目的示例： net：IP/CIDR(192.168.0.2) domain：域名规则，例如*.qq.com
+     */
+    TargetContent: string;
+    /**
+     * 访问目的类型：入向规则时类型可以为ip,net,template,instance,group,tag；出向规则时可以为  ip,net,domain,template,location
+     */
+    TargetType: string;
+    /**
+     * 协议，可选的值： TCP UDP ICMP ANY HTTP HTTPS HTTP/HTTPS SMTP SMTPS SMTP/SMTPS FTP DNS
+     */
+    Protocol: string;
+    /**
+     * 访问控制策略中设置的流量通过云防火墙的方式。取值： accept：放行 drop：拒绝 log：观察
+     */
+    RuleAction: string;
+    /**
+     * 访问控制策略的端口。取值： -1/-1：全部端口 80：80端口
+     */
+    Port: string;
+    /**
+     * 规则方向：1，入站；0，出站
+     */
+    Direction: number;
+    /**
+     * 规则序号
+     */
+    OrderIndex: number;
+    /**
+     * 规则对应的唯一id，创建规则时无需填写
+     */
+    Uuid?: number;
+    /**
+     * 规则状态，true表示启用，false表示禁用
+     */
+    Enable?: string;
+    /**
+     * 描述
+     */
+    Description?: string;
+    /**
+     * all
+     */
+    Scope?: string;
+    /**
+     * 0，正常规则添加；1，入侵检测添加
+     */
+    RuleSource?: number;
+    /**
+     * 告警Id
+     */
+    LogId?: string;
 }
 /**
  * DescribeResourceGroup请求参数结构体
@@ -4523,4 +5957,25 @@ export interface DescribeGuideScanInfoResponse {
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * vpc 防火墙下单防火墙实例结构体
+ */
+export interface VpcFwInstance {
+    /**
+     * 防火墙实例名称
+     */
+    Name: string;
+    /**
+     * 私有网络模式下接入的VpcId列表；仅私有网络模式使用
+     */
+    VpcIds: Array<string>;
+    /**
+     * 部署地域信息
+     */
+    FwDeploy: FwDeploy;
+    /**
+     * 防火墙实例ID (编辑场景传)
+     */
+    FwInsId?: string;
 }

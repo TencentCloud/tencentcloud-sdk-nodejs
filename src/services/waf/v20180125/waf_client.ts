@@ -59,7 +59,7 @@ import {
   DescribeAntiInfoLeakRulesStrategyItem,
   UpsertSessionResponse,
   AccessLogItem,
-  SwitchDomainRulesRequest,
+  DescribeDomainVerifyResultResponse,
   DeleteSessionRequest,
   DescribeWafAutoDenyRulesRequest,
   RefreshAccessCheckResultRequest,
@@ -82,7 +82,6 @@ import {
   DescribeUserCdcClbWafRegionsResponse,
   GetAttackHistogramRequest,
   DeleteAccessExportResponse,
-  AddSpartaProtectionsAutoResponse,
   DescribeAccessExportsRequest,
   ModifyApiAnalyzeStatusResponse,
   DescribeCustomWhiteRuleRequest,
@@ -93,14 +92,13 @@ import {
   ModifyAntiFakeUrlStatusRequest,
   DeleteCustomWhiteRuleRequest,
   ModifyHostModeResponse,
-  FailedInfo,
   DescribeCCRuleListRequest,
   ModifyProtectionStatusResponse,
   DescribeAutoDenyIPRequest,
-  AddSpartaProtectionAutoResponse,
   ModifyWafAutoDenyStatusRequest,
   DescribeCustomRuleListResponse,
   ModifyDomainsCLSStatusResponse,
+  SwitchDomainRulesRequest,
   ModifyAccessPeriodResponse,
   ClbHostResult,
   DescribeVipInfoRequest,
@@ -156,6 +154,7 @@ import {
   ModifyAntiFakeUrlRequest,
   DescribeDomainDetailsClbRequest,
   DeleteDomainWhiteRulesRequest,
+  DescribeDomainVerifyResultRequest,
   DescribeTlsVersionRequest,
   DescribeCiphersDetailResponse,
   ModifyAntiInfoLeakRulesRequest,
@@ -212,7 +211,6 @@ import {
   DescribeDomainDetailsSaasResponse,
   AccessKeyValueInfo,
   ModifyApiAnalyzeStatusRequest,
-  AddSpartaProtectionsAutoRequest,
   AddCustomRuleRequest,
   DescribeWafAutoDenyRulesResponse,
   FraudPkg,
@@ -238,7 +236,6 @@ import {
   CacheUrlItems,
   SearchAttackLogResponse,
   Strategy,
-  AddSpartaProtectionAutoRequest,
   AccessFullTextInfo,
   DeleteAntiInfoLeakRuleRequest,
   DescribeIpHitItemsRequest,
@@ -379,13 +376,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 批量添加域名
+   * 编辑自定义规则
    */
-  async AddSpartaProtectionsAuto(
-    req: AddSpartaProtectionsAutoRequest,
-    cb?: (error: string, rep: AddSpartaProtectionsAutoResponse) => void
-  ): Promise<AddSpartaProtectionsAutoResponse> {
-    return this.request("AddSpartaProtectionsAuto", req, cb)
+  async ModifyCustomRule(
+    req: ModifyCustomRuleRequest,
+    cb?: (error: string, rep: ModifyCustomRuleResponse) => void
+  ): Promise<ModifyCustomRuleResponse> {
+    return this.request("ModifyCustomRule", req, cb)
   }
 
   /**
@@ -511,13 +508,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 一键接入
+   * 本接口用于搜索WAF访问日志
    */
-  async AddSpartaProtectionAuto(
-    req: AddSpartaProtectionAutoRequest,
-    cb?: (error: string, rep: AddSpartaProtectionAutoResponse) => void
-  ): Promise<AddSpartaProtectionAutoResponse> {
-    return this.request("AddSpartaProtectionAuto", req, cb)
+  async SearchAccessLog(
+    req: SearchAccessLogRequest,
+    cb?: (error: string, rep: SearchAccessLogResponse) => void
+  ): Promise<SearchAccessLogResponse> {
+    return this.request("SearchAccessLog", req, cb)
   }
 
   /**
@@ -538,16 +535,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeIpHitItemsResponse) => void
   ): Promise<DescribeIpHitItemsResponse> {
     return this.request("DescribeIpHitItems", req, cb)
-  }
-
-  /**
-   * 本接口用于搜索WAF访问日志
-   */
-  async SearchAccessLog(
-    req: SearchAccessLogRequest,
-    cb?: (error: string, rep: SearchAccessLogResponse) => void
-  ): Promise<SearchAccessLogResponse> {
-    return this.request("SearchAccessLog", req, cb)
   }
 
   /**
@@ -926,16 +913,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 编辑自定义规则
-   */
-  async ModifyCustomRule(
-    req: ModifyCustomRuleRequest,
-    cb?: (error: string, rep: ModifyCustomRuleResponse) => void
-  ): Promise<ModifyCustomRuleResponse> {
-    return this.request("ModifyCustomRule", req, cb)
-  }
-
-  /**
    * Bot_V2 bot总开关更新
    */
   async ModifyBotStatus(
@@ -1173,6 +1150,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteDomainWhiteRulesResponse) => void
   ): Promise<DeleteDomainWhiteRulesResponse> {
     return this.request("DeleteDomainWhiteRules", req, cb)
+  }
+
+  /**
+   * 获取添加域名操作的结果
+   */
+  async DescribeDomainVerifyResult(
+    req: DescribeDomainVerifyResultRequest,
+    cb?: (error: string, rep: DescribeDomainVerifyResultResponse) => void
+  ): Promise<DescribeDomainVerifyResultResponse> {
+    return this.request("DescribeDomainVerifyResult", req, cb)
   }
 
   /**

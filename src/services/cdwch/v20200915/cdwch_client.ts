@@ -28,17 +28,18 @@ import {
   Charge,
   DescribeClusterConfigsResponse,
   ActionAlterCkUserRequest,
-  DescribeSpecRequest,
+  DescribeCkSqlApisRequest,
   CkUserAlterInfo,
   DescribeBackUpScheduleRequest,
   DescribeSpecResponse,
-  ModifyInstanceKeyValConfigsResponse,
+  DescribeSpecRequest,
   DestroyInstanceRequest,
   ModifyUserNewPrivilegeRequest,
-  DescribeCkSqlApisRequest,
+  DescribeBackUpTablesResponse,
   ClusterConfigsInfoFromEMR,
   ClusterInfo,
   OpenBackUpRequest,
+  ModifyInstanceKeyValConfigsResponse,
   BackupTableContent,
   CreateInstanceNewResponse,
   ConfigSubmitContext,
@@ -84,6 +85,7 @@ import {
   AttachCBSSpec,
   ScheduleStrategy,
   DescribeInstanceStateResponse,
+  DescribeBackUpTablesRequest,
   DestroyInstanceResponse,
   ResizeDiskResponse,
   DescribeBackUpScheduleResponse,
@@ -163,6 +165,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取可备份表信息
+   */
+  async DescribeBackUpTables(
+    req: DescribeBackUpTablesRequest,
+    cb?: (error: string, rep: DescribeBackUpTablesResponse) => void
+  ): Promise<DescribeBackUpTablesResponse> {
+    return this.request("DescribeBackUpTables", req, cb)
+  }
+
+  /**
    * 调整clickhouse节点数量
    */
   async ScaleOutInstance(
@@ -173,13 +185,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 备份恢复
+   * 获取实例shard信息列表
    */
-  async RecoverBackUpJob(
-    req: RecoverBackUpJobRequest,
-    cb?: (error: string, rep: RecoverBackUpJobResponse) => void
-  ): Promise<RecoverBackUpJobResponse> {
-    return this.request("RecoverBackUpJob", req, cb)
+  async DescribeInstanceShards(
+    req: DescribeInstanceShardsRequest,
+    cb?: (error: string, rep: DescribeInstanceShardsResponse) => void
+  ): Promise<DescribeInstanceShardsResponse> {
+    return this.request("DescribeInstanceShards", req, cb)
   }
 
   /**
@@ -253,13 +265,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取实例shard信息列表
+   * 备份恢复
    */
-  async DescribeInstanceShards(
-    req: DescribeInstanceShardsRequest,
-    cb?: (error: string, rep: DescribeInstanceShardsResponse) => void
-  ): Promise<DescribeInstanceShardsResponse> {
-    return this.request("DescribeInstanceShards", req, cb)
+  async RecoverBackUpJob(
+    req: RecoverBackUpJobRequest,
+    cb?: (error: string, rep: RecoverBackUpJobResponse) => void
+  ): Promise<RecoverBackUpJobResponse> {
+    return this.request("RecoverBackUpJob", req, cb)
   }
 
   /**

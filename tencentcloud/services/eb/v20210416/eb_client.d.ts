@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { ListConnectionsResponse, GetEventBusResponse, ListConnectionsRequest, DeleteRuleRequest, UpdateRuleResponse, CreateTargetRequest, DeleteTargetResponse, UpdateRuleRequest, DescribeLogTagValueRequest, ListRulesResponse, CreateTargetResponse, CheckRuleRequest, GetRuleResponse, CreateConnectionResponse, ListTargetsRequest, ListRulesRequest, UpdateEventBusRequest, CreateEventBusRequest, PutEventsResponse, CreateRuleRequest, DeleteConnectionResponse, DeleteRuleResponse, GetTransformationResponse, CreateTransformationRequest, PublishEventRequest, SearchLogResponse, CheckTransformationResponse, ListTargetsResponse, ListEventBusesResponse, CheckRuleResponse, UpdateTargetResponse, CreateConnectionRequest, DeleteEventBusRequest, ListEventBusesRequest, PublishEventResponse, CreateTransformationResponse, PutEventsRequest, DeleteEventBusResponse, GetTransformationRequest, CreateEventBusResponse, DeleteConnectionRequest, UpdateTransformationRequest, CreateRuleResponse, DeleteTransformationResponse, DeleteTransformationRequest, UpdateConnectionRequest, GetEventBusRequest, DeleteTargetRequest, DescribeLogTagValueResponse, UpdateTransformationResponse, SearchLogRequest, CheckTransformationRequest, UpdateConnectionResponse, GetRuleRequest, UpdateTargetRequest, UpdateEventBusResponse } from "./eb_models";
+import { DeleteTargetResponse, DeleteRuleRequest, CheckRuleRequest, CreateEventBusRequest, CreateTransformationRequest, SearchLogResponse, ListEventBusesResponse, CreateTargetRequest, CreateRuleResponse, UpdateRuleResponse, DeleteTransformationResponse, ListPlatformProductsResponse, GetEventBusRequest, UpdateConnectionRequest, GetRuleRequest, CreateTargetResponse, UpdateRuleRequest, CreateConnectionResponse, ListTargetsRequest, UpdateTransformationResponse, CheckTransformationResponse, ListTargetsResponse, DeleteEventBusRequest, ListEventBusesRequest, CreateTransformationResponse, DeleteTransformationRequest, UpdateTargetRequest, ListConnectionsResponse, ListPlatformProductsRequest, PublishEventRequest, ListPlatformEventNamesRequest, ListPlatformEventPatternsResponse, ListRulesRequest, CreateRuleRequest, DeleteConnectionResponse, GetTransformationResponse, CheckRuleResponse, UpdateTargetResponse, PublishEventResponse, DeleteEventBusResponse, CreateEventBusResponse, DeleteConnectionRequest, UpdateTransformationRequest, GetPlatformEventTemplateRequest, PutEventsResponse, CheckTransformationRequest, UpdateConnectionResponse, UpdateEventBusResponse, GetEventBusResponse, DeleteRuleResponse, DescribeLogTagValueRequest, ListRulesResponse, GetRuleResponse, UpdateEventBusRequest, GetPlatformEventTemplateResponse, ListConnectionsRequest, SearchLogRequest, CreateConnectionRequest, ListPlatformEventPatternsRequest, GetTransformationRequest, PutEventsRequest, DeleteTargetRequest, DescribeLogTagValueResponse, ListPlatformEventNamesResponse } from "./eb_models";
 /**
  * eb client
  * @class
@@ -11,6 +11,10 @@ export declare class Client extends AbstractClient {
      * 删除事件集
      */
     DeleteEventBus(req: DeleteEventBusRequest, cb?: (error: string, rep: DeleteEventBusResponse) => void): Promise<DeleteEventBusResponse>;
+    /**
+     * 获取平台产品事件模板
+     */
+    GetPlatformEventTemplate(req: GetPlatformEventTemplateRequest, cb?: (error: string, rep: GetPlatformEventTemplateResponse) => void): Promise<GetPlatformEventTemplateResponse>;
     /**
      * 用于创建转换器
      */
@@ -28,6 +32,10 @@ export declare class Client extends AbstractClient {
      */
     DeleteTarget(req: DeleteTargetRequest, cb?: (error: string, rep: DeleteTargetResponse) => void): Promise<DeleteTargetResponse>;
     /**
+     * 获取平台产品事件匹配规则
+     */
+    ListPlatformEventPatterns(req: ListPlatformEventPatternsRequest, cb?: (error: string, rep: ListPlatformEventPatternsResponse) => void): Promise<ListPlatformEventPatternsResponse>;
+    /**
      * 获取事件目标列表
      */
     ListTargets(req: ListTargetsRequest, cb?: (error: string, rep: ListTargetsResponse) => void): Promise<ListTargetsResponse>;
@@ -35,6 +43,10 @@ export declare class Client extends AbstractClient {
      * 检验规则
      */
     CheckRule(req: CheckRuleRequest, cb?: (error: string, rep: CheckRuleResponse) => void): Promise<CheckRuleResponse>;
+    /**
+     * 获取平台产品列表
+     */
+    ListPlatformProducts(req?: ListPlatformProductsRequest, cb?: (error: string, rep: ListPlatformProductsResponse) => void): Promise<ListPlatformProductsResponse>;
     /**
      * （已废弃）用于Event事件投递
      */
@@ -59,6 +71,10 @@ export declare class Client extends AbstractClient {
      * 删除事件规则
      */
     DeleteRule(req: DeleteRuleRequest, cb?: (error: string, rep: DeleteRuleResponse) => void): Promise<DeleteRuleResponse>;
+    /**
+     * 获取平台产品事件名称
+     */
+    ListPlatformEventNames(req: ListPlatformEventNamesRequest, cb?: (error: string, rep: ListPlatformEventNamesResponse) => void): Promise<ListPlatformEventNamesResponse>;
     /**
      * 更新事件集
      */

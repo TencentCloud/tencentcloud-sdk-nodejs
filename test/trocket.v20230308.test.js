@@ -18,6 +18,46 @@ const client = new tencentcloud.trocket.v20230308.Client({
 })
 describe("trocket.v20230308.test.js", function () {
 
+it("trocket.v20230308.DescribeInstanceList", async function () {
+    try {
+       const data = await client.DescribeInstanceList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("trocket.v20230308.CreateInstance", async function () {
+    try {
+       const data = await client.CreateInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("trocket.v20230308.DescribeInstance", async function () {
+    try {
+       const data = await client.DescribeInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("trocket.v20230308.DeleteInstance", async function () {
+    try {
+       const data = await client.DeleteInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("trocket.v20230308.DescribeTopicList", async function () {
     try {
        const data = await client.DescribeTopicList({})
@@ -28,9 +68,9 @@ it("trocket.v20230308.DescribeTopicList", async function () {
     }
 })
 
-it("trocket.v20230308.DescribeInstanceList", async function () {
+it("trocket.v20230308.ModifyInstance", async function () {
     try {
-       const data = await client.DescribeInstanceList({})
+       const data = await client.ModifyInstance({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -18,14 +18,25 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
-  DescribeInstanceListResponse,
+  ModifyInstanceResponse,
+  CreateInstanceResponse,
+  DeleteInstanceResponse,
   DescribeTopicListResponse,
-  TagFilter,
-  Filter,
+  DeleteInstanceRequest,
   TopicItem,
-  Tag,
+  DescribeInstanceResponse,
+  DescribeInstanceRequest,
+  IpRule,
+  Filter,
   InstanceItem,
+  Tag,
+  Endpoint,
+  CreateInstanceRequest,
+  TagFilter,
   DescribeTopicListRequest,
+  ModifyInstanceRequest,
+  DescribeInstanceListResponse,
+  VpcInfo,
   DescribeInstanceListRequest,
 } from "./trocket_models"
 
@@ -36,19 +47,6 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("trocket.tencentcloudapi.com", "2023-03-08", clientConfig)
-  }
-
-  /**
-     * 获取主题列表，Filter参数使用说明如下：
-
-1. TopicName，主题名称模糊搜索
-2. TopicType，主题类型查询，支持多选，可选值：Normal,Order,Transaction,DelayScheduled
-     */
-  async DescribeTopicList(
-    req: DescribeTopicListRequest,
-    cb?: (error: string, rep: DescribeTopicListResponse) => void
-  ): Promise<DescribeTopicListResponse> {
-    return this.request("DescribeTopicList", req, cb)
   }
 
   /**
@@ -65,5 +63,58 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeInstanceListResponse) => void
   ): Promise<DescribeInstanceListResponse> {
     return this.request("DescribeInstanceList", req, cb)
+  }
+
+  /**
+   * 购买新实例
+   */
+  async CreateInstance(
+    req: CreateInstanceRequest,
+    cb?: (error: string, rep: CreateInstanceResponse) => void
+  ): Promise<CreateInstanceResponse> {
+    return this.request("CreateInstance", req, cb)
+  }
+
+  /**
+   * 查询实例信息
+   */
+  async DescribeInstance(
+    req: DescribeInstanceRequest,
+    cb?: (error: string, rep: DescribeInstanceResponse) => void
+  ): Promise<DescribeInstanceResponse> {
+    return this.request("DescribeInstance", req, cb)
+  }
+
+  /**
+   * 删除实例
+   */
+  async DeleteInstance(
+    req: DeleteInstanceRequest,
+    cb?: (error: string, rep: DeleteInstanceResponse) => void
+  ): Promise<DeleteInstanceResponse> {
+    return this.request("DeleteInstance", req, cb)
+  }
+
+  /**
+     * 获取主题列表，Filter参数使用说明如下：
+
+1. TopicName，主题名称模糊搜索
+2. TopicType，主题类型查询，支持多选，可选值：Normal,Order,Transaction,DelayScheduled
+     */
+  async DescribeTopicList(
+    req: DescribeTopicListRequest,
+    cb?: (error: string, rep: DescribeTopicListResponse) => void
+  ): Promise<DescribeTopicListResponse> {
+    return this.request("DescribeTopicList", req, cb)
+  }
+
+  /**
+   * 修改实例属性
+   */
+  async ModifyInstance(
+    req: ModifyInstanceRequest,
+    cb?: (error: string, rep: ModifyInstanceResponse) => void
+  ): Promise<ModifyInstanceResponse> {
+    return this.request("ModifyInstance", req, cb)
   }
 }

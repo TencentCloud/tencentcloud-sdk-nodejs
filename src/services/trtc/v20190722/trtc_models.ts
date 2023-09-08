@@ -1256,7 +1256,7 @@ export interface DismissRoomRequest {
    */
   SdkAppId: number
   /**
-   * 房间号。
+   * 数字房间号。本接口仅支持解散数字类型房间号，如需解散字符串类型房间号，请使用DismissRoomByStrRoomId。
    */
   RoomId: number
 }

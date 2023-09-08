@@ -52,7 +52,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("FuseFace", req, cb);
     }
     /**
-     * 人脸融合活动专用版，不推荐使用。人脸融合接口建议使用[人脸融合](https://cloud.tencent.com/document/product/670/31061)或[选脸融合](https://cloud.tencent.com/document/product/670/37736)接口
+     * 接口不再使用
+
+人脸融合活动专用版，不推荐使用。人脸融合接口建议使用[人脸融合](https://cloud.tencent.com/document/product/670/31061)或[选脸融合](https://cloud.tencent.com/document/product/670/37736)接口
      */
     async FaceFusionLite(req, cb) {
         return this.request("FaceFusionLite", req, cb);

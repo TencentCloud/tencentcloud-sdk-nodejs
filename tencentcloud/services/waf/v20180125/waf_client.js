@@ -72,10 +72,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeAntiInfoLeakRules", req, cb);
     }
     /**
-     * 批量添加域名
+     * 编辑自定义规则
      */
-    async AddSpartaProtectionsAuto(req, cb) {
-        return this.request("AddSpartaProtectionsAuto", req, cb);
+    async ModifyCustomRule(req, cb) {
+        return this.request("ModifyCustomRule", req, cb);
     }
     /**
      * 接口已废弃
@@ -152,10 +152,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeAntiInfoLeakageRules", req, cb);
     }
     /**
-     * 一键接入
+     * 本接口用于搜索WAF访问日志
      */
-    async AddSpartaProtectionAuto(req, cb) {
-        return this.request("AddSpartaProtectionAuto", req, cb);
+    async SearchAccessLog(req, cb) {
+        return this.request("SearchAccessLog", req, cb);
     }
     /**
      * 描述WAF威胁情报封禁模块配置详情
@@ -168,12 +168,6 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeIpHitItems(req, cb) {
         return this.request("DescribeIpHitItems", req, cb);
-    }
-    /**
-     * 本接口用于搜索WAF访问日志
-     */
-    async SearchAccessLog(req, cb) {
-        return this.request("SearchAccessLog", req, cb);
     }
     /**
      * 信息防泄漏删除规则
@@ -403,12 +397,6 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteDownloadRecord", req, cb);
     }
     /**
-     * 编辑自定义规则
-     */
-    async ModifyCustomRule(req, cb) {
-        return this.request("ModifyCustomRule", req, cb);
-    }
-    /**
      * Bot_V2 bot总开关更新
      */
     async ModifyBotStatus(req, cb) {
@@ -551,6 +539,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DeleteDomainWhiteRules(req, cb) {
         return this.request("DeleteDomainWhiteRules", req, cb);
+    }
+    /**
+     * 获取添加域名操作的结果
+     */
+    async DescribeDomainVerifyResult(req, cb) {
+        return this.request("DescribeDomainVerifyResult", req, cb);
     }
     /**
      * 本接口用于创建访问日志导出

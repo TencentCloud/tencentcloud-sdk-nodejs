@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeInstanceShardsRequest, ScaleOutInstanceRequest, ScaleOutInstanceResponse, ResizeDiskRequest, DescribeInstanceKeyValConfigsRequest, OpenBackUpResponse, DescribeClusterConfigsResponse, ActionAlterCkUserRequest, DescribeSpecRequest, DescribeBackUpScheduleRequest, DescribeSpecResponse, ModifyInstanceKeyValConfigsResponse, DestroyInstanceRequest, ModifyUserNewPrivilegeRequest, DescribeCkSqlApisRequest, OpenBackUpRequest, CreateInstanceNewResponse, DescribeInstanceClustersResponse, CreateInstanceNewRequest, DescribeBackUpJobDetailResponse, ModifyClusterConfigsRequest, ScaleUpInstanceRequest, DescribeInstanceKeyValConfigsResponse, ModifyClusterConfigsResponse, RecoverBackUpJobRequest, DescribeInstancesNewRequest, DeleteBackUpDataResponse, ModifyInstanceKeyValConfigsRequest, DescribeInstancesNewResponse, DescribeClusterConfigsRequest, CreateBackUpScheduleResponse, RecoverBackUpJobResponse, DescribeInstanceResponse, DescribeBackUpJobResponse, DescribeInstanceClustersRequest, DescribeInstanceStateRequest, DescribeInstanceShardsResponse, DescribeBackUpJobDetailRequest, CreateBackUpScheduleRequest, DeleteBackUpDataRequest, DescribeInstanceRequest, ActionAlterCkUserResponse, DescribeInstanceStateResponse, DestroyInstanceResponse, ResizeDiskResponse, DescribeBackUpScheduleResponse, DescribeCkSqlApisResponse, DescribeBackUpJobRequest, ScaleUpInstanceResponse, ModifyUserNewPrivilegeResponse } from "./cdwch_models";
+import { DescribeInstanceShardsRequest, ScaleOutInstanceRequest, ScaleOutInstanceResponse, ResizeDiskRequest, DescribeInstanceKeyValConfigsRequest, OpenBackUpResponse, DescribeClusterConfigsResponse, ActionAlterCkUserRequest, DescribeCkSqlApisRequest, DescribeBackUpScheduleRequest, DescribeSpecResponse, DescribeSpecRequest, DestroyInstanceRequest, ModifyUserNewPrivilegeRequest, DescribeBackUpTablesResponse, OpenBackUpRequest, ModifyInstanceKeyValConfigsResponse, CreateInstanceNewResponse, DescribeInstanceClustersResponse, CreateInstanceNewRequest, DescribeBackUpJobDetailResponse, ModifyClusterConfigsRequest, ScaleUpInstanceRequest, DescribeInstanceKeyValConfigsResponse, ModifyClusterConfigsResponse, RecoverBackUpJobRequest, DescribeInstancesNewRequest, DeleteBackUpDataResponse, ModifyInstanceKeyValConfigsRequest, DescribeInstancesNewResponse, DescribeClusterConfigsRequest, CreateBackUpScheduleResponse, RecoverBackUpJobResponse, DescribeInstanceResponse, DescribeBackUpJobResponse, DescribeInstanceClustersRequest, DescribeInstanceStateRequest, DescribeInstanceShardsResponse, DescribeBackUpJobDetailRequest, CreateBackUpScheduleRequest, DeleteBackUpDataRequest, DescribeInstanceRequest, ActionAlterCkUserResponse, DescribeInstanceStateResponse, DescribeBackUpTablesRequest, DestroyInstanceResponse, ResizeDiskResponse, DescribeBackUpScheduleResponse, DescribeCkSqlApisResponse, DescribeBackUpJobRequest, ScaleUpInstanceResponse, ModifyUserNewPrivilegeResponse } from "./cdwch_models";
 /**
  * cdwch client
  * @class
@@ -32,13 +32,17 @@ export declare class Client extends AbstractClient {
      */
     ScaleUpInstance(req: ScaleUpInstanceRequest, cb?: (error: string, rep: ScaleUpInstanceResponse) => void): Promise<ScaleUpInstanceResponse>;
     /**
+     * 获取可备份表信息
+     */
+    DescribeBackUpTables(req: DescribeBackUpTablesRequest, cb?: (error: string, rep: DescribeBackUpTablesResponse) => void): Promise<DescribeBackUpTablesResponse>;
+    /**
      * 调整clickhouse节点数量
      */
     ScaleOutInstance(req: ScaleOutInstanceRequest, cb?: (error: string, rep: ScaleOutInstanceResponse) => void): Promise<ScaleOutInstanceResponse>;
     /**
-     * 备份恢复
+     * 获取实例shard信息列表
      */
-    RecoverBackUpJob(req: RecoverBackUpJobRequest, cb?: (error: string, rep: RecoverBackUpJobResponse) => void): Promise<RecoverBackUpJobResponse>;
+    DescribeInstanceShards(req: DescribeInstanceShardsRequest, cb?: (error: string, rep: DescribeInstanceShardsResponse) => void): Promise<DescribeInstanceShardsResponse>;
     /**
      * 获取实例列表，供外部sdk使用
      */
@@ -68,9 +72,9 @@ export declare class Client extends AbstractClient {
      */
     OpenBackUp(req: OpenBackUpRequest, cb?: (error: string, rep: OpenBackUpResponse) => void): Promise<OpenBackUpResponse>;
     /**
-     * 获取实例shard信息列表
+     * 备份恢复
      */
-    DescribeInstanceShards(req: DescribeInstanceShardsRequest, cb?: (error: string, rep: DescribeInstanceShardsResponse) => void): Promise<DescribeInstanceShardsResponse>;
+    RecoverBackUpJob(req: RecoverBackUpJobRequest, cb?: (error: string, rep: RecoverBackUpJobResponse) => void): Promise<RecoverBackUpJobResponse>;
     /**
      * 查询集群用户、集群表，数据库等相关信息
      */

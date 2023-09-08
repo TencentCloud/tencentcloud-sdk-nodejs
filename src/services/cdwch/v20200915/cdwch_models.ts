@@ -196,21 +196,40 @@ AddSystemUser新增用户，UpdateSystemUser，修改用户
 }
 
 /**
- * DescribeSpec请求参数结构体
+ * DescribeCkSqlApis请求参数结构体
  */
-export interface DescribeSpecRequest {
+export interface DescribeCkSqlApisRequest {
   /**
-   * 地域信息，例如"ap-guangzhou-1"
+   * 实例id
    */
-  Zone: string
+  InstanceId: string
   /**
-   * 计费类型，PREPAID 包年包月，POSTPAID_BY_HOUR 按量计费
+   * api接口名称,GetClusters:获取集群cluster列表
+GetSystemUsers:获取系统用户列表
+CheckNodeCluster: 检查节点是否隶属一个cluster
+GetClusterDatabases: 获取一个cluster下的数据库列表
+GetClusterTables: 获取一个cluster下的数据库表列表
+GetPrivilegeUsers: 获取授权的用户列表
+GET_USER_CLUSTER_PRIVILEGES:获取用户cluster下的权限   
+GetUserClusterNewPrivileges:获取用户cluster下的权限 (新版）
+RevokeClusterUser:解绑cluster用户
+DeleteSystemUser:删除系统用户 —— 必须所有cluster先解绑
+GetUserOptionMessages:获取用户配置备注信息
+GET_USER_CONFIGS:获取用户配置列表  QUOTA、PROFILE、POLICY
    */
-  PayMode?: string
+  ApiType: string
   /**
-   * 是否弹性ck
+   * 集群名称，GET_SYSTEM_USERS，GET_PRIVILEGE_USERS，GET_CLUSTER_DATABASES，GET_CLUSTER_TABLES 必填
    */
-  IsElastic?: boolean
+  Cluster?: string
+  /**
+   * 用户名称，api与user相关的必填
+   */
+  UserName?: string
+  /**
+   * 账户的类型
+   */
+  UserType?: string
 }
 
 /**
@@ -269,22 +288,21 @@ export interface DescribeSpecResponse {
 }
 
 /**
- * ModifyInstanceKeyValConfigs返回参数结构体
+ * DescribeSpec请求参数结构体
  */
-export interface ModifyInstanceKeyValConfigsResponse {
+export interface DescribeSpecRequest {
   /**
-   * 错误信息
-注意：此字段可能返回 null，表示取不到有效值。
+   * 地域信息，例如"ap-guangzhou-1"
    */
-  ErrorMsg?: string
+  Zone: string
   /**
-   * ID
+   * 计费类型，PREPAID 包年包月，POSTPAID_BY_HOUR 按量计费
    */
-  FlowId?: number
+  PayMode?: string
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 是否弹性ck
    */
-  RequestId?: string
+  IsElastic?: boolean
 }
 
 /**
@@ -328,40 +346,17 @@ export interface ModifyUserNewPrivilegeRequest {
 }
 
 /**
- * DescribeCkSqlApis请求参数结构体
+ * DescribeBackUpTables返回参数结构体
  */
-export interface DescribeCkSqlApisRequest {
+export interface DescribeBackUpTablesResponse {
   /**
-   * 实例id
+   * 可备份表列表
    */
-  InstanceId: string
+  AvailableTables: Array<BackupTableContent>
   /**
-   * api接口名称,GetClusters:获取集群cluster列表
-GetSystemUsers:获取系统用户列表
-CheckNodeCluster: 检查节点是否隶属一个cluster
-GetClusterDatabases: 获取一个cluster下的数据库列表
-GetClusterTables: 获取一个cluster下的数据库表列表
-GetPrivilegeUsers: 获取授权的用户列表
-GET_USER_CLUSTER_PRIVILEGES:获取用户cluster下的权限   
-GetUserClusterNewPrivileges:获取用户cluster下的权限 (新版）
-RevokeClusterUser:解绑cluster用户
-DeleteSystemUser:删除系统用户 —— 必须所有cluster先解绑
-GetUserOptionMessages:获取用户配置备注信息
-GET_USER_CONFIGS:获取用户配置列表  QUOTA、PROFILE、POLICY
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  ApiType: string
-  /**
-   * 集群名称，GET_SYSTEM_USERS，GET_PRIVILEGE_USERS，GET_CLUSTER_DATABASES，GET_CLUSTER_TABLES 必填
-   */
-  Cluster?: string
-  /**
-   * 用户名称，api与user相关的必填
-   */
-  UserName?: string
-  /**
-   * 账户的类型
-   */
-  UserType?: string
+  RequestId?: string
 }
 
 /**
@@ -427,6 +422,25 @@ export interface OpenBackUpRequest {
    * 桶名字
    */
   CosBucketName: string
+}
+
+/**
+ * ModifyInstanceKeyValConfigs返回参数结构体
+ */
+export interface ModifyInstanceKeyValConfigsResponse {
+  /**
+   * 错误信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ErrorMsg?: string
+  /**
+   * ID
+   */
+  FlowId?: number
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1716,6 +1730,16 @@ export interface DescribeInstanceStateResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeBackUpTables请求参数结构体
+ */
+export interface DescribeBackUpTablesRequest {
+  /**
+   * 集群id
+   */
+  InstanceId: string
 }
 
 /**

@@ -18,90 +18,101 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
-  Transform,
-  ListConnectionsResponse,
-  ESTargetParams,
-  GetEventBusResponse,
-  RetryPolicy,
   CkafkaTargetParams,
-  ListConnectionsRequest,
-  DeleteRuleRequest,
-  UpdateRuleResponse,
-  CreateTargetRequest,
   DeleteTargetResponse,
-  UpdateRuleRequest,
-  DescribeLogTagValueRequest,
-  TargetBrief,
-  DTSParams,
-  ListRulesResponse,
-  CreateTargetResponse,
+  DeleteRuleRequest,
   CheckRuleRequest,
-  GetRuleResponse,
+  LogFilters,
+  CreateEventBusRequest,
+  PlatformEventSummary,
+  RetryPolicy,
+  CreateTransformationRequest,
+  SearchLogResponse,
+  ListEventBusesResponse,
+  CreateTargetRequest,
+  SearchLogResult,
+  CreateRuleResponse,
+  UpdateRuleResponse,
+  DeleteTransformationResponse,
+  ListPlatformProductsResponse,
+  GetEventBusRequest,
+  UpdateConnectionRequest,
+  OutputStructParam,
+  GetRuleRequest,
+  LogFilter,
+  APIGWParams,
+  PlatformProduct,
+  Extraction,
+  DTSParams,
+  CreateTargetResponse,
+  UpdateRuleRequest,
   CreateConnectionResponse,
-  EventBus,
   ListTargetsRequest,
   Transformation,
-  Target,
-  ListRulesRequest,
-  SCFParams,
-  DeadLetterConfig,
-  LogFilters,
-  UpdateEventBusRequest,
-  CreateEventBusRequest,
-  PutEventsResponse,
-  CreateRuleRequest,
-  TextParams,
-  DeleteConnectionResponse,
-  DeleteRuleResponse,
-  GetTransformationResponse,
-  Rule,
-  CreateTransformationRequest,
-  PublishEventRequest,
-  EtlFilter,
-  SearchLogResponse,
+  UpdateTransformationResponse,
   CheckTransformationResponse,
   ListTargetsResponse,
-  ListEventBusesResponse,
-  CheckRuleResponse,
+  EtlFilter,
   ConnectionDescription,
-  SearchLogResult,
-  CkafkaDeliveryParams,
-  UpdateTargetResponse,
-  CreateConnectionRequest,
+  Target,
   DeleteEventBusRequest,
   ListEventBusesRequest,
-  PublishEventResponse,
   CreateTransformationResponse,
-  ConnectionBrief,
+  PlatformEventDetail,
+  DeleteTransformationRequest,
+  CkafkaParams,
+  Event,
+  UpdateTargetRequest,
+  ListConnectionsResponse,
+  ListPlatformProductsRequest,
+  PublishEventRequest,
+  Transform,
+  ListPlatformEventNamesRequest,
+  EventBus,
+  ListPlatformEventPatternsResponse,
+  ListRulesRequest,
+  CreateRuleRequest,
+  DeleteConnectionResponse,
+  GetTransformationResponse,
+  CheckRuleResponse,
+  UpdateTargetResponse,
+  PublishEventResponse,
+  Rule,
   Filter,
   Connection,
-  PutEventsRequest,
   DeleteEventBusResponse,
-  GetTransformationRequest,
   CreateEventBusResponse,
   DeleteConnectionRequest,
   UpdateTransformationRequest,
-  CreateRuleResponse,
-  TargetDescription,
-  DeleteTransformationResponse,
-  DeleteTransformationRequest,
-  Extraction,
-  UpdateConnectionRequest,
-  GetEventBusRequest,
-  DeleteTargetRequest,
-  CkafkaParams,
-  DescribeLogTagValueResponse,
-  LogFilter,
-  UpdateTransformationResponse,
-  OutputStructParam,
-  SearchLogRequest,
+  GetPlatformEventTemplateRequest,
+  PutEventsResponse,
   CheckTransformationRequest,
   UpdateConnectionResponse,
-  GetRuleRequest,
-  UpdateTargetRequest,
-  Event,
   UpdateEventBusResponse,
-  APIGWParams,
+  GetEventBusResponse,
+  DeleteRuleResponse,
+  DescribeLogTagValueRequest,
+  TargetBrief,
+  ListRulesResponse,
+  ESTargetParams,
+  GetRuleResponse,
+  UpdateEventBusRequest,
+  GetPlatformEventTemplateResponse,
+  SCFParams,
+  DeadLetterConfig,
+  ListConnectionsRequest,
+  TextParams,
+  SearchLogRequest,
+  CkafkaDeliveryParams,
+  CreateConnectionRequest,
+  ListPlatformEventPatternsRequest,
+  GetTransformationRequest,
+  ConnectionBrief,
+  PutEventsRequest,
+  TargetDescription,
+  DeleteTargetRequest,
+  DescribeLogTagValueResponse,
+  ListPlatformEventNamesResponse,
 } from "./eb_models"
 
 /**
@@ -121,6 +132,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteEventBusResponse) => void
   ): Promise<DeleteEventBusResponse> {
     return this.request("DeleteEventBus", req, cb)
+  }
+
+  /**
+   * 获取平台产品事件模板
+   */
+  async GetPlatformEventTemplate(
+    req: GetPlatformEventTemplateRequest,
+    cb?: (error: string, rep: GetPlatformEventTemplateResponse) => void
+  ): Promise<GetPlatformEventTemplateResponse> {
+    return this.request("GetPlatformEventTemplate", req, cb)
   }
 
   /**
@@ -164,6 +185,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取平台产品事件匹配规则
+   */
+  async ListPlatformEventPatterns(
+    req: ListPlatformEventPatternsRequest,
+    cb?: (error: string, rep: ListPlatformEventPatternsResponse) => void
+  ): Promise<ListPlatformEventPatternsResponse> {
+    return this.request("ListPlatformEventPatterns", req, cb)
+  }
+
+  /**
    * 获取事件目标列表
    */
   async ListTargets(
@@ -181,6 +212,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CheckRuleResponse) => void
   ): Promise<CheckRuleResponse> {
     return this.request("CheckRule", req, cb)
+  }
+
+  /**
+   * 获取平台产品列表
+   */
+  async ListPlatformProducts(
+    req?: ListPlatformProductsRequest,
+    cb?: (error: string, rep: ListPlatformProductsResponse) => void
+  ): Promise<ListPlatformProductsResponse> {
+    return this.request("ListPlatformProducts", req, cb)
   }
 
   /**
@@ -241,6 +282,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteRuleResponse) => void
   ): Promise<DeleteRuleResponse> {
     return this.request("DeleteRule", req, cb)
+  }
+
+  /**
+   * 获取平台产品事件名称
+   */
+  async ListPlatformEventNames(
+    req: ListPlatformEventNamesRequest,
+    cb?: (error: string, rep: ListPlatformEventNamesResponse) => void
+  ): Promise<ListPlatformEventNamesResponse> {
+    return this.request("ListPlatformEventNames", req, cb)
   }
 
   /**

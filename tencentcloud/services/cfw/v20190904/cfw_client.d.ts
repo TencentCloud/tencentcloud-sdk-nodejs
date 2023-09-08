@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { ModifyEWRuleStatusResponse, DescribeNatFwInstanceRequest, DescribeLogsRequest, ModifyNatFwVpcDnsSwitchResponse, DescribeNatFwInstanceWithRegionRequest, ModifyNatAcRuleResponse, DescribeRuleOverviewResponse, DescribeNatAcRuleResponse, ModifyPublicIPSwitchStatusResponse, ModifyNatAcRuleRequest, ModifyAcRuleResponse, ModifyNatSequenceRulesRequest, DescribeTableStatusResponse, AddAcRuleRequest, ModifyNatFwVpcDnsSwitchRequest, DeleteNatFwInstanceResponse, DeleteAllAccessControlRuleRequest, ModifySecurityGroupRuleRequest, ModifyAllVPCSwitchStatusResponse, DescribeNatFwVpcDnsLstRequest, DescribeCfwEipsRequest, DescribeTLogInfoResponse, DescribeUnHandleEventTabListRequest, DescribeAssociatedInstanceListResponse, CreateBlockIgnoreRuleListRequest, RemoveAcRuleResponse, CreateSecurityGroupRulesResponse, ExpandCfwVerticalRequest, ModifyAllPublicIPSwitchStatusResponse, DeleteVpcInstanceResponse, ModifyAssetScanRequest, ModifyBlockIgnoreListRequest, AddEnterpriseSecurityGroupRulesRequest, ModifySecurityGroupSequenceRulesResponse, DeleteSecurityGroupRuleResponse, ModifySequenceRulesRequest, DescribeEnterpriseSGRuleProgressResponse, ModifySecurityGroupItemRuleStatusResponse, DescribeEnterpriseSecurityGroupRuleResponse, DescribeEnterpriseSecurityGroupRuleRequest, ModifyNatFwReSelectResponse, DescribeSwitchListsRequest, SetNatFwEipRequest, SetNatFwEipResponse, ModifyPublicIPSwitchStatusRequest, ModifyStorageSettingResponse, ModifySecurityGroupItemRuleStatusRequest, DescribeSourceAssetRequest, DescribeSourceAssetResponse, DescribeTLogInfoRequest, DescribeEnterpriseSGRuleProgressRequest, DescribeTLogIpListRequest, DescribeNatFwInstancesInfoRequest, ModifyNatSequenceRulesResponse, DescribeTableStatusRequest, DescribeSecurityGroupListRequest, ModifyResourceGroupRequest, CreateNatFwInstanceResponse, DescribeNatFwInfoCountResponse, DescribeDefenseSwitchRequest, ModifyEnterpriseSecurityDispatchStatusResponse, RemoveNatAcRuleResponse, CreateNatFwInstanceWithDomainResponse, RemoveAcRuleRequest, RemoveNatAcRuleRequest, ModifyAssetScanResponse, ModifyAllRuleStatusRequest, DescribeAcListsResponse, ModifyAllPublicIPSwitchStatusRequest, CreateAddressTemplateRequest, DescribeBlockStaticListResponse, AddNatAcRuleRequest, ModifySecurityGroupSequenceRulesRequest, CreateDatabaseWhiteListRulesResponse, CreateChooseVpcsResponse, DescribeUnHandleEventTabListResponse, ModifyRunSyncAssetResponse, ModifyEnterpriseSecurityGroupRuleResponse, DescribeSecurityGroupListResponse, AddEnterpriseSecurityGroupRulesResponse, RemoveEnterpriseSecurityGroupRuleRequest, DeleteResourceGroupRequest, CreateNatFwInstanceRequest, DescribeBlockByIpTimesListRequest, RemoveEnterpriseSecurityGroupRuleResponse, CreateAddressTemplateResponse, ModifyEnterpriseSecurityGroupRuleRequest, ModifySequenceRulesResponse, DescribeResourceGroupNewResponse, DescribeNatFwInstanceWithRegionResponse, DescribeResourceGroupNewRequest, ModifyBlockTopRequest, DeleteAcRuleResponse, DescribeIPStatusListRequest, ModifyNatFwSwitchResponse, DescribeBlockByIpTimesListResponse, SetNatFwDnatRuleResponse, DescribeRuleOverviewRequest, DescribeDefenseSwitchResponse, DescribeAcListsRequest, DescribeGuideScanInfoRequest, DescribeBlockIgnoreListResponse, ModifyEWRuleStatusRequest, DeleteAcRuleRequest, DeleteAllAccessControlRuleResponse, ModifyNatFwSwitchRequest, DescribeIPStatusListResponse, CreateDatabaseWhiteListRulesRequest, DescribeTLogIpListResponse, StopSecurityGroupRuleDispatchResponse, DescribeNatFwInfoCountRequest, AddAcRuleResponse, ModifyNatFwReSelectRequest, SetNatFwDnatRuleRequest, ModifyAllVPCSwitchStatusRequest, ModifyAllRuleStatusResponse, StopSecurityGroupRuleDispatchRequest, DescribeBlockIgnoreListRequest, ModifyBlockTopResponse, DeleteNatFwInstanceRequest, ModifyStorageSettingRequest, DescribeNatFwVpcDnsLstResponse, CreateChooseVpcsRequest, ExpandCfwVerticalResponse, DescribeNatAcRuleRequest, DescribeLogsResponse, CreateSecurityGroupRulesRequest, DeleteVpcInstanceRequest, CreateNatFwInstanceWithDomainRequest, DescribeResourceGroupResponse, DeleteAddressTemplateResponse, CreateBlockIgnoreRuleListResponse, DescribeCfwEipsResponse, ModifyResourceGroupResponse, DeleteResourceGroupResponse, DeleteSecurityGroupRuleRequest, DescribeBlockStaticListRequest, ModifyRunSyncAssetRequest, DeleteAddressTemplateRequest, CreateAcRulesResponse, DescribeSwitchListsResponse, ModifyAcRuleRequest, DescribeNatFwInstancesInfoResponse, AddNatAcRuleResponse, ModifyBlockIgnoreListResponse, DescribeNatFwInstanceResponse, ModifySecurityGroupRuleResponse, DescribeResourceGroupRequest, CreateAcRulesRequest, ModifyEnterpriseSecurityDispatchStatusRequest, DescribeAssociatedInstanceListRequest, ModifyTableStatusRequest, ModifyTableStatusResponse, DescribeGuideScanInfoResponse } from "./cfw_models";
+import { ModifyEWRuleStatusResponse, DescribeNatFwInstanceRequest, DescribeLogsRequest, ModifyFwGroupSwitchRequest, ModifySecurityGroupRuleRequest, ModifyNatFwVpcDnsSwitchResponse, DescribeNatFwInstanceWithRegionRequest, ModifyNatAcRuleResponse, DescribeRuleOverviewResponse, ModifyEnterpriseSecurityGroupRuleResponse, DescribeNatAcRuleResponse, ModifyPublicIPSwitchStatusResponse, AddAclRuleRequest, DescribeVpcFwGroupSwitchRequest, ModifyNatAcRuleRequest, ModifyAclRuleRequest, ModifyAcRuleResponse, ModifyNatSequenceRulesRequest, DescribeAclRuleResponse, AddAcRuleRequest, DescribeTLogInfoRequest, ModifyNatFwVpcDnsSwitchRequest, DeleteNatFwInstanceResponse, DeleteAllAccessControlRuleRequest, ModifyBlockIgnoreListRequest, ModifyAllVPCSwitchStatusResponse, DescribeNatFwVpcDnsLstRequest, DescribeCfwEipsRequest, DescribeTLogInfoResponse, DescribeUnHandleEventTabListRequest, DescribeAssociatedInstanceListResponse, CreateBlockIgnoreRuleListRequest, RemoveAcRuleResponse, DescribeAclRuleRequest, CreateSecurityGroupRulesResponse, ExpandCfwVerticalRequest, ModifyAllPublicIPSwitchStatusResponse, DeleteVpcInstanceResponse, ModifyAssetScanRequest, AddEnterpriseSecurityGroupRulesRequest, ModifySecurityGroupSequenceRulesResponse, DeleteSecurityGroupRuleResponse, ModifySequenceRulesRequest, ModifyAclRuleResponse, DescribeEnterpriseSGRuleProgressResponse, ModifySecurityGroupItemRuleStatusResponse, DescribeEnterpriseSecurityGroupRuleResponse, DeleteBlockIgnoreRuleListResponse, CreateVpcFwGroupResponse, DescribeEnterpriseSecurityGroupRuleRequest, ModifyNatFwReSelectResponse, DescribeVpcAcRuleRequest, DescribeSwitchListsRequest, AddAclRuleResponse, SetNatFwEipResponse, ModifyPublicIPSwitchStatusRequest, ModifyStorageSettingResponse, ModifySecurityGroupItemRuleStatusRequest, DescribeSourceAssetRequest, AddVpcAcRuleRequest, DescribeSourceAssetResponse, DescribeFwGroupInstanceInfoRequest, ModifyBlockIgnoreRuleRequest, DescribeEnterpriseSGRuleProgressRequest, DescribeTLogIpListRequest, DescribeNatFwInstancesInfoRequest, DescribeFwGroupInstanceInfoResponse, ModifyNatSequenceRulesResponse, DescribeTableStatusRequest, DescribeSecurityGroupListRequest, ModifyResourceGroupRequest, CreateNatFwInstanceResponse, DescribeNatFwInfoCountResponse, DescribeDefenseSwitchRequest, ModifyVpcFwGroupRequest, ModifyEnterpriseSecurityDispatchStatusResponse, ModifySequenceAclRulesRequest, ModifyVpcAcRuleRequest, CreateNatFwInstanceWithDomainResponse, RemoveAcRuleRequest, ModifyEnterpriseSecurityGroupRuleRequest, RemoveNatAcRuleRequest, ModifyAssetScanResponse, DeleteVpcFwGroupRequest, DescribeAcListsResponse, ModifyAllPublicIPSwitchStatusRequest, ModifySequenceAclRulesResponse, CreateAddressTemplateRequest, DescribeBlockStaticListResponse, AddNatAcRuleRequest, ModifySecurityGroupSequenceRulesRequest, CreateDatabaseWhiteListRulesResponse, DeleteBlockIgnoreRuleListRequest, DeleteVpcFwGroupResponse, CreateChooseVpcsResponse, DescribeUnHandleEventTabListResponse, ModifyRunSyncAssetResponse, AddVpcAcRuleResponse, DescribeSecurityGroupListResponse, DescribeVpcAcRuleResponse, AddEnterpriseSecurityGroupRulesResponse, RemoveEnterpriseSecurityGroupRuleRequest, DeleteResourceGroupRequest, CreateNatFwInstanceRequest, DescribeBlockByIpTimesListRequest, RemoveEnterpriseSecurityGroupRuleResponse, CreateAddressTemplateResponse, DescribeTableStatusResponse, ModifySequenceRulesResponse, DescribeResourceGroupNewResponse, DescribeNatFwInstanceWithRegionResponse, DescribeResourceGroupNewRequest, ModifyBlockTopRequest, RemoveAclRuleRequest, DeleteAcRuleResponse, DescribeIPStatusListRequest, ModifyNatFwSwitchResponse, DescribeBlockByIpTimesListResponse, ModifyAllRuleStatusRequest, SetNatFwDnatRuleResponse, DescribeRuleOverviewRequest, DescribeDefenseSwitchResponse, DescribeAcListsRequest, DescribeGuideScanInfoRequest, DescribeBlockIgnoreListResponse, ModifyVpcAcRuleResponse, ModifyEdgeIpSwitchResponse, ModifyEWRuleStatusRequest, DeleteAcRuleRequest, DeleteAllAccessControlRuleResponse, ModifyNatFwSwitchRequest, ModifyFwGroupSwitchResponse, RemoveNatAcRuleResponse, DescribeFwEdgeIpsResponse, DescribeIPStatusListResponse, CreateDatabaseWhiteListRulesRequest, DescribeVpcFwGroupSwitchResponse, ModifyBlockIgnoreRuleResponse, DescribeTLogIpListResponse, StopSecurityGroupRuleDispatchResponse, DescribeNatFwInfoCountRequest, AddAcRuleResponse, ModifyEdgeIpSwitchRequest, ModifyNatFwReSelectRequest, ModifyVpcFwSequenceRulesResponse, SetNatFwDnatRuleRequest, ModifyAllVPCSwitchStatusRequest, ModifyAllRuleStatusResponse, StopSecurityGroupRuleDispatchRequest, SetNatFwEipRequest, DescribeBlockIgnoreListRequest, ModifyBlockTopResponse, RemoveAclRuleResponse, DeleteNatFwInstanceRequest, ModifyVpcFwSequenceRulesRequest, ModifyStorageSettingRequest, DescribeNatFwVpcDnsLstResponse, CreateChooseVpcsRequest, ExpandCfwVerticalResponse, DescribeBlockStaticListRequest, DescribeLogsResponse, CreateSecurityGroupRulesRequest, DeleteVpcInstanceRequest, CreateVpcFwGroupRequest, CreateNatFwInstanceWithDomainRequest, RemoveVpcAcRuleRequest, DescribeResourceGroupResponse, DeleteAddressTemplateResponse, CreateBlockIgnoreRuleListResponse, DescribeCfwEipsResponse, ModifyResourceGroupResponse, ModifyVpcFwGroupResponse, DeleteResourceGroupResponse, DeleteSecurityGroupRuleRequest, DescribeNatAcRuleRequest, ModifyRunSyncAssetRequest, DeleteAddressTemplateRequest, CreateAcRulesResponse, DescribeSwitchListsResponse, ModifyAcRuleRequest, RemoveVpcAcRuleResponse, DescribeNatFwInstancesInfoResponse, AddNatAcRuleResponse, ModifyBlockIgnoreListResponse, DescribeNatFwInstanceResponse, ModifySecurityGroupRuleResponse, DescribeFwEdgeIpsRequest, DescribeResourceGroupRequest, CreateAcRulesRequest, ModifyEnterpriseSecurityDispatchStatusRequest, DescribeAssociatedInstanceListRequest, ModifyTableStatusRequest, ModifyTableStatusResponse, DescribeGuideScanInfoResponse } from "./cfw_models";
 /**
  * cfw client
  * @class
@@ -8,46 +8,22 @@ import { ModifyEWRuleStatusResponse, DescribeNatFwInstanceRequest, DescribeLogsR
 export declare class Client extends AbstractClient {
     constructor(clientConfig: ClientConfig);
     /**
-     * 获取当前用户接入nat防火墙的所有子网数及natfw实例个数
+     * 删除VPC间规则
      */
-    DescribeNatFwInfoCount(req?: DescribeNatFwInfoCountRequest, cb?: (error: string, rep: DescribeNatFwInfoCountResponse) => void): Promise<DescribeNatFwInfoCountResponse>;
+    RemoveVpcAcRule(req: RemoveVpcAcRuleRequest, cb?: (error: string, rep: RemoveVpcAcRuleResponse) => void): Promise<RemoveVpcAcRuleResponse>;
     /**
      * 中止安全组规则下发
      */
     StopSecurityGroupRuleDispatch(req: StopSecurityGroupRuleDispatchRequest, cb?: (error: string, rep: StopSecurityGroupRuleDispatchResponse) => void): Promise<StopSecurityGroupRuleDispatchResponse>;
     /**
-     * 修改规则表状态
+     * VPC防火墙(组)开关列表
      */
-    ModifyTableStatus(req: ModifyTableStatusRequest, cb?: (error: string, rep: ModifyTableStatusResponse) => void): Promise<ModifyTableStatusResponse>;
+    DescribeVpcFwGroupSwitch(req: DescribeVpcFwGroupSwitchRequest, cb?: (error: string, rep: DescribeVpcFwGroupSwitchResponse) => void): Promise<DescribeVpcFwGroupSwitchResponse>;
     /**
-     * 展示当前natfw 实例对应的vpc dns开关
+     * 启用停用VPC间规则或Nat边界规则
+VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction。
      */
-    DescribeNatFwVpcDnsLst(req: DescribeNatFwVpcDnsLstRequest, cb?: (error: string, rep: DescribeNatFwVpcDnsLstResponse) => void): Promise<DescribeNatFwVpcDnsLstResponse>;
-    /**
-     * DescribeUnHandleEventTabList 告警中心伪攻击链事件未处置接口
-
-     */
-    DescribeUnHandleEventTabList(req: DescribeUnHandleEventTabListRequest, cb?: (error: string, rep: DescribeUnHandleEventTabListResponse) => void): Promise<DescribeUnHandleEventTabListResponse>;
-    /**
-     * 互联网边界防火墙一键开关
-     */
-    ModifyAllPublicIPSwitchStatus(req: ModifyAllPublicIPSwitchStatusRequest, cb?: (error: string, rep: ModifyAllPublicIPSwitchStatusResponse) => void): Promise<ModifyAllPublicIPSwitchStatusResponse>;
-    /**
-     * 获取安全组关联实例列表
-     */
-    DescribeAssociatedInstanceList(req: DescribeAssociatedInstanceListRequest, cb?: (error: string, rep: DescribeAssociatedInstanceListResponse) => void): Promise<DescribeAssociatedInstanceListResponse>;
-    /**
-     * 创建、选择vpc
-     */
-    CreateChooseVpcs(req: CreateChooseVpcsRequest, cb?: (error: string, rep: CreateChooseVpcsResponse) => void): Promise<CreateChooseVpcsResponse>;
-    /**
-     * GetNatFwInstanceWithRegion 获取租户新增运维的NAT实例，带上地域
-     */
-    DescribeNatFwInstanceWithRegion(req?: DescribeNatFwInstanceWithRegionRequest, cb?: (error: string, rep: DescribeNatFwInstanceWithRegionResponse) => void): Promise<DescribeNatFwInstanceWithRegionResponse>;
-    /**
-     * 删除规则
-     */
-    DeleteAcRule(req: DeleteAcRuleRequest, cb?: (error: string, rep: DeleteAcRuleResponse) => void): Promise<DeleteAcRuleResponse>;
+    ModifyEWRuleStatus(req: ModifyEWRuleStatusRequest, cb?: (error: string, rep: ModifyEWRuleStatusResponse) => void): Promise<ModifyEWRuleStatusResponse>;
     /**
      * ModifyResourceGroup-资产中心资产组信息修改
 
@@ -55,66 +31,111 @@ export declare class Client extends AbstractClient {
      */
     ModifyResourceGroup(req: ModifyResourceGroupRequest, cb?: (error: string, rep: ModifyResourceGroupResponse) => void): Promise<ModifyResourceGroupResponse>;
     /**
-     * 启用停用单条企业安全组规则
-     */
-    ModifySecurityGroupItemRuleStatus(req: ModifySecurityGroupItemRuleStatusRequest, cb?: (error: string, rep: ModifySecurityGroupItemRuleStatusResponse) => void): Promise<ModifySecurityGroupItemRuleStatusResponse>;
-    /**
      * DescribeResourceGroupNew资产中心资产树信息
      */
     DescribeResourceGroupNew(req: DescribeResourceGroupNewRequest, cb?: (error: string, rep: DescribeResourceGroupNewResponse) => void): Promise<DescribeResourceGroupNewResponse>;
     /**
-     * 全部删除规则
+     * 编辑VPC间防火墙(防火墙组)
      */
-    DeleteAllAccessControlRule(req: DeleteAllAccessControlRuleRequest, cb?: (error: string, rep: DeleteAllAccessControlRuleResponse) => void): Promise<DeleteAllAccessControlRuleResponse>;
+    ModifyVpcFwGroup(req: ModifyVpcFwGroupRequest, cb?: (error: string, rep: ModifyVpcFwGroupResponse) => void): Promise<ModifyVpcFwGroupResponse>;
     /**
-     * 启用停用VPC间规则或Nat边界规则
-VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction。
+     * 删除防火墙(组)，或者删除其中实例
      */
-    ModifyEWRuleStatus(req: ModifyEWRuleStatusRequest, cb?: (error: string, rep: ModifyEWRuleStatusResponse) => void): Promise<ModifyEWRuleStatusResponse>;
+    DeleteVpcFwGroup(req: DeleteVpcFwGroupRequest, cb?: (error: string, rep: DeleteVpcFwGroupResponse) => void): Promise<DeleteVpcFwGroupResponse>;
     /**
-     * 查询安全组规则列表
+     * 添加VPC内网间规则
      */
-    DescribeSecurityGroupList(req: DescribeSecurityGroupListRequest, cb?: (error: string, rep: DescribeSecurityGroupListResponse) => void): Promise<DescribeSecurityGroupListResponse>;
-    /**
-     * 编辑单条安全组规则
-     */
-    ModifySecurityGroupRule(req: ModifySecurityGroupRuleRequest, cb?: (error: string, rep: ModifySecurityGroupRuleResponse) => void): Promise<ModifySecurityGroupRuleResponse>;
-    /**
-     * DescribeNatFwInstance 获取租户所有NAT实例
-     */
-    DescribeNatFwInstance(req?: DescribeNatFwInstanceRequest, cb?: (error: string, rep: DescribeNatFwInstanceResponse) => void): Promise<DescribeNatFwInstanceResponse>;
-    /**
-     * 资产扫描
-     */
-    ModifyAssetScan(req: ModifyAssetScanRequest, cb?: (error: string, rep: ModifyAssetScanResponse) => void): Promise<ModifyAssetScanResponse>;
-    /**
-     * 创建地址模板规则
-     */
-    CreateAddressTemplate(req: CreateAddressTemplateRequest, cb?: (error: string, rep: CreateAddressTemplateResponse) => void): Promise<CreateAddressTemplateResponse>;
-    /**
-     * 创建暴露数据库白名单规则
-     */
-    CreateDatabaseWhiteListRules(req: CreateDatabaseWhiteListRulesRequest, cb?: (error: string, rep: CreateDatabaseWhiteListRulesResponse) => void): Promise<CreateDatabaseWhiteListRulesResponse>;
-    /**
-     * 创建防火墙实例和接入域名（Region参数必填）
-     */
-    CreateNatFwInstanceWithDomain(req: CreateNatFwInstanceWithDomainRequest, cb?: (error: string, rep: CreateNatFwInstanceWithDomainResponse) => void): Promise<CreateNatFwInstanceWithDomainResponse>;
-    /**
-     * 修改规则执行顺序
-     */
-    ModifySequenceRules(req: ModifySequenceRulesRequest, cb?: (error: string, rep: ModifySequenceRulesResponse) => void): Promise<ModifySequenceRulesResponse>;
-    /**
-     * 添加互联网边界规则
-     */
-    AddAcRule(req: AddAcRuleRequest, cb?: (error: string, rep: AddAcRuleResponse) => void): Promise<AddAcRuleResponse>;
+    AddVpcAcRule(req: AddVpcAcRuleRequest, cb?: (error: string, rep: AddVpcAcRuleResponse) => void): Promise<AddVpcAcRuleResponse>;
     /**
      * 创建新企业安全组规则
      */
     AddEnterpriseSecurityGroupRules(req: AddEnterpriseSecurityGroupRulesRequest, cb?: (error: string, rep: AddEnterpriseSecurityGroupRulesResponse) => void): Promise<AddEnterpriseSecurityGroupRulesResponse>;
     /**
-     * 创建访问控制规则
+     * 查询规则表状态
      */
-    CreateAcRules(req: CreateAcRulesRequest, cb?: (error: string, rep: CreateAcRulesResponse) => void): Promise<CreateAcRulesResponse>;
+    DescribeTableStatus(req: DescribeTableStatusRequest, cb?: (error: string, rep: DescribeTableStatusResponse) => void): Promise<DescribeTableStatusResponse>;
+    /**
+     * 企业安全组规则快速排序
+     */
+    ModifySecurityGroupSequenceRules(req: ModifySecurityGroupSequenceRulesRequest, cb?: (error: string, rep: ModifySecurityGroupSequenceRulesResponse) => void): Promise<ModifySecurityGroupSequenceRulesResponse>;
+    /**
+     * 删除新企业安全组规则
+     */
+    RemoveEnterpriseSecurityGroupRule(req: RemoveEnterpriseSecurityGroupRuleRequest, cb?: (error: string, rep: RemoveEnterpriseSecurityGroupRuleResponse) => void): Promise<RemoveEnterpriseSecurityGroupRuleResponse>;
+    /**
+     * NAT防火墙规则快速排序
+     */
+    ModifyNatSequenceRules(req: ModifyNatSequenceRulesRequest, cb?: (error: string, rep: ModifyNatSequenceRulesResponse) => void): Promise<ModifyNatSequenceRulesResponse>;
+    /**
+     * 删除防火墙实例
+     */
+    DeleteVpcInstance(req?: DeleteVpcInstanceRequest, cb?: (error: string, rep: DeleteVpcInstanceResponse) => void): Promise<DeleteVpcInstanceResponse>;
+    /**
+     * DescribeUnHandleEventTabList 告警中心伪攻击链事件未处置接口
+
+     */
+    DescribeUnHandleEventTabList(req: DescribeUnHandleEventTabListRequest, cb?: (error: string, rep: DescribeUnHandleEventTabListResponse) => void): Promise<DescribeUnHandleEventTabListResponse>;
+    /**
+     * 创建NAT防火墙实例（Region参数必填）
+     */
+    CreateNatFwInstance(req: CreateNatFwInstanceRequest, cb?: (error: string, rep: CreateNatFwInstanceResponse) => void): Promise<CreateNatFwInstanceResponse>;
+    /**
+     * ModifyBlockTop取消置顶接口
+     */
+    ModifyBlockTop(req: ModifyBlockTopRequest, cb?: (error: string, rep: ModifyBlockTopResponse) => void): Promise<ModifyBlockTopResponse>;
+    /**
+     * 删除互联网边界访问控制规则
+     */
+    RemoveAclRule(req: RemoveAclRuleRequest, cb?: (error: string, rep: RemoveAclRuleResponse) => void): Promise<RemoveAclRuleResponse>;
+    /**
+     * 批量添加入侵防御封禁列表、放通列表规则
+     */
+    CreateBlockIgnoreRuleList(req: CreateBlockIgnoreRuleListRequest, cb?: (error: string, rep: CreateBlockIgnoreRuleListResponse) => void): Promise<CreateBlockIgnoreRuleListResponse>;
+    /**
+     * 修改边界防火墙开关(旁路、串行)
+     */
+    ModifyEdgeIpSwitch(req: ModifyEdgeIpSwitchRequest, cb?: (error: string, rep: ModifyEdgeIpSwitchResponse) => void): Promise<ModifyEdgeIpSwitchResponse>;
+    /**
+     * DescribeBlockByIpTimesList 告警中心阻断IP折线图
+
+     */
+    DescribeBlockByIpTimesList(req: DescribeBlockByIpTimesListRequest, cb?: (error: string, rep: DescribeBlockByIpTimesListResponse) => void): Promise<DescribeBlockByIpTimesListResponse>;
+    /**
+     * 查询新版安全组下发进度
+     */
+    DescribeEnterpriseSGRuleProgress(req?: DescribeEnterpriseSGRuleProgressRequest, cb?: (error: string, rep: DescribeEnterpriseSGRuleProgressResponse) => void): Promise<DescribeEnterpriseSGRuleProgressResponse>;
+    /**
+     * 获取当前用户接入nat防火墙的所有子网数及natfw实例个数
+     */
+    DescribeNatFwInfoCount(req?: DescribeNatFwInfoCountRequest, cb?: (error: string, rep: DescribeNatFwInfoCountResponse) => void): Promise<DescribeNatFwInfoCountResponse>;
+    /**
+     * 展示当前natfw 实例对应的vpc dns开关
+     */
+    DescribeNatFwVpcDnsLst(req: DescribeNatFwVpcDnsLstRequest, cb?: (error: string, rep: DescribeNatFwVpcDnsLstResponse) => void): Promise<DescribeNatFwVpcDnsLstResponse>;
+    /**
+     * 编辑单条入侵防御封禁列表、放通列表规则
+     */
+    ModifyBlockIgnoreRule(req: ModifyBlockIgnoreRuleRequest, cb?: (error: string, rep: ModifyBlockIgnoreRuleResponse) => void): Promise<ModifyBlockIgnoreRuleResponse>;
+    /**
+     * 查询互联网边界访问控制列表
+     */
+    DescribeAclRule(req: DescribeAclRuleRequest, cb?: (error: string, rep: DescribeAclRuleResponse) => void): Promise<DescribeAclRuleResponse>;
+    /**
+     * 编辑单条安全组规则
+     */
+    ModifySecurityGroupRule(req: ModifySecurityGroupRuleRequest, cb?: (error: string, rep: ModifySecurityGroupRuleResponse) => void): Promise<ModifySecurityGroupRuleResponse>;
+    /**
+     * 全部删除规则
+     */
+    DeleteAllAccessControlRule(req: DeleteAllAccessControlRuleRequest, cb?: (error: string, rep: DeleteAllAccessControlRuleResponse) => void): Promise<DeleteAllAccessControlRuleResponse>;
+    /**
+     * 查询安全组规则列表
+     */
+    DescribeSecurityGroupList(req: DescribeSecurityGroupListRequest, cb?: (error: string, rep: DescribeSecurityGroupListResponse) => void): Promise<DescribeSecurityGroupListResponse>;
+    /**
+     * 修改内网间访问控制规则
+     */
+    ModifyVpcAcRule(req: ModifyVpcAcRuleRequest, cb?: (error: string, rep: ModifyVpcAcRuleResponse) => void): Promise<ModifyVpcAcRuleResponse>;
     /**
      * 销毁防火墙实例
      */
@@ -124,74 +145,25 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
      */
     CreateSecurityGroupRules(req: CreateSecurityGroupRulesRequest, cb?: (error: string, rep: CreateSecurityGroupRulesResponse) => void): Promise<CreateSecurityGroupRulesResponse>;
     /**
-     * 删除新企业安全组规则
-     */
-    RemoveEnterpriseSecurityGroupRule(req: RemoveEnterpriseSecurityGroupRuleRequest, cb?: (error: string, rep: RemoveEnterpriseSecurityGroupRuleResponse) => void): Promise<RemoveEnterpriseSecurityGroupRuleResponse>;
-    /**
-     * 查询规则列表概况
-     */
-    DescribeRuleOverview(req: DescribeRuleOverviewRequest, cb?: (error: string, rep: DescribeRuleOverviewResponse) => void): Promise<DescribeRuleOverviewResponse>;
-    /**
-     * ip防护状态查询
-     */
-    DescribeIPStatusList(req: DescribeIPStatusListRequest, cb?: (error: string, rep: DescribeIPStatusListResponse) => void): Promise<DescribeIPStatusListResponse>;
-    /**
-     * 编辑新企业安全组规则
-     */
-    ModifyEnterpriseSecurityGroupRule(req: ModifyEnterpriseSecurityGroupRuleRequest, cb?: (error: string, rep: ModifyEnterpriseSecurityGroupRuleResponse) => void): Promise<ModifyEnterpriseSecurityGroupRuleResponse>;
-    /**
      * 获取入侵防御按钮列表
      */
     DescribeDefenseSwitch(req?: DescribeDefenseSwitchRequest, cb?: (error: string, rep: DescribeDefenseSwitchResponse) => void): Promise<DescribeDefenseSwitchResponse>;
     /**
-     * DescribeTLogInfo告警中心概况
-
+     * 获取租户所有VPC防火墙(组)及VPC防火墙实例卡片信息
      */
-    DescribeTLogInfo(req: DescribeTLogInfoRequest, cb?: (error: string, rep: DescribeTLogInfoResponse) => void): Promise<DescribeTLogInfoResponse>;
-    /**
-     * 同步资产-互联网&VPC（新）
-     */
-    ModifyRunSyncAsset(req: ModifyRunSyncAssetRequest, cb?: (error: string, rep: ModifyRunSyncAssetResponse) => void): Promise<ModifyRunSyncAssetResponse>;
-    /**
-     * NAT防火墙规则快速排序
-     */
-    ModifyNatSequenceRules(req: ModifyNatSequenceRulesRequest, cb?: (error: string, rep: ModifyNatSequenceRulesResponse) => void): Promise<ModifyNatSequenceRulesResponse>;
+    DescribeFwGroupInstanceInfo(req: DescribeFwGroupInstanceInfoRequest, cb?: (error: string, rep: DescribeFwGroupInstanceInfoResponse) => void): Promise<DescribeFwGroupInstanceInfoResponse>;
     /**
      * nat 防火墙VPC DNS 开关切换
      */
     ModifyNatFwVpcDnsSwitch(req: ModifyNatFwVpcDnsSwitchRequest, cb?: (error: string, rep: ModifyNatFwVpcDnsSwitchResponse) => void): Promise<ModifyNatFwVpcDnsSwitchResponse>;
     /**
-     * VPC防火墙一键开关
+     * 启用停用单条企业安全组规则
      */
-    ModifyAllVPCSwitchStatus(req: ModifyAllVPCSwitchStatusRequest, cb?: (error: string, rep: ModifyAllVPCSwitchStatusResponse) => void): Promise<ModifyAllVPCSwitchStatusResponse>;
+    ModifySecurityGroupItemRuleStatus(req: ModifySecurityGroupItemRuleStatusRequest, cb?: (error: string, rep: ModifySecurityGroupItemRuleStatusResponse) => void): Promise<ModifySecurityGroupItemRuleStatusResponse>;
     /**
-     * 日志存储设置，可以修改存储时间和清空日志
+     * GetNatFwInstanceWithRegion 获取租户新增运维的NAT实例，带上地域
      */
-    ModifyStorageSetting(req?: ModifyStorageSettingRequest, cb?: (error: string, rep: ModifyStorageSettingResponse) => void): Promise<ModifyStorageSettingResponse>;
-    /**
-     * 查询新企业安全组规则
-     */
-    DescribeEnterpriseSecurityGroupRule(req: DescribeEnterpriseSecurityGroupRuleRequest, cb?: (error: string, rep: DescribeEnterpriseSecurityGroupRuleResponse) => void): Promise<DescribeEnterpriseSecurityGroupRuleResponse>;
-    /**
-     * 日志审计日志查询
-     */
-    DescribeLogs(req: DescribeLogsRequest, cb?: (error: string, rep: DescribeLogsResponse) => void): Promise<DescribeLogsResponse>;
-    /**
-     * 删除防火墙实例
-     */
-    DeleteVpcInstance(req?: DeleteVpcInstanceRequest, cb?: (error: string, rep: DeleteVpcInstanceResponse) => void): Promise<DeleteVpcInstanceResponse>;
-    /**
-     * DescribeGuideScanInfo新手引导扫描接口信息
-     */
-    DescribeGuideScanInfo(req?: DescribeGuideScanInfoRequest, cb?: (error: string, rep: DescribeGuideScanInfoResponse) => void): Promise<DescribeGuideScanInfoResponse>;
-    /**
-     * 删除地址模板规则
-     */
-    DeleteAddressTemplate(req: DeleteAddressTemplateRequest, cb?: (error: string, rep: DeleteAddressTemplateResponse) => void): Promise<DeleteAddressTemplateResponse>;
-    /**
-     * 修改NAT防火墙开关
-     */
-    ModifyNatFwSwitch(req: ModifyNatFwSwitchRequest, cb?: (error: string, rep: ModifyNatFwSwitchResponse) => void): Promise<ModifyNatFwSwitchResponse>;
+    DescribeNatFwInstanceWithRegion(req?: DescribeNatFwInstanceWithRegionRequest, cb?: (error: string, rep: DescribeNatFwInstanceWithRegionResponse) => void): Promise<DescribeNatFwInstanceWithRegionResponse>;
     /**
      * DescribeSourceAsset-查询资产组全部资产信息
 
@@ -202,9 +174,96 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
      */
     DeleteResourceGroup(req: DeleteResourceGroupRequest, cb?: (error: string, rep: DeleteResourceGroupResponse) => void): Promise<DeleteResourceGroupResponse>;
     /**
-     * 创建NAT防火墙实例（Region参数必填）
+     * 删除互联网边界规则
      */
-    CreateNatFwInstance(req: CreateNatFwInstanceRequest, cb?: (error: string, rep: CreateNatFwInstanceResponse) => void): Promise<CreateNatFwInstanceResponse>;
+    RemoveAcRule(req: RemoveAcRuleRequest, cb?: (error: string, rep: RemoveAcRuleResponse) => void): Promise<RemoveAcRuleResponse>;
+    /**
+     * vpc间规则快速排序
+     */
+    ModifyVpcFwSequenceRules(req: ModifyVpcFwSequenceRulesRequest, cb?: (error: string, rep: ModifyVpcFwSequenceRulesResponse) => void): Promise<ModifyVpcFwSequenceRulesResponse>;
+    /**
+     * 查询内网间访问控制列表
+     */
+    DescribeVpcAcRule(req: DescribeVpcAcRuleRequest, cb?: (error: string, rep: DescribeVpcAcRuleResponse) => void): Promise<DescribeVpcAcRuleResponse>;
+    /**
+     * 编辑新企业安全组规则
+     */
+    ModifyEnterpriseSecurityGroupRule(req: ModifyEnterpriseSecurityGroupRuleRequest, cb?: (error: string, rep: ModifyEnterpriseSecurityGroupRuleResponse) => void): Promise<ModifyEnterpriseSecurityGroupRuleResponse>;
+    /**
+     * 添加互联网边界访问控制规则
+     */
+    AddAclRule(req: AddAclRuleRequest, cb?: (error: string, rep: AddAclRuleResponse) => void): Promise<AddAclRuleResponse>;
+    /**
+     * 修改NAT访问控制规则
+     */
+    ModifyNatAcRule(req: ModifyNatAcRuleRequest, cb?: (error: string, rep: ModifyNatAcRuleResponse) => void): Promise<ModifyNatAcRuleResponse>;
+    /**
+     * 删除规则
+     */
+    DeleteSecurityGroupRule(req: DeleteSecurityGroupRuleRequest, cb?: (error: string, rep: DeleteSecurityGroupRuleResponse) => void): Promise<DeleteSecurityGroupRuleResponse>;
+    /**
+     * 防火墙开关列表
+     */
+    DescribeSwitchLists(req: DescribeSwitchListsRequest, cb?: (error: string, rep: DescribeSwitchListsResponse) => void): Promise<DescribeSwitchListsResponse>;
+    /**
+     * 单个修改互联网边界防火墙开关
+     */
+    ModifyPublicIPSwitchStatus(req: ModifyPublicIPSwitchStatusRequest, cb?: (error: string, rep: ModifyPublicIPSwitchStatusResponse) => void): Promise<ModifyPublicIPSwitchStatusResponse>;
+    /**
+     * 修改规则表状态
+     */
+    ModifyTableStatus(req: ModifyTableStatusRequest, cb?: (error: string, rep: ModifyTableStatusResponse) => void): Promise<ModifyTableStatusResponse>;
+    /**
+     * 支持对封禁列表、放通列表如下操作：
+批量增加封禁IP、放通IP/域名
+批量删除封禁IP、放通IP/域名
+批量修改封禁IP、放通IP/域名生效事件
+     */
+    ModifyBlockIgnoreList(req: ModifyBlockIgnoreListRequest, cb?: (error: string, rep: ModifyBlockIgnoreListResponse) => void): Promise<ModifyBlockIgnoreListResponse>;
+    /**
+     * 创建、选择vpc
+     */
+    CreateChooseVpcs(req: CreateChooseVpcsRequest, cb?: (error: string, rep: CreateChooseVpcsResponse) => void): Promise<CreateChooseVpcsResponse>;
+    /**
+     * 资产扫描
+     */
+    ModifyAssetScan(req: ModifyAssetScanRequest, cb?: (error: string, rep: ModifyAssetScanResponse) => void): Promise<ModifyAssetScanResponse>;
+    /**
+     * 删除地址模板规则
+     */
+    DeleteAddressTemplate(req: DeleteAddressTemplateRequest, cb?: (error: string, rep: DeleteAddressTemplateResponse) => void): Promise<DeleteAddressTemplateResponse>;
+    /**
+     * 修改规则执行顺序
+     */
+    ModifySequenceRules(req: ModifySequenceRulesRequest, cb?: (error: string, rep: ModifySequenceRulesResponse) => void): Promise<ModifySequenceRulesResponse>;
+    /**
+     * 添加互联网边界规则
+     */
+    AddAcRule(req: AddAcRuleRequest, cb?: (error: string, rep: AddAcRuleResponse) => void): Promise<AddAcRuleResponse>;
+    /**
+     * 互联网边界规则快速排序
+     */
+    ModifySequenceAclRules(req: ModifySequenceAclRulesRequest, cb?: (error: string, rep: ModifySequenceAclRulesResponse) => void): Promise<ModifySequenceAclRulesResponse>;
+    /**
+     * 查询规则列表概况
+     */
+    DescribeRuleOverview(req: DescribeRuleOverviewRequest, cb?: (error: string, rep: DescribeRuleOverviewResponse) => void): Promise<DescribeRuleOverviewResponse>;
+    /**
+     * ip防护状态查询
+     */
+    DescribeIPStatusList(req: DescribeIPStatusListRequest, cb?: (error: string, rep: DescribeIPStatusListResponse) => void): Promise<DescribeIPStatusListResponse>;
+    /**
+     * 查询新企业安全组规则
+     */
+    DescribeEnterpriseSecurityGroupRule(req: DescribeEnterpriseSecurityGroupRuleRequest, cb?: (error: string, rep: DescribeEnterpriseSecurityGroupRuleResponse) => void): Promise<DescribeEnterpriseSecurityGroupRuleResponse>;
+    /**
+     * 修改防火墙(组)开关(支持单点模式、多点模式、全互通模式)
+     */
+    ModifyFwGroupSwitch(req: ModifyFwGroupSwitchRequest, cb?: (error: string, rep: ModifyFwGroupSwitchResponse) => void): Promise<ModifyFwGroupSwitchResponse>;
+    /**
+     * 日志审计日志查询
+     */
+    DescribeLogs(req: DescribeLogsRequest, cb?: (error: string, rep: DescribeLogsResponse) => void): Promise<DescribeLogsResponse>;
     /**
      * 配置防火墙Dnat规则
      */
@@ -214,77 +273,21 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
      */
     ModifyAllRuleStatus(req: ModifyAllRuleStatusRequest, cb?: (error: string, rep: ModifyAllRuleStatusResponse) => void): Promise<ModifyAllRuleStatusResponse>;
     /**
-     * 防火墙开关列表
+     * 批量删除入侵防御封禁列表、放通列表规则
      */
-    DescribeSwitchLists(req: DescribeSwitchListsRequest, cb?: (error: string, rep: DescribeSwitchListsResponse) => void): Promise<DescribeSwitchListsResponse>;
+    DeleteBlockIgnoreRuleList(req: DeleteBlockIgnoreRuleListRequest, cb?: (error: string, rep: DeleteBlockIgnoreRuleListResponse) => void): Promise<DeleteBlockIgnoreRuleListResponse>;
     /**
-     * 删除互联网边界规则
+     * 设置防火墙实例弹性公网ip，目前仅支持新增模式的防火墙实例
      */
-    RemoveAcRule(req: RemoveAcRuleRequest, cb?: (error: string, rep: RemoveAcRuleResponse) => void): Promise<RemoveAcRuleResponse>;
+    SetNatFwEip(req: SetNatFwEipRequest, cb?: (error: string, rep: SetNatFwEipResponse) => void): Promise<SetNatFwEipResponse>;
     /**
-     * ModifyBlockTop取消置顶接口
+     * 修改互联网边界访问控制规则
      */
-    ModifyBlockTop(req: ModifyBlockTopRequest, cb?: (error: string, rep: ModifyBlockTopResponse) => void): Promise<ModifyBlockTopResponse>;
-    /**
-     * 查询规则表状态
-     */
-    DescribeTableStatus(req: DescribeTableStatusRequest, cb?: (error: string, rep: DescribeTableStatusResponse) => void): Promise<DescribeTableStatusResponse>;
-    /**
-     * 支持对封禁列表、放通列表如下操作：
-批量增加封禁IP、放通IP/域名
-批量删除封禁IP、放通IP/域名
-批量修改封禁IP、放通IP/域名生效事件
-     */
-    ModifyBlockIgnoreList(req: ModifyBlockIgnoreListRequest, cb?: (error: string, rep: ModifyBlockIgnoreListResponse) => void): Promise<ModifyBlockIgnoreListResponse>;
-    /**
-     * GetNatInstance 获取租户所有NAT实例及实例卡片信息
-     */
-    DescribeNatFwInstancesInfo(req: DescribeNatFwInstancesInfoRequest, cb?: (error: string, rep: DescribeNatFwInstancesInfoResponse) => void): Promise<DescribeNatFwInstancesInfoResponse>;
-    /**
-     * 防火墙实例重新选择vpc或nat
-     */
-    ModifyNatFwReSelect(req: ModifyNatFwReSelectRequest, cb?: (error: string, rep: ModifyNatFwReSelectResponse) => void): Promise<ModifyNatFwReSelectResponse>;
-    /**
-     * DescribeResourceGroup资产中心资产树信息
-     */
-    DescribeResourceGroup(req: DescribeResourceGroupRequest, cb?: (error: string, rep: DescribeResourceGroupResponse) => void): Promise<DescribeResourceGroupResponse>;
-    /**
-     * 批量添加入侵防御封禁列表、放通列表规则
-     */
-    CreateBlockIgnoreRuleList(req: CreateBlockIgnoreRuleListRequest, cb?: (error: string, rep: CreateBlockIgnoreRuleListResponse) => void): Promise<CreateBlockIgnoreRuleListResponse>;
-    /**
-     * 查询新版安全组下发进度
-     */
-    DescribeEnterpriseSGRuleProgress(req?: DescribeEnterpriseSGRuleProgressRequest, cb?: (error: string, rep: DescribeEnterpriseSGRuleProgressResponse) => void): Promise<DescribeEnterpriseSGRuleProgressResponse>;
+    ModifyAclRule(req: ModifyAclRuleRequest, cb?: (error: string, rep: ModifyAclRuleResponse) => void): Promise<ModifyAclRuleResponse>;
     /**
      * 查询防火墙弹性公网IP
      */
     DescribeCfwEips(req: DescribeCfwEipsRequest, cb?: (error: string, rep: DescribeCfwEipsResponse) => void): Promise<DescribeCfwEipsResponse>;
-    /**
-     * 修改NAT访问控制规则
-     */
-    ModifyNatAcRule(req: ModifyNatAcRuleRequest, cb?: (error: string, rep: ModifyNatAcRuleResponse) => void): Promise<ModifyNatAcRuleResponse>;
-    /**
-     * 修改规则
-     */
-    ModifyAcRule(req: ModifyAcRuleRequest, cb?: (error: string, rep: ModifyAcRuleResponse) => void): Promise<ModifyAcRuleResponse>;
-    /**
-     * 删除规则
-     */
-    DeleteSecurityGroupRule(req: DeleteSecurityGroupRuleRequest, cb?: (error: string, rep: DeleteSecurityGroupRuleResponse) => void): Promise<DeleteSecurityGroupRuleResponse>;
-    /**
-     * 企业安全组规则快速排序
-     */
-    ModifySecurityGroupSequenceRules(req: ModifySecurityGroupSequenceRulesRequest, cb?: (error: string, rep: ModifySecurityGroupSequenceRulesResponse) => void): Promise<ModifySecurityGroupSequenceRulesResponse>;
-    /**
-     * 修改企业安全组下发状态
-     */
-    ModifyEnterpriseSecurityDispatchStatus(req: ModifyEnterpriseSecurityDispatchStatusRequest, cb?: (error: string, rep: ModifyEnterpriseSecurityDispatchStatusResponse) => void): Promise<ModifyEnterpriseSecurityDispatchStatusResponse>;
-    /**
-     * DescribeTLogIpList告警中心IP柱形图
-
-     */
-    DescribeTLogIpList(req: DescribeTLogIpListRequest, cb?: (error: string, rep: DescribeTLogIpListResponse) => void): Promise<DescribeTLogIpListResponse>;
     /**
      * 查询入侵防御放通封禁列表
      */
@@ -298,33 +301,110 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
      */
     DescribeAcLists(req: DescribeAcListsRequest, cb?: (error: string, rep: DescribeAcListsResponse) => void): Promise<DescribeAcListsResponse>;
     /**
-     * 单个修改互联网边界防火墙开关
+     * 防火墙垂直扩容
      */
-    ModifyPublicIPSwitchStatus(req: ModifyPublicIPSwitchStatusRequest, cb?: (error: string, rep: ModifyPublicIPSwitchStatusResponse) => void): Promise<ModifyPublicIPSwitchStatusResponse>;
+    ExpandCfwVertical(req: ExpandCfwVerticalRequest, cb?: (error: string, rep: ExpandCfwVerticalResponse) => void): Promise<ExpandCfwVerticalResponse>;
+    /**
+     * 创建VPC间防火墙(防火墙组)
+     */
+    CreateVpcFwGroup(req: CreateVpcFwGroupRequest, cb?: (error: string, rep: CreateVpcFwGroupResponse) => void): Promise<CreateVpcFwGroupResponse>;
+    /**
+     * 互联网边界防火墙一键开关
+     */
+    ModifyAllPublicIPSwitchStatus(req: ModifyAllPublicIPSwitchStatusRequest, cb?: (error: string, rep: ModifyAllPublicIPSwitchStatusResponse) => void): Promise<ModifyAllPublicIPSwitchStatusResponse>;
+    /**
+     * 获取安全组关联实例列表
+     */
+    DescribeAssociatedInstanceList(req: DescribeAssociatedInstanceListRequest, cb?: (error: string, rep: DescribeAssociatedInstanceListResponse) => void): Promise<DescribeAssociatedInstanceListResponse>;
+    /**
+     * 删除规则
+     */
+    DeleteAcRule(req: DeleteAcRuleRequest, cb?: (error: string, rep: DeleteAcRuleResponse) => void): Promise<DeleteAcRuleResponse>;
     /**
      * 查询NAT访问控制列表
      */
     DescribeNatAcRule(req: DescribeNatAcRuleRequest, cb?: (error: string, rep: DescribeNatAcRuleResponse) => void): Promise<DescribeNatAcRuleResponse>;
     /**
+     * DescribeNatFwInstance 获取租户所有NAT实例
+     */
+    DescribeNatFwInstance(req?: DescribeNatFwInstanceRequest, cb?: (error: string, rep: DescribeNatFwInstanceResponse) => void): Promise<DescribeNatFwInstanceResponse>;
+    /**
+     * 创建暴露数据库白名单规则
+     */
+    CreateDatabaseWhiteListRules(req: CreateDatabaseWhiteListRulesRequest, cb?: (error: string, rep: CreateDatabaseWhiteListRulesResponse) => void): Promise<CreateDatabaseWhiteListRulesResponse>;
+    /**
+     * 创建防火墙实例和接入域名（Region参数必填）
+     */
+    CreateNatFwInstanceWithDomain(req: CreateNatFwInstanceWithDomainRequest, cb?: (error: string, rep: CreateNatFwInstanceWithDomainResponse) => void): Promise<CreateNatFwInstanceWithDomainResponse>;
+    /**
+     * 创建访问控制规则
+     */
+    CreateAcRules(req: CreateAcRulesRequest, cb?: (error: string, rep: CreateAcRulesResponse) => void): Promise<CreateAcRulesResponse>;
+    /**
+     * 修改NAT防火墙开关
+     */
+    ModifyNatFwSwitch(req: ModifyNatFwSwitchRequest, cb?: (error: string, rep: ModifyNatFwSwitchResponse) => void): Promise<ModifyNatFwSwitchResponse>;
+    /**
+     * DescribeTLogInfo告警中心概况
+
+     */
+    DescribeTLogInfo(req: DescribeTLogInfoRequest, cb?: (error: string, rep: DescribeTLogInfoResponse) => void): Promise<DescribeTLogInfoResponse>;
+    /**
+     * 同步资产-互联网&VPC（新）
+     */
+    ModifyRunSyncAsset(req: ModifyRunSyncAssetRequest, cb?: (error: string, rep: ModifyRunSyncAssetResponse) => void): Promise<ModifyRunSyncAssetResponse>;
+    /**
+     * VPC防火墙一键开关
+     */
+    ModifyAllVPCSwitchStatus(req: ModifyAllVPCSwitchStatusRequest, cb?: (error: string, rep: ModifyAllVPCSwitchStatusResponse) => void): Promise<ModifyAllVPCSwitchStatusResponse>;
+    /**
+     * DescribeGuideScanInfo新手引导扫描接口信息
+     */
+    DescribeGuideScanInfo(req?: DescribeGuideScanInfoRequest, cb?: (error: string, rep: DescribeGuideScanInfoResponse) => void): Promise<DescribeGuideScanInfoResponse>;
+    /**
+     * GetNatInstance 获取租户所有NAT实例及实例卡片信息
+     */
+    DescribeNatFwInstancesInfo(req: DescribeNatFwInstancesInfoRequest, cb?: (error: string, rep: DescribeNatFwInstancesInfoResponse) => void): Promise<DescribeNatFwInstancesInfoResponse>;
+    /**
+     * 防火墙实例重新选择vpc或nat
+     */
+    ModifyNatFwReSelect(req: ModifyNatFwReSelectRequest, cb?: (error: string, rep: ModifyNatFwReSelectResponse) => void): Promise<ModifyNatFwReSelectResponse>;
+    /**
+     * 日志存储设置，可以修改存储时间和清空日志
+     */
+    ModifyStorageSetting(req?: ModifyStorageSettingRequest, cb?: (error: string, rep: ModifyStorageSettingResponse) => void): Promise<ModifyStorageSettingResponse>;
+    /**
+     * DescribeResourceGroup资产中心资产树信息
+     */
+    DescribeResourceGroup(req: DescribeResourceGroupRequest, cb?: (error: string, rep: DescribeResourceGroupResponse) => void): Promise<DescribeResourceGroupResponse>;
+    /**
+     * 修改规则
+     */
+    ModifyAcRule(req: ModifyAcRuleRequest, cb?: (error: string, rep: ModifyAcRuleResponse) => void): Promise<ModifyAcRuleResponse>;
+    /**
+     * 修改企业安全组下发状态
+     */
+    ModifyEnterpriseSecurityDispatchStatus(req: ModifyEnterpriseSecurityDispatchStatusRequest, cb?: (error: string, rep: ModifyEnterpriseSecurityDispatchStatusResponse) => void): Promise<ModifyEnterpriseSecurityDispatchStatusResponse>;
+    /**
+     * DescribeTLogIpList告警中心IP柱形图
+
+     */
+    DescribeTLogIpList(req: DescribeTLogIpListRequest, cb?: (error: string, rep: DescribeTLogIpListResponse) => void): Promise<DescribeTLogIpListResponse>;
+    /**
+     * 创建地址模板规则
+     */
+    CreateAddressTemplate(req: CreateAddressTemplateRequest, cb?: (error: string, rep: CreateAddressTemplateResponse) => void): Promise<CreateAddressTemplateResponse>;
+    /**
      * 添加nat访问控制规则(地域必填)
      */
     AddNatAcRule(req: AddNatAcRuleRequest, cb?: (error: string, rep: AddNatAcRuleResponse) => void): Promise<AddNatAcRuleResponse>;
-    /**
-     * 防火墙垂直扩容
-     */
-    ExpandCfwVertical(req: ExpandCfwVerticalRequest, cb?: (error: string, rep: ExpandCfwVerticalResponse) => void): Promise<ExpandCfwVerticalResponse>;
-    /**
-     * DescribeBlockByIpTimesList 告警中心阻断IP折线图
-
-     */
-    DescribeBlockByIpTimesList(req: DescribeBlockByIpTimesListRequest, cb?: (error: string, rep: DescribeBlockByIpTimesListResponse) => void): Promise<DescribeBlockByIpTimesListResponse>;
     /**
      * DescribeBlockStaticList 告警中心柱形图
 
      */
     DescribeBlockStaticList(req: DescribeBlockStaticListRequest, cb?: (error: string, rep: DescribeBlockStaticListResponse) => void): Promise<DescribeBlockStaticListResponse>;
     /**
-     * 设置防火墙实例弹性公网ip，目前仅支持新增模式的防火墙实例
+     * 串行防火墙IP开关列表
      */
-    SetNatFwEip(req: SetNatFwEipRequest, cb?: (error: string, rep: SetNatFwEipResponse) => void): Promise<SetNatFwEipResponse>;
+    DescribeFwEdgeIps(req: DescribeFwEdgeIpsRequest, cb?: (error: string, rep: DescribeFwEdgeIpsResponse) => void): Promise<DescribeFwEdgeIpsResponse>;
 }

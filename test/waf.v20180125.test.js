@@ -88,9 +88,9 @@ it("waf.v20180125.DescribeAntiInfoLeakRules", async function () {
     }
 })
 
-it("waf.v20180125.AddSpartaProtectionsAuto", async function () {
+it("waf.v20180125.ModifyCustomRule", async function () {
     try {
-       const data = await client.AddSpartaProtectionsAuto({})
+       const data = await client.ModifyCustomRule({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -218,9 +218,9 @@ it("waf.v20180125.DescribeAntiInfoLeakageRules", async function () {
     }
 })
 
-it("waf.v20180125.AddSpartaProtectionAuto", async function () {
+it("waf.v20180125.SearchAccessLog", async function () {
     try {
-       const data = await client.AddSpartaProtectionAuto({})
+       const data = await client.SearchAccessLog({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -241,16 +241,6 @@ it("waf.v20180125.DescribeWafThreatenIntelligence", async function () {
 it("waf.v20180125.DescribeIpHitItems", async function () {
     try {
        const data = await client.DescribeIpHitItems({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("waf.v20180125.SearchAccessLog", async function () {
-    try {
-       const data = await client.SearchAccessLog({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -628,16 +618,6 @@ it("waf.v20180125.DeleteDownloadRecord", async function () {
     }
 })
 
-it("waf.v20180125.ModifyCustomRule", async function () {
-    try {
-       const data = await client.ModifyCustomRule({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("waf.v20180125.ModifyBotStatus", async function () {
     try {
        const data = await client.ModifyBotStatus({})
@@ -871,6 +851,16 @@ it("waf.v20180125.DeleteAccessExport", async function () {
 it("waf.v20180125.DeleteDomainWhiteRules", async function () {
     try {
        const data = await client.DeleteDomainWhiteRules({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("waf.v20180125.DescribeDomainVerifyResult", async function () {
+    try {
+       const data = await client.DescribeDomainVerifyResult({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
