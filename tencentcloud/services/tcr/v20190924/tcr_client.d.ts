@@ -390,7 +390,7 @@ export declare class Client extends AbstractClient {
      */
     DeleteSignaturePolicy(req: DeleteSignaturePolicyRequest, cb?: (error: string, rep: DeleteSignaturePolicyResponse) => void): Promise<DeleteSignaturePolicyResponse>;
     /**
-     * 创建自定义账户
+     * 创建服务级账户
      */
     CreateServiceAccount(req: CreateServiceAccountRequest, cb?: (error: string, rep: CreateServiceAccountResponse) => void): Promise<CreateServiceAccountResponse>;
     /**

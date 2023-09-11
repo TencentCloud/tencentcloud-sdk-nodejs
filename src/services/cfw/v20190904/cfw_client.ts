@@ -23,23 +23,27 @@ import {
   DescribeLogsRequest,
   ModifyFwGroupSwitchRequest,
   ModifySecurityGroupRuleRequest,
+  ModifyAssetSyncResponse,
   ModifyNatFwVpcDnsSwitchResponse,
   DescribeNatFwInstanceWithRegionRequest,
-  ModifyNatAcRuleResponse,
+  ModifyAddressTemplateRequest,
   DescribeRuleOverviewResponse,
   CfwNatDnatRule,
   ScanInfo,
   ModifyEnterpriseSecurityGroupRuleResponse,
   FwCidrInfo,
   StaticInfo,
+  SyncFwOperateResponse,
   DescribeNatAcRuleResponse,
   ModifyPublicIPSwitchStatusResponse,
   AddAclRuleRequest,
   DescribeVpcFwGroupSwitchRequest,
   FwDeploy,
+  SyncFwOperateRequest,
   ModifyNatAcRuleRequest,
   ModifyAclRuleRequest,
   ModifyAcRuleResponse,
+  ModifyAssetScanResponse,
   ModifyNatSequenceRulesRequest,
   DescribeAclRuleResponse,
   AddAcRuleRequest,
@@ -47,6 +51,7 @@ import {
   BlockIgnoreRule,
   ModifyNatFwVpcDnsSwitchRequest,
   DeleteNatFwInstanceResponse,
+  DescribeNatSwitchListRequest,
   DeleteAllAccessControlRuleRequest,
   ModifyBlockIgnoreListRequest,
   ModifyAllVPCSwitchStatusResponse,
@@ -56,11 +61,13 @@ import {
   DescribeCfwEipsRequest,
   DescribeTLogInfoResponse,
   DescribeUnHandleEventTabListRequest,
+  ModifyNatInstanceRequest,
   DescribeAssociatedInstanceListResponse,
   AssociatedInstanceInfo,
   CreateBlockIgnoreRuleListRequest,
   RemoveAcRuleResponse,
   NatFwInstance,
+  ModifyNatAcRuleResponse,
   DescribeAclRuleRequest,
   CreateSecurityGroupRulesResponse,
   ExpandCfwVerticalRequest,
@@ -115,26 +122,29 @@ import {
   CommonFilter,
   DescribeNatFwInstancesInfoRequest,
   DescribeFwGroupInstanceInfoResponse,
-  ModifyNatSequenceRulesResponse,
   DescribeTableStatusRequest,
+  ModifyNatSequenceRulesResponse,
+  DescribeAssetSyncResponse,
   DescribeSecurityGroupListRequest,
-  ModifyResourceGroupRequest,
+  ModifyAddressTemplateResponse,
   CreateNatFwInstanceResponse,
   NewModeItems,
   DescribeNatFwInfoCountResponse,
   DescribeDefenseSwitchRequest,
   ModifyVpcFwGroupRequest,
   ModifyEnterpriseSecurityDispatchStatusResponse,
+  ModifyResourceGroupRequest,
   SecurityGroupListData,
   EdgeIpSwitch,
   ModifySequenceAclRulesRequest,
   ModifyVpcAcRuleRequest,
   CreateNatFwInstanceWithDomainResponse,
-  RemoveAcRuleRequest,
+  DescribeFwSyncStatusRequest,
   ModifyEnterpriseSecurityGroupRuleRequest,
   BetaInfoByACL,
   RemoveNatAcRuleRequest,
-  ModifyAssetScanResponse,
+  ModifySequenceRulesResponse,
+  DescribeAssetSyncRequest,
   DeleteVpcFwGroupRequest,
   IPDefendStatus,
   RuleInfoData,
@@ -147,6 +157,7 @@ import {
   ModifySecurityGroupSequenceRulesRequest,
   CreateDatabaseWhiteListRulesResponse,
   DeleteBlockIgnoreRuleListRequest,
+  DescribeNatSwitchListResponse,
   DeleteVpcFwGroupResponse,
   CreateChooseVpcsResponse,
   DescribeUnHandleEventTabListResponse,
@@ -162,16 +173,17 @@ import {
   DeleteResourceGroupRequest,
   CreateNatFwInstanceRequest,
   DescribeBlockByIpTimesListRequest,
+  ModifyBlockTopRequest,
   RemoveEnterpriseSecurityGroupRuleResponse,
   NetInstancesInfo,
   VpcDnsInfo,
   CreateAddressTemplateResponse,
   DescribeTableStatusResponse,
-  ModifySequenceRulesResponse,
+  ModifyEdgeIpSwitchRequest,
   DescribeResourceGroupNewResponse,
   DescribeNatFwInstanceWithRegionResponse,
   DescribeResourceGroupNewRequest,
-  ModifyBlockTopRequest,
+  DescribeAddressTemplateListRequest,
   RemoveAclRuleRequest,
   DeleteAcRuleResponse,
   SecurityGroupSimplifyRule,
@@ -179,7 +191,7 @@ import {
   InstanceInfo,
   DescribeIPStatusListRequest,
   ModifyNatFwSwitchResponse,
-  FwGroupSwitchShow,
+  DescribeFwSyncStatusResponse,
   DescribeBlockByIpTimesListResponse,
   ModifyAllRuleStatusRequest,
   SetNatFwDnatRuleResponse,
@@ -202,13 +214,15 @@ import {
   DescribeIPStatusListResponse,
   CreateDatabaseWhiteListRulesRequest,
   FwGroupSwitch,
+  TemplateListInfo,
   DescribeVpcFwGroupSwitchResponse,
   ModifyBlockIgnoreRuleResponse,
   DescribeTLogIpListResponse,
   StopSecurityGroupRuleDispatchResponse,
   DescribeNatFwInfoCountRequest,
+  RemoveAcRuleRequest,
   AddAcRuleResponse,
-  ModifyEdgeIpSwitchRequest,
+  FwGroupSwitchShow,
   ModifyNatFwReSelectRequest,
   ModifyVpcFwSequenceRulesResponse,
   SetNatFwDnatRuleRequest,
@@ -223,6 +237,7 @@ import {
   DeleteNatFwInstanceRequest,
   ModifyVpcFwSequenceRulesRequest,
   ModifyStorageSettingRequest,
+  ModifyAssetSyncRequest,
   DescribeNatFwVpcDnsLstResponse,
   DescAcItem,
   CreateChooseVpcsRequest,
@@ -249,6 +264,7 @@ import {
   ModifyRunSyncAssetRequest,
   DeleteAddressTemplateRequest,
   CreateAcRulesResponse,
+  NatSwitchListData,
   DescribeSwitchListsResponse,
   ModifyAcRuleRequest,
   RemoveVpcAcRuleResponse,
@@ -263,10 +279,12 @@ import {
   CreateAcRulesRequest,
   ModifyEnterpriseSecurityDispatchStatusRequest,
   DescribeAssociatedInstanceListRequest,
+  ModifyNatInstanceResponse,
   ModifyTableStatusRequest,
   ModifyTableStatusResponse,
   DescribeGuideScanInfoResponse,
   VpcFwInstance,
+  DescribeAddressTemplateListResponse,
 } from "./cfw_models"
 
 /**
@@ -349,6 +367,16 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
     cb?: (error: string, rep: ModifyVpcFwGroupResponse) => void
   ): Promise<ModifyVpcFwGroupResponse> {
     return this.request("ModifyVpcFwGroup", req, cb)
+  }
+
+  /**
+   * 资产同步
+   */
+  async ModifyAssetSync(
+    req?: ModifyAssetSyncRequest,
+    cb?: (error: string, rep: ModifyAssetSyncResponse) => void
+  ): Promise<ModifyAssetSyncResponse> {
+    return this.request("ModifyAssetSync", req, cb)
   }
 
   /**
@@ -473,6 +501,16 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
   }
 
   /**
+   * 销毁防火墙实例
+   */
+  async DeleteNatFwInstance(
+    req: DeleteNatFwInstanceRequest,
+    cb?: (error: string, rep: DeleteNatFwInstanceResponse) => void
+  ): Promise<DeleteNatFwInstanceResponse> {
+    return this.request("DeleteNatFwInstance", req, cb)
+  }
+
+  /**
    * 批量添加入侵防御封禁列表、放通列表规则
    */
   async CreateBlockIgnoreRuleList(
@@ -594,13 +632,13 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
   }
 
   /**
-   * 销毁防火墙实例
+   * 资产同步状态查询
    */
-  async DeleteNatFwInstance(
-    req: DeleteNatFwInstanceRequest,
-    cb?: (error: string, rep: DeleteNatFwInstanceResponse) => void
-  ): Promise<DeleteNatFwInstanceResponse> {
-    return this.request("DeleteNatFwInstance", req, cb)
+  async DescribeAssetSync(
+    req?: DescribeAssetSyncRequest,
+    cb?: (error: string, rep: DescribeAssetSyncResponse) => void
+  ): Promise<DescribeAssetSyncResponse> {
+    return this.request("DescribeAssetSync", req, cb)
   }
 
   /**
@@ -755,6 +793,16 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
   }
 
   /**
+   * 修改地址模板
+   */
+  async ModifyAddressTemplate(
+    req: ModifyAddressTemplateRequest,
+    cb?: (error: string, rep: ModifyAddressTemplateResponse) => void
+  ): Promise<ModifyAddressTemplateResponse> {
+    return this.request("ModifyAddressTemplate", req, cb)
+  }
+
+  /**
    * 防火墙开关列表
    */
   async DescribeSwitchLists(
@@ -805,6 +853,16 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
     cb?: (error: string, rep: CreateChooseVpcsResponse) => void
   ): Promise<CreateChooseVpcsResponse> {
     return this.request("CreateChooseVpcs", req, cb)
+  }
+
+  /**
+   * 查询NAT边界防火墙开关列表
+   */
+  async DescribeNatSwitchList(
+    req: DescribeNatSwitchListRequest,
+    cb?: (error: string, rep: DescribeNatSwitchListResponse) => void
+  ): Promise<DescribeNatSwitchListResponse> {
+    return this.request("DescribeNatSwitchList", req, cb)
   }
 
   /**
@@ -1038,6 +1096,16 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
   }
 
   /**
+   * 编辑NAT防火墙
+   */
+  async ModifyNatInstance(
+    req: ModifyNatInstanceRequest,
+    cb?: (error: string, rep: ModifyNatInstanceResponse) => void
+  ): Promise<ModifyNatInstanceResponse> {
+    return this.request("ModifyNatInstance", req, cb)
+  }
+
+  /**
    * 删除规则
    */
   async DeleteAcRule(
@@ -1055,6 +1123,16 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
     cb?: (error: string, rep: DescribeNatAcRuleResponse) => void
   ): Promise<DescribeNatAcRuleResponse> {
     return this.request("DescribeNatAcRule", req, cb)
+  }
+
+  /**
+   * 获取防火墙同步状态，一般在执行同步操作后查询
+   */
+  async DescribeFwSyncStatus(
+    req: DescribeFwSyncStatusRequest,
+    cb?: (error: string, rep: DescribeFwSyncStatusResponse) => void
+  ): Promise<DescribeFwSyncStatusResponse> {
+    return this.request("DescribeFwSyncStatus", req, cb)
   }
 
   /**
@@ -1149,6 +1227,16 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
   }
 
   /**
+   * 查询地址模板列表
+   */
+  async DescribeAddressTemplateList(
+    req: DescribeAddressTemplateListRequest,
+    cb?: (error: string, rep: DescribeAddressTemplateListResponse) => void
+  ): Promise<DescribeAddressTemplateListResponse> {
+    return this.request("DescribeAddressTemplateList", req, cb)
+  }
+
+  /**
    * GetNatInstance 获取租户所有NAT实例及实例卡片信息
    */
   async DescribeNatFwInstancesInfo(
@@ -1186,6 +1274,16 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
     cb?: (error: string, rep: DescribeResourceGroupResponse) => void
   ): Promise<DescribeResourceGroupResponse> {
     return this.request("DescribeResourceGroup", req, cb)
+  }
+
+  /**
+   * 同步防火墙操作，包括同步防火墙路由（若vpc，专线网关等增加了Cidr，需要手动同步一下路由使之在防火墙上生效）等。
+   */
+  async SyncFwOperate(
+    req: SyncFwOperateRequest,
+    cb?: (error: string, rep: SyncFwOperateResponse) => void
+  ): Promise<SyncFwOperateResponse> {
+    return this.request("SyncFwOperate", req, cb)
   }
 
   /**

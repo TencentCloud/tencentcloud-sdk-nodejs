@@ -518,6 +518,16 @@ it("sqlserver.v20180328.CreateBusinessIntelligenceFile", async function () {
     }
 })
 
+it("sqlserver.v20180328.DescribeHASwitchLog", async function () {
+    try {
+       const data = await client.DescribeHASwitchLog({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("sqlserver.v20180328.StartMigrationCheck", async function () {
     try {
        const data = await client.StartMigrationCheck({})
@@ -841,6 +851,16 @@ it("sqlserver.v20180328.DescribeDBInstanceInter", async function () {
 it("sqlserver.v20180328.CreateReadOnlyDBInstances", async function () {
     try {
        const data = await client.CreateReadOnlyDBInstances({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("sqlserver.v20180328.SwitchCloudInstanceHA", async function () {
+    try {
+       const data = await client.SwitchCloudInstanceHA({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

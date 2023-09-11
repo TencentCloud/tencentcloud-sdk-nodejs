@@ -4458,6 +4458,20 @@ export interface StartInstanceXEventResponse {
 }
 
 /**
+ * SwitchCloudInstanceHA请求参数结构体
+ */
+export interface SwitchCloudInstanceHARequest {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+  /**
+   * 切换执行方式，0-立刻执行，1-时间窗内执行，默认取值为0。
+   */
+  WaitSwitch?: number
+}
+
+/**
  * CreateBasicDBInstances请求参数结构体
  */
 export interface CreateBasicDBInstancesRequest {
@@ -5333,6 +5347,20 @@ export interface CreateBackupRequest {
 }
 
 /**
+ * SwitchCloudInstanceHA返回参数结构体
+ */
+export interface SwitchCloudInstanceHAResponse {
+  /**
+   * 异步任务流程ID
+   */
+  FlowId?: number
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeDBsNormal请求参数结构体
  */
 export interface DescribeDBsNormalRequest {
@@ -5340,6 +5368,36 @@ export interface DescribeDBsNormalRequest {
    * 实例ID，形如mssql-7vfv3rk3
    */
   InstanceId: string
+}
+
+/**
+ * DescribeHASwitchLog请求参数结构体
+ */
+export interface DescribeHASwitchLogRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+  /**
+   * 开始时间(yyyy-MM-dd HH:mm:ss)
+   */
+  StartTime: string
+  /**
+   * 结束时间(yyyy-MM-dd HH:mm:ss)
+   */
+  EndTime: string
+  /**
+   * 切换模式 0-系统自动切换，1-手动切换，不填默认查全部。
+   */
+  SwitchType?: number
+  /**
+   * 分页，页大小
+   */
+  Limit?: number
+  /**
+   * 分页,页数
+   */
+  Offset?: number
 }
 
 /**
@@ -6192,6 +6250,24 @@ export interface DescribeDBInstancesAttributeRequest {
 }
 
 /**
+ * DescribeHASwitchLog返回参数结构体
+ */
+export interface DescribeHASwitchLogResponse {
+  /**
+   * 日志总数量
+   */
+  TotalCount?: number
+  /**
+   * 主备切换日志
+   */
+  SwitchLog?: Array<SwitchLog>
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeDBSecurityGroups请求参数结构体
  */
 export interface DescribeDBSecurityGroupsRequest {
@@ -6263,6 +6339,37 @@ export interface DescribePublishSubscribeResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 主备切换日志
+ */
+export interface SwitchLog {
+  /**
+   * 切换事件ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EventId?: string
+  /**
+   * 切换模式 0-系统自动切换，1-手动切换
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SwitchType?: number
+  /**
+   * 切换开始时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StartTime?: string
+  /**
+   * 切换结束时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EndTime?: string
+  /**
+   * 机器故障导致自动切换
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Reason?: string
 }
 
 /**

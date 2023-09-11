@@ -1272,7 +1272,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建自定义账户
+   * 创建服务级账户
    */
   async CreateServiceAccount(
     req: CreateServiceAccountRequest,

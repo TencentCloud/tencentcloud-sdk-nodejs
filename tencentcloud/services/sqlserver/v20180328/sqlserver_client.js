@@ -328,6 +328,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateBusinessIntelligenceFile", req, cb);
     }
     /**
+     * 本接口(DescribeHASwitchLog)用于手动主备切换。
+     */
+    async DescribeHASwitchLog(req, cb) {
+        return this.request("DescribeHASwitchLog", req, cb);
+    }
+    /**
      * 本接口（StartMigrationCheck）的作用是启动一个迁移前的校验任务，适用于迁移源的类型为TencentDB for SQLServer 的迁移方式
      */
     async StartMigrationCheck(req, cb) {
@@ -526,6 +532,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CreateReadOnlyDBInstances(req, cb) {
         return this.request("CreateReadOnlyDBInstances", req, cb);
+    }
+    /**
+     * 本接口(SwitchCloudInstanceHA)用于手动主备切换。
+     */
+    async SwitchCloudInstanceHA(req, cb) {
+        return this.request("SwitchCloudInstanceHA", req, cb);
     }
     /**
      * 本接口（CreateCloudReadOnlyDBInstances）用于添加只读副本实例(虚拟机版本)。

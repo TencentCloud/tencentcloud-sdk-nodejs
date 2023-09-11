@@ -1088,7 +1088,7 @@ export interface DescribeServiceAccountsRequest {
    */
   All?: boolean
   /**
-   * 是否填充策略
+   * 是否填充权限信息
    */
   EmbedPermission?: boolean
   /**
@@ -1329,10 +1329,12 @@ export interface DeleteInstanceCustomizedDomainRequest {
 export interface Tag {
   /**
    * 云标签的key
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Key: string
   /**
    * 云标签的值
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Value: string
 }
@@ -1774,7 +1776,7 @@ export interface Permission {
    */
   Resource: string
   /**
-   * 动作，目前仅支持：tcr:PushRepository、tcr:PullRepository
+   * 动作，目前仅支持：tcr:PushRepository、tcr:PullRepository、tcr:CreateRepository、tcr:CreateHelmChart、tcr:DescribeHelmCharts
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Actions: Array<string>
@@ -3431,6 +3433,10 @@ export interface Registry {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RenewFlag: number
+  /**
+   * 是否开启实例删除保护，false表示不开启
+   */
+  DeletionProtection?: boolean
 }
 
 /**
@@ -4581,7 +4587,7 @@ export interface DescribeServiceAccountsResponse {
    */
   ServiceAccounts?: Array<ServiceAccount>
   /**
-   * 自定义账户数量
+   * 服务级账户数量
    */
   TotalCount?: number
   /**

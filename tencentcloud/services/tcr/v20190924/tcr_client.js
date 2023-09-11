@@ -600,7 +600,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteSignaturePolicy", req, cb);
     }
     /**
-     * 创建自定义账户
+     * 创建服务级账户
      */
     async CreateServiceAccount(req, cb) {
         return this.request("CreateServiceAccount", req, cb);

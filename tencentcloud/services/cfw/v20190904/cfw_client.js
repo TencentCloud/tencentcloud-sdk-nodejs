@@ -73,6 +73,12 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
         return this.request("ModifyVpcFwGroup", req, cb);
     }
     /**
+     * 资产同步
+     */
+    async ModifyAssetSync(req, cb) {
+        return this.request("ModifyAssetSync", req, cb);
+    }
+    /**
      * 删除防火墙(组)，或者删除其中实例
      */
     async DeleteVpcFwGroup(req, cb) {
@@ -144,6 +150,12 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
      */
     async RemoveAclRule(req, cb) {
         return this.request("RemoveAclRule", req, cb);
+    }
+    /**
+     * 销毁防火墙实例
+     */
+    async DeleteNatFwInstance(req, cb) {
+        return this.request("DeleteNatFwInstance", req, cb);
     }
     /**
      * 批量添加入侵防御封禁列表、放通列表规则
@@ -219,10 +231,10 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
         return this.request("ModifyVpcAcRule", req, cb);
     }
     /**
-     * 销毁防火墙实例
+     * 资产同步状态查询
      */
-    async DeleteNatFwInstance(req, cb) {
-        return this.request("DeleteNatFwInstance", req, cb);
+    async DescribeAssetSync(req, cb) {
+        return this.request("DescribeAssetSync", req, cb);
     }
     /**
      * 创建企业安全组规则
@@ -316,6 +328,12 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
         return this.request("DeleteSecurityGroupRule", req, cb);
     }
     /**
+     * 修改地址模板
+     */
+    async ModifyAddressTemplate(req, cb) {
+        return this.request("ModifyAddressTemplate", req, cb);
+    }
+    /**
      * 防火墙开关列表
      */
     async DescribeSwitchLists(req, cb) {
@@ -347,6 +365,12 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
      */
     async CreateChooseVpcs(req, cb) {
         return this.request("CreateChooseVpcs", req, cb);
+    }
+    /**
+     * 查询NAT边界防火墙开关列表
+     */
+    async DescribeNatSwitchList(req, cb) {
+        return this.request("DescribeNatSwitchList", req, cb);
     }
     /**
      * 资产扫描
@@ -487,6 +511,12 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
         return this.request("DescribeAssociatedInstanceList", req, cb);
     }
     /**
+     * 编辑NAT防火墙
+     */
+    async ModifyNatInstance(req, cb) {
+        return this.request("ModifyNatInstance", req, cb);
+    }
+    /**
      * 删除规则
      */
     async DeleteAcRule(req, cb) {
@@ -497,6 +527,12 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
      */
     async DescribeNatAcRule(req, cb) {
         return this.request("DescribeNatAcRule", req, cb);
+    }
+    /**
+     * 获取防火墙同步状态，一般在执行同步操作后查询
+     */
+    async DescribeFwSyncStatus(req, cb) {
+        return this.request("DescribeFwSyncStatus", req, cb);
     }
     /**
      * DescribeNatFwInstance 获取租户所有NAT实例
@@ -554,6 +590,12 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
         return this.request("DescribeGuideScanInfo", req, cb);
     }
     /**
+     * 查询地址模板列表
+     */
+    async DescribeAddressTemplateList(req, cb) {
+        return this.request("DescribeAddressTemplateList", req, cb);
+    }
+    /**
      * GetNatInstance 获取租户所有NAT实例及实例卡片信息
      */
     async DescribeNatFwInstancesInfo(req, cb) {
@@ -576,6 +618,12 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
      */
     async DescribeResourceGroup(req, cb) {
         return this.request("DescribeResourceGroup", req, cb);
+    }
+    /**
+     * 同步防火墙操作，包括同步防火墙路由（若vpc，专线网关等增加了Cidr，需要手动同步一下路由使之在防火墙上生效）等。
+     */
+    async SyncFwOperate(req, cb) {
+        return this.request("SyncFwOperate", req, cb);
     }
     /**
      * 修改规则

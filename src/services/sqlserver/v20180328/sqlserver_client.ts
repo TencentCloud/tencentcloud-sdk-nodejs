@@ -208,6 +208,7 @@ import {
   StartMigrationCheckRequest,
   InterInstance,
   StartInstanceXEventResponse,
+  SwitchCloudInstanceHARequest,
   CreateBasicDBInstancesRequest,
   ModifyDBNameResponse,
   CosUploadBackupFile,
@@ -243,7 +244,9 @@ import {
   PublishSubscribe,
   DescribeBackupByFlowIdRequest,
   CreateBackupRequest,
+  SwitchCloudInstanceHAResponse,
   DescribeDBsNormalRequest,
+  DescribeHASwitchLogRequest,
   BackupFile,
   ModifyAccountRemarkRequest,
   ModifyIncrementalMigrationResponse,
@@ -286,11 +289,13 @@ import {
   DescribeAccountsResponse,
   DeleteDBInstanceResponse,
   DescribeDBInstancesAttributeRequest,
+  DescribeHASwitchLogResponse,
   DescribeDBSecurityGroupsRequest,
   DescribeBackupCommandResponse,
   InquiryPriceRenewDBInstanceResponse,
   StartBackupMigrationRequest,
   DescribePublishSubscribeResponse,
+  SwitchLog,
   CreateCloudDBInstancesRequest,
   DescribeReadOnlyGroupListRequest,
   SlowlogInfo,
@@ -814,6 +819,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口(DescribeHASwitchLog)用于手动主备切换。
+   */
+  async DescribeHASwitchLog(
+    req: DescribeHASwitchLogRequest,
+    cb?: (error: string, rep: DescribeHASwitchLogResponse) => void
+  ): Promise<DescribeHASwitchLogResponse> {
+    return this.request("DescribeHASwitchLog", req, cb)
+  }
+
+  /**
    * 本接口（StartMigrationCheck）的作用是启动一个迁移前的校验任务，适用于迁移源的类型为TencentDB for SQLServer 的迁移方式
    */
   async StartMigrationCheck(
@@ -1143,6 +1158,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateReadOnlyDBInstancesResponse) => void
   ): Promise<CreateReadOnlyDBInstancesResponse> {
     return this.request("CreateReadOnlyDBInstances", req, cb)
+  }
+
+  /**
+   * 本接口(SwitchCloudInstanceHA)用于手动主备切换。
+   */
+  async SwitchCloudInstanceHA(
+    req: SwitchCloudInstanceHARequest,
+    cb?: (error: string, rep: SwitchCloudInstanceHAResponse) => void
+  ): Promise<SwitchCloudInstanceHAResponse> {
+    return this.request("SwitchCloudInstanceHA", req, cb)
   }
 
   /**

@@ -208,31 +208,31 @@ export interface CreateFaceResponse {
     /**
      * 加入成功的人脸数量
      */
-    SucFaceNum: number;
+    SucFaceNum?: number;
     /**
      * 加入成功的人脸ID列表
      */
-    SucFaceIds: Array<string>;
+    SucFaceIds?: Array<string>;
     /**
      * 每张人脸图片添加结果，-1101 代表未检测到人脸，-1102 代表图片解码失败，
   -1601代表不符合图片质量控制要求, -1604 代表人脸相似度没有超过FaceMatchThreshold。
   其他非 0 值代表算法服务异常。
   RetCode的顺序和入参中 Images 或 Urls 的顺序一致。
      */
-    RetCode: Array<number | bigint>;
+    RetCode?: Array<number | bigint>;
     /**
      * 加入成功的人脸索引。索引顺序和入参中 Images 或 Urls 的顺序一致。
   例， Urls 中 有 3 个 url，第二个 url 失败，则 SucIndexes 值为 [0,2] 。
      */
-    SucIndexes: Array<number | bigint>;
+    SucIndexes?: Array<number | bigint>;
     /**
      * 加入成功的人脸框位置。顺序和入参中 Images 或 Urls 的顺序一致。
      */
-    SucFaceRects: Array<FaceRect>;
+    SucFaceRects?: Array<FaceRect>;
     /**
      * 人脸识别所用的算法模型版本。
      */
-    FaceModelVersion: string;
+    FaceModelVersion?: string;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -589,15 +589,15 @@ export interface SearchFacesResponse {
     /**
      * 识别结果。
      */
-    Results: Array<Result>;
+    Results?: Array<Result>;
     /**
      * 搜索的人员库中包含的人脸数。
      */
-    FaceNum: number;
+    FaceNum?: number;
     /**
      * 人脸识别所用的算法模型版本。
      */
-    FaceModelVersion: string;
+    FaceModelVersion?: string;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2176,27 +2176,23 @@ export interface DetectFaceResponse {
     /**
      * 请求的图片宽度。
      */
-    ImageWidth: number;
+    ImageWidth?: number;
     /**
      * 请求的图片高度。
      */
-    ImageHeight: number;
+    ImageHeight?: number;
     /**
      * 人脸信息列表。包含人脸坐标信息、属性信息（若需要）、质量分信息（若需要）。
      */
-    FaceInfos: Array<FaceInfo>;
+    FaceInfos?: Array<FaceInfo>;
     /**
      * 人脸识别服务所用的算法模型版本。
-  
   目前入参支持 “2.0”和“3.0“ 两个输入。
-  
   2020年4月2日开始，默认为“3.0”，之前使用过本接口的账号若未填写本参数默认为“2.0”。
-  
   2020年11月26日后开通服务的账号仅支持输入“3.0”。
-  
   不同算法模型版本对应的人脸识别算法不同，新版本的整体效果会优于旧版本，建议使用“3.0”版本。
      */
-    FaceModelVersion: string;
+    FaceModelVersion?: string;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
