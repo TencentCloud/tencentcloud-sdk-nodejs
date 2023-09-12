@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { ImageToObjectRequest, TextToObjectResponse, TextToObjectRequest, ImageToClassResponse, TextToClassResponse, ImageToObjectResponse, ImageToClassRequest, TextToClassRequest } from "./mrs_models";
+import { ImageToObjectRequest, TextToObjectResponse, TurnPDFToObjectResponse, TextToObjectRequest, ImageToClassResponse, TextToClassResponse, ImageToClassRequest, TextToClassRequest, TurnPDFToObjectRequest, ImageToObjectResponse } from "./mrs_models";
 /**
  * mrs client
  * @class
@@ -11,6 +11,10 @@ export declare class Client extends AbstractClient {
      * 图片分类
      */
     ImageToClass(req: ImageToClassRequest, cb?: (error: string, rep: ImageToClassResponse) => void): Promise<ImageToClassResponse>;
+    /**
+     * 将PDF格式的体检报告文件结构化,解析关键信息.
+     */
+    TurnPDFToObject(req: TurnPDFToObjectRequest, cb?: (error: string, rep: TurnPDFToObjectResponse) => void): Promise<TurnPDFToObjectResponse>;
     /**
      * 图片转结构化对象
      */

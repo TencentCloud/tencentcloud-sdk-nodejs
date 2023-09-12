@@ -1,12 +1,36 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { ModifyInstanceResponse, CreateInstanceResponse, DeleteInstanceResponse, DescribeTopicListResponse, DeleteInstanceRequest, DescribeInstanceResponse, DescribeInstanceRequest, CreateInstanceRequest, DescribeTopicListRequest, ModifyInstanceRequest, DescribeInstanceListResponse, DescribeInstanceListRequest } from "./trocket_models";
+import { ModifyInstanceResponse, CreateTopicResponse, CreateConsumerGroupRequest, ModifyInstanceRequest, DescribeTopicListRequest, DescribeInstanceListRequest, CreateInstanceResponse, DescribeTopicListResponse, DeleteInstanceResponse, ModifyConsumerGroupRequest, DescribeConsumerGroupRequest, DescribeConsumerGroupResponse, CreateInstanceRequest, DeleteTopicRequest, DeleteConsumerGroupResponse, ModifyTopicResponse, DescribeTopicResponse, DescribeTopicStatsOpRequest, CreateTopicRequest, DescribeTopicStatsOpResponse, ModifyTopicRequest, DescribeInstanceResponse, DeleteConsumerGroupRequest, DeleteTopicResponse, CreateConsumerGroupResponse, ModifyConsumerGroupResponse, DeleteInstanceRequest, DescribeInstanceRequest, DescribeInstanceListResponse, DescribeTopicRequest } from "./trocket_models";
 /**
  * trocket client
  * @class
  */
 export declare class Client extends AbstractClient {
     constructor(clientConfig: ClientConfig);
+    /**
+     * 运营端查询topicStata
+     */
+    DescribeTopicStatsOp(req: DescribeTopicStatsOpRequest, cb?: (error: string, rep: DescribeTopicStatsOpResponse) => void): Promise<DescribeTopicStatsOpResponse>;
+    /**
+     * 查询消费组详情
+     */
+    DescribeConsumerGroup(req: DescribeConsumerGroupRequest, cb?: (error: string, rep: DescribeConsumerGroupResponse) => void): Promise<DescribeConsumerGroupResponse>;
+    /**
+     * 创建主题
+     */
+    CreateTopic(req: CreateTopicRequest, cb?: (error: string, rep: CreateTopicResponse) => void): Promise<CreateTopicResponse>;
+    /**
+     * 删除消费组
+     */
+    DeleteConsumerGroup(req: DeleteConsumerGroupRequest, cb?: (error: string, rep: DeleteConsumerGroupResponse) => void): Promise<DeleteConsumerGroupResponse>;
+    /**
+     * 修改消费组属性
+     */
+    ModifyConsumerGroup(req: ModifyConsumerGroupRequest, cb?: (error: string, rep: ModifyConsumerGroupResponse) => void): Promise<ModifyConsumerGroupResponse>;
+    /**
+     * 购买新实例
+     */
+    CreateInstance(req: CreateInstanceRequest, cb?: (error: string, rep: CreateInstanceResponse) => void): Promise<CreateInstanceResponse>;
     /**
      * 获取实例列表，Filters参数使用说明如下：
 1. InstanceName, 名称模糊查询
@@ -18,9 +42,15 @@ export declare class Client extends AbstractClient {
      */
     DescribeInstanceList(req: DescribeInstanceListRequest, cb?: (error: string, rep: DescribeInstanceListResponse) => void): Promise<DescribeInstanceListResponse>;
     /**
-     * 购买新实例
+     * 查询主题详情，Offset和Limit参数是指订阅该主题的消费组查询分页参数，Filter参数使用说明如下：
+
+ConsumerGroup，消费组名称过滤
      */
-    CreateInstance(req: CreateInstanceRequest, cb?: (error: string, rep: CreateInstanceResponse) => void): Promise<CreateInstanceResponse>;
+    DescribeTopic(req: DescribeTopicRequest, cb?: (error: string, rep: DescribeTopicResponse) => void): Promise<DescribeTopicResponse>;
+    /**
+     * 修改主题属性
+     */
+    ModifyTopic(req: ModifyTopicRequest, cb?: (error: string, rep: ModifyTopicResponse) => void): Promise<ModifyTopicResponse>;
     /**
      * 查询实例信息
      */
@@ -36,6 +66,14 @@ export declare class Client extends AbstractClient {
 2. TopicType，主题类型查询，支持多选，可选值：Normal,Order,Transaction,DelayScheduled
      */
     DescribeTopicList(req: DescribeTopicListRequest, cb?: (error: string, rep: DescribeTopicListResponse) => void): Promise<DescribeTopicListResponse>;
+    /**
+     * 删除主题
+     */
+    DeleteTopic(req: DeleteTopicRequest, cb?: (error: string, rep: DeleteTopicResponse) => void): Promise<DeleteTopicResponse>;
+    /**
+     * 创建消费组
+     */
+    CreateConsumerGroup(req: CreateConsumerGroupRequest, cb?: (error: string, rep: CreateConsumerGroupResponse) => void): Promise<CreateConsumerGroupResponse>;
     /**
      * 修改实例属性
      */

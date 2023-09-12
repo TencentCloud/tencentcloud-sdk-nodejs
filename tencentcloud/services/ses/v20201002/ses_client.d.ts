@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { BatchSendEmailRequest, GetEmailTemplateRequest, ListSendTasksResponse, CreateReceiverResponse, CreateEmailTemplateRequest, ListEmailAddressResponse, ListEmailAddressRequest, UpdateEmailSmtpPassWordResponse, ListReceiversRequest, GetEmailIdentityResponse, ListBlackEmailAddressRequest, ListSendTasksRequest, GetSendEmailStatusResponse, SendEmailRequest, DeleteBlackListRequest, BatchSendEmailResponse, DeleteEmailIdentityRequest, UpdateEmailIdentityRequest, GetEmailIdentityRequest, DeleteEmailIdentityResponse, GetStatisticsReportRequest, CreateReceiverRequest, DeleteEmailTemplateResponse, CreateEmailIdentityRequest, UpdateEmailSmtpPassWordRequest, UpdateEmailIdentityResponse, DeleteEmailTemplateRequest, DeleteBlackListResponse, UpdateEmailTemplateRequest, ListEmailTemplatesRequest, CreateReceiverDetailWithDataResponse, CreateReceiverDetailResponse, ListEmailTemplatesResponse, SendEmailResponse, ListBlackEmailAddressResponse, GetSendEmailStatusRequest, DeleteReceiverRequest, ListEmailIdentitiesResponse, DeleteReceiverResponse, GetStatisticsReportResponse, DeleteEmailAddressRequest, DeleteEmailAddressResponse, CreateEmailIdentityResponse, CreateEmailAddressRequest, CreateReceiverDetailRequest, CreateEmailTemplateResponse, ListReceiversResponse, CreateEmailAddressResponse, UpdateEmailTemplateResponse, CreateReceiverDetailWithDataRequest, GetEmailTemplateResponse, ListEmailIdentitiesRequest } from "./ses_models";
+import { BatchSendEmailRequest, GetEmailTemplateRequest, ListSendTasksResponse, CreateReceiverResponse, CreateEmailTemplateRequest, ListEmailAddressResponse, ListEmailAddressRequest, UpdateEmailSmtpPassWordResponse, ListReceiversRequest, GetEmailIdentityResponse, ListBlackEmailAddressRequest, ListSendTasksRequest, GetSendEmailStatusResponse, SendEmailRequest, DeleteBlackListRequest, BatchSendEmailResponse, DeleteEmailIdentityRequest, UpdateEmailIdentityRequest, GetEmailIdentityRequest, DeleteEmailIdentityResponse, GetStatisticsReportRequest, CreateReceiverRequest, DeleteEmailTemplateResponse, CreateEmailIdentityRequest, UpdateEmailSmtpPassWordRequest, UpdateEmailIdentityResponse, DeleteEmailTemplateRequest, DeleteBlackListResponse, ListReceiverDetailsResponse, UpdateEmailTemplateRequest, ListEmailTemplatesRequest, CreateReceiverDetailWithDataResponse, CreateReceiverDetailResponse, ListEmailTemplatesResponse, SendEmailResponse, ListBlackEmailAddressResponse, GetSendEmailStatusRequest, DeleteReceiverRequest, ListEmailIdentitiesResponse, DeleteReceiverResponse, GetStatisticsReportResponse, DeleteEmailAddressRequest, DeleteEmailAddressResponse, CreateEmailIdentityResponse, ListReceiverDetailsRequest, CreateEmailAddressRequest, CreateReceiverDetailRequest, CreateEmailTemplateResponse, ListReceiversResponse, CreateEmailAddressResponse, UpdateEmailTemplateResponse, CreateReceiverDetailWithDataRequest, GetEmailTemplateResponse, ListEmailIdentitiesRequest } from "./ses_models";
 /**
  * ses client
  * @class
@@ -24,6 +24,10 @@ export declare class Client extends AbstractClient {
 默认接口请求频率限制：1次/秒
      */
     GetSendEmailStatus(req: GetSendEmailStatusRequest, cb?: (error: string, rep: GetSendEmailStatusResponse) => void): Promise<GetSendEmailStatusResponse>;
+    /**
+     * 根据收件人列表id查询收件人列表中的所有收件人邮箱地址，分页查询，可以根据收件邮箱地址来过滤查询
+     */
+    ListReceiverDetails(req: ListReceiverDetailsRequest, cb?: (error: string, rep: ListReceiverDetailsResponse) => void): Promise<ListReceiverDetailsResponse>;
     /**
      * 创建收件人列表，收件人列表是发送批量邮件的目标邮件地址列表。创建列表后，需要上传收件人邮箱地址。之后创建发送任务，关联列表，便可以实现批量发送邮件的功能
      */

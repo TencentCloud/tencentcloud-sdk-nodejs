@@ -73,6 +73,7 @@ import {
   DeleteContentReviewTemplateRequest,
   NoiseConfigureInfo,
   AiReviewPoliticalTaskInput,
+  VerifyDomainRecordResponse,
   AudioTransform,
   ModifySuperPlayerConfigRequest,
   ResetProcedureTemplateRequest,
@@ -89,6 +90,7 @@ import {
   DeletePersonSampleRequest,
   ProcedureReviewAudioVideoTaskInput,
   AiRecognitionTaskAsrWordsSegmentItem,
+  TextWatermarkTemplateInput,
   QualityEvaluationConfigureInfoForUpdate,
   AiRecognitionTaskInput,
   AudioTemplateInfo,
@@ -162,7 +164,7 @@ import {
   WatermarkTemplate,
   CoverBySnapshotTaskOutput,
   ModifyQualityInspectTemplateResponse,
-  TextWatermarkTemplateInput,
+  ModifyAdaptiveDynamicStreamingTemplateRequest,
   ForbidMediaDistributionRequest,
   DescribeAIRecognitionTemplatesResponse,
   EditMediaResponse,
@@ -256,7 +258,7 @@ import {
   CreatePersonSampleResponse,
   CreateContentReviewTemplateResponse,
   ModifyAnimatedGraphicsTemplateRequest,
-  DescribeProcedureTemplatesRequest,
+  DescribeAIAnalysisTemplatesRequest,
   CreateHeadTailTemplateRequest,
   MediaSampleSnapshotItem,
   TagConfigureInfoForUpdate,
@@ -264,6 +266,7 @@ import {
   EmptyTrackItem,
   StickerTrackItem,
   DescribeDrmDataKeyResponse,
+  ProcessMediaRequest,
   DescribeMediaPlayStatDetailsResponse,
   VideoTemplateInfo,
   PoliticalOcrReviewTemplateInfo,
@@ -286,7 +289,7 @@ import {
   AiAnalysisTaskFrameTagOutput,
   CreateEnhanceMediaTemplateResponse,
   DeleteReviewTemplateResponse,
-  ModifyAdaptiveDynamicStreamingTemplateRequest,
+  DNSVerifyInfo,
   MediaAnimatedGraphicsItem,
   WebPageRecordInfo,
   DescribeCDNUsageDataResponse,
@@ -308,7 +311,7 @@ import {
   ReviewImageSegmentItem,
   CreateRoundPlayResponse,
   MediaSubtitleInput,
-  ProcessMediaRequest,
+  FileVerifyInfo,
   FaceEnhanceInfo,
   PornImageResult,
   ProcessImageResponse,
@@ -416,10 +419,11 @@ import {
   AiAnalysisResult,
   ReduceMediaBitrateAdaptiveDynamicStreamingResult,
   ImageWatermarkInputForUpdate,
-  DescribeAIAnalysisTemplatesRequest,
+  CreateDomainVerifyRecordResponse,
   ExtractCopyRightWatermarkResponse,
   MediaTranscodeInfo,
   ResolutionNameInfo,
+  VerifyDomainRecordRequest,
   AiRecognitionTaskOcrWordsResultItem,
   ParseStreamingManifestRequest,
   ReviewImageResult,
@@ -568,6 +572,7 @@ import {
   MediaSampleSnapshotInfo,
   InspectMediaQualityResponse,
   DescribeSubAppIdsResponse,
+  CreateDomainVerifyRecordRequest,
   MediaInfo,
   VideoTemplateInfoForUpdate,
   CreateContentReviewTemplateRequest,
@@ -660,6 +665,7 @@ import {
   CreateRebuildMediaTemplateRequest,
   ImageOperation,
   MediaSubStreamInfoItem,
+  VerifyDomainOwnershipForConsoleRequest,
   MosaicConfigureInfoForUpdate,
   DescribeWatermarkTemplatesResponse,
   WeChatMiniProgramPublishResponse,
@@ -708,6 +714,7 @@ import {
   FaceConfigureInfo,
   AiRecognitionTaskFaceResultOutput,
   DeleteImageProcessingTemplateResponse,
+  VerifyDomainOwnershipForConsoleResponse,
   PornImgReviewTemplateInfoForUpdate,
   CreateWatermarkTemplateResponse,
   PornImgReviewTemplateInfo,
@@ -726,6 +733,7 @@ import {
   ExtractCopyRightWatermarkTask,
   MediaAiAnalysisFrameTagItem,
   QualityInspectItem,
+  PullUploadTask,
   DescribeImageProcessingTemplatesResponse,
   SampleSnapshotTaskInput,
   ReviewImageRequest,
@@ -756,7 +764,7 @@ import {
   DeleteQualityInspectTemplateRequest,
   ComposeMediaOutput,
   ModifyWatermarkTemplateResponse,
-  PullUploadTask,
+  DescribeProcedureTemplatesRequest,
   ProhibitedConfigureInfoForUpdate,
   FrameTagConfigureInfoForUpdate,
   CreateImageSpriteTemplateResponse,
@@ -1301,6 +1309,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 该接口用于生成一条子域名解析，提示客户添加到域名解析上，用于泛域名及域名取回校验归属权。
+   */
+  async CreateDomainVerifyRecord(
+    req?: CreateDomainVerifyRecordRequest,
+    cb?: (error: string, rep: CreateDomainVerifyRecordResponse) => void
+  ): Promise<CreateDomainVerifyRecordResponse> {
+    return this.request("CreateDomainVerifyRecord", req, cb)
+  }
+
+  /**
    * 查询指定时间点截图模板，支持根据条件，分页查询。
    */
   async DescribeSnapshotByTimeOffsetTemplates(
@@ -1785,6 +1803,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 该接口用于验证域名解析值。
+   */
+  async VerifyDomainRecord(
+    req: VerifyDomainRecordRequest,
+    cb?: (error: string, rep: VerifyDomainRecordResponse) => void
+  ): Promise<VerifyDomainRecordResponse> {
+    return this.request("VerifyDomainRecord", req, cb)
+  }
+
+  /**
      * 该 API 已经<font color='red'>不再维护</font>，新版播放器签名不再使用播放器配置模板，详细请参考 [播放器签名](https://cloud.tencent.com/document/product/266/45554)。
 创建播放器配置，数量上限：100。
      */
@@ -1867,6 +1895,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyHeadTailTemplateResponse) => void
   ): Promise<ModifyHeadTailTemplateResponse> {
     return this.request("ModifyHeadTailTemplate", req, cb)
+  }
+
+  /**
+   * 控制台验证域名归属
+   */
+  async VerifyDomainOwnershipForConsole(
+    req: VerifyDomainOwnershipForConsoleRequest,
+    cb?: (error: string, rep: VerifyDomainOwnershipForConsoleResponse) => void
+  ): Promise<VerifyDomainOwnershipForConsoleResponse> {
+    return this.request("VerifyDomainOwnershipForConsole", req, cb)
   }
 
   /**

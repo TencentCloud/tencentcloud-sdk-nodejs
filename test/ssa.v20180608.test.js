@@ -208,6 +208,16 @@ it("ssa.v20180608.DescribeSocAlertDetails", async function () {
     }
 })
 
+it("ssa.v20180608.DescribeAlarmStat", async function () {
+    try {
+       const data = await client.DescribeAlarmStat({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ssa.v20180608.DescribeSocCspmCompliance", async function () {
     try {
        const data = await client.DescribeSocCspmCompliance({})

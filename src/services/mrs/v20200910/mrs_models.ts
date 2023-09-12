@@ -201,6 +201,17 @@ export interface IHCBlock {
 }
 
 /**
+ * 体检报告-妇科-阴道
+ */
+export interface GynaecologyVagina {
+  /**
+   * 阴道总体描述
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Text?: KeyValueItem
+}
+
+/**
  * 体温名称
  */
 export interface BodyTemperatureBlock {
@@ -581,6 +592,22 @@ export interface SurgeryListBlock {
 }
 
 /**
+ * 体检报告V1版本
+ */
+export interface PhysicalExaminationV1 {
+  /**
+   * 体检报告信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PhysicalExaminationMulti?: PhysicalExamination
+  /**
+   * 版本
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Version?: string
+}
+
+/**
  * 多发
  */
 export interface Multiple {
@@ -747,6 +774,17 @@ export interface BirthPlaceBlock {
 }
 
 /**
+ * 体检报告-小结
+ */
+export interface GeneralExaminationBriefSummary {
+  /**
+   * 一般检查小结
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Text?: KeyValueItem
+}
+
+/**
  * pTNM
  */
 export interface PTNM {
@@ -806,37 +844,6 @@ export interface TableIndicators {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Sample?: BaseItem
-}
-
-/**
- * 组织学类
- */
-export interface HistologyClass {
-  /**
-   * 项目名称
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Name?: string
-  /**
-   * 索引
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Index?: Array<number | bigint>
-  /**
-   * 原文
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Src?: string
-  /**
-   * 归一化值
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Value?: string
-  /**
-   * 原文对应坐标
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Coords?: Array<Coord>
 }
 
 /**
@@ -938,6 +945,37 @@ export interface Lymph {
 }
 
 /**
+ * 体检报告-口腔科
+ */
+export interface StomatologyBaseItem {
+  /**
+   * 龋齿
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ToothDecay?: StomatologyToothDecay
+  /**
+   * 牙龈
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Gingiva?: StomatologyGingiva
+  /**
+   * 牙周
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Periodontics?: StomatologyPeriodontics
+  /**
+   * 口腔其他
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Others?: Array<KeyValueItem>
+  /**
+   * 小结
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BriefSummary?: StomatologyBriefSummary
+}
+
+/**
  * 基础类型
  */
 export interface BaseItem {
@@ -966,6 +1004,37 @@ export interface BaseItem {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Coords?: Array<Coord>
+}
+
+/**
+ * 体检报告-耳鼻喉科
+ */
+export interface OtolaryngologyBaseItem {
+  /**
+   * 耳朵
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Ear?: OtolaryngologyEar
+  /**
+   * 鼻
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Nose?: OtolaryngologyNose
+  /**
+   * 喉
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Larynx?: OtolaryngologyLarynx
+  /**
+   * 耳鼻喉其他
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Others?: Array<KeyValueItem>
+  /**
+   * 小结
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BriefSummary?: OtolaryngologyBriefSummary
 }
 
 /**
@@ -1012,6 +1081,28 @@ export interface Fp2NdItem {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AnesthesiaMethod?: BaseItem
+}
+
+/**
+ * 体检报告-外科-浅表淋巴结
+ */
+export interface SurgeryLymphNode {
+  /**
+   * 浅表淋巴结总体描述
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Text?: KeyValueItem
+}
+
+/**
+ * 体检报告-外科-头颈部
+ */
+export interface SurgeryHeadNeck {
+  /**
+   * 头颈部总体描述
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Text?: KeyValueItem
 }
 
 /**
@@ -1279,14 +1370,186 @@ export interface MenstrualPeriodBlock {
 }
 
 /**
- * 免疫接种证明
+ * 病历
  */
-export interface VaccineCertificate {
+export interface TreatmentRecord {
   /**
-   * 免疫接种列表
+   * 入院
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  VaccineList: Array<Vaccination>
+  DmissionCondition: string
+  /**
+   * 主诉
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ChiefComplaint: string
+  /**
+   * 现病史
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DiseasePresent: string
+  /**
+   * 主要症状体征
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SymptomsAndSigns: string
+  /**
+   * 辅助检查
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AuxiliaryExamination: string
+  /**
+   * 体格检查
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BodyExamination: string
+  /**
+   * 专科检查
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SpecialistExamination: string
+  /**
+   * 精神检查
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MentalExamination: string
+  /**
+   * 检查记录
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CheckRecord: string
+  /**
+   * 化验结果
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InspectResult: string
+  /**
+   * 切口愈合情况
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IncisionHealing: string
+  /**
+   * 处理意见
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TreatmentSuggestion: string
+  /**
+   * 门诊随访要求
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FollowUpRequirements: string
+  /**
+   * 诊疗经过
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CheckAndTreatmentProcess: string
+  /**
+   * 手术经过
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SurgeryCondition: string
+  /**
+   * 入院情况
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ConditionChanges: string
+  /**
+   * 出院情况
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DischargeCondition: string
+  /**
+   * pTNM信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PTNM: string
+  /**
+   * pTNMM信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PTNMM: string
+  /**
+   * pTNMN信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PTNMN: string
+  /**
+   * pTNMT信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PTNMT: string
+  /**
+   * ECOG信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ECOG: string
+  /**
+   * NRS信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NRS: string
+  /**
+   * KPS信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  KPS: string
+  /**
+   * 死亡日期
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DeathDate: string
+  /**
+   * 复发日期
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RelapseDate: string
+  /**
+   * 观测天数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ObservationDays: string
+}
+
+/**
+ * 体检报告-内科-血管
+ */
+export interface InternalMedicineVessel {
+  /**
+   * 血管总体描述
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Text?: KeyValueItem
+  /**
+   * 血管杂音
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VascularMurmur?: KeyValueItem
+  /**
+   * 外周血管
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PeripheralVessel?: KeyValueItem
+}
+
+/**
+ * 体检报告-眼科-裸眼视力
+ */
+export interface OphthalmologyBareEyeSight {
+  /**
+   * 左眼视力
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LeftEyeVisual?: KeyValueItem
+  /**
+   * 裸眼视力
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Text?: KeyValueItem
+  /**
+   * 右眼视力
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RightEyeVisual?: KeyValueItem
 }
 
 /**
@@ -1404,6 +1667,17 @@ export interface GeneticHistoryBlock {
 }
 
 /**
+ * 体检报告-眼科-小结
+ */
+export interface OphthalmologyBriefSummary {
+  /**
+   * 眼科小结
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Text?: KeyValueItem
+}
+
+/**
  * 月经史
  */
 export interface MenstrualHistoryDetailBlock {
@@ -1447,6 +1721,64 @@ export interface MenstrualHistoryDetailBlock {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Value?: string
+}
+
+/**
+ * 体检报告-内科-腹部-胆囊
+ */
+export interface InternalMedicineAbdomenGallBladder {
+  /**
+   * 胆囊总体描述
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Src?: KeyValueItem
+  /**
+   * 胆囊大小
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Size?: KeyValueItem
+  /**
+   * 胆囊触诊
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Palpation?: KeyValueItem
+  /**
+   * 胆囊叩诊
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Percussion?: KeyValueItem
+  /**
+   * 胆囊压痛
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Tenderness?: KeyValueItem
+  /**
+   * 胆囊质地
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Consistency?: KeyValueItem
+}
+
+/**
+ * 体检报告-妇科-外阴
+ */
+export interface GynaecologyVulva {
+  /**
+   * 外阴总体描述
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Text?: KeyValueItem
+}
+
+/**
+ * 体检报告-眼科-色觉
+ */
+export interface OphthalmologyColourVision {
+  /**
+   * 色觉总体描述
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Text?: KeyValueItem
 }
 
 /**
@@ -1634,6 +1966,17 @@ export interface EcgDescription {
 }
 
 /**
+ * 体检报告-外科-甲状腺
+ */
+export interface SurgeryThyroid {
+  /**
+   * 甲状腺总体描述
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Text?: KeyValueItem
+}
+
+/**
  * 门诊病历信息
  */
 export interface MedicalRecordInfo {
@@ -1693,6 +2036,17 @@ export interface EyeItemsInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Version?: string
+}
+
+/**
+ * 体检报告-外科-皮肤
+ */
+export interface SurgerySkin {
+  /**
+   * 皮肤总体描述
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Text?: KeyValueItem
 }
 
 /**
@@ -1783,34 +2137,14 @@ export interface NormSize {
 }
 
 /**
- * 病案首页
+ * 体检报告-妇科-小结
  */
-export interface FirstPage {
+export interface GynaecologyBriefSummary {
   /**
-   * 出入院诊断
+   * 小结
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DischargeDiagnosis?: Array<DischargeDiagnosis>
-  /**
-   * 病理诊断
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  PathologicalDiagnosis?: BlockInfo
-  /**
-   * 临床诊断
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ClinicalDiagnosis?: BlockInfo
-  /**
-   * 受伤中毒的外部原因
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  DamagePoi?: BlockInfoV2
-  /**
-   * 病案首页第二页
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Fp2NdItems?: Array<Fp2NdItem>
+  Text?: KeyValueItem
 }
 
 /**
@@ -2102,6 +2436,58 @@ export interface ChiefComplaintDetailBlock {
 }
 
 /**
+ * TurnPDFToObject返回参数结构体
+ */
+export interface TurnPDFToObjectResponse {
+  /**
+   * 报告结构化结果
+   */
+  Template?: Template
+  /**
+   * 多级分类结果
+   */
+  TextTypeList?: Array<TextType>
+  /**
+   * 报告结构化结果
+   */
+  Block?: Block
+  /**
+   * 是否使用Block字段
+   */
+  IsBlock?: boolean
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 体检报告-内科-心脏
+ */
+export interface InternalMedicineHeart {
+  /**
+   * 心脏总体描述
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Text?: KeyValueItem
+  /**
+   * 心律
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HeartRhythm?: KeyValueItem
+  /**
+   * 心率
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HeartRate?: ValueUnitItem
+  /**
+   * 心脏听诊
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HeartAuscultation?: KeyValueItem
+}
+
+/**
  * 报告基本信息
  */
 export interface ReportInfo {
@@ -2238,50 +2624,85 @@ export interface ReportInfo {
 }
 
 /**
- * 内窥镜报告
+ * 生命体征
  */
-export interface Endoscopy {
+export interface GeneralExaminationVitalSign {
   /**
-   * 活检部位
+   * 生命体征总体描述
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  BiopsyPart: BiopsyPart
+  Text?: ValueUnitItem
   /**
-   * 可见描述
+   * 体温
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Desc: EndoscopyDesc
+  BodyTemperature?: ValueUnitItem
   /**
-   * 结论
+   * 脉率
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Summary: Summary
+  Pulse?: ValueUnitItem
+  /**
+   * 心率
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HeartRate?: ValueUnitItem
+  /**
+   * 呼吸频率
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BreathingRate?: ValueUnitItem
+  /**
+   * 身高
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BodyHeight?: ValueUnitItem
+  /**
+   * 体重
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BodyWeight?: ValueUnitItem
+  /**
+   * 体质指数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BodyMassIndex?: ValueUnitItem
+  /**
+   * 腰围
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Waistline?: ValueUnitItem
+  /**
+   * 血压
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BloodPressure?: GeneralExaminationVitalSignBloodPressure
 }
 
 /**
- * 家庭成员
+ * 体检报告基础信息
  */
-export interface RelativeHistoryBlock {
+export interface PhysicalBaseItem {
   /**
-   * 名称
+   * 类型
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Name?: string
   /**
-   * 成员列表
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Detail?: Array<RelativeHistoryDetailBlock>
-  /**
-   * 原文
+   * 原始文本
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Src?: string
   /**
-   * 对外输出值
+   * 归一化后值
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Value?: string
+  /**
+   * 四点坐标
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Coords?: Array<Coord>
 }
 
 /**
@@ -2377,6 +2798,68 @@ export interface PathologyV2 {
 }
 
 /**
+ * 病案首页
+ */
+export interface FirstPage {
+  /**
+   * 出入院诊断
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DischargeDiagnosis?: Array<DischargeDiagnosis>
+  /**
+   * 病理诊断
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PathologicalDiagnosis?: BlockInfo
+  /**
+   * 临床诊断
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ClinicalDiagnosis?: BlockInfo
+  /**
+   * 受伤中毒的外部原因
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DamagePoi?: BlockInfoV2
+  /**
+   * 病案首页第二页
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Fp2NdItems?: Array<Fp2NdItem>
+}
+
+/**
+ * 侵犯
+ */
+export interface InvasiveV2 {
+  /**
+   * 索引
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Index?: Array<number | bigint>
+  /**
+   * 部位
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Part?: Part
+  /**
+   * 阴性或阳性
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Positive?: string
+  /**
+   * 原文
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Src?: string
+  /**
+   * 原文对应坐标
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Coords?: Array<Coord>
+}
+
+/**
  * TextToObject请求参数结构体
  */
 export interface TextToObjectRequest {
@@ -2435,6 +2918,52 @@ export interface AspectRatio {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Value: string
+}
+
+/**
+ * 个人史
+ */
+export interface PersonalHistoryBlock {
+  /**
+   * 出生地
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BirthPlace?: BirthPlaceBlock
+  /**
+   * 居住地
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LivePlace?: BirthPlaceBlock
+  /**
+   * 职业
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Job?: BirthPlaceBlock
+  /**
+   * 吸烟
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SmokeHistory?: SmokeHistoryBlock
+  /**
+   * 喝酒
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AlcoholicHistory?: SmokeHistoryBlock
+  /**
+   * 月经史
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MenstrualHistory?: MenstrualHistoryBlock
+  /**
+   * 婚姻-生育史
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ObstericalHistory?: ObstetricalHistoryBlock
+  /**
+   * 家族史
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FamilyHistory?: FamilyHistoryBlock
 }
 
 /**
@@ -2526,6 +3055,53 @@ export interface FamilyMedicalHistory {
 }
 
 /**
+ * 体检报告-眼科-矫正视力
+ */
+export interface OphthalmologyCorrectedVisualAcuity {
+  /**
+   * 左眼矫正视力
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LeftEyeVisual?: KeyValueItem
+  /**
+   * 矫正视力
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Text?: KeyValueItem
+  /**
+   * 右眼矫正视力
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RightEyeVisual?: KeyValueItem
+}
+
+/**
+ * 血压
+ */
+export interface GeneralExaminationVitalSignBloodPressure {
+  /**
+   * 血压
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Text?: BloodPressureItem
+  /**
+   * 收缩压/舒张压
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SystolicDiastolicPressure?: Array<BloodPressureItem>
+  /**
+   * 收缩压
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SystolicPressure?: Array<BloodPressureItem>
+  /**
+   * 舒张压
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DiastolicPressure?: Array<BloodPressureItem>
+}
+
+/**
  * 部位信息
  */
 export interface Part {
@@ -2577,29 +3153,29 @@ export interface ImageToClassResponse {
 }
 
 /**
- * 侵犯扩散
+ * 药物史
  */
-export interface Invas {
+export interface DrugListBlock {
   /**
-   * 原文位置
+   * 通用名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Index: Array<number | bigint>
+  CommonName?: string
   /**
-   * 部位
+   * 商品名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Part: Part
+  TradeName?: string
   /**
-   * 阳性
+   * 用法用量
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Positive: string
+  Dosage?: DosageBlock
   /**
-   * 原文
+   * 值
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Src: string
+  Value?: string
 }
 
 /**
@@ -2837,6 +3413,42 @@ export interface ClinicalStaging {
 }
 
 /**
+ * 体检报告-内科-腹部-胰腺
+ */
+export interface InternalMedicineAbdomenPancreas {
+  /**
+   * 胰腺总体描述
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Src?: KeyValueItem
+  /**
+   * 胰腺大小
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Size?: KeyValueItem
+  /**
+   * 胰腺触诊
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Palpation?: KeyValueItem
+  /**
+   * 胰腺叩诊
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Percussion?: KeyValueItem
+  /**
+   * 肝脏压痛
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Tenderness?: KeyValueItem
+  /**
+   * 胰腺质地
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Consistency?: KeyValueItem
+}
+
+/**
  * 个人史
  */
 export interface PersonalMedicalHistory {
@@ -2881,6 +3493,47 @@ export interface DiagCert {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Diagnosis: Array<DiagCertItem>
+}
+
+/**
+ * 体检报告-内科-腹部
+ */
+export interface InternalMedicineAbdomen {
+  /**
+   * 内科腹部小结
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Text?: KeyValueItem
+  /**
+   * 肝脏
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Liver?: InternalMedicineAbdomenLiver
+  /**
+   * 胆囊
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  GallBladder?: InternalMedicineAbdomenGallBladder
+  /**
+   * 胰腺
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Pancreas?: InternalMedicineAbdomenPancreas
+  /**
+   * 脾脏
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Spleen?: InternalMedicineAbdomenSpleen
+  /**
+   * 肾脏
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Kidney?: InternalMedicineAbdomenKidney
+  /**
+   * 腹部其他
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Others?: Array<KeyValueItem>
 }
 
 /**
@@ -2983,6 +3636,17 @@ export interface AdmissionConditionBlock {
 }
 
 /**
+ * 体检报告-口腔科-龋齿
+ */
+export interface StomatologyToothDecay {
+  /**
+   * 龋齿总体描述
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Text?: KeyValueItem
+}
+
+/**
  * TextToClass返回参数结构体
  */
 export interface TextToClassResponse {
@@ -2994,6 +3658,716 @@ export interface TextToClassResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 体检报告-口腔科-小结
+ */
+export interface StomatologyBriefSummary {
+  /**
+   * 口腔小结
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Text?: KeyValueItem
+}
+
+/**
+ * 听力信息
+ */
+export interface HearingItem {
+  /**
+   * 类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name?: string
+  /**
+   * 项目原文
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Item?: PhysicalBaseItem
+  /**
+   * 方位
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Location?: PhysicalBaseItem
+  /**
+   * 描述
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Result?: PhysicalBaseItem
+}
+
+/**
+ * 组织学类型
+ */
+export interface HistologyType {
+  /**
+   * 浸润
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Infiltration: string
+  /**
+   * 原文位置
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Index: Array<number | bigint>
+  /**
+   * 原文
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Src: string
+  /**
+   * 类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Type: string
+}
+
+/**
+ * 块信息
+ */
+export interface BlockInfo {
+  /**
+   * 原文位置
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Index?: Array<number | bigint>
+  /**
+   * 阳性
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Positive?: string
+  /**
+   * 原文
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Src?: string
+  /**
+   * 值
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Value?: string
+  /**
+   * 类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Type?: string
+  /**
+   * 名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name?: string
+  /**
+   * 大小
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Size?: Array<Size>
+}
+
+/**
+ * 手术记录
+ */
+export interface Surgery {
+  /**
+   * 手术史
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SurgeryHistory?: SurgeryHistory
+  /**
+   * 其他信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OtherInfo?: OtherInfo
+}
+
+/**
+ * 结构化信息
+ */
+export interface Block {
+  /**
+   * 诊断信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Check?: Array<Check>
+  /**
+   * 病理报告
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Pathology?: Array<PathologyReport>
+  /**
+   * 医学资料
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MedDoc?: Array<MedDoc>
+  /**
+   * 诊断证明
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DiagCert?: Array<DiagCert>
+  /**
+   * 病案首页
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FirstPage?: Array<FirstPage>
+  /**
+   * 检验报告
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Indicator?: Array<Indicator>
+  /**
+   * 门诊病历信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MedicalRecordInfo?: Array<MedicalRecordInfo>
+  /**
+   * 出入院信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Hospitalization?: Array<Hospitalization>
+  /**
+   * 手术记录
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Surgery?: Array<Surgery>
+  /**
+   * 处方单
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Prescription?: Array<Prescription>
+  /**
+   * 免疫接种证明
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VaccineCertificate?: Array<VaccineCertificate>
+  /**
+   * 心电图
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Electrocardiogram?: Array<Electrocardiogram>
+  /**
+   * 病理报告v2
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PathologyV2?: Array<PathologyV2>
+  /**
+   * 内窥镜报告
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Endoscopy?: Array<Endoscopy>
+  /**
+   * C14检验报告
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  C14?: Array<Indicator>
+  /**
+   * 体检结论
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Exame?: Array<Exame>
+  /**
+   * 出入院结构体
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MedDocV2?: Array<DischargeInfoBlock>
+  /**
+   * 检验报告v3
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IndicatorV3?: Array<IndicatorV3>
+  /**
+   * 孕产报告
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Maternity?: Array<Maternity>
+  /**
+   * 时间轴
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Timeline?: Array<TimelineInformation>
+  /**
+   * 核酸报告结论
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Covid?: Array<CovidItemsInfo>
+  /**
+   * 眼科报告结构体
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Eye?: Array<EyeItemsInfo>
+  /**
+   * 出生证明结构化信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BirthCert?: Array<BirthCert>
+  /**
+   * 文本类型列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TextTypeListBlocks?: Array<TextTypeListBlock>
+  /**
+   * 体检报告信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PhysicalExamination?: PhysicalExaminationV1
+}
+
+/**
+ * 文本类型
+ */
+export interface TextType {
+  /**
+   * 类别Id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Id: number
+  /**
+   * 类别层级
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Level: number
+  /**
+   * 类别名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name: string
+}
+
+/**
+ * 心电图指标项
+ */
+export interface EcgItem {
+  /**
+   * 名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name: string
+  /**
+   * 值
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Value: string
+  /**
+   * 单位
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Unit: string
+  /**
+   * 原文
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Src: string
+}
+
+/**
+ * 体检报告-妇科-子宫
+ */
+export interface GynaecologyUterus {
+  /**
+   * 子宫总体描述
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Text?: KeyValueItem
+}
+
+/**
+ * 胎儿数据结构
+ */
+export interface Fetus {
+  /**
+   * 双顶径
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BPD?: FieldInfo
+  /**
+   * 腹前后径
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  APTD?: FieldInfo
+  /**
+   * 腹左右径
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TTD?: FieldInfo
+  /**
+   * 头臀径
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CRL?: FieldInfo
+  /**
+   * 头围
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HC?: FieldInfo
+  /**
+   * 腹围
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AC?: FieldInfo
+  /**
+   * 股骨长
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FL?: FieldInfo
+  /**
+   * 肱骨长
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HL?: FieldInfo
+  /**
+   * 胎儿重量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Weight?: FieldInfo
+  /**
+   * 颈项透明层
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NT?: FieldInfo
+  /**
+   * 脐动脉血流
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UmbilicalCord?: FieldInfo
+  /**
+   * 羊水最大深度
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WaterDeep?: FieldInfo
+  /**
+   * 羊水四象限测量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WaterQuad?: FieldInfo
+  /**
+   * 羊水指数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AFI?: FieldInfo
+  /**
+   * 胎心
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FHR?: FieldInfo
+  /**
+   * 胎动
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Movement?: FieldInfo
+  /**
+   * 胎数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Num?: FieldInfo
+  /**
+   * 胎位
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Position?: FieldInfo
+  /**
+   * 是否活胎
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Alive?: FieldInfo
+  /**
+   * 胎盘位置
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PlacentaLocation?: FieldInfo
+  /**
+   * 胎盘厚度
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PlacentaThickness?: FieldInfo
+  /**
+   * 胎盘成熟度
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PlacentaGrade?: FieldInfo
+  /**
+   * 妊娠时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  GestationTime?: FieldInfo
+  /**
+   * 妊娠周期
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  GestationPeriod?: FieldInfo
+  /**
+   * 绕颈
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AroundNeck?: FieldInfo
+  /**
+   * 病变
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Sym?: Array<FieldInfo>
+  /**
+   * 原文内容
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Src?: string
+}
+
+/**
+ * 体检报告-耳鼻喉科-耳朵
+ */
+export interface OtolaryngologyEar {
+  /**
+   * 耳总体描述
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Text?: KeyValueItem
+  /**
+   * 听力
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Hearing?: HearingItem
+}
+
+/**
+ * 图片信息
+ */
+export interface ImageInfo {
+  /**
+   * 图片id
+   */
+  Id: number
+  /**
+   * 图片url
+   */
+  Url?: string
+  /**
+   * 图片base64编码
+   */
+  Base64?: string
+}
+
+/**
+ * 点坐标
+ */
+export interface Point {
+  /**
+   * x坐标
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  X?: number
+  /**
+   * y坐标
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Y?: number
+}
+
+/**
+ * 月经史
+ */
+export interface MenstrualMedicalHistory {
+  /**
+   * 末次月经时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LastMenstrualPeriod: string
+  /**
+   * 经量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MenstrualFlow: string
+  /**
+   * 月经初潮年龄
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MenarcheAge: string
+  /**
+   * 是否来月经
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MenstruationOrNot: string
+  /**
+   * 月经周期
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MenstrualCycles: string
+  /**
+   * 月经持续天数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MenstrualPeriod: string
+}
+
+/**
+ * 检查报告单
+ */
+export interface Check {
+  /**
+   * 描述
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Desc: Desc
+  /**
+   * 结论
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Summary: Summary
+}
+
+/**
+ * 心电图诊断
+ */
+export interface EcgDiagnosis {
+  /**
+   * 名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name: string
+  /**
+   * 值
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Value: Array<string>
+}
+
+/**
+ * 免疫组化
+ */
+export interface ImmunohistochemistryBlock {
+  /**
+   * 名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name?: string
+  /**
+   * 原文
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Src?: string
+  /**
+   * 免疫组化详情
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Value?: Array<IHCBlock>
+}
+
+/**
+ * 体检报告-耳鼻喉科-喉
+ */
+export interface OtolaryngologyLarynx {
+  /**
+   * 喉总体描述
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Text?: KeyValueItem
+}
+
+/**
+ * 诊断结论
+ */
+export interface SummaryInfo {
+  /**
+   * 诊断结论文本
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Text?: BaseInfo
+  /**
+   * 诊断结论详情
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Infos?: Array<DetailInformation>
+}
+
+/**
+ * 描述段落
+ */
+export interface DescInfo {
+  /**
+   * 描述段落文本
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Text?: BaseInfo
+  /**
+   * 描述段落详情
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Infos?: Array<DetailInformation>
+}
+
+/**
+ * 组织学类
+ */
+export interface HistologyClass {
+  /**
+   * 项目名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name?: string
+  /**
+   * 索引
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Index?: Array<number | bigint>
+  /**
+   * 原文
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Src?: string
+  /**
+   * 归一化值
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Value?: string
+  /**
+   * 原文对应坐标
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Coords?: Array<Coord>
+}
+
+/**
+ * 家族史
+ */
+export interface FamilyHistoryBlock {
+  /**
+   * 家庭成员
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RelativeHistory?: RelativeHistoryBlock
+  /**
+   * 家族肿瘤史
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RelativeCancerHistory?: RelativeCancerHistoryBlock
+  /**
+   * 家族遗传史
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  GeneticHistory?: GeneticHistoryBlock
+}
+
+/**
+ * 入院诊断
+ */
+export interface AdmissionDiagnosisBlock {
+  /**
+   * 名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name?: string
+  /**
+   * 原文
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Src?: string
+  /**
+   * 归一化值
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Norm?: string
+  /**
+   * 对外输出值
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Value?: string
 }
 
 /**
@@ -3258,499 +4632,6 @@ export interface TreatmentRecordBlock {
 }
 
 /**
- * 组织学类型
- */
-export interface HistologyType {
-  /**
-   * 浸润
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Infiltration: string
-  /**
-   * 原文位置
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Index: Array<number | bigint>
-  /**
-   * 原文
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Src: string
-  /**
-   * 类型
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Type: string
-}
-
-/**
- * 块信息
- */
-export interface BlockInfo {
-  /**
-   * 原文位置
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Index?: Array<number | bigint>
-  /**
-   * 阳性
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Positive?: string
-  /**
-   * 原文
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Src?: string
-  /**
-   * 值
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Value?: string
-  /**
-   * 类型
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Type?: string
-  /**
-   * 名称
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Name?: string
-  /**
-   * 大小
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Size?: Array<Size>
-}
-
-/**
- * 手术记录
- */
-export interface Surgery {
-  /**
-   * 手术史
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SurgeryHistory?: SurgeryHistory
-  /**
-   * 其他信息
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  OtherInfo?: OtherInfo
-}
-
-/**
- * 文本类型
- */
-export interface TextType {
-  /**
-   * 类别Id
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Id: number
-  /**
-   * 类别层级
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Level: number
-  /**
-   * 类别名
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Name: string
-}
-
-/**
- * 心电图指标项
- */
-export interface EcgItem {
-  /**
-   * 名称
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Name: string
-  /**
-   * 值
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Value: string
-  /**
-   * 单位
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Unit: string
-  /**
-   * 原文
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Src: string
-}
-
-/**
- * 胎儿数据结构
- */
-export interface Fetus {
-  /**
-   * 双顶径
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  BPD?: FieldInfo
-  /**
-   * 腹前后径
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  APTD?: FieldInfo
-  /**
-   * 腹左右径
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TTD?: FieldInfo
-  /**
-   * 头臀径
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CRL?: FieldInfo
-  /**
-   * 头围
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  HC?: FieldInfo
-  /**
-   * 腹围
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  AC?: FieldInfo
-  /**
-   * 股骨长
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  FL?: FieldInfo
-  /**
-   * 肱骨长
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  HL?: FieldInfo
-  /**
-   * 胎儿重量
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Weight?: FieldInfo
-  /**
-   * 颈项透明层
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  NT?: FieldInfo
-  /**
-   * 脐动脉血流
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  UmbilicalCord?: FieldInfo
-  /**
-   * 羊水最大深度
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  WaterDeep?: FieldInfo
-  /**
-   * 羊水四象限测量
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  WaterQuad?: FieldInfo
-  /**
-   * 羊水指数
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  AFI?: FieldInfo
-  /**
-   * 胎心
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  FHR?: FieldInfo
-  /**
-   * 胎动
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Movement?: FieldInfo
-  /**
-   * 胎数
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Num?: FieldInfo
-  /**
-   * 胎位
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Position?: FieldInfo
-  /**
-   * 是否活胎
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Alive?: FieldInfo
-  /**
-   * 胎盘位置
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  PlacentaLocation?: FieldInfo
-  /**
-   * 胎盘厚度
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  PlacentaThickness?: FieldInfo
-  /**
-   * 胎盘成熟度
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  PlacentaGrade?: FieldInfo
-  /**
-   * 妊娠时间
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  GestationTime?: FieldInfo
-  /**
-   * 妊娠周期
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  GestationPeriod?: FieldInfo
-  /**
-   * 绕颈
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  AroundNeck?: FieldInfo
-  /**
-   * 病变
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Sym?: Array<FieldInfo>
-  /**
-   * 原文内容
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Src?: string
-}
-
-/**
- * 图片信息
- */
-export interface ImageInfo {
-  /**
-   * 图片id
-   */
-  Id: number
-  /**
-   * 图片url
-   */
-  Url?: string
-  /**
-   * 图片base64编码
-   */
-  Base64?: string
-}
-
-/**
- * 点坐标
- */
-export interface Point {
-  /**
-   * x坐标
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  X?: number
-  /**
-   * y坐标
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Y?: number
-}
-
-/**
- * 月经史
- */
-export interface MenstrualMedicalHistory {
-  /**
-   * 末次月经时间
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  LastMenstrualPeriod: string
-  /**
-   * 经量
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  MenstrualFlow: string
-  /**
-   * 月经初潮年龄
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  MenarcheAge: string
-  /**
-   * 是否来月经
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  MenstruationOrNot: string
-  /**
-   * 月经周期
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  MenstrualCycles: string
-  /**
-   * 月经持续天数
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  MenstrualPeriod: string
-}
-
-/**
- * 检查报告单
- */
-export interface Check {
-  /**
-   * 描述
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Desc: Desc
-  /**
-   * 结论
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Summary: Summary
-}
-
-/**
- * 心电图诊断
- */
-export interface EcgDiagnosis {
-  /**
-   * 名称
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Name: string
-  /**
-   * 值
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Value: Array<string>
-}
-
-/**
- * 免疫组化
- */
-export interface ImmunohistochemistryBlock {
-  /**
-   * 名称
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Name?: string
-  /**
-   * 原文
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Src?: string
-  /**
-   * 免疫组化详情
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Value?: Array<IHCBlock>
-}
-
-/**
- * 诊断结论
- */
-export interface SummaryInfo {
-  /**
-   * 诊断结论文本
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Text?: BaseInfo
-  /**
-   * 诊断结论详情
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Infos?: Array<DetailInformation>
-}
-
-/**
- * 描述段落
- */
-export interface DescInfo {
-  /**
-   * 描述段落文本
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Text?: BaseInfo
-  /**
-   * 描述段落详情
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Infos?: Array<DetailInformation>
-}
-
-/**
- * ImageToObject返回参数结构体
- */
-export interface ImageToObjectResponse {
-  /**
-   * 报告结构化结果
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Template?: Template
-  /**
-   * 多级分类结果
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TextTypeList?: Array<TextType>
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * 家族史
- */
-export interface FamilyHistoryBlock {
-  /**
-   * 家庭成员
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  RelativeHistory?: RelativeHistoryBlock
-  /**
-   * 家族肿瘤史
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  RelativeCancerHistory?: RelativeCancerHistoryBlock
-  /**
-   * 家族遗传史
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  GeneticHistory?: GeneticHistoryBlock
-}
-
-/**
- * 入院诊断
- */
-export interface AdmissionDiagnosisBlock {
-  /**
-   * 名称
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Name?: string
-  /**
-   * 原文
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Src?: string
-  /**
-   * 归一化值
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Norm?: string
-  /**
-   * 对外输出值
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Value?: string
-}
-
-/**
  * 弹性质地
  */
 export interface Elastic {
@@ -3782,6 +4663,58 @@ export interface Elastic {
 }
 
 /**
+ * 体检报告-胸围信息
+ */
+export interface ChestCircumferenceItem {
+  /**
+   * 类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name?: string
+  /**
+   * 项目原文
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Item?: PhysicalBaseItem
+  /**
+   * 数值
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Result?: PhysicalBaseItem
+  /**
+   * 单位
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Unit?: PhysicalBaseItem
+  /**
+   * 呼吸状态
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  State?: PhysicalBaseItem
+}
+
+/**
+ * 体检报告-外科-肛门直肠
+ */
+export interface SurgeryAnorectal {
+  /**
+   * 肛门直肠总体描述
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Text?: KeyValueItem
+  /**
+   * 直肠指检
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DigitalRectalExamination?: KeyValueItem
+  /**
+   * 痔疮
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Hemorrhoid?: KeyValueItem
+}
+
+/**
  * Ihc信息
  */
 export interface IHCInfo {
@@ -3804,6 +4737,56 @@ export interface IHCInfo {
    * 值
    */
   Value: Value
+}
+
+/**
+ * 体检报告PDF信息
+ */
+export interface PdfInfo {
+  /**
+   * pdf文件url链接(暂不支持)
+   */
+  Url?: string
+  /**
+   * pdf文件base64编码字符串
+   */
+  Base64?: string
+}
+
+/**
+ * 体检报告-眼科
+ */
+export interface OphthalmologyBaseItem {
+  /**
+   * 裸眼视力
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BareEyeSight?: OphthalmologyBareEyeSight
+  /**
+   * 矫正视力
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CorrectedVisualAcuity?: OphthalmologyCorrectedVisualAcuity
+  /**
+   * 色觉
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ColourVision?: OphthalmologyColourVision
+  /**
+   * 眼底
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Fundoscopy?: OphthalmologyFundoscopy
+  /**
+   * 眼科其他
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Others?: Array<KeyValueItem>
+  /**
+   * 眼科小结
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BriefSummary?: OphthalmologyBriefSummary
 }
 
 /**
@@ -3907,6 +4890,32 @@ export interface Medicine {
 }
 
 /**
+ * 病理诊断
+ */
+export interface PathologicalDiagnosisBlock {
+  /**
+   * 名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name?: string
+  /**
+   * 原文
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Src?: string
+  /**
+   * 病理详细
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Detail?: Array<PathologicalDiagnosisDetailBlock>
+  /**
+   * 值
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Value?: string
+}
+
+/**
  * 指定报告类型选用其结构化版本
  */
 export interface ReportTypeVersion {
@@ -3994,6 +5003,28 @@ export interface ObstericalMedicalHistory {
 }
 
 /**
+ * 体检报告-口腔科-牙龈
+ */
+export interface StomatologyGingiva {
+  /**
+   * 牙龈总体描述
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Text?: KeyValueItem
+}
+
+/**
+ * 体检报告-耳鼻喉科-鼻
+ */
+export interface OtolaryngologyNose {
+  /**
+   * 鼻总体描述
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Text?: KeyValueItem
+}
+
+/**
  * 基础类型
  */
 export interface BaseItem3 {
@@ -4048,6 +5079,17 @@ export interface BaseItem2 {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Coords?: Array<Coord>
+}
+
+/**
+ * 免疫接种证明
+ */
+export interface VaccineCertificate {
+  /**
+   * 免疫接种列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VaccineList: Array<Vaccination>
 }
 
 /**
@@ -4267,6 +5309,38 @@ export interface PoslistBlock {
 }
 
 /**
+ * 体检报告-妇科-月经史
+ */
+export interface GynaecologyMenstrualHistory {
+  /**
+   * 妇科月经史总体描述
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Text?: KeyValueItem
+}
+
+/**
+ * 内窥镜报告
+ */
+export interface Endoscopy {
+  /**
+   * 活检部位
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BiopsyPart: BiopsyPart
+  /**
+   * 可见描述
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Desc: EndoscopyDesc
+  /**
+   * 结论
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Summary: Summary
+}
+
+/**
  * 处方单
  */
 export interface Prescription {
@@ -4275,6 +5349,63 @@ export interface Prescription {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   MedicineList: Array<Medicine>
+}
+
+/**
+ * 体检报告-内科
+ */
+export interface InternalMedicineBaseItem {
+  /**
+   * 体检报告-内科-腹部
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Abdomen?: InternalMedicineAbdomen
+  /**
+   * 体检报告-内科-心脏
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Heart?: InternalMedicineHeart
+  /**
+   * 体检报告-内科-血管
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Vessel?: InternalMedicineVessel
+  /**
+   * 体检报告-内科-呼吸系统
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RespiratorySystem?: InternalMedicineRespiratorySystem
+  /**
+   * 体检报告-内科-内科其他
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Others?: Array<KeyValueItem>
+  /**
+   * 体检报告-内科-小结
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BriefSummary?: InternalMedicineBriefSummary
+}
+
+/**
+ * 体检报告-外科-泌尿生殖系统
+ */
+export interface SurgeryUrogenitalSystem {
+  /**
+   * 泌尿生殖系统总体描述
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Text?: KeyValueItem
+  /**
+   * 前列腺
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Prostate?: KeyValueItem
+  /**
+   * 外生殖器（男性）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExternalReproductiveOrgans?: KeyValueItem
 }
 
 /**
@@ -4506,6 +5637,43 @@ export interface DosageBlock {
 }
 
 /**
+ * 家庭成员
+ */
+export interface RelativeHistoryBlock {
+  /**
+   * 名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name?: string
+  /**
+   * 成员列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Detail?: Array<RelativeHistoryDetailBlock>
+  /**
+   * 原文
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Src?: string
+  /**
+   * 对外输出值
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Value?: string
+}
+
+/**
+ * 体检报告-口腔科-牙周
+ */
+export interface StomatologyPeriodontics {
+  /**
+   * 牙周总体描述
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Text?: KeyValueItem
+}
+
+/**
  * 活检部位
  */
 export interface BiopsyPart {
@@ -4527,34 +5695,29 @@ export interface BiopsyPart {
 }
 
 /**
- * 侵犯
+ * 侵犯扩散
  */
-export interface InvasiveV2 {
+export interface Invas {
   /**
-   * 索引
+   * 原文位置
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Index?: Array<number | bigint>
+  Index: Array<number | bigint>
   /**
    * 部位
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Part?: Part
+  Part: Part
   /**
-   * 阴性或阳性
+   * 阳性
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Positive?: string
+  Positive: string
   /**
    * 原文
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Src?: string
-  /**
-   * 原文对应坐标
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Coords?: Array<Coord>
+  Src: string
 }
 
 /**
@@ -4577,6 +5740,42 @@ export interface ImageToClassRequest {
    * 后付费的用户类型，新客户传1，老客户可不传或传 0。2022 年 12 月 15 新增了计费项，在此时间之前已经通过商务指定优惠价格的大客户，请不传这个字段或传 0，如果传 1 会导致以前获得的折扣价格失效。在 2022 年 12 月 15 日之后，通过商务指定优惠价格的大客户请传 1。
    */
   UserType?: number
+}
+
+/**
+ * 体检报告-内科-腹部-肝脏
+ */
+export interface InternalMedicineAbdomenLiver {
+  /**
+   * 肝脏总体描述
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Src?: KeyValueItem
+  /**
+   * 肝脏大小
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Size?: KeyValueItem
+  /**
+   * 肝脏触诊
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Palpation?: KeyValueItem
+  /**
+   * 肝脏叩诊
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Percussion?: KeyValueItem
+  /**
+   * 肝脏压痛
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Tenderness?: KeyValueItem
+  /**
+   * 肝脏质地
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Consistency?: KeyValueItem
 }
 
 /**
@@ -4611,6 +5810,119 @@ export interface BaseInfo {
 }
 
 /**
+ * 体检报告综合信息
+ */
+export interface PhysicalExamination {
+  /**
+   * 一般检查
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  GeneralExamination?: GeneralExaminationBaseItem
+  /**
+   * 内科
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InternalMedicine?: InternalMedicineBaseItem
+  /**
+   * 外科
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Surgery?: SurgeryBaseItem
+  /**
+   * 口腔科
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Stomatology?: StomatologyBaseItem
+  /**
+   * 眼科
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Ophthalmology?: OphthalmologyBaseItem
+  /**
+   * 耳鼻喉科
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Otolaryngology?: OtolaryngologyBaseItem
+  /**
+   * 妇科
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Gynaecology?: GynaecologyBaseItem
+  /**
+   * 未标准化
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Unclassified?: Array<KeyValueItem>
+}
+
+/**
+ * 体检报告-内科-呼吸系统
+ */
+export interface InternalMedicineRespiratorySystem {
+  /**
+   * 呼吸系统总体描述
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Text?: KeyValueItem
+  /**
+   * 胸廓
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Thoracic?: KeyValueItem
+  /**
+   * 痰量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Sputum?: KeyValueItem
+  /**
+   * 肺部叩诊
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LungPercussion?: KeyValueItem
+  /**
+   * 肺部听诊其他
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LungAuscultation?: Array<KeyValueItem>
+}
+
+/**
+ * 体检报告血压检测信息
+ */
+export interface BloodPressureItem {
+  /**
+   * 类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name?: string
+  /**
+   * 项目原文
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Item?: PhysicalBaseItem
+  /**
+   * 数值
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Result?: PhysicalBaseItem
+  /**
+   * 单位
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Unit?: PhysicalBaseItem
+  /**
+   * 第几次
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Times?: PhysicalBaseItem
+  /**
+   * 左右手臂
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Location?: PhysicalBaseItem
+}
+
+/**
  * TextToClass请求参数结构体
  */
 export interface TextToClassRequest {
@@ -4622,6 +5934,17 @@ export interface TextToClassRequest {
    * 后付费的用户类型，新客户传1，老客户可不传或传 0。2022 年 12 月 15 新增了计费项，在此时间之前已经通过商务指定优惠价格的大客户，请不传这个字段或传 0，如果传 1 会导致以前获得的折扣价格失效。在 2022 年 12 月 15 日之后，通过商务指定优惠价格的大客户请传 1。
    */
   UserType?: number
+}
+
+/**
+ * 文本类型列表块
+ */
+export interface TextTypeListBlock {
+  /**
+   * 文本类型列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TextTypeList?: Array<TextType>
 }
 
 /**
@@ -4638,6 +5961,47 @@ export interface ObstetricalHistoryBlock {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   FertilityHistory?: FertilityHistoryBlock
+}
+
+/**
+ * 体检报告-外科-脊柱
+ */
+export interface SurgerySpinalExtremities {
+  /**
+   * 脊柱四肢总体描述
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Text?: KeyValueItem
+  /**
+   * 脊柱
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SpinalColumn?: KeyValueItem
+  /**
+   * 四肢和关节
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LimbJoint?: KeyValueItem
+  /**
+   * 平跛足
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Foot?: KeyValueItem
+  /**
+   * 骨骼
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Bone?: KeyValueItem
+  /**
+   * 步态
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Gait?: KeyValueItem
+  /**
+   * 残疾或畸形
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Deformity?: KeyValueItem
 }
 
 /**
@@ -4770,6 +6134,16 @@ export interface OtherInfo {
 }
 
 /**
+ * TurnPDFToObject请求参数结构体
+ */
+export interface TurnPDFToObjectRequest {
+  /**
+   * 体检报告PDF文件信息, 目前只支持传PDF文件的Base64编码字符
+   */
+  PdfInfo: PdfInfo
+}
+
+/**
  * 月经量
  */
 export interface MenstrualFlowBlock {
@@ -4838,6 +6212,39 @@ export interface SurgeryHistory {
 }
 
 /**
+ * 体检报告-眼科-眼底
+ */
+export interface OphthalmologyFundoscopy {
+  /**
+   * 眼底检查总体描述
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Text?: KeyValueItem
+}
+
+/**
+ * 体检报告-外科-乳房
+ */
+export interface SurgeryBreast {
+  /**
+   * 乳房总体描述
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Text?: KeyValueItem
+}
+
+/**
+ * 体检报告-内科-内科小结
+ */
+export interface InternalMedicineBriefSummary {
+  /**
+   * 内科小结
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Text?: KeyValueItem
+}
+
+/**
  * 病症描述信息
  */
 export interface SymptomInfo {
@@ -4879,49 +6286,44 @@ export interface SymptomInfo {
 }
 
 /**
- * 单淋巴结转移信息
+ * 死亡时间
  */
-export interface LymphNode {
+export interface DeathDateBlock {
   /**
-   * 项目名称
+   * 名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Name?: string
-  /**
-   * 索引
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Index?: Array<number | bigint>
-  /**
-   * 部位
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Part?: Part
   /**
    * 原文
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Src?: string
   /**
-   * 总数量
+   * 类型
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Total?: number
+  Type?: string
   /**
-   * 转移数量
+   * 归一化值
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TransferNum?: number
+  Norm?: string
   /**
-   * 淋巴结大小
+   * 单位
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Sizes?: Array<number | bigint>
+  Unit?: string
   /**
-   * 原文对应坐标
+   * 时间戳
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Coords?: Array<Coord>
+  Timestamp?: string
+  /**
+   * 对外输出值
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Value?: string
 }
 
 /**
@@ -4951,29 +6353,24 @@ export interface BirthCert {
 }
 
 /**
- * 病理诊断
+ * 体检报告信息
  */
-export interface PathologicalDiagnosisBlock {
+export interface KeyValueItem {
   /**
-   * 名称
+   * 类型
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Name?: string
   /**
-   * 原文
+   * 项目原文
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Src?: string
+  Item?: PhysicalBaseItem
   /**
-   * 病理详细
+   * 结果
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Detail?: Array<PathologicalDiagnosisDetailBlock>
-  /**
-   * 值
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Value?: string
+  Result?: PhysicalBaseItem
 }
 
 /**
@@ -5055,6 +6452,78 @@ export interface ValueBlock {
 }
 
 /**
+ * 体检报告-内科-腹部-脾脏
+ */
+export interface InternalMedicineAbdomenSpleen {
+  /**
+   * 脾脏总体描述
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Src?: KeyValueItem
+  /**
+   * 脾脏大小
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Size?: KeyValueItem
+  /**
+   * 脾脏触诊
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Palpation?: KeyValueItem
+  /**
+   * 脾脏叩诊
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Percussion?: KeyValueItem
+  /**
+   * 脾脏压痛
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Tenderness?: KeyValueItem
+  /**
+   * 脾脏质地
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Consistency?: KeyValueItem
+}
+
+/**
+ * 体检报告-内科-腹部-肾脏
+ */
+export interface InternalMedicineAbdomenKidney {
+  /**
+   * 肾脏总体描述
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Src?: KeyValueItem
+  /**
+   * 肾脏大小
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Size?: KeyValueItem
+  /**
+   * 肾脏触诊
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Palpation?: KeyValueItem
+  /**
+   * 肾脏叩诊
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Percussion?: KeyValueItem
+  /**
+   * 肾脏压痛
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Tenderness?: KeyValueItem
+  /**
+   * 肾脏质地
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Consistency?: KeyValueItem
+}
+
+/**
  * 母亲或父亲信息
  */
 export interface ParentInfo {
@@ -5122,44 +6591,70 @@ export interface DischargeInfoBlock {
 }
 
 /**
- * 死亡时间
+ * 孕产报告
  */
-export interface DeathDateBlock {
+export interface Maternity {
   /**
-   * 名称
+   * 描述部分
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Desc?: MaternityDesc
+  /**
+   * 结论部分
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Summary?: MaternitySummary
+  /**
+   * 报告原文
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OcrText?: string
+}
+
+/**
+ * 单淋巴结转移信息
+ */
+export interface LymphNode {
+  /**
+   * 项目名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Name?: string
+  /**
+   * 索引
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Index?: Array<number | bigint>
+  /**
+   * 部位
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Part?: Part
   /**
    * 原文
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Src?: string
   /**
-   * 类型
+   * 总数量
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Type?: string
+  Total?: number
   /**
-   * 归一化值
+   * 转移数量
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Norm?: string
+  TransferNum?: number
   /**
-   * 单位
+   * 淋巴结大小
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Unit?: string
+  Sizes?: Array<number | bigint>
   /**
-   * 时间戳
+   * 原文对应坐标
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Timestamp?: string
-  /**
-   * 对外输出值
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Value?: string
+  Coords?: Array<Coord>
 }
 
 /**
@@ -5403,6 +6898,62 @@ export interface HistologyTypeV2 {
 }
 
 /**
+ * 体检报告-外科
+ */
+export interface SurgeryBaseItem {
+  /**
+   * 体检报告-外科-头颈部
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HeadNeck?: SurgeryHeadNeck
+  /**
+   * 体检报告-外科-甲状腺
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Thyroid?: SurgeryThyroid
+  /**
+   * 体检报告-外科-乳房
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Breast?: SurgeryBreast
+  /**
+   * 体检报告-外科-浅表淋巴结
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LymphNode?: SurgeryLymphNode
+  /**
+   * 体检报告-外科-脊柱
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SpinalExtremities?: SurgerySpinalExtremities
+  /**
+   * 体检报告-外科-皮肤
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Skin?: SurgerySkin
+  /**
+   * 体检报告-外科-肛门直肠
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Anorectal?: SurgeryAnorectal
+  /**
+   * 体检报告-外科-泌尿生殖系统
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UrogenitalSystem?: SurgeryUrogenitalSystem
+  /**
+   * 体检报告-外科-外科其他
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Others?: Array<KeyValueItem>
+  /**
+   * 体检报告-外科-小结
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BriefSummary?: SurgeryBriefSummary
+}
+
+/**
  * 部位描述
  */
 export interface PartDesc {
@@ -5493,6 +7044,62 @@ export interface FertilityHistoryBlock {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ProduCount?: string
+}
+
+/**
+ * 体检报告-其他项
+ */
+export interface GeneralExaminationOthers {
+  /**
+   * 面容与表情
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Countenance?: KeyValueItem
+  /**
+   * 精神状态
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MentalStatus?: KeyValueItem
+  /**
+   * 发育及营养状况
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DevelopmentCondition?: KeyValueItem
+  /**
+   * 记忆力
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Memory?: KeyValueItem
+  /**
+   * 臀围
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Hipline?: ValueUnitItem
+  /**
+   * 腰臀比
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WaistHipRatio?: ValueUnitItem
+  /**
+   * 生活嗜好
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Addiction?: KeyValueItem
+  /**
+   * 生活能力评定
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AbilityOfLifeADL?: KeyValueItem
+  /**
+   * 一般检查其他
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Others?: Array<KeyValueItem>
+  /**
+   * 胸围
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ChestCircumference?: ChestCircumferenceItem
 }
 
 /**
@@ -5601,29 +7208,14 @@ export interface IndicatorV3 {
 }
 
 /**
- * 药物史
+ * 体检报告-妇科-子宫颈
  */
-export interface DrugListBlock {
+export interface GynaecologyCervix {
   /**
-   * 通用名称
+   * 子宫颈总体描述
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CommonName?: string
-  /**
-   * 商品名称
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TradeName?: string
-  /**
-   * 用法用量
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Dosage?: DosageBlock
-  /**
-   * 值
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Value?: string
+  Text?: KeyValueItem
 }
 
 /**
@@ -5645,6 +7237,17 @@ export interface EndoscopyDesc {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Coords?: Array<Coord>
+}
+
+/**
+ * 体检报告-妇科-子宫附件
+ */
+export interface GynaecologyAdnexal {
+  /**
+   * 子宫附件总体描述
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Text?: KeyValueItem
 }
 
 /**
@@ -5792,49 +7395,25 @@ export interface SurgeryHistoryBlock {
 }
 
 /**
- * 个人史
+ * 体检报告-外科-小结
  */
-export interface PersonalHistoryBlock {
+export interface SurgeryBriefSummary {
   /**
-   * 出生地
+   * 外科小结
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  BirthPlace?: BirthPlaceBlock
+  Text?: KeyValueItem
+}
+
+/**
+ * 体检报告-妇科-盆腔
+ */
+export interface GynaecologyPelvicCavity {
   /**
-   * 居住地
+   * 盆腔总体描述
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  LivePlace?: BirthPlaceBlock
-  /**
-   * 职业
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Job?: BirthPlaceBlock
-  /**
-   * 吸烟
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SmokeHistory?: SmokeHistoryBlock
-  /**
-   * 喝酒
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  AlcoholicHistory?: SmokeHistoryBlock
-  /**
-   * 月经史
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  MenstrualHistory?: MenstrualHistoryBlock
-  /**
-   * 婚姻-生育史
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ObstericalHistory?: ObstetricalHistoryBlock
-  /**
-   * 家族史
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  FamilyHistory?: FamilyHistoryBlock
+  Text?: KeyValueItem
 }
 
 /**
@@ -5884,24 +7463,121 @@ export interface RelapseDateBlock {
 }
 
 /**
- * 孕产报告
+ * ImageToObject返回参数结构体
  */
-export interface Maternity {
+export interface ImageToObjectResponse {
   /**
-   * 描述部分
+   * 报告结构化结果
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Desc?: MaternityDesc
+  Template?: Template
   /**
-   * 结论部分
+   * 多级分类结果
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Summary?: MaternitySummary
+  TextTypeList?: Array<TextType>
   /**
-   * 报告原文
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 体检报告信息-包含单位
+ */
+export interface ValueUnitItem {
+  /**
+   * 类型
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  OcrText?: string
+  Name?: string
+  /**
+   * 项目原文
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Item?: PhysicalBaseItem
+  /**
+   * 数值
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Result?: PhysicalBaseItem
+  /**
+   * 单位
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Unit?: PhysicalBaseItem
+}
+
+/**
+ * 体检报告-妇科
+ */
+export interface GynaecologyBaseItem {
+  /**
+   * 外阴
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Vulva?: GynaecologyVulva
+  /**
+   * 阴道
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Vagina?: GynaecologyVagina
+  /**
+   * 子宫颈
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Cervix?: GynaecologyCervix
+  /**
+   * 子宫
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Uterus?: GynaecologyUterus
+  /**
+   * 子宫附件
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Adnexal?: GynaecologyAdnexal
+  /**
+   * 盆腔
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PelvicCavity?: GynaecologyPelvicCavity
+  /**
+   * 妇科其他
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Others?: Array<KeyValueItem>
+  /**
+   * 月经史
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MenstrualHistory?: GynaecologyMenstrualHistory
+  /**
+   * 小结
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BriefSummary?: GynaecologyBriefSummary
+}
+
+/**
+ * 体检报告-一般检测信息
+ */
+export interface GeneralExaminationBaseItem {
+  /**
+   * 生命体征
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VitalSign?: GeneralExaminationVitalSign
+  /**
+   * 其他
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Others?: GeneralExaminationOthers
+  /**
+   * 小结
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BriefSummary?: GeneralExaminationBriefSummary
 }
 
 /**
@@ -5957,142 +7633,12 @@ export interface Electrocardiogram {
 }
 
 /**
- * 病历
+ * 体检报告-耳鼻喉科-小结
  */
-export interface TreatmentRecord {
+export interface OtolaryngologyBriefSummary {
   /**
-   * 入院
+   * 耳鼻喉小结
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DmissionCondition: string
-  /**
-   * 主诉
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ChiefComplaint: string
-  /**
-   * 现病史
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  DiseasePresent: string
-  /**
-   * 主要症状体征
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SymptomsAndSigns: string
-  /**
-   * 辅助检查
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  AuxiliaryExamination: string
-  /**
-   * 体格检查
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  BodyExamination: string
-  /**
-   * 专科检查
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SpecialistExamination: string
-  /**
-   * 精神检查
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  MentalExamination: string
-  /**
-   * 检查记录
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CheckRecord: string
-  /**
-   * 化验结果
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  InspectResult: string
-  /**
-   * 切口愈合情况
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  IncisionHealing: string
-  /**
-   * 处理意见
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TreatmentSuggestion: string
-  /**
-   * 门诊随访要求
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  FollowUpRequirements: string
-  /**
-   * 诊疗经过
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CheckAndTreatmentProcess: string
-  /**
-   * 手术经过
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SurgeryCondition: string
-  /**
-   * 入院情况
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ConditionChanges: string
-  /**
-   * 出院情况
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  DischargeCondition: string
-  /**
-   * pTNM信息
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  PTNM: string
-  /**
-   * pTNMM信息
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  PTNMM: string
-  /**
-   * pTNMN信息
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  PTNMN: string
-  /**
-   * pTNMT信息
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  PTNMT: string
-  /**
-   * ECOG信息
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ECOG: string
-  /**
-   * NRS信息
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  NRS: string
-  /**
-   * KPS信息
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  KPS: string
-  /**
-   * 死亡日期
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  DeathDate: string
-  /**
-   * 复发日期
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  RelapseDate: string
-  /**
-   * 观测天数
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ObservationDays: string
+  Text?: KeyValueItem
 }

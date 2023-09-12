@@ -1506,6 +1506,20 @@ export interface AiReviewPoliticalTaskInput {
 }
 
 /**
+ * VerifyDomainRecord返回参数结构体
+ */
+export interface VerifyDomainRecordResponse {
+  /**
+   * 是否验证成功。
+   */
+  Result?: boolean
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 音频操作
  */
 export interface AudioTransform {
@@ -1915,6 +1929,33 @@ export interface AiRecognitionTaskAsrWordsSegmentItem {
    * 识别片段置信度。取值：0~100。
    */
   Confidence: number
+}
+
+/**
+ * 文字水印模板
+ */
+export interface TextWatermarkTemplateInput {
+  /**
+   * 字体类型，目前可以支持两种：
+<li>simkai.ttf：可以支持中文和英文；</li>
+<li>arial.ttf：仅支持英文。</li>
+   */
+  FontType: string
+  /**
+   * 字体大小，格式：Npx，N 为数值。
+   */
+  FontSize: string
+  /**
+   * 字体颜色，格式：0xRRGGBB，默认值：0xFFFFFF（白色）。
+   */
+  FontColor: string
+  /**
+   * 文字透明度，取值范围：(0, 1]
+<li>0：完全透明</li>
+<li>1：完全不透明</li>
+默认值：1。
+   */
+  FontAlpha: number
 }
 
 /**
@@ -3710,30 +3751,54 @@ export interface ModifyQualityInspectTemplateResponse {
 }
 
 /**
- * 文字水印模板
+ * ModifyAdaptiveDynamicStreamingTemplate请求参数结构体
  */
-export interface TextWatermarkTemplateInput {
+export interface ModifyAdaptiveDynamicStreamingTemplateRequest {
   /**
-   * 字体类型，目前可以支持两种：
-<li>simkai.ttf：可以支持中文和英文；</li>
-<li>arial.ttf：仅支持英文。</li>
+   * 自适应转码模板唯一标识。
    */
-  FontType: string
+  Definition: number
   /**
-   * 字体大小，格式：Npx，N 为数值。
+   * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
    */
-  FontSize: string
+  SubAppId?: number
   /**
-   * 字体颜色，格式：0xRRGGBB，默认值：0xFFFFFF（白色）。
+   * 模板名称，长度限制：64 个字符。
    */
-  FontColor: string
+  Name?: string
   /**
-   * 文字透明度，取值范围：(0, 1]
-<li>0：完全透明</li>
-<li>1：完全不透明</li>
-默认值：1。
+   * 自适应转码格式，取值范围：
+<li>HLS；</li>
+<li>MPEG-DASH。</li>
    */
-  FontAlpha: number
+  Format?: string
+  /**
+   * 是否禁止视频低码率转高码率，取值范围：
+<li>0：否，</li>
+<li>1：是。</li>
+   */
+  DisableHigherVideoBitrate?: number
+  /**
+   * 是否禁止视频分辨率转高分辨率，取值范围：
+<li>0：否，</li>
+<li>1：是。</li>
+   */
+  DisableHigherVideoResolution?: number
+  /**
+   * 自适应转码输入流参数信息，最多输入10路流。
+注意：各个流的帧率必须保持一致；如果不一致，采用第一个流的帧率作为输出帧率。
+   */
+  StreamInfos?: Array<AdaptiveStreamTemplate>
+  /**
+   * 模板描述信息，长度限制：256 个字符。
+   */
+  Comment?: string
+  /**
+   * 切片类型，当 Format 为 HLS 时有效，可选值：
+<li>ts：ts 切片；</li>
+<li>fmp4：fmp4 切片。</li>
+   */
+  SegmentType?: string
 }
 
 /**
@@ -6109,23 +6174,17 @@ export interface ModifyAnimatedGraphicsTemplateRequest {
 }
 
 /**
- * DescribeProcedureTemplates请求参数结构体
+ * DescribeAIAnalysisTemplates请求参数结构体
  */
-export interface DescribeProcedureTemplatesRequest {
+export interface DescribeAIAnalysisTemplatesRequest {
   /**
    * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
    */
   SubAppId?: number
   /**
-   * 任务流模板名字过滤条件，数组长度限制：100。
+   * 音视频内容分析模板唯一标识过滤条件，数组长度最大值：100。
    */
-  Names?: Array<string>
-  /**
-   * 任务流模板类型过滤条件，可选值：
-<li>Preset：系统预置任务流模板；</li>
-<li>Custom：用户自定义任务流模板。</li>
-   */
-  Type?: string
+  Definitions?: Array<number | bigint>
   /**
    * 分页偏移量，默认值：0。
    */
@@ -6311,6 +6370,57 @@ export interface DescribeDrmDataKeyResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ProcessMedia请求参数结构体
+ */
+export interface ProcessMediaRequest {
+  /**
+   * 媒体文件 ID，即该文件在云点播上的全局唯一标识符，在上传成功后由云点播后台分配。可以在 [视频上传完成事件通知](/document/product/266/7830) 或 [云点播控制台](https://console.cloud.tencent.com/vod/media) 获取该字段。
+   */
+  FileId: string
+  /**
+   * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
+   */
+  SubAppId?: number
+  /**
+   * 视频处理类型任务参数。
+   */
+  MediaProcessTask?: MediaProcessTaskInput
+  /**
+   * 音视频内容审核类型任务参数 \*。
+<font color=red>\* 不建议使用</font>，推荐使用 [音视频审核(ReviewAudioVideo)](https://cloud.tencent.com/document/api/266/80283) 或 [图片审核(ReviewImage)](https://cloud.tencent.com/document/api/266/73217)。
+   */
+  AiContentReviewTask?: AiContentReviewTaskInput
+  /**
+   * 音视频内容分析类型任务参数。
+   */
+  AiAnalysisTask?: AiAnalysisTaskInput
+  /**
+   * 音视频内容识别类型任务参数。
+   */
+  AiRecognitionTask?: AiRecognitionTaskInput
+  /**
+   * 任务流的优先级，数值越大优先级越高，取值范围是 -10 到 10，不填代表 0。
+   */
+  TasksPriority?: number
+  /**
+   * 任务流状态变更通知模式，可取值有 Finish，Change 和 None，不填代表 Finish。
+   */
+  TasksNotifyMode?: string
+  /**
+   * 来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长 1000 个字符。
+   */
+  SessionContext?: string
+  /**
+   * 用于去重的识别码，如果三天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。
+   */
+  SessionId?: string
+  /**
+   * 保留字段，特殊用途时使用。
+   */
+  ExtInfo?: string
 }
 
 /**
@@ -6866,54 +6976,21 @@ export interface DeleteReviewTemplateResponse {
 }
 
 /**
- * ModifyAdaptiveDynamicStreamingTemplate请求参数结构体
+ * DNS解析验证信息
  */
-export interface ModifyAdaptiveDynamicStreamingTemplateRequest {
+export interface DNSVerifyInfo {
   /**
-   * 自适应转码模板唯一标识。
+   * 子解析。
    */
-  Definition: number
+  SubDomain?: string
   /**
-   * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
+   * 解析值。
    */
-  SubAppId?: number
+  Record?: string
   /**
-   * 模板名称，长度限制：64 个字符。
+   * 解析类型。
    */
-  Name?: string
-  /**
-   * 自适应转码格式，取值范围：
-<li>HLS；</li>
-<li>MPEG-DASH。</li>
-   */
-  Format?: string
-  /**
-   * 是否禁止视频低码率转高码率，取值范围：
-<li>0：否，</li>
-<li>1：是。</li>
-   */
-  DisableHigherVideoBitrate?: number
-  /**
-   * 是否禁止视频分辨率转高分辨率，取值范围：
-<li>0：否，</li>
-<li>1：是。</li>
-   */
-  DisableHigherVideoResolution?: number
-  /**
-   * 自适应转码输入流参数信息，最多输入10路流。
-注意：各个流的帧率必须保持一致；如果不一致，采用第一个流的帧率作为输出帧率。
-   */
-  StreamInfos?: Array<AdaptiveStreamTemplate>
-  /**
-   * 模板描述信息，长度限制：256 个字符。
-   */
-  Comment?: string
-  /**
-   * 切片类型，当 Format 为 HLS 时有效，可选值：
-<li>ts：ts 切片；</li>
-<li>fmp4：fmp4 切片。</li>
-   */
-  SegmentType?: string
+  RecordType?: string
 }
 
 /**
@@ -7492,54 +7569,22 @@ export interface MediaSubtitleInput {
 }
 
 /**
- * ProcessMedia请求参数结构体
+ * 文件验证信息
  */
-export interface ProcessMediaRequest {
+export interface FileVerifyInfo {
   /**
-   * 媒体文件 ID，即该文件在云点播上的全局唯一标识符，在上传成功后由云点播后台分配。可以在 [视频上传完成事件通知](/document/product/266/7830) 或 [云点播控制台](https://console.cloud.tencent.com/vod/media) 获取该字段。
+   * 文件验证 URL 指引。
    */
-  FileId: string
+  FileVerifyUrl?: string
   /**
-   * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
+   * 文件校验域名列表。
    */
-  SubAppId?: number
+  FileVerifyDomains?: Array<string>
   /**
-   * 视频处理类型任务参数。
+   * 文件校验文件名。
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  MediaProcessTask?: MediaProcessTaskInput
-  /**
-   * 音视频内容审核类型任务参数 \*。
-<font color=red>\* 不建议使用</font>，推荐使用 [音视频审核(ReviewAudioVideo)](https://cloud.tencent.com/document/api/266/80283) 或 [图片审核(ReviewImage)](https://cloud.tencent.com/document/api/266/73217)。
-   */
-  AiContentReviewTask?: AiContentReviewTaskInput
-  /**
-   * 音视频内容分析类型任务参数。
-   */
-  AiAnalysisTask?: AiAnalysisTaskInput
-  /**
-   * 音视频内容识别类型任务参数。
-   */
-  AiRecognitionTask?: AiRecognitionTaskInput
-  /**
-   * 任务流的优先级，数值越大优先级越高，取值范围是 -10 到 10，不填代表 0。
-   */
-  TasksPriority?: number
-  /**
-   * 任务流状态变更通知模式，可取值有 Finish，Change 和 None，不填代表 Finish。
-   */
-  TasksNotifyMode?: string
-  /**
-   * 来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长 1000 个字符。
-   */
-  SessionContext?: string
-  /**
-   * 用于去重的识别码，如果三天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。
-   */
-  SessionId?: string
-  /**
-   * 保留字段，特殊用途时使用。
-   */
-  ExtInfo?: string
+  FileVerifyName?: string
 }
 
 /**
@@ -10188,25 +10233,21 @@ export interface ImageWatermarkInputForUpdate {
 }
 
 /**
- * DescribeAIAnalysisTemplates请求参数结构体
+ * CreateDomainVerifyRecord返回参数结构体
  */
-export interface DescribeAIAnalysisTemplatesRequest {
+export interface CreateDomainVerifyRecordResponse {
   /**
-   * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
+   * DNS解析信息
    */
-  SubAppId?: number
+  DNSVerifyInfo?: DNSVerifyInfo
   /**
-   * 音视频内容分析模板唯一标识过滤条件，数组长度最大值：100。
+   * 文件验证信息
    */
-  Definitions?: Array<number | bigint>
+  FileVerifyInfo?: FileVerifyInfo
   /**
-   * 分页偏移量，默认值：0。
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  Offset?: number
-  /**
-   * 返回记录条数，默认值：10，最大值：100。
-   */
-  Limit?: number
+  RequestId?: string
 }
 
 /**
@@ -10245,6 +10286,24 @@ export interface ResolutionNameInfo {
    * 展示名字。
    */
   Name: string
+}
+
+/**
+ * VerifyDomainRecord请求参数结构体
+ */
+export interface VerifyDomainRecordRequest {
+  /**
+   * 需要接入点播的加速域名。
+   */
+  Domain: string
+  /**
+   * 验证方式：
+<li>dns：DNS 解析验证；</li>
+<li>fIle：文件验证。</li>
+
+默认值：dns。
+   */
+  VerifyType?: string
 }
 
 /**
@@ -14181,6 +14240,11 @@ export interface DescribeSubAppIdsResponse {
 }
 
 /**
+ * CreateDomainVerifyRecord请求参数结构体
+ */
+export type CreateDomainVerifyRecordRequest = null
+
+/**
  * 点播文件信息
  */
 export interface MediaInfo {
@@ -16800,6 +16864,20 @@ export interface MediaSubStreamInfoItem {
 }
 
 /**
+ * VerifyDomainOwnershipForConsole请求参数结构体
+ */
+export interface VerifyDomainOwnershipForConsoleRequest {
+  /**
+   * 需要接入点播的域名。
+   */
+  Domain: string
+  /**
+   * 需要开启加速的区域： <li>Mainland: 中国大陆地区</li> <li>Internation: 海外地区及港澳台</li> <li>Global: 全球</li> 不填会根据用户注册腾讯云时的地域信息自动判断 Mainland 或 Internation
+   */
+  AccelerateArea: string
+}
+
+/**
  * 视频画面马赛克检测的控制参数。
  */
 export interface MosaicConfigureInfoForUpdate {
@@ -18190,6 +18268,16 @@ export interface DeleteImageProcessingTemplateResponse {
 }
 
 /**
+ * VerifyDomainOwnershipForConsole返回参数结构体
+ */
+export interface VerifyDomainOwnershipForConsoleResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 画面鉴别涉及令人反感的信息的任务控制参数。
  */
 export interface PornImgReviewTemplateInfoForUpdate {
@@ -18672,6 +18760,70 @@ export interface QualityInspectItem {
 }
 
 /**
+ * 拉取上传任务信息
+ */
+export interface PullUploadTask {
+  /**
+   * 拉取上传任务 ID。
+   */
+  TaskId?: string
+  /**
+   * 任务流状态，取值：
+<li>PROCESSING：处理中；</li>
+<li>FINISH：已完成。</li>
+   */
+  Status?: string
+  /**
+   * 错误码，0 表示成功，其他值表示失败：
+<li>40000：输入参数不合法，请检查输入参数；</li>
+<li>60000：源文件错误（如视频数据损坏），请确认源文件是否正常；</li>
+<li>70000：内部服务错误，建议重试。</li>
+   */
+  ErrCode?: number
+  /**
+   * 错误信息。
+   */
+  Message?: string
+  /**
+   * 拉取上传完成后生成的视频 ID。
+   */
+  FileId?: string
+  /**
+   * 拉取上传完成后生成的媒体文件基础信息。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MediaBasicInfo?: MediaBasicInfo
+  /**
+   * 输出视频的元信息。
+   */
+  MetaData?: MediaMetaData
+  /**
+   * 拉取上传完成后生成的播放地址。
+   */
+  FileUrl?: string
+  /**
+   * 任务类型为 Procedure 的任务 ID。若[拉取上传](https://cloud.tencent.com/document/api/266/35575)时指定了媒体后续任务操作(Procedure)，当该任务流模板指定了 MediaProcessTask、AiAnalysisTask、AiRecognitionTask 中的一个或多个时发起该任务。
+   */
+  ProcedureTaskId?: string
+  /**
+   * 任务类型为 ReviewAudioVideo 的任务 ID。若[拉取上传](https://cloud.tencent.com/document/api/266/35575)时指定了媒体后续任务操作(Procedure)，当该任务流模板指定了 ReviewAudioVideoTask 时，发起该任务。
+   */
+  ReviewAudioVideoTaskId?: string
+  /**
+   * 来源上下文，用于透传用户请求信息，[URL 拉取视频上传完成](https://cloud.tencent.com/document/product/266/7831)将返回该字段值，最长 1000 个字符。
+   */
+  SessionContext?: string
+  /**
+   * 用于去重的识别码，如果七天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。
+   */
+  SessionId?: string
+  /**
+   * 拉取上传进度，取值范围 [0-100] 。
+   */
+  Progress?: number
+}
+
+/**
  * DescribeImageProcessingTemplates返回参数结构体
  */
 export interface DescribeImageProcessingTemplatesResponse {
@@ -18814,7 +18966,7 @@ export interface TerrorismConfigureInfo {
    * 文字鉴别涉及令人不安全的信息的任务控制参数。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  OcrReviewInfo: TerrorismOcrReviewTemplateInfo
+  OcrReviewInfo?: TerrorismOcrReviewTemplateInfo
 }
 
 /**
@@ -19470,67 +19622,31 @@ export interface ModifyWatermarkTemplateResponse {
 }
 
 /**
- * 拉取上传任务信息
+ * DescribeProcedureTemplates请求参数结构体
  */
-export interface PullUploadTask {
+export interface DescribeProcedureTemplatesRequest {
   /**
-   * 拉取上传任务 ID。
+   * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
    */
-  TaskId?: string
+  SubAppId?: number
   /**
-   * 任务流状态，取值：
-<li>PROCESSING：处理中；</li>
-<li>FINISH：已完成。</li>
+   * 任务流模板名字过滤条件，数组长度限制：100。
    */
-  Status?: string
+  Names?: Array<string>
   /**
-   * 错误码，0 表示成功，其他值表示失败：
-<li>40000：输入参数不合法，请检查输入参数；</li>
-<li>60000：源文件错误（如视频数据损坏），请确认源文件是否正常；</li>
-<li>70000：内部服务错误，建议重试。</li>
+   * 任务流模板类型过滤条件，可选值：
+<li>Preset：系统预置任务流模板；</li>
+<li>Custom：用户自定义任务流模板。</li>
    */
-  ErrCode?: number
+  Type?: string
   /**
-   * 错误信息。
+   * 分页偏移量，默认值：0。
    */
-  Message?: string
+  Offset?: number
   /**
-   * 拉取上传完成后生成的视频 ID。
+   * 返回记录条数，默认值：10，最大值：100。
    */
-  FileId?: string
-  /**
-   * 拉取上传完成后生成的媒体文件基础信息。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  MediaBasicInfo?: MediaBasicInfo
-  /**
-   * 输出视频的元信息。
-   */
-  MetaData?: MediaMetaData
-  /**
-   * 拉取上传完成后生成的播放地址。
-   */
-  FileUrl?: string
-  /**
-   * 任务类型为 Procedure 的任务 ID。若[拉取上传](https://cloud.tencent.com/document/api/266/35575)时指定了媒体后续任务操作(Procedure)，当该任务流模板指定了 MediaProcessTask、AiAnalysisTask、AiRecognitionTask 中的一个或多个时发起该任务。
-   */
-  ProcedureTaskId?: string
-  /**
-   * 任务类型为 ReviewAudioVideo 的任务 ID。若[拉取上传](https://cloud.tencent.com/document/api/266/35575)时指定了媒体后续任务操作(Procedure)，当该任务流模板指定了 ReviewAudioVideoTask 时，发起该任务。
-   */
-  ReviewAudioVideoTaskId?: string
-  /**
-   * 来源上下文，用于透传用户请求信息，[URL 拉取视频上传完成](https://cloud.tencent.com/document/product/266/7831)将返回该字段值，最长 1000 个字符。
-   */
-  SessionContext?: string
-  /**
-   * 用于去重的识别码，如果七天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。
-   */
-  SessionId?: string
-  /**
-   * 拉取上传进度，取值范围 [0-100] 。
-   */
-  Progress?: number
+  Limit?: number
 }
 
 /**

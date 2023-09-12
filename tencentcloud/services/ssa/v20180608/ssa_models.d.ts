@@ -71,6 +71,20 @@ export interface ListDataSaEventPub {
     OldIdMd5: string;
 }
 /**
+ * DescribeAlarmStat返回参数结构体
+ */
+export interface DescribeAlarmStatResponse {
+    /**
+     * 威胁告警信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Data?: AlarmInfoRsp;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * 资产类型
  */
 export interface Asset {
@@ -212,6 +226,51 @@ export interface Asset {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     EventRisk: string;
+}
+/**
+ * 攻击事件
+ */
+export interface AttackEvent {
+    /**
+     * 来源ip
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SsaSrcIp?: string;
+    /**
+     * 目标ip
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SsaDstIp?: string;
+    /**
+     * 目标省份
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SsaDstProvince?: string;
+    /**
+     * 目标城市
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SsaDstCity?: string;
+    /**
+     * 目标国家
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SsaDstCountry?: string;
+    /**
+     * 来源省份
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SsaSrcProvince?: string;
+    /**
+     * 来源国家
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SsaSrcCountry?: string;
+    /**
+     * 来源城市
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SsaSrcCity?: string;
 }
 /**
  * SaEventPub请求参数结构体
@@ -1678,6 +1737,16 @@ export interface Filter {
     ExactMatch?: boolean;
 }
 /**
+ * 用户威胁告警信息
+ */
+export interface AlarmInfoRsp {
+    /**
+     * 近7天威胁告警
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AttackEvent?: Array<AttackEvent>;
+}
+/**
  * 事件列表对象
  */
 export interface DataEvent {
@@ -2383,6 +2452,19 @@ export interface DataCheck {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Remarks: string;
+}
+/**
+ * DescribeAlarmStat请求参数结构体
+ */
+export interface DescribeAlarmStatRequest {
+    /**
+     * 开始时间
+     */
+    StartTime?: string;
+    /**
+     * 结束时间
+     */
+    EndTime?: string;
 }
 /**
  * 查询_通用字段

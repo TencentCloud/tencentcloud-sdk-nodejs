@@ -1808,13 +1808,21 @@ export interface GatewayPluginBoundParam {
    */
   PluginId: string
   /**
-   * 插件绑定到的对象类型:group/api
+   * 插件绑定到的对象类型:group/api/all
    */
   ScopeType: string
   /**
    * 插件绑定到的对象主键值，例如分组的ID/API的ID
    */
   ScopeValue: string
+  /**
+   * 创建关联的服务id，关联envoy网关时使用
+   */
+  MicroserviceId?: string
+  /**
+   * 网关id
+   */
+  GatewayInstanceId?: string
 }
 
 /**
@@ -3133,7 +3141,7 @@ export interface RevokeFileConfigRequest {
  */
 export interface DescribeCreateGatewayApiStatusRequest {
   /**
-   * 请求方法
+   * 所属分组ID
    */
   GroupId?: string
   /**
@@ -6358,7 +6366,7 @@ export interface DescribeLaneRulesResponse {
    * 泳道规则列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Result: LaneRules
+  Result?: LaneRules
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6480,6 +6488,10 @@ export interface DescribeGatewayApisRequest {
    * 部署组ID
    */
   GatewayDeployGroupId?: string
+  /**
+   * 发布状态, drafted(未发布)/released(已发布)/releasing(发布中)/failed(发布失败)
+   */
+  ReleaseStatus?: string
 }
 
 /**
@@ -6608,10 +6620,6 @@ export interface DescribeGroupsWithPluginRequest {
    */
   PluginId: string
   /**
-   * 绑定/未绑定: true / false
-   */
-  Bound: boolean
-  /**
    * 翻页偏移量
    */
   Offset: number
@@ -6619,6 +6627,10 @@ export interface DescribeGroupsWithPluginRequest {
    * 每页记录数量
    */
   Limit: number
+  /**
+   * 绑定/未绑定: true / false
+   */
+  Bound?: boolean
   /**
    * 搜索关键字
    */
@@ -6897,7 +6909,7 @@ export interface MetricDimension {
  */
 export interface CreateUnitRuleWithDetailRespResponse {
   /**
-   * 单元化规则 ID
+   * 单元化规则信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: UnitRule
@@ -7434,7 +7446,7 @@ export interface UpdateApiGroupResponse {
    * 返回结果，true: 成功, false: 失败
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Result: boolean
+  Result?: boolean
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -7448,7 +7460,7 @@ export interface DescribeGroupsWithPluginResponse {
   /**
    * API分组信息列表
    */
-  Result: TsfPageApiGroupInfo
+  Result?: TsfPageApiGroupInfo
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -8112,7 +8124,7 @@ export interface UpdateApiGroupRequest {
    */
   Description?: string
   /**
-   * 鉴权类型
+   * 鉴权类型。 secret： 密钥鉴权； none:无鉴权
    */
   AuthType?: string
   /**
@@ -8663,7 +8675,7 @@ export interface DescribeGatewayApisResponse {
   /**
    * 翻页结构
    */
-  Result: TsfPageApiDetailInfo
+  Result?: TsfPageApiDetailInfo
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -9335,7 +9347,7 @@ export interface BindPluginResponse {
   /**
    * 返回结果，成功失败
    */
-  Result: boolean
+  Result?: boolean
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -10108,10 +10120,6 @@ export interface DescribePluginInstancesRequest {
    */
   ScopeValue: string
   /**
-   * 绑定: true; 未绑定: false
-   */
-  Bound: boolean
-  /**
    * 翻页偏移量
    */
   Offset: number
@@ -10119,6 +10127,10 @@ export interface DescribePluginInstancesRequest {
    * 每页展示的条数
    */
   Limit: number
+  /**
+   * 绑定: true; 未绑定: false
+   */
+  Bound?: boolean
   /**
    * 插件类型
    */
@@ -11112,11 +11124,11 @@ export interface DescribeLaneRulesRequest {
   /**
    * 每页展示的条数
    */
-  Limit: number
+  Limit?: number
   /**
    * 翻页偏移量
    */
-  Offset: number
+  Offset?: number
   /**
    * 搜索关键词
    */
@@ -11185,7 +11197,7 @@ export interface DescribePluginInstancesResponse {
   /**
    * 插件信息列表
    */
-  Result: TsfPageGatewayPlugin
+  Result?: TsfPageGatewayPlugin
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -11508,6 +11520,14 @@ export interface DescribeDeliveryConfigsRequest {
    * 搜索条数
    */
   Limit?: number
+  /**
+   * 数据集idList
+   */
+  ProgramIdList?: Array<string>
+  /**
+   * ConfigIdList
+   */
+  ConfigIdList?: Array<string>
 }
 
 /**

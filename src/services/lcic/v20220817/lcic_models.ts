@@ -858,7 +858,7 @@ export interface CreateDocumentResponse {
   /**
    * 文档ID。
    */
-  DocumentId: string
+  DocumentId?: string
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1816,6 +1816,10 @@ export interface CreateDocumentRequest {
    * 文档大小，单位 字节
    */
   DocumentSize?: number
+  /**
+   * 是否对不支持元素开启自动处理的功能。默认关闭。
+   */
+  AutoHandleUnsupportedElement?: boolean
 }
 
 /**

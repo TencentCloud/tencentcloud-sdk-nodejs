@@ -21,7 +21,9 @@ import {
   DescribeAssetDetailRequest,
   DescribeSocCheckItemListResponse,
   ListDataSaEventPub,
+  DescribeAlarmStatResponse,
   Asset,
+  AttackEvent,
   SaEventPubRequest,
   DescribeConfigListResponse,
   AggregationObj,
@@ -75,6 +77,7 @@ import {
   DescribeSocCspmComplianceResponse,
   DescribeSocCheckItemListRequest,
   Filter,
+  AlarmInfoRsp,
   DataEvent,
   SocCheckItemV1,
   CheckAssetItem,
@@ -87,6 +90,7 @@ import {
   DescribeVulListResponse,
   DescribeComplianceAssetListResponse,
   DataCheck,
+  DescribeAlarmStatRequest,
   SaDivulgeDataQueryPub,
   DescribeDomainListRequest,
   CheckConfigDetail,
@@ -307,6 +311,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeSocAlertDetailsResponse) => void
   ): Promise<DescribeSocAlertDetailsResponse> {
     return this.request("DescribeSocAlertDetails", req, cb)
+  }
+
+  /**
+   * 安全大屏-用户威胁告警信息
+   */
+  async DescribeAlarmStat(
+    req: DescribeAlarmStatRequest,
+    cb?: (error: string, rep: DescribeAlarmStatResponse) => void
+  ): Promise<DescribeAlarmStatResponse> {
+    return this.request("DescribeAlarmStat", req, cb)
   }
 
   /**

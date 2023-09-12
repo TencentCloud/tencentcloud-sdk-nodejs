@@ -43,6 +43,7 @@ import {
   DescribeDedicatedClusterCosCapacityRequest,
   DescribeSitesResponse,
   DescribeSitesDetailRequest,
+  DetailData,
   DedicatedClusterOrder,
   ModifyDedicatedClusterInfoRequest,
   DescribeDedicatedClusterHostsRequest,

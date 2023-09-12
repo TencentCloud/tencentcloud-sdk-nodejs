@@ -34,6 +34,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ImageToClass", req, cb);
     }
     /**
+     * 将PDF格式的体检报告文件结构化,解析关键信息.
+     */
+    async TurnPDFToObject(req, cb) {
+        return this.request("TurnPDFToObject", req, cb);
+    }
+    /**
      * 图片转结构化对象
      */
     async ImageToObject(req, cb) {

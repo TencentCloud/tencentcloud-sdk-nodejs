@@ -395,194 +395,209 @@ export interface Certificates {
    * 用户 UIN。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  OwnerUin: string
+  OwnerUin?: string
   /**
    * 项目 ID。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ProjectId: string
+  ProjectId?: string
   /**
    * 证书来源。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  From: string
+  From?: string
   /**
    * 证书套餐类型：
 null = 用户上传证书（没有套餐类型），
 1 = GeoTrust DV SSL CA - G3， 2 = TrustAsia TLS RSA CA， 3 = SecureSite 增强型企业版（EV Pro）， 4 = SecureSite 增强型（EV）， 5 = SecureSite 企业型专业版（OV Pro）， 6 = SecureSite 企业型（OV）， 7 = SecureSite 企业型（OV）通配符， 8 = Geotrust 增强型（EV）， 9 = Geotrust 企业型（OV）， 10 = Geotrust 企业型（OV）通配符， 11 = TrustAsia 域名型多域名 SSL 证书， 12 = TrustAsia 域名型（DV）通配符， 13 = TrustAsia 企业型通配符（OV）SSL 证书（D3）， 14 = TrustAsia 企业型（OV）SSL 证书（D3）， 15 = TrustAsia 企业型多域名 （OV）SSL 证书（D3）， 16 = TrustAsia 增强型 （EV）SSL 证书（D3）， 17 = TrustAsia 增强型多域名（EV）SSL 证书（D3）， 18 = GlobalSign 企业型（OV）SSL 证书， 19 = GlobalSign 企业型通配符 （OV）SSL 证书， 20 = GlobalSign 增强型 （EV）SSL 证书， 21 = TrustAsia 企业型通配符多域名（OV）SSL 证书（D3）， 22 = GlobalSign 企业型多域名（OV）SSL 证书， 23 = GlobalSign 企业型通配符多域名（OV）SSL 证书， 24 = GlobalSign 增强型多域名（EV）SSL 证书。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  PackageType: string
+  PackageType?: string
   /**
    * 证书类型：CA = 客户端证书，SVR = 服务器证书。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CertificateType: string
+  CertificateType?: string
   /**
    * 颁发者。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ProductZhName: string
+  ProductZhName?: string
   /**
    * 主域名。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Domain: string
+  Domain?: string
   /**
    * 备注名称。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Alias: string
+  Alias?: string
   /**
    * 状态。0：审核中，1：已通过，2：审核失败，3：已过期，4：验证方式为 DNS_AUTO 类型的证书， 已添加DNS记录，5：企业证书，待提交，6：订单取消中，7：已取消，8：已提交资料， 待上传确认函，9：证书吊销中，10：已吊销，11：重颁发中，12：待上传吊销确认函，13：免费证书待提交资料状态，14：已退款，
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Status: number
+  Status?: number
   /**
    * 证书扩展信息。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CertificateExtra: CertificateExtra
+  CertificateExtra?: CertificateExtra
   /**
    * 漏洞扫描状态：INACTIVE = 未开启，ACTIVE = 已开启
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  VulnerabilityStatus: string
+  VulnerabilityStatus?: string
   /**
    * 状态信息。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  StatusMsg: string
+  StatusMsg?: string
   /**
    * 验证类型：DNS_AUTO = 自动DNS验证，DNS = 手动DNS验证，FILE = 文件验证，EMAIL = 邮件验证。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  VerifyType: string
+  VerifyType?: string
   /**
    * 证书生效时间。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CertBeginTime: string
+  CertBeginTime?: string
   /**
    * 证书过期时间。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CertEndTime: string
+  CertEndTime?: string
   /**
    * 证书有效期，单位（月）。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ValidityPeriod: string
+  ValidityPeriod?: string
   /**
    * 创建时间。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  InsertTime: string
+  InsertTime?: string
   /**
    * 证书 ID。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CertificateId: string
+  CertificateId?: string
   /**
    * 证书包含的多个域名（包含主域名）。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SubjectAltName: Array<string>
+  SubjectAltName?: Array<string>
   /**
    * 证书类型名称。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  PackageTypeName: string
+  PackageTypeName?: string
   /**
    * 状态名称。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  StatusName: string
+  StatusName?: string
   /**
    * 是否为 VIP 客户。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  IsVip: boolean
+  IsVip?: boolean
   /**
    * 是否为 DV 版证书。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  IsDv: boolean
+  IsDv?: boolean
   /**
    * 是否为泛域名证书。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  IsWildcard: boolean
+  IsWildcard?: boolean
   /**
    * 是否启用了漏洞扫描功能。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  IsVulnerability: boolean
+  IsVulnerability?: boolean
   /**
    * 是否可重颁发证书。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RenewAble: boolean
+  RenewAble?: boolean
   /**
    * 项目信息。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ProjectInfo: ProjectInfo
+  ProjectInfo?: ProjectInfo
   /**
    * 关联的云资源，暂不可用
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  BoundResource: Array<string>
+  BoundResource?: Array<string>
   /**
    * 是否可部署。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Deployable: boolean
+  Deployable?: boolean
   /**
    * 标签列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Tags: Array<Tags>
+  Tags?: Array<Tags>
   /**
    * 是否已忽略到期通知
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  IsIgnore: boolean
+  IsIgnore?: boolean
   /**
    * 是否国密证书
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  IsSM: boolean
+  IsSM?: boolean
   /**
    * 证书算法
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  EncryptAlgorithm: string
+  EncryptAlgorithm?: string
   /**
    * 上传CA证书的加密算法
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CAEncryptAlgorithms: Array<string>
+  CAEncryptAlgorithms?: Array<string>
   /**
    * 上传CA证书的过期时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CAEndTimes: Array<string>
+  CAEndTimes?: Array<string>
   /**
    * 上传CA证书的通用名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CACommonNames: Array<string>
+  CACommonNames?: Array<string>
   /**
    * 证书预审核信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  PreAuditInfo: PreAuditInfo
+  PreAuditInfo?: PreAuditInfo
   /**
    * 是否自动续费
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  AutoRenewFlag: number
+  AutoRenewFlag?: number
+  /**
+   * 托管状态，0，托管中，5，资源替换中， 10， 托管完成， -1未托管 
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HostingStatus?: number
+  /**
+   * 托管完成时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HostingCompleteTime?: string
+  /**
+   * 托管新证书ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HostingRenewCertId?: string
 }
 
 /**
@@ -4450,6 +4465,18 @@ export interface DescribeHostTeoInstanceListRequest {
    * 已部署的证书ID
    */
   OldCertificateId?: string
+  /**
+   * 分页偏移量，从0开始。
+   */
+  Offset?: number
+  /**
+   * 每页数量，默认10。
+   */
+  Limit?: number
+  /**
+   * 是否异步
+   */
+  AsyncCache?: number
 }
 
 /**

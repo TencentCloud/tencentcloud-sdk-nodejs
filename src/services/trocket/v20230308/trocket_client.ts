@@ -19,25 +19,44 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   ModifyInstanceResponse,
-  CreateInstanceResponse,
-  DeleteInstanceResponse,
-  DescribeTopicListResponse,
-  DeleteInstanceRequest,
-  TopicItem,
-  DescribeInstanceResponse,
-  DescribeInstanceRequest,
-  IpRule,
-  Filter,
-  InstanceItem,
-  Tag,
-  Endpoint,
-  CreateInstanceRequest,
-  TagFilter,
-  DescribeTopicListRequest,
+  CreateTopicResponse,
+  CreateConsumerGroupRequest,
   ModifyInstanceRequest,
-  DescribeInstanceListResponse,
-  VpcInfo,
+  DescribeTopicListRequest,
   DescribeInstanceListRequest,
+  CreateInstanceResponse,
+  DescribeTopicListResponse,
+  DeleteInstanceResponse,
+  ModifyConsumerGroupRequest,
+  DescribeConsumerGroupRequest,
+  IpRule,
+  TopicItem,
+  SubscriptionData,
+  DescribeConsumerGroupResponse,
+  CreateInstanceRequest,
+  VpcInfo,
+  DeleteTopicRequest,
+  DeleteConsumerGroupResponse,
+  ModifyTopicResponse,
+  DescribeTopicResponse,
+  Endpoint,
+  DescribeTopicStatsOpRequest,
+  CreateTopicRequest,
+  TagFilter,
+  Filter,
+  DescribeTopicStatsOpResponse,
+  ModifyTopicRequest,
+  DescribeInstanceResponse,
+  DeleteConsumerGroupRequest,
+  DeleteTopicResponse,
+  CreateConsumerGroupResponse,
+  ModifyConsumerGroupResponse,
+  DeleteInstanceRequest,
+  DescribeInstanceRequest,
+  Tag,
+  InstanceItem,
+  DescribeInstanceListResponse,
+  DescribeTopicRequest,
 } from "./trocket_models"
 
 /**
@@ -47,6 +66,66 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("trocket.tencentcloudapi.com", "2023-03-08", clientConfig)
+  }
+
+  /**
+   * 运营端查询topicStata
+   */
+  async DescribeTopicStatsOp(
+    req: DescribeTopicStatsOpRequest,
+    cb?: (error: string, rep: DescribeTopicStatsOpResponse) => void
+  ): Promise<DescribeTopicStatsOpResponse> {
+    return this.request("DescribeTopicStatsOp", req, cb)
+  }
+
+  /**
+   * 查询消费组详情
+   */
+  async DescribeConsumerGroup(
+    req: DescribeConsumerGroupRequest,
+    cb?: (error: string, rep: DescribeConsumerGroupResponse) => void
+  ): Promise<DescribeConsumerGroupResponse> {
+    return this.request("DescribeConsumerGroup", req, cb)
+  }
+
+  /**
+   * 创建主题
+   */
+  async CreateTopic(
+    req: CreateTopicRequest,
+    cb?: (error: string, rep: CreateTopicResponse) => void
+  ): Promise<CreateTopicResponse> {
+    return this.request("CreateTopic", req, cb)
+  }
+
+  /**
+   * 删除消费组
+   */
+  async DeleteConsumerGroup(
+    req: DeleteConsumerGroupRequest,
+    cb?: (error: string, rep: DeleteConsumerGroupResponse) => void
+  ): Promise<DeleteConsumerGroupResponse> {
+    return this.request("DeleteConsumerGroup", req, cb)
+  }
+
+  /**
+   * 修改消费组属性
+   */
+  async ModifyConsumerGroup(
+    req: ModifyConsumerGroupRequest,
+    cb?: (error: string, rep: ModifyConsumerGroupResponse) => void
+  ): Promise<ModifyConsumerGroupResponse> {
+    return this.request("ModifyConsumerGroup", req, cb)
+  }
+
+  /**
+   * 购买新实例
+   */
+  async CreateInstance(
+    req: CreateInstanceRequest,
+    cb?: (error: string, rep: CreateInstanceResponse) => void
+  ): Promise<CreateInstanceResponse> {
+    return this.request("CreateInstance", req, cb)
   }
 
   /**
@@ -66,13 +145,25 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 购买新实例
+     * 查询主题详情，Offset和Limit参数是指订阅该主题的消费组查询分页参数，Filter参数使用说明如下：
+
+ConsumerGroup，消费组名称过滤
+     */
+  async DescribeTopic(
+    req: DescribeTopicRequest,
+    cb?: (error: string, rep: DescribeTopicResponse) => void
+  ): Promise<DescribeTopicResponse> {
+    return this.request("DescribeTopic", req, cb)
+  }
+
+  /**
+   * 修改主题属性
    */
-  async CreateInstance(
-    req: CreateInstanceRequest,
-    cb?: (error: string, rep: CreateInstanceResponse) => void
-  ): Promise<CreateInstanceResponse> {
-    return this.request("CreateInstance", req, cb)
+  async ModifyTopic(
+    req: ModifyTopicRequest,
+    cb?: (error: string, rep: ModifyTopicResponse) => void
+  ): Promise<ModifyTopicResponse> {
+    return this.request("ModifyTopic", req, cb)
   }
 
   /**
@@ -106,6 +197,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeTopicListResponse) => void
   ): Promise<DescribeTopicListResponse> {
     return this.request("DescribeTopicList", req, cb)
+  }
+
+  /**
+   * 删除主题
+   */
+  async DeleteTopic(
+    req: DeleteTopicRequest,
+    cb?: (error: string, rep: DeleteTopicResponse) => void
+  ): Promise<DeleteTopicResponse> {
+    return this.request("DeleteTopic", req, cb)
+  }
+
+  /**
+   * 创建消费组
+   */
+  async CreateConsumerGroup(
+    req: CreateConsumerGroupRequest,
+    cb?: (error: string, rep: CreateConsumerGroupResponse) => void
+  ): Promise<CreateConsumerGroupResponse> {
+    return this.request("CreateConsumerGroup", req, cb)
   }
 
   /**

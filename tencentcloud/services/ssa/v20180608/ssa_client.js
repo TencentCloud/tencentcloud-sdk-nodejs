@@ -142,6 +142,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeSocAlertDetails", req, cb);
     }
     /**
+     * 安全大屏-用户威胁告警信息
+     */
+    async DescribeAlarmStat(req, cb) {
+        return this.request("DescribeAlarmStat", req, cb);
+    }
+    /**
      * 合规详情项
      */
     async DescribeSocCspmCompliance(req, cb) {

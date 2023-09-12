@@ -58,6 +58,16 @@ it("ses.v20201002.GetSendEmailStatus", async function () {
     }
 })
 
+it("ses.v20201002.ListReceiverDetails", async function () {
+    try {
+       const data = await client.ListReceiverDetails({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ses.v20201002.CreateReceiver", async function () {
     try {
        const data = await client.CreateReceiver({})

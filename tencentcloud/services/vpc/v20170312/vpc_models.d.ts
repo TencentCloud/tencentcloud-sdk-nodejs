@@ -11427,6 +11427,10 @@ export interface DescribeAddressTemplateGroupsRequest {
      * 返回数量，默认为20，最大值为100。
      */
     Limit?: string;
+    /**
+     * 是否查询IP地址模板成员标识。
+     */
+    NeedMemberInfo?: boolean;
 }
 /**
  * MigratePrivateIpAddress返回参数结构体
@@ -12432,6 +12436,10 @@ export interface DescribeServiceTemplatesRequest {
      * 返回数量，默认为20，最大值为100。
      */
     Limit?: string;
+    /**
+     * 是否获取协议端口成员标识。
+     */
+    NeedMemberInfo?: boolean;
 }
 /**
  * 协议端口模板
@@ -13477,6 +13485,10 @@ export interface DescribeAddressTemplatesRequest {
      * 返回数量，默认为20，最大值为100。
      */
     Limit?: string;
+    /**
+     * 是否获取IP地址模板成员标识。
+     */
+    NeedMemberInfo?: boolean;
 }
 /**
  * 冲突资源信息。
@@ -13639,6 +13651,10 @@ export interface DescribeServiceTemplateGroupsRequest {
      * 返回数量，默认为20，最大值为100。
      */
     Limit?: string;
+    /**
+     * 是否获取协议端口模板成员标识。
+     */
+    NeedMemberInfo?: boolean;
 }
 /**
  * CreateSecurityGroupWithPolicies请求参数结构体

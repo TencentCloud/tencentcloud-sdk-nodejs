@@ -722,6 +722,24 @@ export interface DeleteBlackListResponse {
 }
 
 /**
+ * ListReceiverDetails返回参数结构体
+ */
+export interface ListReceiverDetailsResponse {
+  /**
+   * 总数
+   */
+  TotalCount: number
+  /**
+   * 数据记录
+   */
+  Data: Array<ReceiverDetail>
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * UpdateEmailTemplate请求参数结构体
  */
 export interface UpdateEmailTemplateRequest {
@@ -869,6 +887,24 @@ export interface CreateReceiverDetailResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 收件人列表详情
+ */
+export interface ReceiverDetail {
+  /**
+   * 收件人地址
+   */
+  Email: string
+  /**
+   * 创建时间
+   */
+  CreateTime: string
+  /**
+   * 模板参数
+   */
+  TemplateData: string
 }
 
 /**
@@ -1133,6 +1169,28 @@ export interface CreateEmailIdentityResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ListReceiverDetails请求参数结构体
+ */
+export interface ListReceiverDetailsRequest {
+  /**
+   * 收件人列表ID,CreateReceiver接口创建收件人列表时会返回该值
+   */
+  ReceiverId: number
+  /**
+   * 偏移量，整型，从0开始
+   */
+  Offset: number
+  /**
+   * 限制数目，整型,不超过100
+   */
+  Limit: number
+  /**
+   * 收件人地址，长度0-50，示例：xxx@te.com，支持模糊查询
+   */
+  Email?: string
 }
 
 /**

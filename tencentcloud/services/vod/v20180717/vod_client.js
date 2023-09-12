@@ -369,6 +369,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribePrepaidProducts", req, cb);
     }
     /**
+     * 该接口用于生成一条子域名解析，提示客户添加到域名解析上，用于泛域名及域名取回校验归属权。
+     */
+    async CreateDomainVerifyRecord(req, cb) {
+        return this.request("CreateDomainVerifyRecord", req, cb);
+    }
+    /**
      * 查询指定时间点截图模板，支持根据条件，分页查询。
      */
     async DescribeSnapshotByTimeOffsetTemplates(req, cb) {
@@ -701,6 +707,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyQualityInspectTemplate", req, cb);
     }
     /**
+     * 该接口用于验证域名解析值。
+     */
+    async VerifyDomainRecord(req, cb) {
+        return this.request("VerifyDomainRecord", req, cb);
+    }
+    /**
      * 该 API 已经<font color='red'>不再维护</font>，新版播放器签名不再使用播放器配置模板，详细请参考 [播放器签名](https://cloud.tencent.com/document/product/266/45554)。
 创建播放器配置，数量上限：100。
      */
@@ -752,6 +764,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ModifyHeadTailTemplate(req, cb) {
         return this.request("ModifyHeadTailTemplate", req, cb);
+    }
+    /**
+     * 控制台验证域名归属
+     */
+    async VerifyDomainOwnershipForConsole(req, cb) {
+        return this.request("VerifyDomainOwnershipForConsole", req, cb);
     }
     /**
      * 删除用户自定义图片处理模板。

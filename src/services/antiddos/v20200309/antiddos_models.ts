@@ -1863,7 +1863,7 @@ export interface DescribeNewL7RulesRequest {
    */
   Limit?: number
   /**
-   * 页起始偏移，取值为(页码-1)*一页条数
+   * 规则偏移量，取值为(页码-1)*一页条数
    */
   Offset?: number
   /**

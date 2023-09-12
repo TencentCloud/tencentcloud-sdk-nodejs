@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeAssetDetailRequest, DescribeSocCheckItemListResponse, SaEventPubRequest, DescribeConfigListResponse, DescribeCheckConfigDetailResponse, DescribeAssetListResponse, DescribeCheckConfigAssetListResponse, SaEventPubResponse, DescribeVulListRequest, DescribeLeakDetectionListRequest, DescribeSocAlertListRequest, DescribeConfigListRequest, DescribeComplianceDetailResponse, DescribeComplianceAssetListRequest, DescribeAssetDetailListRequest, DescribeMappingResultsResponse, DescribeCheckConfigAssetListRequest, DescribeSocCheckResultListResponse, DescribeCheckConfigDetailRequest, DescribeAssetListRequest, DescribeEventDetailResponse, SaDivulgeDataQueryPubResponse, DescribeMappingResultsRequest, DescribeDomainListResponse, DescribeSocCspmComplianceRequest, DescribeComplianceListResponse, DescribeSocAlertDetailsResponse, DescribeSafetyEventListRequest, DescribeSafetyEventListResponse, DescribeSocCheckResultListRequest, DescribeSocAlertDetailsRequest, DescribeSocCspmComplianceResponse, DescribeSocCheckItemListRequest, SaDivulgeDataQueryPubRequest, DescribeAssetsMappingListRequest, DescribeComplianceDetailRequest, DescribeVulListResponse, DescribeComplianceAssetListResponse, DescribeDomainListRequest, DescribeAssetsMappingListResponse, DescribeComplianceListRequest, DescribeLeakDetectionListResponse, DescribeAssetDetailListResponse, DescribeEventDetailRequest, DescribeVulDetailRequest, DescribeSocAlertListResponse, DescribeAssetDetailResponse, DescribeVulDetailResponse } from "./ssa_models";
+import { DescribeAssetDetailRequest, DescribeSocCheckItemListResponse, DescribeAlarmStatResponse, SaEventPubRequest, DescribeConfigListResponse, DescribeCheckConfigDetailResponse, DescribeAssetListResponse, DescribeCheckConfigAssetListResponse, SaEventPubResponse, DescribeVulListRequest, DescribeLeakDetectionListRequest, DescribeSocAlertListRequest, DescribeConfigListRequest, DescribeComplianceDetailResponse, DescribeComplianceAssetListRequest, DescribeAssetDetailListRequest, DescribeMappingResultsResponse, DescribeCheckConfigAssetListRequest, DescribeSocCheckResultListResponse, DescribeCheckConfigDetailRequest, DescribeAssetListRequest, DescribeEventDetailResponse, SaDivulgeDataQueryPubResponse, DescribeMappingResultsRequest, DescribeDomainListResponse, DescribeSocCspmComplianceRequest, DescribeComplianceListResponse, DescribeSocAlertDetailsResponse, DescribeSafetyEventListRequest, DescribeSafetyEventListResponse, DescribeSocCheckResultListRequest, DescribeSocAlertDetailsRequest, DescribeSocCspmComplianceResponse, DescribeSocCheckItemListRequest, SaDivulgeDataQueryPubRequest, DescribeAssetsMappingListRequest, DescribeComplianceDetailRequest, DescribeVulListResponse, DescribeComplianceAssetListResponse, DescribeAlarmStatRequest, DescribeDomainListRequest, DescribeAssetsMappingListResponse, DescribeComplianceListRequest, DescribeLeakDetectionListResponse, DescribeAssetDetailListResponse, DescribeEventDetailRequest, DescribeVulDetailRequest, DescribeSocAlertListResponse, DescribeAssetDetailResponse, DescribeVulDetailResponse } from "./ssa_models";
 /**
  * ssa client
  * @class
@@ -83,6 +83,10 @@ export declare class Client extends AbstractClient {
      * 返回告警详情
      */
     DescribeSocAlertDetails(req: DescribeSocAlertDetailsRequest, cb?: (error: string, rep: DescribeSocAlertDetailsResponse) => void): Promise<DescribeSocAlertDetailsResponse>;
+    /**
+     * 安全大屏-用户威胁告警信息
+     */
+    DescribeAlarmStat(req: DescribeAlarmStatRequest, cb?: (error: string, rep: DescribeAlarmStatResponse) => void): Promise<DescribeAlarmStatResponse>;
     /**
      * 合规详情项
      */

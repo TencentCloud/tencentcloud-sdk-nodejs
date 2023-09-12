@@ -26,13 +26,17 @@ export interface ModifyInstanceResponse {
 }
 
 /**
- * CreateInstance返回参数结构体
+ * CreateTopic返回参数结构体
  */
-export interface CreateInstanceResponse {
+export interface CreateTopicResponse {
   /**
    * 实例ID
    */
   InstanceId?: string
+  /**
+   * 主题
+   */
+  Topic?: string
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -40,9 +44,122 @@ export interface CreateInstanceResponse {
 }
 
 /**
- * DeleteInstance返回参数结构体
+ * CreateConsumerGroup请求参数结构体
  */
-export interface DeleteInstanceResponse {
+export interface CreateConsumerGroupRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+  /**
+   * 消费组名称
+   */
+  ConsumerGroup: string
+  /**
+   * 最大重试次数
+   */
+  MaxRetryTimes: number
+  /**
+   * 是否开启消费
+   */
+  ConsumeEnable: boolean
+  /**
+   * 顺序投递：true
+并发投递：false
+   */
+  ConsumeMessageOrderly: boolean
+  /**
+   * 备注
+   */
+  Remark?: string
+}
+
+/**
+ * ModifyInstance请求参数结构体
+ */
+export interface ModifyInstanceRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+  /**
+   * 实例名称
+   */
+  Name?: string
+  /**
+   * 备注信息
+   */
+  Remark?: string
+  /**
+   * 消息发送和接收的比例
+   */
+  SendReceiveRatio?: number
+  /**
+   * 调整实例规格的商品代号
+   */
+  SkuCode?: string
+  /**
+   * 消息保留时长，小时为单位
+   */
+  MessageRetention?: number
+  /**
+   * 是否开启弹性TPS
+   */
+  ScaledTpsEnabled?: boolean
+}
+
+/**
+ * DescribeTopicList请求参数结构体
+ */
+export interface DescribeTopicListRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+  /**
+   * 查询起始位置
+   */
+  Offset: number
+  /**
+   * 查询结果限制数量
+   */
+  Limit: number
+  /**
+   * 查询条件列表
+   */
+  Filters?: Array<Filter>
+}
+
+/**
+ * DescribeInstanceList请求参数结构体
+ */
+export interface DescribeInstanceListRequest {
+  /**
+   * 查询起始位置
+   */
+  Offset: number
+  /**
+   * 查询结果限制数量
+   */
+  Limit: number
+  /**
+   * 查询条件列表
+   */
+  Filters?: Array<Filter>
+  /**
+   * 标签过滤器
+   */
+  TagFilters?: Array<TagFilter>
+}
+
+/**
+ * CreateInstance返回参数结构体
+ */
+export interface CreateInstanceResponse {
+  /**
+   * 实例ID
+   */
+  InstanceId?: string
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -69,13 +186,77 @@ export interface DescribeTopicListResponse {
 }
 
 /**
- * DeleteInstance请求参数结构体
+ * DeleteInstance返回参数结构体
  */
-export interface DeleteInstanceRequest {
+export interface DeleteInstanceResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyConsumerGroup请求参数结构体
+ */
+export interface ModifyConsumerGroupRequest {
   /**
    * 实例ID
    */
   InstanceId: string
+  /**
+   * 消费组名称
+   */
+  ConsumerGroup?: string
+  /**
+   * 是否开启消费
+   */
+  ConsumeEnable?: boolean
+  /**
+   * 顺序投递：true
+并发投递：false
+   */
+  ConsumeMessageOrderly?: boolean
+  /**
+   * 最大重试次数
+   */
+  MaxRetryTimes?: number
+  /**
+   * 备注
+   */
+  Remark?: string
+}
+
+/**
+ * DescribeConsumerGroup请求参数结构体
+ */
+export interface DescribeConsumerGroupRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+  /**
+   * 消费组名称
+   */
+  ConsumerGroup?: string
+}
+
+/**
+ * IP规则
+ */
+export interface IpRule {
+  /**
+   * IP地址
+   */
+  Ip: string
+  /**
+   * 是否允许放行
+   */
+  Allow: boolean
+  /**
+   * 备注信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Remark: string
 }
 
 /**
@@ -101,6 +282,431 @@ export interface TopicItem {
   /**
    * 描述
 注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Remark?: string
+}
+
+/**
+ * 主题与消费组的订阅关系数据
+ */
+export interface SubscriptionData {
+  /**
+   * 实例ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceId?: string
+  /**
+   * 主题名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Topic?: string
+  /**
+   * 主题类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TopicType?: string
+  /**
+   * 单个节点上主题队列数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TopicQueueNum?: number
+  /**
+   * 消费组名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ConsumerGroup?: string
+  /**
+   * 是否在线
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsOnline?: boolean
+  /**
+   * 消费类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ConsumeType?: string
+  /**
+   * 订阅规则
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SubString?: string
+  /**
+   * 过滤类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExpressionType?: string
+  /**
+   * 订阅一致性
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Consistency?: number
+  /**
+   * 消费堆积
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ConsumerLag?: number
+  /**
+   * 最后消费进度更新时间，秒为单位
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LastUpdateTime?: number
+  /**
+   * 最大重试次数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MaxRetryTimes?: number
+  /**
+   * 是否顺序消费
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ConsumeMessageOrderly?: boolean
+}
+
+/**
+ * DescribeConsumerGroup返回参数结构体
+ */
+export interface DescribeConsumerGroupResponse {
+  /**
+   * 在线消费者数量
+   */
+  ConsumerNum?: number
+  /**
+   * TPS
+   */
+  Tps?: number
+  /**
+   * 消息堆积数量
+   */
+  ConsumerLag?: number
+  /**
+   * 消费者类型
+   */
+  ConsumeType?: string
+  /**
+   * 创建时间，秒为单位
+   */
+  CreatedTime?: number
+  /**
+   * 顺序投递：true
+并发投递：false
+   */
+  ConsumeMessageOrderly?: boolean
+  /**
+   * 是否开启消费
+   */
+  ConsumeEnable?: boolean
+  /**
+   * 最大重试次数
+   */
+  MaxRetryTimes?: number
+  /**
+   * 备注
+   */
+  Remark?: string
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateInstance请求参数结构体
+ */
+export interface CreateInstanceRequest {
+  /**
+   * 实例类型，
+EXPERIMENT 体验版
+BASIC 基础版
+PRO  专业版
+PLATINUM 铂金版
+   */
+  InstanceType: string
+  /**
+   * 实例名称
+   */
+  Name: string
+  /**
+   * 商品规格，可用规格如下：
+experiment_500,
+basic_1k,
+basic_2k,
+basic_4k,
+basic_6k
+   */
+  SkuCode: string
+  /**
+   * 备注信息
+   */
+  Remark?: string
+  /**
+   * 标签列表
+   */
+  TagList?: Array<Tag>
+  /**
+   * 实例绑定的VPC信息
+   */
+  VpcList?: Array<VpcInfo>
+  /**
+   * 是否开启公网
+   */
+  EnablePublic?: boolean
+  /**
+   * 公网带宽
+   */
+  Bandwidth?: number
+  /**
+   * 公网访问白名单
+   */
+  IpRules?: Array<IpRule>
+  /**
+   * 消息保留时长，小时为单位
+   */
+  MessageRetention?: number
+}
+
+/**
+ * VPC信息
+ */
+export interface VpcInfo {
+  /**
+   * VPC ID
+   */
+  VpcId: string
+  /**
+   * 子网ID
+   */
+  SubnetId: string
+}
+
+/**
+ * DeleteTopic请求参数结构体
+ */
+export interface DeleteTopicRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+  /**
+   * 主题
+   */
+  Topic: string
+}
+
+/**
+ * DeleteConsumerGroup返回参数结构体
+ */
+export interface DeleteConsumerGroupResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyTopic返回参数结构体
+ */
+export interface ModifyTopicResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeTopic返回参数结构体
+ */
+export interface DescribeTopicResponse {
+  /**
+   * 实例ID
+   */
+  InstanceId?: string
+  /**
+   * 主题名称
+   */
+  Topic?: string
+  /**
+   * 主题类型
+UNSPECIFIED:未指定,
+NORMAL:普通消息,
+FIFO:顺序消息,
+DELAY:延时消息,
+TRANSACTION:事务消息
+   */
+  TopicType?: string
+  /**
+   * 备注
+   */
+  Remark?: string
+  /**
+   * 创建时间，秒为单位
+   */
+  CreatedTime?: number
+  /**
+   * 最后写入时间，秒为单位
+   */
+  LastUpdateTime?: number
+  /**
+   * 订阅数量
+   */
+  SubscriptionCount?: number
+  /**
+   * 订阅关系列表
+   */
+  SubscriptionData?: Array<SubscriptionData>
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 接入点信息
+ */
+export interface Endpoint {
+  /**
+   * 接入点类型，
+VPC，
+PUBLIC 公网
+   */
+  Type?: string
+  /**
+   * 状态，
+OPEN 开启，
+CLOSE 关闭，
+PROCESSING 操作中，
+   */
+  Status?: string
+  /**
+   * 付费类型，仅公网
+PREPAID 包年包月
+POSTPAID 按量付费
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PayMode?: string
+  /**
+   * 接入点地址
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EndpointUrl?: string
+  /**
+   * VPC ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VpcId?: string
+  /**
+   * 子网ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SubnetId?: string
+  /**
+   * 公网带宽，Mbps为单位
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Bandwidth?: number
+  /**
+   * 公网放通规则
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IpRules?: Array<IpRule>
+}
+
+/**
+ * DescribeTopicStatsOp请求参数结构体
+ */
+export interface DescribeTopicStatsOpRequest {
+  /**
+   * 主题
+   */
+  Topic: string
+}
+
+/**
+ * CreateTopic请求参数结构体
+ */
+export interface CreateTopicRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+  /**
+   * 主题
+   */
+  Topic: string
+  /**
+   * 主题类型
+UNSPECIFIED:未指定,
+NORMAL:普通消息,
+FIFO:顺序消息,
+DELAY:延时消息,
+TRANSACTION:事务消息
+   */
+  TopicType: string
+  /**
+   * 队列数量
+   */
+  QueueNum: number
+  /**
+   * 备注
+   */
+  Remark?: string
+}
+
+/**
+ * 标签过滤器
+ */
+export interface TagFilter {
+  /**
+   * 标签键名称
+   */
+  TagKey: string
+  /**
+   * 标签值列表
+   */
+  TagValues: Array<string>
+}
+
+/**
+ * 查询过滤器
+ */
+export interface Filter {
+  /**
+   * 过滤条件名
+   */
+  Name: string
+  /**
+   * 过滤条件的值
+   */
+  Values: Array<string>
+}
+
+/**
+ * DescribeTopicStatsOp返回参数结构体
+ */
+export interface DescribeTopicStatsOpResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyTopic请求参数结构体
+ */
+export interface ModifyTopicRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+  /**
+   * 主题
+   */
+  Topic: string
+  /**
+   * 队列数量
+   */
+  QueueNum?: number
+  /**
+   * 备注信息
    */
   Remark?: string
 }
@@ -215,6 +821,68 @@ PLATINUM 铂金版
 }
 
 /**
+ * DeleteConsumerGroup请求参数结构体
+ */
+export interface DeleteConsumerGroupRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+  /**
+   * 消费组名称
+   */
+  ConsumerGroup: string
+}
+
+/**
+ * DeleteTopic返回参数结构体
+ */
+export interface DeleteTopicResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateConsumerGroup返回参数结构体
+ */
+export interface CreateConsumerGroupResponse {
+  /**
+   * 实例ID
+   */
+  InstanceId?: string
+  /**
+   * 消费组
+   */
+  ConsumerGroup?: string
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyConsumerGroup返回参数结构体
+ */
+export interface ModifyConsumerGroupResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeleteInstance请求参数结构体
+ */
+export interface DeleteInstanceRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+}
+
+/**
  * DescribeInstance请求参数结构体
  */
 export interface DescribeInstanceRequest {
@@ -225,36 +893,19 @@ export interface DescribeInstanceRequest {
 }
 
 /**
- * IP规则
+ * 标签数据
  */
-export interface IpRule {
+export interface Tag {
   /**
-   * IP地址
-   */
-  Ip: string
-  /**
-   * 是否允许放行
-   */
-  Allow: boolean
-  /**
-   * 备注信息
+   * 标签名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Remark: string
-}
-
-/**
- * 查询过滤器
- */
-export interface Filter {
+  TagKey: string
   /**
-   * 过滤条件名
+   * 标签值
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Name: string
-  /**
-   * 过滤条件的值
-   */
-  Values: Array<string>
+  TagValue: string
 }
 
 /**
@@ -359,198 +1010,6 @@ PREPAID，包年包月
 }
 
 /**
- * 标签数据
- */
-export interface Tag {
-  /**
-   * 标签名称
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TagKey: string
-  /**
-   * 标签值
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TagValue: string
-}
-
-/**
- * 接入点信息
- */
-export interface Endpoint {
-  /**
-   * 接入点类型，
-VPC，
-PUBLIC 公网
-   */
-  Type?: string
-  /**
-   * 状态，
-OPEN 开启，
-CLOSE 关闭，
-PROCESSING 操作中，
-   */
-  Status?: string
-  /**
-   * 付费类型，仅公网
-PREPAID 包年包月
-POSTPAID 按量付费
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  PayMode?: string
-  /**
-   * 接入点地址
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  EndpointUrl?: string
-  /**
-   * VPC ID
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  VpcId?: string
-  /**
-   * 子网ID
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SubnetId?: string
-  /**
-   * 公网带宽，Mbps为单位
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Bandwidth?: number
-  /**
-   * 公网放通规则
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  IpRules?: Array<IpRule>
-}
-
-/**
- * CreateInstance请求参数结构体
- */
-export interface CreateInstanceRequest {
-  /**
-   * 实例类型，
-EXPERIMENT 体验版
-BASIC 基础版
-PRO  专业版
-PLATINUM 铂金版
-   */
-  InstanceType: string
-  /**
-   * 实例名称
-   */
-  Name: string
-  /**
-   * 商品规格，可用规格如下：
-experiment_500,
-basic_1k,
-basic_2k,
-basic_4k,
-basic_6k
-   */
-  SkuCode: string
-  /**
-   * 备注信息
-   */
-  Remark?: string
-  /**
-   * 标签列表
-   */
-  TagList?: Array<Tag>
-  /**
-   * 实例绑定的VPC信息
-   */
-  VpcList?: Array<VpcInfo>
-  /**
-   * 是否开启公网
-   */
-  EnablePublic?: boolean
-  /**
-   * 公网带宽
-   */
-  Bandwidth?: number
-  /**
-   * 公网访问白名单
-   */
-  IpRules?: Array<IpRule>
-  /**
-   * 消息保留时长，小时为单位
-   */
-  MessageRetention?: number
-}
-
-/**
- * 标签过滤器
- */
-export interface TagFilter {
-  /**
-   * 标签键名称
-   */
-  TagKey: string
-  /**
-   * 标签值列表
-   */
-  TagValues: Array<string>
-}
-
-/**
- * DescribeTopicList请求参数结构体
- */
-export interface DescribeTopicListRequest {
-  /**
-   * 实例ID
-   */
-  InstanceId: string
-  /**
-   * 查询起始位置
-   */
-  Offset: number
-  /**
-   * 查询结果限制数量
-   */
-  Limit: number
-  /**
-   * 查询条件列表
-   */
-  Filters?: Array<Filter>
-}
-
-/**
- * ModifyInstance请求参数结构体
- */
-export interface ModifyInstanceRequest {
-  /**
-   * 实例ID
-   */
-  InstanceId: string
-  /**
-   * 实例名称
-   */
-  Name?: string
-  /**
-   * 备注信息
-   */
-  Remark?: string
-  /**
-   * 消息发送和接收的比例
-   */
-  SendReceiveRatio?: number
-  /**
-   * 调整实例规格的商品代号
-   */
-  SkuCode?: string
-  /**
-   * 消息保留时长，小时为单位
-   */
-  MessageRetention?: number
-  /**
-   * 是否开启弹性TPS
-   */
-  ScaledTpsEnabled?: boolean
-}
-
-/**
  * DescribeInstanceList返回参数结构体
  */
 export interface DescribeInstanceListResponse {
@@ -570,23 +1029,17 @@ export interface DescribeInstanceListResponse {
 }
 
 /**
- * VPC信息
+ * DescribeTopic请求参数结构体
  */
-export interface VpcInfo {
+export interface DescribeTopicRequest {
   /**
-   * VPC ID
+   * 实例ID
    */
-  VpcId: string
+  InstanceId: string
   /**
-   * 子网ID
+   * 主题
    */
-  SubnetId: string
-}
-
-/**
- * DescribeInstanceList请求参数结构体
- */
-export interface DescribeInstanceListRequest {
+  Topic: string
   /**
    * 查询起始位置
    */
@@ -599,8 +1052,4 @@ export interface DescribeInstanceListRequest {
    * 查询条件列表
    */
   Filters?: Array<Filter>
-  /**
-   * 标签过滤器
-   */
-  TagFilters?: Array<TagFilter>
 }

@@ -28,6 +28,42 @@ class Client extends abstract_client_1.AbstractClient {
         super("trocket.tencentcloudapi.com", "2023-03-08", clientConfig);
     }
     /**
+     * 运营端查询topicStata
+     */
+    async DescribeTopicStatsOp(req, cb) {
+        return this.request("DescribeTopicStatsOp", req, cb);
+    }
+    /**
+     * 查询消费组详情
+     */
+    async DescribeConsumerGroup(req, cb) {
+        return this.request("DescribeConsumerGroup", req, cb);
+    }
+    /**
+     * 创建主题
+     */
+    async CreateTopic(req, cb) {
+        return this.request("CreateTopic", req, cb);
+    }
+    /**
+     * 删除消费组
+     */
+    async DeleteConsumerGroup(req, cb) {
+        return this.request("DeleteConsumerGroup", req, cb);
+    }
+    /**
+     * 修改消费组属性
+     */
+    async ModifyConsumerGroup(req, cb) {
+        return this.request("ModifyConsumerGroup", req, cb);
+    }
+    /**
+     * 购买新实例
+     */
+    async CreateInstance(req, cb) {
+        return this.request("CreateInstance", req, cb);
+    }
+    /**
      * 获取实例列表，Filters参数使用说明如下：
 1. InstanceName, 名称模糊查询
 2. InstanceId，实例ID查询
@@ -40,10 +76,18 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeInstanceList", req, cb);
     }
     /**
-     * 购买新实例
+     * 查询主题详情，Offset和Limit参数是指订阅该主题的消费组查询分页参数，Filter参数使用说明如下：
+
+ConsumerGroup，消费组名称过滤
      */
-    async CreateInstance(req, cb) {
-        return this.request("CreateInstance", req, cb);
+    async DescribeTopic(req, cb) {
+        return this.request("DescribeTopic", req, cb);
+    }
+    /**
+     * 修改主题属性
+     */
+    async ModifyTopic(req, cb) {
+        return this.request("ModifyTopic", req, cb);
     }
     /**
      * 查询实例信息
@@ -65,6 +109,18 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeTopicList(req, cb) {
         return this.request("DescribeTopicList", req, cb);
+    }
+    /**
+     * 删除主题
+     */
+    async DeleteTopic(req, cb) {
+        return this.request("DeleteTopic", req, cb);
+    }
+    /**
+     * 创建消费组
+     */
+    async CreateConsumerGroup(req, cb) {
+        return this.request("CreateConsumerGroup", req, cb);
     }
     /**
      * 修改实例属性

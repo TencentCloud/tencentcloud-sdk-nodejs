@@ -374,7 +374,10 @@ export interface ReviewerInfo {
  */
 export interface DescribeThirdPartyAuthCodeResponse {
     /**
-     * 用户是否实名，VERIFIED 为实名，UNVERIFIED 未实名
+     * AuthCode 中对应个人用户是否实名
+  <ul>
+  <li> **VERIFIED** : 此个人已实名</li>
+  <li> **UNVERIFIED**: 此个人未实名</li></ul>
      */
     VerifyStatus?: string;
     /**
@@ -548,7 +551,10 @@ export interface ReleasedApprover {
      */
     ApproverSignComponentType?: string;
     /**
-     * 参与方在合同中的角色是按照创建合同的时候来排序的; 解除协议默认会将第一个参与人叫甲方, 第二个叫乙方,第三个叫丙方，以此类推。如果您需要改动参与人的角色名字, 可以设置此签署方自定义控件别名字段，最大20个字。
+     * 参与方在合同中的角色是按照创建合同的时候来排序的，解除协议默认会将第一个参与人叫`甲方`,第二个叫`乙方`,  第三个叫`丙方`，以此类推。
+  
+  如果需改动此参与人的角色名字，可用此字段指定，由汉字,英文字符,数字组成，最大20个字。
+  
      */
     ApproverSignRole?: string;
 }
@@ -1175,7 +1181,9 @@ export interface DescribeIntegrationEmployeesRequest {
      */
     Agent?: Agent;
     /**
-     * 查询过滤实名用户，Key为Status，Values为["IsVerified"]
+     * 查询过滤实名用户，Key为Status，Values为["IsVerified"]，查询过滤未实名用户，Key为Status，Values为["NotVerified"]
+  查询某个部门的用户，Key为DepartmentId，Values为["DepartmentId"]
+  根据用户Id查询员工时，Key为UserId，Values为["UserId"]
   根据第三方系统openId过滤查询员工时,Key为StaffOpenId,Values为["OpenId","OpenId",...]
      */
     Filters?: Array<Filter>;
@@ -1462,15 +1470,17 @@ export interface AutoSignConfig {
  */
 export interface DescribeThirdPartyAuthCodeRequest {
     /**
-     * 电子签小程序跳转客户小程序时携带的授权查看码
+     * 腾讯电子签小程序跳转客户企业小程序时携带的授权查看码，AuthCode由腾讯电子签小程序生成。
      */
     AuthCode: string;
     /**
-     * 操作人信息
+     * 执行本接口操作的员工信息。
+  注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。`
      */
     Operator?: UserInfo;
     /**
-     * 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填
+     * 代理企业和员工的信息。
+  在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。
      */
     Agent?: Agent;
 }
@@ -1614,6 +1624,34 @@ export interface Permission {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Children?: Array<Permission>;
+}
+/**
+ * 签署控件的类型和范围限制条件，用于控制文件发起后签署人拖拽签署区时可使用的控件类型和具体的印章或签名方式。
+ */
+export interface ComponentLimit {
+    /**
+     * 控件类型，支持以下类型
+  <ul><li>SIGN_SEAL : 印章控件</li>
+  <li>SIGN_PAGING_SEAL : 骑缝章控件</li>
+  <li>SIGN_LEGAL_PERSON_SEAL : 企业法定代表人控件</li>
+  <li>SIGN_SIGNATURE : 用户签名控件</li></ul>
+     */
+    ComponentType: string;
+    /**
+     * 签署控件类型的值(可选)，用与限制签署时印章或者签名的选择范围
+  
+  1.当ComponentType 是 SIGN_SEAL 或者 SIGN_PAGING_SEAL 时可传入企业印章Id（支持多个）
+  
+  2.当ComponentType 是 SIGN_SIGNATURE 时可传入以下类型（支持多个）
+  
+  <ul><li>HANDWRITE : 手写签名</li>
+  <li>OCR_ESIGN : OCR印章（智慧手写签名）</li>
+  <li>ESIGN : 个人印章</li>
+  <li>SYSTEM_ESIGN : 系统印章</li></ul>
+  
+  3.当ComponentType 是 SIGN_LEGAL_PERSON_SEAL 时无需传递此参数。
+     */
+    ComponentValue?: Array<string>;
 }
 /**
  * CreateIntegrationDepartment返回参数结构体
@@ -1845,26 +1883,33 @@ export interface OccupiedSeal {
  */
 export interface CreatePersonAuthCertificateImageResponse {
     /**
-     * 个人用户证明证书的下载链接
+     * 个人用户认证证书图片下载URL，`有效期为5分钟`，超过有效期后将无法再下载。
      */
     AuthCertUrl?: string;
     /**
-     * 证书图片上的证书编号，20位数字
+     * 个人用户认证证书的编号, 为20位数字组成的字符串,  由腾讯电子签下发此编号 。
+  该编号会合成到个人用户证书证明图片。
+  
+  注: `个人用户认证证书的编号和证明图片绑定, 获取新的证明图片编号会变动`
   注意：此字段可能返回 null，表示取不到有效值。
      */
     ImageCertId?: string;
     /**
-     * 图片证明对应的CA证书序列号
+     * CA供应商下发给用户的证书编号，在证书到期后自动续期后此证书编号会发生变动，且不会合成到个人用户证书证明图片中。
+  
+  注意：`腾讯电子签接入多家CA供应商以提供容灾能力，不同CA下发的证书编号区别较大，但基本都是由数字和字母组成，长度在200以下。`
   注意：此字段可能返回 null，表示取不到有效值。
      */
     SerialNumber?: string;
     /**
-     * CA证书颁发时间戳
+     * CA证书颁发时间，格式为Unix标准时间戳（秒）
+  该时间格式化后会合成到个人用户证书证明图片
   注意：此字段可能返回 null，表示取不到有效值。
      */
     ValidFrom?: number;
     /**
-     * CA证书有效截止时间戳
+     * CA证书有效截止时间，格式为Unix标准时间戳（秒）
+  该时间格式化后会合成到个人用户证书证明图片
   注意：此字段可能返回 null，表示取不到有效值。
      */
     ValidTo?: number;
@@ -3687,7 +3732,7 @@ export interface CreateReleaseFlowRequest {
      */
     NeedRelievedFlowId: string;
     /**
-     * 解除协议内容。
+     * 解除协议内容, 包括解除理由等信息。
      */
     ReliveInfo: RelieveInfo;
     /**
@@ -3695,12 +3740,12 @@ export interface CreateReleaseFlowRequest {
      */
     Agent?: Agent;
     /**
-     * 解除协议的签署人列表(如不指定该参数，默认使用原流程的签署人列表)。 <br/>
-  如需更换原合同中的签署人，可通过指定该签署人的RecipientId编号更换此签署人。(可通过接口<a href="https://qian.tencent.com/developers/companyApis/queryFlows/DescribeFlowInfo/">DescribeFlowInfo</a>查询签署人的RecipientId编号)<br/>
-  解除协议的签署人数量不能多于原流程的签署人数量。<br/>
+     * 替换解除协议的签署人， 如不指定替换签署人,  则使用原流程的签署人。 <br/>
+  如需更换原合同中的企业端签署人，可通过指定该签署人的RecipientId编号更换此企业端签署人。(可通过接口<a href="https://qian.tencent.com/developers/companyApis/queryFlows/DescribeFlowInfo/">DescribeFlowInfo</a>查询签署人的RecipientId编号)<br/>
   
-  `注意：只能更换同企业的签署人。`<br/>
-  `注意：不支持更换个人类型的签署人。`<br/>
+  注意：
+  `只能更换自己企业的签署人,  不支持更换个人类型或者其他企业的签署人。`
+  `可以不指定替换签署人, 使用原流程的签署人 `
      */
     ReleasedApprovers?: Array<ReleasedApprover>;
     /**
@@ -3777,7 +3822,8 @@ export interface SuccessUpdateStaffData {
  */
 export interface CreatePersonAuthCertificateImageRequest {
     /**
-     * 操作人信息
+     * 执行本接口操作的员工信息。
+  注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。`
      */
     Operator: UserInfo;
     /**
@@ -3785,20 +3831,24 @@ export interface CreatePersonAuthCertificateImageRequest {
      */
     UserName: string;
     /**
-     * 身份证件类型取值：
-  ID_CARD 身居民身份证
-  PASSPORT 护照
-  HONGKONG_AND_MACAO 港澳居民来往内地通行证
-  FOREIGN_ID_CARD 外国人永久居留身份证
-  HONGKONG_MACAO_AND_TAIWAN 港澳台居民居住证(格式同居民身份证)
+     * 证件类型，支持以下类型
+  <ul><li> ID_CARD  : 居民身份证 (默认值)</li>
+  <li> PASSPORT  : 护照</li>
+  <li> FOREIGN_ID_CARD  : 外国人永久居留身份证</li>
+  <li> HONGKONG_AND_MACAO  : 港澳居民来往内地通行证</li>
+  <li> HONGKONG_MACAO_AND_TAIWAN  : 港澳台居民居住证(格式同居民身份证)</li></ul>
      */
     IdCardType: string;
     /**
-     * 身份证件号码
+     * 证件号码，应符合以下规则
+  <ul><li>居民身份证号码应为18位字符串，由数字和大写字母X组成（如存在X，请大写）。</li>
+  <li>港澳居民来往内地通行证号码应为9位字符串，第1位为“C”，第2位为英文字母（但“I”、“O”除外），后7位为阿拉伯数字。</li>
+  <li>港澳台居民居住证号码编码规则与中国大陆身份证相同，应为18位字符串。</li></ul>
      */
     IdCardNumber: string;
     /**
-     * 代理企业和员工的信息。 在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。
+     * 代理企业和员工的信息。
+  在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。
      */
     Agent?: Agent;
 }
@@ -4102,6 +4152,12 @@ export interface ApproverInfo {
   注：`此功能可用于与企业内部的审批流程进行关联，支持手动、静默签署合同`
      */
     ApproverNeedSignReview?: boolean;
+    /**
+     * [用PDF文件创建签署流程](https://qian.tencent.com/developers/companyApis/startFlows/CreateFlowByFiles)时,如果设置了外层参数SignBeanTag=1(允许签署过程中添加签署控件),则可通过此参数明确规定合同所使用的签署控件类型（骑缝章、普通章法人章等）和具体的印章（印章ID）或签名方式。
+  
+  注：`限制印章控件或骑缝章控件情况下,仅本企业签署方可以指定具体印章（通过传递ComponentValue,支持多个），他方企业或个人只支持限制控件类型。`
+     */
+    AddSignComponentsLimits?: Array<ComponentLimit>;
 }
 /**
  * CreateFlowSignReview返回参数结构体
@@ -5308,15 +5364,20 @@ export interface UpdateIntegrationEmployeesRequest {
  */
 export interface DescribeFlowBriefsRequest {
     /**
-     * 调用方用户信息，userId 必填
+     * 执行本接口操作的员工信息。
+  注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。`
      */
     Operator: UserInfo;
     /**
-     * 需要查询的流程ID列表，限制最大100个
+     * 查询的合同流程ID列表最多支持100个流程ID。
+  如果某个合同流程ID不存在，系统会跳过此ID的查询，继续查询剩余存在的合同流程。
+  
+  可登录腾讯电子签控制台，在 "合同"->"合同中心" 中查看某个合同的FlowId(在页面中展示为合同ID)。
      */
     FlowIds: Array<string>;
     /**
-     * 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填
+     * 代理企业和员工的信息。
+  在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。
      */
     Agent?: Agent;
 }
@@ -5406,7 +5467,8 @@ export interface DeleteStaffsResult {
  */
 export interface DescribeFlowBriefsResponse {
     /**
-     * 流程列表
+     * 合同流程基础信息列表，包含流程的名称、状态、创建日期等基本信息。
+  注：`与入参 FlowIds 的顺序可能存在不一致的情况。`
      */
     FlowBriefs?: Array<FlowBrief>;
     /**
@@ -5554,27 +5616,24 @@ export interface ExtendAuthInfo {
  */
 export interface RelieveInfo {
     /**
-     * 解除理由，最大支持200个字
+     * 解除理由，长度不能超过200，只能由中文、字母、数字、中文标点和英文标点组成(不支持表情)。
      */
     Reason: string;
     /**
-     * 解除后仍然有效的条款，保留条款，最大支持200个字
+     * 解除后仍然有效的条款，保留条款，长度不能超过200，只能由中文、字母、数字、中文标点和英文标点组成(不支持表情)。
   
      */
     RemainInForceItem?: string;
     /**
-     * 原合同事项处理-费用结算，最大支持200个字
-  
+     * 原合同事项处理-费用结算，长度不能超过200，只能由中文、字母、数字、中文标点和英文标点组成(不支持表情)。
      */
     OriginalExpenseSettlement?: string;
     /**
-     * 原合同事项处理-其他事项，最大支持200个字
-  
+     * 原合同事项处理-其他事项，长度不能超过200，只能由中文、字母、数字、中文标点和英文标点组成(不支持表情)。
      */
     OriginalOtherSettlement?: string;
     /**
-     * 其他约定，最大支持200个字
-  
+     * 其他约定，长度不能超过200，只能由中文、字母、数字、中文标点和英文标点组成(不支持表情)。
      */
     OtherDeals?: string;
 }

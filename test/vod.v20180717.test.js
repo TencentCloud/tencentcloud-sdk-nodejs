@@ -478,6 +478,16 @@ it("vod.v20180717.DescribePrepaidProducts", async function () {
     }
 })
 
+it("vod.v20180717.CreateDomainVerifyRecord", async function () {
+    try {
+       const data = await client.CreateDomainVerifyRecord({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vod.v20180717.DescribeSnapshotByTimeOffsetTemplates", async function () {
     try {
        const data = await client.DescribeSnapshotByTimeOffsetTemplates({})
@@ -858,6 +868,16 @@ it("vod.v20180717.ModifyQualityInspectTemplate", async function () {
     }
 })
 
+it("vod.v20180717.VerifyDomainRecord", async function () {
+    try {
+       const data = await client.VerifyDomainRecord({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vod.v20180717.CreateSuperPlayerConfig", async function () {
     try {
        const data = await client.CreateSuperPlayerConfig({})
@@ -931,6 +951,16 @@ it("vod.v20180717.DescribeContentReviewTemplates", async function () {
 it("vod.v20180717.ModifyHeadTailTemplate", async function () {
     try {
        const data = await client.ModifyHeadTailTemplate({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("vod.v20180717.VerifyDomainOwnershipForConsole", async function () {
+    try {
+       const data = await client.VerifyDomainOwnershipForConsole({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

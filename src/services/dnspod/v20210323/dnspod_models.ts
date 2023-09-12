@@ -2833,7 +2833,7 @@ export interface ModifyRecordBatchDetail {
  */
 export interface DescribeUserDetailResponse {
   /**
-   * 帐户信息
+   * 账户信息
    */
   UserInfo?: UserInfo
   /**

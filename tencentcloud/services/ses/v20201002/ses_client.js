@@ -53,6 +53,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("GetSendEmailStatus", req, cb);
     }
     /**
+     * 根据收件人列表id查询收件人列表中的所有收件人邮箱地址，分页查询，可以根据收件邮箱地址来过滤查询
+     */
+    async ListReceiverDetails(req, cb) {
+        return this.request("ListReceiverDetails", req, cb);
+    }
+    /**
      * 创建收件人列表，收件人列表是发送批量邮件的目标邮件地址列表。创建列表后，需要上传收件人邮箱地址。之后创建发送任务，关联列表，便可以实现批量发送邮件的功能
      */
     async CreateReceiver(req, cb) {

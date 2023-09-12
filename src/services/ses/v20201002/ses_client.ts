@@ -53,12 +53,14 @@ import {
   UpdateEmailIdentityResponse,
   DeleteEmailTemplateRequest,
   DeleteBlackListResponse,
+  ListReceiverDetailsResponse,
   UpdateEmailTemplateRequest,
   SendEmailStatus,
   ListEmailTemplatesRequest,
   CreateReceiverDetailWithDataResponse,
   ReceiverInputData,
   CreateReceiverDetailResponse,
+  ReceiverDetail,
   ListEmailTemplatesResponse,
   SendEmailResponse,
   ListBlackEmailAddressResponse,
@@ -75,6 +77,7 @@ import {
   CycleEmailParam,
   DeleteEmailAddressResponse,
   CreateEmailIdentityResponse,
+  ListReceiverDetailsRequest,
   CreateEmailAddressRequest,
   CreateReceiverDetailRequest,
   CreateEmailTemplateResponse,
@@ -136,6 +139,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: GetSendEmailStatusResponse) => void
   ): Promise<GetSendEmailStatusResponse> {
     return this.request("GetSendEmailStatus", req, cb)
+  }
+
+  /**
+   * 根据收件人列表id查询收件人列表中的所有收件人邮箱地址，分页查询，可以根据收件邮箱地址来过滤查询
+   */
+  async ListReceiverDetails(
+    req: ListReceiverDetailsRequest,
+    cb?: (error: string, rep: ListReceiverDetailsResponse) => void
+  ): Promise<ListReceiverDetailsResponse> {
+    return this.request("ListReceiverDetails", req, cb)
   }
 
   /**

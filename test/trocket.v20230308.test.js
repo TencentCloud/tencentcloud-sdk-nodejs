@@ -18,9 +18,49 @@ const client = new tencentcloud.trocket.v20230308.Client({
 })
 describe("trocket.v20230308.test.js", function () {
 
-it("trocket.v20230308.DescribeInstanceList", async function () {
+it("trocket.v20230308.DescribeTopicStatsOp", async function () {
     try {
-       const data = await client.DescribeInstanceList({})
+       const data = await client.DescribeTopicStatsOp({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("trocket.v20230308.DescribeConsumerGroup", async function () {
+    try {
+       const data = await client.DescribeConsumerGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("trocket.v20230308.CreateTopic", async function () {
+    try {
+       const data = await client.CreateTopic({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("trocket.v20230308.DeleteConsumerGroup", async function () {
+    try {
+       const data = await client.DeleteConsumerGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("trocket.v20230308.ModifyConsumerGroup", async function () {
+    try {
+       const data = await client.ModifyConsumerGroup({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -31,6 +71,36 @@ it("trocket.v20230308.DescribeInstanceList", async function () {
 it("trocket.v20230308.CreateInstance", async function () {
     try {
        const data = await client.CreateInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("trocket.v20230308.DescribeInstanceList", async function () {
+    try {
+       const data = await client.DescribeInstanceList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("trocket.v20230308.DescribeTopic", async function () {
+    try {
+       const data = await client.DescribeTopic({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("trocket.v20230308.ModifyTopic", async function () {
+    try {
+       const data = await client.ModifyTopic({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -61,6 +131,26 @@ it("trocket.v20230308.DeleteInstance", async function () {
 it("trocket.v20230308.DescribeTopicList", async function () {
     try {
        const data = await client.DescribeTopicList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("trocket.v20230308.DeleteTopic", async function () {
+    try {
+       const data = await client.DeleteTopic({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("trocket.v20230308.CreateConsumerGroup", async function () {
+    try {
+       const data = await client.CreateConsumerGroup({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

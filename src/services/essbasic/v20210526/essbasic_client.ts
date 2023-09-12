@@ -76,6 +76,7 @@ import {
   ChannelVerifyPdfRequest,
   CreateChannelFlowEvidenceReportRequest,
   ChannelCancelUserAutoSignEnableUrlRequest,
+  ComponentLimit,
   ChannelVerifyPdfResponse,
   CreateConsoleLoginUrlRequest,
   OrganizationInfo,
