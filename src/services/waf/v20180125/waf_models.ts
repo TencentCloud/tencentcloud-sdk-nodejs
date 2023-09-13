@@ -2660,6 +2660,24 @@ export interface DescribePolicyStatusRequest {
 }
 
 /**
+ * DescribePorts返回参数结构体
+ */
+export interface DescribePortsResponse {
+  /**
+   * http端口列表
+   */
+  HttpPorts: Array<string>
+  /**
+   * https端口列表
+   */
+  HttpsPorts: Array<string>
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * GetAttackTotalCount请求参数结构体
  */
 export interface GetAttackTotalCountRequest {
@@ -2965,6 +2983,20 @@ export interface DescribeAntiInfoLeakRulesRequest {
    * 翻页
    */
   PageInfo?: PageInfo
+}
+
+/**
+ * DescribePorts请求参数结构体
+ */
+export interface DescribePortsRequest {
+  /**
+   * 版本
+   */
+  Edition?: string
+  /**
+   * 实例ID
+   */
+  InstanceID?: string
 }
 
 /**

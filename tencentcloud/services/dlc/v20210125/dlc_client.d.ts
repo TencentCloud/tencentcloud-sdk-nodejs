@@ -52,7 +52,7 @@ export declare class Client extends AbstractClient {
      */
     CreateNotebookSessionStatementSupportBatchSQL(req: CreateNotebookSessionStatementSupportBatchSQLRequest, cb?: (error: string, rep: CreateNotebookSessionStatementSupportBatchSQLResponse) => void): Promise<CreateNotebookSessionStatementSupportBatchSQLResponse>;
     /**
-     * 本接口（DescribeSparkSessionBatchSqlLog）用于获取SparkSQL批任务日志
+     * 本接口（DescribeSparkSessionBatchSqlLog）用于查询Spark SQL批任务日志
      */
     DescribeSparkSessionBatchSqlLog(req: DescribeSparkSessionBatchSqlLogRequest, cb?: (error: string, rep: DescribeSparkSessionBatchSqlLogResponse) => void): Promise<DescribeSparkSessionBatchSqlLogResponse>;
     /**

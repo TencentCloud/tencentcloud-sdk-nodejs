@@ -4,8 +4,13 @@
 export interface CorrectMultiImageResponse {
     /**
      * 接口返回数据
+     * @deprecated
      */
     Data?: CompostionContext;
+    /**
+     * 接口返回数据
+     */
+    ResultData?: CompositionContext;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -66,8 +71,13 @@ export interface ECCResponse {
 export interface EHOCRResponse {
     /**
      * 接口返回数据
+     * @deprecated
      */
     Data?: CompostionContext;
+    /**
+     * 接口返回数据
+     */
+    ResultData?: CompositionContext;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -331,6 +341,30 @@ export interface EHOCRRequest {
      * 异步模式标识，0：同步模式，1：异步模式。默认为同步模式
      */
     IsAsync?: number;
+}
+/**
+ * 图像识别批改接口返回的作文文本信息或批改信息
+ */
+export interface CompositionContext {
+    /**
+     * 作文内容
+     */
+    Content: string;
+    /**
+     * 批改结果
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CorrectData: CorrectData;
+    /**
+     * 任务 id，用于查询接口
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TaskId: string;
+    /**
+     * 图像识别唯一标识，一次识别一个 SessionId
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SessionId: string;
 }
 /**
  * CorrectMultiImage请求参数结构体

@@ -958,6 +958,10 @@ export interface DescribeBackupsRequest {
      * 按照备份文件形式筛选，pkg-打包备份文件，single-单库备份文件
      */
     BackupFormat?: string;
+    /**
+     * 备份存储策略 0-跟随自定义备份保留策略 1-跟随实例生命周期直到实例下线，默认取值0
+     */
+    StorageStrategy?: number;
 }
 /**
  * ModifyDBInstanceProject返回参数结构体
@@ -4542,71 +4546,75 @@ export interface Backup {
     /**
      * 文件名，对于单库备份文件不返回此值；单库备份文件通过DescribeBackupFiles接口获取文件名
      */
-    FileName: string;
+    FileName?: string;
     /**
      * 文件大小，单位 KB，对于单库备份文件不返回此值；单库备份文件通过DescribeBackupFiles接口获取文件大小
      */
-    Size: number;
+    Size?: number;
     /**
      * 备份开始时间
      */
-    StartTime: string;
+    StartTime?: string;
     /**
      * 备份结束时间
      */
-    EndTime: string;
+    EndTime?: string;
     /**
      * 内网下载地址，对于单库备份文件不返回此值；单库备份文件通过DescribeBackupFiles接口获取下载地址
      */
-    InternalAddr: string;
+    InternalAddr?: string;
     /**
      * 外网下载地址，对于单库备份文件不返回此值；单库备份文件通过DescribeBackupFiles接口获取下载地址
      */
-    ExternalAddr: string;
+    ExternalAddr?: string;
     /**
      * 备份文件唯一标识，RestoreInstance接口会用到该字段，对于单库备份文件不返回此值；单库备份文件通过DescribeBackupFiles接口获取可回档的ID
      */
-    Id: number;
+    Id?: number;
     /**
      * 备份文件状态（0-创建中；1-成功；2-失败）
      */
-    Status: number;
+    Status?: number;
     /**
      * 多库备份时的DB列表
      */
-    DBs: Array<string>;
+    DBs?: Array<string>;
     /**
      * 备份策略（0-实例备份；1-多库备份）
      */
-    Strategy: number;
+    Strategy?: number;
+    /**
+     * 备份存储策略 0-跟随自定义备份保留策略 1-跟随实例生命周期直到实例下线
+     */
+    StorageStrategy?: number;
     /**
      * 备份方式，0-定时备份；1-手动临时备份；2-定期备份
      */
-    BackupWay: number;
+    BackupWay?: number;
     /**
      * 备份任务名称，可自定义
      */
-    BackupName: string;
+    BackupName?: string;
     /**
      * 聚合Id，对于打包备份文件不返回此值。通过此值调用DescribeBackupFiles接口，获取单库备份文件的详细信息
      */
-    GroupId: string;
+    GroupId?: string;
     /**
      * 备份文件形式（pkg-打包备份文件，single-单库备份文件）
      */
-    BackupFormat: string;
+    BackupFormat?: string;
     /**
      * 实例当前地域Code
      */
-    Region: string;
+    Region?: string;
     /**
      * 跨地域备份的目的地域下载链接
      */
-    CrossBackupAddr: Array<CrossBackupAddr>;
+    CrossBackupAddr?: Array<CrossBackupAddr>;
     /**
      * 跨地域备份的目标地域和备份状态
      */
-    CrossBackupStatus: Array<CrossRegionStatus>;
+    CrossBackupStatus?: Array<CrossRegionStatus>;
 }
 /**
  * DescribeBackupCommand请求参数结构体
@@ -4948,11 +4956,11 @@ export interface DescribeBackupsResponse {
     /**
      * 备份总数量
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 备份列表详情
      */
-    Backups: Array<Backup>;
+    Backups?: Array<Backup>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -5102,6 +5110,10 @@ export interface CreateBackupRequest {
      * 备份名称，若不填则自动生成“实例ID_备份开始时间戳”
      */
     BackupName?: string;
+    /**
+     * 备份存储策略 0-跟随自定义备份保留策略 1-跟随实例生命周期直到实例下线，默认取值0
+     */
+    StorageStrategy?: number;
 }
 /**
  * SwitchCloudInstanceHA返回参数结构体

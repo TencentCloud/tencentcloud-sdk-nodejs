@@ -6085,15 +6085,15 @@ export interface DescribeTagsOfInstanceIdsResponse {
   /**
    * 分页偏移量。
    */
-  Offset: number
+  Offset?: number
   /**
    * 分页大小。
    */
-  Limit: number
+  Limit?: number
   /**
    * 实例标签信息。
    */
-  Rows: Array<TagsInfoOfInstance>
+  Rows?: Array<TagsInfoOfInstance>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

@@ -766,12 +766,6 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyHeadTailTemplate", req, cb);
     }
     /**
-     * 控制台验证域名归属
-     */
-    async VerifyDomainOwnershipForConsole(req, cb) {
-        return this.request("VerifyDomainOwnershipForConsole", req, cb);
-    }
-    /**
      * 删除用户自定义图片处理模板。
      */
     async DeleteImageProcessingTemplate(req, cb) {

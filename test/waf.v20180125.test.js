@@ -938,6 +938,16 @@ it("waf.v20180125.ModifyCustomWhiteRuleStatus", async function () {
     }
 })
 
+it("waf.v20180125.DescribePorts", async function () {
+    try {
+       const data = await client.DescribePorts({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("waf.v20180125.ModifyHostMode", async function () {
     try {
        const data = await client.ModifyHostMode({})

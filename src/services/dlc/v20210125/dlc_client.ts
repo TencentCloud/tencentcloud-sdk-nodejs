@@ -386,7 +386,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（DescribeSparkSessionBatchSqlLog）用于获取SparkSQL批任务日志
+   * 本接口（DescribeSparkSessionBatchSqlLog）用于查询Spark SQL批任务日志
    */
   async DescribeSparkSessionBatchSqlLog(
     req: DescribeSparkSessionBatchSqlLogRequest,

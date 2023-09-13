@@ -300,18 +300,6 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeExtendedServiceAuthInfos", req, cb);
     }
     /**
-     * 根据产品要求，调整接口目录
-
-新接口：ChannelCreateOrganizationModifyQrCode
-
-老接口目前无线上流量，测试用例已下线处理
-
-生成子客编辑企业信息二维码
-     */
-    async CreateChannelSubOrganizationModifyQrCode(req, cb) {
-        return this.request("CreateChannelSubOrganizationModifyQrCode", req, cb);
-    }
-    /**
      * 此接口（UploadFiles）用于文件上传。<br/>
 适用场景：用于生成pdf资源编号（FileIds）来配合“用PDF创建流程”接口使用，使用场景可详见“用PDF创建流程”接口说明。<br/>
 
@@ -452,8 +440,10 @@ httpProfile.setEndpoint("file.test.ess.tencent.cn");<br/>
         return this.request("CreateSealPolicy", req, cb);
     }
     /**
-     * 通过此接口，创建企业批量签署链接，企业员工点击链接即可跳转控制台进行批量签署。
-如果没有UserId，Name和Mobile必填，对应的员工必须在企业下已经实名，且该员工为批量签署合同中的签署方。
+     * 使用此接口，您可以创建企业批量签署链接，员工只需点击链接即可跳转至控制台进行批量签署。</br>
+附注：
+- 员工必须在企业下完成实名认证，且需作为批量签署合同的签署方。
+- 如有UserId，应以UserId为主要标识；如果没有UserId，则必须填写Name和Mobile信息。
      */
     async CreateOrganizationBatchSignUrl(req, cb) {
         return this.request("CreateOrganizationBatchSignUrl", req, cb);

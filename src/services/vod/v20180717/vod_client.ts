@@ -665,7 +665,6 @@ import {
   CreateRebuildMediaTemplateRequest,
   ImageOperation,
   MediaSubStreamInfoItem,
-  VerifyDomainOwnershipForConsoleRequest,
   MosaicConfigureInfoForUpdate,
   DescribeWatermarkTemplatesResponse,
   WeChatMiniProgramPublishResponse,
@@ -714,7 +713,6 @@ import {
   FaceConfigureInfo,
   AiRecognitionTaskFaceResultOutput,
   DeleteImageProcessingTemplateResponse,
-  VerifyDomainOwnershipForConsoleResponse,
   PornImgReviewTemplateInfoForUpdate,
   CreateWatermarkTemplateResponse,
   PornImgReviewTemplateInfo,
@@ -1895,16 +1893,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyHeadTailTemplateResponse) => void
   ): Promise<ModifyHeadTailTemplateResponse> {
     return this.request("ModifyHeadTailTemplate", req, cb)
-  }
-
-  /**
-   * 控制台验证域名归属
-   */
-  async VerifyDomainOwnershipForConsole(
-    req: VerifyDomainOwnershipForConsoleRequest,
-    cb?: (error: string, rep: VerifyDomainOwnershipForConsoleResponse) => void
-  ): Promise<VerifyDomainOwnershipForConsoleResponse> {
-    return this.request("VerifyDomainOwnershipForConsole", req, cb)
   }
 
   /**

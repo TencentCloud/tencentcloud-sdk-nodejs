@@ -160,7 +160,7 @@ export interface CreateAudioModerationTaskResponse {
      * 该字段用于返回任务创建的结果，具体输出内容请参见TaskResult数据结构的详细描述。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Results: Array<TaskResult>;
+    Results?: Array<TaskResult>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */

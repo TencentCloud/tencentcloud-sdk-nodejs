@@ -958,16 +958,6 @@ it("vod.v20180717.ModifyHeadTailTemplate", async function () {
     }
 })
 
-it("vod.v20180717.VerifyDomainOwnershipForConsole", async function () {
-    try {
-       const data = await client.VerifyDomainOwnershipForConsole({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("vod.v20180717.DeleteImageProcessingTemplate", async function () {
     try {
        const data = await client.DeleteImageProcessingTemplate({})

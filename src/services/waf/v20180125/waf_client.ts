@@ -135,6 +135,7 @@ import {
   DescribeSessionRequest,
   ModifyAreaBanStatusRequest,
   DescribePolicyStatusRequest,
+  DescribePortsResponse,
   GetAttackTotalCountRequest,
   DescribeAccessFastAnalysisRequest,
   DeleteIpAccessControlRequest,
@@ -149,6 +150,7 @@ import {
   ModifyWafAutoDenyStatusResponse,
   ModifyWafThreatenIntelligenceRequest,
   DescribeAntiInfoLeakRulesRequest,
+  DescribePortsRequest,
   ModifyHostModeRequest,
   DescribeWafAutoDenyStatusResponse,
   ModifyAntiFakeUrlRequest,
@@ -1230,6 +1232,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyCustomWhiteRuleStatusResponse) => void
   ): Promise<ModifyCustomWhiteRuleStatusResponse> {
     return this.request("ModifyCustomWhiteRuleStatus", req, cb)
+  }
+
+  /**
+   * 获取非标端口列表
+   */
+  async DescribePorts(
+    req: DescribePortsRequest,
+    cb?: (error: string, rep: DescribePortsResponse) => void
+  ): Promise<DescribePortsResponse> {
+    return this.request("DescribePorts", req, cb)
   }
 
   /**

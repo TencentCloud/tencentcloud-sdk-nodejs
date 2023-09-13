@@ -2904,7 +2904,12 @@ export interface HostItem {
    * 专用宿主机所属的围笼ID。该字段仅对金融专区围笼内的专用宿主机有效。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CageId: string
+  CageId?: string
+  /**
+   * 专用宿主机关联的标签列表。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Tags?: Array<Tag>
 }
 
 /**

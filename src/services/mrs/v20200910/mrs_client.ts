@@ -269,8 +269,9 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 将PDF格式的体检报告文件结构化,解析关键信息.
-   */
+     * 将PDF格式的体检报告文件结构化，解析关键信息。
+注意：该接口是按照体检报告 PDF 页面数量统计次数，不是按照 PDF 文件数量统计次数。通过该接口传入的报告必须是体检报告，非体检报告可能无法正确解析。
+     */
   async TurnPDFToObject(
     req: TurnPDFToObjectRequest,
     cb?: (error: string, rep: TurnPDFToObjectResponse) => void

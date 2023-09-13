@@ -94,7 +94,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateNotebookSessionStatementSupportBatchSQL", req, cb);
     }
     /**
-     * 本接口（DescribeSparkSessionBatchSqlLog）用于获取SparkSQL批任务日志
+     * 本接口（DescribeSparkSessionBatchSqlLog）用于查询Spark SQL批任务日志
      */
     async DescribeSparkSessionBatchSqlLog(req, cb) {
         return this.request("DescribeSparkSessionBatchSqlLog", req, cb);

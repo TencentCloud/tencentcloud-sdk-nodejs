@@ -230,6 +230,7 @@ export { vrs } from "./vrs";
 export { waf } from "./waf";
 export { wav } from "./wav";
 export { wedata } from "./wedata";
+export { weilingwith } from "./weilingwith";
 export { wss } from "./wss";
 export { yinsuda } from "./yinsuda";
 export { youmall } from "./youmall";

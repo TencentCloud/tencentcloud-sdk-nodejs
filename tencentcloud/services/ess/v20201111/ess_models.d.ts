@@ -2622,19 +2622,6 @@ export interface FormField {
     ComponentName?: string;
 }
 /**
- * CreateChannelSubOrganizationModifyQrCode请求参数结构体
- */
-export interface CreateChannelSubOrganizationModifyQrCodeRequest {
-    /**
-     * 操作人信息，userId必填
-     */
-    Operator: UserInfo;
-    /**
-     * 应用编号
-     */
-    ApplicationId: string;
-}
-/**
  * 用户信息
  */
 export interface UserInfo {
@@ -3224,65 +3211,23 @@ export interface CreateDocumentRequest {
     ClientToken?: string;
 }
 /**
- * 此结构体(FlowDetailInfo)描述的是合同(流程)的详细信息
+ * 催办接口返回的详细信息。
  */
-export interface FlowDetailInfo {
+export interface RemindFlowRecords {
     /**
-     * 合同(流程)的ID
+     * 合同流程是否可以催办：
+  true - 可以，false - 不可以。
+  若无法催办，将返回RemindMessage以解释原因。
+     */
+    CanRemind?: boolean;
+    /**
+     * 合同流程ID，为32位字符串。
      */
     FlowId?: string;
     /**
-     * 合同(流程)的名字
+     * 在合同流程无法催办的情况下，系统将返回RemindMessage以阐述原因。
      */
-    FlowName?: string;
-    /**
-     * 合同(流程)的类型
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    FlowType?: string;
-    /**
-     * 流程状态
-  - 0 还没有发起
-  - 1 待签署
-  - 2 部分签署
-  - 3 已拒签
-  - 4 已签署
-  - 5 已过期
-  - 6 已撤销
-  - 7 还没有预发起
-  - 8 等待填写
-  - 9 部分填写
-  - 10 拒填
-  - 21 已解除
-     */
-    FlowStatus?: number;
-    /**
-     * 合同(流程)的信息
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    FlowMessage?: string;
-    /**
-     * 流程的描述
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    FlowDescription?: string;
-    /**
-     * 合同(流程)的创建时间戳，单位秒
-     */
-    CreatedOn?: number;
-    /**
-     * 合同(流程)的签署方数组
-     */
-    FlowApproverInfos?: Array<FlowApproverDetail>;
-    /**
-     * 合同(流程)的关注方信息列表
-     */
-    CcInfos?: Array<FlowApproverDetail>;
-    /**
-     * 合同发起人UserId
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Creator?: string;
+    RemindMessage?: string;
 }
 /**
  * CreatePreparedPersonalEsign返回参数结构体
@@ -3319,7 +3264,8 @@ export interface DescribeOrganizationSealsResponse {
  */
 export interface CreateEmbedWebUrlRequest {
     /**
-     * 操作者信息
+     * 执行本接口操作的员工信息。
+  <br/>注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。
      */
     Operator: UserInfo;
     /**
@@ -3344,7 +3290,8 @@ export interface CreateEmbedWebUrlRequest {
      */
     BusinessId?: string;
     /**
-     * 代理相关应用信息，如集团主企业代子企业操作
+     * 代理企业和员工的信息。
+  <br/>在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。
      */
     Agent?: Agent;
     /**
@@ -3352,7 +3299,7 @@ export interface CreateEmbedWebUrlRequest {
      */
     Reviewer?: ReviewerInfo;
     /**
-     * 个性化参数
+     * 个性化参数，用于控制页面展示内容
      */
     Option?: EmbedUrlOption;
 }
@@ -3784,21 +3731,65 @@ export interface CreateIntegrationUserRolesRequest {
     Agent?: Agent;
 }
 /**
- * CreateChannelSubOrganizationModifyQrCode返回参数结构体
+ * 此结构体(FlowDetailInfo)描述的是合同(流程)的详细信息
  */
-export interface CreateChannelSubOrganizationModifyQrCodeResponse {
+export interface FlowDetailInfo {
     /**
-     * 二维码下载链接
+     * 合同(流程)的ID
      */
-    QrCodeUrl?: string;
+    FlowId?: string;
     /**
-     * 二维码失效时间 UNIX 时间戳 精确到秒
+     * 合同(流程)的名字
      */
-    ExpiredTime?: number;
+    FlowName?: string;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     * 合同(流程)的类型
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    RequestId?: string;
+    FlowType?: string;
+    /**
+     * 流程状态
+  - 0 还没有发起
+  - 1 待签署
+  - 2 部分签署
+  - 3 已拒签
+  - 4 已签署
+  - 5 已过期
+  - 6 已撤销
+  - 7 还没有预发起
+  - 8 等待填写
+  - 9 部分填写
+  - 10 拒填
+  - 21 已解除
+     */
+    FlowStatus?: number;
+    /**
+     * 合同(流程)的信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    FlowMessage?: string;
+    /**
+     * 流程的描述
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    FlowDescription?: string;
+    /**
+     * 合同(流程)的创建时间戳，单位秒
+     */
+    CreatedOn?: number;
+    /**
+     * 合同(流程)的签署方数组
+     */
+    FlowApproverInfos?: Array<FlowApproverDetail>;
+    /**
+     * 合同(流程)的关注方信息列表
+     */
+    CcInfos?: Array<FlowApproverDetail>;
+    /**
+     * 合同发起人UserId
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Creator?: string;
 }
 /**
  * 更新员工信息成功返回的数据信息
@@ -4282,11 +4273,11 @@ export interface CreateUserAutoSignEnableUrlRequest {
  */
 export interface CreateOrganizationBatchSignUrlResponse {
     /**
-     * 批量签署入口链接
+     * 批量签署入口链接，用户可使用这个链接跳转到控制台页面对合同进行签署操作。
      */
     SignUrl?: string;
     /**
-     * 链接过期时间戳
+     * 链接过期截止时间，格式为Unix标准时间戳（秒），默认为7天后截止。
      */
     ExpiredTime?: number;
     /**
@@ -4307,25 +4298,6 @@ export interface DescribeIntegrationMainOrganizationUserResponse {
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
-}
-/**
- * 催办接口返回的详细信息。
- */
-export interface RemindFlowRecords {
-    /**
-     * 合同流程是否可以催办：
-  true - 可以，false - 不可以。
-  若无法催办，将返回RemindMessage以解释原因。
-     */
-    CanRemind?: boolean;
-    /**
-     * 合同流程ID，为32位字符串。
-     */
-    FlowId?: string;
-    /**
-     * 在合同流程无法催办的情况下，系统将返回RemindMessage以阐述原因。
-     */
-    RemindMessage?: string;
 }
 /**
  * CancelUserAutoSignEnableUrl请求参数结构体
@@ -4449,27 +4421,37 @@ export interface DeleteSealPoliciesRequest {
  */
 export interface CreateOrganizationBatchSignUrlRequest {
     /**
-     * 调用方用户信息，UserId 必填，支持填入集团子公司经办人UserId。
+     * 执行本接口操作的员工信息。使用此接口时，必须填写userId。
+  支持填入集团子公司经办人 userId 代发合同。
+  
+  注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。`
      */
     Operator: UserInfo;
     /**
-     * 指定需要进行批量签署的流程id，数量1-100，填写后用户将通过链接对这些合同进行批量签署。
+     * 请指定需执行批量签署的流程ID，数量范围为1-100。</br>
+  您可登录腾讯电子签控制台，浏览 "合同"->"合同中心" 以查阅某一合同的FlowId（在页面中显示为合同ID）。</br>
+  用户将利用链接对这些合同实施批量操作。
      */
     FlowIds: Array<string>;
     /**
-     * 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填。
+     * 代理企业和员工的信息。
+  在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。
      */
     Agent?: Agent;
     /**
-     * 员工的UserId，该UserId对应的员工必须已经加入企业并实名，Name和Mobile为空时该字段不能为空。（优先使用UserId对应的员工）
+     * 员工在腾讯电子签平台的独特身份标识，为32位字符串。</br>
+  您可登录腾讯电子签控制台，在 "更多能力"->"组织管理" 中查阅某位员工的UserId（在页面中显示为用户ID）。</br>
+  UserId必须是传入合同（FlowId）中的签署人。
+  - 1. 若UserId为空，Name和Mobile 必须提供。
+  - 2. 若UserId 与 Name，Mobile均存在，将优先采用UserId对应的员工。
      */
     UserId?: string;
     /**
-     * 员工姓名，该字段需要与Mobile组合使用，UserId为空时该字段不能为空。（UserId为空时，使用Name和Mbile对应的员工）
+     * 员工姓名，必须与手机号码一起使用。</br> 如果UserId为空，则此字段不能为空。同时，姓名和手机号码必须与传入合同（FlowId）中的签署人信息一致。
      */
     Name?: string;
     /**
-     * 员工手机号码，该字段需要与Name组合使用，UserId为空时该字段不能为空。（UserId为空时，使用Name和Mbile对应的员工）
+     * 员工手机号，必须与姓名一起使用。</br> 如果UserId为空，则此字段不能为空。同时，姓名和手机号码必须与传入合同（FlowId）中的签署人信息一致。
      */
     Mobile?: string;
 }
@@ -4605,10 +4587,11 @@ export interface DeleteIntegrationDepartmentRequest {
  */
 export interface WebThemeConfig {
     /**
-     * 是否页面底部显示电子签logo
-  <br/>true：允许在页面底部隐藏电子签logo
-  <br/>false：不允许允许在页面底部隐藏电子签logo
-  <br/>默认false，不隐藏logo
+     * 是否显示页面底部电子签logo，取值如下：
+  <ul>
+  <li> **true**：页面底部显示电子签logo</li>
+  <li> **false**：页面底部不显示电子签logo（默认）</li>
+  </ul>
      */
     DisplaySignBrandLogo?: boolean;
     /**
@@ -4827,7 +4810,7 @@ export interface ApproverOption {
 export interface CreateEmbedWebUrlResponse {
     /**
      * 嵌入的web链接，有效期：5分钟
-  EmbedType=PREVIEW_CC_FLOW，该url为h5链接
+  <br/>EmbedType=PREVIEW_CC_FLOW，该url为h5链接
      */
     WebUrl?: string;
     /**
@@ -5661,17 +5644,18 @@ export interface EmbedUrlOption {
  */
 export interface CreateBatchCancelFlowUrlRequest {
     /**
-     * 调用方用户信息，userId 必填
+     * 执行本接口操作的员工信息。
+  <br/>注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。
      */
     Operator: UserInfo;
     /**
      * 需要执行撤回的流程(合同)的编号列表，最多100个.
-  列表中的流程(合同)编号不要重复.
+  <br>列表中的流程(合同)编号不要重复.
      */
     FlowIds: Array<string>;
     /**
-     * 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填
-  
+     * 代理企业和员工的信息。
+  <br/>在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。
      */
     Agent?: Agent;
 }

@@ -589,6 +589,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyCustomWhiteRuleStatus", req, cb);
     }
     /**
+     * 获取非标端口列表
+     */
+    async DescribePorts(req, cb) {
+        return this.request("DescribePorts", req, cb);
+    }
+    /**
      * clb-waf设置防护域名防护状态
      */
     async ModifyHostMode(req, cb) {

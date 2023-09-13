@@ -16200,19 +16200,6 @@ export interface MediaSubStreamInfoItem {
     Size?: number;
 }
 /**
- * VerifyDomainOwnershipForConsole请求参数结构体
- */
-export interface VerifyDomainOwnershipForConsoleRequest {
-    /**
-     * 需要接入点播的域名。
-     */
-    Domain: string;
-    /**
-     * 需要开启加速的区域： <li>Mainland: 中国大陆地区</li> <li>Internation: 海外地区及港澳台</li> <li>Global: 全球</li> 不填会根据用户注册腾讯云时的地域信息自动判断 Mainland 或 Internation
-     */
-    AccelerateArea: string;
-}
-/**
  * 视频画面马赛克检测的控制参数。
  */
 export interface MosaicConfigureInfoForUpdate {
@@ -17549,15 +17536,6 @@ export interface AiRecognitionTaskFaceResultOutput {
  * DeleteImageProcessingTemplate返回参数结构体
  */
 export interface DeleteImageProcessingTemplateResponse {
-    /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
-/**
- * VerifyDomainOwnershipForConsole返回参数结构体
- */
-export interface VerifyDomainOwnershipForConsoleResponse {
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */

@@ -33,6 +33,7 @@ import {
   CompostionContext,
   DescribeTaskResponse,
   EHOCRRequest,
+  CompositionContext,
   CorrectMultiImageRequest,
 } from "./ecc_models"
 
