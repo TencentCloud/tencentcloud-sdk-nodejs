@@ -73,6 +73,7 @@ import {
   DeleteCloudNativeAPIGatewayServiceRateLimitRequest,
   CloudNativeAPIGatewayVpcConfig,
   CloudAPIGatewayCanaryRuleList,
+  DescribeCloudNativeAPIGatewayConfigResponse,
   KongRoutePreview,
   CloudNativeAPIGatewayRateLimitDetail,
   CreateCloudNativeAPIGatewayRouteResponse,
@@ -81,6 +82,7 @@ import {
   DescribeCloudNativeAPIGatewaysRequest,
   AutoScalerPolicy,
   DescribeNacosServerInterfacesResponse,
+  DescribeCloudNativeAPIGatewayConfigResult,
   KVMapping,
   RateLimitResponse,
   DescribeCloudNativeAPIGatewayServiceRateLimitResponse,
@@ -90,6 +92,7 @@ import {
   ModifyNativeGatewayServerGroupRequest,
   DescribeCloudNativeAPIGatewayRouteRateLimitRequest,
   DescribeOneCloudNativeAPIGatewayServiceRequest,
+  DescribeCloudNativeAPIGatewayConfigRequest,
   CloudNativeAPIGatewayStrategy,
   DescribeCloudNativeAPIGatewaysResponse,
   UpdateEngineInternetAccessResponse,
@@ -109,9 +112,10 @@ import {
   CloudNativeAPIGatewayStrategyAutoScalerConfigMetric,
   CloudNativeAPIGatewayNode,
   UpdateCloudNativeAPIGatewaySpecResponse,
-  DescribeGatewayInstancePortResult,
+  CloudNativeAPIGatewayConfig,
   DescribeZookeeperServerInterfacesResponse,
   DescribeNativeGatewayServerGroupsRequest,
+  DescribeGatewayInstancePortResult,
   DeleteCloudNativeAPIGatewayRequest,
   EngineAdmin,
   PolarisLimiterAddress,
@@ -120,6 +124,7 @@ import {
   DeleteCloudNativeAPIGatewayResponse,
   KongServices,
   ModifyCloudNativeAPIGatewayResponse,
+  NetworkAccessControl,
   DescribeZookeeperServerInterfacesRequest,
   DescribeCloudNativeAPIGatewayRouteRateLimitResponse,
   UpdateCloudNativeAPIGatewayResult,
@@ -374,13 +379,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改云原生API网关实例的节点规格信息，比如节点扩缩容或者升降配
+   * 修改云原生网关路由
    */
-  async UpdateCloudNativeAPIGatewaySpec(
-    req: UpdateCloudNativeAPIGatewaySpecRequest,
-    cb?: (error: string, rep: UpdateCloudNativeAPIGatewaySpecResponse) => void
-  ): Promise<UpdateCloudNativeAPIGatewaySpecResponse> {
-    return this.request("UpdateCloudNativeAPIGatewaySpec", req, cb)
+  async ModifyCloudNativeAPIGatewayRoute(
+    req: ModifyCloudNativeAPIGatewayRouteRequest,
+    cb?: (error: string, rep: ModifyCloudNativeAPIGatewayRouteResponse) => void
+  ): Promise<ModifyCloudNativeAPIGatewayRouteResponse> {
+    return this.request("ModifyCloudNativeAPIGatewayRoute", req, cb)
   }
 
   /**
@@ -414,13 +419,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询云原生网关的限流插件(服务)
+   * 获取云原生API网关实例网络配置信息
    */
-  async DescribeCloudNativeAPIGatewayServiceRateLimit(
-    req: DescribeCloudNativeAPIGatewayServiceRateLimitRequest,
-    cb?: (error: string, rep: DescribeCloudNativeAPIGatewayServiceRateLimitResponse) => void
-  ): Promise<DescribeCloudNativeAPIGatewayServiceRateLimitResponse> {
-    return this.request("DescribeCloudNativeAPIGatewayServiceRateLimit", req, cb)
+  async DescribeCloudNativeAPIGatewayConfig(
+    req: DescribeCloudNativeAPIGatewayConfigRequest,
+    cb?: (error: string, rep: DescribeCloudNativeAPIGatewayConfigResponse) => void
+  ): Promise<DescribeCloudNativeAPIGatewayConfigResponse> {
+    return this.request("DescribeCloudNativeAPIGatewayConfig", req, cb)
   }
 
   /**
@@ -554,13 +559,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改云原生网关路由
+   * 查询引擎实例访问地址
    */
-  async ModifyCloudNativeAPIGatewayRoute(
-    req: ModifyCloudNativeAPIGatewayRouteRequest,
-    cb?: (error: string, rep: ModifyCloudNativeAPIGatewayRouteResponse) => void
-  ): Promise<ModifyCloudNativeAPIGatewayRouteResponse> {
-    return this.request("ModifyCloudNativeAPIGatewayRoute", req, cb)
+  async DescribeSREInstanceAccessAddress(
+    req: DescribeSREInstanceAccessAddressRequest,
+    cb?: (error: string, rep: DescribeSREInstanceAccessAddressResponse) => void
+  ): Promise<DescribeSREInstanceAccessAddressResponse> {
+    return this.request("DescribeSREInstanceAccessAddress", req, cb)
   }
 
   /**
@@ -584,12 +589,22 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询引擎实例访问地址
+   * 修改云原生API网关实例的节点规格信息，比如节点扩缩容或者升降配
    */
-  async DescribeSREInstanceAccessAddress(
-    req: DescribeSREInstanceAccessAddressRequest,
-    cb?: (error: string, rep: DescribeSREInstanceAccessAddressResponse) => void
-  ): Promise<DescribeSREInstanceAccessAddressResponse> {
-    return this.request("DescribeSREInstanceAccessAddress", req, cb)
+  async UpdateCloudNativeAPIGatewaySpec(
+    req: UpdateCloudNativeAPIGatewaySpecRequest,
+    cb?: (error: string, rep: UpdateCloudNativeAPIGatewaySpecResponse) => void
+  ): Promise<UpdateCloudNativeAPIGatewaySpecResponse> {
+    return this.request("UpdateCloudNativeAPIGatewaySpec", req, cb)
+  }
+
+  /**
+   * 查询云原生网关的限流插件(服务)
+   */
+  async DescribeCloudNativeAPIGatewayServiceRateLimit(
+    req: DescribeCloudNativeAPIGatewayServiceRateLimitRequest,
+    cb?: (error: string, rep: DescribeCloudNativeAPIGatewayServiceRateLimitResponse) => void
+  ): Promise<DescribeCloudNativeAPIGatewayServiceRateLimitResponse> {
+    return this.request("DescribeCloudNativeAPIGatewayServiceRateLimit", req, cb)
   }
 }

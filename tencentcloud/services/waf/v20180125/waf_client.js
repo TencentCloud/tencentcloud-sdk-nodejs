@@ -529,6 +529,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeHostLimit", req, cb);
     }
     /**
+     * 获取套餐实例的弹性qps上限
+     */
+    async GetInstanceQpsLimit(req, cb) {
+        return this.request("GetInstanceQpsLimit", req, cb);
+    }
+    /**
      * 本接口用于删除访问日志导出
      */
     async DeleteAccessExport(req, cb) {

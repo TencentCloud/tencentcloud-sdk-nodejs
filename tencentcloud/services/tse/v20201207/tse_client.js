@@ -148,10 +148,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeNacosServerInterfaces", req, cb);
     }
     /**
-     * 修改云原生API网关实例的节点规格信息，比如节点扩缩容或者升降配
+     * 修改云原生网关路由
      */
-    async UpdateCloudNativeAPIGatewaySpec(req, cb) {
-        return this.request("UpdateCloudNativeAPIGatewaySpec", req, cb);
+    async ModifyCloudNativeAPIGatewayRoute(req, cb) {
+        return this.request("ModifyCloudNativeAPIGatewayRoute", req, cb);
     }
     /**
      * 查询Zookeeper类型注册引擎实例副本信息
@@ -172,10 +172,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeSREInstances", req, cb);
     }
     /**
-     * 查询云原生网关的限流插件(服务)
+     * 获取云原生API网关实例网络配置信息
      */
-    async DescribeCloudNativeAPIGatewayServiceRateLimit(req, cb) {
-        return this.request("DescribeCloudNativeAPIGatewayServiceRateLimit", req, cb);
+    async DescribeCloudNativeAPIGatewayConfig(req, cb) {
+        return this.request("DescribeCloudNativeAPIGatewayConfig", req, cb);
     }
     /**
      * 查询云原生网关的限流插件(路由)
@@ -256,10 +256,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeNativeGatewayServerGroups", req, cb);
     }
     /**
-     * 修改云原生网关路由
+     * 查询引擎实例访问地址
      */
-    async ModifyCloudNativeAPIGatewayRoute(req, cb) {
-        return this.request("ModifyCloudNativeAPIGatewayRoute", req, cb);
+    async DescribeSREInstanceAccessAddress(req, cb) {
+        return this.request("DescribeSREInstanceAccessAddress", req, cb);
     }
     /**
      * 删除网关实例分组
@@ -274,10 +274,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeCloudNativeAPIGatewayCanaryRules", req, cb);
     }
     /**
-     * 查询引擎实例访问地址
+     * 修改云原生API网关实例的节点规格信息，比如节点扩缩容或者升降配
      */
-    async DescribeSREInstanceAccessAddress(req, cb) {
-        return this.request("DescribeSREInstanceAccessAddress", req, cb);
+    async UpdateCloudNativeAPIGatewaySpec(req, cb) {
+        return this.request("UpdateCloudNativeAPIGatewaySpec", req, cb);
+    }
+    /**
+     * 查询云原生网关的限流插件(服务)
+     */
+    async DescribeCloudNativeAPIGatewayServiceRateLimit(req, cb) {
+        return this.request("DescribeCloudNativeAPIGatewayServiceRateLimit", req, cb);
     }
 }
 exports.Client = Client;

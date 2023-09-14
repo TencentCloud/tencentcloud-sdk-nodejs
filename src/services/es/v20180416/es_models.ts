@@ -40,6 +40,11 @@ export interface TaskDetail {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ElapsedTime: number
+  /**
+   * 任务进度详情
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProcessInfo?: ProcessDetail
 }
 
 /**
@@ -239,7 +244,7 @@ export interface StartLogstashPipelinesRequest {
 }
 
 /**
- * ES公网访问访问控制信息
+ * ES公网访问控制信息
  */
 export interface EsPublicAcl {
   /**
@@ -560,7 +565,7 @@ export interface UpdateDiagnoseSettingsRequest {
    */
   Status?: number
   /**
-   * 智能运维每天定时巡检时间
+   * 智能运维每天定时巡检时间，时间格式为HH:00:00，例如15:00:00
    */
   CronTime?: string
 }
@@ -791,6 +796,11 @@ export interface Operation {
    * 操作进度
    */
   Progress: number
+  /**
+   * 操作者Uin
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SubAccountUin?: string
 }
 
 /**
@@ -948,7 +958,7 @@ export interface UpgradeLicenseResponse {
    * 订单号
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DealName: string
+  DealName?: string
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1206,7 +1216,7 @@ export interface UpgradeLicenseRequest {
    */
   VoucherIds?: Array<string>
   /**
-   * 6.8（及以上版本）基础版是否开启xpack security认证<li>1：不开启</li><li>2：开启</li>
+   * 6.8（及以上版本）基础版是否开启xpack security认证<li>1：不开启</li><li>2：开启</li><li>不传参时会默认维持原状，传参时需注意只能由不开启变为开启，无法由开启变为不开启</li>
    */
   BasicSecurityType?: number
   /**
@@ -1233,7 +1243,7 @@ export interface UpdateInstanceResponse {
    * 订单号
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DealName: string
+  DealName?: string
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1553,19 +1563,19 @@ export interface UpdateDictionariesRequest {
    */
   InstanceId: string
   /**
-   * IK分词主词典COS地址
+   * 安装时填IK分词主词典COS地址，删除时填词典名如test.dic
    */
   IkMainDicts?: Array<string>
   /**
-   * IK分词停用词词典COS地址
+   * 安装时填IK分词停用词词典COS地址，删除时填词典名如test.dic
    */
   IkStopwords?: Array<string>
   /**
-   * 同义词词典COS地址
+   * 安装时填同义词词典COS地址，删除时填词典名如test.dic
    */
   Synonym?: Array<string>
   /**
-   * QQ分词词典COS地址
+   * 安装时填QQ分词词典COS地址，删除时填词典名如test.dic
    */
   QQDict?: Array<string>
   /**
@@ -1909,6 +1919,195 @@ export interface UpdateDictionariesResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 任务进度详情
+ */
+export interface ProcessDetail {
+  /**
+   * 已完成数量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Completed?: number
+  /**
+   * 剩余数量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Remain?: number
+  /**
+   * 总数量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Total?: number
+  /**
+   * 任务类型：
+60：重启型任务
+70：分片迁移型任务
+80：节点变配任务
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskType?: number
+}
+
+/**
+ * DeleteIndex返回参数结构体
+ */
+export interface DeleteIndexResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * UpdatePlugins返回参数结构体
+ */
+export interface UpdatePluginsResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeInstances请求参数结构体
+ */
+export interface DescribeInstancesRequest {
+  /**
+   * 集群实例所属可用区，不传则默认所有可用区
+   */
+  Zone?: string
+  /**
+   * 集群实例ID列表
+   */
+  InstanceIds?: Array<string>
+  /**
+   * 集群实例名称列表
+   */
+  InstanceNames?: Array<string>
+  /**
+   * 分页起始值, 默认值0
+   */
+  Offset?: number
+  /**
+   * 分页大小，默认值20
+   */
+  Limit?: number
+  /**
+   * 排序字段<li>1：实例ID</li><li>2：实例名称</li><li>3：可用区</li><li>4：创建时间</li>若orderByKey未传递则按创建时间降序排序
+   */
+  OrderByKey?: number
+  /**
+   * 排序方式<li>0：升序</li><li>1：降序</li>若传递了orderByKey未传递orderByType, 则默认升序
+   */
+  OrderByType?: number
+  /**
+   * 节点标签信息列表
+   */
+  TagList?: Array<TagInfo>
+  /**
+   * 私有网络vip列表
+   */
+  IpList?: Array<string>
+  /**
+   * 可用区列表
+   */
+  ZoneList?: Array<string>
+  /**
+   * 健康状态筛列表:0表示绿色，1表示黄色，2表示红色,-1表示未知
+   */
+  HealthStatus?: Array<number | bigint>
+  /**
+   * Vpc列表 筛选项
+   */
+  VpcIds?: Array<string>
+}
+
+/**
+ * ES 词库信息
+ */
+export interface EsDictionaryInfo {
+  /**
+   * 启用词词典列表
+   */
+  MainDict: Array<DictInfo>
+  /**
+   * 停用词词典列表
+   */
+  Stopwords: Array<DictInfo>
+  /**
+   * QQ分词词典列表
+   */
+  QQDict: Array<DictInfo>
+  /**
+   * 同义词词典列表
+   */
+  Synonym: Array<DictInfo>
+  /**
+   * 更新词典类型
+   */
+  UpdateType: string
+}
+
+/**
+ * DescribeLogstashPipelines请求参数结构体
+ */
+export interface DescribeLogstashPipelinesRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+}
+
+/**
+ * RestartNodes请求参数结构体
+ */
+export interface RestartNodesRequest {
+  /**
+   * 集群实例ID
+   */
+  InstanceId: string
+  /**
+   * 节点名称列表
+   */
+  NodeNames: Array<string>
+  /**
+   * 是否强制重启
+   */
+  ForceRestart?: boolean
+  /**
+   * 可选重启模式"in-place","blue-green"，分别表示重启，蓝绿重启；默认值为"in-place"
+   */
+  RestartMode?: string
+  /**
+   * 节点状态，在蓝绿模式中使用；离线节点蓝绿有风险
+   */
+  IsOffline?: boolean
+}
+
+/**
+ * GetRequestTargetNodeTypes请求参数结构体
+ */
+export interface GetRequestTargetNodeTypesRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+}
+
+/**
+ * ModifyEsVipSecurityGroup请求参数结构体
+ */
+export interface ModifyEsVipSecurityGroupRequest {
+  /**
+   * es集群的实例id
+   */
+  InstanceId: string
+  /**
+   * 安全组id列表
+   */
+  SecurityGroupIds?: Array<string>
 }
 
 /**
@@ -2299,166 +2498,6 @@ RENEW_FLAG_DEFAULT：不自动续费
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CdcId?: string
-}
-
-/**
- * DeleteIndex返回参数结构体
- */
-export interface DeleteIndexResponse {
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * UpdatePlugins返回参数结构体
- */
-export interface UpdatePluginsResponse {
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DescribeInstances请求参数结构体
- */
-export interface DescribeInstancesRequest {
-  /**
-   * 集群实例所属可用区，不传则默认所有可用区
-   */
-  Zone?: string
-  /**
-   * 集群实例ID列表
-   */
-  InstanceIds?: Array<string>
-  /**
-   * 集群实例名称列表
-   */
-  InstanceNames?: Array<string>
-  /**
-   * 分页起始值, 默认值0
-   */
-  Offset?: number
-  /**
-   * 分页大小，默认值20
-   */
-  Limit?: number
-  /**
-   * 排序字段<li>1：实例ID</li><li>2：实例名称</li><li>3：可用区</li><li>4：创建时间</li>若orderByKey未传递则按创建时间降序排序
-   */
-  OrderByKey?: number
-  /**
-   * 排序方式<li>0：升序</li><li>1：降序</li>若传递了orderByKey未传递orderByType, 则默认升序
-   */
-  OrderByType?: number
-  /**
-   * 节点标签信息列表
-   */
-  TagList?: Array<TagInfo>
-  /**
-   * 私有网络vip列表
-   */
-  IpList?: Array<string>
-  /**
-   * 可用区列表
-   */
-  ZoneList?: Array<string>
-  /**
-   * 健康状态筛列表:0表示绿色，1表示黄色，2表示红色,-1表示未知
-   */
-  HealthStatus?: Array<number | bigint>
-  /**
-   * Vpc列表 筛选项
-   */
-  VpcIds?: Array<string>
-}
-
-/**
- * ES 词库信息
- */
-export interface EsDictionaryInfo {
-  /**
-   * 启用词词典列表
-   */
-  MainDict: Array<DictInfo>
-  /**
-   * 停用词词典列表
-   */
-  Stopwords: Array<DictInfo>
-  /**
-   * QQ分词词典列表
-   */
-  QQDict: Array<DictInfo>
-  /**
-   * 同义词词典列表
-   */
-  Synonym: Array<DictInfo>
-  /**
-   * 更新词典类型
-   */
-  UpdateType: string
-}
-
-/**
- * DescribeLogstashPipelines请求参数结构体
- */
-export interface DescribeLogstashPipelinesRequest {
-  /**
-   * 实例ID
-   */
-  InstanceId: string
-}
-
-/**
- * RestartNodes请求参数结构体
- */
-export interface RestartNodesRequest {
-  /**
-   * 集群实例ID
-   */
-  InstanceId: string
-  /**
-   * 节点名称列表
-   */
-  NodeNames: Array<string>
-  /**
-   * 是否强制重启
-   */
-  ForceRestart?: boolean
-  /**
-   * 可选重启模式"in-place","blue-green"，分别表示重启，蓝绿重启；默认值为"in-place"
-   */
-  RestartMode?: string
-  /**
-   * 节点状态，在蓝绿模式中使用；离线节点蓝绿有风险
-   */
-  IsOffline?: boolean
-}
-
-/**
- * GetRequestTargetNodeTypes请求参数结构体
- */
-export interface GetRequestTargetNodeTypesRequest {
-  /**
-   * 实例ID
-   */
-  InstanceId: string
-}
-
-/**
- * ModifyEsVipSecurityGroup请求参数结构体
- */
-export interface ModifyEsVipSecurityGroupRequest {
-  /**
-   * es集群的实例id
-   */
-  InstanceId: string
-  /**
-   * 安全组id列表
-   */
-  SecurityGroupIds?: Array<string>
 }
 
 /**
@@ -3261,7 +3300,7 @@ export interface UpgradeInstanceRequest {
    */
   InstanceId: string
   /**
-   * 目标ES版本，支持：”6.4.3“, "6.8.2"，"7.5.1"
+   * 目标ES版本，支持：”6.4.3“, "6.8.2"，"7.5.1", "7.10.1", "7.14.2"
    */
   EsVersion: string
   /**

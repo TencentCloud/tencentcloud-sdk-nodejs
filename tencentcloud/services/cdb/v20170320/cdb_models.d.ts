@@ -926,6 +926,31 @@ export interface CreateAuditPolicyResponse {
     RequestId?: string;
 }
 /**
+ * 审计日志命中规则模板的基本信息
+ */
+export interface LogRuleTemplateInfo {
+    /**
+     * 模板ID。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RuleTemplateId?: string;
+    /**
+     * 规则模板名
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RuleTemplateName?: string;
+    /**
+     * 告警等级。1-低风险，2-中风险，3-高风险。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AlarmLevel?: string;
+    /**
+     * 规则模板变更状态：0-未变更；1-已变更；2-已删除
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RuleTemplateStatus?: number;
+}
+/**
  * DescribeInstanceParamRecords请求参数结构体
  */
 export interface DescribeInstanceParamRecordsRequest {
@@ -3854,6 +3879,11 @@ export interface AuditLog {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     TrxLivingTime?: number;
+    /**
+     * 日志命中规则模板的基本信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TemplateInfo?: Array<LogRuleTemplateInfo>;
 }
 /**
  * DescribeAuditLogFiles请求参数结构体
@@ -4378,11 +4408,12 @@ export interface DescribeAuditLogFilesResponse {
     /**
      * 符合条件的审计日志文件个数。
      */
-    TotalCount?: number;
+    TotalCount: number;
     /**
      * 审计日志文件详情。
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Items?: Array<AuditLogFile>;
+    Items: Array<AuditLogFile>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -5523,7 +5554,7 @@ export interface InstanceAuditLogFilters {
      * 过滤项。目前支持以下搜索条件：
   
   包含、不包含、包含（分词维度）、不包含（分词维度）:
-  sql - SQL详情
+  sql - SQL详情；alarmLevel - 告警等级；ruleTemplateId - 规则模板Id
   
   等于、不等于、包含、不包含：
   host - 客户端地址；
@@ -7760,9 +7791,13 @@ export interface OpenAuditServiceRequest {
      */
     AuditRuleFilters?: Array<AuditRuleFilters>;
     /**
-     * 规则模版ID。同AuditRuleFilters都不填是全审计。
+     * 规则模板ID。同AuditRuleFilters都不填是全审计。
      */
     RuleTemplateIds?: Array<string>;
+    /**
+     * 审计类型。true-全审计；默认false-规则审计。
+     */
+    AuditAll?: boolean;
 }
 /**
  * DescribeDBInstanceCharset返回参数结构体

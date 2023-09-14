@@ -4461,6 +4461,26 @@ export interface InstanceInfo {
      * 资源ID同唯一id
      */
     ResourceId?: string;
+    /**
+     * 公网IP列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    OuterIpList?: Array<string>;
+    /**
+     * 内网IP列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InnerIpList?: Array<string>;
+    /**
+     * 专享实例计费信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InstanceChargePrepaid?: InstanceChargePrepaid;
+    /**
+     * 所属vpc
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    UniqVpcId?: string;
 }
 /**
  * DeleteApi请求参数结构体

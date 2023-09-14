@@ -20,11 +20,11 @@ import { ClientConfig } from "../../../common/interface"
 import {
   DescribeStrategiesResponse,
   DescribeTaskStrategyRisksRequest,
-  DescribeStrategie,
   DescribeTaskStrategyRisksResponse,
   KeyValue,
   RiskFieldsDesc,
-  DescribeStrategiesCondition,
+  Strategies,
+  Conditions,
   DescribeStrategiesRequest,
 } from "./advisor_models"
 

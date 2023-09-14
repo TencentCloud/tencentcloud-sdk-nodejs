@@ -838,6 +838,16 @@ it("waf.v20180125.DescribeHostLimit", async function () {
     }
 })
 
+it("waf.v20180125.GetInstanceQpsLimit", async function () {
+    try {
+       const data = await client.GetInstanceQpsLimit({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("waf.v20180125.DeleteAccessExport", async function () {
     try {
        const data = await client.DeleteAccessExport({})

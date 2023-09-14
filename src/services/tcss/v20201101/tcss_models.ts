@@ -305,97 +305,102 @@ export interface ImageVul {
    * 漏洞id
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CVEID: string
+  CVEID?: string
   /**
    * 观点验证程序id
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  POCID: string
+  POCID?: string
   /**
    * 漏洞名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Name: string
+  Name?: string
   /**
    * 涉及组件信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Components: Array<ComponentsInfo>
+  Components?: Array<ComponentsInfo>
   /**
    * 分类
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Category: string
+  Category?: string
   /**
    * 分类2
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CategoryType: string
+  CategoryType?: string
   /**
    * 风险等级
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Level: string
+  Level?: string
   /**
    * 描述
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Des: string
+  Des?: string
   /**
    * 解决方案
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  OfficialSolution: string
+  OfficialSolution?: string
   /**
    * 引用
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Reference: string
+  Reference?: string
   /**
    * 防御方案
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DefenseSolution: string
+  DefenseSolution?: string
   /**
    * 提交时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SubmitTime: string
+  SubmitTime?: string
   /**
    * Cvss分数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CvssScore: string
+  CvssScore?: string
   /**
    * Cvss信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CvssVector: string
+  CvssVector?: string
   /**
    * 是否建议修复
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  IsSuggest: string
+  IsSuggest?: string
   /**
    * 修复版本号
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  FixedVersions: string
+  FixedVersions?: string
   /**
    * 漏洞标签:"CanBeFixed","DynamicLevelPoc","DynamicLevelExp"
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Tag: Array<string>
+  Tag?: Array<string>
   /**
    * 组件名
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Component: string
+  Component?: string
   /**
    * 组件版本
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Version: string
+  Version?: string
+  /**
+   * 攻击热度 0-3
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AttackLevel?: number
 }
 
 /**
@@ -3786,12 +3791,12 @@ export interface DescribeAssetImageRegistryListResponse {
    * 镜像仓库列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  List: Array<ImageRepoInfo>
+  List?: Array<ImageRepoInfo>
   /**
    * 总数量
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5367,7 +5372,8 @@ export type DescribeVirusAutoIsolateSettingRequest = null
  */
 export interface CreateAssetImageRegistryScanTaskOneKeyRequest {
   /**
-   * 是否扫描全部镜像
+   * 是否扫描全部镜像(废弃)
+   * @deprecated
    */
   All?: boolean
   /**
@@ -5382,6 +5388,30 @@ export interface CreateAssetImageRegistryScanTaskOneKeyRequest {
    * 扫描的镜像列表Id
    */
   Id?: Array<number | bigint>
+  /**
+   * 是否最新镜像
+   */
+  IsLatest?: boolean
+  /**
+   * 扫描范围 0全部镜像，1自选镜像，2推荐扫描镜像
+   */
+  ScanScope?: number
+  /**
+   * 仓库类型
+   */
+  RegistryType?: Array<string>
+  /**
+   * 命名空间
+   */
+  Namespace?: Array<string>
+  /**
+   * 是否存在运行中的容器
+   */
+  ContainerRunning?: boolean
+  /**
+   * 任务超时时长单位s
+   */
+  Timeout?: number
 }
 
 /**
@@ -6191,6 +6221,7 @@ export interface DescribeImageRegistryTimingScanTaskResponse {
   ScanType?: Array<string>
   /**
    * 扫描全部镜像
+   * @deprecated
    */
   All?: boolean
   /**
@@ -6208,6 +6239,27 @@ export interface DescribeImageRegistryTimingScanTaskResponse {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Latest?: boolean
+  /**
+   * 扫描结束时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ScanEndTime?: string
+  /**
+   * 仓库类型 tcr,ccr,harbor
+   */
+  RegistryType?: Array<string>
+  /**
+   * 是否存在运行中的容器
+   */
+  ContainerRunning?: boolean
+  /**
+   * 扫描范围 0全部镜像，1自选镜像，2推荐扫描镜像
+   */
+  ScanScope?: number
+  /**
+   * 命名空间
+   */
+  Namespace?: Array<string>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -7300,6 +7352,10 @@ IsAuthorized是否授权，取值全部all，未授权0，已授权1
    * 是否仅展示各repository最新的镜像, 默认为false
    */
   OnlyShowLatest?: boolean
+  /**
+   * 是否仅展示运行中容器镜像
+   */
+  IsRunning?: boolean
 }
 
 /**
@@ -8689,153 +8745,191 @@ export interface ImageRepoInfo {
   /**
    * 镜像Digest
    */
-  ImageDigest: string
+  ImageDigest?: string
   /**
    * 镜像仓库地址
    */
-  ImageRepoAddress: string
+  ImageRepoAddress?: string
   /**
    * 仓库类型
    */
-  RegistryType: string
+  RegistryType?: string
   /**
    * 镜像名称
    */
-  ImageName: string
+  ImageName?: string
   /**
    * 镜像版本
    */
-  ImageTag: string
+  ImageTag?: string
   /**
    * 镜像大小
    */
-  ImageSize: number
+  ImageSize?: number
   /**
    * 最近扫描时间
    */
-  ScanTime: string
+  ScanTime?: string
   /**
    * 扫描状态
    */
-  ScanStatus: string
+  ScanStatus?: string
   /**
    * 安全漏洞数
    */
-  VulCnt: number
+  VulCnt?: number
   /**
    * 木马病毒数
    */
-  VirusCnt: number
+  VirusCnt?: number
   /**
    * 风险行为数
    */
-  RiskCnt: number
+  RiskCnt?: number
   /**
    * 敏感信息数
+   * @deprecated
    */
-  SentiveInfoCnt: number
+  SentiveInfoCnt?: number
   /**
    * 是否可信镜像
    */
-  IsTrustImage: boolean
+  IsTrustImage?: boolean
   /**
    * 镜像系统
    */
-  OsName: string
+  OsName?: string
   /**
    * 木马扫描错误
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ScanVirusError: string
+  ScanVirusError?: string
   /**
    * 漏洞扫描错误
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ScanVulError: string
+  ScanVulError?: string
   /**
    * 实例id
    */
-  InstanceId: string
+  InstanceId?: string
   /**
    * 实例名称
    */
-  InstanceName: string
+  InstanceName?: string
   /**
    * 命名空间
    */
-  Namespace: string
+  Namespace?: string
   /**
    * 高危扫描错误
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ScanRiskError: string
+  ScanRiskError?: string
   /**
    * 敏感信息扫描进度
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ScanVirusProgress: number
+  ScanVirusProgress?: number
   /**
    * 木马扫描进度
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ScanVulProgress: number
+  ScanVulProgress?: number
   /**
    * 漏洞扫描进度
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ScanRiskProgress: number
+  ScanRiskProgress?: number
   /**
    * 剩余扫描时间秒
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ScanRemainTime: number
+  ScanRemainTime?: number
   /**
    * cve扫描状态
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CveStatus: string
+  CveStatus?: string
   /**
    * 高危扫描状态
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RiskStatus: string
+  RiskStatus?: string
   /**
    * 木马扫描状态
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  VirusStatus: string
+  VirusStatus?: string
   /**
    * 总进度
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Progress: number
+  Progress?: number
   /**
    * 授权状态
    */
-  IsAuthorized: number
+  IsAuthorized?: number
   /**
    * 仓库区域
    */
-  RegistryRegion: string
+  RegistryRegion?: string
   /**
    * 列表id
    */
-  Id: number
+  Id?: number
   /**
    * 镜像Id
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ImageId: string
+  ImageId?: string
   /**
    * 镜像创建的时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ImageCreateTime: string
+  ImageCreateTime?: string
   /**
    * 是否为镜像的最新版本
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  IsLatestImage: boolean
+  IsLatestImage?: boolean
+  /**
+   * low级别漏洞个数
+   */
+  LowLevelVulCnt?: number
+  /**
+   * medium级别漏洞个数
+   */
+  MediumLevelVulCnt?: number
+  /**
+   * high级别漏洞个数
+   */
+  HighLevelVulCnt?: number
+  /**
+   * critical级别漏洞个数
+   */
+  CriticalLevelVulCnt?: number
+  /**
+   * 关联容器数
+   */
+  ContainerCnt?: number
+  /**
+   * 组件数
+   */
+  ComponentCnt?: number
+  /**
+   * 是否运行中
+   */
+  IsRunning?: boolean
+  /**
+   * 是否存在必修漏洞
+   */
+  HasNeedFixVul?: boolean
+  /**
+   * 敏感信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SensitiveInfoCnt?: number
 }
 
 /**
@@ -8942,7 +9036,12 @@ export interface PortInfo {
 /**
  * DescribeAssetImageRegistrySummary请求参数结构体
  */
-export type DescribeAssetImageRegistrySummaryRequest = null
+export interface DescribeAssetImageRegistrySummaryRequest {
+  /**
+   * 过滤字段
+   */
+  Filters?: Array<AssetFilters>
+}
 
 /**
  * DescribeVirusManualScanEstimateTimeout返回参数结构体
@@ -9599,13 +9698,17 @@ export interface ReverseShellEventDescription {
  */
 export interface DescribeImageRegistryNamespaceListResponse {
   /**
-   * 可返回的项目空间的总量。
+   * 可返回的命令空间的总量。
    */
-  TotalCount: number
+  TotalCount?: number
   /**
-   * 返回的项目空间列表
+   * 返回的命令空间列表
    */
-  NamespaceList: Array<string>
+  NamespaceList?: Array<string>
+  /**
+   * 返回的命令空间详细信息列表
+   */
+  NamespaceDetail?: Array<NamespaceInfo>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -10132,6 +10235,7 @@ export interface UpdateImageRegistryTimingScanTaskRequest {
   Images?: Array<ImageInfo>
   /**
    * 是否扫描所有
+   * @deprecated
    */
   All?: boolean
   /**
@@ -10142,6 +10246,26 @@ export interface UpdateImageRegistryTimingScanTaskRequest {
    * 是否扫描最新版本
    */
   Latest?: boolean
+  /**
+   * 是否存在运行中的容器
+   */
+  ContainerRunning?: boolean
+  /**
+   * 扫描结束时间
+   */
+  ScanEndTime?: string
+  /**
+   * 扫描范围 0全部镜像，1自选镜像，2推荐扫描镜像
+   */
+  ScanScope?: number
+  /**
+   * 仓库类型 tcr,ccr,harbor
+   */
+  RegistryType?: Array<string>
+  /**
+   * 命名空间
+   */
+  Namespace?: Array<string>
 }
 
 /**
@@ -15778,6 +15902,28 @@ export interface DescribeAssetImageRegistryAssetStatusResponse {
 }
 
 /**
+ * 返回的命名空间列表信息
+ */
+export interface NamespaceInfo {
+  /**
+   * 命名空间名称
+   */
+  Namespace?: string
+  /**
+   * 包含仓库数
+   */
+  RegistryCnt?: number
+  /**
+   * 包含镜像数
+   */
+  ImageCnt?: number
+  /**
+   * 包含风险镜像数
+   */
+  RiskImageCnt?: number
+}
+
+/**
  * 容器网络信息
  */
 export interface ContainerNetwork {
@@ -18125,162 +18271,168 @@ export interface DescribeAssetImageRegistryDetailResponse {
    * 镜像Digest
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ImageDigest: string
+  ImageDigest?: string
   /**
    * 镜像地址
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ImageRepoAddress: string
+  ImageRepoAddress?: string
   /**
    * 镜像类型
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RegistryType: string
+  RegistryType?: string
   /**
    * 仓库名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ImageName: string
+  ImageName?: string
   /**
    * 镜像版本
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ImageTag: string
+  ImageTag?: string
   /**
    * 扫描时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ScanTime: string
+  ScanTime?: string
   /**
    * 扫描状态
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ScanStatus: string
+  ScanStatus?: string
   /**
    * 安全漏洞数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  VulCnt: number
+  VulCnt?: number
   /**
    * 木马病毒数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  VirusCnt: number
+  VirusCnt?: number
   /**
    * 风险行为数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RiskCnt: number
+  RiskCnt?: number
   /**
    * 敏感信息数
 注意：此字段可能返回 null，表示取不到有效值。
+   * @deprecated
    */
-  SentiveInfoCnt: number
+  SentiveInfoCnt?: number
   /**
    * 镜像系统
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  OsName: string
+  OsName?: string
   /**
    * 木马扫描错误
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ScanVirusError: string
+  ScanVirusError?: string
   /**
    * 漏洞扫描错误
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ScanVulError: string
+  ScanVulError?: string
   /**
    * 层文件信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  LayerInfo: string
+  LayerInfo?: string
   /**
    * 实例id
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  InstanceId: string
+  InstanceId?: string
   /**
    * 实例名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  InstanceName: string
+  InstanceName?: string
   /**
    * 命名空间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Namespace: string
+  Namespace?: string
   /**
    * 高危扫描错误
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ScanRiskError: string
+  ScanRiskError?: string
   /**
    * 木马信息扫描进度
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ScanVirusProgress: number
+  ScanVirusProgress?: number
   /**
    * 漏洞扫描进度
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ScanVulProgress: number
+  ScanVulProgress?: number
   /**
    * 敏感扫描进度
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ScanRiskProgress: number
+  ScanRiskProgress?: number
   /**
    * 剩余扫描时间秒
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ScanRemainTime: number
+  ScanRemainTime?: number
   /**
    * cve扫描状态
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CveStatus: string
+  CveStatus?: string
   /**
    * 高危扫描状态
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RiskStatus: string
+  RiskStatus?: string
   /**
    * 木马扫描状态
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  VirusStatus: string
+  VirusStatus?: string
   /**
    * 总进度
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Progress: number
+  Progress?: number
   /**
    * 授权状态
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  IsAuthorized: number
+  IsAuthorized?: number
   /**
    * 镜像大小
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ImageSize: number
+  ImageSize?: number
   /**
    * 镜像Id
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ImageId: string
+  ImageId?: string
   /**
    * 镜像区域
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RegistryRegion: string
+  RegistryRegion?: string
   /**
    * 镜像创建的时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ImageCreateTime: string
+  ImageCreateTime?: string
+  /**
+   * 敏感信息数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SensitiveInfoCnt?: number
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -20571,67 +20723,67 @@ export interface ContainerInfo {
   /**
    * 容器id
    */
-  ContainerID: string
+  ContainerID?: string
   /**
    * 容器名称
    */
-  ContainerName: string
+  ContainerName?: string
   /**
    * 容器运行状态
    */
-  Status: string
+  Status?: string
   /**
    * 创建时间
    */
-  CreateTime: string
+  CreateTime?: string
   /**
    * 运行用户
    */
-  RunAs: string
+  RunAs?: string
   /**
    * 命令行
    */
-  Cmd: string
+  Cmd?: string
   /**
    * CPU使用率 *1000
    */
-  CPUUsage: number
+  CPUUsage?: number
   /**
    * 内存使用 kb
    */
-  RamUsage: number
+  RamUsage?: number
   /**
    * 镜像名称
    */
-  ImageName: string
+  ImageName?: string
   /**
    * 镜像id
    */
-  ImageID: string
+  ImageID?: string
   /**
    * 镜像id
    */
-  POD: string
+  POD?: string
   /**
    * 主机id
    */
-  HostID: string
+  HostID?: string
   /**
    * 主机ip
    */
-  HostIP: string
+  HostIP?: string
   /**
    * 更新时间
    */
-  UpdateTime: string
+  UpdateTime?: string
   /**
    * 主机名称
    */
-  HostName: string
+  HostName?: string
   /**
    * 外网ip
    */
-  PublicIp: string
+  PublicIp?: string
   /**
    * 网络状态
 未隔离  	NORMAL
@@ -20641,21 +20793,21 @@ export interface ContainerInfo {
 解除隔离中  RESTORING
 解除隔离失败 RESTORE_FAILED
    */
-  NetStatus: string
+  NetStatus?: string
   /**
    * 网络子状态
    */
-  NetSubStatus: string
+  NetSubStatus?: string
   /**
    * 隔离来源
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  IsolateSource: string
+  IsolateSource?: string
   /**
    * 隔离时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  IsolateTime: string
+  IsolateTime?: string
   /**
    * 超级节点id
    */
@@ -20684,6 +20836,19 @@ export interface ContainerInfo {
    * 所属Pod的内存
    */
   PodMem?: number
+  /**
+   * 集群名称
+   */
+  ClusterName?: string
+  /**
+   * 集群ID
+   */
+  ClusterID?: string
+  /**
+   * pod uid
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PodUid?: string
 }
 
 /**

@@ -54,6 +54,7 @@ import {
   DescribeAuditConfigRequest,
   CreateRoInstanceIpResponse,
   CreateAuditPolicyResponse,
+  LogRuleTemplateInfo,
   DescribeInstanceParamRecordsRequest,
   StopRollbackResponse,
   CreateCdbProxyAddressRequest,

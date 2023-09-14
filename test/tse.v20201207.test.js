@@ -218,9 +218,9 @@ it("tse.v20201207.DescribeNacosServerInterfaces", async function () {
     }
 })
 
-it("tse.v20201207.UpdateCloudNativeAPIGatewaySpec", async function () {
+it("tse.v20201207.ModifyCloudNativeAPIGatewayRoute", async function () {
     try {
-       const data = await client.UpdateCloudNativeAPIGatewaySpec({})
+       const data = await client.ModifyCloudNativeAPIGatewayRoute({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -258,9 +258,9 @@ it("tse.v20201207.DescribeSREInstances", async function () {
     }
 })
 
-it("tse.v20201207.DescribeCloudNativeAPIGatewayServiceRateLimit", async function () {
+it("tse.v20201207.DescribeCloudNativeAPIGatewayConfig", async function () {
     try {
-       const data = await client.DescribeCloudNativeAPIGatewayServiceRateLimit({})
+       const data = await client.DescribeCloudNativeAPIGatewayConfig({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -398,9 +398,9 @@ it("tse.v20201207.DescribeNativeGatewayServerGroups", async function () {
     }
 })
 
-it("tse.v20201207.ModifyCloudNativeAPIGatewayRoute", async function () {
+it("tse.v20201207.DescribeSREInstanceAccessAddress", async function () {
     try {
-       const data = await client.ModifyCloudNativeAPIGatewayRoute({})
+       const data = await client.DescribeSREInstanceAccessAddress({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -428,9 +428,19 @@ it("tse.v20201207.DescribeCloudNativeAPIGatewayCanaryRules", async function () {
     }
 })
 
-it("tse.v20201207.DescribeSREInstanceAccessAddress", async function () {
+it("tse.v20201207.UpdateCloudNativeAPIGatewaySpec", async function () {
     try {
-       const data = await client.DescribeSREInstanceAccessAddress({})
+       const data = await client.UpdateCloudNativeAPIGatewaySpec({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tse.v20201207.DescribeCloudNativeAPIGatewayServiceRateLimit", async function () {
+    try {
+       const data = await client.DescribeCloudNativeAPIGatewayServiceRateLimit({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

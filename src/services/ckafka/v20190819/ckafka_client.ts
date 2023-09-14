@@ -32,6 +32,7 @@ import {
   DeleteUserRequest,
   PartitionOffset,
   SQLServerConnectParam,
+  InstanceDeleteResponse,
   CreateConnectResourceResponse,
   EsModifyConnectParam,
   TopicRetentionTimeConfigRsp,
@@ -137,6 +138,8 @@ import {
   ClusterInfo,
   DeleteGroupRequest,
   DescribeConsumerGroupRequest,
+  DeleteInstancePostResponse,
+  DeleteInstancePostRequest,
   DeleteUserResponse,
   DescribeConnectResourceRequest,
   DescribeTopicProduceConnectionRequest,
@@ -634,6 +637,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateDatahubTopicResponse) => void
   ): Promise<CreateDatahubTopicResponse> {
     return this.request("CreateDatahubTopic", req, cb)
+  }
+
+  /**
+   * 删除后付费实例
+   */
+  async DeleteInstancePost(
+    req: DeleteInstancePostRequest,
+    cb?: (error: string, rep: DeleteInstancePostResponse) => void
+  ): Promise<DeleteInstancePostResponse> {
+    return this.request("DeleteInstancePost", req, cb)
   }
 
   /**

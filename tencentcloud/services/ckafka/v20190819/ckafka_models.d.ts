@@ -358,6 +358,16 @@ export interface SQLServerConnectParam {
     IsUpdate?: boolean;
 }
 /**
+ * 删除实例返回任务
+ */
+export interface InstanceDeleteResponse {
+    /**
+     * 删除实例返回的任务Id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    FlowId: number;
+}
+/**
  * CreateConnectResource返回参数结构体
  */
 export interface CreateConnectResourceResponse {
@@ -3070,6 +3080,28 @@ export interface DescribeConsumerGroupRequest {
      * 偏移位置
      */
     Offset?: number;
+}
+/**
+ * DeleteInstancePost返回参数结构体
+ */
+export interface DeleteInstancePostResponse {
+    /**
+     * 返回的结果集
+     */
+    Result?: InstanceDeleteResponse;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * DeleteInstancePost请求参数结构体
+ */
+export interface DeleteInstancePostRequest {
+    /**
+     * 实例ID
+     */
+    InstanceId: string;
 }
 /**
  * DeleteUser返回参数结构体

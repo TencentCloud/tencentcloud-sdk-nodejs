@@ -6,7 +6,7 @@ export interface DescribeStrategiesResponse {
      * 评估项列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Strategies: Array<DescribeStrategie>;
+    Strategies?: Array<Strategies>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -36,56 +36,6 @@ export interface DescribeTaskStrategyRisksRequest {
      * 任务类型
      */
     TaskType?: string;
-}
-/**
- * 评估项信息
- */
-export interface DescribeStrategie {
-    /**
-     * 评估项ID
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    StrategyId: number;
-    /**
-     * 评估项名称
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Name: string;
-    /**
-     * 评估项描述
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Desc: string;
-    /**
-     * 评估项对应产品ID
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Product: string;
-    /**
-     * 评估项对应产品名称
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ProductDesc: string;
-    /**
-     * 评估项优化建议
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Repair: string;
-    /**
-     * 评估项类别ID
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    GroupId: number;
-    /**
-     * 评估项类别名称
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    GroupName: string;
-    /**
-     * 评估项风险列表
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Conditions: Array<DescribeStrategiesCondition>;
 }
 /**
  * DescribeTaskStrategyRisks返回参数结构体
@@ -162,9 +112,59 @@ export interface RiskFieldsDesc {
     FieldDict: Array<KeyValue>;
 }
 /**
+ * 评估项信息
+ */
+export interface Strategies {
+    /**
+     * 评估项ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    StrategyId?: number;
+    /**
+     * 评估项名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Name?: string;
+    /**
+     * 评估项描述
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Desc?: string;
+    /**
+     * 评估项对应产品ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Product?: string;
+    /**
+     * 评估项对应产品名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ProductDesc?: string;
+    /**
+     * 评估项优化建议
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Repair?: string;
+    /**
+     * 评估项类别ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    GroupId?: number;
+    /**
+     * 评估项类别名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    GroupName?: string;
+    /**
+     * 评估项风险列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Conditions?: Array<Conditions>;
+}
+/**
  * 评估项警告条件
  */
-export interface DescribeStrategiesCondition {
+export interface Conditions {
     /**
      * 警告条件ID
   注意：此字段可能返回 null，表示取不到有效值。

@@ -7127,6 +7127,11 @@ export interface CynosdbClusterDetail {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     RenewFlag?: number;
+    /**
+     * 节点网络类型
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    NetworkType?: string;
 }
 /**
  * ResetAccountPassword请求参数结构体
@@ -7924,15 +7929,15 @@ export interface ZoneStockInfo {
     /**
      * 可用区
      */
-    Zone: string;
+    Zone?: string;
     /**
      * 是否有库存
      */
-    HasStock: boolean;
+    HasStock?: boolean;
     /**
      * 库存数量
      */
-    StockCount: number;
+    StockCount?: number;
 }
 /**
  * InquirePriceRenew返回参数结构体

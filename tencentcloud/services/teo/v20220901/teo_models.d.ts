@@ -36,7 +36,7 @@ export interface DownloadL7LogsRequest {
      */
     Domains?: Array<string>;
     /**
-     * 分页查询的限制数目，默认值为 20，最大查询条目为 1000。
+     * 分页查询的限制数目，默认值为 20，最大查询条目为 300。
      */
     Limit?: number;
     /**
@@ -3797,7 +3797,7 @@ export interface DownloadL4LogsRequest {
      */
     ProxyIds?: Array<string>;
     /**
-     * 分页查询的限制数目，默认值为 20，最大查询条目为 1000。
+     * 分页查询的限制数目，默认值为 20，最大查询条目为 300。
      */
     Limit?: number;
     /**

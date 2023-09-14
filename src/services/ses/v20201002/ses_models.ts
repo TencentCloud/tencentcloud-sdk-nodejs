@@ -226,7 +226,7 @@ export interface ListBlackEmailAddressRequest {
    */
   EmailAddress?: string
   /**
-   * 可以指定任务ID进行查询
+   * 已废弃
    */
   TaskID?: string
 }
@@ -1108,17 +1108,22 @@ export interface EmailIdentity {
 }
 
 /**
- * 邮箱黑名单结构，包含被拉黑的邮箱地址和被拉黑时间
+ * 邮箱黑名单结构，包含被拉黑的邮箱地址和被拉黑时间，以及被拉黑的理由
  */
 export interface BlackEmailAddress {
   /**
    * 邮箱被拉黑时间
    */
-  BounceTime: string
+  BounceTime?: string
   /**
    * 被拉黑的邮箱地址
    */
-  EmailAddress: string
+  EmailAddress?: string
+  /**
+   * 被拉黑的理由
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IspDesc?: string
 }
 
 /**

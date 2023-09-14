@@ -196,6 +196,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateDatahubTopic", req, cb);
     }
     /**
+     * 删除后付费实例
+     */
+    async DeleteInstancePost(req, cb) {
+        return this.request("DeleteInstancePost", req, cb);
+    }
+    /**
      * 枚举ACL
      */
     async DescribeACL(req, cb) {

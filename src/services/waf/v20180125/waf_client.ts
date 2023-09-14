@@ -103,12 +103,14 @@ import {
   ClbHostResult,
   DescribeVipInfoRequest,
   GetAttackHistogramResponse,
+  GetInstanceQpsLimitRequest,
   FiltersItemNew,
   DeleteSpartaProtectionResponse,
   SessionData,
   DescribeAutoDenyIPResponse,
   SwitchDomainRulesResponse,
   SearchAccessLogResponse,
+  QpsData,
   DescribeAntiInfoLeakageRulesRequest,
   CreateHostResponse,
   IpAccessControlItem,
@@ -129,6 +131,7 @@ import {
   SpartaProtectionPort,
   AddSpartaProtectionRequest,
   PeakPointsItem,
+  GetInstanceQpsLimitResponse,
   IpHitItem,
   PostAttackDownloadTaskRequest,
   ModifyCustomWhiteRuleResponse,
@@ -1132,6 +1135,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeHostLimitResponse) => void
   ): Promise<DescribeHostLimitResponse> {
     return this.request("DescribeHostLimit", req, cb)
+  }
+
+  /**
+   * 获取套餐实例的弹性qps上限
+   */
+  async GetInstanceQpsLimit(
+    req: GetInstanceQpsLimitRequest,
+    cb?: (error: string, rep: GetInstanceQpsLimitResponse) => void
+  ): Promise<GetInstanceQpsLimitResponse> {
+    return this.request("GetInstanceQpsLimit", req, cb)
   }
 
   /**

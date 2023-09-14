@@ -1582,6 +1582,19 @@ export interface GetAttackHistogramResponse {
     RequestId?: string;
 }
 /**
+ * GetInstanceQpsLimit请求参数结构体
+ */
+export interface GetInstanceQpsLimitRequest {
+    /**
+     * 套餐实例id
+     */
+    InstanceId: string;
+    /**
+     * 套餐类型
+     */
+    Type?: string;
+}
+/**
  * 过滤数组
  */
 export interface FiltersItemNew {
@@ -1676,6 +1689,36 @@ export interface SearchAccessLogResponse {
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * 获取弹性qps的默认相关值
+ */
+export interface QpsData {
+    /**
+     * 弹性qps默认值
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ElasticBillingDefault?: number;
+    /**
+     * 弹性qps最小值
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ElasticBillingMin?: number;
+    /**
+     * 弹性qps最大值
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ElasticBillingMax?: number;
+    /**
+     * 业务扩展包最大qps
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    QPSExtendMax?: number;
+    /**
+     * 海外业务扩展包最大qps
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    QPSExtendIntlMax?: number;
 }
 /**
  * DescribeAntiInfoLeakageRules请求参数结构体
@@ -1805,6 +1848,38 @@ export interface DeleteSpartaProtectionRequest {
  * saas域名详情
  */
 export interface DomainsPartInfo {
+    /**
+     * 域名
+     */
+    Domain?: string;
+    /**
+     * 域名id
+     */
+    DomainId?: string;
+    /**
+     * 实例id
+     */
+    InstanceId?: string;
+    /**
+     * 类型
+     */
+    Edition?: string;
+    /**
+     * 实例名
+     */
+    InstanceName?: string;
+    /**
+     * 证书
+     */
+    Cert?: string;
+    /**
+     * 创建时间
+     */
+    CreateTime?: string;
+    /**
+     * AI防御模式
+     */
+    Engine?: number;
     /**
      * 是否开启httpRewrite
      */
@@ -2287,7 +2362,7 @@ export interface AddSpartaProtectionRequest {
      */
     Edition?: string;
     /**
-     * 是否开启长连接，仅IP回源时可以用填次参数，域名回源时这个参数无效
+     * 是否开启长连接，0 短连接，1 长连接
      */
     IsKeepAlive?: string;
     /**
@@ -2410,6 +2485,19 @@ export interface PeakPointsItem {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     UpstreamRedirect: number;
+}
+/**
+ * GetInstanceQpsLimit返回参数结构体
+ */
+export interface GetInstanceQpsLimitResponse {
+    /**
+     * 弹性qps相关值集合
+     */
+    QpsData?: QpsData;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * ip封堵状态数据
@@ -4759,38 +4847,38 @@ export interface SearchAttackLogResponse {
 export interface Strategy {
     /**
      * 匹配字段
-   
-  有以下枚举值：
-  IP-来源IP	IPV6-来源IPv6	Referer-Referer	URL-请求路径
-  UserAgent-UserAgent	HTTP_METHOD-HTTP请求方法	QUERY_STRING-请求字符串	GET-GET参数值	GET_PARAMS_NAMES-GET参数名	POST-POST参数值	GET_POST_NAMES-POST参数名	POST_BODY-完整BODY	COOKIE-Cookie	GET_COOKIES_NAMES-Cookie参数名	ARGS_COOKIE-Cookie参数值	GET_HEADERS_NAMES-Header参数名	ARGS_HEADER-Header参数值
+  
+      匹配字段不同，相应的匹配参数、逻辑符号、匹配内容有所不同具体如下所示：
+  <table><thead><tr><th>匹配字段</th><th>匹配参数</th><th>逻辑符号</th><th>匹配内容</th></tr></thead><tbody><tr><td>IP（来源IP）</td><td>不支持参数</td><td>ipmatch（匹配）<br/>ipnmatch（不匹配）</td><td>多个IP以英文逗号隔开,最多20个</td></tr><tr><td>IPV6（来源IPv6）</td><td>不支持参数</td><td>ipmatch（匹配）<br/>ipnmatch（不匹配）</td><td>支持单个IPV6地址</td></tr><tr><td>Referer（Referer）</td><td>不支持参数</td><td>empty（内容为空）<br/>null（不存在）<br/>eq（等于）<br/>neq（不等于）<br/>contains（包含）<br/>ncontains（不包含）<br/>len_eq（长度等于）<br/>len_gt（长度大于）<br/>len_lt（长度小于）<br/>strprefix（前缀匹配）<br/>strsuffix（后缀匹配）<br/>rematch（正则匹配）</td><td>请输入内容,512个字符以内</td></tr><tr><td>URL（请求路径）</td><td>不支持参数</td><td>eq（等于）<br/>neq（不等于）<br/>contains（包含）<br/>ncontains（不包含）<br/>len_eq（长度等于）<br/>len_gt（长度大于）<br/>len_lt（长度小于）<br/>strprefix（前缀匹配）<br/>strsuffix（后缀匹配）<br/>rematch（正则匹配）<br/></td><td>请以/开头,512个字符以内</td></tr><tr><td>UserAgent（UserAgent）</td><td>不支持参数</td><td>同匹配字段<font color="Red">Referer</font>逻辑符号</td><td>请输入内容,512个字符以内</td></tr><tr><td>HTTP_METHOD（HTTP请求方法）</td><td>不支持参数</td><td>eq（等于）<br/>neq（不等于）</td><td>请输入方法名称,建议大写</td></tr><tr><td>QUERY_STRING（请求字符串）</td><td>不支持参数</td><td>同匹配字段<font color="Red">请求路径</font>逻辑符号</td><td>请输入内容,512个字符以内</td></tr><tr><td>GET（GET参数值）</td><td>支持参数录入</td><td>contains（包含）<br/>ncontains（不包含）<br/>len_eq（长度等于）<br/>len_gt（长度大于）<br/>len_lt（长度小于）<br/>strprefix（前缀匹配）<br/>strsuffix（后缀匹配）</td><td>请输入内容,512个字符以内</td></tr><tr><td>GET_PARAMS_NAMES（GET参数名）</td><td>不支持参数</td><td>exsit（存在参数）<br/>nexsit（不存在参数）<br/>len_eq（长度等于）<br/>len_gt（长度大于）<br/>len_lt（长度小于）<br/>strprefix（前缀匹配）<br/>strsuffix（后缀匹配）</td><td>请输入内容,512个字符以内</td></tr><tr><td>POST（POST参数值）</td><td>支持参数录入</td><td>同匹配字段<font color="Red">GET参数值</font>逻辑符号</td><td>请输入内容,512个字符以内</td></tr><tr><td>GET_POST_NAMES（POST参数名）</td><td>不支持参数</td><td>同匹配字段<font color="Red">GET参数名</font>逻辑符号</td><td>请输入内容,512个字符以内</td></tr><tr><td>POST_BODY（完整BODY）</td><td>不支持参数</td><td>同匹配字段<font color="Red">请求路径</font>逻辑符号</td><td>请输入BODY内容,512个字符以内</td></tr><tr><td>COOKIE（Cookie）</td><td>不支持参数</td><td>empty（内容为空）<br/>null（不存在）<br/>rematch（正则匹配）</td><td><font color="Red">暂不支持</font></td></tr><tr><td>GET_COOKIES_NAMES（Cookie参数名）</td><td>不支持参数</td><td>同匹配字段<font color="Red">GET参数名</font>逻辑符号</td><td>请输入内容,512个字符以内</td></tr><tr><td>ARGS_COOKIE（Cookie参数值）</td><td>支持参数录入</td><td>同匹配字段<font color="Red">GET参数值</font>逻辑符号</td><td>请输入内容,512个字符以内</td></tr><tr><td>GET_HEADERS_NAMES（Header参数名）</td><td>不支持参数</td><td>exsit（存在参数）<br/>nexsit（不存在参数）<br/>len_eq（长度等于）<br/>len_gt（长度大于）<br/>len_lt（长度小于）<br/>strprefix（前缀匹配）<br/>strsuffix（后缀匹配）<br/>rematch（正则匹配）</td><td>请输入内容,建议小写,512个字符以内</td></tr><tr><td>ARGS_HEADER（Header参数值）</td><td>支持参数录入</td><td>contains（包含）<br/>ncontains（不包含）<br/>len_eq（长度等于）<br/>len_gt（长度大于）<br/>len_lt（长度小于）<br/>strprefix（前缀匹配）<br/>strsuffix（后缀匹配）<br/>rematch（正则匹配）</td><td>请输入内容,512个字符以内</td></tr></tbody></table>
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Field: string;
     /**
      * 逻辑符号
   
-  有以下枚举值：
-  empty - 内容为空
-      null - 不存在
-      eq - 等于
-      neq - 不等于
-      contains - 包含
-      ncontains - 不包含
-      strprefix - 前缀匹配
-      strsuffix - 后缀匹配
-      len_eq - 长度等于
-      len_gt - 长度大于
-      len_lt - 长度小于
-      ipmatch - 属于
-      ipnmatch - 不属于
+      逻辑符号一共分为以下几种类型：
+          empty （ 内容为空）
+          null （不存在）
+          eq （ 等于）
+          neq （ 不等于）
+          contains （ 包含）
+          ncontains （ 不包含）
+          strprefix （ 前缀匹配）
+          strsuffix （ 后缀匹配）
+          len_eq （ 长度等于）
+          len_gt （ 长度大于）
+          len_lt （ 长度小于）
+          ipmatch （ 属于）
+          ipnmatch （ 不属于）
+      各匹配字段对应的逻辑符号不同，详见上述匹配字段表格
+  
   注意：此字段可能返回 null，表示取不到有效值。
      */
     CompareFunc: string;
     /**
      * 匹配内容
   
-  目前 只有匹配字段为COOKIE-Cookie时，才不需要输入 匹配内容其他都需要
-  
+      目前 当匹配字段为COOKIE（Cookie）时，不需要输入 匹配内容其他都需要
   
   注意：此字段可能返回 null，表示取不到有效值。
      */
@@ -4798,9 +4886,13 @@ export interface Strategy {
     /**
      * 匹配参数
   
-  目前 只有匹配字段为以下4个时，匹配参数才能选择，否则置灰无法选择
+      配置参数一共分2种类型 不支持参数与支持参数
+      当匹配字段为以下4个时，匹配参数才能录入，否则不支持该参数
+          GET（GET参数值）
+          POST（POST参数值）
+          ARGS_COOKIE（Cookie参数值）
+          ARGS_HEADER（Header参数值）
   
-  GET-GET参数值	POST-POST参数值	ARGS_COOKIE-Cookie参数值	ARGS_HEADER-Header参数值
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Arg: string;

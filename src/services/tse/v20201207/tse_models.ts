@@ -1282,6 +1282,20 @@ export interface CloudAPIGatewayCanaryRuleList {
 }
 
 /**
+ * DescribeCloudNativeAPIGatewayConfig返回参数结构体
+ */
+export interface DescribeCloudNativeAPIGatewayConfigResponse {
+  /**
+   * 获取云原生API网关响应结果。
+   */
+  Result?: DescribeCloudNativeAPIGatewayConfigResult
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 云原生网关路由信息
  */
 export interface KongRoutePreview {
@@ -1566,6 +1580,35 @@ export interface DescribeNacosServerInterfacesResponse {
 }
 
 /**
+ * 获取云原生API网关实例网络配置结果。
+ */
+export interface DescribeCloudNativeAPIGatewayConfigResult {
+  /**
+   * 网关实例ID。
+   */
+  GatewayId?: string
+  /**
+   * 分组网络配置列表。
+   */
+  ConfigList?: Array<CloudNativeAPIGatewayConfig>
+  /**
+   * 分组子网信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  GroupSubnetId?: string
+  /**
+   * 分组VPC信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  GroupVpcId?: string
+  /**
+   * 分组ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  GroupId?: string
+}
+
+/**
  * 键值对
  */
 export interface KVMapping {
@@ -1772,6 +1815,20 @@ export interface DescribeOneCloudNativeAPIGatewayServiceRequest {
    * 服务名字，或服务ID
    */
   Name: string
+}
+
+/**
+ * DescribeCloudNativeAPIGatewayConfig请求参数结构体
+ */
+export interface DescribeCloudNativeAPIGatewayConfigRequest {
+  /**
+   * 云原生API网关实例ID。
+   */
+  GatewayId: string
+  /**
+   * 分组id，不填时为默认分组
+   */
+  GroupId?: string
 }
 
 /**
@@ -2353,19 +2410,106 @@ export interface UpdateCloudNativeAPIGatewaySpecResponse {
 }
 
 /**
- * 获取云原生API网关实例协议端口列表响应结果
+ * 云原生API网关配置信息。
  */
-export interface DescribeGatewayInstancePortResult {
+export interface CloudNativeAPIGatewayConfig {
   /**
-   * 云原生API网关ID
+   * 控制台类型。
+   */
+  ConsoleType?: string
+  /**
+   * HTTP链接地址。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  GatewayId?: string
+  HttpUrl?: string
   /**
-   * 网关实例协议端口列表
+   * HTTPS链接地址。
+   */
+  HttpsUrl?: string
+  /**
+   * 网络类型, Open|Internal。
+   */
+  NetType?: string
+  /**
+   * 管理员用户名。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  GatewayInstancePortList?: Array<GatewayInstanceSchemeAndPorts>
+  AdminUser?: string
+  /**
+   * 管理员密码。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AdminPassword?: string
+  /**
+   * 网络状态, Open|Closed|Updating
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status?: string
+  /**
+   * 网络访问策略
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AccessControl?: NetworkAccessControl
+  /**
+   * 内网子网 ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SubnetId?: string
+  /**
+   * 内网VPC ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VpcId?: string
+  /**
+   * 负载均衡的描述
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Description?: string
+  /**
+   * 负载均衡的规格类型，传 "SLA" 表示性能容量型，返回空为共享型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SlaType?: string
+  /**
+   * clb vip
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Vip?: string
+  /**
+   * 带宽
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InternetMaxBandwidthOut?: number
+  /**
+   * 是否多可用区
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MultiZoneFlag?: boolean
+  /**
+   * 主可用区
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MasterZoneId?: string
+  /**
+   * 备可用区
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SlaveZoneId?: string
+  /**
+   * 主可用区名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MasterZoneName?: string
+  /**
+   * 备可用区名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SlaveZoneName?: string
+  /**
+   * 网络 id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NetworkId?: string
 }
 
 /**
@@ -2406,6 +2550,22 @@ export interface DescribeNativeGatewayServerGroupsRequest {
    * 过滤参数
    */
   Filters?: Array<Filter>
+}
+
+/**
+ * 获取云原生API网关实例协议端口列表响应结果
+ */
+export interface DescribeGatewayInstancePortResult {
+  /**
+   * 云原生API网关ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  GatewayId?: string
+  /**
+   * 网关实例协议端口列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  GatewayInstancePortList?: Array<GatewayInstanceSchemeAndPorts>
 }
 
 /**
@@ -2554,6 +2714,24 @@ export interface ModifyCloudNativeAPIGatewayResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 网络访问策略
+ */
+export interface NetworkAccessControl {
+  /**
+   * 访问模式：Whitelist|Blacklist
+   */
+  Mode: string
+  /**
+   * 白名单列表
+   */
+  CidrWhiteList?: Array<string>
+  /**
+   * 黑名单列表
+   */
+  CidrBlackList?: Array<string>
 }
 
 /**

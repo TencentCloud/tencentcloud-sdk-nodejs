@@ -533,7 +533,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（DescribeInstanceSpecs）用于查询实例规格
+   * 本接口（DescribeInstanceSpecs）用于查询购买页可购买的实例规格
    */
   async DescribeInstanceSpecs(
     req: DescribeInstanceSpecsRequest,

@@ -208,7 +208,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeVirusAutoIsolateSampleDownloadURL", req, cb);
     }
     /**
-     * 查询用户镜像仓库下的项目名称列表
+     * 查询用户镜像仓库下的命令空间列表
      */
     async DescribeImageRegistryNamespaceList(req, cb) {
         return this.request("DescribeImageRegistryNamespaceList", req, cb);

@@ -76,7 +76,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeClusterDetail(req: DescribeClusterDetailRequest, cb?: (error: string, rep: DescribeClusterDetailResponse) => void): Promise<DescribeClusterDetailResponse>;
     /**
-     * 本接口（DescribeInstanceSpecs）用于查询实例规格
+     * 本接口（DescribeInstanceSpecs）用于查询购买页可购买的实例规格
      */
     DescribeInstanceSpecs(req: DescribeInstanceSpecsRequest, cb?: (error: string, rep: DescribeInstanceSpecsResponse) => void): Promise<DescribeInstanceSpecsResponse>;
     /**

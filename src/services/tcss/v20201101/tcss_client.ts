@@ -628,6 +628,7 @@ import {
   ProjectInfo,
   DescribeAffectedNodeListRequest,
   DescribeAssetImageRegistryAssetStatusResponse,
+  NamespaceInfo,
   ContainerNetwork,
   DescribeSecLogDeliveryKafkaSettingResponse,
   CreateHostExportJobRequest,
@@ -1152,7 +1153,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询用户镜像仓库下的项目名称列表
+   * 查询用户镜像仓库下的命令空间列表
    */
   async DescribeImageRegistryNamespaceList(
     req: DescribeImageRegistryNamespaceListRequest,
@@ -1326,7 +1327,7 @@ export class Client extends AbstractClient {
    * 镜像仓库查询镜像统计信息
    */
   async DescribeAssetImageRegistrySummary(
-    req?: DescribeAssetImageRegistrySummaryRequest,
+    req: DescribeAssetImageRegistrySummaryRequest,
     cb?: (error: string, rep: DescribeAssetImageRegistrySummaryResponse) => void
   ): Promise<DescribeAssetImageRegistrySummaryResponse> {
     return this.request("DescribeAssetImageRegistrySummary", req, cb)

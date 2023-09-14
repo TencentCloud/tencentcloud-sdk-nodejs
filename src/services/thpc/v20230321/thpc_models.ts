@@ -586,6 +586,10 @@ false（默认）：发送正常请求，通过检查后直接创建实例
    * 节点初始化脚本信息列表。
    */
   InitNodeScripts?: Array<NodeScript>
+  /**
+   * 高性能计算集群ID。若创建的实例为高性能计算实例，需指定实例放置的集群，否则不可指定。
+   */
+  HpcClusterId?: string
 }
 
 /**

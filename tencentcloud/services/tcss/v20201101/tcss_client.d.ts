@@ -128,7 +128,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeVirusAutoIsolateSampleDownloadURL(req: DescribeVirusAutoIsolateSampleDownloadURLRequest, cb?: (error: string, rep: DescribeVirusAutoIsolateSampleDownloadURLResponse) => void): Promise<DescribeVirusAutoIsolateSampleDownloadURLResponse>;
     /**
-     * 查询用户镜像仓库下的项目名称列表
+     * 查询用户镜像仓库下的命令空间列表
      */
     DescribeImageRegistryNamespaceList(req: DescribeImageRegistryNamespaceListRequest, cb?: (error: string, rep: DescribeImageRegistryNamespaceListResponse) => void): Promise<DescribeImageRegistryNamespaceListResponse>;
     /**
@@ -199,7 +199,7 @@ export declare class Client extends AbstractClient {
     /**
      * 镜像仓库查询镜像统计信息
      */
-    DescribeAssetImageRegistrySummary(req?: DescribeAssetImageRegistrySummaryRequest, cb?: (error: string, rep: DescribeAssetImageRegistrySummaryResponse) => void): Promise<DescribeAssetImageRegistrySummaryResponse>;
+    DescribeAssetImageRegistrySummary(req: DescribeAssetImageRegistrySummaryRequest, cb?: (error: string, rep: DescribeAssetImageRegistrySummaryResponse) => void): Promise<DescribeAssetImageRegistrySummaryResponse>;
     /**
      * 容器网络创建网络策略更新任务
      */
