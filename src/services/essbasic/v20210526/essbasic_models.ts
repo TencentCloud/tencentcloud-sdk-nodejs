@@ -629,14 +629,15 @@ export interface ChannelCreatePrepareFlowResponse {
  */
 export interface WebThemeConfig {
   /**
-   * 页面底部是否显示电子签logo
-<br/>true：允许在页面底部隐藏电子签logo 
-<br/>默认false，不允许允许在页面底部隐藏电子签logo
+   * 是否显示页面底部电子签logo，取值如下：
+<ul><li> **true**：页面底部显示电子签logo</li>
+<li> **false**：页面底部不显示电子签logo（默认）</li></ul>
    */
   DisplaySignBrandLogo?: boolean
   /**
-   * 嵌入式主题颜色
-<br/>支持十六进制颜色值以及RGB格式颜色值，例如：#D54941，rgb(213, 73, 65)
+   * 主题颜色：
+支持十六进制颜色值以及RGB格式颜色值，例如：#D54941，rgb(213, 73, 65)
+<br/>
    */
   WebEmbedThemeColor?: string
 }
@@ -768,6 +769,28 @@ export interface CreateFlowOption {
    * 定制化发起合同弹窗的描述信息，描述信息最长500
    */
   CustomCreateFlowDescription?: string
+}
+
+/**
+ * ChannelCreateRole请求参数结构体
+ */
+export interface ChannelCreateRoleRequest {
+  /**
+   * 角色名称，最大长度为20个字符，仅限中文、字母、数字和下划线组成。
+   */
+  Name: string
+  /**
+   * 代理企业和员工的信息。
+   */
+  Agent: Agent
+  /**
+   * 角色描述，最大长度为50个字符
+   */
+  Description?: string
+  /**
+   * 权限树，权限树内容 PermissionGroups 可参考接口 DescribeIntegrationRoles 的输出
+   */
+  PermissionGroups?: Array<PermissionGroup>
 }
 
 /**
@@ -1308,6 +1331,11 @@ export interface ChannelRole {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RoleStatus?: number
+  /**
+   * 权限树
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PermissionGroups?: Array<PermissionGroup>
 }
 
 /**
@@ -1525,10 +1553,6 @@ export interface ChannelDescribeRolesRequest {
    */
   Agent: Agent
   /**
-   * 查询结果分页返回，此处指定第几页，如果不传默认从第一页返回。页码从 0 开始，即首页为 0，最大2000
-   */
-  Offset: number
-  /**
    * 指定每页多少条数据，单页最大200
    */
   Limit: string
@@ -1536,8 +1560,13 @@ export interface ChannelDescribeRolesRequest {
    * 查询的关键字段:
 Key:"RoleType",Values:["1"]查询系统角色，Values:["2"]查询自定义角色
 Key:"RoleStatus",Values:["1"]查询启用角色，Values:["2"]查询禁用角色
+Key:"IsReturnPermissionGroup"，Values:["0"]:表示接口不返回角色对应的权限树字段，Values:["1"]表示接口返回角色对应的权限树字段
    */
   Filters?: Array<Filter>
+  /**
+   * 查询结果分页返回，此处指定第几页，如果不传默认从第一页返回。页码从 0 开始，即首页为 0，最大2000
+   */
+  Offset?: number
   /**
    * 操作人信息
    * @deprecated
@@ -1882,6 +1911,67 @@ export interface ChannelCancelUserAutoSignEnableUrlRequest {
    * 指定撤销链接的用户信息，包含姓名、证件类型、证件号码。
    */
   UserInfo: UserThreeFactor
+}
+
+/**
+ * 权限树节点权限
+ */
+export interface Permission {
+  /**
+   * 权限名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name?: string
+  /**
+   * 权限key
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Key?: string
+  /**
+   * 权限类型 1前端，2后端
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Type?: number
+  /**
+   * 是否隐藏
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Hide?: number
+  /**
+   * 数据权限标签 1:表示根节点，2:表示叶子结点
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DataLabel?: number
+  /**
+   * 数据权限独有，1:关联其他模块鉴权，2:表示关联自己模块鉴权
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DataType?: number
+  /**
+   * 数据权限独有，表示数据范围，1：全公司，2:部门及下级部门，3:自己
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DataRange?: number
+  /**
+   * 关联权限, 表示这个功能权限要受哪个数据权限管控
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DataTo?: string
+  /**
+   * 父级权限key
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ParentKey?: string
+  /**
+   * 是否选中
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsChecked?: boolean
+  /**
+   * 子权限集合
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Children?: Array<Permission>
 }
 
 /**
@@ -3388,6 +3478,20 @@ export interface DescribeChannelFlowEvidenceReportRequest {
 }
 
 /**
+ * ChannelCreateRole返回参数结构体
+ */
+export interface ChannelCreateRoleResponse {
+  /**
+   * 角色id
+   */
+  RoleId?: string
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * SyncProxyOrganizationOperators返回参数结构体
  */
 export interface SyncProxyOrganizationOperatorsResponse {
@@ -3514,6 +3618,20 @@ DISABLE 关闭
 }
 
 /**
+ * ChannelModifyRole返回参数结构体
+ */
+export interface ChannelModifyRoleResponse {
+  /**
+   * 角色id
+   */
+  RoleId?: string
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 此结构体 (Filter) 用于描述查询过滤条件。
  */
 export interface Filter {
@@ -3574,6 +3692,20 @@ export interface CreateSignUrlsResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ChannelDeleteRole请求参数结构体
+ */
+export interface ChannelDeleteRoleRequest {
+  /**
+   * 代理企业和员工的信息。
+   */
+  Agent: Agent
+  /**
+   * 角色id，最多20个
+   */
+  RoleIds: Array<string>
 }
 
 /**
@@ -4016,6 +4148,32 @@ ProcessTimeout - 转换文件超时
 }
 
 /**
+ * 权限树中的权限组
+ */
+export interface PermissionGroup {
+  /**
+   * 权限组名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  GroupName?: string
+  /**
+   * 权限组key
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  GroupKey?: string
+  /**
+   * 是否隐藏分组，0否1是
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Hide?: number
+  /**
+   * 权限集合
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Permissions?: Array<Permission>
+}
+
+/**
  * ChannelCreateOrganizationModifyQrCode返回参数结构体
  */
 export interface ChannelCreateOrganizationModifyQrCodeResponse {
@@ -4116,6 +4274,32 @@ export interface ChannelBatchCancelFlowsRequest {
    * @deprecated
    */
   Operator?: UserInfo
+}
+
+/**
+ * ChannelModifyRole请求参数结构体
+ */
+export interface ChannelModifyRoleRequest {
+  /**
+   * 代理企业和员工的信息。
+   */
+  Agent: Agent
+  /**
+   * 角色名称，最大长度为20个字符，仅限中文、字母、数字和下划线组成。
+   */
+  Name: string
+  /**
+   * 角色Id，可通过接口 ChannelDescribeRoles 查询获取
+   */
+  RoleId: string
+  /**
+   * 角色描述，最大长度为50个字符
+   */
+  Description?: string
+  /**
+   * 权限树，权限树内容 PermissionGroups 可参考接口 DescribeIntegrationRoles 的输出
+   */
+  PermissionGroups?: Array<PermissionGroup>
 }
 
 /**
@@ -4621,6 +4805,16 @@ export interface ChannelDescribeEmployeesResponse {
    * 符合条件的员工数量
    */
   TotalCount?: number
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ChannelDeleteRole返回参数结构体
+ */
+export interface ChannelDeleteRoleResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

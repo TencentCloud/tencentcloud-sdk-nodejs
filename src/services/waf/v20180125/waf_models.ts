@@ -643,21 +643,33 @@ export interface CCRuleData {
 }
 
 /**
- * DescribeInstances返回参数结构体
+ * DescribeCustomRuleList请求参数结构体
  */
-export interface DescribeInstancesResponse {
+export interface DescribeCustomRuleListRequest {
   /**
-   * 总数
+   * 域名
    */
-  Total?: number
+  Domain: string
   /**
-   * instance列表
+   * 偏移
    */
-  Instances?: Array<InstanceInfo>
+  Offset: number
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 容量
    */
-  RequestId?: string
+  Limit: number
+  /**
+   * 过滤数组,name可以是如下的值： RuleID,RuleName,Match
+   */
+  Filters?: Array<FiltersItemNew>
+  /**
+   * asc或者desc
+   */
+  Order?: string
+  /**
+   * exp_ts或者mod_ts
+   */
+  By?: string
 }
 
 /**
@@ -1016,6 +1028,16 @@ export interface DescribeWafAutoDenyRulesRequest {
 }
 
 /**
+ * GenerateDealsAndPayNew请求参数结构体
+ */
+export interface GenerateDealsAndPayNewRequest {
+  /**
+   * 计费下单入参
+   */
+  Goods: Array<GoodNews>
+}
+
+/**
  * RefreshAccessCheckResult请求参数结构体
  */
 export interface RefreshAccessCheckResultRequest {
@@ -1310,6 +1332,24 @@ export interface DeleteAccessExportResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ModifyProtectionStatus请求参数结构体
+ */
+export interface ModifyProtectionStatusRequest {
+  /**
+   * 域名
+   */
+  Domain: string
+  /**
+   * 状态
+   */
+  Status: number
+  /**
+   * WAF的版本，clb-waf代表负载均衡WAF、sparta-waf代表SaaS WAF，默认是sparta-waf。
+   */
+  Edition?: string
 }
 
 /**
@@ -2709,6 +2749,20 @@ export interface ModifyCustomWhiteRuleResponse {
 }
 
 /**
+ * ModifyCustomWhiteRuleStatus返回参数结构体
+ */
+export interface ModifyCustomWhiteRuleStatusResponse {
+  /**
+   * 操作的状态码，如果所有的资源操作成功则返回的是成功的状态码，如果有资源操作失败则需要解析Message的内容来查看哪个资源失败
+   */
+  Success: ResponseCode
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeSession请求参数结构体
  */
 export interface DescribeSessionRequest {
@@ -3251,33 +3305,17 @@ export interface ModifyAntiInfoLeakRulesRequest {
 }
 
 /**
- * DescribeCustomRuleList请求参数结构体
+ * 计费下单响应实体
  */
-export interface DescribeCustomRuleListRequest {
+export interface DealData {
   /**
-   * 域名
+   * 订单号列表，元素个数与请求包的goods数组的元素个数一致，商品详情与订单按顺序对应
    */
-  Domain: string
+  DealNames?: Array<string>
   /**
-   * 偏移
+   * 大订单号，一个大订单号下可以有多个子订单，说明是同一次下单[{},{}]
    */
-  Offset: number
-  /**
-   * 容量
-   */
-  Limit: number
-  /**
-   * 过滤数组,name可以是如下的值： RuleID,RuleName,Match
-   */
-  Filters?: Array<FiltersItemNew>
-  /**
-   * asc或者desc
-   */
-  Order?: string
-  /**
-   * exp_ts或者mod_ts
-   */
-  By?: string
+  BigDealId?: string
 }
 
 /**
@@ -3371,15 +3409,21 @@ export interface ModifyCustomRuleStatusResponse {
  */
 export interface StrategyForAntiInfoLeak {
   /**
-   * 匹配字段
+   * 匹配条件，returncode（响应码）、keywords（关键字）、information（敏感信息）
    */
   Field: string
   /**
-   * 逻辑符号
+   * 逻辑符号，固定取值为contains
    */
   CompareFunc: string
   /**
-   * 匹配内容
+   * 匹配内容。
+以下三个对应Field为information时可取的匹配内容：
+idcard（身份证）、phone（手机号）、bankcard（银行卡）。
+以下为对应Field为returncode时可取的匹配内容：
+400（状态码400）、403（状态码403）、404（状态码404）、4xx（其它4xx状态码）、500（状态码500）、501（状态码501）、502（状态码502）、504（状态码504）、5xx（其它5xx状态码）。
+当对应Field为keywords时由用户自己输入匹配内容。
+
    */
   Content: string
 }
@@ -3523,13 +3567,28 @@ export interface CreateAccessExportResponse {
 }
 
 /**
- * ModifyCustomWhiteRuleStatus返回参数结构体
+ * GenerateDealsAndPayNew返回参数结构体
  */
-export interface ModifyCustomWhiteRuleStatusResponse {
+export interface GenerateDealsAndPayNewResponse {
   /**
-   * 操作的状态码，如果所有的资源操作成功则返回的是成功的状态码，如果有资源操作失败则需要解析Message的内容来查看哪个资源失败
+   * 计费下单响应结构体
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Success: ResponseCode
+  Data?: DealData
+  /**
+   * 1:成功，0:失败
+   */
+  Status?: number
+  /**
+   * 返回message
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ReturnMessage?: string
+  /**
+   * 购买的实例ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceId?: string
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3903,21 +3962,78 @@ export interface HostStatus {
 }
 
 /**
- * ModifyProtectionStatus请求参数结构体
+ * 产品明细
  */
-export interface ModifyProtectionStatusRequest {
+export interface GoodsDetailNew {
   /**
-   * 域名
+   * 时间间隔
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Domain: string
+  TimeSpan?: number
   /**
-   * 状态
+   * 单位，支持m、y、d
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Status: number
+  TimeUnit?: string
   /**
-   * WAF的版本，clb-waf代表负载均衡WAF、sparta-waf代表SaaS WAF，默认是sparta-waf。
+   * 子产品标签,。新购，续费必传，变配时放在oldConfig newConfig里面
+高级版 ：sp_wsm_waf_premium
+企业版 ：sp_wsm_waf_enterprise
+旗舰版 ：sp_wsm_waf_ultimate
+高级版-CLB:sp_wsm_waf_premium_clb
+企业版-CLB : sp_wsm_waf_enterprise_clb
+旗舰版-CLB:sp_wsm_waf_ultimate_clb
+
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Edition?: string
+  SubProductCode?: string
+  /**
+   * 业务产品申请的pid（对应一个定价公式），通过pid计费查询到定价模型
+高级版 ：1000827
+企业版 ：1000830
+旗舰版 ：1000832
+高级版-CLB:1001150
+企业版-CLB : 1001152
+旗舰版-CLB:1001154
+
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Pid?: number
+  /**
+   * waf实例名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceName?: string
+  /**
+   * 1:自动续费，0:不自动续费
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AutoRenewFlag?: number
+  /**
+   * waf购买的实际地域信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RealRegion?: number
+  /**
+   * 计费细项标签数组
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LabelTypes?: Array<string>
+  /**
+   * 计费细项标签数量，一般和SvLabelType一一对应
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LabelCounts?: Array<number | bigint>
+  /**
+   * 变配使用，实例到期时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CurDeadline?: string
+  /**
+   * 对存在的实例购买bot 或api 安全
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceId?: string
 }
 
 /**
@@ -4659,6 +4775,24 @@ export interface DeleteCustomRuleRequest {
 }
 
 /**
+ * DescribeInstances返回参数结构体
+ */
+export interface DescribeInstancesResponse {
+  /**
+   * 总数
+   */
+  Total?: number
+  /**
+   * instance列表
+   */
+  Instances?: Array<InstanceInfo>
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeCCRule返回参数结构体
  */
 export interface DescribeCCRuleResponse {
@@ -5239,6 +5373,39 @@ export interface DescribeVipInfoResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 计费下单接口出入参Goods
+ */
+export interface GoodNews {
+  /**
+   * 商品数量
+   */
+  GoodsNum: number
+  /**
+   * 商品明细
+   */
+  GoodsDetail: GoodsDetailNew
+  /**
+   * 订单类型ID，用来唯一标识一个业务的一种场景（总共三种场景：新购、配置变更、续费）
+高级版: 102375(新购),102376(续费),102377(变配)
+企业版 : 102378(新购),102379(续费),102380(变配)
+旗舰版 : 102369(新购),102370(续费),102371(变配)
+高级版-CLB: 新购 101198  续费 101199 变配 101200
+企业版-CLB 101204(新购),101205(续费),101206(变配)
+旗舰版-CLB : 101201(新购),101202(续费),101203(变配)
+
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  GoodsCategoryId?: number
+  /**
+   * 购买waf实例区域ID
+1 表示购买大陆资源
+2表示购买非中国大陆资源
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RegionId?: number
 }
 
 /**

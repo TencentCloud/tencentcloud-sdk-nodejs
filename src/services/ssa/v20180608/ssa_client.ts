@@ -33,14 +33,15 @@ import {
   QueryFilter,
   QueryFilterV3,
   SocComplianceItem,
-  SaEventPubResponse,
-  DescribeVulListRequest,
+  SocCheckItem,
+  SaDivulgeScanRuleSetList,
   DescribeLeakDetectionListRequest,
   DescribeSocAlertListRequest,
   DomainInfo,
   DescribeConfigListRequest,
   DescribeComplianceDetailResponse,
-  SocCheckItem,
+  SaEventPubResponse,
+  SaDivulgeScanRuleMutateRequest,
   DescribeComplianceAssetListRequest,
   DescribeAssetDetailListRequest,
   AlertDetail,
@@ -74,10 +75,12 @@ import {
   DescribeSafetyEventListResponse,
   DescribeSocCheckResultListRequest,
   DescribeSocAlertDetailsRequest,
+  SaDivulgeScanRuleMutateResponse,
   DescribeSocCspmComplianceResponse,
   DescribeSocCheckItemListRequest,
   Filter,
   AlarmInfoRsp,
+  DescribeVulListRequest,
   DataEvent,
   SocCheckItemV1,
   CheckAssetItem,
@@ -241,6 +244,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeSafetyEventListResponse) => void
   ): Promise<DescribeSafetyEventListResponse> {
     return this.request("DescribeSafetyEventList", req, cb)
+  }
+
+  /**
+   * SaDivulgeScanRuleMutate
+   */
+  async SaDivulgeScanRuleMutate(
+    req: SaDivulgeScanRuleMutateRequest,
+    cb?: (error: string, rep: SaDivulgeScanRuleMutateResponse) => void
+  ): Promise<SaDivulgeScanRuleMutateResponse> {
+    return this.request("SaDivulgeScanRuleMutate", req, cb)
   }
 
   /**

@@ -189,23 +189,33 @@ export interface DescribeAccountPrivilegesResponse {
 }
 
 /**
- * 实例的审计规则详情，DescribeAuditRuleWithInstanceIds接口的出参。
+ * 实例的审计规则详情。
  */
 export interface InstanceAuditRule {
   /**
    * 实例ID。
    */
-  InstanceId: string
+  InstanceId?: string
   /**
    * 是否是规则审计。true-规则审计，false-全审计。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  AuditRule: boolean
+  AuditRule?: boolean
   /**
    * 审计规则详情。仅当AuditRule=true时有效。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  AuditRuleFilters: Array<AuditRuleFilters>
+  AuditRuleFilters?: Array<AuditRuleFilters>
+  /**
+   * 是否是审计策略
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OldRule?: boolean
+  /**
+   * 实例应用的规则模板详情
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RuleTemplates?: Array<RuleTemplateInfo>
 }
 
 /**
@@ -322,7 +332,7 @@ export interface DescribeBackupConfigRequest {
  */
 export interface ModifyAuditRuleTemplatesRequest {
   /**
-   * 审计规则模版ID。
+   * 审计规则模板ID。
    */
   RuleTemplateIds: Array<string>
   /**
@@ -330,13 +340,21 @@ export interface ModifyAuditRuleTemplatesRequest {
    */
   RuleFilters?: Array<RuleFilters>
   /**
-   * 修改后的规则模版名称。
+   * 修改后的规则模板名称。
    */
   RuleTemplateName?: string
   /**
-   * 修改后的规则模版描述。
+   * 修改后的规则模板描述。
    */
   Description?: string
+  /**
+   * 告警等级。1-低风险，2-中风险，3-高风险。
+   */
+  AlarmLevel?: number
+  /**
+   * 告警策略。0-不告警，1-告警。
+   */
+  AlarmPolicy?: number
 }
 
 /**
@@ -564,11 +582,11 @@ export interface DescribeAuditLogFilesResponse {
   /**
    * 符合条件的审计日志文件个数。
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 审计日志文件详情。
    */
-  Items: Array<AuditLogFile>
+  Items?: Array<AuditLogFile>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -692,6 +710,28 @@ export interface ModifyInstanceNameRequest {
    * 实例名称
    */
   InstanceName: string
+}
+
+/**
+ * SwitchClusterVpc请求参数结构体
+ */
+export interface SwitchClusterVpcRequest {
+  /**
+   * 集群ID
+   */
+  ClusterId: string
+  /**
+   * 字符串vpc id
+   */
+  UniqVpcId: string
+  /**
+   * 字符串子网id
+   */
+  UniqSubnetId: string
+  /**
+   * 旧地址回收时间
+   */
+  OldIpReserveHours: number
 }
 
 /**
@@ -1203,25 +1243,17 @@ export interface UpgradeProxyVersionRequest {
 }
 
 /**
- * SwitchClusterVpc请求参数结构体
+ * OfflineInstance请求参数结构体
  */
-export interface SwitchClusterVpcRequest {
+export interface OfflineInstanceRequest {
   /**
    * 集群ID
    */
   ClusterId: string
   /**
-   * 字符串vpc id
+   * 实例ID数组
    */
-  UniqVpcId: string
-  /**
-   * 字符串子网id
-   */
-  UniqSubnetId: string
-  /**
-   * 旧地址回收时间
-   */
-  OldIpReserveHours: number
+  InstanceIdList: Array<string>
 }
 
 /**
@@ -1632,6 +1664,42 @@ export interface SetRenewFlagRequest {
    * 自动续费标志位，续费标记 0:正常续费  1:自动续费 2:到期不续
    */
   AutoRenewFlag: number
+}
+
+/**
+ * 规则模板内容
+ */
+export interface RuleTemplateInfo {
+  /**
+   * 规则模板ID。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RuleTemplateId?: string
+  /**
+   * 规则模板名称。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RuleTemplateName?: string
+  /**
+   * 规则内容。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RuleFilters?: Array<RuleFilters>
+  /**
+   * 告警等级。1-低风险，2-中风险，3-高风险。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AlarmLevel?: number
+  /**
+   * 告警策略。0-不告警，1-告警。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AlarmPolicy?: number
+  /**
+   * 规则描述。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Description?: string
 }
 
 /**
@@ -2262,7 +2330,7 @@ export interface CreateAccountsRequest {
  */
 export interface DeleteAuditRuleTemplatesRequest {
   /**
-   * 审计规则模版ID。
+   * 审计规则模板ID。
    */
   RuleTemplateIds: Array<string>
 }
@@ -2274,12 +2342,12 @@ export interface DescribeAuditRuleTemplatesResponse {
   /**
    * 符合查询条件的实例总数。
    */
-  TotalCount: number
+  TotalCount?: number
   /**
-   * 规则模版详细信息列表。
+   * 规则模板详细信息列表。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Items: Array<AuditRuleTemplateInfo>
+  Items?: Array<AuditRuleTemplateInfo>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2802,12 +2870,12 @@ export interface DescribeAuditRuleWithInstanceIdsResponse {
   /**
    * 无
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 实例审计规则信息。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Items: Array<InstanceAuditRule>
+  Items?: Array<InstanceAuditRule>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3685,7 +3753,7 @@ export interface ModifyAuditServiceRequest {
    */
   AuditRuleFilters?: Array<AuditRuleFilters>
   /**
-   * 规则模版ID。
+   * 规则模板ID。
    */
   RuleTemplateIds?: Array<string>
 }
@@ -3984,9 +4052,13 @@ export interface OpenAuditServiceRequest {
    */
   AuditRuleFilters?: Array<AuditRuleFilters>
   /**
-   * 规则模版ID。同AuditRuleFilters都不填是全审计。
+   * 规则模板ID。同AuditRuleFilters都不填是全审计。
    */
   RuleTemplateIds?: Array<string>
+  /**
+   * 审计类型。true-全审计；默认false-规则审计。
+   */
+  AuditAll?: boolean
 }
 
 /**
@@ -4419,17 +4491,29 @@ export interface RollbackTimeRange {
 }
 
 /**
- * OfflineInstance请求参数结构体
+ * 审计日志命中规则模板的基本信息
  */
-export interface OfflineInstanceRequest {
+export interface LogRuleTemplateInfo {
   /**
-   * 集群ID
+   * 模板ID
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  ClusterId: string
+  RuleTemplateId?: string
   /**
-   * 实例ID数组
+   * 规则模板名
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  InstanceIdList: Array<string>
+  RuleTemplateName?: string
+  /**
+   * 告警等级。1-低风险，2-中风险，3-高风险。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AlarmLevel?: string
+  /**
+   * 规则模板变更状态：0-未变更；1-已变更；2-已删除
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RuleTemplateStatus?: number
 }
 
 /**
@@ -5093,30 +5177,55 @@ export interface DescribeRollbackTimeValidityResponse {
 }
 
 /**
- * 审计规则模版的详情
+ * 审计规则模板的详情
  */
 export interface AuditRuleTemplateInfo {
   /**
-   * 规则模版ID。
+   * 规则模板ID。
    */
-  RuleTemplateId: string
+  RuleTemplateId?: string
   /**
-   * 规则模版名称。
+   * 规则模板名称。
    */
-  RuleTemplateName: string
+  RuleTemplateName?: string
   /**
-   * 规则模版的过滤条件
+   * 规则模板的过滤条件
    */
-  RuleFilters: Array<RuleFilters>
+  RuleFilters?: Array<RuleFilters>
   /**
-   * 规则模版描述。
+   * 规则模板描述。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Description: string
+  Description?: string
   /**
-   * 规则模版创建时间。
+   * 规则模板创建时间。
    */
-  CreateAt: string
+  CreateAt?: string
+  /**
+   * 规则模板修改时间。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UpdateAt?: string
+  /**
+   * 告警等级。1-低风险，2-中风险，3-高风险。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AlarmLevel?: number
+  /**
+   * 告警策略。0-不告警，1-告警。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AlarmPolicy?: number
+  /**
+   * 模版状态。0-无任务 ，1-修改中。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status?: number
+  /**
+   * 规则模板应用在哪些在实例。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AffectedInstances?: Array<string>
 }
 
 /**
@@ -5397,13 +5506,21 @@ export interface CreateAuditRuleTemplateRequest {
    */
   RuleFilters: Array<RuleFilters>
   /**
-   * 规则模版名称。
+   * 规则模板名称。
    */
   RuleTemplateName: string
   /**
-   * 规则模版描述。
+   * 规则模板描述。
    */
   Description?: string
+  /**
+   * 告警等级。1-低风险，2-中风险，3-高风险
+   */
+  AlarmLevel?: number
+  /**
+   * 告警策略。0-不告警，1-告警。
+   */
+  AlarmPolicy?: number
 }
 
 /**
@@ -5814,10 +5931,10 @@ pause
  */
 export interface CreateAuditRuleTemplateResponse {
   /**
-   * 生成的规则模版ID。
+   * 生成的规则模板ID。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RuleTemplateId: string
+  RuleTemplateId?: string
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6162,11 +6279,11 @@ export type OpenClusterReadOnlyInstanceGroupAccessRequest = null
  */
 export interface DescribeAuditRuleTemplatesRequest {
   /**
-   * 规则模版ID。
+   * 规则模板ID。
    */
   RuleTemplateIds?: Array<string>
   /**
-   * 规则模版名称
+   * 规则模板名称
    */
   RuleTemplateNames?: Array<string>
   /**
@@ -6177,6 +6294,14 @@ export interface DescribeAuditRuleTemplatesRequest {
    * 偏移量，默认值为 0。
    */
   Offset?: number
+  /**
+   * 告警等级。1-低风险，2-中风险，3-高风险。
+   */
+  AlarmLevel?: number
+  /**
+   * 告警策略。0-不告警，1-告警。
+   */
+  AlarmPolicy?: number
 }
 
 /**
@@ -7615,6 +7740,7 @@ export interface ModifyInstanceNameResponse {
 export interface AuditRuleFilters {
   /**
    * 单条审计规则。
+注意：此字段可能返回 null，表示取不到有效值。
    */
   RuleFilters: Array<RuleFilters>
 }
@@ -7927,6 +8053,11 @@ export interface AuditLog {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   NsTime?: number
+  /**
+   * 日志命中规则模板的基本信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TemplateInfo?: Array<LogRuleTemplateInfo>
 }
 
 /**
@@ -8227,28 +8358,13 @@ export interface InstanceAuditLogFilter {
   /**
    * 过滤项。目前支持以下搜索条件：
 
-包含、不包含、包含（分词维度）、不包含（分词维度）:
-sql - SQL详情
+包含、不包含、包含（分词维度）、不包含（分词维度）: sql - SQL详情；alarmLevel - 告警等级；ruleTemplateId - 规则模板Id
 
-等于、不等于、包含、不包含：
-host - 客户端地址；
-user - 用户名；
-dbName - 数据库名称；
+等于、不等于、包含、不包含： host - 客户端地址； user - 用户名； dbName - 数据库名称；
 
-等于、不等于：
-sqlType - SQL类型；
-errCode - 错误码；
-threadId - 线程ID；
+等于、不等于： sqlType - SQL类型； errCode - 错误码； threadId - 线程ID；
 
-范围搜索（时间类型统一为微妙）：
-execTime - 执行时间；
-lockWaitTime - 锁等待时间；
-ioWaitTime - IO等待时间；
-trxLivingTime - 事物持续时间；
-cpuTime - cpu时间；
-checkRows - 扫描行数；
-affectRows - 影响行数；
-sentRows - 返回行数。
+范围搜索（时间类型统一为微秒）： execTime - 执行时间； lockWaitTime - 执行时间； ioWaitTime - IO等待时间； trxLivingTime - 事物持续时间； cpuTime - cpu时间； checkRows - 扫描行数； affectRows - 影响行数； sentRows - 返回行数。
    */
   Type: string
   /**

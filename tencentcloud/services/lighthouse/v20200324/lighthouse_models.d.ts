@@ -2695,89 +2695,93 @@ export interface Blueprint {
     /**
      * 镜像 ID  ，是 Blueprint 的唯一标识。
      */
-    BlueprintId: string;
+    BlueprintId?: string;
     /**
      * 镜像对外展示标题。
      */
-    DisplayTitle: string;
+    DisplayTitle?: string;
     /**
      * 镜像对外展示版本。
      */
-    DisplayVersion: string;
+    DisplayVersion?: string;
     /**
      * 镜像描述信息。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Description: string;
+    Description?: string;
     /**
      * 操作系统名称。
      */
-    OsName: string;
+    OsName?: string;
     /**
      * 操作系统平台。
      */
-    Platform: string;
+    Platform?: string;
     /**
      * 操作系统平台类型，如 LINUX_UNIX、WINDOWS。
      */
-    PlatformType: string;
+    PlatformType?: string;
     /**
      * 镜像类型，如 APP_OS、PURE_OS、PRIVATE。
      */
-    BlueprintType: string;
+    BlueprintType?: string;
     /**
      * 镜像图片 URL。
      */
-    ImageUrl: string;
+    ImageUrl?: string;
     /**
      * 镜像所需系统盘大小，单位 GB。
      */
-    RequiredSystemDiskSize: number;
+    RequiredSystemDiskSize?: number;
     /**
      * 镜像状态。
      */
-    BlueprintState: string;
+    BlueprintState?: string;
     /**
      * 创建时间。按照 ISO8601 标准表示，并且使用 UTC 时间。
   格式为： YYYY-MM-DDThh:mm:ssZ。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CreatedTime: string;
+    CreatedTime?: string;
     /**
      * 镜像名称。
      */
-    BlueprintName: string;
+    BlueprintName?: string;
     /**
      * 镜像是否支持自动化助手。
      */
-    SupportAutomationTools: boolean;
+    SupportAutomationTools?: boolean;
     /**
      * 镜像所需内存大小, 单位: GB
      */
-    RequiredMemorySize: number;
+    RequiredMemorySize?: number;
     /**
      * CVM镜像共享到轻量应用服务器轻量应用服务器后的CVM镜像ID。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ImageId: string;
+    ImageId?: string;
     /**
      * 官方网站Url。
      */
-    CommunityUrl: string;
+    CommunityUrl?: string;
     /**
      * 指导文章Url。
      */
-    GuideUrl: string;
+    GuideUrl?: string;
     /**
      * 镜像关联使用场景Id列表。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SceneIdSet: Array<string>;
+    SceneIdSet?: Array<string>;
     /**
      * Docker版本号。
   注意：此字段可能返回 null，表示取不到有效值。
      */
     DockerVersion?: string;
+    /**
+     * 镜像是否已共享。
+     */
+    BlueprintShared?: boolean;
 }
 /**
  * InquirePriceCreateInstances返回参数结构体

@@ -100,6 +100,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeSafetyEventList", req, cb);
     }
     /**
+     * SaDivulgeScanRuleMutate
+     */
+    async SaDivulgeScanRuleMutate(req, cb) {
+        return this.request("SaDivulgeScanRuleMutate", req, cb);
+    }
+    /**
      * 合规管理总览页检查项列表
      */
     async DescribeComplianceList(req, cb) {

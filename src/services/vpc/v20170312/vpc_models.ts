@@ -2699,6 +2699,10 @@ export interface NatGatewayAddress {
    * 资源封堵状态。true表示弹性ip处于封堵状态，false表示弹性ip处于未封堵状态。
    */
   IsBlocked?: boolean
+  /**
+   * 资源封堵类型。NORMAL表示未封禁，SECURITY表示安全封禁，USER表示用户封禁，OTHER表示其他封禁，多个原因封禁时用&连接，比如：SECURITY&USER&OTHER。
+   */
+  BlockType?: string
 }
 
 /**
@@ -4865,93 +4869,103 @@ export interface NatGateway {
   /**
    * NAT网关的ID。
    */
-  NatGatewayId: string
+  NatGatewayId?: string
   /**
    * NAT网关的名称。
    */
-  NatGatewayName: string
+  NatGatewayName?: string
   /**
    * NAT网关创建的时间。
    */
-  CreatedTime: string
+  CreatedTime?: string
   /**
    * NAT网关的状态。
  'PENDING'：生产中，'DELETING'：删除中，'AVAILABLE'：运行中，'UPDATING'：升级中，
 ‘FAILED’：失败。
    */
-  State: string
+  State?: string
   /**
    * 网关最大外网出带宽(单位:Mbps)。
    */
-  InternetMaxBandwidthOut: number
+  InternetMaxBandwidthOut?: number
   /**
    * 网关并发连接上限。
    */
-  MaxConcurrentConnection: number
+  MaxConcurrentConnection?: number
   /**
    * 绑定NAT网关的公网IP对象数组。
    */
-  PublicIpAddressSet: Array<NatGatewayAddress>
+  PublicIpAddressSet?: Array<NatGatewayAddress>
   /**
    * NAT网关网络状态。“AVAILABLE”:运行中, “UNAVAILABLE”:不可用, “INSUFFICIENT”:欠费停服。
    */
-  NetworkState: string
+  NetworkState?: string
   /**
    * NAT网关的端口转发规则。
    */
-  DestinationIpPortTranslationNatRuleSet: Array<DestinationIpPortTranslationNatRule>
+  DestinationIpPortTranslationNatRuleSet?: Array<DestinationIpPortTranslationNatRule>
   /**
    * VPC实例ID。
    */
-  VpcId: string
+  VpcId?: string
   /**
    * NAT网关所在的可用区。
    */
-  Zone: string
+  Zone?: string
   /**
    * 绑定的专线网关ID。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DirectConnectGatewayIds: Array<string>
+  DirectConnectGatewayIds?: Array<string>
   /**
    * 所属子网ID。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SubnetId: string
+  SubnetId?: string
   /**
    * 标签键值对。
    */
-  TagSet: Array<Tag>
+  TagSet?: Array<Tag>
   /**
    * NAT网关绑定的安全组列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SecurityGroupSet: Array<string>
+  SecurityGroupSet?: Array<string>
   /**
    * NAT网关的SNAT转发规则。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SourceIpTranslationNatRuleSet: Array<SourceIpTranslationNatRule>
+  SourceIpTranslationNatRuleSet?: Array<SourceIpTranslationNatRule>
   /**
    * 是否独享型NAT。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  IsExclusive: boolean
+  IsExclusive?: boolean
   /**
    * 独享型NAT所在的网关集群的带宽(单位:Mbps)，当IsExclusive为false时无此字段。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ExclusiveGatewayBandwidth: number
+  ExclusiveGatewayBandwidth?: number
   /**
    * NAT网关是否被封禁。“NORMAL”：未被封禁，“RESTRICTED”：已被封禁。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RestrictState: string
+  RestrictState?: string
   /**
    * NAT网关大版本号，传统型=1，标准型=2
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  NatProductVersion: number
+  NatProductVersion?: number
+  /**
+   * 是否启用根据目的网段选择SNAT使用的EIP功能	
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SmartScheduleMode?: boolean
+  /**
+   * NAT实例归属的专属集群id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DedicatedClusterId?: string
 }
 
 /**
@@ -8593,7 +8607,6 @@ export interface AllocateAddressesRequest {
    * EIP类型。默认值：EIP。
 <ul style="margin:0"><li>已开通Anycast公网加速白名单的用户，可选值：<ul><li>AnycastEIP：加速IP，可参见 [Anycast 公网加速](https://cloud.tencent.com/document/product/644)</li></ul>注意：仅部分地域支持加速IP。</li></ul>
 <ul style="margin:0"><li>已开通精品IP白名单的用户，可选值：<ul><li>HighQualityEIP：精品IP</li></ul>注意：仅部分地域支持精品IP。</li></ul>
-</ul>
 <ul style="margin:0"><li>已开高防IP白名单的用户，可选值：<ul><li>AntiDDoSEIP：高防IP</li></ul>注意：仅部分地域支持高防IP。</li></ul>
    */
   AddressType?: string
@@ -8622,7 +8635,7 @@ AnycastEIP是否用于绑定负载均衡。
    */
   AddressName?: string
   /**
-   * 网络出口，默认是：center_egress1
+   * 静态单线IP网络出口，默认值：center_egress1
    */
   Egress?: string
   /**
@@ -11004,6 +11017,11 @@ export interface Address {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceType?: string
+  /**
+   * 静态单线IP网络出口
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Egress?: string
   /**
    * 高防包ID,当EIP类型为高防EIP时，返回EIP绑定的高防包ID.
    */

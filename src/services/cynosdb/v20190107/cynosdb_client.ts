@@ -50,6 +50,7 @@ import {
   DescribeBinlogDownloadUrlRequest,
   CreateAccountsResponse,
   ModifyInstanceNameRequest,
+  SwitchClusterVpcRequest,
   ModifyClusterDatabaseResponse,
   UpgradeClusterVersionResponse,
   DescribeDBSecurityGroupsResponse,
@@ -73,7 +74,7 @@ import {
   DescribeParamTemplatesRequest,
   CopyClusterPasswordComplexityResponse,
   UpgradeProxyVersionRequest,
-  SwitchClusterVpcRequest,
+  OfflineInstanceRequest,
   DescribeAuditLogsResponse,
   DescribeInstanceParamsRequest,
   DescribeProxiesResponse,
@@ -88,6 +89,7 @@ import {
   DescribeBackupConfigResponse,
   CreateClustersResponse,
   SetRenewFlagRequest,
+  RuleTemplateInfo,
   RuleFilters,
   OfflineClusterRequest,
   DescribeClusterDetailDatabasesResponse,
@@ -199,7 +201,7 @@ import {
   DescribeBackupDownloadUrlRequest,
   SearchClusterDatabasesResponse,
   RollbackTimeRange,
-  OfflineInstanceRequest,
+  LogRuleTemplateInfo,
   ModifyClusterPasswordComplexityRequest,
   RevokeAccountPrivilegesRequest,
   OpenWanRequest,
@@ -413,7 +415,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建审计规则模版
+   * 创建审计规则模板
    */
   async CreateAuditRuleTemplate(
     req: CreateAuditRuleTemplateRequest,
@@ -703,7 +705,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除审计规则模版
+   * 删除审计规则模板
    */
   async DeleteAuditRuleTemplates(
     req: DeleteAuditRuleTemplatesRequest,
@@ -1273,7 +1275,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改审计规则模版
+   * 修改审计规则模板
    */
   async ModifyAuditRuleTemplates(
     req: ModifyAuditRuleTemplatesRequest,
@@ -1333,7 +1335,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询审计规则模版信息
+   * 查询审计规则模板信息
    */
   async DescribeAuditRuleTemplates(
     req: DescribeAuditRuleTemplatesRequest,

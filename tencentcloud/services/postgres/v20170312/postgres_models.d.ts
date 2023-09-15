@@ -27,7 +27,8 @@ export interface CreateDBInstancesRequest {
      */
     ProjectId?: number;
     /**
-     * PostgreSQL版本。当输入该参数时，会基于此版本创建对应的最新内核版本号实例。该参数和DBMajorVersion、DBKernelVersion至少需要传递一个。
+     * PostgreSQL社区大版本+小版本号。
+  一般场景不推荐传入该参数。如需指定，只能传当前大版本号下最新小版本号。
      */
     DBVersion?: string;
     /**
@@ -75,11 +76,13 @@ export interface CreateDBInstancesRequest {
      */
     SecurityGroupIds?: Array<string>;
     /**
-     * PostgreSQL主要版本。当输入该参数时，会基于此版本创建对应的最新内核版本号实例。该参数和DBVersion、DBKernelVersion至少需要传递一个。
+     * PostgreSQL大版本号（该参数当前必传），版本信息可从[DescribeDBVersions](https://cloud.tencent.com/document/api/409/89018)获取。目前支持10，11，12，13，14，15这几个大版本，详情见[内核版本概述](https://cloud.tencent.com/document/product/409/67018)。
+  输入该参数时，会基于此大版本号创建对应的最新小版本的最新内核版本号实例。
      */
     DBMajorVersion?: string;
     /**
-     * PostgreSQL内核版本。当输入该参数时，会创建该内核版本号实例。该参数和DBVersion、DBMajorVersion至少需要传递一个。
+     * PostgreSQL内核版本号。
+  一般场景不推荐传入该参数。如需指定，只能传当前大版本号下最新内核版本号。
      */
     DBKernelVersion?: string;
 }
@@ -490,11 +493,11 @@ export interface DescribeAvailableRecoveryTimeResponse {
     /**
      * 可恢复的最早时间，时区为东八区（UTC+8）。
      */
-    RecoveryBeginTime: string;
+    RecoveryBeginTime?: string;
     /**
      * 可恢复的最晚时间，时区为东八区（UTC+8）。
      */
-    RecoveryEndTime: string;
+    RecoveryEndTime?: string;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1267,43 +1270,43 @@ export interface BaseBackup {
     /**
      * 实例ID。
      */
-    DBInstanceId: string;
+    DBInstanceId?: string;
     /**
      * 备份文件唯一标识。
      */
-    Id: string;
+    Id?: string;
     /**
      * 备份文件名称。
      */
-    Name: string;
+    Name?: string;
     /**
      * 备份方式：物理备份、逻辑备份。
      */
-    BackupMethod: string;
+    BackupMethod?: string;
     /**
      * 备份模式：自动备份、手动备份。
      */
-    BackupMode: string;
+    BackupMode?: string;
     /**
      * 备份任务状态。
      */
-    State: string;
+    State?: string;
     /**
      * 备份集大小，单位bytes。
      */
-    Size: number;
+    Size?: number;
     /**
      * 备份的开始时间。
      */
-    StartTime: string;
+    StartTime?: string;
     /**
      * 备份的结束时间。
      */
-    FinishTime: string;
+    FinishTime?: string;
     /**
      * 备份的过期时间。
      */
-    ExpireTime: string;
+    ExpireTime?: string;
 }
 /**
  * CreateReadOnlyDBInstance返回参数结构体
@@ -4120,43 +4123,43 @@ export interface LogBackup {
     /**
      * 实例ID。
      */
-    DBInstanceId: string;
+    DBInstanceId?: string;
     /**
      * 备份文件唯一标识。
      */
-    Id: string;
+    Id?: string;
     /**
      * 备份文件名称。
      */
-    Name: string;
+    Name?: string;
     /**
      * 备份方式：物理备份、逻辑备份。
      */
-    BackupMethod: string;
+    BackupMethod?: string;
     /**
      * 备份模式：自动备份、手动备份。
      */
-    BackupMode: string;
+    BackupMode?: string;
     /**
      * 备份任务状态。
      */
-    State: string;
+    State?: string;
     /**
      * 备份集大小，单位bytes。
      */
-    Size: number;
+    Size?: number;
     /**
      * 备份的开始时间。
      */
-    StartTime: string;
+    StartTime?: string;
     /**
      * 备份的结束时间。
      */
-    FinishTime: string;
+    FinishTime?: string;
     /**
      * 备份的过期时间。
      */
-    ExpireTime: string;
+    ExpireTime?: string;
 }
 /**
  * RebalanceReadOnlyGroup请求参数结构体
@@ -4981,23 +4984,23 @@ export interface PolicyRule {
     /**
      * 策略，ACCEPT 或者 DROP
      */
-    Action: string;
+    Action?: string;
     /**
      * 来源或目的 IP 或 IP 段，例如172.16.0.0/12
      */
-    CidrIp: string;
+    CidrIp?: string;
     /**
      * 端口
      */
-    PortRange: string;
+    PortRange?: string;
     /**
      * 网络协议，支持 UDP、TCP 等
      */
-    IpProtocol: string;
+    IpProtocol?: string;
     /**
      * 规则描述
      */
-    Description: string;
+    Description?: string;
 }
 /**
  * ModifyDBInstanceSpec返回参数结构体

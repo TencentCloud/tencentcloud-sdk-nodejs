@@ -1862,57 +1862,30 @@ export interface KVPair {
 }
 
 /**
- * 数据表配置信息
+ * QueryResult返回参数结构体
  */
-export interface TableBaseInfo {
+export interface QueryResultResponse {
   /**
-   * 该数据表所属数据库名字
+   * 任务Id
    */
-  DatabaseName: string
+  TaskId: string
   /**
-   * 数据表名字
+   * 结果数据
    */
-  TableName: string
+  ResultSet: string
   /**
-   * 该数据表所属数据源名字
+   * schema
+   */
+  ResultSchema: Array<Column>
+  /**
+   * 分页信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DatasourceConnectionName?: string
+  NextToken: string
   /**
-   * 该数据表备注
-注意：此字段可能返回 null，表示取不到有效值。
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  TableComment?: string
-  /**
-   * 具体类型，表or视图
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Type?: string
-  /**
-   * 数据格式类型，hive，iceberg等
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TableFormat?: string
-  /**
-   * 建表用户昵称
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  UserAlias?: string
-  /**
-   * 建表用户ID
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  UserSubUin?: string
-  /**
-   * 数据治理配置项
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  GovernPolicy?: DataGovernPolicy
-  /**
-   * 库数据治理是否关闭，关闭：true，开启：false
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  DbGovernPolicyIsDisable?: string
+  RequestId?: string
 }
 
 /**
@@ -2529,6 +2502,20 @@ export interface Partition {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateTime: number
+}
+
+/**
+ * QueryResult请求参数结构体
+ */
+export interface QueryResultRequest {
+  /**
+   * 任务ID
+   */
+  TaskId: string
+  /**
+   * lastReadFile为上一次读取的文件，lastReadOffset为上一次读取到的位置
+   */
+  NextToken?: string
 }
 
 /**
@@ -3158,6 +3145,60 @@ export interface CancelNotebookSessionStatementResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 数据表配置信息
+ */
+export interface TableBaseInfo {
+  /**
+   * 该数据表所属数据库名字
+   */
+  DatabaseName: string
+  /**
+   * 数据表名字
+   */
+  TableName: string
+  /**
+   * 该数据表所属数据源名字
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DatasourceConnectionName?: string
+  /**
+   * 该数据表备注
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TableComment?: string
+  /**
+   * 具体类型，表or视图
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Type?: string
+  /**
+   * 数据格式类型，hive，iceberg等
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TableFormat?: string
+  /**
+   * 建表用户昵称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UserAlias?: string
+  /**
+   * 建表用户ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UserSubUin?: string
+  /**
+   * 数据治理配置项
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  GovernPolicy?: DataGovernPolicy
+  /**
+   * 库数据治理是否关闭，关闭：true，开启：false
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DbGovernPolicyIsDisable?: string
 }
 
 /**

@@ -368,6 +368,16 @@ it("ssl.v20191205.DescribeCertificateBindResourceTaskResult", async function () 
     }
 })
 
+it("ssl.v20191205.CancelAuditCertificate", async function () {
+    try {
+       const data = await client.CancelAuditCertificate({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ssl.v20191205.DescribeHostDeployRecord", async function () {
     try {
        const data = await client.DescribeHostDeployRecord({})
@@ -561,6 +571,16 @@ it("ssl.v20191205.DescribeManagers", async function () {
 it("ssl.v20191205.DescribeCertificateBindResourceTaskDetail", async function () {
     try {
        const data = await client.DescribeCertificateBindResourceTaskDetail({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ssl.v20191205.ModifyCertificateResubmit", async function () {
+    try {
+       const data = await client.ModifyCertificateResubmit({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

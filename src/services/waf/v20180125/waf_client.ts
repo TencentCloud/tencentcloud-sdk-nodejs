@@ -47,7 +47,7 @@ import {
   LoadBalancerPackageNew,
   DescribeAntiFakeUrlRequest,
   CCRuleData,
-  DescribeInstancesResponse,
+  DescribeCustomRuleListRequest,
   ModifyDomainWhiteRuleRequest,
   DescribeTlsVersionResponse,
   DescribeHostsResponse,
@@ -62,6 +62,7 @@ import {
   DescribeDomainVerifyResultResponse,
   DeleteSessionRequest,
   DescribeWafAutoDenyRulesRequest,
+  GenerateDealsAndPayNewRequest,
   RefreshAccessCheckResultRequest,
   DescribeUserClbWafRegionsRequest,
   AddAntiFakeUrlResponse,
@@ -82,6 +83,7 @@ import {
   DescribeUserCdcClbWafRegionsResponse,
   GetAttackHistogramRequest,
   DeleteAccessExportResponse,
+  ModifyProtectionStatusRequest,
   DescribeAccessExportsRequest,
   ModifyApiAnalyzeStatusResponse,
   DescribeCustomWhiteRuleRequest,
@@ -135,6 +137,7 @@ import {
   IpHitItem,
   PostAttackDownloadTaskRequest,
   ModifyCustomWhiteRuleResponse,
+  ModifyCustomWhiteRuleStatusResponse,
   DescribeSessionRequest,
   ModifyAreaBanStatusRequest,
   DescribePolicyStatusRequest,
@@ -163,7 +166,7 @@ import {
   DescribeTlsVersionRequest,
   DescribeCiphersDetailResponse,
   ModifyAntiInfoLeakRulesRequest,
-  DescribeCustomRuleListRequest,
+  DealData,
   DescribeHostLimitResponse,
   PostAttackDownloadTaskResponse,
   ModifySpartaProtectionModeResponse,
@@ -178,7 +181,7 @@ import {
   ModifyCustomRuleRequest,
   WafThreatenIntelligenceDetails,
   CreateAccessExportResponse,
-  ModifyCustomWhiteRuleStatusResponse,
+  GenerateDealsAndPayNewResponse,
   DescribeDomainWhiteRulesRequest,
   ModifyHostStatusResponse,
   BatchIpAccessControlData,
@@ -196,7 +199,7 @@ import {
   ClbHostsParams,
   DescribeDomainDetailsClbResponse,
   HostStatus,
-  ModifyProtectionStatusRequest,
+  GoodsDetailNew,
   ModifyAntiFakeUrlResponse,
   ModifyWafAutoDenyRulesResponse,
   DescribeBatchIpAccessControlRequest,
@@ -223,6 +226,7 @@ import {
   ModifyAreaBanStatusResponse,
   FindAllDomainDetail,
   DeleteCustomRuleRequest,
+  DescribeInstancesResponse,
   DescribeCCRuleResponse,
   ModifyDomainWhiteRuleResponse,
   ExportAccessInfo,
@@ -245,6 +249,7 @@ import {
   DeleteAntiInfoLeakRuleRequest,
   DescribeIpHitItemsRequest,
   DescribeVipInfoResponse,
+  GoodNews,
   DescribeCCRuleRequest,
   ModifyDomainsCLSStatusRequest,
   DescribeCCRuleListResponse,
@@ -543,6 +548,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取域名的规则白名单
+   */
+  async DescribeDomainWhiteRules(
+    req: DescribeDomainWhiteRulesRequest,
+    cb?: (error: string, rep: DescribeDomainWhiteRulesResponse) => void
+  ): Promise<DescribeDomainWhiteRulesResponse> {
+    return this.request("DescribeDomainWhiteRules", req, cb)
+  }
+
+  /**
    * 信息防泄漏删除规则
    */
   async DeleteAntiInfoLeakRule(
@@ -624,16 +639,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 信息防泄漏切换规则开关
-   */
-  async ModifyAntiInfoLeakRuleStatus(
-    req: ModifyAntiInfoLeakRuleStatusRequest,
-    cb?: (error: string, rep: ModifyAntiInfoLeakRuleStatusResponse) => void
-  ): Promise<ModifyAntiInfoLeakRuleStatusResponse> {
-    return this.request("ModifyAntiInfoLeakRuleStatus", req, cb)
-  }
-
-  /**
    * 本接口用于修改访问日志保存期限及大字段是否存储
    */
   async ModifyAccessPeriod(
@@ -641,6 +646,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyAccessPeriodResponse) => void
   ): Promise<ModifyAccessPeriodResponse> {
     return this.request("ModifyAccessPeriod", req, cb)
+  }
+
+  /**
+   * 修改域名列表的访问日志开关
+   */
+  async ModifyDomainsCLSStatus(
+    req: ModifyDomainsCLSStatusRequest,
+    cb?: (error: string, rep: ModifyDomainsCLSStatusResponse) => void
+  ): Promise<ModifyDomainsCLSStatusResponse> {
+    return this.request("ModifyDomainsCLSStatus", req, cb)
   }
 
   /**
@@ -1058,23 +1073,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取域名的规则白名单
+   * 计费资源购买、续费下单接口
    */
-  async DescribeDomainWhiteRules(
-    req: DescribeDomainWhiteRulesRequest,
-    cb?: (error: string, rep: DescribeDomainWhiteRulesResponse) => void
-  ): Promise<DescribeDomainWhiteRulesResponse> {
-    return this.request("DescribeDomainWhiteRules", req, cb)
+  async GenerateDealsAndPayNew(
+    req: GenerateDealsAndPayNewRequest,
+    cb?: (error: string, rep: GenerateDealsAndPayNewResponse) => void
+  ): Promise<GenerateDealsAndPayNewResponse> {
+    return this.request("GenerateDealsAndPayNew", req, cb)
   }
 
   /**
-   * 修改域名列表的访问日志开关
+   * 信息防泄漏切换规则开关
    */
-  async ModifyDomainsCLSStatus(
-    req: ModifyDomainsCLSStatusRequest,
-    cb?: (error: string, rep: ModifyDomainsCLSStatusResponse) => void
-  ): Promise<ModifyDomainsCLSStatusResponse> {
-    return this.request("ModifyDomainsCLSStatus", req, cb)
+  async ModifyAntiInfoLeakRuleStatus(
+    req: ModifyAntiInfoLeakRuleStatusRequest,
+    cb?: (error: string, rep: ModifyAntiInfoLeakRuleStatusResponse) => void
+  ): Promise<ModifyAntiInfoLeakRuleStatusResponse> {
+    return this.request("ModifyAntiInfoLeakRuleStatus", req, cb)
   }
 
   /**

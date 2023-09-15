@@ -170,6 +170,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeIpHitItems", req, cb);
     }
     /**
+     * 获取域名的规则白名单
+     */
+    async DescribeDomainWhiteRules(req, cb) {
+        return this.request("DescribeDomainWhiteRules", req, cb);
+    }
+    /**
      * 信息防泄漏删除规则
      */
     async DeleteAntiInfoLeakRule(req, cb) {
@@ -219,16 +225,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyWafAutoDenyStatus", req, cb);
     }
     /**
-     * 信息防泄漏切换规则开关
-     */
-    async ModifyAntiInfoLeakRuleStatus(req, cb) {
-        return this.request("ModifyAntiInfoLeakRuleStatus", req, cb);
-    }
-    /**
      * 本接口用于修改访问日志保存期限及大字段是否存储
      */
     async ModifyAccessPeriod(req, cb) {
         return this.request("ModifyAccessPeriod", req, cb);
+    }
+    /**
+     * 修改域名列表的访问日志开关
+     */
+    async ModifyDomainsCLSStatus(req, cb) {
+        return this.request("ModifyDomainsCLSStatus", req, cb);
     }
     /**
      * 切换防篡改开关
@@ -481,16 +487,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteSession", req, cb);
     }
     /**
-     * 获取域名的规则白名单
+     * 计费资源购买、续费下单接口
      */
-    async DescribeDomainWhiteRules(req, cb) {
-        return this.request("DescribeDomainWhiteRules", req, cb);
+    async GenerateDealsAndPayNew(req, cb) {
+        return this.request("GenerateDealsAndPayNew", req, cb);
     }
     /**
-     * 修改域名列表的访问日志开关
+     * 信息防泄漏切换规则开关
      */
-    async ModifyDomainsCLSStatus(req, cb) {
-        return this.request("ModifyDomainsCLSStatus", req, cb);
+    async ModifyAntiInfoLeakRuleStatus(req, cb) {
+        return this.request("ModifyAntiInfoLeakRuleStatus", req, cb);
     }
     /**
      * 刷新接入检查的结果，后台会生成接入检查任务

@@ -60,6 +60,7 @@ import {
   DescribeHostDdosInstanceListResponse,
   UpdateRecordDetails,
   DescribeCertificateDetailResponse,
+  ModifyCertificateResubmitRequest,
   DownloadCertificateRequest,
   DescribeHostTkeInstanceListResponse,
   DescribeCertificateBindResourceTaskResultRequest,
@@ -144,7 +145,7 @@ import {
   TCBAccessService,
   DdosInstanceList,
   SubmittedData,
-  DescribeCompaniesRequest,
+  DeployCertificateRecordRollbackResponse,
   TCBInstanceList,
   DescribeHostCosInstanceListRequest,
   DescribeHostCdnInstanceListResponse,
@@ -160,6 +161,8 @@ import {
   DescribeHostTeoInstanceListResponse,
   DescribeHostWafInstanceListRequest,
   UploadRevokeLetterResponse,
+  CancelAuditCertificateRequest,
+  ModifyCertificateResubmitResponse,
   UpdateCertificateInstanceResponse,
   UploadCertificateRequest,
   OperationLog,
@@ -183,8 +186,9 @@ import {
   DescribePackagesRequest,
   TCBHostService,
   CheckCertificateChainRequest,
-  DeployCertificateRecordRollbackResponse,
+  DescribeCompaniesRequest,
   ManagerStatusInfo,
+  CancelAuditCertificateResponse,
   DeployRecordInfo,
   DescribePackagesResponse,
   DescribeManagersRequest,
@@ -553,6 +557,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 取消证书审核
+   */
+  async CancelAuditCertificate(
+    req: CancelAuditCertificateRequest,
+    cb?: (error: string, rep: CancelAuditCertificateResponse) => void
+  ): Promise<CancelAuditCertificateResponse> {
+    return this.request("CancelAuditCertificate", req, cb)
+  }
+
+  /**
    * 查询证书云资源部署记录列表
    */
   async DescribeHostDeployRecord(
@@ -750,5 +764,15 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeCertificateBindResourceTaskDetailResponse) => void
   ): Promise<DescribeCertificateBindResourceTaskDetailResponse> {
     return this.request("DescribeCertificateBindResourceTaskDetail", req, cb)
+  }
+
+  /**
+   * 针对审核失败或审核取消的付费证书，重新发起审核
+   */
+  async ModifyCertificateResubmit(
+    req: ModifyCertificateResubmitRequest,
+    cb?: (error: string, rep: ModifyCertificateResubmitResponse) => void
+  ): Promise<ModifyCertificateResubmitResponse> {
+    return this.request("ModifyCertificateResubmit", req, cb)
   }
 }

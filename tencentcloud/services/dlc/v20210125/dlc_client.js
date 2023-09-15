@@ -448,6 +448,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DropDMSTable", req, cb);
     }
     /**
+     * 获取任务结果查询
+     */
+    async QueryResult(req, cb) {
+        return this.request("QueryResult", req, cb);
+    }
+    /**
      * 元数据锁检查
      */
     async CheckLockMetaData(req, cb) {

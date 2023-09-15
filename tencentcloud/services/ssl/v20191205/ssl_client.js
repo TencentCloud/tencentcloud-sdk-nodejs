@@ -238,6 +238,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeCertificateBindResourceTaskResult", req, cb);
     }
     /**
+     * 取消证书审核
+     */
+    async CancelAuditCertificate(req, cb) {
+        return this.request("CancelAuditCertificate", req, cb);
+    }
+    /**
      * 查询证书云资源部署记录列表
      */
     async DescribeHostDeployRecord(req, cb) {
@@ -356,6 +362,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeCertificateBindResourceTaskDetail(req, cb) {
         return this.request("DescribeCertificateBindResourceTaskDetail", req, cb);
+    }
+    /**
+     * 针对审核失败或审核取消的付费证书，重新发起审核
+     */
+    async ModifyCertificateResubmit(req, cb) {
+        return this.request("ModifyCertificateResubmit", req, cb);
     }
 }
 exports.Client = Client;

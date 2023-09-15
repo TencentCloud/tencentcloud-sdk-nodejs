@@ -86,7 +86,7 @@ import {
   ModifySparkAppBatchResponse,
   CancelNotebookSessionStatementBatchResponse,
   KVPair,
-  TableBaseInfo,
+  QueryResultResponse,
   UnlockMetaDataRequest,
   AttachUserPolicyRequest,
   CreateInternalTableRequest,
@@ -112,6 +112,7 @@ import {
   CreateNotebookSessionRequest,
   WorkGroupIdSetOfUserId,
   Partition,
+  QueryResultRequest,
   CreateDataEngineRequest,
   ModifySparkAppBatchRequest,
   CreateTaskRequest,
@@ -139,6 +140,7 @@ import {
   ReportHeartbeatMetaDataRequest,
   CreateDMSTableRequest,
   CancelNotebookSessionStatementResponse,
+  TableBaseInfo,
   DMSTable,
   AttachWorkGroupPolicyResponse,
   ModifyWorkGroupResponse,
@@ -973,6 +975,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DropDMSTableResponse) => void
   ): Promise<DropDMSTableResponse> {
     return this.request("DropDMSTable", req, cb)
+  }
+
+  /**
+   * 获取任务结果查询
+   */
+  async QueryResult(
+    req: QueryResultRequest,
+    cb?: (error: string, rep: QueryResultResponse) => void
+  ): Promise<QueryResultResponse> {
+    return this.request("QueryResult", req, cb)
   }
 
   /**

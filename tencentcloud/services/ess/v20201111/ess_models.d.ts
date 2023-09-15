@@ -248,27 +248,6 @@ export interface DescribeIntegrationDepartmentsResponse {
     RequestId?: string;
 }
 /**
- * 模板中文件的信息结构
- */
-export interface FileInfo {
-    /**
-     * 文件ID
-     */
-    FileId?: string;
-    /**
-     * 文件名
-     */
-    FileName?: string;
-    /**
-     * 文件大小，单位为Byte
-     */
-    FileSize?: number;
-    /**
-     * 文件上传时间，格式为Unix标准时间戳（秒）
-     */
-    CreatedOn?: number;
-}
-/**
  * CreateFlowApprovers返回参数结构体
  */
 export interface CreateFlowApproversResponse {
@@ -563,27 +542,36 @@ export interface ReleasedApprover {
  */
 export interface DescribeIntegrationRolesRequest {
     /**
-     * 操作人信息，UserId必填
+     * 执行本接口操作的员工信息。使用此接口时，必须填写UserId。
+  注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。
      */
     Operator: UserInfo;
     /**
-     * 指定每页多少条数据，单页最大200
+     * 指定分页每页返回的数据条数，单页最大支持 200。
      */
     Limit: number;
     /**
-     * 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填
+     * 代理企业和员工的信息。
+  在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。
      */
     Agent?: Agent;
     /**
-     * 查询的关键字段:
-  Key:"RoleType",Values:["1"]查询系统角色，Values:["2"]查询自定义角色
-  Key:"RoleStatus",Values:["1"]查询启用角色，Values:["2"]查询禁用角色
-  Key:"IsGroupRole"，Values:["0"]:查询非集团角色，Values:["1"]表示查询集团角色
-  Key:"IsReturnPermissionGroup"，Values:["0"]:表示接口不返回角色对应的权限树字段，Values:["1"]表示接口返回角色对应的权限树字段
+     * 查询的关键字段，支持Key-Value单值查询。可选键值对如下：
+  <ul>
+    <li>Key:"RoleType"，查询角色类型，Values可选：
+      <ul><li>**"1"**：查询系统角色</li><li>**"2"**：查询自定义角色</li></ul>
+    </li><li>Key:"RoleStatus"，查询角色状态，Values可选：
+      <ul><li>**"1"**：查询启用角色</li><li>**"2"**：查询禁用角色</li></ul>
+    </li><li>Key:"IsGroupRole"，是否查询集团角色，Values可选：
+      <ul><li>**"0"**：查询非集团角色</li><li>**"1"**：查询集团角色</li></ul>
+    </li><li>Key:"IsReturnPermissionGroup"，是否返回角色对应权限树，Values可选：
+      <ul><li>**"0"**：接口不返回角色对应的权限树字段</li><li>**"1"**：接口返回角色对应的权限树字段</li></ul>
+    </li>
+  </ul>
      */
     Filters?: Array<Filter>;
     /**
-     * 查询结果分页返回，此处指定第几页，如果不传默认从第一页返回。页码从 0 开始，即首页为 0，最大2000
+     * 指定分页返回第几页的数据，如果不传默认返回第一页。页码从 0 开始，即首页为 0，最大2000。
      */
     Offset?: number;
 }
@@ -1199,19 +1187,6 @@ export interface DescribeIntegrationEmployeesRequest {
     Offset?: number;
 }
 /**
- * UnbindEmployeeUserIdWithClientOpenId返回参数结构体
- */
-export interface UnbindEmployeeUserIdWithClientOpenIdResponse {
-    /**
-     * 解绑是否成功，1表示成功，0表示失败
-     */
-    Status?: number;
-    /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
-/**
  * CreateIntegrationUserRoles返回参数结构体
  */
 export interface CreateIntegrationUserRolesResponse {
@@ -1490,13 +1465,17 @@ export interface DescribeThirdPartyAuthCodeRequest {
     Agent?: Agent;
 }
 /**
- * DescribeIntegrationMainOrganizationUser请求参数结构体
+ * UnbindEmployeeUserIdWithClientOpenId返回参数结构体
  */
-export interface DescribeIntegrationMainOrganizationUserRequest {
+export interface UnbindEmployeeUserIdWithClientOpenIdResponse {
     /**
-     * 操作人信息，userId必填
+     * 解绑是否成功，1表示成功，0表示失败
      */
-    Operator: UserInfo;
+    Status?: number;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * CreateReleaseFlow返回参数结构体
@@ -1802,12 +1781,15 @@ export interface DescribeUserAutoSignStatusResponse {
 /**
  * 补充签署人信息
 - RecipientId 必须指定
--  通过企业自定义账号ID补充签署人时，ApproverSource 和 CustomUserId 必填，ApproverSource取值：WEWORKAPP
+-  通过企业微信自定义账号ID补充签署人时，ApproverSource 和 CustomUserId 必填，ApproverSource取值：WEWORKAPP
 - 通过二要素（姓名/手机号）补充签署人时，ApproverName 和 ApproverMobile 必填，ApproverSource设置为空
  */
 export interface FillApproverInfo {
     /**
-     * 对应模板中的参与方ID
+     * 签署方经办人在模板中配置的参与方ID，与控件绑定，是控件的归属方，ID为32位字符串。
+  模板发起合同时，该参数为必填项。
+  文件发起合同是，该参数无需传值。
+  如果开发者后序用合同模板发起合同，建议保存此值，在用合同模板发起合同中需此值绑定对应的签署经办人 。
      */
     RecipientId: string;
     /**
@@ -1817,16 +1799,16 @@ export interface FillApproverInfo {
      */
     ApproverSource?: string;
     /**
-     * 企业自定义账号ID
-  <br/>当ApproverSource为WEWORKAPP的企微或签场景下，必须指企业自有应用获取企微明文的userid
+     * 企业微信UserId
+  <br/>当ApproverSource为WEWORKAPP的企微或签场景下，必须指企业自有应用获取企业微信的UserId
      */
     CustomUserId?: string;
     /**
-     * 补充签署人姓名
+     * 补充企业签署人员工姓名
      */
     ApproverName?: string;
     /**
-     * 补充签署人手机号
+     * 补充企业签署人员工手机号
      */
     ApproverMobile?: string;
 }
@@ -2244,7 +2226,7 @@ export interface CreateSchemeUrlResponse {
  */
 export interface CreateUserAutoSignEnableUrlResponse {
     /**
-     * 个人用户自动签的开通链接, 短链形式
+     * 个人用户自动签的开通链接, 短链形式。过期时间受 `ExpiredTime` 参数控制。
      */
     Url?: string;
     /**
@@ -2685,25 +2667,31 @@ export interface UserInfo {
  */
 export interface CreateFlowApproversRequest {
     /**
-     * 调用方用户信息，userId 必填
+     * 执行本接口操作的员工信息。
+  注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。`
      */
     Operator: UserInfo;
     /**
-     * 签署流程编号
+     * 合同流程ID，为32位字符串。
+  建议开发者妥善保存此流程ID，以便于顺利进行后续操作。
+  可登录腾讯电子签控制台，在 "合同"->"合同中心" 中查看某个合同的FlowId(在页面中展示为合同ID)。
      */
     FlowId: string;
     /**
-     * 补充签署人信息
+     * 补充企业签署人信息。
+  
+  - 如果发起方指定的补充签署人是企业微信签署人（ApproverSource=WEWORKAPP），则需要提供企业微信UserId进行补充；
+  
+  - 如果不指定，则使用姓名和手机号进行补充。
      */
     Approvers: Array<FillApproverInfo>;
     /**
-     * 企微消息中的发起人
+     * 在可定制的企业微信通知中，发起人可以根据具体需求进行自定义设置。
      */
     Initiator?: string;
     /**
-     * 代理相关应用信息，如集团主企业代子企业操作
-  
-  
+     * 代理企业和员工的信息。
+  在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。
      */
     Agent?: Agent;
 }
@@ -2774,10 +2762,10 @@ export interface FlowCreateApprover {
      */
     ApproverIdCardNumber?: string;
     /**
-     * 签署方经办人在模板中的参与方ID
-  <br/>模板发起合同时，该参数为必填项
-  <br/>文件发起合同是，该参数无序传值
-  
+     * 签署方经办人在模板中配置的参与方ID，与控件绑定，是控件的归属方，ID为32位字符串。
+  模板发起合同时，该参数为必填项。
+  文件发起合同是，该参数无需传值。
+  如果开发者后续用合同模板发起合同，建议保存此值，在用合同模板发起合同中需此值绑定对应的签署经办人 。
      */
     RecipientId?: string;
     /**
@@ -3299,24 +3287,23 @@ export interface CreateEmbedWebUrlRequest {
      */
     Operator: UserInfo;
     /**
-     * WEB嵌入资源类型。
-  <br/>CREATE_SEAL: 生成创建印章的嵌入页面
-  <br/>CREATE_TEMPLATE：生成创建模板的嵌入页面
-  <br/>MODIFY_TEMPLATE：生成编辑模板的嵌入页面
-  <br/>PREVIEW_TEMPLATE：生成预览模板的嵌入页面
-  <br/>PREVIEW_SEAL_LIST：生成预览印章列表的嵌入页面
-  <br/>PREVIEW_SEAL_DETAIL：生成预览印章详情的嵌入页面
-  <br/>EXTEND_SERVICE：生成拓展服务的嵌入页面
-  <br/>PREVIEW_FLOW：生成预览合同的嵌入页面
-  <br/>PREVIEW_FLOW_DETAIL：生成查看合同详情的嵌入页面
-  
+     * WEB嵌入资源类型，支持以下类型
+  <ul><li>CREATE_SEAL: 生成创建印章的嵌入页面</li>
+  <li>CREATE_TEMPLATE：生成创建模板的嵌入页面</li>
+  <li>MODIFY_TEMPLATE：生成编辑模板的嵌入页面</li>
+  <li>PREVIEW_TEMPLATE：生成预览模板的嵌入页面</li>
+  <li>PREVIEW_SEAL_LIST：生成预览印章列表的嵌入页面</li>
+  <li>PREVIEW_SEAL_DETAIL：生成预览印章详情的嵌入页面</li>
+  <li>EXTEND_SERVICE：生成拓展服务的嵌入页面</li>
+  <li>PREVIEW_FLOW：生成预览合同的嵌入页面</li>
+  <li>PREVIEW_FLOW_DETAIL：生成查看合同详情的嵌入页面</li></ul>
      */
     EmbedType: string;
     /**
      * WEB嵌入的业务资源ID
-  <br/>PREVIEW_SEAL_DETAIL，必填，取值为印章id
-  <br/>MODIFY_TEMPLATE，PREVIEW_TEMPLATE，必填，取值为模板id
-  <br/>PREVIEW_FLOW，PREVIEW_FLOW_DETAIL，必填，取值为合同id
+  <ul><li>PREVIEW_SEAL_DETAIL，必填，取值为印章id</li>
+  <li>MODIFY_TEMPLATE，PREVIEW_TEMPLATE，必填，取值为模板id</li>
+  <li>PREVIEW_FLOW，PREVIEW_FLOW_DETAIL，必填，取值为合同id</li><ul>
      */
     BusinessId?: string;
     /**
@@ -3495,11 +3482,11 @@ export interface CreateIntegrationEmployeesResponse {
  */
 export interface DeleteIntegrationRoleUsersRequest {
     /**
-     * 操作人信息，userId必填
+     * 执行本接口操作的员工信息。 注: 在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。
      */
     Operator: UserInfo;
     /**
-     * 角色id
+     * 角色id，可以通过DescribeIntegrationRoles接口获取角色信息
      */
     RoleId: string;
     /**
@@ -3507,7 +3494,7 @@ export interface DeleteIntegrationRoleUsersRequest {
      */
     Users: Array<UserInfo>;
     /**
-     * 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填
+     * 代理企业和员工的信息。 在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。
      */
     Agent?: Agent;
 }
@@ -3746,7 +3733,7 @@ export interface CreateReleaseFlowRequest {
  */
 export interface CreateIntegrationUserRolesRequest {
     /**
-     * 操作人信息，UserId必填
+     * 执行本接口操作的员工信息。 注: 在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。
      */
     Operator: UserInfo;
     /**
@@ -3754,11 +3741,11 @@ export interface CreateIntegrationUserRolesRequest {
      */
     UserIds: Array<string>;
     /**
-     * 绑定角色的角色id列表，不能重复，不能大于 100，可以通过DescribeIntegrationRoles接口获取
+     * 绑定角色的角色id列表，不能重复，不能大于 100，可以通过DescribeIntegrationRoles接口获取角色信息
      */
     RoleIds: Array<string>;
     /**
-     * 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填
+     * 代理企业和员工的信息。 在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。
      */
     Agent?: Agent;
 }
@@ -4318,18 +4305,25 @@ export interface CreateOrganizationBatchSignUrlResponse {
     RequestId?: string;
 }
 /**
- * DescribeIntegrationMainOrganizationUser返回参数结构体
+ * 模板中文件的信息结构
  */
-export interface DescribeIntegrationMainOrganizationUserResponse {
+export interface FileInfo {
     /**
-     * 主企业员工账号信息
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 文件ID
      */
-    IntegrationMainOrganizationUser?: IntegrationMainOrganizationUser;
+    FileId?: string;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     * 文件名
      */
-    RequestId?: string;
+    FileName?: string;
+    /**
+     * 文件大小，单位为Byte
+     */
+    FileSize?: number;
+    /**
+     * 文件上传时间，格式为Unix标准时间戳（秒）
+     */
+    CreatedOn?: number;
 }
 /**
  * CancelUserAutoSignEnableUrl请求参数结构体
@@ -4658,26 +4652,6 @@ export interface ModifyApplicationCallbackInfoRequest {
   在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。
      */
     Agent?: Agent;
-}
-/**
- * 主企业员工账号信息
- */
-export interface IntegrationMainOrganizationUser {
-    /**
-     * 主企业id
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    MainOrganizationId?: string;
-    /**
-     * 主企业员工UserId
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    MainUserId?: string;
-    /**
-     * 主企业员工名
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    UserName?: string;
 }
 /**
  * StartFlow请求参数结构体
@@ -5318,19 +5292,19 @@ export interface DescribeExtendedServiceAuthInfosRequest {
  */
 export interface DescribeIntegrationRolesResponse {
     /**
-     * 查询结果分页返回，此处指定第几页，如果不传默认从第一页返回。页码从 0 开始，即首页为 0，最大2000
+     * 指定分页返回的页码。页码从0开始，最大为2000。
      */
     Offset?: number;
     /**
-     * 指定每页多少条数据，单页最大200
+     * 指定分页每页返回的数据条数，单页最大支持 200。
      */
     Limit?: number;
     /**
-     * 符合查询条件的总的角色数
+     * 符合查询条件的总角色数。
      */
     TotalCount?: number;
     /**
-     * 企业角色信息列表
+     * 企业角色信息列表。
      */
     IntegrateRoles?: Array<IntegrateRole>;
     /**
@@ -5403,23 +5377,30 @@ export interface DescribeFlowBriefsRequest {
  */
 export interface CreateFlowGroupByTemplatesRequest {
     /**
-     * 调用方用户信息，userId 必填。支持填入集团子公司经办人 userId 代发合同
+     * 执行本接口操作的员工信息。
+  注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。
      */
     Operator: UserInfo;
     /**
-     * 合同组名称,最大长度200个字符
+     * 合同（流程）组名称（可自定义此名称），长度不能超过200，只能由中文、字母、数字和下划线组成。
      */
     FlowGroupName: string;
     /**
-     * 合同组的子合同信息，支持2-50个子合同
+     * 合同（流程）组的子合同信息，支持2-50个子合同
      */
     FlowGroupInfos: Array<FlowGroupInfo>;
     /**
-     * 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填
+     * 代理企业和员工的信息。
+  在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。
      */
     Agent?: Agent;
     /**
-     * 合同组的配置信息。包括是否通知本企业签署方，是否通知其他签署方
+     * 合同（流程）组的配置项信息。
+  其中包括：
+  <ul>
+  <li>是否通知本企业签署方</li>
+  <li>是否通知其他签署方</li>
+  </ul>
      */
     FlowGroupOptions?: FlowGroupOptions;
 }

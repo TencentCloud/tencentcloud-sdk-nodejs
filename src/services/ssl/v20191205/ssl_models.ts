@@ -1451,6 +1451,16 @@ export interface DescribeCertificateDetailResponse {
 }
 
 /**
+ * ModifyCertificateResubmit请求参数结构体
+ */
+export interface ModifyCertificateResubmitRequest {
+  /**
+   * 证书ID。
+   */
+  CertificateId: string
+}
+
+/**
  * DownloadCertificate请求参数结构体
  */
 export interface DownloadCertificateRequest {
@@ -3792,21 +3802,17 @@ export interface SubmittedData {
 }
 
 /**
- * DescribeCompanies请求参数结构体
+ * DeployCertificateRecordRollback返回参数结构体
  */
-export interface DescribeCompaniesRequest {
+export interface DeployCertificateRecordRollbackResponse {
   /**
-   * 分页偏移量
+   * 回滚部署记录ID
    */
-  Offset?: number
+  DeployRecordId: number
   /**
-   * 分页每页限制数
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  Limit?: number
-  /**
-   * 公司ID
-   */
-  CompanyId?: number
+  RequestId?: string
 }
 
 /**
@@ -4131,6 +4137,30 @@ export interface UploadRevokeLetterResponse {
    * 是否成功。
    */
   IsSuccess: boolean
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CancelAuditCertificate请求参数结构体
+ */
+export interface CancelAuditCertificateRequest {
+  /**
+   * 证书ID
+   */
+  CertificateId: string
+}
+
+/**
+ * ModifyCertificateResubmit返回参数结构体
+ */
+export interface ModifyCertificateResubmitResponse {
+  /**
+   * 证书ID。
+   */
+  CertificateId: string
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4659,23 +4689,41 @@ export interface CheckCertificateChainRequest {
 }
 
 /**
- * DeployCertificateRecordRollback返回参数结构体
+ * DescribeCompanies请求参数结构体
  */
-export interface DeployCertificateRecordRollbackResponse {
+export interface DescribeCompaniesRequest {
   /**
-   * 回滚部署记录ID
+   * 分页偏移量
    */
-  DeployRecordId: number
+  Offset?: number
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 分页每页限制数
    */
-  RequestId?: string
+  Limit?: number
+  /**
+   * 公司ID
+   */
+  CompanyId?: number
 }
 
 /**
  * 管理人的四种审核状态
  */
 export type ManagerStatusInfo = null
+
+/**
+ * CancelAuditCertificate返回参数结构体
+ */
+export interface CancelAuditCertificateResponse {
+  /**
+   * 操作是否成功
+   */
+  Result: boolean
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
 
 /**
  * 部署记录信息

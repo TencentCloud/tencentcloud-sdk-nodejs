@@ -845,7 +845,7 @@ export interface DescribeIndexMetaResponse {
      * 索引元数据字段
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    IndexMetaField: IndexMetaField;
+    IndexMetaField?: IndexMetaField;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1038,7 +1038,7 @@ export interface CreateIndexRequest {
      */
     IndexName: string;
     /**
-     * 创建的索引元数据JSON，如mappings、settings
+     * 【必填】创建的索引元数据JSON，如mappings、settings
      */
     IndexMetaJson?: string;
     /**
@@ -1230,12 +1230,12 @@ export interface DescribeIndexListResponse {
      * 索引元数据字段
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    IndexMetaFields: Array<IndexMetaField>;
+    IndexMetaFields?: Array<IndexMetaField>;
     /**
      * 查询总数
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1472,7 +1472,7 @@ export interface DescribeIndexListRequest {
      */
     IndexStatusList?: Array<string>;
     /**
-     * 排序顺序，支持asc、desc
+     * 排序顺序，支持asc、desc，默认为desc 数据格式"asc","desc"
      */
     Order?: string;
 }

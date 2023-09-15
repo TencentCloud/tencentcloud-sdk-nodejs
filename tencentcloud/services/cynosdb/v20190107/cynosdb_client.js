@@ -58,7 +58,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyResourcePackageClusters", req, cb);
     }
     /**
-     * 创建审计规则模版
+     * 创建审计规则模板
      */
     async CreateAuditRuleTemplate(req, cb) {
         return this.request("CreateAuditRuleTemplate", req, cb);
@@ -232,7 +232,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyVipVport", req, cb);
     }
     /**
-     * 删除审计规则模版
+     * 删除审计规则模板
      */
     async DeleteAuditRuleTemplates(req, cb) {
         return this.request("DeleteAuditRuleTemplates", req, cb);
@@ -574,7 +574,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("SearchClusterDatabases", req, cb);
     }
     /**
-     * 修改审计规则模版
+     * 修改审计规则模板
      */
     async ModifyAuditRuleTemplates(req, cb) {
         return this.request("ModifyAuditRuleTemplates", req, cb);
@@ -610,7 +610,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteAuditLogFile", req, cb);
     }
     /**
-     * 查询审计规则模版信息
+     * 查询审计规则模板信息
      */
     async DescribeAuditRuleTemplates(req, cb) {
         return this.request("DescribeAuditRuleTemplates", req, cb);

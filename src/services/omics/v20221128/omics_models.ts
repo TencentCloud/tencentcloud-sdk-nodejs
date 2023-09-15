@@ -436,7 +436,7 @@ export interface ImportTableFileRequest {
    */
   CosUri: string
   /**
-   * 表格文件中每列的数据类型，支持的类型包括：Int、String、File、Array[File]
+   * 表格文件中每列的数据类型，支持的类型包括：Int、Float、String、File、Boolean、Array[Int]、Array[Float]、Array[String]、Array[File]、Array[Boolean]
    */
   DataType: Array<string>
   /**

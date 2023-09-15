@@ -248,6 +248,16 @@ it("waf.v20180125.DescribeIpHitItems", async function () {
     }
 })
 
+it("waf.v20180125.DescribeDomainWhiteRules", async function () {
+    try {
+       const data = await client.DescribeDomainWhiteRules({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("waf.v20180125.DeleteAntiInfoLeakRule", async function () {
     try {
        const data = await client.DeleteAntiInfoLeakRule({})
@@ -328,9 +338,9 @@ it("waf.v20180125.ModifyWafAutoDenyStatus", async function () {
     }
 })
 
-it("waf.v20180125.ModifyAntiInfoLeakRuleStatus", async function () {
+it("waf.v20180125.ModifyAccessPeriod", async function () {
     try {
-       const data = await client.ModifyAntiInfoLeakRuleStatus({})
+       const data = await client.ModifyAccessPeriod({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -338,9 +348,9 @@ it("waf.v20180125.ModifyAntiInfoLeakRuleStatus", async function () {
     }
 })
 
-it("waf.v20180125.ModifyAccessPeriod", async function () {
+it("waf.v20180125.ModifyDomainsCLSStatus", async function () {
     try {
-       const data = await client.ModifyAccessPeriod({})
+       const data = await client.ModifyDomainsCLSStatus({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -758,9 +768,9 @@ it("waf.v20180125.DeleteSession", async function () {
     }
 })
 
-it("waf.v20180125.DescribeDomainWhiteRules", async function () {
+it("waf.v20180125.GenerateDealsAndPayNew", async function () {
     try {
-       const data = await client.DescribeDomainWhiteRules({})
+       const data = await client.GenerateDealsAndPayNew({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -768,9 +778,9 @@ it("waf.v20180125.DescribeDomainWhiteRules", async function () {
     }
 })
 
-it("waf.v20180125.ModifyDomainsCLSStatus", async function () {
+it("waf.v20180125.ModifyAntiInfoLeakRuleStatus", async function () {
     try {
-       const data = await client.ModifyDomainsCLSStatus({})
+       const data = await client.ModifyAntiInfoLeakRuleStatus({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

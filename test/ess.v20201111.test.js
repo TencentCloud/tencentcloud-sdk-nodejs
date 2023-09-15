@@ -198,16 +198,6 @@ it("ess.v20201111.ModifyIntegrationDepartment", async function () {
     }
 })
 
-it("ess.v20201111.DisableUserAutoSign", async function () {
-    try {
-       const data = await client.DisableUserAutoSign({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("ess.v20201111.DeleteIntegrationRoleUsers", async function () {
     try {
        const data = await client.DeleteIntegrationRoleUsers({})
@@ -508,9 +498,9 @@ it("ess.v20201111.DescribeFlowComponents", async function () {
     }
 })
 
-it("ess.v20201111.DescribeIntegrationMainOrganizationUser", async function () {
+it("ess.v20201111.DisableUserAutoSign", async function () {
     try {
-       const data = await client.DescribeIntegrationMainOrganizationUser({})
+       const data = await client.DisableUserAutoSign({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

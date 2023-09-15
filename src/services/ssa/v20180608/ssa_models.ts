@@ -515,27 +515,47 @@ export interface SocComplianceItem {
 }
 
 /**
- * SaEventPub返回参数结构体
+ * SocCheckItem类型
  */
-export interface SaEventPubResponse {
+export interface SocCheckItem {
   /**
-   * DataSaEventPub
+   * 名字
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  DataSaEventPub?: ObjDataSaEventPub
+  Name: string
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 唯一id
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  RequestId?: string
+  LevelId: string
+  /**
+   * 成功数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SuccessCount: number
+  /**
+   * 失败数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FailCount: number
 }
 
 /**
- * DescribeVulList请求参数结构体
+ * 设置_泄露监测产品监测扫描规则策略
  */
-export interface DescribeVulListRequest {
+export interface SaDivulgeScanRuleSetList {
   /**
-   * 查询过滤参数:(json序列化的结果）
+   * Value
    */
-  Params: string
+  Value: string
+  /**
+   * Code
+   */
+  Code: number
+  /**
+   * Message
+   */
+  Message: string
 }
 
 /**
@@ -750,29 +770,55 @@ export interface DescribeComplianceDetailResponse {
 }
 
 /**
- * SocCheckItem类型
+ * SaEventPub返回参数结构体
  */
-export interface SocCheckItem {
+export interface SaEventPubResponse {
   /**
-   * 名字
-注意：此字段可能返回 null，表示取不到有效值。
+   * DataSaEventPub
    */
-  Name: string
+  DataSaEventPub?: ObjDataSaEventPub
   /**
-   * 唯一id
-注意：此字段可能返回 null，表示取不到有效值。
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  LevelId: string
+  RequestId?: string
+}
+
+/**
+ * SaDivulgeScanRuleMutate请求参数结构体
+ */
+export interface SaDivulgeScanRuleMutateRequest {
   /**
-   * 成功数
-注意：此字段可能返回 null，表示取不到有效值。
+   * Id
    */
-  SuccessCount: number
+  Id: string
   /**
-   * 失败数
-注意：此字段可能返回 null，表示取不到有效值。
+   * DivulgeSoure
    */
-  FailCount: number
+  DivulgeSoure: string
+  /**
+   * DivulgeSoureUrl
+   */
+  DivulgeSoureUrl: string
+  /**
+   * RuleName
+   */
+  RuleName: string
+  /**
+   * RuleWord
+   */
+  RuleWord: string
+  /**
+   * ScanStatus
+   */
+  ScanStatus: string
+  /**
+   * DivulgeType
+   */
+  DivulgeType?: string
+  /**
+   * RepairAdvice
+   */
+  RepairAdvice?: string
 }
 
 /**
@@ -1755,6 +1801,20 @@ export interface DescribeSocAlertDetailsRequest {
 }
 
 /**
+ * SaDivulgeScanRuleMutate返回参数结构体
+ */
+export interface SaDivulgeScanRuleMutateResponse {
+  /**
+   * Data
+   */
+  Data?: SaDivulgeScanRuleSetList
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeSocCspmCompliance返回参数结构体
  */
 export interface DescribeSocCspmComplianceResponse {
@@ -1821,6 +1881,16 @@ export interface AlarmInfoRsp {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AttackEvent?: Array<AttackEvent>
+}
+
+/**
+ * DescribeVulList请求参数结构体
+ */
+export interface DescribeVulListRequest {
+  /**
+   * 查询过滤参数:(json序列化的结果）
+   */
+  Params: string
 }
 
 /**

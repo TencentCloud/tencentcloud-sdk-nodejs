@@ -41,6 +41,7 @@ import {
   OperateChannelTemplateResponse,
   FlowFileInfo,
   CreateFlowOption,
+  ChannelCreateRoleRequest,
   BaseFlowInfo,
   ReleasedApprover,
   CreateConsoleLoginUrlResponse,
@@ -76,6 +77,7 @@ import {
   ChannelVerifyPdfRequest,
   CreateChannelFlowEvidenceReportRequest,
   ChannelCancelUserAutoSignEnableUrlRequest,
+  Permission,
   ComponentLimit,
   ChannelVerifyPdfResponse,
   CreateConsoleLoginUrlRequest,
@@ -112,15 +114,18 @@ import {
   FlowDetailInfo,
   CreateFlowsByTemplatesResponse,
   DescribeChannelFlowEvidenceReportRequest,
+  ChannelCreateRoleResponse,
   SyncProxyOrganizationOperatorsResponse,
   FailedCreateRoleData,
   ChannelDescribeUserAutoSignStatusRequest,
   FlowResourceUrlInfo,
   UploadFile,
   ExtentServiceAuthInfo,
+  ChannelModifyRoleResponse,
   Filter,
   FilledComponent,
   CreateSignUrlsResponse,
+  ChannelDeleteRoleRequest,
   UploadFilesResponse,
   ChannelCreateBatchCancelFlowUrlRequest,
   ApproverRestriction,
@@ -141,12 +146,14 @@ import {
   ModifyExtendedServiceResponse,
   ChannelCreateUserRolesRequest,
   ChannelGetTaskResultApiResponse,
+  PermissionGroup,
   ChannelCreateOrganizationModifyQrCodeResponse,
   ChannelDeleteSealPoliciesResponse,
   ChannelCreateWebThemeConfigResponse,
   GetDownloadFlowUrlRequest,
   ChannelCreateEmbedWebUrlResponse,
   ChannelBatchCancelFlowsRequest,
+  ChannelModifyRoleRequest,
   ChannelUpdateSealStatusRequest,
   ChannelCreateFlowGroupByTemplatesRequest,
   SignUrl,
@@ -164,6 +171,7 @@ import {
   CreateChannelFlowEvidenceReportResponse,
   SyncFailReason,
   ChannelDescribeEmployeesResponse,
+  ChannelDeleteRoleResponse,
   ChannelCreateReleaseFlowResponse,
   DescribeChannelFlowEvidenceReportResponse,
   CreateSealByImageRequest,
@@ -230,6 +238,20 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ChannelCreateMultiFlowSignQRCodeResponse) => void
   ): Promise<ChannelCreateMultiFlowSignQRCodeResponse> {
     return this.request("ChannelCreateMultiFlowSignQRCode", req, cb)
+  }
+
+  /**
+     * 此接口（ChannelModifyRole）用来更新企业自定义角色。
+
+适用场景1：更新当前企业的自定义角色的名称或描述等其他信息，更新时不进行权限的设置（PermissionGroups 参数不传）。
+
+适用场景2：更新当前企业的自定义角色的权限信息，更新时进行权限的设置（PermissionGroups 参数要传），权限树内容 PermissionGroups 可参考接口 ChannelDescribeRoles 的输出。
+     */
+  async ChannelModifyRole(
+    req: ChannelModifyRoleRequest,
+    cb?: (error: string, rep: ChannelModifyRoleResponse) => void
+  ): Promise<ChannelModifyRoleResponse> {
+    return this.request("ChannelModifyRole", req, cb)
   }
 
   /**
@@ -335,6 +357,20 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ChannelCreateSealPolicyResponse) => void
   ): Promise<ChannelCreateSealPolicyResponse> {
     return this.request("ChannelCreateSealPolicy", req, cb)
+  }
+
+  /**
+     * 此接口（ChannelCreateRole）用来创建企业自定义角色。
+
+适用场景1：创建当前企业的自定义角色，并且创建时不进行权限的设置（PermissionGroups 参数不传），角色中的权限内容可通过接口 ChannelModifyRole 完成更新。
+
+适用场景2：创建当前企业的自定义角色，并且创建时进行权限的设置（PermissionGroups 参数要传），权限树内容 PermissionGroups 可参考接口 ChannelDescribeRoles 的输出。
+     */
+  async ChannelCreateRole(
+    req: ChannelCreateRoleRequest,
+    cb?: (error: string, rep: ChannelCreateRoleResponse) => void
+  ): Promise<ChannelCreateRoleResponse> {
+    return this.request("ChannelCreateRole", req, cb)
   }
 
   /**
@@ -489,6 +525,18 @@ https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/launchAp
   }
 
   /**
+     * 此接口（ChannelDeleteRole）用来删除企业自定义角色。
+
+注意：系统角色不可删除。
+     */
+  async ChannelDeleteRole(
+    req: ChannelDeleteRoleRequest,
+    cb?: (error: string, rep: ChannelDeleteRoleResponse) => void
+  ): Promise<ChannelDeleteRoleResponse> {
+    return this.request("ChannelDeleteRole", req, cb)
+  }
+
+  /**
      * 查询转换任务的状态。转换任务Id通过发起转换任务接口（ChannelCreateConvertTaskApi）获取。
 注意：大文件转换所需的时间可能会比较长。
      */
@@ -551,8 +599,9 @@ https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/launchAp
   }
 
   /**
-   * 生成页面主题配置
-   */
+     * 用来创建嵌入式页面个性化主题配置（例如是否展示电子签logo、定义主题色等），该接口配合其他所有可嵌入页面接口使用
+创建配置对当前第三方应用全局生效，如果多次调用，会以最后一次的配置为准
+     */
   async ChannelCreateWebThemeConfig(
     req: ChannelCreateWebThemeConfigRequest,
     cb?: (error: string, rep: ChannelCreateWebThemeConfigResponse) => void
@@ -641,7 +690,7 @@ https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/launchAp
   }
 
   /**
-   * 查询角色列表，支持根据类型和状态过滤角色列表
+   * 分页查询企业角色列表，法人的角色是系统保留角色，不会返回，按照角色创建时间升序排列
    */
   async ChannelDescribeRoles(
     req: ChannelDescribeRolesRequest,

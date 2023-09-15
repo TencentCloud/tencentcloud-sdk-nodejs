@@ -309,7 +309,6 @@ class Client extends abstract_client_1.AbstractClient {
    1. 可以查询最近365天内的 License 请求次数统计数据。
    2. 查询时间跨度不超过90天。
    3. 查询时间跨度超过1天的，返回以天为粒度的数据，否则，返回以5分钟为粒度的数据。
-
      */
     async DescribeLicenseUsageData(req, cb) {
         return this.request("DescribeLicenseUsageData", req, cb);
@@ -405,7 +404,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateContentReviewTemplate", req, cb);
     }
     /**
-     * 发起视频重生
+     * 发起音画质重生
      */
     async RebuildMedia(req, cb) {
         return this.request("RebuildMedia", req, cb);
@@ -472,7 +471,6 @@ class Client extends abstract_client_1.AbstractClient {
 剪辑不固化，由于其剪辑结果不是一个独立的视频，因而也不会纳入点播媒资视频管理（例如控制台的视频总数不会统计这一片段）中，也无法单独针对这个片段做转码、微信发布等任何视频处理操作。
 
 剪辑不固化的优势在于其剪辑操作十分“轻量化”，不会产生额外的存储开销。但其不足之处在于生命周期与原始录制视频相同，且无法进一步进行转码等视频处理。
-
      */
     async LiveRealTimeClip(req, cb) {
         return this.request("LiveRealTimeClip", req, cb);
@@ -541,7 +539,6 @@ class Client extends abstract_client_1.AbstractClient {
    1. 可以查询最近365天内的客户端上传加速统计数据。
    2. 查询时间跨度不超过90天。
    3. 查询时间跨度超过1天的，返回以天为粒度的数据，否则，返回以5分钟为粒度的数据。
-
      */
     async DescribeClientUploadAccelerationUsageData(req, cb) {
         return this.request("DescribeClientUploadAccelerationUsageData", req, cb);
@@ -562,7 +559,6 @@ class Client extends abstract_client_1.AbstractClient {
 ><li>图片文件大小支持：文件 < 5M；</li>
 ><li>图片文件分辨率支持：建议分辨率大于256x256，否则可能会影响识别效果；</li>
 ><li>图片文件支持格式：PNG、JPG、JPEG、BMP、GIF、WEBP格式。</li>
-
      */
     async ProcessImage(req, cb) {
         return this.request("ProcessImage", req, cb);
@@ -595,7 +591,6 @@ class Client extends abstract_client_1.AbstractClient {
    1. 可以查询最近365天内的图片审核统计数据。
    2. 查询时间跨度不超过90天。
    3. 查询时间跨度超过1天的，返回以天为粒度的数据，否则，返回以5分钟为粒度的数据。
-
      */
     async DescribeImageReviewUsageData(req, cb) {
         return this.request("DescribeImageReviewUsageData", req, cb);
@@ -695,7 +690,6 @@ class Client extends abstract_client_1.AbstractClient {
     }
     /**
      * * 该接口用于业务服务器获取 [可靠回调](https://cloud.tencent.com/document/product/266/33779#.E5.8F.AF.E9.9D.A0.E5.9B.9E.E8.B0.83) 事件通知的状态。
-
      */
     async DescribeEventsState(req, cb) {
         return this.request("DescribeEventsState", req, cb);
