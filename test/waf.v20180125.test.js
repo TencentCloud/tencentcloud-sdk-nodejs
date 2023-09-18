@@ -98,6 +98,16 @@ it("waf.v20180125.ModifyCustomRule", async function () {
     }
 })
 
+it("waf.v20180125.ModifyInstanceQpsLimit", async function () {
+    try {
+       const data = await client.ModifyInstanceQpsLimit({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("waf.v20180125.DescribeAutoDenyIP", async function () {
     try {
        const data = await client.DescribeAutoDenyIP({})
@@ -161,6 +171,16 @@ it("waf.v20180125.ModifyAntiFakeUrl", async function () {
 it("waf.v20180125.ModifySpartaProtection", async function () {
     try {
        const data = await client.ModifySpartaProtection({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("waf.v20180125.ModifyInstanceElasticMode", async function () {
+    try {
+       const data = await client.ModifyInstanceElasticMode({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -411,6 +431,16 @@ it("waf.v20180125.DescribePeakPoints", async function () {
 it("waf.v20180125.ModifyCustomWhiteRule", async function () {
     try {
        const data = await client.ModifyCustomWhiteRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("waf.v20180125.ModifyInstanceRenewFlag", async function () {
+    try {
+       const data = await client.ModifyInstanceRenewFlag({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -921,6 +951,16 @@ it("waf.v20180125.DescribeInstances", async function () {
 it("waf.v20180125.ModifyHostFlowMode", async function () {
     try {
        const data = await client.ModifyHostFlowMode({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("waf.v20180125.ModifyInstanceName", async function () {
+    try {
+       const data = await client.ModifyInstanceName({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

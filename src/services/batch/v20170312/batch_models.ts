@@ -2121,10 +2121,6 @@ export interface Placement {
    */
   HostIds?: Array<string>
   /**
-   * 指定母机IP生产子机
-   */
-  HostIps?: Array<string>
-  /**
    * 实例所属的专用宿主机ID，仅用于出参。
    */
   HostId?: string

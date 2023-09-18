@@ -37,6 +37,7 @@ import {
   DomainPackageNew,
   DescribeCustomWhiteRuleResponse,
   AccessLogItems,
+  ModifyInstanceNameRequest,
   DescribePeakValueResponse,
   HostDel,
   DescribeCiphersDetailRequest,
@@ -54,14 +55,17 @@ import {
   AccessRuleTagInfo,
   DescribePeakPointsRequest,
   DescribeAccessIndexRequest,
+  ModifyInstanceQpsLimitRequest,
   DeleteHostRequest,
   DomainInfo,
   DescribeAntiInfoLeakRulesStrategyItem,
+  ModifyInstanceNameResponse,
   UpsertSessionResponse,
   AccessLogItem,
   DescribeDomainVerifyResultResponse,
   DeleteSessionRequest,
   DescribeWafAutoDenyRulesRequest,
+  UpsertIpAccessControlRequest,
   GenerateDealsAndPayNewRequest,
   RefreshAccessCheckResultRequest,
   DescribeUserClbWafRegionsRequest,
@@ -94,6 +98,7 @@ import {
   ModifyAntiFakeUrlStatusRequest,
   DeleteCustomWhiteRuleRequest,
   ModifyHostModeResponse,
+  ModifyInstanceRenewFlagResponse,
   DescribeCCRuleListRequest,
   ModifyProtectionStatusResponse,
   DescribeAutoDenyIPRequest,
@@ -214,7 +219,7 @@ import {
   BatchIpAccessControlItem,
   InstanceInfo,
   TLSCiphers,
-  ModifyWafAutoDenyRulesRequest,
+  ModifyInstanceRenewFlagRequest,
   DescribeBatchIpAccessControlResponse,
   DescribeDomainDetailsSaasResponse,
   AccessKeyValueInfo,
@@ -236,17 +241,19 @@ import {
   DescribeFindDomainListRequest,
   ModifyAntiFakeUrlStatusResponse,
   DescribeHostsRequest,
-  UpsertIpAccessControlRequest,
+  ModifyInstanceElasticModeRequest,
   AutoDenyDetail,
   UpsertCCRuleRequest,
   ResponseCode,
   ModifyCustomWhiteRuleStatusRequest,
   DeleteAntiFakeUrlRequest,
   CacheUrlItems,
+  ModifyInstanceQpsLimitResponse,
   SearchAttackLogResponse,
   Strategy,
   AccessFullTextInfo,
   DeleteAntiInfoLeakRuleRequest,
+  ModifyInstanceElasticModeResponse,
   DescribeIpHitItemsRequest,
   DescribeVipInfoResponse,
   GoodNews,
@@ -283,6 +290,7 @@ import {
   DescribeAccessIndexResponse,
   DescribeAccessExportsResponse,
   DeleteCustomRuleResponse,
+  ModifyWafAutoDenyRulesRequest,
   BotStatPointItem,
   ClbDomainsInfo,
   DescribeHostResponse,
@@ -396,6 +404,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 设置套餐实例的弹性qps上限
+   */
+  async ModifyInstanceQpsLimit(
+    req: ModifyInstanceQpsLimitRequest,
+    cb?: (error: string, rep: ModifyInstanceQpsLimitResponse) => void
+  ): Promise<ModifyInstanceQpsLimitResponse> {
+    return this.request("ModifyInstanceQpsLimit", req, cb)
+  }
+
+  /**
      * 接口已废弃
 
 描述WAF自动封禁IP详情,对齐自动封堵状态
@@ -465,6 +483,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifySpartaProtectionResponse) => void
   ): Promise<ModifySpartaProtectionResponse> {
     return this.request("ModifySpartaProtection", req, cb)
+  }
+
+  /**
+   * 修改实例的QPS弹性计费开关
+   */
+  async ModifyInstanceElasticMode(
+    req: ModifyInstanceElasticModeRequest,
+    cb?: (error: string, rep: ModifyInstanceElasticModeResponse) => void
+  ): Promise<ModifyInstanceElasticModeResponse> {
+    return this.request("ModifyInstanceElasticMode", req, cb)
   }
 
   /**
@@ -717,6 +745,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyCustomWhiteRuleResponse) => void
   ): Promise<ModifyCustomWhiteRuleResponse> {
     return this.request("ModifyCustomWhiteRule", req, cb)
+  }
+
+  /**
+   * 修改实例的自动续费开关
+   */
+  async ModifyInstanceRenewFlag(
+    req: ModifyInstanceRenewFlagRequest,
+    cb?: (error: string, rep: ModifyInstanceRenewFlagResponse) => void
+  ): Promise<ModifyInstanceRenewFlagResponse> {
+    return this.request("ModifyInstanceRenewFlag", req, cb)
   }
 
   /**
@@ -1023,7 +1061,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * waf斯巴达-删除防护域名
+   * SAASWAF删除防护域名
    */
   async DeleteSpartaProtection(
     req: DeleteSpartaProtectionRequest,
@@ -1230,6 +1268,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyHostFlowModeResponse) => void
   ): Promise<ModifyHostFlowModeResponse> {
     return this.request("ModifyHostFlowMode", req, cb)
+  }
+
+  /**
+   * 修改实例的名称
+   */
+  async ModifyInstanceName(
+    req: ModifyInstanceNameRequest,
+    cb?: (error: string, rep: ModifyInstanceNameResponse) => void
+  ): Promise<ModifyInstanceNameResponse> {
+    return this.request("ModifyInstanceName", req, cb)
   }
 
   /**

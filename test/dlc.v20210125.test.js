@@ -608,6 +608,16 @@ it("dlc.v20210125.CreateWorkGroup", async function () {
     }
 })
 
+it("dlc.v20210125.DescribeDatasourceConnection", async function () {
+    try {
+       const data = await client.DescribeDatasourceConnection({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dlc.v20210125.CancelSparkSessionBatchSQL", async function () {
     try {
        const data = await client.CancelSparkSessionBatchSQL({})

@@ -6689,47 +6689,47 @@ export interface PullStreamTaskInfo {
     /**
      * 拉流任务Id。
      */
-    TaskId: string;
+    TaskId?: string;
     /**
      * 拉流源的类型：
   PullLivePushLive -直播，
   PullVodPushLive -点播，
   PullPicPushLive -图片。
      */
-    SourceType: string;
+    SourceType?: string;
     /**
      * 拉流源url列表。
   SourceType为直播（PullLiveToLive）只可以填1个，
   SourceType为点播（PullVodToLive）可以填多个，上限10个。
      */
-    SourceUrls: Array<string>;
+    SourceUrls?: Array<string>;
     /**
      * 推流域名。
   将拉到的源推到该域名。
      */
-    DomainName: string;
+    DomainName?: string;
     /**
      * 推流路径。
   将拉到的源推到该路径。
      */
-    AppName: string;
+    AppName?: string;
     /**
      * 流名称。
   将拉到的源推到该流名称。
      */
-    StreamName: string;
+    StreamName?: string;
     /**
      * 推流参数。
   推流携带的自定义参数。
      */
-    PushArgs: string;
+    PushArgs?: string;
     /**
      * 开始时间。
   使用UTC格式时间，
   例如：2019-01-08T10:00:00Z。
   注意：北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。
      */
-    StartTime: string;
+    StartTime?: string;
     /**
      * 结束时间，注意：
   1. 结束时间必须大于开始时间；
@@ -6739,7 +6739,7 @@ export interface PullStreamTaskInfo {
   例如：2019-01-08T10:00:00Z。
   注意：北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。
      */
-    EndTime: string;
+    EndTime?: string;
     /**
      * 任务创建所在地域：
   ap-beijing - 华北地区(北京)，
@@ -6755,7 +6755,7 @@ export interface PullStreamTaskInfo {
   na-ashburn - 美东，
   ap-tokyo - 日本。
      */
-    Region: string;
+    Region?: string;
     /**
      * 点播拉流转推循环次数。
   -1：无限循环，直到任务结束。
@@ -6763,7 +6763,7 @@ export interface PullStreamTaskInfo {
   >0：具体循环次数。次数和时间以先结束的为准。
   注意：拉流源为点播，该配置生效。
      */
-    VodLoopTimes: number;
+    VodLoopTimes?: number;
     /**
      * 点播更新SourceUrls后的播放方式：
   ImmediateNewSource：立即从更新的拉流源开始播放；
@@ -6771,33 +6771,33 @@ export interface PullStreamTaskInfo {
   
   注意：拉流源为点播，该配置生效。
      */
-    VodRefreshType: string;
+    VodRefreshType?: string;
     /**
      * 任务创建时间。
   使用UTC格式时间，
   例如：2019-01-08T10:00:00Z。
   注意：北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。
      */
-    CreateTime: string;
+    CreateTime?: string;
     /**
      * 任务更新时间。
   使用UTC格式时间，
   例如：2019-01-08T10:00:00Z。
   注意：北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。
      */
-    UpdateTime: string;
+    UpdateTime?: string;
     /**
      * 创建任务的操作者。
      */
-    CreateBy: string;
+    CreateBy?: string;
     /**
      * 最后更新任务的操作者。
      */
-    UpdateBy: string;
+    UpdateBy?: string;
     /**
      * 回调地址。
      */
-    CallbackUrl: string;
+    CallbackUrl?: string;
     /**
      * 选择需要回调的事件：
   TaskStart：任务启动回调，
@@ -6806,62 +6806,67 @@ export interface PullStreamTaskInfo {
   VodSourceFileFinish：从点播源文件拉流结束回调，
   ResetTaskConfig：任务更新回调。
      */
-    CallbackEvents: Array<string>;
+    CallbackEvents?: Array<string>;
     /**
      * 注意：该信息暂不返回。
   最后一次回调信息。
      */
-    CallbackInfo: string;
+    CallbackInfo?: string;
     /**
      * 注意：该信息暂不返回。
   错误信息。
      */
-    ErrorInfo: string;
+    ErrorInfo?: string;
     /**
      * 状态。
   enable：生效中。
   pause：暂停中。
      */
-    Status: string;
+    Status?: string;
     /**
      * 注意：该信息仅在查询单个任务时返回。
   任务最新拉流信息。
   包含：源 url，偏移时间，上报时间。
      */
-    RecentPullInfo: RecentPullInfo;
+    RecentPullInfo?: RecentPullInfo;
     /**
      * 任务备注信息。
      */
-    Comment: string;
+    Comment?: string;
     /**
      * 备源类型：
   PullLivePushLive -直播，
   PullVodPushLive -点播。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    BackupSourceType: string;
+    BackupSourceType?: string;
     /**
      * 备源URL。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    BackupSourceUrl: string;
+    BackupSourceUrl?: string;
     /**
      * 水印信息列表。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    WatermarkList: Array<PullPushWatermarkInfo>;
+    WatermarkList?: Array<PullPushWatermarkInfo>;
     /**
      * 点播源是否启用本地推流模式，默认0，不启用。
   0 - 不启用。
   1 - 启用。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    VodLocalMode: number;
+    VodLocalMode?: number;
     /**
      * 录制模板 ID。
   注意：此字段可能返回 null，表示取不到有效值。
      */
     RecordTemplateId?: string;
+    /**
+     * 新增的推流地址。用于单任务推两路场景。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    BackupToUrl?: string;
 }
 /**
  * CreateLiveTimeShiftTemplate返回参数结构体

@@ -54,7 +54,7 @@ export interface CreateCommandResponse {
     /**
      * 命令ID。
      */
-    CommandId: string;
+    CommandId?: string;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -319,7 +319,7 @@ export interface RunCommandRequest {
      */
     Content: string;
     /**
-     * 待执行命令的实例ID列表，上限100。支持实例类型：
+     * 待执行命令的实例ID列表，上限200。支持实例类型：
   <li> CVM
   <li> LIGHTHOUSE
      */
@@ -346,14 +346,17 @@ export interface RunCommandRequest {
     Timeout?: number;
     /**
      * 是否保存命令，取值范围：
-  <li> True：保存
-  <li> False：不保存
-  默认为 False。
+  <li> true：保存
+  <li> false：不保存
+  默认为 false。
      */
     SaveCommand?: boolean;
     /**
      * 是否启用自定义参数功能。
   一旦创建，此值不提供修改。
+  取值范围：
+  <li> true：启用
+  <li> false：不启用
   默认值：false。
      */
     EnableParameter?: boolean;
@@ -365,6 +368,10 @@ export interface RunCommandRequest {
   自定义参数名称需符合以下规范：字符数目上限64，可选范围【a-zA-Z0-9-_】。
      */
     DefaultParameters?: string;
+    /**
+     * 自定义参数数组。 如果 Parameters 未提供，将使用这里的默认值进行替换。 自定义参数最多20个。
+     */
+    DefaultParameterConfs?: Array<DefaultParameterConf>;
     /**
      * Command 的自定义参数。字段类型为json encoded string。如：{\"varA\": \"222\"}。
   key为自定义参数名称，value为该参数的默认取值。kv均为字符串型。
@@ -403,7 +410,7 @@ export interface InvokeCommandRequest {
      */
     CommandId: string;
     /**
-     * 待执行命令的实例ID列表，上限100。
+     * 待执行命令的实例ID列表，上限200。
      */
     InstanceIds: Array<string>;
     /**
@@ -541,10 +548,12 @@ export interface TaskResult {
     Output: string;
     /**
      * 命令执行开始时间。
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     ExecStartTime: string;
     /**
      * 命令执行结束时间。
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     ExecEndTime: string;
     /**
@@ -864,7 +873,7 @@ export interface InvokeCommandResponse {
     /**
      * 执行活动ID。
      */
-    InvocationId: string;
+    InvocationId?: string;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -911,6 +920,12 @@ export interface ModifyCommandRequest {
   自定义参数名称需符合以下规范：字符数目上限64，可选范围【a-zA-Z0-9-_】。
      */
     DefaultParameters?: string;
+    /**
+     * 自定义参数数组。
+  如果InvokeCommand时未提供参数取值，将使用这里的默认值进行替换。
+  自定义参数最多20个。
+     */
+    DefaultParameterConfs?: Array<DefaultParameterConf>;
     /**
      * 在 CVM 或 Lighthouse 实例中执行命令的用户名称。
   使用最小权限执行命令是权限管理的最佳实践，建议您以普通用户身份执行云助手命令。
@@ -1446,11 +1461,11 @@ export interface RunCommandResponse {
     /**
      * 命令ID。
      */
-    CommandId: string;
+    CommandId?: string;
     /**
      * 执行活动ID。
      */
-    InvocationId: string;
+    InvocationId?: string;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1585,6 +1600,12 @@ export interface CreateCommandRequest {
   自定义参数名称需符合以下规范：字符数目上限64，可选范围【a-zA-Z0-9-_】。
      */
     DefaultParameters?: string;
+    /**
+     * 自定义参数数组。
+  如果InvokeCommand时未提供参数取值，将使用这里的默认值进行替换。
+  自定义参数最多20个。
+     */
+    DefaultParameterConfs?: Array<DefaultParameterConf>;
     /**
      * 为命令关联的标签，列表长度不超过10。
      */

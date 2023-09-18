@@ -126,6 +126,14 @@ export interface CreateEmbedTokenRequest {
    * 备用字段
    */
   ExtraParam?: string
+  /**
+   * 使用者企业Id(仅用于多用户)
+   */
+  UserCorpId?: string
+  /**
+   * 使用者Id(仅用于多用户)
+   */
+  UserId?: string
 }
 
 /**
@@ -187,4 +195,14 @@ export interface EmbedTokenInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ExpireTime?: number
+  /**
+   * 使用者企业Id(仅用于多用户)
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UserCorpId?: string
+  /**
+   * 使用者Id(仅用于多用户)
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UserId?: string
 }

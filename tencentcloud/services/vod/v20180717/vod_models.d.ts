@@ -6778,11 +6778,11 @@ export interface DescribeCDNUsageDataResponse {
     /**
      * 时间粒度，单位：分钟。
      */
-    DataInterval: number;
+    DataInterval?: number;
     /**
      * CDN 统计数据。
      */
-    Data: Array<StatDataItem>;
+    Data?: Array<StatDataItem>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -10033,7 +10033,7 @@ export interface DescribeStorageDetailsResponse {
     /**
      * 存储统计数据，每5分钟或每天一条数据。
      */
-    Data: Array<StatDataItem>;
+    Data?: Array<StatDataItem>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -18580,6 +18580,7 @@ export interface DescribeStorageDetailsRequest {
   <li>ArchiveBulkRetrieval：归档批量取回量。</li>
   <li>DeepArchiveStandardRetrieval：深度归档标准取回量。</li>
   <li>DeepArchiveBulkRetrieval：深度归档批量取回量。</li>
+  <li>InfrequentRetrieval：低频存储取回量。</li>
   默认值为 TotalStorage。
      */
     StorageType?: string;

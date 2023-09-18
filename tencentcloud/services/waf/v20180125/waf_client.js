@@ -78,6 +78,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyCustomRule", req, cb);
     }
     /**
+     * 设置套餐实例的弹性qps上限
+     */
+    async ModifyInstanceQpsLimit(req, cb) {
+        return this.request("ModifyInstanceQpsLimit", req, cb);
+    }
+    /**
      * 接口已废弃
 
 描述WAF自动封禁IP详情,对齐自动封堵状态
@@ -120,6 +126,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ModifySpartaProtection(req, cb) {
         return this.request("ModifySpartaProtection", req, cb);
+    }
+    /**
+     * 修改实例的QPS弹性计费开关
+     */
+    async ModifyInstanceElasticMode(req, cb) {
+        return this.request("ModifyInstanceElasticMode", req, cb);
     }
     /**
      * api分析页面开关
@@ -272,6 +284,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ModifyCustomWhiteRule(req, cb) {
         return this.request("ModifyCustomWhiteRule", req, cb);
+    }
+    /**
+     * 修改实例的自动续费开关
+     */
+    async ModifyInstanceRenewFlag(req, cb) {
+        return this.request("ModifyInstanceRenewFlag", req, cb);
     }
     /**
      * 查询单个saas域名详情
@@ -457,7 +475,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDomainCountInfo", req, cb);
     }
     /**
-     * waf斯巴达-删除防护域名
+     * SAASWAF删除防护域名
      */
     async DeleteSpartaProtection(req, cb) {
         return this.request("DeleteSpartaProtection", req, cb);
@@ -581,6 +599,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ModifyHostFlowMode(req, cb) {
         return this.request("ModifyHostFlowMode", req, cb);
+    }
+    /**
+     * 修改实例的名称
+     */
+    async ModifyInstanceName(req, cb) {
+        return this.request("ModifyInstanceName", req, cb);
     }
     /**
      * 在CDC场景下，负载均衡型WAF的添加、编辑域名配置的时候，需要展示CDC负载均衡型WAF（cdc-clb-waf)支持的地域列表，通过DescribeUserCdcClbWafRegions既可以获得当前对客户已经开放的地域列表

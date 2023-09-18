@@ -453,21 +453,25 @@ export interface CreateNativeGatewayServerGroupRequest {
 }
 
 /**
- * 引擎地域配置详情
+ * DescribeCloudNativeAPIGatewayCertificates请求参数结构体
  */
-export interface EngineRegionInfo {
+export interface DescribeCloudNativeAPIGatewayCertificatesRequest {
   /**
-   * 引擎节点所在地域
+   * 网关ID
    */
-  EngineRegion: string
+  GatewayId: string
   /**
-   * 此地域节点分配数量
+   * 列表数量
    */
-  Replica: number
+  Limit?: number
   /**
-   * 集群网络信息
+   * 列表offset
    */
-  VpcInfos: Array<VpcInfo>
+  Offset?: number
+  /**
+   * 过滤条件，多个过滤条件之间是与的关系，支持BindDomain ，Name
+   */
+  Filters?: Array<ListFilter>
 }
 
 /**
@@ -530,6 +534,16 @@ export interface CreateCloudNativeAPIGatewayResponse {
    * 创建云原生API网关实例响应结果。
    */
   Result?: CreateCloudNativeAPIGatewayResult
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeleteCloudNativeAPIGatewayCertificate返回参数结构体
+ */
+export interface DeleteCloudNativeAPIGatewayCertificateResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -751,6 +765,169 @@ export interface EnvAddressInfo {
 }
 
 /**
+ * 微服务注册引擎实例
+ */
+export interface SREInstance {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+  /**
+   * 名称
+   */
+  Name: string
+  /**
+   * 版本号
+   */
+  Edition: string
+  /**
+   * 状态, 枚举值:creating/create_fail/running/updating/update_fail/restarting/restart_fail/destroying/destroy_fail
+   */
+  Status: string
+  /**
+   * 规格ID
+   */
+  SpecId: string
+  /**
+   * 副本数
+   */
+  Replica: number
+  /**
+   * 类型
+   */
+  Type: string
+  /**
+   * Vpc iD
+   */
+  VpcId: string
+  /**
+   * 子网ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SubnetIds: Array<string>
+  /**
+   * 是否开启持久化存储
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EnableStorage: boolean
+  /**
+   * 数据存储方式
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StorageType: string
+  /**
+   * 云硬盘容量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StorageCapacity: number
+  /**
+   * 计费方式
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Paymode: string
+  /**
+   * EKS集群的ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EKSClusterID: string
+  /**
+   * 集群创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateTime: string
+  /**
+   * 环境配置信息列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EnvInfos: Array<EnvInfo>
+  /**
+   * 引擎所在的区域
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EngineRegion: string
+  /**
+   * 注册引擎是否开启公网
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EnableInternet: boolean
+  /**
+   * 私有网络列表信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VpcInfos: Array<VpcInfo>
+  /**
+   * 服务治理相关信息列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ServiceGovernanceInfos: Array<ServiceGovernanceInfo>
+  /**
+   * 实例的标签信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Tags: Array<KVPair>
+  /**
+   * 引擎实例是否开启控制台公网访问地址
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EnableConsoleInternet: boolean
+  /**
+   * 引擎实例是否开启控制台内网访问地址
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EnableConsoleIntranet: boolean
+  /**
+   * 引擎实例是否展示参数配置页面
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ConfigInfoVisible: boolean
+  /**
+   * 引擎实例控制台默认密码
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ConsoleDefaultPwd: string
+  /**
+   * 交易付费类型，0后付费/1预付费
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TradeType: number
+  /**
+   * 自动续费标记：0表示默认状态(用户未设置，即初始状态)， 1表示自动续费，2表示明确不自动续费
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AutoRenewFlag: number
+  /**
+   * 预付费到期时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CurDeadline: string
+  /**
+   * 隔离开始时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsolateTime: string
+  /**
+   * 实例地域相关的描述信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RegionInfos: Array<DescribeInstanceRegionInfo>
+  /**
+   * 所在EKS环境，分为common和yunti
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EKSType: string
+  /**
+   * 引擎的产品版本
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FeatureVersion?: string
+  /**
+   * 引擎实例是否开启客户端内网访问地址
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EnableClientIntranet?: boolean
+}
+
+/**
  * 引擎实例的标签信息
  */
 export interface InstanceTagInfo {
@@ -784,6 +961,20 @@ export interface DescribeCloudNativeAPIGatewayServicesRequest {
    * 过滤条件，多个过滤条件之间是与的关系，支持 name,upstreamType
    */
   Filters?: Array<ListFilter>
+}
+
+/**
+ * DescribeCloudNativeAPIGatewayCertificates返回参数结构体
+ */
+export interface DescribeCloudNativeAPIGatewayCertificatesResponse {
+  /**
+   * 无
+   */
+  Result?: KongCertificatesList
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -876,6 +1067,17 @@ export interface DescribeSREInstancesRequest {
    * 调用方来源
    */
   QuerySource?: string
+}
+
+/**
+ * 云原生网关证书
+ */
+export interface KongCertificate {
+  /**
+   * 无
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Cert?: KongCertificatesPreview
 }
 
 /**
@@ -1378,6 +1580,28 @@ export interface KongRoutePreview {
 }
 
 /**
+ * kong证书列表
+ */
+export interface KongCertificatesList {
+  /**
+   * 证书列表总数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Total?: number
+  /**
+   * 无
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CertificatesList?: Array<KongCertificatesPreview>
+  /**
+   * 证书列表总页数
+注意：此字段可能返回 null，表示取不到有效值。
+   * @deprecated
+   */
+  Pages?: number
+}
+
+/**
  * 云原生网关Tse 限流插件配置
  */
 export interface CloudNativeAPIGatewayRateLimitDetail {
@@ -1462,34 +1686,17 @@ export interface CreateCloudNativeAPIGatewayRouteResponse {
 }
 
 /**
- * 实例地域信息描述
+ * DescribeCloudNativeAPIGatewayConfig请求参数结构体
  */
-export interface DescribeInstanceRegionInfo {
+export interface DescribeCloudNativeAPIGatewayConfigRequest {
   /**
-   * 引擎部署地域信息
-注意：此字段可能返回 null，表示取不到有效值。
+   * 云原生API网关实例ID。
    */
-  EngineRegion: string
+  GatewayId: string
   /**
-   * 引擎在该地域的副本数
-注意：此字段可能返回 null，表示取不到有效值。
+   * 分组id，不填时为默认分组
    */
-  Replica: number
-  /**
-   * 引擎在该地域的规格id
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SpecId: string
-  /**
-   * 内网的网络信息
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  IntranetVpcInfos: Array<VpcInfo>
-  /**
-   * 是否开公网
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  EnableClientInternet: boolean
+  GroupId?: string
 }
 
 /**
@@ -1674,29 +1881,18 @@ export interface DeleteCloudNativeAPIGatewayServiceRequest {
 }
 
 /**
- * 定时伸缩配置参数
+ * CreateCloudNativeAPIGatewayCertificate返回参数结构体
  */
-export interface CloudNativeAPIGatewayStrategyCronScalerConfigParam {
+export interface CreateCloudNativeAPIGatewayCertificateResponse {
   /**
-   * 定时伸缩周期
+   * 创建证书结果
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Period?: string
+  Result?: CertificateInfo
   /**
-   * 定时伸缩开始时间
-注意：此字段可能返回 null，表示取不到有效值。
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  StartAt?: string
-  /**
-   * 定时伸缩目标节点数
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TargetReplicas?: number
-  /**
-   * 定时伸缩cron表达式
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Crontab?: string
+  RequestId?: string
 }
 
 /**
@@ -1767,6 +1963,24 @@ export interface EnvInfo {
 }
 
 /**
+ * CreateCloudNativeAPIGatewayCanaryRule请求参数结构体
+ */
+export interface CreateCloudNativeAPIGatewayCanaryRuleRequest {
+  /**
+   * 网关 ID
+   */
+  GatewayId: string
+  /**
+   * 服务 ID
+   */
+  ServiceId: string
+  /**
+   * 灰度规则配置
+   */
+  CanaryRule: CloudNativeAPIGatewayCanaryRule
+}
+
+/**
  * ModifyNativeGatewayServerGroup请求参数结构体
  */
 export interface ModifyNativeGatewayServerGroupRequest {
@@ -1818,17 +2032,34 @@ export interface DescribeOneCloudNativeAPIGatewayServiceRequest {
 }
 
 /**
- * DescribeCloudNativeAPIGatewayConfig请求参数结构体
+ * 实例地域信息描述
  */
-export interface DescribeCloudNativeAPIGatewayConfigRequest {
+export interface DescribeInstanceRegionInfo {
   /**
-   * 云原生API网关实例ID。
+   * 引擎部署地域信息
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  GatewayId: string
+  EngineRegion: string
   /**
-   * 分组id，不填时为默认分组
+   * 引擎在该地域的副本数
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  GroupId?: string
+  Replica: number
+  /**
+   * 引擎在该地域的规格id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SpecId: string
+  /**
+   * 内网的网络信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IntranetVpcInfos: Array<VpcInfo>
+  /**
+   * 是否开公网
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EnableClientInternet: boolean
 }
 
 /**
@@ -2097,166 +2328,17 @@ export interface DescribeCloudNativeAPIGatewayCanaryRulesResponse {
 }
 
 /**
- * 微服务注册引擎实例
+ * DeleteCloudNativeAPIGatewayCertificate请求参数结构体
  */
-export interface SREInstance {
+export interface DeleteCloudNativeAPIGatewayCertificateRequest {
   /**
-   * 实例ID
+   * 网关ID
    */
-  InstanceId: string
+  GatewayId: string
   /**
-   * 名称
+   * 证书Id
    */
-  Name: string
-  /**
-   * 版本号
-   */
-  Edition: string
-  /**
-   * 状态, 枚举值:creating/create_fail/running/updating/update_fail/restarting/restart_fail/destroying/destroy_fail
-   */
-  Status: string
-  /**
-   * 规格ID
-   */
-  SpecId: string
-  /**
-   * 副本数
-   */
-  Replica: number
-  /**
-   * 类型
-   */
-  Type: string
-  /**
-   * Vpc iD
-   */
-  VpcId: string
-  /**
-   * 子网ID
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SubnetIds: Array<string>
-  /**
-   * 是否开启持久化存储
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  EnableStorage: boolean
-  /**
-   * 数据存储方式
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  StorageType: string
-  /**
-   * 云硬盘容量
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  StorageCapacity: number
-  /**
-   * 计费方式
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Paymode: string
-  /**
-   * EKS集群的ID
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  EKSClusterID: string
-  /**
-   * 集群创建时间
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CreateTime: string
-  /**
-   * 环境配置信息列表
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  EnvInfos: Array<EnvInfo>
-  /**
-   * 引擎所在的区域
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  EngineRegion: string
-  /**
-   * 注册引擎是否开启公网
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  EnableInternet: boolean
-  /**
-   * 私有网络列表信息
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  VpcInfos: Array<VpcInfo>
-  /**
-   * 服务治理相关信息列表
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ServiceGovernanceInfos: Array<ServiceGovernanceInfo>
-  /**
-   * 实例的标签信息
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Tags: Array<KVPair>
-  /**
-   * 引擎实例是否开启控制台公网访问地址
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  EnableConsoleInternet: boolean
-  /**
-   * 引擎实例是否开启控制台内网访问地址
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  EnableConsoleIntranet: boolean
-  /**
-   * 引擎实例是否展示参数配置页面
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ConfigInfoVisible: boolean
-  /**
-   * 引擎实例控制台默认密码
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ConsoleDefaultPwd: string
-  /**
-   * 交易付费类型，0后付费/1预付费
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TradeType: number
-  /**
-   * 自动续费标记：0表示默认状态(用户未设置，即初始状态)， 1表示自动续费，2表示明确不自动续费
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  AutoRenewFlag: number
-  /**
-   * 预付费到期时间
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CurDeadline: string
-  /**
-   * 隔离开始时间
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  IsolateTime: string
-  /**
-   * 实例地域相关的描述信息
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  RegionInfos: Array<DescribeInstanceRegionInfo>
-  /**
-   * 所在EKS环境，分为common和yunti
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  EKSType: string
-  /**
-   * 引擎的产品版本
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  FeatureVersion?: string
-  /**
-   * 引擎实例是否开启客户端内网访问地址
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  EnableClientIntranet?: boolean
+  Id: string
 }
 
 /**
@@ -2553,6 +2635,17 @@ export interface DescribeNativeGatewayServerGroupsRequest {
 }
 
 /**
+ * 证书信息
+ */
+export interface CertificateInfo {
+  /**
+   * 唯一id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Id?: string
+}
+
+/**
  * 获取云原生API网关实例协议端口列表响应结果
  */
 export interface DescribeGatewayInstancePortResult {
@@ -2580,6 +2673,43 @@ export interface DeleteCloudNativeAPIGatewayRequest {
    * 是否删除实例关联的 CLS 日志主题。
    */
   DeleteClsTopic?: boolean
+}
+
+/**
+ * DescribeCloudNativeAPIGatewayCertificateDetails返回参数结构体
+ */
+export interface DescribeCloudNativeAPIGatewayCertificateDetailsResponse {
+  /**
+   * 无
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Result?: KongCertificate
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * UpdateCloudNativeAPIGatewayCertificateInfo请求参数结构体
+ */
+export interface UpdateCloudNativeAPIGatewayCertificateInfoRequest {
+  /**
+   * 网关ID
+   */
+  GatewayId: string
+  /**
+   * 证书id
+   */
+  Id: string
+  /**
+   * 绑定的域名列表
+   */
+  BindDomains: Array<string>
+  /**
+   * 证书名称
+   */
+  Name?: string
 }
 
 /**
@@ -2707,6 +2837,36 @@ export interface KongServices {
 }
 
 /**
+ * CreateCloudNativeAPIGatewayCertificate请求参数结构体
+ */
+export interface CreateCloudNativeAPIGatewayCertificateRequest {
+  /**
+   * 网关ID
+   */
+  GatewayId: string
+  /**
+   * 绑定的域名
+   */
+  BindDomains: Array<string>
+  /**
+   * ssl平台证书 Id
+   */
+  CertId: string
+  /**
+   * 证书名称
+   */
+  Name?: string
+  /**
+   * 证书私钥
+   */
+  Key?: string
+  /**
+   * 证书pem格式
+   */
+  Crt?: string
+}
+
+/**
  * ModifyCloudNativeAPIGateway返回参数结构体
  */
 export interface ModifyCloudNativeAPIGatewayResponse {
@@ -2796,9 +2956,13 @@ export interface DescribeCloudNativeAPIGatewayRequest {
 }
 
 /**
- * DeleteCloudNativeAPIGatewayCanaryRule返回参数结构体
+ * DescribeNativeGatewayServerGroups返回参数结构体
  */
-export interface DeleteCloudNativeAPIGatewayCanaryRuleResponse {
+export interface DescribeNativeGatewayServerGroupsResponse {
+  /**
+   * 分组列表信息
+   */
+  Result: NativeGatewayServerGroups
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2806,21 +2970,29 @@ export interface DeleteCloudNativeAPIGatewayCanaryRuleResponse {
 }
 
 /**
- * CreateCloudNativeAPIGatewayCanaryRule请求参数结构体
+ * 定时伸缩配置参数
  */
-export interface CreateCloudNativeAPIGatewayCanaryRuleRequest {
+export interface CloudNativeAPIGatewayStrategyCronScalerConfigParam {
   /**
-   * 网关 ID
+   * 定时伸缩周期
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  GatewayId: string
+  Period?: string
   /**
-   * 服务 ID
+   * 定时伸缩开始时间
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  ServiceId: string
+  StartAt?: string
   /**
-   * 灰度规则配置
+   * 定时伸缩目标节点数
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  CanaryRule: CloudNativeAPIGatewayCanaryRule
+  TargetReplicas?: number
+  /**
+   * 定时伸缩cron表达式
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Crontab?: string
 }
 
 /**
@@ -3172,6 +3344,20 @@ export interface BoundK8SInfo {
 }
 
 /**
+ * DescribeCloudNativeAPIGatewayCertificateDetails请求参数结构体
+ */
+export interface DescribeCloudNativeAPIGatewayCertificateDetailsRequest {
+  /**
+   * 网关ID
+   */
+  GatewayId: string
+  /**
+   * 证书Id
+   */
+  Id: string
+}
+
+/**
  * 指标伸缩的规则
  */
 export interface AutoScalerRules {
@@ -3364,6 +3550,69 @@ export interface CreateNativeGatewayServerGroupResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 云原生网关证书预览信息
+ */
+export interface KongCertificatesPreview {
+  /**
+   * 证书名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name?: string
+  /**
+   * Id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Id: string
+  /**
+   * 绑定的域名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BindDomains?: Array<string>
+  /**
+   * 证书状态：expired(已过期)
+                   active(生效中)
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status?: string
+  /**
+   * 证书pem格式
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Crt?: string
+  /**
+   * 证书私钥
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Key?: string
+  /**
+   * 证书过期时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExpireTime?: string
+  /**
+   * 证书上传时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateTime?: string
+  /**
+   * 证书签发时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IssueTime?: string
+  /**
+   * 证书来源：native(kong自定义证书)
+                    ssl(ssl平台证书)
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CertSource?: string
+  /**
+   * ssl平台证书Id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CertId?: string
 }
 
 /**
@@ -3738,13 +3987,9 @@ export interface DescribeCloudNativeAPIGatewayCanaryRulesRequest {
 }
 
 /**
- * DescribeNativeGatewayServerGroups返回参数结构体
+ * DeleteCloudNativeAPIGatewayCanaryRule返回参数结构体
  */
-export interface DescribeNativeGatewayServerGroupsResponse {
-  /**
-   * 分组列表信息
-   */
-  Result: NativeGatewayServerGroups
+export interface DeleteCloudNativeAPIGatewayCanaryRuleResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3765,6 +4010,34 @@ export interface DescribeCloudNativeAPIGatewayPortsRequest {
  * ModifyNativeGatewayServerGroup返回参数结构体
  */
 export interface ModifyNativeGatewayServerGroupResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 引擎地域配置详情
+ */
+export interface EngineRegionInfo {
+  /**
+   * 引擎节点所在地域
+   */
+  EngineRegion: string
+  /**
+   * 此地域节点分配数量
+   */
+  Replica: number
+  /**
+   * 集群网络信息
+   */
+  VpcInfos: Array<VpcInfo>
+}
+
+/**
+ * UpdateCloudNativeAPIGatewayCertificateInfo返回参数结构体
+ */
+export interface UpdateCloudNativeAPIGatewayCertificateInfoResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

@@ -10590,6 +10590,10 @@ export interface CreateNatGatewayRequest {
    * 公网IP是否强制与NAT网关来自同可用区，true表示需要与NAT网关同可用区；false表示可与NAT网关不是同一个可用区。此参数只有当参数Zone存在时才能生效。
    */
   PublicIpFromSameZone?: boolean
+  /**
+   * NAT网关大版本号，1是传统型，2是标准型，默认是1
+   */
+  NatProductVersion?: number
 }
 
 /**

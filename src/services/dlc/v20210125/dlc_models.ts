@@ -70,6 +70,24 @@ export interface DescribeTaskResultResponse {
 }
 
 /**
+ * DescribeDatasourceConnection返回参数结构体
+ */
+export interface DescribeDatasourceConnectionResponse {
+  /**
+   * 数据连接总数
+   */
+  TotalCount: number
+  /**
+   * 数据连接对象集合
+   */
+  ConnectionSet: Array<DatasourceConnectionInfo>
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * Presto监控指标
  */
 export interface PrestoMonitorMetrics {
@@ -905,6 +923,47 @@ export interface Task {
 }
 
 /**
+ * Elasticsearch数据源的详细信息
+ */
+export interface ElasticsearchInfo {
+  /**
+   * 数据源ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceId?: string
+  /**
+   * 数据源名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceName?: string
+  /**
+   * 用户名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  User?: string
+  /**
+   * 密码，需要base64编码
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Password?: string
+  /**
+   * 数据源的VPC和子网信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Location?: DatasourceConnectionLocation
+  /**
+   * 默认数据库名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DbName?: string
+  /**
+   * 访问Elasticsearch的ip、端口信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ServiceInfo?: Array<IpPortPair>
+}
+
+/**
  * DetachUserPolicy请求参数结构体
  */
 export interface DetachUserPolicyRequest {
@@ -1563,53 +1622,25 @@ export interface ModifySparkAppRequest {
 }
 
 /**
- * spark流任务统计信息
+ * 数据源连接的网络信息
  */
-export interface StreamingStatistics {
+export interface DatasourceConnectionLocation {
   /**
-   * 任务开始时间
+   * 数据连接所在Vpc实例Id，如“vpc-azd4dt1c”。
    */
-  StartTime: string
+  VpcId: string
   /**
-   * 数据接收器数
+   * Vpc的IPv4 CIDR
    */
-  Receivers: number
+  VpcCidrBlock: string
   /**
-   * 运行中的接收器数
+   * 数据连接所在子网的实例Id，如“subnet-bthucmmy”
    */
-  NumActiveReceivers: number
+  SubnetId: string
   /**
-   * 不活跃的接收器数
+   * Subnet的IPv4 CIDR
    */
-  NumInactiveReceivers: number
-  /**
-   * 运行中的批数
-   */
-  NumActiveBatches: number
-  /**
-   * 待处理的批数
-   */
-  NumRetainedCompletedBatches: number
-  /**
-   * 已完成的批数
-   */
-  NumTotalCompletedBatches: number
-  /**
-   * 平均输入速率
-   */
-  AverageInputRate: number
-  /**
-   * 平均等待时长
-   */
-  AverageSchedulingDelay: number
-  /**
-   * 平均处理时长
-   */
-  AverageProcessingTime: number
-  /**
-   * 平均延时
-   */
-  AverageTotalDelay: number
+  SubnetCidrBlock: string
 }
 
 /**
@@ -1889,17 +1920,19 @@ export interface QueryResultResponse {
 }
 
 /**
- * UnlockMetaData请求参数结构体
+ * ip端口对信息
  */
-export interface UnlockMetaDataRequest {
+export interface IpPortPair {
   /**
-   * 锁ID
+   * ip信息
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  LockId: number
+  Ip?: string
   /**
-   * 数据源名称
+   * 端口信息
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  DatasourceConnectionName?: string
+  Port?: number
 }
 
 /**
@@ -2081,6 +2114,21 @@ export interface CreateUserResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 文本格式
+ */
+export interface TextFile {
+  /**
+   * 文本类型，本参数取值为TextFile。
+   */
+  Format: string
+  /**
+   * 处理文本用的正则表达式。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Regex: string
 }
 
 /**
@@ -2469,6 +2517,24 @@ export interface WorkGroupIdSetOfUserId {
    * 工作组Id集合
    */
   WorkGroupIds: Array<number | bigint>
+}
+
+/**
+ * Kerberos详细信息
+ */
+export interface KerberosInfo {
+  /**
+   * Krb5Conf文件值
+   */
+  Krb5Conf?: string
+  /**
+   * KeyTab文件值
+   */
+  KeyTab?: string
+  /**
+   * 服务主体
+   */
+  ServicePrincipal?: string
 }
 
 /**
@@ -3202,6 +3268,70 @@ export interface TableBaseInfo {
 }
 
 /**
+ * hive类型数据源的信息
+ */
+export interface HiveInfo {
+  /**
+   * hive metastore的地址
+   */
+  MetaStoreUrl: string
+  /**
+   * hive数据源类型，代表数据储存的位置，COS或者HDFS
+   */
+  Type: string
+  /**
+   * 数据源所在的私有网络信息
+   */
+  Location: DatasourceConnectionLocation
+  /**
+   * 如果类型为HDFS，需要传一个用户名
+   */
+  User?: string
+  /**
+   * 如果类型为HDFS，需要选择是否高可用
+   */
+  HighAvailability?: boolean
+  /**
+   * 如果类型为COS，需要填写COS桶连接
+   */
+  BucketUrl?: string
+  /**
+   * json字符串。如果类型为HDFS，需要填写该字段
+   */
+  HdfsProperties?: string
+  /**
+   * Hive的元数据库信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Mysql?: MysqlInfo
+  /**
+   * emr集群Id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceId?: string
+  /**
+   * emr集群名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceName?: string
+  /**
+   * EMR集群中hive组件的版本号
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HiveVersion?: string
+  /**
+   * Kerberos详细信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  KerberosInfo?: KerberosInfo
+  /**
+   * 是否开启Kerberos
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  KerberosEnable?: boolean
+}
+
+/**
  * DMSTable基本信息
  */
 export interface DMSTable {
@@ -3368,124 +3498,6 @@ export interface DescribeDMSTablesRequest {
    * 排序字段：true：升序（默认），false：降序
    */
   Asc?: boolean
-}
-
-/**
- * ModifyUser请求参数结构体
- */
-export interface ModifyUserRequest {
-  /**
-   * 用户Id，和CAM侧Uin匹配
-   */
-  UserId: string
-  /**
-   * 用户描述
-   */
-  UserDescription: string
-}
-
-/**
- * 元数据存储描述属性
- */
-export interface DMSSds {
-  /**
-   * 存储地址
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Location?: string
-  /**
-   * 输入格式
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  InputFormat?: string
-  /**
-   * 输出格式
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  OutputFormat?: string
-  /**
-   * bucket数量
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  NumBuckets?: number
-  /**
-   * 是是否压缩
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Compressed?: boolean
-  /**
-   * 是否有子目录
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  StoredAsSubDirectories?: boolean
-  /**
-   * 序列化lib
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SerdeLib?: string
-  /**
-   * 序列化名称
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SerdeName?: string
-  /**
-   * 桶名称
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  BucketCols?: Array<string>
-  /**
-   * 序列化参数
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SerdeParams?: Array<KVPair>
-  /**
-   * 附加参数
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Params?: Array<KVPair>
-  /**
-   * 列排序(Expired)
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SortCols?: DMSColumnOrder
-  /**
-   * 列
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Cols?: Array<DMSColumn>
-  /**
-   * 列排序字段
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SortColumns?: Array<DMSColumnOrder>
-}
-
-/**
- * CreateSparkAppTask返回参数结构体
- */
-export interface CreateSparkAppTaskResponse {
-  /**
-   * 批Id
-   */
-  BatchId?: string
-  /**
-   * 任务Id
-   */
-  TaskId?: string
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * CancelTask请求参数结构体
- */
-export interface CancelTaskRequest {
-  /**
-   * 任务Id，全局唯一
-   */
-  TaskId: string
 }
 
 /**
@@ -3680,18 +3692,251 @@ export interface TaskResponseInfo {
 }
 
 /**
- * 文本格式
+ * ModifyUser请求参数结构体
  */
-export interface TextFile {
+export interface ModifyUserRequest {
   /**
-   * 文本类型，本参数取值为TextFile。
+   * 用户Id，和CAM侧Uin匹配
    */
-  Format: string
+  UserId: string
   /**
-   * 处理文本用的正则表达式。
+   * 用户描述
+   */
+  UserDescription: string
+}
+
+/**
+ * 元数据存储描述属性
+ */
+export interface DMSSds {
+  /**
+   * 存储地址
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Regex: string
+  Location?: string
+  /**
+   * 输入格式
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InputFormat?: string
+  /**
+   * 输出格式
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OutputFormat?: string
+  /**
+   * bucket数量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NumBuckets?: number
+  /**
+   * 是是否压缩
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Compressed?: boolean
+  /**
+   * 是否有子目录
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StoredAsSubDirectories?: boolean
+  /**
+   * 序列化lib
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SerdeLib?: string
+  /**
+   * 序列化名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SerdeName?: string
+  /**
+   * 桶名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BucketCols?: Array<string>
+  /**
+   * 序列化参数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SerdeParams?: Array<KVPair>
+  /**
+   * 附加参数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Params?: Array<KVPair>
+  /**
+   * 列排序(Expired)
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SortCols?: DMSColumnOrder
+  /**
+   * 列
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Cols?: Array<DMSColumn>
+  /**
+   * 列排序字段
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SortColumns?: Array<DMSColumnOrder>
+}
+
+/**
+ * CreateSparkAppTask返回参数结构体
+ */
+export interface CreateSparkAppTaskResponse {
+  /**
+   * 批Id
+   */
+  BatchId?: string
+  /**
+   * 任务Id
+   */
+  TaskId?: string
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CancelTask请求参数结构体
+ */
+export interface CancelTaskRequest {
+  /**
+   * 任务Id，全局唯一
+   */
+  TaskId: string
+}
+
+/**
+ * spark流任务统计信息
+ */
+export interface StreamingStatistics {
+  /**
+   * 任务开始时间
+   */
+  StartTime: string
+  /**
+   * 数据接收器数
+   */
+  Receivers: number
+  /**
+   * 运行中的接收器数
+   */
+  NumActiveReceivers: number
+  /**
+   * 不活跃的接收器数
+   */
+  NumInactiveReceivers: number
+  /**
+   * 运行中的批数
+   */
+  NumActiveBatches: number
+  /**
+   * 待处理的批数
+   */
+  NumRetainedCompletedBatches: number
+  /**
+   * 已完成的批数
+   */
+  NumTotalCompletedBatches: number
+  /**
+   * 平均输入速率
+   */
+  AverageInputRate: number
+  /**
+   * 平均等待时长
+   */
+  AverageSchedulingDelay: number
+  /**
+   * 平均处理时长
+   */
+  AverageProcessingTime: number
+  /**
+   * 平均延时
+   */
+  AverageTotalDelay: number
+}
+
+/**
+ * 数据源信息
+ */
+export interface DatasourceConnectionInfo {
+  /**
+   * 数据源数字Id
+   */
+  Id: number
+  /**
+   * 数据源字符串Id
+   */
+  DatasourceConnectionId: string
+  /**
+   * 数据源名称
+   */
+  DatasourceConnectionName: string
+  /**
+   * 数据源描述
+   */
+  DatasourceConnectionDesc: string
+  /**
+   * 数据源类型，支持DataLakeCatalog、IcebergCatalog、Result、Mysql、HiveCos、HiveHdfs
+   */
+  DatasourceConnectionType: string
+  /**
+   * 数据源属性
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DatasourceConnectionConfig: DatasourceConnectionConfig
+  /**
+   * 数据源状态：0（初始化）、1（成功）、-1（已删除）、-2（失败）、-3（删除中）
+   */
+  State: number
+  /**
+   * 地域
+   */
+  Region: string
+  /**
+   * 用户AppId
+   */
+  AppId: string
+  /**
+   * 数据源创建时间
+   */
+  CreateTime: string
+  /**
+   * 数据源最近一次更新时间
+   */
+  UpdateTime: string
+  /**
+   * 数据源同步失败原因
+   */
+  Message: string
+  /**
+   * 数据源绑定的计算引擎信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DataEngines?: Array<DataEngineInfo>
+  /**
+   * 创建人
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UserAlias?: string
+  /**
+   * 网络配置列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NetworkConnectionSet?: Array<NetworkConnection>
+  /**
+   * 连通性状态：0（未测试，默认）、1（正常）、2（失败）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ConnectivityState?: number
+  /**
+   * 连通性测试提示信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ConnectivityTips?: string
 }
 
 /**
@@ -3945,6 +4190,20 @@ export interface AlterDMSTableRequest {
    * 当前表名
    */
   Name?: string
+}
+
+/**
+ * Kafka连接信息
+ */
+export interface KafkaInfo {
+  /**
+   * kakfa实例Id
+   */
+  InstanceId: string
+  /**
+   * kakfa数据源的网络信息
+   */
+  Location: DatasourceConnectionLocation
 }
 
 /**
@@ -4253,6 +4512,20 @@ export interface DescribeTaskResultRequest {
    * 返回结果的最大行数，范围0~1000，默认为1000.
    */
   MaxResults?: number
+}
+
+/**
+ * UnlockMetaData请求参数结构体
+ */
+export interface UnlockMetaDataRequest {
+  /**
+   * 锁ID
+   */
+  LockId: number
+  /**
+   * 数据源名称
+   */
+  DatasourceConnectionName?: string
 }
 
 /**
@@ -5083,6 +5356,42 @@ export interface DMSColumnOrder {
 }
 
 /**
+ * Mysql类型数据源信息
+ */
+export interface MysqlInfo {
+  /**
+   * 连接mysql的jdbc url
+   */
+  JdbcUrl: string
+  /**
+   * 用户名
+   */
+  User: string
+  /**
+   * mysql密码
+   */
+  Password: string
+  /**
+   * mysql数据源的网络信息
+   */
+  Location: DatasourceConnectionLocation
+  /**
+   * 数据库名称
+   */
+  DbName?: string
+  /**
+   * 数据库实例ID，和数据库侧保持一致
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceId?: string
+  /**
+   * 数据库实例名称，和数据库侧保持一致
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceName?: string
+}
+
+/**
  * CreateSparkApp返回参数结构体
  */
 export interface CreateSparkAppResponse {
@@ -5155,17 +5464,13 @@ export interface CreateTasksRequest {
 }
 
 /**
- * SuspendResumeDataEngine请求参数结构体
+ * 其他数据源
  */
-export interface SuspendResumeDataEngineRequest {
+export interface OtherDatasourceConnection {
   /**
-   * 虚拟集群名称
+   * 网络参数
    */
-  DataEngineName: string
-  /**
-   * 操作类型 suspend/resume
-   */
-  Operate: string
+  Location: DatasourceConnectionLocation
 }
 
 /**
@@ -5352,6 +5657,47 @@ export interface LockMetaDataRequest {
    * 主机名
    */
   Hostname?: string
+}
+
+/**
+ * 数据源详细信息
+ */
+export interface DataSourceInfo {
+  /**
+   * 数据源实例的唯一ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceId?: string
+  /**
+   * 数据源的名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceName?: string
+  /**
+   * 数据源的JDBC访问链接
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  JdbcUrl?: string
+  /**
+   * 用于访问数据源的用户名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  User?: string
+  /**
+   * 数据源访问密码，需要base64编码
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Password?: string
+  /**
+   * 数据源的VPC和子网信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Location?: DatasourceConnectionLocation
+  /**
+   * 默认数据库名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DbName?: string
 }
 
 /**
@@ -6069,6 +6415,20 @@ export interface DataEngineInfo {
 }
 
 /**
+ * SuspendResumeDataEngine请求参数结构体
+ */
+export interface SuspendResumeDataEngineRequest {
+  /**
+   * 虚拟集群名称
+   */
+  DataEngineName: string
+  /**
+   * 操作类型 suspend/resume
+   */
+  Operate: string
+}
+
+/**
  * DescribeSparkAppTasks请求参数结构体
  */
 export interface DescribeSparkAppTasksRequest {
@@ -6118,6 +6478,53 @@ export interface LockMetaDataResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeDatasourceConnection请求参数结构体
+ */
+export interface DescribeDatasourceConnectionRequest {
+  /**
+   * 连接ID列表，指定要查询的连接ID
+   */
+  DatasourceConnectionIds?: Array<string>
+  /**
+   * 过滤条件，当前支持的过滤键为：DatasourceConnectionName（数据源连接名）。
+DatasourceConnectionType   （数据源连接连接类型）
+   */
+  Filters?: Array<Filter>
+  /**
+   * 偏移量，默认为0
+   */
+  Offset?: number
+  /**
+   * 返回数量，默认20，最大值100
+   */
+  Limit?: number
+  /**
+   * 排序字段，支持如下字段类型，create-time（默认，创建时间）、update-time（更新时间）
+   */
+  SortBy?: string
+  /**
+   * 排序方式，desc表示正序，asc表示反序， 默认为desc
+   */
+  Sorting?: string
+  /**
+   * 筛选字段：起始时间
+   */
+  StartTime?: string
+  /**
+   * 筛选字段：截止时间
+   */
+  EndTime?: string
+  /**
+   * 连接名称列表，指定要查询的连接名称
+   */
+  DatasourceConnectionNames?: Array<string>
+  /**
+   * 连接类型，支持Mysql/HiveCos/Kafka/DataLakeCatalog
+   */
+  DatasourceConnectionTypes?: Array<string>
 }
 
 /**
@@ -6473,6 +6880,57 @@ export interface DMSColumn {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IsPartition?: boolean
+}
+
+/**
+ * 数据源属性
+ */
+export interface DatasourceConnectionConfig {
+  /**
+   * Mysql数据源连接的属性
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Mysql?: MysqlInfo
+  /**
+   * Hive数据源连接的属性
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Hive?: HiveInfo
+  /**
+   * Kafka数据源连接的属性
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Kafka?: KafkaInfo
+  /**
+   * 其他数据源连接的属性
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OtherDatasourceConnection?: OtherDatasourceConnection
+  /**
+   * PostgreSQL数据源连接的属性
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PostgreSql?: DataSourceInfo
+  /**
+   * SQLServer数据源连接的属性
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SqlServer?: DataSourceInfo
+  /**
+   * ClickHouse数据源连接的属性
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ClickHouse?: DataSourceInfo
+  /**
+   * Elasticsearch数据源连接的属性
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Elasticsearch?: ElasticsearchInfo
+  /**
+   * TDSQL-PostgreSQL数据源连接的属性
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TDSQLPostgreSql?: DataSourceInfo
 }
 
 /**

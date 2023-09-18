@@ -58,6 +58,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeOneCloudNativeAPIGatewayService", req, cb);
     }
     /**
+     * 查询云原生网关证书列表
+     */
+    async DescribeCloudNativeAPIGatewayCertificates(req, cb) {
+        return this.request("DescribeCloudNativeAPIGatewayCertificates", req, cb);
+    }
+    /**
      * 修改云原生网关限流插件(服务)
      */
     async ModifyCloudNativeAPIGatewayServiceRateLimit(req, cb) {
@@ -130,6 +136,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeCloudNativeAPIGateways", req, cb);
     }
     /**
+     * 创建云原生网关证书
+     */
+    async CreateCloudNativeAPIGatewayCertificate(req, cb) {
+        return this.request("CreateCloudNativeAPIGatewayCertificate", req, cb);
+    }
+    /**
      * 查询云原生网关服务列表
      */
     async DescribeCloudNativeAPIGatewayServices(req, cb) {
@@ -172,16 +184,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeSREInstances", req, cb);
     }
     /**
-     * 获取云原生API网关实例网络配置信息
-     */
-    async DescribeCloudNativeAPIGatewayConfig(req, cb) {
-        return this.request("DescribeCloudNativeAPIGatewayConfig", req, cb);
-    }
-    /**
      * 查询云原生网关的限流插件(路由)
      */
     async DescribeCloudNativeAPIGatewayRouteRateLimit(req, cb) {
         return this.request("DescribeCloudNativeAPIGatewayRouteRateLimit", req, cb);
+    }
+    /**
+     * 获取云原生API网关实例网络配置信息
+     */
+    async DescribeCloudNativeAPIGatewayConfig(req, cb) {
+        return this.request("DescribeCloudNativeAPIGatewayConfig", req, cb);
     }
     /**
      * 修改云原生网关服务
@@ -200,6 +212,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CreateCloudNativeAPIGatewayCanaryRule(req, cb) {
         return this.request("CreateCloudNativeAPIGatewayCanaryRule", req, cb);
+    }
+    /**
+     * 查询云原生网关单个证书详情
+     */
+    async DescribeCloudNativeAPIGatewayCertificateDetails(req, cb) {
+        return this.request("DescribeCloudNativeAPIGatewayCertificateDetails", req, cb);
     }
     /**
      * 修改引擎公网访问配置
@@ -226,10 +244,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteCloudNativeAPIGateway", req, cb);
     }
     /**
+     * 删除云原生网关证书
+     */
+    async DeleteCloudNativeAPIGatewayCertificate(req, cb) {
+        return this.request("DeleteCloudNativeAPIGatewayCertificate", req, cb);
+    }
+    /**
      * 创建云原生网关路由
      */
     async CreateCloudNativeAPIGatewayRoute(req, cb) {
         return this.request("CreateCloudNativeAPIGatewayRoute", req, cb);
+    }
+    /**
+     * 修改云原生网关证书信息
+     */
+    async UpdateCloudNativeAPIGatewayCertificateInfo(req, cb) {
+        return this.request("UpdateCloudNativeAPIGatewayCertificateInfo", req, cb);
     }
     /**
      * 创建云原生网关引擎分组

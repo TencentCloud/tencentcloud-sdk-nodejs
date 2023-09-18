@@ -20,6 +20,7 @@ import { ClientConfig } from "../../../common/interface"
 import {
   DescribeResultDownloadResponse,
   DescribeTaskResultResponse,
+  DescribeDatasourceConnectionResponse,
   PrestoMonitorMetrics,
   DescribeNotebookSessionStatementRequest,
   NetworkConnection,
@@ -52,6 +53,7 @@ import {
   DeleteScriptResponse,
   TableInfo,
   Task,
+  ElasticsearchInfo,
   DetachUserPolicyRequest,
   CrontabResumeSuspendStrategy,
   AlterDMSTableResponse,
@@ -71,7 +73,7 @@ import {
   CSVSerde,
   DescribeLakeFsInfoRequest,
   ModifySparkAppRequest,
-  StreamingStatistics,
+  DatasourceConnectionLocation,
   CreateDatabaseRequest,
   GenerateCreateMangedTableSqlResponse,
   DescribeDMSTablesResponse,
@@ -87,7 +89,7 @@ import {
   CancelNotebookSessionStatementBatchResponse,
   KVPair,
   QueryResultResponse,
-  UnlockMetaDataRequest,
+  IpPortPair,
   AttachUserPolicyRequest,
   CreateInternalTableRequest,
   ListTaskJobLogDetailRequest,
@@ -96,6 +98,7 @@ import {
   StatementOutput,
   TagInfo,
   CreateUserResponse,
+  TextFile,
   DescribeNotebookSessionStatementsRequest,
   SparkSessionBatchLog,
   DeleteUserResponse,
@@ -111,6 +114,7 @@ import {
   CreateDMSTableResponse,
   CreateNotebookSessionRequest,
   WorkGroupIdSetOfUserId,
+  KerberosInfo,
   Partition,
   QueryResultRequest,
   CreateDataEngineRequest,
@@ -141,16 +145,18 @@ import {
   CreateDMSTableRequest,
   CancelNotebookSessionStatementResponse,
   TableBaseInfo,
+  HiveInfo,
   DMSTable,
   AttachWorkGroupPolicyResponse,
   ModifyWorkGroupResponse,
   DescribeDMSTablesRequest,
+  TaskResponseInfo,
   ModifyUserRequest,
   DMSSds,
   CreateSparkAppTaskResponse,
   CancelTaskRequest,
-  TaskResponseInfo,
-  TextFile,
+  StreamingStatistics,
+  DatasourceConnectionInfo,
   BindWorkGroupsToUserResponse,
   CreateNotebookSessionStatementResponse,
   DescribeStoreLocationResponse,
@@ -162,6 +168,7 @@ import {
   DescribeNotebookSessionStatementSqlResultRequest,
   ModifySparkAppResponse,
   AlterDMSTableRequest,
+  KafkaInfo,
   CreateImportTaskResponse,
   NotebookSessionInfo,
   Execution,
@@ -173,6 +180,7 @@ import {
   Column,
   DeleteWorkGroupRequest,
   DescribeTaskResultRequest,
+  UnlockMetaDataRequest,
   Filter,
   DescribeLakeFsDirSummaryResponse,
   DataFormat,
@@ -214,18 +222,20 @@ import {
   DescribeUsersRequest,
   DeleteUsersFromWorkGroupRequest,
   DMSColumnOrder,
+  MysqlInfo,
   CreateSparkAppResponse,
   CreateTaskResponse,
   DeleteSparkAppResponse,
   AlterDMSPartitionResponse,
   CreateTasksRequest,
-  SuspendResumeDataEngineRequest,
+  OtherDatasourceConnection,
   DescribeTableResponse,
   DescribeSparkAppJobsResponse,
   DescribeSparkAppTasksResponse,
   TableResponseInfo,
   DescribeViewsRequest,
   LockMetaDataRequest,
+  DataSourceInfo,
   CancelSparkSessionBatchSQLRequest,
   DescribeWorkGroupsRequest,
   TasksOverview,
@@ -244,8 +254,10 @@ import {
   CreateWorkGroupRequest,
   CreateInternalTableResponse,
   DataEngineInfo,
+  SuspendResumeDataEngineRequest,
   DescribeSparkAppTasksRequest,
   LockMetaDataResponse,
+  DescribeDatasourceConnectionRequest,
   CheckLockMetaDataResponse,
   AlterDMSDatabaseRequest,
   SQLTask,
@@ -262,6 +274,7 @@ import {
   DescribeScriptsResponse,
   DatabaseResponseInfo,
   DMSColumn,
+  DatasourceConnectionConfig,
   UpdateRowFilterRequest,
   TColumn,
   DescribeResultDownloadRequest,
@@ -865,6 +878,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateWorkGroupResponse) => void
   ): Promise<CreateWorkGroupResponse> {
     return this.request("CreateWorkGroup", req, cb)
+  }
+
+  /**
+   * 本接口（DescribeDatasourceConnection）用于查询数据源信息
+   */
+  async DescribeDatasourceConnection(
+    req: DescribeDatasourceConnectionRequest,
+    cb?: (error: string, rep: DescribeDatasourceConnectionResponse) => void
+  ): Promise<DescribeDatasourceConnectionResponse> {
+    return this.request("DescribeDatasourceConnection", req, cb)
   }
 
   /**

@@ -34,12 +34,13 @@ import {
   ModifyCloudNativeAPIGatewayCanaryRuleResponse,
   CloudNativeAPIGatewayNodeConfig,
   CreateNativeGatewayServerGroupRequest,
-  EngineRegionInfo,
+  DescribeCloudNativeAPIGatewayCertificatesRequest,
   DeleteCloudNativeAPIGatewayResult,
   QpsThreshold,
   ModifyCloudNativeAPIGatewayServiceResponse,
   DescribeCloudNativeAPIGatewayNodesResponse,
   CreateCloudNativeAPIGatewayResponse,
+  DeleteCloudNativeAPIGatewayCertificateResponse,
   DeleteCloudNativeAPIGatewayCanaryRuleRequest,
   GatewayInstanceSchemeAndPorts,
   ModifyCloudNativeAPIGatewayRouteRateLimitRequest,
@@ -49,12 +50,15 @@ import {
   CloudNativeAPIGatewayBalancedService,
   ExternalRedis,
   EnvAddressInfo,
+  SREInstance,
   InstanceTagInfo,
   DescribeCloudNativeAPIGatewayServicesRequest,
+  DescribeCloudNativeAPIGatewayCertificatesResponse,
   NacosReplica,
   UpdateEngineInternetAccessRequest,
   CreateCloudNativeAPIGatewayCanaryRuleResponse,
   DescribeSREInstancesRequest,
+  KongCertificate,
   KVPair,
   DeleteEngineResponse,
   DescribeCloudNativeAPIGatewayRoutesResponse,
@@ -75,9 +79,10 @@ import {
   CloudAPIGatewayCanaryRuleList,
   DescribeCloudNativeAPIGatewayConfigResponse,
   KongRoutePreview,
+  KongCertificatesList,
   CloudNativeAPIGatewayRateLimitDetail,
   CreateCloudNativeAPIGatewayRouteResponse,
-  DescribeInstanceRegionInfo,
+  DescribeCloudNativeAPIGatewayConfigRequest,
   KongTarget,
   DescribeCloudNativeAPIGatewaysRequest,
   AutoScalerPolicy,
@@ -87,12 +92,13 @@ import {
   RateLimitResponse,
   DescribeCloudNativeAPIGatewayServiceRateLimitResponse,
   DeleteCloudNativeAPIGatewayServiceRequest,
-  CloudNativeAPIGatewayStrategyCronScalerConfigParam,
+  CreateCloudNativeAPIGatewayCertificateResponse,
   EnvInfo,
+  CreateCloudNativeAPIGatewayCanaryRuleRequest,
   ModifyNativeGatewayServerGroupRequest,
   DescribeCloudNativeAPIGatewayRouteRateLimitRequest,
   DescribeOneCloudNativeAPIGatewayServiceRequest,
-  DescribeCloudNativeAPIGatewayConfigRequest,
+  DescribeInstanceRegionInfo,
   CloudNativeAPIGatewayStrategy,
   DescribeCloudNativeAPIGatewaysResponse,
   UpdateEngineInternetAccessResponse,
@@ -106,7 +112,7 @@ import {
   ModifyCloudNativeAPIGatewayServiceRateLimitRequest,
   DescribeSREInstanceAccessAddressRequest,
   DescribeCloudNativeAPIGatewayCanaryRulesResponse,
-  SREInstance,
+  DeleteCloudNativeAPIGatewayCertificateRequest,
   NativeGatewayServerGroup,
   DeleteCloudNativeAPIGatewayServiceRateLimitResponse,
   CloudNativeAPIGatewayStrategyAutoScalerConfigMetric,
@@ -115,22 +121,26 @@ import {
   CloudNativeAPIGatewayConfig,
   DescribeZookeeperServerInterfacesResponse,
   DescribeNativeGatewayServerGroupsRequest,
+  CertificateInfo,
   DescribeGatewayInstancePortResult,
   DeleteCloudNativeAPIGatewayRequest,
+  DescribeCloudNativeAPIGatewayCertificateDetailsResponse,
+  UpdateCloudNativeAPIGatewayCertificateInfoRequest,
   EngineAdmin,
   PolarisLimiterAddress,
   DescribeOneCloudNativeAPIGatewayServiceResponse,
   ModifyCloudNativeAPIGatewayServiceRequest,
   DeleteCloudNativeAPIGatewayResponse,
   KongServices,
+  CreateCloudNativeAPIGatewayCertificateRequest,
   ModifyCloudNativeAPIGatewayResponse,
   NetworkAccessControl,
   DescribeZookeeperServerInterfacesRequest,
   DescribeCloudNativeAPIGatewayRouteRateLimitResponse,
   UpdateCloudNativeAPIGatewayResult,
   DescribeCloudNativeAPIGatewayRequest,
-  DeleteCloudNativeAPIGatewayCanaryRuleResponse,
-  CreateCloudNativeAPIGatewayCanaryRuleRequest,
+  DescribeNativeGatewayServerGroupsResponse,
+  CloudNativeAPIGatewayStrategyCronScalerConfigParam,
   DeleteCloudNativeAPIGatewayRouteRequest,
   InternetConfig,
   DescribeCloudNativeAPIGatewayRoutesRequest,
@@ -146,10 +156,12 @@ import {
   ZookeeperServerInterface,
   CreateCloudNativeAPIGatewayServerGroupResult,
   BoundK8SInfo,
+  DescribeCloudNativeAPIGatewayCertificateDetailsRequest,
   AutoScalerRules,
   KongUpstreamInfo,
   CreateCloudNativeAPIGatewayRouteRequest,
   CreateNativeGatewayServerGroupResponse,
+  KongCertificatesPreview,
   CreateCloudNativeAPIGatewayServiceRateLimitRequest,
   DescribeZookeeperReplicasResponse,
   NativeGatewayServerGroups,
@@ -163,9 +175,11 @@ import {
   ModifyCloudNativeAPIGatewayRouteRateLimitResponse,
   Filter,
   DescribeCloudNativeAPIGatewayCanaryRulesRequest,
-  DescribeNativeGatewayServerGroupsResponse,
+  DeleteCloudNativeAPIGatewayCanaryRuleResponse,
   DescribeCloudNativeAPIGatewayPortsRequest,
   ModifyNativeGatewayServerGroupResponse,
+  EngineRegionInfo,
+  UpdateCloudNativeAPIGatewayCertificateInfoResponse,
   KongServiceDetail,
 } from "./tse_models"
 
@@ -226,6 +240,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeOneCloudNativeAPIGatewayServiceResponse) => void
   ): Promise<DescribeOneCloudNativeAPIGatewayServiceResponse> {
     return this.request("DescribeOneCloudNativeAPIGatewayService", req, cb)
+  }
+
+  /**
+   * 查询云原生网关证书列表
+   */
+  async DescribeCloudNativeAPIGatewayCertificates(
+    req: DescribeCloudNativeAPIGatewayCertificatesRequest,
+    cb?: (error: string, rep: DescribeCloudNativeAPIGatewayCertificatesResponse) => void
+  ): Promise<DescribeCloudNativeAPIGatewayCertificatesResponse> {
+    return this.request("DescribeCloudNativeAPIGatewayCertificates", req, cb)
   }
 
   /**
@@ -349,6 +373,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 创建云原生网关证书
+   */
+  async CreateCloudNativeAPIGatewayCertificate(
+    req: CreateCloudNativeAPIGatewayCertificateRequest,
+    cb?: (error: string, rep: CreateCloudNativeAPIGatewayCertificateResponse) => void
+  ): Promise<CreateCloudNativeAPIGatewayCertificateResponse> {
+    return this.request("CreateCloudNativeAPIGatewayCertificate", req, cb)
+  }
+
+  /**
    * 查询云原生网关服务列表
    */
   async DescribeCloudNativeAPIGatewayServices(
@@ -419,16 +453,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取云原生API网关实例网络配置信息
-   */
-  async DescribeCloudNativeAPIGatewayConfig(
-    req: DescribeCloudNativeAPIGatewayConfigRequest,
-    cb?: (error: string, rep: DescribeCloudNativeAPIGatewayConfigResponse) => void
-  ): Promise<DescribeCloudNativeAPIGatewayConfigResponse> {
-    return this.request("DescribeCloudNativeAPIGatewayConfig", req, cb)
-  }
-
-  /**
    * 查询云原生网关的限流插件(路由)
    */
   async DescribeCloudNativeAPIGatewayRouteRateLimit(
@@ -436,6 +460,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeCloudNativeAPIGatewayRouteRateLimitResponse) => void
   ): Promise<DescribeCloudNativeAPIGatewayRouteRateLimitResponse> {
     return this.request("DescribeCloudNativeAPIGatewayRouteRateLimit", req, cb)
+  }
+
+  /**
+   * 获取云原生API网关实例网络配置信息
+   */
+  async DescribeCloudNativeAPIGatewayConfig(
+    req: DescribeCloudNativeAPIGatewayConfigRequest,
+    cb?: (error: string, rep: DescribeCloudNativeAPIGatewayConfigResponse) => void
+  ): Promise<DescribeCloudNativeAPIGatewayConfigResponse> {
+    return this.request("DescribeCloudNativeAPIGatewayConfig", req, cb)
   }
 
   /**
@@ -466,6 +500,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateCloudNativeAPIGatewayCanaryRuleResponse) => void
   ): Promise<CreateCloudNativeAPIGatewayCanaryRuleResponse> {
     return this.request("CreateCloudNativeAPIGatewayCanaryRule", req, cb)
+  }
+
+  /**
+   * 查询云原生网关单个证书详情
+   */
+  async DescribeCloudNativeAPIGatewayCertificateDetails(
+    req: DescribeCloudNativeAPIGatewayCertificateDetailsRequest,
+    cb?: (error: string, rep: DescribeCloudNativeAPIGatewayCertificateDetailsResponse) => void
+  ): Promise<DescribeCloudNativeAPIGatewayCertificateDetailsResponse> {
+    return this.request("DescribeCloudNativeAPIGatewayCertificateDetails", req, cb)
   }
 
   /**
@@ -509,6 +553,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 删除云原生网关证书
+   */
+  async DeleteCloudNativeAPIGatewayCertificate(
+    req: DeleteCloudNativeAPIGatewayCertificateRequest,
+    cb?: (error: string, rep: DeleteCloudNativeAPIGatewayCertificateResponse) => void
+  ): Promise<DeleteCloudNativeAPIGatewayCertificateResponse> {
+    return this.request("DeleteCloudNativeAPIGatewayCertificate", req, cb)
+  }
+
+  /**
    * 创建云原生网关路由
    */
   async CreateCloudNativeAPIGatewayRoute(
@@ -516,6 +570,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateCloudNativeAPIGatewayRouteResponse) => void
   ): Promise<CreateCloudNativeAPIGatewayRouteResponse> {
     return this.request("CreateCloudNativeAPIGatewayRoute", req, cb)
+  }
+
+  /**
+   * 修改云原生网关证书信息
+   */
+  async UpdateCloudNativeAPIGatewayCertificateInfo(
+    req: UpdateCloudNativeAPIGatewayCertificateInfoRequest,
+    cb?: (error: string, rep: UpdateCloudNativeAPIGatewayCertificateInfoResponse) => void
+  ): Promise<UpdateCloudNativeAPIGatewayCertificateInfoResponse> {
+    return this.request("UpdateCloudNativeAPIGatewayCertificateInfo", req, cb)
   }
 
   /**

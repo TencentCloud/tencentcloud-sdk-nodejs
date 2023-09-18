@@ -418,6 +418,20 @@ export interface AccessLogItems {
 }
 
 /**
+ * ModifyInstanceName请求参数结构体
+ */
+export interface ModifyInstanceNameRequest {
+  /**
+   * 实例id
+   */
+  InstanceID: string
+  /**
+   * 版本
+   */
+  Edition: string
+}
+
+/**
  * DescribePeakValue返回参数结构体
  */
 export interface DescribePeakValueResponse {
@@ -800,6 +814,20 @@ UpstreamRedirect-源站返回给WAF状态码次数趋势图
 export type DescribeAccessIndexRequest = null
 
 /**
+ * ModifyInstanceQpsLimit请求参数结构体
+ */
+export interface ModifyInstanceQpsLimitRequest {
+  /**
+   * 套餐实例id
+   */
+  InstanceId: string
+  /**
+   * qps上限
+   */
+  QpsLimit: number
+}
+
+/**
  * DeleteHost请求参数结构体
  */
 export interface DeleteHostRequest {
@@ -955,6 +983,20 @@ export interface DescribeAntiInfoLeakRulesStrategyItem {
 }
 
 /**
+ * ModifyInstanceName返回参数结构体
+ */
+export interface ModifyInstanceNameResponse {
+  /**
+   * 修改状态：0为成功
+   */
+  ModifyCode?: number
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * UpsertSession返回参数结构体
  */
 export interface UpsertSessionResponse {
@@ -1025,6 +1067,28 @@ export interface DescribeWafAutoDenyRulesRequest {
    * 域名
    */
   Domain: string
+}
+
+/**
+ * UpsertIpAccessControl请求参数结构体
+ */
+export interface UpsertIpAccessControlRequest {
+  /**
+   * 域名
+   */
+  Domain: string
+  /**
+   * ip 参数列表，json数组由ip，source，note，action，valid_ts组成。ip对应配置的ip地址，source固定为custom值，note为注释，action值42为黑名单，40为白名单，valid_ts为有效日期，值为秒级时间戳（（如1680570420代表2023-04-04 09:07:00））
+   */
+  Items: Array<string>
+  /**
+   * WAF实例类型，sparta-waf表示SAAS型WAF，clb-waf表示负载均衡型WAF
+   */
+  Edition?: string
+  /**
+   * 是否为多域名黑白名单，当为多域名的黑白名单时，取值为batch，否则为空
+   */
+  SourceType?: string
 }
 
 /**
@@ -1519,6 +1583,16 @@ export interface ModifyHostModeResponse {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Success: ResponseCode
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyInstanceRenewFlag返回参数结构体
+ */
+export interface ModifyInstanceRenewFlagResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3971,18 +4045,24 @@ export interface GoodsDetailNew {
    */
   TimeSpan?: number
   /**
-   * 单位，支持m、y、d
+   * 单位，支持购买d、m、y 即（日、月、年）
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TimeUnit?: string
   /**
    * 子产品标签,。新购，续费必传，变配时放在oldConfig newConfig里面
-高级版 ：sp_wsm_waf_premium
-企业版 ：sp_wsm_waf_enterprise
-旗舰版 ：sp_wsm_waf_ultimate
+
+Saas 高级版 ：sp_wsm_waf_premium
+Saas企业版 ：sp_wsm_waf_enterprise
+Saas旗舰版 ：sp_wsm_waf_ultimate
+Saas 业务扩展包：sp_wsm_waf_qpsep
+Saas 域名扩展包：sp_wsm_waf_domain
+
 高级版-CLB:sp_wsm_waf_premium_clb
 企业版-CLB : sp_wsm_waf_enterprise_clb
 旗舰版-CLB:sp_wsm_waf_ultimate_clb
+ 业务扩展包-CLB：sp_wsm_waf_qpsep_clb
+域名扩展包-CLB：sp_wsm_waf_domain_clb
 
 注意：此字段可能返回 null，表示取不到有效值。
    */
@@ -3992,9 +4072,13 @@ export interface GoodsDetailNew {
 高级版 ：1000827
 企业版 ：1000830
 旗舰版 ：1000832
+域名包 : 1000834
+业务扩展包 : 1000481
 高级版-CLB:1001150
 企业版-CLB : 1001152
 旗舰版-CLB:1001154
+域名包-CLB: 1001156
+业务扩展包-CLB : 1001160
 
 注意：此字段可能返回 null，表示取不到有效值。
    */
@@ -4016,6 +4100,24 @@ export interface GoodsDetailNew {
   RealRegion?: number
   /**
    * 计费细项标签数组
+Saas 高级版  sv_wsm_waf_package_premium 
+Saas 企业版  sv_wsm_waf_package_enterprise
+Saas 旗舰版  sv_wsm_waf_package_ultimate 
+Saas 非中国大陆高级版  sv_wsm_waf_package_premium_intl
+Saas 非中国大陆企业版   sv_wsm_waf_package_enterprise_intl
+Saas 非中国大陆旗舰版  sv_wsm_waf_package_ultimate _intl
+Saas 业务扩展包  sv_wsm_waf_qps_ep
+Saas 域名扩展包  sv_wsm_waf_domain
+
+高级版CLB   sv_wsm_waf_package_premium_clb
+企业版CLB  sv_wsm_waf_package_enterprise_clb
+旗舰版CLB   sv_wsm_waf_package_ultimate_clb
+非中国大陆高级版 CLB sv_wsm_waf_package_premium_clb_intl
+非中国大陆企业版CLB   sv_wsm_waf_package_premium_clb_intl
+非中国大陆旗舰版CLB  sv_wsm_waf_package_ultimate_clb _intl
+业务扩展包CLB sv_wsm_waf_qps_ep_clb
+域名扩展包CLB  sv_wsm_waf_domain_clb
+
 注意：此字段可能返回 null，表示取不到有效值。
    */
   LabelTypes?: Array<string>
@@ -4480,29 +4582,17 @@ export interface TLSCiphers {
 }
 
 /**
- * ModifyWafAutoDenyRules请求参数结构体
+ * ModifyInstanceRenewFlag请求参数结构体
  */
-export interface ModifyWafAutoDenyRulesRequest {
+export interface ModifyInstanceRenewFlagRequest {
   /**
-   * 域名
+   * 实例ID
    */
-  Domain: string
+  InstanceId: string
   /**
-   * 触发IP封禁的攻击次数阈值，范围为2~100次
+   * 续费开关
    */
-  AttackThreshold: number
-  /**
-   * IP封禁统计时间，范围为1-60分钟
-   */
-  TimeThreshold: number
-  /**
-   * 触发IP封禁后的封禁时间，范围为5~360分钟
-   */
-  DenyTimeThreshold: number
-  /**
-   * 自动封禁状态，0表示关闭，1表示打开
-   */
-  DefenseStatus: number
+  RenewFlag: number
 }
 
 /**
@@ -4991,25 +5081,17 @@ export interface DescribeHostsRequest {
 }
 
 /**
- * UpsertIpAccessControl请求参数结构体
+ * ModifyInstanceElasticMode请求参数结构体
  */
-export interface UpsertIpAccessControlRequest {
+export interface ModifyInstanceElasticModeRequest {
   /**
-   * 域名
+   * 实例ID
    */
-  Domain: string
+  InstanceId: string
   /**
-   * ip 参数列表，json数组由ip，source，note，action，valid_ts组成。ip对应配置的ip地址，source固定为custom值，note为注释，action值42为黑名单，40为白名单，valid_ts为有效日期，值为秒级时间戳（（如1680570420代表2023-04-04 09:07:00））
+   * 弹性计费开关
    */
-  Items: Array<string>
-  /**
-   * WAF实例类型，sparta-waf表示SAAS型WAF，clb-waf表示负载均衡型WAF
-   */
-  Edition?: string
-  /**
-   * 是否为多域名黑白名单，当为多域名的黑白名单时，取值为batch，否则为空
-   */
-  SourceType?: string
+  Mode: number
 }
 
 /**
@@ -5185,6 +5267,16 @@ export interface CacheUrlItems {
 }
 
 /**
+ * ModifyInstanceQpsLimit返回参数结构体
+ */
+export interface ModifyInstanceQpsLimitResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * SearchAttackLog返回参数结构体
  */
 export interface SearchAttackLogResponse {
@@ -5308,6 +5400,16 @@ export interface DeleteAntiInfoLeakRuleRequest {
 }
 
 /**
+ * ModifyInstanceElasticMode返回参数结构体
+ */
+export interface ModifyInstanceElasticModeResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeIpHitItems请求参数结构体
  */
 export interface DescribeIpHitItemsRequest {
@@ -5392,17 +5494,22 @@ export interface GoodNews {
 高级版: 102375(新购),102376(续费),102377(变配)
 企业版 : 102378(新购),102379(续费),102380(变配)
 旗舰版 : 102369(新购),102370(续费),102371(变配)
+域名包 : 102372(新购),102373(续费),102374(变配)
+业务扩展包 : 101040(新购),101041(续费),101042(变配)
+
 高级版-CLB: 新购 101198  续费 101199 变配 101200
 企业版-CLB 101204(新购),101205(续费),101206(变配)
 旗舰版-CLB : 101201(新购),101202(续费),101203(变配)
+域名包-CLB: 101207(新购),101208(续费),101209(变配)
+业务扩展包-CLB: 101210(新购),101211(续费),101212(变配)
 
 注意：此字段可能返回 null，表示取不到有效值。
    */
   GoodsCategoryId?: number
   /**
    * 购买waf实例区域ID
-1 表示购买大陆资源
-2表示购买非中国大陆资源
+1 表示购买大陆资源;
+9表示购买非中国大陆资源
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RegionId?: number
@@ -6215,6 +6322,32 @@ export interface DeleteCustomRuleResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ModifyWafAutoDenyRules请求参数结构体
+ */
+export interface ModifyWafAutoDenyRulesRequest {
+  /**
+   * 域名
+   */
+  Domain: string
+  /**
+   * 触发IP封禁的攻击次数阈值，范围为2~100次
+   */
+  AttackThreshold: number
+  /**
+   * IP封禁统计时间，范围为1-60分钟
+   */
+  TimeThreshold: number
+  /**
+   * 触发IP封禁后的封禁时间，范围为5~360分钟
+   */
+  DenyTimeThreshold: number
+  /**
+   * 自动封禁状态，0表示关闭，1表示打开
+   */
+  DefenseStatus: number
 }
 
 /**

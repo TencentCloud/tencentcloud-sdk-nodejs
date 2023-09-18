@@ -382,6 +382,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateWorkGroup", req, cb);
     }
     /**
+     * 本接口（DescribeDatasourceConnection）用于查询数据源信息
+     */
+    async DescribeDatasourceConnection(req, cb) {
+        return this.request("DescribeDatasourceConnection", req, cb);
+    }
+    /**
      * 本接口（CancelSparkSessionBatchSQL）用于取消Spark SQL批任务。
      */
     async CancelSparkSessionBatchSQL(req, cb) {

@@ -68,6 +68,16 @@ it("tse.v20201207.DescribeOneCloudNativeAPIGatewayService", async function () {
     }
 })
 
+it("tse.v20201207.DescribeCloudNativeAPIGatewayCertificates", async function () {
+    try {
+       const data = await client.DescribeCloudNativeAPIGatewayCertificates({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tse.v20201207.ModifyCloudNativeAPIGatewayServiceRateLimit", async function () {
     try {
        const data = await client.ModifyCloudNativeAPIGatewayServiceRateLimit({})
@@ -188,6 +198,16 @@ it("tse.v20201207.DescribeCloudNativeAPIGateways", async function () {
     }
 })
 
+it("tse.v20201207.CreateCloudNativeAPIGatewayCertificate", async function () {
+    try {
+       const data = await client.CreateCloudNativeAPIGatewayCertificate({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tse.v20201207.DescribeCloudNativeAPIGatewayServices", async function () {
     try {
        const data = await client.DescribeCloudNativeAPIGatewayServices({})
@@ -258,9 +278,9 @@ it("tse.v20201207.DescribeSREInstances", async function () {
     }
 })
 
-it("tse.v20201207.DescribeCloudNativeAPIGatewayConfig", async function () {
+it("tse.v20201207.DescribeCloudNativeAPIGatewayRouteRateLimit", async function () {
     try {
-       const data = await client.DescribeCloudNativeAPIGatewayConfig({})
+       const data = await client.DescribeCloudNativeAPIGatewayRouteRateLimit({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -268,9 +288,9 @@ it("tse.v20201207.DescribeCloudNativeAPIGatewayConfig", async function () {
     }
 })
 
-it("tse.v20201207.DescribeCloudNativeAPIGatewayRouteRateLimit", async function () {
+it("tse.v20201207.DescribeCloudNativeAPIGatewayConfig", async function () {
     try {
-       const data = await client.DescribeCloudNativeAPIGatewayRouteRateLimit({})
+       const data = await client.DescribeCloudNativeAPIGatewayConfig({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -301,6 +321,16 @@ it("tse.v20201207.DescribeCloudNativeAPIGatewayNodes", async function () {
 it("tse.v20201207.CreateCloudNativeAPIGatewayCanaryRule", async function () {
     try {
        const data = await client.CreateCloudNativeAPIGatewayCanaryRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tse.v20201207.DescribeCloudNativeAPIGatewayCertificateDetails", async function () {
+    try {
+       const data = await client.DescribeCloudNativeAPIGatewayCertificateDetails({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -348,9 +378,29 @@ it("tse.v20201207.DeleteCloudNativeAPIGateway", async function () {
     }
 })
 
+it("tse.v20201207.DeleteCloudNativeAPIGatewayCertificate", async function () {
+    try {
+       const data = await client.DeleteCloudNativeAPIGatewayCertificate({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tse.v20201207.CreateCloudNativeAPIGatewayRoute", async function () {
     try {
        const data = await client.CreateCloudNativeAPIGatewayRoute({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tse.v20201207.UpdateCloudNativeAPIGatewayCertificateInfo", async function () {
+    try {
+       const data = await client.UpdateCloudNativeAPIGatewayCertificateInfo({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
