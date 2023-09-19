@@ -458,9 +458,9 @@ it("ess.v20201111.ModifyIntegrationRole", async function () {
     }
 })
 
-it("ess.v20201111.CreateSealPolicy", async function () {
+it("ess.v20201111.CreateBatchSignUrl", async function () {
     try {
-       const data = await client.CreateSealPolicy({})
+       const data = await client.CreateBatchSignUrl({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -591,6 +591,16 @@ it("ess.v20201111.CreateFlowGroupByFiles", async function () {
 it("ess.v20201111.DescribeOrganizationGroupOrganizations", async function () {
     try {
        const data = await client.DescribeOrganizationGroupOrganizations({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ess.v20201111.CreateSealPolicy", async function () {
+    try {
+       const data = await client.CreateSealPolicy({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

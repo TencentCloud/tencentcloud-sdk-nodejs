@@ -566,6 +566,11 @@ export interface AssessmentTemplate {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IsASMTemplate?: boolean
+  /**
+   * 合规组id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IdentifyComplianceId?: number
 }
 
 /**
@@ -3698,6 +3703,16 @@ export interface RiskItemInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RiskSide?: string
+  /**
+   * API安全风险链接
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  APIRiskLinkURL?: string
+  /**
+   * 备注
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Remark?: string
 }
 
 /**
@@ -4773,6 +4788,11 @@ export interface AssessmentRisk {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RiskSide?: string
+  /**
+   * 数据源类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DataSourceType?: string
 }
 
 /**
@@ -5368,6 +5388,12 @@ export interface AssessmentTask {
    */
   TaskId: string
   /**
+   * 评估任务的自增ID
+
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskUid: number
+  /**
    * 评估任务名称
    */
   TaskName: string
@@ -5433,6 +5459,16 @@ export interface AssessmentTask {
    * 评估任务失败信息
    */
   ErrorInfo: string
+  /**
+   * 模版主键id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TemplateUid: number
+  /**
+   * 进度百分比
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProgressPercent: number
 }
 
 /**
@@ -6073,6 +6109,10 @@ export interface DescribeDSPAAssessmentLatestRiskListRequest {
    * 风险面筛选
    */
   RiskSide?: Array<string>
+  /**
+   * ASC 正序，DESC倒叙
+   */
+  TimeSort?: string
 }
 
 /**

@@ -221,6 +221,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteCmqTopic", req, cb);
     }
     /**
+     * RabbitMQ专享版修改公网管控台，vpc15672开关
+     */
+    async ModifyPublicNetworkAccessPoint(req, cb) {
+        return this.request("ModifyPublicNetworkAccessPoint", req, cb);
+    }
+    /**
      * 创建cmq队列接口
      */
     async CreateCmqQueue(req, cb) {
@@ -273,6 +279,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ResetRocketMQConsumerOffSet(req, cb) {
         return this.request("ResetRocketMQConsumerOffSet", req, cb);
+    }
+    /**
+     * 该接口用于开启关闭公网访问、设置安全访问策略
+     */
+    async SetRocketMQPublicAccessPoint(req, cb) {
+        return this.request("SetRocketMQPublicAccessPoint", req, cb);
     }
     /**
      * 查询指定环境和主题下的订阅者列表
@@ -649,6 +661,12 @@ BatchReceivePolicy 的接口会一次性返回多条消息：
      */
     async DeleteCmqSubscribe(req, cb) {
         return this.request("DeleteCmqSubscribe", req, cb);
+    }
+    /**
+     * 接口用于查询RocketMQ实例的公网接入信息
+     */
+    async DescribeRocketMQPublicAccessPoint(req, cb) {
+        return this.request("DescribeRocketMQPublicAccessPoint", req, cb);
     }
     /**
      * 角色修改

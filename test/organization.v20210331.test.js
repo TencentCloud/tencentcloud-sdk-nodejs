@@ -158,6 +158,16 @@ it("organization.v20210331.DescribeOrganizationMemberPolicies", async function (
     }
 })
 
+it("organization.v20210331.DeleteOrganization", async function () {
+    try {
+       const data = await client.DeleteOrganization({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("organization.v20210331.CancelOrganizationMemberAuthAccount", async function () {
     try {
        const data = await client.CancelOrganizationMemberAuthAccount({})
@@ -191,6 +201,16 @@ it("organization.v20210331.DescribeOrganization", async function () {
 it("organization.v20210331.MoveOrganizationNodeMembers", async function () {
     try {
        const data = await client.MoveOrganizationNodeMembers({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("organization.v20210331.CreateOrganization", async function () {
+    try {
+       const data = await client.CreateOrganization({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

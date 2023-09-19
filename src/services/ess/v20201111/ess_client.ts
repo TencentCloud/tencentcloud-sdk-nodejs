@@ -49,6 +49,7 @@ import {
   AuthorizedUser,
   CreateConvertTaskApiRequest,
   DeleteIntegrationEmployeesResponse,
+  CreateBatchSignUrlResponse,
   CreateFlowRemindsResponse,
   DescribeOrganizationGroupOrganizationsRequest,
   Agent,
@@ -174,6 +175,7 @@ import {
   IntegrationDepartment,
   DescribeExtendedServiceAuthInfosRequest,
   DescribeIntegrationRolesResponse,
+  CreateBatchSignUrlRequest,
   CreateFlowRemindsRequest,
   UpdateIntegrationEmployeesRequest,
   DescribeFlowBriefsRequest,
@@ -454,10 +456,9 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 提交企业签署流程审批结果
-适用场景: 
-在通过接口(CreateFlow 或者CreateFlowByFiles)创建签署流程时，若指定了参数 NeedSignReview 为true，且发起方企业作为签署方参与了流程签署，则可以调用此接口提交企业内部签署审批结果。
-若签署流程状态正常，且本企业存在签署方未签署，同一签署流程可以多次提交签署审批结果，签署时的最后一个“审批结果”有效。
+     * 提交签署流程审批结果的适用场景包括：
+1. 在使用模板（CreateFlow）或文件（CreateFlowByFiles）创建签署流程时，若指定了参数NeedSignReview为true，且发起方企业作为签署方参与了流程签署，则可以调用此接口提交企业内部签署审批结果。自动签署也需要进行审核通过才会进行签署。
+2. 若签署流程状态正常，同一签署流程可以多次提交签署审批结果，签署时的最后一个“审批结果”有效。
      */
   async CreateFlowSignReview(
     req: CreateFlowSignReviewRequest,
@@ -815,13 +816,19 @@ httpProfile.setEndpoint("file.test.ess.tencent.cn");<br/>
   }
 
   /**
-   * 对企业员工进行印章授权
-   */
-  async CreateSealPolicy(
-    req: CreateSealPolicyRequest,
-    cb?: (error: string, rep: CreateSealPolicyResponse) => void
-  ): Promise<CreateSealPolicyResponse> {
-    return this.request("CreateSealPolicy", req, cb)
+     * 通过此接口，创建小程序批量签署链接，个人/企业员工点击此链接即可跳转小程序进行批量签署。
+请确保生成链接时候的身份信息和签署合同参与方的信息保持一致。
+
+注：
+- 参与人点击链接后需短信验证码才能查看合同内容。
+- 企业用户批量签署，需要传OrganizationName（参与方所在企业名称）参数生成签署链接，`请确保此企业已完成腾讯电子签企业认证`。
+- 个人批量签署，签名区`仅支持手写签名`。
+     */
+  async CreateBatchSignUrl(
+    req: CreateBatchSignUrlRequest,
+    cb?: (error: string, rep: CreateBatchSignUrlResponse) => void
+  ): Promise<CreateBatchSignUrlResponse> {
+    return this.request("CreateBatchSignUrl", req, cb)
   }
 
   /**
@@ -1004,6 +1011,16 @@ httpProfile.setEndpoint("file.test.ess.tencent.cn");<br/>
     cb?: (error: string, rep: DescribeOrganizationGroupOrganizationsResponse) => void
   ): Promise<DescribeOrganizationGroupOrganizationsResponse> {
     return this.request("DescribeOrganizationGroupOrganizations", req, cb)
+  }
+
+  /**
+   * 对企业员工进行印章授权
+   */
+  async CreateSealPolicy(
+    req: CreateSealPolicyRequest,
+    cb?: (error: string, rep: CreateSealPolicyResponse) => void
+  ): Promise<CreateSealPolicyResponse> {
+    return this.request("CreateSealPolicy", req, cb)
   }
 
   /**

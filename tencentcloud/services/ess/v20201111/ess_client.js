@@ -192,10 +192,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteIntegrationRoleUsers", req, cb);
     }
     /**
-     * 提交企业签署流程审批结果
-适用场景:
-在通过接口(CreateFlow 或者CreateFlowByFiles)创建签署流程时，若指定了参数 NeedSignReview 为true，且发起方企业作为签署方参与了流程签署，则可以调用此接口提交企业内部签署审批结果。
-若签署流程状态正常，且本企业存在签署方未签署，同一签署流程可以多次提交签署审批结果，签署时的最后一个“审批结果”有效。
+     * 提交签署流程审批结果的适用场景包括：
+1. 在使用模板（CreateFlow）或文件（CreateFlowByFiles）创建签署流程时，若指定了参数NeedSignReview为true，且发起方企业作为签署方参与了流程签署，则可以调用此接口提交企业内部签署审批结果。自动签署也需要进行审核通过才会进行签署。
+2. 若签署流程状态正常，同一签署流程可以多次提交签署审批结果，签署时的最后一个“审批结果”有效。
      */
     async CreateFlowSignReview(req, cb) {
         return this.request("CreateFlowSignReview", req, cb);
@@ -453,10 +452,16 @@ httpProfile.setEndpoint("file.test.ess.tencent.cn");<br/>
         return this.request("ModifyIntegrationRole", req, cb);
     }
     /**
-     * 对企业员工进行印章授权
+     * 通过此接口，创建小程序批量签署链接，个人/企业员工点击此链接即可跳转小程序进行批量签署。
+请确保生成链接时候的身份信息和签署合同参与方的信息保持一致。
+
+注：
+- 参与人点击链接后需短信验证码才能查看合同内容。
+- 企业用户批量签署，需要传OrganizationName（参与方所在企业名称）参数生成签署链接，`请确保此企业已完成腾讯电子签企业认证`。
+- 个人批量签署，签名区`仅支持手写签名`。
      */
-    async CreateSealPolicy(req, cb) {
-        return this.request("CreateSealPolicy", req, cb);
+    async CreateBatchSignUrl(req, cb) {
+        return this.request("CreateBatchSignUrl", req, cb);
     }
     /**
      * 使用此接口，您可以创建企业批量签署链接，员工只需点击链接即可跳转至控制台进行批量签署。<br/>
@@ -587,6 +592,12 @@ httpProfile.setEndpoint("file.test.ess.tencent.cn");<br/>
      */
     async DescribeOrganizationGroupOrganizations(req, cb) {
         return this.request("DescribeOrganizationGroupOrganizations", req, cb);
+    }
+    /**
+     * 对企业员工进行印章授权
+     */
+    async CreateSealPolicy(req, cb) {
+        return this.request("CreateSealPolicy", req, cb);
     }
     /**
      * 此接口（CreateIntegrationEmployees）用于创建企业员工。调用成功后会给员工发送提醒员工实名的短信。若通过手机号发现员工已经创建，则不会重新创建，但会发送短信提醒员工实名。另外，此接口还支持通过企微组织架构的openid 创建员工（将WeworkOpenId字段设置为企微员工明文的openid，但需确保该企微员工在应用的可见范围内），该场景下，员工会接收到提醒实名的企微消息。

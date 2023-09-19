@@ -572,6 +572,31 @@ export interface ChannelCreateFlowSignUrlResponse {
     RequestId?: string;
 }
 /**
+ * ChannelCreateBatchSignUrl返回参数结构体
+ */
+export interface ChannelCreateBatchSignUrlResponse {
+    /**
+     * 批量签署链接，以短链形式返回，短链的有效期参考回参中的 ExpiredTime。
+  
+  注: `非小程序和APP集成使用`
+     */
+    SignUrl?: string;
+    /**
+     * 链接过期时间以 Unix 时间戳格式表示，从生成链接时间起，往后7天有效期。过期后短链将失效，无法打开。
+     */
+    ExpiredTime?: number;
+    /**
+     * 从客户小程序或者客户APP跳转至腾讯电子签小程序进行批量签署的跳转路径
+  
+  注: `小程序和APP集成使用`
+     */
+    MiniAppPath?: string;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * ChannelCreatePrepareFlow返回参数结构体
  */
 export interface ChannelCreatePrepareFlowResponse {
@@ -4026,6 +4051,85 @@ export interface PermissionGroup {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Permissions?: Array<Permission>;
+}
+/**
+ * ChannelCreateBatchSignUrl请求参数结构体
+ */
+export interface ChannelCreateBatchSignUrlRequest {
+    /**
+     * 关于渠道应用的相关信息，包括子客企业及应用编、号等详细内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。
+     */
+    Agent: Agent;
+    /**
+     * 签署方经办人的姓名。
+  经办人的姓名将用于身份认证和电子签名，请确保填写的姓名为签署方的真实姓名，而非昵称等代名。
+  
+  注：`请确保和合同中填入的一致`
+     */
+    Name: string;
+    /**
+     * 手机号码， 支持国内手机号11位数字(无需加+86前缀或其他字符)。
+  请确认手机号所有方为此业务通知方。
+  
+  注：`请确保和合同中填入的一致,  若无法保持一致，请确保在发起和生成批量签署链接时传入相同的参与方证件信息`
+     */
+    Mobile: string;
+    /**
+     * 执行本接口操作的员工信息。
+  注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。`
+     */
+    Operator?: UserInfo;
+    /**
+     * 证件类型，支持以下类型
+  <ul><li>**ID_CARD** : 居民身份证 (默认值)</li>
+  <li>**HONGKONG_AND_MACAO** : 港澳居民来往内地通行证</li>
+  <li>**HONGKONG_MACAO_AND_TAIWAN** : 港澳台居民居住证(格式同居民身份证)</li></ul>
+  
+  注：`请确保和合同中填入的一致`
+     */
+    IdCardType?: string;
+    /**
+     * 证件号码，应符合以下规则
+  <ul><li>居民身份证号码应为18位字符串，由数字和大写字母X组成（如存在X，请大写）。</li>
+  <li>港澳居民来往内地通行证号码应为9位字符串，第1位为“C”，第2位为英文字母（但“I”、“O”除外），后7位为阿拉伯数字。</li>
+  <li>港澳台居民居住证号码编码规则与中国大陆身份证相同，应为18位字符串。</li></ul>
+  
+  注：`请确保和合同中填入的一致`
+     */
+    IdCardNumber?: string;
+    /**
+     * 通知用户方式：
+  <ul>
+  <li>**NONE** : 不通知（默认）</li>
+  <li>**SMS** : 短信通知（发送短信通知到Mobile参数所传的手机号）</li>
+  </ul>
+     */
+    NotifyType?: string;
+    /**
+     * 本次需要批量签署的合同流程ID列表。
+  可以不传,  如不传则是发给对方的所有待签署合同流程。
+  
+     */
+    FlowIds?: Array<string>;
+    /**
+     * 目标签署人的企业名称，签署人如果是企业员工身份，需要传此参数。
+  
+  注：
+  <ul>
+  <li>请确认该名称与企业营业执照中注册的名称一致。</li>
+  <li>如果名称中包含英文括号()，请使用中文括号（）代替。</li>
+  <li>请确保此企业已完成腾讯电子签企业认证。</li>
+  </ul>
+     */
+    OrganizationName?: string;
+    /**
+     * 是否直接跳转至合同内容页面进行签署
+  <ul>
+  <li>**false**: 会跳转至批量合同流程的列表,  点击需要批量签署合同后进入合同内容页面进行签署(默认)</li>
+  <li>**true**: 跳过合同流程列表, 直接进入合同内容页面进行签署</li>
+  </ul>
+     */
+    JumpToDetail?: boolean;
 }
 /**
  * ChannelCreateOrganizationModifyQrCode返回参数结构体

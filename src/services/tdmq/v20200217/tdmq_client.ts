@@ -45,7 +45,7 @@ import {
   SendRocketMQMessageRequest,
   DescribeRocketMQMsgTraceResponse,
   RabbitMQPrivateVirtualHost,
-  RocketMQVipInstance,
+  DescribeRocketMQPublicAccessPointRequest,
   RabbitMQVipInstance,
   DescribeCmqQueuesResponse,
   CreateRabbitMQVipInstanceRequest,
@@ -56,10 +56,13 @@ import {
   RocketMQInstanceConfig,
   DescribeBindVpcsResponse,
   RewindCmqQueueResponse,
+  ModifyPublicNetworkAccessPointRequest,
   DeleteClusterRequest,
   CmqSubscription,
+  SetRocketMQPublicAccessPointResponse,
   DeleteRocketMQGroupRequest,
   RocketMQGroup,
+  PublicAccessRule,
   VpcInfo,
   ModifyRabbitMQUserRequest,
   RabbitMQClusterWhiteListInfo,
@@ -72,6 +75,7 @@ import {
   ExchangeQuota,
   DescribeCmqTopicDetailResponse,
   ModifyRabbitMQVirtualHostResponse,
+  SetRocketMQPublicAccessPointRequest,
   CmqQueue,
   CreateEnvironmentResponse,
   RabbitMQVirtualHostStatistics,
@@ -136,6 +140,7 @@ import {
   DeleteEnvironmentsResponse,
   ModifyAMQPClusterRequest,
   DescribeEnvironmentRolesResponse,
+  DescribeRocketMQPublicAccessPointResponse,
   DescribeRocketMQMsgTraceRequest,
   ModifyRocketMQGroupRequest,
   FilterSubscription,
@@ -166,6 +171,7 @@ import {
   RocketMQClusterInfo,
   DescribeRabbitMQUserRequest,
   DescribeRocketMQTopicsResponse,
+  RocketMQVipInstance,
   Environment,
   RocketMQClusterDetail,
   DeleteRocketMQGroupResponse,
@@ -257,6 +263,7 @@ import {
   DescribeBindClustersRequest,
   DescribePulsarProInstanceDetailRequest,
   CreateRabbitMQUserRequest,
+  VpcEndpointInfo,
   CreateRoleRequest,
   DescribeRocketMQTopicMsgsRequest,
   ModifyEnvironmentRoleRequest,
@@ -272,7 +279,7 @@ import {
   DescribeRabbitMQNodeListResponse,
   DescribePulsarProInstanceDetailResponse,
   DescribeNodeHealthOptResponse,
-  VpcEndpointInfo,
+  ModifyPublicNetworkAccessPointResponse,
   PublishCmqMsgRequest,
   UnbindCmqDeadLetterRequest,
   ModifyCmqQueueAttributeRequest,
@@ -627,6 +634,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * RabbitMQ专享版修改公网管控台，vpc15672开关
+   */
+  async ModifyPublicNetworkAccessPoint(
+    req: ModifyPublicNetworkAccessPointRequest,
+    cb?: (error: string, rep: ModifyPublicNetworkAccessPointResponse) => void
+  ): Promise<ModifyPublicNetworkAccessPointResponse> {
+    return this.request("ModifyPublicNetworkAccessPoint", req, cb)
+  }
+
+  /**
    * 创建cmq队列接口
    */
   async CreateCmqQueue(
@@ -714,6 +731,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ResetRocketMQConsumerOffSetResponse) => void
   ): Promise<ResetRocketMQConsumerOffSetResponse> {
     return this.request("ResetRocketMQConsumerOffSet", req, cb)
+  }
+
+  /**
+   * 该接口用于开启关闭公网访问、设置安全访问策略
+   */
+  async SetRocketMQPublicAccessPoint(
+    req: SetRocketMQPublicAccessPointRequest,
+    cb?: (error: string, rep: SetRocketMQPublicAccessPointResponse) => void
+  ): Promise<SetRocketMQPublicAccessPointResponse> {
+    return this.request("SetRocketMQPublicAccessPoint", req, cb)
   }
 
   /**
@@ -1326,6 +1353,16 @@ BatchReceivePolicy 的接口会一次性返回多条消息：
     cb?: (error: string, rep: DeleteCmqSubscribeResponse) => void
   ): Promise<DeleteCmqSubscribeResponse> {
     return this.request("DeleteCmqSubscribe", req, cb)
+  }
+
+  /**
+   * 接口用于查询RocketMQ实例的公网接入信息
+   */
+  async DescribeRocketMQPublicAccessPoint(
+    req: DescribeRocketMQPublicAccessPointRequest,
+    cb?: (error: string, rep: DescribeRocketMQPublicAccessPointResponse) => void
+  ): Promise<DescribeRocketMQPublicAccessPointResponse> {
+    return this.request("DescribeRocketMQPublicAccessPoint", req, cb)
   }
 
   /**

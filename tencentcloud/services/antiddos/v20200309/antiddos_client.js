@@ -82,7 +82,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeCcBlackWhiteIpList", req, cb);
     }
     /**
-     * 获取DDoS防护的IP黑白名单
+     * 接口变更
+
+获取DDoS防护的IP黑白名单
      */
     async DescribeBlackWhiteIpList(req, cb) {
         return this.request("DescribeBlackWhiteIpList", req, cb);
@@ -539,7 +541,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteCcBlackWhiteIpList", req, cb);
     }
     /**
-     * 获取防护阈值配置列表，包括DDoS的AI、等级、CC阈值开关等
+     * 接口变更
+
+获取防护阈值配置列表，包括DDoS的AI、等级、CC阈值开关等
      */
     async DescribeListProtectThresholdConfig(req, cb) {
         return this.request("DescribeListProtectThresholdConfig", req, cb);

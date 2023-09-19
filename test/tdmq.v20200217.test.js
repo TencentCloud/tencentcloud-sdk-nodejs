@@ -338,6 +338,16 @@ it("tdmq.v20200217.DeleteCmqTopic", async function () {
     }
 })
 
+it("tdmq.v20200217.ModifyPublicNetworkAccessPoint", async function () {
+    try {
+       const data = await client.ModifyPublicNetworkAccessPoint({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tdmq.v20200217.CreateCmqQueue", async function () {
     try {
        const data = await client.CreateCmqQueue({})
@@ -421,6 +431,16 @@ it("tdmq.v20200217.DescribeRabbitMQVipInstance", async function () {
 it("tdmq.v20200217.ResetRocketMQConsumerOffSet", async function () {
     try {
        const data = await client.ResetRocketMQConsumerOffSet({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tdmq.v20200217.SetRocketMQPublicAccessPoint", async function () {
+    try {
+       const data = await client.SetRocketMQPublicAccessPoint({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1011,6 +1031,16 @@ it("tdmq.v20200217.ClearCmqSubscriptionFilterTags", async function () {
 it("tdmq.v20200217.DeleteCmqSubscribe", async function () {
     try {
        const data = await client.DeleteCmqSubscribe({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tdmq.v20200217.DescribeRocketMQPublicAccessPoint", async function () {
+    try {
+       const data = await client.DescribeRocketMQPublicAccessPoint({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

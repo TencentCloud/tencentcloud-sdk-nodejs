@@ -422,6 +422,10 @@ export interface AccessLogItems {
  */
 export interface ModifyInstanceNameRequest {
   /**
+   * 新名称
+   */
+  InstanceName: string
+  /**
    * 实例id
    */
   InstanceID: string
@@ -626,6 +630,11 @@ export interface LoadBalancerPackageNew {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   LoadBalancerType: string
+  /**
+   * 负载均衡器的域名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LoadBalancerDomain?: string
 }
 
 /**
@@ -2326,7 +2335,7 @@ export interface HostRecord {
    */
   MainDomain: string
   /**
-   * waf模式，同saas waf保持一致
+   * 规则引擎防护模式，0 观察模式，1拦截模式
    */
   Mode: number
   /**
@@ -2338,7 +2347,7 @@ export interface HostRecord {
    */
   State: number
   /**
-   * 使用的规则，同saas waf保持一致
+   * 规则引擎和AI引擎防护模式联合状态,10规则引擎观察&&AI引擎关闭模式 11规则引擎观察&&AI引擎观察模式 12规则引擎观察&&AI引擎拦截模式 20规则引擎拦截&&AI引擎关闭模式 21规则引擎拦截&&AI引擎观察模式 22规则引擎拦截&&AI引擎拦截模式
    */
   Engine: number
   /**
@@ -2390,6 +2399,11 @@ export interface HostRecord {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   EngineType?: number
+  /**
+   * 云类型:public:公有云；private:私有云;hybrid:混合云
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CloudType?: string
 }
 
 /**
@@ -2413,42 +2427,47 @@ export interface UserDomainInfo {
   /**
    * 用户id
    */
-  Appid: number
+  Appid?: number
   /**
    * 域名
    */
-  Domain: string
+  Domain?: string
   /**
    * 域名id
    */
-  DomainId: string
+  DomainId?: string
   /**
    * 实例id
    */
-  InstanceId: string
+  InstanceId?: string
   /**
    * 实例名
    */
-  InstanceName: string
+  InstanceName?: string
   /**
    * waf类型
    */
-  Edition: string
+  Edition?: string
   /**
    * 版本
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Level: string
+  Level?: string
   /**
    * 指定域名访问日志字段的开关
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  WriteConfig: string
+  WriteConfig?: string
   /**
    * 指定域名是否写cls的开关 1:写 0:不写
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Cls: number
+  Cls?: number
+  /**
+   * 标记是否是混合云接入。hybrid表示混合云接入域名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CloudType?: string
 }
 
 /**
@@ -5814,7 +5833,7 @@ export interface ModifySpartaProtectionRequest {
    */
   IpHeaders?: Array<string>
   /**
-   * 0:关闭xff重置；1:开启xff重置
+   * 0:关闭xff重置；1:开启xff重置，只有在IsCdn=0时可以开启
    */
   XFFReset?: number
 }
@@ -6379,55 +6398,60 @@ export interface ClbDomainsInfo {
   /**
    * 域名
    */
-  Domain: string
+  Domain?: string
   /**
    * 域名id
    */
-  DomainId: string
+  DomainId?: string
   /**
    * 实例id
    */
-  InstanceId: string
+  InstanceId?: string
   /**
    * 实例名
    */
-  InstanceName: string
+  InstanceName?: string
   /**
    * waf类型
    */
-  Edition: string
+  Edition?: string
   /**
    * 是否是cdn
    */
-  IsCdn: number
+  IsCdn?: number
   /**
    * 负载均衡算法
    */
-  LoadBalancerSet: Array<LoadBalancerPackageNew>
+  LoadBalancerSet?: Array<LoadBalancerPackageNew>
   /**
    * 镜像模式
    */
-  FlowMode: number
+  FlowMode?: number
   /**
    * 绑定clb状态
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  State: number
+  State?: number
   /**
    * 负载均衡类型，clb或者apisix
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  AlbType: string
+  AlbType?: string
   /**
    * IsCdn=3时，表示自定义header
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  IpHeaders: Array<string>
+  IpHeaders?: Array<string>
   /**
    * cdc类型会增加集群信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CdcClusters: string
+  CdcClusters?: string
+  /**
+   * 云类型:public:公有云；private:私有云;hybrid:混合云
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CloudType?: string
 }
 
 /**
@@ -6766,6 +6790,11 @@ export interface LoadBalancer {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   LoadBalancerType?: string
+  /**
+   * 负载均衡的域名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LoadBalancerDomain?: string
 }
 
 /**

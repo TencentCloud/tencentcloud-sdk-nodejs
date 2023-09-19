@@ -44,7 +44,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeCcBlackWhiteIpList(req: DescribeCcBlackWhiteIpListRequest, cb?: (error: string, rep: DescribeCcBlackWhiteIpListResponse) => void): Promise<DescribeCcBlackWhiteIpListResponse>;
     /**
-     * 获取DDoS防护的IP黑白名单
+     * 接口变更
+
+获取DDoS防护的IP黑白名单
      */
     DescribeBlackWhiteIpList(req: DescribeBlackWhiteIpListRequest, cb?: (error: string, rep: DescribeBlackWhiteIpListResponse) => void): Promise<DescribeBlackWhiteIpListResponse>;
     /**
@@ -349,7 +351,9 @@ export declare class Client extends AbstractClient {
      */
     DeleteCcBlackWhiteIpList(req: DeleteCcBlackWhiteIpListRequest, cb?: (error: string, rep: DeleteCcBlackWhiteIpListResponse) => void): Promise<DeleteCcBlackWhiteIpListResponse>;
     /**
-     * 获取防护阈值配置列表，包括DDoS的AI、等级、CC阈值开关等
+     * 接口变更
+
+获取防护阈值配置列表，包括DDoS的AI、等级、CC阈值开关等
      */
     DescribeListProtectThresholdConfig(req: DescribeListProtectThresholdConfigRequest, cb?: (error: string, rep: DescribeListProtectThresholdConfigResponse) => void): Promise<DescribeListProtectThresholdConfigResponse>;
     /**

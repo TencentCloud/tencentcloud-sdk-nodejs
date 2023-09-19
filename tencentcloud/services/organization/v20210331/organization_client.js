@@ -112,6 +112,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeOrganizationMemberPolicies", req, cb);
     }
     /**
+     * 删除企业组织
+     */
+    async DeleteOrganization(req, cb) {
+        return this.request("DeleteOrganization", req, cb);
+    }
+    /**
      * 取消组织成员和组织管理员子账号的授权关系
 
      */
@@ -135,6 +141,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async MoveOrganizationNodeMembers(req, cb) {
         return this.request("MoveOrganizationNodeMembers", req, cb);
+    }
+    /**
+     * 创建企业组织
+     */
+    async CreateOrganization(req, cb) {
+        return this.request("CreateOrganization", req, cb);
     }
     /**
      * 添加组织成员邮箱

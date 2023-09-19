@@ -291,6 +291,18 @@ https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/launchAp
         return this.request("ChannelUpdateSealStatus", req, cb);
     }
     /**
+     * 通过此接口，创建小程序批量签署链接，个人/企业员工点击此链接即可跳转小程序进行批量签署。
+请确保生成链接时候的身份信息和签署合同参与方的信息保持一致。
+
+注：
+- 参与人点击链接后需短信验证码才能查看合同内容。
+- 企业用户批量签署，需要传OrganizationName（参与方所在企业名称）参数生成签署链接，`请确保此企业已完成腾讯电子签企业认证`。
+- 个人批量签署，签名区`仅支持手写签名`。
+     */
+    async ChannelCreateBatchSignUrl(req, cb) {
+        return this.request("ChannelCreateBatchSignUrl", req, cb);
+    }
+    /**
      * 此接口（ChannelCreateBoundFlows）用于子客领取合同，经办人需要有相应的角色，合同不能重复领取。
      */
     async ChannelCreateBoundFlows(req, cb) {
@@ -316,14 +328,13 @@ https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/launchAp
         return this.request("ChannelCreateWebThemeConfig", req, cb);
     }
     /**
-     * 创建个人签署H5签署链接，请联系客户经理申请使用<br/>
-该接口用于发起合同后，生成C端签署人的签署链接<br/>
-注意：该接口目前签署人类型仅支持个人签署方（PERSON）<br/>
-注意：该接口可生成签署链接的C端签署人必须仅有手写签名和时间类型的签署控件<br/>
-注意：该接口返回的签署链接是用于APP集成的场景，支持APP打开或浏览器直接打开，不支持微信小程序嵌入。微信小程序请使用小程序跳转或半屏弹窗的方式<br/>
+     * 指定需要批量催办的签署流程Id，批量催办合同，最多100个；接口失败后返回错误信息
+注意:
+该接口不可直接调用，请联系客户经理申请使用
+仅能催办当前状态为“待签署”的签署人，且只能催办一次
      */
-    async ChannelCreateFlowSignUrl(req, cb) {
-        return this.request("ChannelCreateFlowSignUrl", req, cb);
+    async ChannelCreateFlowReminds(req, cb) {
+        return this.request("ChannelCreateFlowReminds", req, cb);
     }
     /**
      * 发起解除协议，主要应用场景为：基于一份已经签署的合同，进行解除操作。
@@ -408,13 +419,14 @@ httpProfile.setEndpoint("file.test.ess.tencent.cn");
         return this.request("UploadFiles", req, cb);
     }
     /**
-     * 指定需要批量催办的签署流程Id，批量催办合同，最多100个；接口失败后返回错误信息
-注意:
-该接口不可直接调用，请联系客户经理申请使用
-仅能催办当前状态为“待签署”的签署人，且只能催办一次
+     * 创建个人签署H5签署链接，请联系客户经理申请使用<br/>
+该接口用于发起合同后，生成C端签署人的签署链接<br/>
+注意：该接口目前签署人类型仅支持个人签署方（PERSON）<br/>
+注意：该接口可生成签署链接的C端签署人必须仅有手写签名和时间类型的签署控件<br/>
+注意：该接口返回的签署链接是用于APP集成的场景，支持APP打开或浏览器直接打开，不支持微信小程序嵌入。微信小程序请使用小程序跳转或半屏弹窗的方式<br/>
      */
-    async ChannelCreateFlowReminds(req, cb) {
-        return this.request("ChannelCreateFlowReminds", req, cb);
+    async ChannelCreateFlowSignUrl(req, cb) {
+        return this.request("ChannelCreateFlowSignUrl", req, cb);
     }
     /**
      * 此接口（SyncProxyOrganization）用于同步第三方平台子客企业信息，包括企业名称，企业营业执照，企业统一社会信用代码和法人姓名等，便于子客企业在企业激活过程中无需手动上传营业执照或补充企业信息。注意：

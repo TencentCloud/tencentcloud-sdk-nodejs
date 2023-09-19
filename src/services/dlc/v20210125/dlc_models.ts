@@ -6043,7 +6043,7 @@ export interface CreateSparkSessionBatchSQLRequest {
    */
   DataEngineName: string
   /**
-   * 运行sql
+   * 运行sql，需要base64编码。
    */
   ExecuteSQL: string
   /**
@@ -6081,7 +6081,7 @@ export interface CreateSparkSessionBatchSQLRequest {
    */
   Arguments?: Array<KVPair>
   /**
-   * 是否继承集群的资源类配置：0：自定义（默认），1：继承集群；
+   * 是否继承集群的资源类配置：0：不继承（默认），1：继承集群；
    */
   IsInherit?: number
 }

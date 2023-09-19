@@ -678,82 +678,13 @@ export interface RabbitMQPrivateVirtualHost {
     Description?: string;
 }
 /**
- * RocketMQ专享实例信息
+ * DescribeRocketMQPublicAccessPoint请求参数结构体
  */
-export interface RocketMQVipInstance {
+export interface DescribeRocketMQPublicAccessPointRequest {
     /**
-     * 实例id
+     * 集群ID，当前只支持专享集群
      */
     InstanceId: string;
-    /**
-     * 实例名称
-     */
-    InstanceName: string;
-    /**
-     * 实例版本
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    InstanceVersion: string;
-    /**
-     * 实例状态，0表示创建中，1表示正常，2表示隔离中，3表示已销毁，4 - 异常, 5 - 发货失败，6 - 变配中，7 - 变配失败
-     */
-    Status: number;
-    /**
-     * 节点数量
-     */
-    NodeCount: number;
-    /**
-     * 实例配置规格名称
-     */
-    ConfigDisplay: string;
-    /**
-     * 峰值TPS
-     */
-    MaxTps: number;
-    /**
-     * 峰值带宽，Mbps为单位
-     */
-    MaxBandWidth: number;
-    /**
-     * 存储容量，GB为单位
-     */
-    MaxStorage: number;
-    /**
-     * 实例到期时间，毫秒为单位
-     */
-    ExpireTime: number;
-    /**
-     * 自动续费标记，0表示默认状态(用户未设置，即初始状态即手动续费)， 1表示自动续费，2表示明确不自动续费(用户设置)
-     */
-    AutoRenewFlag: number;
-    /**
-     * 0-后付费，1-预付费
-     */
-    PayMode: number;
-    /**
-     * 备注信息
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Remark: string;
-    /**
-     * 实例配置ID
-     */
-    SpecName: string;
-    /**
-     * 最大可设置消息保留时间，小时为单位
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    MaxRetention?: number;
-    /**
-     * 最小可设置消息保留时间，小时为单位
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    MinRetention?: number;
-    /**
-     * 实例消息保留时间，小时为单位
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Retention?: number;
 }
 /**
  * RabbitMQ专享实例信息
@@ -1058,6 +989,35 @@ export interface RewindCmqQueueResponse {
     RequestId?: string;
 }
 /**
+ * ModifyPublicNetworkAccessPoint请求参数结构体
+ */
+export interface ModifyPublicNetworkAccessPointRequest {
+    /**
+     * 集群名字
+     */
+    ClusterId: string;
+    /**
+     * 是否开启
+     */
+    PublicNetworkAccessPointStatus: boolean;
+    /**
+     * 必填，公网控制台的开关/Vpc控制台的开关，示例值，Public/Vpc
+     */
+    SwitchOwner?: string;
+    /**
+     * Vpc
+     */
+    VpcId?: string;
+    /**
+     * 子网
+     */
+    SubnetId?: string;
+    /**
+     * 子网下面指定ip作为vpc接入点
+     */
+    SelectIp?: string;
+}
+/**
  * DeleteCluster请求参数结构体
  */
 export interface DeleteClusterRequest {
@@ -1139,6 +1099,15 @@ export interface CmqSubscription {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     TopicName?: string;
+}
+/**
+ * SetRocketMQPublicAccessPoint返回参数结构体
+ */
+export interface SetRocketMQPublicAccessPointResponse {
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * DeleteRocketMQGroup请求参数结构体
@@ -1226,6 +1195,24 @@ export interface RocketMQGroup {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     RetryMaxTimes?: number;
+}
+/**
+ * 公网访问安全规则
+ */
+export interface PublicAccessRule {
+    /**
+     * ip网段信息
+     */
+    IpRule: string;
+    /**
+     * 允许或者拒绝
+     */
+    Allow: boolean;
+    /**
+     * 备注信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Remark?: string;
 }
 /**
  * vpc信息（由UniqVpcId和UniqSubnetId组成）
@@ -1614,6 +1601,31 @@ export interface ModifyRabbitMQVirtualHostResponse {
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * SetRocketMQPublicAccessPoint请求参数结构体
+ */
+export interface SetRocketMQPublicAccessPointRequest {
+    /**
+     * 集群ID，当前只支持专享集群
+     */
+    InstanceId: string;
+    /**
+     * 开启或关闭访问
+     */
+    Enabled: boolean;
+    /**
+     * 带宽大小，开启或者调整公网时必须指定，Mbps为单位
+     */
+    Bandwidth?: number;
+    /**
+     * 付费模式，开启公网时必须指定，0为按小时计费，1为包年包月，当前只支持按小时计费
+     */
+    PayMode?: number;
+    /**
+     * 公网访问安全规则列表，Enabled为true时必须传入
+     */
+    Rules?: Array<PublicAccessRule>;
 }
 /**
  * cmq 批量queue属性信息
@@ -3127,6 +3139,51 @@ export interface DescribeEnvironmentRolesResponse {
     RequestId?: string;
 }
 /**
+ * DescribeRocketMQPublicAccessPoint返回参数结构体
+ */
+export interface DescribeRocketMQPublicAccessPointResponse {
+    /**
+     * 公网接入点状态：
+  0， 已开启
+  1， 已关闭
+  2，开启中
+  3，关闭中
+  4，修改中
+     */
+    Status: number;
+    /**
+     * 支付状态：
+  0, 未知
+  1，正常
+  2，欠费
+     */
+    PayStatus: number;
+    /**
+     * 接入点地址
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AccessUrl: string;
+    /**
+     * 安全访问规则列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Rules: Array<PublicAccessRule>;
+    /**
+     * 带宽
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Bandwidth: number;
+    /**
+     * 付费模式
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PayMode: number;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * DescribeRocketMQMsgTrace请求参数结构体
  */
 export interface DescribeRocketMQMsgTraceRequest {
@@ -3901,6 +3958,84 @@ export interface DescribeRocketMQTopicsResponse {
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * RocketMQ专享实例信息
+ */
+export interface RocketMQVipInstance {
+    /**
+     * 实例id
+     */
+    InstanceId: string;
+    /**
+     * 实例名称
+     */
+    InstanceName: string;
+    /**
+     * 实例版本
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InstanceVersion: string;
+    /**
+     * 实例状态，0表示创建中，1表示正常，2表示隔离中，3表示已销毁，4 - 异常, 5 - 发货失败，6 - 变配中，7 - 变配失败
+     */
+    Status: number;
+    /**
+     * 节点数量
+     */
+    NodeCount: number;
+    /**
+     * 实例配置规格名称
+     */
+    ConfigDisplay: string;
+    /**
+     * 峰值TPS
+     */
+    MaxTps: number;
+    /**
+     * 峰值带宽，Mbps为单位
+     */
+    MaxBandWidth: number;
+    /**
+     * 存储容量，GB为单位
+     */
+    MaxStorage: number;
+    /**
+     * 实例到期时间，毫秒为单位
+     */
+    ExpireTime: number;
+    /**
+     * 自动续费标记，0表示默认状态(用户未设置，即初始状态即手动续费)， 1表示自动续费，2表示明确不自动续费(用户设置)
+     */
+    AutoRenewFlag: number;
+    /**
+     * 0-后付费，1-预付费
+     */
+    PayMode: number;
+    /**
+     * 备注信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Remark: string;
+    /**
+     * 实例配置ID
+     */
+    SpecName: string;
+    /**
+     * 最大可设置消息保留时间，小时为单位
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MaxRetention?: number;
+    /**
+     * 最小可设置消息保留时间，小时为单位
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MinRetention?: number;
+    /**
+     * 实例消息保留时间，小时为单位
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Retention?: number;
 }
 /**
  * 命名空间信息
@@ -5991,6 +6126,29 @@ export interface CreateRabbitMQUserRequest {
     MaxChannels?: number;
 }
 /**
+ * VPC接入点信息
+ */
+export interface VpcEndpointInfo {
+    /**
+     * vpc的id
+     */
+    VpcId: string;
+    /**
+     * 子网id
+     */
+    SubnetId: string;
+    /**
+     * vpc接入点信息
+     */
+    VpcEndpoint: string;
+    /**
+     * vpc接入点状态
+  OFF/ON/CREATING/DELETING
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    VpcDataStreamEndpointStatus?: string;
+}
+/**
  * CreateRole请求参数结构体
  */
 export interface CreateRoleRequest {
@@ -6345,27 +6503,17 @@ export interface DescribeNodeHealthOptResponse {
     RequestId?: string;
 }
 /**
- * VPC接入点信息
+ * ModifyPublicNetworkAccessPoint返回参数结构体
  */
-export interface VpcEndpointInfo {
+export interface ModifyPublicNetworkAccessPointResponse {
     /**
-     * vpc的id
+     * 修改结果
      */
-    VpcId: string;
+    ModifyResult?: string;
     /**
-     * 子网id
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
-    SubnetId: string;
-    /**
-     * vpc接入点信息
-     */
-    VpcEndpoint: string;
-    /**
-     * vpc接入点状态
-  OFF/ON/CREATING/DELETING
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    VpcDataStreamEndpointStatus?: string;
+    RequestId?: string;
 }
 /**
  * PublishCmqMsg请求参数结构体

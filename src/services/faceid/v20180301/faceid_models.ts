@@ -1234,19 +1234,18 @@ export interface PhoneVerificationCMCCResponse {
 -7: 身份证号码有误
 -8: 姓名校验不通过
 -9: 没有记录
--10: 认证未通过
 -11: 验证中心服务繁忙
    */
-  Result: string
+  Result?: string
   /**
    * 运营商名称。
 取值范围为["移动","联通","电信",""]
    */
-  Isp: string
+  Isp?: string
   /**
    * 业务结果描述。
    */
-  Description: string
+  Description?: string
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1285,19 +1284,18 @@ export interface PhoneVerificationCTCCResponse {
 -7: 身份证号码有误
 -8: 姓名校验不通过
 -9: 没有记录
--10: 认证未通过
 -11: 验证中心服务繁忙
    */
-  Result: string
+  Result?: string
   /**
    * 运营商名称。
 取值范围为["移动","联通","电信",""]
    */
-  Isp: string
+  Isp?: string
   /**
    * 业务结果描述。
    */
-  Description: string
+  Description?: string
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2005,19 +2003,18 @@ export interface PhoneVerificationCUCCResponse {
 -7: 身份证号码有误
 -8: 姓名校验不通过
 -9: 没有记录
--10: 认证未通过
 -11: 验证中心服务繁忙
    */
-  Result: string
+  Result?: string
   /**
    * 运营商名称。
 取值范围为["移动","联通","电信",""]
    */
-  Isp: string
+  Isp?: string
   /**
    * 业务结果描述。
    */
-  Description: string
+  Description?: string
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

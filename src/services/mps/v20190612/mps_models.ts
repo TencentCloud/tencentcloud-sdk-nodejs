@@ -427,23 +427,23 @@ export interface MediaAiAnalysisHighlightItem {
   /**
    * 智能精彩集锦地址。
    */
-  HighlightPath: string
+  HighlightPath?: string
   /**
    * 智能精彩集锦封面地址。
    */
-  CovImgPath: string
+  CovImgPath?: string
   /**
    * 智能精彩集锦的可信度，取值范围是 0 到 100。
    */
-  Confidence: number
+  Confidence?: number
   /**
    * 智能精彩集锦持续时间。
    */
-  Duration: number
+  Duration?: number
   /**
    * 智能精彩集锦子片段列表。
    */
-  SegmentSet: Array<HighlightSegmentItem>
+  SegmentSet?: Array<HighlightSegmentItem>
 }
 
 /**
@@ -491,28 +491,28 @@ export interface AiReviewTaskProhibitedAsrResult {
   /**
    * 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。
    */
-  Status: string
+  Status?: string
   /**
    * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
    */
-  ErrCodeExt: string
+  ErrCodeExt?: string
   /**
    * 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。
    */
-  ErrCode: number
+  ErrCode?: number
   /**
    * 错误信息。
    */
-  Message: string
+  Message?: string
   /**
    * 内容审核 Asr 文字鉴违禁任务输入。
    */
-  Input: AiReviewProhibitedAsrTaskInput
+  Input?: AiReviewProhibitedAsrTaskInput
   /**
    * 内容审核 Asr 文字鉴违禁任务输出。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Output: AiReviewProhibitedAsrTaskOutput
+  Output?: AiReviewProhibitedAsrTaskOutput
 }
 
 /**
@@ -586,28 +586,28 @@ export interface AiReviewTaskProhibitedOcrResult {
   /**
    * 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。
    */
-  Status: string
+  Status?: string
   /**
    * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
    */
-  ErrCodeExt: string
+  ErrCodeExt?: string
   /**
    * 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。
    */
-  ErrCode: number
+  ErrCode?: number
   /**
    * 错误信息。
    */
-  Message: string
+  Message?: string
   /**
    * 内容审核 Ocr 文字鉴违禁任务输入。
    */
-  Input: AiReviewProhibitedOcrTaskInput
+  Input?: AiReviewProhibitedOcrTaskInput
   /**
    * 内容审核 Ocr 文字鉴违禁任务输出。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Output: AiReviewProhibitedOcrTaskOutput
+  Output?: AiReviewProhibitedOcrTaskOutput
 }
 
 /**
@@ -617,15 +617,16 @@ export interface AiRecognitionTaskAsrFullTextResultOutput {
   /**
    * 语音全文识别片段列表。
    */
-  SegmentSet: Array<AiRecognitionTaskAsrFullTextSegmentItem>
+  SegmentSet?: Array<AiRecognitionTaskAsrFullTextSegmentItem>
   /**
    * 字幕文件地址。
    */
-  SubtitlePath: string
+  SubtitlePath?: string
   /**
    * 字幕文件存储位置。
+   * @deprecated
    */
-  OutputStorage: TaskOutputStorage
+  OutputStorage?: TaskOutputStorage
 }
 
 /**
@@ -1189,28 +1190,28 @@ export interface AiReviewTaskPoliticalOcrResult {
   /**
    * 任务状态，有 PROCESSING，SUCCESS，FAIL 三种。
    */
-  Status: string
+  Status?: string
   /**
    * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
    */
-  ErrCodeExt: string
+  ErrCodeExt?: string
   /**
    * 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。
    */
-  ErrCode: number
+  ErrCode?: number
   /**
    * 错误信息。
    */
-  Message: string
+  Message?: string
   /**
    * 内容审核 Ocr 文字敏感任务输入。
    */
-  Input: AiReviewPoliticalOcrTaskInput
+  Input?: AiReviewPoliticalOcrTaskInput
   /**
    * 内容审核 Ocr 文字敏感任务输出。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Output: AiReviewPoliticalOcrTaskOutput
+  Output?: AiReviewPoliticalOcrTaskOutput
 }
 
 /**
@@ -1237,6 +1238,26 @@ export interface AiSampleWord {
    * 最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。
    */
   UpdateTime: string
+}
+
+/**
+ * 文本涉敏任务控制参数
+ */
+export interface PoliticalOcrReviewTemplateInfo {
+  /**
+   * 文本涉敏任务开关，可选值：
+<li>ON：开启文本涉敏任务；</li>
+<li>OFF：关闭文本涉敏任务。</li>
+   */
+  Switch: string
+  /**
+   * 判定涉嫌违规的分数阈值，当智能审核达到该分数以上，认为涉嫌违规，不填默认为 100 分。取值范围：0~100。
+   */
+  BlockConfidence?: number
+  /**
+   * 判定需人工复核是否违规的分数阈值，当智能审核达到该分数以上，认为需人工复核，不填默认为 75 分。取值范围：0~100。
+   */
+  ReviewConfidence?: number
 }
 
 /**
@@ -2035,28 +2056,28 @@ export interface AiRecognitionTaskFaceResult {
   /**
    * 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。
    */
-  Status: string
+  Status?: string
   /**
    * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
    */
-  ErrCodeExt: string
+  ErrCodeExt?: string
   /**
    * 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。
    */
-  ErrCode: number
+  ErrCode?: number
   /**
    * 错误信息。
    */
-  Message: string
+  Message?: string
   /**
    * 人脸识别任务输入信息。
    */
-  Input: AiRecognitionTaskFaceResultInput
+  Input?: AiRecognitionTaskFaceResultInput
   /**
    * 人脸识别任务输出信息。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Output: AiRecognitionTaskFaceResultOutput
+  Output?: AiRecognitionTaskFaceResultOutput
 }
 
 /**
@@ -2212,24 +2233,24 @@ export interface AiAnalysisTaskHighlightResult {
   /**
    * 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。
    */
-  Status: string
+  Status?: string
   /**
    * 错误码，0：成功，其他值：失败。
    */
-  ErrCode: number
+  ErrCode?: number
   /**
    * 错误信息。
    */
-  Message: string
+  Message?: string
   /**
    * 智能精彩片段任务输入。
    */
-  Input: AiAnalysisTaskHighlightInput
+  Input?: AiAnalysisTaskHighlightInput
   /**
    * 智能精彩片段任务输出。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Output: AiAnalysisTaskHighlightOutput
+  Output?: AiAnalysisTaskHighlightOutput
 }
 
 /**
@@ -2367,6 +2388,7 @@ LowEvaluation：无参考打分低于阈值。
 export interface AiReviewPornTaskInput {
   /**
    * 鉴黄模板 ID。
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Definition: number
 }
@@ -2584,23 +2606,13 @@ export interface TagConfigureInfo {
 }
 
 /**
- * DescribeWordSamples返回参数结构体
+ * 文本关键词识别输出。
  */
-export interface DescribeWordSamplesResponse {
+export interface AiRecognitionTaskOcrWordsResultOutput {
   /**
-   * 符合条件的记录总数。
-注意：此字段可能返回 null，表示取不到有效值。
+   * 文本关键词识别结果集。
    */
-  TotalCount?: number
-  /**
-   * 关键词信息。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  WordSet?: Array<AiSampleWord>
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  ResultSet: Array<AiRecognitionTaskOcrWordsResultItem>
 }
 
 /**
@@ -2707,28 +2719,28 @@ export interface AiAnalysisTaskCoverResult {
   /**
    * 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。
    */
-  Status: string
+  Status?: string
   /**
    * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
    */
-  ErrCodeExt: string
+  ErrCodeExt?: string
   /**
    * 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。
    */
-  ErrCode: number
+  ErrCode?: number
   /**
    * 错误信息。
    */
-  Message: string
+  Message?: string
   /**
    * 智能封面任务输入。
    */
-  Input: AiAnalysisTaskCoverInput
+  Input?: AiAnalysisTaskCoverInput
   /**
    * 智能封面任务输出。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Output: AiAnalysisTaskCoverOutput
+  Output?: AiAnalysisTaskCoverOutput
 }
 
 /**
@@ -2894,7 +2906,56 @@ export interface EditMediaTaskInput {
   /**
    * 输入的视频文件信息。
    */
-  FileInfoSet: Array<EditMediaFileInfo>
+  FileInfoSet?: Array<EditMediaFileInfo>
+}
+
+/**
+ * 视频编辑/合成任务 元素转场信息。
+ */
+export interface ComposeTransitionOperation {
+  /**
+   * 转场类型。
+
+图像的转场操作，用于两个视频片段图像间的转场处理：
+<li>ImageFadeInFadeOut：图像淡入淡出。</li>
+<li>BowTieHorizontal：水平蝴蝶结。</li>
+<li>BowTieVertical：垂直蝴蝶结。</li>
+<li>ButterflyWaveScrawler：晃动。</li>
+<li>Cannabisleaf：枫叶。</li>
+<li>Circle：弧形收放。</li>
+<li>CircleCrop：圆环聚拢。</li>
+<li>Circleopen：椭圆聚拢。</li>
+<li>Crosswarp：横向翘曲。</li>
+<li>Cube：立方体。</li>
+<li>DoomScreenTransition：幕布。</li>
+<li>Doorway：门廊。</li>
+<li>Dreamy：波浪。</li>
+<li>DreamyZoom：水平聚拢。</li>
+<li>FilmBurn：火烧云。</li>
+<li>GlitchMemories：抖动。</li>
+<li>Heart：心形。</li>
+<li>InvertedPageCurl：翻页。</li>
+<li>Luma：腐蚀。</li>
+<li>Mosaic：九宫格。</li>
+<li>Pinwheel：风车。</li>
+<li>PolarFunction：椭圆扩散。</li>
+<li>PolkaDotsCurtain：弧形扩散。</li>
+<li>Radial：雷达扫描。</li>
+<li>RotateScaleFade：上下收放。</li>
+<li>Squeeze：上下聚拢。</li>
+<li>Swap：放大切换。</li>
+<li>Swirl：螺旋。</li>
+<li>UndulatingBurnOutSwirl：水流蔓延。</li>
+<li>Windowblinds：百叶窗。</li>
+<li>WipeDown：向下收起。</li>
+<li>WipeLeft：向左收起。</li>
+<li>WipeRight：向右收起。</li>
+<li>WipeUp：向上收起。</li>
+<li>ZoomInCircles：水波纹。</li> 
+音频的转场操作，用于两个音频片段间的转场处理：
+<li>AudioFadeInFadeOut：声音淡入淡出。</li>
+   */
+  Type: string
 }
 
 /**
@@ -2923,13 +2984,21 @@ export interface UserDefineAsrTextReviewTemplateInfo {
 }
 
 /**
- * 文本关键词识别输出。
+ * 视频编辑/合成任务 对应元素在目标视频轨道上的时间信息。
  */
-export interface AiRecognitionTaskOcrWordsResultOutput {
+export interface ComposeTrackTime {
   /**
-   * 文本关键词识别结果集。
+   * 元素在轨道上的起始时间，时间点支持：
+<li>以 s 结尾，表示时间点单位为秒，如 3.5s 表示时间点为第3.5秒；</li>
+注意：不填则默认为前一个元素的结束时间，此时可以通过 ComposeEmptyItem 元素来进行占位，实现轨道起始时间设置。
    */
-  ResultSet: Array<AiRecognitionTaskOcrWordsResultItem>
+  Start?: string
+  /**
+   * 元素时长，时间支持：
+<li>以 s 结尾，表示时间点单位为秒，如 3.5s 表示时间点为第3.5秒；</li>
+默认：取对应 ComposeSourceMedia 媒体的有效时长（即 EndTime-StartTime），没有 ComposeSourceMedia 则默认为 1 秒。
+   */
+  Duration?: string
 }
 
 /**
@@ -3173,6 +3242,26 @@ export interface ModifyAIAnalysisTemplateResponse {
 }
 
 /**
+ * DescribeWordSamples返回参数结构体
+ */
+export interface DescribeWordSamplesResponse {
+  /**
+   * 符合条件的记录总数。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalCount?: number
+  /**
+   * 关键词信息。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WordSet?: Array<AiSampleWord>
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeAIRecognitionTemplates返回参数结构体
  */
 export interface DescribeAIRecognitionTemplatesResponse {
@@ -3226,7 +3315,7 @@ export interface EditMediaResponse {
   /**
    * 编辑视频的任务 ID，可以通过该 ID 查询编辑任务的状态。
    */
-  TaskId: string
+  TaskId?: string
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3331,28 +3420,28 @@ export interface ScheduleRecognitionTaskResult {
   /**
    * 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。
    */
-  Status: string
+  Status?: string
   /**
    * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
    */
-  ErrCodeExt: string
+  ErrCodeExt?: string
   /**
    * 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。
    */
-  ErrCode: number
+  ErrCode?: number
   /**
    * 错误信息。
    */
-  Message: string
+  Message?: string
   /**
    * 识别任务的输入。
    */
-  Input: AiRecognitionTaskInput
+  Input?: AiRecognitionTaskInput
   /**
    * 识别任务的输出。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Output: Array<AiRecognitionResult>
+  Output?: Array<AiRecognitionResult>
   /**
    * 任务开始执行的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。
 注意：此字段可能返回 null，表示取不到有效值。
@@ -3394,13 +3483,35 @@ export interface WithdrawsWatermarkRequest {
 }
 
 /**
- * 语音全文识别的输入。
+ * 视频编辑/合成任务 目标视频信息。
  */
-export interface AiRecognitionTaskAsrFullTextResultInput {
+export interface ComposeTargetInfo {
   /**
-   * 语音全文识别模板 ID。
+   * 封装容器格式，可选值：
+<li>mp4：视频文件（默认）。</li>
+<li>mp3：纯音频文件。</li>
    */
-  Definition: number
+  Container?: string
+  /**
+   * 是否去除视频数据，可选值：
+<li>0：保留（默认）。</li>
+<li>1：去除。</li>
+   */
+  RemoveVideo?: number
+  /**
+   * 是否去除音频数据，可选值：
+<li>0：保留（默认）。</li>
+<li>1：去除。</li>
+   */
+  RemoveAudio?: number
+  /**
+   * 输出视频流信息。
+   */
+  VideoStream?: ComposeVideoStream
+  /**
+   * 输出音频流信息。
+   */
+  AudioStream?: ComposeAudioStream
 }
 
 /**
@@ -3651,6 +3762,26 @@ export interface ParseNotificationRequest {
 }
 
 /**
+ * 直播录制任务输入参数类型
+ */
+export interface LiveRecordTaskInput {
+  /**
+   * 直播录制模板 ID。
+   */
+  Definition: number
+  /**
+   * 直播录制后文件的目标存储，不填则继承上层的 OutputStorage 值。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OutputStorage?: TaskOutputStorage
+  /**
+   * 直播录制后文件的输出路径。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OutputObjectPath?: string
+}
+
+/**
  * CreateWordSamples请求参数结构体
  */
 export interface CreateWordSamplesRequest {
@@ -3816,28 +3947,28 @@ export interface AiReviewTaskTerrorismOcrResult {
   /**
    * 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。
    */
-  Status: string
+  Status?: string
   /**
    * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
    */
-  ErrCodeExt: string
+  ErrCodeExt?: string
   /**
    * 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。
    */
-  ErrCode: number
+  ErrCode?: number
   /**
    * 错误信息。
    */
-  Message: string
+  Message?: string
   /**
    * 内容审核 Ocr 文字敏感任务输入。
    */
-  Input: AiReviewTerrorismOcrTaskInput
+  Input?: AiReviewTerrorismOcrTaskInput
   /**
    * 内容审核 Ocr 文字敏感任务输出。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Output: AiReviewTerrorismOcrTaskOutput
+  Output?: AiReviewTerrorismOcrTaskOutput
 }
 
 /**
@@ -3847,28 +3978,28 @@ export interface AiRecognitionTaskOcrWordsResult {
   /**
    * 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。
    */
-  Status: string
+  Status?: string
   /**
    * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
    */
-  ErrCodeExt: string
+  ErrCodeExt?: string
   /**
    * 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。
    */
-  ErrCode: number
+  ErrCode?: number
   /**
    * 错误信息。
    */
-  Message: string
+  Message?: string
   /**
    * 文本关键词识别任务输入信息。
    */
-  Input: AiRecognitionTaskOcrWordsResultInput
+  Input?: AiRecognitionTaskOcrWordsResultInput
   /**
    * 文本关键词识别任务输出信息。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Output: AiRecognitionTaskOcrWordsResultOutput
+  Output?: AiRecognitionTaskOcrWordsResultOutput
 }
 
 /**
@@ -3889,6 +4020,22 @@ export interface PornAsrReviewTemplateInfo {
    * 判定需人工复核是否违规的分数阈值，当智能审核达到该分数以上，认为需人工复核，不填默认为 75 分。取值范围：0~100。
    */
   ReviewConfidence?: number
+}
+
+/**
+ * 视频编辑/合成任务 视频流信息。
+ */
+export interface ComposeVideoStream {
+  /**
+   * 视频流的编码方式，可选值：
+<li>H.264：H.264 编码（默认）。</li>
+   */
+  Codec?: string
+  /**
+   * 视频帧率，取值范围：[0, 60]，单位：Hz。  
+默认值：0，表示和第一个视频帧率一致。
+   */
+  Fps?: number
 }
 
 /**
@@ -3932,6 +4079,37 @@ export interface ModifyAnimatedGraphicsTemplateResponse {
 }
 
 /**
+ * 智能按帧标签结果类型
+ */
+export interface AiAnalysisTaskFrameTagResult {
+  /**
+   * 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。
+   */
+  Status?: string
+  /**
+   * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+   */
+  ErrCodeExt?: string
+  /**
+   * 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。
+   */
+  ErrCode?: number
+  /**
+   * 错误信息。
+   */
+  Message?: string
+  /**
+   * 智能按帧标签任务输入。
+   */
+  Input?: AiAnalysisTaskFrameTagInput
+  /**
+   * 智能按帧标签任务输出。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Output?: AiAnalysisTaskFrameTagOutput
+}
+
+/**
  * DeleteAdaptiveDynamicStreamingTemplate请求参数结构体
  */
 export interface DeleteAdaptiveDynamicStreamingTemplateRequest {
@@ -3965,10 +4143,12 @@ export interface AiRecognitionTaskOcrFullTextSegmentItem {
 export interface EditMediaOutputConfig {
   /**
    * 封装格式，可选值：mp4、hls、mov、flv、avi。默认是 mp4。
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Container?: string
   /**
    * 剪辑模式，可选值 normal、fast。默认是精确剪辑 normal
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Type?: string
 }
@@ -4029,6 +4209,28 @@ export interface AiReviewPornAsrTaskOutput {
 }
 
 /**
+ * 视频编辑/合成任务 转场元素信息。
+ */
+export interface ComposeTransitionItem {
+  /**
+   * 元素时长，时间支持：<li>以 s 结尾，表示时间点单位为秒，如 3s 表示时间点为第3秒。</li>
+默认：1s
+注意：
+<li>必须是整数s，否则向下取整。</li>
+<li>转场 前后必须紧挨着两个不为 Empty 的元素。</li>
+<li>转场 Duration 必须小于前一个元素的 Duration，同时必须小于后一个元素的 Duration。</li>
+<li>进行转场处理的两个元素，第二个元素在轨道上的起始时间会自动调整为前一个元素的结束时间减去转场的 Duration。</li>
+   */
+  Duration?: string
+  /**
+   * 转场操作列表。
+默认：淡入淡出。
+注意：图像转场操作和音频转场操作各自最多支持一个。
+   */
+  Transitions?: Array<ComposeTransitionOperation>
+}
+
+/**
  * DeleteAIAnalysisTemplate请求参数结构体
  */
 export interface DeleteAIAnalysisTemplateRequest {
@@ -4052,12 +4254,21 @@ export interface EditMediaRequest {
   OutputStorage: TaskOutputStorage
   /**
    * 媒体处理输出文件的目标路径。
+
+注意：对于复杂合成任务，路径中的文件名只可为数字、字母、-、_ 的组合，最长 64 个字符。
+
    */
   OutputObjectPath: string
   /**
-   * 编辑后生成的文件配置。
+   * 【剪辑】任务生成的文件配置。
    */
   OutputConfig?: EditMediaOutputConfig
+  /**
+   * 【合成】任务配置。
+
+注意：当其不为空时，认为是合成任务，否则按剪辑任务处理。
+   */
+  ComposeConfig?: ComposeMediaConfig
   /**
    * 任务的事件通知信息，不填代表不获取事件通知。
    */
@@ -4323,6 +4534,22 @@ export interface ImageWatermarkInput {
 }
 
 /**
+ * 直播录制结果
+ */
+export interface LiveRecordResult {
+  /**
+   * 直播录制文件的目标存储。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OutputStorage?: TaskOutputStorage
+  /**
+   * 直播录制文件列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FileList?: Array<LiveRecordFile>
+}
+
+/**
  * 语音全文识别任务控制参数
  */
 export interface AsrFullTextConfigureInfoForUpdate {
@@ -4341,6 +4568,63 @@ export interface AsrFullTextConfigureInfoForUpdate {
    * 视频源语言。
    */
   SourceLanguage?: string
+}
+
+/**
+ * 直播录制输出文件信息
+ */
+export interface LiveRecordFile {
+  /**
+   * 直播录制文件地址
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Url?: string
+  /**
+   * 直播录制文件大小
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Size?: number
+  /**
+   * 直播录制文件时长
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Duration?: number
+  /**
+   * 直播录制文件开始时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StartTime?: string
+  /**
+   * 直播录制文件结束时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EndTime?: string
+}
+
+/**
+ * 视频编辑/合成任务  媒体素材源信息。
+ */
+export interface ComposeSourceMedia {
+  /**
+   * 媒体对应的素材ID，即 FileInfos 列表中对应素材的 ID。
+   */
+  FileId: string
+  /**
+   * 媒体位于素材的起始时间，时间点支持 s、% 两种格式：
+<li>当字符串以 s 结尾，表示时间点单位为秒，如 3.5s 表示时间点为第3.5秒；</li>
+<li>当字符串以 % 结尾，表示时间点为素材时长的百分比大小，如10%表示时间点为素材第10% 的时刻。</li>
+默认：0s
+   */
+  StartTime?: string
+  /**
+   * 媒体位于素材的结束时间，和 StartTime 构成媒体在源素材的时间区间，时间点支持 s、% 两种格式：
+<li>当字符串以 s 结尾，表示时间点单位为秒，如 3.5s 表示时间点为第3.5秒；</li>
+<li>当字符串以 % 结尾，表示时间点为素材时长的百分比大小，如10%表示时间点为素材第10%的时间。</li>
+默认：如果对应轨道时长有设置，则默认轨道时长，否则为素材时长，无时长的素材默认为 1 秒。
+注意：至少需要大于 StartTime 0.02 秒。
+
+   */
+  EndTime?: string
 }
 
 /**
@@ -4390,37 +4674,14 @@ export interface ProhibitedConfigureInfoForUpdate {
 }
 
 /**
- * 采样截图信息
+ * 视频编辑/合成任务 空白占位元素信息。
  */
-export interface MediaSampleSnapshotItem {
+export interface ComposeEmptyItem {
   /**
-   * 采样截图规格 ID，参见[采样截图参数模板](https://cloud.tencent.com/document/product/266/33480#.E9.87.87.E6.A0.B7.E6.88.AA.E5.9B.BE.E6.A8.A1.E6.9D.BF)。
+   * 元素时长，时间支持：
+<li>以 s 结尾，表示时间点单位为秒，如 3.5s 表示时间点为第3.5秒。</li>
    */
-  Definition: number
-  /**
-   * 采样方式，取值范围：
-<li>Percent：根据百分比间隔采样。</li>
-<li>Time：根据时间间隔采样。</li>
-   */
-  SampleType: string
-  /**
-   * 采样间隔
-<li>当 SampleType 为 Percent 时，该值表示多少百分比一张图。</li>
-<li>当 SampleType 为 Time 时，该值表示多少时间间隔一张图，单位秒， 第一张图均为视频首帧。</li>
-   */
-  Interval: number
-  /**
-   * 截图后文件的存储位置。
-   */
-  Storage: TaskOutputStorage
-  /**
-   * 生成的截图 path 列表。
-   */
-  ImagePathSet: Array<string>
-  /**
-   * 截图如果被打上了水印，被打水印的模板 ID 列表。
-   */
-  WaterMarkDefinition: Array<number | bigint>
+  Duration: string
 }
 
 /**
@@ -4627,23 +4888,87 @@ export interface VideoTemplateInfo {
 }
 
 /**
- * 文本涉敏任务控制参数
+ * 视频编辑/合成任务 字幕样式。
  */
-export interface PoliticalOcrReviewTemplateInfo {
+export interface ComposeSubtitleStyle {
   /**
-   * 文本涉敏任务开关，可选值：
-<li>ON：开启文本涉敏任务；</li>
-<li>OFF：关闭文本涉敏任务。</li>
+   * 字幕高度。支持 %、px 两种格式：
+<li>当字符串以 % 结尾，表示为画布高度的百分比大小，如 10% 表示为画布高度的 10%。</li>
+<li>当字符串以 px 结尾，表示单位为像素，如 100px 表示为100像素。</li>
+默认为 FontSize 大小。
    */
-  Switch: string
+  Height?: string
   /**
-   * 判定涉嫌违规的分数阈值，当智能审核达到该分数以上，认为涉嫌违规，不填默认为 100 分。取值范围：0~100。
+   * 字幕距离下边框距离，支持 %、px 两种格式：
+<li>当字符串以 % 结尾，表示为画布高度的百分比大小，如 10% 表示为画布高度的 10%。</li>
+<li>当字符串以 px 结尾，表示单位为像素，如 100px 表示为100像素。</li>
+默认：0px
    */
-  BlockConfidence?: number
+  MarginBottom?: string
   /**
-   * 判定需人工复核是否违规的分数阈值，当智能审核达到该分数以上，认为需人工复核，不填默认为 75 分。取值范围：0~100。
+   * 字体类型，支持：
+<li>SimHei：黑体（默认）。</li>
+<li>SimSun：宋体。</li>
    */
-  ReviewConfidence?: number
+  FontType?: string
+  /**
+   * 字体大小，支持 %、px 两种格式：
+<li>当字符串以 % 结尾，表示为画布高度的百分比大小，如 10% 表示为画布高度的 10%。</li>
+<li>当字符串以 px 结尾，表示单位为像素，如 100px 表示为100像素。</li>
+默认：2%
+   */
+  FontSize?: string
+  /**
+   * 是否使用粗体，和字体相关，可选值：
+<li>0：否（默认）。</li>
+<li>1：是。</li>
+   */
+  FontBold?: number
+  /**
+   * 是否使用斜体，和字体相关，可选值：
+<li>0：否（默认）。</li>
+<li>1：是。</li>
+   */
+  FontItalic?: number
+  /**
+   * 字体颜色，格式：#RRGGBBAA。  
+默认值：0x000000FF（黑色）。  
+注意：其中 AA 部分指的是透明度，为可选。
+
+   */
+  FontColor?: string
+  /**
+   * 文字对齐方式：
+<li>Center：居中（默认）。</li>
+<li>Left：左对齐。</li>
+<li>Right：右对齐。</li>
+   */
+  FontAlign?: string
+  /**
+   * 用于字幕对齐留白：
+<li>FontAlign=Left 时，表示距离左边距离。</li>
+<li>FontAlign=Right时，表示距离右边距离。</li>
+支持 %、px 两种格式：
+<li>当字符串以 % 结尾，表示为画布宽度的百分比大小，如 10% 表示为画布宽度的 10%。</li>
+<li>当字符串以 px 结尾，表示单位为像素，如 100px 表示为100像素。</li>
+   */
+  FontAlignMargin?: string
+  /**
+   * 字体边框宽度，支持 %、px 两种格式：
+<li>当字符串以 % 结尾，表示为画布高度的百分比大小，如 10% 表示为画布高度的 10%。</li>
+<li>当字符串以 px 结尾，表示单位为像素，如 100px 表示为100像素。</li>
+默认： 0，表示不需要边框。
+   */
+  BorderWidth?: string
+  /**
+   * 边框颜色，当 BorderWidth 不为 0 时生效，其值格式和 FontColor 一致。
+   */
+  BorderColor?: string
+  /**
+   * 文字底色，其值格式和 FontColor 一致。  
+默认为空， 表示不使用底色。
+   */
+  BottomColor?: string
 }
 
 /**
@@ -4673,28 +4998,28 @@ export interface AiReviewTaskPornOcrResult {
   /**
    * 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。
    */
-  Status: string
+  Status?: string
   /**
    * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
    */
-  ErrCodeExt: string
+  ErrCodeExt?: string
   /**
    * 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。
    */
-  ErrCode: number
+  ErrCode?: number
   /**
    * 错误信息。
    */
-  Message: string
+  Message?: string
   /**
    * 内容审核 Ocr 文字鉴黄任务输入。
    */
-  Input: AiReviewPornOcrTaskInput
+  Input?: AiReviewPornOcrTaskInput
   /**
    * 内容审核 Ocr 文字鉴黄任务输出。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Output: AiReviewPornOcrTaskOutput
+  Output?: AiReviewPornOcrTaskOutput
 }
 
 /**
@@ -4941,44 +5266,21 @@ export interface DescribeOutputRTPSettings {
 }
 
 /**
- * 直播实时翻译结果
+ * 视频编辑/合成任务 音频元素信息。
  */
-export interface LiveStreamTransTextRecognitionResult {
+export interface ComposeAudioItem {
   /**
-   * 识别文本。
+   * 元素对应媒体信息。
    */
-  Text: string
+  SourceMedia: ComposeSourceMedia
   /**
-   * 翻译片段起始的 PTS 时间，单位：秒。
+   * 元素在轨道时间轴上的时间信息，不填则紧跟上一个元素。
    */
-  StartPtsTime: number
+  TrackTime?: ComposeTrackTime
   /**
-   * 翻译片段终止的 PTS 时间，单位：秒。
+   * 对音频进行操作，如静音等。
    */
-  EndPtsTime: number
-  /**
-   * 翻译片段置信度。取值：0~100。
-   */
-  Confidence: number
-  /**
-   * 翻译文本。
-   */
-  Trans: string
-  /**
-   * 翻译开始UTC时间。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  StartTime?: string
-  /**
-   * 翻译结束UTC时间。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  EndTime?: string
-  /**
-   * 稳态标记。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SteadyState?: boolean
+  AudioOperations?: Array<ComposeAudioOperation>
 }
 
 /**
@@ -4989,6 +5291,44 @@ export interface AiReviewPornOcrTaskInput {
    * 鉴黄模板 ID。
    */
   Definition: number
+}
+
+/**
+ * 直播编排任务信息
+ */
+export interface LiveScheduleTask {
+  /**
+   * 直播编排任务 ID。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskId?: string
+  /**
+   * 任务流状态，取值：
+<li>PROCESSING：处理中；</li>
+<li>FINISH：已完成。</li>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status?: string
+  /**
+   * 源异常时返回非0错误码，返回0 时请使用各个具体任务的 ErrCode。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ErrCode?: number
+  /**
+   * 源异常时返回对应异常Message，否则请使用各个具体任务的 Message。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Message?: string
+  /**
+   * 直播流 URL。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Url?: string
+  /**
+   * 直播编排任务输出。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LiveActivityResultSet?: Array<LiveActivityResult>
 }
 
 /**
@@ -5182,28 +5522,28 @@ export interface AiAnalysisTaskTagResult {
   /**
    * 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。
    */
-  Status: string
+  Status?: string
   /**
    * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
    */
-  ErrCodeExt: string
+  ErrCodeExt?: string
   /**
    * 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。
    */
-  ErrCode: number
+  ErrCode?: number
   /**
    * 错误信息。
    */
-  Message: string
+  Message?: string
   /**
    * 智能标签任务输入。
    */
-  Input: AiAnalysisTaskTagInput
+  Input?: AiAnalysisTaskTagInput
   /**
    * 智能标签任务输出。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Output: AiAnalysisTaskTagOutput
+  Output?: AiAnalysisTaskTagOutput
 }
 
 /**
@@ -5251,11 +5591,12 @@ export interface AiAnalysisTaskHighlightOutput {
   /**
    * 视频智能精彩片段列表。
    */
-  HighlightSet: Array<MediaAiAnalysisHighlightItem>
+  HighlightSet?: Array<MediaAiAnalysisHighlightItem>
   /**
    * 精彩片段的存储位置。
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  OutputStorage: TaskOutputStorage
+  OutputStorage?: TaskOutputStorage
 }
 
 /**
@@ -5394,28 +5735,84 @@ export interface AiRecognitionTaskOcrFullTextResult {
   /**
    * 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。
    */
-  Status: string
+  Status?: string
   /**
    * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
    */
-  ErrCodeExt: string
+  ErrCodeExt?: string
   /**
    * 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。
    */
-  ErrCode: number
+  ErrCode?: number
   /**
    * 错误信息。
    */
-  Message: string
+  Message?: string
   /**
    * 文本全文识别任务输入信息。
    */
-  Input: AiRecognitionTaskOcrFullTextResultInput
+  Input?: AiRecognitionTaskOcrFullTextResultInput
   /**
    * 文本全文识别任务输出信息。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Output: AiRecognitionTaskOcrFullTextResultOutput
+  Output?: AiRecognitionTaskOcrFullTextResultOutput
+}
+
+/**
+ * 视频编辑/合成任务 视频元素信息。
+ */
+export interface ComposeVideoItem {
+  /**
+   * 元素对应媒体信息。
+   */
+  SourceMedia: ComposeSourceMedia
+  /**
+   * 元素在轨道时间轴上的时间信息，不填则紧跟上一个元素。
+   */
+  TrackTime?: ComposeTrackTime
+  /**
+   * 元素中心点距离画布原点的水平位置。支持 %、px 两种格式：
+<li>当字符串以 % 结尾，表示元素 XPos 为画布宽度指定百分比的位置，如 10% 表示 XPos 为画布宽度的 10%。</li>
+<li>当字符串以 px 结尾，表示元素 XPos 单位为像素，如 100px 表示 XPos 为100像素。</li>
+默认：50%。
+   */
+  XPos?: string
+  /**
+   * 元素中心点距离画布原点的垂直位置。支持 %、px 两种格式：
+<li>当字符串以 % 结尾，表示元素 YPos 为画布高度指定百分比的位置，如 10% 表示 YPos 为画布高度的 10%。</li>
+<li>当字符串以 px 结尾，表示元素 YPos 单位为像素，如 100px 表示 YPos 为100像素。</li>
+默认：50%。
+   */
+  YPos?: string
+  /**
+   * 视频片段的宽度。支持 %、px 两种格式：
+<li>当字符串以 % 结尾，表示元素 Width 为画布宽度的百分比大小，如 10% 表示 Width 为画布宽度的 10%。</li>
+<li>当字符串以 px 结尾，表示元素 Width 单位为像素，如 100px 表示 Width 为100像素。</li>
+为空（或0） 的场景：
+<li>当 Width、Height 均为空，则 Width 和 Height 取源素材本身的 Width、Height。</li>
+<li>当 Width 为空，Height 非空，则 Width 按源素材比例缩放。</li>
+<li>当 Width 非空，Height 为空，则 Height 按源素材比例缩放。</li>
+   */
+  Width?: string
+  /**
+   * 元素的高度。支持 %、px 两种格式：
+<li>当字符串以 % 结尾，表示元素 Height 为画布高度的百分比大小，如 10% 表示 Height 为画布高度的 10%。</li>
+<li>当字符串以 px 结尾，表示元素 Height 单位为像素，如 100px 表示 Height 为100像素。</li>
+为空（或0） 的场景：
+<li>当 Width、Height 均为空，则 Width 和 Height 取源素材本身的 Width、Height。</li>
+<li>当 Width 为空，Height 非空，则 Width 按源素材比例缩放。</li>
+<li>当 Width 非空，Height 为空，则 Height 按源素材比例缩放。</li>
+   */
+  Height?: string
+  /**
+   * 对图像画面进行的操作，如图像旋转等。
+   */
+  ImageOperations?: Array<ComposeImageOperation>
+  /**
+   * 对音频进行操作，如静音等。
+   */
+  AudioOperations?: Array<ComposeAudioOperation>
 }
 
 /**
@@ -5425,28 +5822,28 @@ export interface MediaProcessTaskSnapshotByTimeOffsetResult {
   /**
    * 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。
    */
-  Status: string
+  Status?: string
   /**
    * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
    */
-  ErrCodeExt: string
+  ErrCodeExt?: string
   /**
    * 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。
    */
-  ErrCode: number
+  ErrCode?: number
   /**
    * 错误信息。
    */
-  Message: string
+  Message?: string
   /**
    * 对视频按指定时间点截图任务输入。
    */
-  Input: SnapshotByTimeOffsetTaskInput
+  Input?: SnapshotByTimeOffsetTaskInput
   /**
    * 对视频按指定时间点截图任务输出。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Output: MediaSnapshotByTimeOffsetItem
+  Output?: MediaSnapshotByTimeOffsetItem
   /**
    * 任务开始执行的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。
 注意：此字段可能返回 null，表示取不到有效值。
@@ -5551,6 +5948,16 @@ export interface ManageTaskRequest {
    * 视频处理的任务 ID。
    */
   TaskId: string
+}
+
+/**
+ * 语音全文识别的输入。
+ */
+export interface AiRecognitionTaskAsrFullTextResultInput {
+  /**
+   * 语音全文识别模板 ID。
+   */
+  Definition: number
 }
 
 /**
@@ -6409,6 +6816,46 @@ export interface ScheduleAnalysisTaskResult {
 }
 
 /**
+ * 视频编辑/合成任务 轨道元素信息。
+ */
+export interface ComposeMediaItem {
+  /**
+   * 元素类型。取值有：
+<li>Video：视频元素。</li>
+<li>Audio：音频元素。</li>
+<li>Image：图片元素。</li>
+<li>Transition：转场元素。</li>
+<li>Subtitle：字幕元素。</li>
+<li>Empty：空白元素。</li>
+   */
+  Type: string
+  /**
+   * 视频元素，当 Type = Video 时有效。
+   */
+  Video?: ComposeVideoItem
+  /**
+   * 音频元素，当 Type = Audio 时有效。
+   */
+  Audio?: ComposeAudioItem
+  /**
+   * 图片元素，当 Type = Image 时有效。
+   */
+  Image?: ComposeImageItem
+  /**
+   * 转场元素，当 Type = Transition 时有效。
+   */
+  Transition?: ComposeTransitionItem
+  /**
+   * 字幕元素，当 Type = Subtitle 是有效。
+   */
+  Subtitle?: ComposeSubtitleItem
+  /**
+   * 空白元素，当 Type = Empty 时有效。用于时间轴的占位。
+   */
+  Empty?: ComposeEmptyItem
+}
+
+/**
  * CreateStreamLinkInput请求参数结构体
  */
 export interface CreateStreamLinkInputRequest {
@@ -6429,28 +6876,28 @@ export interface ScheduleQualityControlTaskResult {
   /**
    * 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。
    */
-  Status: string
+  Status?: string
   /**
    * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
    */
-  ErrCodeExt: string
+  ErrCodeExt?: string
   /**
    * 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。
    */
-  ErrCode: number
+  ErrCode?: number
   /**
    * 错误信息。
    */
-  Message: string
+  Message?: string
   /**
    * 质检任务的输入。
    */
-  Input: AiQualityControlTaskInput
+  Input?: AiQualityControlTaskInput
   /**
    * 质检任务的输出。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Output: QualityControlData
+  Output?: QualityControlData
 }
 
 /**
@@ -6728,17 +7175,30 @@ export interface AIAnalysisTemplateItem {
 }
 
 /**
- * 片头片尾参数
+ * 视频编辑/合成任务 信息。
+
+关于 轨道、元素、时间轴 关系示意图：
+
+![image](https://ie-mps-1258344699.cos.ap-nanjing.tencentcos.cn/common/cloud/EditMedia-Compose-Track-Item.png)
  */
-export interface HeadTailParameter {
+export interface ComposeMediaConfig {
   /**
-   * 片头列表。
+   * 合成目标视频信息。
    */
-  HeadSet?: Array<MediaInputInfo>
+  TargetInfo?: ComposeTargetInfo
   /**
-   * 片尾列表。
+   * 合成目标视频的画布信息。
    */
-  TailSet?: Array<MediaInputInfo>
+  Canvas?: ComposeCanvas
+  /**
+   * 全局样式，和轨道 Tracks 配合使用，用于定于样式，如字幕样式。
+   */
+  Styles?: Array<ComposeStyles>
+  /**
+   * 用于描述合成视频的轨道列表，包括：视频、音频、图片、文字等元素组成的多个轨道信息。关于轨道和时间：
+<ul><li>轨道时间轴即为目标视频时间轴。</li><li>时间轴上相同时间点的不同轨道上的元素会重叠：</li><ul><li>视频、图片、文字：按轨道顺序进行图像的叠加，轨道顺序靠前的在上面。</li><li>音频 ：进行混音。</li></ul></ul>注意：同一轨道中各个元素（除字幕元素外）的轨道时间不能重叠。
+   */
+  Tracks?: Array<ComposeMediaTrack>
 }
 
 /**
@@ -7268,28 +7728,28 @@ export interface AiReviewTaskTerrorismResult {
   /**
    * 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。
    */
-  Status: string
+  Status?: string
   /**
    * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
    */
-  ErrCodeExt: string
+  ErrCodeExt?: string
   /**
    * 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。
    */
-  ErrCode: number
+  ErrCode?: number
   /**
    * 错误信息。
    */
-  Message: string
+  Message?: string
   /**
    * 内容审核涉敏任务输入。
    */
-  Input: AiReviewTerrorismTaskInput
+  Input?: AiReviewTerrorismTaskInput
   /**
    * 内容审核涉敏任务输出。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Output: AiReviewTerrorismTaskOutput
+  Output?: AiReviewTerrorismTaskOutput
 }
 
 /**
@@ -7779,20 +8239,20 @@ export interface QualityControlItem {
    * 置信度，取值范围是 0 到 100。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Confidence: number
+  Confidence?: number
   /**
    * 出现的起始时间戳，秒。
    */
-  StartTimeOffset: number
+  StartTimeOffset?: number
   /**
    * 出现的结束时间戳，秒。
    */
-  EndTimeOffset: number
+  EndTimeOffset?: number
   /**
    * 区域坐标(px)，即左上角坐标、右下角坐标。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  AreaCoordSet: Array<number | bigint>
+  AreaCoordSet?: Array<number | bigint>
 }
 
 /**
@@ -8122,28 +8582,28 @@ export interface AiReviewTaskPoliticalAsrResult {
   /**
    * 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。
    */
-  Status: string
+  Status?: string
   /**
    * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
    */
-  ErrCodeExt: string
+  ErrCodeExt?: string
   /**
    * 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。
    */
-  ErrCode: number
+  ErrCode?: number
   /**
    * 错误信息。
    */
-  Message: string
+  Message?: string
   /**
    * 内容审核 Asr 文字敏感任务输入。
    */
-  Input: AiReviewPoliticalAsrTaskInput
+  Input?: AiReviewPoliticalAsrTaskInput
   /**
    * 内容审核 Asr 文字敏感任务输出。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Output: AiReviewPoliticalAsrTaskOutput
+  Output?: AiReviewPoliticalAsrTaskOutput
 }
 
 /**
@@ -8292,34 +8752,53 @@ export interface TerrorismOcrReviewTemplateInfo {
 }
 
 /**
+ * 细节增强配置
+ */
+export interface SharpEnhanceConfig {
+  /**
+   * 能力配置开关，可选值：
+<li>ON：开启；</li>
+<li>OFF：关闭。</li>
+默认值：ON。
+   */
+  Switch?: string
+  /**
+   * 强度，取值范围：0.0~1.0。
+默认：0.0。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Intensity?: number
+}
+
+/**
  * 内容审核鉴黄任务结果类型
  */
 export interface AiReviewTaskPornResult {
   /**
    * 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。
    */
-  Status: string
+  Status?: string
   /**
    * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
    */
-  ErrCodeExt: string
+  ErrCodeExt?: string
   /**
    * 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。
    */
-  ErrCode: number
+  ErrCode?: number
   /**
    * 错误信息。
    */
-  Message: string
+  Message?: string
   /**
    * 内容审核鉴黄任务输入。
    */
-  Input: AiReviewPornTaskInput
+  Input?: AiReviewPornTaskInput
   /**
    * 内容审核鉴黄任务输出。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Output: AiReviewPornTaskOutput
+  Output?: AiReviewPornTaskOutput
 }
 
 /**
@@ -8443,28 +8922,28 @@ export interface AiAnalysisTaskClassificationResult {
   /**
    * 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。
    */
-  Status: string
+  Status?: string
   /**
    * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
    */
-  ErrCodeExt: string
+  ErrCodeExt?: string
   /**
    * 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。
    */
-  ErrCode: number
+  ErrCode?: number
   /**
    * 错误信息。
    */
-  Message: string
+  Message?: string
   /**
    * 智能分类任务输入。
    */
-  Input: AiAnalysisTaskClassificationInput
+  Input?: AiAnalysisTaskClassificationInput
   /**
    * 智能分类任务输出。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Output: AiAnalysisTaskClassificationOutput
+  Output?: AiAnalysisTaskClassificationOutput
 }
 
 /**
@@ -8730,6 +9209,28 @@ export interface ParseNotificationResponse {
 }
 
 /**
+ * 视频编辑/合成任务 视频图像转换操作。
+ */
+export interface ComposeImageOperation {
+  /**
+   * 类型，取值有：
+<li>Rotate：图像旋转。</li>
+<li>Flip：图像翻转。</li>
+   */
+  Type: string
+  /**
+   * 当 Type = Rotate 时有效。图像以中心点为原点进行旋转的角度，取值范围0~360。
+   */
+  RotateAngle?: number
+  /**
+   * 当 Type = Flip 时有效。图像翻转动作，取值有： 
+<li>Horizental：水平翻转，即左右镜像。</li>
+<li>Vertical：垂直翻转，即上下镜像。</li>
+   */
+  FlipType?: string
+}
+
+/**
  * 编排任务输出
  */
 export interface ActivityResult {
@@ -8807,28 +9308,28 @@ export interface MediaProcessTaskSampleSnapshotResult {
   /**
    * 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。
    */
-  Status: string
+  Status?: string
   /**
    * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
    */
-  ErrCodeExt: string
+  ErrCodeExt?: string
   /**
    * 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。
    */
-  ErrCode: number
+  ErrCode?: number
   /**
    * 错误信息。
    */
-  Message: string
+  Message?: string
   /**
    * 对视频做采样截图任务输入。
    */
-  Input: SampleSnapshotTaskInput
+  Input?: SampleSnapshotTaskInput
   /**
    * 对视频做采样截图任务输出。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Output: MediaSampleSnapshotItem
+  Output?: MediaSampleSnapshotItem
   /**
    * 任务开始执行的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。
 注意：此字段可能返回 null，表示取不到有效值。
@@ -9133,34 +9634,24 @@ export interface DescribeStreamLinkFlowResponse {
 }
 
 /**
- * 智能按帧标签结果类型
+ * 视频编辑/合成任务画布信息。
  */
-export interface AiAnalysisTaskFrameTagResult {
+export interface ComposeCanvas {
   /**
-   * 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。
+   * 背景颜色对应的 RGB 参考值，取值格式： #RRGGBB，如 #F0F0F0 。 
+默认值：#000000（黑色）。
    */
-  Status: string
+  Color?: string
   /**
-   * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+   * 画布宽度，即输出视频的宽度，取值范围：0~ 3840，单位：px。  
+默认值：0，表示和第一个视频宽度一致。
    */
-  ErrCodeExt: string
+  Width?: number
   /**
-   * 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。
+   * 画布高度，即输出视频的高度，取值范围：0~ 3840，单位：px。  
+默认值：0，表示和第一个视频高度一致。
    */
-  ErrCode: number
-  /**
-   * 错误信息。
-   */
-  Message: string
-  /**
-   * 智能按帧标签任务输入。
-   */
-  Input: AiAnalysisTaskFrameTagInput
-  /**
-   * 智能按帧标签任务输出。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Output: AiAnalysisTaskFrameTagOutput
+  Height?: number
 }
 
 /**
@@ -9213,28 +9704,28 @@ export interface AiRecognitionTaskAsrFullTextResult {
   /**
    * 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。
    */
-  Status: string
+  Status?: string
   /**
    * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
    */
-  ErrCodeExt: string
+  ErrCodeExt?: string
   /**
    * 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。
    */
-  ErrCode: number
+  ErrCode?: number
   /**
    * 错误信息。
    */
-  Message: string
+  Message?: string
   /**
    * 语音全文识别任务输入信息。
    */
-  Input: AiRecognitionTaskAsrFullTextResultInput
+  Input?: AiRecognitionTaskAsrFullTextResultInput
   /**
    * 语音全文识别任务输出信息。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Output: AiRecognitionTaskAsrFullTextResultOutput
+  Output?: AiRecognitionTaskAsrFullTextResultOutput
 }
 
 /**
@@ -9577,6 +10068,20 @@ export interface CreateStreamLinkOutputInfoRequest {
 }
 
 /**
+ * 视频编辑/合成任务 轨道信息。
+ */
+export interface ComposeMediaTrack {
+  /**
+   * 轨道类型，取值有：<ul><li>Video ：视频轨道。视频轨道可由以下元素组成：</li><ul><li>Video 元素</li><li>Image 元素</li><li>Transition 元素</li><li>Empty 元素</li></ul><li>Audio ：音频轨道。音频轨道可由以下元素组成：</li><ul><li>Audio 元素</li><li>Transition 元素</li><li>Empty 元素</li></ul><li>Title：文字轨道。文字轨道可由以下元素组成：</li><ul><li>Subtitle 元素</li></ul>
+   */
+  Type: string
+  /**
+   * 轨道上的元素列表。
+   */
+  Items: Array<ComposeMediaItem>
+}
+
+/**
  * 文本违禁任务控制参数
  */
 export interface ProhibitedOcrReviewTemplateInfo {
@@ -9643,28 +10148,28 @@ export interface ScheduleReviewTaskResult {
   /**
    * 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。
    */
-  Status: string
+  Status?: string
   /**
    * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
    */
-  ErrCodeExt: string
+  ErrCodeExt?: string
   /**
    * 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。
    */
-  ErrCode: number
+  ErrCode?: number
   /**
    * 错误信息。
    */
-  Message: string
+  Message?: string
   /**
    * 审核任务的输入。
    */
-  Input: AiContentReviewTaskInput
+  Input?: AiContentReviewTaskInput
   /**
    * 审核任务的输出。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Output: Array<AiContentReviewResult>
+  Output?: Array<AiContentReviewResult>
   /**
    * 任务开始执行的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。
 注意：此字段可能返回 null，表示取不到有效值。
@@ -9712,47 +10217,67 @@ export interface MediaMetaData {
   /**
    * 上传的媒体文件大小（视频为 HLS 时，大小是 m3u8 和 ts 文件大小的总和），单位：字节。
    */
-  Size: number
+  Size?: number
   /**
    * 容器类型，例如 m4a，mp4 等。
    */
-  Container: string
+  Container?: string
   /**
    * 视频流码率平均值与音频流码率平均值之和，单位：bps。
    */
-  Bitrate: number
+  Bitrate?: number
   /**
    * 视频流高度的最大值，单位：px。
    */
-  Height: number
+  Height?: number
   /**
    * 视频流宽度的最大值，单位：px。
    */
-  Width: number
+  Width?: number
   /**
    * 视频时长，单位：秒。
    */
-  Duration: number
+  Duration?: number
   /**
    * 视频拍摄时的选择角度，单位：度。
    */
-  Rotate: number
+  Rotate?: number
   /**
    * 视频流信息。
    */
-  VideoStreamSet: Array<MediaVideoStreamItem>
+  VideoStreamSet?: Array<MediaVideoStreamItem>
   /**
    * 音频流信息。
    */
-  AudioStreamSet: Array<MediaAudioStreamItem>
+  AudioStreamSet?: Array<MediaAudioStreamItem>
   /**
    * 视频时长，单位：秒。
    */
-  VideoDuration: number
+  VideoDuration?: number
   /**
    * 音频时长，单位：秒。
    */
-  AudioDuration: number
+  AudioDuration?: number
+}
+
+/**
+ * 视频编辑/合成任务 样式信息。
+ */
+export interface ComposeStyles {
+  /**
+   * 样式 Id，用于和轨道元素中的样式关联。
+注意：允许字母、数字、-、_ 组合，最长 32 字符。
+   */
+  Id: string
+  /**
+   * 样式类型，取值有：
+<li>Subtitle：字幕样式。</li>
+   */
+  Type: string
+  /**
+   * 字幕样式信息，当 Type = Subtitle 时有效。
+   */
+  Subtitle?: ComposeSubtitleStyle
 }
 
 /**
@@ -9991,6 +10516,24 @@ export interface SimpleAesDrm {
  */
 export interface TaskNotifyConfig {
   /**
+   * 通知类型，可选值：
+<li>CMQ：已下线，建议切换到TDMQ-CMQ</li>
+<li>TDMQ-CMQ：消息队列</li>
+<li>URL：指定URL时HTTP回调推送到 NotifyUrl 指定的地址，回调协议http+json，包体内容同解析事件通知接口的输出参数 </li>
+<li>SCF：不推荐使用，需要在控制台额外配置SCF</li>
+<li>AWS-SQS：AWS 队列，只适用于 AWS 任务，且要求同区域</li>
+<font color="red"> 注：不填或为空时默认 CMQ，如需采用其他类型需填写对应类型值。 </font>
+   */
+  NotifyType?: string
+  /**
+   * 工作流通知的模式，可取值有 Finish 和 Change，不填代表 Finish。
+   */
+  NotifyMode?: string
+  /**
+   * HTTP回调地址，NotifyType为URL时必填。
+   */
+  NotifyUrl?: string
+  /**
    * CMQ或TDMQ-CMQ 的模型，有 Queue 和 Topic 两种。
    */
   CmqModel?: string
@@ -10006,24 +10549,6 @@ export interface TaskNotifyConfig {
    * 当模型为 Queue 时有效，表示接收事件通知的 CMQ 或 TDMQ-CMQ 的队列名。
    */
   QueueName?: string
-  /**
-   * 工作流通知的模式，可取值有 Finish 和 Change，不填代表 Finish。
-   */
-  NotifyMode?: string
-  /**
-   * 通知类型，可选值：
-<li>CMQ：已下线，建议切换到TDMQ-CMQ</li>
-<li>TDMQ-CMQ：消息队列</li>
-<li>URL：指定URL时HTTP回调推送到 NotifyUrl 指定的地址，回调协议http+json，包体内容同解析事件通知接口的输出参数 </li>
-<li>SCF：不推荐使用，需要在控制台额外配置SCF</li>
-<li>AWS-SQS：AWS 队列，只适用于 AWS 任务，且要求同区域</li>
-<font color="red"> 注：不填或为空时默认 CMQ，如需采用其他类型需填写对应类型值。 </font>
-   */
-  NotifyType?: string
-  /**
-   * HTTP回调地址，NotifyType为URL时必填。
-   */
-  NotifyUrl?: string
   /**
    * AWS SQS 回调，NotifyType为 AWS-SQS 时必填。
 
@@ -10155,6 +10680,22 @@ export interface ModifyStreamLinkInputResponse {
 }
 
 /**
+ * 片头片尾参数
+ */
+export interface HeadTailParameter {
+  /**
+   * 片头列表。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HeadSet?: Array<MediaInputInfo>
+  /**
+   * 片尾列表。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TailSet?: Array<MediaInputInfo>
+}
+
+/**
  * DescribeTaskDetail返回参数结构体
  */
 export interface DescribeTaskDetailResponse {
@@ -10227,6 +10768,11 @@ export interface DescribeTaskDetailResponse {
    */
   ScheduleTask?: ScheduleTask
   /**
+   * 直播编排处理任务信息，仅当 TaskType 为 LiveScheduleTask，该字段有值。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LiveScheduleTask?: LiveScheduleTask
+  /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -10294,6 +10840,51 @@ export interface DeleteImageSpriteTemplateRequest {
 }
 
 /**
+ * 直播编排直播录制任务结果类型
+ */
+export interface LiveScheduleLiveRecordTaskResult {
+  /**
+   * 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。
+   */
+  Status?: string
+  /**
+   * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ErrCodeExt?: string
+  /**
+   * 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ErrCode?: number
+  /**
+   * 错误信息。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Message?: string
+  /**
+   * 直播录制任务的输入。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Input?: LiveRecordTaskInput
+  /**
+   * 直播录制任务的输出。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Output?: LiveRecordResult
+  /**
+   * 任务开始执行的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BeginProcessTime?: string
+  /**
+   * 任务执行完毕的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FinishTime?: string
+}
+
+/**
  * AI 样本管理，处理失败的人脸信息
  */
 export interface AiSampleFailFaceInfo {
@@ -10355,22 +10946,44 @@ RTMP的推流地址拼接规则为：rtmp://Ip:1935/AppName/StreamKey
 }
 
 /**
- * 细节增强配置
+ * 直播实时翻译结果
  */
-export interface SharpEnhanceConfig {
+export interface LiveStreamTransTextRecognitionResult {
   /**
-   * 能力配置开关，可选值：
-<li>ON：开启；</li>
-<li>OFF：关闭。</li>
-默认值：ON。
+   * 识别文本。
    */
-  Switch?: string
+  Text: string
   /**
-   * 强度，取值范围：0.0~1.0。
-默认：0.0。
+   * 翻译片段起始的 PTS 时间，单位：秒。
+   */
+  StartPtsTime: number
+  /**
+   * 翻译片段终止的 PTS 时间，单位：秒。
+   */
+  EndPtsTime: number
+  /**
+   * 翻译片段置信度。取值：0~100。
+   */
+  Confidence: number
+  /**
+   * 翻译文本。
+   */
+  Trans: string
+  /**
+   * 翻译开始UTC时间。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Intensity?: number
+  StartTime?: string
+  /**
+   * 翻译结束UTC时间。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EndTime?: string
+  /**
+   * 稳态标记。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SteadyState?: boolean
 }
 
 /**
@@ -10454,15 +11067,15 @@ export interface DescribeTasksResponse {
   /**
    * 任务概要列表。
    */
-  TaskSet: Array<TaskSimpleInfo>
+  TaskSet?: Array<TaskSimpleInfo>
   /**
    * 翻页标识，当请求未返回所有数据，该字段表示下一条记录的 ID。当该字段为空字符串，说明已无更多数据。
    */
-  ScrollToken: string
+  ScrollToken?: string
   /**
    * 符合过滤条件的记录总数。
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -10592,28 +11205,28 @@ export interface AiReviewTaskPoliticalResult {
   /**
    * 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。
    */
-  Status: string
+  Status?: string
   /**
    * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
    */
-  ErrCodeExt: string
+  ErrCodeExt?: string
   /**
    * 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。
    */
-  ErrCode: number
+  ErrCode?: number
   /**
    * 错误信息。
    */
-  Message: string
+  Message?: string
   /**
    * 内容审核涉敏任务输入。
    */
-  Input: AiReviewPoliticalTaskInput
+  Input?: AiReviewPoliticalTaskInput
   /**
    * 内容审核涉敏任务输出。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Output: AiReviewPoliticalTaskOutput
+  Output?: AiReviewPoliticalTaskOutput
 }
 
 /**
@@ -10623,15 +11236,11 @@ export interface AiRecognitionTaskTransTextResultOutput {
   /**
    * 翻译片段列表。
    */
-  SegmentSet: Array<AiRecognitionTaskTransTextSegmentItem>
+  SegmentSet?: Array<AiRecognitionTaskTransTextSegmentItem>
   /**
    * 字幕文件地址。
    */
-  SubtitlePath: string
-  /**
-   * 字幕文件存储位置。
-   */
-  OutputStorage: TaskOutputStorage
+  SubtitlePath?: string
 }
 
 /**
@@ -10759,30 +11368,30 @@ export interface TaskSimpleInfo {
   /**
    * 任务 ID。
    */
-  TaskId: string
+  TaskId?: string
   /**
    * 任务类型，包含：
 <li> WorkflowTask：工作流处理任务；</li>
 <li> EditMediaTask：视频编辑任务；</li>
 <li> LiveProcessTask：直播处理任务。</li>
    */
-  TaskType: string
+  TaskType?: string
   /**
    * 任务创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。
    */
-  CreateTime: string
+  CreateTime?: string
   /**
    * 任务开始执行时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。若任务尚未开始，该字段为：0000-00-00T00:00:00Z。
    */
-  BeginProcessTime: string
+  BeginProcessTime?: string
   /**
    * 任务结束时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。若任务尚未完成，该字段为：0000-00-00T00:00:00Z。
    */
-  FinishTime: string
+  FinishTime?: string
   /**
    * 子任务类型。
    */
-  SubTaskTypes: Array<string>
+  SubTaskTypes?: Array<string>
 }
 
 /**
@@ -11301,6 +11910,14 @@ export interface ProcessLiveStreamRequest {
    * 来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长 1000 个字符。
    */
   SessionContext?: string
+  /**
+   * 直播编排ID。
+注意1：对于OutputStorage、OutputDir参数：
+<li>当服务编排中子任务节点配置了OutputStorage、OutputDir时，该子任务节点中配置的输出作为子任务的输出。</li>
+<li>当服务编排中子任务节点没有配置OutputStorage、OutputDir时，若对直播流发起处理（ProcessLiveStream）有输出，将覆盖原有编排的默认输出。</li>
+注意2：对于TaskNotifyConfig参数，若创建任务接口（ProcessLiveStream）有设置，将覆盖原有编排的默认回调。
+   */
+  ScheduleId?: number
 }
 
 /**
@@ -11398,6 +12015,24 @@ export interface DeleteWatermarkTemplateRequest {
 }
 
 /**
+ * 视频编辑/合成任务 字幕元素信息。
+ */
+export interface ComposeSubtitleItem {
+  /**
+   * 字幕样式，Styles 列表中对应的 Subtitle样式的 ID。
+   */
+  StyleId: string
+  /**
+   * 字幕文本。
+   */
+  Text: string
+  /**
+   * 元素在轨道时间轴上的时间信息，不填则紧跟上一个元素。
+   */
+  TrackTime?: ComposeTrackTime
+}
+
+/**
  * DescribeWordSamples请求参数结构体
  */
 export interface DescribeWordSamplesRequest {
@@ -11456,18 +12091,22 @@ export interface AddOnSubtitle {
 export interface AwsSQS {
   /**
    * SQS 队列区域。
+注意：此字段可能返回 null，表示取不到有效值。
    */
   SQSRegion: string
   /**
    * SQS 队列名称。
+注意：此字段可能返回 null，表示取不到有效值。
    */
   SQSQueueName: string
   /**
    * 读写SQS的秘钥id。
+注意：此字段可能返回 null，表示取不到有效值。
    */
   S3SecretId?: string
   /**
    * 读写SQS的秘钥key。
+注意：此字段可能返回 null，表示取不到有效值。
    */
   S3SecretKey?: string
 }
@@ -11562,6 +12201,58 @@ export interface DescribeSampleSnapshotTemplatesResponse {
 }
 
 /**
+ * 视频编辑/合成任务 图片元素信息。
+ */
+export interface ComposeImageItem {
+  /**
+   * 元素对应媒体信息。
+   */
+  SourceMedia: ComposeSourceMedia
+  /**
+   * 元素在轨道时间轴上的时间信息，不填则紧跟上一个元素。
+   */
+  TrackTime?: ComposeTrackTime
+  /**
+   * 元素中心点距离画布原点的水平位置。支持 %、px 两种格式：
+<li>当字符串以 % 结尾，表示元素 XPos 为画布宽度指定百分比的位置，如 10% 表示 XPos 为画布宽度的 10%。</li>
+<li>当字符串以 px 结尾，表示元素 XPos 单位为像素，如 100px 表示 XPos 为100像素。</li>
+默认：50%。
+   */
+  XPos?: string
+  /**
+   * 元素中心点距离画布原点的垂直位置。支持 %、px 两种格式：
+<li>当字符串以 % 结尾，表示元素 YPos 为画布高度指定百分比的位置，如 10% 表示 YPos 为画布高度的 10%。</li>
+<li>当字符串以 px 结尾，表示元素 YPos 单位为像素，如 100px 表示 YPos 为100像素。</li>
+默认：50%。
+   */
+  YPos?: string
+  /**
+   * 视频片段的宽度。支持 %、px 两种格式：
+<li>当字符串以 % 结尾，表示元素 Width 为画布宽度的百分比大小，如 10% 表示 Width 为画布宽度的 10%。</li>
+<li>当字符串以 px 结尾，表示元素 Width 单位为像素，如 100px 表示 Width 为100像素。</li>
+为空（或0） 的场景：
+<li>当 Width、Height 均为空，则 Width 和 Height 取源素材本身的 Width、Height。</li>
+<li>当 Width 为空，Height 非空，则 Width 按源素材比例缩放。</li>
+<li>当 Width 非空，Height 为空，则 Height 按源素材比例缩放。</li>
+   */
+  Width?: string
+  /**
+   * 元素的高度。支持 %、px 两种格式：
+<li>当字符串以 % 结尾，表示元素 Height 为画布高度的百分比大小，如 10% 表示 Height 为画布高度的 10%。</li>
+<li>当字符串以 px 结尾，表示元素 Height 单位为像素，如 100px 表示 Height 为100像素。</li>
+为空（或0） 的场景：
+<li>当 Width、Height 均为空，则 Width 和 Height 取源素材本身的 Width、Height。</li>
+<li>当 Width 为空，Height 非空，则 Width 按源素材比例缩放。</li>
+<li>当 Width 非空，Height 为空，则 Height 按源素材比例缩放。</li>
+   */
+  Height?: string
+  /**
+   * 对图像画面进行的操作，如图像旋转等。
+   */
+  ImageOperations?: Array<ComposeImageOperation>
+}
+
+/**
  * 内容审核涉黄/涉敏嫌疑片段
  */
 export interface MediaContentReviewSegmentItem {
@@ -11615,6 +12306,23 @@ export interface DescribeStreamLinkFlowRealtimeStatusResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 直播编排任务输出
+ */
+export interface LiveActivityResult {
+  /**
+   * 原子任务类型。
+<li>LiveRecord：直播录制。</li>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ActivityType?: string
+  /**
+   * 原子任务输出。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LiveActivityResItem?: LiveActivityResItem
 }
 
 /**
@@ -11756,54 +12464,61 @@ export interface SchedulesInfo {
   /**
    * 编排唯一标识。
    */
-  ScheduleId: number
+  ScheduleId?: number
   /**
    * 编排名称。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ScheduleName: string
+  ScheduleName?: string
+  /**
+   * 编排类型，可选值：
+ <li>Preset：系统预置编排；</li>
+<li>Custom：用户自定义编排。</li>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Type?: string
   /**
    * 编排状态，取值范围：
 Enabled：已启用，
 Disabled：已禁用。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Status: string
+  Status?: string
   /**
    * 编排绑定的触发规则。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Trigger: WorkflowTrigger
+  Trigger?: WorkflowTrigger
   /**
    * 编排任务列表。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Activities: Array<Activity>
+  Activities?: Array<Activity>
   /**
    * 媒体处理的文件输出存储位置。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  OutputStorage: TaskOutputStorage
+  OutputStorage?: TaskOutputStorage
   /**
    * 媒体处理生成的文件输出的目标目录。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  OutputDir: string
+  OutputDir?: string
   /**
    * 任务的事件通知配置。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TaskNotifyConfig: TaskNotifyConfig
+  TaskNotifyConfig?: TaskNotifyConfig
   /**
    * 创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CreateTime: string
+  CreateTime?: string
   /**
    * 最后编辑时间，使用  [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  UpdateTime: string
+  UpdateTime?: string
 }
 
 /**
@@ -12053,6 +12768,40 @@ export interface MediaTranscodeItem {
 }
 
 /**
+ * 采样截图信息
+ */
+export interface MediaSampleSnapshotItem {
+  /**
+   * 采样截图规格 ID，参见[采样截图参数模板](https://cloud.tencent.com/document/product/266/33480#.E9.87.87.E6.A0.B7.E6.88.AA.E5.9B.BE.E6.A8.A1.E6.9D.BF)。
+   */
+  Definition: number
+  /**
+   * 采样方式，取值范围：
+<li>Percent：根据百分比间隔采样。</li>
+<li>Time：根据时间间隔采样。</li>
+   */
+  SampleType: string
+  /**
+   * 采样间隔
+<li>当 SampleType 为 Percent 时，该值表示多少百分比一张图。</li>
+<li>当 SampleType 为 Time 时，该值表示多少时间间隔一张图，单位秒， 第一张图均为视频首帧。</li>
+   */
+  Interval: number
+  /**
+   * 截图后文件的存储位置。
+   */
+  Storage: TaskOutputStorage
+  /**
+   * 生成的截图 path 列表。
+   */
+  ImagePathSet: Array<string>
+  /**
+   * 截图如果被打上了水印，被打水印的模板 ID 列表。
+   */
+  WaterMarkDefinition: Array<number | bigint>
+}
+
+/**
  * DescribePersonSamples返回参数结构体
  */
 export interface DescribePersonSamplesResponse {
@@ -12263,28 +13012,28 @@ export interface AiRecognitionTaskAsrWordsResult {
   /**
    * 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。
    */
-  Status: string
+  Status?: string
   /**
    * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
    */
-  ErrCodeExt: string
+  ErrCodeExt?: string
   /**
    * 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。
    */
-  ErrCode: number
+  ErrCode?: number
   /**
    * 错误信息。
    */
-  Message: string
+  Message?: string
   /**
    * 语音关键词识别任务输入信息。
    */
-  Input: AiRecognitionTaskAsrWordsResultInput
+  Input?: AiRecognitionTaskAsrWordsResultInput
   /**
    * 语音关键词识别任务输出信息。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Output: AiRecognitionTaskAsrWordsResultOutput
+  Output?: AiRecognitionTaskAsrWordsResultOutput
 }
 
 /**
@@ -12435,28 +13184,28 @@ export interface AiReviewTaskPornAsrResult {
   /**
    * 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。
    */
-  Status: string
+  Status?: string
   /**
    * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
    */
-  ErrCodeExt: string
+  ErrCodeExt?: string
   /**
    * 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。
    */
-  ErrCode: number
+  ErrCode?: number
   /**
    * 错误信息。
    */
-  Message: string
+  Message?: string
   /**
    * 内容审核 Asr 文字鉴黄任务输入。
    */
-  Input: AiReviewPornAsrTaskInput
+  Input?: AiReviewPornAsrTaskInput
   /**
    * 内容审核 Asr 文字鉴黄任务输出。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Output: AiReviewPornAsrTaskOutput
+  Output?: AiReviewPornAsrTaskOutput
 }
 
 /**
@@ -12468,13 +13217,20 @@ export interface EditMediaFileInfo {
    */
   InputInfo: MediaInputInfo
   /**
-   * 视频剪辑的起始时间偏移，单位：秒。
+   * 【剪辑】任务生效，视频剪辑的起始时间偏移，单位：秒。
    */
   StartTimeOffset?: number
   /**
-   * 视频剪辑的结束时间偏移，单位：秒。
+   * 【剪辑】任务生效，视频剪辑的结束时间偏移，单位：秒。
    */
   EndTimeOffset?: number
+  /**
+   * 【合成】任务必选，用于轨道元素中媒体关联源素材 ID。
+
+注意：允许字母、数字、-、_ ，最长 32 字符
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Id?: string
 }
 
 /**
@@ -12485,6 +13241,32 @@ export interface UrlInputInfo {
    * 视频的 URL。
    */
   Url: string
+}
+
+/**
+ * 视频编辑/合成任务 音频流信息。
+ */
+export interface ComposeAudioStream {
+  /**
+   * 音频流的编码方式，可选值：
+<li>AAC：AAC 编码（默认），用于容器为 mp4。</li>
+<li>MP3：mp3 编码，用于容器为 mp3。</li>
+   */
+  Codec?: string
+  /**
+   * 音频流的采样率，单位：Hz，可选值：
+<li>16000（默认）</li>
+<li>32000</li>
+<li>44100</li>
+<li>48000</li>
+   */
+  SampleRate?: number
+  /**
+   * 声道数，可选值：
+<li>1：单声道 。</li>
+<li>2：双声道（默认）。</li>
+   */
+  AudioChannel?: number
 }
 
 /**
@@ -12742,47 +13524,58 @@ export interface ActivityResItem {
    * 转码任务输出
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TranscodeTask: MediaProcessTaskTranscodeResult
+  TranscodeTask?: MediaProcessTaskTranscodeResult
   /**
    * 转动图任务输出
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  AnimatedGraphicTask: MediaProcessTaskAnimatedGraphicResult
+  AnimatedGraphicTask?: MediaProcessTaskAnimatedGraphicResult
   /**
    * 时间点截图任务输出
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SnapshotByTimeOffsetTask: MediaProcessTaskSampleSnapshotResult
+  SnapshotByTimeOffsetTask?: MediaProcessTaskSnapshotByTimeOffsetResult
   /**
    * 采样截图任务输出
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SampleSnapshotTask: MediaProcessTaskSampleSnapshotResult
+  SampleSnapshotTask?: MediaProcessTaskSampleSnapshotResult
   /**
    * 雪碧图任务输出
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ImageSpriteTask: MediaProcessTaskImageSpriteResult
+  ImageSpriteTask?: MediaProcessTaskImageSpriteResult
   /**
    * 自适应码流任务输出
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  AdaptiveDynamicStreamingTask: MediaProcessTaskAdaptiveDynamicStreamingResult
+  AdaptiveDynamicStreamingTask?: MediaProcessTaskAdaptiveDynamicStreamingResult
   /**
    * 识别任务输出
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RecognitionTask: ScheduleRecognitionTaskResult
+  RecognitionTask?: ScheduleRecognitionTaskResult
   /**
    * 审核任务输出
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ReviewTask: ScheduleReviewTaskResult
+  ReviewTask?: ScheduleReviewTaskResult
   /**
    * 分析任务输出
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  AnalysisTask: ScheduleAnalysisTaskResult
+  AnalysisTask?: ScheduleAnalysisTaskResult
+}
+
+/**
+ * 直播编排子任务输出
+ */
+export interface LiveActivityResItem {
+  /**
+   * 直播录制任务输出
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LiveRecordTask?: LiveScheduleLiveRecordTaskResult
 }
 
 /**
@@ -13047,72 +13840,72 @@ export interface AiRecognitionTaskFaceResultItem {
   /**
    * 人物唯一标识 ID。
    */
-  Id: string
+  Id?: string
   /**
    * 人物库类型，表示识别出的人物来自哪个人物库：
 <li>Default：默认人物库；</li>
 <li>UserDefine：用户自定义人物库。</li>
    */
-  Type: string
+  Type?: string
   /**
    * 人物名称。
    */
-  Name: string
+  Name?: string
   /**
    * 人物出现的片段结果集。
    */
-  SegmentSet: Array<AiRecognitionTaskFaceSegmentItem>
+  SegmentSet?: Array<AiRecognitionTaskFaceSegmentItem>
   /**
    * 人物性别：
 <li>Male：男性；</li>
 <li>Female：女性。</li>
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Gender: string
+  Gender?: string
   /**
    * 人物出生日期。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Birthday: string
+  Birthday?: string
   /**
    * 人物职业或者职务。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Profession: string
+  Profession?: string
   /**
    * 人物毕业院校。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SchoolOfGraduation: string
+  SchoolOfGraduation?: string
   /**
    * 人物简介。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Abstract: string
+  Abstract?: string
   /**
    * 人物出生地或者籍贯。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  PlaceOfBirth: string
+  PlaceOfBirth?: string
   /**
    * 人物类型：
 <li>Politician：官员；</li>
 <li>Artist：艺人。</li>
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  PersonType: string
+  PersonType?: string
   /**
    * 敏感度标注：
 <li>Normal：正常；</li>
 <li>Sensitive：敏感。</li>
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Remark: string
+  Remark?: string
   /**
    * 截图链接
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Url: string
+  Url?: string
 }
 
 /**
@@ -13186,6 +13979,25 @@ export interface CreateStreamLinkInputResponse {
 }
 
 /**
+ * 视频编辑/合成任务 音频操作。
+ */
+export interface ComposeAudioOperation {
+  /**
+   * 音频操作类型，取值有：
+<li>Volume：音量调节。</li>
+   */
+  Type: string
+  /**
+   *  当 Type = Volume 时有效。音量调节参数，取值范围: 0~5。 
+<li>0 表示静音。</li>
+<li>小于1 表示降低音量。</li>
+<li>1 表示不变。</li>
+<li>大于1表示升高音量。</li>
+   */
+  Volume?: number
+}
+
+/**
  * 直播流 AI 分析结果
  */
 export interface LiveStreamAiAnalysisResultItem {
@@ -13209,28 +14021,28 @@ export interface AiRecognitionTaskTransTextResult {
   /**
    * 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。
    */
-  Status: string
+  Status?: string
   /**
    * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
    */
-  ErrCodeExt: string
+  ErrCodeExt?: string
   /**
    * 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。
    */
-  ErrCode: number
+  ErrCode?: number
   /**
    * 错误信息。
    */
-  Message: string
+  Message?: string
   /**
    * 翻译任务输入信息。
    */
-  Input: AiRecognitionTaskTransTextResultInput
+  Input?: AiRecognitionTaskTransTextResultInput
   /**
    * 翻译任务输出信息。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Output: AiRecognitionTaskTransTextResultOutput
+  Output?: AiRecognitionTaskTransTextResultOutput
 }
 
 /**

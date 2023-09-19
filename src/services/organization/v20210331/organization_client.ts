@@ -34,30 +34,31 @@ import {
   UpdateOrganizationNodeResponse,
   CreateOrganizationMemberPolicyRequest,
   DescribeOrganizationRequest,
-  OrgIdentity,
+  DescribeOrganizationFinancialByMonthResponse,
   DescribeOrganizationNodesRequest,
-  BindOrganizationMemberAuthAccountResponse,
+  CreateOrganizationRequest,
   CreateOrganizationMemberResponse,
   MoveOrganizationNodeMembersRequest,
   ListOrganizationIdentityRequest,
   AuthNode,
   DescribeOrganizationMemberEmailBindResponse,
   DeleteOrganizationMembersRequest,
-  DeleteOrganizationMemberAuthIdentityRequest,
+  CreateOrganizationResponse,
   DescribeOrganizationMemberPoliciesResponse,
   DeleteOrganizationNodesRequest,
   IdentityPolicy,
   AddOrganizationNodeResponse,
-  DescribeOrganizationFinancialByMonthResponse,
+  BindOrganizationMemberAuthAccountResponse,
   OrgFinancialByMonth,
   DescribeOrganizationFinancialByProductResponse,
   AddOrganizationMemberEmailRequest,
-  DescribeOrganizationFinancialByProductRequest,
+  DeleteOrganizationRequest,
   ListOrganizationIdentityResponse,
   DescribeOrganizationNodesResponse,
   DeleteOrganizationMembersPolicyRequest,
   DescribeOrganizationMembersResponse,
   CreateOrganizationMemberPolicyResponse,
+  DescribeOrganizationFinancialByProductRequest,
   CancelOrganizationMemberAuthAccountResponse,
   OrgMemberAuthAccount,
   UpdateOrganizationMemberRequest,
@@ -65,7 +66,7 @@ import {
   DescribeOrganizationMemberPoliciesRequest,
   DescribeOrganizationMemberEmailBindRequest,
   UpdateOrganizationMemberEmailBindResponse,
-  DeleteOrganizationMembersPolicyResponse,
+  AddOrganizationNodeRequest,
   DescribeOrganizationMemberAuthIdentitiesResponse,
   OrgMemberFinancial,
   DescribeOrganizationAuthNodeRequest,
@@ -75,17 +76,20 @@ import {
   UpdateOrganizationMemberResponse,
   DeleteOrganizationNodesResponse,
   DescribeOrganizationFinancialByMemberResponse,
+  DeleteOrganizationResponse,
   DescribeOrganizationMemberAuthAccountsResponse,
-  AddOrganizationNodeRequest,
+  DeleteOrganizationMembersPolicyResponse,
   OrgMemberAuthIdentity,
   MemberMainInfo,
   CreateOrganizationMemberRequest,
   MoveOrganizationNodeMembersResponse,
   DescribeOrganizationMembersRequest,
   MemberIdentity,
+  OrgIdentity,
   DeleteOrganizationMemberAuthIdentityResponse,
   UpdateOrganizationMemberEmailBindRequest,
   OrgNode,
+  DeleteOrganizationMemberAuthIdentityRequest,
 } from "./organization_models"
 
 /**
@@ -238,6 +242,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 删除企业组织
+   */
+  async DeleteOrganization(
+    req?: DeleteOrganizationRequest,
+    cb?: (error: string, rep: DeleteOrganizationResponse) => void
+  ): Promise<DeleteOrganizationResponse> {
+    return this.request("DeleteOrganization", req, cb)
+  }
+
+  /**
      * 取消组织成员和组织管理员子账号的授权关系
 
      */
@@ -276,6 +290,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: MoveOrganizationNodeMembersResponse) => void
   ): Promise<MoveOrganizationNodeMembersResponse> {
     return this.request("MoveOrganizationNodeMembers", req, cb)
+  }
+
+  /**
+   * 创建企业组织
+   */
+  async CreateOrganization(
+    req?: CreateOrganizationRequest,
+    cb?: (error: string, rep: CreateOrganizationResponse) => void
+  ): Promise<CreateOrganizationResponse> {
+    return this.request("CreateOrganization", req, cb)
   }
 
   /**

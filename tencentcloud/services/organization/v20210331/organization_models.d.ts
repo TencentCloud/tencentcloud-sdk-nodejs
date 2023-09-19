@@ -358,39 +358,18 @@ export interface DescribeOrganizationRequest {
     Product?: string;
 }
 /**
- * 组织身份
+ * DescribeOrganizationFinancialByMonth返回参数结构体
  */
-export interface OrgIdentity {
+export interface DescribeOrganizationFinancialByMonthResponse {
     /**
-     * 身份ID。
+     * 产品消耗详情。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    IdentityId: number;
+    Items?: Array<OrgFinancialByMonth>;
     /**
-     * 身份名称。
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
-    IdentityAliasName: string;
-    /**
-     * 描述。
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Description: string;
-    /**
-     * 身份策略。
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    IdentityPolicy: Array<IdentityPolicy>;
-    /**
-     * 身份类型。 1-预设、 2-自定义
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    IdentityType: number;
-    /**
-     * 更新时间。
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    UpdateTime: string;
+    RequestId?: string;
 }
 /**
  * DescribeOrganizationNodes请求参数结构体
@@ -406,14 +385,9 @@ export interface DescribeOrganizationNodesRequest {
     Offset: number;
 }
 /**
- * BindOrganizationMemberAuthAccount返回参数结构体
+ * CreateOrganization请求参数结构体
  */
-export interface BindOrganizationMemberAuthAccountResponse {
-    /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
+export declare type CreateOrganizationRequest = null;
 /**
  * CreateOrganizationMember返回参数结构体
  */
@@ -550,17 +524,21 @@ export interface DeleteOrganizationMembersRequest {
     MemberUin: Array<number | bigint>;
 }
 /**
- * DeleteOrganizationMemberAuthIdentity请求参数结构体
+ * CreateOrganization返回参数结构体
  */
-export interface DeleteOrganizationMemberAuthIdentityRequest {
+export interface CreateOrganizationResponse {
     /**
-     * 成员uin。
+     * 企业组织ID
      */
-    MemberUin: number;
+    OrgId: number;
     /**
-     * 身份Id。
+     * 创建者昵称
      */
-    IdentityId: number;
+    NickName: string;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * DescribeOrganizationMemberPolicies返回参数结构体
@@ -617,14 +595,9 @@ export interface AddOrganizationNodeResponse {
     RequestId?: string;
 }
 /**
- * DescribeOrganizationFinancialByMonth返回参数结构体
+ * BindOrganizationMemberAuthAccount返回参数结构体
  */
-export interface DescribeOrganizationFinancialByMonthResponse {
-    /**
-     * 产品消耗详情。
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Items?: Array<OrgFinancialByMonth>;
+export interface BindOrganizationMemberAuthAccountResponse {
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -701,34 +674,9 @@ export interface AddOrganizationMemberEmailRequest {
     Phone: string;
 }
 /**
- * DescribeOrganizationFinancialByProduct请求参数结构体
+ * DeleteOrganization请求参数结构体
  */
-export interface DescribeOrganizationFinancialByProductRequest {
-    /**
-     * 查询开始月份。格式：yyyy-mm，例如：2021-01
-     */
-    Month: string;
-    /**
-     * 限制数目。取值范围：1~50，默认值：10
-     */
-    Limit?: number;
-    /**
-     * 偏移量。取值是limit的整数倍，默认值 : 0
-     */
-    Offset?: number;
-    /**
-     * 查询结束月份。格式：yyyy-mm，例如：2021-01,默认值为查询开始月份
-     */
-    EndMonth?: string;
-    /**
-     * 查询成员列表。 最大100个
-     */
-    MemberUins?: Array<number | bigint>;
-    /**
-     * 查询产品列表。 最大100个
-     */
-    ProductCodes?: Array<string>;
-}
+export declare type DeleteOrganizationRequest = null;
 /**
  * ListOrganizationIdentity返回参数结构体
  */
@@ -806,6 +754,35 @@ export interface CreateOrganizationMemberPolicyResponse {
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * DescribeOrganizationFinancialByProduct请求参数结构体
+ */
+export interface DescribeOrganizationFinancialByProductRequest {
+    /**
+     * 查询开始月份。格式：yyyy-mm，例如：2021-01
+     */
+    Month: string;
+    /**
+     * 限制数目。取值范围：1~50，默认值：10
+     */
+    Limit?: number;
+    /**
+     * 偏移量。取值是limit的整数倍，默认值 : 0
+     */
+    Offset?: number;
+    /**
+     * 查询结束月份。格式：yyyy-mm，例如：2021-01,默认值为查询开始月份
+     */
+    EndMonth?: string;
+    /**
+     * 查询成员列表。 最大100个
+     */
+    MemberUins?: Array<number | bigint>;
+    /**
+     * 查询产品列表。 最大100个
+     */
+    ProductCodes?: Array<string>;
 }
 /**
  * CancelOrganizationMemberAuthAccount返回参数结构体
@@ -1029,13 +1006,21 @@ export interface UpdateOrganizationMemberEmailBindResponse {
     RequestId?: string;
 }
 /**
- * DeleteOrganizationMembersPolicy返回参数结构体
+ * AddOrganizationNode请求参数结构体
  */
-export interface DeleteOrganizationMembersPolicyResponse {
+export interface AddOrganizationNodeRequest {
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     * 父节点ID。可以调用DescribeOrganizationNodes获取
      */
-    RequestId?: string;
+    ParentNodeId: number;
+    /**
+     * 节点名称。最大长度为40个字符，支持英文字母、数字、汉字、符号+@、&._[]-
+     */
+    Name: string;
+    /**
+     * 备注。
+     */
+    Remark?: string;
 }
 /**
  * DescribeOrganizationMemberAuthIdentities返回参数结构体
@@ -1196,6 +1181,15 @@ export interface DescribeOrganizationFinancialByMemberResponse {
     RequestId?: string;
 }
 /**
+ * DeleteOrganization返回参数结构体
+ */
+export interface DeleteOrganizationResponse {
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * DescribeOrganizationMemberAuthAccounts返回参数结构体
  */
 export interface DescribeOrganizationMemberAuthAccountsResponse {
@@ -1215,21 +1209,13 @@ export interface DescribeOrganizationMemberAuthAccountsResponse {
     RequestId?: string;
 }
 /**
- * AddOrganizationNode请求参数结构体
+ * DeleteOrganizationMembersPolicy返回参数结构体
  */
-export interface AddOrganizationNodeRequest {
+export interface DeleteOrganizationMembersPolicyResponse {
     /**
-     * 父节点ID。可以调用DescribeOrganizationNodes获取
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
-    ParentNodeId: number;
-    /**
-     * 节点名称。最大长度为40个字符，支持英文字母、数字、汉字、符号+@、&._[]-
-     */
-    Name: string;
-    /**
-     * 备注。
-     */
-    Remark?: string;
+    RequestId?: string;
 }
 /**
  * 组织成员可授权的身份
@@ -1385,6 +1371,41 @@ export interface MemberIdentity {
     IdentityAliasName: string;
 }
 /**
+ * 组织身份
+ */
+export interface OrgIdentity {
+    /**
+     * 身份ID。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IdentityId: number;
+    /**
+     * 身份名称。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IdentityAliasName: string;
+    /**
+     * 描述。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Description: string;
+    /**
+     * 身份策略。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IdentityPolicy: Array<IdentityPolicy>;
+    /**
+     * 身份类型。 1-预设、 2-自定义
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IdentityType: number;
+    /**
+     * 更新时间。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    UpdateTime: string;
+}
+/**
  * DeleteOrganizationMemberAuthIdentity返回参数结构体
  */
 export interface DeleteOrganizationMemberAuthIdentityResponse {
@@ -1452,4 +1473,17 @@ export interface OrgNode {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     UpdateTime: string;
+}
+/**
+ * DeleteOrganizationMemberAuthIdentity请求参数结构体
+ */
+export interface DeleteOrganizationMemberAuthIdentityRequest {
+    /**
+     * 成员uin。
+     */
+    MemberUin: number;
+    /**
+     * 身份Id。
+     */
+    IdentityId: number;
 }

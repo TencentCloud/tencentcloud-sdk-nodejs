@@ -220,6 +220,28 @@ export interface DatePoint {
 }
 
 /**
+ * DeleteSpecifyPrivateZoneVpc返回参数结构体
+ */
+export interface DeleteSpecifyPrivateZoneVpcResponse {
+  /**
+   * 私有域id
+   */
+  ZoneId?: string
+  /**
+   * 本次删除的VPC
+   */
+  VpcSet?: Array<VpcInfo>
+  /**
+   * 本次删除的关联账户的VPC
+   */
+  AccountVpcSet?: Array<AccountVpcInfo>
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeAccountVpcList返回参数结构体
  */
 export interface DescribeAccountVpcListResponse {
@@ -315,6 +337,28 @@ export interface PrivateZoneRecord {
 }
 
 /**
+ * AddSpecifyPrivateZoneVpc返回参数结构体
+ */
+export interface AddSpecifyPrivateZoneVpcResponse {
+  /**
+   * zone id
+   */
+  ZoneId?: string
+  /**
+   * 本次新增的vpc
+   */
+  VpcSet?: Array<VpcInfo>
+  /**
+   * 本次新增的关联账号vpc
+   */
+  AccountVpcSet?: Array<AccountVpcInfo>
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteEndPoint请求参数结构体
  */
 export interface DeleteEndPointRequest {
@@ -340,6 +384,24 @@ export interface AuditLogInfo {
    * 日志内容
    */
   Content: string
+}
+
+/**
+ * AddSpecifyPrivateZoneVpc请求参数结构体
+ */
+export interface AddSpecifyPrivateZoneVpcRequest {
+  /**
+   * 私有域id
+   */
+  ZoneId: string
+  /**
+   * 本次新增的vpc信息
+   */
+  VpcSet?: Array<VpcInfo>
+  /**
+   * 本次新增关联账户vpc信息
+   */
+  AccountVpcSet?: Array<AccountVpcInfo>
 }
 
 /**
@@ -578,21 +640,21 @@ export interface ModifyPrivateZoneResponse {
 }
 
 /**
- * DescribePrivateZoneList请求参数结构体
+ * DeleteSpecifyPrivateZoneVpc请求参数结构体
  */
-export interface DescribePrivateZoneListRequest {
+export interface DeleteSpecifyPrivateZoneVpcRequest {
   /**
-   * 分页偏移量，从0开始
+   * 私有域id
    */
-  Offset?: number
+  ZoneId: string
   /**
-   * 分页限制数目， 最大100，默认20
+   * 本次删除的VPC
    */
-  Limit?: number
+  VpcSet?: Array<VpcInfo>
   /**
-   * 过滤参数
+   * 本次删除的关联账户VPC
    */
-  Filters?: Array<Filter>
+  AccountVpcSet?: Array<AccountVpcInfo>
 }
 
 /**
@@ -1058,6 +1120,24 @@ export interface ModifyPrivateZoneRecordRequest {
    * 记录缓存时间，数值越小生效越快，取值1-86400s, 默认 600
    */
   TTL?: number
+}
+
+/**
+ * DescribePrivateZoneList请求参数结构体
+ */
+export interface DescribePrivateZoneListRequest {
+  /**
+   * 分页偏移量，从0开始
+   */
+  Offset?: number
+  /**
+   * 分页限制数目， 最大100，默认20
+   */
+  Limit?: number
+  /**
+   * 过滤参数
+   */
+  Filters?: Array<Filter>
 }
 
 /**

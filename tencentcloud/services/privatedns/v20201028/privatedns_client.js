@@ -82,6 +82,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribePrivateZoneRecordList", req, cb);
     }
     /**
+     * 追加与私有域关联的VPC
+     */
+    async AddSpecifyPrivateZoneVpc(req, cb) {
+        return this.request("AddSpecifyPrivateZoneVpc", req, cb);
+    }
+    /**
      * 修改私有域信息
      */
     async ModifyPrivateZone(req, cb) {
@@ -134,6 +140,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ModifyRecordsStatus(req, cb) {
         return this.request("ModifyRecordsStatus", req, cb);
+    }
+    /**
+     * 删除与私有域关联的VPC
+     */
+    async DeleteSpecifyPrivateZoneVpc(req, cb) {
+        return this.request("DeleteSpecifyPrivateZoneVpc", req, cb);
     }
     /**
      * 查询私有域解析开通状态

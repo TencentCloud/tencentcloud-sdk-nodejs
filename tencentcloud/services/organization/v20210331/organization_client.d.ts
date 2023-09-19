@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeOrganizationAuthNodeResponse, BindOrganizationMemberAuthAccountRequest, CreateOrganizationMemberAuthIdentityRequest, DeleteOrganizationMembersResponse, DescribeOrganizationFinancialByMemberRequest, DescribeOrganizationFinancialByMonthRequest, DescribeOrganizationMemberAuthIdentitiesRequest, AddOrganizationMemberEmailResponse, CreateOrganizationMemberAuthIdentityResponse, UpdateOrganizationNodeResponse, CreateOrganizationMemberPolicyRequest, DescribeOrganizationRequest, DescribeOrganizationNodesRequest, BindOrganizationMemberAuthAccountResponse, CreateOrganizationMemberResponse, MoveOrganizationNodeMembersRequest, ListOrganizationIdentityRequest, DescribeOrganizationMemberEmailBindResponse, DeleteOrganizationMembersRequest, DeleteOrganizationMemberAuthIdentityRequest, DescribeOrganizationMemberPoliciesResponse, DeleteOrganizationNodesRequest, AddOrganizationNodeResponse, DescribeOrganizationFinancialByMonthResponse, DescribeOrganizationFinancialByProductResponse, AddOrganizationMemberEmailRequest, DescribeOrganizationFinancialByProductRequest, ListOrganizationIdentityResponse, DescribeOrganizationNodesResponse, DeleteOrganizationMembersPolicyRequest, DescribeOrganizationMembersResponse, CreateOrganizationMemberPolicyResponse, CancelOrganizationMemberAuthAccountResponse, UpdateOrganizationMemberRequest, DescribeOrganizationResponse, DescribeOrganizationMemberPoliciesRequest, DescribeOrganizationMemberEmailBindRequest, UpdateOrganizationMemberEmailBindResponse, DeleteOrganizationMembersPolicyResponse, DescribeOrganizationMemberAuthIdentitiesResponse, DescribeOrganizationAuthNodeRequest, UpdateOrganizationNodeRequest, DescribeOrganizationMemberAuthAccountsRequest, CancelOrganizationMemberAuthAccountRequest, UpdateOrganizationMemberResponse, DeleteOrganizationNodesResponse, DescribeOrganizationFinancialByMemberResponse, DescribeOrganizationMemberAuthAccountsResponse, AddOrganizationNodeRequest, CreateOrganizationMemberRequest, MoveOrganizationNodeMembersResponse, DescribeOrganizationMembersRequest, DeleteOrganizationMemberAuthIdentityResponse, UpdateOrganizationMemberEmailBindRequest } from "./organization_models";
+import { DescribeOrganizationAuthNodeResponse, BindOrganizationMemberAuthAccountRequest, CreateOrganizationMemberAuthIdentityRequest, DeleteOrganizationMembersResponse, DescribeOrganizationFinancialByMemberRequest, DescribeOrganizationFinancialByMonthRequest, DescribeOrganizationMemberAuthIdentitiesRequest, AddOrganizationMemberEmailResponse, CreateOrganizationMemberAuthIdentityResponse, UpdateOrganizationNodeResponse, CreateOrganizationMemberPolicyRequest, DescribeOrganizationRequest, DescribeOrganizationFinancialByMonthResponse, DescribeOrganizationNodesRequest, CreateOrganizationRequest, CreateOrganizationMemberResponse, MoveOrganizationNodeMembersRequest, ListOrganizationIdentityRequest, DescribeOrganizationMemberEmailBindResponse, DeleteOrganizationMembersRequest, CreateOrganizationResponse, DescribeOrganizationMemberPoliciesResponse, DeleteOrganizationNodesRequest, AddOrganizationNodeResponse, BindOrganizationMemberAuthAccountResponse, DescribeOrganizationFinancialByProductResponse, AddOrganizationMemberEmailRequest, DeleteOrganizationRequest, ListOrganizationIdentityResponse, DescribeOrganizationNodesResponse, DeleteOrganizationMembersPolicyRequest, DescribeOrganizationMembersResponse, CreateOrganizationMemberPolicyResponse, DescribeOrganizationFinancialByProductRequest, CancelOrganizationMemberAuthAccountResponse, UpdateOrganizationMemberRequest, DescribeOrganizationResponse, DescribeOrganizationMemberPoliciesRequest, DescribeOrganizationMemberEmailBindRequest, UpdateOrganizationMemberEmailBindResponse, AddOrganizationNodeRequest, DescribeOrganizationMemberAuthIdentitiesResponse, DescribeOrganizationAuthNodeRequest, UpdateOrganizationNodeRequest, DescribeOrganizationMemberAuthAccountsRequest, CancelOrganizationMemberAuthAccountRequest, UpdateOrganizationMemberResponse, DeleteOrganizationNodesResponse, DescribeOrganizationFinancialByMemberResponse, DeleteOrganizationResponse, DescribeOrganizationMemberAuthAccountsResponse, DeleteOrganizationMembersPolicyResponse, CreateOrganizationMemberRequest, MoveOrganizationNodeMembersResponse, DescribeOrganizationMembersRequest, DeleteOrganizationMemberAuthIdentityResponse, UpdateOrganizationMemberEmailBindRequest, DeleteOrganizationMemberAuthIdentityRequest } from "./organization_models";
 /**
  * organization client
  * @class
@@ -64,6 +64,10 @@ export declare class Client extends AbstractClient {
      */
     DescribeOrganizationMemberPolicies(req: DescribeOrganizationMemberPoliciesRequest, cb?: (error: string, rep: DescribeOrganizationMemberPoliciesResponse) => void): Promise<DescribeOrganizationMemberPoliciesResponse>;
     /**
+     * 删除企业组织
+     */
+    DeleteOrganization(req?: DeleteOrganizationRequest, cb?: (error: string, rep: DeleteOrganizationResponse) => void): Promise<DeleteOrganizationResponse>;
+    /**
      * 取消组织成员和组织管理员子账号的授权关系
 
      */
@@ -80,6 +84,10 @@ export declare class Client extends AbstractClient {
      * 移动成员到指定企业组织节点
      */
     MoveOrganizationNodeMembers(req: MoveOrganizationNodeMembersRequest, cb?: (error: string, rep: MoveOrganizationNodeMembersResponse) => void): Promise<MoveOrganizationNodeMembersResponse>;
+    /**
+     * 创建企业组织
+     */
+    CreateOrganization(req?: CreateOrganizationRequest, cb?: (error: string, rep: CreateOrganizationResponse) => void): Promise<CreateOrganizationResponse>;
     /**
      * 添加组织成员邮箱
      */
