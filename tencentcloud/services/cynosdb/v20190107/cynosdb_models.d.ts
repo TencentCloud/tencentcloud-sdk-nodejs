@@ -1514,25 +1514,30 @@ export interface DescribeBackupConfigResponse {
     /**
      * 表示全备开始时间，[0-24*3600]， 如0:00, 1:00, 2:00 分别为 0，3600， 7200
      */
-    BackupTimeBeg: number;
+    BackupTimeBeg?: number;
     /**
      * 表示全备开始时间，[0-24*3600]， 如0:00, 1:00, 2:00 分别为 0，3600， 7200
      */
-    BackupTimeEnd: number;
+    BackupTimeEnd?: number;
     /**
      * 表示保留备份时长, 单位秒，超过该时间将被清理, 七天表示为3600*24*7=604800
      */
-    ReserveDuration: number;
+    ReserveDuration?: number;
     /**
      * 备份频率，长度为7的数组，分别对应周一到周日的备份方式，full-全量备份，increment-增量备份
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    BackupFreq: Array<string>;
+    BackupFreq?: Array<string>;
     /**
      * 备份方式，logic-逻辑备份，snapshot-快照备份
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    BackupType: string;
+    BackupType?: string;
+    /**
+     * 跨地域逻辑备份配置修改时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    LogicCrossRegionsConfigUpdateTime?: string;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2802,54 +2807,54 @@ export interface BackupFileInfo {
     /**
      * 快照文件ID，已废弃，请使用BackupId
      */
-    SnapshotId: number;
+    SnapshotId?: number;
     /**
      * 备份文件名
      */
-    FileName: string;
+    FileName?: string;
     /**
      * 备份文件大小
      */
-    FileSize: number;
+    FileSize?: number;
     /**
      * 备份开始时间
      */
-    StartTime: string;
+    StartTime?: string;
     /**
      * 备份完成时间
      */
-    FinishTime: string;
+    FinishTime?: string;
     /**
      * 备份类型：snapshot，快照备份；logic，逻辑备份
      */
-    BackupType: string;
+    BackupType?: string;
     /**
      * 备份方式：auto，自动备份；manual，手动备份
      */
-    BackupMethod: string;
+    BackupMethod?: string;
     /**
      * 备份文件状态：success：备份成功；fail：备份失败；creating：备份文件创建中；deleting：备份文件删除中
      */
-    BackupStatus: string;
+    BackupStatus?: string;
     /**
      * 备份文件时间
      */
-    SnapshotTime: string;
+    SnapshotTime?: string;
     /**
      * 备份ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    BackupId: number;
+    BackupId?: number;
     /**
      * 快照类型，可选值：full，全量；increment，增量
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SnapShotType: string;
+    SnapShotType?: string;
     /**
      * 备份文件备注
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    BackupName: string;
+    BackupName?: string;
 }
 /**
  * mysql表权限
@@ -3042,6 +3047,14 @@ export interface DescribeBackupListRequest {
      * 快照备份Id列表
      */
     SnapshotIdList?: Array<number | bigint>;
+    /**
+     * 备份地域
+     */
+    BackupRegion?: string;
+    /**
+     * 是否跨地域备份
+     */
+    IsCrossRegionsBackup?: string;
 }
 /**
  * CloseProxy请求参数结构体
@@ -4816,7 +4829,7 @@ export interface CreateBackupResponse {
     /**
      * 异步任务流ID
      */
-    FlowId: number;
+    FlowId?: number;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -6381,11 +6394,11 @@ export interface DescribeBackupListResponse {
     /**
      * 总共备份文件个数
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 备份文件列表
      */
-    BackupList: Array<BackupFileInfo>;
+    BackupList?: Array<BackupFileInfo>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -6484,10 +6497,6 @@ export interface ModifyBackupConfigRequest {
      */
     ClusterId: string;
     /**
-     * 表示保留备份时长, 单位秒，超过该时间将被清理, 七天表示为3600*24*7=604800，最大为158112000
-     */
-    ReserveDuration: number;
-    /**
      * 表示全备开始时间，[0-24*3600]， 如0:00, 1:00, 2:00 分别为 0，3600， 7200
      */
     BackupTimeBeg?: number;
@@ -6496,6 +6505,10 @@ export interface ModifyBackupConfigRequest {
      */
     BackupTimeEnd?: number;
     /**
+     * 表示保留备份时长, 单位秒，超过该时间将被清理, 七天表示为3600*24*7=604800，最大为158112000
+     */
+    ReserveDuration?: number;
+    /**
      * 该参数目前不支持修改，无需填写。备份频率，长度为7的数组，分别对应周一到周日的备份方式，full-全量备份，increment-增量备份
      */
     BackupFreq?: Array<string>;
@@ -6503,6 +6516,14 @@ export interface ModifyBackupConfigRequest {
      * 该参数目前不支持修改，无需填写。备份方式，logic-逻辑备份，snapshot-快照备份
      */
     BackupType?: string;
+    /**
+     * 逻辑备份配置
+     */
+    LogicBackupConfig?: LogicBackupConfigInfo;
+    /**
+     * 是否删除自动逻辑备份
+     */
+    DeleteAutoLogicBackup?: boolean;
 }
 /**
  * ActivateInstance返回参数结构体
@@ -7013,6 +7034,41 @@ export interface ExportInstanceSlowQueriesResponse {
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * 逻辑备份配置信息
+ */
+export interface LogicBackupConfigInfo {
+    /**
+     * 是否开启自动逻辑备份
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    LogicBackupEnable?: string;
+    /**
+     * 自动逻辑备份开始时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    LogicBackupTimeBeg?: number;
+    /**
+     * 自动逻辑备份结束时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    LogicBackupTimeEnd?: number;
+    /**
+     * 自动逻辑备份保留时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    LogicReserveDuration?: number;
+    /**
+     * 是否开启跨地域逻辑备份
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    LogicCrossRegionsEnable?: string;
+    /**
+     * 逻辑备份所跨地域
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    LogicCrossRegions?: Array<string>;
 }
 /**
  * RefundResourcePackage返回参数结构体

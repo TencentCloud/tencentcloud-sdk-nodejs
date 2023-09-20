@@ -108,9 +108,9 @@ it("iss.v20230517.DescribeDomainRegion", async function () {
     }
 })
 
-it("iss.v20230517.ListOrganizationChannels", async function () {
+it("iss.v20230517.DescribeRecordSlice", async function () {
     try {
-       const data = await client.ListOrganizationChannels({})
+       const data = await client.DescribeRecordSlice({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -811,6 +811,16 @@ it("iss.v20230517.PlayRecord", async function () {
 it("iss.v20230517.AddRecordBackupTemplate", async function () {
     try {
        const data = await client.AddRecordBackupTemplate({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iss.v20230517.ListOrganizationChannels", async function () {
+    try {
+       const data = await client.ListOrganizationChannels({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

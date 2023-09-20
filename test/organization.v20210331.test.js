@@ -28,9 +28,9 @@ it("organization.v20210331.DescribeOrganizationMembers", async function () {
     }
 })
 
-it("organization.v20210331.UpdateOrganizationNode", async function () {
+it("organization.v20210331.QuitOrganization", async function () {
     try {
-       const data = await client.UpdateOrganizationNode({})
+       const data = await client.QuitOrganization({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -101,6 +101,16 @@ it("organization.v20210331.UpdateOrganizationMemberEmailBind", async function ()
 it("organization.v20210331.DescribeOrganizationMemberAuthIdentities", async function () {
     try {
        const data = await client.DescribeOrganizationMemberAuthIdentities({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("organization.v20210331.UpdateOrganizationNode", async function () {
+    try {
+       const data = await client.UpdateOrganizationNode({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

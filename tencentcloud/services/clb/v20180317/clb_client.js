@@ -35,6 +35,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("RegisterTargets", req, cb);
     }
     /**
+     * RegisterTargetsWithClassicalLB 接口用于绑定后端服务到传统型负载均衡。本接口为异步接口，接口返回成功后，需以返回的 RequestId 为入参，调用 DescribeTaskStatus 接口查询本次任务是否成功。
+     */
+    async RegisterTargetsWithClassicalLB(req, cb) {
+        return this.request("RegisterTargetsWithClassicalLB", req, cb);
+    }
+    /**
      * ModifyDomainAttributes接口用于修改负载均衡7层监听器转发规则的域名级别属性，如修改域名、修改DefaultServer、开启/关闭Http2、修改证书。
 本接口为异步接口，本接口返回成功后，需以返回的RequestId为入参，调用DescribeTaskStatus接口查询本次任务是否成功。
      */
@@ -54,10 +60,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeClassicalLBListeners", req, cb);
     }
     /**
-     * RegisterTargetsWithClassicalLB 接口用于绑定后端服务到传统型负载均衡。本接口为异步接口，接口返回成功后，需以返回的 RequestId 为入参，调用 DescribeTaskStatus 接口查询本次任务是否成功。
+     * InquiryPriceRefundLoadBalancer接口查询负载均衡退费价格。
      */
-    async RegisterTargetsWithClassicalLB(req, cb) {
-        return this.request("RegisterTargetsWithClassicalLB", req, cb);
+    async InquiryPriceRefundLoadBalancer(req, cb) {
+        return this.request("InquiryPriceRefundLoadBalancer", req, cb);
     }
     /**
      * 拉取配置绑定的 server 或 location，如果 domain 存在，结果将根据 domain 过滤。或拉取配置绑定的 loadbalancer。
@@ -91,6 +97,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DeleteListener(req, cb) {
         return this.request("DeleteListener", req, cb);
+    }
+    /**
+     * InquiryPriceModifyLoadBalancer接口修改负载均衡配置询价。
+     */
+    async InquiryPriceModifyLoadBalancer(req, cb) {
+        return this.request("InquiryPriceModifyLoadBalancer", req, cb);
     }
     /**
      * 绑定或解绑一个安全组到多个公网负载均衡实例。注意：内网负载均衡不支持绑定安全组。
@@ -158,6 +170,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteLoadBalancerListeners", req, cb);
     }
     /**
+     * InquiryPriceRenewLoadBalancer接口查询对负载均衡续费的价格，只支持预付费负载均衡续费。
+     */
+    async InquiryPriceRenewLoadBalancer(req, cb) {
+        return this.request("InquiryPriceRenewLoadBalancer", req, cb);
+    }
+    /**
      * 修改负载均衡转发规则上所绑定的云函数。
      */
     async ModifyFunctionTargets(req, cb) {
@@ -217,6 +235,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DeleteLoadBalancer(req, cb) {
         return this.request("DeleteLoadBalancer", req, cb);
+    }
+    /**
+     * InquiryPriceCreateLoadBalancer接口查询创建负载均衡的价格。
+     */
+    async InquiryPriceCreateLoadBalancer(req, cb) {
+        return this.request("InquiryPriceCreateLoadBalancer", req, cb);
     }
     /**
      * 查询用户在当前地域支持可用区列表和资源列表。

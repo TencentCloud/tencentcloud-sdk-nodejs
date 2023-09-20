@@ -54,6 +54,7 @@ import {
   CreateDeviceGroupResponse,
   DescribeUserGroupMembersRequest,
   OperationEvent,
+  ModifyCmdTemplateRequest,
   SessionResult,
   CreateUserResponse,
   DescribeAssetSyncStatusResponse,
@@ -109,6 +110,7 @@ import {
   ModifyUserResponse,
   DescribeCmdTemplatesResponse,
   CreateDeviceAccountRequest,
+  ModifyCmdTemplateResponse,
   AddDeviceGroupMembersResponse,
   DeleteCmdTemplatesRequest,
   DescribeUserGroupsResponse,
@@ -173,6 +175,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDeviceGroupMembersResponse) => void
   ): Promise<DescribeDeviceGroupMembersResponse> {
     return this.request("DescribeDeviceGroupMembers", req, cb)
+  }
+
+  /**
+   * 修改高危命令模板
+   */
+  async ModifyCmdTemplate(
+    req: ModifyCmdTemplateRequest,
+    cb?: (error: string, rep: ModifyCmdTemplateResponse) => void
+  ): Promise<ModifyCmdTemplateResponse> {
+    return this.request("ModifyCmdTemplate", req, cb)
   }
 
   /**

@@ -1303,7 +1303,7 @@ export interface CreateDiagnoseUrlResponse {
     /**
      * 系统生成的诊断链接，一个诊断链接最多可访问10次，有效期为24h。
      */
-    DiagnoseLink: string;
+    DiagnoseLink?: string;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1668,12 +1668,12 @@ export interface EnableCachesResponse {
      * 结果列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CacheOptResult: CacheOptResult;
+    CacheOptResult?: CacheOptResult;
     /**
      * 任务ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TaskId: string;
+    TaskId?: string;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1733,12 +1733,12 @@ export interface DisableCachesResponse {
      * 提交结果
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CacheOptResult: CacheOptResult;
+    CacheOptResult?: CacheOptResult;
     /**
      * 任务ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TaskId: string;
+    TaskId?: string;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -3773,11 +3773,11 @@ export interface DescribeCdnOriginIpResponse {
     /**
      * 回源节点IP详情。
      */
-    Ips: Array<OriginIp>;
+    Ips?: Array<OriginIp>;
     /**
      * 回源节点IP总个数。
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -4531,7 +4531,7 @@ export interface ListDiagnoseReportResponse {
     /**
      * 诊断信息。
      */
-    Data: Array<DiagnoseInfo>;
+    Data?: Array<DiagnoseInfo>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -6357,12 +6357,12 @@ export interface GetDisableRecordsResponse {
      * 封禁历史记录
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    UrlRecordList: Array<UrlRecord>;
+    UrlRecordList?: Array<UrlRecord>;
     /**
      * 任务总数，用于分页
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -7409,40 +7409,40 @@ export interface DescribeDiagnoseReportResponse {
     /**
      * 诊断报告基础信息
      */
-    BaskInfo: DiagnoseData;
+    BaskInfo?: DiagnoseData;
     /**
      * CNAME检测信息
      */
-    CnameInfo: DiagnoseData;
+    CnameInfo?: DiagnoseData;
     /**
      * 客户端检测信息
      */
-    ClientInfo: DiagnoseData;
+    ClientInfo?: DiagnoseData;
     /**
      * DNS检测信息
      */
-    DnsInfo: DiagnoseData;
+    DnsInfo?: DiagnoseData;
     /**
      * 网络检测信息
      */
-    NetworkInfo: DiagnoseData;
+    NetworkInfo?: DiagnoseData;
     /**
      * 边缘节点检测信息
      */
-    OcNodeInfo: DiagnoseData;
+    OcNodeInfo?: DiagnoseData;
     /**
      * 中间源节点检测信息
      */
-    MidNodeInfo: DiagnoseData;
+    MidNodeInfo?: DiagnoseData;
     /**
      * 源站检测信息
      */
-    OriginInfo: DiagnoseData;
+    OriginInfo?: DiagnoseData;
     /**
      * 刷新检测信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    PurgeInfo: DiagnoseData;
+    PurgeInfo?: DiagnoseData;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */

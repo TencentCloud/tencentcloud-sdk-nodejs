@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { CreateAccessExportRequest, ModifyHostRequest, DescribeAntiInfoLeakRulesResponse, DescribeIpHitItemsResponse, ModifyAntiInfoLeakRulesResponse, DescribeUserCdcClbWafRegionsRequest, DeleteAttackDownloadRecordResponse, AddAntiFakeUrlRequest, DescribeFlowTrendRequest, DescribeWafAutoDenyStatusRequest, AddCustomWhiteRuleResponse, SearchAttackLogRequest, DescribeCustomWhiteRuleResponse, ModifyInstanceNameRequest, DescribePeakValueResponse, DescribeCiphersDetailRequest, AddDomainWhiteRuleResponse, DescribeHostLimitRequest, DescribeIpAccessControlResponse, DescribeAntiFakeUrlRequest, DescribeCustomRuleListRequest, ModifyDomainWhiteRuleRequest, DescribeTlsVersionResponse, DescribeHostsResponse, DescribePeakPointsRequest, DescribeAccessIndexRequest, ModifyInstanceQpsLimitRequest, DeleteHostRequest, ModifyInstanceNameResponse, UpsertSessionResponse, DescribeDomainVerifyResultResponse, DeleteSessionRequest, DescribeWafAutoDenyRulesRequest, UpsertIpAccessControlRequest, GenerateDealsAndPayNewRequest, RefreshAccessCheckResultRequest, DescribeUserClbWafRegionsRequest, AddAntiFakeUrlResponse, ModifyHostResponse, DeleteCustomWhiteRuleResponse, AddCustomRuleResponse, DescribeFlowTrendResponse, GetAttackDownloadRecordsRequest, ModifyDomainIpv6StatusRequest, ModifyAntiInfoLeakRuleStatusResponse, GetAttackTotalCountResponse, DescribeAntiInfoLeakageRulesResponse, ModifySpartaProtectionResponse, ModifyHostFlowModeRequest, UpsertCCRuleResponse, DeleteDownloadRecordRequest, DescribeUserCdcClbWafRegionsResponse, GetAttackHistogramRequest, DeleteAccessExportResponse, ModifyProtectionStatusRequest, DescribeAccessExportsRequest, ModifyApiAnalyzeStatusResponse, DescribeCustomWhiteRuleRequest, DeleteAntiFakeUrlResponse, AddAntiInfoLeakRulesResponse, DescribeUserClbWafRegionsResponse, ModifyAntiFakeUrlStatusRequest, DeleteCustomWhiteRuleRequest, ModifyHostModeResponse, ModifyInstanceRenewFlagResponse, DescribeCCRuleListRequest, ModifyProtectionStatusResponse, DescribeAutoDenyIPRequest, ModifyWafAutoDenyStatusRequest, DescribeCustomRuleListResponse, ModifyDomainsCLSStatusResponse, SwitchDomainRulesRequest, ModifyAccessPeriodResponse, DescribeVipInfoRequest, GetAttackHistogramResponse, GetInstanceQpsLimitRequest, DeleteSpartaProtectionResponse, DescribeAutoDenyIPResponse, SwitchDomainRulesResponse, SearchAccessLogResponse, DescribeAntiInfoLeakageRulesRequest, CreateHostResponse, DeleteHostResponse, FreshAntiFakeUrlResponse, ModifyBotStatusRequest, DeleteSpartaProtectionRequest, DescribeAntiFakeRulesResponse, AddAntiInfoLeakRulesRequest, CreateHostRequest, FreshAntiFakeUrlRequest, DescribeFindDomainListResponse, DescribeWafInfoRequest, AddSpartaProtectionRequest, GetInstanceQpsLimitResponse, PostAttackDownloadTaskRequest, ModifyCustomWhiteRuleResponse, ModifyCustomWhiteRuleStatusResponse, DescribeSessionRequest, ModifyAreaBanStatusRequest, DescribePolicyStatusRequest, DescribePortsResponse, GetAttackTotalCountRequest, DescribeAccessFastAnalysisRequest, DeleteIpAccessControlRequest, ModifyDomainIpv6StatusResponse, DeleteDomainWhiteRulesResponse, DescribeAttackOverviewResponse, DescribeDomainCountInfoResponse, ModifyWafAutoDenyStatusResponse, ModifyWafThreatenIntelligenceRequest, DescribeAntiInfoLeakRulesRequest, DescribePortsRequest, ModifyHostModeRequest, DescribeWafAutoDenyStatusResponse, ModifyAntiFakeUrlRequest, DescribeDomainDetailsClbRequest, DeleteDomainWhiteRulesRequest, DescribeDomainVerifyResultRequest, DescribeTlsVersionRequest, DescribeCiphersDetailResponse, ModifyAntiInfoLeakRulesRequest, DescribeHostLimitResponse, PostAttackDownloadTaskResponse, ModifySpartaProtectionModeResponse, ModifyBotStatusResponse, DescribeDomainDetailsSaasRequest, ModifyCustomRuleStatusResponse, AddSpartaProtectionResponse, DescribeUserDomainInfoRequest, ModifyCustomRuleRequest, CreateAccessExportResponse, GenerateDealsAndPayNewResponse, DescribeDomainWhiteRulesRequest, ModifyHostStatusResponse, ModifyCustomRuleStatusRequest, DescribePeakPointsResponse, DeleteDownloadRecordResponse, DescribeHostRequest, ModifyAccessPeriodRequest, DescribeAttackOverviewRequest, DescribePeakValueRequest, DescribeDomainDetailsClbResponse, ModifyAntiFakeUrlResponse, ModifyWafAutoDenyRulesResponse, DescribeBatchIpAccessControlRequest, DescribePolicyStatusResponse, DescribeInstancesRequest, DeleteIpAccessControlResponse, ModifyCustomWhiteRuleRequest, DescribeWafInfoResponse, ModifyInstanceRenewFlagRequest, DescribeBatchIpAccessControlResponse, DescribeDomainDetailsSaasResponse, ModifyApiAnalyzeStatusRequest, AddCustomRuleRequest, DescribeWafAutoDenyRulesResponse, DeleteCCRuleRequest, ModifyAreaBanStatusResponse, DeleteCustomRuleRequest, DescribeInstancesResponse, DescribeCCRuleResponse, ModifyDomainWhiteRuleResponse, DescribeAntiFakeUrlResponse, DescribeAccessFastAnalysisResponse, DescribeDomainsResponse, DescribeFindDomainListRequest, ModifyAntiFakeUrlStatusResponse, DescribeHostsRequest, ModifyInstanceElasticModeRequest, UpsertCCRuleRequest, ModifyCustomWhiteRuleStatusRequest, DeleteAntiFakeUrlRequest, ModifyInstanceQpsLimitResponse, SearchAttackLogResponse, DeleteAntiInfoLeakRuleRequest, ModifyInstanceElasticModeResponse, DescribeIpHitItemsRequest, DescribeVipInfoResponse, DescribeCCRuleRequest, ModifyDomainsCLSStatusRequest, DescribeCCRuleListResponse, DescribeRuleLimitRequest, DescribeDomainCountInfoRequest, GetAttackDownloadRecordsResponse, DeleteAccessExportRequest, ModifySpartaProtectionRequest, DescribeIpAccessControlRequest, DescribeDomainWhiteRulesResponse, DescribeWafThreatenIntelligenceResponse, DescribeAccessHistogramResponse, ModifyHostFlowModeResponse, DescribeSessionResponse, DeleteAttackDownloadRecordRequest, DescribeAntiFakeRulesRequest, AddCustomWhiteRuleRequest, AddDomainWhiteRuleRequest, UpsertIpAccessControlResponse, DeleteAntiInfoLeakRuleResponse, DescribeAccessHistogramRequest, DeleteSessionResponse, UpsertSessionRequest, DescribeRuleLimitResponse, DescribeWafThreatenIntelligenceRequest, DescribeAccessIndexResponse, DescribeAccessExportsResponse, DeleteCustomRuleResponse, ModifyWafAutoDenyRulesRequest, DescribeHostResponse, DeleteCCRuleResponse, SearchAccessLogRequest, ModifyAntiInfoLeakRuleStatusRequest, ModifySpartaProtectionModeRequest, DescribeDomainsRequest, ModifyWafThreatenIntelligenceResponse, DescribeUserDomainInfoResponse, ModifyHostStatusRequest, ModifyCustomRuleResponse, RefreshAccessCheckResultResponse } from "./waf_models";
+import { CreateAccessExportRequest, ModifyHostRequest, DescribeAntiInfoLeakRulesResponse, DescribeIpHitItemsResponse, ModifyAntiInfoLeakRulesResponse, DescribeUserCdcClbWafRegionsRequest, DeleteAttackDownloadRecordResponse, AddAntiFakeUrlRequest, DescribeFlowTrendRequest, DescribeWafAutoDenyStatusRequest, AddCustomWhiteRuleResponse, SearchAttackLogRequest, DescribeCustomWhiteRuleResponse, SwitchElasticModeRequest, ModifyInstanceNameRequest, DescribePeakValueResponse, DescribeCiphersDetailRequest, AddDomainWhiteRuleResponse, DescribeHostLimitRequest, DescribeIpAccessControlResponse, DescribeAntiFakeUrlRequest, DescribeCustomRuleListRequest, ModifyDomainWhiteRuleRequest, DescribeTlsVersionResponse, DescribeHostsResponse, DescribePeakPointsRequest, DescribeAccessIndexRequest, ModifyInstanceQpsLimitRequest, DeleteHostRequest, ModifyInstanceNameResponse, UpsertSessionResponse, DescribeDomainVerifyResultResponse, DeleteSessionRequest, DescribeWafAutoDenyRulesRequest, UpsertIpAccessControlRequest, GenerateDealsAndPayNewRequest, RefreshAccessCheckResultRequest, DescribeUserClbWafRegionsRequest, AddAntiFakeUrlResponse, ModifyHostResponse, DeleteCustomWhiteRuleResponse, AddCustomRuleResponse, DescribeFlowTrendResponse, GetAttackDownloadRecordsRequest, ModifyDomainIpv6StatusRequest, ModifyAntiInfoLeakRuleStatusResponse, GetAttackTotalCountResponse, DescribeAntiInfoLeakageRulesResponse, ModifySpartaProtectionResponse, ModifyHostFlowModeRequest, UpsertCCRuleResponse, DeleteDownloadRecordRequest, DescribeUserCdcClbWafRegionsResponse, GetAttackHistogramRequest, DeleteAccessExportResponse, ModifyProtectionStatusRequest, DescribeAccessExportsRequest, ModifyApiAnalyzeStatusResponse, DescribeCustomWhiteRuleRequest, DeleteAntiFakeUrlResponse, AddAntiInfoLeakRulesResponse, DescribeUserClbWafRegionsResponse, ModifyAntiFakeUrlStatusRequest, DeleteCustomWhiteRuleRequest, ModifyHostModeResponse, ModifyInstanceRenewFlagResponse, DescribeCCRuleListRequest, ModifyProtectionStatusResponse, DescribeAutoDenyIPRequest, ModifyWafAutoDenyStatusRequest, DescribeCustomRuleListResponse, ModifyDomainsCLSStatusResponse, SwitchDomainRulesRequest, ModifyAccessPeriodResponse, DescribeVipInfoRequest, GetAttackHistogramResponse, GetInstanceQpsLimitRequest, DeleteSpartaProtectionResponse, DescribeAutoDenyIPResponse, SwitchDomainRulesResponse, SearchAccessLogResponse, DescribeAntiInfoLeakageRulesRequest, CreateHostResponse, DeleteHostResponse, SwitchElasticModeResponse, FreshAntiFakeUrlResponse, ModifyBotStatusRequest, DeleteSpartaProtectionRequest, DescribeAntiFakeRulesResponse, AddAntiInfoLeakRulesRequest, CreateHostRequest, FreshAntiFakeUrlRequest, DescribeFindDomainListResponse, DescribeWafInfoRequest, AddSpartaProtectionRequest, GetInstanceQpsLimitResponse, PostAttackDownloadTaskRequest, ModifyCustomWhiteRuleResponse, ModifyCustomWhiteRuleStatusResponse, DescribeSessionRequest, ModifyAreaBanStatusRequest, DescribePolicyStatusRequest, DescribePortsResponse, GetAttackTotalCountRequest, DescribeAccessFastAnalysisRequest, DeleteIpAccessControlRequest, ModifyDomainIpv6StatusResponse, DeleteDomainWhiteRulesResponse, DescribeAttackOverviewResponse, DescribeDomainCountInfoResponse, ModifyWafAutoDenyStatusResponse, ModifyWafThreatenIntelligenceRequest, DescribeAntiInfoLeakRulesRequest, DescribePortsRequest, ModifyHostModeRequest, DescribeWafAutoDenyStatusResponse, ModifyAntiFakeUrlRequest, DescribeDomainDetailsClbRequest, DeleteDomainWhiteRulesRequest, DescribeDomainVerifyResultRequest, DescribeTlsVersionRequest, DescribeCiphersDetailResponse, ModifyAntiInfoLeakRulesRequest, DescribeHostLimitResponse, PostAttackDownloadTaskResponse, ModifySpartaProtectionModeResponse, ModifyBotStatusResponse, DescribeDomainDetailsSaasRequest, ModifyCustomRuleStatusResponse, AddSpartaProtectionResponse, DescribeUserDomainInfoRequest, ModifyCustomRuleRequest, CreateAccessExportResponse, GenerateDealsAndPayNewResponse, DescribeDomainWhiteRulesRequest, ModifyHostStatusResponse, ModifyCustomRuleStatusRequest, DescribePeakPointsResponse, DeleteDownloadRecordResponse, DescribeHostRequest, ModifyAccessPeriodRequest, DescribeAttackOverviewRequest, DescribePeakValueRequest, DescribeDomainDetailsClbResponse, ModifyAntiFakeUrlResponse, ModifyWafAutoDenyRulesResponse, DescribeBatchIpAccessControlRequest, DescribePolicyStatusResponse, DescribeInstancesRequest, DeleteIpAccessControlResponse, ModifyCustomWhiteRuleRequest, DescribeWafInfoResponse, ModifyInstanceRenewFlagRequest, DescribeBatchIpAccessControlResponse, DescribeDomainDetailsSaasResponse, ModifyApiAnalyzeStatusRequest, AddCustomRuleRequest, DescribeWafAutoDenyRulesResponse, DeleteCCRuleRequest, ModifyAreaBanStatusResponse, DeleteCustomRuleRequest, DescribeInstancesResponse, DescribeCCRuleResponse, ModifyDomainWhiteRuleResponse, DescribeAntiFakeUrlResponse, DescribeAccessFastAnalysisResponse, DescribeDomainsResponse, DescribeFindDomainListRequest, ModifyAntiFakeUrlStatusResponse, DescribeHostsRequest, ModifyInstanceElasticModeRequest, UpsertCCRuleRequest, ModifyCustomWhiteRuleStatusRequest, DeleteAntiFakeUrlRequest, ModifyInstanceQpsLimitResponse, SearchAttackLogResponse, DeleteAntiInfoLeakRuleRequest, ModifyInstanceElasticModeResponse, DescribeIpHitItemsRequest, DescribeVipInfoResponse, DescribeCCRuleRequest, ModifyDomainsCLSStatusRequest, DescribeCCRuleListResponse, DescribeRuleLimitRequest, DescribeDomainCountInfoRequest, GetAttackDownloadRecordsResponse, DeleteAccessExportRequest, ModifySpartaProtectionRequest, DescribeIpAccessControlRequest, DescribeDomainWhiteRulesResponse, DescribeWafThreatenIntelligenceResponse, DescribeAccessHistogramResponse, ModifyHostFlowModeResponse, DescribeSessionResponse, DeleteAttackDownloadRecordRequest, DescribeAntiFakeRulesRequest, AddCustomWhiteRuleRequest, AddDomainWhiteRuleRequest, UpsertIpAccessControlResponse, DeleteAntiInfoLeakRuleResponse, DescribeAccessHistogramRequest, DeleteSessionResponse, UpsertSessionRequest, DescribeRuleLimitResponse, DescribeWafThreatenIntelligenceRequest, DescribeAccessIndexResponse, DescribeAccessExportsResponse, DeleteCustomRuleResponse, ModifyWafAutoDenyRulesRequest, DescribeHostResponse, DeleteCCRuleResponse, SearchAccessLogRequest, ModifyAntiInfoLeakRuleStatusRequest, ModifySpartaProtectionModeRequest, DescribeDomainsRequest, ModifyWafThreatenIntelligenceResponse, DescribeUserDomainInfoResponse, ModifyHostStatusRequest, ModifyCustomRuleResponse, RefreshAccessCheckResultResponse } from "./waf_models";
 /**
  * waf client
  * @class
@@ -8,7 +8,7 @@ import { CreateAccessExportRequest, ModifyHostRequest, DescribeAntiInfoLeakRules
 export declare class Client extends AbstractClient {
     constructor(clientConfig: ClientConfig);
     /**
-     * 获取一个clb域名详情
+     * 获取一个clbwaf域名详情
      */
     DescribeDomainDetailsClb(req: DescribeDomainDetailsClbRequest, cb?: (error: string, rep: DescribeDomainDetailsClbResponse) => void): Promise<DescribeDomainDetailsClbResponse>;
     /**
@@ -182,11 +182,15 @@ export declare class Client extends AbstractClient {
      */
     ModifyCustomWhiteRule(req: ModifyCustomWhiteRuleRequest, cb?: (error: string, rep: ModifyCustomWhiteRuleResponse) => void): Promise<ModifyCustomWhiteRuleResponse>;
     /**
+     * 切换弹性的开关
+     */
+    SwitchElasticMode(req: SwitchElasticModeRequest, cb?: (error: string, rep: SwitchElasticModeResponse) => void): Promise<SwitchElasticModeResponse>;
+    /**
      * 修改实例的自动续费开关
      */
     ModifyInstanceRenewFlag(req: ModifyInstanceRenewFlagRequest, cb?: (error: string, rep: ModifyInstanceRenewFlagResponse) => void): Promise<ModifyInstanceRenewFlagResponse>;
     /**
-     * 查询单个saas域名详情
+     * 查询单个saaswaf域名详情
      */
     DescribeDomainDetailsSaas(req: DescribeDomainDetailsSaasRequest, cb?: (error: string, rep: DescribeDomainDetailsSaasResponse) => void): Promise<DescribeDomainDetailsSaasResponse>;
     /**
@@ -225,7 +229,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeHosts(req: DescribeHostsRequest, cb?: (error: string, rep: DescribeHostsResponse) => void): Promise<DescribeHostsResponse>;
     /**
-     * 添加Spart防护域名
+     * 添加SaaS型WAF防护域名
      */
     AddSpartaProtection(req: AddSpartaProtectionRequest, cb?: (error: string, rep: AddSpartaProtectionResponse) => void): Promise<AddSpartaProtectionResponse>;
     /**
@@ -249,7 +253,7 @@ export declare class Client extends AbstractClient {
      */
     ModifyProtectionStatus(req: ModifyProtectionStatusRequest, cb?: (error: string, rep: ModifyProtectionStatusResponse) => void): Promise<ModifyProtectionStatusResponse>;
     /**
-     * 查询加密套件信息
+     * Saas型WAF接入查询加密套件信息
      */
     DescribeCiphersDetail(req?: DescribeCiphersDetailRequest, cb?: (error: string, rep: DescribeCiphersDetailResponse) => void): Promise<DescribeCiphersDetailResponse>;
     /**
@@ -309,7 +313,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeDomainCountInfo(req?: DescribeDomainCountInfoRequest, cb?: (error: string, rep: DescribeDomainCountInfoResponse) => void): Promise<DescribeDomainCountInfoResponse>;
     /**
-     * SAASWAF删除防护域名
+     * Saas型WAF删除防护域名
      */
     DeleteSpartaProtection(req: DeleteSpartaProtectionRequest, cb?: (error: string, rep: DeleteSpartaProtectionResponse) => void): Promise<DeleteSpartaProtectionResponse>;
     /**
@@ -409,7 +413,7 @@ export declare class Client extends AbstractClient {
      */
     ModifyCustomWhiteRuleStatus(req: ModifyCustomWhiteRuleStatusRequest, cb?: (error: string, rep: ModifyCustomWhiteRuleStatusResponse) => void): Promise<ModifyCustomWhiteRuleStatusResponse>;
     /**
-     * 获取非标端口列表
+     * 获取Saas型WAF防护端口列表
      */
     DescribePorts(req: DescribePortsRequest, cb?: (error: string, rep: DescribePortsResponse) => void): Promise<DescribePortsResponse>;
     /**
@@ -433,7 +437,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeCCRuleList(req?: DescribeCCRuleListRequest, cb?: (error: string, rep: DescribeCCRuleListResponse) => void): Promise<DescribeCCRuleListResponse>;
     /**
-     * clb-waf中添加防护的域名
+     * clb-waf中添加防护域名
      */
     CreateHost(req: CreateHostRequest, cb?: (error: string, rep: CreateHostResponse) => void): Promise<CreateHostResponse>;
     /**
@@ -449,7 +453,7 @@ export declare class Client extends AbstractClient {
      */
     AddDomainWhiteRule(req: AddDomainWhiteRuleRequest, cb?: (error: string, rep: AddDomainWhiteRuleResponse) => void): Promise<AddDomainWhiteRuleResponse>;
     /**
-     * 修改ipv6开关
+     * 切换ipv6开关
      */
     ModifyDomainIpv6Status(req: ModifyDomainIpv6StatusRequest, cb?: (error: string, rep: ModifyDomainIpv6StatusResponse) => void): Promise<ModifyDomainIpv6StatusResponse>;
 }

@@ -1190,13 +1190,14 @@ export interface TerminateDisksRequest {
  */
 export interface CdcSize {
     /**
-     * 独享集群的可用容量大小，单位GiB
-     */
-    DiskAavilable: number;
-    /**
      * 独享集群的总容量大小，单位GiB
      */
-    DiskTotal: number;
+    DiskTotal?: number;
+    /**
+     * 独享集群的可用容量大小，单位GiB
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DiskAvailable?: number;
 }
 /**
  * DescribeInstancesDiskNum返回参数结构体

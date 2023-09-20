@@ -178,6 +178,26 @@ it("cwp.v20180228.DescribeBaselineStrategyDetail", async function () {
     }
 })
 
+it("cwp.v20180228.DescribeSecurityBroadcasts", async function () {
+    try {
+       const data = await client.DescribeSecurityBroadcasts({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cwp.v20180228.DescribeAttackEvents", async function () {
+    try {
+       const data = await client.DescribeAttackEvents({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cwp.v20180228.DescribeAssetWebAppPluginList", async function () {
     try {
        const data = await client.DescribeAssetWebAppPluginList({})
@@ -2078,6 +2098,16 @@ it("cwp.v20180228.DescribeBaselineDetectOverview", async function () {
     }
 })
 
+it("cwp.v20180228.DescribeMachineRiskCnt", async function () {
+    try {
+       const data = await client.DescribeMachineRiskCnt({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cwp.v20180228.DescribeBaselineItemDetectList", async function () {
     try {
        const data = await client.DescribeBaselineItemDetectList({})
@@ -2611,6 +2641,16 @@ it("cwp.v20180228.DescribeAssetInfo", async function () {
 it("cwp.v20180228.DeleteWebPageEventLog", async function () {
     try {
        const data = await client.DeleteWebPageEventLog({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cwp.v20180228.ModifyLicenseOrder", async function () {
+    try {
+       const data = await client.ModifyLicenseOrder({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

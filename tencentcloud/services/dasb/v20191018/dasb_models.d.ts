@@ -813,6 +813,28 @@ export interface OperationEvent {
     Result: number;
 }
 /**
+ * ModifyCmdTemplate请求参数结构体
+ */
+export interface ModifyCmdTemplateRequest {
+    /**
+     * 模板名，最长32字符，不能包含空白字符
+     */
+    Name: string;
+    /**
+     * 命令列表，\n分隔，最长32768字节
+     */
+    CmdList: string;
+    /**
+     * 命令模板ID
+     */
+    Id: number;
+    /**
+     * CmdList字段前端是否base64传值。
+  0：否，1：是
+     */
+    Encoding?: number;
+}
+/**
  * 搜索字符或图形会话时返回的SessionResul结构体
  */
 export interface SessionResult {
@@ -2161,6 +2183,15 @@ export interface CreateDeviceAccountRequest {
      * 账号名
      */
     Account: string;
+}
+/**
+ * ModifyCmdTemplate返回参数结构体
+ */
+export interface ModifyCmdTemplateResponse {
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * AddDeviceGroupMembers返回参数结构体

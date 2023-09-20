@@ -416,6 +416,15 @@ export interface MoveOrganizationNodeMembersRequest {
     MemberUin: Array<number | bigint>;
 }
 /**
+ * QuitOrganization返回参数结构体
+ */
+export interface QuitOrganizationResponse {
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * ListOrganizationIdentity请求参数结构体
  */
 export interface ListOrganizationIdentityRequest {
@@ -965,6 +974,15 @@ export interface DescribeOrganizationResponse {
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * QuitOrganization请求参数结构体
+ */
+export interface QuitOrganizationRequest {
+    /**
+     * 企业组织ID
+     */
+    OrgId: number;
 }
 /**
  * DescribeOrganizationMemberPolicies请求参数结构体

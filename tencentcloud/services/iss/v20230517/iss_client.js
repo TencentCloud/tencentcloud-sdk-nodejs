@@ -82,10 +82,11 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDomainRegion", req, cb);
     }
     /**
-     * 用于查询组织目录下的通道列表
+     * 平台支持将数据以TS切片的形式存入客户自有COS桶，该接口用于支持客户快捷查询切片信息列表
+（注意：只支持标准存储类型的查询）
      */
-    async ListOrganizationChannels(req, cb) {
-        return this.request("ListOrganizationChannels", req, cb);
+    async DescribeRecordSlice(req, cb) {
+        return this.request("DescribeRecordSlice", req, cb);
     }
     /**
      * 用于查询网关接入协议。
@@ -509,6 +510,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async AddRecordBackupTemplate(req, cb) {
         return this.request("AddRecordBackupTemplate", req, cb);
+    }
+    /**
+     * 用于查询组织目录下的通道列表
+     */
+    async ListOrganizationChannels(req, cb) {
+        return this.request("ListOrganizationChannels", req, cb);
     }
 }
 exports.Client = Client;

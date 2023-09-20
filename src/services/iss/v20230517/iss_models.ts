@@ -3337,6 +3337,24 @@ export interface DescribeGatewayVersionRequest {
 }
 
 /**
+ * DescribeRecordSlice请求参数结构体
+ */
+export interface DescribeRecordSliceRequest {
+  /**
+   * 通道ID
+   */
+  ChannelId: string
+  /**
+   * 检索开始时间，UTC秒数，例如：1662114146，开始和结束时间段最长为一天，且不能跨天
+   */
+  StartTime: number
+  /**
+   * 检索结束时间，UTC秒数，例如：1662114246，开始和结束时间段最长为一天，且不能跨天
+   */
+  EndTime: number
+}
+
+/**
  * DescribeRecordBackupTemplate请求参数结构体
  */
 export interface DescribeRecordBackupTemplateRequest {
@@ -3970,6 +3988,21 @@ export interface DescribeRecordBackupPlanData {
    * 修改时间
    */
   UpdateAt?: string
+}
+
+/**
+ * DescribeRecordSlice返回参数结构体
+ */
+export interface DescribeRecordSliceResponse {
+  /**
+   * 云录像切片信息列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Data?: Array<RecordSliceInfo>
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -4742,6 +4775,20 @@ export interface ControlDeviceStreamData {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Rtmp?: string
+}
+
+/**
+ * 录像切片信息
+ */
+export interface RecordSliceInfo {
+  /**
+   * 计划ID
+   */
+  PlanId?: string
+  /**
+   * 录像切片开始和结束时间列表
+   */
+  List?: Array<RecordTimeLine>
 }
 
 /**

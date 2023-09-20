@@ -41,10 +41,12 @@ export interface CreateSealRequest {
   GenerateSource?: string
   /**
    * 电子印章类型：
-OFFICIAL-公章；
-CONTRACT-合同专用章;
-FINANCE-合财务专用章;
-PERSONNEL-人事专用章.
+<ul>
+<li>OFFICIAL-公章；</li>
+<li>CONTRACT-合同专用章;</li>
+<li>FINANCE-合财务专用章;</li>
+<li>PERSONNEL-人事专用章.</li>
+</ul>
    */
   SealType?: string
   /**
@@ -90,18 +92,22 @@ PERSONNEL-人事专用章.
    */
   FileToken?: string
   /**
-   * 印章样式:
+   * 印章样式，取值如下:
 
-cycle:圆形印章;
-ellipse:椭圆印章;
-注：默认圆形印章
+<ul>
+<li>cycle:圆形印章;</li>
+<li>ellipse:椭圆印章;</li>
+<li>注：默认圆形印章</li>
+</ul>
    */
   SealStyle?: string
   /**
    * 印章尺寸取值描述：
-42_42 圆形企业公章直径42mm；
-40_40 圆形企业印章直径40mm；
-45_30 椭圆形印章45mm x 30mm;
+<ul>
+<li>42_42 圆形企业公章直径42mm；</li>
+<li>40_40 圆形企业印章直径40mm；</li>
+<li>45_30 椭圆形印章45mm x 30mm;</li>
+</ul>
    */
   SealSize?: string
 }
@@ -187,24 +193,26 @@ export interface CreatePreparedPersonalEsignRequest {
    */
   UserName: string
   /**
-   * 身份证件号码
+   * 证件号码，应符合以下规则
+<ul><li>居民身份证号码应为18位字符串，由数字和大写字母X组成（如存在X，请大写）。</li>
+<li>港澳居民来往内地通行证号码应为9位字符串，第1位为“C”，第2位为英文字母（但“I”、“O”除外），后7位为阿拉伯数字。</li>
+<li>港澳台居民居住证号码编码规则与中国大陆身份证相同，应为18位字符串。</li></ul>
    */
   IdCardNumber: string
   /**
-   * 印章名称
+   * 印章名称，长度1-50个字。
    */
   SealName: string
   /**
-   * 调用方用户信息，userId 必填。支持填入集团子公司经办人 userId代发合同。
+   * 执行本接口操作的员工信息。
+注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。`
    */
   Operator?: UserInfo
   /**
-   * 身份证件类型:
-ID_CARD 身份证
-PASSPORT 护照
-HONGKONG_AND_MACAO 中国香港
-FOREIGN_ID_CARD 境外身份
-HONGKONG_MACAO_AND_TAIWAN 中国台湾
+   * 证件类型，支持以下类型
+<ul><li>ID_CARD : 居民身份证 (默认值)</li>
+<li>HONGKONG_AND_MACAO : 港澳居民来往内地通行证</li>
+<li>HONGKONG_MACAO_AND_TAIWAN : 港澳台居民居住证(格式同居民身份证)</li></ul>
    */
   IdCardType?: string
   /**
@@ -236,10 +244,12 @@ BLUE 蓝色。
    */
   SealColor?: string
   /**
-   * 是否处理印章
-默认不做印章处理。
-取值：false：不做任何处理；
-true：做透明化处理和颜色增强。
+   * 是否处理印章，默认不做印章处理。
+取值如下：
+<ul>
+<li>false：不做任何处理；</li>
+<li>true：做透明化处理和颜色增强。</li>
+</ul>
    */
   ProcessSeal?: boolean
   /**
@@ -249,7 +259,8 @@ true：做透明化处理和颜色增强。
    */
   FileId?: string
   /**
-   * 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填
+   * 代理企业和员工的信息。
+在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。
    */
   Agent?: Agent
   /**
@@ -477,62 +488,62 @@ export interface CreateIntegrationEmployeesRequest {
 export interface CreateFlowOption {
   /**
    * 是否允许修改发起合同时确认弹窗的合同信息（合同名称、合同类型、签署截止时间），若不允许编辑，则表单字段将被禁止输入。
-<br/>true：允许编辑（默认），<br/>false：不允许编辑<br/>默认：false：不允许编辑
+<br/>true：允许编辑<br/>false：不允许编辑（默认值）<br/>
    */
   CanEditFlow?: boolean
   /**
    * 是否允许编辑模板控件
 <br/>true:允许编辑模板控件信息
-<br/>false:不允许编辑模板控件信息
-<br/>默认false:不允许编辑模板控件信息
+<br/>false:不允许编辑模板控件信息（默认值）
+<br/>
    */
   CanEditFormField?: boolean
   /**
    * 发起页面隐藏合同名称展示
 <br/>true:发起页面隐藏合同名称展示
-<br/>false:发起页面不隐藏合同名称展示
-<br/>默认false:发起页面不隐藏合同名称展示
+<br/>false:发起页面不隐藏合同名称展示（默认值）
+<br/>
    */
   HideShowFlowName?: boolean
   /**
    * 发起页面隐藏合同类型展示
 <br/>true:发起页面隐藏合同类型展示
-<br/>false:发起页面不隐藏合同类型展示
-<br/>默认false:发起页面不隐藏合同类型展示
+<br/>false:发起页面不隐藏合同类型展示（默认值）
+<br/>
 
    */
   HideShowFlowType?: boolean
   /**
    * 发起页面隐藏合同截止日期展示
 <br/>true:发起页面隐藏合同截止日期展示
-<br/>false:发起页面不隐藏合同截止日期展示
-<br/>默认false:发起页面不隐藏合同截止日期展示
+<br/>false:发起页面不隐藏合同截止日期展示（默认值）
+<br/>
    */
   HideShowDeadline?: boolean
   /**
    * 发起页面允许跳过添加签署人环节
 <br/>true:发起页面允许跳过添加签署人环节
-<br/>false:发起页面不允许跳过添加签署人环节
-<br/>默认false:发起页面不允许跳过添加签署人环节
+<br/>false:发起页面不允许跳过添加签署人环节（默认值）
+<br/>
 
    */
   CanSkipAddApprover?: boolean
   /**
    * 文件发起页面跳过文件上传步骤
 <br/>true:文件发起页面跳过文件上传步骤
-<br/>false:文件发起页面不跳过文件上传步骤
-<br/>默认false:文件发起页面不跳过文件上传步骤
+<br/>false:文件发起页面不跳过文件上传步骤（默认值）
+<br/>
    */
   SkipUploadFile?: boolean
   /**
    * 禁止编辑填写控件
 <br/>true:禁止编辑填写控件
-<br/>false:允许编辑填写控件
-<br/>默认false:允许编辑填写控件
+<br/>false:允许编辑填写控件（默认值）
+<br/>
    */
   ForbidEditFillComponent?: boolean
   /**
-   * 定制化发起合同弹窗的描述信息，描述信息最长500
+   * 定制化发起合同弹窗的描述信息，描述信息最长500字符
 
    */
   CustomCreateFlowDescription?: string
@@ -1037,7 +1048,7 @@ export interface CreateFlowGroupByFilesRequest {
  */
 export interface DescribeFlowComponentsResponse {
   /**
-   * 流程关联的填写控件信息，按照参与方进行分类返回。
+   * 合同流程关联的填写控件信息，按照参与方进行分类返回。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RecipientComponentInfos?: Array<RecipientComponentInfo>
@@ -1247,7 +1258,8 @@ export interface CreateDocumentResponse {
   /**
    * 合同预览链接URL。
 
-注：如果是预览模式(即NeedPreview设置为true)时, 才会有此预览链接URL
+注: `1.如果是预览模式(即NeedPreview设置为true)时, 才会有此预览链接URL`
+`2.当使用的模板中存在动态表格控件时，预览结果中没有动态表格的填写内容`
 注意：此字段可能返回 null，表示取不到有效值。
    */
   PreviewFileUrl?: string
@@ -1785,40 +1797,44 @@ export interface CreateIntegrationDepartmentResponse {
  */
 export interface DescribeFlowTemplatesRequest {
   /**
-   * 调用方员工/经办人信息
-UserId 必填，在企业控制台组织架构中可以查到员工的UserId
-注：请保证员工有相关的角色权限
+   * 执行本接口操作的员工信息。
+注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。`
    */
   Operator: UserInfo
   /**
-   * 代理相关应用信息
-如集团主企业代子企业操作的场景中ProxyOrganizationId必填
+   * 代理企业和员工的信息。
+在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。
    */
   Agent?: Agent
   /**
-   * 查询内容类型
-0-模板列表及详情（默认）
-1-仅模板列表
+   * 查询内容控制
+
+<ul><li>**0**：模板列表及详情（默认）</li>
+<li>**1**：仅模板列表</li></ul>
    */
   ContentType?: number
   /**
    * 搜索条件，本字段用于指定模板Id进行查询。
-Key：template-id
-Values：需要查询的模板Id列表
+Key：template-id Values：需要查询的模板Id列表
    */
   Filters?: Array<Filter>
   /**
-   * 查询结果分页返回，此处指定第几页，如果不传默从第一页返回。页码从0开始，即首页为0。
+   * 查询结果分页返回，指定从第几页返回数据，和Limit参数配合使用。
+
+注：`1.offset从0开始，即第一页为0。`
+`2.默认从第一页返回。`
    */
   Offset?: number
   /**
-   * 指定每页多少条数据，如果不传默认为20，单页最大200。
+   * 指定每页返回的数据条数，和Offset参数配合使用。
+
+注：`1.默认值为20，单页做大值为200。`
    */
   Limit?: number
   /**
-   * 用于查询指定应用号下单模板列表。
-ApplicationId不为空，查询指定应用下的模板列表
-ApplicationId为空，查询所有应用下的模板列表
+   * 指定查询的应用号，指定后查询该应用号下的模板列表。
+
+注：`1.ApplicationId为空时，查询所有应用下的模板列表。`
    */
   ApplicationId?: string
   /**
@@ -2192,7 +2208,8 @@ export interface SignQrCode {
  */
 export interface CreateSealPolicyResponse {
   /**
-   * 最终授权成功的。其他的跳过的是已经授权了的
+   * 最终授权成功的用户ID，在腾讯电子签平台的唯一身份标识，为32位字符串。
+可登录腾讯电子签控制台，在 "更多能力"->"组织管理" 中查看某位员工的UserId(在页面中展示为用户ID)。
    */
   UserIds?: Array<string>
   /**
@@ -2546,20 +2563,29 @@ export interface RegisterInfo {
  */
 export interface DescribeFileUrlsRequest {
   /**
-   * 调用方用户信息，UserId 必填
+   * 执行本接口操作的员工信息。
+注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。`
    */
   Operator: UserInfo
   /**
    * 文件对应的业务类型，目前支持：
-- 流程 "FLOW"，如需下载合同文件请选择此项
-- 模板 "TEMPLATE"
-- 文档 "DOCUMENT"
-- 印章  “SEAL”
+<ul>
+<li>FLOW 如需下载合同文件请选择此项</li>
+<li>TEMPLATE 如需下载模板文件请选择此项</li>
+<li>DOCUMENT 如需下载文档文件请选择此项</li>
+<li>SEAL 如需下载印章图片请选择此项</li>
+</ul>
    */
   BusinessType: string
   /**
-   * 业务编号的数组，如流程编号、模板编号、文档编号、印章编号。如需下载合同文件请传入FlowId
-最大支持20个资源
+   * 业务编号的数组，取值如下：
+<ul>
+<li>流程编号</li>
+<li>模板编号</li>
+<li>文档编号</li>
+<li>印章编号</li>
+<li>如需下载合同文件请传入FlowId，最大支持20个资源</li>
+</ul>
    */
   BusinessIds: Array<string>
   /**
@@ -2567,15 +2593,20 @@ export interface DescribeFileUrlsRequest {
    */
   FileName?: string
   /**
-   * 文件类型，"JPG", "PDF","ZIP"等
+   * 要下载的文件类型，取值如下：
+<ul>
+<li>JPG</li>
+<li>PDF</li>
+<li>ZIP</li>
+</ul>
    */
   FileType?: string
   /**
-   * 指定资源起始偏移量，默认0
+   * 指定分页返回第几页的数据，如果不传默认返回第一页，页码从 0 开始，即首页为 0，最大 1000。
    */
   Offset?: number
   /**
-   * 指定资源数量，查询全部资源则传入-1
+   * 指定分页每页返回的数据条数，如果不传默认为 20，单页最大支持 100。
    */
   Limit?: number
   /**
@@ -3161,13 +3192,15 @@ export interface RecipientComponentInfo {
   RecipientId?: string
   /**
    * 参与方填写状态
-0-未填写
-1-已填写
+<ul><li>0-未填写</li>
+<li>1-已填写</li></ul>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RecipientFillStatus?: string
   /**
    * 是否为发起方
+<ul><li>true-发起方</li>
+<li>false-参与方</li></ul>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IsPromoter?: boolean
@@ -3227,15 +3260,19 @@ export interface CreateIntegrationRoleResponse {
  */
 export interface DescribeFlowComponentsRequest {
   /**
-   * 操作者信息
+   * 执行本接口操作的员工信息。
+注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。`
    */
   Operator: UserInfo
   /**
-   * 流程(合同)的编号
+   * 合同流程ID，为32位字符串。
+建议开发者妥善保存此流程ID，以便于顺利进行后续操作。
+可登录腾讯电子签控制台，在 "合同"->"合同中心" 中查看某个合同的FlowId(在页面中展示为合同ID)。
    */
   FlowId: string
   /**
-   * 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填
+   * 代理企业和员工的信息。
+在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。
    */
   Agent?: Agent
 }
@@ -3396,6 +3433,7 @@ export interface CreateDocumentRequest {
    * 是否为预览模式，取值如下：
 <ul><li> **false**：非预览模式（默认），会产生合同流程并返回合同流程编号FlowId。</li>
 <li> **true**：预览模式，不产生合同流程，不返回合同流程编号FlowId，而是返回预览链接PreviewUrl，有效期为300秒，用于查看真实发起后合同的样子。</li></ul>
+注: `当使用的模板中存在动态表格控件时，预览结果中没有动态表格的填写内容`
    */
   NeedPreview?: boolean
   /**
@@ -3442,7 +3480,8 @@ true - 可以，false - 不可以。
  */
 export interface CreatePreparedPersonalEsignResponse {
   /**
-   * 导入生成的印章ID
+   * 导入生成的印章ID，为32位字符串。
+建议开发者保存此印章ID，开头实名认证后，通过此 ID查询导入的印章。
    */
   SealId?: string
   /**
@@ -3964,58 +4003,46 @@ export interface CreateIntegrationUserRolesRequest {
  */
 export interface FlowDetailInfo {
   /**
-   * 合同(流程)的ID
+   * 合同流程ID，为32位字符串。
    */
   FlowId?: string
   /**
-   * 合同(流程)的名字
+   * 合同流程的名称（可自定义此名称），长度不能超过200，只能由中文、字母、数字和下划线组成。
    */
   FlowName?: string
   /**
-   * 合同(流程)的类型
+   * 合同流程的类别分类（如销售合同/入职合同等）。	
 注意：此字段可能返回 null，表示取不到有效值。
    */
   FlowType?: string
   /**
-   * 流程状态
-- 0 还没有发起
-- 1 待签署
-- 2 部分签署
-- 3 已拒签
-- 4 已签署
-- 5 已过期
-- 6 已撤销
-- 7 还没有预发起
-- 8 等待填写
-- 9 部分填写
-- 10 拒填
-- 21 已解除
+   * 合同流程当前的签署状态, 会存在下列的状态值 <ul><li> **0** : 未开启流程(合同中不存在填写环节)</li> <li> **1** : 待签署</li> <li> **2** : 部分签署</li> <li> **3** : 已拒签</li> <li> **4** : 已签署</li> <li> **5** : 已过期</li> <li> **6** : 已撤销</li> <li> **7** : 未开启流程(合同中存在填写环节)</li> <li> **8** : 等待填写</li> <li> **9** : 部分填写</li> <li> **10** : 已拒填</li> <li> **21** : 已解除</li></ul>
    */
   FlowStatus?: number
   /**
-   * 合同(流程)的信息
+   * 当合同流程状态为已拒签（即 FlowStatus=3）或已撤销（即 FlowStatus=6）时，此字段 FlowMessage 为拒签或撤销原因。	
 注意：此字段可能返回 null，表示取不到有效值。
    */
   FlowMessage?: string
   /**
-   * 流程的描述
+   * 合同流程描述信息。	
 注意：此字段可能返回 null，表示取不到有效值。
    */
   FlowDescription?: string
   /**
-   * 合同(流程)的创建时间戳，单位秒
+   * 合同流程的创建时间戳，格式为Unix标准时间戳（秒）。
    */
   CreatedOn?: number
   /**
-   * 合同(流程)的签署方数组
+   * 合同流程的签署方数组
    */
   FlowApproverInfos?: Array<FlowApproverDetail>
   /**
-   * 合同(流程)的关注方信息列表
+   * 合同流程的关注方信息数组
    */
   CcInfos?: Array<FlowApproverDetail>
   /**
-   * 合同发起人UserId
+   * 合同流程发起方的员工编号, 即员工在腾讯电子签平台的唯一身份标识。	
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Creator?: string
@@ -4219,13 +4246,20 @@ WECHAT-微信通知
  */
 export interface VerifyPdfRequest {
   /**
-   * 流程ID
+   * 合同流程ID，为32位字符串。
+可登录腾讯电子签控制台，在 "合同"->"合同中心" 中查看某个合同的FlowId(在页面中展示为合同ID)。
    */
   FlowId: string
   /**
-   * 调用方用户信息，userId 必填
+   * 执行本接口操作的员工信息。
+注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。
    */
   Operator?: UserInfo
+  /**
+   * 代理企业和员工的信息。
+在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。
+   */
+  Agent?: Agent
 }
 
 /**
@@ -4640,7 +4674,7 @@ export interface CreateWebThemeConfigRequest {
    */
   ThemeType: string
   /**
-   * 主题配置
+   * 电子签logo是否展示，主体颜色等配置项
    */
   WebThemeConfig: WebThemeConfig
   /**
@@ -4655,7 +4689,8 @@ export interface CreateWebThemeConfigRequest {
  */
 export interface DeleteSealPoliciesRequest {
   /**
-   * 调用方用户信息，userId 必填
+   * 执行本接口操作的员工信息。
+注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。`
    */
   Operator: UserInfo
   /**
@@ -4663,15 +4698,20 @@ export interface DeleteSealPoliciesRequest {
    */
   PolicyIds?: Array<string>
   /**
-   * 印章ID。这个参数跟上面的PolicyIds其中一个必填，另外一个可选填
+   * 电子印章ID，为32位字符串。
+建议开发者保留此印章ID，后续指定签署区印章或者操作印章需此印章ID。
+可登录腾讯电子签控制台，在 "印章"->"印章中心"选择查看的印章，在"印章详情" 中查看某个印章的SealId(在页面中展示为印章ID)。
+注：印章ID。这个参数跟上面的PolicyIds其中一个必填，另外一个可选填。
    */
   SealId?: string
   /**
-   * 待授权的员工ID
+   * 待授权的员工ID，员工在腾讯电子签平台的唯一身份标识，为32位字符串。
+可登录腾讯电子签控制台，在 "更多能力"->"组织管理" 中查看某位员工的UserId(在页面中展示为用户ID)。
    */
   UserIds?: Array<string>
   /**
-   * 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填
+   * 代理企业和员工的信息。
+在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。
    */
   Agent?: Agent
 }
@@ -4759,7 +4799,7 @@ export interface IntegrateRole {
  */
 export interface CreatePrepareFlowResponse {
   /**
-   * 快速发起预览链接，有效期5分钟
+   * 发起流程的web页面链接，有效期5分钟
    */
   Url?: string
   /**
@@ -4932,7 +4972,9 @@ export interface StartFlowRequest {
  */
 export interface CreateSealResponse {
   /**
-   * 电子印章编号
+   * 电子印章ID，为32位字符串。
+建议开发者保留此印章ID，后续指定签署区印章或者操作印章需此印章ID。
+可登录腾讯电子签控制台，在 "印章"->"印章中心"选择查看的印章，在"印章详情" 中查看某个印章的SealId(在页面中展示为印章ID)。
    */
   SealId?: string
   /**
@@ -4946,62 +4988,67 @@ export interface CreateSealResponse {
  */
 export interface CreatePrepareFlowRequest {
   /**
-   * 调用方用户信息，userId 必填
+   * 执行本接口操作的员工信息。使用此接口时，必须填写userId。
+支持填入集团子公司经办人 userId 代发合同。
+
+注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。`
    */
   Operator: UserInfo
   /**
-   * 资源id，与ResourceType对应
+   * 资源id，与ResourceType相对应，取值范围：
+<ul>
+<li>文件Id（通过UploadFiles获取文件资源Id）</li>
+<li>模板Id</li>
+</ul>
    */
   ResourceId: string
   /**
-   * 合同名称
+   * 合同流程的名称（可自定义此名称），长度不能超过200，只能由中文、字母、数字和下划线组成。
+
    */
   FlowName: string
   /**
-   * 是否顺序签署
-true:无序签
-false:顺序签
+   * 合同流程的签署顺序类型：
+<ul><li> **false**：(默认)有序签署, 本合同多个参与人需要依次签署 </li>
+<li> **true**：无序签署, 本合同多个参与人没有先后签署限制</li></ul>
    */
   Unordered?: boolean
   /**
-   * 签署流程的签署截止时间。
-值为unix时间戳,精确到秒
-不传默认为当前时间一年后
+   * 合同流程的签署截止时间，格式为Unix标准时间戳（秒），如果未设置签署截止时间，则默认为合同流程创建后的365天时截止。
+
    */
   Deadline?: number
   /**
    * 用户自定义合同类型Id
 
-该id为电子签企业内的合同类型id， 可以在自定义合同类型处获取
+该id为电子签企业内的合同类型id， 可以在控制台-合同-自定义合同类型处获取
+注: `该参数如果和FlowType同时传，以该参数优先生效`
    */
   UserFlowTypeId?: string
   /**
-   * 合同类型名称
-该字段用于客户自定义合同类型
-建议使用时指定合同类型，便于之后合同分类以及查看
-如果合同类型与自定义的合同类型描述一致，会自动归类到自定义的合同类型处，如果不一致，则会创建一个新的自定义合同类型
+   * 合同流程的类别分类（可自定义名称，如销售合同/入职合同等），最大长度为200个字符，仅限中文、字母、数字和下划线组成。
    */
   FlowType?: string
   /**
-   * 签署流程参与者信息，最大限制50方
+   * 合同流程的参与方列表，最多可支持50个参与方，可在列表中指定企业B端签署方和个人C端签署方的联系和认证方式等信息，具体定义可以参考开发者中心的ApproverInfo结构体。
+
+如果合同流程是有序签署，Approvers列表中参与人的顺序就是默认的签署顺序，请确保列表中参与人的顺序符合实际签署顺序。
    */
   Approvers?: Array<FlowCreateApprover>
   /**
-   * 打开智能添加填写区
-默认开启，打开:"OPEN"
- 关闭："CLOSE"
+   * 开启或者关闭智能添加填写区：
+<ul><li> **OPEN**：开启（默认值）</li>
+<li> **CLOSE**：关闭</li></ul>
    */
   IntelligentStatus?: string
   /**
-   * 资源类型，
-1：模板
-2：文件，
-不传默认为2：文件
+   * 资源类型，取值有：
+<ul><li> **1**：模板</li>
+<li> **2**：文件（默认值）</li></ul>
    */
   ResourceType?: number
   /**
-   * 发起方填写控件
-该类型控件由发起方完成填写
+   * 该字段已废弃，请使用InitiatorComponents
    */
   Components?: Component
   /**
@@ -5011,31 +5058,44 @@ false:顺序签
    */
   FlowOption?: CreateFlowOption
   /**
-   * 是否开启发起方签署审核
-true:开启发起方签署审核
-false:不开启发起方签署审核
-默认false:不开启发起方签署审核
+   * 发起方企业的签署人进行签署操作前，是否需要企业内部走审批流程，取值如下：
+<ul><li> **false**：（默认）不需要审批，直接签署。</li>
+<li> **true**：需要走审批流程。当到对应参与人签署时，会阻塞其签署操作，等待企业内部审批完成。</li></ul>
+企业可以通过CreateFlowSignReview审批接口通知腾讯电子签平台企业内部审批结果
+<ul><li> 如果企业通知腾讯电子签平台审核通过，签署方可继续签署动作。</li>
+<li> 如果企业通知腾讯电子签平台审核未通过，平台将继续阻塞签署方的签署动作，直到企业通知平台审核通过。</li></ul>
+注：`此功能可用于与企业内部的审批流程进行关联，支持手动、静默签署合同`
    */
   NeedSignReview?: boolean
   /**
-   * 开启发起方发起合同审核
-true:开启发起方发起合同审核
-false:不开启发起方发起合同审核
-默认false:不开启发起方发起合同审核
+   * 发起方企业的签署人进行发起操作是否需要企业内部审批。使用此功能需要发起方企业有参与签署。
+
+若设置为true，发起审核结果需通过接口 CreateFlowSignReview 通知电子签，审核通过后，发起方企业签署人方可进行发起操作，否则会阻塞其发起操作。
+
+
    */
   NeedCreateReview?: boolean
   /**
-   * 用户自定义参数
+   * 调用方自定义的个性化字段(可自定义此名称)，并以base64方式编码，支持的最大数据大小为 20480长度。
+
+在合同状态变更的回调信息等场景中，该字段的信息将原封不动地透传给贵方。回调的相关说明可参考开发者中心的<a href="https://qian.tencent.com/developers/company/callback_types_v2" target="_blank">回调通知</a>模块。
    */
   UserData?: string
   /**
-   * 合同id,用于通过已web页面发起的合同id快速生成一个web发起合同链接
+   * 合同Id：用于通过一个已发起的合同快速生成一个发起流程web链接
+注: `该参数必须是一个待发起审核的合同id，并且还未审核通过`
    */
   FlowId?: string
   /**
-   * 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填
+   * 代理企业和员工的信息。
+在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。
    */
   Agent?: Agent
+  /**
+   * 模板或者合同中的填写控件列表，列表中可支持下列多种填写控件，控件的详细定义参考开发者中心的Component结构体
+
+   */
+  InitiatorComponents?: Array<Component>
 }
 
 /**
@@ -5078,7 +5138,8 @@ export interface CreateEmbedWebUrlResponse {
  */
 export interface CreateSealPolicyRequest {
   /**
-   * 调用方用户信息，userId 必填
+   * 执行本接口操作的员工信息。
+注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。`
    */
   Operator: UserInfo
   /**
@@ -5086,7 +5147,9 @@ export interface CreateSealPolicyRequest {
    */
   Users: Array<UserInfo>
   /**
-   * 印章ID
+   * 电子印章ID，为32位字符串。
+建议开发者保留此印章ID，后续指定签署区印章或者操作印章需此印章ID。
+可登录腾讯电子签控制台，在 "印章"->"印章中心"选择查看的印章，在"印章详情" 中查看某个印章的SealId(在页面中展示为印章ID)。
    */
   SealId: string
   /**
@@ -5102,7 +5165,8 @@ export interface CreateSealPolicyRequest {
    */
   Policy?: string
   /**
-   * 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填
+   * 代理企业和员工的信息。
+在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。
    */
   Agent?: Agent
 }
@@ -5112,19 +5176,24 @@ export interface CreateSealPolicyRequest {
  */
 export interface DescribeOrganizationSealsRequest {
   /**
-   * 调用方用户信息，userId 必填
+   * 执行本接口操作的员工信息。
+注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。`
    */
   Operator: UserInfo
   /**
-   * 返回最大数量，最大为100
+   * 指定分页每页返回的数据条数，如果不传默认为 20，单页最大支持 200。
    */
   Limit: number
   /**
-   * 偏移量，默认为0，最大为20000
+   * 指定分页返回第几页的数据，如果不传默认返回第一页，页码从 0 开始，即首页为 0，最大 20000。
    */
   Offset?: number
   /**
-   * 查询信息类型，为0时不返回授权用户，为1时返回
+   * 查询信息类型，取值如下：
+<ul>
+<li>0不返回授权用户</li>
+<li>1返回授权用户信息</li>
+</ul>
    */
   InfoType?: number
   /**
@@ -5135,28 +5204,32 @@ export interface DescribeOrganizationSealsRequest {
    * 印章类型列表（都是组织机构印章）。
 为空时查询所有类型的印章。
 目前支持以下类型：
-OFFICIAL：企业公章；
-CONTRACT：合同专用章；
-ORGANIZATION_SEAL：企业印章(图片上传创建)；
-LEGAL_PERSON_SEAL：法定代表人章
+<ul>
+<li>OFFICIAL：企业公章；</li>
+<li>CONTRACT：合同专用章；</li>
+<li>ORGANIZATION_SEAL：企业印章(图片上传创建)；</li>
+<li>LEGAL_PERSON_SEAL：法定代表人章</li>
+</ul>
    */
   SealTypes?: Array<string>
   /**
-   * 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填
+   * 代理企业和员工的信息。
+在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。
    */
   Agent?: Agent
   /**
    * 查询的印章状态列表。
-取值为空，只查询启用状态的印章；
-取值ALL，查询所有状态的印章；
-取值CHECKING，查询待审核的印章；
-取值SUCCESS，查询启用状态的印章；
-取值FAIL，查询印章审核拒绝的印章；
-取值DISABLE，查询已停用的印章；
-取值STOPPED，查询已终止的印章；
-取值VOID，查询已作废的印章；
-取值INVALID，查询已失效的印章；
-
+<ul>
+<li>空，只查询启用状态的印章；</li>
+<li>ALL，查询所有状态的印章；</li>
+<li>CHECKING，查询待审核的印章；</li>
+<li>SUCCESS，查询启用状态的印章；</li>
+<li>FAIL，查询印章审核拒绝的印章；</li>
+<li>DISABLE，查询已停用的印章；</li>
+<li>STOPPED，查询已终止的印章；</li>
+<li>VOID，查询已作废的印章；</li>
+<li>INVALID，查询已失效的印章；</li>
+</ul>
    */
   SealStatuses?: Array<string>
 }
@@ -5773,15 +5846,26 @@ export interface SignUrl {
  */
 export interface VerifyPdfResponse {
   /**
-   * 验签结果，1-文件未被篡改，全部签名在腾讯电子签完成； 2-文件未被篡改，部分签名在腾讯电子签完成；3-文件被篡改；4-异常：文件内没有签名域；5-异常：文件签名格式错误
+   * 验签结果代码，代码的含义如下：
+
+<ul><li>**1**：文件未被篡改，全部签名在腾讯电子签完成。</li>
+<li>**2**：文件未被篡改，部分签名在腾讯电子签完成。</li>
+<li>**3**：文件被篡改。</li>
+<li>**4**：异常：文件内没有签名域。</li>
+<li>**5**：异常：文件签名格式错误。</li></ul>
    */
   VerifyResult?: number
   /**
-   * 验签结果详情，每个签名域对应的验签结果。状态值：1-验签成功，在电子签签署；2-验签成功，在其他平台签署；3-验签失败；4-pdf文件没有签名域；5-文件签名格式错误
+   * 验签结果详情，每个签名域对应的验签结果。状态值如下
+<ul><li> **1** :验签成功，在电子签签署</li>
+<li> **2** :验签成功，在其他平台签署</li>
+<li> **3** :验签失败</li>
+<li> **4** :pdf文件没有签名域</li>
+<li> **5** :文件签名格式错误</li></ul>
    */
   PdfVerifyResults?: Array<PdfVerifyResult>
   /**
-   * 验签序列号
+   * 验签序列号, 为11为数组组成的字符串
    */
   VerifySerialNo?: string
   /**
@@ -5869,11 +5953,11 @@ export interface Caller {
  */
 export interface DescribeFlowTemplatesResponse {
   /**
-   * 模板详情列表
+   * 模板详情列表数据
    */
   Templates?: Array<TemplateInfo>
   /**
-   * 查询到的总数
+   * 查询到的模板总数
    */
   TotalCount?: number
   /**
@@ -6102,7 +6186,7 @@ export interface CreateMultiFlowSignQRCodeRequest {
  */
 export interface DescribeFlowInfoRequest {
   /**
-   * 调用方用户信息，userId 必填
+   * 执行本接口操作的员工信息。 注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。`
    */
   Operator?: UserInfo
   /**
@@ -6112,7 +6196,7 @@ export interface DescribeFlowInfoRequest {
    */
   FlowIds?: Array<string>
   /**
-   * 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填
+   * 代理企业和员工的信息。 在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。
    */
   Agent?: Agent
   /**
@@ -6132,7 +6216,7 @@ export interface DescribeFlowInfoResponse {
    */
   FlowDetailInfos?: Array<FlowDetailInfo>
   /**
-   * 合同组ID
+   * 合同组ID，为32位字符串
    */
   FlowGroupId?: string
   /**

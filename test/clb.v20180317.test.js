@@ -28,6 +28,16 @@ it("clb.v20180317.RegisterTargets", async function () {
     }
 })
 
+it("clb.v20180317.RegisterTargetsWithClassicalLB", async function () {
+    try {
+       const data = await client.RegisterTargetsWithClassicalLB({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("clb.v20180317.ModifyDomainAttributes", async function () {
     try {
        const data = await client.ModifyDomainAttributes({})
@@ -58,9 +68,9 @@ it("clb.v20180317.DescribeClassicalLBListeners", async function () {
     }
 })
 
-it("clb.v20180317.RegisterTargetsWithClassicalLB", async function () {
+it("clb.v20180317.InquiryPriceRefundLoadBalancer", async function () {
     try {
-       const data = await client.RegisterTargetsWithClassicalLB({})
+       const data = await client.InquiryPriceRefundLoadBalancer({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -111,6 +121,16 @@ it("clb.v20180317.DeleteLoadBalancerSnatIps", async function () {
 it("clb.v20180317.DeleteListener", async function () {
     try {
        const data = await client.DeleteListener({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("clb.v20180317.InquiryPriceModifyLoadBalancer", async function () {
+    try {
+       const data = await client.InquiryPriceModifyLoadBalancer({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -218,6 +238,16 @@ it("clb.v20180317.DeleteLoadBalancerListeners", async function () {
     }
 })
 
+it("clb.v20180317.InquiryPriceRenewLoadBalancer", async function () {
+    try {
+       const data = await client.InquiryPriceRenewLoadBalancer({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("clb.v20180317.ModifyFunctionTargets", async function () {
     try {
        const data = await client.ModifyFunctionTargets({})
@@ -301,6 +331,16 @@ it("clb.v20180317.DescribeLoadBalancersDetail", async function () {
 it("clb.v20180317.DeleteLoadBalancer", async function () {
     try {
        const data = await client.DeleteLoadBalancer({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("clb.v20180317.InquiryPriceCreateLoadBalancer", async function () {
+    try {
+       const data = await client.InquiryPriceCreateLoadBalancer({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

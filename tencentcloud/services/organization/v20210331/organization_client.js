@@ -34,10 +34,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeOrganizationMembers", req, cb);
     }
     /**
-     * 更新企业组织节点
+     * 退出企业组织
      */
-    async UpdateOrganizationNode(req, cb) {
-        return this.request("UpdateOrganizationNode", req, cb);
+    async QuitOrganization(req, cb) {
+        return this.request("QuitOrganization", req, cb);
     }
     /**
      * 获取组织成员访问身份列表
@@ -80,6 +80,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeOrganizationMemberAuthIdentities(req, cb) {
         return this.request("DescribeOrganizationMemberAuthIdentities", req, cb);
+    }
+    /**
+     * 更新企业组织节点
+     */
+    async UpdateOrganizationNode(req, cb) {
+        return this.request("UpdateOrganizationNode", req, cb);
     }
     /**
      * 添加组织成员访问授权

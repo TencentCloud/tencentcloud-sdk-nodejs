@@ -305,6 +305,7 @@ import {
   DescribeSupportProxyVersionResponse,
   UpgradeClusterVersionRequest,
   ExportInstanceSlowQueriesResponse,
+  LogicBackupConfigInfo,
   RefundResourcePackageResponse,
   DeleteClusterDatabaseResponse,
   CynosdbClusterDetail,

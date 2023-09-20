@@ -64,7 +64,8 @@ Value 字段，使用 json 进行序列化，其中固定 update 作为 key，�
      */
     AddCdnDomain(req: AddCdnDomainRequest, cb?: (error: string, rep: AddCdnDomainResponse) => void): Promise<AddCdnDomainResponse>;
     /**
-     * GetDisableRecords 用于查询资源禁用历史，及 URL 当前状态。（接口尚在内测中，暂未全量开放使用）
+     * ### <font color=red>**该接口已废弃** </font><br>
+GetDisableRecords 用于查询资源禁用历史，及 URL 当前状态。
      */
     GetDisableRecords(req: GetDisableRecordsRequest, cb?: (error: string, rep: GetDisableRecordsResponse) => void): Promise<GetDisableRecordsResponse>;
     /**
@@ -114,7 +115,8 @@ Value 字段，使用 json 进行序列化，其中固定 update 作为 key，�
      */
     ManageClsTopicDomains(req: ManageClsTopicDomainsRequest, cb?: (error: string, rep: ManageClsTopicDomainsResponse) => void): Promise<ManageClsTopicDomainsResponse>;
     /**
-     * CreateDiagnoseUrl 用于添加域名诊断任务URL， <font color=red>将于 **2023年5月31日** 下线</font><br>
+     * ### <font color=red>**该接口已废弃** </font><br>
+CreateDiagnoseUrl 用于添加域名诊断任务URL。
      */
     CreateDiagnoseUrl(req: CreateDiagnoseUrlRequest, cb?: (error: string, rep: CreateDiagnoseUrlResponse) => void): Promise<CreateDiagnoseUrlResponse>;
     /**
@@ -130,7 +132,8 @@ Value 字段，使用 json 进行序列化，其中固定 update 作为 key，�
      */
     StopScdnDomain(req: StopScdnDomainRequest, cb?: (error: string, rep: StopScdnDomainResponse) => void): Promise<StopScdnDomainResponse>;
     /**
-     * DescribeDiagnoseReport 用于获取指定报告id的内容， <font color=red>将于 **2023年5月31日** 下线</font><br>
+     * ### <font color=red>**该接口已废弃** </font><br>
+DescribeDiagnoseReport 用于获取指定报告id的内容。
      */
     DescribeDiagnoseReport(req: DescribeDiagnoseReportRequest, cb?: (error: string, rep: DescribeDiagnoseReportResponse) => void): Promise<DescribeDiagnoseReportResponse>;
     /**
@@ -138,11 +141,13 @@ Value 字段，使用 json 进行序列化，其中固定 update 作为 key，�
      */
     DescribeDDoSData(req: DescribeDDoSDataRequest, cb?: (error: string, rep: DescribeDDoSDataResponse) => void): Promise<DescribeDDoSDataResponse>;
     /**
-     * DisableCaches 用于禁用 CDN 上指定 URL 的访问，禁用完成后，中国境内访问会直接返回 403。（注：接口尚在内测中，暂未全量开放；封禁URL并非无限期永久封禁）
+     * ### <font color=red>**该接口已废弃** </font><br>
+DisableCaches 用于禁用 CDN 上指定 URL 的访问，禁用完成后，中国境内访问会直接返回 403。
      */
     DisableCaches(req: DisableCachesRequest, cb?: (error: string, rep: DisableCachesResponse) => void): Promise<DisableCachesResponse>;
     /**
-     * ListDiagnoseReport 用于获取用户诊断URL访问后各个子任务的简要详情， <font color=red>将于 **2023年5月31日** 下线</font><br>
+     * ### <font color=red>**该接口已废弃** </font><br>
+ListDiagnoseReport 用于获取用户诊断URL访问后各个子任务的简要详情。
      */
     ListDiagnoseReport(req: ListDiagnoseReportRequest, cb?: (error: string, rep: ListDiagnoseReportResponse) => void): Promise<ListDiagnoseReportResponse>;
     /**
@@ -337,7 +342,8 @@ Value 字段，使用 json 进行序列化，其中固定 update 作为 key，�
      */
     DeleteClsLogTopic(req: DeleteClsLogTopicRequest, cb?: (error: string, rep: DeleteClsLogTopicResponse) => void): Promise<DeleteClsLogTopicResponse>;
     /**
-     * 本接口（DescribeCdnOriginIp）用于查询 CDN 回源节点的IP信息。（注：此接口即将下线，不再进行维护，请通过DescribeIpStatus 接口进行查询）
+     * ### <font color=red>**该接口已废弃** </font><br>
+本接口（DescribeCdnOriginIp）用于查询 CDN 回源节点的IP信息。（注：替换接口为DescribeIpStatus）
      */
     DescribeCdnOriginIp(req?: DescribeCdnOriginIpRequest, cb?: (error: string, rep: DescribeCdnOriginIpResponse) => void): Promise<DescribeCdnOriginIpResponse>;
     /**
@@ -389,7 +395,8 @@ Value 字段，使用 json 进行序列化，其中固定 update 作为 key，�
      */
     DescribeTopData(req: DescribeTopDataRequest, cb?: (error: string, rep: DescribeTopDataResponse) => void): Promise<DescribeTopDataResponse>;
     /**
-     * EnableCaches 用于解禁手工封禁的 URL，解禁成功后，全网生效时间约 5~10 分钟。（接口尚在内测中，暂未全量开放使用）
+     * ### <font color=red>**该接口已废弃** </font><br>
+EnableCaches 用于解禁手工封禁的 URL，解禁成功后，全网生效时间约 5~10 分钟。
      */
     EnableCaches(req: EnableCachesRequest, cb?: (error: string, rep: EnableCachesResponse) => void): Promise<EnableCachesResponse>;
     /**

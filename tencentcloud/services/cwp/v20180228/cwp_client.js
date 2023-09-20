@@ -124,6 +124,18 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeBaselineStrategyDetail", req, cb);
     }
     /**
+     * 安全播报列表页
+     */
+    async DescribeSecurityBroadcasts(req, cb) {
+        return this.request("DescribeSecurityBroadcasts", req, cb);
+    }
+    /**
+     * 按分页形式展示网络攻击检测事件列表
+     */
+    async DescribeAttackEvents(req, cb) {
+        return this.request("DescribeAttackEvents", req, cb);
+    }
+    /**
      * 获取资产管理Web应用插件列表
      */
     async DescribeAssetWebAppPluginList(req, cb) {
@@ -1267,6 +1279,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeBaselineDetectOverview", req, cb);
     }
     /**
+     * 查询主机入侵检测事件统计
+     */
+    async DescribeMachineRiskCnt(req, cb) {
+        return this.request("DescribeMachineRiskCnt", req, cb);
+    }
+    /**
      * 获取基线检测项的列表
      */
     async DescribeBaselineItemDetectList(req, cb) {
@@ -1589,6 +1607,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DeleteWebPageEventLog(req, cb) {
         return this.request("DeleteWebPageEventLog", req, cb);
+    }
+    /**
+     * 编辑《主机安全-按量计费》授权订单
+     */
+    async ModifyLicenseOrder(req, cb) {
+        return this.request("ModifyLicenseOrder", req, cb);
     }
     /**
      * 用于统计专业版和基础版机器数。

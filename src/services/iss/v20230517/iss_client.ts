@@ -174,6 +174,7 @@ import {
   ListGatewaysRequest,
   ListTasksRequest,
   DescribeGatewayVersionRequest,
+  DescribeRecordSliceRequest,
   DescribeRecordBackupTemplateRequest,
   DescribeUserDeviceRequest,
   DescribeDeviceRegionRequest,
@@ -206,6 +207,7 @@ import {
   AITaskResultData,
   DeleteRecordRetrieveTaskRequest,
   DescribeRecordBackupPlanData,
+  DescribeRecordSliceResponse,
   UpdateRecordPlanResponse,
   DescribeTaskResponse,
   DescribeGatewayVersion,
@@ -246,6 +248,7 @@ import {
   AddRecordBackupPlanRequest,
   ListTasksData,
   ControlDeviceStreamData,
+  RecordSliceInfo,
   RecordTemplateInfo,
   UpdateRecordBackupTemplateRequest,
   UpdateDeviceStatusResponse,
@@ -365,13 +368,14 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 用于查询组织目录下的通道列表
-   */
-  async ListOrganizationChannels(
-    req: ListOrganizationChannelsRequest,
-    cb?: (error: string, rep: ListOrganizationChannelsResponse) => void
-  ): Promise<ListOrganizationChannelsResponse> {
-    return this.request("ListOrganizationChannels", req, cb)
+     * 平台支持将数据以TS切片的形式存入客户自有COS桶，该接口用于支持客户快捷查询切片信息列表
+（注意：只支持标准存储类型的查询）
+     */
+  async DescribeRecordSlice(
+    req: DescribeRecordSliceRequest,
+    cb?: (error: string, rep: DescribeRecordSliceResponse) => void
+  ): Promise<DescribeRecordSliceResponse> {
+    return this.request("DescribeRecordSlice", req, cb)
   }
 
   /**
@@ -1075,5 +1079,15 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: AddRecordBackupTemplateResponse) => void
   ): Promise<AddRecordBackupTemplateResponse> {
     return this.request("AddRecordBackupTemplate", req, cb)
+  }
+
+  /**
+   * 用于查询组织目录下的通道列表
+   */
+  async ListOrganizationChannels(
+    req: ListOrganizationChannelsRequest,
+    cb?: (error: string, rep: ListOrganizationChannelsResponse) => void
+  ): Promise<ListOrganizationChannelsResponse> {
+    return this.request("ListOrganizationChannels", req, cb)
   }
 }

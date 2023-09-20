@@ -418,6 +418,24 @@ export interface AccessLogItems {
 }
 
 /**
+ * SwitchElasticMode请求参数结构体
+ */
+export interface SwitchElasticModeRequest {
+  /**
+   * 版本，只能是sparta-waf, clb-waf, cdn-waf
+   */
+  Edition: string
+  /**
+   * 0代表关闭，1代表打开
+   */
+  Mode: number
+  /**
+   * 实例id
+   */
+  InstanceID?: string
+}
+
+/**
  * ModifyInstanceName请求参数结构体
  */
 export interface ModifyInstanceNameRequest {
@@ -1368,7 +1386,7 @@ export interface DescribeUserCdcClbWafRegionsResponse {
    * CdcRegion的类型描述
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Data: Array<CdcRegion>
+  Data?: Array<CdcRegion>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1544,7 +1562,7 @@ export interface DescribeUserClbWafRegionsResponse {
    * 地域（标准的ap-格式）列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Data: Array<string>
+  Data?: Array<string>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2023,6 +2041,16 @@ export interface DeleteHostResponse {
 }
 
 /**
+ * SwitchElasticMode返回参数结构体
+ */
+export interface SwitchElasticModeResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * FreshAntiFakeUrl返回参数结构体
  */
 export interface FreshAntiFakeUrlResponse {
@@ -2075,7 +2103,7 @@ export interface DeleteSpartaProtectionRequest {
    */
   Domains: Array<string>
   /**
-   * 版本
+   * 实例类型
    */
   Edition?: string
   /**
@@ -2543,47 +2571,67 @@ export interface SpartaProtectionPort {
  */
 export interface AddSpartaProtectionRequest {
   /**
-   * 需要防御的域名
+   * 需要防护的域名
    */
   Domain: string
   /**
-   * 证书类型，0表示没有证书，CertType=1表示自有证书,2 为托管证书
+   * 证书类型。
+0：仅配置HTTP监听端口，没有证书
+1：证书来源为自有证书
+2：证书来源为托管证书
    */
   CertType: number
   /**
-   * 表示是否开启了CDN代理，1：有部署CDN，0：未部署CDN
+   * waf前是否部署有七层代理服务。
+0：没有部署代理服务
+1：有部署代理服务，waf将使用XFF获取客户端IP
+2：有部署代理服务，waf将使用remote_addr获取客户端IP
+3：有部署代理服务，waf将使用ip_headers中的自定义header获取客户端IP
    */
   IsCdn: number
   /**
-   * 回源类型，0表示通过IP回源,1 表示通过域名回源
+   * 回源类型。
+0：通过IP回源
+1：通过域名回源
    */
   UpstreamType: number
   /**
-   * 是否开启WebSocket支持，1表示开启，0不开启
+   * 是否开启WebSocket支持。
+0：关闭
+1：开启
    */
   IsWebsocket: number
   /**
-   * 负载均衡策略，0表示轮询，1表示IP hash
+   * 回源负载均衡策略。
+0：轮询
+1：IP hash
+2：加权轮询
    */
   LoadBalance: string
   /**
-   * 值为1时，需要填次参数，表示证书内容
+   * CertType为1时，需要填充此参数，表示自有证书的证书链
    */
   Cert?: string
   /**
-   * CertType=1时，需要填次参数，表示证书的私钥
+   * CertType为1时，需要填充此参数，表示自有证书的私钥
    */
   PrivateKey?: string
   /**
-   * CertType=2时，需要填次参数，表示证书的ID
+   * CertType为2时，需要填充此参数，表示腾讯云SSL平台托管的证书id
    */
   SSLId?: string
   /**
-   * Waf的资源ID
+   * 待废弃，可不填。Waf的资源ID。
    */
   ResourceId?: string
   /**
-   * HTTPS回源协议，填http或者https
+   * IsCdn为3时，需要填此参数，表示自定义header
+   */
+  IpHeaders?: Array<string>
+  /**
+   * 服务配置有HTTPS端口时，HTTPS的回源协议。
+http：使用http协议回源，和HttpsUpstreamPort配合使用
+https：使用https协议回源
    */
   UpstreamScheme?: string
   /**
@@ -2591,55 +2639,71 @@ export interface AddSpartaProtectionRequest {
    */
   HttpsUpstreamPort?: string
   /**
-   * 是否开启灰度，0表示不开启灰度
+   * 待废弃，可不填。是否开启灰度，0表示不开启灰度。
    */
   IsGray?: number
   /**
-   * 灰度的地区
+   * 待废弃，可不填。灰度的地区
    */
   GrayAreas?: Array<string>
   /**
-   * UpstreamType=1时，填次字段表示回源域名
-   */
-  UpstreamDomain?: string
-  /**
-   * UpstreamType=0时，填次字段表示回源IP
-   */
-  SrcList?: Array<string>
-  /**
-   * 是否开启HTTP2,开启HTTP2需要HTTPS支持
-   */
-  IsHttp2?: number
-  /**
-   * 表示是否强制跳转到HTTPS，1强制跳转Https，0不强制跳转
+   * 是否开启HTTP强制跳转到HTTPS。
+0：不强制跳转
+1：开启强制跳转
    */
   HttpsRewrite?: number
   /**
-   * 服务有多端口需要设置此字段
+   * 域名回源时的回源域名。UpstreamType为1时，需要填充此字段
+   */
+  UpstreamDomain?: string
+  /**
+   * IP回源时的回源IP列表。UpstreamType为0时，需要填充此字段
+   */
+  SrcList?: Array<string>
+  /**
+   * 是否开启HTTP2，需要开启HTTPS协议支持。
+0：关闭
+1：开启
+   */
+  IsHttp2?: number
+  /**
+   * 服务端口列表配置。
+NginxServerId：新增域名时填'0'
+Port：监听端口号
+Protocol：端口协议
+UpstreamPort：与Port相同
+UpstreamProtocol：与Protocol相同
    */
   Ports?: Array<PortItem>
   /**
-   * WAF实例类型，sparta-waf表示SAAS型WAF，clb-waf表示负载均衡型WAF，cdn-waf表示CDN上的Web防护能力
+   * 待废弃，可不填。WAF实例类型。
+sparta-waf：SAAS型WAF
+clb-waf：负载均衡型WAF
+cdn-waf：CDN上的Web防护能力
    */
   Edition?: string
   /**
-   * 是否开启长连接，0 短连接，1 长连接
+   * 是否开启长连接。
+0： 短连接
+1： 长连接
    */
   IsKeepAlive?: string
   /**
-   * 实例id，上线之后带上此字段
+   * 域名所属实例id
    */
   InstanceID?: string
   /**
-   * anycast IP类型开关： 0 普通IP 1 Anycast IP
+   * 待废弃，目前填0即可。anycast IP类型开关： 0 普通IP 1 Anycast IP
    */
   Anycast?: number
   /**
-   * src权重
+   * 回源IP列表各IP的权重，和SrcList一一对应。当且仅当UpstreamType为0，并且SrcList有多个IP，并且LoadBalance为2时需要填写，否则填 []
    */
   Weights?: Array<number | bigint>
   /**
-   * 是否开启主动健康检测，1表示开启，0表示不开启
+   * 是否开启主动健康检测。
+0：不开启
+1：开启
    */
   ActiveCheck?: number
   /**
@@ -2647,35 +2711,41 @@ export interface AddSpartaProtectionRequest {
    */
   TLSVersion?: number
   /**
-   * 加密套件信息
-   */
-  Ciphers?: Array<number | bigint>
-  /**
-   * 0:不支持选择：默认模版  1:通用型模版 2:安全型模版 3:自定义模版
+   * 加密套件模板。
+0：不支持选择，使用默认模版  
+1：通用型模版 
+2：安全型模版 
+3：自定义模版
    */
   CipherTemplate?: number
   /**
-   * 300s
+   * 自定义的加密套件列表。CipherTemplate为3时需要填此字段，表示自定义的加密套件，值通过DescribeCiphersDetail接口获取。
+   */
+  Ciphers?: Array<number | bigint>
+  /**
+   * WAF与源站的读超时时间，默认300s。
    */
   ProxyReadTimeout?: number
   /**
-   * 300s
+   * WAF与源站的写超时时间，默认300s。
    */
   ProxySendTimeout?: number
   /**
-   * 0:关闭SNI；1:开启SNI，SNI=源请求host；2:开启SNI，SNI=修改为源站host；3：开启SNI，自定义host，SNI=SniHost；
+   * WAF回源时的SNI类型。
+0：关闭SNI，不配置client_hello中的server_name
+1：开启SNI，client_hello中的server_name为防护域名
+2：开启SNI，SNI为域名回源时的源站域名
+3：开启SNI，SNI为自定义域名
    */
   SniType?: number
   /**
-   * SniType=3时，需要填此参数，表示自定义的host；
+   * SniType为3时，需要填此参数，表示自定义的SNI；
    */
   SniHost?: string
   /**
-   * is_cdn=3时，需要填此参数，表示自定义header
-   */
-  IpHeaders?: Array<string>
-  /**
-   * 0:关闭xff重置；1:开启xff重置
+   * 是否开启XFF重置。
+0：关闭
+1：开启
    */
   XFFReset?: number
 }
@@ -2904,11 +2974,11 @@ export interface DescribePortsResponse {
   /**
    * http端口列表
    */
-  HttpPorts: Array<string>
+  HttpPorts?: Array<string>
   /**
    * https端口列表
    */
-  HttpsPorts: Array<string>
+  HttpsPorts?: Array<string>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3014,7 +3084,7 @@ export interface ModifyDomainIpv6StatusResponse {
   /**
    * 返回的状态 （0: 操作失败 1:操作成功 2:企业版以上不支持 3:企业版以下不支持 ）
    */
-  Ipv6Status: number
+  Ipv6Status?: number
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3228,13 +3298,13 @@ export interface DescribeAntiInfoLeakRulesRequest {
  */
 export interface DescribePortsRequest {
   /**
-   * 版本
-   */
-  Edition?: string
-  /**
    * 实例ID
    */
   InstanceID?: string
+  /**
+   * 实例类型
+   */
+  Edition?: string
 }
 
 /**
@@ -3364,7 +3434,7 @@ export interface DescribeCiphersDetailResponse {
    * 加密套件信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Ciphers: Array<TLSCiphers>
+  Ciphers?: Array<TLSCiphers>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4025,7 +4095,7 @@ export interface DescribeDomainDetailsClbResponse {
   /**
    * clb域名详情
    */
-  DomainsClbPartInfo: ClbDomainsInfo
+  DomainsClbPartInfo?: ClbDomainsInfo
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

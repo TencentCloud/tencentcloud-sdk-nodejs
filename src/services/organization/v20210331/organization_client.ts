@@ -39,6 +39,7 @@ import {
   CreateOrganizationRequest,
   CreateOrganizationMemberResponse,
   MoveOrganizationNodeMembersRequest,
+  QuitOrganizationResponse,
   ListOrganizationIdentityRequest,
   AuthNode,
   DescribeOrganizationMemberEmailBindResponse,
@@ -63,6 +64,7 @@ import {
   OrgMemberAuthAccount,
   UpdateOrganizationMemberRequest,
   DescribeOrganizationResponse,
+  QuitOrganizationRequest,
   DescribeOrganizationMemberPoliciesRequest,
   DescribeOrganizationMemberEmailBindRequest,
   UpdateOrganizationMemberEmailBindResponse,
@@ -112,13 +114,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 更新企业组织节点
+   * 退出企业组织
    */
-  async UpdateOrganizationNode(
-    req: UpdateOrganizationNodeRequest,
-    cb?: (error: string, rep: UpdateOrganizationNodeResponse) => void
-  ): Promise<UpdateOrganizationNodeResponse> {
-    return this.request("UpdateOrganizationNode", req, cb)
+  async QuitOrganization(
+    req: QuitOrganizationRequest,
+    cb?: (error: string, rep: QuitOrganizationResponse) => void
+  ): Promise<QuitOrganizationResponse> {
+    return this.request("QuitOrganization", req, cb)
   }
 
   /**
@@ -189,6 +191,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeOrganizationMemberAuthIdentitiesResponse) => void
   ): Promise<DescribeOrganizationMemberAuthIdentitiesResponse> {
     return this.request("DescribeOrganizationMemberAuthIdentities", req, cb)
+  }
+
+  /**
+   * 更新企业组织节点
+   */
+  async UpdateOrganizationNode(
+    req: UpdateOrganizationNodeRequest,
+    cb?: (error: string, rep: UpdateOrganizationNodeResponse) => void
+  ): Promise<UpdateOrganizationNodeResponse> {
+    return this.request("UpdateOrganizationNode", req, cb)
   }
 
   /**

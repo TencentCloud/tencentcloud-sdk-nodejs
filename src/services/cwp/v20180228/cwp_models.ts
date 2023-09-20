@@ -225,6 +225,28 @@ export interface ExportBaselineFixListRequest {
 }
 
 /**
+ * ModifyLicenseOrder请求参数结构体
+ */
+export interface ModifyLicenseOrderRequest {
+  /**
+   * 资源ID
+   */
+  ResourceId: string
+  /**
+   * 预期值,如果当前为10,扩容则输入原来大的值, 缩容则比原来小的值(缩容时不允许预期值比使用量小),如果保持不变则填写原值,
+   */
+  InquireNum?: number
+  /**
+   * 项目ID,不修改则输入原值.
+   */
+  ProjectId?: number
+  /**
+   * 资源别名,不修改则输入原值.
+   */
+  Alias?: string
+}
+
+/**
  * DescribeBaselineTop返回参数结构体
  */
 export interface DescribeBaselineTopResponse {
@@ -1231,6 +1253,56 @@ export interface DescribeBaselineBasicInfoRequest {
 }
 
 /**
+ * 漏洞详细信息
+ */
+export interface VulDetailInfo {
+  /**
+   * 漏洞ID
+   */
+  VulId: number
+  /**
+   * 漏洞级别
+   */
+  Level: number
+  /**
+   * 漏洞名称
+   */
+  Name: string
+  /**
+   * cve编号
+   */
+  CveId: string
+  /**
+   * 1: web-cms漏洞 2:应用漏洞  4: Linux软件漏洞 5: Windows系统漏洞 0= 应急漏洞
+   */
+  VulCategory: number
+  /**
+   * 漏洞描述
+   */
+  Descript: string
+  /**
+   * 修复建议
+   */
+  Fix: string
+  /**
+   * 参考链接
+   */
+  Reference: string
+  /**
+   * CVSS评分
+   */
+  CvssScore: number
+  /**
+   * CVSS详情
+   */
+  Cvss: string
+  /**
+   * 发布时间
+   */
+  PublishTime: string
+}
+
+/**
  * DescribeProVersionInfo请求参数结构体
  */
 export type DescribeProVersionInfoRequest = null
@@ -1251,6 +1323,38 @@ export interface DescribeVulCountByDatesRequest {
    * 是否为应急漏洞筛选  是: yes
    */
   IfEmergency?: string
+}
+
+/**
+ * 安全播报列表
+ */
+export interface Broadcasts {
+  /**
+   * 文章名字
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Title: string
+  /**
+   * 类型：0=紧急通知，1=功能更新，2=行业荣誉，3=版本发布
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Type: number
+  /**
+   * 副标题
+   */
+  Subtitle: string
+  /**
+   * 发布时间
+   */
+  CreateTime: string
+  /**
+   * 文章唯一id
+   */
+  Id: number
+  /**
+   * 危险程度  0：无， 1：严重， 2: 高危， 3:中危， 4: 低危
+   */
+  Level: number
 }
 
 /**
@@ -1995,6 +2099,44 @@ export interface DescribeUsualLoginPlacesResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeAttackEvents请求参数结构体
+ */
+export interface DescribeAttackEventsRequest {
+  /**
+   * 返回数量，最大值为100。
+   */
+  Limit?: number
+  /**
+   * 偏移量，默认为0。
+   */
+  Offset?: number
+  /**
+   *  过滤条件。
+<li>Type - String 攻击状态 0: 尝试攻击 1: 攻击成功 - 是否必填: 否</li>
+<li>Status - String 事件处理状态 0：待处理 1：已处理 2： 已加白 3： 已忽略 4：已删除  - 是否必填: 否</li>
+<li>SrcIP - String 来源IP - 是否必填: 否</li>
+<li>Uuids - String 主机安全uuid - 是否必填: 否</li>
+<li>Quuids - String cvm uuid - 是否必填: 否</li>
+<li>DstPort - String 攻击目标端口 - 是否必填: 否</li>
+<li>MachineName - String 主机名称 - 是否必填: 否</li>
+<li>InstanceID - String 主机实例ID - 是否必填: 否</li>
+<li>AttackTimeBegin - String 攻击开始时间 - 是否必填: 否</li>
+<li>AttackTimeEnd - String 攻击结束时间 - 是否必填: 否</li>
+<li>VulSupportDefense - String 漏洞是否支持防御 0不支持，1支持 - 是否必填: 否</li>
+
+   */
+  Filters?: Array<Filter>
+  /**
+   * 排序
+   */
+  By?: string
+  /**
+   * 排序方式 ASC,DESC
+   */
+  Order?: string
 }
 
 /**
@@ -6339,53 +6481,22 @@ export interface ModifyWebPageProtectDirRequest {
 }
 
 /**
- * 漏洞详细信息
+ * DescribeAttackEvents返回参数结构体
  */
-export interface VulDetailInfo {
+export interface DescribeAttackEventsResponse {
   /**
-   * 漏洞ID
+   * 攻击事件列表
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  VulId: number
+  List?: Array<NetAttackEvent>
   /**
-   * 漏洞级别
+   * 总条数
    */
-  Level: number
+  TotalCount?: number
   /**
-   * 漏洞名称
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  Name: string
-  /**
-   * cve编号
-   */
-  CveId: string
-  /**
-   * 1: web-cms漏洞 2:应用漏洞  4: Linux软件漏洞 5: Windows系统漏洞 0= 应急漏洞
-   */
-  VulCategory: number
-  /**
-   * 漏洞描述
-   */
-  Descript: string
-  /**
-   * 修复建议
-   */
-  Fix: string
-  /**
-   * 参考链接
-   */
-  Reference: string
-  /**
-   * CVSS评分
-   */
-  CvssScore: number
-  /**
-   * CVSS详情
-   */
-  Cvss: string
-  /**
-   * 发布时间
-   */
-  PublishTime: string
+  RequestId?: string
 }
 
 /**
@@ -8461,6 +8572,24 @@ export interface DescribeScanVulSettingResponse {
 }
 
 /**
+ * DescribeSecurityBroadcasts返回参数结构体
+ */
+export interface DescribeSecurityBroadcastsResponse {
+  /**
+   * 列表
+   */
+  List: Array<Broadcasts>
+  /**
+   * 总共多少条
+   */
+  TotalCount: number
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 容器安全
 描述键值对过滤器，用于条件过滤查询。例如过滤ID、名称、状态等
 若存在多个Filter时，Filter间的关系为逻辑与（AND）关系。
@@ -9691,6 +9820,44 @@ export interface DescribeBaselineItemRiskTopResponse {
    * 结果数组
    */
   RiskItemTop5: Array<BaselineRiskItem>
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeMachineRiskCnt返回参数结构体
+ */
+export interface DescribeMachineRiskCntResponse {
+  /**
+   * 异地登录
+   */
+  HostLogin: number
+  /**
+   * 密码破解
+   */
+  BruteAttack: number
+  /**
+   * 恶意请求
+   */
+  MaliciousRequest: number
+  /**
+   * 反弹shell
+   */
+  ReverseShell: number
+  /**
+   * 高危命令
+   */
+  Bash: number
+  /**
+   * 本地提权
+   */
+  PrivilegeEscalation: number
+  /**
+   * 木马
+   */
+  Malware: number
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -11903,6 +12070,17 @@ export interface DescribeAssetJarInfoRequest {
 }
 
 /**
+ * DescribeMachineRiskCnt请求参数结构体
+ */
+export interface DescribeMachineRiskCntRequest {
+  /**
+   * 过滤条件。
+<li>Uuids- String - 是否必填：否 - 主机uuid</li>
+   */
+  Filters?: Array<Filter>
+}
+
+/**
  * DescribePrivilegeEvents请求参数结构体
  */
 export interface DescribePrivilegeEventsRequest {
@@ -11954,17 +12132,29 @@ export interface DescribeAssetEnvListResponse {
 export type DescribeVulHostCountScanTimeRequest = null
 
 /**
- * ExportScanTaskDetails返回参数结构体
+ * DescribeSecurityBroadcasts请求参数结构体
  */
-export interface ExportScanTaskDetailsResponse {
+export interface DescribeSecurityBroadcastsRequest {
   /**
-   * 任务ID,需要到接口“异步导出任务”ExportTasks获取DownloadUrl下载地址(不同于入参的本次检测任务id)
+   * 偏移量，默认为0。
    */
-  TaskId?: string
+  Offset?: number
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 需要返回的数量，默认为10 ，0=全部
    */
-  RequestId?: string
+  Limit?: number
+  /**
+   * 筛选发布日期：开始时间
+   */
+  BeginDate?: string
+  /**
+   * 筛选发布日期：结束时间
+   */
+  EndDate?: string
+  /**
+   * 过滤安全播报类型：0-紧急通知，1-功能更新，2-行业荣誉，3-版本发布
+   */
+  BroadcastType?: string
 }
 
 /**
@@ -13000,6 +13190,20 @@ export interface AssetCoreModuleDetail {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   UpdateTime: string
+}
+
+/**
+ * ExportScanTaskDetails返回参数结构体
+ */
+export interface ExportScanTaskDetailsResponse {
+  /**
+   * 任务ID,需要到接口“异步导出任务”ExportTasks获取DownloadUrl下载地址(不同于入参的本次检测任务id)
+   */
+  TaskId?: string
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -16462,6 +16666,24 @@ export interface ExportIgnoreRuleEffectHostListRequest {
 }
 
 /**
+ * ModifyLicenseOrder返回参数结构体
+ */
+export interface ModifyLicenseOrderResponse {
+  /**
+   * 订单号
+   */
+  DealNames?: Array<string>
+  /**
+   * 资源ID
+   */
+  ResourceIds?: Array<string>
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeVulHostCountScanTime返回参数结构体
  */
 export interface DescribeVulHostCountScanTimeResponse {
@@ -16637,6 +16859,81 @@ export interface DescribeBaselineListRequest {
 <li>Uuid- String - 主机uuid</li>
    */
   Filters?: Array<Filters>
+}
+
+/**
+ * 网络攻击事件
+ */
+export interface NetAttackEvent {
+  /**
+   * 日志ID
+   */
+  Id?: number
+  /**
+   * 客户端ID
+   */
+  Uuid?: string
+  /**
+   * 目标端口
+   */
+  DstPort?: number
+  /**
+   * 来源IP
+   */
+  SrcIP?: string
+  /**
+   * 来源地
+   */
+  Location?: string
+  /**
+   * 漏洞id
+   */
+  VulId?: number
+  /**
+   * 漏洞名称
+   */
+  VulName?: string
+  /**
+   * 攻击时间
+   */
+  MergeTime?: string
+  /**
+   * 主机额外信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MachineExtraInfo?: MachineExtraInfo
+  /**
+   * 攻击状态，0: 尝试攻击 1: 实锤攻击(攻击成功)
+   */
+  Type?: number
+  /**
+   * 处理状态，0 待处理 1 已处理 2 已加白  3 已忽略 4 已删除 5: 已开启防御
+   */
+  Status?: number
+  /**
+   * 漏洞是否支持防御，0:不支持 1:支持
+   */
+  VulSupportDefense?: number
+  /**
+   * 是否开启漏洞防御，0关1开
+   */
+  VulDefenceStatus?: number
+  /**
+   * 机器付费版本，0 基础版，1专业版，2旗舰版，3普惠版
+   */
+  PayVersion?: number
+  /**
+   * cvm uuid
+   */
+  Quuid?: string
+  /**
+   * 攻击次数
+   */
+  Count?: number
+  /**
+   * 是否今日新增主机
+   */
+  New?: boolean
 }
 
 /**

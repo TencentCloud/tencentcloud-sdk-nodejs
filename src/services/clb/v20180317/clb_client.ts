@@ -50,7 +50,7 @@ import {
   RsWeightRule,
   RegisterFunctionTargetsRequest,
   DeregisterTargetsFromClassicalLBRequest,
-  SetSecurityGroupForLoadbalancersResponse,
+  InquiryPriceModifyLoadBalancerRequest,
   BasicTargetGroupInfo,
   ModifyTargetWeightResponse,
   ZoneResource,
@@ -70,11 +70,12 @@ import {
   RegisterTargetsWithClassicalLBResponse,
   DescribeTargetGroupsResponse,
   LoadBalancerHealth,
-  ModifyLoadBalancerSlaResponse,
+  InquiryPriceCreateLoadBalancerRequest,
   DeleteLoadBalancerListenersRequest,
   BlockedIP,
   ModifyRuleResponse,
   DescribeClassicalLBTargetsRequest,
+  InquiryPriceRenewLoadBalancerResponse,
   DeregisterFunctionTargetsResponse,
   DescribeCustomizedConfigListRequest,
   AutoRewriteRequest,
@@ -87,14 +88,16 @@ import {
   DescribeTaskStatusResponse,
   BatchRegisterTargetsResponse,
   ModifyLoadBalancerAttributesRequest,
-  TypeInfo,
+  InquiryPriceModifyLoadBalancerResponse,
   DescribeLBListenersRequest,
   SlaUpdateParam,
   Target,
   DescribeLoadBalancerTrafficRequest,
   DescribeBlockIPListRequest,
   CertIdRelatedWithLoadBalancers,
+  ItemPrice,
   DescribeClassicalLBHealthStatusResponse,
+  ModifyLoadBalancerSlaResponse,
   DescribeClsLogSetRequest,
   Listener,
   LoadBalancerTraffic,
@@ -120,6 +123,7 @@ import {
   DeregisterFunctionTargetsRequest,
   DescribeClassicalLBByInstanceIdRequest,
   FunctionTarget,
+  InquiryPriceRefundLoadBalancerResponse,
   DescribeResourcesResponse,
   ModifyTargetGroupInstancesWeightRequest,
   ManualRewriteResponse,
@@ -138,6 +142,7 @@ import {
   ModifyLoadBalancersProjectRequest,
   CertificateInput,
   ResourceAvailability,
+  SetLoadBalancerSecurityGroupsRequest,
   DescribeCustomizedConfigAssociateListResponse,
   SetCustomizedConfigForLoadBalancerRequest,
   CreateListenerResponse,
@@ -156,6 +161,7 @@ import {
   BatchDeregisterTargetsRequest,
   DeregisterTargetGroupInstancesRequest,
   ManualRewriteRequest,
+  InquiryPriceRefundLoadBalancerRequest,
   ModifyListenerResponse,
   DescribeTargetHealthResponse,
   CertInfo,
@@ -164,6 +170,7 @@ import {
   BindDetailItem,
   CreateListenerRequest,
   CreateClsLogSetRequest,
+  TypeInfo,
   DisassociateTargetGroupsRequest,
   Filter,
   ClusterResource,
@@ -196,14 +203,16 @@ import {
   ExclusiveCluster,
   DeregisterTargetsRequest,
   ModifyLoadBalancerMixIpTargetResponse,
-  InternetAccessible,
+  InquiryPriceCreateLoadBalancerResponse,
   CreateLoadBalancerSnatIpsRequest,
   DescribeTargetGroupInstancesResponse,
   DescribeQuotaResponse,
   DeleteTargetGroupsResponse,
+  Price,
   ModifyTargetGroupInstancesPortRequest,
   BatchRegisterTargetsRequest,
   ListenerBackend,
+  SetSecurityGroupForLoadbalancersResponse,
   RuleInput,
   TagInfo,
   SnatIp,
@@ -225,7 +234,7 @@ import {
   DeleteLoadBalancerListenersResponse,
   DescribeIdleLoadBalancersRequest,
   DeleteLoadBalancerSnatIpsRequest,
-  SetLoadBalancerSecurityGroupsRequest,
+  InternetAccessible,
   DescribeClassicalLBTargetsResponse,
   RewriteLocationMap,
   ModifyTargetPortRequest,
@@ -235,6 +244,7 @@ import {
   TargetGroupInfo,
   DeleteListenerResponse,
   DeleteLoadBalancerSnatIpsResponse,
+  InquiryPriceRenewLoadBalancerRequest,
   CertificateOutput,
   DeleteTargetGroupsRequest,
   DescribeClassicalLBListenersRequest,
@@ -265,6 +275,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: RegisterTargetsResponse) => void
   ): Promise<RegisterTargetsResponse> {
     return this.request("RegisterTargets", req, cb)
+  }
+
+  /**
+   * RegisterTargetsWithClassicalLB 接口用于绑定后端服务到传统型负载均衡。本接口为异步接口，接口返回成功后，需以返回的 RequestId 为入参，调用 DescribeTaskStatus 接口查询本次任务是否成功。
+   */
+  async RegisterTargetsWithClassicalLB(
+    req: RegisterTargetsWithClassicalLBRequest,
+    cb?: (error: string, rep: RegisterTargetsWithClassicalLBResponse) => void
+  ): Promise<RegisterTargetsWithClassicalLBResponse> {
+    return this.request("RegisterTargetsWithClassicalLB", req, cb)
   }
 
   /**
@@ -299,13 +319,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * RegisterTargetsWithClassicalLB 接口用于绑定后端服务到传统型负载均衡。本接口为异步接口，接口返回成功后，需以返回的 RequestId 为入参，调用 DescribeTaskStatus 接口查询本次任务是否成功。
+   * InquiryPriceRefundLoadBalancer接口查询负载均衡退费价格。
    */
-  async RegisterTargetsWithClassicalLB(
-    req: RegisterTargetsWithClassicalLBRequest,
-    cb?: (error: string, rep: RegisterTargetsWithClassicalLBResponse) => void
-  ): Promise<RegisterTargetsWithClassicalLBResponse> {
-    return this.request("RegisterTargetsWithClassicalLB", req, cb)
+  async InquiryPriceRefundLoadBalancer(
+    req: InquiryPriceRefundLoadBalancerRequest,
+    cb?: (error: string, rep: InquiryPriceRefundLoadBalancerResponse) => void
+  ): Promise<InquiryPriceRefundLoadBalancerResponse> {
+    return this.request("InquiryPriceRefundLoadBalancer", req, cb)
   }
 
   /**
@@ -359,6 +379,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteListenerResponse) => void
   ): Promise<DeleteListenerResponse> {
     return this.request("DeleteListener", req, cb)
+  }
+
+  /**
+   * InquiryPriceModifyLoadBalancer接口修改负载均衡配置询价。
+   */
+  async InquiryPriceModifyLoadBalancer(
+    req: InquiryPriceModifyLoadBalancerRequest,
+    cb?: (error: string, rep: InquiryPriceModifyLoadBalancerResponse) => void
+  ): Promise<InquiryPriceModifyLoadBalancerResponse> {
+    return this.request("InquiryPriceModifyLoadBalancer", req, cb)
   }
 
   /**
@@ -467,6 +497,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * InquiryPriceRenewLoadBalancer接口查询对负载均衡续费的价格，只支持预付费负载均衡续费。
+   */
+  async InquiryPriceRenewLoadBalancer(
+    req: InquiryPriceRenewLoadBalancerRequest,
+    cb?: (error: string, rep: InquiryPriceRenewLoadBalancerResponse) => void
+  ): Promise<InquiryPriceRenewLoadBalancerResponse> {
+    return this.request("InquiryPriceRenewLoadBalancer", req, cb)
+  }
+
+  /**
    * 修改负载均衡转发规则上所绑定的云函数。
    */
   async ModifyFunctionTargets(
@@ -561,6 +601,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteLoadBalancerResponse) => void
   ): Promise<DeleteLoadBalancerResponse> {
     return this.request("DeleteLoadBalancer", req, cb)
+  }
+
+  /**
+   * InquiryPriceCreateLoadBalancer接口查询创建负载均衡的价格。
+   */
+  async InquiryPriceCreateLoadBalancer(
+    req: InquiryPriceCreateLoadBalancerRequest,
+    cb?: (error: string, rep: InquiryPriceCreateLoadBalancerResponse) => void
+  ): Promise<InquiryPriceCreateLoadBalancerResponse> {
+    return this.request("InquiryPriceCreateLoadBalancer", req, cb)
   }
 
   /**

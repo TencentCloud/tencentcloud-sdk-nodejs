@@ -5385,11 +5385,11 @@ export interface DescribeInstancesModificationResponse {
     /**
      * 实例调整的机型配置的数量。
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 实例支持调整的机型配置列表。
      */
-    InstanceTypeConfigStatusSet: Array<InstanceTypeConfigStatus>;
+    InstanceTypeConfigStatusSet?: Array<InstanceTypeConfigStatus>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */

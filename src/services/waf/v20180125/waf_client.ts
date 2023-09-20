@@ -37,6 +37,7 @@ import {
   DomainPackageNew,
   DescribeCustomWhiteRuleResponse,
   AccessLogItems,
+  SwitchElasticModeRequest,
   ModifyInstanceNameRequest,
   DescribePeakValueResponse,
   HostDel,
@@ -122,6 +123,7 @@ import {
   CreateHostResponse,
   IpAccessControlItem,
   DeleteHostResponse,
+  SwitchElasticModeResponse,
   FreshAntiFakeUrlResponse,
   ModifyBotStatusRequest,
   DeleteSpartaProtectionRequest,
@@ -322,7 +324,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取一个clb域名详情
+   * 获取一个clbwaf域名详情
    */
   async DescribeDomainDetailsClb(
     req: DescribeDomainDetailsClbRequest,
@@ -748,6 +750,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 切换弹性的开关
+   */
+  async SwitchElasticMode(
+    req: SwitchElasticModeRequest,
+    cb?: (error: string, rep: SwitchElasticModeResponse) => void
+  ): Promise<SwitchElasticModeResponse> {
+    return this.request("SwitchElasticMode", req, cb)
+  }
+
+  /**
    * 修改实例的自动续费开关
    */
   async ModifyInstanceRenewFlag(
@@ -758,7 +770,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询单个saas域名详情
+   * 查询单个saaswaf域名详情
    */
   async DescribeDomainDetailsSaas(
     req: DescribeDomainDetailsSaasRequest,
@@ -851,7 +863,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 添加Spart防护域名
+   * 添加SaaS型WAF防护域名
    */
   async AddSpartaProtection(
     req: AddSpartaProtectionRequest,
@@ -911,7 +923,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询加密套件信息
+   * Saas型WAF接入查询加密套件信息
    */
   async DescribeCiphersDetail(
     req?: DescribeCiphersDetailRequest,
@@ -1061,7 +1073,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * SAASWAF删除防护域名
+   * Saas型WAF删除防护域名
    */
   async DeleteSpartaProtection(
     req: DeleteSpartaProtectionRequest,
@@ -1311,7 +1323,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取非标端口列表
+   * 获取Saas型WAF防护端口列表
    */
   async DescribePorts(
     req: DescribePortsRequest,
@@ -1371,7 +1383,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * clb-waf中添加防护的域名
+   * clb-waf中添加防护域名
    */
   async CreateHost(
     req: CreateHostRequest,
@@ -1411,7 +1423,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改ipv6开关
+   * 切换ipv6开关
    */
   async ModifyDomainIpv6Status(
     req: ModifyDomainIpv6StatusRequest,
