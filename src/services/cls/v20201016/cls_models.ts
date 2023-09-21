@@ -640,6 +640,24 @@ export interface DescribeDashboardsRequest {
 }
 
 /**
+ * QueryMetric请求参数结构体
+ */
+export interface QueryMetricRequest {
+  /**
+   * 查询语句，使用PromQL语法
+   */
+  Query: string
+  /**
+   * 指标主题ID
+   */
+  TopicId: string
+  /**
+   * 查询时间，秒级Unix时间戳
+   */
+  Time?: number
+}
+
+/**
  * 日志中的KV对
  */
 export interface LogItem {
@@ -1757,6 +1775,24 @@ export interface FullTextInfo {
 }
 
 /**
+ * QueryMetric返回参数结构体
+ */
+export interface QueryMetricResponse {
+  /**
+   * 指标查询结果类型
+   */
+  ResultType?: string
+  /**
+   * 指标查询结果
+   */
+  Result?: string
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribePartitions返回参数结构体
  */
 export interface DescribePartitionsResponse {
@@ -2850,6 +2886,24 @@ export interface DeleteConsumerRequest {
 }
 
 /**
+ * QueryRangeMetric返回参数结构体
+ */
+export interface QueryRangeMetricResponse {
+  /**
+   * 指标查询结果类型
+   */
+  ResultType?: string
+  /**
+   * 指标查询结果
+   */
+  Result?: string
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteIndex请求参数结构体
  */
 export interface DeleteIndexRequest {
@@ -3271,6 +3325,32 @@ export interface CreateExportRequest {
    * 日志导出数据格式。json，csv，默认为json
    */
   Format?: string
+}
+
+/**
+ * QueryRangeMetric请求参数结构体
+ */
+export interface QueryRangeMetricRequest {
+  /**
+   * 指标主题ID
+   */
+  TopicId: string
+  /**
+   * 查询语句，使用PromQL语法
+   */
+  Query: string
+  /**
+   * 查询起始时间，秒级Unix时间戳
+   */
+  Start: number
+  /**
+   * 查询结束时间，秒级Unix时间戳
+   */
+  End: number
+  /**
+   * 查询时间间隔，单位秒
+   */
+  Step: number
 }
 
 /**

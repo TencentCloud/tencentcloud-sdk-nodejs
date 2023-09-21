@@ -94,7 +94,6 @@ export declare class Client extends AbstractClient {
     DeleteResourceTag(req: DeleteResourceTagRequest, cb?: (error: string, rep: DeleteResourceTagResponse) => void): Promise<DeleteResourceTagResponse>;
     /**
      * 用于查询已建立的标签列表。
-
      */
     DescribeTags(req: DescribeTagsRequest, cb?: (error: string, rep: DescribeTagsResponse) => void): Promise<DescribeTagsResponse>;
     /**
@@ -103,7 +102,6 @@ export declare class Client extends AbstractClient {
     DescribeProjects(req: DescribeProjectsRequest, cb?: (error: string, rep: DescribeProjectsResponse) => void): Promise<DescribeProjectsResponse>;
     /**
      * 用于查询已建立的标签列表中的标签键。
-
      */
     DescribeTagKeys(req: DescribeTagKeysRequest, cb?: (error: string, rep: DescribeTagKeysResponse) => void): Promise<DescribeTagKeysResponse>;
     /**

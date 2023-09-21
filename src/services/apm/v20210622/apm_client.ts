@@ -18,6 +18,7 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  SpanLog,
   ModifyApmInstanceRequest,
   ApmInstanceDetail,
   CreateApmInstanceRequest,
@@ -25,12 +26,15 @@ import {
   QueryMetricItem,
   TerminateApmInstanceRequest,
   DescribeApmInstancesResponse,
+  Span,
   ApmAgentInfo,
+  DescribeGeneralSpanListResponse,
   ApmMetricRecord,
   DescribeServiceOverviewRequest,
   DescribeApmAgentResponse,
   ApmField,
   Line,
+  DescribeGeneralSpanListRequest,
   APMKVItem,
   OrderBy,
   DescribeMetricRecordsResponse,
@@ -41,9 +45,12 @@ import {
   DescribeMetricRecordsRequest,
   DescribeGeneralMetricDataRequest,
   CreateApmInstanceResponse,
+  SpanReference,
+  SpanProcess,
   ModifyApmInstanceResponse,
   GeneralFilter,
   DescribeApmInstancesRequest,
+  SpanTag,
   DescribeGeneralMetricDataResponse,
   TerminateApmInstanceResponse,
 } from "./apm_models"
@@ -65,6 +72,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyApmInstanceResponse) => void
   ): Promise<ModifyApmInstanceResponse> {
     return this.request("ModifyApmInstance", req, cb)
+  }
+
+  /**
+   * 通用查询调用链列表
+   */
+  async DescribeGeneralSpanList(
+    req: DescribeGeneralSpanListRequest,
+    cb?: (error: string, rep: DescribeGeneralSpanListResponse) => void
+  ): Promise<DescribeGeneralSpanListResponse> {
+    return this.request("DescribeGeneralSpanList", req, cb)
   }
 
   /**

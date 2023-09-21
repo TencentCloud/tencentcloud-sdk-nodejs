@@ -909,12 +909,6 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateRedInvoice", req, cb);
     }
     /**
-     * 登记挂账撤销。此接口可以实现把RegisterBillSupportWithdraw接口完成的登记挂账进行撤销，即调减普通会员子账户的可提现和可用余额，调增挂账子账户的可用余额。
-     */
-    async RevResigterBillSupportWithdraw(req, cb) {
-        return this.request("RevResigterBillSupportWithdraw", req, cb);
-    }
-    /**
      * 发起支付等渠道操作后，可以调用该接口查询渠道的数据。
      */
     async QueryCloudChannelData(req, cb) {

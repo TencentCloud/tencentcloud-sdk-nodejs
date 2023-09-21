@@ -2443,8 +2443,13 @@ export interface GeneralAccurateOCRResponse {
   TextDetections?: Array<TextDetection>
   /**
    * 图片旋转角度（角度制），文本的水平方向为0°；顺时针为正，逆时针为负。点击查看<a href="https://cloud.tencent.com/document/product/866/45139">如何纠正倾斜文本</a>
+   * @deprecated
    */
   Angel?: number
+  /**
+   * 图片旋转角度（角度制），文本的水平方向为0°；顺时针为正，逆时针为负。点击查看<a href="https://cloud.tencent.com/document/product/866/45139">如何纠正倾斜文本</a>
+   */
+  Angle?: number
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5357,6 +5362,10 @@ export interface GeneralAccurateOCRRequest {
    * 需要识别的PDF页面的对应页码，仅支持PDF单页识别，当上传文件为PDF且IsPdf参数值为true时有效，默认值为1。
    */
   PdfPageNumber?: number
+  /**
+   * 文本检测开关，默认为true。设置为false可直接进行单行识别，适用于仅包含正向单行文本的图片场景。
+   */
+  EnableDetectText?: boolean
 }
 
 /**

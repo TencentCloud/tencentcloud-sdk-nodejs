@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { ModifyApmInstanceRequest, CreateApmInstanceRequest, DescribeServiceOverviewResponse, TerminateApmInstanceRequest, DescribeApmInstancesResponse, DescribeServiceOverviewRequest, DescribeApmAgentResponse, DescribeMetricRecordsResponse, DescribeApmAgentRequest, DescribeMetricRecordsRequest, DescribeGeneralMetricDataRequest, CreateApmInstanceResponse, ModifyApmInstanceResponse, DescribeApmInstancesRequest, DescribeGeneralMetricDataResponse, TerminateApmInstanceResponse } from "./apm_models";
+import { ModifyApmInstanceRequest, CreateApmInstanceRequest, DescribeServiceOverviewResponse, TerminateApmInstanceRequest, DescribeApmInstancesResponse, DescribeGeneralSpanListResponse, DescribeServiceOverviewRequest, DescribeApmAgentResponse, DescribeGeneralSpanListRequest, DescribeMetricRecordsResponse, DescribeApmAgentRequest, DescribeMetricRecordsRequest, DescribeGeneralMetricDataRequest, CreateApmInstanceResponse, ModifyApmInstanceResponse, DescribeApmInstancesRequest, DescribeGeneralMetricDataResponse, TerminateApmInstanceResponse } from "./apm_models";
 /**
  * apm client
  * @class
@@ -11,6 +11,10 @@ export declare class Client extends AbstractClient {
      * 修改Apm实例接口
      */
     ModifyApmInstance(req: ModifyApmInstanceRequest, cb?: (error: string, rep: ModifyApmInstanceResponse) => void): Promise<ModifyApmInstanceResponse>;
+    /**
+     * 通用查询调用链列表
+     */
+    DescribeGeneralSpanList(req: DescribeGeneralSpanListRequest, cb?: (error: string, rep: DescribeGeneralSpanListResponse) => void): Promise<DescribeGeneralSpanListResponse>;
     /**
      * APM实例列表拉取
      */

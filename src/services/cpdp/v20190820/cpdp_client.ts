@@ -211,7 +211,7 @@ import {
   QueryMerchantPayWayListRequest,
   QueryOpenBankRefundOrderRequest,
   WithdrawCashMembershipRequest,
-  RevResigterBillSupportWithdrawRequest,
+  TransferItem,
   CreateInvoiceResponse,
   AddMerchantRequest,
   CreateRedInvoiceResultV2,
@@ -336,7 +336,6 @@ import {
   PaymentOrders,
   CloudSubRefundItem,
   QueryOpenBankDownLoadUrlResponse,
-  RevResigterBillSupportWithdrawResponse,
   QueryOpenBankVerificationOrderResponse,
   ApplyApplicationMaterialResponse,
   DistributeQueryResult,
@@ -468,7 +467,6 @@ import {
   MultiApplyOrder,
   AddFlexIdInfoRequest,
   ModifyMerchantRequest,
-  TransferItem,
   OrderItem,
   PayeeAccountInfos,
   RefundMemberTransactionRequest,
@@ -2172,16 +2170,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateRedInvoiceResponse) => void
   ): Promise<CreateRedInvoiceResponse> {
     return this.request("CreateRedInvoice", req, cb)
-  }
-
-  /**
-   * 登记挂账撤销。此接口可以实现把RegisterBillSupportWithdraw接口完成的登记挂账进行撤销，即调减普通会员子账户的可提现和可用余额，调增挂账子账户的可用余额。
-   */
-  async RevResigterBillSupportWithdraw(
-    req: RevResigterBillSupportWithdrawRequest,
-    cb?: (error: string, rep: RevResigterBillSupportWithdrawResponse) => void
-  ): Promise<RevResigterBillSupportWithdrawResponse> {
-    return this.request("RevResigterBillSupportWithdraw", req, cb)
   }
 
   /**

@@ -1478,16 +1478,6 @@ it("cpdp.v20190820.CreateRedInvoice", async function () {
     }
 })
 
-it("cpdp.v20190820.RevResigterBillSupportWithdraw", async function () {
-    try {
-       const data = await client.RevResigterBillSupportWithdraw({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("cpdp.v20190820.QueryCloudChannelData", async function () {
     try {
        const data = await client.QueryCloudChannelData({})

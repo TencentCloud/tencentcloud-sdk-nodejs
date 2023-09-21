@@ -34,6 +34,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyApmInstance", req, cb);
     }
     /**
+     * 通用查询调用链列表
+     */
+    async DescribeGeneralSpanList(req, cb) {
+        return this.request("DescribeGeneralSpanList", req, cb);
+    }
+    /**
      * APM实例列表拉取
      */
     async DescribeApmInstances(req, cb) {

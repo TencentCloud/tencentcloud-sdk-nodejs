@@ -313,9 +313,8 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 用于查询已建立的标签列表。
-
-     */
+   * 用于查询已建立的标签列表。
+   */
   async DescribeTags(
     req: DescribeTagsRequest,
     cb?: (error: string, rep: DescribeTagsResponse) => void
@@ -334,9 +333,8 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 用于查询已建立的标签列表中的标签键。
-
-     */
+   * 用于查询已建立的标签列表中的标签键。
+   */
   async DescribeTagKeys(
     req: DescribeTagKeysRequest,
     cb?: (error: string, rep: DescribeTagKeysResponse) => void

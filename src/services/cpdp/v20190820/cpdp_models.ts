@@ -6816,49 +6816,64 @@ export interface WithdrawCashMembershipRequest {
 }
 
 /**
- * RevResigterBillSupportWithdraw请求参数结构体
+ * 转账充值明细信息
  */
-export interface RevResigterBillSupportWithdrawRequest {
+export interface TransferItem {
   /**
-   * String(22)，商户号（签约客户号）
+   * STRING(10)，入账类型（02: 会员充值; 03: 资金挂账）
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  MrchCode: string
+  InAcctType: string
   /**
    * STRING(32)，交易网会员代码
+注意：此字段可能返回 null，表示取不到有效值。
    */
   TranNetMemberCode: string
   /**
-   * STRING(30)，原订单号（RegisterBillSupportWithdraw接口中的订单号）
+   * STRING(50)，见证子帐户的帐号
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  OldOrderNo: string
+  SubAcctNo: string
   /**
-   * STRING(20)，撤销金额（支持部分撤销，不能大于原订单可用金额，包含交易费用）
+   * STRING(20)，入金金额
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  CancelAmt: string
+  TranAmt: string
   /**
-   * STRING(20)，交易费用（暂未使用，默认传0.0）
+   * STRING(50)，入金账号
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  TranFee: string
+  InAcctNo: string
   /**
-   * STRING(300)，备注
+   * STRING(150)，入金账户名称
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Remark?: string
+  InAcctName: string
   /**
-   * STRING(300)，保留域1
+   * STRING(3)，币种
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  ReservedMsgOne?: string
+  Ccy: string
   /**
-   * STRING(300)，保留域2
+   * STRING(8)，会计日期（即银行主机记账日期）
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  ReservedMsgTwo?: string
+  AccountingDate: string
   /**
-   * STRING(300)，保留域3
+   * STRING(150)，银行名称（付款账户银行名称）
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  ReservedMsgThree?: string
+  BankName: string
   /**
-   * STRING(12)，接入环境，默认接入沙箱环境。接入正式环境填"prod"
+   * STRING(300)，转账备注
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Profile?: string
+  Remark: string
+  /**
+   * STRING(52)，见证系统流水号
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FrontSeqNo: string
 }
 
 /**
@@ -11561,38 +11576,6 @@ export interface QueryOpenBankDownLoadUrlResponse {
 }
 
 /**
- * RevResigterBillSupportWithdraw返回参数结构体
- */
-export interface RevResigterBillSupportWithdrawResponse {
-  /**
-   * String(20)，返回码
-   */
-  TxnReturnCode?: string
-  /**
-   * String(100)，返回信息
-   */
-  TxnReturnMsg?: string
-  /**
-   * String(22)，交易流水号
-   */
-  CnsmrSeqNo?: string
-  /**
-   * STRING(52)，见证系统流水号
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  FrontSeqNo?: string
-  /**
-   * STRING(1027)，保留域
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ReservedMsg?: string
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * QueryOpenBankVerificationOrder返回参数结构体
  */
 export interface QueryOpenBankVerificationOrderResponse {
@@ -16206,67 +16189,6 @@ export interface ModifyMerchantRequest {
    * B2B 支付标志。是否开通 B2B支付， 1:开通 0:不开通。
    */
   BusinessPayFlag: string
-}
-
-/**
- * 转账充值明细信息
- */
-export interface TransferItem {
-  /**
-   * STRING(10)，入账类型（02: 会员充值; 03: 资金挂账）
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  InAcctType: string
-  /**
-   * STRING(32)，交易网会员代码
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TranNetMemberCode: string
-  /**
-   * STRING(50)，见证子帐户的帐号
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SubAcctNo: string
-  /**
-   * STRING(20)，入金金额
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TranAmt: string
-  /**
-   * STRING(50)，入金账号
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  InAcctNo: string
-  /**
-   * STRING(150)，入金账户名称
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  InAcctName: string
-  /**
-   * STRING(3)，币种
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Ccy: string
-  /**
-   * STRING(8)，会计日期（即银行主机记账日期）
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  AccountingDate: string
-  /**
-   * STRING(150)，银行名称（付款账户银行名称）
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  BankName: string
-  /**
-   * STRING(300)，转账备注
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Remark: string
-  /**
-   * STRING(52)，见证系统流水号
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  FrontSeqNo: string
 }
 
 /**

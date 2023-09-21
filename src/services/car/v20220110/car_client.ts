@@ -20,7 +20,9 @@ import { ClientConfig } from "../../../common/interface"
 import {
   CreateSessionResponse,
   StopPublishStreamRequest,
+  StartPublishStreamWithURLResponse,
   StopPublishStreamResponse,
+  StartPublishStreamWithURLRequest,
   DestroySessionResponse,
   StartPublishStreamResponse,
   ApplyConcurrentResponse,
@@ -50,16 +52,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 停止云端推流
-   */
-  async StopPublishStream(
-    req: StopPublishStreamRequest,
-    cb?: (error: string, rep: StopPublishStreamResponse) => void
-  ): Promise<StopPublishStreamResponse> {
-    return this.request("StopPublishStream", req, cb)
-  }
-
-  /**
    * 销毁会话
    */
   async DestroySession(
@@ -70,16 +62,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口用于创建会话。接口超时时间：5秒。
-   */
-  async CreateSession(
-    req: CreateSessionRequest,
-    cb?: (error: string, rep: CreateSessionResponse) => void
-  ): Promise<CreateSessionResponse> {
-    return this.request("CreateSession", req, cb)
-  }
-
-  /**
    * 开始云端推流
    */
   async StartPublishStream(
@@ -87,5 +69,35 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: StartPublishStreamResponse) => void
   ): Promise<StartPublishStreamResponse> {
     return this.request("StartPublishStream", req, cb)
+  }
+
+  /**
+   * 停止云端推流
+   */
+  async StopPublishStream(
+    req: StopPublishStreamRequest,
+    cb?: (error: string, rep: StopPublishStreamResponse) => void
+  ): Promise<StopPublishStreamResponse> {
+    return this.request("StopPublishStream", req, cb)
+  }
+
+  /**
+   * 开始云端推流到指定URL
+   */
+  async StartPublishStreamWithURL(
+    req: StartPublishStreamWithURLRequest,
+    cb?: (error: string, rep: StartPublishStreamWithURLResponse) => void
+  ): Promise<StartPublishStreamWithURLResponse> {
+    return this.request("StartPublishStreamWithURL", req, cb)
+  }
+
+  /**
+   * 本接口用于创建会话。接口超时时间：5秒。
+   */
+  async CreateSession(
+    req: CreateSessionRequest,
+    cb?: (error: string, rep: CreateSessionResponse) => void
+  ): Promise<CreateSessionResponse> {
+    return this.request("CreateSession", req, cb)
   }
 }

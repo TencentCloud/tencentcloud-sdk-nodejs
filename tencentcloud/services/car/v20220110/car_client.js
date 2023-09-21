@@ -34,28 +34,34 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ApplyConcurrent", req, cb);
     }
     /**
-     * 停止云端推流
-     */
-    async StopPublishStream(req, cb) {
-        return this.request("StopPublishStream", req, cb);
-    }
-    /**
      * 销毁会话
      */
     async DestroySession(req, cb) {
         return this.request("DestroySession", req, cb);
     }
     /**
-     * 本接口用于创建会话。接口超时时间：5秒。
-     */
-    async CreateSession(req, cb) {
-        return this.request("CreateSession", req, cb);
-    }
-    /**
      * 开始云端推流
      */
     async StartPublishStream(req, cb) {
         return this.request("StartPublishStream", req, cb);
+    }
+    /**
+     * 停止云端推流
+     */
+    async StopPublishStream(req, cb) {
+        return this.request("StopPublishStream", req, cb);
+    }
+    /**
+     * 开始云端推流到指定URL
+     */
+    async StartPublishStreamWithURL(req, cb) {
+        return this.request("StartPublishStreamWithURL", req, cb);
+    }
+    /**
+     * 本接口用于创建会话。接口超时时间：5秒。
+     */
+    async CreateSession(req, cb) {
+        return this.request("CreateSession", req, cb);
     }
 }
 exports.Client = Client;

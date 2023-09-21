@@ -1758,110 +1758,110 @@ export interface Listener {
     /**
      * 负载均衡监听器 ID
      */
-    ListenerId: string;
+    ListenerId?: string;
     /**
      * 监听器协议
      */
-    Protocol: string;
+    Protocol?: string;
     /**
      * 监听器端口
      */
-    Port: number;
+    Port?: number;
     /**
      * 监听器绑定的证书信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Certificate: CertificateOutput;
+    Certificate?: CertificateOutput;
     /**
      * 监听器的健康检查信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    HealthCheck: HealthCheck;
+    HealthCheck?: HealthCheck;
     /**
      * 请求的调度方式
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Scheduler: string;
+    Scheduler?: string;
     /**
      * 会话保持时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SessionExpireTime: number;
+    SessionExpireTime?: number;
     /**
-     * 是否开启SNI特性（本参数仅对于HTTPS监听器有意义）
+     * 是否开启SNI特性，1：表示开启，0：表示不开启（本参数仅对于HTTPS监听器有意义）
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SniSwitch: number;
+    SniSwitch?: number;
     /**
      * 监听器下的全部转发规则（本参数仅对于HTTP/HTTPS监听器有意义）
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Rules: Array<RuleOutput>;
+    Rules?: Array<RuleOutput>;
     /**
      * 监听器的名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ListenerName: string;
+    ListenerName?: string;
     /**
      * 监听器的创建时间。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CreateTime: string;
+    CreateTime?: string;
     /**
      * 端口段结束端口
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    EndPort: number;
+    EndPort?: number;
     /**
      * 后端服务器类型
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TargetType: string;
+    TargetType?: string;
     /**
      * 绑定的目标组基本信息；当监听器绑定目标组时，会返回该字段
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TargetGroup: BasicTargetGroupInfo;
+    TargetGroup?: BasicTargetGroupInfo;
     /**
      * 会话保持类型。NORMAL表示默认会话保持类型。QUIC_CID 表示根据Quic Connection ID做会话保持。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SessionType: string;
+    SessionType?: string;
     /**
      * 是否开启长连接，1开启，0关闭，（本参数仅对于HTTP/HTTPS监听器有意义）
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    KeepaliveEnable: number;
+    KeepaliveEnable?: number;
     /**
      * 仅支持Nat64 CLB TCP监听器
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Toa: boolean;
+    Toa?: boolean;
     /**
      * 解绑后端目标时，是否发RST给客户端，（此参数仅对于TCP监听器有意义）。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DeregisterTargetRst: boolean;
+    DeregisterTargetRst?: boolean;
     /**
      * 监听器的属性
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    AttrFlags: Array<string>;
+    AttrFlags?: Array<string>;
     /**
      * 绑定的目标组列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TargetGroupList: Array<BasicTargetGroupInfo>;
+    TargetGroupList?: Array<BasicTargetGroupInfo>;
     /**
      * 监听器最大连接数，-1表示监听器维度不限速。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    MaxConn: number;
+    MaxConn?: number;
     /**
      * 监听器最大新增连接数，-1表示监听器维度不限速。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    MaxCps: number;
+    MaxCps?: number;
     /**
      * 空闲连接超时时间，仅支持TCP监听器。默认值:900；共享型实例和独占型实例取值范围：300～900，性能容量型实例取值范围:300～1980。
   注意：此字段可能返回 null，表示取不到有效值。
@@ -4023,7 +4023,7 @@ export interface LoadBalancerDetail {
      */
     Zones?: Array<string>;
     /**
-     * 是否开启SNI特性（本参数仅对于HTTPS监听器有意义）。
+     * 是否开启SNI特性，1：表示开启，0：表示不开启（本参数仅对于HTTPS监听器有意义）。
   注意：此字段可能返回 null，表示取不到有效值。
      */
     SniSwitch?: number;

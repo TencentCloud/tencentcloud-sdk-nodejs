@@ -1,4 +1,19 @@
 /**
+ * Span日志部分
+
+
+ */
+export interface SpanLog {
+    /**
+     * 日志时间戳
+     */
+    Timestamp: number;
+    /**
+     * 标签
+     */
+    Fields: Array<SpanTag>;
+}
+/**
  * ModifyApmInstance请求参数结构体
  */
 export interface ModifyApmInstanceRequest {
@@ -289,6 +304,68 @@ export interface DescribeApmInstancesResponse {
     RequestId?: string;
 }
 /**
+ * Span对象
+
+
+ */
+export interface Span {
+    /**
+     * Trace Id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TraceID?: string;
+    /**
+     * 日志
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Logs?: Array<SpanLog>;
+    /**
+     * 标签
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Tags?: Array<SpanTag>;
+    /**
+     * 上报应用服务信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Process?: SpanProcess;
+    /**
+     * 产生时间戳(毫秒)
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Timestamp?: number;
+    /**
+     * Span名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    OperationName?: string;
+    /**
+     * 关联关系
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    References?: Array<SpanReference>;
+    /**
+     * 产生时间戳(微秒)
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    StartTime?: number;
+    /**
+     * 持续耗时(微妙)
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Duration?: number;
+    /**
+     * Span Id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SpanID?: string;
+    /**
+     * 产生时间戳(毫秒)
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    StartTimeMillis?: number;
+}
+/**
  * apm Agent信息
  */
 export interface ApmAgentInfo {
@@ -322,6 +399,23 @@ export interface ApmAgentInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     PrivateLinkCollectorURL: string;
+}
+/**
+ * DescribeGeneralSpanList返回参数结构体
+ */
+export interface DescribeGeneralSpanListResponse {
+    /**
+     * 总数量
+     */
+    TotalCount: number;
+    /**
+     * Span分页列表
+     */
+    Spans: Array<Span>;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * 指标列表单元
@@ -451,6 +545,43 @@ export interface Line {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Tags: Array<ApmTag>;
+}
+/**
+ * DescribeGeneralSpanList请求参数结构体
+ */
+export interface DescribeGeneralSpanListRequest {
+    /**
+     * 分页
+     */
+    Offset: number;
+    /**
+     * 列表项个数
+     */
+    Limit: number;
+    /**
+     * 排序
+     */
+    OrderBy?: OrderBy;
+    /**
+     * span查询开始时间戳（单位:秒）
+     */
+    StartTime?: number;
+    /**
+     * 实例名
+     */
+    InstanceId?: string;
+    /**
+     * 通用过滤参数
+     */
+    Filters?: Array<Filter>;
+    /**
+     * 业务自身服务名
+     */
+    BusinessName?: string;
+    /**
+     * span查询结束时间戳（单位:秒）
+     */
+    EndTime?: number;
 }
 /**
  * Apm通用KV结构
@@ -704,6 +835,36 @@ export interface CreateApmInstanceResponse {
     RequestId?: string;
 }
 /**
+ * Span上下游关联关系
+ */
+export interface SpanReference {
+    /**
+     * 关联关系类型
+     */
+    RefType: string;
+    /**
+     * Span ID
+     */
+    SpanID: string;
+    /**
+     * Trace ID
+     */
+    TraceID: string;
+}
+/**
+ * 服务相关信息
+ */
+export interface SpanProcess {
+    /**
+     * 应用服务名称
+     */
+    ServiceName: string;
+    /**
+     * Tags 标签数组
+     */
+    Tags: Array<SpanTag>;
+}
+/**
  * ModifyApmInstance返回参数结构体
  */
 export interface ModifyApmInstanceResponse {
@@ -749,6 +910,25 @@ export interface DescribeApmInstancesRequest {
      * 是否查询全地域实例
      */
     AllRegionsFlag?: number;
+}
+/**
+ * 标签
+ */
+export interface SpanTag {
+    /**
+     * 标签类型
+     */
+    Type: string;
+    /**
+     * 标签Key
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Key: string;
+    /**
+     * 标签值
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Value: string;
 }
 /**
  * DescribeGeneralMetricData返回参数结构体

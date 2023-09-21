@@ -21,6 +21,15 @@ export interface StopPublishStreamRequest {
     UserId: string;
 }
 /**
+ * StartPublishStreamWithURL返回参数结构体
+ */
+export interface StartPublishStreamWithURLResponse {
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * StopPublishStream返回参数结构体
  */
 export interface StopPublishStreamResponse {
@@ -28,6 +37,19 @@ export interface StopPublishStreamResponse {
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * StartPublishStreamWithURL请求参数结构体
+ */
+export interface StartPublishStreamWithURLRequest {
+    /**
+     * 唯一用户身份标识，由业务方自定义，平台不予理解。
+     */
+    UserId: string;
+    /**
+     * 推流地址，仅支持rtmp协议。
+     */
+    PublishStreamURL: string;
 }
 /**
  * DestroySession返回参数结构体

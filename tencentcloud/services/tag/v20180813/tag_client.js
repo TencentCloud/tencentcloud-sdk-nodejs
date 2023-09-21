@@ -156,7 +156,6 @@ class Client extends abstract_client_1.AbstractClient {
     }
     /**
      * 用于查询已建立的标签列表。
-
      */
     async DescribeTags(req, cb) {
         return this.request("DescribeTags", req, cb);
@@ -169,7 +168,6 @@ class Client extends abstract_client_1.AbstractClient {
     }
     /**
      * 用于查询已建立的标签列表中的标签键。
-
      */
     async DescribeTagKeys(req, cb) {
         return this.request("DescribeTagKeys", req, cb);

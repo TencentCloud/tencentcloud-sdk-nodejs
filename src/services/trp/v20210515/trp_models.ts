@@ -467,102 +467,122 @@ export interface CodePack {
    * 码id
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  PackId: string
+  PackId?: string
   /**
    * 企业id
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CorpId: number
+  CorpId?: number
   /**
    * 商户id
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  MerchantId: string
+  MerchantId?: string
   /**
    * 创建时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CreateTime: string
+  CreateTime?: string
   /**
    * 更新时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  UpdateTime: string
+  UpdateTime?: string
   /**
    * 制码状态 init: 初始化, pending: 执行中, done: 完成, error: 失败
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Status: string
+  Status?: string
   /**
    * 执行日志
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Log: string
+  Log?: string
   /**
    * 创建人
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CreateUser: string
+  CreateUser?: string
   /**
    * 码数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Amount: number
+  Amount?: number
   /**
    * 防伪码长度
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CodeLength: number
+  CodeLength?: number
   /**
    * 码类型
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CodeType: string
+  CodeType?: string
   /**
    * 是否暗码
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Cipher: number
+  Cipher?: number
   /**
    * [弃用] 文字码地址，通过另一个接口查
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TextUrl: string
+  TextUrl?: string
   /**
    * [弃用] 二维码地址，通过另一个接口查
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  PackUrl: string
+  PackUrl?: string
   /**
    * 商户名
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  MerchantName: string
+  MerchantName?: string
   /**
    * 码规则类型 0: 默认, 1: 自定义
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RuleType: number
+  RuleType?: number
   /**
    * 自定义码规则ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CustomId: string
+  CustomId?: string
   /**
    * 码包类型 0: 普通码包 1: 层级码包
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  PackType: number
+  PackType?: number
   /**
    * 生码层级
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  PackLevel: number
+  PackLevel?: number
   /**
    * 层级码配置
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  PackSpec: Array<PackSpec>
+  PackSpec?: Array<PackSpec>
+  /**
+   * 商品名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProductName?: string
+  /**
+   * 商品规格
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProductSpecification?: string
+  /**
+   * 商品ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProductId?: string
+  /**
+   * 码关系是否预关联
+0:否, 1:是
+   */
+  RelateType?: number
 }
 
 /**
@@ -1494,6 +1514,14 @@ export interface CreateCodePackRequest {
    * 是否有流水码 0:无 1:有
    */
   SerialType?: number
+  /**
+   * 关联产品ID
+   */
+  ProductId?: string
+  /**
+   * 层级码时是否提前生成关联关系，默认为 1
+   */
+  RelateType?: number
 }
 
 /**
@@ -1620,6 +1648,16 @@ export interface CreateCustomPackRequest {
    * 是否有流水码 0:无 1:有
    */
   SerialType?: number
+  /**
+   * 产品ID
+   */
+  ProductId?: string
+  /**
+   * 是否预生成码关系
+0: 否, 1:是
+默认为1，仅对层级码有效
+   */
+  RelateType?: number
 }
 
 /**
@@ -1934,7 +1972,7 @@ export interface CreateCustomPackResponse {
   /**
    * 码包ID
    */
-  PackId: string
+  PackId?: string
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2076,7 +2114,7 @@ export interface CreateCodePackResponse {
   /**
    * 码包ID
    */
-  PackId: string
+  PackId?: string
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
