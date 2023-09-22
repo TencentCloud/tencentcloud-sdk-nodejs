@@ -813,8 +813,10 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
   }
 
   /**
-   * 单个修改互联网边界防火墙开关
-   */
+     * 已上新接口，支持串行
+
+单个修改互联网边界防火墙开关
+     */
   async ModifyPublicIPSwitchStatus(
     req: ModifyPublicIPSwitchStatusRequest,
     cb?: (error: string, rep: ModifyPublicIPSwitchStatusResponse) => void

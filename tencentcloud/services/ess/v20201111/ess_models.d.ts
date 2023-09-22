@@ -1,4 +1,17 @@
 /**
+ * DescribePersonCertificate返回参数结构体
+ */
+export interface DescribePersonCertificateResponse {
+    /**
+     * 证书的Base64
+     */
+    Cert?: string;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * CreateSeal请求参数结构体
  */
 export interface CreateSealRequest {
@@ -702,13 +715,17 @@ export interface CreateIntegrationRoleRequest {
     Agent?: Agent;
 }
 /**
- * 授权用户
+ * DeleteIntegrationRoleUsers返回参数结构体
  */
-export interface AuthorizedUser {
+export interface DeleteIntegrationRoleUsersResponse {
     /**
-     * 电子签系统中的用户id
+     * 角色id
      */
-    UserId: string;
+    RoleId?: string;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * CreateConvertTaskApi请求参数结构体
@@ -1675,6 +1692,85 @@ export interface Permission {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Children?: Array<Permission>;
+}
+/**
+ * 企业员工信息。
+ */
+export interface Staff {
+    /**
+     * 员工在腾讯电子签平台的唯一身份标识，为32位字符串。
+  注：`创建和更新场景无需填写。`
+     */
+    UserId?: string;
+    /**
+     * 显示的用户名/昵称。
+     */
+    DisplayName?: string;
+    /**
+     * 用户手机号码， 支持国内手机号11位数字(无需加+86前缀或其他字符)。
+     */
+    Mobile?: string;
+    /**
+     * 用户邮箱。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Email?: string;
+    /**
+     * 用户在第三方平台ID。
+  注：`如需在此接口提醒员工实名，该参数不传。`
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    OpenId?: string;
+    /**
+     * 员工角色信息。
+  注：`创建和更新场景无需填写。`
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Roles?: Array<StaffRole>;
+    /**
+     * 员工部门信息。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Department?: Department;
+    /**
+     * 员工是否实名。
+  注：`创建和更新场景无需填写。`
+     */
+    Verified?: boolean;
+    /**
+     * 员工创建时间戳，单位秒。
+  注：`创建和更新场景无需填写。`
+     */
+    CreatedOn?: number;
+    /**
+     * 员工实名时间戳，单位秒。
+  注：`创建和更新场景无需填写。`
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    VerifiedOn?: number;
+    /**
+     * 员工是否离职：
+  <ul><li>**0**：未离职</li><li>**1**：离职</li></ul>
+  注：`创建和更新场景无需填写。`
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    QuiteJob?: number;
+    /**
+     * 员工离职交接人用户ID。
+  注：`创建和更新场景无需填写。`
+     */
+    ReceiveUserId?: string;
+    /**
+     * 员工离职交接人用户OpenId。
+  注：`创建和更新场景无需填写。`
+     */
+    ReceiveOpenId?: string;
+    /**
+     * 企业微信用户账号ID。
+  注：`仅企微类型的企业创建员工接口支持该字段。`
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    WeworkOpenId?: string;
 }
 /**
  * 签署控件的类型和范围限制条件，用于控制文件发起后签署人拖拽签署区时可使用的控件类型和具体的印章或签名方式。
@@ -2803,6 +2899,45 @@ export interface ModifyIntegrationRoleResponse {
     RequestId?: string;
 }
 /**
+ * 扩展服务开通和授权的详细信息
+ */
+export interface ExtendAuthInfo {
+    /**
+     * 扩展服务的类型，可能是以下值：
+  <ul><li>OPEN_SERVER_SIGN：企业静默签署</li>
+  <li>OVERSEA_SIGN：企业与港澳台居民签署合同</li>
+  <li>MOBILE_CHECK_APPROVER：使用手机号验证签署方身份</li>
+  <li>PAGING_SEAL：骑缝章</li>
+  <li>BATCH_SIGN：批量签署</li></ul>
+     */
+    Type?: string;
+    /**
+     * 扩展服务的名称
+     */
+    Name?: string;
+    /**
+     * 扩展服务的开通状态：
+  ENABLE：开通
+  DISABLE：未开通
+     */
+    Status?: string;
+    /**
+     * 操作扩展服务的操作人UserId，员工在腾讯电子签平台的唯一身份标识，为32位字符串。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    OperatorUserId?: string;
+    /**
+     * 扩展服务的操作时间，格式为Unix标准时间戳（秒）。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    OperateOn?: number;
+    /**
+     * 该扩展服务若可以授权，此参数对应授权人员的列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    HasAuthUserList?: Array<HasAuthUser>;
+}
+/**
  * 创建流程的签署方信息
  */
 export interface FlowCreateApprover {
@@ -2997,83 +3132,25 @@ export interface FlowCreateApprover {
     ApproverSignTypes?: Array<number | bigint>;
 }
 /**
- * 企业员工信息。
+ * 签署方在使用个人印章签署控件（SIGN_SIGNATURE） 时可使用的签署方式
  */
-export interface Staff {
+export interface ApproverComponentLimitType {
     /**
-     * 员工在腾讯电子签平台的唯一身份标识，为32位字符串。
-  注：`创建和更新场景无需填写。`
+     * 签署方经办人在模板中配置的参与方ID，与控件绑定，是控件的归属方，ID为32位字符串。
      */
-    UserId?: string;
+    RecipientId: string;
     /**
-     * 显示的用户名/昵称。
+     * 签署方经办人控件类型是个人印章签署控件（SIGN_SIGNATURE） 时，可选的签名方式，可多选
+  
+  签名方式：
+  <ul>
+  <li>HANDWRITE-手写签名</li>
+  <li>ESIGN-个人印章类型</li>
+  <li>OCR_ESIGN-AI智能识别手写签名</li>
+  <li>SYSTEM_ESIGN-系统签名</li>
+  </ul>
      */
-    DisplayName?: string;
-    /**
-     * 用户手机号码， 支持国内手机号11位数字(无需加+86前缀或其他字符)。
-     */
-    Mobile?: string;
-    /**
-     * 用户邮箱。
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Email?: string;
-    /**
-     * 用户在第三方平台ID。
-  注：`如需在此接口提醒员工实名，该参数不传。`
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    OpenId?: string;
-    /**
-     * 员工角色信息。
-  注：`创建和更新场景无需填写。`
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Roles?: Array<StaffRole>;
-    /**
-     * 员工部门信息。
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Department?: Department;
-    /**
-     * 员工是否实名。
-  注：`创建和更新场景无需填写。`
-     */
-    Verified?: boolean;
-    /**
-     * 员工创建时间戳，单位秒。
-  注：`创建和更新场景无需填写。`
-     */
-    CreatedOn?: number;
-    /**
-     * 员工实名时间戳，单位秒。
-  注：`创建和更新场景无需填写。`
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    VerifiedOn?: number;
-    /**
-     * 员工是否离职：
-  <ul><li>**0**：未离职</li><li>**1**：离职</li></ul>
-  注：`创建和更新场景无需填写。`
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    QuiteJob?: number;
-    /**
-     * 员工离职交接人用户ID。
-  注：`创建和更新场景无需填写。`
-     */
-    ReceiveUserId?: string;
-    /**
-     * 员工离职交接人用户OpenId。
-  注：`创建和更新场景无需填写。`
-     */
-    ReceiveOpenId?: string;
-    /**
-     * 企业微信用户账号ID。
-  注：`仅企微类型的企业创建员工接口支持该字段。`
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    WeworkOpenId?: string;
+    Values: Array<string>;
 }
 /**
  * 参与方填写控件信息
@@ -3278,17 +3355,13 @@ export interface GroupOrganization {
     FlowEngineEnable?: boolean;
 }
 /**
- * DeleteIntegrationRoleUsers返回参数结构体
+ * 授权用户
  */
-export interface DeleteIntegrationRoleUsersResponse {
+export interface AuthorizedUser {
     /**
-     * 角色id
+     * 电子签系统中的用户id
      */
-    RoleId?: string;
-    /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
+    UserId: string;
 }
 /**
  * CreateDocument请求参数结构体
@@ -5615,7 +5688,7 @@ export interface DescribeFlowBriefsRequest {
 export interface CreateFlowGroupByTemplatesRequest {
     /**
      * 执行本接口操作的员工信息。
-  注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。
+  注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。`
      */
     Operator: UserInfo;
     /**
@@ -5821,43 +5894,32 @@ export interface UploadFilesRequest {
     FileUrls?: string;
 }
 /**
- * 扩展服务开通和授权的详细信息
+ * DescribePersonCertificate请求参数结构体
  */
-export interface ExtendAuthInfo {
+export interface DescribePersonCertificateRequest {
     /**
-     * 扩展服务的类型，可能是以下值：
-  <ul><li>OPEN_SERVER_SIGN：企业静默签署</li>
-  <li>OVERSEA_SIGN：企业与港澳台居民签署合同</li>
-  <li>MOBILE_CHECK_APPROVER：使用手机号验证签署方身份</li>
-  <li>PAGING_SEAL：骑缝章</li>
-  <li>BATCH_SIGN：批量签署</li></ul>
+     * 执行本接口操作的员工信息。
+  注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。`
      */
-    Type?: string;
+    Operator: UserInfo;
     /**
-     * 扩展服务的名称
+     * 个人用户的三要素信息：
+  <ul><li>姓名</li>
+  <li>证件号</li>
+  <li>证件类型</li></ul>
      */
-    Name?: string;
+    UserInfo: UserThreeFactor;
     /**
-     * 扩展服务的开通状态：
-  ENABLE：开通
-  DISABLE：未开通
+     * 代理企业和员工的信息。
+  在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。
      */
-    Status?: string;
+    Agent?: Agent;
     /**
-     * 操作扩展服务的操作人UserId，员工在腾讯电子签平台的唯一身份标识，为32位字符串。
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 证书使用场景，可以选择的场景值如下:
+  <ul><li> **E_PRESCRIPTION_AUTO_SIGN** : 电子处方场景</li></ul>
+  注: `现在仅支持电子处方场景`
      */
-    OperatorUserId?: string;
-    /**
-     * 扩展服务的操作时间，格式为Unix标准时间戳（秒）。
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    OperateOn?: number;
-    /**
-     * 该扩展服务若可以授权，此参数对应授权人员的列表
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    HasAuthUserList?: Array<HasAuthUser>;
+    SceneKey?: string;
 }
 /**
  * 解除协议文档中内容信息，包括但不限于：解除理由、解除后仍然有效的条款-保留条款、原合同事项处理-费用结算、原合同事项处理-其他事项、其他约定等。
@@ -5988,6 +6050,10 @@ export interface CreateMultiFlowSignQRCodeRequest {
      * @deprecated
      */
     ApproverRestrictions?: ApproverRestriction;
+    /**
+     * 指定签署方在使用个人印章签署控件（SIGN_SIGNATURE） 时可使用的签署方式：自由书写、正楷临摹、系统签名、个人印章。
+     */
+    ApproverComponentLimitTypes?: Array<ApproverComponentLimitType>;
 }
 /**
  * DescribeFlowInfo请求参数结构体
@@ -5998,9 +6064,8 @@ export interface DescribeFlowInfoRequest {
      */
     Operator?: UserInfo;
     /**
-     * 需要查询的流程ID列表，限制最大100个
-  
-  如果查询合同组的信息,不要传此参数
+     * 需要查询的流程ID列表，最多可传入100个ID。
+  如果要查询合同组的信息，则不需要传入此参数，只需传入 FlowGroupId 参数即可。
      */
     FlowIds?: Array<string>;
     /**
@@ -6008,9 +6073,7 @@ export interface DescribeFlowInfoRequest {
      */
     Agent?: Agent;
     /**
-     * 合同组ID, 如果传此参数会忽略FlowIds入参
-   所以如传此参数不要传FlowIds参数
-  
+     * 需要查询的流程组ID，如果传入此参数，则会忽略 FlowIds 参数。该合同组由<a href="https://qian.tencent.com/developers/companyApis/startFlows/CreateFlowGroupByFiles" target="_blank">通过多文件创建合同组签署流程</a>等接口创建。
      */
     FlowGroupId?: string;
 }
@@ -6019,15 +6082,16 @@ export interface DescribeFlowInfoRequest {
  */
 export interface DescribeFlowInfoResponse {
     /**
-     * 签署流程信息
+     * 合同流程的详细信息。
+  如果查询的是合同组信息，则返回的是组内所有子合同流程的详细信息。
      */
     FlowDetailInfos?: Array<FlowDetailInfo>;
     /**
-     * 合同组ID，为32位字符串
+     * 合同组ID，只有在查询合同组信息时才会返回。
      */
     FlowGroupId?: string;
     /**
-     * 合同组名称
+     * 合同组名称，只有在查询合同组信息时才会返回。
      */
     FlowGroupName?: string;
     /**

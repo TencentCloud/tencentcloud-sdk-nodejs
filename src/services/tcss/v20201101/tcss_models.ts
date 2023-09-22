@@ -272,11 +272,15 @@ export interface CreateRefreshTaskResponse {
   /**
    * 返回创建的集群检查任务的ID，为0表示创建失败。
    */
-  TaskId: number
+  TaskId?: number
   /**
    * 创建检查任务的结果，"Succ"为成功，"Failed"为失败
    */
-  CreateResult: string
+  CreateResult?: string
+  /**
+   * 返回创建的新集群检查任务ID
+   */
+  NewTaskID?: string
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -9230,7 +9234,16 @@ export interface ModifyAssetImageScanStopRequest {
 /**
  * CreateRefreshTask请求参数结构体
  */
-export type CreateRefreshTaskRequest = null
+export interface CreateRefreshTaskRequest {
+  /**
+   * 指定集群列表,若为空则标识同步所有集群
+   */
+  ClusterIDs?: Array<string>
+  /**
+   * 是否只同步列表
+   */
+  IsSyncListOnly?: boolean
+}
 
 /**
  * DescribeK8sApiAbnormalEventList返回参数结构体

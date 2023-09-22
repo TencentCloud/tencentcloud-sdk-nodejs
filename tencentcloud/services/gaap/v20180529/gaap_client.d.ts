@@ -200,7 +200,7 @@ export declare class Client extends AbstractClient {
     /**
      * 本接口（DescribeCustomHeader）用于自定义header列表
      */
-    DescribeCustomHeader(req?: DescribeCustomHeaderRequest, cb?: (error: string, rep: DescribeCustomHeaderResponse) => void): Promise<DescribeCustomHeaderResponse>;
+    DescribeCustomHeader(req: DescribeCustomHeaderRequest, cb?: (error: string, rep: DescribeCustomHeaderResponse) => void): Promise<DescribeCustomHeaderResponse>;
     /**
      * 删除域名的某条解析记录
      */

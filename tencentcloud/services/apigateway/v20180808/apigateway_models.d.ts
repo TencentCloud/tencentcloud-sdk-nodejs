@@ -2169,23 +2169,23 @@ export interface NetworkConfig {
     /**
      * 最大出带宽
      */
-    InternetMaxBandwidthOut: number;
+    InternetMaxBandwidthOut?: number;
     /**
      * EnableInternetInbound信息
      */
-    EnableInternetInbound: boolean;
+    EnableInternetInbound?: boolean;
     /**
      * EnableInternetOutbound信息
      */
-    EnableInternetOutbound: boolean;
+    EnableInternetOutbound?: boolean;
     /**
      * InboundIpAddresses信息
      */
-    InboundIpAddresses: Array<string>;
+    InboundIpAddresses?: Array<string>;
     /**
      * OutboundIpAddresses信息
      */
-    OutboundIpAddresses: Array<string>;
+    OutboundIpAddresses?: Array<string>;
 }
 /**
  * 服务发布历史

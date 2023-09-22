@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeDomainAssetsResponse, DescribeDbAssetInfoResponse, CreateRiskCenterScanTaskRequest, DescribeScanReportListRequest, DescribeRiskCenterAssetViewVULRiskListRequest, CreateDomainAndIpRequest, DescribeSearchBugInfoResponse, DescribeScanTaskListResponse, DescribeScanTaskListRequest, DescribeVpcAssetsResponse, DescribeDbAssetsRequest, DescribeTaskLogListResponse, DescribeScanReportListResponse, DescribeSearchBugInfoRequest, DescribeClusterPodAssetsRequest, DescribeSubnetAssetsRequest, AddNewBindRoleUserRequest, DescribeCVMAssetInfoResponse, DescribePublicIpAssetsResponse, DescribeTaskLogListRequest, DescribeRiskCenterAssetViewVULRiskListResponse, DescribeCVMAssetsRequest, DescribeListenerListResponse, DescribeTaskLogURLResponse, CreateRiskCenterScanTaskResponse, DescribeRiskCenterAssetViewPortRiskListResponse, DescribeSubnetAssetsResponse, DescribeDbAssetInfoRequest, DescribeRiskCenterAssetViewPortRiskListRequest, DescribeCVMAssetsResponse, DescribeVpcAssetsRequest, DescribeClusterPodAssetsResponse, DescribeListenerListRequest, DescribeDomainAssetsRequest, CreateDomainAndIpResponse, DescribePublicIpAssetsRequest, DescribeDbAssetsResponse, AddNewBindRoleUserResponse, DescribeCVMAssetInfoRequest, DescribeTaskLogURLRequest } from "./csip_models";
+import { DescribeDomainAssetsResponse, DeleteDomainAndIpRequest, DescribeDbAssetInfoResponse, DeleteRiskScanTaskRequest, DescribeScanReportListRequest, DescribeRiskCenterAssetViewVULRiskListRequest, CreateDomainAndIpRequest, DescribeSearchBugInfoResponse, StopRiskCenterTaskRequest, DescribeScanTaskListResponse, DescribeScanTaskListRequest, DescribeVpcAssetsResponse, CreateRiskCenterScanTaskRequest, DescribeTaskLogListResponse, DescribeScanReportListResponse, DescribeSearchBugInfoRequest, DescribeClusterPodAssetsRequest, DescribeSubnetAssetsRequest, AddNewBindRoleUserRequest, DescribeCVMAssetInfoResponse, DescribePublicIpAssetsResponse, DescribeTaskLogListRequest, DescribeDbAssetsRequest, DescribeRiskCenterAssetViewVULRiskListResponse, DescribeCVMAssetsRequest, DescribeListenerListResponse, DescribeTaskLogURLResponse, CreateRiskCenterScanTaskResponse, DescribeRiskCenterAssetViewPortRiskListResponse, DescribeSubnetAssetsResponse, DescribeDbAssetInfoRequest, DescribeRiskCenterAssetViewPortRiskListRequest, DescribeCVMAssetsResponse, DescribeVpcAssetsRequest, DeleteRiskScanTaskResponse, DescribeClusterPodAssetsResponse, DescribeListenerListRequest, DescribeDomainAssetsRequest, CreateDomainAndIpResponse, DescribePublicIpAssetsRequest, DeleteDomainAndIpResponse, DescribeDbAssetsResponse, AddNewBindRoleUserResponse, StopRiskCenterTaskResponse, DescribeCVMAssetInfoRequest, DescribeTaskLogURLRequest } from "./csip_models";
 /**
  * csip client
  * @class
@@ -8,9 +8,33 @@ import { DescribeDomainAssetsResponse, DescribeDbAssetInfoResponse, CreateRiskCe
 export declare class Client extends AbstractClient {
     constructor(clientConfig: ClientConfig);
     /**
-     * 获取报告下载的临时链接
+     * 删除域名和ip请求
      */
-    DescribeTaskLogURL(req: DescribeTaskLogURLRequest, cb?: (error: string, rep: DescribeTaskLogURLResponse) => void): Promise<DescribeTaskLogURLResponse>;
+    DeleteDomainAndIp(req: DeleteDomainAndIpRequest, cb?: (error: string, rep: DeleteDomainAndIpResponse) => void): Promise<DeleteDomainAndIpResponse>;
+    /**
+     * db资产详情
+     */
+    DescribeDbAssetInfo(req: DescribeDbAssetInfoRequest, cb?: (error: string, rep: DescribeDbAssetInfoResponse) => void): Promise<DescribeDbAssetInfoResponse>;
+    /**
+     * 域名列表
+     */
+    DescribeDomainAssets(req: DescribeDomainAssetsRequest, cb?: (error: string, rep: DescribeDomainAssetsResponse) => void): Promise<DescribeDomainAssetsResponse>;
+    /**
+     * ip公网列表
+     */
+    DescribePublicIpAssets(req: DescribePublicIpAssetsRequest, cb?: (error: string, rep: DescribePublicIpAssetsResponse) => void): Promise<DescribePublicIpAssetsResponse>;
+    /**
+     * csip角色授权绑定接口
+     */
+    AddNewBindRoleUser(req?: AddNewBindRoleUserRequest, cb?: (error: string, rep: AddNewBindRoleUserResponse) => void): Promise<AddNewBindRoleUserResponse>;
+    /**
+     * 查询clb监听器列表
+     */
+    DescribeListenerList(req: DescribeListenerListRequest, cb?: (error: string, rep: DescribeListenerListResponse) => void): Promise<DescribeListenerListResponse>;
+    /**
+     * 删除风险中心扫描任务
+     */
+    DeleteRiskScanTask(req: DeleteRiskScanTaskRequest, cb?: (error: string, rep: DeleteRiskScanTaskResponse) => void): Promise<DeleteRiskScanTaskResponse>;
     /**
      * 获取任务扫描报告列表
      */
@@ -24,37 +48,25 @@ export declare class Client extends AbstractClient {
      */
     DescribeClusterPodAssets(req: DescribeClusterPodAssetsRequest, cb?: (error: string, rep: DescribeClusterPodAssetsResponse) => void): Promise<DescribeClusterPodAssetsResponse>;
     /**
-     * 获取子网列表
-     */
-    DescribeSubnetAssets(req: DescribeSubnetAssetsRequest, cb?: (error: string, rep: DescribeSubnetAssetsResponse) => void): Promise<DescribeSubnetAssetsResponse>;
-    /**
      * 获取vpc列表
      */
     DescribeVpcAssets(req: DescribeVpcAssetsRequest, cb?: (error: string, rep: DescribeVpcAssetsResponse) => void): Promise<DescribeVpcAssetsResponse>;
-    /**
-     * db资产详情
-     */
-    DescribeDbAssetInfo(req: DescribeDbAssetInfoRequest, cb?: (error: string, rep: DescribeDbAssetInfoResponse) => void): Promise<DescribeDbAssetInfoResponse>;
     /**
      * cvm列表
      */
     DescribeCVMAssets(req: DescribeCVMAssetsRequest, cb?: (error: string, rep: DescribeCVMAssetsResponse) => void): Promise<DescribeCVMAssetsResponse>;
     /**
-     * 域名列表
+     * 获取报告下载的临时链接
      */
-    DescribeDomainAssets(req: DescribeDomainAssetsRequest, cb?: (error: string, rep: DescribeDomainAssetsResponse) => void): Promise<DescribeDomainAssetsResponse>;
+    DescribeTaskLogURL(req: DescribeTaskLogURLRequest, cb?: (error: string, rep: DescribeTaskLogURLResponse) => void): Promise<DescribeTaskLogURLResponse>;
+    /**
+     * 创建风险中心扫描任务
+     */
+    CreateRiskCenterScanTask(req: CreateRiskCenterScanTaskRequest, cb?: (error: string, rep: CreateRiskCenterScanTaskResponse) => void): Promise<CreateRiskCenterScanTaskResponse>;
     /**
      * 立体防护中心查询漏洞信息
      */
     DescribeSearchBugInfo(req: DescribeSearchBugInfoRequest, cb?: (error: string, rep: DescribeSearchBugInfoResponse) => void): Promise<DescribeSearchBugInfoResponse>;
-    /**
-     * ip公网列表
-     */
-    DescribePublicIpAssets(req: DescribePublicIpAssetsRequest, cb?: (error: string, rep: DescribePublicIpAssetsResponse) => void): Promise<DescribePublicIpAssetsResponse>;
-    /**
-     * csip角色授权绑定接口
-     */
-    AddNewBindRoleUser(req?: AddNewBindRoleUserRequest, cb?: (error: string, rep: AddNewBindRoleUserResponse) => void): Promise<AddNewBindRoleUserResponse>;
     /**
      * 获取扫描报告列表
      */
@@ -64,18 +76,6 @@ export declare class Client extends AbstractClient {
      */
     CreateDomainAndIp(req: CreateDomainAndIpRequest, cb?: (error: string, rep: CreateDomainAndIpResponse) => void): Promise<CreateDomainAndIpResponse>;
     /**
-     * 获取资产视角的端口风险列表
-     */
-    DescribeRiskCenterAssetViewPortRiskList(req: DescribeRiskCenterAssetViewPortRiskListRequest, cb?: (error: string, rep: DescribeRiskCenterAssetViewPortRiskListResponse) => void): Promise<DescribeRiskCenterAssetViewPortRiskListResponse>;
-    /**
-     * 查询clb监听器列表
-     */
-    DescribeListenerList(req: DescribeListenerListRequest, cb?: (error: string, rep: DescribeListenerListResponse) => void): Promise<DescribeListenerListResponse>;
-    /**
-     * 创建风险中心扫描任务
-     */
-    CreateRiskCenterScanTask(req: CreateRiskCenterScanTaskRequest, cb?: (error: string, rep: CreateRiskCenterScanTaskResponse) => void): Promise<CreateRiskCenterScanTaskResponse>;
-    /**
      * 获取扫描任务列表
      */
     DescribeScanTaskList(req: DescribeScanTaskListRequest, cb?: (error: string, rep: DescribeScanTaskListResponse) => void): Promise<DescribeScanTaskListResponse>;
@@ -83,6 +83,18 @@ export declare class Client extends AbstractClient {
      * 资产列表
      */
     DescribeDbAssets(req: DescribeDbAssetsRequest, cb?: (error: string, rep: DescribeDbAssetsResponse) => void): Promise<DescribeDbAssetsResponse>;
+    /**
+     * 获取资产视角的端口风险列表
+     */
+    DescribeRiskCenterAssetViewPortRiskList(req: DescribeRiskCenterAssetViewPortRiskListRequest, cb?: (error: string, rep: DescribeRiskCenterAssetViewPortRiskListResponse) => void): Promise<DescribeRiskCenterAssetViewPortRiskListResponse>;
+    /**
+     * 停止扫风险中心扫描任务
+     */
+    StopRiskCenterTask(req: StopRiskCenterTaskRequest, cb?: (error: string, rep: StopRiskCenterTaskResponse) => void): Promise<StopRiskCenterTaskResponse>;
+    /**
+     * 获取子网列表
+     */
+    DescribeSubnetAssets(req: DescribeSubnetAssetsRequest, cb?: (error: string, rep: DescribeSubnetAssetsResponse) => void): Promise<DescribeSubnetAssetsResponse>;
     /**
      * cvm详情
      */

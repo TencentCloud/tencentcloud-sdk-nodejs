@@ -908,6 +908,16 @@ it("cwp.v20180228.FixBaselineDetect", async function () {
     }
 })
 
+it("cwp.v20180228.DescribeAgentInstallCommand", async function () {
+    try {
+       const data = await client.DescribeAgentInstallCommand({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cwp.v20180228.DescribeBaselineRuleDetectList", async function () {
     try {
        const data = await client.DescribeBaselineRuleDetectList({})

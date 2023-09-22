@@ -372,52 +372,57 @@ export interface SentenceDetail {
      * 单句最终识别结果
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    FinalSentence: string;
+    FinalSentence?: string;
     /**
      * 单句中间识别结果，使用空格拆分为多个词
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SliceSentence: string;
+    SliceSentence?: string;
+    /**
+     * 口语转书面语结果，开启改功能才有值
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    WrittenText?: string;
     /**
      * 单句开始时间（毫秒）
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    StartMs: number;
+    StartMs?: number;
     /**
      * 单句结束时间（毫秒）
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    EndMs: number;
+    EndMs?: number;
     /**
      * 单句中词个数
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    WordsNum: number;
+    WordsNum?: number;
     /**
      * 单句中词详情
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Words: Array<SentenceWords>;
+    Words?: Array<SentenceWords>;
     /**
      * 单句语速，单位：字数/秒
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SpeechSpeed: number;
+    SpeechSpeed?: number;
     /**
      * 声道或说话人 Id（请求中如果设置了 speaker_diarization或者ChannelNum为双声道，可区分说话人或声道）
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SpeakerId: number;
+    SpeakerId?: number;
     /**
      * 情绪能量值，取值为音量分贝值/10。取值范围：[1,10]。值越高情绪越强烈。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    EmotionalEnergy: number;
+    EmotionalEnergy?: number;
     /**
      * 本句与上一句之间的静音时长
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SilenceTime: number;
+    SilenceTime?: number;
     /**
      * 情绪类型（可能为空）
   注意：此字段可能返回 null，表示取不到有效值。

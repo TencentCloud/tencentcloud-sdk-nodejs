@@ -93,7 +93,7 @@ import {
   AttachUserPolicyRequest,
   CreateInternalTableRequest,
   ListTaskJobLogDetailRequest,
-  TasksInfo,
+  BatchSqlTask,
   AttachWorkGroupPolicyRequest,
   StatementOutput,
   TagInfo,
@@ -114,6 +114,7 @@ import {
   CreateDMSTableResponse,
   CreateNotebookSessionRequest,
   WorkGroupIdSetOfUserId,
+  DescribeSparkSessionBatchSQLRequest,
   KerberosInfo,
   Partition,
   QueryResultRequest,
@@ -193,6 +194,7 @@ import {
   DataGovernPolicy,
   UnlockMetaDataResponse,
   DeleteWorkGroupResponse,
+  DescribeSparkSessionBatchSQLResponse,
   DropDMSTableResponse,
   DescribeTableRequest,
   SessionResourceTemplate,
@@ -212,6 +214,7 @@ import {
   DatabaseInfo,
   DescribeDMSPartitionsResponse,
   DeleteUsersFromWorkGroupResponse,
+  TasksInfo,
   CreateSparkSessionBatchSQLResponse,
   DescribeDMSDatabaseRequest,
   DescribeLakeFsDirSummaryRequest,
@@ -788,6 +791,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDataEnginesResponse) => void
   ): Promise<DescribeDataEnginesResponse> {
     return this.request("DescribeDataEngines", req, cb)
+  }
+
+  /**
+   * 本接口（DescribeSparkSessionBatchSQL）用于查询Spark SQL批任务运行状态
+   */
+  async DescribeSparkSessionBatchSQL(
+    req: DescribeSparkSessionBatchSQLRequest,
+    cb?: (error: string, rep: DescribeSparkSessionBatchSQLResponse) => void
+  ): Promise<DescribeSparkSessionBatchSQLResponse> {
+    return this.request("DescribeSparkSessionBatchSQL", req, cb)
   }
 
   /**

@@ -28,10 +28,46 @@ class Client extends abstract_client_1.AbstractClient {
         super("csip.tencentcloudapi.com", "2022-11-21", clientConfig);
     }
     /**
-     * 获取报告下载的临时链接
+     * 删除域名和ip请求
      */
-    async DescribeTaskLogURL(req, cb) {
-        return this.request("DescribeTaskLogURL", req, cb);
+    async DeleteDomainAndIp(req, cb) {
+        return this.request("DeleteDomainAndIp", req, cb);
+    }
+    /**
+     * db资产详情
+     */
+    async DescribeDbAssetInfo(req, cb) {
+        return this.request("DescribeDbAssetInfo", req, cb);
+    }
+    /**
+     * 域名列表
+     */
+    async DescribeDomainAssets(req, cb) {
+        return this.request("DescribeDomainAssets", req, cb);
+    }
+    /**
+     * ip公网列表
+     */
+    async DescribePublicIpAssets(req, cb) {
+        return this.request("DescribePublicIpAssets", req, cb);
+    }
+    /**
+     * csip角色授权绑定接口
+     */
+    async AddNewBindRoleUser(req, cb) {
+        return this.request("AddNewBindRoleUser", req, cb);
+    }
+    /**
+     * 查询clb监听器列表
+     */
+    async DescribeListenerList(req, cb) {
+        return this.request("DescribeListenerList", req, cb);
+    }
+    /**
+     * 删除风险中心扫描任务
+     */
+    async DeleteRiskScanTask(req, cb) {
+        return this.request("DeleteRiskScanTask", req, cb);
     }
     /**
      * 获取任务扫描报告列表
@@ -52,22 +88,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeClusterPodAssets", req, cb);
     }
     /**
-     * 获取子网列表
-     */
-    async DescribeSubnetAssets(req, cb) {
-        return this.request("DescribeSubnetAssets", req, cb);
-    }
-    /**
      * 获取vpc列表
      */
     async DescribeVpcAssets(req, cb) {
         return this.request("DescribeVpcAssets", req, cb);
-    }
-    /**
-     * db资产详情
-     */
-    async DescribeDbAssetInfo(req, cb) {
-        return this.request("DescribeDbAssetInfo", req, cb);
     }
     /**
      * cvm列表
@@ -76,28 +100,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeCVMAssets", req, cb);
     }
     /**
-     * 域名列表
+     * 获取报告下载的临时链接
      */
-    async DescribeDomainAssets(req, cb) {
-        return this.request("DescribeDomainAssets", req, cb);
+    async DescribeTaskLogURL(req, cb) {
+        return this.request("DescribeTaskLogURL", req, cb);
+    }
+    /**
+     * 创建风险中心扫描任务
+     */
+    async CreateRiskCenterScanTask(req, cb) {
+        return this.request("CreateRiskCenterScanTask", req, cb);
     }
     /**
      * 立体防护中心查询漏洞信息
      */
     async DescribeSearchBugInfo(req, cb) {
         return this.request("DescribeSearchBugInfo", req, cb);
-    }
-    /**
-     * ip公网列表
-     */
-    async DescribePublicIpAssets(req, cb) {
-        return this.request("DescribePublicIpAssets", req, cb);
-    }
-    /**
-     * csip角色授权绑定接口
-     */
-    async AddNewBindRoleUser(req, cb) {
-        return this.request("AddNewBindRoleUser", req, cb);
     }
     /**
      * 获取扫描报告列表
@@ -112,24 +130,6 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateDomainAndIp", req, cb);
     }
     /**
-     * 获取资产视角的端口风险列表
-     */
-    async DescribeRiskCenterAssetViewPortRiskList(req, cb) {
-        return this.request("DescribeRiskCenterAssetViewPortRiskList", req, cb);
-    }
-    /**
-     * 查询clb监听器列表
-     */
-    async DescribeListenerList(req, cb) {
-        return this.request("DescribeListenerList", req, cb);
-    }
-    /**
-     * 创建风险中心扫描任务
-     */
-    async CreateRiskCenterScanTask(req, cb) {
-        return this.request("CreateRiskCenterScanTask", req, cb);
-    }
-    /**
      * 获取扫描任务列表
      */
     async DescribeScanTaskList(req, cb) {
@@ -140,6 +140,24 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeDbAssets(req, cb) {
         return this.request("DescribeDbAssets", req, cb);
+    }
+    /**
+     * 获取资产视角的端口风险列表
+     */
+    async DescribeRiskCenterAssetViewPortRiskList(req, cb) {
+        return this.request("DescribeRiskCenterAssetViewPortRiskList", req, cb);
+    }
+    /**
+     * 停止扫风险中心扫描任务
+     */
+    async StopRiskCenterTask(req, cb) {
+        return this.request("StopRiskCenterTask", req, cb);
+    }
+    /**
+     * 获取子网列表
+     */
+    async DescribeSubnetAssets(req, cb) {
+        return this.request("DescribeSubnetAssets", req, cb);
     }
     /**
      * cvm详情

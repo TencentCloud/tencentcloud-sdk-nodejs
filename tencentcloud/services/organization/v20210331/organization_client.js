@@ -76,7 +76,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UpdateOrganizationMemberEmailBind", req, cb);
     }
     /**
-     * 获取组织成员可被管理的身份列表
+     * 获取组织成员访问授权列表
      */
     async DescribeOrganizationMemberAuthIdentities(req, cb) {
         return this.request("DescribeOrganizationMemberAuthIdentities", req, cb);

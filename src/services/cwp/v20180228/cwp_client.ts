@@ -380,6 +380,7 @@ import {
   ProtectMachine,
   DescribeAssetUserInfoRequest,
   ExportBaselineItemListRequest,
+  DeleteReverseShellRulesRequest,
   DescribeProtectDirListRequest,
   ExportPrivilegeEventsRequest,
   MachineExtraInfo,
@@ -419,7 +420,7 @@ import {
   DescribeScanStateResponse,
   BaselineHostDetect,
   EditTagsRequest,
-  DeleteReverseShellRulesRequest,
+  DescribeAgentInstallCommandRequest,
   DescribeBaselineEffectHostListRequest,
   ExportSecurityTrendsRequest,
   ExportBaselineHostDetectListRequest,
@@ -618,6 +619,7 @@ import {
   DescribeScanStateRequest,
   SyncBaselineDetectSummaryResponse,
   ModifyMalwareTimingScanSettingsRequest,
+  DescribeAgentInstallCommandResponse,
   AssetEnvBaseInfo,
   DescribeMachineListResponse,
   MalwareInfo,
@@ -1623,6 +1625,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: FixBaselineDetectResponse) => void
   ): Promise<FixBaselineDetectResponse> {
     return this.request("FixBaselineDetect", req, cb)
+  }
+
+  /**
+   * 获取agent安装命令
+   */
+  async DescribeAgentInstallCommand(
+    req: DescribeAgentInstallCommandRequest,
+    cb?: (error: string, rep: DescribeAgentInstallCommandResponse) => void
+  ): Promise<DescribeAgentInstallCommandResponse> {
+    return this.request("DescribeAgentInstallCommand", req, cb)
   }
 
   /**

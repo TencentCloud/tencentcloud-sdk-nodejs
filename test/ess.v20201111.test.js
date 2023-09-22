@@ -508,6 +508,16 @@ it("ess.v20201111.DisableUserAutoSign", async function () {
     }
 })
 
+it("ess.v20201111.DescribePersonCertificate", async function () {
+    try {
+       const data = await client.DescribePersonCertificate({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ess.v20201111.DescribeThirdPartyAuthCode", async function () {
     try {
        const data = await client.DescribeThirdPartyAuthCode({})

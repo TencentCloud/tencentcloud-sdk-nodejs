@@ -2010,29 +2010,24 @@ export interface ListTaskJobLogDetailRequest {
 }
 
 /**
- * 批量顺序执行任务集合
+ * SparkSQL批任务信息
  */
-export interface TasksInfo {
+export interface BatchSqlTask {
   /**
-   * 任务类型，SQLTask：SQL查询任务。SparkSQLTask：Spark SQL查询任务
+   * SQL子任务唯一标识
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  TaskType: string
+  TaskId?: string
   /**
-   * 容错策略。Proceed：前面任务出错/取消后继续执行后面的任务。Terminate：前面的任务出错/取消之后终止后面任务的执行，后面的任务全部标记为已取消。
+   * 运行SQL
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  FailureTolerance: string
+  ExecuteSQL?: string
   /**
-   * base64加密后的SQL语句，用";"号分隔每个SQL语句，一次最多提交50个任务。严格按照前后顺序执行
+   * 任务信息，成功则返回：Task Success!，失败则返回异常信息
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  SQL: string
-  /**
-   * 任务的配置信息，当前仅支持SparkSQLTask任务。
-   */
-  Config?: Array<KVPair>
-  /**
-   * 任务的用户自定义参数信息
-   */
-  Params?: Array<KVPair>
+  Message?: string
 }
 
 /**
@@ -2517,6 +2512,16 @@ export interface WorkGroupIdSetOfUserId {
    * 工作组Id集合
    */
   WorkGroupIds: Array<number | bigint>
+}
+
+/**
+ * DescribeSparkSessionBatchSQL请求参数结构体
+ */
+export interface DescribeSparkSessionBatchSQLRequest {
+  /**
+   * SparkSQL唯一标识
+   */
+  BatchId: string
 }
 
 /**
@@ -4739,6 +4744,29 @@ export interface DeleteWorkGroupResponse {
 }
 
 /**
+ * DescribeSparkSessionBatchSQL返回参数结构体
+ */
+export interface DescribeSparkSessionBatchSQLResponse {
+  /**
+   * 状态：0：运行中、1：成功、2：失败、3：取消、4：超时；
+   */
+  State?: number
+  /**
+   * SQL子任务列表，仅展示运行完成的子任务，若某个任务运行失败，后续其它子任务不返回
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Tasks?: Array<BatchSqlTask>
+  /**
+   * 非sql运行的异常事件信息，包含资源创建失败、调度异常，JOB超时等，正常运行下该Event值为空
+   */
+  Event?: string
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DropDMSTable返回参数结构体
  */
 export interface DropDMSTableResponse {
@@ -5123,6 +5151,32 @@ export interface DeleteUsersFromWorkGroupResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 批量顺序执行任务集合
+ */
+export interface TasksInfo {
+  /**
+   * 任务类型，SQLTask：SQL查询任务。SparkSQLTask：Spark SQL查询任务
+   */
+  TaskType: string
+  /**
+   * 容错策略。Proceed：前面任务出错/取消后继续执行后面的任务。Terminate：前面的任务出错/取消之后终止后面任务的执行，后面的任务全部标记为已取消。
+   */
+  FailureTolerance: string
+  /**
+   * base64加密后的SQL语句，用";"号分隔每个SQL语句，一次最多提交50个任务。严格按照前后顺序执行
+   */
+  SQL: string
+  /**
+   * 任务的配置信息，当前仅支持SparkSQLTask任务。
+   */
+  Config?: Array<KVPair>
+  /**
+   * 任务的用户自定义参数信息
+   */
+  Params?: Array<KVPair>
 }
 
 /**

@@ -184,7 +184,7 @@ ComponentType为SIGN_DATE时，支持以下参数：
 
 ComponentType为SIGN_SEAL类型时，支持以下参数：
 1.PageRanges：PageRange的数组，通过PageRanges属性设置该印章在PDF所有页面上盖章（适用于标书在所有页面盖章的情况）
-参数样例： "ComponentExtra":"{["PageRange":{"BeginPage":1,"EndPage":-1}]}"
+参数样例： "ComponentExtra":"{"PageRange":[{"BeginPage":1,"EndPage":-1}]}"
    */
   ComponentExtra?: string
   /**
@@ -2001,6 +2001,60 @@ export interface Permission {
 }
 
 /**
+ * 企业员工信息
+ */
+export interface Staff {
+  /**
+   * 员工在电子签平台的用户ID
+   */
+  UserId: string
+  /**
+   * 显示的员工名
+   */
+  DisplayName: string
+  /**
+   * 员工手机号
+   */
+  Mobile: string
+  /**
+   * 员工邮箱
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Email: string
+  /**
+   * 员工在第三方应用平台的用户ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OpenId: string
+  /**
+   * 员工角色
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Roles: Array<StaffRole>
+  /**
+   * 员工部门
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Department: Department
+  /**
+   * 员工是否实名
+   */
+  Verified: boolean
+  /**
+   * 员工创建时间戳，单位秒
+   */
+  CreatedOn: number
+  /**
+   * 员工实名时间戳，单位秒
+   */
+  VerifiedOn: number
+  /**
+   * 员工是否离职：0-未离职，1-离职
+   */
+  QuiteJob: number
+}
+
+/**
  * 签署控件的类型和范围限制条件，用于控制文件发起后签署人拖拽签署区时可使用的控件类型和具体的印章或签名方式。
  */
 export interface ComponentLimit {
@@ -2834,57 +2888,25 @@ export interface ChannelCreateBoundFlowsResponse {
 }
 
 /**
- * 企业员工信息
+ * 指定签署方经办人控件类型是个人印章签署控件（SIGN_SIGNATURE） 时，可选的签名方式。
  */
-export interface Staff {
+export interface ApproverComponentLimitType {
   /**
-   * 员工在电子签平台的用户ID
+   * 签署方经办人在模板中配置的参与方ID，与控件绑定，是控件的归属方，ID为32位字符串。
    */
-  UserId: string
+  RecipientId: string
   /**
-   * 显示的员工名
+   * 签署方经办人控件类型是个人印章签署控件（SIGN_SIGNATURE） 时，可选的签名方式。
+
+签名方式：
+<ul>
+<li>HANDWRITE-手写签名</li>
+<li>ESIGN-个人印章类型</li>
+<li>OCR_ESIGN-AI智能识别手写签名</li>
+<li>SYSTEM_ESIGN-系统签名</li>
+</ul>
    */
-  DisplayName: string
-  /**
-   * 员工手机号
-   */
-  Mobile: string
-  /**
-   * 员工邮箱
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Email: string
-  /**
-   * 员工在第三方应用平台的用户ID
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  OpenId: string
-  /**
-   * 员工角色
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Roles: Array<StaffRole>
-  /**
-   * 员工部门
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Department: Department
-  /**
-   * 员工是否实名
-   */
-  Verified: boolean
-  /**
-   * 员工创建时间戳，单位秒
-   */
-  CreatedOn: number
-  /**
-   * 员工实名时间戳，单位秒
-   */
-  VerifiedOn: number
-  /**
-   * 员工是否离职：0-未离职，1-离职
-   */
-  QuiteJob: number
+  Values?: Array<string>
 }
 
 /**
@@ -3138,6 +3160,10 @@ export interface ChannelCreateMultiFlowSignQRCodeRequest {
    * @deprecated
    */
   Operator?: UserInfo
+  /**
+   * 指定签署方经办人控件类型是个人印章签署控件（SIGN_SIGNATURE） 时，可选的签名方式。
+   */
+  ApproverComponentLimitTypes?: Array<ApproverComponentLimitType>
 }
 
 /**
@@ -3216,7 +3242,12 @@ PERSON-个人/自然人；
 PERSON_AUTO_SIGN-个人自动签署，适用于个人自动签场景
 注: 个人自动签场景为白名单功能, 使用前请联系对接的客户经理沟通。
 ORGANIZATION-企业（企业签署方或模板发起时的企业静默签）；
-ENTERPRISESERVER-企业静默签（文件发起时的企业静默签字）。
+ENTERPRISESERVER-企业自动签（他方企业自动签署或文件发起时的本方企业自动签）
+
+若要实现他方企业（同一应用下）自动签，需要满足3个条件：
+条件1：ApproverType 设置为ENTERPRISESERVER
+条件2：子客之间完成授权
+条件3：联系对接的客户经理沟通
    */
   ApproverType?: string
   /**

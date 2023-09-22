@@ -102,7 +102,7 @@ export declare class Client extends AbstractClient {
     /**
      * 下发刷新任务，会刷新资产信息
      */
-    CreateRefreshTask(req?: CreateRefreshTaskRequest, cb?: (error: string, rep: CreateRefreshTaskResponse) => void): Promise<CreateRefreshTaskResponse>;
+    CreateRefreshTask(req: CreateRefreshTaskRequest, cb?: (error: string, rep: CreateRefreshTaskResponse) => void): Promise<CreateRefreshTaskResponse>;
     /**
      * 导出ES查询文档列表
      */

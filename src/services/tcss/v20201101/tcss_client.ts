@@ -1086,7 +1086,7 @@ export class Client extends AbstractClient {
    * 下发刷新任务，会刷新资产信息
    */
   async CreateRefreshTask(
-    req?: CreateRefreshTaskRequest,
+    req: CreateRefreshTaskRequest,
     cb?: (error: string, rep: CreateRefreshTaskResponse) => void
   ): Promise<CreateRefreshTaskResponse> {
     return this.request("CreateRefreshTask", req, cb)

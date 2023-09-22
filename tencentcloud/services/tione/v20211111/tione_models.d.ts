@@ -4326,17 +4326,17 @@ export interface Instance {
     /**
      * 资源组节点id
      */
-    InstanceId: string;
+    InstanceId?: string;
     /**
      * 节点已用资源
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    UsedResource: ResourceInfo;
+    UsedResource?: ResourceInfo;
     /**
      * 节点总资源
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TotalResource: ResourceInfo;
+    TotalResource?: ResourceInfo;
     /**
      * 节点状态
   注意：此字段为枚举值
@@ -4349,23 +4349,23 @@ export interface Instance {
   EXCEPTION：异常
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    InstanceStatus: string;
+    InstanceStatus?: string;
     /**
      * 创建人
      */
-    SubUin: string;
+    SubUin?: string;
     /**
      * 创建时间:
   注意：北京时间，比如: 2021-12-01 12:00:00
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CreateTime: string;
+    CreateTime?: string;
     /**
      * 到期时间
   注意：北京时间，比如：2021-12-11 12:00:00
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ExpireTime: string;
+    ExpireTime?: string;
     /**
      * 自动续费标识
   注意：此字段为枚举值
@@ -4375,15 +4375,20 @@ export interface Instance {
   DISABLE_NOTIFY_AND_MANUAL_RENEW：手动续费(取消自动续费)且到期不通知
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    AutoRenewFlag: string;
+    AutoRenewFlag?: string;
     /**
      * 计费项ID
      */
-    SpecId: string;
+    SpecId?: string;
     /**
      * 计费项别名
      */
-    SpecAlias: string;
+    SpecAlias?: string;
+    /**
+     * 计费项特性列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SpecFeatures?: Array<string>;
 }
 /**
  * DescribeBillingSpecs返回参数结构体

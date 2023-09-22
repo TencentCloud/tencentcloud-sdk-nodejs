@@ -56,6 +56,24 @@ export interface DescribeDomainAssetsResponse {
 }
 
 /**
+ * DeleteDomainAndIp请求参数结构体
+ */
+export interface DeleteDomainAndIpRequest {
+  /**
+   * -
+   */
+  Content: Array<PublicIpDomainListKey>
+  /**
+   * 是否保留路径配置，1：保留，其他：不保留，默认不传为不保留
+   */
+  RetainPath?: number
+  /**
+   * 以后是否忽略该资产，，1：忽略，其他：不忽略，默认不传为忽略
+   */
+  IgnoreAsset?: number
+}
+
+/**
  * 扫描任务列表展示信息
  */
 export interface ScanTaskInfoList {
@@ -272,45 +290,13 @@ export interface DescribeDbAssetInfoResponse {
 }
 
 /**
- * CreateRiskCenterScanTask请求参数结构体
+ * DeleteRiskScanTask请求参数结构体
  */
-export interface CreateRiskCenterScanTaskRequest {
+export interface DeleteRiskScanTaskRequest {
   /**
-   * 任务名称
+   * 任务id 列表
    */
-  TaskName: string
-  /**
-   * 0-全扫，1-指定资产扫，2-排除资产扫，3-手动填写扫；1和2则Assets字段必填，3则SelfDefiningAssets必填
-   */
-  ScanAssetType: number
-  /**
-   * 扫描项目；port/poc/weakpass/webcontent/configrisk/exposedserver
-   */
-  ScanItem: Array<string>
-  /**
-   * 0-周期任务,1-立即扫描,2-定时扫描,3-自定义；0,2,3则ScanPlanContent必填
-   */
-  ScanPlanType: number
-  /**
-   * 扫描资产信息列表
-   */
-  Assets?: Array<TaskAssetObject>
-  /**
-   * 扫描计划详情
-   */
-  ScanPlanContent?: string
-  /**
-   * ip/域名/url数组
-   */
-  SelfDefiningAssets?: Array<string>
-  /**
-   * 高级配置
-   */
-  TaskAdvanceCFG?: TaskAdvanceCFG
-  /**
-   * 体检模式，0-标准模式，1-快速模式，2-高级模式，默认标准模式
-   */
-  TaskMode?: number
+  TaskIdList: Array<TaskIdListKey>
 }
 
 /**
@@ -715,6 +701,16 @@ export interface TaskCenterVulRiskInputParam {
 }
 
 /**
+ * StopRiskCenterTask请求参数结构体
+ */
+export interface StopRiskCenterTaskRequest {
+  /**
+   * 任务id 列表
+   */
+  TaskIdList: Array<TaskIdListKey>
+}
+
+/**
  * DescribeScanTaskList返回参数结构体
  */
 export interface DescribeScanTaskListResponse {
@@ -799,13 +795,63 @@ export interface FilterDataObject {
 }
 
 /**
- * DescribeDbAssets请求参数结构体
+ * CreateRiskCenterScanTask请求参数结构体
  */
-export interface DescribeDbAssetsRequest {
+export interface CreateRiskCenterScanTaskRequest {
   /**
-   * -
+   * 任务名称
    */
-  Filter?: Filter
+  TaskName: string
+  /**
+   * 0-全扫，1-指定资产扫，2-排除资产扫，3-手动填写扫；1和2则Assets字段必填，3则SelfDefiningAssets必填
+   */
+  ScanAssetType: number
+  /**
+   * 扫描项目；port/poc/weakpass/webcontent/configrisk/exposedserver
+   */
+  ScanItem: Array<string>
+  /**
+   * 0-周期任务,1-立即扫描,2-定时扫描,3-自定义；0,2,3则ScanPlanContent必填
+   */
+  ScanPlanType: number
+  /**
+   * 扫描资产信息列表
+   */
+  Assets?: Array<TaskAssetObject>
+  /**
+   * 扫描计划详情
+   */
+  ScanPlanContent?: string
+  /**
+   * ip/域名/url数组
+   */
+  SelfDefiningAssets?: Array<string>
+  /**
+   * 高级配置
+   */
+  TaskAdvanceCFG?: TaskAdvanceCFG
+  /**
+   * 体检模式，0-标准模式，1-快速模式，2-高级模式，默认标准模式
+   */
+  TaskMode?: number
+}
+
+/**
+ * 任务高级配置
+ */
+export interface TaskAdvanceCFG {
+  /**
+   * 漏洞风险高级配置
+   */
+  VulRisk?: Array<TaskCenterVulRiskInputParam>
+  /**
+   * 弱口令风险高级配置
+   */
+  WeakPwdRisk?: Array<TaskCenterWeakPwdRiskInputParam>
+  /**
+   * 配置风险高级配置
+   */
+  CFGRisk?: Array<TaskCenterCFGRiskInputParam>
 }
 
 /**
@@ -1338,73 +1384,13 @@ export interface DescribeTaskLogListRequest {
 }
 
 /**
- * vpc列表数据
+ * DescribeDbAssets请求参数结构体
  */
-export interface Vpc {
+export interface DescribeDbAssetsRequest {
   /**
-   * 子网(只支持32位)
+   * -
    */
-  Subnet?: number
-  /**
-   * 互通vpc(只支持32位)
-   */
-  ConnectedVpc?: number
-  /**
-   * 资产id
-   */
-  AssetId?: string
-  /**
-   * region区域
-   */
-  Region?: string
-  /**
-   * 云服务器(只支持32位)
-   */
-  CVM?: number
-  /**
-   * 标签
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Tag?: Array<Tag>
-  /**
-   * dns域名
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  DNS?: Array<string>
-  /**
-   * 资产名称
-   */
-  AssetName?: string
-  /**
-   * cidr网段
-   */
-  CIDR?: string
-  /**
-   * 资产创建时间
-   */
-  CreateTime?: string
-  /**
-   * appid
-   */
-  AppId?: string
-  /**
-   * uin
-   */
-  Uin?: string
-  /**
-   * 昵称
-   */
-  Nick?: string
-  /**
-   * 是否新资产 1新
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  IsNewAsset?: number
-  /**
-   * 是否核心资产1是 2不是
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  IsCore?: number
+  Filter?: Filter
 }
 
 /**
@@ -2443,6 +2429,26 @@ export interface IpAssetListVO {
 }
 
 /**
+ * DeleteRiskScanTask返回参数结构体
+ */
+export interface DeleteRiskScanTaskResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 公网IP和域名资产列表key
+ */
+export interface PublicIpDomainListKey {
+  /**
+   * 资产值
+   */
+  Asset: string
+}
+
+/**
  * 资产视角的漏洞风险对象
  */
 export interface AssetViewVULRisk {
@@ -2769,6 +2775,16 @@ export interface AssetBaseInfoResponse {
 }
 
 /**
+ * 任务ID列表Key
+ */
+export interface TaskIdListKey {
+  /**
+   * 任务ID
+   */
+  TaskId: string
+}
+
+/**
  * 资产视角的端口风险对象
  */
 export interface AssetViewPortRisk {
@@ -2873,6 +2889,76 @@ export interface DescribeDomainAssetsRequest {
 }
 
 /**
+ * vpc列表数据
+ */
+export interface Vpc {
+  /**
+   * 子网(只支持32位)
+   */
+  Subnet?: number
+  /**
+   * 互通vpc(只支持32位)
+   */
+  ConnectedVpc?: number
+  /**
+   * 资产id
+   */
+  AssetId?: string
+  /**
+   * region区域
+   */
+  Region?: string
+  /**
+   * 云服务器(只支持32位)
+   */
+  CVM?: number
+  /**
+   * 标签
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Tag?: Array<Tag>
+  /**
+   * dns域名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DNS?: Array<string>
+  /**
+   * 资产名称
+   */
+  AssetName?: string
+  /**
+   * cidr网段
+   */
+  CIDR?: string
+  /**
+   * 资产创建时间
+   */
+  CreateTime?: string
+  /**
+   * appid
+   */
+  AppId?: string
+  /**
+   * uin
+   */
+  Uin?: string
+  /**
+   * 昵称
+   */
+  Nick?: string
+  /**
+   * 是否新资产 1新
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsNewAsset?: number
+  /**
+   * 是否核心资产1是 2不是
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsCore?: number
+}
+
+/**
  * CreateDomainAndIp返回参数结构体
  */
 export interface CreateDomainAndIpResponse {
@@ -2897,21 +2983,17 @@ export interface DescribePublicIpAssetsRequest {
 }
 
 /**
- * 任务高级配置
+ * DeleteDomainAndIp返回参数结构体
  */
-export interface TaskAdvanceCFG {
+export interface DeleteDomainAndIpResponse {
   /**
-   * 漏洞风险高级配置
+   * 删除的资产数量
    */
-  VulRisk?: Array<TaskCenterVulRiskInputParam>
+  Data?: number
   /**
-   * 弱口令风险高级配置
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  WeakPwdRisk?: Array<TaskCenterWeakPwdRiskInputParam>
-  /**
-   * 配置风险高级配置
-   */
-  CFGRisk?: Array<TaskCenterCFGRiskInputParam>
+  RequestId?: string
 }
 
 /**
@@ -3061,6 +3143,20 @@ export interface DescribeDbAssetsResponse {
 export interface AddNewBindRoleUserResponse {
   /**
    * 0成功，其他失败
+   */
+  Status?: number
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * StopRiskCenterTask返回参数结构体
+ */
+export interface StopRiskCenterTaskResponse {
+  /**
+   * Status为0， 停止成功
    */
   Status?: number
   /**

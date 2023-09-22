@@ -248,7 +248,7 @@ export interface CreateTranscodeResponse {
     /**
      * 文档转码任务的唯一标识Id，用于查询该任务的进度以及转码结果
      */
-    TaskId: string;
+    TaskId?: string;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -3083,7 +3083,8 @@ export interface CreateTranscodeRequest {
      */
     MinScaleResolution?: string;
     /**
-     * 是否对不支持元素开启自动处理的功能。默认不开启。
+     * 此参数仅对动态转码生效。
+  是否对不支持元素开启自动处理的功能。默认不开启。
   
   在开启自动处理的情况下，会自动进行如下处理：
   1. 墨迹：移除不支持的墨迹（比如使用WPS画的）

@@ -761,7 +761,7 @@ export class Client extends AbstractClient {
    * 本接口（DescribeCustomHeader）用于自定义header列表
    */
   async DescribeCustomHeader(
-    req?: DescribeCustomHeaderRequest,
+    req: DescribeCustomHeaderRequest,
     cb?: (error: string, rep: DescribeCustomHeaderResponse) => void
   ): Promise<DescribeCustomHeaderResponse> {
     return this.request("DescribeCustomHeader", req, cb)

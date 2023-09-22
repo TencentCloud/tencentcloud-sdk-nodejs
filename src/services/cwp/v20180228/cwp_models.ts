@@ -4110,6 +4110,7 @@ Other 混合云专区
 每个过滤条件只支持一个值，暂不支持多个值“或”关系查询
 <li>Quuid - String - 是否必填: 否 - 云服务器uuid  最大100条.</li>
 <li>AddedOnTheFifteen- String 是否必填: 否 - 是否只查询15天内新增的主机( 1：是) </li>
+<li> TagId- String 是否必填: 否 - 查询指定标签关联的主机列表 </li>
    */
   Filters?: Array<Filter>
   /**
@@ -9072,6 +9073,16 @@ export interface ExportBaselineItemListRequest {
 }
 
 /**
+ * DeleteReverseShellRules请求参数结构体
+ */
+export interface DeleteReverseShellRulesRequest {
+  /**
+   * ID数组. (最大100条)
+   */
+  Ids: Array<number | bigint>
+}
+
+/**
  * DescribeProtectDirList请求参数结构体
  */
 export interface DescribeProtectDirListRequest {
@@ -10263,13 +10274,37 @@ export interface EditTagsRequest {
 }
 
 /**
- * DeleteReverseShellRules请求参数结构体
+ * DescribeAgentInstallCommand请求参数结构体
  */
-export interface DeleteReverseShellRulesRequest {
+export interface DescribeAgentInstallCommandRequest {
   /**
-   * ID数组. (最大100条)
+   * 是否腾讯云
    */
-  Ids: Array<number | bigint>
+  IsCloud: boolean
+  /**
+   * 网络类型：basic-基础网络，private-VPC, public-公网，direct-专线
+   */
+  NetType: string
+  /**
+   * 地域标示, NetType=direct时必填
+   */
+  RegionCode?: string
+  /**
+   * VpcId, NetType=direct时必填
+   */
+  VpcId?: string
+  /**
+   * 标签ID列表，IsCloud=false时才会生效
+   */
+  TagIds?: Array<number | bigint>
+  /**
+   * 命令有效期，非腾讯云时必填
+   */
+  ExpireDate?: string
+  /**
+   * 代理方式接入的vip
+   */
+  Vip?: string
 }
 
 /**
@@ -15522,6 +15557,41 @@ export interface ModifyMalwareTimingScanSettingsRequest {
 }
 
 /**
+ * DescribeAgentInstallCommand返回参数结构体
+ */
+export interface DescribeAgentInstallCommandResponse {
+  /**
+   * linux系统安装命令
+   */
+  LinuxCommand: string
+  /**
+   * windows系统安装命令（windows2008及以上）
+   */
+  WindowsCommand: string
+  /**
+   * windows系统安装命令第一步（windows2003）
+   */
+  WindowsStepOne: string
+  /**
+   * windows系统安装命令第二步（windows2003）
+   */
+  WindowsStepTwo: string
+  /**
+   * windows版agent下载链接
+   */
+  WindowsDownloadUrl: string
+  /**
+   * Arm安装命令
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ARMCommand: string
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 资产管理环境变量列表
  */
 export interface AssetEnvBaseInfo {
@@ -17373,11 +17443,11 @@ export interface DescribeMachinesResponse {
   /**
    * 主机列表
    */
-  Machines: Array<Machine>
+  Machines?: Array<Machine>
   /**
    * 主机数量
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

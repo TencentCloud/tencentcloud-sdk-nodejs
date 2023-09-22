@@ -562,6 +562,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("FixBaselineDetect", req, cb);
     }
     /**
+     * 获取agent安装命令
+     */
+    async DescribeAgentInstallCommand(req, cb) {
+        return this.request("DescribeAgentInstallCommand", req, cb);
+    }
+    /**
      * 获取基线规则检测列表
      */
     async DescribeBaselineRuleDetectList(req, cb) {

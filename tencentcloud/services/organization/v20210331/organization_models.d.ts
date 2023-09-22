@@ -292,14 +292,23 @@ export interface DescribeOrganizationMemberAuthIdentitiesRequest {
      */
     Limit: number;
     /**
-     * 组织成员Uin。
+     * 组织成员Uin。入参MemberUin与IdentityId至少填写一个
      */
-    MemberUin: number;
+    MemberUin?: number;
+    /**
+     * 身份ID。入参MemberUin与IdentityId至少填写一个
+     */
+    IdentityId?: number;
 }
 /**
  * AddOrganizationMemberEmail返回参数结构体
  */
 export interface AddOrganizationMemberEmailResponse {
+    /**
+     * 绑定Id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    BindId?: number;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -582,13 +591,23 @@ export interface DeleteOrganizationNodesRequest {
  */
 export interface IdentityPolicy {
     /**
-     * 策略ID
+     * CAM预设策略ID。PolicyType 为预设策略时有效且必选
      */
-    PolicyId: number;
+    PolicyId?: number;
     /**
-     * 策略名称
+     * CAM预设策略名称。PolicyType 为预设策略时有效且必选
      */
-    PolicyName: string;
+    PolicyName?: string;
+    /**
+     * 策略类型。取值 1-自定义策略  2-预设策略；默认值2
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PolicyType?: number;
+    /**
+     * 自定义策略内容，遵循CAM策略语法。PolicyType 为自定义策略时有效且必选
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PolicyDocument?: string;
 }
 /**
  * AddOrganizationNode返回参数结构体
@@ -1243,37 +1262,52 @@ export interface OrgMemberAuthIdentity {
      * 身份ID。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    IdentityId: number;
+    IdentityId?: number;
     /**
      * 身份的角色名。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    IdentityRoleName: string;
+    IdentityRoleName?: string;
     /**
      * 身份的角色别名。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    IdentityRoleAliasName: string;
+    IdentityRoleAliasName?: string;
     /**
-     * 描述。
+     * 身份描述。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Description: string;
+    Description?: string;
     /**
-     * 创建时间。
+     * 首次配置成功的时间。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CreateTime: string;
+    CreateTime?: string;
     /**
-     * 更新时间。
+     * 最后一次配置成功的时间。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    UpdateTime: string;
+    UpdateTime?: string;
     /**
-     * 身份类型。取值： 1-预设  2-自定义
+     * 身份类型。取值： 1-预设身份  2-自定义身份
   注意：此字段可能返回 null，表示取不到有效值。
      */
     IdentityType?: number;
+    /**
+     * 配置状态。取值：1-配置完成 2-需重新配置
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Status?: number;
+    /**
+     * 成员Uin。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MemberUin?: number;
+    /**
+     * 成员名称。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MemberName?: string;
 }
 /**
  * 成员主要信息
@@ -1396,32 +1430,32 @@ export interface OrgIdentity {
      * 身份ID。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    IdentityId: number;
+    IdentityId?: number;
     /**
      * 身份名称。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    IdentityAliasName: string;
+    IdentityAliasName?: string;
     /**
      * 描述。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Description: string;
+    Description?: string;
     /**
      * 身份策略。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    IdentityPolicy: Array<IdentityPolicy>;
+    IdentityPolicy?: Array<IdentityPolicy>;
     /**
      * 身份类型。 1-预设、 2-自定义
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    IdentityType: number;
+    IdentityType?: number;
     /**
      * 更新时间。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    UpdateTime: string;
+    UpdateTime?: string;
 }
 /**
  * DeleteOrganizationMemberAuthIdentity返回参数结构体

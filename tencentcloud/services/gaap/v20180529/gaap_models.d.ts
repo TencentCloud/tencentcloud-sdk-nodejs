@@ -2128,7 +2128,12 @@ export interface CreateProxyGroupDomainResponse {
 /**
  * DescribeCustomHeader请求参数结构体
  */
-export declare type DescribeCustomHeaderRequest = null;
+export interface DescribeCustomHeaderRequest {
+    /**
+     * 规则ID
+     */
+    RuleId: string;
+}
 /**
  * DescribeProxyGroupList返回参数结构体
  */

@@ -18,6 +18,7 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  DescribePersonCertificateResponse,
   CreateSealRequest,
   ModifyIntegrationDepartmentResponse,
   CancelFlowResponse,
@@ -46,7 +47,7 @@ import {
   SealInfo,
   StaffRole,
   CreateIntegrationRoleRequest,
-  AuthorizedUser,
+  DeleteIntegrationRoleUsersResponse,
   CreateConvertTaskApiRequest,
   DeleteIntegrationEmployeesResponse,
   CreateBatchSignUrlResponse,
@@ -74,6 +75,7 @@ import {
   BindEmployeeUserIdWithClientOpenIdRequest,
   DescribeIntegrationDepartmentsRequest,
   Permission,
+  Staff,
   ComponentLimit,
   CreateIntegrationDepartmentResponse,
   DescribeFlowTemplatesRequest,
@@ -105,15 +107,16 @@ import {
   UserInfo,
   CreateFlowApproversRequest,
   ModifyIntegrationRoleResponse,
+  ExtendAuthInfo,
   FlowCreateApprover,
-  Staff,
+  ApproverComponentLimitType,
   RecipientComponentInfo,
   CreateFlowEvidenceReportResponse,
   CreateIntegrationRoleResponse,
   DescribeFlowComponentsRequest,
   CreateIntegrationDepartmentRequest,
   GroupOrganization,
-  DeleteIntegrationRoleUsersResponse,
+  AuthorizedUser,
   CreateDocumentRequest,
   RemindFlowRecords,
   CreatePreparedPersonalEsignResponse,
@@ -188,7 +191,7 @@ import {
   Caller,
   DescribeFlowTemplatesResponse,
   UploadFilesRequest,
-  ExtendAuthInfo,
+  DescribePersonCertificateRequest,
   RelieveInfo,
   EmbedUrlOption,
   CreateBatchCancelFlowUrlRequest,
@@ -216,7 +219,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 接口用户查询合同流程的详情信息, 支持查询多个(数量不能超过100)
+     * 此接口用于查询合同流程的详情信息，支持查询多个（数量不能超过100）。
 
 适用场景：可用于主动查询某个合同详情信息。
      */
@@ -887,6 +890,16 @@ httpProfile.setEndpoint("file.test.ess.tencent.cn");<br/>
     cb?: (error: string, rep: DisableUserAutoSignResponse) => void
   ): Promise<DisableUserAutoSignResponse> {
     return this.request("DisableUserAutoSign", req, cb)
+  }
+
+  /**
+   * 此接口（DescribePersonCertificate）用于查询个人数字证书信息。<br />注：`1.目前仅用于查询开通了医疗自动签署功能的个人数字证书。`<br />`2.调用此接口需要开通白名单，使用前请联系相关人员开通白名单。`
+   */
+  async DescribePersonCertificate(
+    req: DescribePersonCertificateRequest,
+    cb?: (error: string, rep: DescribePersonCertificateResponse) => void
+  ): Promise<DescribePersonCertificateResponse> {
+    return this.request("DescribePersonCertificate", req, cb)
   }
 
   /**

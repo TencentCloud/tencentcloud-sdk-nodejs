@@ -328,6 +328,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDataEngines", req, cb);
     }
     /**
+     * 本接口（DescribeSparkSessionBatchSQL）用于查询Spark SQL批任务运行状态
+     */
+    async DescribeSparkSessionBatchSQL(req, cb) {
+        return this.request("DescribeSparkSessionBatchSQL", req, cb);
+    }
+    /**
      * DMS元数据删除库
      */
     async DropDMSDatabase(req, cb) {

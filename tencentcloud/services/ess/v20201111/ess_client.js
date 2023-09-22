@@ -28,7 +28,7 @@ class Client extends abstract_client_1.AbstractClient {
         super("ess.tencentcloudapi.com", "2020-11-11", clientConfig);
     }
     /**
-     * 接口用户查询合同流程的详情信息, 支持查询多个(数量不能超过100)
+     * 此接口用于查询合同流程的详情信息，支持查询多个（数量不能超过100）。
 
 适用场景：可用于主动查询某个合同详情信息。
      */
@@ -504,6 +504,12 @@ httpProfile.setEndpoint("file.test.ess.tencent.cn");<br/>
      */
     async DisableUserAutoSign(req, cb) {
         return this.request("DisableUserAutoSign", req, cb);
+    }
+    /**
+     * 此接口（DescribePersonCertificate）用于查询个人数字证书信息。<br />注：`1.目前仅用于查询开通了医疗自动签署功能的个人数字证书。`<br />`2.调用此接口需要开通白名单，使用前请联系相关人员开通白名单。`
+     */
+    async DescribePersonCertificate(req, cb) {
+        return this.request("DescribePersonCertificate", req, cb);
     }
     /**
      * 通过AuthCode查询个人用户是否实名

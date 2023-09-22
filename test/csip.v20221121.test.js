@@ -18,9 +18,69 @@ const client = new tencentcloud.csip.v20221121.Client({
 })
 describe("csip.v20221121.test.js", function () {
 
-it("csip.v20221121.DescribeTaskLogURL", async function () {
+it("csip.v20221121.DeleteDomainAndIp", async function () {
     try {
-       const data = await client.DescribeTaskLogURL({})
+       const data = await client.DeleteDomainAndIp({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("csip.v20221121.DescribeDbAssetInfo", async function () {
+    try {
+       const data = await client.DescribeDbAssetInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("csip.v20221121.DescribeDomainAssets", async function () {
+    try {
+       const data = await client.DescribeDomainAssets({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("csip.v20221121.DescribePublicIpAssets", async function () {
+    try {
+       const data = await client.DescribePublicIpAssets({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("csip.v20221121.AddNewBindRoleUser", async function () {
+    try {
+       const data = await client.AddNewBindRoleUser({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("csip.v20221121.DescribeListenerList", async function () {
+    try {
+       const data = await client.DescribeListenerList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("csip.v20221121.DeleteRiskScanTask", async function () {
+    try {
+       const data = await client.DeleteRiskScanTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -58,29 +118,9 @@ it("csip.v20221121.DescribeClusterPodAssets", async function () {
     }
 })
 
-it("csip.v20221121.DescribeSubnetAssets", async function () {
-    try {
-       const data = await client.DescribeSubnetAssets({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("csip.v20221121.DescribeVpcAssets", async function () {
     try {
        const data = await client.DescribeVpcAssets({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("csip.v20221121.DescribeDbAssetInfo", async function () {
-    try {
-       const data = await client.DescribeDbAssetInfo({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -98,9 +138,19 @@ it("csip.v20221121.DescribeCVMAssets", async function () {
     }
 })
 
-it("csip.v20221121.DescribeDomainAssets", async function () {
+it("csip.v20221121.DescribeTaskLogURL", async function () {
     try {
-       const data = await client.DescribeDomainAssets({})
+       const data = await client.DescribeTaskLogURL({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("csip.v20221121.CreateRiskCenterScanTask", async function () {
+    try {
+       const data = await client.CreateRiskCenterScanTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -111,26 +161,6 @@ it("csip.v20221121.DescribeDomainAssets", async function () {
 it("csip.v20221121.DescribeSearchBugInfo", async function () {
     try {
        const data = await client.DescribeSearchBugInfo({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("csip.v20221121.DescribePublicIpAssets", async function () {
-    try {
-       const data = await client.DescribePublicIpAssets({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("csip.v20221121.AddNewBindRoleUser", async function () {
-    try {
-       const data = await client.AddNewBindRoleUser({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -158,36 +188,6 @@ it("csip.v20221121.CreateDomainAndIp", async function () {
     }
 })
 
-it("csip.v20221121.DescribeRiskCenterAssetViewPortRiskList", async function () {
-    try {
-       const data = await client.DescribeRiskCenterAssetViewPortRiskList({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("csip.v20221121.DescribeListenerList", async function () {
-    try {
-       const data = await client.DescribeListenerList({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("csip.v20221121.CreateRiskCenterScanTask", async function () {
-    try {
-       const data = await client.CreateRiskCenterScanTask({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("csip.v20221121.DescribeScanTaskList", async function () {
     try {
        const data = await client.DescribeScanTaskList({})
@@ -201,6 +201,36 @@ it("csip.v20221121.DescribeScanTaskList", async function () {
 it("csip.v20221121.DescribeDbAssets", async function () {
     try {
        const data = await client.DescribeDbAssets({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("csip.v20221121.DescribeRiskCenterAssetViewPortRiskList", async function () {
+    try {
+       const data = await client.DescribeRiskCenterAssetViewPortRiskList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("csip.v20221121.StopRiskCenterTask", async function () {
+    try {
+       const data = await client.StopRiskCenterTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("csip.v20221121.DescribeSubnetAssets", async function () {
+    try {
+       const data = await client.DescribeSubnetAssets({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

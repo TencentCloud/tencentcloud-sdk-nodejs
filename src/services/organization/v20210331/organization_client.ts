@@ -184,7 +184,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取组织成员可被管理的身份列表
+   * 获取组织成员访问授权列表
    */
   async DescribeOrganizationMemberAuthIdentities(
     req: DescribeOrganizationMemberAuthIdentitiesRequest,

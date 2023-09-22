@@ -518,6 +518,16 @@ it("dlc.v20210125.DescribeDataEngines", async function () {
     }
 })
 
+it("dlc.v20210125.DescribeSparkSessionBatchSQL", async function () {
+    try {
+       const data = await client.DescribeSparkSessionBatchSQL({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dlc.v20210125.DropDMSDatabase", async function () {
     try {
        const data = await client.DropDMSDatabase({})

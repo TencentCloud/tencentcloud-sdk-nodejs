@@ -6338,7 +6338,7 @@ export interface DescribeAlarmHistoriesRequest {
      */
     MetricNames?: Array<string>;
     /**
-     * 根据策略名称模糊搜索
+     * 根据策略名称模糊搜索,不支持大小写区分
      */
     PolicyName?: string;
     /**
@@ -6358,7 +6358,7 @@ export interface DescribeAlarmHistoriesRequest {
      */
     PolicyIds?: Array<string>;
     /**
-     * 告警等级
+     * 告警等级,取值范围：Remind、Serious、Warn
      */
     AlarmLevels?: Array<string>;
 }
