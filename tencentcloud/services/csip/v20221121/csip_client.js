@@ -70,10 +70,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteRiskScanTask", req, cb);
     }
     /**
-     * 获取任务扫描报告列表
+     * 获取资产视角的弱口令风险列表
      */
-    async DescribeTaskLogList(req, cb) {
-        return this.request("DescribeTaskLogList", req, cb);
+    async DescribeRiskCenterAssetViewWeakPasswordRiskList(req, cb) {
+        return this.request("DescribeRiskCenterAssetViewWeakPasswordRiskList", req, cb);
     }
     /**
      * 获取资产视角的漏洞风险列表
@@ -88,16 +88,34 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeClusterPodAssets", req, cb);
     }
     /**
+     * 获取资产视角的配置风险列表
+     */
+    async DescribeRiskCenterAssetViewCFGRiskList(req, cb) {
+        return this.request("DescribeRiskCenterAssetViewCFGRiskList", req, cb);
+    }
+    /**
      * 获取vpc列表
      */
     async DescribeVpcAssets(req, cb) {
         return this.request("DescribeVpcAssets", req, cb);
     }
     /**
+     * 获取风险服务列表
+     */
+    async DescribeRiskCenterServerRiskList(req, cb) {
+        return this.request("DescribeRiskCenterServerRiskList", req, cb);
+    }
+    /**
      * cvm列表
      */
     async DescribeCVMAssets(req, cb) {
         return this.request("DescribeCVMAssets", req, cb);
+    }
+    /**
+     * 获取网站风险列表
+     */
+    async DescribeRiskCenterWebsiteRiskList(req, cb) {
+        return this.request("DescribeRiskCenterWebsiteRiskList", req, cb);
     }
     /**
      * 获取报告下载的临时链接
@@ -116,6 +134,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeSearchBugInfo(req, cb) {
         return this.request("DescribeSearchBugInfo", req, cb);
+    }
+    /**
+     * 获取任务扫描报告列表
+     */
+    async DescribeTaskLogList(req, cb) {
+        return this.request("DescribeTaskLogList", req, cb);
     }
     /**
      * 获取扫描报告列表

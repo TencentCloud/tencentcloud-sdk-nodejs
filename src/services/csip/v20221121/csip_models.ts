@@ -16,265 +16,6 @@
  */
 
 /**
- * DescribeDomainAssets返回参数结构体
- */
-export interface DescribeDomainAssetsResponse {
-  /**
-   * -
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Total?: number
-  /**
-   * -
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Data?: Array<DomainAssetVO>
-  /**
-   * 防护状态列表
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  DefenseStatusList?: Array<FilterDataObject>
-  /**
-   * 资产归属地列表
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  AssetLocationList?: Array<FilterDataObject>
-  /**
-   * 资产类型列表
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SourceTypeList?: Array<FilterDataObject>
-  /**
-   * 地域列表
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  RegionList?: Array<FilterDataObject>
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DeleteDomainAndIp请求参数结构体
- */
-export interface DeleteDomainAndIpRequest {
-  /**
-   * -
-   */
-  Content: Array<PublicIpDomainListKey>
-  /**
-   * 是否保留路径配置，1：保留，其他：不保留，默认不传为不保留
-   */
-  RetainPath?: number
-  /**
-   * 以后是否忽略该资产，，1：忽略，其他：不忽略，默认不传为忽略
-   */
-  IgnoreAsset?: number
-}
-
-/**
- * 扫描任务列表展示信息
- */
-export interface ScanTaskInfoList {
-  /**
-   * 任务名称
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TaskName?: string
-  /**
-   * 任务开始时间
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  StartTime?: string
-  /**
-   * 任务结束时间
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  EndTime?: string
-  /**
-   * corn
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ScanPlanContent?: string
-  /**
-   * 0-周期任务,1-立即扫描,2-定时扫描,3-自定义
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TaskType?: number
-  /**
-   * 创建时间
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  InsertTime?: string
-  /**
-   * 任务ID
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TaskId?: string
-  /**
-   * 排除扫描资产信息
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SelfDefiningAssets?: Array<string>
-  /**
-   * 预估时间
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  PredictTime?: number
-  /**
-   * 预估完成时间
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  PredictEndTime?: string
-  /**
-   * 报告数量
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ReportNumber?: number
-  /**
-   * 资产数量
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  AssetNumber?: number
-  /**
-   * 扫描状态 0 初始值  1正在扫描  2扫描完成  3扫描出错
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ScanStatus?: number
-  /**
-   * 任务进度
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Percent?: number
-  /**
-   * port/poc/weakpass/webcontent/configrisk
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ScanItem?: string
-  /**
-   * 0-全扫，1-指定资产扫，2-排除资产扫
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ScanAssetType?: number
-  /**
-   * vss子任务id
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  VSSTaskId?: string
-  /**
-   * cspm子任务id
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CSPMTaskId?: string
-  /**
-   * 主机漏扫子任务id
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CWPPOCId?: string
-  /**
-   * 主机基线子任务id
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CWPBlId?: string
-  /**
-   * vss子任务进度
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  VSSTaskProcess?: number
-  /**
-   * cspm子任务进度
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CSPMTaskProcess?: number
-  /**
-   * 主机漏扫子任务进度
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CWPPOCProcess?: number
-  /**
-   * 主机基线子任务进度
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CWPBlProcess?: number
-  /**
-   * 异常状态码
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ErrorCode?: number
-  /**
-   * 异常信息
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ErrorInfo?: string
-  /**
-   * 周期任务开始的天数
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  StartDay?: number
-  /**
-   * 扫描频率,单位天,1-每天,7-每周,30-月,0-扫描一次
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Frequency?: number
-  /**
-   * 完成次数
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CompleteNumber?: number
-  /**
-   * 已完成资产个数
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CompleteAssetNumber?: number
-  /**
-   * 风险数
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  RiskCount?: number
-  /**
-   * 资产
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Assets?: Array<TaskAssetObject>
-  /**
-   * 用户Appid
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  AppId?: string
-  /**
-   * 用户主账户ID
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  UIN?: string
-  /**
-   * 用户名称
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  UserName?: string
-  /**
-   * 体检模式，0-标准模式，1-快速模式，2-高级模式
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TaskMode?: number
-  /**
-   * 扫描来源
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ScanFrom?: string
-  /**
-   * 是否限免体检0不是，1是
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  IsFree?: number
-  /**
-   * 是否可以删除，1-可以，0-不可以，对应多账户管理使用
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  IsDelete?: number
-}
-
-/**
  * DescribeDbAssetInfo返回参数结构体
  */
 export interface DescribeDbAssetInfoResponse {
@@ -300,77 +41,41 @@ export interface DeleteRiskScanTaskRequest {
 }
 
 /**
- * 报告项key
+ * DescribeRiskCenterAssetViewWeakPasswordRiskList返回参数结构体
  */
-export interface ReportItemKey {
+export interface DescribeRiskCenterAssetViewWeakPasswordRiskListResponse {
   /**
-   * 日志Id列表
+   * 总条数
    */
-  TaskLogList: Array<string>
-}
-
-/**
- * DescribeScanReportList请求参数结构体
- */
-export interface DescribeScanReportListRequest {
+  TotalCount?: number
   /**
-   * 列表过滤条件
+   * 风险列表
    */
-  Filter?: Filter
-}
-
-/**
- * 报告pdf下载的临时链接
- */
-export interface TaskLogURL {
+  Data?: Array<AssetViewWeakPassRisk>
   /**
-   * 报告下载临时链接
-注意：此字段可能返回 null，表示取不到有效值。
+   * 状态列表
    */
-  URL?: string
+  StatusLists?: Array<FilterDataObject>
   /**
-   * 任务报告id
-注意：此字段可能返回 null，表示取不到有效值。
+   * 危险等级列表
    */
-  LogId?: string
+  LevelLists?: Array<FilterDataObject>
   /**
-   * 任务报告名称
-注意：此字段可能返回 null，表示取不到有效值。
+   * 来源列表
    */
-  TaskLogName?: string
+  FromLists?: Array<FilterDataObject>
   /**
-   * APP ID
-注意：此字段可能返回 null，表示取不到有效值。
+   * 资产类型列表
    */
-  AppId?: string
-}
-
-/**
- * DescribeRiskCenterAssetViewVULRiskList请求参数结构体
- */
-export interface DescribeRiskCenterAssetViewVULRiskListRequest {
+  InstanceTypeLists?: Array<FilterDataObject>
   /**
-   * 过滤内容
+   * 弱口令类型列表
    */
-  Filter?: Filter
-}
-
-/**
- * 配置风险高级配置
- */
-export interface TaskCenterCFGRiskInputParam {
+  PasswordTypeLists?: Array<FilterDataObject>
   /**
-   * 检测项ID
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  ItemId: string
-  /**
-   * 是否开启，0-不开启，1-开启
-   */
-  Enable: number
-  /**
-   * 资源类型
-   */
-  ResourceType: string
+  RequestId?: string
 }
 
 /**
@@ -388,399 +93,6 @@ export interface TaskCenterWeakPwdRiskInputParam {
 }
 
 /**
- * 任务报告信息
- */
-export interface TaskLogInfo {
-  /**
-   * 报告名称
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TaskLogName?: string
-  /**
-   * 报告ID
-   */
-  TaskLogId?: string
-  /**
-   * 关联资产个数
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  AssetsNumber?: number
-  /**
-   * 安全风险数量
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  RiskNumber?: number
-  /**
-   * 报告生成时间,任务结束时间
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Time?: string
-  /**
-   * 任务状态码：0 初始值  1正在扫描  2扫描完成  3扫描出错，4停止，5暂停，6该任务已被重启过
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Status?: number
-  /**
-   * 关联任务名称
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TaskName?: string
-  /**
-   * 扫描开始时间
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  StartTime?: string
-  /**
-   * 任务中心扫描任务ID
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TaskCenterTaskId?: string
-  /**
-   * 租户ID
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  AppId?: string
-  /**
-   * 主账户ID
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  UIN?: string
-  /**
-   * 用户名称
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  UserName?: string
-}
-
-/**
- * CreateDomainAndIp请求参数结构体
- */
-export interface CreateDomainAndIpRequest {
-  /**
-   * -
-   */
-  Content: Array<string>
-}
-
-/**
- * 域名资产
- */
-export interface DomainAssetVO {
-  /**
-   * 资产id
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  AssetId?: Array<string>
-  /**
-   * 资产名
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  AssetName?: Array<string>
-  /**
-   * 资产类型
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  AssetType?: Array<string>
-  /**
-   * 地域
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Region?: Array<string>
-  /**
-   * Waf状态
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  WAFStatus?: number
-  /**
-   * 资产创建时间
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  AssetCreateTime?: string
-  /**
-   * Appid
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  AppId?: number
-  /**
-   * 账号id
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Uin?: string
-  /**
-   * 账号名称
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  NickName?: string
-  /**
-   * 是否核心
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  IsCore?: number
-  /**
-   * 是否云上资产
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  IsCloud?: number
-  /**
-   * 网络攻击
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Attack?: number
-  /**
-   * 网络访问
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Access?: number
-  /**
-   * 网络拦截
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Intercept?: number
-  /**
-   * 入站峰值带宽
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  InBandwidth?: string
-  /**
-   * 出站峰值带宽
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  OutBandwidth?: string
-  /**
-   * 入站累计流量
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  InFlow?: string
-  /**
-   * 出站累计流量
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  OutFlow?: string
-  /**
-   * 最近扫描时间
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  LastScanTime?: string
-  /**
-   * 端口风险
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  PortRisk?: number
-  /**
-   * 漏洞风险
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  VulnerabilityRisk?: number
-  /**
-   * 配置风险
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ConfigurationRisk?: number
-  /**
-   * 扫描任务
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ScanTask?: number
-  /**
-   * 域名
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SubDomain?: string
-  /**
-   * 解析ip
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SeverIp?: Array<string>
-  /**
-   * boi访问数量
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  BotCount?: number
-  /**
-   * 弱口令风险
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  WeakPassword?: number
-  /**
-   * 内容风险
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  WebContentRisk?: number
-  /**
-   * tag标签
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Tag?: Array<Tag>
-  /**
-   * 关联实例类型
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SourceType?: string
-  /**
-   * memberiD
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  MemberId?: string
-  /**
-   * cc攻击
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CCAttack?: number
-  /**
-   * web攻击
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  WebAttack?: number
-  /**
-   * 风险服务暴露数量
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ServiceRisk?: number
-  /**
-   * 是否新资产 1新
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  IsNewAsset?: number
-  /**
-   * 待确认资产的随机三级域名
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  VerifyDomain?: string
-  /**
-   * 待确认资产的TXT记录内容
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  VerifyTXTRecord?: string
-  /**
-   * 待确认资产的认证状态，0-待认证，1-认证成功，2-认证中，3-txt认证失败，4-人工认证失败
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  VerifyStatus?: number
-  /**
-   * bot访问数据
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  BotAccessCount?: number
-}
-
-/**
- * DescribeSearchBugInfo返回参数结构体
- */
-export interface DescribeSearchBugInfoResponse {
-  /**
-   * 漏洞信息和资产信息
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Data?: DataSearchBug
-  /**
-   * 状态值，0：查询成功，非0：查询失败
-   */
-  ReturnCode?: number
-  /**
-   * 状态信息，success：查询成功，fail：查询失败
-   */
-  ReturnMsg?: string
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * 漏洞风险高级配置
- */
-export interface TaskCenterVulRiskInputParam {
-  /**
-   * 风险ID
-   */
-  RiskId: string
-  /**
-   * 是否开启，0-不开启，1-开启
-   */
-  Enable: number
-}
-
-/**
- * StopRiskCenterTask请求参数结构体
- */
-export interface StopRiskCenterTaskRequest {
-  /**
-   * 任务id 列表
-   */
-  TaskIdList: Array<TaskIdListKey>
-}
-
-/**
- * DescribeScanTaskList返回参数结构体
- */
-export interface DescribeScanTaskListResponse {
-  /**
-   * 总条数
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TotalCount?: number
-  /**
-   * 任务日志列表
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Data?: Array<ScanTaskInfoList>
-  /**
-   * 主账户ID列表
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  UINList?: Array<string>
-  /**
-   * 体检模式过滤列表
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TaskModeList?: Array<FilterDataObject>
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DescribeScanTaskList请求参数结构体
- */
-export interface DescribeScanTaskListRequest {
-  /**
-   * 过滤内容
-   */
-  Filter?: Filter
-}
-
-/**
- * DescribeVpcAssets返回参数结构体
- */
-export interface DescribeVpcAssetsResponse {
-  /**
-   * 列表
-   */
-  Data?: Array<Vpc>
-  /**
-   * 总数
-   */
-  TotalCount?: number
-  /**
-   * vpc列表
-   */
-  VpcList?: Array<FilterDataObject>
-  /**
-   * 地域列表
-   */
-  RegionList?: Array<FilterDataObject>
-  /**
-   * appid列表
-   */
-  AppIdList?: Array<FilterDataObject>
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * 过滤数据对象
  */
 export interface FilterDataObject {
@@ -795,63 +107,13 @@ export interface FilterDataObject {
 }
 
 /**
- * CreateRiskCenterScanTask请求参数结构体
+ * 报告项key
  */
-export interface CreateRiskCenterScanTaskRequest {
+export interface ReportItemKey {
   /**
-   * 任务名称
+   * 日志Id列表
    */
-  TaskName: string
-  /**
-   * 0-全扫，1-指定资产扫，2-排除资产扫，3-手动填写扫；1和2则Assets字段必填，3则SelfDefiningAssets必填
-   */
-  ScanAssetType: number
-  /**
-   * 扫描项目；port/poc/weakpass/webcontent/configrisk/exposedserver
-   */
-  ScanItem: Array<string>
-  /**
-   * 0-周期任务,1-立即扫描,2-定时扫描,3-自定义；0,2,3则ScanPlanContent必填
-   */
-  ScanPlanType: number
-  /**
-   * 扫描资产信息列表
-   */
-  Assets?: Array<TaskAssetObject>
-  /**
-   * 扫描计划详情
-   */
-  ScanPlanContent?: string
-  /**
-   * ip/域名/url数组
-   */
-  SelfDefiningAssets?: Array<string>
-  /**
-   * 高级配置
-   */
-  TaskAdvanceCFG?: TaskAdvanceCFG
-  /**
-   * 体检模式，0-标准模式，1-快速模式，2-高级模式，默认标准模式
-   */
-  TaskMode?: number
-}
-
-/**
- * 任务高级配置
- */
-export interface TaskAdvanceCFG {
-  /**
-   * 漏洞风险高级配置
-   */
-  VulRisk?: Array<TaskCenterVulRiskInputParam>
-  /**
-   * 弱口令风险高级配置
-   */
-  WeakPwdRisk?: Array<TaskCenterWeakPwdRiskInputParam>
-  /**
-   * 配置风险高级配置
-   */
-  CFGRisk?: Array<TaskCenterCFGRiskInputParam>
+  TaskLogList: Array<string>
 }
 
 /**
@@ -1116,24 +378,503 @@ export interface CVMAssetVO {
 }
 
 /**
- * DescribeTaskLogList返回参数结构体
+ * 资产视角配置风险
  */
-export interface DescribeTaskLogListResponse {
+export interface AssetViewCFGRisk {
   /**
-   * 总条数
+   * 唯一id
+   */
+  Id?: string
+  /**
+   * 配置名
+   */
+  CFGName?: string
+  /**
+   * 检查类型
+   */
+  CheckType?: string
+  /**
+   * 实例id
+   */
+  InstanceId?: string
+  /**
+   * 实例名
+   */
+  InstanceName?: string
+  /**
+   * 实例类型
+   */
+  InstanceType?: string
+  /**
+   * 影响资产
+   */
+  AffectAsset?: string
+  /**
+   * 风险等级
+   */
+  Level?: string
+  /**
+   * 首次识别时间
+   */
+  FirstTime?: string
+  /**
+   * 最近识别时间
+   */
+  RecentTime?: string
+  /**
+   * 来源
+   */
+  From?: string
+  /**
+   * 状态
+   */
+  Status?: number
+  /**
+   * -
+   */
+  CFGSTD?: string
+  /**
+   * 配置详情
+   */
+  CFGDescribe?: string
+  /**
+   * 修复建议
+   */
+  CFGFix?: string
+  /**
+   * 帮助文档链接
+   */
+  CFGHelpURL?: string
+  /**
+   * 前端使用索引
+   */
+  Index?: string
+  /**
+   * 用户appid
+   */
+  AppId?: string
+  /**
+   * 用户昵称
 注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Nick?: string
+  /**
+   * 用户uin
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Uin?: string
+}
+
+/**
+ * 资产视角的漏洞风险对象
+ */
+export interface AssetViewVULRisk {
+  /**
+   * 影响资产
+   */
+  AffectAsset?: string
+  /**
+   * 风险等级
+   */
+  Level?: string
+  /**
+   * 资产类型
+   */
+  InstanceType?: string
+  /**
+   * 组件
+   */
+  Component?: string
+  /**
+   * 服务
+   */
+  Service?: string
+  /**
+   * 最近识别时间
+   */
+  RecentTime?: string
+  /**
+   * 首次识别时间
+   */
+  FirstTime?: string
+  /**
+   * 状态，0未处理、1已处置、2已忽略
+   */
+  Status?: number
+  /**
+   * 资产唯一id
+   */
+  Id?: string
+  /**
+   * 前端索引
+   */
+  Index?: string
+  /**
+   * 实例id
+   */
+  InstanceId?: string
+  /**
+   * 实例名
+   */
+  InstanceName?: string
+  /**
+   * 用户appid
+   */
+  AppId?: string
+  /**
+   * 用户昵称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Nick?: string
+  /**
+   * 用户uin
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Uin?: string
+  /**
+   * 漏洞类型
+   */
+  VULType?: string
+  /**
+   * 端口
+   */
+  Port?: string
+  /**
+   * 描述
+   */
+  Describe?: string
+  /**
+   * 版本名
+   */
+  AppName?: string
+  /**
+   * 相关信息
+   */
+  References?: string
+  /**
+   * 版本
+   */
+  AppVersion?: string
+  /**
+   * 漏洞url
+   */
+  VULURL?: string
+  /**
+   * 漏洞名称
+   */
+  VULName?: string
+  /**
+   * cve
+   */
+  CVE?: string
+  /**
+   * 修复建议
+   */
+  Fix?: string
+  /**
+   * pocid
+   */
+  POCId?: string
+  /**
+   * 来源
+   */
+  From?: string
+  /**
+   * 主机版本
+   */
+  CWPVersion?: number
+  /**
+   * 是否支持修复
+   */
+  IsSupportRepair?: boolean
+  /**
+   * 是否支持扫描
+   */
+  IsSupportDetect?: boolean
+  /**
+   * 实例uuid
+   */
+  InstanceUUID?: string
+  /**
+   * 负载
+   */
+  Payload?: string
+  /**
+   * 应急漏洞类型，1-应急漏洞，0-非应急漏洞
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EMGCVulType?: number
+}
+
+/**
+ * DescribeScanReportList请求参数结构体
+ */
+export interface DescribeScanReportListRequest {
+  /**
+   * 列表过滤条件
+   */
+  Filter?: Filter
+}
+
+/**
+ * DescribeVpcAssets返回参数结构体
+ */
+export interface DescribeVpcAssetsResponse {
+  /**
+   * 列表
+   */
+  Data?: Array<Vpc>
+  /**
+   * 总数
    */
   TotalCount?: number
   /**
-   * 报告列表
-注意：此字段可能返回 null，表示取不到有效值。
+   * vpc列表
    */
-  Data?: Array<TaskLogInfo>
+  VpcList?: Array<FilterDataObject>
   /**
-   * 待查看数量
+   * 地域列表
+   */
+  RegionList?: Array<FilterDataObject>
+  /**
+   * appid列表
+   */
+  AppIdList?: Array<FilterDataObject>
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * vpc列表数据
+ */
+export interface Vpc {
+  /**
+   * 子网(只支持32位)
+   */
+  Subnet?: number
+  /**
+   * 互通vpc(只支持32位)
+   */
+  ConnectedVpc?: number
+  /**
+   * 资产id
+   */
+  AssetId?: string
+  /**
+   * region区域
+   */
+  Region?: string
+  /**
+   * 云服务器(只支持32位)
+   */
+  CVM?: number
+  /**
+   * 标签
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  NotViewNumber?: number
+  Tag?: Array<Tag>
+  /**
+   * dns域名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DNS?: Array<string>
+  /**
+   * 资产名称
+   */
+  AssetName?: string
+  /**
+   * cidr网段
+   */
+  CIDR?: string
+  /**
+   * 资产创建时间
+   */
+  CreateTime?: string
+  /**
+   * appid
+   */
+  AppId?: string
+  /**
+   * uin
+   */
+  Uin?: string
+  /**
+   * 昵称
+   */
+  Nick?: string
+  /**
+   * 是否新资产 1新
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsNewAsset?: number
+  /**
+   * 是否核心资产1是 2不是
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsCore?: number
+}
+
+/**
+ * StopRiskCenterTask请求参数结构体
+ */
+export interface StopRiskCenterTaskRequest {
+  /**
+   * 任务id 列表
+   */
+  TaskIdList: Array<TaskIdListKey>
+}
+
+/**
+ * 漏洞和资产信息
+ */
+export interface DataSearchBug {
+  /**
+   * 返回查询状态
+   */
+  StateCode?: string
+  /**
+   * 无
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DataBug?: Array<BugInfoDetail>
+  /**
+   * 无
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DataAsset?: Array<AssetInfoDetail>
+  /**
+   * true支持扫描。false不支持扫描
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VSSScan?: boolean
+  /**
+   * 0不支持，1支持
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CWPScan?: string
+  /**
+   * 1支持虚拟补丁，0或空不支持
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CFWPatch?: string
+  /**
+   * 0不支持，1支持
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WafPatch?: number
+  /**
+   * 0不支持，1支持
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CWPFix?: number
+}
+
+/**
+ * DescribeDomainAssets请求参数结构体
+ */
+export interface DescribeDomainAssetsRequest {
+  /**
+   * -
+   */
+  Filter?: Filter
+}
+
+/**
+ * DescribeRiskCenterWebsiteRiskList返回参数结构体
+ */
+export interface DescribeRiskCenterWebsiteRiskListResponse {
+  /**
+   * 总条数
+   */
+  TotalCount?: number
+  /**
+   * 资产视角的端口风险列表
+   */
+  Data?: Array<WebsiteRisk>
+  /**
+   * 状态列表
+   */
+  StatusLists?: Array<FilterDataObject>
+  /**
+   * 危险等级列表
+   */
+  LevelLists?: Array<FilterDataObject>
+  /**
+   * 资产类型列表
+   */
+  InstanceTypeLists?: Array<FilterDataObject>
+  /**
+   * 风险类型列表
+   */
+  DetectEngineLists?: Array<FilterDataObject>
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 标签
+ */
+export interface Tag {
+  /**
+   * 标签名称
+   */
+  Name: string
+  /**
+   * 标签内容
+   */
+  Value: string
+}
+
+/**
+ * DeleteDomainAndIp请求参数结构体
+ */
+export interface DeleteDomainAndIpRequest {
+  /**
+   * -
+   */
+  Content: Array<PublicIpDomainListKey>
+  /**
+   * 是否保留路径配置，1：保留，其他：不保留，默认不传为不保留
+   */
+  RetainPath?: number
+  /**
+   * 以后是否忽略该资产，，1：忽略，其他：不忽略，默认不传为忽略
+   */
+  IgnoreAsset?: number
+}
+
+/**
+ * DescribeScanTaskList请求参数结构体
+ */
+export interface DescribeScanTaskListRequest {
+  /**
+   * 过滤内容
+   */
+  Filter?: Filter
+}
+
+/**
+ * 任务ID列表Key
+ */
+export interface TaskIdListKey {
+  /**
+   * 任务ID
+   */
+  TaskId: string
+}
+
+/**
+ * DeleteDomainAndIp返回参数结构体
+ */
+export interface DeleteDomainAndIpResponse {
+  /**
+   * 删除的资产数量
+   */
+  Data?: number
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1179,267 +920,35 @@ export interface DescribeSearchBugInfoRequest {
 }
 
 /**
- * 漏洞详细信息
+ * 报告pdf下载的临时链接
  */
-export interface BugInfoDetail {
+export interface TaskLogURL {
   /**
-   * 漏洞编号
+   * 报告下载临时链接
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Id?: number
+  URL?: string
   /**
-   * 漏洞对应pocId
+   * 任务报告id
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  PatchId?: string
+  LogId?: string
   /**
-   * 漏洞名称
+   * 任务报告名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  VULName?: string
+  TaskLogName?: string
   /**
-   * 漏洞严重性：high,middle，low，info
+   * APP ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Level?: string
-  /**
-   * cvss评分
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CVSSScore?: string
-  /**
-   * cve编号
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CVEId?: string
-  /**
-   * 漏洞标签
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Tag?: string
-  /**
-   * 漏洞种类，1:web应用，2:系统组件漏洞，3:配置风险
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  VULCategory?: number
-  /**
-   * 漏洞影响系统
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ImpactOs?: string
-  /**
-   * 漏洞影响组件
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ImpactCOMPENT?: string
-  /**
-   * 漏洞影响版本
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ImpactVersion?: string
-  /**
-   * 链接
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Reference?: string
-  /**
-   * 漏洞描述
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  VULDescribe?: string
-  /**
-   * 修复建议
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Fix?: string
-  /**
-   * 产品支持状态，实时返回
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ProSupport?: number
-  /**
-   * 是否公开，0为未发布，1为发布
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  IsPublish?: number
-  /**
-   * 释放时间
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ReleaseTime?: string
-  /**
-   * 创建时间
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CreateTime?: string
-  /**
-   * 更新时间
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  UpdateTime?: string
-  /**
-   * 漏洞子类别
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SubCategory?: string
-}
-
-/**
- * DescribeClusterPodAssets请求参数结构体
- */
-export interface DescribeClusterPodAssetsRequest {
-  /**
-   * 过滤
-   */
-  Filter?: Filter
-}
-
-/**
- * DescribeSubnetAssets请求参数结构体
- */
-export interface DescribeSubnetAssetsRequest {
-  /**
-   * 过滤参数
-   */
-  Filter?: Filter
+  AppId?: string
 }
 
 /**
  * AddNewBindRoleUser请求参数结构体
  */
 export type AddNewBindRoleUserRequest = null
-
-/**
- * DescribeCVMAssetInfo返回参数结构体
- */
-export interface DescribeCVMAssetInfoResponse {
-  /**
-   * -
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Data?: AssetBaseInfoResponse
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DescribePublicIpAssets返回参数结构体
- */
-export interface DescribePublicIpAssetsResponse {
-  /**
-   * 列表
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Data?: Array<IpAssetListVO>
-  /**
-   * 总数
-   */
-  Total?: number
-  /**
-   * 资产归属地
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  AssetLocationList?: Array<FilterDataObject>
-  /**
-   * ip列表枚举
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  IpTypeList?: Array<FilterDataObject>
-  /**
-   * 地域列表枚举
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  RegionList?: Array<FilterDataObject>
-  /**
-   * 防护枚举
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  DefenseStatusList?: Array<FilterDataObject>
-  /**
-   * 资产类型枚举
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  AssetTypeList?: Array<FilterDataObject>
-  /**
-   * AppId枚举
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  AppIdList?: Array<FilterDataObject>
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DescribeTaskLogList请求参数结构体
- */
-export interface DescribeTaskLogListRequest {
-  /**
-   * 过滤内容
-   */
-  Filter?: Filter
-}
-
-/**
- * DescribeDbAssets请求参数结构体
- */
-export interface DescribeDbAssetsRequest {
-  /**
-   * -
-   */
-  Filter?: Filter
-}
-
-/**
- * DescribeRiskCenterAssetViewVULRiskList返回参数结构体
- */
-export interface DescribeRiskCenterAssetViewVULRiskListResponse {
-  /**
-   * 总条数
-   */
-  TotalCount?: number
-  /**
-   * 资产视角的漏洞风险列表
-   */
-  Data?: Array<AssetViewVULRisk>
-  /**
-   * 状态列表
-   */
-  StatusLists?: Array<FilterDataObject>
-  /**
-   * 危险等级列表
-   */
-  LevelLists?: Array<FilterDataObject>
-  /**
-   * 来源列表
-   */
-  FromLists?: Array<FilterDataObject>
-  /**
-   * 漏洞类型列表
-   */
-  VULTypeLists?: Array<FilterDataObject>
-  /**
-   * 资产类型列表
-   */
-  InstanceTypeLists?: Array<FilterDataObject>
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DescribeCVMAssets请求参数结构体
- */
-export interface DescribeCVMAssetsRequest {
-  /**
-   * -
-   */
-  Filter?: Filter
-}
 
 /**
  * DescribeListenerList返回参数结构体
@@ -1455,20 +964,6 @@ export interface DescribeListenerListResponse {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Data?: Array<ClbListenerListInfo>
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DescribeTaskLogURL返回参数结构体
- */
-export interface DescribeTaskLogURLResponse {
-  /**
-   * 返回报告临时下载url
-   */
-  Data?: Array<TaskLogURL>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1597,51 +1092,6 @@ export interface DBAssetVO {
 }
 
 /**
- * 漏洞和资产信息
- */
-export interface DataSearchBug {
-  /**
-   * 返回查询状态
-   */
-  StateCode?: string
-  /**
-   * 无
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  DataBug?: Array<BugInfoDetail>
-  /**
-   * 无
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  DataAsset?: Array<AssetInfoDetail>
-  /**
-   * true支持扫描。false不支持扫描
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  VSSScan?: boolean
-  /**
-   * 0不支持，1支持
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CWPScan?: string
-  /**
-   * 1支持虚拟补丁，0或空不支持
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CFWPatch?: string
-  /**
-   * 0不支持，1支持
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  WafPatch?: number
-  /**
-   * 0不支持，1支持
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CWPFix?: number
-}
-
-/**
  * 资产扫描结构细节
  */
 export interface AssetInfoDetail {
@@ -1695,72 +1145,6 @@ export interface AssetInfoDetail {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ScanTime?: string
-}
-
-/**
- * 扫描任务详情
- */
-export interface ScanTaskInfo {
-  /**
-   * 任务日志Id
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TaskId: string
-  /**
-   * 任务日志名称
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TaskName: string
-  /**
-   * 任务状态码：1等待开始  2正在扫描  3扫描出错 4扫描完成
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Status: number
-  /**
-   * 任务进度
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Progress: number
-  /**
-   * 对应的展示时间
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TaskTime: string
-  /**
-   * 报表id
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ReportId: string
-  /**
-   * 报表名称
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ReportName: string
-  /**
-   * 扫描计划，0-周期任务,1-立即扫描,2-定时扫描,3-自定义
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ScanPlan: number
-  /**
-   * 关联的资产数
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  AssetCount: number
-  /**
-   * APP ID
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  AppId?: string
-  /**
-   * 用户主账户ID
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  UIN?: string
-  /**
-   * 用户名称
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  UserName?: string
 }
 
 /**
@@ -1871,44 +1255,6 @@ export interface CreateRiskCenterScanTaskResponse {
 }
 
 /**
- * DescribeRiskCenterAssetViewPortRiskList返回参数结构体
- */
-export interface DescribeRiskCenterAssetViewPortRiskListResponse {
-  /**
-   * 总条数
-   */
-  TotalCount?: number
-  /**
-   * 资产视角的配置风险列表
-   */
-  Data?: Array<AssetViewPortRisk>
-  /**
-   * 状态列表
-   */
-  StatusLists?: Array<FilterDataObject>
-  /**
-   * 危险等级列表
-   */
-  LevelLists?: Array<FilterDataObject>
-  /**
-   * 建议列表
-   */
-  SuggestionLists?: Array<FilterDataObject>
-  /**
-   * 资产类型列表
-   */
-  InstanceTypeLists?: Array<FilterDataObject>
-  /**
-   * 来源列表
-   */
-  FromLists?: Array<FilterDataObject>
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * DescribeSubnetAssets返回参数结构体
  */
 export interface DescribeSubnetAssetsResponse {
@@ -1943,16 +1289,6 @@ export interface DescribeSubnetAssetsResponse {
 }
 
 /**
- * DescribeDbAssetInfo请求参数结构体
- */
-export interface DescribeDbAssetInfoRequest {
-  /**
-   * 资产id
-   */
-  AssetId: string
-}
-
-/**
  * DescribeRiskCenterAssetViewPortRiskList请求参数结构体
  */
 export interface DescribeRiskCenterAssetViewPortRiskListRequest {
@@ -1963,135 +1299,13 @@ export interface DescribeRiskCenterAssetViewPortRiskListRequest {
 }
 
 /**
- * clb实例和监听器信息
+ * StopRiskCenterTask返回参数结构体
  */
-export interface ClbListenerListInfo {
+export interface StopRiskCenterTaskResponse {
   /**
-   * 监听器id
-注意：此字段可能返回 null，表示取不到有效值。
+   * Status为0， 停止成功
    */
-  ListenerId?: string
-  /**
-   * 监听器名称
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ListenerName?: string
-  /**
-   * 负载均衡Id
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  LoadBalancerId?: string
-  /**
-   * 负载均衡名称
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  LoadBalancerName?: string
-  /**
-   * 协议
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Protocol?: string
-  /**
-   * 地域
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Region?: string
-  /**
-   * 负载均衡ip
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Vip?: string
-  /**
-   * 端口
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  VPort?: number
-  /**
-   * 区域
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Zone?: string
-  /**
-   * 私有网络id
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  NumericalVpcId?: number
-  /**
-   * 负载均衡类型
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  LoadBalancerType?: string
-  /**
-   * 监听器域名
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Domain?: string
-  /**
-   * 负载均衡域名
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  LoadBalancerDomain?: string
-}
-
-/**
- * DescribeCVMAssets返回参数结构体
- */
-export interface DescribeCVMAssetsResponse {
-  /**
-   * -
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Total?: number
-  /**
-   * -
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Data?: Array<CVMAssetVO>
-  /**
-   * 地域列表
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  RegionList?: Array<FilterDataObject>
-  /**
-   * 防护状态
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  DefenseStatusList?: Array<FilterDataObject>
-  /**
-   * vpc枚举
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  VpcList?: Array<FilterDataObject>
-  /**
-   * 资产类型枚举
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  AssetTypeList?: Array<FilterDataObject>
-  /**
-   * 操作系统枚举
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SystemTypeList?: Array<FilterDataObject>
-  /**
-   * ip列表
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  IpTypeList?: Array<FilterDataObject>
-  /**
-   * appid列表
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  AppIdList?: Array<FilterDataObject>
-  /**
-   * 可用区列表
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ZoneList?: Array<FilterDataObject>
-  /**
-   * os列表
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  OsList?: Array<FilterDataObject>
+  Status?: number
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2099,13 +1313,119 @@ export interface DescribeCVMAssetsResponse {
 }
 
 /**
- * DescribeVpcAssets请求参数结构体
+ * 服务风险
  */
-export interface DescribeVpcAssetsRequest {
+export interface ServerRisk {
   /**
-   * 过滤参数
+   * 测绘标签
    */
-  Filter?: Filter
+  ServiceTag?: string
+  /**
+   * 端口
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Port?: number
+  /**
+   * 影响资产
+   */
+  AffectAsset?: string
+  /**
+   * 实例id
+   */
+  InstanceId?: string
+  /**
+   * 实例名
+   */
+  InstanceName?: string
+  /**
+   * 资产类型
+   */
+  InstanceType?: string
+  /**
+   * 风险等级
+   */
+  Level?: string
+  /**
+   * 协议
+   */
+  Protocol?: string
+  /**
+   * 组件
+   */
+  Component?: string
+  /**
+   * 服务
+   */
+  Service?: string
+  /**
+   * 最近识别时间
+   */
+  RecentTime?: string
+  /**
+   * 首次识别时间
+   */
+  FirstTime?: string
+  /**
+   * 风险详情
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RiskDetails?: string
+  /**
+   * 处置建议
+   */
+  Suggestion?: string
+  /**
+   * 状态，0未处理、1已处置、2已忽略
+   */
+  Status?: number
+  /**
+   * 资产唯一id
+   */
+  Id?: string
+  /**
+   * 用户appid
+   */
+  AppId?: string
+  /**
+   * 用户昵称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Nick?: string
+  /**
+   * 用户uin
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Uin?: string
+  /**
+   * 服务快照
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ServiceSnapshot?: string
+  /**
+   * 服务访问的url
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Url?: string
+  /**
+   * 列表索引值
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Index?: string
+  /**
+   * 风险列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RiskList?: Array<ServerRiskSuggestion>
+  /**
+   * 建议列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SuggestionList?: Array<ServerRiskSuggestion>
+  /**
+   * HTTP响应状态码
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StatusCode?: string
 }
 
 /**
@@ -2136,115 +1456,6 @@ export interface TaskAssetObject {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Region?: string
-}
-
-/**
- * 列表查询接口采用新filter 接口，直接传给后台供后台查询过滤
- */
-export interface Filter {
-  /**
-   * 查询数量限制
-   */
-  Limit?: number
-  /**
-   * 查询偏移位置
-   */
-  Offset?: number
-  /**
-   * 排序采用升序还是降序 升:asc 降 desc
-   */
-  Order?: string
-  /**
-   * 需排序的字段
-   */
-  By?: string
-  /**
-   * 过滤的列及内容
-   */
-  Filters?: Array<WhereFilter>
-  /**
-   * 可填无， 日志使用查询时间
-   */
-  StartTime?: string
-  /**
-   * 可填无， 日志使用查询时间
-   */
-  EndTime?: string
-}
-
-/**
- * db资产详情
- */
-export interface DbAssetInfo {
-  /**
-   * 云防状态
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CFWStatus?: number
-  /**
-   * 资产id
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  AssetId?: string
-  /**
-   * vpc信息
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  VpcName?: string
-  /**
-   * 资产类型
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  AssetType?: string
-  /**
-   * 公网ip
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  PublicIp?: string
-  /**
-   * 私网ip
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  PrivateIp?: string
-  /**
-   * 地域
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Region?: string
-  /**
-   * vpc信息
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  VpcId?: string
-  /**
-   * 资产名
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  AssetName?: string
-  /**
-   * 云防保护版本
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CFWProtectLevel?: number
-  /**
-   * tag信息
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Tag?: Array<Tag>
-}
-
-/**
- * 标签
- */
-export interface Tag {
-  /**
-   * 标签名称
-   */
-  Name: string
-  /**
-   * 标签内容
-   */
-  Value: string
 }
 
 /**
@@ -2429,13 +1640,23 @@ export interface IpAssetListVO {
 }
 
 /**
- * DeleteRiskScanTask返回参数结构体
+ * DescribeVpcAssets请求参数结构体
  */
-export interface DeleteRiskScanTaskResponse {
+export interface DescribeVpcAssetsRequest {
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 过滤参数
    */
-  RequestId?: string
+  Filter?: Filter
+}
+
+/**
+ * DescribeRiskCenterAssetViewWeakPasswordRiskList请求参数结构体
+ */
+export interface DescribeRiskCenterAssetViewWeakPasswordRiskListRequest {
+  /**
+   * 过滤内容
+   */
+  Filter?: Filter
 }
 
 /**
@@ -2449,9 +1670,256 @@ export interface PublicIpDomainListKey {
 }
 
 /**
- * 资产视角的漏洞风险对象
+ * DescribeCVMAssets返回参数结构体
  */
-export interface AssetViewVULRisk {
+export interface DescribeCVMAssetsResponse {
+  /**
+   * -
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Total?: number
+  /**
+   * -
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Data?: Array<CVMAssetVO>
+  /**
+   * 地域列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RegionList?: Array<FilterDataObject>
+  /**
+   * 防护状态
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DefenseStatusList?: Array<FilterDataObject>
+  /**
+   * vpc枚举
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VpcList?: Array<FilterDataObject>
+  /**
+   * 资产类型枚举
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AssetTypeList?: Array<FilterDataObject>
+  /**
+   * 操作系统枚举
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SystemTypeList?: Array<FilterDataObject>
+  /**
+   * ip列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IpTypeList?: Array<FilterDataObject>
+  /**
+   * appid列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AppIdList?: Array<FilterDataObject>
+  /**
+   * 可用区列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ZoneList?: Array<FilterDataObject>
+  /**
+   * os列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OsList?: Array<FilterDataObject>
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * db资产详情
+ */
+export interface DbAssetInfo {
+  /**
+   * 云防状态
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CFWStatus?: number
+  /**
+   * 资产id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AssetId?: string
+  /**
+   * vpc信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VpcName?: string
+  /**
+   * 资产类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AssetType?: string
+  /**
+   * 公网ip
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PublicIp?: string
+  /**
+   * 私网ip
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PrivateIp?: string
+  /**
+   * 地域
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Region?: string
+  /**
+   * vpc信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VpcId?: string
+  /**
+   * 资产名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AssetName?: string
+  /**
+   * 云防保护版本
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CFWProtectLevel?: number
+  /**
+   * tag信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Tag?: Array<Tag>
+}
+
+/**
+ * DescribePublicIpAssets请求参数结构体
+ */
+export interface DescribePublicIpAssetsRequest {
+  /**
+   * filte过滤条件
+   */
+  Filter?: Filter
+}
+
+/**
+ * 集群pod列表
+ */
+export interface AssetClusterPod {
+  /**
+   * 租户id
+   */
+  AppId?: number
+  /**
+   * 租户uin
+   */
+  Uin?: string
+  /**
+   * 租户昵称
+   */
+  Nick?: string
+  /**
+   * 地域
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Region?: string
+  /**
+   * pod id
+   */
+  AssetId?: string
+  /**
+   * pod名称
+   */
+  AssetName?: string
+  /**
+   * pod创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceCreateTime?: string
+  /**
+   * 命名空间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Namespace?: string
+  /**
+   * 状态
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status?: string
+  /**
+   * 集群id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ClusterId?: string
+  /**
+   * 集群名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ClusterName?: string
+  /**
+   * 主机id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MachineId?: string
+  /**
+   * 主机名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MachineName?: string
+  /**
+   * pod ip
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PodIp?: string
+  /**
+   * 关联service数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ServiceCount?: number
+  /**
+   * 关联容器数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ContainerCount?: number
+  /**
+   * 公网ip
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PublicIp?: string
+  /**
+   * 内网ip
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PrivateIp?: string
+  /**
+   * 是否核心：1:核心，2:非核心
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsCore?: number
+  /**
+   * 是否新资产 1新
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsNewAsset?: number
+}
+
+/**
+ * DescribeCVMAssetInfo请求参数结构体
+ */
+export interface DescribeCVMAssetInfoRequest {
+  /**
+   * -
+   */
+  AssetId: string
+}
+
+/**
+ * 资产视角的弱口令风险
+ */
+export interface AssetViewWeakPassRisk {
   /**
    * 影响资产
    */
@@ -2515,78 +1983,475 @@ export interface AssetViewVULRisk {
    */
   Uin?: string
   /**
-   * 漏洞类型
+   * 弱口令类型
    */
-  VULType?: string
-  /**
-   * 端口
-   */
-  Port?: string
-  /**
-   * 描述
-   */
-  Describe?: string
-  /**
-   * 版本名
-   */
-  AppName?: string
-  /**
-   * 相关信息
-   */
-  References?: string
-  /**
-   * 版本
-   */
-  AppVersion?: string
-  /**
-   * 漏洞url
-   */
-  VULURL?: string
-  /**
-   * 漏洞名称
-   */
-  VULName?: string
-  /**
-   * cve
-   */
-  CVE?: string
-  /**
-   * 修复建议
-   */
-  Fix?: string
-  /**
-   * pocid
-   */
-  POCId?: string
+  PasswordType?: string
   /**
    * 来源
    */
   From?: string
   /**
-   * 主机版本
+   * 漏洞类型
    */
-  CWPVersion?: number
+  VULType?: string
   /**
-   * 是否支持修复
+   * 漏洞url
    */
-  IsSupportRepair?: boolean
+  VULURL?: string
   /**
-   * 是否支持扫描
+   * 修复建议
    */
-  IsSupportDetect?: boolean
-  /**
-   * 实例uuid
-   */
-  InstanceUUID?: string
+  Fix?: string
   /**
    * 负载
    */
   Payload?: string
+}
+
+/**
+ * 网站风险对象
+ */
+export interface WebsiteRisk {
   /**
-   * 应急漏洞类型，1-应急漏洞，0-非应急漏洞
+   * 影响资产
+   */
+  AffectAsset?: string
+  /**
+   * 风险等级
+   */
+  Level?: string
+  /**
+   * 最近识别时间
+   */
+  RecentTime?: string
+  /**
+   * 首次识别时间
+   */
+  FirstTime?: string
+  /**
+   * 状态，0未处理、1已处置、2已忽略
+   */
+  Status?: number
+  /**
+   * 资产唯一id
+   */
+  Id?: string
+  /**
+   * 前端索引
+   */
+  Index?: string
+  /**
+   * 实例id
+   */
+  InstanceId?: string
+  /**
+   * 实例名
+   */
+  InstanceName?: string
+  /**
+   * 用户appid
+   */
+  AppId?: string
+  /**
+   * 用户昵称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  EMGCVulType?: number
+  Nick?: string
+  /**
+   * 用户uin
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Uin?: string
+  /**
+   * 风险链接
+   */
+  URL?: string
+  /**
+   * 风险文件地址
+   */
+  URLPath?: string
+  /**
+   * 实例类型
+   */
+  InstanceType?: string
+  /**
+   * 类型
+   */
+  DetectEngine?: string
+  /**
+   * 结果描述
+   */
+  ResultDescribe?: string
+  /**
+   * 源地址url
+   */
+  SourceURL?: string
+  /**
+   * 源文件地址
+   */
+  SourceURLPath?: string
+}
+
+/**
+ * CreateRiskCenterScanTask请求参数结构体
+ */
+export interface CreateRiskCenterScanTaskRequest {
+  /**
+   * 任务名称
+   */
+  TaskName: string
+  /**
+   * 0-全扫，1-指定资产扫，2-排除资产扫，3-手动填写扫；1和2则Assets字段必填，3则SelfDefiningAssets必填
+   */
+  ScanAssetType: number
+  /**
+   * 扫描项目；port/poc/weakpass/webcontent/configrisk/exposedserver
+   */
+  ScanItem: Array<string>
+  /**
+   * 0-周期任务,1-立即扫描,2-定时扫描,3-自定义；0,2,3则ScanPlanContent必填
+   */
+  ScanPlanType: number
+  /**
+   * 扫描资产信息列表
+   */
+  Assets?: Array<TaskAssetObject>
+  /**
+   * 扫描计划详情
+   */
+  ScanPlanContent?: string
+  /**
+   * ip/域名/url数组
+   */
+  SelfDefiningAssets?: Array<string>
+  /**
+   * 高级配置
+   */
+  TaskAdvanceCFG?: TaskAdvanceCFG
+  /**
+   * 体检模式，0-标准模式，1-快速模式，2-高级模式，默认标准模式
+   */
+  TaskMode?: number
+}
+
+/**
+ * DescribeRiskCenterAssetViewCFGRiskList返回参数结构体
+ */
+export interface DescribeRiskCenterAssetViewCFGRiskListResponse {
+  /**
+   * 总条数
+   */
+  TotalCount?: number
+  /**
+   * 资产视角的配置风险列表
+   */
+  Data?: Array<AssetViewCFGRisk>
+  /**
+   * 状态列表
+   */
+  StatusLists?: Array<FilterDataObject>
+  /**
+   * 危险等级列表
+   */
+  LevelLists?: Array<FilterDataObject>
+  /**
+   * 配置名列表
+   */
+  CFGNameLists?: Array<FilterDataObject>
+  /**
+   * 检查类型列表
+   */
+  CheckTypeLists?: Array<FilterDataObject>
+  /**
+   * 资产类型列表
+   */
+  InstanceTypeLists?: Array<FilterDataObject>
+  /**
+   * 来源列表
+   */
+  FromLists?: Array<FilterDataObject>
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 漏洞风险高级配置
+ */
+export interface TaskCenterVulRiskInputParam {
+  /**
+   * 风险ID
+   */
+  RiskId: string
+  /**
+   * 是否开启，0-不开启，1-开启
+   */
+  Enable: number
+}
+
+/**
+ * DescribeScanTaskList返回参数结构体
+ */
+export interface DescribeScanTaskListResponse {
+  /**
+   * 总条数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalCount?: number
+  /**
+   * 任务日志列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Data?: Array<ScanTaskInfoList>
+  /**
+   * 主账户ID列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UINList?: Array<string>
+  /**
+   * 体检模式过滤列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskModeList?: Array<FilterDataObject>
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 扫描任务详情
+ */
+export interface ScanTaskInfo {
+  /**
+   * 任务日志Id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskId: string
+  /**
+   * 任务日志名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskName: string
+  /**
+   * 任务状态码：1等待开始  2正在扫描  3扫描出错 4扫描完成
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status: number
+  /**
+   * 任务进度
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Progress: number
+  /**
+   * 对应的展示时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskTime: string
+  /**
+   * 报表id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ReportId: string
+  /**
+   * 报表名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ReportName: string
+  /**
+   * 扫描计划，0-周期任务,1-立即扫描,2-定时扫描,3-自定义
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ScanPlan: number
+  /**
+   * 关联的资产数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AssetCount: number
+  /**
+   * APP ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AppId?: string
+  /**
+   * 用户主账户ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UIN?: string
+  /**
+   * 用户名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UserName?: string
+}
+
+/**
+ * DescribeClusterPodAssets请求参数结构体
+ */
+export interface DescribeClusterPodAssetsRequest {
+  /**
+   * 过滤
+   */
+  Filter?: Filter
+}
+
+/**
+ * DescribeCVMAssetInfo返回参数结构体
+ */
+export interface DescribeCVMAssetInfoResponse {
+  /**
+   * -
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Data?: AssetBaseInfoResponse
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribePublicIpAssets返回参数结构体
+ */
+export interface DescribePublicIpAssetsResponse {
+  /**
+   * 列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Data?: Array<IpAssetListVO>
+  /**
+   * 总数
+   */
+  Total?: number
+  /**
+   * 资产归属地
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AssetLocationList?: Array<FilterDataObject>
+  /**
+   * ip列表枚举
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IpTypeList?: Array<FilterDataObject>
+  /**
+   * 地域列表枚举
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RegionList?: Array<FilterDataObject>
+  /**
+   * 防护枚举
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DefenseStatusList?: Array<FilterDataObject>
+  /**
+   * 资产类型枚举
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AssetTypeList?: Array<FilterDataObject>
+  /**
+   * AppId枚举
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AppIdList?: Array<FilterDataObject>
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeTaskLogURL返回参数结构体
+ */
+export interface DescribeTaskLogURLResponse {
+  /**
+   * 返回报告临时下载url
+   */
+  Data?: Array<TaskLogURL>
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeDbAssetInfo请求参数结构体
+ */
+export interface DescribeDbAssetInfoRequest {
+  /**
+   * 资产id
+   */
+  AssetId: string
+}
+
+/**
+ * 列表查询接口采用新filter 接口，直接传给后台供后台查询过滤
+ */
+export interface Filter {
+  /**
+   * 查询数量限制
+   */
+  Limit?: number
+  /**
+   * 查询偏移位置
+   */
+  Offset?: number
+  /**
+   * 排序采用升序还是降序 升:asc 降 desc
+   */
+  Order?: string
+  /**
+   * 需排序的字段
+   */
+  By?: string
+  /**
+   * 过滤的列及内容
+   */
+  Filters?: Array<WhereFilter>
+  /**
+   * 可填无， 日志使用查询时间
+   */
+  StartTime?: string
+  /**
+   * 可填无， 日志使用查询时间
+   */
+  EndTime?: string
+}
+
+/**
+ * DescribeRiskCenterWebsiteRiskList请求参数结构体
+ */
+export interface DescribeRiskCenterWebsiteRiskListRequest {
+  /**
+   * 过滤内容
+   */
+  Filter?: Filter
+}
+
+/**
+ * 风险详情
+ */
+export interface ServerRiskSuggestion {
+  /**
+   * 标题
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Title?: string
+  /**
+   * 详情
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Body?: string
+}
+
+/**
+ * DescribeSubnetAssets请求参数结构体
+ */
+export interface DescribeSubnetAssetsRequest {
+  /**
+   * 过滤参数
+   */
+  Filter?: Filter
 }
 
 /**
@@ -2775,16 +2640,6 @@ export interface AssetBaseInfoResponse {
 }
 
 /**
- * 任务ID列表Key
- */
-export interface TaskIdListKey {
-  /**
-   * 任务ID
-   */
-  TaskId: string
-}
-
-/**
  * 资产视角的端口风险对象
  */
 export interface AssetViewPortRisk {
@@ -2869,127 +2724,371 @@ export interface AssetViewPortRisk {
 }
 
 /**
- * DescribeListenerList请求参数结构体
+ * DescribeRiskCenterAssetViewCFGRiskList请求参数结构体
  */
-export interface DescribeListenerListRequest {
+export interface DescribeRiskCenterAssetViewCFGRiskListRequest {
   /**
-   * -
+   * 过滤内容
    */
   Filter?: Filter
 }
 
 /**
- * DescribeDomainAssets请求参数结构体
+ * 任务高级配置
  */
-export interface DescribeDomainAssetsRequest {
+export interface TaskAdvanceCFG {
   /**
-   * -
+   * 漏洞风险高级配置
    */
-  Filter?: Filter
+  VulRisk?: Array<TaskCenterVulRiskInputParam>
+  /**
+   * 弱口令风险高级配置
+   */
+  WeakPwdRisk?: Array<TaskCenterWeakPwdRiskInputParam>
+  /**
+   * 配置风险高级配置
+   */
+  CFGRisk?: Array<TaskCenterCFGRiskInputParam>
 }
 
 /**
- * vpc列表数据
+ * AddNewBindRoleUser返回参数结构体
  */
-export interface Vpc {
+export interface AddNewBindRoleUserResponse {
   /**
-   * 子网(只支持32位)
+   * 0成功，其他失败
    */
-  Subnet?: number
+  Status?: number
   /**
-   * 互通vpc(只支持32位)
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  ConnectedVpc?: number
+  RequestId?: string
+}
+
+/**
+ * 过滤条件
+ */
+export interface WhereFilter {
   /**
-   * 资产id
+   * 过滤的项
    */
-  AssetId?: string
+  Name: string
   /**
-   * region区域
+   * 过滤的值
    */
-  Region?: string
+  Values: Array<string>
   /**
-   * 云服务器(只支持32位)
+   * 中台定义：
+1等于 2大于 3小于 4大于等于 5小于等于 6不等于 9模糊匹配 13非模糊匹配 14按位与
+精确匹配填 7 模糊匹配填9 兼容 中台定的结构
+
    */
-  CVM?: number
+  OperatorType?: number
+}
+
+/**
+ * 扫描任务列表展示信息
+ */
+export interface ScanTaskInfoList {
   /**
-   * 标签
+   * 任务名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Tag?: Array<Tag>
+  TaskName?: string
   /**
-   * dns域名
+   * 任务开始时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DNS?: Array<string>
+  StartTime?: string
   /**
-   * 资产名称
+   * 任务结束时间
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  AssetName?: string
+  EndTime?: string
   /**
-   * cidr网段
+   * corn
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  CIDR?: string
+  ScanPlanContent?: string
   /**
-   * 资产创建时间
+   * 0-周期任务,1-立即扫描,2-定时扫描,3-自定义
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  CreateTime?: string
+  TaskType?: number
   /**
-   * appid
+   * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InsertTime?: string
+  /**
+   * 任务ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskId?: string
+  /**
+   * 排除扫描资产信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SelfDefiningAssets?: Array<string>
+  /**
+   * 预估时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PredictTime?: number
+  /**
+   * 预估完成时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PredictEndTime?: string
+  /**
+   * 报告数量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ReportNumber?: number
+  /**
+   * 资产数量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AssetNumber?: number
+  /**
+   * 扫描状态 0 初始值  1正在扫描  2扫描完成  3扫描出错
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ScanStatus?: number
+  /**
+   * 任务进度
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Percent?: number
+  /**
+   * port/poc/weakpass/webcontent/configrisk
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ScanItem?: string
+  /**
+   * 0-全扫，1-指定资产扫，2-排除资产扫
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ScanAssetType?: number
+  /**
+   * vss子任务id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VSSTaskId?: string
+  /**
+   * cspm子任务id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CSPMTaskId?: string
+  /**
+   * 主机漏扫子任务id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CWPPOCId?: string
+  /**
+   * 主机基线子任务id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CWPBlId?: string
+  /**
+   * vss子任务进度
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VSSTaskProcess?: number
+  /**
+   * cspm子任务进度
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CSPMTaskProcess?: number
+  /**
+   * 主机漏扫子任务进度
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CWPPOCProcess?: number
+  /**
+   * 主机基线子任务进度
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CWPBlProcess?: number
+  /**
+   * 异常状态码
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ErrorCode?: number
+  /**
+   * 异常信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ErrorInfo?: string
+  /**
+   * 周期任务开始的天数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StartDay?: number
+  /**
+   * 扫描频率,单位天,1-每天,7-每周,30-月,0-扫描一次
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Frequency?: number
+  /**
+   * 完成次数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CompleteNumber?: number
+  /**
+   * 已完成资产个数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CompleteAssetNumber?: number
+  /**
+   * 风险数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RiskCount?: number
+  /**
+   * 资产
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Assets?: Array<TaskAssetObject>
+  /**
+   * 用户Appid
+注意：此字段可能返回 null，表示取不到有效值。
    */
   AppId?: string
   /**
-   * uin
-   */
-  Uin?: string
-  /**
-   * 昵称
-   */
-  Nick?: string
-  /**
-   * 是否新资产 1新
+   * 用户主账户ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  IsNewAsset?: number
+  UIN?: string
   /**
-   * 是否核心资产1是 2不是
+   * 用户名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  IsCore?: number
+  UserName?: string
+  /**
+   * 体检模式，0-标准模式，1-快速模式，2-高级模式
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskMode?: number
+  /**
+   * 扫描来源
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ScanFrom?: string
+  /**
+   * 是否限免体检0不是，1是
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsFree?: number
+  /**
+   * 是否可以删除，1-可以，0-不可以，对应多账户管理使用
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsDelete?: number
 }
 
 /**
- * CreateDomainAndIp返回参数结构体
+ * DescribeDbAssets请求参数结构体
  */
-export interface CreateDomainAndIpResponse {
+export interface DescribeDbAssetsRequest {
   /**
-   * 返回创建成功的数量
-   */
-  Data?: number
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DescribePublicIpAssets请求参数结构体
- */
-export interface DescribePublicIpAssetsRequest {
-  /**
-   * filte过滤条件
+   * -
    */
   Filter?: Filter
 }
 
 /**
- * DeleteDomainAndIp返回参数结构体
+ * 任务报告信息
  */
-export interface DeleteDomainAndIpResponse {
+export interface TaskLogInfo {
   /**
-   * 删除的资产数量
+   * 报告名称
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Data?: number
+  TaskLogName?: string
+  /**
+   * 报告ID
+   */
+  TaskLogId?: string
+  /**
+   * 关联资产个数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AssetsNumber?: number
+  /**
+   * 安全风险数量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RiskNumber?: number
+  /**
+   * 报告生成时间,任务结束时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Time?: string
+  /**
+   * 任务状态码：0 初始值  1正在扫描  2扫描完成  3扫描出错，4停止，5暂停，6该任务已被重启过
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status?: number
+  /**
+   * 关联任务名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskName?: string
+  /**
+   * 扫描开始时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StartTime?: string
+  /**
+   * 任务中心扫描任务ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskCenterTaskId?: string
+  /**
+   * 租户ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AppId?: string
+  /**
+   * 主账户ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UIN?: string
+  /**
+   * 用户名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UserName?: string
+}
+
+/**
+ * DescribeRiskCenterAssetViewVULRiskList请求参数结构体
+ */
+export interface DescribeRiskCenterAssetViewVULRiskListRequest {
+  /**
+   * 过滤内容
+   */
+  Filter?: Filter
+}
+
+/**
+ * DescribeSearchBugInfo返回参数结构体
+ */
+export interface DescribeSearchBugInfoResponse {
+  /**
+   * 漏洞信息和资产信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Data?: DataSearchBug
+  /**
+   * 状态值，0：查询成功，非0：查询失败
+   */
+  ReturnCode?: number
+  /**
+   * 状态信息，success：查询成功，fail：查询失败
+   */
+  ReturnMsg?: string
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2997,104 +3096,403 @@ export interface DeleteDomainAndIpResponse {
 }
 
 /**
- * 集群pod列表
+ * CreateDomainAndIp请求参数结构体
  */
-export interface AssetClusterPod {
+export interface CreateDomainAndIpRequest {
   /**
-   * 租户id
+   * -
    */
-  AppId?: number
+  Content: Array<string>
+}
+
+/**
+ * 域名资产
+ */
+export interface DomainAssetVO {
   /**
-   * 租户uin
+   * 资产id
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Uin?: string
+  AssetId?: Array<string>
   /**
-   * 租户昵称
+   * 资产名
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Nick?: string
+  AssetName?: Array<string>
+  /**
+   * 资产类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AssetType?: Array<string>
   /**
    * 地域
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Region?: string
+  Region?: Array<string>
   /**
-   * pod id
-   */
-  AssetId?: string
-  /**
-   * pod名称
-   */
-  AssetName?: string
-  /**
-   * pod创建时间
+   * Waf状态
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  InstanceCreateTime?: string
+  WAFStatus?: number
   /**
-   * 命名空间
+   * 资产创建时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Namespace?: string
+  AssetCreateTime?: string
   /**
-   * 状态
+   * Appid
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Status?: string
+  AppId?: number
   /**
-   * 集群id
+   * 账号id
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ClusterId?: string
+  Uin?: string
   /**
-   * 集群名称
+   * 账号名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ClusterName?: string
+  NickName?: string
   /**
-   * 主机id
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  MachineId?: string
-  /**
-   * 主机名
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  MachineName?: string
-  /**
-   * pod ip
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  PodIp?: string
-  /**
-   * 关联service数
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ServiceCount?: number
-  /**
-   * 关联容器数
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ContainerCount?: number
-  /**
-   * 公网ip
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  PublicIp?: string
-  /**
-   * 内网ip
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  PrivateIp?: string
-  /**
-   * 是否核心：1:核心，2:非核心
+   * 是否核心
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IsCore?: number
+  /**
+   * 是否云上资产
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsCloud?: number
+  /**
+   * 网络攻击
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Attack?: number
+  /**
+   * 网络访问
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Access?: number
+  /**
+   * 网络拦截
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Intercept?: number
+  /**
+   * 入站峰值带宽
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InBandwidth?: string
+  /**
+   * 出站峰值带宽
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OutBandwidth?: string
+  /**
+   * 入站累计流量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InFlow?: string
+  /**
+   * 出站累计流量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OutFlow?: string
+  /**
+   * 最近扫描时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LastScanTime?: string
+  /**
+   * 端口风险
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PortRisk?: number
+  /**
+   * 漏洞风险
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VulnerabilityRisk?: number
+  /**
+   * 配置风险
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ConfigurationRisk?: number
+  /**
+   * 扫描任务
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ScanTask?: number
+  /**
+   * 域名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SubDomain?: string
+  /**
+   * 解析ip
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SeverIp?: Array<string>
+  /**
+   * boi访问数量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BotCount?: number
+  /**
+   * 弱口令风险
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WeakPassword?: number
+  /**
+   * 内容风险
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WebContentRisk?: number
+  /**
+   * tag标签
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Tag?: Array<Tag>
+  /**
+   * 关联实例类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SourceType?: string
+  /**
+   * memberiD
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MemberId?: string
+  /**
+   * cc攻击
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CCAttack?: number
+  /**
+   * web攻击
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WebAttack?: number
+  /**
+   * 风险服务暴露数量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ServiceRisk?: number
   /**
    * 是否新资产 1新
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IsNewAsset?: number
+  /**
+   * 待确认资产的随机三级域名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VerifyDomain?: string
+  /**
+   * 待确认资产的TXT记录内容
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VerifyTXTRecord?: string
+  /**
+   * 待确认资产的认证状态，0-待认证，1-认证成功，2-认证中，3-txt认证失败，4-人工认证失败
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VerifyStatus?: number
+  /**
+   * bot访问数据
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BotAccessCount?: number
+}
+
+/**
+ * 配置风险高级配置
+ */
+export interface TaskCenterCFGRiskInputParam {
+  /**
+   * 检测项ID
+   */
+  ItemId: string
+  /**
+   * 是否开启，0-不开启，1-开启
+   */
+  Enable: number
+  /**
+   * 资源类型
+   */
+  ResourceType: string
+}
+
+/**
+ * DescribeTaskLogList返回参数结构体
+ */
+export interface DescribeTaskLogListResponse {
+  /**
+   * 总条数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalCount?: number
+  /**
+   * 报告列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Data?: Array<TaskLogInfo>
+  /**
+   * 待查看数量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NotViewNumber?: number
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 漏洞详细信息
+ */
+export interface BugInfoDetail {
+  /**
+   * 漏洞编号
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Id?: number
+  /**
+   * 漏洞对应pocId
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PatchId?: string
+  /**
+   * 漏洞名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VULName?: string
+  /**
+   * 漏洞严重性：high,middle，low，info
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Level?: string
+  /**
+   * cvss评分
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CVSSScore?: string
+  /**
+   * cve编号
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CVEId?: string
+  /**
+   * 漏洞标签
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Tag?: string
+  /**
+   * 漏洞种类，1:web应用，2:系统组件漏洞，3:配置风险
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VULCategory?: number
+  /**
+   * 漏洞影响系统
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ImpactOs?: string
+  /**
+   * 漏洞影响组件
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ImpactCOMPENT?: string
+  /**
+   * 漏洞影响版本
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ImpactVersion?: string
+  /**
+   * 链接
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Reference?: string
+  /**
+   * 漏洞描述
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VULDescribe?: string
+  /**
+   * 修复建议
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Fix?: string
+  /**
+   * 产品支持状态，实时返回
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProSupport?: number
+  /**
+   * 是否公开，0为未发布，1为发布
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsPublish?: number
+  /**
+   * 释放时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ReleaseTime?: string
+  /**
+   * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateTime?: string
+  /**
+   * 更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UpdateTime?: string
+  /**
+   * 漏洞子类别
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SubCategory?: string
+}
+
+/**
+ * DescribeDomainAssets返回参数结构体
+ */
+export interface DescribeDomainAssetsResponse {
+  /**
+   * -
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Total?: number
+  /**
+   * -
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Data?: Array<DomainAssetVO>
+  /**
+   * 防护状态列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DefenseStatusList?: Array<FilterDataObject>
+  /**
+   * 资产归属地列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AssetLocationList?: Array<FilterDataObject>
+  /**
+   * 资产类型列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SourceTypeList?: Array<FilterDataObject>
+  /**
+   * 地域列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RegionList?: Array<FilterDataObject>
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3138,13 +3536,37 @@ export interface DescribeDbAssetsResponse {
 }
 
 /**
- * AddNewBindRoleUser返回参数结构体
+ * DescribeRiskCenterAssetViewVULRiskList返回参数结构体
  */
-export interface AddNewBindRoleUserResponse {
+export interface DescribeRiskCenterAssetViewVULRiskListResponse {
   /**
-   * 0成功，其他失败
+   * 总条数
    */
-  Status?: number
+  TotalCount?: number
+  /**
+   * 资产视角的漏洞风险列表
+   */
+  Data?: Array<AssetViewVULRisk>
+  /**
+   * 状态列表
+   */
+  StatusLists?: Array<FilterDataObject>
+  /**
+   * 危险等级列表
+   */
+  LevelLists?: Array<FilterDataObject>
+  /**
+   * 来源列表
+   */
+  FromLists?: Array<FilterDataObject>
+  /**
+   * 漏洞类型列表
+   */
+  VULTypeLists?: Array<FilterDataObject>
+  /**
+   * 资产类型列表
+   */
+  InstanceTypeLists?: Array<FilterDataObject>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3152,48 +3574,198 @@ export interface AddNewBindRoleUserResponse {
 }
 
 /**
- * StopRiskCenterTask返回参数结构体
+ * DescribeCVMAssets请求参数结构体
  */
-export interface StopRiskCenterTaskResponse {
-  /**
-   * Status为0， 停止成功
-   */
-  Status?: number
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DescribeCVMAssetInfo请求参数结构体
- */
-export interface DescribeCVMAssetInfoRequest {
+export interface DescribeCVMAssetsRequest {
   /**
    * -
    */
-  AssetId: string
+  Filter?: Filter
 }
 
 /**
- * 过滤条件
+ * DescribeRiskCenterServerRiskList请求参数结构体
  */
-export interface WhereFilter {
+export interface DescribeRiskCenterServerRiskListRequest {
   /**
-   * 过滤的项
+   * 过滤内容
    */
-  Name: string
-  /**
-   * 过滤的值
-   */
-  Values: Array<string>
-  /**
-   * 中台定义：
-1等于 2大于 3小于 4大于等于 5小于等于 6不等于 9模糊匹配 13非模糊匹配 14按位与
-精确匹配填 7 模糊匹配填9 兼容 中台定的结构
+  Filter?: Filter
+}
 
+/**
+ * clb实例和监听器信息
+ */
+export interface ClbListenerListInfo {
+  /**
+   * 监听器id
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  OperatorType?: number
+  ListenerId?: string
+  /**
+   * 监听器名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ListenerName?: string
+  /**
+   * 负载均衡Id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LoadBalancerId?: string
+  /**
+   * 负载均衡名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LoadBalancerName?: string
+  /**
+   * 协议
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Protocol?: string
+  /**
+   * 地域
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Region?: string
+  /**
+   * 负载均衡ip
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Vip?: string
+  /**
+   * 端口
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VPort?: number
+  /**
+   * 区域
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Zone?: string
+  /**
+   * 私有网络id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NumericalVpcId?: number
+  /**
+   * 负载均衡类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LoadBalancerType?: string
+  /**
+   * 监听器域名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Domain?: string
+  /**
+   * 负载均衡域名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LoadBalancerDomain?: string
+}
+
+/**
+ * DescribeRiskCenterServerRiskList返回参数结构体
+ */
+export interface DescribeRiskCenterServerRiskListResponse {
+  /**
+   * 总条数
+   */
+  TotalCount?: number
+  /**
+   * 风险服务列表
+   */
+  Data?: Array<ServerRisk>
+  /**
+   * 资产类型枚举
+   */
+  InstanceTypeLists?: Array<FilterDataObject>
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeListenerList请求参数结构体
+ */
+export interface DescribeListenerListRequest {
+  /**
+   * -
+   */
+  Filter?: Filter
+}
+
+/**
+ * DeleteRiskScanTask返回参数结构体
+ */
+export interface DeleteRiskScanTaskResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateDomainAndIp返回参数结构体
+ */
+export interface CreateDomainAndIpResponse {
+  /**
+   * 返回创建成功的数量
+   */
+  Data?: number
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeTaskLogList请求参数结构体
+ */
+export interface DescribeTaskLogListRequest {
+  /**
+   * 过滤内容
+   */
+  Filter?: Filter
+}
+
+/**
+ * DescribeRiskCenterAssetViewPortRiskList返回参数结构体
+ */
+export interface DescribeRiskCenterAssetViewPortRiskListResponse {
+  /**
+   * 总条数
+   */
+  TotalCount?: number
+  /**
+   * 资产视角的配置风险列表
+   */
+  Data?: Array<AssetViewPortRisk>
+  /**
+   * 状态列表
+   */
+  StatusLists?: Array<FilterDataObject>
+  /**
+   * 危险等级列表
+   */
+  LevelLists?: Array<FilterDataObject>
+  /**
+   * 建议列表
+   */
+  SuggestionLists?: Array<FilterDataObject>
+  /**
+   * 资产类型列表
+   */
+  InstanceTypeLists?: Array<FilterDataObject>
+  /**
+   * 来源列表
+   */
+  FromLists?: Array<FilterDataObject>
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

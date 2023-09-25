@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeDomainAssetsResponse, DeleteDomainAndIpRequest, DescribeDbAssetInfoResponse, DeleteRiskScanTaskRequest, DescribeScanReportListRequest, DescribeRiskCenterAssetViewVULRiskListRequest, CreateDomainAndIpRequest, DescribeSearchBugInfoResponse, StopRiskCenterTaskRequest, DescribeScanTaskListResponse, DescribeScanTaskListRequest, DescribeVpcAssetsResponse, CreateRiskCenterScanTaskRequest, DescribeTaskLogListResponse, DescribeScanReportListResponse, DescribeSearchBugInfoRequest, DescribeClusterPodAssetsRequest, DescribeSubnetAssetsRequest, AddNewBindRoleUserRequest, DescribeCVMAssetInfoResponse, DescribePublicIpAssetsResponse, DescribeTaskLogListRequest, DescribeDbAssetsRequest, DescribeRiskCenterAssetViewVULRiskListResponse, DescribeCVMAssetsRequest, DescribeListenerListResponse, DescribeTaskLogURLResponse, CreateRiskCenterScanTaskResponse, DescribeRiskCenterAssetViewPortRiskListResponse, DescribeSubnetAssetsResponse, DescribeDbAssetInfoRequest, DescribeRiskCenterAssetViewPortRiskListRequest, DescribeCVMAssetsResponse, DescribeVpcAssetsRequest, DeleteRiskScanTaskResponse, DescribeClusterPodAssetsResponse, DescribeListenerListRequest, DescribeDomainAssetsRequest, CreateDomainAndIpResponse, DescribePublicIpAssetsRequest, DeleteDomainAndIpResponse, DescribeDbAssetsResponse, AddNewBindRoleUserResponse, StopRiskCenterTaskResponse, DescribeCVMAssetInfoRequest, DescribeTaskLogURLRequest } from "./csip_models";
+import { DescribeDbAssetInfoResponse, DeleteRiskScanTaskRequest, DescribeRiskCenterAssetViewWeakPasswordRiskListResponse, DescribeScanReportListRequest, DescribeVpcAssetsResponse, StopRiskCenterTaskRequest, DescribeDomainAssetsRequest, DescribeRiskCenterWebsiteRiskListResponse, DeleteDomainAndIpRequest, DescribeScanTaskListRequest, DeleteDomainAndIpResponse, DescribeScanReportListResponse, DescribeSearchBugInfoRequest, AddNewBindRoleUserRequest, DescribeListenerListResponse, CreateRiskCenterScanTaskResponse, DescribeSubnetAssetsResponse, DescribeRiskCenterAssetViewPortRiskListRequest, StopRiskCenterTaskResponse, DescribeVpcAssetsRequest, DescribeRiskCenterAssetViewWeakPasswordRiskListRequest, DescribeCVMAssetsResponse, DescribePublicIpAssetsRequest, DescribeCVMAssetInfoRequest, CreateRiskCenterScanTaskRequest, DescribeRiskCenterAssetViewCFGRiskListResponse, DescribeScanTaskListResponse, DescribeClusterPodAssetsRequest, DescribeCVMAssetInfoResponse, DescribePublicIpAssetsResponse, DescribeTaskLogURLResponse, DescribeDbAssetInfoRequest, DescribeRiskCenterWebsiteRiskListRequest, DescribeSubnetAssetsRequest, DescribeClusterPodAssetsResponse, DescribeRiskCenterAssetViewCFGRiskListRequest, AddNewBindRoleUserResponse, DescribeDbAssetsRequest, DescribeRiskCenterAssetViewVULRiskListRequest, DescribeSearchBugInfoResponse, CreateDomainAndIpRequest, DescribeTaskLogListResponse, DescribeDomainAssetsResponse, DescribeDbAssetsResponse, DescribeRiskCenterAssetViewVULRiskListResponse, DescribeCVMAssetsRequest, DescribeRiskCenterServerRiskListRequest, DescribeRiskCenterServerRiskListResponse, DescribeListenerListRequest, DeleteRiskScanTaskResponse, CreateDomainAndIpResponse, DescribeTaskLogListRequest, DescribeRiskCenterAssetViewPortRiskListResponse, DescribeTaskLogURLRequest } from "./csip_models";
 /**
  * csip client
  * @class
@@ -36,9 +36,9 @@ export declare class Client extends AbstractClient {
      */
     DeleteRiskScanTask(req: DeleteRiskScanTaskRequest, cb?: (error: string, rep: DeleteRiskScanTaskResponse) => void): Promise<DeleteRiskScanTaskResponse>;
     /**
-     * 获取任务扫描报告列表
+     * 获取资产视角的弱口令风险列表
      */
-    DescribeTaskLogList(req: DescribeTaskLogListRequest, cb?: (error: string, rep: DescribeTaskLogListResponse) => void): Promise<DescribeTaskLogListResponse>;
+    DescribeRiskCenterAssetViewWeakPasswordRiskList(req: DescribeRiskCenterAssetViewWeakPasswordRiskListRequest, cb?: (error: string, rep: DescribeRiskCenterAssetViewWeakPasswordRiskListResponse) => void): Promise<DescribeRiskCenterAssetViewWeakPasswordRiskListResponse>;
     /**
      * 获取资产视角的漏洞风险列表
      */
@@ -48,13 +48,25 @@ export declare class Client extends AbstractClient {
      */
     DescribeClusterPodAssets(req: DescribeClusterPodAssetsRequest, cb?: (error: string, rep: DescribeClusterPodAssetsResponse) => void): Promise<DescribeClusterPodAssetsResponse>;
     /**
+     * 获取资产视角的配置风险列表
+     */
+    DescribeRiskCenterAssetViewCFGRiskList(req: DescribeRiskCenterAssetViewCFGRiskListRequest, cb?: (error: string, rep: DescribeRiskCenterAssetViewCFGRiskListResponse) => void): Promise<DescribeRiskCenterAssetViewCFGRiskListResponse>;
+    /**
      * 获取vpc列表
      */
     DescribeVpcAssets(req: DescribeVpcAssetsRequest, cb?: (error: string, rep: DescribeVpcAssetsResponse) => void): Promise<DescribeVpcAssetsResponse>;
     /**
+     * 获取风险服务列表
+     */
+    DescribeRiskCenterServerRiskList(req: DescribeRiskCenterServerRiskListRequest, cb?: (error: string, rep: DescribeRiskCenterServerRiskListResponse) => void): Promise<DescribeRiskCenterServerRiskListResponse>;
+    /**
      * cvm列表
      */
     DescribeCVMAssets(req: DescribeCVMAssetsRequest, cb?: (error: string, rep: DescribeCVMAssetsResponse) => void): Promise<DescribeCVMAssetsResponse>;
+    /**
+     * 获取网站风险列表
+     */
+    DescribeRiskCenterWebsiteRiskList(req: DescribeRiskCenterWebsiteRiskListRequest, cb?: (error: string, rep: DescribeRiskCenterWebsiteRiskListResponse) => void): Promise<DescribeRiskCenterWebsiteRiskListResponse>;
     /**
      * 获取报告下载的临时链接
      */
@@ -67,6 +79,10 @@ export declare class Client extends AbstractClient {
      * 立体防护中心查询漏洞信息
      */
     DescribeSearchBugInfo(req: DescribeSearchBugInfoRequest, cb?: (error: string, rep: DescribeSearchBugInfoResponse) => void): Promise<DescribeSearchBugInfoResponse>;
+    /**
+     * 获取任务扫描报告列表
+     */
+    DescribeTaskLogList(req: DescribeTaskLogListRequest, cb?: (error: string, rep: DescribeTaskLogListResponse) => void): Promise<DescribeTaskLogListResponse>;
     /**
      * 获取扫描报告列表
      */

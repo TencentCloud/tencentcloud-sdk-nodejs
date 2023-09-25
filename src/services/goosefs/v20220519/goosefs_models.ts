@@ -868,4 +868,18 @@ export interface MappedBucket {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RuleDescription?: string
+  /**
+   * 桶关联状态 0：关联中 1：关联完成
+   */
+  Status?: number
+  /**
+   * 是否使用全球加速域名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AccelerateFlag?: boolean
+  /**
+   * 桶所在的园区
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BucketRegion?: string
 }

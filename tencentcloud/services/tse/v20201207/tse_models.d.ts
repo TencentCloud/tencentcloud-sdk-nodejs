@@ -2727,10 +2727,12 @@ export interface CreateCloudNativeAPIGatewayCertificateRequest {
     Name?: string;
     /**
      * 证书私钥
+     * @deprecated
      */
     Key?: string;
     /**
      * 证书pem格式
+     * @deprecated
      */
     Crt?: string;
 }

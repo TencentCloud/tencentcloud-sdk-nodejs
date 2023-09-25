@@ -88,9 +88,9 @@ it("csip.v20221121.DeleteRiskScanTask", async function () {
     }
 })
 
-it("csip.v20221121.DescribeTaskLogList", async function () {
+it("csip.v20221121.DescribeRiskCenterAssetViewWeakPasswordRiskList", async function () {
     try {
-       const data = await client.DescribeTaskLogList({})
+       const data = await client.DescribeRiskCenterAssetViewWeakPasswordRiskList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -118,6 +118,16 @@ it("csip.v20221121.DescribeClusterPodAssets", async function () {
     }
 })
 
+it("csip.v20221121.DescribeRiskCenterAssetViewCFGRiskList", async function () {
+    try {
+       const data = await client.DescribeRiskCenterAssetViewCFGRiskList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("csip.v20221121.DescribeVpcAssets", async function () {
     try {
        const data = await client.DescribeVpcAssets({})
@@ -128,9 +138,29 @@ it("csip.v20221121.DescribeVpcAssets", async function () {
     }
 })
 
+it("csip.v20221121.DescribeRiskCenterServerRiskList", async function () {
+    try {
+       const data = await client.DescribeRiskCenterServerRiskList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("csip.v20221121.DescribeCVMAssets", async function () {
     try {
        const data = await client.DescribeCVMAssets({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("csip.v20221121.DescribeRiskCenterWebsiteRiskList", async function () {
+    try {
+       const data = await client.DescribeRiskCenterWebsiteRiskList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -161,6 +191,16 @@ it("csip.v20221121.CreateRiskCenterScanTask", async function () {
 it("csip.v20221121.DescribeSearchBugInfo", async function () {
     try {
        const data = await client.DescribeSearchBugInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("csip.v20221121.DescribeTaskLogList", async function () {
+    try {
+       const data = await client.DescribeTaskLogList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

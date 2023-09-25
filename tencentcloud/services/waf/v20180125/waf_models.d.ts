@@ -852,11 +852,11 @@ export interface DomainInfo {
      */
     Status: number;
     /**
-     * 规则防御模式,0观察模式 1拦截模式
+     * 规则引擎防护模式,0观察模式 1拦截模式
      */
     Mode: number;
     /**
-     * AI防御模式,10规则引擎观察&&AI引擎关闭模式 11规则引擎观察&&AI引擎观察模式 12规则引擎观察&&AI引擎拦截模式 20规则引擎拦截&&AI引擎关闭模式 21规则引擎拦截&&AI引擎观察模式 22规则引擎拦截&&AI引擎拦截模式
+     * 规则引擎和AI引擎防护模式联合状态,10规则引擎观察&&AI引擎关闭模式 11规则引擎观察&&AI引擎观察模式 12规则引擎观察&&AI引擎拦截模式 20规则引擎拦截&&AI引擎关闭模式 21规则引擎拦截&&AI引擎观察模式 22规则引擎拦截&&AI引擎拦截模式
      */
     Engine: number;
     /**
@@ -932,6 +932,11 @@ export interface DomainInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     SgDetail?: string;
+    /**
+     * 域名类型:hybrid表示混合云域名，public表示公有云域名
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CloudType?: string;
 }
 /**
  * DescribeAntiInfoLeakRules返回的规则元素中的具体的规则元素
@@ -1165,7 +1170,7 @@ export interface ModifyDomainIpv6StatusRequest {
      */
     DomainId: string;
     /**
-     * 修改域名的Ipv6开关为Status （0:关闭 1:开启）
+     * 修改域名的Ipv6开关为Status （1:开启 2:关闭）
      */
     Status: number;
 }

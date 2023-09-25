@@ -18,82 +18,95 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
-  DescribeDomainAssetsResponse,
-  DeleteDomainAndIpRequest,
-  ScanTaskInfoList,
   DescribeDbAssetInfoResponse,
   DeleteRiskScanTaskRequest,
-  ReportItemKey,
-  DescribeScanReportListRequest,
-  TaskLogURL,
-  DescribeRiskCenterAssetViewVULRiskListRequest,
-  TaskCenterCFGRiskInputParam,
+  DescribeRiskCenterAssetViewWeakPasswordRiskListResponse,
   TaskCenterWeakPwdRiskInputParam,
-  TaskLogInfo,
-  CreateDomainAndIpRequest,
-  DomainAssetVO,
-  DescribeSearchBugInfoResponse,
-  TaskCenterVulRiskInputParam,
-  StopRiskCenterTaskRequest,
-  DescribeScanTaskListResponse,
-  DescribeScanTaskListRequest,
-  DescribeVpcAssetsResponse,
   FilterDataObject,
-  CreateRiskCenterScanTaskRequest,
-  TaskAdvanceCFG,
+  ReportItemKey,
   CVMAssetVO,
-  DescribeTaskLogListResponse,
+  AssetViewCFGRisk,
+  AssetViewVULRisk,
+  DescribeScanReportListRequest,
+  DescribeVpcAssetsResponse,
+  Vpc,
+  StopRiskCenterTaskRequest,
+  DataSearchBug,
+  DescribeDomainAssetsRequest,
+  DescribeRiskCenterWebsiteRiskListResponse,
+  Tag,
+  DeleteDomainAndIpRequest,
+  DescribeScanTaskListRequest,
+  TaskIdListKey,
+  DeleteDomainAndIpResponse,
   DescribeScanReportListResponse,
   DescribeSearchBugInfoRequest,
-  BugInfoDetail,
-  DescribeClusterPodAssetsRequest,
-  DescribeSubnetAssetsRequest,
+  TaskLogURL,
   AddNewBindRoleUserRequest,
-  DescribeCVMAssetInfoResponse,
-  DescribePublicIpAssetsResponse,
-  DescribeTaskLogListRequest,
-  DescribeDbAssetsRequest,
-  DescribeRiskCenterAssetViewVULRiskListResponse,
-  DescribeCVMAssetsRequest,
   DescribeListenerListResponse,
-  DescribeTaskLogURLResponse,
   DBAssetVO,
-  DataSearchBug,
   AssetInfoDetail,
-  ScanTaskInfo,
   SubnetAsset,
   CreateRiskCenterScanTaskResponse,
-  DescribeRiskCenterAssetViewPortRiskListResponse,
   DescribeSubnetAssetsResponse,
-  DescribeDbAssetInfoRequest,
   DescribeRiskCenterAssetViewPortRiskListRequest,
-  ClbListenerListInfo,
-  DescribeCVMAssetsResponse,
-  DescribeVpcAssetsRequest,
+  StopRiskCenterTaskResponse,
+  ServerRisk,
   TaskAssetObject,
-  Filter,
-  DbAssetInfo,
-  Tag,
   IpAssetListVO,
-  DeleteRiskScanTaskResponse,
+  DescribeVpcAssetsRequest,
+  DescribeRiskCenterAssetViewWeakPasswordRiskListRequest,
   PublicIpDomainListKey,
-  AssetViewVULRisk,
+  DescribeCVMAssetsResponse,
+  DbAssetInfo,
+  DescribePublicIpAssetsRequest,
+  AssetClusterPod,
+  DescribeCVMAssetInfoRequest,
+  AssetViewWeakPassRisk,
+  WebsiteRisk,
+  CreateRiskCenterScanTaskRequest,
+  DescribeRiskCenterAssetViewCFGRiskListResponse,
+  TaskCenterVulRiskInputParam,
+  DescribeScanTaskListResponse,
+  ScanTaskInfo,
+  DescribeClusterPodAssetsRequest,
+  DescribeCVMAssetInfoResponse,
+  DescribePublicIpAssetsResponse,
+  DescribeTaskLogURLResponse,
+  DescribeDbAssetInfoRequest,
+  Filter,
+  DescribeRiskCenterWebsiteRiskListRequest,
+  ServerRiskSuggestion,
+  DescribeSubnetAssetsRequest,
   DescribeClusterPodAssetsResponse,
   AssetBaseInfoResponse,
-  TaskIdListKey,
   AssetViewPortRisk,
-  DescribeListenerListRequest,
-  DescribeDomainAssetsRequest,
-  Vpc,
-  CreateDomainAndIpResponse,
-  DescribePublicIpAssetsRequest,
-  DeleteDomainAndIpResponse,
-  AssetClusterPod,
-  DescribeDbAssetsResponse,
+  DescribeRiskCenterAssetViewCFGRiskListRequest,
+  TaskAdvanceCFG,
   AddNewBindRoleUserResponse,
-  StopRiskCenterTaskResponse,
-  DescribeCVMAssetInfoRequest,
   WhereFilter,
+  ScanTaskInfoList,
+  DescribeDbAssetsRequest,
+  TaskLogInfo,
+  DescribeRiskCenterAssetViewVULRiskListRequest,
+  DescribeSearchBugInfoResponse,
+  CreateDomainAndIpRequest,
+  DomainAssetVO,
+  TaskCenterCFGRiskInputParam,
+  DescribeTaskLogListResponse,
+  BugInfoDetail,
+  DescribeDomainAssetsResponse,
+  DescribeDbAssetsResponse,
+  DescribeRiskCenterAssetViewVULRiskListResponse,
+  DescribeCVMAssetsRequest,
+  DescribeRiskCenterServerRiskListRequest,
+  ClbListenerListInfo,
+  DescribeRiskCenterServerRiskListResponse,
+  DescribeListenerListRequest,
+  DeleteRiskScanTaskResponse,
+  CreateDomainAndIpResponse,
+  DescribeTaskLogListRequest,
+  DescribeRiskCenterAssetViewPortRiskListResponse,
   DescribeTaskLogURLRequest,
 } from "./csip_models"
 
@@ -177,13 +190,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取任务扫描报告列表
+   * 获取资产视角的弱口令风险列表
    */
-  async DescribeTaskLogList(
-    req: DescribeTaskLogListRequest,
-    cb?: (error: string, rep: DescribeTaskLogListResponse) => void
-  ): Promise<DescribeTaskLogListResponse> {
-    return this.request("DescribeTaskLogList", req, cb)
+  async DescribeRiskCenterAssetViewWeakPasswordRiskList(
+    req: DescribeRiskCenterAssetViewWeakPasswordRiskListRequest,
+    cb?: (error: string, rep: DescribeRiskCenterAssetViewWeakPasswordRiskListResponse) => void
+  ): Promise<DescribeRiskCenterAssetViewWeakPasswordRiskListResponse> {
+    return this.request("DescribeRiskCenterAssetViewWeakPasswordRiskList", req, cb)
   }
 
   /**
@@ -207,6 +220,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取资产视角的配置风险列表
+   */
+  async DescribeRiskCenterAssetViewCFGRiskList(
+    req: DescribeRiskCenterAssetViewCFGRiskListRequest,
+    cb?: (error: string, rep: DescribeRiskCenterAssetViewCFGRiskListResponse) => void
+  ): Promise<DescribeRiskCenterAssetViewCFGRiskListResponse> {
+    return this.request("DescribeRiskCenterAssetViewCFGRiskList", req, cb)
+  }
+
+  /**
    * 获取vpc列表
    */
   async DescribeVpcAssets(
@@ -217,6 +240,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取风险服务列表
+   */
+  async DescribeRiskCenterServerRiskList(
+    req: DescribeRiskCenterServerRiskListRequest,
+    cb?: (error: string, rep: DescribeRiskCenterServerRiskListResponse) => void
+  ): Promise<DescribeRiskCenterServerRiskListResponse> {
+    return this.request("DescribeRiskCenterServerRiskList", req, cb)
+  }
+
+  /**
    * cvm列表
    */
   async DescribeCVMAssets(
@@ -224,6 +257,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeCVMAssetsResponse) => void
   ): Promise<DescribeCVMAssetsResponse> {
     return this.request("DescribeCVMAssets", req, cb)
+  }
+
+  /**
+   * 获取网站风险列表
+   */
+  async DescribeRiskCenterWebsiteRiskList(
+    req: DescribeRiskCenterWebsiteRiskListRequest,
+    cb?: (error: string, rep: DescribeRiskCenterWebsiteRiskListResponse) => void
+  ): Promise<DescribeRiskCenterWebsiteRiskListResponse> {
+    return this.request("DescribeRiskCenterWebsiteRiskList", req, cb)
   }
 
   /**
@@ -254,6 +297,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeSearchBugInfoResponse) => void
   ): Promise<DescribeSearchBugInfoResponse> {
     return this.request("DescribeSearchBugInfo", req, cb)
+  }
+
+  /**
+   * 获取任务扫描报告列表
+   */
+  async DescribeTaskLogList(
+    req: DescribeTaskLogListRequest,
+    cb?: (error: string, rep: DescribeTaskLogListResponse) => void
+  ): Promise<DescribeTaskLogListResponse> {
+    return this.request("DescribeTaskLogList", req, cb)
   }
 
   /**

@@ -2163,6 +2163,10 @@ export interface DescribeDBInstancesRequest {
    * 实例类型 HA-高可用 RO-只读实例 SI-基础版 BI-商业智能服务
    */
   InstanceType?: string
+  /**
+   * 分页查询方式 offset-按照偏移量分页查询，pageNumber-按照页数分页查询，默认取值pageNumber
+   */
+  PaginationType?: string
 }
 
 /**
@@ -5923,11 +5927,11 @@ export interface DescribeDBInstancesResponse {
   /**
    * 符合条件的实例总数。分页返回的话，这个值指的是所有符合条件的实例的个数，而非当前根据Limit和Offset值返回的实例个数
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 实例列表
    */
-  DBInstances: Array<DBInstance>
+  DBInstances?: Array<DBInstance>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

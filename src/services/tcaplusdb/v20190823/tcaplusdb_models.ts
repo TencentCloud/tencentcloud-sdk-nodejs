@@ -2655,11 +2655,11 @@ export interface DescribeTablesRequest {
  */
 export interface KafkaInfo {
   /**
-   * kafaka address
+   * Kafka address
    */
   Address: string
   /**
-   * kafaka topic
+   * Kafka topic
    */
   Topic: string
   /**
