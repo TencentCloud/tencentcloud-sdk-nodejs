@@ -389,11 +389,11 @@ export interface ScaleOutClusterRequest {
    */
   ScriptBootstrapActionConfig?: Array<ScriptBootstrapActionConfig>
   /**
-   * 扩容部署服务，新增节点将默认继承当前节点类型中所部署服务，部署服务含默认可选服务，该参数仅支持可选服务填写，如：存量task节点已部署HDFS、YARN、impala；使用api扩容task节不部署impala时，此参数仅填写HDFS、YARN
+   * 扩容部署服务，新增节点将默认继承当前节点类型中所部署服务，部署服务含默认可选服务，该参数仅支持可选服务填写，如：存量task节点已部署HDFS、YARN、impala；使用api扩容task节不部署impala时，部署服务仅填写HDFS、YARN。[组件名对应的映射关系表](https://cloud.tencent.com/document/product/589/98760)。
    */
   SoftDeployInfo?: Array<number | bigint>
   /**
-   * 部署进程，默认部署扩容服务的全部进程，支持修改部署进程，如：当前task节点部署服务为：HDFS、YARN、impala，默认部署服务为：DataNode,NodeManager,ImpalaServer，若用户需修改部署进程信息，此参数信息可填写：	DataNode,NodeManager,ImpalaServerCoordinator或DataNode,NodeManager,ImpalaServerExecutor
+   * 部署进程，默认部署扩容服务的全部进程，支持修改部署进程，如：当前task节点部署服务为：HDFS、YARN、impala，默认部署服务为：DataNode,NodeManager,ImpalaServer，若用户需修改部署进程信息，部署进程：	DataNode,NodeManager,ImpalaServerCoordinator或DataNode,NodeManager,ImpalaServerExecutor。[进程名对应的映射关系表](https://cloud.tencent.com/document/product/589/98760)。
    */
   ServiceNodeInfo?: Array<number | bigint>
   /**
@@ -5332,17 +5332,17 @@ export interface ScaleOutClusterResponse {
   /**
    * 实例ID。
    */
-  InstanceId: string
+  InstanceId?: string
   /**
    * 客户端Token。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ClientToken: string
+  ClientToken?: string
   /**
    * 扩容流程ID。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  FlowId: number
+  FlowId?: number
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

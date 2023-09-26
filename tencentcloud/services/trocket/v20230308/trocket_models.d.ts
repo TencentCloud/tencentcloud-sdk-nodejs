@@ -55,6 +55,37 @@ export interface CreateConsumerGroupRequest {
     Remark?: string;
 }
 /**
+ * CreateRole返回参数结构体
+ */
+export interface CreateRoleResponse {
+    /**
+     * 角色名
+     */
+    Role?: string;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * DescribeRoleList返回参数结构体
+ */
+export interface DescribeRoleListResponse {
+    /**
+     * 查询总数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TotalCount?: number;
+    /**
+     * 角色信息列表
+     */
+    Data?: Array<RoleItem>;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * ModifyInstance请求参数结构体
  */
 export interface ModifyInstanceRequest {
@@ -170,6 +201,32 @@ export interface DeleteInstanceResponse {
     RequestId?: string;
 }
 /**
+ * 列表上的主题信息
+ */
+export interface TopicItem {
+    /**
+     * 实例ID
+     */
+    InstanceId?: string;
+    /**
+     * 主题名称
+     */
+    Topic?: string;
+    /**
+     * 主题类型
+     */
+    TopicType?: string;
+    /**
+     * 队列数量
+     */
+    QueueNum?: number;
+    /**
+     * 描述
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Remark?: string;
+}
+/**
  * ModifyConsumerGroup请求参数结构体
  */
 export interface ModifyConsumerGroupRequest {
@@ -231,30 +288,13 @@ export interface IpRule {
     Remark: string;
 }
 /**
- * 列表上的主题信息
+ * ModifyRole返回参数结构体
  */
-export interface TopicItem {
+export interface ModifyRoleResponse {
     /**
-     * 实例ID
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
-    InstanceId?: string;
-    /**
-     * 主题名称
-     */
-    Topic?: string;
-    /**
-     * 主题类型
-     */
-    TopicType?: string;
-    /**
-     * 队列数量
-     */
-    QueueNum?: number;
-    /**
-     * 描述
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Remark?: string;
+    RequestId?: string;
 }
 /**
  * 主题与消费组的订阅关系数据
@@ -432,6 +472,31 @@ export interface CreateInstanceRequest {
     MessageRetention?: number;
 }
 /**
+ * CreateRole请求参数结构体
+ */
+export interface CreateRoleRequest {
+    /**
+     * 实例ID
+     */
+    InstanceId: string;
+    /**
+     * 角色名称
+     */
+    Role: string;
+    /**
+     * 备注
+     */
+    Remark: string;
+    /**
+     * 是否开启生产权限
+     */
+    PermWrite: boolean;
+    /**
+     * 是否开启消费权限
+     */
+    PermRead: boolean;
+}
+/**
  * VPC信息
  */
 export interface VpcInfo {
@@ -572,6 +637,40 @@ export interface Endpoint {
     IpRules?: Array<IpRule>;
 }
 /**
+ * DeleteRole返回参数结构体
+ */
+export interface DeleteRoleResponse {
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * ModifyRole请求参数结构体
+ */
+export interface ModifyRoleRequest {
+    /**
+     * 实例ID
+     */
+    InstanceId: string;
+    /**
+     * 角色名称
+     */
+    Role: string;
+    /**
+     * 是否开启消费
+     */
+    PermRead: boolean;
+    /**
+     * 是否开启生产
+     */
+    PermWrite: boolean;
+    /**
+     * 备注
+     */
+    Remark?: string;
+}
+/**
  * DescribeTopicStatsOp请求参数结构体
  */
 export interface DescribeTopicStatsOpRequest {
@@ -579,6 +678,43 @@ export interface DescribeTopicStatsOpRequest {
      * 主题
      */
     Topic: string;
+}
+/**
+ * 角色信息
+ */
+export interface RoleItem {
+    /**
+     * 角色名称
+     */
+    RoleName?: string;
+    /**
+     * Access Key
+     */
+    AccessKey?: string;
+    /**
+     * Secret Key
+     */
+    SecretKey?: string;
+    /**
+     * 是否开启消费
+     */
+    PermRead?: boolean;
+    /**
+     * 是否开启生产
+     */
+    PermWrite?: boolean;
+    /**
+     * 备注信息
+     */
+    Remark?: string;
+    /**
+     * 创建时间，秒为单位
+     */
+    CreatedTime?: number;
+    /**
+     * 修改时间，秒为单位
+     */
+    ModifiedTime?: number;
 }
 /**
  * CreateTopic请求参数结构体
@@ -637,13 +773,38 @@ export interface Filter {
     Values: Array<string>;
 }
 /**
- * DescribeTopicStatsOp返回参数结构体
+ * DeleteRole请求参数结构体
  */
-export interface DescribeTopicStatsOpResponse {
+export interface DeleteRoleRequest {
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     * 实例ID
      */
-    RequestId?: string;
+    InstanceId: string;
+    /**
+     * 角色名称
+     */
+    Role: string;
+}
+/**
+ * DescribeRoleList请求参数结构体
+ */
+export interface DescribeRoleListRequest {
+    /**
+     * 实例ID
+     */
+    InstanceId: string;
+    /**
+     * 查询起始位置
+     */
+    Offset: number;
+    /**
+     * 查询结果限制数量
+     */
+    Limit: number;
+    /**
+     * 查询条件列表
+     */
+    Filters?: Array<Filter>;
 }
 /**
  * ModifyTopic请求参数结构体
@@ -769,6 +930,15 @@ export interface DescribeInstanceResponse {
      * 计费模式
      */
     PayMode?: string;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * DescribeTopicStatsOp返回参数结构体
+ */
+export interface DescribeTopicStatsOpResponse {
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */

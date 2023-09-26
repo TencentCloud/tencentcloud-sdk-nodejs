@@ -2822,6 +2822,7 @@ export interface DescribeAssetInitServiceListRequest {
   <li>IpOrAlias - String - 是否必填：否 - 主机ip或别名筛选</li>
   <li>Name- string - 是否必填：否 - 包名</li>
   <li>User- string - 是否必填：否 - 用户</li>
+  <li>IsAutoRun - string - 是否必填：否 - 是否开机自启动：0否，1是</li>
   <li>Status- string - 是否必填：否 - 默认启用状态：0未启用， 1启用 仅linux</li>
   <li>Type- string - 是否必填：否 - 类型：类型 仅windows：
   1:编码器
@@ -11433,6 +11434,10 @@ export interface AssetInitServiceBaseInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     MachineExtraInfo?: MachineExtraInfo;
+    /**
+     * 开机自启动[0:否|1:是]
+     */
+    IsAutoRun?: number;
 }
 /**
  * DescribeVulHostTop请求参数结构体
@@ -17566,11 +17571,11 @@ export interface DescribeAssetInitServiceListResponse {
      * 列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Services: Array<AssetInitServiceBaseInfo>;
+    Services?: Array<AssetInitServiceBaseInfo>;
     /**
      * 总数量
      */
-    Total: number;
+    Total?: number;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */

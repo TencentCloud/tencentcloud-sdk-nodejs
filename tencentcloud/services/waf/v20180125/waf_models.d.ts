@@ -764,20 +764,18 @@ export interface DescribePeakPointsRequest {
      */
     InstanceID?: string;
     /**
-     * 十三个值可选：
+     * 十一个值可选：
   access-峰值qps趋势图
   botAccess- bot峰值qps趋势图
   down-下行峰值带宽趋势图
   up-上行峰值带宽趋势图
   attack-Web攻击总数趋势图
   cc-CC攻击总数趋势图
-  StatusServerError-WAF返回给客户端状态码次数趋势图
-  StatusClientError-WAF返回给客户端状态码次数趋势图
-  StatusRedirect-WAF返回给客户端状态码次数趋势图
-  StatusOk-WAF返回给客户端状态码次数趋势图
-  UpstreamServerError-源站返回给WAF状态码次数趋势图
-  UpstreamClientError-源站返回给WAF状态码次数趋势图
-  UpstreamRedirect-源站返回给WAF状态码次数趋势图
+  bw-黑IP攻击总数趋势图
+  tamper-防篡改攻击总数趋势图
+  leak-防泄露攻击总数趋势图
+  acl-访问控制攻击总数趋势图
+  http_status-状态码各次数趋势图
      */
     MetricName?: string;
 }
@@ -1026,6 +1024,10 @@ export interface DeleteSessionRequest {
      * clb-waf 或者 sprta-waf
      */
     Edition?: string;
+    /**
+     * 要删除的SessionID
+     */
+    SessionID?: number;
 }
 /**
  * DescribeWafAutoDenyRules请求参数结构体
@@ -1035,6 +1037,10 @@ export interface DescribeWafAutoDenyRulesRequest {
      * 域名
      */
     Domain: string;
+    /**
+     * 实例Id
+     */
+    InstanceId?: string;
 }
 /**
  * UpsertIpAccessControl请求参数结构体
@@ -1048,6 +1054,10 @@ export interface UpsertIpAccessControlRequest {
      * ip 参数列表，json数组由ip，source，note，action，valid_ts组成。ip对应配置的ip地址，source固定为custom值，note为注释，action值42为黑名单，40为白名单，valid_ts为有效日期，值为秒级时间戳（（如1680570420代表2023-04-04 09:07:00））
      */
     Items: Array<string>;
+    /**
+     * 实例Id
+     */
+    InstanceId?: string;
     /**
      * WAF实例类型，sparta-waf表示SAAS型WAF，clb-waf表示负载均衡型WAF
      */
@@ -1087,6 +1097,10 @@ export interface AddAntiFakeUrlResponse {
      * 结果
      */
     Result?: string;
+    /**
+     * 规则ID
+     */
+    Id?: string;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1247,6 +1261,61 @@ export interface SessionItem {
     TsVersion: string;
 }
 /**
+ * 重保防护资源信息
+ */
+export interface MajorEventsPkg {
+    /**
+     * 资源id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ResourceIds?: string;
+    /**
+     * 状态
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Status?: number;
+    /**
+     * 地域
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Region?: number;
+    /**
+     * 开始时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    BeginTime?: string;
+    /**
+     * 结束时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    EndTime?: string;
+    /**
+     * 申请数量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InquireNum?: number;
+    /**
+     * 使用数量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    UsedNum?: number;
+    /**
+     * 续费标志
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RenewFlag?: number;
+    /**
+     * 计费项
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    BillingItem?: string;
+    /**
+     * 护网包状态
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    HWState?: number;
+}
+/**
  * ModifySpartaProtection返回参数结构体
  */
 export interface ModifySpartaProtectionResponse {
@@ -1284,7 +1353,11 @@ export interface UpsertCCRuleResponse {
      * 一般为null
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Data: string;
+    Data?: string;
+    /**
+     * 操作的RuleId
+     */
+    RuleId?: number;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1460,6 +1533,10 @@ export interface SearchItem {
  * AddAntiInfoLeakRules返回参数结构体
  */
 export interface AddAntiInfoLeakRulesResponse {
+    /**
+     * 规则ID
+     */
+    RuleId?: number;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1885,30 +1962,40 @@ export interface CreateHostResponse {
  */
 export interface IpAccessControlItem {
     /**
+     * mongo表自增Id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Id?: string;
+    /**
      * 动作
      */
-    ActionType: number;
+    ActionType?: number;
     /**
      * ip
      */
-    Ip: string;
+    Ip?: string;
     /**
      * 备注
      */
-    Note: string;
+    Note?: string;
     /**
      * 来源
      */
-    Source: string;
+    Source?: string;
     /**
      * 更新时间戳
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TsVersion: number;
+    TsVersion?: number;
     /**
      * 有效截止时间戳
      */
-    ValidTs: number;
+    ValidTs?: number;
+    /**
+     * 生效状态
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ValidStatus?: number;
 }
 /**
  * DeleteHost返回参数结构体
@@ -2182,11 +2269,11 @@ export interface AddAntiInfoLeakRulesRequest {
      */
     Domain: string;
     /**
-     * 名称
+     * 规则名称
      */
     Name: string;
     /**
-     * 动作
+     * 动作，0（告警）、1（替换）、2（仅显示前四位）、3（仅显示后四位）、4（阻断）
      */
     ActionType: number;
     /**
@@ -2624,66 +2711,86 @@ export interface PeakPointsItem {
     /**
      * 秒级别时间戳
      */
-    Time: number;
+    Time?: number;
     /**
      * QPS
      */
-    Access: number;
+    Access?: number;
     /**
      * 上行带宽峰值，单位B
      */
-    Up: number;
+    Up?: number;
     /**
      * 下行带宽峰值，单位B
      */
-    Down: number;
+    Down?: number;
     /**
      * Web攻击次数
      */
-    Attack: number;
+    Attack?: number;
     /**
      * CC攻击次数
      */
-    Cc: number;
+    Cc?: number;
     /**
      * Bot qps
      */
-    BotAccess: number;
+    BotAccess?: number;
     /**
-     * WAF返回给客户端状态码次数
+     * WAF返回给客户端状态码5xx次数
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    StatusServerError: number;
+    StatusServerError?: number;
     /**
-     * WAF返回给客户端状态码次数
+     * WAF返回给客户端状态码4xx次数
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    StatusClientError: number;
+    StatusClientError?: number;
     /**
-     * WAF返回给客户端状态码次数
+     * WAF返回给客户端状态码302次数
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    StatusRedirect: number;
+    StatusRedirect?: number;
     /**
-     * WAF返回给客户端状态码次数
+     * WAF返回给客户端状态码202次数
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    StatusOk: number;
+    StatusOk?: number;
     /**
-     * 源站返回给WAF状态码次数
+     * 源站返回给WAF状态码5xx次数
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    UpstreamServerError: number;
+    UpstreamServerError?: number;
     /**
-     * 源站返回给WAF状态码次数
+     * 源站返回给WAF状态码4xx次数
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    UpstreamClientError: number;
+    UpstreamClientError?: number;
     /**
-     * 源站返回给WAF状态码次数
+     * 源站返回给WAF状态码302次数
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    UpstreamRedirect: number;
+    UpstreamRedirect?: number;
+    /**
+     * 黑名单次数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    BlackIP?: number;
+    /**
+     * 防篡改次数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Tamper?: number;
+    /**
+     * 信息防泄露次数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Leak?: number;
+    /**
+     * 访问控制
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ACL?: number;
 }
 /**
  * GetInstanceQpsLimit返回参数结构体
@@ -2887,6 +2994,14 @@ export interface DescribeAccessFastAnalysisRequest {
      * 需要分析统计的字段名
      */
     FieldName: string;
+    /**
+     * 排序字段,升序asc,降序desc，默认降序desc
+     */
+    Sort?: string;
+    /**
+     * 返回的top数，默认返回top5
+     */
+    Count?: number;
 }
 /**
  * DeleteIpAccessControl请求参数结构体
@@ -2900,6 +3015,10 @@ export interface DeleteIpAccessControlRequest {
      * 删除的ip数组
      */
     Items: Array<string>;
+    /**
+     * 若IsId字段为True，则Items列表元素需为Id，否则为IP
+     */
+    IsId?: boolean;
     /**
      * 是否删除对应的域名下的所有黑/白IP名单，true表示全部删除，false表示只删除指定ip名单
      */
@@ -3019,6 +3138,21 @@ export interface DescribeAttackOverviewResponse {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     ApiRiskEventCount?: number;
+    /**
+     * 黑名单总数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IPBlackCount?: number;
+    /**
+     * 防篡改总数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TamperCount?: number;
+    /**
+     * 信息泄露总数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    LeakCount?: number;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -3430,6 +3564,51 @@ export interface AddSpartaProtectionResponse {
  */
 export declare type DescribeUserDomainInfoRequest = null;
 /**
+ * 混合云节点资源信息
+ */
+export interface HybridPkg {
+    /**
+     * 资源id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ResourceIds?: string;
+    /**
+     * 状态
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Status?: number;
+    /**
+     * 地域
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Region?: number;
+    /**
+     * 开始时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    BeginTime?: string;
+    /**
+     * 结束时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    EndTime?: string;
+    /**
+     * 申请数量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InquireNum?: number;
+    /**
+     * 使用数量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    UsedNum?: number;
+    /**
+     * 续费标志
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RenewFlag?: number;
+}
+/**
  * 数据封装
  */
 export interface IpAccessControlData {
@@ -3658,7 +3837,7 @@ export interface DescribePeakPointsResponse {
     /**
      * 数据点
      */
-    Points: Array<PeakPointsItem>;
+    Points?: Array<PeakPointsItem>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -4267,33 +4446,38 @@ export interface AccessLogInfo {
  */
 export interface BatchIpAccessControlItem {
     /**
+     * mongo表自增Id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Id?: string;
+    /**
      * 黑名单42或白名单40
      */
-    ActionType: number;
+    ActionType?: number;
     /**
      * 黑白名单的IP
      */
-    Ip: string;
+    Ip?: string;
     /**
      * 备注
      */
-    Note: string;
+    Note?: string;
     /**
      * 添加路径
      */
-    Source: string;
+    Source?: string;
     /**
      * 修改时间
      */
-    TsVersion: number;
+    TsVersion?: number;
     /**
      * 超时时间
      */
-    ValidTs: number;
+    ValidTs?: number;
     /**
      * 域名列表
      */
-    Hosts: Array<string>;
+    Hosts?: Array<string>;
 }
 /**
  * 一个实例的详细信息
@@ -4434,6 +4618,16 @@ export interface InstanceInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     IsAPISecurityTrial?: number;
+    /**
+     * 重保包
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MajorEventsPkg?: MajorEventsPkg;
+    /**
+     * 混合云子节点包
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    HybridPkg?: HybridPkg;
 }
 /**
  * TLS 加密套件
@@ -4583,19 +4777,23 @@ export interface DescribeWafAutoDenyRulesResponse {
     /**
      * 攻击次数阈值
      */
-    AttackThreshold: number;
+    AttackThreshold?: number;
     /**
      * 攻击时间阈值
      */
-    TimeThreshold: number;
+    TimeThreshold?: number;
     /**
      * 自动封禁时间
      */
-    DenyTimeThreshold: number;
+    DenyTimeThreshold?: number;
     /**
      * 自动封禁状态
      */
-    DefenseStatus: number;
+    DefenseStatus?: number;
+    /**
+     * 重保护网域名状态
+     */
+    HWState?: number;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -4662,6 +4860,10 @@ export interface DeleteCCRuleRequest {
      * clb-waf或者sparta-waf
      */
     Edition?: string;
+    /**
+     * 规则Id
+     */
+    RuleId?: number;
 }
 /**
  * ModifyAreaBanStatus返回参数结构体
@@ -5038,6 +5240,14 @@ export interface UpsertCCRuleRequest {
      * 添加规则的来源事件id
      */
     EventId?: string;
+    /**
+     * 规则需要启用的SessionID
+     */
+    SessionApplied?: Array<number | bigint>;
+    /**
+     * 规则ID，新增时填0
+     */
+    RuleId?: number;
 }
 /**
  * 响应体的返回码
@@ -5410,6 +5620,10 @@ export interface DescribeRuleLimitRequest {
      * 域名
      */
     Domain: string;
+    /**
+     * 实例Id
+     */
+    InstanceId?: string;
 }
 /**
  * 需要开启/关闭API安全的 实例+域名 组合实体
@@ -5697,6 +5911,10 @@ export interface DescribeIpAccessControlRequest {
      * ip
      */
     Ip?: string;
+    /**
+     * 生效状态
+     */
+    ValidStatus?: number;
 }
 /**
  * DescribeDomainWhiteRules返回参数结构体
@@ -5968,7 +6186,7 @@ export interface DeleteSessionResponse {
      * 结果
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Data: string;
+    Data?: string;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -6010,6 +6228,14 @@ export interface UpsertSessionRequest {
      * 版本
      */
     Edition?: string;
+    /**
+     * Session名
+     */
+    SessionName?: string;
+    /**
+     * Session对应ID
+     */
+    SessionID?: number;
 }
 /**
  * 下载攻击日志记录数据项
@@ -6067,7 +6293,7 @@ export interface DescribeRuleLimitResponse {
     /**
      * waf模块的规格
      */
-    Res: WafRuleLimit;
+    Res?: WafRuleLimit;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -6257,6 +6483,10 @@ export interface DeleteCCRuleResponse {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Data?: string;
+    /**
+     * 操作的规则Id
+     */
+    RuleId?: number;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */

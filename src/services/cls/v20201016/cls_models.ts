@@ -3325,6 +3325,11 @@ export interface CreateExportRequest {
    * 日志导出数据格式。json，csv，默认为json
    */
   Format?: string
+  /**
+   * 语法规则,  默认值为0。
+0：Lucene语法，1：CQL语法。
+   */
+  SyntaxRule?: number
 }
 
 /**
@@ -6337,7 +6342,7 @@ export interface CreateExportResponse {
   /**
    * 日志导出ID。
    */
-  ExportId: string
+  ExportId?: string
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

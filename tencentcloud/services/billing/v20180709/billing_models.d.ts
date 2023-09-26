@@ -144,50 +144,31 @@ export interface ConditionBusiness {
     BusinessCodeName: string;
 }
 /**
- * 按地域汇总消费详情
+ * DescribeCostSummaryByProduct返回参数结构体
  */
-export interface RegionSummaryOverviewItem {
+export interface DescribeCostSummaryByProductResponse {
     /**
-     * 地域ID
+     * 数据是否准备好，0未准备好，1准备好
+     */
+    Ready?: number;
+    /**
+     * 消耗详情
+     */
+    Total?: ConsumptionSummaryTotal;
+    /**
+     * 消耗按产品汇总详情
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    RegionId: string;
+    Data?: Array<ConsumptionBusinessSummaryDataItem>;
     /**
-     * 地域名称：资源所属地域，例如华南地区（广州）
+     * 记录数量，NeedRecordNum为0是返回null
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    RegionName: string;
+    RecordNum?: number;
     /**
-     * 费用所占百分比，两位小数
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
-    RealTotalCostRatio: string;
-    /**
-     * 优惠后总价
-     */
-    RealTotalCost: string;
-    /**
-     * 现金账户支出：通过现金账户支付的金额
-     */
-    CashPayAmount: string;
-    /**
-     * 赠送账户支出：使用赠送金支付的金额
-     */
-    IncentivePayAmount: string;
-    /**
-     * 优惠券支出：使用各类优惠券（如代金券、现金券等）支付的金额
-     */
-    VoucherPayAmount: string;
-    /**
-     * 分成金账户支出：通过分成金账户支付的金额
-     */
-    TransferPayAmount: string;
-    /**
-     * 账单月份，格式2019-08
-     */
-    BillMonth: string;
-    /**
-     * 原价，单位为元。TotalCost字段自账单3.0（即2021-05）之后开始生效，账单3.0之前返回"-"。合同价的情况下，TotalCost字段与官网价格存在差异，也返回“-”。
-     */
-    TotalCost: string;
+    RequestId?: string;
 }
 /**
  * 商品详细信息
@@ -203,29 +184,32 @@ export interface ProductInfo {
     Value: string;
 }
 /**
- * DescribeDosageDetailByDate返回参数结构体
+ * DeleteAllocationTag返回参数结构体
  */
-export interface DescribeDosageDetailByDateResponse {
+export interface DeleteAllocationTagResponse {
     /**
-     * 计量单位
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * DescribeBillDetailForOrganization返回参数结构体
+ */
+export interface DescribeBillDetailForOrganizationResponse {
+    /**
+     * 详情列表
+     */
+    DetailSet?: Array<DistributionBillDetail>;
+    /**
+     * 总记录数，24小时缓存一次，可能比实际总记录数少
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Unit: string;
+    Total?: number;
     /**
-     * 用量数组
+     * 本次请求的上下文信息，可用于下一次请求的请求参数中，加快查询速度
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DetailSets: Array<DetailSet>;
-    /**
-     * 错误码
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    RetCode: number;
-    /**
-     * 错误信息
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    RetMsg: string;
+    Context?: string;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -512,6 +496,128 @@ export interface DescribeBillResourceSummaryResponse {
     RequestId?: string;
 }
 /**
+ * 经销账单明细数据对象
+ */
+export interface DistributionBillDetail {
+    /**
+     * 产品名称：用户所采购的各类云产品，例如：云服务器 CVM
+     */
+    BusinessCodeName?: string;
+    /**
+     * 子产品名称：用户采购的具体产品细分类型，例如：云服务器 CVM-标准型 S1
+     */
+    ProductCodeName?: string;
+    /**
+     * 计费模式：资源的计费模式，区分为包年包月和按量计费
+     */
+    PayModeName?: string;
+    /**
+     * 项目名称：资源归属的项目，用户在控制台给资源自主分配项目，未分配则是默认项目
+     */
+    ProjectName?: string;
+    /**
+     * 地域：资源所属地域，如华南地区（广州）
+     */
+    RegionName?: string;
+    /**
+     * 可用区：资源所属可用区，如广州三区
+     */
+    ZoneName?: string;
+    /**
+     * 资源 ID：账单中出账对象 ID，不同产品因资源形态不同，资源内容不完全相同，如云服务器 CVM 为对应的实例 ID
+     */
+    ResourceId?: string;
+    /**
+     * 资源别名：用户在控制台为资源设置的名称，如果未设置，则默认为空
+     */
+    ResourceName?: string;
+    /**
+     * 交易类型，如包年包月新购、包年包月续费、按量计费扣费等类型
+     */
+    ActionTypeName?: string;
+    /**
+     * 订单ID：包年包月计费模式下订购的订单号
+     */
+    OrderId?: string;
+    /**
+     * 交易ID：结算扣费单号
+     */
+    BillId?: string;
+    /**
+     * 扣费时间：结算扣费时间
+     */
+    PayTime?: string;
+    /**
+     * 开始使用时间：产品服务开始使用时间
+     */
+    FeeBeginTime?: string;
+    /**
+     * 结束使用时间：产品服务结束使用时间
+     */
+    FeeEndTime?: string;
+    /**
+     * 组件列表
+     */
+    ComponentSet?: Array<BillDetailComponent>;
+    /**
+     * 使用者UIN：实际使用资源的账号 ID
+     */
+    OwnerUin?: string;
+    /**
+     * 操作者UIN：操作者账号 ID（预付费资源下单或后付费操作开通资源账号的 ID 或者角色 ID ）
+     */
+    OperateUin?: string;
+    /**
+     * 标签信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Tags?: Array<BillTagInfo>;
+    /**
+     * 产品编码
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    BusinessCode?: string;
+    /**
+     * 子产品编码
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ProductCode?: string;
+    /**
+     * 交易类型编码
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ActionType?: string;
+    /**
+     * 地域ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RegionId?: string;
+    /**
+     * 项目ID
+     */
+    ProjectId?: number;
+    /**
+     * 价格属性：该组件除单价、时长外的其他影响折扣定价的属性信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PriceInfo?: Array<string>;
+    /**
+     * 关联交易单据ID：和本笔交易关联单据 ID，如，冲销订单，记录原订单、重结订单，退费单记录对应的原购买订单号
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AssociatedOrder?: BillDetailAssociatedOrder;
+    /**
+     * 计算说明：特殊交易类型计费结算的详细计算说明，如退费及变配
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Formula?: string;
+    /**
+     * 计费规则：各产品详细的计费规则官网说明链接
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    FormulaUrl?: string;
+}
+/**
  * DescribeDosageCosDetailByDate请求参数结构体
  */
 export interface DescribeDosageCosDetailByDateRequest {
@@ -592,6 +698,162 @@ export interface DescribeBillListRequest {
      * 是否返回0元交易金额的交易项，取值：0-不返回，1-返回。不传该参数则不返回
      */
     WithZeroAmount?: number;
+}
+/**
+ * 经销账单资源汇总数据对象
+ */
+export interface BillDistributionResourceSummary {
+    /**
+     * 产品名称：用户所采购的各类云产品，例如：云服务器 CVM
+     */
+    BusinessCodeName?: string;
+    /**
+     * 子产品名称：用户采购的具体产品细分类型，例如：云服务器 CVM-标准型 S1
+     */
+    ProductCodeName?: string;
+    /**
+     * 计费模式：资源的计费模式，区分为包年包月和按量计费
+     */
+    PayModeName?: string;
+    /**
+     * 项目名称：资源归属的项目，用户在控制台给资源自主分配项目，未分配则是默认项目
+     */
+    ProjectName?: string;
+    /**
+     * 地域：资源所属地域，如华南地区（广州）
+     */
+    RegionName?: string;
+    /**
+     * 可用区：资源所属可用区，如广州三区
+     */
+    ZoneName?: string;
+    /**
+     * 资源 ID：账单中出账对象 ID，不同产品因资源形态不同，资源内容不完全相同，如云服务器 CVM 为对应的实例 ID
+     */
+    ResourceId?: string;
+    /**
+     * 资源别名：用户在控制台为资源设置的名称，如果未设置，则默认为空
+     */
+    ResourceName?: string;
+    /**
+     * 交易类型：如包年包月新购、包年包月续费、按量计费扣费等类型
+     */
+    ActionTypeName?: string;
+    /**
+     * 订单ID：包年包月计费模式下订购的订单号
+     */
+    OrderId?: string;
+    /**
+     * 扣费时间：结算扣费时间
+     */
+    PayTime?: string;
+    /**
+     * 开始使用时间：产品服务开始使用时间
+     */
+    FeeBeginTime?: string;
+    /**
+     * 结束使用时间：产品服务结束使用时间
+     */
+    FeeEndTime?: string;
+    /**
+     * 配置描述：该资源下的计费项名称和用量合并展示，仅在资源账单体现
+     */
+    ConfigDesc?: string;
+    /**
+     * 扩展字段1：产品对应的扩展属性信息，仅在资源账单体现
+     */
+    ExtendField1?: string;
+    /**
+     * 扩展字段2：产品对应的扩展属性信息，仅在资源账单体现
+     */
+    ExtendField2?: string;
+    /**
+     * 原价：原价 = 组件刊例价 * 组件用量 * 使用时长（如果客户享受一口价/合同价则默认不展示，退费类场景也默认不展示）
+     */
+    TotalCost?: string;
+    /**
+     * 折扣率：本资源享受的折扣率（如果客户享受一口价/合同价则默认不展示，退费场景也默认不展示）
+     */
+    Discount?: string;
+    /**
+     * 优惠类型
+     */
+    ReduceType?: string;
+    /**
+     * 优惠后总价
+     */
+    RealTotalCost?: string;
+    /**
+     * 优惠券支出：使用各类优惠券（如代金券、现金券等）支付的金额
+     */
+    VoucherPayAmount?: string;
+    /**
+     * 现金账户支出：通过现金账户支付的金额
+     */
+    CashPayAmount?: string;
+    /**
+     * 赠送账户支出：使用赠送金支付的金额
+     */
+    IncentivePayAmount?: string;
+    /**
+     * 分成金账户支出：通过分成金账户支付的金额
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TransferPayAmount?: string;
+    /**
+     * 扩展字段3：产品对应的扩展属性信息，仅在资源账单体现
+     */
+    ExtendField3?: string;
+    /**
+     * 扩展字段4：产品对应的扩展属性信息，仅在资源账单体现
+     */
+    ExtendField4?: string;
+    /**
+     * 扩展字段5：产品对应的扩展属性信息，仅在资源账单体现
+     */
+    ExtendField5?: string;
+    /**
+     * 标签信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Tags?: Array<BillTagInfo>;
+    /**
+     * 使用者UIN：实际使用资源的账号 ID
+     */
+    OwnerUin?: string;
+    /**
+     * 操作者UIN：操作者账号 ID（预付费资源下单或后付费操作开通资源账号的 ID 或者角色 ID ）
+     */
+    OperateUin?: string;
+    /**
+     * 产品编码
+     */
+    BusinessCode?: string;
+    /**
+     * 子产品编码
+     */
+    ProductCode?: string;
+    /**
+     * 地域ID
+     */
+    RegionId?: number;
+    /**
+     * 实例类型：购买的产品服务对应的实例类型，包括资源包、RI、SP、竞价实例。正常的实例展示默认为不展示
+     */
+    InstanceType?: string;
+    /**
+     * 预留实例抵扣组件原价：本产品或服务使用预留实例抵扣的组件原价金额
+     */
+    OriginalCostWithRI?: string;
+    /**
+     * 节省计划抵扣金额（已废弃）
+     * @deprecated
+     */
+    SPDeduction?: string;
+    /**
+     * 节省计划抵扣组件原价：节省计划抵扣原价=节省计划包抵扣金额/节省计划抵扣率
+     */
+    OriginalCostWithSP?: string;
 }
 /**
  * 产品汇总信息
@@ -896,6 +1158,86 @@ export interface SummaryDetail {
     Business?: Array<BusinessSummaryInfo>;
 }
 /**
+ * DescribeBillResourceSummaryForOrganization请求参数结构体
+ */
+export interface DescribeBillResourceSummaryForOrganizationRequest {
+    /**
+     * 分页偏移量，Offset=0表示第一页，如果Limit=100，则Offset=100表示第二页，Offset=200表示第三页，依次类推
+     */
+    Offset: number;
+    /**
+     * 数量，最大值为1000
+     */
+    Limit: number;
+    /**
+     * 月份，格式为yyyy-mm。不能早于开通账单2.0的月份
+     */
+    Month: string;
+    /**
+     * 周期类型，byUsedTime按计费周期/byPayTime按扣费周期。需要与费用中心该月份账单的周期保持一致。您可前往[账单概览](https://console.cloud.tencent.com/expense/bill/overview)页面顶部查看确认您的账单统计周期类型。
+     */
+    PeriodType?: string;
+    /**
+     * 是否需要访问列表的总记录数，用于前端分页
+  1-表示需要， 0-表示不需要
+     */
+    NeedRecordNum?: number;
+    /**
+     * 查询交易类型（请使用交易类型名称入参），入参示例枚举如下：
+  包年包月新购
+  包年包月续费
+  包年包月配置变更
+  包年包月退款
+  按量计费扣费
+  线下项目扣费
+  线下产品扣费
+  调账扣费
+  调账补偿
+  按量计费小时结
+  按量计费日结
+  按量计费月结
+  竞价实例小时结
+  线下项目调账补偿
+  线下产品调账补偿
+  优惠扣费
+  优惠补偿
+  按量计费迁入资源
+  按量计费迁出资源
+  包年包月迁入资源
+  包年包月迁出资源
+  预付费用
+  小时费用
+  预留实例退款
+  按量计费冲正
+  包年包月转按量
+  保底扣款
+  节省计划小时费用
+     */
+    ActionType?: string;
+    /**
+     * 查询指定资源信息
+     */
+    ResourceId?: string;
+    /**
+     * 付费模式 prePay/postPay
+     */
+    PayMode?: string;
+    /**
+     * 产品名称代码
+  备注：如需获取当月使用过的BusinessCode，请调用API：<a href="https://cloud.tencent.com/document/product/555/35761">获取产品汇总费用分布</a>
+     */
+    BusinessCode?: string;
+    /**
+     * 分账标签键，用户自定义（支持2021-01以后账单查询）
+     */
+    TagKey?: string;
+    /**
+     * 分账标签值，该参数为空表示该标签键下未设置标签值的记录
+  （支持2021-01以后账单查询）
+     */
+    TagValue?: string;
+}
+/**
  * DescribeCostSummaryByRegion请求参数结构体
  */
 export interface DescribeCostSummaryByRegionRequest {
@@ -937,6 +1279,30 @@ export interface ConsumptionSummaryTrend {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Value: string;
+}
+/**
+ * DescribeBillDownloadUrl请求参数结构体
+ */
+export interface DescribeBillDownloadUrlRequest {
+    /**
+     * 账单类型，枚举值
+  billOverview=L0-PDF账单
+  billSummary=L1-汇总账单
+  billResource=L2-资源账单
+  billDetail=L3-明细账单
+  billPack=账单包
+     */
+    FileType: string;
+    /**
+     * 账单月份
+  支持的最早开始月份为2021-01
+  L0-PDF&账单包不支持当月下载，当月账单请在次月1号19:00出账后下载
+     */
+    Month: string;
+    /**
+     * 下载的账号 ID列表，默认查询本账号账单，如集团管理账号需下载成员账号自付的账单，该字段需入参成员账号UIN
+     */
+    ChildUin?: Array<string>;
 }
 /**
  * DescribeBillSummaryByPayMode请求参数结构体
@@ -1321,6 +1687,24 @@ export interface DescribeBillSummaryByProjectResponse {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     SummaryOverview?: Array<ProjectSummaryOverviewItem>;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * DescribeBillDownloadUrl返回参数结构体
+ */
+export interface DescribeBillDownloadUrlResponse {
+    /**
+     * 账单文件是否准备就绪，0文件生成中，1文件已生成
+     */
+    Ready?: number;
+    /**
+     * 账单文件下载链接，有效时长为一小时
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DownloadUrl?: string;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1735,31 +2119,50 @@ export interface Conditions {
     Status?: Array<number | bigint>;
 }
 /**
- * DescribeCostSummaryByProduct返回参数结构体
+ * 按地域汇总消费详情
  */
-export interface DescribeCostSummaryByProductResponse {
+export interface RegionSummaryOverviewItem {
     /**
-     * 数据是否准备好，0未准备好，1准备好
-     */
-    Ready?: number;
-    /**
-     * 消耗详情
-     */
-    Total?: ConsumptionSummaryTotal;
-    /**
-     * 消耗按产品汇总详情
+     * 地域ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Data?: Array<ConsumptionBusinessSummaryDataItem>;
+    RegionId: string;
     /**
-     * 记录数量，NeedRecordNum为0是返回null
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 地域名称：资源所属地域，例如华南地区（广州）
      */
-    RecordNum?: number;
+    RegionName: string;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     * 费用所占百分比，两位小数
      */
-    RequestId?: string;
+    RealTotalCostRatio: string;
+    /**
+     * 优惠后总价
+     */
+    RealTotalCost: string;
+    /**
+     * 现金账户支出：通过现金账户支付的金额
+     */
+    CashPayAmount: string;
+    /**
+     * 赠送账户支出：使用赠送金支付的金额
+     */
+    IncentivePayAmount: string;
+    /**
+     * 优惠券支出：使用各类优惠券（如代金券、现金券等）支付的金额
+     */
+    VoucherPayAmount: string;
+    /**
+     * 分成金账户支出：通过分成金账户支付的金额
+     */
+    TransferPayAmount: string;
+    /**
+     * 账单月份，格式2019-08
+     */
+    BillMonth: string;
+    /**
+     * 原价，单位为元。TotalCost字段自账单3.0（即2021-05）之后开始生效，账单3.0之前返回"-"。合同价的情况下，TotalCost字段与官网价格存在差异，也返回“-”。
+     */
+    TotalCost: string;
 }
 /**
  * 消耗按项目汇总详情
@@ -1807,13 +2210,50 @@ export interface ConsumptionProjectSummaryDataItem {
     TransferPayAmount?: string;
 }
 /**
- * DeleteAllocationTag返回参数结构体
+ * DescribeDosageDetailByDate返回参数结构体
  */
-export interface DeleteAllocationTagResponse {
+export interface DescribeDosageDetailByDateResponse {
+    /**
+     * 计量单位
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Unit: string;
+    /**
+     * 用量数组
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DetailSets: Array<DetailSet>;
+    /**
+     * 错误码
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RetCode: number;
+    /**
+     * 错误信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RetMsg: string;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * DescribeBillSummaryForOrganization请求参数结构体
+ */
+export interface DescribeBillSummaryForOrganizationRequest {
+    /**
+     * 账单月份，格式为2023-04
+     */
+    Month: string;
+    /**
+     * 账单维度类型，枚举值如下：business、project、region、payMode、tag
+     */
+    GroupType: string;
+    /**
+     * 标签键，GroupType=tag获取标签维度账单时传
+     */
+    TagKey?: Array<string>;
 }
 /**
  * 按交易类型汇总消费详情
@@ -2201,6 +2641,24 @@ export interface DescribeTagListRequest {
      * 排序方式，枚举值：asc排升序，desc排降序
      */
     OrderType?: string;
+}
+/**
+ * DescribeBillResourceSummaryForOrganization返回参数结构体
+ */
+export interface DescribeBillResourceSummaryForOrganizationResponse {
+    /**
+     * 资源汇总列表
+     */
+    ResourceSummarySet?: Array<BillDistributionResourceSummary>;
+    /**
+     * 资源汇总列表总数，入参NeedRecordNum为0时不返回
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Total?: number;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * DescribeCostSummaryByResource请求参数结构体
@@ -2939,6 +3397,93 @@ export interface UsageRecords {
     UsageDetails: Array<UsageDetails>;
 }
 /**
+ * DescribeBillDetailForOrganization请求参数结构体
+ */
+export interface DescribeBillDetailForOrganizationRequest {
+    /**
+     * 分页偏移量，Offset=0表示第一页，如果Limit=100，则Offset=100表示第二页，Offset=200表示第三页，依次类推
+     */
+    Offset: number;
+    /**
+     * 数量，最大值为100
+     */
+    Limit: number;
+    /**
+     * 周期类型，byUsedTime按计费周期/byPayTime按扣费周期。需要与费用中心该月份账单的周期保持一致。您可前往[账单概览](https://console.cloud.tencent.com/expense/bill/overview)页面顶部查看确认您的账单统计周期类型。
+     */
+    PeriodType?: string;
+    /**
+     * 月份，格式为yyyy-mm，Month和BeginTime&EndTime必传一个，如果有传BeginTime&EndTime则Month字段无效。不能早于开通账单2.0的月份，最多可拉取18个月内的数据。
+     */
+    Month?: string;
+    /**
+     * 周期开始时间，格式为yyyy-mm-dd hh:ii:ss，Month和BeginTime&EndTime必传一个，如果有该字段则Month字段无效。BeginTime和EndTime必须一起传，且为相同月份，不支持跨月查询，查询结果是整月数据。不能早于开通账单2.0的月份，最多可拉取18个月内的数据。
+     */
+    BeginTime?: string;
+    /**
+     * 周期结束时间，格式为yyyy-mm-dd hh:ii:ss，Month和BeginTime&EndTime必传一个，如果有该字段则Month字段无效。BeginTime和EndTime必须一起传，且为相同月份，不支持跨月查询，查询结果是整月数据。不能早于开通账单2.0的月份，最多可拉取18个月内的数据。
+     */
+    EndTime?: string;
+    /**
+     * 是否需要访问列表的总记录数，用于前端分页
+  1-表示需要， 0-表示不需要
+     */
+    NeedRecordNum?: number;
+    /**
+     * 付费模式 prePay(表示包年包月)/postPay(表示按时按量)
+     */
+    PayMode?: string;
+    /**
+     * 查询指定资源信息
+     */
+    ResourceId?: string;
+    /**
+     * 查询交易类型（请使用交易类型名称入参），入参示例枚举如下：
+  包年包月新购
+  包年包月续费
+  包年包月配置变更
+  包年包月退款
+  按量计费扣费
+  线下项目扣费
+  线下产品扣费
+  调账扣费
+  调账补偿
+  按量计费小时结
+  按量计费日结
+  按量计费月结
+  竞价实例小时结
+  线下项目调账补偿
+  线下产品调账补偿
+  优惠扣费
+  优惠补偿
+  按量计费迁入资源
+  按量计费迁出资源
+  包年包月迁入资源
+  包年包月迁出资源
+  预付费用
+  小时费用
+  预留实例退款
+  按量计费冲正
+  包年包月转按量
+  保底扣款
+  节省计划小时费用
+     */
+    ActionType?: string;
+    /**
+     * 项目ID:资源所属项目ID
+     */
+    ProjectId?: number;
+    /**
+     * 产品名称代码
+  备注：如需获取当月使用过的BusinessCode，请调用API：<a href="https://cloud.tencent.com/document/product/555/35761">获取产品汇总费用分布</a>
+     */
+    BusinessCode?: string;
+    /**
+     * 上一次请求返回的上下文信息，翻页查询Month>=2023-05的月份的数据可加快查询速度，数据量10万级别以上的用户建议使用，查询速度可提升2~10倍
+     */
+    Context?: string;
+}
+/**
  * DescribeDealsByCond请求参数结构体
  */
 export interface DescribeDealsByCondRequest {
@@ -2995,6 +3540,23 @@ export interface DescribeDosageCosDetailByDateResponse {
      * 用量数组
      */
     DetailSets?: Array<CosDetailSets>;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * DescribeBillSummaryForOrganization返回参数结构体
+ */
+export interface DescribeBillSummaryForOrganizationResponse {
+    /**
+     * 数据是否准备好，0准备中，1已就绪。（Ready=0，为当前UIN首次进行初始化出账，预计需要5~10分钟出账，请于10分钟后重试即可）
+     */
+    Ready?: number;
+    /**
+     * 账单多维度汇总消费详情
+     */
+    SummaryDetail?: Array<SummaryDetail>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */

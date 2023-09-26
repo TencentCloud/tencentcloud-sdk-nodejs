@@ -643,31 +643,31 @@ export interface DescribeTemplateListStatus {
     /**
      * 模板ID。
      */
-    TemplateId: number;
+    TemplateId?: number;
     /**
      * 是否国际/港澳台短信，其中0表示国内短信，1表示国际/港澳台短信。
      */
-    International: number;
+    International?: number;
     /**
-     * 申请模板状态，其中0表示审核通过且已生效，1表示审核中，2表示审核通过待生效，-1表示审核未通过或审核失败。
+     * 申请模板状态，其中0表示审核通过且已生效，1表示审核中，2表示审核通过待生效，-1表示审核未通过或审核失败。注：只有状态值为0时该模板才能使用。
      */
-    StatusCode: number;
+    StatusCode?: number;
     /**
      * 审核回复，审核人员审核后给出的回复，通常是审核未通过的原因。
      */
-    ReviewReply: string;
+    ReviewReply?: string;
     /**
      * 模板名称。
      */
-    TemplateName: string;
+    TemplateName?: string;
     /**
      * 提交审核时间，UNIX 时间戳（单位：秒）。
      */
-    CreateTime: number;
+    CreateTime?: number;
     /**
      * 模板内容。
      */
-    TemplateContent: string;
+    TemplateContent?: string;
 }
 /**
  * AddSmsTemplate返回参数结构体

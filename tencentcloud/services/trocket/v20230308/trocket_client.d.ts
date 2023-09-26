@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { ModifyInstanceResponse, CreateTopicResponse, CreateConsumerGroupRequest, ModifyInstanceRequest, DescribeTopicListRequest, DescribeInstanceListRequest, CreateInstanceResponse, DescribeTopicListResponse, DeleteInstanceResponse, ModifyConsumerGroupRequest, DescribeConsumerGroupRequest, DescribeConsumerGroupResponse, CreateInstanceRequest, DeleteTopicRequest, DeleteConsumerGroupResponse, ModifyTopicResponse, DescribeTopicResponse, DescribeTopicStatsOpRequest, CreateTopicRequest, DescribeTopicStatsOpResponse, ModifyTopicRequest, DescribeInstanceResponse, DeleteConsumerGroupRequest, DeleteTopicResponse, CreateConsumerGroupResponse, ModifyConsumerGroupResponse, DeleteInstanceRequest, DescribeInstanceRequest, DescribeInstanceListResponse, DescribeTopicRequest } from "./trocket_models";
+import { ModifyInstanceResponse, CreateTopicResponse, CreateConsumerGroupRequest, CreateRoleResponse, DescribeRoleListResponse, ModifyInstanceRequest, DescribeTopicListRequest, DescribeInstanceListRequest, CreateInstanceResponse, DescribeTopicListResponse, DeleteInstanceResponse, ModifyConsumerGroupRequest, DescribeConsumerGroupRequest, ModifyRoleResponse, DescribeConsumerGroupResponse, CreateInstanceRequest, CreateRoleRequest, DeleteTopicRequest, DeleteConsumerGroupResponse, ModifyTopicResponse, DescribeTopicResponse, DeleteRoleResponse, ModifyRoleRequest, DescribeTopicStatsOpRequest, CreateTopicRequest, DeleteRoleRequest, DescribeRoleListRequest, ModifyTopicRequest, DescribeInstanceResponse, DescribeTopicStatsOpResponse, DeleteConsumerGroupRequest, DeleteTopicResponse, CreateConsumerGroupResponse, ModifyConsumerGroupResponse, DeleteInstanceRequest, DescribeInstanceRequest, DescribeInstanceListResponse, DescribeTopicRequest } from "./trocket_models";
 /**
  * trocket client
  * @class
@@ -20,9 +20,20 @@ export declare class Client extends AbstractClient {
      */
     CreateTopic(req: CreateTopicRequest, cb?: (error: string, rep: CreateTopicResponse) => void): Promise<CreateTopicResponse>;
     /**
+     * 修改主题属性
+     */
+    ModifyTopic(req: ModifyTopicRequest, cb?: (error: string, rep: ModifyTopicResponse) => void): Promise<ModifyTopicResponse>;
+    /**
      * 删除消费组
      */
     DeleteConsumerGroup(req: DeleteConsumerGroupRequest, cb?: (error: string, rep: DeleteConsumerGroupResponse) => void): Promise<DeleteConsumerGroupResponse>;
+    /**
+     * 获取主题列表，Filter参数使用说明如下：
+
+1. TopicName，主题名称模糊搜索
+2. TopicType，主题类型查询，支持多选，可选值：Normal,Order,Transaction,DelayScheduled
+     */
+    DescribeTopicList(req: DescribeTopicListRequest, cb?: (error: string, rep: DescribeTopicListResponse) => void): Promise<DescribeTopicListResponse>;
     /**
      * 修改消费组属性
      */
@@ -42,15 +53,17 @@ export declare class Client extends AbstractClient {
      */
     DescribeInstanceList(req: DescribeInstanceListRequest, cb?: (error: string, rep: DescribeInstanceListResponse) => void): Promise<DescribeInstanceListResponse>;
     /**
-     * 查询主题详情，Offset和Limit参数是指订阅该主题的消费组查询分页参数，Filter参数使用说明如下：
-
-ConsumerGroup，消费组名称过滤
+     * 添加角色
      */
-    DescribeTopic(req: DescribeTopicRequest, cb?: (error: string, rep: DescribeTopicResponse) => void): Promise<DescribeTopicResponse>;
+    CreateRole(req: CreateRoleRequest, cb?: (error: string, rep: CreateRoleResponse) => void): Promise<CreateRoleResponse>;
     /**
-     * 修改主题属性
+     * 删除角色
      */
-    ModifyTopic(req: ModifyTopicRequest, cb?: (error: string, rep: ModifyTopicResponse) => void): Promise<ModifyTopicResponse>;
+    DeleteRole(req: DeleteRoleRequest, cb?: (error: string, rep: DeleteRoleResponse) => void): Promise<DeleteRoleResponse>;
+    /**
+     * 修改角色
+     */
+    ModifyRole(req: ModifyRoleRequest, cb?: (error: string, rep: ModifyRoleResponse) => void): Promise<ModifyRoleResponse>;
     /**
      * 查询实例信息
      */
@@ -60,12 +73,11 @@ ConsumerGroup，消费组名称过滤
      */
     DeleteInstance(req: DeleteInstanceRequest, cb?: (error: string, rep: DeleteInstanceResponse) => void): Promise<DeleteInstanceResponse>;
     /**
-     * 获取主题列表，Filter参数使用说明如下：
+     * 查询主题详情，Offset和Limit参数是指订阅该主题的消费组查询分页参数，Filter参数使用说明如下：
 
-1. TopicName，主题名称模糊搜索
-2. TopicType，主题类型查询，支持多选，可选值：Normal,Order,Transaction,DelayScheduled
+ConsumerGroup，消费组名称过滤
      */
-    DescribeTopicList(req: DescribeTopicListRequest, cb?: (error: string, rep: DescribeTopicListResponse) => void): Promise<DescribeTopicListResponse>;
+    DescribeTopic(req: DescribeTopicRequest, cb?: (error: string, rep: DescribeTopicResponse) => void): Promise<DescribeTopicResponse>;
     /**
      * 删除主题
      */
@@ -74,6 +86,12 @@ ConsumerGroup，消费组名称过滤
      * 创建消费组
      */
     CreateConsumerGroup(req: CreateConsumerGroupRequest, cb?: (error: string, rep: CreateConsumerGroupResponse) => void): Promise<CreateConsumerGroupResponse>;
+    /**
+     * 查询角色列表，Filter参数使用说明如下：
+
+1. RoleName，角色名称模糊搜索
+     */
+    DescribeRoleList(req: DescribeRoleListRequest, cb?: (error: string, rep: DescribeRoleListResponse) => void): Promise<DescribeRoleListResponse>;
     /**
      * 修改实例属性
      */

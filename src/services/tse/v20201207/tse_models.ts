@@ -1705,26 +1705,32 @@ export interface DescribeCloudNativeAPIGatewayConfigRequest {
 export interface KongTarget {
   /**
    * Host
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Host: string
   /**
    * 端口
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Port: number
   /**
    * 权重
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Weight: number
   /**
    * 健康状态
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Health?: string
   /**
    * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
    */
   CreatedTime?: string
   /**
    * Target的来源
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Source?: string
 }
@@ -3386,80 +3392,104 @@ export interface AutoScalerRules {
 export interface KongUpstreamInfo {
   /**
    * IP或域名
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Host?: string
   /**
    * 端口
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Port?: number
   /**
    * 服务来源ID
+注意：此字段可能返回 null，表示取不到有效值。
    */
   SourceID?: string
   /**
    * 命名空间
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Namespace?: string
   /**
    * 服务（注册中心或Kubernetes中的服务）名字
+注意：此字段可能返回 null，表示取不到有效值。
    */
   ServiceName?: string
   /**
    * 服务后端类型是IPList时提供
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Targets?: Array<KongTarget>
   /**
    * 服务来源类型
+注意：此字段可能返回 null，表示取不到有效值。
    */
   SourceType?: string
   /**
    * SCF函数类型
+注意：此字段可能返回 null，表示取不到有效值。
    */
   ScfType?: string
   /**
    * SCF函数命名空间
+注意：此字段可能返回 null，表示取不到有效值。
    */
   ScfNamespace?: string
   /**
    * SCF函数名
+注意：此字段可能返回 null，表示取不到有效值。
    */
   ScfLambdaName?: string
   /**
    * SCF函数版本
+注意：此字段可能返回 null，表示取不到有效值。
    */
   ScfLambdaQualifier?: string
   /**
    * 冷启动时间，单位秒
+注意：此字段可能返回 null，表示取不到有效值。
    */
   SlowStart?: number
   /**
    * 负载均衡算法，默认为 round-robin，还支持 least-connections，consisten_hashing
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Algorithm?: string
   /**
    * CVM弹性伸缩组ID
+注意：此字段可能返回 null，表示取不到有效值。
    */
   AutoScalingGroupID?: string
   /**
    * CVM弹性伸缩组端口
+注意：此字段可能返回 null，表示取不到有效值。
    */
   AutoScalingCvmPort?: number
   /**
    * CVM弹性伸缩组使用的CVM TAT命令状态
+注意：此字段可能返回 null，表示取不到有效值。
    */
   AutoScalingTatCmdStatus?: string
   /**
    * CVM弹性伸缩组生命周期挂钩状态
+注意：此字段可能返回 null，表示取不到有效值。
    */
   AutoScalingHookStatus?: string
   /**
    * 服务来源的名字
+注意：此字段可能返回 null，表示取不到有效值。
    */
   SourceName?: string
   /**
    * 精确的服务来源类型，新建服务来源时候传入的类型
+注意：此字段可能返回 null，表示取不到有效值。
    */
   RealSourceType?: string
+  /**
+   * upstream健康状态HEALTHY（健康）, UNHEALTHY（异常）, HEALTHCHECKS_OFF（未开启）和NONE（不支持健康检查）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HealthStatus?: string
 }
 
 /**

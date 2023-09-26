@@ -88,6 +88,16 @@ it("billing.v20180709.DescribeVoucherInfo", async function () {
     }
 })
 
+it("billing.v20180709.DescribeBillResourceSummaryForOrganization", async function () {
+    try {
+       const data = await client.DescribeBillResourceSummaryForOrganization({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("billing.v20180709.DescribeBillDetail", async function () {
     try {
        const data = await client.DescribeBillDetail({})
@@ -141,6 +151,16 @@ it("billing.v20180709.DescribeCostSummaryByProduct", async function () {
 it("billing.v20180709.DescribeDosageCosDetailByDate", async function () {
     try {
        const data = await client.DescribeDosageCosDetailByDate({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("billing.v20180709.DescribeBillDetailForOrganization", async function () {
+    try {
+       const data = await client.DescribeBillDetailForOrganization({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -208,9 +228,29 @@ it("billing.v20180709.DescribeBillSummaryByTag", async function () {
     }
 })
 
+it("billing.v20180709.DescribeBillSummaryForOrganization", async function () {
+    try {
+       const data = await client.DescribeBillSummaryForOrganization({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("billing.v20180709.DescribeTagList", async function () {
     try {
        const data = await client.DescribeTagList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("billing.v20180709.DescribeBillDownloadUrl", async function () {
+    try {
+       const data = await client.DescribeBillDownloadUrl({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

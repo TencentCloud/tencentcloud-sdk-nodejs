@@ -721,82 +721,87 @@ export interface BlockIgnoreRule {
    * 域名
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Domain: string
+  Domain?: string
+  /**
+   * IP
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IP?: string
   /**
    * 规则ip
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Ioc: string
+  Ioc?: string
   /**
    * 危险等级
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Level: string
+  Level?: string
   /**
    * 来源事件名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  EventName: string
+  EventName?: string
   /**
    * 方向：1入站，0出站
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Direction: number
+  Direction?: number
   /**
    * 协议
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Protocol: string
+  Protocol?: string
   /**
    * 地理位置
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Address: string
+  Address?: string
   /**
    * 规则类型：1封禁，2放通
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Action: number
+  Action?: number
   /**
    * 规则生效开始时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  StartTime: string
+  StartTime?: string
   /**
    * 规则生效结束时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  EndTime: string
+  EndTime?: string
   /**
    * 忽略原因
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  IgnoreReason: string
+  IgnoreReason?: string
   /**
    * 安全事件来源
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Source: string
+  Source?: string
   /**
    * 规则id
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  UniqueId: string
+  UniqueId?: string
   /**
    * 规则命中次数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  MatchTimes: number
+  MatchTimes?: number
   /**
    * 国家
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Country: string
+  Country?: string
   /**
    * 备注
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Comment: string
+  Comment?: string
 }
 
 /**
@@ -1166,6 +1171,10 @@ export interface CreateBlockIgnoreRuleListRequest {
    * 规则类型，1封禁，2放通，不支持域名封禁
    */
   RuleType: number
+  /**
+   * 是否覆盖重复数据，1覆盖，非1不覆盖，跳过重复数据
+   */
+  CoverDuplicate?: number
 }
 
 /**
@@ -2299,6 +2308,11 @@ export interface NatInstanceInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   UpdateEnable?: number
+  /**
+   * 是的需要升级引擎 支持 nat拨测 1需要 0不需要
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NeedProbeEngineUpdate?: number
 }
 
 /**
@@ -2726,6 +2740,11 @@ export interface EdgeIpInfo {
 2 : 正在模式切换
    */
   SwitchMode?: number
+  /**
+   * 开关权重
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SwitchWeight?: number
 }
 
 /**
@@ -4126,12 +4145,24 @@ export interface ModifyEdgeIpSwitchRequest {
   /**
    * 0 关闭开关
 1 打开开关
+2 不操作开关，此次切换模式
    */
-  Enable: number
+  Enable?: number
   /**
    * 操作开关详情
    */
   EdgeIpSwitchLst?: Array<EdgeIpSwitch>
+  /**
+   * 0 不自动选择子网
+1 自动选择子网创建私有连接
+   */
+  AutoChooseSubnet?: number
+  /**
+   * 0 切换为旁路
+1 切换为串行
+2 不切换模式，此次操作开关
+   */
+  SwitchMode?: number
 }
 
 /**

@@ -24,6 +24,7 @@ import {
   DeleteRulesRequest,
   ExceptUserRuleCondition,
   CheckCnameStatusResponse,
+  ModifyZoneResponse,
   DescribeOriginGroupResponse,
   DescribeTopL7CacheDataRequest,
   DeleteApplicationProxyResponse,
@@ -43,6 +44,7 @@ import {
   DescribeDDoSAttackDataResponse,
   DescribeZoneSettingRequest,
   ModifyZoneStatusRequest,
+  FileVerification,
   DescribeIdentificationsResponse,
   ModifySecurityPolicyRequest,
   Waf,
@@ -61,7 +63,7 @@ import {
   ModifySecurityPolicyResponse,
   DescribeHostsSettingResponse,
   ModifyZoneStatusResponse,
-  ModifyZoneResponse,
+  DnsVerification,
   AlgDetectSession,
   ModifyZoneRequest,
   ModifyApplicationProxyStatusResponse,
@@ -181,6 +183,7 @@ import {
   TemplateConfig,
   TopEntry,
   VanityNameServersIps,
+  NsVerification,
   SlowPostConfig,
   AccelerateMainland,
   ExceptUserRule,
@@ -266,6 +269,7 @@ import {
   SubRuleItem,
   CreateSecurityIPGroupResponse,
   CreateSharedCNAMEResponse,
+  OwnershipVerification,
   DescribePurgeTasksResponse,
   DescribeAvailablePlansResponse,
   DescribeDDoSAttackEventRequest,
@@ -408,8 +412,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 用于修改域名证书
-   */
+     * 完成域名创建之后，您可以为域名配置自有证书，也可以使用 EdgeOne 为您提供的 [免费证书](https://cloud.tencent.com/document/product/1552/90437)。
+如果您需要配置自有证书，请先将证书上传至 [SSL证书控制台](https://console.cloud.tencent.com/certoverview)，然后在本接口中传入对应的证书 ID。详情参考 [部署自有证书至 EdgeOne 域名
+](https://cloud.tencent.com/document/product/1552/88874)。
+     */
   async ModifyHostsCertificate(
     req: ModifyHostsCertificateRequest,
     cb?: (error: string, rep: ModifyHostsCertificateResponse) => void
@@ -468,8 +474,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 用于用户接入新的站点。
-   */
+     * EdgeOne 为您提供 CNAME、NS 和无域名接入三种接入方式，您需要先通过此接口完成站点创建。CNAME 和 NS 接入站点的场景可参考 [从零开始快速接入 EdgeOne](https://cloud.tencent.com/document/product/1552/87601); 无域名接入的场景可参考 [快速启用四层代理服务](https://cloud.tencent.com/document/product/1552/96051)。
+
+> 建议您在账号下已存在套餐时调用本接口创建站点，请在入参时传入 PlanId ，直接将站点绑定至该套餐；不传入 PlanId 时，创建出来的站点会处于未激活状态，无法正常服务，您需要通过 [BindZoneToPlan](https://cloud.tencent.com/document/product/1552/83042) 完成套餐绑定之后，站点才可正常提供服务 。若您当前没有可绑定的套餐时，请前往控制台购买套餐完成站点创建。
+     */
   async CreateZone(
     req: CreateZoneRequest,
     cb?: (error: string, rep: CreateZoneResponse) => void
@@ -558,7 +566,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询加速域名列表，支持搜索、分页、排序、过滤。
+   * 您可以通过本接口查看站点下的域名信息，包括加速域名、源站以及域名状态等信息。您可以查看站点下全部域名的信息，也可以指定过滤条件查询对应的域名信息。
    */
   async DescribeAccelerationDomains(
     req: DescribeAccelerationDomainsRequest,
@@ -608,7 +616,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 用户查询用户站点信息列表，支持分页。
+   * 该接口用于查询您有权限的站点信息。可根据不同查询条件筛选站点。
    */
   async DescribeZones(
     req: DescribeZonesRequest,
@@ -838,8 +846,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建加速域名
-   */
+     * 在创建完站点之后，您可以通过本接口创建加速域名。 
+
+CNAME 模式接入时，若您未完成站点归属权校验，本接口将为您返回域名归属权验证信息，您可以单独对域名进行归属权验证，详情参考 [站点/域名归属权验证](https://cloud.tencent.com/document/product/1552/70789)。
+     */
   async CreateAccelerationDomain(
     req: CreateAccelerationDomainRequest,
     cb?: (error: string, rep: CreateAccelerationDomainResponse) => void

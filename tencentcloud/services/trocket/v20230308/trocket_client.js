@@ -46,10 +46,25 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateTopic", req, cb);
     }
     /**
+     * 修改主题属性
+     */
+    async ModifyTopic(req, cb) {
+        return this.request("ModifyTopic", req, cb);
+    }
+    /**
      * 删除消费组
      */
     async DeleteConsumerGroup(req, cb) {
         return this.request("DeleteConsumerGroup", req, cb);
+    }
+    /**
+     * 获取主题列表，Filter参数使用说明如下：
+
+1. TopicName，主题名称模糊搜索
+2. TopicType，主题类型查询，支持多选，可选值：Normal,Order,Transaction,DelayScheduled
+     */
+    async DescribeTopicList(req, cb) {
+        return this.request("DescribeTopicList", req, cb);
     }
     /**
      * 修改消费组属性
@@ -76,18 +91,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeInstanceList", req, cb);
     }
     /**
-     * 查询主题详情，Offset和Limit参数是指订阅该主题的消费组查询分页参数，Filter参数使用说明如下：
-
-ConsumerGroup，消费组名称过滤
+     * 添加角色
      */
-    async DescribeTopic(req, cb) {
-        return this.request("DescribeTopic", req, cb);
+    async CreateRole(req, cb) {
+        return this.request("CreateRole", req, cb);
     }
     /**
-     * 修改主题属性
+     * 删除角色
      */
-    async ModifyTopic(req, cb) {
-        return this.request("ModifyTopic", req, cb);
+    async DeleteRole(req, cb) {
+        return this.request("DeleteRole", req, cb);
+    }
+    /**
+     * 修改角色
+     */
+    async ModifyRole(req, cb) {
+        return this.request("ModifyRole", req, cb);
     }
     /**
      * 查询实例信息
@@ -102,13 +121,12 @@ ConsumerGroup，消费组名称过滤
         return this.request("DeleteInstance", req, cb);
     }
     /**
-     * 获取主题列表，Filter参数使用说明如下：
+     * 查询主题详情，Offset和Limit参数是指订阅该主题的消费组查询分页参数，Filter参数使用说明如下：
 
-1. TopicName，主题名称模糊搜索
-2. TopicType，主题类型查询，支持多选，可选值：Normal,Order,Transaction,DelayScheduled
+ConsumerGroup，消费组名称过滤
      */
-    async DescribeTopicList(req, cb) {
-        return this.request("DescribeTopicList", req, cb);
+    async DescribeTopic(req, cb) {
+        return this.request("DescribeTopic", req, cb);
     }
     /**
      * 删除主题
@@ -121,6 +139,14 @@ ConsumerGroup，消费组名称过滤
      */
     async CreateConsumerGroup(req, cb) {
         return this.request("CreateConsumerGroup", req, cb);
+    }
+    /**
+     * 查询角色列表，Filter参数使用说明如下：
+
+1. RoleName，角色名称模糊搜索
+     */
+    async DescribeRoleList(req, cb) {
+        return this.request("DescribeRoleList", req, cb);
     }
     /**
      * 修改实例属性

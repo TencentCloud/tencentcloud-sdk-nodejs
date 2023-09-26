@@ -48,9 +48,29 @@ it("trocket.v20230308.CreateTopic", async function () {
     }
 })
 
+it("trocket.v20230308.ModifyTopic", async function () {
+    try {
+       const data = await client.ModifyTopic({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("trocket.v20230308.DeleteConsumerGroup", async function () {
     try {
        const data = await client.DeleteConsumerGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("trocket.v20230308.DescribeTopicList", async function () {
+    try {
+       const data = await client.DescribeTopicList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -88,9 +108,9 @@ it("trocket.v20230308.DescribeInstanceList", async function () {
     }
 })
 
-it("trocket.v20230308.DescribeTopic", async function () {
+it("trocket.v20230308.CreateRole", async function () {
     try {
-       const data = await client.DescribeTopic({})
+       const data = await client.CreateRole({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -98,9 +118,19 @@ it("trocket.v20230308.DescribeTopic", async function () {
     }
 })
 
-it("trocket.v20230308.ModifyTopic", async function () {
+it("trocket.v20230308.DeleteRole", async function () {
     try {
-       const data = await client.ModifyTopic({})
+       const data = await client.DeleteRole({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("trocket.v20230308.ModifyRole", async function () {
+    try {
+       const data = await client.ModifyRole({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -128,9 +158,9 @@ it("trocket.v20230308.DeleteInstance", async function () {
     }
 })
 
-it("trocket.v20230308.DescribeTopicList", async function () {
+it("trocket.v20230308.DescribeTopic", async function () {
     try {
-       const data = await client.DescribeTopicList({})
+       const data = await client.DescribeTopic({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -151,6 +181,16 @@ it("trocket.v20230308.DeleteTopic", async function () {
 it("trocket.v20230308.CreateConsumerGroup", async function () {
     try {
        const data = await client.CreateConsumerGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("trocket.v20230308.DescribeRoleList", async function () {
+    try {
+       const data = await client.DescribeRoleList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

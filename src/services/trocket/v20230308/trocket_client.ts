@@ -21,32 +21,41 @@ import {
   ModifyInstanceResponse,
   CreateTopicResponse,
   CreateConsumerGroupRequest,
+  CreateRoleResponse,
+  DescribeRoleListResponse,
   ModifyInstanceRequest,
   DescribeTopicListRequest,
   DescribeInstanceListRequest,
   CreateInstanceResponse,
   DescribeTopicListResponse,
   DeleteInstanceResponse,
+  TopicItem,
   ModifyConsumerGroupRequest,
   DescribeConsumerGroupRequest,
   IpRule,
-  TopicItem,
+  ModifyRoleResponse,
   SubscriptionData,
   DescribeConsumerGroupResponse,
   CreateInstanceRequest,
+  CreateRoleRequest,
   VpcInfo,
   DeleteTopicRequest,
   DeleteConsumerGroupResponse,
   ModifyTopicResponse,
   DescribeTopicResponse,
   Endpoint,
+  DeleteRoleResponse,
+  ModifyRoleRequest,
   DescribeTopicStatsOpRequest,
+  RoleItem,
   CreateTopicRequest,
   TagFilter,
   Filter,
-  DescribeTopicStatsOpResponse,
+  DeleteRoleRequest,
+  DescribeRoleListRequest,
   ModifyTopicRequest,
   DescribeInstanceResponse,
+  DescribeTopicStatsOpResponse,
   DeleteConsumerGroupRequest,
   DeleteTopicResponse,
   CreateConsumerGroupResponse,
@@ -99,6 +108,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 修改主题属性
+   */
+  async ModifyTopic(
+    req: ModifyTopicRequest,
+    cb?: (error: string, rep: ModifyTopicResponse) => void
+  ): Promise<ModifyTopicResponse> {
+    return this.request("ModifyTopic", req, cb)
+  }
+
+  /**
    * 删除消费组
    */
   async DeleteConsumerGroup(
@@ -106,6 +125,19 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteConsumerGroupResponse) => void
   ): Promise<DeleteConsumerGroupResponse> {
     return this.request("DeleteConsumerGroup", req, cb)
+  }
+
+  /**
+     * 获取主题列表，Filter参数使用说明如下：
+
+1. TopicName，主题名称模糊搜索
+2. TopicType，主题类型查询，支持多选，可选值：Normal,Order,Transaction,DelayScheduled
+     */
+  async DescribeTopicList(
+    req: DescribeTopicListRequest,
+    cb?: (error: string, rep: DescribeTopicListResponse) => void
+  ): Promise<DescribeTopicListResponse> {
+    return this.request("DescribeTopicList", req, cb)
   }
 
   /**
@@ -145,25 +177,33 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 查询主题详情，Offset和Limit参数是指订阅该主题的消费组查询分页参数，Filter参数使用说明如下：
-
-ConsumerGroup，消费组名称过滤
-     */
-  async DescribeTopic(
-    req: DescribeTopicRequest,
-    cb?: (error: string, rep: DescribeTopicResponse) => void
-  ): Promise<DescribeTopicResponse> {
-    return this.request("DescribeTopic", req, cb)
+   * 添加角色
+   */
+  async CreateRole(
+    req: CreateRoleRequest,
+    cb?: (error: string, rep: CreateRoleResponse) => void
+  ): Promise<CreateRoleResponse> {
+    return this.request("CreateRole", req, cb)
   }
 
   /**
-   * 修改主题属性
+   * 删除角色
    */
-  async ModifyTopic(
-    req: ModifyTopicRequest,
-    cb?: (error: string, rep: ModifyTopicResponse) => void
-  ): Promise<ModifyTopicResponse> {
-    return this.request("ModifyTopic", req, cb)
+  async DeleteRole(
+    req: DeleteRoleRequest,
+    cb?: (error: string, rep: DeleteRoleResponse) => void
+  ): Promise<DeleteRoleResponse> {
+    return this.request("DeleteRole", req, cb)
+  }
+
+  /**
+   * 修改角色
+   */
+  async ModifyRole(
+    req: ModifyRoleRequest,
+    cb?: (error: string, rep: ModifyRoleResponse) => void
+  ): Promise<ModifyRoleResponse> {
+    return this.request("ModifyRole", req, cb)
   }
 
   /**
@@ -187,16 +227,15 @@ ConsumerGroup，消费组名称过滤
   }
 
   /**
-     * 获取主题列表，Filter参数使用说明如下：
+     * 查询主题详情，Offset和Limit参数是指订阅该主题的消费组查询分页参数，Filter参数使用说明如下：
 
-1. TopicName，主题名称模糊搜索
-2. TopicType，主题类型查询，支持多选，可选值：Normal,Order,Transaction,DelayScheduled
+ConsumerGroup，消费组名称过滤
      */
-  async DescribeTopicList(
-    req: DescribeTopicListRequest,
-    cb?: (error: string, rep: DescribeTopicListResponse) => void
-  ): Promise<DescribeTopicListResponse> {
-    return this.request("DescribeTopicList", req, cb)
+  async DescribeTopic(
+    req: DescribeTopicRequest,
+    cb?: (error: string, rep: DescribeTopicResponse) => void
+  ): Promise<DescribeTopicResponse> {
+    return this.request("DescribeTopic", req, cb)
   }
 
   /**
@@ -217,6 +256,18 @@ ConsumerGroup，消费组名称过滤
     cb?: (error: string, rep: CreateConsumerGroupResponse) => void
   ): Promise<CreateConsumerGroupResponse> {
     return this.request("CreateConsumerGroup", req, cb)
+  }
+
+  /**
+     * 查询角色列表，Filter参数使用说明如下：
+
+1. RoleName，角色名称模糊搜索
+     */
+  async DescribeRoleList(
+    req: DescribeRoleListRequest,
+    cb?: (error: string, rep: DescribeRoleListResponse) => void
+  ): Promise<DescribeRoleListResponse> {
+    return this.request("DescribeRoleList", req, cb)
   }
 
   /**
