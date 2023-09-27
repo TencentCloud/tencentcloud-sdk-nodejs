@@ -130,10 +130,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeAuditInstanceList", req, cb);
     }
     /**
+     * 获取实例占用空间最大的前几个库在指定时间段内的每日由DBbrain定时采集的空间数据，默认返回按大小排序。
+     */
+    async DescribeTopSpaceSchemaTimeSeries(req, cb) {
+        return this.request("DescribeTopSpaceSchemaTimeSeries", req, cb);
+    }
+    /**
      * 获取慢日志统计柱状图。
      */
     async DescribeSlowLogTimeSeriesStats(req, cb) {
         return this.request("DescribeSlowLogTimeSeriesStats", req, cb);
+    }
+    /**
+     * 获取 Redis 实例所有 proxy 节点的实时会话详情列表。
+     */
+    async DescribeRedisProcessList(req, cb) {
+        return this.request("DescribeRedisProcessList", req, cb);
     }
     /**
      * 获取慢日志来源地址统计分布图。
@@ -304,10 +316,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("AddUserContact", req, cb);
     }
     /**
-     * 获取实例占用空间最大的前几个库在指定时间段内的每日由DBbrain定时采集的空间数据，默认返回按大小排序。
+     * 查询实例的索引推荐信息，包括索引统计相关信息，推荐索引列表，无效索引列表等。
      */
-    async DescribeTopSpaceSchemaTimeSeries(req, cb) {
-        return this.request("DescribeTopSpaceSchemaTimeSeries", req, cb);
+    async DescribeIndexRecommendInfo(req, cb) {
+        return this.request("DescribeIndexRecommendInfo", req, cb);
+    }
+    /**
+     * 查询某张表的慢查模板概览
+     */
+    async DescribeIndexRecommendAggregationSlowLogs(req, cb) {
+        return this.request("DescribeIndexRecommendAggregationSlowLogs", req, cb);
     }
     /**
      * 创建中断会话的任务。

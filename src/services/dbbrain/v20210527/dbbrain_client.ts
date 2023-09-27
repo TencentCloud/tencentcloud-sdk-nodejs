@@ -23,10 +23,12 @@ import {
   RedisKeySpaceData,
   DescribeRedisTopKeyPrefixListRequest,
   HealthReportTask,
+  SecLogExportTaskInfo,
   OpenAuditServiceResponse,
   CreateDBDiagReportTaskRequest,
   TableSpaceTimeSeries,
   DescribeAuditLogFilesResponse,
+  DescribeIndexRecommendAggregationSlowLogsRequest,
   DescribeSlowLogsRequest,
   DescribeTopSpaceTablesRequest,
   ScoreItem,
@@ -62,6 +64,7 @@ import {
   DeleteAuditLogFileResponse,
   DescribeDBSpaceStatusRequest,
   AlarmsRules,
+  DescribeRedisProcessListRequest,
   TimeSlice,
   DeleteDBDiagReportTasksRequest,
   ModifyDiagDBInstanceConfRequest,
@@ -71,12 +74,14 @@ import {
   CreateDBDiagReportTaskResponse,
   ProcessStatistic,
   CreateMailProfileResponse,
+  UpdateMonitorSwitchResponse,
   DescribeSlowLogTimeSeriesStatsRequest,
   CancelKillTaskRequest,
   InstanceID,
   DescribeDBDiagHistoryRequest,
   CreateAuditLogFileResponse,
   AuditInstance,
+  IndexesToBuild,
   DeleteSqlFiltersResponse,
   DescribeDBDiagEventsRequest,
   CreateDBDiagReportUrlResponse,
@@ -85,6 +90,7 @@ import {
   CreateProxySessionKillTaskRequest,
   DeleteDBDiagReportTasksResponse,
   DescribeProxyProcessStatisticsResponse,
+  DescribeIndexRecommendInfoRequest,
   SlowLogHost,
   CreateMailProfileRequest,
   MonitorFloatMetricSeriesData,
@@ -99,8 +105,9 @@ import {
   DeleteSecurityAuditLogExportTasksResponse,
   KillMySqlThreadsRequest,
   DescribeSqlFiltersResponse,
+  MongoDBIndex,
   CreateDBDiagReportUrlRequest,
-  DescribeSecurityAuditLogExportTasksResponse,
+  CloseAuditServiceResponse,
   CloseAuditServiceRequest,
   InstanceConfs,
   ReceiveInfo,
@@ -108,7 +115,7 @@ import {
   HealthScoreInfo,
   DescribeTopSpaceTableTimeSeriesResponse,
   DescribeDBDiagHistoryResponse,
-  DescribeDiagDBInstancesRequest,
+  Aggregation,
   ModifySqlFiltersRequest,
   DescribeAllUserContactResponse,
   MonitorMetric,
@@ -135,9 +142,12 @@ import {
   DescribeAlarmTemplateResponse,
   DescribeTopSpaceSchemaTimeSeriesRequest,
   ModifyAuditServiceRequest,
+  DescribeIndexRecommendAggregationSlowLogsResponse,
   DescribeDBDiagEventsResponse,
   DescribeMailProfileResponse,
   DescribeRedisTopBigKeysRequest,
+  DescribeIndexRecommendInfoResponse,
+  Process,
   ModifyAuditServiceResponse,
   DescribeHealthScoreRequest,
   IssueTypeInfo,
@@ -158,7 +168,7 @@ import {
   ModifyAlarmPolicyRequest,
   DescribeRedisTopKeyPrefixListResponse,
   DescribeAllUserGroupResponse,
-  UpdateMonitorSwitchResponse,
+  DescribeRedisProcessListResponse,
   CreateAuditLogFileRequest,
   DeleteAuditLogFileRequest,
   ModifyDiagDBInstanceConfResponse,
@@ -168,18 +178,19 @@ import {
   GroupItem,
   RedisPreKeySpaceData,
   DescribeTopSpaceTableTimeSeriesRequest,
+  DescribeUserSqlAdviceRequest,
   DescribeDBDiagReportTasksRequest,
   MonitorMetricSeriesData,
   SlowLogInfoItem,
-  SecLogExportTaskInfo,
+  IndexesToDrop,
   DescribeHealthScoreResponse,
-  CloseAuditServiceResponse,
+  DescribeSecurityAuditLogExportTasksResponse,
   DescribeTopSpaceSchemasRequest,
   DescribeSlowLogTopSqlsResponse,
   DescribeNoPrimaryKeyTablesResponse,
   DescribeAuditLogFilesRequest,
   DeleteSqlFiltersRequest,
-  DescribeUserSqlAdviceRequest,
+  DescribeDiagDBInstancesRequest,
   Table,
   DescribeMySqlProcessListRequest,
   DescribeSecurityAuditLogDownloadUrlsResponse,
@@ -366,6 +377,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取实例占用空间最大的前几个库在指定时间段内的每日由DBbrain定时采集的空间数据，默认返回按大小排序。
+   */
+  async DescribeTopSpaceSchemaTimeSeries(
+    req: DescribeTopSpaceSchemaTimeSeriesRequest,
+    cb?: (error: string, rep: DescribeTopSpaceSchemaTimeSeriesResponse) => void
+  ): Promise<DescribeTopSpaceSchemaTimeSeriesResponse> {
+    return this.request("DescribeTopSpaceSchemaTimeSeries", req, cb)
+  }
+
+  /**
    * 获取慢日志统计柱状图。
    */
   async DescribeSlowLogTimeSeriesStats(
@@ -373,6 +394,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeSlowLogTimeSeriesStatsResponse) => void
   ): Promise<DescribeSlowLogTimeSeriesStatsResponse> {
     return this.request("DescribeSlowLogTimeSeriesStats", req, cb)
+  }
+
+  /**
+   * 获取 Redis 实例所有 proxy 节点的实时会话详情列表。
+   */
+  async DescribeRedisProcessList(
+    req: DescribeRedisProcessListRequest,
+    cb?: (error: string, rep: DescribeRedisProcessListResponse) => void
+  ): Promise<DescribeRedisProcessListResponse> {
+    return this.request("DescribeRedisProcessList", req, cb)
   }
 
   /**
@@ -656,13 +687,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取实例占用空间最大的前几个库在指定时间段内的每日由DBbrain定时采集的空间数据，默认返回按大小排序。
+   * 查询实例的索引推荐信息，包括索引统计相关信息，推荐索引列表，无效索引列表等。
    */
-  async DescribeTopSpaceSchemaTimeSeries(
-    req: DescribeTopSpaceSchemaTimeSeriesRequest,
-    cb?: (error: string, rep: DescribeTopSpaceSchemaTimeSeriesResponse) => void
-  ): Promise<DescribeTopSpaceSchemaTimeSeriesResponse> {
-    return this.request("DescribeTopSpaceSchemaTimeSeries", req, cb)
+  async DescribeIndexRecommendInfo(
+    req: DescribeIndexRecommendInfoRequest,
+    cb?: (error: string, rep: DescribeIndexRecommendInfoResponse) => void
+  ): Promise<DescribeIndexRecommendInfoResponse> {
+    return this.request("DescribeIndexRecommendInfo", req, cb)
+  }
+
+  /**
+   * 查询某张表的慢查模板概览
+   */
+  async DescribeIndexRecommendAggregationSlowLogs(
+    req: DescribeIndexRecommendAggregationSlowLogsRequest,
+    cb?: (error: string, rep: DescribeIndexRecommendAggregationSlowLogsResponse) => void
+  ): Promise<DescribeIndexRecommendAggregationSlowLogsResponse> {
+    return this.request("DescribeIndexRecommendAggregationSlowLogs", req, cb)
   }
 
   /**

@@ -188,9 +188,29 @@ it("dbbrain.v20210527.DescribeAuditInstanceList", async function () {
     }
 })
 
+it("dbbrain.v20210527.DescribeTopSpaceSchemaTimeSeries", async function () {
+    try {
+       const data = await client.DescribeTopSpaceSchemaTimeSeries({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dbbrain.v20210527.DescribeSlowLogTimeSeriesStats", async function () {
     try {
        const data = await client.DescribeSlowLogTimeSeriesStats({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dbbrain.v20210527.DescribeRedisProcessList", async function () {
+    try {
+       const data = await client.DescribeRedisProcessList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -478,9 +498,19 @@ it("dbbrain.v20210527.AddUserContact", async function () {
     }
 })
 
-it("dbbrain.v20210527.DescribeTopSpaceSchemaTimeSeries", async function () {
+it("dbbrain.v20210527.DescribeIndexRecommendInfo", async function () {
     try {
-       const data = await client.DescribeTopSpaceSchemaTimeSeries({})
+       const data = await client.DescribeIndexRecommendInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dbbrain.v20210527.DescribeIndexRecommendAggregationSlowLogs", async function () {
+    try {
+       const data = await client.DescribeIndexRecommendAggregationSlowLogs({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

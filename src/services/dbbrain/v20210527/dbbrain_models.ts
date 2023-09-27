@@ -150,6 +150,58 @@ export interface HealthReportTask {
 }
 
 /**
+ * 安全审计日志导出任务信息
+ */
+export interface SecLogExportTaskInfo {
+  /**
+   * 异步任务Id。
+   */
+  AsyncRequestId: number
+  /**
+   * 任务开始时间。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StartTime: string
+  /**
+   * 任务结束时间。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EndTime: string
+  /**
+   * 任务创建时间。
+   */
+  CreateTime: string
+  /**
+   * 任务状态。
+   */
+  Status: string
+  /**
+   * 任务执行进度。
+   */
+  Progress: number
+  /**
+   * 导出日志开始时间。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LogStartTime: string
+  /**
+   * 导出日志结束时间。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LogEndTime: string
+  /**
+   * 日志文件总大小，单位KB。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalSize: number
+  /**
+   * 风险等级列表。0 无风险；1 低风险；2 中风险；3 高风险。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DangerLevels: Array<number | bigint>
+}
+
+/**
  * OpenAuditService返回参数结构体
  */
 export interface OpenAuditServiceResponse {
@@ -237,6 +289,32 @@ export interface DescribeAuditLogFilesResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeIndexRecommendAggregationSlowLogs请求参数结构体
+ */
+export interface DescribeIndexRecommendAggregationSlowLogsRequest {
+  /**
+   * 服务产品类型，支持值包括："mongodb" - 云数据库 。
+   */
+  Product: string
+  /**
+   * 实例ID。
+   */
+  InstanceId: string
+  /**
+   * 数据库名称。
+   */
+  Db: string
+  /**
+   * 表明。
+   */
+  Collection: string
+  /**
+   * 签名。
+   */
+  Signs: Array<string>
 }
 
 /**
@@ -1158,6 +1236,28 @@ information-通知
 }
 
 /**
+ * DescribeRedisProcessList请求参数结构体
+ */
+export interface DescribeRedisProcessListRequest {
+  /**
+   * Redis 实例ID。
+   */
+  InstanceId: string
+  /**
+   * 服务产品类型，支持值包括 "redis" - 云数据库 Redis。
+   */
+  Product: string
+  /**
+   * 查询的Proxy节点数量上限，默认值为20，最大值为50。
+   */
+  Limit?: number
+  /**
+   * Proxy节点的偏移量，默认值为0。
+   */
+  Offset?: number
+}
+
+/**
  * 单位时间间隔内的慢日志统计
  */
 export interface TimeSlice {
@@ -1309,6 +1409,16 @@ export interface CreateMailProfileResponse {
 }
 
 /**
+ * UpdateMonitorSwitch返回参数结构体
+ */
+export interface UpdateMonitorSwitchResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeSlowLogTimeSeriesStats请求参数结构体
  */
 export interface DescribeSlowLogTimeSeriesStatsRequest {
@@ -1438,6 +1548,40 @@ export interface AuditInstance {
    * 实例详细信息。
    */
   InstanceInfo?: AuditInstanceInfo
+}
+
+/**
+ * 推荐的索引
+ */
+export interface IndexesToBuild {
+  /**
+   * 索引id，唯一标识一个索引。
+   */
+  Id?: number
+  /**
+   * 创建索引命令。
+   */
+  IndexCommand?: string
+  /**
+   * 索引字符串。
+   */
+  IndexStr?: string
+  /**
+   * 优化级别，1-4，优先级从高到低。
+   */
+  Level?: number
+  /**
+   * 索引得分。
+   */
+  Score?: number
+  /**
+   * 签名。
+   */
+  Signs?: Array<string>
+  /**
+   * 0-待创建；1-创建中。
+   */
+  Status?: number
 }
 
 /**
@@ -1587,6 +1731,20 @@ export interface DescribeProxyProcessStatisticsResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeIndexRecommendInfo请求参数结构体
+ */
+export interface DescribeIndexRecommendInfoRequest {
+  /**
+   * 服务产品类型，支持值包括："mongodb" - 云数据库 。
+   */
+  Product: string
+  /**
+   * 实例ID。
+   */
+  InstanceId: string
 }
 
 /**
@@ -1922,6 +2080,42 @@ export interface DescribeSqlFiltersResponse {
 }
 
 /**
+ * Mongodb索引项
+ */
+export interface MongoDBIndex {
+  /**
+   * 实例id。
+   */
+  ClusterId?: string
+  /**
+   * 表名。
+   */
+  Collection?: string
+  /**
+   * 库名。
+   */
+  Db?: string
+  /**
+   * 优化级别，1-4，优先级从高到低。
+   */
+  Level?: number
+  /**
+   * 得分。
+   */
+  Score?: number
+  /**
+   * 推荐索引列表。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IndexesToBuild?: Array<IndexesToBuild>
+  /**
+   * 无效索引列表。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IndexesToDrop?: Array<IndexesToDrop>
+}
+
+/**
  * CreateDBDiagReportUrl请求参数结构体
  */
 export interface CreateDBDiagReportUrlRequest {
@@ -1940,17 +2134,13 @@ export interface CreateDBDiagReportUrlRequest {
 }
 
 /**
- * DescribeSecurityAuditLogExportTasks返回参数结构体
+ * CloseAuditService返回参数结构体
  */
-export interface DescribeSecurityAuditLogExportTasksResponse {
+export interface CloseAuditServiceResponse {
   /**
-   * 安全审计日志导出任务列表。
+   * 0-关闭审计成功，非0关闭审计失败。
    */
-  Tasks: Array<SecLogExportTaskInfo>
-  /**
-   * 安全审计日志导出任务总数。
-   */
-  TotalCount: number
+  TaskId?: number
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2111,37 +2301,30 @@ export interface DescribeDBDiagHistoryResponse {
 }
 
 /**
- * DescribeDiagDBInstances请求参数结构体
+ * mongodb慢查模板概览明细
  */
-export interface DescribeDiagDBInstancesRequest {
+export interface Aggregation {
   /**
-   * 是否是DBbrain支持的实例，固定传 true。
+   * 平均执行时间（ms）。
    */
-  IsSupported: boolean
+  AvgExecTime?: number
   /**
-   * 服务产品类型，支持值包括："mysql" - 云数据库 MySQL，"cynosdb" - 云数据库 TDSQL-C for MySQL，"dbbrain-mysql" - 自建 MySQL，默认为"mysql"。
+   * 平均扫描行数。
    */
-  Product: string
+  AvgDocsExamined?: number
   /**
-   * 分页参数，偏移量。
+   * 产生慢查次数（/天）。
    */
-  Offset: number
+  SlowLogCount?: number
   /**
-   * 分页参数，分页值，最大值为100。
+   * 内存排序次数。
    */
-  Limit: number
+  SortCount?: number
   /**
-   * 根据实例名称条件查询。
+   * 慢查模板概览。
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  InstanceNames?: Array<string>
-  /**
-   * 根据实例ID条件查询。
-   */
-  InstanceIds?: Array<string>
-  /**
-   * 根据地域条件查询。
-   */
-  Regions?: Array<string>
+  SlowLogs?: Array<string>
 }
 
 /**
@@ -2928,6 +3111,21 @@ export interface ModifyAuditServiceRequest {
 }
 
 /**
+ * DescribeIndexRecommendAggregationSlowLogs返回参数结构体
+ */
+export interface DescribeIndexRecommendAggregationSlowLogsResponse {
+  /**
+   * 查询实例慢查询聚合结果。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Aggregation?: Aggregation
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeDBDiagEvents返回参数结构体
  */
 export interface DescribeDBDiagEventsResponse {
@@ -2993,6 +3191,78 @@ export interface DescribeRedisTopBigKeysRequest {
    * 查询数目，默认为20，最大值为100。
    */
   Limit?: number
+}
+
+/**
+ * DescribeIndexRecommendInfo返回参数结构体
+ */
+export interface DescribeIndexRecommendInfoResponse {
+  /**
+   * 索引推荐的集合数量。
+   */
+  CollectionNum?: number
+  /**
+   * 索引推荐的索引数量。
+   */
+  IndexNum?: number
+  /**
+   * 索引项。
+   */
+  Items?: Array<MongoDBIndex>
+  /**
+   * 优化级别，1-4，优先级从高到低。
+   */
+  Level?: number
+  /**
+   * 历史优化数。
+   */
+  Optimized?: number
+  /**
+   * 累计优化条数。
+   */
+  OptimizedCount?: number
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 实时会话详情。
+ */
+export interface Process {
+  /**
+   * 会话 ID。
+   */
+  Id?: number
+  /**
+   * 访问来源，IP 地址和端口号。
+   */
+  Address?: string
+  /**
+   * 文件描述符。
+   */
+  FileDescriptor?: number
+  /**
+   * 会话名称，使用 CLIENT SETNAME 命令设置。
+   */
+  Name?: string
+  /**
+   * 最后一次执行的命令。
+   */
+  LastCommand?: string
+  /**
+   * 会话存活时间，单位：秒。
+   */
+  Age?: number
+  /**
+   * 最后一次执行命令后空闲的时间，单位：秒。
+   */
+  Idle?: number
+  /**
+   * 会话所属的 Proxy节点 ID。
+   */
+  ProxyId?: string
 }
 
 /**
@@ -3460,9 +3730,17 @@ export interface DescribeAllUserGroupResponse {
 }
 
 /**
- * UpdateMonitorSwitch返回参数结构体
+ * DescribeRedisProcessList返回参数结构体
  */
-export interface UpdateMonitorSwitchResponse {
+export interface DescribeRedisProcessListResponse {
+  /**
+   * 该实例的Proxy节点数量，可用于分页查询。
+   */
+  ProxyCount?: number
+  /**
+   * 实时会话详情列表。
+   */
+  Processes?: Array<Process>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3724,6 +4002,28 @@ export interface DescribeTopSpaceTableTimeSeriesRequest {
 }
 
 /**
+ * DescribeUserSqlAdvice请求参数结构体
+ */
+export interface DescribeUserSqlAdviceRequest {
+  /**
+   * 实例ID。
+   */
+  InstanceId: string
+  /**
+   * SQL语句。
+   */
+  SqlText: string
+  /**
+   * 库名。
+   */
+  Schema?: string
+  /**
+   * 服务产品类型，支持值："mysql" - 云数据库 MySQL；"cynosdb" - 云数据库 TDSQL-C for MySQL；"dbbrain-mysql" - 自建 MySQL，默认为"mysql"。
+   */
+  Product?: string
+}
+
+/**
  * DescribeDBDiagReportTasks请求参数结构体
  */
 export interface DescribeDBDiagReportTasksRequest {
@@ -3827,55 +4127,29 @@ export interface SlowLogInfoItem {
 }
 
 /**
- * 安全审计日志导出任务信息
+ * 无效索引
  */
-export interface SecLogExportTaskInfo {
+export interface IndexesToDrop {
   /**
-   * 异步任务Id。
+   * 索引字符串。
    */
-  AsyncRequestId: number
+  IndexStr?: string
   /**
-   * 任务开始时间。
-注意：此字段可能返回 null，表示取不到有效值。
+   * 索引得分。
    */
-  StartTime: string
+  Score?: number
   /**
-   * 任务结束时间。
-注意：此字段可能返回 null，表示取不到有效值。
+   * 无效原因。
    */
-  EndTime: string
+  Reason?: string
   /**
-   * 任务创建时间。
+   * 删除索引命令。
    */
-  CreateTime: string
+  IndexCommand?: string
   /**
-   * 任务状态。
+   * 索引名。
    */
-  Status: string
-  /**
-   * 任务执行进度。
-   */
-  Progress: number
-  /**
-   * 导出日志开始时间。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  LogStartTime: string
-  /**
-   * 导出日志结束时间。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  LogEndTime: string
-  /**
-   * 日志文件总大小，单位KB。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TotalSize: number
-  /**
-   * 风险等级列表。0 无风险；1 低风险；2 中风险；3 高风险。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  DangerLevels: Array<number | bigint>
+  IndexName?: string
 }
 
 /**
@@ -3893,13 +4167,17 @@ export interface DescribeHealthScoreResponse {
 }
 
 /**
- * CloseAuditService返回参数结构体
+ * DescribeSecurityAuditLogExportTasks返回参数结构体
  */
-export interface CloseAuditServiceResponse {
+export interface DescribeSecurityAuditLogExportTasksResponse {
   /**
-   * 0-关闭审计成功，非0关闭审计失败。
+   * 安全审计日志导出任务列表。
    */
-  TaskId?: number
+  Tasks: Array<SecLogExportTaskInfo>
+  /**
+   * 安全审计日志导出任务总数。
+   */
+  TotalCount: number
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4025,25 +4303,37 @@ export interface DeleteSqlFiltersRequest {
 }
 
 /**
- * DescribeUserSqlAdvice请求参数结构体
+ * DescribeDiagDBInstances请求参数结构体
  */
-export interface DescribeUserSqlAdviceRequest {
+export interface DescribeDiagDBInstancesRequest {
   /**
-   * 实例ID。
+   * 是否是DBbrain支持的实例，固定传 true。
    */
-  InstanceId: string
+  IsSupported: boolean
   /**
-   * SQL语句。
+   * 服务产品类型，支持值包括："mysql" - 云数据库 MySQL，"cynosdb" - 云数据库 TDSQL-C for MySQL，"dbbrain-mysql" - 自建 MySQL，默认为"mysql"。
    */
-  SqlText: string
+  Product: string
   /**
-   * 库名。
+   * 分页参数，偏移量。
    */
-  Schema?: string
+  Offset: number
   /**
-   * 服务产品类型，支持值："mysql" - 云数据库 MySQL；"cynosdb" - 云数据库 TDSQL-C for MySQL；"dbbrain-mysql" - 自建 MySQL，默认为"mysql"。
+   * 分页参数，分页值，最大值为100。
    */
-  Product?: string
+  Limit: number
+  /**
+   * 根据实例名称条件查询。
+   */
+  InstanceNames?: Array<string>
+  /**
+   * 根据实例ID条件查询。
+   */
+  InstanceIds?: Array<string>
+  /**
+   * 根据地域条件查询。
+   */
+  Regions?: Array<string>
 }
 
 /**

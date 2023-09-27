@@ -2454,6 +2454,11 @@ export interface AccelerationDomain {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   OwnershipVerification?: OwnershipVerification
+  /**
+   * 域名证书信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Certificate?: AccelerationDomainCertificate
 }
 
 /**
@@ -4870,6 +4875,48 @@ export interface SubRule {
 }
 
 /**
+ * https 服务端证书配置
+ */
+export interface CertificateInfo {
+  /**
+   * 服务器证书 ID。
+   */
+  CertId?: string
+  /**
+   * 证书备注名。
+   */
+  Alias?: string
+  /**
+   * 证书类型，取值有：
+<li>default：默认证书；</li>
+<li>upload：用户上传；</li>
+<li>managed：腾讯云托管。</li>
+   */
+  Type?: string
+  /**
+   * 证书过期时间。
+   */
+  ExpireTime?: string
+  /**
+   * 证书部署时间。
+   */
+  DeployTime?: string
+  /**
+   * 签名算法。
+   */
+  SignAlgo?: string
+  /**
+   * 证书状态，取值有：
+<li>deployed：已部署；</li>
+<li>processing：部署中；</li>
+<li>applying：申请中；</li>
+<li>failed：申请失败；</li>
+<li>issued：绑定失败。</li>
+   */
+  Status?: string
+}
+
+/**
  * CreatePlanForZone请求参数结构体
  */
 export interface CreatePlanForZoneRequest {
@@ -6832,6 +6879,21 @@ export interface ModifySecurityIPGroupRequest {
 <li> update: 全量替换 IPGroup 内容，并可修改 IPGroup 名称。 </li>
    */
   Mode: string
+}
+
+/**
+ * 加速域名所对应的证书信息。
+ */
+export interface AccelerationDomainCertificate {
+  /**
+   * 配置证书的模式，取值有： <li>disable：不配置证书；</li> <li>eofreecert：配置 EdgeOne 免费证书；</li> <li>sslcert：配置 SSL 证书。</li>
+   */
+  Mode?: string
+  /**
+   * 证书列表。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  List?: Array<CertificateInfo>
 }
 
 /**
