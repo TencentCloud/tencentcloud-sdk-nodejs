@@ -340,7 +340,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 资产列表
+   * 数据库资产列表
    */
   async DescribeDbAssets(
     req: DescribeDbAssetsRequest,

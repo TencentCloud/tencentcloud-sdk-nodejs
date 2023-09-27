@@ -118,7 +118,7 @@ export declare class Client extends AbstractClient {
      */
     DeleteUser(req: DeleteUserRequest, cb?: (error: string, rep: DeleteUserResponse) => void): Promise<DeleteUserResponse>;
     /**
-     * 获取房间信息
+     * 获取房间配置信息
      */
     DescribeRoom(req: DescribeRoomRequest, cb?: (error: string, rep: DescribeRoomResponse) => void): Promise<DescribeRoomResponse>;
     /**

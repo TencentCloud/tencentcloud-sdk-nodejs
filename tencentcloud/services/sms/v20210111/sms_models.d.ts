@@ -18,7 +18,7 @@ export interface DeleteSmsTemplateResponse {
     /**
      * 删除模板响应
      */
-    DeleteTemplateStatus: DeleteTemplateStatus;
+    DeleteTemplateStatus?: DeleteTemplateStatus;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -31,7 +31,7 @@ export interface ModifySmsTemplateResponse {
     /**
      * 修改模板参数响应
      */
-    ModifyTemplateStatus: ModifyTemplateStatus;
+    ModifyTemplateStatus?: ModifyTemplateStatus;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -219,7 +219,7 @@ export interface DescribeSmsTemplateListResponse {
     /**
      * 获取短信模板信息响应
      */
-    DescribeTemplateStatusSet: Array<DescribeTemplateListStatus>;
+    DescribeTemplateStatusSet?: Array<DescribeTemplateListStatus>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -273,7 +273,7 @@ export interface ReportConversionResponse {
     /**
      * 转化率上报响应包体。
      */
-    ReportConversionStatus: ReportConversionStatus;
+    ReportConversionStatus?: ReportConversionStatus;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -377,7 +377,7 @@ export interface CallbackStatusStatisticsResponse {
     /**
      * 回执数据统计响应包体。
      */
-    CallbackStatusStatistics: CallbackStatusStatistics;
+    CallbackStatusStatistics?: CallbackStatusStatistics;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -436,7 +436,7 @@ export interface PullSmsSendStatusByPhoneNumberResponse {
     /**
      * 下发状态响应集合。
      */
-    PullSmsSendStatusSet: Array<PullSmsSendStatus>;
+    PullSmsSendStatusSet?: Array<PullSmsSendStatus>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -458,28 +458,28 @@ export interface DescribeSignListStatus {
     /**
      * 签名ID。
      */
-    SignId: number;
+    SignId?: number;
     /**
      * 是否国际/港澳台短信，其中0表示国内短信，1表示国际/港澳台短信。
      */
-    International: number;
+    International?: number;
     /**
      * 申请签名状态，其中0表示审核通过，1表示审核中。
   -1：表示审核未通过或审核失败。
      */
-    StatusCode: number;
+    StatusCode?: number;
     /**
      * 审核回复，审核人员审核后给出的回复，通常是审核未通过的原因。
      */
-    ReviewReply: string;
+    ReviewReply?: string;
     /**
      * 签名名称。
      */
-    SignName: string;
+    SignName?: string;
     /**
      * 提交审核时间，UNIX 时间戳（单位：秒）。
      */
-    CreateTime: number;
+    CreateTime?: number;
 }
 /**
  * SendSms返回参数结构体
@@ -501,7 +501,7 @@ export interface SendStatusStatisticsResponse {
     /**
      * 发送数据统计响应包体。
      */
-    SendStatusStatistics: SendStatusStatistics;
+    SendStatusStatistics?: SendStatusStatistics;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -645,7 +645,7 @@ export interface DescribeTemplateListStatus {
      */
     TemplateId?: number;
     /**
-     * 是否国际/港澳台短信，其中0表示国内短信，1表示国际/港澳台短信。
+     * 是否国际/港澳台短信，其中0表示国内短信，1表示国际/港澳台短信，3表示该模板既支持国内短信也支持国际/港澳台短信。
      */
     International?: number;
     /**
@@ -676,7 +676,7 @@ export interface AddSmsTemplateResponse {
     /**
      * 添加短信模板响应包体
      */
-    AddTemplateStatus: AddTemplateStatus;
+    AddTemplateStatus?: AddTemplateStatus;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -727,7 +727,7 @@ export interface DescribeSmsSignListResponse {
     /**
      * 获取签名信息响应
      */
-    DescribeSignListStatusSet: Array<DescribeSignListStatus>;
+    DescribeSignListStatusSet?: Array<DescribeSignListStatus>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -877,7 +877,7 @@ export interface PullSmsReplyStatusByPhoneNumberResponse {
     /**
      * 回复状态响应集合。
      */
-    PullSmsReplyStatusSet: Array<PullSmsReplyStatus>;
+    PullSmsReplyStatusSet?: Array<PullSmsReplyStatus>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -923,7 +923,7 @@ export interface DeleteSmsSignResponse {
     /**
      * 删除签名响应
      */
-    DeleteSignStatus: DeleteSignStatus;
+    DeleteSignStatus?: DeleteSignStatus;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -936,7 +936,7 @@ export interface AddSmsSignResponse {
     /**
      * 添加签名响应
      */
-    AddSignStatus: AddSignStatus;
+    AddSignStatus?: AddSignStatus;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1037,7 +1037,7 @@ export interface PullSmsSendStatusResponse {
     /**
      * 下发状态响应集合。
      */
-    PullSmsSendStatusSet: Array<PullSmsSendStatus>;
+    PullSmsSendStatusSet?: Array<PullSmsSendStatus>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1062,10 +1062,12 @@ export interface SmsPackagesStatisticsResponse {
 export interface DeleteSignStatus {
     /**
      * 删除状态信息。
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     DeleteStatus: string;
     /**
      * 删除时间，UNIX 时间戳（单位：秒）。
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     DeleteTime: number;
 }
@@ -1076,7 +1078,7 @@ export interface PullSmsReplyStatusResponse {
     /**
      * 回复状态响应集合。
      */
-    PullSmsReplyStatusSet: Array<PullSmsReplyStatus>;
+    PullSmsReplyStatusSet?: Array<PullSmsReplyStatus>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */

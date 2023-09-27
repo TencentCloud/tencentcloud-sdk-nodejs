@@ -68,6 +68,16 @@ it("bi.v20220105.ModifyDatasourceCloud", async function () {
     }
 })
 
+it("bi.v20220105.ModifyUserRole", async function () {
+    try {
+       const data = await client.ModifyUserRole({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("bi.v20220105.CreateEmbedToken", async function () {
     try {
        const data = await client.CreateEmbedToken({})

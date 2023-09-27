@@ -476,6 +476,35 @@ export interface CreateUserRoleRequest {
     UserInfoList?: Array<UserInfo>;
 }
 /**
+ * ModifyUserRole请求参数结构体
+ */
+export interface ModifyUserRoleRequest {
+    /**
+     * 用户ID
+     */
+    UserId?: string;
+    /**
+     * 角色ID 列表
+     */
+    RoleIdList?: Array<number | bigint>;
+    /**
+     * 邮箱
+     */
+    Email?: string;
+    /**
+     * 用户名
+     */
+    UserName?: string;
+    /**
+     * 手机号
+     */
+    PhoneNumber?: string;
+    /**
+     * 手机区号
+     */
+    AreaCode?: string;
+}
+/**
  * 数据源详情列表
  */
 export interface DatasourceInfoData {
@@ -566,6 +595,30 @@ export interface IdDTO {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     TranStatus?: number;
+}
+/**
+ * ModifyUserRole返回参数结构体
+ */
+export interface ModifyUserRoleResponse {
+    /**
+     * 扩展
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Extra?: string;
+    /**
+     * 消息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Msg?: string;
+    /**
+     * 数据
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Data?: string;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * CreateEmbedToken请求参数结构体

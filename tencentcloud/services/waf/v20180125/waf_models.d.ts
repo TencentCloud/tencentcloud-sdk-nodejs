@@ -6676,6 +6676,16 @@ export interface BotPkg {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     RenewFlag?: number;
+    /**
+     * 购买页bot6折
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    BotCPWaf?: number;
+    /**
+     * 控制台买bot5折
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    BotNPWaf?: number;
 }
 /**
  * ModifyWafThreatenIntelligence返回参数结构体

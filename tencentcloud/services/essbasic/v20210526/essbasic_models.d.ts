@@ -521,6 +521,12 @@ export interface ModifyExtendedServiceRequest {
   CLOSE:关闭
      */
     Operate: string;
+    /**
+     * 链接跳转类型，支持以下类型
+  <ul><li>WEIXINAPP : 短链直接跳转到电子签小程序  (默认值)</li>
+  <li>APP : 第三方APP或小程序跳转电子签小程序</li></ul>
+     */
+    Endpoint?: string;
 }
 /**
  * DescribeResourceUrlsByFlows请求参数结构体
@@ -1387,6 +1393,11 @@ export interface FlowApproverDetail {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     ApproveType?: string;
+    /**
+     * 自定义签署人角色
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ApproverRoleName?: string;
 }
 /**
  * DescribeResourceUrlsByFlows返回参数结构体
@@ -1447,6 +1458,25 @@ export interface ChannelCreateOrganizationModifyQrCodeRequest {
      * 应用相关信息。 此接口Agent.AppId 必填。
      */
     Agent: Agent;
+}
+/**
+ * ChannelCreateFlowByFiles返回参数结构体
+ */
+export interface ChannelCreateFlowByFilesResponse {
+    /**
+     * 合同签署流程ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    FlowId?: string;
+    /**
+     * 签署方信息，如角色ID、角色名称等
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Approvers?: Array<ApproverItem>;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * DescribeFlowDetailInfo返回参数结构体
@@ -2208,6 +2238,11 @@ export interface SignUrlInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     FlowGroupId?: string;
+    /**
+     * 二维码，在生成动态签署人跳转封面页链接时返回
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SignQrcodeUrl?: string;
 }
 /**
  * 通用签署人信息
@@ -3000,6 +3035,10 @@ export interface CreateSignUrlsRequest {
   - 3:签署成功页的查看详情按钮
      */
     Hides?: Array<number | bigint>;
+    /**
+     * 签署节点ID，用于补充动态签署人，使用此参数需要与flow_ids数量一致
+     */
+    RecipientIds?: Array<string>;
 }
 /**
  * ChannelCreateMultiFlowSignQRCode请求参数结构体
@@ -3080,11 +3119,14 @@ export interface SignQrCode {
  * 创建签署流程签署人入参。
 
 其中签署方FlowApproverInfo需要传递的参数
-非单C、单B、B2C合同，ApproverType、RecipientId（模板发起合同时）必传，建议都传。其他身份标识
-1-个人：Name、Mobile必传
-2-第三方平台子客企业指定经办人：OpenId必传，OrgName必传、OrgOpenId必传；
-3-第三方平台子客企业不指定经办人：OrgName必传、OrgOpenId必传；
-4-非第三方平台子客企业：Name、Mobile必传，OrgName必传，且NotChannelOrganization=True。
+非单C、单B、B2C合同，ApproverType、RecipientId（模板发起合同时）必传，建议都传。
+
+其他身份标识
+
+<ul><li>1-个人：Name、Mobile必传</li>
+<li>2-第三方平台子客企业指定经办人：OpenId必传，OrgName必传、OrgOpenId必传；</li>
+<li>3-第三方平台子客企业不指定经办人：OrgName必传、OrgOpenId必传；</li>
+<li>4-非第三方平台子客企业：Name、Mobile必传，OrgName必传，且NotChannelOrganization=True。</li></ul>
 
 RecipientId参数：
 从DescribeTemplates接口中，可以得到模板下的签署方Recipient列表，根据模板自定义的Rolename在此结构体中确定其RecipientId。
@@ -3211,6 +3253,10 @@ export interface FlowApproverInfo {
   注：`限制印章控件或骑缝章控件情况下,仅本企业签署方可以指定具体印章（通过传递ComponentValue,支持多个），他方企业或个人只支持限制控件类型。`
      */
     AddSignComponentsLimits?: Array<ComponentLimit>;
+    /**
+     * 自定义签署方角色名称
+     */
+    ApproverRoleName?: string;
 }
 /**
  * ChannelCreateUserAutoSignEnableUrl返回参数结构体
@@ -3401,6 +3447,10 @@ export interface CreateFlowsByTemplatesResponse {
   如果文档需要异步合成，此字段会返回该异步任务的任务信息，后续可以通过ChannelGetTaskResultApi接口查询任务详情；
      */
     TaskInfos?: Array<TaskInfo>;
+    /**
+     * 签署方信息，如角色ID、角色名称等
+     */
+    FlowApprovers?: Array<FlowApproverItem>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -3614,6 +3664,21 @@ export interface FilledComponent {
     ImageUrl?: string;
 }
 /**
+ * 签署方信息，如角色ID、角色名称等
+ */
+export interface FlowApproverItem {
+    /**
+     * 合同编号
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    FlowId?: string;
+    /**
+     * 签署方信息，如角色ID、角色名称等
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Approvers?: Array<ApproverItem>;
+}
+/**
  * CreateSignUrls返回参数结构体
  */
 export interface CreateSignUrlsResponse {
@@ -3726,18 +3791,24 @@ export interface PrepareFlowsRequest {
     Operator?: UserInfo;
 }
 /**
- * ChannelCreateFlowByFiles返回参数结构体
+ * 签署方信息，发起合同后可获取到对应的签署方信息，如角色ID，角色名称
  */
-export interface ChannelCreateFlowByFilesResponse {
+export interface ApproverItem {
     /**
-     * 合同签署流程ID
+     * 签署方唯一编号
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    FlowId?: string;
+    SignId?: string;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     * 签署方角色编号
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    RequestId?: string;
+    RecipientId?: string;
+    /**
+     * 签署方角色名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ApproverRoleName?: string;
 }
 /**
  * ChannelCreateFlowSignReview返回参数结构体
@@ -3939,6 +4010,13 @@ export interface ApproverOption {
      * 是否隐藏一键签署 默认false-不隐藏true-隐藏
      */
     HideOneKeySign?: boolean;
+    /**
+     * 签署人信息补充类型，默认无需补充。
+  
+  <ul><li> **1** : ( 动态签署人（可发起合同后再补充签署人信息）</li>
+  </ul>
+     */
+    FillType?: number;
 }
 /**
  * 合作企业经办人列表信息

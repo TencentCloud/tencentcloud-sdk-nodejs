@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeUserRoleListResponse, ModifyProjectResponse, DeleteProjectRequest, DescribeUserProjectListResponse, CreateDatasourceRequest, DeleteDatasourceRequest, ModifyDatasourceResponse, ApplyEmbedIntervalRequest, DeleteUserRoleResponse, DescribeUserProjectListRequest, CreateDatasourceCloudResponse, DeleteUserRoleRequest, CreateUserRoleRequest, DescribeProjectListResponse, CreateEmbedTokenRequest, CreateUserRoleProjectResponse, DescribeProjectInfoRequest, ModifyUserRoleProjectResponse, ModifyDatasourceCloudRequest, ModifyDatasourceCloudResponse, ModifyDatasourceRequest, ModifyProjectRequest, ModifyUserRoleProjectRequest, CreateUserRoleResponse, DescribeProjectListRequest, DeleteUserRoleProjectRequest, CreateProjectResponse, DescribeProjectInfoResponse, DescribeUserRoleListRequest, DeleteProjectResponse, CreateEmbedTokenResponse, CreateUserRoleProjectRequest, DescribeDatasourceListRequest, ApplyEmbedIntervalResponse, CreateDatasourceResponse, DeleteUserRoleProjectResponse, CreateDatasourceCloudRequest, DescribeDatasourceListResponse, DeleteDatasourceResponse, CreateProjectRequest } from "./bi_models";
+import { DescribeUserRoleListResponse, ModifyProjectResponse, DeleteProjectRequest, DescribeUserProjectListResponse, CreateDatasourceRequest, DeleteDatasourceRequest, ModifyDatasourceResponse, ApplyEmbedIntervalRequest, DeleteUserRoleResponse, DescribeUserProjectListRequest, CreateDatasourceCloudResponse, DeleteUserRoleRequest, CreateUserRoleRequest, ModifyUserRoleRequest, DescribeProjectListResponse, ModifyUserRoleResponse, CreateEmbedTokenRequest, CreateUserRoleProjectResponse, DescribeProjectInfoRequest, ModifyUserRoleProjectResponse, ModifyDatasourceCloudRequest, ModifyDatasourceCloudResponse, ModifyDatasourceRequest, ModifyProjectRequest, ModifyUserRoleProjectRequest, CreateUserRoleResponse, DescribeProjectListRequest, DeleteUserRoleProjectRequest, CreateProjectResponse, DescribeProjectInfoResponse, DescribeUserRoleListRequest, DeleteProjectResponse, CreateEmbedTokenResponse, CreateUserRoleProjectRequest, DescribeDatasourceListRequest, ApplyEmbedIntervalResponse, CreateDatasourceResponse, DeleteUserRoleProjectResponse, CreateDatasourceCloudRequest, DescribeDatasourceListResponse, DeleteDatasourceResponse, CreateProjectRequest } from "./bi_models";
 /**
  * bi client
  * @class
@@ -27,6 +27,10 @@ export declare class Client extends AbstractClient {
      * 更新云数据库
      */
     ModifyDatasourceCloud(req: ModifyDatasourceCloudRequest, cb?: (error: string, rep: ModifyDatasourceCloudResponse) => void): Promise<ModifyDatasourceCloudResponse>;
+    /**
+     * 修改用户角色信息
+     */
+    ModifyUserRole(req: ModifyUserRoleRequest, cb?: (error: string, rep: ModifyUserRoleResponse) => void): Promise<ModifyUserRoleResponse>;
     /**
      * 创建嵌出报表-强鉴权
      */

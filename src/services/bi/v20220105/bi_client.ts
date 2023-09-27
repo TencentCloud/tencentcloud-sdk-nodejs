@@ -36,10 +36,12 @@ import {
   ProjectConfigList,
   DeleteUserRoleRequest,
   CreateUserRoleRequest,
+  ModifyUserRoleRequest,
   DatasourceInfoData,
   DescribeProjectListResponse,
   CorpUserListData,
   IdDTO,
+  ModifyUserRoleResponse,
   CreateEmbedTokenRequest,
   CreateUserRoleProjectResponse,
   DescribeProjectInfoRequest,
@@ -137,6 +139,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyDatasourceCloudResponse) => void
   ): Promise<ModifyDatasourceCloudResponse> {
     return this.request("ModifyDatasourceCloud", req, cb)
+  }
+
+  /**
+   * 修改用户角色信息
+   */
+  async ModifyUserRole(
+    req: ModifyUserRoleRequest,
+    cb?: (error: string, rep: ModifyUserRoleResponse) => void
+  ): Promise<ModifyUserRoleResponse> {
+    return this.request("ModifyUserRole", req, cb)
   }
 
   /**

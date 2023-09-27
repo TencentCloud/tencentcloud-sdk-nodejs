@@ -160,7 +160,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeScanTaskList", req, cb);
     }
     /**
-     * 资产列表
+     * 数据库资产列表
      */
     async DescribeDbAssets(req, cb) {
         return this.request("DescribeDbAssets", req, cb);

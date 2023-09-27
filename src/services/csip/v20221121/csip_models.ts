@@ -1456,6 +1456,11 @@ export interface TaskAssetObject {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Region?: string
+  /**
+   * 多云资产唯一id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Arn?: string
 }
 
 /**
@@ -2806,7 +2811,7 @@ export interface ScanTaskInfoList {
    */
   EndTime?: string
   /**
-   * corn
+   * cron格式
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ScanPlanContent?: string
@@ -2851,7 +2856,7 @@ export interface ScanTaskInfoList {
    */
   AssetNumber?: number
   /**
-   * 扫描状态 0 初始值  1正在扫描  2扫描完成  3扫描出错
+   * 扫描状态, 0-初始值，1-正在扫描，2-扫描完成，3-扫描出错，4-停止扫描
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ScanStatus?: number
@@ -2985,6 +2990,11 @@ export interface ScanTaskInfoList {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IsDelete?: number
+  /**
+   * 任务源类型，0-默认，1-小助手，2-体检项
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SourceType?: number
 }
 
 /**
@@ -2995,6 +3005,10 @@ export interface DescribeDbAssetsRequest {
    * -
    */
   Filter?: Filter
+  /**
+   * 资产类型:MYSQL/MARIADB/REDIS/MONGODB/POSTGRES/CTS/ES/KAFKA/COS/CBS/CFS
+   */
+  AssetTypes?: Array<string>
 }
 
 /**

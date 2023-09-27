@@ -58,6 +58,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyDatasourceCloud", req, cb);
     }
     /**
+     * 修改用户角色信息
+     */
+    async ModifyUserRole(req, cb) {
+        return this.request("ModifyUserRole", req, cb);
+    }
+    /**
      * 创建嵌出报表-强鉴权
      */
     async CreateEmbedToken(req, cb) {

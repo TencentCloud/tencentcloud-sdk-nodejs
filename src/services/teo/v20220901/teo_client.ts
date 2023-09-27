@@ -34,6 +34,7 @@ import {
   DescribeZonesRequest,
   L4OfflineLog,
   DiffIPWhitelist,
+  VerifyOwnershipRequest,
   DeleteSecurityIPGroupResponse,
   ModifyRuleRequest,
   OriginRecord,
@@ -154,6 +155,7 @@ import {
   Task,
   ModifyRuleResponse,
   AscriptionInfo,
+  VerifyOwnershipResponse,
   RuleItem,
   FirstPartConfig,
   DescribeDDoSAttackEventResponse,
@@ -543,6 +545,18 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDefaultCertificatesResponse) => void
   ): Promise<DescribeDefaultCertificatesResponse> {
     return this.request("DescribeDefaultCertificates", req, cb)
+  }
+
+  /**
+     * 在 CNAME 接入模式下，您需要对站点或者域名的归属权进行验证，可以通过本接口触发验证。若站点通过归属权验证后，后续添加域名无需再验证。详情参考 [站点/域名归属权验证](https://cloud.tencent.com/document/product/1552/70789)。
+
+在 NS 接入模式下，您也可以通过本接口来查询 NS 服务器是否切换成功，详情参考 [修改 DNS 服务器](https://cloud.tencent.com/document/product/1552/90452)。
+     */
+  async VerifyOwnership(
+    req: VerifyOwnershipRequest,
+    cb?: (error: string, rep: VerifyOwnershipResponse) => void
+  ): Promise<VerifyOwnershipResponse> {
+    return this.request("VerifyOwnership", req, cb)
   }
 
   /**

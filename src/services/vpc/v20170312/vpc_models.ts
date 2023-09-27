@@ -1687,6 +1687,86 @@ export interface CheckDefaultSubnetRequest {
 }
 
 /**
+ * 对等连接实例信息。
+ */
+export interface PeerConnection {
+  /**
+   * 本端VPC唯一ID。
+   */
+  SourceVpcId?: string
+  /**
+   * 对端VPC唯一ID。
+   */
+  PeerVpcId?: string
+  /**
+   * 对等连接唯一ID。
+   */
+  PeeringConnectionId?: string
+  /**
+   * 对等连接名称。
+   */
+  PeeringConnectionName?: string
+  /**
+   * 对等连接状态，PENDING，投放中；ACTIVE，使用中；REJECTED，已拒绝‘DELETED，已删除；FAILED，失败；EXPIRED，已过期；ISOLATED，隔离中。
+   */
+  State?: string
+  /**
+   * 是否是新控制器，true: 是NewAfc；false:不是。
+   */
+  IsNgw?: boolean
+  /**
+   * 对等连接带宽值。
+   */
+  Bandwidth?: number
+  /**
+   * 本端地域。
+   */
+  SourceRegion?: string
+  /**
+   * 对端地域。
+   */
+  DestinationRegion?: string
+  /**
+   * 创建时间。
+   */
+  CreateTime?: string
+  /**
+   * 本端APPID。
+   */
+  AppId?: number
+  /**
+   * 对端APPID。
+   */
+  PeerAppId?: number
+  /**
+   * 计费类型，POSTPAID_BY_DAY_MAX：日峰值计费；POSTPAID_BY_MONTH_95：月95计费。
+   */
+  ChargeType?: string
+  /**
+   * 本端UIN。
+   */
+  SourceUin?: number
+  /**
+   * 对端UIN。
+   */
+  DestinationUin?: number
+  /**
+   * 资源标签数据。
+   */
+  TagSet?: Array<Tag>
+  /**
+   * 服务分级：PT、AU、AG。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  QosLevel?: string
+  /**
+   * 互通类型，VPC_PEER：VPC间互通；VPC_BM_PEER：VPC与黑石网络互通。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Type?: string
+}
+
+/**
  * CheckNetDetectState请求参数结构体
  */
 export interface CheckNetDetectStateRequest {
@@ -9991,6 +10071,14 @@ LOCAL_GATEWAY：本地网关。
  * DescribeVpcPeeringConnections返回参数结构体
  */
 export interface DescribeVpcPeeringConnectionsResponse {
+  /**
+   * 满足条件的对等连接实例个数。
+   */
+  TotalCount?: number
+  /**
+   * 对等连接实例列表。
+   */
+  PeerConnectionSet?: Array<PeerConnection>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

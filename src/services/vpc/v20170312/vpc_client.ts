@@ -102,6 +102,7 @@ import {
   DeleteNatGatewayDestinationIpPortTranslationNatRuleRequest,
   ResetRoutesRequest,
   CheckDefaultSubnetRequest,
+  PeerConnection,
   CheckNetDetectStateRequest,
   RouteTableAssociation,
   ModifyCustomerGatewayAttributeRequest,

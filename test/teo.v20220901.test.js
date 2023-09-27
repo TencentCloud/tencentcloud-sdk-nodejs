@@ -258,6 +258,16 @@ it("teo.v20220901.DescribeDefaultCertificates", async function () {
     }
 })
 
+it("teo.v20220901.VerifyOwnership", async function () {
+    try {
+       const data = await client.VerifyOwnership({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("teo.v20220901.DescribeZoneSetting", async function () {
     try {
        const data = await client.DescribeZoneSetting({})

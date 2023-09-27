@@ -46,7 +46,7 @@ class Client extends abstract_client_1.AbstractClient {
     /**
      * 本接口支持智能提取各类证照、票据、表单、合同等结构化场景的key:value字段信息，并支持提取表格信息的key:value组的结构化，灵活高效，适用于各类非标准材料的信息录入场景，点击[立即体验](https://cloud.tencent.com/product/smart-ocr)。
 
-默认接口请求频率限制：10次/秒。
+默认接口请求频率限制：5次/秒。
      */
     async SmartStructuralOCRV2(req, cb) {
         return this.request("SmartStructuralOCRV2", req, cb);

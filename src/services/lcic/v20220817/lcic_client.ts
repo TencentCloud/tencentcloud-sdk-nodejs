@@ -434,7 +434,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取房间信息
+   * 获取房间配置信息
    */
   async DescribeRoom(
     req: DescribeRoomRequest,

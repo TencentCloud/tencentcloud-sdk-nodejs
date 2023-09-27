@@ -4534,7 +4534,7 @@ export interface DescribeQuotaResponse {
   /**
    * 配额列表
    */
-  QuotaSet: Array<Quota>
+  QuotaSet?: Array<Quota>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4951,16 +4951,16 @@ export interface Quota {
 <li> TOTAL_SNAP_IP_QUOTA： 一个CLB实例下跨地域2.0的SNAT IP配额 </li>
 <li>TOTAL_ISP_CLB_QUOTA：用户当前地域下的三网CLB配额 </li>
    */
-  QuotaId: string
+  QuotaId?: string
   /**
    * 当前使用数量，为 null 时表示无意义。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  QuotaCurrent: number
+  QuotaCurrent?: number
   /**
    * 配额数量。
    */
-  QuotaLimit: number
+  QuotaLimit?: number
 }
 
 /**

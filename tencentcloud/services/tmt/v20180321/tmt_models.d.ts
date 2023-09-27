@@ -7,7 +7,7 @@ export interface TextTranslateResponse {
      */
     TargetText?: string;
     /**
-     * 源语言，详见入参Target
+     * 源语言，详见入参Source
      */
     Source?: string;
     /**

@@ -192,7 +192,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteUser", req, cb);
     }
     /**
-     * 获取房间信息
+     * 获取房间配置信息
      */
     async DescribeRoom(req, cb) {
         return this.request("DescribeRoom", req, cb);

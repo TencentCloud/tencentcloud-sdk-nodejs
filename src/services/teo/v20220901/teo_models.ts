@@ -466,6 +466,16 @@ export interface DiffIPWhitelist {
 }
 
 /**
+ * VerifyOwnership请求参数结构体
+ */
+export interface VerifyOwnershipRequest {
+  /**
+   * 站点或者加速域名。
+   */
+  Domain: string
+}
+
+/**
  * DeleteSecurityIPGroup返回参数结构体
  */
 export interface DeleteSecurityIPGroupResponse {
@@ -3595,7 +3605,7 @@ export interface CreateZoneRequest {
    */
   PlanId?: string
   /**
-   * 同名站点标识。限制输入数字、英文、- 和 _ 组合，长度 20 个字符以内。详情参考 [同名站点标识]()，无此使用场景时，该字段保留为空即可。
+   * 同名站点标识。限制输入数字、英文、- 和 _ 组合，长度 20 个字符以内。详情参考 [同名站点标识](https://cloud.tencent.com/document/product/1552/70202)，无此使用场景时，该字段保留为空即可。
    */
   AliasZoneName?: string
   /**
@@ -3787,6 +3797,26 @@ export interface AscriptionInfo {
    * 记录值。
    */
   RecordValue: string
+}
+
+/**
+ * VerifyOwnership返回参数结构体
+ */
+export interface VerifyOwnershipResponse {
+  /**
+   * 归属权验证结果。
+<li>success：验证成功；</li>
+<li>fail：验证失败。</li>
+   */
+  Status?: string
+  /**
+   * 当验证结果为不通过时，该字段会返回原因，协助您排查问题。
+   */
+  Result?: string
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

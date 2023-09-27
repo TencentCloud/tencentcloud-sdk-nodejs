@@ -96,7 +96,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeScanTaskList(req: DescribeScanTaskListRequest, cb?: (error: string, rep: DescribeScanTaskListResponse) => void): Promise<DescribeScanTaskListResponse>;
     /**
-     * 资产列表
+     * 数据库资产列表
      */
     DescribeDbAssets(req: DescribeDbAssetsRequest, cb?: (error: string, rep: DescribeDbAssetsResponse) => void): Promise<DescribeDbAssetsResponse>;
     /**

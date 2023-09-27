@@ -497,7 +497,7 @@ export interface DescribeInvocationTasksRequest {
    */
   Offset?: number
   /**
-   * 是否隐藏输出，取值范围：<br><li>True：隐藏输出 <br><li>False：不隐藏 <br>默认为 True。
+   * 是否隐藏输出，取值范围：<br><li>true：隐藏输出 <br><li>false：不隐藏 <br>默认为 false。
    */
   HideOutput?: boolean
 }
@@ -1141,11 +1141,11 @@ export interface DescribeInvocationTasksResponse {
   /**
    * 符合条件的执行任务总数。
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 执行任务列表。
    */
-  InvocationTaskSet: Array<InvocationTask>
+  InvocationTaskSet?: Array<InvocationTask>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1298,10 +1298,12 @@ export interface InvocationTask {
   TaskResult: TaskResult
   /**
    * 执行任务开始时间。
+注意：此字段可能返回 null，表示取不到有效值。
    */
   StartTime: string
   /**
    * 执行任务结束时间。
+注意：此字段可能返回 null，表示取不到有效值。
    */
   EndTime: string
   /**

@@ -1353,12 +1353,12 @@ export interface DescribeNacosReplicasResponse {
     /**
      * 引擎实例副本信息
      */
-    Replicas: Array<NacosReplica>;
+    Replicas?: Array<NacosReplica>;
     /**
      * 副本个数
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1696,11 +1696,11 @@ export interface DescribeNacosServerInterfacesResponse {
     /**
      * 接口总个数
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 接口列表
      */
-    Content: Array<NacosServerInterface>;
+    Content?: Array<NacosServerInterface>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -3510,12 +3510,12 @@ export interface DescribeZookeeperReplicasResponse {
     /**
      * 注册引擎实例副本信息
      */
-    Replicas: Array<ZookeeperReplica>;
+    Replicas?: Array<ZookeeperReplica>;
     /**
      * 副本个数
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */

@@ -8812,7 +8812,7 @@ export interface ParseNotificationResponse {
      */
     Timestamp?: number;
     /**
-     * 事件通知安全签名 Sign = MD5（NotifyKey + Timestamp）。说明：媒体处理把 TaskNotifyConfig 里面的NotifyKey 和 Timestamp 进行字符串拼接后通过 MD5 计算得出 Sign 值，并将其放在通知消息里，您的后台服务器在收到通知消息后可以根据同样的算法确认 Sign 是否正确，进而确认消息是否确实来自媒体处理后台。
+     * 事件通知安全签名 Sign = MD5（Timestamp + NotifyKey）。说明：媒体处理把Timestamp 和 TaskNotifyConfig 里面的NotifyKey 进行字符串拼接后通过 MD5 计算得出 Sign 值，并将其放在通知消息里，您的后台服务器在收到通知消息后可以根据同样的算法确认 Sign 是否正确，进而确认消息是否确实来自媒体处理后台。
      */
     Sign?: string;
     /**
