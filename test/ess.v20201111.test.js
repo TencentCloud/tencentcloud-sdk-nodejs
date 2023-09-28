@@ -278,6 +278,16 @@ it("ess.v20201111.CreateReleaseFlow", async function () {
     }
 })
 
+it("ess.v20201111.CreateSchemeUrl", async function () {
+    try {
+       const data = await client.CreateSchemeUrl({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ess.v20201111.DescribeUserAutoSignStatus", async function () {
     try {
        const data = await client.DescribeUserAutoSignStatus({})
@@ -558,9 +568,9 @@ it("ess.v20201111.DeleteIntegrationEmployees", async function () {
     }
 })
 
-it("ess.v20201111.CreateSchemeUrl", async function () {
+it("ess.v20201111.CreateOrganizationInfoChangeUrl", async function () {
     try {
-       const data = await client.CreateSchemeUrl({})
+       const data = await client.CreateOrganizationInfoChangeUrl({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

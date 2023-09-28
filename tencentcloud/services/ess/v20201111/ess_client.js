@@ -282,6 +282,27 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateReleaseFlow", req, cb);
     }
     /**
+     * 获取跳转至腾讯电子签小程序的签署链接
+
+适用场景：如果需要签署人在自己的APP、小程序、H5应用中签署，可以通过此接口获取跳转腾讯电子签小程序的签署跳转链接。
+
+跳转到小程序的实现，参考微信官方文档（分为<a href="https://developers.weixin.qq.com/miniprogram/dev/api/navigate/wx.navigateToMiniProgram.html">全屏</a>、<a href="https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/openEmbeddedMiniProgram.html">半屏</a>两种方式），如何配置也可以请参考: <a href="https://qian.tencent.com/developers/company/openwxminiprogram">跳转电子签小程序配置</a>
+
+注：
+`1. 如果签署人是在PC端扫码签署，可以通过生成跳转链接自主转换成二维码，让签署人在PC端扫码签署`
+`2. 签署链接的有效期为90天，超过有效期链接不可用`
+
+其中小程序的原始Id如下，或者查看小程序信息自助获取。
+
+| 小程序 | AppID | 原始ID |
+| ------------ | ------------ | ------------ |
+| 腾讯电子签（正式版） | wxa023b292fd19d41d | gh_da88f6188665 |
+| 腾讯电子签Demo | wx371151823f6f3edf | gh_39a5d3de69fa |
+     */
+    async CreateSchemeUrl(req, cb) {
+        return this.request("CreateSchemeUrl", req, cb);
+    }
+    /**
      * 通过此接口获取个人用户自动签的开通状态。
 
 注意: `处方单等特殊场景专用，此接口为白名单功能，使用前请联系对接的客户经理沟通。`
@@ -562,25 +583,10 @@ httpProfile.setEndpoint("file.test.ess.tencent.cn");
         return this.request("DeleteIntegrationEmployees", req, cb);
     }
     /**
-     * 获取跳转至腾讯电子签小程序的签署链接
-
-适用场景：如果需要签署人在自己的APP、小程序、H5应用中签署，可以通过此接口获取跳转腾讯电子签小程序的签署跳转链接。
-
-跳转到小程序的实现，参考微信官方文档（分为<a href="https://developers.weixin.qq.com/miniprogram/dev/api/navigate/wx.navigateToMiniProgram.html">全屏</a>、<a href="https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/openEmbeddedMiniProgram.html">半屏</a>两种方式），如何配置也可以请参考: <a href="https://qian.tencent.com/developers/company/openwxminiprogram">跳转电子签小程序配置</a>
-
-注：
-`1. 如果签署人是在PC端扫码签署，可以通过生成跳转链接自主转换成二维码，让签署人在PC端扫码签署`
-`2. 签署链接的有效期为90天，超过有效期链接不可用`
-
-其中小程序的原始Id如下，或者查看小程序信息自助获取。
-
-| 小程序 | AppID | 原始ID |
-| ------------ | ------------ | ------------ |
-| 腾讯电子签（正式版） | wxa023b292fd19d41d | gh_da88f6188665 |
-| 腾讯电子签Demo | wx371151823f6f3edf | gh_39a5d3de69fa |
+     * 此接口（CreateOrganizationInfoChangeUrl）用于创建企业信息变更链接，支持创建企业超管变更链接或企业基础信息变更链接，通过入参ChangeType指定。
      */
-    async CreateSchemeUrl(req, cb) {
-        return this.request("CreateSchemeUrl", req, cb);
+    async CreateOrganizationInfoChangeUrl(req, cb) {
+        return this.request("CreateOrganizationInfoChangeUrl", req, cb);
     }
     /**
      * 用来撤销<a href="https://qian.tencent.com/developers/companyApis/users/CreateUserAutoSignEnableUrl" target="_blank">获取个人用户自动签的开通状态</a>生成的开通链接，撤销生成的链接失效。

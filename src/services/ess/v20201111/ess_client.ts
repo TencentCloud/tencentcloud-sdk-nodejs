@@ -33,6 +33,7 @@ import {
   CreateMultiFlowSignQRCodeResponse,
   FlowApproverUrlInfo,
   ReviewerInfo,
+  FlowBrief,
   DescribeThirdPartyAuthCodeResponse,
   HasAuthUser,
   DisableUserAutoSignResponse,
@@ -74,7 +75,7 @@ import {
   CreateReleaseFlowResponse,
   CreateWebThemeConfigResponse,
   BindEmployeeUserIdWithClientOpenIdRequest,
-  DescribeIntegrationDepartmentsRequest,
+  CreateOrganizationInfoChangeUrlResponse,
   Permission,
   Staff,
   ComponentLimit,
@@ -198,13 +199,14 @@ import {
   CreateBatchCancelFlowUrlRequest,
   CreateMultiFlowSignQRCodeRequest,
   DescribeFlowInfoRequest,
+  DescribeIntegrationDepartmentsRequest,
   DescribeFlowInfoResponse,
   CancelMultiFlowSignQRCodeResponse,
   CreateFlowResponse,
   DescribeUserAutoSignStatusRequest,
   FilledComponent,
   FileUrl,
-  FlowBrief,
+  CreateOrganizationInfoChangeUrlRequest,
   DescribeOrganizationGroupOrganizationsResponse,
   DescribeExtendedServiceAuthInfosResponse,
   CcInfo,
@@ -575,6 +577,31 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateReleaseFlowResponse) => void
   ): Promise<CreateReleaseFlowResponse> {
     return this.request("CreateReleaseFlow", req, cb)
+  }
+
+  /**
+     * 获取跳转至腾讯电子签小程序的签署链接
+
+适用场景：如果需要签署人在自己的APP、小程序、H5应用中签署，可以通过此接口获取跳转腾讯电子签小程序的签署跳转链接。
+
+跳转到小程序的实现，参考微信官方文档（分为<a href="https://developers.weixin.qq.com/miniprogram/dev/api/navigate/wx.navigateToMiniProgram.html">全屏</a>、<a href="https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/openEmbeddedMiniProgram.html">半屏</a>两种方式），如何配置也可以请参考: <a href="https://qian.tencent.com/developers/company/openwxminiprogram">跳转电子签小程序配置</a>
+
+注：
+`1. 如果签署人是在PC端扫码签署，可以通过生成跳转链接自主转换成二维码，让签署人在PC端扫码签署`
+`2. 签署链接的有效期为90天，超过有效期链接不可用`
+
+其中小程序的原始Id如下，或者查看小程序信息自助获取。
+
+| 小程序 | AppID | 原始ID |
+| ------------ | ------------ | ------------ |
+| 腾讯电子签（正式版） | wxa023b292fd19d41d | gh_da88f6188665 |
+| 腾讯电子签Demo | wx371151823f6f3edf | gh_39a5d3de69fa |
+     */
+  async CreateSchemeUrl(
+    req: CreateSchemeUrlRequest,
+    cb?: (error: string, rep: CreateSchemeUrlResponse) => void
+  ): Promise<CreateSchemeUrlResponse> {
+    return this.request("CreateSchemeUrl", req, cb)
   }
 
   /**
@@ -970,28 +997,13 @@ httpProfile.setEndpoint("file.test.ess.tencent.cn");
   }
 
   /**
-     * 获取跳转至腾讯电子签小程序的签署链接
-
-适用场景：如果需要签署人在自己的APP、小程序、H5应用中签署，可以通过此接口获取跳转腾讯电子签小程序的签署跳转链接。
-
-跳转到小程序的实现，参考微信官方文档（分为<a href="https://developers.weixin.qq.com/miniprogram/dev/api/navigate/wx.navigateToMiniProgram.html">全屏</a>、<a href="https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/openEmbeddedMiniProgram.html">半屏</a>两种方式），如何配置也可以请参考: <a href="https://qian.tencent.com/developers/company/openwxminiprogram">跳转电子签小程序配置</a>
-
-注：
-`1. 如果签署人是在PC端扫码签署，可以通过生成跳转链接自主转换成二维码，让签署人在PC端扫码签署`
-`2. 签署链接的有效期为90天，超过有效期链接不可用`
-
-其中小程序的原始Id如下，或者查看小程序信息自助获取。
-
-| 小程序 | AppID | 原始ID |
-| ------------ | ------------ | ------------ |
-| 腾讯电子签（正式版） | wxa023b292fd19d41d | gh_da88f6188665 |
-| 腾讯电子签Demo | wx371151823f6f3edf | gh_39a5d3de69fa |
-     */
-  async CreateSchemeUrl(
-    req: CreateSchemeUrlRequest,
-    cb?: (error: string, rep: CreateSchemeUrlResponse) => void
-  ): Promise<CreateSchemeUrlResponse> {
-    return this.request("CreateSchemeUrl", req, cb)
+   * 此接口（CreateOrganizationInfoChangeUrl）用于创建企业信息变更链接，支持创建企业超管变更链接或企业基础信息变更链接，通过入参ChangeType指定。
+   */
+  async CreateOrganizationInfoChangeUrl(
+    req: CreateOrganizationInfoChangeUrlRequest,
+    cb?: (error: string, rep: CreateOrganizationInfoChangeUrlResponse) => void
+  ): Promise<CreateOrganizationInfoChangeUrlResponse> {
+    return this.request("CreateOrganizationInfoChangeUrl", req, cb)
   }
 
   /**

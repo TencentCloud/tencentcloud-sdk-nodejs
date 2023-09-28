@@ -857,6 +857,10 @@ export interface ModifyOutputInfo {
    * 最大拉流并发数，最大4，默认4。
    */
   MaxConcurrent?: number
+  /**
+   * 绑定的安全组 ID。 仅支持关联一组安全组。
+   */
+  SecurityGroupIds?: Array<string>
 }
 
 /**
@@ -5099,6 +5103,10 @@ export interface CreateOutputInfo {
    * 最大拉流并发数，最大4，默认4。
    */
   MaxConcurrent?: number
+  /**
+   * 绑定的输入安全组 ID。
+   */
+  SecurityGroupIds?: Array<string>
 }
 
 /**
@@ -6965,10 +6973,12 @@ export interface EnableScheduleResponse {
 export interface OutputSRTSourceAddressResp {
   /**
    * 监听IP。
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Ip: string
   /**
    * 监听端口。
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Port: number
 }
@@ -7324,10 +7334,12 @@ export interface AiSampleTagOperation {
 export interface SRTSourceAddressResp {
   /**
    * 对端IP。
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Ip: string
   /**
    * 对端端口。
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Port: number
 }
@@ -7353,71 +7365,76 @@ export interface DescribeInput {
   /**
    * 输入Id。
    */
-  InputId: string
+  InputId?: string
   /**
    * 输入名称。
    */
-  InputName: string
+  InputName?: string
   /**
    * 输入描述。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Description: string
+  Description?: string
   /**
    * 输入协议。
    */
-  Protocol: string
+  Protocol?: string
   /**
    * 输入地址列表。
    */
-  InputAddressList: Array<InputAddress>
+  InputAddressList?: Array<InputAddress>
   /**
    * 输入IP白名单列表。
    */
-  AllowIpList: Array<string>
+  AllowIpList?: Array<string>
   /**
    * 输入的SRT配置信息。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SRTSettings: DescribeInputSRTSettings
+  SRTSettings?: DescribeInputSRTSettings
   /**
    * 输入的RTP配置信息。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RTPSettings: DescribeInputRTPSettings
+  RTPSettings?: DescribeInputRTPSettings
   /**
    * 输入的地区。
    */
-  InputRegion: string
+  InputRegion?: string
   /**
    * 输入的RTMP配置信息。
    */
-  RTMPSettings: DescribeInputRTMPSettings
+  RTMPSettings?: DescribeInputRTMPSettings
   /**
    * 输入的主备开关。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  FailOver: string
+  FailOver?: string
   /**
    * 输入的RTMP_PULL配置信息。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RTMPPullSettings: DescribeInputRTMPPullSettings
+  RTMPPullSettings?: DescribeInputRTMPPullSettings
   /**
    * 输入的RTSP_PULL配置信息。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RTSPPullSettings: DescribeInputRTSPPullSettings
+  RTSPPullSettings?: DescribeInputRTSPPullSettings
   /**
    * 输入的HLS_PULL配置信息。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  HLSPullSettings: DescribeInputHLSPullSettings
+  HLSPullSettings?: DescribeInputHLSPullSettings
   /**
    * 延播平滑吐流配置信息。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ResilientStream: ResilientStreamConf
+  ResilientStream?: ResilientStreamConf
+  /**
+   * 绑定的输入安全组 ID。	
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SecurityGroupIds?: Array<string>
 }
 
 /**
@@ -7759,73 +7776,78 @@ export interface DescribeOutput {
   /**
    * 输出Id。
    */
-  OutputId: string
+  OutputId?: string
   /**
    * 输出名称。
    */
-  OutputName: string
+  OutputName?: string
   /**
    * 输出类型。
    */
-  OutputType: string
+  OutputType?: string
   /**
    * 输出描述。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Description: string
+  Description?: string
   /**
    * 输出协议。
    */
-  Protocol: string
+  Protocol?: string
   /**
    * 输出的出口地址信息列表。
    */
-  OutputAddressList: Array<OutputAddress>
+  OutputAddressList?: Array<OutputAddress>
   /**
    * 输出的地区。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  OutputRegion: string
+  OutputRegion?: string
   /**
    * 输出的SRT配置信息。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SRTSettings: DescribeOutputSRTSettings
+  SRTSettings?: DescribeOutputSRTSettings
   /**
    * 输出的RTP配置信息。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RTPSettings: DescribeOutputRTPSettings
+  RTPSettings?: DescribeOutputRTPSettings
   /**
    * 输出的RTMP配置信息。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RTMPSettings: DescribeOutputRTMPSettings
+  RTMPSettings?: DescribeOutputRTMPSettings
   /**
    * 输出的RTMP拉流配置信息。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RTMPPullSettings: DescribeOutputRTMPPullSettings
+  RTMPPullSettings?: DescribeOutputRTMPPullSettings
   /**
    * CIDR白名单列表。
 当Protocol为RTMP_PULL有效，为空代表不限制客户端IP。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  AllowIpList: Array<string>
+  AllowIpList?: Array<string>
   /**
    * 输出的RTSP拉流配置信息。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RTSPPullSettings: DescribeOutputRTSPPullSettings
+  RTSPPullSettings?: DescribeOutputRTSPPullSettings
   /**
    * 输出的HLS拉流配置信息。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  HLSPullSettings: DescribeOutputHLSPullSettings
+  HLSPullSettings?: DescribeOutputHLSPullSettings
   /**
    * 最大拉流并发数，最大为4，默认4。
    */
   MaxConcurrent?: number
+  /**
+   * 绑定的安全组 ID。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SecurityGroupIds?: Array<string>
 }
 
 /**
@@ -11734,6 +11756,10 @@ export interface CreateInput {
    * 延播平滑吐流配置信息。
    */
   ResilientStream?: ResilientStreamConf
+  /**
+   * 绑定的输入安全组 ID。
+   */
+  SecurityGroupIds?: Array<string>
 }
 
 /**
@@ -12918,6 +12944,10 @@ export interface ModifyInput {
    * 延播平滑吐流配置信息。
    */
   ResilientStream?: ResilientStreamConf
+  /**
+   * 绑定的输入安全组 ID。 仅支持关联一组安全组。
+   */
+  SecurityGroupIds?: Array<string>
 }
 
 /**

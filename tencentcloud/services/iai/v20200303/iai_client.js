@@ -49,7 +49,6 @@ class Client extends abstract_client_1.AbstractClient {
 
 >
 - 不可同时搜索不同算法模型版本（FaceModelVersion）的人员库。
-
      */
     async SearchFacesReturnsByGroup(req, cb) {
         return this.request("SearchFacesReturnsByGroup", req, cb);

@@ -216,7 +216,44 @@ export interface CreateServiceTemplateRequest {
 /**
  * CreateVpcPeeringConnection请求参数结构体
  */
-export declare type CreateVpcPeeringConnectionRequest = null;
+export interface CreateVpcPeeringConnectionRequest {
+    /**
+     * 本端VPC唯一ID。
+     */
+    SourceVpcId: string;
+    /**
+     * 对等连接名称。
+     */
+    PeeringConnectionName: string;
+    /**
+     * 对端VPC唯一ID。
+     */
+    DestinationVpcId: string;
+    /**
+     * 对端用户UIN。
+     */
+    DestinationUin: string;
+    /**
+     * 对端地域。
+     */
+    DestinationRegion: string;
+    /**
+     * 带宽上限，单位Mbps。
+     */
+    Bandwidth?: number;
+    /**
+     * 互通类型，VPC_PEER：VPC间互通；VPC_BM_PEER：VPC与黑石网络互通。
+     */
+    Type?: string;
+    /**
+     * 计费模式，日峰值POSTPAID_BY_DAY_MAX，月95POSTPAID_BY_MONTH_95。
+     */
+    ChargeType?: string;
+    /**
+     * 服务分级：PT、AU、AG。
+     */
+    QosLevel?: string;
+}
 /**
  * CreateCcn返回参数结构体
  */
@@ -272,7 +309,12 @@ export interface CreateAssistantCidrRequest {
 /**
  * RejectVpcPeeringConnection请求参数结构体
  */
-export declare type RejectVpcPeeringConnectionRequest = null;
+export interface RejectVpcPeeringConnectionRequest {
+    /**
+     * 对等连接唯一ID。
+     */
+    PeeringConnectionId: string;
+}
 /**
  * DescribeNetworkInterfaces请求参数结构体
  */
@@ -697,7 +739,24 @@ export interface ResourceStatisticsItem {
 /**
  * ModifyVpcPeeringConnection请求参数结构体
  */
-export declare type ModifyVpcPeeringConnectionRequest = null;
+export interface ModifyVpcPeeringConnectionRequest {
+    /**
+     * 对等连接ID。
+     */
+    PeeringConnectionId: string;
+    /**
+     * 对等连接名称。
+     */
+    PeeringConnectionName?: string;
+    /**
+     * 带宽上限，单位Mbps。
+     */
+    Bandwidth?: number;
+    /**
+     * 计费模式，日峰值POSTPAID_BY_DAY_MAX，月95 POSTPAID_BY_MONTH_95。
+     */
+    ChargeType?: string;
+}
 /**
  * DetachClassicLinkVpc请求参数结构体
  */
@@ -12301,6 +12360,11 @@ export interface CcnBandwidthInfo {
  * CreateVpcPeeringConnection返回参数结构体
  */
 export interface CreateVpcPeeringConnectionResponse {
+    /**
+     * 对等连接ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PeeringConnectionId?: string;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */

@@ -1503,7 +1503,7 @@ export class Client extends AbstractClient {
    * 本接口（CreateVpcPeeringConnection）用于创建私有网络对等连接。
    */
   async CreateVpcPeeringConnection(
-    req?: CreateVpcPeeringConnectionRequest,
+    req: CreateVpcPeeringConnectionRequest,
     cb?: (error: string, rep: CreateVpcPeeringConnectionResponse) => void
   ): Promise<CreateVpcPeeringConnectionResponse> {
     return this.request("CreateVpcPeeringConnection", req, cb)
@@ -2302,7 +2302,7 @@ export class Client extends AbstractClient {
    * 本接口（ModifyVpcPeeringConnection）用于修改私有网络对等连接属性。
    */
   async ModifyVpcPeeringConnection(
-    req?: ModifyVpcPeeringConnectionRequest,
+    req: ModifyVpcPeeringConnectionRequest,
     cb?: (error: string, rep: ModifyVpcPeeringConnectionResponse) => void
   ): Promise<ModifyVpcPeeringConnectionResponse> {
     return this.request("ModifyVpcPeeringConnection", req, cb)
@@ -2887,7 +2887,7 @@ export class Client extends AbstractClient {
    * 本接口（RejectVpcPeeringConnection）用于驳回对等连接请求。
    */
   async RejectVpcPeeringConnection(
-    req?: RejectVpcPeeringConnectionRequest,
+    req: RejectVpcPeeringConnectionRequest,
     cb?: (error: string, rep: RejectVpcPeeringConnectionResponse) => void
   ): Promise<RejectVpcPeeringConnectionResponse> {
     return this.request("RejectVpcPeeringConnection", req, cb)

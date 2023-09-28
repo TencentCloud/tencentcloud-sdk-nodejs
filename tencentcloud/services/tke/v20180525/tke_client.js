@@ -82,6 +82,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteCluster", req, cb);
     }
     /**
+     * 升级边缘集群组件到指定版本，此版本为TKEEdge专用版本。
+     */
+    async UpdateEdgeClusterVersion(req, cb) {
+        return this.request("UpdateEdgeClusterVersion", req, cb);
+    }
+    /**
      * 从tke@edge集群边缘节点上卸载日志采集组件
      */
     async UninstallEdgeLogAgent(req, cb) {
@@ -94,10 +100,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteEdgeClusterInstances", req, cb);
     }
     /**
-     * 修改告警规则
+     * 包括 Pod 资源统计和绑定的预留券资源统计。
      */
-    async ModifyPrometheusAlertRule(req, cb) {
-        return this.request("ModifyPrometheusAlertRule", req, cb);
+    async DescribePostNodeResources(req, cb) {
+        return this.request("DescribePostNodeResources", req, cb);
     }
     /**
      * 仅能设置节点池中处于伸缩组的节点
@@ -154,16 +160,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreatePrometheusTemplate", req, cb);
     }
     /**
-     * 在TKE集群中安装CLS日志采集组件
+     * 查询可以用预留券抵扣的 Pod 信息。
      */
-    async InstallLogAgent(req, cb) {
-        return this.request("InstallLogAgent", req, cb);
+    async DescribePodsBySpec(req, cb) {
+        return this.request("DescribePodsBySpec", req, cb);
     }
     /**
-     * 根据镜像列表，查询匹配的镜像缓存
+     * 查询预留实例列表
      */
-    async GetMostSuitableImageCache(req, cb) {
-        return this.request("GetMostSuitableImageCache", req, cb);
+    async DescribeReservedInstances(req, cb) {
+        return this.request("DescribeReservedInstances", req, cb);
     }
     /**
      * 删除虚拟节点
@@ -232,10 +238,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeEdgeLogSwitches", req, cb);
     }
     /**
-     * 升级边缘集群组件到指定版本，此版本为TKEEdge专用版本。
+     * 修改预留券的抵扣范围，抵扣范围取值：Region、Zone 和 Node。
      */
-    async UpdateEdgeClusterVersion(req, cb) {
-        return this.request("UpdateEdgeClusterVersion", req, cb);
+    async ModifyReservedInstanceScope(req, cb) {
+        return this.request("ModifyReservedInstanceScope", req, cb);
     }
     /**
      * 获取边缘计算外部访问的kubeconfig
@@ -266,6 +272,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeClusterNodePools(req, cb) {
         return this.request("DescribeClusterNodePools", req, cb);
+    }
+    /**
+     * 本接口查询当前用户和地域在指定可用区下的机型可支持的最大 TKE VPC-CNI 网络模式的 Pod 数量
+     */
+    async DescribeVpcCniPodLimits(req, cb) {
+        return this.request("DescribeVpcCniPodLimits", req, cb);
     }
     /**
      * 升级集群 Master 组件到指定版本
@@ -400,6 +412,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeExistedInstances", req, cb);
     }
     /**
+     * 查询指定集群的巡检结果信息
+     */
+    async ListClusterInspectionResults(req, cb) {
+        return this.request("ListClusterInspectionResults", req, cb);
+    }
+    /**
      * 获取2.0实例初始化任务状态
      */
     async DescribePrometheusInstanceInitStatus(req, cb) {
@@ -448,6 +466,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeClusterEndpointStatus", req, cb);
     }
     /**
+     * 预留券实例的购买会预先扣除本次实例购买所需金额，在调用本接口前请确保账户余额充足。
+     */
+    async CreateReservedInstances(req, cb) {
+        return this.request("CreateReservedInstances", req, cb);
+    }
+    /**
      * 更新镜像缓存接口
      */
     async UpdateImageCache(req, cb) {
@@ -470,6 +494,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async AddExistedInstances(req, cb) {
         return this.request("AddExistedInstances", req, cb);
+    }
+    /**
+     * 修改告警规则
+     */
+    async ModifyPrometheusAlertRule(req, cb) {
+        return this.request("ModifyPrometheusAlertRule", req, cb);
     }
     /**
      * 修改托管集群外网端口的安全策略（老的方式，仅支持托管集群外网端口）
@@ -604,10 +634,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UpdateClusterKubeconfig", req, cb);
     }
     /**
-     * 本接口查询当前用户和地域在指定可用区下的机型可支持的最大 TKE VPC-CNI 网络模式的 Pod 数量
+     * 查看集群状态列表
      */
-    async DescribeVpcCniPodLimits(req, cb) {
-        return this.request("DescribeVpcCniPodLimits", req, cb);
+    async DescribeClusterStatus(req, cb) {
+        return this.request("DescribeClusterStatus", req, cb);
     }
     /**
      * 修改节点池的机型配置
@@ -760,10 +790,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateClusterEndpoint", req, cb);
     }
     /**
-     * 查询指定集群的巡检结果信息
+     * 查询各个规格的 Pod 的抵扣率
      */
-    async ListClusterInspectionResults(req, cb) {
-        return this.request("ListClusterInspectionResults", req, cb);
+    async DescribePodDeductionRate(req, cb) {
+        return this.request("DescribePodDeductionRate", req, cb);
     }
     /**
      * 修改全局告警通知渠道
@@ -772,10 +802,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyPrometheusGlobalNotification", req, cb);
     }
     /**
-     * 查看集群状态列表
+     * 预留券实例如符合退还规则，可通过本接口主动退还。
      */
-    async DescribeClusterStatus(req, cb) {
-        return this.request("DescribeClusterStatus", req, cb);
+    async DeleteReservedInstances(req, cb) {
+        return this.request("DeleteReservedInstances", req, cb);
     }
     /**
      * 获取关联目标集群的实例列表
@@ -832,6 +862,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeClusterSecurity", req, cb);
     }
     /**
+     * 续费时请确保账户余额充足。
+     */
+    async RenewReservedInstances(req, cb) {
+        return this.request("RenewReservedInstances", req, cb);
+    }
+    /**
      * 获取TMP实例关联集群列表
      */
     async DescribePrometheusClusterAgents(req, cb) {
@@ -878,6 +914,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DeleteTKEEdgeCluster(req, cb) {
         return this.request("DeleteTKEEdgeCluster", req, cb);
+    }
+    /**
+     * 根据镜像列表，查询匹配的镜像缓存
+     */
+    async GetMostSuitableImageCache(req, cb) {
+        return this.request("GetMostSuitableImageCache", req, cb);
     }
     /**
      * 获取集群的访问地址，包括内网地址，外网地址，外网域名，外网访问安全策略
@@ -970,6 +1012,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribePrometheusOverviews", req, cb);
     }
     /**
+     * 移出节点池节点，但保留在集群内
+     */
+    async RemoveNodeFromNodePool(req, cb) {
+        return this.request("RemoveNodeFromNodePool", req, cb);
+    }
+    /**
      * 获取边缘计算集群的当前状态以及过程信息
      */
     async DescribeTKEEdgeClusterStatus(req, cb) {
@@ -1030,10 +1078,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("GetClusterLevelPrice", req, cb);
     }
     /**
-     * 修改模板内容
+     * 预留实例用量查询
      */
-    async ModifyPrometheusTemplate(req, cb) {
-        return this.request("ModifyPrometheusTemplate", req, cb);
+    async DescribeRIUtilizationDetail(req, cb) {
+        return this.request("DescribeRIUtilizationDetail", req, cb);
     }
     /**
      * 获取集群的kubeconfig文件，不同子账户获取自己的kubeconfig文件，该文件中有每个子账户自己的kube-apiserver的客户端证书，默认首次调此接口时候创建客户端证书，时效20年，未授予任何权限，如果是集群所有者或者主账户，则默认是cluster-admin权限。
@@ -1168,10 +1216,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UpdateTKEEdgeCluster", req, cb);
     }
     /**
-     * 移出节点池节点，但保留在集群内
+     * 修改模板内容
      */
-    async RemoveNodeFromNodePool(req, cb) {
-        return this.request("RemoveNodeFromNodePool", req, cb);
+    async ModifyPrometheusTemplate(req, cb) {
+        return this.request("ModifyPrometheusTemplate", req, cb);
     }
     /**
      * 拉取模板列表，默认模板将总是在最前面
@@ -1232,6 +1280,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CreateClusterVirtualNode(req, cb) {
         return this.request("CreateClusterVirtualNode", req, cb);
+    }
+    /**
+     * 在TKE集群中安装CLS日志采集组件
+     */
+    async InstallLogAgent(req, cb) {
+        return this.request("InstallLogAgent", req, cb);
     }
     /**
      * 检查边缘计算集群的CIDR是否冲突

@@ -34,6 +34,7 @@ import {
   ChannelCancelUserAutoSignEnableUrlResponse,
   ModifyExtendedServiceRequest,
   DescribeResourceUrlsByFlowsRequest,
+  CreateChannelOrganizationInfoChangeUrlResponse,
   RemindFlowRecords,
   ChannelCreateFlowSignUrlResponse,
   ChannelCreateBatchSignUrlResponse,
@@ -158,6 +159,7 @@ import {
   GetDownloadFlowUrlRequest,
   ChannelCreateEmbedWebUrlResponse,
   ChannelBatchCancelFlowsRequest,
+  CreateChannelOrganizationInfoChangeUrlRequest,
   ChannelModifyRoleRequest,
   ChannelUpdateSealStatusRequest,
   ChannelCreateFlowGroupByTemplatesRequest,
@@ -825,6 +827,16 @@ httpProfile.setEndpoint("file.test.ess.tencent.cn");
     cb?: (error: string, rep: ChannelCreateFlowGroupByTemplatesResponse) => void
   ): Promise<ChannelCreateFlowGroupByTemplatesResponse> {
     return this.request("ChannelCreateFlowGroupByTemplates", req, cb)
+  }
+
+  /**
+   * 此接口（CreateChannelOrganizationInfoChangeUrl）用于创建子客企业信息变更链接，支持创建企业超管变更链接或企业基础信息变更链接，通过入参ChangeType指定。
+   */
+  async CreateChannelOrganizationInfoChangeUrl(
+    req?: CreateChannelOrganizationInfoChangeUrlRequest,
+    cb?: (error: string, rep: CreateChannelOrganizationInfoChangeUrlResponse) => void
+  ): Promise<CreateChannelOrganizationInfoChangeUrlResponse> {
+    return this.request("CreateChannelOrganizationInfoChangeUrl", req, cb)
   }
 
   /**

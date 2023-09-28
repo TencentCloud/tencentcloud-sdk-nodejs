@@ -317,7 +317,7 @@ export declare class Client extends AbstractClient {
     /**
      * 本接口（CreateVpcPeeringConnection）用于创建私有网络对等连接。
      */
-    CreateVpcPeeringConnection(req?: CreateVpcPeeringConnectionRequest, cb?: (error: string, rep: CreateVpcPeeringConnectionResponse) => void): Promise<CreateVpcPeeringConnectionResponse>;
+    CreateVpcPeeringConnection(req: CreateVpcPeeringConnectionRequest, cb?: (error: string, rep: CreateVpcPeeringConnectionResponse) => void): Promise<CreateVpcPeeringConnectionResponse>;
     /**
      * 本接口 (DescribeSpecificTrafficPackageUsedDetails) 用于查询指定 共享流量包 的用量明细。
      */
@@ -672,7 +672,7 @@ export declare class Client extends AbstractClient {
     /**
      * 本接口（ModifyVpcPeeringConnection）用于修改私有网络对等连接属性。
      */
-    ModifyVpcPeeringConnection(req?: ModifyVpcPeeringConnectionRequest, cb?: (error: string, rep: ModifyVpcPeeringConnectionResponse) => void): Promise<ModifyVpcPeeringConnectionResponse>;
+    ModifyVpcPeeringConnection(req: ModifyVpcPeeringConnectionRequest, cb?: (error: string, rep: ModifyVpcPeeringConnectionResponse) => void): Promise<ModifyVpcPeeringConnectionResponse>;
     /**
      * 本接口（ModifyCcnRegionBandwidthLimitsType）用于修改后付费云联网实例修改带宽限速策略。
      */
@@ -927,7 +927,7 @@ export declare class Client extends AbstractClient {
     /**
      * 本接口（RejectVpcPeeringConnection）用于驳回对等连接请求。
      */
-    RejectVpcPeeringConnection(req?: RejectVpcPeeringConnectionRequest, cb?: (error: string, rep: RejectVpcPeeringConnectionResponse) => void): Promise<RejectVpcPeeringConnectionResponse>;
+    RejectVpcPeeringConnection(req: RejectVpcPeeringConnectionRequest, cb?: (error: string, rep: RejectVpcPeeringConnectionResponse) => void): Promise<RejectVpcPeeringConnectionResponse>;
     /**
      * 本接口（ResetVpnConnection）用于重置VPN通道。
      */

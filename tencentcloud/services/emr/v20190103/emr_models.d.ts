@@ -280,7 +280,7 @@ export interface CreateInstanceResponse {
      * 实例ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    InstanceId: string;
+    InstanceId?: string;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1175,6 +1175,21 @@ export interface Tag {
      * 标签值
      */
     TagValue?: string;
+}
+/**
+ * 集群id与流程id的mapping
+ */
+export interface ClusterIDToFlowID {
+    /**
+     * 集群id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ClusterId?: string;
+    /**
+     * 流程id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    FlowId?: number;
 }
 /**
  * 集群列表返回示例
@@ -2521,6 +2536,11 @@ export interface ModifyResourcesTagsResponse {
      */
     PartSuccessList?: Array<string>;
     /**
+     * 集群id与流程id的映射列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ClusterToFlowIdList?: Array<ClusterIDToFlowID>;
+    /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
@@ -3425,8 +3445,8 @@ export interface CreateInstanceRequest {
     CbsEncrypt?: number;
     /**
      * hive共享元数据库类型。取值范围：
-  <li>EMR_NEW_META：表示集群默认创建</li>
-  <li>EMR_EXIT_META：表示集群使用指定EMR-MetaDB。</li>
+  <li>EMR_DEFAULT_META：表示集群默认创建</li>
+  <li>EMR_EXIST_META：表示集群使用指定EMR-MetaDB。</li>
   <li>USER_CUSTOM_META：表示集群使用自定义MetaDB。</li>
      */
     MetaType?: string;

@@ -2938,6 +2938,11 @@ export interface ModifyLivePullStreamTaskRequest {
      */
     OffsetTime?: number;
     /**
+     * 目标 Url。
+  换目标地址，会断流重推到新地址。
+     */
+    ToUrl?: string;
+    /**
      * 任务备注。
      */
     Comment?: string;

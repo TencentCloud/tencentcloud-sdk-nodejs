@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribePersonCertificateResponse, CreateSealRequest, ModifyIntegrationDepartmentResponse, CancelFlowResponse, DescribeFlowEvidenceReportRequest, UpdateIntegrationEmployeesResponse, CreatePreparedPersonalEsignRequest, DescribeIntegrationDepartmentsResponse, CreateFlowApproversResponse, DescribeFileUrlsResponse, ModifyApplicationCallbackInfoResponse, CreateMultiFlowSignQRCodeResponse, DescribeThirdPartyAuthCodeResponse, DisableUserAutoSignResponse, CancelUserAutoSignEnableUrlResponse, BindEmployeeUserIdWithClientOpenIdResponse, CreateIntegrationEmployeesRequest, DescribeIntegrationRolesRequest, CreateFlowEvidenceReportRequest, StartFlowResponse, CreateIntegrationRoleRequest, DeleteIntegrationRoleUsersResponse, CreateConvertTaskApiRequest, DeleteIntegrationEmployeesResponse, CreateBatchSignUrlResponse, CreateFlowRemindsResponse, DescribeOrganizationGroupOrganizationsRequest, CreateFlowGroupByFilesRequest, DescribeFlowComponentsResponse, DescribeFlowEvidenceReportResponse, DeleteSealPoliciesRequest, CreateFlowGroupByTemplatesResponse, CreateDocumentResponse, DescribeIntegrationEmployeesRequest, CreateIntegrationUserRolesResponse, CreateFlowRequest, CreateSchemeUrlRequest, DeleteIntegrationDepartmentResponse, DescribeThirdPartyAuthCodeRequest, UnbindEmployeeUserIdWithClientOpenIdResponse, CreateReleaseFlowResponse, CreateWebThemeConfigResponse, BindEmployeeUserIdWithClientOpenIdRequest, DescribeIntegrationDepartmentsRequest, CreateIntegrationDepartmentResponse, DescribeFlowTemplatesRequest, DeleteSealPoliciesResponse, DescribeUserAutoSignStatusResponse, CreatePersonAuthCertificateImageResponse, CreateBatchCancelFlowUrlResponse, CreateSealPolicyResponse, DisableUserAutoSignRequest, DescribeIntegrationEmployeesResponse, CreateConvertTaskApiResponse, CreateFlowSignReviewRequest, UnbindEmployeeUserIdWithClientOpenIdRequest, CreateSchemeUrlResponse, CreateUserAutoSignEnableUrlResponse, CreateFlowSignUrlResponse, DescribeFileUrlsRequest, CreateFlowApproversRequest, ModifyIntegrationRoleResponse, CreateFlowEvidenceReportResponse, CreateIntegrationRoleResponse, DescribeFlowComponentsRequest, CreateIntegrationDepartmentRequest, CreateDocumentRequest, CreatePreparedPersonalEsignResponse, DescribeOrganizationSealsResponse, CreateEmbedWebUrlRequest, DeleteIntegrationEmployeesRequest, GetTaskResultApiRequest, ModifyIntegrationRoleRequest, CreateFlowGroupByFilesResponse, CreateIntegrationEmployeesResponse, DeleteIntegrationRoleUsersRequest, CreateFlowByFilesRequest, CreateFlowSignUrlRequest, CreateReleaseFlowRequest, CreateIntegrationUserRolesRequest, CreatePersonAuthCertificateImageRequest, CreateFlowByFilesResponse, UploadFilesResponse, VerifyPdfRequest, CreateFlowSignReviewResponse, ModifyIntegrationDepartmentRequest, CreateUserAutoSignEnableUrlRequest, CreateOrganizationBatchSignUrlResponse, CancelUserAutoSignEnableUrlRequest, CreateWebThemeConfigRequest, CreateOrganizationBatchSignUrlRequest, CreatePrepareFlowResponse, GetTaskResultApiResponse, CancelMultiFlowSignQRCodeRequest, DeleteIntegrationDepartmentRequest, ModifyApplicationCallbackInfoRequest, StartFlowRequest, CreateSealResponse, CreatePrepareFlowRequest, CreateEmbedWebUrlResponse, CreateSealPolicyRequest, DescribeOrganizationSealsRequest, CancelFlowRequest, DescribeExtendedServiceAuthInfosRequest, DescribeIntegrationRolesResponse, CreateBatchSignUrlRequest, CreateFlowRemindsRequest, UpdateIntegrationEmployeesRequest, DescribeFlowBriefsRequest, CreateFlowGroupByTemplatesRequest, VerifyPdfResponse, DescribeFlowBriefsResponse, DescribeFlowTemplatesResponse, UploadFilesRequest, DescribePersonCertificateRequest, CreateBatchCancelFlowUrlRequest, CreateMultiFlowSignQRCodeRequest, DescribeFlowInfoRequest, DescribeFlowInfoResponse, CancelMultiFlowSignQRCodeResponse, CreateFlowResponse, DescribeUserAutoSignStatusRequest, DescribeOrganizationGroupOrganizationsResponse, DescribeExtendedServiceAuthInfosResponse } from "./ess_models";
+import { DescribePersonCertificateResponse, CreateSealRequest, ModifyIntegrationDepartmentResponse, CancelFlowResponse, DescribeFlowEvidenceReportRequest, UpdateIntegrationEmployeesResponse, CreatePreparedPersonalEsignRequest, DescribeIntegrationDepartmentsResponse, CreateFlowApproversResponse, DescribeFileUrlsResponse, ModifyApplicationCallbackInfoResponse, CreateMultiFlowSignQRCodeResponse, DescribeThirdPartyAuthCodeResponse, DisableUserAutoSignResponse, CancelUserAutoSignEnableUrlResponse, BindEmployeeUserIdWithClientOpenIdResponse, CreateIntegrationEmployeesRequest, DescribeIntegrationRolesRequest, CreateFlowEvidenceReportRequest, StartFlowResponse, CreateIntegrationRoleRequest, DeleteIntegrationRoleUsersResponse, CreateConvertTaskApiRequest, DeleteIntegrationEmployeesResponse, CreateBatchSignUrlResponse, CreateFlowRemindsResponse, DescribeOrganizationGroupOrganizationsRequest, CreateFlowGroupByFilesRequest, DescribeFlowComponentsResponse, DescribeFlowEvidenceReportResponse, DeleteSealPoliciesRequest, CreateFlowGroupByTemplatesResponse, CreateDocumentResponse, DescribeIntegrationEmployeesRequest, CreateIntegrationUserRolesResponse, CreateFlowRequest, CreateSchemeUrlRequest, DeleteIntegrationDepartmentResponse, DescribeThirdPartyAuthCodeRequest, UnbindEmployeeUserIdWithClientOpenIdResponse, CreateReleaseFlowResponse, CreateWebThemeConfigResponse, BindEmployeeUserIdWithClientOpenIdRequest, CreateOrganizationInfoChangeUrlResponse, CreateIntegrationDepartmentResponse, DescribeFlowTemplatesRequest, DeleteSealPoliciesResponse, DescribeUserAutoSignStatusResponse, CreatePersonAuthCertificateImageResponse, CreateBatchCancelFlowUrlResponse, CreateSealPolicyResponse, DisableUserAutoSignRequest, DescribeIntegrationEmployeesResponse, CreateConvertTaskApiResponse, CreateFlowSignReviewRequest, UnbindEmployeeUserIdWithClientOpenIdRequest, CreateSchemeUrlResponse, CreateUserAutoSignEnableUrlResponse, CreateFlowSignUrlResponse, DescribeFileUrlsRequest, CreateFlowApproversRequest, ModifyIntegrationRoleResponse, CreateFlowEvidenceReportResponse, CreateIntegrationRoleResponse, DescribeFlowComponentsRequest, CreateIntegrationDepartmentRequest, CreateDocumentRequest, CreatePreparedPersonalEsignResponse, DescribeOrganizationSealsResponse, CreateEmbedWebUrlRequest, DeleteIntegrationEmployeesRequest, GetTaskResultApiRequest, ModifyIntegrationRoleRequest, CreateFlowGroupByFilesResponse, CreateIntegrationEmployeesResponse, DeleteIntegrationRoleUsersRequest, CreateFlowByFilesRequest, CreateFlowSignUrlRequest, CreateReleaseFlowRequest, CreateIntegrationUserRolesRequest, CreatePersonAuthCertificateImageRequest, CreateFlowByFilesResponse, UploadFilesResponse, VerifyPdfRequest, CreateFlowSignReviewResponse, ModifyIntegrationDepartmentRequest, CreateUserAutoSignEnableUrlRequest, CreateOrganizationBatchSignUrlResponse, CancelUserAutoSignEnableUrlRequest, CreateWebThemeConfigRequest, CreateOrganizationBatchSignUrlRequest, CreatePrepareFlowResponse, GetTaskResultApiResponse, CancelMultiFlowSignQRCodeRequest, DeleteIntegrationDepartmentRequest, ModifyApplicationCallbackInfoRequest, StartFlowRequest, CreateSealResponse, CreatePrepareFlowRequest, CreateEmbedWebUrlResponse, CreateSealPolicyRequest, DescribeOrganizationSealsRequest, CancelFlowRequest, DescribeExtendedServiceAuthInfosRequest, DescribeIntegrationRolesResponse, CreateBatchSignUrlRequest, CreateFlowRemindsRequest, UpdateIntegrationEmployeesRequest, DescribeFlowBriefsRequest, CreateFlowGroupByTemplatesRequest, VerifyPdfResponse, DescribeFlowBriefsResponse, DescribeFlowTemplatesResponse, UploadFilesRequest, DescribePersonCertificateRequest, CreateBatchCancelFlowUrlRequest, CreateMultiFlowSignQRCodeRequest, DescribeFlowInfoRequest, DescribeIntegrationDepartmentsRequest, DescribeFlowInfoResponse, CancelMultiFlowSignQRCodeResponse, CreateFlowResponse, DescribeUserAutoSignStatusRequest, CreateOrganizationInfoChangeUrlRequest, DescribeOrganizationGroupOrganizationsResponse, DescribeExtendedServiceAuthInfosResponse } from "./ess_models";
 /**
  * ess client
  * @class
@@ -209,6 +209,25 @@ export declare class Client extends AbstractClient {
 <li>在解除协议发起之后，原合同的状态将转变为解除中。一旦解除协议签署完毕，原合同及解除协议均变为已解除状态。</li></ul>
      */
     CreateReleaseFlow(req: CreateReleaseFlowRequest, cb?: (error: string, rep: CreateReleaseFlowResponse) => void): Promise<CreateReleaseFlowResponse>;
+    /**
+     * 获取跳转至腾讯电子签小程序的签署链接
+
+适用场景：如果需要签署人在自己的APP、小程序、H5应用中签署，可以通过此接口获取跳转腾讯电子签小程序的签署跳转链接。
+
+跳转到小程序的实现，参考微信官方文档（分为<a href="https://developers.weixin.qq.com/miniprogram/dev/api/navigate/wx.navigateToMiniProgram.html">全屏</a>、<a href="https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/openEmbeddedMiniProgram.html">半屏</a>两种方式），如何配置也可以请参考: <a href="https://qian.tencent.com/developers/company/openwxminiprogram">跳转电子签小程序配置</a>
+
+注：
+`1. 如果签署人是在PC端扫码签署，可以通过生成跳转链接自主转换成二维码，让签署人在PC端扫码签署`
+`2. 签署链接的有效期为90天，超过有效期链接不可用`
+
+其中小程序的原始Id如下，或者查看小程序信息自助获取。
+
+| 小程序 | AppID | 原始ID |
+| ------------ | ------------ | ------------ |
+| 腾讯电子签（正式版） | wxa023b292fd19d41d | gh_da88f6188665 |
+| 腾讯电子签Demo | wx371151823f6f3edf | gh_39a5d3de69fa |
+     */
+    CreateSchemeUrl(req: CreateSchemeUrlRequest, cb?: (error: string, rep: CreateSchemeUrlResponse) => void): Promise<CreateSchemeUrlResponse>;
     /**
      * 通过此接口获取个人用户自动签的开通状态。
 
@@ -434,24 +453,9 @@ httpProfile.setEndpoint("file.test.ess.tencent.cn");
      */
     DeleteIntegrationEmployees(req: DeleteIntegrationEmployeesRequest, cb?: (error: string, rep: DeleteIntegrationEmployeesResponse) => void): Promise<DeleteIntegrationEmployeesResponse>;
     /**
-     * 获取跳转至腾讯电子签小程序的签署链接
-
-适用场景：如果需要签署人在自己的APP、小程序、H5应用中签署，可以通过此接口获取跳转腾讯电子签小程序的签署跳转链接。
-
-跳转到小程序的实现，参考微信官方文档（分为<a href="https://developers.weixin.qq.com/miniprogram/dev/api/navigate/wx.navigateToMiniProgram.html">全屏</a>、<a href="https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/openEmbeddedMiniProgram.html">半屏</a>两种方式），如何配置也可以请参考: <a href="https://qian.tencent.com/developers/company/openwxminiprogram">跳转电子签小程序配置</a>
-
-注：
-`1. 如果签署人是在PC端扫码签署，可以通过生成跳转链接自主转换成二维码，让签署人在PC端扫码签署`
-`2. 签署链接的有效期为90天，超过有效期链接不可用`
-
-其中小程序的原始Id如下，或者查看小程序信息自助获取。
-
-| 小程序 | AppID | 原始ID |
-| ------------ | ------------ | ------------ |
-| 腾讯电子签（正式版） | wxa023b292fd19d41d | gh_da88f6188665 |
-| 腾讯电子签Demo | wx371151823f6f3edf | gh_39a5d3de69fa |
+     * 此接口（CreateOrganizationInfoChangeUrl）用于创建企业信息变更链接，支持创建企业超管变更链接或企业基础信息变更链接，通过入参ChangeType指定。
      */
-    CreateSchemeUrl(req: CreateSchemeUrlRequest, cb?: (error: string, rep: CreateSchemeUrlResponse) => void): Promise<CreateSchemeUrlResponse>;
+    CreateOrganizationInfoChangeUrl(req: CreateOrganizationInfoChangeUrlRequest, cb?: (error: string, rep: CreateOrganizationInfoChangeUrlResponse) => void): Promise<CreateOrganizationInfoChangeUrlResponse>;
     /**
      * 用来撤销<a href="https://qian.tencent.com/developers/companyApis/users/CreateUserAutoSignEnableUrl" target="_blank">获取个人用户自动签的开通状态</a>生成的开通链接，撤销生成的链接失效。
 

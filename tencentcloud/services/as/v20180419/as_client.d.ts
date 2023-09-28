@@ -1,12 +1,18 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DisableAutoScalingGroupResponse, ModifyLaunchConfigurationAttributesRequest, DisableAutoScalingGroupRequest, ModifyAutoScalingGroupRequest, ScaleOutInstancesRequest, ModifyScheduledActionRequest, DescribeAutoScalingGroupsRequest, DescribeAccountLimitsResponse, CreateLaunchConfigurationResponse, CreateLifecycleHookResponse, ClearLaunchConfigurationAttributesResponse, DescribeAutoScalingGroupsResponse, CreateScheduledActionRequest, StopAutoScalingInstancesResponse, DescribeScalingPoliciesRequest, ModifyScheduledActionResponse, AttachLoadBalancersResponse, ExecuteScalingPolicyResponse, DeleteAutoScalingGroupRequest, SetInstancesProtectionResponse, StartAutoScalingInstancesResponse, CompleteLifecycleActionRequest, CreateScalingPolicyResponse, CreateNotificationConfigurationResponse, DescribeLaunchConfigurationsResponse, RemoveInstancesRequest, DeleteScalingPolicyResponse, DetachLoadBalancersRequest, DescribeAutoScalingInstancesRequest, ModifyLoadBalancersRequest, RemoveInstancesResponse, ModifyScalingPolicyResponse, SetInstancesProtectionRequest, DeleteNotificationConfigurationResponse, DetachInstancesResponse, ModifyLaunchConfigurationAttributesResponse, CreateLaunchConfigurationRequest, AttachInstancesResponse, DescribeAutoScalingGroupLastActivitiesResponse, DescribeAccountLimitsRequest, UpgradeLifecycleHookRequest, DetachLoadBalancersResponse, DescribeAutoScalingGroupLastActivitiesRequest, ModifyLoadBalancersResponse, CreateNotificationConfigurationRequest, DescribeScheduledActionsResponse, DeleteLifecycleHookRequest, ModifyLoadBalancerTargetAttributesResponse, ModifyAutoScalingGroupResponse, DeleteLaunchConfigurationRequest, ModifyScalingPolicyRequest, UpgradeLifecycleHookResponse, ModifyLifecycleHookResponse, DescribeAutoScalingAdvicesResponse, CreateAutoScalingGroupRequest, DeleteScheduledActionResponse, UpgradeLaunchConfigurationRequest, DescribeAutoScalingActivitiesResponse, DescribeNotificationConfigurationsResponse, DeleteScalingPolicyRequest, CreateAutoScalingGroupFromInstanceResponse, DetachInstancesRequest, DescribeAutoScalingInstancesResponse, DeleteLaunchConfigurationResponse, DescribeScheduledActionsRequest, DeleteScheduledActionRequest, DescribeAutoScalingActivitiesRequest, ModifyDesiredCapacityRequest, CreateScheduledActionResponse, CreateLifecycleHookRequest, ModifyLifecycleHookRequest, CompleteLifecycleActionResponse, ScaleOutInstancesResponse, DescribeLifecycleHooksRequest, CreateAutoScalingGroupResponse, ModifyNotificationConfigurationResponse, DescribeLifecycleHooksResponse, CreateScalingPolicyRequest, ScaleInInstancesResponse, DescribeAutoScalingAdvicesRequest, DeleteNotificationConfigurationRequest, DescribeLaunchConfigurationsRequest, ModifyLoadBalancerTargetAttributesRequest, DeleteAutoScalingGroupResponse, EnableAutoScalingGroupRequest, DescribeNotificationConfigurationsRequest, ScaleInInstancesRequest, ClearLaunchConfigurationAttributesRequest, StartAutoScalingInstancesRequest, AttachInstancesRequest, AttachLoadBalancersRequest, DescribeScalingPoliciesResponse, ModifyDesiredCapacityResponse, StopAutoScalingInstancesRequest, ModifyNotificationConfigurationRequest, CreateAutoScalingGroupFromInstanceRequest, EnableAutoScalingGroupResponse, UpgradeLaunchConfigurationResponse, DeleteLifecycleHookResponse, ExecuteScalingPolicyRequest } from "./as_models";
+import { DisableAutoScalingGroupResponse, ModifyLaunchConfigurationAttributesRequest, DisableAutoScalingGroupRequest, DescribeRefreshActivitiesResponse, ModifyAutoScalingGroupRequest, ScaleOutInstancesRequest, ModifyScheduledActionRequest, DescribeAutoScalingGroupsRequest, DescribeAccountLimitsResponse, CreateLaunchConfigurationResponse, CreateLifecycleHookResponse, ClearLaunchConfigurationAttributesResponse, DescribeAutoScalingGroupsResponse, CreateScheduledActionRequest, ExitStandbyRequest, StopAutoScalingInstancesResponse, DescribeScalingPoliciesRequest, ModifyScheduledActionResponse, AttachLoadBalancersResponse, ExecuteScalingPolicyResponse, DeleteAutoScalingGroupRequest, SetInstancesProtectionResponse, StartAutoScalingInstancesResponse, CompleteLifecycleActionRequest, CreateScalingPolicyResponse, CreateNotificationConfigurationResponse, DescribeRefreshActivitiesRequest, DescribeLaunchConfigurationsResponse, RemoveInstancesRequest, DeleteScalingPolicyResponse, DetachLoadBalancersRequest, DescribeAutoScalingInstancesRequest, ModifyLoadBalancersRequest, RemoveInstancesResponse, ModifyScalingPolicyResponse, DeleteLaunchConfigurationRequest, SetInstancesProtectionRequest, DeleteNotificationConfigurationResponse, DetachInstancesResponse, ModifyLaunchConfigurationAttributesResponse, CreateLaunchConfigurationRequest, AttachInstancesResponse, DescribeAutoScalingGroupLastActivitiesResponse, DescribeAccountLimitsRequest, ScaleInInstancesResponse, CancelInstanceRefreshRequest, DetachLoadBalancersResponse, DescribeAutoScalingGroupLastActivitiesRequest, ModifyLoadBalancersResponse, CreateNotificationConfigurationRequest, DescribeScheduledActionsResponse, ModifyNotificationConfigurationRequest, DeleteLifecycleHookRequest, ModifyLoadBalancerTargetAttributesResponse, ModifyAutoScalingGroupResponse, ExitStandbyResponse, ModifyScalingPolicyRequest, UpgradeLifecycleHookResponse, ModifyLifecycleHookResponse, DescribeAutoScalingAdvicesResponse, CreateAutoScalingGroupRequest, DeleteScheduledActionResponse, UpgradeLaunchConfigurationRequest, DescribeAutoScalingActivitiesResponse, DescribeNotificationConfigurationsResponse, RollbackInstanceRefreshResponse, DeleteScalingPolicyRequest, CreateAutoScalingGroupFromInstanceResponse, DetachInstancesRequest, DescribeAutoScalingInstancesResponse, DeleteLaunchConfigurationResponse, DescribeScheduledActionsRequest, DeleteScheduledActionRequest, DescribeAutoScalingActivitiesRequest, ModifyDesiredCapacityRequest, CreateScheduledActionResponse, StartInstanceRefreshResponse, CreateLifecycleHookRequest, ModifyLifecycleHookRequest, CompleteLifecycleActionResponse, ScaleOutInstancesResponse, DescribeLifecycleHooksRequest, CreateAutoScalingGroupResponse, ModifyNotificationConfigurationResponse, DescribeLifecycleHooksResponse, CreateScalingPolicyRequest, ResumeInstanceRefreshRequest, DescribeAutoScalingAdvicesRequest, DeleteNotificationConfigurationRequest, DescribeLaunchConfigurationsRequest, ModifyLoadBalancerTargetAttributesRequest, RollbackInstanceRefreshRequest, StartInstanceRefreshRequest, DeleteAutoScalingGroupResponse, EnableAutoScalingGroupRequest, StopInstanceRefreshRequest, DescribeNotificationConfigurationsRequest, ScaleInInstancesRequest, ClearLaunchConfigurationAttributesRequest, StartAutoScalingInstancesRequest, AttachInstancesRequest, StopInstanceRefreshResponse, AttachLoadBalancersRequest, UpgradeLifecycleHookRequest, ResumeInstanceRefreshResponse, DescribeScalingPoliciesResponse, ModifyDesiredCapacityResponse, StopAutoScalingInstancesRequest, CancelInstanceRefreshResponse, CreateAutoScalingGroupFromInstanceRequest, EnableAutoScalingGroupResponse, UpgradeLaunchConfigurationResponse, DeleteLifecycleHookResponse, ExecuteScalingPolicyRequest } from "./as_models";
 /**
  * as client
  * @class
  */
 export declare class Client extends AbstractClient {
     constructor(clientConfig: ClientConfig);
+    /**
+     * 暂停正在执行的实例刷新活动。
+* 暂停状态下，伸缩组也会处于停用中状态
+* 当前正在更新的实例不会暂停，待更新的实例会暂停更新
+     */
+    StopInstanceRefresh(req: StopInstanceRefreshRequest, cb?: (error: string, rep: StopInstanceRefreshResponse) => void): Promise<StopInstanceRefreshResponse>;
     /**
      * 本接口（ExecuteScalingPolicy）用于执行伸缩策略。
 
@@ -23,6 +29,15 @@ export declare class Client extends AbstractClient {
      * 本接口（ClearLaunchConfigurationAttributes）用于将启动配置内的特定属性完全清空。
      */
     ClearLaunchConfigurationAttributes(req: ClearLaunchConfigurationAttributesRequest, cb?: (error: string, rep: ClearLaunchConfigurationAttributesResponse) => void): Promise<ClearLaunchConfigurationAttributesResponse>;
+    /**
+     * 根据启动配置中参数，刷新伸缩组内运行中状态 CVM 实例，返回实例刷新活动的 RefreshActivityId。
+* 对于重装实例的刷新方式（目前仅支持重装），重装时仅会从启动配置中获取 ImageId、UserData、EnhancedService、 HostName、LoginSettings 参数进行刷新，实例的其他参数不会刷新
+* 实例刷新期间（包括暂停状态），伸缩组会被停用。不建议刷新期间修改关联启动配置，否则会影响刷新参数，造成实例配置不一致
+* 滚动更新模式会分成多批次进行刷新实例，单批次中若存在刷新失败实例，活动会进入失败暂停状态
+* 若待刷新实例被移出或销毁，会被标记为 NOT_FOUND 状态，不阻塞实例刷新活动
+* 运行中状态实例与最新启动配置参数一致，实例也会再次刷新
+     */
+    StartInstanceRefresh(req: StartInstanceRefreshRequest, cb?: (error: string, rep: StartInstanceRefreshResponse) => void): Promise<StartInstanceRefreshResponse>;
     /**
      * 本接口（ModifyScalingPolicy）用于修改告警触发策略。
      */
@@ -52,6 +67,12 @@ export declare class Client extends AbstractClient {
      */
     ScaleOutInstances(req: ScaleOutInstancesRequest, cb?: (error: string, rep: ScaleOutInstancesResponse) => void): Promise<ScaleOutInstancesResponse>;
     /**
+     * 伸缩组内实例退出备用中状态。
+* 备用中状态的实例负载均衡器权重值为 0，退出备用中状态后，权重值也会恢复
+* 对备用中状态实例进行开关机操作也会使其退出备用中状态
+     */
+    ExitStandby(req: ExitStandbyRequest, cb?: (error: string, rep: ExitStandbyResponse) => void): Promise<ExitStandbyResponse>;
+    /**
      * 本接口（StartAutoScalingInstances）用于开启伸缩组内 CVM 实例。
 * 开机成功，实例转为`IN_SERVICE`状态后，会增加期望实例数，期望实例数不可超过设置的最大值
 * 本接口支持批量操作，每次请求开机实例的上限为100
@@ -66,6 +87,10 @@ export declare class Client extends AbstractClient {
 * 升级修改启动配置后，已经使用该启动配置扩容的存量实例不会发生变更，此后使用该启动配置的新增实例会按照新的配置进行扩容。
      */
     UpgradeLaunchConfiguration(req: UpgradeLaunchConfigurationRequest, cb?: (error: string, rep: UpgradeLaunchConfigurationResponse) => void): Promise<UpgradeLaunchConfigurationResponse>;
+    /**
+     * 本接口（DescribeRefreshActivities）用于查询伸缩组的实例刷新活动记录。
+     */
+    DescribeRefreshActivities(req: DescribeRefreshActivitiesRequest, cb?: (error: string, rep: DescribeRefreshActivitiesResponse) => void): Promise<DescribeRefreshActivitiesResponse>;
     /**
      * 此接口用于修改生命周期挂钩。
      */
@@ -115,6 +140,11 @@ export declare class Client extends AbstractClient {
      */
     CreateScheduledAction(req: CreateScheduledActionRequest, cb?: (error: string, rep: CreateScheduledActionResponse) => void): Promise<CreateScheduledActionResponse>;
     /**
+     * 本接口（SetInstancesProtection）用于设置实例保护。
+实例设置保护之后，当发生不健康替换、报警策略、期望值变更等触发缩容时，将不对此实例缩容操作。
+     */
+    SetInstancesProtection(req: SetInstancesProtectionRequest, cb?: (error: string, rep: SetInstancesProtectionResponse) => void): Promise<SetInstancesProtectionResponse>;
+    /**
      * 此接口用于查询伸缩组配置建议。
      */
     DescribeAutoScalingAdvices(req: DescribeAutoScalingAdvicesRequest, cb?: (error: string, rep: DescribeAutoScalingAdvicesResponse) => void): Promise<DescribeAutoScalingAdvicesResponse>;
@@ -148,10 +178,13 @@ export declare class Client extends AbstractClient {
      */
     ModifyDesiredCapacity(req: ModifyDesiredCapacityRequest, cb?: (error: string, rep: ModifyDesiredCapacityResponse) => void): Promise<ModifyDesiredCapacityResponse>;
     /**
-     * 本接口（SetInstancesProtection）用于设置实例保护。
-实例设置保护之后，当发生不健康替换、报警策略、期望值变更等触发缩容时，将不对此实例缩容操作。
+     * 回滚操作会生成一个新的实例刷新活动，该活动也支持分批次刷新以及暂停、恢复、取消操作，接口返回回滚活动的 RefreshActivityId。
+* 原活动中待刷新实例变更为已取消，忽略不存在实例，其他状态实例进入回滚流程
+* 原活动中正在刷新的实例不会立刻终止，刷新结束后再执行回滚活动
+* 暂停状态或最近一次成功的刷新活动支持回滚，其他状态不支持回滚
+* 原活动刷新方式为重装实例时，对于 ImageId参数，会自动恢复到回滚前镜像 ID；对于 UserData、EnhancedService、LoginSettings、 HostName 参数，依然会从启动配置中读取，需用户在回滚前自行修改启动配置
      */
-    SetInstancesProtection(req: SetInstancesProtectionRequest, cb?: (error: string, rep: SetInstancesProtectionResponse) => void): Promise<SetInstancesProtectionResponse>;
+    RollbackInstanceRefresh(req: RollbackInstanceRefreshRequest, cb?: (error: string, rep: RollbackInstanceRefreshResponse) => void): Promise<RollbackInstanceRefreshResponse>;
     /**
      * 本接口（ModifyNotificationConfiguration）用于修改通知。
 * 通知的接收端类型不支持修改。
@@ -332,6 +365,17 @@ export declare class Client extends AbstractClient {
      * 本接口（DeleteNotificationConfiguration）用于删除特定的通知。
      */
     DeleteNotificationConfiguration(req: DeleteNotificationConfigurationRequest, cb?: (error: string, rep: DeleteNotificationConfigurationResponse) => void): Promise<DeleteNotificationConfigurationResponse>;
+    /**
+     * 恢复暂停状态的实例刷新活动，使其重试当前批次刷新失败实例或继续刷新后续批次，非暂停状态下调用该接口无效。
+     */
+    ResumeInstanceRefresh(req: ResumeInstanceRefreshRequest, cb?: (error: string, rep: ResumeInstanceRefreshResponse) => void): Promise<ResumeInstanceRefreshResponse>;
+    /**
+     * 取消伸缩组的实例刷新活动。
+* 已刷新/正在刷新的批次不受影响，待刷新批次被取消
+* 刷新失败的实例保持备用中状态，需用户手动处理后尝试退出备用中状态或销毁
+* 取消后不允许回滚操作，也不支持恢复操作
+     */
+    CancelInstanceRefresh(req: CancelInstanceRefreshRequest, cb?: (error: string, rep: CancelInstanceRefreshResponse) => void): Promise<CancelInstanceRefreshResponse>;
     /**
      * 本接口（DescribeAccountLimits）用于查询用户账户在弹性伸缩中的资源限制。
      */

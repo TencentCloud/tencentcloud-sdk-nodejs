@@ -18,6 +18,16 @@ const client = new tencentcloud.as.v20180419.Client({
 })
 describe("as.v20180419.test.js", function () {
 
+it("as.v20180419.StopInstanceRefresh", async function () {
+    try {
+       const data = await client.StopInstanceRefresh({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("as.v20180419.ExecuteScalingPolicy", async function () {
     try {
        const data = await client.ExecuteScalingPolicy({})
@@ -41,6 +51,16 @@ it("as.v20180419.CreateAutoScalingGroup", async function () {
 it("as.v20180419.ClearLaunchConfigurationAttributes", async function () {
     try {
        const data = await client.ClearLaunchConfigurationAttributes({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("as.v20180419.StartInstanceRefresh", async function () {
+    try {
+       const data = await client.StartInstanceRefresh({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -98,6 +118,16 @@ it("as.v20180419.ScaleOutInstances", async function () {
     }
 })
 
+it("as.v20180419.ExitStandby", async function () {
+    try {
+       const data = await client.ExitStandby({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("as.v20180419.StartAutoScalingInstances", async function () {
     try {
        const data = await client.StartAutoScalingInstances({})
@@ -111,6 +141,16 @@ it("as.v20180419.StartAutoScalingInstances", async function () {
 it("as.v20180419.UpgradeLaunchConfiguration", async function () {
     try {
        const data = await client.UpgradeLaunchConfiguration({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("as.v20180419.DescribeRefreshActivities", async function () {
+    try {
+       const data = await client.DescribeRefreshActivities({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -208,6 +248,16 @@ it("as.v20180419.CreateScheduledAction", async function () {
     }
 })
 
+it("as.v20180419.SetInstancesProtection", async function () {
+    try {
+       const data = await client.SetInstancesProtection({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("as.v20180419.DescribeAutoScalingAdvices", async function () {
     try {
        const data = await client.DescribeAutoScalingAdvices({})
@@ -268,9 +318,9 @@ it("as.v20180419.ModifyDesiredCapacity", async function () {
     }
 })
 
-it("as.v20180419.SetInstancesProtection", async function () {
+it("as.v20180419.RollbackInstanceRefresh", async function () {
     try {
-       const data = await client.SetInstancesProtection({})
+       const data = await client.RollbackInstanceRefresh({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -491,6 +541,26 @@ it("as.v20180419.DescribeAutoScalingActivities", async function () {
 it("as.v20180419.DeleteNotificationConfiguration", async function () {
     try {
        const data = await client.DeleteNotificationConfiguration({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("as.v20180419.ResumeInstanceRefresh", async function () {
+    try {
+       const data = await client.ResumeInstanceRefresh({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("as.v20180419.CancelInstanceRefresh", async function () {
+    try {
+       const data = await client.CancelInstanceRefresh({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

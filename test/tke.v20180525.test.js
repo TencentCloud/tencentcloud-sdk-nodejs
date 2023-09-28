@@ -108,6 +108,16 @@ it("tke.v20180525.DeleteCluster", async function () {
     }
 })
 
+it("tke.v20180525.UpdateEdgeClusterVersion", async function () {
+    try {
+       const data = await client.UpdateEdgeClusterVersion({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tke.v20180525.UninstallEdgeLogAgent", async function () {
     try {
        const data = await client.UninstallEdgeLogAgent({})
@@ -128,9 +138,9 @@ it("tke.v20180525.DeleteEdgeClusterInstances", async function () {
     }
 })
 
-it("tke.v20180525.ModifyPrometheusAlertRule", async function () {
+it("tke.v20180525.DescribePostNodeResources", async function () {
     try {
-       const data = await client.ModifyPrometheusAlertRule({})
+       const data = await client.DescribePostNodeResources({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -228,9 +238,9 @@ it("tke.v20180525.CreatePrometheusTemplate", async function () {
     }
 })
 
-it("tke.v20180525.InstallLogAgent", async function () {
+it("tke.v20180525.DescribePodsBySpec", async function () {
     try {
-       const data = await client.InstallLogAgent({})
+       const data = await client.DescribePodsBySpec({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -238,9 +248,9 @@ it("tke.v20180525.InstallLogAgent", async function () {
     }
 })
 
-it("tke.v20180525.GetMostSuitableImageCache", async function () {
+it("tke.v20180525.DescribeReservedInstances", async function () {
     try {
-       const data = await client.GetMostSuitableImageCache({})
+       const data = await client.DescribeReservedInstances({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -358,9 +368,9 @@ it("tke.v20180525.DescribeEdgeLogSwitches", async function () {
     }
 })
 
-it("tke.v20180525.UpdateEdgeClusterVersion", async function () {
+it("tke.v20180525.ModifyReservedInstanceScope", async function () {
     try {
-       const data = await client.UpdateEdgeClusterVersion({})
+       const data = await client.ModifyReservedInstanceScope({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -411,6 +421,16 @@ it("tke.v20180525.ModifyClusterVirtualNodePool", async function () {
 it("tke.v20180525.DescribeClusterNodePools", async function () {
     try {
        const data = await client.DescribeClusterNodePools({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tke.v20180525.DescribeVpcCniPodLimits", async function () {
+    try {
+       const data = await client.DescribeVpcCniPodLimits({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -638,6 +658,16 @@ it("tke.v20180525.DescribeExistedInstances", async function () {
     }
 })
 
+it("tke.v20180525.ListClusterInspectionResults", async function () {
+    try {
+       const data = await client.ListClusterInspectionResults({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tke.v20180525.DescribePrometheusInstanceInitStatus", async function () {
     try {
        const data = await client.DescribePrometheusInstanceInitStatus({})
@@ -718,6 +748,16 @@ it("tke.v20180525.DescribeClusterEndpointStatus", async function () {
     }
 })
 
+it("tke.v20180525.CreateReservedInstances", async function () {
+    try {
+       const data = await client.CreateReservedInstances({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tke.v20180525.UpdateImageCache", async function () {
     try {
        const data = await client.UpdateImageCache({})
@@ -751,6 +791,16 @@ it("tke.v20180525.SyncPrometheusTemplate", async function () {
 it("tke.v20180525.AddExistedInstances", async function () {
     try {
        const data = await client.AddExistedInstances({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tke.v20180525.ModifyPrometheusAlertRule", async function () {
+    try {
+       const data = await client.ModifyPrometheusAlertRule({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -978,9 +1028,9 @@ it("tke.v20180525.UpdateClusterKubeconfig", async function () {
     }
 })
 
-it("tke.v20180525.DescribeVpcCniPodLimits", async function () {
+it("tke.v20180525.DescribeClusterStatus", async function () {
     try {
-       const data = await client.DescribeVpcCniPodLimits({})
+       const data = await client.DescribeClusterStatus({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1238,9 +1288,9 @@ it("tke.v20180525.CreateClusterEndpoint", async function () {
     }
 })
 
-it("tke.v20180525.ListClusterInspectionResults", async function () {
+it("tke.v20180525.DescribePodDeductionRate", async function () {
     try {
-       const data = await client.ListClusterInspectionResults({})
+       const data = await client.DescribePodDeductionRate({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1258,9 +1308,9 @@ it("tke.v20180525.ModifyPrometheusGlobalNotification", async function () {
     }
 })
 
-it("tke.v20180525.DescribeClusterStatus", async function () {
+it("tke.v20180525.DeleteReservedInstances", async function () {
     try {
-       const data = await client.DescribeClusterStatus({})
+       const data = await client.DeleteReservedInstances({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1358,6 +1408,16 @@ it("tke.v20180525.DescribeClusterSecurity", async function () {
     }
 })
 
+it("tke.v20180525.RenewReservedInstances", async function () {
+    try {
+       const data = await client.RenewReservedInstances({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tke.v20180525.DescribePrometheusClusterAgents", async function () {
     try {
        const data = await client.DescribePrometheusClusterAgents({})
@@ -1431,6 +1491,16 @@ it("tke.v20180525.DescribeECMInstances", async function () {
 it("tke.v20180525.DeleteTKEEdgeCluster", async function () {
     try {
        const data = await client.DeleteTKEEdgeCluster({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tke.v20180525.GetMostSuitableImageCache", async function () {
+    try {
+       const data = await client.GetMostSuitableImageCache({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1588,6 +1658,16 @@ it("tke.v20180525.DescribePrometheusOverviews", async function () {
     }
 })
 
+it("tke.v20180525.RemoveNodeFromNodePool", async function () {
+    try {
+       const data = await client.RemoveNodeFromNodePool({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tke.v20180525.DescribeTKEEdgeClusterStatus", async function () {
     try {
        const data = await client.DescribeTKEEdgeClusterStatus({})
@@ -1688,9 +1768,9 @@ it("tke.v20180525.GetClusterLevelPrice", async function () {
     }
 })
 
-it("tke.v20180525.ModifyPrometheusTemplate", async function () {
+it("tke.v20180525.DescribeRIUtilizationDetail", async function () {
     try {
-       const data = await client.ModifyPrometheusTemplate({})
+       const data = await client.DescribeRIUtilizationDetail({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1918,9 +1998,9 @@ it("tke.v20180525.UpdateTKEEdgeCluster", async function () {
     }
 })
 
-it("tke.v20180525.RemoveNodeFromNodePool", async function () {
+it("tke.v20180525.ModifyPrometheusTemplate", async function () {
     try {
-       const data = await client.RemoveNodeFromNodePool({})
+       const data = await client.ModifyPrometheusTemplate({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -2021,6 +2101,16 @@ it("tke.v20180525.GetTkeAppChartList", async function () {
 it("tke.v20180525.CreateClusterVirtualNode", async function () {
     try {
        const data = await client.CreateClusterVirtualNode({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tke.v20180525.InstallLogAgent", async function () {
+    try {
+       const data = await client.InstallLogAgent({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

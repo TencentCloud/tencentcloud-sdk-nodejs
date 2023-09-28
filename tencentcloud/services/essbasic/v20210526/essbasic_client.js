@@ -469,6 +469,12 @@ httpProfile.setEndpoint("file.test.ess.tencent.cn");
         return this.request("ChannelCreateFlowGroupByTemplates", req, cb);
     }
     /**
+     * 此接口（CreateChannelOrganizationInfoChangeUrl）用于创建子客企业信息变更链接，支持创建企业超管变更链接或企业基础信息变更链接，通过入参ChangeType指定。
+     */
+    async CreateChannelOrganizationInfoChangeUrl(req, cb) {
+        return this.request("CreateChannelOrganizationInfoChangeUrl", req, cb);
+    }
+    /**
      * 此接口（SyncProxyOrganizationOperators）用于同步 第三方平台子客企业经办人列表，主要是同步经办人的离职状态。子客Web控制台的组织架构管理，是依赖于第三方应用平台的，无法针对员工做新增/更新/离职等操作。
 若经办人信息有误，或者需要修改，也可以先将之前的经办人做离职操作，然后重新使用控制台链接CreateConsoleLoginUrl让经办人重新实名。
      */

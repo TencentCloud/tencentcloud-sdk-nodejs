@@ -581,6 +581,16 @@ export interface DescribeResourceUrlsByFlowsRequest {
 }
 
 /**
+ * CreateChannelOrganizationInfoChangeUrl返回参数结构体
+ */
+export interface CreateChannelOrganizationInfoChangeUrlResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 催办接口返回详细信息
  */
 export interface RemindFlowRecords {
@@ -4497,6 +4507,11 @@ export interface ChannelBatchCancelFlowsRequest {
    */
   Operator?: UserInfo
 }
+
+/**
+ * CreateChannelOrganizationInfoChangeUrl请求参数结构体
+ */
+export type CreateChannelOrganizationInfoChangeUrlRequest = null
 
 /**
  * ChannelModifyRole请求参数结构体

@@ -2340,6 +2340,17 @@ export interface DescribeEnvPostpaidDeductRequest {
 }
 
 /**
+ * 安全网关自定义头部
+ */
+export interface CustomHeader {
+  /**
+   * 请求添加头部配置
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RequestToAddList?: Array<CustomRequestToAdd>
+}
+
+/**
  * DescribeExtraPkgBillingInfo请求参数结构体
  */
 export interface DescribeExtraPkgBillingInfoRequest {
@@ -5538,6 +5549,11 @@ export interface WxGatewayRountItem {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   GatewayRoutePathMatchType?: string
+  /**
+   * 安全网关自定义头部
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CustomHeader?: CustomHeader
 }
 
 /**
@@ -5895,6 +5911,21 @@ export interface Tag {
    * 标签值
    */
   Value: string
+}
+
+/**
+ * DescribeCloudBaseRunVersionSnapshot返回参数结构体
+ */
+export interface DescribeCloudBaseRunVersionSnapshotResponse {
+  /**
+   * 版本历史
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Snapshots: Array<CloudRunServiceSimpleVersionSnapshot>
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -6518,18 +6549,24 @@ export interface PostpayEnvQuota {
 }
 
 /**
- * DescribeCloudBaseRunVersionSnapshot返回参数结构体
+ * 安全网关请求自定义头部
  */
-export interface DescribeCloudBaseRunVersionSnapshotResponse {
+export interface CustomRequestToAdd {
   /**
-   * 版本历史
+   * Header名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Snapshots: Array<CloudRunServiceSimpleVersionSnapshot>
+  Key?: string
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * Header值
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  RequestId?: string
+  Value?: string
+  /**
+   * Header类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AppendAction?: string
 }
 
 /**

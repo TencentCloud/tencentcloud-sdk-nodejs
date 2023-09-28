@@ -47,6 +47,7 @@ import {
   TopologyInfo,
   NodeDetailPriceResult,
   Tag,
+  ClusterIDToFlowID,
   EmrListInstance,
   AddUsersForUserManagerResponse,
   EmrProductConfigOutter,

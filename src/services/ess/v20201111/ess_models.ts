@@ -405,6 +405,66 @@ export interface ReviewerInfo {
 }
 
 /**
+ * 合同流程的基础信息
+ */
+export interface FlowBrief {
+  /**
+   * 合同流程ID，为32位字符串。
+   */
+  FlowId?: string
+  /**
+   * 合同流程的名称。
+   */
+  FlowName?: string
+  /**
+   * 合同流程描述信息。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FlowDescription?: string
+  /**
+   * 合同流程的类别分类（如销售合同/入职合同等）。
+   */
+  FlowType?: string
+  /**
+   * 合同流程当前的签署状态, 会存在下列的状态值
+<ul><li> **0** : 未开启流程(合同中不存在填写环节)</li>
+<li> **1** : 待签署</li>
+<li> **2** : 部分签署</li>
+<li> **3** : 已拒签</li>
+<li> **4** : 已签署</li>
+<li> **5** : 已过期</li>
+<li> **6** : 已撤销</li>
+<li> **7** : 未开启流程(合同中存在填写环节)</li>
+<li> **8** : 等待填写</li>
+<li> **9** : 部分填写</li>
+<li> **10** : 已拒填</li>
+<li> **21** : 已解除</li></ul>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FlowStatus?: number
+  /**
+   * 合同流程创建时间，格式为Unix标准时间戳（秒）。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreatedOn?: number
+  /**
+   * 当合同流程状态为已拒签（即 FlowStatus=3）或已撤销（即 FlowStatus=6）时，此字段 FlowMessage 为拒签或撤销原因。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FlowMessage?: string
+  /**
+   *  合同流程发起方的员工编号, 即员工在腾讯电子签平台的唯一身份标识。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Creator?: string
+  /**
+   * 合同流程的签署截止时间，格式为Unix标准时间戳（秒）。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Deadline?: number
+}
+
+/**
  * DescribeThirdPartyAuthCode返回参数结构体
  */
 export interface DescribeThirdPartyAuthCodeResponse {
@@ -1721,35 +1781,21 @@ export interface BindEmployeeUserIdWithClientOpenIdRequest {
 }
 
 /**
- * DescribeIntegrationDepartments请求参数结构体
+ * CreateOrganizationInfoChangeUrl返回参数结构体
  */
-export interface DescribeIntegrationDepartmentsRequest {
+export interface CreateOrganizationInfoChangeUrlResponse {
   /**
-   * 执行本接口操作的员工信息。
-注: `在调用此接口时，请确保指定的员工已获得组织架构管理权限，并具备接口传入的相应资源的数据权限。`
+   * 创建的企业信息变更链接。
    */
-  Operator: UserInfo
+  Url?: string
   /**
-   * 查询类型，支持以下类型：
-<ul><li>**0**：查询单个部门节点列表，不包含子节点部门信息</li>
-<li>**1**：查询单个部门节点级一级子节点部门信息列表</li></ul>
+   * 链接过期时间。链接7天有效。
    */
-  QueryType: number
+  ExpiredTime?: number
   /**
-   * 代理企业和员工的信息。
-在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  Agent?: Agent
-  /**
-   * 查询的部门ID。
-注：`如果同时指定了DeptId与DeptOpenId参数，系统将优先使用DeptId参数进行查询。当二者都未指定时，系统将返回根节点部门数据。`
-   */
-  DeptId?: string
-  /**
-   * 查询的客户系统部门ID。
-注：`如果同时指定了DeptId与DeptOpenId参数，系统将优先使用DeptId参数进行查询。当二者都未指定时，系统将返回根节点部门数据。`
-   */
-  DeptOpenId?: string
+  RequestId?: string
 }
 
 /**
@@ -6366,6 +6412,38 @@ export interface DescribeFlowInfoRequest {
 }
 
 /**
+ * DescribeIntegrationDepartments请求参数结构体
+ */
+export interface DescribeIntegrationDepartmentsRequest {
+  /**
+   * 执行本接口操作的员工信息。
+注: `在调用此接口时，请确保指定的员工已获得组织架构管理权限，并具备接口传入的相应资源的数据权限。`
+   */
+  Operator: UserInfo
+  /**
+   * 查询类型，支持以下类型：
+<ul><li>**0**：查询单个部门节点列表，不包含子节点部门信息</li>
+<li>**1**：查询单个部门节点级一级子节点部门信息列表</li></ul>
+   */
+  QueryType: number
+  /**
+   * 代理企业和员工的信息。
+在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。
+   */
+  Agent?: Agent
+  /**
+   * 查询的部门ID。
+注：`如果同时指定了DeptId与DeptOpenId参数，系统将优先使用DeptId参数进行查询。当二者都未指定时，系统将返回根节点部门数据。`
+   */
+  DeptId?: string
+  /**
+   * 查询的客户系统部门ID。
+注：`如果同时指定了DeptId与DeptOpenId参数，系统将优先使用DeptId参数进行查询。当二者都未指定时，系统将返回根节点部门数据。`
+   */
+  DeptOpenId?: string
+}
+
+/**
  * DescribeFlowInfo返回参数结构体
  */
 export interface DescribeFlowInfoResponse {
@@ -6497,63 +6575,24 @@ export interface FileUrl {
 }
 
 /**
- * 合同流程的基础信息
+ * CreateOrganizationInfoChangeUrl请求参数结构体
  */
-export interface FlowBrief {
+export interface CreateOrganizationInfoChangeUrlRequest {
   /**
-   * 合同流程ID，为32位字符串。
+   * 执行本接口操作的员工信息。
+注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。`
    */
-  FlowId?: string
+  Operator: UserInfo
   /**
-   * 合同流程的名称。
+   * 企业信息变更类型，可选类型如下：
+<ul><li>**1**：企业超管变更</li><li>**2**：企业基础信息变更</li></ul>
    */
-  FlowName?: string
+  ChangeType: number
   /**
-   * 合同流程描述信息。
-注意：此字段可能返回 null，表示取不到有效值。
+   * 代理企业和员工的信息。
+在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。
    */
-  FlowDescription?: string
-  /**
-   * 合同流程的类别分类（如销售合同/入职合同等）。
-   */
-  FlowType?: string
-  /**
-   * 合同流程当前的签署状态, 会存在下列的状态值
-<ul><li> **0** : 未开启流程(合同中不存在填写环节)</li>
-<li> **1** : 待签署</li>
-<li> **2** : 部分签署</li>
-<li> **3** : 已拒签</li>
-<li> **4** : 已签署</li>
-<li> **5** : 已过期</li>
-<li> **6** : 已撤销</li>
-<li> **7** : 未开启流程(合同中存在填写环节)</li>
-<li> **8** : 等待填写</li>
-<li> **9** : 部分填写</li>
-<li> **10** : 已拒填</li>
-<li> **21** : 已解除</li></ul>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  FlowStatus?: number
-  /**
-   * 合同流程创建时间，格式为Unix标准时间戳（秒）。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CreatedOn?: number
-  /**
-   * 当合同流程状态为已拒签（即 FlowStatus=3）或已撤销（即 FlowStatus=6）时，此字段 FlowMessage 为拒签或撤销原因。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  FlowMessage?: string
-  /**
-   *  合同流程发起方的员工编号, 即员工在腾讯电子签平台的唯一身份标识。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Creator?: string
-  /**
-   * 合同流程的签署截止时间，格式为Unix标准时间戳（秒）。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Deadline?: number
+  Agent?: Agent
 }
 
 /**

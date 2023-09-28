@@ -27,7 +27,6 @@ export declare class Client extends AbstractClient {
 
 >
 - 不可同时搜索不同算法模型版本（FaceModelVersion）的人员库。
-
      */
     SearchFacesReturnsByGroup(req: SearchFacesReturnsByGroupRequest, cb?: (error: string, rep: SearchFacesReturnsByGroupResponse) => void): Promise<SearchFacesReturnsByGroupResponse>;
     /**

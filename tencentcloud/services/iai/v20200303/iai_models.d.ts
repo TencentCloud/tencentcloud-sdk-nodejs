@@ -68,19 +68,19 @@ export interface DetectFaceAttributesResponse {
     /**
      * 请求的图片宽度。
      */
-    ImageWidth: number;
+    ImageWidth?: number;
     /**
      * 请求的图片高度。
      */
-    ImageHeight: number;
+    ImageHeight?: number;
     /**
      * 人脸信息列表。
      */
-    FaceDetailInfos: Array<FaceDetailInfo>;
+    FaceDetailInfos?: Array<FaceDetailInfo>;
     /**
      * 人脸识别所用的算法模型版本。
      */
-    FaceModelVersion: string;
+    FaceModelVersion?: string;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -161,13 +161,13 @@ export interface CreatePersonRequest {
     PersonExDescriptionInfos?: Array<PersonExDescriptionInfo>;
     /**
      * 图片 base64 数据，base64 编码后大小不可超过5M。
-  jpg格式长边像素不可超过4000，其他格式图片长边像素不可超2000。
+  jpg格式长边像素不可超过4000，其他格式图片长边像素不可超2000。所有格式的图片短边像素不小于64。
   支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
      */
     Image?: string;
     /**
      * 图片的 Url 。对应图片 base64 编码后大小不可超过5M。
-  jpg格式长边像素不可超过4000，其他格式图片长边像素不可超2000。
+  jpg格式长边像素不可超过4000，其他格式图片长边像素不可超2000。所有格式的图片短边像素不小于64。
   Url、Image必须提供一个，如果都提供，只使用 Url。
   图片存储于腾讯云的Url可保障更高下载速度和稳定性，建议图片存储于腾讯云。
   非腾讯云存储的Url速度和稳定性可能受一定影响。
@@ -270,7 +270,7 @@ export interface CreateFaceRequest {
     PersonId: string;
     /**
      * 图片 base64 数据，base64 编码后大小不可超过5M。
-  jpg格式长边像素不可超过4000，其他格式图片长边像素不可超2000。
+  jpg格式长边像素不可超过4000，其他格式图片长边像素不可超2000。所有格式的图片短边像素不小于64。
   人员人脸总数量不可超过5张。
   若图片中包含多张人脸，只选取其中人脸面积最大的人脸。
   支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
@@ -278,7 +278,7 @@ export interface CreateFaceRequest {
     Images?: Array<string>;
     /**
      * 图片的 Url 。对应图片 base64 编码后大小不可超过5M。
-  jpg格式长边像素不可超过4000，其他格式图片长边像素不可超2000。
+  jpg格式长边像素不可超过4000，其他格式图片长边像素不可超2000。所有格式的图片短边像素不小于64。
   Url、Image必须提供一个，如果都提供，只使用 Url。
   图片存储于腾讯云的Url可保障更高下载速度和稳定性，建议图片存储于腾讯云。
   非腾讯云存储的Url速度和稳定性可能受一定影响。
@@ -427,13 +427,13 @@ export interface AnalyzeDenseLandmarksRequest {
     Mode?: number;
     /**
      * 图片 base64 数据，base64 编码后大小不可超过5M。
-  jpg格式长边像素不可超过4000，其他格式图片长边像素不可超2000。
+  jpg格式长边像素不可超过4000，其他格式图片长边像素不可超2000。所有格式的图片短边像素不小于64。
   支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
      */
     Image?: string;
     /**
      * 图片的 Url 。对应图片 base64 编码后大小不可超过5M。
-  jpg格式长边像素不可超过4000，其他格式图片长边像素不可超2000。
+  jpg格式长边像素不可超过4000，其他格式图片长边像素不可超2000。所有格式的图片短边像素不小于64。
   Url、Image必须提供一个，如果都提供，只使用 Url。
   图片存储于腾讯云的Url可保障更高下载速度和稳定性，建议图片存储于腾讯云。
   非腾讯云存储的Url速度和稳定性可能受一定影响。
@@ -548,13 +548,13 @@ export interface AnalyzeFaceRequest {
     Mode?: number;
     /**
      * 图片 base64 数据，base64 编码后大小不可超过5M。
-  jpg格式长边像素不可超过4000，其他格式图片长边像素不可超2000。
+  jpg格式长边像素不可超过4000，其他格式图片长边像素不可超2000。所有格式的图片短边像素不小于64。
   支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
      */
     Image?: string;
     /**
      * 图片的 Url 。对应图片 base64 编码后大小不可超过5M。
-  jpg格式长边像素不可超过4000，其他格式图片长边像素不可超2000。
+  jpg格式长边像素不可超过4000，其他格式图片长边像素不可超2000。所有格式的图片短边像素不小于64。
   Url、Image必须提供一个，如果都提供，只使用 Url。
   图片存储于腾讯云的Url可保障更高下载速度和稳定性，建议图片存储于腾讯云。
   非腾讯云存储的Url速度和稳定性可能受一定影响。
@@ -585,21 +585,21 @@ export interface CreatePersonResponse {
     /**
      * 人脸图片唯一标识。
      */
-    FaceId: string;
+    FaceId?: string;
     /**
      * 检测出的人脸框的位置。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    FaceRect: FaceRect;
+    FaceRect?: FaceRect;
     /**
      * 疑似同一人的PersonId。
   当 UniquePersonControl 参数不为0且人员库中有疑似的同一人，此参数才有意义。
      */
-    SimilarPersonId: string;
+    SimilarPersonId?: string;
     /**
      * 人脸识别所用的算法模型版本。
      */
-    FaceModelVersion: string;
+    FaceModelVersion?: string;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -822,16 +822,16 @@ export interface SearchPersonsResponse {
     /**
      * 识别结果。
      */
-    Results: Array<Result>;
+    Results?: Array<Result>;
     /**
      * 搜索的人员库中包含的人员数。若输入图片中所有人脸均不符合质量要求，则返回0。
      */
-    PersonNum: number;
+    PersonNum?: number;
     /**
      * 人脸识别所用的算法模型版本。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    FaceModelVersion: string;
+    FaceModelVersion?: string;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -919,15 +919,15 @@ export interface SearchFacesReturnsByGroupResponse {
     /**
      * 搜索的人员库中包含的人脸数。
      */
-    FaceNum: number;
+    FaceNum?: number;
     /**
      * 识别结果。
      */
-    ResultsReturnsByGroup: Array<ResultsReturnsByGroup>;
+    ResultsReturnsByGroup?: Array<ResultsReturnsByGroup>;
     /**
      * 人脸识别所用的算法模型版本。
      */
-    FaceModelVersion: string;
+    FaceModelVersion?: string;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -956,13 +956,13 @@ export interface SearchPersonsReturnsByGroupRequest {
     GroupIds: Array<string>;
     /**
      * 图片 base64 数据，base64 编码后大小不可超过5M。
-  jpg格式长边像素不可超过4000，其他格式图片长边像素不可超2000。
+  jpg格式长边像素不可超过4000，其他格式图片长边像素不可超2000。所有格式的图片短边像素不小于64。
   支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
      */
     Image?: string;
     /**
      * 图片的 Url 。对应图片 base64 编码后大小不可超过5M。
-  jpg格式长边像素不可超过4000，其他格式图片长边像素不可超2000。
+  jpg格式长边像素不可超过4000，其他格式图片长边像素不可超2000。所有格式的图片短边像素不小于64。
   Url、Image必须提供一个，如果都提供，只使用 Url。
   图片存储于腾讯云的Url可保障更高下载速度和稳定性，建议图片存储于腾讯云。
   非腾讯云存储的Url速度和稳定性可能受一定影响。
@@ -1310,13 +1310,13 @@ export interface SearchFacesReturnsByGroupRequest {
     GroupIds: Array<string>;
     /**
      * 图片 base64 数据，base64 编码后大小不可超过5M。
-  jpg格式长边像素不可超过4000，其他格式图片长边像素不可超2000。
+  jpg格式长边像素不可超过4000，其他格式图片长边像素不可超2000。所有格式的图片短边像素不小于64。
   支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
      */
     Image?: string;
     /**
      * 图片的 Url 。对应图片 base64 编码后大小不可超过5M。
-  jpg格式长边像素不可超过4000，其他格式图片长边像素不可超2000。
+  jpg格式长边像素不可超过4000，其他格式图片长边像素不可超2000。所有格式的图片短边像素不小于64。
   Url、Image必须提供一个，如果都提供，只使用 Url。
   图片存储于腾讯云的Url可保障更高下载速度和稳定性，建议图片存储于腾讯云。
   非腾讯云存储的Url速度和稳定性可能受一定影响。
@@ -1685,13 +1685,13 @@ export interface SearchFacesRequest {
     GroupIds: Array<string>;
     /**
      * 图片 base64 数据，base64 编码后大小不可超过5M。
-  jpg格式长边像素不可超过4000，其他格式图片长边像素不可超2000。
+  jpg格式长边像素不可超过4000，其他格式图片长边像素不可超2000。所有格式的图片短边像素不小于64。
   支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
      */
     Image?: string;
     /**
      * 图片的 Url 。对应图片 base64 编码后大小不可超过5M。
-  jpg格式长边像素不可超过4000，其他格式图片长边像素不可超2000。
+  jpg格式长边像素不可超过4000，其他格式图片长边像素不可超2000。所有格式的图片短边像素不小于64。
   Url、Image必须提供一个，如果都提供，只使用 Url。
   图片存储于腾讯云的Url可保障更高下载速度和稳定性，建议图片存储于腾讯云。
   非腾讯云存储的Url速度和稳定性可能受一定影响。
@@ -1748,14 +1748,14 @@ export interface SearchPersonsRequest {
     GroupIds: Array<string>;
     /**
      * 图片 base64 数据，base64 编码后大小不可超过5M。
-  jpg格式长边像素不可超过4000，其他格式图片长边像素不可超2000。
+  jpg格式长边像素不可超过4000，其他格式图片长边像素不可超2000。所有格式的图片短边像素不小于64。
   若图片中包含多张人脸，只选取其中人脸面积最大的人脸。
   支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
      */
     Image?: string;
     /**
      * 图片的 Url 。对应图片 base64 编码后大小不可超过5M。
-  jpg格式长边像素不可超过4000，其他格式图片长边像素不可超2000。
+  jpg格式长边像素不可超过4000，其他格式图片长边像素不可超2000。所有格式的图片短边像素不小于64。
   Url、Image必须提供一个，如果都提供，只使用 Url。
   图片存储于腾讯云的Url可保障更高下载速度和稳定性，建议图片存储于腾讯云。
   非腾讯云存储的Url速度和稳定性可能受一定影响。
@@ -1851,21 +1851,21 @@ export interface GroupExDescriptionInfo {
 export interface CompareMaskFaceRequest {
     /**
      * A 图片 base64 数据，base64 编码后大小不可超过5M。
-  jpg格式长边像素不可超过4000，其他格式图片长边像素不可超2000。
+  jpg格式长边像素不可超过4000，其他格式图片长边像素不可超2000。所有格式的图片短边像素不小于64。
   若图片中包含多张人脸，只选取其中人脸面积最大的人脸。
   支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
      */
     ImageA?: string;
     /**
      * B 图片 base64 数据，base64 编码后大小不可超过5M。
-  jpg格式长边像素不可超过4000，其他格式图片长边像素不可超2000。
+  jpg格式长边像素不可超过4000，其他格式图片长边像素不可超2000。所有格式的图片短边像素不小于64。
   若图片中包含多张人脸，只选取其中人脸面积最大的人脸。
   支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
      */
     ImageB?: string;
     /**
      * A 图片的 Url ，对应图片 base64 编码后大小不可超过5M。
-  jpg格式长边像素不可超过4000，其他格式图片长边像素不可超2000。
+  jpg格式长边像素不可超过4000，其他格式图片长边像素不可超2000。所有格式的图片短边像素不小于64。
   A 图片的 Url、Image必须提供一个，如果都提供，只使用 Url。
   图片存储于腾讯云的Url可保障更高下载速度和稳定性，建议图片存储于腾讯云。
   非腾讯云存储的Url速度和稳定性可能受一定影响。
@@ -1875,7 +1875,7 @@ export interface CompareMaskFaceRequest {
     UrlA?: string;
     /**
      * B 图片的 Url ，对应图片 base64 编码后大小不可超过5M。
-  jpg格式长边像素不可超过4000，其他格式图片长边像素不可超2000。
+  jpg格式长边像素不可超过4000，其他格式图片长边像素不可超2000。所有格式的图片短边像素不小于64。
   B 图片的 Url、Image必须提供一个，如果都提供，只使用 Url。
   图片存储于腾讯云的Url可保障更高下载速度和稳定性，建议图片存储于腾讯云。
   非腾讯云存储的Url速度和稳定性可能受一定影响。
@@ -1906,19 +1906,19 @@ export interface AnalyzeFaceResponse {
     /**
      * 请求的图片宽度。
      */
-    ImageWidth: number;
+    ImageWidth?: number;
     /**
      * 请求的图片高度。
      */
-    ImageHeight: number;
+    ImageHeight?: number;
     /**
      * 五官定位（人脸关键点）具体信息。
      */
-    FaceShapeSet: Array<FaceShape>;
+    FaceShapeSet?: Array<FaceShape>;
     /**
      * 人脸识别所用的算法模型版本。
      */
-    FaceModelVersion: string;
+    FaceModelVersion?: string;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1941,13 +1941,13 @@ export interface DetectFaceRequest {
     MinFaceSize?: number;
     /**
      * 图片 base64 数据，base64 编码后大小不可超过5M。
-  jpg格式长边像素不可超过4000，其他格式图片长边像素不可超2000。
+  jpg格式长边像素不可超过4000，其他格式图片长边像素不可超2000。所有格式的图片短边像素不小于64。
   支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
      */
     Image?: string;
     /**
      * 图片的 Url 。对应图片 base64 编码后大小不可超过5M。
-  jpg格式长边像素不可超过4000，其他格式图片长边像素不可超2000。
+  jpg格式长边像素不可超过4000，其他格式图片长边像素不可超2000。所有格式的图片短边像素不小于64。
   Url、Image必须提供一个，如果都提供，只使用 Url。
   图片存储于腾讯云的Url可保障更高下载速度和稳定性，建议图片存储于腾讯云。
   非腾讯云存储的Url速度和稳定性可能受一定影响。
@@ -2076,14 +2076,14 @@ export interface DetectFaceAttributesRequest {
     MaxFaceNum?: number;
     /**
      * 图片 base64 数据，base64 编码后大小不可超过5M。
-  jpg格式长边像素不可超过4000，其他格式图片长边像素不可超2000。
+  jpg格式长边像素不可超过4000，其他格式图片长边像素不可超2000。 所有格式的图片短边像素不小于64。
   支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
      */
     Image?: string;
     /**
      * 图片的 Url 。
   对应图片 base64 编码后大小不可超过5M。
-  jpg格式长边像素不可超过4000，其他格式图片长边像素不可超2000。
+  jpg格式长边像素不可超过4000，其他格式图片长边像素不可超2000。所有格式的图片短边像素不小于64。
   Url、Image必须提供一个，如果都提供，只使用 Url。
   图片存储于腾讯云的Url可保障更高下载速度和稳定性，建议图片存储于腾讯云。
   非腾讯云存储的Url速度和稳定性可能受一定影响。
@@ -2238,21 +2238,21 @@ export interface FaceShape {
 export interface CompareFaceRequest {
     /**
      * A 图片 base64 数据，base64 编码后大小不可超过5M。
-  jpg格式长边像素不可超过4000，其他格式图片长边像素不可超2000。
+  jpg格式长边像素不可超过4000，其他格式图片长边像素不可超2000。所有格式的图片短边像素不小于64。
   若图片中包含多张人脸，只选取其中置信度最高的人脸。
   支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
      */
     ImageA?: string;
     /**
      * B 图片 base64 数据，base64 编码后大小不可超过5M。
-  jpg格式长边像素不可超过4000，其他格式图片长边像素不可超2000。
+  jpg格式长边像素不可超过4000，其他格式图片长边像素不可超2000。所有格式的图片短边像素不小于64。
   若图片中包含多张人脸，只选取其中置信度最高的人脸。
   支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
      */
     ImageB?: string;
     /**
      * A 图片的 Url ，对应图片 base64 编码后大小不可超过5M。
-  jpg格式长边像素不可超过4000，其他格式图片长边像素不可超2000。
+  jpg格式长边像素不可超过4000，其他格式图片长边像素不可超2000。所有格式的图片短边像素不小于64。
   A 图片的 Url、Image必须提供一个，如果都提供，只使用 Url。
   图片存储于腾讯云的Url可保障更高下载速度和稳定性，建议图片存储于腾讯云。
   非腾讯云存储的Url速度和稳定性可能受一定影响。
@@ -2262,7 +2262,7 @@ export interface CompareFaceRequest {
     UrlA?: string;
     /**
      * B 图片的 Url ，对应图片 base64 编码后大小不可超过5M。
-  jpg格式长边像素不可超过4000，其他格式图片长边像素不可超2000。
+  jpg格式长边像素不可超过4000，其他格式图片长边像素不可超2000。所有格式的图片短边像素不小于64。
   B 图片的 Url、Image必须提供一个，如果都提供，只使用 Url。
   图片存储于腾讯云的Url可保障更高下载速度和稳定性，建议图片存储于腾讯云。
   非腾讯云存储的Url速度和稳定性可能受一定影响。

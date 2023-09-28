@@ -136,6 +136,23 @@ export interface DisableAutoScalingGroupRequest {
     AutoScalingGroupId: string;
 }
 /**
+ * DescribeRefreshActivities返回参数结构体
+ */
+export interface DescribeRefreshActivitiesResponse {
+    /**
+     * 符合条件的刷新活动数量。
+     */
+    TotalCount?: number;
+    /**
+     * 符合条件的刷新活动信息集合。
+     */
+    RefreshActivitySet?: Array<RefreshActivity>;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * ModifyAutoScalingGroup请求参数结构体
  */
 export interface ModifyAutoScalingGroupRequest {
@@ -652,6 +669,19 @@ export interface CreateScheduledActionRequest {
     Recurrence?: string;
 }
 /**
+ * ExitStandby请求参数结构体
+ */
+export interface ExitStandbyRequest {
+    /**
+     * 伸缩组 ID。
+     */
+    AutoScalingGroupId: string;
+    /**
+     * 备用中状态 CVM 实例列表。
+     */
+    InstanceIds: Array<string>;
+}
+/**
  * 启动配置的系统盘配置信息。若不指定该参数，则按照系统默认值进行分配。
  */
 export interface SystemDisk {
@@ -886,6 +916,32 @@ export interface CreateNotificationConfigurationResponse {
     RequestId?: string;
 }
 /**
+ * DescribeRefreshActivities请求参数结构体
+ */
+export interface DescribeRefreshActivitiesRequest {
+    /**
+     * 刷新活动ID列表。ID形如：`asr-5l2ejpfo`。每次请求的上限为100。参数不支持同时指定`RefreshActivityIds`和`Filters`。
+     */
+    RefreshActivityIds?: Array<string>;
+    /**
+     * 过滤条件。
+  <li> auto-scaling-group-id - String - 是否必填：否 -（过滤条件）按照伸缩组ID过滤。</li>
+  <li> refresh-activity-status-code - String - 是否必填：否 -（过滤条件）按照刷新活动状态过滤。（INIT：初始化中 | RUNNING：运行中 | SUCCESSFUL：活动成功 | FAILED_PAUSE：失败暂停 | AUTO_PAUSE：自动暂停 | MANUAL_PAUSE：手动暂停 | CANCELLED：活动取消 | FAILED：活动失败）</li>
+  <li> refresh-activity-type - String - 是否必填：否 -（过滤条件）按照刷新活动类型过滤。（NORMAL：正常刷新活动 | ROLLBACK：回滚刷新活动）</li>
+  <li> refresh-activity-id - String - 是否必填：否 -（过滤条件）按照刷新活动ID过滤。</li>
+  <li> 每次请求的Filters的上限为10，Filter.Values的上限为5。参数不支持同时指定RefreshActivityIds和Filters。
+     */
+    Filters?: Array<Filter>;
+    /**
+     * 返回数量，默认为20，最大值为100。关于`Limit`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。
+     */
+    Limit?: number;
+    /**
+     * 偏移量，默认为0。关于`Offset`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。
+     */
+    Offset?: number;
+}
+/**
  * DescribeLaunchConfigurations返回参数结构体
  */
 export interface DescribeLaunchConfigurationsResponse {
@@ -1029,6 +1085,15 @@ export interface ModifyScalingPolicyResponse {
     RequestId?: string;
 }
 /**
+ * DeleteLaunchConfiguration请求参数结构体
+ */
+export interface DeleteLaunchConfigurationRequest {
+    /**
+     * 需要删除的启动配置ID。
+     */
+    LaunchConfigurationId: string;
+}
+/**
  * SetInstancesProtection请求参数结构体
  */
 export interface SetInstancesProtectionRequest {
@@ -1066,6 +1131,19 @@ export interface DetachInstancesResponse {
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * 滚动更新设置。
+ */
+export interface RollingUpdateSettings {
+    /**
+     * 批次数量。批次数量为大于 0 的正整数，但不能大于待刷新实例数量。
+     */
+    BatchNumber: number;
+    /**
+     * 批次间暂停策略。默认值为 Automatic，取值范围如下：<br><li>FIRST_BATCH_PAUSE：第一批次更新完成后暂停</li><li>BATCH_INTERVAL_PAUSE：批次间暂停</li><li>AUTOMATIC：不暂停
+     */
+    BatchPause?: string;
 }
 /**
  * ModifyLaunchConfigurationAttributes返回参数结构体
@@ -1373,45 +1451,30 @@ export interface DescribeAutoScalingGroupLastActivitiesResponse {
  */
 export declare type DescribeAccountLimitsRequest = null;
 /**
- * UpgradeLifecycleHook请求参数结构体
+ * ScaleInInstances返回参数结构体
  */
-export interface UpgradeLifecycleHookRequest {
+export interface ScaleInInstancesResponse {
     /**
-     * 生命周期挂钩ID
+     * 伸缩活动ID。
      */
-    LifecycleHookId: string;
+    ActivityId: string;
     /**
-     * 生命周期挂钩名称
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
-    LifecycleHookName: string;
+    RequestId?: string;
+}
+/**
+ * CancelInstanceRefresh请求参数结构体
+ */
+export interface CancelInstanceRefreshRequest {
     /**
-     * 进行生命周期挂钩的场景，取值范围包括“INSTANCE_LAUNCHING”和“INSTANCE_TERMINATING”
+     * 伸缩组ID。
      */
-    LifecycleTransition: string;
+    AutoScalingGroupId: string;
     /**
-     * 定义伸缩组在生命周期挂钩超时的情况下应采取的操作，取值范围是“CONTINUE”或“ABANDON”，默认值为“CONTINUE”
+     * 刷新活动ID。
      */
-    DefaultResult?: string;
-    /**
-     * 生命周期挂钩超时之前可以经过的最长时间（以秒为单位），范围从30到7200秒，默认值为300秒
-     */
-    HeartbeatTimeout?: number;
-    /**
-     * 弹性伸缩向通知目标发送的附加信息，配置通知时使用，默认值为空字符串""
-     */
-    NotificationMetadata?: string;
-    /**
-     * 通知目标。NotificationTarget和LifecycleCommand参数互斥，二者不可同时指定。
-     */
-    NotificationTarget?: NotificationTarget;
-    /**
-     * 进行生命周期挂钩的场景类型，取值范围包括NORMAL 和 EXTENSION。说明：设置为EXTENSION值，在AttachInstances、DetachInstances、RemoveInstaces接口时会触发生命周期挂钩操作，值为NORMAL则不会在这些接口中触发生命周期挂钩。
-     */
-    LifecycleTransitionType?: string;
-    /**
-     * 远程命令执行对象。NotificationTarget和LifecycleCommand参数互斥，二者不可同时指定。
-     */
-    LifecycleCommand?: LifecycleCommand;
+    RefreshActivityId: string;
 }
 /**
  * DetachLoadBalancers返回参数结构体
@@ -1596,6 +1659,37 @@ export interface DescribeScheduledActionsResponse {
     RequestId?: string;
 }
 /**
+ * ModifyNotificationConfiguration请求参数结构体
+ */
+export interface ModifyNotificationConfigurationRequest {
+    /**
+     * 待修改的通知ID。
+     */
+    AutoScalingNotificationId: string;
+    /**
+     * 通知类型，即为需要订阅的通知类型集合，取值范围如下：
+  <li>SCALE_OUT_SUCCESSFUL：扩容成功</li>
+  <li>SCALE_OUT_FAILED：扩容失败</li>
+  <li>SCALE_IN_SUCCESSFUL：缩容成功</li>
+  <li>SCALE_IN_FAILED：缩容失败</li>
+  <li>REPLACE_UNHEALTHY_INSTANCE_SUCCESSFUL：替换不健康子机成功</li>
+  <li>REPLACE_UNHEALTHY_INSTANCE_FAILED：替换不健康子机失败</li>
+     */
+    NotificationTypes?: Array<string>;
+    /**
+     * 通知组ID，即为用户组ID集合，用户组ID可以通过[ListGroups](https://cloud.tencent.com/document/product/598/34589)查询。
+     */
+    NotificationUserGroupIds?: Array<string>;
+    /**
+     * CMQ 队列或 TDMQ CMQ 队列名。
+     */
+    QueueName?: string;
+    /**
+     * CMQ 主题或 TDMQ CMQ 主题名。
+     */
+    TopicName?: string;
+}
+/**
  * DeleteLifecycleHook请求参数结构体
  */
 export interface DeleteLifecycleHookRequest {
@@ -1627,13 +1721,18 @@ export interface ModifyAutoScalingGroupResponse {
     RequestId?: string;
 }
 /**
- * DeleteLaunchConfiguration请求参数结构体
+ * ExitStandby返回参数结构体
  */
-export interface DeleteLaunchConfigurationRequest {
+export interface ExitStandbyResponse {
     /**
-     * 需要删除的启动配置ID。
+     * 伸缩活动ID。
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    LaunchConfigurationId: string;
+    ActivityId?: string;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * 执行命令结果。
@@ -1733,6 +1832,33 @@ export interface InstanceMarketOptionsRequest {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     MarketType?: string;
+}
+/**
+ * 实例刷新批次信息，包含该批次的刷新状态、实例、起止时间等信息。
+ */
+export interface RefreshBatch {
+    /**
+     * 刷新批次序号。例如，2 表示当前批次实例会在第二批次进行实例刷新。
+     */
+    RefreshBatchNum?: number;
+    /**
+     * 刷新批次状态。取值如下：<br><li>WAITING：待刷新</li><li>INIT：初始化中</li><li>RUNNING：刷新中</li><li>FAILED:  刷新失败</li><li>PARTIALLY_SUCCESSFUL：批次部分成功</li><li>CANCELLED：已取消</li><li>SUCCESSFUL：刷新成功
+     */
+    RefreshBatchStatus?: string;
+    /**
+     * 刷新批次关联实例列表。
+     */
+    RefreshBatchRelatedInstanceSet?: Array<RefreshBatchRelatedInstance>;
+    /**
+     * 刷新批次开始时间。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    StartTime?: string;
+    /**
+     * 刷新批次结束时间。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    EndTime?: string;
 }
 /**
  * UpgradeLifecycleHook返回参数结构体
@@ -2104,6 +2230,19 @@ export interface DataDisk {
     ThroughputPerformance?: number;
 }
 /**
+ * RollbackInstanceRefresh返回参数结构体
+ */
+export interface RollbackInstanceRefreshResponse {
+    /**
+     * 刷新活动 ID。
+     */
+    RefreshActivityId?: string;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * DeleteScalingPolicy请求参数结构体
  */
 export interface DeleteScalingPolicyRequest {
@@ -2359,6 +2498,30 @@ export interface RunSecurityServiceEnabled {
     Enabled?: boolean;
 }
 /**
+ * 刷新批次关联实例，包含单个实例的刷新活动状态、对应伸缩活动等信息。
+ */
+export interface RefreshBatchRelatedInstance {
+    /**
+     * 实例 ID。
+     */
+    InstanceId?: string;
+    /**
+     * 刷新实例状态。如果在刷新时实例被移出或销毁，状态会更新为 NOT_FOUND。取值如下：<br><li>WAITING：待刷新</li><li>INIT：初始化中</li><li>RUNNING：刷新中</li><li>FAILED：刷新失败</li><li>CANCELLED：已取消</li><li>SUCCESSFUL：刷新成功</li><li>NOT_FOUND：实例不存在
+     */
+    InstanceStatus?: string;
+    /**
+     * 实例刷新中最近一次伸缩活动 ID，可通过 DescribeAutoScalingActivities 接口查询。
+  需注意伸缩活动与实例刷新活动不同，一次实例刷新活动可能包括多次伸缩活动。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    LastActivityId?: string;
+    /**
+     * 实例刷新状态信息。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InstanceStatusMessage?: string;
+}
+/**
  * DeleteScheduledAction请求参数结构体
  */
 export interface DeleteScheduledActionRequest {
@@ -2430,6 +2593,19 @@ export interface CreateScheduledActionResponse {
      * 定时任务ID
      */
     ScheduledActionId: string;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * StartInstanceRefresh返回参数结构体
+ */
+export interface StartInstanceRefreshResponse {
+    /**
+     * 刷新活动 ID。
+     */
+    RefreshActivityId?: string;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2591,6 +2767,20 @@ export interface ScaleOutInstancesResponse {
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * 实例刷新设置。
+ */
+export interface RefreshSettings {
+    /**
+     * 滚动更新设置参数。RefreshMode 为滚动更新该参数必须填写。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RollingUpdateSettings: RollingUpdateSettings;
+    /**
+     * 实例后端服务健康状态检查，默认为 FALSE。仅针对绑定应用型负载均衡器的伸缩组生效，开启该检查后，如刷新后实例未通过检查，负载均衡器端口权重始终为 0，且标记为刷新失败。取值范围如下：<br><li>TRUE：开启检查</li><li>FALSE：不开启检查
+     */
+    CheckInstanceTargetHealth?: boolean;
 }
 /**
  * >描述键值对过滤器，用于条件过滤查询。例如过滤ID、名称、状态等
@@ -2777,17 +2967,21 @@ export interface CreateScalingPolicyRequest {
     NotificationUserGroupIds?: Array<string>;
 }
 /**
- * ScaleInInstances返回参数结构体
+ * ResumeInstanceRefresh请求参数结构体
  */
-export interface ScaleInInstancesResponse {
+export interface ResumeInstanceRefreshRequest {
     /**
-     * 伸缩活动ID。
+     * 伸缩组ID。
      */
-    ActivityId: string;
+    AutoScalingGroupId: string;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     * 刷新活动ID。
      */
-    RequestId?: string;
+    RefreshActivityId: string;
+    /**
+     * 当前批次刷新失败实例的恢复方式，如不存在失败实例，该参数无效。默认值为RETRY，取值范围如下：<br><li>RETRY: 重试当前批次刷新失败实例</li><li>CONTINUE: 跳过当前批次刷新失败实例
+     */
+    ResumeMode?: string;
 }
 /**
  * DescribeAutoScalingAdvices请求参数结构体
@@ -2871,6 +3065,44 @@ export interface ModifyLoadBalancerTargetAttributesRequest {
     ForwardLoadBalancers: Array<ForwardLoadBalancer>;
 }
 /**
+ * RollbackInstanceRefresh请求参数结构体
+ */
+export interface RollbackInstanceRefreshRequest {
+    /**
+     * 伸缩组ID。
+     */
+    AutoScalingGroupId: string;
+    /**
+     * 刷新设置。
+     */
+    RefreshSettings: RefreshSettings;
+    /**
+     * 原始刷新活动 ID。
+     */
+    OriginRefreshActivityId: string;
+    /**
+     * 刷新模式，目前仅支持滚动更新，默认值为 ROLLING_UPDATE_RESET。
+     */
+    RefreshMode?: string;
+}
+/**
+ * StartInstanceRefresh请求参数结构体
+ */
+export interface StartInstanceRefreshRequest {
+    /**
+     * 伸缩组ID。
+     */
+    AutoScalingGroupId: string;
+    /**
+     * 刷新设置。
+     */
+    RefreshSettings: RefreshSettings;
+    /**
+     * 刷新模式，目前仅支持滚动更新，默认值为 ROLLING_UPDATE_RESET。
+     */
+    RefreshMode?: string;
+}
+/**
  * DeleteAutoScalingGroup返回参数结构体
  */
 export interface DeleteAutoScalingGroupResponse {
@@ -2949,6 +3181,19 @@ export interface EnableAutoScalingGroupRequest {
     AutoScalingGroupId: string;
 }
 /**
+ * StopInstanceRefresh请求参数结构体
+ */
+export interface StopInstanceRefreshRequest {
+    /**
+     * 伸缩组ID。
+     */
+    AutoScalingGroupId: string;
+    /**
+     * 刷新活动ID。
+     */
+    RefreshActivityId: string;
+}
+/**
  * 弹性伸缩告警指标
  */
 export interface MetricAlarm {
@@ -2980,6 +3225,64 @@ export interface MetricAlarm {
      * 精确告警阈值，本参数不作为入参输入，仅用作查询接口出参：<br><li>CPU_UTILIZATION：(0, 100]，单位：%</li><li>MEM_UTILIZATION：(0, 100]，单位：%</li><li>LAN_TRAFFIC_OUT：>0，单位：Mbps </li><li>LAN_TRAFFIC_IN：>0，单位：Mbps</li><li>WAN_TRAFFIC_OUT：>0，单位：Mbps</li><li>WAN_TRAFFIC_IN：>0，单位：Mbps</li>
      */
     PreciseThreshold?: number;
+}
+/**
+ * 实例刷新活动。
+ */
+export interface RefreshActivity {
+    /**
+     * 伸缩组 ID。
+     */
+    AutoScalingGroupId?: string;
+    /**
+     * 刷新活动 ID。
+     */
+    RefreshActivityId?: string;
+    /**
+     * 原始刷新活动ID，仅在回滚刷新活动中存在。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    OriginRefreshActivityId?: string;
+    /**
+     * 刷新批次信息列表。
+     */
+    RefreshBatchSet?: Array<RefreshBatch>;
+    /**
+     * 刷新模式。
+     */
+    RefreshMode?: string;
+    /**
+     * 实例更新设置参数。
+     */
+    RefreshSettings?: RefreshSettings;
+    /**
+     * 刷新活动类型。取值如下：<br><li>NORMAL：正常刷新活动</li><li>ROLLBACK：回滚刷新活动
+     */
+    ActivityType?: string;
+    /**
+     * 刷新活动状态。取值如下：<br><li>INIT：初始化中</li><li>RUNNING：运行中</li><li>SUCCESSFUL：活动成功</li><li>FAILED_PAUSE：因刷新批次失败暂停</li><li>AUTO_PAUSE：因暂停策略自动暂停</li><li>MANUAL_PAUSE：手动暂停</li><li>CANCELLED：活动取消</li><li>FAILED：活动失败
+     */
+    Status?: string;
+    /**
+     * 当前刷新批次序号。例如，2 表示当前活动正在刷新第二批次的实例。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CurrentRefreshBatchNum?: number;
+    /**
+     * 刷新活动开始时间。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    StartTime?: string;
+    /**
+     * 刷新活动结束时间。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    EndTime?: string;
+    /**
+     * 刷新活动创建时间。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CreatedTime?: string;
 }
 /**
  * DescribeNotificationConfigurations请求参数结构体
@@ -3186,6 +3489,15 @@ export interface AttachInstancesRequest {
     InstanceIds: Array<string>;
 }
 /**
+ * StopInstanceRefresh返回参数结构体
+ */
+export interface StopInstanceRefreshResponse {
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * AttachLoadBalancers请求参数结构体
  */
 export interface AttachLoadBalancersRequest {
@@ -3233,6 +3545,56 @@ export interface SpotMixedAllocationPolicy {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     CompensateWithBaseInstance?: boolean;
+}
+/**
+ * UpgradeLifecycleHook请求参数结构体
+ */
+export interface UpgradeLifecycleHookRequest {
+    /**
+     * 生命周期挂钩ID
+     */
+    LifecycleHookId: string;
+    /**
+     * 生命周期挂钩名称
+     */
+    LifecycleHookName: string;
+    /**
+     * 进行生命周期挂钩的场景，取值范围包括“INSTANCE_LAUNCHING”和“INSTANCE_TERMINATING”
+     */
+    LifecycleTransition: string;
+    /**
+     * 定义伸缩组在生命周期挂钩超时的情况下应采取的操作，取值范围是“CONTINUE”或“ABANDON”，默认值为“CONTINUE”
+     */
+    DefaultResult?: string;
+    /**
+     * 生命周期挂钩超时之前可以经过的最长时间（以秒为单位），范围从30到7200秒，默认值为300秒
+     */
+    HeartbeatTimeout?: number;
+    /**
+     * 弹性伸缩向通知目标发送的附加信息，配置通知时使用，默认值为空字符串""
+     */
+    NotificationMetadata?: string;
+    /**
+     * 通知目标。NotificationTarget和LifecycleCommand参数互斥，二者不可同时指定。
+     */
+    NotificationTarget?: NotificationTarget;
+    /**
+     * 进行生命周期挂钩的场景类型，取值范围包括NORMAL 和 EXTENSION。说明：设置为EXTENSION值，在AttachInstances、DetachInstances、RemoveInstaces接口时会触发生命周期挂钩操作，值为NORMAL则不会在这些接口中触发生命周期挂钩。
+     */
+    LifecycleTransitionType?: string;
+    /**
+     * 远程命令执行对象。NotificationTarget和LifecycleCommand参数互斥，二者不可同时指定。
+     */
+    LifecycleCommand?: LifecycleCommand;
+}
+/**
+ * ResumeInstanceRefresh返回参数结构体
+ */
+export interface ResumeInstanceRefreshResponse {
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * DescribeScalingPolicies返回参数结构体
@@ -3371,35 +3733,13 @@ export interface RunMonitorServiceEnabled {
     Enabled?: boolean;
 }
 /**
- * ModifyNotificationConfiguration请求参数结构体
+ * CancelInstanceRefresh返回参数结构体
  */
-export interface ModifyNotificationConfigurationRequest {
+export interface CancelInstanceRefreshResponse {
     /**
-     * 待修改的通知ID。
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
-    AutoScalingNotificationId: string;
-    /**
-     * 通知类型，即为需要订阅的通知类型集合，取值范围如下：
-  <li>SCALE_OUT_SUCCESSFUL：扩容成功</li>
-  <li>SCALE_OUT_FAILED：扩容失败</li>
-  <li>SCALE_IN_SUCCESSFUL：缩容成功</li>
-  <li>SCALE_IN_FAILED：缩容失败</li>
-  <li>REPLACE_UNHEALTHY_INSTANCE_SUCCESSFUL：替换不健康子机成功</li>
-  <li>REPLACE_UNHEALTHY_INSTANCE_FAILED：替换不健康子机失败</li>
-     */
-    NotificationTypes?: Array<string>;
-    /**
-     * 通知组ID，即为用户组ID集合，用户组ID可以通过[ListGroups](https://cloud.tencent.com/document/product/598/34589)查询。
-     */
-    NotificationUserGroupIds?: Array<string>;
-    /**
-     * CMQ 队列或 TDMQ CMQ 队列名。
-     */
-    QueueName?: string;
-    /**
-     * CMQ 主题或 TDMQ CMQ 主题名。
-     */
-    TopicName?: string;
+    RequestId?: string;
 }
 /**
  * 与本次伸缩活动相关的实例信息。
