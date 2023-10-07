@@ -41,7 +41,7 @@ export declare class Client extends AbstractClient {
 
 适用场景1：更新当前企业的自定义角色的名称或描述等其他信息，更新时不进行权限的设置（PermissionGroups 参数不传）。
 
-适用场景2：更新当前企业的自定义角色的权限信息，更新时进行权限的设置（PermissionGroups 参数要传），权限树内容 PermissionGroups 可参考接口 ChannelDescribeRoles 的输出。
+适用场景2：更新当前企业的自定义角色的权限信息，更新时进行权限的设置（PermissionGroups 参数要传），权限树内容 PermissionGroups 可参考接口 ChannelDescribeRoles 的输出。此处注意权限树内容可能会更新，需尽量拉取最新的权限树内容，并且权限树内容 PermissionGroups 必须是一颗完整的权限树。
      */
     ChannelModifyRole(req: ChannelModifyRoleRequest, cb?: (error: string, rep: ChannelModifyRoleResponse) => void): Promise<ChannelModifyRoleResponse>;
     /**
@@ -120,7 +120,7 @@ https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/launchAp
 
 适用场景1：创建当前企业的自定义角色，并且创建时不进行权限的设置（PermissionGroups 参数不传），角色中的权限内容可通过接口 ChannelModifyRole 完成更新。
 
-适用场景2：创建当前企业的自定义角色，并且创建时进行权限的设置（PermissionGroups 参数要传），权限树内容 PermissionGroups 可参考接口 ChannelDescribeRoles 的输出。
+适用场景2：创建当前企业的自定义角色，并且创建时进行权限的设置（PermissionGroups 参数要传），权限树内容 PermissionGroups 可参考接口 ChannelDescribeRoles 的输出。此处注意权限树内容可能会更新，需尽量拉取最新的权限树内容，并且权限树内容 PermissionGroups 必须是一颗完整的权限树。
      */
     ChannelCreateRole(req: ChannelCreateRoleRequest, cb?: (error: string, rep: ChannelCreateRoleResponse) => void): Promise<ChannelCreateRoleResponse>;
     /**
@@ -169,9 +169,9 @@ https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/launchAp
 4. 客户小程序直接跳到电子签小程序-->签署完成退出电子签小程序-->回到客户小程序
 跳转到小程序的实现，参考官方文档（分为全屏、半屏两种方式）
 全屏方式：
-（https://developers.weixin.qq.com/miniprogram/dev/api/navigate/wx.navigateToMiniProgram.html）
+（https://developers.weixin.qq.com/miniprogram/dev/api/navigate/wx.navigateToMiniProgram.html ）
 半屏方式：
-（https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/openEmbeddedMiniProgram.html）
+（https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/openEmbeddedMiniProgram.html ）
 其中小程序的原始Id，请联系<对接技术人员>获取，或者查看小程序信息自助获取。
 使用CreateSignUrls，设置EndPoint为APP，得到path。
 
@@ -357,7 +357,7 @@ httpProfile.setEndpoint("file.test.ess.tencent.cn");
     /**
      * 此接口（CreateChannelOrganizationInfoChangeUrl）用于创建子客企业信息变更链接，支持创建企业超管变更链接或企业基础信息变更链接，通过入参ChangeType指定。
      */
-    CreateChannelOrganizationInfoChangeUrl(req?: CreateChannelOrganizationInfoChangeUrlRequest, cb?: (error: string, rep: CreateChannelOrganizationInfoChangeUrlResponse) => void): Promise<CreateChannelOrganizationInfoChangeUrlResponse>;
+    CreateChannelOrganizationInfoChangeUrl(req: CreateChannelOrganizationInfoChangeUrlRequest, cb?: (error: string, rep: CreateChannelOrganizationInfoChangeUrlResponse) => void): Promise<CreateChannelOrganizationInfoChangeUrlResponse>;
     /**
      * 此接口（SyncProxyOrganizationOperators）用于同步 第三方平台子客企业经办人列表，主要是同步经办人的离职状态。子客Web控制台的组织架构管理，是依赖于第三方应用平台的，无法针对员工做新增/更新/离职等操作。
 若经办人信息有误，或者需要修改，也可以先将之前的经办人做离职操作，然后重新使用控制台链接CreateConsoleLoginUrl让经办人重新实名。
