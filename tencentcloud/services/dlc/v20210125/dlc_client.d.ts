@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeResultDownloadResponse, DescribeTaskResultResponse, DescribeDatasourceConnectionResponse, DescribeNotebookSessionStatementRequest, CancelNotebookSessionStatementRequest, DescribeDatabasesRequest, DeleteUserRequest, ListTaskJobLogDetailResponse, DetachUserPolicyResponse, CreateResultDownloadResponse, ModifyGovernEventRuleResponse, DescribeNotebookSessionsRequest, CreateDMSDatabaseResponse, CreateStoreLocationResponse, DescribeNotebookSessionResponse, DescribeDMSDatabaseResponse, UnbindWorkGroupsFromUserResponse, DropDMSDatabaseRequest, CreateScriptResponse, CreateTasksInOrderResponse, DescribeTablesResponse, SwitchDataEngineRequest, SuspendResumeDataEngineResponse, DeleteSparkAppRequest, ModifyUserResponse, DeleteScriptResponse, DetachUserPolicyRequest, AlterDMSTableResponse, DescribeEngineUsageInfoRequest, DescribeDMSTableResponse, DropDMSPartitionsRequest, CreateNotebookSessionStatementSupportBatchSQLRequest, CreateTasksInOrderRequest, AddDMSPartitionsResponse, DetachWorkGroupPolicyResponse, DescribeSparkSessionBatchSqlLogResponse, GenerateCreateMangedTableSqlRequest, SwitchDataEngineResponse, DescribeLakeFsInfoRequest, ModifySparkAppRequest, CreateDatabaseRequest, GenerateCreateMangedTableSqlResponse, DescribeDMSTablesResponse, AlterDMSPartitionRequest, CheckLockMetaDataRequest, DescribeSparkAppJobRequest, CreateDatabaseResponse, DescribeTasksRequest, CreateSparkAppTaskRequest, ModifySparkAppBatchResponse, CancelNotebookSessionStatementBatchResponse, QueryResultResponse, AttachUserPolicyRequest, CreateInternalTableRequest, ListTaskJobLogDetailRequest, AttachWorkGroupPolicyRequest, CreateUserResponse, DescribeNotebookSessionStatementsRequest, DeleteUserResponse, DescribeDatabasesResponse, DescribeNotebookSessionsResponse, DescribeDMSPartitionsRequest, DescribeForbiddenTableProRequest, CreateDataEngineResponse, DescribeSparkAppJobsRequest, DeleteNotebookSessionRequest, CreateDMSTableResponse, CreateNotebookSessionRequest, DescribeSparkSessionBatchSQLRequest, QueryResultRequest, CreateDataEngineRequest, ModifySparkAppBatchRequest, CreateTaskRequest, DescribeNotebookSessionRequest, CreateTableRequest, CreateNotebookSessionStatementRequest, DescribeWorkGroupsResponse, CreateImportTaskRequest, DescribeSparkSessionBatchSqlLogRequest, DescribeScriptsRequest, DescribeSparkAppJobResponse, CreateExportTaskResponse, AddUsersToWorkGroupRequest, DescribeStoreLocationRequest, AddUsersToWorkGroupResponse, DescribeNotebookSessionLogRequest, DescribeUserRolesResponse, CreateExportTaskRequest, DescribeNotebookSessionStatementResponse, ReportHeartbeatMetaDataResponse, ReportHeartbeatMetaDataRequest, CreateDMSTableRequest, CancelNotebookSessionStatementResponse, AttachWorkGroupPolicyResponse, ModifyWorkGroupResponse, DescribeDMSTablesRequest, ModifyUserRequest, CreateSparkAppTaskResponse, CancelTaskRequest, BindWorkGroupsToUserResponse, CreateNotebookSessionStatementResponse, DescribeStoreLocationResponse, DeleteScriptRequest, AddDMSPartitionsRequest, DescribeUserRolesRequest, DescribeNotebookSessionStatementSqlResultRequest, ModifySparkAppResponse, AlterDMSTableRequest, CreateImportTaskResponse, CreateTableResponse, CreateNotebookSessionStatementSupportBatchSQLResponse, CreateScriptRequest, BindWorkGroupsToUserRequest, DeleteWorkGroupRequest, DescribeTaskResultRequest, UnlockMetaDataRequest, DescribeLakeFsDirSummaryResponse, DescribeNotebookSessionLogResponse, DescribeForbiddenTableProResponse, CreateUserRequest, ModifyWorkGroupRequest, CancelTaskResponse, UnlockMetaDataResponse, DeleteWorkGroupResponse, DescribeSparkSessionBatchSQLResponse, DropDMSTableResponse, DescribeTableRequest, CreateWorkGroupResponse, DescribeEngineUsageInfoResponse, DescribeTablesRequest, DeleteNotebookSessionResponse, CreateStoreLocationRequest, DescribeNotebookSessionStatementsResponse, AttachUserPolicyResponse, DescribeLakeFsInfoResponse, DropDMSTableRequest, CancelSparkSessionBatchSQLResponse, DescribeNotebookSessionStatementSqlResultResponse, DescribeDMSPartitionsResponse, DeleteUsersFromWorkGroupResponse, CreateSparkSessionBatchSQLResponse, DescribeDMSDatabaseRequest, DescribeLakeFsDirSummaryRequest, DropDMSDatabaseResponse, DescribeUsersRequest, DeleteUsersFromWorkGroupRequest, CreateSparkAppResponse, CreateTaskResponse, DeleteSparkAppResponse, AlterDMSPartitionResponse, CreateTasksRequest, DescribeTableResponse, DescribeSparkAppJobsResponse, DescribeSparkAppTasksResponse, DescribeViewsRequest, LockMetaDataRequest, CancelSparkSessionBatchSQLRequest, DescribeWorkGroupsRequest, UnbindWorkGroupsFromUserRequest, UpdateRowFilterResponse, CreateTasksResponse, CreateNotebookSessionResponse, DescribeViewsResponse, DescribeTasksResponse, CreateSparkAppRequest, CreateSparkSessionBatchSQLRequest, DescribeDataEnginesRequest, DropDMSPartitionsResponse, AlterDMSDatabaseResponse, CreateWorkGroupRequest, CreateInternalTableResponse, SuspendResumeDataEngineRequest, DescribeSparkAppTasksRequest, LockMetaDataResponse, DescribeDatasourceConnectionRequest, CheckLockMetaDataResponse, AlterDMSDatabaseRequest, DescribeUsersResponse, CreateResultDownloadRequest, CreateDMSDatabaseRequest, DetachWorkGroupPolicyRequest, DescribeDMSTableRequest, ModifyGovernEventRuleRequest, CancelNotebookSessionStatementBatchRequest, DescribeDataEnginesResponse, DescribeScriptsResponse, UpdateRowFilterRequest, DescribeResultDownloadRequest } from "./dlc_models";
+import { UpdateDataEngineRequest, CheckDataEngineConfigPairsValidityResponse, DescribeResultDownloadResponse, DescribeTaskResultResponse, DescribeDatasourceConnectionResponse, DescribeNotebookSessionStatementRequest, ModifyDataEngineDescriptionRequest, CancelNotebookSessionStatementRequest, DescribeDatabasesRequest, DeleteUserRequest, DescribeUserDataEngineConfigResponse, ListTaskJobLogDetailResponse, DeleteDataEngineResponse, RenewDataEngineResponse, DetachUserPolicyResponse, CreateResultDownloadResponse, ModifyGovernEventRuleResponse, DescribeNotebookSessionsRequest, RestartDataEngineRequest, CreateDMSDatabaseResponse, CreateStoreLocationResponse, DescribeNotebookSessionResponse, DescribeDMSDatabaseResponse, DropDMSDatabaseRequest, CreateScriptResponse, CreateTasksInOrderResponse, DescribeTablesResponse, SwitchDataEngineRequest, DeleteSparkAppRequest, ModifyDataEngineDescriptionResponse, RestartDataEngineResponse, ModifyUserResponse, DeleteScriptResponse, DescribeWorkGroupsRequest, AlterDMSTableResponse, DescribeEngineUsageInfoRequest, DescribeDMSTableResponse, DropDMSPartitionsRequest, CreateNotebookSessionStatementSupportBatchSQLRequest, CreateTasksInOrderRequest, AddDMSPartitionsResponse, DetachWorkGroupPolicyResponse, DescribeSparkSessionBatchSqlLogResponse, GenerateCreateMangedTableSqlRequest, DescribeUserTypeRequest, SwitchDataEngineResponse, CheckDataEngineConfigPairsValidityRequest, DescribeLakeFsInfoRequest, ModifySparkAppRequest, DescribeUserInfoRequest, CreateDatabaseRequest, GenerateCreateMangedTableSqlResponse, DescribeDMSTablesResponse, UpdateDataEngineConfigResponse, AlterDMSPartitionRequest, CheckLockMetaDataRequest, DescribeSparkAppJobRequest, CreateDatabaseResponse, DescribeTasksRequest, CreateSparkAppTaskRequest, ModifySparkAppBatchResponse, DescribeUserTypeResponse, CancelNotebookSessionStatementBatchResponse, QueryResultResponse, CheckDataEngineImageCanBeUpgradeResponse, AttachUserPolicyRequest, CreateInternalTableRequest, ListTaskJobLogDetailRequest, DescribeTablesRequest, AttachWorkGroupPolicyRequest, CreateUserResponse, DetachUserPolicyRequest, DescribeDataEngineResponse, RollbackDataEngineImageResponse, UpdateDataEngineResponse, DeleteUserResponse, DescribeDatabasesResponse, DescribeNotebookSessionsResponse, DescribeDMSPartitionsRequest, DescribeForbiddenTableProRequest, CreateDataEngineResponse, DescribeSparkAppJobsRequest, DeleteNotebookSessionRequest, CreateDMSTableResponse, CreateNotebookSessionRequest, DescribeSparkSessionBatchSQLRequest, QueryResultRequest, CheckDataEngineImageCanBeRollbackRequest, CreateDataEngineRequest, ModifySparkAppBatchRequest, DescribeDataEnginePythonSparkImagesRequest, CreateTaskRequest, DescribeNotebookSessionRequest, UpgradeDataEngineImageRequest, ModifyUserTypeRequest, CreateTableRequest, CreateNotebookSessionStatementRequest, DescribeWorkGroupsResponse, CreateImportTaskRequest, DescribeSparkSessionBatchSqlLogRequest, DescribeScriptsRequest, ModifyGovernEventRuleRequest, DescribeSparkAppJobResponse, CreateExportTaskResponse, AddUsersToWorkGroupRequest, DescribeStoreLocationRequest, AddUsersToWorkGroupResponse, DescribeNotebookSessionLogRequest, DescribeUserRolesResponse, CreateExportTaskRequest, DescribeNotebookSessionStatementResponse, ReportHeartbeatMetaDataResponse, ReportHeartbeatMetaDataRequest, CreateDMSTableRequest, CancelNotebookSessionStatementResponse, AttachWorkGroupPolicyResponse, ModifyWorkGroupResponse, DescribeDMSTablesRequest, UpgradeDataEngineImageResponse, ModifyUserRequest, CreateSparkAppTaskResponse, CancelTaskRequest, DescribeDataEngineImageVersionsRequest, BindWorkGroupsToUserResponse, CreateNotebookSessionStatementResponse, DescribeStoreLocationResponse, DeleteScriptRequest, DescribeNotebookSessionStatementSqlResultRequest, UnbindWorkGroupsFromUserResponse, AddDMSPartitionsRequest, DescribeUserRolesRequest, DescribeDataEngineImageVersionsResponse, ModifySparkAppResponse, AlterDMSTableRequest, CreateImportTaskResponse, CreateTableResponse, CreateNotebookSessionStatementSupportBatchSQLResponse, CreateScriptRequest, BindWorkGroupsToUserRequest, DeleteWorkGroupRequest, RenewDataEngineRequest, DescribeTaskResultRequest, UnlockMetaDataRequest, RollbackDataEngineImageRequest, DescribeLakeFsDirSummaryResponse, DescribeNotebookSessionLogResponse, DescribeForbiddenTableProResponse, DescribeWorkGroupInfoRequest, CreateUserRequest, ModifyWorkGroupRequest, CancelTaskResponse, UnlockMetaDataResponse, DeleteWorkGroupResponse, DescribeSparkSessionBatchSQLResponse, DropDMSTableResponse, DescribeTableRequest, CreateWorkGroupResponse, DescribeEngineUsageInfoResponse, DescribeWorkGroupInfoResponse, CheckDataEngineImageCanBeRollbackResponse, SwitchDataEngineImageResponse, SwitchDataEngineImageRequest, DeleteNotebookSessionResponse, CreateStoreLocationRequest, DescribeNotebookSessionStatementsResponse, AttachUserPolicyResponse, DescribeLakeFsInfoResponse, DropDMSTableRequest, CancelSparkSessionBatchSQLResponse, DescribeNotebookSessionStatementSqlResultResponse, SuspendResumeDataEngineResponse, DescribeDMSPartitionsResponse, DeleteDataEngineRequest, CreateSparkSessionBatchSQLResponse, DescribeDMSDatabaseRequest, DescribeLakeFsDirSummaryRequest, DropDMSDatabaseResponse, DescribeUsersRequest, DeleteUsersFromWorkGroupRequest, CreateSparkAppResponse, CreateTaskResponse, UpdateUserDataEngineConfigResponse, DeleteSparkAppResponse, AlterDMSPartitionResponse, CreateTasksRequest, DescribeTableResponse, DescribeSparkAppJobsResponse, DescribeSparkAppTasksResponse, DescribeViewsRequest, LockMetaDataRequest, ModifyUserTypeResponse, CancelSparkSessionBatchSQLRequest, DeleteUsersFromWorkGroupResponse, DescribeUserDataEngineConfigRequest, DescribeDataEngineRequest, UnbindWorkGroupsFromUserRequest, UpdateRowFilterResponse, CreateTasksResponse, CreateNotebookSessionResponse, DescribeViewsResponse, DescribeTasksResponse, CreateSparkAppRequest, CreateSparkSessionBatchSQLRequest, DescribeDataEnginesRequest, DropDMSPartitionsResponse, AlterDMSDatabaseResponse, UpdateDataEngineConfigRequest, CreateWorkGroupRequest, CreateInternalTableResponse, SuspendResumeDataEngineRequest, DescribeSparkAppTasksRequest, LockMetaDataResponse, DescribeDatasourceConnectionRequest, CheckLockMetaDataResponse, DescribeNotebookSessionStatementsRequest, AlterDMSDatabaseRequest, CheckDataEngineImageCanBeUpgradeRequest, DescribeUsersResponse, CreateResultDownloadRequest, CreateDMSDatabaseRequest, DetachWorkGroupPolicyRequest, DescribeDMSTableRequest, DescribeDataEnginePythonSparkImagesResponse, CancelNotebookSessionStatementBatchRequest, DescribeUserInfoResponse, DescribeDataEnginesResponse, DescribeScriptsResponse, UpdateUserDataEngineConfigRequest, UpdateRowFilterRequest, DescribeResultDownloadRequest } from "./dlc_models";
 /**
  * dlc client
  * @class
@@ -28,6 +28,14 @@ export declare class Client extends AbstractClient {
      */
     DescribeUserRoles(req: DescribeUserRolesRequest, cb?: (error: string, rep: DescribeUserRolesResponse) => void): Promise<DescribeUserRolesResponse>;
     /**
+     * 修改用户类型。只有管理员用户能够调用该接口进行操作
+     */
+    ModifyUserType(req: ModifyUserTypeRequest, cb?: (error: string, rep: ModifyUserTypeResponse) => void): Promise<ModifyUserTypeResponse>;
+    /**
+     * 获取工作组详细信息
+     */
+    DescribeWorkGroupInfo(req: DescribeWorkGroupInfoRequest, cb?: (error: string, rep: DescribeWorkGroupInfoResponse) => void): Promise<DescribeWorkGroupInfoResponse>;
+    /**
      * 本接口（DescribeNotebookSession）用于查询交互式 session详情信息
      */
     DescribeNotebookSession(req: DescribeNotebookSessionRequest, cb?: (error: string, rep: DescribeNotebookSessionResponse) => void): Promise<DescribeNotebookSessionResponse>;
@@ -44,6 +52,10 @@ export declare class Client extends AbstractClient {
      */
     UnlockMetaData(req: UnlockMetaDataRequest, cb?: (error: string, rep: UnlockMetaDataResponse) => void): Promise<UnlockMetaDataResponse>;
     /**
+     * 本接口根据名称用于获取数据引擎详细信息
+     */
+    DescribeDataEngine(req: DescribeDataEngineRequest, cb?: (error: string, rep: DescribeDataEngineResponse) => void): Promise<DescribeDataEngineResponse>;
+    /**
      * 该接口（CreateStoreLocation）新增或覆盖计算结果存储位置。
      */
     CreateStoreLocation(req: CreateStoreLocationRequest, cb?: (error: string, rep: CreateStoreLocationResponse) => void): Promise<CreateStoreLocationResponse>;
@@ -51,10 +63,6 @@ export declare class Client extends AbstractClient {
      * 本接口（CreateNotebookSessionStatementSupportBatchSQL）用于创建交互式session并执行SQL任务
      */
     CreateNotebookSessionStatementSupportBatchSQL(req: CreateNotebookSessionStatementSupportBatchSQLRequest, cb?: (error: string, rep: CreateNotebookSessionStatementSupportBatchSQLResponse) => void): Promise<CreateNotebookSessionStatementSupportBatchSQLResponse>;
-    /**
-     * 本接口（DescribeSparkSessionBatchSqlLog）用于查询Spark SQL批任务日志
-     */
-    DescribeSparkSessionBatchSqlLog(req: DescribeSparkSessionBatchSqlLogRequest, cb?: (error: string, rep: DescribeSparkSessionBatchSqlLogResponse) => void): Promise<DescribeSparkSessionBatchSqlLogResponse>;
     /**
      * 切换主备集群
      */
@@ -76,6 +84,10 @@ export declare class Client extends AbstractClient {
      */
     DescribeDMSTables(req: DescribeDMSTablesRequest, cb?: (error: string, rep: DescribeDMSTablesResponse) => void): Promise<DescribeDMSTablesResponse>;
     /**
+     * 获取用户类型
+     */
+    DescribeUserType(req: DescribeUserTypeRequest, cb?: (error: string, rep: DescribeUserTypeResponse) => void): Promise<DescribeUserTypeResponse>;
+    /**
      * 该接口（DescribleTasks）用于查询任务列表
      */
     DescribeTasks(req: DescribeTasksRequest, cb?: (error: string, rep: DescribeTasksResponse) => void): Promise<DescribeTasksResponse>;
@@ -83,6 +95,10 @@ export declare class Client extends AbstractClient {
      * 该接口（DeleteScript）用于删除sql脚本。
      */
     DeleteScript(req: DeleteScriptRequest, cb?: (error: string, rep: DeleteScriptResponse) => void): Promise<DeleteScriptResponse>;
+    /**
+     * 切换引擎镜像版本
+     */
+    SwitchDataEngineImage(req?: SwitchDataEngineImageRequest, cb?: (error: string, rep: SwitchDataEngineImageResponse) => void): Promise<SwitchDataEngineImageResponse>;
     /**
      * 启动Spark作业
      */
@@ -96,9 +112,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeDatabases(req: DescribeDatabasesRequest, cb?: (error: string, rep: DescribeDatabasesResponse) => void): Promise<DescribeDatabasesResponse>;
     /**
-     * 本接口（DescribeNotebookSessions）用于查询交互式 session列表
+     * DMS元数据更新分区
      */
-    DescribeNotebookSessions(req: DescribeNotebookSessionsRequest, cb?: (error: string, rep: DescribeNotebookSessionsResponse) => void): Promise<DescribeNotebookSessionsResponse>;
+    AlterDMSPartition(req: AlterDMSPartitionRequest, cb?: (error: string, rep: AlterDMSPartitionResponse) => void): Promise<AlterDMSPartitionResponse>;
     /**
      * 创建用户
      */
@@ -112,9 +128,13 @@ export declare class Client extends AbstractClient {
      */
     ModifySparkAppBatch(req: ModifySparkAppBatchRequest, cb?: (error: string, rep: ModifySparkAppBatchResponse) => void): Promise<ModifySparkAppBatchResponse>;
     /**
-     * DMS元数据更新分区
+     * 本接口（DescribeNotebookSessions）用于查询交互式 session列表
      */
-    AlterDMSPartition(req: AlterDMSPartitionRequest, cb?: (error: string, rep: AlterDMSPartitionResponse) => void): Promise<AlterDMSPartitionResponse>;
+    DescribeNotebookSessions(req: DescribeNotebookSessionsRequest, cb?: (error: string, rep: DescribeNotebookSessionsResponse) => void): Promise<DescribeNotebookSessionsResponse>;
+    /**
+     * 此接口用于更新行过滤规则。注意只能更新过滤规则，不能更新规格对象catalog，database和table。
+     */
+    UpdateRowFilter(req: UpdateRowFilterRequest, cb?: (error: string, rep: UpdateRowFilterResponse) => void): Promise<UpdateRowFilterResponse>;
     /**
      * 元数据锁
      */
@@ -168,6 +188,10 @@ export declare class Client extends AbstractClient {
      */
     CreateDatabase(req: CreateDatabaseRequest, cb?: (error: string, rep: CreateDatabaseResponse) => void): Promise<CreateDatabaseResponse>;
     /**
+     * 回滚引擎镜像版本
+     */
+    RollbackDataEngineImage(req?: RollbackDataEngineImageRequest, cb?: (error: string, rep: RollbackDataEngineImageResponse) => void): Promise<RollbackDataEngineImageResponse>;
+    /**
      * 本接口（CreateSparkSessionBatchSQL）用于向Spark作业引擎提交Spark SQL批任务。
      */
     CreateSparkSessionBatchSQL(req: CreateSparkSessionBatchSQLRequest, cb?: (error: string, rep: CreateSparkSessionBatchSQLResponse) => void): Promise<CreateSparkSessionBatchSQLResponse>;
@@ -220,9 +244,17 @@ export declare class Client extends AbstractClient {
      */
     AddDMSPartitions(req: AddDMSPartitionsRequest, cb?: (error: string, rep: AddDMSPartitionsResponse) => void): Promise<AddDMSPartitionsResponse>;
     /**
+     * 修改用户引擎自定义配置
+     */
+    UpdateUserDataEngineConfig(req?: UpdateUserDataEngineConfigRequest, cb?: (error: string, rep: UpdateUserDataEngineConfigResponse) => void): Promise<UpdateUserDataEngineConfigResponse>;
+    /**
      * 本接口（CancelNotebookSessionStatementBatch）用于批量取消Session 中执行的任务
      */
     CancelNotebookSessionStatementBatch(req: CancelNotebookSessionStatementBatchRequest, cb?: (error: string, rep: CancelNotebookSessionStatementBatchResponse) => void): Promise<CancelNotebookSessionStatementBatchResponse>;
+    /**
+     * 本接口（CheckDataEngineImageCanBeUpgrade）用于查看集群镜像是否能够升级。
+     */
+    CheckDataEngineImageCanBeUpgrade(req: CheckDataEngineImageCanBeUpgradeRequest, cb?: (error: string, rep: CheckDataEngineImageCanBeUpgradeResponse) => void): Promise<CheckDataEngineImageCanBeUpgradeResponse>;
     /**
      * 删除spark作业
      */
@@ -252,17 +284,37 @@ export declare class Client extends AbstractClient {
      */
     DescribeDatasourceConnection(req: DescribeDatasourceConnectionRequest, cb?: (error: string, rep: DescribeDatasourceConnectionResponse) => void): Promise<DescribeDatasourceConnectionResponse>;
     /**
+     * 本接口（CheckDataEngineImageCanBeRollback）用于查看集群是否能回滚。
+     */
+    CheckDataEngineImageCanBeRollback(req: CheckDataEngineImageCanBeRollbackRequest, cb?: (error: string, rep: CheckDataEngineImageCanBeRollbackResponse) => void): Promise<CheckDataEngineImageCanBeRollbackResponse>;
+    /**
      * 本接口（CancelSparkSessionBatchSQL）用于取消Spark SQL批任务。
      */
     CancelSparkSessionBatchSQL(req: CancelSparkSessionBatchSQLRequest, cb?: (error: string, rep: CancelSparkSessionBatchSQLResponse) => void): Promise<CancelSparkSessionBatchSQLResponse>;
     /**
-     * 本接口（CancelTask），用于取消任务
+     * 本接口（DescribeSparkSessionBatchSqlLog）用于查询Spark SQL批任务日志
      */
-    CancelTask(req: CancelTaskRequest, cb?: (error: string, rep: CancelTaskResponse) => void): Promise<CancelTaskResponse>;
+    DescribeSparkSessionBatchSqlLog(req: DescribeSparkSessionBatchSqlLogRequest, cb?: (error: string, rep: DescribeSparkSessionBatchSqlLogResponse) => void): Promise<DescribeSparkSessionBatchSqlLogResponse>;
     /**
-     * 更新spark作业
+     * 本接口（DescribeTable），用于查询单个表的详细信息。
      */
-    ModifySparkApp(req: ModifySparkAppRequest, cb?: (error: string, rep: ModifySparkAppResponse) => void): Promise<ModifySparkAppResponse>;
+    DescribeTable(req: DescribeTableRequest, cb?: (error: string, rep: DescribeTableResponse) => void): Promise<DescribeTableResponse>;
+    /**
+     * 获取用户详细信息
+     */
+    DescribeUserInfo(req: DescribeUserInfoRequest, cb?: (error: string, rep: DescribeUserInfoResponse) => void): Promise<DescribeUserInfoResponse>;
+    /**
+     * 本接口用于更新数据引擎配置
+     */
+    UpdateDataEngine(req: UpdateDataEngineRequest, cb?: (error: string, rep: UpdateDataEngineResponse) => void): Promise<UpdateDataEngineResponse>;
+    /**
+     * 本接口（CheckDataEngineConfigPairsValidity）用于检查引擎用户自定义参数的有效性
+     */
+    CheckDataEngineConfigPairsValidity(req: CheckDataEngineConfigPairsValidityRequest, cb?: (error: string, rep: CheckDataEngineConfigPairsValidityResponse) => void): Promise<CheckDataEngineConfigPairsValidityResponse>;
+    /**
+     * 删除数据引擎
+     */
+    DeleteDataEngine(req: DeleteDataEngineRequest, cb?: (error: string, rep: DeleteDataEngineResponse) => void): Promise<DeleteDataEngineResponse>;
     /**
      * 删除用户
      */
@@ -272,17 +324,25 @@ export declare class Client extends AbstractClient {
      */
     DescribeEngineUsageInfo(req: DescribeEngineUsageInfoRequest, cb?: (error: string, rep: DescribeEngineUsageInfoResponse) => void): Promise<DescribeEngineUsageInfoResponse>;
     /**
+     * 用户某种操作，触发引擎配置修改
+     */
+    UpdateDataEngineConfig(req?: UpdateDataEngineConfigRequest, cb?: (error: string, rep: UpdateDataEngineConfigResponse) => void): Promise<UpdateDataEngineConfigResponse>;
+    /**
      * 按顺序创建任务（已经废弃，后期不再维护，请使用接口CreateTasks）
      */
     CreateTasksInOrder(req: CreateTasksInOrderRequest, cb?: (error: string, rep: CreateTasksInOrderResponse) => void): Promise<CreateTasksInOrderResponse>;
     /**
-     * 此接口用于更新行过滤规则。注意只能更新过滤规则，不能更新规格对象catalog，database和table。
+     * 本接口（DescribeDataEngineImageVersions）用于获取独享集群大版本镜像列表。
      */
-    UpdateRowFilter(req: UpdateRowFilterRequest, cb?: (error: string, rep: UpdateRowFilterResponse) => void): Promise<UpdateRowFilterResponse>;
+    DescribeDataEngineImageVersions(req: DescribeDataEngineImageVersionsRequest, cb?: (error: string, rep: DescribeDataEngineImageVersionsResponse) => void): Promise<DescribeDataEngineImageVersionsResponse>;
     /**
      * DMS元数据创建表
      */
     CreateDMSTable(req: CreateDMSTableRequest, cb?: (error: string, rep: CreateDMSTableResponse) => void): Promise<CreateDMSTableResponse>;
+    /**
+     * 升级引擎镜像
+     */
+    UpgradeDataEngineImage(req?: UpgradeDataEngineImageRequest, cb?: (error: string, rep: UpgradeDataEngineImageResponse) => void): Promise<UpgradeDataEngineImageResponse>;
     /**
      * 解绑用户鉴权策略
      */
@@ -316,6 +376,10 @@ export declare class Client extends AbstractClient {
      */
     CreateExportTask(req: CreateExportTaskRequest, cb?: (error: string, rep: CreateExportTaskResponse) => void): Promise<CreateExportTaskResponse>;
     /**
+     * 本接口（CancelTask），用于取消任务
+     */
+    CancelTask(req: CancelTaskRequest, cb?: (error: string, rep: CancelTaskResponse) => void): Promise<CancelTaskResponse>;
+    /**
      * 从工作组中删除用户
      */
     DeleteUsersFromWorkGroup(req: DeleteUsersFromWorkGroupRequest, cb?: (error: string, rep: DeleteUsersFromWorkGroupResponse) => void): Promise<DeleteUsersFromWorkGroupResponse>;
@@ -336,13 +400,21 @@ export declare class Client extends AbstractClient {
      */
     CreateScript(req: CreateScriptRequest, cb?: (error: string, rep: CreateScriptResponse) => void): Promise<CreateScriptResponse>;
     /**
+     * 重启引擎
+     */
+    RestartDataEngine(req?: RestartDataEngineRequest, cb?: (error: string, rep: RestartDataEngineResponse) => void): Promise<RestartDataEngineResponse>;
+    /**
      * 本接口（DescribeNotebookSessionStatement）用于查询session 中执行任务的详情
      */
     DescribeNotebookSessionStatement(req: DescribeNotebookSessionStatementRequest, cb?: (error: string, rep: DescribeNotebookSessionStatementResponse) => void): Promise<DescribeNotebookSessionStatementResponse>;
     /**
-     * 本接口（DescribeTable），用于查询单个表的详细信息。
+     * 续费数据引擎
      */
-    DescribeTable(req: DescribeTableRequest, cb?: (error: string, rep: DescribeTableResponse) => void): Promise<DescribeTableResponse>;
+    RenewDataEngine(req: RenewDataEngineRequest, cb?: (error: string, rep: RenewDataEngineResponse) => void): Promise<RenewDataEngineResponse>;
+    /**
+     * 更新spark作业
+     */
+    ModifySparkApp(req: ModifySparkAppRequest, cb?: (error: string, rep: ModifySparkAppResponse) => void): Promise<ModifySparkAppResponse>;
     /**
      * 本接口（DescribeViews）用于查询数据视图列表。
      */
@@ -356,9 +428,17 @@ export declare class Client extends AbstractClient {
      */
     BindWorkGroupsToUser(req: BindWorkGroupsToUserRequest, cb?: (error: string, rep: BindWorkGroupsToUserResponse) => void): Promise<BindWorkGroupsToUserResponse>;
     /**
+     * 查询用户自定义引擎参数
+     */
+    DescribeUserDataEngineConfig(req?: DescribeUserDataEngineConfigRequest, cb?: (error: string, rep: DescribeUserDataEngineConfigResponse) => void): Promise<DescribeUserDataEngineConfigResponse>;
+    /**
      * 修改用户信息
      */
     ModifyUser(req: ModifyUserRequest, cb?: (error: string, rep: ModifyUserResponse) => void): Promise<ModifyUserResponse>;
+    /**
+     * 修改引擎描述信息
+     */
+    ModifyDataEngineDescription(req: ModifyDataEngineDescriptionRequest, cb?: (error: string, rep: ModifyDataEngineDescriptionResponse) => void): Promise<ModifyDataEngineDescriptionResponse>;
     /**
      * 本接口（DeleteNotebookSession）用于删除交互式session（notebook）
      */
@@ -379,6 +459,10 @@ export declare class Client extends AbstractClient {
      * 查询Spark作业的运行任务列表
      */
     DescribeSparkAppTasks(req: DescribeSparkAppTasksRequest, cb?: (error: string, rep: DescribeSparkAppTasksResponse) => void): Promise<DescribeSparkAppTasksResponse>;
+    /**
+     * 本接口（DescribeDataEnginePythonSparkImages）用于获取PYSPARK镜像列表
+     */
+    DescribeDataEnginePythonSparkImages(req: DescribeDataEnginePythonSparkImagesRequest, cb?: (error: string, rep: DescribeDataEnginePythonSparkImagesResponse) => void): Promise<DescribeDataEnginePythonSparkImagesResponse>;
     /**
      * 查询用户的托管存储信息
      */

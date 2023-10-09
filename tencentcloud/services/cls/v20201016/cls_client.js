@@ -292,7 +292,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteMachineGroupInfo", req, cb);
     }
     /**
-     * 本接口用于获取告警任务历史
+     * 本接口用于获取告警策略执行详情
      */
     async GetAlarmLog(req, cb) {
         return this.request("GetAlarmLog", req, cb);

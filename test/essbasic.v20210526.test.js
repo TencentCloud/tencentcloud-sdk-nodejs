@@ -138,9 +138,9 @@ it("essbasic.v20210526.ChannelCancelFlow", async function () {
     }
 })
 
-it("essbasic.v20210526.GetDownloadFlowUrl", async function () {
+it("essbasic.v20210526.ChannelCreateOrganizationBatchSignUrl", async function () {
     try {
-       const data = await client.GetDownloadFlowUrl({})
+       const data = await client.ChannelCreateOrganizationBatchSignUrl({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -161,6 +161,16 @@ it("essbasic.v20210526.ChannelCreateSealPolicy", async function () {
 it("essbasic.v20210526.ChannelCreateRole", async function () {
     try {
        const data = await client.ChannelCreateRole({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("essbasic.v20210526.CreateFlowsByTemplates", async function () {
+    try {
+       const data = await client.CreateFlowsByTemplates({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -398,9 +408,19 @@ it("essbasic.v20210526.PrepareFlows", async function () {
     }
 })
 
-it("essbasic.v20210526.CreateFlowsByTemplates", async function () {
+it("essbasic.v20210526.GetDownloadFlowUrl", async function () {
     try {
-       const data = await client.CreateFlowsByTemplates({})
+       const data = await client.GetDownloadFlowUrl({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("essbasic.v20210526.ChannelCreateFlowApprovers", async function () {
+    try {
+       const data = await client.ChannelCreateFlowApprovers({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

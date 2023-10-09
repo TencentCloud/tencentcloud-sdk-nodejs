@@ -3406,15 +3406,15 @@ export interface DescribeSlowLogTimeSeriesStatsResponse {
     /**
      * 柱间单位时间间隔，单位为秒。
      */
-    Period: number;
+    Period?: number;
     /**
      * 单位时间间隔内慢日志数量统计。
      */
-    TimeSeries: Array<TimeSlice>;
+    TimeSeries?: Array<TimeSlice>;
     /**
      * 单位时间间隔内的实例 cpu 利用率监控数据。
      */
-    SeriesData: MonitorMetricSeriesData;
+    SeriesData?: MonitorMetricSeriesData;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */

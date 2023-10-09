@@ -58,6 +58,18 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeUserRoles", req, cb);
     }
     /**
+     * 修改用户类型。只有管理员用户能够调用该接口进行操作
+     */
+    async ModifyUserType(req, cb) {
+        return this.request("ModifyUserType", req, cb);
+    }
+    /**
+     * 获取工作组详细信息
+     */
+    async DescribeWorkGroupInfo(req, cb) {
+        return this.request("DescribeWorkGroupInfo", req, cb);
+    }
+    /**
      * 本接口（DescribeNotebookSession）用于查询交互式 session详情信息
      */
     async DescribeNotebookSession(req, cb) {
@@ -82,6 +94,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UnlockMetaData", req, cb);
     }
     /**
+     * 本接口根据名称用于获取数据引擎详细信息
+     */
+    async DescribeDataEngine(req, cb) {
+        return this.request("DescribeDataEngine", req, cb);
+    }
+    /**
      * 该接口（CreateStoreLocation）新增或覆盖计算结果存储位置。
      */
     async CreateStoreLocation(req, cb) {
@@ -92,12 +110,6 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CreateNotebookSessionStatementSupportBatchSQL(req, cb) {
         return this.request("CreateNotebookSessionStatementSupportBatchSQL", req, cb);
-    }
-    /**
-     * 本接口（DescribeSparkSessionBatchSqlLog）用于查询Spark SQL批任务日志
-     */
-    async DescribeSparkSessionBatchSqlLog(req, cb) {
-        return this.request("DescribeSparkSessionBatchSqlLog", req, cb);
     }
     /**
      * 切换主备集群
@@ -130,6 +142,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDMSTables", req, cb);
     }
     /**
+     * 获取用户类型
+     */
+    async DescribeUserType(req, cb) {
+        return this.request("DescribeUserType", req, cb);
+    }
+    /**
      * 该接口（DescribleTasks）用于查询任务列表
      */
     async DescribeTasks(req, cb) {
@@ -140,6 +158,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DeleteScript(req, cb) {
         return this.request("DeleteScript", req, cb);
+    }
+    /**
+     * 切换引擎镜像版本
+     */
+    async SwitchDataEngineImage(req, cb) {
+        return this.request("SwitchDataEngineImage", req, cb);
     }
     /**
      * 启动Spark作业
@@ -160,10 +184,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDatabases", req, cb);
     }
     /**
-     * 本接口（DescribeNotebookSessions）用于查询交互式 session列表
+     * DMS元数据更新分区
      */
-    async DescribeNotebookSessions(req, cb) {
-        return this.request("DescribeNotebookSessions", req, cb);
+    async AlterDMSPartition(req, cb) {
+        return this.request("AlterDMSPartition", req, cb);
     }
     /**
      * 创建用户
@@ -184,10 +208,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifySparkAppBatch", req, cb);
     }
     /**
-     * DMS元数据更新分区
+     * 本接口（DescribeNotebookSessions）用于查询交互式 session列表
      */
-    async AlterDMSPartition(req, cb) {
-        return this.request("AlterDMSPartition", req, cb);
+    async DescribeNotebookSessions(req, cb) {
+        return this.request("DescribeNotebookSessions", req, cb);
+    }
+    /**
+     * 此接口用于更新行过滤规则。注意只能更新过滤规则，不能更新规格对象catalog，database和table。
+     */
+    async UpdateRowFilter(req, cb) {
+        return this.request("UpdateRowFilter", req, cb);
     }
     /**
      * 元数据锁
@@ -268,6 +298,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateDatabase", req, cb);
     }
     /**
+     * 回滚引擎镜像版本
+     */
+    async RollbackDataEngineImage(req, cb) {
+        return this.request("RollbackDataEngineImage", req, cb);
+    }
+    /**
      * 本接口（CreateSparkSessionBatchSQL）用于向Spark作业引擎提交Spark SQL批任务。
      */
     async CreateSparkSessionBatchSQL(req, cb) {
@@ -346,10 +382,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("AddDMSPartitions", req, cb);
     }
     /**
+     * 修改用户引擎自定义配置
+     */
+    async UpdateUserDataEngineConfig(req, cb) {
+        return this.request("UpdateUserDataEngineConfig", req, cb);
+    }
+    /**
      * 本接口（CancelNotebookSessionStatementBatch）用于批量取消Session 中执行的任务
      */
     async CancelNotebookSessionStatementBatch(req, cb) {
         return this.request("CancelNotebookSessionStatementBatch", req, cb);
+    }
+    /**
+     * 本接口（CheckDataEngineImageCanBeUpgrade）用于查看集群镜像是否能够升级。
+     */
+    async CheckDataEngineImageCanBeUpgrade(req, cb) {
+        return this.request("CheckDataEngineImageCanBeUpgrade", req, cb);
     }
     /**
      * 删除spark作业
@@ -394,22 +442,52 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDatasourceConnection", req, cb);
     }
     /**
+     * 本接口（CheckDataEngineImageCanBeRollback）用于查看集群是否能回滚。
+     */
+    async CheckDataEngineImageCanBeRollback(req, cb) {
+        return this.request("CheckDataEngineImageCanBeRollback", req, cb);
+    }
+    /**
      * 本接口（CancelSparkSessionBatchSQL）用于取消Spark SQL批任务。
      */
     async CancelSparkSessionBatchSQL(req, cb) {
         return this.request("CancelSparkSessionBatchSQL", req, cb);
     }
     /**
-     * 本接口（CancelTask），用于取消任务
+     * 本接口（DescribeSparkSessionBatchSqlLog）用于查询Spark SQL批任务日志
      */
-    async CancelTask(req, cb) {
-        return this.request("CancelTask", req, cb);
+    async DescribeSparkSessionBatchSqlLog(req, cb) {
+        return this.request("DescribeSparkSessionBatchSqlLog", req, cb);
     }
     /**
-     * 更新spark作业
+     * 本接口（DescribeTable），用于查询单个表的详细信息。
      */
-    async ModifySparkApp(req, cb) {
-        return this.request("ModifySparkApp", req, cb);
+    async DescribeTable(req, cb) {
+        return this.request("DescribeTable", req, cb);
+    }
+    /**
+     * 获取用户详细信息
+     */
+    async DescribeUserInfo(req, cb) {
+        return this.request("DescribeUserInfo", req, cb);
+    }
+    /**
+     * 本接口用于更新数据引擎配置
+     */
+    async UpdateDataEngine(req, cb) {
+        return this.request("UpdateDataEngine", req, cb);
+    }
+    /**
+     * 本接口（CheckDataEngineConfigPairsValidity）用于检查引擎用户自定义参数的有效性
+     */
+    async CheckDataEngineConfigPairsValidity(req, cb) {
+        return this.request("CheckDataEngineConfigPairsValidity", req, cb);
+    }
+    /**
+     * 删除数据引擎
+     */
+    async DeleteDataEngine(req, cb) {
+        return this.request("DeleteDataEngine", req, cb);
     }
     /**
      * 删除用户
@@ -424,22 +502,34 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeEngineUsageInfo", req, cb);
     }
     /**
+     * 用户某种操作，触发引擎配置修改
+     */
+    async UpdateDataEngineConfig(req, cb) {
+        return this.request("UpdateDataEngineConfig", req, cb);
+    }
+    /**
      * 按顺序创建任务（已经废弃，后期不再维护，请使用接口CreateTasks）
      */
     async CreateTasksInOrder(req, cb) {
         return this.request("CreateTasksInOrder", req, cb);
     }
     /**
-     * 此接口用于更新行过滤规则。注意只能更新过滤规则，不能更新规格对象catalog，database和table。
+     * 本接口（DescribeDataEngineImageVersions）用于获取独享集群大版本镜像列表。
      */
-    async UpdateRowFilter(req, cb) {
-        return this.request("UpdateRowFilter", req, cb);
+    async DescribeDataEngineImageVersions(req, cb) {
+        return this.request("DescribeDataEngineImageVersions", req, cb);
     }
     /**
      * DMS元数据创建表
      */
     async CreateDMSTable(req, cb) {
         return this.request("CreateDMSTable", req, cb);
+    }
+    /**
+     * 升级引擎镜像
+     */
+    async UpgradeDataEngineImage(req, cb) {
+        return this.request("UpgradeDataEngineImage", req, cb);
     }
     /**
      * 解绑用户鉴权策略
@@ -490,6 +580,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateExportTask", req, cb);
     }
     /**
+     * 本接口（CancelTask），用于取消任务
+     */
+    async CancelTask(req, cb) {
+        return this.request("CancelTask", req, cb);
+    }
+    /**
      * 从工作组中删除用户
      */
     async DeleteUsersFromWorkGroup(req, cb) {
@@ -520,16 +616,28 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateScript", req, cb);
     }
     /**
+     * 重启引擎
+     */
+    async RestartDataEngine(req, cb) {
+        return this.request("RestartDataEngine", req, cb);
+    }
+    /**
      * 本接口（DescribeNotebookSessionStatement）用于查询session 中执行任务的详情
      */
     async DescribeNotebookSessionStatement(req, cb) {
         return this.request("DescribeNotebookSessionStatement", req, cb);
     }
     /**
-     * 本接口（DescribeTable），用于查询单个表的详细信息。
+     * 续费数据引擎
      */
-    async DescribeTable(req, cb) {
-        return this.request("DescribeTable", req, cb);
+    async RenewDataEngine(req, cb) {
+        return this.request("RenewDataEngine", req, cb);
+    }
+    /**
+     * 更新spark作业
+     */
+    async ModifySparkApp(req, cb) {
+        return this.request("ModifySparkApp", req, cb);
     }
     /**
      * 本接口（DescribeViews）用于查询数据视图列表。
@@ -550,10 +658,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("BindWorkGroupsToUser", req, cb);
     }
     /**
+     * 查询用户自定义引擎参数
+     */
+    async DescribeUserDataEngineConfig(req, cb) {
+        return this.request("DescribeUserDataEngineConfig", req, cb);
+    }
+    /**
      * 修改用户信息
      */
     async ModifyUser(req, cb) {
         return this.request("ModifyUser", req, cb);
+    }
+    /**
+     * 修改引擎描述信息
+     */
+    async ModifyDataEngineDescription(req, cb) {
+        return this.request("ModifyDataEngineDescription", req, cb);
     }
     /**
      * 本接口（DeleteNotebookSession）用于删除交互式session（notebook）
@@ -584,6 +704,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeSparkAppTasks(req, cb) {
         return this.request("DescribeSparkAppTasks", req, cb);
+    }
+    /**
+     * 本接口（DescribeDataEnginePythonSparkImages）用于获取PYSPARK镜像列表
+     */
+    async DescribeDataEnginePythonSparkImages(req, cb) {
+        return this.request("DescribeDataEnginePythonSparkImages", req, cb);
     }
     /**
      * 查询用户的托管存储信息

@@ -53,6 +53,7 @@ import {
   DescribeBackupOverviewRequest,
   DescribeRegionsResponse,
   ModifyBaseBackupExpireTimeResponse,
+  UpgradeDBInstanceMajorVersionResponse,
   ModifyBackupDownloadRestrictionRequest,
   DBInstanceNetInfo,
   BackupDownloadRestriction,
@@ -168,6 +169,7 @@ import {
   ModifyDBInstanceSecurityGroupsResponse,
   DBNode,
   ModifyDBInstanceNameResponse,
+  UpgradeDBInstanceMajorVersionRequest,
   CloseDBExtranetAccessResponse,
   DescribeBackupDownloadRestrictionResponse,
   CreateReadOnlyDBInstanceRequest,
@@ -699,6 +701,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeBackupSummariesResponse) => void
   ): Promise<DescribeBackupSummariesResponse> {
     return this.request("DescribeBackupSummaries", req, cb)
+  }
+
+  /**
+   * 本接口（UpgradeDBInstanceMajorVersion）用于升级实例内核大版本，例如从PostgreSQL 12升级到PostgreSQL 15。
+   */
+  async UpgradeDBInstanceMajorVersion(
+    req: UpgradeDBInstanceMajorVersionRequest,
+    cb?: (error: string, rep: UpgradeDBInstanceMajorVersionResponse) => void
+  ): Promise<UpgradeDBInstanceMajorVersionResponse> {
+    return this.request("UpgradeDBInstanceMajorVersion", req, cb)
   }
 
   /**

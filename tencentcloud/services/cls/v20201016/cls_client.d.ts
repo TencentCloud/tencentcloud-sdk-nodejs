@@ -184,7 +184,7 @@ export declare class Client extends AbstractClient {
      */
     DeleteMachineGroupInfo(req: DeleteMachineGroupInfoRequest, cb?: (error: string, rep: DeleteMachineGroupInfoResponse) => void): Promise<DeleteMachineGroupInfoResponse>;
     /**
-     * 本接口用于获取告警任务历史
+     * 本接口用于获取告警策略执行详情
      */
     GetAlarmLog(req: GetAlarmLogRequest, cb?: (error: string, rep: GetAlarmLogResponse) => void): Promise<GetAlarmLogResponse>;
     /**

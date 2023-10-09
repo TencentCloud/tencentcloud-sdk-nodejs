@@ -136,7 +136,9 @@ export declare class Client extends AbstractClient {
      */
     DeployCertificateRecordRollback(req: DeployCertificateRecordRollbackRequest, cb?: (error: string, rep: DeployCertificateRecordRollbackResponse) => void): Promise<DeployCertificateRecordRollbackResponse>;
     /**
-     * 云资源托管
+     * 证书托管接口已重构， 旧接口预下线， 近30天无请求
+
+云资源托管
      */
     HostCertificate(req: HostCertificateRequest, cb?: (error: string, rep: HostCertificateResponse) => void): Promise<HostCertificateResponse>;
     /**

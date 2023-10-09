@@ -300,6 +300,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeBackupSummaries", req, cb);
     }
     /**
+     * 本接口（UpgradeDBInstanceMajorVersion）用于升级实例内核大版本，例如从PostgreSQL 12升级到PostgreSQL 15。
+     */
+    async UpgradeDBInstanceMajorVersion(req, cb) {
+        return this.request("UpgradeDBInstanceMajorVersion", req, cb);
+    }
+    /**
      * 本接口（DescribeBackupOverview）用于查询用户的备份概览信息。返回用户当前备份个数、备份占用容量、免费容量、收费容量等信息（容量单位为字节）。
      */
     async DescribeBackupOverview(req, cb) {

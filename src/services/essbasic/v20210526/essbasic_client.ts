@@ -59,7 +59,7 @@ import {
   ChannelCreateWebThemeConfigRequest,
   ChannelCreateConvertTaskApiRequest,
   ChannelCreateFlowByFilesRequest,
-  ChannelRole,
+  Agent,
   ChannelCreatePreparedPersonalEsignResponse,
   FlowApproverDetail,
   DescribeResourceUrlsByFlowsResponse,
@@ -71,8 +71,9 @@ import {
   ChannelDescribeRolesRequest,
   PrepareFlowsResponse,
   TemplateInfo,
+  ChannelCreateOrganizationBatchSignUrlRequest,
   GetDownloadFlowUrlResponse,
-  Agent,
+  ChannelRole,
   Recipient,
   DescribeTemplatesResponse,
   AutoSignConfig,
@@ -88,6 +89,7 @@ import {
   OrganizationInfo,
   SignUrlInfo,
   CommonFlowApprover,
+  FillApproverInfo,
   PdfVerifyResult,
   UserThreeFactor,
   ChannelCreateUserAutoSignEnableUrlRequest,
@@ -101,6 +103,7 @@ import {
   UserInfo,
   TaskInfo,
   ChannelCreateBoundFlowsResponse,
+  ChannelCreateFlowApproversRequest,
   ApproverComponentLimitType,
   ResourceUrlInfo,
   ChannelCreateBoundFlowsRequest,
@@ -108,6 +111,7 @@ import {
   AuthorizedUser,
   ChannelDeleteRoleUsersResponse,
   SyncProxyOrganizationOperatorsRequest,
+  ChannelCreateFlowApproversResponse,
   CreateSignUrlsRequest,
   ChannelCreateMultiFlowSignQRCodeRequest,
   SignQrCode,
@@ -172,6 +176,7 @@ import {
   CreateFlowsByTemplatesRequest,
   UploadFilesRequest,
   DescribeUsageResponse,
+  ChannelCreateOrganizationBatchSignUrlResponse,
   UsageDetail,
   ChannelCreateBatchCancelFlowUrlResponse,
   OperateChannelTemplateRequest,
@@ -371,15 +376,18 @@ https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/launchAp
   }
 
   /**
-     * 此接口（GetDownloadFlowUrl）用于创建电子签批量下载地址，让合作企业进入控制台直接下载，支持客户合同（流程）按照自定义文件夹形式 分类下载。
-当前接口限制最多合同（流程）50个.
-返回的链接只能使用一次
+     * 通过此接口，创建小程序批量签署链接，可以创建企业批量签署链接，员工只需点击链接即可跳转至控制台进行批量签署。
+
+注：
+- 员工必须在企业下完成实名认证，且需作为批量签署合同的签署方或者领取方。
+- 仅支持传入待签署或者待领取的合同，待填写暂不支持。
+- 员工批量签署，支持多种签名方式，包括手写签名、临摹签名、系统签名、个人印章，暂不支持签批控件
      */
-  async GetDownloadFlowUrl(
-    req: GetDownloadFlowUrlRequest,
-    cb?: (error: string, rep: GetDownloadFlowUrlResponse) => void
-  ): Promise<GetDownloadFlowUrlResponse> {
-    return this.request("GetDownloadFlowUrl", req, cb)
+  async ChannelCreateOrganizationBatchSignUrl(
+    req: ChannelCreateOrganizationBatchSignUrlRequest,
+    cb?: (error: string, rep: ChannelCreateOrganizationBatchSignUrlResponse) => void
+  ): Promise<ChannelCreateOrganizationBatchSignUrlResponse> {
+    return this.request("ChannelCreateOrganizationBatchSignUrl", req, cb)
   }
 
   /**
@@ -404,6 +412,18 @@ https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/launchAp
     cb?: (error: string, rep: ChannelCreateRoleResponse) => void
   ): Promise<ChannelCreateRoleResponse> {
     return this.request("ChannelCreateRole", req, cb)
+  }
+
+  /**
+     * 接口（CreateFlowsByTemplates）用于使用模板批量创建签署流程。当前可批量发起合同（签署流程）数量为1-20个。
+如若在模板中配置了动态表格, 上传的附件必须为A4大小
+合同发起人必须在电子签已经进行实名。
+     */
+  async CreateFlowsByTemplates(
+    req: CreateFlowsByTemplatesRequest,
+    cb?: (error: string, rep: CreateFlowsByTemplatesResponse) => void
+  ): Promise<CreateFlowsByTemplatesResponse> {
+    return this.request("CreateFlowsByTemplates", req, cb)
   }
 
   /**
@@ -726,15 +746,30 @@ https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/launchAp
   }
 
   /**
-     * 接口（CreateFlowsByTemplates）用于使用模板批量创建签署流程。当前可批量发起合同（签署流程）数量为1-20个。
-如若在模板中配置了动态表格, 上传的附件必须为A4大小
-合同发起人必须在电子签已经进行实名。
+     * 此接口（GetDownloadFlowUrl）用于创建电子签批量下载地址，让合作企业进入控制台直接下载，支持客户合同（流程）按照自定义文件夹形式 分类下载。
+当前接口限制最多合同（流程）50个.
+返回的链接只能使用一次
      */
-  async CreateFlowsByTemplates(
-    req: CreateFlowsByTemplatesRequest,
-    cb?: (error: string, rep: CreateFlowsByTemplatesResponse) => void
-  ): Promise<CreateFlowsByTemplatesResponse> {
-    return this.request("CreateFlowsByTemplates", req, cb)
+  async GetDownloadFlowUrl(
+    req: GetDownloadFlowUrlRequest,
+    cb?: (error: string, rep: GetDownloadFlowUrlResponse) => void
+  ): Promise<GetDownloadFlowUrlResponse> {
+    return this.request("GetDownloadFlowUrl", req, cb)
+  }
+
+  /**
+     * 适用场景：
+当通过模板或文件发起合同时，若未指定企业签署人信息，则可调用此接口动态补充签署人。同一签署人只允许补充一人，最终实际签署人取决于谁先领取合同完成签署。
+
+限制条件：
+1. 本企业（发起方企业）企业签署人仅支持通过企业名称+姓名+手机号进行补充。
+2. 个人签署人仅支持通过姓名+手机号进行补充。
+     */
+  async ChannelCreateFlowApprovers(
+    req: ChannelCreateFlowApproversRequest,
+    cb?: (error: string, rep: ChannelCreateFlowApproversResponse) => void
+  ): Promise<ChannelCreateFlowApproversResponse> {
+    return this.request("ChannelCreateFlowApprovers", req, cb)
   }
 
   /**

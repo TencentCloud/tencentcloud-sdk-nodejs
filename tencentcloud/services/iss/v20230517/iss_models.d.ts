@@ -639,7 +639,7 @@ export interface DescribeRecordRetrieveTaskData {
     ChannelCount?: number;
 }
 /**
- * 查询录像上云模版返回数据
+ * 查询录像上云模板返回数据
  */
 export interface DescribeRecordBackupTemplateData {
     /**
@@ -1043,7 +1043,7 @@ export interface DescribeGatewayRequest {
     GatewayId: string;
 }
 /**
- * 新增录像上云模版返回数据
+ * 新增录像上云模板返回数据
  */
 export interface AddRecordBackupTemplateData {
     /**
@@ -4748,7 +4748,7 @@ export interface DescribeRecordRetrieveTaskResponse {
  */
 export declare type DescribeStreamAuthRequest = null;
 /**
- * 修改录像上云模版返回数据
+ * 修改录像上云模板返回数据
  */
 export interface UpdateRecordBackupTemplateData {
     /**

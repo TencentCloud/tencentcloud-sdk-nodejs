@@ -1430,134 +1430,88 @@ export interface CreateRocketMQNamespaceRequest {
 }
 
 /**
- * 主题实例
+ * RocketMQ消费组订阅信息
  */
-export interface Topic {
+export interface RocketMQSubscription {
   /**
-   * 最后一次间隔内发布消息的平均byte大小。
+   * 主题名称
+   */
+  Topic?: string
+  /**
+   * 主题类型：
+Normal 普通,
+GlobalOrder 全局顺序,
+PartitionedOrder 局部顺序,
+Transaction 事务消息,
+DelayScheduled 延时消息,
+Retry 重试,
+DeadLetter 死信
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  AverageMsgSize?: string
+  Type?: string
   /**
-   * 消费者数量。
+   * 分区数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ConsumerCount?: string
+  PartitionNum?: number
   /**
-   * 被记录下来的消息总数。
+   * 过滤模式，TAG，SQL
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  LastConfirmedEntry?: string
+  ExpressionType?: string
   /**
-   * 最后一个ledger创建的时间。
+   * 过滤表达式
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  LastLedgerCreatedTimestamp?: string
+  SubString?: string
   /**
-   * 本地和复制的发布者每秒发布消息的速率。
+   * 订阅状态：
+0，订阅关系一致
+1，订阅关系不一致
+2，未知
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  MsgRateIn?: string
+  Status?: number
   /**
-   * 本地和复制的消费者每秒分发消息的数量之和。
+   * 消费堆积数量
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  MsgRateOut?: string
+  ConsumerLag?: number
   /**
-   * 本地和复制的发布者每秒发布消息的byte。
+   * 实例ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  MsgThroughputIn?: string
+  ClusterId?: string
   /**
-   * 本地和复制的消费者每秒分发消息的byte。
+   * 消费组名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  MsgThroughputOut?: string
+  ConsumerGroup?: string
   /**
-   * 被记录下来的消息总数。
+   * 是否在线
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  NumberOfEntries?: string
+  IsOnline?: boolean
   /**
-   * 分区数<=0：topic下无子分区。
+   * 消费类型
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Partitions?: number
+  ConsumeType?: number
   /**
-   * 生产者数量。
+   * 订阅一致性
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ProducerCount?: string
+  Consistency?: number
   /**
-   * 以byte计算的所有消息存储总量。
+   * 最后消费进度更新时间，秒为单位
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TotalSize?: string
+  LastUpdateTime?: number
   /**
-   * 分区topic里面的子分区。
+   * 最大重试次数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SubTopicSets?: Array<PartitionsTopic>
-  /**
-   * topic类型描述：
-0：普通消息；
-1：全局顺序消息；
-2：局部顺序消息；
-3：重试队列；
-4：死信队列；
-5：事务消息。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TopicType?: number
-  /**
-   * 环境（命名空间）名称。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  EnvironmentId?: string
-  /**
-   * 主题名称。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TopicName?: string
-  /**
-   * 说明，128个字符以内。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Remark?: string
-  /**
-   * 创建时间。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CreateTime?: string
-  /**
-   * 最近修改时间。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  UpdateTime?: string
-  /**
-   * 生产者上限。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ProducerLimit?: string
-  /**
-   * 消费者上限。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ConsumerLimit?: string
-  /**
-   * 0: 非持久非分区
-1: 非持久分区
-2: 持久非分区
-3: 持久分区
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  PulsarTopicType?: number
-  /**
-   * 未消费消息过期时间，单位：秒
-
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  MsgTTL?: number
+  MaxRetryTimes?: number
 }
 
 /**
@@ -2336,32 +2290,47 @@ export interface RocketMQTopic {
   /**
    * 主题名称
    */
-  Name: string
+  Name?: string
   /**
    * 主题的类别，为枚举类型，Normal，GlobalOrder，PartitionedOrder，Transaction，Retry及DeadLetter
    */
-  Type: string
+  Type?: string
   /**
    * 订阅组数量
    */
-  GroupNum: number
+  GroupNum?: number
   /**
    * 说明
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Remark: string
+  Remark?: string
   /**
    * 读写分区数
    */
-  PartitionNum: number
+  PartitionNum?: number
   /**
    * 创建时间，以毫秒为单位
    */
-  CreateTime: number
+  CreateTime?: number
   /**
    * 创建时间，以毫秒为单位
    */
-  UpdateTime: number
+  UpdateTime?: number
+  /**
+   * 最后写入时间，单位为秒
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LastUpdateTime?: number
+  /**
+   * 订阅数量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SubscriptionCount?: number
+  /**
+   * 订阅关系列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SubscriptionData?: Array<RocketMQSubscription>
 }
 
 /**
@@ -6475,12 +6444,21 @@ export interface DescribeRocketMQTopicMsgsRequest {
   TaskRequestId?: string
   /**
    * 死信查询时该值为true，只对Rocketmq有效
+   * @deprecated
    */
   QueryDlqMsg?: boolean
   /**
    * 查询最近N条消息 最大不超过1024，默认-1为其他查询条件
    */
   NumOfLatestMsg?: number
+  /**
+   * TAG表达式
+   */
+  Tag?: string
+  /**
+   * 死信查询时该值为true，只对Rocketmq有效
+   */
+  QueryDeadLetterMessage?: boolean
 }
 
 /**
@@ -6956,6 +6934,137 @@ export interface RabbitMQPrivateNode {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ProcessNumber?: number
+}
+
+/**
+ * 主题实例
+ */
+export interface Topic {
+  /**
+   * 最后一次间隔内发布消息的平均byte大小。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AverageMsgSize?: string
+  /**
+   * 消费者数量。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ConsumerCount?: string
+  /**
+   * 被记录下来的消息总数。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LastConfirmedEntry?: string
+  /**
+   * 最后一个ledger创建的时间。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LastLedgerCreatedTimestamp?: string
+  /**
+   * 本地和复制的发布者每秒发布消息的速率。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MsgRateIn?: string
+  /**
+   * 本地和复制的消费者每秒分发消息的数量之和。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MsgRateOut?: string
+  /**
+   * 本地和复制的发布者每秒发布消息的byte。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MsgThroughputIn?: string
+  /**
+   * 本地和复制的消费者每秒分发消息的byte。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MsgThroughputOut?: string
+  /**
+   * 被记录下来的消息总数。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NumberOfEntries?: string
+  /**
+   * 分区数<=0：topic下无子分区。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Partitions?: number
+  /**
+   * 生产者数量。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProducerCount?: string
+  /**
+   * 以byte计算的所有消息存储总量。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalSize?: string
+  /**
+   * 分区topic里面的子分区。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SubTopicSets?: Array<PartitionsTopic>
+  /**
+   * topic类型描述：
+0：普通消息；
+1：全局顺序消息；
+2：局部顺序消息；
+3：重试队列；
+4：死信队列；
+5：事务消息。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TopicType?: number
+  /**
+   * 环境（命名空间）名称。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EnvironmentId?: string
+  /**
+   * 主题名称。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TopicName?: string
+  /**
+   * 说明，128个字符以内。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Remark?: string
+  /**
+   * 创建时间。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateTime?: string
+  /**
+   * 最近修改时间。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UpdateTime?: string
+  /**
+   * 生产者上限。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProducerLimit?: string
+  /**
+   * 消费者上限。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ConsumerLimit?: string
+  /**
+   * 0: 非持久非分区
+1: 非持久分区
+2: 持久非分区
+3: 持久分区
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PulsarTopicType?: number
+  /**
+   * 未消费消息过期时间，单位：秒
+
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MsgTTL?: number
 }
 
 /**

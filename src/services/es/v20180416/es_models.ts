@@ -448,72 +448,77 @@ export interface IndexMetaField {
    * 索引类型
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  IndexType: string
+  IndexType?: string
   /**
    * 索引名
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  IndexName: string
+  IndexName?: string
+  /**
+   * 索引元数据JSON
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IndexMetaJson?: string
   /**
    * 索引状态
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  IndexStatus: string
+  IndexStatus?: string
   /**
    * 索引存储大小，单位Byte
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  IndexStorage: number
+  IndexStorage?: number
   /**
    * 索引创建时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  IndexCreateTime: string
+  IndexCreateTime?: string
   /**
    * 后备索引
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  BackingIndices: Array<BackingIndexMetaField>
+  BackingIndices?: Array<BackingIndexMetaField>
   /**
    * 索引所属集群ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ClusterId: string
+  ClusterId?: string
   /**
    * 索引所属集群名
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ClusterName: string
+  ClusterName?: string
   /**
    * 索引所属集群版本
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ClusterVersion: string
+  ClusterVersion?: string
   /**
    * 索引生命周期字段
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  IndexPolicyField: IndexPolicyField
+  IndexPolicyField?: IndexPolicyField
   /**
    * 索引自治字段
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  IndexOptionsField: IndexOptionsField
+  IndexOptionsField?: IndexOptionsField
   /**
    * 索引配置字段
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  IndexSettingsField: IndexSettingsField
+  IndexSettingsField?: IndexSettingsField
   /**
    * 索引所属集群APP ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  AppId: number
+  AppId?: number
   /**
    * 索引文档数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  IndexDocs: number
+  IndexDocs?: number
 }
 
 /**

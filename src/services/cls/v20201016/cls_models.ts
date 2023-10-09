@@ -2637,15 +2637,15 @@ export interface DescribeTopicsRequest {
  */
 export interface GetAlarmLogResponse {
   /**
-   * 加载后续内容的Context
+   * 加载后续详情的Context
    */
   Context?: string
   /**
-   * 日志查询结果是否全部返回
+   * 指定时间范围内的告警执行详情是否完整返回
    */
   ListOver?: boolean
   /**
-   * 返回的是否为分析结果
+   * 返回的结果是否为SQL分析结果
    */
   Analysis?: boolean
   /**
@@ -2654,22 +2654,22 @@ export interface GetAlarmLogResponse {
    */
   ColNames?: Array<string>
   /**
-   * 日志查询结果；当Analysis为True时，可能返回为null
+   * 执行详情查询结果；当Analysis为True时，可能返回为null
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Results?: Array<LogInfo>
   /**
-   * 日志分析结果；当Analysis为False时，可能返回为null
+   * 执行详情统计分析结果；当Analysis为False时，可能返回为null
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AnalysisResults?: Array<LogItems>
   /**
-   * 新的日志分析结果; UseNewAnalysis为true有效
+   * 执行详情统计分析结果; UseNewAnalysis为true有效
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AnalysisRecords?: Array<string>
   /**
-   * 日志分析的列属性; UseNewAnalysis为true有效
+   * 分析结果的列名， UseNewAnalysis为true有效
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Columns?: Array<Column>
@@ -5642,31 +5642,34 @@ export interface ApplyConfigToMachineGroupRequest {
  */
 export interface GetAlarmLogRequest {
   /**
-   * 要查询的日志的起始时间，Unix时间戳，单位ms
+   * 要查询的执行详情的起始时间，Unix时间戳，单位ms
    */
   From: number
   /**
-   * 要查询的日志的结束时间，Unix时间戳，单位ms
+   * 要查询的执行详情的结束时间，Unix时间戳，单位ms
    */
   To: number
   /**
-   * 查询语句，语句长度最大为1024
+   * 查询过滤条件，例如：
+- 按告警策略ID查询：`alert_id:"alarm-0745ec00-e605-xxxx-b50b-54afe61fc971"`
+- 按监控对象ID查询：`monitored_object:"823d8bfa-76a7-xxxx-8399-8cda74d4009b") `
+- 按告警策略ID及监控对象ID查询：`alert_id:"alarm-0745ec00-e605-xxxx-b50b-54afe61fc971" AND monitored_object:"823d8bfa-76a7-xxxx-8399-8cda74d4009b")`
    */
   Query: string
   /**
-   * 单次查询返回的日志条数，最大值为1000
+   * 单次查询返回的执行详情条数，最大值为1000
    */
   Limit?: number
   /**
-   * 加载更多日志时使用，透传上次返回的Context值，获取后续的日志内容
+   * 加载更多详情时使用，透传上次返回的Context值，获取后续的执行详情
    */
   Context?: string
   /**
-   * 日志接口是否按时间排序返回；可选值：asc(升序)、desc(降序)，默认为 desc
+   * 执行详情是否按时间排序返回；可选值：asc(升序)、desc(降序)，默认为 desc
    */
   Sort?: string
   /**
-   * 为true代表使用新检索,响应参数AnalysisRecords和Columns有效， 为false时代表使用老检索方式, AnalysisResults和ColNames有效
+   * 如果Query包含SQL语句，UseNewAnalysis为true时响应参数AnalysisRecords和Columns有效， UseNewAnalysis为false时响应参数AnalysisResults和ColNames有效
    */
   UseNewAnalysis?: boolean
 }

@@ -3346,23 +3346,28 @@ export interface PrometheusZoneItem {
   /**
    * 可用区
    */
-  Zone: string
+  Zone?: string
   /**
    * 可用区 ID
    */
-  ZoneId: number
+  ZoneId?: number
   /**
    * 可用区状态( 0: 不可用；1: 可用)
    */
-  ZoneState: number
+  ZoneState?: number
   /**
    * 地域 ID
    */
-  RegionId: number
+  RegionId?: number
   /**
    * 可用区名（目前为中文）
    */
-  ZoneName: string
+  ZoneName?: string
+  /**
+   * 可用区资源状态(0:资源不足，不可使用；1:资源足够)
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ZoneResourceState?: number
 }
 
 /**

@@ -68,6 +68,26 @@ it("dlc.v20210125.DescribeUserRoles", async function () {
     }
 })
 
+it("dlc.v20210125.ModifyUserType", async function () {
+    try {
+       const data = await client.ModifyUserType({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dlc.v20210125.DescribeWorkGroupInfo", async function () {
+    try {
+       const data = await client.DescribeWorkGroupInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dlc.v20210125.DescribeNotebookSession", async function () {
     try {
        const data = await client.DescribeNotebookSession({})
@@ -108,6 +128,16 @@ it("dlc.v20210125.UnlockMetaData", async function () {
     }
 })
 
+it("dlc.v20210125.DescribeDataEngine", async function () {
+    try {
+       const data = await client.DescribeDataEngine({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dlc.v20210125.CreateStoreLocation", async function () {
     try {
        const data = await client.CreateStoreLocation({})
@@ -121,16 +151,6 @@ it("dlc.v20210125.CreateStoreLocation", async function () {
 it("dlc.v20210125.CreateNotebookSessionStatementSupportBatchSQL", async function () {
     try {
        const data = await client.CreateNotebookSessionStatementSupportBatchSQL({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("dlc.v20210125.DescribeSparkSessionBatchSqlLog", async function () {
-    try {
-       const data = await client.DescribeSparkSessionBatchSqlLog({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -188,6 +208,16 @@ it("dlc.v20210125.DescribeDMSTables", async function () {
     }
 })
 
+it("dlc.v20210125.DescribeUserType", async function () {
+    try {
+       const data = await client.DescribeUserType({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dlc.v20210125.DescribeTasks", async function () {
     try {
        const data = await client.DescribeTasks({})
@@ -201,6 +231,16 @@ it("dlc.v20210125.DescribeTasks", async function () {
 it("dlc.v20210125.DeleteScript", async function () {
     try {
        const data = await client.DeleteScript({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dlc.v20210125.SwitchDataEngineImage", async function () {
+    try {
+       const data = await client.SwitchDataEngineImage({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -238,9 +278,9 @@ it("dlc.v20210125.DescribeDatabases", async function () {
     }
 })
 
-it("dlc.v20210125.DescribeNotebookSessions", async function () {
+it("dlc.v20210125.AlterDMSPartition", async function () {
     try {
-       const data = await client.DescribeNotebookSessions({})
+       const data = await client.AlterDMSPartition({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -278,9 +318,19 @@ it("dlc.v20210125.ModifySparkAppBatch", async function () {
     }
 })
 
-it("dlc.v20210125.AlterDMSPartition", async function () {
+it("dlc.v20210125.DescribeNotebookSessions", async function () {
     try {
-       const data = await client.AlterDMSPartition({})
+       const data = await client.DescribeNotebookSessions({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dlc.v20210125.UpdateRowFilter", async function () {
+    try {
+       const data = await client.UpdateRowFilter({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -418,6 +468,16 @@ it("dlc.v20210125.CreateDatabase", async function () {
     }
 })
 
+it("dlc.v20210125.RollbackDataEngineImage", async function () {
+    try {
+       const data = await client.RollbackDataEngineImage({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dlc.v20210125.CreateSparkSessionBatchSQL", async function () {
     try {
        const data = await client.CreateSparkSessionBatchSQL({})
@@ -548,9 +608,29 @@ it("dlc.v20210125.AddDMSPartitions", async function () {
     }
 })
 
+it("dlc.v20210125.UpdateUserDataEngineConfig", async function () {
+    try {
+       const data = await client.UpdateUserDataEngineConfig({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dlc.v20210125.CancelNotebookSessionStatementBatch", async function () {
     try {
        const data = await client.CancelNotebookSessionStatementBatch({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dlc.v20210125.CheckDataEngineImageCanBeUpgrade", async function () {
+    try {
+       const data = await client.CheckDataEngineImageCanBeUpgrade({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -628,6 +708,16 @@ it("dlc.v20210125.DescribeDatasourceConnection", async function () {
     }
 })
 
+it("dlc.v20210125.CheckDataEngineImageCanBeRollback", async function () {
+    try {
+       const data = await client.CheckDataEngineImageCanBeRollback({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dlc.v20210125.CancelSparkSessionBatchSQL", async function () {
     try {
        const data = await client.CancelSparkSessionBatchSQL({})
@@ -638,9 +728,9 @@ it("dlc.v20210125.CancelSparkSessionBatchSQL", async function () {
     }
 })
 
-it("dlc.v20210125.CancelTask", async function () {
+it("dlc.v20210125.DescribeSparkSessionBatchSqlLog", async function () {
     try {
-       const data = await client.CancelTask({})
+       const data = await client.DescribeSparkSessionBatchSqlLog({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -648,9 +738,49 @@ it("dlc.v20210125.CancelTask", async function () {
     }
 })
 
-it("dlc.v20210125.ModifySparkApp", async function () {
+it("dlc.v20210125.DescribeTable", async function () {
     try {
-       const data = await client.ModifySparkApp({})
+       const data = await client.DescribeTable({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dlc.v20210125.DescribeUserInfo", async function () {
+    try {
+       const data = await client.DescribeUserInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dlc.v20210125.UpdateDataEngine", async function () {
+    try {
+       const data = await client.UpdateDataEngine({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dlc.v20210125.CheckDataEngineConfigPairsValidity", async function () {
+    try {
+       const data = await client.CheckDataEngineConfigPairsValidity({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dlc.v20210125.DeleteDataEngine", async function () {
+    try {
+       const data = await client.DeleteDataEngine({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -678,6 +808,16 @@ it("dlc.v20210125.DescribeEngineUsageInfo", async function () {
     }
 })
 
+it("dlc.v20210125.UpdateDataEngineConfig", async function () {
+    try {
+       const data = await client.UpdateDataEngineConfig({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dlc.v20210125.CreateTasksInOrder", async function () {
     try {
        const data = await client.CreateTasksInOrder({})
@@ -688,9 +828,9 @@ it("dlc.v20210125.CreateTasksInOrder", async function () {
     }
 })
 
-it("dlc.v20210125.UpdateRowFilter", async function () {
+it("dlc.v20210125.DescribeDataEngineImageVersions", async function () {
     try {
-       const data = await client.UpdateRowFilter({})
+       const data = await client.DescribeDataEngineImageVersions({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -701,6 +841,16 @@ it("dlc.v20210125.UpdateRowFilter", async function () {
 it("dlc.v20210125.CreateDMSTable", async function () {
     try {
        const data = await client.CreateDMSTable({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dlc.v20210125.UpgradeDataEngineImage", async function () {
+    try {
+       const data = await client.UpgradeDataEngineImage({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -788,6 +938,16 @@ it("dlc.v20210125.CreateExportTask", async function () {
     }
 })
 
+it("dlc.v20210125.CancelTask", async function () {
+    try {
+       const data = await client.CancelTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dlc.v20210125.DeleteUsersFromWorkGroup", async function () {
     try {
        const data = await client.DeleteUsersFromWorkGroup({})
@@ -838,6 +998,16 @@ it("dlc.v20210125.CreateScript", async function () {
     }
 })
 
+it("dlc.v20210125.RestartDataEngine", async function () {
+    try {
+       const data = await client.RestartDataEngine({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dlc.v20210125.DescribeNotebookSessionStatement", async function () {
     try {
        const data = await client.DescribeNotebookSessionStatement({})
@@ -848,9 +1018,19 @@ it("dlc.v20210125.DescribeNotebookSessionStatement", async function () {
     }
 })
 
-it("dlc.v20210125.DescribeTable", async function () {
+it("dlc.v20210125.RenewDataEngine", async function () {
     try {
-       const data = await client.DescribeTable({})
+       const data = await client.RenewDataEngine({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dlc.v20210125.ModifySparkApp", async function () {
+    try {
+       const data = await client.ModifySparkApp({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -888,9 +1068,29 @@ it("dlc.v20210125.BindWorkGroupsToUser", async function () {
     }
 })
 
+it("dlc.v20210125.DescribeUserDataEngineConfig", async function () {
+    try {
+       const data = await client.DescribeUserDataEngineConfig({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dlc.v20210125.ModifyUser", async function () {
     try {
        const data = await client.ModifyUser({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dlc.v20210125.ModifyDataEngineDescription", async function () {
+    try {
+       const data = await client.ModifyDataEngineDescription({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -941,6 +1141,16 @@ it("dlc.v20210125.DescribeSparkAppJob", async function () {
 it("dlc.v20210125.DescribeSparkAppTasks", async function () {
     try {
        const data = await client.DescribeSparkAppTasks({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dlc.v20210125.DescribeDataEnginePythonSparkImages", async function () {
+    try {
+       const data = await client.DescribeDataEnginePythonSparkImages({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

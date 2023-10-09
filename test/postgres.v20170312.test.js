@@ -468,6 +468,16 @@ it("postgres.v20170312.DescribeBackupSummaries", async function () {
     }
 })
 
+it("postgres.v20170312.UpgradeDBInstanceMajorVersion", async function () {
+    try {
+       const data = await client.UpgradeDBInstanceMajorVersion({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("postgres.v20170312.DescribeBackupOverview", async function () {
     try {
        const data = await client.DescribeBackupOverview({})

@@ -1363,29 +1363,30 @@ MobileCheck：手机号验证，用户手机号和参与方手机号（ApproverM
 }
 
 /**
- * 渠道角色信息
+ * 应用相关信息
  */
-export interface ChannelRole {
+export interface Agent {
   /**
-   * 角色id
-注意：此字段可能返回 null，表示取不到有效值。
+   * 应用的唯一标识。不同的业务系统可以采用不同的AppId，不同AppId下的数据是隔离的。可以由控制台开发者中心-应用集成自主生成。
    */
-  RoleId?: string
+  AppId: string
   /**
-   * 角色名
-注意：此字段可能返回 null，表示取不到有效值。
+   * 第三方应用平台自定义，对应第三方平台子客企业的唯一标识。一个第三方平台子客企业主体与子客企业ProxyOrganizationOpenId是一一对应的，不可更改，不可重复使用。（例如，可以使用企业名称的hash值，或者社会统一信用代码的hash值，或者随机hash值，需要第三方应用平台保存），最大64位字符串
    */
-  RoleName?: string
+  ProxyOrganizationOpenId?: string
   /**
-   * 角色状态：1-启用；2-禁用
-注意：此字段可能返回 null，表示取不到有效值。
+   * 第三方平台子客企业中的员工/经办人，通过第三方应用平台进入电子签完成实名、且被赋予相关权限后，可以参与到企业资源的管理或签署流程中。
    */
-  RoleStatus?: number
+  ProxyOperator?: UserInfo
   /**
-   * 权限树
-注意：此字段可能返回 null，表示取不到有效值。
+   * 非必需参数，在第三方平台子客企业开通电子签后，会生成唯一的子客应用Id（ProxyAppId）用于代理调用时的鉴权，在子客开通的回调中获取。
    */
-  PermissionGroups?: Array<PermissionGroup>
+  ProxyAppId?: string
+  /**
+   * 内部参数，暂未开放使用
+   * @deprecated
+   */
+  ProxyOrganizationId?: string
 }
 
 /**
@@ -1761,6 +1762,35 @@ export interface TemplateInfo {
 }
 
 /**
+ * ChannelCreateOrganizationBatchSignUrl请求参数结构体
+ */
+export interface ChannelCreateOrganizationBatchSignUrlRequest {
+  /**
+   * 关于渠道应用的相关信息，包括子客企业及应用编、号等详细内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。
+   */
+  Agent: Agent
+  /**
+   * 请指定需执行批量签署的流程ID，数量范围为1-100。 您可登录腾讯电子签控制台，浏览 "合同"->"合同中心" 以查阅某一合同的FlowId（在页面中显示为合同ID）。 用户将利用链接对这些合同实施批量操作。
+   */
+  FlowIds?: Array<string>
+  /**
+   * 第三方应用平台的用户openid。 您可登录腾讯电子签控制台，在 "更多能力"->"组织管理" 中查阅某位员工的OpenId。 OpenId必须是传入合同（FlowId）中的签署人。 - 1. 若OpenId为空，Name和Mobile 必须提供。 - 2. 若OpenId 与 Name，Mobile均存在，将优先采用OpenId对应的员工。
+   */
+  OpenId?: string
+  /**
+   * 签署方经办人的姓名。
+经办人的姓名将用于身份认证和电子签名，请确保填写的姓名为签署方的真实姓名，而非昵称等代名。
+
+注：`请确保和合同中填入的一致`
+   */
+  Name?: string
+  /**
+   * 员工手机号，必须与姓名一起使用。 如果OpenId为空，则此字段不能为空。同时，姓名和手机号码必须与传入合同（FlowId）中的签署人信息一致。
+   */
+  Mobile?: string
+}
+
+/**
  * GetDownloadFlowUrl返回参数结构体
  */
 export interface GetDownloadFlowUrlResponse {
@@ -1775,30 +1805,29 @@ export interface GetDownloadFlowUrlResponse {
 }
 
 /**
- * 应用相关信息
+ * 渠道角色信息
  */
-export interface Agent {
+export interface ChannelRole {
   /**
-   * 应用的唯一标识。不同的业务系统可以采用不同的AppId，不同AppId下的数据是隔离的。可以由控制台开发者中心-应用集成自主生成。
+   * 角色id
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  AppId: string
+  RoleId?: string
   /**
-   * 第三方应用平台自定义，对应第三方平台子客企业的唯一标识。一个第三方平台子客企业主体与子客企业ProxyOrganizationOpenId是一一对应的，不可更改，不可重复使用。（例如，可以使用企业名称的hash值，或者社会统一信用代码的hash值，或者随机hash值，需要第三方应用平台保存），最大64位字符串
+   * 角色名
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  ProxyOrganizationOpenId?: string
+  RoleName?: string
   /**
-   * 第三方平台子客企业中的员工/经办人，通过第三方应用平台进入电子签完成实名、且被赋予相关权限后，可以参与到企业资源的管理或签署流程中。
+   * 角色状态：1-启用；2-禁用
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  ProxyOperator?: UserInfo
+  RoleStatus?: number
   /**
-   * 非必需参数，在第三方平台子客企业开通电子签后，会生成唯一的子客应用Id（ProxyAppId）用于代理调用时的鉴权，在子客开通的回调中获取。
+   * 权限树
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  ProxyAppId?: string
-  /**
-   * 内部参数，暂未开放使用
-   * @deprecated
-   */
-  ProxyOrganizationId?: string
+  PermissionGroups?: Array<PermissionGroup>
 }
 
 /**
@@ -2423,6 +2452,42 @@ export interface CommonFlowApprover {
 }
 
 /**
+ * 指定补充签署人信息
+- RecipientId 必须指定
+ */
+export interface FillApproverInfo {
+  /**
+   * 签署方经办人在模板中配置的参与方ID，与控件绑定，是控件的归属方，ID为32位字符串。
+
+   */
+  RecipientId: string
+  /**
+   * 指定企业经办签署人OpenId
+   */
+  OpenId?: string
+  /**
+   * 签署人姓名
+   */
+  ApproverName?: string
+  /**
+   * 签署人手机号码
+   */
+  ApproverMobile?: string
+  /**
+   * 企业名称
+   */
+  OrganizationName?: string
+  /**
+   * 企业OpenId
+   */
+  OrganizationOpenId?: string
+  /**
+   * 签署企业非渠道子客，默认为false，即表示同一渠道下的企业；如果为true，则目前表示接收方企业为SaaS企业, 为渠道子客时，organization_open_id+open_id 必传
+   */
+  NotChannelOrganization?: string
+}
+
+/**
  * 合同文件验签单个结果结构体
  */
 export interface PdfVerifyResult {
@@ -2942,6 +3007,39 @@ export interface ChannelCreateBoundFlowsResponse {
 }
 
 /**
+ * ChannelCreateFlowApprovers请求参数结构体
+ */
+export interface ChannelCreateFlowApproversRequest {
+  /**
+   * 渠道应用相关信息
+   */
+  Agent: Agent
+  /**
+   * 合同唯一编号
+   */
+  FlowId: string
+  /**
+   * 补充企业签署人信息。
+
+- 如果发起方指定的补充签署人是企业签署人，则需要提供企业名称或者企业OpenId；
+
+- 如果不指定，则使用姓名和手机号进行补充。
+   */
+  Approvers: Array<FillApproverInfo>
+  /**
+   * 操作人信息
+   */
+  Operator?: UserInfo
+  /**
+   * 签署人信息补充方式
+
+<ul><li>**0**: 补充或签人，支持补充多个企业经办签署人（默认）注: `不可补充个人签署人`</li>
+<li>**1**: 补充动态签署人，可补充企业和个人签署人。注: `每个签署方节点签署人是唯一的，一个节点只支持传入一个签署人信息`</li></ul>
+   */
+  FillApproverType?: number
+}
+
+/**
  * 指定签署方经办人控件类型是个人印章签署控件（SIGN_SIGNATURE） 时，可选的签名方式。
  */
 export interface ApproverComponentLimitType {
@@ -3081,6 +3179,16 @@ export interface SyncProxyOrganizationOperatorsRequest {
 }
 
 /**
+ * ChannelCreateFlowApprovers返回参数结构体
+ */
+export interface ChannelCreateFlowApproversResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateSignUrls请求参数结构体
  */
 export interface CreateSignUrlsRequest {
@@ -3113,6 +3221,7 @@ export interface CreateSignUrlsRequest {
 - NOT_CHANNEL：非第三方平台子客企业企业
 - PERSON：个人
 - FOLLOWER：关注方，目前是合同抄送方
+- RECIPIENT：获取RecipientId对应的签署链接，可用于生成动态签署人补充链接
    */
   GenerateType?: string
   /**
@@ -3160,7 +3269,7 @@ GenerateType为"PERSON"或"FOLLOWER"时必填
    */
   Hides?: Array<number | bigint>
   /**
-   * 签署节点ID，用于补充动态签署人，使用此参数需要与flow_ids数量一致
+   * 签署节点ID，用于补充动态签署人，使用此参数需要与flow_ids数量一致并且一一对应
    */
   RecipientIds?: Array<string>
 }
@@ -4885,6 +4994,24 @@ export interface DescribeUsageResponse {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Details?: Array<UsageDetail>
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ChannelCreateOrganizationBatchSignUrl返回参数结构体
+ */
+export interface ChannelCreateOrganizationBatchSignUrlResponse {
+  /**
+   * 批量签署入口链接，用户可使用这个链接跳转到控制台页面对合同进行签署操作。
+   */
+  SignUrl?: string
+  /**
+   * 链接过期时间以 Unix 时间戳格式表示，从生成链接时间起，往后7天有效期。过期后短链将失效，无法打开。
+   */
+  ExpiredTime?: number
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

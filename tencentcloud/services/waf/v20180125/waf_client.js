@@ -286,6 +286,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyCustomWhiteRule", req, cb);
     }
     /**
+     * 获取证书的检查结果
+     */
+    async DescribeCertificateVerifyResult(req, cb) {
+        return this.request("DescribeCertificateVerifyResult", req, cb);
+    }
+    /**
      * 切换弹性的开关
      */
     async SwitchElasticMode(req, cb) {

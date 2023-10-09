@@ -16,6 +16,142 @@
  */
 
 /**
+ * 用户详细信息
+ */
+export interface UserDetailInfo {
+  /**
+   * 用户Id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UserId: string
+  /**
+   * 返回的信息类型，Group：返回的当前用户的工作组信息；DataAuth：返回的当前用户的数据权限信息；EngineAuth：返回的当前用户的引擎权限信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Type: string
+  /**
+   * 用户类型：ADMIN：管理员 COMMON：一般用户
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UserType: string
+  /**
+   * 用户描述信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UserDescription: string
+  /**
+   * 数据权限信息集合
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DataPolicyInfo: Policys
+  /**
+   * 引擎权限集合
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EnginePolicyInfo: Policys
+  /**
+   * 绑定到该用户的工作组集合信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WorkGroupInfo: WorkGroups
+  /**
+   * 用户别名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UserAlias: string
+  /**
+   * 行过滤集合
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RowFilterInfo: Policys
+}
+
+/**
+ * UpdateDataEngine请求参数结构体
+ */
+export interface UpdateDataEngineRequest {
+  /**
+   * 资源大小
+   */
+  Size: number
+  /**
+   * 最小资源
+   */
+  MinClusters: number
+  /**
+   * 最大资源
+   */
+  MaxClusters: number
+  /**
+   * 开启自动刷新：true：开启、false（默认）：关闭
+   */
+  AutoResume: boolean
+  /**
+   * 数据引擎名称
+   */
+  DataEngineName: string
+  /**
+   * 相关信息
+   */
+  Message: string
+  /**
+   * 是否自定挂起集群：false（默认）：不自动挂起、true：自动挂起
+   */
+  AutoSuspend?: boolean
+  /**
+   * 定时启停集群策略：0（默认）：关闭定时策略、1：开启定时策略（注：定时启停策略与自动挂起策略互斥）
+   */
+  CrontabResumeSuspend?: number
+  /**
+   * 定时启停策略，复杂类型：包含启停时间、挂起集群策略
+   */
+  CrontabResumeSuspendStrategy?: CrontabResumeSuspendStrategy
+  /**
+   * 单个集群最大并发任务数，默认5
+   */
+  MaxConcurrency?: number
+  /**
+   * 可容忍的排队时间，默认0。当任务排队的时间超过可容忍的时间时可能会触发扩容。如果该参数为0，则表示一旦有任务排队就可能立即触发扩容。
+   */
+  TolerableQueueTime?: number
+  /**
+   * 集群自动挂起时间
+   */
+  AutoSuspendTime?: number
+  /**
+   * spark jar 包年包月集群是否开启弹性
+   */
+  ElasticSwitch?: boolean
+  /**
+   * spark jar 包年包月集群弹性上限
+   */
+  ElasticLimit?: number
+  /**
+   * Spark批作业集群Session资源配置模板
+   */
+  SessionResourceTemplate?: SessionResourceTemplate
+}
+
+/**
+ * CheckDataEngineConfigPairsValidity返回参数结构体
+ */
+export interface CheckDataEngineConfigPairsValidityResponse {
+  /**
+   * 参数有效性：ture:有效，false:至少存在一个无效参数；
+   */
+  IsAvailable?: boolean
+  /**
+   * 无效参数集合
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UnavailableConfig?: Array<string>
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeResultDownload返回参数结构体
  */
 export interface DescribeResultDownloadResponse {
@@ -122,99 +258,17 @@ export interface DescribeNotebookSessionStatementRequest {
 }
 
 /**
- * 网络配置
+ * ModifyDataEngineDescription请求参数结构体
  */
-export interface NetworkConnection {
+export interface ModifyDataEngineDescriptionRequest {
   /**
-   * 网络配置id
-注意：此字段可能返回 null，表示取不到有效值。
+   * 要修改的引擎的名称
    */
-  Id?: number
+  DataEngineName: string
   /**
-   * 网络配置唯一标志符
-注意：此字段可能返回 null，表示取不到有效值。
+   * 引擎的描述信息，最大长度为250
    */
-  AssociateId?: string
-  /**
-   * 计算引擎id
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  HouseId?: string
-  /**
-   * 数据源id(已废弃)
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  DatasourceConnectionId?: string
-  /**
-   * 网络配置状态（0-初始化，1-正常）
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  State?: number
-  /**
-   * 创建时间
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CreateTime?: number
-  /**
-   * 修改时间
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  UpdateTime?: number
-  /**
-   * 创建用户Appid
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Appid?: number
-  /**
-   * 计算引擎名称
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  HouseName?: string
-  /**
-   * 网络配置名称
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  DatasourceConnectionName?: string
-  /**
-   * 网络配置类型
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  NetworkConnectionType?: number
-  /**
-   * 创建用户uin
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Uin?: string
-  /**
-   * 创建用户SubAccountUin
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SubAccountUin?: string
-  /**
-   * 网络配置描述
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  NetworkConnectionDesc?: string
-  /**
-   * 数据源vpcid
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  DatasourceConnectionVpcId?: string
-  /**
-   * 数据源SubnetId
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  DatasourceConnectionSubnetId?: string
-  /**
-   * 数据源SubnetId
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  DatasourceConnectionCidrBlock?: string
-  /**
-   * 数据源SubnetCidrBlock
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  DatasourceConnectionSubnetCidrBlock?: string
+  Message: string
 }
 
 /**
@@ -296,6 +350,16 @@ export interface DeleteUserRequest {
    * 需要删除的用户的Id
    */
   UserIds: Array<string>
+}
+
+/**
+ * DescribeUserDataEngineConfig返回参数结构体
+ */
+export interface DescribeUserDataEngineConfigResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -416,6 +480,57 @@ export interface SparkSessionBatchLogOperate {
 }
 
 /**
+ * python-spark镜像信息。
+ */
+export interface PythonSparkImage {
+  /**
+   * spark镜像唯一id
+   */
+  SparkImageId: string
+  /**
+   * 集群小版本镜像id
+   */
+  ChildImageVersionId: string
+  /**
+   * spark镜像名称
+   */
+  SparkImageVersion: string
+  /**
+   * spark镜像描述信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Description: string
+  /**
+   * 创建时间
+   */
+  CreateTime: string
+  /**
+   * 更新时间
+   */
+  UpdateTime: string
+}
+
+/**
+ * DeleteDataEngine返回参数结构体
+ */
+export interface DeleteDataEngineResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * RenewDataEngine返回参数结构体
+ */
+export interface RenewDataEngineResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DetachUserPolicy返回参数结构体
  */
 export interface DetachUserPolicyResponse {
@@ -496,6 +611,11 @@ export interface DescribeNotebookSessionsRequest {
 }
 
 /**
+ * RestartDataEngine请求参数结构体
+ */
+export type RestartDataEngineRequest = null
+
+/**
  * CreateDMSDatabase返回参数结构体
  */
 export interface CreateDMSDatabaseResponse {
@@ -560,13 +680,19 @@ export interface DescribeDMSDatabaseResponse {
 }
 
 /**
- * UnbindWorkGroupsFromUser返回参数结构体
+ * 策略集合
  */
-export interface UnbindWorkGroupsFromUserResponse {
+export interface Policys {
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 策略集合
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  RequestId?: string
+  PolicySet: Array<Policy>
+  /**
+   * 策略总数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalCount: number
 }
 
 /**
@@ -835,17 +961,19 @@ export interface SwitchDataEngineRequest {
 }
 
 /**
- * SuspendResumeDataEngine返回参数结构体
+ * ip端口对信息
  */
-export interface SuspendResumeDataEngineResponse {
+export interface IpPortPair {
   /**
-   * 虚拟集群详细信息
+   * ip信息
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  DataEngineName?: string
+  Ip?: string
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 端口信息
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  RequestId?: string
+  Port?: number
 }
 
 /**
@@ -856,6 +984,26 @@ export interface DeleteSparkAppRequest {
    * spark作业名
    */
   AppName: string
+}
+
+/**
+ * ModifyDataEngineDescription返回参数结构体
+ */
+export interface ModifyDataEngineDescriptionResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * RestartDataEngine返回参数结构体
+ */
+export interface RestartDataEngineResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -964,17 +1112,33 @@ export interface ElasticsearchInfo {
 }
 
 /**
- * DetachUserPolicy请求参数结构体
+ * DescribeWorkGroups请求参数结构体
  */
-export interface DetachUserPolicyRequest {
+export interface DescribeWorkGroupsRequest {
   /**
-   * 用户Id，和CAM侧Uin匹配
+   * 查询的工作组Id，不填或填0表示不过滤。
    */
-  UserId: string
+  WorkGroupId?: number
   /**
-   * 解绑的权限集合
+   * 过滤条件，当前仅支持按照工作组名称进行模糊搜索。Key为workgroup-name
    */
-  PolicySet?: Array<Policy>
+  Filters?: Array<Filter>
+  /**
+   * 偏移量，默认为0
+   */
+  Offset?: number
+  /**
+   * 返回数量，默认20，最大值100
+   */
+  Limit?: number
+  /**
+   * 排序字段，支持如下字段类型，create-time
+   */
+  SortBy?: string
+  /**
+   * 排序方式，desc表示正序，asc表示反序， 默认为asc
+   */
+  Sorting?: string
 }
 
 /**
@@ -1463,6 +1627,16 @@ export interface GenerateCreateMangedTableSqlRequest {
 }
 
 /**
+ * DescribeUserType请求参数结构体
+ */
+export interface DescribeUserTypeRequest {
+  /**
+   * 用户ID（UIN），如果不填默认为调用方的子UIN
+   */
+  UserId?: string
+}
+
+/**
  * SwitchDataEngine返回参数结构体
  */
 export interface SwitchDataEngineResponse {
@@ -1470,6 +1644,24 @@ export interface SwitchDataEngineResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * CheckDataEngineConfigPairsValidity请求参数结构体
+ */
+export interface CheckDataEngineConfigPairsValidityRequest {
+  /**
+   * 引擎小版本ID
+   */
+  ChildImageVersionId?: string
+  /**
+   * 用户自定义参数
+   */
+  DataEngineConfigPairs?: Array<DataEngineConfigPair>
+  /**
+   * 引擎大版本ID，存在小版本ID时仅需传入小版本ID，不存在时会获取当前大版本下最新的小版本ID。
+   */
+  ImageVersionId?: string
 }
 
 /**
@@ -1644,6 +1836,64 @@ export interface DatasourceConnectionLocation {
 }
 
 /**
+ * DescribeUserInfo请求参数结构体
+ */
+export interface DescribeUserInfoRequest {
+  /**
+   * 用户Id
+   */
+  UserId?: string
+  /**
+   * 查询的信息类型，Group：工作组 DataAuth：数据权限 EngineAuth:引擎权限
+   */
+  Type?: string
+  /**
+   * 查询的过滤条件。
+
+当Type为Group时，支持Key为workgroup-name的模糊搜索；
+
+当Type为DataAuth时，支持key：
+
+policy-type：权限类型。
+
+policy-source：数据来源。
+
+data-name：库表的模糊搜索。
+
+当Type为EngineAuth时，支持key：
+
+policy-type：权限类型。
+
+policy-source：数据来源。
+
+engine-name：库表的模糊搜索。
+   */
+  Filters?: Array<Filter>
+  /**
+   * 排序字段。
+
+当Type为Group时，支持create-time、group-name
+
+当Type为DataAuth时，支持create-time
+
+当Type为EngineAuth时，支持create-time
+   */
+  SortBy?: string
+  /**
+   * 排序方式，desc表示正序，asc表示反序， 默认为asc
+   */
+  Sorting?: string
+  /**
+   * 返回数量，默认20，最大值100
+   */
+  Limit?: number
+  /**
+   * 偏移量，默认为0
+   */
+  Offset?: number
+}
+
+/**
  * CreateDatabase请求参数结构体
  */
 export interface CreateDatabaseRequest {
@@ -1685,6 +1935,16 @@ export interface DescribeDMSTablesResponse {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalCount: number
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * UpdateDataEngineConfig返回参数结构体
+ */
+export interface UpdateDataEngineConfigResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1867,6 +2127,21 @@ export interface ModifySparkAppBatchResponse {
 }
 
 /**
+ * DescribeUserType返回参数结构体
+ */
+export interface DescribeUserTypeResponse {
+  /**
+   * 用户类型。ADMIN：管理员 COMMON：普通用户
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UserType: string
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CancelNotebookSessionStatementBatch返回参数结构体
  */
 export interface CancelNotebookSessionStatementBatchResponse {
@@ -1920,19 +2195,21 @@ export interface QueryResultResponse {
 }
 
 /**
- * ip端口对信息
+ * CheckDataEngineImageCanBeUpgrade返回参数结构体
  */
-export interface IpPortPair {
+export interface CheckDataEngineImageCanBeUpgradeResponse {
   /**
-   * ip信息
-注意：此字段可能返回 null，表示取不到有效值。
+   * 当前大版本下，可升级的集群镜像小版本id
    */
-  Ip?: string
+  ChildImageVersionId: string
   /**
-   * 端口信息
-注意：此字段可能返回 null，表示取不到有效值。
+   * 是否能够升级
    */
-  Port?: number
+  IsUpgrade: boolean
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2007,6 +2284,58 @@ export interface ListTaskJobLogDetailRequest {
    * SparkSQL任务唯一ID
    */
   BatchId?: string
+}
+
+/**
+ * DescribeTables请求参数结构体
+ */
+export interface DescribeTablesRequest {
+  /**
+   * 列出该数据库下所属数据表。
+   */
+  DatabaseName: string
+  /**
+   * 返回数量，默认为10，最大值为100。
+   */
+  Limit?: number
+  /**
+   * 数据偏移量，从0开始，默认为0。
+   */
+  Offset?: number
+  /**
+   * 过滤条件，如下支持的过滤类型，传参Name应为其一
+table-name - String - （过滤条件）数据表名称,形如：table-001。
+table-id - String - （过滤条件）table id形如：12342。
+   */
+  Filters?: Array<Filter>
+  /**
+   * 指定查询的数据源名称，默认为DataLakeCatalog
+   */
+  DatasourceConnectionName?: string
+  /**
+   * 起始时间：用于对更新时间的筛选，格式为yyyy-mm-dd HH:MM:SS
+   */
+  StartTime?: string
+  /**
+   * 终止时间：用于对更新时间的筛选，格式为yyyy-mm-dd HH:MM:SS
+   */
+  EndTime?: string
+  /**
+   * 排序字段，支持：CreateTime（创建时间）、UpdateTime（更新时间）、StorageSize（存储空间）、RecordCount（行数）、Name（表名称）（不传则默认按name升序）
+   */
+  Sort?: string
+  /**
+   * 排序字段，false：降序（默认）；true：升序
+   */
+  Asc?: boolean
+  /**
+   * table type，表类型查询,可用值:EXTERNAL_TABLE,INDEX_TABLE,MANAGED_TABLE,MATERIALIZED_VIEW,TABLE,VIEW,VIRTUAL_VIEW
+   */
+  TableType?: string
+  /**
+   * 筛选字段-表格式：不传（默认）为查全部；LAKEFS：托管表；ICEBERG：非托管iceberg表；HIVE：非托管hive表；OTHER：非托管其它；
+   */
+  TableFormat?: string
 }
 
 /**
@@ -2112,6 +2441,20 @@ export interface CreateUserResponse {
 }
 
 /**
+ * DetachUserPolicy请求参数结构体
+ */
+export interface DetachUserPolicyRequest {
+  /**
+   * 用户Id，和CAM侧Uin匹配
+   */
+  UserId: string
+  /**
+   * 解绑的权限集合
+   */
+  PolicySet?: Array<Policy>
+}
+
+/**
  * 文本格式
  */
 export interface TextFile {
@@ -2127,17 +2470,17 @@ export interface TextFile {
 }
 
 /**
- * DescribeNotebookSessionStatements请求参数结构体
+ * DescribeDataEngine返回参数结构体
  */
-export interface DescribeNotebookSessionStatementsRequest {
+export interface DescribeDataEngineResponse {
   /**
-   * Session唯一标识
+   * 数据引擎详细信息
    */
-  SessionId: string
+  DataEngine: DataEngineInfo
   /**
-   * 批任务id
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  BatchId: string
+  RequestId?: string
 }
 
 /**
@@ -2164,6 +2507,26 @@ export interface SparkSessionBatchLog {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Operate?: Array<SparkSessionBatchLogOperate>
+}
+
+/**
+ * RollbackDataEngineImage返回参数结构体
+ */
+export interface RollbackDataEngineImageResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * UpdateDataEngine返回参数结构体
+ */
+export interface UpdateDataEngineResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2590,6 +2953,16 @@ export interface QueryResultRequest {
 }
 
 /**
+ * CheckDataEngineImageCanBeRollback请求参数结构体
+ */
+export interface CheckDataEngineImageCanBeRollbackRequest {
+  /**
+   * 引擎唯一id
+   */
+  DataEngineId: string
+}
+
+/**
  * CreateDataEngine请求参数结构体
  */
 export interface CreateDataEngineRequest {
@@ -2751,6 +3124,16 @@ export interface ModifySparkAppBatchRequest {
 }
 
 /**
+ * DescribeDataEnginePythonSparkImages请求参数结构体
+ */
+export interface DescribeDataEnginePythonSparkImagesRequest {
+  /**
+   * 集群镜像小版本ID
+   */
+  ChildImageVersionId: string
+}
+
+/**
  * CreateTask请求参数结构体
  */
 export interface CreateTaskRequest {
@@ -2783,6 +3166,11 @@ export interface DescribeNotebookSessionRequest {
 }
 
 /**
+ * UpgradeDataEngineImage请求参数结构体
+ */
+export type UpgradeDataEngineImageRequest = null
+
+/**
  * CSV类型数据格式
  */
 export interface CSV {
@@ -2805,19 +3193,17 @@ export interface CSV {
 }
 
 /**
- * Spark监控数据
+ * ModifyUserType请求参数结构体
  */
-export interface SparkMonitorMetrics {
+export interface ModifyUserTypeRequest {
   /**
-   * shuffle写溢出到COS数据量，单位：byte
-注意：此字段可能返回 null，表示取不到有效值。
+   * 用户ID
    */
-  ShuffleWriteBytesCos?: number
+  UserId: string
   /**
-   * shuffle写数据量，单位：byte
-注意：此字段可能返回 null，表示取不到有效值。
+   * 用户要修改到的类型，ADMIN：管理员，COMMON：一般用户。
    */
-  ShuffleWriteBytesTotal?: number
+  UserType: string
 }
 
 /**
@@ -2976,6 +3362,33 @@ script-name-keyword - String - （过滤条件）数据表名称,形如：script
 }
 
 /**
+ * 任务概览
+ */
+export interface TasksOverview {
+  /**
+   * 正在排队的任务个数
+   */
+  TaskQueuedCount: number
+  /**
+   * 初始化的任务个数
+   */
+  TaskInitCount: number
+  /**
+   * 正在执行的任务个数
+   */
+  TaskRunningCount: number
+  /**
+   * 当前时间范围的总任务个数
+   */
+  TotalTaskCount: number
+}
+
+/**
+ * ModifyGovernEventRule请求参数结构体
+ */
+export type ModifyGovernEventRuleRequest = null
+
+/**
  * DescribeSparkAppJob返回参数结构体
  */
 export interface DescribeSparkAppJobResponse {
@@ -3089,6 +3502,22 @@ export interface CreateExportTaskRequest {
    * 目标数据源的类型，目前支持导出到cos
    */
   OutputType?: string
+}
+
+/**
+ * 用户信息集合
+ */
+export interface Users {
+  /**
+   * 用户信息集合
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UserSet: Array<UserMessage>
+  /**
+   * 用户总数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalCount: number
 }
 
 /**
@@ -3428,6 +3857,102 @@ export interface DMSTable {
 }
 
 /**
+ * 网络配置
+ */
+export interface NetworkConnection {
+  /**
+   * 网络配置id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Id?: number
+  /**
+   * 网络配置唯一标志符
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AssociateId?: string
+  /**
+   * 计算引擎id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HouseId?: string
+  /**
+   * 数据源id(已废弃)
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DatasourceConnectionId?: string
+  /**
+   * 网络配置状态（0-初始化，1-正常）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  State?: number
+  /**
+   * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateTime?: number
+  /**
+   * 修改时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UpdateTime?: number
+  /**
+   * 创建用户Appid
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Appid?: number
+  /**
+   * 计算引擎名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HouseName?: string
+  /**
+   * 网络配置名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DatasourceConnectionName?: string
+  /**
+   * 网络配置类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NetworkConnectionType?: number
+  /**
+   * 创建用户uin
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Uin?: string
+  /**
+   * 创建用户SubAccountUin
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SubAccountUin?: string
+  /**
+   * 网络配置描述
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NetworkConnectionDesc?: string
+  /**
+   * 数据源vpcid
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DatasourceConnectionVpcId?: string
+  /**
+   * 数据源SubnetId
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DatasourceConnectionSubnetId?: string
+  /**
+   * 数据源SubnetId
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DatasourceConnectionCidrBlock?: string
+  /**
+   * 数据源SubnetCidrBlock
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DatasourceConnectionSubnetCidrBlock?: string
+}
+
+/**
  * AttachWorkGroupPolicy返回参数结构体
  */
 export interface AttachWorkGroupPolicyResponse {
@@ -3697,6 +4222,16 @@ export interface TaskResponseInfo {
 }
 
 /**
+ * UpgradeDataEngineImage返回参数结构体
+ */
+export interface UpgradeDataEngineImageResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyUser请求参数结构体
  */
 export interface ModifyUserRequest {
@@ -3945,6 +4480,16 @@ export interface DatasourceConnectionInfo {
 }
 
 /**
+ * DescribeDataEngineImageVersions请求参数结构体
+ */
+export interface DescribeDataEngineImageVersionsRequest {
+  /**
+   * 引擎类型：SQL、SparkBatch
+   */
+  EngineType: string
+}
+
+/**
  * BindWorkGroupsToUser返回参数结构体
  */
 export interface BindWorkGroupsToUserResponse {
@@ -3991,6 +4536,34 @@ export interface DeleteScriptRequest {
    * 脚本id，其可以通过DescribeScripts接口提取
    */
   ScriptIds: Array<string>
+}
+
+/**
+ * DescribeNotebookSessionStatementSqlResult请求参数结构体
+ */
+export interface DescribeNotebookSessionStatementSqlResultRequest {
+  /**
+   * 任务唯一ID
+   */
+  TaskId: string
+  /**
+   * 返回结果的最大行数，范围0~1000，默认为1000.
+   */
+  MaxResults?: number
+  /**
+   * 上一次请求响应返回的分页信息。第一次可以不带，从头开始返回数据，每次返回MaxResults字段设置的数据量。
+   */
+  NextToken?: string
+}
+
+/**
+ * UnbindWorkGroupsFromUser返回参数结构体
+ */
+export interface UnbindWorkGroupsFromUserResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -4092,21 +4665,21 @@ export interface DescribeUserRolesRequest {
 }
 
 /**
- * DescribeNotebookSessionStatementSqlResult请求参数结构体
+ * DescribeDataEngineImageVersions返回参数结构体
  */
-export interface DescribeNotebookSessionStatementSqlResultRequest {
+export interface DescribeDataEngineImageVersionsResponse {
   /**
-   * 任务唯一ID
+   * 集群大版本镜像信息列表
    */
-  TaskId: string
+  ImageParentVersions?: Array<DataEngineImageVersion>
   /**
-   * 返回结果的最大行数，范围0~1000，默认为1000.
+   * 总数
    */
-  MaxResults?: number
+  Total?: number
   /**
-   * 上一次请求响应返回的分页信息。第一次可以不带，从头开始返回数据，每次返回MaxResults字段设置的数据量。
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  NextToken?: string
+  RequestId?: string
 }
 
 /**
@@ -4502,6 +5075,32 @@ export interface DeleteWorkGroupRequest {
 }
 
 /**
+ * RenewDataEngine请求参数结构体
+ */
+export interface RenewDataEngineRequest {
+  /**
+   * CU队列名称
+   */
+  DataEngineName: string
+  /**
+   * 续费时长，单位月，最少续费1一个月
+   */
+  TimeSpan: number
+  /**
+   * 付费类型，默认为1，预付费
+   */
+  PayMode?: number
+  /**
+   * 单位，默认m，仅能填m
+   */
+  TimeUnit?: string
+  /**
+   * 自动续费标志，0，初始状态，默认不自动续费，若用户有预付费不停服特权，自动续费。1：自动续费。2：明确不自动续费。不传该参数默认为0
+   */
+  RenewFlag?: number
+}
+
+/**
  * DescribeTaskResult请求参数结构体
  */
 export interface DescribeTaskResultRequest {
@@ -4534,6 +5133,11 @@ export interface UnlockMetaDataRequest {
 }
 
 /**
+ * RollbackDataEngineImage请求参数结构体
+ */
+export type RollbackDataEngineImageRequest = null
+
+/**
  * 查询列表过滤条件参数
  */
 export interface Filter {
@@ -4555,6 +5159,22 @@ export interface DescribeLakeFsDirSummaryResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * Spark监控数据
+ */
+export interface SparkMonitorMetrics {
+  /**
+   * shuffle写溢出到COS数据量，单位：byte
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ShuffleWriteBytesCos?: number
+  /**
+   * shuffle写数据量，单位：byte
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ShuffleWriteBytesTotal?: number
 }
 
 /**
@@ -4651,6 +5271,64 @@ export interface DescribeForbiddenTableProResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeWorkGroupInfo请求参数结构体
+ */
+export interface DescribeWorkGroupInfoRequest {
+  /**
+   * 工作组Id
+   */
+  WorkGroupId?: number
+  /**
+   * 查询信息类型：User：用户信息 DataAuth：数据权限 EngineAuth：引擎权限
+   */
+  Type?: string
+  /**
+   * 查询的过滤条件。
+
+当Type为User时，支持Key为user-name的模糊搜索；
+
+当Type为DataAuth时，支持key：
+
+policy-type：权限类型。
+
+policy-source：数据来源。
+
+data-name：库表的模糊搜索。
+
+当Type为EngineAuth时，支持key：
+
+policy-type：权限类型。
+
+policy-source：数据来源。
+
+engine-name：库表的模糊搜索。
+   */
+  Filters?: Array<Filter>
+  /**
+   * 排序字段。
+
+当Type为User时，支持create-time、user-name
+
+当Type为DataAuth时，支持create-time
+
+当Type为EngineAuth时，支持create-time
+   */
+  SortBy?: string
+  /**
+   * 排序方式，desc表示正序，asc表示反序， 默认为asc
+   */
+  Sorting?: string
+  /**
+   * 返回数量，默认20，最大值100
+   */
+  Limit?: number
+  /**
+   * 偏移量，默认为0
+   */
+  Offset?: number
 }
 
 /**
@@ -4857,56 +5535,56 @@ export interface DescribeEngineUsageInfoResponse {
 }
 
 /**
- * DescribeTables请求参数结构体
+ * DescribeWorkGroupInfo返回参数结构体
  */
-export interface DescribeTablesRequest {
+export interface DescribeWorkGroupInfoResponse {
   /**
-   * 列出该数据库下所属数据表。
+   * 工作组详细信息
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  DatabaseName: string
+  WorkGroupInfo: WorkGroupDetailInfo
   /**
-   * 返回数量，默认为10，最大值为100。
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  Limit?: number
-  /**
-   * 数据偏移量，从0开始，默认为0。
-   */
-  Offset?: number
-  /**
-   * 过滤条件，如下支持的过滤类型，传参Name应为其一
-table-name - String - （过滤条件）数据表名称,形如：table-001。
-table-id - String - （过滤条件）table id形如：12342。
-   */
-  Filters?: Array<Filter>
-  /**
-   * 指定查询的数据源名称，默认为DataLakeCatalog
-   */
-  DatasourceConnectionName?: string
-  /**
-   * 起始时间：用于对更新时间的筛选，格式为yyyy-mm-dd HH:MM:SS
-   */
-  StartTime?: string
-  /**
-   * 终止时间：用于对更新时间的筛选，格式为yyyy-mm-dd HH:MM:SS
-   */
-  EndTime?: string
-  /**
-   * 排序字段，支持：CreateTime（创建时间）、UpdateTime（更新时间）、StorageSize（存储空间）、RecordCount（行数）、Name（表名称）（不传则默认按name升序）
-   */
-  Sort?: string
-  /**
-   * 排序字段，false：降序（默认）；true：升序
-   */
-  Asc?: boolean
-  /**
-   * table type，表类型查询,可用值:EXTERNAL_TABLE,INDEX_TABLE,MANAGED_TABLE,MATERIALIZED_VIEW,TABLE,VIEW,VIRTUAL_VIEW
-   */
-  TableType?: string
-  /**
-   * 筛选字段-表格式：不传（默认）为查全部；LAKEFS：托管表；ICEBERG：非托管iceberg表；HIVE：非托管hive表；OTHER：非托管其它；
-   */
-  TableFormat?: string
+  RequestId?: string
 }
+
+/**
+ * CheckDataEngineImageCanBeRollback返回参数结构体
+ */
+export interface CheckDataEngineImageCanBeRollbackResponse {
+  /**
+   * 回滚后日志记录id
+   */
+  ToRecordId: string
+  /**
+   * 回滚前日志记录id
+   */
+  FromRecordId: string
+  /**
+   * 是否能够回滚
+   */
+  IsRollback: boolean
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * SwitchDataEngineImage返回参数结构体
+ */
+export interface SwitchDataEngineImageResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * SwitchDataEngineImage请求参数结构体
+ */
+export type SwitchDataEngineImageRequest = null
 
 /**
  * DeleteNotebookSession返回参数结构体
@@ -5126,6 +5804,66 @@ export interface DatabaseInfo {
 }
 
 /**
+ * 工作组详细信息
+ */
+export interface WorkGroupDetailInfo {
+  /**
+   * 工作组Id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WorkGroupId: number
+  /**
+   * 工作组名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WorkGroupName: string
+  /**
+   * 包含的信息类型。User：用户信息；DataAuth：数据权限；EngineAuth:引擎权限
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Type: string
+  /**
+   * 工作组上绑定的用户集合
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UserInfo: Users
+  /**
+   * 数据权限集合
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DataPolicyInfo: Policys
+  /**
+   * 引擎权限集合
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EnginePolicyInfo: Policys
+  /**
+   * 工作组描述信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WorkGroupDescription: string
+  /**
+   * 行过滤信息集合
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RowFilterInfo: Policys
+}
+
+/**
+ * SuspendResumeDataEngine返回参数结构体
+ */
+export interface SuspendResumeDataEngineResponse {
+  /**
+   * 虚拟集群详细信息
+   */
+  DataEngineName?: string
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeDMSPartitions返回参数结构体
  */
 export interface DescribeDMSPartitionsResponse {
@@ -5144,13 +5882,13 @@ export interface DescribeDMSPartitionsResponse {
 }
 
 /**
- * DeleteUsersFromWorkGroup返回参数结构体
+ * DeleteDataEngine请求参数结构体
  */
-export interface DeleteUsersFromWorkGroupResponse {
+export interface DeleteDataEngineRequest {
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 删除虚拟集群的名称数组
    */
-  RequestId?: string
+  DataEngineNames: Array<string>
 }
 
 /**
@@ -5177,6 +5915,49 @@ export interface TasksInfo {
    * 任务的用户自定义参数信息
    */
   Params?: Array<KVPair>
+}
+
+/**
+ * 集群大版本镜像信息。
+ */
+export interface DataEngineImageVersion {
+  /**
+   * 镜像大版本ID
+   */
+  ImageVersionId: string
+  /**
+   * 镜像大版本名称
+   */
+  ImageVersion: string
+  /**
+   * 镜像大版本描述
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Description: string
+  /**
+   * 是否为公共版本：1：公共；2：私有
+   */
+  IsPublic: number
+  /**
+   * 集群类型：SparkSQL/PrestoSQL/SparkBatch
+   */
+  EngineType: string
+  /**
+   * 版本状态：1：初始化；2：上线；3：下线
+   */
+  IsSharedEngine: number
+  /**
+   * 版本状态：1：初始化；2：上线；3：下线
+   */
+  State: number
+  /**
+   * 插入时间
+   */
+  InsertTime: string
+  /**
+   * 更新时间
+   */
+  UpdateTime: string
 }
 
 /**
@@ -5476,6 +6257,16 @@ export interface CreateTaskResponse {
 }
 
 /**
+ * UpdateUserDataEngineConfig返回参数结构体
+ */
+export interface UpdateUserDataEngineConfigResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteSparkApp返回参数结构体
  */
 export interface DeleteSparkAppResponse {
@@ -5714,6 +6505,16 @@ export interface LockMetaDataRequest {
 }
 
 /**
+ * ModifyUserType返回参数结构体
+ */
+export interface ModifyUserTypeResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 数据源详细信息
  */
 export interface DataSourceInfo {
@@ -5765,55 +6566,28 @@ export interface CancelSparkSessionBatchSQLRequest {
 }
 
 /**
- * DescribeWorkGroups请求参数结构体
+ * DeleteUsersFromWorkGroup返回参数结构体
  */
-export interface DescribeWorkGroupsRequest {
+export interface DeleteUsersFromWorkGroupResponse {
   /**
-   * 查询的工作组Id，不填或填0表示不过滤。
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  WorkGroupId?: number
-  /**
-   * 过滤条件，当前仅支持按照工作组名称进行模糊搜索。Key为workgroup-name
-   */
-  Filters?: Array<Filter>
-  /**
-   * 偏移量，默认为0
-   */
-  Offset?: number
-  /**
-   * 返回数量，默认20，最大值100
-   */
-  Limit?: number
-  /**
-   * 排序字段，支持如下字段类型，create-time
-   */
-  SortBy?: string
-  /**
-   * 排序方式，desc表示正序，asc表示反序， 默认为asc
-   */
-  Sorting?: string
+  RequestId?: string
 }
 
 /**
- * 任务概览
+ * DescribeUserDataEngineConfig请求参数结构体
  */
-export interface TasksOverview {
+export type DescribeUserDataEngineConfigRequest = null
+
+/**
+ * DescribeDataEngine请求参数结构体
+ */
+export interface DescribeDataEngineRequest {
   /**
-   * 正在排队的任务个数
+   * House名称
    */
-  TaskQueuedCount: number
-  /**
-   * 初始化的任务个数
-   */
-  TaskInitCount: number
-  /**
-   * 正在执行的任务个数
-   */
-  TaskRunningCount: number
-  /**
-   * 当前时间范围的总任务个数
-   */
-  TotalTaskCount: number
+  DataEngineName: string
 }
 
 /**
@@ -6215,6 +6989,11 @@ export interface AlterDMSDatabaseResponse {
 }
 
 /**
+ * UpdateDataEngineConfig请求参数结构体
+ */
+export type UpdateDataEngineConfigRequest = null
+
+/**
  * CreateWorkGroup请求参数结构体
  */
 export interface CreateWorkGroupRequest {
@@ -6600,6 +7379,20 @@ export interface CheckLockMetaDataResponse {
 }
 
 /**
+ * DescribeNotebookSessionStatements请求参数结构体
+ */
+export interface DescribeNotebookSessionStatementsRequest {
+  /**
+   * Session唯一标识
+   */
+  SessionId: string
+  /**
+   * 批任务id
+   */
+  BatchId: string
+}
+
+/**
  * AlterDMSDatabase请求参数结构体
  */
 export interface AlterDMSDatabaseRequest {
@@ -6619,6 +7412,16 @@ export interface AlterDMSDatabaseRequest {
    * 基础对象
    */
   Asset?: Asset
+}
+
+/**
+ * CheckDataEngineImageCanBeUpgrade请求参数结构体
+ */
+export interface CheckDataEngineImageCanBeUpgradeRequest {
+  /**
+   * 集群id
+   */
+  DataEngineId: string
 }
 
 /**
@@ -6660,6 +7463,22 @@ export interface UserMessage {
    * 用户别名
    */
   UserAlias: string
+}
+
+/**
+ * 工作组集合
+ */
+export interface WorkGroups {
+  /**
+   * 工作组信息集合
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WorkGroupSet: Array<WorkGroupMessage>
+  /**
+   * 工作组总数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalCount: number
 }
 
 /**
@@ -6783,9 +7602,18 @@ export interface DescribeDMSTableRequest {
 }
 
 /**
- * ModifyGovernEventRule请求参数结构体
+ * DescribeDataEnginePythonSparkImages返回参数结构体
  */
-export type ModifyGovernEventRuleRequest = null
+export interface DescribeDataEnginePythonSparkImagesResponse {
+  /**
+   * PYSPARK镜像信息列表
+   */
+  PythonSparkImages?: Array<PythonSparkImage>
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
 
 /**
  * CancelNotebookSessionStatementBatch请求参数结构体
@@ -6799,6 +7627,21 @@ export interface CancelNotebookSessionStatementBatchRequest {
    * 批任务唯一标识
    */
   BatchId: string
+}
+
+/**
+ * DescribeUserInfo返回参数结构体
+ */
+export interface DescribeUserInfoResponse {
+  /**
+   * 用户详细信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UserInfo: UserDetailInfo
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -6935,6 +7778,11 @@ export interface DMSColumn {
    */
   IsPartition?: boolean
 }
+
+/**
+ * UpdateUserDataEngineConfig请求参数结构体
+ */
+export type UpdateUserDataEngineConfigRequest = null
 
 /**
  * 数据源属性

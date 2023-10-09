@@ -173,61 +173,29 @@ export interface ModifyAntiInfoLeakRulesResponse {
 }
 
 /**
- * waf模块的规格
+ * DescribeCertificateVerifyResult请求参数结构体
  */
-export interface WafRuleLimit {
+export interface DescribeCertificateVerifyResultRequest {
   /**
-   * 自定义CC的规格
+   * 域名
    */
-  CC: number
+  Domain: string
   /**
-   * 自定义策略的规格
+   * 证书类型
    */
-  CustomRule: number
+  CertType: number
   /**
-   * 黑白名单的规格
+   * 证书公钥
    */
-  IPControl: number
+  Certificate?: string
   /**
-   * 信息防泄漏的规格
+   * 证书ID
    */
-  AntiLeak: number
+  CertID?: string
   /**
-   * 防篡改的规格
+   * 私钥信息
    */
-  AntiTamper: number
-  /**
-   * 紧急CC的规格
-   */
-  AutoCC: number
-  /**
-   * 地域封禁的规格
-   */
-  AreaBan: number
-  /**
-   * 自定义CC中配置session
-   */
-  CCSession: number
-  /**
-   * AI的规格
-   */
-  AI: number
-  /**
-   * 精准白名单的规格
-   */
-  CustomWhite: number
-  /**
-   * api安全的规格
-   */
-  ApiSecurity: number
-  /**
-   * 客户端流量标记的规格
-   */
-  ClientMsg: number
-  /**
-   * 流量标记的规格
-   */
-  TrafficMarking: number
+  PrivateKey?: string
 }
 
 /**
@@ -355,6 +323,20 @@ export interface SearchAttackLogRequest {
    * 第几页，从0开始
    */
   Page?: number
+}
+
+/**
+ * ModifyHostFlowMode返回参数结构体
+ */
+export interface ModifyHostFlowModeResponse {
+  /**
+   * 成功的状态码
+   */
+  Success: ResponseCode
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -863,135 +845,30 @@ export interface DeleteHostRequest {
 }
 
 /**
- * domain列表
+ * DescribeCertificateVerifyResult返回参数结构体
  */
-export interface DomainInfo {
+export interface DescribeCertificateVerifyResultResponse {
   /**
-   * 域名
-   */
-  Domain: string
-  /**
-   * 域名ID
-   */
-  DomainId: string
-  /**
-   * 实例ID
-   */
-  InstanceId: string
-  /**
-   * cname地址
-   */
-  Cname: string
-  /**
-   * 实例类型,sparta-waf表示saaswaf实例域名,clb-waf表示clbwaf实例域名,cdc-clb-waf表示CDC环境下clbwaf实例域名,cdn-waf表示cdnwaf实例域名
-   */
-  Edition: string
-  /**
-   * 地域
-   */
-  Region: string
-  /**
-   * 实例名
-   */
-  InstanceName: string
-  /**
-   * 日志包
-   */
-  ClsStatus: number
-  /**
-   * clbwaf使用模式,0镜像模式 1清洗模式
-   */
-  FlowMode: number
-  /**
-   * waf开关,0关闭 1开启
+   * 状态码
    */
   Status: number
   /**
-   * 规则引擎防护模式,0观察模式 1拦截模式
+   * 错误详情
    */
-  Mode: number
+  Detail: Array<string>
   /**
-   * 规则引擎和AI引擎防护模式联合状态,10规则引擎观察&&AI引擎关闭模式 11规则引擎观察&&AI引擎观察模式 12规则引擎观察&&AI引擎拦截模式 20规则引擎拦截&&AI引擎关闭模式 21规则引擎拦截&&AI引擎观察模式 22规则引擎拦截&&AI引擎拦截模式
+   * 过期时间
    */
-  Engine: number
+  NotAfter: string
   /**
-   * CC列表
-   */
-  CCList: Array<string>
-  /**
-   * 回源ip
-   */
-  RsList: Array<string>
-  /**
-   * 服务端口配置
-   */
-  Ports: Array<PortInfo>
-  /**
-   * 负载均衡器
-   */
-  LoadBalancerSet: Array<LoadBalancerPackageNew>
-  /**
-   * 用户id
-   */
-  AppId: number
-  /**
-   * clbwaf域名监听器状态,0操作成功 4正在绑定LB 6正在解绑LB 7解绑LB失败 8绑定LB失败 10内部错误
-   */
-  State: number
-  /**
-   * 创建时间
-   */
-  CreateTime?: string
-  /**
-   * Ipv6开关状态,0关闭 1开启
-   */
-  Ipv6Status?: number
-  /**
-   * BOT开关状态,0关闭 1开启
-   */
-  BotStatus?: number
-  /**
-   * 版本信息
-   */
-  Level?: number
-  /**
-   * 是否开启投递CLS功能,0关闭 1开启
-   */
-  PostCLSStatus?: number
-  /**
-   * 是否开启投递CKafka功能,0关闭 1开启
-   */
-  PostCKafkaStatus?: number
-  /**
-   * cdc实例域名接入的集群信息,非cdc实例忽略
+   * 证书是否改变:1有改变，0没有改变
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CdcClusters?: string
+  Changed: number
   /**
-   * api安全开关状态,0关闭 1开启
-注意：此字段可能返回 null，表示取不到有效值。
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  ApiStatus?: number
-  /**
-   * 应用型负载均衡类型,clb或者apisix，默认clb
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  AlbType?: string
-  /**
-   * 安全组状态,0不展示 1非腾讯云源站 2安全组绑定失败 3安全组发生变更
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SgState?: number
-  /**
-   * 安全组状态的详细解释
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SgDetail?: string
-  /**
-   * 域名类型:hybrid表示混合云域名，public表示公有云域名
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CloudType?: string
+  RequestId?: string
 }
 
 /**
@@ -4856,6 +4733,64 @@ export interface InstanceInfo {
 }
 
 /**
+ * waf模块的规格
+ */
+export interface WafRuleLimit {
+  /**
+   * 自定义CC的规格
+   */
+  CC: number
+  /**
+   * 自定义策略的规格
+   */
+  CustomRule: number
+  /**
+   * 黑白名单的规格
+   */
+  IPControl: number
+  /**
+   * 信息防泄漏的规格
+   */
+  AntiLeak: number
+  /**
+   * 防篡改的规格
+   */
+  AntiTamper: number
+  /**
+   * 紧急CC的规格
+   */
+  AutoCC: number
+  /**
+   * 地域封禁的规格
+   */
+  AreaBan: number
+  /**
+   * 自定义CC中配置session
+   */
+  CCSession: number
+  /**
+   * AI的规格
+   */
+  AI: number
+  /**
+   * 精准白名单的规格
+   */
+  CustomWhite: number
+  /**
+   * api安全的规格
+   */
+  ApiSecurity: number
+  /**
+   * 客户端流量标记的规格
+   */
+  ClientMsg: number
+  /**
+   * 流量标记的规格
+   */
+  TrafficMarking: number
+}
+
+/**
  * TLS 加密套件
  */
 export interface TLSCiphers {
@@ -6248,17 +6183,135 @@ export interface DescribeAccessHistogramResponse {
 }
 
 /**
- * ModifyHostFlowMode返回参数结构体
+ * domain列表
  */
-export interface ModifyHostFlowModeResponse {
+export interface DomainInfo {
   /**
-   * 成功的状态码
+   * 域名
    */
-  Success: ResponseCode
+  Domain: string
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 域名ID
    */
-  RequestId?: string
+  DomainId: string
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+  /**
+   * cname地址
+   */
+  Cname: string
+  /**
+   * 实例类型,sparta-waf表示saaswaf实例域名,clb-waf表示clbwaf实例域名,cdc-clb-waf表示CDC环境下clbwaf实例域名,cdn-waf表示cdnwaf实例域名
+   */
+  Edition: string
+  /**
+   * 地域
+   */
+  Region: string
+  /**
+   * 实例名
+   */
+  InstanceName: string
+  /**
+   * 日志包
+   */
+  ClsStatus: number
+  /**
+   * clbwaf使用模式,0镜像模式 1清洗模式
+   */
+  FlowMode: number
+  /**
+   * waf开关,0关闭 1开启
+   */
+  Status: number
+  /**
+   * 规则引擎防护模式,0观察模式 1拦截模式
+   */
+  Mode: number
+  /**
+   * 规则引擎和AI引擎防护模式联合状态,10规则引擎观察&&AI引擎关闭模式 11规则引擎观察&&AI引擎观察模式 12规则引擎观察&&AI引擎拦截模式 20规则引擎拦截&&AI引擎关闭模式 21规则引擎拦截&&AI引擎观察模式 22规则引擎拦截&&AI引擎拦截模式
+   */
+  Engine: number
+  /**
+   * CC列表
+   */
+  CCList: Array<string>
+  /**
+   * 回源ip
+   */
+  RsList: Array<string>
+  /**
+   * 服务端口配置
+   */
+  Ports: Array<PortInfo>
+  /**
+   * 负载均衡器
+   */
+  LoadBalancerSet: Array<LoadBalancerPackageNew>
+  /**
+   * 用户id
+   */
+  AppId: number
+  /**
+   * clbwaf域名监听器状态,0操作成功 4正在绑定LB 6正在解绑LB 7解绑LB失败 8绑定LB失败 10内部错误
+   */
+  State: number
+  /**
+   * 创建时间
+   */
+  CreateTime?: string
+  /**
+   * Ipv6开关状态,0关闭 1开启
+   */
+  Ipv6Status?: number
+  /**
+   * BOT开关状态,0关闭 1开启
+   */
+  BotStatus?: number
+  /**
+   * 版本信息
+   */
+  Level?: number
+  /**
+   * 是否开启投递CLS功能,0关闭 1开启
+   */
+  PostCLSStatus?: number
+  /**
+   * 是否开启投递CKafka功能,0关闭 1开启
+   */
+  PostCKafkaStatus?: number
+  /**
+   * cdc实例域名接入的集群信息,非cdc实例忽略
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CdcClusters?: string
+  /**
+   * api安全开关状态,0关闭 1开启
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ApiStatus?: number
+  /**
+   * 应用型负载均衡类型,clb或者apisix，默认clb
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AlbType?: string
+  /**
+   * 安全组状态,0不展示 1非腾讯云源站 2安全组绑定失败 3安全组发生变更
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SgState?: number
+  /**
+   * 安全组状态的详细解释
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SgDetail?: string
+  /**
+   * 域名类型:hybrid表示混合云域名，public表示公有云域名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CloudType?: string
 }
 
 /**

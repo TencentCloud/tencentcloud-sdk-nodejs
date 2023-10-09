@@ -3488,6 +3488,7 @@ export interface DeleteTriggerRequest {
   TriggerDesc?: string
   /**
    * 函数的版本，默认为 $LATEST，建议填写 [$DEFAULT](https://cloud.tencent.com/document/product/583/36149#.E9.BB.98.E8.AE.A4.E5.88.AB.E5.90.8D)方便后续进行版本的灰度发布。
+如果删除的触发器类型为 APIGW 触发器,该字段为必填参数
    */
   Qualifier?: string
 }

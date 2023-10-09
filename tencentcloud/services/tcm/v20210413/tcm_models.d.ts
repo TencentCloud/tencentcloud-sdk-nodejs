@@ -978,6 +978,11 @@ export interface CLS {
      * 是否删除
      */
     NeedDelete?: boolean;
+    /**
+     * cls 主题创建的地域
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Region?: string;
 }
 /**
  * 调用链配置

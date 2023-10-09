@@ -25,7 +25,7 @@ import {
   DescribeIpHitItemsResponse,
   DescribeCustomRulesRspRuleListItem,
   ModifyAntiInfoLeakRulesResponse,
-  WafRuleLimit,
+  DescribeCertificateVerifyResultRequest,
   DescribeUserCdcClbWafRegionsRequest,
   IpHitItemsData,
   DeleteAttackDownloadRecordResponse,
@@ -34,6 +34,7 @@ import {
   DescribeWafAutoDenyStatusRequest,
   AddCustomWhiteRuleResponse,
   SearchAttackLogRequest,
+  ModifyHostFlowModeResponse,
   DomainPackageNew,
   DescribeCustomWhiteRuleResponse,
   AccessLogItems,
@@ -58,7 +59,7 @@ import {
   DescribeAccessIndexRequest,
   ModifyInstanceQpsLimitRequest,
   DeleteHostRequest,
-  DomainInfo,
+  DescribeCertificateVerifyResultResponse,
   DescribeAntiInfoLeakRulesStrategyItem,
   ModifyInstanceNameResponse,
   UpsertSessionResponse,
@@ -222,6 +223,7 @@ import {
   AccessLogInfo,
   BatchIpAccessControlItem,
   InstanceInfo,
+  WafRuleLimit,
   TLSCiphers,
   ModifyInstanceRenewFlagRequest,
   DescribeBatchIpAccessControlResponse,
@@ -275,7 +277,7 @@ import {
   DescribeDomainWhiteRulesResponse,
   DescribeWafThreatenIntelligenceResponse,
   DescribeAccessHistogramResponse,
-  ModifyHostFlowModeResponse,
+  DomainInfo,
   PageInfo,
   DescribeSessionResponse,
   DeleteAttackDownloadRecordRequest,
@@ -749,6 +751,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyCustomWhiteRuleResponse) => void
   ): Promise<ModifyCustomWhiteRuleResponse> {
     return this.request("ModifyCustomWhiteRule", req, cb)
+  }
+
+  /**
+   * 获取证书的检查结果
+   */
+  async DescribeCertificateVerifyResult(
+    req: DescribeCertificateVerifyResultRequest,
+    cb?: (error: string, rep: DescribeCertificateVerifyResultResponse) => void
+  ): Promise<DescribeCertificateVerifyResultResponse> {
+    return this.request("DescribeCertificateVerifyResult", req, cb)
   }
 
   /**
