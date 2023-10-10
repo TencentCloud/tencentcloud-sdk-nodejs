@@ -3249,77 +3249,77 @@ export interface SyncJobInfo {
      * 同步任务id，如：sync-btso140
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    JobId: string;
+    JobId?: string;
     /**
      * 同步任务名
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    JobName: string;
+    JobName?: string;
     /**
      * 付款方式，PostPay(按量付费)、PrePay(包年包月)
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    PayMode: string;
+    PayMode?: string;
     /**
      * 运行模式，Immediate(表示立即运行，默认为此项值)、Timed(表示定时运行)
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    RunMode: string;
+    RunMode?: string;
     /**
      * 期待运行时间，格式为 yyyy-mm-dd hh:mm:ss
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ExpectRunTime: string;
+    ExpectRunTime?: string;
     /**
      * 支持的所有操作
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    AllActions: Array<string>;
+    AllActions?: Array<string>;
     /**
      * 当前状态能进行的操作
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Actions: Array<string>;
+    Actions?: Array<string>;
     /**
      * 同步选项
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Options: Options;
+    Options?: Options;
     /**
      * 同步库表对象
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Objects: Objects;
+    Objects?: Objects;
     /**
      * 任务规格
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Specification: string;
+    Specification?: string;
     /**
      * 过期时间，格式为 yyyy-mm-dd hh:mm:ss
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ExpireTime: string;
+    ExpireTime?: string;
     /**
      * 源端地域，如：ap-guangzhou等
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SrcRegion: string;
+    SrcRegion?: string;
     /**
      * 源端数据库类型，mysql,cynosdbmysql,tdapg,tdpg,tdsqlmysql等
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SrcDatabaseType: string;
+    SrcDatabaseType?: string;
     /**
      * 源端接入类型，cdb(云数据库)、cvm(云主机自建)、vpc(私有网络)、extranet(外网)、vpncloud(vpn接入)、dcg(专线接入)、ccn(云联网)、intranet(自研上云)
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SrcAccessType: string;
+    SrcAccessType?: string;
     /**
      * 源端信息，单节点数据库使用
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SrcInfo: Endpoint;
+    SrcInfo?: Endpoint;
     /**
      * 枚举值：cluster、single。源库为单节点数据库使用single，多节点使用cluster
   注意：此字段可能返回 null，表示取不到有效值。
@@ -3334,22 +3334,22 @@ export interface SyncJobInfo {
      * 目标端地域，如：ap-guangzhou等
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DstRegion: string;
+    DstRegion?: string;
     /**
      * 目标端数据库类型，mysql,cynosdbmysql,tdapg,tdpg,tdsqlmysql等
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DstDatabaseType: string;
+    DstDatabaseType?: string;
     /**
      * 目标端接入类型，cdb(云数据库)、cvm(云主机自建)、vpc(私有网络)、extranet(外网)、vpncloud(vpn接入)、dcg(专线接入)、ccn(云联网)、intranet(自研上云)
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DstAccessType: string;
+    DstAccessType?: string;
     /**
      * 目标端信息，单节点数据库使用
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DstInfo: Endpoint;
+    DstInfo?: Endpoint;
     /**
      * 枚举值：cluster、single。目标库为单节点数据库使用single，多节点使用cluster
   注意：此字段可能返回 null，表示取不到有效值。
@@ -3364,57 +3364,57 @@ export interface SyncJobInfo {
      * 创建时间，格式为 yyyy-mm-dd hh:mm:ss
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CreateTime: string;
+    CreateTime?: string;
     /**
      * 开始时间，格式为 yyyy-mm-dd hh:mm:ss
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    StartTime: string;
+    StartTime?: string;
     /**
      * 任务状态，UnInitialized(未初始化)、Initialized(已初始化)、Checking(校验中)、CheckPass(校验通过)、CheckNotPass(校验不通过)、ReadyRunning(准备运行)、Running(运行中)、Pausing(暂停中)、Paused(已暂停)、Stopping(停止中)、Stopped(已结束)、ResumableErr(任务错误)、Resuming(恢复中)、Failed(失败)、Released(已释放)、Resetting(重置中)、Unknown(未知)
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Status: string;
+    Status?: string;
     /**
      * 结束时间，格式为 yyyy-mm-dd hh:mm:ss
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    EndTime: string;
+    EndTime?: string;
     /**
      * 标签相关信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Tags: Array<TagItem>;
+    Tags?: Array<TagItem>;
     /**
      * 同步任务运行步骤信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Detail: SyncDetailInfo;
+    Detail?: SyncDetailInfo;
     /**
      * 用于计费的状态，可能取值有：Normal(正常状态)、Resizing(变配中)、Renewing(续费中)、Isolating(隔离中)、Isolated(已隔离)、Offlining(下线中)、Offlined(已下线)、NotBilled(未计费)、Recovering(解隔离)、PostPay2Prepaying(按量计费转包年包月中)、PrePay2Postpaying(包年包月转按量计费中)
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TradeStatus: string;
+    TradeStatus?: string;
     /**
      * 同步链路规格，如micro,small,medium,large
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    InstanceClass: string;
+    InstanceClass?: string;
     /**
      * 自动续费标识，当PayMode值为PrePay则此项配置有意义，取值为：1（表示自动续费）、0（不自动续费）
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    AutoRenew: number;
+    AutoRenew?: number;
     /**
      * 下线时间，格式为 yyyy-mm-dd hh:mm:ss
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    OfflineTime: string;
+    OfflineTime?: string;
     /**
      * 自动重试时间段设置
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    AutoRetryTimeRangeMinutes: number;
+    AutoRetryTimeRangeMinutes?: number;
     /**
      * 全量导出可重入标识：enum::"yes"/"no"。yes表示当前任务可重入、no表示当前任务处于全量导出且不可重入阶段；如果在该值为no时重启任务导出流程不支持断点续传
   注意：此字段可能返回 null，表示取不到有效值。

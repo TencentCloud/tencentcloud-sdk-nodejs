@@ -828,6 +828,16 @@ it("waf.v20180125.GenerateDealsAndPayNew", async function () {
     }
 })
 
+it("waf.v20180125.ModifyWebshellStatus", async function () {
+    try {
+       const data = await client.ModifyWebshellStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("waf.v20180125.ModifyAntiInfoLeakRuleStatus", async function () {
     try {
        const data = await client.ModifyAntiInfoLeakRuleStatus({})
@@ -968,6 +978,16 @@ it("waf.v20180125.DescribeInstances", async function () {
     }
 })
 
+it("waf.v20180125.ModifyUserSignatureRule", async function () {
+    try {
+       const data = await client.ModifyUserSignatureRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("waf.v20180125.ModifyHostFlowMode", async function () {
     try {
        const data = await client.ModifyHostFlowMode({})
@@ -981,6 +1001,16 @@ it("waf.v20180125.ModifyHostFlowMode", async function () {
 it("waf.v20180125.ModifyInstanceName", async function () {
     try {
        const data = await client.ModifyInstanceName({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("waf.v20180125.ModifyModuleStatus", async function () {
+    try {
+       const data = await client.ModifyModuleStatus({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1098,9 +1128,29 @@ it("waf.v20180125.UpsertSession", async function () {
     }
 })
 
+it("waf.v20180125.DescribeUserSignatureRule", async function () {
+    try {
+       const data = await client.DescribeUserSignatureRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("waf.v20180125.FreshAntiFakeUrl", async function () {
     try {
        const data = await client.FreshAntiFakeUrl({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("waf.v20180125.DescribeDomainRules", async function () {
+    try {
+       const data = await client.DescribeDomainRules({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1121,6 +1171,16 @@ it("waf.v20180125.AddDomainWhiteRule", async function () {
 it("waf.v20180125.ModifyDomainIpv6Status", async function () {
     try {
        const data = await client.ModifyDomainIpv6Status({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("waf.v20180125.ModifyUserLevel", async function () {
+    try {
+       const data = await client.ModifyUserLevel({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

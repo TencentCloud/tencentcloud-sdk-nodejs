@@ -70,6 +70,7 @@ import {
   DescribeCorpQuotasRequest,
   AuthorizedTransferRequest,
   ReportBatchCallbackStatusRequest,
+  DescribeCodeBatchesResponse,
   CreateProductRequest,
   CreateCustomPackRequest,
   Ext,
@@ -117,7 +118,7 @@ import {
   DeleteTraceDataRequest,
   DescribeScanLogsRequest,
   ModifyTraceCodeUnlinkResponse,
-  DescribeTraceDataByIdRequest,
+  DescribeCodeBatchesRequest,
   InputEncryptData,
   Merchant,
   Product,
@@ -133,6 +134,7 @@ import {
   DeleteCodeBatchResponse,
   CreateTraceChainRequest,
   DescribeMerchantByIdRequest,
+  DescribeTraceDataByIdRequest,
   DescribeProductByIdResponse,
   DescribeCodePacksRequest,
   DescribeJobFileUrlResponse,
@@ -345,6 +347,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询批次列表
+   */
+  async DescribeCodeBatches(
+    req: DescribeCodeBatchesRequest,
+    cb?: (error: string, rep: DescribeCodeBatchesResponse) => void
+  ): Promise<DescribeCodeBatchesResponse> {
+    return this.request("DescribeCodeBatches", req, cb)
+  }
+
+  /**
    * 编辑商品
    */
   async ModifyProduct(
@@ -476,8 +488,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询批次列表
-   */
+     * 查询批次列表
+
+旧版接口已经弃用，新业务请使用用新版的接口 DescribeCodeBatches
+     */
   async DescribeCodeBatchs(
     req: DescribeCodeBatchsRequest,
     cb?: (error: string, rep: DescribeCodeBatchsResponse) => void

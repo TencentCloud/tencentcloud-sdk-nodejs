@@ -18,6 +18,16 @@ const client = new tencentcloud.ess.v20201111.Client({
 })
 describe("ess.v20201111.test.js", function () {
 
+it("ess.v20201111.CreateUserAutoSignSealUrl", async function () {
+    try {
+       const data = await client.CreateUserAutoSignSealUrl({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ess.v20201111.DescribeFlowInfo", async function () {
     try {
        const data = await client.DescribeFlowInfo({})

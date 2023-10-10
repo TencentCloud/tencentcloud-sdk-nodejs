@@ -143,6 +143,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyTraceData", req, cb);
     }
     /**
+     * 查询批次列表
+     */
+    async DescribeCodeBatches(req, cb) {
+        return this.request("DescribeCodeBatches", req, cb);
+    }
+    /**
      * 编辑商品
      */
     async ModifyProduct(req, cb) {
@@ -223,6 +229,8 @@ class Client extends abstract_client_1.AbstractClient {
     }
     /**
      * 查询批次列表
+
+旧版接口已经弃用，新业务请使用用新版的接口 DescribeCodeBatches
      */
     async DescribeCodeBatchs(req, cb) {
         return this.request("DescribeCodeBatchs", req, cb);

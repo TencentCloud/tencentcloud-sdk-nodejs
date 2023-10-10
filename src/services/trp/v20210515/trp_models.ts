@@ -1567,6 +1567,24 @@ export interface ReportBatchCallbackStatusRequest {
 }
 
 /**
+ * DescribeCodeBatches返回参数结构体
+ */
+export interface DescribeCodeBatchesResponse {
+  /**
+   * 批次列表
+   */
+  CodeBatches?: Array<CodeBatch>
+  /**
+   * 总条数
+   */
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateProduct请求参数结构体
  */
 export interface CreateProductRequest {
@@ -2207,12 +2225,12 @@ export interface DescribeCodeBatchsResponse {
    * 批次列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CodeBatchs: Array<CodeBatch>
+  CodeBatchs?: Array<CodeBatch>
   /**
    * 总条数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2655,13 +2673,33 @@ export interface ModifyTraceCodeUnlinkResponse {
 }
 
 /**
- * DescribeTraceDataById请求参数结构体
+ * DescribeCodeBatches请求参数结构体
  */
-export interface DescribeTraceDataByIdRequest {
+export interface DescribeCodeBatchesRequest {
   /**
-   * 溯源ID
+   * 查询商户ID
    */
-  Id: string
+  MerchantId?: string
+  /**
+   * 查询商品ID
+   */
+  ProductId?: string
+  /**
+   * 查询关键字
+   */
+  Keyword?: string
+  /**
+   * 条数
+   */
+  PageSize?: number
+  /**
+   * 页数
+   */
+  PageNumber?: number
+  /**
+   * 批次类型 0:溯源 1:营销
+   */
+  BatchType?: string
   /**
    * 企业ID
    */
@@ -3049,6 +3087,20 @@ export interface DescribeMerchantByIdRequest {
    * 商户标识码
    */
   MerchantId: string
+  /**
+   * 企业ID
+   */
+  CorpId?: number
+}
+
+/**
+ * DescribeTraceDataById请求参数结构体
+ */
+export interface DescribeTraceDataByIdRequest {
+  /**
+   * 溯源ID
+   */
+  Id: string
   /**
    * 企业ID
    */

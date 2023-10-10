@@ -129,6 +129,15 @@ export interface ScaleOutInstanceResponse {
     RequestId?: string;
 }
 /**
+ * ModifyUserManagerPwd返回参数结构体
+ */
+export interface ModifyUserManagerPwdResponse {
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * Impala查询详情
  */
 export interface ImpalaQuery {
@@ -618,6 +627,23 @@ export interface DiskSpec {
      * 磁盘大小，单位GB。
      */
     DiskSize: number;
+}
+/**
+ * ModifyUserManagerPwd请求参数结构体
+ */
+export interface ModifyUserManagerPwdRequest {
+    /**
+     * 集群实例ID
+     */
+    InstanceId: string;
+    /**
+     * 用户名
+     */
+    UserName: string;
+    /**
+     * 密码
+     */
+    PassWord: string;
 }
 /**
  * COS 相关配置

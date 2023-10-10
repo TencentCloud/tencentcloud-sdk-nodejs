@@ -404,46 +404,6 @@ export interface DescribeZonesRequest {
 }
 
 /**
- * 离线日志详细信息
- */
-export interface L4OfflineLog {
-  /**
-   * 四层代理实例 ID。
-   */
-  ProxyId?: string
-  /**
-   * 日志所属区域，取值有：
-<li>mainland：中国大陆境内;</li>
-<li>overseas：全球（不含中国大陆）。</li>
-   */
-  Area?: string
-  /**
-   * 离线日志数据包名。
-   */
-  LogPacketName?: string
-  /**
-   * 离线日志下载地址。
-   */
-  Url?: string
-  /**
-   * 日志打包时间，此参数已经废弃。
-   */
-  LogTime?: number
-  /**
-   * 日志打包开始时间。
-   */
-  LogStartTime?: string
-  /**
-   * 日志打包结束时间。
-   */
-  LogEndTime?: string
-  /**
-   * 日志大小，单位为 Byte。
-   */
-  Size?: number
-}
-
-/**
  * 最新IP白名单列表相比于当前IP白名单列表的区别
  */
 export interface DiffIPWhitelist {
@@ -998,13 +958,34 @@ export interface BotUserRule {
 }
 
 /**
- * ModifyOriginGroup返回参数结构体
+ * 源站配置。
  */
-export interface ModifyOriginGroupResponse {
+export interface Origin {
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 主源站列表。
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  RequestId?: string
+  Origins?: Array<string>
+  /**
+   * 备源站列表。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BackupOrigins?: Array<string>
+  /**
+   * 回源协议配置，取值有：
+<li>http：强制 http 回源；</li>
+<li>follow：协议跟随回源；</li>
+<li>https：强制 https 回源。</li>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OriginPullProtocol?: string
+  /**
+   * 源站为腾讯云 COS 时，是否为私有访问 bucket，取值有：
+<li>on：私有访问；</li>
+<li>off：公共访问。</li>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CosPrivateAccess?: string
 }
 
 /**
@@ -1476,20 +1457,6 @@ export interface ExceptConfig {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ExceptUserRules?: Array<ExceptUserRule>
-}
-
-/**
- * DeleteOriginGroup请求参数结构体
- */
-export interface DeleteOriginGroupRequest {
-  /**
-   * 站点ID。
-   */
-  ZoneId: string
-  /**
-   * 源站组ID。
-   */
-  OriginGroupId: string
 }
 
 /**
@@ -2514,37 +2481,6 @@ export interface RateLimitTemplateDetail {
    * 统计周期，取值范围0-120秒。
    */
   Period?: number
-}
-
-/**
- * 源站配置。
- */
-export interface Origin {
-  /**
-   * 主源站列表。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Origins?: Array<string>
-  /**
-   * 备源站列表。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  BackupOrigins?: Array<string>
-  /**
-   * 回源协议配置，取值有：
-<li>http：强制 http 回源；</li>
-<li>follow：协议跟随回源；</li>
-<li>https：强制 https 回源。</li>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  OriginPullProtocol?: string
-  /**
-   * 源站为腾讯云 COS 时，是否为私有访问 bucket，取值有：
-<li>on：私有访问；</li>
-<li>off：公共访问。</li>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CosPrivateAccess?: string
 }
 
 /**
@@ -4591,13 +4527,26 @@ export interface RateLimitTemplate {
 }
 
 /**
- * ModifyHostsCertificate返回参数结构体
+ * 该结构体表示各种场景、模式下，用于验证用户对站点域名的归属权内容。
  */
-export interface ModifyHostsCertificateResponse {
+export interface OwnershipVerification {
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * CNAME 接入，使用 DNS 解析验证时所需的信息。详情参考 [站点/域名归属权验证
+](https://cloud.tencent.com/document/product/1552/70789#7af6ecf8-afca-4e35-8811-b5797ed1bde5)。
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  RequestId?: string
+  DnsVerification?: DnsVerification
+  /**
+   * CNAME 接入，使用文件验证时所需的信息。详情参考 [站点/域名归属权验证
+](https://cloud.tencent.com/document/product/1552/70789#7af6ecf8-afca-4e35-8811-b5797ed1bde5)。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FileVerification?: FileVerification
+  /**
+   * NS 接入，切换 DNS 服务器所需的信息。详情参考 [修改 DNS 服务器](https://cloud.tencent.com/document/product/1552/90452)。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NsVerification?: NsVerification
 }
 
 /**
@@ -5426,47 +5375,6 @@ export interface CacheKey {
 }
 
 /**
- * ModifyOriginGroup请求参数结构体
- */
-export interface ModifyOriginGroupRequest {
-  /**
-   * 站点ID。
-   */
-  ZoneId: string
-  /**
-   * 源站组ID。
-   */
-  OriginGroupId: string
-  /**
-   * 源站类型，取值有：
-<li>self：自有源站；</li>
-<li>third_party：第三方源站；</li>
-<li>cos：腾讯云COS源站。</li>
-   */
-  OriginType: string
-  /**
-   * 源站组名称。
-   */
-  OriginGroupName: string
-  /**
-   * 源站配置类型，当OriginType=self时，取值有：
-<li>area：按区域配置；</li>
-<li>weight： 按权重配置；</li>
-<li>proto： 按HTTP协议配置。</li>当OriginType=third_party/cos时放空。
-   */
-  ConfigurationType: string
-  /**
-   * 源站记录信息。
-   */
-  OriginRecords: Array<OriginRecord>
-  /**
-   * 回源Host，仅当OriginType=self时可以设置。
-不填写，表示使用已有配置。
-   */
-  HostHeader?: string
-}
-
-/**
  * DownloadL4Logs返回参数结构体
  */
 export interface DownloadL4LogsResponse {
@@ -5564,9 +5472,17 @@ export interface ModifyApplicationProxyStatusRequest {
 }
 
 /**
- * DeleteOriginGroup返回参数结构体
+ * DescribeZones返回参数结构体
  */
-export interface DeleteOriginGroupResponse {
+export interface DescribeZonesResponse {
+  /**
+   * 符合条件的站点个数。
+   */
+  TotalCount?: number
+  /**
+   * 站点详细信息。
+   */
+  Zones?: Array<Zone>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5687,13 +5603,9 @@ export interface PartialModule {
 }
 
 /**
- * CreateOriginGroup返回参数结构体
+ * ModifyHostsCertificate返回参数结构体
  */
-export interface CreateOriginGroupResponse {
-  /**
-   * 源站组ID。
-   */
-  OriginGroupId: string
+export interface ModifyHostsCertificateResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6146,21 +6058,43 @@ export interface FailReason {
 export type DescribeRulesSettingRequest = null
 
 /**
- * DescribeZones返回参数结构体
+ * 离线日志详细信息
  */
-export interface DescribeZonesResponse {
+export interface L4OfflineLog {
   /**
-   * 符合条件的站点个数。
+   * 四层代理实例 ID。
    */
-  TotalCount?: number
+  ProxyId?: string
   /**
-   * 站点详细信息。
+   * 日志所属区域，取值有：
+<li>mainland：中国大陆境内;</li>
+<li>overseas：全球（不含中国大陆）。</li>
    */
-  Zones?: Array<Zone>
+  Area?: string
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 离线日志数据包名。
    */
-  RequestId?: string
+  LogPacketName?: string
+  /**
+   * 离线日志下载地址。
+   */
+  Url?: string
+  /**
+   * 日志打包时间，此参数已经废弃。
+   */
+  LogTime?: number
+  /**
+   * 日志打包开始时间。
+   */
+  LogStartTime?: string
+  /**
+   * 日志打包结束时间。
+   */
+  LogEndTime?: string
+  /**
+   * 日志大小，单位为 Byte。
+   */
+  Size?: number
 }
 
 /**
@@ -6542,42 +6476,6 @@ export interface Quota {
 }
 
 /**
- * CreateOriginGroup请求参数结构体
- */
-export interface CreateOriginGroupRequest {
-  /**
-   * 站点ID。
-   */
-  ZoneId: string
-  /**
-   * 源站类型，取值有：
-<li>self：自有源站；</li>
-<li>third_party：第三方源站；</li>
-<li>cos：腾讯云COS源站。</li>
-   */
-  OriginType: string
-  /**
-   * 源站组名称。
-   */
-  OriginGroupName: string
-  /**
-   * 源站配置类型，当OriginType=self时，取值有：
-<li>area：按区域配置；</li>
-<li>weight： 按权重配置；</li>
-<li>proto： 按HTTP协议配置。</li>当OriginType=third_party/cos时放空。
-   */
-  ConfigurationType: string
-  /**
-   * 源站记录信息。
-   */
-  OriginRecords: Array<OriginRecord>
-  /**
-   * 回源Host，仅当OriginType=self时可以设置。
-   */
-  HostHeader?: string
-}
-
-/**
  * DescribeTimingL4Data请求参数结构体
  */
 export interface DescribeTimingL4DataRequest {
@@ -6694,29 +6592,6 @@ export interface CreateSharedCNAMEResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * 该结构体表示各种场景、模式下，用于验证用户对站点域名的归属权内容。
- */
-export interface OwnershipVerification {
-  /**
-   * CNAME 接入，使用 DNS 解析验证时所需的信息。详情参考 [站点/域名归属权验证
-](https://cloud.tencent.com/document/product/1552/70789#7af6ecf8-afca-4e35-8811-b5797ed1bde5)。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  DnsVerification?: DnsVerification
-  /**
-   * CNAME 接入，使用文件验证时所需的信息。详情参考 [站点/域名归属权验证
-](https://cloud.tencent.com/document/product/1552/70789#7af6ecf8-afca-4e35-8811-b5797ed1bde5)。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  FileVerification?: FileVerification
-  /**
-   * NS 接入，切换 DNS 服务器所需的信息。详情参考 [修改 DNS 服务器](https://cloud.tencent.com/document/product/1552/90452)。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  NsVerification?: NsVerification
 }
 
 /**

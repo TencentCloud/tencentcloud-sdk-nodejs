@@ -26,6 +26,7 @@ import {
   DescribeDatasourceConnectionResponse,
   PrestoMonitorMetrics,
   DescribeNotebookSessionStatementRequest,
+  SmartOptimizerIndexPolicy,
   ModifyDataEngineDescriptionRequest,
   CancelNotebookSessionStatementRequest,
   DescribeDatabasesRequest,
@@ -34,7 +35,7 @@ import {
   DescribeUserDataEngineConfigResponse,
   ListTaskJobLogDetailResponse,
   Asset,
-  SparkSessionBatchLogOperate,
+  GetOptimizerPolicyRequest,
   PythonSparkImage,
   DeleteDataEngineResponse,
   RenewDataEngineResponse,
@@ -125,6 +126,7 @@ import {
   LockComponentInfo,
   DescribeNotebookSessionsResponse,
   DescribeDMSPartitionsRequest,
+  SmartOptimizerWrittenPolicy,
   TPartition,
   DescribeForbiddenTableProRequest,
   CreateDataEngineResponse,
@@ -141,6 +143,7 @@ import {
   CreateDataEngineRequest,
   ModifySparkAppBatchRequest,
   DescribeDataEnginePythonSparkImagesRequest,
+  SmartOptimizerPolicy,
   CreateTaskRequest,
   DescribeNotebookSessionRequest,
   UpgradeDataEngineImageRequest,
@@ -156,14 +159,16 @@ import {
   TasksOverview,
   ModifyGovernEventRuleRequest,
   DescribeSparkAppJobResponse,
+  SmartOptimizerLifecyclePolicy,
   CreateExportTaskResponse,
   AddUsersToWorkGroupRequest,
   DescribeStoreLocationRequest,
   AddUsersToWorkGroupResponse,
+  SwitchDataEngineImageRequest,
   DescribeNotebookSessionLogRequest,
   DescribeUserRolesResponse,
   CreateExportTaskRequest,
-  Users,
+  GetOptimizerPolicyResponse,
   DescribeNotebookSessionStatementResponse,
   ReportHeartbeatMetaDataResponse,
   DataEngineConfigPair,
@@ -181,6 +186,7 @@ import {
   UpgradeDataEngineImageResponse,
   ModifyUserRequest,
   DMSSds,
+  WorkGroupInfo,
   CreateSparkAppTaskResponse,
   CancelTaskRequest,
   StreamingStatistics,
@@ -202,10 +208,12 @@ import {
   KafkaInfo,
   CreateImportTaskResponse,
   NotebookSessionInfo,
+  ResourceInfo,
   Execution,
   CreateTableResponse,
-  WorkGroupInfo,
+  SparkSessionBatchLogOperate,
   CreateNotebookSessionStatementSupportBatchSQLResponse,
+  SmartPolicy,
   CreateScriptRequest,
   BindWorkGroupsToUserRequest,
   Column,
@@ -237,13 +245,14 @@ import {
   DescribeWorkGroupInfoResponse,
   CheckDataEngineImageCanBeRollbackResponse,
   SwitchDataEngineImageResponse,
-  SwitchDataEngineImageRequest,
+  SmartPolicyBaseInfo,
   DeleteNotebookSessionResponse,
   CreateStoreLocationRequest,
   DMSTableInfo,
   DescribeNotebookSessionStatementsResponse,
   AttachUserPolicyResponse,
   DescribeLakeFsInfoResponse,
+  FavorInfo,
   DropDMSTableRequest,
   CancelSparkSessionBatchSQLResponse,
   DescribeNotebookSessionStatementSqlResultResponse,
@@ -253,6 +262,7 @@ import {
   SuspendResumeDataEngineResponse,
   DescribeDMSPartitionsResponse,
   DeleteDataEngineRequest,
+  Users,
   TasksInfo,
   DataEngineImageVersion,
   CreateSparkSessionBatchSQLResponse,
@@ -1070,6 +1080,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeTableResponse) => void
   ): Promise<DescribeTableResponse> {
     return this.request("DescribeTable", req, cb)
+  }
+
+  /**
+   * GetOptimizerPolicy
+   */
+  async GetOptimizerPolicy(
+    req: GetOptimizerPolicyRequest,
+    cb?: (error: string, rep: GetOptimizerPolicyResponse) => void
+  ): Promise<GetOptimizerPolicyResponse> {
+    return this.request("GetOptimizerPolicy", req, cb)
   }
 
   /**

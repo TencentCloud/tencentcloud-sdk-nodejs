@@ -208,6 +208,16 @@ it("trp.v20210515.ModifyTraceData", async function () {
     }
 })
 
+it("trp.v20210515.DescribeCodeBatches", async function () {
+    try {
+       const data = await client.DescribeCodeBatches({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("trp.v20210515.ModifyProduct", async function () {
     try {
        const data = await client.ModifyProduct({})

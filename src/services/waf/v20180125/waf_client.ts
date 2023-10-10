@@ -18,24 +18,30 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  ModifyUserLevelResponse,
   CreateAccessExportRequest,
   ModifyHostRequest,
   CdcCluster,
+  ModifyUserLevelRequest,
   DescribeAntiInfoLeakRulesResponse,
   DescribeIpHitItemsResponse,
   DescribeCustomRulesRspRuleListItem,
   ModifyAntiInfoLeakRulesResponse,
+  ModifyWebshellStatusRequest,
   DescribeCertificateVerifyResultRequest,
   DescribeUserCdcClbWafRegionsRequest,
+  UpsertIpAccessControlRequest,
   IpHitItemsData,
   DeleteAttackDownloadRecordResponse,
+  TLSCiphers,
   AddAntiFakeUrlRequest,
   DescribeFlowTrendRequest,
+  WebshellStatus,
   DescribeWafAutoDenyStatusRequest,
   AddCustomWhiteRuleResponse,
   SearchAttackLogRequest,
   ModifyHostFlowModeResponse,
-  DomainPackageNew,
+  DescribeUserSignatureRuleResponse,
   DescribeCustomWhiteRuleResponse,
   AccessLogItems,
   SwitchElasticModeRequest,
@@ -60,14 +66,15 @@ import {
   ModifyInstanceQpsLimitRequest,
   DeleteHostRequest,
   DescribeCertificateVerifyResultResponse,
+  ModifyUserSignatureRuleResponse,
   DescribeAntiInfoLeakRulesStrategyItem,
-  ModifyInstanceNameResponse,
+  ModifyApiAnalyzeStatusRequest,
   UpsertSessionResponse,
   AccessLogItem,
   DescribeDomainVerifyResultResponse,
   DeleteSessionRequest,
   DescribeWafAutoDenyRulesRequest,
-  UpsertIpAccessControlRequest,
+  ModifyWafAutoDenyRulesRequest,
   GenerateDealsAndPayNewRequest,
   RefreshAccessCheckResultRequest,
   DescribeUserClbWafRegionsRequest,
@@ -82,10 +89,11 @@ import {
   GetAttackTotalCountResponse,
   DescribeAntiInfoLeakageRulesResponse,
   SessionItem,
+  ModifyInstanceNameResponse,
   MajorEventsPkg,
   ModifySpartaProtectionResponse,
   ModifyHostFlowModeRequest,
-  UpsertCCRuleResponse,
+  DescribeDomainRulesRequest,
   DeleteDownloadRecordRequest,
   DescribeUserCdcClbWafRegionsResponse,
   GetAttackHistogramRequest,
@@ -135,6 +143,7 @@ import {
   AccessRuleInfo,
   HostRecord,
   CreateHostRequest,
+  SearchAttackLogResponse,
   UserDomainInfo,
   FreshAntiFakeUrlRequest,
   DescribeFindDomainListResponse,
@@ -171,6 +180,7 @@ import {
   ModifyAntiFakeUrlRequest,
   DescribeDomainDetailsClbRequest,
   DeleteDomainWhiteRulesRequest,
+  UpsertCCRuleResponse,
   DescribeDomainVerifyResultRequest,
   DescribeTlsVersionRequest,
   DescribeCiphersDetailResponse,
@@ -220,16 +230,17 @@ import {
   DeleteIpAccessControlResponse,
   ModifyCustomWhiteRuleRequest,
   DescribeWafInfoResponse,
+  DescribeDomainRulesResponse,
   AccessLogInfo,
   BatchIpAccessControlItem,
   InstanceInfo,
   WafRuleLimit,
-  TLSCiphers,
+  Strategy,
   ModifyInstanceRenewFlagRequest,
   DescribeBatchIpAccessControlResponse,
   DescribeDomainDetailsSaasResponse,
   AccessKeyValueInfo,
-  ModifyApiAnalyzeStatusRequest,
+  DomainPackageNew,
   AddCustomRuleRequest,
   DescribeWafAutoDenyRulesResponse,
   FraudPkg,
@@ -245,18 +256,19 @@ import {
   DescribeAccessFastAnalysisResponse,
   DescribeDomainsResponse,
   DescribeFindDomainListRequest,
+  SearchAccessLogRequest,
   ModifyAntiFakeUrlStatusResponse,
   DescribeHostsRequest,
   ModifyInstanceElasticModeRequest,
   AutoDenyDetail,
   UpsertCCRuleRequest,
-  ResponseCode,
+  ModifyModuleStatusResponse,
   ModifyCustomWhiteRuleStatusRequest,
   DeleteAntiFakeUrlRequest,
   CacheUrlItems,
   ModifyInstanceQpsLimitResponse,
-  SearchAttackLogResponse,
-  Strategy,
+  ReqUserRule,
+  ModifyWebshellStatusResponse,
   AccessFullTextInfo,
   DeleteAntiInfoLeakRuleRequest,
   ModifyInstanceElasticModeResponse,
@@ -266,6 +278,7 @@ import {
   DescribeCCRuleRequest,
   ModifyDomainsCLSStatusRequest,
   DescribeCCRuleListResponse,
+  ModifyModuleStatusRequest,
   DescribeRuleLimitRequest,
   TargetEntity,
   CCRuleItem,
@@ -291,19 +304,21 @@ import {
   DeleteSessionResponse,
   UpsertSessionRequest,
   DownloadAttackRecordInfo,
+  Rule,
   DescribeRuleLimitResponse,
   DescribeWafThreatenIntelligenceRequest,
   DescribeAccessIndexResponse,
   DescribeAccessExportsResponse,
   DeleteCustomRuleResponse,
-  ModifyWafAutoDenyRulesRequest,
+  ModifyUserSignatureRuleRequest,
+  DescribeUserSignatureRuleRequest,
   BotStatPointItem,
   ClbDomainsInfo,
   DescribeHostResponse,
   DeleteCCRuleResponse,
   LogHistogramInfo,
   DomainURI,
-  SearchAccessLogRequest,
+  ResponseCode,
   ModifyAntiInfoLeakRuleStatusRequest,
   ModifySpartaProtectionModeRequest,
   AccessRuleKeyValueInfo,
@@ -314,6 +329,7 @@ import {
   ModifyHostStatusRequest,
   TLSVersion,
   ModifyCustomRuleResponse,
+  UserSignatureRule,
   LoadBalancer,
   RefreshAccessCheckResultResponse,
 } from "./waf_models"
@@ -1147,6 +1163,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 设置域名的webshell状态。
+   */
+  async ModifyWebshellStatus(
+    req: ModifyWebshellStatusRequest,
+    cb?: (error: string, rep: ModifyWebshellStatusResponse) => void
+  ): Promise<ModifyWebshellStatusResponse> {
+    return this.request("ModifyWebshellStatus", req, cb)
+  }
+
+  /**
    * 信息防泄漏切换规则开关
    */
   async ModifyAntiInfoLeakRuleStatus(
@@ -1287,6 +1313,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 修改用户防护规则，开启关闭具体的某条规则
+   */
+  async ModifyUserSignatureRule(
+    req: ModifyUserSignatureRuleRequest,
+    cb?: (error: string, rep: ModifyUserSignatureRuleResponse) => void
+  ): Promise<ModifyUserSignatureRuleResponse> {
+    return this.request("ModifyUserSignatureRule", req, cb)
+  }
+
+  /**
    * clb-waf 设置防护域名的流量模式
    */
   async ModifyHostFlowMode(
@@ -1304,6 +1340,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyInstanceNameResponse) => void
   ): Promise<ModifyInstanceNameResponse> {
     return this.request("ModifyInstanceName", req, cb)
+  }
+
+  /**
+   * 设置某个domain下基础安全模块的开关
+   */
+  async ModifyModuleStatus(
+    req?: ModifyModuleStatusRequest,
+    cb?: (error: string, rep: ModifyModuleStatusResponse) => void
+  ): Promise<ModifyModuleStatusResponse> {
+    return this.request("ModifyModuleStatus", req, cb)
   }
 
   /**
@@ -1417,6 +1463,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取用户特征规则列表
+   */
+  async DescribeUserSignatureRule(
+    req: DescribeUserSignatureRuleRequest,
+    cb?: (error: string, rep: DescribeUserSignatureRuleResponse) => void
+  ): Promise<DescribeUserSignatureRuleResponse> {
+    return this.request("DescribeUserSignatureRule", req, cb)
+  }
+
+  /**
    * 刷新防篡改url
    */
   async FreshAntiFakeUrl(
@@ -1424,6 +1480,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: FreshAntiFakeUrlResponse) => void
   ): Promise<FreshAntiFakeUrlResponse> {
     return this.request("FreshAntiFakeUrl", req, cb)
+  }
+
+  /**
+   * 拉取域名的防护规则列表
+   */
+  async DescribeDomainRules(
+    req: DescribeDomainRulesRequest,
+    cb?: (error: string, rep: DescribeDomainRulesResponse) => void
+  ): Promise<DescribeDomainRulesResponse> {
+    return this.request("DescribeDomainRules", req, cb)
   }
 
   /**
@@ -1444,5 +1510,15 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyDomainIpv6StatusResponse) => void
   ): Promise<ModifyDomainIpv6StatusResponse> {
     return this.request("ModifyDomainIpv6Status", req, cb)
+  }
+
+  /**
+   * 修改用户防护规则等级
+   */
+  async ModifyUserLevel(
+    req: ModifyUserLevelRequest,
+    cb?: (error: string, rep: ModifyUserLevelResponse) => void
+  ): Promise<ModifyUserLevelResponse> {
+    return this.request("ModifyUserLevel", req, cb)
   }
 }

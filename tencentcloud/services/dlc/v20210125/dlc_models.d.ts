@@ -233,6 +233,16 @@ export interface DescribeNotebookSessionStatementRequest {
     TaskId?: string;
 }
 /**
+ * SmartOptimizerIndexPolicy
+ */
+export interface SmartOptimizerIndexPolicy {
+    /**
+     * 开启索引
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IndexEnable?: string;
+}
+/**
  * ModifyDataEngineDescription请求参数结构体
  */
 export interface ModifyDataEngineDescriptionRequest {
@@ -426,24 +436,13 @@ export interface Asset {
     DatasourceId?: number;
 }
 /**
- * SparkSQL批任务日志操作信息。
+ * GetOptimizerPolicy请求参数结构体
  */
-export interface SparkSessionBatchLogOperate {
+export interface GetOptimizerPolicyRequest {
     /**
-     * 操作提示
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 策略描述
      */
-    Text?: string;
-    /**
-     * 操作类型：COPY、LOG、UI、RESULT、List、TAB
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Operate?: string;
-    /**
-     * 补充信息：如：taskid、sessionid、sparkui等
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Supplement?: Array<KVPair>;
+    SmartPolicy: SmartPolicy;
 }
 /**
  * python-spark镜像信息。
@@ -2556,6 +2555,10 @@ export interface DescribeDMSPartitionsRequest {
     Expression?: string;
 }
 /**
+ * SmartOptimizerWrittenPolicy
+ */
+export declare type SmartOptimizerWrittenPolicy = null;
+/**
  * 表分区字段信息
  */
 export interface TPartition {
@@ -2994,6 +2997,36 @@ export interface DescribeDataEnginePythonSparkImagesRequest {
     ChildImageVersionId: string;
 }
 /**
+ * SmartOptimizerPolicy
+ */
+export interface SmartOptimizerPolicy {
+    /**
+     * 是否继承
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Inherit?: string;
+    /**
+     * ResourceInfo
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Resources?: Array<ResourceInfo>;
+    /**
+     * SmartOptimizerWrittenPolicy
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Written?: SmartOptimizerWrittenPolicy;
+    /**
+     * SmartOptimizerLifecyclePolicy
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Lifecycle?: SmartOptimizerLifecyclePolicy;
+    /**
+     * SmartOptimizerIndexPolicy
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Index?: SmartOptimizerIndexPolicy;
+}
+/**
  * CreateTask请求参数结构体
  */
 export interface CreateTaskRequest {
@@ -3253,6 +3286,26 @@ export interface DescribeSparkAppJobResponse {
     RequestId?: string;
 }
 /**
+ * SmartOptimizerLifecyclePolicy
+ */
+export interface SmartOptimizerLifecyclePolicy {
+    /**
+     * 生命周期启用
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    LifecycleEnable?: string;
+    /**
+     * 过期时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Expiration?: number;
+    /**
+     * 是否删表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DropTable?: boolean;
+}
+/**
  * CreateExportTask返回参数结构体
  */
 export interface CreateExportTaskResponse {
@@ -3287,6 +3340,10 @@ export interface AddUsersToWorkGroupResponse {
      */
     RequestId?: string;
 }
+/**
+ * SwitchDataEngineImage请求参数结构体
+ */
+export declare type SwitchDataEngineImageRequest = null;
 /**
  * DescribeNotebookSessionLog请求参数结构体
  */
@@ -3343,19 +3400,17 @@ export interface CreateExportTaskRequest {
     OutputType?: string;
 }
 /**
- * 用户信息集合
+ * GetOptimizerPolicy返回参数结构体
  */
-export interface Users {
+export interface GetOptimizerPolicyResponse {
     /**
-     * 用户信息集合
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 智能优化策略
      */
-    UserSet: Array<UserMessage>;
+    SmartOptimizerPolicy?: SmartOptimizerPolicy;
     /**
-     * 用户总数
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
-    TotalCount: number;
+    RequestId?: string;
 }
 /**
  * DescribeNotebookSessionStatement返回参数结构体
@@ -3530,6 +3585,11 @@ export interface TableBaseInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     DbGovernPolicyIsDisable?: string;
+    /**
+     * 智能数据治理配置项
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SmartPolicy?: SmartPolicy;
 }
 /**
  * hive类型数据源的信息
@@ -4142,6 +4202,46 @@ export interface DMSSds {
     SortColumns?: Array<DMSColumnOrder>;
 }
 /**
+ * 工作组信息
+ */
+export interface WorkGroupInfo {
+    /**
+     * 查询到的工作组唯一Id
+     */
+    WorkGroupId: number;
+    /**
+     * 工作组名称
+     */
+    WorkGroupName: string;
+    /**
+     * 工作组描述
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    WorkGroupDescription: string;
+    /**
+     * 工作组关联的用户数量
+     */
+    UserNum: number;
+    /**
+     * 工作组关联的用户集合
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    UserSet: Array<UserMessage>;
+    /**
+     * 工作组绑定的权限集合
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PolicySet: Array<Policy>;
+    /**
+     * 工作组的创建人
+     */
+    Creator: string;
+    /**
+     * 工作组的创建时间，形如2021-07-28 16:19:32
+     */
+    CreateTime: string;
+}
+/**
  * CreateSparkAppTask返回参数结构体
  */
 export interface CreateSparkAppTaskResponse {
@@ -4698,6 +4798,41 @@ export interface NotebookSessionInfo {
     ExecutorMaxNumbers?: number;
 }
 /**
+ * ResourceInfo
+ */
+export interface ResourceInfo {
+    /**
+     * 归属类型
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AttributionType?: string;
+    /**
+     * 资源类型
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ResourceType?: string;
+    /**
+     * 引擎名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Name?: string;
+    /**
+     * 如资源类型为spark-sql 取值为Name, 如为spark-batch 取值为session app_name
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Instance?: string;
+    /**
+     * 亲和性
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Favor?: Array<FavorInfo>;
+    /**
+     * 状态
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Status?: number;
+}
+/**
  * SQL语句对象
  */
 export interface Execution {
@@ -4720,44 +4855,24 @@ export interface CreateTableResponse {
     RequestId?: string;
 }
 /**
- * 工作组信息
+ * SparkSQL批任务日志操作信息。
  */
-export interface WorkGroupInfo {
+export interface SparkSessionBatchLogOperate {
     /**
-     * 查询到的工作组唯一Id
-     */
-    WorkGroupId: number;
-    /**
-     * 工作组名称
-     */
-    WorkGroupName: string;
-    /**
-     * 工作组描述
+     * 操作提示
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    WorkGroupDescription: string;
+    Text?: string;
     /**
-     * 工作组关联的用户数量
-     */
-    UserNum: number;
-    /**
-     * 工作组关联的用户集合
+     * 操作类型：COPY、LOG、UI、RESULT、List、TAB
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    UserSet: Array<UserMessage>;
+    Operate?: string;
     /**
-     * 工作组绑定的权限集合
+     * 补充信息：如：taskid、sessionid、sparkui等
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    PolicySet: Array<Policy>;
-    /**
-     * 工作组的创建人
-     */
-    Creator: string;
-    /**
-     * 工作组的创建时间，形如2021-07-28 16:19:32
-     */
-    CreateTime: string;
+    Supplement?: Array<KVPair>;
 }
 /**
  * CreateNotebookSessionStatementSupportBatchSQL返回参数结构体
@@ -4771,6 +4886,21 @@ export interface CreateNotebookSessionStatementSupportBatchSQLResponse {
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * SmartPolicyRequest
+ */
+export interface SmartPolicy {
+    /**
+     * 基础信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    BaseInfo?: SmartPolicyBaseInfo;
+    /**
+     * 策略描述
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Policy?: SmartOptimizerPolicy;
 }
 /**
  * CreateScript请求参数结构体
@@ -5346,9 +5476,40 @@ export interface SwitchDataEngineImageResponse {
     RequestId?: string;
 }
 /**
- * SwitchDataEngineImage请求参数结构体
+ * SmartPolicyBaseInfo
  */
-export declare type SwitchDataEngineImageRequest = null;
+export interface SmartPolicyBaseInfo {
+    /**
+     * 用户uin
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Uin: string;
+    /**
+     * Catalog/Database/Table
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PolicyType?: string;
+    /**
+     * Catalog名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Catalog?: string;
+    /**
+     * 数据库名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Database?: string;
+    /**
+     * 表名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Table?: string;
+    /**
+     * 用户appid
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AppId?: string;
+}
 /**
  * DeleteNotebookSession返回参数结构体
  */
@@ -5412,6 +5573,31 @@ export interface DescribeLakeFsInfoResponse {
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * FavorInfo
+ */
+export interface FavorInfo {
+    /**
+     * 优先事项
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Priority?: number;
+    /**
+     * Catalog名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Catalog?: string;
+    /**
+     * DataBase名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DataBase?: string;
+    /**
+     * Table名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Table?: string;
 }
 /**
  * DropDMSTable请求参数结构体
@@ -5638,6 +5824,21 @@ export interface DeleteDataEngineRequest {
      * 删除虚拟集群的名称数组
      */
     DataEngineNames: Array<string>;
+}
+/**
+ * 用户信息集合
+ */
+export interface Users {
+    /**
+     * 用户信息集合
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    UserSet: Array<UserMessage>;
+    /**
+     * 用户总数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TotalCount: number;
 }
 /**
  * 批量顺序执行任务集合

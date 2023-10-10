@@ -104,6 +104,26 @@ export interface TaskGroupAction {
     TaskGroupActionExecuteTime?: number;
 }
 /**
+ * 应用性能观测产品中应用信息
+ */
+export interface ApmServiceInfo {
+    /**
+     * 业务ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InstanceId: string;
+    /**
+     * 应用名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ServiceNameList: Array<string>;
+    /**
+     * 地域ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RegionId?: number;
+}
+/**
  * 机器选取规则
  */
 export interface TaskGroupInstancesExecuteRules {
@@ -327,6 +347,16 @@ export interface Template {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     TemplateSource?: number;
+    /**
+     * apm应用信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ApmServiceList?: Array<ApmServiceInfo>;
+    /**
+     * 告警指标
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AlarmPolicy?: Array<string>;
 }
 /**
  * DescribeTaskExecuteLogs请求参数结构体
@@ -352,12 +382,12 @@ export interface DescribeTaskResponse {
     /**
      * 任务信息
      */
-    Task: Task;
+    Task?: Task;
     /**
      * 任务对应的演练报告信息，null表示未导出报告
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ReportInfo: TaskReportInfo;
+    ReportInfo?: TaskReportInfo;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -391,7 +421,7 @@ export interface DescribeTemplateResponse {
     /**
      * 经验库详情
      */
-    Template: Template;
+    Template?: Template;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -825,6 +855,26 @@ export interface Task {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     TaskPlanTitle?: string;
+    /**
+     * 关联的应用ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ApplicationId?: string;
+    /**
+     * 关联的应用名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ApplicationName?: string;
+    /**
+     * 关联的告警指标
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AlarmPolicy?: Array<string>;
+    /**
+     * 关联的APM服务
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ApmServiceList?: Array<ApmServiceInfo>;
 }
 /**
  * 演练报告状态信息
@@ -910,6 +960,18 @@ export interface DescribeTaskListRequest {
      * 筛选条件
      */
     Filters?: Array<ActionFilter>;
+    /**
+     * 演练ID
+     */
+    TaskId?: Array<number | bigint>;
+    /**
+     * 关联应用ID筛选
+     */
+    ApplicationId?: Array<string>;
+    /**
+     * 关联应用筛选
+     */
+    ApplicationName?: Array<string>;
 }
 /**
  * 任务列表信息
@@ -959,6 +1021,16 @@ export interface TaskListItem {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     TaskExpect?: number;
+    /**
+     * 关联应用ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ApplicationId?: string;
+    /**
+     * 关联应用名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ApplicationName?: string;
 }
 /**
  * ExecuteTaskInstance返回参数结构体

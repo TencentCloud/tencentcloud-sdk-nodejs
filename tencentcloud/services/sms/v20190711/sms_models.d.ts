@@ -18,7 +18,7 @@ export interface DeleteSmsTemplateResponse {
     /**
      * 删除模板响应
      */
-    DeleteTemplateStatus: DeleteTemplateStatus;
+    DeleteTemplateStatus?: DeleteTemplateStatus;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -31,7 +31,7 @@ export interface ModifySmsTemplateResponse {
     /**
      * 修改模板参数响应
      */
-    ModifyTemplateStatus: ModifyTemplateStatus;
+    ModifyTemplateStatus?: ModifyTemplateStatus;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -179,7 +179,7 @@ export interface DescribeSmsTemplateListResponse {
     /**
      * 获取短信模板信息响应
      */
-    DescribeTemplateStatusSet: Array<DescribeTemplateListStatus>;
+    DescribeTemplateStatusSet?: Array<DescribeTemplateListStatus>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -314,7 +314,7 @@ export interface CallbackStatusStatisticsResponse {
     /**
      * 回执数据统计响应包体。
      */
-    CallbackStatusStatistics: CallbackStatusStatistics;
+    CallbackStatusStatistics?: CallbackStatusStatistics;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -458,7 +458,7 @@ export interface SendStatusStatisticsResponse {
     /**
      * 发送数据统计响应包体。
      */
-    SendStatusStatistics: SendStatusStatistics;
+    SendStatusStatistics?: SendStatusStatistics;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -631,7 +631,7 @@ export interface AddSmsTemplateResponse {
     /**
      * 添加短信模板响应包体
      */
-    AddTemplateStatus: AddTemplateStatus;
+    AddTemplateStatus?: AddTemplateStatus;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -681,7 +681,7 @@ export interface DescribeSmsSignListResponse {
     /**
      * 获取签名信息响应
      */
-    DescribeSignListStatusSet: Array<DescribeSignListStatus>;
+    DescribeSignListStatusSet?: Array<DescribeSignListStatus>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -787,7 +787,7 @@ export interface PullSmsReplyStatusByPhoneNumberResponse {
     /**
      * 回复状态响应集合。
      */
-    PullSmsReplyStatusSet: Array<PullSmsReplyStatus>;
+    PullSmsReplyStatusSet?: Array<PullSmsReplyStatus>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -833,7 +833,7 @@ export interface DeleteSmsSignResponse {
     /**
      * 删除签名响应
      */
-    DeleteSignStatus: DeleteSignStatus;
+    DeleteSignStatus?: DeleteSignStatus;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -846,7 +846,7 @@ export interface AddSmsSignResponse {
     /**
      * 添加签名响应
      */
-    AddSignStatus: AddSignStatus;
+    AddSignStatus?: AddSignStatus;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -947,7 +947,7 @@ export interface SmsPackagesStatisticsResponse {
     /**
      * 发送数据统计响应包体。
      */
-    SmsPackagesStatisticsSet: Array<SmsPackagesStatistics>;
+    SmsPackagesStatisticsSet?: Array<SmsPackagesStatistics>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -959,10 +959,12 @@ export interface SmsPackagesStatisticsResponse {
 export interface DeleteSignStatus {
     /**
      * 删除状态信息。
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     DeleteStatus: string;
     /**
      * 删除时间，UNIX 时间戳（单位：秒）。
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     DeleteTime: number;
 }
@@ -973,7 +975,7 @@ export interface PullSmsReplyStatusResponse {
     /**
      * 回复状态响应集合。
      */
-    PullSmsReplyStatusSet: Array<PullSmsReplyStatus>;
+    PullSmsReplyStatusSet?: Array<PullSmsReplyStatus>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */

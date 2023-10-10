@@ -523,6 +523,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("GenerateDealsAndPayNew", req, cb);
     }
     /**
+     * 设置域名的webshell状态。
+     */
+    async ModifyWebshellStatus(req, cb) {
+        return this.request("ModifyWebshellStatus", req, cb);
+    }
+    /**
      * 信息防泄漏切换规则开关
      */
     async ModifyAntiInfoLeakRuleStatus(req, cb) {
@@ -607,6 +613,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeInstances", req, cb);
     }
     /**
+     * 修改用户防护规则，开启关闭具体的某条规则
+     */
+    async ModifyUserSignatureRule(req, cb) {
+        return this.request("ModifyUserSignatureRule", req, cb);
+    }
+    /**
      * clb-waf 设置防护域名的流量模式
      */
     async ModifyHostFlowMode(req, cb) {
@@ -617,6 +629,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ModifyInstanceName(req, cb) {
         return this.request("ModifyInstanceName", req, cb);
+    }
+    /**
+     * 设置某个domain下基础安全模块的开关
+     */
+    async ModifyModuleStatus(req, cb) {
+        return this.request("ModifyModuleStatus", req, cb);
     }
     /**
      * 在CDC场景下，负载均衡型WAF的添加、编辑域名配置的时候，需要展示CDC负载均衡型WAF（cdc-clb-waf)支持的地域列表，通过DescribeUserCdcClbWafRegions既可以获得当前对客户已经开放的地域列表
@@ -685,10 +703,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UpsertSession", req, cb);
     }
     /**
+     * 获取用户特征规则列表
+     */
+    async DescribeUserSignatureRule(req, cb) {
+        return this.request("DescribeUserSignatureRule", req, cb);
+    }
+    /**
      * 刷新防篡改url
      */
     async FreshAntiFakeUrl(req, cb) {
         return this.request("FreshAntiFakeUrl", req, cb);
+    }
+    /**
+     * 拉取域名的防护规则列表
+     */
+    async DescribeDomainRules(req, cb) {
+        return this.request("DescribeDomainRules", req, cb);
     }
     /**
      * 增加域名规则白名单
@@ -701,6 +731,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ModifyDomainIpv6Status(req, cb) {
         return this.request("ModifyDomainIpv6Status", req, cb);
+    }
+    /**
+     * 修改用户防护规则等级
+     */
+    async ModifyUserLevel(req, cb) {
+        return this.request("ModifyUserLevel", req, cb);
     }
 }
 exports.Client = Client;

@@ -20,6 +20,7 @@ import { ClientConfig } from "../../../common/interface"
 import {
   ModifyTaskRunStatusResponse,
   TaskGroupAction,
+  ApmServiceInfo,
   TaskGroupInstancesExecuteRules,
   TaskConfig,
   DeleteTaskRequest,

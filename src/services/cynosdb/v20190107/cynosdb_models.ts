@@ -3957,7 +3957,7 @@ cpu最大值，可选范围参考DescribeServerlessInstanceSpecs接口返回
    */
   DealMode?: number
   /**
-   * 参数模版ID，可以通过查询参数模板信息DescribeParamTemplates获得参数模板ID
+   * 参数模板ID，可以通过查询参数模板信息DescribeParamTemplates获得参数模板ID
    */
   ParamTemplateId?: number
   /**

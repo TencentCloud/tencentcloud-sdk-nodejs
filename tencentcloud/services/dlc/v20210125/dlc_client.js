@@ -466,6 +466,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeTable", req, cb);
     }
     /**
+     * GetOptimizerPolicy
+     */
+    async GetOptimizerPolicy(req, cb) {
+        return this.request("GetOptimizerPolicy", req, cb);
+    }
+    /**
      * 获取用户详细信息
      */
     async DescribeUserInfo(req, cb) {

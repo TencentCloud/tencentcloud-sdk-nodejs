@@ -34,12 +34,6 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyApplicationProxyRule", req, cb);
     }
     /**
-     * 删除源站组
-     */
-    async DeleteOriginGroup(req, cb) {
-        return this.request("DeleteOriginGroup", req, cb);
-    }
-    /**
      * 创建共享 CNAME
      */
     async CreateSharedCNAME(req, cb) {
@@ -58,12 +52,6 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CreatePurgeTask(req, cb) {
         return this.request("CreatePurgeTask", req, cb);
-    }
-    /**
-     * 创建源站组
-     */
-    async CreateOriginGroup(req, cb) {
-        return this.request("CreateOriginGroup", req, cb);
     }
     /**
      * 创建安全 IP 组
@@ -202,12 +190,6 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeAccelerationDomains(req, cb) {
         return this.request("DescribeAccelerationDomains", req, cb);
-    }
-    /**
-     * 修改源站组
-     */
-    async ModifyOriginGroup(req, cb) {
-        return this.request("ModifyOriginGroup", req, cb);
     }
     /**
      * 删除指定 IP 组，如果有规则引用了 IP 组情况，则不允许删除。

@@ -16,6 +16,16 @@
  */
 
 /**
+ * ModifyUserLevel返回参数结构体
+ */
+export interface ModifyUserLevelResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateAccessExport请求参数结构体
  */
 export interface CreateAccessExportRequest {
@@ -76,6 +86,20 @@ export interface CdcCluster {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Name: string
+}
+
+/**
+ * ModifyUserLevel请求参数结构体
+ */
+export interface ModifyUserLevelRequest {
+  /**
+   * 域名
+   */
+  Domain: string
+  /**
+   * 防护规则等级 300=standard，400=extended
+   */
+  Level: number
 }
 
 /**
@@ -173,6 +197,16 @@ export interface ModifyAntiInfoLeakRulesResponse {
 }
 
 /**
+ * ModifyWebshellStatus请求参数结构体
+ */
+export interface ModifyWebshellStatusRequest {
+  /**
+   * 域名webshell状态
+   */
+  Webshell: WebshellStatus
+}
+
+/**
  * DescribeCertificateVerifyResult请求参数结构体
  */
 export interface DescribeCertificateVerifyResultRequest {
@@ -204,6 +238,32 @@ export interface DescribeCertificateVerifyResultRequest {
 export type DescribeUserCdcClbWafRegionsRequest = null
 
 /**
+ * UpsertIpAccessControl请求参数结构体
+ */
+export interface UpsertIpAccessControlRequest {
+  /**
+   * 域名
+   */
+  Domain: string
+  /**
+   * ip 参数列表，json数组由ip，source，note，action，valid_ts组成。ip对应配置的ip地址，source固定为custom值，note为注释，action值42为黑名单，40为白名单，valid_ts为有效日期，值为秒级时间戳（（如1680570420代表2023-04-04 09:07:00））
+   */
+  Items: Array<string>
+  /**
+   * 实例Id
+   */
+  InstanceId?: string
+  /**
+   * WAF实例类型，sparta-waf表示SAAS型WAF，clb-waf表示负载均衡型WAF
+   */
+  Edition?: string
+  /**
+   * 是否为多域名黑白名单，当为多域名的黑白名单时，取值为batch，否则为空
+   */
+  SourceType?: string
+}
+
+/**
  * 封装参数
  */
 export interface IpHitItemsData {
@@ -225,6 +285,27 @@ export interface DeleteAttackDownloadRecordResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * TLS 加密套件
+ */
+export interface TLSCiphers {
+  /**
+   * TLS版本ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VersionId: number
+  /**
+   * 加密套件ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CipherId: number
+  /**
+   * 加密套件
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CipherName: string
 }
 
 /**
@@ -261,6 +342,20 @@ export interface DescribeFlowTrendRequest {
    * 结束时间戳，精度秒
    */
   EndTs: number
+}
+
+/**
+ * 域名的webshell开启状态
+ */
+export interface WebshellStatus {
+  /**
+   * 域名
+   */
+  Domain: string
+  /**
+   * webshell开关，1：开。0：关。2：观察
+   */
+  Status: number
 }
 
 /**
@@ -340,34 +435,22 @@ export interface ModifyHostFlowModeResponse {
 }
 
 /**
- * clb-waf 域名扩展套餐
+ * DescribeUserSignatureRule返回参数结构体
  */
-export interface DomainPackageNew {
+export interface DescribeUserSignatureRuleResponse {
   /**
-   * 资源ID
+   * 规则总数
+   */
+  Total: number
+  /**
+   * 规则列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ResourceIds: string
+  Rules: Array<UserSignatureRule>
   /**
-   * 过期时间
-注意：此字段可能返回 null，表示取不到有效值。
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  ValidTime: string
-  /**
-   * 是否自动续费，1：自动续费，0：不自动续费
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  RenewFlag: number
-  /**
-   * 套餐购买个数
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Count: number
-  /**
-   * 套餐购买地域，clb-waf暂时没有用到
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Region: string
+  RequestId?: string
 }
 
 /**
@@ -872,6 +955,16 @@ export interface DescribeCertificateVerifyResultResponse {
 }
 
 /**
+ * ModifyUserSignatureRule返回参数结构体
+ */
+export interface ModifyUserSignatureRuleResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeAntiInfoLeakRules返回的规则元素中的具体的规则元素
  */
 export interface DescribeAntiInfoLeakRulesStrategyItem {
@@ -890,17 +983,25 @@ export interface DescribeAntiInfoLeakRulesStrategyItem {
 }
 
 /**
- * ModifyInstanceName返回参数结构体
+ * ModifyApiAnalyzeStatus请求参数结构体
  */
-export interface ModifyInstanceNameResponse {
+export interface ModifyApiAnalyzeStatusRequest {
   /**
-   * 修改状态：0为成功
+   * 开关状态
    */
-  ModifyCode?: number
+  Status: number
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 域名
    */
-  RequestId?: string
+  Domain?: string
+  /**
+   * 实例id
+   */
+  InstanceId?: string
+  /**
+   * 需要批量开启的实体列表
+   */
+  TargetList?: Array<TargetEntity>
 }
 
 /**
@@ -985,29 +1086,29 @@ export interface DescribeWafAutoDenyRulesRequest {
 }
 
 /**
- * UpsertIpAccessControl请求参数结构体
+ * ModifyWafAutoDenyRules请求参数结构体
  */
-export interface UpsertIpAccessControlRequest {
+export interface ModifyWafAutoDenyRulesRequest {
   /**
    * 域名
    */
   Domain: string
   /**
-   * ip 参数列表，json数组由ip，source，note，action，valid_ts组成。ip对应配置的ip地址，source固定为custom值，note为注释，action值42为黑名单，40为白名单，valid_ts为有效日期，值为秒级时间戳（（如1680570420代表2023-04-04 09:07:00））
+   * 触发IP封禁的攻击次数阈值，范围为2~100次
    */
-  Items: Array<string>
+  AttackThreshold: number
   /**
-   * 实例Id
+   * IP封禁统计时间，范围为1-60分钟
    */
-  InstanceId?: string
+  TimeThreshold: number
   /**
-   * WAF实例类型，sparta-waf表示SAAS型WAF，clb-waf表示负载均衡型WAF
+   * 触发IP封禁后的封禁时间，范围为5~360分钟
    */
-  Edition?: string
+  DenyTimeThreshold: number
   /**
-   * 是否为多域名黑白名单，当为多域名的黑白名单时，取值为batch，否则为空
+   * 自动封禁状态，0表示关闭，1表示打开
    */
-  SourceType?: string
+  DefenseStatus: number
 }
 
 /**
@@ -1218,6 +1319,20 @@ export interface SessionItem {
 }
 
 /**
+ * ModifyInstanceName返回参数结构体
+ */
+export interface ModifyInstanceNameResponse {
+  /**
+   * 修改状态：0为成功
+   */
+  ModifyCode?: number
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 重保防护资源信息
  */
 export interface MajorEventsPkg {
@@ -1306,22 +1421,13 @@ export interface ModifyHostFlowModeRequest {
 }
 
 /**
- * UpsertCCRule返回参数结构体
+ * DescribeDomainRules请求参数结构体
  */
-export interface UpsertCCRuleResponse {
+export interface DescribeDomainRulesRequest {
   /**
-   * 一般为null
-注意：此字段可能返回 null，表示取不到有效值。
+   * 需要查询的域名
    */
-  Data?: string
-  /**
-   * 操作的RuleId
-   */
-  RuleId?: number
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  Domain?: string
 }
 
 /**
@@ -2419,6 +2525,36 @@ export interface CreateHostRequest {
 }
 
 /**
+ * SearchAttackLog返回参数结构体
+ */
+export interface SearchAttackLogResponse {
+  /**
+   * 当前返回的攻击日志条数
+   */
+  Count?: number
+  /**
+   * 接口升级，此字段无效，默认返回空字符串
+   */
+  Context?: string
+  /**
+   * 攻击日志数组条目内容
+   */
+  Data?: Array<AttackLogInfo>
+  /**
+   * CLS接口返回内容
+   */
+  ListOver?: boolean
+  /**
+   * CLS接口返回内容，标志是否启动新版本索引
+   */
+  SqlFlag?: boolean
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * saas和clb信息
  */
 export interface UserDomainInfo {
@@ -3422,6 +3558,25 @@ export interface DeleteDomainWhiteRulesRequest {
    * 需要删除的白名单规则
    */
   Ids?: Array<number | bigint>
+}
+
+/**
+ * UpsertCCRule返回参数结构体
+ */
+export interface UpsertCCRuleResponse {
+  /**
+   * 一般为null
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Data?: string
+  /**
+   * 操作的RuleId
+   */
+  RuleId?: number
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -4496,6 +4651,20 @@ export interface DescribeWafInfoResponse {
 }
 
 /**
+ * DescribeDomainRules返回参数结构体
+ */
+export interface DescribeDomainRulesResponse {
+  /**
+   * 规则列表详情
+   */
+  Rules?: Array<Rule>
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 单条日志数据描述
  */
 export interface AccessLogInfo {
@@ -4791,24 +4960,60 @@ export interface WafRuleLimit {
 }
 
 /**
- * TLS 加密套件
+ * 自定义规则的匹配条件结构体
  */
-export interface TLSCiphers {
+export interface Strategy {
   /**
-   * TLS版本ID
+   * 匹配字段
+
+    匹配字段不同，相应的匹配参数、逻辑符号、匹配内容有所不同具体如下所示：
+<table><thead><tr><th>匹配字段</th><th>匹配参数</th><th>逻辑符号</th><th>匹配内容</th></tr></thead><tbody><tr><td>IP（来源IP）</td><td>不支持参数</td><td>ipmatch（匹配）<br/>ipnmatch（不匹配）</td><td>多个IP以英文逗号隔开,最多20个</td></tr><tr><td>IPV6（来源IPv6）</td><td>不支持参数</td><td>ipmatch（匹配）<br/>ipnmatch（不匹配）</td><td>支持单个IPV6地址</td></tr><tr><td>Referer（Referer）</td><td>不支持参数</td><td>empty（内容为空）<br/>null（不存在）<br/>eq（等于）<br/>neq（不等于）<br/>contains（包含）<br/>ncontains（不包含）<br/>len_eq（长度等于）<br/>len_gt（长度大于）<br/>len_lt（长度小于）<br/>strprefix（前缀匹配）<br/>strsuffix（后缀匹配）<br/>rematch（正则匹配）</td><td>请输入内容,512个字符以内</td></tr><tr><td>URL（请求路径）</td><td>不支持参数</td><td>eq（等于）<br/>neq（不等于）<br/>contains（包含）<br/>ncontains（不包含）<br/>len_eq（长度等于）<br/>len_gt（长度大于）<br/>len_lt（长度小于）<br/>strprefix（前缀匹配）<br/>strsuffix（后缀匹配）<br/>rematch（正则匹配）<br/></td><td>请以/开头,512个字符以内</td></tr><tr><td>UserAgent（UserAgent）</td><td>不支持参数</td><td>同匹配字段<font color="Red">Referer</font>逻辑符号</td><td>请输入内容,512个字符以内</td></tr><tr><td>HTTP_METHOD（HTTP请求方法）</td><td>不支持参数</td><td>eq（等于）<br/>neq（不等于）</td><td>请输入方法名称,建议大写</td></tr><tr><td>QUERY_STRING（请求字符串）</td><td>不支持参数</td><td>同匹配字段<font color="Red">请求路径</font>逻辑符号</td><td>请输入内容,512个字符以内</td></tr><tr><td>GET（GET参数值）</td><td>支持参数录入</td><td>contains（包含）<br/>ncontains（不包含）<br/>len_eq（长度等于）<br/>len_gt（长度大于）<br/>len_lt（长度小于）<br/>strprefix（前缀匹配）<br/>strsuffix（后缀匹配）</td><td>请输入内容,512个字符以内</td></tr><tr><td>GET_PARAMS_NAMES（GET参数名）</td><td>不支持参数</td><td>exsit（存在参数）<br/>nexsit（不存在参数）<br/>len_eq（长度等于）<br/>len_gt（长度大于）<br/>len_lt（长度小于）<br/>strprefix（前缀匹配）<br/>strsuffix（后缀匹配）</td><td>请输入内容,512个字符以内</td></tr><tr><td>POST（POST参数值）</td><td>支持参数录入</td><td>同匹配字段<font color="Red">GET参数值</font>逻辑符号</td><td>请输入内容,512个字符以内</td></tr><tr><td>GET_POST_NAMES（POST参数名）</td><td>不支持参数</td><td>同匹配字段<font color="Red">GET参数名</font>逻辑符号</td><td>请输入内容,512个字符以内</td></tr><tr><td>POST_BODY（完整BODY）</td><td>不支持参数</td><td>同匹配字段<font color="Red">请求路径</font>逻辑符号</td><td>请输入BODY内容,512个字符以内</td></tr><tr><td>COOKIE（Cookie）</td><td>不支持参数</td><td>empty（内容为空）<br/>null（不存在）<br/>rematch（正则匹配）</td><td><font color="Red">暂不支持</font></td></tr><tr><td>GET_COOKIES_NAMES（Cookie参数名）</td><td>不支持参数</td><td>同匹配字段<font color="Red">GET参数名</font>逻辑符号</td><td>请输入内容,512个字符以内</td></tr><tr><td>ARGS_COOKIE（Cookie参数值）</td><td>支持参数录入</td><td>同匹配字段<font color="Red">GET参数值</font>逻辑符号</td><td>请输入内容,512个字符以内</td></tr><tr><td>GET_HEADERS_NAMES（Header参数名）</td><td>不支持参数</td><td>exsit（存在参数）<br/>nexsit（不存在参数）<br/>len_eq（长度等于）<br/>len_gt（长度大于）<br/>len_lt（长度小于）<br/>strprefix（前缀匹配）<br/>strsuffix（后缀匹配）<br/>rematch（正则匹配）</td><td>请输入内容,建议小写,512个字符以内</td></tr><tr><td>ARGS_HEADER（Header参数值）</td><td>支持参数录入</td><td>contains（包含）<br/>ncontains（不包含）<br/>len_eq（长度等于）<br/>len_gt（长度大于）<br/>len_lt（长度小于）<br/>strprefix（前缀匹配）<br/>strsuffix（后缀匹配）<br/>rematch（正则匹配）</td><td>请输入内容,512个字符以内</td></tr></tbody></table>
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  VersionId: number
+  Field: string
   /**
-   * 加密套件ID
+   * 逻辑符号 
+
+    逻辑符号一共分为以下几种类型：
+        empty （ 内容为空）
+        null （不存在）
+        eq （ 等于）
+        neq （ 不等于）
+        contains （ 包含）
+        ncontains （ 不包含）
+        strprefix （ 前缀匹配）
+        strsuffix （ 后缀匹配）
+        len_eq （ 长度等于）
+        len_gt （ 长度大于）
+        len_lt （ 长度小于）
+        ipmatch （ 属于）
+        ipnmatch （ 不属于）
+    各匹配字段对应的逻辑符号不同，详见上述匹配字段表格
+
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CipherId: number
+  CompareFunc: string
   /**
-   * 加密套件
+   * 匹配内容
+
+    目前 当匹配字段为COOKIE（Cookie）时，不需要输入 匹配内容其他都需要
+
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CipherName: string
+  Content: string
+  /**
+   * 匹配参数
+
+    配置参数一共分2种类型 不支持参数与支持参数
+    当匹配字段为以下4个时，匹配参数才能录入，否则不支持该参数
+        GET（GET参数值）		
+        POST（POST参数值）		
+        ARGS_COOKIE（Cookie参数值）		
+        ARGS_HEADER（Header参数值）
+
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Arg: string
 }
 
 /**
@@ -4871,25 +5076,34 @@ export interface AccessKeyValueInfo {
 }
 
 /**
- * ModifyApiAnalyzeStatus请求参数结构体
+ * clb-waf 域名扩展套餐
  */
-export interface ModifyApiAnalyzeStatusRequest {
+export interface DomainPackageNew {
   /**
-   * 开关状态
+   * 资源ID
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Status: number
+  ResourceIds: string
   /**
-   * 域名
+   * 过期时间
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Domain?: string
+  ValidTime: string
   /**
-   * 实例id
+   * 是否自动续费，1：自动续费，0：不自动续费
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  InstanceId?: string
+  RenewFlag: number
   /**
-   * 需要批量开启的实体列表
+   * 套餐购买个数
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  TargetList?: Array<TargetEntity>
+  Count: number
+  /**
+   * 套餐购买地域，clb-waf暂时没有用到
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Region: string
 }
 
 /**
@@ -5283,6 +5497,44 @@ export interface DescribeFindDomainListRequest {
 }
 
 /**
+ * SearchAccessLog请求参数结构体
+ */
+export interface SearchAccessLogRequest {
+  /**
+   * 客户要查询的日志主题ID，每个客户都有对应的一个主题，新版本此字段填空字符串
+   */
+  TopicId: string
+  /**
+   * 要查询的日志的起始时间，Unix时间戳，单位ms
+   */
+  From: number
+  /**
+   * 要查询的日志的结束时间，Unix时间戳，单位ms
+   */
+  To: number
+  /**
+   * 查询语句，语句长度最大为4096
+   */
+  Query: string
+  /**
+   * 单次查询返回的日志条数，最大值为100
+   */
+  Limit?: number
+  /**
+   * 新版本此字段失效，填空字符串，翻页使用Page
+   */
+  Context?: string
+  /**
+   * 日志接口是否按时间排序返回；可选值：asc(升序)、desc(降序)，默认为 desc
+   */
+  Sort?: string
+  /**
+   * 第几页，从0开始。新版本接口字段
+   */
+  Page?: number
+}
+
+/**
  * ModifyAntiFakeUrlStatus返回参数结构体
  */
 export interface ModifyAntiFakeUrlStatusResponse {
@@ -5437,17 +5689,13 @@ export interface UpsertCCRuleRequest {
 }
 
 /**
- * 响应体的返回码
+ * ModifyModuleStatus返回参数结构体
  */
-export interface ResponseCode {
+export interface ModifyModuleStatusResponse {
   /**
-   * 如果成功则返回Success，失败则返回云api定义的错误码
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  Code: string
-  /**
-   * 如果成功则返回Success，失败则返回WAF定义的二级错误码
-   */
-  Message: string
+  RequestId?: string
 }
 
 /**
@@ -5523,90 +5771,43 @@ export interface ModifyInstanceQpsLimitResponse {
 }
 
 /**
- * SearchAttackLog返回参数结构体
+ * 用户规则更新输出规则子项
  */
-export interface SearchAttackLogResponse {
+export interface ReqUserRule {
   /**
-   * 当前返回的攻击日志条数
+   * 特征序号
    */
-  Count?: number
+  Id: string
   /**
-   * 接口升级，此字段无效，默认返回空字符串
+   * 规则开关
+0：关
+1：开
+2：只告警
    */
-  Context?: string
+  Status: number
   /**
-   * 攻击日志数组条目内容
+   * 修改原因
+0：无(兼容记录为空)
+1：业务自身特性误报避免
+2：规则误报上报
+3：核心业务规则灰度
+4：其它
    */
-  Data?: Array<AttackLogInfo>
+  Reason?: number
+}
+
+/**
+ * ModifyWebshellStatus返回参数结构体
+ */
+export interface ModifyWebshellStatusResponse {
   /**
-   * CLS接口返回内容
+   * 成功的状态码，需要JSON解码后再使用，返回的格式是{"域名":"状态"}，成功的状态码为Success，其它的为失败的状态码（yunapi定义的错误码）
    */
-  ListOver?: boolean
-  /**
-   * CLS接口返回内容，标志是否启动新版本索引
-   */
-  SqlFlag?: boolean
+  Success?: ResponseCode
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * 自定义规则的匹配条件结构体
- */
-export interface Strategy {
-  /**
-   * 匹配字段
-
-    匹配字段不同，相应的匹配参数、逻辑符号、匹配内容有所不同具体如下所示：
-<table><thead><tr><th>匹配字段</th><th>匹配参数</th><th>逻辑符号</th><th>匹配内容</th></tr></thead><tbody><tr><td>IP（来源IP）</td><td>不支持参数</td><td>ipmatch（匹配）<br/>ipnmatch（不匹配）</td><td>多个IP以英文逗号隔开,最多20个</td></tr><tr><td>IPV6（来源IPv6）</td><td>不支持参数</td><td>ipmatch（匹配）<br/>ipnmatch（不匹配）</td><td>支持单个IPV6地址</td></tr><tr><td>Referer（Referer）</td><td>不支持参数</td><td>empty（内容为空）<br/>null（不存在）<br/>eq（等于）<br/>neq（不等于）<br/>contains（包含）<br/>ncontains（不包含）<br/>len_eq（长度等于）<br/>len_gt（长度大于）<br/>len_lt（长度小于）<br/>strprefix（前缀匹配）<br/>strsuffix（后缀匹配）<br/>rematch（正则匹配）</td><td>请输入内容,512个字符以内</td></tr><tr><td>URL（请求路径）</td><td>不支持参数</td><td>eq（等于）<br/>neq（不等于）<br/>contains（包含）<br/>ncontains（不包含）<br/>len_eq（长度等于）<br/>len_gt（长度大于）<br/>len_lt（长度小于）<br/>strprefix（前缀匹配）<br/>strsuffix（后缀匹配）<br/>rematch（正则匹配）<br/></td><td>请以/开头,512个字符以内</td></tr><tr><td>UserAgent（UserAgent）</td><td>不支持参数</td><td>同匹配字段<font color="Red">Referer</font>逻辑符号</td><td>请输入内容,512个字符以内</td></tr><tr><td>HTTP_METHOD（HTTP请求方法）</td><td>不支持参数</td><td>eq（等于）<br/>neq（不等于）</td><td>请输入方法名称,建议大写</td></tr><tr><td>QUERY_STRING（请求字符串）</td><td>不支持参数</td><td>同匹配字段<font color="Red">请求路径</font>逻辑符号</td><td>请输入内容,512个字符以内</td></tr><tr><td>GET（GET参数值）</td><td>支持参数录入</td><td>contains（包含）<br/>ncontains（不包含）<br/>len_eq（长度等于）<br/>len_gt（长度大于）<br/>len_lt（长度小于）<br/>strprefix（前缀匹配）<br/>strsuffix（后缀匹配）</td><td>请输入内容,512个字符以内</td></tr><tr><td>GET_PARAMS_NAMES（GET参数名）</td><td>不支持参数</td><td>exsit（存在参数）<br/>nexsit（不存在参数）<br/>len_eq（长度等于）<br/>len_gt（长度大于）<br/>len_lt（长度小于）<br/>strprefix（前缀匹配）<br/>strsuffix（后缀匹配）</td><td>请输入内容,512个字符以内</td></tr><tr><td>POST（POST参数值）</td><td>支持参数录入</td><td>同匹配字段<font color="Red">GET参数值</font>逻辑符号</td><td>请输入内容,512个字符以内</td></tr><tr><td>GET_POST_NAMES（POST参数名）</td><td>不支持参数</td><td>同匹配字段<font color="Red">GET参数名</font>逻辑符号</td><td>请输入内容,512个字符以内</td></tr><tr><td>POST_BODY（完整BODY）</td><td>不支持参数</td><td>同匹配字段<font color="Red">请求路径</font>逻辑符号</td><td>请输入BODY内容,512个字符以内</td></tr><tr><td>COOKIE（Cookie）</td><td>不支持参数</td><td>empty（内容为空）<br/>null（不存在）<br/>rematch（正则匹配）</td><td><font color="Red">暂不支持</font></td></tr><tr><td>GET_COOKIES_NAMES（Cookie参数名）</td><td>不支持参数</td><td>同匹配字段<font color="Red">GET参数名</font>逻辑符号</td><td>请输入内容,512个字符以内</td></tr><tr><td>ARGS_COOKIE（Cookie参数值）</td><td>支持参数录入</td><td>同匹配字段<font color="Red">GET参数值</font>逻辑符号</td><td>请输入内容,512个字符以内</td></tr><tr><td>GET_HEADERS_NAMES（Header参数名）</td><td>不支持参数</td><td>exsit（存在参数）<br/>nexsit（不存在参数）<br/>len_eq（长度等于）<br/>len_gt（长度大于）<br/>len_lt（长度小于）<br/>strprefix（前缀匹配）<br/>strsuffix（后缀匹配）<br/>rematch（正则匹配）</td><td>请输入内容,建议小写,512个字符以内</td></tr><tr><td>ARGS_HEADER（Header参数值）</td><td>支持参数录入</td><td>contains（包含）<br/>ncontains（不包含）<br/>len_eq（长度等于）<br/>len_gt（长度大于）<br/>len_lt（长度小于）<br/>strprefix（前缀匹配）<br/>strsuffix（后缀匹配）<br/>rematch（正则匹配）</td><td>请输入内容,512个字符以内</td></tr></tbody></table>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Field: string
-  /**
-   * 逻辑符号 
-
-    逻辑符号一共分为以下几种类型：
-        empty （ 内容为空）
-        null （不存在）
-        eq （ 等于）
-        neq （ 不等于）
-        contains （ 包含）
-        ncontains （ 不包含）
-        strprefix （ 前缀匹配）
-        strsuffix （ 后缀匹配）
-        len_eq （ 长度等于）
-        len_gt （ 长度大于）
-        len_lt （ 长度小于）
-        ipmatch （ 属于）
-        ipnmatch （ 不属于）
-    各匹配字段对应的逻辑符号不同，详见上述匹配字段表格
-
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CompareFunc: string
-  /**
-   * 匹配内容
-
-    目前 当匹配字段为COOKIE（Cookie）时，不需要输入 匹配内容其他都需要
-
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Content: string
-  /**
-   * 匹配参数
-
-    配置参数一共分2种类型 不支持参数与支持参数
-    当匹配字段为以下4个时，匹配参数才能录入，否则不支持该参数
-        GET（GET参数值）		
-        POST（POST参数值）		
-        ARGS_COOKIE（Cookie参数值）		
-        ARGS_HEADER（Header参数值）
-
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Arg: string
 }
 
 /**
@@ -5814,6 +6015,11 @@ export interface DescribeCCRuleListResponse {
    */
   RequestId?: string
 }
+
+/**
+ * ModifyModuleStatus请求参数结构体
+ */
+export type ModifyModuleStatusRequest = null
 
 /**
  * DescribeRuleLimit请求参数结构体
@@ -6633,6 +6839,48 @@ export interface DownloadAttackRecordInfo {
 }
 
 /**
+ * 规则列表详情
+ */
+export interface Rule {
+  /**
+   * 规则id
+   */
+  Id?: number
+  /**
+   * 规则类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Type?: string
+  /**
+   * 规则等级
+   */
+  Level?: string
+  /**
+   * 规则描述
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Description?: string
+  /**
+   * 规则防护的CVE编号
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CVE?: string
+  /**
+   * 规则的状态
+   */
+  Status?: number
+  /**
+   * 规则修改的时间
+   */
+  ModifyTime?: string
+  /**
+   * 门神规则新增/更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AddTime?: string
+}
+
+/**
  * DescribeRuleLimit返回参数结构体
  */
 export interface DescribeRuleLimitResponse {
@@ -6705,29 +6953,55 @@ export interface DeleteCustomRuleResponse {
 }
 
 /**
- * ModifyWafAutoDenyRules请求参数结构体
+ * ModifyUserSignatureRule请求参数结构体
  */
-export interface ModifyWafAutoDenyRulesRequest {
+export interface ModifyUserSignatureRuleRequest {
   /**
    * 域名
    */
   Domain: string
   /**
-   * 触发IP封禁的攻击次数阈值，范围为2~100次
+   * 主类id
    */
-  AttackThreshold: number
+  MainClassID?: string
   /**
-   * IP封禁统计时间，范围为1-60分钟
+   * 主类开关0=关闭，1=开启，2=只告警
    */
-  TimeThreshold: number
+  Status?: number
   /**
-   * 触发IP封禁后的封禁时间，范围为5~360分钟
+   * 下发修改的规则列表
    */
-  DenyTimeThreshold: number
+  RuleID?: Array<ReqUserRule>
+}
+
+/**
+ * DescribeUserSignatureRule请求参数结构体
+ */
+export interface DescribeUserSignatureRuleRequest {
   /**
-   * 自动封禁状态，0表示关闭，1表示打开
+   * 需要查询的域名
    */
-  DefenseStatus: number
+  Domain: string
+  /**
+   * 分页
+   */
+  Offset: number
+  /**
+   * 每页容量
+   */
+  Limit: number
+  /**
+   * 排序字段，支持 signature_id, modify_time
+   */
+  By?: string
+  /**
+   * 排序方式
+   */
+  Order?: string
+  /**
+   * 筛选条件，支持 MainClassName，SubClassID ,CveID, Status, ID;  ID为规则id
+   */
+  Filters?: Array<FiltersItemNew>
 }
 
 /**
@@ -6877,41 +7151,17 @@ export interface DomainURI {
 }
 
 /**
- * SearchAccessLog请求参数结构体
+ * 响应体的返回码
  */
-export interface SearchAccessLogRequest {
+export interface ResponseCode {
   /**
-   * 客户要查询的日志主题ID，每个客户都有对应的一个主题，新版本此字段填空字符串
+   * 如果成功则返回Success，失败则返回云api定义的错误码
    */
-  TopicId: string
+  Code: string
   /**
-   * 要查询的日志的起始时间，Unix时间戳，单位ms
+   * 如果成功则返回Success，失败则返回WAF定义的二级错误码
    */
-  From: number
-  /**
-   * 要查询的日志的结束时间，Unix时间戳，单位ms
-   */
-  To: number
-  /**
-   * 查询语句，语句长度最大为4096
-   */
-  Query: string
-  /**
-   * 单次查询返回的日志条数，最大值为100
-   */
-  Limit?: number
-  /**
-   * 新版本此字段失效，填空字符串，翻页使用Page
-   */
-  Context?: string
-  /**
-   * 日志接口是否按时间排序返回；可选值：asc(升序)、desc(降序)，默认为 desc
-   */
-  Sort?: string
-  /**
-   * 第几页，从0开始。新版本接口字段
-   */
-  Page?: number
+  Message: string
 }
 
 /**
@@ -7113,6 +7363,56 @@ export interface ModifyCustomRuleResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 用户特征规则描述
+ */
+export interface UserSignatureRule {
+  /**
+   * 特征ID
+   */
+  ID: string
+  /**
+   * 规则开关
+   */
+  Status: number
+  /**
+   * 主类ID
+   */
+  MainClassID: string
+  /**
+   * 子类ID
+   */
+  SubClassID: string
+  /**
+   * CVE ID
+   */
+  CveID: string
+  /**
+   * 创建时间
+   */
+  CreateTime: string
+  /**
+   * 更新时间
+   */
+  ModifyTime: string
+  /**
+   * 主类名字，根据Language字段输出中文/英文
+   */
+  MainClassName: string
+  /**
+   * 子类名字，根据Language字段输出中文/英文，若子类id为00000000，此字段为空
+   */
+  SubClassName: string
+  /**
+   * 规则描述
+   */
+  Description: string
+  /**
+   * 0/1
+   */
+  Reason: number
 }
 
 /**

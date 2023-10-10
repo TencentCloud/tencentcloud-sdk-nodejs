@@ -5079,19 +5079,19 @@ export interface BGPInstance {
   /**
    * 资产实例的详细信息
    */
-  InstanceDetail: InstanceRelation
+  InstanceDetail?: InstanceRelation
   /**
    * 资产实例的规格信息
    */
-  SpecificationLimit: BGPInstanceSpecification
+  SpecificationLimit?: BGPInstanceSpecification
   /**
    * 资产实例的使用统计信息
    */
-  Usage: BGPInstanceUsages
+  Usage?: BGPInstanceUsages
   /**
    * 资产实例所在的地域
    */
-  Region: RegionInfo
+  Region?: RegionInfo
   /**
    * 资产实例的防护状态，状态码如下：
 "idle"：正常状态(无攻击)
@@ -5101,29 +5101,29 @@ export interface BGPInstance {
 "deblocking"：解封中
 "isolate"：回收隔离中
    */
-  Status: string
+  Status?: string
   /**
    * 购买时间
    */
-  CreatedTime: string
+  CreatedTime?: string
   /**
    * 到期时间
    */
-  ExpiredTime: string
+  ExpiredTime?: string
   /**
    * 资产实例的名称
    */
-  Name: string
+  Name?: string
   /**
    * 资产实例所属的套餐包信息，
 注意：当资产实例不是套餐包的实例时，此字段为null
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  PackInfo: PackInfo
+  PackInfo?: PackInfo
   /**
    * 高防包绑定的EIP属于的云产品信息
    */
-  EipProductInfos: Array<EipProductInfo>
+  EipProductInfos?: Array<EipProductInfo>
   /**
    * 高防包绑定状态，取值[
 "idle"：绑定已完成
@@ -5131,36 +5131,41 @@ export interface BGPInstance {
 "failed"：绑定失败
 ]
    */
-  BoundStatus: string
+  BoundStatus?: string
   /**
    * 四层防护严格级别
    */
-  DDoSLevel: string
+  DDoSLevel?: string
   /**
    * CC防护开关
    */
-  CCEnable: number
+  CCEnable?: number
   /**
    * 资源关联标签
    */
-  TagInfoList: Array<TagInfo>
+  TagInfoList?: Array<TagInfo>
   /**
    * 新版本1ip高防包
    */
-  IpCountNewFlag: number
+  IpCountNewFlag?: number
   /**
    * 攻击封堵套餐标记
    */
-  VitalityVersion: number
+  VitalityVersion?: number
   /**
    * 网络线路
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Line: number
+  Line?: number
+  /**
+   * 不计费的业务带宽
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FreeServiceBandwidth?: number
   /**
    * 弹性业务带宽开关
    */
-  ElasticServiceBandwidth: number
+  ElasticServiceBandwidth?: number
   /**
    * 赠送的业务带宽
    */

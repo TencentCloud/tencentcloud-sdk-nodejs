@@ -90,6 +90,7 @@ import {
   SignUrlInfo,
   CommonFlowApprover,
   FillApproverInfo,
+  ChannelCreateUserAutoSignSealUrlRequest,
   PdfVerifyResult,
   UserThreeFactor,
   ChannelCreateUserAutoSignEnableUrlRequest,
@@ -103,7 +104,7 @@ import {
   UserInfo,
   TaskInfo,
   ChannelCreateBoundFlowsResponse,
-  ChannelCreateFlowApproversRequest,
+  ChannelCreateUserAutoSignSealUrlResponse,
   ApproverComponentLimitType,
   ResourceUrlInfo,
   ChannelCreateBoundFlowsRequest,
@@ -183,6 +184,7 @@ import {
   CreateChannelFlowEvidenceReportResponse,
   SyncFailReason,
   ChannelDescribeEmployeesResponse,
+  ChannelCreateFlowApproversRequest,
   ChannelDeleteRoleResponse,
   ChannelCreateReleaseFlowResponse,
   DescribeChannelFlowEvidenceReportResponse,
@@ -645,6 +647,23 @@ https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/launchAp
     cb?: (error: string, rep: ChannelCreateBoundFlowsResponse) => void
   ): Promise<ChannelCreateBoundFlowsResponse> {
     return this.request("ChannelCreateBoundFlows", req, cb)
+  }
+
+  /**
+     * 获取设置自动签印章小程序链接。
+
+注意：
+<ul><li>需要<code>企业开通自动签</code>后使用。</li>
+<li>仅支持<code>已经开通了自动签的个人</code>更换自动签印章。</li>
+<li>链接有效期默认7天，<code>最多30天</code>。</li>
+<li>该接口的链接适用于<code>小程序</code>端。</li>
+<li>该接口不会扣除您的合同套餐，暂不参与计费。</li></ul>
+     */
+  async ChannelCreateUserAutoSignSealUrl(
+    req: ChannelCreateUserAutoSignSealUrlRequest,
+    cb?: (error: string, rep: ChannelCreateUserAutoSignSealUrlResponse) => void
+  ): Promise<ChannelCreateUserAutoSignSealUrlResponse> {
+    return this.request("ChannelCreateUserAutoSignSealUrl", req, cb)
   }
 
   /**

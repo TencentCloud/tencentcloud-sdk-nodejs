@@ -4097,6 +4097,10 @@ export interface TrainTicket {
    * 是否仅供报销使用（0：没有，1：有）
    */
   ReimburseOnlyMark?: number
+  /**
+   * 是否有退票费标识（0：没有，1：有）
+   */
+  RefundMark?: number
 }
 
 /**

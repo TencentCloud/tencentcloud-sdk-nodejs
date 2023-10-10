@@ -128,9 +128,9 @@ it("emr.v20190103.ScaleOutInstance", async function () {
     }
 })
 
-it("emr.v20190103.TerminateInstance", async function () {
+it("emr.v20190103.ModifyUserManagerPwd", async function () {
     try {
-       const data = await client.TerminateInstance({})
+       const data = await client.ModifyUserManagerPwd({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -301,6 +301,16 @@ it("emr.v20190103.StartStopServiceOrMonitor", async function () {
 it("emr.v20190103.TerminateTasks", async function () {
     try {
        const data = await client.TerminateTasks({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("emr.v20190103.TerminateInstance", async function () {
+    try {
+       const data = await client.TerminateInstance({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

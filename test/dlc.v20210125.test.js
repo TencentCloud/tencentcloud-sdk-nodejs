@@ -748,6 +748,16 @@ it("dlc.v20210125.DescribeTable", async function () {
     }
 })
 
+it("dlc.v20210125.GetOptimizerPolicy", async function () {
+    try {
+       const data = await client.GetOptimizerPolicy({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dlc.v20210125.DescribeUserInfo", async function () {
     try {
        const data = await client.DescribeUserInfo({})

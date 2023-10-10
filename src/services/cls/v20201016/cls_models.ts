@@ -5301,7 +5301,7 @@ export interface ModifyTopicRequest {
    */
   HotPeriod?: number
   /**
-   * webtracking开关； false: 关闭 true: 开启
+   * 免鉴权开关； false: 关闭 true: 开启
    */
   IsWebTracking?: boolean
 }

@@ -1997,50 +1997,55 @@ export interface AIRecognitionTemplateItem {
   /**
    * 视频内容识别模板唯一标识。
    */
-  Definition: number
+  Definition?: number
   /**
    * 视频内容识别模板名称。
    */
-  Name: string
+  Name?: string
   /**
    * 视频内容识别模板描述信息。
    */
-  Comment: string
+  Comment?: string
   /**
    * 人脸识别控制参数。
    */
-  FaceConfigure: FaceConfigureInfo
+  FaceConfigure?: FaceConfigureInfo
   /**
    * 文本全文识别控制参数。
    */
-  OcrFullTextConfigure: OcrFullTextConfigureInfo
+  OcrFullTextConfigure?: OcrFullTextConfigureInfo
   /**
    * 文本关键词识别控制参数。
    */
-  OcrWordsConfigure: OcrWordsConfigureInfo
+  OcrWordsConfigure?: OcrWordsConfigureInfo
   /**
    * 语音全文识别控制参数。
    */
-  AsrFullTextConfigure: AsrFullTextConfigureInfo
+  AsrFullTextConfigure?: AsrFullTextConfigureInfo
   /**
    * 语音关键词识别控制参数。
    */
-  AsrWordsConfigure: AsrWordsConfigureInfo
+  AsrWordsConfigure?: AsrWordsConfigureInfo
+  /**
+   * 语音翻译控制参数。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TranslateConfigure?: TranslateConfigureInfo
   /**
    * 模板创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。
    */
-  CreateTime: string
+  CreateTime?: string
   /**
    * 模板最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。
    */
-  UpdateTime: string
+  UpdateTime?: string
   /**
    * 模板类型，取值范围：
 * Preset：系统预置模板；
 * Custom：用户自定义模板。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Type: string
+  Type?: string
 }
 
 /**
@@ -7138,50 +7143,50 @@ export interface AIAnalysisTemplateItem {
   /**
    * 智能分析模板唯一标识。
    */
-  Definition: number
+  Definition?: number
   /**
    * 智能分析模板名称。
    */
-  Name: string
+  Name?: string
   /**
    * 智能分析模板描述信息。
    */
-  Comment: string
+  Comment?: string
   /**
    * 智能分类任务控制参数。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ClassificationConfigure: ClassificationConfigureInfo
+  ClassificationConfigure?: ClassificationConfigureInfo
   /**
    * 智能标签任务控制参数。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TagConfigure: TagConfigureInfo
+  TagConfigure?: TagConfigureInfo
   /**
    * 智能封面任务控制参数。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CoverConfigure: CoverConfigureInfo
+  CoverConfigure?: CoverConfigureInfo
   /**
    * 智能按帧标签任务控制参数。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  FrameTagConfigure: FrameTagConfigureInfo
+  FrameTagConfigure?: FrameTagConfigureInfo
   /**
    * 模板创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。
    */
-  CreateTime: string
+  CreateTime?: string
   /**
    * 模板最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。
    */
-  UpdateTime: string
+  UpdateTime?: string
   /**
    * 模板类型，取值范围：
 * Preset：系统预置模板；
 * Custom：用户自定义模板。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Type: string
+  Type?: string
 }
 
 /**
@@ -9327,7 +9332,7 @@ export interface CreateAIAnalysisTemplateResponse {
   /**
    * 视频内容分析模板唯一标识。
    */
-  Definition: number
+  Definition?: number
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -12978,11 +12983,11 @@ export interface DescribeAIAnalysisTemplatesResponse {
   /**
    * 符合过滤条件的记录总数。
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 视频内容分析模板详情列表。
    */
-  AIAnalysisTemplateSet: Array<AIAnalysisTemplateItem>
+  AIAnalysisTemplateSet?: Array<AIAnalysisTemplateItem>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

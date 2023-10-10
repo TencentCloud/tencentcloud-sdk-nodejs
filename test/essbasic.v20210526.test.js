@@ -328,6 +328,16 @@ it("essbasic.v20210526.ChannelCreateBoundFlows", async function () {
     }
 })
 
+it("essbasic.v20210526.ChannelCreateUserAutoSignSealUrl", async function () {
+    try {
+       const data = await client.ChannelCreateUserAutoSignSealUrl({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("essbasic.v20210526.ChannelDescribeUserAutoSignStatus", async function () {
     try {
        const data = await client.ChannelDescribeUserAutoSignStatus({})

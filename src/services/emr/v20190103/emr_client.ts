@@ -22,6 +22,7 @@ import {
   PodSpecInfo,
   PodSaleSpec,
   ScaleOutInstanceResponse,
+  ModifyUserManagerPwdResponse,
   ImpalaQuery,
   PodVolume,
   SyncPodStateResponse,
@@ -37,6 +38,7 @@ import {
   UserManagerFilter,
   MetaDbInfo,
   DiskSpec,
+  ModifyUserManagerPwdRequest,
   COSSettings,
   ClusterInstancesInfo,
   ScaleOutInstanceRequest,
@@ -289,13 +291,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 销毁EMR实例。此接口仅支持弹性MapReduce正式计费版本。
+   * 修改用户密码（用户管理）
    */
-  async TerminateInstance(
-    req: TerminateInstanceRequest,
-    cb?: (error: string, rep: TerminateInstanceResponse) => void
-  ): Promise<TerminateInstanceResponse> {
-    return this.request("TerminateInstance", req, cb)
+  async ModifyUserManagerPwd(
+    req: ModifyUserManagerPwdRequest,
+    cb?: (error: string, rep: ModifyUserManagerPwdResponse) => void
+  ): Promise<ModifyUserManagerPwdResponse> {
+    return this.request("ModifyUserManagerPwd", req, cb)
   }
 
   /**
@@ -468,6 +470,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: TerminateTasksResponse) => void
   ): Promise<TerminateTasksResponse> {
     return this.request("TerminateTasks", req, cb)
+  }
+
+  /**
+   * 销毁EMR实例。此接口仅支持弹性MapReduce正式计费版本。
+   */
+  async TerminateInstance(
+    req: TerminateInstanceRequest,
+    cb?: (error: string, rep: TerminateInstanceResponse) => void
+  ): Promise<TerminateInstanceResponse> {
+    return this.request("TerminateInstance", req, cb)
   }
 
   /**

@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { ScaleOutInstanceResponse, SyncPodStateResponse, CreateInstanceResponse, TerminateTasksRequest, ScaleOutClusterRequest, DescribeEmrApplicationStaticsRequest, ScaleOutInstanceRequest, ModifyResourceScheduleConfigResponse, AddUsersForUserManagerResponse, DescribeInstanceRenewNodesRequest, InquiryPriceRenewInstanceResponse, DescribeJobFlowRequest, InquiryPriceCreateInstanceResponse, StartStopServiceOrMonitorRequest, TerminateInstanceRequest, DescribeResourceScheduleRequest, DescribeUsersForUserManagerRequest, RunJobFlowResponse, StartStopServiceOrMonitorResponse, DescribeHiveQueriesResponse, DescribeInstanceRenewNodesResponse, ModifyResourcesTagsResponse, DescribeClusterNodesResponse, DescribeYarnApplicationsRequest, InquiryPriceUpdateInstanceResponse, DescribeResourceScheduleResponse, TerminateClusterNodesResponse, ModifyResourceSchedulerRequest, RunJobFlowRequest, DescribeHiveQueriesRequest, CreateClusterResponse, DescribeCvmQuotaResponse, CreateClusterRequest, DescribeClusterNodesRequest, DescribeCvmQuotaRequest, DescribeImpalaQueriesRequest, CreateInstanceRequest, DescribeInstancesRequest, InquiryPriceUpdateInstanceRequest, TerminateClusterNodesRequest, DescribeInstancesListRequest, DescribeInstancesListResponse, DeleteUserManagerUserListResponse, ModifyResourcePoolsResponse, TerminateTasksResponse, DescribeInstancesResponse, DescribeYarnApplicationsResponse, DescribeUsersForUserManagerResponse, InquiryPriceRenewInstanceRequest, ModifyResourcesTagsRequest, InquirePriceRenewEmrResponse, AddUsersForUserManagerRequest, SyncPodStateRequest, InquiryPriceCreateInstanceRequest, ModifyResourceScheduleConfigRequest, InquiryPriceScaleOutInstanceRequest, DescribeEmrApplicationStaticsResponse, InquirePriceRenewEmrRequest, DeleteUserManagerUserListRequest, DescribeImpalaQueriesResponse, InquiryPriceScaleOutInstanceResponse, ModifyResourceSchedulerResponse, ScaleOutClusterResponse, ModifyResourcePoolsRequest, DescribeJobFlowResponse, TerminateInstanceResponse } from "./emr_models";
+import { ScaleOutInstanceResponse, ModifyUserManagerPwdResponse, SyncPodStateResponse, CreateInstanceResponse, TerminateTasksRequest, ScaleOutClusterRequest, DescribeEmrApplicationStaticsRequest, ModifyUserManagerPwdRequest, ScaleOutInstanceRequest, ModifyResourceScheduleConfigResponse, AddUsersForUserManagerResponse, DescribeInstanceRenewNodesRequest, InquiryPriceRenewInstanceResponse, DescribeJobFlowRequest, InquiryPriceCreateInstanceResponse, StartStopServiceOrMonitorRequest, TerminateInstanceRequest, DescribeResourceScheduleRequest, DescribeUsersForUserManagerRequest, RunJobFlowResponse, StartStopServiceOrMonitorResponse, DescribeHiveQueriesResponse, DescribeInstanceRenewNodesResponse, ModifyResourcesTagsResponse, DescribeClusterNodesResponse, DescribeYarnApplicationsRequest, InquiryPriceUpdateInstanceResponse, DescribeResourceScheduleResponse, TerminateClusterNodesResponse, ModifyResourceSchedulerRequest, RunJobFlowRequest, DescribeHiveQueriesRequest, CreateClusterResponse, DescribeCvmQuotaResponse, CreateClusterRequest, DescribeClusterNodesRequest, DescribeCvmQuotaRequest, DescribeImpalaQueriesRequest, CreateInstanceRequest, DescribeInstancesRequest, InquiryPriceUpdateInstanceRequest, TerminateClusterNodesRequest, DescribeInstancesListRequest, DescribeInstancesListResponse, DeleteUserManagerUserListResponse, ModifyResourcePoolsResponse, TerminateTasksResponse, DescribeInstancesResponse, DescribeYarnApplicationsResponse, DescribeUsersForUserManagerResponse, InquiryPriceRenewInstanceRequest, ModifyResourcesTagsRequest, InquirePriceRenewEmrResponse, AddUsersForUserManagerRequest, SyncPodStateRequest, InquiryPriceCreateInstanceRequest, ModifyResourceScheduleConfigRequest, InquiryPriceScaleOutInstanceRequest, DescribeEmrApplicationStaticsResponse, InquirePriceRenewEmrRequest, DeleteUserManagerUserListRequest, DescribeImpalaQueriesResponse, InquiryPriceScaleOutInstanceResponse, ModifyResourceSchedulerResponse, ScaleOutClusterResponse, ModifyResourcePoolsRequest, DescribeJobFlowResponse, TerminateInstanceResponse } from "./emr_models";
 /**
  * emr client
  * @class
@@ -52,9 +52,9 @@ export declare class Client extends AbstractClient {
      */
     ScaleOutInstance(req: ScaleOutInstanceRequest, cb?: (error: string, rep: ScaleOutInstanceResponse) => void): Promise<ScaleOutInstanceResponse>;
     /**
-     * 销毁EMR实例。此接口仅支持弹性MapReduce正式计费版本。
+     * 修改用户密码（用户管理）
      */
-    TerminateInstance(req: TerminateInstanceRequest, cb?: (error: string, rep: TerminateInstanceResponse) => void): Promise<TerminateInstanceResponse>;
+    ModifyUserManagerPwd(req: ModifyUserManagerPwdRequest, cb?: (error: string, rep: ModifyUserManagerPwdResponse) => void): Promise<ModifyUserManagerPwdResponse>;
     /**
      * 查询集群实例信息
      */
@@ -125,6 +125,10 @@ export declare class Client extends AbstractClient {
      * 缩容Task节点
      */
     TerminateTasks(req: TerminateTasksRequest, cb?: (error: string, rep: TerminateTasksResponse) => void): Promise<TerminateTasksResponse>;
+    /**
+     * 销毁EMR实例。此接口仅支持弹性MapReduce正式计费版本。
+     */
+    TerminateInstance(req: TerminateInstanceRequest, cb?: (error: string, rep: TerminateInstanceResponse) => void): Promise<TerminateInstanceResponse>;
     /**
      * 查询集群节点信息
      */

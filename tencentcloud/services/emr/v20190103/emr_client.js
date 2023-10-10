@@ -94,10 +94,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ScaleOutInstance", req, cb);
     }
     /**
-     * 销毁EMR实例。此接口仅支持弹性MapReduce正式计费版本。
+     * 修改用户密码（用户管理）
      */
-    async TerminateInstance(req, cb) {
-        return this.request("TerminateInstance", req, cb);
+    async ModifyUserManagerPwd(req, cb) {
+        return this.request("ModifyUserManagerPwd", req, cb);
     }
     /**
      * 查询集群实例信息
@@ -202,6 +202,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async TerminateTasks(req, cb) {
         return this.request("TerminateTasks", req, cb);
+    }
+    /**
+     * 销毁EMR实例。此接口仅支持弹性MapReduce正式计费版本。
+     */
+    async TerminateInstance(req, cb) {
+        return this.request("TerminateInstance", req, cb);
     }
     /**
      * 查询集群节点信息
