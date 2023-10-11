@@ -64,7 +64,7 @@ import {
   DeleteScriptResponse,
   TableInfo,
   Task,
-  ElasticsearchInfo,
+  DataEngineConfigInstanceInfo,
   DescribeWorkGroupsRequest,
   CrontabResumeSuspendStrategy,
   AlterDMSTableResponse,
@@ -83,6 +83,7 @@ import {
   DescribeUserTypeRequest,
   SwitchDataEngineResponse,
   CheckDataEngineConfigPairsValidityRequest,
+  ElasticsearchInfo,
   CSVSerde,
   DescribeLakeFsInfoRequest,
   ModifySparkAppRequest,
@@ -576,7 +577,7 @@ export class Client extends AbstractClient {
    * 切换引擎镜像版本
    */
   async SwitchDataEngineImage(
-    req?: SwitchDataEngineImageRequest,
+    req: SwitchDataEngineImageRequest,
     cb?: (error: string, rep: SwitchDataEngineImageResponse) => void
   ): Promise<SwitchDataEngineImageResponse> {
     return this.request("SwitchDataEngineImage", req, cb)
@@ -806,7 +807,7 @@ export class Client extends AbstractClient {
    * 回滚引擎镜像版本
    */
   async RollbackDataEngineImage(
-    req?: RollbackDataEngineImageRequest,
+    req: RollbackDataEngineImageRequest,
     cb?: (error: string, rep: RollbackDataEngineImageResponse) => void
   ): Promise<RollbackDataEngineImageResponse> {
     return this.request("RollbackDataEngineImage", req, cb)
@@ -946,7 +947,7 @@ export class Client extends AbstractClient {
    * 修改用户引擎自定义配置
    */
   async UpdateUserDataEngineConfig(
-    req?: UpdateUserDataEngineConfigRequest,
+    req: UpdateUserDataEngineConfigRequest,
     cb?: (error: string, rep: UpdateUserDataEngineConfigResponse) => void
   ): Promise<UpdateUserDataEngineConfigResponse> {
     return this.request("UpdateUserDataEngineConfig", req, cb)
@@ -1156,7 +1157,7 @@ export class Client extends AbstractClient {
    * 用户某种操作，触发引擎配置修改
    */
   async UpdateDataEngineConfig(
-    req?: UpdateDataEngineConfigRequest,
+    req: UpdateDataEngineConfigRequest,
     cb?: (error: string, rep: UpdateDataEngineConfigResponse) => void
   ): Promise<UpdateDataEngineConfigResponse> {
     return this.request("UpdateDataEngineConfig", req, cb)
@@ -1196,7 +1197,7 @@ export class Client extends AbstractClient {
    * 升级引擎镜像
    */
   async UpgradeDataEngineImage(
-    req?: UpgradeDataEngineImageRequest,
+    req: UpgradeDataEngineImageRequest,
     cb?: (error: string, rep: UpgradeDataEngineImageResponse) => void
   ): Promise<UpgradeDataEngineImageResponse> {
     return this.request("UpgradeDataEngineImage", req, cb)
@@ -1346,7 +1347,7 @@ export class Client extends AbstractClient {
    * 重启引擎
    */
   async RestartDataEngine(
-    req?: RestartDataEngineRequest,
+    req: RestartDataEngineRequest,
     cb?: (error: string, rep: RestartDataEngineResponse) => void
   ): Promise<RestartDataEngineResponse> {
     return this.request("RestartDataEngine", req, cb)
@@ -1416,7 +1417,7 @@ export class Client extends AbstractClient {
    * 查询用户自定义引擎参数
    */
   async DescribeUserDataEngineConfig(
-    req?: DescribeUserDataEngineConfigRequest,
+    req: DescribeUserDataEngineConfigRequest,
     cb?: (error: string, rep: DescribeUserDataEngineConfigResponse) => void
   ): Promise<DescribeUserDataEngineConfigResponse> {
     return this.request("DescribeUserDataEngineConfig", req, cb)

@@ -20,12 +20,15 @@ import { ClientConfig } from "../../../common/interface"
 import {
   ResourceSpecNew,
   DestroyInstanceByApiResponse,
+  DestroyInstanceByApiRequest,
   CreateInstanceByApiRequest,
   CBSSpec,
   CreateInstanceByApiResponse,
+  DescribeSimpleInstancesResponse,
   Tag,
+  InstanceSimpleInfoNew,
   ChargeProperties,
-  DestroyInstanceByApiRequest,
+  DescribeSimpleInstancesRequest,
 } from "./cdwpg_models"
 
 /**
@@ -55,5 +58,15 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateInstanceByApiResponse) => void
   ): Promise<CreateInstanceByApiResponse> {
     return this.request("CreateInstanceByApi", req, cb)
+  }
+
+  /**
+   * 获取集群实例列表
+   */
+  async DescribeSimpleInstances(
+    req: DescribeSimpleInstancesRequest,
+    cb?: (error: string, rep: DescribeSimpleInstancesResponse) => void
+  ): Promise<DescribeSimpleInstancesResponse> {
+    return this.request("DescribeSimpleInstances", req, cb)
   }
 }

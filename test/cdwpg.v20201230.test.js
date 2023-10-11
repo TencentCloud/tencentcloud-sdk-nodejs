@@ -38,4 +38,14 @@ it("cdwpg.v20201230.CreateInstanceByApi", async function () {
     }
 })
 
+it("cdwpg.v20201230.DescribeSimpleInstances", async function () {
+    try {
+       const data = await client.DescribeSimpleInstances({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 })

@@ -3115,7 +3115,7 @@ export interface CreateTopicRequest {
    */
   TopicName: string
   /**
-   * 入参为1，即是创建非分区topic，无分区；入参大于1，表示分区topic的分区数，最大不允许超过128。
+   * 入参为1，即是创建非分区topic，无分区；入参大于1，表示分区topic的分区数，最大不允许超过32。
    */
   Partitions: number
   /**

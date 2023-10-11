@@ -337,6 +337,15 @@ export interface DeleteUserRequest {
  */
 export interface DescribeUserDataEngineConfigResponse {
     /**
+     * 用户引擎自定义配置项列表。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DataEngineConfigInstanceInfos?: Array<DataEngineConfigInstanceInfo>;
+    /**
+     * 配置项总数。
+     */
+    TotalCount?: number;
+    /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
@@ -570,7 +579,16 @@ export interface DescribeNotebookSessionsRequest {
 /**
  * RestartDataEngine请求参数结构体
  */
-export declare type RestartDataEngineRequest = null;
+export interface RestartDataEngineRequest {
+    /**
+     * 引擎ID
+     */
+    DataEngineId: string;
+    /**
+     * 是否强制重启，忽略任务
+     */
+    ForcedOperation?: boolean;
+}
 /**
  * CreateDMSDatabase返回参数结构体
  */
@@ -1008,44 +1026,22 @@ export interface Task {
     SparkSQLTask?: SQLTask;
 }
 /**
- * Elasticsearch数据源的详细信息
+ * 引擎配置信息
  */
-export interface ElasticsearchInfo {
+export interface DataEngineConfigInstanceInfo {
     /**
-     * 数据源ID
+     * 引擎ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    InstanceId?: string;
+    DataEngineId?: string;
     /**
-     * 数据源名称
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 用户自定义配置项集合
      */
-    InstanceName?: string;
+    DataEngineConfigPairs?: Array<DataEngineConfigPair>;
     /**
-     * 用户名
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 作业集群资源参数配置模版
      */
-    User?: string;
-    /**
-     * 密码，需要base64编码
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Password?: string;
-    /**
-     * 数据源的VPC和子网信息
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Location?: DatasourceConnectionLocation;
-    /**
-     * 默认数据库名称
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    DbName?: string;
-    /**
-     * 访问Elasticsearch的ip、端口信息
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ServiceInfo?: Array<IpPortPair>;
+    SessionResourceTemplate?: SessionResourceTemplate;
 }
 /**
  * DescribeWorkGroups请求参数结构体
@@ -1581,6 +1577,46 @@ export interface CheckDataEngineConfigPairsValidityRequest {
      * 引擎大版本ID，存在小版本ID时仅需传入小版本ID，不存在时会获取当前大版本下最新的小版本ID。
      */
     ImageVersionId?: string;
+}
+/**
+ * Elasticsearch数据源的详细信息
+ */
+export interface ElasticsearchInfo {
+    /**
+     * 数据源ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InstanceId?: string;
+    /**
+     * 数据源名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InstanceName?: string;
+    /**
+     * 用户名
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    User?: string;
+    /**
+     * 密码，需要base64编码
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Password?: string;
+    /**
+     * 数据源的VPC和子网信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Location?: DatasourceConnectionLocation;
+    /**
+     * 默认数据库名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DbName?: string;
+    /**
+     * 访问Elasticsearch的ip、端口信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ServiceInfo?: Array<IpPortPair>;
 }
 /**
  * CSV序列化及反序列化数据结构
@@ -3059,7 +3095,12 @@ export interface DescribeNotebookSessionRequest {
 /**
  * UpgradeDataEngineImage请求参数结构体
  */
-export declare type UpgradeDataEngineImageRequest = null;
+export interface UpgradeDataEngineImageRequest {
+    /**
+     * 引擎ID
+     */
+    DataEngineId: string;
+}
 /**
  * CSV类型数据格式
  */
@@ -3343,7 +3384,16 @@ export interface AddUsersToWorkGroupResponse {
 /**
  * SwitchDataEngineImage请求参数结构体
  */
-export declare type SwitchDataEngineImageRequest = null;
+export interface SwitchDataEngineImageRequest {
+    /**
+     * 引擎ID
+     */
+    DataEngineId: string;
+    /**
+     * 新镜像版本ID
+     */
+    NewImageVersionId: string;
+}
 /**
  * DescribeNotebookSessionLog请求参数结构体
  */
@@ -3437,7 +3487,18 @@ export interface ReportHeartbeatMetaDataResponse {
 /**
  * 引擎配置
  */
-export declare type DataEngineConfigPair = null;
+export interface DataEngineConfigPair {
+    /**
+     * 配置项
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ConfigItem: string;
+    /**
+     * 配置值
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ConfigValue: string;
+}
 /**
  * ReportHeartbeatMetaData请求参数结构体
  */
@@ -5053,7 +5114,20 @@ export interface UnlockMetaDataRequest {
 /**
  * RollbackDataEngineImage请求参数结构体
  */
-export declare type RollbackDataEngineImageRequest = null;
+export interface RollbackDataEngineImageRequest {
+    /**
+     * 引擎ID
+     */
+    DataEngineId: string;
+    /**
+     * 检查是否能回滚的接口返回的FromRecordId参数
+     */
+    FromRecordId?: string;
+    /**
+     * 检查是否能回滚的接口返回的ToRecordId参数
+     */
+    ToRecordId?: string;
+}
 /**
  * 查询列表过滤条件参数
  */
@@ -6497,7 +6571,30 @@ export interface DeleteUsersFromWorkGroupResponse {
 /**
  * DescribeUserDataEngineConfig请求参数结构体
  */
-export declare type DescribeUserDataEngineConfigRequest = null;
+export interface DescribeUserDataEngineConfigRequest {
+    /**
+     * 排序方式，desc表示倒序，asc表示正序
+     */
+    Sorting?: string;
+    /**
+     * 返回数量，默认为10，最大值为100。
+     */
+    Limit?: number;
+    /**
+     * 偏移量，默认为0。
+     */
+    Offset?: number;
+    /**
+     * 排序字段，支持如下字段类型，create-time
+     */
+    SortBy?: string;
+    /**
+     * 过滤条件，如下支持的过滤类型，传参Name应为以下其中一个,每种过滤参数支持的过滤值不超过5个。
+  app-id - String - （appid过滤）
+  engine-id - String - （引擎ID过滤）
+     */
+    Filters?: Array<Filter>;
+}
 /**
  * DescribeDataEngine请求参数结构体
  */
@@ -6896,7 +6993,16 @@ export interface AlterDMSDatabaseResponse {
 /**
  * UpdateDataEngineConfig请求参数结构体
  */
-export declare type UpdateDataEngineConfigRequest = null;
+export interface UpdateDataEngineConfigRequest {
+    /**
+     * 引擎ID
+     */
+    DataEngineIds: Array<string>;
+    /**
+     * 引擎配置命令，支持UpdateSparkSQLLakefsPath（更新原生表配置）、UpdateSparkSQLResultPath（更新结果路径配置）
+     */
+    DataEngineConfigCommand: string;
+}
 /**
  * CreateWorkGroup请求参数结构体
  */
@@ -7659,7 +7765,20 @@ export interface DMSColumn {
 /**
  * UpdateUserDataEngineConfig请求参数结构体
  */
-export declare type UpdateUserDataEngineConfigRequest = null;
+export interface UpdateUserDataEngineConfigRequest {
+    /**
+     * 引擎ID
+     */
+    DataEngineId: string;
+    /**
+     * 引擎配置项
+     */
+    DataEngineConfigPairs?: Array<DataEngineConfigPair>;
+    /**
+     * 作业引擎资源配置模版
+     */
+    SessionResourceTemplate?: SessionResourceTemplate;
+}
 /**
  * 数据源属性
  */

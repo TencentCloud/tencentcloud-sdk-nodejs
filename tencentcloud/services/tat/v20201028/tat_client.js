@@ -128,6 +128,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("InvokeCommand", req, cb);
     }
     /**
+     * 批量删除命令接口
+     */
+    async DeleteCommands(req, cb) {
+        return this.request("DeleteCommands", req, cb);
+    }
+    /**
      * 接口用于查询被托管的实例信息。
      */
     async DescribeRegisterInstances(req, cb) {
@@ -163,6 +169,12 @@ RegionState 为 AVAILABLE，代表该地域的 TAT 后台服务已经可用；�
      */
     async DescribeAutomationAgentStatus(req, cb) {
         return this.request("DescribeAutomationAgentStatus", req, cb);
+    }
+    /**
+     * 此接口用于获取配额信息
+     */
+    async DescribeQuotas(req, cb) {
+        return this.request("DescribeQuotas", req, cb);
     }
     /**
      * 此接口用于批量禁用注册码。

@@ -3210,6 +3210,12 @@ export interface SyncProxyOrganizationOperatorsRequest {
  */
 export interface ChannelCreateFlowApproversResponse {
   /**
+   * 批量补充签署人时，补充失败的报错说明 
+注:`目前仅补充动态签署人时会返回补充失败的原因`	
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FillError?: Array<FillError>
+  /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -3578,6 +3584,22 @@ export interface ChannelGetTaskResultApiRequest {
    * @deprecated
    */
   Organization?: OrganizationInfo
+}
+
+/**
+ * 批量补充签署人时，补充失败的报错说明
+ */
+export interface FillError {
+  /**
+   * 为签署方经办人在签署合同中的参与方ID，与控件绑定，是控件的归属方，ID为32位字符串。与入参中补充的签署人角色ID对应，批量补充部分失败返回对应的错误信息。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RecipientId?: string
+  /**
+   * 补充失败错误说明
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ErrMessage?: string
 }
 
 /**

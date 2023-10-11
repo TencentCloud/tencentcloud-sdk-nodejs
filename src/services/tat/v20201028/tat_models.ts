@@ -339,6 +339,27 @@ export interface Invocation {
 }
 
 /**
+ * GeneralResourceQuotaSet数据结构
+ */
+export interface GeneralResourceQuotaSet {
+  /**
+   * 资源名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResourceName?: string
+  /**
+   * 已使用额度
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResourceQuotaUsed?: number
+  /**
+   * 总额度
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResourceQuotaTotal?: number
+}
+
+/**
  * RunCommand请求参数结构体
  */
 export interface RunCommandRequest {
@@ -675,6 +696,16 @@ export interface InvocationTaskBasicInfo {
 }
 
 /**
+ * DeleteCommands请求参数结构体
+ */
+export interface DeleteCommandsRequest {
+  /**
+   * 待删除命令id
+   */
+  CommandIds: Array<string>
+}
+
+/**
  * EnableInvoker返回参数结构体
  */
 export interface EnableInvokerResponse {
@@ -682,6 +713,16 @@ export interface EnableInvokerResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeQuotas请求参数结构体
+ */
+export interface DescribeQuotasRequest {
+  /**
+   * 资源名称，目前有"COMMAND","REGISTER_CODE" 这两个指标
+   */
+  ResourceNames: Array<string>
 }
 
 /**
@@ -1470,13 +1511,13 @@ export interface DeleteCommandRequest {
 }
 
 /**
- * DeleteInvoker请求参数结构体
+ * DeleteCommands返回参数结构体
  */
-export interface DeleteInvokerRequest {
+export interface DeleteCommandsResponse {
   /**
-   * 待删除的执行器ID。
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  InvokerId: string
+  RequestId?: string
 }
 
 /**
@@ -1505,6 +1546,16 @@ export interface DescribeInvokerRecordsRequest {
    * 偏移量，默认为0。
    */
   Offset?: number
+}
+
+/**
+ * DeleteInvoker请求参数结构体
+ */
+export interface DeleteInvokerRequest {
+  /**
+   * 待删除的执行器ID。
+   */
+  InvokerId: string
 }
 
 /**
@@ -1557,6 +1608,20 @@ export interface RunCommandResponse {
  * DisableRegisterCodes返回参数结构体
  */
 export interface DisableRegisterCodesResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeQuotas返回参数结构体
+ */
+export interface DescribeQuotasResponse {
+  /**
+   * 资源额度列表
+   */
+  GeneralResourceQuotaSet?: Array<GeneralResourceQuotaSet>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

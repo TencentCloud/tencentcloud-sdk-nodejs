@@ -119,6 +119,7 @@ import {
   FlowApproverInfo,
   ChannelCreateUserAutoSignEnableUrlResponse,
   ChannelGetTaskResultApiRequest,
+  FillError,
   ChannelCreatePreparedPersonalEsignRequest,
   FlowDetailInfo,
   CreateFlowsByTemplatesResponse,

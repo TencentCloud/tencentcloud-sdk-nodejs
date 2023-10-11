@@ -196,6 +196,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDasbImageIds", req, cb);
     }
     /**
+     * 清除设备账号绑定的密钥
+     */
+    async ResetDeviceAccountPrivateKey(req, cb) {
+        return this.request("ResetDeviceAccountPrivateKey", req, cb);
+    }
+    /**
      * 新建主机账号
      */
     async CreateDeviceAccount(req, cb) {
@@ -236,6 +242,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CreateCmdTemplate(req, cb) {
         return this.request("CreateCmdTemplate", req, cb);
+    }
+    /**
+     * 资源变配
+     */
+    async ModifyResource(req, cb) {
+        return this.request("ModifyResource", req, cb);
     }
     /**
      * 修改用户信息
@@ -310,10 +322,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateUserGroup", req, cb);
     }
     /**
-     * 清除设备账号绑定的密钥
+     * 创建堡垒机实例
      */
-    async ResetDeviceAccountPrivateKey(req, cb) {
-        return this.request("ResetDeviceAccountPrivateKey", req, cb);
+    async CreateResource(req, cb) {
+        return this.request("CreateResource", req, cb);
     }
     /**
      * 新建用户

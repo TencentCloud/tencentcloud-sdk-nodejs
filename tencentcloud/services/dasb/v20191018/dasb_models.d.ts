@@ -49,6 +49,15 @@ export interface DescribeLoginEventRequest {
     Limit?: number;
 }
 /**
+ * ModifyResource返回参数结构体
+ */
+export interface ModifyResourceResponse {
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * BindDeviceAccountPassword请求参数结构体
  */
 export interface BindDeviceAccountPasswordRequest {
@@ -192,6 +201,19 @@ export interface AddUserGroupMembersRequest {
      * 成员用户ID集合
      */
     MemberIdSet: Array<number | bigint>;
+}
+/**
+ * CreateResource请求参数结构体
+ */
+export interface CreateResourceRequest {
+    /**
+     * 部署堡垒机的VpcId
+     */
+    VpcId: string;
+    /**
+     * 部署堡垒机的SubnetId
+     */
+    SubnetId: string;
 }
 /**
  * DescribeDevices返回参数结构体
@@ -1083,6 +1105,23 @@ export interface DeleteDeviceGroupMembersRequest {
     MemberIdSet: Array<number | bigint>;
 }
 /**
+ * SearchCommand返回参数结构体
+ */
+export interface SearchCommandResponse {
+    /**
+     * 总记录数
+     */
+    TotalCount?: number;
+    /**
+     * 命令列表
+     */
+    Commands?: Array<SearchCommandResult>;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * CreateDeviceGroup请求参数结构体
  */
 export interface CreateDeviceGroupRequest {
@@ -1355,21 +1394,54 @@ export interface SearchAuditLogRequest {
     Limit?: number;
 }
 /**
- * SearchCommand返回参数结构体
+ * CreateResource返回参数结构体
  */
-export interface SearchCommandResponse {
-    /**
-     * 总记录数
-     */
-    TotalCount?: number;
-    /**
-     * 命令列表
-     */
-    Commands?: Array<SearchCommandResult>;
+export interface CreateResourceResponse {
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * ModifyResource请求参数结构体
+ */
+export interface ModifyResourceRequest {
+    /**
+     * 需要开通服务的资源ID
+     */
+    ResourceId: string;
+    /**
+     * 已废弃
+     */
+    Status?: string;
+    /**
+     * 已废弃
+     */
+    ModuleSet?: Array<string>;
+    /**
+     * 实例版本
+     */
+    ResourceEdition?: string;
+    /**
+     * 资源节点数
+     */
+    ResourceNode?: number;
+    /**
+     * 自动续费
+     */
+    AutoRenewFlag?: number;
+    /**
+     * 带宽扩展包个数(4M)
+     */
+    PackageBandwidth?: number;
+    /**
+     * 授权点数扩展包个数(50点)
+     */
+    PackageNode?: number;
+    /**
+     * 日志投递
+     */
+    LogDelivery?: number;
 }
 /**
  * DeleteUsers返回参数结构体

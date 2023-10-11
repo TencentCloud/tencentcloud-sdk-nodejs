@@ -5560,6 +5560,16 @@ export interface AiAnalysisTaskTagResult {
 }
 
 /**
+ * 智能去水印任务输入类型
+ */
+export interface AiAnalysisTaskDelLogoInput {
+  /**
+   * 视频智能去水印模板 ID。
+   */
+  Definition: number
+}
+
+/**
  * BatchStopStreamLinkFlow请求参数结构体
  */
 export interface BatchStopStreamLinkFlowRequest {
@@ -7559,32 +7569,37 @@ export interface AiAnalysisResult {
 <li>FrameTag：智能按帧标签</li>
 <li>Highlight：智能精彩集锦</li>
    */
-  Type: string
+  Type?: string
   /**
    * 视频内容分析智能分类任务的查询结果，当任务类型为 Classification 时有效。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ClassificationTask: AiAnalysisTaskClassificationResult
+  ClassificationTask?: AiAnalysisTaskClassificationResult
   /**
    * 视频内容分析智能封面任务的查询结果，当任务类型为 Cover 时有效。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CoverTask: AiAnalysisTaskCoverResult
+  CoverTask?: AiAnalysisTaskCoverResult
   /**
    * 视频内容分析智能标签任务的查询结果，当任务类型为 Tag 时有效。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TagTask: AiAnalysisTaskTagResult
+  TagTask?: AiAnalysisTaskTagResult
   /**
    * 视频内容分析智能按帧标签任务的查询结果，当任务类型为 FrameTag 时有效。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  FrameTagTask: AiAnalysisTaskFrameTagResult
+  FrameTagTask?: AiAnalysisTaskFrameTagResult
   /**
    * 视频内容分析集锦任务的查询结果，当任务类型为 Highlight时有效。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  HighlightTask: AiAnalysisTaskHighlightResult
+  HighlightTask?: AiAnalysisTaskHighlightResult
+  /**
+   * 视频内容分析去水印任务的查询结果，当任务类型为 DeLogo 时有效。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DeLogoTask?: AiAnalysisTaskDelLogoResult
 }
 
 /**
@@ -8844,6 +8859,20 @@ export interface DescribeStreamLinkFlowRealtimeStatusRequest {
    * 输出id数组，如果输入输出数组都为空，则代表全量查询。
    */
   OutputIds?: Array<string>
+}
+
+/**
+ * 智能去水印结果信息
+ */
+export interface AiAnalysisTaskDelLogoOutput {
+  /**
+   * 去水印后文件的路径。
+   */
+  Path: string
+  /**
+   * 去水印后文件的存储位置。
+   */
+  OutputStorage: TaskOutputStorage
 }
 
 /**
@@ -13627,6 +13656,33 @@ export interface LiveActivityResItem {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   LiveRecordTask?: LiveScheduleLiveRecordTaskResult
+}
+
+/**
+ * 智能去水印结果类型
+ */
+export interface AiAnalysisTaskDelLogoResult {
+  /**
+   * 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。
+   */
+  Status?: string
+  /**
+   * 错误码，0：成功，其他值：失败。
+   */
+  ErrCode?: number
+  /**
+   * 错误信息。
+   */
+  Message?: string
+  /**
+   * 智能去水印任务输入。
+   */
+  Input?: AiAnalysisTaskDelLogoInput
+  /**
+   * 智能去水印任务输出。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Output?: AiAnalysisTaskDelLogoOutput
 }
 
 /**

@@ -37,6 +37,15 @@ export interface DestroyInstanceByApiResponse {
     RequestId?: string;
 }
 /**
+ * DestroyInstanceByApi请求参数结构体
+ */
+export interface DestroyInstanceByApiRequest {
+    /**
+     * 实例名称，例如"cdwpg-xxxx"
+     */
+    InstanceId: string;
+}
+/**
  * CreateInstanceByApi请求参数结构体
  */
 export interface CreateInstanceByApiRequest {
@@ -115,6 +124,30 @@ export interface CreateInstanceByApiResponse {
     RequestId?: string;
 }
 /**
+ * DescribeSimpleInstances返回参数结构体
+ */
+export interface DescribeSimpleInstancesResponse {
+    /**
+     * 1
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TotalCount?: number;
+    /**
+     * 1
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InstancesList?: Array<InstanceSimpleInfoNew>;
+    /**
+     * -
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ErrorMsg?: string;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * 标签描述
  */
 export interface Tag {
@@ -126,6 +159,96 @@ export interface Tag {
      * 标签的值
      */
     TagValue: string;
+}
+/**
+ * 精简集群信息
+ */
+export interface InstanceSimpleInfoNew {
+    /**
+     * 1
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ID?: number;
+    /**
+     * 1
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InstanceId?: string;
+    /**
+     * 1
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InstanceName?: string;
+    /**
+     * 1
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Version?: string;
+    /**
+     * 1
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Region?: string;
+    /**
+     * 1
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RegionId?: number;
+    /**
+     * 1
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RegionDesc?: string;
+    /**
+     * 1
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Zone?: string;
+    /**
+     * 1
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ZoneId?: number;
+    /**
+     * 1
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ZoneDesc?: string;
+    /**
+     * 1
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    VpcId?: string;
+    /**
+     * 1
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SubnetId?: string;
+    /**
+     * 1
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CreateTime?: string;
+    /**
+     * 1
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ExpireTime?: string;
+    /**
+     * 1
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AccessInfo?: string;
+    /**
+     * 1
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PayMode?: string;
+    /**
+     * 1
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RenewFlag?: boolean;
 }
 /**
  * 计费时间参数
@@ -153,11 +276,27 @@ export interface ChargeProperties {
     ChargeType?: string;
 }
 /**
- * DestroyInstanceByApi请求参数结构体
+ * DescribeSimpleInstances请求参数结构体
  */
-export interface DestroyInstanceByApiRequest {
+export interface DescribeSimpleInstancesRequest {
     /**
-     * 实例名称，例如"cdwpg-xxxx"
+     * 11
      */
-    InstanceId: string;
+    SearchInstanceId?: string;
+    /**
+     * 11
+     */
+    SearchInstanceName?: string;
+    /**
+     * 11
+     */
+    Offset?: number;
+    /**
+     * 11
+     */
+    Limit?: number;
+    /**
+     * 11
+     */
+    SearchTags?: Array<string>;
 }

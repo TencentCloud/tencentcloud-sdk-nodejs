@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { CreateRegisterCodeResponse, PreviewReplacedCommandContentResponse, CreateCommandResponse, DisableInvokerRequest, DisableRegisterCodesRequest, DescribeRegisterInstancesRequest, DeleteRegisterCodesRequest, RunCommandRequest, InvokeCommandRequest, DescribeInvocationTasksRequest, DeleteRegisterInstanceResponse, DescribeRegionsRequest, DescribeInvokerRecordsResponse, ModifyInvokerRequest, EnableInvokerResponse, EnableInvokerRequest, DescribeRegisterInstancesResponse, ModifyCommandResponse, DescribeInvokersResponse, CancelInvocationResponse, DeleteRegisterInstanceRequest, DeleteCommandResponse, DisableInvokerResponse, DescribeCommandsResponse, CreateRegisterCodeRequest, CreateInvokerRequest, DescribeAutomationAgentStatusRequest, InvokeCommandResponse, ModifyCommandRequest, DescribeInvokersRequest, DescribeCommandsRequest, DeleteInvokerResponse, DescribeInvocationsRequest, DescribeInvocationsResponse, DescribeInvocationTasksResponse, PreviewReplacedCommandContentRequest, ModifyInvokerResponse, ModifyRegisterInstanceResponse, DescribeRegisterCodesResponse, DescribeAutomationAgentStatusResponse, CreateInvokerResponse, CancelInvocationRequest, DescribeRegisterCodesRequest, DeleteCommandRequest, DeleteInvokerRequest, DeleteRegisterCodesResponse, DescribeInvokerRecordsRequest, ModifyRegisterInstanceRequest, RunCommandResponse, DisableRegisterCodesResponse, DescribeRegionsResponse, CreateCommandRequest } from "./tat_models";
+import { CreateRegisterCodeResponse, PreviewReplacedCommandContentResponse, CreateCommandResponse, DisableInvokerRequest, DisableRegisterCodesRequest, DescribeRegisterInstancesRequest, DeleteRegisterCodesRequest, RunCommandRequest, InvokeCommandRequest, DescribeInvocationTasksRequest, DeleteRegisterInstanceResponse, DescribeRegionsRequest, DescribeInvokerRecordsResponse, ModifyInvokerRequest, DeleteCommandsRequest, EnableInvokerResponse, DescribeQuotasRequest, EnableInvokerRequest, DescribeRegisterInstancesResponse, ModifyCommandResponse, DescribeInvokersResponse, CancelInvocationResponse, DeleteRegisterInstanceRequest, DeleteCommandResponse, DisableInvokerResponse, DescribeCommandsResponse, CreateRegisterCodeRequest, CreateInvokerRequest, DescribeAutomationAgentStatusRequest, InvokeCommandResponse, ModifyCommandRequest, DescribeInvokersRequest, DescribeCommandsRequest, DeleteInvokerResponse, DescribeInvocationsRequest, DescribeInvocationsResponse, DescribeInvocationTasksResponse, PreviewReplacedCommandContentRequest, ModifyInvokerResponse, ModifyRegisterInstanceResponse, DescribeRegisterCodesResponse, DescribeAutomationAgentStatusResponse, CreateInvokerResponse, CancelInvocationRequest, DescribeRegisterCodesRequest, DeleteCommandRequest, DeleteCommandsResponse, DeleteRegisterCodesResponse, DescribeInvokerRecordsRequest, DeleteInvokerRequest, ModifyRegisterInstanceRequest, RunCommandResponse, DisableRegisterCodesResponse, DescribeQuotasResponse, DescribeRegionsResponse, CreateCommandRequest } from "./tat_models";
 /**
  * tat client
  * @class
@@ -78,6 +78,10 @@ export declare class Client extends AbstractClient {
      */
     InvokeCommand(req: InvokeCommandRequest, cb?: (error: string, rep: InvokeCommandResponse) => void): Promise<InvokeCommandResponse>;
     /**
+     * 批量删除命令接口
+     */
+    DeleteCommands(req: DeleteCommandsRequest, cb?: (error: string, rep: DeleteCommandsResponse) => void): Promise<DeleteCommandsResponse>;
+    /**
      * 接口用于查询被托管的实例信息。
      */
     DescribeRegisterInstances(req: DescribeRegisterInstancesRequest, cb?: (error: string, rep: DescribeRegisterInstancesResponse) => void): Promise<DescribeRegisterInstancesResponse>;
@@ -102,6 +106,10 @@ RegionState 为 AVAILABLE，代表该地域的 TAT 后台服务已经可用；�
      * 此接口用于查询自动化助手客户端的状态。
      */
     DescribeAutomationAgentStatus(req: DescribeAutomationAgentStatusRequest, cb?: (error: string, rep: DescribeAutomationAgentStatusResponse) => void): Promise<DescribeAutomationAgentStatusResponse>;
+    /**
+     * 此接口用于获取配额信息
+     */
+    DescribeQuotas(req: DescribeQuotasRequest, cb?: (error: string, rep: DescribeQuotasResponse) => void): Promise<DescribeQuotasResponse>;
     /**
      * 此接口用于批量禁用注册码。
      */

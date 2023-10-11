@@ -298,6 +298,16 @@ it("dasb.v20191018.DescribeDasbImageIds", async function () {
     }
 })
 
+it("dasb.v20191018.ResetDeviceAccountPrivateKey", async function () {
+    try {
+       const data = await client.ResetDeviceAccountPrivateKey({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dasb.v20191018.CreateDeviceAccount", async function () {
     try {
        const data = await client.CreateDeviceAccount({})
@@ -361,6 +371,16 @@ it("dasb.v20191018.DeleteUserGroups", async function () {
 it("dasb.v20191018.CreateCmdTemplate", async function () {
     try {
        const data = await client.CreateCmdTemplate({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dasb.v20191018.ModifyResource", async function () {
+    try {
+       const data = await client.ModifyResource({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -488,9 +508,9 @@ it("dasb.v20191018.CreateUserGroup", async function () {
     }
 })
 
-it("dasb.v20191018.ResetDeviceAccountPrivateKey", async function () {
+it("dasb.v20191018.CreateResource", async function () {
     try {
-       const data = await client.ResetDeviceAccountPrivateKey({})
+       const data = await client.CreateResource({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

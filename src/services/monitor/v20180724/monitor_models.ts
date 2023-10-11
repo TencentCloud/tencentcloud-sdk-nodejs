@@ -1251,10 +1251,12 @@ export interface CreateGrafanaIntegrationRequest {
 export interface Dimension {
   /**
    * 实例维度名称
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Name: string
   /**
    * 实例维度值
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Value: string
 }

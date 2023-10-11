@@ -814,7 +814,7 @@ export interface ModifyZoneSettingRequest {
  */
 export interface RuleRewriteActionParams {
     /**
-     * 功能参数名称，参数填写规范可调用接口 [查询规则引擎的设置参数](https://tcloud4api.woa.com/document/product/1657/79433?!preview&!document=1) 查看。现在只有三种取值：
+     * 功能参数名称，参数填写规范可调用接口 [查询规则引擎的设置参数](https://cloud.tencent.com/document/product/1552/80618) 查看。现在只有三种取值：
   <li> add：添加 HTTP 头部；</li>
   <li> set：重写 HTTP 头部；</li>
   <li> del：删除 HTTP 头部。</li>
@@ -855,7 +855,9 @@ export interface BotUserRule {
   <li>drop：拦截；</li>
   <li>monitor：观察；</li>
   <li>trans：放行；</li>
-  <li>alg：JavaScript挑战；</li>
+  <li>redirect：重定向；</li>
+  <li>page：指定页面；</li>
+  <li>alg：JavaScript 挑战；</li>
   <li>captcha：托管挑战；</li>
   <li>random：随机处置；</li>
   <li>silence：静默；</li>
@@ -866,7 +868,7 @@ export interface BotUserRule {
     /**
      * 规则状态，取值有：
   <li>on：生效；</li>
-  <li>off：不生效。</li>默认on生效。
+  <li>off：不生效。</li>默认 on 生效。
      */
     RuleStatus: string;
     /**
@@ -878,8 +880,7 @@ export interface BotUserRule {
      */
     RulePriority: number;
     /**
-     * 规则id。仅出参使用。
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 规则 Id。仅出参使用。
      */
     RuleID?: number;
     /**
@@ -888,22 +889,37 @@ export interface BotUserRule {
     ExtendActions?: Array<BotExtendAction>;
     /**
      * 过滤词，取值有：
-  <li>sip：客户端ip。</li>
-  注意：此字段可能返回 null，表示取不到有效值。
+  <li>sip：客户端 ip。</li>
+  默认为空字符串。
      */
     FreqFields?: Array<string>;
     /**
-     * 更新时间。
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 更新时间。仅出参使用。
      */
     UpdateTime?: string;
     /**
-     * 统计范围，字段为null时，代表source_to_eo。取值有：
-  <li>source_to_eo：（响应）源站到EdgeOne。</li>
-  <li>client_to_eo：（请求）客户端到EdgeOne；</li>
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 统计范围。取值有：
+  <li>source_to_eo：（响应）源站到 EdgeOne；</li>
+  <li>client_to_eo：（请求）客户端到 EdgeOne。</li>
+  默认为 source_to_eo。
      */
     FreqScope?: Array<string>;
+    /**
+     * 自定义返回页面的名称。Action 是 page 时必填，且不能为空。
+     */
+    Name?: string;
+    /**
+     * 自定义响应 Id。该 Id 可通过查询自定义错误页列表接口获取。默认值为default，使用系统默认页面。Action 是 page 时必填，且不能为空。
+     */
+    CustomResponseId?: string;
+    /**
+     * 自定义返回页面的响应码。Action 是 page 时必填，且不能为空，取值: 100~600，不支持 3xx 响应码。默认值：567。
+     */
+    ResponseCode?: number;
+    /**
+     * 重定向时候的地址。Action 是 redirect 时必填，且不能为空。
+     */
+    RedirectUrl?: string;
 }
 /**
  * 源站配置。
@@ -2664,7 +2680,7 @@ export interface DescribeTopL7AnalysisDataRequest {
     Limit?: number;
     /**
      * 过滤条件，详细的过滤条件Key值如下：
-  <li>country<br>   按照【<strong>国家/地区</strong>】进行过滤，国家/地区遵循<a href="https://zh.wikipedia.org/wiki/ISO_3166-1">ISO 3166</a>规范。</li>
+  <li>country<br>   按照【<strong>国家/地区</strong>】进行过滤，国家/地区遵循 <a href="https://baike.baidu.com/item/ISO%203166-1/5269555">ISO 3166</a> 规范。</li>
   <li>province<br>   按照【<strong>省份</strong>】进行过滤，此参数只支持服务区域为中国大陆。</li>
   <li>isp<br>   按照【<strong>运营商</strong>】进行过滤，此参数只支持服务区域为中国大陆。<br>   对应的Value可选项如下：<br>   2：中国电信；<br>   26：中国联通；<br>   1046：中国移动；<br>   3947：中国铁通；<br>   38：教育网；<br>   43：长城宽带；<br>   0：其他运营商。</li>
   <li>domain<br>   按照【<strong>子域名</strong>】进行过滤，子域名形如： test.example.com。</li>
@@ -3185,7 +3201,7 @@ export interface RuleCodeActionParams {
      */
     StatusCode: number;
     /**
-     * 参数名称，参数填写规范可调用接口 [查询规则引擎的设置参数](https://tcloud4api.woa.com/document/product/1657/79433?!preview&!document=1) 查看。
+     * 参数名称，参数填写规范可调用接口 [查询规则引擎的设置参数](https://cloud.tencent.com/document/product/1552/80618) 查看。
      */
     Name: string;
     /**
@@ -3248,7 +3264,7 @@ export interface DescribeTimingL7AnalysisDataRequest {
     Interval?: string;
     /**
      * 过滤条件，详细的过滤条件Key值如下：
-  <li>country<br>   按照【<strong>国家/地区</strong>】进行过滤，国家/地区遵循<a href="https://zh.wikipedia.org/wiki/ISO_3166-1">ISO 3166</a>规范。</li>
+  <li>country<br>   按照【<strong>国家/地区</strong>】进行过滤，国家/地区遵循 <a href="https://baike.baidu.com/item/ISO%203166-1/5269555">ISO 3166</a> 规范。</li>
   <li>province<br>   按照【<strong>省份</strong>】进行过滤，此参数只支持服务区域为中国大陆。</li>
   <li>isp<br>   按照【<strong>运营商</strong>】进行过滤，此参数只支持服务区域为中国大陆。<br>   对应的Value可选项如下：<br>   2：中国电信；<br>   26：中国联通；<br>   1046：中国移动；<br>   3947：中国铁通；<br>   38：教育网；<br>   43：长城宽带；<br>   0：其他运营商。</li>
   <li>domain<br>   按照【<strong>子域名</strong>】进行过滤，子域名形如： test.example.com。</li>
@@ -3846,7 +3862,7 @@ export interface DownloadL4LogsRequest {
  */
 export interface CodeAction {
     /**
-     * 功能名称，功能名称填写规范可调用接口 [查询规则引擎的设置参数](https://tcloud4api.woa.com/document/product/1657/79433?!preview&!document=1) 查看。
+     * 功能名称，功能名称填写规范可调用接口 [查询规则引擎的设置参数](https://cloud.tencent.com/document/product/1552/80618) 查看。
      */
     Action: string;
     /**
@@ -4235,47 +4251,47 @@ export interface RulesProperties {
     /**
      * 值为参数名称。
      */
-    Name: string;
+    Name?: string;
     /**
      * 数值参数的最小值，非数值参数或 Min 和 Max 值都为 0 则此项无意义。
      */
-    Min: number;
+    Min?: number;
     /**
      * 参数值的可选值。
   注意：若参数值为用户自定义则该数组为空数组。
      */
-    ChoicesValue: Array<string>;
+    ChoicesValue?: Array<string>;
     /**
      * 参数值类型。
   <li> CHOICE：参数值只能在 ChoicesValue 中选择； </li>
   <li> TOGGLE：参数值为开关类型，可在 ChoicesValue 中选择；</li>
   <li> OBJECT：参数值为对象类型，ChoiceProperties 为改对象类型关联的属性；</li>
   <li> CUSTOM_NUM：参数值用户自定义，整型类型；</li>
-  <li> CUSTOM_STRING：参数值用户自定义，字符串类型。</li>注意：当参数类型为 OBJECT 类型时，请注意参考 [示例2 参数为 OBJECT 类型的创建](https://tcloud4api.woa.com/document/product/1657/79382?!preview&!document=1)
+  <li> CUSTOM_STRING：参数值用户自定义，字符串类型。</li>注意：当参数类型为 OBJECT 类型时，请注意参考 [示例2 参数为 OBJECT 类型的创建](https://cloud.tencent.com/document/product/1552/80622#.E7.A4.BA.E4.BE.8B2-.E5.8F.82.E6.95.B0.E4.B8.BA-OBJECT-.E7.B1.BB.E5.9E.8B.E7.9A.84.E5.88.9B.E5.BB.BA)
      */
-    Type: string;
+    Type?: string;
     /**
      * 数值参数的最大值，非数值参数或 Min 和 Max 值都为 0 则此项无意义。
      */
-    Max: number;
+    Max?: number;
     /**
      * 参数值是否支持多选或者填写多个。
      */
-    IsMultiple: boolean;
+    IsMultiple?: boolean;
     /**
      * 是否允许为空。
      */
-    IsAllowEmpty: boolean;
+    IsAllowEmpty?: boolean;
     /**
      * 该参数对应的关联配置参数，属于调用接口的必填参数。
   注意：如果可选参数无特殊新增参数则该数组为空数组。
      */
-    ChoiceProperties: Array<RuleChoicePropertiesItem>;
+    ChoiceProperties?: Array<RuleChoicePropertiesItem>;
     /**
      * <li> 为 NULL：无特殊参数，RuleAction 选择 NormalAction；</li>
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ExtraParameter: RuleExtraParameter;
+    ExtraParameter?: RuleExtraParameter;
 }
 /**
  * DescribeOverviewL7Data返回参数结构体
@@ -4563,7 +4579,7 @@ export interface RateLimitUserRule {
      */
     RuleName: string;
     /**
-     * 处置动作，取值有： <li>monitor：观察；</li> <li>drop：拦截；</li> <li>alg：JavaScript挑战。</li>
+     * 处置动作，取值有： <li>monitor：观察；</li> <li>drop：拦截；</li><li> redirect：重定向；</li><li> page：指定页面；</li><li>alg：JavaScript 挑战。</li>
      */
     Action: string;
     /**
@@ -4580,7 +4596,7 @@ export interface RateLimitUserRule {
     /**
      * 规则状态，取值有：
   <li>on：生效；</li>
-  <li>off：不生效。</li>默认on生效。
+  <li>off：不生效。</li>默认 on 生效。
      */
     RuleStatus: string;
     /**
@@ -4593,27 +4609,41 @@ export interface RateLimitUserRule {
     RulePriority: number;
     /**
      * 规则 Id。仅出参使用。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     RuleID?: number;
     /**
      * 过滤词，取值有：
-  <li>sip：客户端ip。</li>
-  注意：此字段可能返回 null，表示取不到有效值。
+  <li>sip：客户端 ip。</li>
+  默认为空字符串。
      */
     FreqFields?: Array<string>;
     /**
-     * 更新时间。
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 更新时间。仅出参使用。修改时默认为当前时间。
      */
     UpdateTime?: string;
     /**
-     * 统计范围，字段为 null 时，代表 source_to_eo。取值有：
-  <li>source_to_eo：（响应）源站到EdgeOne。</li>
-  <li>client_to_eo：（请求）客户端到EdgeOne；</li>
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 统计范围。取值有：
+  <li>source_to_eo：（响应）源站到  EdgeOne；</li>
+  <li>client_to_eo：（请求）客户端到  EdgeOne。</li>
+  默认为 source_to_eo。
      */
     FreqScope?: Array<string>;
+    /**
+     * 自定义返回页面的名称。Action 是 page 时必填，且不能为空。
+     */
+    Name?: string;
+    /**
+     * 自定义响应 Id。该 Id 可通过查询自定义错误页列表接口获取。默认值为default，使用系统默认页面。Action 是 page 时必填，且不能为空。
+     */
+    CustomResponseId?: string;
+    /**
+     * 自定义返回页面的响应码。Action 是 page 时必填，且不能为空，取值: 100~600，不支持 3xx 响应码。默认值：567。
+     */
+    ResponseCode?: number;
+    /**
+     * 重定向时候的地址。Action 是 redirect 时必填，且不能为空。
+     */
+    RedirectUrl?: string;
 }
 /**
  * 嵌套规则信息。
@@ -4977,7 +5007,7 @@ export interface CreateZoneResponse {
     RequestId?: string;
 }
 /**
- * 规则引擎功能项操作，对于一种功能只对应下面三种类型的其中一种，RuleAction 数组中的每一项只能是其中一个类型，更多功能项的填写规范可调用接口 [查询规则引擎的设置参数](https://tcloud4api.woa.com/document/product/1657/79433?!preview&!document=1) 查看。
+ * 规则引擎功能项操作，对于一种功能只对应下面三种类型的其中一种，RuleAction 数组中的每一项只能是其中一个类型，更多功能项的填写规范可调用接口 [查询规则引擎的设置参数](https://cloud.tencent.com/document/product/1552/80618) 查看。
  */
 export interface Action {
     /**
@@ -5536,7 +5566,7 @@ export interface BotManagedRule {
  */
 export interface NormalAction {
     /**
-     * 功能名称，功能名称填写规范可调用接口 [查询规则引擎的设置参数](https://tcloud4api.woa.com/document/product/1657/79433?!preview&!document=1) 查看。
+     * 功能名称，功能名称填写规范可调用接口 [查询规则引擎的设置参数](https://cloud.tencent.com/document/product/1552/80618) 查看。
      */
     Action: string;
     /**
@@ -5628,24 +5658,28 @@ export interface CreateSecurityIPGroupRequest {
  */
 export interface DropPageDetail {
     /**
-     * 拦截页面的唯一Id。系统默认包含一个自带拦截页面，Id值为0。
-  该Id可通过创建拦截页面接口进行上传获取。如传入0，代表使用系统默认拦截页面。
+     * 拦截页面的唯一 Id。系统默认包含一个自带拦截页面，Id 值为0。
+  该 Id 可通过创建拦截页面接口进行上传获取。如传入0，代表使用系统默认拦截页面。该参数已废弃。
      */
     PageId: number;
     /**
-     * 拦截页面的HTTP状态码。状态码范围是100-600。
+     * 拦截页面的 HTTP 状态码。状态码取值：100～600，不支持 3xx 状态码。托管规则拦截页面默认：566，安全防护（除托管规则外）拦截页面默认：567.
      */
     StatusCode: number;
     /**
-     * 页面文件名或url。
+     * 页面文件名或 url。
      */
     Name: string;
     /**
      * 页面的类型，取值有：
-  <li> file：页面文件内容；</li>
-  <li> url：上传的url地址。</li>
+  <li>page：指定页面。</li>
+  
      */
     Type: string;
+    /**
+     * 自定义响应 Id。该 Id 可通过查询自定义错误页列表接口获取。默认值为default，使用系统默认页面。Type 类型是 page 时必填，且不能为空。
+     */
+    CustomResponseId?: string;
 }
 /**
  * DeleteRules返回参数结构体
@@ -5865,7 +5899,7 @@ export interface ModifyAliasDomainResponse {
  */
 export interface RewriteAction {
     /**
-     * 功能名称，功能名称填写规范可调用接口 [查询规则引擎的设置参数](https://tcloud4api.woa.com/document/product/1657/79433?!preview&!document=1) 查看。
+     * 功能名称，功能名称填写规范可调用接口 [查询规则引擎的设置参数](https://cloud.tencent.com/document/product/1552/80618) 查看。
      */
     Action: string;
     /**
@@ -5971,7 +6005,7 @@ export interface StandardDebug {
  */
 export interface RuleNormalActionParams {
     /**
-     * 参数名称，参数填写规范可调用接口 [查询规则引擎的设置参数](https://tcloud4api.woa.com/document/product/1657/79433?!preview&!document=1) 查看。
+     * 参数名称，参数填写规范可调用接口 [查询规则引擎的设置参数](https://cloud.tencent.com/document/product/1552/80618) 查看。
      */
     Name: string;
     /**
@@ -6124,10 +6158,10 @@ export interface AclUserRule {
   <li>trans：放行；</li>
   <li>drop：拦截；</li>
   <li>monitor：观察；</li>
-  <li>ban：IP封禁；</li>
+  <li>ban：IP 封禁；</li>
   <li>redirect：重定向；</li>
   <li>page：指定页面；</li>
-  <li>alg：Javascript挑战。</li>
+  <li>alg：JavaScript 挑战。</li>
      */
     Action: string;
     /**
@@ -6145,48 +6179,44 @@ export interface AclUserRule {
      */
     RulePriority: number;
     /**
-     * 规则Id。仅出参使用。
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 规则 Id。仅出参使用。
      */
     RuleID?: number;
     /**
      * 更新时间。仅出参使用。
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     UpdateTime?: string;
     /**
-     * ip封禁的惩罚时间，取值范围0-2天。默认为0。
-  注意：此字段可能返回 null，表示取不到有效值。
+     * ip 封禁的惩罚时间。Action 是 ban 时必填，且不能为空，取值范围0-2天。
      */
     PunishTime?: number;
     /**
-     * ip封禁的惩罚时间单位，取值有：
+     * ip 封禁的惩罚时间单位，取值有：
   <li>second：秒；</li>
   <li>minutes：分；</li>
-  <li>hour：小时。</li>默认为second。
-  注意：此字段可能返回 null，表示取不到有效值。
+  <li>hour：小时。</li>默认为 second。
      */
     PunishTimeUnit?: string;
     /**
-     * 自定义返回页面的名称。默认为空字符串。
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 自定义返回页面的名称。Action 是 page 时必填，且不能为空。
      */
     Name?: string;
     /**
-     * 自定义返回页面的实例id。默认为0。
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 自定义返回页面的实例 Id。默认为0，代表使用系统默认拦截页面。该参数已废弃。
      */
     PageId?: number;
     /**
-     * 重定向时候的地址，必须为本用户接入的站点子域名。默认为空字符串。
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 自定义响应 Id。该 Id 可通过查询自定义错误页列表接口获取。默认值为default，使用系统默认页面。Action 是 page 时必填，且不能为空。
      */
-    RedirectUrl?: string;
+    CustomResponseId?: string;
     /**
-     * 重定向时候的返回码。默认为0。
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 自定义返回页面的响应码。Action 是 page 时必填，且不能为空，取值: 100~600，不支持 3xx 响应码。默认值：567。
      */
     ResponseCode?: number;
+    /**
+     * 重定向时候的地址。Action 是 redirect 时必填，且不能为空。
+     */
+    RedirectUrl?: string;
 }
 /**
  * 刷新/预热 可用量及配额

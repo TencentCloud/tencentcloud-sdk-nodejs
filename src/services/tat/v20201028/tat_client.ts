@@ -29,6 +29,7 @@ import {
   DescribeRegisterInstancesRequest,
   DeleteRegisterCodesRequest,
   Invocation,
+  GeneralResourceQuotaSet,
   RunCommandRequest,
   InvokeCommandRequest,
   DescribeInvocationTasksRequest,
@@ -39,7 +40,9 @@ import {
   TaskResult,
   ModifyInvokerRequest,
   InvocationTaskBasicInfo,
+  DeleteCommandsRequest,
   EnableInvokerResponse,
+  DescribeQuotasRequest,
   EnableInvokerRequest,
   DefaultParameterConf,
   DescribeRegisterInstancesResponse,
@@ -75,13 +78,15 @@ import {
   CancelInvocationRequest,
   DescribeRegisterCodesRequest,
   DeleteCommandRequest,
-  DeleteInvokerRequest,
+  DeleteCommandsResponse,
   DeleteRegisterCodesResponse,
   DescribeInvokerRecordsRequest,
+  DeleteInvokerRequest,
   ModifyRegisterInstanceRequest,
   Tag,
   RunCommandResponse,
   DisableRegisterCodesResponse,
+  DescribeQuotasResponse,
   RegisterCodeInfo,
   DescribeRegionsResponse,
   CreateCommandRequest,
@@ -258,6 +263,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 批量删除命令接口
+   */
+  async DeleteCommands(
+    req: DeleteCommandsRequest,
+    cb?: (error: string, rep: DeleteCommandsResponse) => void
+  ): Promise<DeleteCommandsResponse> {
+    return this.request("DeleteCommands", req, cb)
+  }
+
+  /**
    * 接口用于查询被托管的实例信息。
    */
   async DescribeRegisterInstances(
@@ -316,6 +331,16 @@ RegionState 为 AVAILABLE，代表该地域的 TAT 后台服务已经可用；�
     cb?: (error: string, rep: DescribeAutomationAgentStatusResponse) => void
   ): Promise<DescribeAutomationAgentStatusResponse> {
     return this.request("DescribeAutomationAgentStatus", req, cb)
+  }
+
+  /**
+   * 此接口用于获取配额信息
+   */
+  async DescribeQuotas(
+    req: DescribeQuotasRequest,
+    cb?: (error: string, rep: DescribeQuotasResponse) => void
+  ): Promise<DescribeQuotasResponse> {
+    return this.request("DescribeQuotas", req, cb)
   }
 
   /**

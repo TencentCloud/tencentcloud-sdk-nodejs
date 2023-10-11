@@ -168,6 +168,16 @@ it("tat.v20201028.InvokeCommand", async function () {
     }
 })
 
+it("tat.v20201028.DeleteCommands", async function () {
+    try {
+       const data = await client.DeleteCommands({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tat.v20201028.DescribeRegisterInstances", async function () {
     try {
        const data = await client.DescribeRegisterInstances({})
@@ -221,6 +231,16 @@ it("tat.v20201028.DescribeRegisterCodes", async function () {
 it("tat.v20201028.DescribeAutomationAgentStatus", async function () {
     try {
        const data = await client.DescribeAutomationAgentStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tat.v20201028.DescribeQuotas", async function () {
+    try {
+       const data = await client.DescribeQuotas({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

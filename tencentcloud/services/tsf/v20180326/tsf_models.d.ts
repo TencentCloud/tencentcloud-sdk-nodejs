@@ -3474,7 +3474,7 @@ export interface DeployContainerGroupRequest {
      */
     DeployAgent?: boolean;
     /**
-     * 节点调度策略。若不指定改参数，则默认不使用节点调度策略。
+     * 节点调度策略。若不指定该参数，则默认不使用节点调度策略。
      */
     SchedulingStrategy?: SchedulingStrategy;
     /**
@@ -13779,7 +13779,7 @@ export interface DeployContainerGroupResponse {
   false：失败。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Result: boolean;
+    Result?: boolean;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */

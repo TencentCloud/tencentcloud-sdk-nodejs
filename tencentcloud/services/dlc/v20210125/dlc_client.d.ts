@@ -98,7 +98,7 @@ export declare class Client extends AbstractClient {
     /**
      * 切换引擎镜像版本
      */
-    SwitchDataEngineImage(req?: SwitchDataEngineImageRequest, cb?: (error: string, rep: SwitchDataEngineImageResponse) => void): Promise<SwitchDataEngineImageResponse>;
+    SwitchDataEngineImage(req: SwitchDataEngineImageRequest, cb?: (error: string, rep: SwitchDataEngineImageResponse) => void): Promise<SwitchDataEngineImageResponse>;
     /**
      * 启动Spark作业
      */
@@ -190,7 +190,7 @@ export declare class Client extends AbstractClient {
     /**
      * 回滚引擎镜像版本
      */
-    RollbackDataEngineImage(req?: RollbackDataEngineImageRequest, cb?: (error: string, rep: RollbackDataEngineImageResponse) => void): Promise<RollbackDataEngineImageResponse>;
+    RollbackDataEngineImage(req: RollbackDataEngineImageRequest, cb?: (error: string, rep: RollbackDataEngineImageResponse) => void): Promise<RollbackDataEngineImageResponse>;
     /**
      * 本接口（CreateSparkSessionBatchSQL）用于向Spark作业引擎提交Spark SQL批任务。
      */
@@ -246,7 +246,7 @@ export declare class Client extends AbstractClient {
     /**
      * 修改用户引擎自定义配置
      */
-    UpdateUserDataEngineConfig(req?: UpdateUserDataEngineConfigRequest, cb?: (error: string, rep: UpdateUserDataEngineConfigResponse) => void): Promise<UpdateUserDataEngineConfigResponse>;
+    UpdateUserDataEngineConfig(req: UpdateUserDataEngineConfigRequest, cb?: (error: string, rep: UpdateUserDataEngineConfigResponse) => void): Promise<UpdateUserDataEngineConfigResponse>;
     /**
      * 本接口（CancelNotebookSessionStatementBatch）用于批量取消Session 中执行的任务
      */
@@ -330,7 +330,7 @@ export declare class Client extends AbstractClient {
     /**
      * 用户某种操作，触发引擎配置修改
      */
-    UpdateDataEngineConfig(req?: UpdateDataEngineConfigRequest, cb?: (error: string, rep: UpdateDataEngineConfigResponse) => void): Promise<UpdateDataEngineConfigResponse>;
+    UpdateDataEngineConfig(req: UpdateDataEngineConfigRequest, cb?: (error: string, rep: UpdateDataEngineConfigResponse) => void): Promise<UpdateDataEngineConfigResponse>;
     /**
      * 按顺序创建任务（已经废弃，后期不再维护，请使用接口CreateTasks）
      */
@@ -346,7 +346,7 @@ export declare class Client extends AbstractClient {
     /**
      * 升级引擎镜像
      */
-    UpgradeDataEngineImage(req?: UpgradeDataEngineImageRequest, cb?: (error: string, rep: UpgradeDataEngineImageResponse) => void): Promise<UpgradeDataEngineImageResponse>;
+    UpgradeDataEngineImage(req: UpgradeDataEngineImageRequest, cb?: (error: string, rep: UpgradeDataEngineImageResponse) => void): Promise<UpgradeDataEngineImageResponse>;
     /**
      * 解绑用户鉴权策略
      */
@@ -406,7 +406,7 @@ export declare class Client extends AbstractClient {
     /**
      * 重启引擎
      */
-    RestartDataEngine(req?: RestartDataEngineRequest, cb?: (error: string, rep: RestartDataEngineResponse) => void): Promise<RestartDataEngineResponse>;
+    RestartDataEngine(req: RestartDataEngineRequest, cb?: (error: string, rep: RestartDataEngineResponse) => void): Promise<RestartDataEngineResponse>;
     /**
      * 本接口（DescribeNotebookSessionStatement）用于查询session 中执行任务的详情
      */
@@ -434,7 +434,7 @@ export declare class Client extends AbstractClient {
     /**
      * 查询用户自定义引擎参数
      */
-    DescribeUserDataEngineConfig(req?: DescribeUserDataEngineConfigRequest, cb?: (error: string, rep: DescribeUserDataEngineConfigResponse) => void): Promise<DescribeUserDataEngineConfigResponse>;
+    DescribeUserDataEngineConfig(req: DescribeUserDataEngineConfigRequest, cb?: (error: string, rep: DescribeUserDataEngineConfigResponse) => void): Promise<DescribeUserDataEngineConfigResponse>;
     /**
      * 修改用户信息
      */

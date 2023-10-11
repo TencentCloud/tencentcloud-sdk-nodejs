@@ -385,7 +385,7 @@ export interface PullSmsSendStatusByPhoneNumberResponse {
     /**
      * 下发状态响应集合。
      */
-    PullSmsSendStatusSet: Array<PullSmsSendStatus>;
+    PullSmsSendStatusSet?: Array<PullSmsSendStatus>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -934,7 +934,7 @@ export interface PullSmsSendStatusResponse {
     /**
      * 下发状态响应集合。
      */
-    PullSmsSendStatusSet: Array<PullSmsSendStatus>;
+    PullSmsSendStatusSet?: Array<PullSmsSendStatus>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */

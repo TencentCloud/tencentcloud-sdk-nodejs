@@ -219,7 +219,8 @@ export interface CreateInstancesRequest {
      */
     InstanceCount?: number;
     /**
-     * 可用区列表。默认为随机可用区
+     * 可用区列表。
+  不填此参数，表示为随机可用区。
      */
     Zones?: Array<string>;
     /**
@@ -235,7 +236,7 @@ export interface CreateInstancesRequest {
      */
     ClientToken?: string;
     /**
-     * 实例登录密码信息配置。本字段目前仅支持WINDOWS实例进行密码设置。默认缺失情况下代表用户选择实例创建后设置登录密码。
+     * 实例登录密码信息配置。默认缺失情况下代表用户选择实例创建后设置登录密码。
      */
     LoginConfiguration?: LoginConfiguration;
     /**
@@ -250,6 +251,14 @@ export interface CreateInstancesRequest {
      * 防火墙模版ID。若不指定该参数，则使用默认防火墙策略。
      */
     FirewallTemplateId?: string;
+    /**
+     * 标签键和标签值。
+  如果指定多个标签，则会为指定资源同时创建并绑定该多个标签。
+  同一个资源上的同一个标签键只能对应一个标签值。如果您尝试添加已有标签键，则对应的标签值会更新为新值。
+  如果标签不存在会为您自动创建标签。
+  数组最多支持10个元素。
+     */
+    Tags?: Array<Tag>;
 }
 /**
  * DescribeZones请求参数结构体

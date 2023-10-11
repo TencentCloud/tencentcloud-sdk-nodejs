@@ -20,6 +20,7 @@ import { ClientConfig } from "../../../common/interface"
 import {
   ResetDeviceAccountPasswordResponse,
   DescribeLoginEventRequest,
+  ModifyResourceResponse,
   BindDeviceAccountPasswordRequest,
   DeleteAclsRequest,
   DeleteDeviceGroupsResponse,
@@ -31,6 +32,7 @@ import {
   BindDeviceAccountPasswordResponse,
   ResetDeviceAccountPasswordRequest,
   AddUserGroupMembersRequest,
+  CreateResourceRequest,
   DescribeDevicesResponse,
   ResetUserResponse,
   SessionCommand,
@@ -61,6 +63,7 @@ import {
   CreateAclRequest,
   DescribeLoginEventResponse,
   DeleteDeviceGroupMembersRequest,
+  SearchCommandResponse,
   CreateDeviceGroupRequest,
   CreateAclResponse,
   DescribeAclsResponse,
@@ -68,7 +71,8 @@ import {
   Command,
   ModifyAclRequest,
   SearchAuditLogRequest,
-  SearchCommandResponse,
+  CreateResourceResponse,
+  ModifyResourceRequest,
   DeleteUsersResponse,
   SearchCommandBySidResponse,
   AssetSyncStatus,
@@ -438,6 +442,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 清除设备账号绑定的密钥
+   */
+  async ResetDeviceAccountPrivateKey(
+    req: ResetDeviceAccountPrivateKeyRequest,
+    cb?: (error: string, rep: ResetDeviceAccountPrivateKeyResponse) => void
+  ): Promise<ResetDeviceAccountPrivateKeyResponse> {
+    return this.request("ResetDeviceAccountPrivateKey", req, cb)
+  }
+
+  /**
    * 新建主机账号
    */
   async CreateDeviceAccount(
@@ -505,6 +519,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateCmdTemplateResponse) => void
   ): Promise<CreateCmdTemplateResponse> {
     return this.request("CreateCmdTemplate", req, cb)
+  }
+
+  /**
+   * 资源变配
+   */
+  async ModifyResource(
+    req: ModifyResourceRequest,
+    cb?: (error: string, rep: ModifyResourceResponse) => void
+  ): Promise<ModifyResourceResponse> {
+    return this.request("ModifyResource", req, cb)
   }
 
   /**
@@ -628,13 +652,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 清除设备账号绑定的密钥
+   * 创建堡垒机实例
    */
-  async ResetDeviceAccountPrivateKey(
-    req: ResetDeviceAccountPrivateKeyRequest,
-    cb?: (error: string, rep: ResetDeviceAccountPrivateKeyResponse) => void
-  ): Promise<ResetDeviceAccountPrivateKeyResponse> {
-    return this.request("ResetDeviceAccountPrivateKey", req, cb)
+  async CreateResource(
+    req: CreateResourceRequest,
+    cb?: (error: string, rep: CreateResourceResponse) => void
+  ): Promise<CreateResourceResponse> {
+    return this.request("CreateResource", req, cb)
   }
 
   /**

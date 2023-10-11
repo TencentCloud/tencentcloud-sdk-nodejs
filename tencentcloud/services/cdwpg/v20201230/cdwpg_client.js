@@ -39,5 +39,11 @@ class Client extends abstract_client_1.AbstractClient {
     async CreateInstanceByApi(req, cb) {
         return this.request("CreateInstanceByApi", req, cb);
     }
+    /**
+     * 获取集群实例列表
+     */
+    async DescribeSimpleInstances(req, cb) {
+        return this.request("DescribeSimpleInstances", req, cb);
+    }
 }
 exports.Client = Client;
