@@ -40,6 +40,18 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateInstanceByApi", req, cb);
     }
     /**
+     * 集群详情页中显示集群状态、流程进度等
+     */
+    async DescribeInstanceState(req, cb) {
+        return this.request("DescribeInstanceState", req, cb);
+    }
+    /**
+     * 修改实例信息，目前为实例名称
+     */
+    async ModifyInstance(req, cb) {
+        return this.request("ModifyInstance", req, cb);
+    }
+    /**
      * 获取集群实例列表
      */
     async DescribeSimpleInstances(req, cb) {

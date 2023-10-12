@@ -828,6 +828,11 @@ export interface ApiInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Base64EncodedTriggerRules?: Array<Base64EncodedTriggerRule>
+  /**
+   * 是否开启SCF Event异步调用。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ServiceScfEventIsAsyncCall?: boolean
 }
 
 /**
@@ -3544,6 +3549,10 @@ export interface ModifyApiRequest {
    */
   ServiceScfFunctionType?: string
   /**
+   * 是否开启SCF Event异步调用。
+   */
+  ServiceScfEventIsAsyncCall?: boolean
+  /**
    * EIAM应用类型。
    */
   EIAMAppType?: string
@@ -3958,6 +3967,10 @@ export interface CreateApiRequest {
    * scf函数类型。当后端类型是SCF时生效。支持事件触发(EVENT)，http直通云函数(HTTP)。
    */
   ServiceScfFunctionType?: string
+  /**
+   * 是否开启SCF Event异步调用。
+   */
+  ServiceScfEventIsAsyncCall?: boolean
   /**
    * EIAM应用类型。
    */

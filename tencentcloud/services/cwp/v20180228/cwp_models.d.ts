@@ -676,7 +676,9 @@ export interface DescribeAssetProcessInfoListRequest {
     Quuid?: string;
     /**
      * 过滤条件。
-  <li>IpOrAlias - String - 是否必填：否 - 主机ip或别名筛选</li>
+  <li>IP - String - 是否必填：否 - 主机ip</li>
+  <li>MachineName - String - 是否必填：否 - 主机名称</li>
+  <li>InstanceID - string - 是否必填：否 - 实例ID</li>
   <li>Name - String - 是否必填：否 - 进程名</li>
   <li>User - String - 是否必填：否 - 进程用户</li>
   <li>Group - String - 是否必填：否 - 进程用户组</li>
@@ -818,7 +820,9 @@ export interface DescribeAssetWebFrameListRequest {
     Quuid?: string;
     /**
      * 过滤条件。
-  <li>IpOrAlias - String - 是否必填：否 - 主机ip或别名筛选</li>
+  <li>IP - String - 是否必填：否 - 主机ip</li>
+  <li>MachineName - String - 是否必填：否 - 主机名称</li>
+  <li>InstanceID - string - 是否必填：否 - 实例ID</li>
   <li>Name - String - 是否必填：否 - 框架名</li>
   <li>NameStrict - String - 是否必填：否 - 框架名（严格匹配）</li>
   <li>Lang - String - 是否必填：否 - 框架语言:java/python</li>
@@ -1824,7 +1828,9 @@ export interface DescribeAssetJarListRequest {
     Quuid?: string;
     /**
      * 过滤条件。
-  <li>IpOrAlias - String - 是否必填：否 - 主机ip或别名筛选</li>
+  <li>IP - String - 是否必填：否 - 主机ip</li>
+  <li>MachineName - String - 是否必填：否 - 主机名称</li>
+  <li>InstanceID - string - 是否必填：否 - 实例ID</li>
   <li>Name- string - 是否必填：否 - 包名</li>
   <li>Type- uint - 是否必填：否 - 类型
   1: 应用程序
@@ -5162,7 +5168,9 @@ export interface DescribeAssetInitServiceListRequest {
     Quuid?: string;
     /**
      * 过滤条件。
-  <li>IpOrAlias - String - 是否必填：否 - 主机ip或别名筛选</li>
+  <li>IP - String - 是否必填：否 - 主机ip</li>
+  <li>MachineName - String - 是否必填：否 - 主机名称</li>
+  <li>InstanceID - string - 是否必填：否 - 实例ID</li>
   <li>Name- string - 是否必填：否 - 包名</li>
   <li>User- string - 是否必填：否 - 用户</li>
   <li>IsAutoRun - string - 是否必填：否 - 是否开机自启动：0否，1是</li>
@@ -5540,11 +5548,11 @@ export interface DescribeAssetJarListResponse {
      * 应用列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Jars: Array<AssetJarBaseInfo>;
+    Jars?: Array<AssetJarBaseInfo>;
     /**
      * 总数量
      */
-    Total: number;
+    Total?: number;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -6153,11 +6161,11 @@ export interface DescribeAssetPlanTaskListResponse {
      * 列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Tasks: Array<AssetPlanTask>;
+    Tasks?: Array<AssetPlanTask>;
     /**
      * 总数量
      */
-    Total: number;
+    Total?: number;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -6542,7 +6550,7 @@ export interface ExportAssetAppListResponse {
     /**
      * 异步下载任务ID，需要配合ExportTasks接口使用
      */
-    TaskId: string;
+    TaskId?: string;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -8613,7 +8621,9 @@ export interface DescribeAssetAppListRequest {
     /**
      * 过滤条件。
   <li>AppName- string - 是否必填：否 - 应用名搜索</li>
-  <li>IpOrAlias - String - 是否必填：否 - 主机ip或别名筛选</li>
+  <li>IP - String - 是否必填：否 - 主机ip</li>
+  <li>MachineName - String - 是否必填：否 - 主机名称</li>
+  <li>InstanceID - string - 是否必填：否 - 实例ID</li>
   <li>Type - int - 是否必填：否 - 类型	: 仅linux
   0: 全部
   1: 运维
@@ -9652,12 +9662,12 @@ export interface DescribeAssetWebLocationListResponse {
     /**
      * 记录总数
      */
-    Total: number;
+    Total?: number;
     /**
      * 站点列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Locations: Array<AssetWebLocationBaseInfo>;
+    Locations?: Array<AssetWebLocationBaseInfo>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -13729,12 +13739,12 @@ export interface DescribeAssetUserListResponse {
     /**
      * 记录总数
      */
-    Total: number;
+    Total?: number;
     /**
      * 账号列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Users: Array<AssetUserBaseInfo>;
+    Users?: Array<AssetUserBaseInfo>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -15300,12 +15310,12 @@ export interface DescribeAssetWebAppListResponse {
     /**
      * 记录总数
      */
-    Total: number;
+    Total?: number;
     /**
      * 列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    WebApps: Array<AssetWebAppBaseInfo>;
+    WebApps?: Array<AssetWebAppBaseInfo>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -17123,7 +17133,7 @@ export interface ExportAssetMachineListResponse {
     /**
      * 异步下载任务ID，需要配合ExportTasks接口使用
      */
-    TaskId: string;
+    TaskId?: string;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -19272,7 +19282,9 @@ export interface DescribeIgnoreRuleEffectHostListRequest {
 export interface ExportAssetMachineListRequest {
     /**
      * 过滤条件。
-  <li>IpOrAlias - String - 是否必填：否 - 主机ip或别名筛选</li>
+  <li>IP - String - 是否必填：否 - 主机ip</li>
+  <li>MachineName - String - 是否必填：否 - 主机名称</li>
+  <li>InstanceID - string - 是否必填：否 - 实例ID</li>
   <li>OsType - String - 是否必填：否 - windows或linux</li>
   <li>CpuLoad - Int - 是否必填：否 -
   0: 0%或未知  1: 0%～20%
@@ -20456,11 +20468,11 @@ export interface DescribeAssetAppListResponse {
      * 应用列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Apps: Array<AssetAppBaseInfo>;
+    Apps?: Array<AssetAppBaseInfo>;
     /**
      * 总数量
      */
-    Total: number;
+    Total?: number;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -20510,7 +20522,9 @@ export interface ExportAssetAppListRequest {
     /**
      * 过滤条件。
   <li>AppName- string - 是否必填：否 - 应用名搜索</li>
-  <li>IpOrAlias - String - 是否必填：否 - 主机ip或别名筛选</li>
+  <li>IP - String - 是否必填：否 - 主机ip</li>
+  <li>MachineName - String - 是否必填：否 - 主机名称</li>
+  <li>InstanceID - string - 是否必填：否 - 实例ID</li>
   <li>Type - int - 是否必填：否 - 类型	: 仅linux
   0: 全部
   1: 运维
@@ -21709,12 +21723,12 @@ export interface DescribeAssetPortInfoListResponse {
     /**
      * 记录总数
      */
-    Total: number;
+    Total?: number;
     /**
      * 列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Ports: Array<AssetPortBaseInfo>;
+    Ports?: Array<AssetPortBaseInfo>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -22219,9 +22233,10 @@ export interface DescribeAssetDatabaseListRequest {
     Quuid?: string;
     /**
      * 过滤条件。
-  <li>IpOrAlias - String - 是否必填：否 - 主机ip或别名筛选</li>
+  <li>MachineName- String - 是否必填：否 - 主机别名筛选</li>
+  <li>IP- String - 是否必填：否 - 主机ip筛选</li>
+  <li>InstanceID- String - 是否必填：否 - 主机实例ID筛选</li>
   <li>User- string - 是否必填：否 - 运行用户</li>
-  <li>Ip - String - 是否必填：否 - 绑定IP</li>
   <li>Port - Int - 是否必填：否 - 端口</li>
   <li>Name - Int - 是否必填：否 - 数据库名称
   0:全部
@@ -22482,11 +22497,11 @@ export interface DescribeAssetDatabaseListResponse {
      * 列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Databases: Array<AssetDatabaseBaseInfo>;
+    Databases?: Array<AssetDatabaseBaseInfo>;
     /**
      * 总数量
      */
-    Total: number;
+    Total?: number;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -23120,7 +23135,9 @@ export interface DescribeAssetPortInfoListRequest {
     /**
      * 过滤条件。
   <li>Port - uint64 - 是否必填：否 - 端口</li>
-  <li>Ip - String - 是否必填：否 - 绑定IP</li>
+  <li>IP - String - 是否必填：否 - 主机ip</li>
+  <li>MachineName - String - 是否必填：否 - 主机名称</li>
+  <li>InstanceID - string - 是否必填：否 - 实例ID</li>
   <li>ProcessName - String - 是否必填：否 - 监听进程</li>
   <li>Pid - uint64 - 是否必填：否 - PID</li>
   <li>User - String - 是否必填：否 - 运行用户</li>
@@ -24325,11 +24342,11 @@ export interface DescribeAssetCoreModuleListResponse {
      * 列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Modules: Array<AssetCoreModuleBaseInfo>;
+    Modules?: Array<AssetCoreModuleBaseInfo>;
     /**
      * 总数量
      */
-    Total: number;
+    Total?: number;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -25064,7 +25081,9 @@ export interface DescribeAssetPlanTaskListRequest {
     Quuid?: string;
     /**
      * 过滤条件。
-  <li>IpOrAlias - String - 是否必填：否 - 主机ip或别名筛选</li>
+  <li>IP - String - 是否必填：否 - 主机ip</li>
+  <li>MachineName - String - 是否必填：否 - 主机名称</li>
+  <li>InstanceID - string - 是否必填：否 - 实例ID</li>
   <li>User- string - 是否必填：否 - 用户</li>
   <li>Status- int - 是否必填：否 - 默认启用状态：0未启用， 1启用 </li>
      */
@@ -26381,7 +26400,9 @@ export interface DescribeAssetCoreModuleListRequest {
     Quuid?: string;
     /**
      * 过滤条件。
-  <li>IpOrAlias - String - 是否必填：否 - 主机ip或别名筛选</li>
+  <li>IP - String - 是否必填：否 - 主机ip</li>
+  <li>MachineName - String - 是否必填：否 - 主机名称</li>
+  <li>InstanceID - string - 是否必填：否 - 实例ID</li>
   <li>Name- string - 是否必填：否 - 包名</li>
   <li>User- string - 是否必填：否 - 用户</li>
      */
@@ -27045,12 +27066,12 @@ export interface DescribeAssetProcessInfoListResponse {
     /**
      * 记录总数
      */
-    Total: number;
+    Total?: number;
     /**
      * 列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Process: Array<AssetProcessBaseInfo>;
+    Process?: Array<AssetProcessBaseInfo>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -27214,7 +27235,9 @@ export interface DescribeAssetWebAppListRequest {
     Quuid?: string;
     /**
      * 过滤条件。
-  <li>IpOrAlias - String - 是否必填：否 - 主机ip或别名筛选</li>
+  <li>IP - String - 是否必填：否 - 主机ip</li>
+  <li>MachineName - String - 是否必填：否 - 主机名称</li>
+  <li>InstanceID - string - 是否必填：否 - 实例ID</li>
   <li>Name - String - 是否必填：否 - 应用名</li>
   <li>Domain - String - 是否必填：否 - 站点域名</li>
   <li>Type - int - 是否必填：否 - 服务类型：
@@ -27537,7 +27560,9 @@ export interface DescribeAssetWebLocationListRequest {
     Quuid?: string;
     /**
      * 过滤条件。
-  <li>IpOrAlias - String - 是否必填：否 - 主机ip或别名筛选</li>
+  <li>IP - String - 是否必填：否 - 主机ip</li>
+  <li>MachineName - String - 是否必填：否 - 主机名称</li>
+  <li>InstanceID - string - 是否必填：否 - 实例ID</li>
   <li>Name - String - 是否必填：否 - 域名</li>
   <li>User - String - 是否必填：否 - 运行用户</li>
   <li>Port - uint64 - 是否必填：否 - 站点端口</li>
@@ -28990,12 +29015,12 @@ export interface DescribeAssetWebFrameListResponse {
     /**
      * 记录总数
      */
-    Total: number;
+    Total?: number;
     /**
      * 列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    WebFrames: Array<AssetWebFrameBaseInfo>;
+    WebFrames?: Array<AssetWebFrameBaseInfo>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -29063,7 +29088,9 @@ export interface DescribeAssetUserListRequest {
     Quuid?: string;
     /**
      * 过滤条件。
-  <li>IpOrAlias - String - 是否必填：否 - 主机ip或别名筛选</li>
+  <li>IP - String - 是否必填：否 - 主机ip</li>
+  <li>MachineName - String - 是否必填：否 - 主机名称</li>
+  <li>InstanceID - string - 是否必填：否 - 实例ID</li>
   <li>Name - String - 是否必填：否 - 账户名（模糊匹配）</li>
   <li>NameStrict - String - 是否必填：否 - 账户名（严格匹配）</li>
   <li>Uid - uint64 - 是否必填：否 - Uid</li>

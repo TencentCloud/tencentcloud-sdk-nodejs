@@ -1,4 +1,22 @@
 /**
+ * ModifyInstance返回参数结构体
+ */
+export interface ModifyInstanceResponse {
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * DescribeInstanceState请求参数结构体
+ */
+export interface DescribeInstanceStateRequest {
+    /**
+     * 集群实例名称
+     */
+    InstanceId: string;
+}
+/**
  * 资源规格
  */
 export interface ResourceSpecNew {
@@ -100,6 +118,19 @@ export interface CBSSpec {
     DiskCount: number;
 }
 /**
+ * ModifyInstance请求参数结构体
+ */
+export interface ModifyInstanceRequest {
+    /**
+     * 实例Id
+     */
+    InstanceId: string;
+    /**
+     * 新修改的实例名称
+     */
+    InstanceName: string;
+}
+/**
  * CreateInstanceByApi返回参数结构体
  */
 export interface CreateInstanceByApiResponse {
@@ -159,6 +190,54 @@ export interface Tag {
      * 标签的值
      */
     TagValue: string;
+}
+/**
+ * DescribeInstanceState返回参数结构体
+ */
+export interface DescribeInstanceStateResponse {
+    /**
+     * 集群状态，例如：Serving
+     */
+    InstanceState?: string;
+    /**
+     * 集群操作创建时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    FlowCreateTime?: string;
+    /**
+     * 集群操作名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    FlowName?: string;
+    /**
+     * 集群操作进度
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    FlowProgress?: number;
+    /**
+     * 集群状态描述，例如：运行中
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InstanceStateDesc?: string;
+    /**
+     * 集群流程错误信息，例如：“创建失败，资源不足”
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    FlowMsg?: string;
+    /**
+     * 当前步骤的名称，例如：”购买资源中“
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ProcessName?: string;
+    /**
+     * 集群备份任务开启状态
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    BackupStatus?: number;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * 精简集群信息

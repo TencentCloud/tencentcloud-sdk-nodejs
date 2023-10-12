@@ -288,6 +288,16 @@ it("waf.v20180125.DeleteAntiInfoLeakRule", async function () {
     }
 })
 
+it("waf.v20180125.DescribeObjects", async function () {
+    try {
+       const data = await client.DescribeObjects({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("waf.v20180125.DescribeRuleLimit", async function () {
     try {
        const data = await client.DescribeRuleLimit({})
@@ -1081,6 +1091,16 @@ it("waf.v20180125.DescribeUserClbWafRegions", async function () {
 it("waf.v20180125.UpsertCCRule", async function () {
     try {
        const data = await client.UpsertCCRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("waf.v20180125.ModifyObject", async function () {
+    try {
+       const data = await client.ModifyObject({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

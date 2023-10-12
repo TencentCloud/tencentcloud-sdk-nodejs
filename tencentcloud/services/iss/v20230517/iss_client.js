@@ -119,6 +119,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ListRecordBackupPlans", req, cb);
     }
     /**
+     * 用于获取视频通道的码率信息
+     */
+    async DescribeVideoBitRate(req, cb) {
+        return this.request("DescribeVideoBitRate", req, cb);
+    }
+    /**
      * 查询网关服务版本
      */
     async DescribeGatewayVersion(req, cb) {

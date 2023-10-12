@@ -297,6 +297,29 @@ export interface DescribeCNAMERequest {
     ClusterId: string;
 }
 /**
+ * 获取云录像下载URL返回的数据
+ */
+export interface DescribeVideoDownloadUrlData {
+    /**
+     * 录像文件下载 URL
+  注意：
+  URL 有效期是10分钟，过期后将拒绝访问，若需再用请重新获取
+  录像文件下载采用分块传输编码，响应头Transfer-Encoding:chunked
+  下载文件命名格式为{ChannelId}-{BeginTime}-{EndTime}.{FileType}
+     */
+    Url?: string;
+    /**
+     * 实际下载录像的开始时间
+  注意：当请求中指定IsRespActualTime参数为true时，才有该字段
+     */
+    ActualBeginTime?: string;
+    /**
+     * 实际下载录像的结束时间
+  注意：当请求中指定IsRespActualTime参数为true时，才有该字段
+     */
+    ActualEndTime?: string;
+}
+/**
  * ControlRecordTimeline请求参数结构体
  */
 export interface ControlRecordTimelineRequest {
@@ -576,6 +599,19 @@ export interface ListRecordPlanChannelsData {
     List?: Array<string>;
 }
 /**
+ * DescribeVideoBitRate返回参数结构体
+ */
+export interface DescribeVideoBitRateResponse {
+    /**
+     * 无
+     */
+    Data?: DescribeVideoBitRateList;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * DescribeDomain返回参数结构体
  */
 export interface DescribeDomainResponse {
@@ -814,6 +850,15 @@ export interface AddRecordBackupTemplateRequest {
      * 上云倍速（支持1，2，4倍速）
      */
     Scale: number;
+}
+/**
+ * DescribeVideoBitRate请求参数结构体
+ */
+export interface DescribeVideoBitRateRequest {
+    /**
+     * 通道ID列表
+     */
+    ChannelIds: Array<string>;
 }
 /**
  * DeleteAITask请求参数结构体
@@ -3300,6 +3345,21 @@ export interface RecordTemplateTimeSections {
     EndTime: string;
 }
 /**
+ * 视频通道码率返回结果
+ */
+export interface BitRateInfo {
+    /**
+     * 通道Id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ChannelId?: string;
+    /**
+     * 码率,单位:kbps
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Bitrate?: number;
+}
+/**
  * PlayRecord请求参数结构体
  */
 export interface PlayRecordRequest {
@@ -4079,27 +4139,14 @@ export interface DeleteAITaskResponse {
     RequestId?: string;
 }
 /**
- * 获取云录像下载URL返回的数据
+ * 查询视频通道码率的返回结果列表
  */
-export interface DescribeVideoDownloadUrlData {
+export interface DescribeVideoBitRateList {
     /**
-     * 录像文件下载 URL
-  注意：
-  URL 有效期是10分钟，过期后将拒绝访问，若需再用请重新获取
-  录像文件下载采用分块传输编码，响应头Transfer-Encoding:chunked
-  下载文件命名格式为{ChannelId}-{BeginTime}-{EndTime}.{FileType}
+     * 通道码率列表
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Url?: string;
-    /**
-     * 实际下载录像的开始时间
-  注意：当请求中指定IsRespActualTime参数为true时，才有该字段
-     */
-    ActualBeginTime?: string;
-    /**
-     * 实际下载录像的结束时间
-  注意：当请求中指定IsRespActualTime参数为true时，才有该字段
-     */
-    ActualEndTime?: string;
+    BitRates?: Array<BitRateInfo>;
 }
 /**
  * AddRecordBackupTemplate返回参数结构体

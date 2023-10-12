@@ -694,6 +694,56 @@ export interface CreateJobResponse {
     RequestId?: string;
 }
 /**
+ * SqlGateway配置信息
+ */
+export interface SqlGatewayItem {
+    /**
+     * 唯一标识
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SerialId?: string;
+    /**
+     * Flink内核版本
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    FlinkVersion?: string;
+    /**
+     * 状态，1.停止 2. 开启中 3. 开启 4. 开启失败 5. 停止中
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Status?: number;
+    /**
+     * 创建人
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CreatorUin?: string;
+    /**
+     * 引用资源
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ResourceRefs?: Array<GatewayRefItem>;
+    /**
+     * Cu规格
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CuSpec?: number;
+    /**
+     * 创建时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CreateTime?: string;
+    /**
+     * 更新时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    UpdateTime?: string;
+    /**
+     * 配置参数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Properties?: Array<Property>;
+}
+/**
  * 作业运行图
  */
 export interface JobGraph {
@@ -903,42 +953,29 @@ export interface DescribeWorkSpacesResponse {
     RequestId?: string;
 }
 /**
- * 空间和集群绑定关系
+ * Gateway引用资源信息
  */
-export interface WorkSpaceClusterItem {
+export interface GatewayRefItem {
     /**
-     * 集群 ID
-     */
-    ClusterGroupId: number;
-    /**
-     * 集群 SerialId
-     */
-    ClusterGroupSerialId: string;
-    /**
-     * 集群名称
-     */
-    ClusterName: string;
-    /**
-     * 工作空间 SerialId
-     */
-    WorkSpaceId: string;
-    /**
-     * 工作空间名称
-     */
-    WorkSpaceName: string;
-    /**
-     * 绑定状态  2 绑定 1  解除绑定
-     */
-    Status: number;
-    /**
-     * 项目ID
-     */
-    ProjectId: number;
-    /**
-     * 项目ID string类型
+     * 空间唯一标识
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ProjectIdStr: string;
+    WorkspaceId: string;
+    /**
+     * 资源唯一标识
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ResourceId: string;
+    /**
+     * 版本号
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Version: number;
+    /**
+     * 引用类型，0:用户资源
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Type: number;
 }
 /**
  * CreateResource返回参数结构体
@@ -1140,6 +1177,44 @@ export interface ClazzLevel {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Level: string;
+}
+/**
+ * 空间和集群绑定关系
+ */
+export interface WorkSpaceClusterItem {
+    /**
+     * 集群 ID
+     */
+    ClusterGroupId: number;
+    /**
+     * 集群 SerialId
+     */
+    ClusterGroupSerialId: string;
+    /**
+     * 集群名称
+     */
+    ClusterName: string;
+    /**
+     * 工作空间 SerialId
+     */
+    WorkSpaceId: string;
+    /**
+     * 工作空间名称
+     */
+    WorkSpaceName: string;
+    /**
+     * 绑定状态  2 绑定 1  解除绑定
+     */
+    Status: number;
+    /**
+     * 项目ID
+     */
+    ProjectId: number;
+    /**
+     * 项目ID string类型
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ProjectIdStr: string;
 }
 /**
  * CheckSavepoint请求参数结构体
@@ -1952,6 +2027,11 @@ export interface Cluster {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Orders?: Array<Order>;
+    /**
+     * Gateway信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SqlGateways?: Array<SqlGatewayItem>;
 }
 /**
  * DescribeJobSubmissionLog请求参数结构体

@@ -270,7 +270,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeAlarmNotice(req: DescribeAlarmNoticeRequest, cb?: (error: string, rep: DescribeAlarmNoticeResponse) => void): Promise<DescribeAlarmNoticeResponse>;
     /**
-     * 创建 Grafana 集成配置
+     * 创建 Grafana 集成配置，其中 Prometheus 集成不通过该接口创建，可参考 BindPrometheusManagedGrafana 接口
      */
     CreateGrafanaIntegration(req: CreateGrafanaIntegrationRequest, cb?: (error: string, rep: CreateGrafanaIntegrationResponse) => void): Promise<CreateGrafanaIntegrationResponse>;
     /**

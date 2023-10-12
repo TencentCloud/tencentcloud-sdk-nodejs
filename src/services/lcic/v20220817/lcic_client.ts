@@ -35,7 +35,6 @@ import {
   DescribeDocumentsByRoomRequest,
   BatchCreateGroupWithMembersResponse,
   GetRoomEventResponse,
-  BatchCreateRoomResponse,
   MemberRecord,
   DeleteAppCustomContentRequest,
   BatchAddGroupMemberResponse,
@@ -46,10 +45,10 @@ import {
   BindDocumentToRoomResponse,
   CreateGroupWithSubGroupRequest,
   RoomItem,
-  SetWatermarkRequest,
+  ClassScoreItem,
   DescribeRoomRequest,
   BatchDescribeDocumentRequest,
-  EndRoomRequest,
+  BatchCreateRoomResponse,
   UnbindDocumentFromRoomResponse,
   CreateDocumentResponse,
   DescribeGroupResponse,
@@ -78,6 +77,7 @@ import {
   DeleteGroupMemberResponse,
   DescribeGroupMemberListResponse,
   EventInfo,
+  DescribeScoreListRequest,
   AppConfig,
   DeleteRecordResponse,
   DescribeAnswerListRequest,
@@ -85,6 +85,7 @@ import {
   DescribeGroupMemberListRequest,
   UserInfo,
   DescribeUserResponse,
+  DescribeScoreListResponse,
   DescribeDocumentRequest,
   BatchDeleteRecordResponse,
   WatermarkConfig,
@@ -109,6 +110,7 @@ import {
   DescribeGroupRequest,
   EndRoomResponse,
   GetWatermarkRequest,
+  EndRoomRequest,
   CreateGroupWithMembersResponse,
   BatchDeleteGroupMemberRequest,
   ModifyAppRequest,
@@ -129,6 +131,7 @@ import {
   GetRoomsResponse,
   QuestionInfo,
   KickUserFromRoomRequest,
+  SetWatermarkRequest,
   GetRoomsRequest,
   DescribeDeveloperRequest,
   AppCustomContent,
@@ -701,6 +704,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: BatchCreateGroupWithMembersResponse) => void
   ): Promise<BatchCreateGroupWithMembersResponse> {
     return this.request("BatchCreateGroupWithMembers", req, cb)
+  }
+
+  /**
+   * 获取课堂评分列表
+   */
+  async DescribeScoreList(
+    req: DescribeScoreListRequest,
+    cb?: (error: string, rep: DescribeScoreListResponse) => void
+  ): Promise<DescribeScoreListResponse> {
+    return this.request("DescribeScoreList", req, cb)
   }
 
   /**

@@ -18,14 +18,18 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  ModifyInstanceResponse,
+  DescribeInstanceStateRequest,
   ResourceSpecNew,
   DestroyInstanceByApiResponse,
   DestroyInstanceByApiRequest,
   CreateInstanceByApiRequest,
   CBSSpec,
+  ModifyInstanceRequest,
   CreateInstanceByApiResponse,
   DescribeSimpleInstancesResponse,
   Tag,
+  DescribeInstanceStateResponse,
   InstanceSimpleInfoNew,
   ChargeProperties,
   DescribeSimpleInstancesRequest,
@@ -58,6 +62,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateInstanceByApiResponse) => void
   ): Promise<CreateInstanceByApiResponse> {
     return this.request("CreateInstanceByApi", req, cb)
+  }
+
+  /**
+   * 集群详情页中显示集群状态、流程进度等
+   */
+  async DescribeInstanceState(
+    req: DescribeInstanceStateRequest,
+    cb?: (error: string, rep: DescribeInstanceStateResponse) => void
+  ): Promise<DescribeInstanceStateResponse> {
+    return this.request("DescribeInstanceState", req, cb)
+  }
+
+  /**
+   * 修改实例信息，目前为实例名称
+   */
+  async ModifyInstance(
+    req: ModifyInstanceRequest,
+    cb?: (error: string, rep: ModifyInstanceResponse) => void
+  ): Promise<ModifyInstanceResponse> {
+    return this.request("ModifyInstance", req, cb)
   }
 
   /**

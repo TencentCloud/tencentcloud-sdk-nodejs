@@ -360,19 +360,6 @@ export interface GetRoomEventResponse {
     RequestId?: string;
 }
 /**
- * BatchCreateRoom返回参数结构体
- */
-export interface BatchCreateRoomResponse {
-    /**
-     * 创建成功课堂ID，与传入课堂信息顺序一致
-     */
-    RoomIds?: Array<number | bigint>;
-    /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
-/**
  * 成员记录信息。
  */
 export interface MemberRecord {
@@ -680,66 +667,34 @@ export interface RoomItem {
     EndDelayTime?: number;
 }
 /**
- * SetWatermark请求参数结构体
+ * 课堂评分字段
  */
-export interface SetWatermarkRequest {
+export interface ClassScoreItem {
     /**
-     * 低代码互动课堂的SdkAppId。
-  
+     * 课堂iD
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    SdkAppId: number;
+    RoomId?: number;
     /**
-     * 老师视频区域的水印参数地址，设置为空字符串表示删除
+     * 用户ID
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    TeacherUrl?: string;
+    UserId?: string;
     /**
-     * 白板视频区域的水印参数地址，设置为空字符串表示删除
+     * 评分时间
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    BoardUrl?: string;
+    CreateTime?: number;
     /**
-     * 视频默认图片（在没有视频流的时候显示），设置为空字符串表示删除
+     * 课堂评分
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    VideoUrl?: string;
+    Score?: number;
     /**
-     * 白板区域水印的宽度，取值:0-100，默认为0，表示区域X方向的百分比
+     * 课堂评价
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    BoardW?: number;
-    /**
-     * 白板区域水印的高度，取值:0-100，默认为0, 表示区域Y方向的百分比
-     */
-    BoardH?: number;
-    /**
-     * 白板区域水印X偏移, 取值:0-100, 表示区域X方向的百分比。比如50，则表示位于X轴中间
-     */
-    BoardX?: number;
-    /**
-     * 白板区域水印Y偏移, 取值:0-100, 表示区域X方向的百分比。比如50，则表示位于X轴中间
-     */
-    BoardY?: number;
-    /**
-     * 老师视频区域水印的宽度，取值:0-100，默认为0，表示区域X方向的百分比
-     */
-    TeacherW?: number;
-    /**
-     * 老师视频区域水印的高度，取值:0-100，默认为0, 表示区域Y方向的百分比
-     */
-    TeacherH?: number;
-    /**
-     * 老师视频区域水印X偏移, 取值:0-100, 表示区域X方向的百分比。比如50，则表示位于X轴中间
-     */
-    TeacherX?: number;
-    /**
-     * 老师视频区域水印Y偏移, 取值:0-100, 表示区域X方向的百分比。比如50，则表示位于X轴中间
-     */
-    TeacherY?: number;
-    /**
-     * 文字水印内容，设置为空字符串表示删除
-     */
-    Text?: string;
-    /**
-     * 文字水印颜色
-     */
-    TextColor?: string;
+    ScoreMsg?: string;
 }
 /**
  * DescribeRoom请求参数结构体
@@ -784,13 +739,17 @@ export interface BatchDescribeDocumentRequest {
     DocumentId?: Array<string>;
 }
 /**
- * EndRoom请求参数结构体
+ * BatchCreateRoom返回参数结构体
  */
-export interface EndRoomRequest {
+export interface BatchCreateRoomResponse {
     /**
-     * 房间ID。
+     * 创建成功课堂ID，与传入课堂信息顺序一致
      */
-    RoomId: number;
+    RoomIds?: Array<number | bigint>;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * UnbindDocumentFromRoom返回参数结构体
@@ -1441,6 +1400,23 @@ export interface EventInfo {
     EventData?: EventDataInfo;
 }
 /**
+ * DescribeScoreList请求参数结构体
+ */
+export interface DescribeScoreListRequest {
+    /**
+     * 课堂ID
+     */
+    RoomId: number;
+    /**
+     * 分页查询当前页数，从1开始递增
+     */
+    Page?: number;
+    /**
+     * 默认是10条
+     */
+    Limit?: number;
+}
+/**
  * 应用配置信息
  */
 export declare type AppConfig = null;
@@ -1559,6 +1535,24 @@ export interface DescribeUserResponse {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     OriginId?: string;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * DescribeScoreList返回参数结构体
+ */
+export interface DescribeScoreListResponse {
+    /**
+     * 总数
+     */
+    Total?: number;
+    /**
+     * 课堂评分列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Scores?: Array<ClassScoreItem>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2118,6 +2112,15 @@ export interface GetWatermarkRequest {
     SdkAppId: number;
 }
 /**
+ * EndRoom请求参数结构体
+ */
+export interface EndRoomRequest {
+    /**
+     * 房间ID。
+     */
+    RoomId: number;
+}
+/**
  * CreateGroupWithMembers返回参数结构体
  */
 export interface CreateGroupWithMembersResponse {
@@ -2616,6 +2619,68 @@ export interface KickUserFromRoomRequest {
      * 污点时间(单位秒)，KickType = 1时生效，默认为0
      */
     Duration: number;
+}
+/**
+ * SetWatermark请求参数结构体
+ */
+export interface SetWatermarkRequest {
+    /**
+     * 低代码互动课堂的SdkAppId。
+  
+     */
+    SdkAppId: number;
+    /**
+     * 老师视频区域的水印参数地址，设置为空字符串表示删除
+     */
+    TeacherUrl?: string;
+    /**
+     * 白板视频区域的水印参数地址，设置为空字符串表示删除
+     */
+    BoardUrl?: string;
+    /**
+     * 视频默认图片（在没有视频流的时候显示），设置为空字符串表示删除
+     */
+    VideoUrl?: string;
+    /**
+     * 白板区域水印的宽度，取值:0-100，默认为0，表示区域X方向的百分比
+     */
+    BoardW?: number;
+    /**
+     * 白板区域水印的高度，取值:0-100，默认为0, 表示区域Y方向的百分比
+     */
+    BoardH?: number;
+    /**
+     * 白板区域水印X偏移, 取值:0-100, 表示区域X方向的百分比。比如50，则表示位于X轴中间
+     */
+    BoardX?: number;
+    /**
+     * 白板区域水印Y偏移, 取值:0-100, 表示区域X方向的百分比。比如50，则表示位于X轴中间
+     */
+    BoardY?: number;
+    /**
+     * 老师视频区域水印的宽度，取值:0-100，默认为0，表示区域X方向的百分比
+     */
+    TeacherW?: number;
+    /**
+     * 老师视频区域水印的高度，取值:0-100，默认为0, 表示区域Y方向的百分比
+     */
+    TeacherH?: number;
+    /**
+     * 老师视频区域水印X偏移, 取值:0-100, 表示区域X方向的百分比。比如50，则表示位于X轴中间
+     */
+    TeacherX?: number;
+    /**
+     * 老师视频区域水印Y偏移, 取值:0-100, 表示区域X方向的百分比。比如50，则表示位于X轴中间
+     */
+    TeacherY?: number;
+    /**
+     * 文字水印内容，设置为空字符串表示删除
+     */
+    Text?: string;
+    /**
+     * 文字水印颜色
+     */
+    TextColor?: string;
 }
 /**
  * GetRooms请求参数结构体

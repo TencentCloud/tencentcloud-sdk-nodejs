@@ -168,6 +168,16 @@ it("iss.v20230517.ListRecordBackupPlans", async function () {
     }
 })
 
+it("iss.v20230517.DescribeVideoBitRate", async function () {
+    try {
+       const data = await client.DescribeVideoBitRate({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iss.v20230517.DescribeGatewayVersion", async function () {
     try {
        const data = await client.DescribeGatewayVersion({})

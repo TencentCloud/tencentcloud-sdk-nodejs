@@ -91,7 +91,7 @@ import {
   SessionItem,
   ModifyInstanceNameResponse,
   MajorEventsPkg,
-  ModifySpartaProtectionResponse,
+  ModifyObjectRequest,
   ModifyHostFlowModeRequest,
   DescribeDomainRulesRequest,
   DeleteDownloadRecordRequest,
@@ -113,6 +113,7 @@ import {
   DescribeCCRuleListRequest,
   ModifyProtectionStatusResponse,
   DescribeAutoDenyIPRequest,
+  ModifyObjectResponse,
   ModifyWafAutoDenyStatusRequest,
   DescribeCustomRuleListResponse,
   ModifyDomainsCLSStatusResponse,
@@ -221,6 +222,7 @@ import {
   HostStatus,
   GoodsDetailNew,
   ModifyAntiFakeUrlResponse,
+  ModifySpartaProtectionResponse,
   ModifyWafAutoDenyRulesResponse,
   DescribeBatchIpAccessControlRequest,
   DescribePolicyStatusResponse,
@@ -275,6 +277,7 @@ import {
   DescribeIpHitItemsRequest,
   DescribeVipInfoResponse,
   GoodNews,
+  TLSVersion,
   DescribeCCRuleRequest,
   ModifyDomainsCLSStatusRequest,
   DescribeCCRuleListResponse,
@@ -314,6 +317,7 @@ import {
   DescribeUserSignatureRuleRequest,
   BotStatPointItem,
   ClbDomainsInfo,
+  DescribeObjectsResponse,
   DescribeHostResponse,
   DeleteCCRuleResponse,
   LogHistogramInfo,
@@ -324,14 +328,15 @@ import {
   AccessRuleKeyValueInfo,
   DescribeDomainsRequest,
   BotPkg,
+  DescribeObjectsRequest,
   ModifyWafThreatenIntelligenceResponse,
   DescribeUserDomainInfoResponse,
   ModifyHostStatusRequest,
-  TLSVersion,
+  RefreshAccessCheckResultResponse,
   ModifyCustomRuleResponse,
   UserSignatureRule,
   LoadBalancer,
-  RefreshAccessCheckResultResponse,
+  ClbObject,
 } from "./waf_models"
 
 /**
@@ -615,6 +620,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteAntiInfoLeakRuleResponse) => void
   ): Promise<DeleteAntiInfoLeakRuleResponse> {
     return this.request("DeleteAntiInfoLeakRule", req, cb)
+  }
+
+  /**
+   * 查看防护对象列表
+   */
+  async DescribeObjects(
+    req: DescribeObjectsRequest,
+    cb?: (error: string, rep: DescribeObjectsResponse) => void
+  ): Promise<DescribeObjectsResponse> {
+    return this.request("DescribeObjects", req, cb)
   }
 
   /**
@@ -1420,6 +1435,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: UpsertCCRuleResponse) => void
   ): Promise<UpsertCCRuleResponse> {
     return this.request("UpsertCCRule", req, cb)
+  }
+
+  /**
+   * 修改防护对象
+   */
+  async ModifyObject(
+    req: ModifyObjectRequest,
+    cb?: (error: string, rep: ModifyObjectResponse) => void
+  ): Promise<ModifyObjectResponse> {
+    return this.request("ModifyObject", req, cb)
   }
 
   /**

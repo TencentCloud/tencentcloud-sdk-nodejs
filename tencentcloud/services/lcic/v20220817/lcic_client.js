@@ -354,6 +354,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("BatchCreateGroupWithMembers", req, cb);
     }
     /**
+     * 获取课堂评分列表
+     */
+    async DescribeScoreList(req, cb) {
+        return this.request("DescribeScoreList", req, cb);
+    }
+    /**
      * 创建房间
      */
     async CreateRoom(req, cb) {

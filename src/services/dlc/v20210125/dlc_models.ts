@@ -8204,6 +8204,15 @@ export interface TColumn {
    * 字段是否是非空
    */
   NotNull?: boolean
+  /**
+   * 表示整个 numeric 的长度,取值1-38
+   */
+  Precision?: number
+  /**
+   * 表示小数部分的长度
+Scale小于Precision
+   */
+  Scale?: number
 }
 
 /**

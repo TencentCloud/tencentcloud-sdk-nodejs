@@ -32,19 +32,19 @@ export interface GooseFSxAttribute {
   /**
    * GooseFSx的型号
    */
-  Model: string
+  Model?: string
   /**
-   * 容量单位是GB, 比如4608(4.5TB)
+   * 容量单位是GB, 例如4608(4.5TB)
    */
-  Capacity: number
+  Capacity?: number
   /**
    * 要关联映射的bucket列表
    */
-  MappedBucketList: Array<MappedBucket>
+  MappedBucketList?: Array<MappedBucket>
   /**
    * 客户侧管理节点信息
    */
-  ClientManagerNodeList: Array<ClientClusterManagerNodeInfo>
+  ClientManagerNodeList?: Array<ClientClusterManagerNodeInfo>
 }
 
 /**
@@ -284,7 +284,7 @@ export interface GooseFSxBuildElement {
    */
   Model: string
   /**
-   * 容量单位是GB, 比如4608(4.5TB)
+   * 容量单位是GB, 例如4608(4.5TB)
    */
   Capacity: number
   /**

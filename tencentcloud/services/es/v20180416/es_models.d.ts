@@ -1287,7 +1287,7 @@ export interface CreateLogstashInstanceResponse {
     /**
      * 实例ID
      */
-    InstanceId: string;
+    InstanceId?: string;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2858,6 +2858,10 @@ export interface NodeView {
      * 是否为隐藏可用区
      */
     Hidden: boolean;
+    /**
+     * 是否充当协调节点的角色
+     */
+    IsCoordinationNode?: boolean;
 }
 /**
  * ModifyEsVipSecurityGroup返回参数结构体
@@ -3214,17 +3218,17 @@ export interface DescribeViewsResponse {
      * 集群维度视图
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ClusterView: ClusterView;
+    ClusterView?: ClusterView;
     /**
      * 节点维度视图
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    NodesView: Array<NodeView>;
+    NodesView?: Array<NodeView>;
     /**
      * Kibana维度视图
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    KibanasView: Array<KibanaView>;
+    KibanasView?: Array<KibanaView>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */

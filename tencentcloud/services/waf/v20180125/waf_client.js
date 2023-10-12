@@ -194,6 +194,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteAntiInfoLeakRule", req, cb);
     }
     /**
+     * 查看防护对象列表
+     */
+    async DescribeObjects(req, cb) {
+        return this.request("DescribeObjects", req, cb);
+    }
+    /**
      * 获取各个模块具体的规格限制
      */
     async DescribeRuleLimit(req, cb) {
@@ -677,6 +683,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async UpsertCCRule(req, cb) {
         return this.request("UpsertCCRule", req, cb);
+    }
+    /**
+     * 修改防护对象
+     */
+    async ModifyObject(req, cb) {
+        return this.request("ModifyObject", req, cb);
     }
     /**
      * 删除防篡改url

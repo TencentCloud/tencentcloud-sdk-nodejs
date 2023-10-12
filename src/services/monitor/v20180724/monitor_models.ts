@@ -1092,7 +1092,7 @@ export interface InstallPluginsResponse {
    * 已安装插件 ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  PluginIds: Array<string>
+  PluginIds?: Array<string>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1236,7 +1236,7 @@ export interface CreateGrafanaIntegrationRequest {
    */
   InstanceId: string
   /**
-   * 集成类型，可在实例详情-云产品集成-集成列表查看。例如：tencent-cloud-prometheus
+   * 集成类型(接口DescribeGrafanaIntegrationOverviews返回的集成信息中的Code字段)
    */
   Kind: string
   /**
@@ -1970,7 +1970,7 @@ export interface GrafanaAccountRole {
    */
   Organization?: string
   /**
-   * 权限
+   * 权限(Admin、Editor、Viewer)
    */
   Role?: string
 }
@@ -2757,7 +2757,7 @@ export interface DescribeGrafanaChannelsRequest {
    */
   ChannelIds?: Array<string>
   /**
-   * 告警通道状态
+   * 告警通道状态(不用填写，目前只有可用和删除状态，默认只能查询可用的告警通道)
    */
   ChannelState?: number
 }
@@ -3052,7 +3052,7 @@ export interface DescribePolicyConditionListConfigManual {
  */
 export interface InstallPluginsRequest {
   /**
-   * 插件信息
+   * 插件信息(可通过 DescribePluginOverviews 接口获取)
    */
   Plugins: Array<GrafanaPlugin>
   /**
@@ -3468,7 +3468,8 @@ export interface UpdateGrafanaEnvironmentsRequest {
    */
   InstanceId: string
   /**
-   * 环境变量字符串
+   * JSON 序列化后的环境变量字符串，如 "{\"key1\":\"key2\"}"
+
    */
   Envs: string
 }
@@ -4009,11 +4010,11 @@ export interface CreateGrafanaNotificationChannelRequest {
    */
   ChannelName: string
   /**
-   * 默认为1，已废弃，请使用 OrganizationIds
+   * 默认为1，建议使用 OrganizationIds
    */
   OrgId: number
   /**
-   * 接受告警通道 ID 数组
+   * 接受告警通道 ID 数组，值为告警管理/基础配置/通知模板中的模板 ID
    */
   Receivers: Array<string>
   /**
@@ -4120,7 +4121,7 @@ export interface CreateGrafanaIntegrationResponse {
    * 集成 ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  IntegrationId: string
+  IntegrationId?: string
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4170,11 +4171,11 @@ export interface CreateGrafanaInstanceRequest {
    */
   InstanceName: string
   /**
-   * VPC ID
+   * VPC ID (私有网络 ID)
    */
   VpcId: string
   /**
-   * 子网 ID 数组
+   * 子网 ID 数组(VPC ID下的子网 ID，只取第一个)
    */
   SubnetIds: Array<string>
   /**
@@ -4182,7 +4183,7 @@ export interface CreateGrafanaInstanceRequest {
    */
   EnableInternet: boolean
   /**
-   * Grafana 初始密码
+   * Grafana 初始密码(国际站用户必填，国内站用户可不填，不填时会生成随机密码并给主账号发送通知)
    */
   GrafanaInitPassword?: string
   /**
@@ -5723,7 +5724,7 @@ export interface DeletePolicyGroupResponse {
  */
 export interface DeleteGrafanaInstanceRequest {
   /**
-   * 实例名数组
+   * 实例ID数组
    */
   InstanceIDs: Array<string>
 }
@@ -5956,7 +5957,7 @@ export interface CreateAlarmPolicyResponse {
  */
 export interface DeleteGrafanaNotificationChannelRequest {
   /**
-   * 通道 ID 数组。例如：nchannel-abcd1234
+   * 通道 ID 数组。例如：nchannel-abcd1234，通过 DescribeGrafanaChannels 获取
    */
   ChannelIDs: Array<string>
   /**
@@ -6292,7 +6293,7 @@ export interface CreateSSOAccountRequest {
    */
   UserId: string
   /**
-   * 权限
+   * 权限(只取数组中的第一个，其中 Organization 暂未使用，可不填)
    */
   Role: Array<GrafanaAccountRole>
   /**
@@ -6385,7 +6386,7 @@ export interface DescribeGrafanaChannelsResponse {
   /**
    * 告警通道数组
    */
-  NotificationChannelSet: Array<GrafanaChannel>
+  NotificationChannelSet?: Array<GrafanaChannel>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6512,7 +6513,7 @@ export interface UpgradeGrafanaInstanceRequest {
    */
   InstanceId: string
   /**
-   * 版本别名，例如：v7.4.2
+   * 版本别名，目前固定为 v9.1.5
    */
   Alias: string
 }
@@ -7372,7 +7373,7 @@ export interface UpdateGrafanaConfigRequest {
    */
   InstanceId: string
   /**
-   * JSON 编码后的字符串
+   * JSON 编码后的字符串，如 "{"server":{"root_url":"http://custom.domain"}}"
    */
   Config: string
 }
@@ -8256,7 +8257,8 @@ export interface UpdateGrafanaWhiteListRequest {
    */
   InstanceId: string
   /**
-   * 白名单数组，输入公网域名 IP ，例如：127.0.0.1，可通过接口 DescribeGrafanaWhiteList 查看
+   * 白名单数组，输入白名单 IP 或 CIDR，如：127.0.0.1或127.0.0.1/24
+如有多个 IP 可换行输入
    */
   Whitelist: Array<string>
 }
@@ -9646,7 +9648,7 @@ export interface CreateSSOAccountResponse {
   /**
    * 已添加的用户 UIN
    */
-  UserId: string
+  UserId?: string
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -10029,7 +10031,7 @@ export interface UpdateGrafanaIntegrationRequest {
    */
   Kind: string
   /**
-   * 集成内容
+   * 集成内容，请查看示例
    */
   Content: string
 }

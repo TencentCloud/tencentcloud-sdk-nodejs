@@ -38,6 +38,26 @@ it("cdwpg.v20201230.CreateInstanceByApi", async function () {
     }
 })
 
+it("cdwpg.v20201230.DescribeInstanceState", async function () {
+    try {
+       const data = await client.DescribeInstanceState({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cdwpg.v20201230.ModifyInstance", async function () {
+    try {
+       const data = await client.ModifyInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cdwpg.v20201230.DescribeSimpleInstances", async function () {
     try {
        const data = await client.DescribeSimpleInstances({})

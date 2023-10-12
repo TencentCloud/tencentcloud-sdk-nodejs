@@ -148,11 +148,16 @@ export interface DescribeProtectedTelCdrResponse {
   /**
    * 话单记录总数
    */
-  TotalCount: number
+  TotalCount?: number
+  /**
+   * 话单记录
+   * @deprecated
+   */
+  TelCdrs?: Array<TelCdrInfo>
   /**
    * 话单记录
    */
-  TelCdrs: Array<TelCdrInfo>
+  TelCdrList?: Array<TelCdrInfo>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -419,8 +424,13 @@ export interface DescribeTelCallInfoResponse {
   SeatUsedCount?: number
   /**
    * 音频套餐包消耗分钟数
+   * @deprecated
    */
   VoipCallInCount?: number
+  /**
+   * 音频套餐包消耗分钟数
+   */
+  VOIPCallInCount?: number
   /**
    * 离线语音转文字套餐包消耗分钟数
    */
@@ -521,6 +531,7 @@ export interface DescribeTelCdrRequest {
   EndTimeStamp: number
   /**
    * 实例 ID（废弃）
+   * @deprecated
    */
   InstanceId?: number
   /**
@@ -1733,8 +1744,14 @@ export interface TelCdrInfo {
   /**
    * 客户自定义数据（User-to-User Interface）
 注意：此字段可能返回 null，表示取不到有效值。
+   * @deprecated
    */
   Uui?: string
+  /**
+   * 客户自定义数据（User-to-User Interface）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UUI?: string
   /**
    * IVR按键信息（e.g. [{"Key":"1","Label":"非常满意"}]）
 注意：此字段可能返回 null，表示取不到有效值。
@@ -1784,6 +1801,10 @@ export interface NumberInfo {
    * 绑定的外呼技能组
    */
   CallOutSkillGroupIds?: Array<number | bigint>
+  /**
+   * 号码状态，1-正常，2-欠费停用，4-管理员停用，5-违规停用
+   */
+  State?: number
 }
 
 /**
@@ -2076,8 +2097,13 @@ export interface CreateCallOutSessionRequest {
   IsForceUseMobile?: boolean
   /**
    * 自定义数据，长度限制 1024 字节
+   * @deprecated
    */
   Uui?: string
+  /**
+   * 自定义数据，长度限制 1024 字节
+   */
+  UUI?: string
 }
 
 /**
@@ -2338,11 +2364,16 @@ export interface DescribeTelCdrResponse {
   /**
    * 话单记录总数
    */
-  TotalCount: number
+  TotalCount?: number
+  /**
+   * 话单记录
+   * @deprecated
+   */
+  TelCdrs?: Array<TelCdrInfo>
   /**
    * 话单记录
    */
-  TelCdrs: Array<TelCdrInfo>
+  TelCdrList?: Array<TelCdrInfo>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

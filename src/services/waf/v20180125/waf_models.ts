@@ -1389,13 +1389,25 @@ export interface MajorEventsPkg {
 }
 
 /**
- * ModifySpartaProtection返回参数结构体
+ * ModifyObject请求参数结构体
  */
-export interface ModifySpartaProtectionResponse {
+export interface ModifyObjectRequest {
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 修改对象标识
    */
-  RequestId?: string
+  ObjectId: string
+  /**
+   * 改动作类型:Status修改开关，InstanceId绑定实例
+   */
+  OpType: string
+  /**
+   * 新的Waf开关状态，如果和已有状态相同认为修改成功
+   */
+  Status?: number
+  /**
+   * 新的实例ID，如果和已绑定的实例相同认为修改成功
+   */
+  InstanceId?: string
 }
 
 /**
@@ -1759,6 +1771,16 @@ export interface DescribeAutoDenyIPRequest {
    * 排序参数
    */
   Sort?: string
+}
+
+/**
+ * ModifyObject返回参数结构体
+ */
+export interface ModifyObjectResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -4465,6 +4487,16 @@ export interface ModifyAntiFakeUrlResponse {
 }
 
 /**
+ * ModifySpartaProtection返回参数结构体
+ */
+export interface ModifySpartaProtectionResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyWafAutoDenyRules返回参数结构体
  */
 export interface ModifyWafAutoDenyRulesResponse {
@@ -5963,6 +5995,22 @@ export interface GoodNews {
 }
 
 /**
+ * TLS信息
+ */
+export interface TLSVersion {
+  /**
+   * TLSVERSION的ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VersionId: number
+  /**
+   * TLSVERSION的NAME
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VersionName: string
+}
+
+/**
  * DescribeCCRule请求参数结构体
  */
 export interface DescribeCCRuleRequest {
@@ -7090,6 +7138,20 @@ export interface ClbDomainsInfo {
 }
 
 /**
+ * DescribeObjects返回参数结构体
+ */
+export interface DescribeObjectsResponse {
+  /**
+   * 对象列表
+   */
+  ClbObjects?: Array<ClbObject>
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeHost返回参数结构体
  */
 export interface DescribeHostResponse {
@@ -7302,6 +7364,22 @@ export interface BotPkg {
 }
 
 /**
+ * DescribeObjects请求参数结构体
+ */
+export interface DescribeObjectsRequest {
+  /**
+   * 支持的过滤器:
+	ObjectId: clb实例ID
+	VIP: clb实例的公网IP
+	InstanceId: waf实例ID
+	Domain: 精准域名
+	Status: waf防护开关状态: 0关闭，1开启
+	ClsStatus: waf日志开关: 0关闭，1开启
+   */
+  Filters?: Array<FiltersItemNew>
+}
+
+/**
  * ModifyWafThreatenIntelligence返回参数结构体
  */
 export interface ModifyWafThreatenIntelligenceResponse {
@@ -7340,19 +7418,13 @@ export interface ModifyHostStatusRequest {
 }
 
 /**
- * TLS信息
+ * RefreshAccessCheckResult返回参数结构体
  */
-export interface TLSVersion {
+export interface RefreshAccessCheckResultResponse {
   /**
-   * TLSVERSION的ID
-注意：此字段可能返回 null，表示取不到有效值。
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  VersionId: number
-  /**
-   * TLSVERSION的NAME
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  VersionName: string
+  RequestId?: string
 }
 
 /**
@@ -7473,11 +7545,67 @@ export interface LoadBalancer {
 }
 
 /**
- * RefreshAccessCheckResult返回参数结构体
+ * Clb类型防护对象
  */
-export interface RefreshAccessCheckResultResponse {
+export interface ClbObject {
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 对象ID
    */
-  RequestId?: string
+  ObjectId: string
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+  /**
+   * 实例名称
+   */
+  InstanceName: string
+  /**
+   * 精准域名列表
+   */
+  PreciseDomains: Array<string>
+  /**
+   * WAF功能开关状态，0关闭1开启
+   */
+  Status: number
+  /**
+   * WAF日志开关状态，0关闭1开启
+   */
+  ClsStatus: number
+  /**
+   * CLB对象对应的虚拟域名
+   */
+  VirtualDomain: string
+  /**
+   * 对象名称
+   */
+  ObjectName: string
+  /**
+   * 公网地址
+   */
+  PublicIp: Array<string>
+  /**
+   * 内网地址
+   */
+  PrivateIp: Array<string>
+  /**
+   * VPC名称
+   */
+  VpcName: string
+  /**
+   * VPC ID
+   */
+  Vpc: string
+  /**
+   * waf实例等级，如果未绑定实例为0
+   */
+  InstanceLevel: number
+  /**
+   * clb投递开关
+   */
+  PostCLSStatus: number
+  /**
+   * kafka投递开关
+   */
+  PostCKafkaStatus: number
 }

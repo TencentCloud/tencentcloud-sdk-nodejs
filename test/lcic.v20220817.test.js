@@ -558,6 +558,16 @@ it("lcic.v20220817.BatchCreateGroupWithMembers", async function () {
     }
 })
 
+it("lcic.v20220817.DescribeScoreList", async function () {
+    try {
+       const data = await client.DescribeScoreList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("lcic.v20220817.CreateRoom", async function () {
     try {
        const data = await client.CreateRoom({})

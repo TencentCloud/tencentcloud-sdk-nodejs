@@ -29,6 +29,7 @@ import {
   DescribeGatewayMonitor,
   DescribeAITaskResultRequest,
   DescribeCNAMERequest,
+  DescribeVideoDownloadUrlData,
   ControlRecordTimelineRequest,
   DeleteOrganizationRequest,
   OperTimeSlot,
@@ -45,6 +46,7 @@ import {
   BatchOperateDeviceResponse,
   DescribeDeviceRegionResponse,
   ListRecordPlanChannelsData,
+  DescribeVideoBitRateResponse,
   DescribeDomainResponse,
   DescribeRecordRetrieveTaskData,
   DescribeRecordBackupTemplateData,
@@ -57,6 +59,7 @@ import {
   UpdateUserDeviceRequest,
   DescribeDeviceChannelResponse,
   AddRecordBackupTemplateRequest,
+  DescribeVideoBitRateRequest,
   DeleteAITaskRequest,
   ChefHatAIResultInfo,
   UpdateGatewayResponse,
@@ -183,6 +186,7 @@ import {
   DescribeRecordFileRequest,
   AddStreamAuthRequest,
   RecordTemplateTimeSections,
+  BitRateInfo,
   PlayRecordRequest,
   UpdateRecordBackupTemplateModify,
   CheckDomainRequest,
@@ -222,7 +226,7 @@ import {
   DeleteRecordBackupTemplateRequest,
   ListGatewayDevicesRequest,
   DeleteAITaskResponse,
-  DescribeVideoDownloadUrlData,
+  DescribeVideoBitRateList,
   AddRecordBackupTemplateResponse,
   PlayRecordResponse,
   DescribeGatewayMonitorResponse,
@@ -426,6 +430,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ListRecordBackupPlansResponse) => void
   ): Promise<ListRecordBackupPlansResponse> {
     return this.request("ListRecordBackupPlans", req, cb)
+  }
+
+  /**
+   * 用于获取视频通道的码率信息
+   */
+  async DescribeVideoBitRate(
+    req: DescribeVideoBitRateRequest,
+    cb?: (error: string, rep: DescribeVideoBitRateResponse) => void
+  ): Promise<DescribeVideoBitRateResponse> {
+    return this.request("DescribeVideoBitRate", req, cb)
   }
 
   /**
