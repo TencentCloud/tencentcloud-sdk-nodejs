@@ -171,13 +171,13 @@ export interface ModifyAntiInfoLeakRulesResponse {
     RequestId?: string;
 }
 /**
- * ModifyWebshellStatus请求参数结构体
+ * ModifyObject返回参数结构体
  */
-export interface ModifyWebshellStatusRequest {
+export interface ModifyObjectResponse {
     /**
-     * 域名webshell状态
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
-    Webshell: WebshellStatus;
+    RequestId?: string;
 }
 /**
  * DescribeCertificateVerifyResult请求参数结构体
@@ -681,6 +681,19 @@ export interface DescribeAntiFakeUrlRequest {
     PageInfo: PageInfo;
 }
 /**
+ * DeleteAttackWhiteRule请求参数结构体
+ */
+export interface DeleteAttackWhiteRuleRequest {
+    /**
+     * 规则序号组
+     */
+    Ids: Array<number | bigint>;
+    /**
+     * 用户域名
+     */
+    Domain: string;
+}
+/**
  * 数据封装
  */
 export interface CCRuleData {
@@ -1181,6 +1194,20 @@ export interface GetAttackTotalCountResponse {
     RequestId?: string;
 }
 /**
+ * ModifyBotStatus返回参数结构体
+ */
+export interface ModifyBotStatusResponse {
+    /**
+     * 正常情况为null
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Data: string;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * DescribeAntiInfoLeakageRules返回参数结构体
  */
 export interface DescribeAntiInfoLeakageRulesResponse {
@@ -1573,6 +1600,43 @@ export interface DeleteCustomWhiteRuleRequest {
     RuleId: number;
 }
 /**
+ * 用户规则白名单
+ */
+export interface UserWhiteRule {
+    /**
+     * 白名单的id
+     */
+    WhiteRuleId: number;
+    /**
+     * 规则id
+     */
+    SignatureId: string;
+    /**
+     * 状态
+     */
+    Status: number;
+    /**
+     * 匹配域
+     */
+    MatchField: string;
+    /**
+     * 匹配方法
+     */
+    MatchMethod: string;
+    /**
+     * 匹配内容
+     */
+    MatchContent: string;
+    /**
+     * 创建时间
+     */
+    CreateTime: string;
+    /**
+     * 修改时间
+     */
+    ModifyTime: string;
+}
+/**
  * ModifyHostMode返回参数结构体
  */
 export interface ModifyHostModeResponse {
@@ -1662,9 +1726,13 @@ export interface DescribeAutoDenyIPRequest {
     Sort?: string;
 }
 /**
- * ModifyObject返回参数结构体
+ * AddAttackWhiteRule返回参数结构体
  */
-export interface ModifyObjectResponse {
+export interface AddAttackWhiteRuleResponse {
+    /**
+     * 规则总数
+     */
+    RuleId: number;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1697,9 +1765,27 @@ export interface DescribeCustomRuleListResponse {
     RequestId?: string;
 }
 /**
- * ModifyDomainsCLSStatus返回参数结构体
+ * 响应体的返回码
  */
-export interface ModifyDomainsCLSStatusResponse {
+export interface ResponseCode {
+    /**
+     * 如果成功则返回Success，失败则返回云api定义的错误码
+     */
+    Code: string;
+    /**
+     * 如果成功则返回Success，失败则返回WAF定义的二级错误码
+     */
+    Message: string;
+}
+/**
+ * DeleteAttackWhiteRule返回参数结构体
+ */
+export interface DeleteAttackWhiteRuleResponse {
+    /**
+     * 删除失败的规则序号组
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    FailIds: Array<number | bigint>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1760,6 +1846,15 @@ export interface ClbHostResult {
      * 绑定了WAF的情况下，WAF流量模式，1：清洗模式，0：镜像模式（默认）
      */
     FlowMode: number;
+}
+/**
+ * ModifyWebshellStatus请求参数结构体
+ */
+export interface ModifyWebshellStatusRequest {
+    /**
+     * 域名webshell状态
+     */
+    Webshell: WebshellStatus;
 }
 /**
  * DescribeVipInfo请求参数结构体
@@ -1831,13 +1926,17 @@ export interface DeleteSpartaProtectionResponse {
     RequestId?: string;
 }
 /**
- * 参数包装
+ * ModifyAttackWhiteRule返回参数结构体
  */
-export interface SessionData {
+export interface ModifyAttackWhiteRuleResponse {
     /**
-     * session定义
+     * 规则总数
      */
-    Res: Array<SessionItem>;
+    RuleId: number;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * DescribeAutoDenyIP返回参数结构体
@@ -2302,6 +2401,31 @@ export interface AccessRuleInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Tag: AccessRuleTagInfo;
+}
+/**
+ * ModifyAttackWhiteRule请求参数结构体
+ */
+export interface ModifyAttackWhiteRuleRequest {
+    /**
+     * 规则序号
+     */
+    RuleId: number;
+    /**
+     * 域名
+     */
+    Domain: string;
+    /**
+     * 规则Id
+     */
+    SignatureId: string;
+    /**
+     * 规则状态
+     */
+    Status: number;
+    /**
+     * 匹配规则项列表
+     */
+    Rules: Array<UserWhiteRuleItem>;
 }
 /**
  * clb-waf防护域名
@@ -3526,18 +3650,33 @@ export interface ModifySpartaProtectionModeResponse {
     RequestId?: string;
 }
 /**
- * ModifyBotStatus返回参数结构体
+ * DescribeAttackWhiteRule请求参数结构体
  */
-export interface ModifyBotStatusResponse {
+export interface DescribeAttackWhiteRuleRequest {
     /**
-     * 正常情况为null
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 需要查询的域名
      */
-    Data: string;
+    Domain: string;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     * 分页
      */
-    RequestId?: string;
+    Offset: number;
+    /**
+     * 每页容量
+     */
+    Limit: number;
+    /**
+     * 排序字段，支持user_id, signature_id, modify_time
+     */
+    By?: string;
+    /**
+     * 排序方式
+     */
+    Order?: string;
+    /**
+     * 筛选条件，支持SignatureId, MatchContent
+     */
+    Filters?: Array<FiltersItemNew>;
 }
 /**
  * DescribeDomainDetailsSaas请求参数结构体
@@ -4897,6 +5036,31 @@ export interface DomainPackageNew {
     Region: string;
 }
 /**
+ * AddAttackWhiteRule请求参数结构体
+ */
+export interface AddAttackWhiteRuleRequest {
+    /**
+     * 域名
+     */
+    Domain: string;
+    /**
+     * 规则Id
+     */
+    SignatureId: string;
+    /**
+     * 规则状态
+     */
+    Status: number;
+    /**
+     * 匹配规则项列表
+     */
+    Rules: Array<UserWhiteRuleItem>;
+    /**
+     * 规则序号
+     */
+    RuleId?: number;
+}
+/**
  * AddCustomRule请求参数结构体
  */
 export interface AddCustomRuleRequest {
@@ -5815,6 +5979,32 @@ export interface TargetEntity {
     Domain?: string;
 }
 /**
+ * 用户规则白名单规则子项
+ */
+export interface UserWhiteRuleItem {
+    /**
+     * 匹配域
+     */
+    MatchField: string;
+    /**
+     * 匹配方法
+     */
+    MatchMethod: string;
+    /**
+     * 匹配内容
+     */
+    MatchContent: string;
+}
+/**
+ * 参数包装
+ */
+export interface SessionData {
+    /**
+     * session定义
+     */
+    Res: Array<SessionItem>;
+}
+/**
  * cc规则
  */
 export interface CCRuleItem {
@@ -6104,6 +6294,15 @@ export interface DescribeDomainWhiteRulesResponse {
      * 规则的数量
      */
     Total?: number;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * ModifyDomainsCLSStatus返回参数结构体
+ */
+export interface ModifyDomainsCLSStatusResponse {
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -6892,17 +7091,22 @@ export interface DomainURI {
     Edition: string;
 }
 /**
- * 响应体的返回码
+ * DescribeAttackWhiteRule返回参数结构体
  */
-export interface ResponseCode {
+export interface DescribeAttackWhiteRuleResponse {
     /**
-     * 如果成功则返回Success，失败则返回云api定义的错误码
+     * 规则总数
      */
-    Code: string;
+    Total: number;
     /**
-     * 如果成功则返回Success，失败则返回WAF定义的二级错误码
+     * 规则白名单列表
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Message: string;
+    List: Array<UserWhiteRule>;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * ModifyAntiInfoLeakRuleStatus请求参数结构体

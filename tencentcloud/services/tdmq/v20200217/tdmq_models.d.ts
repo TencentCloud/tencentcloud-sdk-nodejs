@@ -4262,7 +4262,7 @@ export interface ResetMsgSubOffsetByTimestampResponse {
      * 结果。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Result: boolean;
+    Result?: boolean;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -5029,7 +5029,7 @@ export interface ModifyTopicRequest {
      */
     TopicName: string;
     /**
-     * 分区数，必须大于或者等于原分区数，若想维持原分区数请输入原数目，修改分区数仅对非全局顺序消息起效果，不允许超过128个分区。
+     * 分区数，必须大于或者等于原分区数，若想维持原分区数请输入原数目，修改分区数仅对非全局顺序消息起效果，不允许超过32个分区。
      */
     Partitions: number;
     /**
@@ -5069,7 +5069,7 @@ export interface ResetMsgSubOffsetByTimestampRequest {
     /**
      * Pulsar 集群的ID
      */
-    ClusterId?: string;
+    ClusterId: string;
 }
 /**
  * CreateEnvironmentRole返回参数结构体

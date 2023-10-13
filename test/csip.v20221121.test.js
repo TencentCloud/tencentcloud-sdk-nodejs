@@ -38,6 +38,16 @@ it("csip.v20221121.DescribeDbAssetInfo", async function () {
     }
 })
 
+it("csip.v20221121.DescribeRiskCenterVULViewVULRiskList", async function () {
+    try {
+       const data = await client.DescribeRiskCenterVULViewVULRiskList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("csip.v20221121.DescribeDomainAssets", async function () {
     try {
        const data = await client.DescribeDomainAssets({})
@@ -248,9 +258,29 @@ it("csip.v20221121.DescribeDbAssets", async function () {
     }
 })
 
+it("csip.v20221121.DescribeRiskCenterPortViewPortRiskList", async function () {
+    try {
+       const data = await client.DescribeRiskCenterPortViewPortRiskList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("csip.v20221121.DescribeRiskCenterAssetViewPortRiskList", async function () {
     try {
        const data = await client.DescribeRiskCenterAssetViewPortRiskList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("csip.v20221121.ModifyRiskCenterRiskStatus", async function () {
+    try {
+       const data = await client.ModifyRiskCenterRiskStatus({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

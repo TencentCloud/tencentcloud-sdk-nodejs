@@ -38,6 +38,31 @@ export interface ResourceSpecNew {
     Type: string;
 }
 /**
+ * 计费时间参数
+ */
+export interface ChargeProperties {
+    /**
+     * 1-需要自动续期
+     */
+    RenewFlag: number;
+    /**
+     * 订单时间范围
+     */
+    TimeSpan: number;
+    /**
+     * 时间单位，一般为h和m
+     */
+    TimeUnit: string;
+    /**
+     * 计费类型0-按量计费，1-包年包月
+     */
+    PayMode?: number;
+    /**
+     * PREPAID、POSTPAID_BY_HOUR
+     */
+    ChargeType?: string;
+}
+/**
  * DestroyInstanceByApi返回参数结构体
  */
 export interface DestroyInstanceByApiResponse {
@@ -54,6 +79,10 @@ export interface DestroyInstanceByApiResponse {
      */
     RequestId?: string;
 }
+/**
+ * 集群节点信息
+ */
+export declare type InstanceNodeGroup = null;
 /**
  * DestroyInstanceByApi请求参数结构体
  */
@@ -116,6 +145,70 @@ export interface CBSSpec {
      * 个数
      */
     DiskCount: number;
+}
+/**
+ * 集群状态抽象后的结构体
+ */
+export interface InstanceStateInfo {
+    /**
+     * 集群状态，例如：Serving
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InstanceState: string;
+    /**
+     * 集群操作创建时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    FlowCreateTime: string;
+    /**
+     * 集群操作名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    FlowName: string;
+    /**
+     * 集群操作进度
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    FlowProgress: number;
+    /**
+     * 集群状态描述，例如：运行中
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InstanceStateDesc: string;
+    /**
+     * 集群流程错误信息，例如：“创建失败，资源不足”
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    FlowMsg: string;
+    /**
+     * 当前步骤的名称，例如：”购买资源中“
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ProcessName: string;
+    /**
+     * 集群是否有备份中任务，有为1,无为0
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    BackupStatus?: number;
+    /**
+     * 1
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RequestId?: string;
+    /**
+     * 1
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    BackupOpenStatus?: number;
+}
+/**
+ * DescribeInstance请求参数结构体
+ */
+export interface DescribeInstanceRequest {
+    /**
+     * 集群实例ID
+     */
+    InstanceId: string;
 }
 /**
  * ModifyInstance请求参数结构体
@@ -240,6 +333,116 @@ export interface DescribeInstanceStateResponse {
     RequestId?: string;
 }
 /**
+ * 云原生实例详情
+ */
+export interface InstanceInfo {
+    /**
+     * ID值
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ID: number;
+    /**
+     * cdwpg-cn或者其他
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InstanceType: string;
+    /**
+     * cdwpg-cn或者其他
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InstanceName: string;
+    /**
+     * Running
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Status: string;
+    /**
+     * 运行中
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    StatusDesc: string;
+    /**
+     * 无
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InstanceStateInfo: InstanceStateInfo;
+    /**
+     * -
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InstanceID: string;
+    /**
+     * 2022-09-05 20:00:01
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CreateTime: string;
+    /**
+     * ap-chongqing
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Region: string;
+    /**
+     * ap
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Zone: string;
+    /**
+     * region
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RegionDesc: string;
+    /**
+     * zone
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ZoneDesc: string;
+    /**
+     * 标签
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Tags: Array<Tag>;
+    /**
+     * v3
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Version: string;
+    /**
+     * 字符集
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Charset: string;
+    /**
+     * 引擎版本
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    EngineVersion: string;
+    /**
+     * GTM节点列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    GTMNodes: Array<InstanceNodeGroup>;
+    /**
+     * CN节点列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CNNodes: Array<InstanceNodeGroup>;
+    /**
+     * DN节点列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DNNodes: Array<InstanceNodeGroup>;
+    /**
+     * 备份存储
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    BackupStorage: Array<InstanceNodeGroup>;
+    /**
+     * FN节点列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    FNNodes: Array<InstanceNodeGroup>;
+}
+/**
  * 精简集群信息
  */
 export interface InstanceSimpleInfoNew {
@@ -330,29 +533,17 @@ export interface InstanceSimpleInfoNew {
     RenewFlag?: boolean;
 }
 /**
- * 计费时间参数
+ * DescribeInstance返回参数结构体
  */
-export interface ChargeProperties {
+export interface DescribeInstanceResponse {
     /**
-     * 1-需要自动续期
+     * 实例描述信息
      */
-    RenewFlag: number;
+    InstanceInfo: InstanceInfo;
     /**
-     * 订单时间范围
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
-    TimeSpan: number;
-    /**
-     * 时间单位，一般为h和m
-     */
-    TimeUnit: string;
-    /**
-     * 计费类型0-按量计费，1-包年包月
-     */
-    PayMode?: number;
-    /**
-     * PREPAID、POSTPAID_BY_HOUR
-     */
-    ChargeType?: string;
+    RequestId?: string;
 }
 /**
  * DescribeSimpleInstances请求参数结构体

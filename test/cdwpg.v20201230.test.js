@@ -18,9 +18,29 @@ const client = new tencentcloud.cdwpg.v20201230.Client({
 })
 describe("cdwpg.v20201230.test.js", function () {
 
+it("cdwpg.v20201230.DescribeInstanceState", async function () {
+    try {
+       const data = await client.DescribeInstanceState({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cdwpg.v20201230.DestroyInstanceByApi", async function () {
     try {
        const data = await client.DestroyInstanceByApi({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cdwpg.v20201230.DescribeInstance", async function () {
+    try {
+       const data = await client.DescribeInstance({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -38,9 +58,9 @@ it("cdwpg.v20201230.CreateInstanceByApi", async function () {
     }
 })
 
-it("cdwpg.v20201230.DescribeInstanceState", async function () {
+it("cdwpg.v20201230.DescribeSimpleInstances", async function () {
     try {
-       const data = await client.DescribeInstanceState({})
+       const data = await client.DescribeSimpleInstances({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -51,16 +71,6 @@ it("cdwpg.v20201230.DescribeInstanceState", async function () {
 it("cdwpg.v20201230.ModifyInstance", async function () {
     try {
        const data = await client.ModifyInstance({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("cdwpg.v20201230.DescribeSimpleInstances", async function () {
-    try {
-       const data = await client.DescribeSimpleInstances({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

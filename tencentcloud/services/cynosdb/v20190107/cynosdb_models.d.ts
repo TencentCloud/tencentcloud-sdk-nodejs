@@ -2191,7 +2191,7 @@ export interface InstanceNetInfo {
      */
     WanDomain?: string;
     /**
-     * 外网Ip
+     * 外网IP
   注意：此字段可能返回 null，表示取不到有效值。
      */
     WanIP?: string;
@@ -5013,7 +5013,7 @@ export interface AuditRuleTemplateInfo {
      */
     AlarmPolicy?: number;
     /**
-     * 模版状态。0-无任务 ，1-修改中。
+     * 模板状态。0-无任务 ，1-修改中。
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Status?: number;

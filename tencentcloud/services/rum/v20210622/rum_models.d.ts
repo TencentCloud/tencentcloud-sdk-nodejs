@@ -1527,7 +1527,7 @@ export interface DescribeDataPvUrlStatisticsRequest {
      */
     Device?: string;
     /**
-     * 是否海外
+     * 显示是否海外
      */
     IsAbroad?: string;
     /**
@@ -1547,6 +1547,10 @@ export interface DescribeDataPvUrlStatisticsRequest {
    5:1d
      */
     GroupByType?: number;
+    /**
+     * 无需关注，是否查询zhiyan
+     */
+    IsNewData?: number;
 }
 /**
  * 发布文件列表(SOURCEMAP)

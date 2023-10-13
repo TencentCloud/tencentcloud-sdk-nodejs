@@ -794,7 +794,7 @@ export interface DeletePrivateZoneRecordRequest {
      */
     ZoneId?: string;
     /**
-     * 记录ID
+     * 记录ID（调用DescribePrivateZoneRecordList可获取到RecordId）
      */
     RecordId?: string;
     /**

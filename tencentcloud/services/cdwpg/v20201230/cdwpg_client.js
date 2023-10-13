@@ -28,10 +28,22 @@ class Client extends abstract_client_1.AbstractClient {
         super("cdwpg.tencentcloudapi.com", "2020-12-30", clientConfig);
     }
     /**
+     * 集群详情页中显示集群状态、流程进度等
+     */
+    async DescribeInstanceState(req, cb) {
+        return this.request("DescribeInstanceState", req, cb);
+    }
+    /**
      * 销毁集群
      */
     async DestroyInstanceByApi(req, cb) {
         return this.request("DestroyInstanceByApi", req, cb);
+    }
+    /**
+     * 根据实例ID查询某个实例的具体信息
+     */
+    async DescribeInstance(req, cb) {
+        return this.request("DescribeInstance", req, cb);
     }
     /**
      * 创建集群
@@ -40,22 +52,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateInstanceByApi", req, cb);
     }
     /**
-     * 集群详情页中显示集群状态、流程进度等
+     * 获取集群实例列表
      */
-    async DescribeInstanceState(req, cb) {
-        return this.request("DescribeInstanceState", req, cb);
+    async DescribeSimpleInstances(req, cb) {
+        return this.request("DescribeSimpleInstances", req, cb);
     }
     /**
      * 修改实例信息，目前为实例名称
      */
     async ModifyInstance(req, cb) {
         return this.request("ModifyInstance", req, cb);
-    }
-    /**
-     * 获取集群实例列表
-     */
-    async DescribeSimpleInstances(req, cb) {
-        return this.request("DescribeSimpleInstances", req, cb);
     }
 }
 exports.Client = Client;

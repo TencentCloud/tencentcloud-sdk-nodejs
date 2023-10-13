@@ -21,17 +21,22 @@ import {
   ModifyInstanceResponse,
   DescribeInstanceStateRequest,
   ResourceSpecNew,
+  ChargeProperties,
   DestroyInstanceByApiResponse,
+  InstanceNodeGroup,
   DestroyInstanceByApiRequest,
   CreateInstanceByApiRequest,
   CBSSpec,
+  InstanceStateInfo,
+  DescribeInstanceRequest,
   ModifyInstanceRequest,
   CreateInstanceByApiResponse,
   DescribeSimpleInstancesResponse,
   Tag,
   DescribeInstanceStateResponse,
+  InstanceInfo,
   InstanceSimpleInfoNew,
-  ChargeProperties,
+  DescribeInstanceResponse,
   DescribeSimpleInstancesRequest,
 } from "./cdwpg_models"
 
@@ -45,6 +50,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 集群详情页中显示集群状态、流程进度等
+   */
+  async DescribeInstanceState(
+    req: DescribeInstanceStateRequest,
+    cb?: (error: string, rep: DescribeInstanceStateResponse) => void
+  ): Promise<DescribeInstanceStateResponse> {
+    return this.request("DescribeInstanceState", req, cb)
+  }
+
+  /**
    * 销毁集群
    */
   async DestroyInstanceByApi(
@@ -52,6 +67,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DestroyInstanceByApiResponse) => void
   ): Promise<DestroyInstanceByApiResponse> {
     return this.request("DestroyInstanceByApi", req, cb)
+  }
+
+  /**
+   * 根据实例ID查询某个实例的具体信息
+   */
+  async DescribeInstance(
+    req: DescribeInstanceRequest,
+    cb?: (error: string, rep: DescribeInstanceResponse) => void
+  ): Promise<DescribeInstanceResponse> {
+    return this.request("DescribeInstance", req, cb)
   }
 
   /**
@@ -65,13 +90,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 集群详情页中显示集群状态、流程进度等
+   * 获取集群实例列表
    */
-  async DescribeInstanceState(
-    req: DescribeInstanceStateRequest,
-    cb?: (error: string, rep: DescribeInstanceStateResponse) => void
-  ): Promise<DescribeInstanceStateResponse> {
-    return this.request("DescribeInstanceState", req, cb)
+  async DescribeSimpleInstances(
+    req: DescribeSimpleInstancesRequest,
+    cb?: (error: string, rep: DescribeSimpleInstancesResponse) => void
+  ): Promise<DescribeSimpleInstancesResponse> {
+    return this.request("DescribeSimpleInstances", req, cb)
   }
 
   /**
@@ -82,15 +107,5 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyInstanceResponse) => void
   ): Promise<ModifyInstanceResponse> {
     return this.request("ModifyInstance", req, cb)
-  }
-
-  /**
-   * 获取集群实例列表
-   */
-  async DescribeSimpleInstances(
-    req: DescribeSimpleInstancesRequest,
-    cb?: (error: string, rep: DescribeSimpleInstancesResponse) => void
-  ): Promise<DescribeSimpleInstancesResponse> {
-    return this.request("DescribeSimpleInstances", req, cb)
   }
 }

@@ -246,6 +246,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeProtectedTelCdr", req, cb);
     }
     /**
+     * 获取包括全媒体和文本会话两种类型的服务记录。
+     */
+    async DescribeIMCdrList(req, cb) {
+        return this.request("DescribeIMCdrList", req, cb);
+    }
+    /**
      * 获取呼入实时数据统计指标
      */
     async DescribeCallInMetrics(req, cb) {

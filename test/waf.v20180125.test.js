@@ -558,6 +558,16 @@ it("waf.v20180125.DescribeWafInfo", async function () {
     }
 })
 
+it("waf.v20180125.DescribeAttackWhiteRule", async function () {
+    try {
+       const data = await client.DescribeAttackWhiteRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("waf.v20180125.DescribeHosts", async function () {
     try {
        const data = await client.DescribeHosts({})
@@ -608,9 +618,9 @@ it("waf.v20180125.ModifyHost", async function () {
     }
 })
 
-it("waf.v20180125.DescribeTlsVersion", async function () {
+it("waf.v20180125.ModifyBotStatus", async function () {
     try {
-       const data = await client.DescribeTlsVersion({})
+       const data = await client.ModifyBotStatus({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -688,9 +698,9 @@ it("waf.v20180125.DeleteDownloadRecord", async function () {
     }
 })
 
-it("waf.v20180125.ModifyBotStatus", async function () {
+it("waf.v20180125.DescribeTlsVersion", async function () {
     try {
-       const data = await client.ModifyBotStatus({})
+       const data = await client.DescribeTlsVersion({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -758,9 +768,29 @@ it("waf.v20180125.ModifyCustomRuleStatus", async function () {
     }
 })
 
+it("waf.v20180125.DeleteAttackWhiteRule", async function () {
+    try {
+       const data = await client.DeleteAttackWhiteRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("waf.v20180125.DescribeIpAccessControl", async function () {
     try {
        const data = await client.DescribeIpAccessControl({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("waf.v20180125.AddAttackWhiteRule", async function () {
+    try {
+       const data = await client.AddAttackWhiteRule({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -981,6 +1011,16 @@ it("waf.v20180125.SearchAttackLog", async function () {
 it("waf.v20180125.DescribeInstances", async function () {
     try {
        const data = await client.DescribeInstances({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("waf.v20180125.ModifyAttackWhiteRule", async function () {
+    try {
+       const data = await client.ModifyAttackWhiteRule({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

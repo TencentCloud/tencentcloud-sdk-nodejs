@@ -40,6 +40,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDbAssetInfo", req, cb);
     }
     /**
+     * 获取漏洞视角的漏洞风险列表
+     */
+    async DescribeRiskCenterVULViewVULRiskList(req, cb) {
+        return this.request("DescribeRiskCenterVULViewVULRiskList", req, cb);
+    }
+    /**
      * 域名列表
      */
     async DescribeDomainAssets(req, cb) {
@@ -166,10 +172,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDbAssets", req, cb);
     }
     /**
+     * 获取端口视角的端口风险列表
+     */
+    async DescribeRiskCenterPortViewPortRiskList(req, cb) {
+        return this.request("DescribeRiskCenterPortViewPortRiskList", req, cb);
+    }
+    /**
      * 获取资产视角的端口风险列表
      */
     async DescribeRiskCenterAssetViewPortRiskList(req, cb) {
         return this.request("DescribeRiskCenterAssetViewPortRiskList", req, cb);
+    }
+    /**
+     * 修改风险中心风险状态
+     */
+    async ModifyRiskCenterRiskStatus(req, cb) {
+        return this.request("ModifyRiskCenterRiskStatus", req, cb);
     }
     /**
      * 停止扫风险中心扫描任务

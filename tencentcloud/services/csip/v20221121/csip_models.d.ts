@@ -72,17 +72,21 @@ export interface TaskCenterWeakPwdRiskInputParam {
     Enable: number;
 }
 /**
- * 过滤数据对象
+ * ModifyRiskCenterRiskStatus请求参数结构体
  */
-export interface FilterDataObject {
+export interface ModifyRiskCenterRiskStatusRequest {
     /**
-     * 英文翻译
+     * 风险资产相关数据
      */
-    Value?: string;
+    RiskStatusKeys: Array<RiskCenterStatusKey>;
     /**
-     * 中文翻译
+     * 处置状态，1为已处置、2为已忽略，3为取消已处置，4为取消已忽略
      */
-    Text?: string;
+    Status: number;
+    /**
+     * 风险类型，0-端口风险， 1-漏洞风险，2-弱口令风险， 3-网站内容风险，4-配置风险，5-风险服务暴露
+     */
+    Type: number;
 }
 /**
  * 报告项key
@@ -741,11 +745,41 @@ export interface DataSearchBug {
     CWPFix?: number;
 }
 /**
+ * 风险中心状态处理Key
+ */
+export interface RiskCenterStatusKey {
+    /**
+     * 风险ID
+     */
+    Id: string;
+    /**
+     * APP ID
+     */
+    AppId: string;
+    /**
+     * 公网IP/域名
+     */
+    PublicIPDomain?: string;
+    /**
+     * 实例ID
+     */
+    InstanceId?: string;
+}
+/**
  * DescribeDomainAssets请求参数结构体
  */
 export interface DescribeDomainAssetsRequest {
     /**
      * -
+     */
+    Filter?: Filter;
+}
+/**
+ * DescribeRiskCenterAssetViewCFGRiskList请求参数结构体
+ */
+export interface DescribeRiskCenterAssetViewCFGRiskListRequest {
+    /**
+     * 过滤内容
      */
     Filter?: Filter;
 }
@@ -829,19 +863,6 @@ export interface TaskIdListKey {
      * 任务ID
      */
     TaskId: string;
-}
-/**
- * DeleteDomainAndIp返回参数结构体
- */
-export interface DeleteDomainAndIpResponse {
-    /**
-     * 删除的资产数量
-     */
-    Data?: number;
-    /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
 }
 /**
  * DescribeScanReportList返回参数结构体
@@ -1592,6 +1613,19 @@ export interface IpAssetListVO {
     VerifyStatus?: number;
 }
 /**
+ * 过滤数据对象
+ */
+export interface FilterDataObject {
+    /**
+     * 英文翻译
+     */
+    Value?: string;
+    /**
+     * 中文翻译
+     */
+    Text?: string;
+}
+/**
  * DescribeVpcAssets请求参数结构体
  */
 export interface DescribeVpcAssetsRequest {
@@ -2117,6 +2151,44 @@ export interface DescribeRiskCenterAssetViewCFGRiskListResponse {
     RequestId?: string;
 }
 /**
+ * DescribeRiskCenterVULViewVULRiskList返回参数结构体
+ */
+export interface DescribeRiskCenterVULViewVULRiskListResponse {
+    /**
+     * 总条数
+     */
+    TotalCount?: number;
+    /**
+     * 漏洞产视角的漏洞风险列表
+     */
+    Data?: Array<VULViewVULRisk>;
+    /**
+     * 危险等级列表
+     */
+    LevelLists?: Array<FilterDataObject>;
+    /**
+     * 来源列表
+     */
+    FromLists?: Array<FilterDataObject>;
+    /**
+     * 漏洞类型列表
+     */
+    VULTypeLists?: Array<FilterDataObject>;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * DescribeRiskCenterVULViewVULRiskList请求参数结构体
+ */
+export interface DescribeRiskCenterVULViewVULRiskListRequest {
+    /**
+     * 过滤内容
+     */
+    Filter?: Filter;
+}
+/**
  * 漏洞风险高级配置
  */
 export interface TaskCenterVulRiskInputParam {
@@ -2128,6 +2200,23 @@ export interface TaskCenterVulRiskInputParam {
      * 是否开启，0-不开启，1-开启
      */
     Enable: number;
+}
+/**
+ * 任务高级配置
+ */
+export interface TaskAdvanceCFG {
+    /**
+     * 漏洞风险高级配置
+     */
+    VulRisk?: Array<TaskCenterVulRiskInputParam>;
+    /**
+     * 弱口令风险高级配置
+     */
+    WeakPwdRisk?: Array<TaskCenterWeakPwdRiskInputParam>;
+    /**
+     * 配置风险高级配置
+     */
+    CFGRisk?: Array<TaskCenterCFGRiskInputParam>;
 }
 /**
  * DescribeScanTaskList返回参数结构体
@@ -2222,6 +2311,182 @@ export interface ScanTaskInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     UserName?: string;
+}
+/**
+ * 漏洞视角的漏洞风险对象
+ */
+export interface VULViewVULRisk {
+    /**
+     * 端口
+     */
+    Port?: string;
+    /**
+     * 影响资产
+     */
+    NoHandleCount?: number;
+    /**
+     * 风险等级
+     */
+    Level?: string;
+    /**
+     * 组件
+     */
+    Component?: string;
+    /**
+     * 最近识别时间
+     */
+    RecentTime?: string;
+    /**
+     * 首次识别时间
+     */
+    FirstTime?: string;
+    /**
+     * 状态，0未处理、1已处置、2已忽略
+     */
+    AffectAssetCount?: number;
+    /**
+     * 资产唯一id
+     */
+    Id?: string;
+    /**
+     * 资产子类型
+     */
+    From?: string;
+    /**
+     * 前端索引
+     */
+    Index?: string;
+    /**
+     * 漏洞类型
+     */
+    VULType?: string;
+    /**
+     * 漏洞名
+     */
+    VULName?: string;
+    /**
+     * cve
+     */
+    CVE?: string;
+    /**
+     * 描述
+     */
+    Describe?: string;
+    /**
+     * 负载
+     */
+    Payload?: string;
+    /**
+     * 版本名
+     */
+    AppName?: string;
+    /**
+     * 相关引用
+     */
+    References?: string;
+    /**
+     * 版本
+     */
+    AppVersion?: string;
+    /**
+     * 漏洞链接
+     */
+    VULURL?: string;
+    /**
+     * 用户昵称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Nick?: string;
+    /**
+     * 用户appid
+     */
+    AppId?: string;
+    /**
+     * 用户uin
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Uin?: string;
+    /**
+     * 修复建议
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Fix?: string;
+    /**
+     * 应急漏洞类型，1-应急漏洞，0-非应急漏洞
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    EMGCVulType?: number;
+}
+/**
+ * 端口视角的端口风险对象
+ */
+export interface PortViewPortRisk {
+    /**
+     * 影响资产
+     */
+    NoHandleCount?: number;
+    /**
+     * 风险等级
+     */
+    Level?: string;
+    /**
+     * 协议
+     */
+    Protocol?: string;
+    /**
+     * 组件
+     */
+    Component?: string;
+    /**
+     * 端口
+     */
+    Port?: number;
+    /**
+     * 最近识别时间
+     */
+    RecentTime?: string;
+    /**
+     * 首次识别时间
+     */
+    FirstTime?: string;
+    /**
+     * 处置建议,0保持现状、1限制访问、2封禁端口
+     */
+    Suggestion?: number;
+    /**
+     * 状态，0未处理、1已处置、2已忽略
+     */
+    AffectAssetCount?: string;
+    /**
+     * 资产唯一id
+     */
+    Id?: string;
+    /**
+     * 资产子类型
+     */
+    From?: string;
+    /**
+     * 前端索引
+     */
+    Index?: string;
+    /**
+     * 用户appid
+     */
+    AppId?: string;
+    /**
+     * 用户昵称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Nick?: string;
+    /**
+     * 用户uin
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Uin?: string;
+    /**
+     * 服务
+     */
+    Service?: string;
 }
 /**
  * DescribeClusterPodAssets请求参数结构体
@@ -2649,30 +2914,55 @@ export interface AssetViewPortRisk {
     From?: string;
 }
 /**
- * DescribeRiskCenterAssetViewCFGRiskList请求参数结构体
+ * DescribeRiskCenterPortViewPortRiskList请求参数结构体
  */
-export interface DescribeRiskCenterAssetViewCFGRiskListRequest {
+export interface DescribeRiskCenterPortViewPortRiskListRequest {
     /**
      * 过滤内容
      */
     Filter?: Filter;
 }
 /**
- * 任务高级配置
+ * DescribeRiskCenterPortViewPortRiskList返回参数结构体
  */
-export interface TaskAdvanceCFG {
+export interface DescribeRiskCenterPortViewPortRiskListResponse {
     /**
-     * 漏洞风险高级配置
+     * 总条数
      */
-    VulRisk?: Array<TaskCenterVulRiskInputParam>;
+    TotalCount?: number;
     /**
-     * 弱口令风险高级配置
+     * 资产视角的端口风险列表
      */
-    WeakPwdRisk?: Array<TaskCenterWeakPwdRiskInputParam>;
+    Data?: Array<PortViewPortRisk>;
     /**
-     * 配置风险高级配置
+     * 危险等级列表
      */
-    CFGRisk?: Array<TaskCenterCFGRiskInputParam>;
+    LevelLists?: Array<FilterDataObject>;
+    /**
+     * 处置建议列表
+     */
+    SuggestionLists?: Array<FilterDataObject>;
+    /**
+     * 来源列表
+     */
+    FromLists?: Array<FilterDataObject>;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * DeleteDomainAndIp返回参数结构体
+ */
+export interface DeleteDomainAndIpResponse {
+    /**
+     * 删除的资产数量
+     */
+    Data?: number;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * AddNewBindRoleUser返回参数结构体
@@ -2990,6 +3280,19 @@ export interface TaskLogInfo {
     UserName?: string;
 }
 /**
+ * CreateDomainAndIp返回参数结构体
+ */
+export interface CreateDomainAndIpResponse {
+    /**
+     * 返回创建成功的数量
+     */
+    Data?: number;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * DescribeRiskCenterAssetViewVULRiskList请求参数结构体
  */
 export interface DescribeRiskCenterAssetViewVULRiskListRequest {
@@ -2999,26 +3302,21 @@ export interface DescribeRiskCenterAssetViewVULRiskListRequest {
     Filter?: Filter;
 }
 /**
- * DescribeSearchBugInfo返回参数结构体
+ * 配置风险高级配置
  */
-export interface DescribeSearchBugInfoResponse {
+export interface TaskCenterCFGRiskInputParam {
     /**
-     * 漏洞信息和资产信息
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 检测项ID
      */
-    Data?: DataSearchBug;
+    ItemId: string;
     /**
-     * 状态值，0：查询成功，非0：查询失败
+     * 是否开启，0-不开启，1-开启
      */
-    ReturnCode?: number;
+    Enable: number;
     /**
-     * 状态信息，success：查询成功，fail：查询失败
+     * 资源类型
      */
-    ReturnMsg?: string;
-    /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
+    ResourceType: string;
 }
 /**
  * CreateDomainAndIp请求参数结构体
@@ -3230,21 +3528,26 @@ export interface DomainAssetVO {
     BotAccessCount?: number;
 }
 /**
- * 配置风险高级配置
+ * DescribeSearchBugInfo返回参数结构体
  */
-export interface TaskCenterCFGRiskInputParam {
+export interface DescribeSearchBugInfoResponse {
     /**
-     * 检测项ID
+     * 漏洞信息和资产信息
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    ItemId: string;
+    Data?: DataSearchBug;
     /**
-     * 是否开启，0-不开启，1-开启
+     * 状态值，0：查询成功，非0：查询失败
      */
-    Enable: number;
+    ReturnCode?: number;
     /**
-     * 资源类型
+     * 状态信息，success：查询成功，fail：查询失败
      */
-    ResourceType: string;
+    ReturnMsg?: string;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * DescribeTaskLogList返回参数结构体
@@ -3618,13 +3921,9 @@ export interface DeleteRiskScanTaskResponse {
     RequestId?: string;
 }
 /**
- * CreateDomainAndIp返回参数结构体
+ * ModifyRiskCenterRiskStatus返回参数结构体
  */
-export interface CreateDomainAndIpResponse {
-    /**
-     * 返回创建成功的数量
-     */
-    Data?: number;
+export interface ModifyRiskCenterRiskStatusResponse {
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */

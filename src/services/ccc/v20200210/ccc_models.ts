@@ -202,8 +202,14 @@ export interface DescribeIMCdrsResponse {
   TotalCount?: number
   /**
    * 服务记录列表
+   * @deprecated
    */
   IMCdrs?: Array<IMCdrInfo>
+  /**
+   * 服务记录列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IMCdrList?: Array<IMCdrInfo>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -623,39 +629,22 @@ export interface ModifyExtensionResponse {
 }
 
 /**
- * 坐席用户信息
+ * DescribeIMCdrList返回参数结构体
  */
-export interface SeatUserInfo {
+export interface DescribeIMCdrListResponse {
   /**
-   * 坐席名称
+   * 总记录数
    */
-  Name: string
+  TotalCount?: number
   /**
-   * 坐席邮箱
-   */
-  Mail: string
-  /**
-   * 工号
+   * 服务记录列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  StaffNumber: string
+  IMCdrList?: Array<IMCdrInfo>
   /**
-   * 坐席电话号码（带0086前缀）
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  Phone?: string
-  /**
-   * 坐席昵称
-   */
-  Nick?: string
-  /**
-   * 用户ID
-   */
-  UserId?: string
-  /**
-   * 坐席关联的技能组列表
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SkillGroupNameList?: Array<string>
+  RequestId?: string
 }
 
 /**
@@ -925,6 +914,7 @@ export interface DescribeIMCdrsRequest {
   EndTimestamp: number
   /**
    * 实例 ID（废弃）
+   * @deprecated
    */
   InstanceId?: number
   /**
@@ -1005,6 +995,42 @@ export interface AutoCalloutTaskCalleeInfo {
    * 会话ID列表
    */
   Sessions: Array<string>
+}
+
+/**
+ * 坐席用户信息
+ */
+export interface SeatUserInfo {
+  /**
+   * 坐席名称
+   */
+  Name: string
+  /**
+   * 坐席邮箱
+   */
+  Mail: string
+  /**
+   * 工号
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StaffNumber: string
+  /**
+   * 坐席电话号码（带0086前缀）
+   */
+  Phone?: string
+  /**
+   * 坐席昵称
+   */
+  Nick?: string
+  /**
+   * 用户ID
+   */
+  UserId?: string
+  /**
+   * 坐席关联的技能组列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SkillGroupNameList?: Array<string>
 }
 
 /**
@@ -2598,6 +2624,36 @@ export interface IMCdrInfo {
 }
 
 /**
+ * DescribeIMCdrList请求参数结构体
+ */
+export interface DescribeIMCdrListRequest {
+  /**
+   * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
+   */
+  SdkAppId: number
+  /**
+   * 起始时间（必填），Unix 秒级时间戳
+   */
+  StartTimestamp: number
+  /**
+   * 结束时间（必填），Unix 秒级时间戳
+   */
+  EndTimestamp: number
+  /**
+   * 返回记录条数，最大为100默认20
+   */
+  Limit?: number
+  /**
+   * 返回记录偏移，默认为 0
+   */
+  Offset?: number
+  /**
+   * 1为全媒体，2为文本客服，不填则查询全部
+   */
+  Type?: number
+}
+
+/**
  * DescribeAutoCalloutTasks请求参数结构体
  */
 export interface DescribeAutoCalloutTasksRequest {
@@ -2621,6 +2677,7 @@ export interface DescribeAutoCalloutTasksRequest {
 export interface DescribeChatMessagesRequest {
   /**
    * 实例 ID（废弃）
+   * @deprecated
    */
   InstanceId?: number
   /**

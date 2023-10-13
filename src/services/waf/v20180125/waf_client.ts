@@ -27,7 +27,7 @@ import {
   DescribeIpHitItemsResponse,
   DescribeCustomRulesRspRuleListItem,
   ModifyAntiInfoLeakRulesResponse,
-  ModifyWebshellStatusRequest,
+  ModifyObjectResponse,
   DescribeCertificateVerifyResultRequest,
   DescribeUserCdcClbWafRegionsRequest,
   UpsertIpAccessControlRequest,
@@ -55,6 +55,7 @@ import {
   DescribeAntiLeakageItem,
   LoadBalancerPackageNew,
   DescribeAntiFakeUrlRequest,
+  DeleteAttackWhiteRuleRequest,
   CCRuleData,
   DescribeCustomRuleListRequest,
   ModifyDomainWhiteRuleRequest,
@@ -87,6 +88,7 @@ import {
   ModifyDomainIpv6StatusRequest,
   ModifyAntiInfoLeakRuleStatusResponse,
   GetAttackTotalCountResponse,
+  ModifyBotStatusResponse,
   DescribeAntiInfoLeakageRulesResponse,
   SessionItem,
   ModifyInstanceNameResponse,
@@ -108,24 +110,27 @@ import {
   DescribeUserClbWafRegionsResponse,
   ModifyAntiFakeUrlStatusRequest,
   DeleteCustomWhiteRuleRequest,
+  UserWhiteRule,
   ModifyHostModeResponse,
   ModifyInstanceRenewFlagResponse,
   DescribeCCRuleListRequest,
   ModifyProtectionStatusResponse,
   DescribeAutoDenyIPRequest,
-  ModifyObjectResponse,
+  AddAttackWhiteRuleResponse,
   ModifyWafAutoDenyStatusRequest,
   DescribeCustomRuleListResponse,
-  ModifyDomainsCLSStatusResponse,
+  ResponseCode,
+  DeleteAttackWhiteRuleResponse,
   SwitchDomainRulesRequest,
   ModifyAccessPeriodResponse,
   ClbHostResult,
+  ModifyWebshellStatusRequest,
   DescribeVipInfoRequest,
   GetAttackHistogramResponse,
   GetInstanceQpsLimitRequest,
   FiltersItemNew,
   DeleteSpartaProtectionResponse,
-  SessionData,
+  ModifyAttackWhiteRuleResponse,
   DescribeAutoDenyIPResponse,
   SwitchDomainRulesResponse,
   SearchAccessLogResponse,
@@ -142,6 +147,7 @@ import {
   DescribeAntiFakeRulesResponse,
   AddAntiInfoLeakRulesRequest,
   AccessRuleInfo,
+  ModifyAttackWhiteRuleRequest,
   HostRecord,
   CreateHostRequest,
   SearchAttackLogResponse,
@@ -190,7 +196,7 @@ import {
   DescribeHostLimitResponse,
   PostAttackDownloadTaskResponse,
   ModifySpartaProtectionModeResponse,
-  ModifyBotStatusResponse,
+  DescribeAttackWhiteRuleRequest,
   DescribeDomainDetailsSaasRequest,
   ModifyCustomRuleStatusResponse,
   StrategyForAntiInfoLeak,
@@ -243,6 +249,7 @@ import {
   DescribeDomainDetailsSaasResponse,
   AccessKeyValueInfo,
   DomainPackageNew,
+  AddAttackWhiteRuleRequest,
   AddCustomRuleRequest,
   DescribeWafAutoDenyRulesResponse,
   FraudPkg,
@@ -284,6 +291,8 @@ import {
   ModifyModuleStatusRequest,
   DescribeRuleLimitRequest,
   TargetEntity,
+  UserWhiteRuleItem,
+  SessionData,
   CCRuleItem,
   DescribeDomainCountInfoRequest,
   GetAttackDownloadRecordsResponse,
@@ -291,6 +300,7 @@ import {
   ModifySpartaProtectionRequest,
   DescribeIpAccessControlRequest,
   DescribeDomainWhiteRulesResponse,
+  ModifyDomainsCLSStatusResponse,
   DescribeWafThreatenIntelligenceResponse,
   DescribeAccessHistogramResponse,
   DomainInfo,
@@ -322,7 +332,7 @@ import {
   DeleteCCRuleResponse,
   LogHistogramInfo,
   DomainURI,
-  ResponseCode,
+  DescribeAttackWhiteRuleResponse,
   ModifyAntiInfoLeakRuleStatusRequest,
   ModifySpartaProtectionModeRequest,
   AccessRuleKeyValueInfo,
@@ -898,6 +908,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取用户规则白名单列表
+   */
+  async DescribeAttackWhiteRule(
+    req: DescribeAttackWhiteRuleRequest,
+    cb?: (error: string, rep: DescribeAttackWhiteRuleResponse) => void
+  ): Promise<DescribeAttackWhiteRuleResponse> {
+    return this.request("DescribeAttackWhiteRule", req, cb)
+  }
+
+  /**
    * clb-waf中获取防护域名列表
    */
   async DescribeHosts(
@@ -948,13 +968,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询用户TLS版本
+   * Bot_V2 bot总开关更新
    */
-  async DescribeTlsVersion(
-    req?: DescribeTlsVersionRequest,
-    cb?: (error: string, rep: DescribeTlsVersionResponse) => void
-  ): Promise<DescribeTlsVersionResponse> {
-    return this.request("DescribeTlsVersion", req, cb)
+  async ModifyBotStatus(
+    req: ModifyBotStatusRequest,
+    cb?: (error: string, rep: ModifyBotStatusResponse) => void
+  ): Promise<ModifyBotStatusResponse> {
+    return this.request("ModifyBotStatus", req, cb)
   }
 
   /**
@@ -1028,13 +1048,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * Bot_V2 bot总开关更新
+   * 查询用户TLS版本
    */
-  async ModifyBotStatus(
-    req: ModifyBotStatusRequest,
-    cb?: (error: string, rep: ModifyBotStatusResponse) => void
-  ): Promise<ModifyBotStatusResponse> {
-    return this.request("ModifyBotStatus", req, cb)
+  async DescribeTlsVersion(
+    req?: DescribeTlsVersionRequest,
+    cb?: (error: string, rep: DescribeTlsVersionResponse) => void
+  ): Promise<DescribeTlsVersionResponse> {
+    return this.request("DescribeTlsVersion", req, cb)
   }
 
   /**
@@ -1098,6 +1118,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 供用户控制台调用，删除Tiga规则引擎白名单。
+   */
+  async DeleteAttackWhiteRule(
+    req: DeleteAttackWhiteRuleRequest,
+    cb?: (error: string, rep: DeleteAttackWhiteRuleResponse) => void
+  ): Promise<DeleteAttackWhiteRuleResponse> {
+    return this.request("DeleteAttackWhiteRule", req, cb)
+  }
+
+  /**
    * Waf ip黑白名单查询
    */
   async DescribeIpAccessControl(
@@ -1105,6 +1135,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeIpAccessControlResponse) => void
   ): Promise<DescribeIpAccessControlResponse> {
     return this.request("DescribeIpAccessControl", req, cb)
+  }
+
+  /**
+   * 供用户控制台调用，增加Tiga规则引擎白名单。
+   */
+  async AddAttackWhiteRule(
+    req: AddAttackWhiteRuleRequest,
+    cb?: (error: string, rep: AddAttackWhiteRuleResponse) => void
+  ): Promise<AddAttackWhiteRuleResponse> {
+    return this.request("AddAttackWhiteRule", req, cb)
   }
 
   /**
@@ -1325,6 +1365,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeInstancesResponse) => void
   ): Promise<DescribeInstancesResponse> {
     return this.request("DescribeInstances", req, cb)
+  }
+
+  /**
+   * 供用户控制台调用，修改Tiga规则引擎白名单。
+   */
+  async ModifyAttackWhiteRule(
+    req: ModifyAttackWhiteRuleRequest,
+    cb?: (error: string, rep: ModifyAttackWhiteRuleResponse) => void
+  ): Promise<ModifyAttackWhiteRuleResponse> {
+    return this.request("ModifyAttackWhiteRule", req, cb)
   }
 
   /**

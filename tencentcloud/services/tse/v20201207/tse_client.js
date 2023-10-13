@@ -124,6 +124,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteEngine", req, cb);
     }
     /**
+     * 更新云原生网关证书
+     */
+    async ModifyCloudNativeAPIGatewayCertificate(req, cb) {
+        return this.request("ModifyCloudNativeAPIGatewayCertificate", req, cb);
+    }
+    /**
      * 删除云原生网关的灰度规则
      */
     async DeleteCloudNativeAPIGatewayCanaryRule(req, cb) {

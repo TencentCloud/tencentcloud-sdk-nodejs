@@ -178,6 +178,16 @@ it("tse.v20201207.DeleteEngine", async function () {
     }
 })
 
+it("tse.v20201207.ModifyCloudNativeAPIGatewayCertificate", async function () {
+    try {
+       const data = await client.ModifyCloudNativeAPIGatewayCertificate({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tse.v20201207.DeleteCloudNativeAPIGatewayCanaryRule", async function () {
     try {
        const data = await client.DeleteCloudNativeAPIGatewayCanaryRule({})

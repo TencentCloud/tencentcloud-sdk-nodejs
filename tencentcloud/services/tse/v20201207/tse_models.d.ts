@@ -307,6 +307,15 @@ export interface DeleteNativeGatewayServerGroupResponse {
     RequestId?: string;
 }
 /**
+ * ModifyCloudNativeAPIGatewayCertificate返回参数结构体
+ */
+export interface ModifyCloudNativeAPIGatewayCertificateResponse {
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * CreateCloudNativeAPIGatewayRouteRateLimit返回参数结构体
  */
 export interface CreateCloudNativeAPIGatewayRouteRateLimitResponse {
@@ -682,6 +691,48 @@ export interface ExternalRedis {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     RedisTimeout: number;
+}
+/**
+ * ModifyCloudNativeAPIGatewayCertificate请求参数结构体
+ */
+export interface ModifyCloudNativeAPIGatewayCertificateRequest {
+    /**
+     * 网关ID
+     */
+    GatewayId: string;
+    /**
+     * 证书id
+     */
+    Id: string;
+    /**
+     * 证书名称，即将废弃
+     * @deprecated
+     */
+    Name?: string;
+    /**
+     * 证书私钥，CertSource为native时必填。
+     */
+    Key?: string;
+    /**
+     * 证书pem格式，CertSource为native时必填。
+     */
+    Crt?: string;
+    /**
+     * 绑定的域名，即将废弃
+     * @deprecated
+     */
+    BindDomains?: Array<string>;
+    /**
+     * ssl平台证书 Id，CertSource为ssl时必填。
+     */
+    CertId?: string;
+    /**
+     * 证书来源
+  - ssl (ssl平台证书)，默认值
+  - native (kong自定义证书)
+  
+     */
+    CertSource?: string;
 }
 /**
  * 多环境网络信息

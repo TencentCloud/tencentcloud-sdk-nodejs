@@ -42,7 +42,7 @@ import {
   DescribeAutoCalloutTasksResponse,
   PackageBuyInfo,
   ModifyExtensionResponse,
-  SeatUserInfo,
+  DescribeIMCdrListResponse,
   CreateStaffResponse,
   DescribeSkillGroupInfoListResponse,
   DescribeNumbersResponse,
@@ -60,6 +60,7 @@ import {
   DescribeSkillGroupInfoListRequest,
   CreateCarrierPrivilegeNumberApplicantResponse,
   AutoCalloutTaskCalleeInfo,
+  SeatUserInfo,
   CarrierPrivilegeNumberApplicant,
   ErrStaffItem,
   PSTNSession,
@@ -116,6 +117,7 @@ import {
   SdkAppIdBuyInfo,
   DescribePSTNActiveSessionListResponse,
   IMCdrInfo,
+  DescribeIMCdrListRequest,
   DescribeAutoCalloutTasksRequest,
   DescribeChatMessagesRequest,
   DescribeTelSessionResponse,
@@ -502,6 +504,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeProtectedTelCdrResponse) => void
   ): Promise<DescribeProtectedTelCdrResponse> {
     return this.request("DescribeProtectedTelCdr", req, cb)
+  }
+
+  /**
+   * 获取包括全媒体和文本会话两种类型的服务记录。
+   */
+  async DescribeIMCdrList(
+    req: DescribeIMCdrListRequest,
+    cb?: (error: string, rep: DescribeIMCdrListResponse) => void
+  ): Promise<DescribeIMCdrListResponse> {
+    return this.request("DescribeIMCdrList", req, cb)
   }
 
   /**

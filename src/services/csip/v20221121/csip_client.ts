@@ -22,7 +22,7 @@ import {
   DeleteRiskScanTaskRequest,
   DescribeRiskCenterAssetViewWeakPasswordRiskListResponse,
   TaskCenterWeakPwdRiskInputParam,
-  FilterDataObject,
+  ModifyRiskCenterRiskStatusRequest,
   ReportItemKey,
   CVMAssetVO,
   AssetViewCFGRisk,
@@ -32,13 +32,14 @@ import {
   Vpc,
   StopRiskCenterTaskRequest,
   DataSearchBug,
+  RiskCenterStatusKey,
   DescribeDomainAssetsRequest,
+  DescribeRiskCenterAssetViewCFGRiskListRequest,
   DescribeRiskCenterWebsiteRiskListResponse,
   Tag,
   DeleteDomainAndIpRequest,
   DescribeScanTaskListRequest,
   TaskIdListKey,
-  DeleteDomainAndIpResponse,
   DescribeScanReportListResponse,
   DescribeSearchBugInfoRequest,
   TaskLogURL,
@@ -54,6 +55,7 @@ import {
   ServerRisk,
   TaskAssetObject,
   IpAssetListVO,
+  FilterDataObject,
   DescribeVpcAssetsRequest,
   DescribeRiskCenterAssetViewWeakPasswordRiskListRequest,
   PublicIpDomainListKey,
@@ -66,9 +68,14 @@ import {
   WebsiteRisk,
   CreateRiskCenterScanTaskRequest,
   DescribeRiskCenterAssetViewCFGRiskListResponse,
+  DescribeRiskCenterVULViewVULRiskListResponse,
+  DescribeRiskCenterVULViewVULRiskListRequest,
   TaskCenterVulRiskInputParam,
+  TaskAdvanceCFG,
   DescribeScanTaskListResponse,
   ScanTaskInfo,
+  VULViewVULRisk,
+  PortViewPortRisk,
   DescribeClusterPodAssetsRequest,
   DescribeCVMAssetInfoResponse,
   DescribePublicIpAssetsResponse,
@@ -81,18 +88,20 @@ import {
   DescribeClusterPodAssetsResponse,
   AssetBaseInfoResponse,
   AssetViewPortRisk,
-  DescribeRiskCenterAssetViewCFGRiskListRequest,
-  TaskAdvanceCFG,
+  DescribeRiskCenterPortViewPortRiskListRequest,
+  DescribeRiskCenterPortViewPortRiskListResponse,
+  DeleteDomainAndIpResponse,
   AddNewBindRoleUserResponse,
   WhereFilter,
   ScanTaskInfoList,
   DescribeDbAssetsRequest,
   TaskLogInfo,
+  CreateDomainAndIpResponse,
   DescribeRiskCenterAssetViewVULRiskListRequest,
-  DescribeSearchBugInfoResponse,
+  TaskCenterCFGRiskInputParam,
   CreateDomainAndIpRequest,
   DomainAssetVO,
-  TaskCenterCFGRiskInputParam,
+  DescribeSearchBugInfoResponse,
   DescribeTaskLogListResponse,
   BugInfoDetail,
   DescribeDomainAssetsResponse,
@@ -104,7 +113,7 @@ import {
   DescribeRiskCenterServerRiskListResponse,
   DescribeListenerListRequest,
   DeleteRiskScanTaskResponse,
-  CreateDomainAndIpResponse,
+  ModifyRiskCenterRiskStatusResponse,
   DescribeTaskLogListRequest,
   DescribeRiskCenterAssetViewPortRiskListResponse,
   DescribeTaskLogURLRequest,
@@ -137,6 +146,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDbAssetInfoResponse) => void
   ): Promise<DescribeDbAssetInfoResponse> {
     return this.request("DescribeDbAssetInfo", req, cb)
+  }
+
+  /**
+   * 获取漏洞视角的漏洞风险列表
+   */
+  async DescribeRiskCenterVULViewVULRiskList(
+    req: DescribeRiskCenterVULViewVULRiskListRequest,
+    cb?: (error: string, rep: DescribeRiskCenterVULViewVULRiskListResponse) => void
+  ): Promise<DescribeRiskCenterVULViewVULRiskListResponse> {
+    return this.request("DescribeRiskCenterVULViewVULRiskList", req, cb)
   }
 
   /**
@@ -350,6 +369,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取端口视角的端口风险列表
+   */
+  async DescribeRiskCenterPortViewPortRiskList(
+    req: DescribeRiskCenterPortViewPortRiskListRequest,
+    cb?: (error: string, rep: DescribeRiskCenterPortViewPortRiskListResponse) => void
+  ): Promise<DescribeRiskCenterPortViewPortRiskListResponse> {
+    return this.request("DescribeRiskCenterPortViewPortRiskList", req, cb)
+  }
+
+  /**
    * 获取资产视角的端口风险列表
    */
   async DescribeRiskCenterAssetViewPortRiskList(
@@ -357,6 +386,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeRiskCenterAssetViewPortRiskListResponse) => void
   ): Promise<DescribeRiskCenterAssetViewPortRiskListResponse> {
     return this.request("DescribeRiskCenterAssetViewPortRiskList", req, cb)
+  }
+
+  /**
+   * 修改风险中心风险状态
+   */
+  async ModifyRiskCenterRiskStatus(
+    req: ModifyRiskCenterRiskStatusRequest,
+    cb?: (error: string, rep: ModifyRiskCenterRiskStatusResponse) => void
+  ): Promise<ModifyRiskCenterRiskStatusResponse> {
+    return this.request("ModifyRiskCenterRiskStatus", req, cb)
   }
 
   /**

@@ -610,6 +610,7 @@ RideHailingDriverLicense -- 网约车驾驶证
 RideHailingTransportLicense -- 网约车运输证
 WayBill -- 快递运单
 AccountOpeningPermit -- 银行开户许可证
+InvoiceEng -- 海外发票模版
    */
   ConfigId?: string
 }
@@ -1363,79 +1364,79 @@ export interface VehicleInvoiceInfo {
   /**
    * 车辆类型
    */
-  CarType: string
+  CarType?: string
   /**
    * 厂牌型号
    */
-  PlateModel: string
+  PlateModel?: string
   /**
    * 产地
    */
-  ProduceAddress: string
+  ProduceAddress?: string
   /**
    * 合格证号
    */
-  CertificateNo: string
+  CertificateNo?: string
   /**
    * 进口证明书号
    */
-  ImportNo: string
+  ImportNo?: string
   /**
    * LSVCA2NP9HN0xxxxx
    */
-  VinNo: string
+  VinNo?: string
   /**
    * 完税证书号
    */
-  PayTaxesNo: string
+  PayTaxesNo?: string
   /**
    * 吨位
    */
-  Tonnage: string
+  Tonnage?: string
   /**
    * 限乘人数
    */
-  LimitCount: string
+  LimitCount?: string
   /**
    * 发动机号码
    */
-  EngineNo: string
+  EngineNo?: string
   /**
    * 商检单号
    */
-  BizCheckFormNo: string
+  BizCheckFormNo?: string
   /**
    * 主管税务机关代码
    */
-  TaxtationOrgCode: string
+  TaxtationOrgCode?: string
   /**
    * 主管税务机关名称
    */
-  TaxtationOrgName: string
+  TaxtationOrgName?: string
   /**
    * 税率
    */
-  MotorTaxRate: string
+  MotorTaxRate?: string
+  /**
+   * 银行账号
+   */
+  MotorBankName?: string
   /**
    * 开户行
    */
-  MotorBankName: string
-  /**
-   * 账号
-   */
-  MotorBankAccount: string
+  MotorBankAccount?: string
   /**
    * 销售地址
    */
-  SellerAddress: string
+  SellerAddress?: string
   /**
    * 销售电话
    */
-  SellerTel: string
+  SellerTel?: string
   /**
    * 购方身份证
    */
-  BuyerNo: string
+  BuyerNo?: string
 }
 
 /**
@@ -2912,7 +2913,7 @@ export interface VatInvoiceVerifyNewRequest {
    */
   RegionCode?: string
   /**
-   * 销方税号，通用机打电子发票必填
+   * 销方税号，通用机打电子发票必填，区块链发票时必填
    */
   SellerTaxCode?: string
   /**

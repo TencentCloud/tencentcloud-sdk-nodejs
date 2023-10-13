@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeDbAssetInfoResponse, DeleteRiskScanTaskRequest, DescribeRiskCenterAssetViewWeakPasswordRiskListResponse, DescribeScanReportListRequest, DescribeVpcAssetsResponse, StopRiskCenterTaskRequest, DescribeDomainAssetsRequest, DescribeRiskCenterWebsiteRiskListResponse, DeleteDomainAndIpRequest, DescribeScanTaskListRequest, DeleteDomainAndIpResponse, DescribeScanReportListResponse, DescribeSearchBugInfoRequest, AddNewBindRoleUserRequest, DescribeListenerListResponse, CreateRiskCenterScanTaskResponse, DescribeSubnetAssetsResponse, DescribeRiskCenterAssetViewPortRiskListRequest, StopRiskCenterTaskResponse, DescribeVpcAssetsRequest, DescribeRiskCenterAssetViewWeakPasswordRiskListRequest, DescribeCVMAssetsResponse, DescribePublicIpAssetsRequest, DescribeCVMAssetInfoRequest, CreateRiskCenterScanTaskRequest, DescribeRiskCenterAssetViewCFGRiskListResponse, DescribeScanTaskListResponse, DescribeClusterPodAssetsRequest, DescribeCVMAssetInfoResponse, DescribePublicIpAssetsResponse, DescribeTaskLogURLResponse, DescribeDbAssetInfoRequest, DescribeRiskCenterWebsiteRiskListRequest, DescribeSubnetAssetsRequest, DescribeClusterPodAssetsResponse, DescribeRiskCenterAssetViewCFGRiskListRequest, AddNewBindRoleUserResponse, DescribeDbAssetsRequest, DescribeRiskCenterAssetViewVULRiskListRequest, DescribeSearchBugInfoResponse, CreateDomainAndIpRequest, DescribeTaskLogListResponse, DescribeDomainAssetsResponse, DescribeDbAssetsResponse, DescribeRiskCenterAssetViewVULRiskListResponse, DescribeCVMAssetsRequest, DescribeRiskCenterServerRiskListRequest, DescribeRiskCenterServerRiskListResponse, DescribeListenerListRequest, DeleteRiskScanTaskResponse, CreateDomainAndIpResponse, DescribeTaskLogListRequest, DescribeRiskCenterAssetViewPortRiskListResponse, DescribeTaskLogURLRequest } from "./csip_models";
+import { DescribeDbAssetInfoResponse, DeleteRiskScanTaskRequest, DescribeRiskCenterAssetViewWeakPasswordRiskListResponse, ModifyRiskCenterRiskStatusRequest, DescribeScanReportListRequest, DescribeVpcAssetsResponse, StopRiskCenterTaskRequest, DescribeDomainAssetsRequest, DescribeRiskCenterAssetViewCFGRiskListRequest, DescribeRiskCenterWebsiteRiskListResponse, DeleteDomainAndIpRequest, DescribeScanTaskListRequest, DescribeScanReportListResponse, DescribeSearchBugInfoRequest, AddNewBindRoleUserRequest, DescribeListenerListResponse, CreateRiskCenterScanTaskResponse, DescribeSubnetAssetsResponse, DescribeRiskCenterAssetViewPortRiskListRequest, StopRiskCenterTaskResponse, DescribeVpcAssetsRequest, DescribeRiskCenterAssetViewWeakPasswordRiskListRequest, DescribeCVMAssetsResponse, DescribePublicIpAssetsRequest, DescribeCVMAssetInfoRequest, CreateRiskCenterScanTaskRequest, DescribeRiskCenterAssetViewCFGRiskListResponse, DescribeRiskCenterVULViewVULRiskListResponse, DescribeRiskCenterVULViewVULRiskListRequest, DescribeScanTaskListResponse, DescribeClusterPodAssetsRequest, DescribeCVMAssetInfoResponse, DescribePublicIpAssetsResponse, DescribeTaskLogURLResponse, DescribeDbAssetInfoRequest, DescribeRiskCenterWebsiteRiskListRequest, DescribeSubnetAssetsRequest, DescribeClusterPodAssetsResponse, DescribeRiskCenterPortViewPortRiskListRequest, DescribeRiskCenterPortViewPortRiskListResponse, DeleteDomainAndIpResponse, AddNewBindRoleUserResponse, DescribeDbAssetsRequest, CreateDomainAndIpResponse, DescribeRiskCenterAssetViewVULRiskListRequest, CreateDomainAndIpRequest, DescribeSearchBugInfoResponse, DescribeTaskLogListResponse, DescribeDomainAssetsResponse, DescribeDbAssetsResponse, DescribeRiskCenterAssetViewVULRiskListResponse, DescribeCVMAssetsRequest, DescribeRiskCenterServerRiskListRequest, DescribeRiskCenterServerRiskListResponse, DescribeListenerListRequest, DeleteRiskScanTaskResponse, ModifyRiskCenterRiskStatusResponse, DescribeTaskLogListRequest, DescribeRiskCenterAssetViewPortRiskListResponse, DescribeTaskLogURLRequest } from "./csip_models";
 /**
  * csip client
  * @class
@@ -15,6 +15,10 @@ export declare class Client extends AbstractClient {
      * db资产详情
      */
     DescribeDbAssetInfo(req: DescribeDbAssetInfoRequest, cb?: (error: string, rep: DescribeDbAssetInfoResponse) => void): Promise<DescribeDbAssetInfoResponse>;
+    /**
+     * 获取漏洞视角的漏洞风险列表
+     */
+    DescribeRiskCenterVULViewVULRiskList(req: DescribeRiskCenterVULViewVULRiskListRequest, cb?: (error: string, rep: DescribeRiskCenterVULViewVULRiskListResponse) => void): Promise<DescribeRiskCenterVULViewVULRiskListResponse>;
     /**
      * 域名列表
      */
@@ -100,9 +104,17 @@ export declare class Client extends AbstractClient {
      */
     DescribeDbAssets(req: DescribeDbAssetsRequest, cb?: (error: string, rep: DescribeDbAssetsResponse) => void): Promise<DescribeDbAssetsResponse>;
     /**
+     * 获取端口视角的端口风险列表
+     */
+    DescribeRiskCenterPortViewPortRiskList(req: DescribeRiskCenterPortViewPortRiskListRequest, cb?: (error: string, rep: DescribeRiskCenterPortViewPortRiskListResponse) => void): Promise<DescribeRiskCenterPortViewPortRiskListResponse>;
+    /**
      * 获取资产视角的端口风险列表
      */
     DescribeRiskCenterAssetViewPortRiskList(req: DescribeRiskCenterAssetViewPortRiskListRequest, cb?: (error: string, rep: DescribeRiskCenterAssetViewPortRiskListResponse) => void): Promise<DescribeRiskCenterAssetViewPortRiskListResponse>;
+    /**
+     * 修改风险中心风险状态
+     */
+    ModifyRiskCenterRiskStatus(req: ModifyRiskCenterRiskStatusRequest, cb?: (error: string, rep: ModifyRiskCenterRiskStatusResponse) => void): Promise<ModifyRiskCenterRiskStatusResponse>;
     /**
      * 停止扫风险中心扫描任务
      */

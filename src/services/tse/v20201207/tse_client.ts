@@ -29,6 +29,7 @@ import {
   DescribeCloudNativeAPIGatewayNodesRequest,
   ModifyCloudNativeAPIGatewayRouteRequest,
   DeleteNativeGatewayServerGroupResponse,
+  ModifyCloudNativeAPIGatewayCertificateResponse,
   CreateCloudNativeAPIGatewayRouteRateLimitResponse,
   DescribeSREInstanceAccessAddressResponse,
   ModifyCloudNativeAPIGatewayCanaryRuleResponse,
@@ -49,6 +50,7 @@ import {
   CreateCloudNativeAPIGatewayServiceRequest,
   CloudNativeAPIGatewayBalancedService,
   ExternalRedis,
+  ModifyCloudNativeAPIGatewayCertificateRequest,
   EnvAddressInfo,
   SREInstance,
   InstanceTagInfo,
@@ -350,6 +352,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteEngineResponse) => void
   ): Promise<DeleteEngineResponse> {
     return this.request("DeleteEngine", req, cb)
+  }
+
+  /**
+   * 更新云原生网关证书
+   */
+  async ModifyCloudNativeAPIGatewayCertificate(
+    req: ModifyCloudNativeAPIGatewayCertificateRequest,
+    cb?: (error: string, rep: ModifyCloudNativeAPIGatewayCertificateResponse) => void
+  ): Promise<ModifyCloudNativeAPIGatewayCertificateResponse> {
+    return this.request("ModifyCloudNativeAPIGatewayCertificate", req, cb)
   }
 
   /**

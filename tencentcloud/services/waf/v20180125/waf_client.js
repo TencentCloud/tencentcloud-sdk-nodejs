@@ -361,6 +361,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeWafInfo", req, cb);
     }
     /**
+     * 获取用户规则白名单列表
+     */
+    async DescribeAttackWhiteRule(req, cb) {
+        return this.request("DescribeAttackWhiteRule", req, cb);
+    }
+    /**
      * clb-waf中获取防护域名列表
      */
     async DescribeHosts(req, cb) {
@@ -391,10 +397,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyHost", req, cb);
     }
     /**
-     * 查询用户TLS版本
+     * Bot_V2 bot总开关更新
      */
-    async DescribeTlsVersion(req, cb) {
-        return this.request("DescribeTlsVersion", req, cb);
+    async ModifyBotStatus(req, cb) {
+        return this.request("ModifyBotStatus", req, cb);
     }
     /**
      * waf斯巴达-waf开关
@@ -439,10 +445,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteDownloadRecord", req, cb);
     }
     /**
-     * Bot_V2 bot总开关更新
+     * 查询用户TLS版本
      */
-    async ModifyBotStatus(req, cb) {
-        return this.request("ModifyBotStatus", req, cb);
+    async DescribeTlsVersion(req, cb) {
+        return this.request("DescribeTlsVersion", req, cb);
     }
     /**
      * 编辑信息防泄漏规则
@@ -481,10 +487,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyCustomRuleStatus", req, cb);
     }
     /**
+     * 供用户控制台调用，删除Tiga规则引擎白名单。
+     */
+    async DeleteAttackWhiteRule(req, cb) {
+        return this.request("DeleteAttackWhiteRule", req, cb);
+    }
+    /**
      * Waf ip黑白名单查询
      */
     async DescribeIpAccessControl(req, cb) {
         return this.request("DescribeIpAccessControl", req, cb);
+    }
+    /**
+     * 供用户控制台调用，增加Tiga规则引擎白名单。
+     */
+    async AddAttackWhiteRule(req, cb) {
+        return this.request("AddAttackWhiteRule", req, cb);
     }
     /**
      * 获取域名概况
@@ -617,6 +635,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeInstances(req, cb) {
         return this.request("DescribeInstances", req, cb);
+    }
+    /**
+     * 供用户控制台调用，修改Tiga规则引擎白名单。
+     */
+    async ModifyAttackWhiteRule(req, cb) {
+        return this.request("ModifyAttackWhiteRule", req, cb);
     }
     /**
      * 修改用户防护规则，开启关闭具体的某条规则
