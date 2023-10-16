@@ -418,6 +418,16 @@ it("iotexplorer.v20190423.CallDeviceActionAsync", async function () {
     }
 })
 
+it("iotexplorer.v20190423.GetDeviceSumStatistics", async function () {
+    try {
+       const data = await client.GetDeviceSumStatistics({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotexplorer.v20190423.DeleteProject", async function () {
     try {
        const data = await client.DeleteProject({})

@@ -567,6 +567,22 @@ export interface Step {
 }
 
 /**
+ * 键值对，主要用来做Filter
+ */
+export interface KeyValue {
+  /**
+   * 键
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Key: string
+  /**
+   * 值
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Value: string
+}
+
+/**
  * DescribeEmrApplicationStatics请求参数结构体
  */
 export interface DescribeEmrApplicationStaticsRequest {
@@ -942,6 +958,22 @@ export interface ClusterInstancesInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IsCvmReplace: boolean
+}
+
+/**
+ * 子网信息
+ */
+export interface SubnetInfo {
+  /**
+   * 子网信息（名字）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SubnetName?: string
+  /**
+   * 子网信息（ID）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SubnetId?: string
 }
 
 /**
@@ -2087,6 +2119,58 @@ export interface TerminateInstanceRequest {
 }
 
 /**
+ * 弹性扩缩容记录
+ */
+export interface AutoScaleRecord {
+  /**
+   * 扩缩容规则名。
+   */
+  StrategyName?: string
+  /**
+   * "SCALE_OUT"和"SCALE_IN"，分别表示扩容和缩容。
+   */
+  ScaleAction?: string
+  /**
+   * 取值为"SUCCESS","FAILED","PART_SUCCESS","IN_PROCESS"，分别表示成功、失败、部分成功和流程中。
+   */
+  ActionStatus?: string
+  /**
+   * 流程触发时间。
+   */
+  ActionTime?: string
+  /**
+   * 扩缩容相关描述信息。
+   */
+  ScaleInfo?: string
+  /**
+   * 只在ScaleAction为SCALE_OUT时有效。
+   */
+  ExpectScaleNum?: number
+  /**
+   * 流程结束时间。
+   */
+  EndTime?: string
+  /**
+   * 策略类型，按负载或者按时间，1表示负载伸缩，2表示时间伸缩
+   */
+  StrategyType?: number
+  /**
+   * 扩容时所使用规格信息。
+   */
+  SpecInfo?: string
+  /**
+   * 补偿扩容，0表示不开启，1表示开启
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CompensateFlag?: number
+  /**
+   * 补偿次数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CompensateCount?: number
+}
+
+/**
  * 流程作业资源描述
  */
 export interface JobFlowResourceSpec {
@@ -2814,41 +2898,29 @@ export interface ScaleOutNodeConfig {
 }
 
 /**
- * 强制修改标签
+ * DeleteUserManagerUserList请求参数结构体
  */
-export interface ModifyResourceTags {
+export interface DeleteUserManagerUserListRequest {
   /**
-   * 集群id 或者 cvm id
+   * 集群实例ID
    */
-  ResourceId: string
+  InstanceId: string
   /**
-   * 资源6段式表达式
+   * 集群用户名列表
    */
-  Resource: string
+  UserNameList?: Array<string>
   /**
-   * 资源前缀
+   * tke/eks集群id，容器集群传
    */
-  ResourcePrefix: string
+  TkeClusterId?: string
   /**
-   * ap-beijing
+   * 默认空，容器版传"native"
    */
-  ResourceRegion: string
+  DisplayStrategy?: string
   /**
-   * emr
+   * 用户组
    */
-  ServiceType: string
-  /**
-   * 删除的标签列表
-   */
-  DeleteTags?: Array<Tag>
-  /**
-   * 添加的标签列表
-   */
-  AddTags?: Array<Tag>
-  /**
-   * 修改的标签列表
-   */
-  ModifyTags?: Array<Tag>
+  UserGroupList?: Array<UserAndGroup>
 }
 
 /**
@@ -3150,19 +3222,21 @@ export interface CreateClusterResponse {
 }
 
 /**
- * 子网信息
+ * DescribeAutoScaleRecords返回参数结构体
  */
-export interface SubnetInfo {
+export interface DescribeAutoScaleRecordsResponse {
   /**
-   * 子网信息（名字）
-注意：此字段可能返回 null，表示取不到有效值。
+   * 总扩缩容记录数。
    */
-  SubnetName?: string
+  TotalCount?: number
   /**
-   * 子网信息（ID）
-注意：此字段可能返回 null，表示取不到有效值。
+   * 记录列表。
    */
-  SubnetId?: string
+  RecordList?: Array<AutoScaleRecord>
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -4518,6 +4592,30 @@ export interface PodState {
 }
 
 /**
+ * ScaleOutCluster返回参数结构体
+ */
+export interface ScaleOutClusterResponse {
+  /**
+   * 实例ID。
+   */
+  InstanceId?: string
+  /**
+   * 客户端Token。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ClientToken?: string
+  /**
+   * 扩容流程ID。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FlowId?: number
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 共用组件信息
  */
 export interface ExternalService {
@@ -4839,29 +4937,41 @@ export interface InquirePriceRenewEmrRequest {
 }
 
 /**
- * DeleteUserManagerUserList请求参数结构体
+ * 强制修改标签
  */
-export interface DeleteUserManagerUserListRequest {
+export interface ModifyResourceTags {
   /**
-   * 集群实例ID
+   * 集群id 或者 cvm id
    */
-  InstanceId: string
+  ResourceId: string
   /**
-   * 集群用户名列表
+   * 资源6段式表达式
    */
-  UserNameList?: Array<string>
+  Resource: string
   /**
-   * tke/eks集群id，容器集群传
+   * 资源前缀
    */
-  TkeClusterId?: string
+  ResourcePrefix: string
   /**
-   * 默认空，容器版传"native"
+   * ap-beijing
    */
-  DisplayStrategy?: string
+  ResourceRegion: string
   /**
-   * 用户组
+   * emr
    */
-  UserGroupList?: Array<UserAndGroup>
+  ServiceType: string
+  /**
+   * 删除的标签列表
+   */
+  DeleteTags?: Array<Tag>
+  /**
+   * 添加的标签列表
+   */
+  AddTags?: Array<Tag>
+  /**
+   * 修改的标签列表
+   */
+  ModifyTags?: Array<Tag>
 }
 
 /**
@@ -5375,27 +5485,25 @@ export interface ServiceBasicRestartInfo {
 }
 
 /**
- * ScaleOutCluster返回参数结构体
+ * DescribeAutoScaleRecords请求参数结构体
  */
-export interface ScaleOutClusterResponse {
+export interface DescribeAutoScaleRecordsRequest {
   /**
    * 实例ID。
    */
-  InstanceId?: string
+  InstanceId: string
   /**
-   * 客户端Token。
-注意：此字段可能返回 null，表示取不到有效值。
+   * 记录过滤参数，目前仅能为“StartTime”,“EndTime”和“StrategyName”。StartTime和EndTime支持2006-01-02 15:04:05 或者2006/01/02 15:04:05的时间格式
    */
-  ClientToken?: string
+  Filters?: Array<KeyValue>
   /**
-   * 扩容流程ID。
-注意：此字段可能返回 null，表示取不到有效值。
+   * 分页参数。
    */
-  FlowId?: number
+  Offset?: number
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 分页参数。最大支持100
    */
-  RequestId?: string
+  Limit?: number
 }
 
 /**

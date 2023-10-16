@@ -274,7 +274,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("BatchModifyOpsOwners", req, cb);
     }
     /**
-     *  创建用户自定义函数
+     * 创建用户自定义函数
      */
     async CreateCustomFunction(req, cb) {
         return this.request("CreateCustomFunction", req, cb);
@@ -362,11 +362,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteRuleTemplate", req, cb);
     }
     /**
-     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
-实例批量终止操作
+     * 编排空间-创建文件夹
      */
-    async KillInstances(req, cb) {
-        return this.request("KillInstances", req, cb);
+    async CreateDsFolder(req, cb) {
+        return this.request("CreateDsFolder", req, cb);
     }
     /**
      * 更新集成节点
@@ -453,10 +452,23 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteInLongAgent", req, cb);
     }
     /**
-     * 无
+     * 实例强制成功
      */
-    async SubmitTaskTestRun(req, cb) {
-        return this.request("SubmitTaskTestRun", req, cb);
+    async RunForceSucScheduleInstances(req, cb) {
+        return this.request("RunForceSucScheduleInstances", req, cb);
+    }
+    /**
+     * 查询目录树
+     */
+    async DescribeDsFolderTree(req, cb) {
+        return this.request("DescribeDsFolderTree", req, cb);
+    }
+    /**
+     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
+实例批量终止操作
+     */
+    async KillInstances(req, cb) {
+        return this.request("KillInstances", req, cb);
     }
     /**
      * 编辑基线实例中任务告警状态
@@ -745,6 +757,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeFunctionTypes", req, cb);
     }
     /**
+     * 查询父目录树，用于工作流、任务定位
+     */
+    async DescribeDsParentFolderTree(req, cb) {
+        return this.request("DescribeDsParentFolderTree", req, cb);
+    }
+    /**
      * 离线任务周期统计明细
      */
     async DescribeTaskReportDetailList(req, cb) {
@@ -945,6 +963,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateHiveTableByDDL", req, cb);
     }
     /**
+     * 编排空间-删除文件夹
+     */
+    async DeleteDsFolder(req, cb) {
+        return this.request("DeleteDsFolder", req, cb);
+    }
+    /**
      * 实例强制成功
      */
     async ForceSucScheduleInstances(req, cb) {
@@ -1071,6 +1095,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async RerunInstances(req, cb) {
         return this.request("RerunInstances", req, cb);
+    }
+    /**
+     * 无
+     */
+    async SubmitTaskTestRun(req, cb) {
+        return this.request("SubmitTaskTestRun", req, cb);
     }
     /**
      * 批量操作任务列表
@@ -1509,10 +1539,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDependTasksNew", req, cb);
     }
     /**
-     * 修改任务告警规则
+     * 数据开发模块-文件夹更新
      */
-    async ModifyTaskAlarmRegular(req, cb) {
-        return this.request("ModifyTaskAlarmRegular", req, cb);
+    async ModifyDsFolder(req, cb) {
+        return this.request("ModifyDsFolder", req, cb);
     }
     /**
      * 删除用户自定义函数
@@ -1643,10 +1673,28 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyDimensionWeight", req, cb);
     }
     /**
+     * 查找全部的文件夹
+     */
+    async FindAllFolder(req, cb) {
+        return this.request("FindAllFolder", req, cb);
+    }
+    /**
+     * 修改任务告警规则
+     */
+    async ModifyTaskAlarmRegular(req, cb) {
+        return this.request("ModifyTaskAlarmRegular", req, cb);
+    }
+    /**
      * 检查规则模板名称是否重复
      */
     async CheckDuplicateTemplateName(req, cb) {
         return this.request("CheckDuplicateTemplateName", req, cb);
+    }
+    /**
+     * 实例批量重跑
+     */
+    async RunRerunScheduleInstances(req, cb) {
+        return this.request("RunRerunScheduleInstances", req, cb);
     }
     /**
      * 批量继续执行集成实时任务
@@ -1757,7 +1805,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeProject", req, cb);
     }
     /**
-     * 获取kafka的topic信息
+     * 没用到
+
+获取kafka的topic信息
      */
     async DescribeKafkaTopicInfo(req, cb) {
         return this.request("DescribeKafkaTopicInfo", req, cb);

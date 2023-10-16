@@ -80,7 +80,7 @@ import {
   DeviceDataHistoryItem,
   GetFamilyDeviceUserListResponse,
   BindDeviceInfo,
-  ProjectEntryEx,
+  ModifyProjectRequest,
   DescribeBatchProductionResponse,
   ListTopicPolicyRequest,
   BatchProductionInfo,
@@ -190,6 +190,7 @@ import {
   UpdateFirmwareRequest,
   DescribeStudioProductRequest,
   CreatePositionSpaceResponse,
+  ProjectEntryEx,
   CreateBatchProductionResponse,
   ModifyLoRaFrequencyResponse,
   DeletePositionFenceRequest,
@@ -208,10 +209,11 @@ import {
   GetCOSURLRequest,
   DescribeLoRaFrequencyRequest,
   DescribeGatewayBindDevicesRequest,
+  GetDeviceSumStatisticsResponse,
   DescribeGatewaySubProductsRequest,
   DeleteStudioProductRequest,
   BindProductsRequest,
-  ModifyProjectRequest,
+  GetDeviceSumStatisticsRequest,
   ModifySpacePropertyResponse,
   PublishMessageResponse,
   BindDevicesResponse,
@@ -646,6 +648,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CallDeviceActionAsyncResponse) => void
   ): Promise<CallDeviceActionAsyncResponse> {
     return this.request("CallDeviceActionAsync", req, cb)
+  }
+
+  /**
+   * 拉取设备统计汇总数据
+   */
+  async GetDeviceSumStatistics(
+    req: GetDeviceSumStatisticsRequest,
+    cb?: (error: string, rep: GetDeviceSumStatisticsResponse) => void
+  ): Promise<GetDeviceSumStatisticsResponse> {
+    return this.request("GetDeviceSumStatistics", req, cb)
   }
 
   /**

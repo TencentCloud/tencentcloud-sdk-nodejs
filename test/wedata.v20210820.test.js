@@ -558,9 +558,9 @@ it("wedata.v20210820.DeleteRuleTemplate", async function () {
     }
 })
 
-it("wedata.v20210820.KillInstances", async function () {
+it("wedata.v20210820.CreateDsFolder", async function () {
     try {
-       const data = await client.KillInstances({})
+       const data = await client.CreateDsFolder({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -708,9 +708,29 @@ it("wedata.v20210820.DeleteInLongAgent", async function () {
     }
 })
 
-it("wedata.v20210820.SubmitTaskTestRun", async function () {
+it("wedata.v20210820.RunForceSucScheduleInstances", async function () {
     try {
-       const data = await client.SubmitTaskTestRun({})
+       const data = await client.RunForceSucScheduleInstances({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("wedata.v20210820.DescribeDsFolderTree", async function () {
+    try {
+       const data = await client.DescribeDsFolderTree({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("wedata.v20210820.KillInstances", async function () {
+    try {
+       const data = await client.KillInstances({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1178,6 +1198,16 @@ it("wedata.v20210820.DescribeFunctionTypes", async function () {
     }
 })
 
+it("wedata.v20210820.DescribeDsParentFolderTree", async function () {
+    try {
+       const data = await client.DescribeDsParentFolderTree({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("wedata.v20210820.DescribeTaskReportDetailList", async function () {
     try {
        const data = await client.DescribeTaskReportDetailList({})
@@ -1508,6 +1538,16 @@ it("wedata.v20210820.CreateHiveTableByDDL", async function () {
     }
 })
 
+it("wedata.v20210820.DeleteDsFolder", async function () {
+    try {
+       const data = await client.DeleteDsFolder({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("wedata.v20210820.ForceSucScheduleInstances", async function () {
     try {
        const data = await client.ForceSucScheduleInstances({})
@@ -1701,6 +1741,16 @@ it("wedata.v20210820.DescribeTaskDetail", async function () {
 it("wedata.v20210820.RerunInstances", async function () {
     try {
        const data = await client.RerunInstances({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("wedata.v20210820.SubmitTaskTestRun", async function () {
+    try {
+       const data = await client.SubmitTaskTestRun({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -2418,9 +2468,9 @@ it("wedata.v20210820.DescribeDependTasksNew", async function () {
     }
 })
 
-it("wedata.v20210820.ModifyTaskAlarmRegular", async function () {
+it("wedata.v20210820.ModifyDsFolder", async function () {
     try {
-       const data = await client.ModifyTaskAlarmRegular({})
+       const data = await client.ModifyDsFolder({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -2638,9 +2688,39 @@ it("wedata.v20210820.ModifyDimensionWeight", async function () {
     }
 })
 
+it("wedata.v20210820.FindAllFolder", async function () {
+    try {
+       const data = await client.FindAllFolder({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("wedata.v20210820.ModifyTaskAlarmRegular", async function () {
+    try {
+       const data = await client.ModifyTaskAlarmRegular({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("wedata.v20210820.CheckDuplicateTemplateName", async function () {
     try {
        const data = await client.CheckDuplicateTemplateName({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("wedata.v20210820.RunRerunScheduleInstances", async function () {
+    try {
+       const data = await client.RunRerunScheduleInstances({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

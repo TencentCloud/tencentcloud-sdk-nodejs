@@ -82,6 +82,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("InquiryPriceScaleOutInstance", req, cb);
     }
     /**
+     * 获取集群的自动扩缩容的详细记录
+     */
+    async DescribeAutoScaleRecords(req, cb) {
+        return this.request("DescribeAutoScaleRecords", req, cb);
+    }
+    /**
      * 获取账户的CVM配额
      */
     async DescribeCvmQuota(req, cb) {

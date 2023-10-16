@@ -312,6 +312,10 @@ export interface DescribeStreamTaskLogListRequest {
      * 作业运行的实例ID
      */
     RunningOrderId?: number;
+    /**
+     * 关键字
+     */
+    Keyword?: string;
 }
 /**
  * ModifyBaselineAlarmStatus请求参数结构体
@@ -749,12 +753,12 @@ export interface CreateIntegrationNodeResponse {
     /**
      * 节点
      */
-    Id: string;
+    Id?: string;
     /**
      * 当前任务id
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TaskId: string;
+    TaskId?: string;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -787,6 +791,20 @@ export interface BatchDeleteTasksDsRequest {
   false: 不删除任务引用的脚本
      */
     DeleteScript?: boolean;
+}
+/**
+ * CreateDsFolder返回参数结构体
+ */
+export interface CreateDsFolderResponse {
+    /**
+     * 文件夹Id，null则创建失败
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Data?: string;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * 开发空间-获取数据开发脚本信息响应体
@@ -1029,24 +1047,21 @@ export interface DescribeRulesResponse {
     RequestId?: string;
 }
 /**
- * 工作流运行信息
+ * 采集器关联的集成任务
  */
-export interface WorkFlowExecuteDto {
+export interface InLongAgentTask {
     /**
-     * 开始时间
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 集成任务ID
      */
-    StartTime?: string;
+    TaskId: string;
     /**
-     * 结束时间
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 集成任务名称
      */
-    EndTime?: string;
+    TaskName: string;
     /**
-     * 工作流运行状态 0：等待运行、1：运行中、2：运行完成、3：运行出错
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 集成任务状态
      */
-    Status?: number;
+    TaskStatus: string;
 }
 /**
  * 规则组分页
@@ -1210,64 +1225,74 @@ export interface InLongAgentDetail {
     /**
      * Agent ID
      */
-    AgentId: string;
+    AgentId?: string;
     /**
      * Agent Name
      */
-    AgentName: string;
+    AgentName?: string;
     /**
      * Agent状态(running运行中，initializing 操作中，failed心跳异常)
      */
-    Status: string;
+    Status?: string;
     /**
      * Agent状态描述
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    StatusDesc: string;
+    StatusDesc?: string;
     /**
      * 集群类型，1：TKE Agent，2：BOSS SDK，默认：1
      */
-    AgentType: number;
+    AgentType?: number;
     /**
      * 采集来源
      */
-    Source: string;
+    Source?: string;
     /**
      * VPC
      */
-    VpcId: string;
+    VpcId?: string;
     /**
      * 集成资源组Id
      */
-    ExecutorGroupId: string;
+    ExecutorGroupId?: string;
     /**
      * 集成资源组名称
      */
-    ExecutorGroupName: string;
+    ExecutorGroupName?: string;
     /**
      * 关联任务数
      */
-    TaskCount: number;
+    TaskCount?: number;
     /**
      * 采集器组ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    AgentGroupId: string;
+    AgentGroupId?: string;
     /**
      * agent状态统计
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CvmAgentStatusList: Array<CvmAgentStatus>;
+    CvmAgentStatusList?: Array<CvmAgentStatus>;
     /**
      * agent数量
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    AgentTotal: number;
+    AgentTotal?: number;
     /**
      * 生命周期
   注意：此字段可能返回 null，表示取不到有效值。
      */
     LifeDays?: number;
+    /**
+     * 集群ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ClusterId?: string;
+    /**
+     * agent地域
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AgentRegion?: string;
 }
 /**
  * CreateWorkflow请求参数结构体
@@ -1285,6 +1310,15 @@ export interface CreateWorkflowRequest {
      * 所属文件夹id
      */
     FolderId?: string;
+}
+/**
+ * FindAllFolder请求参数结构体
+ */
+export interface FindAllFolderRequest {
+    /**
+     * 项目ID
+     */
+    ProjectId: string;
 }
 /**
  * 合并元数据Manifests治理项
@@ -1822,6 +1856,21 @@ export interface AlarmEventInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     RegularId?: string;
+    /**
+     * 告警接收人昵称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AlarmRecipientName?: string;
+    /**
+     * 告警任务类型
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TaskType?: number;
+    /**
+     * 发送结果
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SendResult?: string;
 }
 /**
  * 离线任务实例详情
@@ -2671,6 +2720,16 @@ export interface InstanceOpsDto {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceKey?: string;
+    /**
+     * 资源组id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ExecutorGroupId?: string;
+    /**
+     * 资源组名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ExecutorGroupName?: string;
 }
 /**
  * RunTask返回参数结构体
@@ -3193,18 +3252,21 @@ export interface ModifyWorkflowScheduleRequest {
     DependencyWorkflow?: string;
 }
 /**
- * DescribeRuleDataSources返回参数结构体
+ * CreateDsFolder请求参数结构体
  */
-export interface DescribeRuleDataSourcesResponse {
+export interface CreateDsFolderRequest {
     /**
-     * 数据源列表
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 项目Id
      */
-    Data: Array<DatabaseInfo>;
+    ProjectId: string;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     * 文件夹名称
      */
-    RequestId?: string;
+    FolderName: string;
+    /**
+     * 父文件夹ID
+     */
+    ParentsFolderId?: string;
 }
 /**
  * RegisterEvent请求参数结构体
@@ -3250,6 +3312,19 @@ export interface RegisterEventRequest {
      * 事件描述
      */
     Description?: string;
+}
+/**
+ * dlc建表属性
+ */
+export interface Property {
+    /**
+     * key值
+     */
+    Key: string;
+    /**
+     * value值
+     */
+    Value: string;
 }
 /**
  * 补录计划集合
@@ -4173,6 +4248,19 @@ export interface BatchSuspendIntegrationTasksRequest {
      * 项目id
      */
     ProjectId: string;
+}
+/**
+ * DeleteDsFolder返回参数结构体
+ */
+export interface DeleteDsFolderResponse {
+    /**
+     * true代表删除成功，false代表删除失败
+     */
+    Data?: boolean;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * DescribeDrInstancePage返回参数结构体
@@ -6212,6 +6300,19 @@ export interface DescribeQualityScoreRequest {
     Filters?: Array<Filter>;
 }
 /**
+ * RunForceSucScheduleInstances返回参数结构体
+ */
+export interface RunForceSucScheduleInstancesResponse {
+    /**
+     * 结果
+     */
+    Data?: BatchOperateResultOpsDto;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * DescribeBaselineAllTaskDag返回参数结构体
  */
 export interface DescribeBaselineAllTaskDagResponse {
@@ -7159,6 +7260,20 @@ export interface DescribeDiagnosticInfoResponse {
     BaselineTasks?: Array<BaselineTaskDto>;
 }
 /**
+ * FindAllFolder返回参数结构体
+ */
+export interface FindAllFolderResponse {
+    /**
+     * 文件夹列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    FolderList?: Array<FolderDsDto>;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * MakeUpOpsTasks返回参数结构体
  */
 export interface MakeUpOpsTasksResponse {
@@ -7367,6 +7482,39 @@ export interface DescribeInstanceLogsResponse {
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * DescribeDsFolderTree请求参数结构体
+ */
+export interface DescribeDsFolderTreeRequest {
+    /**
+     * 项目id
+     */
+    ProjectId: string;
+    /**
+     * 是否一级拉取
+     */
+    FirstLevelPull?: boolean;
+    /**
+     * 文件夹ID
+     */
+    FolderId?: string;
+    /**
+     * 工作流ID
+     */
+    WorkflowId?: string;
+    /**
+     * 关键字搜索
+     */
+    Keyword?: string;
+    /**
+     * 是否包含工作流
+     */
+    IncludeWorkflow?: boolean;
+    /**
+     * 是否包含任务
+     */
+    IncludeTask?: boolean;
 }
 /**
  * BatchDeleteIntegrationTasks请求参数结构体
@@ -7648,6 +7796,26 @@ export interface DescribeBelongToResponse {
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * 工作流运行信息
+ */
+export interface WorkFlowExecuteDto {
+    /**
+     * 开始时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    StartTime?: string;
+    /**
+     * 结束时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    EndTime?: string;
+    /**
+     * 工作流运行状态 0：等待运行、1：运行中、2：运行完成、3：运行出错
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Status?: number;
 }
 /**
  * FreezeOpsTasks返回参数结构体
@@ -7956,6 +8124,27 @@ export interface DescribeAllByFolderNewResponse {
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * DescribeDsParentFolderTree请求参数结构体
+ */
+export interface DescribeDsParentFolderTreeRequest {
+    /**
+     * 项目id
+     */
+    ProjectId: string;
+    /**
+     * 文件夹ID
+     */
+    FolderId?: string;
+    /**
+     * 工作流ID
+     */
+    WorkflowId?: string;
+    /**
+     * 任务id
+     */
+    TaskId?: string;
 }
 /**
  * KillScheduleInstances返回参数结构体
@@ -11623,6 +11812,83 @@ export interface RecordField {
     Value?: string;
 }
 /**
+ * RunForceSucScheduleInstances请求参数结构体
+ */
+export interface RunForceSucScheduleInstancesRequest {
+    /**
+     * 实例列表
+     */
+    Instances?: Array<InstanceOpsDto>;
+    /**
+     * 检查父任务类型, true: 检查父任务; false: 不检查父任务
+     */
+    CheckFather?: boolean;
+    /**
+     * 重跑类型, 1: 自身; 3: 孩子; 2: 自身以及孩子
+     */
+    RerunType?: string;
+    /**
+     * 实例依赖方式, 1: 自依赖; 2: 任务依赖; 3: 自依赖及父子依赖
+     */
+    DependentWay?: string;
+    /**
+     * 重跑忽略事件监听与否
+     */
+    SkipEventListening?: boolean;
+    /**
+     * 下游实例范围 1: 所在工作流 2: 所在项目 3: 所有跨工作流依赖的项目
+     */
+    SonInstanceType?: string;
+    /**
+     * 查询条件
+     */
+    SearchCondition?: InstanceApiOpsRequest;
+    /**
+     * 访问类型
+     */
+    OptType?: string;
+    /**
+     * 操作者名称
+     */
+    OperatorName?: string;
+    /**
+     * 操作者id
+     */
+    OperatorId?: string;
+    /**
+     * 项目id
+     */
+    ProjectId?: string;
+    /**
+     * 项目标志
+     */
+    ProjectIdent?: string;
+    /**
+     * 项目名称
+     */
+    ProjectName?: string;
+    /**
+     * 索引页码
+     */
+    PageIndex?: number;
+    /**
+     * 页面大小
+     */
+    PageSize?: number;
+    /**
+     * 数据总数
+     */
+    Count?: number;
+    /**
+     * 基础请求信息
+     */
+    RequestBaseInfo?: ProjectBaseInfoOpsRequest;
+    /**
+     * 是否计算总数
+     */
+    IsCount?: boolean;
+}
+/**
  * DescribeQualityScore返回参数结构体
  */
 export interface DescribeQualityScoreResponse {
@@ -11650,19 +11916,17 @@ export interface DeleteInLongAgentRequest {
     ProjectId: string;
 }
 /**
- * 采集器状态统计
+ * DescribeDsParentFolderTree返回参数结构体
  */
-export interface CvmAgentStatus {
+export interface DescribeDsParentFolderTreeResponse {
     /**
-     * agent状态
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 统一树结构返回属性列表
      */
-    Status: string;
+    Data?: Array<PathNodeDsVO>;
     /**
-     * 对应状态的agent总数
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
-    Count: number;
+    RequestId?: string;
 }
 /**
  * DescribeRuleTablesByPage请求参数结构体
@@ -12448,12 +12712,12 @@ export interface DescribeStreamTaskLogListResponse {
      * 是否是全量
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ListOver: boolean;
+    ListOver?: boolean;
     /**
      * 日志集合
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    LogContentList: Array<LogContentInfo>;
+    LogContentList?: Array<LogContentInfo>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -13149,6 +13413,19 @@ export interface DescribeDatabaseInfoListResponse {
     RequestId?: string;
 }
 /**
+ * ModifyDsFolder返回参数结构体
+ */
+export interface ModifyDsFolderResponse {
+    /**
+     * true代表成功，false代表失败
+     */
+    Data?: boolean;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * 内容详情
  */
 export interface CommonContent {
@@ -13725,6 +14002,19 @@ export interface SourceFieldInfo {
     Comment?: string;
 }
 /**
+ * DeleteDsFolder请求参数结构体
+ */
+export interface DeleteDsFolderRequest {
+    /**
+     * 项目Id
+     */
+    ProjectId: string;
+    /**
+     * 文件夹ID
+     */
+    FolderId: string;
+}
+/**
  * FreezeTasksByMultiWorkflow返回参数结构体
  */
 export interface FreezeTasksByMultiWorkflowResponse {
@@ -13755,6 +14045,27 @@ export interface SaveCustomFunctionResponse {
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * ModifyDsFolder请求参数结构体
+ */
+export interface ModifyDsFolderRequest {
+    /**
+     * 项目Id
+     */
+    ProjectId: string;
+    /**
+     * 文件夹名称
+     */
+    FolderName: string;
+    /**
+     * 文件夹Id
+     */
+    FolderId: string;
+    /**
+     * 父文件夹ID
+     */
+    ParentsFolderId?: string;
 }
 /**
  * 任务提交记录
@@ -14224,6 +14535,10 @@ export interface InstanceApiOpsRequest {
      * 根据当前数据时间或者是下一个数据时间查询, 默认当前数据时间
      */
     DataTimeCycle?: string;
+    /**
+     * 资源组id,多个资源组id用英文逗号分隔
+     */
+    ExecutorGroupIdList?: Array<string>;
 }
 /**
  * SubmitSqlTask请求参数结构体
@@ -14456,6 +14771,19 @@ export interface InstanceReportWriteNode {
      * 脏数据条数
      */
     TotalErrorRecords: number;
+}
+/**
+ * RunRerunScheduleInstances返回参数结构体
+ */
+export interface RunRerunScheduleInstancesResponse {
+    /**
+     * 结果
+     */
+    Data?: BatchOperateResultOpsDto;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * 依赖配置
@@ -15275,11 +15603,11 @@ export interface DatasourceTypeByTaskType {
  */
 export interface CreateCustomFunctionRequest {
     /**
-     * 类型：HIVE、SPARK
+     * 枚举值：HIVE、SPARK、DLC
      */
     Type: string;
     /**
-     * 分类：窗口函数、聚合函数、日期函数......
+     * 枚举值：ANALYSIS(函数)、ENCRYPTION(加密函数)、AGGREGATE(聚合函数)、LOGIC(逻辑函数)、DATE_AND_TIME(日期与时间函数)、MATH(数学函数)、CONVERSION(转换函数)、STRING(字符串函数)、IP_AND_DOMAIN(IP和域名函数)、WINDOW(窗口函数)、OTHER(其他函数)
      */
     Kind: string;
     /**
@@ -16105,12 +16433,12 @@ export interface CreateCustomFunctionResponse {
      * 函数唯一标识
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    FunctionId: string;
+    FunctionId?: string;
     /**
      * 无
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ErrorMessage: string;
+    ErrorMessage?: string;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -16371,6 +16699,10 @@ export interface DescribeOperateOpsTasksRequest {
      * 告警类型，多个类型以逗号分隔
      */
     AlarmType?: string;
+    /**
+     * 资源组id,多个资源组id之间以英文字符逗号分隔
+     */
+    ExecutorGroupIdList?: string;
 }
 /**
  * 数据源对象
@@ -16978,6 +17310,16 @@ export interface TaskOpsDto {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Submit: boolean;
+    /**
+     * 资源组id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ExecutorGroupId?: string;
+    /**
+     * 资源组名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ExecutorGroupName?: string;
 }
 /**
  * DescribeOfflineTaskToken请求参数结构体
@@ -17905,11 +18247,11 @@ export interface FieldConfig {
  */
 export interface DescribeRealTimeTaskMetricOverviewRequest {
     /**
-     * 要查看的实时任务的任务Id
+     * 要查看的实时任务的任务ID，可在任务列表页面中获得
      */
     TaskId: string;
     /**
-     * 无
+     * 要查看的项目ID
      */
     ProjectId: string;
     /**
@@ -18061,6 +18403,83 @@ export interface RuleGroupMonitor {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     CreateTime?: string;
+}
+/**
+ * RunRerunScheduleInstances请求参数结构体
+ */
+export interface RunRerunScheduleInstancesRequest {
+    /**
+     * 实例列表
+     */
+    Instances?: Array<InstanceOpsDto>;
+    /**
+     * 检查父任务类型, true: 检查父任务; false: 不检查父任务
+     */
+    CheckFather?: boolean;
+    /**
+     * 重跑类型, 1: 自身; 3: 孩子; 2: 自身以及孩子
+     */
+    RerunType?: string;
+    /**
+     * 实例依赖方式, 1: 自依赖; 2: 任务依赖; 3: 自依赖及父子依赖
+     */
+    DependentWay?: string;
+    /**
+     * 重跑忽略事件监听与否
+     */
+    SkipEventListening?: boolean;
+    /**
+     * 下游实例范围 1: 所在工作流 2: 所在项目 3: 所有跨工作流依赖的项目
+     */
+    SonInstanceType?: string;
+    /**
+     * 查询条件
+     */
+    SearchCondition?: InstanceApiOpsRequest;
+    /**
+     * 访问类型
+     */
+    OptType?: string;
+    /**
+     * 操作者名称
+     */
+    OperatorName?: string;
+    /**
+     * 操作者id
+     */
+    OperatorId?: string;
+    /**
+     * 项目id
+     */
+    ProjectId?: string;
+    /**
+     * 项目标志
+     */
+    ProjectIdent?: string;
+    /**
+     * 项目名称
+     */
+    ProjectName?: string;
+    /**
+     * 索引页码
+     */
+    PageIndex?: number;
+    /**
+     * 页面大小
+     */
+    PageSize?: number;
+    /**
+     * 数据总数
+     */
+    Count?: number;
+    /**
+     * 基础请求信息
+     */
+    RequestBaseInfo?: ProjectBaseInfoOpsRequest;
+    /**
+     * 是否计算总数
+     */
+    IsCount?: boolean;
 }
 /**
  * StartIntegrationTask请求参数结构体
@@ -18261,7 +18680,7 @@ export interface CreateIntegrationNodeRequest {
      */
     ProjectId: string;
     /**
-     * 任务类型
+     * 任务类型，201为实时任务，202为离线任务
      */
     TaskType?: number;
 }
@@ -19687,6 +20106,20 @@ export interface TaskTypeMap {
     Value?: string;
 }
 /**
+ * DescribeRuleDataSources返回参数结构体
+ */
+export interface DescribeRuleDataSourcesResponse {
+    /**
+     * 数据源列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Data: Array<DatabaseInfo>;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * DescribeAlarmReceiver返回参数结构体
  */
 export interface DescribeAlarmReceiverResponse {
@@ -19882,34 +20315,79 @@ export interface DescribeDimensionScoreRequest {
     Filters?: Array<Filter>;
 }
 /**
- * dlc建表属性
+ * 采集器状态统计
  */
-export interface Property {
+export interface CvmAgentStatus {
     /**
-     * key值
+     * agent状态
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Key: string;
+    Status: string;
     /**
-     * value值
+     * 对应状态的agent总数
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Value: string;
+    Count: number;
 }
 /**
- * 采集器关联的集成任务
+ * 文件夹属性
  */
-export interface InLongAgentTask {
+export interface FolderDsDto {
     /**
-     * 集成任务ID
+     * 文件夹id
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    TaskId: string;
+    Id?: string;
     /**
-     * 集成任务名称
+     * 创建时间
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    TaskName: string;
+    CreateTime?: string;
     /**
-     * 集成任务状态
+     * 文件夹名称
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    TaskStatus: string;
+    Name?: string;
+    /**
+     * 所属项目id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ProjectId?: string;
+    /**
+     * 更新时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    UpdateTime?: string;
+    /**
+     * 父文件夹id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ParentsFolderId?: string;
+    /**
+     * 工作流总数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Total?: number;
+    /**
+     * 工作流列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Workflows?: Array<WorkflowCanvasOpsDto>;
+    /**
+     * 子文件夹总数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TotalFolders?: number;
+    /**
+     * 子文件夹列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Folders?: Array<FolderDsDto>;
+    /**
+     * 搜索类型
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    FindType?: string;
 }
 /**
  * BatchStartIntegrationTasks返回参数结构体
@@ -21620,6 +22098,59 @@ export interface BatchModifyOwnersNewRequest {
      * 项目Id
      */
     ProjectId: string;
+}
+/**
+ * DescribeDsFolderTree返回参数结构体
+ */
+export interface DescribeDsFolderTreeResponse {
+    /**
+     * 统一树结构返回属性列表
+     */
+    Data?: Array<PathNodeDsVO>;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * 数据开发-统一树结构返回属性
+ */
+export interface PathNodeDsVO {
+    /**
+     * PathNode ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Id?: string;
+    /**
+     * PathNode 名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Title?: string;
+    /**
+     * PathNode 类型
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Type?: string;
+    /**
+     * 父节点唯一标识
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ParentId?: string;
+    /**
+     * 是否叶子节点
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IsLeaf?: boolean;
+    /**
+     * 子节点列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Children?: Array<PathNodeDsVO>;
+    /**
+     * 业务参数 ,base64编译的json串，获取具体参数需要base64反编译
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Params?: string;
 }
 /**
  * DescribeWorkflowCanvasInfo请求参数结构体

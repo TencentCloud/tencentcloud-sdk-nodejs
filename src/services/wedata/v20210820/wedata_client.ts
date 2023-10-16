@@ -52,18 +52,20 @@ import {
   ModifyBaselineTaskAlarmStatusResponse,
   CreateIntegrationNodeResponse,
   BatchDeleteTasksDsRequest,
+  CreateDsFolderResponse,
   UserFileInfo,
   RuleGroupSchedulerInfo,
   FreezeOpsTasksRequest,
   InstanceOpsInfoPage,
   DeleteBaselineRequest,
   DescribeRulesResponse,
-  WorkFlowExecuteDto,
+  InLongAgentTask,
   RuleGroupPage,
   RecordsSpeed,
   ColumnLineageInfo,
   InLongAgentDetail,
   CreateWorkflowRequest,
+  FindAllFolderRequest,
   DlcMergeManifestsInfo,
   RuleExecResultDetail,
   DataSourceInfoPage,
@@ -125,8 +127,9 @@ import {
   InLongTkeDetail,
   RuleGroupExecStrategy,
   ModifyWorkflowScheduleRequest,
-  DescribeRuleDataSourcesResponse,
+  CreateDsFolderRequest,
   RegisterEventRequest,
+  Property,
   MakePlanOpsDtoCollection,
   CheckAlarmRegularNameExistResponse,
   CreateAlarmRuleRequest,
@@ -155,6 +158,7 @@ import {
   ExportTaskInfo,
   DescribeInstanceLogDetailRequest,
   BatchSuspendIntegrationTasksRequest,
+  DeleteDsFolderResponse,
   DescribeDrInstancePageResponse,
   TaskCanvasInfo,
   TaskLinkInfo,
@@ -225,6 +229,7 @@ import {
   CommitIntegrationTaskRequest,
   DescribeTableInfoListRequest,
   DescribeQualityScoreRequest,
+  RunForceSucScheduleInstancesResponse,
   DescribeBaselineAllTaskDagResponse,
   CommitIntegrationTaskResponse,
   TaskReportDetail,
@@ -250,6 +255,7 @@ import {
   ModifyRuleRequest,
   BatchReturn,
   DescribeDiagnosticInfoResponse,
+  FindAllFolderResponse,
   MakeUpOpsTasksResponse,
   ResourcePathTree,
   StopBaselineRequest,
@@ -258,6 +264,7 @@ import {
   DescribeDependOpsTaskListRequest,
   ParamInfo,
   DescribeInstanceLogsResponse,
+  DescribeDsFolderTreeRequest,
   BatchDeleteIntegrationTasksRequest,
   KillOpsMakePlanInstancesResponse,
   DescribeScheduleInstanceRequest,
@@ -269,6 +276,7 @@ import {
   DescribeIntegrationStatisticsTaskStatusRequest,
   BatchDeleteTasksNewResponse,
   DescribeBelongToResponse,
+  WorkFlowExecuteDto,
   FreezeOpsTasksResponse,
   IntegrationNodeMapping,
   ColumnAggregationLineage,
@@ -288,6 +296,7 @@ import {
   DeleteTaskDsResponse,
   Namespace,
   DescribeAllByFolderNewResponse,
+  DescribeDsParentFolderTreeRequest,
   KillScheduleInstancesResponse,
   RerunScheduleInstancesRequest,
   DescribeTaskInstancesResponse,
@@ -411,9 +420,10 @@ import {
   DescribeSchedulerRunTimeInstanceCntByStatusResponse,
   DescribeDataTypesRequest,
   RecordField,
+  RunForceSucScheduleInstancesRequest,
   DescribeQualityScoreResponse,
   DeleteInLongAgentRequest,
-  CvmAgentStatus,
+  DescribeDsParentFolderTreeResponse,
   DescribeRuleTablesByPageRequest,
   TopTableStatItem,
   DescribeIntegrationStatisticsAgentStatusResponse,
@@ -479,6 +489,7 @@ import {
   DescribeInLongAgentVpcListRequest,
   RuleExecExportResult,
   DescribeDatabaseInfoListResponse,
+  ModifyDsFolderResponse,
   CommonContent,
   DescribeTableScoreTrendResponse,
   ModifyIntegrationNodeRequest,
@@ -505,8 +516,10 @@ import {
   WorkflowSchedulerOpsDto,
   DescribeEventDetailResponse,
   SourceFieldInfo,
+  DeleteDsFolderRequest,
   FreezeTasksByMultiWorkflowResponse,
   SaveCustomFunctionResponse,
+  ModifyDsFolderRequest,
   AdhocRecord,
   OperateResult,
   CreateTaskRequest,
@@ -536,6 +549,7 @@ import {
   InstanceLogInfoOpsDto,
   DeleteFilePathResponse,
   InstanceReportWriteNode,
+  RunRerunScheduleInstancesResponse,
   DependencyConfig,
   RobAndLockIntegrationTaskRequest,
   RuleGroupMonitorPage,
@@ -647,6 +661,7 @@ import {
   SubmitWorkflowRequest,
   DescribeResourceManagePathTreesResponse,
   RuleGroupMonitor,
+  RunRerunScheduleInstancesRequest,
   StartIntegrationTaskRequest,
   DescribeTaskDetailResponse,
   RerunInstancesResponse,
@@ -718,6 +733,7 @@ import {
   CheckIntegrationTaskNameExistsRequest,
   DescribeRuleRequest,
   TaskTypeMap,
+  DescribeRuleDataSourcesResponse,
   DescribeAlarmReceiverResponse,
   DlcExpiredSnapshotsInfo,
   DescribeWorkflowCanvasInfoResponse,
@@ -729,8 +745,8 @@ import {
   BatchOperateResult,
   ModifyTaskScriptResponse,
   DescribeDimensionScoreRequest,
-  Property,
-  InLongAgentTask,
+  CvmAgentStatus,
+  FolderDsDto,
   BatchStartIntegrationTasksResponse,
   DescribeIntegrationVersionNodesInfoRequest,
   DescribeSuccessorOpsTaskInfosRequest,
@@ -810,6 +826,8 @@ import {
   DescribeDataCheckStatResponse,
   DescribeIntegrationStatisticsInstanceTrendRequest,
   BatchModifyOwnersNewRequest,
+  DescribeDsFolderTreeResponse,
+  PathNodeDsVO,
   DescribeWorkflowCanvasInfoRequest,
   DagInstancesRequest,
   DryRunDIOfflineTaskResponse,
@@ -1270,7 +1288,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   *  创建用户自定义函数
+   * 创建用户自定义函数
    */
   async CreateCustomFunction(
     req: CreateCustomFunctionRequest,
@@ -1414,14 +1432,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
-实例批量终止操作
-     */
-  async KillInstances(
-    req: KillInstancesRequest,
-    cb?: (error: string, rep: KillInstancesResponse) => void
-  ): Promise<KillInstancesResponse> {
-    return this.request("KillInstances", req, cb)
+   * 编排空间-创建文件夹
+   */
+  async CreateDsFolder(
+    req: CreateDsFolderRequest,
+    cb?: (error: string, rep: CreateDsFolderResponse) => void
+  ): Promise<CreateDsFolderResponse> {
+    return this.request("CreateDsFolder", req, cb)
   }
 
   /**
@@ -1565,13 +1582,34 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 无
+   * 实例强制成功
    */
-  async SubmitTaskTestRun(
-    req: SubmitTaskTestRunRequest,
-    cb?: (error: string, rep: SubmitTaskTestRunResponse) => void
-  ): Promise<SubmitTaskTestRunResponse> {
-    return this.request("SubmitTaskTestRun", req, cb)
+  async RunForceSucScheduleInstances(
+    req: RunForceSucScheduleInstancesRequest,
+    cb?: (error: string, rep: RunForceSucScheduleInstancesResponse) => void
+  ): Promise<RunForceSucScheduleInstancesResponse> {
+    return this.request("RunForceSucScheduleInstances", req, cb)
+  }
+
+  /**
+   * 查询目录树
+   */
+  async DescribeDsFolderTree(
+    req: DescribeDsFolderTreeRequest,
+    cb?: (error: string, rep: DescribeDsFolderTreeResponse) => void
+  ): Promise<DescribeDsFolderTreeResponse> {
+    return this.request("DescribeDsFolderTree", req, cb)
+  }
+
+  /**
+     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
+实例批量终止操作
+     */
+  async KillInstances(
+    req: KillInstancesRequest,
+    cb?: (error: string, rep: KillInstancesResponse) => void
+  ): Promise<KillInstancesResponse> {
+    return this.request("KillInstances", req, cb)
   }
 
   /**
@@ -2045,6 +2083,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询父目录树，用于工作流、任务定位
+   */
+  async DescribeDsParentFolderTree(
+    req: DescribeDsParentFolderTreeRequest,
+    cb?: (error: string, rep: DescribeDsParentFolderTreeResponse) => void
+  ): Promise<DescribeDsParentFolderTreeResponse> {
+    return this.request("DescribeDsParentFolderTree", req, cb)
+  }
+
+  /**
    * 离线任务周期统计明细
    */
   async DescribeTaskReportDetailList(
@@ -2377,6 +2425,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 编排空间-删除文件夹
+   */
+  async DeleteDsFolder(
+    req: DeleteDsFolderRequest,
+    cb?: (error: string, rep: DeleteDsFolderResponse) => void
+  ): Promise<DeleteDsFolderResponse> {
+    return this.request("DeleteDsFolder", req, cb)
+  }
+
+  /**
    * 实例强制成功
    */
   async ForceSucScheduleInstances(
@@ -2582,6 +2640,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: RerunInstancesResponse) => void
   ): Promise<RerunInstancesResponse> {
     return this.request("RerunInstances", req, cb)
+  }
+
+  /**
+   * 无
+   */
+  async SubmitTaskTestRun(
+    req: SubmitTaskTestRunRequest,
+    cb?: (error: string, rep: SubmitTaskTestRunResponse) => void
+  ): Promise<SubmitTaskTestRunResponse> {
+    return this.request("SubmitTaskTestRun", req, cb)
   }
 
   /**
@@ -3305,13 +3373,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改任务告警规则
+   * 数据开发模块-文件夹更新
    */
-  async ModifyTaskAlarmRegular(
-    req: ModifyTaskAlarmRegularRequest,
-    cb?: (error: string, rep: ModifyTaskAlarmRegularResponse) => void
-  ): Promise<ModifyTaskAlarmRegularResponse> {
-    return this.request("ModifyTaskAlarmRegular", req, cb)
+  async ModifyDsFolder(
+    req: ModifyDsFolderRequest,
+    cb?: (error: string, rep: ModifyDsFolderResponse) => void
+  ): Promise<ModifyDsFolderResponse> {
+    return this.request("ModifyDsFolder", req, cb)
   }
 
   /**
@@ -3527,6 +3595,26 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查找全部的文件夹
+   */
+  async FindAllFolder(
+    req: FindAllFolderRequest,
+    cb?: (error: string, rep: FindAllFolderResponse) => void
+  ): Promise<FindAllFolderResponse> {
+    return this.request("FindAllFolder", req, cb)
+  }
+
+  /**
+   * 修改任务告警规则
+   */
+  async ModifyTaskAlarmRegular(
+    req: ModifyTaskAlarmRegularRequest,
+    cb?: (error: string, rep: ModifyTaskAlarmRegularResponse) => void
+  ): Promise<ModifyTaskAlarmRegularResponse> {
+    return this.request("ModifyTaskAlarmRegular", req, cb)
+  }
+
+  /**
    * 检查规则模板名称是否重复
    */
   async CheckDuplicateTemplateName(
@@ -3534,6 +3622,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CheckDuplicateTemplateNameResponse) => void
   ): Promise<CheckDuplicateTemplateNameResponse> {
     return this.request("CheckDuplicateTemplateName", req, cb)
+  }
+
+  /**
+   * 实例批量重跑
+   */
+  async RunRerunScheduleInstances(
+    req: RunRerunScheduleInstancesRequest,
+    cb?: (error: string, rep: RunRerunScheduleInstancesResponse) => void
+  ): Promise<RunRerunScheduleInstancesResponse> {
+    return this.request("RunRerunScheduleInstances", req, cb)
   }
 
   /**
@@ -3717,8 +3815,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取kafka的topic信息
-   */
+     * 没用到
+
+获取kafka的topic信息
+     */
   async DescribeKafkaTopicInfo(
     req: DescribeKafkaTopicInfoRequest,
     cb?: (error: string, rep: DescribeKafkaTopicInfoResponse) => void

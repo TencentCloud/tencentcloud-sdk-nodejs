@@ -2101,6 +2101,10 @@ export interface CreateRiskCenterScanTaskRequest {
      */
     SelfDefiningAssets?: Array<string>;
     /**
+     * 请求发起源，默认为vss表示漏洞扫描服务，云安全中心的用户请填充csip
+     */
+    ScanFrom?: string;
+    /**
      * 高级配置
      */
     TaskAdvanceCFG?: TaskAdvanceCFG;

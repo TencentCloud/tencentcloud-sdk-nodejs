@@ -34,6 +34,7 @@ import {
   DiskSpecInfo,
   HiveQuery,
   Step,
+  KeyValue,
   DescribeEmrApplicationStaticsRequest,
   UserManagerFilter,
   MetaDbInfo,
@@ -41,6 +42,7 @@ import {
   ModifyUserManagerPwdRequest,
   COSSettings,
   ClusterInstancesInfo,
+  SubnetInfo,
   ScaleOutInstanceRequest,
   ZoneDetailPriceResult,
   PodNewSpec,
@@ -66,6 +68,7 @@ import {
   InquiryPriceCreateInstanceResponse,
   StartStopServiceOrMonitorRequest,
   TerminateInstanceRequest,
+  AutoScaleRecord,
   JobFlowResourceSpec,
   Configuration,
   DescribeResourceScheduleRequest,
@@ -87,7 +90,7 @@ import {
   NewResourceSpec,
   DiskGroup,
   ScaleOutNodeConfig,
-  ModifyResourceTags,
+  DeleteUserManagerUserListRequest,
   PriceDetail,
   DescribeResourceScheduleResponse,
   MultiDisk,
@@ -98,7 +101,7 @@ import {
   PriceResource,
   DescribeHiveQueriesRequest,
   CreateClusterResponse,
-  SubnetInfo,
+  DescribeAutoScaleRecordsResponse,
   DescribeCvmQuotaResponse,
   SearchItem,
   CreateClusterRequest,
@@ -141,6 +144,7 @@ import {
   UserInfoForUserManager,
   DynamicPodSpec,
   PodState,
+  ScaleOutClusterResponse,
   ExternalService,
   PreExecuteFileSettings,
   ClusterExternalServiceInfo,
@@ -150,7 +154,7 @@ import {
   Filters,
   DescribeEmrApplicationStaticsResponse,
   InquirePriceRenewEmrRequest,
-  DeleteUserManagerUserListRequest,
+  ModifyResourceTags,
   DescribeImpalaQueriesResponse,
   CustomMetaDBInfo,
   UserManagerUserBriefInfo,
@@ -163,7 +167,7 @@ import {
   EmrPrice,
   NodeHardwareInfo,
   ServiceBasicRestartInfo,
-  ScaleOutClusterResponse,
+  DescribeAutoScaleRecordsRequest,
   JobFlowResource,
   ModifyResourcePoolsRequest,
   DescribeJobFlowResponse,
@@ -268,6 +272,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: InquiryPriceScaleOutInstanceResponse) => void
   ): Promise<InquiryPriceScaleOutInstanceResponse> {
     return this.request("InquiryPriceScaleOutInstance", req, cb)
+  }
+
+  /**
+   * 获取集群的自动扩缩容的详细记录
+   */
+  async DescribeAutoScaleRecords(
+    req: DescribeAutoScaleRecordsRequest,
+    cb?: (error: string, rep: DescribeAutoScaleRecordsResponse) => void
+  ): Promise<DescribeAutoScaleRecordsResponse> {
+    return this.request("DescribeAutoScaleRecords", req, cb)
   }
 
   /**

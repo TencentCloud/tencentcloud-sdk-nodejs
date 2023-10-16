@@ -108,6 +108,16 @@ it("emr.v20190103.InquiryPriceScaleOutInstance", async function () {
     }
 })
 
+it("emr.v20190103.DescribeAutoScaleRecords", async function () {
+    try {
+       const data = await client.DescribeAutoScaleRecords({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("emr.v20190103.DescribeCvmQuota", async function () {
     try {
        const data = await client.DescribeCvmQuota({})

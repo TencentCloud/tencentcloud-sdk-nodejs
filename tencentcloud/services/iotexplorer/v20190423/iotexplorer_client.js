@@ -268,6 +268,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CallDeviceActionAsync", req, cb);
     }
     /**
+     * 拉取设备统计汇总数据
+     */
+    async GetDeviceSumStatistics(req, cb) {
+        return this.request("GetDeviceSumStatistics", req, cb);
+    }
+    /**
      * 提供删除某个项目的能力
      */
     async DeleteProject(req, cb) {

@@ -1221,9 +1221,9 @@ export interface BindDeviceInfo {
 }
 
 /**
- * 项目详情
+ * ModifyProject请求参数结构体
  */
-export interface ProjectEntryEx {
+export interface ModifyProjectRequest {
   /**
    * 项目ID
    */
@@ -1236,46 +1236,6 @@ export interface ProjectEntryEx {
    * 项目描述
    */
   ProjectDesc: string
-  /**
-   * 项目创建时间，unix时间戳
-   */
-  CreateTime: number
-  /**
-   * 项目更新时间，unix时间戳
-   */
-  UpdateTime: number
-  /**
-   * 产品数量
-   */
-  ProductCount: number
-  /**
-   * NativeApp数量
-   */
-  NativeAppCount: number
-  /**
-   * WebApp数量
-   */
-  WebAppCount: number
-  /**
-   * 实例ID
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  InstanceId: string
-  /**
-   * 应用数量
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ApplicationCount: number
-  /**
-   * 设备注册总数
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  DeviceCount: number
-  /**
-   * 是否开通物联使能
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  EnableOpenState: number
 }
 
 /**
@@ -3601,6 +3561,64 @@ export interface CreatePositionSpaceResponse {
 }
 
 /**
+ * 项目详情
+ */
+export interface ProjectEntryEx {
+  /**
+   * 项目ID
+   */
+  ProjectId: string
+  /**
+   * 项目名称
+   */
+  ProjectName: string
+  /**
+   * 项目描述
+   */
+  ProjectDesc: string
+  /**
+   * 项目创建时间，unix时间戳
+   */
+  CreateTime: number
+  /**
+   * 项目更新时间，unix时间戳
+   */
+  UpdateTime: number
+  /**
+   * 产品数量
+   */
+  ProductCount: number
+  /**
+   * NativeApp数量
+   */
+  NativeAppCount: number
+  /**
+   * WebApp数量
+   */
+  WebAppCount: number
+  /**
+   * 实例ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceId: string
+  /**
+   * 应用数量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ApplicationCount: number
+  /**
+   * 设备注册总数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DeviceCount: number
+  /**
+   * 是否开通物联使能
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EnableOpenState: number
+}
+
+/**
  * CreateBatchProduction返回参数结构体
  */
 export interface CreateBatchProductionResponse {
@@ -3937,6 +3955,48 @@ export interface DescribeGatewayBindDevicesRequest {
 }
 
 /**
+ * GetDeviceSumStatistics返回参数结构体
+ */
+export interface GetDeviceSumStatisticsResponse {
+  /**
+   * 激活设备总数
+   */
+  ActivationCount?: number
+  /**
+   * 在线设备总数
+   */
+  OnlineCount?: number
+  /**
+   * 前一天激活设备数
+   */
+  ActivationBeforeDay?: number
+  /**
+   * 前一天活跃设备数
+   */
+  ActiveBeforeDay?: number
+  /**
+   * 前一周激活设备数
+   */
+  ActivationWeekDayCount?: number
+  /**
+   * 前一周活跃设备数
+   */
+  ActiveWeekDayCount?: number
+  /**
+   * 上一周激活设备数
+   */
+  ActivationBeforeWeekDayCount?: number
+  /**
+   * 上一周活跃设备数
+   */
+  ActiveBeforeWeekDayCount?: number
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeGatewaySubProducts请求参数结构体
  */
 export interface DescribeGatewaySubProductsRequest {
@@ -3987,21 +4047,17 @@ export interface BindProductsRequest {
 }
 
 /**
- * ModifyProject请求参数结构体
+ * GetDeviceSumStatistics请求参数结构体
  */
-export interface ModifyProjectRequest {
+export interface GetDeviceSumStatisticsRequest {
   /**
-   * 项目ID
+   * 项目id
    */
   ProjectId: string
   /**
-   * 项目名称
+   * 产品id列表，长度为0则拉取项目内全部产品
    */
-  ProjectName: string
-  /**
-   * 项目描述
-   */
-  ProjectDesc: string
+  ProductIds?: Array<string>
 }
 
 /**
