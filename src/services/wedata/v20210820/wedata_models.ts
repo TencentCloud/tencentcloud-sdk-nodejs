@@ -1725,15 +1725,15 @@ export interface BatchResumeIntegrationTasksResponse {
   /**
    * 操作成功的任务数
    */
-  SuccessCount: number
+  SuccessCount?: number
   /**
    * 操作失败的任务数
    */
-  FailedCount: number
+  FailedCount?: number
   /**
    * 任务总数
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -10905,7 +10905,7 @@ export interface CreateIntegrationTaskResponse {
   /**
    * 任务id
    */
-  TaskId: string
+  TaskId?: string
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -11249,7 +11249,7 @@ export interface BatchResumeIntegrationTasksRequest {
    */
   TaskIds: Array<string>
   /**
-   * 任务类型
+   * 任务类型, 201为实时任务，202为离线任务
    */
   TaskType: number
   /**
@@ -12207,7 +12207,7 @@ export interface DescribeSchedulerRunTimeInstanceCntByStatusResponse {
  */
 export interface DescribeDataTypesRequest {
   /**
-   * 数据源类型，MYSQL|KAFKA等
+   * 数据源类型，MYSQL|HIVE|KAFKA|POSTGRE|CDW|ORACLE|SQLSERVER|FTP|HDFS|ICEBERG|HBASE|TDSQL|TDSQLC|SPARK|VIRTUAL|TBASE|DB2|DM|GAUSSDB|GBASE|IMPALA|ES|S3_DATAINSIGHT|GREENPLUM|PHOENIX|SAP_HANA|SFTP|OCEANBASE|CLICKHOUSE|KUDU|VERTICA|REDIS|COS|DLC|DORIS|CKAFKA|MONGODB|FTP_FILE|HDFS_FILE|DTS_KAFKA|REST_API|FILE|TIDB|SYBASE|TCHOUSE_X 等
    */
   DatasourceType: string
   /**
@@ -12952,7 +12952,7 @@ export interface DescribeDataTypesResponse {
   /**
    * 字段类型列表。
    */
-  TypeInfoSet: Array<Label>
+  TypeInfoSet?: Array<Label>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -14265,7 +14265,7 @@ export interface DescribeIntegrationTaskRequest {
    */
   ProjectId: string
   /**
-   * 任务类型：201. stream,   202. offline
+   * 任务类型，201: 实时集成任务,   202：离线集成任务，不传默认值为201 实时任务类型
    */
   TaskType?: number
   /**
@@ -19367,7 +19367,7 @@ export interface DescribeTableSchemaInfoRequest {
    */
   DatabaseName: string
   /**
-   * 表类型
+   * 数据源的类型（例如MYSQL、HIVE、KAFKA等）
    */
   MsType: string
   /**
@@ -19375,7 +19375,7 @@ export interface DescribeTableSchemaInfoRequest {
    */
   DatasourceId: string
   /**
-   * HIVE传rpc
+   * 连接类型（示例值rpc）
    */
   ConnectionType?: string
   /**
@@ -20306,7 +20306,7 @@ export interface DescribeTableSchemaInfoResponse {
    * 123
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SchemaInfoList: Array<SchemaDetail>
+  SchemaInfoList?: Array<SchemaDetail>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -22558,7 +22558,7 @@ export interface DescribeDatabaseInfoListRequest {
    */
   Filters: Array<Filter>
   /**
-   * 如果是hive这里写rpc，如果是其他类型不传
+   * 连接类型
    */
   ConnectionType: string
 }
@@ -23277,6 +23277,16 @@ export interface OfflineTaskAddParam {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ExecutionStartTime?: string
+  /**
+   * 是否自动提交
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskAutoSubmit?: boolean
+  /**
+   * 实例初始化策略
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceInitStrategy?: string
 }
 
 /**

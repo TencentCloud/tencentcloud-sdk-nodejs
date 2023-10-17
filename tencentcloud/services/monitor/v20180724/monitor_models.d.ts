@@ -693,180 +693,185 @@ export interface AlarmPolicy {
      * 告警策略 ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    PolicyId: string;
+    PolicyId?: string;
     /**
      * 告警策略名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    PolicyName: string;
+    PolicyName?: string;
     /**
      * 备注信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Remark: string;
+    Remark?: string;
     /**
      * 监控类型 MT_QCE=云产品监控
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    MonitorType: string;
+    MonitorType?: string;
     /**
      * 启停状态 0=停用 1=启用
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Enable: number;
+    Enable?: number;
     /**
      * 策略组绑定的实例数
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    UseSum: number;
+    UseSum?: number;
     /**
      * 项目 Id -1=无项目 0=默认项目
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ProjectId: number;
+    ProjectId?: number;
     /**
      * 项目名
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ProjectName: string;
+    ProjectName?: string;
     /**
      * 告警策略类型
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Namespace: string;
+    Namespace?: string;
     /**
      * 触发条件模板 Id
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ConditionTemplateId: string;
+    ConditionTemplateId?: string;
     /**
      * 指标触发条件
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Condition: AlarmPolicyCondition;
+    Condition?: AlarmPolicyCondition;
     /**
      * 事件触发条件
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    EventCondition: AlarmPolicyEventCondition;
+    EventCondition?: AlarmPolicyEventCondition;
     /**
      * 通知规则 id 列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    NoticeIds: Array<string>;
+    NoticeIds?: Array<string>;
     /**
      * 通知规则 列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Notices: Array<AlarmNotice>;
+    Notices?: Array<AlarmNotice>;
     /**
      * 触发任务列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TriggerTasks: Array<AlarmPolicyTriggerTask>;
+    TriggerTasks?: Array<AlarmPolicyTriggerTask>;
     /**
      * 模板策略组
   注意：此字段可能返回 null，表示取不到有效值。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ConditionsTemp: ConditionsTemp;
+    ConditionsTemp?: ConditionsTemp;
     /**
      * 最后编辑的用户uin
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    LastEditUin: string;
+    LastEditUin?: string;
     /**
      * 更新时间
   注意：此字段可能返回 null，表示取不到有效值。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    UpdateTime: number;
+    UpdateTime?: number;
     /**
      * 创建时间
   注意：此字段可能返回 null，表示取不到有效值。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    InsertTime: number;
+    InsertTime?: number;
     /**
      * 地域
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Region: Array<string>;
+    Region?: Array<string>;
     /**
      * namespace显示名字
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    NamespaceShowName: string;
+    NamespaceShowName?: string;
     /**
      * 是否默认策略，1是，0否
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    IsDefault: number;
+    IsDefault?: number;
     /**
      * 能否设置默认策略，1是，0否
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CanSetDefault: number;
+    CanSetDefault?: number;
     /**
      * 实例分组ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    InstanceGroupId: number;
+    InstanceGroupId?: number;
     /**
      * 实例分组总实例数
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    InstanceSum: number;
+    InstanceSum?: number;
     /**
      * 实例分组名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    InstanceGroupName: string;
+    InstanceGroupName?: string;
     /**
      * 触发条件类型 STATIC=静态阈值 DYNAMIC=动态类型
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    RuleType: string;
+    RuleType?: string;
     /**
      * 用于实例、实例组绑定和解绑接口（BindingPolicyObject、UnBindingAllPolicyObject、UnBindingPolicyObject）的策略 ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    OriginId: string;
+    OriginId?: string;
     /**
      * 标签
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TagInstances: Array<TagInstance>;
+    TagInstances?: Array<TagInstance>;
     /**
      * 策略关联的过滤维度信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    FilterDimensionsParam: string;
+    FilterDimensionsParam?: string;
     /**
      * 是否为一键告警策略
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    IsOneClick: number;
+    IsOneClick?: number;
     /**
      * 一键告警策略是否开启
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    OneClickStatus: number;
+    OneClickStatus?: number;
     /**
      * 高级指标数量
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    AdvancedMetricNumber: number;
+    AdvancedMetricNumber?: number;
     /**
      * 策略是否是全部对象策略
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    IsBindAll: number;
+    IsBindAll?: number;
     /**
      * 策略标签
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Tags: Array<Tag>;
+    Tags?: Array<Tag>;
+    /**
+     * 是否支持告警标签
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IsSupportAlarmTag?: number;
 }
 /**
  * DeleteExporterIntegration请求参数结构体

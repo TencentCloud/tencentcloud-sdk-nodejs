@@ -3115,6 +3115,7 @@ CMCC：中国移动
   SkipAllocateBandwidth?: boolean
   /**
    * 该字段没有使用（已过期）。
+   * @deprecated
    */
   Ipv6ISP?: string
 }

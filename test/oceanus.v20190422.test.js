@@ -48,6 +48,16 @@ it("oceanus.v20190422.CopyJobs", async function () {
     }
 })
 
+it("oceanus.v20190422.RunSqlGatewayStatement", async function () {
+    try {
+       const data = await client.RunSqlGatewayStatement({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("oceanus.v20190422.DeleteResourceConfigs", async function () {
     try {
        const data = await client.DeleteResourceConfigs({})
@@ -111,6 +121,16 @@ it("oceanus.v20190422.DescribeJobSubmissionLog", async function () {
 it("oceanus.v20190422.DescribeResources", async function () {
     try {
        const data = await client.DescribeResources({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("oceanus.v20190422.FetchSqlGatewayStatementResult", async function () {
+    try {
+       const data = await client.FetchSqlGatewayStatementResult({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

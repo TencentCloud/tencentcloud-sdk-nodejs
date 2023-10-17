@@ -2964,6 +2964,7 @@ export interface AssignIpv6AddressesRequest {
     SkipAllocateBandwidth?: boolean;
     /**
      * 该字段没有使用（已过期）。
+     * @deprecated
      */
     Ipv6ISP?: string;
 }

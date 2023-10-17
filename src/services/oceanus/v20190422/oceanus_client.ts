@@ -51,8 +51,9 @@ import {
   DeleteTableConfigRequest,
   DeleteResourcesResponse,
   ModifyJobResponse,
-  CheckSavepointResponse,
+  SlotSharingGroupSpec,
   Tag,
+  FetchSqlGatewayStatementResultResponse,
   JobGraphNode,
   DeleteResourceConfigsRequest,
   DescribeJobSavepointResponse,
@@ -97,6 +98,7 @@ import {
   JobConfig,
   DescribeResourceConfigsRequest,
   SlotSharingGroup,
+  RunSqlGatewayStatementResponse,
   CreateJobRequest,
   JobInstanceForSubmissionLog,
   DeleteTableConfigResponse,
@@ -107,13 +109,15 @@ import {
   StopJobsResponse,
   LogContent,
   DescribeResourcesRequest,
-  SlotSharingGroupSpec,
+  RunSqlGatewayStatementRequest,
+  CheckSavepointResponse,
   DescribeJobsResponse,
   ExpertModeConfiguration,
   Order,
   CopyJobItem,
   DescribeTreeJobsRequest,
   DescribeJobConfigsResponse,
+  FetchSqlGatewayStatementResultRequest,
 } from "./oceanus_models"
 
 /**
@@ -153,6 +157,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CopyJobsResponse) => void
   ): Promise<CopyJobsResponse> {
     return this.request("CopyJobs", req, cb)
+  }
+
+  /**
+   * 通过Sql gateway执行satement
+   */
+  async RunSqlGatewayStatement(
+    req?: RunSqlGatewayStatementRequest,
+    cb?: (error: string, rep: RunSqlGatewayStatementResponse) => void
+  ): Promise<RunSqlGatewayStatementResponse> {
+    return this.request("RunSqlGatewayStatement", req, cb)
   }
 
   /**
@@ -223,6 +237,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeResourcesResponse) => void
   ): Promise<DescribeResourcesResponse> {
     return this.request("DescribeResources", req, cb)
+  }
+
+  /**
+   * 查询Sql Gateway的Statement执行结果
+   */
+  async FetchSqlGatewayStatementResult(
+    req?: FetchSqlGatewayStatementResultRequest,
+    cb?: (error: string, rep: FetchSqlGatewayStatementResultResponse) => void
+  ): Promise<FetchSqlGatewayStatementResultResponse> {
+    return this.request("FetchSqlGatewayStatementResult", req, cb)
   }
 
   /**

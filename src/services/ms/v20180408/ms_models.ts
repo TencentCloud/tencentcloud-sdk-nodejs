@@ -499,6 +499,33 @@ export interface UpdateLocalTaskResultRequest {
 }
 
 /**
+ * iOS加固信息
+
+	InfoPListUrl  string `json:"InfoPListUrl"`  //info.plist的url，必须保证不用权限校验就可以下载
+	InfoPListSize int64  `json:"InfoPListSize"` //info.plist文件的大小
+	InfoPListMd5  string `json:"InfoPListMd5"`  //info.plist文件的md5
+	BuildType     string `json:"BuildType"`     //release: 需要INFO-PLIST文件，会生成工具部署安装包，并带有license文件，绑定机器；nobind不需要INFO-PLIST文件，不绑定机器
+ */
+export interface IOSInfo {
+  /**
+   * info.plist的url，必须保证不用权限校验就可以下载
+   */
+  InfoPListUrl?: string
+  /**
+   * info.plist文件的大小
+   */
+  InfoPListSize?: number
+  /**
+   * info.plist文件的md5
+   */
+  InfoPListMd5?: string
+  /**
+   * release: 需要INFO-PLIST文件，会生成工具部署安装包，并带有license文件，绑定机器；nobind不需要INFO-PLIST文件，不绑定机器
+   */
+  BuildType?: string
+}
+
+/**
  * 加固策略信息
  */
 export interface ShieldPlanInfo {
@@ -938,8 +965,64 @@ aab加固方案二
 export interface IOSResult {
   /**
    * 加固任务结果Id
+注意：此字段可能返回 null，表示取不到有效值。
    */
   ResultId?: string
+  /**
+   * 用户uid
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OpUin?: number
+  /**
+   * 加固类型，这里为ios
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EncryptType?: string
+  /**
+   * 资源id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResourceId?: string
+  /**
+   * 加固状态
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EncryptState?: number
+  /**
+   * 业务错误码
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EncryptErrno?: number
+  /**
+   * 业务错误信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EncryptErrDesc?: string
+  /**
+   * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreatTime?: string
+  /**
+   * 开始时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StartTime?: string
+  /**
+   * 结束时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EndTime?: string
+  /**
+   * 消耗时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CostTime?: number
+  /**
+   * 加固（混淆）包结果url
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EncryptPkgUrl?: string
 }
 
 /**
@@ -1946,6 +2029,10 @@ export interface CreateEncryptInstanceRequest {
    * 小程序加固信息
    */
   AppletInfo?: AppletInfo
+  /**
+   * iOS混淆信息
+   */
+  IOSInfo?: IOSInfo
 }
 
 /**

@@ -25,6 +25,15 @@ export interface DescribeKBComponentVulnerabilityRequest {
     PURL: PURL;
 }
 /**
+ * DescribeKBComponentVersionList请求参数结构体
+ */
+export interface DescribeKBComponentVersionListRequest {
+    /**
+     * 要查询的组件 PURL
+     */
+    PURL: PURL;
+}
+/**
  * 描述组件漏洞相关概览信息。
  */
 export interface ComponentVulnerabilityUnion {
@@ -96,6 +105,27 @@ export interface LicenseSummary {
      * 许可证来源URL
      */
     Source: string;
+}
+/**
+ * SearchKBComponent请求参数结构体
+ */
+export interface SearchKBComponentRequest {
+    /**
+     * 需要搜索的组件名
+     */
+    Query: string;
+    /**
+     * 需要搜索的组件类型
+     */
+    Protocol?: string;
+    /**
+     * 分页参数，从 0 开始
+     */
+    PageNumber?: number;
+    /**
+     * 分页参数，设置每页返回的结果数量
+     */
+    PageSize?: number;
 }
 /**
  * PURL下的Qualifier属性类型，用于定义第三方组件的额外属性，见 https://github.com/package-url/purl-spec。
@@ -245,6 +275,21 @@ export interface DescribeKBLicenseResponse {
     RequestId?: string;
 }
 /**
+ * 描述组件的一条版本信息。
+ */
+export interface ComponentVersion {
+    /**
+     * 该组件的PURL
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PURL?: PURL;
+    /**
+     * 该组件版本的许可证表达式
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    LicenseExpression?: string;
+}
+/**
  * MatchKBPURLList请求参数结构体
  */
 export interface MatchKBPURLListRequest {
@@ -369,6 +414,19 @@ export interface DescribeKBComponentResponse {
     RequestId?: string;
 }
 /**
+ * DescribeKBComponentVersionList返回参数结构体
+ */
+export interface DescribeKBComponentVersionListResponse {
+    /**
+     * 该组件的版本列表信息
+     */
+    VersionList?: Array<ComponentVersion>;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * 描述漏洞的摘要信息。
  */
 export interface VulnerabilitySummary {
@@ -481,17 +539,51 @@ export interface DescribeKBComponentRequest {
     PURL: PURL;
 }
 /**
- * License约束信息。
+ * PURL(Package URL)用于定位一个产品或组件，见 https://github.com/package-url/purl-spec。
  */
-export interface LicenseRestriction {
+export interface PURL {
     /**
-     * license约束的名称。
+     * 组件名称
      */
     Name: string;
     /**
-     * license约束的描述。
+     * 组件所属的类型，如：github, gitlab, generic, deb, rpm, maven 等
      */
-    Description: string;
+    Protocol?: string;
+    /**
+     * 组件名的前缀名，如github和gitlab的用户名，deb的操作系统，maven包的group id等
+     */
+    Namespace?: string;
+    /**
+     * 修饰组件的额外属性
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Qualifiers?: Array<Qualifier>;
+    /**
+     * 相对于组件包根位置的子目录
+     */
+    Subpath?: string;
+    /**
+     * 组件版本号
+     */
+    Version?: string;
+}
+/**
+ * SearchKBComponent返回参数结构体
+ */
+export interface SearchKBComponentResponse {
+    /**
+     * 满足搜索条件的组件列表
+     */
+    ComponentList?: Array<Component>;
+    /**
+     * 满足搜索条件的总个数
+     */
+    Total?: number;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * 与输入组件相关的漏洞信息摘要信息。
@@ -528,32 +620,15 @@ export interface ComponentVulnerabilitySummary {
     RiskLevel: string;
 }
 /**
- * PURL(Package URL)用于定位一个产品或组件，见 https://github.com/package-url/purl-spec。
+ * License约束信息。
  */
-export interface PURL {
+export interface LicenseRestriction {
     /**
-     * 组件名称
+     * license约束的名称。
      */
     Name: string;
     /**
-     * 组件所属的类型，如：github, gitlab, generic, deb, rpm, maven 等
+     * license约束的描述。
      */
-    Protocol?: string;
-    /**
-     * 组件名的前缀名，如github和gitlab的用户名，deb的操作系统，maven包的group id等
-     */
-    Namespace?: string;
-    /**
-     * 修饰组件的额外属性
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Qualifiers?: Array<Qualifier>;
-    /**
-     * 相对于组件包根位置的子目录
-     */
-    Subpath?: string;
-    /**
-     * 组件版本号
-     */
-    Version?: string;
+    Description: string;
 }

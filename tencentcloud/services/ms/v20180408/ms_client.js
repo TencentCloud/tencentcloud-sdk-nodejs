@@ -72,7 +72,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeEncryptPlan", req, cb);
     }
     /**
-     * 该接口供渠道合作应用加固使用，接口调用有白名单用户限制。 接口返回的结果为：创建订单后，订单审批状态信息，以及与订单关联的资源状态等信息，入参中的条件过滤字段均为精准匹配。
+     * 该接口供渠道合作应用加固使用，接口调用有白名单用户限制。 接口返回的结果为：创建订单后，订单审批状态信息，以及与订单关联的资源状态等信息，入参中的条件过滤字段均为精准匹配.
 接口功能点：
 1.支持多订单分页查询；
 2.支持唯一订单号精准匹配查询；
@@ -136,7 +136,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateCosSecKeyInstance", req, cb);
     }
     /**
-     * 该接口供渠道合作应用加固使用，接口调用有白名单用户限制，取消渠道合作加固中的任务。
+     * 该接口供渠道合作应用加固使用，接口调用有白名单用户限制，取消渠道合作加固中的任务
      */
     async CancelEncryptTask(req, cb) {
         return this.request("CancelEncryptTask", req, cb);
@@ -154,7 +154,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeApkDetectionResult", req, cb);
     }
     /**
-     * 该接口供渠道合作应用加固使用，接口调用有白名单用户限制，用于查询加固任务，入参中的条件过滤字段均为精准匹配。支持功能点：1. 多任务分页查询  2.根据任务Id唯一值查询单记录
+     * 该接口供渠道合作应用加固使用，接口调用有白名单用户限制，用于查询加固任务，入参中的条件过滤字段均为精准匹配。支持功能点: 1. 多任务分页查询  2.根据任务Id唯一值查询单记录
      */
     async DescribeEncryptInstances(req, cb) {
         return this.request("DescribeEncryptInstances", req, cb);

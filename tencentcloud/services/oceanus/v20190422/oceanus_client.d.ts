@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { CreateResourceRequest, DescribeJobSubmissionLogResponse, DeleteJobsRequest, CreateJobConfigResponse, CreateResourceConfigResponse, CreateJobConfigRequest, DescribeTreeJobsResponse, CopyJobsRequest, CopyJobsResponse, TriggerJobSavepointRequest, DescribeJobSavepointRequest, DescribeWorkSpacesRequest, DescribeTreeResourcesRequest, DescribeResourceConfigsResponse, DescribeClustersRequest, CreateJobResponse, CreateFolderRequest, DeleteTableConfigRequest, DeleteResourcesResponse, ModifyJobResponse, CheckSavepointResponse, DeleteResourceConfigsRequest, DescribeJobSavepointResponse, DescribeWorkSpacesResponse, CreateResourceResponse, DescribeSystemResourcesRequest, CreateFolderResponse, DescribeResourcesResponse, DescribeResourceRelatedJobsResponse, DescribeClustersResponse, DescribeSystemResourcesResponse, CheckSavepointRequest, StopJobsRequest, RunJobsRequest, DeleteJobsResponse, DescribeResourceRelatedJobsRequest, DescribeTreeResourcesResponse, RunJobsResponse, DeleteResourcesRequest, DescribeJobConfigsRequest, ModifyJobRequest, DeleteResourceConfigsResponse, DescribeJobSubmissionLogRequest, DescribeJobsRequest, DescribeResourceConfigsRequest, CreateJobRequest, DeleteTableConfigResponse, TriggerJobSavepointResponse, CreateResourceConfigRequest, StopJobsResponse, DescribeResourcesRequest, DescribeJobsResponse, DescribeTreeJobsRequest, DescribeJobConfigsResponse } from "./oceanus_models";
+import { CreateResourceRequest, DescribeJobSubmissionLogResponse, DeleteJobsRequest, CreateJobConfigResponse, CreateResourceConfigResponse, CreateJobConfigRequest, DescribeTreeJobsResponse, CopyJobsRequest, CopyJobsResponse, TriggerJobSavepointRequest, DescribeJobSavepointRequest, DescribeWorkSpacesRequest, DescribeTreeResourcesRequest, DescribeResourceConfigsResponse, DescribeClustersRequest, CreateJobResponse, CreateFolderRequest, DeleteTableConfigRequest, DeleteResourcesResponse, ModifyJobResponse, FetchSqlGatewayStatementResultResponse, DeleteResourceConfigsRequest, DescribeJobSavepointResponse, DescribeWorkSpacesResponse, CreateResourceResponse, DescribeSystemResourcesRequest, CreateFolderResponse, DescribeResourcesResponse, DescribeResourceRelatedJobsResponse, DescribeClustersResponse, DescribeSystemResourcesResponse, CheckSavepointRequest, StopJobsRequest, RunJobsRequest, DeleteJobsResponse, DescribeResourceRelatedJobsRequest, DescribeTreeResourcesResponse, RunJobsResponse, DeleteResourcesRequest, DescribeJobConfigsRequest, ModifyJobRequest, DeleteResourceConfigsResponse, DescribeJobSubmissionLogRequest, DescribeJobsRequest, DescribeResourceConfigsRequest, RunSqlGatewayStatementResponse, CreateJobRequest, DeleteTableConfigResponse, TriggerJobSavepointResponse, CreateResourceConfigRequest, StopJobsResponse, DescribeResourcesRequest, RunSqlGatewayStatementRequest, CheckSavepointResponse, DescribeJobsResponse, DescribeTreeJobsRequest, DescribeJobConfigsResponse, FetchSqlGatewayStatementResultRequest } from "./oceanus_models";
 /**
  * oceanus client
  * @class
@@ -19,6 +19,10 @@ export declare class Client extends AbstractClient {
      * 单条和批量复制作业
      */
     CopyJobs(req: CopyJobsRequest, cb?: (error: string, rep: CopyJobsResponse) => void): Promise<CopyJobsResponse>;
+    /**
+     * 通过Sql gateway执行satement
+     */
+    RunSqlGatewayStatement(req?: RunSqlGatewayStatementRequest, cb?: (error: string, rep: RunSqlGatewayStatementResponse) => void): Promise<RunSqlGatewayStatementResponse>;
     /**
      * 删除资源版本
      */
@@ -47,6 +51,10 @@ export declare class Client extends AbstractClient {
      * 描述资源接口
      */
     DescribeResources(req: DescribeResourcesRequest, cb?: (error: string, rep: DescribeResourcesResponse) => void): Promise<DescribeResourcesResponse>;
+    /**
+     * 查询Sql Gateway的Statement执行结果
+     */
+    FetchSqlGatewayStatementResult(req?: FetchSqlGatewayStatementResultRequest, cb?: (error: string, rep: FetchSqlGatewayStatementResultResponse) => void): Promise<FetchSqlGatewayStatementResultResponse>;
     /**
      * 查询集群
      */

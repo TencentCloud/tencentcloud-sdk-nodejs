@@ -18,6 +18,16 @@ const client = new tencentcloud.waf.v20180125.Client({
 })
 describe("waf.v20180125.test.js", function () {
 
+it("waf.v20180125.DescribeAttackType", async function () {
+    try {
+       const data = await client.DescribeAttackType({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("waf.v20180125.DescribeDomainDetailsClb", async function () {
     try {
        const data = await client.DescribeDomainDetailsClb({})
@@ -261,6 +271,16 @@ it("waf.v20180125.DescribeWafThreatenIntelligence", async function () {
 it("waf.v20180125.DescribeIpHitItems", async function () {
     try {
        const data = await client.DescribeIpHitItems({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("waf.v20180125.DescribeHistogram", async function () {
+    try {
+       const data = await client.DescribeHistogram({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -601,6 +621,16 @@ it("waf.v20180125.DescribePolicyStatus", async function () {
 it("waf.v20180125.DescribeSession", async function () {
     try {
        const data = await client.DescribeSession({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("waf.v20180125.DescribeTopAttackDomain", async function () {
+    try {
+       const data = await client.DescribeTopAttackDomain({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

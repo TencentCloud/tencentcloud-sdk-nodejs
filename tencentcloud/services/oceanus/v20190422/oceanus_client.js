@@ -46,6 +46,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CopyJobs", req, cb);
     }
     /**
+     * 通过Sql gateway执行satement
+     */
+    async RunSqlGatewayStatement(req, cb) {
+        return this.request("RunSqlGatewayStatement", req, cb);
+    }
+    /**
      * 删除资源版本
      */
     async DeleteResourceConfigs(req, cb) {
@@ -86,6 +92,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeResources(req, cb) {
         return this.request("DescribeResources", req, cb);
+    }
+    /**
+     * 查询Sql Gateway的Statement执行结果
+     */
+    async FetchSqlGatewayStatementResult(req, cb) {
+        return this.request("FetchSqlGatewayStatementResult", req, cb);
     }
     /**
      * 查询集群

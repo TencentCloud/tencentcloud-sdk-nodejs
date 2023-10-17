@@ -28,10 +28,16 @@ class Client extends abstract_client_1.AbstractClient {
         super("bsca.tencentcloudapi.com", "2021-08-11", clientConfig);
     }
     /**
-     * 本接口(DescribeKBComponentVulnerability)用于在知识库中查询开源组件的漏洞信息。
+     * 根据输入的组件名、组件类型搜索相应的组件，返回符合条件的组件列表
      */
-    async DescribeKBComponentVulnerability(req, cb) {
-        return this.request("DescribeKBComponentVulnerability", req, cb);
+    async SearchKBComponent(req, cb) {
+        return this.request("SearchKBComponent", req, cb);
+    }
+    /**
+     * 查询特定组件的版本列表
+     */
+    async DescribeKBComponentVersionList(req, cb) {
+        return this.request("DescribeKBComponentVersionList", req, cb);
     }
     /**
      * 本接口(DescribeKBComponent)用于在知识库中查询开源组件信息。本接口根据用户输入的PURL在知识库中寻找对应的开源组件，其中Name为必填字段。
@@ -46,16 +52,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeKBLicense", req, cb);
     }
     /**
-     * 本接口(DescribeKBVulnerability)用于在知识库中查询漏洞详细信息，支持根据CVE ID查询或者根据Vul ID查询。
-     */
-    async DescribeKBVulnerability(req, cb) {
-        return this.request("DescribeKBVulnerability", req, cb);
-    }
-    /**
      * 本接口(MatchKBPURLList)用于在知识库中匹配与特征对应的开源组件列表。
      */
     async MatchKBPURLList(req, cb) {
         return this.request("MatchKBPURLList", req, cb);
+    }
+    /**
+     * 本接口(DescribeKBComponentVulnerability)用于在知识库中查询开源组件的漏洞信息。
+     */
+    async DescribeKBComponentVulnerability(req, cb) {
+        return this.request("DescribeKBComponentVulnerability", req, cb);
+    }
+    /**
+     * 本接口(DescribeKBVulnerability)用于在知识库中查询漏洞详细信息，支持根据CVE ID查询或者根据Vul ID查询。
+     */
+    async DescribeKBVulnerability(req, cb) {
+        return this.request("DescribeKBVulnerability", req, cb);
     }
 }
 exports.Client = Client;

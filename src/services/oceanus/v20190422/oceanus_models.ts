@@ -882,21 +882,29 @@ export interface ModifyJobResponse {
 }
 
 /**
- * CheckSavepoint返回参数结构体
+ * SlotSharingGroup的规格描述
  */
-export interface CheckSavepointResponse {
+export interface SlotSharingGroupSpec {
   /**
-   * 资源 id
+   * 适用的cpu
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  SerialId: string
+  CPU: number
   /**
-   * 1=可用，2=不可用
+   * 默认为b, 支持单位有 b, kb, mb, gb
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  SavepointStatus: number
+  HeapMemory: string
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 默认为b, 支持单位有 b, kb, mb, gb
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  RequestId?: string
+  OffHeapMemory?: string
+  /**
+   * 默认为b, 支持单位有 b, kb, mb, gb
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ManagedMemory?: string
 }
 
 /**
@@ -913,6 +921,16 @@ export interface Tag {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TagValue?: string
+}
+
+/**
+ * FetchSqlGatewayStatementResult返回参数结构体
+ */
+export interface FetchSqlGatewayStatementResultResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2532,6 +2550,16 @@ export interface SlotSharingGroup {
 }
 
 /**
+ * RunSqlGatewayStatement返回参数结构体
+ */
+export interface RunSqlGatewayStatementResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateJob请求参数结构体
  */
 export interface CreateJobRequest {
@@ -2764,29 +2792,26 @@ export interface DescribeResourcesRequest {
 }
 
 /**
- * SlotSharingGroup的规格描述
+ * RunSqlGatewayStatement请求参数结构体
  */
-export interface SlotSharingGroupSpec {
+export type RunSqlGatewayStatementRequest = null
+
+/**
+ * CheckSavepoint返回参数结构体
+ */
+export interface CheckSavepointResponse {
   /**
-   * 适用的cpu
-注意：此字段可能返回 null，表示取不到有效值。
+   * 资源 id
    */
-  CPU: number
+  SerialId: string
   /**
-   * 默认为b, 支持单位有 b, kb, mb, gb
-注意：此字段可能返回 null，表示取不到有效值。
+   * 1=可用，2=不可用
    */
-  HeapMemory: string
+  SavepointStatus: number
   /**
-   * 默认为b, 支持单位有 b, kb, mb, gb
-注意：此字段可能返回 null，表示取不到有效值。
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  OffHeapMemory?: string
-  /**
-   * 默认为b, 支持单位有 b, kb, mb, gb
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ManagedMemory?: string
+  RequestId?: string
 }
 
 /**
@@ -2916,3 +2941,8 @@ export interface DescribeJobConfigsResponse {
    */
   RequestId?: string
 }
+
+/**
+ * FetchSqlGatewayStatementResult请求参数结构体
+ */
+export type FetchSqlGatewayStatementResultRequest = null

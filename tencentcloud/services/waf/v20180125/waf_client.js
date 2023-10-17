@@ -28,6 +28,12 @@ class Client extends abstract_client_1.AbstractClient {
         super("waf.tencentcloudapi.com", "2018-01-25", clientConfig);
     }
     /**
+     * 查询指定域名TOP N攻击类型
+     */
+    async DescribeAttackType(req, cb) {
+        return this.request("DescribeAttackType", req, cb);
+    }
+    /**
      * 获取一个clbwaf域名详情
      */
     async DescribeDomainDetailsClb(req, cb) {
@@ -180,6 +186,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeIpHitItems(req, cb) {
         return this.request("DescribeIpHitItems", req, cb);
+    }
+    /**
+     * 查询多种条件的聚类分析
+     */
+    async DescribeHistogram(req, cb) {
+        return this.request("DescribeHistogram", req, cb);
     }
     /**
      * 获取域名的规则白名单
@@ -389,6 +401,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeSession(req, cb) {
         return this.request("DescribeSession", req, cb);
+    }
+    /**
+     * 查询Top5的攻击域名
+     */
+    async DescribeTopAttackDomain(req, cb) {
+        return this.request("DescribeTopAttackDomain", req, cb);
     }
     /**
      * clb-waf编辑防护域名配置

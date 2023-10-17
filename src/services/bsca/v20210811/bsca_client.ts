@@ -20,28 +20,33 @@ import { ClientConfig } from "../../../common/interface"
 import {
   MatchKBPURLListResponse,
   DescribeKBComponentVulnerabilityRequest,
+  DescribeKBComponentVersionListRequest,
   ComponentVulnerabilityUnion,
   LicenseUnion,
   DescribeKBComponentVulnerabilityResponse,
   LicenseSummary,
+  SearchKBComponentRequest,
   Qualifier,
   CVSSV3Info,
   Component,
   DescribeKBVulnerabilityResponse,
   DescribeKBLicenseResponse,
+  ComponentVersion,
   MatchKBPURLListRequest,
   VulnerabilityUnion,
   LicenseDetail,
   DescribeKBVulnerabilityRequest,
   VulnerabilityDetail,
   DescribeKBComponentResponse,
+  DescribeKBComponentVersionListResponse,
   VulnerabilitySummary,
   DescribeKBLicenseRequest,
   CVSSV2Info,
   DescribeKBComponentRequest,
-  LicenseRestriction,
-  ComponentVulnerabilitySummary,
   PURL,
+  SearchKBComponentResponse,
+  ComponentVulnerabilitySummary,
+  LicenseRestriction,
 } from "./bsca_models"
 
 /**
@@ -54,13 +59,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口(DescribeKBComponentVulnerability)用于在知识库中查询开源组件的漏洞信息。
+   * 根据输入的组件名、组件类型搜索相应的组件，返回符合条件的组件列表
    */
-  async DescribeKBComponentVulnerability(
-    req: DescribeKBComponentVulnerabilityRequest,
-    cb?: (error: string, rep: DescribeKBComponentVulnerabilityResponse) => void
-  ): Promise<DescribeKBComponentVulnerabilityResponse> {
-    return this.request("DescribeKBComponentVulnerability", req, cb)
+  async SearchKBComponent(
+    req: SearchKBComponentRequest,
+    cb?: (error: string, rep: SearchKBComponentResponse) => void
+  ): Promise<SearchKBComponentResponse> {
+    return this.request("SearchKBComponent", req, cb)
+  }
+
+  /**
+   * 查询特定组件的版本列表
+   */
+  async DescribeKBComponentVersionList(
+    req: DescribeKBComponentVersionListRequest,
+    cb?: (error: string, rep: DescribeKBComponentVersionListResponse) => void
+  ): Promise<DescribeKBComponentVersionListResponse> {
+    return this.request("DescribeKBComponentVersionList", req, cb)
   }
 
   /**
@@ -84,16 +99,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口(DescribeKBVulnerability)用于在知识库中查询漏洞详细信息，支持根据CVE ID查询或者根据Vul ID查询。
-   */
-  async DescribeKBVulnerability(
-    req: DescribeKBVulnerabilityRequest,
-    cb?: (error: string, rep: DescribeKBVulnerabilityResponse) => void
-  ): Promise<DescribeKBVulnerabilityResponse> {
-    return this.request("DescribeKBVulnerability", req, cb)
-  }
-
-  /**
    * 本接口(MatchKBPURLList)用于在知识库中匹配与特征对应的开源组件列表。
    */
   async MatchKBPURLList(
@@ -101,5 +106,25 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: MatchKBPURLListResponse) => void
   ): Promise<MatchKBPURLListResponse> {
     return this.request("MatchKBPURLList", req, cb)
+  }
+
+  /**
+   * 本接口(DescribeKBComponentVulnerability)用于在知识库中查询开源组件的漏洞信息。
+   */
+  async DescribeKBComponentVulnerability(
+    req: DescribeKBComponentVulnerabilityRequest,
+    cb?: (error: string, rep: DescribeKBComponentVulnerabilityResponse) => void
+  ): Promise<DescribeKBComponentVulnerabilityResponse> {
+    return this.request("DescribeKBComponentVulnerability", req, cb)
+  }
+
+  /**
+   * 本接口(DescribeKBVulnerability)用于在知识库中查询漏洞详细信息，支持根据CVE ID查询或者根据Vul ID查询。
+   */
+  async DescribeKBVulnerability(
+    req: DescribeKBVulnerabilityRequest,
+    cb?: (error: string, rep: DescribeKBVulnerabilityResponse) => void
+  ): Promise<DescribeKBVulnerabilityResponse> {
+    return this.request("DescribeKBVulnerability", req, cb)
   }
 }

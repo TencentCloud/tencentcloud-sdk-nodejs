@@ -36,7 +36,7 @@ import {
   TLSCiphers,
   AddAntiFakeUrlRequest,
   DescribeFlowTrendRequest,
-  WebshellStatus,
+  ModifyApiAnalyzeStatusResponse,
   DescribeWafAutoDenyStatusRequest,
   AddCustomWhiteRuleResponse,
   SearchAttackLogRequest,
@@ -54,6 +54,7 @@ import {
   DescribeIpAccessControlResponse,
   DescribeAntiLeakageItem,
   LoadBalancerPackageNew,
+  RefreshAccessCheckResultResponse,
   DescribeAntiFakeUrlRequest,
   DeleteAttackWhiteRuleRequest,
   CCRuleData,
@@ -102,14 +103,16 @@ import {
   DeleteAccessExportResponse,
   ModifyProtectionStatusRequest,
   DescribeAccessExportsRequest,
-  ModifyApiAnalyzeStatusResponse,
+  DomainsPartInfo,
   DescribeCustomWhiteRuleRequest,
   DeleteAntiFakeUrlResponse,
   SearchItem,
   AddAntiInfoLeakRulesResponse,
+  DescribeAttackTypeRequest,
   DescribeUserClbWafRegionsResponse,
   ModifyAntiFakeUrlStatusRequest,
   DeleteCustomWhiteRuleRequest,
+  ModifyAreaBanStatusResponse,
   UserWhiteRule,
   ModifyHostModeResponse,
   ModifyInstanceRenewFlagResponse,
@@ -137,13 +140,15 @@ import {
   QpsData,
   DescribeAntiInfoLeakageRulesRequest,
   CreateHostResponse,
+  PiechartItem,
   IpAccessControlItem,
+  WebshellStatus,
   DeleteHostResponse,
   SwitchElasticModeResponse,
   FreshAntiFakeUrlResponse,
   ModifyBotStatusRequest,
   DeleteSpartaProtectionRequest,
-  DomainsPartInfo,
+  DescribeTopAttackDomainRequest,
   DescribeAntiFakeRulesResponse,
   AddAntiInfoLeakRulesRequest,
   AccessRuleInfo,
@@ -230,6 +235,7 @@ import {
   ModifyAntiFakeUrlResponse,
   ModifySpartaProtectionResponse,
   ModifyWafAutoDenyRulesResponse,
+  DomainInfo,
   DescribeBatchIpAccessControlRequest,
   DescribePolicyStatusResponse,
   DescribeInstancesRequest,
@@ -243,7 +249,7 @@ import {
   BatchIpAccessControlItem,
   InstanceInfo,
   WafRuleLimit,
-  Strategy,
+  KVInt,
   ModifyInstanceRenewFlagRequest,
   DescribeBatchIpAccessControlResponse,
   DescribeDomainDetailsSaasResponse,
@@ -254,7 +260,7 @@ import {
   DescribeWafAutoDenyRulesResponse,
   FraudPkg,
   DeleteCCRuleRequest,
-  ModifyAreaBanStatusResponse,
+  DescribeAttackTypeResponse,
   FindAllDomainDetail,
   DeleteCustomRuleRequest,
   DescribeInstancesResponse,
@@ -303,7 +309,7 @@ import {
   ModifyDomainsCLSStatusResponse,
   DescribeWafThreatenIntelligenceResponse,
   DescribeAccessHistogramResponse,
-  DomainInfo,
+  DescribeTopAttackDomainResponse,
   PageInfo,
   DescribeSessionResponse,
   DeleteAttackDownloadRecordRequest,
@@ -328,9 +334,11 @@ import {
   BotStatPointItem,
   ClbDomainsInfo,
   DescribeObjectsResponse,
+  DescribeHistogramRequest,
   DescribeHostResponse,
   DeleteCCRuleResponse,
   LogHistogramInfo,
+  Strategy,
   DomainURI,
   DescribeAttackWhiteRuleResponse,
   ModifyAntiInfoLeakRuleStatusRequest,
@@ -342,7 +350,7 @@ import {
   ModifyWafThreatenIntelligenceResponse,
   DescribeUserDomainInfoResponse,
   ModifyHostStatusRequest,
-  RefreshAccessCheckResultResponse,
+  DescribeHistogramResponse,
   ModifyCustomRuleResponse,
   UserSignatureRule,
   LoadBalancer,
@@ -356,6 +364,16 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("waf.tencentcloudapi.com", "2018-01-25", clientConfig)
+  }
+
+  /**
+   * 查询指定域名TOP N攻击类型
+   */
+  async DescribeAttackType(
+    req: DescribeAttackTypeRequest,
+    cb?: (error: string, rep: DescribeAttackTypeResponse) => void
+  ): Promise<DescribeAttackTypeResponse> {
+    return this.request("DescribeAttackType", req, cb)
   }
 
   /**
@@ -610,6 +628,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeIpHitItemsResponse) => void
   ): Promise<DescribeIpHitItemsResponse> {
     return this.request("DescribeIpHitItems", req, cb)
+  }
+
+  /**
+   * 查询多种条件的聚类分析
+   */
+  async DescribeHistogram(
+    req: DescribeHistogramRequest,
+    cb?: (error: string, rep: DescribeHistogramResponse) => void
+  ): Promise<DescribeHistogramResponse> {
+    return this.request("DescribeHistogram", req, cb)
   }
 
   /**
@@ -955,6 +983,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeSessionResponse) => void
   ): Promise<DescribeSessionResponse> {
     return this.request("DescribeSession", req, cb)
+  }
+
+  /**
+   * 查询Top5的攻击域名
+   */
+  async DescribeTopAttackDomain(
+    req: DescribeTopAttackDomainRequest,
+    cb?: (error: string, rep: DescribeTopAttackDomainResponse) => void
+  ): Promise<DescribeTopAttackDomainResponse> {
+    return this.request("DescribeTopAttackDomain", req, cb)
   }
 
   /**

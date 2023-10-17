@@ -18,9 +18,19 @@ const client = new tencentcloud.bsca.v20210811.Client({
 })
 describe("bsca.v20210811.test.js", function () {
 
-it("bsca.v20210811.DescribeKBComponentVulnerability", async function () {
+it("bsca.v20210811.SearchKBComponent", async function () {
     try {
-       const data = await client.DescribeKBComponentVulnerability({})
+       const data = await client.SearchKBComponent({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("bsca.v20210811.DescribeKBComponentVersionList", async function () {
+    try {
+       const data = await client.DescribeKBComponentVersionList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -48,9 +58,9 @@ it("bsca.v20210811.DescribeKBLicense", async function () {
     }
 })
 
-it("bsca.v20210811.DescribeKBVulnerability", async function () {
+it("bsca.v20210811.MatchKBPURLList", async function () {
     try {
-       const data = await client.DescribeKBVulnerability({})
+       const data = await client.MatchKBPURLList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -58,9 +68,19 @@ it("bsca.v20210811.DescribeKBVulnerability", async function () {
     }
 })
 
-it("bsca.v20210811.MatchKBPURLList", async function () {
+it("bsca.v20210811.DescribeKBComponentVulnerability", async function () {
     try {
-       const data = await client.MatchKBPURLList({})
+       const data = await client.DescribeKBComponentVulnerability({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("bsca.v20210811.DescribeKBVulnerability", async function () {
+    try {
+       const data = await client.DescribeKBVulnerability({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

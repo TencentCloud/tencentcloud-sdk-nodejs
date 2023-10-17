@@ -331,40 +331,45 @@ export interface DescribeSREInstanceAccessAddressResponse {
     /**
      * 内网访问地址
      */
-    IntranetAddress: string;
+    IntranetAddress?: string;
     /**
      * 公网访问地址
      */
-    InternetAddress: string;
+    InternetAddress?: string;
     /**
      * apollo多环境公网ip
      */
-    EnvAddressInfos: Array<EnvAddressInfo>;
+    EnvAddressInfos?: Array<EnvAddressInfo>;
     /**
      * 控制台公网访问地址
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ConsoleInternetAddress: string;
+    ConsoleInternetAddress?: string;
     /**
      * 控制台内网访问地址
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ConsoleIntranetAddress: string;
+    ConsoleIntranetAddress?: string;
     /**
      * 客户端公网带宽
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    InternetBandWidth: number;
+    InternetBandWidth?: number;
     /**
      * 控制台公网带宽
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ConsoleInternetBandWidth: number;
+    ConsoleInternetBandWidth?: number;
     /**
      * 北极星限流server节点接入IP
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    LimiterAddressInfos: Array<PolarisLimiterAddress>;
+    LimiterAddressInfos?: Array<PolarisLimiterAddress>;
+    /**
+     * InternetAddress 的公网 CLB 多可用区信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CLBMultiRegion?: CLBMultiRegion;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -741,20 +746,20 @@ export interface EnvAddressInfo {
     /**
      * 环境名
      */
-    EnvName: string;
+    EnvName?: string;
     /**
      * 是否开启config公网
      */
-    EnableConfigInternet: boolean;
+    EnableConfigInternet?: boolean;
     /**
      * config公网ip
      */
-    ConfigInternetServiceIp: string;
+    ConfigInternetServiceIp?: string;
     /**
      * config内网访问地址
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ConfigIntranetAddress: string;
+    ConfigIntranetAddress?: string;
     /**
      * 是否开启config内网clb
   注意：此字段可能返回 null，表示取不到有效值。
@@ -765,6 +770,31 @@ export interface EnvAddressInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     InternetBandWidth?: number;
+    /**
+     * 客户端公网CLB多可用区信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CLBMultiRegion?: CLBMultiRegion;
+}
+/**
+ * CLB多可用区信息
+ */
+export interface CLBMultiRegion {
+    /**
+     * 是否启用多可用区
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CLBMultiZoneFlag?: boolean;
+    /**
+     * 主可用区信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CLBMasterZone?: string;
+    /**
+     * 备可用区信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CLBSlaveZone?: string;
 }
 /**
  * 微服务注册引擎实例
@@ -927,6 +957,11 @@ export interface SREInstance {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     EnableClientIntranet?: boolean;
+    /**
+     * 存储额外配置选项
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    StorageOption?: Array<StorageOption>;
 }
 /**
  * 引擎实例的标签信息
@@ -1275,6 +1310,31 @@ export interface DescribeCloudNativeAPIGatewayResult {
     PublicIpAddresses?: Array<string>;
 }
 /**
+ * 北极星日志主题信息
+ */
+export interface PolarisCLSTopicInfo {
+    /**
+     * 日志集ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    LogSetId?: string;
+    /**
+     * 日志集名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    LogSetName?: string;
+    /**
+     * 日志主题ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TopicId?: string;
+    /**
+     * 日志主题名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TopicName?: string;
+}
+/**
  * DeleteCloudNativeAPIGatewayRoute返回参数结构体
  */
 export interface DeleteCloudNativeAPIGatewayRouteResponse {
@@ -1396,6 +1456,11 @@ export interface ServiceGovernanceInfo {
      * 服务治理限流server引擎绑定的网络信息
      */
     LimiterVpcInfos?: Array<VpcInfo>;
+    /**
+     * 引擎关联CLS日志主题信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CLSTopics?: Array<PolarisCLSTopicInfo>;
 }
 /**
  * DescribeNacosReplicas返回参数结构体
@@ -1861,6 +1926,26 @@ export interface CreateCloudNativeAPIGatewayCertificateResponse {
     RequestId?: string;
 }
 /**
+ * 存储的额外选项
+ */
+export interface StorageOption {
+    /**
+     * 存储对象，分为snap和txn两种
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Name?: string;
+    /**
+     * 存储类型，分为三类CLOUD_PREMIUM/CLOUD_SSD/CLOUD_SSD_PLUS，分别对应高性能云硬盘、SSD云硬盘、增强型SSD云硬盘
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Type?: string;
+    /**
+     * 存储容量，[50, 3200]的范围
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Capacity?: number;
+}
+/**
  * 环境具体信息
  */
 export interface EnvInfo {
@@ -1999,27 +2084,47 @@ export interface DescribeInstanceRegionInfo {
      * 引擎部署地域信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    EngineRegion: string;
+    EngineRegion?: string;
     /**
      * 引擎在该地域的副本数
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Replica: number;
+    Replica?: number;
     /**
      * 引擎在该地域的规格id
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SpecId: string;
+    SpecId?: string;
     /**
-     * 内网的网络信息
+     * 客户端内网的网络信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    IntranetVpcInfos: Array<VpcInfo>;
+    IntranetVpcInfos?: Array<VpcInfo>;
+    /**
+     * 控制台内网的网络信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ConsoleIntranetVpcInfos?: Array<VpcInfo>;
     /**
      * 是否开公网
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    EnableClientInternet: boolean;
+    EnableClientInternet?: boolean;
+    /**
+     * 限流客户端内网的网络信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    LimiterIntranetVpcInfos?: Array<VpcInfo>;
+    /**
+     * 是否为主地域，仅在服务治理中心多地域有效
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MainRegion?: boolean;
+    /**
+     * 该地域所在的EKS集群
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    EKSClusterID?: string;
 }
 /**
  * 网关实例策略
@@ -3185,11 +3290,11 @@ export interface DescribeSREInstancesResponse {
     /**
      * 总数量
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 实例记录
      */
-    Content: Array<SREInstance>;
+    Content?: Array<SREInstance>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -3246,6 +3351,11 @@ export interface BoundK8SInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     SyncMode?: string;
+    /**
+     * 绑定的kubernetes集群所在地域
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    BindRegion?: string;
 }
 /**
  * DescribeCloudNativeAPIGatewayCertificateDetails请求参数结构体
@@ -3938,6 +4048,14 @@ export interface EngineRegionInfo {
      * 集群网络信息
      */
     VpcInfos: Array<VpcInfo>;
+    /**
+     * 是否为主地域
+     */
+    MainRegion?: boolean;
+    /**
+     * 引擎规格ID
+     */
+    SpecId?: string;
 }
 /**
  * UpdateCloudNativeAPIGatewayCertificateInfo返回参数结构体
