@@ -778,25 +778,17 @@ export interface DescribeDomainNameListResponse {
 }
 
 /**
- * 手机号邮箱列表
+ * CreateCustomDnsHost返回参数结构体
  */
-export interface PhoneEmailData {
+export interface CreateCustomDnsHostResponse {
   /**
-   * 手机号或者邮箱
+   * 异步任务ID
    */
-  Code: string
+  LogId: number
   /**
-   * 1：手机  2：邮箱
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  Type: number
-  /**
-   * 创建时间
-   */
-  CreatedOn: string
-  /**
-   * 1=控制台校验，2=第三方校验
-   */
-  CheckStatus: number
+  RequestId?: string
 }
 
 /**
@@ -1131,6 +1123,23 @@ export interface DescribeDomainPriceListRequest {
 }
 
 /**
+ * SetDomainAutoRenew请求参数结构体
+ */
+export interface SetDomainAutoRenewRequest {
+  /**
+   * 域名ID 例如：domain-123abc
+   */
+  DomainId: string
+  /**
+   * AutoRenew 有三个可选值：
+ 0：不设置自动续费
+1：设置自动续费
+2：设置到期后不续费
+   */
+  AutoRenew: number
+}
+
+/**
  * CreateDomainBatch请求参数结构体
  */
 export interface CreateDomainBatchRequest {
@@ -1424,6 +1433,24 @@ export interface TransferProhibitionBatchResponse {
 }
 
 /**
+ * CreateCustomDnsHost请求参数结构体
+ */
+export interface CreateCustomDnsHostRequest {
+  /**
+   * 域名实例ID
+   */
+  DomainId: string
+  /**
+   * Dns名称
+   */
+  DnsName: string
+  /**
+   * IP地址列表
+   */
+  IpSet: Array<string>
+}
+
+/**
  * ModifyDomainDNSBatch请求参数结构体
  */
 export interface ModifyDomainDNSBatchRequest {
@@ -1519,20 +1546,25 @@ export interface CreatePhoneEmailResponse {
 }
 
 /**
- * SetDomainAutoRenew请求参数结构体
+ * 手机号邮箱列表
  */
-export interface SetDomainAutoRenewRequest {
+export interface PhoneEmailData {
   /**
-   * 域名ID 例如：domain-123abc
+   * 手机号或者邮箱
    */
-  DomainId: string
+  Code: string
   /**
-   * AutoRenew 有三个可选值：
- 0：不设置自动续费
-1：设置自动续费
-2：设置到期后不续费
+   * 1：手机  2：邮箱
    */
-  AutoRenew: number
+  Type: number
+  /**
+   * 创建时间
+   */
+  CreatedOn: string
+  /**
+   * 1=控制台校验，2=第三方校验
+   */
+  CheckStatus: number
 }
 
 /**

@@ -1410,11 +1410,13 @@ export interface DescribeRealtimeScanConfigResponse {
    */
   AuditType?: number
   /**
-   * 用户号正则表达式
+   * 用户号正则表达式。
+符合此正则表达式规则的用户号将被送检。示例：^6.*（表示所有以6开头的用户号将被送检）
    */
   UserIdRegex?: Array<string>
   /**
-   * 房间号正则表达式
+   * 房间号正则表达式。
+符合此正则表达式规则的房间号将被送检。示例：^6.*（表示所有以6开头的房间号将被送检）
    */
   RoomIdRegex?: Array<string>
   /**
@@ -1516,7 +1518,7 @@ export interface UpdateScanRoomsRequest {
  */
 export interface DescribeRealtimeScanConfigRequest {
   /**
-   * 应用ID
+   * 应用ID。
    */
   BizId: number
 }

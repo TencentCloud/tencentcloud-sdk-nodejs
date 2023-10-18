@@ -449,6 +449,26 @@ export interface DescribeJobSavepointRequest {
     WorkSpaceId?: string;
 }
 /**
+ * Sql Gateway返回Column类型
+ */
+export interface ResultColumn {
+    /**
+     * 名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Name?: string;
+    /**
+     * 本地类型描述
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    LogicalType?: LogicalType;
+    /**
+     * 备注
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Comment?: string;
+}
+/**
  * 资源详细描述
  */
 export interface ResourceItem {
@@ -599,6 +619,26 @@ export interface ResourceRefJobInfo {
      * 资源版本
      */
     ResourceVersion: number;
+}
+/**
+ * SqlGateway返回LogicalType类型
+ */
+export interface LogicalType {
+    /**
+     * 类型
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Type?: string;
+    /**
+     * 是否允许为空
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    NullAble?: boolean;
+    /**
+     * 长度
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Length?: number;
 }
 /**
  * DescribeTreeResources请求参数结构体
@@ -814,6 +854,26 @@ export interface DeleteTableConfigRequest {
     WorkSpaceId?: string;
 }
 /**
+ * Sql Gateway 返回Result结构类型
+ */
+export interface StatementResult {
+    /**
+     * 返回结果列
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Columns?: Array<ResultColumn>;
+    /**
+     * 格式
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RowFormat?: string;
+    /**
+     * 结果值
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Data?: Array<ResultData>;
+}
+/**
  * DeleteResources返回参数结构体
  */
 export interface DeleteResourcesResponse {
@@ -875,6 +935,36 @@ export interface Tag {
  * FetchSqlGatewayStatementResult返回参数结构体
  */
 export interface FetchSqlGatewayStatementResultResponse {
+    /**
+     * 错误信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ErrorMessage?: Array<string>;
+    /**
+     * 返回类型
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ResultType?: string;
+    /**
+     * 是否DQL结果
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IsQueryResult?: boolean;
+    /**
+     * 结果类型
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ResultKind?: string;
+    /**
+     * 结果
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Results?: StatementResult;
+    /**
+     * 下一次请求的uri
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    NextResultUri?: string;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1854,6 +1944,21 @@ export interface ModifyJobRequest {
     WorkSpaceId?: string;
 }
 /**
+ * Sql Gateway返回数据
+ */
+export interface ResultData {
+    /**
+     * 操作类型
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Kind?: string;
+    /**
+     * 结果
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Fields?: Array<string>;
+}
+/**
  * DeleteResourceConfigs返回参数结构体
  */
 export interface DeleteResourceConfigsResponse {
@@ -2457,6 +2562,19 @@ export interface SlotSharingGroup {
  */
 export interface RunSqlGatewayStatementResponse {
     /**
+     * 错误信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ErrorMessage?: Array<string>;
+    /**
+     * 会话id，若入参未传，则返回自动创建的会话id，若入参已经传递，则返回值与原传入值一致
+     */
+    SessionId?: string;
+    /**
+     * 返回执行id，可以根据该执行id和会话id获取执行结果
+     */
+    OperationHandleId?: string;
+    /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
@@ -2686,7 +2804,20 @@ export interface DescribeResourcesRequest {
 /**
  * RunSqlGatewayStatement请求参数结构体
  */
-export declare type RunSqlGatewayStatementRequest = null;
+export interface RunSqlGatewayStatementRequest {
+    /**
+     * 集群ID
+     */
+    ClusterId: string;
+    /**
+     * 需要执行的sql，该sql会被Sql Gateway执行，当前支持的是paimon修改需求，因此主要是DDL语句
+     */
+    Sql: string;
+    /**
+     * Sql Gateway会话ID，可不填，如果不填则会自动创建一个会话ID，每个会话ID都有一个存活时间，测试环境为10分钟，线上默认是30分钟
+     */
+    SessionId?: string;
+}
 /**
  * CheckSavepoint返回参数结构体
  */
@@ -2829,4 +2960,21 @@ export interface DescribeJobConfigsResponse {
 /**
  * FetchSqlGatewayStatementResult请求参数结构体
  */
-export declare type FetchSqlGatewayStatementResultRequest = null;
+export interface FetchSqlGatewayStatementResultRequest {
+    /**
+     * 集群ID
+     */
+    ClusterId: string;
+    /**
+     * Sql Gateway会话ID
+     */
+    SessionId?: string;
+    /**
+     * sql的查询id
+     */
+    OperationHandleId?: string;
+    /**
+     * 下一条结果的获取url，首次获取执行结果时可以为空，当获取下一批查询结果时需要传递
+     */
+    ResultUri?: string;
+}

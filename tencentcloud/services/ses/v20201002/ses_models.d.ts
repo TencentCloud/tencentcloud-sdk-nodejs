@@ -275,8 +275,8 @@ export interface GetSendEmailStatusResponse {
 export interface SendEmailRequest {
     /**
      * 发信邮件地址。请填写发件人邮箱地址，例如：noreply@mail.qcloud.com
-  如需填写发件人说明，请按照如下方式(别名与邮箱地址之间使用一个空格隔开)：
-  别名 <邮箱地址>
+  如需填写发件人别名，请按照如下方式（注意别名与邮箱地址之间必须使用一个空格隔开）：
+  别名 <邮箱地址>，例如：QCLOUDTEAM <noreply@mail.qcloud.com>
      */
     FromEmailAddress: string;
     /**

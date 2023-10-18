@@ -94,6 +94,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteRocketMQGroup", req, cb);
     }
     /**
+     * 用于查询RocketMQ平滑迁移任务列表
+     */
+    async DescribeRocketMQSmoothMigrationTaskList(req, cb) {
+        return this.request("DescribeRocketMQSmoothMigrationTaskList", req, cb);
+    }
+    /**
      * 创建RabbitMQ的用户
      */
     async CreateRabbitMQUser(req, cb) {
@@ -185,10 +191,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeEnvironmentAttributes", req, cb);
     }
     /**
-     * 创建cmq订阅接口
+     * 输入迁移任务id和要导入的Group，导入后台
      */
-    async CreateCmqSubscribe(req, cb) {
-        return this.request("CreateCmqSubscribe", req, cb);
+    async ImportRocketMQConsumerGroups(req, cb) {
+        return this.request("ImportRocketMQConsumerGroups", req, cb);
     }
     /**
      * 获取消息生产概览信息
@@ -245,6 +251,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyCmqTopicAttribute", req, cb);
     }
     /**
+     * 查询Topic迁移状态列表，源集群和目标集群客户端数量信息需要配合DescribeRocketMQSmoothMigrationTaskTopicInsNum接口查询
+     */
+    async DescribeRocketMQMigratingTopicList(req, cb) {
+        return this.request("DescribeRocketMQMigratingTopicList", req, cb);
+    }
+    /**
      * 查询cmq订阅详情
      */
     async DescribeCmqSubscriptionDetail(req, cb) {
@@ -263,10 +275,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeCmqDeadLetterSourceQueues", req, cb);
     }
     /**
+     * 重置指定Group的消费位点到指定时间戳
+     */
+    async ResetRocketMQConsumerOffSet(req, cb) {
+        return this.request("ResetRocketMQConsumerOffSet", req, cb);
+    }
+    /**
      * 获取集群列表
      */
     async DescribeClusters(req, cb) {
         return this.request("DescribeClusters", req, cb);
+    }
+    /**
+     * 平滑迁移过程获取源集群topic列表接口
+     */
+    async DescribeRocketMQSourceClusterTopicList(req, cb) {
+        return this.request("DescribeRocketMQSourceClusterTopicList", req, cb);
     }
     /**
      * 获取单个RabbitMQ专享实例信息
@@ -275,10 +299,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeRabbitMQVipInstance", req, cb);
     }
     /**
-     * 重置指定Group的消费位点到指定时间戳
+     * 导入topic列表
      */
-    async ResetRocketMQConsumerOffSet(req, cb) {
-        return this.request("ResetRocketMQConsumerOffSet", req, cb);
+    async ImportRocketMQTopics(req, cb) {
+        return this.request("ImportRocketMQTopics", req, cb);
     }
     /**
      * 该接口用于开启关闭公网访问、设置安全访问策略
@@ -475,6 +499,12 @@ BatchReceivePolicy 的接口会一次性返回多条消息：
         return this.request("SendCmqMsg", req, cb);
     }
     /**
+     * 用于获取RocketMQ平滑迁移任务详情
+     */
+    async DescribeRocketMQSmoothMigrationTask(req, cb) {
+        return this.request("DescribeRocketMQSmoothMigrationTask", req, cb);
+    }
+    /**
      * 修改指定命名空间的属性值
      */
     async ModifyEnvironmentAttributes(req, cb) {
@@ -559,6 +589,12 @@ BatchReceivePolicy 的接口会一次性返回多条消息：
         return this.request("CreateRole", req, cb);
     }
     /**
+     * 创建cmq订阅接口
+     */
+    async CreateCmqSubscribe(req, cb) {
+        return this.request("CreateCmqSubscribe", req, cb);
+    }
+    /**
      * 更新RocketMQ命名空间
      */
     async ModifyRocketMQNamespace(req, cb) {
@@ -631,6 +667,12 @@ BatchReceivePolicy 的接口会一次性返回多条消息：
      */
     async DescribeCmqQueueDetail(req, cb) {
         return this.request("DescribeCmqQueueDetail", req, cb);
+    }
+    /**
+     * 平滑迁移过程获取源集群group列表接口
+     */
+    async DescribeRocketMQSourceClusterGroupList(req, cb) {
+        return this.request("DescribeRocketMQSourceClusterGroupList", req, cb);
     }
     /**
      * 此接口仅用于测试发生消息，不能作为现网正式生产使用

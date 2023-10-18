@@ -274,6 +274,7 @@ import {
   OpsTaskLinkInfoDto,
   IntegrationNodeInfo,
   DescribeIntegrationStatisticsTaskStatusRequest,
+  GetFileInfoResponse,
   BatchDeleteTasksNewResponse,
   DescribeBelongToResponse,
   WorkFlowExecuteDto,
@@ -309,6 +310,7 @@ import {
   DescribeAllTaskTypeRequest,
   SimpleDataSourceInfo,
   InstanceLogInfo,
+  GetFileInfoRequest,
   DescribeSonInstancesRequest,
   DescribeBaselinesResponse,
   DescribeTaskInstancesData,
@@ -940,6 +942,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: KillScheduleInstancesResponse) => void
   ): Promise<KillScheduleInstancesResponse> {
     return this.request("KillScheduleInstances", req, cb)
+  }
+
+  /**
+   * 开发空间-获取数据开发脚本信息
+   */
+  async GetFileInfo(
+    req: GetFileInfoRequest,
+    cb?: (error: string, rep: GetFileInfoResponse) => void
+  ): Promise<GetFileInfoResponse> {
+    return this.request("GetFileInfo", req, cb)
   }
 
   /**

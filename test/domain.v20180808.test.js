@@ -28,16 +28,6 @@ it("domain.v20180808.SetDomainAutoRenew", async function () {
     }
 })
 
-it("domain.v20180808.ModifyDomainDNSBatch", async function () {
-    try {
-       const data = await client.ModifyDomainDNSBatch({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("domain.v20180808.CheckBatchStatus", async function () {
     try {
        const data = await client.CheckBatchStatus({})
@@ -61,6 +51,16 @@ it("domain.v20180808.UploadImage", async function () {
 it("domain.v20180808.DeletePhoneEmail", async function () {
     try {
        const data = await client.DeletePhoneEmail({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("domain.v20180808.SendPhoneEmailCode", async function () {
+    try {
+       const data = await client.SendPhoneEmailCode({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -118,16 +118,6 @@ it("domain.v20180808.DeleteTemplate", async function () {
     }
 })
 
-it("domain.v20180808.CreateDomainRedemption", async function () {
-    try {
-       const data = await client.CreateDomainRedemption({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("domain.v20180808.CheckDomain", async function () {
     try {
        const data = await client.CheckDomain({})
@@ -148,6 +138,16 @@ it("domain.v20180808.RenewDomainBatch", async function () {
     }
 })
 
+it("domain.v20180808.CreateCustomDnsHost", async function () {
+    try {
+       const data = await client.CreateCustomDnsHost({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("domain.v20180808.DescribeTemplate", async function () {
     try {
        const data = await client.DescribeTemplate({})
@@ -161,6 +161,16 @@ it("domain.v20180808.DescribeTemplate", async function () {
 it("domain.v20180808.CreatePhoneEmail", async function () {
     try {
        const data = await client.CreatePhoneEmail({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("domain.v20180808.CreateDomainRedemption", async function () {
+    try {
+       const data = await client.CreateDomainRedemption({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -248,9 +258,9 @@ it("domain.v20180808.DescribePhoneEmailList", async function () {
     }
 })
 
-it("domain.v20180808.SendPhoneEmailCode", async function () {
+it("domain.v20180808.ModifyDomainDNSBatch", async function () {
     try {
-       const data = await client.SendPhoneEmailCode({})
+       const data = await client.ModifyDomainDNSBatch({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

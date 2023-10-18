@@ -6712,7 +6712,25 @@ export interface DescribeTagsOfInstanceIdsRequest {
 /**
  * StartCpuExpand请求参数结构体
  */
-export type StartCpuExpandRequest = null
+export interface StartCpuExpandRequest {
+  /**
+   * 实例 ID 。
+   */
+  InstanceId: string
+  /**
+   * 扩容类型。可选值：auto：代表进行自动扩容
+manual：代表进行手动扩容
+   */
+  Type: string
+  /**
+   * 手动扩容时，扩容的CPU核心数。Type 为 manual 时必传。
+   */
+  ExpandCpu?: number
+  /**
+   * 自动扩容策略。Type 为 auto 时必传。
+   */
+  AutoStrategy?: AutoStrategy
+}
 
 /**
  * DescribeCpuExpandStrategy请求参数结构体
@@ -8224,6 +8242,28 @@ export interface ModifyDBInstanceSecurityGroupsRequest {
    * 当传入只读实例ID时，默认操作的是对应只读组的安全组。如果需要操作只读实例ID的安全组， 需要将该入参置为True
    */
   ForReadonlyInstance?: boolean
+}
+
+/**
+ * CPU弹性扩容的自动扩容策略
+ */
+export interface AutoStrategy {
+  /**
+   * 自动扩容阈值，可选值70、80、90，代表CPU利用率达到70%、80%、90%时后台进行自动扩容
+   */
+  ExpandThreshold: number
+  /**
+   * 自动扩容观测周期，单位s，可选值1、3、5、10、15、30。后台会按照配置的周期进行扩容判断。
+   */
+  ExpandPeriod: number
+  /**
+   * 自动缩容阈值，可选值10、20、30，代表CPU利用率达到10%、20%、30%时后台进行自动缩容
+   */
+  ShrinkThreshold: number
+  /**
+   * 自动缩容观测周期，单位s，可选值5、10、15、30。后台会按照配置的周期进行缩容判断。
+   */
+  ShrinkPeriod: number
 }
 
 /**

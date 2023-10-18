@@ -680,7 +680,7 @@ https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/launchAp
   }
 
   /**
-   * 对流程的合同文件进行数字签名验证，判断文件是否被篡改。
+   * 对合同流程文件进行数字签名验证，判断数字签名是否有效，合同文件内容是否被篡改。
    */
   async ChannelVerifyPdf(
     req: ChannelVerifyPdfRequest,

@@ -7772,6 +7772,20 @@ export interface DescribeIntegrationStatisticsTaskStatusRequest {
     ExecutorGroupId?: string;
 }
 /**
+ * GetFileInfo返回参数结构体
+ */
+export interface GetFileInfoResponse {
+    /**
+     * 当前脚本信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    UserFileInfo?: UserFileInfo;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * BatchDeleteTasksNew返回参数结构体
  */
 export interface BatchDeleteTasksNewResponse {
@@ -8577,6 +8591,19 @@ export interface InstanceLogInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceStatus?: string;
+}
+/**
+ * GetFileInfo请求参数结构体
+ */
+export interface GetFileInfoRequest {
+    /**
+     * 项目ID
+     */
+    ProjectId: string;
+    /**
+     * 文件路径
+     */
+    FilePath: string;
 }
 /**
  * DescribeSonInstances请求参数结构体

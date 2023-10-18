@@ -73,17 +73,18 @@ export interface DeleteLiveRecordTemplateRequest {
 export type DescribeLiveTranscodeTemplatesRequest = null
 
 /**
- * DescribeLiveStreamMonitorList请求参数结构体
+ * DescribeBackupStreamList返回参数结构体
  */
-export interface DescribeLiveStreamMonitorListRequest {
+export interface DescribeBackupStreamListResponse {
   /**
-   * 查询列表时的起始偏移。
+   * 主备流分组信息列表。
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Index: number
+  StreamInfoList?: Array<BackupStreamGroupInfo>
   /**
-   * 本次查询的记录个数。最小值为1。
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  Count: number
+  RequestId?: string
 }
 
 /**
@@ -865,6 +866,26 @@ export type DescribeLiveWatermarksRequest = null
  * DescribeLiveWatermarkRules请求参数结构体
  */
 export type DescribeLiveWatermarkRulesRequest = null
+
+/**
+ * EnableOptimalSwitching请求参数结构体
+ */
+export interface EnableOptimalSwitchingRequest {
+  /**
+   * 针对该流 ID 启用择优调度。
+   */
+  StreamName: string
+  /**
+   * 启用开关，默认为启用。
+0 - 禁用。
+1 - 启用。
+   */
+  EnableSwitch?: number
+  /**
+   * 要启用自动择优的流所属的域名分组名称。
+   */
+  HostGroupName?: string
+}
 
 /**
  * 获取省份/运营商的播放信息。
@@ -1981,6 +2002,20 @@ export interface DescribeLiveDomainPlayInfoListResponse {
 }
 
 /**
+ * DescribeLiveStreamMonitorList请求参数结构体
+ */
+export interface DescribeLiveStreamMonitorListRequest {
+  /**
+   * 查询列表时的起始偏移。
+   */
+  Index: number
+  /**
+   * 本次查询的记录个数。最小值为1。
+   */
+  Count: number
+}
+
+/**
  * HTTP返回码数据信息
  */
 export interface HttpCodeValue {
@@ -2507,36 +2542,6 @@ export interface PushAuthKeyInfo {
    * 有效时间，单位：秒。
    */
   AuthDelta: number
-}
-
-/**
- * 禁推流列表
- */
-export interface ForbidStreamInfo {
-  /**
-   * 流名称。
-   */
-  StreamName?: string
-  /**
-   * 创建时间。
-注：此字段为北京时间（UTC+8时区）。
-   */
-  CreateTime?: string
-  /**
-   * 禁推过期时间。
-注：此字段为北京时间（UTC+8时区）。
-   */
-  ExpireTime?: string
-  /**
-   * 推流路径。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  AppName?: string
-  /**
-   * 推流域名。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  DomainName?: string
 }
 
 /**
@@ -3179,6 +3184,16 @@ UTC格式时间，例如：2019-01-08T10:00:00Z。
 }
 
 /**
+ * DescribeBackupStreamList请求参数结构体
+ */
+export interface DescribeBackupStreamListRequest {
+  /**
+   * 流名称，用于精确查询。
+   */
+  StreamName?: string
+}
+
+/**
  * DescribeDeliverLogDownList请求参数结构体
  */
 export type DescribeDeliverLogDownListRequest = null
@@ -3355,6 +3370,34 @@ export interface DescribeScreenshotTaskRequest {
    * 翻页标识，分批拉取时使用：当单次请求无法拉取所有数据，接口将会返回 ScrollToken，下一次请求携带该 Token，将会从下一条记录开始获取。
    */
   ScrollToken?: string
+}
+
+/**
+ * 主备流分组信息。
+ */
+export interface BackupStreamGroupInfo {
+  /**
+   * 流名称。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StreamName?: string
+  /**
+   * 主备流信息。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BackupList?: Array<BackupStreamDetailData>
+  /**
+   * 是否对该流开启了择优调度。
+0 - 未开启。
+1 - 已开启。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OptimalEnable?: number
+  /**
+   * 域名分组的分组名称。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HostGroupName?: string
 }
 
 /**
@@ -3969,6 +4012,28 @@ export interface CancelCommonMixStreamRequest {
 该值与CreateCommonMixStream中的MixStreamSessionId保持一致。
    */
   MixStreamSessionId: string
+}
+
+/**
+ * SwitchBackupStream请求参数结构体
+ */
+export interface SwitchBackupStreamRequest {
+  /**
+   * 推流域名。
+   */
+  PushDomainName: string
+  /**
+   * 应用名称。
+   */
+  AppName: string
+  /**
+   * 流名称。
+   */
+  StreamName: string
+  /**
+   * 查询接口获取到该流所有在推的上行 Sequence。指定要切到的目标上行 Sequence。
+   */
+  UpstreamSequence: string
 }
 
 /**
@@ -4684,6 +4749,16 @@ export interface DelayInfo {
 1： 生效中。
    */
   Status: number
+}
+
+/**
+ * EnableOptimalSwitching返回参数结构体
+ */
+export interface EnableOptimalSwitchingResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -8008,6 +8083,44 @@ export interface DescribeLiveTimeShiftBillInfoListRequest {
 }
 
 /**
+ * 录制任务
+ */
+export interface RecordTask {
+  /**
+   * 录制任务ID。
+   */
+  TaskId: string
+  /**
+   * 推流域名。
+   */
+  DomainName: string
+  /**
+   * 推流路径。
+   */
+  AppName: string
+  /**
+   * 流名称。
+   */
+  StreamName: string
+  /**
+   * 任务开始时间，Unix时间戳。
+   */
+  StartTime: number
+  /**
+   * 任务结束时间，Unix时间戳。
+   */
+  EndTime: number
+  /**
+   * 录制模板ID。
+   */
+  TemplateId: number
+  /**
+   * 调用 StopRecordTask 停止任务时间，Unix时间戳。值为0表示未曾调用接口停止任务。
+   */
+  Stopped: number
+}
+
+/**
  * 某条流的推流质量详情数据。
  */
 export interface PushQualityData {
@@ -8384,6 +8497,16 @@ export interface DeleteLiveTimeShiftTemplateRequest {
    * 模板 ID。
    */
   TemplateId: number
+}
+
+/**
+ * SwitchBackupStream返回参数结构体
+ */
+export interface SwitchBackupStreamResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -9193,6 +9316,49 @@ export interface ModifyLivePadTemplateRequest {
 }
 
 /**
+ * 主备流详细信息。
+ */
+export interface BackupStreamDetailData {
+  /**
+   * 推流域名。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DomainName?: string
+  /**
+   * 推流路径。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AppName?: string
+  /**
+   *  UTC 格式，例如：2018-06-29T19:00:00Z。
+注意：和北京时间相差8小时。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PublishTime?: string
+  /**
+   * 推流唯一标识。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UpstreamSequence?: string
+  /**
+   * 推流来源。示例：
+直推流；
+拉流转推(1234)；
+注意：拉流转推来源括号中为拉流转推的任务 
+ ID。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SourceFrom?: string
+  /**
+   * 主备标识。
+当前流为主流：1，
+当前流为备流: 0。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MasterFlag?: number
+}
+
+/**
  * CreateLiveSnapshotTemplate请求参数结构体
  */
 export interface CreateLiveSnapshotTemplateRequest {
@@ -9395,41 +9561,33 @@ export interface StopScreenshotTaskResponse {
 }
 
 /**
- * 录制任务
+ * 禁推流列表
  */
-export interface RecordTask {
-  /**
-   * 录制任务ID。
-   */
-  TaskId: string
-  /**
-   * 推流域名。
-   */
-  DomainName: string
-  /**
-   * 推流路径。
-   */
-  AppName: string
+export interface ForbidStreamInfo {
   /**
    * 流名称。
    */
-  StreamName: string
+  StreamName?: string
   /**
-   * 任务开始时间，Unix时间戳。
+   * 创建时间。
+注：此字段为北京时间（UTC+8时区）。
    */
-  StartTime: number
+  CreateTime?: string
   /**
-   * 任务结束时间，Unix时间戳。
+   * 禁推过期时间。
+注：此字段为北京时间（UTC+8时区）。
    */
-  EndTime: number
+  ExpireTime?: string
   /**
-   * 录制模板ID。
+   * 推流路径。
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  TemplateId: number
+  AppName?: string
   /**
-   * 调用 StopRecordTask 停止任务时间，Unix时间戳。值为0表示未曾调用接口停止任务。
+   * 推流域名。
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Stopped: number
+  DomainName?: string
 }
 
 /**

@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { UploadImageResponse, RenewDomainBatchResponse, BatchModifyDomainInfoRequest, CreateDomainRedemptionResponse, UpdateProhibitionBatchRequest, TransferInDomainBatchResponse, DeleteTemplateResponse, TransferInDomainBatchRequest, CreateDomainBatchResponse, SendPhoneEmailCodeResponse, ModifyDomainDNSBatchResponse, DeletePhoneEmailRequest, DescribeTemplateResponse, UpdateProhibitionBatchResponse, CheckDomainResponse, DescribeDomainSimpleInfoRequest, CreatePhoneEmailRequest, DescribeTemplateRequest, RenewDomainBatchRequest, BatchModifyDomainInfoResponse, ModifyDomainOwnerBatchResponse, DescribeDomainBaseInfoResponse, DescribeTemplateListResponse, TransferProhibitionBatchRequest, DescribeTemplateListRequest, DescribeBatchOperationLogDetailsRequest, DescribeDomainNameListResponse, DescribeDomainPriceListResponse, CreateTemplateResponse, DeleteTemplateRequest, CheckBatchStatusRequest, SetDomainAutoRenewResponse, CreateTemplateRequest, DescribeDomainPriceListRequest, CreateDomainBatchRequest, DescribeDomainSimpleInfoResponse, DescribeDomainBaseInfoRequest, DescribePhoneEmailListRequest, DescribeDomainNameListRequest, DescribeBatchOperationLogsRequest, UploadImageRequest, CheckDomainRequest, DescribeBatchOperationLogsResponse, TransferProhibitionBatchResponse, ModifyDomainDNSBatchRequest, DescribeBatchOperationLogDetailsResponse, DescribePhoneEmailListResponse, CheckBatchStatusResponse, DeletePhoneEmailResponse, CreateDomainRedemptionRequest, CreatePhoneEmailResponse, SetDomainAutoRenewRequest, ModifyDomainOwnerBatchRequest, SendPhoneEmailCodeRequest } from "./domain_models";
+import { UploadImageResponse, RenewDomainBatchResponse, BatchModifyDomainInfoRequest, CreateDomainRedemptionResponse, UpdateProhibitionBatchRequest, TransferInDomainBatchResponse, DeleteTemplateResponse, TransferInDomainBatchRequest, CreateDomainBatchResponse, SendPhoneEmailCodeResponse, ModifyDomainDNSBatchResponse, DeletePhoneEmailRequest, DescribeTemplateResponse, UpdateProhibitionBatchResponse, CheckDomainResponse, DescribeDomainSimpleInfoRequest, CreatePhoneEmailRequest, DescribeTemplateRequest, RenewDomainBatchRequest, BatchModifyDomainInfoResponse, ModifyDomainOwnerBatchResponse, DescribeDomainBaseInfoResponse, DescribeTemplateListResponse, TransferProhibitionBatchRequest, DescribeTemplateListRequest, DescribeBatchOperationLogDetailsRequest, DescribeDomainNameListResponse, CreateCustomDnsHostResponse, DescribeDomainPriceListResponse, CreateTemplateResponse, DeleteTemplateRequest, CheckBatchStatusRequest, SetDomainAutoRenewResponse, CreateTemplateRequest, DescribeDomainPriceListRequest, SetDomainAutoRenewRequest, CreateDomainBatchRequest, DescribeDomainSimpleInfoResponse, DescribeDomainBaseInfoRequest, DescribePhoneEmailListRequest, DescribeDomainNameListRequest, DescribeBatchOperationLogsRequest, UploadImageRequest, CheckDomainRequest, DescribeBatchOperationLogsResponse, TransferProhibitionBatchResponse, CreateCustomDnsHostRequest, ModifyDomainDNSBatchRequest, DescribeBatchOperationLogDetailsResponse, DescribePhoneEmailListResponse, CheckBatchStatusResponse, DeletePhoneEmailResponse, CreateDomainRedemptionRequest, CreatePhoneEmailResponse, ModifyDomainOwnerBatchRequest, SendPhoneEmailCodeRequest } from "./domain_models";
 /**
  * domain client
  * @class
@@ -11,10 +11,6 @@ export declare class Client extends AbstractClient {
      * 本接口 ( SetDomainAutoRenew ) 用于设置域名自动续费。
      */
     SetDomainAutoRenew(req: SetDomainAutoRenewRequest, cb?: (error: string, rep: SetDomainAutoRenewResponse) => void): Promise<SetDomainAutoRenewResponse>;
-    /**
-     * 本接口 ( ModifyDomainDNSBatch) 用于批量域名 DNS 修改 。
-     */
-    ModifyDomainDNSBatch(req: ModifyDomainDNSBatchRequest, cb?: (error: string, rep: ModifyDomainDNSBatchResponse) => void): Promise<ModifyDomainDNSBatchResponse>;
     /**
      * 本接口 ( CheckBatchStatus ) 用于查询批量操作日志状态 。
      */
@@ -27,6 +23,10 @@ export declare class Client extends AbstractClient {
      * 此接口用于删除已验证的手机邮箱
      */
     DeletePhoneEmail(req: DeletePhoneEmailRequest, cb?: (error: string, rep: DeletePhoneEmailResponse) => void): Promise<DeletePhoneEmailResponse>;
+    /**
+     * 此接口用于发送手机邮箱验证码。
+     */
+    SendPhoneEmailCode(req: SendPhoneEmailCodeRequest, cb?: (error: string, rep: SendPhoneEmailCodeResponse) => void): Promise<SendPhoneEmailCodeResponse>;
     /**
      * 本接口 (  DescribeDomainNameList ) 我的域名列表。
 
@@ -50,10 +50,6 @@ export declare class Client extends AbstractClient {
      */
     DeleteTemplate(req: DeleteTemplateRequest, cb?: (error: string, rep: DeleteTemplateResponse) => void): Promise<DeleteTemplateResponse>;
     /**
-     * 创建赎回订单。
-     */
-    CreateDomainRedemption(req: CreateDomainRedemptionRequest, cb?: (error: string, rep: CreateDomainRedemptionResponse) => void): Promise<CreateDomainRedemptionResponse>;
-    /**
      * 检查域名是否可以注册。
      */
     CheckDomain(req: CheckDomainRequest, cb?: (error: string, rep: CheckDomainResponse) => void): Promise<CheckDomainResponse>;
@@ -63,6 +59,10 @@ export declare class Client extends AbstractClient {
      */
     RenewDomainBatch(req: RenewDomainBatchRequest, cb?: (error: string, rep: RenewDomainBatchResponse) => void): Promise<RenewDomainBatchResponse>;
     /**
+     * 创建自定义DNS Host
+     */
+    CreateCustomDnsHost(req: CreateCustomDnsHostRequest, cb?: (error: string, rep: CreateCustomDnsHostResponse) => void): Promise<CreateCustomDnsHostResponse>;
+    /**
      * 本接口 (DescribeTemplate) 用于获取模板信息。
      */
     DescribeTemplate(req: DescribeTemplateRequest, cb?: (error: string, rep: DescribeTemplateResponse) => void): Promise<DescribeTemplateResponse>;
@@ -70,6 +70,10 @@ export declare class Client extends AbstractClient {
      * 此接口用于创建有效的手机、邮箱
      */
     CreatePhoneEmail(req: CreatePhoneEmailRequest, cb?: (error: string, rep: CreatePhoneEmailResponse) => void): Promise<CreatePhoneEmailResponse>;
+    /**
+     * 创建赎回订单。
+     */
+    CreateDomainRedemption(req: CreateDomainRedemptionRequest, cb?: (error: string, rep: CreateDomainRedemptionResponse) => void): Promise<CreateDomainRedemptionResponse>;
     /**
      * 本接口 (DescribeTemplateList) 用于获取信息模板列表。
      */
@@ -103,9 +107,9 @@ export declare class Client extends AbstractClient {
      */
     DescribePhoneEmailList(req: DescribePhoneEmailListRequest, cb?: (error: string, rep: DescribePhoneEmailListResponse) => void): Promise<DescribePhoneEmailListResponse>;
     /**
-     * 此接口用于发送手机邮箱验证码。
+     * 本接口 ( ModifyDomainDNSBatch) 用于批量域名 DNS 修改 。
      */
-    SendPhoneEmailCode(req: SendPhoneEmailCodeRequest, cb?: (error: string, rep: SendPhoneEmailCodeResponse) => void): Promise<SendPhoneEmailCodeResponse>;
+    ModifyDomainDNSBatch(req: ModifyDomainDNSBatchRequest, cb?: (error: string, rep: ModifyDomainDNSBatchResponse) => void): Promise<ModifyDomainDNSBatchResponse>;
     /**
      * 获取域名实名信息详情
      */

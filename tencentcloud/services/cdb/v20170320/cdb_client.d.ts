@@ -598,7 +598,7 @@ export declare class Client extends AbstractClient {
     /**
      * 通过该API，可以开启CPU弹性扩容，包括一次性的手动扩容以及自动弹性扩容。
      */
-    StartCpuExpand(req?: StartCpuExpandRequest, cb?: (error: string, rep: StartCpuExpandResponse) => void): Promise<StartCpuExpandResponse>;
+    StartCpuExpand(req: StartCpuExpandRequest, cb?: (error: string, rep: StartCpuExpandResponse) => void): Promise<StartCpuExpandResponse>;
     /**
      * 本接口(DescribeSupportedPrivileges)用于查询云数据库的支持的权限信息，包括全局权限，数据库权限，表权限以及列权限。
      */

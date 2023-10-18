@@ -2089,7 +2089,7 @@ export interface CreateDatabaseResponse {
   /**
    * 生成的建库执行语句对象。
    */
-  Execution: Execution
+  Execution?: Execution
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2238,11 +2238,11 @@ export interface CheckDataEngineImageCanBeUpgradeResponse {
   /**
    * 当前大版本下，可升级的集群镜像小版本id
    */
-  ChildImageVersionId: string
+  ChildImageVersionId?: string
   /**
    * 是否能够升级
    */
-  IsUpgrade: boolean
+  IsUpgrade?: boolean
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2498,12 +2498,12 @@ export interface TextFile {
   /**
    * 文本类型，本参数取值为TextFile。
    */
-  Format: string
+  Format?: string
   /**
    * 处理文本用的正则表达式。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Regex: string
+  Regex?: string
 }
 
 /**
@@ -2954,30 +2954,30 @@ export interface Partition {
   /**
    * 分区列名。
    */
-  Name: string
+  Name?: string
   /**
    * 分区类型。
    */
-  Type: string
+  Type?: string
   /**
    * 对分区的描述。
    */
-  Comment: string
+  Comment?: string
   /**
    * 隐式分区转换策略
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Transform: string
+  Transform?: string
   /**
    * 转换策略参数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TransformArgs: Array<string>
+  TransformArgs?: Array<string>
   /**
    * 创建时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CreateTime: number
+  CreateTime?: number
 }
 
 /**
@@ -3129,6 +3129,10 @@ export interface CreateDataEngineRequest {
    * spark作业集群session资源配置模板
    */
   SessionResourceTemplate?: SessionResourceTemplate
+  /**
+   * 自动授权
+   */
+  AutoAuthorization?: boolean
 }
 
 /**
@@ -5119,7 +5123,7 @@ export interface CreateTableResponse {
   /**
    * 生成的建表执行语句对象。
    */
-  Execution: Execution
+  Execution?: Execution
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5398,32 +5402,32 @@ export interface DataFormat {
    * 文本格式，TextFile。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TextFile: TextFile
+  TextFile?: TextFile
   /**
    * 文本格式，CSV。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CSV: CSV
+  CSV?: CSV
   /**
    * 文本格式，Json。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Json: Other
+  Json?: Other
   /**
    * Parquet格式
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Parquet: Other
+  Parquet?: Other
   /**
    * ORC格式
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ORC: Other
+  ORC?: Other
   /**
    * AVRO格式
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  AVRO: Other
+  AVRO?: Other
 }
 
 /**
@@ -5718,7 +5722,7 @@ export interface CreateWorkGroupResponse {
   /**
    * 工作组Id，全局唯一
    */
-  WorkGroupId: number
+  WorkGroupId?: number
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5769,15 +5773,15 @@ export interface CheckDataEngineImageCanBeRollbackResponse {
   /**
    * 回滚后日志记录id
    */
-  ToRecordId: string
+  ToRecordId?: string
   /**
    * 回滚前日志记录id
    */
-  FromRecordId: string
+  FromRecordId?: string
   /**
    * 是否能够回滚
    */
-  IsRollback: boolean
+  IsRollback?: boolean
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6407,7 +6411,7 @@ export interface Other {
   /**
    * 枚举类型，默认值为Json，可选值为[Json, Parquet, ORC, AVRD]之一。
    */
-  Format: string
+  Format?: string
 }
 
 /**
@@ -6611,7 +6615,7 @@ export interface DescribeTableResponse {
   /**
    * 数据表对象
    */
-  Table: TableResponseInfo
+  Table?: TableResponseInfo
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6667,52 +6671,52 @@ export interface TableResponseInfo {
   /**
    * 数据表基本信息。
    */
-  TableBaseInfo: TableBaseInfo
+  TableBaseInfo?: TableBaseInfo
   /**
    * 数据表列信息。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Columns: Array<Column>
+  Columns?: Array<Column>
   /**
    * 数据表分块信息。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Partitions: Array<Partition>
+  Partitions?: Array<Partition>
   /**
    * 数据存储路径。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Location: string
+  Location?: string
   /**
    * 数据表属性信息。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Properties: Array<Property>
+  Properties?: Array<Property>
   /**
    * 数据表更新时间, 单位: ms。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ModifiedTime: string
+  ModifiedTime?: string
   /**
    * 数据表创建时间,单位: ms。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CreateTime: string
+  CreateTime?: string
   /**
    * 数据格式。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  InputFormat: string
+  InputFormat?: string
   /**
    * 数据表存储大小（单位：Byte）
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  StorageSize: number
+  StorageSize?: number
   /**
    * 数据表行数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RecordCount: number
+  RecordCount?: number
   /**
    * xxxx
 注意：此字段可能返回 null，表示取不到有效值。
@@ -7015,11 +7019,11 @@ export interface DescribeViewsResponse {
   /**
    * 视图对象列表。
    */
-  ViewList: Array<ViewResponseInfo>
+  ViewList?: Array<ViewResponseInfo>
   /**
    * 实例总数。
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -7232,7 +7236,7 @@ export interface DescribeDataEnginesRequest {
    */
   Offset?: number
   /**
-   * 过滤类型，支持如下的过滤类型，传参Name应为以下其中一个, data-engine-name - String（数据引擎名称）：engine-type - String（引擎类型：spark：spark 引擎，presto：presto引擎），state - String (数据引擎状态 -2已删除 -1失败 0初始化中 1挂起 2运行中 3准备删除 4删除中) ， mode - String（计费模式 0共享模式 1按量计费 2包年包月） ， create-time - String（创建时间，10位时间戳） message - String （描述信息），cluster-type - String (集群资源类型 spark_private/presto_private/presto_cu/spark_cu)，engine-id - String（数据引擎ID），key-word - String（数据引擎名称或集群资源类型或描述信息模糊搜索），engine-exec-type - String（引擎执行任务类型，SQL/BATCH）
+   * 过滤类型，支持如下的过滤类型，传参Name应为以下其中一个, data-engine-name - String（数据引擎名称）：engine-type - String（引擎类型：spark：spark 引擎，presto：presto引擎），state - String (数据引擎状态 -2已删除 -1失败 0初始化中 1挂起 2运行中 3准备删除 4删除中) ， mode - String（计费模式 0共享模式 1按量计费 2包年包月） ， create-time - String（创建时间，10位时间戳） message - String （描述信息），cluster-type - String (集群资源类型 spark_private/presto_private/presto_cu/spark_cu/kyuubi_cu)，engine-id - String（数据引擎ID），key-word - String（数据引擎名称或集群资源类型或描述信息模糊搜索），engine-exec-type - String（引擎执行任务类型，SQL/BATCH），engine-network-id - String（引擎网络Id）
    */
   Filters?: Array<Filter>
   /**
@@ -7264,7 +7268,7 @@ export interface DescribeDataEnginesRequest {
    */
   EngineExecType?: string
   /**
-   * 引擎类型，有效值：spark/presto
+   * 引擎类型，有效值：spark/presto/kyuubi，为空时默认获取非kyuubi引擎（网关引擎）
    */
   EngineType?: string
   /**
@@ -7563,6 +7567,11 @@ export interface DataEngineInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SessionResourceTemplate?: SessionResourceTemplate
+  /**
+   * 自动授权开关
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AutoAuthorization?: boolean
 }
 
 /**
@@ -8008,7 +8017,7 @@ export interface DatabaseResponseInfo {
   /**
    * 数据库名称。
    */
-  DatabaseName: string
+  DatabaseName?: string
   /**
    * 数据库描述信息，长度 0~256。
 注意：此字段可能返回 null，表示取不到有效值。
@@ -8033,27 +8042,27 @@ export interface DatabaseResponseInfo {
    * cos存储路径
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Location: string
+  Location?: string
   /**
    * 建库用户昵称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  UserAlias: string
+  UserAlias?: string
   /**
    * 建库用户ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  UserSubUin: string
+  UserSubUin?: string
   /**
    * 数据治理配置项
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  GovernPolicy: DataGovernPolicy
+  GovernPolicy?: DataGovernPolicy
   /**
    * 数据库ID（无效字段）
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DatabaseId: string
+  DatabaseId?: string
 }
 
 /**

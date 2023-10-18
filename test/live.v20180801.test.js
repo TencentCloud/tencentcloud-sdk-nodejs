@@ -398,6 +398,16 @@ it("live.v20180801.DescribeLiveStreamOnlineList", async function () {
     }
 })
 
+it("live.v20180801.EnableOptimalSwitching", async function () {
+    try {
+       const data = await client.EnableOptimalSwitching({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("live.v20180801.DeleteLiveCallbackTemplate", async function () {
     try {
        const data = await client.DeleteLiveCallbackTemplate({})
@@ -1118,6 +1128,16 @@ it("live.v20180801.DescribeDeliverBandwidthList", async function () {
     }
 })
 
+it("live.v20180801.SwitchBackupStream", async function () {
+    try {
+       const data = await client.SwitchBackupStream({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("live.v20180801.DescribeLiveDomainPlayInfoList", async function () {
     try {
        const data = await client.DescribeLiveDomainPlayInfoList({})
@@ -1391,6 +1411,16 @@ it("live.v20180801.ModifyLiveDomainReferer", async function () {
 it("live.v20180801.DeleteLiveRecordTemplate", async function () {
     try {
        const data = await client.DeleteLiveRecordTemplate({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("live.v20180801.DescribeBackupStreamList", async function () {
+    try {
+       const data = await client.DescribeBackupStreamList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

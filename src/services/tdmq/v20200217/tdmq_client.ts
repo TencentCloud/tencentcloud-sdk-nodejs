@@ -32,12 +32,13 @@ import {
   ModifyRabbitMQVirtualHostRequest,
   ModifyEnvironmentAttributesRequest,
   DeleteClusterResponse,
-  SendBatchMessagesResponse,
+  RocketMQTopicDistribution,
   ModifyCmqSubscriptionAttributeResponse,
   CreateCmqTopicRequest,
   ModifyRabbitMQVipInstanceRequest,
-  RocketMQTopicDistribution,
-  DescribeRocketMQNamespacesResponse,
+  ImportRocketMQTopicsResponse,
+  DescribeRocketMQMigratingTopicListRequest,
+  ResetRocketMQConsumerOffSetResponse,
   ModifyRocketMQInstanceSpecRequest,
   BindCluster,
   ModifyRoleResponse,
@@ -46,6 +47,7 @@ import {
   DescribeRocketMQMsgTraceResponse,
   RabbitMQPrivateVirtualHost,
   DescribeRocketMQPublicAccessPointRequest,
+  SendMessagesRequest,
   RabbitMQVipInstance,
   DescribeCmqQueuesResponse,
   CreateRabbitMQVipInstanceRequest,
@@ -53,16 +55,18 @@ import {
   CreateRabbitMQVirtualHostResponse,
   DescribeRabbitMQNodeListRequest,
   DescribeNamespaceBundlesOptResponse,
-  RocketMQInstanceConfig,
+  ReceiveMessageRequest,
   DescribeBindVpcsResponse,
   RewindCmqQueueResponse,
-  ModifyPublicNetworkAccessPointRequest,
+  DescribeRocketMQSmoothMigrationTaskRequest,
   DeleteClusterRequest,
   CmqSubscription,
+  DescribeRocketMQSourceClusterGroupListResponse,
   SetRocketMQPublicAccessPointResponse,
   DeleteRocketMQGroupRequest,
   RocketMQGroup,
   PublicAccessRule,
+  RocketMQSmoothMigrationTaskItem,
   VpcInfo,
   ModifyRabbitMQUserRequest,
   RabbitMQClusterWhiteListInfo,
@@ -80,6 +84,7 @@ import {
   CreateEnvironmentResponse,
   RabbitMQVirtualHostStatistics,
   CreateSubscriptionResponse,
+  ModifyEnvironmentRoleRequest,
   SendMsgResponse,
   ModifyCmqTopicAttributeResponse,
   DescribeCmqSubscriptionDetailRequest,
@@ -108,7 +113,7 @@ import {
   ModifyRocketMQClusterRequest,
   CreateRocketMQVipInstanceResponse,
   AcknowledgeMessageRequest,
-  ResetRocketMQConsumerOffSetResponse,
+  ImportRocketMQConsumerGroupsRequest,
   DescribeRocketMQVipInstanceDetailResponse,
   PublishCmqMsgResponse,
   DescribePublishersRequest,
@@ -134,11 +139,13 @@ import {
   DeleteRocketMQVipInstanceRequest,
   DescribeRocketMQMsgRequest,
   SendMessagesResponse,
-  ReceiveMessageRequest,
+  DescribeRocketMQNamespacesResponse,
   CreateTopicRequest,
   DescribeTopicsRequest,
   DeleteEnvironmentsResponse,
+  DescribeRocketMQMigratingTopicListResponse,
   ModifyAMQPClusterRequest,
+  ReceiveMessageResponse,
   DescribeEnvironmentRolesResponse,
   DescribeRocketMQPublicAccessPointResponse,
   DescribeRocketMQMsgTraceRequest,
@@ -165,6 +172,8 @@ import {
   DescribeRocketMQClustersResponse,
   DeleteRolesResponse,
   EnvironmentRoleSet,
+  RocketMQTopicConfigOutput,
+  DescribeRocketMQSourceClusterTopicListRequest,
   VpcConfig,
   RocketMQClusterRecentStats,
   ModifyRocketMQTopicRequest,
@@ -179,12 +188,16 @@ import {
   PulsarProInstance,
   PartitionsTopic,
   DescribeRocketMQGroupsResponse,
+  RocketMQMigrationTopicDistribution,
   ResetMsgSubOffsetByTimestampResponse,
   CreateClusterResponse,
+  DescribeRocketMQSmoothMigrationTaskListRequest,
   DescribeCmqDeadLetterSourceQueuesRequest,
   DeleteRocketMQNamespaceRequest,
   DescribeRolesRequest,
+  DescribeRocketMQSmoothMigrationTaskListResponse,
   CreateClusterRequest,
+  DescribeRocketMQSourceClusterTopicListResponse,
   DescribeRabbitMQVirtualHostListRequest,
   DescribeAMQPClustersRequest,
   ModifyCmqQueueAttributeResponse,
@@ -231,14 +244,17 @@ import {
   Cluster,
   RetentionPolicy,
   RocketMQClusterConfig,
+  RocketMQGroupConfig,
+  RocketMQGroupConfigOutput,
   CreateRocketMQClusterResponse,
-  ReceiveMessageResponse,
+  ModifyPublicNetworkAccessPointRequest,
   DeleteRocketMQNamespaceResponse,
   DescribePublishersResponse,
   ModifyRabbitMQVipInstanceResponse,
   SendMsgRequest,
   ResetRocketMQConsumerOffSetRequest,
   DescribeCmqQueueDetailRequest,
+  DescribeRocketMQSourceClusterGroupListRequest,
   DeleteRabbitMQVirtualHostRequest,
   CreateRocketMQTopicRequest,
   QueueQuota,
@@ -248,8 +264,9 @@ import {
   DeleteEnvironmentRolesRequest,
   ClearCmqQueueResponse,
   ModifyRabbitMQUserResponse,
+  MigrateTopic,
   DescribeNodeHealthOptRequest,
-  TraceResult,
+  DescribeRocketMQSmoothMigrationTaskResponse,
   DeleteRabbitMQVirtualHostResponse,
   PulsarNetworkAccessPointInfo,
   CreateRocketMQTopicResponse,
@@ -266,7 +283,7 @@ import {
   VpcEndpointInfo,
   CreateRoleRequest,
   DescribeRocketMQTopicMsgsRequest,
-  ModifyEnvironmentRoleRequest,
+  ImportRocketMQConsumerGroupsResponse,
   DescribeEnvironmentAttributesResponse,
   Role,
   ModifyAMQPClusterResponse,
@@ -274,10 +291,12 @@ import {
   AMQPClusterConfig,
   Tag,
   CreateRocketMQNamespaceResponse,
+  RocketMQInstanceConfig,
   SendBatchMessagesRequest,
   DeleteCmqTopicRequest,
   DescribeRabbitMQNodeListResponse,
   DescribePulsarProInstanceDetailResponse,
+  RocketMQTopicConfig,
   DescribeNodeHealthOptResponse,
   ModifyPublicNetworkAccessPointResponse,
   PublishCmqMsgRequest,
@@ -287,6 +306,7 @@ import {
   RabbitMQPrivateNode,
   Topic,
   DeleteCmqSubscribeResponse,
+  TraceResult,
   DeleteRabbitMQVipInstanceRequest,
   DescribePublisherSummaryRequest,
   DeleteSubscriptionsRequest,
@@ -297,7 +317,8 @@ import {
   DescribeRabbitMQVipInstancesRequest,
   AMQPClusterDetail,
   DescribeClusterDetailResponse,
-  SendMessagesRequest,
+  SendBatchMessagesResponse,
+  ImportRocketMQTopicsRequest,
   CreateEnvironmentRoleRequest,
   DeleteRabbitMQVipInstanceResponse,
   DescribeAllTenantsRequest,
@@ -421,6 +442,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteRocketMQGroupResponse) => void
   ): Promise<DeleteRocketMQGroupResponse> {
     return this.request("DeleteRocketMQGroup", req, cb)
+  }
+
+  /**
+   * 用于查询RocketMQ平滑迁移任务列表
+   */
+  async DescribeRocketMQSmoothMigrationTaskList(
+    req: DescribeRocketMQSmoothMigrationTaskListRequest,
+    cb?: (error: string, rep: DescribeRocketMQSmoothMigrationTaskListResponse) => void
+  ): Promise<DescribeRocketMQSmoothMigrationTaskListResponse> {
+    return this.request("DescribeRocketMQSmoothMigrationTaskList", req, cb)
   }
 
   /**
@@ -575,13 +606,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建cmq订阅接口
+   * 输入迁移任务id和要导入的Group，导入后台
    */
-  async CreateCmqSubscribe(
-    req: CreateCmqSubscribeRequest,
-    cb?: (error: string, rep: CreateCmqSubscribeResponse) => void
-  ): Promise<CreateCmqSubscribeResponse> {
-    return this.request("CreateCmqSubscribe", req, cb)
+  async ImportRocketMQConsumerGroups(
+    req: ImportRocketMQConsumerGroupsRequest,
+    cb?: (error: string, rep: ImportRocketMQConsumerGroupsResponse) => void
+  ): Promise<ImportRocketMQConsumerGroupsResponse> {
+    return this.request("ImportRocketMQConsumerGroups", req, cb)
   }
 
   /**
@@ -675,6 +706,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询Topic迁移状态列表，源集群和目标集群客户端数量信息需要配合DescribeRocketMQSmoothMigrationTaskTopicInsNum接口查询
+   */
+  async DescribeRocketMQMigratingTopicList(
+    req: DescribeRocketMQMigratingTopicListRequest,
+    cb?: (error: string, rep: DescribeRocketMQMigratingTopicListResponse) => void
+  ): Promise<DescribeRocketMQMigratingTopicListResponse> {
+    return this.request("DescribeRocketMQMigratingTopicList", req, cb)
+  }
+
+  /**
    * 查询cmq订阅详情
    */
   async DescribeCmqSubscriptionDetail(
@@ -705,6 +746,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 重置指定Group的消费位点到指定时间戳
+   */
+  async ResetRocketMQConsumerOffSet(
+    req: ResetRocketMQConsumerOffSetRequest,
+    cb?: (error: string, rep: ResetRocketMQConsumerOffSetResponse) => void
+  ): Promise<ResetRocketMQConsumerOffSetResponse> {
+    return this.request("ResetRocketMQConsumerOffSet", req, cb)
+  }
+
+  /**
    * 获取集群列表
    */
   async DescribeClusters(
@@ -712,6 +763,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeClustersResponse) => void
   ): Promise<DescribeClustersResponse> {
     return this.request("DescribeClusters", req, cb)
+  }
+
+  /**
+   * 平滑迁移过程获取源集群topic列表接口
+   */
+  async DescribeRocketMQSourceClusterTopicList(
+    req: DescribeRocketMQSourceClusterTopicListRequest,
+    cb?: (error: string, rep: DescribeRocketMQSourceClusterTopicListResponse) => void
+  ): Promise<DescribeRocketMQSourceClusterTopicListResponse> {
+    return this.request("DescribeRocketMQSourceClusterTopicList", req, cb)
   }
 
   /**
@@ -725,13 +786,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 重置指定Group的消费位点到指定时间戳
+   * 导入topic列表
    */
-  async ResetRocketMQConsumerOffSet(
-    req: ResetRocketMQConsumerOffSetRequest,
-    cb?: (error: string, rep: ResetRocketMQConsumerOffSetResponse) => void
-  ): Promise<ResetRocketMQConsumerOffSetResponse> {
-    return this.request("ResetRocketMQConsumerOffSet", req, cb)
+  async ImportRocketMQTopics(
+    req: ImportRocketMQTopicsRequest,
+    cb?: (error: string, rep: ImportRocketMQTopicsResponse) => void
+  ): Promise<ImportRocketMQTopicsResponse> {
+    return this.request("ImportRocketMQTopics", req, cb)
   }
 
   /**
@@ -1045,6 +1106,16 @@ BatchReceivePolicy 的接口会一次性返回多条消息：
   }
 
   /**
+   * 用于获取RocketMQ平滑迁移任务详情
+   */
+  async DescribeRocketMQSmoothMigrationTask(
+    req: DescribeRocketMQSmoothMigrationTaskRequest,
+    cb?: (error: string, rep: DescribeRocketMQSmoothMigrationTaskResponse) => void
+  ): Promise<DescribeRocketMQSmoothMigrationTaskResponse> {
+    return this.request("DescribeRocketMQSmoothMigrationTask", req, cb)
+  }
+
+  /**
    * 修改指定命名空间的属性值
    */
   async ModifyEnvironmentAttributes(
@@ -1185,6 +1256,16 @@ BatchReceivePolicy 的接口会一次性返回多条消息：
   }
 
   /**
+   * 创建cmq订阅接口
+   */
+  async CreateCmqSubscribe(
+    req: CreateCmqSubscribeRequest,
+    cb?: (error: string, rep: CreateCmqSubscribeResponse) => void
+  ): Promise<CreateCmqSubscribeResponse> {
+    return this.request("CreateCmqSubscribe", req, cb)
+  }
+
+  /**
    * 更新RocketMQ命名空间
    */
   async ModifyRocketMQNamespace(
@@ -1304,6 +1385,16 @@ BatchReceivePolicy 的接口会一次性返回多条消息：
     cb?: (error: string, rep: DescribeCmqQueueDetailResponse) => void
   ): Promise<DescribeCmqQueueDetailResponse> {
     return this.request("DescribeCmqQueueDetail", req, cb)
+  }
+
+  /**
+   * 平滑迁移过程获取源集群group列表接口
+   */
+  async DescribeRocketMQSourceClusterGroupList(
+    req: DescribeRocketMQSourceClusterGroupListRequest,
+    cb?: (error: string, rep: DescribeRocketMQSourceClusterGroupListResponse) => void
+  ): Promise<DescribeRocketMQSourceClusterGroupListResponse> {
+    return this.request("DescribeRocketMQSourceClusterGroupList", req, cb)
   }
 
   /**

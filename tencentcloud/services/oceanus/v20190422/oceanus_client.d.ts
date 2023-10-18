@@ -22,7 +22,7 @@ export declare class Client extends AbstractClient {
     /**
      * 通过Sql gateway执行satement
      */
-    RunSqlGatewayStatement(req?: RunSqlGatewayStatementRequest, cb?: (error: string, rep: RunSqlGatewayStatementResponse) => void): Promise<RunSqlGatewayStatementResponse>;
+    RunSqlGatewayStatement(req: RunSqlGatewayStatementRequest, cb?: (error: string, rep: RunSqlGatewayStatementResponse) => void): Promise<RunSqlGatewayStatementResponse>;
     /**
      * 删除资源版本
      */
@@ -54,7 +54,7 @@ export declare class Client extends AbstractClient {
     /**
      * 查询Sql Gateway的Statement执行结果
      */
-    FetchSqlGatewayStatementResult(req?: FetchSqlGatewayStatementResultRequest, cb?: (error: string, rep: FetchSqlGatewayStatementResultResponse) => void): Promise<FetchSqlGatewayStatementResultResponse>;
+    FetchSqlGatewayStatementResult(req: FetchSqlGatewayStatementResultRequest, cb?: (error: string, rep: FetchSqlGatewayStatementResultResponse) => void): Promise<FetchSqlGatewayStatementResultResponse>;
     /**
      * 查询集群
      */

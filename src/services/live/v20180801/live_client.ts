@@ -23,7 +23,7 @@ import {
   ModifyPullStreamStatusRequest,
   DeleteLiveRecordTemplateRequest,
   DescribeLiveTranscodeTemplatesRequest,
-  DescribeLiveStreamMonitorListRequest,
+  DescribeBackupStreamListResponse,
   DescribeLiveSnapshotTemplateRequest,
   DescribePlayErrorCodeDetailInfoListRequest,
   DescribeBillBandwidthAndFluxListRequest,
@@ -54,6 +54,7 @@ import {
   DeleteLiveWatermarkRuleRequest,
   DescribeLiveWatermarksRequest,
   DescribeLiveWatermarkRulesRequest,
+  EnableOptimalSwitchingRequest,
   ProIspPlaySumInfo,
   ModifyLiveTranscodeTemplateResponse,
   DescribeStreamDayPlayInfoListRequest,
@@ -96,6 +97,7 @@ import {
   ResumeLiveStreamRequest,
   DescribeBillBandwidthAndFluxListResponse,
   DescribeLiveDomainPlayInfoListResponse,
+  DescribeLiveStreamMonitorListRequest,
   HttpCodeValue,
   DeleteLiveStreamMonitorResponse,
   DeleteLiveCallbackTemplateRequest,
@@ -120,7 +122,6 @@ import {
   DeleteLiveCallbackRuleResponse,
   DescribeStreamPlayInfoListRequest,
   PushAuthKeyInfo,
-  ForbidStreamInfo,
   DescribeLivePlayAuthKeyRequest,
   CreateLiveTimeShiftRuleResponse,
   DeleteLiveTranscodeRuleResponse,
@@ -144,6 +145,7 @@ import {
   DescribeDeliverLogDownListResponse,
   ModifyLivePullStreamTaskRequest,
   PullStreamConfig,
+  DescribeBackupStreamListRequest,
   DescribeDeliverLogDownListRequest,
   DescribeLiveStreamPushInfoListRequest,
   DescribeLiveTimeShiftTemplatesRequest,
@@ -155,6 +157,7 @@ import {
   CreateLivePadTemplateResponse,
   DescribeLiveRecordTemplatesResponse,
   DescribeScreenshotTaskRequest,
+  BackupStreamGroupInfo,
   ScreenshotTask,
   DeletePullStreamConfigResponse,
   DeleteLiveTimeShiftRuleResponse,
@@ -176,6 +179,7 @@ import {
   TemplateInfo,
   DescribeLiveStreamPushInfoListResponse,
   CancelCommonMixStreamRequest,
+  SwitchBackupStreamRequest,
   DeleteLiveStreamMonitorRequest,
   DescribeLiveDelayInfoListResponse,
   ClientIpPlaySumInfo,
@@ -206,6 +210,7 @@ import {
   DescribeLivePullStreamTaskStatusRequest,
   RestartLivePullStreamTaskRequest,
   DelayInfo,
+  EnableOptimalSwitchingResponse,
   DescribeLiveStreamMonitorRequest,
   DescribeLiveSnapshotRulesRequest,
   DeleteLiveRecordRuleResponse,
@@ -345,6 +350,7 @@ import {
   DescribeLiveTimeShiftRulesRequest,
   DescribePlayErrorCodeSumInfoListRequest,
   DescribeLiveTimeShiftBillInfoListRequest,
+  RecordTask,
   PushQualityData,
   DescribeLiveCertRequest,
   PlaySumStatInfo,
@@ -356,6 +362,7 @@ import {
   DescribeLivePackageInfoRequest,
   DescribeLiveStreamMonitorListResponse,
   DeleteLiveTimeShiftTemplateRequest,
+  SwitchBackupStreamResponse,
   CdnPlayStatData,
   AddLiveDomainResponse,
   ModifyPullStreamConfigResponse,
@@ -389,6 +396,7 @@ import {
   CreateLiveTranscodeRuleResponse,
   CreateLiveTranscodeTemplateResponse,
   ModifyLivePadTemplateRequest,
+  BackupStreamDetailData,
   CreateLiveSnapshotTemplateRequest,
   ModifyLiveCallbackTemplateRequest,
   DescribeMonitorReportRequest,
@@ -397,7 +405,7 @@ import {
   DescribeLiveXP2PDetailInfoListRequest,
   ModifyLivePushAuthKeyResponse,
   StopScreenshotTaskResponse,
-  RecordTask,
+  ForbidStreamInfo,
   DescribeTimeShiftRecordDetailResponse,
   DeleteLiveDomainResponse,
 } from "./live_models"
@@ -833,6 +841,17 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeLiveStreamOnlineListResponse) => void
   ): Promise<DescribeLiveStreamOnlineListResponse> {
     return this.request("DescribeLiveStreamOnlineList", req, cb)
+  }
+
+  /**
+     * 启用择优调度。
+注意：流维度的择优调度，当主备流结束后自动失效。
+     */
+  async EnableOptimalSwitching(
+    req: EnableOptimalSwitchingRequest,
+    cb?: (error: string, rep: EnableOptimalSwitchingResponse) => void
+  ): Promise<EnableOptimalSwitchingResponse> {
+    return this.request("EnableOptimalSwitching", req, cb)
   }
 
   /**
@@ -1588,6 +1607,16 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
   }
 
   /**
+   * 调用该接口实现切换当前播放所使用的主备流。
+   */
+  async SwitchBackupStream(
+    req: SwitchBackupStreamRequest,
+    cb?: (error: string, rep: SwitchBackupStreamResponse) => void
+  ): Promise<SwitchBackupStreamResponse> {
+    return this.request("SwitchBackupStream", req, cb)
+  }
+
+  /**
      * 该接口为监控数据接口，数据采集及统计方式与计费数据不同，仅供运营分析使用，不能用于计费对账参考。
 查询实时的域名维度下行播放数据，由于数据处理有耗时，接口默认查询4分钟前的准实时数据。
      */
@@ -1900,6 +1929,20 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
     cb?: (error: string, rep: DeleteLiveRecordTemplateResponse) => void
   ): Promise<DeleteLiveRecordTemplateResponse> {
     return this.request("DeleteLiveRecordTemplate", req, cb)
+  }
+
+  /**
+     * 返回正在直播中的流列表。适用于推流成功后查询在线流信息。
+
+注意：
+1. 该接口仅提供辅助查询在线流列表功能，业务重要场景不可强依赖该接口。
+2. 该接口仅适用于流数少于2万路的情况，对于流数较大用户请联系售后。
+     */
+  async DescribeBackupStreamList(
+    req: DescribeBackupStreamListRequest,
+    cb?: (error: string, rep: DescribeBackupStreamListResponse) => void
+  ): Promise<DescribeBackupStreamListResponse> {
+    return this.request("DescribeBackupStreamList", req, cb)
   }
 
   /**

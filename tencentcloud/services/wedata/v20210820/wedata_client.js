@@ -65,6 +65,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("KillScheduleInstances", req, cb);
     }
     /**
+     * 开发空间-获取数据开发脚本信息
+     */
+    async GetFileInfo(req, cb) {
+        return this.request("GetFileInfo", req, cb);
+    }
+    /**
      * 检查规则名称是否重复
      */
     async CheckDuplicateRuleName(req, cb) {

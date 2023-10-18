@@ -34,12 +34,6 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("SetDomainAutoRenew", req, cb);
     }
     /**
-     * 本接口 ( ModifyDomainDNSBatch) 用于批量域名 DNS 修改 。
-     */
-    async ModifyDomainDNSBatch(req, cb) {
-        return this.request("ModifyDomainDNSBatch", req, cb);
-    }
-    /**
      * 本接口 ( CheckBatchStatus ) 用于查询批量操作日志状态 。
      */
     async CheckBatchStatus(req, cb) {
@@ -56,6 +50,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DeletePhoneEmail(req, cb) {
         return this.request("DeletePhoneEmail", req, cb);
+    }
+    /**
+     * 此接口用于发送手机邮箱验证码。
+     */
+    async SendPhoneEmailCode(req, cb) {
+        return this.request("SendPhoneEmailCode", req, cb);
     }
     /**
      * 本接口 (  DescribeDomainNameList ) 我的域名列表。
@@ -90,12 +90,6 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteTemplate", req, cb);
     }
     /**
-     * 创建赎回订单。
-     */
-    async CreateDomainRedemption(req, cb) {
-        return this.request("CreateDomainRedemption", req, cb);
-    }
-    /**
      * 检查域名是否可以注册。
      */
     async CheckDomain(req, cb) {
@@ -109,6 +103,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("RenewDomainBatch", req, cb);
     }
     /**
+     * 创建自定义DNS Host
+     */
+    async CreateCustomDnsHost(req, cb) {
+        return this.request("CreateCustomDnsHost", req, cb);
+    }
+    /**
      * 本接口 (DescribeTemplate) 用于获取模板信息。
      */
     async DescribeTemplate(req, cb) {
@@ -119,6 +119,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CreatePhoneEmail(req, cb) {
         return this.request("CreatePhoneEmail", req, cb);
+    }
+    /**
+     * 创建赎回订单。
+     */
+    async CreateDomainRedemption(req, cb) {
+        return this.request("CreateDomainRedemption", req, cb);
     }
     /**
      * 本接口 (DescribeTemplateList) 用于获取信息模板列表。
@@ -169,10 +175,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribePhoneEmailList", req, cb);
     }
     /**
-     * 此接口用于发送手机邮箱验证码。
+     * 本接口 ( ModifyDomainDNSBatch) 用于批量域名 DNS 修改 。
      */
-    async SendPhoneEmailCode(req, cb) {
-        return this.request("SendPhoneEmailCode", req, cb);
+    async ModifyDomainDNSBatch(req, cb) {
+        return this.request("ModifyDomainDNSBatch", req, cb);
     }
     /**
      * 获取域名实名信息详情

@@ -34,11 +34,13 @@ import {
   ResourceLocParam,
   WorkSpaceSetItem,
   DescribeJobSavepointRequest,
+  ResultColumn,
   ResourceItem,
   ResourceLoc,
   CCN,
   DescribeWorkSpacesRequest,
   ResourceRefJobInfo,
+  LogicalType,
   DescribeTreeResourcesRequest,
   DescribeResourceConfigsResponse,
   DescribeClustersRequest,
@@ -49,6 +51,7 @@ import {
   StopJobDescription,
   CreateFolderRequest,
   DeleteTableConfigRequest,
+  StatementResult,
   DeleteResourcesResponse,
   ModifyJobResponse,
   SlotSharingGroupSpec,
@@ -90,6 +93,7 @@ import {
   ClusterGroupSetItem,
   DescribeJobConfigsRequest,
   ModifyJobRequest,
+  ResultData,
   DeleteResourceConfigsResponse,
   Cluster,
   DescribeJobSubmissionLogRequest,
@@ -163,7 +167,7 @@ export class Client extends AbstractClient {
    * 通过Sql gateway执行satement
    */
   async RunSqlGatewayStatement(
-    req?: RunSqlGatewayStatementRequest,
+    req: RunSqlGatewayStatementRequest,
     cb?: (error: string, rep: RunSqlGatewayStatementResponse) => void
   ): Promise<RunSqlGatewayStatementResponse> {
     return this.request("RunSqlGatewayStatement", req, cb)
@@ -243,7 +247,7 @@ export class Client extends AbstractClient {
    * 查询Sql Gateway的Statement执行结果
    */
   async FetchSqlGatewayStatementResult(
-    req?: FetchSqlGatewayStatementResultRequest,
+    req: FetchSqlGatewayStatementResultRequest,
     cb?: (error: string, rep: FetchSqlGatewayStatementResultResponse) => void
   ): Promise<FetchSqlGatewayStatementResultResponse> {
     return this.request("FetchSqlGatewayStatementResult", req, cb)

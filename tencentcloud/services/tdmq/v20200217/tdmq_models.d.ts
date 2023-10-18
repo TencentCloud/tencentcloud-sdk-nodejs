@@ -399,23 +399,17 @@ export interface DeleteClusterResponse {
     RequestId?: string;
 }
 /**
- * SendBatchMessages返回参数结构体
+ * RocketMQtopic分布情况
  */
-export interface SendBatchMessagesResponse {
+export interface RocketMQTopicDistribution {
     /**
-     * 消息的唯一标识
-  注意：此字段可能返回 null，表示取不到有效值。
+     * topic类型
      */
-    MessageId: string;
+    TopicType: string;
     /**
-     * 错误消息，返回为 ""，代表没有错误
-  注意：此字段可能返回 null，表示取不到有效值。
+     * topic数量
      */
-    ErrorMsg: string;
-    /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
+    Count: number;
 }
 /**
  * ModifyCmqSubscriptionAttribute返回参数结构体
@@ -473,30 +467,39 @@ export interface ModifyRabbitMQVipInstanceRequest {
     Remark?: string;
 }
 /**
- * RocketMQtopic分布情况
+ * ImportRocketMQTopics返回参数结构体
  */
-export interface RocketMQTopicDistribution {
+export interface ImportRocketMQTopicsResponse {
     /**
-     * topic类型
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
-    TopicType: string;
-    /**
-     * topic数量
-     */
-    Count: number;
+    RequestId?: string;
 }
 /**
- * DescribeRocketMQNamespaces返回参数结构体
+ * DescribeRocketMQMigratingTopicList请求参数结构体
  */
-export interface DescribeRocketMQNamespacesResponse {
+export interface DescribeRocketMQMigratingTopicListRequest {
     /**
-     * 命名空间列表
+     * 迁移任务名称
      */
-    Namespaces: Array<RocketMQNamespace>;
+    TaskId: string;
     /**
-     * 总条数
+     * 分页大小
      */
-    TotalCount: number;
+    Limit: number;
+    /**
+     * 偏移量
+     */
+    Offset: number;
+    /**
+     * 查询过滤器，支持topicname、MigrationStatus查询
+     */
+    Filters?: Array<Filter>;
+}
+/**
+ * ResetRocketMQConsumerOffSet返回参数结构体
+ */
+export interface ResetRocketMQConsumerOffSetResponse {
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -685,6 +688,36 @@ export interface DescribeRocketMQPublicAccessPointRequest {
      * 集群ID，当前只支持专享集群
      */
     InstanceId: string;
+}
+/**
+ * SendMessages请求参数结构体
+ */
+export interface SendMessagesRequest {
+    /**
+     * 消息要发送的topic的名字, 这里尽量需要使用topic的全路径，即：tenant/namespace/topic。如果不指定，默认使用的是：public/default
+     */
+    Topic: string;
+    /**
+     * 要发送的消息的内容
+     */
+    Payload: string;
+    /**
+     * Token 是用来做鉴权使用的，可以不填，系统会自动获取
+     */
+    StringToken?: string;
+    /**
+     * 设置 producer 的名字，要求全局唯一。该参数建议用户无需手动配置，此时系统会随机生成，如果手动设置有可能会造成创建 Producer 失败进而导致消息发送失败。
+  该参数主要用于某些特定场景下，只允许特定的 Producer 生产消息时设置，用户的大部分场景使用不到该特性。
+     */
+    ProducerName?: string;
+    /**
+     * 设置消息发送的超时时间，默认为30s
+     */
+    SendTimeout?: number;
+    /**
+     * 内存中缓存的最大的生产消息的数量，默认为1000条
+     */
+    MaxPendingMessages?: number;
 }
 /**
  * RabbitMQ专享实例信息
@@ -909,58 +942,37 @@ export interface DescribeNamespaceBundlesOptResponse {
     RequestId?: string;
 }
 /**
- * RocketMQ专享集群实例配置
+ * ReceiveMessage请求参数结构体
  */
-export interface RocketMQInstanceConfig {
+export interface ReceiveMessageRequest {
     /**
-     * 单命名空间TPS上线
+     * 接收消息的topic的名字, 这里尽量需要使用topic的全路径，如果不指定，即：tenant/namespace/topic。默认使用的是：public/default
      */
-    MaxTpsPerNamespace?: number;
+    Topic: string;
     /**
-     * 最大命名空间数量
+     * 订阅者的名字
      */
-    MaxNamespaceNum?: number;
+    SubscriptionName: string;
     /**
-     * 已使用命名空间数量
+     * 默认值为1000，consumer接收的消息会首先存储到receiverQueueSize这个队列中，用作调优接收消息的速率
      */
-    UsedNamespaceNum?: number;
+    ReceiverQueueSize?: number;
     /**
-     * 最大Topic数量
+     * 默认值为：Earliest。用作判定consumer初始接收消息的位置，可选参数为：Earliest, Latest
      */
-    MaxTopicNum?: number;
+    SubInitialPosition?: string;
     /**
-     * 已使用Topic数量
+     * 用于设置BatchReceivePolicy，指在一次batch中最多接收多少条消息，默认是 0。即不开启BatchReceivePolicy
      */
-    UsedTopicNum?: number;
+    MaxNumMessages?: number;
     /**
-     * 最大Group数量
+     * 用于设置BatchReceivePolicy，指在一次batch中最多接收的消息体有多大，单位是 bytes。默认是 0，即不开启BatchReceivePolicy
      */
-    MaxGroupNum?: number;
+    MaxNumBytes?: number;
     /**
-     * 已使用Group数量
+     * 用于设置BatchReceivePolicy，指在一次batch消息的接收z中最多等待的超时时间，单位是毫秒。默认是 0，即不开启BatchReceivePolicy
      */
-    UsedGroupNum?: number;
-    /**
-     * 集群类型
-     */
-    ConfigDisplay?: string;
-    /**
-     * 集群节点数
-     */
-    NodeCount?: number;
-    /**
-     * 节点分布情况
-     */
-    NodeDistribution?: Array<InstanceNodeDistribution>;
-    /**
-     * topic分布情况
-     */
-    TopicDistribution?: Array<RocketMQTopicDistribution>;
-    /**
-     * 每个主题最大队列数
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    MaxQueuesPerTopic?: number;
+    Timeout?: number;
 }
 /**
  * DescribeBindVpcs返回参数结构体
@@ -989,33 +1001,13 @@ export interface RewindCmqQueueResponse {
     RequestId?: string;
 }
 /**
- * ModifyPublicNetworkAccessPoint请求参数结构体
+ * DescribeRocketMQSmoothMigrationTask请求参数结构体
  */
-export interface ModifyPublicNetworkAccessPointRequest {
+export interface DescribeRocketMQSmoothMigrationTaskRequest {
     /**
-     * 集群名字
+     * 任务ID
      */
-    ClusterId: string;
-    /**
-     * 是否开启
-     */
-    PublicNetworkAccessPointStatus: boolean;
-    /**
-     * 必填，公网控制台的开关/Vpc控制台的开关，示例值，Public/Vpc
-     */
-    SwitchOwner?: string;
-    /**
-     * Vpc
-     */
-    VpcId?: string;
-    /**
-     * 子网
-     */
-    SubnetId?: string;
-    /**
-     * 子网下面指定ip作为vpc接入点
-     */
-    SelectIp?: string;
+    TaskId: string;
 }
 /**
  * DeleteCluster请求参数结构体
@@ -1099,6 +1091,23 @@ export interface CmqSubscription {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     TopicName?: string;
+}
+/**
+ * DescribeRocketMQSourceClusterGroupList返回参数结构体
+ */
+export interface DescribeRocketMQSourceClusterGroupListResponse {
+    /**
+     * group列表
+     */
+    Groups?: Array<RocketMQGroupConfigOutput>;
+    /**
+     * 总条数
+     */
+    TotalCount?: number;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * SetRocketMQPublicAccessPoint返回参数结构体
@@ -1213,6 +1222,56 @@ export interface PublicAccessRule {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Remark?: string;
+}
+/**
+ * RocketMQ平滑迁移任务
+ */
+export interface RocketMQSmoothMigrationTaskItem {
+    /**
+     * 任务ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TaskId?: string;
+    /**
+     * 任务名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TaskName?: string;
+    /**
+     * 源集群名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SourceClusterName?: string;
+    /**
+     * 目标集群ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ClusterId?: string;
+    /**
+     * 网络连接类型，
+  PUBLIC 公网
+  VPC 私有网络
+  OTHER 其他
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ConnectionType?: string;
+    /**
+     * 源集群NameServer地址
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SourceNameServer?: string;
+    /**
+     * 任务状态
+  Configuration 迁移配置
+  SourceConnecting 连接源集群中
+  MetaDataImport 元数据导入
+  EndpointSetup 切换接入点
+  ServiceMigration 切流中
+  Completed 已完成
+  Cancelled 已取消
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TaskStatus?: string;
 }
 /**
  * vpc信息（由UniqVpcId和UniqSubnetId组成）
@@ -1801,6 +1860,27 @@ export interface CreateSubscriptionResponse {
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * ModifyEnvironmentRole请求参数结构体
+ */
+export interface ModifyEnvironmentRoleRequest {
+    /**
+     * 环境（命名空间）名称。
+     */
+    EnvironmentId: string;
+    /**
+     * 角色名称。
+     */
+    RoleName: string;
+    /**
+     * 授权项，最多只能包含produce、consume两项的非空字符串数组。
+     */
+    Permissions: Array<string>;
+    /**
+     * 必填字段，集群的ID
+     */
+    ClusterId: string;
 }
 /**
  * SendMsg返回参数结构体
@@ -2472,13 +2552,17 @@ export interface AcknowledgeMessageRequest {
     SubName: string;
 }
 /**
- * ResetRocketMQConsumerOffSet返回参数结构体
+ * ImportRocketMQConsumerGroups请求参数结构体
  */
-export interface ResetRocketMQConsumerOffSetResponse {
+export interface ImportRocketMQConsumerGroupsRequest {
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     * 导入topic
      */
-    RequestId?: string;
+    Groups: Array<RocketMQGroupConfig>;
+    /**
+     * 任务id
+     */
+    TaskId: string;
 }
 /**
  * DescribeRocketMQVipInstanceDetail返回参数结构体
@@ -2936,37 +3020,21 @@ export interface SendMessagesResponse {
     RequestId?: string;
 }
 /**
- * ReceiveMessage请求参数结构体
+ * DescribeRocketMQNamespaces返回参数结构体
  */
-export interface ReceiveMessageRequest {
+export interface DescribeRocketMQNamespacesResponse {
     /**
-     * 接收消息的topic的名字, 这里尽量需要使用topic的全路径，如果不指定，即：tenant/namespace/topic。默认使用的是：public/default
+     * 命名空间列表
      */
-    Topic: string;
+    Namespaces: Array<RocketMQNamespace>;
     /**
-     * 订阅者的名字
+     * 总条数
      */
-    SubscriptionName: string;
+    TotalCount: number;
     /**
-     * 默认值为1000，consumer接收的消息会首先存储到receiverQueueSize这个队列中，用作调优接收消息的速率
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
-    ReceiverQueueSize?: number;
-    /**
-     * 默认值为：Earliest。用作判定consumer初始接收消息的位置，可选参数为：Earliest, Latest
-     */
-    SubInitialPosition?: string;
-    /**
-     * 用于设置BatchReceivePolicy，指在一次batch中最多接收多少条消息，默认是 0。即不开启BatchReceivePolicy
-     */
-    MaxNumMessages?: number;
-    /**
-     * 用于设置BatchReceivePolicy，指在一次batch中最多接收的消息体有多大，单位是 bytes。默认是 0，即不开启BatchReceivePolicy
-     */
-    MaxNumBytes?: number;
-    /**
-     * 用于设置BatchReceivePolicy，指在一次batch消息的接收z中最多等待的超时时间，单位是毫秒。默认是 0，即不开启BatchReceivePolicy
-     */
-    Timeout?: number;
+    RequestId?: string;
 }
 /**
  * CreateTopic请求参数结构体
@@ -3074,6 +3142,23 @@ export interface DeleteEnvironmentsResponse {
     RequestId?: string;
 }
 /**
+ * DescribeRocketMQMigratingTopicList返回参数结构体
+ */
+export interface DescribeRocketMQMigratingTopicListResponse {
+    /**
+     * 总条数
+     */
+    TotalCount?: number;
+    /**
+     * 迁移topic列表
+     */
+    MigrateTopics?: Array<MigrateTopic>;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * ModifyAMQPCluster请求参数结构体
  */
 export interface ModifyAMQPClusterRequest {
@@ -3089,6 +3174,47 @@ export interface ModifyAMQPClusterRequest {
      * 说明信息，不超过128个字符
      */
     Remark?: string;
+}
+/**
+ * ReceiveMessage返回参数结构体
+ */
+export interface ReceiveMessageResponse {
+    /**
+     * 用作标识消息的唯一主键
+     */
+    MessageID: string;
+    /**
+     * 接收消息的内容
+     */
+    MessagePayload: string;
+    /**
+     * 提供给 Ack 接口，用来Ack哪一个topic中的消息
+     */
+    AckTopic: string;
+    /**
+     * 返回的错误信息，如果为空，说明没有错误
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ErrorMsg: string;
+    /**
+     * 返回订阅者的名字，用来创建 ack consumer时使用
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SubName: string;
+    /**
+     * BatchReceivePolicy 一次性返回的多条消息的 MessageID，用 ‘###’ 来区分不同的 MessageID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MessageIDList: string;
+    /**
+     * BatchReceivePolicy 一次性返回的多条消息的消息内容，用 ‘###’ 来区分不同的消息内容
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MessagesPayload: string;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * DescribeEnvironmentRoles返回参数结构体
@@ -3740,6 +3866,69 @@ export interface EnvironmentRoleSet {
     Permissions: Array<string>;
 }
 /**
+ * RocketMQ主题配置信息
+ */
+export interface RocketMQTopicConfigOutput {
+    /**
+     * 命名空间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Namespace?: string;
+    /**
+     * 主题名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TopicName?: string;
+    /**
+     * 主题类型：
+  Normal，普通
+  GlobalOrder， 全局顺序
+  PartitionedOrder, 分区顺序
+  Transaction，事务消息
+  DelayScheduled，延迟/定时消息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Type?: string;
+    /**
+     * 分区个数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Partitions?: number;
+    /**
+     * 备注信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Remark?: string;
+    /**
+     * 是否导入
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Imported?: boolean;
+}
+/**
+ * DescribeRocketMQSourceClusterTopicList请求参数结构体
+ */
+export interface DescribeRocketMQSourceClusterTopicListRequest {
+    /**
+     * 分页大小
+     */
+    Limit: number;
+    /**
+     * 偏移量
+     */
+    Offset: number;
+    /**
+     * 迁移任务名
+     */
+    TaskId: string;
+    /**
+     * 查询过滤器，支持字段如下
+  TopicName,
+  Type，Imported
+     */
+    Filters?: Array<Filter>;
+}
+/**
  * VPC配置信息
  */
 export interface VpcConfig {
@@ -4255,6 +4444,21 @@ export interface DescribeRocketMQGroupsResponse {
     RequestId?: string;
 }
 /**
+ * 迁移主题的阶段分布
+ */
+export interface RocketMQMigrationTopicDistribution {
+    /**
+     * 迁移主题阶段
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Stage?: string;
+    /**
+     * 数量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Count?: number;
+}
+/**
  * ResetMsgSubOffsetByTimestamp返回参数结构体
  */
 export interface ResetMsgSubOffsetByTimestampResponse {
@@ -4280,6 +4484,28 @@ export interface CreateClusterResponse {
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * DescribeRocketMQSmoothMigrationTaskList请求参数结构体
+ */
+export interface DescribeRocketMQSmoothMigrationTaskListRequest {
+    /**
+     * 查询起始偏移量
+     */
+    Offset: number;
+    /**
+     * 查询最大数量
+     */
+    Limit: number;
+    /**
+     * 查询过滤器，
+  支持的字段如下
+  TaskStatus, 支持多选
+  ConnectionType，支持多选
+  ClusterId，精确搜索
+  TaskName，支持模糊搜索
+     */
+    Filters?: Array<Filter>;
 }
 /**
  * DescribeCmqDeadLetterSourceQueues请求参数结构体
@@ -4344,6 +4570,23 @@ export interface DescribeRolesRequest {
     Filters?: Array<Filter>;
 }
 /**
+ * DescribeRocketMQSmoothMigrationTaskList返回参数结构体
+ */
+export interface DescribeRocketMQSmoothMigrationTaskListResponse {
+    /**
+     * 任务总数
+     */
+    TotalCount?: number;
+    /**
+     * 任务列表
+     */
+    Data?: Array<RocketMQSmoothMigrationTaskItem>;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * CreateCluster请求参数结构体
  */
 export interface CreateClusterRequest {
@@ -4367,6 +4610,23 @@ export interface CreateClusterRequest {
      * 是否开启公网访问，不填时默认开启
      */
     PublicAccessEnabled?: boolean;
+}
+/**
+ * DescribeRocketMQSourceClusterTopicList返回参数结构体
+ */
+export interface DescribeRocketMQSourceClusterTopicListResponse {
+    /**
+     * topic层列表
+     */
+    Topics?: Array<RocketMQTopicConfigOutput>;
+    /**
+     * 总条数
+     */
+    TotalCount?: number;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * DescribeRabbitMQVirtualHostList请求参数结构体
@@ -5512,6 +5772,62 @@ export interface RocketMQClusterConfig {
     MaxQueuesPerTopic?: number;
 }
 /**
+ * RocketMQ消费组配置信息
+ */
+export interface RocketMQGroupConfig {
+    /**
+     * 命名空间
+     */
+    Namespace: string;
+    /**
+     * 消费组名称
+     */
+    GroupName: string;
+    /**
+     * 是否开启广播消费
+     */
+    ConsumeBroadcastEnable: boolean;
+    /**
+     * 是否开启消费
+     */
+    ConsumeEnable: boolean;
+    /**
+     * 备注信息
+     */
+    Remark?: string;
+    /**
+     * 协议类型，支持以下枚举值
+  TCP;
+  HTTP;
+     */
+    ConsumerGroupType?: string;
+}
+/**
+ * RocketMQ消费组配置信息
+ */
+export interface RocketMQGroupConfigOutput {
+    /**
+     * 命名空间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Namespace?: string;
+    /**
+     * 消费组名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    GroupName?: string;
+    /**
+     * 导入状态
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Imported?: boolean;
+    /**
+     * remark
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Remark?: string;
+}
+/**
  * CreateRocketMQCluster返回参数结构体
  */
 export interface CreateRocketMQClusterResponse {
@@ -5525,45 +5841,33 @@ export interface CreateRocketMQClusterResponse {
     RequestId?: string;
 }
 /**
- * ReceiveMessage返回参数结构体
+ * ModifyPublicNetworkAccessPoint请求参数结构体
  */
-export interface ReceiveMessageResponse {
+export interface ModifyPublicNetworkAccessPointRequest {
     /**
-     * 用作标识消息的唯一主键
+     * 集群名字
      */
-    MessageID: string;
+    ClusterId: string;
     /**
-     * 接收消息的内容
+     * 是否开启
      */
-    MessagePayload: string;
+    PublicNetworkAccessPointStatus: boolean;
     /**
-     * 提供给 Ack 接口，用来Ack哪一个topic中的消息
+     * 必填，公网控制台的开关/Vpc控制台的开关，示例值，Public/Vpc
      */
-    AckTopic: string;
+    SwitchOwner?: string;
     /**
-     * 返回的错误信息，如果为空，说明没有错误
-  注意：此字段可能返回 null，表示取不到有效值。
+     * Vpc
      */
-    ErrorMsg: string;
+    VpcId?: string;
     /**
-     * 返回订阅者的名字，用来创建 ack consumer时使用
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 子网
      */
-    SubName: string;
+    SubnetId?: string;
     /**
-     * BatchReceivePolicy 一次性返回的多条消息的 MessageID，用 ‘###’ 来区分不同的 MessageID
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 子网下面指定ip作为vpc接入点
      */
-    MessageIDList: string;
-    /**
-     * BatchReceivePolicy 一次性返回的多条消息的消息内容，用 ‘###’ 来区分不同的消息内容
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    MessagesPayload: string;
-    /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
+    SelectIp?: string;
 }
 /**
  * DeleteRocketMQNamespace返回参数结构体
@@ -5664,6 +5968,27 @@ export interface DescribeCmqQueueDetailRequest {
      * 精确匹配QueueName
      */
     QueueName: string;
+}
+/**
+ * DescribeRocketMQSourceClusterGroupList请求参数结构体
+ */
+export interface DescribeRocketMQSourceClusterGroupListRequest {
+    /**
+     * 页大小
+     */
+    Limit: number;
+    /**
+     * 偏移量
+     */
+    Offset: number;
+    /**
+     * 迁移任务名称
+     */
+    TaskId: string;
+    /**
+     * 查询过滤器，支持字段groupName，imported
+     */
+    Filters?: Array<Filter>;
 }
 /**
  * DeleteRabbitMQVirtualHost请求参数结构体
@@ -5810,6 +6135,53 @@ export interface ModifyRabbitMQUserResponse {
     RequestId?: string;
 }
 /**
+ * 迁移topic列表数据
+ */
+export interface MigrateTopic {
+    /**
+     * 命名空间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Namespace?: string;
+    /**
+     * topic名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TopicName?: string;
+    /**
+     * 迁移状态
+  S_RW_D_NA 源集群读写
+  S_RW_D_R 源集群读写目标集群读
+  S_RW_D_RW 源集群读写目标集群读写
+  S_R_D_RW 源集群读目标集群读写
+  S_NA_D_RW 目标集群读写
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MigrationStatus?: string;
+    /**
+     * 是否完成健康检查
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    HealthCheckPassed?: boolean;
+    /**
+     * 上次健康检查返回的错误信息，仅在HealthCheckPassed为false时有效。
+  NotChecked 未执行检查，
+  Unknown 未知错误,
+  TopicNotImported 主题未导入,
+   TopicNotExistsInSourceCluster  主题在源集群中不存在,
+      TopicNotExistsInTargetCluster 主题在目标集群中不存在,
+      ConsumerConnectedOnTarget 目标集群上存在消费者连接,
+      SourceTopicHasNewMessagesIn5Minutes 源集群主题前5分钟内有新消息写入,
+  TargetTopicHasNewMessagesIn5Minutes 目标集群主题前5分钟内有新消息写入,
+      SourceTopicHasNoMessagesIn5Minutes 源集群前5分钟内没有新消息写入,
+  TargetTopicHasNoMessagesIn5Minutes 源集群前5分钟内没有新消息写入,
+      ConsumerGroupCountNotMatch 订阅组数量不一致,
+      SourceTopicHasUnconsumedMessages 源集群主题存在未消费消息,
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    HealthCheckError?: string;
+}
+/**
  * DescribeNodeHealthOpt请求参数结构体
  */
 export interface DescribeNodeHealthOptRequest {
@@ -5819,17 +6191,99 @@ export interface DescribeNodeHealthOptRequest {
     InstanceId: string;
 }
 /**
- * 消息轨迹结果
+ * DescribeRocketMQSmoothMigrationTask返回参数结构体
  */
-export interface TraceResult {
+export interface DescribeRocketMQSmoothMigrationTaskResponse {
     /**
-     * 阶段
+     * 任务名称
      */
-    Stage: string;
+    TaskName?: string;
     /**
-     * 内容详情
+     * 目标集群ID
      */
-    Data: string;
+    ClusterId?: string;
+    /**
+     * 源集群名称
+     */
+    SourceClusterName?: string;
+    /**
+     * 网络连接类型，
+  PUBLIC 公网
+  VPC 私有网络
+  OTHER 其它
+     */
+    ConnectionType?: string;
+    /**
+     * 源集群NameServer地址
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SourceClusterNameServer?: string;
+    /**
+     * 源集群所在私有网络ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    VpcId?: string;
+    /**
+     * 源集群所在子网ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SubnetId?: string;
+    /**
+     * 是否开启ACL
+     */
+    EnableACL?: boolean;
+    /**
+     * 源集群AccessKey
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AccessKey?: string;
+    /**
+     * 元集群SecretKey
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SecretKey?: string;
+    /**
+     * 配置源集群时发生的错误
+  TIMEOUT 连接超时，
+  SERVER_ERROR 服务错误，
+  INTERNAL_ERROR 内部错误，
+  CONNECT_NAMESERVER_ERROR 连接nameserver错误
+  CONNECT_BROKER_ERROR 连接broker错误
+  ACL_WRONG ACL信息不正确
+  
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TaskError?: string;
+    /**
+     * 任务状态
+  Configuration 迁移配置
+  SourceConnecting 连接源集群中
+  SourceConnectionFailure 连接源集群失败
+  MetaDataImport 元数据导入
+  EndpointSetup 切换接入点
+  ServiceMigration 切流中
+  Completed 已完成
+  Cancelled 已取消
+     */
+    TaskStatus?: string;
+    /**
+     * 任务ID
+     */
+    TaskId?: string;
+    /**
+     * 主题类型分布情况
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TopicTypeDistribution?: Array<RocketMQTopicDistribution>;
+    /**
+     * 主题迁移进度分布情况
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TopicStageDistribution?: Array<RocketMQMigrationTopicDistribution>;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * DeleteRabbitMQVirtualHost返回参数结构体
@@ -6197,25 +6651,13 @@ export interface DescribeRocketMQTopicMsgsRequest {
     QueryDeadLetterMessage?: boolean;
 }
 /**
- * ModifyEnvironmentRole请求参数结构体
+ * ImportRocketMQConsumerGroups返回参数结构体
  */
-export interface ModifyEnvironmentRoleRequest {
+export interface ImportRocketMQConsumerGroupsResponse {
     /**
-     * 环境（命名空间）名称。
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
-    EnvironmentId: string;
-    /**
-     * 角色名称。
-     */
-    RoleName: string;
-    /**
-     * 授权项，最多只能包含produce、consume两项的非空字符串数组。
-     */
-    Permissions: Array<string>;
-    /**
-     * 必填字段，集群的ID
-     */
-    ClusterId: string;
+    RequestId?: string;
 }
 /**
  * DescribeEnvironmentAttributes返回参数结构体
@@ -6373,6 +6815,60 @@ export interface CreateRocketMQNamespaceResponse {
     RequestId?: string;
 }
 /**
+ * RocketMQ专享集群实例配置
+ */
+export interface RocketMQInstanceConfig {
+    /**
+     * 单命名空间TPS上线
+     */
+    MaxTpsPerNamespace?: number;
+    /**
+     * 最大命名空间数量
+     */
+    MaxNamespaceNum?: number;
+    /**
+     * 已使用命名空间数量
+     */
+    UsedNamespaceNum?: number;
+    /**
+     * 最大Topic数量
+     */
+    MaxTopicNum?: number;
+    /**
+     * 已使用Topic数量
+     */
+    UsedTopicNum?: number;
+    /**
+     * 最大Group数量
+     */
+    MaxGroupNum?: number;
+    /**
+     * 已使用Group数量
+     */
+    UsedGroupNum?: number;
+    /**
+     * 集群类型
+     */
+    ConfigDisplay?: string;
+    /**
+     * 集群节点数
+     */
+    NodeCount?: number;
+    /**
+     * 节点分布情况
+     */
+    NodeDistribution?: Array<InstanceNodeDistribution>;
+    /**
+     * topic分布情况
+     */
+    TopicDistribution?: Array<RocketMQTopicDistribution>;
+    /**
+     * 每个主题最大队列数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MaxQueuesPerTopic?: number;
+}
+/**
  * SendBatchMessages请求参数结构体
  */
 export interface SendBatchMessagesRequest {
@@ -6462,6 +6958,35 @@ export interface DescribePulsarProInstanceDetailResponse {
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * RocketMQ主题配置信息
+ */
+export interface RocketMQTopicConfig {
+    /**
+     * 命名空间
+     */
+    Namespace: string;
+    /**
+     * 主题名称
+     */
+    TopicName: string;
+    /**
+     * 主题类型：
+  Normal，普通
+  PartitionedOrder, 分区顺序
+  Transaction，事务消息
+  DelayScheduled，延迟/定时消息
+     */
+    Type: string;
+    /**
+     * 分区个数
+     */
+    Partitions: number;
+    /**
+     * 备注信息
+     */
+    Remark?: string;
 }
 /**
  * DescribeNodeHealthOpt返回参数结构体
@@ -6792,6 +7317,19 @@ export interface DeleteCmqSubscribeResponse {
     RequestId?: string;
 }
 /**
+ * 消息轨迹结果
+ */
+export interface TraceResult {
+    /**
+     * 阶段
+     */
+    Stage: string;
+    /**
+     * 内容详情
+     */
+    Data: string;
+}
+/**
  * DeleteRabbitMQVipInstance请求参数结构体
  */
 export interface DeleteRabbitMQVipInstanceRequest {
@@ -6978,34 +7516,36 @@ export interface DescribeClusterDetailResponse {
     RequestId?: string;
 }
 /**
- * SendMessages请求参数结构体
+ * SendBatchMessages返回参数结构体
  */
-export interface SendMessagesRequest {
+export interface SendBatchMessagesResponse {
     /**
-     * 消息要发送的topic的名字, 这里尽量需要使用topic的全路径，即：tenant/namespace/topic。如果不指定，默认使用的是：public/default
+     * 消息的唯一标识
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Topic: string;
+    MessageId: string;
     /**
-     * 要发送的消息的内容
+     * 错误消息，返回为 ""，代表没有错误
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Payload: string;
+    ErrorMsg: string;
     /**
-     * Token 是用来做鉴权使用的，可以不填，系统会自动获取
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
-    StringToken?: string;
+    RequestId?: string;
+}
+/**
+ * ImportRocketMQTopics请求参数结构体
+ */
+export interface ImportRocketMQTopicsRequest {
     /**
-     * 设置 producer 的名字，要求全局唯一。该参数建议用户无需手动配置，此时系统会随机生成，如果手动设置有可能会造成创建 Producer 失败进而导致消息发送失败。
-  该参数主要用于某些特定场景下，只允许特定的 Producer 生产消息时设置，用户的大部分场景使用不到该特性。
+     * 导入topic
      */
-    ProducerName?: string;
+    Topics: Array<RocketMQTopicConfig>;
     /**
-     * 设置消息发送的超时时间，默认为30s
+     * 任务ID
      */
-    SendTimeout?: number;
-    /**
-     * 内存中缓存的最大的生产消息的数量，默认为1000条
-     */
-    MaxPendingMessages?: number;
+    TaskId: string;
 }
 /**
  * CreateEnvironmentRole请求参数结构体

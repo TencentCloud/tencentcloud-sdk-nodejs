@@ -237,7 +237,7 @@ export interface ModifyAPIDocResponse {
     /**
      * API文档基本信息
      */
-    Result: APIDoc;
+    Result?: APIDoc;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2526,25 +2526,25 @@ export interface DescribeLogSearchResponse {
  */
 export interface ModifyAPIDocRequest {
     /**
-     * API文档ID
-     */
-    ApiDocId: string;
-    /**
      * API文档名称
      */
-    ApiDocName?: string;
+    ApiDocName: string;
     /**
      * 服务名称
      */
-    ServiceId?: string;
+    ServiceId: string;
     /**
      * 环境名称
      */
-    Environment?: string;
+    Environment: string;
     /**
      * 生成文档的API列表
      */
-    ApiIds?: Array<string>;
+    ApiIds: Array<string>;
+    /**
+     * API文档ID
+     */
+    ApiDocId: string;
 }
 /**
  * UnBindIPStrategy请求参数结构体

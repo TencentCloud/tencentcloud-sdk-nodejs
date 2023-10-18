@@ -49,7 +49,7 @@ import {
   DescribeTemplateListRequest,
   DescribeBatchOperationLogDetailsRequest,
   DescribeDomainNameListResponse,
-  PhoneEmailData,
+  CreateCustomDnsHostResponse,
   ContactInfo,
   DescribeDomainPriceListResponse,
   CreateTemplateResponse,
@@ -61,6 +61,7 @@ import {
   BatchStatus,
   DomainList,
   DescribeDomainPriceListRequest,
+  SetDomainAutoRenewRequest,
   CreateDomainBatchRequest,
   DescribeDomainSimpleInfoResponse,
   DescribeDomainBaseInfoRequest,
@@ -72,6 +73,7 @@ import {
   CheckDomainRequest,
   DescribeBatchOperationLogsResponse,
   TransferProhibitionBatchResponse,
+  CreateCustomDnsHostRequest,
   ModifyDomainDNSBatchRequest,
   DescribeBatchOperationLogDetailsResponse,
   DescribePhoneEmailListResponse,
@@ -79,7 +81,7 @@ import {
   DeletePhoneEmailResponse,
   CreateDomainRedemptionRequest,
   CreatePhoneEmailResponse,
-  SetDomainAutoRenewRequest,
+  PhoneEmailData,
   ModifyDomainOwnerBatchRequest,
   SendPhoneEmailCodeRequest,
   DomainBatchLogSet,
@@ -102,16 +104,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: SetDomainAutoRenewResponse) => void
   ): Promise<SetDomainAutoRenewResponse> {
     return this.request("SetDomainAutoRenew", req, cb)
-  }
-
-  /**
-   * 本接口 ( ModifyDomainDNSBatch) 用于批量域名 DNS 修改 。
-   */
-  async ModifyDomainDNSBatch(
-    req: ModifyDomainDNSBatchRequest,
-    cb?: (error: string, rep: ModifyDomainDNSBatchResponse) => void
-  ): Promise<ModifyDomainDNSBatchResponse> {
-    return this.request("ModifyDomainDNSBatch", req, cb)
   }
 
   /**
@@ -142,6 +134,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeletePhoneEmailResponse) => void
   ): Promise<DeletePhoneEmailResponse> {
     return this.request("DeletePhoneEmail", req, cb)
+  }
+
+  /**
+   * 此接口用于发送手机邮箱验证码。
+   */
+  async SendPhoneEmailCode(
+    req: SendPhoneEmailCodeRequest,
+    cb?: (error: string, rep: SendPhoneEmailCodeResponse) => void
+  ): Promise<SendPhoneEmailCodeResponse> {
+    return this.request("SendPhoneEmailCode", req, cb)
   }
 
   /**
@@ -197,16 +199,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建赎回订单。
-   */
-  async CreateDomainRedemption(
-    req: CreateDomainRedemptionRequest,
-    cb?: (error: string, rep: CreateDomainRedemptionResponse) => void
-  ): Promise<CreateDomainRedemptionResponse> {
-    return this.request("CreateDomainRedemption", req, cb)
-  }
-
-  /**
    * 检查域名是否可以注册。
    */
   async CheckDomain(
@@ -228,6 +220,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 创建自定义DNS Host
+   */
+  async CreateCustomDnsHost(
+    req: CreateCustomDnsHostRequest,
+    cb?: (error: string, rep: CreateCustomDnsHostResponse) => void
+  ): Promise<CreateCustomDnsHostResponse> {
+    return this.request("CreateCustomDnsHost", req, cb)
+  }
+
+  /**
    * 本接口 (DescribeTemplate) 用于获取模板信息。
    */
   async DescribeTemplate(
@@ -245,6 +247,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreatePhoneEmailResponse) => void
   ): Promise<CreatePhoneEmailResponse> {
     return this.request("CreatePhoneEmail", req, cb)
+  }
+
+  /**
+   * 创建赎回订单。
+   */
+  async CreateDomainRedemption(
+    req: CreateDomainRedemptionRequest,
+    cb?: (error: string, rep: CreateDomainRedemptionResponse) => void
+  ): Promise<CreateDomainRedemptionResponse> {
+    return this.request("CreateDomainRedemption", req, cb)
   }
 
   /**
@@ -328,13 +340,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 此接口用于发送手机邮箱验证码。
+   * 本接口 ( ModifyDomainDNSBatch) 用于批量域名 DNS 修改 。
    */
-  async SendPhoneEmailCode(
-    req: SendPhoneEmailCodeRequest,
-    cb?: (error: string, rep: SendPhoneEmailCodeResponse) => void
-  ): Promise<SendPhoneEmailCodeResponse> {
-    return this.request("SendPhoneEmailCode", req, cb)
+  async ModifyDomainDNSBatch(
+    req: ModifyDomainDNSBatchRequest,
+    cb?: (error: string, rep: ModifyDomainDNSBatchResponse) => void
+  ): Promise<ModifyDomainDNSBatchResponse> {
+    return this.request("ModifyDomainDNSBatch", req, cb)
   }
 
   /**

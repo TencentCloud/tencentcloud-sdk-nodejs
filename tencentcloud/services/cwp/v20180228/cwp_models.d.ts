@@ -4404,7 +4404,7 @@ export interface AssetMachineDetail {
      */
     CpuSize?: number;
     /**
-     * Cpu使用率百分比
+     * Cpu负载
      */
     CpuLoad?: string;
     /**
@@ -4499,6 +4499,16 @@ export interface AssetMachineDetail {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     MachineExtraInfo?: MachineExtraInfo;
+    /**
+     * CpuLoadVul
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CpuLoadVul?: string;
+    /**
+     * 时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    FirstTime?: string;
 }
 /**
  * ModifyNetAttackWhiteList请求参数结构体
