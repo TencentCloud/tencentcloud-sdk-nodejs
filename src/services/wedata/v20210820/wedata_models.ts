@@ -16828,6 +16828,11 @@ export interface BooleanResponse {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Message?: string
+  /**
+   * 基线Id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BaselineId?: number
 }
 
 /**
@@ -21855,7 +21860,7 @@ export interface CreateHiveTableRequest {
    */
   DatasourceId: string
   /**
-   * 数据库
+   * 数据库名称
    */
   Database: string
   /**

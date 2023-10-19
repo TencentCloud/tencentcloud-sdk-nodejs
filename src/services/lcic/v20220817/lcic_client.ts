@@ -24,6 +24,7 @@ import {
   DescribeAppDetailResponse,
   DeleteSupervisorRequest,
   DeleteUserRequest,
+  WatermarkConfig,
   DescribeSupervisorsResponse,
   DeleteUserResponse,
   BatchDeleteRecordRequest,
@@ -37,6 +38,7 @@ import {
   GetRoomEventResponse,
   MemberRecord,
   DeleteAppCustomContentRequest,
+  SendRoomNotificationMessageResponse,
   BatchAddGroupMemberResponse,
   ModifyUserProfileResponse,
   GetWatermarkResponse,
@@ -88,7 +90,7 @@ import {
   DescribeScoreListResponse,
   DescribeDocumentRequest,
   BatchDeleteRecordResponse,
-  WatermarkConfig,
+  FaceMsgContent,
   SetAppCustomContentRequest,
   DescribeUserRequest,
   RegisterUserResponse,
@@ -100,6 +102,7 @@ import {
   BatchAddGroupMemberRequest,
   DescribeRoomResponse,
   DescribeCurrentMemberListRequest,
+  SendRoomNotificationMessageRequest,
   DescribeSdkAppIdUsersResponse,
   EventDataInfo,
   DescribeAnswerListResponse,
@@ -113,12 +116,15 @@ import {
   EndRoomRequest,
   CreateGroupWithMembersResponse,
   BatchDeleteGroupMemberRequest,
+  ImageInfo,
   ModifyAppRequest,
   UnbindDocumentFromRoomRequest,
   RegisterUserRequest,
   GroupBaseInfo,
   LoginUserRequest,
+  ImageMsgContent,
   AnswerStat,
+  SendRoomNormalMessageResponse,
   DeleteSupervisorResponse,
   SetWatermarkResponse,
   RoomInfo,
@@ -133,12 +139,14 @@ import {
   KickUserFromRoomRequest,
   SetWatermarkRequest,
   GetRoomsRequest,
+  SendRoomNormalMessageRequest,
   DescribeDeveloperRequest,
   AppCustomContent,
   BatchDescribeDocumentResponse,
   DeleteGroupResponse,
   DescribeSdkAppIdUsersRequest,
   AddGroupMemberResponse,
+  MsgBody,
   CreateSupervisorResponse,
   SceneItem,
   DeleteRoomRequest,
@@ -152,6 +160,7 @@ import {
   DescribeGroupListResponse,
   CreateRoomResponse,
   DescribeDeveloperResponse,
+  TextMsgContent,
   TextMarkConfig,
 } from "./lcic_models"
 
@@ -172,6 +181,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAppDetailResponse) => void
   ): Promise<DescribeAppDetailResponse> {
     return this.request("DescribeAppDetail", req, cb)
+  }
+
+  /**
+   * App 管理员可以通过该接口在群组中发送通知、公告等。目前仅支持文本消息。
+   */
+  async SendRoomNotificationMessage(
+    req: SendRoomNotificationMessageRequest,
+    cb?: (error: string, rep: SendRoomNotificationMessageResponse) => void
+  ): Promise<SendRoomNotificationMessageResponse> {
+    return this.request("SendRoomNotificationMessage", req, cb)
   }
 
   /**
@@ -454,6 +473,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteRecordResponse) => void
   ): Promise<DeleteRecordResponse> {
     return this.request("DeleteRecord", req, cb)
+  }
+
+  /**
+   * 1、按照指定身份发送消息，目前支持表情消息、图片消息、文本消息。
+   */
+  async SendRoomNormalMessage(
+    req: SendRoomNormalMessageRequest,
+    cb?: (error: string, rep: SendRoomNormalMessageResponse) => void
+  ): Promise<SendRoomNormalMessageResponse> {
+    return this.request("SendRoomNormalMessage", req, cb)
   }
 
   /**

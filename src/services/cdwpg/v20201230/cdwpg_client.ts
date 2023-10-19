@@ -20,23 +20,26 @@ import { ClientConfig } from "../../../common/interface"
 import {
   ModifyInstanceResponse,
   DescribeInstanceStateRequest,
-  ResourceSpecNew,
   ChargeProperties,
-  DestroyInstanceByApiResponse,
-  InstanceNodeGroup,
   DestroyInstanceByApiRequest,
-  CreateInstanceByApiRequest,
+  InstanceNodeGroup,
   CBSSpec,
-  InstanceStateInfo,
-  DescribeInstanceRequest,
   ModifyInstanceRequest,
+  InstanceStateInfo,
+  InstanceInfo,
+  DescribeInstancesResponse,
+  ResourceSpecNew,
+  DescribeInstancesRequest,
   CreateInstanceByApiResponse,
   DescribeSimpleInstancesResponse,
+  DescribeInstanceResponse,
+  DestroyInstanceByApiResponse,
+  CreateInstanceByApiRequest,
+  SearchTags,
+  DescribeInstanceRequest,
   Tag,
   DescribeInstanceStateResponse,
-  InstanceInfo,
   InstanceSimpleInfoNew,
-  DescribeInstanceResponse,
   DescribeSimpleInstancesRequest,
 } from "./cdwpg_models"
 
@@ -47,6 +50,16 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("cdwpg.tencentcloudapi.com", "2020-12-30", clientConfig)
+  }
+
+  /**
+   * 获取云原生实例列表
+   */
+  async DescribeInstances(
+    req: DescribeInstancesRequest,
+    cb?: (error: string, rep: DescribeInstancesResponse) => void
+  ): Promise<DescribeInstancesResponse> {
+    return this.request("DescribeInstances", req, cb)
   }
 
   /**

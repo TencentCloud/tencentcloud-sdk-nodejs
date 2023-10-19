@@ -68,6 +68,16 @@ it("oceanus.v20190422.DeleteResourceConfigs", async function () {
     }
 })
 
+it("oceanus.v20190422.CreateWorkSpace", async function () {
+    try {
+       const data = await client.CreateWorkSpace({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("oceanus.v20190422.CreateResourceConfig", async function () {
     try {
        const data = await client.CreateResourceConfig({})
@@ -91,6 +101,16 @@ it("oceanus.v20190422.DeleteTableConfig", async function () {
 it("oceanus.v20190422.DescribeResourceConfigs", async function () {
     try {
        const data = await client.DescribeResourceConfigs({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("oceanus.v20190422.ModifyFolder", async function () {
+    try {
+       const data = await client.ModifyFolder({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -141,6 +161,16 @@ it("oceanus.v20190422.FetchSqlGatewayStatementResult", async function () {
 it("oceanus.v20190422.DescribeClusters", async function () {
     try {
        const data = await client.DescribeClusters({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("oceanus.v20190422.DeleteFolders", async function () {
+    try {
+       const data = await client.DeleteFolders({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -228,6 +258,16 @@ it("oceanus.v20190422.CreateJobConfig", async function () {
     }
 })
 
+it("oceanus.v20190422.DeleteJobConfigs", async function () {
+    try {
+       const data = await client.DeleteJobConfigs({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("oceanus.v20190422.StopJobs", async function () {
     try {
        const data = await client.StopJobs({})
@@ -241,6 +281,16 @@ it("oceanus.v20190422.StopJobs", async function () {
 it("oceanus.v20190422.DescribeResourceRelatedJobs", async function () {
     try {
        const data = await client.DescribeResourceRelatedJobs({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("oceanus.v20190422.ModifyWorkSpace", async function () {
+    try {
+       const data = await client.ModifyWorkSpace({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

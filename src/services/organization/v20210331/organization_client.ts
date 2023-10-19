@@ -25,22 +25,25 @@ import {
   OrgProductFinancial,
   BindOrganizationMemberAuthAccountRequest,
   CreateOrganizationMemberAuthIdentityRequest,
+  UpdateOrganizationIdentityRequest,
   DeleteOrganizationMembersResponse,
   DescribeOrganizationFinancialByMemberRequest,
+  DescribeOrganizationAuthNodeRequest,
   DescribeOrganizationFinancialByMonthRequest,
   DescribeOrganizationMemberAuthIdentitiesRequest,
   AddOrganizationMemberEmailResponse,
   CreateOrganizationMemberAuthIdentityResponse,
-  UpdateOrganizationNodeResponse,
+  DescribeOrganizationFinancialByProductRequest,
   CreateOrganizationMemberPolicyRequest,
-  DescribeOrganizationRequest,
+  CreateOrganizationMembersPolicyResponse,
   DescribeOrganizationFinancialByMonthResponse,
   DescribeOrganizationNodesRequest,
   CreateOrganizationRequest,
   CreateOrganizationMemberResponse,
-  MoveOrganizationNodeMembersRequest,
+  CreateOrganizationIdentityResponse,
+  UpdateOrganizationMemberResponse,
   QuitOrganizationResponse,
-  ListOrganizationIdentityRequest,
+  CreateOrganizationMembersPolicyRequest,
   AuthNode,
   DescribeOrganizationMemberEmailBindResponse,
   DeleteOrganizationMembersRequest,
@@ -52,6 +55,7 @@ import {
   BindOrganizationMemberAuthAccountResponse,
   OrgFinancialByMonth,
   DescribeOrganizationFinancialByProductResponse,
+  UpdateOrganizationIdentityResponse,
   AddOrganizationMemberEmailRequest,
   DeleteOrganizationRequest,
   ListOrganizationIdentityResponse,
@@ -59,27 +63,31 @@ import {
   DeleteOrganizationMembersPolicyRequest,
   DescribeOrganizationMembersResponse,
   CreateOrganizationMemberPolicyResponse,
-  DescribeOrganizationFinancialByProductRequest,
+  CreateOrganizationIdentityRequest,
+  MoveOrganizationNodeMembersRequest,
   CancelOrganizationMemberAuthAccountResponse,
   OrgMemberAuthAccount,
   UpdateOrganizationMemberRequest,
-  DescribeOrganizationResponse,
+  DeleteOrganizationNodesResponse,
   QuitOrganizationRequest,
+  DescribeOrganizationResponse,
   DescribeOrganizationMemberPoliciesRequest,
   DescribeOrganizationMemberEmailBindRequest,
   UpdateOrganizationMemberEmailBindResponse,
   AddOrganizationNodeRequest,
+  UpdateOrganizationNodeResponse,
   DescribeOrganizationMemberAuthIdentitiesResponse,
   OrgMemberFinancial,
-  DescribeOrganizationAuthNodeRequest,
+  DeleteOrganizationIdentityRequest,
   UpdateOrganizationNodeRequest,
   DescribeOrganizationMemberAuthAccountsRequest,
   CancelOrganizationMemberAuthAccountRequest,
-  UpdateOrganizationMemberResponse,
-  DeleteOrganizationNodesResponse,
+  ListOrganizationIdentityRequest,
+  DeleteOrganizationIdentityResponse,
   DescribeOrganizationFinancialByMemberResponse,
   DeleteOrganizationResponse,
   DescribeOrganizationMemberAuthAccountsResponse,
+  DescribeOrganizationRequest,
   DeleteOrganizationMembersPolicyResponse,
   OrgMemberAuthIdentity,
   MemberMainInfo,
@@ -285,6 +293,26 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 更新组织身份
+   */
+  async UpdateOrganizationIdentity(
+    req: UpdateOrganizationIdentityRequest,
+    cb?: (error: string, rep: UpdateOrganizationIdentityResponse) => void
+  ): Promise<UpdateOrganizationIdentityResponse> {
+    return this.request("UpdateOrganizationIdentity", req, cb)
+  }
+
+  /**
+   * 创建组织成员访问策略
+   */
+  async CreateOrganizationMembersPolicy(
+    req: CreateOrganizationMembersPolicyRequest,
+    cb?: (error: string, rep: CreateOrganizationMembersPolicyResponse) => void
+  ): Promise<CreateOrganizationMembersPolicyResponse> {
+    return this.request("CreateOrganizationMembersPolicy", req, cb)
+  }
+
+  /**
    * 获取企业组织信息
    */
   async DescribeOrganization(
@@ -312,6 +340,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateOrganizationResponse) => void
   ): Promise<CreateOrganizationResponse> {
     return this.request("CreateOrganization", req, cb)
+  }
+
+  /**
+   * 添加组织身份
+   */
+  async CreateOrganizationIdentity(
+    req: CreateOrganizationIdentityRequest,
+    cb?: (error: string, rep: CreateOrganizationIdentityResponse) => void
+  ): Promise<CreateOrganizationIdentityResponse> {
+    return this.request("CreateOrganizationIdentity", req, cb)
+  }
+
+  /**
+   * 删除组织身份
+   */
+  async DeleteOrganizationIdentity(
+    req: DeleteOrganizationIdentityRequest,
+    cb?: (error: string, rep: DeleteOrganizationIdentityResponse) => void
+  ): Promise<DeleteOrganizationIdentityResponse> {
+    return this.request("DeleteOrganizationIdentity", req, cb)
   }
 
   /**

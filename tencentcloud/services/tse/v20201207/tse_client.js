@@ -250,6 +250,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteCloudNativeAPIGateway", req, cb);
     }
     /**
+     * 更新网关上游实例列表，仅支持IPList服务类型
+     */
+    async UpdateUpstreamTargets(req, cb) {
+        return this.request("UpdateUpstreamTargets", req, cb);
+    }
+    /**
      * 删除云原生网关证书
      */
     async DeleteCloudNativeAPIGatewayCertificate(req, cb) {

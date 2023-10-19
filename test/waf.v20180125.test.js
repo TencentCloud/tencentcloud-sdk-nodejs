@@ -118,6 +118,16 @@ it("waf.v20180125.ModifyInstanceQpsLimit", async function () {
     }
 })
 
+it("waf.v20180125.DescribeSpartaProtectionInfo", async function () {
+    try {
+       const data = await client.DescribeSpartaProtectionInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("waf.v20180125.DescribeAutoDenyIP", async function () {
     try {
        const data = await client.DescribeAutoDenyIP({})
@@ -281,6 +291,16 @@ it("waf.v20180125.DescribeIpHitItems", async function () {
 it("waf.v20180125.DescribeHistogram", async function () {
     try {
        const data = await client.DescribeHistogram({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("waf.v20180125.DescribeWebshellStatus", async function () {
+    try {
+       const data = await client.DescribeWebshellStatus({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -498,9 +518,9 @@ it("waf.v20180125.ModifyInstanceRenewFlag", async function () {
     }
 })
 
-it("waf.v20180125.DescribeDomainDetailsSaas", async function () {
+it("waf.v20180125.DescribeUserLevel", async function () {
     try {
-       const data = await client.DescribeDomainDetailsSaas({})
+       const data = await client.DescribeUserLevel({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1051,6 +1071,16 @@ it("waf.v20180125.DescribeInstances", async function () {
 it("waf.v20180125.ModifyAttackWhiteRule", async function () {
     try {
        const data = await client.ModifyAttackWhiteRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("waf.v20180125.DescribeDomainDetailsSaas", async function () {
+    try {
+       const data = await client.DescribeDomainDetailsSaas({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

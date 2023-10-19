@@ -1283,6 +1283,10 @@ export interface ExportVideoByEditorTrackDataRequest {
    */
   VODExportInfo?: VODExportInfo
   /**
+   * 视频导出扩展参数。可以覆盖导出模板中的参数，灵活的指定导出规格及参数。
+   */
+  ExportExtensionArgs?: VideoExportExtensionArgs
+  /**
    * 操作者。如不填，默认为 `cmeid_system`，表示平台管理员操作，无权限限制。如果指定操作者，轨道数据中使用的媒资该操作者需要拥有使用权限。
    */
   Operator?: string
@@ -3469,6 +3473,10 @@ export interface ExportVideoByTemplateRequest {
    * 导出的云点播媒资信息。当导出目标为 VOD 时必填。
    */
   VODExportInfo?: VODExportInfo
+  /**
+   * 视频导出扩展参数。可以覆盖导出模板中的参数，灵活的指定导出规格及参数。
+   */
+  ExportExtensionArgs?: VideoExportExtensionArgs
   /**
    * 操作者。如不填，默认为 `cmeid_system`，表示平台管理员操作，无权限限制。如果指定操作者，则操作者需要有替换媒体及剪辑模板的权限。
    */

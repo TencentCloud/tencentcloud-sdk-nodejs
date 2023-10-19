@@ -328,6 +328,16 @@ it("dlc.v20210125.DescribeNotebookSessions", async function () {
     }
 })
 
+it("dlc.v20210125.DescribeLakeFsTaskResult", async function () {
+    try {
+       const data = await client.DescribeLakeFsTaskResult({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dlc.v20210125.UpdateRowFilter", async function () {
     try {
        const data = await client.UpdateRowFilter({})

@@ -105,10 +105,11 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("InquiryPriceModifyLoadBalancer", req, cb);
     }
     /**
-     * 绑定或解绑一个安全组到多个公网负载均衡实例。注意：内网负载均衡不支持绑定安全组。
+     * 用户手动配置原访问地址和重定向地址，系统自动将原访问地址的请求重定向至对应路径的目的地址。同一域名下可以配置多条路径作为重定向策略，实现http/https之间请求的自动跳转。设置重定向时，需满足如下约束条件：若A已经重定向至B，则A不能再重定向至C（除非先删除老的重定向关系，再建立新的重定向关系），B不能重定向至任何其它地址。
+本接口为异步接口，本接口返回成功后需以返回的RequestID为入参，调用DescribeTaskStatus接口查询本次任务是否成功。
      */
-    async SetSecurityGroupForLoadbalancers(req, cb) {
-        return this.request("SetSecurityGroupForLoadbalancers", req, cb);
+    async ManualRewrite(req, cb) {
+        return this.request("ManualRewrite", req, cb);
     }
     /**
      * 批量解绑四七层后端服务。批量解绑的资源数量上限为500。只支持VPC网络负载均衡。
@@ -471,6 +472,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeRewrite", req, cb);
     }
     /**
+     * 绑定或解绑一个安全组到多个公网负载均衡实例。注意：内网负载均衡不支持绑定安全组。
+     */
+    async SetSecurityGroupForLoadbalancers(req, cb) {
+        return this.request("SetSecurityGroupForLoadbalancers", req, cb);
+    }
+    /**
      * 查询目标组信息
      */
     async DescribeTargetGroups(req, cb) {
@@ -594,11 +601,10 @@ BGP带宽包必须传带宽包id
         return this.request("DeleteRewrite", req, cb);
     }
     /**
-     * 用户手动配置原访问地址和重定向地址，系统自动将原访问地址的请求重定向至对应路径的目的地址。同一域名下可以配置多条路径作为重定向策略，实现http/https之间请求的自动跳转。设置重定向时，需满足如下约束条件：若A已经重定向至B，则A不能再重定向至C（除非先删除老的重定向关系，再建立新的重定向关系），B不能重定向至任何其它地址。
-本接口为异步接口，本接口返回成功后需以返回的RequestID为入参，调用DescribeTaskStatus接口查询本次任务是否成功。
+     * BatchModifyTargetTag 接口用于批量修改负载均衡监听器绑定的后端机器的标签。批量修改的资源数量上限为500。本接口为同步接口。<br/>负载均衡的4层和7层监听器支持此接口，传统型负载均衡不支持。
      */
-    async ManualRewrite(req, cb) {
-        return this.request("ManualRewrite", req, cb);
+    async BatchModifyTargetTag(req, cb) {
+        return this.request("BatchModifyTargetTag", req, cb);
     }
     /**
      * 本接口(CreateLoadBalancer)用来创建负载均衡实例（本接口只支持购买按量计费的负载均衡，包年包月的负载均衡请通过控制台购买）。为了使用负载均衡服务，您必须购买一个或多个负载均衡实例。成功调用该接口后，会返回负载均衡实例的唯一 ID。负载均衡实例的类型分为：公网、内网。详情可参考产品说明中的产品类型。

@@ -28,6 +28,16 @@ it("lcic.v20220817.DescribeAppDetail", async function () {
     }
 })
 
+it("lcic.v20220817.SendRoomNotificationMessage", async function () {
+    try {
+       const data = await client.SendRoomNotificationMessage({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("lcic.v20220817.GetRoomMessage", async function () {
     try {
        const data = await client.GetRoomMessage({})
@@ -301,6 +311,16 @@ it("lcic.v20220817.DescribeRoom", async function () {
 it("lcic.v20220817.DeleteRecord", async function () {
     try {
        const data = await client.DeleteRecord({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("lcic.v20220817.SendRoomNormalMessage", async function () {
+    try {
+       const data = await client.SendRoomNormalMessage({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

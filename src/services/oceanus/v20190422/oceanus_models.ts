@@ -101,6 +101,36 @@ export interface CreateResourceRequest {
 }
 
 /**
+ * ModifyFolder请求参数结构体
+ */
+export interface ModifyFolderRequest {
+  /**
+   * 文件夹ID（必填）
+   */
+  SourceFolderId?: string
+  /**
+   * 如需拖拽文件夹，需传入目标文件夹ID
+   */
+  TargetFolderId?: string
+  /**
+   * 如需修改文件夹名，需传入FolderName字段
+   */
+  FolderName?: string
+  /**
+   * 文件夹类型，0是任务文件夹，1是依赖文件夹
+   */
+  FolderType?: number
+  /**
+   * 批量移动的作业serial id 列表
+   */
+  SourceJobIds?: Array<string>
+  /**
+   * 工作空间 SerialId
+   */
+  WorkSpaceId?: string
+}
+
+/**
  * DescribeJobSubmissionLog返回参数结构体
  */
 export interface DescribeJobSubmissionLogResponse {
@@ -150,6 +180,24 @@ export interface DeleteJobsRequest {
    * 工作空间Id
    */
   WorkSpaceId?: string
+}
+
+/**
+ * ModifyWorkSpace请求参数结构体
+ */
+export interface ModifyWorkSpaceRequest {
+  /**
+   * 工作空间 SerialId
+   */
+  WorkSpaceId: string
+  /**
+   * 待修改的工作空间名称
+   */
+  WorkSpaceName?: string
+  /**
+   * 待修改的工作空间备注
+   */
+  Description?: string
 }
 
 /**
@@ -739,29 +787,17 @@ export interface DescribeClustersRequest {
 }
 
 /**
- * JobConfig引用资源信息
+ * CreateWorkSpace返回参数结构体
  */
-export interface ResourceRefDetail {
+export interface CreateWorkSpaceResponse {
   /**
-   * 资源id
+   * 工作空间 SerialId
    */
-  ResourceId: string
+  WorkSpaceId?: string
   /**
-   * 资源版本，-1表示使用最新版本
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  Version: number
-  /**
-   * 资源名称
-   */
-  Name: string
-  /**
-   * 1: 主资源
-   */
-  Type: number
-  /**
-   * 1: 系统内置资源
-   */
-  SystemProvide: number
+  RequestId?: string
 }
 
 /**
@@ -879,6 +915,16 @@ export interface CreateFolderRequest {
    * 工作空间 SerialId
    */
   WorkSpaceId?: string
+}
+
+/**
+ * DeleteJobConfigs返回参数结构体
+ */
+export interface DeleteJobConfigsResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1053,6 +1099,20 @@ export interface JobGraphNode {
 }
 
 /**
+ * CreateWorkSpace请求参数结构体
+ */
+export interface CreateWorkSpaceRequest {
+  /**
+   * 工作空间名称
+   */
+  WorkSpaceName: string
+  /**
+   * 项目空间备注
+   */
+  Description?: string
+}
+
+/**
  * DeleteResourceConfigs请求参数结构体
  */
 export interface DeleteResourceConfigsRequest {
@@ -1101,6 +1161,24 @@ export interface DescribeJobSavepointResponse {
 }
 
 /**
+ * DeleteFolders请求参数结构体
+ */
+export interface DeleteFoldersRequest {
+  /**
+   * 需删除的文件夹唯一ID
+   */
+  FolderIds: Array<string>
+  /**
+   * 文件夹类型，0是任务文件夹，1是依赖文件夹
+   */
+  FolderType?: number
+  /**
+   * 工作空间 SerialId
+   */
+  WorkSpaceId?: string
+}
+
+/**
  * DescribeWorkSpaces返回参数结构体
  */
 export interface DescribeWorkSpacesResponse {
@@ -1143,6 +1221,32 @@ export interface GatewayRefItem {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Type: number
+}
+
+/**
+ * DescribeJobs请求参数结构体
+ */
+export interface DescribeJobsRequest {
+  /**
+   * 按照一个或者多个作业ID查询。作业ID形如：cql-11112222，每次请求的作业上限为100。参数不支持同时指定JobIds和Filters。
+   */
+  JobIds?: Array<string>
+  /**
+   * 过滤条件，支持的 Filter.Name 为：作业名 Name、作业状态 Status、所属集群 ClusterId、作业id JobId、集群名称 ClusterName。 每次请求的 Filters 个数的上限为 5，Filter.Values 的个数上限为 5。参数不支持同时指定 JobIds 和 Filters。
+   */
+  Filters?: Array<Filter>
+  /**
+   * 偏移量，默认为0
+   */
+  Offset?: number
+  /**
+   * 分页大小，默认为20，最大值为100
+   */
+  Limit?: number
+  /**
+   * 工作空间 SerialId
+   */
+  WorkSpaceId?: string
 }
 
 /**
@@ -1419,6 +1523,24 @@ export interface CheckSavepointRequest {
    * 工作空间 id
    */
   WorkSpaceId: string
+}
+
+/**
+ * DeleteJobConfigs请求参数结构体
+ */
+export interface DeleteJobConfigsRequest {
+  /**
+   * 作业ID
+   */
+  JobId: string
+  /**
+   * 作业配置版本数组
+   */
+  JobConfigVersions: Array<number | bigint>
+  /**
+   * 工作空间 SerialId
+   */
+  WorkSpaceId?: string
 }
 
 /**
@@ -1774,6 +1896,32 @@ export interface DescribeTreeResourcesRsp {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalCount?: number
+}
+
+/**
+ * JobConfig引用资源信息
+ */
+export interface ResourceRefDetail {
+  /**
+   * 资源id
+   */
+  ResourceId: string
+  /**
+   * 资源版本，-1表示使用最新版本
+   */
+  Version: number
+  /**
+   * 资源名称
+   */
+  Name: string
+  /**
+   * 1: 主资源
+   */
+  Type: number
+  /**
+   * 1: 系统内置资源
+   */
+  SystemProvide: number
 }
 
 /**
@@ -2289,29 +2437,34 @@ export interface DescribeJobSubmissionLogRequest {
 }
 
 /**
- * DescribeJobs请求参数结构体
+ * 专家模式  计算节点的配置信息
  */
-export interface DescribeJobsRequest {
+export interface NodeConfig {
   /**
-   * 按照一个或者多个作业ID查询。作业ID形如：cql-11112222，每次请求的作业上限为100。参数不支持同时指定JobIds和Filters。
+   * Node ID
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  JobIds?: Array<string>
+  Id: number
   /**
-   * 过滤条件，支持的 Filter.Name 为：作业名 Name、作业状态 Status、所属集群 ClusterId、作业id JobId、集群名称 ClusterName。 每次请求的 Filters 个数的上限为 5，Filter.Values 的个数上限为 5。参数不支持同时指定 JobIds 和 Filters。
+   * Node parallelism
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Filters?: Array<Filter>
+  Parallelism?: number
   /**
-   * 偏移量，默认为0
+   * Slot sharing group
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Offset?: number
+  SlotSharingGroup?: string
   /**
-   * 分页大小，默认为20，最大值为100
+   * Configuration properties
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Limit?: number
+  Configuration?: Array<Property>
   /**
-   * 工作空间 SerialId
+   * 节点的状态ttl配置, 多个用 ; 分割
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  WorkSpaceId?: string
+  StateTTL?: string
 }
 
 /**
@@ -2638,6 +2791,16 @@ export interface DescribeResourceConfigsRequest {
 }
 
 /**
+ * ModifyFolder返回参数结构体
+ */
+export interface ModifyFolderResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * SlotSharingGroup 描述
  */
 export interface SlotSharingGroup {
@@ -2656,6 +2819,16 @@ export interface SlotSharingGroup {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Description?: string
+}
+
+/**
+ * ModifyWorkSpace返回参数结构体
+ */
+export interface ModifyWorkSpaceResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2756,34 +2929,13 @@ export interface DeleteTableConfigResponse {
 }
 
 /**
- * 专家模式  计算节点的配置信息
+ * DeleteFolders返回参数结构体
  */
-export interface NodeConfig {
+export interface DeleteFoldersResponse {
   /**
-   * Node ID
-注意：此字段可能返回 null，表示取不到有效值。
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  Id: number
-  /**
-   * Node parallelism
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Parallelism?: number
-  /**
-   * Slot sharing group
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SlotSharingGroup?: string
-  /**
-   * Configuration properties
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Configuration?: Array<Property>
-  /**
-   * 节点的状态ttl配置, 多个用 ; 分割
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  StateTTL?: string
+  RequestId?: string
 }
 
 /**

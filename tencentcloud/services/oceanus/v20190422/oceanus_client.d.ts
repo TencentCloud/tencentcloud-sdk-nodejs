@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { CreateResourceRequest, DescribeJobSubmissionLogResponse, DeleteJobsRequest, CreateJobConfigResponse, CreateResourceConfigResponse, CreateJobConfigRequest, DescribeTreeJobsResponse, CopyJobsRequest, CopyJobsResponse, TriggerJobSavepointRequest, DescribeJobSavepointRequest, DescribeWorkSpacesRequest, DescribeTreeResourcesRequest, DescribeResourceConfigsResponse, DescribeClustersRequest, CreateJobResponse, CreateFolderRequest, DeleteTableConfigRequest, DeleteResourcesResponse, ModifyJobResponse, FetchSqlGatewayStatementResultResponse, DeleteResourceConfigsRequest, DescribeJobSavepointResponse, DescribeWorkSpacesResponse, CreateResourceResponse, DescribeSystemResourcesRequest, CreateFolderResponse, DescribeResourcesResponse, DescribeResourceRelatedJobsResponse, DescribeClustersResponse, DescribeSystemResourcesResponse, CheckSavepointRequest, StopJobsRequest, RunJobsRequest, DeleteJobsResponse, DescribeResourceRelatedJobsRequest, DescribeTreeResourcesResponse, RunJobsResponse, DeleteResourcesRequest, DescribeJobConfigsRequest, ModifyJobRequest, DeleteResourceConfigsResponse, DescribeJobSubmissionLogRequest, DescribeJobsRequest, DescribeResourceConfigsRequest, RunSqlGatewayStatementResponse, CreateJobRequest, DeleteTableConfigResponse, TriggerJobSavepointResponse, CreateResourceConfigRequest, StopJobsResponse, DescribeResourcesRequest, RunSqlGatewayStatementRequest, CheckSavepointResponse, DescribeJobsResponse, DescribeTreeJobsRequest, DescribeJobConfigsResponse, FetchSqlGatewayStatementResultRequest } from "./oceanus_models";
+import { CreateResourceRequest, ModifyFolderRequest, DescribeJobSubmissionLogResponse, DeleteJobsRequest, ModifyWorkSpaceRequest, CreateJobConfigResponse, CreateResourceConfigResponse, CreateJobConfigRequest, DescribeTreeJobsResponse, CopyJobsRequest, CopyJobsResponse, TriggerJobSavepointRequest, DescribeJobSavepointRequest, DescribeWorkSpacesRequest, DescribeTreeResourcesRequest, DescribeResourceConfigsResponse, DescribeClustersRequest, CreateWorkSpaceResponse, CreateJobResponse, CreateFolderRequest, DeleteJobConfigsResponse, DeleteTableConfigRequest, DeleteResourcesResponse, ModifyJobResponse, FetchSqlGatewayStatementResultResponse, CreateWorkSpaceRequest, DeleteResourceConfigsRequest, DescribeJobSavepointResponse, DeleteFoldersRequest, DescribeWorkSpacesResponse, DescribeJobsRequest, CreateResourceResponse, DescribeSystemResourcesRequest, CreateFolderResponse, DescribeResourcesResponse, DescribeResourceRelatedJobsResponse, DescribeClustersResponse, DescribeSystemResourcesResponse, CheckSavepointRequest, DeleteJobConfigsRequest, StopJobsRequest, RunJobsRequest, DeleteJobsResponse, DescribeResourceRelatedJobsRequest, DescribeTreeResourcesResponse, RunJobsResponse, DeleteResourcesRequest, DescribeJobConfigsRequest, ModifyJobRequest, DeleteResourceConfigsResponse, DescribeJobSubmissionLogRequest, DescribeResourceConfigsRequest, ModifyFolderResponse, ModifyWorkSpaceResponse, RunSqlGatewayStatementResponse, CreateJobRequest, DeleteTableConfigResponse, DeleteFoldersResponse, TriggerJobSavepointResponse, CreateResourceConfigRequest, StopJobsResponse, DescribeResourcesRequest, RunSqlGatewayStatementRequest, CheckSavepointResponse, DescribeJobsResponse, DescribeTreeJobsRequest, DescribeJobConfigsResponse, FetchSqlGatewayStatementResultRequest } from "./oceanus_models";
 /**
  * oceanus client
  * @class
@@ -28,6 +28,10 @@ export declare class Client extends AbstractClient {
      */
     DeleteResourceConfigs(req: DeleteResourceConfigsRequest, cb?: (error: string, rep: DeleteResourceConfigsResponse) => void): Promise<DeleteResourceConfigsResponse>;
     /**
+     * 创建工作空间
+     */
+    CreateWorkSpace(req: CreateWorkSpaceRequest, cb?: (error: string, rep: CreateWorkSpaceResponse) => void): Promise<CreateWorkSpaceResponse>;
+    /**
      * 创建资源配置接口
      */
     CreateResourceConfig(req: CreateResourceConfigRequest, cb?: (error: string, rep: CreateResourceConfigResponse) => void): Promise<CreateResourceConfigResponse>;
@@ -39,6 +43,10 @@ export declare class Client extends AbstractClient {
      * 描述资源配置接口
      */
     DescribeResourceConfigs(req: DescribeResourceConfigsRequest, cb?: (error: string, rep: DescribeResourceConfigsResponse) => void): Promise<DescribeResourceConfigsResponse>;
+    /**
+     * 自定义树状结构页面拖拽文件夹
+     */
+    ModifyFolder(req: ModifyFolderRequest, cb?: (error: string, rep: ModifyFolderResponse) => void): Promise<ModifyFolderResponse>;
     /**
      * 查找Savepoint列表
      */
@@ -59,6 +67,10 @@ export declare class Client extends AbstractClient {
      * 查询集群
      */
     DescribeClusters(req: DescribeClustersRequest, cb?: (error: string, rep: DescribeClustersResponse) => void): Promise<DescribeClustersResponse>;
+    /**
+     * 作业列表删除文件夹
+     */
+    DeleteFolders(req: DeleteFoldersRequest, cb?: (error: string, rep: DeleteFoldersResponse) => void): Promise<DeleteFoldersResponse>;
     /**
      * 授权工作空间列表
      */
@@ -92,6 +104,10 @@ export declare class Client extends AbstractClient {
      */
     CreateJobConfig(req: CreateJobConfigRequest, cb?: (error: string, rep: CreateJobConfigResponse) => void): Promise<CreateJobConfigResponse>;
     /**
+     * 删除作业配置
+     */
+    DeleteJobConfigs(req: DeleteJobConfigsRequest, cb?: (error: string, rep: DeleteJobConfigsResponse) => void): Promise<DeleteJobConfigsResponse>;
+    /**
      * 批量停止作业，批量操作数量上限为20
      */
     StopJobs(req: StopJobsRequest, cb?: (error: string, rep: StopJobsResponse) => void): Promise<StopJobsResponse>;
@@ -99,6 +115,10 @@ export declare class Client extends AbstractClient {
      * 获取资源关联作业信息
      */
     DescribeResourceRelatedJobs(req: DescribeResourceRelatedJobsRequest, cb?: (error: string, rep: DescribeResourceRelatedJobsResponse) => void): Promise<DescribeResourceRelatedJobsResponse>;
+    /**
+     * 修改工作空间
+     */
+    ModifyWorkSpace(req: ModifyWorkSpaceRequest, cb?: (error: string, rep: ModifyWorkSpaceResponse) => void): Promise<ModifyWorkSpaceResponse>;
     /**
      * 删除资源接口
      */

@@ -29,12 +29,14 @@ import {
   SmartOptimizerIndexPolicy,
   ModifyDataEngineDescriptionRequest,
   CancelNotebookSessionStatementRequest,
+  DescribeNotebookSessionStatementSqlResultRequest,
   DescribeDatabasesRequest,
   WorkGroupMessage,
   DeleteUserRequest,
   DescribeUserDataEngineConfigResponse,
   ListTaskJobLogDetailResponse,
   Asset,
+  DetachWorkGroupPolicyResponse,
   GetOptimizerPolicyRequest,
   PythonSparkImage,
   DeleteDataEngineResponse,
@@ -77,7 +79,7 @@ import {
   CreateNotebookSessionStatementSupportBatchSQLRequest,
   CreateTasksInOrderRequest,
   AddDMSPartitionsResponse,
-  DetachWorkGroupPolicyResponse,
+  DescribeViewsRequest,
   DescribeSparkSessionBatchSqlLogResponse,
   GenerateCreateMangedTableSqlRequest,
   DescribeUserTypeRequest,
@@ -197,7 +199,7 @@ import {
   CreateNotebookSessionStatementResponse,
   DescribeStoreLocationResponse,
   DeleteScriptRequest,
-  DescribeNotebookSessionStatementSqlResultRequest,
+  DescribeLakeFsTaskResultRequest,
   UnbindWorkGroupsFromUserResponse,
   AddDMSPartitionsRequest,
   Script,
@@ -288,7 +290,7 @@ import {
   DescribeSparkAppJobsResponse,
   DescribeSparkAppTasksResponse,
   TableResponseInfo,
-  DescribeViewsRequest,
+  DescribeLakeFsTaskResultResponse,
   LockMetaDataRequest,
   ModifyUserTypeResponse,
   DataSourceInfo,
@@ -661,6 +663,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeNotebookSessionsResponse) => void
   ): Promise<DescribeNotebookSessionsResponse> {
     return this.request("DescribeNotebookSessions", req, cb)
+  }
+
+  /**
+   * 获取LakeFs上task执行结果访问信息
+   */
+  async DescribeLakeFsTaskResult(
+    req?: DescribeLakeFsTaskResultRequest,
+    cb?: (error: string, rep: DescribeLakeFsTaskResultResponse) => void
+  ): Promise<DescribeLakeFsTaskResultResponse> {
+    return this.request("DescribeLakeFsTaskResult", req, cb)
   }
 
   /**

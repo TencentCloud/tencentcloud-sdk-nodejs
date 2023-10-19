@@ -297,6 +297,24 @@ export interface CancelNotebookSessionStatementRequest {
 }
 
 /**
+ * DescribeNotebookSessionStatementSqlResult请求参数结构体
+ */
+export interface DescribeNotebookSessionStatementSqlResultRequest {
+  /**
+   * 任务唯一ID
+   */
+  TaskId: string
+  /**
+   * 返回结果的最大行数，范围0~1000，默认为1000.
+   */
+  MaxResults?: number
+  /**
+   * 上一次请求响应返回的分页信息。第一次可以不带，从头开始返回数据，每次返回MaxResults字段设置的数据量。
+   */
+  NextToken?: string
+}
+
+/**
  * DescribeDatabases请求参数结构体
  */
 export interface DescribeDatabasesRequest {
@@ -476,6 +494,16 @@ export interface Asset {
    * 数据源主键
    */
   DatasourceId?: number
+}
+
+/**
+ * DetachWorkGroupPolicy返回参数结构体
+ */
+export interface DetachWorkGroupPolicyResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1568,13 +1596,47 @@ export interface AddDMSPartitionsResponse {
 }
 
 /**
- * DetachWorkGroupPolicy返回参数结构体
+ * DescribeViews请求参数结构体
  */
-export interface DetachWorkGroupPolicyResponse {
+export interface DescribeViewsRequest {
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 列出该数据库下所属数据表。
    */
-  RequestId?: string
+  DatabaseName: string
+  /**
+   * 返回数量，默认为10，最大值为100。
+   */
+  Limit?: number
+  /**
+   * 数据偏移量，从0开始，默认为0。
+   */
+  Offset?: number
+  /**
+   * 过滤条件，如下支持的过滤类型，传参Name应为其一
+view-name - String - （过滤条件）数据表名称,形如：view-001。
+view-id - String - （过滤条件）view id形如：12342。
+   */
+  Filters?: Array<Filter>
+  /**
+   * 数据库所属的数据源名称
+   */
+  DatasourceConnectionName?: string
+  /**
+   * 排序字段
+   */
+  Sort?: string
+  /**
+   * 排序规则，true:升序；false:降序
+   */
+  Asc?: boolean
+  /**
+   * 按视图更新时间筛选，开始时间，如2021-11-11 00:00:00
+   */
+  StartTime?: string
+  /**
+   * 按视图更新时间筛选，结束时间，如2021-11-12 00:00:00
+   */
+  EndTime?: string
 }
 
 /**
@@ -4711,22 +4773,9 @@ export interface DeleteScriptRequest {
 }
 
 /**
- * DescribeNotebookSessionStatementSqlResult请求参数结构体
+ * DescribeLakeFsTaskResult请求参数结构体
  */
-export interface DescribeNotebookSessionStatementSqlResultRequest {
-  /**
-   * 任务唯一ID
-   */
-  TaskId: string
-  /**
-   * 返回结果的最大行数，范围0~1000，默认为1000.
-   */
-  MaxResults?: number
-  /**
-   * 上一次请求响应返回的分页信息。第一次可以不带，从头开始返回数据，每次返回MaxResults字段设置的数据量。
-   */
-  NextToken?: string
-}
+export type DescribeLakeFsTaskResultRequest = null
 
 /**
  * UnbindWorkGroupsFromUser返回参数结构体
@@ -6725,47 +6774,13 @@ export interface TableResponseInfo {
 }
 
 /**
- * DescribeViews请求参数结构体
+ * DescribeLakeFsTaskResult返回参数结构体
  */
-export interface DescribeViewsRequest {
+export interface DescribeLakeFsTaskResultResponse {
   /**
-   * 列出该数据库下所属数据表。
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  DatabaseName: string
-  /**
-   * 返回数量，默认为10，最大值为100。
-   */
-  Limit?: number
-  /**
-   * 数据偏移量，从0开始，默认为0。
-   */
-  Offset?: number
-  /**
-   * 过滤条件，如下支持的过滤类型，传参Name应为其一
-view-name - String - （过滤条件）数据表名称,形如：view-001。
-view-id - String - （过滤条件）view id形如：12342。
-   */
-  Filters?: Array<Filter>
-  /**
-   * 数据库所属的数据源名称
-   */
-  DatasourceConnectionName?: string
-  /**
-   * 排序字段
-   */
-  Sort?: string
-  /**
-   * 排序规则，true:升序；false:降序
-   */
-  Asc?: boolean
-  /**
-   * 按视图更新时间筛选，开始时间，如2021-11-11 00:00:00
-   */
-  StartTime?: string
-  /**
-   * 按视图更新时间筛选，结束时间，如2021-11-12 00:00:00
-   */
-  EndTime?: string
+  RequestId?: string
 }
 
 /**

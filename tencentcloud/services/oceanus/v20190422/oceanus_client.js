@@ -58,6 +58,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteResourceConfigs", req, cb);
     }
     /**
+     * 创建工作空间
+     */
+    async CreateWorkSpace(req, cb) {
+        return this.request("CreateWorkSpace", req, cb);
+    }
+    /**
      * 创建资源配置接口
      */
     async CreateResourceConfig(req, cb) {
@@ -74,6 +80,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeResourceConfigs(req, cb) {
         return this.request("DescribeResourceConfigs", req, cb);
+    }
+    /**
+     * 自定义树状结构页面拖拽文件夹
+     */
+    async ModifyFolder(req, cb) {
+        return this.request("ModifyFolder", req, cb);
     }
     /**
      * 查找Savepoint列表
@@ -104,6 +116,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeClusters(req, cb) {
         return this.request("DescribeClusters", req, cb);
+    }
+    /**
+     * 作业列表删除文件夹
+     */
+    async DeleteFolders(req, cb) {
+        return this.request("DeleteFolders", req, cb);
     }
     /**
      * 授权工作空间列表
@@ -154,6 +172,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateJobConfig", req, cb);
     }
     /**
+     * 删除作业配置
+     */
+    async DeleteJobConfigs(req, cb) {
+        return this.request("DeleteJobConfigs", req, cb);
+    }
+    /**
      * 批量停止作业，批量操作数量上限为20
      */
     async StopJobs(req, cb) {
@@ -164,6 +188,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeResourceRelatedJobs(req, cb) {
         return this.request("DescribeResourceRelatedJobs", req, cb);
+    }
+    /**
+     * 修改工作空间
+     */
+    async ModifyWorkSpace(req, cb) {
+        return this.request("ModifyWorkSpace", req, cb);
     }
     /**
      * 删除资源接口

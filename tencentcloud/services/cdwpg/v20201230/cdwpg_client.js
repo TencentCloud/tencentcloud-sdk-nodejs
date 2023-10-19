@@ -28,6 +28,12 @@ class Client extends abstract_client_1.AbstractClient {
         super("cdwpg.tencentcloudapi.com", "2020-12-30", clientConfig);
     }
     /**
+     * 获取云原生实例列表
+     */
+    async DescribeInstances(req, cb) {
+        return this.request("DescribeInstances", req, cb);
+    }
+    /**
      * 集群详情页中显示集群状态、流程进度等
      */
     async DescribeInstanceState(req, cb) {

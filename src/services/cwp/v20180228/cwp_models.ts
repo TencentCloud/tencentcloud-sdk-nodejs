@@ -3771,7 +3771,32 @@ export interface DescribeRiskDnsListRequest {
 /**
  * CreateWhiteListOrder请求参数结构体
  */
-export type CreateWhiteListOrderRequest = null
+export interface CreateWhiteListOrderRequest {
+  /**
+   * 授权类型
+   */
+  LicenseType: number
+  /**
+   * 授权数量,最小为1 最大99999
+   */
+  LicenseNum: number
+  /**
+   * 到期时间,最小为1
+   */
+  Deadline: number
+  /**
+   * 规则名称,大资产中心:asset_center
+   */
+  RuleName: string
+  /**
+   * 地域, 1 广州 9新加坡, 默认为 1. 非必要情况不要选9
+   */
+  RegionId?: number
+  /**
+   * 额外参数,json字符串,包含ResourceId 资源ID,LicenseType 授权类型
+   */
+  ExtraParam?: string
+}
 
 /**
  * 基线项
@@ -27064,7 +27089,12 @@ export interface DeleteBashEventsRequest {
 /**
  * DescribeLicenseWhiteConfig请求参数结构体
  */
-export type DescribeLicenseWhiteConfigRequest = null
+export interface DescribeLicenseWhiteConfigRequest {
+  /**
+   * 规则名称,例如: cwp
+   */
+  RuleName: string
+}
 
 /**
  * 网络攻击top统计数据

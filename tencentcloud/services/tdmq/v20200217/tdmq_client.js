@@ -100,6 +100,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeRocketMQSmoothMigrationTaskList", req, cb);
     }
     /**
+     * 获取指定消费组下当前客户端的连接情况
+     */
+    async DescribeRocketMQConsumerConnections(req, cb) {
+        return this.request("DescribeRocketMQConsumerConnections", req, cb);
+    }
+    /**
      * 创建RabbitMQ的用户
      */
     async CreateRabbitMQUser(req, cb) {

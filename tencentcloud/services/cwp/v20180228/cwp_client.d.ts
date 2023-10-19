@@ -470,7 +470,7 @@ export declare class Client extends AbstractClient {
     /**
      * 该接口可以创建白名单订单
      */
-    CreateWhiteListOrder(req?: CreateWhiteListOrderRequest, cb?: (error: string, rep: CreateWhiteListOrderResponse) => void): Promise<CreateWhiteListOrderResponse>;
+    CreateWhiteListOrder(req: CreateWhiteListOrderRequest, cb?: (error: string, rep: CreateWhiteListOrderResponse) => void): Promise<CreateWhiteListOrderResponse>;
     /**
      * 设置中心-授权管理 对某个授权批量解绑机器
      */
@@ -842,7 +842,7 @@ export declare class Client extends AbstractClient {
     /**
      * 查询授权白名单的可用配置
      */
-    DescribeLicenseWhiteConfig(req?: DescribeLicenseWhiteConfigRequest, cb?: (error: string, rep: DescribeLicenseWhiteConfigResponse) => void): Promise<DescribeLicenseWhiteConfigResponse>;
+    DescribeLicenseWhiteConfig(req: DescribeLicenseWhiteConfigRequest, cb?: (error: string, rep: DescribeLicenseWhiteConfigResponse) => void): Promise<DescribeLicenseWhiteConfigResponse>;
     /**
      * 查询恶意请求白名单列表
      */

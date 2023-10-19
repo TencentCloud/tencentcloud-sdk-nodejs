@@ -206,6 +206,37 @@ export interface DeleteUserRequest {
 }
 
 /**
+ * 水印配置
+ */
+export interface WatermarkConfig {
+  /**
+   * 水印图片的url
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Url?: string
+  /**
+   * 水印宽。为比例值
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Width?: number
+  /**
+   * 水印高。为比例值
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Height?: number
+  /**
+   * 水印X偏移, 取值:0-100, 表示区域X方向的百分比。比如50，则表示位于X轴中间。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LocationX?: number
+  /**
+   * 水印Y偏移, 取值:0-100, 表示区域Y方向的百分比。比如50，则表示位于Y轴中间。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LocationY?: number
+}
+
+/**
  * DescribeSupervisors返回参数结构体
  */
 export interface DescribeSupervisorsResponse {
@@ -499,6 +530,16 @@ export interface DeleteAppCustomContentRequest {
    * 指定需要删除的已设置的scene场景自定义元素，如果为空则删除应用下已设置的所有自定义元素。
    */
   Scenes?: Array<string>
+}
+
+/**
+ * SendRoomNotificationMessage返回参数结构体
+ */
+export interface SendRoomNotificationMessageResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1669,34 +1710,17 @@ export interface BatchDeleteRecordResponse {
 }
 
 /**
- * 水印配置
+ * 表情消息
  */
-export interface WatermarkConfig {
+export interface FaceMsgContent {
   /**
-   * 水印图片的url
-注意：此字段可能返回 null，表示取不到有效值。
+   * 表情索引，用户自定义。
    */
-  Url?: string
+  Index: number
   /**
-   * 水印宽。为比例值
-注意：此字段可能返回 null，表示取不到有效值。
+   * 额外数据。
    */
-  Width?: number
-  /**
-   * 水印高。为比例值
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Height?: number
-  /**
-   * 水印X偏移, 取值:0-100, 表示区域X方向的百分比。比如50，则表示位于X轴中间。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  LocationX?: number
-  /**
-   * 水印Y偏移, 取值:0-100, 表示区域Y方向的百分比。比如50，则表示位于Y轴中间。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  LocationY?: number
+  Data?: string
 }
 
 /**
@@ -2013,6 +2037,25 @@ export interface DescribeCurrentMemberListRequest {
 }
 
 /**
+ * SendRoomNotificationMessage请求参数结构体
+ */
+export interface SendRoomNotificationMessageRequest {
+  /**
+   * 低代码互动课堂的SdkAppId。
+   */
+  SdkAppId: number
+  /**
+   * 房间ID。
+
+   */
+  RoomId: number
+  /**
+   * 消息。
+   */
+  MsgContent: string
+}
+
+/**
  * DescribeSdkAppIdUsers返回参数结构体
  */
 export interface DescribeSdkAppIdUsersResponse {
@@ -2263,6 +2306,36 @@ export interface BatchDeleteGroupMemberRequest {
 }
 
 /**
+ * 单张图片信息
+ */
+export interface ImageInfo {
+  /**
+   * 图片类型：
+1-原图
+2-大图
+3-缩略图
+
+   */
+  Type: number
+  /**
+   * 图片数据大小，单位：字节。
+   */
+  Size: number
+  /**
+   * 图片宽度，单位为像素。
+   */
+  Width: number
+  /**
+   * 图片高度，单位为像素。
+   */
+  Height: number
+  /**
+   * 图片下载地址。
+   */
+  URL: string
+}
+
+/**
  * ModifyApp请求参数结构体
  */
 export interface ModifyAppRequest {
@@ -2341,6 +2414,30 @@ export interface LoginUserRequest {
 }
 
 /**
+ * 图片消息
+ */
+export interface ImageMsgContent {
+  /**
+   * 图片的唯一标识，客户端用于索引图片的键值。
+   */
+  UUID: string
+  /**
+   * 图片格式。
+JPG = 1
+GIF = 2
+PNG = 3
+BMP = 4
+其他 = 255
+
+   */
+  ImageFormat: number
+  /**
+   * 图片信息
+   */
+  ImageInfoList: Array<ImageInfo>
+}
+
+/**
  * 每个选项答题人数统计
  */
 export interface AnswerStat {
@@ -2352,6 +2449,16 @@ export interface AnswerStat {
    * 答题人数
    */
   Count?: number
+}
+
+/**
+ * SendRoomNormalMessage返回参数结构体
+ */
+export interface SendRoomNormalMessageResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2845,6 +2952,32 @@ export interface GetRoomsRequest {
 }
 
 /**
+ * SendRoomNormalMessage请求参数结构体
+ */
+export interface SendRoomNormalMessageRequest {
+  /**
+   * 低代码互动课堂的SdkAppId。
+   */
+  SdkAppId: number
+  /**
+   * 房间ID。
+   */
+  RoomId: number
+  /**
+   * 管理员指定消息发送方账号（若需设置 FromAccount 信息，则该参数取值不能为空）
+   */
+  FromAccount: string
+  /**
+   * 自定义消息
+   */
+  MsgBody: Array<MsgBody>
+  /**
+   * 消息自定义数据（云端保存，会发送到对端，程序卸载重装后还能拉取到）。
+   */
+  CloudCustomData?: string
+}
+
+/**
  * DescribeDeveloper请求参数结构体
  */
 export type DescribeDeveloperRequest = null
@@ -2930,6 +3063,31 @@ export interface AddGroupMemberResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 自定义消息结构
+ */
+export interface MsgBody {
+  /**
+   * TIM 消息对象类型，目前支持的消息对象包括：
+TIMTextElem（文本消息）
+TIMFaceElem（表情消息）
+TIMImageElem（图像消息）
+   */
+  MsgType: string
+  /**
+   * 文本消息，当MsgType 为TIMTextElem（文本消息）必选。
+   */
+  TextMsgContent?: TextMsgContent
+  /**
+   * 表情消息，当MsgType 为TIMFaceElem（表情消息）必选。
+   */
+  FaceMsgContent?: FaceMsgContent
+  /**
+   * 图像消息，当MsgType为TIMImageElem（图像消息）必选。
+   */
+  ImageMsgContent?: ImageMsgContent
 }
 
 /**
@@ -3101,6 +3259,16 @@ export interface DescribeDeveloperResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 文本消息
+ */
+export interface TextMsgContent {
+  /**
+   * 文本消息。
+   */
+  Text: string
 }
 
 /**

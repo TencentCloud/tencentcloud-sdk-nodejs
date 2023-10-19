@@ -36,6 +36,7 @@ import {
   SetLoadBalancerClsLogResponse,
   DescribeLoadBalancerTrafficResponse,
   MultiCertInfo,
+  RsTagRule,
   ModifyRuleRequest,
   DescribeCustomizedConfigListResponse,
   DescribeBlockIPListResponse,
@@ -63,6 +64,7 @@ import {
   DescribeExclusiveClustersResponse,
   ModifyDomainRequest,
   IdleLoadBalancer,
+  BatchModifyTargetTagRequest,
   RegisterTargetGroupInstancesResponse,
   ClassicalTargetInfo,
   DescribeTargetsRequest,
@@ -135,7 +137,7 @@ import {
   DescribeClassicalLBHealthStatusRequest,
   DescribeListenersRequest,
   CreateClsLogSetResponse,
-  DescribeCrossTargetsRequest,
+  Backend,
   LBChargePrepaid,
   ClassicalListener,
   DeleteLoadBalancerRequest,
@@ -190,6 +192,7 @@ import {
   LoadBalancerDetail,
   LbRsTargets,
   BatchModifyTargetWeightRequest,
+  BatchModifyTargetTagResponse,
   DeleteRewriteResponse,
   BatchTarget,
   DescribeLoadBalancerListByCertIdRequest,
@@ -252,7 +255,7 @@ import {
   TargetGroupAssociation,
   ListenerHealth,
   AssociationItem,
-  Backend,
+  DescribeCrossTargetsRequest,
   RegisterTargetGroupInstancesRequest,
   LoadBalancer,
 } from "./clb_models"
@@ -392,13 +395,14 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 绑定或解绑一个安全组到多个公网负载均衡实例。注意：内网负载均衡不支持绑定安全组。
-   */
-  async SetSecurityGroupForLoadbalancers(
-    req: SetSecurityGroupForLoadbalancersRequest,
-    cb?: (error: string, rep: SetSecurityGroupForLoadbalancersResponse) => void
-  ): Promise<SetSecurityGroupForLoadbalancersResponse> {
-    return this.request("SetSecurityGroupForLoadbalancers", req, cb)
+     * 用户手动配置原访问地址和重定向地址，系统自动将原访问地址的请求重定向至对应路径的目的地址。同一域名下可以配置多条路径作为重定向策略，实现http/https之间请求的自动跳转。设置重定向时，需满足如下约束条件：若A已经重定向至B，则A不能再重定向至C（除非先删除老的重定向关系，再建立新的重定向关系），B不能重定向至任何其它地址。
+本接口为异步接口，本接口返回成功后需以返回的RequestID为入参，调用DescribeTaskStatus接口查询本次任务是否成功。
+     */
+  async ManualRewrite(
+    req: ManualRewriteRequest,
+    cb?: (error: string, rep: ManualRewriteResponse) => void
+  ): Promise<ManualRewriteResponse> {
+    return this.request("ManualRewrite", req, cb)
   }
 
   /**
@@ -978,6 +982,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 绑定或解绑一个安全组到多个公网负载均衡实例。注意：内网负载均衡不支持绑定安全组。
+   */
+  async SetSecurityGroupForLoadbalancers(
+    req: SetSecurityGroupForLoadbalancersRequest,
+    cb?: (error: string, rep: SetSecurityGroupForLoadbalancersResponse) => void
+  ): Promise<SetSecurityGroupForLoadbalancersResponse> {
+    return this.request("SetSecurityGroupForLoadbalancers", req, cb)
+  }
+
+  /**
    * 查询目标组信息
    */
   async DescribeTargetGroups(
@@ -1157,14 +1171,13 @@ BGP带宽包必须传带宽包id
   }
 
   /**
-     * 用户手动配置原访问地址和重定向地址，系统自动将原访问地址的请求重定向至对应路径的目的地址。同一域名下可以配置多条路径作为重定向策略，实现http/https之间请求的自动跳转。设置重定向时，需满足如下约束条件：若A已经重定向至B，则A不能再重定向至C（除非先删除老的重定向关系，再建立新的重定向关系），B不能重定向至任何其它地址。
-本接口为异步接口，本接口返回成功后需以返回的RequestID为入参，调用DescribeTaskStatus接口查询本次任务是否成功。
-     */
-  async ManualRewrite(
-    req: ManualRewriteRequest,
-    cb?: (error: string, rep: ManualRewriteResponse) => void
-  ): Promise<ManualRewriteResponse> {
-    return this.request("ManualRewrite", req, cb)
+   * BatchModifyTargetTag 接口用于批量修改负载均衡监听器绑定的后端机器的标签。批量修改的资源数量上限为500。本接口为同步接口。<br/>负载均衡的4层和7层监听器支持此接口，传统型负载均衡不支持。
+   */
+  async BatchModifyTargetTag(
+    req: BatchModifyTargetTagRequest,
+    cb?: (error: string, rep: BatchModifyTargetTagResponse) => void
+  ): Promise<BatchModifyTargetTagResponse> {
+    return this.request("BatchModifyTargetTag", req, cb)
   }
 
   /**

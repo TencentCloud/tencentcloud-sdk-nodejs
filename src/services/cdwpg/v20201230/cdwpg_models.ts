@@ -36,28 +36,6 @@ export interface DescribeInstanceStateRequest {
 }
 
 /**
- * 资源规格
- */
-export interface ResourceSpecNew {
-  /**
-   * 资源名称
-   */
-  SpecName: string
-  /**
-   * 资源数
-   */
-  Count: number
-  /**
-   * 磁盘信息
-   */
-  DiskSpec: CBSSpec
-  /**
-   * 资源类型，DATA
-   */
-  Type: string
-}
-
-/**
  * 计费时间参数
  */
 export interface ChargeProperties {
@@ -84,29 +62,6 @@ export interface ChargeProperties {
 }
 
 /**
- * DestroyInstanceByApi返回参数结构体
- */
-export interface DestroyInstanceByApiResponse {
-  /**
-   * 销毁流程Id
-   */
-  FlowId?: string
-  /**
-   * 错误信息
-   */
-  ErrorMsg?: string
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * 集群节点信息
- */
-export type InstanceNodeGroup = null
-
-/**
  * DestroyInstanceByApi请求参数结构体
  */
 export interface DestroyInstanceByApiRequest {
@@ -117,42 +72,9 @@ export interface DestroyInstanceByApiRequest {
 }
 
 /**
- * CreateInstanceByApi请求参数结构体
+ * 集群节点信息
  */
-export interface CreateInstanceByApiRequest {
-  /**
-   * 实例名称
-   */
-  InstanceName: string
-  /**
-   * 可用区
-   */
-  Zone: string
-  /**
-   * 私有网络
-   */
-  UserVPCId: string
-  /**
-   * 子网
-   */
-  UserSubnetId: string
-  /**
-   * 计费方式
-   */
-  ChargeProperties: ChargeProperties
-  /**
-   * 集群密码
-   */
-  AdminPassword: string
-  /**
-   * 资源信息
-   */
-  Resources: Array<ResourceSpecNew>
-  /**
-   * 标签列表
-   */
-  Tags?: Tag
-}
+export type InstanceNodeGroup = null
 
 /**
  * 磁盘规格
@@ -170,6 +92,20 @@ export interface CBSSpec {
    * 个数
    */
   DiskCount: number
+}
+
+/**
+ * ModifyInstance请求参数结构体
+ */
+export interface ModifyInstanceRequest {
+  /**
+   * 实例Id
+   */
+  InstanceId: string
+  /**
+   * 新修改的实例名称
+   */
+  InstanceName: string
 }
 
 /**
@@ -226,143 +162,6 @@ export interface InstanceStateInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   BackupOpenStatus?: number
-}
-
-/**
- * DescribeInstance请求参数结构体
- */
-export interface DescribeInstanceRequest {
-  /**
-   * 集群实例ID
-   */
-  InstanceId: string
-}
-
-/**
- * ModifyInstance请求参数结构体
- */
-export interface ModifyInstanceRequest {
-  /**
-   * 实例Id
-   */
-  InstanceId: string
-  /**
-   * 新修改的实例名称
-   */
-  InstanceName: string
-}
-
-/**
- * CreateInstanceByApi返回参数结构体
- */
-export interface CreateInstanceByApiResponse {
-  /**
-   * 流程ID
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  FlowId?: string
-  /**
-   * 实例ID
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  InstanceId?: string
-  /**
-   * 错误信息
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ErrorMsg?: string
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DescribeSimpleInstances返回参数结构体
- */
-export interface DescribeSimpleInstancesResponse {
-  /**
-   * 1
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TotalCount?: number
-  /**
-   * 1
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  InstancesList?: Array<InstanceSimpleInfoNew>
-  /**
-   * -
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ErrorMsg?: string
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * 标签描述
- */
-export interface Tag {
-  /**
-   * 标签的键
-   */
-  TagKey: string
-  /**
-   * 标签的值
-   */
-  TagValue: string
-}
-
-/**
- * DescribeInstanceState返回参数结构体
- */
-export interface DescribeInstanceStateResponse {
-  /**
-   * 集群状态，例如：Serving
-   */
-  InstanceState?: string
-  /**
-   * 集群操作创建时间
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  FlowCreateTime?: string
-  /**
-   * 集群操作名称
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  FlowName?: string
-  /**
-   * 集群操作进度
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  FlowProgress?: number
-  /**
-   * 集群状态描述，例如：运行中
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  InstanceStateDesc?: string
-  /**
-   * 集群流程错误信息，例如：“创建失败，资源不足”
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  FlowMsg?: string
-  /**
-   * 当前步骤的名称，例如：”购买资源中“
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ProcessName?: string
-  /**
-   * 集群备份任务开启状态
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  BackupStatus?: number
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**
@@ -477,6 +276,290 @@ export interface InstanceInfo {
 }
 
 /**
+ * DescribeInstances返回参数结构体
+ */
+export interface DescribeInstancesResponse {
+  /**
+   * 实例总数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalCount: number
+  /**
+   * 实例数组
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstancesList: Array<InstanceInfo>
+  /**
+   * -
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ErrorMsg: string
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 资源规格
+ */
+export interface ResourceSpecNew {
+  /**
+   * 资源名称
+   */
+  SpecName: string
+  /**
+   * 资源数
+   */
+  Count: number
+  /**
+   * 磁盘信息
+   */
+  DiskSpec: CBSSpec
+  /**
+   * 资源类型，DATA
+   */
+  Type: string
+}
+
+/**
+ * DescribeInstances请求参数结构体
+ */
+export interface DescribeInstancesRequest {
+  /**
+   * 搜索的集群id名称
+   */
+  SearchInstanceId?: string
+  /**
+   * 搜索的集群name
+   */
+  SearchInstanceName?: string
+  /**
+   * 分页参数，第一页为0，第二页为10
+   */
+  Offset?: number
+  /**
+   * 分页参数，分页步长，默认为10
+   */
+  Limit?: number
+  /**
+   * 搜索标签列表
+   */
+  SearchTags?: Array<SearchTags>
+}
+
+/**
+ * CreateInstanceByApi返回参数结构体
+ */
+export interface CreateInstanceByApiResponse {
+  /**
+   * 流程ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FlowId?: string
+  /**
+   * 实例ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceId?: string
+  /**
+   * 错误信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ErrorMsg?: string
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeSimpleInstances返回参数结构体
+ */
+export interface DescribeSimpleInstancesResponse {
+  /**
+   * 1
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalCount?: number
+  /**
+   * 1
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstancesList?: Array<InstanceSimpleInfoNew>
+  /**
+   * -
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ErrorMsg?: string
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeInstance返回参数结构体
+ */
+export interface DescribeInstanceResponse {
+  /**
+   * 实例描述信息
+   */
+  InstanceInfo: InstanceInfo
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DestroyInstanceByApi返回参数结构体
+ */
+export interface DestroyInstanceByApiResponse {
+  /**
+   * 销毁流程Id
+   */
+  FlowId?: string
+  /**
+   * 错误信息
+   */
+  ErrorMsg?: string
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateInstanceByApi请求参数结构体
+ */
+export interface CreateInstanceByApiRequest {
+  /**
+   * 实例名称
+   */
+  InstanceName: string
+  /**
+   * 可用区
+   */
+  Zone: string
+  /**
+   * 私有网络
+   */
+  UserVPCId: string
+  /**
+   * 子网
+   */
+  UserSubnetId: string
+  /**
+   * 计费方式
+   */
+  ChargeProperties: ChargeProperties
+  /**
+   * 集群密码
+   */
+  AdminPassword: string
+  /**
+   * 资源信息
+   */
+  Resources: Array<ResourceSpecNew>
+  /**
+   * 标签列表
+   */
+  Tags?: Tag
+}
+
+/**
+ * 列表页搜索的标记列表
+ */
+export interface SearchTags {
+  /**
+   * 标签的键
+   */
+  TagKey?: string
+  /**
+   * 标签的值
+   */
+  TagValue?: string
+  /**
+   * 1表示只输入标签的键，没有输入值；0表示输入键时且输入值
+   */
+  AllValue?: number
+}
+
+/**
+ * DescribeInstance请求参数结构体
+ */
+export interface DescribeInstanceRequest {
+  /**
+   * 集群实例ID
+   */
+  InstanceId: string
+}
+
+/**
+ * 标签描述
+ */
+export interface Tag {
+  /**
+   * 标签的键
+   */
+  TagKey: string
+  /**
+   * 标签的值
+   */
+  TagValue: string
+}
+
+/**
+ * DescribeInstanceState返回参数结构体
+ */
+export interface DescribeInstanceStateResponse {
+  /**
+   * 集群状态，例如：Serving
+   */
+  InstanceState?: string
+  /**
+   * 集群操作创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FlowCreateTime?: string
+  /**
+   * 集群操作名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FlowName?: string
+  /**
+   * 集群操作进度
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FlowProgress?: number
+  /**
+   * 集群状态描述，例如：运行中
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceStateDesc?: string
+  /**
+   * 集群流程错误信息，例如：“创建失败，资源不足”
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FlowMsg?: string
+  /**
+   * 当前步骤的名称，例如：”购买资源中“
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProcessName?: string
+  /**
+   * 集群备份任务开启状态
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BackupStatus?: number
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 精简集群信息
  */
 export interface InstanceSimpleInfoNew {
@@ -565,20 +648,6 @@ export interface InstanceSimpleInfoNew {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RenewFlag?: boolean
-}
-
-/**
- * DescribeInstance返回参数结构体
- */
-export interface DescribeInstanceResponse {
-  /**
-   * 实例描述信息
-   */
-  InstanceInfo: InstanceInfo
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**

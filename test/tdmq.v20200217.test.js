@@ -138,6 +138,16 @@ it("tdmq.v20200217.DescribeRocketMQSmoothMigrationTaskList", async function () {
     }
 })
 
+it("tdmq.v20200217.DescribeRocketMQConsumerConnections", async function () {
+    try {
+       const data = await client.DescribeRocketMQConsumerConnections({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tdmq.v20200217.CreateRabbitMQUser", async function () {
     try {
        const data = await client.CreateRabbitMQUser({})

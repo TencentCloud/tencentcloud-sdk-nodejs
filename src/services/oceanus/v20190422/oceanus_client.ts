@@ -20,8 +20,10 @@ import { ClientConfig } from "../../../common/interface"
 import {
   CopyJobResult,
   CreateResourceRequest,
+  ModifyFolderRequest,
   DescribeJobSubmissionLogResponse,
   DeleteJobsRequest,
+  ModifyWorkSpaceRequest,
   CreateJobConfigResponse,
   CreateResourceConfigResponse,
   CreateJobConfigRequest,
@@ -44,12 +46,13 @@ import {
   DescribeTreeResourcesRequest,
   DescribeResourceConfigsResponse,
   DescribeClustersRequest,
-  ResourceRefDetail,
+  CreateWorkSpaceResponse,
   CreateJobResponse,
   SqlGatewayItem,
   JobGraph,
   StopJobDescription,
   CreateFolderRequest,
+  DeleteJobConfigsResponse,
   DeleteTableConfigRequest,
   StatementResult,
   DeleteResourcesResponse,
@@ -58,10 +61,13 @@ import {
   Tag,
   FetchSqlGatewayStatementResultResponse,
   JobGraphNode,
+  CreateWorkSpaceRequest,
   DeleteResourceConfigsRequest,
   DescribeJobSavepointResponse,
+  DeleteFoldersRequest,
   DescribeWorkSpacesResponse,
   GatewayRefItem,
+  DescribeJobsRequest,
   CreateResourceResponse,
   DescribeSystemResourcesRequest,
   CreateFolderResponse,
@@ -74,6 +80,7 @@ import {
   ClazzLevel,
   WorkSpaceClusterItem,
   CheckSavepointRequest,
+  DeleteJobConfigsRequest,
   StopJobsRequest,
   RunJobsRequest,
   DeleteJobsResponse,
@@ -85,6 +92,7 @@ import {
   ResourceConfigItem,
   RoleAuth,
   DescribeTreeResourcesRsp,
+  ResourceRefDetail,
   TreeResourceItem,
   DescribeTreeResourcesResponse,
   RunJobsResponse,
@@ -97,16 +105,18 @@ import {
   DeleteResourceConfigsResponse,
   Cluster,
   DescribeJobSubmissionLogRequest,
-  DescribeJobsRequest,
+  NodeConfig,
   JobV1,
   JobConfig,
   DescribeResourceConfigsRequest,
+  ModifyFolderResponse,
   SlotSharingGroup,
+  ModifyWorkSpaceResponse,
   RunSqlGatewayStatementResponse,
   CreateJobRequest,
   JobInstanceForSubmissionLog,
   DeleteTableConfigResponse,
-  NodeConfig,
+  DeleteFoldersResponse,
   TriggerJobSavepointResponse,
   ClusterSession,
   CreateResourceConfigRequest,
@@ -184,6 +194,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 创建工作空间
+   */
+  async CreateWorkSpace(
+    req: CreateWorkSpaceRequest,
+    cb?: (error: string, rep: CreateWorkSpaceResponse) => void
+  ): Promise<CreateWorkSpaceResponse> {
+    return this.request("CreateWorkSpace", req, cb)
+  }
+
+  /**
    * 创建资源配置接口
    */
   async CreateResourceConfig(
@@ -211,6 +231,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeResourceConfigsResponse) => void
   ): Promise<DescribeResourceConfigsResponse> {
     return this.request("DescribeResourceConfigs", req, cb)
+  }
+
+  /**
+   * 自定义树状结构页面拖拽文件夹
+   */
+  async ModifyFolder(
+    req: ModifyFolderRequest,
+    cb?: (error: string, rep: ModifyFolderResponse) => void
+  ): Promise<ModifyFolderResponse> {
+    return this.request("ModifyFolder", req, cb)
   }
 
   /**
@@ -261,6 +291,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeClustersResponse) => void
   ): Promise<DescribeClustersResponse> {
     return this.request("DescribeClusters", req, cb)
+  }
+
+  /**
+   * 作业列表删除文件夹
+   */
+  async DeleteFolders(
+    req: DeleteFoldersRequest,
+    cb?: (error: string, rep: DeleteFoldersResponse) => void
+  ): Promise<DeleteFoldersResponse> {
+    return this.request("DeleteFolders", req, cb)
   }
 
   /**
@@ -344,6 +384,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 删除作业配置
+   */
+  async DeleteJobConfigs(
+    req: DeleteJobConfigsRequest,
+    cb?: (error: string, rep: DeleteJobConfigsResponse) => void
+  ): Promise<DeleteJobConfigsResponse> {
+    return this.request("DeleteJobConfigs", req, cb)
+  }
+
+  /**
    * 批量停止作业，批量操作数量上限为20
    */
   async StopJobs(
@@ -361,6 +411,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeResourceRelatedJobsResponse) => void
   ): Promise<DescribeResourceRelatedJobsResponse> {
     return this.request("DescribeResourceRelatedJobs", req, cb)
+  }
+
+  /**
+   * 修改工作空间
+   */
+  async ModifyWorkSpace(
+    req: ModifyWorkSpaceRequest,
+    cb?: (error: string, rep: ModifyWorkSpaceResponse) => void
+  ): Promise<ModifyWorkSpaceResponse> {
+    return this.request("ModifyWorkSpace", req, cb)
   }
 
   /**

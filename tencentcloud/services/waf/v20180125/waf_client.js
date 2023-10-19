@@ -90,6 +90,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyInstanceQpsLimit", req, cb);
     }
     /**
+     * waf斯巴达-获取防护域名信息
+     */
+    async DescribeSpartaProtectionInfo(req, cb) {
+        return this.request("DescribeSpartaProtectionInfo", req, cb);
+    }
+    /**
      * 接口已废弃
 
 描述WAF自动封禁IP详情,对齐自动封堵状态
@@ -192,6 +198,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeHistogram(req, cb) {
         return this.request("DescribeHistogram", req, cb);
+    }
+    /**
+     * 获取域名的webshell状态
+     */
+    async DescribeWebshellStatus(req, cb) {
+        return this.request("DescribeWebshellStatus", req, cb);
     }
     /**
      * 获取域名的规则白名单
@@ -322,10 +334,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyInstanceRenewFlag", req, cb);
     }
     /**
-     * 查询单个saaswaf域名详情
+     * 获取用户防护规则等级
      */
-    async DescribeDomainDetailsSaas(req, cb) {
-        return this.request("DescribeDomainDetailsSaas", req, cb);
+    async DescribeUserLevel(req, cb) {
+        return this.request("DescribeUserLevel", req, cb);
     }
     /**
      * Waf  CC V2 Query接口
@@ -659,6 +671,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ModifyAttackWhiteRule(req, cb) {
         return this.request("ModifyAttackWhiteRule", req, cb);
+    }
+    /**
+     * 查询单个saaswaf域名详情
+     */
+    async DescribeDomainDetailsSaas(req, cb) {
+        return this.request("DescribeDomainDetailsSaas", req, cb);
     }
     /**
      * 修改用户防护规则，开启关闭具体的某条规则

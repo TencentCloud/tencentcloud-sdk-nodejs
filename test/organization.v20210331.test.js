@@ -198,6 +198,26 @@ it("organization.v20210331.DescribeOrganizationFinancialByMember", async functio
     }
 })
 
+it("organization.v20210331.UpdateOrganizationIdentity", async function () {
+    try {
+       const data = await client.UpdateOrganizationIdentity({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("organization.v20210331.CreateOrganizationMembersPolicy", async function () {
+    try {
+       const data = await client.CreateOrganizationMembersPolicy({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("organization.v20210331.DescribeOrganization", async function () {
     try {
        const data = await client.DescribeOrganization({})
@@ -221,6 +241,26 @@ it("organization.v20210331.MoveOrganizationNodeMembers", async function () {
 it("organization.v20210331.CreateOrganization", async function () {
     try {
        const data = await client.CreateOrganization({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("organization.v20210331.CreateOrganizationIdentity", async function () {
+    try {
+       const data = await client.CreateOrganizationIdentity({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("organization.v20210331.DeleteOrganizationIdentity", async function () {
+    try {
+       const data = await client.DeleteOrganizationIdentity({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

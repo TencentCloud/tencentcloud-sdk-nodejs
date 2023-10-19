@@ -214,6 +214,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeNotebookSessions", req, cb);
     }
     /**
+     * 获取LakeFs上task执行结果访问信息
+     */
+    async DescribeLakeFsTaskResult(req, cb) {
+        return this.request("DescribeLakeFsTaskResult", req, cb);
+    }
+    /**
      * 此接口用于更新行过滤规则。注意只能更新过滤规则，不能更新规格对象catalog，database和table。
      */
     async UpdateRowFilter(req, cb) {

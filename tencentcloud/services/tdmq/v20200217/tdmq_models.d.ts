@@ -1883,6 +1883,28 @@ export interface ModifyEnvironmentRoleRequest {
     ClusterId: string;
 }
 /**
+ * DescribeRocketMQConsumerConnections返回参数结构体
+ */
+export interface DescribeRocketMQConsumerConnectionsResponse {
+    /**
+     * 总数目
+     */
+    TotalCount: number;
+    /**
+     * 在线消费者信息
+     */
+    Connections: Array<RocketMQConsumerConnection>;
+    /**
+     * 订阅组信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    GroupDetail: RocketMQGroup;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * SendMsg返回参数结构体
  */
 export interface SendMsgResponse {
@@ -3704,6 +3726,31 @@ export interface DescribeClustersResponse {
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * 在线消费者情况
+ */
+export interface RocketMQConsumerConnection {
+    /**
+     * 消费者实例ID
+     */
+    ClientId?: string;
+    /**
+     * 消费者实例的地址和端口
+     */
+    ClientAddr?: string;
+    /**
+     * 消费者应用的语言版本
+     */
+    Language?: string;
+    /**
+     * 消息堆积量
+     */
+    Accumulative?: number;
+    /**
+     * 消费端版本
+     */
+    Version?: string;
 }
 /**
  * ClearCmqSubscriptionFilterTags请求参数结构体
@@ -6384,6 +6431,29 @@ export interface EnvironmentRole {
     UpdateTime: string;
 }
 /**
+ * VPC接入点信息
+ */
+export interface VpcEndpointInfo {
+    /**
+     * vpc的id
+     */
+    VpcId: string;
+    /**
+     * 子网id
+     */
+    SubnetId: string;
+    /**
+     * vpc接入点信息
+     */
+    VpcEndpoint: string;
+    /**
+     * vpc接入点状态
+  OFF/ON/CREATING/DELETING
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    VpcDataStreamEndpointStatus?: string;
+}
+/**
  * CreateCmqQueue请求参数结构体
  */
 export interface CreateCmqQueueRequest {
@@ -6549,27 +6619,37 @@ export interface CreateRabbitMQUserRequest {
     MaxChannels?: number;
 }
 /**
- * VPC接入点信息
+ * DescribeRocketMQConsumerConnections请求参数结构体
  */
-export interface VpcEndpointInfo {
+export interface DescribeRocketMQConsumerConnectionsRequest {
     /**
-     * vpc的id
+     * 集群ID
      */
-    VpcId: string;
+    ClusterId: string;
     /**
-     * 子网id
+     * 命名空间名称
      */
-    SubnetId: string;
+    NamespaceId: string;
     /**
-     * vpc接入点信息
+     * 消费组ID
      */
-    VpcEndpoint: string;
+    GroupId: string;
     /**
-     * vpc接入点状态
-  OFF/ON/CREATING/DELETING
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 偏移量
      */
-    VpcDataStreamEndpointStatus?: string;
+    Offset: number;
+    /**
+     * 限制数目
+     */
+    Limit: number;
+    /**
+     * 对查询结果排序，此为排序字段，目前支持Accumulative（消息堆积量）
+     */
+    SortedBy?: string;
+    /**
+     * 查询结果排序规则，ASC为升序，DESC为降序
+     */
+    SortOrder?: string;
 }
 /**
  * CreateRole请求参数结构体

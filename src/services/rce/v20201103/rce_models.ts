@@ -505,22 +505,22 @@ AccountType是0时，对应账号信息。
 AccountType是10004时，对应手机号的MD5。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  UserId: string
+  UserId?: string
   /**
    * 操作时间戳，单位秒（对应输入参数）。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  PostTime: number
+  PostTime?: number
   /**
    * 对应输入参数，AccountType 是 QQ 或微信开放账号时，用于标识 QQ 或微信用户登录后关联业务自身的账号ID。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  AssociateAccount: string
+  AssociateAccount?: string
   /**
    * 操作来源的外网IP（对应输入参数）。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  UserIp: string
+  UserIp?: string
   /**
    * 风险值
 pass : 无恶意
@@ -528,7 +528,7 @@ review：需要人工审核
 reject：拒绝，高风险恶意
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RiskLevel: string
+  RiskLevel?: string
   /**
    * 风险类型，请参考官网风险类型
 账号风险 
@@ -558,12 +558,12 @@ reject：拒绝，高风险恶意
 2063 疑似 群控设备 请求设备为猫池、手机墙等群控设备
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RiskType: Array<number | bigint>
+  RiskType?: Array<number | bigint>
   /**
    * 唯一ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ConstId: string
+  ConstId?: string
 }
 
 /**

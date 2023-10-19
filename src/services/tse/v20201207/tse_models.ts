@@ -48,6 +48,11 @@ export interface DescribeCloudNativeAPIGatewayResponse {
  */
 export interface CreateCloudNativeAPIGatewayServiceResponse {
   /**
+   * 网关服务创建结果
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Result?: CreateGatewayServiceResult
+  /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -1053,6 +1058,21 @@ export interface DescribeCloudNativeAPIGatewayServicesRequest {
 }
 
 /**
+ * UpdateUpstreamTargets返回参数结构体
+ */
+export interface UpdateUpstreamTargetsResponse {
+  /**
+   * 是否更新成功
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Result?: boolean
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeCloudNativeAPIGatewayCertificates返回参数结构体
  */
 export interface DescribeCloudNativeAPIGatewayCertificatesResponse {
@@ -1159,6 +1179,17 @@ export interface DescribeSREInstancesRequest {
 }
 
 /**
+ * 创建云原生网关服务结果
+ */
+export interface CreateGatewayServiceResult {
+  /**
+   * 网关服务ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ServiceId?: string
+}
+
+/**
  * 云原生网关证书
  */
 export interface KongCertificate {
@@ -1224,6 +1255,24 @@ export interface DescribeZookeeperReplicasRequest {
    * 副本列表Offset
    */
   Offset?: number
+}
+
+/**
+ * UpdateUpstreamTargets请求参数结构体
+ */
+export interface UpdateUpstreamTargetsRequest {
+  /**
+   * 网关实例ID
+   */
+  GatewayId: string
+  /**
+   * 服务名称或ID
+   */
+  Name: string
+  /**
+   * 实例列表
+   */
+  Targets?: Array<KongTarget>
 }
 
 /**
@@ -2715,10 +2764,15 @@ export interface CloudNativeAPIGatewayConfig {
    */
   Description?: string
   /**
-   * 负载均衡的规格类型，传 "SLA" 表示性能容量型，返回空为共享型
+   * 负载均衡的规格类型
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SlaType?: string
+  /**
+   * clb规格名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SlaName?: string
   /**
    * clb vip
 注意：此字段可能返回 null，表示取不到有效值。
@@ -3199,7 +3253,7 @@ export interface InternetConfig {
    */
   Description?: string
   /**
-   * 负载均衡的规格类型，传 "SLA" 表示性能容量型，不传为共享型。
+   * 负载均衡的规格类型，支持clb.c2.medium、clb.c3.small、clb.c3.medium、clb.c4.small、clb.c4.medium、clb.c4.large、clb.c4.xlarge，不传为共享型。
    */
   SlaType?: string
   /**

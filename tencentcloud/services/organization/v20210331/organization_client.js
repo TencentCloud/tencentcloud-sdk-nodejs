@@ -137,6 +137,18 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeOrganizationFinancialByMember", req, cb);
     }
     /**
+     * 更新组织身份
+     */
+    async UpdateOrganizationIdentity(req, cb) {
+        return this.request("UpdateOrganizationIdentity", req, cb);
+    }
+    /**
+     * 创建组织成员访问策略
+     */
+    async CreateOrganizationMembersPolicy(req, cb) {
+        return this.request("CreateOrganizationMembersPolicy", req, cb);
+    }
+    /**
      * 获取企业组织信息
      */
     async DescribeOrganization(req, cb) {
@@ -153,6 +165,18 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CreateOrganization(req, cb) {
         return this.request("CreateOrganization", req, cb);
+    }
+    /**
+     * 添加组织身份
+     */
+    async CreateOrganizationIdentity(req, cb) {
+        return this.request("CreateOrganizationIdentity", req, cb);
+    }
+    /**
+     * 删除组织身份
+     */
+    async DeleteOrganizationIdentity(req, cb) {
+        return this.request("DeleteOrganizationIdentity", req, cb);
     }
     /**
      * 添加组织成员邮箱

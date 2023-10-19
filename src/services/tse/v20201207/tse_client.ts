@@ -56,16 +56,19 @@ import {
   SREInstance,
   InstanceTagInfo,
   DescribeCloudNativeAPIGatewayServicesRequest,
+  UpdateUpstreamTargetsResponse,
   DescribeCloudNativeAPIGatewayCertificatesResponse,
   NacosReplica,
   UpdateEngineInternetAccessRequest,
   CreateCloudNativeAPIGatewayCanaryRuleResponse,
   DescribeSREInstancesRequest,
+  CreateGatewayServiceResult,
   KongCertificate,
   KVPair,
   DeleteEngineResponse,
   DescribeCloudNativeAPIGatewayRoutesResponse,
   DescribeZookeeperReplicasRequest,
+  UpdateUpstreamTargetsRequest,
   DeleteCloudNativeAPIGatewayServiceResponse,
   InstancePort,
   DescribeCloudNativeAPIGatewayResult,
@@ -565,6 +568,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteCloudNativeAPIGatewayResponse) => void
   ): Promise<DeleteCloudNativeAPIGatewayResponse> {
     return this.request("DeleteCloudNativeAPIGateway", req, cb)
+  }
+
+  /**
+   * 更新网关上游实例列表，仅支持IPList服务类型
+   */
+  async UpdateUpstreamTargets(
+    req: UpdateUpstreamTargetsRequest,
+    cb?: (error: string, rep: UpdateUpstreamTargetsResponse) => void
+  ): Promise<UpdateUpstreamTargetsResponse> {
+    return this.request("UpdateUpstreamTargets", req, cb)
   }
 
   /**

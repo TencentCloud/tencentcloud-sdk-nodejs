@@ -388,6 +388,16 @@ it("tse.v20201207.DeleteCloudNativeAPIGateway", async function () {
     }
 })
 
+it("tse.v20201207.UpdateUpstreamTargets", async function () {
+    try {
+       const data = await client.UpdateUpstreamTargets({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tse.v20201207.DeleteCloudNativeAPIGatewayCertificate", async function () {
     try {
        const data = await client.DeleteCloudNativeAPIGatewayCertificate({})

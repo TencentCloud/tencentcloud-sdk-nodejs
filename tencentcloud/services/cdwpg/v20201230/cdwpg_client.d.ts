@@ -1,12 +1,16 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { ModifyInstanceResponse, DescribeInstanceStateRequest, DestroyInstanceByApiResponse, DestroyInstanceByApiRequest, CreateInstanceByApiRequest, DescribeInstanceRequest, ModifyInstanceRequest, CreateInstanceByApiResponse, DescribeSimpleInstancesResponse, DescribeInstanceStateResponse, DescribeInstanceResponse, DescribeSimpleInstancesRequest } from "./cdwpg_models";
+import { ModifyInstanceResponse, DescribeInstanceStateRequest, DestroyInstanceByApiRequest, ModifyInstanceRequest, DescribeInstancesResponse, DescribeInstancesRequest, CreateInstanceByApiResponse, DescribeSimpleInstancesResponse, DescribeInstanceResponse, DestroyInstanceByApiResponse, CreateInstanceByApiRequest, DescribeInstanceRequest, DescribeInstanceStateResponse, DescribeSimpleInstancesRequest } from "./cdwpg_models";
 /**
  * cdwpg client
  * @class
  */
 export declare class Client extends AbstractClient {
     constructor(clientConfig: ClientConfig);
+    /**
+     * 获取云原生实例列表
+     */
+    DescribeInstances(req: DescribeInstancesRequest, cb?: (error: string, rep: DescribeInstancesResponse) => void): Promise<DescribeInstancesResponse>;
     /**
      * 集群详情页中显示集群状态、流程进度等
      */

@@ -138,9 +138,9 @@ it("clb.v20180317.InquiryPriceModifyLoadBalancer", async function () {
     }
 })
 
-it("clb.v20180317.SetSecurityGroupForLoadbalancers", async function () {
+it("clb.v20180317.ManualRewrite", async function () {
     try {
-       const data = await client.SetSecurityGroupForLoadbalancers({})
+       const data = await client.ManualRewrite({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -688,6 +688,16 @@ it("clb.v20180317.DescribeRewrite", async function () {
     }
 })
 
+it("clb.v20180317.SetSecurityGroupForLoadbalancers", async function () {
+    try {
+       const data = await client.SetSecurityGroupForLoadbalancers({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("clb.v20180317.DescribeTargetGroups", async function () {
     try {
        const data = await client.DescribeTargetGroups({})
@@ -828,9 +838,9 @@ it("clb.v20180317.DeleteRewrite", async function () {
     }
 })
 
-it("clb.v20180317.ManualRewrite", async function () {
+it("clb.v20180317.BatchModifyTargetTag", async function () {
     try {
-       const data = await client.ManualRewrite({})
+       const data = await client.BatchModifyTargetTag({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

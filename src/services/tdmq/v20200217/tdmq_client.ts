@@ -85,6 +85,7 @@ import {
   RabbitMQVirtualHostStatistics,
   CreateSubscriptionResponse,
   ModifyEnvironmentRoleRequest,
+  DescribeRocketMQConsumerConnectionsResponse,
   SendMsgResponse,
   ModifyCmqTopicAttributeResponse,
   DescribeCmqSubscriptionDetailRequest,
@@ -163,6 +164,7 @@ import {
   ModifyClusterResponse,
   DescribeBindVpcsRequest,
   DescribeClustersResponse,
+  RocketMQConsumerConnection,
   ClearCmqSubscriptionFilterTagsRequest,
   TopicRecord,
   SendCmqMsgResponse,
@@ -272,6 +274,7 @@ import {
   CreateRocketMQTopicResponse,
   CreateRabbitMQVirtualHostRequest,
   EnvironmentRole,
+  VpcEndpointInfo,
   CreateCmqQueueRequest,
   ModifyEnvironmentRoleResponse,
   DeleteCmqQueueRequest,
@@ -280,7 +283,7 @@ import {
   DescribeBindClustersRequest,
   DescribePulsarProInstanceDetailRequest,
   CreateRabbitMQUserRequest,
-  VpcEndpointInfo,
+  DescribeRocketMQConsumerConnectionsRequest,
   CreateRoleRequest,
   DescribeRocketMQTopicMsgsRequest,
   ImportRocketMQConsumerGroupsResponse,
@@ -452,6 +455,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeRocketMQSmoothMigrationTaskListResponse) => void
   ): Promise<DescribeRocketMQSmoothMigrationTaskListResponse> {
     return this.request("DescribeRocketMQSmoothMigrationTaskList", req, cb)
+  }
+
+  /**
+   * 获取指定消费组下当前客户端的连接情况
+   */
+  async DescribeRocketMQConsumerConnections(
+    req: DescribeRocketMQConsumerConnectionsRequest,
+    cb?: (error: string, rep: DescribeRocketMQConsumerConnectionsResponse) => void
+  ): Promise<DescribeRocketMQConsumerConnectionsResponse> {
+    return this.request("DescribeRocketMQConsumerConnections", req, cb)
   }
 
   /**

@@ -1372,7 +1372,7 @@ export interface CreateTriggerRequest {
    */
   TriggerName: string
   /**
-   * 触发器类型，目前支持 cos 、cmq、 timer、 ckafka、apigw类型。创建函数URL请在此填写 http 。创建 cls 触发器请参考[CLS 创建投递 SCF 任务](https://cloud.tencent.com/document/product/614/61096)。
+   * 触发器类型，目前支持 cos 、cmq、 timer、 ckafka、apigw类型。创建函数 URL 请在此填写 http，请参考[创建函数 URL ](https://cloud.tencent.com/document/product/583/100227#33bbbda4-9131-48a6-ac37-ac62ffe01424)。创建 cls 触发器请参考[CLS 创建投递 SCF 任务](https://cloud.tencent.com/document/product/614/61096)。
    */
   Type: string
   /**

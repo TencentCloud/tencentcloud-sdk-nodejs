@@ -245,6 +245,24 @@ export interface CreateOrganizationMemberAuthIdentityRequest {
 }
 
 /**
+ * UpdateOrganizationIdentity请求参数结构体
+ */
+export interface UpdateOrganizationIdentityRequest {
+  /**
+   * 身份ID
+   */
+  IdentityId: number
+  /**
+   * 身份描述
+   */
+  Description: string
+  /**
+   * 身份策略
+   */
+  IdentityPolicy: Array<IdentityPolicy>
+}
+
+/**
  * DeleteOrganizationMembers返回参数结构体
  */
 export interface DeleteOrganizationMembersResponse {
@@ -282,6 +300,24 @@ export interface DescribeOrganizationFinancialByMemberRequest {
    * 查询产品列表。 最大100个
    */
   ProductCodes?: Array<string>
+}
+
+/**
+ * DescribeOrganizationAuthNode请求参数结构体
+ */
+export interface DescribeOrganizationAuthNodeRequest {
+  /**
+   * 偏移量。
+   */
+  Offset: number
+  /**
+   * 限制数目。最大50
+   */
+  Limit: number
+  /**
+   * 互信主体名称。
+   */
+  AuthName?: string
 }
 
 /**
@@ -354,13 +390,33 @@ export interface CreateOrganizationMemberAuthIdentityResponse {
 }
 
 /**
- * UpdateOrganizationNode返回参数结构体
+ * DescribeOrganizationFinancialByProduct请求参数结构体
  */
-export interface UpdateOrganizationNodeResponse {
+export interface DescribeOrganizationFinancialByProductRequest {
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 查询开始月份。格式：yyyy-mm，例如：2021-01
    */
-  RequestId?: string
+  Month: string
+  /**
+   * 限制数目。取值范围：1~50，默认值：10
+   */
+  Limit?: number
+  /**
+   * 偏移量。取值是limit的整数倍，默认值 : 0
+   */
+  Offset?: number
+  /**
+   * 查询结束月份。格式：yyyy-mm，例如：2021-01,默认值为查询开始月份
+   */
+  EndMonth?: string
+  /**
+   * 查询成员列表。 最大100个
+   */
+  MemberUins?: Array<number | bigint>
+  /**
+   * 查询产品列表。 最大100个
+   */
+  ProductCodes?: Array<string>
 }
 
 /**
@@ -386,17 +442,18 @@ export interface CreateOrganizationMemberPolicyRequest {
 }
 
 /**
- * DescribeOrganization请求参数结构体
+ * CreateOrganizationMembersPolicy返回参数结构体
  */
-export interface DescribeOrganizationRequest {
+export interface CreateOrganizationMembersPolicyResponse {
   /**
-   * 国际站：en，国内站：zh
+   * 策略ID。
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Lang?: string
+  PolicyId?: number
   /**
-   * 可信服务产品简称。查询是否该可信服务管理员时必须指定
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  Product?: string
+  RequestId?: string
 }
 
 /**
@@ -449,17 +506,28 @@ export interface CreateOrganizationMemberResponse {
 }
 
 /**
- * MoveOrganizationNodeMembers请求参数结构体
+ * CreateOrganizationIdentity返回参数结构体
  */
-export interface MoveOrganizationNodeMembersRequest {
+export interface CreateOrganizationIdentityResponse {
   /**
-   * 组织节点ID。
+   * 身份ID
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  NodeId: number
+  IdentityId?: number
   /**
-   * 成员UIN列表。
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  MemberUin: Array<number | bigint>
+  RequestId?: string
+}
+
+/**
+ * UpdateOrganizationMember返回参数结构体
+ */
+export interface UpdateOrganizationMemberResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -473,29 +541,25 @@ export interface QuitOrganizationResponse {
 }
 
 /**
- * ListOrganizationIdentity请求参数结构体
+ * CreateOrganizationMembersPolicy请求参数结构体
  */
-export interface ListOrganizationIdentityRequest {
+export interface CreateOrganizationMembersPolicyRequest {
   /**
-   * 偏移量。取值是limit的整数倍。默认值 : 0。
+   * 成员Uin列表。最多10个
    */
-  Offset: number
+  MemberUins: Array<number | bigint>
   /**
-   * 限制数目。取值范围：1~50。默认值：10。
+   * 策略名。长度1～128个字符，支持英文字母、数字、符号+=,.@_-
    */
-  Limit: number
+  PolicyName: string
   /**
-   * 名称搜索关键字。
+   * 成员访问身份ID。
    */
-  SearchKey?: string
+  IdentityId: number
   /**
-   * 身份ID搜索。
+   * 策略描述。最大长度为128个字符
    */
-  IdentityId?: number
-  /**
-   * 身份类型。取值范围 1-预设, 2-自定义
-   */
-  IdentityType?: number
+  Description?: string
 }
 
 /**
@@ -732,6 +796,16 @@ export interface DescribeOrganizationFinancialByProductResponse {
 }
 
 /**
+ * UpdateOrganizationIdentity返回参数结构体
+ */
+export interface UpdateOrganizationIdentityResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * AddOrganizationMemberEmail请求参数结构体
  */
 export interface AddOrganizationMemberEmailRequest {
@@ -842,33 +916,35 @@ export interface CreateOrganizationMemberPolicyResponse {
 }
 
 /**
- * DescribeOrganizationFinancialByProduct请求参数结构体
+ * CreateOrganizationIdentity请求参数结构体
  */
-export interface DescribeOrganizationFinancialByProductRequest {
+export interface CreateOrganizationIdentityRequest {
   /**
-   * 查询开始月份。格式：yyyy-mm，例如：2021-01
+   * 身份名称
    */
-  Month: string
+  IdentityAliasName: string
   /**
-   * 限制数目。取值范围：1~50，默认值：10
+   * 身份策略
    */
-  Limit?: number
+  IdentityPolicy: Array<IdentityPolicy>
   /**
-   * 偏移量。取值是limit的整数倍，默认值 : 0
+   * 身份描述
    */
-  Offset?: number
+  Description?: string
+}
+
+/**
+ * MoveOrganizationNodeMembers请求参数结构体
+ */
+export interface MoveOrganizationNodeMembersRequest {
   /**
-   * 查询结束月份。格式：yyyy-mm，例如：2021-01,默认值为查询开始月份
+   * 组织节点ID。
    */
-  EndMonth?: string
+  NodeId: number
   /**
-   * 查询成员列表。 最大100个
+   * 成员UIN列表。
    */
-  MemberUins?: Array<number | bigint>
-  /**
-   * 查询产品列表。 最大100个
-   */
-  ProductCodes?: Array<string>
+  MemberUin: Array<number | bigint>
 }
 
 /**
@@ -968,6 +1044,26 @@ export interface UpdateOrganizationMemberRequest {
 }
 
 /**
+ * DeleteOrganizationNodes返回参数结构体
+ */
+export interface DeleteOrganizationNodesResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * QuitOrganization请求参数结构体
+ */
+export interface QuitOrganizationRequest {
+  /**
+   * 企业组织ID
+   */
+  OrgId: number
+}
+
+/**
  * DescribeOrganization返回参数结构体
  */
 export interface DescribeOrganizationResponse {
@@ -1058,16 +1154,6 @@ export interface DescribeOrganizationResponse {
 }
 
 /**
- * QuitOrganization请求参数结构体
- */
-export interface QuitOrganizationRequest {
-  /**
-   * 企业组织ID
-   */
-  OrgId: number
-}
-
-/**
  * DescribeOrganizationMemberPolicies请求参数结构体
  */
 export interface DescribeOrganizationMemberPoliciesRequest {
@@ -1128,6 +1214,16 @@ export interface AddOrganizationNodeRequest {
 }
 
 /**
+ * UpdateOrganizationNode返回参数结构体
+ */
+export interface UpdateOrganizationNodeResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeOrganizationMemberAuthIdentities返回参数结构体
  */
 export interface DescribeOrganizationMemberAuthIdentitiesResponse {
@@ -1174,21 +1270,13 @@ export interface OrgMemberFinancial {
 }
 
 /**
- * DescribeOrganizationAuthNode请求参数结构体
+ * DeleteOrganizationIdentity请求参数结构体
  */
-export interface DescribeOrganizationAuthNodeRequest {
+export interface DeleteOrganizationIdentityRequest {
   /**
-   * 偏移量。
+   * 身份ID
    */
-  Offset: number
-  /**
-   * 限制数目。最大50
-   */
-  Limit: number
-  /**
-   * 互信主体名称。
-   */
-  AuthName?: string
+  IdentityId: number
 }
 
 /**
@@ -1250,19 +1338,35 @@ export interface CancelOrganizationMemberAuthAccountRequest {
 }
 
 /**
- * UpdateOrganizationMember返回参数结构体
+ * ListOrganizationIdentity请求参数结构体
  */
-export interface UpdateOrganizationMemberResponse {
+export interface ListOrganizationIdentityRequest {
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 偏移量。取值是limit的整数倍。默认值 : 0。
    */
-  RequestId?: string
+  Offset: number
+  /**
+   * 限制数目。取值范围：1~50。默认值：10。
+   */
+  Limit: number
+  /**
+   * 名称搜索关键字。
+   */
+  SearchKey?: string
+  /**
+   * 身份ID搜索。
+   */
+  IdentityId?: number
+  /**
+   * 身份类型。取值范围 1-预设, 2-自定义
+   */
+  IdentityType?: number
 }
 
 /**
- * DeleteOrganizationNodes返回参数结构体
+ * DeleteOrganizationIdentity返回参数结构体
  */
-export interface DeleteOrganizationNodesResponse {
+export interface DeleteOrganizationIdentityResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1322,6 +1426,20 @@ export interface DescribeOrganizationMemberAuthAccountsResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeOrganization请求参数结构体
+ */
+export interface DescribeOrganizationRequest {
+  /**
+   * 国际站：en，国内站：zh
+   */
+  Lang?: string
+  /**
+   * 可信服务产品简称。查询是否该可信服务管理员时必须指定
+   */
+  Product?: string
 }
 
 /**

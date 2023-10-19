@@ -2476,7 +2476,7 @@ export class Client extends AbstractClient {
    * 该接口可以创建白名单订单
    */
   async CreateWhiteListOrder(
-    req?: CreateWhiteListOrderRequest,
+    req: CreateWhiteListOrderRequest,
     cb?: (error: string, rep: CreateWhiteListOrderResponse) => void
   ): Promise<CreateWhiteListOrderResponse> {
     return this.request("CreateWhiteListOrder", req, cb)
@@ -3406,7 +3406,7 @@ export class Client extends AbstractClient {
    * 查询授权白名单的可用配置
    */
   async DescribeLicenseWhiteConfig(
-    req?: DescribeLicenseWhiteConfigRequest,
+    req: DescribeLicenseWhiteConfigRequest,
     cb?: (error: string, rep: DescribeLicenseWhiteConfigResponse) => void
   ): Promise<DescribeLicenseWhiteConfigResponse> {
     return this.request("DescribeLicenseWhiteConfig", req, cb)

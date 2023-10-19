@@ -34,6 +34,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeAppDetail", req, cb);
     }
     /**
+     * App 管理员可以通过该接口在群组中发送通知、公告等。目前仅支持文本消息。
+     */
+    async SendRoomNotificationMessage(req, cb) {
+        return this.request("SendRoomNotificationMessage", req, cb);
+    }
+    /**
      * 获取房间历史消息(房间历史消息保存7天)
      */
     async GetRoomMessage(req, cb) {
@@ -202,6 +208,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DeleteRecord(req, cb) {
         return this.request("DeleteRecord", req, cb);
+    }
+    /**
+     * 1、按照指定身份发送消息，目前支持表情消息、图片消息、文本消息。
+     */
+    async SendRoomNormalMessage(req, cb) {
+        return this.request("SendRoomNormalMessage", req, cb);
     }
     /**
      * 获取群组列表

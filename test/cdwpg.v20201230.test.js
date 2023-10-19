@@ -18,6 +18,16 @@ const client = new tencentcloud.cdwpg.v20201230.Client({
 })
 describe("cdwpg.v20201230.test.js", function () {
 
+it("cdwpg.v20201230.DescribeInstances", async function () {
+    try {
+       const data = await client.DescribeInstances({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cdwpg.v20201230.DescribeInstanceState", async function () {
     try {
        const data = await client.DescribeInstanceState({})

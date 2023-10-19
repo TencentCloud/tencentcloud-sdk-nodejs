@@ -480,6 +480,28 @@ export interface MultiCertInfo {
 }
 
 /**
+ * 修改节点标签的数据类型
+ */
+export interface RsTagRule {
+  /**
+   * 负载均衡监听器 ID。
+   */
+  ListenerId: string
+  /**
+   * 要修改标签的后端机器列表。
+   */
+  Targets: Array<Target>
+  /**
+   * 转发规则的ID，七层规则时需要此参数，4层规则不需要。
+   */
+  LocationId?: string
+  /**
+   * 后端服务修改后的标签。此参数的优先级低于前述[Target](https://cloud.tencent.com/document/api/214/30694#Target)中的Tag参数，即最终的标签以Target中的Tag参数值为准，仅当Target中的Weight参数为空时，才以RsTagRule中的Tag参数为准。
+   */
+  Tag?: string
+}
+
+/**
  * ModifyRule请求参数结构体
  */
 export interface ModifyRuleRequest {
@@ -1179,6 +1201,20 @@ export interface IdleLoadBalancer {
 }
 
 /**
+ * BatchModifyTargetTag请求参数结构体
+ */
+export interface BatchModifyTargetTagRequest {
+  /**
+   * 负载均衡实例 ID。
+   */
+  LoadBalancerId: string
+  /**
+   * 要批量修改标签的列表。
+   */
+  ModifyList: Array<RsTagRule>
+}
+
+/**
  * RegisterTargetGroupInstances返回参数结构体
  */
 export interface RegisterTargetGroupInstancesResponse {
@@ -1736,6 +1772,11 @@ export interface Target {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   EniIp?: string
+  /**
+   * 标签。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Tag?: string
 }
 
 /**
@@ -2666,11 +2707,11 @@ export interface DescribeClusterResourcesResponse {
   /**
    * 集群中资源列表。
    */
-  ClusterResourceSet: Array<ClusterResource>
+  ClusterResourceSet?: Array<ClusterResource>
   /**
    * 集群中资源总数。
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2707,7 +2748,7 @@ export interface DescribeClusterResourcesRequest {
    * 查询集群中资源列表条件，详细的过滤条件如下：
 <li> cluster-id - String - 是否必填：否 - （过滤条件）按照 集群 的唯一ID过滤，如 ："tgw-12345678","stgw-12345678","vpcgw-12345678"。</li>
 <li> vip - String - 是否必填：否 - （过滤条件）按照vip过滤。</li>
-<li> loadblancer-id - String - 是否必填：否 - （过滤条件）按照负载均衡唯一ID过滤。</li>
+<li> loadbalancer-id - String - 是否必填：否 - （过滤条件）按照负载均衡唯一ID过滤。</li>
 <li> idle - String 是否必填：否 - （过滤条件）按照是否闲置过滤，如"True","False"。</li>
    */
   Filters?: Array<Filter>
@@ -2814,25 +2855,50 @@ export interface CreateClsLogSetResponse {
 }
 
 /**
- * DescribeCrossTargets请求参数结构体
+ * 监听器绑定的后端服务的详细信息
  */
-export interface DescribeCrossTargetsRequest {
+export interface Backend {
   /**
-   * 返回后端服务列表数目，默认20，最大值100。
+   * 后端服务的类型，可取：CVM、ENI
    */
-  Limit?: number
+  Type: string
   /**
-   * 返回后端服务列表起始偏移量，默认0。
+   * 后端服务的唯一 ID，如 ins-abcd1234
    */
-  Offset?: number
+  InstanceId: string
   /**
-   * 查询跨域2.0版本云联网后端子机和网卡服务列表条件，详细的过滤条件如下：
-<li> vpc-id - String - 是否必填：否 - （过滤条件）按照 本地私有网络ID，即负载均衡的VpcId 过滤，如："vpc-12345678"。</li>
-<li> ip - String - 是否必填：否 - （过滤条件）按照 后端服务ip 过滤，如："192.168.0.1"。</li>
-<li> listener-id - String - 是否必填：否 - （过滤条件）按照 监听器ID 过滤，如："lbl-12345678"。</li>
-<li> location-id - String - 是否必填：否 - （过滤条件）按照 七层监听器规则ID 过滤，如："loc-12345678"。</li>
+   * 后端服务的监听端口
    */
-  Filters?: Array<Filter>
+  Port: number
+  /**
+   * 后端服务的转发权重，取值范围：[0, 100]，默认为 10。
+   */
+  Weight: number
+  /**
+   * 后端服务的外网 IP
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PublicIpAddresses: Array<string>
+  /**
+   * 后端服务的内网 IP
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PrivateIpAddresses: Array<string>
+  /**
+   * 后端服务的实例名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceName: string
+  /**
+   * 后端服务被绑定的时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RegisteredTime: string
+  /**
+   * 弹性网卡唯一ID，如 eni-1234abcd
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EniId: string
 }
 
 /**
@@ -4268,6 +4334,16 @@ export interface BatchModifyTargetWeightRequest {
 }
 
 /**
+ * BatchModifyTargetTag返回参数结构体
+ */
+export interface BatchModifyTargetTagResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteRewrite返回参数结构体
  */
 export interface DeleteRewriteResponse {
@@ -4306,6 +4382,10 @@ export interface BatchTarget {
    * 七层规则 ID。
    */
   LocationId?: string
+  /**
+   * 标签。
+   */
+  Tag?: string
 }
 
 /**
@@ -5466,50 +5546,25 @@ export interface AssociationItem {
 }
 
 /**
- * 监听器绑定的后端服务的详细信息
+ * DescribeCrossTargets请求参数结构体
  */
-export interface Backend {
+export interface DescribeCrossTargetsRequest {
   /**
-   * 后端服务的类型，可取：CVM、ENI
+   * 返回后端服务列表数目，默认20，最大值100。
    */
-  Type: string
+  Limit?: number
   /**
-   * 后端服务的唯一 ID，如 ins-abcd1234
+   * 返回后端服务列表起始偏移量，默认0。
    */
-  InstanceId: string
+  Offset?: number
   /**
-   * 后端服务的监听端口
+   * 查询跨域2.0版本云联网后端子机和网卡服务列表条件，详细的过滤条件如下：
+<li> vpc-id - String - 是否必填：否 - （过滤条件）按照 本地私有网络ID，即负载均衡的VpcId 过滤，如："vpc-12345678"。</li>
+<li> ip - String - 是否必填：否 - （过滤条件）按照 后端服务ip 过滤，如："192.168.0.1"。</li>
+<li> listener-id - String - 是否必填：否 - （过滤条件）按照 监听器ID 过滤，如："lbl-12345678"。</li>
+<li> location-id - String - 是否必填：否 - （过滤条件）按照 七层监听器规则ID 过滤，如："loc-12345678"。</li>
    */
-  Port: number
-  /**
-   * 后端服务的转发权重，取值范围：[0, 100]，默认为 10。
-   */
-  Weight: number
-  /**
-   * 后端服务的外网 IP
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  PublicIpAddresses: Array<string>
-  /**
-   * 后端服务的内网 IP
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  PrivateIpAddresses: Array<string>
-  /**
-   * 后端服务的实例名称
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  InstanceName: string
-  /**
-   * 后端服务被绑定的时间
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  RegisteredTime: string
-  /**
-   * 弹性网卡唯一ID，如 eni-1234abcd
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  EniId: string
+  Filters?: Array<Filter>
 }
 
 /**
