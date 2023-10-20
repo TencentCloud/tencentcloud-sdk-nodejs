@@ -46,16 +46,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateDatasource", req, cb);
     }
     /**
-     * 项目内-创建用户角色
+     * 项目详情接口
      */
-    async CreateUserRoleProject(req, cb) {
-        return this.request("CreateUserRoleProject", req, cb);
+    async DescribeProjectInfo(req, cb) {
+        return this.request("DescribeProjectInfo", req, cb);
     }
     /**
-     * 更新云数据库
+     * 申请延长Token可用时间接口-强鉴权
      */
-    async ModifyDatasourceCloud(req, cb) {
-        return this.request("ModifyDatasourceCloud", req, cb);
+    async ApplyEmbedInterval(req, cb) {
+        return this.request("ApplyEmbedInterval", req, cb);
+    }
+    /**
+     * 创建云数据库
+     */
+    async CreateDatasourceCloud(req, cb) {
+        return this.request("CreateDatasourceCloud", req, cb);
     }
     /**
      * 修改用户角色信息
@@ -70,28 +76,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateEmbedToken", req, cb);
     }
     /**
-     * 项目详情接口
-     */
-    async DescribeProjectInfo(req, cb) {
-        return this.request("DescribeProjectInfo", req, cb);
-    }
-    /**
-     * 创建项目
-     */
-    async CreateProject(req, cb) {
-        return this.request("CreateProject", req, cb);
-    }
-    /**
      * 创建用户角色
      */
     async CreateUserRole(req, cb) {
         return this.request("CreateUserRole", req, cb);
-    }
-    /**
-     * 项目内-用户接口
-     */
-    async DescribeUserProjectList(req, cb) {
-        return this.request("DescribeUserProjectList", req, cb);
     }
     /**
      * 删除数据源
@@ -100,22 +88,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteDatasource", req, cb);
     }
     /**
-     * 申请延长Token可用时间接口-强鉴权
-     */
-    async ApplyEmbedInterval(req, cb) {
-        return this.request("ApplyEmbedInterval", req, cb);
-    }
-    /**
      * 删除用户角色，会删除用户
      */
     async DeleteUserRole(req, cb) {
         return this.request("DeleteUserRole", req, cb);
-    }
-    /**
-     * 项目-修改用户角色信息
-     */
-    async ModifyUserRoleProject(req, cb) {
-        return this.request("ModifyUserRoleProject", req, cb);
     }
     /**
      * 修改项目信息
@@ -124,22 +100,28 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyProject", req, cb);
     }
     /**
-     * 项目信息
-     */
-    async DescribeProjectList(req, cb) {
-        return this.request("DescribeProjectList", req, cb);
-    }
-    /**
      * 用户角色列表
      */
     async DescribeUserRoleList(req, cb) {
         return this.request("DescribeUserRoleList", req, cb);
     }
     /**
-     * 创建云数据库
+     * 项目内-用户角色列表
      */
-    async CreateDatasourceCloud(req, cb) {
-        return this.request("CreateDatasourceCloud", req, cb);
+    async DescribeUserRoleProjectList(req, cb) {
+        return this.request("DescribeUserRoleProjectList", req, cb);
+    }
+    /**
+     * 更新云数据库
+     */
+    async ModifyDatasourceCloud(req, cb) {
+        return this.request("ModifyDatasourceCloud", req, cb);
+    }
+    /**
+     * 项目内-创建用户角色
+     */
+    async CreateUserRoleProject(req, cb) {
+        return this.request("CreateUserRoleProject", req, cb);
     }
     /**
      * 项目内-删除用户角色
@@ -148,10 +130,34 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteUserRoleProject", req, cb);
     }
     /**
+     * 创建项目
+     */
+    async CreateProject(req, cb) {
+        return this.request("CreateProject", req, cb);
+    }
+    /**
+     * 项目内-用户接口
+     */
+    async DescribeUserProjectList(req, cb) {
+        return this.request("DescribeUserProjectList", req, cb);
+    }
+    /**
      * 删除项目
      */
     async DeleteProject(req, cb) {
         return this.request("DeleteProject", req, cb);
+    }
+    /**
+     * 项目-修改用户角色信息
+     */
+    async ModifyUserRoleProject(req, cb) {
+        return this.request("ModifyUserRoleProject", req, cb);
+    }
+    /**
+     * 项目信息
+     */
+    async DescribeProjectList(req, cb) {
+        return this.request("DescribeProjectList", req, cb);
     }
 }
 exports.Client = Client;

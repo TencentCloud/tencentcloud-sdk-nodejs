@@ -2723,46 +2723,51 @@ export interface CreateClsLogSetResponse {
  */
 export interface Backend {
     /**
-     * 后端服务的类型，可取：CVM、ENI
+     * 后端服务的类型，可取：CVM、ENI、CCN
      */
-    Type: string;
+    Type?: string;
     /**
      * 后端服务的唯一 ID，如 ins-abcd1234
      */
-    InstanceId: string;
+    InstanceId?: string;
     /**
      * 后端服务的监听端口
      */
-    Port: number;
+    Port?: number;
     /**
      * 后端服务的转发权重，取值范围：[0, 100]，默认为 10。
      */
-    Weight: number;
+    Weight?: number;
     /**
      * 后端服务的外网 IP
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    PublicIpAddresses: Array<string>;
+    PublicIpAddresses?: Array<string>;
     /**
      * 后端服务的内网 IP
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    PrivateIpAddresses: Array<string>;
+    PrivateIpAddresses?: Array<string>;
     /**
      * 后端服务的实例名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    InstanceName: string;
+    InstanceName?: string;
     /**
      * 后端服务被绑定的时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    RegisteredTime: string;
+    RegisteredTime?: string;
     /**
      * 弹性网卡唯一ID，如 eni-1234abcd
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    EniId: string;
+    EniId?: string;
+    /**
+     * 标签。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Tag?: string;
 }
 /**
  * lb实例包年包月相关配置属性

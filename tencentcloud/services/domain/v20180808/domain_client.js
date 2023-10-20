@@ -34,6 +34,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("SetDomainAutoRenew", req, cb);
     }
     /**
+     * 修改自定义DNS Host
+     */
+    async ModifyCustomDnsHost(req, cb) {
+        return this.request("ModifyCustomDnsHost", req, cb);
+    }
+    /**
      * 本接口 ( CheckBatchStatus ) 用于查询批量操作日志状态 。
      */
     async CheckBatchStatus(req, cb) {
@@ -58,11 +64,23 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("SendPhoneEmailCode", req, cb);
     }
     /**
+     * 查询自定义DNS Host
+     */
+    async DescribeCustomDnsHostSet(req, cb) {
+        return this.request("DescribeCustomDnsHostSet", req, cb);
+    }
+    /**
      * 本接口 (  DescribeDomainNameList ) 我的域名列表。
 
      */
     async DescribeDomainNameList(req, cb) {
         return this.request("DescribeDomainNameList", req, cb);
+    }
+    /**
+     * 国际站-修改DNS Host
+     */
+    async ModifyIntlCustomDnsHost(req, cb) {
+        return this.request("ModifyIntlCustomDnsHost", req, cb);
     }
     /**
      * 本接口 ( CreateDomainBatch ) 用于批量域名注册 。
@@ -96,11 +114,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CheckDomain", req, cb);
     }
     /**
-     * 本接口 ( RenewDomainBatch ) 用于批量续费域名 。
-
+     * 同步自定义DNS Host
      */
-    async RenewDomainBatch(req, cb) {
-        return this.request("RenewDomainBatch", req, cb);
+    async SyncCustomDnsHost(req, cb) {
+        return this.request("SyncCustomDnsHost", req, cb);
+    }
+    /**
+     * 本接口 ( ModifyDomainDNSBatch) 用于批量域名 DNS 修改 。
+     */
+    async ModifyDomainDNSBatch(req, cb) {
+        return this.request("ModifyDomainDNSBatch", req, cb);
     }
     /**
      * 创建自定义DNS Host
@@ -169,16 +192,23 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyDomainOwnerBatch", req, cb);
     }
     /**
+     * 删除自定义DNS Host
+     */
+    async DeleteCustomDnsHost(req, cb) {
+        return this.request("DeleteCustomDnsHost", req, cb);
+    }
+    /**
      * 本接口用于获取已验证的手机邮箱列表
      */
     async DescribePhoneEmailList(req, cb) {
         return this.request("DescribePhoneEmailList", req, cb);
     }
     /**
-     * 本接口 ( ModifyDomainDNSBatch) 用于批量域名 DNS 修改 。
+     * 本接口 ( RenewDomainBatch ) 用于批量续费域名 。
+
      */
-    async ModifyDomainDNSBatch(req, cb) {
-        return this.request("ModifyDomainDNSBatch", req, cb);
+    async RenewDomainBatch(req, cb) {
+        return this.request("RenewDomainBatch", req, cb);
     }
     /**
      * 获取域名实名信息详情

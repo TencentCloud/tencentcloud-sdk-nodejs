@@ -720,7 +720,7 @@ export interface DescribeDBSecurityGroupsResponse {
     /**
      * 安全组信息
      */
-    Groups: Array<SecurityGroup>;
+    Groups?: Array<SecurityGroup>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -7815,7 +7815,7 @@ export interface DescribeInstanceSpecsResponse {
  */
 export interface DescribeDBSecurityGroupsRequest {
     /**
-     * 实例组ID
+     * 实例组ID。可以通过接口DescribeClusterInstanceGrps获取。
      */
     InstanceId: string;
 }

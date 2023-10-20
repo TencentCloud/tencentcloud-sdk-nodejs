@@ -25,6 +25,15 @@ export interface RenewDomainBatchResponse {
     RequestId?: string;
 }
 /**
+ * SyncCustomDnsHost请求参数结构体
+ */
+export interface SyncCustomDnsHostRequest {
+    /**
+     * 域名实例ID
+     */
+    DomainId: string;
+}
+/**
  * BatchModifyDomainInfo请求参数结构体
  */
 export interface BatchModifyDomainInfoRequest {
@@ -337,6 +346,24 @@ export interface ModifyDomainDNSBatchResponse {
     RequestId?: string;
 }
 /**
+ * DescribeCustomDnsHostSet返回参数结构体
+ */
+export interface DescribeCustomDnsHostSetResponse {
+    /**
+     * 自定义DNS Host 列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DnsHostSet: Array<CustomDnsHost>;
+    /**
+     * 自定义DNS Host总数
+     */
+    TotalCount: number;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * DeletePhoneEmail请求参数结构体
  */
 export interface DeletePhoneEmailRequest {
@@ -363,17 +390,17 @@ export interface DescribeTemplateResponse {
     RequestId?: string;
 }
 /**
- * UpdateProhibitionBatch返回参数结构体
+ * 自定义DNS Host
  */
-export interface UpdateProhibitionBatchResponse {
+export interface CustomDnsHost {
     /**
-     * 日志ID
+     * DNS名称
      */
-    LogId: number;
+    DnsName: string;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     * IP地址列表
      */
-    RequestId?: string;
+    IpSet: Array<string>;
 }
 /**
  * CheckDomain返回参数结构体
@@ -465,6 +492,19 @@ export interface CreatePhoneEmailRequest {
      * 验证码
      */
     VerifyCode: string;
+}
+/**
+ * DeleteCustomDnsHost返回参数结构体
+ */
+export interface DeleteCustomDnsHostResponse {
+    /**
+     * 异步任务ID
+     */
+    LogId: number;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * 域名价格信息
@@ -695,6 +735,19 @@ export interface DescribeTemplateListRequest {
     Keyword?: string;
 }
 /**
+ * UpdateProhibitionBatch返回参数结构体
+ */
+export interface UpdateProhibitionBatchResponse {
+    /**
+     * 日志ID
+     */
+    LogId: number;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * DescribeBatchOperationLogDetails请求参数结构体
  */
 export interface DescribeBatchOperationLogDetailsRequest {
@@ -712,22 +765,21 @@ export interface DescribeBatchOperationLogDetailsRequest {
     Limit?: number;
 }
 /**
- * DescribeDomainNameList返回参数结构体
+ * DescribeCustomDnsHostSet请求参数结构体
  */
-export interface DescribeDomainNameListResponse {
+export interface DescribeCustomDnsHostSetRequest {
     /**
-     * 域名信息集合
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 域名实例ID
      */
-    DomainSet: Array<DomainList>;
+    DomainId: string;
     /**
-     * 域名总数量
+     * 返回数量，默认为20，取值范围[1,100]
      */
-    TotalCount: number;
+    Limit: number;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     * 偏移量，默认为0
      */
-    RequestId?: string;
+    Offset: number;
 }
 /**
  * CreateCustomDnsHost返回参数结构体
@@ -1130,6 +1182,23 @@ export interface CreateDomainBatchRequest {
     ActivityId?: string;
 }
 /**
+ * ModifyIntlCustomDnsHost请求参数结构体
+ */
+export interface ModifyIntlCustomDnsHostRequest {
+    /**
+     * 域名ID
+     */
+    DomainId: string;
+    /**
+     * DNS Host
+     */
+    DnsName: string;
+    /**
+     * IP地址
+     */
+    IpSet: Array<string>;
+}
+/**
  * DescribeDomainSimpleInfo返回参数结构体
  */
 export interface DescribeDomainSimpleInfoResponse {
@@ -1282,6 +1351,24 @@ export interface DomainBaseInfo {
     LockEndTime: string;
 }
 /**
+ * DescribeDomainNameList返回参数结构体
+ */
+export interface DescribeDomainNameListResponse {
+    /**
+     * 域名信息集合
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DomainSet: Array<DomainList>;
+    /**
+     * 域名总数量
+     */
+    TotalCount: number;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * DescribeDomainNameList请求参数结构体
  */
 export interface DescribeDomainNameListRequest {
@@ -1361,6 +1448,49 @@ export interface TransferProhibitionBatchResponse {
     RequestId?: string;
 }
 /**
+ * ModifyCustomDnsHost返回参数结构体
+ */
+export interface ModifyCustomDnsHostResponse {
+    /**
+     * 异步任务ID
+     */
+    LogId: number;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * SyncCustomDnsHost返回参数结构体
+ */
+export interface SyncCustomDnsHostResponse {
+    /**
+     * 异步任务ID
+     */
+    LogId: number;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * ModifyCustomDnsHost请求参数结构体
+ */
+export interface ModifyCustomDnsHostRequest {
+    /**
+     * 域名实例ID
+     */
+    DomainId: string;
+    /**
+     * DNS名称
+     */
+    DnsName: string;
+    /**
+     * IP地址列表
+     */
+    IpSet: Array<string>;
+}
+/**
  * CreateCustomDnsHost请求参数结构体
  */
 export interface CreateCustomDnsHostRequest {
@@ -1391,6 +1521,19 @@ export interface ModifyDomainDNSBatchRequest {
     Dns: Array<string>;
 }
 /**
+ * DeleteCustomDnsHost请求参数结构体
+ */
+export interface DeleteCustomDnsHostRequest {
+    /**
+     * 域名实例ID
+     */
+    DomainId: string;
+    /**
+     * DNS名称
+     */
+    DnsName: string;
+}
+/**
  * DescribeBatchOperationLogDetails返回参数结构体
  */
 export interface DescribeBatchOperationLogDetailsResponse {
@@ -1407,6 +1550,19 @@ export interface DescribeBatchOperationLogDetailsResponse {
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * SendPhoneEmailCode请求参数结构体
+ */
+export interface SendPhoneEmailCodeRequest {
+    /**
+     * 手机或者邮箱号。
+     */
+    Code: string;
+    /**
+     * 1：手机  2：邮箱。
+     */
+    Type: number;
 }
 /**
  * DescribePhoneEmailList返回参数结构体
@@ -1508,17 +1664,17 @@ export interface ModifyDomainOwnerBatchRequest {
     NewOwnerAppId?: string;
 }
 /**
- * SendPhoneEmailCode请求参数结构体
+ * ModifyIntlCustomDnsHost返回参数结构体
  */
-export interface SendPhoneEmailCodeRequest {
+export interface ModifyIntlCustomDnsHostResponse {
     /**
-     * 手机或者邮箱号。
+     * 任务ID
      */
-    Code: string;
+    LogId: number;
     /**
-     * 1：手机  2：邮箱。
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
-    Type: number;
+    RequestId?: string;
 }
 /**
  * 批量操作记录

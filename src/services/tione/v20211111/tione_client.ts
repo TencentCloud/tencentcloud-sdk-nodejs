@@ -492,10 +492,8 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 该接口支持与两种类型大模型的聊天。
-1. 与多行业多场景大模型的在线体验聊天
-2. 与自行部署的开源大模型的聊天
-     */
+   * 该接口支持与自行部署的大模型的聊天。
+   */
   async ChatCompletion(
     req: ChatCompletionRequest,
     cb?: (error: string, rep: ChatCompletionResponse) => void

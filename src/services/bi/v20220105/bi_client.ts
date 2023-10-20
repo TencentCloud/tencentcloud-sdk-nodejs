@@ -48,8 +48,9 @@ import {
   BaseStateAction,
   Data,
   ModifyUserRoleProjectResponse,
-  ModifyDatasourceCloudRequest,
+  DescribeUserRoleProjectListResponse,
   ModifyDatasourceCloudResponse,
+  ModifyDatasourceCloudRequest,
   ModifyDatasourceRequest,
   ModifyProjectRequest,
   ModifyUserRoleProjectRequest,
@@ -67,6 +68,7 @@ import {
   DescribeUserRoleListRequest,
   DeleteProjectResponse,
   ProjectListData,
+  DescribeUserRoleProjectListRequest,
   PermissionGroup,
   CreateEmbedTokenResponse,
   CreateUserRoleProjectRequest,
@@ -122,23 +124,33 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 项目内-创建用户角色
+   * 项目详情接口
    */
-  async CreateUserRoleProject(
-    req: CreateUserRoleProjectRequest,
-    cb?: (error: string, rep: CreateUserRoleProjectResponse) => void
-  ): Promise<CreateUserRoleProjectResponse> {
-    return this.request("CreateUserRoleProject", req, cb)
+  async DescribeProjectInfo(
+    req: DescribeProjectInfoRequest,
+    cb?: (error: string, rep: DescribeProjectInfoResponse) => void
+  ): Promise<DescribeProjectInfoResponse> {
+    return this.request("DescribeProjectInfo", req, cb)
   }
 
   /**
-   * 更新云数据库
+   * 申请延长Token可用时间接口-强鉴权
    */
-  async ModifyDatasourceCloud(
-    req: ModifyDatasourceCloudRequest,
-    cb?: (error: string, rep: ModifyDatasourceCloudResponse) => void
-  ): Promise<ModifyDatasourceCloudResponse> {
-    return this.request("ModifyDatasourceCloud", req, cb)
+  async ApplyEmbedInterval(
+    req: ApplyEmbedIntervalRequest,
+    cb?: (error: string, rep: ApplyEmbedIntervalResponse) => void
+  ): Promise<ApplyEmbedIntervalResponse> {
+    return this.request("ApplyEmbedInterval", req, cb)
+  }
+
+  /**
+   * 创建云数据库
+   */
+  async CreateDatasourceCloud(
+    req: CreateDatasourceCloudRequest,
+    cb?: (error: string, rep: CreateDatasourceCloudResponse) => void
+  ): Promise<CreateDatasourceCloudResponse> {
+    return this.request("CreateDatasourceCloud", req, cb)
   }
 
   /**
@@ -162,26 +174,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 项目详情接口
-   */
-  async DescribeProjectInfo(
-    req: DescribeProjectInfoRequest,
-    cb?: (error: string, rep: DescribeProjectInfoResponse) => void
-  ): Promise<DescribeProjectInfoResponse> {
-    return this.request("DescribeProjectInfo", req, cb)
-  }
-
-  /**
-   * 创建项目
-   */
-  async CreateProject(
-    req: CreateProjectRequest,
-    cb?: (error: string, rep: CreateProjectResponse) => void
-  ): Promise<CreateProjectResponse> {
-    return this.request("CreateProject", req, cb)
-  }
-
-  /**
    * 创建用户角色
    */
   async CreateUserRole(
@@ -189,16 +181,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateUserRoleResponse) => void
   ): Promise<CreateUserRoleResponse> {
     return this.request("CreateUserRole", req, cb)
-  }
-
-  /**
-   * 项目内-用户接口
-   */
-  async DescribeUserProjectList(
-    req: DescribeUserProjectListRequest,
-    cb?: (error: string, rep: DescribeUserProjectListResponse) => void
-  ): Promise<DescribeUserProjectListResponse> {
-    return this.request("DescribeUserProjectList", req, cb)
   }
 
   /**
@@ -212,16 +194,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 申请延长Token可用时间接口-强鉴权
-   */
-  async ApplyEmbedInterval(
-    req: ApplyEmbedIntervalRequest,
-    cb?: (error: string, rep: ApplyEmbedIntervalResponse) => void
-  ): Promise<ApplyEmbedIntervalResponse> {
-    return this.request("ApplyEmbedInterval", req, cb)
-  }
-
-  /**
    * 删除用户角色，会删除用户
    */
   async DeleteUserRole(
@@ -229,16 +201,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteUserRoleResponse) => void
   ): Promise<DeleteUserRoleResponse> {
     return this.request("DeleteUserRole", req, cb)
-  }
-
-  /**
-   * 项目-修改用户角色信息
-   */
-  async ModifyUserRoleProject(
-    req: ModifyUserRoleProjectRequest,
-    cb?: (error: string, rep: ModifyUserRoleProjectResponse) => void
-  ): Promise<ModifyUserRoleProjectResponse> {
-    return this.request("ModifyUserRoleProject", req, cb)
   }
 
   /**
@@ -252,16 +214,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 项目信息
-   */
-  async DescribeProjectList(
-    req: DescribeProjectListRequest,
-    cb?: (error: string, rep: DescribeProjectListResponse) => void
-  ): Promise<DescribeProjectListResponse> {
-    return this.request("DescribeProjectList", req, cb)
-  }
-
-  /**
    * 用户角色列表
    */
   async DescribeUserRoleList(
@@ -272,13 +224,33 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建云数据库
+   * 项目内-用户角色列表
    */
-  async CreateDatasourceCloud(
-    req: CreateDatasourceCloudRequest,
-    cb?: (error: string, rep: CreateDatasourceCloudResponse) => void
-  ): Promise<CreateDatasourceCloudResponse> {
-    return this.request("CreateDatasourceCloud", req, cb)
+  async DescribeUserRoleProjectList(
+    req: DescribeUserRoleProjectListRequest,
+    cb?: (error: string, rep: DescribeUserRoleProjectListResponse) => void
+  ): Promise<DescribeUserRoleProjectListResponse> {
+    return this.request("DescribeUserRoleProjectList", req, cb)
+  }
+
+  /**
+   * 更新云数据库
+   */
+  async ModifyDatasourceCloud(
+    req: ModifyDatasourceCloudRequest,
+    cb?: (error: string, rep: ModifyDatasourceCloudResponse) => void
+  ): Promise<ModifyDatasourceCloudResponse> {
+    return this.request("ModifyDatasourceCloud", req, cb)
+  }
+
+  /**
+   * 项目内-创建用户角色
+   */
+  async CreateUserRoleProject(
+    req: CreateUserRoleProjectRequest,
+    cb?: (error: string, rep: CreateUserRoleProjectResponse) => void
+  ): Promise<CreateUserRoleProjectResponse> {
+    return this.request("CreateUserRoleProject", req, cb)
   }
 
   /**
@@ -292,6 +264,26 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 创建项目
+   */
+  async CreateProject(
+    req: CreateProjectRequest,
+    cb?: (error: string, rep: CreateProjectResponse) => void
+  ): Promise<CreateProjectResponse> {
+    return this.request("CreateProject", req, cb)
+  }
+
+  /**
+   * 项目内-用户接口
+   */
+  async DescribeUserProjectList(
+    req: DescribeUserProjectListRequest,
+    cb?: (error: string, rep: DescribeUserProjectListResponse) => void
+  ): Promise<DescribeUserProjectListResponse> {
+    return this.request("DescribeUserProjectList", req, cb)
+  }
+
+  /**
    * 删除项目
    */
   async DeleteProject(
@@ -299,5 +291,25 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteProjectResponse) => void
   ): Promise<DeleteProjectResponse> {
     return this.request("DeleteProject", req, cb)
+  }
+
+  /**
+   * 项目-修改用户角色信息
+   */
+  async ModifyUserRoleProject(
+    req: ModifyUserRoleProjectRequest,
+    cb?: (error: string, rep: ModifyUserRoleProjectResponse) => void
+  ): Promise<ModifyUserRoleProjectResponse> {
+    return this.request("ModifyUserRoleProject", req, cb)
+  }
+
+  /**
+   * 项目信息
+   */
+  async DescribeProjectList(
+    req: DescribeProjectListRequest,
+    cb?: (error: string, rep: DescribeProjectListResponse) => void
+  ): Promise<DescribeProjectListResponse> {
+    return this.request("DescribeProjectList", req, cb)
   }
 }

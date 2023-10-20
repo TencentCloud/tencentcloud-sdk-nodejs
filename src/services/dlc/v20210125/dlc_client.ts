@@ -18,7 +18,7 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
-  UserDetailInfo,
+  LakeFileSystemToken,
   UpdateDataEngineRequest,
   CheckDataEngineConfigPairsValidityResponse,
   DescribeResultDownloadResponse,
@@ -64,6 +64,7 @@ import {
   RestartDataEngineResponse,
   ModifyUserResponse,
   DeleteScriptResponse,
+  UserDetailInfo,
   TableInfo,
   Task,
   DataEngineConfigInstanceInfo,
@@ -669,7 +670,7 @@ export class Client extends AbstractClient {
    * 获取LakeFs上task执行结果访问信息
    */
   async DescribeLakeFsTaskResult(
-    req?: DescribeLakeFsTaskResultRequest,
+    req: DescribeLakeFsTaskResultRequest,
     cb?: (error: string, rep: DescribeLakeFsTaskResultResponse) => void
   ): Promise<DescribeLakeFsTaskResultResponse> {
     return this.request("DescribeLakeFsTaskResult", req, cb)

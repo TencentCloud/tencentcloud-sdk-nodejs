@@ -831,6 +831,56 @@ export interface ModifyUserRoleProjectResponse {
 }
 
 /**
+ * DescribeUserRoleProjectList返回参数结构体
+ */
+export interface DescribeUserRoleProjectListResponse {
+  /**
+   * 扩展
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Extra?: string
+  /**
+   * 数据
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Data?: UserRoleListData
+  /**
+   * 消息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Msg?: string
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyDatasourceCloud返回参数结构体
+ */
+export interface ModifyDatasourceCloudResponse {
+  /**
+   * 成功无
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Data?: string
+  /**
+   * 额外信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Extra?: string
+  /**
+   * 提示
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Msg?: string
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyDatasourceCloud请求参数结构体
  */
 export interface ModifyDatasourceCloudRequest {
@@ -914,31 +964,6 @@ export interface ModifyDatasourceCloudRequest {
    * 第三方数据源id
    */
   DataOriginDatasourceId?: string
-}
-
-/**
- * ModifyDatasourceCloud返回参数结构体
- */
-export interface ModifyDatasourceCloudResponse {
-  /**
-   * 成功无
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Data?: string
-  /**
-   * 额外信息
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Extra?: string
-  /**
-   * 提示
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Msg?: string
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**
@@ -1706,6 +1731,24 @@ export interface ProjectListData {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalPages: number
+}
+
+/**
+ * DescribeUserRoleProjectList请求参数结构体
+ */
+export interface DescribeUserRoleProjectListRequest {
+  /**
+   * 页码
+   */
+  PageNo: number
+  /**
+   * 页数
+   */
+  PageSize: number
+  /**
+   * 项目ID
+   */
+  ProjectId: number
 }
 
 /**

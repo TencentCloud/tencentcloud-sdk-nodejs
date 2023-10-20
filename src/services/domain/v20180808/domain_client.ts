@@ -20,6 +20,7 @@ import { ClientConfig } from "../../../common/interface"
 import {
   UploadImageResponse,
   RenewDomainBatchResponse,
+  SyncCustomDnsHostRequest,
   BatchModifyDomainInfoRequest,
   DomainSimpleInfo,
   CreateDomainRedemptionResponse,
@@ -31,12 +32,14 @@ import {
   DomainBatchDetailSet,
   SendPhoneEmailCodeResponse,
   ModifyDomainDNSBatchResponse,
+  DescribeCustomDnsHostSetResponse,
   DeletePhoneEmailRequest,
   DescribeTemplateResponse,
-  UpdateProhibitionBatchResponse,
+  CustomDnsHost,
   CheckDomainResponse,
   DescribeDomainSimpleInfoRequest,
   CreatePhoneEmailRequest,
+  DeleteCustomDnsHostResponse,
   PriceInfo,
   DescribeTemplateRequest,
   RenewDomainBatchRequest,
@@ -47,8 +50,9 @@ import {
   DescribeTemplateListResponse,
   TransferProhibitionBatchRequest,
   DescribeTemplateListRequest,
+  UpdateProhibitionBatchResponse,
   DescribeBatchOperationLogDetailsRequest,
-  DescribeDomainNameListResponse,
+  DescribeCustomDnsHostSetRequest,
   CreateCustomDnsHostResponse,
   ContactInfo,
   DescribeDomainPriceListResponse,
@@ -63,19 +67,26 @@ import {
   DescribeDomainPriceListRequest,
   SetDomainAutoRenewRequest,
   CreateDomainBatchRequest,
+  ModifyIntlCustomDnsHostRequest,
   DescribeDomainSimpleInfoResponse,
   DescribeDomainBaseInfoRequest,
   DescribePhoneEmailListRequest,
   DomainBaseInfo,
+  DescribeDomainNameListResponse,
   DescribeDomainNameListRequest,
   DescribeBatchOperationLogsRequest,
   UploadImageRequest,
   CheckDomainRequest,
   DescribeBatchOperationLogsResponse,
   TransferProhibitionBatchResponse,
+  ModifyCustomDnsHostResponse,
+  SyncCustomDnsHostResponse,
+  ModifyCustomDnsHostRequest,
   CreateCustomDnsHostRequest,
   ModifyDomainDNSBatchRequest,
+  DeleteCustomDnsHostRequest,
   DescribeBatchOperationLogDetailsResponse,
+  SendPhoneEmailCodeRequest,
   DescribePhoneEmailListResponse,
   CheckBatchStatusResponse,
   DeletePhoneEmailResponse,
@@ -83,7 +94,7 @@ import {
   CreatePhoneEmailResponse,
   PhoneEmailData,
   ModifyDomainOwnerBatchRequest,
-  SendPhoneEmailCodeRequest,
+  ModifyIntlCustomDnsHostResponse,
   DomainBatchLogSet,
 } from "./domain_models"
 
@@ -104,6 +115,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: SetDomainAutoRenewResponse) => void
   ): Promise<SetDomainAutoRenewResponse> {
     return this.request("SetDomainAutoRenew", req, cb)
+  }
+
+  /**
+   * 修改自定义DNS Host
+   */
+  async ModifyCustomDnsHost(
+    req: ModifyCustomDnsHostRequest,
+    cb?: (error: string, rep: ModifyCustomDnsHostResponse) => void
+  ): Promise<ModifyCustomDnsHostResponse> {
+    return this.request("ModifyCustomDnsHost", req, cb)
   }
 
   /**
@@ -147,6 +168,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询自定义DNS Host
+   */
+  async DescribeCustomDnsHostSet(
+    req: DescribeCustomDnsHostSetRequest,
+    cb?: (error: string, rep: DescribeCustomDnsHostSetResponse) => void
+  ): Promise<DescribeCustomDnsHostSetResponse> {
+    return this.request("DescribeCustomDnsHostSet", req, cb)
+  }
+
+  /**
      * 本接口 (  DescribeDomainNameList ) 我的域名列表。
 
      */
@@ -155,6 +186,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDomainNameListResponse) => void
   ): Promise<DescribeDomainNameListResponse> {
     return this.request("DescribeDomainNameList", req, cb)
+  }
+
+  /**
+   * 国际站-修改DNS Host
+   */
+  async ModifyIntlCustomDnsHost(
+    req: ModifyIntlCustomDnsHostRequest,
+    cb?: (error: string, rep: ModifyIntlCustomDnsHostResponse) => void
+  ): Promise<ModifyIntlCustomDnsHostResponse> {
+    return this.request("ModifyIntlCustomDnsHost", req, cb)
   }
 
   /**
@@ -209,14 +250,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 本接口 ( RenewDomainBatch ) 用于批量续费域名 。
+   * 同步自定义DNS Host
+   */
+  async SyncCustomDnsHost(
+    req: SyncCustomDnsHostRequest,
+    cb?: (error: string, rep: SyncCustomDnsHostResponse) => void
+  ): Promise<SyncCustomDnsHostResponse> {
+    return this.request("SyncCustomDnsHost", req, cb)
+  }
 
-     */
-  async RenewDomainBatch(
-    req: RenewDomainBatchRequest,
-    cb?: (error: string, rep: RenewDomainBatchResponse) => void
-  ): Promise<RenewDomainBatchResponse> {
-    return this.request("RenewDomainBatch", req, cb)
+  /**
+   * 本接口 ( ModifyDomainDNSBatch) 用于批量域名 DNS 修改 。
+   */
+  async ModifyDomainDNSBatch(
+    req: ModifyDomainDNSBatchRequest,
+    cb?: (error: string, rep: ModifyDomainDNSBatchResponse) => void
+  ): Promise<ModifyDomainDNSBatchResponse> {
+    return this.request("ModifyDomainDNSBatch", req, cb)
   }
 
   /**
@@ -330,6 +380,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 删除自定义DNS Host
+   */
+  async DeleteCustomDnsHost(
+    req: DeleteCustomDnsHostRequest,
+    cb?: (error: string, rep: DeleteCustomDnsHostResponse) => void
+  ): Promise<DeleteCustomDnsHostResponse> {
+    return this.request("DeleteCustomDnsHost", req, cb)
+  }
+
+  /**
    * 本接口用于获取已验证的手机邮箱列表
    */
   async DescribePhoneEmailList(
@@ -340,13 +400,14 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口 ( ModifyDomainDNSBatch) 用于批量域名 DNS 修改 。
-   */
-  async ModifyDomainDNSBatch(
-    req: ModifyDomainDNSBatchRequest,
-    cb?: (error: string, rep: ModifyDomainDNSBatchResponse) => void
-  ): Promise<ModifyDomainDNSBatchResponse> {
-    return this.request("ModifyDomainDNSBatch", req, cb)
+     * 本接口 ( RenewDomainBatch ) 用于批量续费域名 。
+
+     */
+  async RenewDomainBatch(
+    req: RenewDomainBatchRequest,
+    cb?: (error: string, rep: RenewDomainBatchResponse) => void
+  ): Promise<RenewDomainBatchResponse> {
+    return this.request("RenewDomainBatch", req, cb)
   }
 
   /**

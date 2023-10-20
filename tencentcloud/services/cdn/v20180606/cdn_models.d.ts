@@ -1073,7 +1073,7 @@ export interface AdvancedAuthenticationTypeA {
      */
     ExpireTimeRequired: boolean;
     /**
-     * Url组成格式，如：${private_key}${schema}${host}${full_uri。
+     * URL 组成格式，如：${private_key}${schema}${host}${full_uri}。
      */
     Format: string;
     /**
@@ -6421,15 +6421,15 @@ export interface EdgePackTaskStatus {
     /**
      * APK 名称
      */
-    Apk: string;
+    Apk?: string;
     /**
      * 输出目录
      */
-    DstDir: string;
+    DstDir?: string;
     /**
      * 上传时间
      */
-    UploadTime: string;
+    UploadTime?: string;
     /**
      * 任务状态
   created: 创建成功
@@ -6437,15 +6437,15 @@ export interface EdgePackTaskStatus {
   done: 处理完成
   failed: 处理失败
      */
-    Status: string;
+    Status?: string;
     /**
      * 上传目录
      */
-    SrcDir: Array<string>;
+    SrcDir?: Array<string>;
     /**
      * 失败任务状态详情
      */
-    StatusDesc: string;
+    StatusDesc?: string;
 }
 /**
  * 域名国内地区特殊配置。分地区特殊配置。UpdateDomainConfig接口只支持修改部分地区配置，为了兼容旧版本配置，本类型会列出旧版本所有可能存在差异的配置列表，支持修改的配置列表如下：
@@ -6843,24 +6843,24 @@ export interface RuleQueryString {
  */
 export interface AdvancedScdnAclRule {
     /**
-     * 匹配关键字：
-  protocol：HTTP协议
-  httpVersion：HTTP版本
-  method：请求方法
-  ip：请求源IP
-  ipAsn：请求源IP自治域号
-  ipCountry：请求源IP所在国家
-  ipArea：请求源IP所在大区
-  xForwardFor：请求头X-Forward-For
-  directory：路径
-  index：首页
-  path：文件全路径
-  file：文件扩展名
-  param：请求参数
-  referer：请求头Referer
-  cookie：请求头Cookie
-  userAgent：请求头User-Agent
-  head：自定义请求头
+     * 匹配关键字，可取值有：
+  <li>protocol：HTTP协议</li>
+  <li>httpVersion：HTTP版本</li>
+  <li>method：请求方法</li>
+  <li>ip：请求源IP</li>
+  <li>ipAsn：请求源IP自治域号</li>
+  <li>ipCountry：请求源IP所在国家</li>
+  <li>ipArea：请求源IP所在大区</li>
+  <li>xForwardFor：请求头X-Forwarded-For</li>
+  <li>directory：路径</li>
+  <li>index：首页</li>
+  <li>path：文件全路径</li>
+  <li>file：文件扩展名</li>
+  <li>param：请求参数</li>
+  <li>referer：请求头Referer</li>
+  <li>cookie：请求头Cookie</li>
+  <li>userAgent：请求头User-Agent</li>
+  <li>head：自定义请求头</li>
      */
     MatchKey: string;
     /**
