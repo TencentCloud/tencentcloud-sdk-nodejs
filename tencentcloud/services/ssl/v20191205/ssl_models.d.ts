@@ -24,17 +24,34 @@ export interface DescribeCertificateBindResourceTaskDetailRequest {
     Regions?: Array<string>;
 }
 /**
- * 云资源地域列表
+ * 云原生网关证书信息
  */
-export interface ResourceTypeRegions {
+export interface GatewayCertificate {
     /**
-     * 云资源类型
+     * 网关证书ID
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    ResourceType?: string;
+    Id?: string;
     /**
-     * 地域列表
+     * 网关证书名称
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Regions?: Array<string>;
+    Name?: string;
+    /**
+     * 绑定域名
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    BindDomains?: Array<string>;
+    /**
+     * 证书来源
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CertSource?: string;
+    /**
+     * 当前绑定的SSL证书ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CertId?: string;
 }
 /**
  * DescribeHostDdosInstanceList请求参数结构体
@@ -2009,6 +2026,39 @@ export interface PackageTransferOutInfo {
     ReceiveTime: string;
 }
 /**
+ * tse实例详情
+ */
+export interface TSEInstanceDetail {
+    /**
+     * 网关ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    GatewayId?: string;
+    /**
+     * 网关名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    GatewayName?: string;
+    /**
+     * 网关证书列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CertificateList?: Array<GatewayCertificate>;
+}
+/**
+ * 云资源地域列表
+ */
+export interface ResourceTypeRegions {
+    /**
+     * 云资源类型
+     */
+    ResourceType?: string;
+    /**
+     * 地域列表
+     */
+    Regions?: Array<string>;
+}
+/**
  * DeleteManager请求参数结构体
  */
 export interface DeleteManagerRequest {
@@ -2136,6 +2186,11 @@ export interface DescribeCertificateBindResourceTaskDetailResponse {
      * 当前结果缓存时间
      */
     CacheTime?: string;
+    /**
+     * 关联tse资源详情
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TSE?: Array<TSEInstanceList>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -4658,6 +4713,24 @@ export interface DescribeManagersRequest {
      * 管理人姓/管理人名/邮箱/部门精准匹配
      */
     SearchKey?: string;
+}
+/**
+ * TSE实例详情 - 异步关联云资源数据结构
+ */
+export interface TSEInstanceList {
+    /**
+     * TSE实例详情
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InstanceList?: Array<TSEInstanceDetail>;
+    /**
+     * 该地域下TSE实例总数
+     */
+    TotalCount?: number;
+    /**
+     * 地域
+     */
+    Region?: string;
 }
 /**
  * DescribeHostLighthouseInstanceList返回参数结构体

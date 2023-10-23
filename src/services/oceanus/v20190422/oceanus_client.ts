@@ -65,6 +65,7 @@ import {
   DeleteResourceConfigsRequest,
   DescribeJobSavepointResponse,
   DeleteFoldersRequest,
+  DeleteWorkSpaceRequest,
   DescribeWorkSpacesResponse,
   GatewayRefItem,
   DescribeJobsRequest,
@@ -83,6 +84,7 @@ import {
   DeleteJobConfigsRequest,
   StopJobsRequest,
   RunJobsRequest,
+  DeleteWorkSpaceResponse,
   DeleteJobsResponse,
   Property,
   JobGraphEdge,
@@ -224,13 +226,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 描述资源配置接口
+   * 删除工作空间
    */
-  async DescribeResourceConfigs(
-    req: DescribeResourceConfigsRequest,
-    cb?: (error: string, rep: DescribeResourceConfigsResponse) => void
-  ): Promise<DescribeResourceConfigsResponse> {
-    return this.request("DescribeResourceConfigs", req, cb)
+  async DeleteWorkSpace(
+    req: DeleteWorkSpaceRequest,
+    cb?: (error: string, rep: DeleteWorkSpaceResponse) => void
+  ): Promise<DeleteWorkSpaceResponse> {
+    return this.request("DeleteWorkSpace", req, cb)
   }
 
   /**
@@ -291,6 +293,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeClustersResponse) => void
   ): Promise<DescribeClustersResponse> {
     return this.request("DescribeClusters", req, cb)
+  }
+
+  /**
+   * 描述资源配置接口
+   */
+  async DescribeResourceConfigs(
+    req: DescribeResourceConfigsRequest,
+    cb?: (error: string, rep: DescribeResourceConfigsResponse) => void
+  ): Promise<DescribeResourceConfigsResponse> {
+    return this.request("DescribeResourceConfigs", req, cb)
   }
 
   /**

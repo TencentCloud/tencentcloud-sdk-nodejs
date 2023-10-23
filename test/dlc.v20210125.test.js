@@ -348,6 +348,16 @@ it("dlc.v20210125.UpdateRowFilter", async function () {
     }
 })
 
+it("dlc.v20210125.DescribeAdvancedStoreLocation", async function () {
+    try {
+       const data = await client.DescribeAdvancedStoreLocation({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dlc.v20210125.LockMetaData", async function () {
     try {
        const data = await client.LockMetaData({})
@@ -551,6 +561,16 @@ it("dlc.v20210125.ModifyGovernEventRule", async function () {
 it("dlc.v20210125.CreateResultDownload", async function () {
     try {
        const data = await client.CreateResultDownload({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dlc.v20210125.ModifyAdvancedStoreLocation", async function () {
+    try {
+       const data = await client.ModifyAdvancedStoreLocation({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -692,6 +692,15 @@ export interface CreateScriptResponse {
     RequestId?: string;
 }
 /**
+ * ModifyWorkGroup返回参数结构体
+ */
+export interface ModifyWorkGroupResponse {
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * CreateTasksInOrder返回参数结构体
  */
 export interface CreateTasksInOrderResponse {
@@ -1142,6 +1151,19 @@ export interface CrontabResumeSuspendStrategy {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     SuspendStrategy?: number;
+}
+/**
+ * SwitchDataEngineImage请求参数结构体
+ */
+export interface SwitchDataEngineImageRequest {
+    /**
+     * 引擎ID
+     */
+    DataEngineId: string;
+    /**
+     * 新镜像版本ID
+     */
+    NewImageVersionId: string;
 }
 /**
  * AlterDMSTable返回参数结构体
@@ -2016,26 +2038,9 @@ export interface AlterDMSPartitionRequest {
     Partition?: DMSPartition;
 }
 /**
- * 视图基本配置信息
+ * DescribeAdvancedStoreLocation请求参数结构体
  */
-export interface ViewBaseInfo {
-    /**
-     * 该视图所属数据库名字
-     */
-    DatabaseName: string;
-    /**
-     * 视图名称
-     */
-    ViewName: string;
-    /**
-     * 视图创建人昵称
-     */
-    UserAlias?: string;
-    /**
-     * 视图创建人ID
-     */
-    UserSubUin?: string;
-}
+export declare type DescribeAdvancedStoreLocationRequest = null;
 /**
  * CheckLockMetaData请求参数结构体
  */
@@ -3182,6 +3187,32 @@ export interface DescribeNotebookSessionRequest {
     SessionId: string;
 }
 /**
+ * DescribeAdvancedStoreLocation返回参数结构体
+ */
+export interface DescribeAdvancedStoreLocationResponse {
+    /**
+     * 是否启用高级设置：0-否，1-是
+     */
+    Enable: number;
+    /**
+     * 查询结果保存cos路径
+     */
+    StoreLocation: string;
+    /**
+     * 是否有托管存储权限
+     */
+    HasLakeFs: boolean;
+    /**
+     * 托管存储状态，HasLakeFs等于true时，该值才有意义
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    LakeFsStatus: string;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * UpgradeDataEngineImage请求参数结构体
  */
 export interface UpgradeDataEngineImageRequest {
@@ -3471,17 +3502,17 @@ export interface AddUsersToWorkGroupResponse {
     RequestId?: string;
 }
 /**
- * SwitchDataEngineImage请求参数结构体
+ * ModifyAdvancedStoreLocation请求参数结构体
  */
-export interface SwitchDataEngineImageRequest {
+export interface ModifyAdvancedStoreLocationRequest {
     /**
-     * 引擎ID
+     * 查询结果保存cos路径
      */
-    DataEngineId: string;
+    StoreLocation: string;
     /**
-     * 新镜像版本ID
+     * 是否启用高级设置：0-否，1-是
      */
-    NewImageVersionId: string;
+    Enable: number;
 }
 /**
  * DescribeNotebookSessionLog请求参数结构体
@@ -3999,9 +4030,9 @@ export interface AttachWorkGroupPolicyResponse {
     RequestId?: string;
 }
 /**
- * ModifyWorkGroup返回参数结构体
+ * ModifyAdvancedStoreLocation返回参数结构体
  */
-export interface ModifyWorkGroupResponse {
+export interface ModifyAdvancedStoreLocationResponse {
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -5871,6 +5902,27 @@ export interface DMSPartition {
      * 存储对象
      */
     Sds?: DMSSds;
+}
+/**
+ * 视图基本配置信息
+ */
+export interface ViewBaseInfo {
+    /**
+     * 该视图所属数据库名字
+     */
+    DatabaseName: string;
+    /**
+     * 视图名称
+     */
+    ViewName: string;
+    /**
+     * 视图创建人昵称
+     */
+    UserAlias?: string;
+    /**
+     * 视图创建人ID
+     */
+    UserSubUin?: string;
 }
 /**
  * 数据库对象

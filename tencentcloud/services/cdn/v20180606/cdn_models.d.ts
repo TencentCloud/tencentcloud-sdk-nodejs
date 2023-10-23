@@ -154,11 +154,11 @@ export interface DescribeCdnDomainLogsRequest {
      */
     Domain: string;
     /**
-     * 开始时间，如 2019-09-04 00:00:00
+     * 开始时间
      */
     StartTime: string;
     /**
-     * 结束时间，如 2019-09-04 12:00:00
+     * 结束时间
      */
     EndTime: string;
     /**
@@ -170,16 +170,15 @@ export interface DescribeCdnDomainLogsRequest {
      */
     Limit?: number;
     /**
-     * 指定区域下载日志
-  mainland：获取境内加速日志包下载链接
-  overseas：获取境外加速日志包下载链接
-  global：同时获取境内、境外加速日志包下载链接（分开打包）
-  不指定时默认为 mainland
+     * 指定区域下载日志，默认为 mainland，可取值有：
+  <li>mainland：获取境内加速日志包下载链接</li>
+  <li>overseas：获取境外加速日志包下载链接</li>
+  <li>global：同时获取境内、境外加速日志包下载链接（分开打包）</li>
      */
     Area?: string;
     /**
-     * 指定下载日志的类型，目前仅支持访问日志（access）。
-  access：访问日志
+     * 指定下载日志的类型，可取值有：
+  <li>access：访问日志</li>
      */
     LogType?: string;
 }
@@ -1415,11 +1414,11 @@ export interface DescribeEdgePackTaskStatusResponse {
     /**
      * 动态打包任务状态列表
      */
-    EdgePackTaskStatusSet: Array<EdgePackTaskStatus>;
+    EdgePackTaskStatusSet?: Array<EdgePackTaskStatus>;
     /**
      * 总数，用于分页查询
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -4191,7 +4190,7 @@ export interface DescribeCdnIpResponse {
     /**
      * 查询的节点归属详情。
      */
-    Ips: Array<CdnIp>;
+    Ips?: Array<CdnIp>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */

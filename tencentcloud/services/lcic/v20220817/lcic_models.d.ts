@@ -112,6 +112,18 @@ export interface CreateRoomRequest {
      * 拖堂时间：单位分钟，0为不限制(默认值), -1为不能拖堂，大于0为拖堂的时间，最大值120分钟
      */
     EndDelayTime?: number;
+    /**
+     * 直播方式：0 常规模式（默认）1 回放直播模式（伪直播）
+     */
+    LiveType?: number;
+    /**
+     * 伪直播链接
+     */
+    RecordLiveUrl?: string;
+    /**
+     * 是否自动开始上课：0 不自动上课（默认） 1 自动上课 live_type=1的时候有效
+     */
+    EnableAutoStart?: number;
 }
 /**
  * DescribeQuestionList请求参数结构体
@@ -704,6 +716,21 @@ export interface RoomItem {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     EndDelayTime?: number;
+    /**
+     * 直播方式：0 常规模式（默认）1 回放直播模式（伪直播）
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    LiveType?: number;
+    /**
+     * 伪直播回放链接
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RecordLiveUrl?: string;
+    /**
+     * 是否自动开始上课：0 不自动上课（默认） 1 自动上课 live_type=1的时候有效
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    EnableAutoStart?: number;
 }
 /**
  * 课堂评分字段
@@ -1914,6 +1941,18 @@ export interface DescribeRoomResponse {
      */
     EndDelayTime?: number;
     /**
+     * 直播方式：0 常规模式（默认）1 回放直播模式（伪直播）
+     */
+    LiveType?: number;
+    /**
+     * 伪直播链接
+     */
+    RecordLiveUrl?: string;
+    /**
+     * 是否自动开始上课：0 不自动上课（默认） 1 自动上课 live_type=1的时候有效
+     */
+    EnableAutoStart?: number;
+    /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
@@ -2447,6 +2486,18 @@ export interface RoomInfo {
      * 拖堂时间：单位分钟，0为不限制(默认值), -1为不能拖堂，大于0为拖堂的时间，最大值120分钟
      */
     EndDelayTime?: number;
+    /**
+     * 直播方式：0 常规模式（默认）1 回放直播模式（伪直播）
+     */
+    LiveType?: number;
+    /**
+     * 伪直播回放链接
+     */
+    RecordLiveUrl?: string;
+    /**
+     * 是否自动开始上课：0 不自动上课（默认） 1 自动上课 live_type=1的时候有效
+     */
+    EnableAutoStart?: number;
 }
 /**
  * ModifyRoom请求参数结构体
@@ -2555,6 +2606,18 @@ export interface ModifyRoomRequest {
      * 拖堂时间：单位分钟，0为不限制(默认值), -1为不能拖堂，大于0为拖堂的时间，最大值120分钟
      */
     EndDelayTime?: number;
+    /**
+     * 直播方式：0 常规模式（默认）1 回放直播模式（伪直播）
+     */
+    LiveType?: number;
+    /**
+     * 伪直播链接
+     */
+    RecordLiveUrl?: string;
+    /**
+     * 是否自动开始上课：0 不自动上课（默认） 1 自动上课 live_type=1的时候有效
+     */
+    EnableAutoStart?: number;
 }
 /**
  * 房间问答答案详情

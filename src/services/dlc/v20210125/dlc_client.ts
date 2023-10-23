@@ -54,6 +54,7 @@ import {
   Policys,
   DropDMSDatabaseRequest,
   CreateScriptResponse,
+  ModifyWorkGroupResponse,
   CreateTasksInOrderResponse,
   DescribeTablesResponse,
   SparkJobInfo,
@@ -70,6 +71,7 @@ import {
   DataEngineConfigInstanceInfo,
   DescribeWorkGroupsRequest,
   CrontabResumeSuspendStrategy,
+  SwitchDataEngineImageRequest,
   AlterDMSTableResponse,
   DescribeEngineUsageInfoRequest,
   TaskResultInfo,
@@ -98,7 +100,7 @@ import {
   UpdateDataEngineConfigResponse,
   UserIdSetOfWorkGroupId,
   AlterDMSPartitionRequest,
-  ViewBaseInfo,
+  DescribeAdvancedStoreLocationRequest,
   CheckLockMetaDataRequest,
   DescribeSparkAppJobRequest,
   CreateDatabaseResponse,
@@ -150,6 +152,7 @@ import {
   SmartOptimizerPolicy,
   CreateTaskRequest,
   DescribeNotebookSessionRequest,
+  DescribeAdvancedStoreLocationResponse,
   UpgradeDataEngineImageRequest,
   CSV,
   ModifyUserTypeRequest,
@@ -168,7 +171,7 @@ import {
   AddUsersToWorkGroupRequest,
   DescribeStoreLocationRequest,
   AddUsersToWorkGroupResponse,
-  SwitchDataEngineImageRequest,
+  ModifyAdvancedStoreLocationRequest,
   DescribeNotebookSessionLogRequest,
   DescribeUserRolesResponse,
   CreateExportTaskRequest,
@@ -184,7 +187,7 @@ import {
   DMSTable,
   NetworkConnection,
   AttachWorkGroupPolicyResponse,
-  ModifyWorkGroupResponse,
+  ModifyAdvancedStoreLocationResponse,
   DescribeDMSTablesRequest,
   TaskResponseInfo,
   UpgradeDataEngineImageResponse,
@@ -261,6 +264,7 @@ import {
   CancelSparkSessionBatchSQLResponse,
   DescribeNotebookSessionStatementSqlResultResponse,
   DMSPartition,
+  ViewBaseInfo,
   DatabaseInfo,
   WorkGroupDetailInfo,
   SuspendResumeDataEngineResponse,
@@ -687,6 +691,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询sql查询界面高级设置
+   */
+  async DescribeAdvancedStoreLocation(
+    req?: DescribeAdvancedStoreLocationRequest,
+    cb?: (error: string, rep: DescribeAdvancedStoreLocationResponse) => void
+  ): Promise<DescribeAdvancedStoreLocationResponse> {
+    return this.request("DescribeAdvancedStoreLocation", req, cb)
+  }
+
+  /**
    * 元数据锁
    */
   async LockMetaData(
@@ -894,6 +908,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateResultDownloadResponse) => void
   ): Promise<CreateResultDownloadResponse> {
     return this.request("CreateResultDownload", req, cb)
+  }
+
+  /**
+   * 修改sql查询界面高级设置。
+   */
+  async ModifyAdvancedStoreLocation(
+    req: ModifyAdvancedStoreLocationRequest,
+    cb?: (error: string, rep: ModifyAdvancedStoreLocationResponse) => void
+  ): Promise<ModifyAdvancedStoreLocationResponse> {
+    return this.request("ModifyAdvancedStoreLocation", req, cb)
   }
 
   /**

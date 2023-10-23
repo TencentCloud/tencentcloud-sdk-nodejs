@@ -8699,12 +8699,12 @@ export interface DescribeAssetMachineListResponse {
   /**
    * 总数
    */
-  Total: number
+  Total?: number
   /**
    * 记录列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Machines: Array<AssetMachineBaseInfo>
+  Machines?: Array<AssetMachineBaseInfo>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -23347,7 +23347,15 @@ export interface KeysLocalStorageResponse {
 export interface DescribeAssetMachineListRequest {
   /**
    * 过滤条件。
-<li>IpOrAlias - String - 是否必填：否 - 主机ip或别名筛选</li>
+<li>MachineName  主机名称
+
+
+
+InstanceID  实例ID  
+
+ 
+
+IP   内网IP或公网IP</li>
 <li>OsType - String - 是否必填：否 - windows或linux</li>
 <li>CpuLoad - Int - 是否必填：否 - 
 0: 未知  1: 低负载

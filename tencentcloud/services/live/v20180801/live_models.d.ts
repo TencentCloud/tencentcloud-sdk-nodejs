@@ -1065,29 +1065,35 @@ export interface DescribeVisitTopSumInfoListRequest {
  */
 export interface DescribePushBandwidthAndFluxListResponse {
     /**
-     * 峰值带宽所在时间点，格式为 yyyy-mm-dd HH:MM:SS。
+     * 峰值带宽所在时间点，
+  使用UTC格式时间，
+  例如：2019-01-08T10:00:00Z。
+  注意：北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。
      */
-    PeakBandwidthTime: string;
+    PeakBandwidthTime?: string;
     /**
      * 峰值带宽，单位是 Mbps。
      */
-    PeakBandwidth: number;
+    PeakBandwidth?: number;
     /**
-     * 95峰值带宽所在时间点，格式为 yyyy-mm-dd HH:MM:SS。
+     * 95峰值带宽所在时间点，
+  使用UTC格式时间，
+  例如：2019-01-08T10:00:00Z。
+  注意：北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。
      */
-    P95PeakBandwidthTime: string;
+    P95PeakBandwidthTime?: string;
     /**
      * 95峰值带宽，单位是 Mbps。
      */
-    P95PeakBandwidth: number;
+    P95PeakBandwidth?: number;
     /**
      * 总流量，单位是 MB。
      */
-    SumFlux: number;
+    SumFlux?: number;
     /**
      * 明细数据信息。
      */
-    DataInfoList: Array<BillDataInfo>;
+    DataInfoList?: Array<BillDataInfo>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2054,7 +2060,7 @@ export interface DescribeScreenShotSheetNumListRequest {
      * 结束时间点，接口查询支持两种时间格式：
   1）YYYY-MM-DDThh:mm:ssZ：UTC时间格式，详见IOS日期格式说明文档: https://cloud.tencent.com/document/product/266/11732#I
   2）YYYY-MM-DD hh:mm:ss：使用此格式时，默认代表北京时间。
-  支持查询最近1年的数据。
+  支持最近三个月的查询，查询开始和结束时间跨度不支持超过31天。
      */
     EndTime: string;
     /**
@@ -5215,11 +5221,17 @@ export interface DescribeLiveDomainRequest {
  */
 export interface DescribePushBandwidthAndFluxListRequest {
     /**
-     * 起始时间点，格式为 yyyy-mm-dd HH:MM:SS。
+     * 查询开始时间点，精确到分钟粒度，接口查询支持两种时间格式：
+  1）YYYY-MM-DDThh:mm:ssZ：UTC时间格式，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/267/38543#:~:text=I-,ISO%20%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F,-ISO%20%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F)。
+  2）YYYY-MM-DD hh:mm:ss：使用此格式时，默认代表北京时间。
+  支持最近三年的查询，查询开始和结束时间跨度不支持超过31天。
      */
     StartTime: string;
     /**
-     * 结束时间点，格式为 yyyy-mm-dd HH:MM:SS，起始和结束时间跨度不支持超过31天。
+     * 查询结束时间点，精确到分钟粒度，接口查询支持两种时间格式：
+  1）YYYY-MM-DDThh:mm:ssZ：UTC时间格式，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/267/38543#:~:text=I-,ISO%20%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F,-ISO%20%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F)。
+  2）YYYY-MM-DD hh:mm:ss：使用此格式时，默认代表北京时间。
+  支持最近三年的查询，查询开始和结束时间跨度不支持超过31天。
      */
     EndTime: string;
     /**

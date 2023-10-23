@@ -76,10 +76,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteTableConfig", req, cb);
     }
     /**
-     * 描述资源配置接口
+     * 删除工作空间
      */
-    async DescribeResourceConfigs(req, cb) {
-        return this.request("DescribeResourceConfigs", req, cb);
+    async DeleteWorkSpace(req, cb) {
+        return this.request("DeleteWorkSpace", req, cb);
     }
     /**
      * 自定义树状结构页面拖拽文件夹
@@ -116,6 +116,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeClusters(req, cb) {
         return this.request("DescribeClusters", req, cb);
+    }
+    /**
+     * 描述资源配置接口
+     */
+    async DescribeResourceConfigs(req, cb) {
+        return this.request("DescribeResourceConfigs", req, cb);
     }
     /**
      * 作业列表删除文件夹

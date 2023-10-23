@@ -848,7 +848,7 @@ ListDiagnoseReport 用于获取用户诊断URL访问后各个子任务的简要�
 
   /**
      * DescribeCdnIp 用于查询 CDN IP 归属。
-（注意：此接口请求频率限制以 CDN 侧限制为准：200次/10分钟）  
+（注意：此接口请求频率限制以 CDN 侧限制为准：200次/10分钟）
      */
   async DescribeCdnIp(
     req: DescribeCdnIpRequest,

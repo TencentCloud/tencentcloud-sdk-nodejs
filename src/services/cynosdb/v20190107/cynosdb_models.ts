@@ -3266,47 +3266,47 @@ export interface CynosdbInstance {
   /**
    * 用户Uin
    */
-  Uin: string
+  Uin?: string
   /**
    * 用户AppId
    */
-  AppId: number
+  AppId?: number
   /**
    * 集群ID
    */
-  ClusterId: string
+  ClusterId?: string
   /**
    * 集群名称
    */
-  ClusterName: string
+  ClusterName?: string
   /**
    * 实例ID
    */
-  InstanceId: string
+  InstanceId?: string
   /**
    * 实例名称
    */
-  InstanceName: string
+  InstanceName?: string
   /**
    * 项目ID
    */
-  ProjectId: number
+  ProjectId?: number
   /**
    * 地域
    */
-  Region: string
+  Region?: string
   /**
    * 可用区
    */
-  Zone: string
+  Zone?: string
   /**
    * 实例状态
    */
-  Status: string
+  Status?: string
   /**
    * 实例状态中文描述
    */
-  StatusDesc: string
+  StatusDesc?: string
   /**
    * 实例形态，是否为serverless实例
    */
@@ -3314,154 +3314,154 @@ export interface CynosdbInstance {
   /**
    * 数据库类型
    */
-  DbType: string
+  DbType?: string
   /**
    * 数据库版本
    */
-  DbVersion: string
+  DbVersion?: string
   /**
    * Cpu，单位：核
    */
-  Cpu: number
+  Cpu?: number
   /**
    * 内存，单位：GB
    */
-  Memory: number
+  Memory?: number
   /**
    * 存储量，单位：GB
    */
-  Storage: number
+  Storage?: number
   /**
    * 实例类型
    */
-  InstanceType: string
+  InstanceType?: string
   /**
    * 实例当前角色
    */
-  InstanceRole: string
+  InstanceRole?: string
   /**
    * 更新时间
    */
-  UpdateTime: string
+  UpdateTime?: string
   /**
    * 创建时间
    */
-  CreateTime: string
+  CreateTime?: string
   /**
    * VPC网络ID
    */
-  VpcId: string
+  VpcId?: string
   /**
    * 子网ID
    */
-  SubnetId: string
+  SubnetId?: string
   /**
    * 实例内网IP
    */
-  Vip: string
+  Vip?: string
   /**
    * 实例内网端口
    */
-  Vport: number
+  Vport?: number
   /**
    * 付费模式
    */
-  PayMode: number
+  PayMode?: number
   /**
    * 实例过期时间
    */
-  PeriodEndTime: string
+  PeriodEndTime?: string
   /**
    * 销毁期限
    */
-  DestroyDeadlineText: string
+  DestroyDeadlineText?: string
   /**
    * 隔离时间
    */
-  IsolateTime: string
+  IsolateTime?: string
   /**
    * 网络类型
    */
-  NetType: number
+  NetType?: number
   /**
    * 外网域名
    */
-  WanDomain: string
+  WanDomain?: string
   /**
    * 外网IP
    */
-  WanIP: string
+  WanIP?: string
   /**
    * 外网端口
    */
-  WanPort: number
+  WanPort?: number
   /**
    * 外网状态
    */
-  WanStatus: string
+  WanStatus?: string
   /**
    * 实例销毁时间
    */
-  DestroyTime: string
+  DestroyTime?: string
   /**
    * Cynos内核版本
    */
-  CynosVersion: string
+  CynosVersion?: string
   /**
    * 正在处理的任务
    */
-  ProcessingTask: string
+  ProcessingTask?: string
   /**
    * 续费标志
    */
-  RenewFlag: number
+  RenewFlag?: number
   /**
    * serverless实例cpu下限
    */
-  MinCpu: number
+  MinCpu?: number
   /**
    * serverless实例cpu上限
    */
-  MaxCpu: number
+  MaxCpu?: number
   /**
    * serverless实例状态, 可选值：
 resume
 pause
    */
-  ServerlessStatus: string
+  ServerlessStatus?: string
   /**
    * 预付费存储Id
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  StorageId: string
+  StorageId?: string
   /**
    * 存储付费类型
    */
-  StoragePayMode: number
+  StoragePayMode?: number
   /**
    * 物理区
    */
-  PhysicalZone: string
+  PhysicalZone?: string
   /**
    * 商业类型
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  BusinessType: string
+  BusinessType?: string
   /**
    * 任务
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Tasks: Array<ObjectTask>
+  Tasks?: Array<ObjectTask>
   /**
    * 是否冻结
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  IsFreeze: string
+  IsFreeze?: string
   /**
    * 资源标签
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ResourceTags: Array<Tag>
+  ResourceTags?: Array<Tag>
   /**
    * 主可用区
 注意：此字段可能返回 null，表示取不到有效值。
@@ -3482,6 +3482,11 @@ pause
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ResourcePackages?: Array<ResourcePackage>
+  /**
+   * 实例索引形态,可选值【mixedRowColumn（行列混存），onlyRowIndex（仅行存）】
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceIndexMode?: string
 }
 
 /**
@@ -7150,141 +7155,141 @@ export interface CynosdbInstanceDetail {
   /**
    * 用户Uin
    */
-  Uin: string
+  Uin?: string
   /**
    * 用户AppId
    */
-  AppId: number
+  AppId?: number
   /**
    * 集群ID
    */
-  ClusterId: string
+  ClusterId?: string
   /**
    * 集群名称
    */
-  ClusterName: string
+  ClusterName?: string
   /**
    * 实例ID
    */
-  InstanceId: string
+  InstanceId?: string
   /**
    * 实例名称
    */
-  InstanceName: string
+  InstanceName?: string
   /**
    * 项目ID
    */
-  ProjectId: number
+  ProjectId?: number
   /**
    * 地域
    */
-  Region: string
+  Region?: string
   /**
    * 可用区
    */
-  Zone: string
+  Zone?: string
   /**
    * 实例状态
    */
-  Status: string
+  Status?: string
   /**
    * 实例状态中文描述
    */
-  StatusDesc: string
+  StatusDesc?: string
   /**
    * 数据库类型
    */
-  DbType: string
+  DbType?: string
   /**
    * 数据库版本
    */
-  DbVersion: string
+  DbVersion?: string
   /**
    * Cpu，单位：核
    */
-  Cpu: number
+  Cpu?: number
   /**
    * 内存，单位：GB
    */
-  Memory: number
+  Memory?: number
   /**
    * 存储量，单位：GB
    */
-  Storage: number
+  Storage?: number
   /**
    * 实例类型
    */
-  InstanceType: string
+  InstanceType?: string
   /**
    * 实例当前角色
    */
-  InstanceRole: string
+  InstanceRole?: string
   /**
    * 更新时间
    */
-  UpdateTime: string
+  UpdateTime?: string
   /**
    * 创建时间
    */
-  CreateTime: string
+  CreateTime?: string
   /**
    * 付费模式
    */
-  PayMode: number
+  PayMode?: number
   /**
    * 实例过期时间
    */
-  PeriodEndTime: string
+  PeriodEndTime?: string
   /**
    * 网络类型
    */
-  NetType: number
+  NetType?: number
   /**
    * VPC网络ID
    */
-  VpcId: string
+  VpcId?: string
   /**
    * 子网ID
    */
-  SubnetId: string
+  SubnetId?: string
   /**
    * 实例内网IP
    */
-  Vip: string
+  Vip?: string
   /**
    * 实例内网端口
    */
-  Vport: number
+  Vport?: number
   /**
    * 实例外网域名
    */
-  WanDomain: string
+  WanDomain?: string
   /**
    * 字符集
    */
-  Charset: string
+  Charset?: string
   /**
    * Cynos内核版本
    */
-  CynosVersion: string
+  CynosVersion?: string
   /**
    * 续费标志
    */
-  RenewFlag: number
+  RenewFlag?: number
   /**
    * serverless实例cpu下限
    */
-  MinCpu: number
+  MinCpu?: number
   /**
    * serverless实例cpu上限
    */
-  MaxCpu: number
+  MaxCpu?: number
   /**
    * serverless实例状态, 可能值：
 resume
 pause
    */
-  ServerlessStatus: string
+  ServerlessStatus?: string
 }
 
 /**

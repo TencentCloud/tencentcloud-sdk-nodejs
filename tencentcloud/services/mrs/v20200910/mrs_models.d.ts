@@ -6,7 +6,12 @@ export interface Indicator {
      * 检验指标项
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Indicators: Array<IndicatorItem>;
+    Indicators?: Array<IndicatorItem>;
+    /**
+     * 检验报告块标题
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    BlockTitle?: Array<BlockTitle>;
 }
 /**
  * 末次月经
@@ -2917,6 +2922,36 @@ export interface NeonatalInfo {
     MedicalInstitutions?: string;
 }
 /**
+ * 大小
+ */
+export interface Size {
+    /**
+     * 原文位置
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Index?: Array<number | bigint>;
+    /**
+     * 标准大小
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    NormSize?: NormSize;
+    /**
+     * 原文
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Src?: string;
+    /**
+     * 值
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Value?: string;
+    /**
+     * 名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Name?: string;
+}
+/**
  * 眼科结构体
  */
 export interface EyeItem {
@@ -4074,12 +4109,17 @@ export interface Check {
      * 描述
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Desc: Desc;
+    Desc?: Desc;
     /**
      * 结论
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Summary: Summary;
+    Summary?: Summary;
+    /**
+     * 检查报告块标题
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    BlockTitle?: Array<BlockTitle>;
 }
 /**
  * 心电图诊断
@@ -5815,34 +5855,24 @@ export interface SurgerySpinalExtremities {
     Deformity?: KeyValueItem;
 }
 /**
- * 大小
+ * 块标题
  */
-export interface Size {
+export interface BlockTitle {
     /**
-     * 原文位置
+     * name
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Index?: Array<number | bigint>;
+    Name?: string;
     /**
-     * 标准大小
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    NormSize?: NormSize;
-    /**
-     * 原文
+     * src
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Src?: string;
     /**
-     * 值
+     * value
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Value?: string;
-    /**
-     * 名称
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Name?: string;
 }
 /**
  * 出院情况

@@ -1682,13 +1682,21 @@ export interface DescribeStreamLinkFlowsResponse {
     RequestId?: string;
 }
 /**
- * 查询输入的RTSP配置信息。
+ * 语音识别片段。
  */
-export interface DescribeInputRTSPPullSettings {
+export interface AiRecognitionTaskAsrWordsSegmentItem {
     /**
-     * RTSP源站地址信息。
+     * 识别片段起始的偏移时间，单位：秒。
      */
-    SourceAddresses: Array<DescribeRTSPPullSourceAddress>;
+    StartTimeOffset: number;
+    /**
+     * 识别片段终止的偏移时间，单位：秒。
+     */
+    EndTimeOffset: number;
+    /**
+     * 识别片段置信度。取值：0~100。
+     */
+    Confidence: number;
 }
 /**
  * 内容审核结果
@@ -6882,6 +6890,19 @@ export interface AIAnalysisTemplateItem {
     Type?: string;
 }
 /**
+ * 单个物体识别结果。
+ */
+export interface AiRecognitionTaskObjectResultItem {
+    /**
+     * 识别的物体名称。
+     */
+    Name: string;
+    /**
+     * 物体出现的片段列表。
+     */
+    SegmentSet: Array<AiRecognitionTaskObjectSeqmentItem>;
+}
+/**
  * 视频编辑/合成任务 信息。
 
 关于 轨道、元素、时间轴 关系示意图：
@@ -7417,6 +7438,15 @@ export interface ResetWorkflowRequest {
      * 任务的事件通知信息，不填代表不获取事件通知。
      */
     TaskNotifyConfig?: TaskNotifyConfig;
+}
+/**
+ * 物体识别任务输入类型。
+ */
+export interface AiRecognitionTaskObjectResultInput {
+    /**
+     * 物体识别模板 ID。
+     */
+    Definition: number;
 }
 /**
  * 内容审核涉敏任务结果类型
@@ -8272,21 +8302,13 @@ export interface AiReviewTaskPoliticalAsrResult {
     Output?: AiReviewPoliticalAsrTaskOutput;
 }
 /**
- * 语音识别片段。
+ * 查询输入的RTSP配置信息。
  */
-export interface AiRecognitionTaskAsrWordsSegmentItem {
+export interface DescribeInputRTSPPullSettings {
     /**
-     * 识别片段起始的偏移时间，单位：秒。
+     * RTSP源站地址信息。
      */
-    StartTimeOffset: number;
-    /**
-     * 识别片段终止的偏移时间，单位：秒。
-     */
-    EndTimeOffset: number;
-    /**
-     * 识别片段置信度。取值：0~100。
-     */
-    Confidence: number;
+    SourceAddresses: Array<DescribeRTSPPullSourceAddress>;
 }
 /**
  * 字幕流配置参数。
@@ -8543,21 +8565,27 @@ export interface LiveStreamFaceRecognitionResult {
     AreaCoordSet: Array<number | bigint>;
 }
 /**
- * 流的音频数据。
+ * DescribeSampleSnapshotTemplates请求参数结构体
  */
-export interface FlowAudio {
+export interface DescribeSampleSnapshotTemplatesRequest {
     /**
-     * 帧率。
+     * 采样截图模板唯一标识过滤条件，数组长度限制：100。
      */
-    Fps: number;
+    Definitions?: Array<number | bigint>;
     /**
-     * 码率，单位是bps。
+     * 分页偏移量，默认值：0。
      */
-    Rate: number;
+    Offset?: number;
     /**
-     * 音频Pid。
+     * 返回记录条数，默认值：10，最大值：100。
      */
-    Pid: number;
+    Limit?: number;
+    /**
+     * 模板类型过滤条件，可选值：
+  <li>Preset：系统预置模板；</li>
+  <li>Custom：用户自定义模板。</li>
+     */
+    Type?: string;
 }
 /**
  * 智能封面任务控制参数
@@ -12382,6 +12410,27 @@ export interface PornConfigureInfo {
     OcrReviewInfo?: PornOcrReviewTemplateInfo;
 }
 /**
+ * 物体识别结果片段。
+ */
+export interface AiRecognitionTaskObjectSeqmentItem {
+    /**
+     * 识别片段起始的偏移时间，单位：秒。
+     */
+    StartTimeOffset: number;
+    /**
+     * 识别片段终止的偏移时间，单位：秒。
+     */
+    EndTimeOffset: number;
+    /**
+     * 识别片段置信度。取值：0~100。
+     */
+    Confidence: number;
+    /**
+     * 识别结果的区域坐标。数组包含 4 个元素 [x1,y1,x2,y2]，依次表示区域左上点、右下点的横纵坐标。
+     */
+    AreaCoordSet: Array<number | bigint>;
+}
+/**
  * 修改输入信息的参数。
  */
 export interface ModifyInput {
@@ -12460,6 +12509,41 @@ export interface VideoDenoiseConfig {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Type?: string;
+}
+/**
+ * 物体识别结果。
+ */
+export interface AiRecognitionTaskObjectResult {
+    /**
+     * 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。
+     */
+    Status?: string;
+    /**
+     * 错误码，0：成功，其他值：失败。
+     */
+    ErrCode?: number;
+    /**
+     * 错误信息。
+     */
+    Message?: string;
+    /**
+     * 物体识别任务输入信息。
+     */
+    Input?: AiRecognitionTaskObjectResultInput;
+    /**
+     * 物体识别任务输出信息。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Output?: AiRecognitionTaskObjectResultOutput;
+}
+/**
+ * 智能物体识别输出。
+ */
+export interface AiRecognitionTaskObjectResultOutput {
+    /**
+     * 智能物体识别结果集。
+     */
+    ResultSet: Array<AiRecognitionTaskObjectResultItem>;
 }
 /**
  * DescribeAIAnalysisTemplates返回参数结构体
@@ -13006,27 +13090,21 @@ export interface DescribeAnimatedGraphicsTemplatesResponse {
     RequestId?: string;
 }
 /**
- * DescribeSampleSnapshotTemplates请求参数结构体
+ * 流的音频数据。
  */
-export interface DescribeSampleSnapshotTemplatesRequest {
+export interface FlowAudio {
     /**
-     * 采样截图模板唯一标识过滤条件，数组长度限制：100。
+     * 帧率。
      */
-    Definitions?: Array<number | bigint>;
+    Fps: number;
     /**
-     * 分页偏移量，默认值：0。
+     * 码率，单位是bps。
      */
-    Offset?: number;
+    Rate: number;
     /**
-     * 返回记录条数，默认值：10，最大值：100。
+     * 音频Pid。
      */
-    Limit?: number;
-    /**
-     * 模板类型过滤条件，可选值：
-  <li>Preset：系统预置模板；</li>
-  <li>Custom：用户自定义模板。</li>
-     */
-    Type?: string;
+    Pid: number;
 }
 /**
  * 编排子任务输出
@@ -13766,42 +13844,49 @@ export interface AiRecognitionResult {
   <li>OcrFullTextRecognition：文本全文识别。</li>
   <li>TransTextRecognition：语音翻译。</li>
      */
-    Type: string;
+    Type?: string;
     /**
      * 人脸识别结果，当 Type 为
    FaceRecognition 时有效。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    FaceTask: AiRecognitionTaskFaceResult;
+    FaceTask?: AiRecognitionTaskFaceResult;
     /**
      * 语音关键词识别结果，当 Type 为
    AsrWordsRecognition 时有效。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    AsrWordsTask: AiRecognitionTaskAsrWordsResult;
+    AsrWordsTask?: AiRecognitionTaskAsrWordsResult;
     /**
      * 语音全文识别结果，当 Type 为
    AsrFullTextRecognition 时有效。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    AsrFullTextTask: AiRecognitionTaskAsrFullTextResult;
+    AsrFullTextTask?: AiRecognitionTaskAsrFullTextResult;
     /**
      * 文本关键词识别结果，当 Type 为
    OcrWordsRecognition 时有效。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    OcrWordsTask: AiRecognitionTaskOcrWordsResult;
+    OcrWordsTask?: AiRecognitionTaskOcrWordsResult;
     /**
      * 文本全文识别结果，当 Type 为
    OcrFullTextRecognition 时有效。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    OcrFullTextTask: AiRecognitionTaskOcrFullTextResult;
+    OcrFullTextTask?: AiRecognitionTaskOcrFullTextResult;
     /**
      * 翻译结果，当 Type 为
   
   TransTextRecognition 时有效。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TransTextTask: AiRecognitionTaskTransTextResult;
+    TransTextTask?: AiRecognitionTaskTransTextResult;
+    /**
+     * 物体识别结果，当Type 为
+  
+  ObjectRecognition 时有效。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ObjectTask?: AiRecognitionTaskObjectResult;
 }

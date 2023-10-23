@@ -226,6 +226,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UpdateRowFilter", req, cb);
     }
     /**
+     * 查询sql查询界面高级设置
+     */
+    async DescribeAdvancedStoreLocation(req, cb) {
+        return this.request("DescribeAdvancedStoreLocation", req, cb);
+    }
+    /**
      * 元数据锁
      */
     async LockMetaData(req, cb) {
@@ -350,6 +356,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CreateResultDownload(req, cb) {
         return this.request("CreateResultDownload", req, cb);
+    }
+    /**
+     * 修改sql查询界面高级设置。
+     */
+    async ModifyAdvancedStoreLocation(req, cb) {
+        return this.request("ModifyAdvancedStoreLocation", req, cb);
     }
     /**
      * 本接口（DescribeNotebookSessionStatementSqlResult）用于获取statement运行结果。

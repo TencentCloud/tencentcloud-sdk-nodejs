@@ -1115,6 +1115,15 @@ export interface DeleteFoldersRequest {
     WorkSpaceId?: string;
 }
 /**
+ * DeleteWorkSpace请求参数结构体
+ */
+export interface DeleteWorkSpaceRequest {
+    /**
+     * 工作空间 SerialId
+     */
+    WorkSpaceId: string;
+}
+/**
  * DescribeWorkSpaces返回参数结构体
  */
 export interface DescribeWorkSpacesResponse {
@@ -1488,6 +1497,19 @@ export interface RunJobsRequest {
      * 工作空间 SerialId
      */
     WorkSpaceId?: string;
+}
+/**
+ * DeleteWorkSpace返回参数结构体
+ */
+export interface DeleteWorkSpaceResponse {
+    /**
+     * 是否删除
+     */
+    Delete: boolean;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * DeleteJobs返回参数结构体
@@ -2853,7 +2875,73 @@ export interface TriggerJobSavepointResponse {
 /**
  * session集群信息
  */
-export declare type ClusterSession = null;
+export interface ClusterSession {
+    /**
+     * 集群SerialId
+     */
+    ClusterGroupSerialId?: string;
+    /**
+     * 创建者appId
+     */
+    AppId?: number;
+    /**
+     * 创建者主账号
+     */
+    OwnerUin?: string;
+    /**
+     * 创建者账号
+     */
+    CreatorUin?: string;
+    /**
+     * 区域
+     */
+    Region?: string;
+    /**
+     * zone
+     */
+    Zone?: string;
+    /**
+     * Session集群状态
+     */
+    Status?: number;
+    /**
+     * Session集群消耗的cu数量
+     */
+    CuNum?: number;
+    /**
+     * Session集群的Flink版本
+     */
+    FlinkVersion?: string;
+    /**
+     * session集群FlinkUi地址
+     */
+    WebUIUrl?: string;
+    /**
+     * session集群高级参数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Properties?: Array<Property>;
+    /**
+     * JobManager的规格
+     */
+    JobManagerCuSpec?: number;
+    /**
+     * TaskManager的规格
+     */
+    TaskManagerCuSpec?: number;
+    /**
+     * TaskManager启动的数量
+     */
+    TaskManagerNum?: number;
+    /**
+     * 创建时间
+     */
+    CreateTime?: string;
+    /**
+     * 更新时间
+     */
+    UpdateTime?: string;
+}
 /**
  * CreateResourceConfig请求参数结构体
  */

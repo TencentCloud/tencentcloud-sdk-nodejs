@@ -138,6 +138,16 @@ it("cdb.v20170320.StopReplication", async function () {
     }
 })
 
+it("cdb.v20170320.ModifyDBInstanceLogToCLS", async function () {
+    try {
+       const data = await client.ModifyDBInstanceLogToCLS({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cdb.v20170320.StopCpuExpand", async function () {
     try {
        const data = await client.StopCpuExpand({})
@@ -1251,6 +1261,16 @@ it("cdb.v20170320.ModifyCdbProxyAddressVipAndVPort", async function () {
 it("cdb.v20170320.InitDBInstances", async function () {
     try {
        const data = await client.InitDBInstances({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cdb.v20170320.DescribeDBInstanceLogToCLS", async function () {
+    try {
+       const data = await client.DescribeDBInstanceLogToCLS({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

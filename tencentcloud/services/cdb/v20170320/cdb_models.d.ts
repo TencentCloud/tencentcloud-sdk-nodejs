@@ -1111,21 +1111,21 @@ export interface DescribeInstanceParamsRequest {
     InstanceId: string;
 }
 /**
- * DescribeRoMinScale返回参数结构体
+ * DescribeUploadedFiles请求参数结构体
  */
-export interface DescribeRoMinScaleResponse {
+export interface DescribeUploadedFilesRequest {
     /**
-     * 内存规格大小, 单位为：MB。
+     * 文件路径。该字段应填用户主账号的OwnerUin信息。
      */
-    Memory: number;
+    Path: string;
     /**
-     * 磁盘规格大小, 单位为：GB。
+     * 记录偏移量，默认值为0。
      */
-    Volume: number;
+    Offset?: number;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     * 单次请求返回的数量，默认值为20。
      */
-    RequestId?: string;
+    Limit?: number;
 }
 /**
  * StopDBImportJob返回参数结构体
@@ -1609,6 +1609,25 @@ export interface DescribeBinlogBackupOverviewResponse {
      * 标准存储日志备份个数。
      */
     BinlogStandbyCount: number;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * DescribeDBInstanceLogToCLS返回参数结构体
+ */
+export interface DescribeDBInstanceLogToCLSResponse {
+    /**
+     * 错误日志投递CLS配置
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ErrorLog?: LogToCLSConfig;
+    /**
+     * 慢日志投递CLS配置
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SlowLog?: LogToCLSConfig;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2931,6 +2950,47 @@ export interface ModifyCdbProxyAddressDescResponse {
     RequestId?: string;
 }
 /**
+ * ModifyDBInstanceLogToCLS请求参数结构体
+ */
+export interface ModifyDBInstanceLogToCLSRequest {
+    /**
+     * 实例ID
+     */
+    InstanceId: string;
+    /**
+     * 日志类型：errorLog/slowLog
+     */
+    LogType: string;
+    /**
+     * 投递状态：ON/OFF
+     */
+    Status: string;
+    /**
+     * 是否需要创建日志集
+     */
+    CreateLogset?: boolean;
+    /**
+     * 需要创建日志集时为日志集名称；选择已有日志集时，为日志集ID
+     */
+    Logset?: string;
+    /**
+     * 是否需要创建日志主题
+     */
+    CreateLogTopic?: boolean;
+    /**
+     * 需要创建日志主题时为日志主题名称；选择已有日志主题时，为日志主题ID
+     */
+    LogTopic?: string;
+    /**
+     * 日志主题有效期，不填写时，默认30天
+     */
+    Period?: number;
+    /**
+     * 创建日志主题时，是否创建索引
+     */
+    CreateIndex?: boolean;
+}
+/**
  * DeleteTimeWindow返回参数结构体
  */
 export interface DeleteTimeWindowResponse {
@@ -3423,29 +3483,24 @@ export interface StopRollbackRequest {
     InstanceId: string;
 }
 /**
- * DescribeDeviceMonitorInfo返回参数结构体
+ * DB实例慢日志、错误日志投递CLS配置
  */
-export interface DescribeDeviceMonitorInfoResponse {
+export interface LogToCLSConfig {
     /**
-     * 实例CPU监控数据
+     * 投递状态打开或者关闭
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Cpu: DeviceCpuInfo;
+    Status?: string;
     /**
-     * 实例内存监控数据
+     * CLS日志集ID
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Mem: DeviceMemInfo;
+    LogSetId?: string;
     /**
-     * 实例网络监控数据
+     * 日志主题ID
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Net: DeviceNetInfo;
-    /**
-     * 实例磁盘监控数据
-     */
-    Disk: DeviceDiskInfo;
-    /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
+    LogTopicId?: string;
 }
 /**
  * ResetRootAccount请求参数结构体
@@ -3549,6 +3604,15 @@ export interface DescribeCloneListResponse {
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * DescribeDBInstanceLogToCLS请求参数结构体
+ */
+export interface DescribeDBInstanceLogToCLSRequest {
+    /**
+     * 实例ID
+     */
+    InstanceId: string;
 }
 /**
  * DescribeDBInstanceConfig返回参数结构体
@@ -5552,6 +5616,15 @@ export interface DeleteAuditRuleResponse {
     RequestId?: string;
 }
 /**
+ * IsolateDBInstance请求参数结构体
+ */
+export interface IsolateDBInstanceRequest {
+    /**
+     * 实例 ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同，可使用 [查询实例列表](https://cloud.tencent.com/document/api/236/15872) 接口获取，其值为输出参数中字段 InstanceId 的值。
+     */
+    InstanceId: string;
+}
+/**
  * 审计日志搜索过滤器
  */
 export interface InstanceAuditLogFilters {
@@ -5597,23 +5670,6 @@ export interface InstanceAuditLogFilters {
      * 过滤的值。反向查询时，多个值之前是且的关系，正向查询多个值是或的关系
      */
     Value?: Array<string>;
-}
-/**
- * DescribeUploadedFiles请求参数结构体
- */
-export interface DescribeUploadedFilesRequest {
-    /**
-     * 文件路径。该字段应填用户主账号的OwnerUin信息。
-     */
-    Path: string;
-    /**
-     * 记录偏移量，默认值为0。
-     */
-    Offset?: number;
-    /**
-     * 单次请求返回的数量，默认值为20。
-     */
-    Limit?: number;
 }
 /**
  * 实例详细信息
@@ -6858,6 +6914,23 @@ export interface DeviceDiskInfo {
      * 磁盘空间容量，每两个一组，第一个为已使用容量，第二个为磁盘总容量
      */
     CapacityRatio: Array<number | bigint>;
+}
+/**
+ * DescribeRoMinScale返回参数结构体
+ */
+export interface DescribeRoMinScaleResponse {
+    /**
+     * 内存规格大小, 单位为：MB。
+     */
+    Memory: number;
+    /**
+     * 磁盘规格大小, 单位为：GB。
+     */
+    Volume: number;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * RO 实例的权重值
@@ -8377,13 +8450,13 @@ export interface DescribeBackupEncryptionStatusRequest {
     InstanceId: string;
 }
 /**
- * IsolateDBInstance请求参数结构体
+ * ModifyDBInstanceLogToCLS返回参数结构体
  */
-export interface IsolateDBInstanceRequest {
+export interface ModifyDBInstanceLogToCLSResponse {
     /**
-     * 实例 ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同，可使用 [查询实例列表](https://cloud.tencent.com/document/api/236/15872) 接口获取，其值为输出参数中字段 InstanceId 的值。
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
-    InstanceId: string;
+    RequestId?: string;
 }
 /**
  * 审计日志文件
@@ -8689,4 +8762,29 @@ export interface UpgradeCDBProxyVersionRequest {
      * 升级时间 ：nowTime（升级完成时）timeWindow（实例维护时间）
      */
     UpgradeTime: string;
+}
+/**
+ * DescribeDeviceMonitorInfo返回参数结构体
+ */
+export interface DescribeDeviceMonitorInfoResponse {
+    /**
+     * 实例CPU监控数据
+     */
+    Cpu: DeviceCpuInfo;
+    /**
+     * 实例内存监控数据
+     */
+    Mem: DeviceMemInfo;
+    /**
+     * 实例网络监控数据
+     */
+    Net: DeviceNetInfo;
+    /**
+     * 实例磁盘监控数据
+     */
+    Disk: DeviceDiskInfo;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }

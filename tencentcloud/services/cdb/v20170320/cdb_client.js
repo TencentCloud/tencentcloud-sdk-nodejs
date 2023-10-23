@@ -104,6 +104,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("StopReplication", req, cb);
     }
     /**
+     * 开启/关闭CDB慢日志、错误日志投递CLS
+     */
+    async ModifyDBInstanceLogToCLS(req, cb) {
+        return this.request("ModifyDBInstanceLogToCLS", req, cb);
+    }
+    /**
      * 通过该API，可以关闭 CPU 弹性扩容。
      */
     async StopCpuExpand(req, cb) {
@@ -816,6 +822,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async InitDBInstances(req, cb) {
         return this.request("InitDBInstances", req, cb);
+    }
+    /**
+     * 本接口(DescribeDBInstanceLogToCLS)用于查询实例慢日志、错误日志投递CLS的配置，通过appId、Region以及实例ID过滤出当前实例日志投递CLS的配置。
+     */
+    async DescribeDBInstanceLogToCLS(req, cb) {
+        return this.request("DescribeDBInstanceLogToCLS", req, cb);
     }
     /**
      * 主实例创建数据库代理

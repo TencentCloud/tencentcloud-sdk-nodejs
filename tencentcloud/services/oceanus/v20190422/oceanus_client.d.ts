@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { CreateResourceRequest, ModifyFolderRequest, DescribeJobSubmissionLogResponse, DeleteJobsRequest, ModifyWorkSpaceRequest, CreateJobConfigResponse, CreateResourceConfigResponse, CreateJobConfigRequest, DescribeTreeJobsResponse, CopyJobsRequest, CopyJobsResponse, TriggerJobSavepointRequest, DescribeJobSavepointRequest, DescribeWorkSpacesRequest, DescribeTreeResourcesRequest, DescribeResourceConfigsResponse, DescribeClustersRequest, CreateWorkSpaceResponse, CreateJobResponse, CreateFolderRequest, DeleteJobConfigsResponse, DeleteTableConfigRequest, DeleteResourcesResponse, ModifyJobResponse, FetchSqlGatewayStatementResultResponse, CreateWorkSpaceRequest, DeleteResourceConfigsRequest, DescribeJobSavepointResponse, DeleteFoldersRequest, DescribeWorkSpacesResponse, DescribeJobsRequest, CreateResourceResponse, DescribeSystemResourcesRequest, CreateFolderResponse, DescribeResourcesResponse, DescribeResourceRelatedJobsResponse, DescribeClustersResponse, DescribeSystemResourcesResponse, CheckSavepointRequest, DeleteJobConfigsRequest, StopJobsRequest, RunJobsRequest, DeleteJobsResponse, DescribeResourceRelatedJobsRequest, DescribeTreeResourcesResponse, RunJobsResponse, DeleteResourcesRequest, DescribeJobConfigsRequest, ModifyJobRequest, DeleteResourceConfigsResponse, DescribeJobSubmissionLogRequest, DescribeResourceConfigsRequest, ModifyFolderResponse, ModifyWorkSpaceResponse, RunSqlGatewayStatementResponse, CreateJobRequest, DeleteTableConfigResponse, DeleteFoldersResponse, TriggerJobSavepointResponse, CreateResourceConfigRequest, StopJobsResponse, DescribeResourcesRequest, RunSqlGatewayStatementRequest, CheckSavepointResponse, DescribeJobsResponse, DescribeTreeJobsRequest, DescribeJobConfigsResponse, FetchSqlGatewayStatementResultRequest } from "./oceanus_models";
+import { CreateResourceRequest, ModifyFolderRequest, DescribeJobSubmissionLogResponse, DeleteJobsRequest, ModifyWorkSpaceRequest, CreateJobConfigResponse, CreateResourceConfigResponse, CreateJobConfigRequest, DescribeTreeJobsResponse, CopyJobsRequest, CopyJobsResponse, TriggerJobSavepointRequest, DescribeJobSavepointRequest, DescribeWorkSpacesRequest, DescribeTreeResourcesRequest, DescribeResourceConfigsResponse, DescribeClustersRequest, CreateWorkSpaceResponse, CreateJobResponse, CreateFolderRequest, DeleteJobConfigsResponse, DeleteTableConfigRequest, DeleteResourcesResponse, ModifyJobResponse, FetchSqlGatewayStatementResultResponse, CreateWorkSpaceRequest, DeleteResourceConfigsRequest, DescribeJobSavepointResponse, DeleteFoldersRequest, DeleteWorkSpaceRequest, DescribeWorkSpacesResponse, DescribeJobsRequest, CreateResourceResponse, DescribeSystemResourcesRequest, CreateFolderResponse, DescribeResourcesResponse, DescribeResourceRelatedJobsResponse, DescribeClustersResponse, DescribeSystemResourcesResponse, CheckSavepointRequest, DeleteJobConfigsRequest, StopJobsRequest, RunJobsRequest, DeleteWorkSpaceResponse, DeleteJobsResponse, DescribeResourceRelatedJobsRequest, DescribeTreeResourcesResponse, RunJobsResponse, DeleteResourcesRequest, DescribeJobConfigsRequest, ModifyJobRequest, DeleteResourceConfigsResponse, DescribeJobSubmissionLogRequest, DescribeResourceConfigsRequest, ModifyFolderResponse, ModifyWorkSpaceResponse, RunSqlGatewayStatementResponse, CreateJobRequest, DeleteTableConfigResponse, DeleteFoldersResponse, TriggerJobSavepointResponse, CreateResourceConfigRequest, StopJobsResponse, DescribeResourcesRequest, RunSqlGatewayStatementRequest, CheckSavepointResponse, DescribeJobsResponse, DescribeTreeJobsRequest, DescribeJobConfigsResponse, FetchSqlGatewayStatementResultRequest } from "./oceanus_models";
 /**
  * oceanus client
  * @class
@@ -40,9 +40,9 @@ export declare class Client extends AbstractClient {
      */
     DeleteTableConfig(req: DeleteTableConfigRequest, cb?: (error: string, rep: DeleteTableConfigResponse) => void): Promise<DeleteTableConfigResponse>;
     /**
-     * 描述资源配置接口
+     * 删除工作空间
      */
-    DescribeResourceConfigs(req: DescribeResourceConfigsRequest, cb?: (error: string, rep: DescribeResourceConfigsResponse) => void): Promise<DescribeResourceConfigsResponse>;
+    DeleteWorkSpace(req: DeleteWorkSpaceRequest, cb?: (error: string, rep: DeleteWorkSpaceResponse) => void): Promise<DeleteWorkSpaceResponse>;
     /**
      * 自定义树状结构页面拖拽文件夹
      */
@@ -67,6 +67,10 @@ export declare class Client extends AbstractClient {
      * 查询集群
      */
     DescribeClusters(req: DescribeClustersRequest, cb?: (error: string, rep: DescribeClustersResponse) => void): Promise<DescribeClustersResponse>;
+    /**
+     * 描述资源配置接口
+     */
+    DescribeResourceConfigs(req: DescribeResourceConfigsRequest, cb?: (error: string, rep: DescribeResourceConfigsResponse) => void): Promise<DescribeResourceConfigsResponse>;
     /**
      * 作业列表删除文件夹
      */

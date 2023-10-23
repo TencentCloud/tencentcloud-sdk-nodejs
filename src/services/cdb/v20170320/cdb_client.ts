@@ -61,7 +61,7 @@ import {
   AnalyzeAuditLogsRequest,
   ModifyBackupEncryptionStatusResponse,
   DescribeInstanceParamsRequest,
-  DescribeRoMinScaleResponse,
+  DescribeUploadedFilesRequest,
   StopDBImportJobResponse,
   ProxyAllocation,
   StopCpuExpandRequest,
@@ -83,6 +83,7 @@ import {
   ModifyParamTemplateRequest,
   OpenAuditServiceResponse,
   DescribeBinlogBackupOverviewResponse,
+  DescribeDBInstanceLogToCLSResponse,
   SwitchDBInstanceMasterSlaveRequest,
   ModifyCdbProxyAddressVipAndVPortRequest,
   ModifyAutoRenewFlagRequest,
@@ -149,6 +150,7 @@ import {
   DeleteAccountsResponse,
   ParamTemplateInfo,
   ModifyCdbProxyAddressDescResponse,
+  ModifyDBInstanceLogToCLSRequest,
   DeleteTimeWindowResponse,
   DescribeBackupsResponse,
   CreateAuditPolicyRequest,
@@ -176,7 +178,7 @@ import {
   SlaveConfig,
   ModifyAccountPrivilegesResponse,
   StopRollbackRequest,
-  DescribeDeviceMonitorInfoResponse,
+  LogToCLSConfig,
   ResetRootAccountRequest,
   DescribeDBInstanceConfigRequest,
   DescribeProxyCustomConfResponse,
@@ -185,6 +187,7 @@ import {
   ModifyDBInstanceNameResponse,
   VerifyRootAccountRequest,
   DescribeCloneListResponse,
+  DescribeDBInstanceLogToCLSRequest,
   DescribeDBInstanceConfigResponse,
   StartBatchRollbackRequest,
   OpenDBInstanceEncryptionRequest,
@@ -266,8 +269,8 @@ import {
   DeviceNetInfo,
   ModifyDBInstanceVipVportResponse,
   DeleteAuditRuleResponse,
+  IsolateDBInstanceRequest,
   InstanceAuditLogFilters,
-  DescribeUploadedFilesRequest,
   InstanceInfo,
   DescribeDefaultParamsResponse,
   SwitchCDBProxyRequest,
@@ -316,6 +319,7 @@ import {
   DescribeCdbProxyInfoResponse,
   ModifyAuditConfigRequest,
   DeviceDiskInfo,
+  DescribeRoMinScaleResponse,
   RoWeightValue,
   DescribeSlowLogDataResponse,
   RestartDBInstancesResponse,
@@ -386,7 +390,7 @@ import {
   AddTimeWindowResponse,
   AdjustCdbProxyResponse,
   DescribeBackupEncryptionStatusRequest,
-  IsolateDBInstanceRequest,
+  ModifyDBInstanceLogToCLSResponse,
   AuditLogFile,
   CloseCdbProxyAddressResponse,
   RollbackTables,
@@ -404,6 +408,7 @@ import {
   ModifyNameOrDescByDpIdRequest,
   UpgradeDBInstanceResponse,
   UpgradeCDBProxyVersionRequest,
+  DescribeDeviceMonitorInfoResponse,
 } from "./cdb_models"
 
 /**
@@ -537,6 +542,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: StopReplicationResponse) => void
   ): Promise<StopReplicationResponse> {
     return this.request("StopReplication", req, cb)
+  }
+
+  /**
+   * 开启/关闭CDB慢日志、错误日志投递CLS
+   */
+  async ModifyDBInstanceLogToCLS(
+    req: ModifyDBInstanceLogToCLSRequest,
+    cb?: (error: string, rep: ModifyDBInstanceLogToCLSResponse) => void
+  ): Promise<ModifyDBInstanceLogToCLSResponse> {
+    return this.request("ModifyDBInstanceLogToCLS", req, cb)
   }
 
   /**
@@ -1699,6 +1714,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: InitDBInstancesResponse) => void
   ): Promise<InitDBInstancesResponse> {
     return this.request("InitDBInstances", req, cb)
+  }
+
+  /**
+   * 本接口(DescribeDBInstanceLogToCLS)用于查询实例慢日志、错误日志投递CLS的配置，通过appId、Region以及实例ID过滤出当前实例日志投递CLS的配置。
+   */
+  async DescribeDBInstanceLogToCLS(
+    req: DescribeDBInstanceLogToCLSRequest,
+    cb?: (error: string, rep: DescribeDBInstanceLogToCLSResponse) => void
+  ): Promise<DescribeDBInstanceLogToCLSResponse> {
+    return this.request("DescribeDBInstanceLogToCLS", req, cb)
   }
 
   /**

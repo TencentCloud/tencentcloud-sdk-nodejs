@@ -98,9 +98,9 @@ it("oceanus.v20190422.DeleteTableConfig", async function () {
     }
 })
 
-it("oceanus.v20190422.DescribeResourceConfigs", async function () {
+it("oceanus.v20190422.DeleteWorkSpace", async function () {
     try {
-       const data = await client.DescribeResourceConfigs({})
+       const data = await client.DeleteWorkSpace({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -161,6 +161,16 @@ it("oceanus.v20190422.FetchSqlGatewayStatementResult", async function () {
 it("oceanus.v20190422.DescribeClusters", async function () {
     try {
        const data = await client.DescribeClusters({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("oceanus.v20190422.DescribeResourceConfigs", async function () {
+    try {
+       const data = await client.DescribeResourceConfigs({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

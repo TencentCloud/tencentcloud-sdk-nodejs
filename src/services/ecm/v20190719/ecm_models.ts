@@ -7115,19 +7115,25 @@ export interface ISPCounter {
   /**
    * 运营商名称
    */
-  ProviderName: string
+  ProviderName?: string
   /**
    * 节点数量
    */
-  ProviderNodeNum: number
+  ProviderNodeNum?: number
   /**
    * 实例数量
+   * @deprecated
    */
-  ProvederInstanceNum: number
+  ProvederInstanceNum?: number
   /**
    * Zone实例信息结构体数组
    */
-  ZoneInstanceInfoSet: Array<ZoneInstanceInfo>
+  ZoneInstanceInfoSet?: Array<ZoneInstanceInfo>
+  /**
+   * 实例数量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProviderInstanceNum?: number
 }
 
 /**

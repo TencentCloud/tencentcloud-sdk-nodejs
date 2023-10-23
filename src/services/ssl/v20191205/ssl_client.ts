@@ -19,7 +19,7 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   DescribeCertificateBindResourceTaskDetailRequest,
-  ResourceTypeRegions,
+  GatewayCertificate,
   DescribeHostDdosInstanceListRequest,
   CompleteCertificateRequest,
   DownloadCertificateResponse,
@@ -79,6 +79,8 @@ import {
   VodInstanceDetail,
   DescribeCertificateResponse,
   PackageTransferOutInfo,
+  TSEInstanceDetail,
+  ResourceTypeRegions,
   DeleteManagerRequest,
   DescribeHostUpdateRecordResponse,
   UpdateCertificateRecordRollbackResponse,
@@ -192,6 +194,7 @@ import {
   DeployRecordInfo,
   DescribePackagesResponse,
   DescribeManagersRequest,
+  TSEInstanceList,
   DescribeHostLighthouseInstanceListResponse,
   CompleteCertificateResponse,
   VODInstanceList,
