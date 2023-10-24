@@ -320,6 +320,22 @@ export interface CreateJobConfigRequest {
    * 专家模式的配置
    */
   ExpertModeConfiguration?: ExpertModeConfiguration
+  /**
+   * trace链路
+   */
+  TraceModeOn?: boolean
+  /**
+   * trace链路配置
+   */
+  TraceModeConfiguration?: TraceModeConfiguration
+  /**
+   * checkpoint保留个数
+   */
+  CheckpointRetainedNum?: number
+  /**
+   * 算子拓扑图
+   */
+  JobGraph?: JobGraph
 }
 
 /**
@@ -342,6 +358,31 @@ export interface ClusterVersion {
  * DescribeTreeJobs返回参数结构体
  */
 export interface DescribeTreeJobsResponse {
+  /**
+   * 父节点ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ParentId?: string
+  /**
+   * 当前文件夹ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Id?: string
+  /**
+   * 当前文件夹名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name?: string
+  /**
+   * 当前文件夹下的作业列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  JobSet?: Array<TreeJobSets>
+  /**
+   * 迭代子目录
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Children?: Array<DescribeTreeJobsRsp>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -527,6 +568,12 @@ export interface DescribeJobSavepointRequest {
    * 工作空间 SerialId
    */
   WorkSpaceId?: string
+  /**
+   * 2 是checkpoint
+1 是触发savepoint
+3 停止触发的savepoint
+   */
+  RecordTypes?: Array<number | bigint>
 }
 
 /**
@@ -548,6 +595,37 @@ export interface ResultColumn {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Comment?: string
+}
+
+/**
+ * 自定义树结构出参作业列表
+ */
+export interface TreeJobSets {
+  /**
+   * 作业Id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  JobId?: string
+  /**
+   * 作业名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name?: string
+  /**
+   * 作业类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  JobType?: number
+  /**
+   * 作业占用资源
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RunningCu?: number
+  /**
+   * 作业状态 启动或者停止或者暂停
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status?: number
 }
 
 /**
@@ -971,6 +1049,42 @@ export interface StatementResult {
 }
 
 /**
+ * 自定义树结构遍历子节点
+ */
+export interface DescribeTreeJobsRsp {
+  /**
+   * 父节点ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ParentId?: string
+  /**
+   * 当前文件夹ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Id?: string
+  /**
+   * 当前文件夹名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name?: string
+  /**
+   * 当前文件夹下的作业集合
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  JobSet?: Array<TreeJobSets>
+  /**
+   * 迭代子目录
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Children?: Array<DescribeTreeJobsRsp>
+  /**
+   * 请求ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteResources返回参数结构体
  */
 export interface DeleteResourcesResponse {
@@ -1138,22 +1252,22 @@ export interface DescribeJobSavepointResponse {
    * 快照列表总数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TotalNumber: number
+  TotalNumber?: number
   /**
    * 快照列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Savepoint: Array<Savepoint>
+  Savepoint?: Array<Savepoint>
   /**
    * 进行中的快照列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RunningSavepoint: Array<Savepoint>
+  RunningSavepoint?: Array<Savepoint>
   /**
    * 进行中的快照列表总数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RunningTotalNumber: number
+  RunningTotalNumber?: number
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1565,6 +1679,27 @@ export interface StopJobsRequest {
    * 工作空间 SerialId
    */
   WorkSpaceId?: string
+}
+
+/**
+ * {
+  "Rate": "0.01",  ///如1%转换为0.01
+  "Operator":  "1:OUT,2:IN_AND_OUT,3:IN"  ///如1%转换为0.01 
+}
+Operator
+算子ID顺序配置，可以对每个算子配置IN、OUT、IN_AND_OUT三个值，分别表示采集输入数据、采集输出数据、同时采集输入和输出数据，配置示例:
+ */
+export interface TraceModeConfiguration {
+  /**
+   * 如1%转换为0.01
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Rate?: string
+  /**
+   * 按照算子ID顺序配置，可以对每个算子配置IN、OUT、IN_AND_OUT三个值，分别表示采集输入数据、采集输出数据、同时采集输入和输出数据
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Operator?: string
 }
 
 /**
@@ -2420,6 +2555,11 @@ export interface Cluster {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SqlGateways?: Array<SqlGatewayItem>
+  /**
+   * 0 公网访问 // 1 内网访问	
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WebUIType?: number
 }
 
 /**
@@ -2664,105 +2804,105 @@ export interface JobConfig {
   /**
    * 作业Id
    */
-  JobId: string
+  JobId?: string
   /**
    * 主类
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  EntrypointClass: string
+  EntrypointClass?: string
   /**
    * 主类入参
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ProgramArgs: string
+  ProgramArgs?: string
   /**
    * 备注
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Remark: string
+  Remark?: string
   /**
    * 作业配置创建时间
    */
-  CreateTime: string
+  CreateTime?: string
   /**
    * 作业配置的版本号
    */
-  Version: number
+  Version?: number
   /**
    * 作业默认并行度
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DefaultParallelism: number
+  DefaultParallelism?: number
   /**
    * 系统参数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Properties: Array<Property>
+  Properties?: Array<Property>
   /**
    * 引用资源
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ResourceRefDetails: Array<ResourceRefDetail>
+  ResourceRefDetails?: Array<ResourceRefDetail>
   /**
    * 创建者uin
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CreatorUin: string
+  CreatorUin?: string
   /**
    * 作业配置上次启动时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  UpdateTime: string
+  UpdateTime?: string
   /**
    * 作业绑定的存储桶
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  COSBucket: string
+  COSBucket?: string
   /**
    * 是否启用日志收集，0-未启用，1-已启用，2-历史集群未设置日志集，3-历史集群已开启
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  LogCollect: number
+  LogCollect?: number
   /**
    * 作业的最大并行度
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  MaxParallelism: number
+  MaxParallelism?: number
   /**
    * JobManager规格
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  JobManagerSpec: number
+  JobManagerSpec?: number
   /**
    * TaskManager规格
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TaskManagerSpec: number
+  TaskManagerSpec?: number
   /**
    * CLS日志集ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ClsLogsetId: string
+  ClsLogsetId?: string
   /**
    * CLS日志主题ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ClsTopicId: string
+  ClsTopicId?: string
   /**
    * pyflink作业运行的python版本
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  PythonVersion: string
+  PythonVersion?: string
   /**
    * Oceanus 平台恢复作业开关 1:开启 -1: 关闭
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  AutoRecover: number
+  AutoRecover?: number
   /**
    * 日志级别
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  LogLevel: string
+  LogLevel?: string
   /**
    * 类日志级别
 注意：此字段可能返回 null，表示取不到有效值。
@@ -2778,6 +2918,26 @@ export interface JobConfig {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ExpertModeConfiguration?: ExpertModeConfiguration
+  /**
+   * trace链路
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TraceModeOn?: boolean
+  /**
+   * trace链路配置
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TraceModeConfiguration?: TraceModeConfiguration
+  /**
+   * checkpoint保留个数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CheckpointRetainedNum?: number
+  /**
+   * 算子拓扑图
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  JobGraph?: JobGraph
 }
 
 /**
@@ -3295,6 +3455,10 @@ export interface CopyJobItem {
  * DescribeTreeJobs请求参数结构体
  */
 export interface DescribeTreeJobsRequest {
+  /**
+   * 筛选条件字段
+   */
+  Filters?: Array<Filter>
   /**
    * 工作空间 Serialid
    */

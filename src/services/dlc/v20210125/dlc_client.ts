@@ -327,6 +327,7 @@ import {
   DescribeNotebookSessionStatementsRequest,
   AlterDMSDatabaseRequest,
   CheckDataEngineImageCanBeUpgradeRequest,
+  StatementInformation,
   SQLTask,
   UserMessage,
   WorkGroups,

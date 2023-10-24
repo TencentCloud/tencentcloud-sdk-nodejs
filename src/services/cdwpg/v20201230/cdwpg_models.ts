@@ -26,86 +26,13 @@ export interface ModifyInstanceResponse {
 }
 
 /**
- * DescribeInstanceState请求参数结构体
+ * DescribeInstanceInfo请求参数结构体
  */
-export interface DescribeInstanceStateRequest {
+export interface DescribeInstanceInfoRequest {
   /**
-   * 集群实例名称
+   * 集群实例ID
    */
   InstanceId: string
-}
-
-/**
- * 计费时间参数
- */
-export interface ChargeProperties {
-  /**
-   * 1-需要自动续期
-   */
-  RenewFlag: number
-  /**
-   * 订单时间范围
-   */
-  TimeSpan: number
-  /**
-   * 时间单位，一般为h和m
-   */
-  TimeUnit: string
-  /**
-   * 计费类型0-按量计费，1-包年包月
-   */
-  PayMode?: number
-  /**
-   * PREPAID、POSTPAID_BY_HOUR
-   */
-  ChargeType?: string
-}
-
-/**
- * DestroyInstanceByApi请求参数结构体
- */
-export interface DestroyInstanceByApiRequest {
-  /**
-   * 实例名称，例如"cdwpg-xxxx"
-   */
-  InstanceId: string
-}
-
-/**
- * 集群节点信息
- */
-export type InstanceNodeGroup = null
-
-/**
- * 磁盘规格
- */
-export interface CBSSpec {
-  /**
-   * 盘类型
-   */
-  DiskType: string
-  /**
-   * 大小
-   */
-  DiskSize: number
-  /**
-   * 个数
-   */
-  DiskCount: number
-}
-
-/**
- * ModifyInstance请求参数结构体
- */
-export interface ModifyInstanceRequest {
-  /**
-   * 实例Id
-   */
-  InstanceId: string
-  /**
-   * 新修改的实例名称
-   */
-  InstanceName: string
 }
 
 /**
@@ -162,6 +89,145 @@ export interface InstanceStateInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   BackupOpenStatus?: number
+}
+
+/**
+ * DescribeInstanceState请求参数结构体
+ */
+export interface DescribeInstanceStateRequest {
+  /**
+   * 集群实例名称
+   */
+  InstanceId: string
+}
+
+/**
+ * 计费时间参数
+ */
+export interface ChargeProperties {
+  /**
+   * 1-需要自动续期
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RenewFlag: number
+  /**
+   * 订单时间范围
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TimeSpan: number
+  /**
+   * 时间单位，一般为h和m
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TimeUnit: string
+  /**
+   * 计费类型0-按量计费，1-包年包月
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PayMode?: number
+  /**
+   * PREPAID、POSTPAID_BY_HOUR
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ChargeType?: string
+}
+
+/**
+ * DestroyInstanceByApi请求参数结构体
+ */
+export interface DestroyInstanceByApiRequest {
+  /**
+   * 实例名称，例如"cdwpg-xxxx"
+   */
+  InstanceId: string
+}
+
+/**
+ * 集群节点信息
+ */
+export type InstanceNodeGroup = null
+
+/**
+ * 磁盘规格
+ */
+export interface CBSSpec {
+  /**
+   * 盘类型
+   */
+  DiskType: string
+  /**
+   * 大小
+   */
+  DiskSize: number
+  /**
+   * 个数
+   */
+  DiskCount: number
+}
+
+/**
+ * ModifyInstance请求参数结构体
+ */
+export interface ModifyInstanceRequest {
+  /**
+   * 实例Id
+   */
+  InstanceId: string
+  /**
+   * 新修改的实例名称
+   */
+  InstanceName: string
+}
+
+/**
+ * DescribeSimpleInstances返回参数结构体
+ */
+export interface DescribeSimpleInstancesResponse {
+  /**
+   * 1
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalCount?: number
+  /**
+   * 1
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstancesList?: Array<InstanceSimpleInfoNew>
+  /**
+   * -
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ErrorMsg?: string
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 资源信息
+ */
+export interface ResourceInfo {
+  /**
+   * 资源名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SpecName: string
+  /**
+   * 资源数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Count: number
+  /**
+   * 磁盘信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DiskSpec: CBSSpecInfo
+  /**
+   * 资源类型，DATA
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Type: string
 }
 
 /**
@@ -374,28 +440,89 @@ export interface CreateInstanceByApiResponse {
 }
 
 /**
- * DescribeSimpleInstances返回参数结构体
+ * 集群信息
  */
-export interface DescribeSimpleInstancesResponse {
+export interface SimpleInstanceInfo {
   /**
    * 1
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TotalCount?: number
+  ID?: number
   /**
    * 1
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  InstancesList?: Array<InstanceSimpleInfoNew>
+  InstanceId?: string
   /**
-   * -
+   * 1
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ErrorMsg?: string
+  InstanceName?: string
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 1
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  RequestId?: string
+  Version?: string
+  /**
+   * 1
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Region?: string
+  /**
+   * 1
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Zone?: string
+  /**
+   * 1
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UserVPCID?: string
+  /**
+   * 1
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UserSubnetID?: string
+  /**
+   * 1
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateTime?: string
+  /**
+   * 1
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExpireTime?: string
+  /**
+   * 1
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AccessInfo?: string
+  /**
+   * 1
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RenewFlag?: number
+  /**
+   * 1
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ChargeProperties?: ChargeProperties
+  /**
+   * 1
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Resources?: Array<ResourceInfo>
+  /**
+   * 1
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Tags?: Array<Tag>
+  /**
+   * 1
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status?: number
 }
 
 /**
@@ -428,6 +555,27 @@ export interface DestroyInstanceByApiResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 磁盘信息
+ */
+export interface CBSSpecInfo {
+  /**
+   * 盘类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DiskType: string
+  /**
+   * 大小
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DiskSize: number
+  /**
+   * 个数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DiskCount: number
 }
 
 /**
@@ -674,4 +822,22 @@ export interface DescribeSimpleInstancesRequest {
    * 11
    */
   SearchTags?: Array<string>
+}
+
+/**
+ * DescribeInstanceInfo返回参数结构体
+ */
+export interface DescribeInstanceInfoResponse {
+  /**
+   * 1
+   */
+  SimpleInstanceInfo?: SimpleInstanceInfo
+  /**
+   * 1
+   */
+  ErrorMsg?: string
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }

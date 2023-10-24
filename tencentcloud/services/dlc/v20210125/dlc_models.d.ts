@@ -6123,6 +6123,11 @@ export interface CreateSparkSessionBatchSQLResponse {
      */
     BatchId?: string;
     /**
+     * Statement任务列表信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Statements?: Array<StatementInformation>;
+    /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
@@ -7530,6 +7535,21 @@ export interface CheckDataEngineImageCanBeUpgradeRequest {
      * 集群id
      */
     DataEngineId: string;
+}
+/**
+ * statement信息
+ */
+export interface StatementInformation {
+    /**
+     * SQL任务唯一ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TaskId?: string;
+    /**
+     * SQL内容
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SQL?: string;
 }
 /**
  *  SQL查询任务

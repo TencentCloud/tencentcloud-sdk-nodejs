@@ -2443,6 +2443,14 @@ export interface DescribeVoucherInfoRequest {
    * 操作人，默认就是用户uin
    */
   Operator?: string
+  /**
+   * 代金券主类型 has_price 为有价现金券 no_price 为无价代金券
+   */
+  VoucherMainType?: string
+  /**
+   * 代金券副类型 discount 为折扣券 deduct 为抵扣券
+   */
+  VoucherSubType?: string
 }
 
 /**

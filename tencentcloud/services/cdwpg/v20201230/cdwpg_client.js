@@ -52,6 +52,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeInstance", req, cb);
     }
     /**
+     * 获取集群信息
+     */
+    async DescribeInstanceInfo(req, cb) {
+        return this.request("DescribeInstanceInfo", req, cb);
+    }
+    /**
      * 创建集群
      */
     async CreateInstanceByApi(req, cb) {

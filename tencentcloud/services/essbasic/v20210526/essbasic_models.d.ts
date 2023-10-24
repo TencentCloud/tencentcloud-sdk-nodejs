@@ -39,7 +39,7 @@ export interface ChannelCreateFlowRemindsResponse {
 在通过文件发起合同时，对应的component有三种定位方式
 1. 绝对定位方式
 2. 表单域(FIELD)定位方式
-3. 关键字(KEYWORD)定位方式
+3. 关键字(KEYWORD)定位方式，使用关键字定位时，请确保PDF原始文件内是关键字以文字形式保存在PDF文件中，不支持对图片内文字进行关键字查找
 可以参考官网说明
 https://cloud.tencent.com/document/product/1323/78346#component-.E4.B8.89.E7.A7.8D.E5.AE.9A.E4.BD.8D.E6.96.B9.E5.BC.8F.E8.AF.B4.E6.98.8E
  */
@@ -103,7 +103,7 @@ export interface Component {
      * 控件生成的方式：
   NORMAL - 普通控件
   FIELD - 表单域
-  KEYWORD - 关键字
+  KEYWORD - 关键字（设置关键字时，请确保PDF原始文件内是关键字以文字形式保存在PDF文件中，不支持对图片内文字进行关键字查找）
      */
     GenerateMode?: string;
     /**
@@ -456,13 +456,15 @@ export interface ChannelCreateFlowSignReviewRequest {
  */
 export interface AuthFailMessage {
     /**
-     * 第三方应用平台的子客企业OpenId
+     * 第三方平台子客企业的唯一标识，长度不能超过64，只能由字母和数字组成。开发者可自定义此字段的值，并需要保存此 ID 以便进行后续操作。
+  
+  一个第三方平台子客企业主体与子客企业 ProxyOrganizationOpenId 是一一对应的，不可更改，不可重复使用。例如，可以使用企业名称的哈希值，或者社会统一信用代码的哈希值，或者随机哈希值。
      */
-    ProxyOrganizationOpenId: string;
+    ProxyOrganizationOpenId?: string;
     /**
      * 错误信息
      */
-    Message: string;
+    Message?: string;
 }
 /**
  * DescribeFlowDetailInfo请求参数结构体
@@ -667,27 +669,33 @@ export interface OperateChannelTemplateResponse {
      */
     AppId?: string;
     /**
-     * 第三方应用平台模板库模板唯一标识
+     * 合同模板ID，为32位字符串。此处为第三方应用平台模板库模板ID，非子客模板ID。
   注意：此字段可能返回 null，表示取不到有效值。
      */
     TemplateId?: string;
     /**
      * 描述模板可见性更改的结果，和参数中Available无关。
-  全部成功-"all-success",
-  部分成功-"part-success",
-  全部失败-"fail"，失败的会在FailMessageList中展示。
+  <ul>
+  <li>全部成功-"all-success"</li>
+  <li>部分成功-"part-success"</li>
+  <li>全部失败-"fail"，失败的会在FailMessageList中展示</li>
+  </ul>
   注意：此字段可能返回 null，表示取不到有效值。
      */
     OperateResult?: string;
     /**
      * 模板可见性,
-  全部可见-"all",
-  部分可见-"part"
+  <ul>
+  <li>全部可见-"all"</li>
+  <li>部分可见-"part"</li>
+  </ul>
   注意：此字段可能返回 null，表示取不到有效值。
      */
     AuthTag?: string;
     /**
-     * 合作企业方第三方机构唯一标识数据
+     * 第三方平台子客企业的唯一标识，长度不能超过64，只能由字母和数字组成。开发者可自定义此字段的值，并需要保存此 ID 以便进行后续操作。
+  
+  一个第三方平台子客企业主体与子客企业 ProxyOrganizationOpenId 是一一对应的，不可更改，不可重复使用。例如，可以使用企业名称的哈希值，或者社会统一信用代码的哈希值，或者随机哈希值。
   注意：此字段可能返回 null，表示取不到有效值。
      */
     ProxyOrganizationOpenIds?: Array<string>;
@@ -3454,37 +3462,45 @@ export interface CreateSignUrlsRequest {
  */
 export interface ChannelCreateMultiFlowSignQRCodeRequest {
     /**
-     * 应用相关信息。
-  此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 必填。
+     * 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。
+  
+  此接口下面信息必填。
+  <ul>
+  <li>渠道应用标识:  Agent.ProxyOrganizationOpenId</li>
+  <li>第三方平台子客企业标识: Agent. ProxyOperator.OpenId</li>
+  <li>第三方平台子客企业中的员工标识: Agent.AppId</li>
+  </ul>
      */
     Agent: Agent;
     /**
-     * 模版ID
+     * 合同模板ID，为32位字符串。
+  建议开发者保存此模板ID，后续用此模板发起合同流程需要此参数。
      */
     TemplateId: string;
     /**
-     * 签署流程名称，最大长度200个字符。
+     * 合同流程的名称（可自定义此名称），长度不能超过200，只能由中文、字母、数字和下划线组成。 该名称还将用于合同签署完成后的下载文件名。
      */
     FlowName: string;
     /**
-     * 最大可发起签署流程份数
-  <br/>默认5份
-  <br/>备注：发起签署流程数量超过此上限后，二维码自动失效。
+     * 通过此二维码可发起的流程最大限额，如未明确指定，默认为5份。 一旦发起流程数超越该限制，该二维码将自动失效。
      */
     MaxFlowNum?: number;
     /**
-     * 签署流程有效天数 默认7天 最高设置不超过30天
+     * 合同流程的签署有效期限，若未设定签署截止日期，则默认为自合同流程创建起的7天内截止。 若在签署截止日期前未完成签署，合同状态将变更为已过期，从而导致合同无效。 最长设定期限不得超过30天。
      */
     FlowEffectiveDay?: number;
     /**
-     * 二维码有效天数 默认7天 最高设置不超过90天
+     * 二维码的有效期限，默认为7天，最高设定不得超过90天。 一旦超过二维码的有效期限，该二维码将自动失效。
      */
     QrEffectiveDay?: number;
     /**
-     * 指定的签署二维码签署人
-  <br/>指定后，只允许知道的人操作和签署
+     * 指定签署人信息。 在指定签署人后，仅允许特定签署人通过扫描二维码进行签署。
      */
     Restrictions?: Array<ApproverRestriction>;
+    /**
+     * 指定签署方经办人控件类型是个人印章签署控件（SIGN_SIGNATURE） 时，可选的签名方式。
+     */
+    ApproverComponentLimitTypes?: Array<ApproverComponentLimitType>;
     /**
      * 已废弃，回调配置统一使用企业应用管理-应用集成-第三方应用中的配置
   <br/> 通过一码多扫二维码发起的合同，回调消息可参考文档 https://qian.tencent.com/developers/partner/callback_types_contracts_sign
@@ -3502,27 +3518,23 @@ export interface ChannelCreateMultiFlowSignQRCodeRequest {
      * @deprecated
      */
     Operator?: UserInfo;
-    /**
-     * 指定签署方经办人控件类型是个人印章签署控件（SIGN_SIGNATURE） 时，可选的签名方式。
-     */
-    ApproverComponentLimitTypes?: Array<ApproverComponentLimitType>;
 }
 /**
- * 一码多扫签署二维码对象
+ * 签署二维码的基本信息，用于创建二维码，用户可扫描该二维码进行签署操作。
  */
 export interface SignQrCode {
     /**
-     * 二维码id
+     * 二维码ID，为32位字符串。
      */
-    QrCodeId: string;
+    QrCodeId?: string;
     /**
-     * 二维码url
+     * 二维码URL，可通过转换二维码的工具或代码组件将此URL转化为二维码，以便用户扫描进行流程签署。
      */
-    QrCodeUrl: string;
+    QrCodeUrl?: string;
     /**
-     * 二维码过期时间
+     * 二维码的有截止时间，格式为Unix标准时间戳（秒）。 一旦超过二维码的有效期限，该二维码将自动失效。
      */
-    ExpiredTime: number;
+    ExpiredTime?: number;
 }
 /**
  * 创建签署流程签署人入参。
@@ -4493,11 +4505,11 @@ export interface ChannelCreateFlowGroupByFilesResponse {
  */
 export interface ChannelCreateMultiFlowSignQRCodeResponse {
     /**
-     * 签署二维码对象
+     * 签署二维码的基本信息，用于创建二维码，用户可扫描该二维码进行签署操作。
      */
     QrCode?: SignQrCode;
     /**
-     * 签署链接对象
+     * 流程签署二维码的签署信息，适用于客户系统整合二维码功能。通过链接，用户可直接访问电子签名小程序并签署合同。
      */
     SignUrls?: SignUrl;
     /**
@@ -4946,21 +4958,21 @@ export interface ChannelCreateFlowGroupByTemplatesRequest {
     FlowGroupName: string;
 }
 /**
- * 一码多扫签署二维码签署信息
+ * 流程签署二维码的签署信息，适用于客户系统整合二维码功能。 通过链接，用户可直接访问电子签名小程序并签署合同。
  */
 export interface SignUrl {
     /**
-     * 小程序签署链接
+     * 跳转至电子签名小程序签署的链接地址。 适用于客户端APP及小程序直接唤起电子签名小程序。
      */
-    AppSignUrl: string;
+    AppSignUrl?: string;
     /**
-     * 签署链接有效时间
+     * 签署链接有效时间，格式类似"2022-08-05 15:55:01"
      */
-    EffectiveTime: string;
+    EffectiveTime?: string;
     /**
-     * 移动端签署链接
+     * 跳转至电子签名小程序签署的链接地址，格式类似于https://essurl.cn/xxx。 打开此链接将会展示H5中间页面，随后唤起电子签名小程序以进行合同签署。
      */
-    HttpSignUrl: string;
+    HttpSignUrl?: string;
 }
 /**
  * ChannelCancelFlow请求参数结构体
@@ -5317,38 +5329,51 @@ export interface ChannelCreateBatchCancelFlowUrlResponse {
  */
 export interface OperateChannelTemplateRequest {
     /**
-     * 应用相关信息。
-  此接口Agent.AppId必填。
+     * 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。
+  
+  此接口下面信息必填。
+  <ul>
+  <li>第三方平台子客企业中的员工标识: Agent.AppId</li>
+  </ul>
      */
     Agent: Agent;
     /**
      * 操作类型，
-  查询:"SELECT"，
-  删除:"DELETE"，
-  更新:"UPDATE"
+  <ul>
+  <li>查询:"SELECT"</li>
+  <li>删除:"DELETE"</li>
+  <li>更新:"UPDATE"</li>
+  </ul>
      */
     OperateType: string;
     /**
-     * 第三方应用平台模板库模板唯一标识
+     * 合同模板ID，为32位字符串。此处为第三方应用平台模板库模板ID，非子客模板ID。
      */
     TemplateId: string;
     /**
-     * 合作企业方第三方机构唯一标识数据.
-  支持多个， 用","进行分隔
+     * 第三方平台子客企业的唯一标识，长度不能超过64，只能由字母和数字组成。开发者可自定义此字段的值，并需要保存此 ID 以便进行后续操作。
+  
+  一个第三方平台子客企业主体与子客企业 ProxyOrganizationOpenId 是一一对应的，不可更改，不可重复使用。例如，可以使用企业名称的哈希值，或者社会统一信用代码的哈希值，或者随机哈希值。
      */
     ProxyOrganizationOpenIds?: string;
     /**
      * 模板可见性,
-  全部可见-"all",
-   部分可见-"part"
+  <ul>
+  <li>全部可见-"all"</li>
+  <li>部分可见-"part"</li>
+  </ul>
      */
     AuthTag?: string;
     /**
      * 当OperateType=UPDATE时，可以通过设置此字段对模板启停用状态进行操作。
-  若此字段值为0，则不会修改模板Available，
-  1为启用模板，
-  2为停用模板。
-  启用后模板可以正常领取。停用后，推送方式为【自动推送】的模板则无法被子客使用，推送方式为【手动领取】的模板则无法出现被模板库被子客领用。如果Available更新失败，会直接返回错误。
+  <ul>
+  <li>若此字段值为0，则不会修改模板Available</li>
+  <li>1为启用模板</li>
+  <li>2为停用模板</li>
+  </ul>
+  启用后模板可以正常领取。
+  停用后，推送方式为【自动推送】的模板则无法被子客使用，推送方式为【手动领取】的模板则无法出现被模板库被子客领用。
+  如果Available更新失败，会直接返回错误。
      */
     Available?: number;
     /**

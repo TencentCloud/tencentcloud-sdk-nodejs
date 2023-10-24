@@ -64,7 +64,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeKBComponentVulnerability", req, cb);
     }
     /**
-     * 本接口(DescribeKBVulnerability)用于在知识库中查询漏洞详细信息，支持根据CVE ID查询或者根据Vul ID查询。
+     * 本接口(DescribeKBVulnerability)用于在知识库中查询漏洞详细信息，支持根据CVE、Vul ID、CNVD ID、CNNVD ID查询。
      */
     async DescribeKBVulnerability(req, cb) {
         return this.request("DescribeKBVulnerability", req, cb);

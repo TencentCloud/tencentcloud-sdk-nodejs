@@ -48,6 +48,16 @@ it("dts.v20211206.DescribeSyncJobs", async function () {
     }
 })
 
+it("dts.v20211206.ModifyMigrateRuntimeAttribute", async function () {
+    try {
+       const data = await client.ModifyMigrateRuntimeAttribute({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dts.v20211206.CreateMigrationService", async function () {
     try {
        const data = await client.CreateMigrationService({})

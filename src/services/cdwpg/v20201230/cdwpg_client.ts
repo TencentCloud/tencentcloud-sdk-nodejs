@@ -19,21 +19,25 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   ModifyInstanceResponse,
+  DescribeInstanceInfoRequest,
+  InstanceStateInfo,
   DescribeInstanceStateRequest,
   ChargeProperties,
   DestroyInstanceByApiRequest,
   InstanceNodeGroup,
   CBSSpec,
   ModifyInstanceRequest,
-  InstanceStateInfo,
+  DescribeSimpleInstancesResponse,
+  ResourceInfo,
   InstanceInfo,
   DescribeInstancesResponse,
   ResourceSpecNew,
   DescribeInstancesRequest,
   CreateInstanceByApiResponse,
-  DescribeSimpleInstancesResponse,
+  SimpleInstanceInfo,
   DescribeInstanceResponse,
   DestroyInstanceByApiResponse,
+  CBSSpecInfo,
   CreateInstanceByApiRequest,
   SearchTags,
   DescribeInstanceRequest,
@@ -41,6 +45,7 @@ import {
   DescribeInstanceStateResponse,
   InstanceSimpleInfoNew,
   DescribeSimpleInstancesRequest,
+  DescribeInstanceInfoResponse,
 } from "./cdwpg_models"
 
 /**
@@ -90,6 +95,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeInstanceResponse) => void
   ): Promise<DescribeInstanceResponse> {
     return this.request("DescribeInstance", req, cb)
+  }
+
+  /**
+   * 获取集群信息
+   */
+  async DescribeInstanceInfo(
+    req: DescribeInstanceInfoRequest,
+    cb?: (error: string, rep: DescribeInstanceInfoResponse) => void
+  ): Promise<DescribeInstanceInfoResponse> {
+    return this.request("DescribeInstanceInfo", req, cb)
   }
 
   /**

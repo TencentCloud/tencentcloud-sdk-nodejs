@@ -58,6 +58,16 @@ it("cdwpg.v20201230.DescribeInstance", async function () {
     }
 })
 
+it("cdwpg.v20201230.DescribeInstanceInfo", async function () {
+    try {
+       const data = await client.DescribeInstanceInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cdwpg.v20201230.CreateInstanceByApi", async function () {
     try {
        const data = await client.CreateInstanceByApi({})

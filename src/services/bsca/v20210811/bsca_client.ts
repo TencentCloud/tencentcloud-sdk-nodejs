@@ -20,6 +20,7 @@ import { ClientConfig } from "../../../common/interface"
 import {
   MatchKBPURLListResponse,
   DescribeKBComponentVulnerabilityRequest,
+  AffectedComponent,
   DescribeKBComponentVersionListRequest,
   ComponentVulnerabilityUnion,
   LicenseUnion,
@@ -119,7 +120,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口(DescribeKBVulnerability)用于在知识库中查询漏洞详细信息，支持根据CVE ID查询或者根据Vul ID查询。
+   * 本接口(DescribeKBVulnerability)用于在知识库中查询漏洞详细信息，支持根据CVE、Vul ID、CNVD ID、CNNVD ID查询。
    */
   async DescribeKBVulnerability(
     req: DescribeKBVulnerabilityRequest,

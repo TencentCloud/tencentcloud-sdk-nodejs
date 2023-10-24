@@ -46,6 +46,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeSyncJobs", req, cb);
     }
     /**
+     * 修改任务运行时属性，此接口不同于配置类接口，不会进行状态机判断。
+     */
+    async ModifyMigrateRuntimeAttribute(req, cb) {
+        return this.request("ModifyMigrateRuntimeAttribute", req, cb);
+    }
+    /**
      * 购买迁移任务。购买成功后会返回随机生成的迁移任务id列表，也可以通过查询迁移任务任务列表接口`DescribeMigrationJobs`看到购买成功的实例Id。注意，一旦购买成功后源及目标数据库类型，源及目标实例地域不可修改。
      */
     async CreateMigrationService(req, cb) {

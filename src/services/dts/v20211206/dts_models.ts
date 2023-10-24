@@ -748,6 +748,16 @@ export interface StartSyncJobRequest {
 }
 
 /**
+ * ModifyMigrateRuntimeAttribute返回参数结构体
+ */
+export interface ModifyMigrateRuntimeAttributeResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * PauseSyncJob请求参数结构体
  */
 export interface PauseSyncJobRequest {
@@ -1008,7 +1018,7 @@ export interface DBEndpointInfo {
    */
   DatabaseType: string
   /**
-   * 节点类型，为空或者"simple":表示普通节点，"cluster": 集群节点
+   * 节点类型，为空或者"simple"表示普通节点、"cluster"表示集群节点；对于mongo业务，取值为replicaset(mongodb副本集)、standalone(mongodb单节点)、cluster(mongodb集群)
 注意：此字段可能返回 null，表示取不到有效值。
    */
   NodeType: string
@@ -3894,6 +3904,20 @@ export interface DatabaseTableObject {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AdvancedObjects?: Array<string>
+}
+
+/**
+ * ModifyMigrateRuntimeAttribute请求参数结构体
+ */
+export interface ModifyMigrateRuntimeAttributeRequest {
+  /**
+   * 迁移任务id，如：dts-2rgv0f09
+   */
+  JobId: string
+  /**
+   * 需要修改的属性，此结构设计为通用结构，用于屏蔽多个业务的定制属性。<br>例如对于Redis:<br>{<br>	 "Key": "DstWriteMode",	//目标库写入模式<br> 	"Value": "normal"	          //clearData(清空目标实例数据)、overwrite(以覆盖写的方式执行任务)、normal(跟正常流程一样，不做额外动作，默认为此值) <br>},<br>{<br/>	 "Key": "IsDstReadOnly",	//是否在迁移时设置目标库只读<br/> 	"Value": "true"	          //true(设置只读)、false(不设置只读) <br/>}
+   */
+  OtherOptions: Array<KeyValuePairOption>
 }
 
 /**

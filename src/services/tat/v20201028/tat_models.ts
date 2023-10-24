@@ -947,7 +947,7 @@ export interface DescribeAutomationAgentStatusRequest {
    */
   InstanceIds?: Array<string>
   /**
-   * 过滤条件。<br> <li> agent-status - String - 是否必填：否 -（过滤条件）按照agent状态过滤，取值：Online 在线，Offline 离线。<br> <li> environment - String - 是否必填：否 -（过滤条件）按照agent运行环境查询，取值：Linux。<br> <li> instance-id - String - 是否必填：否 -（过滤条件）按照实例ID过滤。 <br>每次请求的 `Filters` 的上限为10， `Filter.Values` 的上限为5。参数不支持同时指定 `InstanceIds` 和 `Filters` 。
+   * 过滤条件。<br> <li> agent-status - String - 是否必填：否 -（过滤条件）按照agent状态过滤，取值：Online 在线，Offline 离线。<br> <li> environment - String - 是否必填：否 -（过滤条件）按照agent运行环境查询，取值：Linux, Windows。<br> <li> instance-id - String - 是否必填：否 -（过滤条件）按照实例ID过滤。 <br>每次请求的 `Filters` 的上限为10， `Filter.Values` 的上限为5。参数不支持同时指定 `InstanceIds` 和 `Filters` 。
    */
   Filters?: Array<Filter>
   /**
@@ -1441,11 +1441,11 @@ export interface DescribeAutomationAgentStatusResponse {
   /**
    * Agent 信息列表。
    */
-  AutomationAgentSet: Array<AutomationAgentInfo>
+  AutomationAgentSet?: Array<AutomationAgentInfo>
   /**
    * 符合条件的 Agent 总数。
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

@@ -58,6 +58,7 @@ import {
   ResumeSyncJobResponse,
   ModifyCompareTaskNameResponse,
   StartSyncJobRequest,
+  ModifyMigrateRuntimeAttributeResponse,
   PauseSyncJobRequest,
   CreateMigrateCheckJobResponse,
   ModifySyncJobConfigRequest,
@@ -167,6 +168,7 @@ import {
   RecoverMigrateJobRequest,
   OnlineDDL,
   DatabaseTableObject,
+  ModifyMigrateRuntimeAttributeRequest,
   PauseMigrateJobResponse,
   Table,
   CompareDetailInfo,
@@ -211,6 +213,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeSyncJobsResponse) => void
   ): Promise<DescribeSyncJobsResponse> {
     return this.request("DescribeSyncJobs", req, cb)
+  }
+
+  /**
+   * 修改任务运行时属性，此接口不同于配置类接口，不会进行状态机判断。
+   */
+  async ModifyMigrateRuntimeAttribute(
+    req: ModifyMigrateRuntimeAttributeRequest,
+    cb?: (error: string, rep: ModifyMigrateRuntimeAttributeResponse) => void
+  ): Promise<ModifyMigrateRuntimeAttributeResponse> {
+    return this.request("ModifyMigrateRuntimeAttribute", req, cb)
   }
 
   /**

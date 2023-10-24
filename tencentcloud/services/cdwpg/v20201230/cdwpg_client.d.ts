@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { ModifyInstanceResponse, DescribeInstanceStateRequest, DestroyInstanceByApiRequest, ModifyInstanceRequest, DescribeInstancesResponse, DescribeInstancesRequest, CreateInstanceByApiResponse, DescribeSimpleInstancesResponse, DescribeInstanceResponse, DestroyInstanceByApiResponse, CreateInstanceByApiRequest, DescribeInstanceRequest, DescribeInstanceStateResponse, DescribeSimpleInstancesRequest } from "./cdwpg_models";
+import { ModifyInstanceResponse, DescribeInstanceInfoRequest, DescribeInstanceStateRequest, DestroyInstanceByApiRequest, ModifyInstanceRequest, DescribeSimpleInstancesResponse, DescribeInstancesResponse, DescribeInstancesRequest, CreateInstanceByApiResponse, DescribeInstanceResponse, DestroyInstanceByApiResponse, CreateInstanceByApiRequest, DescribeInstanceRequest, DescribeInstanceStateResponse, DescribeSimpleInstancesRequest, DescribeInstanceInfoResponse } from "./cdwpg_models";
 /**
  * cdwpg client
  * @class
@@ -23,6 +23,10 @@ export declare class Client extends AbstractClient {
      * 根据实例ID查询某个实例的具体信息
      */
     DescribeInstance(req: DescribeInstanceRequest, cb?: (error: string, rep: DescribeInstanceResponse) => void): Promise<DescribeInstanceResponse>;
+    /**
+     * 获取集群信息
+     */
+    DescribeInstanceInfo(req: DescribeInstanceInfoRequest, cb?: (error: string, rep: DescribeInstanceInfoResponse) => void): Promise<DescribeInstanceInfoResponse>;
     /**
      * 创建集群
      */

@@ -25,6 +25,26 @@ export interface DescribeKBComponentVulnerabilityRequest {
     PURL: PURL;
 }
 /**
+ * 受漏洞影响的组件信息。
+ */
+export interface AffectedComponent {
+    /**
+     * 受漏洞影响的组件名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Name?: string;
+    /**
+     * 受漏洞影响的版本
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AffectedVersionList?: Array<string>;
+    /**
+     * 修复此漏洞的版本
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    FixedVersionList?: Array<string>;
+}
+/**
  * DescribeKBComponentVersionList请求参数结构体
  */
 export interface DescribeKBComponentVersionListRequest {
@@ -250,7 +270,7 @@ export interface DescribeKBVulnerabilityResponse {
      * 漏洞详细信息列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    VulnerabilityDetailList: Array<VulnerabilityUnion>;
+    VulnerabilityDetailList?: Array<VulnerabilityUnion>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -337,13 +357,21 @@ export interface LicenseDetail {
  */
 export interface DescribeKBVulnerabilityRequest {
     /**
-     * CVE ID列表（不能与Vul ID同时存在）
+     * 根据CVE ID查询（不能与其他参数同时存在）
      */
     CVEID?: Array<string>;
     /**
-     * Vul ID列表（不能与CVE ID 同时存在）
+     * 根据Vul ID查询（不能与其他参数同时存在）
      */
     VulID?: Array<string>;
+    /**
+     * 根据CNVD ID查询（不能与其他参数同时存在）
+     */
+    CNVDID?: Array<string>;
+    /**
+     * 根据CNNVD ID查询（不能与其他参数同时存在）
+     */
+    CNNVDID?: Array<string>;
 }
 /**
  * 描述漏洞详细信息。
@@ -352,53 +380,57 @@ export interface VulnerabilityDetail {
     /**
      * 漏洞类别
      */
-    Category: string;
+    Category?: string;
     /**
      * 漏洞分类
      */
-    CategoryType: string;
+    CategoryType?: string;
     /**
      * 漏洞描述
      */
-    Description: string;
+    Description?: string;
     /**
      * 漏洞官方解决方案
      */
-    OfficialSolution: string;
+    OfficialSolution?: string;
     /**
      * 漏洞信息参考列表
      */
-    ReferenceList: Array<string>;
+    ReferenceList?: Array<string>;
     /**
      * 漏洞防御方案
      */
-    DefenseSolution: string;
+    DefenseSolution?: string;
     /**
      * 漏洞CVSSv2信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CVSSv2Info: CVSSV2Info;
+    CVSSv2Info?: CVSSV2Info;
     /**
      * 漏洞CVSSv3信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CVSSv3Info: CVSSV3Info;
+    CVSSv3Info?: CVSSV3Info;
     /**
      * 漏洞提交时间
      */
-    SubmitTime: string;
+    SubmitTime?: string;
     /**
      * CWE编号
      */
-    CWEID: string;
+    CWEID?: string;
     /**
      * 漏洞CVSSv2向量
      */
-    CVSSv2Vector: string;
+    CVSSv2Vector?: string;
     /**
      * 漏洞CVSSv3向量
      */
-    CVSSv3Vector: string;
+    CVSSv3Vector?: string;
+    /**
+     * 漏洞影响的组件列表，仅当查询单个漏洞时有效
+     */
+    AffectedComponentList?: Array<AffectedComponent>;
 }
 /**
  * DescribeKBComponent返回参数结构体
@@ -433,27 +465,27 @@ export interface VulnerabilitySummary {
     /**
      * 漏洞ID
      */
-    VulID: string;
+    VulID?: string;
     /**
      * 漏洞所属CVE编号
      */
-    CVEID: string;
+    CVEID?: string;
     /**
      * 漏洞所属CNVD编号
      */
-    CNVDID: string;
+    CNVDID?: string;
     /**
      * 漏洞所属CNNVD编号
      */
-    CNNVDID: string;
+    CNNVDID?: string;
     /**
      * 漏洞名称
      */
-    Name: string;
+    Name?: string;
     /**
      * 该漏洞是否是需重点关注的漏洞
      */
-    IsSuggest: boolean;
+    IsSuggest?: boolean;
     /**
      * 漏洞风险等级
   <li>Critical</li>
@@ -461,7 +493,7 @@ export interface VulnerabilitySummary {
   <li>Medium</li>
   <li>Low</li>
      */
-    Severity: string;
+    Severity?: string;
 }
 /**
  * DescribeKBLicense请求参数结构体
