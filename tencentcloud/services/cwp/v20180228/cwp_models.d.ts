@@ -3628,6 +3628,10 @@ export interface CreateWhiteListOrderRequest {
      */
     RuleName: string;
     /**
+     * 订单类型, 1 试用 2 赠送 3 体验 4 SSL-证书赠送 5 cvm赠送
+     */
+    SourceType?: number;
+    /**
      * 地域, 1 广州 9新加坡, 默认为 1. 非必要情况不要选9
      */
     RegionId?: number;

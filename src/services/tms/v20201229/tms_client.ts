@@ -18,9 +18,11 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  Positions,
   RiskDetails,
   TextModerationRequest,
   DetailResults,
+  HitInfo,
   Tag,
   User,
   Device,

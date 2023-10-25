@@ -27,8 +27,10 @@ import {
   Department,
   CreatePreparedPersonalEsignRequest,
   DescribeIntegrationDepartmentsResponse,
+  DeleteExtendedServiceAuthInfosResponse,
   CreateFlowApproversResponse,
   DescribeFileUrlsResponse,
+  CreateExtendedServiceAuthInfosRequest,
   ModifyApplicationCallbackInfoResponse,
   CreateMultiFlowSignQRCodeResponse,
   FlowApproverUrlInfo,
@@ -158,6 +160,7 @@ import {
   FileInfo,
   CancelUserAutoSignEnableUrlRequest,
   FailedCreateStaffData,
+  CreateExtendedServiceAuthInfosResponse,
   ApproverRestriction,
   CreateWebThemeConfigRequest,
   ApproverItem,
@@ -202,6 +205,7 @@ import {
   CreateBatchCancelFlowUrlRequest,
   CreateMultiFlowSignQRCodeRequest,
   DescribeFlowInfoRequest,
+  DeleteExtendedServiceAuthInfosRequest,
   DescribeIntegrationDepartmentsRequest,
   DescribeFlowInfoResponse,
   CancelMultiFlowSignQRCodeResponse,
@@ -767,6 +771,18 @@ httpProfile.setEndpoint("file.test.ess.tencent.cn");
   }
 
   /**
+     * 创建企业扩展服务授权，当前仅支持授权 “企业自动签” 给企业员工。
+
+注：支持集团代子企业操作，请联系运营开通此功能。
+     */
+  async CreateExtendedServiceAuthInfos(
+    req: CreateExtendedServiceAuthInfosRequest,
+    cb?: (error: string, rep: CreateExtendedServiceAuthInfosResponse) => void
+  ): Promise<CreateExtendedServiceAuthInfosResponse> {
+    return this.request("CreateExtendedServiceAuthInfos", req, cb)
+  }
+
+  /**
      * 此接口（CancelMultiFlowSignQRCode）用于废除一码多扫流程签署二维码。
 该接口所需的二维码ID，源自[创建一码多扫流程签署二维码](https://qian.tencent.com/developers/companyApis/startFlows/CreateMultiFlowSignQRCode)生成的。
 如果该二维码尚处于有效期内，可通过本接口将其设置为失效状态。
@@ -826,13 +842,13 @@ httpProfile.setEndpoint("file.test.ess.tencent.cn");
   }
 
   /**
-     * 此接口（CreateConvertTaskApi）用来将word、excel、图片、txt类型文件转换为PDF文件。<br />
+     * 此接口（CreateConvertTaskApi）用来将word、excel、html、图片、txt类型文件转换为PDF文件。<br />
 前提条件：源文件已经通过 <a href="https://qian.tencent.com/developers/companyApis/templatesAndFiles/UploadFiles" target="_blank">文件上传接口</a>完成上传，并得到了源文件的资源Id。<br />
 适用场景1：已经上传了一个word文件，希望将该word文件转换成pdf文件后发起合同
 适用场景2：已经上传了一个jpg图片文件，希望将该图片文件转换成pdf文件后发起合同<br />
 转换文件是一个耗时操作，若想查看转换任务是否完成，可以通过<a href="https://qian.tencent.com/developers/companyApis/templatesAndFiles/GetTaskResultApi" target="_blank">查询转换任务状态</a>接口获取任务状态。<br />
 注: 
-1. `支持的文件类型有doc、docx、xls、xlsx、jpg、jpeg、png、bmp、txt`
+1. `支持的文件类型有doc、docx、xls、xlsx、html、jpg、jpeg、png、bmp、txt`
 2. `可通过发起合同时设置预览来检查转换文件是否达到预期效果`
      */
   async CreateConvertTaskApi(
@@ -1120,6 +1136,18 @@ httpProfile.setEndpoint("file.test.ess.tencent.cn");
     cb?: (error: string, rep: CreateSealPolicyResponse) => void
   ): Promise<CreateSealPolicyResponse> {
     return this.request("CreateSealPolicy", req, cb)
+  }
+
+  /**
+     * 删除企业扩展服务授权，当前仅支持 “企业自动签” 取消授权。
+
+注：支持集团代子企业操作，请联系运营开通此功能。
+     */
+  async DeleteExtendedServiceAuthInfos(
+    req: DeleteExtendedServiceAuthInfosRequest,
+    cb?: (error: string, rep: DeleteExtendedServiceAuthInfosResponse) => void
+  ): Promise<DeleteExtendedServiceAuthInfosResponse> {
+    return this.request("DeleteExtendedServiceAuthInfos", req, cb)
   }
 
   /**

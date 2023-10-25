@@ -265,6 +265,10 @@ AnalyzeTaskType_MediaStream：音视频体验
 多伦多
    */
   City?: Array<string>
+  /**
+   * es scroll查询id
+   */
+  ScrollID?: string
 }
 
 /**
@@ -318,6 +322,10 @@ export interface DescribeDetailedSingleProbeDataResponse {
    * 符合条件的数据总数
    */
   TotalNumber?: number
+  /**
+   * es scroll查询的id
+   */
+  ScrollID?: string
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

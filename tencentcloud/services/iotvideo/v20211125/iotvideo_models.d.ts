@@ -3574,6 +3574,10 @@ export interface DescribeCloudStorageRequest {
      * 云存用户ID
      */
     UserId?: string;
+    /**
+     * 通道ID 非NVR设备不填 NVR设备必填 默认为无
+     */
+    ChannelId?: number;
 }
 /**
  * DescribeBalanceTransactions返回参数结构体
@@ -3874,24 +3878,24 @@ export interface DescribeCloudStorageResponse {
     /**
      * 云存开启状态，1为开启，0为未开启或已过期
      */
-    Status: number;
+    Status?: number;
     /**
      * 云存类型，1为全时云存，2为事件云存
      */
-    Type: number;
+    Type?: number;
     /**
      * 云存套餐过期时间
      */
-    ExpireTime: number;
+    ExpireTime?: number;
     /**
      * 云存回看时长
      */
-    ShiftDuration: number;
+    ShiftDuration?: number;
     /**
      * 云存用户ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    UserId: string;
+    UserId?: string;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */

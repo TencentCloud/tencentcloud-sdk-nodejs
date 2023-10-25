@@ -1,4 +1,19 @@
 /**
+ * 标识命中的违规关键词位置信息
+ */
+export interface Positions {
+    /**
+     * 关键词起始位置
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Start: number;
+    /**
+     * 关键词结束位置
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    End: number;
+}
+/**
  * 账号风险检测结果
  */
 export interface RiskDetails {
@@ -84,6 +99,36 @@ export interface DetailResults {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Tags: Array<Tag>;
+    /**
+     * 该字段用于返回违规文本命中信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    HitInfos: Array<HitInfo>;
+}
+/**
+ * 关键词命中位置信息
+ */
+export interface HitInfo {
+    /**
+     * 标识模型命中还是关键词命中
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Type: string;
+    /**
+     * 命中关键词
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Keyword: string;
+    /**
+     * 自定义词库名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    LibName: string;
+    /**
+     * 位置信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Positions: Array<Positions>;
 }
 /**
  * 该字段用于返回审核结果明细字段的标签及分数

@@ -4935,54 +4935,54 @@ export interface RecordTemplateInfo {
     /**
      * 模板 ID。
      */
-    TemplateId: number;
+    TemplateId?: number;
     /**
      * 模板名称。
      */
-    TemplateName: string;
+    TemplateName?: string;
     /**
      * 描述信息。
      */
-    Description: string;
+    Description?: string;
     /**
      * FLV 录制参数。
      */
-    FlvParam: RecordParam;
+    FlvParam?: RecordParam;
     /**
      * HLS 录制参数。
      */
-    HlsParam: RecordParam;
+    HlsParam?: RecordParam;
     /**
      * MP4 录制参数。
      */
-    Mp4Param: RecordParam;
+    Mp4Param?: RecordParam;
     /**
      * AAC 录制参数。
      */
-    AacParam: RecordParam;
+    AacParam?: RecordParam;
     /**
      * 0：普通直播，
   1：慢直播。
      */
-    IsDelayLive: number;
+    IsDelayLive?: number;
     /**
      * HLS 录制定制参数。
      */
-    HlsSpecialParam: HlsSpecialParam;
+    HlsSpecialParam?: HlsSpecialParam;
     /**
      * MP3 录制参数。
      */
-    Mp3Param: RecordParam;
+    Mp3Param?: RecordParam;
     /**
      * 是否去除水印。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    RemoveWatermark: boolean;
+    RemoveWatermark?: boolean;
     /**
      * FLV 录制定制参数。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    FlvSpecialParam: FlvSpecialParam;
+    FlvSpecialParam?: FlvSpecialParam;
 }
 /**
  * 播放错误码信息
@@ -6567,6 +6567,7 @@ export interface HlsSpecialParam {
     /**
      * HLS续流超时时间。
   取值范围[0，1800]。
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     FlowContinueDuration?: number;
 }

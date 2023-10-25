@@ -398,6 +398,16 @@ it("ess.v20201111.GetTaskResultApi", async function () {
     }
 })
 
+it("ess.v20201111.CreateExtendedServiceAuthInfos", async function () {
+    try {
+       const data = await client.CreateExtendedServiceAuthInfos({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ess.v20201111.CancelMultiFlowSignQRCode", async function () {
     try {
        const data = await client.CancelMultiFlowSignQRCode({})
@@ -631,6 +641,16 @@ it("ess.v20201111.DescribeOrganizationGroupOrganizations", async function () {
 it("ess.v20201111.CreateSealPolicy", async function () {
     try {
        const data = await client.CreateSealPolicy({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ess.v20201111.DeleteExtendedServiceAuthInfos", async function () {
+    try {
+       const data = await client.DeleteExtendedServiceAuthInfos({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
