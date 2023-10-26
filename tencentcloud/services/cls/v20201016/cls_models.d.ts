@@ -84,6 +84,26 @@ export interface AlarmInfo {
      */
     Analysis?: Array<AnalysisDimensional>;
     /**
+     * 分组触发状态。1：开启，0：关闭（默认）
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    GroupTriggerStatus?: boolean;
+    /**
+     * 分组触发条件。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    GroupTriggerCondition?: Array<string>;
+    /**
+     * 监控对象类型。0:执行语句共用监控对象;1:每个执行语句单独选择监控对象。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MonitorObjectType?: number;
+    /**
+     * 告警级别。0:警告(Warn);1:提醒(Info);2:紧急 (Critical)。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AlarmLevel?: number;
+    /**
      * 多触发条件。
   
   注意：此字段可能返回 null，表示取不到有效值。
@@ -1796,6 +1816,20 @@ export interface ModifyAlarmRequest {
      * 多维分析
      */
     Analysis?: Array<AnalysisDimensional>;
+    /**
+     * 分组触发状态。true：开启，false：关闭（默认）
+     */
+    GroupTriggerStatus?: boolean;
+    /**
+     * 分组触发条件。
+     */
+    GroupTriggerCondition?: Array<string>;
+    /**
+     * 监控对象类型。0:执行语句共用监控对象; 1:每个执行语句单独选择监控对象。
+  <li> 当值为1时，AlarmTargets元素个数不能超过10个，AlarmTargets中的Number必须是从1开始的连续正整数，不能重复。
+  
+     */
+    MonitorObjectType?: number;
 }
 /**
  * DescribeTopics返回参数结构体
@@ -1903,7 +1937,11 @@ export interface CreateAlarmRequest {
      */
     TriggerCount: number;
     /**
-     * 告警重复的周期。单位是分钟。取值范围是0~1440。
+     * 告警重复的周期。
+  
+  单位是分钟。
+  
+  取值范围是0~1440。
      */
     AlarmPeriod: number;
     /**
@@ -1920,17 +1958,29 @@ export interface CreateAlarmRequest {
      */
     Condition?: string;
     /**
+     * 告警级别。
+  
+  0:警告(Warn); 1:提醒(Info); 2:紧急 (Critical)。
+  
+  注意:
+  - 不填则默认为0。
+  - Condition和AlarmLevel是一组配置，MultiConditions是另一组配置，2组配置互斥。
+     */
+    AlarmLevel?: number;
+    /**
      * 多触发条件。
   
    注意:
-  - Condition和AlarmLevel是一组配置，MultiConditions是另一组配置，2组配置互斥。</li>
+  - Condition和AlarmLevel是一组配置，MultiConditions是另一组配置，2组配置互斥。
   
   
   
      */
     MultiConditions?: Array<MultiCondition>;
     /**
-     * 是否开启告警策略。默认值为true
+     * 是否开启告警策略。
+  
+  默认值为true
      */
     Status?: boolean;
     /**
@@ -1945,6 +1995,31 @@ export interface CreateAlarmRequest {
      * 多维分析
      */
     Analysis?: Array<AnalysisDimensional>;
+    /**
+     * 分组触发状态。
+  
+  默认值false
+     */
+    GroupTriggerStatus?: boolean;
+    /**
+     * 分组触发条件。
+     */
+    GroupTriggerCondition?: Array<string>;
+    /**
+     * 标签描述列表，通过指定该参数可以同时绑定标签到相应的告警策略。
+  
+  最大支持10个标签键值对，并且不能有重复的键值对。
+     */
+    Tags?: Array<Tag>;
+    /**
+     * 监控对象类型。0:执行语句共用监控对象; 1:每个执行语句单独选择监控对象。
+  
+  不填则默认为0。
+  
+  当值为1时，AlarmTargets元素个数不能超过10个，AlarmTargets中的Number必须是从1开始的连续正整数，不能重复。
+  
+     */
+    MonitorObjectType?: number;
 }
 /**
  * DeleteExport返回参数结构体

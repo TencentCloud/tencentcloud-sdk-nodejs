@@ -23,6 +23,7 @@ import {
   DescribeUserClbWafRegionsResponse,
   AddAntiFakeUrlRequest,
   DescribePeakValueResponse,
+  ProductInfo,
   DescribeAntiLeakageItem,
   LoadBalancerPackageNew,
   DeleteHostRequest,
@@ -148,6 +149,7 @@ import {
   DescribePeakPointsResponse,
   ModifyInstanceRenewFlagRequest,
   GoodsDetailNew,
+  GoodsDetail,
   DeleteIpAccessControlResponse,
   DescribeWafInfoResponse,
   BatchIpAccessControlItem,
@@ -166,7 +168,7 @@ import {
   DescribeUserSignatureRuleRequest,
   DescribeUserClbWafRegionsRequest,
   AddAntiInfoLeakRulesResponse,
-  DescribeWafThreatenIntelligenceResponse,
+  QPSPackageNew,
   AddDomainWhiteRuleRequest,
   DeleteAntiInfoLeakRuleResponse,
   IpHitItem,
@@ -195,6 +197,7 @@ import {
   DescribeInstancesResponse,
   AccessRuleTagInfo,
   IpAccessControlItem,
+  ModifyGenerateDealsResponse,
   UpsertSessionResponse,
   AccessLogItem,
   DeleteHostResponse,
@@ -265,6 +268,7 @@ import {
   VipInfo,
   DescribeAccessHistogramResponse,
   DescribeTopAttackDomainResponse,
+  Goods,
   UpsertIpAccessControlResponse,
   DescribeAccessHistogramRequest,
   DescribeWafThreatenIntelligenceRequest,
@@ -303,7 +307,7 @@ import {
   ModifyInstanceRenewFlagResponse,
   AddAttackWhiteRuleResponse,
   ClbHostResult,
-  QPSPackageNew,
+  DescribeWafThreatenIntelligenceResponse,
   DomainsPartInfo,
   DescribeAutoDenyIPRequest,
   AddSpartaProtectionRequest,
@@ -334,6 +338,7 @@ import {
   DeleteCCRuleRequest,
   DescribeAttackTypeResponse,
   DescribeCCRuleResponse,
+  ModifyGenerateDealsRequest,
   ModifyDomainWhiteRuleResponse,
   ModifyObjectResponse,
   ModifyAntiFakeUrlStatusResponse,
@@ -346,7 +351,7 @@ import {
   DeleteAntiInfoLeakRuleRequest,
   DescribeVipInfoResponse,
   DescribeRuleLimitRequest,
-  AccessRuleKeyValueInfo,
+  UserWhiteRuleItem,
   ModifyDomainsCLSStatusRequest,
   DeleteAccessExportRequest,
   DescribeTlsVersionResponse,
@@ -359,7 +364,7 @@ import {
   SearchAccessLogRequest,
   DomainURI,
   DescribeAttackWhiteRuleResponse,
-  UserWhiteRuleItem,
+  AccessRuleKeyValueInfo,
   DescribeObjectsRequest,
   ModifyHostStatusRequest,
 } from "./waf_models"
@@ -463,6 +468,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyCustomRuleResponse) => void
   ): Promise<ModifyCustomRuleResponse> {
     return this.request("ModifyCustomRule", req, cb)
+  }
+
+  /**
+   * clb-waf 设置防护域名的流量模式
+   */
+  async ModifyHostFlowMode(
+    req: ModifyHostFlowModeRequest,
+    cb?: (error: string, rep: ModifyHostFlowModeResponse) => void
+  ): Promise<ModifyHostFlowModeResponse> {
+    return this.request("ModifyHostFlowMode", req, cb)
   }
 
   /**
@@ -1463,13 +1478,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * clb-waf 设置防护域名的流量模式
+   * 提供给clb等使用的waf实例下单接口，目前只支持clb旗舰版实例的下单，该接口会进行入参校验，然后调用是否为收购用户，然后调用计费接口下单。目前只支持预付费下单，计费侧接口：https://tcb.woa.com/magical-brush/docs/754661947
    */
-  async ModifyHostFlowMode(
-    req: ModifyHostFlowModeRequest,
-    cb?: (error: string, rep: ModifyHostFlowModeResponse) => void
-  ): Promise<ModifyHostFlowModeResponse> {
-    return this.request("ModifyHostFlowMode", req, cb)
+  async ModifyGenerateDeals(
+    req: ModifyGenerateDealsRequest,
+    cb?: (error: string, rep: ModifyGenerateDealsResponse) => void
+  ): Promise<ModifyGenerateDealsResponse> {
+    return this.request("ModifyGenerateDeals", req, cb)
   }
 
   /**

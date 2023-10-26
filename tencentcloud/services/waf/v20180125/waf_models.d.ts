@@ -130,6 +130,21 @@ export interface DescribePeakValueResponse {
     RequestId?: string;
 }
 /**
+ * waf产品
+ */
+export interface ProductInfo {
+    /**
+     * 产品名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Name?: string;
+    /**
+     * 版本
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Value?: string;
+}
+/**
  * 出参
  */
 export interface DescribeAntiLeakageItem {
@@ -3000,6 +3015,86 @@ export interface GoodsDetailNew {
     ResourceId?: string;
 }
 /**
+ * 产品明细
+ */
+export interface GoodsDetail {
+    /**
+     * 时间间隔
+     */
+    TimeSpan: number;
+    /**
+     * 单位，支持m、y、d
+     */
+    TimeUnit: string;
+    /**
+     * 产品码
+     */
+    ProductCode: string;
+    /**
+     * 二级产品码
+     */
+    SubProductCode: string;
+    /**
+     * 计费策略id
+     */
+    Pid: number;
+    /**
+     * waf产品码
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ProductInfo?: Array<ProductInfo>;
+    /**
+     * waf实例名
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InstanceName?: string;
+    /**
+     * QPS数量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ElasticQps?: number;
+    /**
+     * 弹性账单
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    FlexBill?: number;
+    /**
+     * 1:自动续费，0:不自动续费
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AutoRenewFlag?: number;
+    /**
+     * waf购买的实际地域信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RealRegion?: number;
+    /**
+     * Waf实例对应的二级产品码
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Type?: string;
+    /**
+     * 计费细项标签数组
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    LabelTypes?: Array<string>;
+    /**
+     * 计费细项标签数量，一般和SvLabelType一一对应
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    LabelCounts?: Array<number | bigint>;
+    /**
+     * 变配使用，实例到期时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CurDeadline?: string;
+    /**
+     * 对存在的实例购买bot 或api 安全
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InstanceId?: string;
+}
+/**
  * DeleteIpAccessControl返回参数结构体
  */
 export interface DeleteIpAccessControlResponse {
@@ -3518,17 +3613,39 @@ export interface AddAntiInfoLeakRulesResponse {
     RequestId?: string;
 }
 /**
- * DescribeWafThreatenIntelligence返回参数结构体
+ * clb-waf QPS套餐 New
  */
-export interface DescribeWafThreatenIntelligenceResponse {
+export interface QPSPackageNew {
     /**
-     * WAF 威胁情报封禁信息
+     * 资源ID
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    WafThreatenIntelligenceDetails: WafThreatenIntelligenceDetails;
+    ResourceIds: string;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     * 过期时间
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    RequestId?: string;
+    ValidTime: string;
+    /**
+     * 是否自动续费，1：自动续费，0：不自动续费
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RenewFlag: number;
+    /**
+     * 套餐购买个数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Count: number;
+    /**
+     * 套餐购买地域，clb-waf暂时没有用到
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Region: string;
+    /**
+     * 计费项
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    BillingItem?: string;
 }
 /**
  * AddDomainWhiteRule请求参数结构体
@@ -4038,6 +4155,29 @@ export interface IpAccessControlItem {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     ValidStatus?: number;
+}
+/**
+ * ModifyGenerateDeals返回参数结构体
+ */
+export interface ModifyGenerateDealsResponse {
+    /**
+     * 计费下单响应结构体
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Data: DealData;
+    /**
+     * 1:成功，0:失败
+     */
+    Status: number;
+    /**
+     * 返回message
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ReturnMessage: string;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * UpsertSession返回参数结构体
@@ -5494,6 +5634,43 @@ export interface DescribeTopAttackDomainResponse {
     RequestId?: string;
 }
 /**
+ * 计费下单接口出入参Goods
+ */
+export interface Goods {
+    /**
+     * 付费类型，1:预付费，0:后付费
+     */
+    PayMode: number;
+    /**
+     * 商品数量
+     */
+    GoodsNum: number;
+    /**
+     * 商品明细
+     */
+    GoodsDetail: GoodsDetail;
+    /**
+     * 默认为0
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ProjectId: number;
+    /**
+     * 计费类目ID，对应cid
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    GoodsCategoryId?: number;
+    /**
+     * 平台类型，默认1
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Platform?: number;
+    /**
+     * 购买waf实例区域ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RegionId?: number;
+}
+/**
  * UpsertIpAccessControl返回参数结构体
  */
 export interface UpsertIpAccessControlResponse {
@@ -6408,39 +6585,17 @@ export interface ClbHostResult {
     FlowMode: number;
 }
 /**
- * clb-waf QPS套餐 New
+ * DescribeWafThreatenIntelligence返回参数结构体
  */
-export interface QPSPackageNew {
+export interface DescribeWafThreatenIntelligenceResponse {
     /**
-     * 资源ID
-  注意：此字段可能返回 null，表示取不到有效值。
+     * WAF 威胁情报封禁信息
      */
-    ResourceIds: string;
+    WafThreatenIntelligenceDetails: WafThreatenIntelligenceDetails;
     /**
-     * 过期时间
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
-    ValidTime: string;
-    /**
-     * 是否自动续费，1：自动续费，0：不自动续费
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    RenewFlag: number;
-    /**
-     * 套餐购买个数
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Count: number;
-    /**
-     * 套餐购买地域，clb-waf暂时没有用到
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Region: string;
-    /**
-     * 计费项
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    BillingItem?: string;
+    RequestId?: string;
 }
 /**
  * saas域名详情
@@ -7321,6 +7476,15 @@ export interface DescribeCCRuleResponse {
     RequestId?: string;
 }
 /**
+ * ModifyGenerateDeals请求参数结构体
+ */
+export interface ModifyGenerateDealsRequest {
+    /**
+     * 计费下单入参
+     */
+    Goods: Array<Goods>;
+}
+/**
  * ModifyDomainWhiteRule返回参数结构体
  */
 export interface ModifyDomainWhiteRuleResponse {
@@ -7517,19 +7681,21 @@ export interface DescribeRuleLimitRequest {
     InstanceId?: string;
 }
 /**
- * DescribeAccessIndex接口的出参
+ * 用户规则白名单规则子项
  */
-export interface AccessRuleKeyValueInfo {
+export interface UserWhiteRuleItem {
     /**
-     * 是否大小写敏感
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 匹配域
      */
-    CaseSensitive: boolean;
+    MatchField: string;
     /**
-     * 需要建立索引的键值对信息；最大只能配置100个键值对
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 匹配方法
      */
-    KeyValues: Array<AccessKeyValueInfo>;
+    MatchMethod: string;
+    /**
+     * 匹配内容
+     */
+    MatchContent: string;
 }
 /**
  * ModifyDomainsCLSStatus请求参数结构体
@@ -7812,21 +7978,19 @@ export interface DescribeAttackWhiteRuleResponse {
     RequestId?: string;
 }
 /**
- * 用户规则白名单规则子项
+ * DescribeAccessIndex接口的出参
  */
-export interface UserWhiteRuleItem {
+export interface AccessRuleKeyValueInfo {
     /**
-     * 匹配域
+     * 是否大小写敏感
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    MatchField: string;
+    CaseSensitive: boolean;
     /**
-     * 匹配方法
+     * 需要建立索引的键值对信息；最大只能配置100个键值对
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    MatchMethod: string;
-    /**
-     * 匹配内容
-     */
-    MatchContent: string;
+    KeyValues: Array<AccessKeyValueInfo>;
 }
 /**
  * DescribeObjects请求参数结构体

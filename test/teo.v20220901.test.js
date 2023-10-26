@@ -28,6 +28,16 @@ it("teo.v20220901.ModifyApplicationProxyRule", async function () {
     }
 })
 
+it("teo.v20220901.DeleteOriginGroup", async function () {
+    try {
+       const data = await client.DeleteOriginGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("teo.v20220901.CreateSharedCNAME", async function () {
     try {
        const data = await client.CreateSharedCNAME({})
@@ -51,6 +61,16 @@ it("teo.v20220901.DeleteZone", async function () {
 it("teo.v20220901.CreatePurgeTask", async function () {
     try {
        const data = await client.CreatePurgeTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("teo.v20220901.CreateOriginGroup", async function () {
+    try {
+       const data = await client.CreateOriginGroup({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -271,6 +291,16 @@ it("teo.v20220901.DescribeRulesSetting", async function () {
 it("teo.v20220901.DescribeAccelerationDomains", async function () {
     try {
        const data = await client.DescribeAccelerationDomains({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("teo.v20220901.ModifyOriginGroup", async function () {
+    try {
+       const data = await client.ModifyOriginGroup({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -12969,6 +12969,11 @@ export interface FixBaselineDetectResponse {
  */
 export interface CreateScanMalwareSettingResponse {
     /**
+     * 任务id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TaskId?: number;
+    /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
@@ -22489,6 +22494,27 @@ export interface Filter {
  */
 export declare type DescribeAssetMachineTagTopRequest = null;
 /**
+ * 授权版本白名单配置信息
+ */
+export interface VersionWhiteConfig {
+    /**
+     * 到期天数
+     */
+    Deadline?: number;
+    /**
+     * 授权数量
+     */
+    LicenseNum?: number;
+    /**
+     * 是否可申请
+     */
+    IsApplyFor?: boolean;
+    /**
+     * 类型
+     */
+    SourceType?: number;
+}
+/**
  * DescribeAgentInstallationToken请求参数结构体
  */
 export interface DescribeAgentInstallationTokenRequest {
@@ -24516,6 +24542,18 @@ export interface DeleteMachineClearHistoryResponse {
  * DescribeLicenseWhiteConfig返回参数结构体
  */
 export interface DescribeLicenseWhiteConfigResponse {
+    /**
+     * 旗舰版 配置信息
+     */
+    FlagShip?: VersionWhiteConfig;
+    /**
+     * 专业版 配置信息
+     */
+    Professional?: VersionWhiteConfig;
+    /**
+     * 普惠版 配置信息
+     */
+    PrattWhitney?: VersionWhiteConfig;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */

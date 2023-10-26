@@ -18856,7 +18856,7 @@ export interface DeleteWatermarkTemplateResponse {
  */
 export interface DeleteQualityInspectTemplateRequest {
     /**
-     * 音画质检测模板号。
+     * 音画质检测模板 ID。
      */
     Definition: number;
     /**

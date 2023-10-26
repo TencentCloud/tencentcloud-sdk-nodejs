@@ -84,6 +84,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyCustomRule", req, cb);
     }
     /**
+     * clb-waf 设置防护域名的流量模式
+     */
+    async ModifyHostFlowMode(req, cb) {
+        return this.request("ModifyHostFlowMode", req, cb);
+    }
+    /**
      * 设置套餐实例的弹性qps上限
      */
     async ModifyInstanceQpsLimit(req, cb) {
@@ -685,10 +691,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyUserSignatureRule", req, cb);
     }
     /**
-     * clb-waf 设置防护域名的流量模式
+     * 提供给clb等使用的waf实例下单接口，目前只支持clb旗舰版实例的下单，该接口会进行入参校验，然后调用是否为收购用户，然后调用计费接口下单。目前只支持预付费下单，计费侧接口：https://tcb.woa.com/magical-brush/docs/754661947
      */
-    async ModifyHostFlowMode(req, cb) {
-        return this.request("ModifyHostFlowMode", req, cb);
+    async ModifyGenerateDeals(req, cb) {
+        return this.request("ModifyGenerateDeals", req, cb);
     }
     /**
      * 修改实例的名称

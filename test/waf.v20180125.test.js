@@ -108,6 +108,16 @@ it("waf.v20180125.ModifyCustomRule", async function () {
     }
 })
 
+it("waf.v20180125.ModifyHostFlowMode", async function () {
+    try {
+       const data = await client.ModifyHostFlowMode({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("waf.v20180125.ModifyInstanceQpsLimit", async function () {
     try {
        const data = await client.ModifyInstanceQpsLimit({})
@@ -1098,9 +1108,9 @@ it("waf.v20180125.ModifyUserSignatureRule", async function () {
     }
 })
 
-it("waf.v20180125.ModifyHostFlowMode", async function () {
+it("waf.v20180125.ModifyGenerateDeals", async function () {
     try {
-       const data = await client.ModifyHostFlowMode({})
+       const data = await client.ModifyGenerateDeals({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

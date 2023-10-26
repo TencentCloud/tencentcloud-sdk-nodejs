@@ -300,6 +300,11 @@ httpProfile.setEndpoint("file.test.ess.tencent.cn");
     CreateFlowByFiles(req: CreateFlowByFilesRequest, cb?: (error: string, rep: CreateFlowByFilesResponse) => void): Promise<CreateFlowByFilesResponse>;
     /**
      * 本接口（CreateSeal）用于创建企业电子印章，支持创建企业公章，合同章，财务专用章和人事专用章创建。
+
+1. 可以**通过图片**创建印章，图片最大5MB
+2. 可以**系统创建**创建印章, 系统创建的印章样子下图(样式可以调整)
+
+![image](https://dyn.ess.tencent.cn/guide/capi/CreateSealByImage.png)
      */
     CreateSeal(req: CreateSealRequest, cb?: (error: string, rep: CreateSealResponse) => void): Promise<CreateSealResponse>;
     /**

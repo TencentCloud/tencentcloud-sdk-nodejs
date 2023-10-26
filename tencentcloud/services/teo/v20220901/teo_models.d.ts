@@ -152,11 +152,11 @@ export interface DescribeOriginGroupResponse {
     /**
      * 记录总数。
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 源站组信息。
      */
-    OriginGroups: Array<OriginGroup>;
+    OriginGroups?: Array<OriginGroup>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -373,6 +373,45 @@ export interface DescribeZonesRequest {
     Direction?: string;
 }
 /**
+ * 离线日志详细信息
+ */
+export interface L4OfflineLog {
+    /**
+     * 四层代理实例 ID。
+     */
+    ProxyId?: string;
+    /**
+     * 日志所属区域，取值有：
+  <li>mainland：中国大陆境内;</li>
+  <li>overseas：全球（不含中国大陆）。</li>
+     */
+    Area?: string;
+    /**
+     * 离线日志数据包名。
+     */
+    LogPacketName?: string;
+    /**
+     * 离线日志下载地址。
+     */
+    Url?: string;
+    /**
+     * 日志打包时间，此参数已经废弃。
+     */
+    LogTime?: number;
+    /**
+     * 日志打包开始时间。
+     */
+    LogStartTime?: string;
+    /**
+     * 日志打包结束时间。
+     */
+    LogEndTime?: string;
+    /**
+     * 日志大小，单位为 Byte。
+     */
+    Size?: number;
+}
+/**
  * 最新IP白名单列表相比于当前IP白名单列表的区别
  */
 export interface DiffIPWhitelist {
@@ -451,46 +490,30 @@ export interface OriginRecord {
      */
     Record: string;
     /**
+     * 源站类型，取值有：
+  <li>IP_DOMAIN：IPV4、IPV6、域名类型源站；</li>
+  <li>COS：COS源。</li>
+  <li>AWS_S3：AWS S3对象存储源站。</li>
+     */
+    Type?: string;
+    /**
      * 源站记录ID。
      */
     RecordId?: string;
     /**
-     * 源站端口，取值范围：[1-65535]。
-     */
-    Port?: number;
-    /**
-     * 当源站配置类型ConfigurationType=weight时，表示权重。
-  不配置权重信息时，所有源站组记录统一填写为0或者不填写，表示多个源站轮询回源。
-  配置权重信息时，取值为[1-100]，多个源站权重总和应为100，表示多个源站按照权重回源。
-  当源站配置类型ConfigurationType=proto时，表示权重。
-  不配置权重信息时，所有源站组记录统一填写为0或者不填写，表示多个源站轮询回源。
-  配置权重信息时，取值为[1-100]，源站组内Proto相同的多个源站权重总和应为100，表示多个源站按照权重回源。
+     * 源站权重，取值为0-100, 不填表示不设置权重，由系统自由调度，填0表示权重为0, 流量将不会调度到此源站。
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     Weight?: number;
     /**
-     * 当源站配置类型ConfigurationType=proto时，表示源站的协议类型，将按照客户端请求协议回到相应的源站，取值有：
-  <li>http：HTTP协议源站；</li>
-  <li>https：HTTPS协议源站。</li>
-     */
-    Proto?: string;
-    /**
-     * 当源站配置类型ConfigurationType=area时，表示区域，为空表示全部地区。取值为iso-3166中alpha-2编码或者大洲区域代码。大洲区域代码取值为：
-  <li>Asia：亚洲；</li>
-  <li>Europe：欧洲；</li>
-  <li>Africa：非洲；</li>
-  <li>Oceania：大洋洲；</li>
-  <li>Americas：美洲。</li>源站组记录中，至少需要有一项为全部地区。
-     */
-    Area?: Array<string>;
-    /**
-     * 当源站类型OriginType=third_part时有效
-  是否私有鉴权，取值有：
+     * 是否私有鉴权，当源站类型 RecordType=COS/AWS_S3 时生效，取值有：
   <li>true：使用私有鉴权；</li>
   <li>false：不使用私有鉴权。</li>不填写，默认值为：false。
+  
      */
     Private?: boolean;
     /**
-     * 当源站类型Private=true时有效，表示私有鉴权使用参数。
+     * 私有鉴权参数，当源站类型Private=true时有效。
      */
     PrivateParameters?: Array<PrivateParameter>;
 }
@@ -922,34 +945,13 @@ export interface BotUserRule {
     RedirectUrl?: string;
 }
 /**
- * 源站配置。
+ * ModifyOriginGroup返回参数结构体
  */
-export interface Origin {
+export interface ModifyOriginGroupResponse {
     /**
-     * 主源站列表。
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
-    Origins?: Array<string>;
-    /**
-     * 备源站列表。
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    BackupOrigins?: Array<string>;
-    /**
-     * 回源协议配置，取值有：
-  <li>http：强制 http 回源；</li>
-  <li>follow：协议跟随回源；</li>
-  <li>https：强制 https 回源。</li>
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    OriginPullProtocol?: string;
-    /**
-     * 源站为腾讯云 COS 时，是否为私有访问 bucket，取值有：
-  <li>on：私有访问；</li>
-  <li>off：公共访问。</li>
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    CosPrivateAccess?: string;
+    RequestId?: string;
 }
 /**
  * DeleteAccelerationDomains请求参数结构体
@@ -1397,6 +1399,19 @@ export interface ExceptConfig {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     ExceptUserRules?: Array<ExceptUserRule>;
+}
+/**
+ * DeleteOriginGroup请求参数结构体
+ */
+export interface DeleteOriginGroupRequest {
+    /**
+     * 站点ID。
+     */
+    ZoneId: string;
+    /**
+     * 源站组ID，此参数必填。
+     */
+    GroupId?: string;
 }
 /**
  * 别称域名信息。
@@ -2176,7 +2191,31 @@ export interface ModifyAccelerationDomainRequest {
     /**
      * 源站信息。
      */
-    OriginInfo: OriginInfo;
+    OriginInfo?: OriginInfo;
+    /**
+     * 回源协议，取值有：
+  <li>FOLLOW: 协议跟随；</li>
+  <li>HTTP: HTTP协议回源；</li>
+  <li>HTTPS: HTTPS协议回源。</li>
+  <li>不填保持原有配置。</li>
+     */
+    OriginProtocol?: string;
+    /**
+     * HTTP回源端口，取值为1-65535，当OriginProtocol=FOLLOW/HTTP时生效, 不填保持原有配置。
+     */
+    HttpOriginPort?: number;
+    /**
+     * HTTPS回源端口，取值为1-65535，当OriginProtocol=FOLLOW/HTTPS时生效，不填保持原有配置。
+     */
+    HttpsOriginPort?: number;
+    /**
+     * IPv6状态，取值有：
+  <li>follow：遵循站点IPv6配置；</li>
+  <li>on：开启状态；</li>
+  <li>off：关闭状态。</li>
+  <li>不填保持原有配置。</li>
+     */
+    IPv6Status?: string;
 }
 /**
  * DescribeRules请求参数结构体
@@ -2312,6 +2351,32 @@ export interface AccelerationDomain {
      */
     OriginDetail?: OriginDetail;
     /**
+     * 回源协议，取值有：
+  <li>FOLLOW: 协议跟随；</li>
+  <li>HTTP: HTTP协议回源；</li>
+  <li>HTTPS: HTTPS协议回源。</li>
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    OriginProtocol?: string;
+    /**
+     * HTTP回源端口。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    HttpOriginPort?: number;
+    /**
+     * HTTPS回源端口。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    HttpsOriginPort?: number;
+    /**
+     * IPv6状态，取值有：
+  <li>follow：遵循站点IPv6配置；</li>
+  <li>on：开启状态；</li>
+  <li>off：关闭状态。</li>
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IPv6Status?: string;
+    /**
      * CNAME 地址。
      */
     Cname?: string;
@@ -2391,6 +2456,36 @@ export interface RateLimitTemplateDetail {
      * 统计周期，取值范围0-120秒。
      */
     Period?: number;
+}
+/**
+ * 源站配置。
+ */
+export interface Origin {
+    /**
+     * 主源站列表。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Origins?: Array<string>;
+    /**
+     * 备源站列表。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    BackupOrigins?: Array<string>;
+    /**
+     * 回源协议配置，取值有：
+  <li>http：强制 http 回源；</li>
+  <li>follow：协议跟随回源；</li>
+  <li>https：强制 https 回源。</li>
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    OriginPullProtocol?: string;
+    /**
+     * 源站为腾讯云 COS 时，是否为私有访问 bucket，取值有：
+  <li>on：私有访问；</li>
+  <li>off：公共访问。</li>
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CosPrivateAccess?: string;
 }
 /**
  * Waf配置。
@@ -4367,26 +4462,34 @@ export interface RateLimitTemplate {
     RateLimitTemplateDetail?: RateLimitTemplateDetail;
 }
 /**
- * 该结构体表示各种场景、模式下，用于验证用户对站点域名的归属权内容。
+ * 源站组引用服务。
  */
-export interface OwnershipVerification {
+export interface OriginGroupReference {
     /**
-     * CNAME 接入，使用 DNS 解析验证时所需的信息。详情参考 [站点/域名归属权验证
-  ](https://cloud.tencent.com/document/product/1552/70789#7af6ecf8-afca-4e35-8811-b5797ed1bde5)。
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 引用服务类型，取值有：
+  <li>AccelerationDomain: 加速域名；</li>
+  <li>RuleEngine: 规则引擎；</li>
+  <li>Loadbalance: 负载均衡；</li>
+  <li>ApplicationProxy: 四层代理。</li>
      */
-    DnsVerification?: DnsVerification;
+    InstanceType?: string;
     /**
-     * CNAME 接入，使用文件验证时所需的信息。详情参考 [站点/域名归属权验证
-  ](https://cloud.tencent.com/document/product/1552/70789#7af6ecf8-afca-4e35-8811-b5797ed1bde5)。
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 引用类型的实例ID。
      */
-    FileVerification?: FileVerification;
+    InstanceId?: string;
     /**
-     * NS 接入，切换 DNS 服务器所需的信息。详情参考 [修改 DNS 服务器](https://cloud.tencent.com/document/product/1552/90452)。
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 应用类型的实例名称。
      */
-    NsVerification?: NsVerification;
+    InstanceName?: string;
+}
+/**
+ * ModifyHostsCertificate返回参数结构体
+ */
+export interface ModifyHostsCertificateResponse {
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * CreateRule请求参数结构体
@@ -5197,6 +5300,33 @@ export interface CacheKey {
     QueryString?: QueryString;
 }
 /**
+ * ModifyOriginGroup请求参数结构体
+ */
+export interface ModifyOriginGroupRequest {
+    /**
+     * 站点ID。
+     */
+    ZoneId: string;
+    /**
+     * 源站组ID，此参数必填。
+     */
+    GroupId?: string;
+    /**
+     * 源站组名称，不填保持原有配置，可输入1-200个字符，允许的字符为 a-z, A-Z, 0-9, _, - 。
+     */
+    Name?: string;
+    /**
+     * 源站组类型，取值有：
+  <li>GENERAL：通用型源站组，仅支持添加 IP/域名 源站，可以被域名服务、规则引擎、四层代理、通用型负载均衡引用；</li>
+  <li>HTTP： HTTP专用型源站组，支持添加 IP/域名、对象存储源站，无法被四层代理引用。</li>不填保持原有配置。
+     */
+    Type?: string;
+    /**
+     * 源站记录信息，不填保持原有配置。
+     */
+    Records?: Array<OriginRecord>;
+}
+/**
  * DownloadL4Logs返回参数结构体
  */
 export interface DownloadL4LogsResponse {
@@ -5289,17 +5419,9 @@ export interface ModifyApplicationProxyStatusRequest {
     Status: string;
 }
 /**
- * DescribeZones返回参数结构体
+ * DeleteOriginGroup返回参数结构体
  */
-export interface DescribeZonesResponse {
-    /**
-     * 符合条件的站点个数。
-     */
-    TotalCount?: number;
-    /**
-     * 站点详细信息。
-     */
-    Zones?: Array<Zone>;
+export interface DeleteOriginGroupResponse {
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -5412,9 +5534,13 @@ export interface PartialModule {
     Include?: Array<number | bigint>;
 }
 /**
- * ModifyHostsCertificate返回参数结构体
+ * CreateOriginGroup返回参数结构体
  */
-export interface ModifyHostsCertificateResponse {
+export interface CreateOriginGroupResponse {
+    /**
+     * 源站组ID。
+     */
+    OriginGroupId?: string;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -5483,6 +5609,30 @@ export interface CreateAccelerationDomainRequest {
      * 源站信息。
      */
     OriginInfo: OriginInfo;
+    /**
+     * 回源协议，取值有：
+  <li>FOLLOW: 协议跟随；</li>
+  <li>HTTP: HTTP协议回源；</li>
+  <li>HTTPS: HTTPS协议回源。</li>
+  <li>不填默认为： FOLLOW。</li>
+     */
+    OriginProtocol?: string;
+    /**
+     * HTTP回源端口，取值为1-65535，当OriginProtocol=FOLLOW/HTTP时生效, 不填默认为80。
+     */
+    HttpOriginPort?: number;
+    /**
+     * HTTPS回源端口，取值为1-65535，当OriginProtocol=FOLLOW/HTTPS时生效，不填默认为443。
+     */
+    HttpsOriginPort?: number;
+    /**
+     * IPv6状态，取值有：
+  <li>follow：遵循站点IPv6配置；</li>
+  <li>on：开启状态；</li>
+  <li>off：关闭状态。</li>
+  <li>不填默认为：follow。</li>
+     */
+    IPv6Status?: string;
 }
 /**
  * 缓存遵循源站配置
@@ -5592,16 +5742,20 @@ export interface TopDetailData {
  */
 export interface DescribeOriginGroupRequest {
     /**
-     * 分页查询偏移量，默认为0。
+     * 站点ID，此参数必填。
      */
-    Offset: number;
+    ZoneId?: string;
     /**
-     * 分页查询限制数目，默认为10，取值：1-1000。
+     * 分页查询偏移量，不填默认为0。
      */
-    Limit: number;
+    Offset?: number;
+    /**
+     * 分页查询限制数目，不填默认为20，取值：1-1000。
+     */
+    Limit?: number;
     /**
      * 过滤条件，Filters.Values的上限为20。详细的过滤条件如下：
-  <li>zone-id<br>   按照【<strong>站点ID</strong>】进行过滤。站点ID形如：zone-20hzkd4rdmy0<br>   类型：String<br>   必选：否<br>   模糊查询：不支持</li><li>origin-group-id<br>   按照【<strong>源站组ID</strong>】进行过滤。源站组ID形如：origin-2ccgtb24-7dc5-46s2-9r3e-95825d53dwe3a<br>   类型：String<br>   必选：否<br>   模糊查询：不支持</li><li>origin-group-name<br>   按照【<strong>源站组名称</strong>】进行过滤<br>   类型：String<br>   必选：否<br>   模糊查询：支持。使用模糊查询时，仅支持填写一个源站组名称</li>
+  <li>origin-group-id<br>   按照【<strong>源站组ID</strong>】进行过滤。源站组ID形如：origin-2ccgtb24-7dc5-46s2-9r3e-95825d53dwe3a<br>   模糊查询：不支持</li><li>origin-group-name<br>   按照【<strong>源站组名称</strong>】进行过滤<br>   模糊查询：支持。使用模糊查询时，仅支持填写一个源站组名称</li>
      */
     Filters?: Array<AdvancedFilter>;
 }
@@ -5847,43 +6001,21 @@ export interface FailReason {
  */
 export declare type DescribeRulesSettingRequest = null;
 /**
- * 离线日志详细信息
+ * DescribeZones返回参数结构体
  */
-export interface L4OfflineLog {
+export interface DescribeZonesResponse {
     /**
-     * 四层代理实例 ID。
+     * 符合条件的站点个数。
      */
-    ProxyId?: string;
+    TotalCount?: number;
     /**
-     * 日志所属区域，取值有：
-  <li>mainland：中国大陆境内;</li>
-  <li>overseas：全球（不含中国大陆）。</li>
+     * 站点详细信息。
      */
-    Area?: string;
+    Zones?: Array<Zone>;
     /**
-     * 离线日志数据包名。
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
-    LogPacketName?: string;
-    /**
-     * 离线日志下载地址。
-     */
-    Url?: string;
-    /**
-     * 日志打包时间，此参数已经废弃。
-     */
-    LogTime?: number;
-    /**
-     * 日志打包开始时间。
-     */
-    LogStartTime?: string;
-    /**
-     * 日志打包结束时间。
-     */
-    LogEndTime?: string;
-    /**
-     * 日志大小，单位为 Byte。
-     */
-    Size?: number;
+    RequestId?: string;
 }
 /**
  * ModifyAliasDomain返回参数结构体
@@ -6114,13 +6246,15 @@ export interface Resource {
     ZoneNumber?: number;
 }
 /**
- * 源站记录私有鉴权参数
+ * 对象存储源站记录私有鉴权参数
  */
 export interface PrivateParameter {
     /**
      * 私有鉴权参数名称，取值有：
   <li>AccessKeyId：鉴权参数Access Key ID；</li>
-  <li>SecretAccessKey：鉴权参数Secret Access Key。</li>
+  <li>SecretAccessKey：鉴权参数Secret Access Key；</li>
+  <li>SignatureVersion：鉴权版本，v2或者v4；</li>
+  <li>Region：存储桶地域。</li>
      */
     Name: string;
     /**
@@ -6245,6 +6379,29 @@ export interface Quota {
     Type: string;
 }
 /**
+ * CreateOriginGroup请求参数结构体
+ */
+export interface CreateOriginGroupRequest {
+    /**
+     * 站点ID。
+     */
+    ZoneId: string;
+    /**
+     * 源站组名称，可输入1-200个字符，允许的字符为 a-z, A-Z, 0-9, _, - 。
+     */
+    Name?: string;
+    /**
+     * 源站组类型，此参数必填，取值有：
+  <li>GENERAL：通用型源站组，仅支持添加 IP/域名 源站，可以被域名服务、规则引擎、四层代理、通用型负载均衡引用；</li>
+  <li>HTTP： HTTP专用型源站组，支持添加 IP/域名、对象存储源站，无法被四层代理引用。</li>
+     */
+    Type?: string;
+    /**
+     * 源站记录信息，此参数必填。
+     */
+    Records?: Array<OriginRecord>;
+}
+/**
  * DescribeTimingL4Data请求参数结构体
  */
 export interface DescribeTimingL4DataRequest {
@@ -6359,6 +6516,28 @@ export interface CreateSharedCNAMEResponse {
     RequestId?: string;
 }
 /**
+ * 该结构体表示各种场景、模式下，用于验证用户对站点域名的归属权内容。
+ */
+export interface OwnershipVerification {
+    /**
+     * CNAME 接入，使用 DNS 解析验证时所需的信息。详情参考 [站点/域名归属权验证
+  ](https://cloud.tencent.com/document/product/1552/70789#7af6ecf8-afca-4e35-8811-b5797ed1bde5)。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DnsVerification?: DnsVerification;
+    /**
+     * CNAME 接入，使用文件验证时所需的信息。详情参考 [站点/域名归属权验证
+  ](https://cloud.tencent.com/document/product/1552/70789#7af6ecf8-afca-4e35-8811-b5797ed1bde5)。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    FileVerification?: FileVerification;
+    /**
+     * NS 接入，切换 DNS 服务器所需的信息。详情参考 [修改 DNS 服务器](https://cloud.tencent.com/document/product/1552/90452)。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    NsVerification?: NsVerification;
+}
+/**
  * DescribePurgeTasks返回参数结构体
  */
 export interface DescribePurgeTasksResponse {
@@ -6446,48 +6625,35 @@ export interface DescribeDDoSAttackEventRequest {
  */
 export interface OriginGroup {
     /**
-     * 站点ID。
-     */
-    ZoneId?: string;
-    /**
-     * 站点名称。
-     */
-    ZoneName?: string;
-    /**
      * 源站组ID。
      */
-    OriginGroupId?: string;
-    /**
-     * 源站类型，取值有：
-  <li>self：自有源站；</li>
-  <li>third_party：第三方源站；</li>
-  <li>cos：腾讯云COS源站。</li>
-     */
-    OriginType?: string;
+    GroupId?: string;
     /**
      * 源站组名称。
      */
-    OriginGroupName?: string;
+    Name?: string;
     /**
-     * 源站配置类型，当OriginType=self时，取值有：
-  <li>area：按区域配置；</li>
-  <li>weight： 按权重配置。</li>
-  <li>proto： 按HTTP协议配置。</li>当OriginType=third_party/cos时放空。
+     * 源站组类型，取值有：
+  <li>GENERAL：通用型源站组；</li>
+  <li>HTTP： HTTP专用型源站组。</li>
      */
-    ConfigurationType?: string;
+    Type?: string;
     /**
      * 源站记录信息。
      */
-    OriginRecords?: Array<OriginRecord>;
+    Records?: Array<OriginRecord>;
+    /**
+     * 源站组被引用实例列表。
+     */
+    References?: Array<OriginGroupReference>;
+    /**
+     * 源站组创建时间。
+     */
+    CreateTime?: string;
     /**
      * 源站组更新时间。
      */
     UpdateTime?: string;
-    /**
-     * 当OriginType=self时，表示回源Host。
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    HostHeader?: string;
 }
 /**
  * ModifySecurityIPGroup请求参数结构体
@@ -6644,8 +6810,10 @@ export interface CreateSharedCNAMERequest {
     ZoneId: string;
     /**
      * 共享 CNAME 前缀。请输入合法的域名前缀，例如"test-api"、"test-api.com"，限制输入 50 个字符。
-  共享 CNAME 完整格式为：<自定义前缀>+<zoneid中的12位随机字符串>+"share.eo.dnse[0-5].com"。例如前缀传入 example.com，EO 会为您创建共享 CNAME：example.com.sai2ig51kaa5.eo.dns2.com
-  示例值：example.com
+  
+  共享 CNAME 完整格式为：<自定义前缀>+<zoneid中的12位随机字符串>+"share.eo.dnse[0-5].com"。
+  
+  例如前缀传入 example.com，EO 会为您创建共享 CNAME：example.com.sai2ig51kaa5.share.eo.dnse2.com
      */
     SharedCNAMEPrefix: string;
     /**

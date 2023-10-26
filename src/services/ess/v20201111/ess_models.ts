@@ -39,7 +39,8 @@ export interface CreateSealRequest {
    */
   Operator: UserInfo
   /**
-   * 电子印章名字，1-50个中文字符。
+   * 电子印章名字，1-50个中文字符
+注:`同一企业下电子印章名字不能相同`
    */
   SealName: string
   /**
@@ -48,19 +49,21 @@ export interface CreateSealRequest {
    */
   Agent?: Agent
   /**
-   * 本接口支持上传图片印章及系统直接生成印章；
-如果要使用系统生成印章，此值传：SealGenerateSourceSystem；
-如果要使用图片上传请传字段 Image
+   * 电子印章生成方式
+<ul>
+<li><strong>空值</strong>:(默认)使用上传的图片生成印章, 此时需要上传SealImage图片</li>
+<li><strong>SealGenerateSourceSystem</strong>: 系统生成印章, 无需上传SealImage图片</li>
+</ul>
    */
   GenerateSource?: string
   /**
-   * 电子印章类型：
-<ul>
-<li>OFFICIAL-公章；</li>
-<li>CONTRACT-合同专用章;</li>
-<li>FINANCE-合财务专用章;</li>
-<li>PERSONNEL-人事专用章.</li>
+   * 电子印章类型 , 可选类型如下: 
+<ul><li>**OFFICIAL**: (默认)公章</li>
+<li>**CONTRACT**: 合同专用章;</li>
+<li>**FINANCE**: 合财务专用章;</li>
+<li>**PERSONNEL**: 人事专用章</li>
 </ul>
+注: `同企业下只能有一个公章, 重复创建会报错`
    */
   SealType?: string
   /**
@@ -68,8 +71,11 @@ export interface CreateSealRequest {
    */
   FileName?: string
   /**
-   * 电子印章图片base64编码
-参数Image,FileToken或GenerateSource=SealGenerateSourceSystem三选一。
+   * 电子印章图片base64编码，大小不超过10M（原始图片不超过5M），只支持PNG或JPG图片格式
+
+注: `通过图片创建的电子印章，需电子签平台人工审核`
+
+
    */
   Image?: string
   /**
@@ -89,7 +95,11 @@ export interface CreateSealRequest {
    */
   Color?: string
   /**
-   * 企业印章横向文字，最多可填15个汉字（若超过印章最大宽度，优先压缩字间距，其次缩小字号）
+   * 企业印章横向文字，最多可填15个汉字  (若超过印章最大宽度，优先压缩字间距，其次缩小字号)
+横向文字的位置如下图中的"印章横向文字在这里"
+
+![image](https://dyn.ess.tencent.cn/guide/capi/CreateSealByImage2.png)
+
    */
   SealHorizontalText?: string
   /**
@@ -106,22 +116,16 @@ export interface CreateSealRequest {
    */
   FileToken?: string
   /**
-   * 印章样式，取值如下:
-
-<ul>
-<li>cycle:圆形印章;</li>
-<li>ellipse:椭圆印章;</li>
-<li>注：默认圆形印章</li>
-</ul>
+   * 印章样式, 可以选择的样式如下: 
+<ul><li>**cycle**:(默认)圆形印章</li>
+<li>**ellipse**:椭圆印章</li>
    */
   SealStyle?: string
   /**
-   * 印章尺寸取值描述：
-<ul>
-<li>42_42 圆形企业公章直径42mm；</li>
-<li>40_40 圆形企业印章直径40mm；</li>
-<li>45_30 椭圆形印章45mm x 30mm;</li>
-</ul>
+   * 印章尺寸取值描述, 可以选择的尺寸如下: 
+<ul><li> **42_42**: 圆形企业公章直径42mm, 当SealStyle是圆形的时候才有效</li>
+<li> **40_40**: 圆形企业印章直径40mm, 当SealStyle是圆形的时候才有效</li>
+<li> **45_30**: 椭圆形印章45mm x 30mm, 当SealStyle是椭圆的时候才有效</li></ul>
    */
   SealSize?: string
 }

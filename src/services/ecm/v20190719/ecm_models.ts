@@ -1092,11 +1092,11 @@ export interface DescribeRegionIpv6AddressesResponse {
   /**
    * 符合条件的 IPV6 数量。
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * IPV6 详细信息列表。
    */
-  AddressSet: Array<Address>
+  AddressSet?: Array<Address>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

@@ -1016,6 +1016,7 @@ import {
   ExportBaselineWeakPasswordListRequest,
   Filter,
   DescribeAssetMachineTagTopRequest,
+  VersionWhiteConfig,
   DescribeAgentInstallationTokenRequest,
   DescribeVulDefencePluginDetailResponse,
   JavaMemShellPluginInfo,

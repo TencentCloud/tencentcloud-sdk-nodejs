@@ -511,7 +511,7 @@ export interface DescribeCallDetailInfoRequest {
     StartTime: number;
     /**
      * 查询结束时间，本地unix时间戳，单位为秒（如：1590065877）
-  注意：DataType 不为null ，与StartTime间隔时间不超过1小时；DataType 为null，与StartTime间隔时间不超过4小时。
+  注意：查询起止时间需小于1小时，超过则返回null，即与StartTime间隔时间不超过1小时。
      */
     EndTime: number;
     /**
@@ -938,17 +938,17 @@ export interface DescribeCallDetailInfoResponse {
     /**
      * 返回的用户总条数
      */
-    Total: number;
+    Total?: number;
     /**
      * 用户信息列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    UserList: Array<UserInformation>;
+    UserList?: Array<UserInformation>;
     /**
      * 质量数据
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Data: Array<QualityData>;
+    Data?: Array<QualityData>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */

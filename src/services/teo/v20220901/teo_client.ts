@@ -32,6 +32,7 @@ import {
   AlgDetectRule,
   SecEntryValue,
   DescribeZonesRequest,
+  L4OfflineLog,
   DiffIPWhitelist,
   VerifyOwnershipRequest,
   DeleteSecurityIPGroupResponse,
@@ -53,7 +54,7 @@ import {
   RuleRewriteActionParams,
   CreateApplicationProxyResponse,
   BotUserRule,
-  Origin,
+  ModifyOriginGroupResponse,
   DeleteAccelerationDomainsRequest,
   ExceptUserRuleScope,
   ModifyAliasDomainRequest,
@@ -78,6 +79,7 @@ import {
   DescribeOriginProtectionResponse,
   BindZoneToPlanResponse,
   ExceptConfig,
+  DeleteOriginGroupRequest,
   AliasDomain,
   AclCondition,
   DescribeAliasDomainsRequest,
@@ -108,6 +110,7 @@ import {
   AccelerationDomain,
   DeleteSecurityIPGroupRequest,
   RateLimitTemplateDetail,
+  Origin,
   WafConfig,
   Grpc,
   SlowRateConfig,
@@ -177,7 +180,8 @@ import {
   DescribeOverviewL7DataResponse,
   Hsts,
   RateLimitTemplate,
-  OwnershipVerification,
+  OriginGroupReference,
+  ModifyHostsCertificateResponse,
   CreateRuleRequest,
   TemplateConfig,
   TopEntry,
@@ -209,12 +213,13 @@ import {
   ModifyApplicationProxyResponse,
   ModifySecurityIPGroupResponse,
   CacheKey,
+  ModifyOriginGroupRequest,
   DownloadL4LogsResponse,
   DescribeTimingL7CacheDataResponse,
   RateLimitIntelligence,
   IpTableConfig,
   ModifyApplicationProxyStatusRequest,
-  DescribeZonesResponse,
+  DeleteOriginGroupResponse,
   Header,
   RuleAndConditions,
   DropPageConfig,
@@ -222,7 +227,7 @@ import {
   DescribeIdentificationsRequest,
   DescribeDefaultCertificatesResponse,
   PartialModule,
-  ModifyHostsCertificateResponse,
+  CreateOriginGroupResponse,
   ModifyApplicationProxyRuleStatusRequest,
   AccelerateType,
   BindZoneToPlanRequest,
@@ -246,7 +251,7 @@ import {
   ModifyAccelerationDomainResponse,
   FailReason,
   DescribeRulesSettingRequest,
-  L4OfflineLog,
+  DescribeZonesResponse,
   ModifyAliasDomainResponse,
   RewriteAction,
   CheckCnameStatusRequest,
@@ -262,11 +267,13 @@ import {
   DownloadL7LogsResponse,
   AclUserRule,
   Quota,
+  CreateOriginGroupRequest,
   DescribeTimingL4DataRequest,
   DescribeHostsSettingRequest,
   SubRuleItem,
   CreateSecurityIPGroupResponse,
   CreateSharedCNAMEResponse,
+  OwnershipVerification,
   DescribePurgeTasksResponse,
   DescribeAvailablePlansResponse,
   DescribeDDoSAttackEventRequest,
@@ -308,6 +315,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 删除源站组，若源站组仍然被服务（例如：四层代理，域名服务，负载均衡，规则引起）引用，将不允许删除。
+   */
+  async DeleteOriginGroup(
+    req: DeleteOriginGroupRequest,
+    cb?: (error: string, rep: DeleteOriginGroupResponse) => void
+  ): Promise<DeleteOriginGroupResponse> {
+    return this.request("DeleteOriginGroup", req, cb)
+  }
+
+  /**
    * 创建共享 CNAME
    */
   async CreateSharedCNAME(
@@ -337,6 +354,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreatePurgeTaskResponse) => void
   ): Promise<CreatePurgeTaskResponse> {
     return this.request("CreatePurgeTask", req, cb)
+  }
+
+  /**
+   * 创建源站组
+   */
+  async CreateOriginGroup(
+    req: CreateOriginGroupRequest,
+    cb?: (error: string, rep: CreateOriginGroupResponse) => void
+  ): Promise<CreateOriginGroupResponse> {
+    return this.request("CreateOriginGroup", req, cb)
   }
 
   /**
@@ -563,6 +590,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAccelerationDomainsResponse) => void
   ): Promise<DescribeAccelerationDomainsResponse> {
     return this.request("DescribeAccelerationDomains", req, cb)
+  }
+
+  /**
+   * 修改源站组
+   */
+  async ModifyOriginGroup(
+    req: ModifyOriginGroupRequest,
+    cb?: (error: string, rep: ModifyOriginGroupResponse) => void
+  ): Promise<ModifyOriginGroupResponse> {
+    return this.request("ModifyOriginGroup", req, cb)
   }
 
   /**
