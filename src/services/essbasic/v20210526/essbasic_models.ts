@@ -5822,8 +5822,8 @@ export interface CreateSealByImageRequest {
   SealHorizontalText?: string
   /**
    * 印章样式, 可以选择的样式如下: 
-<ul><li>**cycle**:(默认)圆形印章</li>
-<li>**ellipse**:椭圆印章</li>
+<ul><li>**circle**:(默认)圆形印章</li>
+<li>**ellipse**:椭圆印章</li></ul>
    */
   SealStyle?: string
   /**

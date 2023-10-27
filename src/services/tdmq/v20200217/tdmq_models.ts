@@ -1171,6 +1171,48 @@ export interface DescribeRocketMQSourceClusterGroupListResponse {
 }
 
 /**
+ * rocketmq消息日志
+ */
+export interface RocketMQMsgLog {
+  /**
+   * 消息id
+   */
+  MsgId?: string
+  /**
+   * 消息tag
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MsgTag?: string
+  /**
+   * 消息key
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MsgKey?: string
+  /**
+   * 客户端地址
+   */
+  ProducerAddr?: string
+  /**
+   * 消息发送时间
+   */
+  ProduceTime?: string
+  /**
+   * pulsar消息id
+   */
+  PulsarMsgId?: string
+  /**
+   * 死信重发次数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DeadLetterResendTimes?: number
+  /**
+   * 死信重发成功次数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResendSuccessCount?: number
+}
+
+/**
  * SetRocketMQPublicAccessPoint返回参数结构体
  */
 export interface SetRocketMQPublicAccessPointResponse {
@@ -1967,22 +2009,19 @@ export interface ModifyEnvironmentRoleRequest {
 }
 
 /**
- * DescribeRocketMQConsumerConnections返回参数结构体
+ * DescribeRabbitMQQueues返回参数结构体
  */
-export interface DescribeRocketMQConsumerConnectionsResponse {
+export interface DescribeRabbitMQQueuesResponse {
   /**
-   * 总数目
-   */
-  TotalCount: number
-  /**
-   * 在线消费者信息
-   */
-  Connections: Array<RocketMQConsumerConnection>
-  /**
-   * 订阅组信息
+   * 列表信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  GroupDetail: RocketMQGroup
+  QueueInfoList?: Array<RabbitMQQueueListInfo>
+  /**
+   * 数量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalCount?: number
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2771,6 +2810,46 @@ export interface DescribePublishersRequest {
 }
 
 /**
+ * RabbitMQ队列列表成员信息
+ */
+export interface RabbitMQQueueListInfo {
+  /**
+   * 队列名
+   */
+  QueueName?: string
+  /**
+   * 备注说明
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Remark?: string
+  /**
+   * 消费者信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ConsumerDetail?: RabbitMQQueueListConsumerDetailInfo
+  /**
+   * 队列类型，取值 "classic"，"quorum"
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  QueueType?: string
+  /**
+   * 消息堆积数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MessageHeapCount?: number
+  /**
+   * 消息生产速率，每秒
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MessageRateIn?: number
+  /**
+   * 消息消费速率，每秒
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MessageRateOut?: number
+}
+
+/**
  * CreateRocketMQCluster请求参数结构体
  */
 export interface CreateRocketMQClusterRequest {
@@ -2860,45 +2939,17 @@ export interface ModifyRoleRequest {
 }
 
 /**
- * rocketmq消息日志
+ * 消息保留策略
  */
-export interface RocketMQMsgLog {
+export interface RetentionPolicy {
   /**
-   * 消息id
+   * 消息保留时长
    */
-  MsgId?: string
+  TimeInMinutes: number
   /**
-   * 消息tag
-注意：此字段可能返回 null，表示取不到有效值。
+   * 消息保留大小
    */
-  MsgTag?: string
-  /**
-   * 消息key
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  MsgKey?: string
-  /**
-   * 客户端地址
-   */
-  ProducerAddr?: string
-  /**
-   * 消息发送时间
-   */
-  ProduceTime?: string
-  /**
-   * pulsar消息id
-   */
-  PulsarMsgId?: string
-  /**
-   * 死信重发次数
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  DeadLetterResendTimes?: number
-  /**
-   * 死信重发成功次数
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ResendSuccessCount?: number
+  SizeInMB: number
 }
 
 /**
@@ -3121,6 +3172,29 @@ export interface RocketMQMessageTrack {
 }
 
 /**
+ * DescribeRocketMQConsumerConnections返回参数结构体
+ */
+export interface DescribeRocketMQConsumerConnectionsResponse {
+  /**
+   * 总数目
+   */
+  TotalCount: number
+  /**
+   * 在线消费者信息
+   */
+  Connections: Array<RocketMQConsumerConnection>
+  /**
+   * 订阅组信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  GroupDetail: RocketMQGroup
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteRocketMQVipInstance请求参数结构体
  */
 export interface DeleteRocketMQVipInstanceRequest {
@@ -3307,17 +3381,129 @@ export interface DeleteEnvironmentsResponse {
 }
 
 /**
- * DescribeRocketMQMigratingTopicList返回参数结构体
+ * DescribeRabbitMQQueueDetail返回参数结构体
  */
-export interface DescribeRocketMQMigratingTopicListResponse {
+export interface DescribeRabbitMQQueueDetailResponse {
   /**
-   * 总条数
+   * 队列名称
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  TotalCount?: number
+  InstanceId: string
   /**
-   * 迁移topic列表
+   * Vhost参数
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  MigrateTopics?: Array<MigrateTopic>
+  VirtualHost: string
+  /**
+   * 队列名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  QueueName: string
+  /**
+   * 队列类型,取值classic或quorum
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  QueueType: string
+  /**
+   * 在线消费者数量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Consumers: number
+  /**
+   * 持久标记
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Durable: boolean
+  /**
+   * 自动清除
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AutoDelete: boolean
+  /**
+   * 备注
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Remark: string
+  /**
+   * MessageTTL参数,classic类型专用
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MessageTTL: number
+  /**
+   * AutoExpire参数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AutoExpire: number
+  /**
+   * MaxLength参数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MaxLength: number
+  /**
+   * MaxLengthBytes参数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MaxLengthBytes: number
+  /**
+   * DeliveryLimit参数,quorum类型专用
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DeliveryLimit: number
+  /**
+   * OverflowBehaviour参数,取值为drop-head, reject-publish或reject-publish-dlx
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OverflowBehaviour: string
+  /**
+   * DeadLetterExchange参数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DeadLetterExchange: string
+  /**
+   * DeadLetterRoutingKey参数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DeadLetterRoutingKey: string
+  /**
+   * SingleActiveConsumer参数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SingleActiveConsumer: boolean
+  /**
+   * MaximumPriority参数,classic类型专用
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MaximumPriority: number
+  /**
+   * LazyMode参数,classic类型专用
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LazyMode: boolean
+  /**
+   * MasterLocator参数,classic类型专用
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MasterLocator: string
+  /**
+   * MaxInMemoryLength参数,quorum类型专用
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MaxInMemoryLength: number
+  /**
+   * MaxInMemoryBytes参数,quorum类型专用
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MaxInMemoryBytes: number
+  /**
+   * 创建时间戳,单位秒
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateTime: number
+  /**
+   * 节点
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Node: string
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3654,6 +3840,24 @@ FilterType = 2表示用户使用 BindingKey 过滤。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SubscriptionCount?: number
+}
+
+/**
+ * DescribeRocketMQMigratingTopicList返回参数结构体
+ */
+export interface DescribeRocketMQMigratingTopicListResponse {
+  /**
+   * 总条数
+   */
+  TotalCount?: number
+  /**
+   * 迁移topic列表
+   */
+  MigrateTopics?: Array<MigrateTopic>
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -6003,17 +6207,14 @@ export interface Cluster {
 }
 
 /**
- * 消息保留策略
+ * RabbitMQ队列列表消费者信息
  */
-export interface RetentionPolicy {
+export interface RabbitMQQueueListConsumerDetailInfo {
   /**
-   * 消息保留时长
+   * 消费者数量
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  TimeInMinutes: number
-  /**
-   * 消息保留大小
-   */
-  SizeInMB: number
+  ConsumersNumber: number
 }
 
 /**
@@ -6163,6 +6364,48 @@ export interface ModifyPublicNetworkAccessPointRequest {
    * 子网下面指定ip作为vpc接入点
    */
   SelectIp?: string
+}
+
+/**
+ * DescribeRabbitMQQueues请求参数结构体
+ */
+export interface DescribeRabbitMQQueuesRequest {
+  /**
+   * 实例Id
+   */
+  InstanceId: string
+  /**
+   * Vhost参数
+   */
+  VirtualHost: string
+  /**
+   * 分页Offset
+   */
+  Offset?: number
+  /**
+   * 分页Limit
+   */
+  Limit?: number
+  /**
+   * 搜索关键词
+   */
+  SearchWord?: string
+  /**
+   * 队列类型筛选，不填或 "all"：classic 和 quorum 队列；"classic"：筛选 classic 队列；"quorum"：筛选 quorum 队列
+   */
+  QueueType?: string
+  /**
+   * 排序依据的字段：
+MessageHeapCount - 消息堆积数；
+MessageRateInOut - 生产消费速率之和；
+MessageRateIn - 生产速率；
+MessageRateOut - 消费速率；
+   */
+  SortElement?: string
+  /**
+   * 排序顺序，ascend 或 descend
+   */
+  SortOrder?: string
 }
 
 /**
@@ -6809,6 +7052,24 @@ export interface ModifyEnvironmentRoleResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeRabbitMQQueueDetail请求参数结构体
+ */
+export interface DescribeRabbitMQQueueDetailRequest {
+  /**
+   * 实例Id
+   */
+  InstanceId: string
+  /**
+   * Vhost参数
+   */
+  VirtualHost: string
+  /**
+   * 队列名称
+   */
+  QueueName: string
 }
 
 /**

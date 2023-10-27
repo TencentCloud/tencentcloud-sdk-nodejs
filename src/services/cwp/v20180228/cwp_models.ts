@@ -15004,7 +15004,7 @@ export interface ReverseShell {
    */
   ProcTree?: string
   /**
-   * 检测方法
+   * 检测方法: 0行为分析; 1命令特征检测
    */
   DetectBy?: number
   /**
@@ -15017,6 +15017,11 @@ export interface ReverseShell {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Pid?: number
+  /**
+   * 威胁等级：0中危，1高危
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RiskLevel?: number
 }
 
 /**
@@ -29778,6 +29783,11 @@ export interface BruteAttackInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Location?: string
+  /**
+   * 威胁等级：0低危，1中危，2高危
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RiskLevel?: number
 }
 
 /**

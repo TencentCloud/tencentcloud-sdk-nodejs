@@ -187,11 +187,11 @@ export interface DescribeDatasourceConnectionResponse {
   /**
    * 数据连接总数
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 数据连接对象集合
    */
-  ConnectionSet: Array<DatasourceConnectionInfo>
+  ConnectionSet?: Array<DatasourceConnectionInfo>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -7796,6 +7796,10 @@ DatasourceConnectionType   （数据源连接连接类型）
    * 连接类型，支持Mysql/HiveCos/Kafka/DataLakeCatalog
    */
   DatasourceConnectionTypes?: Array<string>
+  /**
+   * 返回指定hive版本的数据源，该参数指定后，会过滤掉该参数指定版本以外的hive数据源，非hive数据源正常返回
+   */
+  HiveVersion?: Array<string>
 }
 
 /**

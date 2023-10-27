@@ -775,7 +775,7 @@ export interface ResetInstanceRequest {
   InstanceId: string
   /**
    * 指定有效的[镜像](https://cloud.tencent.com/document/product/213/4940)ID，格式形如`img-xxx`。镜像类型分为四种：<br/><li>公共镜像</li><li>自定义镜像</li><li>共享镜像</li><li>服务市场镜像</li><br/>可通过以下方式获取可用的镜像ID：<br/><li>`公共镜像`、`自定义镜像`、`共享镜像`的镜像ID可通过登录[控制台](https://console.cloud.tencent.com/cvm/image?rid=1&imageType=PUBLIC_IMAGE)查询；`服务镜像市场`的镜像ID可通过[云市场](https://market.cloud.tencent.com/list)查询。</li><li>通过调用接口 [DescribeImages](https://cloud.tencent.com/document/api/213/15715) ，取返回信息中的`ImageId`字段。</li>
-<br>默认取值：默认使用当前镜像。
+默认取值：默认使用当前镜像。
    */
   ImageId?: string
   /**
@@ -1861,7 +1861,7 @@ export interface DescribeInstanceInternetBandwidthConfigsResponse {
  */
 export interface RunSecurityServiceEnabled {
   /**
-   * 是否开启[云安全](/document/product/296)服务。取值范围：<br><li>TRUE：表示开启云安全服务<br><li>FALSE：表示不开启云安全服务<br><br>默认取值：TRUE。
+   * 是否开启[云安全](/document/product/296)服务。取值范围：<br><li>true：表示开启云安全服务<br><li>false：表示不开启云安全服务<br><br>默认取值：true。
    */
   Enabled?: boolean
 }
@@ -2290,7 +2290,7 @@ export interface InquiryPriceRunInstancesRequest {
    */
   EnhancedService?: EnhancedService
   /**
-   * 用于保证请求幂等性的字符串。该字符串由客户生成，需保证不同请求之间唯一，最大值不超过64个ASCII字符。若不指定该参数，则无法保证请求的幂等性。<br>更多详细信息请参阅：如何保证幂等性。
+   * 用于保证请求幂等性的字符串。该字符串由客户生成，需保证不同请求之间唯一，最大值不超过64个ASCII字符。若不指定该参数，则无法保证请求的幂等性。
    */
   ClientToken?: string
   /**
@@ -2309,6 +2309,10 @@ export interface InquiryPriceRunInstancesRequest {
    * 高性能计算集群ID。
    */
   HpcClusterId?: string
+  /**
+   * 实例启动模板。
+   */
+  LaunchTemplate?: LaunchTemplate
 }
 
 /**
@@ -3836,10 +3840,12 @@ BYOL: 自带许可（Bring Your Own License）
 export interface SpotMarketOptions {
   /**
    * 竞价出价
+注意：此字段可能返回 null，表示取不到有效值。
    */
   MaxPrice: string
   /**
    * 竞价请求类型，当前仅支持类型：one-time
+注意：此字段可能返回 null，表示取不到有效值。
    */
   SpotInstanceType?: string
 }
@@ -6002,7 +6008,7 @@ export interface InternetAccessible {
    */
   InternetMaxBandwidthOut?: number
   /**
-   * 是否分配公网IP。取值范围：<br><li>TRUE：表示分配公网IP<br><li>FALSE：表示不分配公网IP<br><br>当公网带宽大于0Mbps时，可自由选择开通与否，默认开通公网IP；当公网带宽为0，则不允许分配公网IP。该参数仅在RunInstances接口中作为入参使用。
+   * 是否分配公网IP。取值范围：<br><li>true：表示分配公网IP<br><li>false：表示不分配公网IP<br><br>当公网带宽大于0Mbps时，可自由选择开通与否，默认开通公网IP；当公网带宽为0，则不允许分配公网IP。该参数仅在RunInstances接口中作为入参使用。
    */
   PublicIpAssigned?: boolean
   /**

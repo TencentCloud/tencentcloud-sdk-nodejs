@@ -5632,21 +5632,21 @@ export interface PacketFilterRelation {
     ModifyTime: string;
 }
 /**
- * 四七层规则的
+ * 四七层规则对应实例与IP的关系
  */
 export interface RuleInstanceRelation {
     /**
      * 资源实例的IP
      */
-    EipList: Array<string>;
+    EipList?: Array<string>;
     /**
      * 资源实例的ID
      */
-    InstanceId: string;
+    InstanceId?: string;
     /**
      * 资源实例的Cname
      */
-    Cname: string;
+    Cname?: string;
 }
 /**
  * CreatePacketFilterConfig请求参数结构体

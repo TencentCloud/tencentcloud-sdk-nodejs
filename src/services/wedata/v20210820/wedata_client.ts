@@ -834,6 +834,7 @@ import {
   DagInstancesRequest,
   DryRunDIOfflineTaskResponse,
   FolderOpsDto,
+  TaskTag,
   DescribeTaskLockStatusRequest,
   DescribeBaselinesRequest,
   OfflineTaskAddParam,

@@ -39,7 +39,7 @@ import {
   AddAclRuleRequest,
   DescribeVpcFwGroupSwitchRequest,
   FwDeploy,
-  SyncFwOperateRequest,
+  CreateAlertCenterIsolateResponse,
   ModifyNatAcRuleRequest,
   ModifyAclRuleRequest,
   ModifyAcRuleResponse,
@@ -92,8 +92,9 @@ import {
   CreateVpcFwGroupResponse,
   VpcFwCvmInsInfo,
   DescribeEnterpriseSecurityGroupRuleRequest,
-  VpcRuleItem,
+  CreateAlertCenterRuleRequest,
   ModifyNatFwReSelectResponse,
+  CreateAlertCenterOmitRequest,
   DescribeVpcAcRuleRequest,
   VpcFwInstanceInfo,
   DescribeSwitchListsRequest,
@@ -109,7 +110,7 @@ import {
   VpcFwJoinInstanceType,
   DescribeSourceAssetRequest,
   SecurityGroupOrderIndexData,
-  AddVpcAcRuleRequest,
+  DescribeFwGroupInstanceInfoResponse,
   DescribeSourceAssetResponse,
   DescribeFwGroupInstanceInfoRequest,
   ModifyBlockIgnoreRuleRequest,
@@ -121,7 +122,7 @@ import {
   DescribeTLogIpListRequest,
   CommonFilter,
   DescribeNatFwInstancesInfoRequest,
-  DescribeFwGroupInstanceInfoResponse,
+  AddVpcAcRuleRequest,
   DescribeTableStatusRequest,
   ModifyNatSequenceRulesResponse,
   DescribeAssetSyncResponse,
@@ -173,6 +174,7 @@ import {
   DeleteResourceGroupRequest,
   CreateNatFwInstanceRequest,
   DescribeBlockByIpTimesListRequest,
+  VpcRuleItem,
   ModifyBlockTopRequest,
   RemoveEnterpriseSecurityGroupRuleResponse,
   NetInstancesInfo,
@@ -180,6 +182,7 @@ import {
   CreateAddressTemplateResponse,
   DescribeTableStatusResponse,
   ModifyEdgeIpSwitchRequest,
+  CreateAlertCenterOmitResponse,
   DescribeResourceGroupNewResponse,
   DescribeNatFwInstanceWithRegionResponse,
   DescribeResourceGroupNewRequest,
@@ -200,6 +203,7 @@ import {
   DescribeDefenseSwitchResponse,
   DescribeAcListsRequest,
   DescribeGuideScanInfoRequest,
+  SyncFwOperateRequest,
   UnHandleEvent,
   DescribeBlockIgnoreListResponse,
   ModifyVpcAcRuleResponse,
@@ -259,6 +263,7 @@ import {
   ModifyVpcFwGroupResponse,
   DeleteResourceGroupResponse,
   DeleteSecurityGroupRuleRequest,
+  CreateAlertCenterIsolateRequest,
   DescribeNatAcRuleRequest,
   FwVpcCidr,
   ModifyRunSyncAssetRequest,
@@ -284,6 +289,7 @@ import {
   ModifyTableStatusResponse,
   DescribeGuideScanInfoResponse,
   VpcFwInstance,
+  CreateAlertCenterRuleResponse,
   DescribeAddressTemplateListResponse,
 } from "./cfw_models"
 
@@ -743,6 +749,16 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
   }
 
   /**
+   * 用户告警中心-忽略处置按钮
+   */
+  async CreateAlertCenterOmit(
+    req: CreateAlertCenterOmitRequest,
+    cb?: (error: string, rep: CreateAlertCenterOmitResponse) => void
+  ): Promise<CreateAlertCenterOmitResponse> {
+    return this.request("CreateAlertCenterOmit", req, cb)
+  }
+
+  /**
    * 查询内网间访问控制列表
    */
   async DescribeVpcAcRule(
@@ -832,6 +848,16 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
     cb?: (error: string, rep: ModifyTableStatusResponse) => void
   ): Promise<ModifyTableStatusResponse> {
     return this.request("ModifyTableStatus", req, cb)
+  }
+
+  /**
+   * 用户告警中心-封隔离处置按钮
+   */
+  async CreateAlertCenterIsolate(
+    req: CreateAlertCenterIsolateRequest,
+    cb?: (error: string, rep: CreateAlertCenterIsolateResponse) => void
+  ): Promise<CreateAlertCenterIsolateResponse> {
+    return this.request("CreateAlertCenterIsolate", req, cb)
   }
 
   /**
@@ -1005,6 +1031,16 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
     cb?: (error: string, rep: SetNatFwEipResponse) => void
   ): Promise<SetNatFwEipResponse> {
     return this.request("SetNatFwEip", req, cb)
+  }
+
+  /**
+   * 用户告警中心-封禁、放通处置按钮
+   */
+  async CreateAlertCenterRule(
+    req: CreateAlertCenterRuleRequest,
+    cb?: (error: string, rep: CreateAlertCenterRuleResponse) => void
+  ): Promise<CreateAlertCenterRuleResponse> {
+    return this.request("CreateAlertCenterRule", req, cb)
   }
 
   /**

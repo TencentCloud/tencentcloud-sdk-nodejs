@@ -218,6 +218,16 @@ it("teo.v20220901.DescribeHostsSetting", async function () {
     }
 })
 
+it("teo.v20220901.DescribeSecurityTemplateBindings", async function () {
+    try {
+       const data = await client.DescribeSecurityTemplateBindings({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("teo.v20220901.DescribeAvailablePlans", async function () {
     try {
        const data = await client.DescribeAvailablePlans({})

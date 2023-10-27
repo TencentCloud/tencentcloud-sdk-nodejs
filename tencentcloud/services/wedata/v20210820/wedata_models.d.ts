@@ -16735,6 +16735,10 @@ export interface DescribeOperateOpsTasksRequest {
      * 资源组id,多个资源组id之间以英文字符逗号分隔
      */
     ExecutorGroupIdList?: string;
+    /**
+     * 任务标签
+     */
+    TaskTags?: Array<TaskTag>;
 }
 /**
  * 数据源对象
@@ -22364,6 +22368,19 @@ export interface FolderOpsDto {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     FindType?: string;
+}
+/**
+ * 任务标签，可用于检索任务的条件
+ */
+export interface TaskTag {
+    /**
+     * 标签名称
+     */
+    TagName: string;
+    /**
+     * 标签值列表
+     */
+    TagValues: Array<string>;
 }
 /**
  * DescribeTaskLockStatus请求参数结构体

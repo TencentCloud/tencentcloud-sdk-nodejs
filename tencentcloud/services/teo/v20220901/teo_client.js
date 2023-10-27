@@ -60,7 +60,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreatePurgeTask", req, cb);
     }
     /**
-     * 创建源站组
+     * 创建源站组，以源站组的方式管理业务源站。此处配置的源站组可于**添加加速域名**和**四层代理**等功能中引用。
      */
     async CreateOriginGroup(req, cb) {
         return this.request("CreateOriginGroup", req, cb);
@@ -154,6 +154,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeHostsSetting", req, cb);
     }
     /**
+     * 查询指定策略模板的绑定关系列表。
+     */
+    async DescribeSecurityTemplateBindings(req, cb) {
+        return this.request("DescribeSecurityTemplateBindings", req, cb);
+    }
+    /**
      * 查询当前账户可用套餐信息列表
      */
     async DescribeAvailablePlans(req, cb) {
@@ -204,7 +210,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeAccelerationDomains", req, cb);
     }
     /**
-     * 修改源站组
+     * 修改源站组配置，新提交的源站记录将会覆盖原有源站组中的源站记录。
      */
     async ModifyOriginGroup(req, cb) {
         return this.request("ModifyOriginGroup", req, cb);

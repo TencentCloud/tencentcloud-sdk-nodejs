@@ -745,6 +745,21 @@ export interface DataSearchBug {
     CWPFix?: number;
 }
 /**
+ * 安全中心资产标签
+ */
+export interface AssetTag {
+    /**
+     * 标签的key值,可以是字母、数字、下划线
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TagKey?: string;
+    /**
+     * 标签的vale值,可以是字母、数字、下划线
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TagValue?: string;
+}
+/**
  * 风险中心状态处理Key
  */
 export interface RiskCenterStatusKey {
@@ -773,6 +788,10 @@ export interface DescribeDomainAssetsRequest {
      * -
      */
     Filter?: Filter;
+    /**
+     * 安全中心自定义标签
+     */
+    Tags?: Array<AssetTag>;
 }
 /**
  * DescribeRiskCenterAssetViewCFGRiskList请求参数结构体
@@ -782,6 +801,10 @@ export interface DescribeRiskCenterAssetViewCFGRiskListRequest {
      * 过滤内容
      */
     Filter?: Filter;
+    /**
+     * 资产标签
+     */
+    Tags?: Array<AssetTag>;
 }
 /**
  * DescribeRiskCenterWebsiteRiskList返回参数结构体
@@ -836,7 +859,7 @@ export interface DeleteDomainAndIpRequest {
     /**
      * -
      */
-    Content: Array<PublicIpDomainListKey>;
+    Content?: Array<PublicIpDomainListKey>;
     /**
      * 是否保留路径配置，1：保留，其他：不保留，默认不传为不保留
      */
@@ -845,6 +868,14 @@ export interface DeleteDomainAndIpRequest {
      * 以后是否忽略该资产，，1：忽略，其他：不忽略，默认不传为忽略
      */
     IgnoreAsset?: number;
+    /**
+     * 资产标签
+     */
+    Tags?: Array<AssetTag>;
+    /**
+     * 删除类型，取值： ALL， 删除全部，将直接忽略Content的内容；                                           其他值 ,非全部，则Centent必填，  默认为其他值。
+     */
+    Type?: string;
 }
 /**
  * DescribeScanTaskList请求参数结构体
@@ -854,6 +885,10 @@ export interface DescribeScanTaskListRequest {
      * 过滤内容
      */
     Filter?: Filter;
+    /**
+     * 标签
+     */
+    Tags?: Array<Tags>;
 }
 /**
  * 任务ID列表Key
@@ -1269,6 +1304,10 @@ export interface DescribeRiskCenterAssetViewPortRiskListRequest {
      * 过滤内容
      */
     Filter?: Filter;
+    /**
+     * 资产标签
+     */
+    Tags?: Array<AssetTag>;
 }
 /**
  * StopRiskCenterTask返回参数结构体
@@ -1642,6 +1681,10 @@ export interface DescribeRiskCenterAssetViewWeakPasswordRiskListRequest {
      * 过滤内容
      */
     Filter?: Filter;
+    /**
+     * 资产标签
+     */
+    Tags?: Array<AssetTag>;
 }
 /**
  * 公网IP和域名资产列表key
@@ -1784,6 +1827,10 @@ export interface DescribePublicIpAssetsRequest {
      * filte过滤条件
      */
     Filter?: Filter;
+    /**
+     * 安全中心自定义标签
+     */
+    Tags?: Array<AssetTag>;
 }
 /**
  * 集群pod列表
@@ -2112,6 +2159,10 @@ export interface CreateRiskCenterScanTaskRequest {
      * 体检模式，0-标准模式，1-快速模式，2-高级模式，默认标准模式
      */
     TaskMode?: number;
+    /**
+     * 资产标签
+     */
+    Tags?: AssetTag;
 }
 /**
  * DescribeRiskCenterAssetViewCFGRiskList返回参数结构体
@@ -2191,6 +2242,10 @@ export interface DescribeRiskCenterVULViewVULRiskListRequest {
      * 过滤内容
      */
     Filter?: Filter;
+    /**
+     * 资产标签
+     */
+    Tags?: Array<AssetTag>;
 }
 /**
  * 漏洞风险高级配置
@@ -2315,6 +2370,21 @@ export interface ScanTaskInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     UserName?: string;
+}
+/**
+ * 主机标签信息
+ */
+export interface Tags {
+    /**
+     * 无
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TagKey?: string;
+    /**
+     * 无
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TagValue?: string;
 }
 /**
  * 漏洞视角的漏洞风险对象
@@ -2626,6 +2696,10 @@ export interface DescribeRiskCenterWebsiteRiskListRequest {
      * 过滤内容
      */
     Filter?: Filter;
+    /**
+     * 资产标签
+     */
+    Tags?: Array<AssetTag>;
 }
 /**
  * 风险详情
@@ -2925,6 +2999,10 @@ export interface DescribeRiskCenterPortViewPortRiskListRequest {
      * 过滤内容
      */
     Filter?: Filter;
+    /**
+     * 资产标签
+     */
+    Tags?: Array<AssetTag>;
 }
 /**
  * DescribeRiskCenterPortViewPortRiskList返回参数结构体
@@ -2967,6 +3045,19 @@ export interface DeleteDomainAndIpResponse {
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * 报告中的task_id list
+ */
+export interface ReportTaskIdList {
+    /**
+     * 任务id列表
+     */
+    TaskIdList: Array<string>;
+    /**
+     * 租户ID
+     */
+    AppId?: string;
 }
 /**
  * AddNewBindRoleUser返回参数结构体
@@ -3304,6 +3395,10 @@ export interface DescribeRiskCenterAssetViewVULRiskListRequest {
      * 过滤内容
      */
     Filter?: Filter;
+    /**
+     * 资产标签
+     */
+    Tags?: Array<AssetTag>;
 }
 /**
  * 配置风险高级配置
@@ -3327,9 +3422,13 @@ export interface TaskCenterCFGRiskInputParam {
  */
 export interface CreateDomainAndIpRequest {
     /**
-     * -
+     * 公网IP/域名
      */
     Content: Array<string>;
+    /**
+     * 资产标签
+     */
+    Tags?: Array<AssetTag>;
 }
 /**
  * 域名资产
@@ -3814,6 +3913,10 @@ export interface DescribeRiskCenterServerRiskListRequest {
      * 过滤内容
      */
     Filter?: Filter;
+    /**
+     * 资产标签
+     */
+    Tags?: Array<AssetTag>;
 }
 /**
  * clb实例和监听器信息
@@ -3984,11 +4087,15 @@ export interface DescribeRiskCenterAssetViewPortRiskListResponse {
  */
 export interface DescribeTaskLogURLRequest {
     /**
-     * 任务报告Id 列表
-     */
-    ReportItemKeyList: Array<ReportItemKey>;
-    /**
      * 0: 预览， 1: 下载
      */
     Type: number;
+    /**
+     * 任务报告Id 列表
+     */
+    ReportItemKeyList?: Array<ReportItemKey>;
+    /**
+     * 报告中任务id列表
+     */
+    ReportTaskIdList?: Array<ReportTaskIdList>;
 }

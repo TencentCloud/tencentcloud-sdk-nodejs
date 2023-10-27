@@ -298,9 +298,9 @@ it("tdmq.v20200217.DescribeEnvironmentAttributes", async function () {
     }
 })
 
-it("tdmq.v20200217.ImportRocketMQConsumerGroups", async function () {
+it("tdmq.v20200217.CreateCmqSubscribe", async function () {
     try {
-       const data = await client.ImportRocketMQConsumerGroups({})
+       const data = await client.CreateCmqSubscribe({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -648,6 +648,16 @@ it("tdmq.v20200217.DeleteRocketMQTopic", async function () {
     }
 })
 
+it("tdmq.v20200217.DescribeRabbitMQQueues", async function () {
+    try {
+       const data = await client.DescribeRabbitMQQueues({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tdmq.v20200217.ModifyCmqQueueAttribute", async function () {
     try {
        const data = await client.ModifyCmqQueueAttribute({})
@@ -661,6 +671,16 @@ it("tdmq.v20200217.ModifyCmqQueueAttribute", async function () {
 it("tdmq.v20200217.ModifyRocketMQInstanceSpec", async function () {
     try {
        const data = await client.ModifyRocketMQInstanceSpec({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tdmq.v20200217.ImportRocketMQConsumerGroups", async function () {
+    try {
+       const data = await client.ImportRocketMQConsumerGroups({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -928,16 +948,6 @@ it("tdmq.v20200217.CreateRole", async function () {
     }
 })
 
-it("tdmq.v20200217.CreateCmqSubscribe", async function () {
-    try {
-       const data = await client.CreateCmqSubscribe({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("tdmq.v20200217.ModifyRocketMQNamespace", async function () {
     try {
        const data = await client.ModifyRocketMQNamespace({})
@@ -991,6 +1001,16 @@ it("tdmq.v20200217.DescribePublishers", async function () {
 it("tdmq.v20200217.CreateRocketMQCluster", async function () {
     try {
        const data = await client.CreateRocketMQCluster({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tdmq.v20200217.DescribeRabbitMQQueueDetail", async function () {
+    try {
+       const data = await client.DescribeRabbitMQQueueDetail({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

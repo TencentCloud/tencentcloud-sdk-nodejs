@@ -2779,6 +2779,23 @@ export interface DescribeAntiInfoLeakageRulesRequest {
    * 域名
    */
   Domain: string
+  /**
+   * 翻页支持，读取偏移
+   */
+  Offset?: number
+  /**
+   * 翻页支持，读取长度限制
+   */
+  Limit?: number
+  /**
+   * 排序方式，asc或者desc
+   */
+  Order?: string
+  /**
+   * 过滤器,可以允许如下的值：
+RuleId,Match_field,Name,Action,Status
+   */
+  Filters?: Array<FiltersItemNew>
 }
 
 /**
@@ -6699,11 +6716,11 @@ export interface DescribeAntiInfoLeakageRulesResponse {
   /**
    * 记录条数
    */
-  Total: number
+  Total?: number
   /**
    * 规则列表
    */
-  RuleList: Array<DescribeAntiLeakageItem>
+  RuleList?: Array<DescribeAntiLeakageItem>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

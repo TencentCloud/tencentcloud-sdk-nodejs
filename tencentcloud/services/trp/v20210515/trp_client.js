@@ -65,6 +65,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeCustomRuleById", req, cb);
     }
     /**
+     * 支持增量查询扫码日志，通常提供给数据同步使用，调用时需要指定从哪一行开始查询数据
+     */
+    async DescribeRawScanLogs(req, cb) {
+        return this.request("DescribeRawScanLogs", req, cb);
+    }
+    /**
      * 异步导入激活码包，如果是第三方码包，需要域名跟配置的匹配
      */
     async CreateTraceCodesAsync(req, cb) {
@@ -83,10 +89,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeTraceCodes", req, cb);
     }
     /**
-     * 支持增量查询扫码日志，通常提供给数据同步使用，调用时需要指定从哪一行开始查询数据
+     * 查询安心计划二维码列表
      */
-    async DescribeRawScanLogs(req, cb) {
-        return this.request("DescribeRawScanLogs", req, cb);
+    async DescribePlanQRCodes(req, cb) {
+        return this.request("DescribePlanQRCodes", req, cb);
     }
     /**
      * 修改溯源信息的排序

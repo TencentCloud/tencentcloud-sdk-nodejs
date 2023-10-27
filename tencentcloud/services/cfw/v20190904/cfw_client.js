@@ -298,6 +298,12 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
         return this.request("ModifyVpcFwSequenceRules", req, cb);
     }
     /**
+     * 用户告警中心-忽略处置按钮
+     */
+    async CreateAlertCenterOmit(req, cb) {
+        return this.request("CreateAlertCenterOmit", req, cb);
+    }
+    /**
      * 查询内网间访问控制列表
      */
     async DescribeVpcAcRule(req, cb) {
@@ -352,6 +358,12 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
      */
     async ModifyTableStatus(req, cb) {
         return this.request("ModifyTableStatus", req, cb);
+    }
+    /**
+     * 用户告警中心-封隔离处置按钮
+     */
+    async CreateAlertCenterIsolate(req, cb) {
+        return this.request("CreateAlertCenterIsolate", req, cb);
     }
     /**
      * 支持对封禁列表、放通列表如下操作：
@@ -457,6 +469,12 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
      */
     async SetNatFwEip(req, cb) {
         return this.request("SetNatFwEip", req, cb);
+    }
+    /**
+     * 用户告警中心-封禁、放通处置按钮
+     */
+    async CreateAlertCenterRule(req, cb) {
+        return this.request("CreateAlertCenterRule", req, cb);
     }
     /**
      * 修改互联网边界访问控制规则

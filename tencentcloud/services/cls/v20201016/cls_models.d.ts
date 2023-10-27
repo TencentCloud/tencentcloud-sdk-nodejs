@@ -1001,6 +1001,10 @@ export interface ModifyDataTransformRequest {
      * 加工任务目的topic_id以及别名
      */
     DstResources?: Array<DataTransformResouceInfo>;
+    /**
+     * 是否开启投递服务日志。1关闭，2开启
+     */
+    HasServicesLog?: number;
 }
 /**
  * DescribeScheduledSqlInfo返回参数结构体
@@ -4617,55 +4621,55 @@ export interface DataTransformTaskInfo {
     /**
      * 数据加工任务名称
      */
-    Name: string;
+    Name?: string;
     /**
      * 数据加工任务id
      */
-    TaskId: string;
+    TaskId?: string;
     /**
      * 任务启用状态，默认为1，正常开启,  2关闭
      */
-    EnableFlag: number;
+    EnableFlag?: number;
     /**
      * 加工任务类型，1： DSL， 2：SQL
      */
-    Type: number;
+    Type?: number;
     /**
      * 源日志主题
      */
-    SrcTopicId: string;
+    SrcTopicId?: string;
     /**
      * 当前加工任务状态（1准备中/2运行中/3停止中/4已停止）
      */
-    Status: number;
+    Status?: number;
     /**
      * 加工任务创建时间
      */
-    CreateTime: string;
+    CreateTime?: string;
     /**
      * 最近修改时间
      */
-    UpdateTime: string;
+    UpdateTime?: string;
     /**
      * 最后启用时间，如果需要重建集群，修改该时间
      */
-    LastEnableTime: string;
+    LastEnableTime?: string;
     /**
      * 日志主题名称
      */
-    SrcTopicName: string;
+    SrcTopicName?: string;
     /**
      * 日志集id
      */
-    LogsetId: string;
+    LogsetId?: string;
     /**
      * 加工任务目的topic_id以及别名
      */
-    DstResources: Array<DataTransformResouceInfo>;
+    DstResources?: Array<DataTransformResouceInfo>;
     /**
      * 加工逻辑函数
      */
-    EtlContent: string;
+    EtlContent?: string;
 }
 /**
  * DescribeMachines返回参数结构体

@@ -148,6 +148,16 @@ it("organization.v20210331.DescribeOrganizationFinancialByMonth", async function
     }
 })
 
+it("organization.v20210331.DeleteAccount", async function () {
+    try {
+       const data = await client.DeleteAccount({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("organization.v20210331.DeleteOrganizationNodes", async function () {
     try {
        const data = await client.DeleteOrganizationNodes({})

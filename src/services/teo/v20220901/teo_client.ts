@@ -122,6 +122,7 @@ import {
   CreatePrefetchTaskRequest,
   DeleteApplicationProxyRuleRequest,
   DescribeApplicationProxiesResponse,
+  TemplateScope,
   DescribeTopL7AnalysisDataRequest,
   FileAscriptionInfo,
   DescribeAccelerationDomainsResponse,
@@ -137,6 +138,7 @@ import {
   WafRule,
   SecurityConfig,
   DescribePrefetchTasksRequest,
+  DescribeSecurityTemplateBindingsResponse,
   MaxAge,
   ModifyAliasDomainStatusResponse,
   RuleCodeActionParams,
@@ -222,6 +224,7 @@ import {
   DeleteOriginGroupResponse,
   Header,
   RuleAndConditions,
+  SecurityTemplateBinding,
   DropPageConfig,
   SecEntry,
   DescribeIdentificationsRequest,
@@ -253,6 +256,7 @@ import {
   DescribeRulesSettingRequest,
   DescribeZonesResponse,
   ModifyAliasDomainResponse,
+  EntityStatus,
   RewriteAction,
   CheckCnameStatusRequest,
   DeleteAliasDomainRequest,
@@ -280,6 +284,7 @@ import {
   OriginGroup,
   ModifySecurityIPGroupRequest,
   AccelerationDomainCertificate,
+  DescribeSecurityTemplateBindingsRequest,
   AlgDetectResult,
   QueryString,
   DefaultServerCertInfo,
@@ -357,7 +362,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建源站组
+   * 创建源站组，以源站组的方式管理业务源站。此处配置的源站组可于**添加加速域名**和**四层代理**等功能中引用。
    */
   async CreateOriginGroup(
     req: CreateOriginGroupRequest,
@@ -511,6 +516,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询指定策略模板的绑定关系列表。
+   */
+  async DescribeSecurityTemplateBindings(
+    req: DescribeSecurityTemplateBindingsRequest,
+    cb?: (error: string, rep: DescribeSecurityTemplateBindingsResponse) => void
+  ): Promise<DescribeSecurityTemplateBindingsResponse> {
+    return this.request("DescribeSecurityTemplateBindings", req, cb)
+  }
+
+  /**
    * 查询当前账户可用套餐信息列表
    */
   async DescribeAvailablePlans(
@@ -593,7 +608,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改源站组
+   * 修改源站组配置，新提交的源站记录将会覆盖原有源站组中的源站记录。
    */
   async ModifyOriginGroup(
     req: ModifyOriginGroupRequest,

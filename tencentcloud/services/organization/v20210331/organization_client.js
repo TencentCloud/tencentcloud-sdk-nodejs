@@ -106,6 +106,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeOrganizationFinancialByMonth", req, cb);
     }
     /**
+     * 删除成员账号
+     */
+    async DeleteAccount(req, cb) {
+        return this.request("DeleteAccount", req, cb);
+    }
+    /**
      * 批量删除企业组织节点
      */
     async DeleteOrganizationNodes(req, cb) {

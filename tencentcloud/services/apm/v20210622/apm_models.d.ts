@@ -305,8 +305,6 @@ export interface DescribeApmInstancesResponse {
 }
 /**
  * Span对象
-
-
  */
 export interface Span {
     /**
@@ -364,6 +362,11 @@ export interface Span {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     StartTimeMillis?: number;
+    /**
+     * Parent Span Id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ParentSpanID?: string;
 }
 /**
  * apm Agent信息

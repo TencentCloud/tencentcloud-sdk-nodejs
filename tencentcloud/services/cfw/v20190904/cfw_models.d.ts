@@ -436,17 +436,33 @@ export interface FwDeploy {
     CdcId?: string;
 }
 /**
- * SyncFwOperate请求参数结构体
+ * CreateAlertCenterIsolate返回参数结构体
  */
-export interface SyncFwOperateRequest {
+export interface CreateAlertCenterIsolateResponse {
     /**
-     * 同步操作类型：Route，同步防火墙路由
+     * 返回状态码：
+  0 成功
+  非0 失败
      */
-    SyncType: string;
+    ReturnCode?: number;
     /**
-     * 防火墙类型；nat,nat防火墙;ew,vpc间防火墙
+     * 返回信息：
+  success 成功
+  其他
      */
-    FwType?: string;
+    ReturnMsg?: string;
+    /**
+     * 处置状态码：
+  0  处置成功
+  -1 通用错误，不用处理
+  -3 表示重复，需重新刷新列表
+  其他
+     */
+    Status?: number;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * ModifyNatAcRule请求参数结构体
@@ -1705,6 +1721,16 @@ export interface VpcFwCvmInsInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     BandWidth?: number;
+    /**
+     * 实例主机所在可用区
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Zone?: string;
+    /**
+     * 实例备机所在可用区
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ZoneBak?: string;
 }
 /**
  * DescribeEnterpriseSecurityGroupRule请求参数结构体
@@ -1779,111 +1805,51 @@ export interface DescribeEnterpriseSecurityGroupRuleRequest {
     RuleUuid?: number;
 }
 /**
- * VPC内网间规则
+ * CreateAlertCenterRule请求参数结构体
  */
-export interface VpcRuleItem {
+export interface CreateAlertCenterRuleRequest {
     /**
-     * 访问源示例：
-  net：IP/CIDR(192.168.0.2)
+     * 处置时间
+  1  1天
+  7   7天
+  -2 永久
      */
-    SourceContent: string;
+    HandleTime: number;
     /**
-     * 访问源类型，类型可以为：net
+     * 处置类型
+  当HandleIdList 不为空时：1封禁 2放通
+  当HandleIpList 不为空时：3放通 4封禁
      */
-    SourceType: string;
+    HandleType: number;
     /**
-     * 访问目的示例：
-  net：IP/CIDR(192.168.0.2)
-  domain：域名规则，例如*.qq.com
+     * 当前日志方向： 0 出向 1 入向
      */
-    DestContent: string;
+    AlertDirection: number;
     /**
-     * 访问目的类型，类型可以为：net，domain
+     * 处置方向： 0出向 1入向 0,1出入向 3内网
      */
-    DestType: string;
+    HandleDirection: string;
     /**
-     * 协议，可选的值：
-  TCP
-  UDP
-  ICMP
-  ANY
-  HTTP
-  HTTPS
-  HTTP/HTTPS
-  SMTP
-  SMTPS
-  SMTP/SMTPS
-  FTP
-  DNS
-  TLS/SSL
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 处置对象,ID列表，  IdLists和IpList二选一
      */
-    Protocol: string;
+    HandleIdList?: Array<string>;
     /**
-     * 访问控制策略中设置的流量通过云防火墙的方式。取值：
-  accept：放行
-  drop：拒绝
-  log：观察
+     * 处置对象,IP列表，  IdLists和IpList二选一
      */
-    RuleAction: string;
+    HandleIpList?: Array<string>;
     /**
-     * 访问控制策略的端口。取值：
-  -1/-1：全部端口
-  80：80端口
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 处置描述
      */
-    Port: string;
+    HandleComment?: string;
     /**
-     * 描述
+     * 放通原因:
+  0默认 1重复 2误报 3紧急放通
      */
-    Description: string;
+    IgnoreReason?: number;
     /**
-     * 规则顺序，-1表示最低，1表示最高
+     * 封禁域名-保留字段
      */
-    OrderIndex: number;
-    /**
-     * 规则对应的唯一id
-     */
-    Uuid: number;
-    /**
-     * 规则状态，true表示启用，false表示禁用
-     */
-    Enable: string;
-    /**
-     * 规则生效的范围，是在哪对vpc之间还是针对所有vpc间生效
-     */
-    EdgeId: string;
-    /**
-     * 规则的命中次数，增删改查规则时无需传入此参数，主要用于返回查询结果数据
-     */
-    DetectedTimes?: number;
-    /**
-     * EdgeId对应的这对VPC间防火墙的描述
-     */
-    EdgeName?: string;
-    /**
-     * 内部使用的uuid，一般情况下不会使用到该字段
-     */
-    InternalUuid?: number;
-    /**
-     * 规则被删除：1，已删除；0，未删除
-     */
-    Deleted?: number;
-    /**
-     * 规则生效的防火墙实例ID
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    FwGroupId?: string;
-    /**
-     * 防火墙名称
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    FwGroupName?: string;
-    /**
-     * beta任务详情
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    BetaList?: Array<BetaInfoByACL>;
+    BlockDomain?: string;
 }
 /**
  * ModifyNatFwReSelect返回参数结构体
@@ -1893,6 +1859,20 @@ export interface ModifyNatFwReSelectResponse {
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * CreateAlertCenterOmit请求参数结构体
+ */
+export interface CreateAlertCenterOmitRequest {
+    /**
+     * 处置对象,ID列表，  IdLists和IpList二选一
+     */
+    HandleIdList: Array<string>;
+    /**
+     * 忽略数据来源：
+  AlertTable 告警中心  InterceptionTable拦截列表
+     */
+    TableType: string;
 }
 /**
  * DescribeVpcAcRule请求参数结构体
@@ -2049,6 +2029,11 @@ export interface VpcFwInstanceInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     UpdateEnable?: number;
+    /**
+     * 引擎运行模式，Normal:正常, OnlyRoute:透明模式
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TrafficMode?: string;
 }
 /**
  * DescribeSwitchLists请求参数结构体
@@ -2215,6 +2200,21 @@ export interface NatInstanceInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     NeedProbeEngineUpdate?: number;
+    /**
+     * 引擎运行模式，Normal:正常, OnlyRoute:透明模式
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TrafficMode?: string;
+    /**
+     * 实例主所在可用区
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Zone?: string;
+    /**
+     * 实例备所在可用区
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ZoneBak?: string;
 }
 /**
  * SetNatFwEip返回参数结构体
@@ -2427,17 +2427,23 @@ export interface SecurityGroupOrderIndexData {
     NewOrderIndex: number;
 }
 /**
- * AddVpcAcRule请求参数结构体
+ * DescribeFwGroupInstanceInfo返回参数结构体
  */
-export interface AddVpcAcRuleRequest {
+export interface DescribeFwGroupInstanceInfoResponse {
     /**
-     * 需要添加的vpc内网间规则列表
+     * 防火墙(组)
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Rules: Array<VpcRuleItem>;
+    VpcFwGroupLst?: Array<VpcFwGroupInfo>;
     /**
-     * 添加规则的来源，一般不需要使用，值insert_rule 表示插入指定位置的规则；值batch_import 表示批量导入规则；为空时表示添加规则
+     * 防火墙(组)个数
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    From?: string;
+    Total?: number;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * DescribeSourceAsset返回参数结构体
@@ -2766,23 +2772,17 @@ export interface DescribeNatFwInstancesInfoRequest {
     Limit?: number;
 }
 /**
- * DescribeFwGroupInstanceInfo返回参数结构体
+ * AddVpcAcRule请求参数结构体
  */
-export interface DescribeFwGroupInstanceInfoResponse {
+export interface AddVpcAcRuleRequest {
     /**
-     * 防火墙(组)
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 需要添加的vpc内网间规则列表
      */
-    VpcFwGroupLst?: Array<VpcFwGroupInfo>;
+    Rules: Array<VpcRuleItem>;
     /**
-     * 防火墙(组)个数
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 添加规则的来源，一般不需要使用，值insert_rule 表示插入指定位置的规则；值batch_import 表示批量导入规则；为空时表示添加规则
      */
-    Total?: number;
-    /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
+    From?: string;
 }
 /**
  * DescribeTableStatus请求参数结构体
@@ -3828,6 +3828,113 @@ export interface DescribeBlockByIpTimesListRequest {
     LogSource?: string;
 }
 /**
+ * VPC内网间规则
+ */
+export interface VpcRuleItem {
+    /**
+     * 访问源示例：
+  net：IP/CIDR(192.168.0.2)
+     */
+    SourceContent: string;
+    /**
+     * 访问源类型，类型可以为：net
+     */
+    SourceType: string;
+    /**
+     * 访问目的示例：
+  net：IP/CIDR(192.168.0.2)
+  domain：域名规则，例如*.qq.com
+     */
+    DestContent: string;
+    /**
+     * 访问目的类型，类型可以为：net，domain
+     */
+    DestType: string;
+    /**
+     * 协议，可选的值：
+  TCP
+  UDP
+  ICMP
+  ANY
+  HTTP
+  HTTPS
+  HTTP/HTTPS
+  SMTP
+  SMTPS
+  SMTP/SMTPS
+  FTP
+  DNS
+  TLS/SSL
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Protocol: string;
+    /**
+     * 访问控制策略中设置的流量通过云防火墙的方式。取值：
+  accept：放行
+  drop：拒绝
+  log：观察
+     */
+    RuleAction: string;
+    /**
+     * 访问控制策略的端口。取值：
+  -1/-1：全部端口
+  80：80端口
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Port: string;
+    /**
+     * 描述
+     */
+    Description: string;
+    /**
+     * 规则顺序，-1表示最低，1表示最高
+     */
+    OrderIndex: number;
+    /**
+     * 规则对应的唯一id
+     */
+    Uuid: number;
+    /**
+     * 规则状态，true表示启用，false表示禁用
+     */
+    Enable: string;
+    /**
+     * 规则生效的范围，是在哪对vpc之间还是针对所有vpc间生效
+     */
+    EdgeId: string;
+    /**
+     * 规则的命中次数，增删改查规则时无需传入此参数，主要用于返回查询结果数据
+     */
+    DetectedTimes?: number;
+    /**
+     * EdgeId对应的这对VPC间防火墙的描述
+     */
+    EdgeName?: string;
+    /**
+     * 内部使用的uuid，一般情况下不会使用到该字段
+     */
+    InternalUuid?: number;
+    /**
+     * 规则被删除：1，已删除；0，未删除
+     */
+    Deleted?: number;
+    /**
+     * 规则生效的防火墙实例ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    FwGroupId?: string;
+    /**
+     * 防火墙名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    FwGroupName?: string;
+    /**
+     * beta任务详情
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    BetaList?: Array<BetaInfoByACL>;
+}
+/**
  * ModifyBlockTop请求参数结构体
  */
 export interface ModifyBlockTopRequest {
@@ -3985,6 +4092,35 @@ export interface ModifyEdgeIpSwitchRequest {
   2 不切换模式，此次操作开关
      */
     SwitchMode?: number;
+}
+/**
+ * CreateAlertCenterOmit返回参数结构体
+ */
+export interface CreateAlertCenterOmitResponse {
+    /**
+     * 返回状态码：
+  0 成功
+  非0 失败
+     */
+    ReturnCode?: number;
+    /**
+     * 返回信息：
+  success 成功
+  其他
+     */
+    ReturnMsg?: string;
+    /**
+     * 处置状态码：
+  0  处置成功
+  -1 通用错误，不用处理
+  -3 表示重复，需重新刷新列表
+  其他
+     */
+    Status?: number;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * DescribeResourceGroupNew返回参数结构体
@@ -4449,6 +4585,19 @@ export interface DescribeAcListsRequest {
  */
 export declare type DescribeGuideScanInfoRequest = null;
 /**
+ * SyncFwOperate请求参数结构体
+ */
+export interface SyncFwOperateRequest {
+    /**
+     * 同步操作类型：Route，同步防火墙路由
+     */
+    SyncType: string;
+    /**
+     * 防火墙类型；nat,nat防火墙;ew,vpc间防火墙
+     */
+    FwType?: string;
+}
+/**
  * 未处置事件详情
  */
 export interface UnHandleEvent {
@@ -4849,7 +4998,7 @@ export interface FwGroupSwitchShow {
     /**
      * 防火墙开关ID
      */
-    SwitchId: string;
+    SwitchId?: string;
     /**
      * 防火墙开关NAME
   注意：此字段可能返回 null，表示取不到有效值。
@@ -4920,7 +5069,7 @@ export interface FwGroupSwitchShow {
      */
     FwInsRegion?: Array<string>;
     /**
-     * 0 观察 1 拦截 2 严格 3 关闭
+     * 0 观察 1 拦截 2 严格 3 关闭 4 不支持ips 前端展示tag
   注意：此字段可能返回 null，表示取不到有效值。
      */
     IpsAction?: number;
@@ -5804,6 +5953,37 @@ export interface DeleteSecurityGroupRuleRequest {
     IsDelReverse?: number;
 }
 /**
+ * CreateAlertCenterIsolate请求参数结构体
+ */
+export interface CreateAlertCenterIsolateRequest {
+    /**
+     * 处置对象,资产列表
+     */
+    HandleAssetList: Array<string>;
+    /**
+     * 处置时间
+  1  1天
+  7   7天
+  -2 永久
+     */
+    HandleTime: number;
+    /**
+     * 当前日志方向： 0 出向 1 入向
+     */
+    AlertDirection: number;
+    /**
+     * 隔离类型
+  1 互联网入站
+  2 互联网出站
+  4 内网访问
+     */
+    IsolateType: Array<number | bigint>;
+    /**
+     * 运维模式 1 IP白名单 2 身份认证
+     */
+    OmMode?: number;
+}
+/**
  * DescribeNatAcRule请求参数结构体
  */
 export interface DescribeNatAcRuleRequest {
@@ -6406,6 +6586,35 @@ export interface VpcFwInstance {
      * 防火墙实例ID (编辑场景传)
      */
     FwInsId?: string;
+}
+/**
+ * CreateAlertCenterRule返回参数结构体
+ */
+export interface CreateAlertCenterRuleResponse {
+    /**
+     * 返回状态码：
+  0 成功
+  非0 失败
+     */
+    ReturnCode?: number;
+    /**
+     * 返回信息：
+  success 成功
+  其他
+     */
+    ReturnMsg?: string;
+    /**
+     * 处置状态码：
+  0  处置成功
+  -1 通用错误，不用处理
+  -3 表示重复，需重新刷新列表
+  其他
+     */
+    Status?: number;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * DescribeAddressTemplateList返回参数结构体

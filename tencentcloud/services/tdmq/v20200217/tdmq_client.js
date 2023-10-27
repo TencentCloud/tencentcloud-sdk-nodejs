@@ -197,10 +197,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeEnvironmentAttributes", req, cb);
     }
     /**
-     * 输入迁移任务id和要导入的Group，导入后台
+     * 创建cmq订阅接口
      */
-    async ImportRocketMQConsumerGroups(req, cb) {
-        return this.request("ImportRocketMQConsumerGroups", req, cb);
+    async CreateCmqSubscribe(req, cb) {
+        return this.request("CreateCmqSubscribe", req, cb);
     }
     /**
      * 获取消息生产概览信息
@@ -407,6 +407,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteRocketMQTopic", req, cb);
     }
     /**
+     * 查询RabbitMQ队列列表
+     */
+    async DescribeRabbitMQQueues(req, cb) {
+        return this.request("DescribeRabbitMQQueues", req, cb);
+    }
+    /**
      * 修改cmq队列属性
      */
     async ModifyCmqQueueAttribute(req, cb) {
@@ -417,6 +423,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ModifyRocketMQInstanceSpec(req, cb) {
         return this.request("ModifyRocketMQInstanceSpec", req, cb);
+    }
+    /**
+     * 输入迁移任务id和要导入的Group，导入后台
+     */
+    async ImportRocketMQConsumerGroups(req, cb) {
+        return this.request("ImportRocketMQConsumerGroups", req, cb);
     }
     /**
      * 查询用户已购的RocketMQ专享实例列表
@@ -595,12 +607,6 @@ BatchReceivePolicy 的接口会一次性返回多条消息：
         return this.request("CreateRole", req, cb);
     }
     /**
-     * 创建cmq订阅接口
-     */
-    async CreateCmqSubscribe(req, cb) {
-        return this.request("CreateCmqSubscribe", req, cb);
-    }
-    /**
      * 更新RocketMQ命名空间
      */
     async ModifyRocketMQNamespace(req, cb) {
@@ -637,6 +643,12 @@ BatchReceivePolicy 的接口会一次性返回多条消息：
      */
     async CreateRocketMQCluster(req, cb) {
         return this.request("CreateRocketMQCluster", req, cb);
+    }
+    /**
+     * 查询RabbitMQ队列详情
+     */
+    async DescribeRabbitMQQueueDetail(req, cb) {
+        return this.request("DescribeRabbitMQQueueDetail", req, cb);
     }
     /**
      * rocketmq消息详情

@@ -21,6 +21,7 @@ import {
   OrgMember,
   DescribeOrganizationAuthNodeResponse,
   OrgPermission,
+  DeleteAccountRequest,
   OrgMemberPolicy,
   OrgProductFinancial,
   BindOrganizationMemberAuthAccountRequest,
@@ -100,6 +101,7 @@ import {
   UpdateOrganizationMemberEmailBindRequest,
   OrgNode,
   DeleteOrganizationMemberAuthIdentityRequest,
+  DeleteAccountResponse,
 } from "./organization_models"
 
 /**
@@ -239,6 +241,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeOrganizationFinancialByMonthResponse) => void
   ): Promise<DescribeOrganizationFinancialByMonthResponse> {
     return this.request("DescribeOrganizationFinancialByMonth", req, cb)
+  }
+
+  /**
+   * 删除成员账号
+   */
+  async DeleteAccount(
+    req: DeleteAccountRequest,
+    cb?: (error: string, rep: DeleteAccountResponse) => void
+  ): Promise<DeleteAccountResponse> {
+    return this.request("DeleteAccount", req, cb)
   }
 
   /**

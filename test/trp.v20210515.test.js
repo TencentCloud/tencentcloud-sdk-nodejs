@@ -78,6 +78,16 @@ it("trp.v20210515.DescribeCustomRuleById", async function () {
     }
 })
 
+it("trp.v20210515.DescribeRawScanLogs", async function () {
+    try {
+       const data = await client.DescribeRawScanLogs({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("trp.v20210515.CreateTraceCodesAsync", async function () {
     try {
        const data = await client.CreateTraceCodesAsync({})
@@ -108,9 +118,9 @@ it("trp.v20210515.DescribeTraceCodes", async function () {
     }
 })
 
-it("trp.v20210515.DescribeRawScanLogs", async function () {
+it("trp.v20210515.DescribePlanQRCodes", async function () {
     try {
-       const data = await client.DescribeRawScanLogs({})
+       const data = await client.DescribePlanQRCodes({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -458,6 +458,16 @@ it("cfw.v20190904.ModifyVpcFwSequenceRules", async function () {
     }
 })
 
+it("cfw.v20190904.CreateAlertCenterOmit", async function () {
+    try {
+       const data = await client.CreateAlertCenterOmit({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cfw.v20190904.DescribeVpcAcRule", async function () {
     try {
        const data = await client.DescribeVpcAcRule({})
@@ -541,6 +551,16 @@ it("cfw.v20190904.ModifyPublicIPSwitchStatus", async function () {
 it("cfw.v20190904.ModifyTableStatus", async function () {
     try {
        const data = await client.ModifyTableStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cfw.v20190904.CreateAlertCenterIsolate", async function () {
+    try {
+       const data = await client.CreateAlertCenterIsolate({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -711,6 +731,16 @@ it("cfw.v20190904.DeleteBlockIgnoreRuleList", async function () {
 it("cfw.v20190904.SetNatFwEip", async function () {
     try {
        const data = await client.SetNatFwEip({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cfw.v20190904.CreateAlertCenterRule", async function () {
+    try {
+       const data = await client.CreateAlertCenterRule({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

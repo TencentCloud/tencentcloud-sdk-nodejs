@@ -776,6 +776,22 @@ export interface DataSearchBug {
 }
 
 /**
+ * 安全中心资产标签
+ */
+export interface AssetTag {
+  /**
+   * 标签的key值,可以是字母、数字、下划线
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TagKey?: string
+  /**
+   * 标签的vale值,可以是字母、数字、下划线
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TagValue?: string
+}
+
+/**
  * 风险中心状态处理Key
  */
 export interface RiskCenterStatusKey {
@@ -805,6 +821,10 @@ export interface DescribeDomainAssetsRequest {
    * -
    */
   Filter?: Filter
+  /**
+   * 安全中心自定义标签
+   */
+  Tags?: Array<AssetTag>
 }
 
 /**
@@ -815,6 +835,10 @@ export interface DescribeRiskCenterAssetViewCFGRiskListRequest {
    * 过滤内容
    */
   Filter?: Filter
+  /**
+   * 资产标签
+   */
+  Tags?: Array<AssetTag>
 }
 
 /**
@@ -872,7 +896,7 @@ export interface DeleteDomainAndIpRequest {
   /**
    * -
    */
-  Content: Array<PublicIpDomainListKey>
+  Content?: Array<PublicIpDomainListKey>
   /**
    * 是否保留路径配置，1：保留，其他：不保留，默认不传为不保留
    */
@@ -881,6 +905,14 @@ export interface DeleteDomainAndIpRequest {
    * 以后是否忽略该资产，，1：忽略，其他：不忽略，默认不传为忽略
    */
   IgnoreAsset?: number
+  /**
+   * 资产标签
+   */
+  Tags?: Array<AssetTag>
+  /**
+   * 删除类型，取值： ALL， 删除全部，将直接忽略Content的内容；                                           其他值 ,非全部，则Centent必填，  默认为其他值。
+   */
+  Type?: string
 }
 
 /**
@@ -891,6 +923,10 @@ export interface DescribeScanTaskListRequest {
    * 过滤内容
    */
   Filter?: Filter
+  /**
+   * 标签
+   */
+  Tags?: Array<Tags>
 }
 
 /**
@@ -1318,6 +1354,10 @@ export interface DescribeRiskCenterAssetViewPortRiskListRequest {
    * 过滤内容
    */
   Filter?: Filter
+  /**
+   * 资产标签
+   */
+  Tags?: Array<AssetTag>
 }
 
 /**
@@ -1698,6 +1738,10 @@ export interface DescribeRiskCenterAssetViewWeakPasswordRiskListRequest {
    * 过滤内容
    */
   Filter?: Filter
+  /**
+   * 资产标签
+   */
+  Tags?: Array<AssetTag>
 }
 
 /**
@@ -1844,6 +1888,10 @@ export interface DescribePublicIpAssetsRequest {
    * filte过滤条件
    */
   Filter?: Filter
+  /**
+   * 安全中心自定义标签
+   */
+  Tags?: Array<AssetTag>
 }
 
 /**
@@ -2177,6 +2225,10 @@ export interface CreateRiskCenterScanTaskRequest {
    * 体检模式，0-标准模式，1-快速模式，2-高级模式，默认标准模式
    */
   TaskMode?: number
+  /**
+   * 资产标签
+   */
+  Tags?: AssetTag
 }
 
 /**
@@ -2259,6 +2311,10 @@ export interface DescribeRiskCenterVULViewVULRiskListRequest {
    * 过滤内容
    */
   Filter?: Filter
+  /**
+   * 资产标签
+   */
+  Tags?: Array<AssetTag>
 }
 
 /**
@@ -2387,6 +2443,22 @@ export interface ScanTaskInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   UserName?: string
+}
+
+/**
+ * 主机标签信息
+ */
+export interface Tags {
+  /**
+   * 无
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TagKey?: string
+  /**
+   * 无
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TagValue?: string
 }
 
 /**
@@ -2707,6 +2779,10 @@ export interface DescribeRiskCenterWebsiteRiskListRequest {
    * 过滤内容
    */
   Filter?: Filter
+  /**
+   * 资产标签
+   */
+  Tags?: Array<AssetTag>
 }
 
 /**
@@ -3012,6 +3088,10 @@ export interface DescribeRiskCenterPortViewPortRiskListRequest {
    * 过滤内容
    */
   Filter?: Filter
+  /**
+   * 资产标签
+   */
+  Tags?: Array<AssetTag>
 }
 
 /**
@@ -3056,6 +3136,20 @@ export interface DeleteDomainAndIpResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 报告中的task_id list
+ */
+export interface ReportTaskIdList {
+  /**
+   * 任务id列表
+   */
+  TaskIdList: Array<string>
+  /**
+   * 租户ID
+   */
+  AppId?: string
 }
 
 /**
@@ -3400,6 +3494,10 @@ export interface DescribeRiskCenterAssetViewVULRiskListRequest {
    * 过滤内容
    */
   Filter?: Filter
+  /**
+   * 资产标签
+   */
+  Tags?: Array<AssetTag>
 }
 
 /**
@@ -3425,9 +3523,13 @@ export interface TaskCenterCFGRiskInputParam {
  */
 export interface CreateDomainAndIpRequest {
   /**
-   * -
+   * 公网IP/域名
    */
   Content: Array<string>
+  /**
+   * 资产标签
+   */
+  Tags?: Array<AssetTag>
 }
 
 /**
@@ -3921,6 +4023,10 @@ export interface DescribeRiskCenterServerRiskListRequest {
    * 过滤内容
    */
   Filter?: Filter
+  /**
+   * 资产标签
+   */
+  Tags?: Array<AssetTag>
 }
 
 /**
@@ -4099,11 +4205,15 @@ export interface DescribeRiskCenterAssetViewPortRiskListResponse {
  */
 export interface DescribeTaskLogURLRequest {
   /**
-   * 任务报告Id 列表
-   */
-  ReportItemKeyList: Array<ReportItemKey>
-  /**
    * 0: 预览， 1: 下载
    */
   Type: number
+  /**
+   * 任务报告Id 列表
+   */
+  ReportItemKeyList?: Array<ReportItemKey>
+  /**
+   * 报告中任务id列表
+   */
+  ReportTaskIdList?: Array<ReportTaskIdList>
 }

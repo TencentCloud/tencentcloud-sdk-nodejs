@@ -85,7 +85,7 @@ export interface GetRunStatusRequest {
   /**
    * 项目ID。
    */
-  ProjectId: string
+  ProjectId?: string
 }
 
 /**
@@ -203,13 +203,13 @@ export interface GetRunCallsRequest {
    */
   RunUuid: string
   /**
-   * 项目ID。
-   */
-  ProjectId: string
-  /**
    * 作业路径
    */
   Path: string
+  /**
+   * 项目ID。
+   */
+  ProjectId?: string
 }
 
 /**
@@ -219,7 +219,7 @@ export interface DescribeRunsRequest {
   /**
    * 项目ID。
    */
-  ProjectId: string
+  ProjectId?: string
   /**
    * 返回数量，默认为10，最大值为100。
    */
@@ -293,6 +293,11 @@ export interface Run {
    * 执行时间。
    */
   ExecutionTime?: ExecutionTime
+  /**
+   * 缓存信息。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Cache?: CacheInfo
   /**
    * 错误信息。
    */
@@ -446,6 +451,27 @@ export interface ImportTableFileRequest {
 }
 
 /**
+ * 缓存信息。
+ */
+export interface CacheInfo {
+  /**
+   * 缓存清理时间(小时)。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CacheClearDelay?: number
+  /**
+   * 缓存清理计划时间。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CacheClearTime?: string
+  /**
+   * 缓存是否已被清理。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CacheCleared?: boolean
+}
+
+/**
  * 计算集群配置。
  */
 export interface ClusterOption {
@@ -508,6 +534,57 @@ export interface RunApplicationRequest {
    * 应用版本ID。不填表示使用当前最新版本。
    */
   ApplicationVersionId?: string
+}
+
+/**
+ * 应用版本。
+ */
+export interface ApplicationVersion {
+  /**
+   * 版本类型。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Type?: string
+  /**
+   * 版本ID。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ApplicationVersionId?: string
+  /**
+   * 发布名称。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name?: string
+  /**
+   * 发布描述。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Description?: string
+  /**
+   * 入口文件。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Entrypoint?: string
+  /**
+   * 创建时间。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateTime?: string
+  /**
+   * 创建者名称。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreatorName?: string
+  /**
+   * 创建者ID。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreatorId?: string
+  /**
+   * Git信息。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  GitInfo?: string
 }
 
 /**
@@ -578,9 +655,14 @@ export interface RunGroup {
    */
   Input?: string
   /**
-   * 运行选项。
+   * WDL运行选项。
    */
   Option?: RunOption
+  /**
+   * Nextflow运行选项。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NFOption?: NFOption
   /**
    * 任务总数量。
    */
@@ -605,6 +687,26 @@ export interface RunGroup {
    * 更新时间。
    */
   UpdateTime?: string
+  /**
+   * 创建者。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Creator?: string
+  /**
+   * 创建者ID。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreatorId?: string
+  /**
+   * 运行结果通知方式。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResultNotify?: string
+  /**
+   * 应用版本。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ApplicationVersion?: ApplicationVersion
 }
 
 /**
@@ -802,7 +904,7 @@ export interface DescribeRunGroupsRequest {
   /**
    * 项目ID。
    */
-  ProjectId: string
+  ProjectId?: string
   /**
    * 返回数量，默认为10，最大值为100。
    */
@@ -931,6 +1033,32 @@ export interface RunOption {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   UseRelativeOutputPaths?: boolean
+}
+
+/**
+ * Nextflow选项。
+ */
+export interface NFOption {
+  /**
+   * Config。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Config?: string
+  /**
+   * Profile。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Profile?: string
+  /**
+   * Report。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Report?: boolean
+  /**
+   * Resume。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Resume?: boolean
 }
 
 /**
@@ -1092,6 +1220,11 @@ export interface RunMetadata {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Stderr?: string
+  /**
+   * 其他信息。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Meta?: string
 }
 
 /**

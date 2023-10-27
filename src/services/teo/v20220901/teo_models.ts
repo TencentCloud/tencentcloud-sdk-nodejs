@@ -2850,6 +2850,22 @@ export interface DescribeApplicationProxiesResponse {
 }
 
 /**
+ * 安全模板绑定域名状态
+ */
+export interface TemplateScope {
+  /**
+   * 站点ID。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ZoneId?: string
+  /**
+   * 实例状态列表。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EntityStatus?: Array<EntityStatus>
+}
+
+/**
  * DescribeTopL7AnalysisData请求参数结构体
  */
 export interface DescribeTopL7AnalysisDataRequest {
@@ -3396,6 +3412,26 @@ export interface DescribePrefetchTasksRequest {
 <li>zone-id<br>   按照【<strong>站点 ID</strong>】进行过滤。zone-id形如：zone-1379afjk91u32h，暂不支持多值。<br>   类型：String<br>   必选：否。<br>   模糊查询：不支持。</li><li>job-id<br>   按照【<strong>任务ID</strong>】进行过滤。job-id形如：1379afjk91u32h，暂不支持多值。<br>   类型：String<br>   必选：否。<br>   模糊查询：不支持。</li><li>target<br>   按照【<strong>目标资源信息</strong>】进行过滤。target形如：http://www.qq.com/1.txt，暂不支持多值。<br>   类型：String<br>   必选：否。<br>   模糊查询：不支持。</li><li>domains<br>   按照【<strong>域名</strong>】进行过滤。domains形如：www.qq.com。<br>   类型：String<br>   必选：否。<br>   模糊查询：不支持。</li><li>statuses<br>   按照【<strong>任务状态</strong>】进行过滤。<br>   必选：否<br>   模糊查询：不支持。<br>   可选项：<br>   processing：处理中<br>   success：成功<br>   failed：失败<br>   timeout：超时</li>
    */
   Filters?: Array<AdvancedFilter>
+}
+
+/**
+ * DescribeSecurityTemplateBindings返回参数结构体
+ */
+export interface DescribeSecurityTemplateBindingsResponse {
+  /**
+   * 指定策略模板的绑定关系列表。
+
+当某个站点中的域名包含在指定策略模板的绑定关系中时，绑定关系列表 `TemplateScope` 中会包含该站点的 `ZoneId`，和该站点下的和该策略模板有关的域名绑定关系。
+
+注意：当没有任何域名正在绑定或已经绑定到指定策略模板时，绑定关系为空。即：返回结构体中，`TemplateScope` 数组长度为 0。
+
+绑定关系中，同一域名可能在 `EntityStatus` 列表中重复出现，并标记为不同 `Status` 。例如，正在被绑定到其他策略模板的域名，会同时标记为 `online` 和 `pending` 。
+   */
+  SecurityTemplate?: Array<SecurityTemplateBinding>
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -5516,15 +5552,15 @@ export interface CacheKey {
  */
 export interface ModifyOriginGroupRequest {
   /**
-   * 站点ID。
+   * 站点 ID
    */
   ZoneId: string
   /**
-   * 源站组ID，此参数必填。
+   * 源站组 ID，此参数必填。
    */
   GroupId?: string
   /**
-   * 源站组名称，不填保持原有配置，可输入1-200个字符，允许的字符为 a-z, A-Z, 0-9, _, - 。
+   * 源站组名称，不填保持原有配置，可输入1 - 200个字符，允许的字符为 a - z, A - Z, 0 - 9, _, - 。
    */
   Name?: string
   /**
@@ -5537,6 +5573,10 @@ export interface ModifyOriginGroupRequest {
    * 源站记录信息，不填保持原有配置。
    */
   Records?: Array<OriginRecord>
+  /**
+   * 回源 Host Header，仅 Type = HTTP 时生效， 不填或者填空表示不配置回源Host，规则引擎修改 Host Header 配置优先级高于源站组的 Host Header。
+   */
+  HostHeader?: string
 }
 
 /**
@@ -5668,6 +5708,20 @@ export interface RuleAndConditions {
    * 规则引擎条件，该数组内所有项全部满足即判断该条件满足。
    */
   Conditions: Array<RuleCondition>
+}
+
+/**
+ * 安全策略模板的绑定关系。
+ */
+export interface SecurityTemplateBinding {
+  /**
+   * 模板ID
+   */
+  TemplateId?: string
+  /**
+   * 模板绑定状态。
+   */
+  TemplateScope?: Array<TemplateScope>
 }
 
 /**
@@ -6279,6 +6333,25 @@ export interface ModifyAliasDomainResponse {
 }
 
 /**
+ * 安全实例状态。
+ */
+export interface EntityStatus {
+  /**
+   * 实例名，现在只有子域名。
+   */
+  Entity?: string
+  /**
+   * 实例配置下发状态，取值有：
+<li>online：配置已生效；</li><li>fail：配置失败；</li><li> process：配置下发中。</li>
+   */
+  Status?: string
+  /**
+   * 实例配置下发信息提示。
+   */
+  Message?: string
+}
+
+/**
  * 规则引擎HTTP请求头/响应头类型的动作
  */
 export interface RewriteAction {
@@ -6649,23 +6722,27 @@ export interface Quota {
  */
 export interface CreateOriginGroupRequest {
   /**
-   * 站点ID。
+   * 站点 ID
    */
   ZoneId: string
   /**
-   * 源站组名称，可输入1-200个字符，允许的字符为 a-z, A-Z, 0-9, _, - 。
+   * 源站组名称，可输入1 - 200个字符，允许的字符为 a - z, A - Z, 0 - 9, _, - 。
    */
   Name?: string
   /**
    * 源站组类型，此参数必填，取值有：
-<li>GENERAL：通用型源站组，仅支持添加 IP/域名 源站，可以被域名服务、规则引擎、四层代理、通用型负载均衡引用；</li>
-<li>HTTP： HTTP专用型源站组，支持添加 IP/域名、对象存储源站，无法被四层代理引用。</li>
+<li>GENERAL：通用型源站组，仅支持添加 IP/域名 源站，可以被域名服务、规则引擎、四层代理、通用型负载均衡、HTTP 专用型负载均衡引用；</li>
+<li>HTTP： HTTP 专用型源站组，支持添加 IP/域名、对象存储源站作为源站，无法被四层代理引用，仅支持被添加加速域名、规则引擎-修改源站、HTTP 专用型负载均衡引用。</li>
    */
   Type?: string
   /**
    * 源站记录信息，此参数必填。
    */
   Records?: Array<OriginRecord>
+  /**
+   * 回源 Host Header，仅 Type = HTTP 时传入生效，规则引擎修改 Host Header 配置优先级高于源站组的 Host Header。
+   */
+  HostHeader?: string
 }
 
 /**
@@ -6966,6 +7043,20 @@ export interface AccelerationDomainCertificate {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   List?: Array<CertificateInfo>
+}
+
+/**
+ * DescribeSecurityTemplateBindings请求参数结构体
+ */
+export interface DescribeSecurityTemplateBindingsRequest {
+  /**
+   * 要查询的站点 ID。
+   */
+  ZoneId: string
+  /**
+   * 要查询的策略模板 ID。
+   */
+  TemplateId: Array<string>
 }
 
 /**

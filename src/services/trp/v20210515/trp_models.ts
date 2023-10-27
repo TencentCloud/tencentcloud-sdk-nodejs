@@ -215,6 +215,22 @@ export interface Quota {
 }
 
 /**
+ * 安心计划二维码
+ */
+export interface PlanQRCode {
+  /**
+   * 二维码
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Url: string
+  /**
+   * 状态，0:未激活 1:已激活 2:已冻结
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status: number
+}
+
+/**
  * 扫码明细
  */
 export interface ScanLog {
@@ -955,6 +971,36 @@ export interface CreateCodeBatchResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeCustomRules请求参数结构体
+ */
+export interface DescribeCustomRulesRequest {
+  /**
+   * 搜索关键字
+   */
+  Keyword?: string
+  /**
+   * 条数
+   */
+  PageSize?: number
+  /**
+   * 页数
+   */
+  PageNumber?: number
+  /**
+   * 企业ID
+   */
+  CorpId?: number
+  /**
+   * 码规则状态 0:未生效 1:已生效 -1:已失效
+   */
+  Status?: number
+  /**
+   * 商户ID
+   */
+  MerchantId?: string
 }
 
 /**
@@ -2391,33 +2437,29 @@ export interface RawScanLog {
 }
 
 /**
- * DescribeCustomRules请求参数结构体
+ * DescribePlanQRCodes请求参数结构体
  */
-export interface DescribeCustomRulesRequest {
+export interface DescribePlanQRCodesRequest {
   /**
-   * 搜索关键字
+   * 计划ID
    */
-  Keyword?: string
+  PlanId: number
   /**
-   * 条数
+   * 开始时间
    */
-  PageSize?: number
+  StartTime: string
   /**
-   * 页数
+   * 结束时间
    */
-  PageNumber?: number
+  EndTime: string
   /**
-   * 企业ID
+   * 页码
    */
-  CorpId?: number
+  PageNo: number
   /**
-   * 码规则状态 0:未生效 1:已生效 -1:已失效
+   * 页大小
    */
-  Status?: number
-  /**
-   * 商户ID
-   */
-  MerchantId?: string
+  PageSize: number
 }
 
 /**
@@ -3165,6 +3207,28 @@ export interface DescribeJobFileUrlResponse {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Url: string
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribePlanQRCodes返回参数结构体
+ */
+export interface DescribePlanQRCodesResponse {
+  /**
+   * 返回码
+   */
+  Ret?: number
+  /**
+   * 总数
+   */
+  Total?: number
+  /**
+   * 数据
+   */
+  Data?: Array<PlanQRCode>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

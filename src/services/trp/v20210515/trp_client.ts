@@ -21,6 +21,7 @@ import {
   CodeBatch,
   DescribeScanLogsResponse,
   Quota,
+  PlanQRCode,
   ScanLog,
   DescribeProductsRequest,
   CreateCorporationOrderResponse,
@@ -46,6 +47,7 @@ import {
   ModifyTraceDataResponse,
   AuthorizedTransferResponse,
   CreateCodeBatchResponse,
+  DescribeCustomRulesRequest,
   CorpQuota,
   CreateCustomRuleRequest,
   DescribeCodePackStatusRequest,
@@ -108,7 +110,7 @@ import {
   DescribeJobFileUrlRequest,
   CreateTraceCodesAsyncResponse,
   RawScanLog,
-  DescribeCustomRulesRequest,
+  DescribePlanQRCodesRequest,
   ModifyCodeBatchRequest,
   DescribeProductByIdRequest,
   DescribeTraceCodesResponse,
@@ -138,6 +140,7 @@ import {
   DescribeProductByIdResponse,
   DescribeCodePacksRequest,
   DescribeJobFileUrlResponse,
+  DescribePlanQRCodesResponse,
   DescribeTraceCodeByIdRequest,
   ModifyCodeBatchResponse,
   ScanStat,
@@ -217,6 +220,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 支持增量查询扫码日志，通常提供给数据同步使用，调用时需要指定从哪一行开始查询数据
+   */
+  async DescribeRawScanLogs(
+    req: DescribeRawScanLogsRequest,
+    cb?: (error: string, rep: DescribeRawScanLogsResponse) => void
+  ): Promise<DescribeRawScanLogsResponse> {
+    return this.request("DescribeRawScanLogs", req, cb)
+  }
+
+  /**
    * 异步导入激活码包，如果是第三方码包，需要域名跟配置的匹配
    */
   async CreateTraceCodesAsync(
@@ -247,13 +260,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 支持增量查询扫码日志，通常提供给数据同步使用，调用时需要指定从哪一行开始查询数据
+   * 查询安心计划二维码列表
    */
-  async DescribeRawScanLogs(
-    req: DescribeRawScanLogsRequest,
-    cb?: (error: string, rep: DescribeRawScanLogsResponse) => void
-  ): Promise<DescribeRawScanLogsResponse> {
-    return this.request("DescribeRawScanLogs", req, cb)
+  async DescribePlanQRCodes(
+    req: DescribePlanQRCodesRequest,
+    cb?: (error: string, rep: DescribePlanQRCodesResponse) => void
+  ): Promise<DescribePlanQRCodesResponse> {
+    return this.request("DescribePlanQRCodes", req, cb)
   }
 
   /**
