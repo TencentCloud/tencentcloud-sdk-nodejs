@@ -21,6 +21,7 @@ import {
   DescribeDbAssetInfoResponse,
   DeleteRiskScanTaskRequest,
   DescribeRiskCenterAssetViewWeakPasswordRiskListResponse,
+  DescribeVULRiskAdvanceCFGListResponse,
   TaskCenterWeakPwdRiskInputParam,
   ModifyRiskCenterRiskStatusRequest,
   ReportItemKey,
@@ -30,17 +31,19 @@ import {
   DescribeScanReportListRequest,
   DescribeVpcAssetsResponse,
   Vpc,
+  VULRiskAdvanceCFGList,
   StopRiskCenterTaskRequest,
   DataSearchBug,
   AssetTag,
   RiskCenterStatusKey,
-  DescribeDomainAssetsRequest,
+  DescribeVULRiskAdvanceCFGListRequest,
   DescribeRiskCenterAssetViewCFGRiskListRequest,
-  DescribeRiskCenterWebsiteRiskListResponse,
+  DescribeDomainAssetsRequest,
   Tag,
   DeleteDomainAndIpRequest,
   DescribeScanTaskListRequest,
   TaskIdListKey,
+  DescribeRiskCenterWebsiteRiskListResponse,
   DescribeScanReportListResponse,
   DescribeSearchBugInfoRequest,
   TaskLogURL,
@@ -389,6 +392,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeRiskCenterAssetViewPortRiskListResponse) => void
   ): Promise<DescribeRiskCenterAssetViewPortRiskListResponse> {
     return this.request("DescribeRiskCenterAssetViewPortRiskList", req, cb)
+  }
+
+  /**
+   * 查询漏洞风险高级配置
+   */
+  async DescribeVULRiskAdvanceCFGList(
+    req: DescribeVULRiskAdvanceCFGListRequest,
+    cb?: (error: string, rep: DescribeVULRiskAdvanceCFGListResponse) => void
+  ): Promise<DescribeVULRiskAdvanceCFGListResponse> {
+    return this.request("DescribeVULRiskAdvanceCFGList", req, cb)
   }
 
   /**

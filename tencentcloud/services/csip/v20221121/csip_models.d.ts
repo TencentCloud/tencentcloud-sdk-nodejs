@@ -59,6 +59,39 @@ export interface DescribeRiskCenterAssetViewWeakPasswordRiskListResponse {
     RequestId?: string;
 }
 /**
+ * DescribeVULRiskAdvanceCFGList返回参数结构体
+ */
+export interface DescribeVULRiskAdvanceCFGListResponse {
+    /**
+     * 配置项列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Data?: Array<VULRiskAdvanceCFGList>;
+    /**
+     * 总数
+     */
+    TotalCount?: number;
+    /**
+     * 风险等级过滤列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RiskLevelLists?: Array<FilterDataObject>;
+    /**
+     * 漏洞类型过滤列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    VULTypeLists?: Array<FilterDataObject>;
+    /**
+     * 识别来源过滤列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CheckFromLists?: Array<FilterDataObject>;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * 弱口令风险高级配置
  */
 export interface TaskCenterWeakPwdRiskInputParam {
@@ -692,6 +725,70 @@ export interface Vpc {
     IsCore?: number;
 }
 /**
+ * 漏洞风险高级配置列表
+ */
+export interface VULRiskAdvanceCFGList {
+    /**
+     * 漏洞名称
+     */
+    VULName?: string;
+    /**
+     * 风险等级
+     */
+    RiskLevel?: string;
+    /**
+     * 识别来源
+     */
+    CheckFrom?: string;
+    /**
+     * 是否启用，1-启用，0-禁用
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Enable?: number;
+    /**
+     * 风险类型
+     */
+    VULType?: string;
+    /**
+     * 影响版本
+     */
+    ImpactVersion?: string;
+    /**
+     * CVE
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CVE?: string;
+    /**
+     * 漏洞标签
+     */
+    VULTag?: Array<string>;
+    /**
+     * 修复方式
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    FixMethod?: Array<string>;
+    /**
+     * 披露时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ReleaseTime?: string;
+    /**
+     * 应急漏洞类型，1-应急漏洞，0-非应急漏洞
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    EMGCVulType?: number;
+    /**
+     * 漏洞描述
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    VULDescribe?: string;
+    /**
+     * 影响组件
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ImpactComponent?: string;
+}
+/**
  * StopRiskCenterTask请求参数结构体
  */
 export interface StopRiskCenterTaskRequest {
@@ -781,17 +878,17 @@ export interface RiskCenterStatusKey {
     InstanceId?: string;
 }
 /**
- * DescribeDomainAssets请求参数结构体
+ * DescribeVULRiskAdvanceCFGList请求参数结构体
  */
-export interface DescribeDomainAssetsRequest {
+export interface DescribeVULRiskAdvanceCFGListRequest {
     /**
-     * -
+     * 任务ID
+     */
+    TaskId?: string;
+    /**
+     * 过滤条件
      */
     Filter?: Filter;
-    /**
-     * 安全中心自定义标签
-     */
-    Tags?: Array<AssetTag>;
 }
 /**
  * DescribeRiskCenterAssetViewCFGRiskList请求参数结构体
@@ -807,37 +904,17 @@ export interface DescribeRiskCenterAssetViewCFGRiskListRequest {
     Tags?: Array<AssetTag>;
 }
 /**
- * DescribeRiskCenterWebsiteRiskList返回参数结构体
+ * DescribeDomainAssets请求参数结构体
  */
-export interface DescribeRiskCenterWebsiteRiskListResponse {
+export interface DescribeDomainAssetsRequest {
     /**
-     * 总条数
+     * -
      */
-    TotalCount?: number;
+    Filter?: Filter;
     /**
-     * 资产视角的端口风险列表
+     * 安全中心自定义标签
      */
-    Data?: Array<WebsiteRisk>;
-    /**
-     * 状态列表
-     */
-    StatusLists?: Array<FilterDataObject>;
-    /**
-     * 危险等级列表
-     */
-    LevelLists?: Array<FilterDataObject>;
-    /**
-     * 资产类型列表
-     */
-    InstanceTypeLists?: Array<FilterDataObject>;
-    /**
-     * 风险类型列表
-     */
-    DetectEngineLists?: Array<FilterDataObject>;
-    /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
+    Tags?: Array<AssetTag>;
 }
 /**
  * 标签
@@ -898,6 +975,39 @@ export interface TaskIdListKey {
      * 任务ID
      */
     TaskId: string;
+}
+/**
+ * DescribeRiskCenterWebsiteRiskList返回参数结构体
+ */
+export interface DescribeRiskCenterWebsiteRiskListResponse {
+    /**
+     * 总条数
+     */
+    TotalCount?: number;
+    /**
+     * 资产视角的端口风险列表
+     */
+    Data?: Array<WebsiteRisk>;
+    /**
+     * 状态列表
+     */
+    StatusLists?: Array<FilterDataObject>;
+    /**
+     * 危险等级列表
+     */
+    LevelLists?: Array<FilterDataObject>;
+    /**
+     * 资产类型列表
+     */
+    InstanceTypeLists?: Array<FilterDataObject>;
+    /**
+     * 风险类型列表
+     */
+    DetectEngineLists?: Array<FilterDataObject>;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * DescribeScanReportList返回参数结构体

@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { RetryRunsResponse, RunApplicationResponse, GetRunStatusRequest, DescribeRunsResponse, ImportTableFileResponse, DeleteEnvironmentResponse, GetRunCallsRequest, DescribeRunsRequest, DescribeTablesRowsRequest, DescribeEnvironmentsResponse, DescribeTablesResponse, RetryRunsRequest, ImportTableFileRequest, RunApplicationRequest, DeleteEnvironmentRequest, GetRunCallsResponse, DescribeRunGroupsResponse, DescribeTablesRowsResponse, CreateEnvironmentResponse, DescribeRunGroupsRequest, GetRunStatusResponse, DescribeTablesRequest, DescribeEnvironmentsRequest, CreateEnvironmentRequest } from "./omics_models";
+import { RetryRunsResponse, RunApplicationResponse, GetRunStatusRequest, DescribeRunsResponse, ImportTableFileResponse, RunApplicationRequest, GetRunMetadataFileResponse, DeleteEnvironmentResponse, GetRunCallsRequest, RunWorkflowRequest, DescribeRunsRequest, DescribeTablesRowsRequest, DescribeEnvironmentsResponse, DescribeTablesResponse, RetryRunsRequest, ImportTableFileRequest, TerminateRunGroupResponse, DeleteEnvironmentRequest, GetRunCallsResponse, DescribeRunGroupsResponse, TerminateRunGroupRequest, DescribeTablesRowsResponse, CreateEnvironmentResponse, GetRunMetadataFileRequest, RunWorkflowResponse, DescribeRunGroupsRequest, GetRunStatusResponse, DescribeTablesRequest, DescribeEnvironmentsRequest, CreateEnvironmentRequest } from "./omics_models";
 /**
  * omics client
  * @class
@@ -16,6 +16,10 @@ export declare class Client extends AbstractClient {
      */
     DescribeEnvironments(req: DescribeEnvironmentsRequest, cb?: (error: string, rep: DescribeEnvironmentsResponse) => void): Promise<DescribeEnvironmentsResponse>;
     /**
+     * 查询任务详情文件。
+     */
+    GetRunMetadataFile(req: GetRunMetadataFileRequest, cb?: (error: string, rep: GetRunMetadataFileResponse) => void): Promise<GetRunMetadataFileResponse>;
+    /**
      * 导入表格文件。
      */
     ImportTableFile(req: ImportTableFileRequest, cb?: (error: string, rep: ImportTableFileResponse) => void): Promise<ImportTableFileResponse>;
@@ -28,6 +32,10 @@ export declare class Client extends AbstractClient {
      */
     RunApplication(req: RunApplicationRequest, cb?: (error: string, rep: RunApplicationResponse) => void): Promise<RunApplicationResponse>;
     /**
+     * 运行工作流。
+     */
+    RunWorkflow(req: RunWorkflowRequest, cb?: (error: string, rep: RunWorkflowResponse) => void): Promise<RunWorkflowResponse>;
+    /**
      * 创建组学平台计算环境。
      */
     CreateEnvironment(req: CreateEnvironmentRequest, cb?: (error: string, rep: CreateEnvironmentResponse) => void): Promise<CreateEnvironmentResponse>;
@@ -35,6 +43,10 @@ export declare class Client extends AbstractClient {
      * 重试任务。
      */
     RetryRuns(req: RetryRunsRequest, cb?: (error: string, rep: RetryRunsResponse) => void): Promise<RetryRunsResponse>;
+    /**
+     * 终止任务批次。
+     */
+    TerminateRunGroup(req: TerminateRunGroupRequest, cb?: (error: string, rep: TerminateRunGroupResponse) => void): Promise<TerminateRunGroupResponse>;
     /**
      * 查询任务列表。
      */

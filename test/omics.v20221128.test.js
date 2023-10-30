@@ -38,6 +38,16 @@ it("omics.v20221128.DescribeEnvironments", async function () {
     }
 })
 
+it("omics.v20221128.GetRunMetadataFile", async function () {
+    try {
+       const data = await client.GetRunMetadataFile({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("omics.v20221128.ImportTableFile", async function () {
     try {
        const data = await client.ImportTableFile({})
@@ -68,6 +78,16 @@ it("omics.v20221128.RunApplication", async function () {
     }
 })
 
+it("omics.v20221128.RunWorkflow", async function () {
+    try {
+       const data = await client.RunWorkflow({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("omics.v20221128.CreateEnvironment", async function () {
     try {
        const data = await client.CreateEnvironment({})
@@ -81,6 +101,16 @@ it("omics.v20221128.CreateEnvironment", async function () {
 it("omics.v20221128.RetryRuns", async function () {
     try {
        const data = await client.RetryRuns({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("omics.v20221128.TerminateRunGroup", async function () {
+    try {
+       const data = await client.TerminateRunGroup({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

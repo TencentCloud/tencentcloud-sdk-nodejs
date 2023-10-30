@@ -422,6 +422,12 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
         return this.request("ModifyApplicationProxyStatus", req, cb);
     }
     /**
+     * 操作安全策略模板，支持将域名绑定或换绑到指定的策略模板，或者从指定的策略模板解绑。
+     */
+    async BindSecurityTemplateToEntity(req, cb) {
+        return this.request("BindSecurityTemplateToEntity", req, cb);
+    }
+    /**
      * 本接口（DescribeTimingL7AnalysisData）查询七层数据分析类时序数据。
      */
     async DescribeTimingL7AnalysisData(req, cb) {

@@ -34,16 +34,28 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeCostSummaryByResource", req, cb);
     }
     /**
-     * 获取收支明细列表，支持翻页和参数过滤
+     * 获取按地域汇总消耗详情
      */
-    async DescribeBillList(req, cb) {
-        return this.request("DescribeBillList", req, cb);
+    async DescribeCostSummaryByRegion(req, cb) {
+        return this.request("DescribeCostSummaryByRegion", req, cb);
+    }
+    /**
+     * 查询当前用户节省计划覆盖率明细数据，如无特别说明，金额单位均为元（国内站）或者美元（国际站）。
+     */
+    async DescribeSavingPlanCoverage(req, cb) {
+        return this.request("DescribeSavingPlanCoverage", req, cb);
     }
     /**
      * 获取账单资源汇总数据
      */
     async DescribeBillResourceSummary(req, cb) {
         return this.request("DescribeBillResourceSummary", req, cb);
+    }
+    /**
+     * 查用当前用户明细节省计划总览查询时段内的使用情况
+     */
+    async DescribeSavingPlanOverview(req, cb) {
+        return this.request("DescribeSavingPlanOverview", req, cb);
     }
     /**
      * 批量设置分账标签
@@ -97,16 +109,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeBillSummaryByPayMode", req, cb);
     }
     /**
-     * 获取按地域汇总消耗详情
+     * 获取收支明细列表，支持翻页和参数过滤
      */
-    async DescribeCostSummaryByRegion(req, cb) {
-        return this.request("DescribeCostSummaryByRegion", req, cb);
+    async DescribeBillList(req, cb) {
+        return this.request("DescribeBillList", req, cb);
     }
     /**
-     * 获取按产品汇总消耗详情
+     * 该接口支持通过传参，获取L0-PDF、L1-汇总、L2-资源、L3-明细、账单包、五类账单文件下载链接
      */
-    async DescribeCostSummaryByProduct(req, cb) {
-        return this.request("DescribeCostSummaryByProduct", req, cb);
+    async DescribeBillDownloadUrl(req, cb) {
+        return this.request("DescribeBillDownloadUrl", req, cb);
     }
     /**
      * 获取COS产品用量明细
@@ -134,10 +146,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDosageDetailByDate", req, cb);
     }
     /**
+     * 查用当前用户明细节省计划查询时段内的使用情况
+     */
+    async DescribeSavingPlanUsage(req, cb) {
+        return this.request("DescribeSavingPlanUsage", req, cb);
+    }
+    /**
      * 获取代金券使用记录
      */
     async DescribeVoucherUsageDetails(req, cb) {
         return this.request("DescribeVoucherUsageDetails", req, cb);
+    }
+    /**
+     * 创建节省计划订单，创建订单完成需调用PayDeals接口完成订单支付
+     */
+    async CreateSavingPlanOrder(req, cb) {
+        return this.request("CreateSavingPlanOrder", req, cb);
     }
     /**
      * 获取按地域汇总费用分布
@@ -170,10 +194,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeTagList", req, cb);
     }
     /**
-     * 该接口支持通过传参，获取L0-PDF、L1-汇总、L2-资源、L3-明细、账单包、五类账单文件下载链接
+     * 获取按产品汇总消耗详情
      */
-    async DescribeBillDownloadUrl(req, cb) {
-        return this.request("DescribeBillDownloadUrl", req, cb);
+    async DescribeCostSummaryByProduct(req, cb) {
+        return this.request("DescribeCostSummaryByProduct", req, cb);
     }
     /**
      * 批量取消设置分账标签

@@ -1073,7 +1073,7 @@ export interface AssociateInstancesKeyPairsRequest {
    */
   KeyIds: Array<string>
   /**
-   * 是否对运行中的实例选择强制关机。建议对运行中的实例先手动关机，然后再绑定密钥。取值范围：<br><li>TRUE：表示在正常关机失败后进行强制关机。<br><li>FALSE：表示在正常关机失败后不进行强制关机。<br>默认取值：FALSE。
+   * 是否对运行中的实例选择强制关机。建议对运行中的实例先手动关机，然后再绑定密钥。取值范围：<br><li>true：表示在正常关机失败后进行强制关机。<br><li>false：表示在正常关机失败后不进行强制关机。<br>默认取值：false。
    */
   ForceStop?: boolean
 }
@@ -1988,7 +1988,7 @@ export interface DisassociateInstancesKeyPairsRequest {
    */
   KeyIds: Array<string>
   /**
-   * 是否对运行中的实例选择强制关机。建议对运行中的实例先手动关机，然后再解绑密钥。取值范围：<br><li>TRUE：表示在正常关机失败后进行强制关机。<br><li>FALSE：表示在正常关机失败后不进行强制关机。<br><br>默认取值：FALSE。
+   * 是否对运行中的实例选择强制关机。建议对运行中的实例先手动关机，然后再解绑密钥。取值范围：<br><li>true：表示在正常关机失败后进行强制关机。<br><li>false：表示在正常关机失败后不进行强制关机。<br><br>默认取值：false。
    */
   ForceStop?: boolean
 }
@@ -2995,12 +2995,12 @@ export interface CreateImageRequest {
   ImageDescription?: string
   /**
    * 是否执行强制关机以制作镜像。
-取值范围：<br><li>TRUE：表示关机之后制作镜像<br><li>FALSE：表示开机状态制作镜像<br><br>默认取值：FALSE。<br><br>开机状态制作镜像，可能导致部分数据未备份，影响数据安全。
+取值范围：<br><li>true：表示关机之后制作镜像<br><li>false：表示开机状态制作镜像<br><br>默认取值：false。<br><br>开机状态制作镜像，可能导致部分数据未备份，影响数据安全。
    */
   ForcePoweroff?: string
   /**
    * 创建Windows镜像时是否启用Sysprep。
-取值范围：TRUE或FALSE，默认取值为FALSE。
+取值范围：true或false，传true表示启用Sysprep，传false表示不启用，默认取值为false。
 
 关于Sysprep的详情请参考[链接](https://cloud.tencent.com/document/product/213/43498)。
    */
@@ -3014,7 +3014,7 @@ export interface CreateImageRequest {
    */
   SnapshotIds?: Array<string>
   /**
-   * 检测本次请求的是否成功，但不会对操作的资源产生任何影响
+   * 检测本次请求的是否成功，但不会对操作的资源产生任何影响。默认取值为false。
    */
   DryRun?: boolean
   /**
@@ -5512,7 +5512,7 @@ export interface DisassociateSecurityGroupsRequest {
    */
   SecurityGroupIds: Array<string>
   /**
-   * 被解绑的`实例ID`，类似ins-lesecurk，支持指定多个实例 。
+   * 被解绑的`实例ID`，类似ins-lesecurk，支持指定多个实例，每次请求批量实例的上限为100。
    */
   InstanceIds: Array<string>
 }

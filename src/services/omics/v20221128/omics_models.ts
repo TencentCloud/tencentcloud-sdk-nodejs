@@ -84,6 +84,7 @@ export interface GetRunStatusRequest {
   RunUuid: string
   /**
    * 项目ID。
+（不填使用指定地域下的默认项目）
    */
   ProjectId?: string
 }
@@ -114,6 +115,70 @@ export interface ImportTableFileResponse {
    * 表格ID。
    */
   TableId?: string
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * RunApplication请求参数结构体
+ */
+export interface RunApplicationRequest {
+  /**
+   * 应用ID。
+   */
+  ApplicationId: string
+  /**
+   * 项目ID。
+   */
+  ProjectId: string
+  /**
+   * 任务批次名称。
+   */
+  Name: string
+  /**
+   * 投递环境ID。
+   */
+  EnvironmentId: string
+  /**
+   * 任务输入JSON。需要进行base64编码。
+   */
+  InputBase64: string
+  /**
+   * 任务缓存清理时间。不填表示不清理。
+   */
+  CacheClearDelay: number
+  /**
+   * 运行选项。
+   */
+  Option: RunOption
+  /**
+   * 任务批次描述。
+   */
+  Description?: string
+  /**
+   * 批量投递表格ID，不填表示单例投递。
+   */
+  TableId?: string
+  /**
+   * 批量投递表格行UUID。不填表示表格全部行。
+   */
+  TableRowUuids?: Array<string>
+  /**
+   * 应用版本ID。不填表示使用当前最新版本。
+   */
+  ApplicationVersionId?: string
+}
+
+/**
+ * GetRunMetadataFile返回参数结构体
+ */
+export interface GetRunMetadataFileResponse {
+  /**
+   * 文件预签名链接，一分钟内有效。
+   */
+  CosSignedUrl?: string
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -208,8 +273,61 @@ export interface GetRunCallsRequest {
   Path: string
   /**
    * 项目ID。
+（不填使用指定地域下的默认项目）
    */
   ProjectId?: string
+}
+
+/**
+ * RunWorkflow请求参数结构体
+ */
+export interface RunWorkflowRequest {
+  /**
+   * 任务批次名称。
+   */
+  Name: string
+  /**
+   * 投递环境ID。
+   */
+  EnvironmentId: string
+  /**
+   * 工作流Git仓库信息。
+   */
+  GitSource: GitInfo
+  /**
+   * 工作流类型。
+
+支持类型：
+- NEXTFLOW
+   */
+  Type: string
+  /**
+   * Nextflow选项。
+   */
+  NFOption: NFOption
+  /**
+   * 项目ID。
+（不填使用指定地域下的默认项目）
+   */
+  ProjectId?: string
+  /**
+   * 任务批次描述。
+   */
+  Description?: string
+  /**
+   * 任务输入JSON。需要进行base64编码。
+（InputBase64和InputCosUri必选其一）
+   */
+  InputBase64?: string
+  /**
+   * 任务输入COS地址。
+（InputBase64和InputCosUri必选其一）
+   */
+  InputCosUri?: string
+  /**
+   * 任务缓存清理时间。不填表示不清理。
+   */
+  CacheClearDelay?: number
 }
 
 /**
@@ -218,6 +336,7 @@ export interface GetRunCallsRequest {
 export interface DescribeRunsRequest {
   /**
    * 项目ID。
+（不填使用指定地域下的默认项目）
    */
   ProjectId?: string
   /**
@@ -287,6 +406,7 @@ export interface Run {
   Input?: string
   /**
    * 运行选项。
+   * @deprecated
    */
   Option?: RunOption
   /**
@@ -487,53 +607,39 @@ export interface ClusterOption {
 }
 
 /**
- * RunApplication请求参数结构体
+ * TerminateRunGroup返回参数结构体
  */
-export interface RunApplicationRequest {
+export interface TerminateRunGroupResponse {
   /**
-   * 应用ID。
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  ApplicationId: string
+  RequestId?: string
+}
+
+/**
+ * Git信息。
+ */
+export interface GitInfo {
   /**
-   * 项目ID。
+   * Git地址。
    */
-  ProjectId: string
+  GitHttpPath: string
   /**
-   * 任务批次名称。
+   * Git用户名。
    */
-  Name: string
+  GitUserName?: string
   /**
-   * 投递环境ID。
+   * Git密码或者Token。
    */
-  EnvironmentId: string
+  GitTokenOrPassword?: string
   /**
-   * 任务输入JSON。需要进行base64编码。
+   * 分支。
    */
-  InputBase64: string
+  Branch?: string
   /**
-   * 任务缓存清理时间。不填表示不清理。
+   * 标签。
    */
-  CacheClearDelay: number
-  /**
-   * 运行选项。
-   */
-  Option: RunOption
-  /**
-   * 任务批次描述。
-   */
-  Description?: string
-  /**
-   * 批量投递表格ID，不填表示单例投递。
-   */
-  TableId?: string
-  /**
-   * 批量投递表格行UUID。不填表示表格全部行。
-   */
-  TableRowUuids?: Array<string>
-  /**
-   * 应用版本ID。不填表示使用当前最新版本。
-   */
-  ApplicationVersionId?: string
+  Tag?: string
 }
 
 /**
@@ -820,6 +926,21 @@ export interface DescribeRunGroupsResponse {
 }
 
 /**
+ * TerminateRunGroup请求参数结构体
+ */
+export interface TerminateRunGroupRequest {
+  /**
+   * 任务批次ID。
+   */
+  RunGroupId: string
+  /**
+   * 项目ID。
+（不填使用指定地域下的默认项目）
+   */
+  ProjectId?: string
+}
+
+/**
  * 环境配置。
  */
 export interface EnvironmentConfig {
@@ -882,6 +1003,48 @@ export interface CreateEnvironmentResponse {
 }
 
 /**
+ * GetRunMetadataFile请求参数结构体
+ */
+export interface GetRunMetadataFileRequest {
+  /**
+   * 任务Uuid。
+   */
+  RunUuid: string
+  /**
+   * 需要获取的文件名。
+
+默认支持以下文件：
+- nextflow.log
+
+提交时NFOption中report指定为true时，额外支持以下文件：
+- execution_report.html
+- execution_timeline.html
+- execution_trace.txt
+- pipeline_dag.html
+   */
+  Key: string
+  /**
+   * 项目ID。
+（不填使用指定地域下的默认项目）
+   */
+  ProjectId?: string
+}
+
+/**
+ * RunWorkflow返回参数结构体
+ */
+export interface RunWorkflowResponse {
+  /**
+   * 任务批次ID。
+   */
+  RunGroupId?: string
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 表格行。
  */
 export interface TableRow {
@@ -903,6 +1066,7 @@ export interface TableRow {
 export interface DescribeRunGroupsRequest {
   /**
    * 项目ID。
+（不填使用指定地域下的默认项目）
    */
   ProjectId?: string
   /**

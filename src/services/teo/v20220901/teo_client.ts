@@ -93,6 +93,7 @@ import {
   ModifyAccelerationDomainStatusesResponse,
   Zone,
   DescribeRulesSettingResponse,
+  BindSecurityTemplateToEntityResponse,
   RuleExtraParameter,
   RulesSettingAction,
   DDoSAttackEvent,
@@ -147,7 +148,7 @@ import {
   CreatePrefetchTaskResponse,
   NoCache,
   DescribeDefaultCertificatesRequest,
-  DescribeAliasDomainsResponse,
+  BindZoneToPlanRequest,
   SecurityType,
   IPWhitelist,
   DDoS,
@@ -198,6 +199,7 @@ import {
   CertificateInfo,
   CreatePlanForZoneRequest,
   ModifyAliasDomainStatusRequest,
+  BindSecurityTemplateToEntityRequest,
   TimingDataItem,
   CreateApplicationProxyRequest,
   CC,
@@ -233,7 +235,7 @@ import {
   CreateOriginGroupResponse,
   ModifyApplicationProxyRuleStatusRequest,
   AccelerateType,
-  BindZoneToPlanRequest,
+  DescribeAliasDomainsResponse,
   CreateAccelerationDomainRequest,
   FollowOrigin,
   DeleteZoneRequest,
@@ -957,6 +959,16 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
     cb?: (error: string, rep: ModifyApplicationProxyStatusResponse) => void
   ): Promise<ModifyApplicationProxyStatusResponse> {
     return this.request("ModifyApplicationProxyStatus", req, cb)
+  }
+
+  /**
+   * 操作安全策略模板，支持将域名绑定或换绑到指定的策略模板，或者从指定的策略模板解绑。
+   */
+  async BindSecurityTemplateToEntity(
+    req: BindSecurityTemplateToEntityRequest,
+    cb?: (error: string, rep: BindSecurityTemplateToEntityResponse) => void
+  ): Promise<BindSecurityTemplateToEntityResponse> {
+    return this.request("BindSecurityTemplateToEntity", req, cb)
   }
 
   /**

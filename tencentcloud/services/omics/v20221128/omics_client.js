@@ -40,6 +40,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeEnvironments", req, cb);
     }
     /**
+     * 查询任务详情文件。
+     */
+    async GetRunMetadataFile(req, cb) {
+        return this.request("GetRunMetadataFile", req, cb);
+    }
+    /**
      * 导入表格文件。
      */
     async ImportTableFile(req, cb) {
@@ -58,6 +64,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("RunApplication", req, cb);
     }
     /**
+     * 运行工作流。
+     */
+    async RunWorkflow(req, cb) {
+        return this.request("RunWorkflow", req, cb);
+    }
+    /**
      * 创建组学平台计算环境。
      */
     async CreateEnvironment(req, cb) {
@@ -68,6 +80,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async RetryRuns(req, cb) {
         return this.request("RetryRuns", req, cb);
+    }
+    /**
+     * 终止任务批次。
+     */
+    async TerminateRunGroup(req, cb) {
+        return this.request("TerminateRunGroup", req, cb);
     }
     /**
      * 查询任务列表。

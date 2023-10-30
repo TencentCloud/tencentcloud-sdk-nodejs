@@ -658,6 +658,16 @@ it("teo.v20220901.ModifyApplicationProxyStatus", async function () {
     }
 })
 
+it("teo.v20220901.BindSecurityTemplateToEntity", async function () {
+    try {
+       const data = await client.BindSecurityTemplateToEntity({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("teo.v20220901.DescribeTimingL7AnalysisData", async function () {
     try {
        const data = await client.DescribeTimingL7AnalysisData({})

@@ -1961,6 +1961,15 @@ export interface DescribeRulesSettingResponse {
     RequestId?: string;
 }
 /**
+ * BindSecurityTemplateToEntity返回参数结构体
+ */
+export interface BindSecurityTemplateToEntityResponse {
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * 规则引擎参数详情信息，特殊参数类型。
  */
 export interface RuleExtraParameter {
@@ -3468,21 +3477,17 @@ export interface DescribeDefaultCertificatesRequest {
     Limit?: number;
 }
 /**
- * DescribeAliasDomains返回参数结构体
+ * BindZoneToPlan请求参数结构体
  */
-export interface DescribeAliasDomainsResponse {
+export interface BindZoneToPlanRequest {
     /**
-     * 符合条件的别称域名个数。
+     * 未绑定套餐的站点ID。
      */
-    TotalCount: number;
+    ZoneId: string;
     /**
-     * 别称域名详细信息列表。
+     * 待绑定的目标套餐ID。
      */
-    AliasDomains: Array<AliasDomain>;
-    /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
+    PlanId: string;
 }
 /**
  * 安全类型配置项。
@@ -4882,6 +4887,36 @@ export interface ModifyAliasDomainStatusRequest {
     AliasNames?: Array<string>;
 }
 /**
+ * BindSecurityTemplateToEntity请求参数结构体
+ */
+export interface BindSecurityTemplateToEntityRequest {
+    /**
+     * 需要绑定或解绑的策略模板所属站点 ID。
+     */
+    ZoneId: string;
+    /**
+     * 绑定至策略模板（或者从策略模板解绑）的域名列表。
+     */
+    Entities: Array<string>;
+    /**
+     * 绑定或解绑操作选项，取值有：
+  <li>bind：绑定域名至策略模板；</li>
+  <li>unbind-keep-policy：将域名从策略模板解绑，解绑时保留当前策略；</li>
+  <li>unbind-use-default：将域名从策略模板解绑，并使用默认空白策略。</li>注意：解绑操作当前仅支持单个域名解绑。即：当 Operate 参数取值为 unbind-keep-policy 或 unbind-use-default 时，Entities 参数列表仅支持填写一个域名。
+     */
+    Operate: string;
+    /**
+     * 指定绑定或解绑的策略模板 ID 。
+     */
+    TemplateId: string;
+    /**
+     * 如指定的域名已经绑定了策略模板，是否替换该模板。支持下列取值：
+  <li>true： 替换域名当前绑定的模板；</li>
+  <li>false：不替换域名当前绑定的模板。</li>注意：当选择不替换已有策略模板时，若指定域名已经绑定策略模板，API 将返回错误。
+     */
+    OverWrite?: boolean;
+}
+/**
  * 统计曲线数据项
  */
 export interface TimingDataItem {
@@ -5632,17 +5667,21 @@ export interface AccelerateType {
     Switch: string;
 }
 /**
- * BindZoneToPlan请求参数结构体
+ * DescribeAliasDomains返回参数结构体
  */
-export interface BindZoneToPlanRequest {
+export interface DescribeAliasDomainsResponse {
     /**
-     * 未绑定套餐的站点ID。
+     * 符合条件的别称域名个数。
      */
-    ZoneId: string;
+    TotalCount: number;
     /**
-     * 待绑定的目标套餐ID。
+     * 别称域名详细信息列表。
      */
-    PlanId: string;
+    AliasDomains: Array<AliasDomain>;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * CreateAccelerationDomain请求参数结构体

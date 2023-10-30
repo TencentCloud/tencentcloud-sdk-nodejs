@@ -102,6 +102,20 @@ export interface BillTagInfo {
 }
 
 /**
+ * 节省计划覆盖率聚合数据
+ */
+export interface SavingPlanCoverageRate {
+  /**
+   * 聚合时间维度，按天聚合格式为yyyy-MM-dd，按月聚合格式为yyyy-MM
+   */
+  DatePoint?: string
+  /**
+   * 覆盖率结果，取值[0, 100]
+   */
+  Rate?: number
+}
+
+/**
  * 收支明细的流水信息
  */
 export interface BillTransactionInfo {
@@ -737,6 +751,24 @@ other 第三方解冻;hour 按量解冻;month 按月解冻
 }
 
 /**
+ * DescribeSavingPlanOverview返回参数结构体
+ */
+export interface DescribeSavingPlanOverviewResponse {
+  /**
+   * 节省计划总览明细数据
+   */
+  Overviews?: Array<SavingPlanOverviewDetail>
+  /**
+   * 查询命中的节省计划总览明细数据总条数
+   */
+  Total?: number
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 经销账单资源汇总数据对象
  */
 export interface BillDistributionResourceSummary {
@@ -991,6 +1023,59 @@ export interface ConsumptionSummaryTotal {
    * 折后总价
    */
   RealTotalCost: string
+}
+
+/**
+ * 节省计划覆盖率数据
+ */
+export interface SavingPlanCoverageDetail {
+  /**
+   * 资源 ID：账单中出账对象 ID，不同产品因资源形态不同，资源内容不完全相同，如云服务器 CVM 为对应的实例 ID
+   */
+  ResourceId?: string
+  /**
+   * 地域ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RegionId?: number
+  /**
+   * 产品编码
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProductCode?: string
+  /**
+   * 子产品编码
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SubProductCode?: string
+  /**
+   * 费用起始日期，格式yyyy-MM-dd
+   */
+  StartDate?: string
+  /**
+   * 费用结束日期，格式yyyy-MM-dd，目前与StartDate相等
+   */
+  EndDate?: string
+  /**
+   * 节省计划覆盖金额（即节省计划支付金额）
+   */
+  SpCoveredAmount?: number
+  /**
+   * 节省计划未覆盖金额（即优惠后总价）
+   */
+  SpUncoveredAmount?: number
+  /**
+   * 总支出（即节省计划未覆盖金额 + 节省计划覆盖金额）
+   */
+  TotalRealAmount?: number
+  /**
+   * 按量计费预期金额（即折前价 * 折扣）
+   */
+  ExpectedAmount?: number
+  /**
+   * 覆盖率结果，取值[0, 100]
+   */
+  SpCoverage?: number
 }
 
 /**
@@ -1358,6 +1443,62 @@ L0-PDF&账单包不支持当月下载，当月账单请在次月1号19:00出账�
 }
 
 /**
+ * CreateSavingPlanOrder返回参数结构体
+ */
+export interface CreateSavingPlanOrderResponse {
+  /**
+   * 订单号
+   */
+  BigDealId?: string
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 节省计划总览明细数据
+ */
+export interface SavingPlanOverviewDetail {
+  /**
+   * 节省计划类型
+   */
+  SpType?: string
+  /**
+   * 支付类型
+   */
+  PayType?: number
+  /**
+   * 支付金额（单位：元）
+   */
+  PayAmount?: string
+  /**
+   * 开始时间 yyyy-mm-dd HH:mm:ss格式
+   */
+  StartTime?: string
+  /**
+   * 结束时间 yyyy-mm-dd HH:mm:ss格式
+   */
+  EndTime?: string
+  /**
+   * 购买时间 yyyy-mm-dd HH:mm:ss格式
+   */
+  BuyTime?: string
+  /**
+   * 状态
+   */
+  Status?: number
+  /**
+   * 累计节省金额（单位：元）
+   */
+  SavingAmount?: string
+  /**
+   * 地域
+   */
+  Region?: Array<string>
+}
+
+/**
  * DescribeBillSummaryByPayMode请求参数结构体
  */
 export interface DescribeBillSummaryByPayModeRequest {
@@ -1553,22 +1694,65 @@ export interface BillDetail {
 }
 
 /**
- * 由域名和使用明细组成的数据结构
+ * CreateSavingPlanOrder请求参数结构体
  */
-export interface DetailSet {
+export interface CreateSavingPlanOrderRequest {
   /**
-   * 域名
+   * 地域编码
    */
-  Domain: string
+  RegionId: number
   /**
-   * 使用数据明细
+   * 区域编码
    */
-  DetailPoints: Array<DetailPoint>
+  ZoneId: number
   /**
-   * 实例ID
+   * 预付费类型
+   */
+  PrePayType: string
+  /**
+   * 时长
+   */
+  TimeSpan: number
+  /**
+   * 时长单位
+   */
+  TimeUnit: string
+  /**
+   * 商品唯一标识
+   */
+  CommodityCode: string
+  /**
+   * 承诺时长内的小额金额（单位：分）
+   */
+  PromiseUseAmount: number
+  /**
+   * 节省计划的指定生效时间，若不传则为当前下单时间。传参数格式:"2023-10-01 00:00:00"，仅支持指定日期的0点时刻
+   */
+  SpecifyEffectTime?: string
+}
+
+/**
+ * DescribeBillDetail返回参数结构体
+ */
+export interface DescribeBillDetailResponse {
+  /**
+   * 详情列表
+   */
+  DetailSet?: Array<BillDetail>
+  /**
+   * 总记录数，24小时缓存一次，可能比实际总记录数少
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  InstanceID: string
+  Total?: number
+  /**
+   * 本次请求的上下文信息，可用于下一次请求的请求参数中，加快查询速度
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Context?: string
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2192,6 +2376,32 @@ export interface Conditions {
 }
 
 /**
+ * DescribeSavingPlanCoverage请求参数结构体
+ */
+export interface DescribeSavingPlanCoverageRequest {
+  /**
+   * 费用起始日期，格式yyyy-MM-dd
+   */
+  StartDate: string
+  /**
+   * 费用结束日期，格式yyyy-MM-dd
+   */
+  EndDate: string
+  /**
+   * 分页偏移量，Offset=0表示第一页，如果Limit=100，则Offset=100表示第二页，Offset=200表示第三页，以此类推
+   */
+  Offset: number
+  /**
+   * 数量，最大值为200
+   */
+  Limit: number
+  /**
+   * 取值包括1（缺省值）和2，1表示按天统计覆盖率，2表示按月统计覆盖率，此参数仅影响返回的RateSet聚合粒度，不影响返回的DetailSet
+   */
+  PeriodType?: number
+}
+
+/**
  * 按地域汇总消费详情
  */
 export interface RegionSummaryOverviewItem {
@@ -2333,6 +2543,28 @@ export interface DescribeBillSummaryForOrganizationRequest {
 }
 
 /**
+ * DescribeSavingPlanOverview请求参数结构体
+ */
+export interface DescribeSavingPlanOverviewRequest {
+  /**
+   * 开始时间，格式yyyy-MM-dd 注：查询范围请勿超过6个月
+   */
+  StartDate: string
+  /**
+   * 结束时间，格式yyyy-MM-dd
+   */
+  EndDate: string
+  /**
+   * 分页偏移量
+   */
+  Offset: number
+  /**
+   * 每页数量，最大值为200
+   */
+  Limit: number
+}
+
+/**
  * 按交易类型汇总消费详情
  */
 export interface ActionSummaryOverviewItem {
@@ -2380,77 +2612,91 @@ export interface ActionSummaryOverviewItem {
 }
 
 /**
- * DescribeVoucherInfo请求参数结构体
+ * DescribeBillDetailForOrganization请求参数结构体
  */
-export interface DescribeVoucherInfoRequest {
+export interface DescribeBillDetailForOrganizationRequest {
   /**
-   * 一页多少条数据，默认是20条，最大不超过1000
-   */
-  Limit: number
-  /**
-   * 第多少页，默认是1
+   * 分页偏移量，Offset=0表示第一页，如果Limit=100，则Offset=100表示第二页，Offset=200表示第三页，依次类推
    */
   Offset: number
   /**
-   * 券状态：待使用：unUsed，已使用： used，已发货：delivered，已作废： cancel，已过期：overdue
+   * 数量，最大值为100
    */
-  Status?: string
+  Limit: number
   /**
-   * 代金券id
+   * 周期类型，byUsedTime按计费周期/byPayTime按扣费周期。需要与费用中心该月份账单的周期保持一致。您可前往[账单概览](https://console.cloud.tencent.com/expense/bill/overview)页面顶部查看确认您的账单统计周期类型。
    */
-  VoucherId?: string
+  PeriodType?: string
   /**
-   * 代金券订单id
+   * 月份，格式为yyyy-mm，Month和BeginTime&EndTime必传一个，如果有传BeginTime&EndTime则Month字段无效。不能早于开通账单2.0的月份，最多可拉取18个月内的数据。
    */
-  CodeId?: string
+  Month?: string
   /**
-   * 商品码
+   * 周期开始时间，格式为yyyy-mm-dd hh:ii:ss，Month和BeginTime&EndTime必传一个，如果有该字段则Month字段无效。BeginTime和EndTime必须一起传，且为相同月份，不支持跨月查询，查询结果是整月数据。不能早于开通账单2.0的月份，最多可拉取18个月内的数据。
    */
-  ProductCode?: string
+  BeginTime?: string
   /**
-   * 活动id
+   * 周期结束时间，格式为yyyy-mm-dd hh:ii:ss，Month和BeginTime&EndTime必传一个，如果有该字段则Month字段无效。BeginTime和EndTime必须一起传，且为相同月份，不支持跨月查询，查询结果是整月数据。不能早于开通账单2.0的月份，最多可拉取18个月内的数据。
    */
-  ActivityId?: string
+  EndTime?: string
   /**
-   * 代金券名称
+   * 是否需要访问列表的总记录数，用于前端分页
+1-表示需要， 0-表示不需要
    */
-  VoucherName?: string
+  NeedRecordNum?: number
   /**
-   * 发放开始时间,例：2021-01-01
-   */
-  TimeFrom?: string
-  /**
-   * 发放结束时间，例：2021-01-01
-   */
-  TimeTo?: string
-  /**
-   * 指定排序字段：BeginTime开始时间、EndTime到期时间、CreateTime创建时间
-   */
-  SortField?: string
-  /**
-   * 指定升序降序：desc、asc
-   */
-  SortOrder?: string
-  /**
-   * 付费模式，postPay后付费/prePay预付费/riPay预留实例/""或者"*"表示全部模式，如果payMode为""或"*"，那么productCode与subProductCode必须传空
+   * 付费模式 prePay(表示包年包月)/postPay(表示按时按量)
    */
   PayMode?: string
   /**
-   * 付费场景PayMode=postPay时：spotpay-竞价实例,"settle account"-普通后付费PayMode=prePay时：purchase-包年包月新购，renew-包年包月续费（自动续费），modify-包年包月配置变更(变配）PayMode=riPay时：oneOffFee-预留实例预付，hourlyFee-预留实例每小时扣费，*-支持全部付费场景
+   * 查询指定资源信息
    */
-  PayScene?: string
+  ResourceId?: string
   /**
-   * 操作人，默认就是用户uin
+   * 查询交易类型（请使用交易类型名称入参），入参示例枚举如下：
+包年包月新购
+包年包月续费
+包年包月配置变更
+包年包月退款 
+按量计费扣费 
+线下项目扣费 
+线下产品扣费 
+调账扣费 
+调账补偿 
+按量计费小时结 
+按量计费日结 
+按量计费月结 
+竞价实例小时结 
+线下项目调账补偿 
+线下产品调账补偿 
+优惠扣费 
+优惠补偿 
+按量计费迁入资源 
+按量计费迁出资源 
+包年包月迁入资源 
+包年包月迁出资源 
+预付费用 
+小时费用 
+预留实例退款 
+按量计费冲正 
+包年包月转按量 
+保底扣款 
+节省计划小时费用
    */
-  Operator?: string
+  ActionType?: string
   /**
-   * 代金券主类型 has_price 为有价现金券 no_price 为无价代金券
+   * 项目ID:资源所属项目ID
    */
-  VoucherMainType?: string
+  ProjectId?: number
   /**
-   * 代金券副类型 discount 为折扣券 deduct 为抵扣券
+   * 产品名称代码
+备注：如需获取当月使用过的BusinessCode，请调用API：<a href="https://cloud.tencent.com/document/product/555/35761">获取产品汇总费用分布</a>
    */
-  VoucherSubType?: string
+  BusinessCode?: string
+  /**
+   * 上一次请求返回的上下文信息，翻页查询Month>=2023-05的月份的数据可加快查询速度，数据量10万级别以上的用户建议使用，查询速度可提升2~10倍
+   */
+  Context?: string
 }
 
 /**
@@ -2561,27 +2807,22 @@ export interface DescribeBillResourceSummaryRequest {
 }
 
 /**
- * DescribeBillDetail返回参数结构体
+ * 由域名和使用明细组成的数据结构
  */
-export interface DescribeBillDetailResponse {
+export interface DetailSet {
   /**
-   * 详情列表
+   * 域名
    */
-  DetailSet?: Array<BillDetail>
+  Domain: string
   /**
-   * 总记录数，24小时缓存一次，可能比实际总记录数少
+   * 使用数据明细
+   */
+  DetailPoints: Array<DetailPoint>
+  /**
+   * 实例ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Total?: number
-  /**
-   * 本次请求的上下文信息，可用于下一次请求的请求参数中，加快查询速度
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Context?: string
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  InstanceID: string
 }
 
 /**
@@ -3032,6 +3273,53 @@ export interface DescribeBillSummaryByProductResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 节省计划使用率数据
+ */
+export interface SavingPlanUsageDetail {
+  /**
+   * 节省计划类型
+   */
+  SpType?: string
+  /**
+   * 节省计划状态
+   */
+  Status?: number
+  /**
+   * 累计抵扣的金额（单位：元）
+   */
+  DeductAmount?: string
+  /**
+   * 累计承诺消费金额（单位：元）
+   */
+  PromiseAmount?: string
+  /**
+   * 累计净节省金额（单位：元）
+   */
+  NetSavings?: string
+  /**
+   * 使用率
+   */
+  UtilizationRate?: number
+  /**
+   * 累计流失金额（单位：元）
+   */
+  LossAmount?: string
+  /**
+   * 累计按量计费预期金额（单位：元）
+   */
+  DosageAmount?: string
+  /**
+   * 累计成本金额（单位：元）
+   */
+  CostAmount?: string
+  /**
+   * 地域
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Region?: Array<string>
 }
 
 /**
@@ -3494,6 +3782,24 @@ export interface BusinessSummaryOverviewItem {
 }
 
 /**
+ * DescribeSavingPlanUsage返回参数结构体
+ */
+export interface DescribeSavingPlanUsageResponse {
+  /**
+   * 节省计划使用率数据
+   */
+  Usages?: Array<SavingPlanUsageDetail>
+  /**
+   * 查询命中的节省计划总览明细数据总条数
+   */
+  Total?: number
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 使用记录
  */
 export interface UsageRecords {
@@ -3513,91 +3819,125 @@ export interface UsageRecords {
 }
 
 /**
- * DescribeBillDetailForOrganization请求参数结构体
+ * DescribeSavingPlanCoverage返回参数结构体
  */
-export interface DescribeBillDetailForOrganizationRequest {
+export interface DescribeSavingPlanCoverageResponse {
   /**
-   * 分页偏移量，Offset=0表示第一页，如果Limit=100，则Offset=100表示第二页，Offset=200表示第三页，依次类推
+   * 节省计划覆盖率明细数据
    */
-  Offset: number
+  DetailSet?: Array<SavingPlanCoverageDetail>
   /**
-   * 数量，最大值为100
+   * 节省计划覆盖率聚合数据
+   */
+  RateSet?: Array<SavingPlanCoverageRate>
+  /**
+   * 查询命中的节省计划覆盖率明细数据总条数
+   */
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeVoucherInfo请求参数结构体
+ */
+export interface DescribeVoucherInfoRequest {
+  /**
+   * 一页多少条数据，默认是20条，最大不超过1000
    */
   Limit: number
   /**
-   * 周期类型，byUsedTime按计费周期/byPayTime按扣费周期。需要与费用中心该月份账单的周期保持一致。您可前往[账单概览](https://console.cloud.tencent.com/expense/bill/overview)页面顶部查看确认您的账单统计周期类型。
+   * 第多少页，默认是1
    */
-  PeriodType?: string
+  Offset: number
   /**
-   * 月份，格式为yyyy-mm，Month和BeginTime&EndTime必传一个，如果有传BeginTime&EndTime则Month字段无效。不能早于开通账单2.0的月份，最多可拉取18个月内的数据。
+   * 券状态：待使用：unUsed，已使用： used，已发货：delivered，已作废： cancel，已过期：overdue
    */
-  Month?: string
+  Status?: string
   /**
-   * 周期开始时间，格式为yyyy-mm-dd hh:ii:ss，Month和BeginTime&EndTime必传一个，如果有该字段则Month字段无效。BeginTime和EndTime必须一起传，且为相同月份，不支持跨月查询，查询结果是整月数据。不能早于开通账单2.0的月份，最多可拉取18个月内的数据。
+   * 代金券id
    */
-  BeginTime?: string
+  VoucherId?: string
   /**
-   * 周期结束时间，格式为yyyy-mm-dd hh:ii:ss，Month和BeginTime&EndTime必传一个，如果有该字段则Month字段无效。BeginTime和EndTime必须一起传，且为相同月份，不支持跨月查询，查询结果是整月数据。不能早于开通账单2.0的月份，最多可拉取18个月内的数据。
+   * 代金券订单id
    */
-  EndTime?: string
+  CodeId?: string
   /**
-   * 是否需要访问列表的总记录数，用于前端分页
-1-表示需要， 0-表示不需要
+   * 商品码
    */
-  NeedRecordNum?: number
+  ProductCode?: string
   /**
-   * 付费模式 prePay(表示包年包月)/postPay(表示按时按量)
+   * 活动id
+   */
+  ActivityId?: string
+  /**
+   * 代金券名称
+   */
+  VoucherName?: string
+  /**
+   * 发放开始时间,例：2021-01-01
+   */
+  TimeFrom?: string
+  /**
+   * 发放结束时间，例：2021-01-01
+   */
+  TimeTo?: string
+  /**
+   * 指定排序字段：BeginTime开始时间、EndTime到期时间、CreateTime创建时间
+   */
+  SortField?: string
+  /**
+   * 指定升序降序：desc、asc
+   */
+  SortOrder?: string
+  /**
+   * 付费模式，postPay后付费/prePay预付费/riPay预留实例/""或者"*"表示全部模式，如果payMode为""或"*"，那么productCode与subProductCode必须传空
    */
   PayMode?: string
   /**
-   * 查询指定资源信息
+   * 付费场景PayMode=postPay时：spotpay-竞价实例,"settle account"-普通后付费PayMode=prePay时：purchase-包年包月新购，renew-包年包月续费（自动续费），modify-包年包月配置变更(变配）PayMode=riPay时：oneOffFee-预留实例预付，hourlyFee-预留实例每小时扣费，*-支持全部付费场景
    */
-  ResourceId?: string
+  PayScene?: string
   /**
-   * 查询交易类型（请使用交易类型名称入参），入参示例枚举如下：
-包年包月新购
-包年包月续费
-包年包月配置变更
-包年包月退款 
-按量计费扣费 
-线下项目扣费 
-线下产品扣费 
-调账扣费 
-调账补偿 
-按量计费小时结 
-按量计费日结 
-按量计费月结 
-竞价实例小时结 
-线下项目调账补偿 
-线下产品调账补偿 
-优惠扣费 
-优惠补偿 
-按量计费迁入资源 
-按量计费迁出资源 
-包年包月迁入资源 
-包年包月迁出资源 
-预付费用 
-小时费用 
-预留实例退款 
-按量计费冲正 
-包年包月转按量 
-保底扣款 
-节省计划小时费用
+   * 操作人，默认就是用户uin
    */
-  ActionType?: string
+  Operator?: string
   /**
-   * 项目ID:资源所属项目ID
+   * 代金券主类型 has_price 为有价现金券 no_price 为无价代金券
    */
-  ProjectId?: number
+  VoucherMainType?: string
   /**
-   * 产品名称代码
-备注：如需获取当月使用过的BusinessCode，请调用API：<a href="https://cloud.tencent.com/document/product/555/35761">获取产品汇总费用分布</a>
+   * 代金券副类型 discount 为折扣券 deduct 为抵扣券
    */
-  BusinessCode?: string
+  VoucherSubType?: string
+}
+
+/**
+ * DescribeSavingPlanUsage请求参数结构体
+ */
+export interface DescribeSavingPlanUsageRequest {
   /**
-   * 上一次请求返回的上下文信息，翻页查询Month>=2023-05的月份的数据可加快查询速度，数据量10万级别以上的用户建议使用，查询速度可提升2~10倍
+   * 开始时间，格式yyyy-MM-dd 注：查询范围请勿超过6个月
    */
-  Context?: string
+  StartDate: string
+  /**
+   * 结束时间，格式yyyy-MM-dd
+   */
+  EndDate: string
+  /**
+   * 分页偏移量
+   */
+  Offset: number
+  /**
+   * 每页数量，最大值为200
+   */
+  Limit: number
+  /**
+   * 查询结果数据的时间间隔
+   */
+  TimeInterval: string
 }
 
 /**

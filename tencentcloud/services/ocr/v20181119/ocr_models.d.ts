@@ -627,7 +627,7 @@ export interface FinanBillSliceOCRResponse {
  */
 export interface DriverLicenseOCRResponse {
     /**
-     * 姓名
+     * 驾驶证正页姓名
      */
     Name?: string;
     /**
@@ -664,7 +664,7 @@ export interface DriverLicenseOCRResponse {
      */
     EndDate?: string;
     /**
-     * 证号
+     * 驾驶证正页证号
      */
     CardCode?: string;
     /**
@@ -709,6 +709,14 @@ export interface DriverLicenseOCRResponse {
      * 生成时间（仅电子驾驶证支持返回该字段）
      */
     GenerateTime?: string;
+    /**
+     * 驾驶证副页姓名
+     */
+    BackPageName?: string;
+    /**
+     * 驾驶证副页证号
+     */
+    BackPageCardCode?: string;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1393,6 +1401,7 @@ export interface DriverLicenseOCRRequest {
     /**
      * FRONT 为驾驶证主页正面（有红色印章的一面），
   BACK 为驾驶证副页正面（有档案编号的一面）。
+  DOUBLE 支持自动识别驾驶证正副页单面，和正副双面同框识别
   默认值为：FRONT。
      */
     CardSide?: string;

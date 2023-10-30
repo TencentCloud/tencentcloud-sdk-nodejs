@@ -25,9 +25,12 @@ import {
   GetRunStatusRequest,
   DescribeRunsResponse,
   ImportTableFileResponse,
+  RunApplicationRequest,
+  GetRunMetadataFileResponse,
   DeleteEnvironmentResponse,
   Environment,
   GetRunCallsRequest,
+  RunWorkflowRequest,
   DescribeRunsRequest,
   Run,
   TableColumn,
@@ -39,7 +42,8 @@ import {
   ImportTableFileRequest,
   CacheInfo,
   ClusterOption,
-  RunApplicationRequest,
+  TerminateRunGroupResponse,
+  GitInfo,
   ApplicationVersion,
   DeleteEnvironmentRequest,
   RunGroup,
@@ -48,9 +52,12 @@ import {
   Filter,
   ResourceIds,
   DescribeRunGroupsResponse,
+  TerminateRunGroupRequest,
   EnvironmentConfig,
   DescribeTablesRowsResponse,
   CreateEnvironmentResponse,
+  GetRunMetadataFileRequest,
+  RunWorkflowResponse,
   TableRow,
   DescribeRunGroupsRequest,
   GetRunStatusResponse,
@@ -95,6 +102,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询任务详情文件。
+   */
+  async GetRunMetadataFile(
+    req: GetRunMetadataFileRequest,
+    cb?: (error: string, rep: GetRunMetadataFileResponse) => void
+  ): Promise<GetRunMetadataFileResponse> {
+    return this.request("GetRunMetadataFile", req, cb)
+  }
+
+  /**
    * 导入表格文件。
    */
   async ImportTableFile(
@@ -125,6 +142,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 运行工作流。
+   */
+  async RunWorkflow(
+    req: RunWorkflowRequest,
+    cb?: (error: string, rep: RunWorkflowResponse) => void
+  ): Promise<RunWorkflowResponse> {
+    return this.request("RunWorkflow", req, cb)
+  }
+
+  /**
    * 创建组学平台计算环境。
    */
   async CreateEnvironment(
@@ -142,6 +169,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: RetryRunsResponse) => void
   ): Promise<RetryRunsResponse> {
     return this.request("RetryRuns", req, cb)
+  }
+
+  /**
+   * 终止任务批次。
+   */
+  async TerminateRunGroup(
+    req: TerminateRunGroupRequest,
+    cb?: (error: string, rep: TerminateRunGroupResponse) => void
+  ): Promise<TerminateRunGroupResponse> {
+    return this.request("TerminateRunGroup", req, cb)
   }
 
   /**

@@ -289,6 +289,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeAddresses", req, cb);
     }
     /**
+     * 本接口用于修改 SSL-VPN 服务端属性
+     */
+    async ModifyVpnGatewaySslServer(req, cb) {
+        return this.request("ModifyVpnGatewaySslServer", req, cb);
+    }
+    /**
      * 本接口（EnableVpnGatewaySslClientCert）用于启用SSL-VPN-CLIENT 证书。
      */
     async EnableVpnGatewaySslClientCert(req, cb) {

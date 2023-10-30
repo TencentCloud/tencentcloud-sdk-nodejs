@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { RestartLogstashInstanceRequest, DescribeInstanceOperationsRequest, StartLogstashPipelinesRequest, DescribeLogstashInstanceLogsResponse, CreateInstanceResponse, DescribeInstanceLogsRequest, DeleteLogstashPipelinesResponse, UpdateLogstashPipelineDescResponse, DescribeInstancesResponse, DescribeInstanceLogsResponse, DiagnoseInstanceRequest, UpdateDiagnoseSettingsRequest, DescribeInstanceOperationsResponse, UpdateRequestTargetNodeTypesResponse, DeleteLogstashInstanceResponse, GetRequestTargetNodeTypesResponse, DescribeIndexMetaResponse, DiagnoseInstanceResponse, UpgradeLicenseResponse, UpdateLogstashInstanceRequest, UpdateRequestTargetNodeTypesRequest, DescribeLogstashInstancesResponse, DeleteInstanceResponse, DescribeLogstashInstanceOperationsResponse, CreateIndexRequest, UpdatePluginsRequest, UpgradeLicenseRequest, UpdateJdkResponse, UpdateInstanceResponse, DeleteIndexRequest, DescribeViewsRequest, DescribeIndexListResponse, StartLogstashPipelinesResponse, DescribeLogstashInstanceOperationsRequest, CreateLogstashInstanceResponse, SaveAndDeployLogstashPipelineRequest, CreateIndexResponse, DeleteLogstashPipelinesRequest, RestartKibanaRequest, DescribeIndexListRequest, UpdateDictionariesRequest, SaveAndDeployLogstashPipelineResponse, DescribeLogstashPipelinesResponse, CreateInstanceRequest, CreateLogstashInstanceRequest, UpdateDictionariesResponse, DeleteIndexResponse, UpdatePluginsResponse, DescribeInstancesRequest, DescribeLogstashPipelinesRequest, RestartNodesRequest, GetRequestTargetNodeTypesRequest, ModifyEsVipSecurityGroupRequest, DescribeLogstashInstancesRequest, DeleteInstanceRequest, UpgradeInstanceResponse, DescribeIndexMetaRequest, RestartKibanaResponse, UpdateIndexRequest, UpdateIndexResponse, UpdateJdkRequest, UpdateLogstashInstanceResponse, StopLogstashPipelinesRequest, RestartInstanceResponse, UpdateLogstashPipelineDescRequest, ModifyEsVipSecurityGroupResponse, UpdateInstanceRequest, DescribeLogstashInstanceLogsRequest, RestartInstanceRequest, StopLogstashPipelinesResponse, UpdateDiagnoseSettingsResponse, RestartNodesResponse, DeleteLogstashInstanceRequest, UpgradeInstanceRequest, DescribeViewsResponse, RestartLogstashInstanceResponse } from "./es_models";
+import { RestartLogstashInstanceRequest, DescribeInstanceOperationsRequest, DiagnoseInstanceResponse, DescribeDiagnoseResponse, DescribeLogstashInstanceLogsResponse, CreateInstanceResponse, DescribeInstanceLogsRequest, DeleteLogstashPipelinesResponse, UpdateLogstashPipelineDescResponse, DescribeInstancesResponse, DescribeInstanceLogsResponse, DiagnoseInstanceRequest, UpdateDiagnoseSettingsRequest, DescribeInstanceOperationsResponse, UpdateRequestTargetNodeTypesResponse, DeleteLogstashInstanceResponse, GetRequestTargetNodeTypesResponse, DescribeIndexMetaResponse, StartLogstashPipelinesRequest, GetDiagnoseSettingsResponse, UpgradeLicenseResponse, UpdateLogstashInstanceRequest, UpdateRequestTargetNodeTypesRequest, DescribeLogstashInstancesResponse, DeleteInstanceResponse, DescribeLogstashInstanceOperationsResponse, CreateIndexRequest, UpdatePluginsRequest, UpdateJdkResponse, UpdateInstanceResponse, DeleteIndexRequest, DescribeViewsRequest, DescribeIndexListResponse, StartLogstashPipelinesResponse, DescribeLogstashInstanceOperationsRequest, CreateLogstashInstanceResponse, SaveAndDeployLogstashPipelineRequest, CreateIndexResponse, DeleteLogstashPipelinesRequest, RestartKibanaRequest, SaveAndDeployLogstashPipelineResponse, UpdateDictionariesRequest, UpgradeLicenseRequest, DescribeIndexListRequest, DescribeLogstashPipelinesResponse, CreateInstanceRequest, CreateLogstashInstanceRequest, UpdateDictionariesResponse, DeleteIndexResponse, UpdatePluginsResponse, DescribeInstancesRequest, DescribeLogstashPipelinesRequest, RestartNodesRequest, GetRequestTargetNodeTypesRequest, ModifyEsVipSecurityGroupRequest, DescribeLogstashInstancesRequest, DeleteInstanceRequest, UpgradeInstanceResponse, DescribeIndexMetaRequest, RestartKibanaResponse, UpdateIndexRequest, UpdateIndexResponse, UpdateJdkRequest, UpdateLogstashInstanceResponse, StopLogstashPipelinesRequest, RestartInstanceResponse, UpdateLogstashPipelineDescRequest, ModifyEsVipSecurityGroupResponse, UpdateInstanceRequest, DescribeDiagnoseRequest, DescribeInstancePluginListResponse, DescribeLogstashInstanceLogsRequest, RestartInstanceRequest, StopLogstashPipelinesResponse, UpdateDiagnoseSettingsResponse, GetDiagnoseSettingsRequest, DescribeInstancePluginListRequest, RestartNodesResponse, DeleteLogstashInstanceRequest, UpgradeInstanceRequest, DescribeViewsResponse, RestartLogstashInstanceResponse } from "./es_models";
 /**
  * es client
  * @class
@@ -36,6 +36,10 @@ export declare class Client extends AbstractClient {
      */
     DeleteInstance(req: DeleteInstanceRequest, cb?: (error: string, rep: DeleteInstanceResponse) => void): Promise<DeleteInstanceResponse>;
     /**
+     * 查看智能运维配置
+     */
+    GetDiagnoseSettings(req: GetDiagnoseSettingsRequest, cb?: (error: string, rep: GetDiagnoseSettingsResponse) => void): Promise<GetDiagnoseSettingsResponse>;
+    /**
      * 创建索引
      */
     CreateIndex(req: CreateIndexRequest, cb?: (error: string, rep: CreateIndexResponse) => void): Promise<CreateIndexResponse>;
@@ -68,6 +72,10 @@ export declare class Client extends AbstractClient {
      * 更新实例Jdk配置
      */
     UpdateJdk(req: UpdateJdkRequest, cb?: (error: string, rep: UpdateJdkResponse) => void): Promise<UpdateJdkResponse>;
+    /**
+     * 查询智能运维诊断结果报告
+     */
+    DescribeDiagnose(req: DescribeDiagnoseRequest, cb?: (error: string, rep: DescribeDiagnoseResponse) => void): Promise<DescribeDiagnoseResponse>;
     /**
      * 对集群进行节点规格变更，修改实例名称，修改配置，重置密码， 添加Kibana黑白名单等操作。参数中InstanceId为必传参数，ForceRestart为选填参数，剩余参数传递组合及含义如下：
 - InstanceName：修改实例名称(仅用于标识实例)
@@ -167,6 +175,10 @@ export declare class Client extends AbstractClient {
      * 升级ES商业特性
      */
     UpgradeLicense(req: UpgradeLicenseRequest, cb?: (error: string, rep: UpgradeLicenseResponse) => void): Promise<UpgradeLicenseResponse>;
+    /**
+     * 查询实例插件列表
+     */
+    DescribeInstancePluginList(req: DescribeInstancePluginListRequest, cb?: (error: string, rep: DescribeInstancePluginListResponse) => void): Promise<DescribeInstancePluginListResponse>;
     /**
      * 获取索引元数据
      */

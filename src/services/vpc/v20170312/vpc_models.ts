@@ -4751,6 +4751,20 @@ export interface AssociateNetworkAclSubnetsRequest {
 }
 
 /**
+ * ModifyVpnGatewaySslServer返回参数结构体
+ */
+export interface ModifyVpnGatewaySslServerResponse {
+  /**
+   * 异步任务TASKID
+   */
+  TaskId?: number
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * AdjustPublicAddress返回参数结构体
  */
 export interface AdjustPublicAddressResponse {
@@ -8461,6 +8475,56 @@ export interface RenewAddressesResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ModifyVpnGatewaySslServer请求参数结构体
+ */
+export interface ModifyVpnGatewaySslServerRequest {
+  /**
+   * SSL-VPN SERVER 实例ID
+   */
+  SslVpnServerId: string
+  /**
+   * SSL-VPN SERVER NAME
+   */
+  SslVpnServerName?: string
+  /**
+   * 本端地址
+   */
+  LocalAddress?: Array<string>
+  /**
+   * 客户端地址
+   */
+  RemoteAddress?: string
+  /**
+   * SSL VPN服务端监听协议。当前仅支持 UDP。默认UDP
+   */
+  SslVpnProtocol?: string
+  /**
+   * SSL VPN服务端监听协议端口。
+   */
+  SslVpnPort?: number
+  /**
+   * 加密算法。可选 'AES-128-CBC', 'AES-192-CBC', 'AES-256-CBC', 'NONE'。默认NONE
+   */
+  EncryptAlgorithm?: string
+  /**
+   * 认证算法。可选 'SHA1', 'MD5', 'NONE'。默认NONE
+   */
+  IntegrityAlgorithm?: string
+  /**
+   * 是否支持压缩。当前仅支持不支持压缩。默认False
+   */
+  Compress?: boolean
+  /**
+   * 是否开启SSO认证，默认False
+   */
+  SsoEnabled?: boolean
+  /**
+   * SAML-DATA
+   */
+  SamlData?: string
 }
 
 /**

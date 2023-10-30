@@ -23,9 +23,10 @@ import {
   DescribeInstanceOperationsRequest,
   LogstashInstanceInfo,
   OperationDetail,
-  StartLogstashPipelinesRequest,
+  DiagnoseInstanceResponse,
   EsPublicAcl,
   DictInfo,
+  DescribeDiagnoseResponse,
   DescribeLogstashInstanceLogsResponse,
   CreateInstanceResponse,
   DescribeInstanceLogsRequest,
@@ -42,17 +43,21 @@ import {
   DescribeInstanceOperationsResponse,
   IndexOptionsField,
   UpdateRequestTargetNodeTypesResponse,
+  JobParam,
   DeleteLogstashInstanceResponse,
   LogstashPipeline,
   SubTaskDetail,
+  DiagnoseJobMeta,
   EsConfigSetInfo,
   GetRequestTargetNodeTypesResponse,
   Operation,
   InstanceLog,
-  NodeInfo,
+  DiagnoseResult,
+  LogDetail,
   DescribeIndexMetaResponse,
-  DiagnoseInstanceResponse,
-  LogstashNodeInfo,
+  StartLogstashPipelinesRequest,
+  GetDiagnoseSettingsResponse,
+  KibanaView,
   IndexSettingsField,
   UpgradeLicenseResponse,
   LogstashExtendedFile,
@@ -60,35 +65,40 @@ import {
   UpdateRequestTargetNodeTypesRequest,
   DescribeLogstashInstancesResponse,
   DeleteInstanceResponse,
+  SettingDetail,
   DescribeLogstashInstanceOperationsResponse,
   CreateIndexRequest,
   LogstashPipelineInfo,
   UpdatePluginsRequest,
-  UpgradeLicenseRequest,
+  Dimension,
   UpdateJdkResponse,
+  Metric,
   UpdateInstanceResponse,
   DeleteIndexRequest,
   DescribeViewsRequest,
   DescribeIndexListResponse,
   StartLogstashPipelinesResponse,
   DescribeLogstashInstanceOperationsRequest,
+  DescribeInstancePluginInfo,
   CreateLogstashInstanceResponse,
   SaveAndDeployLogstashPipelineRequest,
   ClusterView,
   CreateIndexResponse,
   DeleteLogstashPipelinesRequest,
   RestartKibanaRequest,
-  DescribeIndexListRequest,
+  SaveAndDeployLogstashPipelineResponse,
   UpdateDictionariesRequest,
   CosBackup,
-  SaveAndDeployLogstashPipelineResponse,
+  UpgradeLicenseRequest,
+  DescribeIndexListRequest,
+  NodeInfo,
   OperationDuration,
   DescribeLogstashPipelinesResponse,
   OperationDurationUpdated,
   CreateInstanceRequest,
   CreateLogstashInstanceRequest,
   UpdateDictionariesResponse,
-  ProcessDetail,
+  InstanceInfo,
   DeleteIndexResponse,
   UpdatePluginsResponse,
   DescribeInstancesRequest,
@@ -97,10 +107,11 @@ import {
   RestartNodesRequest,
   GetRequestTargetNodeTypesRequest,
   ModifyEsVipSecurityGroupRequest,
-  InstanceInfo,
+  ProcessDetail,
   DescribeLogstashInstancesRequest,
   MasterNodeInfo,
   DeleteInstanceRequest,
+  MetricDetail,
   UpgradeInstanceResponse,
   DescribeIndexMetaRequest,
   RestartKibanaResponse,
@@ -112,20 +123,25 @@ import {
   UpdateJdkRequest,
   UpdateLogstashInstanceResponse,
   StopLogstashPipelinesRequest,
-  KibanaView,
+  DiagnoseJobResult,
+  LogstashNodeInfo,
   RestartInstanceResponse,
   BackingIndexMetaField,
   UpdateLogstashPipelineDescRequest,
   NodeView,
   ModifyEsVipSecurityGroupResponse,
   UpdateInstanceRequest,
+  DescribeDiagnoseRequest,
+  DescribeInstancePluginListResponse,
   DescribeLogstashInstanceLogsRequest,
   RestartInstanceRequest,
   ZoneDetail,
   StopLogstashPipelinesResponse,
   KibanaNodeInfo,
   UpdateDiagnoseSettingsResponse,
+  GetDiagnoseSettingsRequest,
   EsAcl,
+  DescribeInstancePluginListRequest,
   RestartNodesResponse,
   DeleteLogstashInstanceRequest,
   UpgradeInstanceRequest,
@@ -214,6 +230,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查看智能运维配置
+   */
+  async GetDiagnoseSettings(
+    req: GetDiagnoseSettingsRequest,
+    cb?: (error: string, rep: GetDiagnoseSettingsResponse) => void
+  ): Promise<GetDiagnoseSettingsResponse> {
+    return this.request("GetDiagnoseSettings", req, cb)
+  }
+
+  /**
    * 创建索引
    */
   async CreateIndex(
@@ -286,6 +312,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: UpdateJdkResponse) => void
   ): Promise<UpdateJdkResponse> {
     return this.request("UpdateJdk", req, cb)
+  }
+
+  /**
+   * 查询智能运维诊断结果报告
+   */
+  async DescribeDiagnose(
+    req: DescribeDiagnoseRequest,
+    cb?: (error: string, rep: DescribeDiagnoseResponse) => void
+  ): Promise<DescribeDiagnoseResponse> {
+    return this.request("DescribeDiagnose", req, cb)
   }
 
   /**
@@ -523,6 +559,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: UpgradeLicenseResponse) => void
   ): Promise<UpgradeLicenseResponse> {
     return this.request("UpgradeLicense", req, cb)
+  }
+
+  /**
+   * 查询实例插件列表
+   */
+  async DescribeInstancePluginList(
+    req: DescribeInstancePluginListRequest,
+    cb?: (error: string, rep: DescribeInstancePluginListResponse) => void
+  ): Promise<DescribeInstancePluginListResponse> {
+    return this.request("DescribeInstancePluginList", req, cb)
   }
 
   /**

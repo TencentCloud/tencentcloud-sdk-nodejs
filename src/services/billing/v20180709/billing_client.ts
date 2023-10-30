@@ -21,6 +21,7 @@ import {
   DescribeCostSummaryByProductRequest,
   ConsumptionBusinessSummaryDataItem,
   BillTagInfo,
+  SavingPlanCoverageRate,
   BillTransactionInfo,
   ConditionBusiness,
   DescribeCostSummaryByProductResponse,
@@ -38,11 +39,13 @@ import {
   DescribeDosageCosDetailByDateRequest,
   DeleteAllocationTagRequest,
   DescribeBillListRequest,
+  DescribeSavingPlanOverviewResponse,
   BillDistributionResourceSummary,
   BusinessSummaryInfo,
   DescribeBillSummaryByProductRequest,
   DescribeVoucherUsageDetailsResponse,
   ConsumptionSummaryTotal,
+  SavingPlanCoverageDetail,
   DescribeCostDetailResponse,
   VoucherInfos,
   DescribeCostSummaryByProjectResponse,
@@ -54,12 +57,15 @@ import {
   DescribeCostSummaryByRegionRequest,
   ConsumptionSummaryTrend,
   DescribeBillDownloadUrlRequest,
+  CreateSavingPlanOrderResponse,
+  SavingPlanOverviewDetail,
   DescribeBillSummaryByPayModeRequest,
   ApplicableProducts,
   ConditionPayMode,
   PayDealsResponse,
   BillDetail,
-  DetailSet,
+  CreateSavingPlanOrderRequest,
+  DescribeBillDetailResponse,
   Deal,
   DescribeDealsByCondResponse,
   DescribeBillSummaryByProjectRequest,
@@ -74,15 +80,17 @@ import {
   DescribeBillSummaryResponse,
   BillResourceSummary,
   Conditions,
+  DescribeSavingPlanCoverageRequest,
   RegionSummaryOverviewItem,
   ConsumptionProjectSummaryDataItem,
   DescribeDosageDetailByDateResponse,
   DescribeBillSummaryForOrganizationRequest,
+  DescribeSavingPlanOverviewRequest,
   ActionSummaryOverviewItem,
-  DescribeVoucherInfoRequest,
+  DescribeBillDetailForOrganizationRequest,
   DescribeVoucherUsageDetailsRequest,
   DescribeBillResourceSummaryRequest,
-  DescribeBillDetailResponse,
+  DetailSet,
   BillDetailComponentConfig,
   TagSummaryOverviewItem,
   ConsumptionResourceSummaryConditionValue,
@@ -98,6 +106,7 @@ import {
   ConditionRegion,
   CostDetail,
   DescribeBillSummaryByProductResponse,
+  SavingPlanUsageDetail,
   DescribeBillSummaryByRegionResponse,
   CreateAllocationTagResponse,
   ConsumptionResourceSummaryDataItem,
@@ -108,8 +117,11 @@ import {
   DescribeBillListResponse,
   DescribeAccountBalanceResponse,
   BusinessSummaryOverviewItem,
+  DescribeSavingPlanUsageResponse,
   UsageRecords,
-  DescribeBillDetailForOrganizationRequest,
+  DescribeSavingPlanCoverageResponse,
+  DescribeVoucherInfoRequest,
+  DescribeSavingPlanUsageRequest,
   DescribeDealsByCondRequest,
   DescribeDosageCosDetailByDateResponse,
   DescribeBillSummaryForOrganizationResponse,
@@ -140,13 +152,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取收支明细列表，支持翻页和参数过滤
+   * 获取按地域汇总消耗详情
    */
-  async DescribeBillList(
-    req: DescribeBillListRequest,
-    cb?: (error: string, rep: DescribeBillListResponse) => void
-  ): Promise<DescribeBillListResponse> {
-    return this.request("DescribeBillList", req, cb)
+  async DescribeCostSummaryByRegion(
+    req: DescribeCostSummaryByRegionRequest,
+    cb?: (error: string, rep: DescribeCostSummaryByRegionResponse) => void
+  ): Promise<DescribeCostSummaryByRegionResponse> {
+    return this.request("DescribeCostSummaryByRegion", req, cb)
+  }
+
+  /**
+   * 查询当前用户节省计划覆盖率明细数据，如无特别说明，金额单位均为元（国内站）或者美元（国际站）。
+   */
+  async DescribeSavingPlanCoverage(
+    req: DescribeSavingPlanCoverageRequest,
+    cb?: (error: string, rep: DescribeSavingPlanCoverageResponse) => void
+  ): Promise<DescribeSavingPlanCoverageResponse> {
+    return this.request("DescribeSavingPlanCoverage", req, cb)
   }
 
   /**
@@ -157,6 +179,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeBillResourceSummaryResponse) => void
   ): Promise<DescribeBillResourceSummaryResponse> {
     return this.request("DescribeBillResourceSummary", req, cb)
+  }
+
+  /**
+   * 查用当前用户明细节省计划总览查询时段内的使用情况
+   */
+  async DescribeSavingPlanOverview(
+    req: DescribeSavingPlanOverviewRequest,
+    cb?: (error: string, rep: DescribeSavingPlanOverviewResponse) => void
+  ): Promise<DescribeSavingPlanOverviewResponse> {
+    return this.request("DescribeSavingPlanOverview", req, cb)
   }
 
   /**
@@ -243,23 +275,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取按地域汇总消耗详情
+   * 获取收支明细列表，支持翻页和参数过滤
    */
-  async DescribeCostSummaryByRegion(
-    req: DescribeCostSummaryByRegionRequest,
-    cb?: (error: string, rep: DescribeCostSummaryByRegionResponse) => void
-  ): Promise<DescribeCostSummaryByRegionResponse> {
-    return this.request("DescribeCostSummaryByRegion", req, cb)
+  async DescribeBillList(
+    req: DescribeBillListRequest,
+    cb?: (error: string, rep: DescribeBillListResponse) => void
+  ): Promise<DescribeBillListResponse> {
+    return this.request("DescribeBillList", req, cb)
   }
 
   /**
-   * 获取按产品汇总消耗详情
+   * 该接口支持通过传参，获取L0-PDF、L1-汇总、L2-资源、L3-明细、账单包、五类账单文件下载链接
    */
-  async DescribeCostSummaryByProduct(
-    req: DescribeCostSummaryByProductRequest,
-    cb?: (error: string, rep: DescribeCostSummaryByProductResponse) => void
-  ): Promise<DescribeCostSummaryByProductResponse> {
-    return this.request("DescribeCostSummaryByProduct", req, cb)
+  async DescribeBillDownloadUrl(
+    req: DescribeBillDownloadUrlRequest,
+    cb?: (error: string, rep: DescribeBillDownloadUrlResponse) => void
+  ): Promise<DescribeBillDownloadUrlResponse> {
+    return this.request("DescribeBillDownloadUrl", req, cb)
   }
 
   /**
@@ -304,6 +336,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查用当前用户明细节省计划查询时段内的使用情况
+   */
+  async DescribeSavingPlanUsage(
+    req: DescribeSavingPlanUsageRequest,
+    cb?: (error: string, rep: DescribeSavingPlanUsageResponse) => void
+  ): Promise<DescribeSavingPlanUsageResponse> {
+    return this.request("DescribeSavingPlanUsage", req, cb)
+  }
+
+  /**
    * 获取代金券使用记录
    */
   async DescribeVoucherUsageDetails(
@@ -311,6 +353,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeVoucherUsageDetailsResponse) => void
   ): Promise<DescribeVoucherUsageDetailsResponse> {
     return this.request("DescribeVoucherUsageDetails", req, cb)
+  }
+
+  /**
+   * 创建节省计划订单，创建订单完成需调用PayDeals接口完成订单支付
+   */
+  async CreateSavingPlanOrder(
+    req: CreateSavingPlanOrderRequest,
+    cb?: (error: string, rep: CreateSavingPlanOrderResponse) => void
+  ): Promise<CreateSavingPlanOrderResponse> {
+    return this.request("CreateSavingPlanOrder", req, cb)
   }
 
   /**
@@ -364,13 +416,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 该接口支持通过传参，获取L0-PDF、L1-汇总、L2-资源、L3-明细、账单包、五类账单文件下载链接
+   * 获取按产品汇总消耗详情
    */
-  async DescribeBillDownloadUrl(
-    req: DescribeBillDownloadUrlRequest,
-    cb?: (error: string, rep: DescribeBillDownloadUrlResponse) => void
-  ): Promise<DescribeBillDownloadUrlResponse> {
-    return this.request("DescribeBillDownloadUrl", req, cb)
+  async DescribeCostSummaryByProduct(
+    req: DescribeCostSummaryByProductRequest,
+    cb?: (error: string, rep: DescribeCostSummaryByProductResponse) => void
+  ): Promise<DescribeCostSummaryByProductResponse> {
+    return this.request("DescribeCostSummaryByProduct", req, cb)
   }
 
   /**

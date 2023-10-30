@@ -3773,7 +3773,10 @@ export interface DescribeInstancesRequest {
    */
   Type?: number
   /**
-   * 设置搜索关键字数组，可根据实例ID、实例名称、完整IP地址搜索实例。
+   * 该参数为数组类型，支持配置实例名称、实例 ID、IP地址，其中实例名称为模糊匹配，实例 ID 和 IP 地址精确匹配。
+
+- 数组中每一个元素取并集进行匹配查询。
+- **InstanceId** 与 **SearchKeys** 同时配置，则取二者交集进行匹配查询。
    */
   SearchKeys?: Array<string>
   /**

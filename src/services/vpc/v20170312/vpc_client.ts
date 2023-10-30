@@ -250,6 +250,7 @@ import {
   ModifyIp6RuleRequest,
   ReplaceRouteTableAssociationRequest,
   AssociateNetworkAclSubnetsRequest,
+  ModifyVpnGatewaySslServerResponse,
   AdjustPublicAddressResponse,
   RenewVpnGatewayRequest,
   SecurityGroupPolicy,
@@ -421,6 +422,7 @@ import {
   ModifySnapshotPoliciesResponse,
   DescribeAccountAttributesRequest,
   RenewAddressesResponse,
+  ModifyVpnGatewaySslServerRequest,
   DescribeCcnRoutesRequest,
   GenerateVpnConnectionDefaultHealthCheckIpResponse,
   ModifyDhcpIpAttributeResponse,
@@ -1213,6 +1215,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAddressesResponse) => void
   ): Promise<DescribeAddressesResponse> {
     return this.request("DescribeAddresses", req, cb)
+  }
+
+  /**
+   * 本接口用于修改 SSL-VPN 服务端属性
+   */
+  async ModifyVpnGatewaySslServer(
+    req: ModifyVpnGatewaySslServerRequest,
+    cb?: (error: string, rep: ModifyVpnGatewaySslServerResponse) => void
+  ): Promise<ModifyVpnGatewaySslServerResponse> {
+    return this.request("ModifyVpnGatewaySslServer", req, cb)
   }
 
   /**

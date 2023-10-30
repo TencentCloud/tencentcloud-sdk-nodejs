@@ -88,6 +88,16 @@ it("es.v20180416.DeleteInstance", async function () {
     }
 })
 
+it("es.v20180416.GetDiagnoseSettings", async function () {
+    try {
+       const data = await client.GetDiagnoseSettings({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("es.v20180416.CreateIndex", async function () {
     try {
        const data = await client.CreateIndex({})
@@ -151,6 +161,16 @@ it("es.v20180416.UpdateLogstashInstance", async function () {
 it("es.v20180416.UpdateJdk", async function () {
     try {
        const data = await client.UpdateJdk({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("es.v20180416.DescribeDiagnose", async function () {
+    try {
+       const data = await client.DescribeDiagnose({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -381,6 +401,16 @@ it("es.v20180416.UpdateDictionaries", async function () {
 it("es.v20180416.UpgradeLicense", async function () {
     try {
        const data = await client.UpgradeLicense({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("es.v20180416.DescribeInstancePluginList", async function () {
+    try {
+       const data = await client.DescribeInstancePluginList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

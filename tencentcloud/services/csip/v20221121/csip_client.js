@@ -184,6 +184,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeRiskCenterAssetViewPortRiskList", req, cb);
     }
     /**
+     * 查询漏洞风险高级配置
+     */
+    async DescribeVULRiskAdvanceCFGList(req, cb) {
+        return this.request("DescribeVULRiskAdvanceCFGList", req, cb);
+    }
+    /**
      * 修改风险中心风险状态
      */
     async ModifyRiskCenterRiskStatus(req, cb) {

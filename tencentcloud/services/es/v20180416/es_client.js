@@ -70,6 +70,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteInstance", req, cb);
     }
     /**
+     * 查看智能运维配置
+     */
+    async GetDiagnoseSettings(req, cb) {
+        return this.request("GetDiagnoseSettings", req, cb);
+    }
+    /**
      * 创建索引
      */
     async CreateIndex(req, cb) {
@@ -115,6 +121,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async UpdateJdk(req, cb) {
         return this.request("UpdateJdk", req, cb);
+    }
+    /**
+     * 查询智能运维诊断结果报告
+     */
+    async DescribeDiagnose(req, cb) {
+        return this.request("DescribeDiagnose", req, cb);
     }
     /**
      * 对集群进行节点规格变更，修改实例名称，修改配置，重置密码， 添加Kibana黑白名单等操作。参数中InstanceId为必传参数，ForceRestart为选填参数，剩余参数传递组合及含义如下：
@@ -260,6 +272,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async UpgradeLicense(req, cb) {
         return this.request("UpgradeLicense", req, cb);
+    }
+    /**
+     * 查询实例插件列表
+     */
+    async DescribeInstancePluginList(req, cb) {
+        return this.request("DescribeInstancePluginList", req, cb);
     }
     /**
      * 获取索引元数据

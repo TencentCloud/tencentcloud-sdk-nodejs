@@ -278,6 +278,16 @@ it("csip.v20221121.DescribeRiskCenterAssetViewPortRiskList", async function () {
     }
 })
 
+it("csip.v20221121.DescribeVULRiskAdvanceCFGList", async function () {
+    try {
+       const data = await client.DescribeVULRiskAdvanceCFGList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("csip.v20221121.ModifyRiskCenterRiskStatus", async function () {
     try {
        const data = await client.ModifyRiskCenterRiskStatus({})

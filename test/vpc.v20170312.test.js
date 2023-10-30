@@ -428,6 +428,16 @@ it("vpc.v20170312.DescribeAddresses", async function () {
     }
 })
 
+it("vpc.v20170312.ModifyVpnGatewaySslServer", async function () {
+    try {
+       const data = await client.ModifyVpnGatewaySslServer({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vpc.v20170312.EnableVpnGatewaySslClientCert", async function () {
     try {
        const data = await client.EnableVpnGatewaySslClientCert({})
