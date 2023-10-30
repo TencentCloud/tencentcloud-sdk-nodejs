@@ -4700,6 +4700,10 @@ export interface ModifyLoadBalancerSlaRequest {
      * 负载均衡实例信息。
      */
     LoadBalancerSla: Array<SlaUpdateParam>;
+    /**
+     * 是否强制升级，默认否。
+     */
+    Force?: boolean;
 }
 /**
  * DescribeBlockIPTask请求参数结构体

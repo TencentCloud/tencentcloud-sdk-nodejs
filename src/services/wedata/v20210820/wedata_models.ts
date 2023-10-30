@@ -9141,11 +9141,11 @@ export interface SubmitSqlTaskResponse {
   /**
    * 任务提交记录
    */
-  Record: AdhocRecord
+  Record?: AdhocRecord
   /**
    * 子任务记录列表
    */
-  Details: Array<AdhocDetail>
+  Details?: Array<AdhocDetail>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -15163,6 +15163,10 @@ export interface SubmitSqlTaskRequest {
    * 高级设置
    */
   ConfParams?: string
+  /**
+   * 脚本内容是否base64加密
+   */
+  ScriptEncryption?: boolean
 }
 
 /**

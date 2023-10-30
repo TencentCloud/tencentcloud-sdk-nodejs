@@ -14936,6 +14936,16 @@ RESULT_FAILED: 未通过
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ApplicableVersion: string
+  /**
+   * 检查项描述
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Description?: string
+  /**
+   * 检查项审计方法
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AuditProcedure?: string
 }
 
 /**
@@ -16507,6 +16517,10 @@ export interface DescribeEscapeEventDetailRequest {
    * 事件唯一id
    */
   EventId: string
+  /**
+   * 事件类型
+   */
+  EventType?: string
 }
 
 /**
@@ -17439,7 +17453,13 @@ export interface DescribeEscapeEventInfoRequest {
    */
   Offset?: number
   /**
-   * 过滤参数,Status：EVENT_UNDEAL:未处理，EVENT_DEALED:已处理，EVENT_INGNORE:忽略
+   * 过滤参数,
+Status：状态(EVENT_UNDEAL:未处理，EVENT_DEALED:已处理，EVENT_INGNORE:忽略)
+EventType: 事件类型(MOUNT_SENSITIVE_PTAH:敏感路径挂载 PRIVILEGE_CONTAINER_START:特权容器 PRIVILEGE:提权事件 
+    ESCAPE_VUL_OCCURRED:逃逸漏洞利用 ESCAPE_DOCKER_API:访问Docker API接口逃逸 ESCAPE_TAMPER_SENSITIVE_FILE:篡改敏感文件逃逸 ESCAPE_CGROUPS:利用cgroup机制逃逸)
+ContainerNetStatus: 容器隔离状态 (NORMAL:正常 ISOLATED:已隔离 ISOLATE_FAILED:隔离失败 ISOLATE_FAILED:解除隔离失败 RESTORING:解除隔离中 ISOLATING:隔离中)
+ContainerStatus: 容器状态(CREATED:已创建 RUNNING:正常运行 PAUSED:暂停运行 STOPPED:停止运行 RESTARTING:重启中 REMOVING:迁移中 DEAD:DEAD UNKNOWN：未知 DESTROYED:已销毁)
+ForeignUniqueKey:镜像ID及事件类型唯一值
    */
   Filters?: Array<RunTimeFilters>
   /**

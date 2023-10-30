@@ -365,6 +365,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyCmqSubscriptionAttribute", req, cb);
     }
     /**
+     * 用于获取RocketMQ消费组订阅关系数据
+     */
+    async DescribeRocketMQSubscriptions(req, cb) {
+        return this.request("DescribeRocketMQSubscriptions", req, cb);
+    }
+    /**
      * 创建一个主题的订阅关系
      */
     async CreateSubscription(req, cb) {

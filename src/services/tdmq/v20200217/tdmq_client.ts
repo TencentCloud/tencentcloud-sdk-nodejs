@@ -36,6 +36,7 @@ import {
   ModifyCmqSubscriptionAttributeResponse,
   CreateCmqTopicRequest,
   ModifyRabbitMQVipInstanceRequest,
+  Filter,
   ImportRocketMQTopicsResponse,
   DescribeRocketMQMigratingTopicListRequest,
   ResetRocketMQConsumerOffSetResponse,
@@ -100,6 +101,7 @@ import {
   CreateEnvironmentRequest,
   ClearCmqQueueRequest,
   ModifyEnvironmentAttributesResponse,
+  DescribeRocketMQSubscriptionsResponse,
   DescribeClustersRequest,
   SubscriptionTopic,
   RocketMQTopic,
@@ -229,7 +231,7 @@ import {
   DescribeRabbitMQVipInstanceRequest,
   PulsarProClusterSpecInfo,
   DescribeCmqTopicsRequest,
-  Filter,
+  DescribeRocketMQSubscriptionsRequest,
   Sort,
   DeleteTopicsRequest,
   CmqTransactionPolicy,
@@ -902,6 +904,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyCmqSubscriptionAttributeResponse) => void
   ): Promise<ModifyCmqSubscriptionAttributeResponse> {
     return this.request("ModifyCmqSubscriptionAttribute", req, cb)
+  }
+
+  /**
+   * 用于获取RocketMQ消费组订阅关系数据
+   */
+  async DescribeRocketMQSubscriptions(
+    req: DescribeRocketMQSubscriptionsRequest,
+    cb?: (error: string, rep: DescribeRocketMQSubscriptionsResponse) => void
+  ): Promise<DescribeRocketMQSubscriptionsResponse> {
+    return this.request("DescribeRocketMQSubscriptions", req, cb)
   }
 
   /**

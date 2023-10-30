@@ -759,6 +759,10 @@ export interface Vpc {
  */
 export interface VULRiskAdvanceCFGList {
   /**
+   * 风险ID
+   */
+  RiskId?: string
+  /**
    * 漏洞名称
    */
   VULName?: string

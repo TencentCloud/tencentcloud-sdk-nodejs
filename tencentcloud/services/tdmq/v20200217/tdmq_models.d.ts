@@ -467,6 +467,19 @@ export interface ModifyRabbitMQVipInstanceRequest {
     Remark?: string;
 }
 /**
+ * 过滤参数
+ */
+export interface Filter {
+    /**
+     * 过滤参数的名字
+     */
+    Name?: string;
+    /**
+     * 数值
+     */
+    Values?: Array<string>;
+}
+/**
  * ImportRocketMQTopics返回参数结构体
  */
 export interface ImportRocketMQTopicsResponse {
@@ -2282,6 +2295,24 @@ export interface ModifyEnvironmentAttributesResponse {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     NamespaceId?: string;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * DescribeRocketMQSubscriptions返回参数结构体
+ */
+export interface DescribeRocketMQSubscriptionsResponse {
+    /**
+     * 总条数
+     */
+    TotalCount: number;
+    /**
+     * 订阅关系列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Subscriptions: Array<RocketMQSubscription>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -5458,17 +5489,29 @@ export interface DescribeCmqTopicsRequest {
     Filters?: Array<Filter>;
 }
 /**
- * 过滤参数
+ * DescribeRocketMQSubscriptions请求参数结构体
  */
-export interface Filter {
+export interface DescribeRocketMQSubscriptionsRequest {
     /**
-     * 过滤参数的名字
+     * 集群ID
      */
-    Name?: string;
+    ClusterId: string;
     /**
-     * 数值
+     * 命名空间名称
      */
-    Values?: Array<string>;
+    Namespace: string;
+    /**
+     * 消费组名称
+     */
+    Group: string;
+    /**
+     * 查询起始位置
+     */
+    Offset: number;
+    /**
+     * 查询限制条数
+     */
+    Limit: number;
 }
 /**
  * 排序器

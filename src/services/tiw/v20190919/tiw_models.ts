@@ -1600,8 +1600,8 @@ export interface StartWhiteboardPushRequest {
   /**
    * 需要推流的白板房间号，取值范围: (1, 4294967295)。
 
-1. 白板推流默认以RoomId的字符串表达形式作为IM群组的GroupID（比如RoomId为1234，则IM群组的GroupID为"1234"）加群进行信令同步，请在开始推流前确保相应IM群组已创建完成，否则会导致推流失败。
-2. 在没有指定TRTCRoomId和TRTCRoomIdStr的情况下，默认会以RoomId作为白板流进行推流的TRTC房间号。
+1. 在没有指定`GroupId`的情况下，白板推流默认以`RoomId`的字符串表达形式作为IM群组ID（比如RoomId为1234，则IM群组ID为"1234"），并加群进行信令同步，请在开始推流前确保相应IM群组已创建完成，否则会导致推流失败。
+2. 在没有指定`TRTCRoomId`和`TRTCRoomIdStr`的情况下，默认会以`RoomId`作为白板流进行推流的TRTC房间号。
    */
   RoomId: number
   /**
@@ -1610,7 +1610,7 @@ export interface StartWhiteboardPushRequest {
    */
   PushUserId: string
   /**
-   * 与PushUserId对应的IM签名(usersig)。
+   * 与`PushUserId`对应的IM签名(usersig)。
    */
   PushUserSig: string
   /**
@@ -1656,7 +1656,7 @@ export interface StartWhiteboardPushRequest {
    */
   AutoRecord?: boolean
   /**
-   * 指定白板推流录制的RecordID，指定的RecordID会用于填充实时音视频云端录制完成后的回调消息中的 "userdefinerecordid" 字段内容，便于您更方便的识别录制回调，以及在点播媒体资源管理中查找相应的录制视频文件。
+   * 指定白板推流这路流在音视频云端录制中的RecordID，指定的RecordID会用于填充实时音视频云端录制完成后的回调消息中的 "userdefinerecordid" 字段内容，便于您更方便的识别录制回调，以及在点播媒体资源管理中查找相应的录制视频文件。
 
 限制长度为64字节，只允许包含大小写英文字母（a-zA-Z）、数字（0-9）及下划线和连词符。
 
@@ -1679,7 +1679,7 @@ SdkAppID = 12345678，RoomID = 12345，PushUserID = push_user_1
    */
   AutoPublish?: boolean
   /**
-   * 指定实时音视频在旁路白板推流时的StreamID，设置之后，您就可以在腾讯云直播 CDN 上通过标准直播方案（FLV或HLS）播放该用户的音视频流。
+   * 指定实时音视频在旁路白板推流这路流时的StreamID，设置之后，您就可以在腾讯云直播 CDN 上通过标准直播方案（FLV或HLS）播放该用户的音视频流。
 
 限制长度为64字节，只允许包含大小写英文字母（a-zA-Z）、数字（0-9）及下划线和连词符。
 
@@ -1700,15 +1700,15 @@ SdkAppID = 12345678，RoomID = 12345，PushUserID = push_user_1
   /**
    * TRTC数字类型房间号，取值范围: (1, 4294967295)。
 
-在同时指定了RoomId与TRTCRoomId的情况下，优先使用TRTCRoomId作为白板流进行推流的TRTC房间号。
+在同时指定了`RoomId`与`TRTCRoomId`的情况下，优先使用`TRTCRoomId`作为白板流进行推流的TRTC房间号。
 
-当指定了TRTCRoomIdStr的情况下，此字段将被忽略。
+当指定了`TRTCRoomIdStr`的情况下，此字段将被忽略。
    */
   TRTCRoomId?: number
   /**
    * TRTC字符串类型房间号。
 
-在指定了TRTCRoomIdStr的情况下，会优先使用TRTCRoomIdStr作为白板流进行推流的TRTC房间号。
+在指定了`TRTCRoomIdStr`的情况下，会优先使用`TRTCRoomIdStr`作为白板流进行推流的TRTC房间号。
    */
   TRTCRoomIdStr?: string
   /**
@@ -1732,6 +1732,12 @@ TRTCAppSceneVideoCall - 视频通话场景，即绝大多数时间都是两人�
 TRTCAppSceneLIVE - 直播场景，即绝大多数时间都是一人直播，偶尔有多人视频互动的场景，内部编码器和网络协议优化侧重性能和兼容性，性能和清晰度表现更佳。
    */
   TRTCEnterRoomMode?: string
+  /**
+   * 白板进行信令同步的 IM 群组 ID。
+在没有指定`GroupId`的情况下，白板推流服务将使用 `RoomId` 的字符串形式作为同步白板信令的IM群组ID。
+在指定了`GroupId`的情况下，白板推流将优先`GroupId`作为同步白板信令的群组ID。请在开始推流前确保指定的IM群组已创建完成，否则会导致推流失败。
+   */
+  GroupId?: string
 }
 
 /**
@@ -1886,7 +1892,10 @@ export interface StartOnlineRecordRequest {
    */
   SdkAppId: number
   /**
-   * 需要录制的房间号，取值范围: (1, 4294967295)
+   * 需要录制的白板房间号，取值范围: (1, 4294967295)。
+
+1. 在没有指定`GroupId`的情况下，实时录制默认以`RoomId`的字符串表达形式作为同步白板信令的IM群组ID（比如`RoomId`为1234，则IM群组ID为"1234"），并加群进行信令同步，请在开始录制前确保相应IM群组已创建完成，否则会导致录制失败。
+2. 在没有指定`TRTCRoomId`和`TRTCRoomIdStr`的情况下，默认会以`RoomId`作为TRTC房间号进房拉流进行录制。
    */
   RoomId: number
   /**
@@ -1895,11 +1904,13 @@ export interface StartOnlineRecordRequest {
    */
   RecordUserId: string
   /**
-   * 与RecordUserId对应的签名
+   * 与`RecordUserId`对应的IM签名
    */
   RecordUserSig: string
   /**
-   * （已废弃，设置无效）白板的 IM 群组 Id，默认同房间号
+   * 白板进行信令同步的 IM 群组 ID。
+在没有指定`GroupId`的情况下，实时录制服务将使用 `RoomId` 的字符串形式作为同步白板信令的IM群组ID。
+在指定了`GroupId`的情况下，实时录制将优先使用`GroupId`作为同步白板信令的群组ID。请在开始录制前确保相应的IM群组已创建完成，否则会导致录制失败。
    */
   GroupId?: string
   /**
@@ -1954,6 +1965,20 @@ VIDEO_GENERATION_MODE - 视频生成模式（内测中，需邮件申请开通�
    * 内部参数，可忽略
    */
   ExtraData?: string
+  /**
+   * TRTC数字类型房间号，取值范围: (1, 4294967295)。
+
+在同时指定了`RoomId`与`TRTCRoomId`的情况下，优先使用`TRTCRoomId`作为实时录制拉TRTC流的TRTC房间号。
+
+当指定了`TRTCRoomIdStr`的情况下，此字段将被忽略。
+   */
+  TRTCRoomId?: number
+  /**
+   * TRTC字符串类型房间号。
+
+在指定了`TRTCRoomIdStr`的情况下，会优先使用`TRTCRoomIdStr`作为实时录制拉TRTC流的TRTC房间号。
+   */
+  TRTCRoomIdStr?: string
 }
 
 /**
@@ -3110,7 +3135,7 @@ export interface StartOnlineRecordResponse {
   /**
    * 录制任务Id
    */
-  TaskId: string
+  TaskId?: string
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

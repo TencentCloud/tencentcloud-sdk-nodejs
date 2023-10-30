@@ -578,6 +578,16 @@ it("tdmq.v20200217.ModifyCmqSubscriptionAttribute", async function () {
     }
 })
 
+it("tdmq.v20200217.DescribeRocketMQSubscriptions", async function () {
+    try {
+       const data = await client.DescribeRocketMQSubscriptions({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tdmq.v20200217.CreateSubscription", async function () {
     try {
        const data = await client.CreateSubscription({})

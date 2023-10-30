@@ -2152,7 +2152,7 @@ export interface CreateModuleResponse {
     /**
      * 模块ID，创建模块成功后分配给该模块的ID。
      */
-    ModuleId: string;
+    ModuleId?: string;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -3449,11 +3449,11 @@ export interface CreateModuleRequest {
      */
     ModuleName: string;
     /**
-     * 默认带宽，单位：M。范围不得超过带宽上下限，详看DescribeConfig。
+     * 默认带宽，单位：Mbps。范围不得超过带宽上下限，详看DescribeConfig。
      */
     DefaultBandWidth: number;
     /**
-     * 默认镜像，如img-qsdf3ff2。
+     * 默认镜像。
      */
     DefaultImageId: string;
     /**
@@ -3461,11 +3461,11 @@ export interface CreateModuleRequest {
      */
     InstanceType: string;
     /**
-     * 默认系统盘大小，单位：G，默认大小为50G。范围不得超过系统盘上下限制，详看DescribeConfig。
+     * 默认系统盘大小，单位：GB，默认大小为50GB。范围不得超过系统盘上下限制，详看DescribeConfig。
      */
     DefaultSystemDiskSize: number;
     /**
-     * 默认数据盘大小，单位：G。范围不得超过数据盘范围大小，详看DescribeConfig。
+     * 默认数据盘大小，单位：GB。范围不得超过数据盘范围大小，详看DescribeConfig。
      */
     DefaultDataDiskSize: number;
     /**
@@ -3483,7 +3483,7 @@ export interface CreateModuleRequest {
      */
     SecurityGroups?: Array<string>;
     /**
-     * 默认入带宽，单位：M。范围不得超过带宽上下限，详看DescribeConfig。
+     * 默认入带宽，单位：Mbps。范围不得超过带宽上下限，详看DescribeConfig。
      */
     DefaultBandWidthIn?: number;
     /**

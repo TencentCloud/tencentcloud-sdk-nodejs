@@ -140,11 +140,11 @@ FailedOperation.UnKnowError：表示识别失败；
    */
   Page?: number
   /**
-   * 发票详细类型，详见上方 SubType 返回值说明
+   * 发票详细类型，详见票据识别（高级版）接口文档说明中 SubType 返回值说明
    */
   SubType?: string
   /**
-   * 发票类型描述，详见上方 TypeDescription  返回值说明
+   * 发票类型描述，详见票据识别（高级版）接口文档说明中 TypeDescription  返回值说明
    */
   TypeDescription?: string
   /**
@@ -155,6 +155,10 @@ FailedOperation.UnKnowError：表示识别失败；
    * 发票详细类型描述，详见上方 SubType 返回值说明
    */
   SubTypeDescription?: string
+  /**
+   * 该发票中所有字段坐标信息。包括字段英文名称、字段值所在位置四点坐标、字段所属行号，具体内容请点击左侧链接。
+   */
+  ItemPolygon?: Array<ItemPolygonInfo>
 }
 
 /**
@@ -2720,6 +2724,10 @@ export interface RecognizeGeneralInvoiceRequest {
    * 是否返回切割图片base64，默认值为false。
    */
   EnableCutImage?: boolean
+  /**
+   * 是否打开字段坐标返回。默认为false。
+   */
+  EnableItemPolygon?: boolean
 }
 
 /**
@@ -3317,29 +3325,21 @@ export interface GroupInfo {
 }
 
 /**
- * OrgCodeCertOCR返回参数结构体
+ * 发票字段坐标信息。包括字段英文名称、字段值所在位置的四点坐标、字段所属行号，具体内容请点击左侧链接。
  */
-export interface OrgCodeCertOCRResponse {
+export interface ItemPolygonInfo {
   /**
-   * 代码
+   * 发票的英文字段名称（如Title）
    */
-  OrgCode?: string
+  Key?: string
   /**
-   * 机构名称
+   * 字段值所在位置的四点坐标
    */
-  Name?: string
+  Polygon?: Polygon
   /**
-   * 地址
+   * 字段属于第几行，用于相同字段的排版，如发票明细表格项目，普通字段使用默认值为-1，表示无列排版。
    */
-  Address?: string
-  /**
-   * 有效期
-   */
-  ValidDate?: string
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  Row?: number
 }
 
 /**
@@ -7785,44 +7785,25 @@ export interface BusInvoiceOCRRequest {
 }
 
 /**
- * QuotaInvoiceOCR返回参数结构体
+ * OrgCodeCertOCR返回参数结构体
  */
-export interface QuotaInvoiceOCRResponse {
+export interface OrgCodeCertOCRResponse {
   /**
-   * 发票号码
+   * 代码
    */
-  InvoiceNum?: string
+  OrgCode?: string
   /**
-   * 发票代码
+   * 机构名称
    */
-  InvoiceCode?: string
+  Name?: string
   /**
-   * 大写金额
+   * 地址
    */
-  Rate?: string
+  Address?: string
   /**
-   * 小写金额
+   * 有效期
    */
-  RateNum?: string
-  /**
-   * 发票消费类型
-   */
-  InvoiceType?: string
-  /**
-   * 省
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Province?: string
-  /**
-   * 市
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  City?: string
-  /**
-   * 是否有公司印章（1有 0无 空为识别不出）
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  HasStamp?: string
+  ValidDate?: string
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -8815,6 +8796,51 @@ export interface FinanBillOCRRequest {
 非腾讯云存储的 Url 速度和稳定性可能受一定影响。
    */
   ImageUrl?: string
+}
+
+/**
+ * QuotaInvoiceOCR返回参数结构体
+ */
+export interface QuotaInvoiceOCRResponse {
+  /**
+   * 发票号码
+   */
+  InvoiceNum?: string
+  /**
+   * 发票代码
+   */
+  InvoiceCode?: string
+  /**
+   * 大写金额
+   */
+  Rate?: string
+  /**
+   * 小写金额
+   */
+  RateNum?: string
+  /**
+   * 发票消费类型
+   */
+  InvoiceType?: string
+  /**
+   * 省
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Province?: string
+  /**
+   * 市
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  City?: string
+  /**
+   * 是否有公司印章（1有 0无 空为识别不出）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HasStamp?: string
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

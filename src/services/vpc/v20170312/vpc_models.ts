@@ -285,17 +285,27 @@ export interface CreateVpcPeeringConnectionRequest {
 }
 
 /**
- * CreateCcn返回参数结构体
+ * DescribeBandwidthPackageResources请求参数结构体
  */
-export interface CreateCcnResponse {
+export interface DescribeBandwidthPackageResourcesRequest {
   /**
-   * 云联网（CCN）对象。
+   * 标识 共享带宽包 的唯一 ID 列表。共享带宽包 唯一 ID 形如：`bwp-11112222`。
    */
-  Ccn?: CCN
+  BandwidthPackageId: string
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 每次请求的`Filters`的上限为10，`Filter.Values`的上限为5。参数不支持同时指定`AddressIds`和`Filters`。详细的过滤条件如下：
+<li> resource-id - String - 是否必填：否 - （过滤条件）按照 共享带宽包内资源 的唯一 ID 过滤。共享带宽包内资源 唯一 ID 形如：eip-11112222。</li>
+<li> resource-type - String - 是否必填：否 - （过滤条件）按照 共享带宽包内资源 类型过滤，目前仅支持 弹性IP 和 负载均衡 两种类型，可选值为 Address 和 LoadBalance。</li>
    */
-  RequestId?: string
+  Filters?: Array<Filter>
+  /**
+   * 偏移量，默认为0。关于`Offset`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/11646)中的相关小节。
+   */
+  Offset?: number
+  /**
+   * 返回数量，默认为20，最大值为100。关于`Limit`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/11646)中的相关小节。
+   */
+  Limit?: number
 }
 
 /**
@@ -2497,50 +2507,62 @@ export interface DisassociateVpcEndPointSecurityGroupsRequest {
 export interface IKEOptionsSpecification {
   /**
    * 加密算法，可选值：'3DES-CBC', 'AES-CBC-128', 'AES-CBS-192', 'AES-CBC-256', 'DES-CBC'，'SM4', 默认为3DES-CBC
+注意：此字段可能返回 null，表示取不到有效值。
    */
   PropoEncryAlgorithm?: string
   /**
    * 认证算法：可选值：'MD5', 'SHA1'，'SHA-256' 默认为MD5
+注意：此字段可能返回 null，表示取不到有效值。
    */
   PropoAuthenAlgorithm?: string
   /**
    * 协商模式：可选值：'AGGRESSIVE', 'MAIN'，默认为MAIN
+注意：此字段可能返回 null，表示取不到有效值。
    */
   ExchangeMode?: string
   /**
    * 本端标识类型：可选值：'ADDRESS', 'FQDN'，默认为ADDRESS
+注意：此字段可能返回 null，表示取不到有效值。
    */
   LocalIdentity?: string
   /**
    * 对端标识类型：可选值：'ADDRESS', 'FQDN'，默认为ADDRESS
+注意：此字段可能返回 null，表示取不到有效值。
    */
   RemoteIdentity?: string
   /**
    * 本端标识，当LocalIdentity选为ADDRESS时，LocalAddress必填。localAddress默认为vpn网关公网IP
+注意：此字段可能返回 null，表示取不到有效值。
    */
   LocalAddress?: string
   /**
    * 对端标识，当RemoteIdentity选为ADDRESS时，RemoteAddress必填
+注意：此字段可能返回 null，表示取不到有效值。
    */
   RemoteAddress?: string
   /**
    * 本端标识，当LocalIdentity选为FQDN时，LocalFqdnName必填
+注意：此字段可能返回 null，表示取不到有效值。
    */
   LocalFqdnName?: string
   /**
    * 对端标识，当remoteIdentity选为FQDN时，RemoteFqdnName必填
+注意：此字段可能返回 null，表示取不到有效值。
    */
   RemoteFqdnName?: string
   /**
    * DH group，指定IKE交换密钥时使用的DH组，可选值：'GROUP1', 'GROUP2', 'GROUP5', 'GROUP14', 'GROUP24'，
+注意：此字段可能返回 null，表示取不到有效值。
    */
   DhGroupName?: string
   /**
    * IKE SA Lifetime，单位：秒，设置IKE SA的生存周期，取值范围：60-604800
+注意：此字段可能返回 null，表示取不到有效值。
    */
   IKESaLifetimeSeconds?: number
   /**
    * IKE版本
+注意：此字段可能返回 null，表示取不到有效值。
    */
   IKEVersion?: string
 }
@@ -4081,6 +4103,14 @@ CCN VPN 形的通道 可以不传VPCID
    * DPD超时后的动作。默认为clear。dpdEnable为1（开启）时有效。可取值为clear（断开）和restart（重试）
    */
   DpdAction?: string
+  /**
+   * 创建通道路由信息。
+   */
+  Route?: CreateVpnConnRoute
+  /**
+   * BGP配置。
+   */
+  BgpConfig?: BgpConfig
 }
 
 /**
@@ -4201,103 +4231,108 @@ export interface VpnConnection {
   /**
    * 通道实例ID。
    */
-  VpnConnectionId: string
+  VpnConnectionId?: string
   /**
    * 通道名称。
    */
-  VpnConnectionName: string
+  VpnConnectionName?: string
   /**
    * VPC实例ID。
    */
-  VpcId: string
+  VpcId?: string
   /**
    * VPN网关实例ID。
    */
-  VpnGatewayId: string
+  VpnGatewayId?: string
   /**
    * 对端网关实例ID。
    */
-  CustomerGatewayId: string
+  CustomerGatewayId?: string
   /**
    * 预共享密钥。
    */
-  PreShareKey: string
+  PreShareKey?: string
   /**
    * 通道传输协议。
    */
-  VpnProto: string
+  VpnProto?: string
   /**
    * 通道加密协议。
    */
-  EncryptProto: string
+  EncryptProto?: string
   /**
    * 路由类型。
    */
-  RouteType: string
+  RouteType?: string
   /**
    * 创建时间。
    */
-  CreatedTime: string
+  CreatedTime?: string
   /**
    * 通道的生产状态，PENDING：生产中，AVAILABLE：运行中，DELETING：删除中。
    */
-  State: string
+  State?: string
   /**
    * 通道连接状态，AVAILABLE：已连接。
    */
-  NetStatus: string
+  NetStatus?: string
   /**
    * SPD。
    */
-  SecurityPolicyDatabaseSet: Array<SecurityPolicyDatabase>
+  SecurityPolicyDatabaseSet?: Array<SecurityPolicyDatabase>
   /**
    * IKE选项。
    */
-  IKEOptionsSpecification: IKEOptionsSpecification
+  IKEOptionsSpecification?: IKEOptionsSpecification
   /**
    * IPSEC选择。
    */
-  IPSECOptionsSpecification: IPSECOptionsSpecification
+  IPSECOptionsSpecification?: IPSECOptionsSpecification
   /**
    * 是否支持健康状态探测
    */
-  EnableHealthCheck: boolean
+  EnableHealthCheck?: boolean
   /**
    * 本端探测ip
    */
-  HealthCheckLocalIp: string
+  HealthCheckLocalIp?: string
   /**
    * 对端探测ip
    */
-  HealthCheckRemoteIp: string
+  HealthCheckRemoteIp?: string
   /**
    * 通道健康检查状态，AVAILABLE：正常，UNAVAILABLE：不正常。 未配置健康检查不返回该对象
    */
-  HealthCheckStatus: string
+  HealthCheckStatus?: string
   /**
    * DPD探测开关。默认为0，表示关闭DPD探测。可选值：0（关闭），1（开启）
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DpdEnable: number
+  DpdEnable?: number
   /**
    * DPD超时时间。即探测确认对端不存在需要的时间。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DpdTimeout: string
+  DpdTimeout?: string
   /**
    * DPD超时后的动作。默认为clear。dpdEnable为1（开启）时有效。可取值为clear（断开）和restart（重试）
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DpdAction: string
+  DpdAction?: string
   /**
    * 标签键值对数组
    */
-  TagSet: Array<Tag>
+  TagSet?: Array<Tag>
   /**
    * 协商类型
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  NegotiationType: string
+  NegotiationType?: string
+  /**
+   * Bgp配置信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BgpConfig?: BgpConfigAndAsn
 }
 
 /**
@@ -5318,27 +5353,17 @@ export interface DescribeVpnGatewaySslClientsResponse {
 }
 
 /**
- * DescribeBandwidthPackageResources请求参数结构体
+ * CreateCcn返回参数结构体
  */
-export interface DescribeBandwidthPackageResourcesRequest {
+export interface CreateCcnResponse {
   /**
-   * 标识 共享带宽包 的唯一 ID 列表。共享带宽包 唯一 ID 形如：`bwp-11112222`。
+   * 云联网（CCN）对象。
    */
-  BandwidthPackageId: string
+  Ccn?: CCN
   /**
-   * 每次请求的`Filters`的上限为10，`Filter.Values`的上限为5。参数不支持同时指定`AddressIds`和`Filters`。详细的过滤条件如下：
-<li> resource-id - String - 是否必填：否 - （过滤条件）按照 共享带宽包内资源 的唯一 ID 过滤。共享带宽包内资源 唯一 ID 形如：eip-11112222。</li>
-<li> resource-type - String - 是否必填：否 - （过滤条件）按照 共享带宽包内资源 类型过滤，目前仅支持 弹性IP 和 负载均衡 两种类型，可选值为 Address 和 LoadBalance。</li>
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  Filters?: Array<Filter>
-  /**
-   * 偏移量，默认为0。关于`Offset`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/11646)中的相关小节。
-   */
-  Offset?: number
-  /**
-   * 返回数量，默认为20，最大值为100。关于`Limit`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/11646)中的相关小节。
-   */
-  Limit?: number
+  RequestId?: string
 }
 
 /**
@@ -5541,6 +5566,10 @@ export interface CustomerGateway {
    * 创建时间
    */
   CreatedTime: string
+  /**
+   * BGP ASN。
+   */
+  BgpAsn?: number
 }
 
 /**
@@ -7807,6 +7836,37 @@ export interface DeleteNatGatewaySourceIpTranslationNatRuleResponse {
 }
 
 /**
+ * VPN通道BGP配置
+ */
+export interface BgpConfigAndAsn {
+  /**
+   * BGP通道CIDR
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TunnelCidr?: string
+  /**
+   * 本端BGP IP
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LocalBgpIp?: string
+  /**
+   * 对端BGP IP
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RemoteBgpIp?: string
+  /**
+   * 本端BGP ASN号
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LocalBgpAsn?: string
+  /**
+   * 对端BGP ASN号
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RemoteBgpAsn?: string
+}
+
+/**
  * 云联网（CCN）关联实例（Instance）对象
  */
 export interface CcnAttachedInstance {
@@ -7888,10 +7948,12 @@ export interface CcnAttachedInstance {
 export interface SecurityPolicyDatabase {
   /**
    * 本端网段
+注意：此字段可能返回 null，表示取不到有效值。
    */
   LocalCidrBlock: string
   /**
    * 对端网段
+注意：此字段可能返回 null，表示取不到有效值。
    */
   RemoteCidrBlock: Array<string>
 }
@@ -9417,6 +9479,24 @@ export interface ConflictItem {
 }
 
 /**
+ * BgpConfig
+ */
+export interface BgpConfig {
+  /**
+   * BGP隧道网段。
+   */
+  TunnelCidr: string
+  /**
+   * 云端BGP地址。必须从BGP隧道网段内分配。
+   */
+  LocalBgpIp: string
+  /**
+   * 用户端BGP地址。必须从BGP隧道网段内分配。
+   */
+  RemoteBgpIp: string
+}
+
+/**
  * InquiryPriceRenewVpnGateway返回参数结构体
  */
 export interface InquiryPriceRenewVpnGatewayResponse {
@@ -9764,6 +9844,20 @@ export interface DeleteFlowLogResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 创建路由添加的指向此通道的路由
+ */
+export interface CreateVpnConnRoute {
+  /**
+   * 目的端IDC网段
+   */
+  DestinationCidrBlock: string
+  /**
+   * 优先级；可选值0，100。
+   */
+  Priority?: number
 }
 
 /**
@@ -10838,22 +10932,27 @@ export interface DeleteNetDetectRequest {
 export interface IPSECOptionsSpecification {
   /**
    * 加密算法，可选值：'3DES-CBC', 'AES-CBC-128', 'AES-CBC-192', 'AES-CBC-256', 'DES-CBC', 'SM4', 'NULL'， 默认为AES-CBC-128
+注意：此字段可能返回 null，表示取不到有效值。
    */
   EncryptAlgorithm?: string
   /**
    * 认证算法：可选值：'MD5', 'SHA1'，'SHA-256' 默认为
+注意：此字段可能返回 null，表示取不到有效值。
    */
   IntegrityAlgorith?: string
   /**
    * IPsec SA lifetime(s)：单位秒，取值范围：180-604800
+注意：此字段可能返回 null，表示取不到有效值。
    */
   IPSECSaLifetimeSeconds?: number
   /**
    * PFS：可选值：'NULL', 'DH-GROUP1', 'DH-GROUP2', 'DH-GROUP5', 'DH-GROUP14', 'DH-GROUP24'，默认为NULL
+注意：此字段可能返回 null，表示取不到有效值。
    */
   PfsDhGroup?: string
   /**
    * IPsec SA lifetime(KB)：单位KB，取值范围：2560-604800
+注意：此字段可能返回 null，表示取不到有效值。
    */
   IPSECSaLifetimeTraffic?: number
 }
@@ -14135,6 +14234,10 @@ export interface CreateCustomerGatewayRequest {
    * 指定绑定的标签列表，例如：[{"Key": "city", "Value": "shanghai"}]
    */
   Tags?: Array<Tag>
+  /**
+   * BGP ASN。ASN取值范围为1- 4294967295，其中139341、45090和58835不可用。
+   */
+  BgpAsn?: number
 }
 
 /**
@@ -14990,18 +15093,23 @@ export interface DescribeUsedIpAddressResponse {
 }
 
 /**
- * IP地址模板信息
+ * DescribeNetDetects返回参数结构体
  */
-export interface AddressInfo {
+export interface DescribeNetDetectsResponse {
   /**
-   * ip地址。
-   */
-  Address: string
-  /**
-   * 备注。
+   * 符合条件的网络探测对象数组。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Description?: string
+  NetDetectSet?: Array<NetDetect>
+  /**
+   * 符合条件的网络探测对象数量。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -15023,21 +15131,16 @@ export interface AuditCrossBorderComplianceRequest {
 }
 
 /**
- * DescribeNetDetects返回参数结构体
+ * IP地址模板信息
  */
-export interface DescribeNetDetectsResponse {
+export interface AddressInfo {
   /**
-   * 符合条件的网络探测对象数组。
+   * ip地址。
+   */
+  Address: string
+  /**
+   * 备注。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  NetDetectSet?: Array<NetDetect>
-  /**
-   * 符合条件的网络探测对象数量。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TotalCount?: number
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  Description?: string
 }

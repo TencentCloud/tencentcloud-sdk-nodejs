@@ -528,6 +528,11 @@ export interface OutputManageMarketingRiskValue {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     ConstId?: string;
+    /**
+     * 扩展信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RiskInformation?: string;
 }
 /**
  * 风险趋势统计--出参

@@ -1611,7 +1611,7 @@ export interface GenerateSignedVideoURLResponse {
     /**
      * 视频防盗链播放URL
      */
-    SignedVideoURL: string;
+    SignedVideoURL?: string;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2895,6 +2895,10 @@ export interface GenerateSignedVideoURLRequest {
      * 播放链接过期时间
      */
     ExpireTime: number;
+    /**
+     * 通道ID 非NVR设备不填 NVR设备必填 默认为无
+     */
+    ChannelId?: number;
 }
 /**
  * ModifyPushChannel请求参数结构体
