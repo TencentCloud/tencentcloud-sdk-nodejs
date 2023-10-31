@@ -637,10 +637,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeMonitorsByPage", req, cb);
     }
     /**
-     * 重命名任务（任务编辑）
+     * 质量报告-修改维度权限
      */
-    async ModifyTaskName(req, cb) {
-        return this.request("ModifyTaskName", req, cb);
+    async ModifyDimensionWeight(req, cb) {
+        return this.request("ModifyDimensionWeight", req, cb);
     }
     /**
      * 查询规则执行结果详情
@@ -936,6 +936,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeDependOpsTasks(req, cb) {
         return this.request("DescribeDependOpsTasks", req, cb);
+    }
+    /**
+     * 重命名任务（任务编辑）
+     */
+    async ModifyTaskName(req, cb) {
+        return this.request("ModifyTaskName", req, cb);
     }
     /**
      * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
@@ -1673,10 +1679,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeWorkflowCanvasInfo", req, cb);
     }
     /**
-     * 质量报告-修改维度权限
+     * 查询数据库列表
      */
-    async ModifyDimensionWeight(req, cb) {
-        return this.request("ModifyDimensionWeight", req, cb);
+    async DescribeDatabaseMetas(req, cb) {
+        return this.request("DescribeDatabaseMetas", req, cb);
     }
     /**
      * 查找全部的文件夹

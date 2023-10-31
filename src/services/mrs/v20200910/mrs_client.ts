@@ -66,6 +66,7 @@ import {
   OphthalmologyColourVision,
   CovidItemsInfo,
   BloodPressureBlock,
+  TurnPDFToObjectAsyncRequest,
   HistologyLevel,
   EcgDescription,
   SurgeryThyroid,
@@ -73,6 +74,7 @@ import {
   EyeItemsInfo,
   SurgerySkin,
   IndicatorItemV2,
+  TurnPDFToObjectAsyncResponse,
   NormSize,
   GynaecologyBriefSummary,
   TextToObjectResponse,
@@ -88,6 +90,7 @@ import {
   InternalMedicineHeart,
   ReportInfo,
   GeneralExaminationVitalSign,
+  TurnPDFToObjectAsyncGetResultResponse,
   PhysicalBaseItem,
   Exame,
   PathologyV2,
@@ -187,6 +190,7 @@ import {
   BaseInfo,
   PhysicalExamination,
   InternalMedicineRespiratorySystem,
+  TurnPDFToObjectAsyncGetResultRequest,
   BloodPressureItem,
   TextToClassRequest,
   TextTypeListBlock,
@@ -270,14 +274,25 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 将PDF格式的体检报告文件结构化，解析关键信息。
-注意：该接口是按照体检报告 PDF 页面数量统计次数，不是按照 PDF 文件数量统计次数。通过该接口传入的报告必须是体检报告，非体检报告可能无法正确解析。
+   * 体检报告PDF文件结构化异步获取结果接口
+   */
+  async TurnPDFToObjectAsyncGetResult(
+    req: TurnPDFToObjectAsyncGetResultRequest,
+    cb?: (error: string, rep: TurnPDFToObjectAsyncGetResultResponse) => void
+  ): Promise<TurnPDFToObjectAsyncGetResultResponse> {
+    return this.request("TurnPDFToObjectAsyncGetResult", req, cb)
+  }
+
+  /**
+     * 文本转结构化对象。
+
+适用场景：经过腾讯医疗专用 OCR 从图片识别之后的文本，可以调用此接口。通过其它 OCR 识别的文本可能不适配。医院的 XML 格式文本也不适配，XML 文件需要经过特殊转换才能直接调用此接口。单次调用传入的文本不宜超过 2000 字。
      */
-  async TurnPDFToObject(
-    req: TurnPDFToObjectRequest,
-    cb?: (error: string, rep: TurnPDFToObjectResponse) => void
-  ): Promise<TurnPDFToObjectResponse> {
-    return this.request("TurnPDFToObject", req, cb)
+  async TextToObject(
+    req: TextToObjectRequest,
+    cb?: (error: string, rep: TextToObjectResponse) => void
+  ): Promise<TextToObjectResponse> {
+    return this.request("TextToObject", req, cb)
   }
 
   /**
@@ -291,6 +306,27 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 体检报告PDF文件结构化-异步接口
+   */
+  async TurnPDFToObjectAsync(
+    req: TurnPDFToObjectAsyncRequest,
+    cb?: (error: string, rep: TurnPDFToObjectAsyncResponse) => void
+  ): Promise<TurnPDFToObjectAsyncResponse> {
+    return this.request("TurnPDFToObjectAsync", req, cb)
+  }
+
+  /**
+     * 将PDF格式的体检报告文件结构化，解析关键信息。
+注意：该接口是按照体检报告 PDF 页面数量统计次数，不是按照 PDF 文件数量统计次数。通过该接口传入的报告必须是体检报告，非体检报告可能无法正确解析。
+     */
+  async TurnPDFToObject(
+    req: TurnPDFToObjectRequest,
+    cb?: (error: string, rep: TurnPDFToObjectResponse) => void
+  ): Promise<TurnPDFToObjectResponse> {
+    return this.request("TurnPDFToObject", req, cb)
+  }
+
+  /**
    * 文本分类
    */
   async TextToClass(
@@ -298,17 +334,5 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: TextToClassResponse) => void
   ): Promise<TextToClassResponse> {
     return this.request("TextToClass", req, cb)
-  }
-
-  /**
-     * 文本转结构化对象。
-
-适用场景：经过腾讯医疗专用 OCR 从图片识别之后的文本，可以调用此接口。通过其它 OCR 识别的文本可能不适配。医院的 XML 格式文本也不适配，XML 文件需要经过特殊转换才能直接调用此接口。单次调用传入的文本不宜超过 2000 字。
-     */
-  async TextToObject(
-    req: TextToObjectRequest,
-    cb?: (error: string, rep: TextToObjectResponse) => void
-  ): Promise<TextToObjectResponse> {
-    return this.request("TextToObject", req, cb)
   }
 }

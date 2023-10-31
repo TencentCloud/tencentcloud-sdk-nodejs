@@ -1958,6 +1958,10 @@ export interface DescribeDiskConfigQuotaRequest {
    * 实例CPU核数。
    */
   CPU?: number
+  /**
+   * 专用集群ID。
+   */
+  DedicatedClusterId?: string
 }
 
 /**

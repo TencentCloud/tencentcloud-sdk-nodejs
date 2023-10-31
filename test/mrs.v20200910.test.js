@@ -28,9 +28,19 @@ it("mrs.v20200910.ImageToClass", async function () {
     }
 })
 
-it("mrs.v20200910.TurnPDFToObject", async function () {
+it("mrs.v20200910.TurnPDFToObjectAsyncGetResult", async function () {
     try {
-       const data = await client.TurnPDFToObject({})
+       const data = await client.TurnPDFToObjectAsyncGetResult({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mrs.v20200910.TextToObject", async function () {
+    try {
+       const data = await client.TextToObject({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -48,9 +58,9 @@ it("mrs.v20200910.ImageToObject", async function () {
     }
 })
 
-it("mrs.v20200910.TextToClass", async function () {
+it("mrs.v20200910.TurnPDFToObjectAsync", async function () {
     try {
-       const data = await client.TextToClass({})
+       const data = await client.TurnPDFToObjectAsync({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -58,9 +68,19 @@ it("mrs.v20200910.TextToClass", async function () {
     }
 })
 
-it("mrs.v20200910.TextToObject", async function () {
+it("mrs.v20200910.TurnPDFToObject", async function () {
     try {
-       const data = await client.TextToObject({})
+       const data = await client.TurnPDFToObject({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mrs.v20200910.TextToClass", async function () {
+    try {
+       const data = await client.TextToClass({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

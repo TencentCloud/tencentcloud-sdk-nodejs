@@ -310,6 +310,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("RestartModelAccelerateTask", req, cb);
     }
     /**
+     * 查询资源组节点运行中的任务
+     */
+    async DescribeBillingResourceInstanceRunningJobs(req, cb) {
+        return this.request("DescribeBillingResourceInstanceRunningJobs", req, cb);
+    }
+    /**
      * 这是一个供您体验大模型聊天的接口。
      */
     async SendChatMessage(req, cb) {

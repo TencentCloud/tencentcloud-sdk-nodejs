@@ -1643,6 +1643,19 @@ export interface EventPage {
     TotalCount?: number;
 }
 /**
+ * ModifyDimensionWeight返回参数结构体
+ */
+export interface ModifyDimensionWeightResponse {
+    /**
+     * 更新权重是否成功
+     */
+    Data: boolean;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * BatchResumeIntegrationTasks返回参数结构体
  */
 export interface BatchResumeIntegrationTasksResponse {
@@ -6019,37 +6032,104 @@ export interface CollectionFolderOpsDto {
     Items?: Array<FolderOpsDto>;
 }
 /**
- * RerunInstances请求参数结构体
+ * 数据源元数据
  */
-export interface RerunInstancesRequest {
+export interface DatabaseMeta {
     /**
      * 项目Id
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     ProjectId: string;
     /**
-     * 实例嵌套集合
+     * 技术类型
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Instances: Array<InstanceInfo>;
+    MetastoreType: string;
     /**
-     * 检查父任务类型, true: 检查父任务; false: 不检查父任务
+     * 数据源名称
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    CheckFather: boolean;
+    DatasourceName: string;
     /**
-     * 重跑类型, 1: 自身; 3: 孩子; 2: 自身以及孩子
+     * 数据源Id
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    RerunType: string;
+    DatasourceId: number;
     /**
-     * 实例依赖方式, 1: 自依赖; 2: 任务依赖; 3: 自依赖及父子依赖
+     * 项目英文名
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    DependentWay: string;
+    ProjectName: string;
     /**
-     * 重跑忽略事件监听与否
+     * 数据源类别：绑定引擎、绑定数据库,可用值:DB,ENGINE
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    SkipEventListening: boolean;
+    Category: string;
     /**
-     * 下游实例范围 1: 所在工作流 2: 所在项目 3: 所有跨工作流依赖的项目
+     * 数据源描述信息
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    SonInstanceType: string;
+    Description: string;
+    /**
+     * 数据源引擎的实例ID，如CDB实例ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Instance: string;
+    /**
+     * 数据源引擎所属区域
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Region: string;
+    /**
+     * 数据源数据源的可见性，1为可见、0为不可见。默认为1
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Status: number;
+    /**
+     * db名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DatabaseName: string;
+    /**
+     * 项目中文名
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ProjectDisplayName: string;
+    /**
+     * 责任人名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    OwnerAccountName: string;
+    /**
+     * 数据来源展示名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DisplayName: string;
+    /**
+     * 数据库ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DatabaseId: string;
+    /**
+     * 数据来源类型：hive/mysql/hbase等
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Catalog: string;
+    /**
+     * 存储量大小,单位为 byte
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    StorageSize: number;
+    /**
+     * 格式化后的存储量大小，带单位，如 12B
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    StorageSizeWithUnit: string;
+    /**
+     * 创建时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CreateTime: string;
 }
 /**
  * 移除孤立文件治理项
@@ -12715,6 +12795,39 @@ export interface DeleteResourceFilesResponse {
     RequestId?: string;
 }
 /**
+ * RerunInstances请求参数结构体
+ */
+export interface RerunInstancesRequest {
+    /**
+     * 项目Id
+     */
+    ProjectId: string;
+    /**
+     * 实例嵌套集合
+     */
+    Instances: Array<InstanceInfo>;
+    /**
+     * 检查父任务类型, true: 检查父任务; false: 不检查父任务
+     */
+    CheckFather: boolean;
+    /**
+     * 重跑类型, 1: 自身; 3: 孩子; 2: 自身以及孩子
+     */
+    RerunType: string;
+    /**
+     * 实例依赖方式, 1: 自依赖; 2: 任务依赖; 3: 自依赖及父子依赖
+     */
+    DependentWay: string;
+    /**
+     * 重跑忽略事件监听与否
+     */
+    SkipEventListening: boolean;
+    /**
+     * 下游实例范围 1: 所在工作流 2: 所在项目 3: 所有跨工作流依赖的项目
+     */
+    SonInstanceType: string;
+}
+/**
  * DescribeEventIsAlarmTypes请求参数结构体
  */
 export declare type DescribeEventIsAlarmTypesRequest = null;
@@ -13113,13 +13226,14 @@ export interface RuleDimStat {
     DimCntList: Array<RuleDimCnt>;
 }
 /**
- * ModifyDimensionWeight返回参数结构体
+ * DescribeDatabaseMetas返回参数结构体
  */
-export interface ModifyDimensionWeightResponse {
+export interface DescribeDatabaseMetasResponse {
     /**
-     * 更新权重是否成功
+     * 无
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Data: boolean;
+    DatabaseMeta: Array<DatabaseMeta>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -14169,21 +14283,17 @@ export interface CreateTaskRequest {
     TaskExt?: Array<TaskExtInfo>;
 }
 /**
- * ModifyDimensionWeight请求参数结构体
+ * DescribeDatabaseMetas请求参数结构体
  */
-export interface ModifyDimensionWeightRequest {
+export interface DescribeDatabaseMetasRequest {
     /**
-     * 权重信息列表
+     * 过滤字段，projectIds/msTypes/createTime/modifiedTime
      */
-    WeightInfoList: Array<WeightInfo>;
+    Filters?: Array<Filter>;
     /**
-     * 项目id
+     * 排序字段，如name
      */
-    ProjectId: string;
-    /**
-     * 是否重刷历史数据
-     */
-    Refresh: boolean;
+    OrderFields?: Array<OrderField>;
 }
 /**
  * 简单Task信息
@@ -14398,6 +14508,23 @@ export interface DescribeMonitorsByPageRequest {
      * 分页序号
      */
     PageNumber?: number;
+}
+/**
+ * ModifyDimensionWeight请求参数结构体
+ */
+export interface ModifyDimensionWeightRequest {
+    /**
+     * 权重信息列表
+     */
+    WeightInfoList: Array<WeightInfo>;
+    /**
+     * 项目id
+     */
+    ProjectId: string;
+    /**
+     * 是否重刷历史数据
+     */
+    Refresh: boolean;
 }
 /**
  * 补录计划日期范围

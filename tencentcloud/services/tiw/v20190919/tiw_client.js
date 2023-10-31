@@ -409,7 +409,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeUserStatus", req, cb);
     }
     /**
-     * 查询PPT检测任务的执行进度或结果
+     * 查询PPT检测任务的执行进度或结果，支持查询最近半年内的任务结果
      */
     async DescribePPTCheck(req, cb) {
         return this.request("DescribePPTCheck", req, cb);

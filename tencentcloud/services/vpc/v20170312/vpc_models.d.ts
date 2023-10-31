@@ -2680,12 +2680,12 @@ export interface CidrForCcn {
      * local cidr值。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Cidr: string;
+    Cidr?: string;
     /**
      * 是否发布到了云联网。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    PublishedToVbc: boolean;
+    PublishedToVbc?: boolean;
 }
 /**
  * NAT网关绑定的弹性IP
@@ -14124,7 +14124,9 @@ export interface Route {
     GatewayType: string;
     /**
      * 下一跳地址，这里只需要指定不同下一跳类型的网关ID，系统会自动匹配到下一跳地址。
-  特殊说明：GatewayType为NORMAL_CVM时，GatewayId填写实例的内网IP。
+  特殊说明：
+  GatewayType为NORMAL_CVM时，GatewayId填写实例的内网IP。
+  GatewayType为EIP时，GatewayId填写0。
      */
     GatewayId: string;
     /**
@@ -14154,6 +14156,7 @@ export interface Route {
     RouteTableId?: string;
     /**
      * 目的IPv6网段，取值不能在私有网络网段内，例如：2402:4e00:1000:810b::/64。
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     DestinationIpv6CidrBlock?: string;
     /**

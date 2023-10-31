@@ -1844,6 +1844,16 @@ export interface BloodPressureBlock {
 }
 
 /**
+ * TurnPDFToObjectAsync请求参数结构体
+ */
+export interface TurnPDFToObjectAsyncRequest {
+  /**
+   * 体检报告PDF文件信息, 目前只支持传PDF文件的Base64编码字符(PDF文件不能超过10MB，如果超过建议先压缩PDF，再转成base64)
+   */
+  PdfInfo: PdfInfo
+}
+
+/**
  * 组织学等级
  */
 export interface HistologyLevel {
@@ -2113,6 +2123,25 @@ export interface IndicatorItemV2 {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   InferNormal?: string
+}
+
+/**
+ * TurnPDFToObjectAsync返回参数结构体
+ */
+export interface TurnPDFToObjectAsyncResponse {
+  /**
+   * 加密任务ID。 
+1、此 ID 是经过加密生成，是用于获取 PDF 返回 json 的凭证，需要由客户存储该 TaskID。
+2、建议在获取到TaskID 后，5-10分钟后再调用 TurnPDFToObjectAsyncGetResult 接口获取 json 结果。
+3、使用此接口，腾讯不会存储传入的 PDF 文件，但是会临时加密存储对应的 json 结果。如果不希望腾讯临时加密存储 json 结果，请使用 TurnPDFToObject 接口。
+4、加密存储的 json 结果会24小时后定时自动删除，因此TaskID 仅 24 小时内有效，请在24小时内调用接口 TurnPDFToObjectAsyncGetResult 获取对应 json 结果。
+5、TaskID 与腾讯云的账号绑定，通过 TurnPDFToObjectAsync 传入PDF文件和通过 TurnPDFToObjectAsyncGetResult 获取 json 结果，必须是同一个腾讯云账号。即其它人就算获取到 TaskID 也无法获取到 json 结果。
+   */
+  TaskID?: string
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2682,6 +2711,32 @@ export interface GeneralExaminationVitalSign {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   BloodPressure?: GeneralExaminationVitalSignBloodPressure
+}
+
+/**
+ * TurnPDFToObjectAsyncGetResult返回参数结构体
+ */
+export interface TurnPDFToObjectAsyncGetResultResponse {
+  /**
+   * 报告结构化结果
+   */
+  Template?: Template
+  /**
+   * 多级分类结果
+   */
+  TextTypeList?: Array<TextType>
+  /**
+   * 报告结构化结果(体检报告PDF结构化接口返回的 json 内容非常多，建议通过本地代码调用)
+   */
+  Block?: Block
+  /**
+   * 是否使用Block字段
+   */
+  IsBlock?: boolean
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -5925,6 +5980,19 @@ export interface InternalMedicineRespiratorySystem {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   LungAuscultation?: Array<KeyValueItem>
+}
+
+/**
+ * TurnPDFToObjectAsyncGetResult请求参数结构体
+ */
+export interface TurnPDFToObjectAsyncGetResultRequest {
+  /**
+   * 加密任务ID。在上一步通过TurnPDFToObjectAsync 接口返回的TaskID。
+1、建议在上一步调用TurnPDFToObjectAsync接口传入PDF之后，等5-10分钟再调用此接口获取 json 结果。如果任务还没完成，可以等待几分钟之后再重新调用此接口获取 json 结果。
+2、临时加密存储的 json 结果会 24 小时后定时自动删除，因此TaskID 仅 24 小时内有效。
+3、TaskID 与腾讯云的账号绑定，通过 TurnPDFToObjectAsync 传入 PDF 文件和通过 TurnPDFToObjectAsyncGetResult 获取 json 结果，必须是同一个腾讯云账号，否则无法获取到 json 结果。
+   */
+  TaskID: string
 }
 
 /**

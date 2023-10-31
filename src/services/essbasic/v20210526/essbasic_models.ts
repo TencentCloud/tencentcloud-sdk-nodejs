@@ -2007,19 +2007,25 @@ export interface DescribeTemplatesResponse {
  */
 export interface AutoSignConfig {
   /**
-   * 自动签开通个人用户的三要素
+   * 自动签开通个人用户信息, 包括名字,身份证等
    */
   UserInfo: UserThreeFactor
   /**
-   * 是否回调证书信息
+   * 是否回调证书信息:
+<ul><li>**false**: 不需要(默认)</li>
+<li>**true**:需要</li></ul>
    */
   CertInfoCallback?: boolean
   /**
-   * 是否支持用户自定义签名印章
+   * 是否支持用户自定义签名印章:
+<ul><li>**false**: 不能自己定义(默认)</li>
+<li>**true**: 可以自己定义</li></ul>
    */
   UserDefineSeal?: boolean
   /**
-   * 是否需要回调的时候返回印章(签名) 图片的 base64
+   * 回调中是否需要自动签将要使用的印章（签名）图片的 base64:
+<ul><li>**false**: 不需要(默认)</li>
+<li>**true**: 需要</li></ul>
    */
   SealImgCallback?: boolean
   /**
@@ -2027,11 +2033,20 @@ export interface AutoSignConfig {
    */
   CallbackUrl?: string
   /**
-   * 开通时候的验证方式，取值：WEIXINAPP（微信人脸识别），INSIGHT（慧眼人脸认别），TELECOM（运营商三要素验证）。如果是小程序开通链接，支持传 WEIXINAPP / TELECOM。如果是 H5 开通链接，支持传 INSIGHT / TELECOM。默认值 WEIXINAPP / INSIGHT。
+   * 开通时候的身份验证方式, 取值为：
+<ul><li>**WEIXINAPP** : 微信人脸识别</li>
+<li>**INSIGHT** : 慧眼人脸认别</li>
+<li>**TELECOM** : 运营商三要素验证</li></ul>
+注：
+<ul><li>如果是小程序开通链接，支持传 WEIXINAPP / TELECOM。为空默认 WEIXINAPP</li>
+<li>如果是 H5 开通链接，支持传 INSIGHT / TELECOM。为空默认 INSIGHT </li></ul>
    */
   VerifyChannels?: Array<string>
   /**
-   * 设置用户开通自动签时是否绑定个人自动签账号许可。一旦绑定后，将扣减购买的个人自动签账号许可一次（1年有效期），不可解绑释放。不传默认为绑定自动签账号许可。 0-绑定个人自动签账号许可，开通后将扣减购买的个人自动签账号许可一次
+   * 设置用户开通自动签时是否绑定个人自动签账号许可。
+
+<ul><li>**0**: (默认) 使用个人自动签账号许可进行开通，个人自动签账号许可有效期1年，注: `不可解绑释放更换他人`</li>
+</ul>
    */
   LicenseType?: number
 }
@@ -2356,7 +2371,7 @@ export interface CreateConsoleLoginUrlRequest {
    * 该参数和Module参数配合使用，用于指定模块下的资源Id，指定后链接登录将展示该资源的详情。
 
 根据Module参数的不同所代表的含义不同(ModuleId需要和Module对应，ModuleId可以通过API或者控制台获取到)。当前支持：
-<table> <thead> <tr> <th>Module传值</th> <th>ModuleId传值</th> <th>进入的目标页面</th> </tr> </thead> <tbody> <tr> <td>SEAL</td> <td>印章ID</td> <td>查看指定印章的详情页面</td> </tr> <tr> <td>TEMPLATE</td> <td>合同模板ID</td> <td>指定模版的详情页面</td> </tr> <tr> <td>DOCUMENT</td> <td>合同ID</td> <td>指定合同的详情页面</td> </tr> </tbody> </table>
+<table> <thead> <tr> <th>Module传值</th> <th>ModuleId传值</th> <th>进入的目标页面</th> </tr> </thead> <tbody> <tr> <td>SEAL</td> <td>印章ID</td> <td>查看指定印章的详情页面</td> </tr> <tr> <td>TEMPLATE</td> <td>合同模板ID</td> <td>指定模板的详情页面</td> </tr> <tr> <td>DOCUMENT</td> <td>合同ID</td> <td>指定合同的详情页面</td> </tr> </tbody> </table>
 注意：该参数**仅在企业和员工激活完成，登录控制台场景才生效**。
 
    */
@@ -3452,21 +3467,32 @@ export interface ChannelCreateBoundFlowsRequest {
  */
 export interface ChannelDescribeEmployeesRequest {
   /**
-   * 应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 必填。
+   * 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。
+
+此接口下面信息必填。
+<ul>
+<li>渠道应用标识:  Agent.AppId</li>
+<li>第三方平台子客企业标识: Agent.ProxyOrganizationOpenId</li>
+<li>第三方平台子客企业中的员工标识: Agent. ProxyOperator.OpenId</li>
+</ul>
+第三方平台子客企业和员工必须已经经过实名认证
    */
   Agent: Agent
   /**
-   * 指定每页多少条数据，单页最大20
+   * 指定分页每页返回的数据条数，单页最大支持 20。
    */
   Limit: number
   /**
-   * 查询过滤实名用户，Key为Status，Values为["IsVerified"]
-根据第三方系统openId过滤查询员工时,Key为StaffOpenId,Values为["OpenId","OpenId",...]
-查询离职员工时，Key为Status，Values为["QuiteJob"]
+   * 查询的关键字段，支持Key-Values查询。可选键值如下：
+<ul>
+  <li>Key:**"Status"**，根据实名状态查询员工，Values可选：
+    <ul><li>**["IsVerified"]**：查询已实名的员工</li><li>**["QuiteJob"]**：查询离职员工</li></ul></li>
+  <li>Key:**"StaffOpenId"**，根据第三方系统用户OpenId查询员工，Values为第三方系统用户OpenId列表：**["OpenId1","OpenId2",...]**</li>
+</ul>
    */
   Filters?: Array<Filter>
   /**
-   * 查询结果分页返回，此处指定第几页，如果不传默认从第一页返回。页码从 0 开始，即首页为 0,最大为20000
+   * 指定分页返回第几页的数据，如果不传默认返回第一页。页码从 0 开始，即首页为 0，最大20000。
    */
   Offset?: number
   /**
@@ -3552,7 +3578,7 @@ export interface CreateSignUrlsRequest {
 <li>第三方平台子客企业标识: Agent.ProxyOrganizationOpenId</li>
 <li>第三方平台子客企业中的员工标识: Agent. ProxyOperator.OpenId</li>
 </ul>
-第三方平台子客企业和员工必须已经经过实名认证
+第三方平台子客企业和员工必须已经过实名认证
    */
   Agent: Agent
   /**
@@ -3569,7 +3595,7 @@ export interface CreateSignUrlsRequest {
    * 签署链接类型,可以设置的参数如下
 <ul><li> **WEIXINAPP** :(默认)跳转电子签小程序的http_url, 短信通知或者H5跳转适合此类型 ，此时返回短链</li>
 <li> **CHANNEL** :带有H5引导页的跳转电子签小程序的链接</li>
-<li> **APP** :第三方APP或小程序跳转电子签小程序的path, APP或者小程序跳转适合此类型</li>
+<li> **APP** :第三方App或小程序跳转电子签小程序的path, App或者小程序跳转适合此类型</li>
 <li> **LONGURL2WEIXINAPP** :跳转电子签小程序的链接, H5跳转适合此类型，此时返回长链</li></ul>
 
 详细使用场景可以参数接口说明中的 **主要使用场景可以更加EndPoint分类如下**
@@ -3911,7 +3937,13 @@ export interface FlowApproverInfo {
   ApproverVerifyTypes?: Array<number | bigint>
   /**
    * 签署人签署合同时的认证方式
-1-人脸认证 2-签署密码 3-运营商三要素(默认为1,2)
+<ul><li> **1** :人脸认证</li>
+<li> **2** :签署密码</li>
+<li> **3** :运营商三要素</li></ul>
+
+默认为1(人脸认证 ),2(签署密码)
+
+注: `用模版创建合同场景, 签署人的认证方式需要在配置模板的时候指定, 在此创建合同指定无效`
    */
   ApproverSignTypes?: Array<number | bigint>
   /**
@@ -5750,21 +5782,21 @@ export interface SyncFailReason {
  */
 export interface ChannelDescribeEmployeesResponse {
   /**
-   * 员工数据列表
+   * 员工信息列表。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Employees?: Array<Staff>
   /**
-   * 查询结果分页返回，此处指定第几页，如果不传默认从第一页返回。页码从 0 开始，即首页为 0，最大20000
+   * 指定分页返回第几页的数据。页码从 0 开始，即首页为 0，最大20000。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Offset?: number
   /**
-   * 指定每页多少条数据，单页最大20
+   * 指定分页每页返回的数据条数，单页最大支持 20。
    */
   Limit?: number
   /**
-   * 符合条件的员工数量
+   * 符合条件的员工数量。
    */
   TotalCount?: number
   /**

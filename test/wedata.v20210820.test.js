@@ -1008,9 +1008,9 @@ it("wedata.v20210820.DescribeMonitorsByPage", async function () {
     }
 })
 
-it("wedata.v20210820.ModifyTaskName", async function () {
+it("wedata.v20210820.ModifyDimensionWeight", async function () {
     try {
-       const data = await client.ModifyTaskName({})
+       const data = await client.ModifyDimensionWeight({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1491,6 +1491,16 @@ it("wedata.v20210820.DescribeTemplateHistory", async function () {
 it("wedata.v20210820.DescribeDependOpsTasks", async function () {
     try {
        const data = await client.DescribeDependOpsTasks({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("wedata.v20210820.ModifyTaskName", async function () {
+    try {
+       const data = await client.ModifyTaskName({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -2688,9 +2698,9 @@ it("wedata.v20210820.DescribeWorkflowCanvasInfo", async function () {
     }
 })
 
-it("wedata.v20210820.ModifyDimensionWeight", async function () {
+it("wedata.v20210820.DescribeDatabaseMetas", async function () {
     try {
-       const data = await client.ModifyDimensionWeight({})
+       const data = await client.DescribeDatabaseMetas({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

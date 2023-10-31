@@ -475,7 +475,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeAccessHistogram", req, cb);
     }
     /**
-     * 删除访问日志下载记录
+     * 废弃接口，无有效调用
+
+删除访问日志下载记录
      */
     async DeleteDownloadRecord(req, cb) {
         return this.request("DeleteDownloadRecord", req, cb);

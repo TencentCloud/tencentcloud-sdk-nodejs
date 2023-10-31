@@ -36,7 +36,7 @@ import {
   DeleteNotebookRequest,
   DescribeTrainingFrameworksResponse,
   DescribeModelServiceGroupRequest,
-  RDMAConfig,
+  Filter,
   TrainingMetric,
   DescribeTrainingModelVersionsRequest,
   SpecUnit,
@@ -60,6 +60,7 @@ import {
   CFSTurbo,
   RowValue,
   CreateBatchTaskRequest,
+  ResourceInstanceRunningJobInfo,
   DescribeLatestTrainingMetricsResponse,
   DescribeDatasetDetailUnstructuredResponse,
   FilterLabelInfo,
@@ -87,7 +88,7 @@ import {
   StartCmdInfo,
   DescribeAPIConfigsRequest,
   DescribeModelServiceGroupsResponse,
-  DeleteBatchTaskRequest,
+  DescribeBillingResourceInstanceRunningJobsResponse,
   InferGatewayCallInfo,
   DescribeTrainingModelsResponse,
   DescribeBatchTaskInstancesResponse,
@@ -114,6 +115,7 @@ import {
   DeleteTrainingModelResponse,
   DescribeInferTemplatesResponse,
   DescribeBillingSpecsRequest,
+  RDMAConfig,
   InferCodeInfo,
   DescribeInferTemplatesRequest,
   DeleteModelServiceGroupResponse,
@@ -165,6 +167,7 @@ import {
   Pod,
   DescribeLatestTrainingMetricsRequest,
   ResourceInfo,
+  DeleteBatchTaskRequest,
   GroupResource,
   DescribeModelServiceCallInfoResponse,
   DataSetConfig,
@@ -175,7 +178,7 @@ import {
   DescribeModelServiceHistoryResponse,
   BatchModelAccTask,
   DescribeNotebookImageKernelsResponse,
-  Filter,
+  DescribeBillingResourceInstanceRunningJobsRequest,
   ModifyModelServiceResponse,
   PodInfo,
   DeleteBatchTaskResponse,
@@ -739,6 +742,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: RestartModelAccelerateTaskResponse) => void
   ): Promise<RestartModelAccelerateTaskResponse> {
     return this.request("RestartModelAccelerateTask", req, cb)
+  }
+
+  /**
+   * 查询资源组节点运行中的任务
+   */
+  async DescribeBillingResourceInstanceRunningJobs(
+    req: DescribeBillingResourceInstanceRunningJobsRequest,
+    cb?: (error: string, rep: DescribeBillingResourceInstanceRunningJobsResponse) => void
+  ): Promise<DescribeBillingResourceInstanceRunningJobsResponse> {
+    return this.request("DescribeBillingResourceInstanceRunningJobs", req, cb)
   }
 
   /**

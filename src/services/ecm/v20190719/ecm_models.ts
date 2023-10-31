@@ -3633,7 +3633,7 @@ export interface CreateModuleRequest {
    */
   ModuleName: string
   /**
-   * 默认带宽，单位：Mbps。范围不得超过带宽上下限，详看DescribeConfig。
+   * 默认带宽，单位：Mbps。范围不得超过带宽上下限，详看[DescribeConfig](https://cloud.tencent.com/document/product/1108/42572)。
    */
   DefaultBandWidth: number
   /**
@@ -3645,11 +3645,11 @@ export interface CreateModuleRequest {
    */
   InstanceType: string
   /**
-   * 默认系统盘大小，单位：GB，默认大小为50GB。范围不得超过系统盘上下限制，详看DescribeConfig。
+   * 默认系统盘大小，单位：GB，默认大小为50GB。范围不得超过系统盘上下限制，详看[DescribeConfig](https://cloud.tencent.com/document/product/1108/42572)。
    */
   DefaultSystemDiskSize: number
   /**
-   * 默认数据盘大小，单位：GB。范围不得超过数据盘范围大小，详看DescribeConfig。
+   * 默认数据盘大小，单位：GB。范围不得超过数据盘范围大小，详看[DescribeConfig](https://cloud.tencent.com/document/product/1108/42572)。
    */
   DefaultDataDiskSize: number
   /**
@@ -3667,7 +3667,7 @@ false：表示开通IP直通
    */
   SecurityGroups?: Array<string>
   /**
-   * 默认入带宽，单位：Mbps。范围不得超过带宽上下限，详看DescribeConfig。
+   * 默认入带宽，单位：Mbps。范围不得超过带宽上下限，详看[DescribeConfig](https://cloud.tencent.com/document/product/1108/42572)。
    */
   DefaultBandWidthIn?: number
   /**

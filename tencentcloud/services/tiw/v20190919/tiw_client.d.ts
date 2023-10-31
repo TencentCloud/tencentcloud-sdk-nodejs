@@ -267,7 +267,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeUserStatus(req?: DescribeUserStatusRequest, cb?: (error: string, rep: DescribeUserStatusResponse) => void): Promise<DescribeUserStatusResponse>;
     /**
-     * 查询PPT检测任务的执行进度或结果
+     * 查询PPT检测任务的执行进度或结果，支持查询最近半年内的任务结果
      */
     DescribePPTCheck(req: DescribePPTCheckRequest, cb?: (error: string, rep: DescribePPTCheckResponse) => void): Promise<DescribePPTCheckResponse>;
     /**

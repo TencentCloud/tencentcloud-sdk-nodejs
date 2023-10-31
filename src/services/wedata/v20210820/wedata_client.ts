@@ -77,6 +77,7 @@ import {
   UpdateWorkflowOwnerRequest,
   DescribeEventCasesRequest,
   EventPage,
+  ModifyDimensionWeightResponse,
   BatchResumeIntegrationTasksResponse,
   DescribeRuleExecResultsByPageResponse,
   RuleGroupExecResult,
@@ -219,7 +220,7 @@ import {
   OpsTaskCanvasInfoList,
   DescribeDependTaskListsRequest,
   CollectionFolderOpsDto,
-  RerunInstancesRequest,
+  DatabaseMeta,
   DlcRemoveOrphanFilesInfo,
   DescribeEventsRequest,
   DescribeAllByFolderNewRequest,
@@ -455,6 +456,7 @@ import {
   EventCaseAuditLogOptDto,
   RealTimeTaskInstanceNodeInfo,
   DeleteResourceFilesResponse,
+  RerunInstancesRequest,
   DescribeEventIsAlarmTypesRequest,
   CreateOpsMakePlanResponse,
   DescribeStreamTaskLogListResponse,
@@ -476,7 +478,7 @@ import {
   DescribeWorkflowInfoByIdResponse,
   DescribeBaselineByIdRequest,
   RuleDimStat,
-  ModifyDimensionWeightResponse,
+  DescribeDatabaseMetasResponse,
   ModifyTaskAlarmRegularResponse,
   InstanceSearchCondition,
   CreateRuleResponse,
@@ -525,7 +527,7 @@ import {
   AdhocRecord,
   OperateResult,
   CreateTaskRequest,
-  ModifyDimensionWeightRequest,
+  DescribeDatabaseMetasRequest,
   SimpleTaskInfo,
   CreateFolderResponse,
   DescribeRealTimeTaskInstanceNodeInfoRequest,
@@ -538,6 +540,7 @@ import {
   OperationOpsDto,
   DescribeTaskByStatusReportResponse,
   DescribeMonitorsByPageRequest,
+  ModifyDimensionWeightRequest,
   CreateMakeDatetimeInfo,
   DescribeRuleGroupsByPageResponse,
   InstanceApiOpsRequest,
@@ -1890,13 +1893,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 重命名任务（任务编辑）
+   * 质量报告-修改维度权限
    */
-  async ModifyTaskName(
-    req: ModifyTaskNameRequest,
-    cb?: (error: string, rep: ModifyTaskNameResponse) => void
-  ): Promise<ModifyTaskNameResponse> {
-    return this.request("ModifyTaskName", req, cb)
+  async ModifyDimensionWeight(
+    req: ModifyDimensionWeightRequest,
+    cb?: (error: string, rep: ModifyDimensionWeightResponse) => void
+  ): Promise<ModifyDimensionWeightResponse> {
+    return this.request("ModifyDimensionWeight", req, cb)
   }
 
   /**
@@ -2384,6 +2387,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDependOpsTasksResponse) => void
   ): Promise<DescribeDependOpsTasksResponse> {
     return this.request("DescribeDependOpsTasks", req, cb)
+  }
+
+  /**
+   * 重命名任务（任务编辑）
+   */
+  async ModifyTaskName(
+    req: ModifyTaskNameRequest,
+    cb?: (error: string, rep: ModifyTaskNameResponse) => void
+  ): Promise<ModifyTaskNameResponse> {
+    return this.request("ModifyTaskName", req, cb)
   }
 
   /**
@@ -3598,13 +3611,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 质量报告-修改维度权限
+   * 查询数据库列表
    */
-  async ModifyDimensionWeight(
-    req: ModifyDimensionWeightRequest,
-    cb?: (error: string, rep: ModifyDimensionWeightResponse) => void
-  ): Promise<ModifyDimensionWeightResponse> {
-    return this.request("ModifyDimensionWeight", req, cb)
+  async DescribeDatabaseMetas(
+    req: DescribeDatabaseMetasRequest,
+    cb?: (error: string, rep: DescribeDatabaseMetasResponse) => void
+  ): Promise<DescribeDatabaseMetasResponse> {
+    return this.request("DescribeDatabaseMetas", req, cb)
   }
 
   /**

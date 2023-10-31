@@ -34,23 +34,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ImageToClass", req, cb);
     }
     /**
-     * 将PDF格式的体检报告文件结构化，解析关键信息。
-注意：该接口是按照体检报告 PDF 页面数量统计次数，不是按照 PDF 文件数量统计次数。通过该接口传入的报告必须是体检报告，非体检报告可能无法正确解析。
+     * 体检报告PDF文件结构化异步获取结果接口
      */
-    async TurnPDFToObject(req, cb) {
-        return this.request("TurnPDFToObject", req, cb);
-    }
-    /**
-     * 图片转结构化对象
-     */
-    async ImageToObject(req, cb) {
-        return this.request("ImageToObject", req, cb);
-    }
-    /**
-     * 文本分类
-     */
-    async TextToClass(req, cb) {
-        return this.request("TextToClass", req, cb);
+    async TurnPDFToObjectAsyncGetResult(req, cb) {
+        return this.request("TurnPDFToObjectAsyncGetResult", req, cb);
     }
     /**
      * 文本转结构化对象。
@@ -59,6 +46,31 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async TextToObject(req, cb) {
         return this.request("TextToObject", req, cb);
+    }
+    /**
+     * 图片转结构化对象
+     */
+    async ImageToObject(req, cb) {
+        return this.request("ImageToObject", req, cb);
+    }
+    /**
+     * 体检报告PDF文件结构化-异步接口
+     */
+    async TurnPDFToObjectAsync(req, cb) {
+        return this.request("TurnPDFToObjectAsync", req, cb);
+    }
+    /**
+     * 将PDF格式的体检报告文件结构化，解析关键信息。
+注意：该接口是按照体检报告 PDF 页面数量统计次数，不是按照 PDF 文件数量统计次数。通过该接口传入的报告必须是体检报告，非体检报告可能无法正确解析。
+     */
+    async TurnPDFToObject(req, cb) {
+        return this.request("TurnPDFToObject", req, cb);
+    }
+    /**
+     * 文本分类
+     */
+    async TextToClass(req, cb) {
+        return this.request("TextToClass", req, cb);
     }
 }
 exports.Client = Client;

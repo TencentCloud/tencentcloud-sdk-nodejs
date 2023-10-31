@@ -796,14 +796,25 @@ export interface DescribeModelServiceGroupRequest {
     ServiceCategory?: string;
 }
 /**
- * RDMA配置
+ * 过滤器
  */
-export interface RDMAConfig {
+export interface Filter {
     /**
-     * 是否开启RDMA
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 过滤字段名称
      */
-    Enable?: boolean;
+    Name?: string;
+    /**
+     * 过滤字段取值
+     */
+    Values?: Array<string>;
+    /**
+     * 是否开启反向查询
+     */
+    Negative?: boolean;
+    /**
+     * 是否开启模糊匹配
+     */
+    Fuzzy?: boolean;
 }
 /**
  * 训练指标
@@ -1611,6 +1622,31 @@ export interface CreateBatchTaskRequest {
      * 任务执行结果回调URL，仅支持http和https。回调格式&内容详见: [TI-ONE 接口回调说明](https://cloud.tencent.com/document/product/851/84292)
      */
     CallbackUrl?: string;
+}
+/**
+ * 资源组节点运行任务信息
+ */
+export interface ResourceInstanceRunningJobInfo {
+    /**
+     * pod名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PodName?: string;
+    /**
+     * 任务类型
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TaskType?: string;
+    /**
+     * 任务id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TaskId?: string;
+    /**
+     * 任务自定义名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TaskName?: string;
 }
 /**
  * DescribeLatestTrainingMetrics返回参数结构体
@@ -2445,13 +2481,18 @@ export interface DescribeModelServiceGroupsResponse {
     RequestId?: string;
 }
 /**
- * DeleteBatchTask请求参数结构体
+ * DescribeBillingResourceInstanceRunningJobs返回参数结构体
  */
-export interface DeleteBatchTaskRequest {
+export interface DescribeBillingResourceInstanceRunningJobsResponse {
     /**
-     * 跑批任务ID
+     * 资源组节点运行中的任务信息
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    BatchTaskId: string;
+    ResourceInstanceRunningJobInfos?: Array<ResourceInstanceRunningJobInfo>;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * 服务的调用信息，服务组下唯一
@@ -3167,6 +3208,16 @@ export interface DescribeBillingSpecsRequest {
      * 资源类型：CALC 计算资源、CPU CPU资源、GPU GPU资源、CBS云硬盘
      */
     ResourceType?: string;
+}
+/**
+ * RDMA配置
+ */
+export interface RDMAConfig {
+    /**
+     * 是否开启RDMA
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Enable?: boolean;
 }
 /**
  * 推理代码的信息
@@ -4800,6 +4851,15 @@ export interface ResourceInfo {
     RealGpuDetailSet?: Array<GpuDetail>;
 }
 /**
+ * DeleteBatchTask请求参数结构体
+ */
+export interface DeleteBatchTaskRequest {
+    /**
+     * 跑批任务ID
+     */
+    BatchTaskId: string;
+}
+/**
  * 资源信息
  */
 export interface GroupResource {
@@ -5013,25 +5073,17 @@ export interface DescribeNotebookImageKernelsResponse {
     RequestId?: string;
 }
 /**
- * 过滤器
+ * DescribeBillingResourceInstanceRunningJobs请求参数结构体
  */
-export interface Filter {
+export interface DescribeBillingResourceInstanceRunningJobsRequest {
     /**
-     * 过滤字段名称
+     * 资源组id
      */
-    Name?: string;
+    ResourceGroupId: string;
     /**
-     * 过滤字段取值
+     * 资源组节点id
      */
-    Values?: Array<string>;
-    /**
-     * 是否开启反向查询
-     */
-    Negative?: boolean;
-    /**
-     * 是否开启模糊匹配
-     */
-    Fuzzy?: boolean;
+    ResourceInstanceId: string;
 }
 /**
  * ModifyModelService返回参数结构体

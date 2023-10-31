@@ -1118,8 +1118,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除访问日志下载记录
-   */
+     * 废弃接口，无有效调用
+
+删除访问日志下载记录
+     */
   async DeleteDownloadRecord(
     req: DeleteDownloadRecordRequest,
     cb?: (error: string, rep: DeleteDownloadRecordResponse) => void

@@ -309,7 +309,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeAccessHistogram(req: DescribeAccessHistogramRequest, cb?: (error: string, rep: DescribeAccessHistogramResponse) => void): Promise<DescribeAccessHistogramResponse>;
     /**
-     * 删除访问日志下载记录
+     * 废弃接口，无有效调用
+
+删除访问日志下载记录
      */
     DeleteDownloadRecord(req: DeleteDownloadRecordRequest, cb?: (error: string, rep: DeleteDownloadRecordResponse) => void): Promise<DeleteDownloadRecordResponse>;
     /**
