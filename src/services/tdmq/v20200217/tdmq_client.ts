@@ -22,6 +22,7 @@ import {
   RabbitMQClusterAccessInfo,
   DescribeBindClustersResponse,
   DescribeRabbitMQVirtualHostResponse,
+  RabbitMQClusterWhiteListInfo,
   CmqDeadLetterPolicy,
   DescribeNamespaceBundlesOptRequest,
   DeleteRabbitMQUserRequest,
@@ -60,7 +61,7 @@ import {
   DescribeBindVpcsResponse,
   RewindCmqQueueResponse,
   DescribeRocketMQSmoothMigrationTaskRequest,
-  DeleteClusterRequest,
+  ConsumerStats,
   CmqSubscription,
   DescribeRocketMQSourceClusterGroupListResponse,
   RocketMQMsgLog,
@@ -71,7 +72,7 @@ import {
   RocketMQSmoothMigrationTaskItem,
   VpcInfo,
   ModifyRabbitMQUserRequest,
-  RabbitMQClusterWhiteListInfo,
+  DescribeRocketMQConsumeStatsResponse,
   DeleteCmqTopicResponse,
   CreateSubscriptionRequest,
   CreateRocketMQNamespaceRequest,
@@ -154,6 +155,7 @@ import {
   ReceiveMessageResponse,
   DescribeEnvironmentRolesResponse,
   DescribeRocketMQPublicAccessPointResponse,
+  VerifyRocketMQConsumeResponse,
   DescribeRocketMQMsgTraceRequest,
   ModifyRocketMQGroupRequest,
   FilterSubscription,
@@ -226,6 +228,7 @@ import {
   RabbitMQClusterInfo,
   CreateCmqTopicResponse,
   CmqDeadLetterSource,
+  ModifyRabbitMQVipInstanceResponse,
   ClearCmqSubscriptionFilterTagsResponse,
   CreateRabbitMQVipInstanceResponse,
   DescribeRabbitMQVipInstanceRequest,
@@ -259,7 +262,7 @@ import {
   DescribeRabbitMQQueuesRequest,
   DeleteRocketMQNamespaceResponse,
   DescribePublishersResponse,
-  ModifyRabbitMQVipInstanceResponse,
+  DeleteClusterRequest,
   SendMsgRequest,
   ResetRocketMQConsumerOffSetRequest,
   DescribeCmqQueueDetailRequest,
@@ -302,7 +305,7 @@ import {
   AMQPClusterConfig,
   Tag,
   CreateRocketMQNamespaceResponse,
-  RocketMQInstanceConfig,
+  DescribeRocketMQConsumeStatsRequest,
   SendBatchMessagesRequest,
   DeleteCmqTopicRequest,
   DescribeRabbitMQNodeListResponse,
@@ -310,6 +313,7 @@ import {
   RocketMQTopicConfig,
   DescribeNodeHealthOptResponse,
   ModifyPublicNetworkAccessPointResponse,
+  RocketMQInstanceConfig,
   PublishCmqMsgRequest,
   UnbindCmqDeadLetterRequest,
   ModifyCmqQueueAttributeRequest,
@@ -328,6 +332,7 @@ import {
   DescribeRabbitMQVipInstancesRequest,
   AMQPClusterDetail,
   DescribeClusterDetailResponse,
+  VerifyRocketMQConsumeRequest,
   SendBatchMessagesResponse,
   ImportRocketMQTopicsRequest,
   CreateEnvironmentRoleRequest,
@@ -363,6 +368,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateClusterResponse) => void
   ): Promise<CreateClusterResponse> {
     return this.request("CreateCluster", req, cb)
+  }
+
+  /**
+   * 获取消费详情列表
+   */
+  async DescribeRocketMQConsumeStats(
+    req: DescribeRocketMQConsumeStatsRequest,
+    cb?: (error: string, rep: DescribeRocketMQConsumeStatsResponse) => void
+  ): Promise<DescribeRocketMQConsumeStatsResponse> {
+    return this.request("DescribeRocketMQConsumeStats", req, cb)
   }
 
   /**
@@ -1034,6 +1049,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeRocketMQVipInstancesResponse) => void
   ): Promise<DescribeRocketMQVipInstancesResponse> {
     return this.request("DescribeRocketMQVipInstances", req, cb)
+  }
+
+  /**
+   * Rocketmq消费验证
+   */
+  async VerifyRocketMQConsume(
+    req: VerifyRocketMQConsumeRequest,
+    cb?: (error: string, rep: VerifyRocketMQConsumeResponse) => void
+  ): Promise<VerifyRocketMQConsumeResponse> {
+    return this.request("VerifyRocketMQConsume", req, cb)
   }
 
   /**

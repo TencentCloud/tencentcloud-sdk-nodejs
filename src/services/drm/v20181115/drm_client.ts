@@ -29,11 +29,13 @@ import {
   ModifyFairPlayPemResponse,
   DescribeFairPlayPemResponse,
   Key,
+  DescribeDRMLicenseResponse,
   PlaybackPolicy,
   AddFairPlayPemResponse,
   AddFairPlayPemRequest,
   DeleteFairPlayPemRequest,
   DescribeKeysResponse,
+  DescribeDRMLicenseRequest,
   DescribeAllKeysResponse,
   StartEncryptionRequest,
   ModifyFairPlayPemRequest,
@@ -118,6 +120,17 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeKeysResponse) => void
   ): Promise<DescribeKeysResponse> {
     return this.request("DescribeKeys", req, cb)
+  }
+
+  /**
+     * 开发者需要指定使用的DRM类型取值 NORMALAES、和需要加密的Track类型取值 SD,ContentType取值 LiveVideo
+
+     */
+  async DescribeDRMLicense(
+    req: DescribeDRMLicenseRequest,
+    cb?: (error: string, rep: DescribeDRMLicenseResponse) => void
+  ): Promise<DescribeDRMLicenseResponse> {
+    return this.request("DescribeDRMLicense", req, cb)
   }
 
   /**

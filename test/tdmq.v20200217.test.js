@@ -38,6 +38,16 @@ it("tdmq.v20200217.CreateCluster", async function () {
     }
 })
 
+it("tdmq.v20200217.DescribeRocketMQConsumeStats", async function () {
+    try {
+       const data = await client.DescribeRocketMQConsumeStats({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tdmq.v20200217.DescribeRocketMQNamespaces", async function () {
     try {
        const data = await client.DescribeRocketMQNamespaces({})
@@ -701,6 +711,16 @@ it("tdmq.v20200217.ImportRocketMQConsumerGroups", async function () {
 it("tdmq.v20200217.DescribeRocketMQVipInstances", async function () {
     try {
        const data = await client.DescribeRocketMQVipInstances({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tdmq.v20200217.VerifyRocketMQConsume", async function () {
+    try {
+       const data = await client.VerifyRocketMQConsume({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

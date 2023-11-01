@@ -78,6 +78,16 @@ it("drm.v20181115.DescribeKeys", async function () {
     }
 })
 
+it("drm.v20181115.DescribeDRMLicense", async function () {
+    try {
+       const data = await client.DescribeDRMLicense({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("drm.v20181115.DescribeAllKeys", async function () {
     try {
        const data = await client.DescribeAllKeys({})

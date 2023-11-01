@@ -70,6 +70,13 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeKeys", req, cb);
     }
     /**
+     * 开发者需要指定使用的DRM类型取值 NORMALAES、和需要加密的Track类型取值 SD,ContentType取值 LiveVideo
+
+     */
+    async DescribeDRMLicense(req, cb) {
+        return this.request("DescribeDRMLicense", req, cb);
+    }
+    /**
      * 本接口用来查询指定DRM类型、ContentType的所有加密密钥
 
      */

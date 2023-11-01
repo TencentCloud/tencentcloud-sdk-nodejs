@@ -784,6 +784,19 @@ export interface StaffRole {
     RoleName?: string;
 }
 /**
+ * CreateBatchQuickSignUrl返回参数结构体
+ */
+export interface CreateBatchQuickSignUrlResponse {
+    /**
+     * 签署人签署链接信息
+     */
+    FlowApproverUrlInfo?: FlowApproverUrlInfo;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * CreateIntegrationRole请求参数结构体
  */
 export interface CreateIntegrationRoleRequest {
@@ -3334,7 +3347,7 @@ export interface FlowCreateApprover {
   </li></ul>
   注:
   <ul><li>如果合同流程设置ApproverVerifyType查看合同的校验方式,    则忽略此签署人的查看合同的校验方式</li>
-  <li>此字段不可传多个校验方式</li></ul>
+  <li>此字段可传多个校验方式</li></ul>
   
   `此参数仅针对文件发起设置生效,模板发起合同签署流程, 请以模板配置为主`
   
@@ -4531,7 +4544,9 @@ export interface ApproverInfo {
      */
     ApproverRole?: number;
     /**
-     * 自定义签署人角色名：收款人、开具人、见证人
+     * 可以自定义签署人角色名：收款人、开具人、见证人等，长度不能超过20，只能由中文、字母、数字和下划线组成。
+  
+  注: `如果是用模板发起, 优先使用此处上传的, 如果不传则用模板的配置的`
      */
     ApproverRoleName?: string;
     /**
@@ -4578,7 +4593,7 @@ export interface ApproverInfo {
   </li></ul>
   注:
   <ul><li>如果合同流程设置ApproverVerifyType查看合同的校验方式,    则忽略此签署人的查看合同的校验方式</li>
-  <li>此字段不可传多个校验方式</li></ul>
+  <li>此字段可传多个校验方式</li></ul>
      */
     ApproverVerifyTypes?: Array<number | bigint>;
     /**
@@ -6562,6 +6577,56 @@ export interface FilledComponent {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     ImageUrl?: string;
+}
+/**
+ * CreateBatchQuickSignUrl请求参数结构体
+ */
+export interface CreateBatchQuickSignUrlRequest {
+    /**
+     * 批量签署的合同流程ID数组。
+  注: `在调用此接口时，请确保合同流程均为本企业发起，且合同数量不超过100个。`
+     */
+    FlowIds: Array<string>;
+    /**
+     * 批量签署的流程签署人，其中姓名(ApproverName)、参与人类型(ApproverType)必传，手机号(ApproverMobile)和证件信息(ApproverIdCardType、ApproverIdCardNumber)可任选一种或全部传入。
+  注:
+  `1. ApproverType目前只支持个人类型的签署人。`
+  `2. 签署人只能有手写签名和时间类型的签署控件，其他类型的填写控件和签署控件暂时都未支持。`
+  `3. 当需要通过短信验证码签署时，手机号ApproverMobile需要与发起合同时填写的用户手机号一致。`
+     */
+    FlowApproverInfo: FlowCreateApprover;
+    /**
+     * 代理企业和员工的信息。
+  在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId(子企业的组织ID)为必填项。
+     */
+    Agent?: Agent;
+    /**
+     * 执行本接口操作的员工信息。
+  注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。`
+     */
+    Operator?: UserInfo;
+    /**
+     * 签署完之后的H5页面的跳转链接，此链接及支持http://和https://，最大长度1000个字符。(建议https协议)
+     */
+    JumpUrl?: string;
+    /**
+     * 指定批量签署合同的签名类型，可传递以下值：
+  <ul><li>**0**：手写签名(默认)</li>
+  <li>**1**：OCR楷体</li></ul>
+  注：
+  <ul><li>默认情况下，签名类型为手写签名</li>
+  <li>您可以传递多种值，表示可用多种签名类型。</li></ul>
+     */
+    SignatureTypes?: Array<number | bigint>;
+    /**
+     * 指定批量签署合同的认证校验方式，可传递以下值：
+  <ul><li>**1**：人脸认证(默认)，需进行人脸识别成功后才能签署合同</li>
+  <li>**3**：运营商三要素，需到运营商处比对手机号实名信息(名字、手机号、证件号)校验一致才能成功进行合同签署。</li></ul>
+  注：
+  <ul><li>默认情况下，认证校验方式为人脸认证</li>
+  <li>您可以传递多种值，表示可用多种认证校验方式。</li></ul>
+     */
+    ApproverSignTypes?: Array<number | bigint>;
 }
 /**
  * 下载文件的URL信息

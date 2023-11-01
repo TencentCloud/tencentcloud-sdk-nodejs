@@ -18,9 +18,9 @@ const client = new tencentcloud.ess.v20201111.Client({
 })
 describe("ess.v20201111.test.js", function () {
 
-it("ess.v20201111.CreateUserAutoSignSealUrl", async function () {
+it("ess.v20201111.CreateBatchQuickSignUrl", async function () {
     try {
-       const data = await client.CreateUserAutoSignSealUrl({})
+       const data = await client.CreateBatchQuickSignUrl({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -91,6 +91,16 @@ it("ess.v20201111.DeleteSealPolicies", async function () {
 it("ess.v20201111.DescribeFileUrls", async function () {
     try {
        const data = await client.DescribeFileUrls({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ess.v20201111.CreateUserAutoSignSealUrl", async function () {
+    try {
+       const data = await client.CreateUserAutoSignSealUrl({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

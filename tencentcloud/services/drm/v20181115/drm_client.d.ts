@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { CreateLicenseResponse, CreateEncryptKeysResponse, CreateLicenseRequest, DescribeAllKeysRequest, CreateEncryptKeysRequest, ModifyFairPlayPemResponse, DescribeFairPlayPemResponse, AddFairPlayPemResponse, AddFairPlayPemRequest, DeleteFairPlayPemRequest, DescribeKeysResponse, DescribeAllKeysResponse, StartEncryptionRequest, ModifyFairPlayPemRequest, DeleteFairPlayPemResponse, StartEncryptionResponse, DescribeFairPlayPemRequest, DescribeKeysRequest } from "./drm_models";
+import { CreateLicenseResponse, CreateEncryptKeysResponse, CreateLicenseRequest, DescribeAllKeysRequest, CreateEncryptKeysRequest, ModifyFairPlayPemResponse, DescribeFairPlayPemResponse, DescribeDRMLicenseResponse, AddFairPlayPemResponse, AddFairPlayPemRequest, DeleteFairPlayPemRequest, DescribeKeysResponse, DescribeDRMLicenseRequest, DescribeAllKeysResponse, StartEncryptionRequest, ModifyFairPlayPemRequest, DeleteFairPlayPemResponse, StartEncryptionResponse, DescribeFairPlayPemRequest, DescribeKeysRequest } from "./drm_models";
 /**
  * drm client
  * @class
@@ -37,6 +37,11 @@ export declare class Client extends AbstractClient {
 
      */
     DescribeKeys(req: DescribeKeysRequest, cb?: (error: string, rep: DescribeKeysResponse) => void): Promise<DescribeKeysResponse>;
+    /**
+     * 开发者需要指定使用的DRM类型取值 NORMALAES、和需要加密的Track类型取值 SD,ContentType取值 LiveVideo
+
+     */
+    DescribeDRMLicense(req: DescribeDRMLicenseRequest, cb?: (error: string, rep: DescribeDRMLicenseResponse) => void): Promise<DescribeDRMLicenseResponse>;
     /**
      * 本接口用来查询指定DRM类型、ContentType的所有加密密钥
 

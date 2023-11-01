@@ -28,17 +28,17 @@ class Client extends abstract_client_1.AbstractClient {
         super("ess.tencentcloudapi.com", "2020-11-11", clientConfig);
     }
     /**
-     * 获取设置自动签印章小程序链接。
-
-注意：
-<ul><li>需要<code>企业开通自动签</code>后使用。</li>
-<li>仅支持<code>已经开通了自动签的个人</code>更换自动签印章。</li>
-<li>链接有效期默认7天，<code>最多30天</code>。</li>
-<li>该接口的链接适用于<code>小程序</code>端。</li>
-<li>该接口不会扣除您的合同套餐，暂不参与计费。</li></ul>
+     * 该接口用于发起合同后，生成个人用户的批量签署链接, 暂时不支持企业端签署 <br/>
+`注意：`<br/>
+`1. 该接口目前仅支持签署人类型是个人签署方的批量签署场景(ApproverType=1)。` <br/>
+`2. 该接口可生成批量签署链接的C端签署人必须仅有手写签名和时间类型的签署控件，不支持填写控件 。` <br/>
+`3. 请确保C端签署人在批量签署合同中为待签署状态，如需顺序签署请待前一位参与人签署完成后，再创建该C端用户的签署链接。` <br/>
+`4. 该签署链接有效期为30分钟，过期后将失效，如需签署可重新创建批量签署链接 。` <br/>
+`5. 该接口返回的签署链接适用于APP集成的场景，支持APP打开或浏览器直接打开，不支持微信小程序嵌入。`<br/>
+跳转到小程序的实现，参考微信官方文档(分为<a href="https://developers.weixin.qq.com/miniprogram/dev/api/navigate/wx.navigateToMiniProgram.html">全屏</a>、<a href="https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/openEmbeddedMiniProgram.html">半屏</a>两种方式)，如何配置也可以请参考: <a href="https://qian.tencent.com/developers/company/openwxminiprogram">跳转电子签小程序配置</a>
      */
-    async CreateUserAutoSignSealUrl(req, cb) {
-        return this.request("CreateUserAutoSignSealUrl", req, cb);
+    async CreateBatchQuickSignUrl(req, cb) {
+        return this.request("CreateBatchQuickSignUrl", req, cb);
     }
     /**
      * 此接口用于查询合同流程的详情信息，支持查询多个（数量不能超过100）。
@@ -106,6 +106,19 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeFileUrls(req, cb) {
         return this.request("DescribeFileUrls", req, cb);
+    }
+    /**
+     * 获取设置自动签印章小程序链接。
+
+注意：
+<ul><li>需要<code>企业开通自动签</code>后使用。</li>
+<li>仅支持<code>已经开通了自动签的个人</code>更换自动签印章。</li>
+<li>链接有效期默认7天，<code>最多30天</code>。</li>
+<li>该接口的链接适用于<code>小程序</code>端。</li>
+<li>该接口不会扣除您的合同套餐，暂不参与计费。</li></ul>
+     */
+    async CreateUserAutoSignSealUrl(req, cb) {
+        return this.request("CreateUserAutoSignSealUrl", req, cb);
     }
     /**
      * 获取个人用户自动签的开通链接。

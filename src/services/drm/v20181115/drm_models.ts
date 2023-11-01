@@ -246,6 +246,24 @@ export interface Key {
 }
 
 /**
+ * DescribeDRMLicense返回参数结构体
+ */
+export interface DescribeDRMLicenseResponse {
+  /**
+   * 内容ID。
+   */
+  ContentId: string
+  /**
+   * 加密密钥。
+   */
+  TXEncryptionToken: string
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 播放控制参数
  */
 export interface PlaybackPolicy {
@@ -352,6 +370,28 @@ Fairplay方案无该值。
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeDRMLicense请求参数结构体
+ */
+export interface DescribeDRMLicenseRequest {
+  /**
+   * 使用的DRM方案类型，接口取值 NORMALAES 。
+   */
+  DrmType: string
+  /**
+   * 加密的track列表，接口取值 SD 。
+   */
+  Tracks: Array<string>
+  /**
+   * 一个加密内容的唯一标识。
+   */
+  ContentId: string
+  /**
+   * 内容类型。接口取值 LiveVideo 。
+   */
+  ContentType: string
 }
 
 /**

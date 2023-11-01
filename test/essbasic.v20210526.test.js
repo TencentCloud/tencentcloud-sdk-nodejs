@@ -38,6 +38,16 @@ it("essbasic.v20210526.ChannelCreateFlowSignReview", async function () {
     }
 })
 
+it("essbasic.v20210526.ModifyExtendedService", async function () {
+    try {
+       const data = await client.ModifyExtendedService({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("essbasic.v20210526.ChannelCreateMultiFlowSignQRCode", async function () {
     try {
        const data = await client.ChannelCreateMultiFlowSignQRCode({})
@@ -98,9 +108,9 @@ it("essbasic.v20210526.DescribeExtendedServiceAuthInfo", async function () {
     }
 })
 
-it("essbasic.v20210526.ModifyExtendedService", async function () {
+it("essbasic.v20210526.ChannelDescribeRoles", async function () {
     try {
-       const data = await client.ModifyExtendedService({})
+       const data = await client.ChannelDescribeRoles({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -158,9 +168,9 @@ it("essbasic.v20210526.ChannelCreateSealPolicy", async function () {
     }
 })
 
-it("essbasic.v20210526.ChannelCreateRole", async function () {
+it("essbasic.v20210526.ChannelCreateBatchQuickSignUrl", async function () {
     try {
-       const data = await client.ChannelCreateRole({})
+       const data = await client.ChannelCreateBatchQuickSignUrl({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -368,9 +378,9 @@ it("essbasic.v20210526.ChannelCreateWebThemeConfig", async function () {
     }
 })
 
-it("essbasic.v20210526.ChannelCreateFlowReminds", async function () {
+it("essbasic.v20210526.ChannelCreateFlowSignUrl", async function () {
     try {
-       const data = await client.ChannelCreateFlowReminds({})
+       const data = await client.ChannelCreateFlowSignUrl({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -438,9 +448,9 @@ it("essbasic.v20210526.ChannelCreateFlowApprovers", async function () {
     }
 })
 
-it("essbasic.v20210526.ChannelDescribeRoles", async function () {
+it("essbasic.v20210526.ChannelCreateRole", async function () {
     try {
-       const data = await client.ChannelDescribeRoles({})
+       const data = await client.ChannelCreateRole({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -488,9 +498,9 @@ it("essbasic.v20210526.UploadFiles", async function () {
     }
 })
 
-it("essbasic.v20210526.ChannelCreateFlowSignUrl", async function () {
+it("essbasic.v20210526.ChannelCreateFlowReminds", async function () {
     try {
-       const data = await client.ChannelCreateFlowSignUrl({})
+       const data = await client.ChannelCreateFlowReminds({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

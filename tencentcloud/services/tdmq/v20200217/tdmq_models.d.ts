@@ -109,6 +109,36 @@ export interface DescribeRabbitMQVirtualHostResponse {
     RequestId?: string;
 }
 /**
+ * RabbiteMQ集群白名单信息
+ */
+export interface RabbitMQClusterWhiteListInfo {
+    /**
+     * 废弃
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    WhiteList: string;
+    /**
+     * 公网管控台白名单
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PublicControlConsoleWhiteList: string;
+    /**
+     * 公网数据流白名单
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PublicDataStreamWhiteList: string;
+    /**
+     * 公网管控台白名单状态
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PublicControlConsoleWhiteListStatus?: string;
+    /**
+     * 公网数据流白名单状态
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PublicDataStreamWhiteListStatus?: string;
+}
+/**
  * cmq DeadLetterPolicy
  */
 export interface CmqDeadLetterPolicy {
@@ -1023,13 +1053,49 @@ export interface DescribeRocketMQSmoothMigrationTaskRequest {
     TaskId: string;
 }
 /**
- * DeleteCluster请求参数结构体
+ * 消费详情
  */
-export interface DeleteClusterRequest {
+export interface ConsumerStats {
     /**
-     * 集群Id，传入需要删除的集群Id。
+     * 主题名
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    ClusterId: string;
+    TopicName?: string;
+    /**
+     * 所属Broker
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    BrokerName?: string;
+    /**
+     * 队列编号
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    QueueId?: number;
+    /**
+     * 消费者ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ConsumerClientId?: string;
+    /**
+     * 消费位点
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ConsumerOffset?: number;
+    /**
+     * 服务端位点
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    BrokerOffset?: number;
+    /**
+     * 消息堆积条数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DiffTotal?: number;
+    /**
+     * 最近消费时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    LastTimestamp?: number;
 }
 /**
  * cmq订阅返回参数
@@ -1374,34 +1440,17 @@ export interface ModifyRabbitMQUserRequest {
     MaxChannels?: number;
 }
 /**
- * RabbiteMQ集群白名单信息
+ * DescribeRocketMQConsumeStats返回参数结构体
  */
-export interface RabbitMQClusterWhiteListInfo {
+export interface DescribeRocketMQConsumeStatsResponse {
     /**
-     * 废弃
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 消费详情列表
      */
-    WhiteList: string;
+    ConsumerStatsList?: Array<ConsumerStats>;
     /**
-     * 公网管控台白名单
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
-    PublicControlConsoleWhiteList: string;
-    /**
-     * 公网数据流白名单
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    PublicDataStreamWhiteList: string;
-    /**
-     * 公网管控台白名单状态
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    PublicControlConsoleWhiteListStatus?: string;
-    /**
-     * 公网数据流白名单状态
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    PublicDataStreamWhiteListStatus?: string;
+    RequestId?: string;
 }
 /**
  * DeleteCmqTopic返回参数结构体
@@ -3515,6 +3564,15 @@ export interface DescribeRocketMQPublicAccessPointResponse {
     RequestId?: string;
 }
 /**
+ * VerifyRocketMQConsume返回参数结构体
+ */
+export interface VerifyRocketMQConsumeResponse {
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * DescribeRocketMQMsgTrace请求参数结构体
  */
 export interface DescribeRocketMQMsgTraceRequest {
@@ -5403,6 +5461,20 @@ export interface CmqDeadLetterSource {
     QueueName: string;
 }
 /**
+ * ModifyRabbitMQVipInstance返回参数结构体
+ */
+export interface ModifyRabbitMQVipInstanceResponse {
+    /**
+     * 实例id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InstanceId?: string;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * ClearCmqSubscriptionFilterTags返回参数结构体
  */
 export interface ClearCmqSubscriptionFilterTagsResponse {
@@ -6235,18 +6307,13 @@ export interface DescribePublishersResponse {
     RequestId?: string;
 }
 /**
- * ModifyRabbitMQVipInstance返回参数结构体
+ * DeleteCluster请求参数结构体
  */
-export interface ModifyRabbitMQVipInstanceResponse {
+export interface DeleteClusterRequest {
     /**
-     * 实例id
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 集群Id，传入需要删除的集群Id。
      */
-    InstanceId?: string;
-    /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
+    ClusterId: string;
 }
 /**
  * SendMsg请求参数结构体
@@ -7203,58 +7270,21 @@ export interface CreateRocketMQNamespaceResponse {
     RequestId?: string;
 }
 /**
- * RocketMQ专享集群实例配置
+ * DescribeRocketMQConsumeStats请求参数结构体
  */
-export interface RocketMQInstanceConfig {
+export interface DescribeRocketMQConsumeStatsRequest {
     /**
-     * 单命名空间TPS上线
+     * 实例ID
      */
-    MaxTpsPerNamespace?: number;
+    ClusterId: string;
     /**
-     * 最大命名空间数量
+     * 命名空间
      */
-    MaxNamespaceNum?: number;
+    NamespaceId: string;
     /**
-     * 已使用命名空间数量
+     * 消费组
      */
-    UsedNamespaceNum?: number;
-    /**
-     * 最大Topic数量
-     */
-    MaxTopicNum?: number;
-    /**
-     * 已使用Topic数量
-     */
-    UsedTopicNum?: number;
-    /**
-     * 最大Group数量
-     */
-    MaxGroupNum?: number;
-    /**
-     * 已使用Group数量
-     */
-    UsedGroupNum?: number;
-    /**
-     * 集群类型
-     */
-    ConfigDisplay?: string;
-    /**
-     * 集群节点数
-     */
-    NodeCount?: number;
-    /**
-     * 节点分布情况
-     */
-    NodeDistribution?: Array<InstanceNodeDistribution>;
-    /**
-     * topic分布情况
-     */
-    TopicDistribution?: Array<RocketMQTopicDistribution>;
-    /**
-     * 每个主题最大队列数
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    MaxQueuesPerTopic?: number;
+    ConsumerGroup: string;
 }
 /**
  * SendBatchMessages请求参数结构体
@@ -7405,6 +7435,60 @@ export interface ModifyPublicNetworkAccessPointResponse {
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * RocketMQ专享集群实例配置
+ */
+export interface RocketMQInstanceConfig {
+    /**
+     * 单命名空间TPS上线
+     */
+    MaxTpsPerNamespace?: number;
+    /**
+     * 最大命名空间数量
+     */
+    MaxNamespaceNum?: number;
+    /**
+     * 已使用命名空间数量
+     */
+    UsedNamespaceNum?: number;
+    /**
+     * 最大Topic数量
+     */
+    MaxTopicNum?: number;
+    /**
+     * 已使用Topic数量
+     */
+    UsedTopicNum?: number;
+    /**
+     * 最大Group数量
+     */
+    MaxGroupNum?: number;
+    /**
+     * 已使用Group数量
+     */
+    UsedGroupNum?: number;
+    /**
+     * 集群类型
+     */
+    ConfigDisplay?: string;
+    /**
+     * 集群节点数
+     */
+    NodeCount?: number;
+    /**
+     * 节点分布情况
+     */
+    NodeDistribution?: Array<InstanceNodeDistribution>;
+    /**
+     * topic分布情况
+     */
+    TopicDistribution?: Array<RocketMQTopicDistribution>;
+    /**
+     * 每个主题最大队列数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MaxQueuesPerTopic?: number;
 }
 /**
  * PublishCmqMsg请求参数结构体
@@ -7902,6 +7986,35 @@ export interface DescribeClusterDetailResponse {
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * VerifyRocketMQConsume请求参数结构体
+ */
+export interface VerifyRocketMQConsumeRequest {
+    /**
+     * 集群id
+     */
+    ClusterId: string;
+    /**
+     * 命名空间
+     */
+    NamespaceId: string;
+    /**
+     * 消费组ID
+     */
+    GroupId: string;
+    /**
+     * 消息id
+     */
+    MsgId: string;
+    /**
+     * 客户端ID
+     */
+    ClientId: string;
+    /**
+     * topic名称
+     */
+    TopicName: string;
 }
 /**
  * SendBatchMessages返回参数结构体

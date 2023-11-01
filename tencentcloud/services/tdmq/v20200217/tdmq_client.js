@@ -40,6 +40,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateCluster", req, cb);
     }
     /**
+     * 获取消费详情列表
+     */
+    async DescribeRocketMQConsumeStats(req, cb) {
+        return this.request("DescribeRocketMQConsumeStats", req, cb);
+    }
+    /**
      * 获取RocketMQ命名空间列表
      */
     async DescribeRocketMQNamespaces(req, cb) {
@@ -441,6 +447,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeRocketMQVipInstances(req, cb) {
         return this.request("DescribeRocketMQVipInstances", req, cb);
+    }
+    /**
+     * Rocketmq消费验证
+     */
+    async VerifyRocketMQConsume(req, cb) {
+        return this.request("VerifyRocketMQConsume", req, cb);
     }
     /**
      * 获取amqp集群列表

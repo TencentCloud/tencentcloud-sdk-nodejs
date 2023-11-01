@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { SyncProxyOrganizationResponse, ChannelCreateConvertTaskApiResponse, ChannelCreateFlowRemindsResponse, ChannelDeleteSealPoliciesRequest, ChannelBatchCancelFlowsResponse, ChannelDisableUserAutoSignResponse, ChannelCreateFlowGroupByTemplatesResponse, ChannelCreateFlowSignReviewRequest, DescribeFlowDetailInfoRequest, ChannelCancelUserAutoSignEnableUrlResponse, ModifyExtendedServiceRequest, DescribeResourceUrlsByFlowsRequest, CreateChannelOrganizationInfoChangeUrlResponse, ChannelCreateFlowSignUrlResponse, ChannelCreateBatchSignUrlResponse, ChannelCreatePrepareFlowResponse, OperateChannelTemplateResponse, ChannelCreateRoleRequest, CreateConsoleLoginUrlResponse, ChannelDeleteRoleUsersRequest, ChannelCreateUserRolesResponse, SyncProxyOrganizationRequest, ChannelCreatePrepareFlowRequest, ChannelCreateFlowRemindsRequest, ChannelCreateSealPolicyResponse, ChannelCancelFlowResponse, ChannelCreateWebThemeConfigRequest, ChannelCreateConvertTaskApiRequest, ChannelCreateFlowByFilesRequest, ChannelCreatePreparedPersonalEsignResponse, DescribeResourceUrlsByFlowsResponse, ChannelCreateFlowGroupByFilesRequest, ChannelCreateOrganizationModifyQrCodeRequest, ChannelCreateFlowByFilesResponse, DescribeFlowDetailInfoResponse, ChannelDescribeRolesRequest, PrepareFlowsResponse, ChannelCreateOrganizationBatchSignUrlRequest, GetDownloadFlowUrlResponse, DescribeTemplatesResponse, ChannelVerifyPdfRequest, CreateChannelFlowEvidenceReportRequest, ChannelCancelUserAutoSignEnableUrlRequest, ChannelVerifyPdfResponse, CreateConsoleLoginUrlRequest, ChannelCreateUserAutoSignSealUrlRequest, ChannelCreateUserAutoSignEnableUrlRequest, ChannelCancelMultiFlowSignQRCodeRequest, ChannelDescribeOrganizationSealsRequest, DescribeUsageRequest, DescribeExtendedServiceAuthInfoRequest, ChannelCreateBoundFlowsResponse, ChannelCreateUserAutoSignSealUrlResponse, ChannelCreateBoundFlowsRequest, ChannelDescribeEmployeesRequest, ChannelDeleteRoleUsersResponse, SyncProxyOrganizationOperatorsRequest, ChannelCreateFlowApproversResponse, CreateSignUrlsRequest, ChannelCreateMultiFlowSignQRCodeRequest, ChannelCreateUserAutoSignEnableUrlResponse, ChannelGetTaskResultApiRequest, ChannelCreatePreparedPersonalEsignRequest, CreateFlowsByTemplatesResponse, DescribeChannelFlowEvidenceReportRequest, ChannelCreateRoleResponse, SyncProxyOrganizationOperatorsResponse, ChannelDescribeUserAutoSignStatusRequest, ChannelModifyRoleResponse, CreateSignUrlsResponse, ChannelDeleteRoleRequest, UploadFilesResponse, ChannelCreateBatchCancelFlowUrlRequest, PrepareFlowsRequest, ChannelCreateFlowSignReviewResponse, ChannelDisableUserAutoSignRequest, ChannelDescribeOrganizationSealsResponse, CreateSealByImageResponse, ChannelCancelMultiFlowSignQRCodeResponse, ChannelDescribeRolesResponse, ChannelCreateReleaseFlowRequest, ChannelDescribeFlowComponentsResponse, ChannelCreateFlowGroupByFilesResponse, ChannelCreateMultiFlowSignQRCodeResponse, ModifyExtendedServiceResponse, ChannelCreateUserRolesRequest, ChannelGetTaskResultApiResponse, ChannelCreateBatchSignUrlRequest, ChannelCreateOrganizationModifyQrCodeResponse, ChannelDeleteSealPoliciesResponse, ChannelCreateWebThemeConfigResponse, GetDownloadFlowUrlRequest, ChannelCreateEmbedWebUrlResponse, ChannelBatchCancelFlowsRequest, CreateChannelOrganizationInfoChangeUrlRequest, ChannelModifyRoleRequest, ChannelUpdateSealStatusRequest, ChannelCreateFlowGroupByTemplatesRequest, ChannelCancelFlowRequest, DescribeTemplatesRequest, ChannelCreateSealPolicyRequest, CreateFlowsByTemplatesRequest, UploadFilesRequest, DescribeUsageResponse, ChannelCreateOrganizationBatchSignUrlResponse, ChannelCreateBatchCancelFlowUrlResponse, OperateChannelTemplateRequest, CreateChannelFlowEvidenceReportResponse, ChannelDescribeEmployeesResponse, ChannelCreateFlowApproversRequest, ChannelDeleteRoleResponse, ChannelCreateReleaseFlowResponse, DescribeChannelFlowEvidenceReportResponse, CreateSealByImageRequest, ChannelDescribeUserAutoSignStatusResponse, ChannelUpdateSealStatusResponse, ChannelCreateFlowSignUrlRequest, DescribeExtendedServiceAuthInfoResponse, ChannelCreateEmbedWebUrlRequest, ChannelDescribeFlowComponentsRequest } from "./essbasic_models";
+import { SyncProxyOrganizationResponse, ChannelCreateConvertTaskApiResponse, ChannelCreateFlowRemindsResponse, ChannelDeleteSealPoliciesRequest, ChannelBatchCancelFlowsResponse, ChannelDisableUserAutoSignResponse, ChannelCreateFlowGroupByTemplatesResponse, ChannelCreateFlowSignReviewRequest, DescribeFlowDetailInfoRequest, ChannelCancelUserAutoSignEnableUrlResponse, ModifyExtendedServiceRequest, DescribeResourceUrlsByFlowsRequest, CreateChannelOrganizationInfoChangeUrlResponse, ChannelCreateFlowSignUrlResponse, ChannelCreateBatchSignUrlResponse, ChannelCreatePrepareFlowResponse, OperateChannelTemplateResponse, ChannelCreateRoleRequest, CreateConsoleLoginUrlResponse, ChannelDeleteRoleUsersRequest, ChannelCreateUserRolesResponse, SyncProxyOrganizationRequest, ChannelCreatePrepareFlowRequest, ChannelCreateFlowRemindsRequest, ChannelCreateSealPolicyResponse, ChannelCancelFlowResponse, ChannelCreateWebThemeConfigRequest, ChannelCreateConvertTaskApiRequest, ChannelCreateFlowByFilesRequest, UploadFilesResponse, ChannelCreatePreparedPersonalEsignResponse, DescribeResourceUrlsByFlowsResponse, ChannelCreateFlowGroupByFilesRequest, ChannelCreateOrganizationModifyQrCodeRequest, ChannelCreateFlowByFilesResponse, DescribeFlowDetailInfoResponse, ChannelDescribeRolesRequest, PrepareFlowsResponse, ChannelCreateOrganizationBatchSignUrlRequest, GetDownloadFlowUrlResponse, DescribeTemplatesResponse, ChannelVerifyPdfRequest, CreateChannelFlowEvidenceReportRequest, ChannelCancelUserAutoSignEnableUrlRequest, ChannelVerifyPdfResponse, CreateConsoleLoginUrlRequest, ChannelCreateUserAutoSignSealUrlRequest, ChannelCreateUserAutoSignEnableUrlRequest, ChannelCancelMultiFlowSignQRCodeRequest, ChannelDescribeOrganizationSealsRequest, DescribeUsageRequest, DescribeExtendedServiceAuthInfoRequest, ChannelCreateBoundFlowsResponse, ChannelCreateUserAutoSignSealUrlResponse, ChannelCreateBatchQuickSignUrlRequest, ChannelCreateBoundFlowsRequest, ChannelDescribeEmployeesRequest, ChannelDeleteRoleUsersResponse, SyncProxyOrganizationOperatorsRequest, ChannelCreateFlowApproversResponse, CreateSignUrlsRequest, ChannelCreateMultiFlowSignQRCodeRequest, ChannelCreateUserAutoSignEnableUrlResponse, ChannelGetTaskResultApiRequest, ChannelCreatePreparedPersonalEsignRequest, CreateFlowsByTemplatesResponse, DescribeChannelFlowEvidenceReportRequest, ChannelCreateRoleResponse, SyncProxyOrganizationOperatorsResponse, ChannelDescribeUserAutoSignStatusRequest, ChannelModifyRoleResponse, CreateSignUrlsResponse, ChannelDeleteRoleRequest, ChannelCreateBatchQuickSignUrlResponse, ChannelCreateBatchCancelFlowUrlRequest, PrepareFlowsRequest, ChannelCreateFlowSignReviewResponse, ChannelDisableUserAutoSignRequest, ChannelDescribeOrganizationSealsResponse, CreateSealByImageResponse, ChannelCancelMultiFlowSignQRCodeResponse, ChannelDescribeRolesResponse, ChannelCreateReleaseFlowRequest, ChannelDescribeFlowComponentsResponse, ChannelCreateFlowGroupByFilesResponse, ChannelCreateMultiFlowSignQRCodeResponse, ModifyExtendedServiceResponse, ChannelCreateUserRolesRequest, ChannelGetTaskResultApiResponse, ChannelCreateBatchSignUrlRequest, ChannelCreateOrganizationModifyQrCodeResponse, ChannelDeleteSealPoliciesResponse, ChannelCreateWebThemeConfigResponse, GetDownloadFlowUrlRequest, ChannelCreateEmbedWebUrlResponse, ChannelBatchCancelFlowsRequest, CreateChannelOrganizationInfoChangeUrlRequest, ChannelModifyRoleRequest, ChannelUpdateSealStatusRequest, ChannelCreateFlowGroupByTemplatesRequest, ChannelCancelFlowRequest, DescribeTemplatesRequest, ChannelCreateSealPolicyRequest, CreateFlowsByTemplatesRequest, UploadFilesRequest, DescribeUsageResponse, ChannelCreateOrganizationBatchSignUrlResponse, ChannelCreateBatchCancelFlowUrlResponse, OperateChannelTemplateRequest, CreateChannelFlowEvidenceReportResponse, ChannelDescribeEmployeesResponse, ChannelCreateFlowApproversRequest, ChannelDeleteRoleResponse, ChannelCreateReleaseFlowResponse, DescribeChannelFlowEvidenceReportResponse, CreateSealByImageRequest, ChannelDescribeUserAutoSignStatusResponse, ChannelUpdateSealStatusResponse, ChannelCreateFlowSignUrlRequest, DescribeExtendedServiceAuthInfoResponse, ChannelCreateEmbedWebUrlRequest, ChannelDescribeFlowComponentsRequest } from "./essbasic_models";
 /**
  * essbasic client
  * @class
@@ -19,6 +19,36 @@ export declare class Client extends AbstractClient {
 发起审核：通过接口ChannelCreatePrepareFlow指定发起后需要审核，则可以通过调用此接口，指定operate=CreateReview，提交企业内部审批结果，可多次提交，当通过后，后续提交结果无效
      */
     ChannelCreateFlowSignReview(req: ChannelCreateFlowSignReviewRequest, cb?: (error: string, rep: ChannelCreateFlowSignReviewResponse) => void): Promise<ChannelCreateFlowSignReviewResponse>;
+    /**
+     * 修改（操作）企业扩展服务 ，企业经办人需要是企业超管或者法人。
+
+跳转小程序的几种方式：主要是设置不同的EndPoint
+1. 通过链接Url直接跳转到小程序，不需要返回
+设置EndPoint为WEIXINAPP，得到链接打开即可。
+
+2. 客户App直接跳转到小程序-->腾讯电子签小程序操作完成-->返回App
+跳转到小程序的实现，参考官方文档
+https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/launchApp.html
+其中小程序的原始Id，请联系<对接技术人员>获取，或者查看小程序信息自助获取。
+设置EndPoint为APP，得到path。
+
+4. 客户小程序直接跳到电子签小程序-->腾讯电子签小程序操作完成--->回到客户小程序
+跳转到小程序的实现，参考官方文档（分为全屏、半屏两种方式）
+全屏方式：
+（https://developers.weixin.qq.com/miniprogram/dev/api/navigate/wx.navigateToMiniProgram.html）
+半屏方式：
+（https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/openEmbeddedMiniProgram.html）
+其中小程序的原始Id，请联系<对接技术人员>获取，或者查看小程序信息自助获取。
+设置EndPoint为APP，得到path。
+
+其中小程序的原始Id如下，或者查看小程序信息自助获取。
+
+| 小程序 | AppID | 原始ID |
+| ------------ | ------------ | ------------ |
+| 腾讯电子签（正式版） | wxa023b292fd19d41d | gh_da88f6188665 |
+| 腾讯电子签Demo | wx371151823f6f3edf | gh_39a5d3de69fa |
+     */
+    ModifyExtendedService(req: ModifyExtendedServiceRequest, cb?: (error: string, rep: ModifyExtendedServiceResponse) => void): Promise<ModifyExtendedServiceResponse>;
     /**
      * 此接口（ChannelCreateMultiFlowSignQRCode）用于创建一码多扫流程签署二维码。
 适用场景：无需填写签署人信息，可通过模板id生成签署二维码，签署人可通过扫描二维码补充签署信息进行实名签署。
@@ -134,37 +164,19 @@ export declare class Client extends AbstractClient {
      */
     DescribeExtendedServiceAuthInfo(req: DescribeExtendedServiceAuthInfoRequest, cb?: (error: string, rep: DescribeExtendedServiceAuthInfoResponse) => void): Promise<DescribeExtendedServiceAuthInfoResponse>;
     /**
-     * 修改（操作）企业扩展服务 ，企业经办人需要是企业超管或者法人。
-
-跳转小程序的几种方式：主要是设置不同的EndPoint
-1. 通过链接Url直接跳转到小程序，不需要返回
-设置EndPoint为WEIXINAPP，得到链接打开即可。
-
-2. 客户App直接跳转到小程序-->腾讯电子签小程序操作完成-->返回App
-跳转到小程序的实现，参考官方文档
-https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/launchApp.html
-其中小程序的原始Id，请联系<对接技术人员>获取，或者查看小程序信息自助获取。
-设置EndPoint为APP，得到path。
-
-4. 客户小程序直接跳到电子签小程序-->腾讯电子签小程序操作完成--->回到客户小程序
-跳转到小程序的实现，参考官方文档（分为全屏、半屏两种方式）
-全屏方式：
-（https://developers.weixin.qq.com/miniprogram/dev/api/navigate/wx.navigateToMiniProgram.html）
-半屏方式：
-（https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/openEmbeddedMiniProgram.html）
-其中小程序的原始Id，请联系<对接技术人员>获取，或者查看小程序信息自助获取。
-设置EndPoint为APP，得到path。
-
-其中小程序的原始Id如下，或者查看小程序信息自助获取。
-
-| 小程序 | AppID | 原始ID |
-| ------------ | ------------ | ------------ |
-| 腾讯电子签（正式版） | wxa023b292fd19d41d | gh_da88f6188665 |
-| 腾讯电子签Demo | wx371151823f6f3edf | gh_39a5d3de69fa |
+     * 分页查询企业角色列表，法人的角色是系统保留角色，不会返回，按照角色创建时间升序排列。
+相关系统默认角色说明可参考文档：https://cloud.tencent.com/document/product/1323/61355
      */
-    ModifyExtendedService(req: ModifyExtendedServiceRequest, cb?: (error: string, rep: ModifyExtendedServiceResponse) => void): Promise<ModifyExtendedServiceResponse>;
+    ChannelDescribeRoles(req: ChannelDescribeRolesRequest, cb?: (error: string, rep: ChannelDescribeRolesResponse) => void): Promise<ChannelDescribeRolesResponse>;
     /**
-     * 上传了word、excel、图片文件后，通过该接口发起文件转换任务，将word、excel、图片文件转换为pdf文件。
+     * 此接口（ChannelCreateConvertTaskApi）用来将word、excel、html、图片、txt类型文件转换为PDF文件。<br />
+前提条件：源文件已经通过 <a href="https://qian.tencent.com/developers/partnerApis/files/UploadFiles" target="_blank">文件上传接口</a>完成上传，并得到了源文件的资源Id。<br />
+适用场景1：已经上传了一个word文件，希望将该word文件转换成pdf文件后发起合同
+适用场景2：已经上传了一个jpg图片文件，希望将该图片文件转换成pdf文件后发起合同<br />
+转换文件是一个耗时操作，若想查看转换任务是否完成，可以通过<a href="https://qian.tencent.com/developers/partnerApis/files/ChannelGetTaskResultApi" target="_blank">查询转换任务状态</a>接口获取任务状态。<br />
+注:
+1. `支持的文件类型有doc、docx、xls、xlsx、html、jpg、jpeg、png、bmp、txt`
+2. `可通过发起合同时设置预览来检查转换文件是否达到预期效果`
      */
     ChannelCreateConvertTaskApi(req: ChannelCreateConvertTaskApiRequest, cb?: (error: string, rep: ChannelCreateConvertTaskApiResponse) => void): Promise<ChannelCreateConvertTaskApiResponse>;
     /**
@@ -197,13 +209,16 @@ https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/launchAp
      */
     ChannelCreateSealPolicy(req: ChannelCreateSealPolicyRequest, cb?: (error: string, rep: ChannelCreateSealPolicyResponse) => void): Promise<ChannelCreateSealPolicyResponse>;
     /**
-     * 此接口（ChannelCreateRole）用来创建企业自定义角色。
-
-适用场景1：创建当前企业的自定义角色，并且创建时不进行权限的设置（PermissionGroups 参数不传），角色中的权限内容可通过接口 ChannelModifyRole 完成更新。
-
-适用场景2：创建当前企业的自定义角色，并且创建时进行权限的设置（PermissionGroups 参数要传），权限树内容 PermissionGroups 可参考接口 ChannelDescribeRoles 的输出。此处注意权限树内容可能会更新，需尽量拉取最新的权限树内容，并且权限树内容 PermissionGroups 必须是一颗完整的权限树。
+     * 该接口用于发起合同后，生成个人用户的批量签署链接, 暂时不支持企业端签署 <br/>
+`注意：`<br/>
+`1. 该接口目前仅支持签署人类型是个人签署方的批量签署场景(ApproverType=PERSON)。` <br/>
+`2. 该接口可生成批量签署链接的C端签署人必须仅有手写签名和时间类型的签署控件，不支持填写控件 。` <br/>
+`3. 请确保C端签署人在批量签署合同中为待签署状态，如需顺序签署请待前一位参与人签署完成后，再创建该C端用户的签署链接。` <br/>
+`4. 该签署链接有效期为30分钟，过期后将失效，如需签署可重新创建批量签署链接 。` <br/>
+`5. 该接口返回的签署链接适用于APP集成的场景，支持APP打开或浏览器直接打开，不支持微信小程序嵌入。`<br/>
+跳转到小程序的实现，参考微信官方文档(分为<a href="https://developers.weixin.qq.com/miniprogram/dev/api/navigate/wx.navigateToMiniProgram.html">全屏</a>、<a href="https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/openEmbeddedMiniProgram.html">半屏</a>两种方式)，如何配置也可以请参考: <a href="https://qian.tencent.com/developers/company/openwxminiprogram">跳转电子签小程序配置</a>
      */
-    ChannelCreateRole(req: ChannelCreateRoleRequest, cb?: (error: string, rep: ChannelCreateRoleResponse) => void): Promise<ChannelCreateRoleResponse>;
+    ChannelCreateBatchQuickSignUrl(req: ChannelCreateBatchQuickSignUrlRequest, cb?: (error: string, rep: ChannelCreateBatchQuickSignUrlResponse) => void): Promise<ChannelCreateBatchQuickSignUrlResponse>;
     /**
      * 接口（CreateFlowsByTemplates）用于使用模板批量创建签署流程。当前可批量发起合同（签署流程）数量为1-20个。
 如若在模板中配置了动态表格, 上传的附件必须为A4大小
@@ -292,6 +307,11 @@ https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/launchAp
 >- 填写控件 Components
 >- 签署控件 SignComponents
 >- 生成模板的文件基础信息 FileInfos
+
+注意：
+
+>1. 查询条件TemplateId、TemplateName与ChannelTemplateId可同时存在，即可查询同时满足这些条件的模板。
+>2. TemplateId 和TemplateIds互为独立，若两个参数都传入，则以TemplateId为准
      */
     DescribeTemplates(req: DescribeTemplatesRequest, cb?: (error: string, rep: DescribeTemplatesResponse) => void): Promise<DescribeTemplatesResponse>;
     /**
@@ -382,8 +402,12 @@ Web链接访问后，会根据子客企业(**Agent中ProxyOrganizationOpenId表�
      */
     ChannelDeleteRole(req: ChannelDeleteRoleRequest, cb?: (error: string, rep: ChannelDeleteRoleResponse) => void): Promise<ChannelDeleteRoleResponse>;
     /**
-     * 查询转换任务的状态。转换任务Id通过发起转换任务接口（ChannelCreateConvertTaskApi）获取。
-注意：大文件转换所需的时间可能会比较长。
+     * 此接口（ChannelGetTaskResultApi）用来查询转换任务的状态。如需发起转换任务，请使用<a href="https://qian.tencent.com/developers/partnerApis/files/ChannelCreateConvertTaskApi" target="_blank">创建文件转换任务接口</a>进行资源文件的转换操作<br />
+前提条件：已调用 <a href="https://qian.tencent.com/developers/partnerApis/files/ChannelCreateConvertTaskApi" target="_blank">创建文件转换任务接口</a>进行文件转换，并得到了返回的转换任务Id。<br />
+
+适用场景：已创建一个文件转换任务，想查询该文件转换任务的状态，或获取转换后的文件资源Id。<br />
+注：
+1. `大文件转换所需的时间可能会比较长`
      */
     ChannelGetTaskResultApi(req: ChannelGetTaskResultApiRequest, cb?: (error: string, rep: ChannelGetTaskResultApiResponse) => void): Promise<ChannelGetTaskResultApiResponse>;
     /**
@@ -443,14 +467,12 @@ Web链接访问后，会根据子客企业(**Agent中ProxyOrganizationOpenId表�
      */
     ChannelCreateWebThemeConfig(req: ChannelCreateWebThemeConfigRequest, cb?: (error: string, rep: ChannelCreateWebThemeConfigResponse) => void): Promise<ChannelCreateWebThemeConfigResponse>;
     /**
-     * 指定需要批量催办的签署流程ID，批量催办合同，最多100个。需要符合以下条件的合同才可被催办：
-
-1. 合同中当前状态为“待签署”的签署人是催办的对象
-2. 每个合同只能催办一次
-
-注意：该接口无法直接调用，请联系客户经理申请使用。
+     * 该接口用于发起合同后，生成C端签署人的签署链接<br/>
+注意：该接口目前签署人类型仅支持个人签署方（PERSON）<br/>
+注意：该接口可生成签署链接的C端签署人必须仅有手写签名和时间类型的签署控件<br/>
+注意：该接口返回的签署链接是用于APP集成的场景，支持APP打开或浏览器直接打开，不支持微信小程序嵌入。微信小程序请使用小程序跳转或半屏弹窗的方式<br/>
      */
-    ChannelCreateFlowReminds(req: ChannelCreateFlowRemindsRequest, cb?: (error: string, rep: ChannelCreateFlowRemindsResponse) => void): Promise<ChannelCreateFlowRemindsResponse>;
+    ChannelCreateFlowSignUrl(req: ChannelCreateFlowSignUrlRequest, cb?: (error: string, rep: ChannelCreateFlowSignUrlResponse) => void): Promise<ChannelCreateFlowSignUrlResponse>;
     /**
      * 发起解除协议，主要应用场景为：基于一份已经签署的合同，进行解除操作。
 合同发起人必须在电子签已经进行实名。
@@ -482,7 +504,7 @@ Web链接访问后，会根据子客企业(**Agent中ProxyOrganizationOpenId表�
     /**
      * 该接口 (PrepareFlows) 用于创建待发起文件
 用户通过该接口进入签署流程发起的确认页面，进行发起信息二次确认， 如果确认则进行正常发起。
-目前该接口只支持B2C，不建议使用，将会废弃。
+目前该接口只支持B2C，不建议使用，将会**废弃**。
      */
     PrepareFlows(req: PrepareFlowsRequest, cb?: (error: string, rep: PrepareFlowsResponse) => void): Promise<PrepareFlowsResponse>;
     /**
@@ -506,10 +528,13 @@ Web链接访问后，会根据子客企业(**Agent中ProxyOrganizationOpenId表�
      */
     ChannelCreateFlowApprovers(req: ChannelCreateFlowApproversRequest, cb?: (error: string, rep: ChannelCreateFlowApproversResponse) => void): Promise<ChannelCreateFlowApproversResponse>;
     /**
-     * 分页查询企业角色列表，法人的角色是系统保留角色，不会返回，按照角色创建时间升序排列。
-相关系统默认角色说明可参考文档：https://cloud.tencent.com/document/product/1323/61355
+     * 此接口（ChannelCreateRole）用来创建企业自定义角色。
+
+适用场景1：创建当前企业的自定义角色，并且创建时不进行权限的设置（PermissionGroups 参数不传），角色中的权限内容可通过接口 ChannelModifyRole 完成更新。
+
+适用场景2：创建当前企业的自定义角色，并且创建时进行权限的设置（PermissionGroups 参数要传），权限树内容 PermissionGroups 可参考接口 ChannelDescribeRoles 的输出。此处注意权限树内容可能会更新，需尽量拉取最新的权限树内容，并且权限树内容 PermissionGroups 必须是一颗完整的权限树。
      */
-    ChannelDescribeRoles(req: ChannelDescribeRolesRequest, cb?: (error: string, rep: ChannelDescribeRolesResponse) => void): Promise<ChannelDescribeRolesResponse>;
+    ChannelCreateRole(req: ChannelCreateRoleRequest, cb?: (error: string, rep: ChannelCreateRoleResponse) => void): Promise<ChannelCreateRoleResponse>;
     /**
      * 获取合同流程PDF的下载链接，可以下载签署中、签署完的此子企业创建的合同
 
@@ -550,12 +575,14 @@ httpProfile.setEndpoint("file.test.ess.tencent.cn");
      */
     UploadFiles(req: UploadFilesRequest, cb?: (error: string, rep: UploadFilesResponse) => void): Promise<UploadFilesResponse>;
     /**
-     * 该接口用于发起合同后，生成C端签署人的签署链接<br/>
-注意：该接口目前签署人类型仅支持个人签署方（PERSON）<br/>
-注意：该接口可生成签署链接的C端签署人必须仅有手写签名和时间类型的签署控件<br/>
-注意：该接口返回的签署链接是用于APP集成的场景，支持APP打开或浏览器直接打开，不支持微信小程序嵌入。微信小程序请使用小程序跳转或半屏弹窗的方式<br/>
+     * 指定需要批量催办的签署流程ID，批量催办合同，最多100个。需要符合以下条件的合同才可被催办：
+
+1. 合同中当前状态为“待签署”的签署人是催办的对象
+2. 每个合同只能催办一次
+
+注意：该接口无法直接调用，请联系客户经理申请使用。
      */
-    ChannelCreateFlowSignUrl(req: ChannelCreateFlowSignUrlRequest, cb?: (error: string, rep: ChannelCreateFlowSignUrlResponse) => void): Promise<ChannelCreateFlowSignUrlResponse>;
+    ChannelCreateFlowReminds(req: ChannelCreateFlowRemindsRequest, cb?: (error: string, rep: ChannelCreateFlowRemindsResponse) => void): Promise<ChannelCreateFlowRemindsResponse>;
     /**
      * 此接口（SyncProxyOrganization）用于同步第三方平台子客企业信息，包括企业名称，企业营业执照，企业统一社会信用代码和法人姓名等，便于子客企业在企业激活过程中无需手动上传营业执照或补充企业信息。注意：
 1. 需要在子客企业激活前调用该接口，如果您的企业已经提交企业信息或者企业已经激活，同步的企业信息将不会生效。
