@@ -366,9 +366,18 @@ export interface CreateVRSTaskRequest {
    */
   CallbackUrl?: string
   /**
-   * 任务类型 1:在线 2:离线  默认为1
+   * 模型类型 1:在线 2:离线  默认为1
    */
   ModelType?: number
+  /**
+   * 任务类型 0:默认类型 1:轻量级复刻
+默认为0
+   */
+  TaskType?: number
+  /**
+   * 校验音频ID
+   */
+  VPRAudioId?: string
 }
 
 /**

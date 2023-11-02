@@ -38,7 +38,7 @@ import {
   DescribeBatchTaskRequest,
   DomainAnalyticsDetail,
   CreateSnapshotResponse,
-  KeyValue,
+  DescribeDomainCustomLineListRequest,
   DeleteRecordGroupRequest,
   PayOrderWithBalanceResponse,
   DescribeDomainResponse,
@@ -53,6 +53,7 @@ import {
   DescribeDomainShareInfoRequest,
   DomainListItem,
   DeleteDomainBatchRequest,
+  DeleteDomainCustomLineRequest,
   DescribeSnapshotRollbackResultResponse,
   TagItemFilter,
   DescribeRecordTypeResponse,
@@ -65,12 +66,13 @@ import {
   DescribeSnapshotConfigResponse,
   RecordCountInfo,
   DeleteShareDomainResponse,
+  PackageDetailItem,
   ModifyRecordRequest,
   BatchRecordInfo,
   LineGroupInfo,
   DeleteDomainRequest,
   ModifyDomainOwnerRequest,
-  ModifyPackageAutoRenewRequest,
+  DescribeSubdomainAnalyticsResponse,
   DeleteRecordBatchDetail,
   DomainShareInfo,
   DescribeSnapshotConfigRequest,
@@ -99,6 +101,7 @@ import {
   RecordInfo,
   DescribeSnapshotRollbackTaskRequest,
   CheckRecordSnapshotRollbackResponse,
+  UserInfo,
   DescribeDomainPreviewRequest,
   CreateRecordBatchDetail,
   WhoisContact,
@@ -117,11 +120,13 @@ import {
   CreateRecordBatchRecord,
   CreateDomainResponse,
   DomainCountInfo,
-  UserInfo,
+  ModifyDomainCustomLineResponse,
+  ModifyPackageAutoRenewResponse,
   ModifyRecordBatchResponse,
   CheckSnapshotRollbackRequest,
   CheckSnapshotRollbackResponse,
   DescribeRecordTypeRequest,
+  DeleteDomainCustomLineResponse,
   DescribeSnapshotRollbackTaskResponse,
   RecordListItem,
   DescribeDomainPreviewResponse,
@@ -130,15 +135,18 @@ import {
   LockInfo,
   ModifyDomainOwnerResponse,
   SubdomainAnalyticsInfo,
-  DescribeSubdomainAnalyticsResponse,
+  CustomLineInfo,
   ModifyRecordBatchDetail,
   DescribeUserDetailResponse,
   DeleteDomainBatchDetail,
   CreateDomainRequest,
-  ModifyPackageAutoRenewResponse,
+  ModifyDomainCustomLineRequest,
   DomainAliasAnalyticsItem,
   DescribeDomainGroupListResponse,
+  ModifyPackageAutoRenewRequest,
   ModifyDomainRemarkRequest,
+  KeyValue,
+  DescribeDomainLogListResponse,
   CreateDomainAliasResponse,
   DescribeRecordListRequest,
   PayOrderWithBalanceRequest,
@@ -176,13 +184,14 @@ import {
   ModifyRecordRemarkResponse,
   DescribeDomainListRequest,
   DomainCreateInfo,
+  DescribeDomainCustomLineListResponse,
   DeleteRecordBatchRequest,
   DescribeDomainPurviewRequest,
   CreateDomainBatchDetail,
   ModifyDomainUnlockRequest,
   DescribeRecordSnapshotRollbackResultRequest,
   ModifyDomainLockResponse,
-  PackageDetailItem,
+  CreateDomainCustomLineRequest,
   CreateDealResponse,
   DescribeRecordExistExceptDefaultNSResponse,
   ModifyVasAutoRenewStatusRequest,
@@ -190,15 +199,15 @@ import {
   DownloadSnapshotResponse,
   PreviewDetail,
   TagItem,
-  DescribeDomainWhoisResponse,
   CreateRecordGroupResponse,
   DescribeDomainGroupListRequest,
   DescribeBatchTaskResponse,
   CheckRecordSnapshotRollbackRequest,
+  CreateDomainCustomLineResponse,
   DescribeDomainAnalyticsRequest,
   ModifyDynamicDNSResponse,
   DescribeSnapshotRollbackResultRequest,
-  DescribeDomainLogListResponse,
+  DescribeDomainWhoisResponse,
 } from "./dnspod_models"
 
 /**
@@ -241,6 +250,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 增值服务自动续费设置
+   */
+  async ModifyVasAutoRenewStatus(
+    req: ModifyVasAutoRenewStatusRequest,
+    cb?: (error: string, rep: ModifyVasAutoRenewStatusResponse) => void
+  ): Promise<ModifyVasAutoRenewStatusResponse> {
+    return this.request("ModifyVasAutoRenewStatus", req, cb)
+  }
+
+  /**
    * 获取域名权限
    */
   async DescribeDomainPurview(
@@ -258,6 +277,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifySubdomainStatusResponse) => void
   ): Promise<ModifySubdomainStatusResponse> {
     return this.request("ModifySubdomainStatus", req, cb)
+  }
+
+  /**
+   * 删除域名的自定义线路
+   */
+  async DeleteDomainCustomLine(
+    req: DeleteDomainCustomLineRequest,
+    cb?: (error: string, rep: DeleteDomainCustomLineResponse) => void
+  ): Promise<DeleteDomainCustomLineResponse> {
+    return this.request("DeleteDomainCustomLine", req, cb)
   }
 
   /**
@@ -481,13 +510,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 增值服务自动续费设置
+   * 获取域名信息
    */
-  async ModifyVasAutoRenewStatus(
-    req: ModifyVasAutoRenewStatusRequest,
-    cb?: (error: string, rep: ModifyVasAutoRenewStatusResponse) => void
-  ): Promise<ModifyVasAutoRenewStatusResponse> {
-    return this.request("ModifyVasAutoRenewStatus", req, cb)
+  async DescribeDomain(
+    req: DescribeDomainRequest,
+    cb?: (error: string, rep: DescribeDomainResponse) => void
+  ): Promise<DescribeDomainResponse> {
+    return this.request("DescribeDomain", req, cb)
   }
 
   /**
@@ -511,13 +540,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取域名信息
+   * 添加记录分组
    */
-  async DescribeDomain(
-    req: DescribeDomainRequest,
-    cb?: (error: string, rep: DescribeDomainResponse) => void
-  ): Promise<DescribeDomainResponse> {
-    return this.request("DescribeDomain", req, cb)
+  async CreateRecordGroup(
+    req: CreateRecordGroupRequest,
+    cb?: (error: string, rep: CreateRecordGroupResponse) => void
+  ): Promise<CreateRecordGroupResponse> {
+    return this.request("CreateRecordGroup", req, cb)
   }
 
   /**
@@ -538,6 +567,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateRecordBatchResponse) => void
   ): Promise<CreateRecordBatchResponse> {
     return this.request("CreateRecordBatch", req, cb)
+  }
+
+  /**
+   * 创建域名的自定义线路
+   */
+  async CreateDomainCustomLine(
+    req: CreateDomainCustomLineRequest,
+    cb?: (error: string, rep: CreateDomainCustomLineResponse) => void
+  ): Promise<CreateDomainCustomLineResponse> {
+    return this.request("CreateDomainCustomLine", req, cb)
   }
 
   /**
@@ -578,16 +617,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeRecordResponse) => void
   ): Promise<DescribeRecordResponse> {
     return this.request("DescribeRecord", req, cb)
-  }
-
-  /**
-   * 修改快照配置
-   */
-  async ModifySnapshotConfig(
-    req: ModifySnapshotConfigRequest,
-    cb?: (error: string, rep: ModifySnapshotConfigResponse) => void
-  ): Promise<ModifySnapshotConfigResponse> {
-    return this.request("ModifySnapshotConfig", req, cb)
   }
 
   /**
@@ -711,13 +740,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 添加记录分组
+   * 修改快照配置
    */
-  async CreateRecordGroup(
-    req: CreateRecordGroupRequest,
-    cb?: (error: string, rep: CreateRecordGroupResponse) => void
-  ): Promise<CreateRecordGroupResponse> {
-    return this.request("CreateRecordGroup", req, cb)
+  async ModifySnapshotConfig(
+    req: ModifySnapshotConfigRequest,
+    cb?: (error: string, rep: ModifySnapshotConfigResponse) => void
+  ): Promise<ModifySnapshotConfigResponse> {
+    return this.request("ModifySnapshotConfig", req, cb)
   }
 
   /**
@@ -751,13 +780,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取域名概览信息
+   * 获取域名的自定义线路列表
    */
-  async DescribeDomainPreview(
-    req: DescribeDomainPreviewRequest,
-    cb?: (error: string, rep: DescribeDomainPreviewResponse) => void
-  ): Promise<DescribeDomainPreviewResponse> {
-    return this.request("DescribeDomainPreview", req, cb)
+  async DescribeDomainCustomLineList(
+    req: DescribeDomainCustomLineListRequest,
+    cb?: (error: string, rep: DescribeDomainCustomLineListResponse) => void
+  ): Promise<DescribeDomainCustomLineListResponse> {
+    return this.request("DescribeDomainCustomLineList", req, cb)
   }
 
   /**
@@ -781,6 +810,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 修改域名的自定义线路
+   */
+  async ModifyDomainCustomLine(
+    req: ModifyDomainCustomLineRequest,
+    cb?: (error: string, rep: ModifyDomainCustomLineResponse) => void
+  ): Promise<ModifyDomainCustomLineResponse> {
+    return this.request("ModifyDomainCustomLine", req, cb)
+  }
+
+  /**
    * 获取域名筛选列表
    */
   async DescribeDomainFilterList(
@@ -788,6 +827,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDomainFilterListResponse) => void
   ): Promise<DescribeDomainFilterListResponse> {
     return this.request("DescribeDomainFilterList", req, cb)
+  }
+
+  /**
+   * DNSPod商品余额支付
+   */
+  async PayOrderWithBalance(
+    req: PayOrderWithBalanceRequest,
+    cb?: (error: string, rep: PayOrderWithBalanceResponse) => void
+  ): Promise<PayOrderWithBalanceResponse> {
+    return this.request("PayOrderWithBalance", req, cb)
   }
 
   /**
@@ -801,13 +850,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * DNSPod商品余额支付
+   * 获取域名概览信息
    */
-  async PayOrderWithBalance(
-    req: PayOrderWithBalanceRequest,
-    cb?: (error: string, rep: PayOrderWithBalanceResponse) => void
-  ): Promise<PayOrderWithBalanceResponse> {
-    return this.request("PayOrderWithBalance", req, cb)
+  async DescribeDomainPreview(
+    req: DescribeDomainPreviewRequest,
+    cb?: (error: string, rep: DescribeDomainPreviewResponse) => void
+  ): Promise<DescribeDomainPreviewResponse> {
+    return this.request("DescribeDomainPreview", req, cb)
   }
 
   /**

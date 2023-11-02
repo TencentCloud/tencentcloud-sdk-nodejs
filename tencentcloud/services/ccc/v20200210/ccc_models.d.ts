@@ -972,6 +972,14 @@ export interface SeatUserInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     SkillGroupNameList?: Array<string>;
+    /**
+     * 1:管理员
+  2:质检员
+  3:普通座席
+  else:自定义角色ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Role?: number;
 }
 /**
  * 运营商白名单号码申请单
@@ -1510,6 +1518,11 @@ export interface TelCdrInfo {
      * 录音信息
      */
     RecordURL?: string;
+    /**
+     * 录音 ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RecordId?: string;
     /**
      * 坐席信息
      */

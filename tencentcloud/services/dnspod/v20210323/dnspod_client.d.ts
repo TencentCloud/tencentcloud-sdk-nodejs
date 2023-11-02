@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { CreateRecordRequest, DescribeRecordFilterListResponse, DownloadSnapshotRequest, ModifyVasAutoRenewStatusResponse, RollbackSnapshotRequest, DeleteDomainAliasResponse, DescribeVASStatisticRequest, DeleteDomainBatchResponse, ModifySubdomainStatusRequest, CreateRecordBatchResponse, DescribeSnapshotListResponse, ModifyRecordGroupRequest, DescribeVASStatisticResponse, DescribeBatchTaskRequest, CreateSnapshotResponse, DeleteRecordGroupRequest, PayOrderWithBalanceResponse, DescribeDomainResponse, DescribeSnapshotListRequest, DescribePackageDetailResponse, DescribeDomainFilterListResponse, DescribeRecordLineListResponse, CreateDomainBatchRequest, ModifyRecordGroupResponse, DescribeDomainShareInfoRequest, DeleteDomainBatchRequest, DescribeSnapshotRollbackResultResponse, DescribeRecordTypeResponse, ModifyDomainRemarkResponse, DeleteSnapshotRequest, DeleteRecordBatchResponse, DescribeDomainAliasListResponse, RollbackRecordSnapshotRequest, ModifyRecordToGroupRequest, DescribeSnapshotConfigResponse, DeleteShareDomainResponse, ModifyRecordRequest, DeleteDomainRequest, ModifyDomainOwnerRequest, ModifyPackageAutoRenewRequest, DescribeSnapshotConfigRequest, DescribeRecordExistExceptDefaultNSRequest, DescribeRecordLineListRequest, DescribeRecordListResponse, CreateRecordBatchRequest, DeleteDomainAliasRequest, CreateDealRequest, ModifyDomainLockRequest, DescribeDomainWhoisRequest, ModifyDomainStatusResponse, DescribeRecordRequest, CreateDomainGroupResponse, DescribeSubdomainAnalyticsRequest, DeleteRecordRequest, DescribeDomainRequest, ModifyRecordStatusRequest, CreateRecordResponse, DeleteRecordGroupResponse, DescribeSnapshotRollbackTaskRequest, CheckRecordSnapshotRollbackResponse, DescribeDomainPreviewRequest, DescribeRecordResponse, ModifyRecordResponse, ModifyRecordToGroupResponse, ModifyDomainUnlockResponse, DescribeDomainLogListRequest, DescribeDomainListResponse, ModifyRecordBatchRequest, ModifyRecordFieldsResponse, DeleteRecordResponse, CreateDomainResponse, ModifyRecordBatchResponse, CheckSnapshotRollbackRequest, CheckSnapshotRollbackResponse, DescribeRecordTypeRequest, DescribeSnapshotRollbackTaskResponse, DescribeDomainPreviewResponse, CreateDomainBatchResponse, DescribeDomainShareInfoResponse, ModifyDomainOwnerResponse, DescribeSubdomainAnalyticsResponse, DescribeUserDetailResponse, CreateDomainRequest, ModifyPackageAutoRenewResponse, DescribeDomainGroupListResponse, ModifyDomainRemarkRequest, CreateDomainAliasResponse, DescribeRecordListRequest, PayOrderWithBalanceRequest, DescribePackageDetailRequest, DescribeRecordFilterListRequest, ModifyRecordFieldsRequest, DeleteSnapshotResponse, DescribeDomainPurviewResponse, ModifySubdomainStatusResponse, DescribeDomainAnalyticsResponse, ModifyRecordStatusResponse, CreateRecordGroupRequest, RollbackSnapshotResponse, DescribeRecordGroupListResponse, CreateDomainGroupRequest, CreateSnapshotRequest, DeleteDomainResponse, DescribeRecordSnapshotRollbackResultResponse, ModifySnapshotConfigRequest, DescribeDomainAliasListRequest, CreateDomainAliasRequest, DeleteShareDomainRequest, ModifyDynamicDNSRequest, DescribeRecordGroupListRequest, DescribeDomainFilterListRequest, ModifyRecordRemarkRequest, ModifySnapshotConfigResponse, RollbackRecordSnapshotResponse, DescribeUserDetailRequest, ModifyDomainStatusRequest, ModifyRecordRemarkResponse, DescribeDomainListRequest, DeleteRecordBatchRequest, DescribeDomainPurviewRequest, ModifyDomainUnlockRequest, DescribeRecordSnapshotRollbackResultRequest, ModifyDomainLockResponse, CreateDealResponse, DescribeRecordExistExceptDefaultNSResponse, ModifyVasAutoRenewStatusRequest, DownloadSnapshotResponse, DescribeDomainWhoisResponse, CreateRecordGroupResponse, DescribeDomainGroupListRequest, DescribeBatchTaskResponse, CheckRecordSnapshotRollbackRequest, DescribeDomainAnalyticsRequest, ModifyDynamicDNSResponse, DescribeSnapshotRollbackResultRequest, DescribeDomainLogListResponse } from "./dnspod_models";
+import { CreateRecordRequest, DescribeRecordFilterListResponse, DownloadSnapshotRequest, ModifyVasAutoRenewStatusResponse, RollbackSnapshotRequest, DeleteDomainAliasResponse, DescribeVASStatisticRequest, DeleteDomainBatchResponse, ModifySubdomainStatusRequest, CreateRecordBatchResponse, DescribeSnapshotListResponse, ModifyRecordGroupRequest, DescribeVASStatisticResponse, DescribeBatchTaskRequest, CreateSnapshotResponse, DescribeDomainCustomLineListRequest, DeleteRecordGroupRequest, PayOrderWithBalanceResponse, DescribeDomainResponse, DescribeSnapshotListRequest, DescribePackageDetailResponse, DescribeDomainFilterListResponse, DescribeRecordLineListResponse, CreateDomainBatchRequest, ModifyRecordGroupResponse, DescribeDomainShareInfoRequest, DeleteDomainBatchRequest, DeleteDomainCustomLineRequest, DescribeSnapshotRollbackResultResponse, DescribeRecordTypeResponse, ModifyDomainRemarkResponse, DeleteSnapshotRequest, DeleteRecordBatchResponse, DescribeDomainAliasListResponse, RollbackRecordSnapshotRequest, ModifyRecordToGroupRequest, DescribeSnapshotConfigResponse, DeleteShareDomainResponse, ModifyRecordRequest, DeleteDomainRequest, ModifyDomainOwnerRequest, DescribeSubdomainAnalyticsResponse, DescribeSnapshotConfigRequest, DescribeRecordExistExceptDefaultNSRequest, DescribeRecordLineListRequest, DescribeRecordListResponse, CreateRecordBatchRequest, DeleteDomainAliasRequest, CreateDealRequest, ModifyDomainLockRequest, DescribeDomainWhoisRequest, ModifyDomainStatusResponse, DescribeRecordRequest, CreateDomainGroupResponse, DescribeSubdomainAnalyticsRequest, DeleteRecordRequest, DescribeDomainRequest, ModifyRecordStatusRequest, CreateRecordResponse, DeleteRecordGroupResponse, DescribeSnapshotRollbackTaskRequest, CheckRecordSnapshotRollbackResponse, DescribeDomainPreviewRequest, DescribeRecordResponse, ModifyRecordResponse, ModifyRecordToGroupResponse, ModifyDomainUnlockResponse, DescribeDomainLogListRequest, DescribeDomainListResponse, ModifyRecordBatchRequest, ModifyRecordFieldsResponse, DeleteRecordResponse, CreateDomainResponse, ModifyDomainCustomLineResponse, ModifyPackageAutoRenewResponse, ModifyRecordBatchResponse, CheckSnapshotRollbackRequest, CheckSnapshotRollbackResponse, DescribeRecordTypeRequest, DeleteDomainCustomLineResponse, DescribeSnapshotRollbackTaskResponse, DescribeDomainPreviewResponse, CreateDomainBatchResponse, DescribeDomainShareInfoResponse, ModifyDomainOwnerResponse, DescribeUserDetailResponse, CreateDomainRequest, ModifyDomainCustomLineRequest, DescribeDomainGroupListResponse, ModifyPackageAutoRenewRequest, ModifyDomainRemarkRequest, DescribeDomainLogListResponse, CreateDomainAliasResponse, DescribeRecordListRequest, PayOrderWithBalanceRequest, DescribePackageDetailRequest, DescribeRecordFilterListRequest, ModifyRecordFieldsRequest, DeleteSnapshotResponse, DescribeDomainPurviewResponse, ModifySubdomainStatusResponse, DescribeDomainAnalyticsResponse, ModifyRecordStatusResponse, CreateRecordGroupRequest, RollbackSnapshotResponse, DescribeRecordGroupListResponse, CreateDomainGroupRequest, CreateSnapshotRequest, DeleteDomainResponse, DescribeRecordSnapshotRollbackResultResponse, ModifySnapshotConfigRequest, DescribeDomainAliasListRequest, CreateDomainAliasRequest, DeleteShareDomainRequest, ModifyDynamicDNSRequest, DescribeRecordGroupListRequest, DescribeDomainFilterListRequest, ModifyRecordRemarkRequest, ModifySnapshotConfigResponse, RollbackRecordSnapshotResponse, DescribeUserDetailRequest, ModifyDomainStatusRequest, ModifyRecordRemarkResponse, DescribeDomainListRequest, DescribeDomainCustomLineListResponse, DeleteRecordBatchRequest, DescribeDomainPurviewRequest, ModifyDomainUnlockRequest, DescribeRecordSnapshotRollbackResultRequest, ModifyDomainLockResponse, CreateDomainCustomLineRequest, CreateDealResponse, DescribeRecordExistExceptDefaultNSResponse, ModifyVasAutoRenewStatusRequest, DownloadSnapshotResponse, CreateRecordGroupResponse, DescribeDomainGroupListRequest, DescribeBatchTaskResponse, CheckRecordSnapshotRollbackRequest, CreateDomainCustomLineResponse, DescribeDomainAnalyticsRequest, ModifyDynamicDNSResponse, DescribeSnapshotRollbackResultRequest, DescribeDomainWhoisResponse } from "./dnspod_models";
 /**
  * dnspod client
  * @class
@@ -20,6 +20,10 @@ export declare class Client extends AbstractClient {
      */
     DescribeSnapshotRollbackTask(req: DescribeSnapshotRollbackTaskRequest, cb?: (error: string, rep: DescribeSnapshotRollbackTaskResponse) => void): Promise<DescribeSnapshotRollbackTaskResponse>;
     /**
+     * 增值服务自动续费设置
+     */
+    ModifyVasAutoRenewStatus(req: ModifyVasAutoRenewStatusRequest, cb?: (error: string, rep: ModifyVasAutoRenewStatusResponse) => void): Promise<ModifyVasAutoRenewStatusResponse>;
+    /**
      * 获取域名权限
      */
     DescribeDomainPurview(req: DescribeDomainPurviewRequest, cb?: (error: string, rep: DescribeDomainPurviewResponse) => void): Promise<DescribeDomainPurviewResponse>;
@@ -27,6 +31,10 @@ export declare class Client extends AbstractClient {
      * 暂停子域名的解析记录
      */
     ModifySubdomainStatus(req: ModifySubdomainStatusRequest, cb?: (error: string, rep: ModifySubdomainStatusResponse) => void): Promise<ModifySubdomainStatusResponse>;
+    /**
+     * 删除域名的自定义线路
+     */
+    DeleteDomainCustomLine(req: DeleteDomainCustomLineRequest, cb?: (error: string, rep: DeleteDomainCustomLineResponse) => void): Promise<DeleteDomainCustomLineResponse>;
     /**
      * 获取等级允许的记录类型
      */
@@ -116,9 +124,9 @@ export declare class Client extends AbstractClient {
      */
     DeleteShareDomain(req: DeleteShareDomainRequest, cb?: (error: string, rep: DeleteShareDomainResponse) => void): Promise<DeleteShareDomainResponse>;
     /**
-     * 增值服务自动续费设置
+     * 获取域名信息
      */
-    ModifyVasAutoRenewStatus(req: ModifyVasAutoRenewStatusRequest, cb?: (error: string, rep: ModifyVasAutoRenewStatusResponse) => void): Promise<ModifyVasAutoRenewStatusResponse>;
+    DescribeDomain(req: DescribeDomainRequest, cb?: (error: string, rep: DescribeDomainResponse) => void): Promise<DescribeDomainResponse>;
     /**
      * 修改记录分组
      */
@@ -128,9 +136,9 @@ export declare class Client extends AbstractClient {
      */
     ModifyRecordStatus(req: ModifyRecordStatusRequest, cb?: (error: string, rep: ModifyRecordStatusResponse) => void): Promise<ModifyRecordStatusResponse>;
     /**
-     * 获取域名信息
+     * 添加记录分组
      */
-    DescribeDomain(req: DescribeDomainRequest, cb?: (error: string, rep: DescribeDomainResponse) => void): Promise<DescribeDomainResponse>;
+    CreateRecordGroup(req: CreateRecordGroupRequest, cb?: (error: string, rep: CreateRecordGroupResponse) => void): Promise<CreateRecordGroupResponse>;
     /**
      * 更新动态 DNS 记录
      */
@@ -139,6 +147,10 @@ export declare class Client extends AbstractClient {
      * 批量添加记录
      */
     CreateRecordBatch(req: CreateRecordBatchRequest, cb?: (error: string, rep: CreateRecordBatchResponse) => void): Promise<CreateRecordBatchResponse>;
+    /**
+     * 创建域名的自定义线路
+     */
+    CreateDomainCustomLine(req: CreateDomainCustomLineRequest, cb?: (error: string, rep: CreateDomainCustomLineResponse) => void): Promise<CreateDomainCustomLineResponse>;
     /**
      * 获取帐户信息
      */
@@ -155,10 +167,6 @@ export declare class Client extends AbstractClient {
      * 获取记录信息
      */
     DescribeRecord(req: DescribeRecordRequest, cb?: (error: string, rep: DescribeRecordResponse) => void): Promise<DescribeRecordResponse>;
-    /**
-     * 修改快照配置
-     */
-    ModifySnapshotConfig(req: ModifySnapshotConfigRequest, cb?: (error: string, rep: ModifySnapshotConfigResponse) => void): Promise<ModifySnapshotConfigResponse>;
     /**
      * 获取各套餐配置详情
      */
@@ -208,9 +216,9 @@ export declare class Client extends AbstractClient {
      */
     CreateDomainGroup(req: CreateDomainGroupRequest, cb?: (error: string, rep: CreateDomainGroupResponse) => void): Promise<CreateDomainGroupResponse>;
     /**
-     * 添加记录分组
+     * 修改快照配置
      */
-    CreateRecordGroup(req: CreateRecordGroupRequest, cb?: (error: string, rep: CreateRecordGroupResponse) => void): Promise<CreateRecordGroupResponse>;
+    ModifySnapshotConfig(req: ModifySnapshotConfigRequest, cb?: (error: string, rep: ModifySnapshotConfigResponse) => void): Promise<ModifySnapshotConfigResponse>;
     /**
      * 删除域名别名
      */
@@ -224,9 +232,9 @@ export declare class Client extends AbstractClient {
      */
     CheckRecordSnapshotRollback(req: CheckRecordSnapshotRollbackRequest, cb?: (error: string, rep: CheckRecordSnapshotRollbackResponse) => void): Promise<CheckRecordSnapshotRollbackResponse>;
     /**
-     * 获取域名概览信息
+     * 获取域名的自定义线路列表
      */
-    DescribeDomainPreview(req: DescribeDomainPreviewRequest, cb?: (error: string, rep: DescribeDomainPreviewResponse) => void): Promise<DescribeDomainPreviewResponse>;
+    DescribeDomainCustomLineList(req: DescribeDomainCustomLineListRequest, cb?: (error: string, rep: DescribeDomainCustomLineListResponse) => void): Promise<DescribeDomainCustomLineListResponse>;
     /**
      * 添加域名
      */
@@ -236,17 +244,25 @@ export declare class Client extends AbstractClient {
      */
     ModifyRecordRemark(req: ModifyRecordRemarkRequest, cb?: (error: string, rep: ModifyRecordRemarkResponse) => void): Promise<ModifyRecordRemarkResponse>;
     /**
+     * 修改域名的自定义线路
+     */
+    ModifyDomainCustomLine(req: ModifyDomainCustomLineRequest, cb?: (error: string, rep: ModifyDomainCustomLineResponse) => void): Promise<ModifyDomainCustomLineResponse>;
+    /**
      * 获取域名筛选列表
      */
     DescribeDomainFilterList(req: DescribeDomainFilterListRequest, cb?: (error: string, rep: DescribeDomainFilterListResponse) => void): Promise<DescribeDomainFilterListResponse>;
+    /**
+     * DNSPod商品余额支付
+     */
+    PayOrderWithBalance(req: PayOrderWithBalanceRequest, cb?: (error: string, rep: PayOrderWithBalanceResponse) => void): Promise<PayOrderWithBalanceResponse>;
     /**
      * 将记录添加到分组
      */
     ModifyRecordToGroup(req: ModifyRecordToGroupRequest, cb?: (error: string, rep: ModifyRecordToGroupResponse) => void): Promise<ModifyRecordToGroupResponse>;
     /**
-     * DNSPod商品余额支付
+     * 获取域名概览信息
      */
-    PayOrderWithBalance(req: PayOrderWithBalanceRequest, cb?: (error: string, rep: PayOrderWithBalanceResponse) => void): Promise<PayOrderWithBalanceResponse>;
+    DescribeDomainPreview(req: DescribeDomainPreviewRequest, cb?: (error: string, rep: DescribeDomainPreviewResponse) => void): Promise<DescribeDomainPreviewResponse>;
     /**
      * 统计子域名的解析量，帮助您了解流量情况、时间段分布。支持查看近 3 个月内的统计情况。仅付费套餐域名可用。
      */

@@ -571,6 +571,14 @@ BatchReceivePolicy 的接口会一次性返回多条消息：
         return this.request("CreateRocketMQNamespace", req, cb);
     }
     /**
+     * 批量发送消息
+
+注意：TDMQ 批量发送消息的接口是在 TDMQ-HTTP 的服务侧将消息打包为一个 Batch，然后将该 Batch 在服务内部当作一次 TCP 请求发送出去。所以在使用过程中，用户还是按照单条消息发送的逻辑，每一条消息是一个独立的 HTTP 的请求，在 TDMQ-HTTP 的服务内部，会将多个 HTTP 的请求聚合为一个 Batch 发送到服务端。即，批量发送消息在使用上与发送单条消息是一致的，batch 的聚合是在 TDMQ-HTTP 的服务内部完成的。
+     */
+    async SendBatchMessages(req, cb) {
+        return this.request("SendBatchMessages", req, cb);
+    }
+    /**
      * 修改RabbitMQ专享版实例
      */
     async ModifyRabbitMQVipInstance(req, cb) {
@@ -631,12 +639,10 @@ BatchReceivePolicy 的接口会一次性返回多条消息：
         return this.request("ModifyRocketMQNamespace", req, cb);
     }
     /**
-     * 批量发送消息
-
-注意：TDMQ 批量发送消息的接口是在 TDMQ-HTTP 的服务侧将消息打包为一个 Batch，然后将该 Batch 在服务内部当作一次 TCP 请求发送出去。所以在使用过程中，用户还是按照单条消息发送的逻辑，每一条消息是一个独立的 HTTP 的请求，在 TDMQ-HTTP 的服务内部，会将多个 HTTP 的请求聚合为一个 Batch 发送到服务端。即，批量发送消息在使用上与发送单条消息是一致的，batch 的聚合是在 TDMQ-HTTP 的服务内部完成的。
+     * 消息查询
      */
-    async SendBatchMessages(req, cb) {
-        return this.request("SendBatchMessages", req, cb);
+    async DescribeTopicMsgs(req, cb) {
+        return this.request("DescribeTopicMsgs", req, cb);
     }
     /**
      * 清空cmq消息队列中的消息

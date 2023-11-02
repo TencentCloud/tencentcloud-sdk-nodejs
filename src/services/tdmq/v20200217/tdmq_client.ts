@@ -33,7 +33,7 @@ import {
   ModifyRabbitMQVirtualHostRequest,
   ModifyEnvironmentAttributesRequest,
   DeleteClusterResponse,
-  RocketMQTopicDistribution,
+  DescribeTopicMsgsResponse,
   ModifyCmqSubscriptionAttributeResponse,
   CreateCmqTopicRequest,
   ModifyRabbitMQVipInstanceRequest,
@@ -127,13 +127,14 @@ import {
   CreateRabbitMQUserResponse,
   AcknowledgeMessageResponse,
   DeleteEnvironmentRolesResponse,
+  RocketMQTopicDistribution,
   DescribeClusterDetailRequest,
   ModifyRoleRequest,
   RetentionPolicy,
   DeleteCmqQueueResponse,
   DescribeRocketMQClusterRequest,
   DeleteRocketMQTopicResponse,
-  SendRocketMQMessageResponse,
+  MsgLog,
   ModifyCmqTopicAttributeRequest,
   DescribeRabbitMQVipInstancesResponse,
   DeleteRolesRequest,
@@ -160,10 +161,12 @@ import {
   ModifyRocketMQGroupRequest,
   FilterSubscription,
   DescribeCmqTopicsResponse,
+  SendRocketMQMessageResponse,
   DescribeCmqTopicDetailRequest,
   CmqTopic,
   DescribeRocketMQMigratingTopicListResponse,
   UnbindCmqDeadLetterResponse,
+  EnvironmentRole,
   ModifyRocketMQNamespaceResponse,
   InternalTenant,
   DescribePulsarProInstancesRequest,
@@ -283,7 +286,7 @@ import {
   PulsarNetworkAccessPointInfo,
   CreateRocketMQTopicResponse,
   CreateRabbitMQVirtualHostRequest,
-  EnvironmentRole,
+  DescribeTopicMsgsRequest,
   VpcEndpointInfo,
   CreateCmqQueueRequest,
   ModifyEnvironmentRoleResponse,
@@ -1242,6 +1245,18 @@ BatchReceivePolicy 的接口会一次性返回多条消息：
   }
 
   /**
+     * 批量发送消息
+
+注意：TDMQ 批量发送消息的接口是在 TDMQ-HTTP 的服务侧将消息打包为一个 Batch，然后将该 Batch 在服务内部当作一次 TCP 请求发送出去。所以在使用过程中，用户还是按照单条消息发送的逻辑，每一条消息是一个独立的 HTTP 的请求，在 TDMQ-HTTP 的服务内部，会将多个 HTTP 的请求聚合为一个 Batch 发送到服务端。即，批量发送消息在使用上与发送单条消息是一致的，batch 的聚合是在 TDMQ-HTTP 的服务内部完成的。
+     */
+  async SendBatchMessages(
+    req: SendBatchMessagesRequest,
+    cb?: (error: string, rep: SendBatchMessagesResponse) => void
+  ): Promise<SendBatchMessagesResponse> {
+    return this.request("SendBatchMessages", req, cb)
+  }
+
+  /**
    * 修改RabbitMQ专享版实例
    */
   async ModifyRabbitMQVipInstance(
@@ -1342,15 +1357,13 @@ BatchReceivePolicy 的接口会一次性返回多条消息：
   }
 
   /**
-     * 批量发送消息
-
-注意：TDMQ 批量发送消息的接口是在 TDMQ-HTTP 的服务侧将消息打包为一个 Batch，然后将该 Batch 在服务内部当作一次 TCP 请求发送出去。所以在使用过程中，用户还是按照单条消息发送的逻辑，每一条消息是一个独立的 HTTP 的请求，在 TDMQ-HTTP 的服务内部，会将多个 HTTP 的请求聚合为一个 Batch 发送到服务端。即，批量发送消息在使用上与发送单条消息是一致的，batch 的聚合是在 TDMQ-HTTP 的服务内部完成的。
-     */
-  async SendBatchMessages(
-    req: SendBatchMessagesRequest,
-    cb?: (error: string, rep: SendBatchMessagesResponse) => void
-  ): Promise<SendBatchMessagesResponse> {
-    return this.request("SendBatchMessages", req, cb)
+   * 消息查询
+   */
+  async DescribeTopicMsgs(
+    req: DescribeTopicMsgsRequest,
+    cb?: (error: string, rep: DescribeTopicMsgsResponse) => void
+  ): Promise<DescribeTopicMsgsResponse> {
+    return this.request("DescribeTopicMsgs", req, cb)
   }
 
   /**

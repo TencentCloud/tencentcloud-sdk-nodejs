@@ -429,17 +429,21 @@ export interface DeleteClusterResponse {
     RequestId?: string;
 }
 /**
- * RocketMQtopic分布情况
+ * DescribeTopicMsgs返回参数结构体
  */
-export interface RocketMQTopicDistribution {
+export interface DescribeTopicMsgsResponse {
     /**
-     * topic类型
+     * 总记录数。
      */
-    TopicType: string;
+    TotalCount: number;
     /**
-     * topic数量
+     * 消息日志列表。
      */
-    Count: number;
+    TopicMsgLogSets: Array<MsgLog>;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * ModifyCmqSubscriptionAttribute返回参数结构体
@@ -2860,6 +2864,19 @@ export interface DeleteEnvironmentRolesResponse {
     RequestId?: string;
 }
 /**
+ * RocketMQtopic分布情况
+ */
+export interface RocketMQTopicDistribution {
+    /**
+     * topic类型
+     */
+    TopicType: string;
+    /**
+     * topic数量
+     */
+    Count: number;
+}
+/**
  * DescribeClusterDetail请求参数结构体
  */
 export interface DescribeClusterDetailRequest {
@@ -2934,22 +2951,25 @@ export interface DeleteRocketMQTopicResponse {
     RequestId?: string;
 }
 /**
- * SendRocketMQMessage返回参数结构体
+ * 消息日志
  */
-export interface SendRocketMQMessageResponse {
+export interface MsgLog {
     /**
-     * 发送结果
-     */
-    Result: boolean;
-    /**
-     * 消息ID
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 消息ID。
      */
     MsgId: string;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     * 生产者名称。
      */
-    RequestId?: string;
+    ProducerName: string;
+    /**
+     * 生产时间。
+     */
+    ProduceTime: string;
+    /**
+     * 生产客户端地址。
+     */
+    ProducerAddr: string;
 }
 /**
  * ModifyCmqTopicAttribute请求参数结构体
@@ -3674,6 +3694,24 @@ export interface DescribeCmqTopicsResponse {
     RequestId?: string;
 }
 /**
+ * SendRocketMQMessage返回参数结构体
+ */
+export interface SendRocketMQMessageResponse {
+    /**
+     * 发送结果
+     */
+    Result: boolean;
+    /**
+     * 消息ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MsgId: string;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * DescribeCmqTopicDetail请求参数结构体
  */
 export interface DescribeCmqTopicDetailRequest {
@@ -3799,6 +3837,35 @@ export interface UnbindCmqDeadLetterResponse {
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * 环境角色集合
+ */
+export interface EnvironmentRole {
+    /**
+     * 环境（命名空间）。
+     */
+    EnvironmentId: string;
+    /**
+     * 角色名称。
+     */
+    RoleName: string;
+    /**
+     * 授权项，最多只能包含produce、consume两项的非空字符串数组。
+     */
+    Permissions: Array<string>;
+    /**
+     * 角色描述。
+     */
+    RoleDescribe: string;
+    /**
+     * 创建时间。
+     */
+    CreateTime: string;
+    /**
+     * 更新时间。
+     */
+    UpdateTime: string;
 }
 /**
  * ModifyRocketMQNamespace返回参数结构体
@@ -5111,33 +5178,33 @@ export interface DescribeRabbitMQVipInstanceResponse {
     /**
      * 集群信息
      */
-    ClusterInfo: RabbitMQClusterInfo;
+    ClusterInfo?: RabbitMQClusterInfo;
     /**
      * 集群规格信息
      */
-    ClusterSpecInfo: RabbitMQClusterSpecInfo;
+    ClusterSpecInfo?: RabbitMQClusterSpecInfo;
     /**
      * 集群访问
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ClusterNetInfo: RabbitMQClusterAccessInfo;
+    ClusterNetInfo?: RabbitMQClusterAccessInfo;
     /**
      * 集群白名单
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ClusterWhiteListInfo: RabbitMQClusterWhiteListInfo;
+    ClusterWhiteListInfo?: RabbitMQClusterWhiteListInfo;
     /**
      * vhost配额信息
      */
-    VirtualHostQuota: VirtualHostQuota;
+    VirtualHostQuota?: VirtualHostQuota;
     /**
      * exchange配额信息
      */
-    ExchangeQuota: ExchangeQuota;
+    ExchangeQuota?: ExchangeQuota;
     /**
      * queue配额信息
      */
-    QueueQuota: QueueQuota;
+    QueueQuota?: QueueQuota;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -6760,33 +6827,41 @@ export interface CreateRabbitMQVirtualHostRequest {
     TraceFlag?: boolean;
 }
 /**
- * 环境角色集合
+ * DescribeTopicMsgs请求参数结构体
  */
-export interface EnvironmentRole {
+export interface DescribeTopicMsgsRequest {
     /**
-     * 环境（命名空间）。
+     * 环境（命名空间）名称。
      */
     EnvironmentId: string;
     /**
-     * 角色名称。
+     * 主题名。
      */
-    RoleName: string;
+    TopicName: string;
     /**
-     * 授权项，最多只能包含produce、consume两项的非空字符串数组。
+     * 开始时间。
      */
-    Permissions: Array<string>;
+    StartTime: string;
     /**
-     * 角色描述。
+     * 结束时间。
      */
-    RoleDescribe: string;
+    EndTime: string;
     /**
-     * 创建时间。
+     * 起始下标，不填默认为0。
      */
-    CreateTime: string;
+    Offset?: number;
     /**
-     * 更新时间。
+     * 返回数量，不填则默认为10，最大值为20。
      */
-    UpdateTime: string;
+    Limit?: number;
+    /**
+     * 消息ID。
+     */
+    MsgId?: string;
+    /**
+     * Pulsar 集群的ID
+     */
+    ClusterId?: string;
 }
 /**
  * VPC接入点信息

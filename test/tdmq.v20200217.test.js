@@ -888,6 +888,16 @@ it("tdmq.v20200217.CreateRocketMQNamespace", async function () {
     }
 })
 
+it("tdmq.v20200217.SendBatchMessages", async function () {
+    try {
+       const data = await client.SendBatchMessages({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tdmq.v20200217.ModifyRabbitMQVipInstance", async function () {
     try {
        const data = await client.ModifyRabbitMQVipInstance({})
@@ -988,9 +998,9 @@ it("tdmq.v20200217.ModifyRocketMQNamespace", async function () {
     }
 })
 
-it("tdmq.v20200217.SendBatchMessages", async function () {
+it("tdmq.v20200217.DescribeTopicMsgs", async function () {
     try {
-       const data = await client.SendBatchMessages({})
+       const data = await client.DescribeTopicMsgs({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -1439,7 +1439,7 @@ export interface DescribeCdbZoneConfigResponse {
     /**
      * 售卖规格和地域信息集合
      */
-    DataResult: CdbZoneDataResult;
+    DataResult?: CdbZoneDataResult;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */

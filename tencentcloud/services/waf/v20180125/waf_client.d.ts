@@ -222,7 +222,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeUserLevel(req: DescribeUserLevelRequest, cb?: (error: string, rep: DescribeUserLevelResponse) => void): Promise<DescribeUserLevelResponse>;
     /**
-     * Waf  CC V2 Query接口
+     * 没有在使用。
+
+Waf  CC V2 Query接口
      */
     DescribeCCRule(req: DescribeCCRuleRequest, cb?: (error: string, rep: DescribeCCRuleResponse) => void): Promise<DescribeCCRuleResponse>;
     /**
@@ -331,7 +333,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeFlowTrend(req: DescribeFlowTrendRequest, cb?: (error: string, rep: DescribeFlowTrendResponse) => void): Promise<DescribeFlowTrendResponse>;
     /**
-     * 获取防篡改url
+     * 废弃接口
+
+获取防篡改url
      */
     DescribeAntiFakeUrl(req: DescribeAntiFakeUrlRequest, cb?: (error: string, rep: DescribeAntiFakeUrlResponse) => void): Promise<DescribeAntiFakeUrlResponse>;
     /**

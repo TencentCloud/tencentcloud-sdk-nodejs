@@ -1051,6 +1051,21 @@ export interface Service {
     LatestVersion?: string;
 }
 /**
+ * 跨租户弹性网卡下Pod调用信息
+ */
+export interface CrossTenantENIInfo {
+    /**
+     * Pod IP
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PrimaryIP?: string;
+    /**
+     * Pod Port
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Port?: string;
+}
+/**
  * 模型专业参数
  */
 export interface HyperParameter {
@@ -1995,27 +2010,27 @@ export interface ContainerStatus {
      * 重启次数
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    RestartCount?: number;
+    RestartCount: number;
     /**
      * 状态
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    State?: string;
+    State: string;
     /**
      * 是否就绪
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Ready?: boolean;
+    Ready: boolean;
     /**
      * 状态原因
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Reason?: string;
+    Reason: string;
     /**
      * 容器的错误信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Message?: string;
+    Message: string;
 }
 /**
  * 三级标签
@@ -4802,6 +4817,11 @@ export interface Pod {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     ContainerInfos?: Array<Container>;
+    /**
+     * 容器调用信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CrossTenantENIInfo?: CrossTenantENIInfo;
 }
 /**
  * DescribeLatestTrainingMetrics请求参数结构体
@@ -5721,22 +5741,22 @@ export interface Container {
      * 名字
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Name?: string;
+    Name: string;
     /**
      * id
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ContainerId?: string;
+    ContainerId: string;
     /**
      * 镜像地址
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Image?: string;
+    Image: string;
     /**
      * 容器状态
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Status?: ContainerStatus;
+    Status: ContainerStatus;
 }
 /**
  * 图片分割参数信息

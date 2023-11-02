@@ -46,6 +46,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeSnapshotRollbackTask", req, cb);
     }
     /**
+     * 增值服务自动续费设置
+     */
+    async ModifyVasAutoRenewStatus(req, cb) {
+        return this.request("ModifyVasAutoRenewStatus", req, cb);
+    }
+    /**
      * 获取域名权限
      */
     async DescribeDomainPurview(req, cb) {
@@ -56,6 +62,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ModifySubdomainStatus(req, cb) {
         return this.request("ModifySubdomainStatus", req, cb);
+    }
+    /**
+     * 删除域名的自定义线路
+     */
+    async DeleteDomainCustomLine(req, cb) {
+        return this.request("DeleteDomainCustomLine", req, cb);
     }
     /**
      * 获取等级允许的记录类型
@@ -190,10 +202,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteShareDomain", req, cb);
     }
     /**
-     * 增值服务自动续费设置
+     * 获取域名信息
      */
-    async ModifyVasAutoRenewStatus(req, cb) {
-        return this.request("ModifyVasAutoRenewStatus", req, cb);
+    async DescribeDomain(req, cb) {
+        return this.request("DescribeDomain", req, cb);
     }
     /**
      * 修改记录分组
@@ -208,10 +220,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyRecordStatus", req, cb);
     }
     /**
-     * 获取域名信息
+     * 添加记录分组
      */
-    async DescribeDomain(req, cb) {
-        return this.request("DescribeDomain", req, cb);
+    async CreateRecordGroup(req, cb) {
+        return this.request("CreateRecordGroup", req, cb);
     }
     /**
      * 更新动态 DNS 记录
@@ -224,6 +236,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CreateRecordBatch(req, cb) {
         return this.request("CreateRecordBatch", req, cb);
+    }
+    /**
+     * 创建域名的自定义线路
+     */
+    async CreateDomainCustomLine(req, cb) {
+        return this.request("CreateDomainCustomLine", req, cb);
     }
     /**
      * 获取帐户信息
@@ -248,12 +266,6 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeRecord(req, cb) {
         return this.request("DescribeRecord", req, cb);
-    }
-    /**
-     * 修改快照配置
-     */
-    async ModifySnapshotConfig(req, cb) {
-        return this.request("ModifySnapshotConfig", req, cb);
     }
     /**
      * 获取各套餐配置详情
@@ -328,10 +340,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateDomainGroup", req, cb);
     }
     /**
-     * 添加记录分组
+     * 修改快照配置
      */
-    async CreateRecordGroup(req, cb) {
-        return this.request("CreateRecordGroup", req, cb);
+    async ModifySnapshotConfig(req, cb) {
+        return this.request("ModifySnapshotConfig", req, cb);
     }
     /**
      * 删除域名别名
@@ -352,10 +364,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CheckRecordSnapshotRollback", req, cb);
     }
     /**
-     * 获取域名概览信息
+     * 获取域名的自定义线路列表
      */
-    async DescribeDomainPreview(req, cb) {
-        return this.request("DescribeDomainPreview", req, cb);
+    async DescribeDomainCustomLineList(req, cb) {
+        return this.request("DescribeDomainCustomLineList", req, cb);
     }
     /**
      * 添加域名
@@ -370,10 +382,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyRecordRemark", req, cb);
     }
     /**
+     * 修改域名的自定义线路
+     */
+    async ModifyDomainCustomLine(req, cb) {
+        return this.request("ModifyDomainCustomLine", req, cb);
+    }
+    /**
      * 获取域名筛选列表
      */
     async DescribeDomainFilterList(req, cb) {
         return this.request("DescribeDomainFilterList", req, cb);
+    }
+    /**
+     * DNSPod商品余额支付
+     */
+    async PayOrderWithBalance(req, cb) {
+        return this.request("PayOrderWithBalance", req, cb);
     }
     /**
      * 将记录添加到分组
@@ -382,10 +406,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyRecordToGroup", req, cb);
     }
     /**
-     * DNSPod商品余额支付
+     * 获取域名概览信息
      */
-    async PayOrderWithBalance(req, cb) {
-        return this.request("PayOrderWithBalance", req, cb);
+    async DescribeDomainPreview(req, cb) {
+        return this.request("DescribeDomainPreview", req, cb);
     }
     /**
      * 统计子域名的解析量，帮助您了解流量情况、时间段分布。支持查看近 3 个月内的统计情况。仅付费套餐域名可用。

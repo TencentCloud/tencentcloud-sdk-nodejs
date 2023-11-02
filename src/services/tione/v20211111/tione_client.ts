@@ -42,6 +42,7 @@ import {
   SpecUnit,
   CreateDatasetResponse,
   Service,
+  CrossTenantENIInfo,
   HyperParameter,
   ModifyServiceGroupWeightsRequest,
   DescribeTrainingTasksRequest,

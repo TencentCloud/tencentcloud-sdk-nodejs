@@ -905,8 +905,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * Waf  CC V2 Query接口
-   */
+     * 没有在使用。
+
+Waf  CC V2 Query接口
+     */
   async DescribeCCRule(
     req: DescribeCCRuleRequest,
     cb?: (error: string, rep: DescribeCCRuleResponse) => void
@@ -1170,8 +1172,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取防篡改url
-   */
+     * 废弃接口
+
+获取防篡改url
+     */
   async DescribeAntiFakeUrl(
     req: DescribeAntiFakeUrlRequest,
     cb?: (error: string, rep: DescribeAntiFakeUrlResponse) => void

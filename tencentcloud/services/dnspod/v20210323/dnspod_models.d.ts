@@ -415,18 +415,17 @@ export interface CreateSnapshotResponse {
     RequestId?: string;
 }
 /**
- * 键值对
+ * DescribeDomainCustomLineList请求参数结构体
  */
-export interface KeyValue {
+export interface DescribeDomainCustomLineListRequest {
     /**
-     * 键
+     * 域名
      */
-    Key: string;
+    Domain: string;
     /**
-     * 值
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 域名ID，如果传了DomainId，系统将会忽略Domain参数，优先使用DomainId
      */
-    Value?: string;
+    DomainId?: number;
 }
 /**
  * DeleteRecordGroup请求参数结构体
@@ -843,6 +842,23 @@ export interface DeleteDomainBatchRequest {
     DomainList: Array<string>;
 }
 /**
+ * DeleteDomainCustomLine请求参数结构体
+ */
+export interface DeleteDomainCustomLineRequest {
+    /**
+     * 域名
+     */
+    Domain: string;
+    /**
+     * 自定义线路名称
+     */
+    Name: string;
+    /**
+     * 域名ID，如果传了DomainId，系统将会忽略Domain参数，优先使用DomainId
+     */
+    DomainId?: number;
+}
+/**
  * DescribeSnapshotRollbackResult返回参数结构体
  */
 export interface DescribeSnapshotRollbackResultResponse {
@@ -1068,6 +1084,55 @@ export interface DeleteShareDomainResponse {
     RequestId?: string;
 }
 /**
+ * 套餐配置明细
+ */
+export interface PackageDetailItem {
+    /**
+     * 套餐原价
+     */
+    RealPrice: number;
+    /**
+     * 可更换域名次数
+     */
+    ChangedTimes: number;
+    /**
+     * 允许设置的最小 TTL 值
+     */
+    MinTtl: number;
+    /**
+     * 负载均衡数量
+     */
+    RecordRoll: number;
+    /**
+     * 子域名级数
+     */
+    SubDomainLevel: number;
+    /**
+     * 泛解析级数
+     */
+    MaxWildcard: number;
+    /**
+     * DNS 服务集群个数
+     */
+    DnsServerRegion: string;
+    /**
+     * 套餐名称
+     */
+    DomainGradeCn: string;
+    /**
+     * 套餐代号
+     */
+    GradeLevel: number;
+    /**
+     * 套餐对应的 NS
+     */
+    Ns: Array<string>;
+    /**
+     * 套餐代码
+     */
+    DomainGrade: string;
+}
+/**
  * ModifyRecord请求参数结构体
  */
 export interface ModifyRecordRequest {
@@ -1246,17 +1311,25 @@ export interface ModifyDomainOwnerRequest {
     DomainId?: number;
 }
 /**
- * ModifyPackageAutoRenew请求参数结构体
+ * DescribeSubdomainAnalytics返回参数结构体
  */
-export interface ModifyPackageAutoRenewRequest {
+export interface DescribeSubdomainAnalyticsResponse {
     /**
-     * 资源ID。可以在控制台查看所有的资源
+     * 当前统计维度解析量小计
      */
-    ResourceId: string;
+    Data?: Array<DomainAnalyticsDetail>;
     /**
-     * enable 开启自动续费；disable 关闭自动续费
+     * 子域名解析量统计查询信息
      */
-    Status: string;
+    Info?: SubdomainAnalyticsInfo;
+    /**
+     * 子域名别名解析量统计信息
+     */
+    AliasData?: Array<SubdomainAliasAnalyticsItem>;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * 批量删除记录详情
@@ -1819,6 +1892,59 @@ export interface CheckRecordSnapshotRollbackResponse {
     RequestId?: string;
 }
 /**
+ * 用户信息
+ */
+export interface UserInfo {
+    /**
+     * 用户昵称
+     */
+    Nick: string;
+    /**
+     * 用户ID
+     */
+    Id: number;
+    /**
+     * 用户账号, 邮箱格式
+     */
+    Email: string;
+    /**
+     * 账号状态：”enabled”: 正常；”disabled”: 被封禁
+     */
+    Status: string;
+    /**
+     * 电话号码
+     */
+    Telephone: string;
+    /**
+     * 邮箱是否通过验证：”yes”: 通过；”no”: 未通过
+     */
+    EmailVerified: string;
+    /**
+     * 手机是否通过验证：”yes”: 通过；”no”: 未通过
+     */
+    TelephoneVerified: string;
+    /**
+     * 账号等级, 按照用户账号下域名等级排序, 选取一个最高等级为账号等级, 具体对应情况参见域名等级。
+     */
+    UserGrade: string;
+    /**
+     * 用户名称, 企业用户对应为公司名称
+     */
+    RealName: string;
+    /**
+     * 是否绑定微信：”yes”: 通过；”no”: 未通过
+     */
+    WechatBinded: string;
+    /**
+     * 用户UIN
+     */
+    Uin: number;
+    /**
+     * 所属 DNS 服务器
+     */
+    FreeNs: Array<string>;
+}
+/**
  * DescribeDomainPreview请求参数结构体
  */
 export interface DescribeDomainPreviewRequest {
@@ -2297,57 +2423,22 @@ export interface DomainCountInfo {
     GroupTotal: number;
 }
 /**
- * 用户信息
+ * ModifyDomainCustomLine返回参数结构体
  */
-export interface UserInfo {
+export interface ModifyDomainCustomLineResponse {
     /**
-     * 用户昵称
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
-    Nick: string;
+    RequestId?: string;
+}
+/**
+ * ModifyPackageAutoRenew返回参数结构体
+ */
+export interface ModifyPackageAutoRenewResponse {
     /**
-     * 用户ID
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
-    Id: number;
-    /**
-     * 用户账号, 邮箱格式
-     */
-    Email: string;
-    /**
-     * 账号状态：”enabled”: 正常；”disabled”: 被封禁
-     */
-    Status: string;
-    /**
-     * 电话号码
-     */
-    Telephone: string;
-    /**
-     * 邮箱是否通过验证：”yes”: 通过；”no”: 未通过
-     */
-    EmailVerified: string;
-    /**
-     * 手机是否通过验证：”yes”: 通过；”no”: 未通过
-     */
-    TelephoneVerified: string;
-    /**
-     * 账号等级, 按照用户账号下域名等级排序, 选取一个最高等级为账号等级, 具体对应情况参见域名等级。
-     */
-    UserGrade: string;
-    /**
-     * 用户名称, 企业用户对应为公司名称
-     */
-    RealName: string;
-    /**
-     * 是否绑定微信：”yes”: 通过；”no”: 未通过
-     */
-    WechatBinded: string;
-    /**
-     * 用户UIN
-     */
-    Uin: number;
-    /**
-     * 所属 DNS 服务器
-     */
-    FreeNs: Array<string>;
+    RequestId?: string;
 }
 /**
  * ModifyRecordBatch返回参数结构体
@@ -2433,6 +2524,15 @@ export interface DescribeRecordTypeRequest {
   + 新套餐：DP_FREE、DP_PLUS、DP_EXTRA、DP_EXPERT、DP_ULTRA 分别对应新免费、个人专业版、企业创业版、企业标准版、企业旗舰版。
      */
     DomainGrade: string;
+}
+/**
+ * DeleteDomainCustomLine返回参数结构体
+ */
+export interface DeleteDomainCustomLineResponse {
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * DescribeSnapshotRollbackTask返回参数结构体
@@ -2633,25 +2733,29 @@ export interface SubdomainAnalyticsInfo {
     Subdomain: string;
 }
 /**
- * DescribeSubdomainAnalytics返回参数结构体
+ * 自定义线路详情
  */
-export interface DescribeSubdomainAnalyticsResponse {
+export interface CustomLineInfo {
     /**
-     * 当前统计维度解析量小计
+     * 域名ID
      */
-    Data?: Array<DomainAnalyticsDetail>;
+    DomainId: number;
     /**
-     * 子域名解析量统计查询信息
+     * 自定义线路名称
      */
-    Info?: SubdomainAnalyticsInfo;
+    Name: string;
     /**
-     * 子域名别名解析量统计信息
+     * 自定义线路IP段
      */
-    AliasData?: Array<SubdomainAliasAnalyticsItem>;
+    Area: string;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     * 已使用IP段个数
      */
-    RequestId?: string;
+    UseCount: number;
+    /**
+     * 允许使用IP段最大个数
+     */
+    MaxCount: number;
 }
 /**
  * 批量添加记录返回结构
@@ -2762,13 +2866,29 @@ export interface CreateDomainRequest {
     Tags?: Array<TagItem>;
 }
 /**
- * ModifyPackageAutoRenew返回参数结构体
+ * ModifyDomainCustomLine请求参数结构体
  */
-export interface ModifyPackageAutoRenewResponse {
+export interface ModifyDomainCustomLineRequest {
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     * 域名
      */
-    RequestId?: string;
+    Domain: string;
+    /**
+     * 修改后的自定义线路名称，如果不修改名称，需要和PreName保持一致
+     */
+    Name: string;
+    /**
+     * 自定义线路IP段，用-分割
+     */
+    Area: string;
+    /**
+     * 修改前的自定义线路名称
+     */
+    PreName: string;
+    /**
+     * 域名ID，如果传了DomainId，系统将会忽略Domain参数，优先使用DomainId
+     */
+    DomainId?: number;
 }
 /**
  * 域名别名解析量统计信息
@@ -2797,6 +2917,19 @@ export interface DescribeDomainGroupListResponse {
     RequestId?: string;
 }
 /**
+ * ModifyPackageAutoRenew请求参数结构体
+ */
+export interface ModifyPackageAutoRenewRequest {
+    /**
+     * 资源ID。可以在控制台查看所有的资源
+     */
+    ResourceId: string;
+    /**
+     * enable 开启自动续费；disable 关闭自动续费
+     */
+    Status: string;
+}
+/**
  * ModifyDomainRemark请求参数结构体
  */
 export interface ModifyDomainRemarkRequest {
@@ -2812,6 +2945,42 @@ export interface ModifyDomainRemarkRequest {
      * 域名备注，删除备注请提交空内容。
      */
     Remark?: string;
+}
+/**
+ * 键值对
+ */
+export interface KeyValue {
+    /**
+     * 键
+     */
+    Key: string;
+    /**
+     * 值
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Value?: string;
+}
+/**
+ * DescribeDomainLogList返回参数结构体
+ */
+export interface DescribeDomainLogListResponse {
+    /**
+     * 域名信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    LogList?: Array<string>;
+    /**
+     * 分页大小
+     */
+    PageSize?: number;
+    /**
+     * 日志总条数
+     */
+    TotalCount?: number;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * CreateDomainAlias返回参数结构体
@@ -3629,6 +3798,23 @@ export interface DomainCreateInfo {
     GradeNsList: Array<string>;
 }
 /**
+ * DescribeDomainCustomLineList返回参数结构体
+ */
+export interface DescribeDomainCustomLineListResponse {
+    /**
+     * 自定义线路列表
+     */
+    LineList?: Array<CustomLineInfo>;
+    /**
+     * 可添加的自定义线路条数
+     */
+    AvailableCount?: number;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * DeleteRecordBatch请求参数结构体
  */
 export interface DeleteRecordBatchRequest {
@@ -3737,53 +3923,25 @@ export interface ModifyDomainLockResponse {
     RequestId?: string;
 }
 /**
- * 套餐配置明细
+ * CreateDomainCustomLine请求参数结构体
  */
-export interface PackageDetailItem {
+export interface CreateDomainCustomLineRequest {
     /**
-     * 套餐原价
+     * 域名
      */
-    RealPrice: number;
+    Domain: string;
     /**
-     * 可更换域名次数
+     * 自定义线路名称
      */
-    ChangedTimes: number;
+    Name: string;
     /**
-     * 允许设置的最小 TTL 值
+     * 自定义线路IP段，用-分割
      */
-    MinTtl: number;
+    Area: string;
     /**
-     * 负载均衡数量
+     * 域名ID，如果传了DomainId，系统将会忽略Domain参数，优先使用DomainId
      */
-    RecordRoll: number;
-    /**
-     * 子域名级数
-     */
-    SubDomainLevel: number;
-    /**
-     * 泛解析级数
-     */
-    MaxWildcard: number;
-    /**
-     * DNS 服务集群个数
-     */
-    DnsServerRegion: string;
-    /**
-     * 套餐名称
-     */
-    DomainGradeCn: string;
-    /**
-     * 套餐代号
-     */
-    GradeLevel: number;
-    /**
-     * 套餐对应的 NS
-     */
-    Ns: Array<string>;
-    /**
-     * 套餐代码
-     */
-    DomainGrade: string;
+    DomainId?: number;
 }
 /**
  * CreateDeal返回参数结构体
@@ -3965,19 +4123,6 @@ export interface TagItem {
     TagValue?: string;
 }
 /**
- * DescribeDomainWhois返回参数结构体
- */
-export interface DescribeDomainWhoisResponse {
-    /**
-     * 域名Whois信息
-     */
-    Info?: WhoisInfo;
-    /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
-/**
  * CreateRecordGroup返回参数结构体
  */
 export interface CreateRecordGroupResponse {
@@ -4049,6 +4194,15 @@ export interface CheckRecordSnapshotRollbackRequest {
     DomainId?: number;
 }
 /**
+ * CreateDomainCustomLine返回参数结构体
+ */
+export interface CreateDomainCustomLineResponse {
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * DescribeDomainAnalytics请求参数结构体
  */
 export interface DescribeDomainAnalyticsRequest {
@@ -4104,22 +4258,13 @@ export interface DescribeSnapshotRollbackResultRequest {
     DomainId?: number;
 }
 /**
- * DescribeDomainLogList返回参数结构体
+ * DescribeDomainWhois返回参数结构体
  */
-export interface DescribeDomainLogListResponse {
+export interface DescribeDomainWhoisResponse {
     /**
-     * 域名信息
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 域名Whois信息
      */
-    LogList?: Array<string>;
-    /**
-     * 分页大小
-     */
-    PageSize?: number;
-    /**
-     * 日志总条数
-     */
-    TotalCount?: number;
+    Info?: WhoisInfo;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */

@@ -346,7 +346,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeUserLevel", req, cb);
     }
     /**
-     * Waf  CC V2 Query接口
+     * 没有在使用。
+
+Waf  CC V2 Query接口
      */
     async DescribeCCRule(req, cb) {
         return this.request("DescribeCCRule", req, cb);
@@ -507,7 +509,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeFlowTrend", req, cb);
     }
     /**
-     * 获取防篡改url
+     * 废弃接口
+
+获取防篡改url
      */
     async DescribeAntiFakeUrl(req, cb) {
         return this.request("DescribeAntiFakeUrl", req, cb);

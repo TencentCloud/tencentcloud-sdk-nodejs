@@ -3487,6 +3487,16 @@ export interface TaskLogInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     UserName?: string;
+    /**
+     * 报告类型： 1安全体检 2日报 3周报 4月报
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ReportType?: number;
+    /**
+     * 报告模板id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TemplateId?: number;
 }
 /**
  * CreateDomainAndIp返回参数结构体
@@ -3785,6 +3795,11 @@ export interface DescribeTaskLogListResponse {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     NotViewNumber?: number;
+    /**
+     * 报告模板数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ReportTemplateNumber?: number;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
