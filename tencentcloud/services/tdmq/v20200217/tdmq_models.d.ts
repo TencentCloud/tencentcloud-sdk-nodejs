@@ -429,6 +429,15 @@ export interface DeleteClusterResponse {
     RequestId?: string;
 }
 /**
+ * ResetRocketMQConsumerOffSet返回参数结构体
+ */
+export interface ResetRocketMQConsumerOffSetResponse {
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * DescribeTopicMsgs返回参数结构体
  */
 export interface DescribeTopicMsgsResponse {
@@ -544,9 +553,13 @@ export interface DescribeRocketMQMigratingTopicListRequest {
     Filters?: Array<Filter>;
 }
 /**
- * ResetRocketMQConsumerOffSet返回参数结构体
+ * ModifyCluster返回参数结构体
  */
-export interface ResetRocketMQConsumerOffSetResponse {
+export interface ModifyClusterResponse {
+    /**
+     * Pulsar 集群的ID
+     */
+    ClusterId: string;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2512,6 +2525,79 @@ export interface DescribeCmqSubscriptionDetailResponse {
     RequestId?: string;
 }
 /**
+ * Pulsar专业版实例信息
+ */
+export interface PulsarProInstance {
+    /**
+     * 实例id
+     */
+    InstanceId: string;
+    /**
+     * 实例名称
+     */
+    InstanceName: string;
+    /**
+     * 实例版本
+     */
+    InstanceVersion: string;
+    /**
+     * 实例状态，0-创建中，1-正常，2-隔离中，3-已销毁，4 - 异常, 5 - 发货失败，6-变配中，7-变配失败
+     */
+    Status: number;
+    /**
+     * 实例配置规格名称
+     */
+    ConfigDisplay: string;
+    /**
+     * 峰值TPS
+     */
+    MaxTps: number;
+    /**
+     * 存储容量，GB为单位
+     */
+    MaxStorage: number;
+    /**
+     * 实例到期时间，毫秒为单位
+     */
+    ExpireTime: number;
+    /**
+     * 自动续费标记，0表示默认状态(用户未设置，即初始状态即手动续费)， 1表示自动续费，2表示明确不自动续费(用户设置)
+     */
+    AutoRenewFlag: number;
+    /**
+     * 0-后付费，1-预付费
+     */
+    PayMode: number;
+    /**
+     * 备注信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Remark: string;
+    /**
+     * 实例配置ID
+     */
+    SpecName: string;
+    /**
+     * 规格外弹性TPS
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ScalableTps: number;
+    /**
+     * VPC的id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    VpcId: string;
+    /**
+     * 子网id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SubnetId: string;
+    /**
+     * 峰值带宽。单位：mbps
+     */
+    MaxBandWidth: number;
+}
+/**
  * vcp绑定记录
  */
 export interface VpcBindRecord {
@@ -4037,17 +4123,19 @@ export interface DescribeRocketMQClustersRequest {
     Filters?: Array<Filter>;
 }
 /**
- * ModifyCluster返回参数结构体
+ * 消费信息
  */
-export interface ModifyClusterResponse {
+export interface ConsumerLogs {
     /**
-     * Pulsar 集群的ID
+     * 记录数。
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    ClusterId: string;
+    TotalCount: number;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     * 消费日志。
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    RequestId?: string;
+    ConsumerLogSets: Array<ConsumerLog>;
 }
 /**
  * DescribeBindVpcs请求参数结构体
@@ -4687,77 +4775,28 @@ export interface CreateCmqQueueResponse {
     RequestId?: string;
 }
 /**
- * Pulsar专业版实例信息
+ * DescribeMsgTrace返回参数结构体
  */
-export interface PulsarProInstance {
+export interface DescribeMsgTraceResponse {
     /**
-     * 实例id
-     */
-    InstanceId: string;
-    /**
-     * 实例名称
-     */
-    InstanceName: string;
-    /**
-     * 实例版本
-     */
-    InstanceVersion: string;
-    /**
-     * 实例状态，0-创建中，1-正常，2-隔离中，3-已销毁，4 - 异常, 5 - 发货失败，6-变配中，7-变配失败
-     */
-    Status: number;
-    /**
-     * 实例配置规格名称
-     */
-    ConfigDisplay: string;
-    /**
-     * 峰值TPS
-     */
-    MaxTps: number;
-    /**
-     * 存储容量，GB为单位
-     */
-    MaxStorage: number;
-    /**
-     * 实例到期时间，毫秒为单位
-     */
-    ExpireTime: number;
-    /**
-     * 自动续费标记，0表示默认状态(用户未设置，即初始状态即手动续费)， 1表示自动续费，2表示明确不自动续费(用户设置)
-     */
-    AutoRenewFlag: number;
-    /**
-     * 0-后付费，1-预付费
-     */
-    PayMode: number;
-    /**
-     * 备注信息
+     * 生产信息。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Remark: string;
+    ProducerLog: ProducerLog;
     /**
-     * 实例配置ID
-     */
-    SpecName: string;
-    /**
-     * 规格外弹性TPS
+     * 服务方信息。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ScalableTps: number;
+    ServerLog: ServerLog;
     /**
-     * VPC的id
+     * 消费信息。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    VpcId: string;
+    ConsumerLogs: ConsumerLogs;
     /**
-     * 子网id
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
-    SubnetId: string;
-    /**
-     * 峰值带宽。单位：mbps
-     */
-    MaxBandWidth: number;
+    RequestId?: string;
 }
 /**
  * 分区topic
@@ -5663,17 +5702,37 @@ export interface DescribeRocketMQSubscriptionsRequest {
     Limit: number;
 }
 /**
- * 排序器
+ * 消费日志
  */
-export interface Sort {
+export interface ConsumerLog {
     /**
-     * 排序字段
+     * 消息ID。
      */
-    Name: string;
+    MsgId: string;
     /**
-     * 升序ASC，降序DESC
+     * 消费组。
      */
-    Order: string;
+    ConsumerGroup: string;
+    /**
+     * 消费组名称。
+     */
+    ConsumerName: string;
+    /**
+     * 消费时间。
+     */
+    ConsumeTime: string;
+    /**
+     * 消费者客户端地址。
+     */
+    ConsumerAddr: string;
+    /**
+     * 消费耗时（毫秒）。
+     */
+    ConsumeUseTime: number;
+    /**
+     * 消费状态。
+     */
+    Status: string;
 }
 /**
  * DeleteTopics请求参数结构体
@@ -5883,6 +5942,19 @@ export interface DeleteCmqSubscribeRequest {
      * 订阅名字，在单个地域同一帐号的同一主题下唯一。订阅名称是一个不超过64个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-)。
      */
     SubscriptionName: string;
+}
+/**
+ * 服务方信息
+ */
+export interface ServerLog {
+    /**
+     * 存储时间。
+     */
+    SaveTime: string;
+    /**
+     * 状态。
+     */
+    Status: string;
 }
 /**
  * DescribeAMQPClusters返回参数结构体
@@ -6517,6 +6589,19 @@ export interface QueueQuota {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     UsedQueue?: number;
+}
+/**
+ * 排序器
+ */
+export interface Sort {
+    /**
+     * 排序字段
+     */
+    Name: string;
+    /**
+     * 升序ASC，降序DESC
+     */
+    Order: string;
 }
 /**
  * CreateRole返回参数结构体
@@ -7179,6 +7264,39 @@ export interface DescribeRocketMQTopicMsgsRequest {
      * 死信查询时该值为true，只对Rocketmq有效
      */
     QueryDeadLetterMessage?: boolean;
+}
+/**
+ * DescribeMsgTrace请求参数结构体
+ */
+export interface DescribeMsgTraceRequest {
+    /**
+     * 环境（命名空间）。
+     */
+    EnvironmentId: string;
+    /**
+     * 消息ID。
+     */
+    MsgId: string;
+    /**
+     * 消息生产时间。
+     */
+    ProduceTime: string;
+    /**
+     * 起始下标，不填默认为0。
+     */
+    Offset?: number;
+    /**
+     * 返回数量，不填则默认为10，最大值为20。
+     */
+    Limit?: number;
+    /**
+     * 消费组名称模糊匹配。
+     */
+    SubscriptionName?: string;
+    /**
+     * Pulsar 集群的ID
+     */
+    ClusterId?: string;
 }
 /**
  * ImportRocketMQConsumerGroups返回参数结构体
@@ -7875,6 +7993,35 @@ export interface TraceResult {
      * 内容详情
      */
     Data: string;
+}
+/**
+ * 消息生产信息
+ */
+export interface ProducerLog {
+    /**
+     * 消息ID。
+     */
+    MsgId: string;
+    /**
+     * 生产者名称。
+     */
+    ProducerName: string;
+    /**
+     * 消息生产时间。
+     */
+    ProduceTime: string;
+    /**
+     * 生产者客户端。
+     */
+    ProducerAddr: string;
+    /**
+     * 生产耗时（秒）。
+     */
+    ProduceUseTime: number;
+    /**
+     * 状态。
+     */
+    Status: string;
 }
 /**
  * DeleteRabbitMQVipInstance请求参数结构体

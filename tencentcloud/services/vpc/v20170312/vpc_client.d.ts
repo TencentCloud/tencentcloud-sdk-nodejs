@@ -1028,7 +1028,6 @@ export declare class Client extends AbstractClient {
 * 支持CVM实例，弹性网卡上的EIP解绑
 * 不支持NAT上的EIP解绑。NAT上的EIP解绑请参考[DisassociateNatGatewayAddress](https://cloud.tencent.com/document/api/215/36716)
 * 只有状态为 BIND 和 BIND_ENI 的 EIP 才能进行解绑定操作。
-* EIP 如果被封堵，则不能进行解绑定操作。
      */
     DisassociateAddress(req: DisassociateAddressRequest, cb?: (error: string, rep: DisassociateAddressResponse) => void): Promise<DisassociateAddressResponse>;
     /**

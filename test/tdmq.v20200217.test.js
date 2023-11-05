@@ -428,16 +428,6 @@ it("tdmq.v20200217.DescribeCmqSubscriptionDetail", async function () {
     }
 })
 
-it("tdmq.v20200217.DescribeRabbitMQVirtualHost", async function () {
-    try {
-       const data = await client.DescribeRabbitMQVirtualHost({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("tdmq.v20200217.DescribeCmqDeadLetterSourceQueues", async function () {
     try {
        const data = await client.DescribeCmqDeadLetterSourceQueues({})
@@ -548,6 +538,16 @@ it("tdmq.v20200217.DescribeRabbitMQUser", async function () {
     }
 })
 
+it("tdmq.v20200217.DeleteRoles", async function () {
+    try {
+       const data = await client.DeleteRoles({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tdmq.v20200217.ModifyRocketMQCluster", async function () {
     try {
        const data = await client.ModifyRocketMQCluster({})
@@ -631,6 +631,16 @@ it("tdmq.v20200217.DeleteEnvironmentRoles", async function () {
 it("tdmq.v20200217.ResetMsgSubOffsetByTimestamp", async function () {
     try {
        const data = await client.ResetMsgSubOffsetByTimestamp({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tdmq.v20200217.DescribeMsgTrace", async function () {
+    try {
+       const data = await client.DescribeMsgTrace({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -788,9 +798,9 @@ it("tdmq.v20200217.DeleteRabbitMQUser", async function () {
     }
 })
 
-it("tdmq.v20200217.DeleteRoles", async function () {
+it("tdmq.v20200217.DescribeRabbitMQVirtualHost", async function () {
     try {
-       const data = await client.DeleteRoles({})
+       const data = await client.DescribeRabbitMQVirtualHost({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

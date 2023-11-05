@@ -275,12 +275,6 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeCmqSubscriptionDetail", req, cb);
     }
     /**
-     * 查询RabbitMQ vhost列表
-     */
-    async DescribeRabbitMQVirtualHost(req, cb) {
-        return this.request("DescribeRabbitMQVirtualHost", req, cb);
-    }
-    /**
      * 枚举cmq死信队列源队列
      */
     async DescribeCmqDeadLetterSourceQueues(req, cb) {
@@ -347,6 +341,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeRabbitMQUser", req, cb);
     }
     /**
+     * 删除角色，支持批量。
+     */
+    async DeleteRoles(req, cb) {
+        return this.request("DeleteRoles", req, cb);
+    }
+    /**
      * 更新RocketMQ集群信息
      */
     async ModifyRocketMQCluster(req, cb) {
@@ -399,6 +399,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ResetMsgSubOffsetByTimestamp(req, cb) {
         return this.request("ResetMsgSubOffsetByTimestamp", req, cb);
+    }
+    /**
+     * 查询消息轨迹
+     */
+    async DescribeMsgTrace(req, cb) {
+        return this.request("DescribeMsgTrace", req, cb);
     }
     /**
      * RabbitMQ专享版查询节点列表
@@ -491,10 +497,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteRabbitMQUser", req, cb);
     }
     /**
-     * 删除角色，支持批量。
+     * 查询RabbitMQ vhost列表
      */
-    async DeleteRoles(req, cb) {
-        return this.request("DeleteRoles", req, cb);
+    async DescribeRabbitMQVirtualHost(req, cb) {
+        return this.request("DescribeRabbitMQVirtualHost", req, cb);
     }
     /**
      * 当前 ReceiveMessage 接口只支持 Partitioned 类型的 Topic。该接口用于接收发送到指定 Partitioned Topic 中的消息，当 Partitioned Topic 中没有消息但还去尝试调用该接口时，会抛出 ReceiveTimeout 的异常。

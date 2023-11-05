@@ -5025,33 +5025,33 @@ export interface ReservedInstancePriceItem {
   /**
    * 付费类型，如："All Upfront","Partial Upfront","No Upfront"
    */
-  OfferingType: string
+  OfferingType?: string
   /**
    * 预支合计费用，单位：元。
    */
-  FixedPrice: number
+  FixedPrice?: number
   /**
    * 后续合计费用，单位：元/小时
    */
-  UsagePrice: number
+  UsagePrice?: number
   /**
    * 预留实例配置ID
    */
-  ReservedInstancesOfferingId: string
+  ReservedInstancesOfferingId?: string
   /**
    * 预留实例计费可购买的可用区。
    */
-  Zone: string
+  Zone?: string
   /**
    * 预留实例计费【有效期】即预留实例计费购买时长。形如：31536000。
 计量单位：秒
    */
-  Duration: number
+  Duration?: number
   /**
    * 预留实例计费的平台描述（即操作系统）。形如：Linux。
 返回项： Linux 。
    */
-  ProductDescription: string
+  ProductDescription?: string
 }
 
 /**

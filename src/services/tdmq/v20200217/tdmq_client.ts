@@ -33,6 +33,7 @@ import {
   ModifyRabbitMQVirtualHostRequest,
   ModifyEnvironmentAttributesRequest,
   DeleteClusterResponse,
+  ResetRocketMQConsumerOffSetResponse,
   DescribeTopicMsgsResponse,
   ModifyCmqSubscriptionAttributeResponse,
   CreateCmqTopicRequest,
@@ -40,7 +41,7 @@ import {
   Filter,
   ImportRocketMQTopicsResponse,
   DescribeRocketMQMigratingTopicListRequest,
-  ResetRocketMQConsumerOffSetResponse,
+  ModifyClusterResponse,
   ModifyRocketMQInstanceSpecRequest,
   BindCluster,
   ModifyRoleResponse,
@@ -109,6 +110,7 @@ import {
   DescribeRocketMQClusterResponse,
   DeleteRocketMQVipInstanceResponse,
   DescribeCmqSubscriptionDetailResponse,
+  PulsarProInstance,
   VpcBindRecord,
   RewindCmqQueueRequest,
   DescribeRabbitMQUserResponse,
@@ -172,7 +174,7 @@ import {
   DescribePulsarProInstancesRequest,
   DeleteEnvironmentsRequest,
   DescribeRocketMQClustersRequest,
-  ModifyClusterResponse,
+  ConsumerLogs,
   DescribeBindVpcsRequest,
   DescribeClustersResponse,
   RocketMQConsumerConnection,
@@ -198,7 +200,7 @@ import {
   RocketMQClusterDetail,
   DeleteRocketMQGroupResponse,
   CreateCmqQueueResponse,
-  PulsarProInstance,
+  DescribeMsgTraceResponse,
   PartitionsTopic,
   DescribeRocketMQGroupsResponse,
   RocketMQMigrationTopicDistribution,
@@ -238,7 +240,7 @@ import {
   PulsarProClusterSpecInfo,
   DescribeCmqTopicsRequest,
   DescribeRocketMQSubscriptionsRequest,
-  Sort,
+  ConsumerLog,
   DeleteTopicsRequest,
   CmqTransactionPolicy,
   BundleSetOpt,
@@ -249,6 +251,7 @@ import {
   PrometheusEndpointInfo,
   CreateCmqSubscribeRequest,
   DeleteCmqSubscribeRequest,
+  ServerLog,
   DescribeAMQPClustersResponse,
   RabbitMQUser,
   DescribeCmqDeadLetterSourceQueuesResponse,
@@ -273,6 +276,7 @@ import {
   DeleteRabbitMQVirtualHostRequest,
   CreateRocketMQTopicRequest,
   QueueQuota,
+  Sort,
   CreateRoleResponse,
   DeleteRocketMQClusterRequest,
   DescribePulsarProInstancesResponse,
@@ -300,6 +304,7 @@ import {
   DescribeRocketMQConsumerConnectionsRequest,
   CreateRoleRequest,
   DescribeRocketMQTopicMsgsRequest,
+  DescribeMsgTraceRequest,
   ImportRocketMQConsumerGroupsResponse,
   DescribeEnvironmentAttributesResponse,
   Role,
@@ -325,6 +330,7 @@ import {
   Topic,
   DeleteCmqSubscribeResponse,
   TraceResult,
+  ProducerLog,
   DeleteRabbitMQVipInstanceRequest,
   DescribePublisherSummaryRequest,
   DeleteSubscriptionsRequest,
@@ -765,16 +771,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询RabbitMQ vhost列表
-   */
-  async DescribeRabbitMQVirtualHost(
-    req: DescribeRabbitMQVirtualHostRequest,
-    cb?: (error: string, rep: DescribeRabbitMQVirtualHostResponse) => void
-  ): Promise<DescribeRabbitMQVirtualHostResponse> {
-    return this.request("DescribeRabbitMQVirtualHost", req, cb)
-  }
-
-  /**
    * 枚举cmq死信队列源队列
    */
   async DescribeCmqDeadLetterSourceQueues(
@@ -885,6 +881,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 删除角色，支持批量。
+   */
+  async DeleteRoles(
+    req: DeleteRolesRequest,
+    cb?: (error: string, rep: DeleteRolesResponse) => void
+  ): Promise<DeleteRolesResponse> {
+    return this.request("DeleteRoles", req, cb)
+  }
+
+  /**
    * 更新RocketMQ集群信息
    */
   async ModifyRocketMQCluster(
@@ -972,6 +978,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ResetMsgSubOffsetByTimestampResponse) => void
   ): Promise<ResetMsgSubOffsetByTimestampResponse> {
     return this.request("ResetMsgSubOffsetByTimestamp", req, cb)
+  }
+
+  /**
+   * 查询消息轨迹
+   */
+  async DescribeMsgTrace(
+    req: DescribeMsgTraceRequest,
+    cb?: (error: string, rep: DescribeMsgTraceResponse) => void
+  ): Promise<DescribeMsgTraceResponse> {
+    return this.request("DescribeMsgTrace", req, cb)
   }
 
   /**
@@ -1125,13 +1141,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除角色，支持批量。
+   * 查询RabbitMQ vhost列表
    */
-  async DeleteRoles(
-    req: DeleteRolesRequest,
-    cb?: (error: string, rep: DeleteRolesResponse) => void
-  ): Promise<DeleteRolesResponse> {
-    return this.request("DeleteRoles", req, cb)
+  async DescribeRabbitMQVirtualHost(
+    req: DescribeRabbitMQVirtualHostRequest,
+    cb?: (error: string, rep: DescribeRabbitMQVirtualHostResponse) => void
+  ): Promise<DescribeRabbitMQVirtualHostResponse> {
+    return this.request("DescribeRabbitMQVirtualHost", req, cb)
   }
 
   /**

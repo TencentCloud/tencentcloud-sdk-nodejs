@@ -70,7 +70,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeUploadIncrementalInfo", req, cb);
     }
     /**
-     * 本接口(ModifyDatabaseMdf)用于收缩数据库mdf(Shrink mdf)
+     * 本接口(ModifyDatabaseMdf)用于收缩数据库mdf(Shrink mdf)。**本接口已废弃，请使用接口ModifyDatabaseShrinkMDF**。
      */
     async ModifyDatabaseMdf(req, cb) {
         return this.request("ModifyDatabaseMdf", req, cb);
@@ -594,7 +594,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyBackupStrategy", req, cb);
     }
     /**
-     * 本接口(DescribeDBsNormal)用于查询数据库配置信息，此接口不包含数据库的关联账号
+     * 本接口(DescribeDBsNormal)用于查询数据库配置信息，此接口不包含数据库的关联账号。**此接口已废弃，请使用DescribeDatabasesNormal。**
      */
     async DescribeDBsNormal(req, cb) {
         return this.request("DescribeDBsNormal", req, cb);
@@ -612,7 +612,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("RollbackInstance", req, cb);
     }
     /**
-     * 本接口（DescribeDBs）用于查询数据库列表。
+     * 本接口（DescribeDBs）用于查询数据库列表。**已废弃，请使用接口DescribeDatabases**
      */
     async DescribeDBs(req, cb) {
         return this.request("DescribeDBs", req, cb);

@@ -621,12 +621,17 @@ export interface ModifyReadOnlyGroupDetailsResponse {
 export interface ModifyBackupStrategyResponse {
   /**
    * 返回错误码
+   * @deprecated
    */
-  Errno: number
+  Errno?: number
   /**
    * 返回错误信息
    */
-  Msg: string
+  Msg?: string
+  /**
+   * 返回错误码
+   */
+  Code?: number
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3235,35 +3240,40 @@ export interface DescribeUploadIncrementalInfoResponse {
   /**
    * 存储桶名称
    */
-  BucketName: string
+  BucketName?: string
   /**
    * 存储桶地域信息
    */
-  Region: string
+  Region?: string
   /**
    * 存储路径
    */
-  Path: string
+  Path?: string
   /**
    * 临时密钥ID
    */
-  TmpSecretId: string
+  TmpSecretId?: string
   /**
    * 临时密钥Key
    */
-  TmpSecretKey: string
+  TmpSecretKey?: string
   /**
    * 临时密钥Token
+   * @deprecated
    */
-  XCosSecurityToken: string
+  XCosSecurityToken?: string
   /**
    * 临时密钥开始时间
    */
-  StartTime: string
+  StartTime?: string
   /**
    * 临时密钥到期时间
    */
-  ExpiredTime: string
+  ExpiredTime?: string
+  /**
+   * 临时密钥Token
+   */
+  CosSecurityToken?: string
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3990,7 +4000,7 @@ export interface ModifyDatabaseMdfResponse {
   /**
    * 流程ID
    */
-  FlowId: number
+  FlowId?: number
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4296,35 +4306,40 @@ export interface DescribeUploadBackupInfoResponse {
   /**
    * 存储桶名称
    */
-  BucketName: string
+  BucketName?: string
   /**
    * 存储桶地域信息
    */
-  Region: string
+  Region?: string
   /**
    * 存储路径
    */
-  Path: string
+  Path?: string
   /**
    * 临时密钥ID
    */
-  TmpSecretId: string
+  TmpSecretId?: string
   /**
    * 临时密钥Key
    */
-  TmpSecretKey: string
+  TmpSecretKey?: string
   /**
    * 临时密钥Token
+   * @deprecated
    */
-  XCosSecurityToken: string
+  XCosSecurityToken?: string
   /**
    * 临时密钥开始时间
    */
-  StartTime: string
+  StartTime?: string
   /**
    * 临时密钥到期时间
    */
-  ExpiredTime: string
+  ExpiredTime?: string
+  /**
+   * 临时密钥Token
+   */
+  CosSecurityToken?: string
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4608,79 +4623,85 @@ export interface DbNormalDetail {
   /**
    * 是否已订阅 0：否 1：是
    */
-  IsSubscribed: string
+  IsSubscribed?: string
   /**
    * 数据库排序规则
    */
-  CollationName: string
+  CollationName?: string
   /**
    * 开启CT之后是否自动清理 0：否 1：是
    */
-  IsAutoCleanupOn: string
+  IsAutoCleanupOn?: string
   /**
    * 是否已启用代理  0：否 1：是
    */
-  IsBrokerEnabled: string
+  IsBrokerEnabled?: string
   /**
    * 是否已开启/关闭CDC 0：关闭 1：开启
    */
-  IsCdcEnabled: string
+  IsCdcEnabled?: string
   /**
    * 是否已启用/ 禁用CT 0：禁用 1：启用
    */
-  IsDbChainingOn: string
+  IsDbChainingOn?: string
   /**
    * 是否加密 0：否 1：是
    */
-  IsEncrypted: string
+  IsEncrypted?: string
   /**
    * 是否全文启用 0：否 1：是
+   * @deprecated
    */
-  IsFulltextEnabled: string
+  IsFulltextEnabled?: string
   /**
    * 是否是镜像 0：否 1：是
    */
-  IsMirroring: string
+  IsMirroring?: string
   /**
    * 是否已发布 0：否 1：是
    */
-  IsPublished: string
+  IsPublished?: string
   /**
    * 是否开启快照 0：否 1：是
    */
-  IsReadCommittedSnapshotOn: string
+  IsReadCommittedSnapshotOn?: string
   /**
    * 是否可信任 0：否 1：是
    */
-  IsTrustworthyOn: string
+  IsTrustworthyOn?: string
   /**
    * 镜像状态
    */
-  MirroringState: string
+  MirroringState?: string
   /**
    * 数据库名称
    */
-  Name: string
+  Name?: string
   /**
    * 恢复模式
    */
-  RecoveryModelDesc: string
+  RecoveryModelDesc?: string
   /**
    * 保留天数
    */
-  RetentionPeriod: string
+  RetentionPeriod?: string
   /**
    * 数据库状态
    */
-  StateDesc: string
+  StateDesc?: string
   /**
    * 用户类型
    */
-  UserAccessDesc: string
+  UserAccessDesc?: string
   /**
    * 数据库创建时间
    */
   CreateTime?: string
+  /**
+   * 是否全文启用 0：否 1：是
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsFullTextEnabled?: string
 }
 
 /**
@@ -5701,6 +5722,20 @@ export interface ModifyPublishSubscribeNameResponse {
 }
 
 /**
+ * StopMigration返回参数结构体
+ */
+export interface StopMigrationResponse {
+  /**
+   * 中止迁移流程发起后，返回的流程id
+   */
+  FlowId: number
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateAccount返回参数结构体
  */
 export interface CreateAccountResponse {
@@ -5948,8 +5983,13 @@ export interface DescribeSlowlogsResponse {
   TotalCount?: number
   /**
    * 慢查询日志信息列表
+   * @deprecated
    */
   Slowlogs?: Array<SlowlogInfo>
+  /**
+   * 慢查询日志信息列表
+   */
+  SlowLogs?: Array<SlowLog>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6168,17 +6208,42 @@ export interface ModifyBackupNameRequest {
 }
 
 /**
- * StopMigration返回参数结构体
+ * 慢查询日志文件信息
  */
-export interface StopMigrationResponse {
+export interface SlowLog {
   /**
-   * 中止迁移流程发起后，返回的流程id
+   * 慢查询日志文件唯一标识
    */
-  FlowId: number
+  Id: number
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 文件生成的开始时间
    */
-  RequestId?: string
+  StartTime: string
+  /**
+   * 文件生成的结束时间
+   */
+  EndTime: string
+  /**
+   * 文件大小（KB）
+   */
+  Size: number
+  /**
+   * 文件中log条数
+   */
+  Count: number
+  /**
+   * 内网下载地址
+   */
+  InternalAddr: string
+  /**
+   * 外网下载地址
+   */
+  ExternalAddr: string
+  /**
+   * 状态（1成功 2失败）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status: number
 }
 
 /**
