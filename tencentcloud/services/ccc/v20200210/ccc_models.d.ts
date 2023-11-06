@@ -1570,6 +1570,8 @@ export interface TelCdrInfo {
   
   电话呼出	        210	           notInService	不在服务区
   
+  电话呼入&呼出	211    clientError    客户端错误
+  
      */
     EndStatus?: number;
     /**
@@ -1606,7 +1608,7 @@ export interface TelCdrInfo {
      */
     IVRKeyPressed?: Array<string>;
     /**
-     * 挂机方 seat 坐席 user 用户
+     * 挂机方 seat 坐席 user 用户 system 系统
   注意：此字段可能返回 null，表示取不到有效值。
      */
     HungUpSide?: string;
@@ -1646,7 +1648,7 @@ export interface TelCdrInfo {
   电话呼出               2	              unconnected	未接通
                            
   电话呼出             201            unknown	未知状态
-  听
+  
   电话呼出            203	    userReject	拒接挂断
   
   电话呼出	          204	    powerOff	关机
@@ -1662,6 +1664,8 @@ export interface TelCdrInfo {
   电话呼出         	209	           callerCancel	主叫取消
   
   电话呼出	        210	           notInService	不在服务区
+  
+  电话呼入&呼出	211    clientError    客户端错误
   
   
   注意：此字段可能返回 null，表示取不到有效值。

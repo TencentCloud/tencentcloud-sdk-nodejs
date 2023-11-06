@@ -40,6 +40,13 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteBlueprints", req, cb);
     }
     /**
+     * 本接口（CancelShareBlueprintAcrossAccounts）用于取消镜像跨账号共享。
+指定的镜像ID必须为自定义镜像，且指定账号ID必须已进行共享。
+     */
+    async CancelShareBlueprintAcrossAccounts(req, cb) {
+        return this.request("CancelShareBlueprintAcrossAccounts", req, cb);
+    }
+    /**
      * 本接口（CreateFirewallRules）用于在实例上添加防火墙规则。
 
 
@@ -404,6 +411,14 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeBundles(req, cb) {
         return this.request("DescribeBundles", req, cb);
+    }
+    /**
+     * 本接口（ShareBlueprintAcrossAccounts）用于跨账号共享镜像。
+仅支持共享自定义镜像， 且用于共享的镜像状态必须为NORMAL。
+共享的账号必须为主账号。
+     */
+    async ShareBlueprintAcrossAccounts(req, cb) {
+        return this.request("ShareBlueprintAcrossAccounts", req, cb);
     }
     /**
      * 本接口（DescribeInstancesTrafficPackages）用于查询一个或多个实例的流量包详情。

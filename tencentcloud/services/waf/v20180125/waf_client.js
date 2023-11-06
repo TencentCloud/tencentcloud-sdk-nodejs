@@ -249,10 +249,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyHostStatus", req, cb);
     }
     /**
-     * 设置waf防护状态
+     * 查询各个waf基础安全模块的开关状态，看每个模块是否开启
      */
-    async ModifySpartaProtectionMode(req, cb) {
-        return this.request("ModifySpartaProtectionMode", req, cb);
+    async DescribeModuleStatus(req, cb) {
+        return this.request("DescribeModuleStatus", req, cb);
     }
     /**
      * Waf IP黑白名单Upsert接口
@@ -364,6 +364,12 @@ Waf  CC V2 Query接口
      */
     async ModifyWafThreatenIntelligence(req, cb) {
         return this.request("ModifyWafThreatenIntelligence", req, cb);
+    }
+    /**
+     * 设置waf防护状态
+     */
+    async ModifySpartaProtectionMode(req, cb) {
+        return this.request("ModifySpartaProtectionMode", req, cb);
     }
     /**
      * 删除攻击日志下载任务记录

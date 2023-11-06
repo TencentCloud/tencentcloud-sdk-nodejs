@@ -437,6 +437,15 @@ export interface DeleteAccessExportResponse {
     RequestId?: string;
 }
 /**
+ * DescribeModuleStatus返回参数结构体
+ */
+export interface DescribeModuleStatusResponse {
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * 用于 DescribeAccessIndex 的出参
  */
 export interface AccessKeyValueInfo {
@@ -2234,6 +2243,10 @@ export interface HostDel {
     InstanceID?: string;
 }
 /**
+ * DescribeModuleStatus请求参数结构体
+ */
+export declare type DescribeModuleStatusRequest = null;
+/**
  * DescribeAntiFakeUrl请求参数结构体
  */
 export interface DescribeAntiFakeUrlRequest {
@@ -2786,6 +2799,72 @@ export interface SearchItem {
      * 流量模式
      */
     FlowMode?: string;
+}
+/**
+ * API安全资源信息
+ */
+export interface ApiPkg {
+    /**
+     * 资源id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ResourceIds?: string;
+    /**
+     * 状态
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Status?: number;
+    /**
+     * 地域
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Region?: number;
+    /**
+     * 开始时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    BeginTime?: string;
+    /**
+     * 结束时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    EndTime?: string;
+    /**
+     * 申请数量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InquireNum?: number;
+    /**
+     * 使用数量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    UsedNum?: number;
+    /**
+     * 续费标志
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RenewFlag?: number;
+    /**
+     * 计费项
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    BillingItem?: string;
+    /**
+     * 1 API安全6折
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    APICPWaf?: number;
+    /**
+     * 1 表示5折折扣
+  2 表示4折折扣
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    APINPWaf?: number;
+    /**
+     * api安全7天试用标识。1试用。0没试用
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IsAPISecurityTrial?: number;
 }
 /**
  * DescribePorts请求参数结构体
@@ -5157,6 +5236,11 @@ export interface InstanceInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     HybridPkg?: HybridPkg;
+    /**
+     * API安全资源包
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ApiPkg?: ApiPkg;
 }
 /**
  * CLB回调WAF接口（获取、删除）的参数
@@ -5992,6 +6076,11 @@ export interface BotPkg {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     BotNPWaf?: number;
+    /**
+     * 7天bot试用标识 1 试用 0 没有试用
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IsBotTrial?: number;
 }
 /**
  * SearchAttackLog返回参数结构体

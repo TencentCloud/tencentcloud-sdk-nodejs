@@ -378,9 +378,9 @@ it("waf.v20180125.ModifyHostStatus", async function () {
     }
 })
 
-it("waf.v20180125.ModifySpartaProtectionMode", async function () {
+it("waf.v20180125.DescribeModuleStatus", async function () {
     try {
-       const data = await client.ModifySpartaProtectionMode({})
+       const data = await client.DescribeModuleStatus({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -561,6 +561,16 @@ it("waf.v20180125.DescribePeakValue", async function () {
 it("waf.v20180125.ModifyWafThreatenIntelligence", async function () {
     try {
        const data = await client.ModifyWafThreatenIntelligence({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("waf.v20180125.ModifySpartaProtectionMode", async function () {
+    try {
+       const data = await client.ModifySpartaProtectionMode({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

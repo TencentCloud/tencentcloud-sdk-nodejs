@@ -39,6 +39,7 @@ import {
   InquirePriceCreateDisksRequest,
   ModifyBundle,
   DetachCcnResponse,
+  ShareBlueprintAcrossAccountsRequest,
   BlueprintPrice,
   DescribeScenesResponse,
   InquirePriceRenewInstancesResponse,
@@ -70,7 +71,7 @@ import {
   CreateDisksRequest,
   AssociateInstancesKeyPairsRequest,
   DockerContainer,
-  ImportKeyPairResponse,
+  CancelShareBlueprintAcrossAccountsResponse,
   DescribeSnapshotsRequest,
   TerminateDisksResponse,
   DiskBackup,
@@ -81,7 +82,7 @@ import {
   DescribeDockerContainerConfigurationRequest,
   ModifyBlueprintAttributeRequest,
   InquirePriceRenewDisksRequest,
-  TrafficPackage,
+  ShareBlueprintAcrossAccountsResponse,
   FirewallTemplateRuleInfo,
   Disk,
   ModifyFirewallRulesResponse,
@@ -134,6 +135,7 @@ import {
   SceneInfo,
   ImportKeyPairRequest,
   DescribeDockerActivitiesRequest,
+  ImportKeyPairResponse,
   DeleteBlueprintsResponse,
   ModifyInstancesLoginKeyPairAttributeRequest,
   IsolateInstancesRequest,
@@ -211,6 +213,7 @@ import {
   DescribeFirewallRulesResponse,
   DescribeInstancesReturnableResponse,
   ContainerEnv,
+  TrafficPackage,
   FirewallRule,
   DeleteBlueprintsRequest,
   FirewallRuleInfo,
@@ -284,6 +287,7 @@ import {
   AttachDetail,
   ModifyDisksAttributeResponse,
   CreateInstanceSnapshotRequest,
+  CancelShareBlueprintAcrossAccountsRequest,
   BlueprintInstance,
   InquirePriceCreateDisksResponse,
   InstanceChargePrepaid,
@@ -320,6 +324,17 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteBlueprintsResponse) => void
   ): Promise<DeleteBlueprintsResponse> {
     return this.request("DeleteBlueprints", req, cb)
+  }
+
+  /**
+     * 本接口（CancelShareBlueprintAcrossAccounts）用于取消镜像跨账号共享。
+指定的镜像ID必须为自定义镜像，且指定账号ID必须已进行共享。
+     */
+  async CancelShareBlueprintAcrossAccounts(
+    req: CancelShareBlueprintAcrossAccountsRequest,
+    cb?: (error: string, rep: CancelShareBlueprintAcrossAccountsResponse) => void
+  ): Promise<CancelShareBlueprintAcrossAccountsResponse> {
+    return this.request("CancelShareBlueprintAcrossAccounts", req, cb)
   }
 
   /**
@@ -898,6 +913,18 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeBundlesResponse) => void
   ): Promise<DescribeBundlesResponse> {
     return this.request("DescribeBundles", req, cb)
+  }
+
+  /**
+     * 本接口（ShareBlueprintAcrossAccounts）用于跨账号共享镜像。
+仅支持共享自定义镜像， 且用于共享的镜像状态必须为NORMAL。
+共享的账号必须为主账号。
+     */
+  async ShareBlueprintAcrossAccounts(
+    req: ShareBlueprintAcrossAccountsRequest,
+    cb?: (error: string, rep: ShareBlueprintAcrossAccountsResponse) => void
+  ): Promise<ShareBlueprintAcrossAccountsResponse> {
+    return this.request("ShareBlueprintAcrossAccounts", req, cb)
   }
 
   /**

@@ -38,6 +38,16 @@ it("lighthouse.v20200324.DeleteBlueprints", async function () {
     }
 })
 
+it("lighthouse.v20200324.CancelShareBlueprintAcrossAccounts", async function () {
+    try {
+       const data = await client.CancelShareBlueprintAcrossAccounts({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("lighthouse.v20200324.CreateFirewallRules", async function () {
     try {
        const data = await client.CreateFirewallRules({})
@@ -561,6 +571,16 @@ it("lighthouse.v20200324.CreateKeyPair", async function () {
 it("lighthouse.v20200324.DescribeBundles", async function () {
     try {
        const data = await client.DescribeBundles({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("lighthouse.v20200324.ShareBlueprintAcrossAccounts", async function () {
+    try {
+       const data = await client.ShareBlueprintAcrossAccounts({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

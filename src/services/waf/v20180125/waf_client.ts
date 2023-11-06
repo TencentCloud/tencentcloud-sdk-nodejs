@@ -39,6 +39,7 @@ import {
   DescribeDomainRulesRequest,
   DeleteDownloadRecordRequest,
   DeleteAccessExportResponse,
+  DescribeModuleStatusResponse,
   AccessKeyValueInfo,
   KVInt,
   AddAntiInfoLeakRulesRequest,
@@ -112,6 +113,7 @@ import {
   AddCustomWhiteRuleResponse,
   SwitchElasticModeRequest,
   HostDel,
+  DescribeModuleStatusRequest,
   DescribeAntiFakeUrlRequest,
   DeleteAttackWhiteRuleRequest,
   DescribeHostsResponse,
@@ -138,6 +140,7 @@ import {
   GetInstanceQpsLimitResponse,
   ModifyCustomWhiteRuleResponse,
   SearchItem,
+  ApiPkg,
   DescribePortsRequest,
   DescribeWafAutoDenyStatusResponse,
   DescribeTlsVersionRequest,
@@ -744,13 +747,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 设置waf防护状态
+   * 查询各个waf基础安全模块的开关状态，看每个模块是否开启
    */
-  async ModifySpartaProtectionMode(
-    req: ModifySpartaProtectionModeRequest,
-    cb?: (error: string, rep: ModifySpartaProtectionModeResponse) => void
-  ): Promise<ModifySpartaProtectionModeResponse> {
-    return this.request("ModifySpartaProtectionMode", req, cb)
+  async DescribeModuleStatus(
+    req?: DescribeModuleStatusRequest,
+    cb?: (error: string, rep: DescribeModuleStatusResponse) => void
+  ): Promise<DescribeModuleStatusResponse> {
+    return this.request("DescribeModuleStatus", req, cb)
   }
 
   /**
@@ -934,6 +937,16 @@ Waf  CC V2 Query接口
     cb?: (error: string, rep: ModifyWafThreatenIntelligenceResponse) => void
   ): Promise<ModifyWafThreatenIntelligenceResponse> {
     return this.request("ModifyWafThreatenIntelligence", req, cb)
+  }
+
+  /**
+   * 设置waf防护状态
+   */
+  async ModifySpartaProtectionMode(
+    req: ModifySpartaProtectionModeRequest,
+    cb?: (error: string, rep: ModifySpartaProtectionModeResponse) => void
+  ): Promise<ModifySpartaProtectionModeResponse> {
+    return this.request("ModifySpartaProtectionMode", req, cb)
   }
 
   /**

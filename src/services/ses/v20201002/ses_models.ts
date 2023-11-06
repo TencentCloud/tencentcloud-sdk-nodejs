@@ -43,10 +43,12 @@ export interface BatchSendEmailRequest {
   ReplyToAddresses?: string
   /**
    * 使用模板发送时，填写的模板相关参数
+<dx-alert infotype="notice" title="注意"> 如您未申请过特殊配置，则该字段为必填 </dx-alert>
    */
   Template?: Template
   /**
    * 已废弃
+<dx-alert infotype="notice" title="说明"> 仅部分历史上申请了特殊配置的客户需要使用。如您未申请过特殊配置，则不存在该字段。</dx-alert> 
    */
   Simple?: Simple
   /**
@@ -332,11 +334,13 @@ export interface SendEmailRequest {
    */
   Bcc?: Array<string>
   /**
-   * 使用模板发送时，填写的模板相关参数。因 Simple 已经废除使用，Template 为必填项
+   * 使用模板发送时，填写模板相关参数。
+<dx-alert infotype="notice" title="注意"> 如您未申请过特殊配置，则该字段为必填 </dx-alert>
    */
   Template?: Template
   /**
    * 已废弃
+<dx-alert infotype="notice" title="说明"> 仅部分历史上申请了特殊配置的客户需要使用。如您未申请过特殊配置，则不存在该字段。</dx-alert>
    */
   Simple?: Simple
   /**

@@ -5728,7 +5728,7 @@ export interface DeleteDataSourcesResponse {
    * 是否删除成功
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Data: boolean
+  Data?: boolean
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5951,6 +5951,10 @@ export interface DeleteDataSourcesRequest {
    * id列表
    */
   Ids: Array<number | bigint>
+  /**
+   * 项目id
+   */
+  ProjectId?: string
 }
 
 /**
@@ -7859,6 +7863,10 @@ export interface DescribeDsFolderTreeRequest {
    * 是否包含任务
    */
   IncludeTask?: boolean
+  /**
+   * 是否包含虚拟任务，当 IncludeTask 为 true 的时候，该参数才生效，默认为 true
+   */
+  IncludeVirtualTask?: boolean
 }
 
 /**
@@ -14974,7 +14982,7 @@ export interface ModifyDataSourceResponse {
    * 是否成功
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Data: boolean
+  Data?: boolean
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -16203,6 +16211,10 @@ export interface ModifyDataSourceRequest {
    * cos region
    */
   COSRegion?: string
+  /**
+   * 操作项目id
+   */
+  ProjectId?: string
 }
 
 /**

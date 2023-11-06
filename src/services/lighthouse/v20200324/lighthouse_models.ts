@@ -438,6 +438,20 @@ export interface DetachCcnResponse {
 }
 
 /**
+ * ShareBlueprintAcrossAccounts请求参数结构体
+ */
+export interface ShareBlueprintAcrossAccountsRequest {
+  /**
+   * 镜像ID, 可以通过[DescribeBlueprints](https://cloud.tencent.com/document/product/1207/47689)接口返回的BlueprintId获取。
+   */
+  BlueprintId: string
+  /**
+   * 接收共享镜像的账号Id列表。帐号ID不同于QQ号，查询用户帐号ID请查看帐号信息中的帐号ID栏。账号个数取值最大为10。
+   */
+  AccountIds: Array<string>
+}
+
+/**
  * BlueprintPrice	自定义镜像的价格参数。
  */
 export interface BlueprintPrice {
@@ -1012,13 +1026,9 @@ export interface DockerContainer {
 }
 
 /**
- * ImportKeyPair返回参数结构体
+ * CancelShareBlueprintAcrossAccounts返回参数结构体
  */
-export interface ImportKeyPairResponse {
-  /**
-   * 密钥对 ID。
-   */
-  KeyId: string
+export interface CancelShareBlueprintAcrossAccountsResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1242,53 +1252,13 @@ export interface InquirePriceRenewDisksRequest {
 }
 
 /**
- * 流量包详情
+ * ShareBlueprintAcrossAccounts返回参数结构体
  */
-export interface TrafficPackage {
+export interface ShareBlueprintAcrossAccountsResponse {
   /**
-   * 流量包ID。
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  TrafficPackageId: string
-  /**
-   * 流量包生效周期内已使用流量，单位字节。
-   */
-  TrafficUsed: number
-  /**
-   * 流量包生效周期内的总流量，单位字节。
-   */
-  TrafficPackageTotal: number
-  /**
-   * 流量包生效周期内的剩余流量，单位字节。
-   */
-  TrafficPackageRemaining: number
-  /**
-   * 流量包生效周期内超出流量包额度的流量，单位字节。
-   */
-  TrafficOverflow: number
-  /**
-   * 流量包生效周期开始时间。按照 ISO8601 标准表示，并且使用 UTC 时间。 
-格式为： YYYY-MM-DDThh:mm:ssZ。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  StartTime: string
-  /**
-   * 流量包生效周期结束时间。按照 ISO8601 标准表示，并且使用 UTC 时间。 
-格式为： YYYY-MM-DDThh:mm:ssZ。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  EndTime: string
-  /**
-   * 流量包到期时间。按照 ISO8601 标准表示，并且使用 UTC 时间。 
-格式为： YYYY-MM-DDThh:mm:ssZ。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Deadline: string
-  /**
-   * 流量包状态：
-<li>NETWORK_NORMAL：正常</li>
-<li>OVERDUE_NETWORK_DISABLED：欠费断网</li>
-   */
-  Status: string
+  RequestId?: string
 }
 
 /**
@@ -2206,6 +2176,20 @@ export interface DescribeDockerActivitiesRequest {
    * 活动创建时间的结束值，时间戳秒数。
    */
   CreatedTimeEnd?: number
+}
+
+/**
+ * ImportKeyPair返回参数结构体
+ */
+export interface ImportKeyPairResponse {
+  /**
+   * 密钥对 ID。
+   */
+  KeyId: string
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3802,6 +3786,56 @@ export interface ContainerEnv {
 }
 
 /**
+ * 流量包详情
+ */
+export interface TrafficPackage {
+  /**
+   * 流量包ID。
+   */
+  TrafficPackageId: string
+  /**
+   * 流量包生效周期内已使用流量，单位字节。
+   */
+  TrafficUsed: number
+  /**
+   * 流量包生效周期内的总流量，单位字节。
+   */
+  TrafficPackageTotal: number
+  /**
+   * 流量包生效周期内的剩余流量，单位字节。
+   */
+  TrafficPackageRemaining: number
+  /**
+   * 流量包生效周期内超出流量包额度的流量，单位字节。
+   */
+  TrafficOverflow: number
+  /**
+   * 流量包生效周期开始时间。按照 ISO8601 标准表示，并且使用 UTC 时间。 
+格式为： YYYY-MM-DDThh:mm:ssZ。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StartTime: string
+  /**
+   * 流量包生效周期结束时间。按照 ISO8601 标准表示，并且使用 UTC 时间。 
+格式为： YYYY-MM-DDThh:mm:ssZ。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EndTime: string
+  /**
+   * 流量包到期时间。按照 ISO8601 标准表示，并且使用 UTC 时间。 
+格式为： YYYY-MM-DDThh:mm:ssZ。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Deadline: string
+  /**
+   * 流量包状态：
+<li>NETWORK_NORMAL：正常</li>
+<li>OVERDUE_NETWORK_DISABLED：欠费断网</li>
+   */
+  Status: string
+}
+
+/**
  * 描述防火墙规则信息。
  */
 export interface FirewallRule {
@@ -5061,6 +5095,20 @@ export interface CreateInstanceSnapshotRequest {
    * 快照名称，最长为 60 个字符。
    */
   SnapshotName?: string
+}
+
+/**
+ * CancelShareBlueprintAcrossAccounts请求参数结构体
+ */
+export interface CancelShareBlueprintAcrossAccountsRequest {
+  /**
+   * 镜像ID, 可以通过[DescribeBlueprints](https://cloud.tencent.com/document/product/1207/47689)接口返回的BlueprintId获取。
+   */
+  BlueprintId: string
+  /**
+   * 接收共享镜像的账号ID列表。帐号ID不同于QQ号，查询用户帐号ID请查看帐号信息中的帐号ID栏。账号个数取值最大为10。
+   */
+  AccountIds: Array<string>
 }
 
 /**
