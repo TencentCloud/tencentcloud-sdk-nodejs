@@ -18,6 +18,16 @@ const client = new tencentcloud.mna.v20210119.Client({
 })
 describe("mna.v20210119.test.js", function () {
 
+it("mna.v20210119.GetNetMonitor", async function () {
+    try {
+       const data = await client.GetNetMonitor({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mna.v20210119.GetStatisticData", async function () {
     try {
        const data = await client.GetStatisticData({})

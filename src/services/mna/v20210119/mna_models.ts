@@ -137,6 +137,42 @@ export interface DestAddressInfo {
 }
 
 /**
+ * GetNetMonitor返回参数结构体
+ */
+export interface GetNetMonitorResponse {
+  /**
+   * 监控数据
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MonitorData?: Array<MonitorData>
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 网卡流量指标数据
+ */
+export interface SlotNetInfo {
+  /**
+   * 网卡名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NetInfoName: string
+  /**
+   * 公网IP
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PublicIP: string
+  /**
+   * 指标数据（bps/ms/%）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Current: number
+}
+
+/**
  * DeleteQos请求参数结构体
  */
 export interface DeleteQosRequest {
@@ -144,6 +180,28 @@ export interface DeleteQosRequest {
    * 单次加速唯一 Id
    */
   SessionId: string
+}
+
+/**
+ * GetNetMonitor请求参数结构体
+ */
+export interface GetNetMonitorRequest {
+  /**
+   * 设备id
+   */
+  DeviceId: string
+  /**
+   * 开始时间
+   */
+  BeginTime: number
+  /**
+   * 结束时间
+   */
+  EndTime: number
+  /**
+   * 统计指标（上行速率："TxRate":bit/s，下行速率："RxRate":bit/s，丢包："Loss":%，时延："RTT":ms）
+   */
+  Metrics: string
 }
 
 /**
@@ -722,25 +780,23 @@ export interface DescribeQosRequest {
 }
 
 /**
- * 测速数据
+ * 流量监控指标
  */
-export interface NetworkData {
+export interface MonitorData {
   /**
-   * 时延数组，最大长度30
+   * 时间点：s
    */
-  RTT: Array<number>
+  Time: string
   /**
-   * 丢包率
+   * 业务指标（bps/ms/%）
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Loss: number
+  BusinessMetrics: number
   /**
-   * 抖动
+   * 网卡状态信息
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Jitter: number
-  /**
-   * 10位秒级时间戳
-   */
-  Timestamp: number
+  SlotNetInfo: Array<SlotNetInfo>
 }
 
 /**
@@ -830,6 +886,28 @@ export interface GetDevicesRequest {
 2:三方设备
    */
   DeviceType?: number
+}
+
+/**
+ * 测速数据
+ */
+export interface NetworkData {
+  /**
+   * 时延数组，最大长度30
+   */
+  RTT: Array<number>
+  /**
+   * 丢包率
+   */
+  Loss: number
+  /**
+   * 抖动
+   */
+  Jitter: number
+  /**
+   * 10位秒级时间戳
+   */
+  Timestamp: number
 }
 
 /**

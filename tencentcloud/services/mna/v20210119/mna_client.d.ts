@@ -1,12 +1,16 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { GetDeviceResponse, GetFlowStatisticResponse, GetFlowStatisticRequest, DeleteQosRequest, GetMultiFlowStatisticResponse, CreateQosResponse, DescribeQosResponse, CreateEncryptedKeyRequest, DeleteDeviceRequest, CreateEncryptedKeyResponse, UpdateDeviceResponse, CreateQosRequest, GetStatisticDataRequest, UpdateDeviceRequest, GetPublicKeyResponse, GetMultiFlowStatisticRequest, DeleteQosResponse, AddDeviceResponse, GetDeviceRequest, GetDevicesResponse, DescribeQosRequest, DeleteDeviceResponse, GetStatisticDataResponse, GetDevicesRequest, AddDeviceRequest, GetPublicKeyRequest } from "./mna_models";
+import { GetDeviceResponse, GetFlowStatisticResponse, GetFlowStatisticRequest, GetNetMonitorResponse, DeleteQosRequest, GetNetMonitorRequest, GetMultiFlowStatisticResponse, CreateQosResponse, DescribeQosResponse, CreateEncryptedKeyRequest, DeleteDeviceRequest, CreateEncryptedKeyResponse, UpdateDeviceResponse, CreateQosRequest, GetStatisticDataRequest, UpdateDeviceRequest, GetPublicKeyResponse, GetMultiFlowStatisticRequest, DeleteQosResponse, AddDeviceResponse, GetDeviceRequest, GetDevicesResponse, DescribeQosRequest, DeleteDeviceResponse, GetStatisticDataResponse, GetDevicesRequest, AddDeviceRequest, GetPublicKeyRequest } from "./mna_models";
 /**
  * mna client
  * @class
  */
 export declare class Client extends AbstractClient {
     constructor(clientConfig: ClientConfig);
+    /**
+     * 获取单设备的实时流量统计指标
+     */
+    GetNetMonitor(req: GetNetMonitorRequest, cb?: (error: string, rep: GetNetMonitorResponse) => void): Promise<GetNetMonitorResponse>;
     /**
      * 在用量统计页面下载流量数据
      */

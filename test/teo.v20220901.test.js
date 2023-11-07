@@ -238,9 +238,29 @@ it("teo.v20220901.DescribeAvailablePlans", async function () {
     }
 })
 
+it("teo.v20220901.BindSharedCNAME", async function () {
+    try {
+       const data = await client.BindSharedCNAME({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("teo.v20220901.IdentifyZone", async function () {
     try {
        const data = await client.IdentifyZone({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("teo.v20220901.ModifyAliasDomainStatus", async function () {
+    try {
+       const data = await client.ModifyAliasDomainStatus({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -408,9 +428,9 @@ it("teo.v20220901.ModifyZoneStatus", async function () {
     }
 })
 
-it("teo.v20220901.ModifyAliasDomainStatus", async function () {
+it("teo.v20220901.DescribeOriginGroup", async function () {
     try {
-       const data = await client.ModifyAliasDomainStatus({})
+       const data = await client.DescribeOriginGroup({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -508,9 +528,9 @@ it("teo.v20220901.DescribeDDoSAttackData", async function () {
     }
 })
 
-it("teo.v20220901.DescribeDDoSAttackEvent", async function () {
+it("teo.v20220901.DeleteSharedCNAME", async function () {
     try {
-       const data = await client.DescribeDDoSAttackEvent({})
+       const data = await client.DeleteSharedCNAME({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -638,9 +658,9 @@ it("teo.v20220901.CreateApplicationProxy", async function () {
     }
 })
 
-it("teo.v20220901.DescribeOriginGroup", async function () {
+it("teo.v20220901.DescribeDDoSAttackEvent", async function () {
     try {
-       const data = await client.DescribeOriginGroup({})
+       const data = await client.DescribeDDoSAttackEvent({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

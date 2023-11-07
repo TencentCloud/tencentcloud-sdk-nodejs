@@ -34,7 +34,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ApplyConcurrent", req, cb);
     }
     /**
-     * 销毁会话
+     * 销毁会话。如果该会话开启了云端推流，那么销毁会话时会结束云端推流。
      */
     async DestroySession(req, cb) {
         return this.request("DestroySession", req, cb);

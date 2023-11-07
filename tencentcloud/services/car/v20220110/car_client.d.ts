@@ -12,7 +12,7 @@ export declare class Client extends AbstractClient {
      */
     ApplyConcurrent(req: ApplyConcurrentRequest, cb?: (error: string, rep: ApplyConcurrentResponse) => void): Promise<ApplyConcurrentResponse>;
     /**
-     * 销毁会话
+     * 销毁会话。如果该会话开启了云端推流，那么销毁会话时会结束云端推流。
      */
     DestroySession(req: DestroySessionRequest, cb?: (error: string, rep: DestroySessionResponse) => void): Promise<DestroySessionResponse>;
     /**

@@ -353,17 +353,21 @@ export interface DescribeShipperTasksResponse {
 }
 
 /**
- * CreateMachineGroup返回参数结构体
+ * CheckFunction请求参数结构体
  */
-export interface CreateMachineGroupResponse {
+export interface CheckFunctionRequest {
   /**
-   * 机器组ID
+   * 用户输入的加工语句
    */
-  GroupId?: string
+  EtlContent: string
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 加工任务目的topic_id以及别名
    */
-  RequestId?: string
+  DstResources?: Array<DataTransformResouceInfo>
+  /**
+   * 数据加工目标主题的类型. 1 固定主题 2动态创建
+   */
+  FuncType?: number
 }
 
 /**
@@ -818,6 +822,24 @@ export interface ContainerStdoutInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CustomLabels?: Array<string>
+}
+
+/**
+ * CheckFunction返回参数结构体
+ */
+export interface CheckFunctionResponse {
+  /**
+   * 失败错误码
+   */
+  ErrorCode?: number
+  /**
+   * 失败错误信息
+   */
+  ErrorMsg?: string
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2407,9 +2429,13 @@ export interface ConfigExtraInfo {
 }
 
 /**
- * RetryShipperTask返回参数结构体
+ * CreateMachineGroup返回参数结构体
  */
-export interface RetryShipperTaskResponse {
+export interface CreateMachineGroupResponse {
+  /**
+   * 机器组ID
+   */
+  GroupId?: string
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3025,19 +3051,13 @@ export interface DescribeConsumerResponse {
 }
 
 /**
- * 多主题检索返回信息
+ * RetryShipperTask返回参数结构体
  */
-export interface SearchLogTopics {
+export interface RetryShipperTaskResponse {
   /**
-   * 多日志主题检索对应的错误信息
-注意：此字段可能返回 null，表示取不到有效值。
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  Errors?: Array<SearchLogErrors>
-  /**
-   * 多日志主题检索各日志主题信息
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Infos?: Array<SearchLogInfos>
+  RequestId?: string
 }
 
 /**
@@ -5555,6 +5575,22 @@ export interface MonitorTime {
    * 执行的周期，或者定制执行的时间节点。单位为分钟，取值范围为1~1440。
    */
   Time: number
+}
+
+/**
+ * 多主题检索返回信息
+ */
+export interface SearchLogTopics {
+  /**
+   * 多日志主题检索对应的错误信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Errors?: Array<SearchLogErrors>
+  /**
+   * 多日志主题检索各日志主题信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Infos?: Array<SearchLogInfos>
 }
 
 /**

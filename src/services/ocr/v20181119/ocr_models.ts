@@ -7522,55 +7522,55 @@ export interface VatInvoice {
   /**
    * 发票代码
    */
-  Code: string
+  Code?: string
   /**
    * 发票号码
    */
-  Number: string
+  Number?: string
   /**
    * 开票日期
    */
-  Date: string
+  Date?: string
   /**
    * 购方抬头
    */
-  BuyerName: string
+  BuyerName?: string
   /**
    * 购方税号
    */
-  BuyerTaxCode: string
+  BuyerTaxCode?: string
   /**
    * 购方地址电话
    */
-  BuyerAddressPhone: string
+  BuyerAddressPhone?: string
   /**
    * 购方银行账号
    */
-  BuyerBankAccount: string
+  BuyerBankAccount?: string
   /**
    * 销方名称
    */
-  SellerName: string
+  SellerName?: string
   /**
    * 销方税号
    */
-  SellerTaxCode: string
+  SellerTaxCode?: string
   /**
    * 销方地址电话
    */
-  SellerAddressPhone: string
+  SellerAddressPhone?: string
   /**
    * 销方银行账号
    */
-  SellerBankAccount: string
+  SellerBankAccount?: string
   /**
    * 备注
    */
-  Remark: string
+  Remark?: string
   /**
    * 机器编码
    */
-  MachineNo: string
+  MachineNo?: string
   /**
    * 票种类型
 01：增值税专用发票，
@@ -7585,54 +7585,72 @@ export interface VatInvoice {
 32：深圳区块链发票，
 102：通用机打电子发票
    */
-  Type: string
+  Type?: string
   /**
    * 检验码
    */
-  CheckCode: string
+  CheckCode?: string
   /**
    * 是否作废（红冲）是否作废（红冲）
 Y：已作废，N：未作废，H：红冲，HP：部分红冲，HF：全额红冲
    */
-  IsAbandoned: string
+  IsAbandoned?: string
   /**
    * 是否有销货清单 
 Y: 有清单 N：无清单 
 卷票无
    */
-  HasSellerList: string
+  HasSellerList?: string
   /**
    * 销货清单标题
    */
-  SellerListTitle: string
+  SellerListTitle?: string
   /**
    * 销货清单税额
    */
-  SellerListTax: string
+  SellerListTax?: string
   /**
    * 不含税金额
    */
-  AmountWithoutTax: string
+  AmountWithoutTax?: string
   /**
    * 税额
    */
-  TaxAmount: string
+  TaxAmount?: string
   /**
    * 含税金额
    */
-  AmountWithTax: string
+  AmountWithTax?: string
   /**
    * 项目明细
    */
-  Items: Array<VatInvoiceItem>
+  Items?: Array<VatInvoiceItem>
   /**
    * 所属税局
    */
-  TaxBureau: string
+  TaxBureau?: string
   /**
    * 通行费标志:Y、是;N、否
    */
-  TrafficFreeFlag: string
+  TrafficFreeFlag?: string
+  /**
+   * 是否为红票
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RedLetterInvoiceMark?: boolean
+  /**
+   * 开具类型标识（0: 委托代开，1：自开，2：代开，3：代办退税
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IssuingTypeMark?: number
+  /**
+   * 代开销售方名称
+   */
+  SellerAgentName?: string
+  /**
+   * 代开销售方税号
+   */
+  SellerAgentTaxID?: string
 }
 
 /**

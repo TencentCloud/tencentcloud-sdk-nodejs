@@ -7441,7 +7441,32 @@ export interface DescribeDomainRulesResponse {
 /**
  * DescribeCCRuleList请求参数结构体
  */
-export declare type DescribeCCRuleListRequest = null;
+export interface DescribeCCRuleListRequest {
+    /**
+     * 需要查询的API所属的域名
+     */
+    Domain: string;
+    /**
+     * 偏移
+     */
+    Offset: number;
+    /**
+     * 容量
+     */
+    Limit: number;
+    /**
+     * 目前支持根据ts_version排序
+     */
+    By: string;
+    /**
+     * 过滤数组,name可以是如下的值： RuleID,ParamName,Url,Action,Method,Source,Status
+     */
+    Filters?: Array<FiltersItemNew>;
+    /**
+     * asc或者desc
+     */
+    Order?: string;
+}
 /**
  * DescribeDomainVerifyResult返回参数结构体
  */

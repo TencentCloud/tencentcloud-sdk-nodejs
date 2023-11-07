@@ -513,7 +513,7 @@ Waf  CC V2 Query接口
     /**
      * 根据多条件查询CC规则
      */
-    DescribeCCRuleList(req?: DescribeCCRuleListRequest, cb?: (error: string, rep: DescribeCCRuleListResponse) => void): Promise<DescribeCCRuleListResponse>;
+    DescribeCCRuleList(req: DescribeCCRuleListRequest, cb?: (error: string, rep: DescribeCCRuleListResponse) => void): Promise<DescribeCCRuleListResponse>;
     /**
      * clb-waf中添加防护域名
      */

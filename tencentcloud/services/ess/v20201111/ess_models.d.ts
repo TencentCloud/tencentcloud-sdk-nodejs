@@ -12,6 +12,69 @@ export interface DescribePersonCertificateResponse {
     RequestId?: string;
 }
 /**
+ * 用户计费使用情况详情
+ */
+export interface BillUsageDetail {
+    /**
+     * 合同流程ID，为32位字符串。
+  建议开发者妥善保存此流程ID，以便于顺利进行后续操作。
+  可登录腾讯电子签控制台，在 "合同"->"合同中心" 中查看某个合同的FlowId(在页面中展示为合同ID)。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    FlowId?: string;
+    /**
+     * 经办人名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    OperatorName?: string;
+    /**
+     * 发起方组织机构名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CreateOrganizationName?: string;
+    /**
+     * 合同流程的名称（可自定义此名称），长度不能超过200，只能由中文、字母、数字和下划线组成。
+  该名称还将用于合同签署完成后的下载文件名。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    FlowName?: string;
+    /**
+     * 0 还没有发起 1等待签署 2部分签署 3拒签 4已签署 5已过期 6已撤销 7还没有预发起 8等待填写 9部分填写 10拒填 11已解除
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Status?: number;
+    /**
+     * 套餐类型
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    QuotaType?: string;
+    /**
+     * 合同使用量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    UseCount?: number;
+    /**
+     * 消耗的时间戳
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CostTime?: number;
+    /**
+     * 套餐名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    QuotaName?: string;
+    /**
+     *  消耗类型	1.扣费 2.撤销返还
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CostType?: number;
+    /**
+     * 备注
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Remark?: string;
+}
+/**
  * CreateSeal请求参数结构体
  */
 export interface CreateSealRequest {
@@ -42,7 +105,7 @@ export interface CreateSealRequest {
      * 电子印章类型 , 可选类型如下:
   <ul><li>**OFFICIAL**: (默认)公章</li>
   <li>**CONTRACT**: 合同专用章;</li>
-  <li>**FINANCE**: 合财务专用章;</li>
+  <li>**FINANCE**: 财务专用章;</li>
   <li>**PERSONNEL**: 人事专用章</li>
   </ul>
   注: `同企业下只能有一个公章, 重复创建会报错`
@@ -1419,6 +1482,7 @@ export interface DescribeIntegrationEmployeesRequest {
     <li>Key:**"UserId"**，根据用户ID查询员工，Values为指定的用户ID：**["UserId"]**</li>
     <li>Key:**"UserWeWorkOpenId"**，根据用户企微账号ID查询员工，Values为指定用户的企微账号ID：**["UserWeWorkOpenId"]**</li>
     <li>Key:**"StaffOpenId"**，根据第三方系统用户OpenId查询员工，Values为第三方系统用户OpenId列表：**["OpenId1","OpenId2",...]**</li>
+    <li>Key:**"RoleId"**，根据电子签角色ID查询员工，Values为指定的角色ID，满足其中任意一个角色即可：**["RoleId1","RoleId2",...]**</li>
   </ul>
      */
     Filters?: Array<Filter>;
@@ -1851,6 +1915,20 @@ export interface Permission {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Children?: Array<Permission>;
+}
+/**
+ * DescribeFlowBriefs返回参数结构体
+ */
+export interface DescribeFlowBriefsResponse {
+    /**
+     * 合同流程基础信息列表，包含流程的名称、状态、创建日期等基本信息。
+  注：`与入参 FlowIds 的顺序可能存在不一致的情况。`
+     */
+    FlowBriefs?: Array<FlowBrief>;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * 企业员工信息。
@@ -2608,47 +2686,151 @@ export interface CreateSchemeUrlResponse {
     RequestId?: string;
 }
 /**
- * CreateUserAutoSignEnableUrl返回参数结构体
+ * CreateFlowByFiles请求参数结构体
  */
-export interface CreateUserAutoSignEnableUrlResponse {
+export interface CreateFlowByFilesRequest {
     /**
-     * 个人用户自动签的开通链接, 短链形式。过期时间受 `ExpiredTime` 参数控制。
-     */
-    Url?: string;
-    /**
-     * 腾讯电子签小程序的 AppID，用于其他小程序/APP等应用跳转至腾讯电子签小程序使用
+     * 执行本接口操作的员工信息。使用此接口时，必须填写userId。
+  支持填入集团子公司经办人 userId 代发合同。
   
-  注: `如果获取的是H5链接, 则不会返回此值`
+  注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。`
      */
-    AppId?: string;
+    Operator: UserInfo;
     /**
-     * 腾讯电子签小程序的原始 Id,  ，用于其他小程序/APP等应用跳转至腾讯电子签小程序使用
+     * 合同流程的名称（可自定义此名称），长度不能超过200，只能由中文、字母、数字和下划线组成。
   
-  注: `如果获取的是H5链接, 则不会返回此值`
+  该名称还将用于合同签署完成后的下载文件名。
      */
-    AppOriginalId?: string;
+    FlowName: string;
     /**
-     * 腾讯电子签小程序的跳转路径，用于其他小程序/APP等应用跳转至腾讯电子签小程序使用
+     * 合同流程的参与方列表，最多可支持50个参与方，可在列表中指定企业B端签署方和个人C端签署方的联系和认证方式等信息，具体定义可以参考开发者中心的ApproverInfo结构体。
   
-  注: `如果获取的是H5链接, 则不会返回此值`
+  如果合同流程是有序签署，Approvers列表中参与人的顺序就是默认的签署顺序，请确保列表中参与人的顺序符合实际签署顺序。
      */
-    Path?: string;
+    Approvers: Array<ApproverInfo>;
     /**
-     * base64 格式的跳转二维码图片，可通过微信扫描后跳转到腾讯电子签小程序的开通界面。
+     * 本合同流程需包含的PDF文件资源编号列表，通过<a href="https://qian.tencent.com/developers/companyApis/templatesAndFiles/UploadFiles" target="_blank">UploadFiles</a>接口获取PDF文件资源编号。
   
-  注: `如果获取的是H5链接, 则不会返回此二维码图片`
+  注:  `目前，此接口仅支持单个文件发起。`
      */
-    QrCode?: string;
+    FileIds: Array<string>;
     /**
-     * 返回的链接类型
-  <ul><li> 空: 默认小程序端链接</li>
-  <li> **H5SIGN** : h5端链接</li></ul>
+     * 合同流程描述信息(可自定义此描述)，最大长度1000个字符。
      */
-    UrlType?: string;
+    FlowDescription?: string;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     * 合同流程的类别分类（可自定义名称，如销售合同/入职合同等），最大长度为200个字符，仅限中文、字母、数字和下划线组成。
      */
-    RequestId?: string;
+    FlowType?: string;
+    /**
+     * 模板或者合同中的填写控件列表，列表中可支持下列多种填写控件，控件的详细定义参考开发者中心的Component结构体
+  <ul><li> 单行文本控件      </li>
+  <li> 多行文本控件      </li>
+  <li> 勾选框控件        </li>
+  <li> 数字控件          </li>
+  <li> 图片控件          </li>
+  <li> 动态表格等填写控件</li></ul>
+     */
+    Components?: Array<Component>;
+    /**
+     * 合同流程的抄送人列表，最多可支持50个抄送人，抄送人可查看合同内容及签署进度，但无需参与合同签署。
+  
+     */
+    CcInfos?: Array<CcInfo>;
+    /**
+     * 可以设置以下时间节点来给抄送人发送短信通知来查看合同内容：
+  <ul><li> **0**：合同发起时通知（默认值）</li>
+  <li> **1**：签署完成后通知</li></ul>
+     */
+    CcNotifyType?: number;
+    /**
+     * 是否为预览模式，取值如下：
+  <ul><li> **false**：非预览模式（默认），会产生合同流程并返回合同流程编号FlowId。</li>
+  <li> **true**：预览模式，不产生合同流程，不返回合同流程编号FlowId，而是返回预览链接PreviewUrl，有效期为300秒，用于查看真实发起后合同的样子。</li></ul>
+     */
+    NeedPreview?: boolean;
+    /**
+     * 预览模式下产生的预览链接类型
+  <ul><li> **0** :(默认) 文件流 ,点开后后下载预览的合同PDF文件 </li>
+  <li> **1** :H5链接 ,点开后在浏览器中展示合同的样子</li></ul>
+  注: `此参数在NeedPreview 为true时有效`
+  
+     */
+    PreviewType?: number;
+    /**
+     * 合同流程的签署截止时间，格式为Unix标准时间戳（秒），如果未设置签署截止时间，则默认为合同流程创建后的365天时截止。
+  如果在签署截止时间前未完成签署，则合同状态会变为已过期，导致合同作废。
+     */
+    Deadline?: number;
+    /**
+     * 合同到期提醒时间，为Unix标准时间戳（秒）格式，支持的范围是从发起时间开始到后10年内。
+  
+  到达提醒时间后，腾讯电子签会短信通知发起方企业合同提醒，可用于处理合同到期事务，如合同续签等事宜。
+     */
+    RemindedOn?: number;
+    /**
+     * 合同流程的签署顺序类型：
+  <ul><li> **false**：(默认)有序签署, 本合同多个参与人需要依次签署 </li>
+  <li> **true**：无序签署, 本合同多个参与人没有先后签署限制</li></ul>
+     */
+    Unordered?: boolean;
+    /**
+     * 您可以自定义腾讯电子签小程序合同列表页展示的合同内容模板，模板中支持以下变量：
+  <ul><li>{合同名称}   </li>
+  <li>{发起方企业} </li>
+  <li>{发起方姓名} </li>
+  <li>{签署方N企业}</li>
+  <li>{签署方N姓名}</li></ul>
+  其中，N表示签署方的编号，从1开始，不能超过签署人的数量。
+  
+  例如，如果是腾讯公司张三发给李四名称为“租房合同”的合同，您可以将此字段设置为：`合同名称:{合同名称};发起方: {发起方企业}({发起方姓名});签署方:{签署方1姓名}`，则小程序中列表页展示此合同为以下样子
+  
+  合同名称：租房合同
+  发起方：腾讯公司(张三)
+  签署方：李四
+  
+  
+     */
+    CustomShowMap?: string;
+    /**
+     * 发起方企业的签署人进行签署操作前，是否需要企业内部走审批流程，取值如下：
+  <ul><li> **false**：（默认）不需要审批，直接签署。</li>
+  <li> **true**：需要走审批流程。当到对应参与人签署时，会阻塞其签署操作，等待企业内部审批完成。</li></ul>
+  企业可以通过CreateFlowSignReview审批接口通知腾讯电子签平台企业内部审批结果
+  <ul><li> 如果企业通知腾讯电子签平台审核通过，签署方可继续签署动作。</li>
+  <li> 如果企业通知腾讯电子签平台审核未通过，平台将继续阻塞签署方的签署动作，直到企业通知平台审核通过。</li></ul>
+  注：`此功能可用于与企业内部的审批流程进行关联，支持手动、静默签署合同`
+     */
+    NeedSignReview?: boolean;
+    /**
+     * 调用方自定义的个性化字段(可自定义此名称)，并以base64方式编码，支持的最大数据大小为 20480长度。
+  
+  在合同状态变更的回调信息等场景中，该字段的信息将原封不动地透传给贵方。回调的相关说明可参考开发者中心的<a href="https://qian.tencent.com/developers/company/callback_types_v2" target="_blank">回调通知</a>模块。
+     */
+    UserData?: string;
+    /**
+     * 指定个人签署方查看合同的校验方式
+  <ul><li>   **VerifyCheck**  :（默认）人脸识别,人脸识别后才能合同内容 </li>
+  <li>   **MobileCheck**  :  手机号验证, 用户手机号和参与方手机号（ApproverMobile）相同即可查看合同内容（当手写签名方式为OCR_ESIGN时，该校验方式无效，因为这种签名方式依赖实名认证）</li></ul>
+     */
+    ApproverVerifyType?: string;
+    /**
+     * 签署方签署控件（印章/签名等）的生成方式：
+  <ul><li> **0**：在合同流程发起时，由发起人指定签署方的签署控件的位置和数量。</li>
+  <li> **1**：签署方在签署时自行添加签署控件，可以拖动位置和控制数量。</li></ul>
+     */
+    SignBeanTag?: number;
+    /**
+     * 代理企业和员工的信息。
+  在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。
+     */
+    Agent?: Agent;
+    /**
+     * 个人自动签名的使用场景包括以下, 个人自动签署(即ApproverType设置成个人自动签署时)业务此值必传：
+  <ul><li> **E_PRESCRIPTION_AUTO_SIGN**：处方单（医疗自动签）  </li></ul>
+  注: `个人自动签名场景是白名单功能，使用前请与对接的客户经理联系沟通。`
+     */
+    AutoSignScene?: string;
 }
 /**
  * 此结构体(FlowGroupInfo)描述的是合同组(流程组)的单个合同(流程)信息
@@ -3954,153 +4136,6 @@ export interface DeleteIntegrationRoleUsersRequest {
      * 代理企业和员工的信息。 在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。
      */
     Agent?: Agent;
-}
-/**
- * CreateFlowByFiles请求参数结构体
- */
-export interface CreateFlowByFilesRequest {
-    /**
-     * 执行本接口操作的员工信息。使用此接口时，必须填写userId。
-  支持填入集团子公司经办人 userId 代发合同。
-  
-  注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。`
-     */
-    Operator: UserInfo;
-    /**
-     * 合同流程的名称（可自定义此名称），长度不能超过200，只能由中文、字母、数字和下划线组成。
-  
-  该名称还将用于合同签署完成后的下载文件名。
-     */
-    FlowName: string;
-    /**
-     * 合同流程的参与方列表，最多可支持50个参与方，可在列表中指定企业B端签署方和个人C端签署方的联系和认证方式等信息，具体定义可以参考开发者中心的ApproverInfo结构体。
-  
-  如果合同流程是有序签署，Approvers列表中参与人的顺序就是默认的签署顺序，请确保列表中参与人的顺序符合实际签署顺序。
-     */
-    Approvers: Array<ApproverInfo>;
-    /**
-     * 本合同流程需包含的PDF文件资源编号列表，通过<a href="https://qian.tencent.com/developers/companyApis/templatesAndFiles/UploadFiles" target="_blank">UploadFiles</a>接口获取PDF文件资源编号。
-  
-  注:  `目前，此接口仅支持单个文件发起。`
-     */
-    FileIds: Array<string>;
-    /**
-     * 合同流程描述信息(可自定义此描述)，最大长度1000个字符。
-     */
-    FlowDescription?: string;
-    /**
-     * 合同流程的类别分类（可自定义名称，如销售合同/入职合同等），最大长度为200个字符，仅限中文、字母、数字和下划线组成。
-     */
-    FlowType?: string;
-    /**
-     * 模板或者合同中的填写控件列表，列表中可支持下列多种填写控件，控件的详细定义参考开发者中心的Component结构体
-  <ul><li> 单行文本控件      </li>
-  <li> 多行文本控件      </li>
-  <li> 勾选框控件        </li>
-  <li> 数字控件          </li>
-  <li> 图片控件          </li>
-  <li> 动态表格等填写控件</li></ul>
-     */
-    Components?: Array<Component>;
-    /**
-     * 合同流程的抄送人列表，最多可支持50个抄送人，抄送人可查看合同内容及签署进度，但无需参与合同签署。
-  
-     */
-    CcInfos?: Array<CcInfo>;
-    /**
-     * 可以设置以下时间节点来给抄送人发送短信通知来查看合同内容：
-  <ul><li> **0**：合同发起时通知（默认值）</li>
-  <li> **1**：签署完成后通知</li></ul>
-     */
-    CcNotifyType?: number;
-    /**
-     * 是否为预览模式，取值如下：
-  <ul><li> **false**：非预览模式（默认），会产生合同流程并返回合同流程编号FlowId。</li>
-  <li> **true**：预览模式，不产生合同流程，不返回合同流程编号FlowId，而是返回预览链接PreviewUrl，有效期为300秒，用于查看真实发起后合同的样子。</li></ul>
-     */
-    NeedPreview?: boolean;
-    /**
-     * 预览模式下产生的预览链接类型
-  <ul><li> **0** :(默认) 文件流 ,点开后后下载预览的合同PDF文件 </li>
-  <li> **1** :H5链接 ,点开后在浏览器中展示合同的样子</li></ul>
-  注: `此参数在NeedPreview 为true时有效`
-  
-     */
-    PreviewType?: number;
-    /**
-     * 合同流程的签署截止时间，格式为Unix标准时间戳（秒），如果未设置签署截止时间，则默认为合同流程创建后的365天时截止。
-  如果在签署截止时间前未完成签署，则合同状态会变为已过期，导致合同作废。
-     */
-    Deadline?: number;
-    /**
-     * 合同到期提醒时间，为Unix标准时间戳（秒）格式，支持的范围是从发起时间开始到后10年内。
-  
-  到达提醒时间后，腾讯电子签会短信通知发起方企业合同提醒，可用于处理合同到期事务，如合同续签等事宜。
-     */
-    RemindedOn?: number;
-    /**
-     * 合同流程的签署顺序类型：
-  <ul><li> **false**：(默认)有序签署, 本合同多个参与人需要依次签署 </li>
-  <li> **true**：无序签署, 本合同多个参与人没有先后签署限制</li></ul>
-     */
-    Unordered?: boolean;
-    /**
-     * 您可以自定义腾讯电子签小程序合同列表页展示的合同内容模板，模板中支持以下变量：
-  <ul><li>{合同名称}   </li>
-  <li>{发起方企业} </li>
-  <li>{发起方姓名} </li>
-  <li>{签署方N企业}</li>
-  <li>{签署方N姓名}</li></ul>
-  其中，N表示签署方的编号，从1开始，不能超过签署人的数量。
-  
-  例如，如果是腾讯公司张三发给李四名称为“租房合同”的合同，您可以将此字段设置为：`合同名称:{合同名称};发起方: {发起方企业}({发起方姓名});签署方:{签署方1姓名}`，则小程序中列表页展示此合同为以下样子
-  
-  合同名称：租房合同
-  发起方：腾讯公司(张三)
-  签署方：李四
-  
-  
-     */
-    CustomShowMap?: string;
-    /**
-     * 发起方企业的签署人进行签署操作前，是否需要企业内部走审批流程，取值如下：
-  <ul><li> **false**：（默认）不需要审批，直接签署。</li>
-  <li> **true**：需要走审批流程。当到对应参与人签署时，会阻塞其签署操作，等待企业内部审批完成。</li></ul>
-  企业可以通过CreateFlowSignReview审批接口通知腾讯电子签平台企业内部审批结果
-  <ul><li> 如果企业通知腾讯电子签平台审核通过，签署方可继续签署动作。</li>
-  <li> 如果企业通知腾讯电子签平台审核未通过，平台将继续阻塞签署方的签署动作，直到企业通知平台审核通过。</li></ul>
-  注：`此功能可用于与企业内部的审批流程进行关联，支持手动、静默签署合同`
-     */
-    NeedSignReview?: boolean;
-    /**
-     * 调用方自定义的个性化字段(可自定义此名称)，并以base64方式编码，支持的最大数据大小为 20480长度。
-  
-  在合同状态变更的回调信息等场景中，该字段的信息将原封不动地透传给贵方。回调的相关说明可参考开发者中心的<a href="https://qian.tencent.com/developers/company/callback_types_v2" target="_blank">回调通知</a>模块。
-     */
-    UserData?: string;
-    /**
-     * 指定个人签署方查看合同的校验方式
-  <ul><li>   **VerifyCheck**  :（默认）人脸识别,人脸识别后才能合同内容 </li>
-  <li>   **MobileCheck**  :  手机号验证, 用户手机号和参与方手机号（ApproverMobile）相同即可查看合同内容（当手写签名方式为OCR_ESIGN时，该校验方式无效，因为这种签名方式依赖实名认证）</li></ul>
-     */
-    ApproverVerifyType?: string;
-    /**
-     * 签署方签署控件（印章/签名等）的生成方式：
-  <ul><li> **0**：在合同流程发起时，由发起人指定签署方的签署控件的位置和数量。</li>
-  <li> **1**：签署方在签署时自行添加签署控件，可以拖动位置和控制数量。</li></ul>
-     */
-    SignBeanTag?: number;
-    /**
-     * 代理企业和员工的信息。
-  在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。
-     */
-    Agent?: Agent;
-    /**
-     * 个人自动签名的使用场景包括以下, 个人自动签署(即ApproverType设置成个人自动签署时)业务此值必传：
-  <ul><li> **E_PRESCRIPTION_AUTO_SIGN**：处方单（医疗自动签）  </li></ul>
-  注: `个人自动签名场景是白名单功能，使用前请与对接的客户经理联系沟通。`
-     */
-    AutoSignScene?: string;
 }
 /**
  * CreateFlowSignUrl请求参数结构体
@@ -6031,6 +6066,66 @@ export interface CreateFlowGroupByTemplatesRequest {
     FlowGroupOptions?: FlowGroupOptions;
 }
 /**
+ * DescribeBillUsageDetail返回参数结构体
+ */
+export interface DescribeBillUsageDetailResponse {
+    /**
+     * 总数
+     */
+    Total?: number;
+    /**
+     * 消耗详情
+     */
+    Details?: Array<BillUsageDetail>;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * CreateUserAutoSignEnableUrl返回参数结构体
+ */
+export interface CreateUserAutoSignEnableUrlResponse {
+    /**
+     * 个人用户自动签的开通链接, 短链形式。过期时间受 `ExpiredTime` 参数控制。
+     */
+    Url?: string;
+    /**
+     * 腾讯电子签小程序的 AppID，用于其他小程序/APP等应用跳转至腾讯电子签小程序使用
+  
+  注: `如果获取的是H5链接, 则不会返回此值`
+     */
+    AppId?: string;
+    /**
+     * 腾讯电子签小程序的原始 Id,  ，用于其他小程序/APP等应用跳转至腾讯电子签小程序使用
+  
+  注: `如果获取的是H5链接, 则不会返回此值`
+     */
+    AppOriginalId?: string;
+    /**
+     * 腾讯电子签小程序的跳转路径，用于其他小程序/APP等应用跳转至腾讯电子签小程序使用
+  
+  注: `如果获取的是H5链接, 则不会返回此值`
+     */
+    Path?: string;
+    /**
+     * base64 格式的跳转二维码图片，可通过微信扫描后跳转到腾讯电子签小程序的开通界面。
+  
+  注: `如果获取的是H5链接, 则不会返回此二维码图片`
+     */
+    QrCode?: string;
+    /**
+     * 返回的链接类型
+  <ul><li> 空: 默认小程序端链接</li>
+  <li> **H5SIGN** : h5端链接</li></ul>
+     */
+    UrlType?: string;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * 流程签署二维码的签署信息，适用于客户系统整合二维码功能。
 通过链接，用户可直接访问电子签名小程序并签署合同。
  */
@@ -6102,18 +6197,49 @@ export interface DeleteStaffsResult {
     FailedEmployeeData: Array<FailedDeleteStaffData>;
 }
 /**
- * DescribeFlowBriefs返回参数结构体
+ * DescribeBillUsageDetail请求参数结构体
  */
-export interface DescribeFlowBriefsResponse {
+export interface DescribeBillUsageDetailRequest {
     /**
-     * 合同流程基础信息列表，包含流程的名称、状态、创建日期等基本信息。
-  注：`与入参 FlowIds 的顺序可能存在不一致的情况。`
+     * 查询开始时间，时间跨度不能大于31天
      */
-    FlowBriefs?: Array<FlowBrief>;
+    StartTime: string;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     * 查询结束时间，时间跨度不能大于31天
      */
-    RequestId?: string;
+    EndTime: string;
+    /**
+     * 指定分页返回第几页的数据，如果不传默认返回第一页，页码从 0 开始，即首页为 0
+     */
+    Offset: number;
+    /**
+     * 指定分页每页返回的数据条数，如果不传默认为 50，单页最大支持 50。
+     */
+    Limit?: number;
+    /**
+     * 查询的套餐类型 （选填 ）不传则查询所有套餐；
+  对应关系如下
+  CloudEnterprise-企业版合同
+  SingleSignature-单方签章
+  CloudProve-签署报告
+  CloudOnlineSign-腾讯会议在线签约
+  ChannelWeCard-微工卡
+  SignFlow-合同套餐
+  SignFace-签署意愿（人脸识别）
+  SignPassword-签署意愿（密码）
+  SignSMS-签署意愿（短信）
+  PersonalEssAuth-签署人实名（腾讯电子签认证）
+  PersonalThirdAuth-签署人实名（信任第三方认证）
+  OrgEssAuth-签署企业实名
+  FlowNotify-短信通知
+  AuthService-企业工商信息查询
+     */
+    QuotaType?: string;
+    /**
+     * 非必填，查询某个渠道企业的消耗情况。
+  关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。
+     */
+    Agent?: Agent;
 }
 /**
  * 企业超管信息

@@ -40,7 +40,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteOriginGroup", req, cb);
     }
     /**
-     * 创建共享 CNAME
+     * 用于创建共享 CNAME，该功能白名单内测中。
      */
     async CreateSharedCNAME(req, cb) {
         return this.request("CreateSharedCNAME", req, cb);
@@ -166,10 +166,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeAvailablePlans", req, cb);
     }
     /**
+     * 用于加速域名绑定或解绑共享 CNAME，该功能白名单内测中。
+     */
+    async BindSharedCNAME(req, cb) {
+        return this.request("BindSharedCNAME", req, cb);
+    }
+    /**
      * 用于验证站点所有权。
      */
     async IdentifyZone(req, cb) {
         return this.request("IdentifyZone", req, cb);
+    }
+    /**
+     * 修改别称域名状态。
+     */
+    async ModifyAliasDomainStatus(req, cb) {
+        return this.request("ModifyAliasDomainStatus", req, cb);
     }
     /**
      * 查询源站防护信息
@@ -270,10 +282,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyZoneStatus", req, cb);
     }
     /**
-     * 修改别称域名状态。
+     * 获取源站组列表
      */
-    async ModifyAliasDomainStatus(req, cb) {
-        return this.request("ModifyAliasDomainStatus", req, cb);
+    async DescribeOriginGroup(req, cb) {
+        return this.request("DescribeOriginGroup", req, cb);
     }
     /**
      * 本接口（DownloadL7Logs）下载七层离线日志。
@@ -330,10 +342,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDDoSAttackData", req, cb);
     }
     /**
-     * 本接口（DescribeDDoSAttackEvent）用于查询DDoS攻击事件列表。
+     * 用于删除共享 CNAME，该功能白名单内测中。
      */
-    async DescribeDDoSAttackEvent(req, cb) {
-        return this.request("DescribeDDoSAttackEvent", req, cb);
+    async DeleteSharedCNAME(req, cb) {
+        return this.request("DeleteSharedCNAME", req, cb);
     }
     /**
      * 修改Web&Bot安全配置。
@@ -410,10 +422,10 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
         return this.request("CreateApplicationProxy", req, cb);
     }
     /**
-     * 获取源站组列表
+     * 本接口（DescribeDDoSAttackEvent）用于查询DDoS攻击事件列表。
      */
-    async DescribeOriginGroup(req, cb) {
-        return this.request("DescribeOriginGroup", req, cb);
+    async DescribeDDoSAttackEvent(req, cb) {
+        return this.request("DescribeDDoSAttackEvent", req, cb);
     }
     /**
      * 修改应用代理的状态

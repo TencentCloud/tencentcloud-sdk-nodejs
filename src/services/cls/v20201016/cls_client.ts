@@ -32,7 +32,7 @@ import {
   ParquetKeyInfo,
   DescribeCosRechargesResponse,
   DescribeShipperTasksResponse,
-  CreateMachineGroupResponse,
+  CheckFunctionRequest,
   Filter,
   DescribeConfigMachineGroupsRequest,
   ModifyConfigExtraResponse,
@@ -50,6 +50,7 @@ import {
   DeleteTopicRequest,
   DescribePartitionsRequest,
   ContainerStdoutInfo,
+  CheckFunctionResponse,
   ModifyAlarmResponse,
   DescribeShipperTasksRequest,
   DescribeAlarmsRequest,
@@ -111,7 +112,7 @@ import {
   ExcludePathInfo,
   FilterRuleInfo,
   ConfigExtraInfo,
-  RetryShipperTaskResponse,
+  CreateMachineGroupResponse,
   SplitPartitionRequest,
   DescribeMachineGroupConfigsResponse,
   CheckRechargeKafkaServerRequest,
@@ -136,7 +137,7 @@ import {
   QueryRangeMetricResponse,
   DeleteIndexRequest,
   DescribeConsumerResponse,
-  SearchLogTopics,
+  RetryShipperTaskResponse,
   ModifyConsumerResponse,
   DescribeAlertRecordHistoryRequest,
   DescribeConfigsRequest,
@@ -234,6 +235,7 @@ import {
   MachineInfo,
   ModifyLogsetResponse,
   MonitorTime,
+  SearchLogTopics,
   SearchLogRequest,
   CreateMachineGroupRequest,
   Tag,
@@ -828,6 +830,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteConfigExtraResponse) => void
   ): Promise<DeleteConfigExtraResponse> {
     return this.request("DeleteConfigExtra", req, cb)
+  }
+
+  /**
+   * 本接口用于数据加工DSL函数的语法校验。
+   */
+  async CheckFunction(
+    req: CheckFunctionRequest,
+    cb?: (error: string, rep: CheckFunctionResponse) => void
+  ): Promise<CheckFunctionResponse> {
+    return this.request("CheckFunction", req, cb)
   }
 
   /**

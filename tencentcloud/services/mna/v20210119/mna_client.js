@@ -28,6 +28,12 @@ class Client extends abstract_client_1.AbstractClient {
         super("mna.tencentcloudapi.com", "2021-01-19", clientConfig);
     }
     /**
+     * 获取单设备的实时流量统计指标
+     */
+    async GetNetMonitor(req, cb) {
+        return this.request("GetNetMonitor", req, cb);
+    }
+    /**
      * 在用量统计页面下载流量数据
      */
     async GetStatisticData(req, cb) {

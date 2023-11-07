@@ -568,6 +568,16 @@ it("cls.v20201016.DeleteConfigExtra", async function () {
     }
 })
 
+it("cls.v20201016.CheckFunction", async function () {
+    try {
+       const data = await client.CheckFunction({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cls.v20201016.DeleteAlarm", async function () {
     try {
        const data = await client.DeleteAlarm({})

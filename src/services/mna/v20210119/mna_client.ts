@@ -24,7 +24,10 @@ import {
   Capacity,
   GetFlowStatisticRequest,
   DestAddressInfo,
+  GetNetMonitorResponse,
+  SlotNetInfo,
   DeleteQosRequest,
+  GetNetMonitorRequest,
   NetDetails,
   DeviceNetInfo,
   GetMultiFlowStatisticResponse,
@@ -50,11 +53,12 @@ import {
   GetDeviceRequest,
   GetDevicesResponse,
   DescribeQosRequest,
-  NetworkData,
+  MonitorData,
   DeleteDeviceResponse,
   GetStatisticDataResponse,
   DeviceInfo,
   GetDevicesRequest,
+  NetworkData,
   AddDeviceRequest,
   GetPublicKeyRequest,
 } from "./mna_models"
@@ -66,6 +70,16 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("mna.tencentcloudapi.com", "2021-01-19", clientConfig)
+  }
+
+  /**
+   * 获取单设备的实时流量统计指标
+   */
+  async GetNetMonitor(
+    req: GetNetMonitorRequest,
+    cb?: (error: string, rep: GetNetMonitorResponse) => void
+  ): Promise<GetNetMonitorResponse> {
+    return this.request("GetNetMonitor", req, cb)
   }
 
   /**

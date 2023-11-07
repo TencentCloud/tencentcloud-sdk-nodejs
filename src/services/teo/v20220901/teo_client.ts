@@ -56,6 +56,7 @@ import {
   BotUserRule,
   ModifyOriginGroupResponse,
   DeleteAccelerationDomainsRequest,
+  DescribeApplicationProxiesResponse,
   ExceptUserRuleScope,
   ModifyAliasDomainRequest,
   DescribeAvailablePlansRequest,
@@ -95,12 +96,14 @@ import {
   DescribeRulesSettingResponse,
   BindSecurityTemplateToEntityResponse,
   RuleExtraParameter,
+  BindSharedCNAMEMap,
   RulesSettingAction,
   DDoSAttackEvent,
   ClientIpHeader,
   DescribeDDoSAttackTopDataRequest,
   Quic,
   Ipv6,
+  WebSocket,
   ModifyAccelerationDomainRequest,
   DescribeRulesRequest,
   DescribeContentQuotaResponse,
@@ -122,17 +125,18 @@ import {
   ClientIpCountry,
   CreatePrefetchTaskRequest,
   DeleteApplicationProxyRuleRequest,
-  DescribeApplicationProxiesResponse,
+  BindSharedCNAMEResponse,
   TemplateScope,
   DescribeTopL7AnalysisDataRequest,
   FileAscriptionInfo,
+  DeleteSharedCNAMERequest,
   DescribeAccelerationDomainsResponse,
   ZoneSetting,
   DescribeTopL7CacheDataResponse,
   DescribeOverviewL7DataRequest,
   SwitchConfig,
   IdentifyZoneResponse,
-  WebSocket,
+  DeleteSharedCNAMEResponse,
   DDoSBlockData,
   VanityNameServers,
   RuleChoicePropertiesItem,
@@ -220,6 +224,7 @@ import {
   ModifyOriginGroupRequest,
   DownloadL4LogsResponse,
   DescribeTimingL7CacheDataResponse,
+  BindSharedCNAMERequest,
   RateLimitIntelligence,
   IpTableConfig,
   ModifyApplicationProxyStatusRequest,
@@ -332,7 +337,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建共享 CNAME
+   * 用于创建共享 CNAME，该功能白名单内测中。
    */
   async CreateSharedCNAME(
     req: CreateSharedCNAMERequest,
@@ -538,6 +543,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 用于加速域名绑定或解绑共享 CNAME，该功能白名单内测中。
+   */
+  async BindSharedCNAME(
+    req: BindSharedCNAMERequest,
+    cb?: (error: string, rep: BindSharedCNAMEResponse) => void
+  ): Promise<BindSharedCNAMEResponse> {
+    return this.request("BindSharedCNAME", req, cb)
+  }
+
+  /**
    * 用于验证站点所有权。
    */
   async IdentifyZone(
@@ -545,6 +560,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: IdentifyZoneResponse) => void
   ): Promise<IdentifyZoneResponse> {
     return this.request("IdentifyZone", req, cb)
+  }
+
+  /**
+   * 修改别称域名状态。
+   */
+  async ModifyAliasDomainStatus(
+    req: ModifyAliasDomainStatusRequest,
+    cb?: (error: string, rep: ModifyAliasDomainStatusResponse) => void
+  ): Promise<ModifyAliasDomainStatusResponse> {
+    return this.request("ModifyAliasDomainStatus", req, cb)
   }
 
   /**
@@ -710,13 +735,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改别称域名状态。
+   * 获取源站组列表
    */
-  async ModifyAliasDomainStatus(
-    req: ModifyAliasDomainStatusRequest,
-    cb?: (error: string, rep: ModifyAliasDomainStatusResponse) => void
-  ): Promise<ModifyAliasDomainStatusResponse> {
-    return this.request("ModifyAliasDomainStatus", req, cb)
+  async DescribeOriginGroup(
+    req: DescribeOriginGroupRequest,
+    cb?: (error: string, rep: DescribeOriginGroupResponse) => void
+  ): Promise<DescribeOriginGroupResponse> {
+    return this.request("DescribeOriginGroup", req, cb)
   }
 
   /**
@@ -810,13 +835,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（DescribeDDoSAttackEvent）用于查询DDoS攻击事件列表。
+   * 用于删除共享 CNAME，该功能白名单内测中。
    */
-  async DescribeDDoSAttackEvent(
-    req: DescribeDDoSAttackEventRequest,
-    cb?: (error: string, rep: DescribeDDoSAttackEventResponse) => void
-  ): Promise<DescribeDDoSAttackEventResponse> {
-    return this.request("DescribeDDoSAttackEvent", req, cb)
+  async DeleteSharedCNAME(
+    req: DeleteSharedCNAMERequest,
+    cb?: (error: string, rep: DeleteSharedCNAMEResponse) => void
+  ): Promise<DeleteSharedCNAMEResponse> {
+    return this.request("DeleteSharedCNAME", req, cb)
   }
 
   /**
@@ -942,13 +967,13 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
   }
 
   /**
-   * 获取源站组列表
+   * 本接口（DescribeDDoSAttackEvent）用于查询DDoS攻击事件列表。
    */
-  async DescribeOriginGroup(
-    req: DescribeOriginGroupRequest,
-    cb?: (error: string, rep: DescribeOriginGroupResponse) => void
-  ): Promise<DescribeOriginGroupResponse> {
-    return this.request("DescribeOriginGroup", req, cb)
+  async DescribeDDoSAttackEvent(
+    req: DescribeDDoSAttackEventRequest,
+    cb?: (error: string, rep: DescribeDDoSAttackEventResponse) => void
+  ): Promise<DescribeDDoSAttackEventResponse> {
+    return this.request("DescribeDDoSAttackEvent", req, cb)
   }
 
   /**

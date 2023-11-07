@@ -973,6 +973,23 @@ export interface DeleteAccelerationDomainsRequest {
     Force?: boolean;
 }
 /**
+ * DescribeApplicationProxies返回参数结构体
+ */
+export interface DescribeApplicationProxiesResponse {
+    /**
+     * 应用代理列表。
+     */
+    ApplicationProxies?: Array<ApplicationProxy>;
+    /**
+     * 记录总数。
+     */
+    TotalCount?: number;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * 例外规则的生效范围。
  */
 export interface ExceptUserRuleScope {
@@ -1992,6 +2009,19 @@ export interface RuleExtraParameter {
     Choices: Array<string>;
 }
 /**
+ * 共享 CNAME 和接入域名的绑定关系
+ */
+export interface BindSharedCNAMEMap {
+    /**
+     * 需要绑定或解绑的共享 CNAME。
+     */
+    SharedCNAME: string;
+    /**
+     * 加速域名，可传递多个，最多20个。
+     */
+    DomainNames: Array<string>;
+}
+/**
  * 规则引擎可应用于匹配请求的设置列表及其详细信息
  */
 export interface RulesSettingAction {
@@ -2183,6 +2213,21 @@ export interface Ipv6 {
   <li>off：关闭Ipv6访问功能。</li>
      */
     Switch: string;
+}
+/**
+ * WebSocket配置
+ */
+export interface WebSocket {
+    /**
+     * WebSocket 超时时间配置开关，取值有：
+  <li>on：使用Timeout作为WebSocket超时时间；</li>
+  <li>off：平台仍支持WebSocket连接，此时使用系统默认的15秒为超时时间。</li>
+     */
+    Switch: string;
+    /**
+     * 超时时间，单位为秒，最大超时时间120秒。
+     */
+    Timeout?: number;
 }
 /**
  * ModifyAccelerationDomain请求参数结构体
@@ -2720,17 +2765,9 @@ export interface DeleteApplicationProxyRuleRequest {
     RuleId: string;
 }
 /**
- * DescribeApplicationProxies返回参数结构体
+ * BindSharedCNAME返回参数结构体
  */
-export interface DescribeApplicationProxiesResponse {
-    /**
-     * 应用代理列表。
-     */
-    ApplicationProxies?: Array<ApplicationProxy>;
-    /**
-     * 记录总数。
-     */
-    TotalCount?: number;
+export interface BindSharedCNAMEResponse {
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2845,6 +2882,19 @@ export interface FileAscriptionInfo {
      * 文件校验内容。
      */
     IdentifyContent: string;
+}
+/**
+ * DeleteSharedCNAME请求参数结构体
+ */
+export interface DeleteSharedCNAMERequest {
+    /**
+     * 共享 CNAME 所属站点 ID。
+     */
+    ZoneId: string;
+    /**
+     * 需要删除的共享 CNAME。
+     */
+    SharedCNAME: string;
 }
 /**
  * DescribeAccelerationDomains返回参数结构体
@@ -3094,19 +3144,13 @@ export interface IdentifyZoneResponse {
     RequestId?: string;
 }
 /**
- * WebSocket配置
+ * DeleteSharedCNAME返回参数结构体
  */
-export interface WebSocket {
+export interface DeleteSharedCNAMEResponse {
     /**
-     * WebSocket 超时时间配置开关，取值有：
-  <li>on：使用Timeout作为WebSocket超时时间；</li>
-  <li>off：平台仍支持WebSocket连接，此时使用系统默认的15秒为超时时间。</li>
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
-    Switch: string;
-    /**
-     * 超时时间，单位为秒，最大超时时间120秒。
-     */
-    Timeout?: number;
+    RequestId?: string;
 }
 /**
  * DDoS封禁解封信息
@@ -5434,6 +5478,25 @@ export interface DescribeTimingL7CacheDataResponse {
     RequestId?: string;
 }
 /**
+ * BindSharedCNAME请求参数结构体
+ */
+export interface BindSharedCNAMERequest {
+    /**
+     * 加速域名所属站点 ID。
+     */
+    ZoneId: string;
+    /**
+     * 绑定类型，取值有：
+  <li>bind：绑定；</li>
+  <li>unbind：解绑。</li>
+     */
+    BindType: string;
+    /**
+     * 接入域名与共享 CNAME 的绑定关系。
+     */
+    BindSharedCNAMEMaps: Array<BindSharedCNAMEMap>;
+}
+/**
  * 智能客户端过滤
  */
 export interface RateLimitIntelligence {
@@ -6618,7 +6681,7 @@ export interface CreateSecurityIPGroupResponse {
  */
 export interface CreateSharedCNAMEResponse {
     /**
-     * 共享 CNAME。格式为：<自定义前缀>+<ZoneId中的12位随机字符串>+"share.eo.dnse[0-5].com"
+     * 共享 CNAME。格式为：<自定义前缀>+<ZoneId中的12位随机字符串>+"share.dnse[0-5].com"。
      */
     SharedCNAME?: string;
     /**
@@ -6940,9 +7003,9 @@ export interface CreateSharedCNAMERequest {
     /**
      * 共享 CNAME 前缀。请输入合法的域名前缀，例如"test-api"、"test-api.com"，限制输入 50 个字符。
   
-  共享 CNAME 完整格式为：<自定义前缀>+<zoneid中的12位随机字符串>+"share.eo.dnse[0-5].com"。
+  共享 CNAME 完整格式为：<自定义前缀>+<zoneid中的12位随机字符串>+"share.dnse[0-5].com"。
   
-  例如前缀传入 example.com，EO 会为您创建共享 CNAME：example.com.sai2ig51kaa5.share.eo.dnse2.com
+  例如前缀传入 example.com，EO 会为您创建共享 CNAME：example.com.sai2ig51kaa5.share.dnse2.com。
      */
     SharedCNAMEPrefix: string;
     /**

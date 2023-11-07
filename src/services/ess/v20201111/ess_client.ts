@@ -19,6 +19,7 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   DescribePersonCertificateResponse,
+  BillUsageDetail,
   CreateSealRequest,
   ModifyIntegrationDepartmentResponse,
   CancelFlowResponse,
@@ -80,6 +81,7 @@ import {
   BindEmployeeUserIdWithClientOpenIdRequest,
   CreateOrganizationInfoChangeUrlResponse,
   Permission,
+  DescribeFlowBriefsResponse,
   Staff,
   ComponentLimit,
   CreateIntegrationDepartmentResponse,
@@ -104,7 +106,7 @@ import {
   CreateFlowSignReviewRequest,
   UnbindEmployeeUserIdWithClientOpenIdRequest,
   CreateSchemeUrlResponse,
-  CreateUserAutoSignEnableUrlResponse,
+  CreateFlowByFilesRequest,
   FlowGroupInfo,
   CreateFlowSignUrlResponse,
   RegisterInfo,
@@ -138,7 +140,6 @@ import {
   CreateIntegrationEmployeesResponse,
   FillError,
   DeleteIntegrationRoleUsersRequest,
-  CreateFlowByFilesRequest,
   CreateFlowSignUrlRequest,
   CreateReleaseFlowRequest,
   CreateIntegrationUserRolesRequest,
@@ -192,10 +193,12 @@ import {
   UpdateIntegrationEmployeesRequest,
   DescribeFlowBriefsRequest,
   CreateFlowGroupByTemplatesRequest,
+  DescribeBillUsageDetailResponse,
+  CreateUserAutoSignEnableUrlResponse,
   SignUrl,
   VerifyPdfResponse,
   DeleteStaffsResult,
-  DescribeFlowBriefsResponse,
+  DescribeBillUsageDetailRequest,
   Admin,
   Caller,
   DescribeFlowTemplatesResponse,
@@ -1118,6 +1121,16 @@ httpProfile.setEndpoint("file.test.ess.tencent.cn");
     cb?: (error: string, rep: CancelUserAutoSignEnableUrlResponse) => void
   ): Promise<CancelUserAutoSignEnableUrlResponse> {
     return this.request("CancelUserAutoSignEnableUrl", req, cb)
+  }
+
+  /**
+   * 查询企业使用情况
+   */
+  async DescribeBillUsageDetail(
+    req: DescribeBillUsageDetailRequest,
+    cb?: (error: string, rep: DescribeBillUsageDetailResponse) => void
+  ): Promise<DescribeBillUsageDetailResponse> {
+    return this.request("DescribeBillUsageDetail", req, cb)
   }
 
   /**

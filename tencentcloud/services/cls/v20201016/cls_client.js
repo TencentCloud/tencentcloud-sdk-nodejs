@@ -358,6 +358,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteConfigExtra", req, cb);
     }
     /**
+     * 本接口用于数据加工DSL函数的语法校验。
+     */
+    async CheckFunction(req, cb) {
+        return this.request("CheckFunction", req, cb);
+    }
+    /**
      * 本接口用于删除告警策略。
      */
     async DeleteAlarm(req, cb) {

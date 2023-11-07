@@ -2588,16 +2588,16 @@ export interface DescribeRocketMQClusterResponse {
   /**
    * 集群信息
    */
-  ClusterInfo: RocketMQClusterInfo
+  ClusterInfo?: RocketMQClusterInfo
   /**
    * 集群配置
    */
-  ClusterConfig: RocketMQClusterConfig
+  ClusterConfig?: RocketMQClusterConfig
   /**
-   * 集群最近使用量
+   * 集群最近使用量，即将废弃，请使用云监控获取相关数据。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ClusterStats: RocketMQClusterRecentStats
+  ClusterStats?: RocketMQClusterRecentStats
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4752,6 +4752,36 @@ export interface RocketMQClusterInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   HttpInternalEndpoint?: string
+  /**
+   * 是否开启ACL鉴权，专享实例支持关闭
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AclEnabled?: boolean
+  /**
+   * 公网CLB实例ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PublicClbId?: string
+  /**
+   * vip
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Vip?: string
+  /**
+   * 所属VPC
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VpcId?: string
+  /**
+   * 是否支持迁移
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SupportMigration?: boolean
+  /**
+   * 实例状态，0表示创建中，1表示正常，2表示隔离中，3表示已销毁，4 - 异常, 5 - 发货失败，6 - 变配中，7 - 变配失败
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceStatus?: number
 }
 
 /**
@@ -6537,6 +6567,11 @@ export interface RocketMQClusterConfig {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   MaxQueuesPerTopic?: number
+  /**
+   * topic分布
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TopicDistribution?: Array<RocketMQTopicDistribution>
 }
 
 /**
@@ -7756,10 +7791,12 @@ export interface AMQPClusterConfig {
 export interface Tag {
   /**
    * 标签的key的值
+注意：此字段可能返回 null，表示取不到有效值。
    */
   TagKey: string
   /**
    * 标签的Value的值
+注意：此字段可能返回 null，表示取不到有效值。
    */
   TagValue: string
 }

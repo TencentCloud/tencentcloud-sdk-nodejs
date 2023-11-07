@@ -678,6 +678,12 @@ httpProfile.setEndpoint("file.test.ess.tencent.cn");
         return this.request("CancelUserAutoSignEnableUrl", req, cb);
     }
     /**
+     * 查询企业使用情况
+     */
+    async DescribeBillUsageDetail(req, cb) {
+        return this.request("DescribeBillUsageDetail", req, cb);
+    }
+    /**
      * 此接口（DescribeIntegrationDepartments）用于查询企业的部门信息列表，支持查询单个部门节点或单个部门节点及一级子节点部门列表。
      */
     async DescribeIntegrationDepartments(req, cb) {

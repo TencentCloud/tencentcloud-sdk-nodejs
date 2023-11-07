@@ -1620,7 +1620,7 @@ Waf  CC V2 Query接口
    * 根据多条件查询CC规则
    */
   async DescribeCCRuleList(
-    req?: DescribeCCRuleListRequest,
+    req: DescribeCCRuleListRequest,
     cb?: (error: string, rep: DescribeCCRuleListResponse) => void
   ): Promise<DescribeCCRuleListResponse> {
     return this.request("DescribeCCRuleList", req, cb)
