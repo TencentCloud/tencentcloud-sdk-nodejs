@@ -34,6 +34,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeAppDetail", req, cb);
     }
     /**
+     * 根据房间ID获取群组中被禁言的用户列表。
+     */
+    async DescribeRoomForbiddenUser(req, cb) {
+        return this.request("DescribeRoomForbiddenUser", req, cb);
+    }
+    /**
      * App 管理员可以通过该接口在群组中发送通知、公告等。目前仅支持文本消息。
      */
     async SendRoomNotificationMessage(req, cb) {
@@ -256,6 +262,14 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async LoginOriginId(req, cb) {
         return this.request("LoginOriginId", req, cb);
+    }
+    /**
+     * 禁止指定房间中某些用户在一段时间内发言。
+取消对某些用户的禁言。
+被禁言用户退出房间之后再进入同一房间，禁言仍然有效。
+     */
+    async ForbidSendMsg(req, cb) {
+        return this.request("ForbidSendMsg", req, cb);
     }
     /**
      * 登录

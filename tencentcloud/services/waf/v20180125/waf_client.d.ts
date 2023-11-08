@@ -58,9 +58,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeSpartaProtectionInfo(req: DescribeSpartaProtectionInfoRequest, cb?: (error: string, rep: DescribeSpartaProtectionInfoResponse) => void): Promise<DescribeSpartaProtectionInfoResponse>;
     /**
-     * 接口已废弃
-
-描述WAF自动封禁IP详情,对齐自动封堵状态
+     * 描述WAF自动封禁IP详情,对齐自动封堵状态
      */
     DescribeAutoDenyIP(req: DescribeAutoDenyIPRequest, cb?: (error: string, rep: DescribeAutoDenyIPResponse) => void): Promise<DescribeAutoDenyIPResponse>;
     /**
@@ -159,7 +157,7 @@ export declare class Client extends AbstractClient {
     /**
      * 查询各个waf基础安全模块的开关状态，看每个模块是否开启
      */
-    DescribeModuleStatus(req?: DescribeModuleStatusRequest, cb?: (error: string, rep: DescribeModuleStatusResponse) => void): Promise<DescribeModuleStatusResponse>;
+    DescribeModuleStatus(req: DescribeModuleStatusRequest, cb?: (error: string, rep: DescribeModuleStatusResponse) => void): Promise<DescribeModuleStatusResponse>;
     /**
      * Waf IP黑白名单Upsert接口
      */
@@ -473,7 +471,7 @@ Waf  CC V2 Query接口
     /**
      * 设置某个domain下基础安全模块的开关
      */
-    ModifyModuleStatus(req?: ModifyModuleStatusRequest, cb?: (error: string, rep: ModifyModuleStatusResponse) => void): Promise<ModifyModuleStatusResponse>;
+    ModifyModuleStatus(req: ModifyModuleStatusRequest, cb?: (error: string, rep: ModifyModuleStatusResponse) => void): Promise<ModifyModuleStatusResponse>;
     /**
      * 在CDC场景下，负载均衡型WAF的添加、编辑域名配置的时候，需要展示CDC负载均衡型WAF（cdc-clb-waf)支持的地域列表，通过DescribeUserCdcClbWafRegions既可以获得当前对客户已经开放的地域列表
      */

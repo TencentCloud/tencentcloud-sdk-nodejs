@@ -497,6 +497,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteRabbitMQUser", req, cb);
     }
     /**
+     * 创建专业集群——预付费，仅通过api调用
+     */
+    async CreateProCluster(req, cb) {
+        return this.request("CreateProCluster", req, cb);
+    }
+    /**
      * 查询RabbitMQ vhost列表
      */
     async DescribeRabbitMQVirtualHost(req, cb) {

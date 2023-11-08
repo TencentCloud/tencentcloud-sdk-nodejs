@@ -248,7 +248,7 @@ export interface CreateInstancesRequest {
      */
     AutoVoucher?: boolean;
     /**
-     * 防火墙模版ID。若不指定该参数，则使用默认防火墙策略。
+     * 防火墙模板ID。若不指定该参数，则使用默认防火墙策略。
      */
     FirewallTemplateId?: string;
     /**
@@ -623,13 +623,13 @@ export interface DescribeFirewallTemplatesRequest {
     TemplateIds?: Array<string>;
     /**
      * 过滤器列表。
-  <li>template-id</li>按照【防火墙模版所属的ID】进行过滤。
+  <li>template-id</li>按照【防火墙模板所属的ID】进行过滤。
   类型：String
   必选：否
-  <li>template-name</li>按照【防火墙模版所属的名称】进行过滤。
+  <li>template-name</li>按照【防火墙模板所属的名称】进行过滤。
   类型：String
   必选：否
-  <li>template-type</li>按照【防火墙模版的类型】进行过滤。
+  <li>template-type</li>按照【防火墙模板的类型】进行过滤。
   类型：String
   必选：否
   每次请求的 Filters 的上限为 10，Filter.Values 的上限为 100。参数不支持同时指定 TemplateIds 和 Filters。

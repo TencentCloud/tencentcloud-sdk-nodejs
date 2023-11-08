@@ -365,7 +365,7 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
         return this.request("DescribeGroupUseDetail", req, cb);
     }
     /**
-     * 镜像仓库列表
+     * 查询镜像仓库列表
      */
     async DescribeImageRepository(req, cb) {
         return this.request("DescribeImageRepository", req, cb);

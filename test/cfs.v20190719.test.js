@@ -68,6 +68,16 @@ it("cfs.v20190719.DescribeCfsPGroups", async function () {
     }
 })
 
+it("cfs.v20190719.UpdateFileSystemBandwidthLimit", async function () {
+    try {
+       const data = await client.UpdateFileSystemBandwidthLimit({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cfs.v20190719.SetUserQuota", async function () {
     try {
        const data = await client.SetUserQuota({})

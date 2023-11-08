@@ -28,6 +28,16 @@ it("lcic.v20220817.DescribeAppDetail", async function () {
     }
 })
 
+it("lcic.v20220817.DescribeRoomForbiddenUser", async function () {
+    try {
+       const data = await client.DescribeRoomForbiddenUser({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("lcic.v20220817.SendRoomNotificationMessage", async function () {
     try {
        const data = await client.SendRoomNotificationMessage({})
@@ -391,6 +401,16 @@ it("lcic.v20220817.BindDocumentToRoom", async function () {
 it("lcic.v20220817.LoginOriginId", async function () {
     try {
        const data = await client.LoginOriginId({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("lcic.v20220817.ForbidSendMsg", async function () {
+    try {
+       const data = await client.ForbidSendMsg({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

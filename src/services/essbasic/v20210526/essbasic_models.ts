@@ -26,6 +26,98 @@ export interface SyncProxyOrganizationResponse {
 }
 
 /**
+ * 用户计费使用情况详情
+ */
+export interface BillUsageDetail {
+  /**
+   * 合同流程ID，为32位字符串。
+建议开发者妥善保存此流程ID，以便于顺利进行后续操作。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FlowId?: string
+  /**
+   * 合同经办人名称
+如果有多个经办人用分号隔开。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OperatorName?: string
+  /**
+   * 发起方组织机构名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateOrganizationName?: string
+  /**
+   * 合同流程的名称（可自定义此名称），长度不能超过200，只能由中文、字母、数字和下划线组成。
+该名称还将用于合同签署完成后的下载文件名。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FlowName?: string
+  /**
+   * 当前合同状态,如下是状态码对应的状态。
+0-还没有发起
+1-等待签署
+2-部分签署 
+3-拒签
+4-已签署 
+5-已过期 
+6-已撤销 
+7-还没有预发起
+8-等待填写
+9-部分填写 
+10-拒填
+11-已解除
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status?: number
+  /**
+   * 套餐类型
+对应关系如下
+CloudEnterprise-企业版合同
+SingleSignature-单方签章
+CloudProve-签署报告
+CloudOnlineSign-腾讯会议在线签约
+ChannelWeCard-微工卡
+SignFlow-合同套餐
+SignFace-签署意愿（人脸识别）
+SignPassword-签署意愿（密码）
+SignSMS-签署意愿（短信）
+PersonalEssAuth-签署人实名（腾讯电子签认证）
+PersonalThirdAuth-签署人实名（信任第三方认证）
+OrgEssAuth-签署企业实名
+FlowNotify-短信通知
+AuthService-企业工商信息查询
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  QuotaType?: string
+  /**
+   * 合同使用量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UseCount?: number
+  /**
+   * 消耗的时间戳，格式为Unix标准时间戳（秒）。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CostTime?: number
+  /**
+   * 消耗的套餐名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  QuotaName?: string
+  /**
+   * 消耗类型
+1.扣费 2.撤销返还
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CostType?: number
+  /**
+   * 备注
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Remark?: string
+}
+
+/**
  * ChannelCreateConvertTaskApi返回参数结构体
  */
 export interface ChannelCreateConvertTaskApiResponse {
@@ -967,7 +1059,7 @@ export interface ReleasedApprover {
   ApproverNumber: number
   /**
    * 指定签署人类型，目前支持
-<ul><li> **ORGANIZATION**：企业（默认值）</li>
+<ul><li> **ORGANIZATION**：企业(默认值)</li>
 <li> **ENTERPRISESERVER**：企业静默签</li></ul>
    */
   ApproverType: string
@@ -977,15 +1069,15 @@ export interface ReleasedApprover {
   Name?: string
   /**
    * 签署方经办人的证件类型，支持以下类型
-<ul><li>ID_CARD : 居民身份证  (默认值)</li>
+<ul><li>ID_CARD : 居民身份证(默认值)</li>
 <li>HONGKONG_AND_MACAO : 港澳居民来往内地通行证</li>
 <li>HONGKONG_MACAO_AND_TAIWAN : 港澳台居民居住证(格式同居民身份证)</li></ul>
    */
   IdCardType?: string
   /**
    * 证件号码，应符合以下规则
-<ul><li>居民身份证号码应为18位字符串，由数字和大写字母X组成（如存在X，请大写）。</li>
-<li>港澳居民来往内地通行证号码应为9位字符串，第1位为“C”，第2位为英文字母（但“I”、“O”除外），后7位为阿拉伯数字。</li>
+<ul><li>居民身份证号码应为18位字符串，由数字和大写字母X组成(如存在X，请大写)。</li>
+<li>港澳居民来往内地通行证号码应为9位字符串，第1位为“C”，第2位为英文字母(但“I”、“O”除外)，后7位为阿拉伯数字。</li>
 <li>港澳台居民居住证号码编码规则与中国大陆身份证相同，应为18位字符串。</li></ul>
    */
   IdCardNumber?: string
@@ -1143,7 +1235,7 @@ export interface SyncProxyOrganizationRequest {
   ProxyLegalIdCardType?: string
   /**
    * 第三方平台子客企业法定代表人的证件号码, 应符合以下规则
-<ul><li>居民身份证号码应为18位字符串，由数字和大写字母X组成（如存在X，请大写）。</li>
+<ul><li>居民身份证号码应为18位字符串，由数字和大写字母X组成（如存在X，请大写）。</li></ul>
    */
   ProxyLegalIdCardNumber?: string
   /**
@@ -1212,14 +1304,15 @@ export interface ChannelCreateFlowRemindsRequest {
 
 此接口下面信息必填。
 <ul>
-<li>渠道应用标识:  Agent.ProxyOrganizationOpenId</li>
-<li>第三方平台子客企业标识: Agent. ProxyOperator.OpenId</li>
-<li>第三方平台子客企业中的员工标识: Agent.AppId</li>
+<li>渠道应用标识:  Agent.AppId</li>
+<li>第三方平台子客企业标识: Agent.ProxyOrganizationOpenId</li>
+<li>第三方平台子客企业中的员工标识: Agent. ProxyOperator.OpenId</li>
 </ul>
+第三方平台子客企业和员工必须已经经过实名认证
    */
   Agent: Agent
   /**
-   * 需执行催办的签署流程ID数组，最多包含100个。
+   * 需执行催办的合同流程ID数组，最多支持100个。
    */
   FlowIds: Array<string>
 }
@@ -1537,11 +1630,16 @@ export interface UploadFilesResponse {
 }
 
 /**
- * 应用相关信息
+ * 应用相关信息, 整体应用的层级图如下
+
+注:
+  1. `不同的业务系统可以采用不同的应用，不同应用下的数据是隔离的,  应用A中的某个企业已经实名, 在应用B中此企业还需要重新认证`
  */
 export interface Agent {
   /**
-   * 应用的唯一标识。不同的业务系统可以采用不同的AppId，不同AppId下的数据是隔离的。可以由控制台开发者中心-应用集成自主生成。
+   * 应用的唯一标识(由电子签平台自动生成)。不同的业务系统可以采用不同的AppId，不同AppId下的数据是隔离的。可以由控制台开发者中心-应用集成自主生成。位置如下:
+
+![image](https://qcloudimg.tencent-cloud.cn/raw/fac77e0d3f28aaec56669f67e65c8db8.png)
    */
   AppId: string
   /**
@@ -1553,7 +1651,7 @@ export interface Agent {
    */
   ProxyOperator?: UserInfo
   /**
-   * 非必需参数，在第三方平台子客企业开通电子签后，会生成唯一的子客应用Id（ProxyAppId）用于代理调用时的鉴权，在子客开通的回调中获取。
+   * **不用填写**，在第三方平台子客企业开通电子签后，会生成唯一的子客应用Id（ProxyAppId）用于代理调用时的鉴权，在子客开通的回调中获取。
    */
   ProxyAppId?: string
   /**
@@ -1568,7 +1666,9 @@ export interface Agent {
  */
 export interface ChannelCreatePreparedPersonalEsignResponse {
   /**
-   * 导入的印章 ID
+   * 电子印章ID，为32位字符串。
+建议开发者保留此印章ID，后续指定签署区印章或者操作印章需此印章ID。
+可登录腾讯电子签控制台，在 "印章"->"印章中心"选择查看的印章，在"印章详情" 中查看某个印章的SealId(在页面中展示为印章ID)。
    */
   SealId?: string
   /**
@@ -1582,20 +1682,20 @@ export interface ChannelCreatePreparedPersonalEsignResponse {
  */
 export interface FlowApproverDetail {
   /**
-   * 模板配置时候的签署人id,与控件绑定
+   * 模板配置时候的签署人角色ID(用PDF文件发起也可以指定,如果不指定则自动生成此角色ID), 所有的填写控件和签署控件都归属不同的角色
    */
   ReceiptId?: string
   /**
-   * 平台企业的第三方id
+   * 第三方平台子客企业的唯一标识，定义Agent中的ProxyOrganizationOpenId一样, 可以参考<a href="https://qian.tencent.com/developers/partnerApis/dataTypes/#agent" target="_blank">Agent结构体</a>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ProxyOrganizationOpenId?: string
   /**
-   * 平台企业操作人的第三方id
+   * 第三方平台子客企业员工的唯一标识
    */
   ProxyOperatorOpenId?: string
   /**
-   * 平台企业名称
+   * 第三方平台子客企业名称，与企业营业执照中注册的名称一致。
    */
   ProxyOrganizationName?: string
   /**
@@ -1603,34 +1703,34 @@ export interface FlowApproverDetail {
    */
   Mobile?: string
   /**
-   * 签署人签署顺序
+   * 签署顺序，如果是有序签署，签署顺序从小到大
    */
   SignOrder?: number
   /**
-   * 签署人姓名
+   * 签署方经办人的姓名。
+经办人的姓名将用于身份认证和电子签名，请确保填写的姓名为签署方的真实姓名，而非昵称等代名。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ApproveName?: string
   /**
    * 当前签署人的状态, 状态如下
-<br/>PENDING 待签署	
-<br/>FILLPENDING 待填写
-<br/>FILLACCEPT 填写完成	
-<br/>FILLREJECT 拒绝填写	
-<br/>WAITPICKUP 待领取	
-<br/>ACCEPT 已签署	
-<br/>REJECT 拒签 
-<br/>DEADLINE 过期没人处理 
-<br/>CANCEL 流程已撤回	
-<br/>FORWARD 已经转他人处理
-<br/>STOP 流程已终止	
-<br/>RELIEVED 解除协议（已解除）
-
+<ul><li> **PENDING** :待签署</li>
+<li> **FILLPENDING** :待填写</li>
+<li> **FILLACCEPT** :填写完成</li>
+<li> **FILLREJECT** :拒绝填写</li>
+<li> **WAITPICKUP** :待领取</li>
+<li> **ACCEPT** :已签署</li>
+<li> **REJECT** :拒签</li>
+<li> **DEADLINE** :过期没人处理</li>
+<li> **CANCEL** :流程已撤回</li>
+<li> **FORWARD** :已经转他人处理</li>
+<li> **STOP** :流程已终止</li>
+<li> **RELIEVED** :解除协议（已解除）</li></ul>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ApproveStatus?: string
   /**
-   * 签署人自定义信息
+   * 签署人拒签等情况的时候填写的原因
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ApproveMessage?: string
@@ -1640,13 +1740,13 @@ export interface FlowApproverDetail {
   ApproveTime?: number
   /**
    * 参与者类型 
-<br/>ORGANIZATION：企业签署人
-<br/>PERSON：个人签署人
+<ul><li> **ORGANIZATION** :企业签署人</li>
+<li> **PERSON** :个人签署人</li></ul>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ApproveType?: string
   /**
-   * 自定义签署人角色
+   * 自定义签署人的角色名, 如: 收款人、开具人、见证人等
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ApproverRoleName?: string
@@ -2295,6 +2395,102 @@ export interface Permission {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Children?: Array<Permission>
+}
+
+/**
+ * DescribeTemplates请求参数结构体
+ */
+export interface DescribeTemplatesRequest {
+  /**
+   * 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。
+
+此接口下面信息必填。
+<ul>
+<li>渠道应用标识:  Agent.AppId</li>
+<li>第三方平台子客企业标识: Agent.ProxyOrganizationOpenId</li>
+<li>第三方平台子客企业中的员工标识: Agent. ProxyOperator.OpenId</li>
+</ul>
+第三方平台子客企业和员工必须已经经过实名认证
+   */
+  Agent: Agent
+  /**
+   * 合同模板ID，为32位字符串。
+
+可以通过<a href="https://qian.tencent.com/developers/partnerApis/accounts/CreateConsoleLoginUrl" target="_blank">生成子客登录链接</a>登录企业控制台, 在企业模板中得到合同模板ID。
+   */
+  TemplateId?: string
+  /**
+   * 查询模版的内容
+
+<ul><li>**0**：（默认）模板列表及详情</li>
+<li>**1**：仅模板列表, 不会返回模板中的签署控件, 填写控件, 参与方角色列表等信息</li></ul>
+   */
+  ContentType?: number
+  /**
+   * 合同模板ID数组，每一个合同模板ID为32位字符串,  最多支持200个模板的批量查询。
+
+注意: 
+1.` 此参数TemplateIds与TemplateId互为独立，若两者均传入，以TemplateId为准。`
+2. `请确保每个模板均正确且属于当前企业，若有任一模板不存在，则返回错误。`
+4. `若传递此参数，分页参数(Limit,Offset)无效`
+
+   */
+  TemplateIds?: Array<string>
+  /**
+   * 指定每页返回的数据条数，和Offset参数配合使用。
+
+注：`1.默认值为20，单页做大值为200。`
+   */
+  Limit?: number
+  /**
+   * 查询结果分页返回，指定从第几页返回数据，和Limit参数配合使用。
+
+注：`1.offset从0开始，即第一页为0。`
+`2.默认从第一页返回。`
+   */
+  Offset?: number
+  /**
+   * 模糊搜索的模板名称，注意是模板名的连续部分，长度不能超过200，可支持由中文、字母、数字和下划线组成字符串。
+   */
+  TemplateName?: string
+  /**
+   * 对应第三方应用平台企业的模板ID，通过此值可以搜索由第三方应用平台模板ID下发或领取得到的子客模板列表。
+   */
+  ChannelTemplateId?: string
+  /**
+   * 返回控件的范围, 是只返回发起方自己的还是所有参与方的
+
+<ul><li>**false**：（默认）只返回发起方控件</li>
+<li>**true**：返回所有参与方(包括发起方和签署方)控件</li></ul>
+   */
+  QueryAllComponents?: boolean
+  /**
+   * 是否获取模板预览链接。
+
+<ul><li>**false**：不获取（默认）</li>
+<li>**true**：获取</li></ul>
+
+设置为true之后， 返回参数PreviewUrl，为模板的H5预览链接,  有效期5分钟。可以通过浏览器打开此链接预览模板，或者嵌入到iframe中预览模板。
+
+注: `此功能为白名单功能，使用前请联系对接的客户经理沟通。`
+   */
+  WithPreviewUrl?: boolean
+  /**
+   * 是否获取模板的PDF文件链接。
+
+<ul><li>**false**：不获取（默认）</li>
+<li>**true**：获取</li></ul>
+
+设置为true之后， 返回参数PdfUrl，为模板PDF文件链接，有效期5分钟, 可以用于将PDF文件下载到本地
+
+注: `此功能为白名单功能，使用前请联系对接的客户经理沟通。`
+   */
+  WithPdfUrl?: boolean
+  /**
+   * 操作者的信息
+   * @deprecated
+   */
+  Operator?: UserInfo
 }
 
 /**
@@ -3464,11 +3660,18 @@ export interface FlowInfo {
 }
 
 /**
- * 接口调用者信息
+ * 接口调用的员工信息
  */
 export interface UserInfo {
   /**
-   * 第三方应用平台自定义，对应第三方平台子客企业员的唯一标识。一个OpenId在一个子客企业内唯一对应一个真实员工，不可在其他子客企业内重复使用。（例如，可以使用经办人企业名+员工身份证的hash值，需要第三方应用平台保存），最大64位字符串
+   * 第三方应用平台自定义，对应第三方平台子客企业员工的唯一标识。
+
+
+注意:
+1. OpenId在子客企业对应一个真实员工，**本应用唯一, 不可重复使用**，最大64位字符串
+2. 可使用用户在贵方企业系统中的Userid或者hash值作为子客企业的员工OpenId
+3. **员工加入企业后**, 可以通过<a href="https://qian.tencent.com/developers/partnerApis/accounts/CreateConsoleLoginUrl" target="_blank">生成子客登录链接</a>登录子客控制台后, 在**组织架构**模块查看员工们的OpenId, 样式如下图
+![image](https://qcloudimg.tencent-cloud.cn/raw/bb67fb66c926759df3a0af5838fdafd5.png)
    */
   OpenId?: string
   /**
@@ -3766,6 +3969,24 @@ export interface ChannelCreateFlowApproversResponse {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   FillError?: Array<FillError>
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeBillUsageDetail返回参数结构体
+ */
+export interface DescribeBillUsageDetailResponse {
+  /**
+   * 返回查询记录总数
+   */
+  Total?: number
+  /**
+   * 消耗记录详情
+   */
+  Details?: Array<BillUsageDetail>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4282,7 +4503,7 @@ export interface FillError {
  */
 export interface ChannelCreatePreparedPersonalEsignRequest {
   /**
-   * 应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 和 Agent.ProxyAppId 必填。
+   * 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。
    */
   Agent: Agent
   /**
@@ -4290,23 +4511,36 @@ export interface ChannelCreatePreparedPersonalEsignRequest {
    */
   UserName: string
   /**
-   * 身份证件号码
+   * 证件号码, 应符合以下规则
+<ul><li>居民身份证号码应为18位字符串，由数字和大写字母X组成（如存在X，请大写）。</li>
+<li>港澳居民来往内地通行证号码应为9位字符串，第1位为“C”，第2位为英文字母（但“I”、“O”除外），后7位为阿拉伯数字。</li>
+<li>港澳台居民居住证号码编码规则与中国大陆身份证相同，应为18位字符串。</li></ul>
    */
   IdCardNumber: string
   /**
-   * 印章名称
+   * 电子印章名字，1-50个中文字符
+注:`同一企业下电子印章名字不能相同`
    */
   SealName: string
   /**
-   * 印章图片的base64，最大不超过 8M
+   * 电子印章图片base64编码，大小不超过10M（原始图片不超过5M），只支持PNG或JPG图片格式。
+
+
    */
   SealImage: string
   /**
-   * 操作者信息
+   * 执行本接口操作的员工信息。
+注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。`
    */
   Operator?: UserInfo
   /**
-   * 身份证件类型
+   * 证件类型，支持以下类型
+<ul><li>ID_CARD : 居民身份证 (默认值)</li>
+<li>HONGKONG_AND_MACAO : 港澳居民来往内地通行证</li>
+<li>HONGKONG_MACAO_AND_TAIWAN : 港澳台居民居住证(格式同居民身份证)</li>
+<li>OTHER_CARD_TYPE : 其他</li></ul>
+
+注: `其他证件类型为白名单功能，使用前请联系对接的客户经理沟通。`
    */
   IdCardType?: string
   /**
@@ -4953,13 +5187,13 @@ export interface ChannelCreateReleaseFlowRequest {
    */
   ReliveInfo: RelieveInfo
   /**
-   * 替换解除协议的签署人， 如不指定替换签署人,  则使用原流程的签署人。 <br/>
-如需更换原合同中的企业端签署人，可通过指定该签署人的RecipientId编号更换此企业端签署人。(可通过接口<a href="https://qian.tencent.com/developers/companyApis/queryFlows/DescribeFlowInfo/">DescribeFlowInfo</a>查询签署人的RecipientId编号)<br/>
+   * 指定解除协议的签署人，如不指定，则默认使用原流程的签署人。 <br/>
+如需更换原合同中的企业端签署人，可通过指定该签署人在原合同列表中的ApproverNumber编号来更换此企业端签署人。(可通过接口<a href="https://qian.tencent.com/developers/partnerApis/flows/DescribeFlowDetailInfo/">DescribeFlowDetailInfo</a>查询签署人的ApproverNumber编号，默认从0开始，顺序递增)<br/>
 
 注意：
 <ul>
-<li>只能更换自己企业的签署人, 不支持更换个人类型或者其他企业的签署人</li>
-<li>可以不指定替换签署人, 使用原流程的签署人</li>
+<li>只能更换自己企业的签署人，不支持更换个人类型或者其他企业的签署人</li>
+<li>可以不指定替换签署人，使用原流程的签署人</li>
 </ul>
    */
   ReleasedApprovers?: Array<ReleasedApprover>
@@ -5613,99 +5847,48 @@ export interface ChannelCancelFlowRequest {
 }
 
 /**
- * DescribeTemplates请求参数结构体
+ * DescribeBillUsageDetail请求参数结构体
  */
-export interface DescribeTemplatesRequest {
+export interface DescribeBillUsageDetailRequest {
   /**
    * 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。
-
-此接口下面信息必填。
-<ul>
-<li>渠道应用标识:  Agent.AppId</li>
-<li>第三方平台子客企业标识: Agent.ProxyOrganizationOpenId</li>
-<li>第三方平台子客企业中的员工标识: Agent. ProxyOperator.OpenId</li>
-</ul>
-第三方平台子客企业和员工必须已经经过实名认证
    */
   Agent: Agent
   /**
-   * 合同模板ID，为32位字符串。
-
-可以通过<a href="https://qian.tencent.com/developers/partnerApis/accounts/CreateConsoleLoginUrl" target="_blank">生成子客登录链接</a>登录企业控制台, 在企业模板中得到合同模板ID。
+   * 查询开始时间字符串，格式为yyyymmdd,时间跨度不能大于31天
    */
-  TemplateId?: string
+  StartTime: string
   /**
-   * 查询模版的内容
-
-<ul><li>**0**：（默认）模板列表及详情</li>
-<li>**1**：仅模板列表, 不会返回模板中的签署控件, 填写控件, 参与方角色列表等信息</li></ul>
+   * 查询结束时间字符串，格式为yyyymmdd,时间跨度不能大于31天
    */
-  ContentType?: number
+  EndTime: string
   /**
-   * 合同模板ID数组，每一个合同模板ID为32位字符串,  最多支持200个模板的批量查询。
-
-注意: 
-1.` 此参数TemplateIds与TemplateId互为独立，若两者均传入，以TemplateId为准。`
-2. `请确保每个模板均正确且属于当前企业，若有任一模板不存在，则返回错误。`
-4. `若传递此参数，分页参数(Limit,Offset)无效`
-
+   * 查询的套餐类型 （选填 ）不传则查询所有套餐；
+对应关系如下
+CloudEnterprise-企业版合同
+SingleSignature-单方签章
+CloudProve-签署报告
+CloudOnlineSign-腾讯会议在线签约
+ChannelWeCard-微工卡
+SignFlow-合同套餐
+SignFace-签署意愿（人脸识别）
+SignPassword-签署意愿（密码）
+SignSMS-签署意愿（短信）
+PersonalEssAuth-签署人实名（腾讯电子签认证）
+PersonalThirdAuth-签署人实名（信任第三方认证）
+OrgEssAuth-签署企业实名
+FlowNotify-短信通知
+AuthService-企业工商信息查询
    */
-  TemplateIds?: Array<string>
+  QuotaType?: string
   /**
-   * 指定每页返回的数据条数，和Offset参数配合使用。
-
-注：`1.默认值为20，单页做大值为200。`
-   */
-  Limit?: number
-  /**
-   * 查询结果分页返回，指定从第几页返回数据，和Limit参数配合使用。
-
-注：`1.offset从0开始，即第一页为0。`
-`2.默认从第一页返回。`
+   * 指定分页返回第几页的数据，如果不传默认返回第一页，页码从 0 开始，即首页为 0
    */
   Offset?: number
   /**
-   * 模糊搜索的模板名称，注意是模板名的连续部分，长度不能超过200，可支持由中文、字母、数字和下划线组成字符串。
+   * 指定分页每页返回的数据条数，如果不传默认为 50，单页最大支持 50。
    */
-  TemplateName?: string
-  /**
-   * 对应第三方应用平台企业的模板ID，通过此值可以搜索由第三方应用平台模板ID下发或领取得到的子客模板列表。
-   */
-  ChannelTemplateId?: string
-  /**
-   * 返回控件的范围, 是只返回发起方自己的还是所有参与方的
-
-<ul><li>**false**：（默认）只返回发起方控件</li>
-<li>**true**：返回所有参与方(包括发起方和签署方)控件</li></ul>
-   */
-  QueryAllComponents?: boolean
-  /**
-   * 是否获取模板预览链接。
-
-<ul><li>**false**：不获取（默认）</li>
-<li>**true**：获取</li></ul>
-
-设置为true之后， 返回参数PreviewUrl，为模板的H5预览链接,  有效期5分钟。可以通过浏览器打开此链接预览模板，或者嵌入到iframe中预览模板。
-
-注: `此功能为白名单功能，使用前请联系对接的客户经理沟通。`
-   */
-  WithPreviewUrl?: boolean
-  /**
-   * 是否获取模板的PDF文件链接。
-
-<ul><li>**false**：不获取（默认）</li>
-<li>**true**：获取</li></ul>
-
-设置为true之后， 返回参数PdfUrl，为模板PDF文件链接，有效期5分钟, 可以用于将PDF文件下载到本地
-
-注: `此功能为白名单功能，使用前请联系对接的客户经理沟通。`
-   */
-  WithPdfUrl?: boolean
-  /**
-   * 操作者的信息
-   * @deprecated
-   */
-  Operator?: UserInfo
+  Limit?: number
 }
 
 /**
@@ -5739,15 +5922,29 @@ export interface RelieveInfo {
  */
 export interface ChannelCreateSealPolicyRequest {
   /**
-   * 应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 必填。
+   * 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。
+
+此接口下面信息必填。
+
+渠道应用标识: Agent.AppId
+第三方平台子客企业标识: Agent.ProxyOrganizationOpenId
+第三方平台子客企业中的员工标识: Agent. ProxyOperator.OpenId
+第三方平台子客企业和员工必须已经经过实名认证。
    */
   Agent: Agent
   /**
-   * 指定印章ID
+   * 电子印章ID，为32位字符串。
+建议开发者保留此印章ID，后续指定签署区印章或者操作印章需此印章ID。
+可登录腾讯电子签控制台，在 "印章"->"印章中心"选择查看的印章，在"印章详情" 中查看某个印章的SealId(在页面中展示为印章ID)。
    */
   SealId: string
   /**
-   * 指定待授权的用户ID数组,电子签的用户ID
+   * 
+员工在腾讯电子签平台的唯一身份标识，为32位字符串。
+可登录腾讯电子签控制台，在 "更多能力"->"组织管理" 中查看某位员工的UserId(在页面中展示为用户ID)。
+员工在贵司业务系统中的唯一身份标识，用于与腾讯电子签账号进行映射，确保在同一企业内不会出现重复。
+该标识最大长度为64位字符串，仅支持包含26个英文字母和数字0-9的字符。
+指定待授权的用户ID数组,电子签的用户ID
 可以填写OpenId，系统会通过组织+渠道+OpenId查询得到UserId进行授权。
    */
   UserIds: Array<string>

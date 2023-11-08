@@ -947,6 +947,15 @@ export interface DeleteMigrationTaskResponse {
     RequestId?: string;
 }
 /**
+ * UpdateFileSystemBandwidthLimit返回参数结构体
+ */
+export interface UpdateFileSystemBandwidthLimitResponse {
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * DescribeSnapshotOperationLogs返回参数结构体
  */
 export interface DescribeSnapshotOperationLogsResponse {
@@ -988,6 +997,19 @@ export interface DeleteCfsFileSystemRequest {
      * 文件系统 ID。说明，进行删除文件系统操作前需要先调用 DeleteMountTarget 接口删除该文件系统的挂载点，否则会删除失败。
      */
     FileSystemId: string;
+}
+/**
+ * UpdateFileSystemBandwidthLimit请求参数结构体
+ */
+export interface UpdateFileSystemBandwidthLimitRequest {
+    /**
+     * 文件系统 ID
+     */
+    FileSystemId: string;
+    /**
+     * 文件系统带宽，仅吞吐型可填。单位MiB/s，最小为1GiB/s，最大200GiB/s。
+     */
+    BandwidthLimit: number;
 }
 /**
  * CreateCfsPGroup返回参数结构体

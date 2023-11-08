@@ -7479,7 +7479,7 @@ export interface CreateClusterVirtualNodeResponse {
   /**
    * 虚拟节点名称
    */
-  NodeName: string
+  NodeName?: string
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -8545,12 +8545,12 @@ export interface DescribeClusterVirtualNodePoolsResponse {
    * 节点池总数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 虚拟节点池列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  NodePoolSet: Array<VirtualNodePool>
+  NodePoolSet?: Array<VirtualNodePool>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -10221,7 +10221,7 @@ export interface EnableEventPersistenceResponse {
 }
 
 /**
- * 虚拟节点
+ * 超级节点
  */
 export interface VirtualNodeSpec {
   /**

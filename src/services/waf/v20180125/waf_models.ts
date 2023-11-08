@@ -479,6 +479,30 @@ export interface DeleteAccessExportResponse {
  */
 export interface DescribeModuleStatusResponse {
   /**
+   * WEB安全规则是否开启
+   */
+  WebSecurity?: number
+  /**
+   * 访问控制规则是否开启
+   */
+  AccessControl?: number
+  /**
+   * CC防护是否开启
+   */
+  CcProtection?: number
+  /**
+   * 网页防篡改是否开启
+   */
+  AntiTamper?: number
+  /**
+   * 信息防泄漏是否开启
+   */
+  AntiLeakage?: number
+  /**
+   * API安全是否开启
+   */
+  ApiProtection?: number
+  /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -2357,7 +2381,12 @@ export interface HostDel {
 /**
  * DescribeModuleStatus请求参数结构体
  */
-export type DescribeModuleStatusRequest = null
+export interface DescribeModuleStatusRequest {
+  /**
+   * 要查询状态的域名
+   */
+  Domain: string
+}
 
 /**
  * DescribeAntiFakeUrl请求参数结构体
@@ -6551,7 +6580,36 @@ export interface DescribeSpartaProtectionInfoResponse {
 /**
  * ModifyModuleStatus请求参数结构体
  */
-export type ModifyModuleStatusRequest = null
+export interface ModifyModuleStatusRequest {
+  /**
+   * 需要设置的domain
+   */
+  Domain: string
+  /**
+   * WEB 安全模块开关，0或1
+   */
+  WebSecurity: number
+  /**
+   * 访问控制模块开关，0或者1
+   */
+  AccessControl: number
+  /**
+   * CC模块开关，0或者1
+   */
+  CcProtection: number
+  /**
+   * API安全模块开关，0或者1
+   */
+  ApiProtection: number
+  /**
+   * 防篡改模块开关，0或者1
+   */
+  AntiTamper?: number
+  /**
+   * 防泄漏模块开关，0或者1
+   */
+  AntiLeakage?: number
+}
 
 /**
  * 日志KeyValue对数组，用于搜索访问日志

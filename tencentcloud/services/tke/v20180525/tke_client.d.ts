@@ -16,7 +16,7 @@ export declare class Client extends AbstractClient {
      */
     CreateECMInstances(req: CreateECMInstancesRequest, cb?: (error: string, rep: CreateECMInstancesResponse) => void): Promise<CreateECMInstancesResponse>;
     /**
-     * 查看虚拟节点列表
+     * 查看超级节点列表
      */
     DescribeClusterVirtualNode(req: DescribeClusterVirtualNodeRequest, cb?: (error: string, rep: DescribeClusterVirtualNodeResponse) => void): Promise<DescribeClusterVirtualNodeResponse>;
     /**
@@ -28,7 +28,7 @@ export declare class Client extends AbstractClient {
      */
     InstallEdgeLogAgent(req: InstallEdgeLogAgentRequest, cb?: (error: string, rep: InstallEdgeLogAgentResponse) => void): Promise<InstallEdgeLogAgentResponse>;
     /**
-     * 创建虚拟节点池
+     * 创建超级节点池
      */
     CreateClusterVirtualNodePool(req: CreateClusterVirtualNodePoolRequest, cb?: (error: string, rep: CreateClusterVirtualNodePoolResponse) => void): Promise<CreateClusterVirtualNodePoolResponse>;
     /**
@@ -104,7 +104,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeReservedInstances(req: DescribeReservedInstancesRequest, cb?: (error: string, rep: DescribeReservedInstancesResponse) => void): Promise<DescribeReservedInstancesResponse>;
     /**
-     * 删除虚拟节点
+     * 删除超级节点
      */
     DeleteClusterVirtualNode(req: DeleteClusterVirtualNodeRequest, cb?: (error: string, rep: DeleteClusterVirtualNodeResponse) => void): Promise<DeleteClusterVirtualNodeResponse>;
     /**
@@ -164,7 +164,7 @@ export declare class Client extends AbstractClient {
      */
     CreateBackupStorageLocation(req: CreateBackupStorageLocationRequest, cb?: (error: string, rep: CreateBackupStorageLocationResponse) => void): Promise<CreateBackupStorageLocationResponse>;
     /**
-     * 修改虚拟节点池
+     * 修改超级节点池
      */
     ModifyClusterVirtualNodePool(req: ModifyClusterVirtualNodePoolRequest, cb?: (error: string, rep: ModifyClusterVirtualNodePoolResponse) => void): Promise<ModifyClusterVirtualNodePoolResponse>;
     /**
@@ -364,7 +364,7 @@ export declare class Client extends AbstractClient {
      */
     CreateImageCache(req: CreateImageCacheRequest, cb?: (error: string, rep: CreateImageCacheResponse) => void): Promise<CreateImageCacheResponse>;
     /**
-     * 删除虚拟节点池
+     * 删除超级节点池
      */
     DeleteClusterVirtualNodePool(req: DeleteClusterVirtualNodePoolRequest, cb?: (error: string, rep: DeleteClusterVirtualNodePoolResponse) => void): Promise<DeleteClusterVirtualNodePoolResponse>;
     /**
@@ -384,7 +384,7 @@ export declare class Client extends AbstractClient {
      */
     DeleteAddon(req: DeleteAddonRequest, cb?: (error: string, rep: DeleteAddonResponse) => void): Promise<DeleteAddonResponse>;
     /**
-     * 驱逐虚拟节点
+     * 驱逐超级节点
      */
     DrainClusterVirtualNode(req: DrainClusterVirtualNodeRequest, cb?: (error: string, rep: DrainClusterVirtualNodeResponse) => void): Promise<DrainClusterVirtualNodeResponse>;
     /**
@@ -700,7 +700,7 @@ export declare class Client extends AbstractClient {
      */
     CreateClusterRelease(req: CreateClusterReleaseRequest, cb?: (error: string, rep: CreateClusterReleaseResponse) => void): Promise<CreateClusterReleaseResponse>;
     /**
-     * 查看虚拟节点池列表
+     * 查看超级节点池列表
      */
     DescribeClusterVirtualNodePools(req: DescribeClusterVirtualNodePoolsRequest, cb?: (error: string, rep: DescribeClusterVirtualNodePoolsResponse) => void): Promise<DescribeClusterVirtualNodePoolsResponse>;
     /**
@@ -840,7 +840,7 @@ export declare class Client extends AbstractClient {
      */
     GetTkeAppChartList(req: GetTkeAppChartListRequest, cb?: (error: string, rep: GetTkeAppChartListResponse) => void): Promise<GetTkeAppChartListResponse>;
     /**
-     * 创建虚拟节点
+     * 创建按量计费超级节点
      */
     CreateClusterVirtualNode(req: CreateClusterVirtualNodeRequest, cb?: (error: string, rep: CreateClusterVirtualNodeResponse) => void): Promise<CreateClusterVirtualNodeResponse>;
     /**

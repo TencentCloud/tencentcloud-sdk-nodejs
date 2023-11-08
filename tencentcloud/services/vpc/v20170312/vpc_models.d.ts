@@ -10316,6 +10316,10 @@ export interface ModifyVpnGatewayAttributeRequest {
      * VPN网关计费模式，目前只支持预付费（即包年包月）到后付费（即按量计费）的转换。即参数只支持：POSTPAID_BY_HOUR。
      */
     InstanceChargeType?: string;
+    /**
+     * BGP ASN。ASN取值范围为1- 4294967295，默认值64551，其中139341、45090和58835不可用。
+     */
+    BgpAsn?: number;
 }
 /**
  * CreateNatGateway请求参数结构体

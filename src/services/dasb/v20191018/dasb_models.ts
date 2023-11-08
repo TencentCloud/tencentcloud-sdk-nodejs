@@ -677,47 +677,47 @@ export interface SearchCommandResult {
   /**
    * 命令输入的时间
    */
-  Time: string
+  Time?: string
   /**
    * 用户名
    */
-  UserName: string
+  UserName?: string
   /**
    * 姓名
    */
-  RealName: string
+  RealName?: string
   /**
    * 资产ID
    */
-  InstanceId: string
+  InstanceId?: string
   /**
    * 资产名称
    */
-  DeviceName: string
+  DeviceName?: string
   /**
    * 资产公网IP
    */
-  PublicIp: string
+  PublicIp?: string
   /**
    * 资产内网IP
    */
-  PrivateIp: string
+  PrivateIp?: string
   /**
    * 命令
    */
-  Cmd: string
+  Cmd?: string
   /**
    * 命令执行情况，1--允许，2--拒绝
    */
-  Action: number
+  Action?: number
   /**
    * 命令所属的会话ID
    */
-  Sid: string
+  Sid?: string
   /**
    * 命令执行时间相对于所属会话开始时间的偏移量，单位ms
    */
-  TimeOffset: number
+  TimeOffset?: number
   /**
    * 账号
 注意：此字段可能返回 null，表示取不到有效值。
@@ -731,6 +731,12 @@ export interface SearchCommandResult {
   /**
    * 该命令所属会话的会话开始时间
 注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SessionTime?: string
+  /**
+   * 该命令所属会话的会话开始时间（废弃，使用SessionTime）
+注意：此字段可能返回 null，表示取不到有效值。
+   * @deprecated
    */
   SessTime?: string
   /**
@@ -1283,19 +1289,19 @@ export interface Command {
   /**
    * 命令
    */
-  Cmd: string
+  Cmd?: string
   /**
    * 命令输入的时间
    */
-  Time: string
+  Time?: string
   /**
    * 命令执行时间相对于所属会话开始时间的偏移量，单位ms
    */
-  TimeOffset: number
+  TimeOffset?: number
   /**
    * 命令执行情况，1--允许，2--拒绝，3--确认
    */
-  Action: number
+  Action?: number
   /**
    * 会话id
 注意：此字段可能返回 null，表示取不到有效值。
@@ -1324,6 +1330,12 @@ export interface Command {
   /**
    * 该命令所属会话的会话开始时间
 注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SessionTime?: string
+  /**
+   * 该命令所属会话的会话开始时间
+注意：此字段可能返回 null，表示取不到有效值。
+   * @deprecated
    */
   SessTime?: string
   /**
@@ -1499,6 +1511,11 @@ export interface SearchAuditLogRequest {
  * CreateResource返回参数结构体
  */
 export interface CreateResourceResponse {
+  /**
+   * 实例Id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResourceId?: string
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1969,6 +1986,11 @@ export interface DescribeUserGroupMembersResponse {
  * ImportExternalDevice返回参数结构体
  */
 export interface ImportExternalDeviceResponse {
+  /**
+   * 资产ID列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DeviceIdSet?: Array<number | bigint>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

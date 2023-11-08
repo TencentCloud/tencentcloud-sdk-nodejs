@@ -40,7 +40,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateECMInstances", req, cb);
     }
     /**
-     * 查看虚拟节点列表
+     * 查看超级节点列表
      */
     async DescribeClusterVirtualNode(req, cb) {
         return this.request("DescribeClusterVirtualNode", req, cb);
@@ -58,7 +58,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("InstallEdgeLogAgent", req, cb);
     }
     /**
-     * 创建虚拟节点池
+     * 创建超级节点池
      */
     async CreateClusterVirtualNodePool(req, cb) {
         return this.request("CreateClusterVirtualNodePool", req, cb);
@@ -172,7 +172,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeReservedInstances", req, cb);
     }
     /**
-     * 删除虚拟节点
+     * 删除超级节点
      */
     async DeleteClusterVirtualNode(req, cb) {
         return this.request("DeleteClusterVirtualNode", req, cb);
@@ -262,7 +262,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateBackupStorageLocation", req, cb);
     }
     /**
-     * 修改虚拟节点池
+     * 修改超级节点池
      */
     async ModifyClusterVirtualNodePool(req, cb) {
         return this.request("ModifyClusterVirtualNodePool", req, cb);
@@ -562,7 +562,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateImageCache", req, cb);
     }
     /**
-     * 删除虚拟节点池
+     * 删除超级节点池
      */
     async DeleteClusterVirtualNodePool(req, cb) {
         return this.request("DeleteClusterVirtualNodePool", req, cb);
@@ -592,7 +592,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteAddon", req, cb);
     }
     /**
-     * 驱逐虚拟节点
+     * 驱逐超级节点
      */
     async DrainClusterVirtualNode(req, cb) {
         return this.request("DrainClusterVirtualNode", req, cb);
@@ -1066,7 +1066,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateClusterRelease", req, cb);
     }
     /**
-     * 查看虚拟节点池列表
+     * 查看超级节点池列表
      */
     async DescribeClusterVirtualNodePools(req, cb) {
         return this.request("DescribeClusterVirtualNodePools", req, cb);
@@ -1276,7 +1276,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("GetTkeAppChartList", req, cb);
     }
     /**
-     * 创建虚拟节点
+     * 创建按量计费超级节点
      */
     async CreateClusterVirtualNode(req, cb) {
         return this.request("CreateClusterVirtualNode", req, cb);

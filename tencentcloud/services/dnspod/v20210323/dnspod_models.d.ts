@@ -741,91 +741,91 @@ export interface DomainListItem {
     /**
      * 系统分配给域名的唯一标识
      */
-    DomainId: number;
+    DomainId?: number;
     /**
      * 域名的原始格式
      */
-    Name: string;
+    Name?: string;
     /**
      * 域名的状态，正常：ENABLE，暂停：PAUSE，封禁：SPAM
      */
-    Status: string;
+    Status?: string;
     /**
      * 域名默认的解析记录默认TTL值
      */
-    TTL: number;
+    TTL?: number;
     /**
      * 是否开启CNAME加速，开启：ENABLE，未开启：DISABLE
      */
-    CNAMESpeedup: string;
+    CNAMESpeedup?: string;
     /**
      * DNS 设置状态，错误：DNSERROR，正常：空字符串
      */
-    DNSStatus: string;
+    DNSStatus?: string;
     /**
      * 域名的套餐等级代码
      */
-    Grade: string;
+    Grade?: string;
     /**
      * 域名所属的分组Id
      */
-    GroupId: number;
+    GroupId?: number;
     /**
      * 是否开启搜索引擎推送优化，是：YES，否：NO
      */
-    SearchEnginePush: string;
+    SearchEnginePush?: string;
     /**
      * 域名备注说明
      */
-    Remark: string;
+    Remark?: string;
     /**
      * 经过punycode编码后的域名格式
      */
-    Punycode: string;
+    Punycode?: string;
     /**
      * 系统为域名分配的有效DNS
      */
-    EffectiveDNS: Array<string>;
+    EffectiveDNS?: Array<string>;
     /**
      * 域名套餐等级对应的序号
      */
-    GradeLevel: number;
+    GradeLevel?: number;
     /**
      * 套餐名称
      */
-    GradeTitle: string;
+    GradeTitle?: string;
     /**
      * 是否是付费套餐
      */
-    IsVip: string;
+    IsVip?: string;
     /**
      * 付费套餐开通时间
      */
-    VipStartAt: string;
+    VipStartAt?: string;
     /**
      * 付费套餐到期时间
      */
-    VipEndAt: string;
+    VipEndAt?: string;
     /**
      * 域名是否开通VIP自动续费，是：YES，否：NO，默认：DEFAULT
      */
-    VipAutoRenew: string;
+    VipAutoRenew?: string;
     /**
      * 域名下的记录数量
      */
-    RecordCount: number;
+    RecordCount?: number;
     /**
      * 域名添加时间
      */
-    CreatedOn: string;
+    CreatedOn?: string;
     /**
      * 域名更新时间
      */
-    UpdatedOn: string;
+    UpdatedOn?: string;
     /**
      * 域名所属账号
      */
-    Owner: string;
+    Owner?: string;
     /**
      * 域名关联的标签列表
   注意：此字段可能返回 null，表示取不到有效值。

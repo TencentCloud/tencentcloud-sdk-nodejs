@@ -798,6 +798,16 @@ it("tdmq.v20200217.DeleteRabbitMQUser", async function () {
     }
 })
 
+it("tdmq.v20200217.CreateProCluster", async function () {
+    try {
+       const data = await client.CreateProCluster({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tdmq.v20200217.DescribeRabbitMQVirtualHost", async function () {
     try {
        const data = await client.DescribeRabbitMQVirtualHost({})

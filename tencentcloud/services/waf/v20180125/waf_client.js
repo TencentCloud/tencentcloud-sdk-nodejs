@@ -102,9 +102,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeSpartaProtectionInfo", req, cb);
     }
     /**
-     * 接口已废弃
-
-描述WAF自动封禁IP详情,对齐自动封堵状态
+     * 描述WAF自动封禁IP详情,对齐自动封堵状态
      */
     async DescribeAutoDenyIP(req, cb) {
         return this.request("DescribeAutoDenyIP", req, cb);

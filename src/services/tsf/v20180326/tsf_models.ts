@@ -5677,192 +5677,207 @@ export interface ContainerGroupDeploy {
    * 部署组id
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  GroupId: string
+  GroupId?: string
   /**
    * 分组名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  GroupName: string
+  GroupName?: string
   /**
    * 实例总数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  InstanceNum: number
+  InstanceNum?: number
   /**
    * 已启动实例总数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CurrentNum: number
+  CurrentNum?: number
   /**
    * 镜像server
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Server: string
+  Server?: string
   /**
    * 镜像名，如/tsf/nginx
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Reponame: string
+  Reponame?: string
   /**
    * 镜像版本名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TagName: string
+  TagName?: string
   /**
    * 业务容器初始分配的 CPU 核数，对应 K8S request
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CpuRequest: string
+  CpuRequest?: string
   /**
    * 业务容器最大分配的 CPU 核数，对应 K8S limit
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CpuLimit: string
+  CpuLimit?: string
   /**
    * 业务容器初始分配的内存 MiB 数，对应 K8S request
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  MemRequest: string
+  MemRequest?: string
   /**
    * 业务容器最大分配的内存 MiB 数，对应 K8S limit
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  MemLimit: string
+  MemLimit?: string
   /**
    * 0:公网 1:集群内访问 2：NodePort
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  AccessType: number
+  AccessType?: number
   /**
    * 端口映射
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ProtocolPorts: Array<ProtocolPort>
+  ProtocolPorts?: Array<ProtocolPort>
   /**
    * 更新方式：0:快速更新 1:滚动更新
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  UpdateType: number
+  UpdateType?: number
   /**
    * 更新间隔,单位秒
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  UpdateIvl: number
+  UpdateIvl?: number
   /**
    * jvm参数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  JvmOpts: string
+  JvmOpts?: string
   /**
    * 子网id
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SubnetId: string
+  SubnetId?: string
   /**
    * agent容器初始分配的 CPU 核数，对应 K8S request
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  AgentCpuRequest: string
+  AgentCpuRequest?: string
   /**
    * agent容器最大分配的 CPU 核数，对应 K8S limit
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  AgentCpuLimit: string
+  AgentCpuLimit?: string
   /**
    * agent容器初始分配的内存 MiB 数，对应 K8S request
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  AgentMemRequest: string
+  AgentMemRequest?: string
   /**
    * agent容器最大分配的内存 MiB 数，对应 K8S limit
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  AgentMemLimit: string
+  AgentMemLimit?: string
   /**
    * istioproxy容器初始分配的 CPU 核数，对应 K8S request
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  IstioCpuRequest: string
+  IstioCpuRequest?: string
   /**
    * istioproxy容器最大分配的 CPU 核数，对应 K8S limit
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  IstioCpuLimit: string
+  IstioCpuLimit?: string
   /**
    * istioproxy容器初始分配的内存 MiB 数，对应 K8S request
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  IstioMemRequest: string
+  IstioMemRequest?: string
   /**
    * istioproxy容器最大分配的内存 MiB 数，对应 K8S limit
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  IstioMemLimit: string
+  IstioMemLimit?: string
   /**
    * 部署组的环境变量数组，这里没有展示 tsf 使用的环境变量，只展示了用户设置的环境变量。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Envs: Array<Env>
+  Envs?: Array<Env>
   /**
    * 健康检查配置信息，若不指定该参数，则默认不设置健康检查。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  HealthCheckSettings: HealthCheckSettings
+  HealthCheckSettings?: HealthCheckSettings
   /**
    * 是否部署Agent容器
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DeployAgent: boolean
+  DeployAgent?: boolean
   /**
    * 部署组备注
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Alias: string
+  Alias?: string
   /**
    * 是否创建 k8s service
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DisableService: boolean
+  DisableService?: boolean
   /**
    * service 是否为 headless 类型
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  HeadlessService: boolean
+  HeadlessService?: boolean
   /**
    * TcrRepoInfo值
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TcrRepoInfo: TcrRepoInfo
+  TcrRepoInfo?: TcrRepoInfo
   /**
    * 数据卷信息，list
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  VolumeInfos: Array<VolumeInfo>
+  VolumeInfos?: Array<VolumeInfo>
   /**
    * 数据卷挂载信息，list
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  VolumeMountInfos: Array<VolumeMountInfo>
+  VolumeMountInfos?: Array<VolumeMountInfo>
   /**
    * KubeInjectEnable值
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  KubeInjectEnable: boolean
+  KubeInjectEnable?: boolean
   /**
    * 仓库类型 (person, tcr)
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RepoType: string
+  RepoType?: string
   /**
    * 预热配置设置
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  WarmupSetting: WarmupSetting
+  WarmupSetting?: WarmupSetting
   /**
    * Envoy网关服务配置
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  GatewayConfig: GatewayConfig
+  GatewayConfig?: GatewayConfig
+  /**
+   * 容器名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ContainerName?: string
+  /**
+   * 附加容器列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AdditionalContainerList?: Array<GroupContainerInfo>
+  /**
+   * 内部容器列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InternalContainerList?: Array<GroupContainerInfo>
 }
 
 /**
@@ -6401,6 +6416,10 @@ export interface DescribeImageRepositoryRequest {
    * TcrRepoInfo值
    */
   TcrRepoInfo?: TcrRepoInfo
+  /**
+   * 镜像仓库
+   */
+  RepoName?: string
 }
 
 /**
@@ -6902,6 +6921,91 @@ export interface MetricDimension {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Value?: string
+}
+
+/**
+ * 部署组容器信息
+ */
+export interface GroupContainerInfo {
+  /**
+   * 镜像版本名称
+   */
+  TagName: string
+  /**
+   * 容器名字
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ContainerName?: string
+  /**
+   * 镜像名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RepoName?: string
+  /**
+   * 仓库类型,tcr，address，personal，默认personal
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RepoType?: string
+  /**
+   * tcr仓库信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TcrRepoInfo?: TcrRepoInfo
+  /**
+   * 镜像server
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Server?: string
+  /**
+   * 凭证名字
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SecretName?: string
+  /**
+   * jvm 参数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  JvmOpts?: string
+  /**
+   * 容器最大的 CPU 核数，对应 K8S 的 limit
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CpuLimit?: string
+  /**
+   * 容器分配的 CPU 核数，对应 K8S 的 request
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CpuRequest?: string
+  /**
+   * 容器分配的内存 MiB 数，对应 K8S 的 request
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MemRequest?: string
+  /**
+   * 容器最大的内存 MiB 数，对应 K8S 的 limit
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MemLimit?: string
+  /**
+   * 健康检查配置信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HealthCheckSettings?: HealthCheckSettings
+  /**
+   * 环境变量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Envs?: Array<Env>
+  /**
+   * 环境变量,作为入参时不用填
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UserEnvs?: Array<Env>
+  /**
+   * 数据卷挂载点信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VolumeMountInfoList?: Array<VolumeMountInfo>
 }
 
 /**
@@ -9333,7 +9437,7 @@ export interface DescribeImageTagsResponse {
   /**
    * 查询的权限数据对象
    */
-  Result: ImageTagsResult
+  Result?: ImageTagsResult
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -14867,7 +14971,7 @@ export interface DescribeImageRepositoryResponse {
   /**
    * 查询的权限数据对象
    */
-  Result: ImageRepositoryResult
+  Result?: ImageRepositoryResult
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -14892,7 +14996,7 @@ export interface DescribeImageTagsRequest {
   /**
    * 应用Id
    */
-  ApplicationId: string
+  ApplicationId?: string
   /**
    * 偏移量，取值从0开始
    */
@@ -14917,6 +15021,10 @@ export interface DescribeImageTagsRequest {
    * TcrRepoInfo值
    */
   TcrRepoInfo?: TcrRepoInfo
+  /**
+   * 仓库名
+   */
+  RepoName?: string
 }
 
 /**

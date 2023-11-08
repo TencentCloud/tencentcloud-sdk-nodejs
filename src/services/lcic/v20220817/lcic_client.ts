@@ -50,6 +50,7 @@ import {
   ClassScoreItem,
   DescribeRoomRequest,
   BatchDescribeDocumentRequest,
+  RegisterUserRequest,
   BatchCreateRoomResponse,
   UnbindDocumentFromRoomResponse,
   CreateDocumentResponse,
@@ -78,6 +79,8 @@ import {
   DescribeDocumentResponse,
   DeleteGroupMemberResponse,
   DescribeGroupMemberListResponse,
+  ForbidSendMsgRequest,
+  DescribeRoomForbiddenUserRequest,
   EventInfo,
   DescribeScoreListRequest,
   AppConfig,
@@ -85,6 +88,7 @@ import {
   DescribeAnswerListRequest,
   BatchCreateRoomRequest,
   DescribeGroupMemberListRequest,
+  DescribeRoomForbiddenUserResponse,
   UserInfo,
   DescribeUserResponse,
   DescribeScoreListResponse,
@@ -119,7 +123,7 @@ import {
   ImageInfo,
   ModifyAppRequest,
   UnbindDocumentFromRoomRequest,
-  RegisterUserRequest,
+  MutedAccountList,
   GroupBaseInfo,
   LoginUserRequest,
   ImageMsgContent,
@@ -139,6 +143,7 @@ import {
   KickUserFromRoomRequest,
   SetWatermarkRequest,
   GetRoomsRequest,
+  ForbidSendMsgResponse,
   SendRoomNormalMessageRequest,
   DescribeDeveloperRequest,
   AppCustomContent,
@@ -181,6 +186,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAppDetailResponse) => void
   ): Promise<DescribeAppDetailResponse> {
     return this.request("DescribeAppDetail", req, cb)
+  }
+
+  /**
+   * 根据房间ID获取群组中被禁言的用户列表。
+   */
+  async DescribeRoomForbiddenUser(
+    req: DescribeRoomForbiddenUserRequest,
+    cb?: (error: string, rep: DescribeRoomForbiddenUserResponse) => void
+  ): Promise<DescribeRoomForbiddenUserResponse> {
+    return this.request("DescribeRoomForbiddenUser", req, cb)
   }
 
   /**
@@ -553,6 +568,18 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: LoginOriginIdResponse) => void
   ): Promise<LoginOriginIdResponse> {
     return this.request("LoginOriginId", req, cb)
+  }
+
+  /**
+     * 禁止指定房间中某些用户在一段时间内发言。
+取消对某些用户的禁言。
+被禁言用户退出房间之后再进入同一房间，禁言仍然有效。
+     */
+  async ForbidSendMsg(
+    req: ForbidSendMsgRequest,
+    cb?: (error: string, rep: ForbidSendMsgResponse) => void
+  ): Promise<ForbidSendMsgResponse> {
+    return this.request("ForbidSendMsg", req, cb)
   }
 
   /**

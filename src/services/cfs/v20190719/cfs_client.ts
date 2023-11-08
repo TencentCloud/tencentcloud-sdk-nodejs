@@ -58,9 +58,11 @@ import {
   DeleteCfsRuleRequest,
   UpdateCfsRuleResponse,
   DeleteMigrationTaskResponse,
+  UpdateFileSystemBandwidthLimitResponse,
   DescribeSnapshotOperationLogsResponse,
   UpdateCfsFileSystemPGroupResponse,
   DeleteCfsFileSystemRequest,
+  UpdateFileSystemBandwidthLimitRequest,
   CreateCfsPGroupResponse,
   DescribeCfsServiceStatusRequest,
   DeleteUserQuotaResponse,
@@ -182,6 +184,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeCfsPGroupsResponse) => void
   ): Promise<DescribeCfsPGroupsResponse> {
     return this.request("DescribeCfsPGroups", req, cb)
+  }
+
+  /**
+   * 更新文件系统带宽
+   */
+  async UpdateFileSystemBandwidthLimit(
+    req: UpdateFileSystemBandwidthLimitRequest,
+    cb?: (error: string, rep: UpdateFileSystemBandwidthLimitResponse) => void
+  ): Promise<UpdateFileSystemBandwidthLimitResponse> {
+    return this.request("UpdateFileSystemBandwidthLimit", req, cb)
   }
 
   /**

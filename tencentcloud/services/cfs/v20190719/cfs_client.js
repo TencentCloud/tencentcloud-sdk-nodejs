@@ -58,6 +58,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeCfsPGroups", req, cb);
     }
     /**
+     * 更新文件系统带宽
+     */
+    async UpdateFileSystemBandwidthLimit(req, cb) {
+        return this.request("UpdateFileSystemBandwidthLimit", req, cb);
+    }
+    /**
      * 设置文件系统配额，提供UID/GID的配额设置的接口
      */
     async SetUserQuota(req, cb) {

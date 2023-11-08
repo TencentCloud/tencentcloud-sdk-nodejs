@@ -161,6 +161,32 @@ export interface RabbitMQClusterWhiteListInfo {
 }
 
 /**
+ * CreateProCluster返回参数结构体
+ */
+export interface CreateProClusterResponse {
+  /**
+   * 子订单号
+   */
+  DealName?: string
+  /**
+   * 订单号
+   */
+  BigDealId?: string
+  /**
+   * 集群Id
+   */
+  ClusterId?: string
+  /**
+   * 集群名称
+   */
+  ClusterName?: string
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * cmq DeadLetterPolicy
  */
 export interface CmqDeadLetterPolicy {
@@ -3172,25 +3198,51 @@ export interface DeleteRocketMQTopicResponse {
 }
 
 /**
- * 消息日志
+ * CreateProCluster请求参数结构体
  */
-export interface MsgLog {
+export interface CreateProClusterRequest {
   /**
-   * 消息ID。
+   * 多可用区部署选择三个可用区，示例"200002","200003","200004"
+
+单可用区部署选择一个可用区，示例"200002"
    */
-  MsgId: string
+  ZoneIds: string
   /**
-   * 生产者名称。
+   * 集群规格代号
+参考 [专业集群规格](https://cloud.tencent.com/document/product/1179/83705)
    */
-  ProducerName: string
+  ProductName: string
   /**
-   * 生产时间。
+   * 存储规格
+参考 [专业集群规格](https://cloud.tencent.com/document/product/1179/83705)
    */
-  ProduceTime: string
+  StorageSize: number
   /**
-   * 生产客户端地址。
+   * 1: true，开启自动按月续费
+
+0: false，关闭自动按月续费
    */
-  ProducerAddr: string
+  AutoRenewFlag: number
+  /**
+   * 购买时长，取值范围：1～50
+   */
+  TimeSpan: number
+  /**
+   * 集群的标签列表(已废弃)
+   */
+  Tags: Array<Tag>
+  /**
+   * 集群名称，不支持中字以及除了短线和下划线外的特殊字符且不超过64个字符。
+   */
+  ClusterName: string
+  /**
+   * 是否自动选择代金券 1是 0否 默认为0
+   */
+  AutoVoucher: number
+  /**
+   * vpc网络标签
+   */
+  Vpcs?: VpcInfo
 }
 
 /**
@@ -3424,6 +3476,28 @@ export interface DescribeRocketMQMsgRequest {
    * 查询死信时该值为true，只对Rocketmq有效
    */
   QueryDlqMsg?: boolean
+}
+
+/**
+ * 消息日志
+ */
+export interface MsgLog {
+  /**
+   * 消息ID。
+   */
+  MsgId: string
+  /**
+   * 生产者名称。
+   */
+  ProducerName: string
+  /**
+   * 生产时间。
+   */
+  ProduceTime: string
+  /**
+   * 生产客户端地址。
+   */
+  ProducerAddr: string
 }
 
 /**

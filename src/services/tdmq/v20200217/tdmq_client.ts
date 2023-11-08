@@ -23,6 +23,7 @@ import {
   DescribeBindClustersResponse,
   DescribeRabbitMQVirtualHostResponse,
   RabbitMQClusterWhiteListInfo,
+  CreateProClusterResponse,
   CmqDeadLetterPolicy,
   DescribeNamespaceBundlesOptRequest,
   DeleteRabbitMQUserRequest,
@@ -136,7 +137,7 @@ import {
   DeleteCmqQueueResponse,
   DescribeRocketMQClusterRequest,
   DeleteRocketMQTopicResponse,
-  MsgLog,
+  CreateProClusterRequest,
   ModifyCmqTopicAttributeRequest,
   DescribeRabbitMQVipInstancesResponse,
   DeleteRolesRequest,
@@ -148,6 +149,7 @@ import {
   DescribeRocketMQConsumerConnectionsResponse,
   DeleteRocketMQVipInstanceRequest,
   DescribeRocketMQMsgRequest,
+  MsgLog,
   SendMessagesResponse,
   DescribeRocketMQNamespacesResponse,
   CreateTopicRequest,
@@ -1138,6 +1140,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteRabbitMQUserResponse) => void
   ): Promise<DeleteRabbitMQUserResponse> {
     return this.request("DeleteRabbitMQUser", req, cb)
+  }
+
+  /**
+   * 创建专业集群——预付费，仅通过api调用
+   */
+  async CreateProCluster(
+    req: CreateProClusterRequest,
+    cb?: (error: string, rep: CreateProClusterResponse) => void
+  ): Promise<CreateProClusterResponse> {
+    return this.request("CreateProCluster", req, cb)
   }
 
   /**

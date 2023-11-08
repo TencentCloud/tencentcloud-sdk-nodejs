@@ -504,10 +504,8 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 接口已废弃
-
-描述WAF自动封禁IP详情,对齐自动封堵状态
-     */
+   * 描述WAF自动封禁IP详情,对齐自动封堵状态
+   */
   async DescribeAutoDenyIP(
     req: DescribeAutoDenyIPRequest,
     cb?: (error: string, rep: DescribeAutoDenyIPResponse) => void
@@ -750,7 +748,7 @@ export class Client extends AbstractClient {
    * 查询各个waf基础安全模块的开关状态，看每个模块是否开启
    */
   async DescribeModuleStatus(
-    req?: DescribeModuleStatusRequest,
+    req: DescribeModuleStatusRequest,
     cb?: (error: string, rep: DescribeModuleStatusResponse) => void
   ): Promise<DescribeModuleStatusResponse> {
     return this.request("DescribeModuleStatus", req, cb)
@@ -1520,7 +1518,7 @@ Waf  CC V2 Query接口
    * 设置某个domain下基础安全模块的开关
    */
   async ModifyModuleStatus(
-    req?: ModifyModuleStatusRequest,
+    req: ModifyModuleStatusRequest,
     cb?: (error: string, rep: ModifyModuleStatusResponse) => void
   ): Promise<ModifyModuleStatusResponse> {
     return this.request("ModifyModuleStatus", req, cb)

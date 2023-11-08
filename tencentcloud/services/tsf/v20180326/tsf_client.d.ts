@@ -233,7 +233,7 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
      */
     DescribeGroupUseDetail(req: DescribeGroupUseDetailRequest, cb?: (error: string, rep: DescribeGroupUseDetailResponse) => void): Promise<DescribeGroupUseDetailResponse>;
     /**
-     * 镜像仓库列表
+     * 查询镜像仓库列表
      */
     DescribeImageRepository(req: DescribeImageRepositoryRequest, cb?: (error: string, rep: DescribeImageRepositoryResponse) => void): Promise<DescribeImageRepositoryResponse>;
     /**

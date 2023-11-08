@@ -638,7 +638,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查看虚拟节点列表
+   * 查看超级节点列表
    */
   async DescribeClusterVirtualNode(
     req: DescribeClusterVirtualNodeRequest,
@@ -668,7 +668,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建虚拟节点池
+   * 创建超级节点池
    */
   async CreateClusterVirtualNodePool(
     req: CreateClusterVirtualNodePoolRequest,
@@ -858,7 +858,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除虚拟节点
+   * 删除超级节点
    */
   async DeleteClusterVirtualNode(
     req: DeleteClusterVirtualNodeRequest,
@@ -1008,7 +1008,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改虚拟节点池
+   * 修改超级节点池
    */
   async ModifyClusterVirtualNodePool(
     req: ModifyClusterVirtualNodePoolRequest,
@@ -1508,7 +1508,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除虚拟节点池
+   * 删除超级节点池
    */
   async DeleteClusterVirtualNodePool(
     req: DeleteClusterVirtualNodePoolRequest,
@@ -1558,7 +1558,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 驱逐虚拟节点
+   * 驱逐超级节点
    */
   async DrainClusterVirtualNode(
     req: DrainClusterVirtualNodeRequest,
@@ -2348,7 +2348,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查看虚拟节点池列表
+   * 查看超级节点池列表
    */
   async DescribeClusterVirtualNodePools(
     req: DescribeClusterVirtualNodePoolsRequest,
@@ -2698,7 +2698,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建虚拟节点
+   * 创建按量计费超级节点
    */
   async CreateClusterVirtualNode(
     req: CreateClusterVirtualNodeRequest,

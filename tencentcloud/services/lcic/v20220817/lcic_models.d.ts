@@ -805,6 +805,27 @@ export interface BatchDescribeDocumentRequest {
     DocumentId?: Array<string>;
 }
 /**
+ * RegisterUser请求参数结构体
+ */
+export interface RegisterUserRequest {
+    /**
+     * 低代码互动课堂的SdkAppId。
+     */
+    SdkAppId: number;
+    /**
+     * 用户名称。
+     */
+    Name?: string;
+    /**
+     * 用户在客户系统的Id，需要在同一应用下唯一。
+     */
+    OriginId?: string;
+    /**
+     * 用户头像。
+     */
+    Avatar?: string;
+}
+/**
  * BatchCreateRoom返回参数结构体
  */
 export interface BatchCreateRoomResponse {
@@ -1439,6 +1460,40 @@ export interface DescribeGroupMemberListResponse {
     RequestId?: string;
 }
 /**
+ * ForbidSendMsg请求参数结构体
+ */
+export interface ForbidSendMsgRequest {
+    /**
+     * 低代码互动课堂的SdkAppId。
+     */
+    SdkAppId: number;
+    /**
+     * 房间ID。
+     */
+    RoomId: number;
+    /**
+     * 需要禁言的用户账号，最多支持500个账号
+     */
+    MembersAccount: Array<string>;
+    /**
+     * 需禁言时间，单位为秒，为0时表示取消禁言，4294967295为永久禁言。
+     */
+    MuteTime: number;
+}
+/**
+ * DescribeRoomForbiddenUser请求参数结构体
+ */
+export interface DescribeRoomForbiddenUserRequest {
+    /**
+     * 低代码互动课堂的SdkAppId。
+     */
+    SdkAppId: number;
+    /**
+     * 房间ID。
+     */
+    RoomId: number;
+}
+/**
  * 房间事件信息。
  */
 export interface EventInfo {
@@ -1545,6 +1600,20 @@ export interface DescribeGroupMemberListRequest {
      * 每页数据量，默认20，最大1000
      */
     Limit?: number;
+}
+/**
+ * DescribeRoomForbiddenUser返回参数结构体
+ */
+export interface DescribeRoomForbiddenUserResponse {
+    /**
+     * 禁言用户信息数组，内容包括被禁言的成员 ID，及其被禁言到的时间（使用 UTC 时间，即世界协调时间）
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MutedAccountList?: Array<MutedAccountList>;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * 用户信息结构体
@@ -2289,25 +2358,19 @@ export interface UnbindDocumentFromRoomRequest {
     DocumentId: string;
 }
 /**
- * RegisterUser请求参数结构体
+ * 禁言用户信息数组，内容包括被禁言的成员 ID，及其被禁言到的时间（使用 UTC 时间，即世界协调时间）
  */
-export interface RegisterUserRequest {
+export interface MutedAccountList {
     /**
-     * 低代码互动课堂的SdkAppId。
+     * 用户 ID
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    SdkAppId: number;
+    MemberAccount?: string;
     /**
-     * 用户名称。
+     * 禁言到的时间（使用 UTC 时间，即世界协调时间）
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Name?: string;
-    /**
-     * 用户在客户系统的Id，需要在同一应用下唯一。
-     */
-    OriginId?: string;
-    /**
-     * 用户头像。
-     */
-    Avatar?: string;
+    MutedUntil?: number;
 }
 /**
  * 批量创建群组基础信息
@@ -2877,6 +2940,15 @@ export interface GetRoomsRequest {
     Status?: Array<number | bigint>;
 }
 /**
+ * ForbidSendMsg返回参数结构体
+ */
+export interface ForbidSendMsgResponse {
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * SendRoomNormalMessage请求参数结构体
  */
 export interface SendRoomNormalMessageRequest {
@@ -2900,6 +2972,10 @@ export interface SendRoomNormalMessageRequest {
      * 消息自定义数据（云端保存，会发送到对端，程序卸载重装后还能拉取到）。
      */
     CloudCustomData?: string;
+    /**
+     * 昵称，当FromAccount没有在房间中，需要填写NickName，当FromAccount在房间中，填写NickName无意义
+     */
+    NickName?: string;
 }
 /**
  * DescribeDeveloper请求参数结构体
