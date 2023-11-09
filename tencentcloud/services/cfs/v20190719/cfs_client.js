@@ -59,6 +59,7 @@ class Client extends abstract_client_1.AbstractClient {
     }
     /**
      * 更新文件系统带宽
+仅吞吐型支持此接口
      */
     async UpdateFileSystemBandwidthLimit(req, cb) {
         return this.request("UpdateFileSystemBandwidthLimit", req, cb);

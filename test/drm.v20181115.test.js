@@ -118,4 +118,14 @@ it("drm.v20181115.DescribeFairPlayPem", async function () {
     }
 })
 
+it("drm.v20181115.GenerateTDRMKey", async function () {
+    try {
+       const data = await client.GenerateTDRMKey({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 })

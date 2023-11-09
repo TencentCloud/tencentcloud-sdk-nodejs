@@ -156,6 +156,7 @@ import {
   LifecycleHook,
   ForwardLoadBalancer,
   ClearLaunchConfigurationAttributesRequest,
+  InstanceNameIndexSettings,
   ForwardLoadBalancerIdentification,
   AutoScalingAdvice,
   StartAutoScalingInstancesRequest,

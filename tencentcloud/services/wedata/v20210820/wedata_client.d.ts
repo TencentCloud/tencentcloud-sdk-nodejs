@@ -614,7 +614,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeDatabaseInfoList(req: DescribeDatabaseInfoListRequest, cb?: (error: string, rep: DescribeDatabaseInfoListResponse) => void): Promise<DescribeDatabaseInfoListResponse>;
     /**
-     * 查询规则模版操作记录
+     * 查询规则模板操作记录
      */
     DescribeTemplateHistory(req: DescribeTemplateHistoryRequest, cb?: (error: string, rep: DescribeTemplateHistoryResponse) => void): Promise<DescribeTemplateHistoryResponse>;
     /**
@@ -688,7 +688,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeInstanceLogFile(req: DescribeInstanceLogFileRequest, cb?: (error: string, rep: DescribeInstanceLogFileResponse) => void): Promise<DescribeInstanceLogFileResponse>;
     /**
-     * 编辑规则模版
+     * 编辑规则模板
      */
     ModifyRuleTemplate(req: ModifyRuleTemplateRequest, cb?: (error: string, rep: ModifyRuleTemplateResponse) => void): Promise<ModifyRuleTemplateResponse>;
     /**
@@ -1045,7 +1045,7 @@ export declare class Client extends AbstractClient {
      */
     DeleteCustomFunction(req: DeleteCustomFunctionRequest, cb?: (error: string, rep: DeleteCustomFunctionResponse) => void): Promise<DeleteCustomFunctionResponse>;
     /**
-     * 查询规则模版维度分布情况
+     * 查询规则模板维度分布情况
      */
     DescribeTemplateDimCount(req: DescribeTemplateDimCountRequest, cb?: (error: string, rep: DescribeTemplateDimCountResponse) => void): Promise<DescribeTemplateDimCountResponse>;
     /**

@@ -2370,7 +2370,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询规则模版操作记录
+   * 查询规则模板操作记录
    */
   async DescribeTemplateHistory(
     req: DescribeTemplateHistoryRequest,
@@ -2552,7 +2552,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 编辑规则模版
+   * 编辑规则模板
    */
   async ModifyRuleTemplate(
     req: ModifyRuleTemplateRequest,
@@ -3419,7 +3419,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询规则模版维度分布情况
+   * 查询规则模板维度分布情况
    */
   async DescribeTemplateDimCount(
     req: DescribeTemplateDimCountRequest,

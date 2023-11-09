@@ -3688,120 +3688,120 @@ export interface TemplateInfo {
   
   origin: 保持原始编码格式
      */
-    Vcodec: string;
+    Vcodec?: string;
     /**
      * 视频码率。范围：0kbps - 8000kbps。
   0为保持原始码率。
   注: 转码模板有码率唯一要求，最终保存的码率可能与输入码率有所差别。
      */
-    VideoBitrate: number;
+    VideoBitrate?: number;
     /**
      * 音频编码：aac，默认aac。
   注意：当前该参数未生效，待后续支持！
      */
-    Acodec: string;
+    Acodec?: string;
     /**
      * 音频码率。取值范围：0kbps - 500kbps。
   默认0。
      */
-    AudioBitrate: number;
+    AudioBitrate?: number;
     /**
      * 宽，默认0。
   范围[0-3000]
   数值必须是2的倍数，0是原始宽度
      */
-    Width: number;
+    Width?: number;
     /**
      * 高，默认0。
   范围[0-3000]
   数值必须是2的倍数，0是原始宽度
      */
-    Height: number;
+    Height?: number;
     /**
      * 帧率，默认0。
   范围0-60fps
      */
-    Fps: number;
+    Fps?: number;
     /**
      * 关键帧间隔，单位：秒。
   默认原始的间隔
   范围2-6
      */
-    Gop: number;
+    Gop?: number;
     /**
      * 旋转角度，默认0。
   可取值：0，90，180，270
      */
-    Rotate: number;
+    Rotate?: number;
     /**
      * 编码质量：
   baseline/main/high。默认baseline
      */
-    Profile: string;
+    Profile?: string;
     /**
      * 当设置的码率>原始码率时，是否以原始码率为准。
   0：否， 1：是
   默认 0。
      */
-    BitrateToOrig: number;
+    BitrateToOrig?: number;
     /**
      * 当设置的高度>原始高度时，是否以原始高度为准。
   0：否， 1：是
   默认 0。
      */
-    HeightToOrig: number;
+    HeightToOrig?: number;
     /**
      * 当设置的帧率>原始帧率时，是否以原始帧率为准。
   0：否， 1：是
   默认 0。
      */
-    FpsToOrig: number;
+    FpsToOrig?: number;
     /**
      * 是否保留视频。0：否，1：是。
      */
-    NeedVideo: number;
+    NeedVideo?: number;
     /**
      * 是否保留音频。0：否，1：是。
      */
-    NeedAudio: number;
+    NeedAudio?: number;
     /**
      * 模板 ID。
      */
-    TemplateId: number;
+    TemplateId?: number;
     /**
      * 模板名称。
      */
-    TemplateName: string;
+    TemplateName?: string;
     /**
      * 模板描述。
      */
-    Description: string;
+    Description?: string;
     /**
      * 是否是极速高清模板，0：否，1：是。默认0。
      */
-    AiTransCode: number;
+    AiTransCode?: number;
     /**
      * 极速高清视频码率压缩比。
   极速高清目标码率=VideoBitrate * (1-AdaptBitratePercent)
   
   取值范围：0.0到0.5
      */
-    AdaptBitratePercent: number;
+    AdaptBitratePercent?: number;
     /**
      * 是否以短边作为高度，0：否，1：是。默认0。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ShortEdgeAsHeight: number;
+    ShortEdgeAsHeight?: number;
     /**
      * DRM 加密类型，可选值：fairplay、normalaes、widevine。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DRMType: string;
+    DRMType?: string;
     /**
      * DRM 加密项，多个用|分割，可选值：AUDIO、SD、HD、UHD1、UHD2，后四个为一组，同组中的内容只能选一个。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DRMTracks: string;
+    DRMTracks?: string;
 }
 /**
  * DescribeLiveStreamPushInfoList返回参数结构体

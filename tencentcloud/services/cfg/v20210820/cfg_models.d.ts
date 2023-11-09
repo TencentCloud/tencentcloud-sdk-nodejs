@@ -674,34 +674,34 @@ export interface TaskMonitor {
     /**
      * 演练监控指标ID
      */
-    TaskMonitorId?: number;
+    TaskMonitorId: number;
     /**
      * 监控指标ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    MetricId?: number;
+    MetricId: number;
     /**
      * 监控指标对象类型ID
      */
-    TaskMonitorObjectTypeId?: number;
+    TaskMonitorObjectTypeId: number;
     /**
      * 指标名称
      */
-    MetricName?: string;
+    MetricName: string;
     /**
      * 实例ID列表
      */
-    InstancesIds?: Array<string>;
+    InstancesIds: Array<string>;
     /**
      * 中文指标
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    MetricChineseName?: string;
+    MetricChineseName: string;
     /**
      * 单位
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Unit?: string;
+    Unit: string;
 }
 /**
  * 展示标签列表
@@ -875,6 +875,11 @@ export interface Task {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     ApmServiceList?: Array<ApmServiceInfo>;
+    /**
+     * 关联的隐患验证项ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    VerifyId?: number;
 }
 /**
  * 演练报告状态信息
@@ -953,6 +958,10 @@ export interface DescribeTaskListRequest {
      */
     TaskEndTime?: string;
     /**
+     * 更新时间，固定格式%Y-%m-%d %H:%M:%S
+     */
+    TaskUpdateTime?: string;
+    /**
      * 标签对
      */
     Tags?: Array<TagWithDescribe>;
@@ -972,6 +981,10 @@ export interface DescribeTaskListRequest {
      * 关联应用筛选
      */
     ApplicationName?: Array<string>;
+    /**
+     * 任务状态筛选--支持多选 任务状态(1001 -- 未开始 1002 -- 进行中 1003 -- 暂停中 1004 -- 任务结束)
+     */
+    TaskStatusList?: Array<number | bigint>;
 }
 /**
  * 任务列表信息
@@ -1031,6 +1044,16 @@ export interface TaskListItem {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     ApplicationName?: string;
+    /**
+     * 验证项ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    VerifyId?: number;
+    /**
+     * 状态类型: 0 -- 无状态，1 -- 成功，2-- 失败，3--终止
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TaskStatusType?: number;
 }
 /**
  * ExecuteTaskInstance返回参数结构体

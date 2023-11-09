@@ -187,8 +187,9 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 更新文件系统带宽
-   */
+     * 更新文件系统带宽
+仅吞吐型支持此接口
+     */
   async UpdateFileSystemBandwidthLimit(
     req: UpdateFileSystemBandwidthLimitRequest,
     cb?: (error: string, rep: UpdateFileSystemBandwidthLimitResponse) => void

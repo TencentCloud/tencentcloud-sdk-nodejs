@@ -97,5 +97,11 @@ class Client extends abstract_client_1.AbstractClient {
     async DescribeFairPlayPem(req, cb) {
         return this.request("DescribeFairPlayPem", req, cb);
     }
+    /**
+     * 开发者需要指定使用的DRM类型取值 NORMALAES、和需要加密的Track类型取值 SD,ContentType取值 LiveVideo
+     */
+    async GenerateTDRMKey(req, cb) {
+        return this.request("GenerateTDRMKey", req, cb);
+    }
 }
 exports.Client = Client;

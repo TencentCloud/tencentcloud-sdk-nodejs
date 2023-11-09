@@ -46,14 +46,14 @@ Terror 暴恐
 Ad 广告
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Scene: string
+  Scene?: string
   /**
    * 是否命中
 0 未命中
 1 命中
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  HitFlag: number
+  HitFlag?: number
   /**
    * 审核建议，可选值：
 Pass 通过，
@@ -61,37 +61,37 @@ Review 建议人审，
 Block 确认违规
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Suggestion: string
+  Suggestion?: string
   /**
    * 标签
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Label: string
+  Label?: string
   /**
    * 子标签
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SubLabel: string
+  SubLabel?: string
   /**
    * 分数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Score: number
+  Score?: number
   /**
-   * 如果命中场景为涉政，则该数据为人物姓名列表，否则null
+   * 人物名称列表，如未识别，则为null
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Names: Array<string>
+  Names?: Array<string>
   /**
    * 图片OCR文本
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Text: string
+  Text?: string
   /**
    * 其他详情
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Details: Array<ImageResultsResultDetail>
+  Details?: Array<ImageResultsResultDetail>
 }
 
 /**
@@ -141,7 +141,7 @@ export interface CreateVideoModerationTaskResponse {
    * 任务创建结果
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Results: Array<TaskResult>
+  Results?: Array<TaskResult>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -192,105 +192,115 @@ export interface DescribeTaskDetailResponse {
    * 该字段用于返回创建视频审核任务后返回的任务ID（在Results参数中），用于标识需要查询任务详情的审核任务。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TaskId: string
+  TaskId?: string
   /**
    * 该字段用于返回调用视频审核接口时传入的数据ID参数，方便数据的辨别和管理。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DataId: string
+  DataId?: string
   /**
    * 该字段用于返回调用视频审核接口时传入的BizType参数，方便数据的辨别和管理。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  BizType: string
+  BizType?: string
   /**
    * 该字段用于返回调用视频审核接口时传入的TaskInput参数中的任务名称，方便任务的识别与管理。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Name: string
+  Name?: string
   /**
    * 该字段用于返回所查询内容的任务状态。
 <br>取值：**FINISH**（任务已完成）、**PENDING** （任务等待中）、**RUNNING** （任务进行中）、**ERROR** （任务出错）、**CANCELLED** （任务已取消）。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Status: string
+  Status?: string
   /**
    * 该字段用于返回调用视频审核接口时输入的视频审核类型，取值为：**VIDEO**（点播视频）和**LIVE_VIDEO**（直播视频），默认值为VIDEO。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Type: string
+  Type?: string
   /**
    * 该字段用于返回基于恶意标签的后续操作建议。当您获取到判定结果后，返回值表示系统推荐的后续操作；建议您按照业务所需，对不同违规类型与建议值进行处理。<br>返回值：**Block**：建议屏蔽，**Review** ：建议人工复审，**Pass**：建议通过
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Suggestion: string
+  Suggestion?: string
   /**
    * 该字段用于返回检测结果所对应的恶意标签。<br>返回值：**Porn**：色情，**Abuse**：谩骂，**Ad**：广告，**Custom**：自定义违规；以及其他令人反感、不安全或不适宜的内容类型。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Labels: Array<TaskLabel>
+  Labels?: Array<TaskLabel>
   /**
    * 该字段用于返回输入媒体文件的详细信息，包括编解码格式、分片时长等信息。详细内容敬请参考MediaInfo数据结构的描述。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  MediaInfo: MediaInfo
+  MediaInfo?: MediaInfo
   /**
    * 该字段用于返回审核服务的媒体内容信息，主要包括传入文件类型和访问地址。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  InputInfo: InputInfo
+  InputInfo?: InputInfo
   /**
    * 该字段用于返回被查询任务创建的时间，格式采用 ISO 8601标准。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CreatedAt: string
+  CreatedAt?: string
   /**
    * 该字段用于返回被查询任务最后更新时间，格式采用 ISO 8601标准。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  UpdatedAt: string
+  UpdatedAt?: string
   /**
    * 在秒后重试
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TryInSeconds: number
+  TryInSeconds?: number
   /**
    * 该字段用于返回视频中截帧审核的结果，详细返回内容敬请参考ImageSegments数据结构的描述。<br>备注：数据有效期为24小时，如需要延长存储时间，请在已配置的COS储存桶中设置。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ImageSegments: Array<ImageSegments>
+  ImageSegments?: Array<ImageSegments>
   /**
    * 该字段用于返回视频中音频审核的结果，详细返回内容敬请参考AudioSegments数据结构的描述。<br>备注：数据有效期为24小时，如需要延长存储时间，请在已配置的COS储存桶中设置。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  AudioSegments: Array<AudioSegments>
+  AudioSegments?: Array<AudioSegments>
   /**
-   * 当任务状态为Error时，返回对应错误的类型，取值：**DECODE_ERROR**: 解码失败。（输入资源中可能包含无法解码的视频）
+   * 当任务状态为Error时，返回对应错误的类型，取值：
+**DECODE_ERROR**: 解码失败。（输入资源中可能包含无法解码的视频）
 **URL_ERROR**：下载地址验证失败。
-**TIMEOUT_ERROR**：处理超时。任务状态非Error时默认返回为空。
+**TIMEOUT_ERROR**：处理超时。
+**CALLBACK_ERRORR**：回调错误。
+**MODERATION_ERROR**：审核失败。
+**URL_NOT_SUPPORTED**：源文件太大或没有图片音频帧
+任务状态非Error时默认返回为空。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ErrorType: string
+  ErrorType?: string
   /**
    * 当任务状态为Error时，该字段用于返回对应错误的详细描述，任务状态非Error时默认返回为空。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ErrorDescription: string
+  ErrorDescription?: string
   /**
    * 该字段用于返回检测结果所对应的标签。如果未命中恶意，返回Normal，如果命中恶意，则返回Labels中优先级最高的标签
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Label: string
+  Label?: string
   /**
    * 该字段用于返回音频文件识别出的对应文本内容，最大支持**前1000个字符**。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  AudioText: string
+  AudioText?: string
   /**
    * 该字段用于返回音频文件识别出的对应文本内容。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Asrs: Array<RcbAsr>
+  Asrs?: Array<RcbAsr>
+  /**
+   * 该字段用于返回检测结果明细数据相关的cos url	
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SegmentCosUrlList?: SegmentCosUrlList
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -384,6 +394,11 @@ Block 确认违规
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Score: number
+  /**
+   * 命中的二级标签
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SubLabel: string
 }
 
 /**
@@ -468,7 +483,8 @@ export interface InputInfo {
  */
 export interface CreateVideoModerationTaskRequest {
   /**
-   * 业务类型, 定义 模版策略，输出存储配置。如果没有BizType，可以先参考 【创建业务配置】接口进行创建
+   * 该字段表示策略的具体编号，用于接口调度，在[内容安全控制台](https://console.cloud.tencent.com/cms/clouds/manage)中可配置。若不传入Biztype参数（留空），则代表采用默认的识别策略；传入则会在审核时根据业务场景采取不同的审核策略。
+备注：Biztype仅为数字、字母与下划线的组合，长度为3-32个字符；不同Biztype关联不同的业务场景与识别能力策略，调用前请确认正确的Biztype。
    */
   BizType: string
   /**
@@ -501,17 +517,17 @@ export interface DescribeTasksResponse {
    * 该字段用于返回当前查询的任务总量，格式为int字符串。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Total: string
+  Total?: string
   /**
    * 该字段用于返回当前页的任务详细数据，具体输出内容请参见TaskData数据结构的详细描述。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Data: Array<TaskData>
+  Data?: Array<TaskData>
   /**
    * 该字段用于返回翻页时使用的Token信息，由系统自动生成，并在翻页时向下一个生成的页面传递此参数，以方便快速翻页功能的实现。当到最后一页时，该字段为空。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  PageToken: string
+  PageToken?: string
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -642,6 +658,37 @@ export interface AudioResultDetailTextResult {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SubLabel: string
+}
+
+/**
+ * 明细数据相关的cos url
+ */
+export interface SegmentCosUrlList {
+  /**
+   * 全量图片片段的cos url
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ImageAllUrl?: string
+  /**
+   * 全量音频片段的cos url
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AudioAllUrl?: string
+  /**
+   * 违规图片片段的cos url
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ImageBlockUrl?: string
+  /**
+   * 违规音频片段的cos url
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AudioBlockUrl?: string
+  /**
+   * 全量音频识别文本的cos url
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AsrUrl?: string
 }
 
 /**

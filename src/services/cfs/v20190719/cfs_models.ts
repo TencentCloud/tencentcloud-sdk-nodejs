@@ -406,11 +406,11 @@ export interface FileSystemInfo {
    */
   LifeCycleState?: string
   /**
-   * 文件系统已使用容量,单位Byte
+   * 文件系统已使用容量。单位：Byte
    */
   SizeByte?: number
   /**
-   * 文件系统最大空间限制,GiB
+   * 文件系统最大空间限制。单位:GiB
    */
   SizeLimit?: number
   /**
@@ -463,6 +463,7 @@ export interface FileSystemInfo {
   BandwidthLimit?: number
   /**
    * 文件系统总容量
+单位:GiB
    */
   Capacity?: number
   /**

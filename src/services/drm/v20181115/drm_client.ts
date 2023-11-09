@@ -20,7 +20,9 @@ import { ClientConfig } from "../../../common/interface"
 import {
   CreateLicenseResponse,
   KeyParam,
+  GenerateTDRMKeyResponse,
   FairPlayPemDigestInfo,
+  GenerateTDRMKeyRequest,
   CreateEncryptKeysResponse,
   CreateLicenseRequest,
   DescribeAllKeysRequest,
@@ -164,5 +166,15 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeFairPlayPemResponse) => void
   ): Promise<DescribeFairPlayPemResponse> {
     return this.request("DescribeFairPlayPem", req, cb)
+  }
+
+  /**
+   * 开发者需要指定使用的DRM类型取值 NORMALAES、和需要加密的Track类型取值 SD,ContentType取值 LiveVideo
+   */
+  async GenerateTDRMKey(
+    req: GenerateTDRMKeyRequest,
+    cb?: (error: string, rep: GenerateTDRMKeyResponse) => void
+  ): Promise<GenerateTDRMKeyResponse> {
+    return this.request("GenerateTDRMKey", req, cb)
   }
 }

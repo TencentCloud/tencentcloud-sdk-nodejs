@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { CreateLicenseResponse, CreateEncryptKeysResponse, CreateLicenseRequest, DescribeAllKeysRequest, CreateEncryptKeysRequest, ModifyFairPlayPemResponse, DescribeFairPlayPemResponse, DescribeDRMLicenseResponse, AddFairPlayPemResponse, AddFairPlayPemRequest, DeleteFairPlayPemRequest, DescribeKeysResponse, DescribeDRMLicenseRequest, DescribeAllKeysResponse, StartEncryptionRequest, ModifyFairPlayPemRequest, DeleteFairPlayPemResponse, StartEncryptionResponse, DescribeFairPlayPemRequest, DescribeKeysRequest } from "./drm_models";
+import { CreateLicenseResponse, GenerateTDRMKeyResponse, GenerateTDRMKeyRequest, CreateEncryptKeysResponse, CreateLicenseRequest, DescribeAllKeysRequest, CreateEncryptKeysRequest, ModifyFairPlayPemResponse, DescribeFairPlayPemResponse, DescribeDRMLicenseResponse, AddFairPlayPemResponse, AddFairPlayPemRequest, DeleteFairPlayPemRequest, DescribeKeysResponse, DescribeDRMLicenseRequest, DescribeAllKeysResponse, StartEncryptionRequest, ModifyFairPlayPemRequest, DeleteFairPlayPemResponse, StartEncryptionResponse, DescribeFairPlayPemRequest, DescribeKeysRequest } from "./drm_models";
 /**
  * drm client
  * @class
@@ -57,4 +57,8 @@ export declare class Client extends AbstractClient {
      * 该接口用来查询设置的FairPlay私钥校验信息。可用该接口校验设置的私钥与本身的私钥是否一致。
      */
     DescribeFairPlayPem(req: DescribeFairPlayPemRequest, cb?: (error: string, rep: DescribeFairPlayPemResponse) => void): Promise<DescribeFairPlayPemResponse>;
+    /**
+     * 开发者需要指定使用的DRM类型取值 NORMALAES、和需要加密的Track类型取值 SD,ContentType取值 LiveVideo
+     */
+    GenerateTDRMKey(req: GenerateTDRMKeyRequest, cb?: (error: string, rep: GenerateTDRMKeyResponse) => void): Promise<GenerateTDRMKeyResponse>;
 }

@@ -1553,17 +1553,17 @@ export interface DetectInfoText {
    * 本次流程最终验证结果。0为成功
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ErrCode: number
+  ErrCode?: number
   /**
    * 本次流程最终验证结果描述。（仅描述用，文案更新时不会通知。）
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ErrMsg: string
+  ErrMsg?: string
   /**
    * 本次验证使用的身份证号。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  IdCard: string
+  IdCard?: string
   /**
    * 用户认证时使用的证件号码类型：
 0：二代身份证的证件号码
@@ -1571,52 +1571,52 @@ export interface DetectInfoText {
 2：其他（核验使用的证件号码非合法身份号码）
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  UseIDType: number
+  UseIDType?: number
   /**
    * 本次验证使用的姓名。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Name: string
+  Name?: string
   /**
    * 身份校验环节识别结果：民族。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  OcrNation: string
+  OcrNation?: string
   /**
    * 身份校验环节识别结果：家庭住址。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  OcrAddress: string
+  OcrAddress?: string
   /**
    * 身份校验环节识别结果：生日。格式为：YYYY/M/D
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  OcrBirth: string
+  OcrBirth?: string
   /**
    * 身份校验环节识别结果：签发机关。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  OcrAuthority: string
+  OcrAuthority?: string
   /**
    * 身份校验环节识别结果：有效日期。格式为：YYYY.MM.DD-YYYY.MM.DD
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  OcrValidDate: string
+  OcrValidDate?: string
   /**
    * 身份校验环节识别结果：姓名。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  OcrName: string
+  OcrName?: string
   /**
    * 身份校验环节识别结果：身份证号。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  OcrIdCard: string
+  OcrIdCard?: string
   /**
    * 身份校验环节识别结果：性别。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  OcrGender: string
+  OcrGender?: string
   /**
    * 身份校验环节采用的信息上传方式。
 取值有"NFC"、"OCR"、"手动输入"、"其他"
@@ -1627,47 +1627,47 @@ export interface DetectInfoText {
    * 本次流程最终活体结果。0为成功
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  LiveStatus: number
+  LiveStatus?: number
   /**
    * 本次流程最终活体结果描述。（仅描述用，文案更新时不会通知。）
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  LiveMsg: string
+  LiveMsg?: string
   /**
    * 本次流程最终一比一结果。0为成功
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Comparestatus: number
+  Comparestatus?: number
   /**
    * 本次流程最终一比一结果描述。（仅描述用，文案更新时不会通知。）
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Comparemsg: string
+  Comparemsg?: string
   /**
    * 本次流程活体一比一的分数，取值范围 [0.00, 100.00]。相似度大于等于70时才判断为同一人，也可根据具体场景自行调整阈值（阈值70的误通过率为千分之一，阈值80的误通过率是万分之一）
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Sim: string
+  Sim?: string
   /**
    * 地理位置经纬度。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Location: string
+  Location?: string
   /**
    * Auth接口带入额外信息。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Extra: string
+  Extra?: string
   /**
    * 本次流程进行的活体一比一流水。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  LivenessDetail: Array<DetectDetail>
+  LivenessDetail?: Array<DetectDetail>
   /**
    * 手机号码。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Mobile: string
+  Mobile?: string
   /**
    * 本次流程最终比对库源类型。包括：
 权威库；
@@ -1676,7 +1676,7 @@ export interface DetectInfoText {
 人工审核库；
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CompareLibType: string
+  CompareLibType?: string
   /**
    * 本次流程最终活体类型。包括：
 0：未知
@@ -1686,7 +1686,7 @@ export interface DetectInfoText {
 4：一闪活体（动作+光线）
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  LivenessMode: number
+  LivenessMode?: number
   /**
    * nfc重复计费requestId列表
 注意：此字段可能返回 null，表示取不到有效值。
@@ -2540,62 +2540,62 @@ export interface DetectDetail {
    * 请求时间戳。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ReqTime: string
+  ReqTime?: string
   /**
    * 本次活体一比一请求的唯一标记。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Seq: string
+  Seq?: string
   /**
    * 参与本次活体一比一的身份证号。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Idcard: string
+  Idcard?: string
   /**
    * 参与本次活体一比一的姓名。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Name: string
+  Name?: string
   /**
    * 本次活体一比一的相似度。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Sim: string
+  Sim?: string
   /**
    * 本次活体一比一是否收费
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  IsNeedCharge: boolean
+  IsNeedCharge?: boolean
   /**
    * 本次活体一比一最终结果。0为成功
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Errcode: number
+  Errcode?: number
   /**
    * 本次活体一比一最终结果描述。（仅描述用，文案更新时不会通知。）
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Errmsg: string
+  Errmsg?: string
   /**
    * 本次活体结果。0为成功
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Livestatus: number
+  Livestatus?: number
   /**
    * 本次活体结果描述。（仅描述用，文案更新时不会通知。）
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Livemsg: string
+  Livemsg?: string
   /**
    * 本次一比一结果。0为成功
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Comparestatus: number
+  Comparestatus?: number
   /**
    * 本次一比一结果描述。（仅描述用，文案更新时不会通知。）
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Comparemsg: string
+  Comparemsg?: string
   /**
    * 比对库源类型。包括：
 公安商业库；
@@ -2604,7 +2604,7 @@ export interface DetectDetail {
 人工审核库；
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CompareLibType: string
+  CompareLibType?: string
   /**
    * 枚举活体检测类型：
 0：未知
@@ -2614,7 +2614,7 @@ export interface DetectDetail {
 4：一闪活体（动作+光线）
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  LivenessMode: number
+  LivenessMode?: number
 }
 
 /**

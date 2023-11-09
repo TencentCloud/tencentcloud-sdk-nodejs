@@ -2063,7 +2063,7 @@ export interface UpdateInLongAgentResponse {
  */
 export interface DescribeTemplateDimCountRequest {
     /**
-     * 模版类型
+     * 模板类型
      */
     Type?: number;
     /**
@@ -7250,7 +7250,7 @@ export interface ModifyRuleRequest {
      */
     Type?: number;
     /**
-     * 规则所属质量维度（1：准确性，2：唯一性，3：完整性，4：一致性，5：及时性，6：有效性
+     * 规则所属质量维度（1：准确性，2：唯一性，3：完整性，4：一致性，5：及时性，6：有效性）
      */
     QualityDim?: number;
     /**
@@ -9605,15 +9605,15 @@ export interface CreateInLongAgentRequest {
  */
 export interface ModifyRuleTemplateRequest {
     /**
-     * 模版ID
+     * 模板ID
      */
     TemplateId?: number;
     /**
-     * 模版类型  1.系统模版   2.自定义模版
+     * 模板类型  1.系统模板   2.自定义模板
      */
     Type?: number;
     /**
-     * 模版名称
+     * 模板名称
      */
     Name?: string;
     /**
@@ -10289,7 +10289,7 @@ export interface ModifyRuleTemplateResponse {
      * 修改成功
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Data: boolean;
+    Data?: boolean;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -11522,19 +11522,19 @@ export interface DeleteIntegrationNodeResponse {
  */
 export interface CommitRuleGroupExecResultRequest {
     /**
-     * preject id
+     * 项目ID
      */
     ProjectId: string;
     /**
-     * rule group exec id
+     * 规则组执行ID
      */
     RuleGroupExecId: number;
     /**
-     * group exec state
+     * 规则组执行状态
      */
     RuleGroupState: string;
     /**
-     * runner rule exec result list
+     * 规则执行结果集合
      */
     RuleExecResults: Array<RunnerRuleExecResult>;
 }
@@ -13697,7 +13697,7 @@ export interface DescribeTemplateDimCountResponse {
      * 维度统计结果
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Data: Array<DimensionCount>;
+    Data?: Array<DimensionCount>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -21417,7 +21417,7 @@ export interface DescribeTemplateHistoryResponse {
      * 分页记录
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Data: RuleTemplateHistoryPage;
+    Data?: RuleTemplateHistoryPage;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -23384,7 +23384,7 @@ export interface CommitRuleGroupExecResultResponse {
      * 无
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Data: string;
+    Data?: string;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */

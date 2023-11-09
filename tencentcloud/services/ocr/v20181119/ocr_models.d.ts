@@ -440,32 +440,21 @@ export interface EstateCertOCRResponse {
     RequestId?: string;
 }
 /**
- * FlightInvoiceOCR请求参数结构体
+ * GeneralHandwritingOCR返回参数结构体
  */
-export interface FlightInvoiceOCRRequest {
+export interface GeneralHandwritingOCRResponse {
     /**
-     * 图片的 Base64 值。
-  支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-  支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。
-  图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
+     * 检测到的文本信息，具体内容请点击左侧链接。
      */
-    ImageBase64?: string;
+    TextDetections: Array<TextGeneralHandwriting>;
     /**
-     * 图片的 Url 地址。
-  支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-  支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。
-  图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
-  非腾讯云存储的 Url 速度和稳定性可能受一定影响。
+     * 图片旋转角度（角度制），文本的水平方向为0°；顺时针为正，逆时针为负。点击查看<a href="https://cloud.tencent.com/document/product/866/45139">如何纠正倾斜文本</a>
      */
-    ImageUrl?: string;
+    Angel: number;
     /**
-     * 是否开启PDF识别，默认值为true，开启后可同时支持图片和PDF的识别。
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
-    IsPdf?: boolean;
-    /**
-     * 需要识别的PDF页面的对应页码，仅支持PDF单页识别，当上传文件为PDF且IsPdf参数值为true时有效，默认值为1。
-     */
-    PdfPageNumber?: number;
+    RequestId?: string;
 }
 /**
  * RecognizePhilippinesDrivingLicenseOCR请求参数结构体
@@ -595,6 +584,111 @@ export interface TextDetectResponse {
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * 铁路电子客票信息
+ */
+export interface RailwayTicketInfo {
+    /**
+     * 电子发票类型
+     */
+    TypeOfVoucher?: string;
+    /**
+     * 电子客票号
+     */
+    ElectronicTicketNum?: string;
+    /**
+     * 开票日期
+     */
+    DateOfIssue?: string;
+    /**
+     * 售票或退票类型
+     */
+    TypeOfBusiness?: string;
+    /**
+     * 始发站
+     */
+    DepartureStation?: string;
+    /**
+     * 始发站英文
+     */
+    PhonicsOfDepartureStation?: string;
+    /**
+     * 到达站
+     */
+    DestinationStation?: string;
+    /**
+     * 到达站英文
+     */
+    PhonicsOfDestinationStation?: string;
+    /**
+     * 火车号
+     */
+    TrainNumber?: string;
+    /**
+     * 火车出发日期
+     */
+    TravelDate?: string;
+    /**
+     * 始发时间
+     */
+    DepartureTime?: string;
+    /**
+     * 空调特点
+     */
+    AirConditioningCharacteristics?: string;
+    /**
+     * 座位类型
+     */
+    SeatLevel?: string;
+    /**
+     * 火车第几车
+     */
+    Carriage?: string;
+    /**
+     * 座位号
+     */
+    Seat?: string;
+    /**
+     * 票价
+     */
+    Fare?: string;
+    /**
+     * 发票号码
+     */
+    ElectronicInvoiceRailwayETicketNumber?: string;
+    /**
+     * 身份证号
+     */
+    IdNumber?: string;
+    /**
+     * 姓名
+     */
+    Name?: string;
+    /**
+     * 金额
+     */
+    TotalAmountExcludingTax?: string;
+    /**
+     * 税率
+     */
+    TaxRate?: string;
+    /**
+     * 税额
+     */
+    TaxAmount?: string;
+    /**
+     * 购买方名称
+     */
+    NameOfPurchaser?: string;
+    /**
+     * 统一社会信用代码
+     */
+    UnifiedSocialCreditCodeOfPurchaser?: string;
+    /**
+     * 原发票号码
+     */
+    NumberOfOriginalInvoice?: string;
 }
 /**
  * TollInvoiceOCR返回参数结构体
@@ -934,25 +1028,32 @@ export interface RideHailingTransportLicenseOCRRequest {
     ImageUrl?: string;
 }
 /**
- * 增值税普通发票（卷票）条目
+ * FlightInvoiceOCR请求参数结构体
  */
-export interface VatRollItem {
+export interface FlightInvoiceOCRRequest {
     /**
-     * 项目名称
+     * 图片的 Base64 值。
+  支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
+  支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。
+  图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
      */
-    Name?: string;
+    ImageBase64?: string;
     /**
-     * 数量
+     * 图片的 Url 地址。
+  支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
+  支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。
+  图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
+  非腾讯云存储的 Url 速度和稳定性可能受一定影响。
      */
-    Quantity?: string;
+    ImageUrl?: string;
     /**
-     * 单价
+     * 是否开启PDF识别，默认值为true，开启后可同时支持图片和PDF的识别。
      */
-    Price?: string;
+    IsPdf?: boolean;
     /**
-     * 金额
+     * 需要识别的PDF页面的对应页码，仅支持PDF单页识别，当上传文件为PDF且IsPdf参数值为true时有效，默认值为1。
      */
-    Total?: string;
+    PdfPageNumber?: number;
 }
 /**
  * 数学公式识别结果
@@ -2338,17 +2439,41 @@ export interface VatInvoiceUserInfo {
     FinancialAccount: string;
 }
 /**
- * InsuranceBillOCR返回参数结构体
+ * 通用机打发票条目
  */
-export interface InsuranceBillOCRResponse {
+export interface GeneralMachineItem {
     /**
-     * 保险单据识别结果，具体内容请点击左侧链接。
+     * 项目名称
      */
-    InsuranceBillInfos: Array<InsuranceBillInfo>;
+    Name?: string;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     * 规格型号
      */
-    RequestId?: string;
+    Specification?: string;
+    /**
+     * 单位
+     */
+    Unit?: string;
+    /**
+     * 数量
+     */
+    Quantity?: string;
+    /**
+     * 单价
+     */
+    Price?: string;
+    /**
+     * 金额
+     */
+    Total?: string;
+    /**
+     * 税率
+     */
+    TaxRate?: string;
+    /**
+     * 税额
+     */
+    Tax?: string;
 }
 /**
  * GeneralAccurateOCR返回参数结构体
@@ -2488,19 +2613,49 @@ export interface BusInvoice {
     TrainNumber?: string;
 }
 /**
- * QrcodeOCR请求参数结构体
+ * 定额发票
  */
-export interface QrcodeOCRRequest {
+export interface QuotaInvoice {
     /**
-     * 图片的 Base64 值。要求图片经Base64编码后不超过 7M，支持PNG、JPG、JPEG格式。
-  图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
+     * 发票名称
      */
-    ImageBase64?: string;
+    Title?: string;
     /**
-     * 图片的 Url 地址。要求图片经Base64编码后不超过 7M，支持PNG、JPG、JPEG格式。
-  建议图片存储于腾讯云，可保障更高的下载速度和稳定性。
+     * 发票代码
      */
-    ImageUrl?: string;
+    Code?: string;
+    /**
+     * 发票号码
+     */
+    Number?: string;
+    /**
+     * 价税合计（小写）
+     */
+    Total?: string;
+    /**
+     * 价税合计（大写）
+     */
+    TotalCn?: string;
+    /**
+     * 发票消费类型
+     */
+    Kind?: string;
+    /**
+     * 省
+     */
+    Province?: string;
+    /**
+     * 市
+     */
+    City?: string;
+    /**
+     * 是否存在二维码（1：有，0：无）
+     */
+    QRCodeMark?: number;
+    /**
+     * 是否有公司印章（0：没有，1：有）
+     */
+    CompanySealMark?: number;
 }
 /**
  * TaxiInvoiceOCR返回参数结构体
@@ -4867,6 +5022,111 @@ export interface AdvertiseOCRRequest {
     ImageUrl?: string;
 }
 /**
+ * 航空运输电子客票行程单信息
+ */
+export interface AirTicketInfo {
+    /**
+     * 旅客姓名
+     */
+    PassengerName?: string;
+    /**
+     * 有效身份证件号码
+     */
+    ValidIdNumber?: string;
+    /**
+     * 签注
+     */
+    Endorsement?: string;
+    /**
+     * GP单号
+     */
+    NumberOfGPOrder?: string;
+    /**
+     * 发票号码
+     */
+    ElectronicInvoiceAirTransportReceiptNumber?: string;
+    /**
+     * 机票详细信息元组
+     */
+    DetailInformationOfAirTicketTuple?: Array<DetailInformationOfAirTicketTupleList>;
+    /**
+     * 票价
+     */
+    Fare?: string;
+    /**
+     * 燃油附加费
+     */
+    FuelSurcharge?: string;
+    /**
+     * 增值税税率
+     */
+    VatRate?: string;
+    /**
+     * 增值税税额
+     */
+    VatTaxAmount?: string;
+    /**
+     * 民航发展基金
+     */
+    CivilAviationDevelopmentFund?: string;
+    /**
+     * 其他税费
+     */
+    OtherTaxes?: string;
+    /**
+     * 合计
+     */
+    TotalAmount?: string;
+    /**
+     * 电子客票号码
+     */
+    ElectronicTicketNum?: string;
+    /**
+     * 验证码
+     */
+    VerificationCode?: string;
+    /**
+     * 提示信息
+     */
+    PromptInformation?: string;
+    /**
+     * 保险费
+     */
+    Insurance?: string;
+    /**
+     * 销售网点代号
+     */
+    AgentCode?: string;
+    /**
+     * 填开单位
+     */
+    IssueParty?: string;
+    /**
+     * 填开时间
+     */
+    IssueDate?: string;
+    /**
+     * 开具状态
+     */
+    IssuingStatus?: string;
+    /**
+     * 国内国际标识
+     */
+    MarkingOfDomesticOrInternational?: string;
+    /**
+     * 购买方名称
+     */
+    NameOfPurchaser?: string;
+    /**
+     * 销售方名称
+     */
+    NameOfSeller?: string;
+    /**
+     * 统一社会信用代码
+     */
+    UnifiedSocialCreditCodeOfPurchaser?: string;
+}
+/**
  * RideHailingDriverLicenseOCR返回参数结构体
  */
 export interface RideHailingDriverLicenseOCRResponse {
@@ -5318,6 +5578,59 @@ export interface FlightInvoiceInfo {
      * 多个行程的字段所在行号，下标从0开始，非行字段或未能识别行号的该值返回-1。
      */
     Row: number;
+}
+/**
+ * 机票详细信息元组
+ */
+export interface DetailInformationOfAirTicketTupleList {
+    /**
+     * 出发站（自）
+     */
+    DepartureStation?: string;
+    /**
+     * 目的地（至）
+     */
+    DestinationStation?: string;
+    /**
+     * 航班
+     */
+    FlightSegment?: string;
+    /**
+     * 航班
+     */
+    Carrier?: string;
+    /**
+     * 航班号
+     */
+    Flight?: string;
+    /**
+     * 座位等级
+     */
+    SeatClass?: string;
+    /**
+     * 日期
+     */
+    CarrierDate?: string;
+    /**
+     * 时间
+     */
+    DepartureTime?: string;
+    /**
+     * 客票级别/客票类别
+     */
+    FareBasis?: string;
+    /**
+     * 客票生效日期
+     */
+    EffectiveDate?: string;
+    /**
+     * 有效截止日期
+     */
+    ExpirationDate?: string;
+    /**
+     * 免费行李
+     */
+    FreeBaggageAllowance?: string;
 }
 /**
  * 行驶证主页正面的识别结果
@@ -6866,41 +7179,17 @@ export interface RecognizeMedicalInvoiceOCRRequest {
     PdfPageNumber?: number;
 }
 /**
- * 通用机打发票条目
+ * InsuranceBillOCR返回参数结构体
  */
-export interface GeneralMachineItem {
+export interface InsuranceBillOCRResponse {
     /**
-     * 项目名称
+     * 保险单据识别结果，具体内容请点击左侧链接。
      */
-    Name?: string;
+    InsuranceBillInfos: Array<InsuranceBillInfo>;
     /**
-     * 规格型号
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
-    Specification?: string;
-    /**
-     * 单位
-     */
-    Unit?: string;
-    /**
-     * 数量
-     */
-    Quantity?: string;
-    /**
-     * 单价
-     */
-    Price?: string;
-    /**
-     * 金额
-     */
-    Total?: string;
-    /**
-     * 税率
-     */
-    TaxRate?: string;
-    /**
-     * 税额
-     */
-    Tax?: string;
+    RequestId?: string;
 }
 /**
  * 卡证智能分类结果
@@ -7056,6 +7345,14 @@ export interface VerifyOfdVatInvoiceOCRResponse {
      * 货物或服务清单
      */
     GoodsInfos?: Array<VatInvoiceGoodsInfo>;
+    /**
+     * 航空运输电子客票行程单信息
+     */
+    AirTicketInfo?: AirTicketInfo;
+    /**
+     * 铁路电子客票
+     */
+    RailwayTicketInfo?: RailwayTicketInfo;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -7697,51 +7994,6 @@ export interface EnterpriseLicenseInfo {
     Value?: string;
 }
 /**
- * 定额发票
- */
-export interface QuotaInvoice {
-    /**
-     * 发票名称
-     */
-    Title?: string;
-    /**
-     * 发票代码
-     */
-    Code?: string;
-    /**
-     * 发票号码
-     */
-    Number?: string;
-    /**
-     * 价税合计（小写）
-     */
-    Total?: string;
-    /**
-     * 价税合计（大写）
-     */
-    TotalCn?: string;
-    /**
-     * 发票消费类型
-     */
-    Kind?: string;
-    /**
-     * 省
-     */
-    Province?: string;
-    /**
-     * 市
-     */
-    City?: string;
-    /**
-     * 是否存在二维码（1：有，0：无）
-     */
-    QRCodeMark?: number;
-    /**
-     * 是否有公司印章（0：没有，1：有）
-     */
-    CompanySealMark?: number;
-}
-/**
  * InsuranceBillOCR请求参数结构体
  */
 export interface InsuranceBillOCRRequest {
@@ -7762,21 +8014,19 @@ export interface InsuranceBillOCRRequest {
     ImageUrl?: string;
 }
 /**
- * GeneralHandwritingOCR返回参数结构体
+ * QrcodeOCR请求参数结构体
  */
-export interface GeneralHandwritingOCRResponse {
+export interface QrcodeOCRRequest {
     /**
-     * 检测到的文本信息，具体内容请点击左侧链接。
+     * 图片的 Base64 值。要求图片经Base64编码后不超过 7M，支持PNG、JPG、JPEG格式。
+  图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
      */
-    TextDetections: Array<TextGeneralHandwriting>;
+    ImageBase64?: string;
     /**
-     * 图片旋转角度（角度制），文本的水平方向为0°；顺时针为正，逆时针为负。点击查看<a href="https://cloud.tencent.com/document/product/866/45139">如何纠正倾斜文本</a>
+     * 图片的 Url 地址。要求图片经Base64编码后不超过 7M，支持PNG、JPG、JPEG格式。
+  建议图片存储于腾讯云，可保障更高的下载速度和稳定性。
      */
-    Angel: number;
-    /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
+    ImageUrl?: string;
 }
 /**
  * 单元格数据
@@ -7862,6 +8112,27 @@ export interface QuestionBlockObj {
      * 题目主体区域检测框在图片中的像素坐标
      */
     QuestionBboxCoord: Rect;
+}
+/**
+ * 增值税普通发票（卷票）条目
+ */
+export interface VatRollItem {
+    /**
+     * 项目名称
+     */
+    Name?: string;
+    /**
+     * 数量
+     */
+    Quantity?: string;
+    /**
+     * 单价
+     */
+    Price?: string;
+    /**
+     * 金额
+     */
+    Total?: string;
 }
 /**
  * AdvertiseOCR返回参数结构体

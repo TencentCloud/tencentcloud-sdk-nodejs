@@ -926,7 +926,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDatabaseInfoList", req, cb);
     }
     /**
-     * 查询规则模版操作记录
+     * 查询规则模板操作记录
      */
     async DescribeTemplateHistory(req, cb) {
         return this.request("DescribeTemplateHistory", req, cb);
@@ -1036,7 +1036,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeInstanceLogFile", req, cb);
     }
     /**
-     * 编辑规则模版
+     * 编辑规则模板
      */
     async ModifyRuleTemplate(req, cb) {
         return this.request("ModifyRuleTemplate", req, cb);
@@ -1563,7 +1563,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteCustomFunction", req, cb);
     }
     /**
-     * 查询规则模版维度分布情况
+     * 查询规则模板维度分布情况
      */
     async DescribeTemplateDimCount(req, cb) {
         return this.request("DescribeTemplateDimCount", req, cb);
