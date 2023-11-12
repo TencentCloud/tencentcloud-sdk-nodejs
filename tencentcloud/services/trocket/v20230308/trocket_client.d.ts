@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { ModifyInstanceResponse, CreateTopicResponse, CreateConsumerGroupRequest, CreateRoleResponse, DescribeRoleListResponse, ModifyInstanceRequest, DescribeTopicListRequest, DescribeInstanceListRequest, CreateInstanceResponse, DescribeTopicListResponse, DeleteInstanceResponse, ModifyConsumerGroupRequest, DescribeConsumerGroupRequest, ModifyRoleResponse, DescribeConsumerGroupResponse, CreateInstanceRequest, CreateRoleRequest, DeleteTopicRequest, DeleteConsumerGroupResponse, ModifyTopicResponse, DescribeTopicResponse, DeleteRoleResponse, ModifyRoleRequest, DescribeTopicStatsOpRequest, CreateTopicRequest, DeleteRoleRequest, DescribeRoleListRequest, ModifyTopicRequest, DescribeInstanceResponse, DescribeTopicStatsOpResponse, DeleteConsumerGroupRequest, DeleteTopicResponse, CreateConsumerGroupResponse, ModifyConsumerGroupResponse, DeleteInstanceRequest, DescribeInstanceRequest, DescribeInstanceListResponse, DescribeTopicRequest } from "./trocket_models";
+import { ModifyInstanceResponse, CreateTopicResponse, CreateConsumerGroupRequest, CreateRoleResponse, DescribeRoleListResponse, ModifyInstanceRequest, DescribeTopicListRequest, DescribeInstanceListRequest, CreateInstanceResponse, DescribeTopicListResponse, DeleteInstanceResponse, ModifyConsumerGroupRequest, DescribeConsumerGroupRequest, DescribeConsumerGroupListRequest, ModifyRoleResponse, DescribeConsumerGroupResponse, CreateInstanceRequest, CreateRoleRequest, DeleteTopicRequest, DeleteConsumerGroupResponse, ModifyTopicResponse, DescribeTopicResponse, DeleteRoleResponse, ModifyRoleRequest, DescribeTopicStatsOpRequest, CreateTopicRequest, DescribeConsumerGroupListResponse, DeleteRoleRequest, DescribeRoleListRequest, ModifyTopicRequest, DescribeInstanceResponse, DescribeTopicStatsOpResponse, DeleteConsumerGroupRequest, DeleteTopicResponse, CreateConsumerGroupResponse, ModifyConsumerGroupResponse, DeleteInstanceRequest, DescribeInstanceRequest, DescribeInstanceListResponse, DescribeTopicRequest } from "./trocket_models";
 /**
  * trocket client
  * @class
@@ -96,4 +96,11 @@ ConsumerGroup，消费组名称过滤
      * 修改实例属性
      */
     ModifyInstance(req: ModifyInstanceRequest, cb?: (error: string, rep: ModifyInstanceResponse) => void): Promise<ModifyInstanceResponse>;
+    /**
+     * 获取消费组列表，Filter参数使用说明如下：
+
+1. ConsumerGroupName，名称模糊查询
+2. ConsumeMessageOrderly，投递顺序性。"true":顺序投递；"false":并发投递
+     */
+    DescribeConsumerGroupList(req: DescribeConsumerGroupListRequest, cb?: (error: string, rep: DescribeConsumerGroupListResponse) => void): Promise<DescribeConsumerGroupListResponse>;
 }

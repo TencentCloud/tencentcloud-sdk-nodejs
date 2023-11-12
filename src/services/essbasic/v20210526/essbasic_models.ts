@@ -963,7 +963,15 @@ export interface ChannelCreateRoleRequest {
    */
   Name: string
   /**
-   * 代理企业和员工的信息。
+   * 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。
+
+此接口下面信息必填。
+<ul>
+<li>渠道应用标识:  Agent.AppId</li>
+<li>第三方平台子客企业标识: Agent.ProxyOrganizationOpenId</li>
+<li>第三方平台子客企业中的员工标识: Agent. ProxyOperator.OpenId</li>
+</ul>
+第三方平台子客企业和员工必须已经经过实名认证
    */
   Agent: Agent
   /**
@@ -1820,7 +1828,14 @@ export interface ChannelCreateFlowGroupByFilesRequest {
  */
 export interface ChannelCreateOrganizationModifyQrCodeRequest {
   /**
-   * 应用相关信息。 此接口Agent.AppId 必填。
+   * 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。
+
+此接口下面信息必填。
+
+渠道应用标识: Agent.AppId
+第三方平台子客企业标识: Agent.ProxyOrganizationOpenId
+第三方平台子客企业中的员工标识: Agent. ProxyOperator.OpenId
+第三方平台子客企业和员工必须已经经过实名认证
    */
   Agent: Agent
 }
@@ -1915,7 +1930,15 @@ export interface RecipientComponentInfo {
  */
 export interface ChannelDescribeRolesRequest {
   /**
-   * 应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 必填。
+   * 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。
+
+此接口下面信息必填。
+<ul>
+<li>渠道应用标识:  Agent.AppId</li>
+<li>第三方平台子客企业标识: Agent.ProxyOrganizationOpenId</li>
+<li>第三方平台子客企业中的员工标识: Agent. ProxyOperator.OpenId</li>
+</ul>
+第三方平台子客企业和员工必须已经经过实名认证
    */
   Agent: Agent
   /**
@@ -2155,7 +2178,6 @@ export interface ChannelRole {
   RoleName?: string
   /**
    * 角色状态：1-启用；2-禁用
-注意：此字段可能返回 null，表示取不到有效值。
    */
   RoleStatus?: number
   /**
@@ -4949,11 +4971,11 @@ export interface ExtentServiceAuthInfo {
   /**
    * 扩展服务类型
 <ul>
-  <li>AUTO_SIGN             企业自动签（自动签署）</li>
+<li>AUTO_SIGN             企业自动签（自动签署）</li>
 <li>  OVERSEA_SIGN          企业与港澳台居民*签署合同</li>
 <li>  MOBILE_CHECK_APPROVER 使用手机号验证签署方身份</li>
- <li> PAGING_SEAL           骑缝章</li>
- <li> DOWNLOAD_FLOW         授权渠道下载合同 </li>
+<li> PAGING_SEAL           骑缝章</li>
+<li> DOWNLOAD_FLOW         授权渠道下载合同 </li>
 <li>AGE_LIMIT_EXPANSION 拓宽签署方年龄限制</li>
 </ul>
    */
@@ -4963,7 +4985,9 @@ export interface ExtentServiceAuthInfo {
    */
   Name?: string
   /**
-   * 扩展服务的开通状态： ENABLE：开通 DISABLE：未开通
+   * 扩展服务的开通状态
+   **ENABLE**：开通
+   **DISABLE**：未开通
    */
   Status?: string
   /**
@@ -5075,7 +5099,15 @@ export interface CreateSignUrlsResponse {
  */
 export interface ChannelDeleteRoleRequest {
   /**
-   * 代理企业和员工的信息。
+   * 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。
+
+此接口下面信息必填。
+<ul>
+<li>渠道应用标识:  Agent.AppId</li>
+<li>第三方平台子客企业标识: Agent.ProxyOrganizationOpenId</li>
+<li>第三方平台子客企业中的员工标识: Agent. ProxyOperator.OpenId</li>
+</ul>
+第三方平台子客企业和员工必须已经经过实名认证
    */
   Agent: Agent
   /**
@@ -6655,11 +6687,19 @@ export interface CreateSealByImageRequest {
  */
 export interface ChannelCreateFlowApproversRequest {
   /**
-   * 渠道应用相关信息
+   * 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。
+
+此接口下面信息必填。
+<ul>
+<li>渠道应用标识:  Agent.AppId</li>
+<li>第三方平台子客企业标识: Agent.ProxyOrganizationOpenId</li>
+<li>第三方平台子客企业中的员工标识: Agent. ProxyOperator.OpenId</li>
+</ul>
+第三方平台子客企业和员工必须已经经过实名认证
    */
   Agent: Agent
   /**
-   * 合同唯一编号
+   * 合同流程ID，为32位字符串。 建议开发者妥善保存此流程ID，以便于顺利进行后续操作。 可登录腾讯电子签控制台，在 "合同"->"合同中心" 中查看某个合同的FlowId(在页面中展示为合同ID)。
    */
   FlowId: string
   /**

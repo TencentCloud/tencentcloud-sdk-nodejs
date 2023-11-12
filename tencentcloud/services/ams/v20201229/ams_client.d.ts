@@ -61,7 +61,7 @@ export declare class Client extends AbstractClient {
      */
     CreateAudioModerationSyncTask(req: CreateAudioModerationSyncTaskRequest, cb?: (error: string, rep: CreateAudioModerationSyncTaskResponse) => void): Promise<CreateAudioModerationSyncTaskResponse>;
     /**
-     * 通过该接口可查看音频审核任务的详情信息，包括任务状态、检测结果、音频文件识别出的对应文本内容、检测结果所对应的恶意标签及推荐的后续操作等，具体输出内容可查看输出参数示例。<br>默认接口请求频率限制：**100次/秒**。
+     * 通过该接口可查看音频审核任务的详情信息，包括任务状态、检测结果、音频文件识别出的对应文本内容、检测结果所对应的恶意标签及推荐的后续操作等，具体输出内容可查看输出参数示例。
      */
     DescribeTaskDetail(req: DescribeTaskDetailRequest, cb?: (error: string, rep: DescribeTaskDetailResponse) => void): Promise<DescribeTaskDetailResponse>;
     /**

@@ -208,4 +208,14 @@ it("trocket.v20230308.ModifyInstance", async function () {
     }
 })
 
+it("trocket.v20230308.DescribeConsumerGroupList", async function () {
+    try {
+       const data = await client.DescribeConsumerGroupList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 })

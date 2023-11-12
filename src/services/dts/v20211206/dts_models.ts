@@ -3955,7 +3955,7 @@ export interface Table {
    */
   ColumnMode?: string
   /**
-   * 同步的的列信息，当ColumnMode为Partial时，必填
+   * 同步的列信息，当ColumnMode为Partial时，必填
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Columns?: Array<Column>

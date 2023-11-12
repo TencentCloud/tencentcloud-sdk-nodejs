@@ -290,6 +290,21 @@ export interface DescribeDatabasesRequest {
     Asc?: boolean;
 }
 /**
+ * ip端口对信息
+ */
+export interface IpPortPair {
+    /**
+     * ip信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Ip?: string;
+    /**
+     * 端口信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Port?: number;
+}
+/**
  * 工作组部分信息
  */
 export interface WorkGroupMessage {
@@ -934,19 +949,38 @@ export interface SwitchDataEngineRequest {
     StartStandbyCluster: boolean;
 }
 /**
- * ip端口对信息
+ * DescribeDataEngineEvents返回参数结构体
  */
-export interface IpPortPair {
+export interface DescribeDataEngineEventsResponse {
     /**
-     * ip信息
+     * 事件详细信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Ip?: string;
+    Events: Array<HouseEventsInfo>;
     /**
-     * 端口信息
+     * 分页号
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Port?: number;
+    Page: number;
+    /**
+     * 分页大小
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Size: number;
+    /**
+     * 总页数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TotalPages: number;
+    /**
+     * 总条数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TotalCount: number;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * DeleteSparkApp请求参数结构体
@@ -2562,41 +2596,35 @@ export interface DescribeDatabasesResponse {
     RequestId?: string;
 }
 /**
- * 元数据加锁内容
+ * DescribeNotebookSessionStatementSqlResult返回参数结构体
  */
-export interface LockComponentInfo {
+export interface DescribeNotebookSessionStatementSqlResultResponse {
     /**
-     * 数据库名称
+     * 任务Id
      */
-    DbName: string;
+    TaskId?: string;
     /**
-     * 表名称
+     * 结果数据
      */
-    TableName?: string;
+    ResultSet?: string;
     /**
-     * 分区
+     * schema
      */
-    Partition?: string;
+    ResultSchema?: Array<Column>;
     /**
-     * 锁类型：SHARED_READ、SHARED_WRITE、EXCLUSIVE
+     * 分页信息
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    LockType?: string;
+    NextToken?: string;
     /**
-     * 锁级别：DB、TABLE、PARTITION
+     * 存储结果地址
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    LockLevel?: string;
+    OutputPath?: string;
     /**
-     * 锁操作：SELECT,INSERT,UPDATE,DELETE,UNSET,NO_TXN
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
-    DataOperationType?: string;
-    /**
-     * 是否保持Acid
-     */
-    IsAcid?: boolean;
-    /**
-     * 是否动态分区写
-     */
-    IsDynamicPartitionWrite?: boolean;
+    RequestId?: string;
 }
 /**
  * DescribeNotebookSessions返回参数结构体
@@ -3213,13 +3241,41 @@ export interface DescribeAdvancedStoreLocationResponse {
     RequestId?: string;
 }
 /**
- * UpgradeDataEngineImage请求参数结构体
+ * 元数据加锁内容
  */
-export interface UpgradeDataEngineImageRequest {
+export interface LockComponentInfo {
     /**
-     * 引擎ID
+     * 数据库名称
      */
-    DataEngineId: string;
+    DbName: string;
+    /**
+     * 表名称
+     */
+    TableName?: string;
+    /**
+     * 分区
+     */
+    Partition?: string;
+    /**
+     * 锁类型：SHARED_READ、SHARED_WRITE、EXCLUSIVE
+     */
+    LockType?: string;
+    /**
+     * 锁级别：DB、TABLE、PARTITION
+     */
+    LockLevel?: string;
+    /**
+     * 锁操作：SELECT,INSERT,UPDATE,DELETE,UNSET,NO_TXN
+     */
+    DataOperationType?: string;
+    /**
+     * 是否保持Acid
+     */
+    IsAcid?: boolean;
+    /**
+     * 是否动态分区写
+     */
+    IsDynamicPartitionWrite?: boolean;
 }
 /**
  * CSV类型数据格式
@@ -5816,35 +5872,21 @@ export interface CancelSparkSessionBatchSQLResponse {
     RequestId?: string;
 }
 /**
- * DescribeNotebookSessionStatementSqlResult返回参数结构体
+ * DescribeDataEngineEvents请求参数结构体
  */
-export interface DescribeNotebookSessionStatementSqlResultResponse {
+export interface DescribeDataEngineEventsRequest {
     /**
-     * 任务Id
+     * 虚拟集群名称
      */
-    TaskId?: string;
+    DataEngineName: string;
     /**
-     * 结果数据
+     * 返回数量，默认为10，最大为100
      */
-    ResultSet?: string;
+    Limit?: number;
     /**
-     * schema
+     * 偏移量，默认为0
      */
-    ResultSchema?: Array<Column>;
-    /**
-     * 分页信息
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    NextToken?: string;
-    /**
-     * 存储结果地址
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    OutputPath?: string;
-    /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
+    Offset?: number;
 }
 /**
  * 迁移元数据分区对象
@@ -5992,6 +6034,15 @@ export interface WorkGroupDetailInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     RowFilterInfo: Policys;
+}
+/**
+ * UpgradeDataEngineImage请求参数结构体
+ */
+export interface UpgradeDataEngineImageRequest {
+    /**
+     * 引擎ID
+     */
+    DataEngineId: string;
 }
 /**
  * SuspendResumeDataEngine返回参数结构体
@@ -7509,6 +7560,26 @@ export interface DescribeNotebookSessionStatementsRequest {
      * 批任务id
      */
     BatchId: string;
+}
+/**
+ * 集群事件日志
+ */
+export interface HouseEventsInfo {
+    /**
+     * 事件时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Time: Array<string>;
+    /**
+     * 事件类型
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    EventsAction: Array<string>;
+    /**
+     * 集群信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ClusterInfo: Array<string>;
 }
 /**
  * AlterDMSDatabase请求参数结构体

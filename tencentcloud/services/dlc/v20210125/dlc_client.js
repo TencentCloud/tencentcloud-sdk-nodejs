@@ -562,6 +562,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DetachUserPolicy", req, cb);
     }
     /**
+     * 查询数据引擎事件
+     */
+    async DescribeDataEngineEvents(req, cb) {
+        return this.request("DescribeDataEngineEvents", req, cb);
+    }
+    /**
      * 解绑工作组鉴权策略
      */
     async DetachWorkGroupPolicy(req, cb) {

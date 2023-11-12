@@ -31,6 +31,7 @@ import {
   CancelNotebookSessionStatementRequest,
   DescribeNotebookSessionStatementSqlResultRequest,
   DescribeDatabasesRequest,
+  IpPortPair,
   WorkGroupMessage,
   DeleteUserRequest,
   DescribeUserDataEngineConfigResponse,
@@ -59,7 +60,7 @@ import {
   DescribeTablesResponse,
   SparkJobInfo,
   SwitchDataEngineRequest,
-  IpPortPair,
+  DescribeDataEngineEventsResponse,
   DeleteSparkAppRequest,
   ModifyDataEngineDescriptionResponse,
   RestartDataEngineResponse,
@@ -129,7 +130,7 @@ import {
   UpdateDataEngineResponse,
   DeleteUserResponse,
   DescribeDatabasesResponse,
-  LockComponentInfo,
+  DescribeNotebookSessionStatementSqlResultResponse,
   DescribeNotebookSessionsResponse,
   DescribeDMSPartitionsRequest,
   SmartOptimizerWrittenPolicy,
@@ -153,7 +154,7 @@ import {
   CreateTaskRequest,
   DescribeNotebookSessionRequest,
   DescribeAdvancedStoreLocationResponse,
-  UpgradeDataEngineImageRequest,
+  LockComponentInfo,
   CSV,
   ModifyUserTypeRequest,
   NotebookSessionStatementInfo,
@@ -262,11 +263,12 @@ import {
   FavorInfo,
   DropDMSTableRequest,
   CancelSparkSessionBatchSQLResponse,
-  DescribeNotebookSessionStatementSqlResultResponse,
+  DescribeDataEngineEventsRequest,
   DMSPartition,
   ViewBaseInfo,
   DatabaseInfo,
   WorkGroupDetailInfo,
+  UpgradeDataEngineImageRequest,
   SuspendResumeDataEngineResponse,
   DescribeDMSPartitionsResponse,
   DeleteDataEngineRequest,
@@ -325,6 +327,7 @@ import {
   DescribeDatasourceConnectionRequest,
   CheckLockMetaDataResponse,
   DescribeNotebookSessionStatementsRequest,
+  HouseEventsInfo,
   AlterDMSDatabaseRequest,
   CheckDataEngineImageCanBeUpgradeRequest,
   StatementInformation,
@@ -1249,6 +1252,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DetachUserPolicyResponse) => void
   ): Promise<DetachUserPolicyResponse> {
     return this.request("DetachUserPolicy", req, cb)
+  }
+
+  /**
+   * 查询数据引擎事件
+   */
+  async DescribeDataEngineEvents(
+    req: DescribeDataEngineEventsRequest,
+    cb?: (error: string, rep: DescribeDataEngineEventsResponse) => void
+  ): Promise<DescribeDataEngineEventsResponse> {
+    return this.request("DescribeDataEngineEvents", req, cb)
   }
 
   /**

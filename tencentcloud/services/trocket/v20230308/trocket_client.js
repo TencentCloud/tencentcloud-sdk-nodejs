@@ -154,5 +154,14 @@ ConsumerGroup，消费组名称过滤
     async ModifyInstance(req, cb) {
         return this.request("ModifyInstance", req, cb);
     }
+    /**
+     * 获取消费组列表，Filter参数使用说明如下：
+
+1. ConsumerGroupName，名称模糊查询
+2. ConsumeMessageOrderly，投递顺序性。"true":顺序投递；"false":并发投递
+     */
+    async DescribeConsumerGroupList(req, cb) {
+        return this.request("DescribeConsumerGroupList", req, cb);
+    }
 }
 exports.Client = Client;

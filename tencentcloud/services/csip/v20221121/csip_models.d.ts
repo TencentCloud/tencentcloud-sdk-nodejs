@@ -3071,7 +3071,7 @@ export interface AssetViewPortRisk {
      */
     Status?: number;
     /**
-     * 资产唯一id
+     * 风险ID
      */
     Id?: string;
     /**
@@ -3101,7 +3101,7 @@ export interface AssetViewPortRisk {
      */
     Uin?: string;
     /**
-     * 来源
+     * 识别来源，详细看枚举返回。
      */
     From?: string;
 }

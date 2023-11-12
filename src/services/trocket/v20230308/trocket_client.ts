@@ -29,10 +29,11 @@ import {
   CreateInstanceResponse,
   DescribeTopicListResponse,
   DeleteInstanceResponse,
+  ConsumeGroupItem,
   TopicItem,
   ModifyConsumerGroupRequest,
   DescribeConsumerGroupRequest,
-  IpRule,
+  DescribeConsumerGroupListRequest,
   ModifyRoleResponse,
   SubscriptionData,
   DescribeConsumerGroupResponse,
@@ -46,11 +47,12 @@ import {
   Endpoint,
   DeleteRoleResponse,
   ModifyRoleRequest,
+  IpRule,
   DescribeTopicStatsOpRequest,
   RoleItem,
   CreateTopicRequest,
   TagFilter,
-  Filter,
+  DescribeConsumerGroupListResponse,
   DeleteRoleRequest,
   DescribeRoleListRequest,
   ModifyTopicRequest,
@@ -58,6 +60,7 @@ import {
   DescribeTopicStatsOpResponse,
   DeleteConsumerGroupRequest,
   DeleteTopicResponse,
+  Filter,
   CreateConsumerGroupResponse,
   ModifyConsumerGroupResponse,
   DeleteInstanceRequest,
@@ -278,5 +281,18 @@ ConsumerGroup，消费组名称过滤
     cb?: (error: string, rep: ModifyInstanceResponse) => void
   ): Promise<ModifyInstanceResponse> {
     return this.request("ModifyInstance", req, cb)
+  }
+
+  /**
+     * 获取消费组列表，Filter参数使用说明如下：
+
+1. ConsumerGroupName，名称模糊查询
+2. ConsumeMessageOrderly，投递顺序性。"true":顺序投递；"false":并发投递
+     */
+  async DescribeConsumerGroupList(
+    req: DescribeConsumerGroupListRequest,
+    cb?: (error: string, rep: DescribeConsumerGroupListResponse) => void
+  ): Promise<DescribeConsumerGroupListResponse> {
+    return this.request("DescribeConsumerGroupList", req, cb)
   }
 }

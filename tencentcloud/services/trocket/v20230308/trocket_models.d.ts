@@ -201,6 +201,36 @@ export interface DeleteInstanceResponse {
     RequestId?: string;
 }
 /**
+ * 消费组信息
+ */
+export interface ConsumeGroupItem {
+    /**
+     * 实例ID
+     */
+    InstanceId?: string;
+    /**
+     * 消费组名称
+     */
+    ConsumerGroup?: string;
+    /**
+     * 是否开启消费
+     */
+    ConsumeEnable?: boolean;
+    /**
+     * 顺序投递：true
+  并发投递：false
+     */
+    ConsumeMessageOrderly?: boolean;
+    /**
+     * 最大重试次数
+     */
+    MaxRetryTimes?: number;
+    /**
+     * 备注
+     */
+    Remark?: string;
+}
+/**
  * 列表上的主题信息
  */
 export interface TopicItem {
@@ -270,22 +300,29 @@ export interface DescribeConsumerGroupRequest {
     ConsumerGroup?: string;
 }
 /**
- * IP规则
+ * DescribeConsumerGroupList请求参数结构体
  */
-export interface IpRule {
+export interface DescribeConsumerGroupListRequest {
     /**
-     * IP地址
+     * 实例ID
      */
-    Ip: string;
+    InstanceId: string;
     /**
-     * 是否允许放行
+     * 查询起始位置
      */
-    Allow: boolean;
+    Offset: number;
     /**
-     * 备注信息
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 查询结果限制数量
      */
-    Remark: string;
+    Limit: number;
+    /**
+     * 查询条件列表
+     */
+    Filters?: Array<Filter>;
+    /**
+     * 查询指定主题下的消费组
+     */
+    FromTopic?: string;
 }
 /**
  * ModifyRole返回参数结构体
@@ -671,6 +708,24 @@ export interface ModifyRoleRequest {
     Remark?: string;
 }
 /**
+ * IP规则
+ */
+export interface IpRule {
+    /**
+     * IP地址
+     */
+    Ip: string;
+    /**
+     * 是否允许放行
+     */
+    Allow: boolean;
+    /**
+     * 备注信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Remark: string;
+}
+/**
  * DescribeTopicStatsOp请求参数结构体
  */
 export interface DescribeTopicStatsOpRequest {
@@ -760,17 +815,22 @@ export interface TagFilter {
     TagValues: Array<string>;
 }
 /**
- * 查询过滤器
+ * DescribeConsumerGroupList返回参数结构体
  */
-export interface Filter {
+export interface DescribeConsumerGroupListResponse {
     /**
-     * 过滤条件名
+     * 查询总数
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Name: string;
+    TotalCount?: number;
     /**
-     * 过滤条件的值
+     * 消费组列表
      */
-    Values: Array<string>;
+    Data?: Array<ConsumeGroupItem>;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * DeleteRole请求参数结构体
@@ -965,6 +1025,19 @@ export interface DeleteTopicResponse {
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * 查询过滤器
+ */
+export interface Filter {
+    /**
+     * 过滤条件名
+     */
+    Name: string;
+    /**
+     * 过滤条件的值
+     */
+    Values: Array<string>;
 }
 /**
  * CreateConsumerGroup返回参数结构体
