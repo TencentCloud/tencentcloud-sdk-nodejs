@@ -1818,6 +1818,11 @@ export interface MainlandPermitOCRRequest {
    * 是否返回头像。默认不返回。
    */
   RetProfile?: boolean
+  /**
+   * 图片正反面
+FRONT：正面、BACK：反面，默认为FRONT
+   */
+  CardSide?: string
 }
 
 /**
@@ -7810,6 +7815,10 @@ export interface MainlandPermitOCRResponse {
    */
   Profile?: string
   /**
+   * 背面字段信息
+   */
+  MainlandTravelPermitBackInfos?: MainlandTravelPermitBackInfos
+  /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -8278,6 +8287,32 @@ export interface QrcodeOCRRequest {
 建议图片存储于腾讯云，可保障更高的下载速度和稳定性。
    */
   ImageUrl?: string
+}
+
+/**
+ * 港澳台来往内地通行证背面字段信息
+ */
+export interface MainlandTravelPermitBackInfos {
+  /**
+   * String	证件类别， 如：台湾居民来往大陆通行证、港澳居民来往内地通行证。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Type?: string
+  /**
+   * 卡证背面的中文姓名	
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name?: string
+  /**
+   * 卡证背面的身份证号码	
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IDNumber?: string
+  /**
+   * 历史通行证号码	
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HistoryNumber?: string
 }
 
 /**

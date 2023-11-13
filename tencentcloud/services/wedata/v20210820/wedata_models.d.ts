@@ -1341,6 +1341,27 @@ export interface DlcMergeManifestsInfo {
     IntervalMin?: number;
 }
 /**
+ * DescribeTableMetas请求参数结构体
+ */
+export interface DescribeTableMetasRequest {
+    /**
+     * 分页页码
+     */
+    PageNumber?: number;
+    /**
+     * 分页大小
+     */
+    PageSize?: number;
+    /**
+     * 过滤字段
+     */
+    Filters?: Array<Filter>;
+    /**
+     * 排序字段
+     */
+    OrderFields?: Array<OrderField>;
+}
+/**
  * 规则执行结果详情
  */
 export interface RuleExecResultDetail {
@@ -7315,6 +7336,25 @@ export interface ModifyRuleRequest {
     SourceEngineTypes?: Array<number | bigint>;
 }
 /**
+ * DescribeTableMetas返回参数结构体
+ */
+export interface DescribeTableMetasResponse {
+    /**
+     * 表元数据
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TableMetas: Array<TableMeta>;
+    /**
+     * 总条数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TotalCount: number;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * 操作结果
  */
 export interface BatchReturn {
@@ -12836,6 +12876,43 @@ export interface RerunInstancesRequest {
     SonInstanceType: string;
 }
 /**
+ * 按天更新的表的资产评分
+ */
+export interface TablePropertyScore {
+    /**
+     * 表ID
+     */
+    TableId: string;
+    /**
+     * 统计日期
+     */
+    DayTime: string;
+    /**
+     * 表完整性评分
+     */
+    Integrity: number;
+    /**
+     * 表保障性评分
+     */
+    Safety: number;
+    /**
+     * 表及时性评分
+     */
+    Timeliness: number;
+    /**
+     * 表稳定性评分
+     */
+    Stability: number;
+    /**
+     * 表规范性评分
+     */
+    Normative: number;
+    /**
+     * 资产评分平均分
+     */
+    Average: number;
+}
+/**
  * DescribeEventIsAlarmTypes请求参数结构体
  */
 export declare type DescribeEventIsAlarmTypesRequest = null;
@@ -14302,6 +14379,76 @@ export interface DescribeDatabaseMetasRequest {
      * 排序字段，如name
      */
     OrderFields?: Array<OrderField>;
+}
+/**
+ * 表字段信息
+ */
+export interface SearchColumnDocVO {
+    /**
+     * 字段名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Name?: string;
+    /**
+     * 字段中文名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ChineseName?: string;
+    /**
+     * 字段类型
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Type?: string;
+    /**
+     * 字段类型长度
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Length?: number;
+    /**
+     * 字段类型精度
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Precision?: number;
+    /**
+     * 字段类型scale
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Scale?: number;
+    /**
+     * 字段默认值
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DefaultValue?: string;
+    /**
+     * 字段描述
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Description?: string;
+    /**
+     * 字段的顺序
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Position?: number;
+    /**
+     * 是否为分区字段
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IsPartition?: boolean;
+    /**
+     * 列上的索引类型 主键: PRI,唯一索引: UNI,一般索引: MUL
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ColumnKey?: string;
+    /**
+     * 创建时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CreateTime?: string;
+    /**
+     * 更新时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ModifiedTime?: string;
 }
 /**
  * 简单Task信息
@@ -16121,6 +16268,246 @@ export interface DescribeStatisticInstanceStatusTrendOpsResponse {
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * 表的元数据信息
+ */
+export interface TableMeta {
+    /**
+     * 表的全局唯一ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TableId: string;
+    /**
+     * 表名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TableName: string;
+    /**
+     * 责任人
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TableOwnerName: string;
+    /**
+     * 数据源全局唯一ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DatasourceId: number;
+    /**
+     * 所属集群名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ClusterName: string;
+    /**
+     * 数据源名
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DatasourceName: string;
+    /**
+     * 数据库名
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DatabaseName: string;
+    /**
+     * 表路径
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TablePath: string;
+    /**
+     * 表中文名
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TableNameCn: string;
+    /**
+     * 元数据租户ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MetastoreId: number;
+    /**
+     * 技术类型，可用值:HIVE,MYSQL,KAFKA, HBASE
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MetastoreType: string;
+    /**
+     * 表描述
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Description: string;
+    /**
+     * 列分隔符
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ColumnSeparator: string;
+    /**
+     * 存储格式
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    StorageFormat: string;
+    /**
+     * 存储量，字节数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    StorageSize: number;
+    /**
+     * 表类型，如hive MANAGED_TABLE;EXTERNAL_TABLE
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TableType: string;
+    /**
+     * 创建时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CreateTime: string;
+    /**
+     * 最近数据变更时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ModifyTime: string;
+    /**
+     * 最近DDL变更时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DdlModifyTime: string;
+    /**
+     * 数据最后访问时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    LastAccessTime: string;
+    /**
+     * 所属项目英文名
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ProjectName: string;
+    /**
+     * 所属数据目录id（可能多个）
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    BizCatalogIds: Array<string>;
+    /**
+     * 所属数据目录（可能多个）
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    BizCatalogNames: Array<string>;
+    /**
+     * true已收藏/false表示未收藏状态
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    HasFavorite: boolean;
+    /**
+     * 生命周期
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    LifeCycleTime: number;
+    /**
+     * 存储量，已转为适合的单位展示
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    StorageSizeWithUnit: string;
+    /**
+     * 数据源引擎的实例ID：如EMR集群实例ID/数据源实例ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InstanceId: string;
+    /**
+     * 数据来源技术类型：HIVE/MYSQL/HBASE/KAFKA等
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TechnologyType: string;
+    /**
+     * 表英文名
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TableNameEn: string;
+    /**
+     * 项目Id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ProjectId: string;
+    /**
+     * Kafka Topic 分区数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Partitions: string;
+    /**
+     * Kafka Topic 副本数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ReplicationFactor: string;
+    /**
+     * 所属项目英中文名
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ProjectDisplayName: string;
+    /**
+     * 数据最后修改时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DataModifyTime: string;
+    /**
+     * 集群ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ClusterId: string;
+    /**
+     * 当前用户是否有管理员权限
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    HasAdminAuthority: boolean;
+    /**
+     * 数据源展示名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DatasourceDisplayName: string;
+    /**
+     * 数据库ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DatabaseId: string;
+    /**
+     * 租户下对表的收藏总次数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    FavoriteCount: number;
+    /**
+     * 租户下对表的点赞总次数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    LikeCount: number;
+    /**
+     * true已点赞/false表示未点赞状态
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    HasLike: boolean;
+    /**
+     * 表的资产评分
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TablePropertyScore: TablePropertyScore;
+    /**
+     * 表的热度值
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TableHeat: TableHeat;
+    /**
+     * 数据源ownerProjectId
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    OwnerProjectId: string;
+    /**
+     * 表负责人ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TableOwnerId: string;
+    /**
+     * 系统源-CLUSTER, DB-自定义源
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DataSourceCategory?: string;
+    /**
+     * 表字段信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Columns?: Array<SearchColumnDocVO>;
 }
 /**
  * CountOpsInstanceState返回参数结构体
@@ -21113,6 +21500,31 @@ export interface DescribeInstanceLastLogResponse {
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * 过去七天（不算当天）表的热度值
+ */
+export interface TableHeat {
+    /**
+     * 表ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TableId: string;
+    /**
+     * 统计日期
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DayTime: string;
+    /**
+     * 表热度
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Heat: number;
+    /**
+     * 表热度最大值
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MaxHeat: number;
 }
 /**
  * DescribeExecStrategy请求参数结构体

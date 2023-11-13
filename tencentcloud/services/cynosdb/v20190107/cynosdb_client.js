@@ -340,6 +340,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeInstanceSlowQueries", req, cb);
     }
     /**
+     * 获取database列表
+     */
+    async DescribeClusterDatabases(req, cb) {
+        return this.request("DescribeClusterDatabases", req, cb);
+    }
+    /**
      * 修改集群参数
      */
     async ModifyClusterParam(req, cb) {

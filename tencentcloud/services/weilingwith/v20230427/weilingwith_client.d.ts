@@ -62,7 +62,7 @@ export declare class Client extends AbstractClient {
     /**
      * 获取设备影子数据
      */
-    DescribeDeviceShadowList(req?: DescribeDeviceShadowListRequest, cb?: (error: string, rep: DescribeDeviceShadowListResponse) => void): Promise<DescribeDeviceShadowListResponse>;
+    DescribeDeviceShadowList(req: DescribeDeviceShadowListRequest, cb?: (error: string, rep: DescribeDeviceShadowListResponse) => void): Promise<DescribeDeviceShadowListResponse>;
     /**
      * 标签列表查询
      */
@@ -198,7 +198,7 @@ export declare class Client extends AbstractClient {
     /**
      * 历史流接口
      */
-    DescribeVideoRecordStream(req?: DescribeVideoRecordStreamRequest, cb?: (error: string, rep: DescribeVideoRecordStreamResponse) => void): Promise<DescribeVideoRecordStreamResponse>;
+    DescribeVideoRecordStream(req: DescribeVideoRecordStreamRequest, cb?: (error: string, rep: DescribeVideoRecordStreamResponse) => void): Promise<DescribeVideoRecordStreamResponse>;
     /**
      * 告警列表查询
      */
@@ -206,7 +206,7 @@ export declare class Client extends AbstractClient {
     /**
      * 查询指定空间关联的应用列表
      */
-    DescribeApplicationList(req?: DescribeApplicationListRequest, cb?: (error: string, rep: DescribeApplicationListResponse) => void): Promise<DescribeApplicationListResponse>;
+    DescribeApplicationList(req: DescribeApplicationListRequest, cb?: (error: string, rep: DescribeApplicationListResponse) => void): Promise<DescribeApplicationListResponse>;
     /**
      * 添加告警处理记录
      */

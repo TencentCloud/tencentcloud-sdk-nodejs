@@ -253,6 +253,7 @@ import {
   EnterpriseLicenseInfo,
   InsuranceBillOCRRequest,
   QrcodeOCRRequest,
+  MainlandTravelPermitBackInfos,
   TableCell,
   TableOCRResponse,
   DetectedWordCoordPoint,

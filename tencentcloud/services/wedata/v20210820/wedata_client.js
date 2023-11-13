@@ -71,6 +71,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("GetFileInfo", req, cb);
     }
     /**
+     * 获取表元数据list
+     */
+    async DescribeTableMetas(req, cb) {
+        return this.request("DescribeTableMetas", req, cb);
+    }
+    /**
      * 检查规则名称是否重复
      */
     async CheckDuplicateRuleName(req, cb) {

@@ -946,6 +946,7 @@ export interface CreateConvertTaskApiRequest {
   <li>jpg</li>
   <li>jpeg</li>
   <li>png</li>
+  <li>html</li>
   <li>bmp</li>
   <li>txt</li></ul>
      */

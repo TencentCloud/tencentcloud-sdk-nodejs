@@ -178,6 +178,16 @@ it("faceid.v20180301.GetEidToken", async function () {
     }
 })
 
+it("faceid.v20180301.DetectAIFakeFaces", async function () {
+    try {
+       const data = await client.DetectAIFakeFaces({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("faceid.v20180301.PhoneVerification", async function () {
     try {
        const data = await client.PhoneVerification({})

@@ -449,6 +449,16 @@ export interface TableColumn {
 }
 
 /**
+ * 安全组配置。
+ */
+export interface SecurityGroupOption {
+  /**
+   * 安全组ID。
+   */
+  SecurityGroupId: string
+}
+
+/**
  * DescribeTablesRows请求参数结构体
  */
 export interface DescribeTablesRowsRequest {
@@ -495,6 +505,22 @@ export interface DescribeEnvironmentsResponse {
 }
 
 /**
+ * 资源限制范围。
+ */
+export interface LimitRange {
+  /**
+   * 最大CPU设置
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MaxCPU?: string
+  /**
+   * 最大内存设置（单位：Mi，Gi，Ti，M，G，T）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MaxMemory?: string
+}
+
+/**
  * DescribeTables返回参数结构体
  */
 export interface DescribeTablesResponse {
@@ -517,17 +543,46 @@ export interface DescribeTablesResponse {
  */
 export interface VPCOption {
   /**
+   * 私有网络ID（VPCId和VPCCIDRBlock必选其一。若使用VPCId，则使用现用私有网络；若使用VPCCIDRBlock，则创建新的私有网络）
+   */
+  VPCId?: string
+  /**
+   * 子网ID（SubnetId和SubnetZone&SubnetCIDRBlock必选其一。若使用SubnetId，则使用现用子网；若使用SubnetZone&SubnetCIDRBlock，则创建新的子网）
+   */
+  SubnetId?: string
+  /**
    * 子网可用区。
    */
-  SubnetZone: string
+  SubnetZone?: string
   /**
    * 私有网络CIDR。
    */
-  VPCCIDRBlock: string
+  VPCCIDRBlock?: string
   /**
    * 子网CIDR。
    */
-  SubnetCIDRBlock: string
+  SubnetCIDRBlock?: string
+}
+
+/**
+ * 资源配额。
+ */
+export interface ResourceQuota {
+  /**
+   * CPU Limit设置。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CPULimit?: string
+  /**
+   * 内存Limit设置（单位：Mi，Gi，Ti，M，G，T）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MemoryLimit?: string
+  /**
+   * Pods数量设置
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Pods?: string
 }
 
 /**
@@ -604,6 +659,14 @@ export interface ClusterOption {
 - KUBERNETES
    */
   Type: string
+  /**
+   * 资源配额。
+   */
+  ResourceQuota?: ResourceQuota
+  /**
+   * 限制范围。
+   */
+  LimitRange?: LimitRange
 }
 
 /**
@@ -964,6 +1027,10 @@ export interface EnvironmentConfig {
    * 云服务器配置。
    */
   CVMOption: CVMOption
+  /**
+   * 安全组配置。
+   */
+  SecurityGroupOption?: SecurityGroupOption
 }
 
 /**
@@ -1407,4 +1474,8 @@ export interface CreateEnvironmentRequest {
    * 环境描述。
    */
   Description?: string
+  /**
+   * 是否为默认环境。
+   */
+  IsDefault?: boolean
 }

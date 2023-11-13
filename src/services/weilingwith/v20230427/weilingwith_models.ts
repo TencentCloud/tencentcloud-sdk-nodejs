@@ -21,6 +21,22 @@
 export type DescribeWorkSpaceBuildingCountAndAreaRequest = null
 
 /**
+ * 应用列表
+ */
+export interface ApplicationList {
+  /**
+   * 应用列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ApplicationInfoList?: Array<ApplicationInfo>
+  /**
+   * 当前查询条件命中的数据总条数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalCount?: string
+}
+
+/**
  * DescribeSpaceDeviceRelationList请求参数结构体
  */
 export type DescribeSpaceDeviceRelationListRequest = null
@@ -121,7 +137,7 @@ export interface SsoTeamUser {
    */
   RealName?: string
   /**
-   * 用户类型
+   * 用户类型，1-超级管理员；2-1号管理员；3-普通管理员；99-普通用户
 注意：此字段可能返回 null，表示取不到有效值。
    */
   UserType?: string
@@ -330,7 +346,28 @@ export interface DescribeSpaceInfoByDeviceIdResponse {
 /**
  * DescribeApplicationList请求参数结构体
  */
-export type DescribeApplicationListRequest = null
+export interface DescribeApplicationListRequest {
+  /**
+   * 项目空间id，本次查询返回的应用均关联至该空间
+   */
+  WorkspaceId: number
+  /**
+   * 应用token
+   */
+  ApplicationToken: string
+  /**
+   * 应用id数组，可选，填了则表示根据id批量查询
+   */
+  ApplicationId?: Array<number | bigint>
+  /**
+   * 请求页号
+   */
+  PageNumber?: number
+  /**
+   * 页容量，默认为10
+   */
+  PageSize?: number
+}
 
 /**
  * DescribeSceneList请求参数结构体
@@ -396,6 +433,10 @@ export interface DescribePropertyListResponse {
  * DescribeApplicationList返回参数结构体
  */
 export interface DescribeApplicationListResponse {
+  /**
+   * 应用列表
+   */
+  Result?: ApplicationList
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -489,6 +530,22 @@ export type DescribePropertyListRequest = null
 export type DescribeProductListRequest = null
 
 /**
+ * 应用logo
+ */
+export interface ApplicationLogo {
+  /**
+   * logo图片对应的fileId
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FileId?: string
+  /**
+   * logo图片地址
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Url?: string
+}
+
+/**
  * ControlCameraPTZ返回参数结构体
  */
 export interface ControlCameraPTZResponse {
@@ -541,6 +598,37 @@ export interface DescribeDeviceStatusStatResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 设备影子查询列表
+ */
+export interface DeviceShadowRes {
+  /**
+   * 第几页
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PageNumber?: number
+  /**
+   * 每页条数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PageSize?: number
+  /**
+   * 总页数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalPage?: number
+  /**
+   * 总条数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalRow?: number
+  /**
+   * 设备影子列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Set?: Array<DeviceShadowInfo>
 }
 
 /**
@@ -621,6 +709,10 @@ export type DescribeBuildingProfileRequest = null
  * DescribeDeviceShadowList返回参数结构体
  */
 export interface DescribeDeviceShadowListResponse {
+  /**
+   * 获取设备影子结果
+   */
+  Result?: DeviceShadowRes
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -798,6 +890,47 @@ export interface DescribeBuildingProfileResponse {
 export type ReportAppMessageRequest = null
 
 /**
+ * 应用描述
+ */
+export interface ApplicationInfo {
+  /**
+   * 应用分配的appId
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ApplicationId?: string
+  /**
+   * 应用中文名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name?: string
+  /**
+   * 应用地址
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Address?: string
+  /**
+   * 应用logo
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ApplicationLogo?: ApplicationLogo
+  /**
+   * 应用类型，0:saas应用 1:平台应用
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Type?: number
+  /**
+   * engine
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EnglishName?: string
+  /**
+   * 能源管理应用
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Description?: string
+}
+
+/**
  * DescribeFileUploadURL请求参数结构体
  */
 export type DescribeFileUploadURLRequest = null
@@ -885,7 +1018,49 @@ export interface DescribeProductListResponse {
 /**
  * DescribeVideoRecordStream请求参数结构体
  */
-export type DescribeVideoRecordStreamRequest = null
+export interface DescribeVideoRecordStreamRequest {
+  /**
+   * 设备唯一标识
+   */
+  WID: string
+  /**
+   * 枚举如下：
+flvsh
+rtmp
+hls
+webrtc
+raw (视频原始帧)
+   */
+  Protocol: string
+  /**
+   * 开始时间（精确到毫秒）
+   */
+  StartTime: number
+  /**
+   * 结束时间（精确到毫秒）
+   */
+  EndTime: number
+  /**
+   * 倍速 0.5、1、2、4
+   */
+  PlayBackRate: number
+  /**
+   * 工作空间id
+   */
+  WorkspaceId: number
+  /**
+   * 应用token
+   */
+  ApplicationToken: string
+  /**
+   * 流的唯一标识，播放链接尾缀
+   */
+  Stream?: string
+  /**
+   * 公有云私有化项目传0或者不传；混合云项目一般传空间id
+   */
+  Env?: string
+}
 
 /**
  * DescribeAlarmStatusList返回参数结构体
@@ -998,6 +1173,27 @@ export interface BatchKillAlarmResponse {
 }
 
 /**
+ * 设备影子信息
+ */
+export interface DeviceShadowInfo {
+  /**
+   * 设备ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WID?: string
+  /**
+   * 设备影子数据,返回有效数据为"x-json:"后字段
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DeviceShadow?: string
+  /**
+   * 设备影子更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DeviceShadowUpdateTime?: string
+}
+
+/**
  * DescribeDeviceTypeList请求参数结构体
  */
 export type DescribeDeviceTypeListRequest = null
@@ -1005,7 +1201,44 @@ export type DescribeDeviceTypeListRequest = null
 /**
  * DescribeDeviceShadowList请求参数结构体
  */
-export type DescribeDeviceShadowListRequest = null
+export interface DescribeDeviceShadowListRequest {
+  /**
+   * 工作空间id
+   */
+  WorkspaceId: number
+  /**
+   * WID
+   */
+  WIDSet: Array<string>
+  /**
+   * 分页查询，第几页
+   */
+  PageNumber: number
+  /**
+   * 每页条数
+   */
+  PageSize: number
+  /**
+   * 应用token
+   */
+  ApplicationToken: string
+  /**
+   * 设备类型code
+   */
+  DeviceTypeSet?: Array<string>
+  /**
+   * 产品 pid
+   */
+  ProductIdSet?: Array<number | bigint>
+  /**
+   * 空间层级，（支持空间多层，比如具体建筑、具体楼层）
+   */
+  SpaceCodeSet?: Array<string>
+  /**
+   * 设备标签名
+   */
+  DeviceTagSet?: Array<string>
+}
 
 /**
  * DescribeSceneList返回参数结构体
@@ -1062,7 +1295,7 @@ export interface SsoUser {
    */
   RealName?: string
   /**
-   * 用户类型
+   * 用户类型，1-超级管理员；2-1号管理员；3-普通管理员；99-普通用户
 注意：此字段可能返回 null，表示取不到有效值。
    */
   UserType?: string
@@ -1087,7 +1320,7 @@ export interface SsoUser {
    */
   Phone?: string
   /**
-   * 用户状态
+   * 用户状态，0待审核，1正常启用，2禁用
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Status?: number
@@ -1102,17 +1335,17 @@ export interface SsoUser {
    */
   UpdateAt?: number
   /**
-   * 是否属于团队
+   * 是否属于团队，0不可用，1属于，2不属
 注意：此字段可能返回 null，表示取不到有效值。
    */
   BelongTeam?: number
   /**
-   * ID
+   * 部门ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DepartmentId?: string
   /**
-   * 名称
+   * 部门名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DepartmentName?: string

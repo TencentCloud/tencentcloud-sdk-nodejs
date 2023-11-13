@@ -216,7 +216,7 @@ export interface ModifyBackupStrategyRequest {
    */
   BackupDay?: number
   /**
-   * 备份模式，master_pkg-主节点上打包备份文件；master_no_pkg-主节点单库备份文件；slave_pkg-从节点上打包备份文件；slave_no_pkg-从节点上单库备份文件，从节点上备份只有在always on容灾模式下支持。
+   * 备份模式（必填），master_pkg-主节点上打包备份文件；master_no_pkg-主节点单库备份文件；slave_pkg-从节点上打包备份文件；slave_no_pkg-从节点上单库备份文件，从节点上备份只有在always on容灾模式下支持。
    */
   BackupModel?: string
   /**
@@ -224,7 +224,7 @@ export interface ModifyBackupStrategyRequest {
    */
   BackupCycle?: Array<number | bigint>
   /**
-   * 数据(日志)备份保留时间，取值[3-1830]天，默认7天
+   * 数据(日志)备份保留天数（必填），取值[3-1830]天，默认7天
    */
   BackupSaveDays?: number
   /**
@@ -1926,7 +1926,7 @@ export interface ModifyAccountPrivilegeResponse {
   /**
    * 异步任务流程ID
    */
-  FlowId: number
+  FlowId?: number
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1942,15 +1942,15 @@ export interface RemoveBackupsRequest {
    */
   InstanceId: string
   /**
-   * 待删除的备份名称，备份名称可通过DescribeBackups接口的FileName字段获得。单次请求批量删除备份数不能超过10个。
+   * 待删除的备份名称，备份名称可通过DescribeBackups接口的FileName字段获得，单次请求批量删除备份数不能超过10个。当StartTime、EndTime为空时，此字段必填。
    */
   BackupNames?: Array<string>
   /**
-   * 批量删除手动备份起始时间
+   * 批量删除手动备份起始时间。当BackupNames为空时，此字段必填。
    */
   StartTime?: string
   /**
-   * 批量删除手动备份截止时间
+   * 批量删除手动备份截止时间。当BackupNames为空时，此字段必填。
    */
   EndTime?: string
 }
@@ -5742,7 +5742,7 @@ export interface CreateAccountResponse {
   /**
    * 任务流ID
    */
-  FlowId: number
+  FlowId?: number
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5882,7 +5882,7 @@ export interface RestartDBInstanceResponse {
   /**
    * 异步任务流程ID
    */
-  FlowId: number
+  FlowId?: number
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6197,7 +6197,7 @@ export interface ModifyBackupNameRequest {
    */
   BackupName: string
   /**
-   * 要修改名称的备份ID，可通过 [DescribeBackups](https://cloud.tencent.com/document/product/238/19943)  接口获取。
+   * 备份ID 可通过 [DescribeBackups](https://cloud.tencent.com/document/product/238/19943)  接口获取。当GroupId为空时，BackupId必填。
    */
   BackupId?: number
   /**

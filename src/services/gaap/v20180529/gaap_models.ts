@@ -5787,6 +5787,11 @@ CrossBorder表示跨境通道。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   FeatureBitmap?: number
+  /**
+   * 是否是开启了auto scale的通道，0表示否，1表示是。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsAutoScaleProxy?: number
 }
 
 /**

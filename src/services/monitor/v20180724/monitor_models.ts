@@ -10074,7 +10074,7 @@ export interface DescribeStatisticDataRequest {
    */
   Module: string
   /**
-   * 命名空间，目前只支持QCE/TKE2
+   * 命名空间，目前支持QCE/TKE2(Conditions必填),QCE/KEEWIDB,QCE/CAMP
    */
   Namespace: string
   /**
@@ -10083,6 +10083,7 @@ export interface DescribeStatisticDataRequest {
   MetricNames: Array<string>
   /**
    * 维度条件，操作符支持=、in
+配置文档参考：https://cloud.tencent.com/document/product/248/53821
    */
   Conditions?: Array<MidQueryCondition>
   /**

@@ -95,6 +95,7 @@ import {
   DescribeClusterDetailDatabasesResponse,
   CynosdbInstanceGrp,
   CreateParamTemplateResponse,
+  ZoneStockInfo,
   ActivateInstanceRequest,
   RevokeAccountPrivilegesResponse,
   DatabaseTables,
@@ -165,6 +166,7 @@ import {
   SearchClusterDatabasesRequest,
   DescribeClusterPasswordComplexityResponse,
   DescribeAuditRuleWithInstanceIdsRequest,
+  DescribeClusterDatabasesResponse,
   RefundResourcePackageRequest,
   ExportInstanceErrorLogsResponse,
   DbTable,
@@ -350,7 +352,7 @@ import {
   InputAccount,
   DisassociateSecurityGroupsResponse,
   InstanceAuditLogFilter,
-  ZoneStockInfo,
+  DescribeClusterDatabasesRequest,
   InquirePriceRenewResponse,
   Tag,
   ModifyAuditRuleTemplatesResponse,
@@ -883,6 +885,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeInstanceSlowQueriesResponse) => void
   ): Promise<DescribeInstanceSlowQueriesResponse> {
     return this.request("DescribeInstanceSlowQueries", req, cb)
+  }
+
+  /**
+   * 获取database列表
+   */
+  async DescribeClusterDatabases(
+    req: DescribeClusterDatabasesRequest,
+    cb?: (error: string, rep: DescribeClusterDatabasesResponse) => void
+  ): Promise<DescribeClusterDatabasesResponse> {
+    return this.request("DescribeClusterDatabases", req, cb)
   }
 
   /**

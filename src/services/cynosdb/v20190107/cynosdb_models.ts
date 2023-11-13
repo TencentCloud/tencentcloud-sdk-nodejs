@@ -1869,6 +1869,24 @@ export interface CreateParamTemplateResponse {
 }
 
 /**
+ * 可用区库存信息
+ */
+export interface ZoneStockInfo {
+  /**
+   * 可用区
+   */
+  Zone?: string
+  /**
+   * 是否有库存
+   */
+  HasStock?: boolean
+  /**
+   * 库存数量
+   */
+  StockCount?: number
+}
+
+/**
  * ActivateInstance请求参数结构体
  */
 export interface ActivateInstanceRequest {
@@ -3557,6 +3575,32 @@ export interface DescribeAuditRuleWithInstanceIdsRequest {
    * 实例ID。目前仅支持单个实例的查询。
    */
   InstanceIds: Array<string>
+}
+
+/**
+ * DescribeClusterDatabases返回参数结构体
+ */
+export interface DescribeClusterDatabasesResponse {
+  /**
+   * 总条数
+   */
+  TotalCount: number
+  /**
+   * 分页偏移
+   */
+  Offset: number
+  /**
+   * 数据库列表
+   */
+  Databases: Array<string>
+  /**
+   * 分页限制数
+   */
+  Limit: number
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -8457,21 +8501,21 @@ RA - 范围。
 }
 
 /**
- * 可用区库存信息
+ * DescribeClusterDatabases请求参数结构体
  */
-export interface ZoneStockInfo {
+export interface DescribeClusterDatabasesRequest {
   /**
-   * 可用区
+   * 集群id
    */
-  Zone?: string
+  ClusterId: string
   /**
-   * 是否有库存
+   * 分页偏移
    */
-  HasStock?: boolean
+  Offset?: number
   /**
-   * 库存数量
+   * 分页限制数量
    */
-  StockCount?: number
+  Limit?: number
 }
 
 /**

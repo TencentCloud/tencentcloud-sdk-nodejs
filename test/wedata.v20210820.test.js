@@ -88,6 +88,16 @@ it("wedata.v20210820.GetFileInfo", async function () {
     }
 })
 
+it("wedata.v20210820.DescribeTableMetas", async function () {
+    try {
+       const data = await client.DescribeTableMetas({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("wedata.v20210820.CheckDuplicateRuleName", async function () {
     try {
        const data = await client.CheckDuplicateRuleName({})

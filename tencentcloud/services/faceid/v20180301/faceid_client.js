@@ -125,6 +125,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("GetEidToken", req, cb);
     }
     /**
+     * 提供对人脸图片/视频的AI合成、翻拍、水印等攻击痕迹的检测，增强图片/视频防伪能力
+     */
+    async DetectAIFakeFaces(req, cb) {
+        return this.request("DetectAIFakeFaces", req, cb);
+    }
+    /**
      * 本接口用于校验手机号、姓名和身份证号的真实性和一致性。支持的手机号段详情请查阅<a href="https://cloud.tencent.com/document/product/1007/46063">运营商类</a>文档。
      */
     async PhoneVerification(req, cb) {

@@ -370,7 +370,7 @@ export interface CreateVRSTaskRequest {
    */
   ModelType?: number
   /**
-   * 任务类型 0:默认类型 1:轻量级复刻
+   * 任务类型 0:轻量版复刻
 默认为0
    */
   TaskType?: number

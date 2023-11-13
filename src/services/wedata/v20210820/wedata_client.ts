@@ -67,6 +67,7 @@ import {
   CreateWorkflowRequest,
   FindAllFolderRequest,
   DlcMergeManifestsInfo,
+  DescribeTableMetasRequest,
   RuleExecResultDetail,
   DataSourceInfoPage,
   OpsTaskInfoPage,
@@ -254,6 +255,7 @@ import {
   DescribeColumnLineageRequest,
   CreateTaskAlarmRegularRequest,
   ModifyRuleRequest,
+  DescribeTableMetasResponse,
   BatchReturn,
   DescribeDiagnosticInfoResponse,
   FindAllFolderResponse,
@@ -457,6 +459,7 @@ import {
   RealTimeTaskInstanceNodeInfo,
   DeleteResourceFilesResponse,
   RerunInstancesRequest,
+  TablePropertyScore,
   DescribeEventIsAlarmTypesRequest,
   CreateOpsMakePlanResponse,
   DescribeStreamTaskLogListResponse,
@@ -528,6 +531,7 @@ import {
   OperateResult,
   CreateTaskRequest,
   DescribeDatabaseMetasRequest,
+  SearchColumnDocVO,
   SimpleTaskInfo,
   CreateFolderResponse,
   DescribeRealTimeTaskInstanceNodeInfoRequest,
@@ -594,6 +598,7 @@ import {
   DescribeWorkflowListByProjectIdRequest,
   AlarmIndicatorInfo,
   DescribeStatisticInstanceStatusTrendOpsResponse,
+  TableMeta,
   CountOpsInstanceStateResponse,
   SubscribeReceiver,
   DescribeQualityScoreTrendRequest,
@@ -775,6 +780,7 @@ import {
   DescribeRuleExecResultsByPageRequest,
   RunTasksByMultiWorkflowResponse,
   DescribeInstanceLastLogResponse,
+  TableHeat,
   DescribeExecStrategyRequest,
   ScriptInfoResponse,
   CreateHiveTableRequest,
@@ -956,6 +962,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: GetFileInfoResponse) => void
   ): Promise<GetFileInfoResponse> {
     return this.request("GetFileInfo", req, cb)
+  }
+
+  /**
+   * 获取表元数据list
+   */
+  async DescribeTableMetas(
+    req: DescribeTableMetasRequest,
+    cb?: (error: string, rep: DescribeTableMetasResponse) => void
+  ): Promise<DescribeTableMetasResponse> {
+    return this.request("DescribeTableMetas", req, cb)
   }
 
   /**

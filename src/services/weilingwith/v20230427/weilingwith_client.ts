@@ -19,6 +19,7 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   DescribeWorkSpaceBuildingCountAndAreaRequest,
+  ApplicationList,
   DescribeSpaceDeviceRelationListRequest,
   DescribeAlarmTypeListResponse,
   DescribeDeviceStatusStatRequest,
@@ -63,6 +64,7 @@ import {
   DescribeWorkspaceUserListResponse,
   DescribePropertyListRequest,
   DescribeProductListRequest,
+  ApplicationLogo,
   ControlCameraPTZResponse,
   DescribeWorkspaceListRequest,
   DescribeDeviceTypeListResponse,
@@ -70,6 +72,7 @@ import {
   DescribeAlarmLevelListRequest,
   BatchReportAppMessageRequest,
   DescribeDeviceStatusStatResponse,
+  DeviceShadowRes,
   DescribeBuildingModelRequest,
   AddAlarmProcessRecordResponse,
   DescribeSpaceDeviceIdListResponse,
@@ -97,6 +100,7 @@ import {
   DescribeDeviceTagListRequest,
   DescribeBuildingProfileResponse,
   ReportAppMessageRequest,
+  ApplicationInfo,
   DescribeFileUploadURLRequest,
   DescribeDeviceStatusListRequest,
   DescribeVideoCloudRecordRequest,
@@ -121,6 +125,7 @@ import {
   DescribeAdministrationByTagResponse,
   SsoDepartment,
   BatchKillAlarmResponse,
+  DeviceShadowInfo,
   DescribeDeviceTypeListRequest,
   DescribeDeviceShadowListRequest,
   DescribeSceneListResponse,
@@ -283,7 +288,7 @@ export class Client extends AbstractClient {
    * 获取设备影子数据
    */
   async DescribeDeviceShadowList(
-    req?: DescribeDeviceShadowListRequest,
+    req: DescribeDeviceShadowListRequest,
     cb?: (error: string, rep: DescribeDeviceShadowListResponse) => void
   ): Promise<DescribeDeviceShadowListResponse> {
     return this.request("DescribeDeviceShadowList", req, cb)
@@ -623,7 +628,7 @@ export class Client extends AbstractClient {
    * 历史流接口
    */
   async DescribeVideoRecordStream(
-    req?: DescribeVideoRecordStreamRequest,
+    req: DescribeVideoRecordStreamRequest,
     cb?: (error: string, rep: DescribeVideoRecordStreamResponse) => void
   ): Promise<DescribeVideoRecordStreamResponse> {
     return this.request("DescribeVideoRecordStream", req, cb)
@@ -643,7 +648,7 @@ export class Client extends AbstractClient {
    * 查询指定空间关联的应用列表
    */
   async DescribeApplicationList(
-    req?: DescribeApplicationListRequest,
+    req: DescribeApplicationListRequest,
     cb?: (error: string, rep: DescribeApplicationListResponse) => void
   ): Promise<DescribeApplicationListResponse> {
     return this.request("DescribeApplicationList", req, cb)

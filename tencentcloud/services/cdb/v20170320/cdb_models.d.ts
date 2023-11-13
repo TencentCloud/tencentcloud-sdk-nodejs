@@ -2958,7 +2958,7 @@ export interface ModifyDBInstanceLogToCLSRequest {
      */
     InstanceId: string;
     /**
-     * 日志类型：errorLog/slowLog
+     * 日志类型：error/slowLog
      */
     LogType: string;
     /**

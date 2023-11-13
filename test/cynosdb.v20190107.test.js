@@ -538,6 +538,16 @@ it("cynosdb.v20190107.DescribeInstanceSlowQueries", async function () {
     }
 })
 
+it("cynosdb.v20190107.DescribeClusterDatabases", async function () {
+    try {
+       const data = await client.DescribeClusterDatabases({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cynosdb.v20190107.ModifyClusterParam", async function () {
     try {
        const data = await client.ModifyClusterParam({})
