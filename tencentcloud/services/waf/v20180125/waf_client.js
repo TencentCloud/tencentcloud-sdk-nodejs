@@ -228,6 +228,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeObjects", req, cb);
     }
     /**
+     * Waf 斯巴达版本更新cc自动封堵状态
+     */
+    async UpsertCCAutoStatus(req, cb) {
+        return this.request("UpsertCCAutoStatus", req, cb);
+    }
+    /**
      * 获取各个模块具体的规格限制
      */
     async DescribeRuleLimit(req, cb) {
@@ -263,12 +269,6 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async GetAttackHistogram(req, cb) {
         return this.request("GetAttackHistogram", req, cb);
-    }
-    /**
-     * 配置WAF自动封禁模块状态
-     */
-    async ModifyWafAutoDenyStatus(req, cb) {
-        return this.request("ModifyWafAutoDenyStatus", req, cb);
     }
     /**
      * 本接口用于修改访问日志保存期限及大字段是否存储
@@ -344,9 +344,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeUserLevel", req, cb);
     }
     /**
-     * 没有在使用。
-
-Waf  CC V2 Query接口
+     * Waf  CC V2 Query接口
      */
     async DescribeCCRule(req, cb) {
         return this.request("DescribeCCRule", req, cb);
@@ -789,6 +787,12 @@ Waf  CC V2 Query接口
      */
     async UpsertSession(req, cb) {
         return this.request("UpsertSession", req, cb);
+    }
+    /**
+     * Waf 斯巴达版本查询cc自动封堵状态
+     */
+    async DescribeCCAutoStatus(req, cb) {
+        return this.request("DescribeCCAutoStatus", req, cb);
     }
     /**
      * 获取用户特征规则列表

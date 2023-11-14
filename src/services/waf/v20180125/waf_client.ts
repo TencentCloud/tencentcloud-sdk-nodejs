@@ -99,7 +99,6 @@ import {
   DescribeVipInfoRequest,
   DescribeFindDomainListResponse,
   DeleteSessionResponse,
-  ModifyWafAutoDenyStatusResponse,
   DescribeAccessIndexResponse,
   ModifyUserSignatureRuleRequest,
   ModifyWafThreatenIntelligenceResponse,
@@ -125,10 +124,11 @@ import {
   DescribeUserCdcClbWafRegionsResponse,
   SwitchElasticModeResponse,
   AccessRuleInfo,
+  CCRuleLists,
   PostAttackDownloadTaskRequest,
   ModifyAntiFakeUrlStatusRequest,
   TLSCiphers,
-  ModifyWafAutoDenyStatusRequest,
+  ResponseCode,
   ModifyAccessPeriodResponse,
   ModifyAttackWhiteRuleResponse,
   SearchAccessLogResponse,
@@ -200,6 +200,7 @@ import {
   DescribeInstancesResponse,
   AccessRuleTagInfo,
   IpAccessControlItem,
+  UpsertCCAutoStatusResponse,
   ModifyGenerateDealsResponse,
   UpsertSessionResponse,
   AccessLogItem,
@@ -230,7 +231,7 @@ import {
   DeleteDomainWhiteRulesResponse,
   DescribeAttackOverviewResponse,
   CacheUrlItem,
-  AddCustomWhiteRuleRequest,
+  DescribeCCAutoStatusRequest,
   DescribeDomainDetailsClbRequest,
   DomainPackageNew,
   ModifyDomainsCLSStatusResponse,
@@ -271,6 +272,7 @@ import {
   VipInfo,
   DescribeAccessHistogramResponse,
   DescribeTopAttackDomainResponse,
+  AddCustomWhiteRuleRequest,
   Goods,
   UpsertIpAccessControlResponse,
   DescribeAccessHistogramRequest,
@@ -284,6 +286,7 @@ import {
   ModifyProtectionStatusResponse,
   DescribeDomainsRequest,
   BotPkg,
+  UpsertCCAutoStatusRequest,
   SearchAttackLogResponse,
   RefreshAccessCheckResultRequest,
   IpHitItemsData,
@@ -300,6 +303,7 @@ import {
   DescribeAntiInfoLeakRulesStrategyItem,
   BotStatPointItem,
   DescribeCiphersDetailRequest,
+  CCRuleItems,
   ModifyDomainIpv6StatusRequest,
   DescribeAntiInfoLeakageRulesResponse,
   GetAttackHistogramRequest,
@@ -316,6 +320,7 @@ import {
   AddSpartaProtectionRequest,
   ModifyModuleStatusResponse,
   AttackLogInfo,
+  DescribeCCAutoStatusResponse,
   DescribeAntiInfoLeakRulesRequest,
   LogHistogramInfo,
   DeleteDomainWhiteRulesRequest,
@@ -348,7 +353,6 @@ import {
   ModifyAntiFakeUrlRequest,
   ModifyInstanceElasticModeRequest,
   AutoDenyDetail,
-  ResponseCode,
   DescribeWebshellStatusResponse,
   FindAllDomainDetail,
   DeleteAntiInfoLeakRuleRequest,
@@ -714,6 +718,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * Waf 斯巴达版本更新cc自动封堵状态
+   */
+  async UpsertCCAutoStatus(
+    req: UpsertCCAutoStatusRequest,
+    cb?: (error: string, rep: UpsertCCAutoStatusResponse) => void
+  ): Promise<UpsertCCAutoStatusResponse> {
+    return this.request("UpsertCCAutoStatus", req, cb)
+  }
+
+  /**
    * 获取各个模块具体的规格限制
    */
   async DescribeRuleLimit(
@@ -772,16 +786,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: GetAttackHistogramResponse) => void
   ): Promise<GetAttackHistogramResponse> {
     return this.request("GetAttackHistogram", req, cb)
-  }
-
-  /**
-   * 配置WAF自动封禁模块状态
-   */
-  async ModifyWafAutoDenyStatus(
-    req: ModifyWafAutoDenyStatusRequest,
-    cb?: (error: string, rep: ModifyWafAutoDenyStatusResponse) => void
-  ): Promise<ModifyWafAutoDenyStatusResponse> {
-    return this.request("ModifyWafAutoDenyStatus", req, cb)
   }
 
   /**
@@ -906,10 +910,8 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 没有在使用。
-
-Waf  CC V2 Query接口
-     */
+   * Waf  CC V2 Query接口
+   */
   async DescribeCCRule(
     req: DescribeCCRuleRequest,
     cb?: (error: string, rep: DescribeCCRuleResponse) => void
@@ -1642,6 +1644,16 @@ Waf  CC V2 Query接口
     cb?: (error: string, rep: UpsertSessionResponse) => void
   ): Promise<UpsertSessionResponse> {
     return this.request("UpsertSession", req, cb)
+  }
+
+  /**
+   * Waf 斯巴达版本查询cc自动封堵状态
+   */
+  async DescribeCCAutoStatus(
+    req: DescribeCCAutoStatusRequest,
+    cb?: (error: string, rep: DescribeCCAutoStatusResponse) => void
+  ): Promise<DescribeCCAutoStatusResponse> {
+    return this.request("DescribeCCAutoStatus", req, cb)
   }
 
   /**

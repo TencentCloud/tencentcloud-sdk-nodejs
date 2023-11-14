@@ -2056,20 +2056,6 @@ export interface DeleteSessionResponse {
 }
 
 /**
- * ModifyWafAutoDenyStatus返回参数结构体
- */
-export interface ModifyWafAutoDenyStatusResponse {
-  /**
-   * WAF 自动封禁配置项
-   */
-  WafAutoDenyDetails?: AutoDenyDetail
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * DescribeAccessIndex返回参数结构体
  */
 export interface DescribeAccessIndexResponse {
@@ -2669,6 +2655,21 @@ export interface AccessRuleInfo {
 }
 
 /**
+ * CC规则总览
+ */
+export interface CCRuleLists {
+  /**
+   * 总数
+   */
+  TotalCount: number
+  /**
+   * 规则
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Res: Array<CCRuleItems>
+}
+
+/**
  * PostAttackDownloadTask请求参数结构体
  */
 export interface PostAttackDownloadTaskRequest {
@@ -2742,13 +2743,17 @@ export interface TLSCiphers {
 }
 
 /**
- * ModifyWafAutoDenyStatus请求参数结构体
+ * 响应体的返回码
  */
-export interface ModifyWafAutoDenyStatusRequest {
+export interface ResponseCode {
   /**
-   * WAF 自动封禁配置项
+   * 如果成功则返回Success，失败则返回云api定义的错误码
    */
-  WafAutoDenyDetails: AutoDenyDetail
+  Code: string
+  /**
+   * 如果成功则返回Success，失败则返回WAF定义的二级错误码
+   */
+  Message: string
 }
 
 /**
@@ -3017,17 +3022,6 @@ export interface ApiPkg {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   BillingItem?: string
-  /**
-   * 1 API安全6折
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  APICPWaf?: number
-  /**
-   * 1 表示5折折扣
-2 表示4折折扣
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  APINPWaf?: number
   /**
    * api安全7天试用标识。1试用。0没试用
 注意：此字段可能返回 null，表示取不到有效值。
@@ -4481,6 +4475,21 @@ export interface IpAccessControlItem {
 }
 
 /**
+ * UpsertCCAutoStatus返回参数结构体
+ */
+export interface UpsertCCAutoStatusResponse {
+  /**
+   * 正常情况为null
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Data?: string
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyGenerateDeals返回参数结构体
  */
 export interface ModifyGenerateDealsResponse {
@@ -5101,33 +5110,13 @@ export interface CacheUrlItem {
 }
 
 /**
- * AddCustomWhiteRule请求参数结构体
+ * DescribeCCAutoStatus请求参数结构体
  */
-export interface AddCustomWhiteRuleRequest {
+export interface DescribeCCAutoStatusRequest {
   /**
-   * 规则名称
-   */
-  Name: string
-  /**
-   * 优先级
-   */
-  SortId: string
-  /**
-   * 过期时间
-   */
-  ExpireTime: string
-  /**
-   * 策略详情
-   */
-  Strategies: Array<Strategy>
-  /**
-   * 需要添加策略的域名
+   * 域名
    */
   Domain: string
-  /**
-   * 放行的详情
-   */
-  Bypass: string
 }
 
 /**
@@ -5957,6 +5946,11 @@ export interface DescribeCCRuleRequest {
  */
 export interface DescribeCCRuleListResponse {
   /**
+   * 查询到的CC规则的列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Data?: CCRuleLists
+  /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -6031,6 +6025,36 @@ export interface DescribeTopAttackDomainResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * AddCustomWhiteRule请求参数结构体
+ */
+export interface AddCustomWhiteRuleRequest {
+  /**
+   * 规则名称
+   */
+  Name: string
+  /**
+   * 优先级
+   */
+  SortId: string
+  /**
+   * 过期时间
+   */
+  ExpireTime: string
+  /**
+   * 策略详情
+   */
+  Strategies: Array<Strategy>
+  /**
+   * 需要添加策略的域名
+   */
+  Domain: string
+  /**
+   * 放行的详情
+   */
+  Bypass: string
 }
 
 /**
@@ -6392,6 +6416,24 @@ export interface BotPkg {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IsBotTrial?: number
+}
+
+/**
+ * UpsertCCAutoStatus请求参数结构体
+ */
+export interface UpsertCCAutoStatusRequest {
+  /**
+   * 域名
+   */
+  Domain: string
+  /**
+   * 状态值
+   */
+  Value: number
+  /**
+   * 版本：clb-waf, spart-waf
+   */
+  Edition?: string
 }
 
 /**
@@ -6836,6 +6878,74 @@ export interface BotStatPointItem {
  * DescribeCiphersDetail请求参数结构体
  */
 export type DescribeCiphersDetailRequest = null
+
+/**
+ * CC规则详情
+ */
+export interface CCRuleItems {
+  /**
+   * 名字
+   */
+  Name?: string
+  /**
+   * 状态
+   */
+  Status?: number
+  /**
+   * 模式
+   */
+  Advance?: number
+  /**
+   * 限制
+   */
+  Limit?: number
+  /**
+   * 范围
+   */
+  Interval?: number
+  /**
+   * 网址
+   */
+  Url?: string
+  /**
+   * 匹配类型
+   */
+  MatchFunc?: number
+  /**
+   * 动作
+   */
+  ActionType?: number
+  /**
+   * 优先级
+   */
+  Priority?: number
+  /**
+   * 有效时间
+   */
+  ValidTime?: number
+  /**
+   * 版本
+   */
+  TsVersion?: number
+  /**
+   * 规则详情
+   */
+  Options?: string
+  /**
+   * 规则ID
+   */
+  RuleId?: number
+  /**
+   * 事件id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EventId?: string
+  /**
+   * 关联的Session规则
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SessionApplied?: Array<number | bigint>
+}
 
 /**
  * ModifyDomainIpv6Status请求参数结构体
@@ -7511,6 +7621,20 @@ export interface AttackLogInfo {
 }
 
 /**
+ * DescribeCCAutoStatus返回参数结构体
+ */
+export interface DescribeCCAutoStatusResponse {
+  /**
+   * 配置状态
+   */
+  AutoCCSwitch?: number
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeAntiInfoLeakRules请求参数结构体
  */
 export interface DescribeAntiInfoLeakRulesRequest {
@@ -8108,20 +8232,6 @@ export interface AutoDenyDetail {
    * 最后更新时间
    */
   LastUpdateTime?: string
-}
-
-/**
- * 响应体的返回码
- */
-export interface ResponseCode {
-  /**
-   * 如果成功则返回Success，失败则返回云api定义的错误码
-   */
-  Code: string
-  /**
-   * 如果成功则返回Success，失败则返回WAF定义的二级错误码
-   */
-  Message: string
 }
 
 /**

@@ -348,6 +348,16 @@ it("waf.v20180125.DescribeObjects", async function () {
     }
 })
 
+it("waf.v20180125.UpsertCCAutoStatus", async function () {
+    try {
+       const data = await client.UpsertCCAutoStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("waf.v20180125.DescribeRuleLimit", async function () {
     try {
        const data = await client.DescribeRuleLimit({})
@@ -401,16 +411,6 @@ it("waf.v20180125.UpsertIpAccessControl", async function () {
 it("waf.v20180125.GetAttackHistogram", async function () {
     try {
        const data = await client.GetAttackHistogram({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("waf.v20180125.ModifyWafAutoDenyStatus", async function () {
-    try {
-       const data = await client.ModifyWafAutoDenyStatus({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1261,6 +1261,16 @@ it("waf.v20180125.CreateHost", async function () {
 it("waf.v20180125.UpsertSession", async function () {
     try {
        const data = await client.UpsertSession({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("waf.v20180125.DescribeCCAutoStatus", async function () {
+    try {
+       const data = await client.DescribeCCAutoStatus({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
