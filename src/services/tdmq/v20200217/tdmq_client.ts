@@ -184,7 +184,7 @@ import {
   TopicRecord,
   SendCmqMsgResponse,
   CreateRocketMQGroupResponse,
-  ModifyRocketMQNamespaceRequest,
+  DeleteProClustersRequest,
   DescribeEnvironmentRolesRequest,
   DescribeRocketMQClustersResponse,
   DeleteRolesResponse,
@@ -336,6 +336,7 @@ import {
   DeleteRabbitMQVipInstanceRequest,
   DescribePublisherSummaryRequest,
   DeleteSubscriptionsRequest,
+  DeleteProClustersResponse,
   SendCmqMsgRequest,
   PulsarProClusterInfo,
   ModifyRocketMQGroupResponse,
@@ -346,6 +347,7 @@ import {
   VerifyRocketMQConsumeRequest,
   SendBatchMessagesResponse,
   ImportRocketMQTopicsRequest,
+  ModifyRocketMQNamespaceRequest,
   CreateEnvironmentRoleRequest,
   DeleteRabbitMQVipInstanceResponse,
   DescribeAllTenantsRequest,
@@ -1542,6 +1544,16 @@ BatchReceivePolicy 的接口会一次性返回多条消息：
     cb?: (error: string, rep: SendRocketMQMessageResponse) => void
   ): Promise<SendRocketMQMessageResponse> {
     return this.request("SendRocketMQMessage", req, cb)
+  }
+
+  /**
+   * 删除专业集群——预付费，仅通过API 调用，支持同时删除多个集群
+   */
+  async DeleteProClusters(
+    req: DeleteProClustersRequest,
+    cb?: (error: string, rep: DeleteProClustersResponse) => void
+  ): Promise<DeleteProClustersResponse> {
+    return this.request("DeleteProClusters", req, cb)
   }
 
   /**

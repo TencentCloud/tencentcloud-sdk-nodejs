@@ -34,7 +34,7 @@ export interface VehiclePurpose {
  */
 export interface QueryExternalContactDetailRequest {
   /**
-   * 外部联系人的userid，注意不是企业成员的帐号
+   * 外部联系人的userid，注意不是企业成员的账号
    */
   ExternalUserId: string
   /**

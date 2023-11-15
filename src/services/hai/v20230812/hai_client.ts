@@ -17,7 +17,13 @@
  */
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
-import { SystemDisk, RunInstancesResponse, RunInstancesRequest } from "./hai_models"
+import {
+  TerminateInstancesResponse,
+  SystemDisk,
+  TerminateInstancesRequest,
+  RunInstancesResponse,
+  RunInstancesRequest,
+} from "./hai_models"
 
 /**
  * hai client
@@ -36,5 +42,15 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: RunInstancesResponse) => void
   ): Promise<RunInstancesResponse> {
     return this.request("RunInstances", req, cb)
+  }
+
+  /**
+   * 本接口 (TerminateInstances) 用于主动退还实例。
+   */
+  async TerminateInstances(
+    req: TerminateInstancesRequest,
+    cb?: (error: string, rep: TerminateInstancesResponse) => void
+  ): Promise<TerminateInstancesResponse> {
+    return this.request("TerminateInstances", req, cb)
   }
 }

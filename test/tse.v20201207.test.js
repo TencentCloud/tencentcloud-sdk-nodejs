@@ -18,9 +18,19 @@ const client = new tencentcloud.tse.v20201207.Client({
 })
 describe("tse.v20201207.test.js", function () {
 
-it("tse.v20201207.DescribeNacosReplicas", async function () {
+it("tse.v20201207.DescribeCloudNativeAPIGatewayUpstream", async function () {
     try {
-       const data = await client.DescribeNacosReplicas({})
+       const data = await client.DescribeCloudNativeAPIGatewayUpstream({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tse.v20201207.DescribeUpstreamHealthCheckConfig", async function () {
+    try {
+       const data = await client.DescribeUpstreamHealthCheckConfig({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -31,6 +41,16 @@ it("tse.v20201207.DescribeNacosReplicas", async function () {
 it("tse.v20201207.ModifyNativeGatewayServerGroup", async function () {
     try {
        const data = await client.ModifyNativeGatewayServerGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tse.v20201207.ModifyUpstreamNodeStatus", async function () {
+    try {
+       const data = await client.ModifyUpstreamNodeStatus({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -461,6 +481,26 @@ it("tse.v20201207.CreateCloudNativeAPIGatewayRouteRateLimit", async function () 
 it("tse.v20201207.DescribeNativeGatewayServerGroups", async function () {
     try {
        const data = await client.DescribeNativeGatewayServerGroups({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tse.v20201207.DescribeNacosReplicas", async function () {
+    try {
+       const data = await client.DescribeNacosReplicas({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tse.v20201207.UpdateUpstreamHealthCheckConfig", async function () {
+    try {
+       const data = await client.UpdateUpstreamHealthCheckConfig({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

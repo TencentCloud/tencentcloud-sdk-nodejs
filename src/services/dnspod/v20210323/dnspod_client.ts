@@ -500,7 +500,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除域名共享
+   * 按账号删除域名共享
    */
   async DeleteShareDomain(
     req: DeleteShareDomainRequest,

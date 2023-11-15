@@ -84,6 +84,23 @@ export interface ApolloEnvParam {
     EnvDesc?: string;
 }
 /**
+ * UpdateUpstreamHealthCheckConfig请求参数结构体
+ */
+export interface UpdateUpstreamHealthCheckConfigRequest {
+    /**
+     * 网关ID
+     */
+    GatewayId: string;
+    /**
+     * 网关服务名称
+     */
+    Name: string;
+    /**
+     * 健康检查配置
+     */
+    HealthCheckConfig: UpstreamHealthCheckConfig;
+}
+/**
  * DescribeCloudNativeAPIGatewayServiceRateLimit请求参数结构体
  */
 export interface DescribeCloudNativeAPIGatewayServiceRateLimitRequest {
@@ -299,6 +316,19 @@ export interface ModifyCloudNativeAPIGatewayRouteRequest {
     Headers?: Array<KVMapping>;
 }
 /**
+ * DescribeCloudNativeAPIGatewayUpstream请求参数结构体
+ */
+export interface DescribeCloudNativeAPIGatewayUpstreamRequest {
+    /**
+     * 网关ID
+     */
+    GatewayId: string;
+    /**
+     * 服务名字
+     */
+    ServiceName: string;
+}
+/**
  * DeleteNativeGatewayServerGroup返回参数结构体
  */
 export interface DeleteNativeGatewayServerGroupResponse {
@@ -403,6 +433,19 @@ export interface CloudNativeAPIGatewayNodeConfig {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Number: number;
+}
+/**
+ * DescribeUpstreamHealthCheckConfig请求参数结构体
+ */
+export interface DescribeUpstreamHealthCheckConfigRequest {
+    /**
+     * 网关ID
+     */
+    GatewayId: string;
+    /**
+     * 网关服务名称
+     */
+    Name: string;
 }
 /**
  * CreateNativeGatewayServerGroup请求参数结构体
@@ -521,6 +564,40 @@ export interface CreateCloudNativeAPIGatewayResponse {
     RequestId?: string;
 }
 /**
+ * DescribeUpstreamHealthCheckConfig返回参数结构体
+ */
+export interface DescribeUpstreamHealthCheckConfigResponse {
+    /**
+     * 健康检查配置
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Result?: UpstreamHealthCheckConfig;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * Kong网关主动健康检查配置
+ */
+export interface KongActiveHealthCheck {
+    /**
+     * 主动健康检查健康探测间隔，单位：秒，0表示不开启
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    HealthyInterval?: number;
+    /**
+     * 主动健康检查异常探测间隔，单位：秒，0表示不开启
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    UnHealthyInterval?: number;
+    /**
+     * 在 GET HTTP 请求中使用的路径，以作为主动运行状况检查的探测器运行。默认： ”/”。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    HttpPath?: string;
+}
+/**
  * DeleteCloudNativeAPIGatewayCertificate返回参数结构体
  */
 export interface DeleteCloudNativeAPIGatewayCertificateResponse {
@@ -578,6 +655,56 @@ export interface ModifyCloudNativeAPIGatewayRouteRateLimitRequest {
      * 限流配置
      */
     LimitDetail: CloudNativeAPIGatewayRateLimitDetail;
+}
+/**
+ * 云原生网关健康检查配置
+ */
+export interface UpstreamHealthCheckConfig {
+    /**
+     * 开启主动健康检查
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    EnableActiveHealthCheck?: boolean;
+    /**
+     * 主动健康检查配置
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ActiveHealthCheck?: KongActiveHealthCheck;
+    /**
+     * 开启被动健康检查
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    EnablePassiveHealthCheck?: boolean;
+    /**
+     * 被动健康检查配置
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PassiveHealthCheck?: KongPassiveHealthCheck;
+    /**
+     * 连续健康阈值，单位：次
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Successes?: number;
+    /**
+     * 连续异常阈值，单位：次
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Failures?: number;
+    /**
+     * 超时阈值，单位：次
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Timeouts?: number;
+    /**
+     * 健康HTTP状态码
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    HealthyHttpStatuses?: Array<number | bigint>;
+    /**
+     * 异常HTTP状态码
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    UnhealthyHttpStatuses?: Array<number | bigint>;
 }
 /**
  * nacos服务端接口列表，用于云监控
@@ -1003,14 +1130,13 @@ export interface DescribeCloudNativeAPIGatewayServicesRequest {
     Filters?: Array<ListFilter>;
 }
 /**
- * UpdateUpstreamTargets返回参数结构体
+ * DescribeCloudNativeAPIGatewayUpstream返回参数结构体
  */
-export interface UpdateUpstreamTargetsResponse {
+export interface DescribeCloudNativeAPIGatewayUpstreamResponse {
     /**
-     * 是否更新成功
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 无
      */
-    Result?: boolean;
+    Result?: KongUpstreamList;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1065,6 +1191,26 @@ export interface NacosReplica {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     VpcId?: string;
+}
+/**
+ * 云原生网关Upstream信息
+ */
+export interface KongUpstreamPreview {
+    /**
+     * 服务ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ID: string;
+    /**
+     * 服务名字
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Name?: string;
+    /**
+     * 后端配置
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Target?: Array<KongTarget>;
 }
 /**
  * UpdateEngineInternetAccess请求参数结构体
@@ -1550,6 +1696,16 @@ export interface DeleteCloudNativeAPIGatewayServiceRateLimitRequest {
     Name: string;
 }
 /**
+ * Kong网关被动健康检查配置
+ */
+export interface KongPassiveHealthCheck {
+    /**
+     * 后端target协议类型，被动健康检查支持http和tcp，主动健康检查支持http
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Type?: string;
+}
+/**
  * 云原生API网关vpc配置。
  */
 export interface CloudNativeAPIGatewayVpcConfig {
@@ -1578,6 +1734,31 @@ export interface CloudAPIGatewayCanaryRuleList {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     TotalCount?: number;
+}
+/**
+ * ModifyUpstreamNodeStatus请求参数结构体
+ */
+export interface ModifyUpstreamNodeStatusRequest {
+    /**
+     * 网关实例ID
+     */
+    GatewayId: string;
+    /**
+     * 服务名称
+     */
+    ServiceName: string;
+    /**
+     * 访问IP地址或域名
+     */
+    Host: string;
+    /**
+     * 访问端口
+     */
+    Port: number;
+    /**
+     * HEALTHY或UNHEALTHY
+     */
+    Status: string;
 }
 /**
  * DescribeCloudNativeAPIGatewayConfig返回参数结构体
@@ -2435,6 +2616,20 @@ export interface DescribeCloudNativeAPIGatewayCanaryRulesResponse {
     RequestId?: string;
 }
 /**
+ * UpdateUpstreamTargets返回参数结构体
+ */
+export interface UpdateUpstreamTargetsResponse {
+    /**
+     * 是否更新成功
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Result?: boolean;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * DeleteCloudNativeAPIGatewayCertificate请求参数结构体
  */
 export interface DeleteCloudNativeAPIGatewayCertificateRequest {
@@ -2811,6 +3006,16 @@ export interface UpdateCloudNativeAPIGatewayCertificateInfoRequest {
     Name?: string;
 }
 /**
+ * kong后端upstream列表
+ */
+export interface KongUpstreamList {
+    /**
+     * 无
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    UpstreamList?: Array<KongUpstreamPreview>;
+}
+/**
  * 引擎的初始管理帐号
  */
 export interface EngineAdmin {
@@ -2963,6 +3168,20 @@ export interface CreateCloudNativeAPIGatewayCertificateRequest {
  * ModifyCloudNativeAPIGateway返回参数结构体
  */
 export interface ModifyCloudNativeAPIGatewayResponse {
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * ModifyUpstreamNodeStatus返回参数结构体
+ */
+export interface ModifyUpstreamNodeStatusResponse {
+    /**
+     * 是否成功
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Result?: boolean;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -3343,6 +3562,20 @@ export interface CloudNativeAPIGatewayCanaryRuleCondition {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     GlobalConfigName?: string;
+}
+/**
+ * UpdateUpstreamHealthCheckConfig返回参数结构体
+ */
+export interface UpdateUpstreamHealthCheckConfigResponse {
+    /**
+     * 是否成功
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Result?: boolean;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * DescribeSREInstances返回参数结构体

@@ -12753,6 +12753,11 @@ export interface OutputAudioStream {
   默认值：2。
      */
     AudioChannel?: number;
+    /**
+     * 音频流的码率，取值范围：0 和 [26, 256]，单位：kbps。
+  当取值为 0，将自动设置音频码率。
+     */
+    Bitrate?: number;
 }
 /**
  * ModifyClass请求参数结构体

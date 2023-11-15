@@ -3115,6 +3115,10 @@ export interface IDCardOCRResponse {
      */
     AdvancedInfo?: string;
     /**
+     * 反光点覆盖区域详情结果，具体内容请点击左侧链接
+     */
+    ReflectDetailInfos?: Array<ReflectDetailInfo>;
+    /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
@@ -7260,6 +7264,18 @@ export interface ShipInvoiceOCRRequest {
     PdfPageNumber?: number;
 }
 /**
+ * 反光点覆盖区域详情结果
+ */
+export interface ReflectDetailInfo {
+    /**
+     * NationalEmblem 国徽位置
+  Portrait 人像照片位置
+  RecognitionField 识别字段位置
+  Others 其他位置
+     */
+    Position?: string;
+}
+/**
  * SealOCR请求参数结构体
  */
 export interface SealOCRRequest {
@@ -8293,6 +8309,12 @@ export interface IDCardOCRRequest {
      * 默认值为true，打开识别结果纠正开关。开关开启后，身份证号、出生日期、性别，三个字段会进行矫正补齐，统一结果输出；若关闭此开关，以上三个字段不会进行矫正补齐，保持原始识别结果输出，若原图出现篡改情况，这三个字段的识别结果可能会不统一。
      */
     EnableRecognitionRectify?: boolean;
+    /**
+     * 默认值为false。
+  
+  此开关需要在反光检测开关开启下才会生效（即此开关生效的前提是config入参里的"ReflectWarn":true），若EnableReflectDetail设置为true，则会返回反光点覆盖区域详情。反光点覆盖区域详情分为四部分：人像照片位置、国徽位置、识别字段位置、其他位置。一个反光点允许覆盖多个区域，且一张图片可能存在多个反光点。
+     */
+    EnableReflectDetail?: boolean;
 }
 /**
  * MixedInvoiceDetect请求参数结构体

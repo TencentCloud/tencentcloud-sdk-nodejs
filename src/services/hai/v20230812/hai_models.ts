@@ -16,6 +16,16 @@
  */
 
 /**
+ * TerminateInstances返回参数结构体
+ */
+export interface TerminateInstancesResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 描述了操作系统所在块设备即系统盘的信息
  */
 export interface SystemDisk {
@@ -29,6 +39,20 @@ export interface SystemDisk {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DiskSize?: number
+}
+
+/**
+ * TerminateInstances请求参数结构体
+ */
+export interface TerminateInstancesRequest {
+  /**
+   * 实例ID列表
+   */
+  InstanceIds: Array<string>
+  /**
+   * 默认为False，True代表只验证接口连通性
+   */
+  DryRun?: boolean
 }
 
 /**

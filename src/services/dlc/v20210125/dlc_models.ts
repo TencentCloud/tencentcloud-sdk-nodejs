@@ -7736,6 +7736,16 @@ export interface DataEngineInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AutoAuthorization?: boolean
+  /**
+   * 引擎版本，支持Native/SuperSQL
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EngineGeneration?: string
+  /**
+   * 引擎详细类型，支持：SparkSQL/SparkBatch/PrestoSQL/Kyuubi
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EngineTypeDetail?: string
 }
 
 /**

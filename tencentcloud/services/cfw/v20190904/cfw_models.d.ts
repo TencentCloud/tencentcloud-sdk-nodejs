@@ -162,6 +162,10 @@ export interface ModifyAddressTemplateRequest {
   5 域名模板
      */
     Type: number;
+    /**
+     * 协议端口模板，协议类型，4:4层协议，7:7层协议。Type=6时必填。
+     */
+    ProtocolType?: string;
 }
 /**
  * DescribeRuleOverview返回参数结构体
@@ -2638,6 +2642,11 @@ export interface EdgeIpInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     SwitchWeight?: number;
+    /**
+     * 域名化CLB的域名
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Domain?: string;
 }
 /**
  * AssetZone
@@ -3455,8 +3464,13 @@ export interface CreateAddressTemplateRequest {
     /**
      * 1 ip模板
   5 域名模板
+  6 协议端口模板
      */
     Type: number;
+    /**
+     * 协议端口模板，协议类型，4:4层协议，7:7层协议，Type=6时必填
+     */
+    ProtocolType?: string;
 }
 /**
  * DescribeBlockStaticList返回参数结构体
@@ -4206,6 +4220,14 @@ export interface DescribeAddressTemplateListRequest {
      * 检索地址模板唯一id
      */
     Uuid?: string;
+    /**
+     * 1：ip模板，5：域名模板，6：协议端口模板
+     */
+    TemplateType?: string;
+    /**
+     * 模板Id
+     */
+    TemplateId?: string;
 }
 /**
  * RemoveAclRule请求参数结构体
@@ -4865,42 +4887,52 @@ export interface TemplateListInfo {
      * 模版ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Uuid: string;
+    Uuid?: string;
     /**
      * 模版名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Name: string;
+    Name?: string;
     /**
      * 描述
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Detail: string;
+    Detail?: string;
     /**
      * IP模版
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    IpString: string;
+    IpString?: string;
     /**
      * 插入时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    InsertTime: string;
+    InsertTime?: string;
     /**
      * 修改时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    UpdateTime: string;
+    UpdateTime?: string;
     /**
      * 模版类型
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Type: number;
+    Type?: number;
     /**
      * 关联规则条数
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    RulesNum: number;
+    RulesNum?: number;
+    /**
+     * 模板Id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TemplateId?: string;
+    /**
+     * 协议端口模板，协议类型，4:4层协议，7:7层协议
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ProtocolType?: string;
 }
 /**
  * DescribeVpcFwGroupSwitch返回参数结构体
@@ -6632,6 +6664,18 @@ export interface DescribeAddressTemplateListResponse {
      * 模板名称列表
      */
     NameList?: Array<string>;
+    /**
+     * Ip地址模板数量
+     */
+    IpTemplateCount?: number;
+    /**
+     * 域名地址模板数量
+     */
+    DomainTemplateCount?: number;
+    /**
+     * 协议端口模板数量
+     */
+    PortTemplateCount?: number;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */

@@ -232,59 +232,63 @@ export interface DescribeFraudUltimateResponse {
     /**
      * App版本信息
      */
-    AppVersion: string;
+    AppVersion?: string;
     /**
      * 品牌
      */
-    Brand: string;
+    Brand?: string;
     /**
      * 客户端IP
      */
-    ClientIp: string;
+    ClientIp?: string;
     /**
      * 机型
      */
-    Model: string;
+    Model?: string;
     /**
      * 网络类型
      */
-    NetworkType: string;
+    NetworkType?: string;
     /**
      * 应用包名
      */
-    PackageName: string;
+    PackageName?: string;
     /**
      * 平台（2-Android，3-iOS，4-H5，5-微信小程序）
      */
-    Platform: string;
+    Platform?: string;
     /**
      * 系统版本
      */
-    SystemVersion: string;
+    SystemVersion?: string;
     /**
      * SDK版本号
      */
-    SdkBuildNo: string;
+    SdkBuildNo?: string;
     /**
      * 实时风险信息
      */
-    RiskInfos: Array<RiskInfo>;
+    RiskInfos?: Array<RiskInfo>;
     /**
      * 离线风险信息
      */
-    HistRiskInfos: Array<RiskInfo>;
+    HistRiskInfos?: Array<RiskInfo>;
     /**
      * 设备匿名标识
      */
-    Openid: string;
+    Openid?: string;
     /**
      * 场景风险信息
      */
-    SceneRiskInfos: Array<RiskInfo>;
+    SceneRiskInfos?: Array<RiskInfo>;
     /**
      * 建议等级。1-极差，2-较差，3-中等，4-良好，5-优秀
      */
-    SuggestionLevel: number;
+    SuggestionLevel?: number;
+    /**
+     * 图灵盾统一ID
+     */
+    Unionid?: string;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */

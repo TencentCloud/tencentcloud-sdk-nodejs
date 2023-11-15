@@ -28,16 +28,28 @@ class Client extends abstract_client_1.AbstractClient {
         super("tse.tencentcloudapi.com", "2020-12-07", clientConfig);
     }
     /**
-     * 查询Nacos类型引擎实例副本信息
+     * 获取云原生网关服务详情下的Upstream列表
      */
-    async DescribeNacosReplicas(req, cb) {
-        return this.request("DescribeNacosReplicas", req, cb);
+    async DescribeCloudNativeAPIGatewayUpstream(req, cb) {
+        return this.request("DescribeCloudNativeAPIGatewayUpstream", req, cb);
+    }
+    /**
+     * 获取云原生网关服务健康检查配置
+     */
+    async DescribeUpstreamHealthCheckConfig(req, cb) {
+        return this.request("DescribeUpstreamHealthCheckConfig", req, cb);
     }
     /**
      * 修改云原生API网关实例分组基础信息
      */
     async ModifyNativeGatewayServerGroup(req, cb) {
         return this.request("ModifyNativeGatewayServerGroup", req, cb);
+    }
+    /**
+     * 修改云原生网关上游实例节点健康状态
+     */
+    async ModifyUpstreamNodeStatus(req, cb) {
+        return this.request("ModifyUpstreamNodeStatus", req, cb);
     }
     /**
      * 删除云原生网关的限流插件(服务)
@@ -296,6 +308,18 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeNativeGatewayServerGroups(req, cb) {
         return this.request("DescribeNativeGatewayServerGroups", req, cb);
+    }
+    /**
+     * 查询Nacos类型引擎实例副本信息
+     */
+    async DescribeNacosReplicas(req, cb) {
+        return this.request("DescribeNacosReplicas", req, cb);
+    }
+    /**
+     * 更新云原生网关健康检查配置
+     */
+    async UpdateUpstreamHealthCheckConfig(req, cb) {
+        return this.request("UpdateUpstreamHealthCheckConfig", req, cb);
     }
     /**
      * 查询引擎实例访问地址

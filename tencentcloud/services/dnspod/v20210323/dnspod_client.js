@@ -196,7 +196,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeSnapshotConfig", req, cb);
     }
     /**
-     * 删除域名共享
+     * 按账号删除域名共享
      */
     async DeleteShareDomain(req, cb) {
         return this.request("DeleteShareDomain", req, cb);

@@ -4321,33 +4321,13 @@ export interface CreateRocketMQGroupResponse {
     RequestId?: string;
 }
 /**
- * ModifyRocketMQNamespace请求参数结构体
+ * DeleteProClusters请求参数结构体
  */
-export interface ModifyRocketMQNamespaceRequest {
+export interface DeleteProClustersRequest {
     /**
-     * 集群ID
+     * 集群Id列表
      */
-    ClusterId: string;
-    /**
-     * 命名空间名称，3-64个字符，只能包含字母、数字、“-”及“_”
-     */
-    NamespaceId: string;
-    /**
-     * 已废弃
-     */
-    Ttl?: number;
-    /**
-     * 已废弃
-     */
-    RetentionTime?: number;
-    /**
-     * 说明，最大128个字符
-     */
-    Remark?: string;
-    /**
-     * 是否开启公网访问
-     */
-    PublicAccessEnabled?: boolean;
+    ClusterIds: Array<string>;
 }
 /**
  * DescribeEnvironmentRoles请求参数结构体
@@ -8180,6 +8160,23 @@ export interface DeleteSubscriptionsRequest {
     Force?: boolean;
 }
 /**
+ * DeleteProClusters返回参数结构体
+ */
+export interface DeleteProClustersResponse {
+    /**
+     * 退还实例订单号
+     */
+    DealNames?: Array<string>;
+    /**
+     * 集群ID
+     */
+    ClusterIds?: Array<string>;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * SendCmqMsg请求参数结构体
  */
 export interface SendCmqMsgRequest {
@@ -8378,6 +8375,35 @@ export interface ImportRocketMQTopicsRequest {
      * 任务ID
      */
     TaskId: string;
+}
+/**
+ * ModifyRocketMQNamespace请求参数结构体
+ */
+export interface ModifyRocketMQNamespaceRequest {
+    /**
+     * 集群ID
+     */
+    ClusterId: string;
+    /**
+     * 命名空间名称，3-64个字符，只能包含字母、数字、“-”及“_”
+     */
+    NamespaceId: string;
+    /**
+     * 已废弃
+     */
+    Ttl?: number;
+    /**
+     * 已废弃
+     */
+    RetentionTime?: number;
+    /**
+     * 说明，最大128个字符
+     */
+    Remark?: string;
+    /**
+     * 是否开启公网访问
+     */
+    PublicAccessEnabled?: boolean;
 }
 /**
  * CreateEnvironmentRole请求参数结构体

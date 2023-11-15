@@ -515,47 +515,27 @@ export interface SocComplianceItem {
 }
 
 /**
- * SocCheckItem类型
+ * SaEventPub返回参数结构体
  */
-export interface SocCheckItem {
+export interface SaEventPubResponse {
   /**
-   * 名字
-注意：此字段可能返回 null，表示取不到有效值。
+   * DataSaEventPub
    */
-  Name: string
+  DataSaEventPub?: ObjDataSaEventPub
   /**
-   * 唯一id
-注意：此字段可能返回 null，表示取不到有效值。
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  LevelId: string
-  /**
-   * 成功数
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SuccessCount: number
-  /**
-   * 失败数
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  FailCount: number
+  RequestId?: string
 }
 
 /**
- * 设置_泄露监测产品监测扫描规则策略
+ * DescribeVulList请求参数结构体
  */
-export interface SaDivulgeScanRuleSetList {
+export interface DescribeVulListRequest {
   /**
-   * Value
+   * 查询过滤参数:(json序列化的结果）
    */
-  Value: string
-  /**
-   * Code
-   */
-  Code: number
-  /**
-   * Message
-   */
-  Message: string
+  Params: string
 }
 
 /**
@@ -770,17 +750,29 @@ export interface DescribeComplianceDetailResponse {
 }
 
 /**
- * SaEventPub返回参数结构体
+ * SocCheckItem类型
  */
-export interface SaEventPubResponse {
+export interface SocCheckItem {
   /**
-   * DataSaEventPub
+   * 名字
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  DataSaEventPub?: ObjDataSaEventPub
+  Name: string
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 唯一id
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  RequestId?: string
+  LevelId: string
+  /**
+   * 成功数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SuccessCount: number
+  /**
+   * 失败数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FailCount: number
 }
 
 /**
@@ -822,29 +814,17 @@ export interface SaDivulgeScanRuleMutateRequest {
 }
 
 /**
- * DescribeComplianceAssetList请求参数结构体
+ * 标签
  */
-export interface DescribeComplianceAssetListRequest {
+export interface Tag {
   /**
-   * 页码
+   * 数据库标识
    */
-  Offset: number
+  Fid?: number
   /**
-   * 每页数量
+   * 标签名称字段
    */
-  Limit: number
-  /**
-   * 检查项uuid
-   */
-  Id: string
-  /**
-   * 过滤条件
-   */
-  Filter?: Array<Filter>
-  /**
-   * 查询条件
-   */
-  Search?: Array<Filter>
+  Fname?: string
 }
 
 /**
@@ -1126,17 +1106,29 @@ export interface DescribeAssetListRequest {
 }
 
 /**
- * 标签
+ * DescribeComplianceAssetList请求参数结构体
  */
-export interface Tag {
+export interface DescribeComplianceAssetListRequest {
   /**
-   * 数据库标识
+   * 页码
    */
-  Fid?: number
+  Offset: number
   /**
-   * 标签名称字段
+   * 每页数量
    */
-  Fname?: string
+  Limit: number
+  /**
+   * 检查项uuid
+   */
+  Id: string
+  /**
+   * 过滤条件
+   */
+  Filter?: Array<Filter>
+  /**
+   * 查询条件
+   */
+  Search?: Array<Filter>
 }
 
 /**
@@ -1151,20 +1143,6 @@ export interface DescribeEventDetailResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * 自定义泄露事件列表
- */
-export interface SaDivulgeDataQueryPubList {
-  /**
-   * 数据条数
-   */
-  Count: number
-  /**
-   * 自定义泄露事件列表
-   */
-  List: Array<SaDivulgeDataQueryPub>
 }
 
 /**
@@ -1284,20 +1262,6 @@ export interface ComplianceCheckDetail {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Title?: string
-}
-
-/**
- * SaDivulgeDataQueryPub返回参数结构体
- */
-export interface SaDivulgeDataQueryPubResponse {
-  /**
-   * 自定义泄露事件列表
-   */
-  Data: SaDivulgeDataQueryPubList
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**
@@ -1632,44 +1596,6 @@ export interface DescribeSocAlertDetailsResponse {
 }
 
 /**
- * DescribeSafetyEventList请求参数结构体
- */
-export interface DescribeSafetyEventListRequest {
-  /**
-   * 搜索过滤查询参数
-   */
-  Filter: string
-  /**
-   * 限制数目
-   */
-  Limit: number
-  /**
-   * 页偏移
-   */
-  Offset: number
-  /**
-   * 排序列名
-   */
-  Order?: string
-  /**
-   * 排序升降：desc-降序 asc-升序
-   */
-  By?: string
-  /**
-   * 开始查询时间
-   */
-  StartTime?: string
-  /**
-   * 结束查询时间
-   */
-  EndTime?: string
-  /**
-   * 是否过滤响应时间
-   */
-  IsFilterResponseTime?: boolean
-}
-
-/**
  * 云安全配置检测结果
  */
 export interface SocCheckResult {
@@ -1740,24 +1666,6 @@ export interface AlertListData {
  * 安全放回状态
  */
 export type SecurityStatus = null
-
-/**
- * DescribeSafetyEventList返回参数结构体
- */
-export interface DescribeSafetyEventListResponse {
-  /**
-   * 事件列表
-   */
-  List?: Array<DataEvent>
-  /**
-   * 事件总条数
-   */
-  Total?: number
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
 
 /**
  * DescribeSocCheckResultList请求参数结构体
@@ -1884,192 +1792,21 @@ export interface AlarmInfoRsp {
 }
 
 /**
- * DescribeVulList请求参数结构体
+ * 设置_泄露监测产品监测扫描规则策略
  */
-export interface DescribeVulListRequest {
+export interface SaDivulgeScanRuleSetList {
   /**
-   * 查询过滤参数:(json序列化的结果）
+   * Value
    */
-  Params: string
-}
-
-/**
- * 事件列表对象
- */
-export interface DataEvent {
+  Value: string
   /**
-   * Md5值
-注意：此字段可能返回 null，表示取不到有效值。
+   * Code
    */
-  OldIdMd5: string
+  Code: number
   /**
-   * 事件名称
-注意：此字段可能返回 null，表示取不到有效值。
+   * Message
    */
-  EventName: string
-  /**
-   * 事件类型一级分类
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  EventType1: number
-  /**
-   * 事件类型二级分类
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  EventType2: number
-  /**
-   * 事件等级
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Level: number
-  /**
-   * 处理状态
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Status: number
-  /**
-   * 源ip
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SrcIp: string
-  /**
-   * 目的ip
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  DstIp: string
-  /**
-   * 事件发生时间
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Time: string
-  /**
-   * 目的端口
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Dstport: number
-  /**
-   * 资产ip
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  AssetIp: string
-  /**
-   * 资产名称
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  AssetName: string
-  /**
-   * 安全事件唯一标识符
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SsaEventUniqid: string
-  /**
-   * 资产id
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  AssetId: string
-  /**
-   * 事件来源
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Source: string
-  /**
-   * 索引
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Index: string
-  /**
-   * 索引中的唯一标识符
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Id: string
-  /**
-   * 受影响资产是否已下线
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  IsAssetDeleted: string
-  /**
-   * 源ip所属地
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SsaSrcCountry: string
-  /**
-   * 目的ip所属地
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SsaDstCountry: string
-  /**
-   * 木马类型的描述信息
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SsaDescription: string
-  /**
-   * 供给链类型
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SsaAttackChain: string
-  /**
-   * 受影响组件
-   */
-  RuleComponents: string
-  /**
-   * 资产ip
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  AssetIpAll: Array<string>
-  /**
-   * 资产类型
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  AssetType: string
-  /**
-   * cvm类型资产的公网ip
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  PublicIpAddresses: Array<string>
-  /**
-   * cvm类型资产的内网ip
-   */
-  PrivateIpAddresses: Array<string>
-  /**
-   * 事件响应状态
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SoarResponseStatus: number
-  /**
-   * 事件最近响应时间
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SoarResponseTime: number
-  /**
-   * 事件建议处理状态
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SoarSuggestStatus: number
-  /**
-   * 事件剧本类型
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SoarPlaybookType: string
-  /**
-   * 剧本任务Id
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SoarRunId: string
-  /**
-   * 事件Id
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SsaEventId: string
-  /**
-   * 是否新接入的云防事件
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  IsNewCfwEvent: boolean
-  /**
-   * 出入站方向
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Direction: string
+  Message: string
 }
 
 /**
@@ -2170,70 +1907,6 @@ export interface CheckAssetItem {
    * 备注内容
    */
   Remarks?: string
-}
-
-/**
- * SaDivulgeDataQueryPub请求参数结构体
- */
-export interface SaDivulgeDataQueryPubRequest {
-  /**
-   * 模糊查询字段(针对appid或者uin)
-   */
-  QueryKey: string
-  /**
-   * 安全事件名称
-   */
-  EventName: string
-  /**
-   * 监控源  0:全部 1:GitHub 2:暗网 默认值1
-   */
-  DivulgeSoure: string
-  /**
-   * 受影响资产
-   */
-  Asset: string
-  /**
-   * 命中主题集下的规则topic名称
-   */
-  RuleName: string
-  /**
-   * 命中主题集下的规则topic唯一id
-   */
-  RuleId: string
-  /**
-   * 风险等级 -1:未知 1:低危 2:中危 3:高危 4:严重
-   */
-  Level: string
-  /**
-   * 安全事件处理状态 -1:未知 1:待处理 2:已处理 3:误报 4:已忽略 5:已知晓 6:已信任
-   */
-  Status: string
-  /**
-   * 起始时间
-   */
-  StartTime: string
-  /**
-   * 结束时间
-   */
-  EndTime: string
-  /**
-   * 查询起始地址
-   */
-  Offset: string
-  /**
-   * 查询个数
-   */
-  Limit: string
-}
-
-/**
- * DescribeAssetsMappingList请求参数结构体
- */
-export interface DescribeAssetsMappingListRequest {
-  /**
-   * 请求参数
-   */
-  Params: string
 }
 
 /**
@@ -2627,76 +2300,6 @@ export interface DescribeAlarmStatRequest {
 }
 
 /**
- * 查询_通用字段
- */
-export interface SaDivulgeDataQueryPub {
-  /**
-   * Id信息
-   */
-  Id: string
-  /**
-   * 用户Uin
-   */
-  Uin: string
-  /**
-   * 用户AppId
-   */
-  AppId: string
-  /**
-   * 事件名称
-   */
-  EventName: string
-  /**
-   * 监控源 0:全部 1:GitHub 2:暗网 默认值1
-   */
-  DivulgeSoure: string
-  /**
-   * 受影响资产
-   */
-  Asset: string
-  /**
-   * 命中主题集下的规则topic名称
-   */
-  RuleName: string
-  /**
-   * 命中主题集下的规则topic唯一id
-   */
-  RuleId: string
-  /**
-   * 命中主题集下的自定义规则策略
-   */
-  RuleWord: string
-  /**
-   * 扫描监测url
-   */
-  ScanUrl: string
-  /**
-   * 扫描监测命中次数
-   */
-  ScanCount: string
-  /**
-   * 风险等级 -1:未知 1:低危 2:中危 3:高危 4:严重
-   */
-  Level: string
-  /**
-   * 安全事件处理状态 -1:未知 1:待处理 2:已处理 3:误报 4:已忽略 5:已知晓 6:已信任
-   */
-  Status: string
-  /**
-   * 安全事件发生时间
-   */
-  EventTime: string
-  /**
-   * 事件插入时间
-   */
-  InsertTime: string
-  /**
-   * 事件更新时间
-   */
-  UpdateTime: string
-}
-
-/**
  * DescribeDomainList请求参数结构体
  */
 export interface DescribeDomainListRequest {
@@ -2810,29 +2413,6 @@ export interface CheckConfigDetail {
    * 是否忽略
    */
   IsIgnore: number
-}
-
-/**
- * DescribeAssetsMappingList返回参数结构体
- */
-export interface DescribeAssetsMappingListResponse {
-  /**
-   * 资产测绘列表
-   */
-  Data?: Array<DataAssetMapping>
-  /**
-   * 资产测绘总数
-   */
-  TotalCount?: number
-  /**
-   * 类型分类统计数量
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CountByType?: string
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**
@@ -3039,102 +2619,6 @@ export interface Bucket {
    * 数量
    */
   Count: number
-}
-
-/**
- * 资产测绘对象
- */
-export interface DataAssetMapping {
-  /**
-   * 资产主IP地址(公网IP)
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  AssetIp: string
-  /**
-   * 资产名称
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  AssetName: string
-  /**
-   * 资产ID(各模块间通用)
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Instid: string
-  /**
-   * 资产类型
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  AssetType: string
-  /**
-   * 资产可用区(英文)
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  AssetRegionEn: string
-  /**
-   * 资产可用区(中文)
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  AssetRegionCn: string
-  /**
-   * 资产所属网络
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  AssetNetwork: string
-  /**
-   * 资产运行状态(英文)
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  AssetStatusEn: string
-  /**
-   * 资产运行状态(中文)
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  AssetStatusCn: string
-  /**
-   * 是否白名单：“True”为白名单不测绘，默认“False”正常测绘
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  IsWhite: string
-  /**
-   * 资产测绘状态(“unstart”未开始/“running”测绘中/“finish”已完成/“abandoned”任务中止)
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Status: string
-  /**
-   * 最近更新时间
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Time: string
-  /**
-   * 资产标签
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Tag: Array<Tag>
-  /**
-   * 资产组
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Group: Array<string>
-  /**
-   * 端口和服务信息
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Port: string
-  /**
-   * 组件信息
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Component: string
-  /**
-   * 资产实例类型
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  AssetInstanceType: string
-  /**
-   * 资产是否是内网类型
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  IsIntranet: number
 }
 
 /**

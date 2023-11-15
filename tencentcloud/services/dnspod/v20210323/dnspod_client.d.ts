@@ -120,7 +120,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeSnapshotConfig(req: DescribeSnapshotConfigRequest, cb?: (error: string, rep: DescribeSnapshotConfigResponse) => void): Promise<DescribeSnapshotConfigResponse>;
     /**
-     * 删除域名共享
+     * 按账号删除域名共享
      */
     DeleteShareDomain(req: DeleteShareDomainRequest, cb?: (error: string, rep: DeleteShareDomainResponse) => void): Promise<DeleteShareDomainResponse>;
     /**

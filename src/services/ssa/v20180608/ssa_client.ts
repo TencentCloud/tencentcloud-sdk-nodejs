@@ -33,16 +33,16 @@ import {
   QueryFilter,
   QueryFilterV3,
   SocComplianceItem,
-  SocCheckItem,
-  SaDivulgeScanRuleSetList,
+  SaEventPubResponse,
+  DescribeVulListRequest,
   DescribeLeakDetectionListRequest,
   DescribeSocAlertListRequest,
   DomainInfo,
   DescribeConfigListRequest,
   DescribeComplianceDetailResponse,
-  SaEventPubResponse,
+  SocCheckItem,
   SaDivulgeScanRuleMutateRequest,
-  DescribeComplianceAssetListRequest,
+  Tag,
   DescribeAssetDetailListRequest,
   AlertDetail,
   DescribeMappingResultsResponse,
@@ -51,12 +51,10 @@ import {
   DescribeSocCheckResultListResponse,
   DescribeCheckConfigDetailRequest,
   DescribeAssetListRequest,
-  Tag,
+  DescribeComplianceAssetListRequest,
   DescribeEventDetailResponse,
-  SaDivulgeDataQueryPubList,
   AssetQueryFilter,
   ComplianceCheckDetail,
-  SaDivulgeDataQueryPubResponse,
   DescribeMappingResultsRequest,
   AssetList,
   VulList,
@@ -68,11 +66,9 @@ import {
   MappingResult,
   DescribeComplianceListResponse,
   DescribeSocAlertDetailsResponse,
-  DescribeSafetyEventListRequest,
   SocCheckResult,
   AlertListData,
   SecurityStatus,
-  DescribeSafetyEventListResponse,
   DescribeSocCheckResultListRequest,
   DescribeSocAlertDetailsRequest,
   SaDivulgeScanRuleMutateResponse,
@@ -80,12 +76,9 @@ import {
   DescribeSocCheckItemListRequest,
   Filter,
   AlarmInfoRsp,
-  DescribeVulListRequest,
-  DataEvent,
+  SaDivulgeScanRuleSetList,
   SocCheckItemV1,
   CheckAssetItem,
-  SaDivulgeDataQueryPubRequest,
-  DescribeAssetsMappingListRequest,
   DescribeComplianceDetailRequest,
   AssetDetail,
   SocProductionItem,
@@ -94,15 +87,12 @@ import {
   DescribeComplianceAssetListResponse,
   DataCheck,
   DescribeAlarmStatRequest,
-  SaDivulgeDataQueryPub,
   DescribeDomainListRequest,
   CheckConfigDetail,
-  DescribeAssetsMappingListResponse,
   DescribeComplianceListRequest,
   AlertListAggregations,
   AlertType,
   Bucket,
-  DataAssetMapping,
   DescribeLeakDetectionListResponse,
   DescribeAssetDetailListResponse,
   DescribeEventDetailRequest,
@@ -177,16 +167,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询【通用字段】【泄露监测数据列表】
-   */
-  async SaDivulgeDataQueryPub(
-    req: SaDivulgeDataQueryPubRequest,
-    cb?: (error: string, rep: SaDivulgeDataQueryPubResponse) => void
-  ): Promise<SaDivulgeDataQueryPubResponse> {
-    return this.request("SaDivulgeDataQueryPub", req, cb)
-  }
-
-  /**
    * 合规管理-资产列表
    */
   async DescribeComplianceAssetList(
@@ -237,16 +217,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取安全事件列表
-   */
-  async DescribeSafetyEventList(
-    req: DescribeSafetyEventListRequest,
-    cb?: (error: string, rep: DescribeSafetyEventListResponse) => void
-  ): Promise<DescribeSafetyEventListResponse> {
-    return this.request("DescribeSafetyEventList", req, cb)
-  }
-
-  /**
    * SaDivulgeScanRuleMutate
    */
   async SaDivulgeScanRuleMutate(
@@ -284,16 +254,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeCheckConfigAssetListResponse) => void
   ): Promise<DescribeCheckConfigAssetListResponse> {
     return this.request("DescribeCheckConfigAssetList", req, cb)
-  }
-
-  /**
-   * 资产测绘-测绘列表
-   */
-  async DescribeAssetsMappingList(
-    req: DescribeAssetsMappingListRequest,
-    cb?: (error: string, rep: DescribeAssetsMappingListResponse) => void
-  ): Promise<DescribeAssetsMappingListResponse> {
-    return this.request("DescribeAssetsMappingList", req, cb)
   }
 
   /**

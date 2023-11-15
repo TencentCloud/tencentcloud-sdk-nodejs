@@ -87,7 +87,7 @@ https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/launchAp
 <li>此接口需要依赖<a href="https://qian.tencent.com/developers/partnerApis/files/UploadFiles" target="_blank">文件上传接口</a>生成pdf资源编号（FileIds）进行使用。整体的逻辑如下图</li>
 </ul>
 
-![image](https://dyn.ess.tencent.cn/guide/capi/ChannelCreateFlowByFiles.png)
+![image](https://qcloudimg.tencent-cloud.cn/raw/bf86248a2c163228c4e894cf5926af69/ChannelCreateFlowByFiles.png)
 
 **可以作为发起方和签署方的角色列表**
 <table>
@@ -239,7 +239,7 @@ https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/launchAp
 
 **整体的逻辑如下**
 
-![image](https://dyn.ess.tencent.cn/guide/capi/CreateFlowsByTemplates.png)
+![image](https://qcloudimg.tencent-cloud.cn/raw/e193519d4383fa74782a9e19147ef01a/CreateFlowsByTemplates.png)
 
 **可以作为发起方和签署方的角色列表**
 <table>
@@ -316,23 +316,23 @@ https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/launchAp
 
 **适用场景**
  该接口常用来配合<a href="https://qian.tencent.com/developers/partnerApis/startFlows/CreateFlowsByTemplates" target="_blank">用模板创建签署流程</a>和<a href="https://qian.tencent.com/developers/partnerApis/startFlows/ChannelCreateFlowGroupByTemplates" target="_blank">通过多模板创建合同组签署流程</a>接口，作为创建合同的前置接口使用。
-通过此接口查询到模板信息后，再通过调用创建合同的接口，指定模板ID，指定模板中需要的填写控件内容等，完成合同文档的的创建。
+通过此接口查询到模板信息后，再通过调用创建合同的接口，指定模板ID，指定模板中需要的填写控件内容等，完成合同文档的创建。
 
-**模版的来源**
+**模板的来源**
 子客企业的模板有两种途径获取
 - 渠道方(平台方)配置完成后, 分发给同应用的各个子企业
 - 子客企业通过CreateConsoleLoginUrl创建的链接登录子客控制台自己创建
 
 **一个模板通常会包含以下结构信息**
 
-- 模板模版ID, 模板名字等基本信息
+- 模板ID, 模板名字等基本信息
 - 发起方参与信息Promoter、签署参与方 Recipients，后者会在模板发起合同时用于指定参与方
 - 发起方和签署方的填写控件 Components
 - 签署方的签署控件 SignComponents
 
-![image](https://dyn.ess.tencent.cn/guide/capi/channel_DescribeTemplates.png)
+![image](https://qcloudimg.tencent-cloud.cn/raw/ab81fa948a0a6fea14f48cac91d0e36a/channel_DescribeTemplates.png)
 
-模版中各元素的层级关系, 所有的填写控件和签署控件都归属某一个角色(通过控件的ComponentRecipientId来关联)
+模板中各元素的层级关系, 所有的填写控件和签署控件都归属某一个角色(通过控件的ComponentRecipientId来关联)
 
 ![image](https://qcloudimg.tencent-cloud.cn/raw/45c638bd93f9c8024763add9ab47c27f.png)
 
@@ -452,7 +452,7 @@ Web链接访问后，会根据子客企业(**Agent中ProxyOrganizationOpenId表�
 - 出证过程需一定时间，建议在**提交出证任务后的24小时之后**，通过<a href="https://qian.tencent.com/developers/partnerApis/certificate/DescribeChannelFlowEvidenceReport" target="_blank">获取出证报告任务执行结果</a>接口进行查询执行结果和出证报告的下载URL。
 
 
-![image](https://dyn.ess.tencent.cn/guide/capi/channel_CreateChannelFlowEvidenceReport.png)
+![image](https://qcloudimg.tencent-cloud.cn/raw/1b4307ed143a992940c41d61192d3a0f/channel_CreateChannelFlowEvidenceReport.png)
      */
     CreateChannelFlowEvidenceReport(req: CreateChannelFlowEvidenceReportRequest, cb?: (error: string, rep: CreateChannelFlowEvidenceReportResponse) => void): Promise<CreateChannelFlowEvidenceReportResponse>;
     /**
@@ -770,7 +770,7 @@ httpProfile.setEndpoint("file.test.ess.tencent.cn");
 
 - **员工离职的场景**: 将员工置为离职, 员工无法登录控制台和腾讯电子签小程序进行操作了,   同时给此员工分配的openid会被回收可以给其他新员工使用 (离职后员工数据会被置空,  再次加入公司会从零开始) ,  若员工信息有误可通过离职后在新增来解决,  离职员工状态为**离职**
 
-![image](https://dyn.ess.tencent.cn/guide/capi/channel_SyncProxyOrganizationOperators.png)
+![image](https://qcloudimg.tencent-cloud.cn/raw/7a27a6bb0e4d39c2f6aa2a0b39946181/channel_SyncProxyOrganizationOperators.png)
 
 **注**:
 -  新增员工可以配置白名单限制注册使用对应openid的员工必须满足SyncProxyOrganizationOperators导入的(默认生成子客登录链接生成的链接可以任意员工点击注册绑定对应的openid), 此白名单需要咨询接入经理
@@ -786,27 +786,28 @@ httpProfile.setEndpoint("file.test.ess.tencent.cn");
 - 使用此功能`需搭配出证套餐` ，使用前请联系对接的客户经理沟通。
 - 需调用创建并返回出证报告接口<a href="https://qian.tencent.com/developers/partnerApis/certificate/CreateChannelFlowEvidenceReport" target="_blank">提交申请出证报告任务</a>获取报告编号后调用当前接口获取报告链接。
 
-![image](https://dyn.ess.tencent.cn/guide/capi/channel_CreateChannelFlowEvidenceReport.png)
+![image](https://qcloudimg.tencent-cloud.cn/raw/1b4307ed143a992940c41d61192d3a0f/channel_CreateChannelFlowEvidenceReport.png)
      */
     DescribeChannelFlowEvidenceReport(req: DescribeChannelFlowEvidenceReportRequest, cb?: (error: string, rep: DescribeChannelFlowEvidenceReportResponse) => void): Promise<DescribeChannelFlowEvidenceReportResponse>;
     /**
-     * 此接口（OperateChannelTemplate）用于针对第三方应用平台模板库中的模板对子客企业可见性的查询和设置。
+     * 此接口（OperateChannelTemplate）用于针对第三方应用平台模板库中的模板对子客企业发布授权的查询和设置。
+平台模板库中的模板的位置在控制台 企业应用管理 中下面的应用模板库管理目录, 可以参照下图位置
+![image](https://qcloudimg.tencent-cloud.cn/raw/7f2b6c94164b3e931efc9a037e0400f7.png)
 
-> **使用场景**
->
->  1：查询 OperateType=SELECT
-> - 查询第三方应用平台模板库的可见性以及授权的子客列表。
->
->  2：修改部分子客授权 OperateType=UPDATE
-> - 对子客企业进行模板库中模板可见性的进行修改操作。
->- 当模板未发布时，可以修改可见性AuthTag（part/all），当模板发布后，不可做此修改
-> - 若模板已发布且可见性AuthTag是part，可以通过ProxyOrganizationOpenIds增加子客的授权范围。如果是自动领取的模板，增加授权范围后会自动下发。
->
->  3：取消部分子客授权 OperateType=DELETE
-> - 对子客企业进行模板库中模板可见性的进行删除操作。
-> - 主要对于手动领取的模板，去除授权后子客在模板库中看不到，就无法再领取了。但是已经领取过成为自有模板的不会同步删除。
-> - 对于自动领取的模板，由于已经下发，更改授权不会影响。
-> - 如果要同步删除子客自有模板库中的模板，请使用OperateType=UPDATE+Available参数处理。
+# 支持的操作
+
+## 1. 查询模板的子客企业授权 (OperateType=SELECT)
+- 查询模板的授权子企业列表
+
+## 2. 修改模板的子客企业授权 (OperateType=UPDATE)
+- 当模板未发布时，可以修改模板的模板授权范围是**所有第三方应用合作企业**(AuthTag设置为all)或者**指定第三方应用合作企业**(AuthTag设置为part)，**当模板发布后，不可做此修改**
+- 如果模板是部分授权,  可通过ProxyOrganizationOpenIds增加子客的授权范围。
+
+## 3. 取消模板的子客企业授权 (OperateType=DELETE)
+- 对子客企业进行模板库中模板授权范围的进行删除操作。
+- 主要对于手动领取的模板，去除授权后子客在模板库中看不到，就无法再领取了。但是**已经领取过成为自有模板的不会同步删除**。
+- 对于自动领取的模板，由于已经下发，更改授权不会影响。
+- 如果要同步删除子客自有模板库中的模板，请使用OperateType=UPDATE+Available参数处理。
      */
     OperateChannelTemplate(req: OperateChannelTemplateRequest, cb?: (error: string, rep: OperateChannelTemplateResponse) => void): Promise<OperateChannelTemplateResponse>;
     /**

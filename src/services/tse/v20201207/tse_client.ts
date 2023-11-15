@@ -23,17 +23,20 @@ import {
   CreateCloudNativeAPIGatewayServiceResponse,
   DeleteCloudNativeAPIGatewayRouteRateLimitResponse,
   ApolloEnvParam,
+  UpdateUpstreamHealthCheckConfigRequest,
   DescribeCloudNativeAPIGatewayServiceRateLimitRequest,
   CreateCloudNativeAPIGatewayRequest,
   CloudNativeAPIGatewayStrategyCronScalerConfig,
   DescribeCloudNativeAPIGatewayNodesRequest,
   ModifyCloudNativeAPIGatewayRouteRequest,
+  DescribeCloudNativeAPIGatewayUpstreamRequest,
   DeleteNativeGatewayServerGroupResponse,
   ModifyCloudNativeAPIGatewayCertificateResponse,
   CreateCloudNativeAPIGatewayRouteRateLimitResponse,
   DescribeSREInstanceAccessAddressResponse,
   ModifyCloudNativeAPIGatewayCanaryRuleResponse,
   CloudNativeAPIGatewayNodeConfig,
+  DescribeUpstreamHealthCheckConfigRequest,
   CreateNativeGatewayServerGroupRequest,
   DescribeCloudNativeAPIGatewayCertificatesRequest,
   DeleteCloudNativeAPIGatewayResult,
@@ -41,10 +44,13 @@ import {
   ModifyCloudNativeAPIGatewayServiceResponse,
   DescribeCloudNativeAPIGatewayNodesResponse,
   CreateCloudNativeAPIGatewayResponse,
+  DescribeUpstreamHealthCheckConfigResponse,
+  KongActiveHealthCheck,
   DeleteCloudNativeAPIGatewayCertificateResponse,
   DeleteCloudNativeAPIGatewayCanaryRuleRequest,
   GatewayInstanceSchemeAndPorts,
   ModifyCloudNativeAPIGatewayRouteRateLimitRequest,
+  UpstreamHealthCheckConfig,
   NacosServerInterface,
   DescribeNacosReplicasRequest,
   CreateCloudNativeAPIGatewayServiceRequest,
@@ -56,9 +62,10 @@ import {
   SREInstance,
   InstanceTagInfo,
   DescribeCloudNativeAPIGatewayServicesRequest,
-  UpdateUpstreamTargetsResponse,
+  DescribeCloudNativeAPIGatewayUpstreamResponse,
   DescribeCloudNativeAPIGatewayCertificatesResponse,
   NacosReplica,
+  KongUpstreamPreview,
   UpdateEngineInternetAccessRequest,
   CreateCloudNativeAPIGatewayCanaryRuleResponse,
   DescribeSREInstancesRequest,
@@ -82,8 +89,10 @@ import {
   ServiceGovernanceInfo,
   DescribeNacosReplicasResponse,
   DeleteCloudNativeAPIGatewayServiceRateLimitRequest,
+  KongPassiveHealthCheck,
   CloudNativeAPIGatewayVpcConfig,
   CloudAPIGatewayCanaryRuleList,
+  ModifyUpstreamNodeStatusRequest,
   DescribeCloudNativeAPIGatewayConfigResponse,
   KongRoutePreview,
   KongCertificatesList,
@@ -120,6 +129,7 @@ import {
   ModifyCloudNativeAPIGatewayServiceRateLimitRequest,
   DescribeSREInstanceAccessAddressRequest,
   DescribeCloudNativeAPIGatewayCanaryRulesResponse,
+  UpdateUpstreamTargetsResponse,
   DeleteCloudNativeAPIGatewayCertificateRequest,
   NativeGatewayServerGroup,
   DeleteCloudNativeAPIGatewayServiceRateLimitResponse,
@@ -134,6 +144,7 @@ import {
   DeleteCloudNativeAPIGatewayRequest,
   DescribeCloudNativeAPIGatewayCertificateDetailsResponse,
   UpdateCloudNativeAPIGatewayCertificateInfoRequest,
+  KongUpstreamList,
   EngineAdmin,
   PolarisLimiterAddress,
   DescribeOneCloudNativeAPIGatewayServiceResponse,
@@ -142,6 +153,7 @@ import {
   KongServices,
   CreateCloudNativeAPIGatewayCertificateRequest,
   ModifyCloudNativeAPIGatewayResponse,
+  ModifyUpstreamNodeStatusResponse,
   NetworkAccessControl,
   DescribeZookeeperServerInterfacesRequest,
   DescribeCloudNativeAPIGatewayRouteRateLimitResponse,
@@ -160,6 +172,7 @@ import {
   CloudNativeAPIGatewayStrategyAutoScalerConfig,
   DescribeNacosServerInterfacesRequest,
   CloudNativeAPIGatewayCanaryRuleCondition,
+  UpdateUpstreamHealthCheckConfigResponse,
   DescribeSREInstancesResponse,
   ZookeeperServerInterface,
   CreateCloudNativeAPIGatewayServerGroupResult,
@@ -201,13 +214,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询Nacos类型引擎实例副本信息
+   * 获取云原生网关服务详情下的Upstream列表
    */
-  async DescribeNacosReplicas(
-    req: DescribeNacosReplicasRequest,
-    cb?: (error: string, rep: DescribeNacosReplicasResponse) => void
-  ): Promise<DescribeNacosReplicasResponse> {
-    return this.request("DescribeNacosReplicas", req, cb)
+  async DescribeCloudNativeAPIGatewayUpstream(
+    req: DescribeCloudNativeAPIGatewayUpstreamRequest,
+    cb?: (error: string, rep: DescribeCloudNativeAPIGatewayUpstreamResponse) => void
+  ): Promise<DescribeCloudNativeAPIGatewayUpstreamResponse> {
+    return this.request("DescribeCloudNativeAPIGatewayUpstream", req, cb)
+  }
+
+  /**
+   * 获取云原生网关服务健康检查配置
+   */
+  async DescribeUpstreamHealthCheckConfig(
+    req: DescribeUpstreamHealthCheckConfigRequest,
+    cb?: (error: string, rep: DescribeUpstreamHealthCheckConfigResponse) => void
+  ): Promise<DescribeUpstreamHealthCheckConfigResponse> {
+    return this.request("DescribeUpstreamHealthCheckConfig", req, cb)
   }
 
   /**
@@ -218,6 +241,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyNativeGatewayServerGroupResponse) => void
   ): Promise<ModifyNativeGatewayServerGroupResponse> {
     return this.request("ModifyNativeGatewayServerGroup", req, cb)
+  }
+
+  /**
+   * 修改云原生网关上游实例节点健康状态
+   */
+  async ModifyUpstreamNodeStatus(
+    req: ModifyUpstreamNodeStatusRequest,
+    cb?: (error: string, rep: ModifyUpstreamNodeStatusResponse) => void
+  ): Promise<ModifyUpstreamNodeStatusResponse> {
+    return this.request("ModifyUpstreamNodeStatus", req, cb)
   }
 
   /**
@@ -648,6 +681,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeNativeGatewayServerGroupsResponse) => void
   ): Promise<DescribeNativeGatewayServerGroupsResponse> {
     return this.request("DescribeNativeGatewayServerGroups", req, cb)
+  }
+
+  /**
+   * 查询Nacos类型引擎实例副本信息
+   */
+  async DescribeNacosReplicas(
+    req: DescribeNacosReplicasRequest,
+    cb?: (error: string, rep: DescribeNacosReplicasResponse) => void
+  ): Promise<DescribeNacosReplicasResponse> {
+    return this.request("DescribeNacosReplicas", req, cb)
+  }
+
+  /**
+   * 更新云原生网关健康检查配置
+   */
+  async UpdateUpstreamHealthCheckConfig(
+    req: UpdateUpstreamHealthCheckConfigRequest,
+    cb?: (error: string, rep: UpdateUpstreamHealthCheckConfigResponse) => void
+  ): Promise<UpdateUpstreamHealthCheckConfigResponse> {
+    return this.request("UpdateUpstreamHealthCheckConfig", req, cb)
   }
 
   /**

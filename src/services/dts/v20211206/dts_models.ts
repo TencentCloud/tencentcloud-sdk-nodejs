@@ -2549,7 +2549,7 @@ export interface ResumeMigrateJobRequest {
   /**
    * 恢复任务的模式，目前的取值有：clearData 清空目标实例数据，overwrite 以覆盖写的方式执行任务，normal 跟正常流程一样，不做额外动作；注意，clearData、overwrite仅对redis生效，normal仅针对非redis链路生效
    */
-  ResumeOption: string
+  ResumeOption?: string
 }
 
 /**

@@ -58,12 +58,6 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeEventDetail", req, cb);
     }
     /**
-     * 查询【通用字段】【泄露监测数据列表】
-     */
-    async SaDivulgeDataQueryPub(req, cb) {
-        return this.request("SaDivulgeDataQueryPub", req, cb);
-    }
-    /**
      * 合规管理-资产列表
      */
     async DescribeComplianceAssetList(req, cb) {
@@ -94,12 +88,6 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("SaEventPub", req, cb);
     }
     /**
-     * 获取安全事件列表
-     */
-    async DescribeSafetyEventList(req, cb) {
-        return this.request("DescribeSafetyEventList", req, cb);
-    }
-    /**
      * SaDivulgeScanRuleMutate
      */
     async SaDivulgeScanRuleMutate(req, cb) {
@@ -122,12 +110,6 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeCheckConfigAssetList(req, cb) {
         return this.request("DescribeCheckConfigAssetList", req, cb);
-    }
-    /**
-     * 资产测绘-测绘列表
-     */
-    async DescribeAssetsMappingList(req, cb) {
-        return this.request("DescribeAssetsMappingList", req, cb);
     }
     /**
      * 漏洞管理页，获取漏洞列表

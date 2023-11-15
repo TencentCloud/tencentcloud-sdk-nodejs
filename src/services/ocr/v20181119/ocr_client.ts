@@ -232,6 +232,7 @@ import {
   ClassifyDetectInfo,
   GeneralEfficientOCRResponse,
   ShipInvoiceOCRRequest,
+  ReflectDetailInfo,
   SealOCRRequest,
   VerifyOfdVatInvoiceOCRResponse,
   MedicalInvoice,

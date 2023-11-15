@@ -33,5 +33,11 @@ class Client extends abstract_client_1.AbstractClient {
     async RunInstances(req, cb) {
         return this.request("RunInstances", req, cb);
     }
+    /**
+     * 本接口 (TerminateInstances) 用于主动退还实例。
+     */
+    async TerminateInstances(req, cb) {
+        return this.request("TerminateInstances", req, cb);
+    }
 }
 exports.Client = Client;

@@ -747,6 +747,12 @@ BatchReceivePolicy 的接口会一次性返回多条消息：
         return this.request("SendRocketMQMessage", req, cb);
     }
     /**
+     * 删除专业集群——预付费，仅通过API 调用，支持同时删除多个集群
+     */
+    async DeleteProClusters(req, cb) {
+        return this.request("DeleteProClusters", req, cb);
+    }
+    /**
      * 清空订阅者消息标签
      */
     async ClearCmqSubscriptionFilterTags(req, cb) {

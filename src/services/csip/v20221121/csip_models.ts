@@ -1617,7 +1617,7 @@ export interface TaskAssetObject {
    */
   AssetName?: string
   /**
-   * 	资产类型
+   * 资产类型
 注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceType?: string
@@ -2501,50 +2501,50 @@ export interface DescribeScanTaskListResponse {
  */
 export interface ScanTaskInfo {
   /**
-   * 任务日志Id
+   * 任务Id
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TaskId: string
+  TaskId?: string
   /**
-   * 任务日志名称
+   * 任务名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TaskName: string
+  TaskName?: string
   /**
    * 任务状态码：1等待开始  2正在扫描  3扫描出错 4扫描完成
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Status: number
+  Status?: number
   /**
    * 任务进度
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Progress: number
+  Progress?: number
   /**
-   * 对应的展示时间
+   * 任务完成时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TaskTime: string
+  TaskTime?: string
   /**
-   * 报表id
+   * 报告ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ReportId: string
+  ReportId?: string
   /**
-   * 报表名称
+   * 报告名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ReportName: string
+  ReportName?: string
   /**
    * 扫描计划，0-周期任务,1-立即扫描,2-定时扫描,3-自定义
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ScanPlan: number
+  ScanPlan?: number
   /**
    * 关联的资产数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  AssetCount: number
+  AssetCount?: number
   /**
    * APP ID
 注意：此字段可能返回 null，表示取不到有效值。
@@ -2607,15 +2607,15 @@ export interface VULViewVULRisk {
    */
   FirstTime?: string
   /**
-   * 状态，0未处理、1已处置、2已忽略
+   * 影响资产数量
    */
   AffectAssetCount?: number
   /**
-   * 资产唯一id
+   * 风险ID
    */
   Id?: string
   /**
-   * 资产子类型
+   * 扫描来源，具体看接口返回枚举类型
    */
   From?: string
   /**
@@ -2639,23 +2639,23 @@ export interface VULViewVULRisk {
    */
   Describe?: string
   /**
-   * 负载
+   * 漏洞payload
    */
   Payload?: string
   /**
-   * 版本名
+   * 漏洞影响组件
    */
   AppName?: string
   /**
-   * 相关引用
+   * 技术参考
    */
   References?: string
   /**
-   * 版本
+   * 漏洞影响版本
    */
   AppVersion?: string
   /**
-   * 漏洞链接
+   * 风险点
    */
   VULURL?: string
   /**
@@ -3548,7 +3548,7 @@ export interface TaskLogInfo {
    */
   RiskNumber?: number
   /**
-   * 报告生成时间,任务结束时间
+   * 报告生成时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Time?: string
