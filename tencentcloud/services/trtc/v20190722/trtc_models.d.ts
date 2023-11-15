@@ -1397,6 +1397,10 @@ export interface McuWaterMarkImage {
      * 水印在输出时的层级，不填默认为0。
      */
     ZOrder?: number;
+    /**
+     * 动态水印类型，默认为0。0:关闭；1:随机位置，每秒变动一次；2:边界扫描反弹，每帧变动一次。
+     */
+    DynamicPosType?: number;
 }
 /**
  * StartPublishCdnStream返回参数结构体
@@ -2746,6 +2750,10 @@ export interface McuWaterMarkText {
      * 字体背景色，不配置默认为透明。常用的颜色有： 红色：0xcc0033。 黄色：0xcc9900。 绿色：0xcccc33。 蓝色：0x99CCFF。 黑色：0x000000。 白色：0xFFFFFF。 灰色：0x999999。
      */
     BackGroundColor?: string;
+    /**
+     * 动态水印类型，默认为0。0:关闭；1:随机位置，每秒变动一次；2:边界扫描反弹，每帧变动一次。
+     */
+    DynamicPosType?: number;
 }
 /**
  * SeriesInfos类型
@@ -2907,7 +2915,7 @@ export interface PresetLayoutConfig {
  */
 export interface McuPublishCdnParam {
     /**
-     * CDN转推URL。
+     * CDN转推URL。注：若更新转推时，URL有任何变化，都会断流重推。
      */
     PublishCdnUrl: string;
     /**

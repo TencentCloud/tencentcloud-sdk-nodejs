@@ -895,81 +895,13 @@ export interface ModifyCmdTemplateRequest {
     Encoding?: number;
 }
 /**
- * 搜索字符或图形会话时返回的SessionResul结构体
+ * ModifyUserGroup返回参数结构体
  */
-export interface SessionResult {
+export interface ModifyUserGroupResponse {
     /**
-     * 用户名
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
-    UserName: string;
-    /**
-     * 姓名
-     */
-    RealName: string;
-    /**
-     * 主机账号
-     */
-    Account: string;
-    /**
-     * 开始时间
-     */
-    StartTime: string;
-    /**
-     * 结束时间
-     */
-    EndTime: string;
-    /**
-     * 会话大小
-     */
-    Size: number;
-    /**
-     * 设备ID
-     */
-    InstanceId: string;
-    /**
-     * 设备名
-     */
-    DeviceName: string;
-    /**
-     * 内部Ip
-     */
-    PrivateIp: string;
-    /**
-     * 外部Ip
-     */
-    PublicIp: string;
-    /**
-     * 来源Ip
-     */
-    FromIp: string;
-    /**
-     * 会话持续时长
-     */
-    Duration: number;
-    /**
-     * 该会话内命令数量 ，搜索图形会话时该字段无意义
-     */
-    Count: number;
-    /**
-     * 该会话内高危命令数，搜索图形时该字段无意义
-     */
-    DangerCount: number;
-    /**
-     * 会话状态，如1会话活跃  2会话结束  3强制离线  4其他错误
-     */
-    Status: number;
-    /**
-     * 会话Id
-     */
-    Id: string;
-    /**
-     * 设备所属的地域
-     */
-    ApCode: string;
-    /**
-     * 会话协议
-     */
-    Protocol: string;
+    RequestId?: string;
 }
 /**
  * CreateUser返回参数结构体
@@ -2427,6 +2359,23 @@ export interface DescribeCmdTemplatesRequest {
     Limit?: number;
 }
 /**
+ * ModifyUserGroup请求参数结构体
+ */
+export interface ModifyUserGroupRequest {
+    /**
+     * 用户组ID
+     */
+    Id: number;
+    /**
+     * 用户组名
+     */
+    Name: string;
+    /**
+     * 用户组所属的部门ID，如：1.2.3
+     */
+    DepartmentId?: string;
+}
+/**
  * DeleteAcls返回参数结构体
  */
 export interface DeleteAclsResponse {
@@ -2589,6 +2538,83 @@ export interface SearchAuditLogResponse {
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * 搜索字符或图形会话时返回的SessionResul结构体
+ */
+export interface SessionResult {
+    /**
+     * 用户名
+     */
+    UserName: string;
+    /**
+     * 姓名
+     */
+    RealName: string;
+    /**
+     * 主机账号
+     */
+    Account: string;
+    /**
+     * 开始时间
+     */
+    StartTime: string;
+    /**
+     * 结束时间
+     */
+    EndTime: string;
+    /**
+     * 会话大小
+     */
+    Size: number;
+    /**
+     * 设备ID
+     */
+    InstanceId: string;
+    /**
+     * 设备名
+     */
+    DeviceName: string;
+    /**
+     * 内部Ip
+     */
+    PrivateIp: string;
+    /**
+     * 外部Ip
+     */
+    PublicIp: string;
+    /**
+     * 来源Ip
+     */
+    FromIp: string;
+    /**
+     * 会话持续时长
+     */
+    Duration: number;
+    /**
+     * 该会话内命令数量 ，搜索图形会话时该字段无意义
+     */
+    Count: number;
+    /**
+     * 该会话内高危命令数，搜索图形时该字段无意义
+     */
+    DangerCount: number;
+    /**
+     * 会话状态，如1会话活跃  2会话结束  3强制离线  4其他错误
+     */
+    Status: number;
+    /**
+     * 会话Id
+     */
+    Id: string;
+    /**
+     * 设备所属的地域
+     */
+    ApCode: string;
+    /**
+     * 会话协议
+     */
+    Protocol: string;
 }
 /**
  * 堡垒机服务信息

@@ -2744,72 +2744,72 @@ export interface CompareTaskItem {
      * 任务id
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    JobId: string;
+    JobId?: string;
     /**
      * 对比任务 Id
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CompareTaskId: string;
+    CompareTaskId?: string;
     /**
      * 对比任务名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TaskName: string;
+    TaskName?: string;
     /**
      * 对比任务状态, 可能的值：created - 创建完成；readyRun - 等待运行；running - 运行中；success - 成功；stopping - 结束中；failed - 失败；canceled - 已终止
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Status: string;
+    Status?: string;
     /**
      * 对比任务配置
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Config: CompareObject;
+    Config?: CompareObject;
     /**
      * 对比任务校验详情
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CheckProcess: ProcessProgress;
+    CheckProcess?: ProcessProgress;
     /**
      * 对比任务运行详情
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CompareProcess: ProcessProgress;
+    CompareProcess?: ProcessProgress;
     /**
      * 对比结果, 可能的值：same - 一致；different - 不一致；skipAll - 跳过
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Conclusion: string;
+    Conclusion?: string;
     /**
      * 任务创建时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CreatedAt: string;
+    CreatedAt?: string;
     /**
      * 任务启动时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    StartedAt: string;
+    StartedAt?: string;
     /**
      * 对比结束时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    FinishedAt: string;
+    FinishedAt?: string;
     /**
      * 对比类型，dataCheck(完整数据对比)、sampleDataCheck(抽样数据对比)、rowsCount(行数对比)
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Method: string;
+    Method?: string;
     /**
      * 对比配置信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Options: CompareOptions;
+    Options?: CompareOptions;
     /**
      * 一致性校验提示信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Message: string;
+    Message?: string;
 }
 /**
  * ModifyMigrateJobSpec返回参数结构体

@@ -57,7 +57,7 @@ import {
   DescribeUserGroupMembersRequest,
   OperationEvent,
   ModifyCmdTemplateRequest,
-  SessionResult,
+  ModifyUserGroupResponse,
   CreateUserResponse,
   DescribeAssetSyncStatusResponse,
   CreateAclRequest,
@@ -122,6 +122,7 @@ import {
   DescribeDeviceAccountsRequest,
   DescribeDasbImageIdsResponse,
   DescribeCmdTemplatesRequest,
+  ModifyUserGroupRequest,
   DeleteAclsResponse,
   CreateUserGroupResponse,
   DeleteDevicesRequest,
@@ -132,6 +133,7 @@ import {
   DeleteDeviceGroupsRequest,
   DescribeDeviceGroupMembersResponse,
   SearchAuditLogResponse,
+  SessionResult,
   Resource,
   BindDeviceResourceRequest,
   Acl,
@@ -379,6 +381,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ResetDeviceAccountPasswordResponse) => void
   ): Promise<ResetDeviceAccountPasswordResponse> {
     return this.request("ResetDeviceAccountPassword", req, cb)
+  }
+
+  /**
+   * 修改用户组
+   */
+  async ModifyUserGroup(
+    req: ModifyUserGroupRequest,
+    cb?: (error: string, rep: ModifyUserGroupResponse) => void
+  ): Promise<ModifyUserGroupResponse> {
+    return this.request("ModifyUserGroup", req, cb)
   }
 
   /**

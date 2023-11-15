@@ -4428,9 +4428,17 @@ export interface MotorVehicleSaleInvoice {
      */
     Issuer?: string;
     /**
-     * 完税凭证号码
+     * 进口证明书号
      */
     TaxNum?: string;
+    /**
+     * 完税凭证号码
+     */
+    TaxPayNum?: string;
+    /**
+     * 税控码
+     */
+    TaxCode?: string;
     /**
      * 限乘人数
      */
@@ -9048,6 +9056,46 @@ export interface UsedCarPurchaseInvoice {
      * 是否有公司印章（0：没有，1：有）
      */
     CompanySealMark?: number;
+    /**
+     * 经营拍卖单位
+     */
+    AuctionOrgName?: string;
+    /**
+     * 经营拍卖单位地址
+     */
+    AuctionOrgAddress?: string;
+    /**
+     * 经营拍卖单位纳税人识别号
+     */
+    AuctionOrgTaxID?: string;
+    /**
+     * 经营拍卖单位开户银行账号
+     */
+    AuctionOrgBankAccount?: string;
+    /**
+     * 经营拍卖单位电话
+     */
+    AuctionOrgPhone?: string;
+    /**
+     * 开票人
+     */
+    Issuer?: string;
+    /**
+     * 税控码
+     */
+    TaxCode?: string;
+    /**
+     * 机器编号
+     */
+    MachineSerialNumber?: string;
+    /**
+     * 机打发票代码
+     */
+    MachineCode?: string;
+    /**
+     * 机打发票号码
+     */
+    MachineNumber?: string;
 }
 /**
  * GeneralFastOCR返回参数结构体

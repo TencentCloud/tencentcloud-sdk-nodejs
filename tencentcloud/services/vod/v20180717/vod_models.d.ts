@@ -611,6 +611,19 @@ export interface AdaptiveDynamicStreamingTemplate {
     SegmentType?: string;
 }
 /**
+ * DeleteJustInTimeTranscodeTemplate请求参数结构体
+ */
+export interface DeleteJustInTimeTranscodeTemplateRequest {
+    /**
+     * 模板名字。
+     */
+    Name: string;
+    /**
+     * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
+     */
+    SubAppId?: number;
+}
+/**
  * DeleteAnimatedGraphicsTemplate返回参数结构体
  */
 export interface DeleteAnimatedGraphicsTemplateResponse {
@@ -1008,6 +1021,31 @@ export interface AiReviewPoliticalOcrTaskInput {
     Definition?: number;
 }
 /**
+ * ModifyJustInTimeTranscodeTemplate请求参数结构体
+ */
+export interface ModifyJustInTimeTranscodeTemplateRequest {
+    /**
+     * 模板名字。
+     */
+    Name: string;
+    /**
+     * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
+     */
+    SubAppId?: number;
+    /**
+     * 视频参数配置。
+     */
+    VideoConfigure?: VideoConfigureInfoForUpdate;
+    /**
+     * 水印参数配置。
+     */
+    WatermarkConfigure?: WatermarkConfigureInfoForUpdate;
+    /**
+     * 模板描述，长度限制256个字符。
+     */
+    Comment?: string;
+}
+/**
  * DescribePrepaidProducts请求参数结构体
  */
 export declare type DescribePrepaidProductsRequest = null;
@@ -1332,6 +1370,27 @@ export interface RefreshUrlCacheRequest {
      * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
      */
     SubAppId?: number;
+}
+/**
+ * DescribeAIAnalysisTemplates请求参数结构体
+ */
+export interface DescribeAIAnalysisTemplatesRequest {
+    /**
+     * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
+     */
+    SubAppId?: number;
+    /**
+     * 音视频内容分析模板唯一标识过滤条件，数组长度最大值：100。
+     */
+    Definitions?: Array<number | bigint>;
+    /**
+     * 分页偏移量，默认值：0。
+     */
+    Offset?: number;
+    /**
+     * 返回记录条数，默认值：10，最大值：100。
+     */
+    Limit?: number;
 }
 /**
  * 音视频审核模板详情
@@ -2662,6 +2721,48 @@ export interface CreateProcedureTemplateRequest {
     ReviewAudioVideoTask?: ProcedureReviewAudioVideoTaskInput;
 }
 /**
+ * 转动图任务结果类型
+ */
+export interface MediaProcessTaskAnimatedGraphicResult {
+    /**
+     * 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。
+     */
+    Status?: string;
+    /**
+     * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/266/50368#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+     */
+    ErrCodeExt?: string;
+    /**
+     * 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。
+     */
+    ErrCode?: number;
+    /**
+     * 错误信息。
+     */
+    Message?: string;
+    /**
+     * 转动图任务的输入。
+     */
+    Input?: AnimatedGraphicTaskInput;
+    /**
+     * 转动图任务的输出。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Output?: MediaAnimatedGraphicsItem;
+    /**
+     * 转动图任务进度，取值范围 [0-100] 。
+     */
+    Progress?: number;
+    /**
+     * 转动图任务开始执行的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+     */
+    BeginProcessTime?: string;
+    /**
+     * 转动图任务执行完毕的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+     */
+    FinishTime?: string;
+}
+/**
  * DescribeMediaProcessUsageData请求参数结构体
  */
 export interface DescribeMediaProcessUsageDataRequest {
@@ -3597,6 +3698,44 @@ export interface ModifyQualityInspectTemplateResponse {
     RequestId?: string;
 }
 /**
+ * 即时转码视频模板更新配置。
+ */
+export interface VideoConfigureInfoForUpdate {
+    /**
+     * 视频流宽度（或长边）的最大值，取值范围：0 和 [128, 1920]，单位：px。
+  <li>当 Width、Height 均为 0，则分辨率同源；</li>
+  <li>当 Width 为 0，Height 非 0，则 Width 按比例缩放；</li>
+  <li>当 Width 非 0，Height 为 0，则 Height 按比例缩放；</li>
+  <li>当 Width、Height 均非 0，则分辨率按用户指定。</li>
+  
+  默认值：0。
+     */
+    Width?: number;
+    /**
+     * 视频流高度（或短边）的最大值，取值范围：0 和 [128, 1920]，单位：px。
+  <li>当 Width、Height 均为 0，则分辨率同源；</li>
+  <li>当 Width 为 0，Height 非 0，则 Width 按比例缩放；</li>
+  <li>当 Width 非 0，Height 为 0，则 Height 按比例缩放；</li>
+  <li>当 Width、Height 均非 0，则分辨率按用户指定。</li>
+  
+  默认值：0。
+     */
+    Height?: number;
+    /**
+     * 分辨率自适应，可选值：
+  <li>open：开启，此时，Width 代表视频的长边，Height 表示视频的短边；</li>
+  <li>close：关闭，此时，Width 代表视频的宽度，Height 表示视频的高度。</li>
+  
+  默认值：open。
+     */
+    ResolutionAdaptive?: string;
+    /**
+     * 视频流的码率，取值范围：0 和 [128, 10000]，单位：kbps。
+  当取值为 0，表示视频码率和原始视频保持一致。
+     */
+    Bitrate?: number;
+}
+/**
  * ModifyAdaptiveDynamicStreamingTemplate请求参数结构体
  */
 export interface ModifyAdaptiveDynamicStreamingTemplateRequest {
@@ -4460,46 +4599,25 @@ export interface ProductInstanceRecource {
     Left?: number;
 }
 /**
- * 转动图任务结果类型
+ * 人脸识别结果片段
  */
-export interface MediaProcessTaskAnimatedGraphicResult {
+export interface AiRecognitionTaskFaceSegmentItem {
     /**
-     * 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。
+     * 识别片段起始的偏移时间，单位：秒。
      */
-    Status?: string;
+    StartTimeOffset: number;
     /**
-     * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/266/50368#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+     * 识别片段终止的偏移时间，单位：秒。
      */
-    ErrCodeExt?: string;
+    EndTimeOffset: number;
     /**
-     * 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。
+     * 识别片段置信度。取值：0~100。
      */
-    ErrCode?: number;
+    Confidence: number;
     /**
-     * 错误信息。
+     * 识别结果的区域坐标。数组包含 4 个元素 [x1,y1,x2,y2]，依次表示区域左上点、右下点的横纵坐标。
      */
-    Message?: string;
-    /**
-     * 转动图任务的输入。
-     */
-    Input?: AnimatedGraphicTaskInput;
-    /**
-     * 转动图任务的输出。
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Output?: MediaAnimatedGraphicsItem;
-    /**
-     * 转动图任务进度，取值范围 [0-100] 。
-     */
-    Progress?: number;
-    /**
-     * 转动图任务开始执行的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
-     */
-    BeginProcessTime?: string;
-    /**
-     * 转动图任务执行完毕的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
-     */
-    FinishTime?: string;
+    AreaCoordSet: Array<number | bigint>;
 }
 /**
  * ProcessMedia返回参数结构体
@@ -4698,6 +4816,39 @@ export interface AiReviewTaskTerrorismOcrResult {
      * 音视频审核 Ocr 文字涉及令人不安全的信息的任务进度，取值范围 [0-100] 。
      */
     Progress?: number;
+}
+/**
+ * 即时转码水印模板更新配置。
+ */
+export interface WatermarkConfigureInfoForUpdate {
+    /**
+     * 是否启用水印。可取值：
+  <li>ON：表示启用水印；</li>
+  <li>OFF：表示关闭水印。</li>
+     */
+    Switch?: string;
+    /**
+     * 水印图片 Base64 编码后的字符串。支持 jpeg、png 图片格式。
+     */
+    ImageContent?: string;
+    /**
+     * 水印的宽度。
+  <li>字符串以 % 结尾，表示水印 Width 为视频宽度的百分比大小，如 10% 表示 Width 为视频宽度的 10%；</li>
+     */
+    Width?: string;
+    /**
+     * 水印的高度。
+  <li>字符串以 % 结尾，表示水印 Height 为视频高度的百分比大小，如 10% 表示 Height 为视频高度的 10%；</li>
+     */
+    Height?: string;
+    /**
+     * 水印原点距离视频图像坐标原点的水平位置。字符串以 % 结尾，表示水印 XPos 为视频宽度指定百分比，如 10% 表示 XPos 为视频宽度的 10%；
+     */
+    XPos?: string;
+    /**
+     * 水印原点距离视频图像坐标原点的垂直位置。当字符串以 % 结尾，表示水印 YPos 为视频高度指定百分比，如 10% 表示 YPos 为视频高度的 10%。
+     */
+    YPos?: string;
 }
 /**
  * 文本关键识别结果。
@@ -5392,58 +5543,21 @@ export interface MediaProcessTaskImageSpriteResult {
     FinishTime?: string;
 }
 /**
- * 降码率任务信息
+ * DescribeJustInTimeTranscodeTemplates返回参数结构体
  */
-export interface ReduceMediaBitrateTask {
+export interface DescribeJustInTimeTranscodeTemplatesResponse {
     /**
-     * 视频处理任务 ID。
+     * 符合过滤条件的记录总数。
      */
-    TaskId?: string;
+    TotalCount?: number;
     /**
-     * 任务流状态，取值：
-  <li>PROCESSING：处理中；</li>
-  <li>FINISH：已完成。</li>
+     * 模板详情列表。
      */
-    Status?: string;
+    JustInTimeTranscodeTemplateSet?: Array<JustInTimeTranscodeTemplate>;
     /**
-     * 媒体文件 ID。
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
-    FileId?: string;
-    /**
-     * 媒体文件名称。
-     */
-    FileName?: string;
-    /**
-     * 媒体文件地址。
-     */
-    FileUrl?: string;
-    /**
-     * 原始视频的元信息。
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    MetaData?: MediaMetaData;
-    /**
-     * 降码率任务执行状态与结果。
-     */
-    MediaProcessResultSet?: Array<ReduceMediaBitrateMediaProcessTaskResult>;
-    /**
-     * 任务流的优先级，取值范围为 [-10, 10]。
-     */
-    TasksPriority?: number;
-    /**
-     * 任务流状态变更通知模式。
-  <li>Finish：只有当任务流全部执行完毕时，才发起一次事件通知；</li>
-  <li>None：不接受该任务流回调。</li>
-     */
-    TasksNotifyMode?: string;
-    /**
-     * 来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长 1000 个字符。
-     */
-    SessionContext?: string;
-    /**
-     * 用于去重的识别码，如果七天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。
-     */
-    SessionId?: string;
+    RequestId?: string;
 }
 /**
  * 视频画面花屏检测的控制参数。
@@ -5926,17 +6040,23 @@ export interface ModifyAnimatedGraphicsTemplateRequest {
     Comment?: string;
 }
 /**
- * DescribeAIAnalysisTemplates请求参数结构体
+ * DescribeProcedureTemplates请求参数结构体
  */
-export interface DescribeAIAnalysisTemplatesRequest {
+export interface DescribeProcedureTemplatesRequest {
     /**
      * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
      */
     SubAppId?: number;
     /**
-     * 音视频内容分析模板唯一标识过滤条件，数组长度最大值：100。
+     * 任务流模板名字过滤条件，数组长度限制：100。
      */
-    Definitions?: Array<number | bigint>;
+    Names?: Array<string>;
+    /**
+     * 任务流模板类型过滤条件，可选值：
+  <li>Preset：系统预置任务流模板；</li>
+  <li>Custom：用户自定义任务流模板。</li>
+     */
+    Type?: string;
     /**
      * 分页偏移量，默认值：0。
      */
@@ -6882,25 +7002,46 @@ export interface EditMediaTask {
     SessionContext?: string;
 }
 /**
- * 人脸识别结果片段
+ * CreateJustInTimeTranscodeTemplate返回参数结构体
  */
-export interface AiRecognitionTaskFaceSegmentItem {
+export interface CreateJustInTimeTranscodeTemplateResponse {
     /**
-     * 识别片段起始的偏移时间，单位：秒。
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
-    StartTimeOffset: number;
+    RequestId?: string;
+}
+/**
+ * 即时转码水印模板配置。
+ */
+export interface WatermarkConfigureData {
     /**
-     * 识别片段终止的偏移时间，单位：秒。
+     * 是否启用水印。可取值：
+  <li>ON：表示启用水印；</li>
+  <li>OFF：表示关闭水印。</li>
      */
-    EndTimeOffset: number;
+    Switch?: string;
     /**
-     * 识别片段置信度。取值：0~100。
+     * 水印 Url。
      */
-    Confidence: number;
+    Url?: string;
     /**
-     * 识别结果的区域坐标。数组包含 4 个元素 [x1,y1,x2,y2]，依次表示区域左上点、右下点的横纵坐标。
+     * 水印的宽度。
+  <li>字符串以 % 结尾，表示水印 Width 为视频宽度的百分比大小，如 10% 表示 Width 为视频宽度的 10%；</li>
      */
-    AreaCoordSet: Array<number | bigint>;
+    Width?: string;
+    /**
+     * 水印的高度。
+  <li>字符串以 % 结尾，表示水印 Height 为视频高度的百分比大小，如 10% 表示 Height 为视频高度的 10%；</li>
+     */
+    Height?: string;
+    /**
+     * 水印原点距离视频图像坐标原点的水平位置。字符串以 % 结尾，表示水印 XPos 为视频宽度指定百分比，如 10% 表示 XPos 为视频宽度的 10%；
+     */
+    XPos?: string;
+    /**
+     * 水印原点距离视频图像坐标原点的垂直位置。当字符串以 % 结尾，表示水印 YPos 为视频高度指定百分比，如 10% 表示 YPos 为视频高度的 10%。
+     */
+    YPos?: string;
 }
 /**
  * DeleteMedia返回参数结构体
@@ -7567,6 +7708,31 @@ export interface EnhanceMediaByTemplateResponse {
     RequestId?: string;
 }
 /**
+ * CreateJustInTimeTranscodeTemplate请求参数结构体
+ */
+export interface CreateJustInTimeTranscodeTemplateRequest {
+    /**
+     * 模板名字，长度限制64个字符。
+     */
+    Name: string;
+    /**
+     * 视频参数配置。
+     */
+    VideoConfigure: VideoConfigureInfo;
+    /**
+     * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
+     */
+    SubAppId?: number;
+    /**
+     * 水印参数配置。
+     */
+    WatermarkConfigure?: WatermarkConfigureInfo;
+    /**
+     * 模板描述，长度限制256个字符。
+     */
+    Comment?: string;
+}
+/**
  * ManageTask请求参数结构体
  */
 export interface ManageTaskRequest {
@@ -8050,17 +8216,21 @@ export interface DeleteRebuildMediaTemplateResponse {
     RequestId?: string;
 }
 /**
- * DeleteRebuildMediaTemplate请求参数结构体
+ * DescribeSubAppIds返回参数结构体
  */
-export interface DeleteRebuildMediaTemplateRequest {
+export interface DescribeSubAppIdsResponse {
     /**
-     * 视频重生模板号。
+     * 子应用信息集合。
      */
-    Definition: number;
+    SubAppIdInfoSet?: Array<SubAppIdInfo>;
     /**
-     * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
+     * 子应用总数量。
      */
-    SubAppId?: number;
+    TotalCount?: number;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * SimpleHlsClip请求参数结构体
@@ -8883,6 +9053,15 @@ export interface ImageScale {
     ShortEdge?: number;
 }
 /**
+ * ModifyJustInTimeTranscodeTemplate返回参数结构体
+ */
+export interface ModifyJustInTimeTranscodeTemplateResponse {
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * 图片智能内容识别任务输入
  */
 export interface ImageContentReviewInput {
@@ -9219,6 +9398,44 @@ export interface MediaSnapshotByTimeOffsetInfo {
      * 特定规格的指定时间点截图信息集合。目前每种规格只能有一套截图。
      */
     SnapshotByTimeOffsetSet: Array<MediaSnapshotByTimeOffsetItem>;
+}
+/**
+ * 即时转码视频模板配置。
+ */
+export interface VideoConfigureInfo {
+    /**
+     * 视频流宽度（或长边）的最大值，取值范围：0 和 [128, 1920]，单位：px。
+  <li>当 Width、Height 均为 0，则分辨率同源；</li>
+  <li>当 Width 为 0，Height 非 0，则 Width 按比例缩放；</li>
+  <li>当 Width 非 0，Height 为 0，则 Height 按比例缩放；</li>
+  <li>当 Width、Height 均非 0，则分辨率按用户指定。</li>
+  
+  默认值：0。
+     */
+    Width?: number;
+    /**
+     * 视频流高度（或短边）的最大值，取值范围：0 和 [128, 1920]，单位：px。
+  <li>当 Width、Height 均为 0，则分辨率同源；</li>
+  <li>当 Width 为 0，Height 非 0，则 Width 按比例缩放；</li>
+  <li>当 Width 非 0，Height 为 0，则 Height 按比例缩放；</li>
+  <li>当 Width、Height 均非 0，则分辨率按用户指定。</li>
+  
+  默认值：0。
+     */
+    Height?: number;
+    /**
+     * 分辨率自适应，可选值：
+  <li>open：开启，此时，Width 代表视频的长边，Height 表示视频的短边；</li>
+  <li>close：关闭，此时，Width 代表视频的宽度，Height 表示视频的高度。</li>
+  
+  默认值：open。
+     */
+    ResolutionAdaptive?: string;
+    /**
+     * 视频流的码率，取值范围：0 和 [128, 10000]，单位：kbps。
+  当取值为 0，表示视频码率和原始视频保持一致。
+     */
+    Bitrate?: number;
 }
 /**
  * DescribeImageSpriteTemplates请求参数结构体
@@ -11463,6 +11680,33 @@ export interface DescribeCDNUsageDataRequest {
     DomainNames?: Array<string>;
 }
 /**
+ * 即时转码模板详情。
+ */
+export interface JustInTimeTranscodeTemplate {
+    /**
+     * 模板类型。
+     */
+    Type?: string;
+    /**
+     * 模板名。
+     */
+    Name?: string;
+    /**
+     * 模板描述。
+     */
+    Comment?: string;
+    /**
+     * 视频参数配置。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    VideoConfigure?: VideoConfigureInfo;
+    /**
+     * 水印参数配置。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    WatermarkConfigure?: WatermarkConfigureData;
+}
+/**
  * 文本鉴别涉及令人反感的信息的任务控制参数
  */
 export interface PornOcrReviewTemplateInfo {
@@ -13693,21 +13937,17 @@ export interface InspectMediaQualityResponse {
     RequestId?: string;
 }
 /**
- * DescribeSubAppIds返回参数结构体
+ * DeleteRebuildMediaTemplate请求参数结构体
  */
-export interface DescribeSubAppIdsResponse {
+export interface DeleteRebuildMediaTemplateRequest {
     /**
-     * 子应用信息集合。
+     * 视频重生模板号。
      */
-    SubAppIdInfoSet?: Array<SubAppIdInfo>;
+    Definition: number;
     /**
-     * 子应用总数量。
+     * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
      */
-    TotalCount?: number;
-    /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
+    SubAppId?: number;
 }
 /**
  * CreateDomainVerifyRecord请求参数结构体
@@ -14060,6 +14300,39 @@ export interface TransitionOperation {
   </ul>
      */
     Type: string;
+}
+/**
+ * 即时转码水印模板配置。
+ */
+export interface WatermarkConfigureInfo {
+    /**
+     * 是否启用水印。可取值：
+  <li>ON：表示启用水印；</li>
+  <li>OFF：表示关闭水印。</li>
+     */
+    Switch: string;
+    /**
+     * 水印图片 Base64 编码后的字符串。支持 jpeg、png 图片格式。
+     */
+    ImageContent?: string;
+    /**
+     * 水印的宽度。
+  <li>字符串以 % 结尾，表示水印 Width 为视频宽度的百分比大小，如 10% 表示 Width 为视频宽度的 10%；</li>
+     */
+    Width?: string;
+    /**
+     * 水印的高度。
+  <li>字符串以 % 结尾，表示水印 Height 为视频高度的百分比大小，如 10% 表示 Height 为视频高度的 10%；</li>
+     */
+    Height?: string;
+    /**
+     * 水印原点距离视频图像坐标原点的水平位置。字符串以 % 结尾，表示水印 XPos 为视频宽度指定百分比，如 10% 表示 XPos 为视频宽度的 10%；
+     */
+    XPos?: string;
+    /**
+     * 水印原点距离视频图像坐标原点的垂直位置。当字符串以 % 结尾，表示水印 YPos 为视频高度指定百分比，如 10% 表示 YPos 为视频高度的 10%。
+     */
+    YPos?: string;
 }
 /**
  * 智能按帧标签任务输入类型
@@ -15972,6 +16245,60 @@ export interface AiContentReviewResult {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     ProhibitedAsrTask?: AiReviewTaskProhibitedAsrResult;
+}
+/**
+ * 降码率任务信息
+ */
+export interface ReduceMediaBitrateTask {
+    /**
+     * 视频处理任务 ID。
+     */
+    TaskId?: string;
+    /**
+     * 任务流状态，取值：
+  <li>PROCESSING：处理中；</li>
+  <li>FINISH：已完成。</li>
+     */
+    Status?: string;
+    /**
+     * 媒体文件 ID。
+     */
+    FileId?: string;
+    /**
+     * 媒体文件名称。
+     */
+    FileName?: string;
+    /**
+     * 媒体文件地址。
+     */
+    FileUrl?: string;
+    /**
+     * 原始视频的元信息。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MetaData?: MediaMetaData;
+    /**
+     * 降码率任务执行状态与结果。
+     */
+    MediaProcessResultSet?: Array<ReduceMediaBitrateMediaProcessTaskResult>;
+    /**
+     * 任务流的优先级，取值范围为 [-10, 10]。
+     */
+    TasksPriority?: number;
+    /**
+     * 任务流状态变更通知模式。
+  <li>Finish：只有当任务流全部执行完毕时，才发起一次事件通知；</li>
+  <li>None：不接受该任务流回调。</li>
+     */
+    TasksNotifyMode?: string;
+    /**
+     * 来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长 1000 个字符。
+     */
+    SessionContext?: string;
+    /**
+     * 用于去重的识别码，如果七天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。
+     */
+    SessionId?: string;
 }
 /**
  * 画面鉴别涉及令人不安全的信息的任务控制参数
@@ -18921,6 +19248,15 @@ export interface ComposeMediaOutput {
     RemoveAudio?: number;
 }
 /**
+ * DeleteJustInTimeTranscodeTemplate返回参数结构体
+ */
+export interface DeleteJustInTimeTranscodeTemplateResponse {
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * ModifyWatermarkTemplate返回参数结构体
  */
 export interface ModifyWatermarkTemplateResponse {
@@ -18934,19 +19270,19 @@ export interface ModifyWatermarkTemplateResponse {
     RequestId?: string;
 }
 /**
- * DescribeProcedureTemplates请求参数结构体
+ * DescribeJustInTimeTranscodeTemplates请求参数结构体
  */
-export interface DescribeProcedureTemplatesRequest {
+export interface DescribeJustInTimeTranscodeTemplatesRequest {
+    /**
+     * 模板名过滤条件，数组长度限制：100。
+     */
+    Names?: Array<string>;
     /**
      * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
      */
     SubAppId?: number;
     /**
-     * 任务流模板名字过滤条件，数组长度限制：100。
-     */
-    Names?: Array<string>;
-    /**
-     * 任务流模板类型过滤条件，可选值：
+     * 模板类型过滤条件，可选值：
   <li>Preset：系统预置任务流模板；</li>
   <li>Custom：用户自定义任务流模板。</li>
      */

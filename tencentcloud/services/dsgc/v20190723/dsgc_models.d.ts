@@ -164,11 +164,11 @@ export interface DescribeDSPARDBDataAssetDetailResponse {
      * RDB关系数据库敏感数据资产详情列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Details: Array<DspaRDBDataAssetDetail>;
+    Details?: Array<DspaRDBDataAssetDetail>;
     /**
      * 符合条件的RDB关系数据库敏感数据资产数量
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -561,6 +561,24 @@ export interface ModifyDSPATaskResultRequest {
      * 调整后新的分级ID
      */
     DestLevelId?: number;
+    /**
+     * 调整前的规则ID
+  
+     */
+    SrcRuleId?: number;
+    /**
+     * 调整之前的分类id
+     */
+    SrcCategoryId?: number;
+    /**
+     * 调整之前的分级id
+     */
+    SrcLevelId?: number;
+    /**
+     * 识别方式
+  0-系统识别，1-人工打标
+     */
+    IdentifyType?: number;
 }
 /**
  * rdb的资产统计结果
@@ -1244,6 +1262,22 @@ export interface ModifyDSPAESTaskResultRequest {
      * 调整后新的分级ID
      */
     DestLevelId?: number;
+    /**
+     * 调整前的规则id（系统识别的id）
+     */
+    SrcRuleId?: number;
+    /**
+     * 调整前的规则id（系统识别的id）
+     */
+    SrcCategoryId?: number;
+    /**
+     * 调整前的等级id
+     */
+    SrcLevelId?: number;
+    /**
+     * 0系统识别，1人工打标
+     */
+    IdentifyType?: number;
 }
 /**
  * DescribeDSPACOSDataAssetByComplianceId请求参数结构体
@@ -4580,85 +4614,100 @@ export interface DspaRDBDataAssetDetail {
     /**
      * 数据源ID
      */
-    DataSourceId: string;
+    DataSourceId?: string;
     /**
      * 数据库类型
      */
-    DbType: string;
+    DbType?: string;
     /**
      * 数据库名称
      */
-    DbName: string;
+    DbName?: string;
     /**
      * 数据库表名称
      */
-    TableName: string;
+    TableName?: string;
     /**
      * 数据库表字段名称
      */
-    FieldName: string;
+    FieldName?: string;
     /**
      * 规则名称
      */
-    RuleName: string;
+    RuleName?: string;
     /**
      * 数据分类
      */
-    CategoryName: string;
+    CategoryName?: string;
     /**
      * 敏感等级
      */
-    LevelRiskName: string;
+    LevelRiskName?: string;
     /**
      * 分级风险分数，1-10，最小值为1，最大值为10
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    LevelRiskScore: number;
+    LevelRiskScore?: number;
     /**
      * 可信分
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TrustedScore: string;
+    TrustedScore?: string;
     /**
      * 资源所在地域
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ResourceRegion: string;
+    ResourceRegion?: string;
     /**
      * 字段扫描结果ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    FieldResultId: string;
+    FieldResultId?: string;
     /**
      * 规则ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    RuleId: number;
+    RuleId?: number;
     /**
      * 分级ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    LevelId: number;
+    LevelId?: number;
     /**
      * 分类ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CategoryId: number;
+    CategoryId?: number;
     /**
      * 数据源名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DataSourceName: string;
+    DataSourceName?: string;
     /**
      * 保护措施
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SafeGuard: DspaSafeGuard;
+    SafeGuard?: DspaSafeGuard;
     /**
      * 分类路径
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CategoryFullPath: string;
+    CategoryFullPath?: string;
+    /**
+     * 0.系统识别，1人工打标
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IdentifyType?: number;
+    /**
+     * 0未核查 1已核查
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CheckStatus?: number;
+    /**
+     * 0非敏感，1敏感
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IsSensitiveData?: number;
 }
 /**
  * 敏感数据识别规则
@@ -6659,6 +6708,11 @@ export interface DescribeDSPARDBDataAssetDetailRequest {
      * 合规组Id
      */
     ComplianceId: number;
+    /**
+     * 可信分排序，ASC-升序
+  DESC降序
+     */
+    CreditScore?: string;
 }
 /**
  * DescribeDSPACOSDataAssetDetail返回参数结构体
@@ -8478,6 +8532,11 @@ export interface DescribeDSPAESDataAssetDetailRequest {
      * 过滤条件
      */
     Filters?: Array<Filter>;
+    /**
+     * 可信分排序，ASC升序
+  DESC降序
+     */
+    CreditScore?: string;
 }
 /**
  * ListDSPAMetaResources返回参数结构体
@@ -8755,6 +8814,14 @@ export interface ESDataAssetDetail {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     RuleName?: string;
+    /**
+     * 0系统识别，1人工打标
+     */
+    IdentifyType?: number;
+    /**
+     * 0未核查，1已核查
+     */
+    CheckStatus?: number;
 }
 /**
  * DescribeDSPACOSTaskResultDetail请求参数结构体

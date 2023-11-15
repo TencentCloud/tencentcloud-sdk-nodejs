@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { CancelVRSTaskRequest, CancelVRSTaskResponse, DescribeVRSTaskStatusResponse, CreateVRSTaskResponse, GetTrainingTextResponse, DescribeVRSTaskStatusRequest, DetectEnvAndSoundQualityRequest, DownloadVRSModelResponse, DownloadVRSModelRequest, GetTrainingTextRequest, CreateVRSTaskRequest, DetectEnvAndSoundQualityResponse } from "./vrs_models";
+import { CancelVRSTaskRequest, DescribeVRSTaskStatusResponse, GetTrainingTextRequest, DownloadVRSModelRequest, DownloadVRSModelResponse, GetVRSVoiceTypesResponse, CancelVRSTaskResponse, CreateVRSTaskResponse, GetVRSVoiceTypesRequest, GetTrainingTextResponse, DescribeVRSTaskStatusRequest, CreateVRSTaskRequest, DetectEnvAndSoundQualityResponse, DetectEnvAndSoundQualityRequest } from "./vrs_models";
 /**
  * vrs client
  * @class
@@ -35,6 +35,10 @@ export declare class Client extends AbstractClient {
 • 签名方法参考 公共参数 中签名方法v3。
      */
     CreateVRSTask(req: CreateVRSTaskRequest, cb?: (error: string, rep: CreateVRSTaskResponse) => void): Promise<CreateVRSTaskResponse>;
+    /**
+     * 查询复刻音色
+     */
+    GetVRSVoiceTypes(req?: GetVRSVoiceTypesRequest, cb?: (error: string, rep: GetVRSVoiceTypesResponse) => void): Promise<GetVRSVoiceTypesResponse>;
     /**
      * 本接口用于获取声音复刻训练文本信息。
  请求方法为 HTTP POST , Content-Type为"application/json; charset=utf-8"

@@ -27,12 +27,12 @@ import {
   PrestoMonitorMetrics,
   DescribeNotebookSessionStatementRequest,
   SmartOptimizerIndexPolicy,
-  ModifyDataEngineDescriptionRequest,
+  DataEngineBasicInfo,
   CancelNotebookSessionStatementRequest,
   DescribeNotebookSessionStatementSqlResultRequest,
   DescribeDatabasesRequest,
   IpPortPair,
-  WorkGroupMessage,
+  DescribeUpdatableDataEnginesResponse,
   DeleteUserRequest,
   DescribeUserDataEngineConfigResponse,
   ListTaskJobLogDetailResponse,
@@ -68,7 +68,7 @@ import {
   DeleteScriptResponse,
   UserDetailInfo,
   TableInfo,
-  Task,
+  ModifyDataEngineDescriptionRequest,
   DataEngineConfigInstanceInfo,
   DescribeWorkGroupsRequest,
   CrontabResumeSuspendStrategy,
@@ -98,6 +98,7 @@ import {
   CreateDatabaseRequest,
   GenerateCreateMangedTableSqlResponse,
   DescribeDMSTablesResponse,
+  WorkGroupMessage,
   UpdateDataEngineConfigResponse,
   UserIdSetOfWorkGroupId,
   AlterDMSPartitionRequest,
@@ -165,6 +166,7 @@ import {
   DescribeSparkSessionBatchSqlLogRequest,
   DescribeScriptsRequest,
   TasksOverview,
+  DescribeUpdatableDataEnginesRequest,
   ModifyGovernEventRuleRequest,
   DescribeSparkAppJobResponse,
   SmartOptimizerLifecyclePolicy,
@@ -301,6 +303,7 @@ import {
   LockMetaDataRequest,
   ModifyUserTypeResponse,
   DataSourceInfo,
+  Task,
   CancelSparkSessionBatchSQLRequest,
   DeleteUsersFromWorkGroupResponse,
   DescribeUserDataEngineConfigRequest,
@@ -775,13 +778,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（ListTaskJobLogDetail）用于获取spark 作业任务日志详情
+   * 查询可更新配置的引擎列表
    */
-  async ListTaskJobLogDetail(
-    req: ListTaskJobLogDetailRequest,
-    cb?: (error: string, rep: ListTaskJobLogDetailResponse) => void
-  ): Promise<ListTaskJobLogDetailResponse> {
-    return this.request("ListTaskJobLogDetail", req, cb)
+  async DescribeUpdatableDataEngines(
+    req: DescribeUpdatableDataEnginesRequest,
+    cb?: (error: string, rep: DescribeUpdatableDataEnginesResponse) => void
+  ): Promise<DescribeUpdatableDataEnginesResponse> {
+    return this.request("DescribeUpdatableDataEngines", req, cb)
   }
 
   /**
@@ -1552,6 +1555,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDataEnginePythonSparkImagesResponse) => void
   ): Promise<DescribeDataEnginePythonSparkImagesResponse> {
     return this.request("DescribeDataEnginePythonSparkImages", req, cb)
+  }
+
+  /**
+   * 本接口（ListTaskJobLogDetail）用于获取spark 作业任务日志详情
+   */
+  async ListTaskJobLogDetail(
+    req: ListTaskJobLogDetailRequest,
+    cb?: (error: string, rep: ListTaskJobLogDetailResponse) => void
+  ): Promise<ListTaskJobLogDetailResponse> {
+    return this.request("ListTaskJobLogDetail", req, cb)
   }
 
   /**

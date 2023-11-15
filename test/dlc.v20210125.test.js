@@ -428,9 +428,9 @@ it("dlc.v20210125.ReportHeartbeatMetaData", async function () {
     }
 })
 
-it("dlc.v20210125.ListTaskJobLogDetail", async function () {
+it("dlc.v20210125.DescribeUpdatableDataEngines", async function () {
     try {
-       const data = await client.ListTaskJobLogDetail({})
+       const data = await client.DescribeUpdatableDataEngines({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1201,6 +1201,16 @@ it("dlc.v20210125.DescribeSparkAppTasks", async function () {
 it("dlc.v20210125.DescribeDataEnginePythonSparkImages", async function () {
     try {
        const data = await client.DescribeDataEnginePythonSparkImages({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dlc.v20210125.ListTaskJobLogDetail", async function () {
+    try {
+       const data = await client.ListTaskJobLogDetail({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

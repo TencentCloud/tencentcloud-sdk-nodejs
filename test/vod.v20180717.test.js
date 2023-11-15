@@ -78,6 +78,16 @@ it("vod.v20180717.EditMedia", async function () {
     }
 })
 
+it("vod.v20180717.ModifyJustInTimeTranscodeTemplate", async function () {
+    try {
+       const data = await client.ModifyJustInTimeTranscodeTemplate({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vod.v20180717.DescribeVodDomains", async function () {
     try {
        const data = await client.DescribeVodDomains({})
@@ -548,9 +558,9 @@ it("vod.v20180717.DeleteAIAnalysisTemplate", async function () {
     }
 })
 
-it("vod.v20180717.DescribeMediaInfos", async function () {
+it("vod.v20180717.DescribeDrmKeyProviderInfo", async function () {
     try {
-       const data = await client.DescribeMediaInfos({})
+       const data = await client.DescribeDrmKeyProviderInfo({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1258,9 +1268,9 @@ it("vod.v20180717.SetDrmKeyProviderInfo", async function () {
     }
 })
 
-it("vod.v20180717.RebuildMediaByTemplate", async function () {
+it("vod.v20180717.DescribeJustInTimeTranscodeTemplates", async function () {
     try {
-       const data = await client.RebuildMediaByTemplate({})
+       const data = await client.DescribeJustInTimeTranscodeTemplates({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1301,6 +1311,16 @@ it("vod.v20180717.DeleteQualityInspectTemplate", async function () {
 it("vod.v20180717.DescribeQualityInspectTemplates", async function () {
     try {
        const data = await client.DescribeQualityInspectTemplates({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("vod.v20180717.CreateJustInTimeTranscodeTemplate", async function () {
+    try {
+       const data = await client.CreateJustInTimeTranscodeTemplate({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1391,6 +1411,16 @@ it("vod.v20180717.SearchMedia", async function () {
 it("vod.v20180717.DeleteWatermarkTemplate", async function () {
     try {
        const data = await client.DeleteWatermarkTemplate({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("vod.v20180717.DeleteJustInTimeTranscodeTemplate", async function () {
+    try {
+       const data = await client.DeleteJustInTimeTranscodeTemplate({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1508,9 +1538,19 @@ it("vod.v20180717.SimpleHlsClip", async function () {
     }
 })
 
-it("vod.v20180717.DescribeDrmKeyProviderInfo", async function () {
+it("vod.v20180717.DescribeMediaInfos", async function () {
     try {
-       const data = await client.DescribeDrmKeyProviderInfo({})
+       const data = await client.DescribeMediaInfos({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("vod.v20180717.RebuildMediaByTemplate", async function () {
+    try {
+       const data = await client.RebuildMediaByTemplate({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

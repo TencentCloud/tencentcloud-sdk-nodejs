@@ -18,9 +18,79 @@ const client = new tencentcloud.hai.v20230812.Client({
 })
 describe("hai.v20230812.test.js", function () {
 
+it("hai.v20230812.DescribeServiceLoginSettings", async function () {
+    try {
+       const data = await client.DescribeServiceLoginSettings({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("hai.v20230812.DescribeApplications", async function () {
+    try {
+       const data = await client.DescribeApplications({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("hai.v20230812.DescribeScenes", async function () {
+    try {
+       const data = await client.DescribeScenes({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("hai.v20230812.DescribeRegions", async function () {
+    try {
+       const data = await client.DescribeRegions({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("hai.v20230812.RunInstances", async function () {
     try {
        const data = await client.RunInstances({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("hai.v20230812.DescribeInstanceNetworkStatus", async function () {
+    try {
+       const data = await client.DescribeInstanceNetworkStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("hai.v20230812.DescribeInstances", async function () {
+    try {
+       const data = await client.DescribeInstances({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("hai.v20230812.InquirePriceRunInstances", async function () {
+    try {
+       const data = await client.InquirePriceRunInstances({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

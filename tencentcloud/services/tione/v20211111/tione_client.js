@@ -82,6 +82,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeTrainingTask", req, cb);
     }
     /**
+     * 获取任务式建模训练任务，Notebook，在线服务和批量预测任务的事件API
+     */
+    async DescribeEvents(req, cb) {
+        return this.request("DescribeEvents", req, cb);
+    }
+    /**
      * 查询单个服务组
      */
     async DescribeModelServiceGroup(req, cb) {
@@ -286,7 +292,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDatasets", req, cb);
     }
     /**
-     * 获取训练、推理、Notebook服务的日志 API
+     * 获取任务式建模训练任务，Notebook，在线服务和批量预测任务的日志API
      */
     async DescribeLogs(req, cb) {
         return this.request("DescribeLogs", req, cb);

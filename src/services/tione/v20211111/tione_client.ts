@@ -87,6 +87,7 @@ import {
   CreateTrainingModelRequest,
   SchemaInfo,
   StartCmdInfo,
+  Event,
   DescribeAPIConfigsRequest,
   DescribeModelServiceGroupsResponse,
   DescribeBillingResourceInstanceRunningJobsResponse,
@@ -124,6 +125,7 @@ import {
   DescribeTrainingFrameworksRequest,
   DescribeBatchTasksResponse,
   CronScaleJob,
+  DescribeNotebooksResponse,
   InferTemplateGroup,
   DescribeModelServiceHotUpdatedResponse,
   DatasetInfo,
@@ -159,7 +161,7 @@ import {
   TextLabelDistributionDetailInfoFifthClass,
   BatchTaskInstance,
   CreateBatchTaskResponse,
-  DescribeNotebooksResponse,
+  DescribeEventsResponse,
   DeleteModelServiceResponse,
   DatasetGroup,
   DescribeTrainingModelsRequest,
@@ -168,6 +170,7 @@ import {
   Pod,
   DescribeLatestTrainingMetricsRequest,
   ResourceInfo,
+  OcrLabelInfo,
   DeleteBatchTaskRequest,
   GroupResource,
   DescribeModelServiceCallInfoResponse,
@@ -247,7 +250,7 @@ import {
   DescribeTrainingTaskPodsResponse,
   ModelAccelerateTask,
   EnvVar,
-  OcrLabelInfo,
+  DescribeEventsRequest,
   DeleteTrainingModelRequest,
   PointInfo,
   DescribeModelServiceHotUpdatedRequest,
@@ -363,6 +366,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeTrainingTaskResponse) => void
   ): Promise<DescribeTrainingTaskResponse> {
     return this.request("DescribeTrainingTask", req, cb)
+  }
+
+  /**
+   * 获取任务式建模训练任务，Notebook，在线服务和批量预测任务的事件API
+   */
+  async DescribeEvents(
+    req: DescribeEventsRequest,
+    cb?: (error: string, rep: DescribeEventsResponse) => void
+  ): Promise<DescribeEventsResponse> {
+    return this.request("DescribeEvents", req, cb)
   }
 
   /**
@@ -706,7 +719,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取训练、推理、Notebook服务的日志 API
+   * 获取任务式建模训练任务，Notebook，在线服务和批量预测任务的日志API
    */
   async DescribeLogs(
     req: DescribeLogsRequest,

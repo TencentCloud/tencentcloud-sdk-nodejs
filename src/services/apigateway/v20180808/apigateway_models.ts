@@ -2901,7 +2901,7 @@ export interface CreateAPIDocResponse {
   /**
    * API文档基本信息
    */
-  Result: APIDoc
+  Result?: APIDoc
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2954,6 +2954,10 @@ export interface CreateUsagePlanRequest {
    * 每秒请求限制数，取值范围为-1或者[1, 2000]，默认-1，表示不开启。
    */
   MaxRequestNumPreSec?: number
+  /**
+   * 标签
+   */
+  Tags?: Array<Tag>
 }
 
 /**
@@ -4263,59 +4267,64 @@ export interface APIDocInfo {
   /**
    * API文档ID
    */
-  ApiDocId: string
+  ApiDocId?: string
   /**
    * API文档名称
    */
-  ApiDocName: string
+  ApiDocName?: string
   /**
    * API文档构建状态
    */
-  ApiDocStatus: string
+  ApiDocStatus?: string
   /**
    * API文档API数量
    */
-  ApiCount: number
+  ApiCount?: number
   /**
    * API文档查看次数
    */
-  ViewCount: number
+  ViewCount?: number
   /**
    * API文档发布次数
    */
-  ReleaseCount: number
+  ReleaseCount?: number
   /**
    * API文档访问URI
    */
-  ApiDocUri: string
+  ApiDocUri?: string
   /**
    * API文档分享密码
    */
-  SharePassword: string
+  SharePassword?: string
   /**
    * API文档更新时间
    */
-  UpdatedTime: string
+  UpdatedTime?: string
   /**
    * 服务ID
    */
-  ServiceId: string
+  ServiceId?: string
   /**
    * 环境信息
    */
-  Environment: string
+  Environment?: string
   /**
    * 生成API文档的API ID
    */
-  ApiIds: Array<string>
+  ApiIds?: Array<string>
   /**
    * 服务名称
    */
-  ServiceName: string
+  ServiceName?: string
   /**
    * 生成API文档的API名称
    */
-  ApiNames: Array<string>
+  ApiNames?: Array<string>
+  /**
+   * 标签
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Tags?: Array<Tag>
 }
 
 /**
@@ -4889,7 +4898,7 @@ export interface CreateApiKeyResponse {
    * 新增的密钥详情。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Result: ApiKey
+  Result?: ApiKey
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5099,77 +5108,82 @@ export interface ApiUsagePlan {
    * 服务唯一ID。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ServiceId: string
+  ServiceId?: string
   /**
    * API 唯一 ID。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ApiId: string
+  ApiId?: string
   /**
    * API 名称。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ApiName: string
+  ApiName?: string
   /**
    * API 路径。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Path: string
+  Path?: string
   /**
    * API 方法。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Method: string
+  Method?: string
   /**
    * 使用计划的唯一 ID。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  UsagePlanId: string
+  UsagePlanId?: string
   /**
    * 使用计划的名称。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  UsagePlanName: string
+  UsagePlanName?: string
   /**
    * 使用计划的描述。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  UsagePlanDesc: string
+  UsagePlanDesc?: string
   /**
    * 使用计划绑定的服务环境。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Environment: string
+  Environment?: string
   /**
    * 已经使用的配额。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  InUseRequestNum: number
+  InUseRequestNum?: number
   /**
    * 请求配额总量，-1表示没有限制。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  MaxRequestNum: number
+  MaxRequestNum?: number
   /**
    * 请求 QPS 上限，-1 表示没有限制。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  MaxRequestNumPreSec: number
+  MaxRequestNumPreSec?: number
   /**
    * 使用计划创建时间。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CreatedTime: string
+  CreatedTime?: string
   /**
    * 使用计划最后修改时间。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ModifiedTime: string
+  ModifiedTime?: string
   /**
    * 服务名称。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ServiceName: string
+  ServiceName?: string
+  /**
+   * 标签
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Tags?: Array<Tag>
 }
 
 /**
@@ -5300,6 +5314,10 @@ export interface CreateAPIDocRequest {
    * 生成文档的API列表
    */
   ApiIds: Array<string>
+  /**
+   * 标签
+   */
+  Tags?: Array<Tag>
 }
 
 /**
@@ -5915,31 +5933,36 @@ export interface ApiKey {
   /**
    * 创建的 API 密钥 ID 。
    */
-  AccessKeyId: string
+  AccessKeyId?: string
   /**
    * 创建的 API 密钥 Key。
    */
-  AccessKeySecret: string
+  AccessKeySecret?: string
   /**
    * 密钥类型，auto 或者 manual。
    */
-  AccessKeyType: string
+  AccessKeyType?: string
   /**
    * 用户自定义密钥名称。
    */
-  SecretName: string
+  SecretName?: string
   /**
    * 最后一次修改时间。按照 ISO8601 标准表示，并且使用 UTC 时间。格式为：YYYY-MM-DDThh:mm:ssZ。
    */
-  ModifiedTime: string
+  ModifiedTime?: string
   /**
    * 密钥状态。0表示禁用，1表示启用。
    */
-  Status: number
+  Status?: number
   /**
    * 创建时间。按照 ISO8601 标准表示，并且使用 UTC 时间。格式为：YYYY-MM-DDThh:mm:ssZ。
    */
-  CreatedTime: string
+  CreatedTime?: string
+  /**
+   * 标签
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Tags?: Array<Tag>
 }
 
 /**
@@ -6373,57 +6396,62 @@ export interface UsagePlanInfo {
    * 使用计划唯一 ID。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  UsagePlanId: string
+  UsagePlanId?: string
   /**
    * 使用计划名称。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  UsagePlanName: string
+  UsagePlanName?: string
   /**
    * 使用计划描述。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  UsagePlanDesc: string
+  UsagePlanDesc?: string
   /**
    * 每秒请求限制数。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  MaxRequestNumPreSec: number
+  MaxRequestNumPreSec?: number
   /**
    * 最大调用次数。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  MaxRequestNum: number
+  MaxRequestNum?: number
   /**
    * 创建时间。按照 ISO8601 标准表示，并且使用 UTC 时间。格式为：YYYY-MM-DDThh:mm:ssZ。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CreatedTime: string
+  CreatedTime?: string
   /**
    * 最后修改时间。按照 ISO8601 标准表示，并且使用 UTC 时间。格式为：YYYY-MM-DDThh:mm:ssZ。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ModifiedTime: string
+  ModifiedTime?: string
   /**
    * 绑定密钥的数量。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  BindSecretIdTotalCount: number
+  BindSecretIdTotalCount?: number
   /**
    * 绑定密钥的详情。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  BindSecretIds: Array<string>
+  BindSecretIds?: Array<string>
   /**
    * 绑定环境数量。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  BindEnvironmentTotalCount: number
+  BindEnvironmentTotalCount?: number
   /**
    * 绑定环境详情。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  BindEnvironments: Array<UsagePlanBindEnvironment>
+  BindEnvironments?: Array<UsagePlanBindEnvironment>
+  /**
+   * 标签
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Tags?: Array<Tag>
 }
 
 /**
@@ -6681,37 +6709,42 @@ export interface UsagePlanStatusInfo {
    * 使用计划唯一 ID。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  UsagePlanId: string
+  UsagePlanId?: string
   /**
    * 用户自定义的使用计划名称。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  UsagePlanName: string
+  UsagePlanName?: string
   /**
    * 用户自定义的使用计划描述。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  UsagePlanDesc: string
+  UsagePlanDesc?: string
   /**
    * 每秒最大请求次数。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  MaxRequestNumPreSec: number
+  MaxRequestNumPreSec?: number
   /**
    * 请求配额总量，-1表示没有限制。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  MaxRequestNum: number
+  MaxRequestNum?: number
   /**
    * 创建时间。按照 ISO8601 标准表示，并且使用 UTC 时间。格式为：YYYY-MM-DDThh:mm:ssZ。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CreatedTime: string
+  CreatedTime?: string
   /**
    * 最后修改时间。按照 ISO8601 标准表示，并且使用 UTC 时间。格式为：YYYY-MM-DDThh:mm:ssZ。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ModifiedTime: string
+  ModifiedTime?: string
+  /**
+   * 标签
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Tags?: Array<Tag>
 }
 
 /**
@@ -6800,15 +6833,20 @@ export interface APIDoc {
   /**
    * API文档ID
    */
-  ApiDocId: string
+  ApiDocId?: string
   /**
    * API文档名称
    */
-  ApiDocName: string
+  ApiDocName?: string
   /**
    * API文档构建状态
    */
-  ApiDocStatus: string
+  ApiDocStatus?: string
+  /**
+   * 标签
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Tags?: Array<Tag>
 }
 
 /**
@@ -7226,4 +7264,8 @@ export interface CreateApiKeyRequest {
    * 用户自定义密钥 Key，AccessKeyType 为 manual 时必传。长度为10 - 50字符，由字母、数字、英文下划线。
    */
   AccessKeySecret?: string
+  /**
+   * 标签
+   */
+  Tags?: Array<Tag>
 }

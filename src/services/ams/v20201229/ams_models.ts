@@ -20,40 +20,40 @@
  */
 export interface TextResult {
   /**
-   * 恶意标签，Normal：正常，Porn：色情，Abuse：谩骂，Ad：广告，Custom：自定义词库。
+   * 恶意标签，Normal：正常，Porn：色情，Abuse：谩骂，Ad：广告。
 以及其他令人反感、不安全或不适宜的内容类型。
 
-如音频中无复杂类型「TextResults」的返回则代表改音频中无相关违规内容；
+如音频中无复杂类型「TextResults」的返回则代表该音频中无相关违规内容；
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Label: string
+  Label?: string
   /**
    * 命中的关键词，为空则代表该违规内容出自于模型的判断；
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Keywords: Array<string>
+  Keywords?: Array<string>
   /**
    * 命中关键词库的库标识；
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  LibId: string
+  LibId?: string
   /**
    * 命中关键词库的名字；
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  LibName: string
+  LibName?: string
   /**
    * 机器判断当前分类的置信度，取值范围：0~100。分数越高，表示越有可能属于当前分类。
 （如：Porn 99，则该样本属于色情的置信度非常高。）
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Score: number
+  Score?: number
   /**
    * 建议您拿到判断结果后的执行操作。
 建议值，Block：建议屏蔽，Review：建议复审，Pass：建议通过
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Suggestion: string
+  Suggestion?: string
   /**
    * 自定义词库的类型，自定义词库相关的信息可登录控制台中查看；
 
@@ -61,13 +61,13 @@ export interface TextResult {
 
 2：自定义库；
    */
-  LibType: number
+  LibType?: number
   /**
    * 该字段用于返回当前标签（Lable）下的二级标签。
 注意：此字段可能返回null，表示取不到有效值。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SubLabel: string
+  SubLabel?: string
 }
 
 /**
@@ -620,34 +620,34 @@ export interface RecognitionResult {
  */
 export interface MoanResult {
   /**
-   * 固定取值为Moan（呻吟/娇喘），如音频中无复杂类型「MoanResult」的返回则代表改音频中无呻吟/娇喘相关违规内容；
+   * 固定取值为Moan（呻吟/娇喘），如音频中无复杂类型「MoanResult」的返回则代表该音频中无呻吟/娇喘相关违规内容；
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Label: string
+  Label?: string
   /**
    * 机器判断当前分类的置信度，取值范围：0~100。分数越高，表示越有可能属于当前分类。
 （如：Moan 99，则该样本属于呻吟/娇喘的置信度非常高。）
    */
-  Score: number
+  Score?: number
   /**
    * 建议您拿到判断结果后的执行操作。
 建议值，Block：建议屏蔽，Review：建议复审，Pass：建议通过
    */
-  Suggestion: string
+  Suggestion?: string
   /**
    * 违规事件开始时间，单位为秒（s）；
    */
-  StartTime: number
+  StartTime?: number
   /**
    * 违规事件结束时间，单位为秒（s）；
    */
-  EndTime: number
+  EndTime?: number
   /**
    * 该字段用于返回当前标签（Lable）下的二级标签。
 注意：此字段可能返回null，表示取不到有效值。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SubLabel: string
+  SubLabel?: string
 }
 
 /**
@@ -877,7 +877,7 @@ export interface MediaInfo {
    */
   Codecs: string
   /**
-   * 该字段用于返回对传入的流媒体文件进行分片的片段时长，单位为秒。**默认值为15秒**，支持用户自定义配置。
+   * 该字段用于返回对传入的流媒体文件进行分片的片段时长，单位为毫秒。**默认值为15秒**，支持用户自定义配置。
    */
   Duration: number
   /**

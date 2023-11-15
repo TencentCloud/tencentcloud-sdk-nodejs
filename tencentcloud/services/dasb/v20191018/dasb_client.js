@@ -160,6 +160,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ResetDeviceAccountPassword", req, cb);
     }
     /**
+     * 修改用户组
+     */
+    async ModifyUserGroup(req, cb) {
+        return this.request("ModifyUserGroup", req, cb);
+    }
+    /**
      * 根据会话Id搜索Command
      */
     async SearchCommandBySid(req, cb) {

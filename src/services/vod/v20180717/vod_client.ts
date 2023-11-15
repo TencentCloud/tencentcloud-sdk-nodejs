@@ -39,6 +39,7 @@ import {
   LiveRealTimeClipResponse,
   AiReviewTaskProhibitedAsrResult,
   AdaptiveDynamicStreamingTemplate,
+  DeleteJustInTimeTranscodeTemplateRequest,
   DeleteAnimatedGraphicsTemplateResponse,
   AiReviewTaskProhibitedOcrResult,
   AiRecognitionTaskAsrFullTextResultOutput,
@@ -56,6 +57,7 @@ import {
   RebuildMediaTargetInfo,
   ModifySampleSnapshotTemplateRequest,
   AiReviewPoliticalOcrTaskInput,
+  ModifyJustInTimeTranscodeTemplateRequest,
   DescribePrepaidProductsRequest,
   MediaInputInfo,
   CreateImageSpriteTask2017,
@@ -68,6 +70,7 @@ import {
   DescribeDailyMostPlayedStatRequest,
   UserDefineFaceReviewTemplateInfo,
   RefreshUrlCacheRequest,
+  DescribeAIAnalysisTemplatesRequest,
   ContentReviewTemplateItem,
   DeleteAIRecognitionTemplateResponse,
   DeleteContentReviewTemplateRequest,
@@ -124,6 +127,7 @@ import {
   JitterConfigureInfoForUpdate,
   UserDefineAsrTextReviewTemplateInfo,
   CreateProcedureTemplateRequest,
+  MediaProcessTaskAnimatedGraphicResult,
   DescribeMediaProcessUsageDataRequest,
   CreatePersonSampleRequest,
   RemoveWatermarkTask,
@@ -164,6 +168,7 @@ import {
   WatermarkTemplate,
   CoverBySnapshotTaskOutput,
   ModifyQualityInspectTemplateResponse,
+  VideoConfigureInfoForUpdate,
   ModifyAdaptiveDynamicStreamingTemplateRequest,
   ForbidMediaDistributionRequest,
   DescribeAIRecognitionTemplatesResponse,
@@ -197,7 +202,7 @@ import {
   SuperResolutionInfo,
   MediaImageSpriteInfo,
   ProductInstanceRecource,
-  MediaProcessTaskAnimatedGraphicResult,
+  AiRecognitionTaskFaceSegmentItem,
   ProcessMediaResponse,
   CreateWordSamplesResponse,
   ClassificationConfigureInfoForUpdate,
@@ -209,6 +214,7 @@ import {
   AiSampleFaceOperation,
   SvgWatermarkInputForUpdate,
   AiReviewTaskTerrorismOcrResult,
+  WatermarkConfigureInfoForUpdate,
   AiRecognitionTaskOcrWordsResult,
   PornAsrReviewTemplateInfo,
   AiRecognitionTaskSegmentResult,
@@ -236,7 +242,7 @@ import {
   ConcatFileInfo2017,
   ContentReviewResult,
   MediaProcessTaskImageSpriteResult,
-  ReduceMediaBitrateTask,
+  DescribeJustInTimeTranscodeTemplatesResponse,
   CrashScreenConfigureInfo,
   CreateReviewTemplateRequest,
   DescribeMediaInfosResponse,
@@ -258,7 +264,7 @@ import {
   CreatePersonSampleResponse,
   CreateContentReviewTemplateResponse,
   ModifyAnimatedGraphicsTemplateRequest,
-  DescribeAIAnalysisTemplatesRequest,
+  DescribeProcedureTemplatesRequest,
   CreateHeadTailTemplateRequest,
   MediaSampleSnapshotItem,
   TagConfigureInfoForUpdate,
@@ -295,7 +301,8 @@ import {
   DescribeCDNUsageDataResponse,
   ModifyWordSampleRequest,
   EditMediaTask,
-  AiRecognitionTaskFaceSegmentItem,
+  CreateJustInTimeTranscodeTemplateResponse,
+  WatermarkConfigureData,
   DeleteMediaResponse,
   ModifySnapshotByTimeOffsetTemplateResponse,
   DeleteHeadTailTemplateRequest,
@@ -324,6 +331,7 @@ import {
   MediaProcessTaskSnapshotByTimeOffsetResult,
   ModifyEnhanceMediaTemplateResponse,
   EnhanceMediaByTemplateResponse,
+  CreateJustInTimeTranscodeTemplateRequest,
   ManageTaskRequest,
   RoundPlayListItemInfo,
   ModifyEventConfigRequest,
@@ -344,7 +352,7 @@ import {
   ModifySubAppIdInfoResponse,
   AsrWordsConfigureInfo,
   DeleteRebuildMediaTemplateResponse,
-  DeleteRebuildMediaTemplateRequest,
+  DescribeSubAppIdsResponse,
   SimpleHlsClipRequest,
   MediaDeleteItem,
   PoliticalImageResult,
@@ -383,6 +391,7 @@ import {
   ComposeMediaTask,
   HeadTailConfigureInfoForUpdate,
   ImageScale,
+  ModifyJustInTimeTranscodeTemplateResponse,
   ImageContentReviewInput,
   TranscodePlayInfo2017,
   SplitMediaTask,
@@ -395,6 +404,7 @@ import {
   UrlSignatureAuthPolicy,
   ModifyVodDomainConfigResponse,
   MediaSnapshotByTimeOffsetInfo,
+  VideoConfigureInfo,
   DescribeImageSpriteTemplatesRequest,
   ModifyRebuildMediaTemplateResponse,
   CreateEnhanceMediaTemplateRequest,
@@ -481,6 +491,7 @@ import {
   ClipTask2017,
   TranscodeTemplate,
   DescribeCDNUsageDataRequest,
+  JustInTimeTranscodeTemplate,
   PornOcrReviewTemplateInfo,
   AiReviewTaskPoliticalAsrResult,
   DescribeFileAttributesTaskOutput,
@@ -572,7 +583,7 @@ import {
   MediaMetaData,
   MediaSampleSnapshotInfo,
   InspectMediaQualityResponse,
-  DescribeSubAppIdsResponse,
+  DeleteRebuildMediaTemplateRequest,
   CreateDomainVerifyRecordRequest,
   MediaInfo,
   VideoTemplateInfoForUpdate,
@@ -582,6 +593,7 @@ import {
   DescribeImageSpriteTemplatesResponse,
   InspectMediaQualityRequest,
   TransitionOperation,
+  WatermarkConfigureInfo,
   AiAnalysisTaskFrameTagInput,
   MediaAiAnalysisFrameTagSegmentItem,
   AiRecognitionTaskAsrWordsResultItem,
@@ -656,6 +668,7 @@ import {
   DescribeSampleSnapshotTemplatesResponse,
   ModifyWordSampleResponse,
   AiContentReviewResult,
+  ReduceMediaBitrateTask,
   TerrorismImgReviewTemplateInfo,
   ApplyUploadResponse,
   ReviewAudioVideoResponse,
@@ -763,8 +776,9 @@ import {
   DeleteWatermarkTemplateResponse,
   DeleteQualityInspectTemplateRequest,
   ComposeMediaOutput,
+  DeleteJustInTimeTranscodeTemplateResponse,
   ModifyWatermarkTemplateResponse,
-  DescribeProcedureTemplatesRequest,
+  DescribeJustInTimeTranscodeTemplatesRequest,
   ProhibitedConfigureInfoForUpdate,
   FrameTagConfigureInfoForUpdate,
   CreateImageSpriteTemplateResponse,
@@ -859,6 +873,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: EditMediaResponse) => void
   ): Promise<EditMediaResponse> {
     return this.request("EditMedia", req, cb)
+  }
+
+  /**
+   * 修改即时转码模板。
+   */
+  async ModifyJustInTimeTranscodeTemplate(
+    req: ModifyJustInTimeTranscodeTemplateRequest,
+    cb?: (error: string, rep: ModifyJustInTimeTranscodeTemplateResponse) => void
+  ): Promise<ModifyJustInTimeTranscodeTemplateResponse> {
+    return this.request("ModifyJustInTimeTranscodeTemplate", req, cb)
   }
 
   /**
@@ -1392,24 +1416,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 1. 该接口可以获取多个媒体文件的多种信息，包括：
-    1. 基础信息（basicInfo）：包括媒体名称、分类、播放地址、封面图片等。
-    2. 元信息（metaData）：包括大小、时长、视频流信息、音频流信息等。
-    3. 转码结果信息（transcodeInfo）：包括该媒体转码生成的各种规格的媒体地址、视频流参数、音频流参数等。
-    4. 转动图结果信息（animatedGraphicsInfo）：对视频转动图（如 gif）后的动图信息。
-    5. 采样截图信息（sampleSnapshotInfo）：对视频采样截图后的截图信息。
-    6. 雪碧图信息（imageSpriteInfo）：对视频截取雪碧图后的雪碧图信息。
-    7. 指定时间点截图信息（snapshotByTimeOffsetInfo）：对视频依照指定时间点截图后，的截图信息。
-    8. 视频打点信息（keyFrameDescInfo）：对视频设置的打点信息。
-    9. 转自适应码流信息（adaptiveDynamicStreamingInfo）：包括规格、加密类型、打包格式等相关信息。
-    10. 审核信息（reviewInfo）：包括媒体审核及媒体封面审核信息。
-2. 可以指定回包只返回部分信息。
-     */
-  async DescribeMediaInfos(
-    req: DescribeMediaInfosRequest,
-    cb?: (error: string, rep: DescribeMediaInfosResponse) => void
-  ): Promise<DescribeMediaInfosResponse> {
-    return this.request("DescribeMediaInfos", req, cb)
+   * 查询 DRM 密钥提供商信息。
+   */
+  async DescribeDrmKeyProviderInfo(
+    req: DescribeDrmKeyProviderInfoRequest,
+    cb?: (error: string, rep: DescribeDrmKeyProviderInfoResponse) => void
+  ): Promise<DescribeDrmKeyProviderInfoResponse> {
+    return this.request("DescribeDrmKeyProviderInfo", req, cb)
   }
 
   /**
@@ -2219,13 +2232,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 使用模板发起视频重生。
+   * 获取即时转码模板列表。
    */
-  async RebuildMediaByTemplate(
-    req: RebuildMediaByTemplateRequest,
-    cb?: (error: string, rep: RebuildMediaByTemplateResponse) => void
-  ): Promise<RebuildMediaByTemplateResponse> {
-    return this.request("RebuildMediaByTemplate", req, cb)
+  async DescribeJustInTimeTranscodeTemplates(
+    req: DescribeJustInTimeTranscodeTemplatesRequest,
+    cb?: (error: string, rep: DescribeJustInTimeTranscodeTemplatesResponse) => void
+  ): Promise<DescribeJustInTimeTranscodeTemplatesResponse> {
+    return this.request("DescribeJustInTimeTranscodeTemplates", req, cb)
   }
 
   /**
@@ -2267,6 +2280,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeQualityInspectTemplatesResponse) => void
   ): Promise<DescribeQualityInspectTemplatesResponse> {
     return this.request("DescribeQualityInspectTemplates", req, cb)
+  }
+
+  /**
+   * 创建即时转码模板。
+   */
+  async CreateJustInTimeTranscodeTemplate(
+    req: CreateJustInTimeTranscodeTemplateRequest,
+    cb?: (error: string, rep: CreateJustInTimeTranscodeTemplateResponse) => void
+  ): Promise<CreateJustInTimeTranscodeTemplateResponse> {
+    return this.request("CreateJustInTimeTranscodeTemplate", req, cb)
   }
 
   /**
@@ -2399,6 +2422,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteWatermarkTemplateResponse) => void
   ): Promise<DeleteWatermarkTemplateResponse> {
     return this.request("DeleteWatermarkTemplate", req, cb)
+  }
+
+  /**
+   * 删除即时转码模板。
+   */
+  async DeleteJustInTimeTranscodeTemplate(
+    req: DeleteJustInTimeTranscodeTemplateRequest,
+    cb?: (error: string, rep: DeleteJustInTimeTranscodeTemplateResponse) => void
+  ): Promise<DeleteJustInTimeTranscodeTemplateResponse> {
+    return this.request("DeleteJustInTimeTranscodeTemplate", req, cb)
   }
 
   /**
@@ -2544,13 +2577,34 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询 DRM 密钥提供商信息。
+     * 1. 该接口可以获取多个媒体文件的多种信息，包括：
+    1. 基础信息（basicInfo）：包括媒体名称、分类、播放地址、封面图片等。
+    2. 元信息（metaData）：包括大小、时长、视频流信息、音频流信息等。
+    3. 转码结果信息（transcodeInfo）：包括该媒体转码生成的各种规格的媒体地址、视频流参数、音频流参数等。
+    4. 转动图结果信息（animatedGraphicsInfo）：对视频转动图（如 gif）后的动图信息。
+    5. 采样截图信息（sampleSnapshotInfo）：对视频采样截图后的截图信息。
+    6. 雪碧图信息（imageSpriteInfo）：对视频截取雪碧图后的雪碧图信息。
+    7. 指定时间点截图信息（snapshotByTimeOffsetInfo）：对视频依照指定时间点截图后，的截图信息。
+    8. 视频打点信息（keyFrameDescInfo）：对视频设置的打点信息。
+    9. 转自适应码流信息（adaptiveDynamicStreamingInfo）：包括规格、加密类型、打包格式等相关信息。
+    10. 审核信息（reviewInfo）：包括媒体审核及媒体封面审核信息。
+2. 可以指定回包只返回部分信息。
+     */
+  async DescribeMediaInfos(
+    req: DescribeMediaInfosRequest,
+    cb?: (error: string, rep: DescribeMediaInfosResponse) => void
+  ): Promise<DescribeMediaInfosResponse> {
+    return this.request("DescribeMediaInfos", req, cb)
+  }
+
+  /**
+   * 使用模板发起视频重生。
    */
-  async DescribeDrmKeyProviderInfo(
-    req: DescribeDrmKeyProviderInfoRequest,
-    cb?: (error: string, rep: DescribeDrmKeyProviderInfoResponse) => void
-  ): Promise<DescribeDrmKeyProviderInfoResponse> {
-    return this.request("DescribeDrmKeyProviderInfo", req, cb)
+  async RebuildMediaByTemplate(
+    req: RebuildMediaByTemplateRequest,
+    cb?: (error: string, rep: RebuildMediaByTemplateResponse) => void
+  ): Promise<RebuildMediaByTemplateResponse> {
+    return this.request("RebuildMediaByTemplate", req, cb)
   }
 
   /**

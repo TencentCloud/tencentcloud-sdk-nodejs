@@ -514,7 +514,7 @@ export interface AssetViewVULRisk {
      */
     Status?: number;
     /**
-     * 资产唯一id
+     * 风险ID
      */
     Id?: string;
     /**
@@ -552,23 +552,23 @@ export interface AssetViewVULRisk {
      */
     Port?: string;
     /**
-     * 描述
+     * 漏洞描述
      */
     Describe?: string;
     /**
-     * 版本名
+     * 漏洞影响组件
      */
     AppName?: string;
     /**
-     * 相关信息
+     * 技术参考
      */
     References?: string;
     /**
-     * 版本
+     * 漏洞影响版本
      */
     AppVersion?: string;
     /**
-     * 漏洞url
+     * 风险点
      */
     VULURL?: string;
     /**
@@ -580,7 +580,7 @@ export interface AssetViewVULRisk {
      */
     CVE?: string;
     /**
-     * 修复建议
+     * 修复方案
      */
     Fix?: string;
     /**
@@ -588,7 +588,7 @@ export interface AssetViewVULRisk {
      */
     POCId?: string;
     /**
-     * 来源
+     * 扫描来源
      */
     From?: string;
     /**
@@ -608,7 +608,7 @@ export interface AssetViewVULRisk {
      */
     InstanceUUID?: string;
     /**
-     * 负载
+     * 攻击载荷
      */
     Payload?: string;
     /**
@@ -989,7 +989,7 @@ export interface DescribeRiskCenterWebsiteRiskListResponse {
      */
     TotalCount?: number;
     /**
-     * 资产视角的端口风险列表
+     * 内容风险列表
      */
     Data?: Array<WebsiteRisk>;
     /**
@@ -3127,7 +3127,7 @@ export interface DescribeRiskCenterPortViewPortRiskListResponse {
      */
     TotalCount?: number;
     /**
-     * 资产视角的端口风险列表
+     * 端口视角的端口风险列表
      */
     Data?: Array<PortViewPortRisk>;
     /**
@@ -3246,7 +3246,7 @@ export interface ScanTaskInfoList {
      */
     TaskId?: string;
     /**
-     * 排除扫描资产信息
+     * 自定义指定扫描资产信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
     SelfDefiningAssets?: Array<string>;
@@ -3286,7 +3286,7 @@ export interface ScanTaskInfoList {
      */
     ScanItem?: string;
     /**
-     * 0-全扫，1-指定资产扫，2-排除资产扫
+     * 0-全扫，1-指定资产扫，2-排除资产扫，3-自定义指定资产扫描
   注意：此字段可能返回 null，表示取不到有效值。
      */
     ScanAssetType?: number;

@@ -18,11 +18,35 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
-  TerminateInstancesResponse,
-  SystemDisk,
+  NetworkStatus,
+  InquirePriceRunInstancesResponse,
   TerminateInstancesRequest,
-  RunInstancesResponse,
+  DescribeServiceLoginSettingsResponse,
+  DescribeInstanceNetworkStatusResponse,
+  Instance,
+  TerminateInstancesResponse,
+  DescribeRegionsRequest,
+  LoginSetting,
+  Price,
+  RegionInfo,
+  DescribeScenesResponse,
+  DescribeApplicationsRequest,
   RunInstancesRequest,
+  DescribeInstancesResponse,
+  SystemDisk,
+  RunInstancesResponse,
+  DescribeInstancesRequest,
+  Filter,
+  DescribeScenesRequest,
+  DescribeRegionsResponse,
+  InquirePriceRunInstancesRequest,
+  DescribeServiceLoginSettingsRequest,
+  ApplicationInfo,
+  DescribeApplicationsResponse,
+  ItemPrice,
+  DescribeInstanceNetworkStatusRequest,
+  LoginService,
+  SceneInfo,
 } from "./hai_models"
 
 /**
@@ -35,6 +59,46 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询服务登录配置
+   */
+  async DescribeServiceLoginSettings(
+    req: DescribeServiceLoginSettingsRequest,
+    cb?: (error: string, rep: DescribeServiceLoginSettingsResponse) => void
+  ): Promise<DescribeServiceLoginSettingsResponse> {
+    return this.request("DescribeServiceLoginSettings", req, cb)
+  }
+
+  /**
+   * 查询应用
+   */
+  async DescribeApplications(
+    req: DescribeApplicationsRequest,
+    cb?: (error: string, rep: DescribeApplicationsResponse) => void
+  ): Promise<DescribeApplicationsResponse> {
+    return this.request("DescribeApplications", req, cb)
+  }
+
+  /**
+   * 查询场景
+   */
+  async DescribeScenes(
+    req: DescribeScenesRequest,
+    cb?: (error: string, rep: DescribeScenesResponse) => void
+  ): Promise<DescribeScenesResponse> {
+    return this.request("DescribeScenes", req, cb)
+  }
+
+  /**
+   * 查询地域列表
+   */
+  async DescribeRegions(
+    req?: DescribeRegionsRequest,
+    cb?: (error: string, rep: DescribeRegionsResponse) => void
+  ): Promise<DescribeRegionsResponse> {
+    return this.request("DescribeRegions", req, cb)
+  }
+
+  /**
    * 本接口 (RunInstances) 用于创建一个或多个指定配置的实例。
    */
   async RunInstances(
@@ -42,6 +106,36 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: RunInstancesResponse) => void
   ): Promise<RunInstancesResponse> {
     return this.request("RunInstances", req, cb)
+  }
+
+  /**
+   * 查询实例的网络配置及消耗情况
+   */
+  async DescribeInstanceNetworkStatus(
+    req: DescribeInstanceNetworkStatusRequest,
+    cb?: (error: string, rep: DescribeInstanceNetworkStatusResponse) => void
+  ): Promise<DescribeInstanceNetworkStatusResponse> {
+    return this.request("DescribeInstanceNetworkStatus", req, cb)
+  }
+
+  /**
+   * 查询实例
+   */
+  async DescribeInstances(
+    req: DescribeInstancesRequest,
+    cb?: (error: string, rep: DescribeInstancesResponse) => void
+  ): Promise<DescribeInstancesResponse> {
+    return this.request("DescribeInstances", req, cb)
+  }
+
+  /**
+   * 本接口 (InquirePriceRunInstances) 用于实例询价。
+   */
+  async InquirePriceRunInstances(
+    req: InquirePriceRunInstancesRequest,
+    cb?: (error: string, rep: InquirePriceRunInstancesResponse) => void
+  ): Promise<InquirePriceRunInstancesResponse> {
+    return this.request("InquirePriceRunInstances", req, cb)
   }
 
   /**

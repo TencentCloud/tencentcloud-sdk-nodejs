@@ -238,6 +238,16 @@ it("dasb.v20191018.ResetDeviceAccountPassword", async function () {
     }
 })
 
+it("dasb.v20191018.ModifyUserGroup", async function () {
+    try {
+       const data = await client.ModifyUserGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dasb.v20191018.SearchCommandBySid", async function () {
     try {
        const data = await client.SearchCommandBySid({})

@@ -18,26 +18,30 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
-  TrainingTexts,
   CancelVRSTaskRequest,
-  CancelVRSTaskResponse,
   DescribeVRSTaskStatusResponse,
-  CreateVRSTaskResponse,
-  DownloadVRSModelRsp,
-  CreateVRSTaskRespData,
-  DetectionEnvAndSoundQualityRespData,
-  GetTrainingTextResponse,
-  Words,
-  DescribeVRSTaskStatusRequest,
-  DetectEnvAndSoundQualityRequest,
-  DescribeVRSTaskStatusRespData,
-  DownloadVRSModelResponse,
-  DownloadVRSModelRequest,
-  TrainingText,
-  CancelVRSTaskRsp,
   GetTrainingTextRequest,
+  DownloadVRSModelRequest,
+  DownloadVRSModelResponse,
+  GetVRSVoiceTypesResponse,
+  CancelVRSTaskResponse,
+  CreateVRSTaskResponse,
+  GetVRSVoiceTypesRequest,
+  DescribeVRSTaskStatusRespData,
+  VoiceTypeListData,
+  Words,
+  CreateVRSTaskRespData,
+  GetTrainingTextResponse,
+  DescribeVRSTaskStatusRequest,
+  DownloadVRSModelRsp,
   CreateVRSTaskRequest,
+  TrainingText,
   DetectEnvAndSoundQualityResponse,
+  DetectionEnvAndSoundQualityRespData,
+  VoiceTypeInfo,
+  DetectEnvAndSoundQualityRequest,
+  TrainingTexts,
+  CancelVRSTaskRsp,
 } from "./vrs_models"
 
 /**
@@ -105,6 +109,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateVRSTaskResponse) => void
   ): Promise<CreateVRSTaskResponse> {
     return this.request("CreateVRSTask", req, cb)
+  }
+
+  /**
+   * 查询复刻音色
+   */
+  async GetVRSVoiceTypes(
+    req?: GetVRSVoiceTypesRequest,
+    cb?: (error: string, rep: GetVRSVoiceTypesResponse) => void
+  ): Promise<GetVRSVoiceTypesResponse> {
+    return this.request("GetVRSVoiceTypes", req, cb)
   }
 
   /**

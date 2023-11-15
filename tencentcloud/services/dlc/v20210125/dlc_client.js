@@ -274,10 +274,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ReportHeartbeatMetaData", req, cb);
     }
     /**
-     * 本接口（ListTaskJobLogDetail）用于获取spark 作业任务日志详情
+     * 查询可更新配置的引擎列表
      */
-    async ListTaskJobLogDetail(req, cb) {
-        return this.request("ListTaskJobLogDetail", req, cb);
+    async DescribeUpdatableDataEngines(req, cb) {
+        return this.request("DescribeUpdatableDataEngines", req, cb);
     }
     /**
      * 创建托管存储内表（该接口已废弃）
@@ -740,6 +740,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeDataEnginePythonSparkImages(req, cb) {
         return this.request("DescribeDataEnginePythonSparkImages", req, cb);
+    }
+    /**
+     * 本接口（ListTaskJobLogDetail）用于获取spark 作业任务日志详情
+     */
+    async ListTaskJobLogDetail(req, cb) {
+        return this.request("ListTaskJobLogDetail", req, cb);
     }
     /**
      * 查询用户的托管存储信息

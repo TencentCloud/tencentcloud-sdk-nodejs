@@ -66,6 +66,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateVRSTask", req, cb);
     }
     /**
+     * 查询复刻音色
+     */
+    async GetVRSVoiceTypes(req, cb) {
+        return this.request("GetVRSVoiceTypes", req, cb);
+    }
+    /**
      * 本接口用于获取声音复刻训练文本信息。
  请求方法为 HTTP POST , Content-Type为"application/json; charset=utf-8"
 • 签名方法参考 公共参数 中签名方法v3。

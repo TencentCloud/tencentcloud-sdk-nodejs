@@ -285,7 +285,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取网站风险列表
+   * 获取内容风险列表
    */
   async DescribeRiskCenterWebsiteRiskList(
     req: DescribeRiskCenterWebsiteRiskListRequest,

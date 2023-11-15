@@ -218,17 +218,49 @@ export interface SmartOptimizerIndexPolicy {
     IndexEnable?: string;
 }
 /**
- * ModifyDataEngineDescription请求参数结构体
+ * DataEngine基本信息
  */
-export interface ModifyDataEngineDescriptionRequest {
+export interface DataEngineBasicInfo {
     /**
-     * 要修改的引擎的名称
+     * DataEngine名称
      */
     DataEngineName: string;
     /**
-     * 引擎的描述信息，最大长度为250
+     * 数据引擎状态  -2已删除 -1失败 0初始化中 1挂起 2运行中 3准备删除 4删除中
      */
-    Message: string;
+    State?: number;
+    /**
+     * 创建时间
+     */
+    CreateTime?: number;
+    /**
+     * 更新时间
+     */
+    UpdateTime?: number;
+    /**
+     * 返回信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Message?: string;
+    /**
+     * 引擎id
+     */
+    DataEngineId?: string;
+    /**
+     * 引擎类型，有效值：PrestoSQL/SparkSQL/SparkBatch
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DataEngineType?: string;
+    /**
+     * 用户ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AppId?: number;
+    /**
+     * 账号ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    UserUin?: string;
 }
 /**
  * CancelNotebookSessionStatement请求参数结构体
@@ -305,30 +337,21 @@ export interface IpPortPair {
     Port?: number;
 }
 /**
- * 工作组部分信息
+ * DescribeUpdatableDataEngines返回参数结构体
  */
-export interface WorkGroupMessage {
+export interface DescribeUpdatableDataEnginesResponse {
     /**
-     * 工作组唯一Id
+     * 集群基础信息
      */
-    WorkGroupId: number;
+    DataEngineBasicInfos?: Array<DataEngineBasicInfo>;
     /**
-     * 工作组名称
+     * 集群个数
      */
-    WorkGroupName: string;
+    TotalCount?: number;
     /**
-     * 工作组描述
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
-    WorkGroupDescription: string;
-    /**
-     * 创建者
-     */
-    Creator: string;
-    /**
-     * 工作组创建的时间，形如2021-07-28 16:19:32
-     */
-    CreateTime: string;
+    RequestId?: string;
 }
 /**
  * DeleteUser请求参数结构体
@@ -1107,17 +1130,17 @@ export interface TableInfo {
     Location: string;
 }
 /**
- * 任务类型，任务如SQL查询等。
+ * ModifyDataEngineDescription请求参数结构体
  */
-export interface Task {
+export interface ModifyDataEngineDescriptionRequest {
     /**
-     * SQL查询任务
+     * 要修改的引擎的名称
      */
-    SQLTask?: SQLTask;
+    DataEngineName: string;
     /**
-     * Spark SQL查询任务
+     * 引擎的描述信息，最大长度为250
      */
-    SparkSQLTask?: SQLTask;
+    Message: string;
 }
 /**
  * 引擎配置信息
@@ -2027,6 +2050,32 @@ export interface DescribeDMSTablesResponse {
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * 工作组部分信息
+ */
+export interface WorkGroupMessage {
+    /**
+     * 工作组唯一Id
+     */
+    WorkGroupId: number;
+    /**
+     * 工作组名称
+     */
+    WorkGroupName: string;
+    /**
+     * 工作组描述
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    WorkGroupDescription: string;
+    /**
+     * 创建者
+     */
+    Creator: string;
+    /**
+     * 工作组创建的时间，形如2021-07-28 16:19:32
+     */
+    CreateTime: string;
 }
 /**
  * UpdateDataEngineConfig返回参数结构体
@@ -3036,7 +3085,7 @@ export interface CreateDataEngineRequest {
      */
     PayMode?: number;
     /**
-     * 资源使用时长，后付费：固定填3600，预付费：最少填1，代表购买资源一个月，最长不超过120。默认3600
+     * 资源使用时长，后付费：固定填3600，预付费：最少填1，代表购买资源一个月，最长不超过120。默认1
      */
     TimeSpan?: number;
     /**
@@ -3111,6 +3160,14 @@ export interface CreateDataEngineRequest {
      * 自动授权
      */
     AutoAuthorization?: boolean;
+    /**
+     * 引擎网络ID
+     */
+    EngineNetworkId?: string;
+    /**
+     * 引擎世代，SuperSQL：代表supersql引擎，Native：代表标准引擎。默认值为SuperSQL
+     */
+    EngineGeneration?: string;
 }
 /**
  * ModifySparkAppBatch请求参数结构体
@@ -3479,6 +3536,15 @@ export interface TasksOverview {
      * 当前时间范围的总任务个数
      */
     TotalTaskCount: number;
+}
+/**
+ * DescribeUpdatableDataEngines请求参数结构体
+ */
+export interface DescribeUpdatableDataEnginesRequest {
+    /**
+     * 引擎配置操作命令，UpdateSparkSQLLakefsPath 更新托管表路径，UpdateSparkSQLResultPath 更新结果桶路径
+     */
+    DataEngineConfigCommand: string;
 }
 /**
  * ModifyGovernEventRule请求参数结构体
@@ -6710,6 +6776,19 @@ export interface DataSourceInfo {
     DbName?: string;
 }
 /**
+ * 任务类型，任务如SQL查询等。
+ */
+export interface Task {
+    /**
+     * SQL查询任务
+     */
+    SQLTask?: SQLTask;
+    /**
+     * Spark SQL查询任务
+     */
+    SparkSQLTask?: SQLTask;
+}
+/**
  * CancelSparkSessionBatchSQL请求参数结构体
  */
 export interface CancelSparkSessionBatchSQLRequest {
@@ -7126,6 +7205,14 @@ export interface DescribeDataEnginesRequest {
      * 网络配置列表，若传入该参数，则返回网络配置关联的计算引擎
      */
     DatasourceConnectionNameSet?: Array<string>;
+    /**
+     * 引擎版本，有效值：Native/SuperSQL，为空时默认获取SuperSQL引擎
+     */
+    EngineGeneration?: string;
+    /**
+     * 引擎类型，支持：SparkSQL、SparkBatch、PrestoSQL、Kyuubi
+     */
+    EngineTypeDetail?: string;
 }
 /**
  * DropDMSPartitions返回参数结构体

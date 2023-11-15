@@ -68,6 +68,16 @@ it("vrs.v20200824.CreateVRSTask", async function () {
     }
 })
 
+it("vrs.v20200824.GetVRSVoiceTypes", async function () {
+    try {
+       const data = await client.GetVRSVoiceTypes({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vrs.v20200824.GetTrainingText", async function () {
     try {
        const data = await client.GetTrainingText({})

@@ -82,6 +82,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("EditMedia", req, cb);
     }
     /**
+     * 修改即时转码模板。
+     */
+    async ModifyJustInTimeTranscodeTemplate(req, cb) {
+        return this.request("ModifyJustInTimeTranscodeTemplate", req, cb);
+    }
+    /**
      * 该接口用于查询点播域名信息列表。
      */
     async DescribeVodDomains(req, cb) {
@@ -424,21 +430,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteAIAnalysisTemplate", req, cb);
     }
     /**
-     * 1. 该接口可以获取多个媒体文件的多种信息，包括：
-    1. 基础信息（basicInfo）：包括媒体名称、分类、播放地址、封面图片等。
-    2. 元信息（metaData）：包括大小、时长、视频流信息、音频流信息等。
-    3. 转码结果信息（transcodeInfo）：包括该媒体转码生成的各种规格的媒体地址、视频流参数、音频流参数等。
-    4. 转动图结果信息（animatedGraphicsInfo）：对视频转动图（如 gif）后的动图信息。
-    5. 采样截图信息（sampleSnapshotInfo）：对视频采样截图后的截图信息。
-    6. 雪碧图信息（imageSpriteInfo）：对视频截取雪碧图后的雪碧图信息。
-    7. 指定时间点截图信息（snapshotByTimeOffsetInfo）：对视频依照指定时间点截图后，的截图信息。
-    8. 视频打点信息（keyFrameDescInfo）：对视频设置的打点信息。
-    9. 转自适应码流信息（adaptiveDynamicStreamingInfo）：包括规格、加密类型、打包格式等相关信息。
-    10. 审核信息（reviewInfo）：包括媒体审核及媒体封面审核信息。
-2. 可以指定回包只返回部分信息。
+     * 查询 DRM 密钥提供商信息。
      */
-    async DescribeMediaInfos(req, cb) {
-        return this.request("DescribeMediaInfos", req, cb);
+    async DescribeDrmKeyProviderInfo(req, cb) {
+        return this.request("DescribeDrmKeyProviderInfo", req, cb);
     }
     /**
      * 删除视频重生模板。
@@ -967,10 +962,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("SetDrmKeyProviderInfo", req, cb);
     }
     /**
-     * 使用模板发起视频重生。
+     * 获取即时转码模板列表。
      */
-    async RebuildMediaByTemplate(req, cb) {
-        return this.request("RebuildMediaByTemplate", req, cb);
+    async DescribeJustInTimeTranscodeTemplates(req, cb) {
+        return this.request("DescribeJustInTimeTranscodeTemplates", req, cb);
     }
     /**
      * 创建用户自定义审核模板，数量上限：50。
@@ -996,6 +991,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeQualityInspectTemplates(req, cb) {
         return this.request("DescribeQualityInspectTemplates", req, cb);
+    }
+    /**
+     * 创建即时转码模板。
+     */
+    async CreateJustInTimeTranscodeTemplate(req, cb) {
+        return this.request("CreateJustInTimeTranscodeTemplate", req, cb);
     }
     /**
      * 该 API 已经<font color='red'>不再维护</font>，新版播放器签名不再使用播放器配置模板，详细请参考 [播放器签名](https://cloud.tencent.com/document/product/266/45554)。
@@ -1092,6 +1093,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DeleteWatermarkTemplate(req, cb) {
         return this.request("DeleteWatermarkTemplate", req, cb);
+    }
+    /**
+     * 删除即时转码模板。
+     */
+    async DeleteJustInTimeTranscodeTemplate(req, cb) {
+        return this.request("DeleteJustInTimeTranscodeTemplate", req, cb);
     }
     /**
      * 该接口用于根据人物 ID，删除素材样本。
@@ -1192,10 +1199,27 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("SimpleHlsClip", req, cb);
     }
     /**
-     * 查询 DRM 密钥提供商信息。
+     * 1. 该接口可以获取多个媒体文件的多种信息，包括：
+    1. 基础信息（basicInfo）：包括媒体名称、分类、播放地址、封面图片等。
+    2. 元信息（metaData）：包括大小、时长、视频流信息、音频流信息等。
+    3. 转码结果信息（transcodeInfo）：包括该媒体转码生成的各种规格的媒体地址、视频流参数、音频流参数等。
+    4. 转动图结果信息（animatedGraphicsInfo）：对视频转动图（如 gif）后的动图信息。
+    5. 采样截图信息（sampleSnapshotInfo）：对视频采样截图后的截图信息。
+    6. 雪碧图信息（imageSpriteInfo）：对视频截取雪碧图后的雪碧图信息。
+    7. 指定时间点截图信息（snapshotByTimeOffsetInfo）：对视频依照指定时间点截图后，的截图信息。
+    8. 视频打点信息（keyFrameDescInfo）：对视频设置的打点信息。
+    9. 转自适应码流信息（adaptiveDynamicStreamingInfo）：包括规格、加密类型、打包格式等相关信息。
+    10. 审核信息（reviewInfo）：包括媒体审核及媒体封面审核信息。
+2. 可以指定回包只返回部分信息。
      */
-    async DescribeDrmKeyProviderInfo(req, cb) {
-        return this.request("DescribeDrmKeyProviderInfo", req, cb);
+    async DescribeMediaInfos(req, cb) {
+        return this.request("DescribeMediaInfos", req, cb);
+    }
+    /**
+     * 使用模板发起视频重生。
+     */
+    async RebuildMediaByTemplate(req, cb) {
+        return this.request("RebuildMediaByTemplate", req, cb);
     }
     /**
      * 删除片头片尾模板。

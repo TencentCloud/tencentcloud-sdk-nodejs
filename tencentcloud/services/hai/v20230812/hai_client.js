@@ -28,10 +28,52 @@ class Client extends abstract_client_1.AbstractClient {
         super("hai.tencentcloudapi.com", "2023-08-12", clientConfig);
     }
     /**
+     * 查询服务登录配置
+     */
+    async DescribeServiceLoginSettings(req, cb) {
+        return this.request("DescribeServiceLoginSettings", req, cb);
+    }
+    /**
+     * 查询应用
+     */
+    async DescribeApplications(req, cb) {
+        return this.request("DescribeApplications", req, cb);
+    }
+    /**
+     * 查询场景
+     */
+    async DescribeScenes(req, cb) {
+        return this.request("DescribeScenes", req, cb);
+    }
+    /**
+     * 查询地域列表
+     */
+    async DescribeRegions(req, cb) {
+        return this.request("DescribeRegions", req, cb);
+    }
+    /**
      * 本接口 (RunInstances) 用于创建一个或多个指定配置的实例。
      */
     async RunInstances(req, cb) {
         return this.request("RunInstances", req, cb);
+    }
+    /**
+     * 查询实例的网络配置及消耗情况
+     */
+    async DescribeInstanceNetworkStatus(req, cb) {
+        return this.request("DescribeInstanceNetworkStatus", req, cb);
+    }
+    /**
+     * 查询实例
+     */
+    async DescribeInstances(req, cb) {
+        return this.request("DescribeInstances", req, cb);
+    }
+    /**
+     * 本接口 (InquirePriceRunInstances) 用于实例询价。
+     */
+    async InquirePriceRunInstances(req, cb) {
+        return this.request("InquirePriceRunInstances", req, cb);
     }
     /**
      * 本接口 (TerminateInstances) 用于主动退还实例。

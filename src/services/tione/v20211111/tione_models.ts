@@ -229,7 +229,12 @@ export interface ModelInfo {
  */
 export interface DescribeLogsRequest {
   /**
-   * 查询哪个服务的事件（可选值为TRAIN, NOTEBOOK, INFER）
+   * 服务类型，TRAIN为任务式建模, NOTEBOOK为Notebook, INFER为在线服务, BATCH为批量预测
+枚举值：
+- TRAIN
+- NOTEBOOK
+- INFER
+- BATCH
    */
   Service: string
   /**
@@ -245,7 +250,28 @@ export interface DescribeLogsRequest {
    */
   Limit?: number
   /**
-   * 查询哪个Pod的日志（支持结尾通配符*)
+   * 服务ID，和Service参数对应，不同Service的服务ID获取方式不同，具体如下：
+- Service类型为TRAIN：
+  调用[DescribeTrainingTask接口](/document/product/851/75089)查询训练任务详情，ServiceId为接口返回值中Response.TrainingTaskDetail.LatestInstanceId
+- Service类型为NOTEBOOK：
+  调用[DescribeNotebook接口](/document/product/851/95662)查询Notebook详情，ServiceId为接口返回值中Response.NotebookDetail.PodName
+- Service类型为INFER：
+  调用[DescribeModelServiceGroup接口](/document/product/851/82285)查询服务组详情，ServiceId为接口返回值中Response.ServiceGroup.Services.ServiceId
+- Service类型为BATCH：
+  调用[DescribeBatchTask接口](/document/product/851/80180)查询跑批任务详情，ServiceId为接口返回值中Response.BatchTaskDetail.LatestInstanceId
+   */
+  ServiceId?: string
+  /**
+   * Pod的名称，即需要查询服务对应的Pod，和Service参数对应，不同Service的PodName获取方式不同，具体如下：
+- Service类型为TRAIN：
+  调用[DescribeTrainingTaskPods接口](/document/product/851/75088)查询训练任务pod列表，PodName为接口返回值中Response.PodNames
+- Service类型为NOTEBOOK：
+  调用[DescribeNotebook接口](/document/product/851/95662)查询Notebook详情，PodName为接口返回值中Response.NotebookDetail.PodName
+- Service类型为INFER：
+  调用[DescribeModelService接口](/document/product/851/82287)查询单个服务详情，PodName为接口返回值中Response.Service.ServiceInfo.PodInfos
+- Service类型为BATCH：
+  调用[DescribeBatchTask接口](/document/product/851/80180)查询跑批任务详情，PodName为接口返回值中Response.BatchTaskDetail. PodList
+注：支持结尾通配符*
    */
   PodName?: string
   /**
@@ -2537,6 +2563,52 @@ export interface StartCmdInfo {
 }
 
 /**
+ * K8s的Event
+ */
+export interface Event {
+  /**
+   * 事件的id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Id: string
+  /**
+   * 事件的具体信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Message: string
+  /**
+   * 事件第一次发生的时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FirstTimestamp: string
+  /**
+   * 事件最后一次发生的时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LastTimestamp: string
+  /**
+   * 事件发生的次数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Count: number
+  /**
+   * 事件的类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Type: string
+  /**
+   * 事件关联的资源的类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResourceKind: string
+  /**
+   * 事件关联的资源的名字
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResourceName: string
+}
+
+/**
  * DescribeAPIConfigs请求参数结构体
  */
 export interface DescribeAPIConfigsRequest {
@@ -3449,6 +3521,26 @@ export interface CronScaleJob {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ExcludeDates?: Array<string>
+}
+
+/**
+ * DescribeNotebooks返回参数结构体
+ */
+export interface DescribeNotebooksResponse {
+  /**
+   * 详情
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NotebookSet?: Array<NotebookSetItem>
+  /**
+   * 总条数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -4697,16 +4789,16 @@ export interface CreateBatchTaskResponse {
 }
 
 /**
- * DescribeNotebooks返回参数结构体
+ * DescribeEvents返回参数结构体
  */
-export interface DescribeNotebooksResponse {
+export interface DescribeEventsResponse {
   /**
-   * 详情
+   * 事件的列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  NotebookSet?: Array<NotebookSetItem>
+  Events?: Array<Event>
   /**
-   * 总条数
+   * 此次查询的事件的个数
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalCount?: number
@@ -5035,6 +5127,52 @@ RealGpu=100表示实际使用了一张gpu卡, 对应实际的实例机型, 有�
    * 创建或更新时无需填写，仅展示需要关注。详细的GPU使用信息。
    */
   RealGpuDetailSet?: Array<GpuDetail>
+}
+
+/**
+ * OCR场景标签列表
+ */
+export interface OcrLabelInfo {
+  /**
+   * 坐标点围起来的框
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Points: Array<PointInfo>
+  /**
+   * 框的形状：
+FRAME_TYPE_RECTANGLE
+FRAME_TYPE_POLYGON
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FrameType: string
+  /**
+   * 智能结构化：key区域对应的内容
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Key: string
+  /**
+   * 智能结构化：上述key的ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  KeyId: string
+  /**
+   * 识别：框区域的内容
+智能结构化：value区域对应的内容
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Value: string
+  /**
+   * 智能结构化：value区域所关联的key 区域的keyID的集合
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  KeyIdsForValue: Array<string>
+  /**
+   * key或者value区域内容的方向：
+DIRECTION_VERTICAL
+DIRECTION_HORIZONTAL
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Direction: string
 }
 
 /**
@@ -7106,49 +7244,65 @@ export interface EnvVar {
 }
 
 /**
- * OCR场景标签列表
+ * DescribeEvents请求参数结构体
  */
-export interface OcrLabelInfo {
+export interface DescribeEventsRequest {
   /**
-   * 坐标点围起来的框
-注意：此字段可能返回 null，表示取不到有效值。
+   * 服务类型，TRAIN为任务式建模, NOTEBOOK为Notebook, INFER为在线服务, BATCH为批量预测
+枚举值：
+- TRAIN
+- NOTEBOOK
+- INFER
+- BATCH
    */
-  Points: Array<PointInfo>
+  Service: string
   /**
-   * 框的形状：
-FRAME_TYPE_RECTANGLE
-FRAME_TYPE_POLYGON
-注意：此字段可能返回 null，表示取不到有效值。
+   * 服务ID，和Service参数对应，不同Service的服务ID获取方式不同，具体如下：
+- Service类型为TRAIN：
+  调用[DescribeTrainingTask接口](/document/product/851/75089)查询训练任务详情，ServiceId为接口返回值中Response.TrainingTaskDetail.LatestInstanceId
+- Service类型为NOTEBOOK：
+  调用[DescribeNotebook接口](/document/product/851/95662)查询Notebook详情，ServiceId为接口返回值中Response.NotebookDetail.PodName
+- Service类型为INFER：
+  调用[DescribeModelServiceGroup接口](/document/product/851/82285)查询服务组详情，ServiceId为接口返回值中Response.ServiceGroup.Services.ServiceId
+- Service类型为BATCH：
+  调用[DescribeBatchTask接口](/document/product/851/80180)查询跑批任务详情，ServiceId为接口返回值中Response.BatchTaskDetail.LatestInstanceId
    */
-  FrameType: string
+  ServiceId?: string
   /**
-   * 智能结构化：key区域对应的内容
-注意：此字段可能返回 null，表示取不到有效值。
+   * 查询事件最早发生的时间（RFC3339格式的时间字符串），默认值为当前时间的前一天
    */
-  Key: string
+  StartTime?: string
   /**
-   * 智能结构化：上述key的ID
-注意：此字段可能返回 null，表示取不到有效值。
+   * 查询事件最晚发生的时间（RFC3339格式的时间字符串），默认值为当前时间
    */
-  KeyId: string
+  EndTime?: string
   /**
-   * 识别：框区域的内容
-智能结构化：value区域对应的内容
-注意：此字段可能返回 null，表示取不到有效值。
+   * 分页Limit，默认值为100，最大值为100
    */
-  Value: string
+  Limit?: number
   /**
-   * 智能结构化：value区域所关联的key 区域的keyID的集合
-注意：此字段可能返回 null，表示取不到有效值。
+   * 分页Offset，默认值为0
    */
-  KeyIdsForValue: Array<string>
+  Offset?: number
   /**
-   * key或者value区域内容的方向：
-DIRECTION_VERTICAL
-DIRECTION_HORIZONTAL
-注意：此字段可能返回 null，表示取不到有效值。
+   * 排列顺序（可选值为ASC, DESC ），默认为DESC
    */
-  Direction: string
+  Order?: string
+  /**
+   * 排序的依据字段（可选值为FirstTimestamp, LastTimestamp），默认值为LastTimestamp
+   */
+  OrderField?: string
+  /**
+   * 过滤条件
+注意: 
+1. Filter.Name：目前支持ResourceKind（按事件关联的资源类型过滤）；Type（按事件类型过滤）
+2. Filter.Values：
+对于Name为ResourceKind，Values的可选取值为Deployment, Replicaset, Pod等K8S资源类型；
+对于Name为Type，Values的可选取值仅为Normal或者Warning；
+Values为多个的时候表示同时满足
+3. Filter. Negative和Filter. Fuzzy没有使用
+   */
+  Filters?: Array<Filter>
 }
 
 /**

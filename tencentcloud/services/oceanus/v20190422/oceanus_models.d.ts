@@ -768,9 +768,21 @@ export interface LogicalType {
  */
 export interface DescribeTreeResourcesRequest {
     /**
+     * 筛选条件字段
+     */
+    Filters?: Array<Filter>;
+    /**
      * 工作空间 SerialId
      */
     WorkSpaceId?: string;
+    /**
+     * 分页游标
+     */
+    Offset?: number;
+    /**
+     * 单页显示数
+     */
+    Limit?: number;
 }
 /**
  * DescribeResourceConfigs返回参数结构体
