@@ -148,6 +148,16 @@ it("sqlserver.v20180328.ModifyMaintenanceSpan", async function () {
     }
 })
 
+it("sqlserver.v20180328.DescribeMaintenanceSpan", async function () {
+    try {
+       const data = await client.DescribeMaintenanceSpan({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("sqlserver.v20180328.DescribeReadOnlyGroupDetails", async function () {
     try {
        const data = await client.DescribeReadOnlyGroupDetails({})
@@ -168,9 +178,9 @@ it("sqlserver.v20180328.CreatePublishSubscribe", async function () {
     }
 })
 
-it("sqlserver.v20180328.DescribeReadOnlyGroupByReadOnlyInstance", async function () {
+it("sqlserver.v20180328.DescribeBackupFiles", async function () {
     try {
-       const data = await client.DescribeReadOnlyGroupByReadOnlyInstance({})
+       const data = await client.DescribeBackupFiles({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -178,9 +188,9 @@ it("sqlserver.v20180328.DescribeReadOnlyGroupByReadOnlyInstance", async function
     }
 })
 
-it("sqlserver.v20180328.DescribeMaintenanceSpan", async function () {
+it("sqlserver.v20180328.DescribeRegularBackupPlan", async function () {
     try {
-       const data = await client.DescribeMaintenanceSpan({})
+       const data = await client.DescribeRegularBackupPlan({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -191,6 +201,16 @@ it("sqlserver.v20180328.DescribeMaintenanceSpan", async function () {
 it("sqlserver.v20180328.DescribePublishSubscribe", async function () {
     try {
        const data = await client.DescribePublishSubscribe({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("sqlserver.v20180328.DescribeDatabases", async function () {
+    try {
+       const data = await client.DescribeDatabases({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -468,6 +488,16 @@ it("sqlserver.v20180328.CompleteExpansion", async function () {
     }
 })
 
+it("sqlserver.v20180328.DescribeBackupStatistical", async function () {
+    try {
+       const data = await client.DescribeBackupStatistical({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("sqlserver.v20180328.CreateDB", async function () {
     try {
        const data = await client.CreateDB({})
@@ -558,6 +588,16 @@ it("sqlserver.v20180328.DeletePublishSubscribe", async function () {
     }
 })
 
+it("sqlserver.v20180328.ModifyDatabaseShrinkMDF", async function () {
+    try {
+       const data = await client.ModifyDatabaseShrinkMDF({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("sqlserver.v20180328.ResetAccountPassword", async function () {
     try {
        const data = await client.ResetAccountPassword({})
@@ -581,6 +621,16 @@ it("sqlserver.v20180328.ModifyInstanceParam", async function () {
 it("sqlserver.v20180328.DescribeSlowlogs", async function () {
     try {
        const data = await client.DescribeSlowlogs({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("sqlserver.v20180328.ModifyCrossBackupStrategy", async function () {
+    try {
+       const data = await client.ModifyCrossBackupStrategy({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -888,6 +938,16 @@ it("sqlserver.v20180328.CloseInterCommunication", async function () {
     }
 })
 
+it("sqlserver.v20180328.DescribeBackupSummary", async function () {
+    try {
+       const data = await client.DescribeBackupSummary({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("sqlserver.v20180328.ModifyMigration", async function () {
     try {
        const data = await client.ModifyMigration({})
@@ -918,6 +978,16 @@ it("sqlserver.v20180328.RecycleDBInstance", async function () {
     }
 })
 
+it("sqlserver.v20180328.DescribeBackupMonitor", async function () {
+    try {
+       const data = await client.DescribeBackupMonitor({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("sqlserver.v20180328.CloneDB", async function () {
     try {
        const data = await client.CloneDB({})
@@ -931,6 +1001,16 @@ it("sqlserver.v20180328.CloneDB", async function () {
 it("sqlserver.v20180328.ModifyDBInstanceProject", async function () {
     try {
        const data = await client.ModifyDBInstanceProject({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("sqlserver.v20180328.DescribeCrossBackupStatistical", async function () {
+    try {
+       const data = await client.DescribeCrossBackupStatistical({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -971,6 +1051,16 @@ it("sqlserver.v20180328.DescribeDBsNormal", async function () {
 it("sqlserver.v20180328.ModifyAccountPrivilege", async function () {
     try {
        const data = await client.ModifyAccountPrivilege({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("sqlserver.v20180328.DescribeDatabasesNormal", async function () {
+    try {
+       const data = await client.DescribeDatabasesNormal({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1021,16 +1111,6 @@ it("sqlserver.v20180328.RenewDBInstance", async function () {
 it("sqlserver.v20180328.InquiryPriceUpgradeDBInstance", async function () {
     try {
        const data = await client.InquiryPriceUpgradeDBInstance({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("sqlserver.v20180328.DescribeBackupFiles", async function () {
-    try {
-       const data = await client.DescribeBackupFiles({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1108,6 +1188,16 @@ it("sqlserver.v20180328.DescribeDBSecurityGroups", async function () {
     }
 })
 
+it("sqlserver.v20180328.ModifyReadOnlyGroupDetails", async function () {
+    try {
+       const data = await client.ModifyReadOnlyGroupDetails({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("sqlserver.v20180328.DeleteBackupMigration", async function () {
     try {
        const data = await client.DeleteBackupMigration({})
@@ -1138,9 +1228,9 @@ it("sqlserver.v20180328.UpgradeDBInstance", async function () {
     }
 })
 
-it("sqlserver.v20180328.ModifyReadOnlyGroupDetails", async function () {
+it("sqlserver.v20180328.ModifyDBInstanceRenewFlag", async function () {
     try {
-       const data = await client.ModifyReadOnlyGroupDetails({})
+       const data = await client.ModifyDBInstanceRenewFlag({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1148,9 +1238,9 @@ it("sqlserver.v20180328.ModifyReadOnlyGroupDetails", async function () {
     }
 })
 
-it("sqlserver.v20180328.ModifyDBInstanceRenewFlag", async function () {
+it("sqlserver.v20180328.DescribeReadOnlyGroupByReadOnlyInstance", async function () {
     try {
-       const data = await client.ModifyDBInstanceRenewFlag({})
+       const data = await client.DescribeReadOnlyGroupByReadOnlyInstance({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

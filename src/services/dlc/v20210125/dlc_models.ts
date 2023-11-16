@@ -740,6 +740,58 @@ export interface DescribeDMSDatabaseResponse {
 }
 
 /**
+ * DescribeTablesName请求参数结构体
+ */
+export interface DescribeTablesNameRequest {
+  /**
+   * 列出该数据库下所属数据表。
+   */
+  DatabaseName: string
+  /**
+   * 返回数量，默认为10，最大值为100。
+   */
+  Limit?: number
+  /**
+   * 数据偏移量，从0开始，默认为0。
+   */
+  Offset?: number
+  /**
+   * 过滤条件，如下支持的过滤类型，传参Name应为其一
+table-name - String - （过滤条件）数据表名称,形如：table-001。
+table-id - String - （过滤条件）table id形如：12342。
+   */
+  Filters?: Array<Filter>
+  /**
+   * 指定查询的数据源名称，默认为DataLakeCatalog
+   */
+  DatasourceConnectionName?: string
+  /**
+   * 起始时间：用于对更新时间的筛选，格式为yyyy-mm-dd HH:MM:SS
+   */
+  StartTime?: string
+  /**
+   * 终止时间：用于对更新时间的筛选，格式为yyyy-mm-dd HH:MM:SS
+   */
+  EndTime?: string
+  /**
+   * 排序字段，支持：CreateTime（创建时间）、UpdateTime（更新时间）、StorageSize（存储空间）、RecordCount（行数）、Name（表名称）（不传则默认按name升序）
+   */
+  Sort?: string
+  /**
+   * 排序字段，false：降序（默认）；true：升序
+   */
+  Asc?: boolean
+  /**
+   * table type，表类型查询,可用值:EXTERNAL_TABLE,INDEX_TABLE,MANAGED_TABLE,MATERIALIZED_VIEW,TABLE,VIEW,VIRTUAL_VIEW
+   */
+  TableType?: string
+  /**
+   * 筛选字段-表格式：不传（默认）为查全部；LAKEFS：托管表；ICEBERG：非托管iceberg表；HIVE：非托管hive表；OTHER：非托管其它；
+   */
+  TableFormat?: string
+}
+
+/**
  * 策略集合
  */
 export interface Policys {
@@ -2219,6 +2271,24 @@ export interface AlterDMSPartitionRequest {
    * 分区
    */
   Partition?: DMSPartition
+}
+
+/**
+ * DescribeTablesName返回参数结构体
+ */
+export interface DescribeTablesNameResponse {
+  /**
+   * 数据表名称对象列表。
+   */
+  TableNameList?: Array<string>
+  /**
+   * 实例总数。
+   */
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

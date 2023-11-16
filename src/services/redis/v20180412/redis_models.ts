@@ -5034,17 +5034,17 @@ export interface StartupInstanceRequest {
  */
 export interface HotKeyInfo {
   /**
-   * 热Key
+   * 热 Key 的名称。
    */
-  Key: string
+  Key?: string
   /**
-   * 类型
+   * Key 类型。
    */
-  Type: string
+  Type?: string
   /**
-   * 数量
+   * 某段时间内热 Key 的访问次数
    */
-  Count: number
+  Count?: number
 }
 
 /**

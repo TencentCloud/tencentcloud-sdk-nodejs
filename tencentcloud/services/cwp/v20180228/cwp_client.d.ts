@@ -1943,7 +1943,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeBanWhiteList(req: DescribeBanWhiteListRequest, cb?: (error: string, rep: DescribeBanWhiteListResponse) => void): Promise<DescribeBanWhiteListResponse>;
     /**
-     *  一键检测
+     * 漏洞一键检测
      */
     ScanVul(req: ScanVulRequest, cb?: (error: string, rep: ScanVulResponse) => void): Promise<ScanVulResponse>;
     /**

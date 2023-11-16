@@ -2927,7 +2927,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeBanWhiteList", req, cb);
     }
     /**
-     *  一键检测
+     * 漏洞一键检测
      */
     async ScanVul(req, cb) {
         return this.request("ScanVul", req, cb);

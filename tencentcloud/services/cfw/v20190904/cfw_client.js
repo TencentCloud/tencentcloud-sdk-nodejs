@@ -340,7 +340,7 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
         return this.request("ModifyAddressTemplate", req, cb);
     }
     /**
-     * 防火墙开关列表
+     * 防火墙开关列表，已废弃，请使用DescribeFwEdgeIps
      */
     async DescribeSwitchLists(req, cb) {
         return this.request("DescribeSwitchLists", req, cb);

@@ -106,6 +106,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyMaintenanceSpan", req, cb);
     }
     /**
+     * 本接口（DescribeMaintenanceSpan）根据实例ID查询该实例的可维护时间窗。
+     */
+    async DescribeMaintenanceSpan(req, cb) {
+        return this.request("DescribeMaintenanceSpan", req, cb);
+    }
+    /**
      * 本接口（DescribeReadOnlyGroupDetails）用于查询只读组详情。
      */
     async DescribeReadOnlyGroupDetails(req, cb) {
@@ -118,22 +124,28 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreatePublishSubscribe", req, cb);
     }
     /**
-     * 本接口（DescribeReadOnlyGroupByReadOnlyInstance）用于通过只读副本实例ID查询其所在的只读组。
+     * 本接口(DescribeBackupFiles)用于查询单库备份明细
      */
-    async DescribeReadOnlyGroupByReadOnlyInstance(req, cb) {
-        return this.request("DescribeReadOnlyGroupByReadOnlyInstance", req, cb);
+    async DescribeBackupFiles(req, cb) {
+        return this.request("DescribeBackupFiles", req, cb);
     }
     /**
-     * 本接口（DescribeMaintenanceSpan）根据实例ID查询该实例的可维护时间窗。
+     * 本接口（DescribeRegularBackupPlan）用于查询实例定期备份保留计划
      */
-    async DescribeMaintenanceSpan(req, cb) {
-        return this.request("DescribeMaintenanceSpan", req, cb);
+    async DescribeRegularBackupPlan(req, cb) {
+        return this.request("DescribeRegularBackupPlan", req, cb);
     }
     /**
      * 本接口（DescribePublishSubscribe）用于查询发布订阅关系列表。
      */
     async DescribePublishSubscribe(req, cb) {
         return this.request("DescribePublishSubscribe", req, cb);
+    }
+    /**
+     * 本接口（DescribeDatabases）用于查询数据库列表。
+     */
+    async DescribeDatabases(req, cb) {
+        return this.request("DescribeDatabases", req, cb);
     }
     /**
      * 本接口（DescribeReadOnlyGroupList）用于查询只读组列表。
@@ -298,6 +310,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CompleteExpansion", req, cb);
     }
     /**
+     * 本接口(DescribeBackupStatistical)用于查询备份实时统计列表。
+     */
+    async DescribeBackupStatistical(req, cb) {
+        return this.request("DescribeBackupStatistical", req, cb);
+    }
+    /**
      * 本接口（CreateDB）用于创建数据库。
      */
     async CreateDB(req, cb) {
@@ -352,6 +370,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeletePublishSubscribe", req, cb);
     }
     /**
+     * 本接口(ModifyDatabaseShrinkDMF)用于收缩数据库mdf(Shrink mdf)。
+     */
+    async ModifyDatabaseShrinkMDF(req, cb) {
+        return this.request("ModifyDatabaseShrinkMDF", req, cb);
+    }
+    /**
      * 本接口（ResetAccountPassword）用于重置实例的账户密码。
      */
     async ResetAccountPassword(req, cb) {
@@ -370,6 +394,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeSlowlogs(req, cb) {
         return this.request("DescribeSlowlogs", req, cb);
+    }
+    /**
+     * 本接口(ModifyCrossBackupStrategy)用于开启、关闭地域备份策略。
+     */
+    async ModifyCrossBackupStrategy(req, cb) {
+        return this.request("ModifyCrossBackupStrategy", req, cb);
     }
     /**
      * 本接口(DeleteDB)用于删除数据库。
@@ -552,6 +582,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CloseInterCommunication", req, cb);
     }
     /**
+     * 本接口(DescribeBackupSummary)用于查询数据库备份概览信息。
+     */
+    async DescribeBackupSummary(req, cb) {
+        return this.request("DescribeBackupSummary", req, cb);
+    }
+    /**
      * 本接口（ModifyMigration）可以修改已有的迁移任务信息
      */
     async ModifyMigration(req, cb) {
@@ -570,6 +606,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("RecycleDBInstance", req, cb);
     }
     /**
+     * 本接口(DescribeBackupMonitor)用于查询备份空间使用详情。
+     */
+    async DescribeBackupMonitor(req, cb) {
+        return this.request("DescribeBackupMonitor", req, cb);
+    }
+    /**
      * 本接口（CloneDB）用于克隆数据库，只支持克隆到本实例，克隆时必须指定新库名称。
      */
     async CloneDB(req, cb) {
@@ -580,6 +622,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ModifyDBInstanceProject(req, cb) {
         return this.request("ModifyDBInstanceProject", req, cb);
+    }
+    /**
+     * 本接口(DescribeCrossBackupStatistical)用于查询跨地域备份实时统计列表。
+     */
+    async DescribeCrossBackupStatistical(req, cb) {
+        return this.request("DescribeCrossBackupStatistical", req, cb);
     }
     /**
      * 本接口（DeleteAccount）用于删除实例账号。
@@ -604,6 +652,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ModifyAccountPrivilege(req, cb) {
         return this.request("ModifyAccountPrivilege", req, cb);
+    }
+    /**
+     * 本接口(DescribeDBsNormal)用于查询数据库配置信息，此接口不包含数据库的关联账号
+     */
+    async DescribeDatabasesNormal(req, cb) {
+        return this.request("DescribeDatabasesNormal", req, cb);
     }
     /**
      * 本接口（RollbackInstance）用于按照时间点回档实例
@@ -635,12 +689,6 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async InquiryPriceUpgradeDBInstance(req, cb) {
         return this.request("InquiryPriceUpgradeDBInstance", req, cb);
-    }
-    /**
-     * 本接口(DescribeBackupFiles)用于查询单库备份明细
-     */
-    async DescribeBackupFiles(req, cb) {
-        return this.request("DescribeBackupFiles", req, cb);
     }
     /**
      * 本接口（InquiryPriceRenewDBInstance）用于查询包年包月实例的续费价格。
@@ -685,6 +733,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDBSecurityGroups", req, cb);
     }
     /**
+     * 本接口（ModifyReadOnlyGroupDetails）用于修改只读组详情。
+     */
+    async ModifyReadOnlyGroupDetails(req, cb) {
+        return this.request("ModifyReadOnlyGroupDetails", req, cb);
+    }
+    /**
      * 本接口（DeleteBackupMigration）用于删除备份导入任务。
      */
     async DeleteBackupMigration(req, cb) {
@@ -703,16 +757,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UpgradeDBInstance", req, cb);
     }
     /**
-     * 本接口（ModifyReadOnlyGroupDetails）用于修改只读组详情。
-     */
-    async ModifyReadOnlyGroupDetails(req, cb) {
-        return this.request("ModifyReadOnlyGroupDetails", req, cb);
-    }
-    /**
      * 本接口（ModifyDBInstanceRenewFlag）用于修改实例续费标记
      */
     async ModifyDBInstanceRenewFlag(req, cb) {
         return this.request("ModifyDBInstanceRenewFlag", req, cb);
+    }
+    /**
+     * 本接口（DescribeReadOnlyGroupByReadOnlyInstance）用于通过只读副本实例ID查询其所在的只读组。
+     */
+    async DescribeReadOnlyGroupByReadOnlyInstance(req, cb) {
+        return this.request("DescribeReadOnlyGroupByReadOnlyInstance", req, cb);
     }
 }
 exports.Client = Client;

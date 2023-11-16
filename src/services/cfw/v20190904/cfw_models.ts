@@ -5975,64 +5975,64 @@ export interface SwitchListsData {
    * 公网IP
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  PublicIp: string
+  PublicIp?: string
   /**
    * 内网IP
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  IntranetIp: string
+  IntranetIp?: string
   /**
    * 实例名
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  InstanceName: string
+  InstanceName?: string
   /**
    * 实例ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  InstanceId: string
+  InstanceId?: string
   /**
    * 资产类型
    */
-  AssetType: string
+  AssetType?: string
   /**
    * 地域
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Area: string
+  Area?: string
   /**
    * 防火墙开关
    */
-  Switch: number
+  Switch?: number
   /**
    * id值
    */
-  Id: number
+  Id?: number
   /**
    * 公网 IP 类型
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  PublicIpType: number
+  PublicIpType?: number
   /**
    * 风险端口数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  PortTimes: number
+  PortTimes?: number
   /**
    * 最近扫描时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  LastTime: string
+  LastTime?: string
   /**
    * 扫描深度
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ScanMode: string
+  ScanMode?: string
   /**
    * 扫描状态
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ScanStatus: number
+  ScanStatus?: number
 }
 
 /**
@@ -6466,25 +6466,25 @@ export interface DescribeSwitchListsResponse {
   /**
    * 总条数
    */
-  Total: number
+  Total?: number
   /**
    * 列表数据
    */
-  Data: Array<SwitchListsData>
+  Data?: Array<SwitchListsData>
   /**
    * 区域列表
    */
-  AreaLists: Array<string>
+  AreaLists?: Array<string>
   /**
    * 打开个数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  OnNum: number
+  OnNum?: number
   /**
    * 关闭个数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  OffNum: number
+  OffNum?: number
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

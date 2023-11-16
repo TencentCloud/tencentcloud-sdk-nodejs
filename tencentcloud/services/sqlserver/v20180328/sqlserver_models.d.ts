@@ -105,6 +105,36 @@ export interface CreateDBInstancesRequest {
     TimeZone?: string;
 }
 /**
+ * DescribeMigrations返回参数结构体
+ */
+export interface DescribeMigrationsResponse {
+    /**
+     * 查询结果的总数
+     */
+    TotalCount: number;
+    /**
+     * 查询结果的列表
+     */
+    MigrateTaskSet: Array<MigrateTask>;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * ModifyDBInstanceProject返回参数结构体
+ */
+export interface ModifyDBInstanceProjectResponse {
+    /**
+     * 修改成功的实例个数
+     */
+    Count: number;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * CloneDB返回参数结构体
  */
 export interface CloneDBResponse {
@@ -173,57 +203,94 @@ export interface ModifyDBEncryptAttributesResponse {
     RequestId?: string;
 }
 /**
- * ModifyBackupStrategy请求参数结构体
+ * DescribeDatabases请求参数结构体
  */
-export interface ModifyBackupStrategyRequest {
+export interface DescribeDatabasesRequest {
+    /**
+     * 实例ID
+     */
+    InstanceIdSet: Array<string>;
+    /**
+     * 分页返回，每页返回的数目，取值为1-100，默认值为20
+     */
+    Limit?: number;
+    /**
+     * 分页返回，页编号，默认值为第0页
+     */
+    Offset?: number;
+    /**
+     * 数据库名称
+     */
+    Name?: string;
+    /**
+     * 排序规则（desc-降序，asc-升序），默认desc
+     */
+    OrderByType?: string;
+    /**
+     * 是否已开启TDE加密，enable-已加密，disable-未加密
+     */
+    Encryption?: string;
+}
+/**
+ * 备份概览实时统计项
+ */
+export interface SummaryDetailRes {
+    /**
+     * 地域标识
+     */
+    RegionId: number;
+    /**
+     * 实例状态。1：申请中2：运行中3：受限运行中 (主备切换中)4：已隔离5：回收中6：已回收7：任务执行中 (实例做备份、回档等操作)8：已下线9：实例扩容中10：实例迁移中
+     */
+    Status: number;
     /**
      * 实例ID
      */
     InstanceId: string;
     /**
-     * 备份类型，当length(BackupDay) <=7 && length(BackupDay) >=2时，取值为weekly，当length(BackupDay)=1时，取值daily，默认daily
+     * 实例名称
      */
-    BackupType?: string;
+    Name: string;
     /**
-     * 备份时间点，取值为0-23的整数
+     * 备份空间
      */
-    BackupTime?: number;
+    ActualUsedSpace: number;
     /**
-     * BackupType取值为daily时，表示备份间隔天数。当前取值只能为1
+     * 数据备份空间
      */
-    BackupDay?: number;
+    DataBackupSpace: number;
     /**
-     * 备份模式（必填），master_pkg-主节点上打包备份文件；master_no_pkg-主节点单库备份文件；slave_pkg-从节点上打包备份文件；slave_no_pkg-从节点上单库备份文件，从节点上备份只有在always on容灾模式下支持。
+     * 数据备份文件总个数
      */
-    BackupModel?: string;
+    DataBackupCount: number;
     /**
-     * BackupType取值为weekly时，表示每周的星期N做备份。（如果数据备份保留时间<7天，则取值[1,2,3,4,5,6,7]。如果数据备份保留时间>=7天，则备份周期取值至少是一周的任意2天）
+     * 日志备份空间
      */
-    BackupCycle?: Array<number | bigint>;
+    LogBackupSpace: number;
     /**
-     * 数据(日志)备份保留天数（必填），取值[3-1830]天，默认7天
+     * 日志备份文件总个数
      */
-    BackupSaveDays?: number;
+    LogBackupCount: number;
     /**
-     * 定期备份状态 enable-开启，disable-关闭，默认关闭
+     * 自动备份空间
      */
-    RegularBackupEnable?: string;
+    AutoBackupSpace: number;
     /**
-     * 定期备份保留天数 [90 - 3650]天，默认365天
+     * 自动备份文件总个数
      */
-    RegularBackupSaveDays?: number;
+    AutoBackupCount: number;
     /**
-     * 定期备份策略 years-每年，quarters-每季度，months-每月，默认months
+     * 手动备份空间
      */
-    RegularBackupStrategy?: string;
+    ManualBackupSpace: number;
     /**
-     * 定期备份保留个数，默认1个
+     * 手动备份文件总个数
      */
-    RegularBackupCounts?: number;
+    ManualBackupCount: number;
     /**
-     * 定期备份开始日期，格式-YYYY-MM-DD 默认当前日期
+     * 实例所属地域码
      */
-    RegularBackupStartTime?: string;
+    Region: string;
 }
 /**
  * RestoreInstance请求参数结构体
@@ -341,6 +408,35 @@ export interface CreatePublishSubscribeRequest {
      * 发布订阅的名称，默认值为：default_name
      */
     PublishSubscribeName?: string;
+}
+/**
+ * ModifyCrossBackupStrategy请求参数结构体
+ */
+export interface ModifyCrossBackupStrategyRequest {
+    /**
+     * 跨地域备份开关(数据备份&日志备份) enable-开启，disable-关闭
+     */
+    CrossBackupEnabled: string;
+    /**
+     * 实例Id
+     */
+    InstanceId?: string;
+    /**
+     * 实例ID列表
+     */
+    InstanceIdSet?: Array<string>;
+    /**
+     * 跨地域备份保留天数，取值：7~1830，默认7天
+     */
+    CrossBackupSaveDays?: number;
+    /**
+     * 跨地域备份的目标地域ID，最多两个，最少一个
+     */
+    CrossBackupRegion?: Array<string>;
+    /**
+     * 是否立即清理跨地域备份(数据备份&日志备份) ，只有在BackupEnabled = disable时有效。1-是，0-否，默认：0
+     */
+    CleanUpCrossBackup?: number;
 }
 /**
  * CreateBusinessIntelligenceFile请求参数结构体
@@ -550,27 +646,18 @@ export interface DatabaseTupleStatus {
     Status: string;
 }
 /**
- * StartBackupMigration返回参数结构体
+ * DescribeDatabasesNormal请求参数结构体
  */
-export interface StartBackupMigrationResponse {
+export interface DescribeDatabasesNormalRequest {
     /**
-     * 流程ID
+     * 实例ID，形如mssql-7vfv3rk3
      */
-    FlowId: number;
-    /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
+    InstanceId: string;
 }
 /**
- * ModifyReadOnlyGroupDetails返回参数结构体
+ * DescribeBackupSummary请求参数结构体
  */
-export interface ModifyReadOnlyGroupDetailsResponse {
-    /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
+export declare type DescribeBackupSummaryRequest = null;
 /**
  * ModifyBackupStrategy返回参数结构体
  */
@@ -731,13 +818,33 @@ export interface CreateBusinessIntelligenceFileResponse {
     RequestId?: string;
 }
 /**
- * OpenInterCommunication请求参数结构体
+ * DescribeRegularBackupPlan请求参数结构体
  */
-export interface OpenInterCommunicationRequest {
+export interface DescribeRegularBackupPlanRequest {
     /**
-     * 打开互通组的实例ID集合
+     * 实例ID
      */
-    InstanceIdSet: Array<string>;
+    InstanceId: string;
+    /**
+     * 定期备份保留天数 [90 - 3650]天，默认365天
+     */
+    RegularBackupSaveDays: number;
+    /**
+     * 定期备份策略 years-每年，quarters-每季度，months-每月，默认months
+     */
+    RegularBackupStrategy: string;
+    /**
+     * 定期备份保留个数，默认1个
+     */
+    RegularBackupCounts: number;
+    /**
+     * 定期备份开始日期，格式-YYYY-MM-DD 默认当前日期
+     */
+    RegularBackupStartTime: string;
+    /**
+     * 常规备份周期
+     */
+    BackupCycle: Array<number | bigint>;
 }
 /**
  * DescribeProductConfig请求参数结构体
@@ -969,19 +1076,6 @@ export interface DescribeBackupsRequest {
     StorageStrategy?: number;
 }
 /**
- * ModifyDBInstanceProject返回参数结构体
- */
-export interface ModifyDBInstanceProjectResponse {
-    /**
-     * 修改成功的实例个数
-     */
-    Count: number;
-    /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
-/**
  * DescribeRollbackTime返回参数结构体
  */
 export interface DescribeRollbackTimeResponse {
@@ -989,6 +1083,107 @@ export interface DescribeRollbackTimeResponse {
      * 数据库可回档实例信息
      */
     Details: Array<DbRollbackTimeInfo>;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * DescribeBackupSummary返回参数结构体
+ */
+export interface DescribeBackupSummaryResponse {
+    /**
+     * 实际免费总空间，单位(KB)。
+     */
+    FreeSpace: number;
+    /**
+     * 备份实际使用空间，单位(KB)。
+     */
+    ActualUsedSpace: number;
+    /**
+     * 备份文件总个数。
+     */
+    BackupFilesTotal: number;
+    /**
+     * 备份占用收费空间，单位(KB)。
+     */
+    BillingSpace: number;
+    /**
+     * 数据备份使用空间，单位(KB)。
+     */
+    DataBackupSpace: number;
+    /**
+     * 数据备份文件总个数。
+     */
+    DataBackupCount: number;
+    /**
+     * 数据备份中手动备份使用空间，单位(KB)。
+     */
+    ManualBackupSpace: number;
+    /**
+     * 数据备份中手动备份文件总个数。
+     */
+    ManualBackupCount: number;
+    /**
+     * 数据备份中自动备份使用空间，单位(KB)。
+     */
+    AutoBackupSpace: number;
+    /**
+     * 数据备份中自动备份文件总个数。
+     */
+    AutoBackupCount: number;
+    /**
+     * 日志备份使用空间，单位(KB)。
+     */
+    LogBackupSpace: number;
+    /**
+     * 日志备份文件总个数。
+     */
+    LogBackupCount: number;
+    /**
+     * 预估收费金额，单位（元/小时）。
+     */
+    EstimatedAmount: number;
+    /**
+     * 本地备份文件总个数
+     */
+    LocalBackupFilesTotal: number;
+    /**
+     * 跨地域备份文件总个数
+     */
+    CrossBackupFilesTotal: number;
+    /**
+     * 跨地域备份占用收费空间，单位（KB）
+     */
+    CrossBillingSpace: number;
+    /**
+     * 跨地域自动数据备份使用空间，单位（KB）
+     */
+    CrossAutoBackupSpace: number;
+    /**
+     * 跨地域自动数据备份文件总个数
+     */
+    CrossAutoBackupCount: number;
+    /**
+     * 本地日志备份使用空间，单位（KB）
+     */
+    LocalLogBackupSpace: number;
+    /**
+     * 本地日志备份文件总个数
+     */
+    LocalLogBackupCount: number;
+    /**
+     * 跨地域日志备份使用空间，单位（KB）
+     */
+    CrossLogBackupSpace: number;
+    /**
+     * 跨地域日志备份文件总个数
+     */
+    CrossLogBackupCount: number;
+    /**
+     * 跨地域备份预估收费金额，单位（元/小时）
+     */
+    CrossEstimatedAmount: number;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1051,6 +1246,19 @@ export interface DescribeIncrementalMigrationRequest {
      * 增量备份导入任务ID，由CreateIncrementalMigration接口返回
      */
     IncrementalMigrationId?: string;
+}
+/**
+ * ModifyDatabaseShrinkMDF请求参数结构体
+ */
+export interface ModifyDatabaseShrinkMDFRequest {
+    /**
+     * 数据库名数组
+     */
+    DBNames: Array<string>;
+    /**
+     * 实例ID
+     */
+    InstanceId: string;
 }
 /**
  * DescribeReadOnlyGroupByReadOnlyInstance返回参数结构体
@@ -1165,49 +1373,33 @@ export interface StepDetail {
     Name: string;
 }
 /**
- * 实例参数的详细描述
+ * DescribeBackupMonitor返回参数结构体
  */
-export interface ParameterDetail {
+export interface DescribeBackupMonitorResponse {
     /**
-     * 参数名称
+     * 备份趋势图时间轴
      */
-    Name: string;
+    TimeStamp: Array<string>;
     /**
-     * 参数类型，integer-整型，enum-枚举型
+     * 免费备份空间
      */
-    ParamType: string;
+    FreeSpace: Array<number>;
     /**
-     * 参数默认值
+     * 实际总备份空间
      */
-    Default: string;
+    ActualUsedSpace: Array<number>;
     /**
-     * 参数描述
+     * 日志备份空间
      */
-    Description: string;
+    LogBackupSpace: Array<number>;
     /**
-     * 参数当前值
+     * 数据备份空间
      */
-    CurrentValue: string;
+    DataBackupSpace: Array<number>;
     /**
-     * 修改参数后，是否需要重启数据库以使参数生效，0-不需要重启，1-需要重启
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
-    NeedReboot: number;
-    /**
-     * 参数允许的最大值
-     */
-    Max: number;
-    /**
-     * 参数允许的最小值
-     */
-    Min: number;
-    /**
-     * 参数允许的枚举类型
-     */
-    EnumValue: Array<string>;
-    /**
-     * 参数状态 0-状态正常 1-在修改中
-     */
-    Status: number;
+    RequestId?: string;
 }
 /**
  * DescribeInstanceByOrders请求参数结构体
@@ -1230,6 +1422,23 @@ export interface DescribeBusinessIntelligenceFileResponse {
      * 文件部署任务集合
      */
     BackupMigrationSet: Array<BusinessIntelligenceFile>;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * DescribeDatabasesNormal返回参数结构体
+ */
+export interface DescribeDatabasesNormalResponse {
+    /**
+     * 表示当前实例下的数据库总个数
+     */
+    TotalCount?: number;
+    /**
+     * 返回数据库的详细配置信息，例如：数据库是否开启CDC、CT等
+     */
+    DBList?: Array<DbNormalDetail>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1592,6 +1801,23 @@ export interface BusinessIntelligenceFile {
     Action: FileAction;
 }
 /**
+ * DescribeBackupMonitor请求参数结构体
+ */
+export interface DescribeBackupMonitorRequest {
+    /**
+     * 备份空间使用详情开始时间
+     */
+    StartTime: string;
+    /**
+     * 备份空间使用详情结束时间
+     */
+    EndTime: string;
+    /**
+     * 备份趋势查询类型，local-本地备份，cross-跨地域备份
+     */
+    Type?: string;
+}
+/**
  * CompleteMigration返回参数结构体
  */
 export interface CompleteMigrationResponse {
@@ -1631,61 +1857,38 @@ export interface StartMigrationCheckResponse {
     RequestId?: string;
 }
 /**
- * 查询迁移任务列表类型
+ * DescribeBackupStatistical请求参数结构体
  */
-export interface MigrateTask {
+export interface DescribeBackupStatisticalRequest {
     /**
-     * 迁移任务ID
+     * 分页返回，每页返回的数目，取值为1-100，默认值为100
      */
-    MigrateId: number;
+    Limit: number;
     /**
-     * 迁移任务名称
+     * 分页返回，页编号，默认值为第0页。
      */
-    MigrateName: string;
+    Offset: number;
     /**
-     * 迁移任务所属的用户ID
+     * 一个或者多个实例ID。实例ID，格式如：mssql-si2823jyl。
      */
-    AppId: number;
+    InstanceIdSet?: Array<string>;
     /**
-     * 迁移任务所属的地域
+     * 实例名称列表，模糊查询。
      */
-    Region: string;
+    InstanceNameSet?: Array<string>;
     /**
-     * 迁移源的类型 1:TencentDB for SQLServer 2:云服务器自建SQLServer数据库 4:SQLServer备份还原 5:SQLServer备份还原（COS方式）
+     * 排序字段，默认default，则按照备份空间降序。
+  default 按照备份空间排序
+  data 数据备份排序
+  log 日志备份排序
+  auto 自动备份排序
+  manual 手动备份排序
      */
-    SourceType: number;
+    OrderBy?: string;
     /**
-     * 迁移任务的创建时间
+     * 默认降序，[desc-降序，asc-升序]。
      */
-    CreateTime: string;
-    /**
-     * 迁移任务的开始时间
-     */
-    StartTime: string;
-    /**
-     * 迁移任务的结束时间
-     */
-    EndTime: string;
-    /**
-     * 迁移任务的状态（1:初始化,4:迁移中,5.迁移失败,6.迁移成功,7已中止,8已删除,9中止中,10完成中,11中止失败,12完成失败）
-     */
-    Status: number;
-    /**
-     * 信息
-     */
-    Message: string;
-    /**
-     * 是否迁移任务经过检查（0:未校验,1:校验成功,2:校验失败,3:校验中）
-     */
-    CheckFlag: number;
-    /**
-     * 迁移任务当前进度（单位%）
-     */
-    Progress: number;
-    /**
-     * 迁移任务进度细节
-     */
-    MigrateDetail: MigrateDetail;
+    OrderByType?: string;
 }
 /**
  * 实例可售卖的规格信息
@@ -1934,6 +2137,23 @@ export interface ModifyMigrationResponse {
     RequestId?: string;
 }
 /**
+ * DescribeBackupStatistical返回参数结构体
+ */
+export interface DescribeBackupStatisticalResponse {
+    /**
+     * 符合条件的实例总数。分页返回的话，这个值指的是所有符合条件的实例的个数，而非当前根据Limit和Offset值返回的实例个数。
+     */
+    TotalCount: number;
+    /**
+     * 实例列表。
+     */
+    Items: Array<SummaryDetailRes>;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * RecycleReadOnlyGroup返回参数结构体
  */
 export interface RecycleReadOnlyGroupResponse {
@@ -2167,6 +2387,15 @@ export interface CreateCloudReadOnlyDBInstancesRequest {
     TimeZone?: string;
 }
 /**
+ * StopMigration请求参数结构体
+ */
+export interface StopMigrationRequest {
+    /**
+     * 迁移任务ID
+     */
+    MigrateId: number;
+}
+/**
  * ModifyInstanceEncryptAttributes返回参数结构体
  */
 export interface ModifyInstanceEncryptAttributesResponse {
@@ -2251,17 +2480,17 @@ export interface Events {
     ExternalAddr?: string;
 }
 /**
- * DescribeMigrations返回参数结构体
+ * DescribeCrossBackupStatistical返回参数结构体
  */
-export interface DescribeMigrationsResponse {
+export interface DescribeCrossBackupStatisticalResponse {
     /**
-     * 查询结果的总数
+     * 跨地域备份概览实时统计总条数
      */
     TotalCount: number;
     /**
-     * 查询结果的列表
+     * 跨地域备份概览实时统计列表
      */
-    MigrateTaskSet: Array<MigrateTask>;
+    Items: Array<CrossSummaryDetailRes>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2825,6 +3054,15 @@ export interface DealInstance {
     DealName?: string;
 }
 /**
+ * TerminateDBInstance请求参数结构体
+ */
+export interface TerminateDBInstanceRequest {
+    /**
+     * 主动销毁的实例ID列表，格式如：[mssql-3l3fgqn7]。与云数据库控制台页面中显示的实例ID相同
+     */
+    InstanceIdSet: Array<string>;
+}
+/**
  * DescribeDBCharsets请求参数结构体
  */
 export interface DescribeDBCharsetsRequest {
@@ -2889,6 +3127,15 @@ export interface DescribeDBsRequest {
     Encryption?: string;
 }
 /**
+ * OpenInterCommunication请求参数结构体
+ */
+export interface OpenInterCommunicationRequest {
+    /**
+     * 打开互通组的实例ID集合
+     */
+    InstanceIdSet: Array<string>;
+}
+/**
  * DescribeMigrationDatabases请求参数结构体
  */
 export interface DescribeMigrationDatabasesRequest {
@@ -2950,6 +3197,51 @@ export interface ModifyDatabaseCTResponse {
     RequestId?: string;
 }
 /**
+ * 实例参数的详细描述
+ */
+export interface ParameterDetail {
+    /**
+     * 参数名称
+     */
+    Name: string;
+    /**
+     * 参数类型，integer-整型，enum-枚举型
+     */
+    ParamType: string;
+    /**
+     * 参数默认值
+     */
+    Default: string;
+    /**
+     * 参数描述
+     */
+    Description: string;
+    /**
+     * 参数当前值
+     */
+    CurrentValue: string;
+    /**
+     * 修改参数后，是否需要重启数据库以使参数生效，0-不需要重启，1-需要重启
+     */
+    NeedReboot: number;
+    /**
+     * 参数允许的最大值
+     */
+    Max: number;
+    /**
+     * 参数允许的最小值
+     */
+    Min: number;
+    /**
+     * 参数允许的枚举类型
+     */
+    EnumValue: Array<string>;
+    /**
+     * 参数状态 0-状态正常 1-在修改中
+     */
+    Status: number;
+}
+/**
  * DescribeRegions请求参数结构体
  */
 export declare type DescribeRegionsRequest = null;
@@ -2980,13 +3272,13 @@ export interface AccountPrivilege {
     AccountType?: string;
 }
 /**
- * StopMigration请求参数结构体
+ * ModifyCrossBackupStrategy返回参数结构体
  */
-export interface StopMigrationRequest {
+export interface ModifyCrossBackupStrategyResponse {
     /**
-     * 迁移任务ID
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
-    MigrateId: number;
+    RequestId?: string;
 }
 /**
  * CreateReadOnlyDBInstances返回参数结构体
@@ -3000,6 +3292,43 @@ export interface CreateReadOnlyDBInstancesResponse {
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * DescribeCrossBackupStatistical请求参数结构体
+ */
+export interface DescribeCrossBackupStatisticalRequest {
+    /**
+     * 分页,页数
+     */
+    Offset: number;
+    /**
+     * 分页，页大小
+     */
+    Limit: number;
+    /**
+     * 实例ID列表
+     */
+    InstanceIdSet?: Array<string>;
+    /**
+     * 实例名称列表
+     */
+    InstanceNameSet?: Array<string>;
+    /**
+     * 跨地域备份状态，enable-开启，disable-关闭
+     */
+    CrossBackupStatus?: string;
+    /**
+     * 跨地域备份目标地域
+     */
+    CrossRegion?: string;
+    /**
+     * 排序字段，默认default-按照备份空间降序排序，data-按照数据备份排序，log-按照日志备份培训
+     */
+    OrderBy?: string;
+    /**
+     * 排序规则（desc-降序，asc-升序），默认desc
+     */
+    OrderByType?: string;
 }
 /**
  * DeleteMigration请求参数结构体
@@ -3064,13 +3393,17 @@ export interface RemoveBackupsResponse {
     RequestId?: string;
 }
 /**
- * TerminateDBInstance请求参数结构体
+ * StartBackupMigration返回参数结构体
  */
-export interface TerminateDBInstanceRequest {
+export interface StartBackupMigrationResponse {
     /**
-     * 主动销毁的实例ID列表，格式如：[mssql-3l3fgqn7]。与云数据库控制台页面中显示的实例ID相同
+     * 流程ID
      */
-    InstanceIdSet: Array<string>;
+    FlowId: number;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * DescribeUploadIncrementalInfo返回参数结构体
@@ -3642,6 +3975,19 @@ export interface ModifyInstanceParamResponse {
     RequestId?: string;
 }
 /**
+ * SwitchCloudInstanceHA返回参数结构体
+ */
+export interface SwitchCloudInstanceHAResponse {
+    /**
+     * 异步任务流程ID
+     */
+    FlowId?: number;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * InquiryPriceRenewDBInstance请求参数结构体
  */
 export interface InquiryPriceRenewDBInstanceRequest {
@@ -3823,6 +4169,63 @@ export interface CreateBackupResponse {
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * 查询迁移任务列表类型
+ */
+export interface MigrateTask {
+    /**
+     * 迁移任务ID
+     */
+    MigrateId: number;
+    /**
+     * 迁移任务名称
+     */
+    MigrateName: string;
+    /**
+     * 迁移任务所属的用户ID
+     */
+    AppId: number;
+    /**
+     * 迁移任务所属的地域
+     */
+    Region: string;
+    /**
+     * 迁移源的类型 1:TencentDB for SQLServer 2:云服务器自建SQLServer数据库 4:SQLServer备份还原 5:SQLServer备份还原（COS方式）
+     */
+    SourceType: number;
+    /**
+     * 迁移任务的创建时间
+     */
+    CreateTime: string;
+    /**
+     * 迁移任务的开始时间
+     */
+    StartTime: string;
+    /**
+     * 迁移任务的结束时间
+     */
+    EndTime: string;
+    /**
+     * 迁移任务的状态（1:初始化,4:迁移中,5.迁移失败,6.迁移成功,7已中止,8已删除,9中止中,10完成中,11中止失败,12完成失败）
+     */
+    Status: number;
+    /**
+     * 信息
+     */
+    Message: string;
+    /**
+     * 是否迁移任务经过检查（0:未校验,1:校验成功,2:校验失败,3:校验中）
+     */
+    CheckFlag: number;
+    /**
+     * 迁移任务当前进度（单位%）
+     */
+    Progress: number;
+    /**
+     * 迁移任务进度细节
+     */
+    MigrateDetail: MigrateDetail;
 }
 /**
  * 实例详细信息
@@ -4717,6 +5120,67 @@ export interface DescribePublishSubscribeRequest {
     Limit?: number;
 }
 /**
+ * 跨地域备份实时统计列表项
+ */
+export interface CrossSummaryDetailRes {
+    /**
+     * 实例状态
+     */
+    Status: number;
+    /**
+     * 实例所属地域
+     */
+    Region: string;
+    /**
+     * 实例ID
+     */
+    InstanceId: string;
+    /**
+     * 实例名称
+     */
+    Name: string;
+    /**
+     * 跨地域备份状态 enable-开启，disable-关闭
+     */
+    CrossBackupEnabled: string;
+    /**
+     * 跨地域备份目标地域
+     */
+    CrossRegions: Array<string>;
+    /**
+     * 最新备份开始时间
+     */
+    LastBackupStartTime: string;
+    /**
+     * 跨地域备份保留天数
+     */
+    CrossBackupSaveDays: number;
+    /**
+     * 跨地域数据备份总空间
+     */
+    DataBackupSpace: number;
+    /**
+     * 跨地域数据备份文件总个数
+     */
+    DataBackupCount: number;
+    /**
+     * 跨地域日志备份总空间
+     */
+    LogBackupSpace: number;
+    /**
+     * 跨地域日志备份文件总个数
+     */
+    LogBackupCount: number;
+    /**
+     * 跨地域备份总空间
+     */
+    ActualUsedSpace: number;
+    /**
+     * 跨地域备份总个数
+     */
+    ActualUsedCount: number;
+}
+/**
  * ModifyDatabaseCDC返回参数结构体
  */
 export interface ModifyDatabaseCDCResponse {
@@ -4862,17 +5326,21 @@ export interface RenewDBInstanceResponse {
     RequestId?: string;
 }
 /**
- * StartInstanceXEvent请求参数结构体
+ * DescribeDatabases返回参数结构体
  */
-export interface StartInstanceXEventRequest {
+export interface DescribeDatabasesResponse {
     /**
-     * 实例ID
+     * 数据库数量
      */
-    InstanceId: string;
+    TotalCount?: number;
     /**
-     * 开启、关闭扩展事件
+     * 实例数据库列表
      */
-    EventConfig: Array<EventConfig>;
+    DBInstances?: Array<InstanceDBDetail>;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * 账号的数据库权限信息
@@ -4990,6 +5458,19 @@ export interface DescribeBackupsResponse {
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * ModifyPublishSubscribeName请求参数结构体
+ */
+export interface ModifyPublishSubscribeNameRequest {
+    /**
+     * 发布订阅ID
+     */
+    PublishSubscribeId: number;
+    /**
+     * 待修改的发布订阅名称
+     */
+    PublishSubscribeName: string;
 }
 /**
  * 实例绑定的标签信息
@@ -5141,13 +5622,9 @@ export interface CreateBackupRequest {
     StorageStrategy?: number;
 }
 /**
- * SwitchCloudInstanceHA返回参数结构体
+ * ModifyReadOnlyGroupDetails返回参数结构体
  */
-export interface SwitchCloudInstanceHAResponse {
-    /**
-     * 异步任务流程ID
-     */
-    FlowId?: number;
+export interface ModifyReadOnlyGroupDetailsResponse {
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -5251,17 +5728,21 @@ export interface ModifyIncrementalMigrationResponse {
     RequestId?: string;
 }
 /**
- * ModifyPublishSubscribeName请求参数结构体
+ * DescribeRegularBackupPlan返回参数结构体
  */
-export interface ModifyPublishSubscribeNameRequest {
+export interface DescribeRegularBackupPlanResponse {
     /**
-     * 发布订阅ID
+     * 常规备份计划
      */
-    PublishSubscribeId: number;
+    SaveModePeriod: Array<string>;
     /**
-     * 待修改的发布订阅名称
+     * 定期备份计划
      */
-    PublishSubscribeName: string;
+    SaveModeRegular: Array<string>;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * DeletePublishSubscribe返回参数结构体
@@ -5702,6 +6183,19 @@ export interface DescribeDBInstancesResponse {
     RequestId?: string;
 }
 /**
+ * ModifyDatabaseShrinkMDF返回参数结构体
+ */
+export interface ModifyDatabaseShrinkMDFResponse {
+    /**
+     * 流程ID
+     */
+    FlowId?: number;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * DescribeSlowlogs返回参数结构体
  */
 export interface DescribeSlowlogsResponse {
@@ -5772,6 +6266,19 @@ export interface ResetAccountPasswordRequest {
      * 更新后的账户密码信息数组
      */
     Accounts: Array<AccountPassword>;
+}
+/**
+ * StartInstanceXEvent请求参数结构体
+ */
+export interface StartInstanceXEventRequest {
+    /**
+     * 实例ID
+     */
+    InstanceId: string;
+    /**
+     * 开启、关闭扩展事件
+     */
+    EventConfig: Array<EventConfig>;
 }
 /**
  * ModifyReadOnlyGroupDetails请求参数结构体
@@ -6156,6 +6663,59 @@ export interface SwitchLog {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Reason?: string;
+}
+/**
+ * ModifyBackupStrategy请求参数结构体
+ */
+export interface ModifyBackupStrategyRequest {
+    /**
+     * 实例ID
+     */
+    InstanceId: string;
+    /**
+     * 备份类型，当length(BackupDay) <=7 && length(BackupDay) >=2时，取值为weekly，当length(BackupDay)=1时，取值daily，默认daily
+     */
+    BackupType?: string;
+    /**
+     * 备份时间点，取值为0-23的整数
+     */
+    BackupTime?: number;
+    /**
+     * BackupType取值为daily时，表示备份间隔天数。当前取值只能为1
+     */
+    BackupDay?: number;
+    /**
+     * 备份模式（必填），master_pkg-主节点上打包备份文件；master_no_pkg-主节点单库备份文件；slave_pkg-从节点上打包备份文件；slave_no_pkg-从节点上单库备份文件，从节点上备份只有在always on容灾模式下支持。
+     */
+    BackupModel?: string;
+    /**
+     * BackupType取值为weekly时，表示每周的星期N做备份。（如果数据备份保留时间<7天，则取值[1,2,3,4,5,6,7]。如果数据备份保留时间>=7天，则备份周期取值至少是一周的任意2天）
+     */
+    BackupCycle?: Array<number | bigint>;
+    /**
+     * 数据(日志)备份保留天数（必填），取值[3-1830]天，默认7天
+     */
+    BackupSaveDays?: number;
+    /**
+     * 定期备份状态 enable-开启，disable-关闭，默认关闭
+     */
+    RegularBackupEnable?: string;
+    /**
+     * 定期备份保留天数 [90 - 3650]天，默认365天
+     */
+    RegularBackupSaveDays?: number;
+    /**
+     * 定期备份策略 years-每年，quarters-每季度，months-每月，默认months
+     */
+    RegularBackupStrategy?: string;
+    /**
+     * 定期备份保留个数，默认1个
+     */
+    RegularBackupCounts?: number;
+    /**
+     * 定期备份开始日期，格式-YYYY-MM-DD 默认当前日期
+     */
+    RegularBackupStartTime?: string;
 }
 /**
  * CreateCloudDBInstances请求参数结构体

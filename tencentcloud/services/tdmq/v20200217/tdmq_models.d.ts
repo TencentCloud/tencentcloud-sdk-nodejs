@@ -1648,6 +1648,11 @@ export interface RocketMQSubscription {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     MaxRetryTimes?: number;
+    /**
+     * 协议类型
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ClientProtocol?: string;
 }
 /**
  * RabbitMQ的vhost详情
@@ -4697,61 +4702,61 @@ export interface RocketMQVipInstance {
     /**
      * 实例id
      */
-    InstanceId: string;
+    InstanceId?: string;
     /**
      * 实例名称
      */
-    InstanceName: string;
+    InstanceName?: string;
     /**
      * 实例版本
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    InstanceVersion: string;
+    InstanceVersion?: string;
     /**
      * 实例状态，0表示创建中，1表示正常，2表示隔离中，3表示已销毁，4 - 异常, 5 - 发货失败，6 - 变配中，7 - 变配失败
      */
-    Status: number;
+    Status?: number;
     /**
      * 节点数量
      */
-    NodeCount: number;
+    NodeCount?: number;
     /**
      * 实例配置规格名称
      */
-    ConfigDisplay: string;
+    ConfigDisplay?: string;
     /**
      * 峰值TPS
      */
-    MaxTps: number;
+    MaxTps?: number;
     /**
      * 峰值带宽，Mbps为单位
      */
-    MaxBandWidth: number;
+    MaxBandWidth?: number;
     /**
      * 存储容量，GB为单位
      */
-    MaxStorage: number;
+    MaxStorage?: number;
     /**
      * 实例到期时间，毫秒为单位
      */
-    ExpireTime: number;
+    ExpireTime?: number;
     /**
      * 自动续费标记，0表示默认状态(用户未设置，即初始状态即手动续费)， 1表示自动续费，2表示明确不自动续费(用户设置)
      */
-    AutoRenewFlag: number;
+    AutoRenewFlag?: number;
     /**
      * 0-后付费，1-预付费
      */
-    PayMode: number;
+    PayMode?: number;
     /**
      * 备注信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Remark: string;
+    Remark?: string;
     /**
      * 实例配置ID
      */
-    SpecName: string;
+    SpecName?: string;
     /**
      * 最大可设置消息保留时间，小时为单位
   注意：此字段可能返回 null，表示取不到有效值。
@@ -4767,6 +4772,16 @@ export interface RocketMQVipInstance {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Retention?: number;
+    /**
+     * 是否开启ACL鉴权
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AclEnabled?: boolean;
+    /**
+     * 销毁时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DestroyTime?: number;
 }
 /**
  * 命名空间信息

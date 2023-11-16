@@ -3710,6 +3710,21 @@ export interface TextLabelDistributionDetailInfoSecondClass {
     ChildLabelList?: Array<TextLabelDistributionDetailInfoThirdClass>;
 }
 /**
+ * 太极任务预训练模型信息
+ */
+export interface PreTrainModel {
+    /**
+     * 模型ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ModelId?: string;
+    /**
+     * 模型名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ModelName?: string;
+}
+/**
  * 出参类型
  */
 export interface BatchTaskSetItem {
@@ -4298,6 +4313,10 @@ export interface CreateTrainingTaskRequest {
      * 回调地址，用于创建/启动/停止训练任务的异步回调。回调格式&内容详见：[[TI-ONE接口回调说明]](https://cloud.tencent.com/document/product/851/84292)
      */
     CallbackUrl?: string;
+    /**
+     * 太极预训练模型ID
+     */
+    PreTrainModel?: PreTrainModel;
 }
 /**
  * 对话输入内容

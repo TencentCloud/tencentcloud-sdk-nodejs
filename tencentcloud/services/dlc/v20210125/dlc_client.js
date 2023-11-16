@@ -268,6 +268,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyWorkGroup", req, cb);
     }
     /**
+     * 本接口（DescribeTables）用于查询数据表名称列表
+     */
+    async DescribeTablesName(req, cb) {
+        return this.request("DescribeTablesName", req, cb);
+    }
+    /**
      * 上报元数据心跳
      */
     async ReportHeartbeatMetaData(req, cb) {

@@ -134,6 +134,7 @@ import {
   DescribeModelServiceGroupsRequest,
   ServiceEIPInfo,
   TextLabelDistributionDetailInfoSecondClass,
+  PreTrainModel,
   BatchTaskSetItem,
   ImageInfo,
   ServiceInfo,

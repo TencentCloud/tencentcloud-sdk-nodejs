@@ -6151,7 +6151,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   *  一键检测
+   * 漏洞一键检测
    */
   async ScanVul(
     req: ScanVulRequest,

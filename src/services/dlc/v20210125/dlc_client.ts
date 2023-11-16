@@ -52,6 +52,7 @@ import {
   CreateStoreLocationResponse,
   DescribeNotebookSessionResponse,
   DescribeDMSDatabaseResponse,
+  DescribeTablesNameRequest,
   Policys,
   DropDMSDatabaseRequest,
   CreateScriptResponse,
@@ -102,6 +103,7 @@ import {
   UpdateDataEngineConfigResponse,
   UserIdSetOfWorkGroupId,
   AlterDMSPartitionRequest,
+  DescribeTablesNameResponse,
   DescribeAdvancedStoreLocationRequest,
   CheckLockMetaDataRequest,
   DescribeSparkAppJobRequest,
@@ -765,6 +767,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyWorkGroupResponse) => void
   ): Promise<ModifyWorkGroupResponse> {
     return this.request("ModifyWorkGroup", req, cb)
+  }
+
+  /**
+   * 本接口（DescribeTables）用于查询数据表名称列表
+   */
+  async DescribeTablesName(
+    req: DescribeTablesNameRequest,
+    cb?: (error: string, rep: DescribeTablesNameResponse) => void
+  ): Promise<DescribeTablesNameResponse> {
+    return this.request("DescribeTablesName", req, cb)
   }
 
   /**

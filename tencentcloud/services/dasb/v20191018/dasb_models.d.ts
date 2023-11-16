@@ -2955,21 +2955,21 @@ export interface DepartmentManagerUser {
     ManagerName?: string;
 }
 /**
- * 权限控制模版对象
+ * 权限控制模板对象
  */
 export interface ACTemplate {
     /**
-     * 模版id
+     * 模板id
   注意：此字段可能返回 null，表示取不到有效值。
      */
     TemplateId?: string;
     /**
-     * 模版名称
+     * 模板名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
     TemplateName?: string;
     /**
-     * 模版描述
+     * 模板描述
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Description?: string;

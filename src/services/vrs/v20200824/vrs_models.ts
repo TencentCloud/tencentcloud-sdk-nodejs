@@ -73,7 +73,7 @@ export interface DownloadVRSModelResponse {
  */
 export interface GetVRSVoiceTypesResponse {
   /**
-   * 数据
+   * 复刻音色信息
    */
   Data?: VoiceTypeListData
   /**
@@ -386,32 +386,26 @@ export interface DetectionEnvAndSoundQualityRespData {
 export interface VoiceTypeInfo {
   /**
    * 音色id
-注意：此字段可能返回 null，表示取不到有效值。
    */
   VoiceType?: number
   /**
    * 音色名称
-注意：此字段可能返回 null，表示取不到有效值。
    */
   VoiceName?: string
   /**
    * 音色性别: 1-male 2-female
-注意：此字段可能返回 null，表示取不到有效值。
    */
   VoiceGender?: number
   /**
    * 复刻类型: 0-轻量版复刻 1-基础版复刻
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskType?: number
   /**
    * 复刻任务 ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskID?: string
   /**
    * 创建时间
-注意：此字段可能返回 null，表示取不到有效值。
    */
   DateCreated?: string
 }
