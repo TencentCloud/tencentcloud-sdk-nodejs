@@ -4680,31 +4680,51 @@ export interface SessionItem {
   /**
    * 匹配类型
    */
-  Category: string
+  Category?: string
   /**
    * 起始模式
    */
-  KeyOrStartMat: string
+  KeyOrStartMat?: string
   /**
    * 结束模式
    */
-  EndMat: string
+  EndMat?: string
   /**
    * 起始偏移
    */
-  StartOffset: string
+  StartOffset?: string
   /**
    * 结束偏移
    */
-  EndOffset: string
+  EndOffset?: string
   /**
    * 数据源
    */
-  Source: string
+  Source?: string
   /**
    * 更新时间戳
    */
-  TsVersion: string
+  TsVersion?: string
+  /**
+   * SessionID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SessionId?: number
+  /**
+   * Session名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SessionName?: string
+  /**
+   * Session是否正在被启用
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SessionInUsed?: boolean
+  /**
+   * Session关联的CC规则ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RelatedRuleID?: Array<number | bigint>
 }
 
 /**
