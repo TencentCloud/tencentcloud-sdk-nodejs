@@ -612,7 +612,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 证书查询关联资源
+   * 证书查询关联资源， 最新查询接口请使用CreateCertificateBindResourceSyncTask， 可以查询更多支持的云资源
    */
   async DescribeDeployedResources(
     req: DescribeDeployedResourcesRequest,

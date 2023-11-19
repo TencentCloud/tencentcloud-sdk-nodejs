@@ -270,7 +270,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeCertificate", req, cb);
     }
     /**
-     * 证书查询关联资源
+     * 证书查询关联资源， 最新查询接口请使用CreateCertificateBindResourceSyncTask， 可以查询更多支持的云资源
      */
     async DescribeDeployedResources(req, cb) {
         return this.request("DescribeDeployedResources", req, cb);

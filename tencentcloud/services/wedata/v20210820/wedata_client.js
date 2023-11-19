@@ -280,6 +280,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeInstanceLastLog", req, cb);
     }
     /**
+     * 创建任务版本
+     */
+    async CreateTaskVersionDs(req, cb) {
+        return this.request("CreateTaskVersionDs", req, cb);
+    }
+    /**
      * 批量修改任务责任人
      */
     async BatchModifyOpsOwners(req, cb) {
@@ -374,10 +380,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteRuleTemplate", req, cb);
     }
     /**
-     * 编排空间-创建文件夹
+     * 获取待审批列表
      */
-    async CreateDsFolder(req, cb) {
-        return this.request("CreateDsFolder", req, cb);
+    async DescribeApproveList(req, cb) {
+        return this.request("DescribeApproveList", req, cb);
     }
     /**
      * 更新集成节点
@@ -507,11 +513,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("MakeUpOpsTasks", req, cb);
     }
     /**
-     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
-提交工作流
+     * 编排空间-创建文件夹
      */
-    async SubmitWorkflow(req, cb) {
-        return this.request("SubmitWorkflow", req, cb);
+    async CreateDsFolder(req, cb) {
+        return this.request("CreateDsFolder", req, cb);
     }
     /**
      * 获取下游任务信息
@@ -530,6 +535,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DryRunDIOfflineTask(req, cb) {
         return this.request("DryRunDIOfflineTask", req, cb);
+    }
+    /**
+     * 根据条件查找事件实例
+     */
+    async DescribeEventCases(req, cb) {
+        return this.request("DescribeEventCases", req, cb);
     }
     /**
      * 质量报告-查询质量评分
@@ -1287,6 +1298,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeFolderList", req, cb);
     }
     /**
+     * 修改审批单状态
+     */
+    async ModifyApproveStatus(req, cb) {
+        return this.request("ModifyApproveStatus", req, cb);
+    }
+    /**
      * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
 数据源列表
      */
@@ -1381,10 +1398,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeTableLineage", req, cb);
     }
     /**
-     * 根据条件查找事件实例
+     * 批量创建任务版本Ds
      */
-    async DescribeEventCases(req, cb) {
-        return this.request("DescribeEventCases", req, cb);
+    async BatchCreateTaskVersionDs(req, cb) {
+        return this.request("BatchCreateTaskVersionDs", req, cb);
     }
     /**
      * 查询规则执行导出结果
@@ -1561,6 +1578,13 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ModifyDsFolder(req, cb) {
         return this.request("ModifyDsFolder", req, cb);
+    }
+    /**
+     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
+提交工作流
+     */
+    async SubmitWorkflow(req, cb) {
+        return this.request("SubmitWorkflow", req, cb);
     }
     /**
      * 删除用户自定义函数

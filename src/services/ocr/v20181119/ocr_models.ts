@@ -4729,6 +4729,56 @@ export interface UsedVehicleInvoiceInfo {
 }
 
 /**
+ * 信息区证件内容
+ */
+export interface PassportRecognizeInfos {
+  /**
+   * 证件类型（护照信息页识别结果）
+   */
+  Type?: string
+  /**
+   * 发行国家（护照信息页识别结果）
+   */
+  IssuingCountry?: string
+  /**
+   * 护照号码（护照信息页识别结果）
+   */
+  PassportID?: string
+  /**
+   * 姓（护照信息页识别结果）
+   */
+  Surname?: string
+  /**
+   * 名（护照信息页识别结果）
+   */
+  GivenName?: string
+  /**
+   * 姓名（护照信息页识别结果）
+   */
+  Name?: string
+  /**
+   * 国籍信息（护照信息页识别结果）
+   */
+  Nationality?: string
+  /**
+   * 出生日期（护照信息页识别结果）
+   */
+  DateOfBirth?: string
+  /**
+   * 性别（护照信息页识别结果）
+   */
+  Sex?: string
+  /**
+   * 发行日期（护照信息页识别结果）
+   */
+  DateOfIssuance?: string
+  /**
+   * 截止日期（护照信息页识别结果）
+   */
+  DateOfExpiration?: string
+}
+
+/**
  * ImageEnhancement返回参数结构体
  */
 export interface ImageEnhancementResponse {
@@ -6136,35 +6186,35 @@ export interface FinanBillSliceOCRRequest {
  */
 export interface MLIDPassportOCRResponse {
   /**
-   * 护照ID
+   * 护照ID（机读码区的解析结果）
    */
   ID?: string
   /**
-   * 姓名
+   * 姓名（机读码区的解析结果）
    */
   Name?: string
   /**
-   * 出生日期
+   * 出生日期（机读码区的解析结果）
    */
   DateOfBirth?: string
   /**
-   * 性别（F女，M男）
+   * 性别（F女，M男）（机读码区的解析结果）
    */
   Sex?: string
   /**
-   * 有效期
+   * 有效期（机读码区的解析结果）
    */
   DateOfExpiration?: string
   /**
-   * 发行国
+   * 发行国（机读码区的解析结果）
    */
   IssuingCountry?: string
   /**
-   * 国家地区代码
+   * 国家地区代码（机读码区的解析结果）
    */
   Nationality?: string
   /**
-   * 告警码
+   * 告警码：
 -9103	证照翻拍告警
 -9102	证照复印件告警（包括黑白复印件、彩色复印件）
 -9106       证件遮挡告警
@@ -6195,15 +6245,23 @@ export interface MLIDPassportOCRResponse {
    */
   CodeCrc?: string
   /**
-   * 姓
+   * 姓（机读码区的解析结果）
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Surname?: string
   /**
-   * 名
+   * 名（机读码区的解析结果）
 注意：此字段可能返回 null，表示取不到有效值。
    */
   GivenName?: string
+  /**
+   * 类型（机读码区的解析结果）
+   */
+  Type?: string
+  /**
+   * 信息区证件内容
+   */
+  PassportRecognizeInfos?: PassportRecognizeInfos
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

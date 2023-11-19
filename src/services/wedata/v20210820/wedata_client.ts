@@ -23,6 +23,7 @@ import {
   AlarmInfo,
   DescribeEventConsumeTasksResponse,
   RuleHistory,
+  SubmitBaselineRequest,
   DescribeIntegrationStatisticsResponse,
   InstanceList,
   SubmitTaskTestRunResponse,
@@ -40,6 +41,7 @@ import {
   DescribeWorkflowInfoByIdRequest,
   CreateDataSourceRequest,
   IntegrationNodeSchemaMapping,
+  TaskDsDTOLiteV2,
   DescribeTrendStatResponse,
   DescribeRealTimeTaskSpeedRequest,
   DescribeRuleDimStatRequest,
@@ -90,11 +92,13 @@ import {
   ThresholdValue,
   DescribeFunctionKindsRequest,
   DescribeFunctionKindsResponse,
+  SaveCustomFunctionResponse,
   UpdateInLongAgentResponse,
   DescribeTemplateDimCountRequest,
   ModifyIntegrationTaskResponse,
   DescribeDataSourceListRequest,
   DescribeInstanceByCycleResponse,
+  BatchCreateTaskVersionDsDTOLite,
   DescribeIntegrationStatisticsRecordsTrendRequest,
   DescribeInLongTkeClusterListResponse,
   DescribeOperateTasksRequest,
@@ -141,9 +145,11 @@ import {
   DescribeRuleGroupsByPageRequest,
   DescribeDataBasesRequest,
   BatchDeleteIntegrationTasksResponse,
+  DrInstanceOpsDtoPage,
   SearchConditionInstanceNew,
   DescribeThirdTaskRunLogRequest,
   BatchRerunIntegrationTaskInstancesRequest,
+  ParameterTaskInDsDto,
   DescribeDrSonInstanceRequest,
   TableLineageInfo,
   DescribeWorkflowTaskCountResponse,
@@ -175,14 +181,14 @@ import {
   UploadContentResponse,
   ForceSucScheduleInstancesResponse,
   CollectionInstanceOpsDto,
-  DrInstanceOpsDtoPage,
+  DescribeIntegrationTasksRequest,
   RuleExecDateStat,
   DescribeTaskInstanceResponse,
   DescribeSchedulerInstanceStatusResponse,
   CountOpsInstanceStateRequest,
   EventCaseOpsDto,
   DrInstanceOpsDto,
-  SubmitBaselineRequest,
+  CreateTaskVersionDsResponse,
   DescribeProdTasksRequest,
   CheckDuplicateTemplateNameRequest,
   DescribeEventTypesResponse,
@@ -220,7 +226,6 @@ import {
   DescribeKafkaTopicInfoResponse,
   OpsTaskCanvasInfoList,
   DescribeDependTaskListsRequest,
-  CollectionFolderOpsDto,
   DatabaseMeta,
   DlcRemoveOrphanFilesInfo,
   DescribeEventsRequest,
@@ -241,7 +246,8 @@ import {
   DeleteResourceFileResponse,
   SubmitTaskResponse,
   ModifyFolderRequest,
-  DescribeAlarmEventsResponse,
+  ModifyApproveStatusResponse,
+  DependencyStrategyDs,
   DescribeInstanceLogListResponse,
   RuleGroup,
   DescribeTableQualityDetailsRequest,
@@ -258,6 +264,8 @@ import {
   DescribeTableMetasResponse,
   BatchReturn,
   DescribeDiagnosticInfoResponse,
+  AlarmDsVO,
+  DependencyConfigDsDTONoRecurV2,
   FindAllFolderResponse,
   MakeUpOpsTasksResponse,
   ResourcePathTree,
@@ -272,7 +280,7 @@ import {
   KillOpsMakePlanInstancesResponse,
   DescribeScheduleInstanceRequest,
   TaskLogRequest,
-  SourceObject,
+  ParameterTaskDsDto,
   DescribeBaselineAllTaskDagRequest,
   OpsTaskLinkInfoDto,
   IntegrationNodeInfo,
@@ -280,7 +288,7 @@ import {
   GetFileInfoResponse,
   BatchDeleteTasksNewResponse,
   DescribeBelongToResponse,
-  WorkFlowExecuteDto,
+  InstanceCondition,
   FreezeOpsTasksResponse,
   IntegrationNodeMapping,
   ColumnAggregationLineage,
@@ -317,17 +325,22 @@ import {
   DescribeSonInstancesRequest,
   DescribeBaselinesResponse,
   DescribeTaskInstancesData,
+  DescribeIntegrationStatisticsAgentStatusRequest,
   MakePlanInstanceOpsDtoCollection,
+  OrderFieldOptional,
   DryRunDIOfflineTaskRequest,
   CreateOfflineTaskRequest,
   SubmitSqlTaskResponse,
   DescribeIntegrationStatisticsRecordsTrendResponse,
+  BatchCreateTaskVersionDsResponse,
   EventOpsDto,
   DescribeFolderWorkflowListData,
   DescribeWorkflowOpsCanvasInfoRequest,
+  SubmitCustomFunctionRequest,
   ScreenTaskInfo,
   RerunOpsMakePlanInstancesRequest,
   TableConfig,
+  FilterOptional,
   TaskInstanceCountDto,
   TableScoreStatisticsInfo,
   BatchForceSuccessIntegrationTaskInstancesResponse,
@@ -336,9 +349,9 @@ import {
   DescribeClusterNamespaceListRequest,
   AlarmReceiverInfo,
   GeneralTaskParam,
-  DiagnosePlusRequest,
+  CandidateDsDTo,
   DescribeDiagnosticInfoByBaselineIdResponse,
-  CreateInLongAgentRequest,
+  CompareRuleItem,
   ModifyRuleTemplateRequest,
   DescribeRuleExecStatResponse,
   TaskByCycle,
@@ -375,6 +388,7 @@ import {
   BatchModifyOpsOwnersResponse,
   TaskInstanceInfo,
   CreateTaskAlarmRegularResponse,
+  BatchOperateResultDs,
   DeleteRuleTemplateRequest,
   DescribeOpsMakePlanTasksRequest,
   TaskVersionInstance,
@@ -388,7 +402,7 @@ import {
   DescribeSchedulerTaskCntByStatusResponse,
   TaskExtInfo,
   ModifyWorkflowInfoRequest,
-  MakePlanOpsDto,
+  Apply,
   StartIntegrationTaskResponse,
   SubmitWorkflow,
   BatchResumeIntegrationTasksRequest,
@@ -456,6 +470,7 @@ import {
   BatchOperateResultOpsDto,
   DeleteRuleRequest,
   EventCaseAuditLogOptDto,
+  BatchCreateTaskVersionDsRequest,
   RealTimeTaskInstanceNodeInfo,
   DeleteResourceFilesResponse,
   RerunInstancesRequest,
@@ -474,7 +489,9 @@ import {
   RulePage,
   DeleteIntegrationNodeRequest,
   StringListNode,
+  DescribeAlarmEventsResponse,
   ModifyIntegrationNodeResponse,
+  TaskTypeExtDsVO,
   DescribeIntegrationStatisticsTaskStatusTrendRequest,
   DescribeRuleHistoryByPageResponse,
   EventDto,
@@ -489,7 +506,8 @@ import {
   DescribeTaskRunHistoryRequest,
   BatchMakeUpIntegrationTasksRequest,
   OfflineInstance,
-  InstanceCondition,
+  BatchCreateTaskVersionDTO,
+  CreateTaskVersionDsRequest,
   DeleteOfflineTaskRequest,
   SubmitTaskRequest,
   WeightInfo,
@@ -509,6 +527,8 @@ import {
   BatchDeleteTasksNewRequest,
   DimensionCount,
   DescribeInstanceLogResponse,
+  DiagnosePlusRequest,
+  ApproveModify,
   DeleteInLongAgentResponse,
   InstanceLogList,
   ModifyMonitorStatusRequest,
@@ -518,6 +538,7 @@ import {
   DescribeWorkflowListByProjectIdResponse,
   DeleteFilePathRequest,
   DescribeRulesByPageRequest,
+  AlarmExtDsVO,
   DescribeTopTableStatResponse,
   ProdSchedulerTask,
   WorkflowSchedulerOpsDto,
@@ -525,7 +546,8 @@ import {
   SourceFieldInfo,
   DeleteDsFolderRequest,
   FreezeTasksByMultiWorkflowResponse,
-  SaveCustomFunctionResponse,
+  MakePlanOpsDto,
+  TaskLinkDsDTO,
   ModifyDsFolderRequest,
   AdhocRecord,
   OperateResult,
@@ -559,7 +581,7 @@ import {
   DeleteFilePathResponse,
   InstanceReportWriteNode,
   RunRerunScheduleInstancesResponse,
-  DependencyConfig,
+  BatchModifyOwnersNewResponse,
   RobAndLockIntegrationTaskRequest,
   RuleGroupMonitorPage,
   CommitExportTaskResponse,
@@ -589,6 +611,7 @@ import {
   DescribeTableQualityDetailsResponse,
   DescribeStandardRuleDetailInfoListRequest,
   DescribeDataSourceWithoutInfoResponse,
+  WorkFlowExecuteDto,
   CommonIdOpsDto,
   BatchStopWorkflowsByIdsResponse,
   DescribeDependOpsTaskListResponse,
@@ -601,6 +624,7 @@ import {
   TableMeta,
   CountOpsInstanceStateResponse,
   SubscribeReceiver,
+  TaskExtDsVO,
   DescribeQualityScoreTrendRequest,
   RobLockState,
   SubmitTaskTestRunRequest,
@@ -621,12 +645,12 @@ import {
   DescribeRuleExecHistoryRequest,
   EditBaselineResponse,
   DimensionScore,
+  ParameterTaskOutDsDto,
   CreateCustomFunctionResponse,
   ScreenInstanceInfo,
   ModifyTaskInfoRequest,
   DescribeOperateOpsTasksRequest,
   DataSourceInfo,
-  CompareRuleItem,
   DescribeTaskDetailRequest,
   TaskOpsDto,
   DescribeOfflineTaskTokenRequest,
@@ -641,7 +665,7 @@ import {
   DescribeFathersRequest,
   DeleteTaskAlarmRegularRequest,
   CompareRule,
-  DescribeIntegrationStatisticsAgentStatusRequest,
+  CreateInLongAgentRequest,
   DescribeInstanceLogFileRequest,
   UnlockIntegrationTaskRequest,
   DeleteOfflineTaskResponse,
@@ -660,6 +684,7 @@ import {
   DescribeOperateOpsTaskDatasourceRequest,
   RuleExecResult,
   DescribeWorkflowExecuteByIdResponse,
+  TaskDsDTONoRecurV2,
   CreateIntegrationTaskRequest,
   BatchRunOpsTaskRequest,
   FieldConfig,
@@ -694,7 +719,7 @@ import {
   DescribeInstanceLogDetailResponse,
   SetTaskAlarmNewResponse,
   DescribeProdTasksResponse,
-  SubmitCustomFunctionRequest,
+  DescribeApproveListRequest,
   DescribeBatchOperateTaskRequest,
   MakeUpWorkflowNewRequest,
   DescribeTaskReportRequest,
@@ -728,6 +753,7 @@ import {
   StopIntegrationTaskRequest,
   FunctionTypeOrKind,
   DescribeRuleGroupRequest,
+  DescribeApply,
   CreateDataSourceResponse,
   TaskByStatus,
   DescribeFolderWorkflowListResponse,
@@ -747,9 +773,10 @@ import {
   DescribeAlarmReceiverResponse,
   DlcExpiredSnapshotsInfo,
   DescribeWorkflowCanvasInfoResponse,
-  BatchModifyOwnersNewResponse,
+  DependencyConfig,
   DescribeRulesByPageResponse,
   Partition,
+  AttributeItemDsVO,
   RuleDimCnt,
   ModifyBaselineTaskAlarmStatusRequest,
   BatchOperateResult,
@@ -816,6 +843,7 @@ import {
   ResumeIntegrationTaskRequest,
   DescribeInstanceByCycleRequest,
   DescribeFolderListResponse,
+  TaskTypeExtParamDsVO,
   DescribeIntegrationStatisticsTaskStatusResponse,
   DescribeAllUsedVersionSonRequest,
   DescribeOpsMakePlanInstancesResponse,
@@ -840,6 +868,7 @@ import {
   DescribeDsFolderTreeResponse,
   PathNodeDsVO,
   DescribeWorkflowCanvasInfoRequest,
+  ParamInfoDs,
   DagInstancesRequest,
   DryRunDIOfflineTaskResponse,
   FolderOpsDto,
@@ -847,13 +876,14 @@ import {
   DescribeTaskLockStatusRequest,
   DescribeBaselinesRequest,
   OfflineTaskAddParam,
+  ModifyApproveStatusRequest,
   DescribeRuleExecExportResultResponse,
   LogContent,
   DescribeOperateTasksResponse,
   DescribeBaselineResponse,
   DescribeTopTableStatRequest,
   BatchCreateIntegrationTaskAlarmsResponse,
-  DescribeIntegrationTasksRequest,
+  CollectionFolderOpsDto,
   BatchStopTasksNewRequest,
   DescribeInLongAgentTaskListRequest,
   ModifyTaskNameRequest,
@@ -865,6 +895,7 @@ import {
   DescribeBaselineInstanceGanttRequest,
   OrganizationalFunction,
   OrderField,
+  TaskTypeDsVO,
   BatchSuspendIntegrationTasksResponse,
   DescribeWorkflowExecuteByIdRequest,
   WorkflowExtOpsDtoPage,
@@ -874,7 +905,9 @@ import {
   DescribeBaselineByIdResponse,
   OpsTaskCanvasDto,
   DescribeBaselineInstanceGanttResponse,
+  SourceObject,
   CommitRuleGroupExecResultResponse,
+  DescribeApproveListResponse,
   DescribeIntegrationStatisticsRequest,
   DescribeTasksByPageRequest,
   BatchMakeUpIntegrationTasksResponse,
@@ -1310,6 +1343,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 创建任务版本
+   */
+  async CreateTaskVersionDs(
+    req: CreateTaskVersionDsRequest,
+    cb?: (error: string, rep: CreateTaskVersionDsResponse) => void
+  ): Promise<CreateTaskVersionDsResponse> {
+    return this.request("CreateTaskVersionDs", req, cb)
+  }
+
+  /**
    * 批量修改任务责任人
    */
   async BatchModifyOpsOwners(
@@ -1464,13 +1507,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 编排空间-创建文件夹
+   * 获取待审批列表
    */
-  async CreateDsFolder(
-    req: CreateDsFolderRequest,
-    cb?: (error: string, rep: CreateDsFolderResponse) => void
-  ): Promise<CreateDsFolderResponse> {
-    return this.request("CreateDsFolder", req, cb)
+  async DescribeApproveList(
+    req: DescribeApproveListRequest,
+    cb?: (error: string, rep: DescribeApproveListResponse) => void
+  ): Promise<DescribeApproveListResponse> {
+    return this.request("DescribeApproveList", req, cb)
   }
 
   /**
@@ -1685,14 +1728,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
-提交工作流
-     */
-  async SubmitWorkflow(
-    req: SubmitWorkflowRequest,
-    cb?: (error: string, rep: SubmitWorkflowResponse) => void
-  ): Promise<SubmitWorkflowResponse> {
-    return this.request("SubmitWorkflow", req, cb)
+   * 编排空间-创建文件夹
+   */
+  async CreateDsFolder(
+    req: CreateDsFolderRequest,
+    cb?: (error: string, rep: CreateDsFolderResponse) => void
+  ): Promise<CreateDsFolderResponse> {
+    return this.request("CreateDsFolder", req, cb)
   }
 
   /**
@@ -1723,6 +1765,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DryRunDIOfflineTaskResponse) => void
   ): Promise<DryRunDIOfflineTaskResponse> {
     return this.request("DryRunDIOfflineTask", req, cb)
+  }
+
+  /**
+   * 根据条件查找事件实例
+   */
+  async DescribeEventCases(
+    req: DescribeEventCasesRequest,
+    cb?: (error: string, rep: DescribeEventCasesResponse) => void
+  ): Promise<DescribeEventCasesResponse> {
+    return this.request("DescribeEventCases", req, cb)
   }
 
   /**
@@ -2969,6 +3021,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 修改审批单状态
+   */
+  async ModifyApproveStatus(
+    req: ModifyApproveStatusRequest,
+    cb?: (error: string, rep: ModifyApproveStatusResponse) => void
+  ): Promise<ModifyApproveStatusResponse> {
+    return this.request("ModifyApproveStatus", req, cb)
+  }
+
+  /**
      * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
 数据源列表
      */
@@ -3123,13 +3185,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 根据条件查找事件实例
+   * 批量创建任务版本Ds
    */
-  async DescribeEventCases(
-    req: DescribeEventCasesRequest,
-    cb?: (error: string, rep: DescribeEventCasesResponse) => void
-  ): Promise<DescribeEventCasesResponse> {
-    return this.request("DescribeEventCases", req, cb)
+  async BatchCreateTaskVersionDs(
+    req: BatchCreateTaskVersionDsRequest,
+    cb?: (error: string, rep: BatchCreateTaskVersionDsResponse) => void
+  ): Promise<BatchCreateTaskVersionDsResponse> {
+    return this.request("BatchCreateTaskVersionDs", req, cb)
   }
 
   /**
@@ -3422,6 +3484,17 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyDsFolderResponse) => void
   ): Promise<ModifyDsFolderResponse> {
     return this.request("ModifyDsFolder", req, cb)
+  }
+
+  /**
+     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
+提交工作流
+     */
+  async SubmitWorkflow(
+    req: SubmitWorkflowRequest,
+    cb?: (error: string, rep: SubmitWorkflowResponse) => void
+  ): Promise<SubmitWorkflowResponse> {
+    return this.request("SubmitWorkflow", req, cb)
   }
 
   /**

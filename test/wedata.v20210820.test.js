@@ -428,6 +428,16 @@ it("wedata.v20210820.DescribeInstanceLastLog", async function () {
     }
 })
 
+it("wedata.v20210820.CreateTaskVersionDs", async function () {
+    try {
+       const data = await client.CreateTaskVersionDs({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("wedata.v20210820.BatchModifyOpsOwners", async function () {
     try {
        const data = await client.BatchModifyOpsOwners({})
@@ -578,9 +588,9 @@ it("wedata.v20210820.DeleteRuleTemplate", async function () {
     }
 })
 
-it("wedata.v20210820.CreateDsFolder", async function () {
+it("wedata.v20210820.DescribeApproveList", async function () {
     try {
-       const data = await client.CreateDsFolder({})
+       const data = await client.DescribeApproveList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -798,9 +808,9 @@ it("wedata.v20210820.MakeUpOpsTasks", async function () {
     }
 })
 
-it("wedata.v20210820.SubmitWorkflow", async function () {
+it("wedata.v20210820.CreateDsFolder", async function () {
     try {
-       const data = await client.SubmitWorkflow({})
+       const data = await client.CreateDsFolder({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -831,6 +841,16 @@ it("wedata.v20210820.DescribeSonInstances", async function () {
 it("wedata.v20210820.DryRunDIOfflineTask", async function () {
     try {
        const data = await client.DryRunDIOfflineTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("wedata.v20210820.DescribeEventCases", async function () {
+    try {
+       const data = await client.DescribeEventCases({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -2058,6 +2078,16 @@ it("wedata.v20210820.DescribeFolderList", async function () {
     }
 })
 
+it("wedata.v20210820.ModifyApproveStatus", async function () {
+    try {
+       const data = await client.ModifyApproveStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("wedata.v20210820.DescribeDataSourceWithoutInfo", async function () {
     try {
        const data = await client.DescribeDataSourceWithoutInfo({})
@@ -2208,9 +2238,9 @@ it("wedata.v20210820.DescribeTableLineage", async function () {
     }
 })
 
-it("wedata.v20210820.DescribeEventCases", async function () {
+it("wedata.v20210820.BatchCreateTaskVersionDs", async function () {
     try {
-       const data = await client.DescribeEventCases({})
+       const data = await client.BatchCreateTaskVersionDs({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -2501,6 +2531,16 @@ it("wedata.v20210820.DescribeDependTasksNew", async function () {
 it("wedata.v20210820.ModifyDsFolder", async function () {
     try {
        const data = await client.ModifyDsFolder({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("wedata.v20210820.SubmitWorkflow", async function () {
+    try {
+       const data = await client.SubmitWorkflow({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

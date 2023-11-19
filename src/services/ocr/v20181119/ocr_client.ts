@@ -148,6 +148,7 @@ import {
   MotorVehicleSaleInvoice,
   TableOCRRequest,
   UsedVehicleInvoiceInfo,
+  PassportRecognizeInfos,
   ImageEnhancementResponse,
   QrcodeImgSize,
   PassportOCRResponse,
