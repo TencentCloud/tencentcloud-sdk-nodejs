@@ -28,16 +28,28 @@ class Client extends abstract_client_1.AbstractClient {
         super("sqlserver.tencentcloudapi.com", "2018-03-28", clientConfig);
     }
     /**
-     * 本接口（DescribeMigrations）根据输入的限定条件，查询符合条件的迁移任务列表
+     * 本接口（ModifyAccountPrivilege）用于修改实例账户权限。
      */
-    async DescribeMigrations(req, cb) {
-        return this.request("DescribeMigrations", req, cb);
+    async ModifyAccountPrivilege(req, cb) {
+        return this.request("ModifyAccountPrivilege", req, cb);
     }
     /**
      * 本接口（RecycleReadOnlyGroup）立即回收只读组的资源，只读组占用的vip等资源将立即释放且不可找回。
      */
     async RecycleReadOnlyGroup(req, cb) {
         return this.request("RecycleReadOnlyGroup", req, cb);
+    }
+    /**
+     * 本接口(ModifyBackupName)用于修改备份任务名称。
+     */
+    async ModifyBackupName(req, cb) {
+        return this.request("ModifyBackupName", req, cb);
+    }
+    /**
+     * 本接口（DescribeSpecSellStatus）用于查询售卖规格状态信息，其中包括售卖状态，参考价格等(实际价格以询价接口为准)。
+     */
+    async DescribeSpecSellStatus(req, cb) {
+        return this.request("DescribeSpecSellStatus", req, cb);
     }
     /**
      * 本接口（StartIncrementalMigration）用于启动增量备份导入任务。
@@ -56,6 +68,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ModifyAccountRemark(req, cb) {
         return this.request("ModifyAccountRemark", req, cb);
+    }
+    /**
+     * 本接口（ModifyPublishSubscribe）用于修改实例的发布订阅关系。
+     */
+    async ModifyPublishSubscribe(req, cb) {
+        return this.request("ModifyPublishSubscribe", req, cb);
     }
     /**
      * 本接口（ModifyDBInstanceName）用于修改实例名字。
@@ -88,10 +106,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteIncrementalMigration", req, cb);
     }
     /**
+     * 本接口（RunMigration）用于启动迁移任务，开始迁移
+     */
+    async RunMigration(req, cb) {
+        return this.request("RunMigration", req, cb);
+    }
+    /**
      * 本接口（ModifyDBInstanceNetwork）用于修改运行中实例的网络，仅支持从VPC网络到VPC网络的转换
      */
     async ModifyDBInstanceNetwork(req, cb) {
         return this.request("ModifyDBInstanceNetwork", req, cb);
+    }
+    /**
+     * 本接口（CreateCloudReadOnlyDBInstances）用于添加只读副本实例(虚拟机版本)。
+     */
+    async CreateCloudReadOnlyDBInstances(req, cb) {
+        return this.request("CreateCloudReadOnlyDBInstances", req, cb);
     }
     /**
      * 本接口(ModifyDBInstanceSecurityGroups)用于修改实例绑定的安全组。
@@ -178,6 +208,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeProductConfig", req, cb);
     }
     /**
+     * 本接口（DescribeUpgradeInstanceCheck）用于在实例变配前，预检查实例变配的影响情况等。
+     */
+    async DescribeUpgradeInstanceCheck(req, cb) {
+        return this.request("DescribeUpgradeInstanceCheck", req, cb);
+    }
+    /**
      * 本接口(DisassociateSecurityGroups)用于安全组批量解绑实例。
      */
     async DisassociateSecurityGroups(req, cb) {
@@ -188,6 +224,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async TerminateDBInstance(req, cb) {
         return this.request("TerminateDBInstance", req, cb);
+    }
+    /**
+     * 本接口（ModifyDBInstanceNote）用于修改实例备注信息。
+     */
+    async ModifyDBInstanceNote(req, cb) {
+        return this.request("ModifyDBInstanceNote", req, cb);
     }
     /**
      * 本接口（DeleteDBInstance）用于释放回收站中的SQL server实例(立即下线)。释放后的实例将保存一段时间后物理销毁。其发布订阅将自动解除，其ro副本将自动释放。
@@ -256,10 +298,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateBackup", req, cb);
     }
     /**
+     * 本接口（DescribeDBRestoreTime）用于查询可回档的数据库
+     */
+    async DescribeDBRestoreTime(req, cb) {
+        return this.request("DescribeDBRestoreTime", req, cb);
+    }
+    /**
      * 本接口（DescribeBackupMigration）用于创建增量备份导入任务。
      */
     async DescribeBackupMigration(req, cb) {
         return this.request("DescribeBackupMigration", req, cb);
+    }
+    /**
+     * 本接口（BalanceReadOnlyGroup）用于根据预定义的权重平衡每个只读实例的路由权重。预定义权重可根据接口DescribeReadOnlyGroupAutoWeight查询。
+     */
+    async BalanceReadOnlyGroup(req, cb) {
+        return this.request("BalanceReadOnlyGroup", req, cb);
     }
     /**
      * 本接口(ModifyDatabaseCDC)用于开启、关闭数据库数据变更捕获(CDC)
@@ -268,10 +322,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyDatabaseCDC", req, cb);
     }
     /**
-     * 本接口（RunMigration）用于启动迁移任务，开始迁移
+     * 本接口(DeleteRestoreTask)用于删除回档任务记录。
      */
-    async RunMigration(req, cb) {
-        return this.request("RunMigration", req, cb);
+    async DeleteRestoreTask(req, cb) {
+        return this.request("DeleteRestoreTask", req, cb);
+    }
+    /**
+     * 本接口（CompleteMigration）作用是完成一个迁移任务
+     */
+    async CompleteMigration(req, cb) {
+        return this.request("CompleteMigration", req, cb);
     }
     /**
      * 本接口(DescribeProjectSecurityGroups)用于查询项目的安全组详情。
@@ -298,10 +358,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeRegions", req, cb);
     }
     /**
+     * 本接口（DescribeRestoreTask）用于查询回档任务列表。
+     */
+    async DescribeRestoreTask(req, cb) {
+        return this.request("DescribeRestoreTask", req, cb);
+    }
+    /**
      * 该接口（DescribeInstanceParams）用于查询实例的参数列表。
      */
     async DescribeInstanceParams(req, cb) {
         return this.request("DescribeInstanceParams", req, cb);
+    }
+    /**
+     * 本接口(ModifyCloseWanIp)用于关闭实例外网。
+     */
+    async ModifyCloseWanIp(req, cb) {
+        return this.request("ModifyCloseWanIp", req, cb);
     }
     /**
      * 本接口（CompleteExpansion）在实例发起扩容后，实例状态处于“升级待切换”时，可立即完成实例升级切换操作，无需等待可维护时间窗。本接口需要在实例低峰时调用，在完全切换成功前，存在部分库不可访问的风险。
@@ -328,10 +400,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateCloudDBInstances", req, cb);
     }
     /**
-     * 本接口（RestoreInstance）用于按照备份集回档数据库。
+     * 本接口(DescribeCollationTimeZone)用于查询实例支持的字符集和时区。
      */
-    async RestoreInstance(req, cb) {
-        return this.request("RestoreInstance", req, cb);
+    async DescribeCollationTimeZone(req, cb) {
+        return this.request("DescribeCollationTimeZone", req, cb);
     }
     /**
      * 该接口（DescribeInstanceParamRecords）用于查询实例参数修改历史。
@@ -344,6 +416,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CreateBusinessIntelligenceFile(req, cb) {
         return this.request("CreateBusinessIntelligenceFile", req, cb);
+    }
+    /**
+     * 本接口（DescribeInstanceTasks）用于查询实例相关的异步任务列表。
+     */
+    async DescribeInstanceTasks(req, cb) {
+        return this.request("DescribeInstanceTasks", req, cb);
     }
     /**
      * 本接口(DescribeHASwitchLog)用于手动主备切换。
@@ -510,10 +588,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyInstanceEncryptAttributes", req, cb);
     }
     /**
-     * 本接口(ModifyBackupName)用于修改备份任务名称。
+     * 本接口（DescribeDatabaseNames）查询账户关联的数据库名称。
      */
-    async ModifyBackupName(req, cb) {
-        return this.request("ModifyBackupName", req, cb);
+    async DescribeDatabaseNames(req, cb) {
+        return this.request("DescribeDatabaseNames", req, cb);
     }
     /**
      * 本接口（DescribeInstanceByOrders）用于根据订单号查询资源ID
@@ -540,6 +618,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyDBEncryptAttributes", req, cb);
     }
     /**
+     * 本接口(DescribeCrossRegions)用于查询跨地域备份的目标地域。
+     */
+    async DescribeCrossRegions(req, cb) {
+        return this.request("DescribeCrossRegions", req, cb);
+    }
+    /**
      * 本接口（RemoveBackups）可以删除用户手动创建的备份文件。待删除的备份策略可以是实例备份，也可以是多库备份。
      */
     async RemoveBackups(req, cb) {
@@ -558,6 +642,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDBInstanceInter", req, cb);
     }
     /**
+     * 本接口（RecycleDBInstance）用于主动回收已下线的SQLSERVER实例
+     */
+    async RecycleDBInstance(req, cb) {
+        return this.request("RecycleDBInstance", req, cb);
+    }
+    /**
      * 本接口（CreateReadOnlyDBInstances）用于添加只读副本实例。
      */
     async CreateReadOnlyDBInstances(req, cb) {
@@ -570,10 +660,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("SwitchCloudInstanceHA", req, cb);
     }
     /**
-     * 本接口（CreateCloudReadOnlyDBInstances）用于添加只读副本实例(虚拟机版本)。
+     * 本接口（DescribeInquiryPriceParameter）用于查询实例询价计费参数。当前接口查询实例新购的计费参数。内部接口用于活动页售卖场景。
      */
-    async CreateCloudReadOnlyDBInstances(req, cb) {
-        return this.request("CreateCloudReadOnlyDBInstances", req, cb);
+    async DescribeInquiryPriceParameter(req, cb) {
+        return this.request("DescribeInquiryPriceParameter", req, cb);
     }
     /**
      * 本接口（CloseInterCommunication）用于关闭实例互通。
@@ -600,10 +690,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeOrders", req, cb);
     }
     /**
-     * 本接口（RecycleDBInstance）用于主动回收已下线的SQLSERVER实例
+     * 本接口（DescribeInstanceTradeParameter）用于查询实例的计费参数，当前接口默认返回创建实例时需要的计费参数。内部接口用于活动页售卖场景。
      */
-    async RecycleDBInstance(req, cb) {
-        return this.request("RecycleDBInstance", req, cb);
+    async DescribeInstanceTradeParameter(req, cb) {
+        return this.request("DescribeInstanceTradeParameter", req, cb);
     }
     /**
      * 本接口(DescribeBackupMonitor)用于查询备份空间使用详情。
@@ -616,6 +706,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CloneDB(req, cb) {
         return this.request("CloneDB", req, cb);
+    }
+    /**
+     * 本接口（RestoreInstance）用于按照备份集回档数据库。
+     */
+    async RestoreInstance(req, cb) {
+        return this.request("RestoreInstance", req, cb);
     }
     /**
      * 本接口（ModifyDBInstanceProject）用于修改数据库实例所属项目。
@@ -648,10 +744,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDBsNormal", req, cb);
     }
     /**
-     * 本接口（ModifyAccountPrivilege）用于修改实例账户权限。
+     * 本接口(ModifyOpenWanIp)用于开通实例外网。
      */
-    async ModifyAccountPrivilege(req, cb) {
-        return this.request("ModifyAccountPrivilege", req, cb);
+    async ModifyOpenWanIp(req, cb) {
+        return this.request("ModifyOpenWanIp", req, cb);
+    }
+    /**
+     * 本接口（DescribeMigrations）根据输入的限定条件，查询符合条件的迁移任务列表
+     */
+    async DescribeMigrations(req, cb) {
+        return this.request("DescribeMigrations", req, cb);
     }
     /**
      * 本接口(DescribeDBsNormal)用于查询数据库配置信息，此接口不包含数据库的关联账号
@@ -691,6 +793,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("InquiryPriceUpgradeDBInstance", req, cb);
     }
     /**
+     * 本接口（DescribeReadOnlyGroupAutoWeight）用于查询只读组的自动权重分配结果，在接口BalanceReadOnlyGroup接口中按照自动权重分配结果进行路由权重分配。
+     */
+    async DescribeReadOnlyGroupAutoWeight(req, cb) {
+        return this.request("DescribeReadOnlyGroupAutoWeight", req, cb);
+    }
+    /**
      * 本接口（InquiryPriceRenewDBInstance）用于查询包年包月实例的续费价格。
      */
     async InquiryPriceRenewDBInstance(req, cb) {
@@ -709,10 +817,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyBackupMigration", req, cb);
     }
     /**
-     * 本接口（CompleteMigration）作用是完成一个迁移任务
+     * 本接口(DescribeDBPrivilegeByAccount)用于查询账号关联的数据库和权限信息
      */
-    async CompleteMigration(req, cb) {
-        return this.request("CompleteMigration", req, cb);
+    async DescribeDBPrivilegeByAccount(req, cb) {
+        return this.request("DescribeDBPrivilegeByAccount", req, cb);
+    }
+    /**
+     * 本接口(DescribeAccountPrivilegeByDB)用于查询数据库关联的账号和权限信息
+     */
+    async DescribeAccountPrivilegeByDB(req, cb) {
+        return this.request("DescribeAccountPrivilegeByDB", req, cb);
+    }
+    /**
+     * 本接口 (DescribeProductSpec) 用于查询全地域售卖规格配置（内部前端使用不公开）
+     */
+    async DescribeProductSpec(req, cb) {
+        return this.request("DescribeProductSpec", req, cb);
     }
     /**
      * 本接口(DescribeBackupByFlowId)用于通过备份创建流程的ID查询创建的备份详情，流程ID可从接口CreateBackup中获得。

@@ -290,6 +290,7 @@ import {
   AccessControlEventInfo,
   DescribeClusterSummaryResponse,
   DescribeSecLogDeliveryClsOptionsResponse,
+  ImageVulLayerInfo,
   DeleteMachineRequest,
   CreateVulImageExportJobRequest,
   DescribeValueAddedSrvInfoRequest,
@@ -2348,7 +2349,7 @@ export class Client extends AbstractClient {
    * 镜像仓库资产刷新
    */
   async SyncAssetImageRegistryAsset(
-    req?: SyncAssetImageRegistryAssetRequest,
+    req: SyncAssetImageRegistryAssetRequest,
     cb?: (error: string, rep: SyncAssetImageRegistryAssetResponse) => void
   ): Promise<SyncAssetImageRegistryAssetResponse> {
     return this.request("SyncAssetImageRegistryAsset", req, cb)

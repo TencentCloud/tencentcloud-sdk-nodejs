@@ -465,6 +465,10 @@ export interface DescribeModuleStatusResponse {
      */
     ApiProtection?: number;
     /**
+     * 限流模块开关
+     */
+    RateLimit?: number;
+    /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
@@ -910,6 +914,11 @@ export interface PeakPointsItem {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     ACL?: number;
+    /**
+     * 小程序 qps
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    WxAccess?: number;
 }
 /**
  * Clb类型防护对象
@@ -918,63 +927,73 @@ export interface ClbObject {
     /**
      * 对象ID
      */
-    ObjectId: string;
+    ObjectId?: string;
     /**
      * 实例ID
      */
-    InstanceId: string;
+    InstanceId?: string;
     /**
      * 实例名称
      */
-    InstanceName: string;
+    InstanceName?: string;
     /**
      * 精准域名列表
      */
-    PreciseDomains: Array<string>;
+    PreciseDomains?: Array<string>;
     /**
      * WAF功能开关状态，0关闭1开启
      */
-    Status: number;
+    Status?: number;
     /**
      * WAF日志开关状态，0关闭1开启
      */
-    ClsStatus: number;
+    ClsStatus?: number;
     /**
      * CLB对象对应的虚拟域名
      */
-    VirtualDomain: string;
+    VirtualDomain?: string;
     /**
      * 对象名称
      */
-    ObjectName: string;
+    ObjectName?: string;
     /**
      * 公网地址
      */
-    PublicIp: Array<string>;
+    PublicIp?: Array<string>;
     /**
      * 内网地址
      */
-    PrivateIp: Array<string>;
+    PrivateIp?: Array<string>;
     /**
      * VPC名称
      */
-    VpcName: string;
+    VpcName?: string;
     /**
      * VPC ID
      */
-    Vpc: string;
+    Vpc?: string;
     /**
      * waf实例等级，如果未绑定实例为0
      */
-    InstanceLevel: number;
+    InstanceLevel?: number;
     /**
      * clb投递开关
      */
-    PostCLSStatus: number;
+    PostCLSStatus?: number;
     /**
      * kafka投递开关
      */
-    PostCKafkaStatus: number;
+    PostCKafkaStatus?: number;
+    /**
+     * 对象类型：CLB:负载均衡器，TSE:云原生网关
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Type?: string;
+    /**
+     * 对象地域
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Region?: string;
 }
 /**
  * DescribeSession请求参数结构体
@@ -2119,48 +2138,63 @@ export interface DescribeCustomRulesRspRuleListItem {
     /**
      * 动作类型
      */
-    ActionType: string;
+    ActionType?: string;
     /**
      * 跳过的策略
      */
-    Bypass: string;
+    Bypass?: string;
     /**
      * 创建时间
      */
-    CreateTime: string;
+    CreateTime?: string;
     /**
      * 过期时间
      */
-    ExpireTime: string;
+    ExpireTime?: string;
     /**
      * 策略名称
      */
-    Name: string;
+    Name?: string;
     /**
      * 重定向地址
      */
-    Redirect: string;
+    Redirect?: string;
     /**
      * 策略ID
      */
-    RuleId: string;
+    RuleId?: string;
     /**
      * 优先级
      */
-    SortId: string;
+    SortId?: string;
     /**
      * 状态
      */
-    Status: string;
+    Status?: string;
     /**
      * 策略详情
      */
-    Strategies: Array<Strategy>;
+    Strategies?: Array<Strategy>;
     /**
      * 事件id
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    EventId: string;
+    EventId?: string;
+    /**
+     * 修改时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ModifyTime?: string;
+    /**
+     * 生效状态
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ValidStatus?: number;
+    /**
+     * 来源
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Source?: string;
 }
 /**
  * ModifyAntiInfoLeakRules返回参数结构体
@@ -3513,10 +3547,12 @@ export interface DescribeIpAccessControlRequest {
     ActionType?: number;
     /**
      * 最小有效时间的时间戳
+     * @deprecated
      */
     VtsMin?: number;
     /**
      * 最大有效时间的时间戳
+     * @deprecated
      */
     VtsMax?: number;
     /**
@@ -3551,6 +3587,14 @@ export interface DescribeIpAccessControlRequest {
      * 生效状态
      */
     ValidStatus?: number;
+    /**
+     * 最小有效时间的时间戳
+     */
+    ValidTimeStampMin?: string;
+    /**
+     * 最大有效时间的时间戳
+     */
+    ValidTimeStampMax?: string;
 }
 /**
  * ModifyWafThreatenIntelligence请求参数结构体
@@ -3613,10 +3657,12 @@ export interface DescribeIpHitItemsRequest {
     Category: string;
     /**
      * 有效时间最小时间戳
+     * @deprecated
      */
     VtsMin?: number;
     /**
      * 有效时间最大时间戳
+     * @deprecated
      */
     VtsMax?: number;
     /**
@@ -3647,6 +3693,14 @@ export interface DescribeIpHitItemsRequest {
      * IP
      */
     Ip?: string;
+    /**
+     * 有效时间最小时间戳
+     */
+    ValidTimeStampMin?: number;
+    /**
+     * 有效时间最大时间戳
+     */
+    ValidTimeStampMax?: number;
 }
 /**
  * 计费下单接口出入参Goods
@@ -4321,6 +4375,11 @@ export interface UpsertSessionResponse {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Data?: string;
+    /**
+     * SessionID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SessionID?: number;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -5056,12 +5115,17 @@ export interface ModifyCustomRuleStatusRequest {
 export interface AccessHistogramItem {
     /**
      * 时间，单位ms
+     * @deprecated
      */
     BTime?: number;
     /**
      * 日志条数
      */
     Count?: number;
+    /**
+     * 时间，单位ms
+     */
+    BeginTime?: number;
 }
 /**
  * ModifySpartaProtectionMode请求参数结构体
@@ -5857,6 +5921,11 @@ export interface UpsertIpAccessControlResponse {
      */
     FailedCount?: number;
     /**
+     * 添加或修改的IP数据Id列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Ids?: Array<string>;
+    /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
@@ -6380,6 +6449,10 @@ export interface ModifyModuleStatusRequest {
      * 防泄漏模块开关，0或者1
      */
     AntiLeakage?: number;
+    /**
+     * 限流模块开关，0或1
+     */
+    RateLimit?: number;
 }
 /**
  * 日志KeyValue对数组，用于搜索访问日志
@@ -6527,7 +6600,7 @@ export interface DescribePeakPointsRequest {
      */
     InstanceID?: string;
     /**
-     * 十一个值可选：
+     * 十二个值可选：
   access-峰值qps趋势图
   botAccess- bot峰值qps趋势图
   down-下行峰值带宽趋势图
@@ -6539,6 +6612,7 @@ export interface DescribePeakPointsRequest {
   leak-防泄露攻击总数趋势图
   acl-访问控制攻击总数趋势图
   http_status-状态码各次数趋势图
+  wx_access-微信小程序峰值qps趋势图
      */
     MetricName?: string;
 }
@@ -7493,11 +7567,11 @@ export interface DeleteDownloadRecordResponse {
  */
 export interface ModifyAccessPeriodRequest {
     /**
-     * 访问日志保存期限，范围为[1, 30]
+     * 访问日志保存期限，范围为[1, 180]
      */
     Period: number;
     /**
-     * 日志主题
+     * 日志主题，新版本不需要再传
      */
     TopicId: string;
 }

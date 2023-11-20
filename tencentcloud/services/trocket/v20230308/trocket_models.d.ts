@@ -25,6 +25,15 @@ export interface CreateTopicResponse {
     RequestId?: string;
 }
 /**
+ * ImportSourceClusterTopics返回参数结构体
+ */
+export interface ImportSourceClusterTopicsResponse {
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * CreateConsumerGroup请求参数结构体
  */
 export interface CreateConsumerGroupRequest {
@@ -547,6 +556,40 @@ export interface VpcInfo {
     SubnetId: string;
 }
 /**
+ * 消费组配置信息
+ */
+export interface SourceClusterGroupConfig {
+    /**
+     * 消费组名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    GroupName: string;
+    /**
+     * 备注信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Remark?: string;
+    /**
+     * 是否已导入，作为入参时无效
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Imported?: boolean;
+    /**
+     * 命名空间，仅4.x集群有效
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Namespace?: string;
+    /**
+     * 导入状态
+  Unknown 未知
+  Success 成功
+  Failure 失败
+  AlreadyExists 已存在
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ImportStatus?: string;
+}
+/**
  * DeleteTopic请求参数结构体
  */
 export interface DeleteTopicRequest {
@@ -569,13 +612,17 @@ export interface DeleteConsumerGroupResponse {
     RequestId?: string;
 }
 /**
- * ModifyTopic返回参数结构体
+ * ImportSourceClusterTopics请求参数结构体
  */
-export interface ModifyTopicResponse {
+export interface ImportSourceClusterTopicsRequest {
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     * 任务ID
      */
-    RequestId?: string;
+    TaskId: string;
+    /**
+     * 待导入的主题列表
+     */
+    TopicList: Array<SourceClusterTopicConfig>;
 }
 /**
  * DescribeTopic返回参数结构体
@@ -674,6 +721,15 @@ export interface Endpoint {
     IpRules?: Array<IpRule>;
 }
 /**
+ * ImportSourceClusterConsumerGroups返回参数结构体
+ */
+export interface ImportSourceClusterConsumerGroupsResponse {
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * DeleteRole返回参数结构体
  */
 export interface DeleteRoleResponse {
@@ -724,6 +780,63 @@ export interface IpRule {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Remark: string;
+}
+/**
+ * 源集群主题配置
+ */
+export interface SourceClusterTopicConfig {
+    /**
+     * 主题名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TopicName: string;
+    /**
+     * 主题类型，
+  5.x版本
+  UNSPECIFIED 未指定
+  NORMAL 普通消息
+  FIFO 顺序消息
+  DELAY 延迟消息
+  TRANSACTION 事务消息
+  
+  4.x版本
+  Normal 普通消息
+  PartitionedOrder 分区顺序消息
+  Transaction 事务消息
+  DelayScheduled 延时消息
+  
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TopicType: string;
+    /**
+     * 队列数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    QueueNum: number;
+    /**
+     * 备注信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Remark?: string;
+    /**
+     * 是否已导入，作为入参时无效
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Imported?: boolean;
+    /**
+     * 命名空间，仅4.x集群有效
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Namespace?: string;
+    /**
+     * 导入状态，
+  Unknown 未知，
+  AlreadyExists 已存在，
+  Success 成功，
+  Failure 失败
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ImportStatus?: string;
 }
 /**
  * DescribeTopicStatsOp请求参数结构体
@@ -865,6 +978,15 @@ export interface DescribeRoleListRequest {
      * 查询条件列表
      */
     Filters?: Array<Filter>;
+}
+/**
+ * ModifyConsumerGroup返回参数结构体
+ */
+export interface ModifyConsumerGroupResponse {
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * ModifyTopic请求参数结构体
@@ -1057,13 +1179,17 @@ export interface CreateConsumerGroupResponse {
     RequestId?: string;
 }
 /**
- * ModifyConsumerGroup返回参数结构体
+ * ImportSourceClusterConsumerGroups请求参数结构体
  */
-export interface ModifyConsumerGroupResponse {
+export interface ImportSourceClusterConsumerGroupsRequest {
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     * 任务ID
      */
-    RequestId?: string;
+    TaskId: string;
+    /**
+     * 待导入的消费组列表
+     */
+    GroupList: Array<SourceClusterGroupConfig>;
 }
 /**
  * DeleteInstance请求参数结构体
@@ -1197,6 +1323,15 @@ export interface InstanceItem {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     MaxMessageDelay?: number;
+}
+/**
+ * ModifyTopic返回参数结构体
+ */
+export interface ModifyTopicResponse {
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * DescribeInstanceList返回参数结构体

@@ -495,6 +495,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyBaselineTaskAlarmStatus", req, cb);
     }
     /**
+     * 获取审批分类列表
+     */
+    async DescribeApproveTypeList(req, cb) {
+        return this.request("DescribeApproveTypeList", req, cb);
+    }
+    /**
      * Runner 规则检测结果上报
      */
     async CommitRuleGroupExecResult(req, cb) {

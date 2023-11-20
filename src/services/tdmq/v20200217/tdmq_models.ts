@@ -3233,10 +3233,6 @@ export interface CreateProClusterRequest {
    */
   TimeSpan: number
   /**
-   * 集群的标签列表(已废弃)
-   */
-  Tags: Array<Tag>
-  /**
    * 集群名称，不支持中字以及除了短线和下划线外的特殊字符且不超过64个字符。
    */
   ClusterName: string
@@ -3248,6 +3244,10 @@ export interface CreateProClusterRequest {
    * vpc网络标签
    */
   Vpcs?: VpcInfo
+  /**
+   * 集群的标签列表(已废弃)
+   */
+  Tags?: Array<Tag>
 }
 
 /**

@@ -96,41 +96,41 @@ export interface AssessmentControlItem {
     /**
      * 评估项Id
      */
-    ItemId: string;
+    ItemId?: string;
     /**
      * 评估项名称
      */
-    ItemName: string;
+    ItemName?: string;
     /**
      * 评估项描述
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Description: string;
+    Description?: string;
     /**
      * 评估项来源，内置/用户自定，取值（system，user）
      */
-    Source: string;
+    Source?: string;
     /**
      * 评估项类型，问卷/自动化，取值（questionnaire，auto）
      */
-    ItemType: string;
+    ItemType?: string;
     /**
      * 评估项子类型，单选/多选/时间/文本/AKSK等，取值（singlechoice，multichoice，date，text，AKSK……等）
      */
-    ItemSubType: string;
+    ItemSubType?: string;
     /**
      * 评估项创建时间
      */
-    CreatedTime: string;
+    CreatedTime?: string;
     /**
      * 评估项启用状态，启用/未启用，取值draft / launched
      */
-    Status: string;
+    Status?: string;
     /**
-     * 评估项关联的模版数量
+     * 评估项关联的模板数量
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TemplateCount: number;
+    TemplateCount?: number;
 }
 /**
  * DescribeESAssetSensitiveDistribution返回参数结构体
@@ -477,11 +477,11 @@ export interface AssessmentTemplate {
      */
     Id?: number;
     /**
-     * 评估模版Id
+     * 评估模板Id
      */
     TemplateId?: string;
     /**
-     * 评估模版名称
+     * 评估模板名称
      */
     TemplateName?: string;
     /**
@@ -490,27 +490,27 @@ export interface AssessmentTemplate {
      */
     Description?: string;
     /**
-     * 模版来源，内置/用户自定，取值（system，user）
+     * 模板来源，内置/用户自定，取值（system，user）
      */
     Source?: string;
     /**
-     * 模版类型，自动化/半自动化/问卷，取值（auto，semi-auto，law）等
+     * 模板类型，自动化/半自动化/问卷，取值（auto，semi-auto，law）等
      */
     UseType?: string;
     /**
-     * 评估模版创建时间
+     * 评估模板创建时间
      */
     CreatedTime?: string;
     /**
-     * 模版关联的评估项数量
+     * 模板关联的评估项数量
      */
     ControlItemCount?: number;
     /**
-     * 模版已启用的评估项数量
+     * 模板已启用的评估项数量
      */
     AppliedItemCount?: number;
     /**
-     * 模版启用状态，草稿/已启用，取值draft / launched
+     * 模板启用状态，草稿/已启用，取值draft / launched
      */
     Status?: string;
     /**
@@ -3227,7 +3227,7 @@ export interface RiskLevelRisk {
      */
     RiskLevelDescription?: string;
     /**
-     * 引用的分类分级模版
+     * 引用的分类分级模板
   注意：此字段可能返回 null，表示取不到有效值。
      */
     IdentifyComplianceName?: string;
@@ -4528,11 +4528,11 @@ export interface AssessmentRisk {
      */
     RiskDescription?: string;
     /**
-     * 评估模版Id
+     * 评估模板Id
      */
     TemplateId?: string;
     /**
-     * 评估模版名称
+     * 评估模板名称
      */
     TemplateName?: string;
     /**
@@ -5207,19 +5207,19 @@ export interface AssessmentTask {
      */
     BusinessOwner: string;
     /**
-     * 评估模版Id
+     * 评估模板Id
      */
     TemplateId: string;
     /**
-     * 评估模版名称
+     * 评估模板名称
      */
     TemplateName: string;
     /**
-     * 分类分级模版Id
+     * 分类分级模板Id
      */
     ComplianceGroupId: number;
     /**
-     * 分类分级模版名称
+     * 分类分级模板名称
      */
     ComplianceGroupName: string;
     /**
@@ -5257,7 +5257,7 @@ export interface AssessmentTask {
      */
     ErrorInfo: string;
     /**
-     * 模版主键id
+     * 模板主键id
   注意：此字段可能返回 null，表示取不到有效值。
      */
     TemplateUid: number;
@@ -5441,15 +5441,15 @@ export interface CreateDSPAAssessmentRiskTemplateRequest {
  */
 export interface TemplateInfo {
     /**
-     * 模版id
+     * 模板id
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TemplateId?: number;
+    TemplateId: number;
     /**
-     * 模版名称
+     * 模板名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TemplateName?: string;
+    TemplateName: string;
 }
 /**
  * DescribeDSPACOSDiscoveryTaskFiles返回参数结构体
@@ -5935,7 +5935,7 @@ export interface AssessmentRiskItem {
      */
     RiskType?: string;
     /**
-     * 关联模版个数
+     * 关联模板个数
   注意：此字段可能返回 null，表示取不到有效值。
      */
     ReferTemplateCount?: number;
@@ -5950,7 +5950,7 @@ export interface AssessmentRiskItem {
      */
     RiskSide?: string;
     /**
-     * 关联模版列表
+     * 关联模板列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
     ReferTemplateList?: Array<TemplateInfo>;
@@ -6033,12 +6033,12 @@ export interface ModifyDSPACOSTaskResultResponse {
  */
 export interface Note {
     /**
-     * 通用key，比如分类名称
+     * 通用key，例如分类名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Key?: string;
     /**
-     * 通用value，比如分类个数
+     * 通用value，例如分类个数
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Value?: number;
@@ -6429,7 +6429,7 @@ export interface DspaInstance {
      */
     CosTotalQuota?: number;
     /**
-     * COS配额单位，比如TB。
+     * COS配额单位，例如:TB。
      */
     CosQuotaUnit?: string;
     /**
@@ -7702,16 +7702,16 @@ export interface RiskCountInfo {
     /**
      * 风险等级
      */
-    RiskLevel?: string;
+    RiskLevel: string;
     /**
      * 该等级风险项数量
      */
-    Count?: number;
+    Count: number;
     /**
      * 风险等级名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    RiskLevelName?: string;
+    RiskLevelName: string;
 }
 /**
  * CreateDSPAAssessmentTask请求参数结构体

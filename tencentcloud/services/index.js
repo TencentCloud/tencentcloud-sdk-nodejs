@@ -74,8 +74,6 @@ var captcha_1 = require("./captcha");
 Object.defineProperty(exports, "captcha", { enumerable: true, get: function () { return captcha_1.captcha; } });
 var car_1 = require("./car");
 Object.defineProperty(exports, "car", { enumerable: true, get: function () { return car_1.car; } });
-var casb_1 = require("./casb");
-Object.defineProperty(exports, "casb", { enumerable: true, get: function () { return casb_1.casb; } });
 var cat_1 = require("./cat");
 Object.defineProperty(exports, "cat", { enumerable: true, get: function () { return cat_1.cat; } });
 var cbs_1 = require("./cbs");

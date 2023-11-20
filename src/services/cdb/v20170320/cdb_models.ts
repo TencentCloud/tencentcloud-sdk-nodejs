@@ -5483,6 +5483,10 @@ export interface RenewDBInstanceRequest {
    * 如果需要将按量计费实例续费为包年包月的实例，该入参的值需要指定为 "PREPAID" 。
    */
   ModifyPayType?: string
+  /**
+   * 自动续费标记，0表示不自动续费，1表示进行自动续费
+   */
+  AutoRenew?: number
 }
 
 /**
@@ -8778,7 +8782,7 @@ export interface RenewDBInstanceResponse {
   /**
    * 订单 ID。
    */
-  DealId: string
+  DealId?: string
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

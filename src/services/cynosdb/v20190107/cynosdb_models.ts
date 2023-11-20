@@ -1046,12 +1046,12 @@ export interface DescribeClusterParamsResponse {
   /**
    * 参数个数
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 实例参数列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Items: Array<ParamInfo>
+  Items?: Array<ParamInfo>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4089,11 +4089,11 @@ export interface DescribeClustersResponse {
   /**
    * 集群数
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 集群列表
    */
-  ClusterSet: Array<CynosdbCluster>
+  ClusterSet?: Array<CynosdbCluster>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -7943,11 +7943,11 @@ export interface ReloadBalanceProxyNodeResponse {
   /**
    * 异步流程ID
    */
-  FlowId: number
+  FlowId?: number
   /**
    * 异步任务ID
    */
-  TaskId: number
+  TaskId?: number
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

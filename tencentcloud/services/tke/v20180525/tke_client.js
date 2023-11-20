@@ -94,6 +94,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UninstallEdgeLogAgent", req, cb);
     }
     /**
+     * 查看开启第三方节点池配置信息
+     */
+    async DescribeExternalNodeSupportConfig(req, cb) {
+        return this.request("DescribeExternalNodeSupportConfig", req, cb);
+    }
+    /**
      * 删除边缘计算实例
      */
     async DeleteEdgeClusterInstances(req, cb) {
@@ -140,6 +146,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribePrometheusAlertHistory(req, cb) {
         return this.request("DescribePrometheusAlertHistory", req, cb);
+    }
+    /**
+     * 获取eniipamd组件信息
+     */
+    async DescribeIPAMD(req, cb) {
+        return this.request("DescribeIPAMD", req, cb);
     }
     /**
      * 创建集群路由表
@@ -626,6 +638,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CreateEKSCluster(req, cb) {
         return this.request("CreateEKSCluster", req, cb);
+    }
+    /**
+     * 查询集群自定义参数
+     */
+    async DescribeClusterExtraArgs(req, cb) {
+        return this.request("DescribeClusterExtraArgs", req, cb);
     }
     /**
      * 对集群的Kubeconfig信息进行更新

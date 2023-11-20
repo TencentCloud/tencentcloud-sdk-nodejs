@@ -608,7 +608,7 @@ export declare class Client extends AbstractClient {
     /**
      * 镜像仓库资产刷新
      */
-    SyncAssetImageRegistryAsset(req?: SyncAssetImageRegistryAssetRequest, cb?: (error: string, rep: SyncAssetImageRegistryAssetResponse) => void): Promise<SyncAssetImageRegistryAssetResponse>;
+    SyncAssetImageRegistryAsset(req: SyncAssetImageRegistryAssetRequest, cb?: (error: string, rep: SyncAssetImageRegistryAssetResponse) => void): Promise<SyncAssetImageRegistryAssetResponse>;
     /**
      * 创建合规检查任务，在资产级别触发重新检测时使用。
      */

@@ -128,6 +128,16 @@ it("tke.v20180525.UninstallEdgeLogAgent", async function () {
     }
 })
 
+it("tke.v20180525.DescribeExternalNodeSupportConfig", async function () {
+    try {
+       const data = await client.DescribeExternalNodeSupportConfig({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tke.v20180525.DeleteEdgeClusterInstances", async function () {
     try {
        const data = await client.DeleteEdgeClusterInstances({})
@@ -201,6 +211,16 @@ it("tke.v20180525.EnableEventPersistence", async function () {
 it("tke.v20180525.DescribePrometheusAlertHistory", async function () {
     try {
        const data = await client.DescribePrometheusAlertHistory({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tke.v20180525.DescribeIPAMD", async function () {
+    try {
+       const data = await client.DescribeIPAMD({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1011,6 +1031,16 @@ it("tke.v20180525.ModifyClusterAuthenticationOptions", async function () {
 it("tke.v20180525.CreateEKSCluster", async function () {
     try {
        const data = await client.CreateEKSCluster({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tke.v20180525.DescribeClusterExtraArgs", async function () {
+    try {
+       const data = await client.DescribeClusterExtraArgs({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

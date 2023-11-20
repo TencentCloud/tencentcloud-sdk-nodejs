@@ -19,49 +19,58 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   QueryChainMakerDemoBlockTransactionResponse,
-  QueryChainMakerContractRequest,
+  DescribeFabricTransactionResponse,
   QueryChainMakerBlockTransactionRequest,
   GetBlockTransactionListForUserResponse,
   ApplyChainMakerBatchUserCertResponse,
   ApplyUserCertRequest,
+  SrvInvokeResponse,
   GetTransactionDetailForUserResponse,
   SrvInvokeRequest,
   ApplyUserCertResponse,
-  GetLatesdTransactionListRequest,
-  InvokeResponse,
+  GetInvokeTxRequest,
+  InvokeFabricChaincodeResponse,
   SignCertCsr,
   DownloadUserCertResponse,
+  GetLatesdTransactionListRequest,
+  InvokeResponse,
+  QueryFabricChaincodeResponse,
   GetTransactionDetailForUserRequest,
   GetBlockListResponse,
   GetBlockTransactionListForUserRequest,
+  TransactionItem,
   InvokeChainMakerDemoContractRequest,
   InvokeChainMakerContractResponse,
-  SrvInvokeResponse,
-  GetInvokeTxRequest,
+  QueryChainMakerTransactionRequest,
   GetLatesdTransactionListResponse,
   QueryChainMakerTransactionResponse,
-  GetLatestTransactionListResponse,
+  DownloadUserCertRequest,
   GetClusterSummaryResponse,
+  QueryChainMakerDemoContractResponse,
   PeerSet,
   ChainMakerTransactionResult,
   GetLatestTransactionListRequest,
+  DescribeFabricBlockResponse,
+  QueryChainMakerDemoContractRequest,
   QueryChainMakerDemoTransactionResponse,
   ApplyChainMakerBatchUserCertRequest,
   QueryChainMakerDemoTransactionRequest,
-  QueryChainMakerDemoContractRequest,
+  DescribeFabricTransactionRequest,
   ChainMakerContractResult,
   GetClusterSummaryRequest,
   Block,
-  QueryChainMakerDemoContractResponse,
+  DescribeFabricBlockRequest,
   GetBlockListRequest,
+  QueryFabricChaincodeRequest,
+  InvokeFabricChaincodeRequest,
   InvokeRequest,
   GetInvokeTxResponse,
   QueryChainMakerContractResponse,
-  DownloadUserCertRequest,
   InvokeChainMakerContractRequest,
-  TransactionItem,
-  QueryChainMakerTransactionRequest,
+  QueryChainMakerContractRequest,
+  GetLatestTransactionListResponse,
   QueryChainMakerDemoBlockTransactionRequest,
+  Transaction,
   QueryRequest,
   QueryChainMakerBlockTransactionResponse,
   InvokeChainMakerDemoContractResponse,
@@ -89,16 +98,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 申请用户证书
-   */
-  async ApplyUserCert(
-    req: ApplyUserCertRequest,
-    cb?: (error: string, rep: ApplyUserCertResponse) => void
-  ): Promise<ApplyUserCertResponse> {
-    return this.request("ApplyUserCert", req, cb)
-  }
-
-  /**
    * 批量申请长安链用户签名证书
    */
   async ApplyChainMakerBatchUserCert(
@@ -109,13 +108,43 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * trustsql服务统一接口
+   * 通过交易ID查询长安链体验网络交易
    */
-  async SrvInvoke(
-    req: SrvInvokeRequest,
-    cb?: (error: string, rep: SrvInvokeResponse) => void
-  ): Promise<SrvInvokeResponse> {
-    return this.request("SrvInvoke", req, cb)
+  async QueryChainMakerDemoTransaction(
+    req: QueryChainMakerDemoTransactionRequest,
+    cb?: (error: string, rep: QueryChainMakerDemoTransactionResponse) => void
+  ): Promise<QueryChainMakerDemoTransactionResponse> {
+    return this.request("QueryChainMakerDemoTransaction", req, cb)
+  }
+
+  /**
+   * 调用长安链合约查询
+   */
+  async QueryChainMakerContract(
+    req: QueryChainMakerContractRequest,
+    cb?: (error: string, rep: QueryChainMakerContractResponse) => void
+  ): Promise<QueryChainMakerContractResponse> {
+    return this.request("QueryChainMakerContract", req, cb)
+  }
+
+  /**
+   * 查询长安链体验网络指定高度区块的交易
+   */
+  async QueryChainMakerDemoBlockTransaction(
+    req: QueryChainMakerDemoBlockTransactionRequest,
+    cb?: (error: string, rep: QueryChainMakerDemoBlockTransactionResponse) => void
+  ): Promise<QueryChainMakerDemoBlockTransactionResponse> {
+    return this.request("QueryChainMakerDemoBlockTransaction", req, cb)
+  }
+
+  /**
+   * 获取Fabric某区块的详细信息
+   */
+  async DescribeFabricBlock(
+    req: DescribeFabricBlockRequest,
+    cb?: (error: string, rep: DescribeFabricBlockResponse) => void
+  ): Promise<DescribeFabricBlockResponse> {
+    return this.request("DescribeFabricBlock", req, cb)
   }
 
   /**
@@ -139,6 +168,66 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取fabric最新交易列表
+   */
+  async GetLatestTransactionList(
+    req: GetLatestTransactionListRequest,
+    cb?: (error: string, rep: GetLatestTransactionListResponse) => void
+  ): Promise<GetLatestTransactionListResponse> {
+    return this.request("GetLatestTransactionList", req, cb)
+  }
+
+  /**
+   * 下载用户证书
+   */
+  async DownloadUserCert(
+    req: DownloadUserCertRequest,
+    cb?: (error: string, rep: DownloadUserCertResponse) => void
+  ): Promise<DownloadUserCertResponse> {
+    return this.request("DownloadUserCert", req, cb)
+  }
+
+  /**
+   * 获取最新交易列表（已废弃）
+   */
+  async GetLatesdTransactionList(
+    req: GetLatesdTransactionListRequest,
+    cb?: (error: string, rep: GetLatesdTransactionListResponse) => void
+  ): Promise<GetLatesdTransactionListResponse> {
+    return this.request("GetLatesdTransactionList", req, cb)
+  }
+
+  /**
+   * 申请用户证书
+   */
+  async ApplyUserCert(
+    req: ApplyUserCertRequest,
+    cb?: (error: string, rep: ApplyUserCertResponse) => void
+  ): Promise<ApplyUserCertResponse> {
+    return this.request("ApplyUserCert", req, cb)
+  }
+
+  /**
+   * 调用长安链合约执行交易
+   */
+  async InvokeChainMakerContract(
+    req: InvokeChainMakerContractRequest,
+    cb?: (error: string, rep: InvokeChainMakerContractResponse) => void
+  ): Promise<InvokeChainMakerContractResponse> {
+    return this.request("InvokeChainMakerContract", req, cb)
+  }
+
+  /**
+   * Invoke异步调用结果查询
+   */
+  async GetInvokeTx(
+    req: GetInvokeTxRequest,
+    cb?: (error: string, rep: GetInvokeTxResponse) => void
+  ): Promise<GetInvokeTxResponse> {
+    return this.request("GetInvokeTx", req, cb)
+  }
+
+  /**
    * 查询长安链指定高度区块的交易
    */
   async QueryChainMakerBlockTransaction(
@@ -159,33 +248,43 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 通过交易ID查询长安链体验网络交易
+   * 获取交易详情
    */
-  async QueryChainMakerDemoTransaction(
-    req: QueryChainMakerDemoTransactionRequest,
-    cb?: (error: string, rep: QueryChainMakerDemoTransactionResponse) => void
-  ): Promise<QueryChainMakerDemoTransactionResponse> {
-    return this.request("QueryChainMakerDemoTransaction", req, cb)
+  async GetTransactionDetailForUser(
+    req: GetTransactionDetailForUserRequest,
+    cb?: (error: string, rep: GetTransactionDetailForUserResponse) => void
+  ): Promise<GetTransactionDetailForUserResponse> {
+    return this.request("GetTransactionDetailForUser", req, cb)
   }
 
   /**
-   * Invoke异步调用结果查询
+   * 调用Fabric用户合约查询
    */
-  async GetInvokeTx(
-    req: GetInvokeTxRequest,
-    cb?: (error: string, rep: GetInvokeTxResponse) => void
-  ): Promise<GetInvokeTxResponse> {
-    return this.request("GetInvokeTx", req, cb)
+  async QueryFabricChaincode(
+    req: QueryFabricChaincodeRequest,
+    cb?: (error: string, rep: QueryFabricChaincodeResponse) => void
+  ): Promise<QueryFabricChaincodeResponse> {
+    return this.request("QueryFabricChaincode", req, cb)
   }
 
   /**
-   * 获取fabric最新交易列表
+   * trustsql服务统一接口
    */
-  async GetLatestTransactionList(
-    req: GetLatestTransactionListRequest,
-    cb?: (error: string, rep: GetLatestTransactionListResponse) => void
-  ): Promise<GetLatestTransactionListResponse> {
-    return this.request("GetLatestTransactionList", req, cb)
+  async SrvInvoke(
+    req: SrvInvokeRequest,
+    cb?: (error: string, rep: SrvInvokeResponse) => void
+  ): Promise<SrvInvokeResponse> {
+    return this.request("SrvInvoke", req, cb)
+  }
+
+  /**
+   * 获取Fabric交易的详细信息
+   */
+  async DescribeFabricTransaction(
+    req: DescribeFabricTransactionRequest,
+    cb?: (error: string, rep: DescribeFabricTransactionResponse) => void
+  ): Promise<DescribeFabricTransactionResponse> {
+    return this.request("DescribeFabricTransaction", req, cb)
   }
 
   /**
@@ -199,16 +298,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 下载用户证书
-   */
-  async DownloadUserCert(
-    req: DownloadUserCertRequest,
-    cb?: (error: string, rep: DownloadUserCertResponse) => void
-  ): Promise<DownloadUserCertResponse> {
-    return this.request("DownloadUserCert", req, cb)
-  }
-
-  /**
    * 获取区块内的交易列表
    */
   async GetBlockTransactionListForUser(
@@ -216,16 +305,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: GetBlockTransactionListForUserResponse) => void
   ): Promise<GetBlockTransactionListForUserResponse> {
     return this.request("GetBlockTransactionListForUser", req, cb)
-  }
-
-  /**
-   * 调用长安链合约执行交易
-   */
-  async InvokeChainMakerContract(
-    req: InvokeChainMakerContractRequest,
-    cb?: (error: string, rep: InvokeChainMakerContractResponse) => void
-  ): Promise<InvokeChainMakerContractResponse> {
-    return this.request("InvokeChainMakerContract", req, cb)
   }
 
   /**
@@ -239,6 +318,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 调用Fabric用户合约执行交易
+   */
+  async InvokeFabricChaincode(
+    req: InvokeFabricChaincodeRequest,
+    cb?: (error: string, rep: InvokeFabricChaincodeResponse) => void
+  ): Promise<InvokeFabricChaincodeResponse> {
+    return this.request("InvokeFabricChaincode", req, cb)
+  }
+
+  /**
    * 查询交易
    */
   async Query(
@@ -246,45 +335,5 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: QueryResponse) => void
   ): Promise<QueryResponse> {
     return this.request("Query", req, cb)
-  }
-
-  /**
-   * 获取交易详情
-   */
-  async GetTransactionDetailForUser(
-    req: GetTransactionDetailForUserRequest,
-    cb?: (error: string, rep: GetTransactionDetailForUserResponse) => void
-  ): Promise<GetTransactionDetailForUserResponse> {
-    return this.request("GetTransactionDetailForUser", req, cb)
-  }
-
-  /**
-   * 查询长安链体验网络指定高度区块的交易
-   */
-  async QueryChainMakerDemoBlockTransaction(
-    req: QueryChainMakerDemoBlockTransactionRequest,
-    cb?: (error: string, rep: QueryChainMakerDemoBlockTransactionResponse) => void
-  ): Promise<QueryChainMakerDemoBlockTransactionResponse> {
-    return this.request("QueryChainMakerDemoBlockTransaction", req, cb)
-  }
-
-  /**
-   * 调用长安链合约查询
-   */
-  async QueryChainMakerContract(
-    req: QueryChainMakerContractRequest,
-    cb?: (error: string, rep: QueryChainMakerContractResponse) => void
-  ): Promise<QueryChainMakerContractResponse> {
-    return this.request("QueryChainMakerContract", req, cb)
-  }
-
-  /**
-   * 获取最新交易列表（已废弃）
-   */
-  async GetLatesdTransactionList(
-    req: GetLatesdTransactionListRequest,
-    cb?: (error: string, rep: GetLatesdTransactionListResponse) => void
-  ): Promise<GetLatesdTransactionListResponse> {
-    return this.request("GetLatesdTransactionList", req, cb)
   }
 }

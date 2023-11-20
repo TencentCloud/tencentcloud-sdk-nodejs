@@ -1981,6 +1981,71 @@ export interface Label {
     Text: string;
 }
 /**
+ * 事件实例
+ */
+export interface EventCaseAuditLogOptDto {
+    /**
+     * 事件实例ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CaseId?: string;
+    /**
+     * 事件名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    EventName?: string;
+    /**
+     * 事件类型
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    EventType?: string;
+    /**
+     * 事件分割类型
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    EventSubType?: string;
+    /**
+     * 事件广播类型
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    EventBroadcastType?: string;
+    /**
+     * 事件实例存活时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TTL?: number;
+    /**
+     * 事件实例存活时间单位
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TimeUnit?: string;
+    /**
+     * 数据时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Dimension?: string;
+    /**
+     * 事件实例状态
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Status?: string;
+    /**
+     * 事件实例触发时间戳
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    EventTriggerTimestamp?: string;
+    /**
+     * 事件实例消费时间戳
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    LogTimestamp?: string;
+    /**
+     * 事件实例描述
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Description?: string;
+}
+/**
  * DescribeTableLineage请求参数结构体
  */
 export interface DescribeTableLineageRequest {
@@ -2144,21 +2209,14 @@ export interface ModifyDimensionWeightResponse {
     RequestId?: string;
 }
 /**
- * BatchResumeIntegrationTasks返回参数结构体
+ * DescribeInstanceByCycleReport返回参数结构体
  */
-export interface BatchResumeIntegrationTasksResponse {
+export interface DescribeInstanceByCycleReportResponse {
     /**
-     * 操作成功的任务数
+     * 实例周期统计
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    SuccessCount?: number;
-    /**
-     * 操作失败的任务数
-     */
-    FailedCount?: number;
-    /**
-     * 任务总数
-     */
-    TotalCount?: number;
+    Data?: Array<TaskByStatus>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -10394,6 +10452,31 @@ export interface DescribeRuleExecStatResponse {
     RequestId?: string;
 }
 /**
+ * DescribeInstanceLogFile请求参数结构体
+ */
+export interface DescribeInstanceLogFileRequest {
+    /**
+     * 项目ID
+     */
+    ProjectId: string;
+    /**
+     * 任务ID
+     */
+    TaskId: string;
+    /**
+     * 实例数据时间
+     */
+    CurRunDate: string;
+    /**
+     * 执行机IP
+     */
+    BrokerIp: string;
+    /**
+     * 日志文件名
+     */
+    OriginFileName: string;
+}
+/**
  * 周期单位统计
  */
 export interface TaskByCycle {
@@ -11558,7 +11641,7 @@ export interface Apply {
     /**
      * 申请人id
      */
-    ApplicantId: string;
+    ApplicantId?: string;
     /**
      * 申请人名称
      */
@@ -11567,11 +11650,11 @@ export interface Apply {
      * 审批备注
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Remark: string;
+    Remark?: string;
     /**
      * 审批分类key
      */
-    ApproveClassification: string;
+    ApproveClassification?: string;
     /**
      * 审批单id
      */
@@ -11579,33 +11662,57 @@ export interface Apply {
     /**
      * 审批类型key
      */
-    ApproveType: string;
+    ApproveType?: string;
     /**
      * 申请原因
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Reason: string;
+    Reason?: string;
     /**
      * 创建时间
      */
-    CreateTime: string;
+    CreateTime?: string;
     /**
      * 审批时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ApproveTime: string;
+    ApproveTime?: string;
     /**
      * 审批分类名称
      */
-    ApproveClassificationName: string;
+    ApproveClassificationName?: string;
     /**
      * 状态
      */
-    Status: string;
+    Status?: string;
     /**
      * 审批类型名称
      */
-    ApproveTypeName: string;
+    ApproveTypeName?: string;
+    /**
+     * 审批异常或者失败信息
+     */
+    ErrorMessage?: string;
+    /**
+     * 申请名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ApplyName?: string;
+    /**
+     * 审批人id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ApproverId?: string;
+    /**
+     * 审批人名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ApproverName?: string;
+    /**
+     * 审批所属项目
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ApproveProjectName?: string;
 }
 /**
  * StartIntegrationTask返回参数结构体
@@ -12165,14 +12272,21 @@ export interface ForceSucScheduleInstancesRequest {
     IsCount?: boolean;
 }
 /**
- * DescribeInstanceByCycleReport返回参数结构体
+ * BatchResumeIntegrationTasks返回参数结构体
  */
-export interface DescribeInstanceByCycleReportResponse {
+export interface BatchResumeIntegrationTasksResponse {
     /**
-     * 实例周期统计
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 操作成功的任务数
      */
-    Data?: Array<TaskByStatus>;
+    SuccessCount?: number;
+    /**
+     * 操作失败的任务数
+     */
+    FailedCount?: number;
+    /**
+     * 任务总数
+     */
+    TotalCount?: number;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -13189,81 +13303,39 @@ export interface DescribeOrganizationalFunctionsResponse {
     RequestId?: string;
 }
 /**
- * DescribeInstancesInfoWithTaskInfo请求参数结构体
+ * 文件夹列表
  */
-export interface DescribeInstancesInfoWithTaskInfoRequest {
+export interface CollectionFolderOpsDto {
     /**
-     * 实例列表
+     * 总数
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Instances?: Array<InstanceOpsDto>;
+    TotalCount?: number;
     /**
-     * 检查父任务类型, true: 检查父任务; false: 不检查父任务
+     * 总页面数
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    CheckFather?: boolean;
+    TotalPage?: number;
     /**
-     * 重跑类型, 1: 自身; 3: 孩子; 2: 自身以及孩子
+     * 当前页面数量
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    RerunType?: string;
+    PageCount?: number;
     /**
-     * 实例依赖方式, 1: 自依赖; 2: 任务依赖; 3: 自依赖及父子依赖
+     * 页码
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    DependentWay?: string;
+    PageNumber?: number;
     /**
-     * 重跑忽略事件监听与否
-     */
-    SkipEventListening?: boolean;
-    /**
-     * 下游实例范围 1: 所在工作流 2: 所在项目 3: 所有跨工作流依赖的项目
-     */
-    SonInstanceType?: string;
-    /**
-     * 查询条件
-     */
-    SearchCondition?: InstanceApiOpsRequest;
-    /**
-     * 访问类型
-     */
-    OptType?: string;
-    /**
-     * 操作者名称
-     */
-    OperatorName?: string;
-    /**
-     * 操作者id
-     */
-    OperatorId?: string;
-    /**
-     * 项目id
-     */
-    ProjectId?: string;
-    /**
-     * 项目标志
-     */
-    ProjectIdent?: string;
-    /**
-     * 项目名称
-     */
-    ProjectName?: string;
-    /**
-     * 索引页码
-     */
-    PageIndex?: number;
-    /**
-     * 页面大小
+     * 每页数量
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     PageSize?: number;
     /**
-     * 数据总数
+     * 任务信息
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Count?: number;
-    /**
-     * 基础请求信息
-     */
-    RequestBaseInfo?: ProjectBaseInfoOpsRequest;
-    /**
-     * 是否计算总数
-     */
-    IsCount?: boolean;
+    Items?: Array<FolderOpsDto>;
 }
 /**
  * DescribeEventDetail请求参数结构体
@@ -13379,69 +13451,21 @@ export interface DeleteRuleRequest {
     ProjectId?: string;
 }
 /**
- * 事件实例
+ * 审批分类
  */
-export interface EventCaseAuditLogOptDto {
+export interface ApproveType {
     /**
-     * 事件实例ID
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 申请分类key
      */
-    CaseId?: string;
+    Type: string;
     /**
-     * 事件名称
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 类型名称
      */
-    EventName?: string;
+    TypeName: string;
     /**
-     * 事件类型
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 申请类型key
      */
-    EventType?: string;
-    /**
-     * 事件分割类型
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    EventSubType?: string;
-    /**
-     * 事件广播类型
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    EventBroadcastType?: string;
-    /**
-     * 事件实例存活时间
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    TTL?: number;
-    /**
-     * 事件实例存活时间单位
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    TimeUnit?: string;
-    /**
-     * 数据时间
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Dimension?: string;
-    /**
-     * 事件实例状态
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Status?: string;
-    /**
-     * 事件实例触发时间戳
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    EventTriggerTimestamp?: string;
-    /**
-     * 事件实例消费时间戳
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    LogTimestamp?: string;
-    /**
-     * 事件实例描述
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Description?: string;
+    Classification: string;
 }
 /**
  * BatchCreateTaskVersionDs请求参数结构体
@@ -19510,29 +19534,13 @@ export interface CreateInLongAgentRequest {
     ClusterId?: string;
 }
 /**
- * DescribeInstanceLogFile请求参数结构体
+ * DescribeApproveTypeList请求参数结构体
  */
-export interface DescribeInstanceLogFileRequest {
+export interface DescribeApproveTypeListRequest {
     /**
-     * 项目ID
+     * 类型key
      */
-    ProjectId: string;
-    /**
-     * 任务ID
-     */
-    TaskId: string;
-    /**
-     * 实例数据时间
-     */
-    CurRunDate: string;
-    /**
-     * 执行机IP
-     */
-    BrokerIp: string;
-    /**
-     * 日志文件名
-     */
-    OriginFileName: string;
+    Classification: string;
 }
 /**
  * UnlockIntegrationTask请求参数结构体
@@ -24932,39 +24940,81 @@ export interface BatchCreateIntegrationTaskAlarmsResponse {
     RequestId?: string;
 }
 /**
- * 文件夹列表
+ * DescribeInstancesInfoWithTaskInfo请求参数结构体
  */
-export interface CollectionFolderOpsDto {
+export interface DescribeInstancesInfoWithTaskInfoRequest {
     /**
-     * 总数
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 实例列表
      */
-    TotalCount?: number;
+    Instances?: Array<InstanceOpsDto>;
     /**
-     * 总页面数
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 检查父任务类型, true: 检查父任务; false: 不检查父任务
      */
-    TotalPage?: number;
+    CheckFather?: boolean;
     /**
-     * 当前页面数量
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 重跑类型, 1: 自身; 3: 孩子; 2: 自身以及孩子
      */
-    PageCount?: number;
+    RerunType?: string;
     /**
-     * 页码
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 实例依赖方式, 1: 自依赖; 2: 任务依赖; 3: 自依赖及父子依赖
      */
-    PageNumber?: number;
+    DependentWay?: string;
     /**
-     * 每页数量
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 重跑忽略事件监听与否
+     */
+    SkipEventListening?: boolean;
+    /**
+     * 下游实例范围 1: 所在工作流 2: 所在项目 3: 所有跨工作流依赖的项目
+     */
+    SonInstanceType?: string;
+    /**
+     * 查询条件
+     */
+    SearchCondition?: InstanceApiOpsRequest;
+    /**
+     * 访问类型
+     */
+    OptType?: string;
+    /**
+     * 操作者名称
+     */
+    OperatorName?: string;
+    /**
+     * 操作者id
+     */
+    OperatorId?: string;
+    /**
+     * 项目id
+     */
+    ProjectId?: string;
+    /**
+     * 项目标志
+     */
+    ProjectIdent?: string;
+    /**
+     * 项目名称
+     */
+    ProjectName?: string;
+    /**
+     * 索引页码
+     */
+    PageIndex?: number;
+    /**
+     * 页面大小
      */
     PageSize?: number;
     /**
-     * 任务信息
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 数据总数
      */
-    Items?: Array<FolderOpsDto>;
+    Count?: number;
+    /**
+     * 基础请求信息
+     */
+    RequestBaseInfo?: ProjectBaseInfoOpsRequest;
+    /**
+     * 是否计算总数
+     */
+    IsCount?: boolean;
 }
 /**
  * BatchStopTasksNew请求参数结构体
@@ -25056,6 +25106,19 @@ export interface DescribeOperateOpsTasksResponse {
      * 任务列表信息
      */
     Data?: OpsTaskInfoPage;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * DescribeApproveTypeList返回参数结构体
+ */
+export interface DescribeApproveTypeListResponse {
+    /**
+     * 获取审批分类列表
+     */
+    Data: Array<ApproveType>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -25728,7 +25791,7 @@ export interface DescribeApproveListResponse {
      * 待审批列表详情
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Data: DescribeApply;
+    Data?: DescribeApply;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */

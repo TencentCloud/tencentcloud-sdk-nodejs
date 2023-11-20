@@ -34,6 +34,7 @@ import {
   DescribeEKSClustersRequest,
   DescribePrometheusInstancesOverviewRequest,
   ServiceAccountAuthenticationOptions,
+  Step,
   CreateClusterNodePoolRequest,
   UpgradeClusterReleaseRequest,
   Addon,
@@ -132,6 +133,7 @@ import {
   UpdateEdgeClusterVersionRequest,
   GetTkeAppChartListResponse,
   DescribePrometheusTemplateSyncRequest,
+  DescribeExternalNodeSupportConfigRequest,
   UpgradeAbleInstancesItem,
   UpgradeClusterInstancesResponse,
   CustomDriver,
@@ -171,9 +173,11 @@ import {
   DeletePrometheusConfigRequest,
   DescribeEKSContainerInstanceEventRequest,
   ScaleOutClusterMasterResponse,
+  DeleteClusterAsGroupsRequest,
   Toleration,
   CreateEKSContainerInstancesResponse,
   DeleteEdgeCVMInstancesResponse,
+  DescribeIPAMDRequest,
   DescribeClusterKubeconfigResponse,
   DescribeClusterCommonNamesRequest,
   NfsVolume,
@@ -255,6 +259,7 @@ import {
   DescribePrometheusConfigRequest,
   DescribeEdgeLogSwitchesRequest,
   EdgeClusterAdvancedSettings,
+  DescribeExternalNodeSupportConfigResponse,
   EnableEncryptionProtectionResponse,
   DeletePrometheusTemplateRequest,
   DeletePrometheusRecordRuleYamlResponse,
@@ -351,6 +356,7 @@ import {
   VersionInstance,
   EksCi,
   UpdateImageCacheResponse,
+  DescribeIPAMDResponse,
   CreatePrometheusConfigRequest,
   CreateClusterVirtualNodeResponse,
   ImageCacheEvent,
@@ -430,7 +436,7 @@ import {
   ModifyClusterEndpointSPResponse,
   ECMRunSecurityServiceEnabled,
   SyncPrometheusTemplateResponse,
-  DeleteClusterAsGroupsRequest,
+  DescribeClusterExtraArgsResponse,
   ClusterAsGroupAttribute,
   ForwardTKEEdgeApplicationRequestV3Request,
   DisableEventPersistenceRequest,
@@ -441,6 +447,7 @@ import {
   CancelClusterReleaseResponse,
   UpdateEdgeClusterVersionResponse,
   ModifyClusterAsGroupAttributeRequest,
+  DescribeClusterExtraArgsRequest,
   DescribeClusterAsGroupsResponse,
   DescribePrometheusConfigResponse,
   ScaleOutClusterMasterRequest,
@@ -728,6 +735,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查看开启第三方节点池配置信息
+   */
+  async DescribeExternalNodeSupportConfig(
+    req: DescribeExternalNodeSupportConfigRequest,
+    cb?: (error: string, rep: DescribeExternalNodeSupportConfigResponse) => void
+  ): Promise<DescribeExternalNodeSupportConfigResponse> {
+    return this.request("DescribeExternalNodeSupportConfig", req, cb)
+  }
+
+  /**
    * 删除边缘计算实例
    */
   async DeleteEdgeClusterInstances(
@@ -805,6 +822,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribePrometheusAlertHistoryResponse) => void
   ): Promise<DescribePrometheusAlertHistoryResponse> {
     return this.request("DescribePrometheusAlertHistory", req, cb)
+  }
+
+  /**
+   * 获取eniipamd组件信息
+   */
+  async DescribeIPAMD(
+    req: DescribeIPAMDRequest,
+    cb?: (error: string, rep: DescribeIPAMDResponse) => void
+  ): Promise<DescribeIPAMDResponse> {
+    return this.request("DescribeIPAMD", req, cb)
   }
 
   /**
@@ -1615,6 +1642,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateEKSClusterResponse) => void
   ): Promise<CreateEKSClusterResponse> {
     return this.request("CreateEKSCluster", req, cb)
+  }
+
+  /**
+   * 查询集群自定义参数
+   */
+  async DescribeClusterExtraArgs(
+    req: DescribeClusterExtraArgsRequest,
+    cb?: (error: string, rep: DescribeClusterExtraArgsResponse) => void
+  ): Promise<DescribeClusterExtraArgsResponse> {
+    return this.request("DescribeClusterExtraArgs", req, cb)
   }
 
   /**

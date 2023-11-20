@@ -301,6 +301,36 @@ export interface ServiceAccountAuthenticationOptions {
 }
 
 /**
+ * 执行步骤信息
+ */
+export interface Step {
+  /**
+   * 名称
+   */
+  Name?: string
+  /**
+   * 开始时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StartAt?: string
+  /**
+   * 结束时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EndAt?: string
+  /**
+   * 当前状态
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status?: string
+  /**
+   * 执行信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Message?: string
+}
+
+/**
  * CreateClusterNodePool请求参数结构体
  */
 export interface CreateClusterNodePoolRequest {
@@ -2533,6 +2563,16 @@ export interface DescribePrometheusTemplateSyncRequest {
 }
 
 /**
+ * DescribeExternalNodeSupportConfig请求参数结构体
+ */
+export interface DescribeExternalNodeSupportConfigRequest {
+  /**
+   * 集群Id
+   */
+  ClusterId: string
+}
+
+/**
  * 可升级节点信息
  */
 export interface UpgradeAbleInstancesItem {
@@ -3388,6 +3428,24 @@ export interface ScaleOutClusterMasterResponse {
 }
 
 /**
+ * DeleteClusterAsGroups请求参数结构体
+ */
+export interface DeleteClusterAsGroupsRequest {
+  /**
+   * 集群ID，通过[DescribeClusters](https://cloud.tencent.com/document/api/457/31862)接口获取。
+   */
+  ClusterId: string
+  /**
+   * 集群伸缩组ID的列表
+   */
+  AutoScalingGroupIds: Array<string>
+  /**
+   * 是否保留伸缩组中的节点(默认值： false(不保留))
+   */
+  KeepInstance?: boolean
+}
+
+/**
  * kubernetes Taint
  */
 export interface Toleration {
@@ -3427,6 +3485,16 @@ export interface DeleteEdgeCVMInstancesResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeIPAMD请求参数结构体
+ */
+export interface DescribeIPAMDRequest {
+  /**
+   * 集群ID
+   */
+  ClusterId: string
 }
 
 /**
@@ -5290,6 +5358,78 @@ export interface EdgeClusterAdvancedSettings {
 }
 
 /**
+ * DescribeExternalNodeSupportConfig返回参数结构体
+ */
+export interface DescribeExternalNodeSupportConfigResponse {
+  /**
+   * 用于分配集群容器和服务 IP 的 CIDR，不得与 VPC CIDR 冲突，也不得与同 VPC 内其他集群 CIDR 冲突。且网段范围必须在内网网段内，例如:10.1.0.0/14, 192.168.0.1/18,172.16.0.0/16。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ClusterCIDR?: string
+  /**
+   * 集群网络插件类型，支持：CiliumBGP、CiliumVXLan
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NetworkType?: string
+  /**
+   * 子网ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SubnetId?: string
+  /**
+   * 是否开启第三方节点专线连接支持
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Enabled?: boolean
+  /**
+   * 节点所属交换机的BGP AS 号
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AS?: string
+  /**
+   * 节点所属交换机的交换机 IP
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SwitchIP?: string
+  /**
+   * 开启第三方节点池状态
+   */
+  Status?: string
+  /**
+   * 如果开启失败原因
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FailedReason?: string
+  /**
+   * 内网访问地址
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Master?: string
+  /**
+   * 镜像仓库代理地址
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Proxy?: string
+  /**
+   * 用于记录开启第三方节点的过程进行到哪一步了
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Progress?: Array<Step>
+  /**
+   * 是否开启第三方节点公网连接支持
+   */
+  EnabledPublicConnect?: boolean
+  /**
+   * 公网连接地址
+   */
+  PublicConnectUrl?: string
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * EnableEncryptionProtection返回参数结构体
  */
 export interface EnableEncryptionProtectionResponse {
@@ -5990,6 +6130,11 @@ export interface DescribeClusterEndpointsResponse {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SecurityGroup?: string
+  /**
+   * 内网访问所属子网
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ClusterIntranetSubnetId?: string
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -7436,6 +7581,45 @@ Pending是创建中，Running是 运行中。
  * UpdateImageCache返回参数结构体
  */
 export interface UpdateImageCacheResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeIPAMD返回参数结构体
+ */
+export interface DescribeIPAMDResponse {
+  /**
+   * 是否安装了eniipamd组件
+   */
+  EnableIPAMD: boolean
+  /**
+   * 是否开启自定义podcidr，默认为false，已安装eniipamd组件才意义
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EnableCustomizedPodCidr: boolean
+  /**
+   * 是否不开启vpccni模式，默认为false，已安装eniipamd组件才意义
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DisableVpcCniMode: boolean
+  /**
+   * 组件状态，已安装eniipamd组件才会有值
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Phase: string
+  /**
+   * 错误信息，已安装eniipamd组件且状态为非running才会有错误信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Reason: string
+  /**
+   * 子网信息，已安装eniipamd组件才会有值
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SubnetIds: Array<string>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -8978,21 +9162,18 @@ export interface SyncPrometheusTemplateResponse {
 }
 
 /**
- * DeleteClusterAsGroups请求参数结构体
+ * DescribeClusterExtraArgs返回参数结构体
  */
-export interface DeleteClusterAsGroupsRequest {
+export interface DescribeClusterExtraArgsResponse {
   /**
-   * 集群ID，通过[DescribeClusters](https://cloud.tencent.com/document/api/457/31862)接口获取。
+   * 集群自定义参数
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  ClusterId: string
+  ClusterExtraArgs?: ClusterExtraArgs
   /**
-   * 集群伸缩组ID的列表
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  AutoScalingGroupIds: Array<string>
-  /**
-   * 是否保留伸缩组中的节点(默认值： false(不保留))
-   */
-  KeepInstance?: boolean
+  RequestId?: string
 }
 
 /**
@@ -9314,6 +9495,16 @@ export interface ModifyClusterAsGroupAttributeRequest {
    * 集群关联的伸缩组属性
    */
   ClusterAsGroupAttribute?: ClusterAsGroupAttribute
+}
+
+/**
+ * DescribeClusterExtraArgs请求参数结构体
+ */
+export interface DescribeClusterExtraArgsRequest {
+  /**
+   * 集群ID
+   */
+  ClusterId: string
 }
 
 /**

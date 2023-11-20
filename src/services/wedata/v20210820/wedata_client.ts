@@ -75,13 +75,14 @@ import {
   OpsTaskInfoPage,
   DescribeRuleGroupExecResultsByPageRequest,
   Label,
+  EventCaseAuditLogOptDto,
   DescribeTableLineageRequest,
   KillOpsMakePlanInstancesRequest,
   UpdateWorkflowOwnerRequest,
   DescribeEventCasesRequest,
   EventPage,
   ModifyDimensionWeightResponse,
-  BatchResumeIntegrationTasksResponse,
+  DescribeInstanceByCycleReportResponse,
   DescribeRuleExecResultsByPageResponse,
   RuleGroupExecResult,
   MakeUpTasksByWorkflowResponse,
@@ -354,6 +355,7 @@ import {
   CompareRuleItem,
   ModifyRuleTemplateRequest,
   DescribeRuleExecStatResponse,
+  DescribeInstanceLogFileRequest,
   TaskByCycle,
   DagInstancesResponse,
   DescribeAllUsedVersionSonResponse,
@@ -422,7 +424,7 @@ import {
   TableQualityDetail,
   BatchStopIntegrationTasksResponse,
   ForceSucScheduleInstancesRequest,
-  DescribeInstanceByCycleReportResponse,
+  BatchResumeIntegrationTasksResponse,
   DeleteIntegrationNodeResponse,
   CommitRuleGroupExecResultRequest,
   DescribeDataSourceInfoListRequest,
@@ -460,7 +462,7 @@ import {
   DescribeDimensionScoreResponse,
   ScriptRequestInfo,
   DescribeOrganizationalFunctionsResponse,
-  DescribeInstancesInfoWithTaskInfoRequest,
+  CollectionFolderOpsDto,
   DescribeEventDetailRequest,
   FreezeTasksByWorkflowIdsRequest,
   DescribeDataTypesResponse,
@@ -469,7 +471,7 @@ import {
   CheckDuplicateRuleNameResponse,
   BatchOperateResultOpsDto,
   DeleteRuleRequest,
-  EventCaseAuditLogOptDto,
+  ApproveType,
   BatchCreateTaskVersionDsRequest,
   RealTimeTaskInstanceNodeInfo,
   DeleteResourceFilesResponse,
@@ -666,7 +668,7 @@ import {
   DeleteTaskAlarmRegularRequest,
   CompareRule,
   CreateInLongAgentRequest,
-  DescribeInstanceLogFileRequest,
+  DescribeApproveTypeListRequest,
   UnlockIntegrationTaskRequest,
   DeleteOfflineTaskResponse,
   IntegrationInstanceLog,
@@ -883,7 +885,7 @@ import {
   DescribeBaselineResponse,
   DescribeTopTableStatRequest,
   BatchCreateIntegrationTaskAlarmsResponse,
-  CollectionFolderOpsDto,
+  DescribeInstancesInfoWithTaskInfoRequest,
   BatchStopTasksNewRequest,
   DescribeInLongAgentTaskListRequest,
   ModifyTaskNameRequest,
@@ -891,6 +893,7 @@ import {
   DescribeEventTypesRequest,
   DescribeOpsInstanceLogListResponse,
   DescribeOperateOpsTasksResponse,
+  DescribeApproveTypeListResponse,
   RuleGroupExecResultPage,
   DescribeBaselineInstanceGanttRequest,
   OrganizationalFunction,
@@ -1695,6 +1698,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyBaselineTaskAlarmStatusResponse) => void
   ): Promise<ModifyBaselineTaskAlarmStatusResponse> {
     return this.request("ModifyBaselineTaskAlarmStatus", req, cb)
+  }
+
+  /**
+   * 获取审批分类列表
+   */
+  async DescribeApproveTypeList(
+    req: DescribeApproveTypeListRequest,
+    cb?: (error: string, rep: DescribeApproveTypeListResponse) => void
+  ): Promise<DescribeApproveTypeListResponse> {
+    return this.request("DescribeApproveTypeList", req, cb)
   }
 
   /**

@@ -778,6 +778,16 @@ it("wedata.v20210820.ModifyBaselineTaskAlarmStatus", async function () {
     }
 })
 
+it("wedata.v20210820.DescribeApproveTypeList", async function () {
+    try {
+       const data = await client.DescribeApproveTypeList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("wedata.v20210820.CommitRuleGroupExecResult", async function () {
     try {
        const data = await client.CommitRuleGroupExecResult({})

@@ -219,7 +219,7 @@ FAILED：表示操作失败
    */
   MaxOutBandwidth?: string
   /**
-   * 每月免费流量，默认1000G
+   * 每月免费流量，默认500G
 注意：此字段可能返回 null，表示取不到有效值。
    */
   MaxFreeTraffic?: string
@@ -317,7 +317,7 @@ NO_NEED_SUPPORT表示不需支持；NOT_SUPPORT_YET表示暂未支持；ALREADY_
  */
 export interface DescribeScenesResponse {
   /**
-   * scene info
+   * 场景详情
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SceneSet?: Array<SceneInfo>
@@ -450,7 +450,7 @@ export interface DescribeInstancesRequest {
    */
   InstanceIds?: Array<string>
   /**
-   * 描述键值对过滤器，用于条件过滤查询。
+   * 描述键值对过滤器，用于条件过滤查询。目前支持的过滤器有：instance-id，实例id；instance-state，实例状态
    */
   Filters?: Array<Filter>
   /**
@@ -486,7 +486,7 @@ export interface Filter {
  */
 export interface DescribeScenesRequest {
   /**
-   * ["sc-abcdefgh"]
+   * 场景id列表
    */
   SceneIds?: Array<string>
 }

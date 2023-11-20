@@ -35,7 +35,6 @@ export { btoe } from "./btoe";
 export { cam } from "./cam";
 export { captcha } from "./captcha";
 export { car } from "./car";
-export { casb } from "./casb";
 export { cat } from "./cat";
 export { cbs } from "./cbs";
 export { ccc } from "./ccc";

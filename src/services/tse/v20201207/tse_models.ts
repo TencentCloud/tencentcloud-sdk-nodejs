@@ -993,150 +993,150 @@ export interface SREInstance {
   /**
    * 实例ID
    */
-  InstanceId: string
+  InstanceId?: string
   /**
    * 名称
    */
-  Name: string
+  Name?: string
   /**
    * 版本号
    */
-  Edition: string
+  Edition?: string
   /**
    * 状态, 枚举值:creating/create_fail/running/updating/update_fail/restarting/restart_fail/destroying/destroy_fail
    */
-  Status: string
+  Status?: string
   /**
    * 规格ID
    */
-  SpecId: string
+  SpecId?: string
   /**
    * 副本数
    */
-  Replica: number
+  Replica?: number
   /**
    * 类型
    */
-  Type: string
+  Type?: string
   /**
    * Vpc iD
    */
-  VpcId: string
+  VpcId?: string
   /**
    * 子网ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SubnetIds: Array<string>
+  SubnetIds?: Array<string>
   /**
    * 是否开启持久化存储
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  EnableStorage: boolean
+  EnableStorage?: boolean
   /**
    * 数据存储方式
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  StorageType: string
+  StorageType?: string
   /**
    * 云硬盘容量
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  StorageCapacity: number
+  StorageCapacity?: number
   /**
    * 计费方式
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Paymode: string
+  Paymode?: string
   /**
    * EKS集群的ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  EKSClusterID: string
+  EKSClusterID?: string
   /**
    * 集群创建时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CreateTime: string
+  CreateTime?: string
   /**
    * 环境配置信息列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  EnvInfos: Array<EnvInfo>
+  EnvInfos?: Array<EnvInfo>
   /**
    * 引擎所在的区域
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  EngineRegion: string
+  EngineRegion?: string
   /**
    * 注册引擎是否开启公网
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  EnableInternet: boolean
+  EnableInternet?: boolean
   /**
    * 私有网络列表信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  VpcInfos: Array<VpcInfo>
+  VpcInfos?: Array<VpcInfo>
   /**
    * 服务治理相关信息列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ServiceGovernanceInfos: Array<ServiceGovernanceInfo>
+  ServiceGovernanceInfos?: Array<ServiceGovernanceInfo>
   /**
    * 实例的标签信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Tags: Array<KVPair>
+  Tags?: Array<KVPair>
   /**
    * 引擎实例是否开启控制台公网访问地址
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  EnableConsoleInternet: boolean
+  EnableConsoleInternet?: boolean
   /**
    * 引擎实例是否开启控制台内网访问地址
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  EnableConsoleIntranet: boolean
+  EnableConsoleIntranet?: boolean
   /**
    * 引擎实例是否展示参数配置页面
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ConfigInfoVisible: boolean
+  ConfigInfoVisible?: boolean
   /**
    * 引擎实例控制台默认密码
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ConsoleDefaultPwd: string
+  ConsoleDefaultPwd?: string
   /**
    * 交易付费类型，0后付费/1预付费
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TradeType: number
+  TradeType?: number
   /**
    * 自动续费标记：0表示默认状态(用户未设置，即初始状态)， 1表示自动续费，2表示明确不自动续费
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  AutoRenewFlag: number
+  AutoRenewFlag?: number
   /**
    * 预付费到期时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CurDeadline: string
+  CurDeadline?: string
   /**
    * 隔离开始时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  IsolateTime: string
+  IsolateTime?: string
   /**
    * 实例地域相关的描述信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RegionInfos: Array<DescribeInstanceRegionInfo>
+  RegionInfos?: Array<DescribeInstanceRegionInfo>
   /**
    * 所在EKS环境，分为common和yunti
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  EKSType: string
+  EKSType?: string
   /**
    * 引擎的产品版本
 注意：此字段可能返回 null，表示取不到有效值。
@@ -2102,6 +2102,16 @@ export interface KongTarget {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Source?: string
+  /**
+   * CVM实例ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CvmInstanceId?: string
+  /**
+   * CVM实例名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CvmInstanceName?: string
 }
 
 /**
