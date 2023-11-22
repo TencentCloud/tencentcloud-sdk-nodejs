@@ -106,21 +106,43 @@ export interface ApolloEnvParam {
 }
 
 /**
- * UpdateUpstreamHealthCheckConfig请求参数结构体
+ * DeleteWafDomains请求参数结构体
  */
-export interface UpdateUpstreamHealthCheckConfigRequest {
+export interface DeleteWafDomainsRequest {
   /**
    * 网关ID
    */
   GatewayId: string
   /**
-   * 网关服务名称
+   * WAF 防护域名列表
    */
-  Name: string
+  Domains: Array<string>
+}
+
+/**
+ * 服务的 WAF 状态
+ */
+export interface ServiceWafStatus {
   /**
-   * 健康检查配置
+   *  服务的名字
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  HealthCheckConfig: UpstreamHealthCheckConfig
+  Name?: string
+  /**
+   * 服务的 ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Id?: string
+  /**
+   * 服务的类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Type?: string
+  /**
+   *  服务是否开启 WAF 防护
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status?: string
 }
 
 /**
@@ -566,6 +588,16 @@ export interface QpsThreshold {
    * 阈值
    */
   Max: number
+}
+
+/**
+ * ModifyCloudNativeAPIGateway返回参数结构体
+ */
+export interface ModifyCloudNativeAPIGatewayResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1421,6 +1453,20 @@ export interface DescribeCloudNativeAPIGatewayRoutesResponse {
 }
 
 /**
+ * DescribeWafProtection返回参数结构体
+ */
+export interface DescribeWafProtectionResponse {
+  /**
+   * 保护状态
+   */
+  Result?: DescribeWafProtectionResult
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeZookeeperReplicas请求参数结构体
  */
 export interface DescribeZookeeperReplicasRequest {
@@ -1464,6 +1510,17 @@ export interface DeleteCloudNativeAPIGatewayServiceResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 获取WAF保护域名列表
+ */
+export interface DescribeWafDomainsResult {
+  /**
+   * WAF防护域名列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Domains?: Array<string>
 }
 
 /**
@@ -2695,6 +2752,21 @@ export interface DeleteEngineRequest {
 }
 
 /**
+ * DescribeWafDomains返回参数结构体
+ */
+export interface DescribeWafDomainsResponse {
+  /**
+   * 已被 WAF 防护域名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Result?: DescribeWafDomainsResult
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * Zookeeper副本信息
  */
 export interface ZookeeperReplica {
@@ -2903,6 +2975,24 @@ export interface CloseWafProtectionResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * UpdateUpstreamHealthCheckConfig请求参数结构体
+ */
+export interface UpdateUpstreamHealthCheckConfigRequest {
+  /**
+   * 网关ID
+   */
+  GatewayId: string
+  /**
+   * 网关服务名称
+   */
+  Name: string
+  /**
+   * 健康检查配置
+   */
+  HealthCheckConfig: UpstreamHealthCheckConfig
 }
 
 /**
@@ -3378,13 +3468,36 @@ export interface CreateCloudNativeAPIGatewayCertificateRequest {
 }
 
 /**
- * ModifyCloudNativeAPIGateway返回参数结构体
+ * DescribeWafDomains请求参数结构体
  */
-export interface ModifyCloudNativeAPIGatewayResponse {
+export interface DescribeWafDomainsRequest {
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 网关ID
    */
-  RequestId?: string
+  GatewayId: string
+}
+
+/**
+ * DescribeWafProtection请求参数结构体
+ */
+export interface DescribeWafProtectionRequest {
+  /**
+   * 网关ID
+   */
+  GatewayId: string
+  /**
+   *  防护资源的类型。
+- Global  实例
+- Service  服务
+- Route  路由
+- Object  对象
+   * @deprecated
+   */
+  Type?: string
+  /**
+   * 防护资源类型列表，支持查询多个类型（Global、Service、Route、Object）。为空时，默认查询Global类型。
+   */
+  TypeList?: Array<string>
 }
 
 /**
@@ -3493,6 +3606,52 @@ export interface DescribeNativeGatewayServerGroupsResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 路由 WAF 状态
+ */
+export interface RouteWafStatus {
+  /**
+   * 路由的名字
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name?: string
+  /**
+   * 路由的 ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Id?: string
+  /**
+   *  路由是否开启 WAF 防护
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status?: string
+  /**
+   * 方法
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Methods?: Array<string>
+  /**
+   * 路径
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Paths?: Array<string>
+  /**
+   * 域名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Hosts?: Array<string>
+  /**
+   * 路由对应服务的名字
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ServiceName?: string
+  /**
+   * 路由对应服务的ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ServiceId?: string
 }
 
 /**
@@ -4456,6 +4615,16 @@ export interface KongServiceRouteList {
 }
 
 /**
+ * DeleteWafDomains返回参数结构体
+ */
+export interface DeleteWafDomainsResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 创建云原生API网关响应结果。
  */
 export interface CreateCloudNativeAPIGatewayResult {
@@ -4656,6 +4825,32 @@ export interface UpdateCloudNativeAPIGatewayCertificateInfoResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 获取WAF保护资源状态
+ */
+export interface DescribeWafProtectionResult {
+  /**
+   * 全局防护状态
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  GlobalStatus?: string
+  /**
+   * 服务防护状态
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ServicesStatus?: Array<ServiceWafStatus>
+  /**
+   * 路由防护状态
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RouteStatus?: Array<RouteWafStatus>
+  /**
+   * 对象防护状态
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ObjectStatus?: string
 }
 
 /**

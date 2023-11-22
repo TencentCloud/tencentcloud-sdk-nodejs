@@ -512,8 +512,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 更新自定义账户
-   */
+     * 接口未使用
+
+更新自定义账户
+     */
   async ModifyCustomAccount(
     req: ModifyCustomAccountRequest,
     cb?: (error: string, rep: ModifyCustomAccountResponse) => void
@@ -792,8 +794,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除自定义账号
-   */
+     * 接口未使用
+
+删除自定义账号
+     */
   async DeleteCustomAccount(
     req: DeleteCustomAccountRequest,
     cb?: (error: string, rep: DeleteCustomAccountResponse) => void
@@ -912,8 +916,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询自定义账号
-   */
+     * 接口未使用
+
+查询自定义账号
+     */
   async DescribeCustomAccounts(
     req: DescribeCustomAccountsRequest,
     cb?: (error: string, rep: DescribeCustomAccountsResponse) => void
@@ -1002,8 +1008,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建自定义账户
-   */
+     * 接口未使用
+
+创建自定义账户
+     */
   async CreateCustomAccount(
     req: CreateCustomAccountRequest,
     cb?: (error: string, rep: CreateCustomAccountResponse) => void

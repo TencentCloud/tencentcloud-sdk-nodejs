@@ -23,7 +23,8 @@ import {
   CreateCloudNativeAPIGatewayServiceResponse,
   DeleteCloudNativeAPIGatewayRouteRateLimitResponse,
   ApolloEnvParam,
-  UpdateUpstreamHealthCheckConfigRequest,
+  DeleteWafDomainsRequest,
+  ServiceWafStatus,
   DescribeCloudNativeAPIGatewayServiceRateLimitRequest,
   CreateCloudNativeAPIGatewayRequest,
   CloudNativeAPIGatewayStrategyCronScalerConfig,
@@ -41,6 +42,7 @@ import {
   DescribeCloudNativeAPIGatewayCertificatesRequest,
   DeleteCloudNativeAPIGatewayResult,
   QpsThreshold,
+  ModifyCloudNativeAPIGatewayResponse,
   CloseWafProtectionRequest,
   ModifyCloudNativeAPIGatewayServiceResponse,
   DescribeCloudNativeAPIGatewayNodesResponse,
@@ -76,9 +78,11 @@ import {
   KVPair,
   DeleteEngineResponse,
   DescribeCloudNativeAPIGatewayRoutesResponse,
+  DescribeWafProtectionResponse,
   DescribeZookeeperReplicasRequest,
   UpdateUpstreamTargetsRequest,
   DeleteCloudNativeAPIGatewayServiceResponse,
+  DescribeWafDomainsResult,
   InstancePort,
   DescribeCloudNativeAPIGatewayResult,
   PolarisCLSTopicInfo,
@@ -128,6 +132,7 @@ import {
   AutoScalerBehavior,
   ListFilter,
   DeleteEngineRequest,
+  DescribeWafDomainsResponse,
   ZookeeperReplica,
   ModifyCloudNativeAPIGatewayServiceRateLimitRequest,
   DescribeSREInstanceAccessAddressRequest,
@@ -137,6 +142,7 @@ import {
   NativeGatewayServerGroup,
   DeleteCloudNativeAPIGatewayServiceRateLimitResponse,
   CloseWafProtectionResponse,
+  UpdateUpstreamHealthCheckConfigRequest,
   CloudNativeAPIGatewayStrategyAutoScalerConfigMetric,
   CloudNativeAPIGatewayNode,
   UpdateCloudNativeAPIGatewaySpecResponse,
@@ -156,7 +162,8 @@ import {
   DeleteCloudNativeAPIGatewayResponse,
   KongServices,
   CreateCloudNativeAPIGatewayCertificateRequest,
-  ModifyCloudNativeAPIGatewayResponse,
+  DescribeWafDomainsRequest,
+  DescribeWafProtectionRequest,
   ModifyUpstreamNodeStatusResponse,
   NetworkAccessControl,
   DescribeZookeeperServerInterfacesRequest,
@@ -164,6 +171,7 @@ import {
   UpdateCloudNativeAPIGatewayResult,
   DescribeCloudNativeAPIGatewayRequest,
   DescribeNativeGatewayServerGroupsResponse,
+  RouteWafStatus,
   CloudNativeAPIGatewayStrategyCronScalerConfigParam,
   OpenWafProtectionRequest,
   DeleteCloudNativeAPIGatewayRouteRequest,
@@ -196,6 +204,7 @@ import {
   ModifyCloudNativeAPIGatewayCanaryRuleRequest,
   VpcInfo,
   KongServiceRouteList,
+  DeleteWafDomainsResponse,
   CreateCloudNativeAPIGatewayResult,
   ModifyCloudNativeAPIGatewayRequest,
   KongServicePreview,
@@ -207,6 +216,7 @@ import {
   ModifyNativeGatewayServerGroupResponse,
   EngineRegionInfo,
   UpdateCloudNativeAPIGatewayCertificateInfoResponse,
+  DescribeWafProtectionResult,
   KongServiceDetail,
 } from "./tse_models"
 
@@ -347,6 +357,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyCloudNativeAPIGatewayCanaryRuleResponse) => void
   ): Promise<ModifyCloudNativeAPIGatewayCanaryRuleResponse> {
     return this.request("ModifyCloudNativeAPIGatewayCanaryRule", req, cb)
+  }
+
+  /**
+   * 删除 WAF 防护域名
+   */
+  async DeleteWafDomains(
+    req: DeleteWafDomainsRequest,
+    cb?: (error: string, rep: DeleteWafDomainsResponse) => void
+  ): Promise<DeleteWafDomainsResponse> {
+    return this.request("DeleteWafDomains", req, cb)
   }
 
   /**
@@ -540,6 +560,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取 WAF 防护状态
+   */
+  async DescribeWafProtection(
+    req: DescribeWafProtectionRequest,
+    cb?: (error: string, rep: DescribeWafProtectionResponse) => void
+  ): Promise<DescribeWafProtectionResponse> {
+    return this.request("DescribeWafProtection", req, cb)
+  }
+
+  /**
    * 获取云原生API网关实例网络配置信息
    */
   async DescribeCloudNativeAPIGatewayConfig(
@@ -577,6 +607,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateCloudNativeAPIGatewayCanaryRuleResponse) => void
   ): Promise<CreateCloudNativeAPIGatewayCanaryRuleResponse> {
     return this.request("CreateCloudNativeAPIGatewayCanaryRule", req, cb)
+  }
+
+  /**
+   * 获取 WAF 防护域名
+   */
+  async DescribeWafDomains(
+    req: DescribeWafDomainsRequest,
+    cb?: (error: string, rep: DescribeWafDomainsResponse) => void
+  ): Promise<DescribeWafDomainsResponse> {
+    return this.request("DescribeWafDomains", req, cb)
   }
 
   /**

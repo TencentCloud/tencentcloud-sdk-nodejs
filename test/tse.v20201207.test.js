@@ -148,6 +148,16 @@ it("tse.v20201207.ModifyCloudNativeAPIGatewayCanaryRule", async function () {
     }
 })
 
+it("tse.v20201207.DeleteWafDomains", async function () {
+    try {
+       const data = await client.DeleteWafDomains({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tse.v20201207.DeleteCloudNativeAPIGatewayService", async function () {
     try {
        const data = await client.DeleteCloudNativeAPIGatewayService({})
@@ -338,6 +348,16 @@ it("tse.v20201207.DescribeCloudNativeAPIGatewayRouteRateLimit", async function (
     }
 })
 
+it("tse.v20201207.DescribeWafProtection", async function () {
+    try {
+       const data = await client.DescribeWafProtection({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tse.v20201207.DescribeCloudNativeAPIGatewayConfig", async function () {
     try {
        const data = await client.DescribeCloudNativeAPIGatewayConfig({})
@@ -371,6 +391,16 @@ it("tse.v20201207.DescribeCloudNativeAPIGatewayNodes", async function () {
 it("tse.v20201207.CreateCloudNativeAPIGatewayCanaryRule", async function () {
     try {
        const data = await client.CreateCloudNativeAPIGatewayCanaryRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tse.v20201207.DescribeWafDomains", async function () {
+    try {
+       const data = await client.DescribeWafDomains({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

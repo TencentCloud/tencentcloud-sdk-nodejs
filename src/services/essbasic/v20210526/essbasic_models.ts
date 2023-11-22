@@ -3055,9 +3055,9 @@ export interface FillApproverInfo {
    */
   OrganizationOpenId?: string
   /**
-   * 签署企业非渠道子客，默认为false，即表示同一渠道下的企业；如果为true，则目前表示接收方企业为SaaS企业, 为渠道子客时，organization_open_id+open_id 必传
+   * 签署企业非渠道子客，默认为false，即表示同一渠道下的企业；如果为true，则目前表示接收方企业为SaaS企业, 为渠道子客时，OrganizationOpenId 必传
    */
-  NotChannelOrganization?: string
+  NotChannelOrganization?: boolean
 }
 
 /**
@@ -4224,6 +4224,20 @@ export interface CreateSignUrlsRequest {
    */
   Mobile?: string
   /**
+   * 证件类型，支持以下类型
+<ul><li>ID_CARD : 居民身份证(默认值)</li>
+<li>HONGKONG_AND_MACAO : 港澳居民来往内地通行证</li>
+<li>HONGKONG_MACAO_AND_TAIWAN : 港澳台居民居住证(格式同居民身份证)</li></ul>
+   */
+  IdCardType?: string
+  /**
+   * 证件号码，应符合以下规则
+<ul><li>居民身份证号码应为18位字符串，由数字和大写字母X组成(如存在X，请大写)。</li>
+<li>港澳居民来往内地通行证号码应为9位字符串，第1位为“C”，第2位为英文字母(但“I”、“O”除外)，后7位为阿拉伯数字。</li>
+<li>港澳台居民居住证号码编码规则与中国大陆身份证相同，应为18位字符串。</li></ul>
+   */
+  IdCardNumber?: string
+  /**
    * 第三方平台子客企业的企业的标识, 即OrganizationOpenId
 注: `GenerateType为"CHANNEL"时必填`
    */
@@ -4544,7 +4558,9 @@ export interface FlowApproverInfo {
 
 默认为1(人脸认证 ),2(签署密码)
 
-注: `用模版创建合同场景, 签署人的认证方式需要在配置模板的时候指定, 在此创建合同指定无效`
+注: 
+1. 用<font color='red'>模版创建合同场景</font>, 签署人的认证方式需要在配置模板的时候指定, <font color='red'>在创建合同重新指定无效</font>
+2. 运营商三要素认证方式对手机号运营商及前缀有限制,可以参考[运营商支持列表类](https://qian.tencent.com/developers/partner/mobile_support)得到具体的支持说明
    */
   ApproverSignTypes?: Array<number | bigint>
   /**
@@ -5498,7 +5514,7 @@ export interface ApproverOption {
   /**
    * 签署人信息补充类型，默认无需补充。
 
-<ul><li> **1** : ( 动态签署人（可发起合同后再补充签署人信息）</li>
+<ul><li> **1** : ( 动态签署人（可发起合同后再补充签署人信息）注：`企业自动签不支持动态补充`</li>
 </ul>
    */
   FillType?: number

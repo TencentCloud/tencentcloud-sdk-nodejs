@@ -1288,9 +1288,9 @@ it("wedata.v20210820.CreateBaseline", async function () {
     }
 })
 
-it("wedata.v20210820.DiagnosePlus", async function () {
+it("wedata.v20210820.DescribeColumnsMeta", async function () {
     try {
-       const data = await client.DiagnosePlus({})
+       const data = await client.DescribeColumnsMeta({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1441,6 +1441,16 @@ it("wedata.v20210820.SubmitBaseline", async function () {
 it("wedata.v20210820.DescribeOperateTasks", async function () {
     try {
        const data = await client.DescribeOperateTasks({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("wedata.v20210820.DiagnosePlus", async function () {
+    try {
+       const data = await client.DiagnosePlus({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

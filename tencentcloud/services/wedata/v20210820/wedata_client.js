@@ -810,10 +810,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateBaseline", req, cb);
     }
     /**
-     * 实例诊断信息
+     * 查询表的所有列元数据
      */
-    async DiagnosePlus(req, cb) {
-        return this.request("DiagnosePlus", req, cb);
+    async DescribeColumnsMeta(req, cb) {
+        return this.request("DescribeColumnsMeta", req, cb);
     }
     /**
      * 删除集成节点
@@ -905,6 +905,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeOperateTasks(req, cb) {
         return this.request("DescribeOperateTasks", req, cb);
+    }
+    /**
+     * 实例诊断信息
+     */
+    async DiagnosePlus(req, cb) {
+        return this.request("DiagnosePlus", req, cb);
     }
     /**
      * 任务运维-批量冻结任务

@@ -386,8 +386,13 @@ export interface DownloadUserCertResponse {
   CertName?: string
   /**
    * 证书内容
+   * @deprecated
    */
   CertCtx?: string
+  /**
+   * 证书内容
+   */
+  Cert?: string
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -446,12 +451,17 @@ export interface GetLatesdTransactionListRequest {
 export interface InvokeResponse {
   /**
    * 交易ID
+   * @deprecated
    */
-  Txid: string
+  Txid?: string
   /**
    * 交易执行结果
    */
-  Events: string
+  Events?: string
+  /**
+   * 交易ID
+   */
+  TxId?: string
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

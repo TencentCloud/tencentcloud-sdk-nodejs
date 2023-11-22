@@ -106,6 +106,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyCloudNativeAPIGatewayCanaryRule", req, cb);
     }
     /**
+     * 删除 WAF 防护域名
+     */
+    async DeleteWafDomains(req, cb) {
+        return this.request("DeleteWafDomains", req, cb);
+    }
+    /**
      * 删除云原生网关服务
      */
     async DeleteCloudNativeAPIGatewayService(req, cb) {
@@ -220,6 +226,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeCloudNativeAPIGatewayRouteRateLimit", req, cb);
     }
     /**
+     * 获取 WAF 防护状态
+     */
+    async DescribeWafProtection(req, cb) {
+        return this.request("DescribeWafProtection", req, cb);
+    }
+    /**
      * 获取云原生API网关实例网络配置信息
      */
     async DescribeCloudNativeAPIGatewayConfig(req, cb) {
@@ -242,6 +254,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CreateCloudNativeAPIGatewayCanaryRule(req, cb) {
         return this.request("CreateCloudNativeAPIGatewayCanaryRule", req, cb);
+    }
+    /**
+     * 获取 WAF 防护域名
+     */
+    async DescribeWafDomains(req, cb) {
+        return this.request("DescribeWafDomains", req, cb);
     }
     /**
      * 查询云原生网关单个证书详情

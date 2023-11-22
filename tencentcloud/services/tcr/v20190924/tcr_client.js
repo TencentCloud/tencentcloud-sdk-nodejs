@@ -144,7 +144,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeReplicationInstanceCreateTasks", req, cb);
     }
     /**
-     * 更新自定义账户
+     * 接口未使用
+
+更新自定义账户
      */
     async ModifyCustomAccount(req, cb) {
         return this.request("ModifyCustomAccount", req, cb);
@@ -312,7 +314,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeRegions", req, cb);
     }
     /**
-     * 删除自定义账号
+     * 接口未使用
+
+删除自定义账号
      */
     async DeleteCustomAccount(req, cb) {
         return this.request("DeleteCustomAccount", req, cb);
@@ -384,7 +388,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateUserPersonal", req, cb);
     }
     /**
-     * 查询自定义账号
+     * 接口未使用
+
+查询自定义账号
      */
     async DescribeCustomAccounts(req, cb) {
         return this.request("DescribeCustomAccounts", req, cb);
@@ -438,7 +444,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeChartDownloadInfo", req, cb);
     }
     /**
-     * 创建自定义账户
+     * 接口未使用
+
+创建自定义账户
      */
     async CreateCustomAccount(req, cb) {
         return this.request("CreateCustomAccount", req, cb);

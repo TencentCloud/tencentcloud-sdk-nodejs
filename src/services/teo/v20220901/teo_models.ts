@@ -1382,11 +1382,11 @@ export interface DescribeRulesResponse {
   /**
    * 站点 ID。
    */
-  ZoneId: string
+  ZoneId?: string
   /**
    * 规则列表，按规则执行顺序从先往后排序。
    */
-  RuleItems: Array<RuleItem>
+  RuleItems?: Array<RuleItem>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1917,8 +1917,7 @@ export interface ModifyApplicationProxyRequest {
   SessionPersistTime?: number
   /**
    * 四层代理模式，取值有：
-<li>hostname：表示子域名模式；</li>
-<li>instance：表示实例模式。</li>不填写保持原有配置。
+<li>instance：表示实例模式。</li>不填写使用默认值instance。
    */
   ProxyType?: string
   /**
@@ -6567,7 +6566,7 @@ export interface StandardDebug {
    */
   Switch: string
   /**
-   * 允许的客户端来源。支持填写 IPV4 以及 IPV6 的 IP/IP 段。
+   * 允许的客户端来源。支持填写 IPv4 以及 IPv6 的 IP/IP 段。0.0.0.0/0 表示允许所有 IPv4 客户端进行调试，::/0 表示允许所有 IPv6 客户端进行调试。
    */
   AllowClientIPList: Array<string>
   /**

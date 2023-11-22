@@ -2371,7 +2371,7 @@ RENEW_FLAG_DEFAULT：不自动续费
    */
   MultiZoneInfo?: Array<ZoneDetail>
   /**
-   * 部署模式<li>0：单可用区</li><li>1：多可用区</li>
+   * 部署模式<li>0：单可用区</li><li>1：多可用区，北京、上海、上海金融、广州、南京、香港、新加坡、法兰克福（白名单控制）</li>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DeployMode?: number
@@ -2545,7 +2545,7 @@ RENEW_FLAG_DEFAULT：不自动续费
    */
   ProcessPercent?: number
   /**
-   * Kibana的altering外网告警策略<li>OPEN：开启</li><li>CLOSE：关闭
+   * Kibana的alerting外网告警策略<li>OPEN：开启</li><li>CLOSE：关闭
 注意：此字段可能返回 null，表示取不到有效值。
    */
   KibanaAlteringPublicAccess?: string
@@ -2559,6 +2559,16 @@ RENEW_FLAG_DEFAULT：不自动续费
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CdcId?: string
+  /**
+   * kibana内网vip
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  KibanaPrivateVip?: string
+  /**
+   * 自定义kibana内网url
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CustomKibanaPrivateUrl?: string
 }
 
 /**
@@ -3419,6 +3429,14 @@ OPEN 开启
 CLOSE 关闭
    */
   KibanaAlteringPublicAccess?: string
+  /**
+   * kibana内网自定义域名
+   */
+  KibanaPrivateDomain?: string
+  /**
+   * cerebro内网自定义域名
+   */
+  CerebroPrivateDomain?: string
 }
 
 /**
@@ -3516,6 +3534,10 @@ export interface RestartInstanceRequest {
    * 重启模式：0 滚动重启； 1 全量重启
    */
   RestartMode?: number
+  /**
+   * 重启时选择是否升级内核patch版本
+   */
+  UpgradeKernel?: boolean
 }
 
 /**
@@ -3737,35 +3759,45 @@ export interface OptionalWebServiceInfo {
    * 类型
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Type: string
+  Type?: string
   /**
    * 状态
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Status: number
+  Status?: number
   /**
    * 公网url
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  PublicUrl: string
+  PublicUrl?: string
   /**
    * 内网url
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  PrivateUrl: string
+  PrivateUrl?: string
   /**
    * 公网访问权限
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  PublicAccess: string
+  PublicAccess?: string
   /**
    * 内网访问权限
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  PrivateAccess: string
+  PrivateAccess?: string
   /**
    * 版本号
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Version: string
+  Version?: string
+  /**
+   * web服务内网vip
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PrivateVip?: string
+  /**
+   * 自定义cerebro内网url
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CustomPrivateUrl?: string
 }

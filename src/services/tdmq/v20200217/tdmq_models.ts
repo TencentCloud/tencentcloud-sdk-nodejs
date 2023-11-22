@@ -2625,7 +2625,7 @@ export interface DescribeRocketMQClusterResponse {
    */
   ClusterConfig?: RocketMQClusterConfig
   /**
-   * 集群最近使用量，即将废弃，请使用云监控获取相关数据。
+   * 集群最近使用量，即将废弃，请使用腾讯云可观测平台获取相关数据。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ClusterStats?: RocketMQClusterRecentStats

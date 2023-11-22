@@ -86,7 +86,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeReplicationInstanceCreateTasks(req: DescribeReplicationInstanceCreateTasksRequest, cb?: (error: string, rep: DescribeReplicationInstanceCreateTasksResponse) => void): Promise<DescribeReplicationInstanceCreateTasksResponse>;
     /**
-     * 更新自定义账户
+     * 接口未使用
+
+更新自定义账户
      */
     ModifyCustomAccount(req: ModifyCustomAccountRequest, cb?: (error: string, rep: ModifyCustomAccountResponse) => void): Promise<ModifyCustomAccountResponse>;
     /**
@@ -198,7 +200,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeRegions(req?: DescribeRegionsRequest, cb?: (error: string, rep: DescribeRegionsResponse) => void): Promise<DescribeRegionsResponse>;
     /**
-     * 删除自定义账号
+     * 接口未使用
+
+删除自定义账号
      */
     DeleteCustomAccount(req: DeleteCustomAccountRequest, cb?: (error: string, rep: DeleteCustomAccountResponse) => void): Promise<DeleteCustomAccountResponse>;
     /**
@@ -246,7 +250,9 @@ export declare class Client extends AbstractClient {
      */
     CreateUserPersonal(req: CreateUserPersonalRequest, cb?: (error: string, rep: CreateUserPersonalResponse) => void): Promise<CreateUserPersonalResponse>;
     /**
-     * 查询自定义账号
+     * 接口未使用
+
+查询自定义账号
      */
     DescribeCustomAccounts(req: DescribeCustomAccountsRequest, cb?: (error: string, rep: DescribeCustomAccountsResponse) => void): Promise<DescribeCustomAccountsResponse>;
     /**
@@ -282,7 +288,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeChartDownloadInfo(req: DescribeChartDownloadInfoRequest, cb?: (error: string, rep: DescribeChartDownloadInfoResponse) => void): Promise<DescribeChartDownloadInfoResponse>;
     /**
-     * 创建自定义账户
+     * 接口未使用
+
+创建自定义账户
      */
     CreateCustomAccount(req: CreateCustomAccountRequest, cb?: (error: string, rep: CreateCustomAccountResponse) => void): Promise<CreateCustomAccountResponse>;
     /**

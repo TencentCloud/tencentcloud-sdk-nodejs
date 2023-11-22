@@ -1214,6 +1214,19 @@ export interface ModifyBaselineTaskAlarmStatusResponse {
     RequestId?: string;
 }
 /**
+ * DescribeRuleGroupSubscription请求参数结构体
+ */
+export interface DescribeRuleGroupSubscriptionRequest {
+    /**
+     * 规则组ID
+     */
+    RuleGroupId?: number;
+    /**
+     * 项目ID
+     */
+    ProjectId?: string;
+}
+/**
  * CreateIntegrationNode返回参数结构体
  */
 export interface CreateIntegrationNodeResponse {
@@ -6614,6 +6627,35 @@ export interface BaselineInstanceVo {
     UserUin?: string;
 }
 /**
+ * DescribeColumnsMeta请求参数结构体
+ */
+export interface DescribeColumnsMetaRequest {
+    /**
+     * 表ID
+     */
+    TableId: string;
+    /**
+     * 页码
+     */
+    PageNumber: number;
+    /**
+     * 每页大小
+     */
+    PageSize: number;
+    /**
+     * 过滤器
+     */
+    FilterSet?: Array<Filter>;
+    /**
+     * 排序字段
+     */
+    OrderFieldSet?: Array<OrderField>;
+    /**
+     * 是否查询分区字段，默认false
+     */
+    IsPartitionQuery?: boolean;
+}
+/**
  * DescribeOrganizationalFunctions请求参数结构体
  */
 export interface DescribeOrganizationalFunctionsRequest {
@@ -11546,6 +11588,51 @@ export interface DescribeAlarmReceiverRequest {
     AlarmTime?: string;
 }
 /**
+ * 列的元数据
+ */
+export interface ColumnMeta {
+    /**
+     * 字段英文名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    NameEn: string;
+    /**
+     * 字段中文名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    NameCn: string;
+    /**
+     * 字段类型
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Type: string;
+    /**
+     * 字段描述
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Description: string;
+    /**
+     * 字段序号
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Position: number;
+    /**
+     * 是否为分区字段
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IsPartition: boolean;
+    /**
+     * 字段名
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Name: string;
+    /**
+     * HBase列簇属性集合
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ColumnFamiliesFieldSet: Array<Pair>;
+}
+/**
  * 集成离线任务实例信息
  */
 export interface SchedulerTaskInstanceInfo {
@@ -16462,17 +16549,22 @@ export interface CreateRuleRequest {
     SourceEngineTypes?: Array<number | bigint>;
 }
 /**
- * DescribeRuleGroupSubscription请求参数结构体
+ * DescribeColumnsMeta返回参数结构体
  */
-export interface DescribeRuleGroupSubscriptionRequest {
+export interface DescribeColumnsMetaResponse {
     /**
-     * 规则组ID
+     * 分页返回的
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    RuleGroupId?: number;
+    ColumnMetaSet: Array<ColumnMeta>;
     /**
-     * 项目ID
+     * 总记录数
      */
-    ProjectId?: string;
+    TotalCount: number;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * DescribeRuleExecResults返回参数结构体
@@ -23891,6 +23983,19 @@ export interface Filter {
      * 过滤值列表
      */
     Values?: Array<string>;
+}
+/**
+ * 键值对
+ */
+export interface Pair {
+    /**
+     * 键名
+     */
+    Key: string;
+    /**
+     * 值
+     */
+    Value: string;
 }
 /**
  * DeleteIntegrationTask返回参数结构体

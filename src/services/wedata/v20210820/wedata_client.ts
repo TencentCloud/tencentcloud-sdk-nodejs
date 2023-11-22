@@ -52,6 +52,7 @@ import {
   MakeUpWorkflowNewResponse,
   DescribeInstancesInfoWithTaskInfoResponse,
   ModifyBaselineTaskAlarmStatusResponse,
+  DescribeRuleGroupSubscriptionRequest,
   CreateIntegrationNodeResponse,
   BatchDeleteTasksDsRequest,
   CreateDsFolderResponse,
@@ -222,6 +223,7 @@ import {
   TaskInnerInfo,
   ModifyTaskAlarmRegularRequest,
   BaselineInstanceVo,
+  DescribeColumnsMetaRequest,
   DescribeOrganizationalFunctionsRequest,
   DescribeRuleTemplateResponse,
   DescribeKafkaTopicInfoResponse,
@@ -400,6 +402,7 @@ import {
   CreateIntegrationTaskResponse,
   DescribeIntegrationTasksResponse,
   DescribeAlarmReceiverRequest,
+  ColumnMeta,
   SchedulerTaskInstanceInfo,
   DescribeSchedulerTaskCntByStatusResponse,
   TaskExtInfo,
@@ -590,7 +593,7 @@ import {
   ModifyTaskInfoResponse,
   DataCheckStat,
   CreateRuleRequest,
-  DescribeRuleGroupSubscriptionRequest,
+  DescribeColumnsMetaResponse,
   DescribeRuleExecResultsResponse,
   DescribeTaskByStatusReportRequest,
   QualityScoreTrend,
@@ -840,6 +843,7 @@ import {
   UnlockIntegrationTaskResponse,
   DescribeRuleExecDetailResponse,
   Filter,
+  Pair,
   DeleteIntegrationTaskResponse,
   TableBaseInfo,
   ResumeIntegrationTaskRequest,
@@ -2220,13 +2224,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 实例诊断信息
+   * 查询表的所有列元数据
    */
-  async DiagnosePlus(
-    req: DiagnosePlusRequest,
-    cb?: (error: string, rep: DiagnosePlusResponse) => void
-  ): Promise<DiagnosePlusResponse> {
-    return this.request("DiagnosePlus", req, cb)
+  async DescribeColumnsMeta(
+    req: DescribeColumnsMetaRequest,
+    cb?: (error: string, rep: DescribeColumnsMetaResponse) => void
+  ): Promise<DescribeColumnsMetaResponse> {
+    return this.request("DescribeColumnsMeta", req, cb)
   }
 
   /**
@@ -2378,6 +2382,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeOperateTasksResponse) => void
   ): Promise<DescribeOperateTasksResponse> {
     return this.request("DescribeOperateTasks", req, cb)
+  }
+
+  /**
+   * 实例诊断信息
+   */
+  async DiagnosePlus(
+    req: DiagnosePlusRequest,
+    cb?: (error: string, rep: DiagnosePlusResponse) => void
+  ): Promise<DiagnosePlusResponse> {
+    return this.request("DiagnosePlus", req, cb)
   }
 
   /**
