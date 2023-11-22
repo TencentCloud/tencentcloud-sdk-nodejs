@@ -126,6 +126,8 @@ var cmq_1 = require("./cmq");
 Object.defineProperty(exports, "cmq", { enumerable: true, get: function () { return cmq_1.cmq; } });
 var cms_1 = require("./cms");
 Object.defineProperty(exports, "cms", { enumerable: true, get: function () { return cms_1.cms; } });
+var config_1 = require("./config");
+Object.defineProperty(exports, "config", { enumerable: true, get: function () { return config_1.config; } });
 var cpdp_1 = require("./cpdp");
 Object.defineProperty(exports, "cpdp", { enumerable: true, get: function () { return cpdp_1.cpdp; } });
 var cr_1 = require("./cr");

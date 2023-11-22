@@ -7594,32 +7594,37 @@ export interface DescribeIPAMDResponse {
   /**
    * 是否安装了eniipamd组件
    */
-  EnableIPAMD: boolean
+  EnableIPAMD?: boolean
   /**
    * 是否开启自定义podcidr，默认为false，已安装eniipamd组件才意义
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  EnableCustomizedPodCidr: boolean
+  EnableCustomizedPodCidr?: boolean
   /**
    * 是否不开启vpccni模式，默认为false，已安装eniipamd组件才意义
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DisableVpcCniMode: boolean
+  DisableVpcCniMode?: boolean
   /**
    * 组件状态，已安装eniipamd组件才会有值
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Phase: string
+  Phase?: string
   /**
    * 错误信息，已安装eniipamd组件且状态为非running才会有错误信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Reason: string
+  Reason?: string
   /**
    * 子网信息，已安装eniipamd组件才会有值
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SubnetIds: Array<string>
+  SubnetIds?: Array<string>
+  /**
+   * 固定ip回收时间，已安装eniipamd组件才会有值
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ClaimExpiredDuration?: string
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

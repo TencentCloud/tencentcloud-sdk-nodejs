@@ -3725,11 +3725,11 @@ export interface DescribeIpAccessControlRequest {
    */
   CtsMax?: number
   /**
-   * 分页开始条数
+   * 分页偏移量，取Limit整数倍。最小值为0，最大值= Total/Limit向上取整
    */
   OffSet?: number
   /**
-   * 每页的条数
+   * 每页返回的数量
    */
   Limit?: number
   /**

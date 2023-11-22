@@ -1,4 +1,13 @@
 /**
+ * DescribeTask请求参数结构体
+ */
+export interface DescribeTaskRequest {
+    /**
+     * 任务ID
+     */
+    TaskId: number;
+}
+/**
  * ModifyTaskRunStatus返回参数结构体
  */
 export interface ModifyTaskRunStatusResponse {
@@ -717,6 +726,20 @@ export interface TagWithDescribe {
     TagValue: string;
 }
 /**
+ * DescribeTaskPolicyTriggerLog返回参数结构体
+ */
+export interface DescribeTaskPolicyTriggerLogResponse {
+    /**
+     * 触发日志
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TriggerLogs?: Array<PolicyTriggerLog>;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * CreateTaskFromTemplate返回参数结构体
  */
 export interface CreateTaskFromTemplateResponse {
@@ -739,13 +762,21 @@ export interface DeleteTaskResponse {
     RequestId?: string;
 }
 /**
- * DescribeTask请求参数结构体
+ * DescribeTaskPolicyTriggerLog请求参数结构体
  */
-export interface DescribeTaskRequest {
+export interface DescribeTaskPolicyTriggerLogRequest {
     /**
-     * 任务ID
+     * 演练ID
      */
     TaskId: number;
+    /**
+     * 页码
+     */
+    Page: number;
+    /**
+     * 页数量
+     */
+    PageSize: number;
 }
 /**
  * 任务
@@ -924,6 +955,45 @@ export interface CreateTaskFromTemplateRequest {
      * 演练的配置参数
      */
     TaskConfig: TaskConfig;
+}
+/**
+ * TriggerPolicy请求参数结构体
+ */
+export interface TriggerPolicyRequest {
+    /**
+     * 混沌演练ID
+  
+     */
+    TaskId: number;
+    /**
+     * 名称
+     */
+    Name: string;
+    /**
+     * 触发内容
+     */
+    Content: string;
+    /**
+     * 触发类型，0--触发；1--恢复
+     */
+    TriggerType: number;
+}
+/**
+ * TriggerPolicy返回参数结构体
+ */
+export interface TriggerPolicyResponse {
+    /**
+     * 演练ID
+     */
+    TaskId?: number;
+    /**
+     * 是否触发成功
+     */
+    Success?: boolean;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * DescribeTaskList请求参数结构体
@@ -1179,6 +1249,36 @@ export interface TaskGroupActionConfig {
      * 动作自定义参数，需要json序列化传入，可以从查询经验详情接口获取，不填默认使用经验中动作参数
      */
     TaskGroupActionCustomConfiguration?: string;
+}
+/**
+ * 护栏策略触发日志
+ */
+export interface PolicyTriggerLog {
+    /**
+     * 演练ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TaskId?: number;
+    /**
+     * 名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Name?: string;
+    /**
+     * 类型，0--触发，1--恢复
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TriggerType?: number;
+    /**
+     * 内容
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Content?: string;
+    /**
+     * 触发时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CreatTime?: string;
 }
 /**
  * DescribeTemplateList请求参数结构体

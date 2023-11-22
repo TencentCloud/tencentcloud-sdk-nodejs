@@ -3107,7 +3107,7 @@ export interface CreateProClusterRequest {
     /**
      * vpc网络标签
      */
-    Vpcs?: VpcInfo;
+    Vpc?: VpcInfo;
     /**
      * 集群的标签列表(已废弃)
      */
@@ -6197,128 +6197,138 @@ export interface Cluster {
     /**
      * 集群Id。
      */
-    ClusterId: string;
+    ClusterId?: string;
     /**
      * 集群名称。
      */
-    ClusterName: string;
+    ClusterName?: string;
     /**
      * 说明信息。
      */
-    Remark: string;
+    Remark?: string;
     /**
      * 接入点数量
      */
-    EndPointNum: number;
+    EndPointNum?: number;
     /**
      * 创建时间
      */
-    CreateTime: string;
+    CreateTime?: string;
     /**
      * 集群是否健康，1表示健康，0表示异常
      */
-    Healthy: number;
+    Healthy?: number;
     /**
      * 集群健康信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    HealthyInfo: string;
+    HealthyInfo?: string;
     /**
      * 集群状态，0:创建中，1:正常，2:销毁中，3:已删除，4: 隔离中，5:创建失败，6: 删除失败
      */
-    Status: number;
+    Status?: number;
     /**
      * 最大命名空间数量
      */
-    MaxNamespaceNum: number;
+    MaxNamespaceNum?: number;
     /**
      * 最大Topic数量
      */
-    MaxTopicNum: number;
+    MaxTopicNum?: number;
     /**
      * 最大QPS
      */
-    MaxQps: number;
+    MaxQps?: number;
     /**
      * 最大消息保留时间，秒为单位
      */
-    MessageRetentionTime: number;
+    MessageRetentionTime?: number;
     /**
      * 最大存储容量
      */
-    MaxStorageCapacity: number;
+    MaxStorageCapacity?: number;
     /**
      * 集群版本
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Version: string;
+    Version?: string;
     /**
      * 公网访问接入点
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    PublicEndPoint: string;
+    PublicEndPoint?: string;
     /**
      * VPC访问接入点
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    VpcEndPoint: string;
+    VpcEndPoint?: string;
     /**
      * 命名空间数量
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    NamespaceNum: number;
+    NamespaceNum?: number;
     /**
      * 已使用存储限制，MB为单位
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    UsedStorageBudget: number;
+    UsedStorageBudget?: number;
     /**
      * 最大生产消息速率，以条数为单位
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    MaxPublishRateInMessages: number;
+    MaxPublishRateInMessages?: number;
     /**
      * 最大推送消息速率，以条数为单位
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    MaxDispatchRateInMessages: number;
+    MaxDispatchRateInMessages?: number;
     /**
      * 最大生产消息速率，以字节为单位
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    MaxPublishRateInBytes: number;
+    MaxPublishRateInBytes?: number;
     /**
      * 最大推送消息速率，以字节为单位
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    MaxDispatchRateInBytes: number;
+    MaxDispatchRateInBytes?: number;
     /**
      * 已创建主题数
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TopicNum: number;
+    TopicNum?: number;
     /**
      * 最长消息延时，以秒为单位
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    MaxMessageDelayInSeconds: number;
+    MaxMessageDelayInSeconds?: number;
     /**
      * 是否开启公网访问，不填时默认开启
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    PublicAccessEnabled: boolean;
+    PublicAccessEnabled?: boolean;
     /**
      * 标签
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Tags: Array<Tag>;
+    Tags?: Array<Tag>;
     /**
      * 计费模式：
   0: 按量计费
   1: 包年包月
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    PayMode: number;
+    PayMode?: number;
+    /**
+     * 项目ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ProjectId?: number;
+    /**
+     * 项目名字
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ProjectName?: string;
 }
 /**
  * RabbitMQ队列列表消费者信息

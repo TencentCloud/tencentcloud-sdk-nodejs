@@ -58,6 +58,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyTaskRunStatus", req, cb);
     }
     /**
+     * 用于触发混沌演练护栏（类型为触发和恢复2种）
+     */
+    async TriggerPolicy(req, cb) {
+        return this.request("TriggerPolicy", req, cb);
+    }
+    /**
      * 查询任务列表
      */
     async DescribeTaskList(req, cb) {
@@ -76,16 +82,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeTask", req, cb);
     }
     /**
+     * 删除任务
+     */
+    async DeleteTask(req, cb) {
+        return this.request("DeleteTask", req, cb);
+    }
+    /**
      * 执行任务
      */
     async ExecuteTask(req, cb) {
         return this.request("ExecuteTask", req, cb);
     }
     /**
-     * 删除任务
+     * 获取护栏触发日志
      */
-    async DeleteTask(req, cb) {
-        return this.request("DeleteTask", req, cb);
+    async DescribeTaskPolicyTriggerLog(req, cb) {
+        return this.request("DescribeTaskPolicyTriggerLog", req, cb);
     }
 }
 exports.Client = Client;

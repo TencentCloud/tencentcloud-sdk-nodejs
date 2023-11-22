@@ -46,7 +46,7 @@ export interface DownloadL7LogsRequest {
    */
   EndTime: string
   /**
-   * 站点集合，此参数必填，不填默认查询为空。
+   * 站点ID集合，此参数必填。
    */
   ZoneIds?: Array<string>
   /**
@@ -208,7 +208,7 @@ export interface DescribeTopL7CacheDataRequest {
    */
   MetricName: string
   /**
-   * 站点id集合，不填默认选择全部站点。
+   * 站点 ID 集合，此参数必填。
    */
   ZoneIds?: Array<string>
   /**
@@ -561,11 +561,11 @@ export interface DescribePrefetchTasksResponse {
   /**
    * 该查询条件总共条目数。
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 任务结果列表。
    */
-  Tasks: Array<Task>
+  Tasks?: Array<Task>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2952,7 +2952,7 @@ export interface DescribeTopL7AnalysisDataRequest {
    */
   MetricName: string
   /**
-   * 站点集合，此参数必填，不填默认查询为空。
+   * 站点 ID 集合，此参数必填。
    */
   ZoneIds?: Array<string>
   /**
@@ -3171,12 +3171,12 @@ export interface DescribeTopL7CacheDataResponse {
   /**
    * 查询结果的总条数。
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 七层缓存TopN流量数据列表。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Data: Array<TopDataRecord>
+  Data?: Array<TopDataRecord>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3208,12 +3208,11 @@ export interface DescribeOverviewL7DataRequest {
    */
   MetricNames: Array<string>
   /**
-   * 站点集合。
-若不填写，默认选择全部站点，且最多只能查询近30天的数据；若填写，则可查询站点绑定套餐支持的<a href="https://cloud.tencent.com/document/product/1552/77380#edgeone-.E5.A5.97.E9.A4.90">数据分析最大查询范围</a>。
+   * 站点 ID 集合，此参数必填。
    */
   ZoneIds?: Array<string>
   /**
-   * 查询的域名集合，不填默认查询所有子域名。
+   * 查询的域名集合，此参数已经废弃。
    */
   Domains?: Array<string>
   /**
@@ -3235,6 +3234,7 @@ export interface DescribeOverviewL7DataRequest {
   /**
    * 过滤条件，详细的过滤条件Key值如下：
 <li>socket<br>   按照【<strong>HTTP协议类型</strong>】进行过滤。<br>   对应的Value可选项如下：<br>   HTTP：HTTP 协议；<br>   HTTPS：HTTPS协议；<br>   QUIC：QUIC协议。</li>
+<li>domain<br>   按照【<strong>域名</strong>】进行过滤。</li>
 <li>tagKey<br>   按照【<strong>标签Key</strong>】进行过滤。</li>
 <li>tagValue<br>   按照【<strong>标签Value</strong>】进行过滤。</li>
    */
@@ -3449,6 +3449,11 @@ export interface SecurityConfig {
  */
 export interface DescribePrefetchTasksRequest {
   /**
+   * 站点ID。
+必填参数。
+   */
+  ZoneId?: string
+  /**
    * 查询起始时间。
    */
   StartTime?: string
@@ -3465,8 +3470,7 @@ export interface DescribePrefetchTasksRequest {
    */
   Limit?: number
   /**
-   * 过滤条件，Filters.Values的上限为20。详细的过滤条件如下：
-<li>zone-id<br>   按照【<strong>站点 ID</strong>】进行过滤。zone-id形如：zone-1379afjk91u32h，暂不支持多值。<br>   类型：String<br>   必选：否。<br>   模糊查询：不支持。</li><li>job-id<br>   按照【<strong>任务ID</strong>】进行过滤。job-id形如：1379afjk91u32h，暂不支持多值。<br>   类型：String<br>   必选：否。<br>   模糊查询：不支持。</li><li>target<br>   按照【<strong>目标资源信息</strong>】进行过滤。target形如：http://www.qq.com/1.txt，暂不支持多值。<br>   类型：String<br>   必选：否。<br>   模糊查询：不支持。</li><li>domains<br>   按照【<strong>域名</strong>】进行过滤。domains形如：www.qq.com。<br>   类型：String<br>   必选：否。<br>   模糊查询：不支持。</li><li>statuses<br>   按照【<strong>任务状态</strong>】进行过滤。<br>   必选：否<br>   模糊查询：不支持。<br>   可选项：<br>   processing：处理中<br>   success：成功<br>   failed：失败<br>   timeout：超时</li>
+   * 过滤条件，Filters.Values的上限为20。详细的过滤条件如下：<li>job-id<br>   按照【<strong>任务ID</strong>】进行过滤。job-id形如：1379afjk91u32h，暂不支持多值。<br>   类型：String<br>   必选：否。<br>   模糊查询：不支持。</li><li>target<br>   按照【<strong>目标资源信息</strong>】进行过滤。target形如：http://www.qq.com/1.txt，暂不支持多值。<br>   类型：String<br>   必选：否。<br>   模糊查询：不支持。</li><li>domains<br>   按照【<strong>域名</strong>】进行过滤。domains形如：www.qq.com。<br>   类型：String<br>   必选：否。<br>   模糊查询：不支持。</li><li>statuses<br>   按照【<strong>任务状态</strong>】进行过滤。<br>   必选：否<br>   模糊查询：不支持。<br>   可选项：<br>   processing：处理中<br>   success：成功<br>   failed：失败<br>   timeout：超时</li>
    */
   Filters?: Array<AdvancedFilter>
 }
@@ -3568,18 +3572,17 @@ export interface DescribeTimingL7AnalysisDataRequest {
   EndTime: string
   /**
    * 指标列表，取值有:
-<li>l7Flow_outFlux: Edgeone响应流量；</li>
-<li>l7Flow_inFlux: Edgeone请求流量；</li>
-<li>l7Flow_outBandwidth: Edgeone响应带宽；</li>
-<li>l7Flow_inBandwidth：Edgeone请求带宽；</li>
+<li>l7Flow_outFlux: Edgeone 响应流量；</li>
+<li>l7Flow_inFlux: Edgeone 请求流量；</li>
+<li>l7Flow_outBandwidth: Edgeone 响应带宽；</li>
+<li>l7Flow_inBandwidth：Edgeone 请求带宽；</li>
 <li>l7Flow_request: 访问请求数；</li>
 <li>l7Flow_flux: 访问请求上行+下行流量；</li>
 <li>l7Flow_bandwidth：访问请求上行+下行带宽。</li>
    */
   MetricNames: Array<string>
   /**
-   * 站点集合。
-若不填写，默认选择全部站点，且最多只能查询近30天的数据；若填写，则可查询站点绑定套餐支持的<a href="https://cloud.tencent.com/document/product/1552/77380#edgeone-.E5.A5.97.E9.A4.90">数据分析最大查询范围</a>。
+   * 站点 ID 集合, 此参数必填。
    */
   ZoneIds?: Array<string>
   /**
@@ -3850,7 +3853,7 @@ export interface DescribeTimingL7CacheDataRequest {
    */
   MetricNames: Array<string>
   /**
-   * 站点集合，不填默认选择全部站点。
+   * 站点 ID 集合，此参数必填。
    */
   ZoneIds?: Array<string>
   /**
@@ -4187,7 +4190,7 @@ export interface DownloadL4LogsRequest {
    */
   EndTime: string
   /**
-   * 站点集合，此参数必填，不填默认查询为空。
+   * 站点 ID 集合，此参数必填。
    */
   ZoneIds?: Array<string>
   /**
@@ -4436,7 +4439,8 @@ export interface CachePrefresh {
  */
 export interface DescribePurgeTasksRequest {
   /**
-   * 字段已废弃，请使用Filters中的zone-id。
+   * 站点ID。
+必填参数。
    */
   ZoneId?: string
   /**
@@ -4456,7 +4460,7 @@ export interface DescribePurgeTasksRequest {
    */
   Limit?: number
   /**
-   * 过滤条件，Filters.Values的上限为20。详细的过滤条件如下：<li>zone-id<br>   按照【<strong>站点 ID</strong>】进行过滤。zone-id形如：zone-xxx，暂不支持多值<br>   类型：String<br>   必选：否<br>   模糊查询：不支持</li><li>job-id<br>   按照【<strong>任务ID</strong>】进行过滤。job-id形如：1379afjk91u32h，暂不支持多值。<br>   类型：String<br>   必选：否<br>   模糊查询：不支持</li><li>target<br>   按照【<strong>目标资源信息</strong>】进行过滤，target形如：http://www.qq.com/1.txt或者tag1，暂不支持多值<br>   类型：String<br>   必选：否<br>   模糊查询：不支持</li><li>domains<br>   按照【<strong>域名</strong>】进行过滤，domains形如：www.qq.com<br>   类型：String<br>   必选：否<br>   模糊查询：不支持。</li><li>statuses<br>   按照【<strong>任务状态</strong>】进行过滤<br>   必选：否<br>   模糊查询：不支持。<br>   可选项：<br>   processing：处理中<br>   success：成功<br>   failed：失败<br>   timeout：超时</li><li>type<br>   按照【<strong>清除缓存类型</strong>】进行过滤，暂不支持多值。<br>   类型：String<br>   必选：否<br>   模糊查询：不支持<br>   可选项：<br>   purge_url：URL<br>   purge_prefix：前缀<br>   purge_all：全部缓存内容<br>   purge_host：Hostname<br>   purge_cache_tag：CacheTag</li>
+   * 过滤条件，Filters.Values的上限为20。详细的过滤条件如下：<li>job-id<br>   按照【<strong>任务ID</strong>】进行过滤。job-id形如：1379afjk91u32h，暂不支持多值。<br>   类型：String<br>   必选：否<br>   模糊查询：不支持</li><li>target<br>   按照【<strong>目标资源信息</strong>】进行过滤，target形如：http://www.qq.com/1.txt或者tag1，暂不支持多值<br>   类型：String<br>   必选：否<br>   模糊查询：不支持</li><li>domains<br>   按照【<strong>域名</strong>】进行过滤，domains形如：www.qq.com<br>   类型：String<br>   必选：否<br>   模糊查询：不支持。</li><li>statuses<br>   按照【<strong>任务状态</strong>】进行过滤<br>   必选：否<br>   模糊查询：不支持。<br>   可选项：<br>   processing：处理中<br>   success：成功<br>   failed：失败<br>   timeout：超时</li><li>type<br>   按照【<strong>清除缓存类型</strong>】进行过滤，暂不支持多值。<br>   类型：String<br>   必选：否<br>   模糊查询：不支持<br>   可选项：<br>   purge_url：URL<br>   purge_prefix：前缀<br>   purge_all：全部缓存内容<br>   purge_host：Hostname<br>   purge_cache_tag：CacheTag</li>
    */
   Filters?: Array<AdvancedFilter>
 }
@@ -5399,12 +5403,12 @@ export interface DescribeTimingL4DataResponse {
   /**
    * 查询结果的总条数。
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 四层时序流量数据列表。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Data: Array<TimingDataRecord>
+  Data?: Array<TimingDataRecord>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5688,12 +5692,12 @@ export interface DescribeTimingL7CacheDataResponse {
   /**
    * 查询结果的总条数。
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 七层缓存分析时序类流量数据列表。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Data: Array<TimingDataRecord>
+  Data?: Array<TimingDataRecord>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6870,14 +6874,11 @@ export interface DescribeTimingL4DataRequest {
 <li>l4Flow_connections: 访问连接数；</li>
 <li>l4Flow_flux: 访问总流量；</li>
 <li>l4Flow_inFlux: 访问入流量；</li>
-<li>l4Flow_outFlux: 访问出流量；</li>
-<li> l4Flow_outPkt: 访问出包量。</li>
+<li>l4Flow_outFlux: 访问出流量。</li>
    */
   MetricNames: Array<string>
   /**
-   * 站点集合。
-若不填写，默认选择全部站点，且最多只能查询近30天的数据；
-若填写，则可查询站点绑定套餐支持的<a href="https://cloud.tencent.com/document/product/1552/77380#edgeone-.E5.A5.97.E9.A4.90">数据分析最大查询范围</a>。
+   * 站点 ID 集合，此参数必填。
    */
   ZoneIds?: Array<string>
   /**
@@ -7002,11 +7003,11 @@ export interface DescribePurgeTasksResponse {
   /**
    * 该查询条件总共条目数。
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 任务结果列表。
    */
-  Tasks: Array<Task>
+  Tasks?: Array<Task>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

@@ -68,6 +68,16 @@ it("cfg.v20210820.ModifyTaskRunStatus", async function () {
     }
 })
 
+it("cfg.v20210820.TriggerPolicy", async function () {
+    try {
+       const data = await client.TriggerPolicy({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cfg.v20210820.DescribeTaskList", async function () {
     try {
        const data = await client.DescribeTaskList({})
@@ -98,6 +108,16 @@ it("cfg.v20210820.DescribeTask", async function () {
     }
 })
 
+it("cfg.v20210820.DeleteTask", async function () {
+    try {
+       const data = await client.DeleteTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cfg.v20210820.ExecuteTask", async function () {
     try {
        const data = await client.ExecuteTask({})
@@ -108,9 +128,9 @@ it("cfg.v20210820.ExecuteTask", async function () {
     }
 })
 
-it("cfg.v20210820.DeleteTask", async function () {
+it("cfg.v20210820.DescribeTaskPolicyTriggerLog", async function () {
     try {
-       const data = await client.DeleteTask({})
+       const data = await client.DescribeTaskPolicyTriggerLog({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

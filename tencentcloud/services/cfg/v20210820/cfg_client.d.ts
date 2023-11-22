@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { ModifyTaskRunStatusResponse, DeleteTaskRequest, ExecuteTaskResponse, DescribeTaskExecuteLogsRequest, DescribeTaskResponse, ModifyTaskRunStatusRequest, DescribeTemplateResponse, DescribeTemplateRequest, ExecuteTaskInstanceRequest, ExecuteTaskRequest, DescribeTaskListResponse, DescribeTemplateListResponse, CreateTaskFromTemplateResponse, DeleteTaskResponse, DescribeTaskRequest, CreateTaskFromTemplateRequest, DescribeTaskListRequest, ExecuteTaskInstanceResponse, DescribeTaskExecuteLogsResponse, DescribeTemplateListRequest } from "./cfg_models";
+import { DescribeTaskRequest, ModifyTaskRunStatusResponse, DeleteTaskRequest, ExecuteTaskResponse, DescribeTaskExecuteLogsRequest, DescribeTaskResponse, ModifyTaskRunStatusRequest, DescribeTemplateResponse, DescribeTemplateRequest, ExecuteTaskInstanceRequest, ExecuteTaskRequest, DescribeTaskListResponse, DescribeTemplateListResponse, DescribeTaskPolicyTriggerLogResponse, CreateTaskFromTemplateResponse, DeleteTaskResponse, DescribeTaskPolicyTriggerLogRequest, CreateTaskFromTemplateRequest, TriggerPolicyRequest, TriggerPolicyResponse, DescribeTaskListRequest, ExecuteTaskInstanceResponse, DescribeTaskExecuteLogsResponse, DescribeTemplateListRequest } from "./cfg_models";
 /**
  * cfg client
  * @class
@@ -28,6 +28,10 @@ export declare class Client extends AbstractClient {
      */
     ModifyTaskRunStatus(req: ModifyTaskRunStatusRequest, cb?: (error: string, rep: ModifyTaskRunStatusResponse) => void): Promise<ModifyTaskRunStatusResponse>;
     /**
+     * 用于触发混沌演练护栏（类型为触发和恢复2种）
+     */
+    TriggerPolicy(req: TriggerPolicyRequest, cb?: (error: string, rep: TriggerPolicyResponse) => void): Promise<TriggerPolicyResponse>;
+    /**
      * 查询任务列表
      */
     DescribeTaskList(req: DescribeTaskListRequest, cb?: (error: string, rep: DescribeTaskListResponse) => void): Promise<DescribeTaskListResponse>;
@@ -40,11 +44,15 @@ export declare class Client extends AbstractClient {
      */
     DescribeTask(req: DescribeTaskRequest, cb?: (error: string, rep: DescribeTaskResponse) => void): Promise<DescribeTaskResponse>;
     /**
+     * 删除任务
+     */
+    DeleteTask(req: DeleteTaskRequest, cb?: (error: string, rep: DeleteTaskResponse) => void): Promise<DeleteTaskResponse>;
+    /**
      * 执行任务
      */
     ExecuteTask(req: ExecuteTaskRequest, cb?: (error: string, rep: ExecuteTaskResponse) => void): Promise<ExecuteTaskResponse>;
     /**
-     * 删除任务
+     * 获取护栏触发日志
      */
-    DeleteTask(req: DeleteTaskRequest, cb?: (error: string, rep: DeleteTaskResponse) => void): Promise<DeleteTaskResponse>;
+    DescribeTaskPolicyTriggerLog(req: DescribeTaskPolicyTriggerLogRequest, cb?: (error: string, rep: DescribeTaskPolicyTriggerLogResponse) => void): Promise<DescribeTaskPolicyTriggerLogResponse>;
 }

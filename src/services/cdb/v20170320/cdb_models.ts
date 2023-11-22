@@ -329,18 +329,82 @@ export interface ModifyBackupDownloadRestrictionResponse {
 }
 
 /**
- * StartReplication返回参数结构体
+ * 实例审计详情信息
  */
-export interface StartReplicationResponse {
+export interface InstanceDbAuditStatus {
   /**
-   * 异步任务 ID。
+   * 实例ID。
+   */
+  InstanceId?: string
+  /**
+   * 审计状态。ON-表示审计已开启，OFF-表示审计关闭
+   */
+  AuditStatus?: string
+  /**
+   * 任务状态。0-无任务；1-审计开启中，2-审计关闭中。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  AsyncRequestId: string
+  AuditTask?: number
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 日志保留时长。
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  RequestId?: string
+  LogExpireDay?: number
+  /**
+   * 高频存储时长。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HighLogExpireDay?: number
+  /**
+   * 低频存储时长。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LowLogExpireDay?: number
+  /**
+   * 日志存储量。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BillingAmount?: number
+  /**
+   * 高频存储量。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HighRealStorage?: number
+  /**
+   * 低频存储量。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LowRealStorage?: number
+  /**
+   * 是否为全审计。true-表示全审计。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AuditAll?: boolean
+  /**
+   * 审计开通时间。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateAt?: string
+  /**
+   * 实例相关信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceInfo?: AuditInstanceInfo
+  /**
+   * 总存储量。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RealStorage?: number
+  /**
+   * 是否包含审计策略
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OldRule?: boolean
+  /**
+   * 实例所应用的规则模板。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RuleTemplateIds?: Array<string>
 }
 
 /**
@@ -436,6 +500,25 @@ export interface DescribeBackupOverviewRequest {
    * 需要查询的云数据库产品类型，目前仅支持 "mysql"。
    */
   Product: string
+}
+
+/**
+ * DescribeAuditInstanceList返回参数结构体
+ */
+export interface DescribeAuditInstanceListResponse {
+  /**
+   * 符合查询条件的实例总数。
+   */
+  TotalCount?: number
+  /**
+   * 审计实例详细信息列表。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Items?: Array<InstanceDbAuditStatus>
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -649,13 +732,33 @@ export interface CreateParamTemplateRequest {
 }
 
 /**
- * DescribeSupportedPrivileges请求参数结构体
+ * 异地备份信息
  */
-export interface DescribeSupportedPrivilegesRequest {
+export interface RemoteBackupInfo {
   /**
-   * 实例 ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。
+   * 异地备份子任务的ID
    */
-  InstanceId: string
+  SubBackupId?: number
+  /**
+   * 异地备份所在地域
+   */
+  Region?: string
+  /**
+   * 备份任务状态。可能的值有 "SUCCESS": 备份成功， "FAILED": 备份失败， "RUNNING": 备份进行中。
+   */
+  Status?: string
+  /**
+   * 异地备份任务的开始时间
+   */
+  StartTime?: string
+  /**
+   * 异地备份任务的结束时间
+   */
+  FinishTime?: string
+  /**
+   * 下载地址
+   */
+  Url?: string
 }
 
 /**
@@ -1962,6 +2065,20 @@ export interface DescribeInstanceParamsResponse {
 }
 
 /**
+ * DeleteDatabase请求参数结构体
+ */
+export interface DeleteDatabaseRequest {
+  /**
+   * 实例 ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。
+   */
+  InstanceId: string
+  /**
+   * 数据库名称。
+   */
+  DBName: string
+}
+
+/**
  * 文件上传描述
  */
 export interface UploadInfo {
@@ -2261,6 +2378,36 @@ export interface RuleFilters {
 }
 
 /**
+ * ModifyAuditRuleTemplates请求参数结构体
+ */
+export interface ModifyAuditRuleTemplatesRequest {
+  /**
+   * 审计规则模板ID。
+   */
+  RuleTemplateIds: Array<string>
+  /**
+   * 修改后的审计规则。
+   */
+  RuleFilters?: Array<RuleFilters>
+  /**
+   * 修改后的规则模板名称。
+   */
+  RuleTemplateName?: string
+  /**
+   * 修改后的规则模板描述。
+   */
+  Description?: string
+  /**
+   * 告警等级。1-低风险，2-中风险，3-高风险。
+   */
+  AlarmLevel?: number
+  /**
+   * 告警策略。0-不告警，1-告警。
+   */
+  AlarmPolicy?: number
+}
+
+/**
  * CreateAuditRule返回参数结构体
  */
 export interface CreateAuditRuleResponse {
@@ -2337,6 +2484,21 @@ export interface AssociateSecurityGroupsRequest {
    * 当传入只读实例ID时，默认操作的是对应只读组的安全组。如果需要操作只读实例ID的安全组， 需要将该入参置为True
    */
   ForReadonlyInstance?: boolean
+}
+
+/**
+ * StartReplication返回参数结构体
+ */
+export interface StartReplicationResponse {
+  /**
+   * 异步任务 ID。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AsyncRequestId: string
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2459,6 +2621,32 @@ export interface DescribeDefaultParamsRequest {
    * 参数模板引擎，默认值：InnoDB
    */
   EngineType?: string
+}
+
+/**
+ * 审计实例详情
+ */
+export interface AuditInstanceInfo {
+  /**
+   * 项目ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProjectId?: number
+  /**
+   * 标签信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TagList?: Array<TagInfoUnit>
+  /**
+   * 数据库内核类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DbType?: string
+  /**
+   * 数据库内核版本
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DbVersion?: string
 }
 
 /**
@@ -2942,6 +3130,42 @@ export interface Tag {
 }
 
 /**
+ * 规则模板内容
+ */
+export interface RuleTemplateInfo {
+  /**
+   * 规则模板ID。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RuleTemplateId?: string
+  /**
+   * 规则模板名称。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RuleTemplateName?: string
+  /**
+   * 规则内容。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RuleFilters?: Array<RuleFilters>
+  /**
+   * 告警等级。1-低风险，2-中风险，3-高风险。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AlarmLevel?: number
+  /**
+   * 告警策略。0-不告警，1-告警。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AlarmPolicy?: number
+  /**
+   * 规则描述。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Description?: string
+}
+
+/**
  * CreateAuditLogFile返回参数结构体
  */
 export interface CreateAuditLogFileResponse {
@@ -2994,33 +3218,13 @@ export interface DescribeDBSwitchRecordsRequest {
 }
 
 /**
- * 异地备份信息
+ * DescribeSupportedPrivileges请求参数结构体
  */
-export interface RemoteBackupInfo {
+export interface DescribeSupportedPrivilegesRequest {
   /**
-   * 异地备份子任务的ID
+   * 实例 ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。
    */
-  SubBackupId?: number
-  /**
-   * 异地备份所在地域
-   */
-  Region?: string
-  /**
-   * 备份任务状态。可能的值有 "SUCCESS": 备份成功， "FAILED": 备份失败， "RUNNING": 备份进行中。
-   */
-  Status?: string
-  /**
-   * 异地备份任务的开始时间
-   */
-  StartTime?: string
-  /**
-   * 异地备份任务的结束时间
-   */
-  FinishTime?: string
-  /**
-   * 下载地址
-   */
-  Url?: string
+  InstanceId: string
 }
 
 /**
@@ -3701,6 +3905,36 @@ export interface DescribeDBInstanceConfigRequest {
 }
 
 /**
+ * ModifyAuditService请求参数结构体
+ */
+export interface ModifyAuditServiceRequest {
+  /**
+   * 实例ID。
+   */
+  InstanceId: string
+  /**
+   * 日志保留时长。
+   */
+  LogExpireDay?: number
+  /**
+   * 高频日志保留时长。
+   */
+  HighLogExpireDay?: number
+  /**
+   * 修改实例审计规则为全审计。
+   */
+  AuditAll?: boolean
+  /**
+   * 审计规则。
+   */
+  AuditRuleFilters?: Array<AuditRuleFilters>
+  /**
+   * 规则模版ID。
+   */
+  RuleTemplateIds?: Array<string>
+}
+
+/**
  * DescribeProxyCustomConf返回参数结构体
  */
 export interface DescribeProxyCustomConfResponse {
@@ -3771,6 +4005,42 @@ export interface VerifyRootAccountRequest {
    * 实例 ROOT 账号的密码。
    */
   Password: string
+}
+
+/**
+ * 规则模板变更记录信息
+ */
+export interface RuleTemplateRecordInfo {
+  /**
+   * 任务ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskId?: number
+  /**
+   * 修改前规则模板的详情。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ModifyBeforeInfo?: RuleTemplateInfo
+  /**
+   * 修改后规则模板的详情。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ModifyAfterInfo?: RuleTemplateInfo
+  /**
+   * 影响的实例。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AffectedInstances?: Array<string>
+  /**
+   * 操作人，账号uin。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Operator?: string
+  /**
+   * 变更的时间。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UpdateTime?: string
 }
 
 /**
@@ -4157,6 +4427,26 @@ export interface AuditLog {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TemplateInfo?: Array<LogRuleTemplateInfo>
+}
+
+/**
+ * DescribeAuditRuleTemplateModifyHistory返回参数结构体
+ */
+export interface DescribeAuditRuleTemplateModifyHistoryResponse {
+  /**
+   * 总的条数。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalCount?: number
+  /**
+   * 变更详情。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Items?: Array<RuleTemplateRecordInfo>
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -5345,6 +5635,31 @@ export interface CreateAccountsRequest {
 }
 
 /**
+ * DeleteAuditRuleTemplates请求参数结构体
+ */
+export interface DeleteAuditRuleTemplatesRequest {
+  /**
+   * 审计规则模版ID。
+   */
+  RuleTemplateIds: Array<string>
+}
+
+/**
+ * CreateAuditRuleTemplate返回参数结构体
+ */
+export interface CreateAuditRuleTemplateResponse {
+  /**
+   * 生成的规则模板ID。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RuleTemplateId?: string
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeDeployGroupList请求参数结构体
  */
 export interface DescribeDeployGroupListRequest {
@@ -5530,6 +5845,16 @@ export interface ModifyLocalBinlogConfigResponse {
 }
 
 /**
+ * DeleteDatabase返回参数结构体
+ */
+export interface DeleteDatabaseResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeCloneList请求参数结构体
  */
 export interface DescribeCloneListRequest {
@@ -5678,13 +6003,33 @@ export interface ReloadBalanceProxyNodeResponse {
 }
 
 /**
- * DescribeTimeWindow请求参数结构体
+ * DescribeRemoteBackupConfig返回参数结构体
  */
-export interface DescribeTimeWindowRequest {
+export interface DescribeRemoteBackupConfigResponse {
   /**
-   * 实例ID，格式如：cdb-c1nl9rpv或者cdbro-c1nl9rpv，与云数据库控制台页面中显示的实例ID相同。
+   * 异地备份保留时间，单位为天
    */
-  InstanceId: string
+  ExpireDays?: number
+  /**
+   * 异地数据备份开关，off - 关闭异地备份，on-开启异地备份
+   */
+  RemoteBackupSave?: string
+  /**
+   * 异地日志备份开关，off - 关闭异地备份，on-开启异地备份，只有在参数RemoteBackupSave为on时，RemoteBinlogSave参数才可设置为on
+   */
+  RemoteBinlogSave?: string
+  /**
+   * 用户已设置异地备份地域列表
+   */
+  RemoteRegion?: Array<string>
+  /**
+   * 用户可设置异地备份地域列表
+   */
+  RegionList?: Array<string>
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -5795,6 +6140,16 @@ export interface DescribeProxySupportParamResponse {
 }
 
 /**
+ * CloseAuditService返回参数结构体
+ */
+export interface CloseAuditServiceResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeRollbackTaskDetail请求参数结构体
  */
 export interface DescribeRollbackTaskDetailRequest {
@@ -5814,6 +6169,21 @@ export interface DescribeRollbackTaskDetailRequest {
    * 分页偏移量。默认为 0。
    */
   Offset?: number
+}
+
+/**
+ * AdjustCdbProxy返回参数结构体
+ */
+export interface AdjustCdbProxyResponse {
+  /**
+   * 异步任务ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AsyncRequestId: string
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -5952,86 +6322,86 @@ export interface InstanceInfo {
   /**
    * 外网状态，可能的返回值为：0-未开通外网；1-已开通外网；2-已关闭外网
    */
-  WanStatus: number
+  WanStatus?: number
   /**
    * 可用区信息
    */
-  Zone: string
+  Zone?: string
   /**
    * 初始化标志，可能的返回值为：0-未初始化；1-已初始化
    */
-  InitFlag: number
+  InitFlag?: number
   /**
    * 只读vip信息。单独开通只读实例访问的只读实例才有该字段
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RoVipInfo: RoVipInfo
+  RoVipInfo?: RoVipInfo
   /**
    * 内存容量，单位为 MB
    */
-  Memory: number
+  Memory?: number
   /**
    * 实例状态，可能的返回值：0-创建中；1-运行中；4-正在进行隔离操作；5-已隔离
    */
-  Status: number
+  Status?: number
   /**
    * 私有网络 ID，例如：51102
    */
-  VpcId: number
+  VpcId?: number
   /**
    * 备机信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SlaveInfo: SlaveInfo
+  SlaveInfo?: SlaveInfo
   /**
    * 实例 ID
    */
-  InstanceId: string
+  InstanceId?: string
   /**
    * 硬盘容量，单位为 GB
    */
-  Volume: number
+  Volume?: number
   /**
    * 自动续费标志，可能的返回值：0-未开通自动续费；1-已开通自动续费；2-已关闭自动续费
    */
-  AutoRenew: number
+  AutoRenew?: number
   /**
    * 数据复制方式。0 - 异步复制；1 - 半同步复制；2 - 强同步复制
    */
-  ProtectMode: number
+  ProtectMode?: number
   /**
    * 只读组详细信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RoGroups: Array<RoGroup>
+  RoGroups?: Array<RoGroup>
   /**
    * 子网 ID，例如：2333
    */
-  SubnetId: number
+  SubnetId?: number
   /**
    * 实例类型，可能的返回值：1-主实例；2-灾备实例；3-只读实例
    */
-  InstanceType: number
+  InstanceType?: number
   /**
    * 项目 ID
    */
-  ProjectId: number
+  ProjectId?: number
   /**
    * 地域信息
    */
-  Region: string
+  Region?: string
   /**
    * 实例到期时间
    */
-  DeadlineTime: string
+  DeadlineTime?: string
   /**
    * 可用区部署方式。可能的值为：0 - 单可用区；1 - 多可用区
    */
-  DeployMode: number
+  DeployMode?: number
   /**
    * 实例任务状态。0 - 没有任务 ,1 - 升级中,2 - 数据导入中,3 - 开放Slave中,4 - 外网访问开通中,5 - 批量操作执行中,6 - 回档中,7 - 外网访问关闭中,8 - 密码修改中,9 - 实例名修改中,10 - 重启中,12 - 自建迁移中,13 - 删除库表中,14 - 灾备实例创建同步中,15 - 升级待切换,16 - 升级切换中,17 - 升级切换完成
    */
-  TaskStatus: number
+  TaskStatus?: number
   /**
    * 主实例详细信息
 注意：此字段可能返回 null，表示取不到有效值。
@@ -6040,110 +6410,115 @@ export interface InstanceInfo {
   /**
    * 实例类型
    */
-  DeviceType: string
+  DeviceType?: string
   /**
    * 内核版本
    */
-  EngineVersion: string
+  EngineVersion?: string
   /**
    * 实例名称
    */
-  InstanceName: string
+  InstanceName?: string
   /**
    * 灾备实例详细信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DrInfo: Array<DrInfo>
+  DrInfo?: Array<DrInfo>
   /**
    * 外网域名
    */
-  WanDomain: string
+  WanDomain?: string
   /**
    * 外网端口号
    */
-  WanPort: number
+  WanPort?: number
   /**
    * 付费类型，可能的返回值：0-包年包月；1-按量计费
    */
-  PayType: number
+  PayType?: number
   /**
    * 实例创建时间
    */
-  CreateTime: string
+  CreateTime?: string
   /**
    * 实例 IP
    */
-  Vip: string
+  Vip?: string
   /**
    * 端口号
    */
-  Vport: number
+  Vport?: number
   /**
    * 磁盘写入是否被锁定（实例数据写入量已经超过磁盘配额）。0 -未被锁定 1 -已被锁定
    */
-  CdbError: number
+  CdbError?: number
   /**
    * 私有网络描述符，例如：“vpc-5v8wn9mg”
    */
-  UniqVpcId: string
+  UniqVpcId?: string
   /**
    * 子网描述符，例如：“subnet-1typ0s7d”
    */
-  UniqSubnetId: string
+  UniqSubnetId?: string
   /**
    * 物理 ID
    */
-  PhysicalId: string
+  PhysicalId?: string
   /**
    * 核心数
    */
-  Cpu: number
+  Cpu?: number
   /**
    * 每秒查询数量
    */
-  Qps: number
+  Qps?: number
   /**
    * 可用区中文名称
    */
-  ZoneName: string
+  ZoneName?: string
   /**
    * 物理机型
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DeviceClass: string
+  DeviceClass?: string
   /**
    * 置放群组 ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DeployGroupId: string
+  DeployGroupId?: string
   /**
    * 可用区 ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ZoneId: number
+  ZoneId?: number
   /**
    * 节点数
    */
-  InstanceNodes: number
+  InstanceNodes?: number
   /**
    * 标签列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TagList: Array<TagInfoItem>
+  TagList?: Array<TagInfoItem>
   /**
    * 引擎类型
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  EngineType: string
+  EngineType?: string
   /**
    * 最大延迟阈值
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  MaxDelayTime: number
+  MaxDelayTime?: number
   /**
    * 实例磁盘类型，仅云盘版实例才返回该值。可能的值为 CLOUD_SSD：SSD云硬盘， CLOUD_HSSD：增强型SSD云硬盘
    */
-  DiskType: string
+  DiskType?: string
+  /**
+   * 当前扩容的CPU核心数。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExpandCpu?: number
 }
 
 /**
@@ -6227,6 +6602,32 @@ export interface OfflineIsolatedInstancesResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * CreateAuditRuleTemplate请求参数结构体
+ */
+export interface CreateAuditRuleTemplateRequest {
+  /**
+   * 审计规则
+   */
+  RuleFilters: Array<RuleFilters>
+  /**
+   * 规则模板名称
+   */
+  RuleTemplateName: string
+  /**
+   * 规则模板描述
+   */
+  Description?: string
+  /**
+   * 告警等级。1-低风险，2-中风险，3-高风险
+   */
+  AlarmLevel?: number
+  /**
+   * 告警策略。0-不告警，1-告警
+   */
+  AlarmPolicy?: number
 }
 
 /**
@@ -6363,6 +6764,16 @@ export interface DescribeRoGroupsResponse {
    * RO组信息数组，一个实例可关联多个RO组。
    */
   RoGroups: Array<RoGroup>
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CloseCdbProxyAddress返回参数结构体
+ */
+export interface CloseCdbProxyAddressResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6640,33 +7051,13 @@ export interface AccountInfo {
 }
 
 /**
- * DescribeRemoteBackupConfig返回参数结构体
+ * DescribeTimeWindow请求参数结构体
  */
-export interface DescribeRemoteBackupConfigResponse {
+export interface DescribeTimeWindowRequest {
   /**
-   * 异地备份保留时间，单位为天
+   * 实例ID，格式如：cdb-c1nl9rpv或者cdbro-c1nl9rpv，与云数据库控制台页面中显示的实例ID相同。
    */
-  ExpireDays?: number
-  /**
-   * 异地数据备份开关，off - 关闭异地备份，on-开启异地备份
-   */
-  RemoteBackupSave?: string
-  /**
-   * 异地日志备份开关，off - 关闭异地备份，on-开启异地备份，只有在参数RemoteBackupSave为on时，RemoteBinlogSave参数才可设置为on
-   */
-  RemoteBinlogSave?: string
-  /**
-   * 用户已设置异地备份地域列表
-   */
-  RemoteRegion?: Array<string>
-  /**
-   * 用户可设置异地备份地域列表
-   */
-  RegionList?: Array<string>
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  InstanceId: string
 }
 
 /**
@@ -7104,6 +7495,16 @@ export interface DescribeLocalBinlogConfigResponse {
 }
 
 /**
+ * ModifyAuditService返回参数结构体
+ */
+export interface ModifyAuditServiceResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyInstancePasswordComplexity请求参数结构体
  */
 export interface ModifyInstancePasswordComplexityRequest {
@@ -7455,6 +7856,36 @@ export interface DBSwitchInfo {
    * 切换类型，可能的返回值为：TRANSFER - 数据迁移；MASTER2SLAVE - 主备切换；RECOVERY - 主从恢复
    */
   SwitchType: string
+}
+
+/**
+ * DescribeAuditRuleTemplateModifyHistory请求参数结构体
+ */
+export interface DescribeAuditRuleTemplateModifyHistoryRequest {
+  /**
+   * 模板ID
+   */
+  RuleTemplateIds?: Array<string>
+  /**
+   * 查询范围的开始时间。
+   */
+  StartTime?: string
+  /**
+   * 查询范围的结束时间。
+   */
+  EndTime?: string
+  /**
+   * 返回条数。
+   */
+  Limit?: number
+  /**
+   * 偏移量。
+   */
+  Offset?: number
+  /**
+   * 排序方式。DESC-按修改时间倒排，ASC-正序。
+   */
+  Order?: string
 }
 
 /**
@@ -7988,6 +8419,25 @@ export interface CreateDBInstanceHourRequest {
 }
 
 /**
+ * DescribeAuditRuleTemplates返回参数结构体
+ */
+export interface DescribeAuditRuleTemplatesResponse {
+  /**
+   * 符合查询条件的实例总数。
+   */
+  TotalCount?: number
+  /**
+   * 规则模板详细信息列表。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Items?: Array<AuditRuleTemplateInfo>
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 用于回档的实例详情
  */
 export interface RollbackInstancesInfo {
@@ -8141,11 +8591,11 @@ export interface DescribeProjectSecurityGroupsResponse {
   /**
    * 安全组详情。
    */
-  Groups: Array<SecurityGroup>
+  Groups?: Array<SecurityGroup>
   /**
    * 安全组规则数量。
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -8326,6 +8776,16 @@ export interface ModifyDBInstanceSecurityGroupsRequest {
 }
 
 /**
+ * CloseAuditService请求参数结构体
+ */
+export interface CloseAuditServiceRequest {
+  /**
+   * 实例ID。
+   */
+  InstanceId: string
+}
+
+/**
  * CPU弹性扩容的自动扩容策略
  */
 export interface AutoStrategy {
@@ -8393,6 +8853,24 @@ export interface Outbound {
    * 规则描述
    */
   Desc: string
+}
+
+/**
+ * 查询审计实例的过滤条件
+ */
+export interface AuditInstanceFilters {
+  /**
+   * 过滤条件名。支持InstanceId-实例ID，InstanceName-实例名称，ProjectId-项目ID，TagKey-标签键，Tag-标签（以竖线分割，例：Tagkey|Tagvalue）。
+   */
+  Name: string
+  /**
+   * true表示精确查找，false表示模糊匹配。
+   */
+  ExactMatch: boolean
+  /**
+   * 筛选值
+   */
+  Values: Array<string>
 }
 
 /**
@@ -8818,18 +9296,29 @@ export interface AddTimeWindowResponse {
 }
 
 /**
- * AdjustCdbProxy返回参数结构体
+ * DescribeAuditInstanceList请求参数结构体
  */
-export interface AdjustCdbProxyResponse {
+export interface DescribeAuditInstanceListRequest {
   /**
-   * 异步任务ID
-注意：此字段可能返回 null，表示取不到有效值。
+   * 实例审计开启的状态。1-已开启审计；0-未开启审计。
    */
-  AsyncRequestId: string
+  AuditSwitch?: number
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 查询实例列表的过滤条件。
    */
-  RequestId?: string
+  Filters?: Array<AuditInstanceFilters>
+  /**
+   * 实例的审计规则模式。1-规则审计；0-全审计。
+   */
+  AuditMode?: number
+  /**
+   * 单次请求返回的数量。默认值为30，最大值为 20000。
+   */
+  Limit?: number
+  /**
+   * 偏移量，默认值为 0。
+   */
+  Offset?: number
 }
 
 /**
@@ -8889,13 +9378,33 @@ export interface AuditLogFile {
 }
 
 /**
- * CloseCdbProxyAddress返回参数结构体
+ * DescribeAuditRuleTemplates请求参数结构体
  */
-export interface CloseCdbProxyAddressResponse {
+export interface DescribeAuditRuleTemplatesRequest {
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 规则模板ID。
    */
-  RequestId?: string
+  RuleTemplateIds?: Array<string>
+  /**
+   * 规则模板名称。
+   */
+  RuleTemplateNames?: Array<string>
+  /**
+   * 单次请求返回的数量。默认值20。
+   */
+  Limit?: number
+  /**
+   * 偏移量，默认值为 0。
+   */
+  Offset?: number
+  /**
+   * 告警等级。1-低风险，2-中风险，3-高风险。
+   */
+  AlarmLevel?: number
+  /**
+   * 告警策略。0-不告警，1-告警。
+   */
+  AlarmPolicy?: number
 }
 
 /**
@@ -8912,6 +9421,58 @@ export interface RollbackTables {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Table: Array<RollbackTableName>
+}
+
+/**
+ * 审计规则模板的详情
+ */
+export interface AuditRuleTemplateInfo {
+  /**
+   * 规则模板ID。
+   */
+  RuleTemplateId?: string
+  /**
+   * 规则模板名称。
+   */
+  RuleTemplateName?: string
+  /**
+   * 规则模板的过滤条件。
+   */
+  RuleFilters?: Array<RuleFilters>
+  /**
+   * 规则模板描述。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Description?: string
+  /**
+   * 规则模板创建时间。
+   */
+  CreateAt?: string
+  /**
+   * 告警等级。1-低风险，2-中风险，3-高风险。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AlarmLevel?: number
+  /**
+   * 告警策略。0-不告警，1-告警。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AlarmPolicy?: number
+  /**
+   * 规则模板应用在哪些在实例。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AffectedInstances?: Array<string>
+  /**
+   * 模板状态。0-无任务 ，1-修改中。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status?: number
+  /**
+   * 模板更新时间。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UpdateAt?: string
 }
 
 /**
@@ -9175,6 +9736,16 @@ export interface UpgradeCDBProxyVersionRequest {
 }
 
 /**
+ * DeleteAuditRuleTemplates返回参数结构体
+ */
+export interface DeleteAuditRuleTemplatesResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeDeviceMonitorInfo返回参数结构体
  */
 export interface DescribeDeviceMonitorInfoResponse {
@@ -9194,6 +9765,16 @@ export interface DescribeDeviceMonitorInfoResponse {
    * 实例磁盘监控数据
    */
   Disk: DeviceDiskInfo
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyAuditRuleTemplates返回参数结构体
+ */
+export interface ModifyAuditRuleTemplatesResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

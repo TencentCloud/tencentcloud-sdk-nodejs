@@ -38,6 +38,16 @@ it("tse.v20201207.DescribeUpstreamHealthCheckConfig", async function () {
     }
 })
 
+it("tse.v20201207.DescribeZookeeperReplicas", async function () {
+    try {
+       const data = await client.DescribeZookeeperReplicas({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tse.v20201207.ModifyNativeGatewayServerGroup", async function () {
     try {
        const data = await client.ModifyNativeGatewayServerGroup({})
@@ -61,6 +71,16 @@ it("tse.v20201207.ModifyUpstreamNodeStatus", async function () {
 it("tse.v20201207.DeleteCloudNativeAPIGatewayServiceRateLimit", async function () {
     try {
        const data = await client.DeleteCloudNativeAPIGatewayServiceRateLimit({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tse.v20201207.CreateWafDomains", async function () {
+    try {
+       const data = await client.CreateWafDomains({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -278,9 +298,9 @@ it("tse.v20201207.ModifyCloudNativeAPIGatewayRoute", async function () {
     }
 })
 
-it("tse.v20201207.DescribeZookeeperReplicas", async function () {
+it("tse.v20201207.CloseWafProtection", async function () {
     try {
-       const data = await client.DescribeZookeeperReplicas({})
+       const data = await client.CloseWafProtection({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -371,6 +391,16 @@ it("tse.v20201207.DescribeCloudNativeAPIGatewayCertificateDetails", async functi
 it("tse.v20201207.UpdateEngineInternetAccess", async function () {
     try {
        const data = await client.UpdateEngineInternetAccess({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tse.v20201207.OpenWafProtection", async function () {
+    try {
+       const data = await client.OpenWafProtection({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

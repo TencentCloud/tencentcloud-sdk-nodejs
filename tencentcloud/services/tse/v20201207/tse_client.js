@@ -40,6 +40,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeUpstreamHealthCheckConfig", req, cb);
     }
     /**
+     * 查询Zookeeper类型注册引擎实例副本信息
+     */
+    async DescribeZookeeperReplicas(req, cb) {
+        return this.request("DescribeZookeeperReplicas", req, cb);
+    }
+    /**
      * 修改云原生API网关实例分组基础信息
      */
     async ModifyNativeGatewayServerGroup(req, cb) {
@@ -56,6 +62,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DeleteCloudNativeAPIGatewayServiceRateLimit(req, cb) {
         return this.request("DeleteCloudNativeAPIGatewayServiceRateLimit", req, cb);
+    }
+    /**
+     * 新建 WAF 防护域名
+     */
+    async CreateWafDomains(req, cb) {
+        return this.request("CreateWafDomains", req, cb);
     }
     /**
      * 查询zookeeper服务接口列表
@@ -184,10 +196,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyCloudNativeAPIGatewayRoute", req, cb);
     }
     /**
-     * 查询Zookeeper类型注册引擎实例副本信息
+     * 关闭 WAF 防护
      */
-    async DescribeZookeeperReplicas(req, cb) {
-        return this.request("DescribeZookeeperReplicas", req, cb);
+    async CloseWafProtection(req, cb) {
+        return this.request("CloseWafProtection", req, cb);
     }
     /**
      * 创建云原生API网关实例
@@ -242,6 +254,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async UpdateEngineInternetAccess(req, cb) {
         return this.request("UpdateEngineInternetAccess", req, cb);
+    }
+    /**
+     * 开启 WAF 防护
+     */
+    async OpenWafProtection(req, cb) {
+        return this.request("OpenWafProtection", req, cb);
     }
     /**
      * 修改云原生API网关实例基础信息

@@ -529,6 +529,27 @@ export interface QpsThreshold {
     Max: number;
 }
 /**
+ * CloseWafProtection请求参数结构体
+ */
+export interface CloseWafProtectionRequest {
+    /**
+     * 网关ID
+     */
+    GatewayId: string;
+    /**
+     *  防护资源的类型。
+  - Global  实例
+  - Service  服务
+  - Route  路由
+  - Object  对象
+     */
+    Type: string;
+    /**
+     * 当资源类型 Type 是 Service 或 Route 的时候，传入的服务或路由的列表
+     */
+    List?: Array<string>;
+}
+/**
  * ModifyCloudNativeAPIGatewayService返回参数结构体
  */
 export interface ModifyCloudNativeAPIGatewayServiceResponse {
@@ -572,6 +593,15 @@ export interface DescribeUpstreamHealthCheckConfigResponse {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Result?: UpstreamHealthCheckConfig;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * OpenWafProtection返回参数结构体
+ */
+export interface OpenWafProtectionResponse {
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1096,17 +1126,13 @@ export interface SREInstance {
     StorageOption?: Array<StorageOption>;
 }
 /**
- * 引擎实例的标签信息
+ * CreateWafDomains返回参数结构体
  */
-export interface InstanceTagInfo {
+export interface CreateWafDomainsResponse {
     /**
-     * 标签键
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
-    TagKey?: string;
-    /**
-     * 标签值
-     */
-    TagValue?: string;
+    RequestId?: string;
 }
 /**
  * DescribeCloudNativeAPIGatewayServices请求参数结构体
@@ -1704,6 +1730,19 @@ export interface KongPassiveHealthCheck {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Type?: string;
+}
+/**
+ * 引擎实例的标签信息
+ */
+export interface InstanceTagInfo {
+    /**
+     * 标签键
+     */
+    TagKey?: string;
+    /**
+     * 标签值
+     */
+    TagValue?: string;
 }
 /**
  * 云原生API网关vpc配置。
@@ -2722,6 +2761,15 @@ export interface DeleteCloudNativeAPIGatewayServiceRateLimitResponse {
     RequestId?: string;
 }
 /**
+ * CloseWafProtection返回参数结构体
+ */
+export interface CloseWafProtectionResponse {
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * 弹性伸缩配置指标
  */
 export interface CloudNativeAPIGatewayStrategyAutoScalerConfigMetric {
@@ -3310,6 +3358,27 @@ export interface CloudNativeAPIGatewayStrategyCronScalerConfigParam {
     Crontab?: string;
 }
 /**
+ * OpenWafProtection请求参数结构体
+ */
+export interface OpenWafProtectionRequest {
+    /**
+     * 网关ID
+     */
+    GatewayId: string;
+    /**
+     *  防护资源的类型。
+  - Global  实例
+  - Service  服务
+  - Route  路由
+  - Object  对象（接口暂不支持）
+     */
+    Type: string;
+    /**
+     * 当资源类型 Type 是 Service 或 Route 的时候，传入的服务或路由的列表
+     */
+    List?: Array<string>;
+}
+/**
  * DeleteCloudNativeAPIGatewayRoute请求参数结构体
  */
 export interface DeleteCloudNativeAPIGatewayRouteRequest {
@@ -3693,6 +3762,19 @@ export interface AutoScalerRules {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Policies?: Array<AutoScalerPolicy>;
+}
+/**
+ * CreateWafDomains请求参数结构体
+ */
+export interface CreateWafDomainsRequest {
+    /**
+     * 网关ID
+     */
+    GatewayId: string;
+    /**
+     * WAF 防护域名列表
+     */
+    Domains: Array<string>;
 }
 /**
  * 服务的后端配置

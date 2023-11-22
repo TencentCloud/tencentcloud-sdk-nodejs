@@ -18,6 +18,7 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  DescribeTaskRequest,
   ModifyTaskRunStatusResponse,
   TaskGroupAction,
   ApmServiceInfo,
@@ -43,12 +44,15 @@ import {
   DescribeTemplateListResponse,
   TaskMonitor,
   TagWithDescribe,
+  DescribeTaskPolicyTriggerLogResponse,
   CreateTaskFromTemplateResponse,
   DeleteTaskResponse,
-  DescribeTaskRequest,
+  DescribeTaskPolicyTriggerLogRequest,
   Task,
   TaskReportInfo,
   CreateTaskFromTemplateRequest,
+  TriggerPolicyRequest,
+  TriggerPolicyResponse,
   DescribeTaskListRequest,
   TaskListItem,
   ExecuteTaskInstanceResponse,
@@ -57,6 +61,7 @@ import {
   TemplateGroup,
   TemplatePolicy,
   TaskGroupActionConfig,
+  PolicyTriggerLog,
   DescribeTemplateListRequest,
   TemplateListItem,
   TagWithCreate,
@@ -122,6 +127,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 用于触发混沌演练护栏（类型为触发和恢复2种）
+   */
+  async TriggerPolicy(
+    req: TriggerPolicyRequest,
+    cb?: (error: string, rep: TriggerPolicyResponse) => void
+  ): Promise<TriggerPolicyResponse> {
+    return this.request("TriggerPolicy", req, cb)
+  }
+
+  /**
    * 查询任务列表
    */
   async DescribeTaskList(
@@ -152,6 +167,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 删除任务
+   */
+  async DeleteTask(
+    req: DeleteTaskRequest,
+    cb?: (error: string, rep: DeleteTaskResponse) => void
+  ): Promise<DeleteTaskResponse> {
+    return this.request("DeleteTask", req, cb)
+  }
+
+  /**
    * 执行任务
    */
   async ExecuteTask(
@@ -162,12 +187,12 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除任务
+   * 获取护栏触发日志
    */
-  async DeleteTask(
-    req: DeleteTaskRequest,
-    cb?: (error: string, rep: DeleteTaskResponse) => void
-  ): Promise<DeleteTaskResponse> {
-    return this.request("DeleteTask", req, cb)
+  async DescribeTaskPolicyTriggerLog(
+    req: DescribeTaskPolicyTriggerLogRequest,
+    cb?: (error: string, rep: DescribeTaskPolicyTriggerLogResponse) => void
+  ): Promise<DescribeTaskPolicyTriggerLogResponse> {
+    return this.request("DescribeTaskPolicyTriggerLog", req, cb)
   }
 }

@@ -61,6 +61,7 @@ export { cls } from "./cls";
 export { cme } from "./cme";
 export { cmq } from "./cmq";
 export { cms } from "./cms";
+export { config } from "./config";
 export { cpdp } from "./cpdp";
 export { cr } from "./cr";
 export { csip } from "./csip";

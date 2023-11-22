@@ -41,10 +41,12 @@ import {
   DescribeCloudNativeAPIGatewayCertificatesRequest,
   DeleteCloudNativeAPIGatewayResult,
   QpsThreshold,
+  CloseWafProtectionRequest,
   ModifyCloudNativeAPIGatewayServiceResponse,
   DescribeCloudNativeAPIGatewayNodesResponse,
   CreateCloudNativeAPIGatewayResponse,
   DescribeUpstreamHealthCheckConfigResponse,
+  OpenWafProtectionResponse,
   KongActiveHealthCheck,
   DeleteCloudNativeAPIGatewayCertificateResponse,
   DeleteCloudNativeAPIGatewayCanaryRuleRequest,
@@ -60,7 +62,7 @@ import {
   EnvAddressInfo,
   CLBMultiRegion,
   SREInstance,
-  InstanceTagInfo,
+  CreateWafDomainsResponse,
   DescribeCloudNativeAPIGatewayServicesRequest,
   DescribeCloudNativeAPIGatewayUpstreamResponse,
   DescribeCloudNativeAPIGatewayCertificatesResponse,
@@ -90,6 +92,7 @@ import {
   DescribeNacosReplicasResponse,
   DeleteCloudNativeAPIGatewayServiceRateLimitRequest,
   KongPassiveHealthCheck,
+  InstanceTagInfo,
   CloudNativeAPIGatewayVpcConfig,
   CloudAPIGatewayCanaryRuleList,
   ModifyUpstreamNodeStatusRequest,
@@ -133,6 +136,7 @@ import {
   DeleteCloudNativeAPIGatewayCertificateRequest,
   NativeGatewayServerGroup,
   DeleteCloudNativeAPIGatewayServiceRateLimitResponse,
+  CloseWafProtectionResponse,
   CloudNativeAPIGatewayStrategyAutoScalerConfigMetric,
   CloudNativeAPIGatewayNode,
   UpdateCloudNativeAPIGatewaySpecResponse,
@@ -161,6 +165,7 @@ import {
   DescribeCloudNativeAPIGatewayRequest,
   DescribeNativeGatewayServerGroupsResponse,
   CloudNativeAPIGatewayStrategyCronScalerConfigParam,
+  OpenWafProtectionRequest,
   DeleteCloudNativeAPIGatewayRouteRequest,
   InternetConfig,
   DescribeCloudNativeAPIGatewayRoutesRequest,
@@ -179,6 +184,7 @@ import {
   BoundK8SInfo,
   DescribeCloudNativeAPIGatewayCertificateDetailsRequest,
   AutoScalerRules,
+  CreateWafDomainsRequest,
   KongUpstreamInfo,
   CreateCloudNativeAPIGatewayRouteRequest,
   CreateNativeGatewayServerGroupResponse,
@@ -234,6 +240,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询Zookeeper类型注册引擎实例副本信息
+   */
+  async DescribeZookeeperReplicas(
+    req: DescribeZookeeperReplicasRequest,
+    cb?: (error: string, rep: DescribeZookeeperReplicasResponse) => void
+  ): Promise<DescribeZookeeperReplicasResponse> {
+    return this.request("DescribeZookeeperReplicas", req, cb)
+  }
+
+  /**
    * 修改云原生API网关实例分组基础信息
    */
   async ModifyNativeGatewayServerGroup(
@@ -261,6 +277,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteCloudNativeAPIGatewayServiceRateLimitResponse) => void
   ): Promise<DeleteCloudNativeAPIGatewayServiceRateLimitResponse> {
     return this.request("DeleteCloudNativeAPIGatewayServiceRateLimit", req, cb)
+  }
+
+  /**
+   * 新建 WAF 防护域名
+   */
+  async CreateWafDomains(
+    req: CreateWafDomainsRequest,
+    cb?: (error: string, rep: CreateWafDomainsResponse) => void
+  ): Promise<CreateWafDomainsResponse> {
+    return this.request("CreateWafDomains", req, cb)
   }
 
   /**
@@ -474,13 +500,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询Zookeeper类型注册引擎实例副本信息
+   * 关闭 WAF 防护
    */
-  async DescribeZookeeperReplicas(
-    req: DescribeZookeeperReplicasRequest,
-    cb?: (error: string, rep: DescribeZookeeperReplicasResponse) => void
-  ): Promise<DescribeZookeeperReplicasResponse> {
-    return this.request("DescribeZookeeperReplicas", req, cb)
+  async CloseWafProtection(
+    req: CloseWafProtectionRequest,
+    cb?: (error: string, rep: CloseWafProtectionResponse) => void
+  ): Promise<CloseWafProtectionResponse> {
+    return this.request("CloseWafProtection", req, cb)
   }
 
   /**
@@ -571,6 +597,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: UpdateEngineInternetAccessResponse) => void
   ): Promise<UpdateEngineInternetAccessResponse> {
     return this.request("UpdateEngineInternetAccess", req, cb)
+  }
+
+  /**
+   * 开启 WAF 防护
+   */
+  async OpenWafProtection(
+    req: OpenWafProtectionRequest,
+    cb?: (error: string, rep: OpenWafProtectionResponse) => void
+  ): Promise<OpenWafProtectionResponse> {
+    return this.request("OpenWafProtection", req, cb)
   }
 
   /**

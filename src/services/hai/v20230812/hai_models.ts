@@ -425,6 +425,11 @@ export interface SystemDisk {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DiskSize?: number
+  /**
+   * 系统盘分区盘符
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DiskName?: string
 }
 
 /**

@@ -895,28 +895,17 @@ export interface QualityInspectTaskOutput {
 }
 
 /**
- * 用户自定义文本音视频审核任务控制参数。
+ * 音画质重生任务的输入。
  */
-export interface UserDefineOcrTextReviewTemplateInfoForUpdate {
+export interface QualityEnhanceTaskInput {
   /**
-   * 用户自定文本音视频审核任务开关，可选值：
-<li>ON：开启自定义文本音视频审核任务；</li>
-<li>OFF：关闭自定义文本音视频审核任务。</li>
+   * 媒体文件 ID。
    */
-  Switch?: string
+  FileId?: string
   /**
-   * 用户自定义文本过滤标签，音视频审核结果包含选择的标签则返回结果，如果过滤标签为空，则音视频审核结果全部返回。如果要使用标签过滤功能，添加自定义文本关键词素材时需要添加对应标签。
-标签个数最多 10 个，每个标签长度最多 16 个字符。
+   * 音画质重生模板 ID。
    */
-  LabelSet?: Array<string>
-  /**
-   * 判定涉嫌违规的分数阈值，当审核达到该分数以上，认为涉嫌违规。取值范围：0~100。
-   */
-  BlockConfidence?: number
-  /**
-   * 判定需人工复核是否违规的分数阈值，当审核达到该分数以上，认为需人工复核。取值范围：0~100。
-   */
-  ReviewConfidence?: number
+  Definition?: number
 }
 
 /**
@@ -1248,6 +1237,64 @@ export interface AiReviewTaskPoliticalOcrResult {
    * 音视频审核 Ocr 文字涉及令人不适宜信息的任务进度，取值范围 [0-100] 。
    */
   Progress?: number
+}
+
+/**
+ * 音画质重生任务
+ */
+export interface QualityEnhanceTask {
+  /**
+   * 任务 ID。
+   */
+  TaskId?: string
+  /**
+   * 任务流状态，取值：
+<li>PROCESSING：处理中；</li>
+<li>FINISH：已完成。</li>
+   */
+  Status?: string
+  /**
+   * 错误码，0 表示成功，其他值表示失败：
+<li>40000：输入参数不合法，请检查输入参数；</li>
+<li>60000：源文件错误（如视频数据损坏），请确认源文件是否正常；</li>
+<li>70000：内部服务错误，建议重试。</li>
+   */
+  ErrCode?: number
+  /**
+   * 错误信息。
+   */
+  Message?: string
+  /**
+   * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/266/50368#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+   */
+  ErrCodeExt?: string
+  /**
+   * 音画质重生任务进度，取值范围 [0-100] 。
+   */
+  Progress?: number
+  /**
+   * 音画质重生任务的输入。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Input?: QualityEnhanceTaskInput
+  /**
+   * 音画质重生任务的输出。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Output?: QualityEnhanceTaskOutput
+  /**
+   * 音画质重生输出视频的元信息。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MetaData?: MediaMetaData
+  /**
+   * 用于去重的识别码，如果七天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。
+   */
+  SessionId?: string
+  /**
+   * 来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长 1000 个字符。
+   */
+  SessionContext?: string
 }
 
 /**
@@ -4991,6 +5038,7 @@ export interface SvgWatermarkInputForUpdate {
 花括号 {} 表示由 A、B、C、D 4 个水印组成的大周期，可以看出每个大周期持续 20 秒。
 可以看出，A、B、C、D 都是周期性地显示 5 秒、隐藏 15 秒，且四者有固定的显示顺序。
 此配置项即用来描述单个水印的周期配置。
+注意：此字段可能返回 null，表示取不到有效值。
    */
   CycleConfig?: WatermarkCycleConfigForUpdate
 }
@@ -15134,11 +15182,12 @@ export interface DescribeTaskDetailResponse {
 <li>FastClipMedia：快速剪辑任务；</li>
 <li>RemoveWatermarkTask：智能去除水印任务；</li>
 <li>DescribeFileAttributesTask：获取文件属性任务；</li>
-<li>RebuildMedia：音画质重生任务；</li>
+<li>RebuildMedia：音画质重生任务（不推荐使用）；</li>
 <li>ReviewAudioVideo：音视频审核任务；</li>
 <li>ExtractTraceWatermark：提取溯源水印任务；</li>
 <li>ExtractCopyRightWatermark：提取版权水印任务；</li>
-<li>QualityInspect：音画质检测任务。</li>
+<li>QualityInspect：音画质检测任务；</li>
+<li>QualityEnhance：音画质重生任务。</li>
    */
   TaskType?: string
   /**
@@ -15260,6 +15309,11 @@ export interface DescribeTaskDetailResponse {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   QualityInspectTask?: QualityInspectTask
+  /**
+   * 音画质重生任务信息，仅当 TaskType 为 QualityEnhance，该字段有值。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  QualityEnhanceTask?: QualityEnhanceTask
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -17101,6 +17155,37 @@ export interface DescribeTranscodeTemplatesRequest {
    * 返回记录条数，默认值：10，最大值：100。
    */
   Limit?: number
+}
+
+/**
+ * 音画质重生任务输出
+ */
+export interface QualityEnhanceTaskOutput {
+  /**
+   * 文件类型，例如 mp4、flv 等。
+   */
+  FileType?: string
+  /**
+   * 媒体文件播放地址。
+   */
+  FileUrl?: string
+  /**
+   * 媒体文件 ID。
+   */
+  FileId?: string
+  /**
+   * 输出文件名，最长 64 个字符。缺省由系统指定生成文件名。
+   */
+  MediaName?: string
+  /**
+   * 分类ID，用于对媒体进行分类管理，可通过 [创建分类](/document/product/266/7812) 接口，创建分类，获得分类 ID。
+<li>默认值：0，表示其他分类。</li>
+   */
+  ClassId?: number
+  /**
+   * 输出文件的过期时间，超过该时间文件将被删除，默认为永久不过期，格式按照 ISO 8601标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。
+   */
+  ExpireTime?: string
 }
 
 /**
@@ -19253,6 +19338,31 @@ export interface DescribeImageProcessingTemplatesResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 用户自定义文本音视频审核任务控制参数。
+ */
+export interface UserDefineOcrTextReviewTemplateInfoForUpdate {
+  /**
+   * 用户自定文本音视频审核任务开关，可选值：
+<li>ON：开启自定义文本音视频审核任务；</li>
+<li>OFF：关闭自定义文本音视频审核任务。</li>
+   */
+  Switch?: string
+  /**
+   * 用户自定义文本过滤标签，音视频审核结果包含选择的标签则返回结果，如果过滤标签为空，则音视频审核结果全部返回。如果要使用标签过滤功能，添加自定义文本关键词素材时需要添加对应标签。
+标签个数最多 10 个，每个标签长度最多 16 个字符。
+   */
+  LabelSet?: Array<string>
+  /**
+   * 判定涉嫌违规的分数阈值，当审核达到该分数以上，认为涉嫌违规。取值范围：0~100。
+   */
+  BlockConfidence?: number
+  /**
+   * 判定需人工复核是否违规的分数阈值，当审核达到该分数以上，认为需人工复核。取值范围：0~100。
+   */
+  ReviewConfidence?: number
 }
 
 /**

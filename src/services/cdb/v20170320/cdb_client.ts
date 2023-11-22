@@ -27,12 +27,13 @@ import {
   InstanceRollbackRangeTime,
   DescribeTablesResponse,
   ModifyBackupDownloadRestrictionResponse,
-  StartReplicationResponse,
+  InstanceDbAuditStatus,
   ModifyTimeWindowResponse,
   ParamRecord,
   ModifyTimeWindowRequest,
   DescribeRollbackRangeTimeRequest,
   DescribeBackupOverviewRequest,
+  DescribeAuditInstanceListResponse,
   ModifyDBInstanceProjectResponse,
   DescribeDataBackupOverviewResponse,
   DeleteAuditPolicyRequest,
@@ -40,7 +41,7 @@ import {
   CreateDatabaseRequest,
   ModifyInstanceParamRequest,
   CreateParamTemplateRequest,
-  DescribeSupportedPrivilegesRequest,
+  RemoteBackupInfo,
   DescribeParamTemplateInfoRequest,
   ModifyCdbProxyAddressVipAndVPortResponse,
   DescribeDBInstancesRequest,
@@ -95,6 +96,7 @@ import {
   InitDBInstancesResponse,
   DescribeParamTemplateInfoResponse,
   DescribeInstanceParamsResponse,
+  DeleteDatabaseRequest,
   UploadInfo,
   DisassociateSecurityGroupsRequest,
   AuditRuleFilters,
@@ -110,15 +112,18 @@ import {
   DescribeCdbProxyInfoRequest,
   RollbackDBName,
   RuleFilters,
+  ModifyAuditRuleTemplatesRequest,
   CreateAuditRuleResponse,
   ModifyRemoteBackupConfigResponse,
   DescribeDBInstanceInfoResponse,
   AssociateSecurityGroupsRequest,
+  StartReplicationResponse,
   DescribeDBFeaturesResponse,
   ModifyAuditRuleRequest,
   DescribeBinlogsResponse,
   DescribeRoMinScaleRequest,
   DescribeDefaultParamsRequest,
+  AuditInstanceInfo,
   CustomConfig,
   SwitchDBInstanceMasterSlaveResponse,
   DescribeBackupsRequest,
@@ -141,11 +146,12 @@ import {
   DescribeDBSecurityGroupsRequest,
   DescribeDBSwitchRecordsResponse,
   Tag,
+  RuleTemplateInfo,
   CreateAuditLogFileResponse,
   ModifyCdbProxyParamResponse,
   ModifyInstanceTagResponse,
   DescribeDBSwitchRecordsRequest,
-  RemoteBackupInfo,
+  DescribeSupportedPrivilegesRequest,
   DescribeAsyncRequestInfoResponse,
   DeleteAccountsResponse,
   ParamTemplateInfo,
@@ -181,11 +187,13 @@ import {
   LogToCLSConfig,
   ResetRootAccountRequest,
   DescribeDBInstanceConfigRequest,
+  ModifyAuditServiceRequest,
   DescribeProxyCustomConfResponse,
   ModifyAuditConfigResponse,
   SwitchDrInstanceToMasterResponse,
   ModifyDBInstanceNameResponse,
   VerifyRootAccountRequest,
+  RuleTemplateRecordInfo,
   DescribeCloneListResponse,
   DescribeDBInstanceLogToCLSRequest,
   DescribeDBInstanceConfigResponse,
@@ -206,6 +214,7 @@ import {
   DescribeAccountsResponse,
   RollbackTimeRange,
   AuditLog,
+  DescribeAuditRuleTemplateModifyHistoryResponse,
   DescribeAuditLogFilesRequest,
   ModifyBackupConfigRequest,
   DisassociateSecurityGroupsResponse,
@@ -244,12 +253,15 @@ import {
   CloneItem,
   ModifyDBInstanceSecurityGroupsResponse,
   CreateAccountsRequest,
+  DeleteAuditRuleTemplatesRequest,
+  CreateAuditRuleTemplateResponse,
   DescribeDeployGroupListRequest,
   BackupInfo,
   CloseWanServiceResponse,
   RenewDBInstanceRequest,
   SlowLogInfo,
   ModifyLocalBinlogConfigResponse,
+  DeleteDatabaseResponse,
   DescribeCloneListRequest,
   ModifyInstanceTagRequest,
   DescribeProxySupportParamRequest,
@@ -258,12 +270,14 @@ import {
   StartReplicationRequest,
   ProxyInst,
   ReloadBalanceProxyNodeResponse,
-  DescribeTimeWindowRequest,
+  DescribeRemoteBackupConfigResponse,
   DescribeDBImportRecordsResponse,
   BackupItem,
   AuditFilter,
   DescribeProxySupportParamResponse,
+  CloseAuditServiceResponse,
   DescribeRollbackTaskDetailRequest,
+  AdjustCdbProxyResponse,
   ModifyParamTemplateResponse,
   BalanceRoGroupLoadResponse,
   DeviceNetInfo,
@@ -277,11 +291,13 @@ import {
   DescribeTagsOfInstanceIdsResponse,
   DescribeDeployGroupListResponse,
   OfflineIsolatedInstancesResponse,
+  CreateAuditRuleTemplateRequest,
   DatabasePrivilege,
   DescribeAuditPoliciesRequest,
   AdjustCdbProxyAddressRequest,
   DescribeDatabasesResponse,
   DescribeRoGroupsResponse,
+  CloseCdbProxyAddressResponse,
   DescribeAuditRulesResponse,
   RoInstanceInfo,
   ModifyAccountHostRequest,
@@ -290,7 +306,7 @@ import {
   ModifyAccountPrivilegesRequest,
   CreateBackupRequest,
   AccountInfo,
-  DescribeRemoteBackupConfigResponse,
+  DescribeTimeWindowRequest,
   AdjustCdbProxyAddressResponse,
   ModifyDBInstanceVipVportRequest,
   DescribeDBImportRecordsRequest,
@@ -312,6 +328,7 @@ import {
   DescribeSupportedPrivilegesResponse,
   SlowLogItem,
   DescribeLocalBinlogConfigResponse,
+  ModifyAuditServiceResponse,
   ModifyInstancePasswordComplexityRequest,
   OpenWanServiceResponse,
   DescribeDBInstanceGTIDRequest,
@@ -333,6 +350,7 @@ import {
   DeleteAuditRuleRequest,
   DeleteParamTemplateResponse,
   DBSwitchInfo,
+  DescribeAuditRuleTemplateModifyHistoryRequest,
   DescribeTasksResponse,
   DescribeAuditLogsResponse,
   DescribeAuditPoliciesResponse,
@@ -348,6 +366,7 @@ import {
   ModifyBackupEncryptionStatusRequest,
   DescribeRollbackTaskDetailResponse,
   CreateDBInstanceHourRequest,
+  DescribeAuditRuleTemplatesResponse,
   RollbackInstancesInfo,
   CreateCloneInstanceRequest,
   CloseCDBProxyRequest,
@@ -362,9 +381,11 @@ import {
   DescribeBackupSummariesResponse,
   DescribeBinlogBackupOverviewRequest,
   ModifyDBInstanceSecurityGroupsRequest,
+  CloseAuditServiceRequest,
   AutoStrategy,
   ModifyAccountMaxUserConnectionsResponse,
   Outbound,
+  AuditInstanceFilters,
   ParamInfo,
   DescribeBackupDecryptionKeyResponse,
   SecurityGroup,
@@ -388,12 +409,13 @@ import {
   RenewDBInstanceResponse,
   TablePrivilege,
   AddTimeWindowResponse,
-  AdjustCdbProxyResponse,
+  DescribeAuditInstanceListRequest,
   DescribeBackupEncryptionStatusRequest,
   ModifyDBInstanceLogToCLSResponse,
   AuditLogFile,
-  CloseCdbProxyAddressResponse,
+  DescribeAuditRuleTemplatesRequest,
   RollbackTables,
+  AuditRuleTemplateInfo,
   LocalBinlogConfigDefault,
   DescribeSlowLogDataRequest,
   ReleaseIsolatedDBInstancesResponse,
@@ -408,7 +430,9 @@ import {
   ModifyNameOrDescByDpIdRequest,
   UpgradeDBInstanceResponse,
   UpgradeCDBProxyVersionRequest,
+  DeleteAuditRuleTemplatesResponse,
   DescribeDeviceMonitorInfoResponse,
+  ModifyAuditRuleTemplatesResponse,
 } from "./cdb_models"
 
 /**
@@ -461,13 +485,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口(DescribeDataBackupOverview)用于查询用户在当前地域总的数据备份概览。
+   * 创建审计规则模板
    */
-  async DescribeDataBackupOverview(
-    req: DescribeDataBackupOverviewRequest,
-    cb?: (error: string, rep: DescribeDataBackupOverviewResponse) => void
-  ): Promise<DescribeDataBackupOverviewResponse> {
-    return this.request("DescribeDataBackupOverview", req, cb)
+  async CreateAuditRuleTemplate(
+    req: CreateAuditRuleTemplateRequest,
+    cb?: (error: string, rep: CreateAuditRuleTemplateResponse) => void
+  ): Promise<CreateAuditRuleTemplateResponse> {
+    return this.request("CreateAuditRuleTemplate", req, cb)
   }
 
   /**
@@ -585,6 +609,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 实例关闭审计服务
+   */
+  async CloseAuditService(
+    req: CloseAuditServiceRequest,
+    cb?: (error: string, rep: CloseAuditServiceResponse) => void
+  ): Promise<CloseAuditServiceResponse> {
+    return this.request("CloseAuditService", req, cb)
+  }
+
+  /**
    * 本接口(StopRollback) 用于撤销实例正在进行的回档任务，该接口返回一个异步任务id。 撤销结果可以通过 DescribeAsyncRequestInfo 查询任务的执行情况。
    */
   async StopRollback(
@@ -689,6 +723,26 @@ export class Client extends AbstractClient {
   }
 
   /**
+     * 本接口(OpenDBInstanceEncryption)用于启用实例数据存储加密功能，支持用户指定自定义密钥。
+
+注意，启用实例数据存储加密之前，需要进行以下操作：
+
+1、进行 [实例初始化](https://cloud.tencent.com/document/api/236/15873) 操作；
+
+2、开启 [KMS服务](https://console.cloud.tencent.com/kms2)；
+
+3、对云数据库(MySQL)[授予访问KMS密钥的权限](https://console.cloud.tencent.com/cam/role)，角色名为MySQL_QCSRole，预设策略名为QcloudAccessForMySQLRole；
+
+该 API 耗时可能到10s，客户端可能超时，如果调用 API 返回 InternalError ，请您调用DescribeDBInstanceInfo 确认后端加密是否开通成功。
+     */
+  async OpenDBInstanceEncryption(
+    req: OpenDBInstanceEncryptionRequest,
+    cb?: (error: string, rep: OpenDBInstanceEncryptionResponse) => void
+  ): Promise<OpenDBInstanceEncryptionResponse> {
+    return this.request("OpenDBInstanceEncryption", req, cb)
+  }
+
+  /**
    * 本接口(CloseWanService)用于关闭云数据库实例的外网访问。关闭外网访问后，外网地址将不可访问。
    */
   async CloseWanService(
@@ -719,23 +773,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 本接口(OpenDBInstanceEncryption)用于启用实例数据存储加密功能，支持用户指定自定义密钥。
-
-注意，启用实例数据存储加密之前，需要进行以下操作：
-
-1、进行 [实例初始化](https://cloud.tencent.com/document/api/236/15873) 操作；
-
-2、开启 [KMS服务](https://console.cloud.tencent.com/kms2)；
-
-3、对云数据库(MySQL)[授予访问KMS密钥的权限](https://console.cloud.tencent.com/cam/role)，角色名为MySQL_QCSRole，预设策略名为QcloudAccessForMySQLRole；
-
-该 API 耗时可能到10s，客户端可能超时，如果调用 API 返回 InternalError ，请您调用DescribeDBInstanceInfo 确认后端加密是否开通成功。
-     */
-  async OpenDBInstanceEncryption(
-    req: OpenDBInstanceEncryptionRequest,
-    cb?: (error: string, rep: OpenDBInstanceEncryptionResponse) => void
-  ): Promise<OpenDBInstanceEncryptionResponse> {
-    return this.request("OpenDBInstanceEncryption", req, cb)
+   * 本接口(DeleteDatabase)用于在云数据库实例中删除数据库。
+   */
+  async DeleteDatabase(
+    req: DeleteDatabaseRequest,
+    cb?: (error: string, rep: DeleteDatabaseResponse) => void
+  ): Promise<DeleteDatabaseResponse> {
+    return this.request("DeleteDatabase", req, cb)
   }
 
   /**
@@ -780,13 +824,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口(DeleteAuditPolicy)用于删除用户的审计策略。
+   * 本接口(CreateDatabase)用于在云数据库实例中创建数据库。
    */
-  async DeleteAuditPolicy(
-    req: DeleteAuditPolicyRequest,
-    cb?: (error: string, rep: DeleteAuditPolicyResponse) => void
-  ): Promise<DeleteAuditPolicyResponse> {
-    return this.request("DeleteAuditPolicy", req, cb)
+  async CreateDatabase(
+    req: CreateDatabaseRequest,
+    cb?: (error: string, rep: CreateDatabaseResponse) => void
+  ): Promise<CreateDatabaseResponse> {
+    return this.request("CreateDatabase", req, cb)
   }
 
   /**
@@ -827,6 +871,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAccountPrivilegesResponse) => void
   ): Promise<DescribeAccountPrivilegesResponse> {
     return this.request("DescribeAccountPrivileges", req, cb)
+  }
+
+  /**
+   * 本接口(DescribeDataBackupOverview)用于查询用户在当前地域总的数据备份概览。
+   */
+  async DescribeDataBackupOverview(
+    req: DescribeDataBackupOverviewRequest,
+    cb?: (error: string, rep: DescribeDataBackupOverviewResponse) => void
+  ): Promise<DescribeDataBackupOverviewResponse> {
+    return this.request("DescribeDataBackupOverview", req, cb)
   }
 
   /**
@@ -900,13 +954,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 该接口（DeleteParamTemplate）用于删除参数模板，全地域公共参数Region均为ap-guangzhou。
+   * 删除审计规则模版
    */
-  async DeleteParamTemplate(
-    req: DeleteParamTemplateRequest,
-    cb?: (error: string, rep: DeleteParamTemplateResponse) => void
-  ): Promise<DeleteParamTemplateResponse> {
-    return this.request("DeleteParamTemplate", req, cb)
+  async DeleteAuditRuleTemplates(
+    req: DeleteAuditRuleTemplatesRequest,
+    cb?: (error: string, rep: DeleteAuditRuleTemplatesResponse) => void
+  ): Promise<DeleteAuditRuleTemplatesResponse> {
+    return this.request("DeleteAuditRuleTemplates", req, cb)
   }
 
   /**
@@ -917,6 +971,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeBackupsResponse) => void
   ): Promise<DescribeBackupsResponse> {
     return this.request("DescribeBackups", req, cb)
+  }
+
+  /**
+   * 查询数据库代理详情信息
+   */
+  async DescribeCdbProxyInfo(
+    req: DescribeCdbProxyInfoRequest,
+    cb?: (error: string, rep: DescribeCdbProxyInfoResponse) => void
+  ): Promise<DescribeCdbProxyInfoResponse> {
+    return this.request("DescribeCdbProxyInfo", req, cb)
   }
 
   /**
@@ -1018,13 +1082,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口(CreateDatabase)用于在云数据库实例中创建数据库。
+   * 本接口(DeleteAuditPolicy)用于删除用户的审计策略。
    */
-  async CreateDatabase(
-    req: CreateDatabaseRequest,
-    cb?: (error: string, rep: CreateDatabaseResponse) => void
-  ): Promise<CreateDatabaseResponse> {
-    return this.request("CreateDatabase", req, cb)
+  async DeleteAuditPolicy(
+    req: DeleteAuditPolicyRequest,
+    cb?: (error: string, rep: DeleteAuditPolicyResponse) => void
+  ): Promise<DeleteAuditPolicyResponse> {
+    return this.request("DeleteAuditPolicy", req, cb)
   }
 
   /**
@@ -1357,13 +1421,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询数据库代理详情信息
+   * 获取审计实例列表
    */
-  async DescribeCdbProxyInfo(
-    req: DescribeCdbProxyInfoRequest,
-    cb?: (error: string, rep: DescribeCdbProxyInfoResponse) => void
-  ): Promise<DescribeCdbProxyInfoResponse> {
-    return this.request("DescribeCdbProxyInfo", req, cb)
+  async DescribeAuditInstanceList(
+    req: DescribeAuditInstanceListRequest,
+    cb?: (error: string, rep: DescribeAuditInstanceListResponse) => void
+  ): Promise<DescribeAuditInstanceListResponse> {
+    return this.request("DescribeAuditInstanceList", req, cb)
   }
 
   /**
@@ -1604,6 +1668,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 修改审计规则模板
+   */
+  async ModifyAuditRuleTemplates(
+    req: ModifyAuditRuleTemplatesRequest,
+    cb?: (error: string, rep: ModifyAuditRuleTemplatesResponse) => void
+  ): Promise<ModifyAuditRuleTemplatesResponse> {
+    return this.request("ModifyAuditRuleTemplates", req, cb)
+  }
+
+  /**
    * 本接口(ModifyAccountPassword)用于修改云数据库账户的密码。
    */
   async ModifyAccountPassword(
@@ -1662,6 +1736,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteAuditLogFileResponse) => void
   ): Promise<DeleteAuditLogFileResponse> {
     return this.request("DeleteAuditLogFile", req, cb)
+  }
+
+  /**
+   * 查询审计规则模板信息
+   */
+  async DescribeAuditRuleTemplates(
+    req: DescribeAuditRuleTemplatesRequest,
+    cb?: (error: string, rep: DescribeAuditRuleTemplatesResponse) => void
+  ): Promise<DescribeAuditRuleTemplatesResponse> {
+    return this.request("DescribeAuditRuleTemplates", req, cb)
   }
 
   /**
@@ -1727,6 +1811,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询规则模板变更记录
+   */
+  async DescribeAuditRuleTemplateModifyHistory(
+    req: DescribeAuditRuleTemplateModifyHistoryRequest,
+    cb?: (error: string, rep: DescribeAuditRuleTemplateModifyHistoryResponse) => void
+  ): Promise<DescribeAuditRuleTemplateModifyHistoryResponse> {
+    return this.request("DescribeAuditRuleTemplateModifyHistory", req, cb)
+  }
+
+  /**
    * 主实例创建数据库代理
    */
   async CreateCdbProxy(
@@ -1754,6 +1848,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: SwitchCDBProxyResponse) => void
   ): Promise<SwitchCDBProxyResponse> {
     return this.request("SwitchCDBProxy", req, cb)
+  }
+
+  /**
+   * 本接口(ModifyAuditService)用于修改云数据库审计日志保存时长、审计规则等服务配置
+   */
+  async ModifyAuditService(
+    req: ModifyAuditServiceRequest,
+    cb?: (error: string, rep: ModifyAuditServiceResponse) => void
+  ): Promise<ModifyAuditServiceResponse> {
+    return this.request("ModifyAuditService", req, cb)
   }
 
   /**
@@ -1856,6 +1960,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeSupportedPrivilegesResponse) => void
   ): Promise<DescribeSupportedPrivilegesResponse> {
     return this.request("DescribeSupportedPrivileges", req, cb)
+  }
+
+  /**
+   * 该接口（DeleteParamTemplate）用于删除参数模板，全地域公共参数Region均为ap-guangzhou。
+   */
+  async DeleteParamTemplate(
+    req: DeleteParamTemplateRequest,
+    cb?: (error: string, rep: DeleteParamTemplateResponse) => void
+  ): Promise<DeleteParamTemplateResponse> {
+    return this.request("DeleteParamTemplate", req, cb)
   }
 
   /**
