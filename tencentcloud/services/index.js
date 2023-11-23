@@ -222,6 +222,8 @@ var hasim_1 = require("./hasim");
 Object.defineProperty(exports, "hasim", { enumerable: true, get: function () { return hasim_1.hasim; } });
 var hcm_1 = require("./hcm");
 Object.defineProperty(exports, "hcm", { enumerable: true, get: function () { return hcm_1.hcm; } });
+var hunyuan_1 = require("./hunyuan");
+Object.defineProperty(exports, "hunyuan", { enumerable: true, get: function () { return hunyuan_1.hunyuan; } });
 var iai_1 = require("./iai");
 Object.defineProperty(exports, "iai", { enumerable: true, get: function () { return iai_1.iai; } });
 var ic_1 = require("./ic");
