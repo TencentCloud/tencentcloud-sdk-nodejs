@@ -16,33 +16,34 @@ export interface CreatePlanForZoneResponse {
     RequestId?: string;
 }
 /**
- * DownloadL7Logs请求参数结构体
+ * DeployConfigGroupVersion请求参数结构体
  */
-export interface DownloadL7LogsRequest {
+export interface DeployConfigGroupVersionRequest {
     /**
-     * 开始时间。
+     * 站点 ID。
      */
-    StartTime: string;
+    ZoneId: string;
     /**
-     * 结束时间。
+     * 环境 ID。请填写版本需要发布到的环境 ID。
      */
-    EndTime: string;
+    EnvId: string;
     /**
-     * 站点ID集合，此参数必填。
+     * 需要发布的版本信息。可以同时变更多个不同配置组的版本，每个配置组一次仅支持变更一个版本。
      */
-    ZoneIds?: Array<string>;
+    ConfigGroupVersionInfos: Array<ConfigGroupVersionInfo>;
     /**
-     * 子域名集合，不填默认选择全部子域名。
+     * 变更说明。用于描述此次变更的内容、原因，最大支持 100 个字符。
      */
-    Domains?: Array<string>;
+    Description: string;
+}
+/**
+ * DescribeEnvironments请求参数结构体
+ */
+export interface DescribeEnvironmentsRequest {
     /**
-     * 分页查询的限制数目，默认值为 20，最大查询条目为 300。
+     * 站点 ID。
      */
-    Limit?: number;
-    /**
-     * 分页的偏移量，默认值为 0。
-     */
-    Offset?: number;
+    ZoneId: string;
 }
 /**
  * 智能压缩配置。
@@ -567,6 +568,23 @@ export interface DeleteApplicationProxyRequest {
     ProxyId: string;
 }
 /**
+ * DescribeConfigGroupVersionDetail返回参数结构体
+ */
+export interface DescribeConfigGroupVersionDetailResponse {
+    /**
+     * 版本信息。
+     */
+    ConfigGroupVersionInfo?: ConfigGroupVersionInfo;
+    /**
+     * 版本文件的内容。以 JSON 格式返回。
+     */
+    Content?: string;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * 加速域名源站信息。
  */
 export interface OriginDetail {
@@ -1021,32 +1039,22 @@ export interface ExceptUserRuleScope {
     SkipConditions?: Array<SkipCondition>;
 }
 /**
- * ModifyAliasDomain请求参数结构体
+ * DescribeDeployHistory请求参数结构体
  */
-export interface ModifyAliasDomainRequest {
+export interface DescribeDeployHistoryRequest {
     /**
      * 站点 ID。
      */
     ZoneId: string;
     /**
-     * 别称域名名称。
+     * 环境 ID。
      */
-    AliasName: string;
+    EnvId: string;
     /**
-     * 目标域名名称。
+     * 过滤条件，Filters.Values 的上限为 20，详细的过滤条件如下：
+  <li>record-id：按照发布记录 ID 进行过滤进行过滤。</li>
      */
-    TargetName: string;
-    /**
-     * 证书配置，取值有：
-  <li> none：不配置；</li>
-  <li> hosting：SSL托管证书；</li>
-  <li> apply：申请免费证书。</li>不填写保持原有配置。
-     */
-    CertType?: string;
-    /**
-     * 当 CertType 取值为 hosting 时填入相应证书 ID。
-     */
-    CertId?: Array<string>;
+    Filters?: Array<AdvancedFilter>;
 }
 /**
  * DescribeAvailablePlans请求参数结构体
@@ -1431,6 +1439,17 @@ export interface DeleteOriginGroupRequest {
     GroupId?: string;
 }
 /**
+ * 图片优化配置。
+ */
+export interface ImageOptimize {
+    /**
+     * 开关，取值有：
+  <li>on：开启；</li>
+  <li>off：关闭。</li>
+     */
+    Switch: string;
+}
+/**
  * 别称域名信息。
  */
 export interface AliasDomain {
@@ -1469,6 +1488,21 @@ export interface AliasDomain {
      * 别称域名修改时间。
      */
     ModifiedOn: string;
+}
+/**
+ * WebSocket配置
+ */
+export interface WebSocket {
+    /**
+     * WebSocket 超时时间配置开关，取值有：
+  <li>on：使用Timeout作为WebSocket超时时间；</li>
+  <li>off：平台仍支持WebSocket连接，此时使用系统默认的15秒为超时时间。</li>
+     */
+    Switch: string;
+    /**
+     * 超时时间，单位为秒，最大超时时间120秒。
+     */
+    Timeout?: number;
 }
 /**
  * 精准防护条件
@@ -2203,30 +2237,34 @@ export interface Quic {
     Switch: string;
 }
 /**
- * Ipv6访问配置
+ * DescribeConfigGroupVersionDetail请求参数结构体
  */
-export interface Ipv6 {
+export interface DescribeConfigGroupVersionDetailRequest {
     /**
-     * Ipv6 访问功能配置，取值有：
-  <li>on：开启Ipv6访问功能；</li>
-  <li>off：关闭Ipv6访问功能。</li>
+     * 站点 ID。
      */
-    Switch: string;
+    ZoneId: string;
+    /**
+     * 版本 ID。
+     */
+    VersionId: string;
 }
 /**
- * WebSocket配置
+ * DownloadL7Logs返回参数结构体
  */
-export interface WebSocket {
+export interface DownloadL7LogsResponse {
     /**
-     * WebSocket 超时时间配置开关，取值有：
-  <li>on：使用Timeout作为WebSocket超时时间；</li>
-  <li>off：平台仍支持WebSocket连接，此时使用系统默认的15秒为超时时间。</li>
+     * 查询结果的总条数。
      */
-    Switch: string;
+    TotalCount?: number;
     /**
-     * 超时时间，单位为秒，最大超时时间120秒。
+     * 七层离线日志数据列表。
      */
-    Timeout?: number;
+    Data?: Array<L7OfflineLog>;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * ModifyAccelerationDomain请求参数结构体
@@ -2303,17 +2341,33 @@ export interface DescribeContentQuotaResponse {
     RequestId?: string;
 }
 /**
- * Top类数据记录
+ * DownloadL7Logs请求参数结构体
  */
-export interface TopDataRecord {
+export interface DownloadL7LogsRequest {
     /**
-     * 查询维度值。
+     * 开始时间。
      */
-    TypeKey: string;
+    StartTime: string;
     /**
-     * top数据排行。
+     * 结束时间。
      */
-    DetailData: Array<TopDetailData>;
+    EndTime: string;
+    /**
+     * 站点ID集合，此参数必填。
+     */
+    ZoneIds?: Array<string>;
+    /**
+     * 子域名集合，不填默认选择全部子域名。
+     */
+    Domains?: Array<string>;
+    /**
+     * 分页查询的限制数目，默认值为 20，最大查询条目为 300。
+     */
+    Limit?: number;
+    /**
+     * 分页的偏移量，默认值为 0。
+     */
+    Offset?: number;
 }
 /**
  * ACL配置
@@ -3535,15 +3589,45 @@ export interface BindZoneToPlanRequest {
     PlanId: string;
 }
 /**
- * 安全类型配置项。
+ * 环境信息。
  */
-export interface SecurityType {
+export interface EnvInfo {
     /**
-     * 安全类型开关，取值为：
-  <li> on：开启；</li>
-  <li> off：关闭。</li>
+     * 环境 ID。
      */
-    Switch: string;
+    EnvId?: string;
+    /**
+     * 环境类型，取值有：
+  <li>production: 生产环境；</li><li>staging: 测试环境。</li>
+     */
+    EnvType?: string;
+    /**
+     * 环境状态，取值有：
+  <li>creating：创建中；</li>
+  <li>running：稳定运行中，可进行版本变更；</li>
+  <li>version_deploying：版本部署中，不能进行新的变更。</li>
+     */
+    Status?: string;
+    /**
+     * 当前环境的配置生效范围：
+  <li>当 EnvType 取值为 production 时，该参数值为 ["ALL"]，代表全网生效；</li>
+  <li>当 EnvType 取值为 staging 时，会返回测试节点 IP，可用于绑定 host 测试。</li>
+     */
+    Scope?: Array<string>;
+    /**
+     * 当前环境中各配置组实际生效的版本，根据 Status 的取值有以下两种情况：
+  <li>当 Status 取值为 version_deploying 时，本字段返回的值为执行变更动作之前生效的版本，即新版本部署期间，实际生效的版本为执行变更动作之前的版本；</li>
+  <li>当 Status 取值为 running 时，本字段返回的值即为当前实际生效的版本。</li>
+     */
+    CurrentConfigGroupVersionInfos?: Array<ConfigGroupVersionInfo>;
+    /**
+     * 创建时间。时间为世界标准时间（UTC）， 遵循 ISO 8601 标准的日期和时间格式。
+     */
+    CreateTime?: string;
+    /**
+     * 更新时间。时间为世界标准时间（UTC）， 遵循 ISO 8601 标准的日期和时间格式。
+     */
+    UpdateTime?: string;
 }
 /**
  * 源站防护IP白名单
@@ -3762,6 +3846,19 @@ export interface ModifyRuleResponse {
      * 规则 ID。
      */
     RuleId?: string;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * CreateConfigGroupVersion返回参数结构体
+ */
+export interface CreateConfigGroupVersionResponse {
+    /**
+     * 版本 ID。
+     */
+    VersionId?: string;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -4307,15 +4404,21 @@ export interface DescribeTimingL7AnalysisDataResponse {
     RequestId?: string;
 }
 /**
- * 图片优化配置。
+ * DescribeConfigGroupVersions返回参数结构体
  */
-export interface ImageOptimize {
+export interface DescribeConfigGroupVersionsResponse {
     /**
-     * 开关，取值有：
-  <li>on：开启；</li>
-  <li>off：关闭。</li>
+     * 版本总数。
      */
-    Switch: string;
+    TotalCount?: number;
+    /**
+     * 版本信息列表。
+     */
+    ConfigGroupVersionInfos?: Array<ConfigGroupVersionInfo>;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * DescribeApplicationProxies请求参数结构体
@@ -4630,6 +4733,23 @@ export interface TopEntry {
     Value: Array<TopEntryValue>;
 }
 /**
+ * DescribeEnvironments返回参数结构体
+ */
+export interface DescribeEnvironmentsResponse {
+    /**
+     * 环境总数。
+     */
+    TotalCount?: number;
+    /**
+     * 环境列表。
+     */
+    EnvInfos?: Array<EnvInfo>;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * 自定义名字服务器 IP 信息
  */
 export interface VanityNameServersIps {
@@ -4848,6 +4968,39 @@ export interface SubRule {
     Actions: Array<Action>;
 }
 /**
+ * 配置组版本发布记录详情。
+ */
+export interface DeployRecord {
+    /**
+     * 发布版本的详细信息。
+     */
+    ConfigGroupVersionInfos?: Array<ConfigGroupVersionInfo>;
+    /**
+     * 发布时间。时间为世界标准时间（UTC）， 遵循 ISO 8601 标准的日期和时间格式。
+     */
+    DeployTime?: string;
+    /**
+     * 发布状态，取值有：
+  <li> deploying ：发布中；</li>
+  <li>failure ：发布失败；</li>
+  <li>success： 发布成功。</li>
+     */
+    Status?: string;
+    /**
+     * 发布结果信息。
+     */
+    Message?: string;
+    /**
+     * 发布记录 ID。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RecordId?: string;
+    /**
+     * 变更说明。
+     */
+    Description?: string;
+}
+/**
  * https 服务端证书配置
  */
 export interface CertificateInfo {
@@ -4974,6 +5127,44 @@ export interface TimingDataItem {
      * 具体数值。
      */
     Value: number;
+}
+/**
+ * 配置组版本信息。
+ */
+export interface ConfigGroupVersionInfo {
+    /**
+     * 版本 ID。
+     */
+    VersionId: string;
+    /**
+     * 版本号。
+     */
+    VersionNumber?: string;
+    /**
+     * 配置组 ID。
+     */
+    GroupId?: string;
+    /**
+     * 配置组类型。取值有：
+  <li>l7_acceleration ：七层加速配置组。</li>
+  <li>edge_functions ：边缘函数配置组。</li>
+     */
+    GroupType?: string;
+    /**
+     * 版本描述。
+     */
+    Description?: string;
+    /**
+     * 版本状态，取值有：
+  <li>creating：创建中；</li>
+  <li>inactive：未生效；</li>
+  <li>active：已生效。</li>
+     */
+    Status?: string;
+    /**
+     * 版本创建时间。时间为世界标准时间（UTC）， 遵循 ISO 8601 标准的日期和时间格式。
+     */
+    CreateTime?: string;
 }
 /**
  * CreateApplicationProxy请求参数结构体
@@ -5732,6 +5923,17 @@ export interface AccelerateType {
     Switch: string;
 }
 /**
+ * Ipv6访问配置
+ */
+export interface Ipv6 {
+    /**
+     * Ipv6 访问功能配置，取值有：
+  <li>on：开启Ipv6访问功能；</li>
+  <li>off：关闭Ipv6访问功能。</li>
+     */
+    Switch: string;
+}
+/**
  * DescribeAliasDomains返回参数结构体
  */
 export interface DescribeAliasDomainsResponse {
@@ -5825,6 +6027,17 @@ export interface DeleteZoneRequest {
     ZoneId: string;
 }
 /**
+ * 安全类型配置项。
+ */
+export interface SecurityType {
+    /**
+     * 安全类型开关，取值为：
+  <li> on：开启；</li>
+  <li> off：关闭。</li>
+     */
+    Switch: string;
+}
+/**
  * Bot 规则，下列规则ID可参考接口 DescribeBotManagedRules返回的ID信息
  */
 export interface BotManagedRule {
@@ -5891,6 +6104,32 @@ export interface TopDetailData {
      * 字段值。
      */
     Value: number;
+}
+/**
+ * DescribeConfigGroupVersions请求参数结构体
+ */
+export interface DescribeConfigGroupVersionsRequest {
+    /**
+     * 站点 ID。
+     */
+    ZoneId: string;
+    /**
+     * 配置组 ID。
+     */
+    GroupId: string;
+    /**
+     * 过滤条件，Filters.Values 的上限为 20，该参数不填写时，返回所选配置组下的所有版本信息。详细的过滤条件如下：
+  <li>version-id：按照版本 ID 进行过滤；</li>
+     */
+    Filters?: Array<AdvancedFilter>;
+    /**
+     * 分页查询偏移量。默认值为 0。
+     */
+    Offset?: number;
+    /**
+     * 分页查询限制数目。默认值为 20，最大值为 100。
+     */
+    Limit?: number;
 }
 /**
  * DescribeOriginGroup请求参数结构体
@@ -6213,6 +6452,34 @@ export interface RewriteAction {
     Parameters: Array<RuleRewriteActionParams>;
 }
 /**
+ * ModifyAliasDomain请求参数结构体
+ */
+export interface ModifyAliasDomainRequest {
+    /**
+     * 站点 ID。
+     */
+    ZoneId: string;
+    /**
+     * 别称域名名称。
+     */
+    AliasName: string;
+    /**
+     * 目标域名名称。
+     */
+    TargetName: string;
+    /**
+     * 证书配置，取值有：
+  <li> none：不配置；</li>
+  <li> hosting：SSL托管证书；</li>
+  <li> apply：申请免费证书。</li>不填写保持原有配置。
+     */
+    CertType?: string;
+    /**
+     * 当 CertType 取值为 hosting 时填入相应证书 ID。
+     */
+    CertId?: Array<string>;
+}
+/**
  * CheckCnameStatus请求参数结构体
  */
 export interface CheckCnameStatusRequest {
@@ -6224,6 +6491,19 @@ export interface CheckCnameStatusRequest {
      * 加速域名列表。
      */
     RecordNames: Array<string>;
+}
+/**
+ * Top类数据记录
+ */
+export interface TopDataRecord {
+    /**
+     * 查询维度值。
+     */
+    TypeKey: string;
+    /**
+     * top数据排行。
+     */
+    DetailData: Array<TopDetailData>;
 }
 /**
  * DeleteAliasDomain请求参数结构体
@@ -6436,21 +6716,25 @@ export interface PrivateParameter {
     Value: string;
 }
 /**
- * DownloadL7Logs返回参数结构体
+ * CreateConfigGroupVersion请求参数结构体
  */
-export interface DownloadL7LogsResponse {
+export interface CreateConfigGroupVersionRequest {
     /**
-     * 查询结果的总条数。
+     * 站点 ID。
      */
-    TotalCount?: number;
+    ZoneId: string;
     /**
-     * 七层离线日志数据列表。
+     * 待新建版本的配置组 ID。
      */
-    Data?: Array<L7OfflineLog>;
+    GroupId: string;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     * 待导入的配置内容。要求采用 JSON 格式，按照 UTF-8 方式进行编码。配置文件内容可参考下方示例。
      */
-    RequestId?: string;
+    Content: string;
+    /**
+     * 版本描述，可输入最大长度为 50 个字符，可以通过本字段填写该版本的使用场景等。
+     */
+    Description?: string;
 }
 /**
  * 用户自定义规则
@@ -6869,6 +7153,19 @@ export interface AccelerationDomainCertificate {
     List?: Array<CertificateInfo>;
 }
 /**
+ * DeployConfigGroupVersion返回参数结构体
+ */
+export interface DeployConfigGroupVersionResponse {
+    /**
+     * 发布记录 ID。
+     */
+    RecordId?: string;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * DescribeSecurityTemplateBindings请求参数结构体
  */
 export interface DescribeSecurityTemplateBindingsRequest {
@@ -6907,6 +7204,23 @@ export interface AlgDetectResult {
   <li>longdelay：（长时间）等待后响应。</li>
      */
     Action?: string;
+}
+/**
+ * DescribeDeployHistory返回参数结构体
+ */
+export interface DescribeDeployHistoryResponse {
+    /**
+     * 发布记录总数。
+     */
+    TotalCount?: number;
+    /**
+     * 发布记录详情。
+     */
+    Records?: Array<DeployRecord>;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * CacheKey中包含请求参数

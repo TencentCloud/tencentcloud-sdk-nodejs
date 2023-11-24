@@ -2315,6 +2315,11 @@ export interface GetFunctionResponse {
      */
     TraceEnable?: string;
     /**
+     * 镜像配置
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ImageConfig?: ImageConfig;
+    /**
      * HTTP函数支持的访问协议。当前支持WebSockets协议。
   注意：此字段可能返回 null，表示取不到有效值。
      */
@@ -2324,6 +2329,16 @@ export interface GetFunctionResponse {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     ProtocolParams?: ProtocolParams;
+    /**
+     * 是否开启DNS缓存
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DnsCache?: string;
+    /**
+     * 内网访问配置
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IntranetConfig?: IntranetConfigOut;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -3137,6 +3152,22 @@ export interface NamespaceUsage {
     TotalAllocatedProvisionedMem: number;
 }
 /**
+ * 内网配置
+ */
+export interface IntranetConfigOut {
+    /**
+     * 是否启用固定内网IP
+  ENABLE 为启用
+  DISABLE 为不启用
+     */
+    IpFixed?: string;
+    /**
+     * 若已启用固定内网IP，则该字段返回使用的IP列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IpAddress?: Array<string>;
+}
+/**
  * ListAliases请求参数结构体
  */
 export interface ListAliasesRequest {
@@ -3280,9 +3311,9 @@ export interface ImageConfig {
     ContainerImageAccelerate?: boolean;
     /**
      * 镜像函数端口设置
+  默认值: 9000
   -1: 无端口镜像函数
-  0: 默认端口，当前默认端口是9000
-  其他: 特殊端口
+  其他: 取值范围 0 ~ 65535
   注意：此字段可能返回 null，表示取不到有效值。
      */
     ImagePort?: number;

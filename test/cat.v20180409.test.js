@@ -68,9 +68,9 @@ it("cat.v20180409.DescribeNodes", async function () {
     }
 })
 
-it("cat.v20180409.DescribeProbeNodes", async function () {
+it("cat.v20180409.DescribeInstantTasks", async function () {
     try {
-       const data = await client.DescribeProbeNodes({})
+       const data = await client.DescribeInstantTasks({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -91,6 +91,16 @@ it("cat.v20180409.UpdateProbeTaskConfigurationList", async function () {
 it("cat.v20180409.CreateProbeTasks", async function () {
     try {
        const data = await client.CreateProbeTasks({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cat.v20180409.DescribeProbeNodes", async function () {
+    try {
+       const data = await client.DescribeProbeNodes({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

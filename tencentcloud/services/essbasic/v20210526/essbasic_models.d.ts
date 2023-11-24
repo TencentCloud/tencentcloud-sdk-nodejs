@@ -2242,7 +2242,7 @@ export interface AutoSignConfig {
      * 设置用户开通自动签时是否绑定个人自动签账号许可。
   
   <ul><li>**0**: (默认) 使用个人自动签账号许可进行开通，个人自动签账号许可有效期1年，注: `不可解绑释放更换他人`</li>
-  </ul>
+  <li>**1**: 不绑定自动签账号许可开通，后续使用合同份额进行合同发起</li></ul>
      */
     LicenseType?: number;
 }
@@ -2381,7 +2381,8 @@ export interface ChannelCancelUserAutoSignEnableUrlRequest {
      */
     Operator: UserInfo;
     /**
-     * 自动签场景: E_PRESCRIPTION_AUTO_SIGN 电子处方
+     * 自动签使用的场景值, 可以选择的场景值如下:
+  <ul><li> **E_PRESCRIPTION_AUTO_SIGN** :  电子处方场景</li><li> **OTHER** :  通用场景</li></ul>
      */
     SceneKey: string;
     /**
@@ -2976,9 +2977,7 @@ export interface ChannelCreateUserAutoSignSealUrlRequest {
     Agent: Agent;
     /**
      * 自动签使用的场景值, 可以选择的场景值如下:
-  <ul><li> **E_PRESCRIPTION_AUTO_SIGN** :  电子处方场景</li></ul>
-  
-  注: `现在仅支持电子处方场景`
+  <ul><li> **E_PRESCRIPTION_AUTO_SIGN** :  电子处方场景</li><li> **OTHER** :  通用场景</li></ul>
      */
     SceneKey: string;
     /**
@@ -3107,9 +3106,7 @@ export interface ChannelCreateUserAutoSignEnableUrlRequest {
     Agent: Agent;
     /**
      * 自动签使用的场景值, 可以选择的场景值如下:
-  <ul><li> **E_PRESCRIPTION_AUTO_SIGN** :  电子处方场景</li></ul>
-  
-  注: `现在仅支持电子处方场景`
+  <ul><li> **E_PRESCRIPTION_AUTO_SIGN** :  电子处方场景</li><li> **OTHER** :  通用场景</li></ul>
      */
     SceneKey: string;
     /**
@@ -3130,7 +3127,7 @@ export interface ChannelCreateUserAutoSignEnableUrlRequest {
     /**
      * 是否通知开通方，通知类型:
   <ul><li>默认不设置为不通知开通方</li>
-  <li>**SMS** :  短信通知 ,如果需要短信通知则NotifyAddress填写对方的手机号</li><ul>
+  <li>**SMS** :  短信通知 ,如果需要短信通知则NotifyAddress填写对方的手机号</li></ul>
      */
     NotifyType?: string;
     /**
@@ -3632,6 +3629,7 @@ export interface FlowInfo {
     Deadline: number;
     /**
      * 用户配置的合同模板ID，会基于此模板创建合同文档，为32位字符串。
+  如果使用模板发起接口，此参数为必填。
   
   可以通过<a href="https://qian.tencent.com/developers/partnerApis/accounts/CreateConsoleLoginUrl" target="_blank">生成子客登录链接</a>登录企业控制台, 在**企业模板**中得到合同模板ID。
      */
@@ -4106,7 +4104,7 @@ export interface CreateSignUrlsRequest {
     Mobile?: string;
     /**
      * 证件类型，支持以下类型
-  <ul><li>ID_CARD : 居民身份证(默认值)</li>
+  <ul><li>ID_CARD : 居民身份证</li>
   <li>HONGKONG_AND_MACAO : 港澳居民来往内地通行证</li>
   <li>HONGKONG_MACAO_AND_TAIWAN : 港澳台居民居住证(格式同居民身份证)</li></ul>
      */
@@ -4820,9 +4818,7 @@ export interface ChannelDescribeUserAutoSignStatusRequest {
     Agent: Agent;
     /**
      * 自动签使用的场景值, 可以选择的场景值如下:
-  <ul><li> **E_PRESCRIPTION_AUTO_SIGN** : 电子处方场景</li></ul>
-  
-  注: `现在仅支持电子处方场景`
+  <ul><li> **E_PRESCRIPTION_AUTO_SIGN** :  电子处方场景</li><li> **OTHER** :  通用场景</li></ul>
      */
     SceneKey: string;
     /**
@@ -5133,7 +5129,7 @@ export interface ChannelDisableUserAutoSignRequest {
     Agent: Agent;
     /**
      * 自动签使用的场景值, 可以选择的场景值如下:
-  <ul><li> **E_PRESCRIPTION_AUTO_SIGN** 电子处方</li></ul>
+  <ul><li> **E_PRESCRIPTION_AUTO_SIGN** :  电子处方场景</li><li> **OTHER** :  通用场景</li></ul>
      */
     SceneKey: string;
     /**

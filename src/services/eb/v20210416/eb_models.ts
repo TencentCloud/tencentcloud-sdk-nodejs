@@ -465,7 +465,21 @@ export interface Extraction {
 /**
  * Data Transfer Service参数
  */
-export type DTSParams = null
+export interface DTSParams {
+  /**
+   * Consumer Group Name
+   */
+  ConsumerGroupName: string
+  /**
+   * 账户名
+   */
+  Account: string
+  /**
+   * 密码
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Password: string
+}
 
 /**
  * CreateTarget返回参数结构体
@@ -651,6 +665,11 @@ export interface ConnectionDescription {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DTSParams?: DTSParams
+  /**
+   * tdmq参数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TDMQParams?: TDMQParams
 }
 
 /**
@@ -1294,6 +1313,22 @@ export interface UpdateEventBusResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * TDMQ参数详情
+ */
+export interface TDMQParams {
+  /**
+   * 集群类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ClusterType?: string
+  /**
+   * 集群支撑网接入点
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ClusterEndPoint?: string
 }
 
 /**

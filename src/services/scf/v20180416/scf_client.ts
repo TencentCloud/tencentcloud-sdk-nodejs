@@ -146,6 +146,7 @@ import {
   PutProvisionedConcurrencyConfigRequest,
   Function,
   NamespaceUsage,
+  IntranetConfigOut,
   ListAliasesRequest,
   EipOutConfig,
   Alias,

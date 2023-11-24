@@ -89,6 +89,7 @@ import {
   CheckTransformationRequest,
   UpdateConnectionResponse,
   UpdateEventBusResponse,
+  TDMQParams,
   GetEventBusResponse,
   DeleteRuleResponse,
   DescribeLogTagValueRequest,

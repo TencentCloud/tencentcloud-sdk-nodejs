@@ -68,9 +68,9 @@ it("trtc.v20190722.DescribeCallDetailInfo", async function () {
     }
 })
 
-it("trtc.v20190722.StopMCUMixTranscode", async function () {
+it("trtc.v20190722.DescribeStreamIngest", async function () {
     try {
-       const data = await client.StopMCUMixTranscode({})
+       const data = await client.DescribeStreamIngest({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -88,9 +88,29 @@ it("trtc.v20190722.DescribeTRTCMarketScaleMetricData", async function () {
     }
 })
 
+it("trtc.v20190722.StopStreamIngest", async function () {
+    try {
+       const data = await client.StopStreamIngest({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("trtc.v20190722.StartMCUMixTranscodeByStrRoomId", async function () {
     try {
        const data = await client.StartMCUMixTranscodeByStrRoomId({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("trtc.v20190722.StartStreamIngest", async function () {
+    try {
+       const data = await client.StartStreamIngest({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -141,6 +161,16 @@ it("trtc.v20190722.DescribeTRTCRealTimeScaleData", async function () {
 it("trtc.v20190722.RemoveUser", async function () {
     try {
        const data = await client.RemoveUser({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("trtc.v20190722.StopMCUMixTranscode", async function () {
+    try {
+       const data = await client.StopMCUMixTranscode({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

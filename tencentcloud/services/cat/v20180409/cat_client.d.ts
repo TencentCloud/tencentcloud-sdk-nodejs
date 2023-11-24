@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeNodesRequest, SuspendProbeTaskResponse, DescribeProbeMetricDataResponse, DescribeDetailedSingleProbeDataRequest, DescribeProbeTasksResponse, UpdateProbeTaskAttributesResponse, DeleteProbeTaskRequest, DescribeDetailedSingleProbeDataResponse, SuspendProbeTaskRequest, DescribeProbeMetricDataRequest, UpdateProbeTaskAttributesRequest, DescribeProbeNodesResponse, UpdateProbeTaskConfigurationListRequest, CreateProbeTasksRequest, DescribeProbeTasksRequest, ResumeProbeTaskResponse, DeleteProbeTaskResponse, CreateProbeTasksResponse, ResumeProbeTaskRequest, DescribeProbeNodesRequest, DescribeNodesResponse, UpdateProbeTaskConfigurationListResponse } from "./cat_models";
+import { DescribeNodesRequest, SuspendProbeTaskResponse, DescribeInstantTasksResponse, DescribeDetailedSingleProbeDataRequest, DescribeProbeTasksResponse, UpdateProbeTaskAttributesResponse, DeleteProbeTaskRequest, DescribeDetailedSingleProbeDataResponse, SuspendProbeTaskRequest, DescribeProbeMetricDataRequest, UpdateProbeTaskAttributesRequest, DescribeProbeNodesResponse, DescribeInstantTasksRequest, UpdateProbeTaskConfigurationListRequest, CreateProbeTasksRequest, DescribeProbeTasksRequest, ResumeProbeTaskResponse, DeleteProbeTaskResponse, CreateProbeTasksResponse, ResumeProbeTaskRequest, DescribeProbeNodesRequest, DescribeNodesResponse, DescribeProbeMetricDataResponse, UpdateProbeTaskConfigurationListResponse } from "./cat_models";
 /**
  * cat client
  * @class
@@ -28,9 +28,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeNodes(req: DescribeNodesRequest, cb?: (error: string, rep: DescribeNodesResponse) => void): Promise<DescribeNodesResponse>;
     /**
-     * 查询拨测节点
+     * 获取历史即时拨测任务
      */
-    DescribeProbeNodes(req: DescribeProbeNodesRequest, cb?: (error: string, rep: DescribeProbeNodesResponse) => void): Promise<DescribeProbeNodesResponse>;
+    DescribeInstantTasks(req: DescribeInstantTasksRequest, cb?: (error: string, rep: DescribeInstantTasksResponse) => void): Promise<DescribeInstantTasksResponse>;
     /**
      * 批量更新拨测任务配置
      */
@@ -39,6 +39,10 @@ export declare class Client extends AbstractClient {
      * 批量创建拨测任务
      */
     CreateProbeTasks(req: CreateProbeTasksRequest, cb?: (error: string, rep: CreateProbeTasksResponse) => void): Promise<CreateProbeTasksResponse>;
+    /**
+     * 查询拨测节点
+     */
+    DescribeProbeNodes(req: DescribeProbeNodesRequest, cb?: (error: string, rep: DescribeProbeNodesResponse) => void): Promise<DescribeProbeNodesResponse>;
     /**
      * 根据时间范围、任务ID、运营商等条件查询单次拨测详情数据
      */

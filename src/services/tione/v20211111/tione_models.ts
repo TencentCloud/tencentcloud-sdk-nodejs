@@ -4718,6 +4718,10 @@ DISABLE_NOTIFY_AND_MANUAL_RENEW：手动续费(取消自动续费)且到期不�
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SpecFeatures?: Array<string>
+  /**
+   * 纳管cvmid
+   */
+  CvmInstanceId?: string
 }
 
 /**

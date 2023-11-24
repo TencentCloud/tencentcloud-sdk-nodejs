@@ -25,16 +25,18 @@ import {
   TaskResult,
   SuspendProbeTaskResponse,
   ProbeTaskBasicConfiguration,
-  DescribeProbeMetricDataResponse,
+  DescribeInstantTasksResponse,
   DescribeDetailedSingleProbeDataRequest,
   DescribeProbeTasksResponse,
   UpdateProbeTaskAttributesResponse,
+  SingleInstantTask,
   DeleteProbeTaskRequest,
   DescribeDetailedSingleProbeDataResponse,
   SuspendProbeTaskRequest,
   DescribeProbeMetricDataRequest,
   UpdateProbeTaskAttributesRequest,
   DescribeProbeNodesResponse,
+  DescribeInstantTasksRequest,
   UpdateProbeTaskConfigurationListRequest,
   CreateProbeTasksRequest,
   ProbeTask,
@@ -48,6 +50,7 @@ import {
   NodeDefine,
   Tag,
   DescribeNodesResponse,
+  DescribeProbeMetricDataResponse,
   UpdateProbeTaskConfigurationListResponse,
   DetailedSingleDataDefine,
 } from "./cat_models"
@@ -112,13 +115,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询拨测节点
+   * 获取历史即时拨测任务
    */
-  async DescribeProbeNodes(
-    req: DescribeProbeNodesRequest,
-    cb?: (error: string, rep: DescribeProbeNodesResponse) => void
-  ): Promise<DescribeProbeNodesResponse> {
-    return this.request("DescribeProbeNodes", req, cb)
+  async DescribeInstantTasks(
+    req: DescribeInstantTasksRequest,
+    cb?: (error: string, rep: DescribeInstantTasksResponse) => void
+  ): Promise<DescribeInstantTasksResponse> {
+    return this.request("DescribeInstantTasks", req, cb)
   }
 
   /**
@@ -139,6 +142,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateProbeTasksResponse) => void
   ): Promise<CreateProbeTasksResponse> {
     return this.request("CreateProbeTasks", req, cb)
+  }
+
+  /**
+   * 查询拨测节点
+   */
+  async DescribeProbeNodes(
+    req: DescribeProbeNodesRequest,
+    cb?: (error: string, rep: DescribeProbeNodesResponse) => void
+  ): Promise<DescribeProbeNodesResponse> {
+    return this.request("DescribeProbeNodes", req, cb)
   }
 
   /**

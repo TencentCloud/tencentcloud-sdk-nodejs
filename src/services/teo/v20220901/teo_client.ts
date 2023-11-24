@@ -19,7 +19,8 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   CreatePlanForZoneResponse,
-  DownloadL7LogsRequest,
+  DeployConfigGroupVersionRequest,
+  DescribeEnvironmentsRequest,
   Compression,
   DeleteRulesRequest,
   ExceptUserRuleCondition,
@@ -41,6 +42,7 @@ import {
   DescribePrefetchTasksResponse,
   AdvancedFilter,
   DeleteApplicationProxyRequest,
+  DescribeConfigGroupVersionDetailResponse,
   OriginDetail,
   DescribeDDoSAttackDataResponse,
   DescribeZoneSettingRequest,
@@ -58,7 +60,7 @@ import {
   DeleteAccelerationDomainsRequest,
   DescribeApplicationProxiesResponse,
   ExceptUserRuleScope,
-  ModifyAliasDomainRequest,
+  DescribeDeployHistoryRequest,
   DescribeAvailablePlansRequest,
   OriginInfo,
   Tag,
@@ -81,7 +83,9 @@ import {
   BindZoneToPlanResponse,
   ExceptConfig,
   DeleteOriginGroupRequest,
+  ImageOptimize,
   AliasDomain,
+  WebSocket,
   AclCondition,
   DescribeAliasDomainsRequest,
   SkipCondition,
@@ -102,12 +106,12 @@ import {
   ClientIpHeader,
   DescribeDDoSAttackTopDataRequest,
   Quic,
-  Ipv6,
-  WebSocket,
+  DescribeConfigGroupVersionDetailRequest,
+  DownloadL7LogsResponse,
   ModifyAccelerationDomainRequest,
   DescribeRulesRequest,
   DescribeContentQuotaResponse,
-  TopDataRecord,
+  DownloadL7LogsRequest,
   AclConfig,
   ModifyZoneSettingResponse,
   AlgDetectJS,
@@ -153,7 +157,7 @@ import {
   NoCache,
   DescribeDefaultCertificatesRequest,
   BindZoneToPlanRequest,
-  SecurityType,
+  EnvInfo,
   IPWhitelist,
   DDoS,
   CreateZoneRequest,
@@ -161,6 +165,7 @@ import {
   DescribeTimingL7CacheDataRequest,
   Task,
   ModifyRuleResponse,
+  CreateConfigGroupVersionResponse,
   AscriptionInfo,
   VerifyOwnershipResponse,
   RuleItem,
@@ -178,7 +183,7 @@ import {
   CachePrefresh,
   DescribePurgeTasksRequest,
   DescribeTimingL7AnalysisDataResponse,
-  ImageOptimize,
+  DescribeConfigGroupVersionsResponse,
   DescribeApplicationProxiesRequest,
   DescribeContentQuotaRequest,
   BotPortraitRule,
@@ -192,6 +197,7 @@ import {
   CreateRuleRequest,
   TemplateConfig,
   TopEntry,
+  DescribeEnvironmentsResponse,
   VanityNameServersIps,
   NsVerification,
   SlowPostConfig,
@@ -200,11 +206,13 @@ import {
   CreateApplicationProxyRuleResponse,
   RateLimitUserRule,
   SubRule,
+  DeployRecord,
   CertificateInfo,
   CreatePlanForZoneRequest,
   ModifyAliasDomainStatusRequest,
   BindSecurityTemplateToEntityRequest,
   TimingDataItem,
+  ConfigGroupVersionInfo,
   CreateApplicationProxyRequest,
   CC,
   IntelligenceRuleItem,
@@ -240,13 +248,16 @@ import {
   CreateOriginGroupResponse,
   ModifyApplicationProxyRuleStatusRequest,
   AccelerateType,
+  Ipv6,
   DescribeAliasDomainsResponse,
   CreateAccelerationDomainRequest,
   FollowOrigin,
   DeleteZoneRequest,
+  SecurityType,
   BotManagedRule,
   NormalAction,
   TopDetailData,
+  DescribeConfigGroupVersionsRequest,
   DescribeOriginGroupRequest,
   ModifyApplicationProxyRuleResponse,
   DescribeZoneSettingResponse,
@@ -265,7 +276,9 @@ import {
   ModifyAliasDomainResponse,
   EntityStatus,
   RewriteAction,
+  ModifyAliasDomainRequest,
   CheckCnameStatusRequest,
+  TopDataRecord,
   DeleteAliasDomainRequest,
   CnameStatus,
   DeleteAccelerationDomainsResponse,
@@ -275,7 +288,7 @@ import {
   CreatePurgeTaskRequest,
   Resource,
   PrivateParameter,
-  DownloadL7LogsResponse,
+  CreateConfigGroupVersionRequest,
   AclUserRule,
   Quota,
   CreateOriginGroupRequest,
@@ -291,8 +304,10 @@ import {
   OriginGroup,
   ModifySecurityIPGroupRequest,
   AccelerationDomainCertificate,
+  DeployConfigGroupVersionResponse,
   DescribeSecurityTemplateBindingsRequest,
   AlgDetectResult,
+  DescribeDeployHistoryResponse,
   QueryString,
   DefaultServerCertInfo,
   CreateSharedCNAMERequest,
@@ -441,6 +456,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 在版本管理模式下，用于查询生产/测试环境的版本发布历史。版本管理功能内测中，当前仅白名单开放。
+   */
+  async DescribeDeployHistory(
+    req: DescribeDeployHistoryRequest,
+    cb?: (error: string, rep: DescribeDeployHistoryResponse) => void
+  ): Promise<DescribeDeployHistoryResponse> {
+    return this.request("DescribeDeployHistory", req, cb)
+  }
+
+  /**
    * 规则引擎创建规则。
    */
   async CreateRule(
@@ -451,13 +476,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 为未购买套餐的站点购买套餐
+   * 在版本管理模式下，用于创建指定配置组的新版本。版本管理功能内测中，当前仅白名单开放。
    */
-  async CreatePlanForZone(
-    req: CreatePlanForZoneRequest,
-    cb?: (error: string, rep: CreatePlanForZoneResponse) => void
-  ): Promise<CreatePlanForZoneResponse> {
-    return this.request("CreatePlanForZone", req, cb)
+  async CreateConfigGroupVersion(
+    req: CreateConfigGroupVersionRequest,
+    cb?: (error: string, rep: CreateConfigGroupVersionResponse) => void
+  ): Promise<CreateConfigGroupVersionResponse> {
+    return this.request("CreateConfigGroupVersion", req, cb)
   }
 
   /**
@@ -635,6 +660,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 在版本管理模式下，用于查询指定配置组的版本列表。版本管理功能内测中，当前仅白名单开放。
+   */
+  async DescribeConfigGroupVersions(
+    req: DescribeConfigGroupVersionsRequest,
+    cb?: (error: string, rep: DescribeConfigGroupVersionsResponse) => void
+  ): Promise<DescribeConfigGroupVersionsResponse> {
+    return this.request("DescribeConfigGroupVersions", req, cb)
+  }
+
+  /**
    * 修改源站组配置，新提交的源站记录将会覆盖原有源站组中的源站记录。
    */
   async ModifyOriginGroup(
@@ -662,6 +697,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateApplicationProxyRuleResponse) => void
   ): Promise<CreateApplicationProxyRuleResponse> {
     return this.request("CreateApplicationProxyRule", req, cb)
+  }
+
+  /**
+   * 本接口（DescribeOverviewL7Data）用于查询七层监控类时序流量数据。此接口待废弃，请使用 <a href="https://cloud.tencent.com/document/product/1552/80648">DescribeTimingL7AnalysisData</a> 接口。
+   */
+  async DescribeOverviewL7Data(
+    req: DescribeOverviewL7DataRequest,
+    cb?: (error: string, rep: DescribeOverviewL7DataResponse) => void
+  ): Promise<DescribeOverviewL7DataResponse> {
+    return this.request("DescribeOverviewL7Data", req, cb)
   }
 
   /**
@@ -752,6 +797,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DownloadL7LogsResponse) => void
   ): Promise<DownloadL7LogsResponse> {
     return this.request("DownloadL7Logs", req, cb)
+  }
+
+  /**
+   * 在版本管理模式下，用于查询环境信息，可获取环境 ID、类型、当前生效版本等。版本管理功能内测中，当前仅白名单开放。
+   */
+  async DescribeEnvironments(
+    req: DescribeEnvironmentsRequest,
+    cb?: (error: string, rep: DescribeEnvironmentsResponse) => void
+  ): Promise<DescribeEnvironmentsResponse> {
+    return this.request("DescribeEnvironments", req, cb)
   }
 
   /**
@@ -885,13 +940,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（DescribeOverviewL7Data）用于查询七层监控类时序流量数据。此接口待废弃，请使用 <a href="https://cloud.tencent.com/document/product/1552/80648">DescribeTimingL7AnalysisData</a> 接口。
+   * 本接口（DescribeDDoSAttackEvent）用于查询DDoS攻击事件列表。
    */
-  async DescribeOverviewL7Data(
-    req: DescribeOverviewL7DataRequest,
-    cb?: (error: string, rep: DescribeOverviewL7DataResponse) => void
-  ): Promise<DescribeOverviewL7DataResponse> {
-    return this.request("DescribeOverviewL7Data", req, cb)
+  async DescribeDDoSAttackEvent(
+    req: DescribeDDoSAttackEventRequest,
+    cb?: (error: string, rep: DescribeDDoSAttackEventResponse) => void
+  ): Promise<DescribeDDoSAttackEventResponse> {
+    return this.request("DescribeDDoSAttackEvent", req, cb)
   }
 
   /**
@@ -924,6 +979,16 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
     cb?: (error: string, rep: DescribeAliasDomainsResponse) => void
   ): Promise<DescribeAliasDomainsResponse> {
     return this.request("DescribeAliasDomains", req, cb)
+  }
+
+  /**
+   * 修改别称域名。
+   */
+  async ModifyAliasDomain(
+    req: ModifyAliasDomainRequest,
+    cb?: (error: string, rep: ModifyAliasDomainResponse) => void
+  ): Promise<ModifyAliasDomainResponse> {
+    return this.request("ModifyAliasDomain", req, cb)
   }
 
   /**
@@ -967,13 +1032,13 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
   }
 
   /**
-   * 本接口（DescribeDDoSAttackEvent）用于查询DDoS攻击事件列表。
+   * 在版本管理模式下，用于获取版本的详细信息，包括版本 ID、描述、状态、创建时间、所属配置组信息以及版本配置文件的内容。版本管理功能内测中，当前仅白名单开放。
    */
-  async DescribeDDoSAttackEvent(
-    req: DescribeDDoSAttackEventRequest,
-    cb?: (error: string, rep: DescribeDDoSAttackEventResponse) => void
-  ): Promise<DescribeDDoSAttackEventResponse> {
-    return this.request("DescribeDDoSAttackEvent", req, cb)
+  async DescribeConfigGroupVersionDetail(
+    req: DescribeConfigGroupVersionDetailRequest,
+    cb?: (error: string, rep: DescribeConfigGroupVersionDetailResponse) => void
+  ): Promise<DescribeConfigGroupVersionDetailResponse> {
+    return this.request("DescribeConfigGroupVersionDetail", req, cb)
   }
 
   /**
@@ -1007,13 +1072,23 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
   }
 
   /**
-   * 修改别称域名。
+   * 在版本管理模式下，用于版本发布，可通过 EnvId 将版本发布至测试环境或生产环境。版本管理功能内测中，当前仅白名单开放。
    */
-  async ModifyAliasDomain(
-    req: ModifyAliasDomainRequest,
-    cb?: (error: string, rep: ModifyAliasDomainResponse) => void
-  ): Promise<ModifyAliasDomainResponse> {
-    return this.request("ModifyAliasDomain", req, cb)
+  async DeployConfigGroupVersion(
+    req: DeployConfigGroupVersionRequest,
+    cb?: (error: string, rep: DeployConfigGroupVersionResponse) => void
+  ): Promise<DeployConfigGroupVersionResponse> {
+    return this.request("DeployConfigGroupVersion", req, cb)
+  }
+
+  /**
+   * 查询应用代理列表。
+   */
+  async DescribeApplicationProxies(
+    req: DescribeApplicationProxiesRequest,
+    cb?: (error: string, rep: DescribeApplicationProxiesResponse) => void
+  ): Promise<DescribeApplicationProxiesResponse> {
+    return this.request("DescribeApplicationProxies", req, cb)
   }
 
   /**
@@ -1027,12 +1102,12 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
   }
 
   /**
-   * 查询应用代理列表。
+   * 为未购买套餐的站点购买套餐
    */
-  async DescribeApplicationProxies(
-    req: DescribeApplicationProxiesRequest,
-    cb?: (error: string, rep: DescribeApplicationProxiesResponse) => void
-  ): Promise<DescribeApplicationProxiesResponse> {
-    return this.request("DescribeApplicationProxies", req, cb)
+  async CreatePlanForZone(
+    req: CreatePlanForZoneRequest,
+    cb?: (error: string, rep: CreatePlanForZoneResponse) => void
+  ): Promise<CreatePlanForZoneResponse> {
+    return this.request("CreatePlanForZone", req, cb)
   }
 }

@@ -50,22 +50,21 @@ export interface CreatePictureRequest {
 }
 
 /**
- * DescribeRelayUsage请求参数结构体
+ * 音频转码参数
  */
-export interface DescribeRelayUsageRequest {
+export interface AudioEncodeParams {
   /**
-   * 查询开始时间，格式为YYYY-MM-DD。
+   * 音频采样率，取值为[48000, 44100]，单位是Hz。
    */
-  StartTime: string
+  SampleRate: number
   /**
-   * 查询结束时间，格式为YYYY-MM-DD。
-单次查询统计区间最多不能超过31天。
+   * 音频声道数，取值范围[1,2]，1表示音频为单声道，2表示音频为双声道。
    */
-  EndTime: string
+  Channel: number
   /**
-   * TRTC的SdkAppId，和房间所对应的SdkAppId相同。如果没有这个参数，返回用户下全部实时音视频应用的汇总。
+   * 音频码率，取值范围[8,500]，单位为kbps。
    */
-  SdkAppId?: number
+  BitRate: number
 }
 
 /**
@@ -404,6 +403,32 @@ export interface DescribeTRTCRealTimeScaleMetricDataRequest {
 }
 
 /**
+ * 视频转码参数
+ */
+export interface VideoEncodeParams {
+  /**
+   * 宽。取值范围[0,1920]，单位为像素值。
+   */
+  Width: number
+  /**
+   * 高。取值范围[0,1080]，单位为像素值。
+   */
+  Height: number
+  /**
+   * 帧率。取值范围[1,60]，表示帧率可选范围为1到60fps。
+   */
+  Fps: number
+  /**
+   * 码率。取值范围[1,10000]，单位为kbps。
+   */
+  BitRate: number
+  /**
+   * gop。取值范围[1,2]，单位为秒。
+   */
+  Gop: number
+}
+
+/**
  * DescribeUserEvent返回参数结构体
  */
 export interface DescribeUserEventResponse {
@@ -672,6 +697,25 @@ export interface DescribeUserInfoRequest {
 范围：[1，100]。
    */
   PageSize?: number
+}
+
+/**
+ * DescribeRelayUsage请求参数结构体
+ */
+export interface DescribeRelayUsageRequest {
+  /**
+   * 查询开始时间，格式为YYYY-MM-DD。
+   */
+  StartTime: string
+  /**
+   * 查询结束时间，格式为YYYY-MM-DD。
+单次查询统计区间最多不能超过31天。
+   */
+  EndTime: string
+  /**
+   * TRTC的SdkAppId，和房间所对应的SdkAppId相同。如果没有这个参数，返回用户下全部实时音视频应用的汇总。
+   */
+  SdkAppId?: number
 }
 
 /**
@@ -1067,6 +1111,23 @@ export interface DescribeMixTranscodingUsageRequest {
 }
 
 /**
+ * DescribeStreamIngest返回参数结构体
+ */
+export interface DescribeStreamIngestResponse {
+  /**
+   * 任务的状态信息。
+InProgress：表示当前任务正在进行中。
+NotExist：表示当前任务不存在。
+示例值：InProgress
+   */
+  Status?: string
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 录制的音视频转码参数。
  */
 export interface MixTranscodeParams {
@@ -1078,6 +1139,20 @@ export interface MixTranscodeParams {
    * 录制音频转码参数，注意如果设置了这个参数，那么里面的字段都是必填的，没有默认值，如果不填这个参数，那么取值为默认值。
    */
   AudioParams?: AudioParams
+}
+
+/**
+ * StopStreamIngest请求参数结构体
+ */
+export interface StopStreamIngestRequest {
+  /**
+   * TRTC的SDKAppId，和任务的房间所对应的SDKAppId相同。
+   */
+  SdkAppId: number
+  /**
+   * 任务的唯一Id，在启动任务成功后会返回。
+   */
+  TaskId: string
 }
 
 /**
@@ -1548,6 +1623,51 @@ export interface DescribeRelayUsageResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * StartStreamIngest请求参数结构体
+ */
+export interface StartStreamIngestRequest {
+  /**
+   * TRTC的[SdkAppId](https://cloud.tencent.com/document/product/647/46351#sdkappid)，和录制的房间所对应的SdkAppId相同。
+   */
+  SdkAppId: number
+  /**
+   * TRTC的[RoomId](https://cloud.tencent.com/document/product/647/46351#roomid)，录制的TRTC房间所对应的RoomId。
+   */
+  RoomId: string
+  /**
+   * TRTC房间号的类型。
+【*注意】必须和录制的房间所对应的RoomId类型相同:
+0: 字符串类型的RoomId
+1: 32位整型的RoomId（默认）
+   */
+  RoomIdType: number
+  /**
+   * 拉流转推机器人的UserId，用于进房发起拉流转推任务。
+   */
+  UserId: string
+  /**
+   * 拉流转推机器人UserId对应的校验签名，即UserId和UserSig相当于机器人进房的登录密码，具体计算方法请参考TRTC计算[UserSig](https://cloud.tencent.com/document/product/647/45910#UserSig)的方案。
+   */
+  UserSig: string
+  /**
+   * 源流URL。示例值：https://a.b/test.mp4
+   */
+  SourceUrl: Array<string>
+  /**
+   * TRTC房间权限加密串，只有在TRTC控制台启用了高级权限控制的时候需要携带，在TRTC控制台如果开启高级权限控制后，TRTC 的后台服务系统会校验一个叫做 [PrivateMapKey] 的“权限票据”，权限票据中包含了一个加密后的 RoomId 和一个加密后的“权限位列表”。由于 PrivateMapKey 中包含 RoomId，所以只提供了 UserSig 没有提供 PrivateMapKey 时，并不能进入指定的房间。
+   */
+  PrivateMapKey?: string
+  /**
+   * 视频编码参数。可选，如果不填，保持原始流的参数。
+   */
+  VideoEncodeParams?: VideoEncodeParams
+  /**
+   * 音频编码参数。可选，如果不填，保持原始流的参数。
+   */
+  AudioEncodeParams?: AudioEncodeParams
 }
 
 /**
@@ -2367,6 +2487,20 @@ export interface CreateCloudRecordingResponse {
 }
 
 /**
+ * StartStreamIngest返回参数结构体
+ */
+export interface StartStreamIngestResponse {
+  /**
+   * 拉流转推的任务 ID。任务 ID 是对一次拉流转推生命周期过程的唯一标识，结束任务时会失去意义。任务 ID 需要业务保存下来，作为下次针对这个任务操作的参数。
+   */
+  TaskId?: string
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * StartMCUMixTranscode返回参数结构体
  */
 export interface StartMCUMixTranscodeResponse {
@@ -2663,6 +2797,16 @@ Exited：表示当前录制任务正在退出的过程中。
  * DismissRoom返回参数结构体
  */
 export interface DismissRoomResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * StopStreamIngest返回参数结构体
+ */
+export interface StopStreamIngestResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2977,6 +3121,20 @@ Hls 格式录制此参数不生效。
    * 指定录制主辅流，0：主流+辅流（默认）；1:主流；2:辅流。
    */
   MediaId?: number
+}
+
+/**
+ * DescribeStreamIngest请求参数结构体
+ */
+export interface DescribeStreamIngestRequest {
+  /**
+   * TRTC的SDKAppId，和任务的房间所对应的SDKAppId相同
+   */
+  SdkAppId: number
+  /**
+   * 任务的唯一Id，在启动任务成功后会返回。
+   */
+  TaskId: string
 }
 
 /**

@@ -180,6 +180,10 @@ export interface TaskConfig {
      * 演练标签信息，不填则默认取经验标签
      */
     Tags?: Array<TagWithCreate>;
+    /**
+     * 护栏处理方式，1--顺序回滚，2--演练暂停
+     */
+    PolicyDealType?: number;
 }
 /**
  * DeleteTask请求参数结构体
@@ -366,6 +370,11 @@ export interface Template {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     AlarmPolicy?: Array<string>;
+    /**
+     * 护栏处理方式，1--顺序回滚，2--演练暂停
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PolicyDealType?: number;
 }
 /**
  * DescribeTaskExecuteLogs请求参数结构体
@@ -911,6 +920,11 @@ export interface Task {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     VerifyId?: number;
+    /**
+     * 护栏处理方式，1--顺序回滚，2--演练暂停
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PolicyDealType?: number;
 }
 /**
  * 演练报告状态信息

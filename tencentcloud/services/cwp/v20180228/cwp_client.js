@@ -586,7 +586,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeWebHookReceiver", req, cb);
     }
     /**
-     *  用于设置新增主机自动开通专业防护配置。
+     * 用于设置新增主机自动开通专业防护配置。
      */
     async ModifyAutoOpenProVersionConfig(req, cb) {
         return this.request("ModifyAutoOpenProVersionConfig", req, cb);

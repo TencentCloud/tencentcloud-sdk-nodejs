@@ -774,21 +774,70 @@ export interface ContainerStdoutInfo {
     CustomLabels?: Array<string>;
 }
 /**
- * CheckFunction返回参数结构体
+ * 采集规则配置信息
  */
-export interface CheckFunctionResponse {
+export interface ConfigInfo {
     /**
-     * 失败错误码
+     * 采集规则配置ID
      */
-    ErrorCode?: number;
+    ConfigId?: string;
     /**
-     * 失败错误信息
+     * 采集规则配置名称
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    ErrorMsg?: string;
+    Name?: string;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     * 日志格式化方式
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    RequestId?: string;
+    LogFormat?: string;
+    /**
+     * 日志采集路径
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Path?: string;
+    /**
+     * 采集的日志类型，json_log代表json格式日志，delimiter_log代表分隔符格式日志，minimalist_log代表极简日志，multiline_log代表多行日志，fullregex_log代表完整正则，默认为minimalist_log
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    LogType?: string;
+    /**
+     * 提取规则，如果设置了ExtractRule，则必须设置LogType
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ExtractRule?: ExtractRuleInfo;
+    /**
+     * 采集黑名单路径列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ExcludePaths?: Array<ExcludePathInfo>;
+    /**
+     * 采集配置所属日志主题ID即TopicId
+     */
+    Output?: string;
+    /**
+     * 更新时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    UpdateTime?: string;
+    /**
+     * 创建时间
+     */
+    CreateTime?: string;
+    /**
+     * 用户自定义解析字符串
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    UserDefineRule?: string;
+    /**
+     * 高级采集配置。 Json字符串， Key/Value定义为如下：
+  - ClsAgentFileTimeout(超时属性), 取值范围: 大于等于0的整数， 0为不超时
+  - ClsAgentMaxDepth(最大目录深度)，取值范围: 大于等于0的整数
+  - ClsAgentParseFailMerge(合并解析失败日志)，取值范围: true或false
+  样例：{"ClsAgentFileTimeout":0,"ClsAgentMaxDepth":10,"ClsAgentParseFailMerge":true}
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AdvancedConfig?: string;
 }
 /**
  * ModifyAlarm返回参数结构体
@@ -1107,6 +1156,19 @@ export interface AlarmTargetInfo {
     EndTimeOffset?: number;
 }
 /**
+ * 告警分类信息
+ */
+export interface AlarmClassification {
+    /**
+     * 分类键
+     */
+    Key: string;
+    /**
+     * 分类值
+     */
+    Value: string;
+}
+/**
  * ScheduledSql的资源信息
  */
 export interface ScheduledSqlResouceInfo {
@@ -1126,6 +1188,23 @@ export interface ScheduledSqlResouceInfo {
      * 指标名称
      */
     MetricName?: string;
+    /**
+     * 指标名称
+  BizType为1时，优先使用MetricNames字段信息。多指标只能填充到MetricNames字段，单指标建议填充到MetricNames字段
+     */
+    MetricNames?: Array<string>;
+    /**
+     * 指标项
+     */
+    MetricLabels?: Array<string>;
+    /**
+     * 自定义时间
+     */
+    CustomTime?: string;
+    /**
+     * 自定义标签
+     */
+    CustomMetricLabels?: Array<MetricLabel>;
 }
 /**
  * 文件路径信息
@@ -1527,77 +1606,91 @@ export interface TopicInfo {
     /**
      * 日志集ID
      */
-    LogsetId: string;
+    LogsetId?: string;
     /**
      * 日志主题ID
      */
-    TopicId: string;
+    TopicId?: string;
     /**
      * 日志主题名称
      */
-    TopicName: string;
+    TopicName?: string;
     /**
      * 主题分区个数
      */
-    PartitionCount: number;
+    PartitionCount?: number;
     /**
      * 是否开启索引
      */
-    Index: boolean;
+    Index?: boolean;
     /**
      * 云产品标识，日志主题由其它云产品创建时，该字段会显示云产品名称，例如CDN、TKE
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    AssumerName: string;
+    AssumerName?: string;
     /**
      * 创建时间
      */
-    CreateTime: string;
+    CreateTime?: string;
     /**
      * 日主主题是否开启采集
      */
-    Status: boolean;
+    Status?: boolean;
     /**
      * 日志主题绑定的标签信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Tags: Array<Tag>;
+    Tags?: Array<Tag>;
     /**
      * 该主题是否开启自动分裂
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    AutoSplit: boolean;
+    AutoSplit?: boolean;
     /**
      * 若开启自动分裂的话，该主题能够允许的最大分区数
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    MaxSplitPartitions: number;
+    MaxSplitPartitions?: number;
     /**
      * 日主题的存储类型
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    StorageType: string;
+    StorageType?: string;
     /**
      * 生命周期，单位天，可取值范围1~3600。取值为3640时代表永久保存
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Period: number;
+    Period?: number;
     /**
      * 云产品二级标识，日志主题由其它云产品创建时，该字段会显示云产品名称及其日志类型的二级分类，例如TKE-Audit、TKE-Event。部分云产品仅有云产品标识(AssumerName)，无该字段。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SubAssumerName: string;
+    SubAssumerName?: string;
     /**
      * 日志主题描述
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Describes: string;
+    Describes?: string;
     /**
      * 开启日志沉降，热存储的生命周期， hotPeriod < Period。
   热存储为 hotPeriod, 冷存储则为 Period-hotPeriod。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    HotPeriod: number;
+    HotPeriod?: number;
+    /**
+     * 主题类型。
+  - 0: 日志主题
+  - 1: 指标主题
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    BizType?: number;
+    /**
+     * 免鉴权开关。
+  - false: 关闭
+  - true: 开启
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IsWebTracking?: boolean;
 }
 /**
  * DeleteDataTransform返回参数结构体
@@ -1828,6 +1921,10 @@ export interface ModifyAlarmRequest {
      */
     Status?: boolean;
     /**
+     * 是否开启告警策略。默认值为true
+     */
+    Enable?: boolean;
+    /**
      * 用户自定义告警内容
      */
     MessageTemplate?: string;
@@ -1848,11 +1945,22 @@ export interface ModifyAlarmRequest {
      */
     GroupTriggerCondition?: Array<string>;
     /**
+     * 标签描述列表，通过指定该参数可以同时绑定标签到相应的告警策略。最大支持10个标签键值对，并且不能有重复的键值对。
+     */
+    Tags?: Array<Tag>;
+    /**
      * 监控对象类型。0:执行语句共用监控对象; 1:每个执行语句单独选择监控对象。
-  <li> 当值为1时，AlarmTargets元素个数不能超过10个，AlarmTargets中的Number必须是从1开始的连续正整数，不能重复。
+  当值为1时，AlarmTargets元素个数不能超过10个，AlarmTargets中的Number必须是从1开始的连续正整数，不能重复。
   
      */
     MonitorObjectType?: number;
+    /**
+     * 告警附加分类信息列表。
+  Classifications元素个数不能超过20个。
+  Classifications元素的Key不能为空，不能重复，长度不能超过50个字符，符合正则 `^[a-z]([a-z0-9_]{0,49})$`。
+  Classifications元素的Value长度不能超过200个字符。
+     */
+    Classifications?: Array<AlarmClassification>;
 }
 /**
  * DescribeTopics返回参数结构体
@@ -2007,6 +2115,10 @@ export interface CreateAlarmRequest {
      */
     Status?: boolean;
     /**
+     * 是否开启告警策略。默认值为true
+     */
+    Enable?: boolean;
+    /**
      * 用户自定义告警内容
      */
     MessageTemplate?: string;
@@ -2043,6 +2155,16 @@ export interface CreateAlarmRequest {
   
      */
     MonitorObjectType?: number;
+    /**
+     * 告警附加分类信息列表。
+  
+  Classifications元素个数不能超过20个。
+  
+  Classifications元素的Key不能为空，不能重复，长度不能超过50个字符，字符规则 ^[a-z]([a-z0-9_]{0,49})$。
+  
+  Classifications元素的Value长度不能超过200个字符。
+     */
+    Classifications?: Array<AlarmClassification>;
 }
 /**
  * DeleteExport返回参数结构体
@@ -2703,7 +2825,7 @@ export interface CreateTopicRequest {
      */
     HotPeriod?: number;
     /**
-     * webtracking开关； false: 关闭 true： 开启
+     * 免鉴权开关； false: 关闭 true： 开启
      */
     IsWebTracking?: boolean;
 }
@@ -4034,70 +4156,21 @@ export interface DescribeLogContextResponse {
     RequestId?: string;
 }
 /**
- * 采集规则配置信息
+ * CheckFunction返回参数结构体
  */
-export interface ConfigInfo {
+export interface CheckFunctionResponse {
     /**
-     * 采集规则配置ID
+     * 失败错误码
      */
-    ConfigId?: string;
+    ErrorCode?: number;
     /**
-     * 采集规则配置名称
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 失败错误信息
      */
-    Name?: string;
+    ErrorMsg?: string;
     /**
-     * 日志格式化方式
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
-    LogFormat?: string;
-    /**
-     * 日志采集路径
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Path?: string;
-    /**
-     * 采集的日志类型，json_log代表json格式日志，delimiter_log代表分隔符格式日志，minimalist_log代表极简日志，multiline_log代表多行日志，fullregex_log代表完整正则，默认为minimalist_log
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    LogType?: string;
-    /**
-     * 提取规则，如果设置了ExtractRule，则必须设置LogType
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ExtractRule?: ExtractRuleInfo;
-    /**
-     * 采集黑名单路径列表
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ExcludePaths?: Array<ExcludePathInfo>;
-    /**
-     * 采集配置所属日志主题ID即TopicId
-     */
-    Output?: string;
-    /**
-     * 更新时间
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    UpdateTime?: string;
-    /**
-     * 创建时间
-     */
-    CreateTime?: string;
-    /**
-     * 用户自定义解析字符串
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    UserDefineRule?: string;
-    /**
-     * 高级采集配置。 Json字符串， Key/Value定义为如下：
-  - ClsAgentFileTimeout(超时属性), 取值范围: 大于等于0的整数， 0为不超时
-  - ClsAgentMaxDepth(最大目录深度)，取值范围: 大于等于0的整数
-  - ClsAgentParseFailMerge(合并解析失败日志)，取值范围: true或false
-  样例：{"ClsAgentFileTimeout":0,"ClsAgentMaxDepth":10,"ClsAgentParseFailMerge":true}
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    AdvancedConfig?: string;
+    RequestId?: string;
 }
 /**
  * DeleteExport请求参数结构体
@@ -4186,32 +4259,32 @@ export interface LogContextInfo {
     /**
      * 日志来源设备
      */
-    Source: string;
+    Source?: string;
     /**
      * 采集路径
      */
-    Filename: string;
+    Filename?: string;
     /**
      * 日志内容
      */
-    Content: string;
+    Content?: string;
     /**
      * 日志包序号
      */
-    PkgId: string;
+    PkgId?: string;
     /**
      * 日志包内一条日志的序号
      */
-    PkgLogId: number;
+    PkgLogId?: number;
     /**
      * 日志时间戳
      */
-    BTime: number;
+    BTime?: number;
     /**
      * 日志来源主机名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    HostName: string;
+    HostName?: string;
     /**
      * 原始日志(仅在日志创建索引异常时有值)
   注意：此字段可能返回 null，表示取不到有效值。
@@ -5136,6 +5209,21 @@ export interface NoticeReceiver {
      * 位序
      */
     Index?: number;
+}
+/**
+ * 过滤器
+ */
+export interface MetricLabel {
+    /**
+     * 指标名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Key: string;
+    /**
+     * 指标内容
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Value: string;
 }
 /**
  * ModifyTopic请求参数结构体

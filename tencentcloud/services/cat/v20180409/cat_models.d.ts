@@ -144,14 +144,18 @@ export interface ProbeTaskBasicConfiguration {
     TargetAddress: string;
 }
 /**
- * DescribeProbeMetricData返回参数结构体
+ * DescribeInstantTasks返回参数结构体
  */
-export interface DescribeProbeMetricDataResponse {
+export interface DescribeInstantTasksResponse {
     /**
-     * 返回指标 JSON 序列化后的字符串,具体如下所示：
-  "[{\"name\":\"task_navigate_request_gauge\",\"columns\":[\"time\",\"avg(first_screen_time) / 1000\"],\"values\":[[1641571200,6.756600000000001]],\"tags\":null}]"
+     * 任务
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    MetricSet?: string;
+    Tasks: Array<SingleInstantTask>;
+    /**
+     * 总数
+     */
+    Total: number;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -273,6 +277,43 @@ export interface UpdateProbeTaskAttributesResponse {
     RequestId?: string;
 }
 /**
+ * 单个即时拨测任务信息
+ */
+export interface SingleInstantTask {
+    /**
+     * 任务ID
+     */
+    TaskId: string;
+    /**
+     * 任务地址
+     */
+    TargetAddress: string;
+    /**
+     * 任务类型
+     */
+    TaskType: number;
+    /**
+     * 测试时间
+     */
+    ProbeTime: number;
+    /**
+     * 任务状态
+     */
+    Status: string;
+    /**
+     * 成功率
+     */
+    SuccessRate: number;
+    /**
+     * 节点数量
+     */
+    NodeCount: number;
+    /**
+     * 节点类型
+     */
+    TaskCategory: number;
+}
+/**
  * DeleteProbeTask请求参数结构体
  */
 export interface DeleteProbeTaskRequest {
@@ -374,23 +415,36 @@ export interface DescribeProbeNodesResponse {
     RequestId?: string;
 }
 /**
+ * DescribeInstantTasks请求参数结构体
+ */
+export interface DescribeInstantTasksRequest {
+    /**
+     * 数量
+     */
+    Limit: number;
+    /**
+     * 起始位置
+     */
+    Offset: number;
+}
+/**
  * UpdateProbeTaskConfigurationList请求参数结构体
  */
 export interface UpdateProbeTaskConfigurationListRequest {
     /**
-     * 任务 ID
+     * 任务 ID，如task-n1wchki8
      */
     TaskIds: Array<string>;
     /**
-     * 拨测节点
+     * 拨测节点，如10001，详细地区运营商拨测编号请联系云拨测。
      */
     Nodes: Array<string>;
     /**
-     * 拨测间隔
+     * 拨测间隔，如30，单位为分钟。
      */
     Interval: number;
     /**
-     * 拨测参数
+     * 拨测参数，详细参数配置可参考云拨测官网文档。
      */
     Parameters: string;
     /**
@@ -402,6 +456,10 @@ export interface UpdateProbeTaskConfigurationListRequest {
   需要与taskId对应
      */
     ResourceIDs?: Array<string>;
+    /**
+     * 拨测节点的IP类型，0-不限，1-IPv4，2-IPv6
+     */
+    NodeIpType?: number;
 }
 /**
  * CreateProbeTasks请求参数结构体
@@ -412,11 +470,11 @@ export interface CreateProbeTasksRequest {
      */
     BatchTasks: Array<ProbeTaskBasicConfiguration>;
     /**
-     * 任务类型
+     * 任务类型，如1、2、3、4、5、6、7；1-页面性能、2-文件上传、3-文件下载、4-端口性能、5-网络质量、6-音视频体验、7-域名whois
      */
     TaskType: number;
     /**
-     * 拨测节点
+     * 拨测节点，如10001，具体拨测地域运营商对应的拨测点编号可联系云拨测确认。
      */
     Nodes: Array<string>;
     /**
@@ -424,7 +482,7 @@ export interface CreateProbeTasksRequest {
      */
     Interval: number;
     /**
-     * 拨测参数
+     * 拨测参数，如{}，详细可参考云拨测官方文档。
      */
     Parameters: string;
     /**
@@ -442,17 +500,21 @@ export interface CreateProbeTasksRequest {
      */
     Tag?: Array<Tag>;
     /**
-     * 测试类型，包含定时测试与即时测试
+     * 测试类型，包含定时测试与即时测试。1-定时拨测，其它表示即时拨测。
      */
     ProbeType?: number;
     /**
-     * 插件类型
+     * 插件类型，如CDN，详情参考云拨测官方文档。
      */
     PluginSource?: string;
     /**
      * 客户端ID
      */
     ClientNum?: string;
+    /**
+     * 拨测点IP类型：0-不限制IP类型，1-IPv4，2-IPv6
+     */
+    NodeIpType?: number;
 }
 /**
  * 拨测任务
@@ -462,11 +524,11 @@ export interface ProbeTask {
      * 任务名
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Name: string;
+    Name?: string;
     /**
      * 任务 ID
      */
-    TaskId: string;
+    TaskId?: string;
     /**
      * 拨测类型
   <li>1 = 页面浏览</li>
@@ -478,19 +540,24 @@ export interface ProbeTask {
   
   即时拨测只支持页面浏览，网络质量，文件下载
      */
-    TaskType: number;
+    TaskType?: number;
     /**
      * 拨测节点列表
      */
-    Nodes: Array<string>;
+    Nodes?: Array<string>;
+    /**
+     * 拨测任务所选的拨测点IP类型，0-不限，1-IPv4，2-IPv6
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    NodeIpType?: number;
     /**
      * 拨测间隔
      */
-    Interval: number;
+    Interval?: number;
     /**
      * 拨测参数
      */
-    Parameters: string;
+    Parameters?: string;
     /**
      * 任务状态
   <li>1 = 创建中</li>
@@ -504,50 +571,50 @@ export interface ProbeTask {
   <li> 9 = 任务删除</li>
   <li> 10 = 定时任务暂停中 </li>
      */
-    Status: number;
+    Status?: number;
     /**
      * 目标地址
      */
-    TargetAddress: string;
+    TargetAddress?: string;
     /**
      * 付费模式
   <li>1 = 试用版本</li>
   <li> 2 = 付费版本 </li>
      */
-    PayMode: number;
+    PayMode?: number;
     /**
      * 订单状态
   <li>1 = 正常</li>
   <li> 2 = 欠费 </li>
      */
-    OrderState: number;
+    OrderState?: number;
     /**
      * 任务分类
   <li>1 = PC</li>
   <li> 2 = Mobile </li>
      */
-    TaskCategory: number;
+    TaskCategory?: number;
     /**
      * 创建时间
      */
-    CreatedAt: string;
+    CreatedAt?: string;
     /**
      * 定时任务cron表达式
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Cron: string;
+    Cron?: string;
     /**
      * 定时任务启动状态
   <li>1 = 定时任务表达式生效</li>
   <li> 2 = 定时任务表达式未生效（一般为任务手动暂停）</li>
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CronState: number;
+    CronState?: number;
     /**
      * 任务当前绑定的标签
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TagInfoList: Array<KeyValuePair>;
+    TagInfoList?: Array<KeyValuePair>;
 }
 /**
  * DescribeProbeTasks请求参数结构体
@@ -681,7 +748,7 @@ export interface CreateProbeTasksResponse {
     /**
      * 任务ID列表
      */
-    TaskIDs: Array<string>;
+    TaskIDs?: Array<string>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -865,6 +932,20 @@ export interface DescribeNodesResponse {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     NodeSet?: Array<NodeDefineExt>;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * DescribeProbeMetricData返回参数结构体
+ */
+export interface DescribeProbeMetricDataResponse {
+    /**
+     * 返回指标 JSON 序列化后的字符串,具体如下所示：
+  "[{\"name\":\"task_navigate_request_gauge\",\"columns\":[\"time\",\"avg(first_screen_time) / 1000\"],\"values\":[[1641571200,6.756600000000001]],\"tags\":null}]"
+     */
+    MetricSet?: string;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */

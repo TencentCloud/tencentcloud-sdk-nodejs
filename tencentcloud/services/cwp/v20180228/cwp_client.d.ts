@@ -380,7 +380,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeWebHookReceiver(req: DescribeWebHookReceiverRequest, cb?: (error: string, rep: DescribeWebHookReceiverResponse) => void): Promise<DescribeWebHookReceiverResponse>;
     /**
-     *  用于设置新增主机自动开通专业防护配置。
+     * 用于设置新增主机自动开通专业防护配置。
      */
     ModifyAutoOpenProVersionConfig(req: ModifyAutoOpenProVersionConfigRequest, cb?: (error: string, rep: ModifyAutoOpenProVersionConfigResponse) => void): Promise<ModifyAutoOpenProVersionConfigResponse>;
     /**

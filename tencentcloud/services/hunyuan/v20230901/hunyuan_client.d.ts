@@ -9,10 +9,16 @@ export declare class Client extends AbstractClient {
     constructor(clientConfig: ClientConfig);
     /**
      * 腾讯混元大模型高级版是由腾讯研发的大语言模型，具备强大的中文创作能力，复杂语境下的逻辑推理能力，以及可靠的任务执行能力。本接口为SSE协议。
+
+ 1.本接口暂不支持返回图片内容。
+ 2.默认单账号限制并发数为5路，如您有提高并发限制的需求请 [联系我们](https://cloud.tencent.com/act/event/Online_service) 。
      */
     ChatPro(req: ChatProRequest, cb?: (error: string, rep: ChatProResponse) => void): Promise<ChatProResponse>;
     /**
      * 腾讯混元大模型标准版是由腾讯研发的大语言模型，具备强大的中文创作能力，复杂语境下的逻辑推理能力，以及可靠的任务执行能力。本接口为SSE协议。
+
+ 1.本接口暂不支持返回图片内容。
+ 2.默认单账号限制并发数为5路，如您有提高并发限制的需求请 [联系我们](https://cloud.tencent.com/act/event/Online_service) 。
      */
     ChatStd(req: ChatStdRequest, cb?: (error: string, rep: ChatStdResponse) => void): Promise<ChatStdResponse>;
     /**

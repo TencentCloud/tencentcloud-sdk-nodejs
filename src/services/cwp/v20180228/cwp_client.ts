@@ -2254,7 +2254,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   *  用于设置新增主机自动开通专业防护配置。
+   * 用于设置新增主机自动开通专业防护配置。
    */
   async ModifyAutoOpenProVersionConfig(
     req: ModifyAutoOpenProVersionConfigRequest,

@@ -172,10 +172,10 @@ ver：可以忽略。
         return this.request("DescribeCallDetailInfo", req, cb);
     }
     /**
-     * 接口说明：结束云端混流
+     * 您可以查询转推任务的状态。
      */
-    async StopMCUMixTranscode(req, cb) {
-        return this.request("StopMCUMixTranscode", req, cb);
+    async DescribeStreamIngest(req, cb) {
+        return this.request("DescribeStreamIngest", req, cb);
     }
     /**
      * 查询TRTC监控仪表盘-数据大盘规模指标（会返回通话人数，通话房间数，峰值同时在线人数，峰值同时在线频道数）
@@ -189,6 +189,12 @@ peakCurrentUsers：峰值同时在线人数。
      */
     async DescribeTRTCMarketScaleMetricData(req, cb) {
         return this.request("DescribeTRTCMarketScaleMetricData", req, cb);
+    }
+    /**
+     * 停止一个拉流转推任务。
+     */
+    async StopStreamIngest(req, cb) {
+        return this.request("StopStreamIngest", req, cb);
     }
     /**
      * 接口说明：启动云端混流，并指定混流画面中各路画面的布局位置。
@@ -215,6 +221,12 @@ TRTC 的一个房间中可能会同时存在多路音视频流，您可以通过
      */
     async StartMCUMixTranscodeByStrRoomId(req, cb) {
         return this.request("StartMCUMixTranscodeByStrRoomId", req, cb);
+    }
+    /**
+     * 将一个在线媒体流推到TRTC房间。
+     */
+    async StartStreamIngest(req, cb) {
+        return this.request("StartStreamIngest", req, cb);
     }
     /**
      * 如果您需要在 [云端混流转码](https://cloud.tencent.com/document/product/647/16827) 时频繁删除自定义背景图或水印，可通过此接口删除已上传的图片。无需频繁删除图片的场景，建议直接在 [控制台 > 应用管理 > 素材管理](https://cloud.tencent.com/document/product/647/50769) 中操作。
@@ -257,6 +269,12 @@ xa0
      */
     async RemoveUser(req, cb) {
         return this.request("RemoveUser", req, cb);
+    }
+    /**
+     * 接口说明：结束云端混流
+     */
+    async StopMCUMixTranscode(req, cb) {
+        return this.request("StopMCUMixTranscode", req, cb);
     }
     /**
      * 成功开启录制后，可以使用此接口来更新录制任务。仅在录制任务进行时有效，录制退出后更新将会返回错误。更新操作是全量覆盖，并不是增量更新的模式，也就是说每次更新都需要携带全量的信息。

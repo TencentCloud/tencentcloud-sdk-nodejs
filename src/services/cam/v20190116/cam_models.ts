@@ -278,7 +278,8 @@ export interface GetRoleRequest {
  */
 export interface CreateServiceLinkedRoleRequest {
   /**
-   * 授权服务，附加了此角色的腾讯云服务主体。
+   * 填写此角色的腾讯云服务载体，具体可查询文档（角色载体）字段
+https://cloud.tencent.com/document/product/598/85165
    */
   QCSServiceName: Array<string>
   /**
@@ -2417,7 +2418,7 @@ export interface CreateServiceLinkedRoleResponse {
   /**
    * 角色ID
    */
-  RoleId: string
+  RoleId?: string
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

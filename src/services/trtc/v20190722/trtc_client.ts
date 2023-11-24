@@ -19,7 +19,7 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   CreatePictureRequest,
-  DescribeRelayUsageRequest,
+  AudioEncodeParams,
   DescribeTRTCMarketQualityMetricDataResponse,
   MixLayout,
   McuVideoParams,
@@ -33,6 +33,7 @@ import {
   AbnormalEvent,
   ScaleInfomation,
   DescribeTRTCRealTimeScaleMetricDataRequest,
+  VideoEncodeParams,
   DescribeUserEventResponse,
   VideoEncode,
   LayoutParams,
@@ -42,6 +43,7 @@ import {
   DescribeTRTCMarketScaleDataResponse,
   ModifyPictureRequest,
   DescribeUserInfoRequest,
+  DescribeRelayUsageRequest,
   WaterMarkParams,
   DescribeRecordStatisticResponse,
   StartMCUMixTranscodeByStrRoomIdResponse,
@@ -60,7 +62,9 @@ import {
   DescribeTRTCRealTimeQualityDataResponse,
   McuCustomCrop,
   DescribeMixTranscodingUsageRequest,
+  DescribeStreamIngestResponse,
   MixTranscodeParams,
+  StopStreamIngestRequest,
   DescribeTRTCMarketQualityDataResponse,
   SmallVideoLayoutParams,
   SubscribeStreamUserIds,
@@ -83,6 +87,7 @@ import {
   TrtcUsage,
   DescribeTRTCMarketScaleMetricDataRequest,
   DescribeRelayUsageResponse,
+  StartStreamIngestRequest,
   DescribeRecordingUsageResponse,
   StopMCUMixTranscodeRequest,
   ModifyPictureResponse,
@@ -119,6 +124,7 @@ import {
   RowValues,
   OneSdkAppIdTranscodeTimeUsagesInfo,
   CreateCloudRecordingResponse,
+  StartStreamIngestResponse,
   StartMCUMixTranscodeResponse,
   DescribeTrtcMcuTranscodeTimeResponse,
   DeleteCloudRecordingRequest,
@@ -135,6 +141,7 @@ import {
   StartMCUMixTranscodeByStrRoomIdRequest,
   DescribeCloudRecordingResponse,
   DismissRoomResponse,
+  StopStreamIngestResponse,
   MixUserInfo,
   EventMessage,
   DescribeTRTCMarketQualityDataRequest,
@@ -148,6 +155,7 @@ import {
   SeriesInfos,
   RemoveUserByStrRoomIdRequest,
   RecordParams,
+  DescribeStreamIngestRequest,
   DescribeTRTCMarketScaleMetricDataResponse,
   McuAudioParams,
   PresetLayoutConfig,
@@ -338,13 +346,13 @@ ver：可以忽略。
   }
 
   /**
-   * 接口说明：结束云端混流
+   * 您可以查询转推任务的状态。
    */
-  async StopMCUMixTranscode(
-    req: StopMCUMixTranscodeRequest,
-    cb?: (error: string, rep: StopMCUMixTranscodeResponse) => void
-  ): Promise<StopMCUMixTranscodeResponse> {
-    return this.request("StopMCUMixTranscode", req, cb)
+  async DescribeStreamIngest(
+    req: DescribeStreamIngestRequest,
+    cb?: (error: string, rep: DescribeStreamIngestResponse) => void
+  ): Promise<DescribeStreamIngestResponse> {
+    return this.request("DescribeStreamIngest", req, cb)
   }
 
   /**
@@ -362,6 +370,16 @@ peakCurrentUsers：峰值同时在线人数。
     cb?: (error: string, rep: DescribeTRTCMarketScaleMetricDataResponse) => void
   ): Promise<DescribeTRTCMarketScaleMetricDataResponse> {
     return this.request("DescribeTRTCMarketScaleMetricData", req, cb)
+  }
+
+  /**
+   * 停止一个拉流转推任务。
+   */
+  async StopStreamIngest(
+    req: StopStreamIngestRequest,
+    cb?: (error: string, rep: StopStreamIngestResponse) => void
+  ): Promise<StopStreamIngestResponse> {
+    return this.request("StopStreamIngest", req, cb)
   }
 
   /**
@@ -392,6 +410,16 @@ TRTC 的一个房间中可能会同时存在多路音视频流，您可以通过
     cb?: (error: string, rep: StartMCUMixTranscodeByStrRoomIdResponse) => void
   ): Promise<StartMCUMixTranscodeByStrRoomIdResponse> {
     return this.request("StartMCUMixTranscodeByStrRoomId", req, cb)
+  }
+
+  /**
+   * 将一个在线媒体流推到TRTC房间。
+   */
+  async StartStreamIngest(
+    req: StartStreamIngestRequest,
+    cb?: (error: string, rep: StartStreamIngestResponse) => void
+  ): Promise<StartStreamIngestResponse> {
+    return this.request("StartStreamIngest", req, cb)
   }
 
   /**
@@ -454,6 +482,16 @@ xa0
     cb?: (error: string, rep: RemoveUserResponse) => void
   ): Promise<RemoveUserResponse> {
     return this.request("RemoveUser", req, cb)
+  }
+
+  /**
+   * 接口说明：结束云端混流
+   */
+  async StopMCUMixTranscode(
+    req: StopMCUMixTranscodeRequest,
+    cb?: (error: string, rep: StopMCUMixTranscodeResponse) => void
+  ): Promise<StopMCUMixTranscodeResponse> {
+    return this.request("StopMCUMixTranscode", req, cb)
   }
 
   /**

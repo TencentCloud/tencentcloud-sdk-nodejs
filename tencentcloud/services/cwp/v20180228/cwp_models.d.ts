@@ -13270,6 +13270,10 @@ export interface ModifyAutoOpenProVersionConfigRequest {
      * 自动加购的订单是否自动续费,默认0 ,0关闭, 1开启
      */
     AutoRepurchaseRenewSwitch?: number;
+    /**
+     * 手动购买的订单是否自动续费,默认0, 0关闭 ,1 开启
+     */
+    RepurchaseRenewSwitch?: number;
 }
 /**
  * DescribeLogDeliveryKafkaOptions请求参数结构体
@@ -23895,75 +23899,79 @@ export interface DescribeLicenseGeneralResponse {
     /**
      * 总授权数 (包含隔离,过期等不可用状态)
      */
-    LicenseCnt: number;
+    LicenseCnt?: number;
     /**
      * 可用授权数
      */
-    AvailableLicenseCnt: number;
+    AvailableLicenseCnt?: number;
     /**
      * 可用专业版授权数(包含后付费).
      */
-    AvailableProVersionLicenseCnt: number;
+    AvailableProVersionLicenseCnt?: number;
     /**
      * 可用旗舰版授权数
      */
-    AvailableFlagshipVersionLicenseCnt: number;
+    AvailableFlagshipVersionLicenseCnt?: number;
     /**
      * 即将到期授权数 (15天内到期的)
      */
-    NearExpiryLicenseCnt: number;
+    NearExpiryLicenseCnt?: number;
     /**
      * 已到期授权数(不包含已删除的记录)
      */
-    ExpireLicenseCnt: number;
+    ExpireLicenseCnt?: number;
     /**
      * 自动升级开关状态,默认 false,  true 开启, false 关闭
      */
-    AutoOpenStatus: boolean;
+    AutoOpenStatus?: boolean;
     /**
      * PROVERSION_POSTPAY 专业版-后付费, PROVERSION_PREPAY 专业版-预付费, FLAGSHIP_PREPAY 旗舰版-预付费
      */
-    ProtectType: string;
+    ProtectType?: string;
     /**
      * 历史是否开通过自动升级开关
      */
-    IsOpenStatusHistory: boolean;
+    IsOpenStatusHistory?: boolean;
     /**
      * 已使用授权数
      */
-    UsedLicenseCnt: number;
+    UsedLicenseCnt?: number;
     /**
      * 未到期授权数
      */
-    NotExpiredLicenseCnt: number;
+    NotExpiredLicenseCnt?: number;
     /**
      * 旗舰版总授权数(有效订单)
      */
-    FlagshipVersionLicenseCnt: number;
+    FlagshipVersionLicenseCnt?: number;
     /**
      * 专业版总授权数(有效订单)
      */
-    ProVersionLicenseCnt: number;
+    ProVersionLicenseCnt?: number;
     /**
      * 普惠版总授权数(有效订单的授权数)
      */
-    CwpVersionLicenseCnt: number;
+    CwpVersionLicenseCnt?: number;
     /**
      * 可用惠普版授权数
      */
-    AvailableLHLicenseCnt: number;
+    AvailableLHLicenseCnt?: number;
     /**
      * 自动加购开关, true 开启, false 关闭
      */
-    AutoRepurchaseSwitch: boolean;
+    AutoRepurchaseSwitch?: boolean;
     /**
      * 自动加购订单是否自动续费 ,true 开启, false 关闭
      */
-    AutoRepurchaseRenewSwitch: boolean;
+    AutoRepurchaseRenewSwitch?: boolean;
     /**
      * 已销毁订单数
      */
-    DestroyOrderNum: number;
+    DestroyOrderNum?: number;
+    /**
+     * 是否自动续费开关,true 开启,false 关闭
+     */
+    RepurchaseRenewSwitch?: boolean;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */

@@ -104,16 +104,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyHostsCertificate", req, cb);
     }
     /**
+     * 在版本管理模式下，用于查询生产/测试环境的版本发布历史。版本管理功能内测中，当前仅白名单开放。
+     */
+    async DescribeDeployHistory(req, cb) {
+        return this.request("DescribeDeployHistory", req, cb);
+    }
+    /**
      * 规则引擎创建规则。
      */
     async CreateRule(req, cb) {
         return this.request("CreateRule", req, cb);
     }
     /**
-     * 为未购买套餐的站点购买套餐
+     * 在版本管理模式下，用于创建指定配置组的新版本。版本管理功能内测中，当前仅白名单开放。
      */
-    async CreatePlanForZone(req, cb) {
-        return this.request("CreatePlanForZone", req, cb);
+    async CreateConfigGroupVersion(req, cb) {
+        return this.request("CreateConfigGroupVersion", req, cb);
     }
     /**
      * 查询内容管理接口配额
@@ -222,6 +228,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeAccelerationDomains", req, cb);
     }
     /**
+     * 在版本管理模式下，用于查询指定配置组的版本列表。版本管理功能内测中，当前仅白名单开放。
+     */
+    async DescribeConfigGroupVersions(req, cb) {
+        return this.request("DescribeConfigGroupVersions", req, cb);
+    }
+    /**
      * 修改源站组配置，新提交的源站记录将会覆盖原有源站组中的源站记录。
      */
     async ModifyOriginGroup(req, cb) {
@@ -238,6 +250,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CreateApplicationProxyRule(req, cb) {
         return this.request("CreateApplicationProxyRule", req, cb);
+    }
+    /**
+     * 本接口（DescribeOverviewL7Data）用于查询七层监控类时序流量数据。此接口待废弃，请使用 <a href="https://cloud.tencent.com/document/product/1552/80648">DescribeTimingL7AnalysisData</a> 接口。
+     */
+    async DescribeOverviewL7Data(req, cb) {
+        return this.request("DescribeOverviewL7Data", req, cb);
     }
     /**
      * DescribePrefetchTasks 用于查询预热任务提交历史记录及执行进度，通过 CreatePrefetchTasks 接口提交的任务可通过此接口进行查询。
@@ -292,6 +310,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DownloadL7Logs(req, cb) {
         return this.request("DownloadL7Logs", req, cb);
+    }
+    /**
+     * 在版本管理模式下，用于查询环境信息，可获取环境 ID、类型、当前生效版本等。版本管理功能内测中，当前仅白名单开放。
+     */
+    async DescribeEnvironments(req, cb) {
+        return this.request("DescribeEnvironments", req, cb);
     }
     /**
      * 删除应用代理规则
@@ -372,10 +396,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteAliasDomain", req, cb);
     }
     /**
-     * 本接口（DescribeOverviewL7Data）用于查询七层监控类时序流量数据。此接口待废弃，请使用 <a href="https://cloud.tencent.com/document/product/1552/80648">DescribeTimingL7AnalysisData</a> 接口。
+     * 本接口（DescribeDDoSAttackEvent）用于查询DDoS攻击事件列表。
      */
-    async DescribeOverviewL7Data(req, cb) {
-        return this.request("DescribeOverviewL7Data", req, cb);
+    async DescribeDDoSAttackEvent(req, cb) {
+        return this.request("DescribeDDoSAttackEvent", req, cb);
     }
     /**
      * 将未绑定套餐的站点绑定到已有套餐
@@ -396,6 +420,12 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
      */
     async DescribeAliasDomains(req, cb) {
         return this.request("DescribeAliasDomains", req, cb);
+    }
+    /**
+     * 修改别称域名。
+     */
+    async ModifyAliasDomain(req, cb) {
+        return this.request("ModifyAliasDomain", req, cb);
     }
     /**
      * 修改加速域名信息
@@ -422,10 +452,10 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
         return this.request("CreateApplicationProxy", req, cb);
     }
     /**
-     * 本接口（DescribeDDoSAttackEvent）用于查询DDoS攻击事件列表。
+     * 在版本管理模式下，用于获取版本的详细信息，包括版本 ID、描述、状态、创建时间、所属配置组信息以及版本配置文件的内容。版本管理功能内测中，当前仅白名单开放。
      */
-    async DescribeDDoSAttackEvent(req, cb) {
-        return this.request("DescribeDDoSAttackEvent", req, cb);
+    async DescribeConfigGroupVersionDetail(req, cb) {
+        return this.request("DescribeConfigGroupVersionDetail", req, cb);
     }
     /**
      * 修改应用代理的状态
@@ -446,10 +476,16 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
         return this.request("DescribeTimingL7AnalysisData", req, cb);
     }
     /**
-     * 修改别称域名。
+     * 在版本管理模式下，用于版本发布，可通过 EnvId 将版本发布至测试环境或生产环境。版本管理功能内测中，当前仅白名单开放。
      */
-    async ModifyAliasDomain(req, cb) {
-        return this.request("ModifyAliasDomain", req, cb);
+    async DeployConfigGroupVersion(req, cb) {
+        return this.request("DeployConfigGroupVersion", req, cb);
+    }
+    /**
+     * 查询应用代理列表。
+     */
+    async DescribeApplicationProxies(req, cb) {
+        return this.request("DescribeApplicationProxies", req, cb);
     }
     /**
      * 修改应用代理规则的状态
@@ -458,10 +494,10 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
         return this.request("ModifyApplicationProxyRuleStatus", req, cb);
     }
     /**
-     * 查询应用代理列表。
+     * 为未购买套餐的站点购买套餐
      */
-    async DescribeApplicationProxies(req, cb) {
-        return this.request("DescribeApplicationProxies", req, cb);
+    async CreatePlanForZone(req, cb) {
+        return this.request("CreatePlanForZone", req, cb);
     }
 }
 exports.Client = Client;

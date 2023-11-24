@@ -4563,6 +4563,10 @@ export interface Instance {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     SpecFeatures?: Array<string>;
+    /**
+     * 纳管cvmid
+     */
+    CvmInstanceId?: string;
 }
 /**
  * DescribeBillingSpecs返回参数结构体

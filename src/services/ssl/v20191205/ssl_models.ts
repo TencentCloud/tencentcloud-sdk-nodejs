@@ -536,7 +536,7 @@ null = 用户上传证书（没有套餐类型），
    */
   IsVulnerability?: boolean
   /**
-   * 是否可重颁发证书。
+   * 是否可续费。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RenewAble?: boolean
@@ -615,6 +615,46 @@ null = 用户上传证书（没有套餐类型），
 注意：此字段可能返回 null，表示取不到有效值。
    */
   HostingRenewCertId?: string
+  /**
+   * 存在的续费证书ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HasRenewOrder?: string
+  /**
+   * 重颁发证书原证书是否删除
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ReplaceOriCertIsDelete?: boolean
+  /**
+   * 是否即将过期， 证书即将到期的30天内为即将过期
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsExpiring?: boolean
+  /**
+   * DV证书添加验证截止时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DVAuthDeadline?: string
+  /**
+   * 域名验证通过时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ValidationPassedTime?: string
+  /**
+   * 证书关联的多域名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CertSANs?: Array<string>
+  /**
+   * 域名验证驳回信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AwaitingValidationMsg?: string
+  /**
+   * 是否允许下载
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AllowDownload?: boolean
 }
 
 /**
@@ -625,32 +665,37 @@ export interface CertificateExtra {
    * 证书可配置域名数量。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DomainNumber: string
+  DomainNumber?: string
   /**
    * 原始证书 ID。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  OriginCertificateId: string
+  OriginCertificateId?: string
   /**
    * 重颁发证书原始 ID。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ReplacedBy: string
+  ReplacedBy?: string
   /**
    * 重颁发证书新 ID。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ReplacedFor: string
+  ReplacedFor?: string
   /**
    * 新订单证书 ID。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RenewOrder: string
+  RenewOrder?: string
   /**
    * 是否是国密证书
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SMCert?: number
+  /**
+   * 公司类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CompanyType?: number
 }
 
 /**

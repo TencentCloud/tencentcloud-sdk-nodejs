@@ -58,10 +58,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeNodes", req, cb);
     }
     /**
-     * 查询拨测节点
+     * 获取历史即时拨测任务
      */
-    async DescribeProbeNodes(req, cb) {
-        return this.request("DescribeProbeNodes", req, cb);
+    async DescribeInstantTasks(req, cb) {
+        return this.request("DescribeInstantTasks", req, cb);
     }
     /**
      * 批量更新拨测任务配置
@@ -74,6 +74,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CreateProbeTasks(req, cb) {
         return this.request("CreateProbeTasks", req, cb);
+    }
+    /**
+     * 查询拨测节点
+     */
+    async DescribeProbeNodes(req, cb) {
+        return this.request("DescribeProbeNodes", req, cb);
     }
     /**
      * 根据时间范围、任务ID、运营商等条件查询单次拨测详情数据
