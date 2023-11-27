@@ -78,6 +78,16 @@ it("cls.v20201016.DescribeConfigs", async function () {
     }
 })
 
+it("cls.v20201016.CreateDeliverCloudFunction", async function () {
+    try {
+       const data = await client.CreateDeliverCloudFunction({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cls.v20201016.DeleteLogset", async function () {
     try {
        const data = await client.DeleteLogset({})
@@ -578,9 +588,9 @@ it("cls.v20201016.CheckFunction", async function () {
     }
 })
 
-it("cls.v20201016.DeleteAlarm", async function () {
+it("cls.v20201016.SearchLog", async function () {
     try {
-       const data = await client.DeleteAlarm({})
+       const data = await client.SearchLog({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -828,9 +838,9 @@ it("cls.v20201016.ModifyDataTransform", async function () {
     }
 })
 
-it("cls.v20201016.SearchLog", async function () {
+it("cls.v20201016.DeleteAlarm", async function () {
     try {
-       const data = await client.SearchLog({})
+       const data = await client.DeleteAlarm({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

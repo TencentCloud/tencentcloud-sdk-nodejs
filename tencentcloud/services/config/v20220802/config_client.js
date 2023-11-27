@@ -39,5 +39,11 @@ class Client extends abstract_client_1.AbstractClient {
     async ListAggregateConfigRules(req, cb) {
         return this.request("ListAggregateConfigRules", req, cb);
     }
+    /**
+     * 上报自定义规则评估结果
+     */
+    async PutEvaluations(req, cb) {
+        return this.request("PutEvaluations", req, cb);
+    }
 }
 exports.Client = Client;

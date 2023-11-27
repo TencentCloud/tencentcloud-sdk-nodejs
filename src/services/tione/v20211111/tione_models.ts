@@ -1508,6 +1508,30 @@ export interface ModifyNotebookTagsResponse {
 }
 
 /**
+ * DescribeBillingResourceGroup返回参数结构体
+ */
+export interface DescribeBillingResourceGroupResponse {
+  /**
+   * 资源组节点总数； 注意接口是分页拉取的，total是指资源组节点总数，不是本次返回中InstanceSet数组的大小
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalCount?: number
+  /**
+   * 资源组节点信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceSet?: Array<Instance>
+  /**
+   * 资源组纳管类型
+   */
+  ResourceGroupSWType?: string
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeNotebookImageRecords返回参数结构体
  */
 export interface DescribeNotebookImageRecordsResponse {
@@ -6749,6 +6773,42 @@ export interface StopBatchTaskResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeBillingResourceGroup请求参数结构体
+ */
+export interface DescribeBillingResourceGroupRequest {
+  /**
+   * 资源组id, 取值为创建资源组接口(CreateBillingResourceGroup)响应中的ResourceGroupId
+   */
+  ResourceGroupId: string
+  /**
+   * 过滤条件
+注意: 
+1. Filter.Name 只支持以下枚举值:
+    InstanceId (资源组节点id)
+    InstanceStatus (资源组节点状态)
+2. Filter.Values: 长度为1且Filter.Fuzzy=true时，支持模糊查询; 不为1时，精确查询
+3. 每次请求的Filters的上限为10，Filter.Values的上限为100
+   */
+  Filters?: Array<Filter>
+  /**
+   * 分页查询起始位置，如：Limit为10，第一页Offset为0，第二页Offset为10....即每页左边为闭区间; 默认0
+   */
+  Offset?: number
+  /**
+   * 分页查询每页大小，最大30; 默认20
+   */
+  Limit?: number
+  /**
+   * 排序方向; 枚举值: ASC | DESC；默认DESC
+   */
+  Order?: string
+  /**
+   * 排序字段; 枚举值: CreateTime (创建时间) ｜ ExpireTime (到期时间)；默认CreateTime
+   */
+  OrderField?: string
 }
 
 /**

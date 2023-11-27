@@ -144,14 +144,6 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeReplicationInstanceCreateTasks", req, cb);
     }
     /**
-     * 接口未使用
-
-更新自定义账户
-     */
-    async ModifyCustomAccount(req, cb) {
-        return this.request("ModifyCustomAccount", req, cb);
-    }
-    /**
      * 删除镜像加速服务
      */
     async DeleteImageAccelerateService(req, cb) {
@@ -236,10 +228,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeTagRetentionExecution", req, cb);
     }
     /**
-     * 用于个人版镜像仓库中删除
+     * 删除自定义域名
      */
-    async DeleteRepositoryPersonal(req, cb) {
-        return this.request("DeleteRepositoryPersonal", req, cb);
+    async DeleteInstanceCustomizedDomain(req, cb) {
+        return this.request("DeleteInstanceCustomizedDomain", req, cb);
     }
     /**
      * GC 最近10条历史
@@ -312,14 +304,6 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeRegions(req, cb) {
         return this.request("DescribeRegions", req, cb);
-    }
-    /**
-     * 接口未使用
-
-删除自定义账号
-     */
-    async DeleteCustomAccount(req, cb) {
-        return this.request("DeleteCustomAccount", req, cb);
     }
     /**
      * 查询实例公网访问白名单策略
@@ -442,14 +426,6 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeChartDownloadInfo(req, cb) {
         return this.request("DescribeChartDownloadInfo", req, cb);
-    }
-    /**
-     * 接口未使用
-
-创建自定义账户
-     */
-    async CreateCustomAccount(req, cb) {
-        return this.request("CreateCustomAccount", req, cb);
     }
     /**
      * 更新服务级账号
@@ -620,10 +596,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeInstances", req, cb);
     }
     /**
-     * 删除自定义域名
+     * 用于个人版镜像仓库中删除
      */
-    async DeleteInstanceCustomizedDomain(req, cb) {
-        return this.request("DeleteInstanceCustomizedDomain", req, cb);
+    async DeleteRepositoryPersonal(req, cb) {
+        return this.request("DeleteRepositoryPersonal", req, cb);
     }
     /**
      * 用于查询应用更新触发器触发日志

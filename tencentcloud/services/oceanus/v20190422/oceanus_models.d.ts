@@ -117,31 +117,31 @@ export interface DescribeJobSubmissionLogResponse {
     /**
      * 日志搜索的游标，需要搜索更多时透传这个值
      */
-    Cursor: string;
+    Cursor?: string;
     /**
      * 是否返回了所有的日志记录
      */
-    ListOver: boolean;
+    ListOver?: boolean;
     /**
      * 作业启动的requestId
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    JobRequestId: string;
+    JobRequestId?: string;
     /**
      * 该时间段内符合关键字的所有的作业实例列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    JobInstanceList: Array<JobInstanceForSubmissionLog>;
+    JobInstanceList?: Array<JobInstanceForSubmissionLog>;
     /**
      * 废弃，请使用LogContentList
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    LogList: Array<string>;
+    LogList?: Array<string>;
     /**
      * 日志列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    LogContentList: Array<LogContent>;
+    LogContentList?: Array<LogContent>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -197,7 +197,7 @@ export interface CreateResourceConfigResponse {
     /**
      * 资源版本ID
      */
-    Version: number;
+    Version?: number;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -791,11 +791,11 @@ export interface DescribeResourceConfigsResponse {
     /**
      * 资源配置描述数组
      */
-    ResourceConfigSet: Array<ResourceConfigItem>;
+    ResourceConfigSet?: Array<ResourceConfigItem>;
     /**
      * 资源配置数量
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1322,11 +1322,11 @@ export interface CreateResourceResponse {
     /**
      * 资源ID
      */
-    ResourceId: string;
+    ResourceId?: string;
     /**
      * 资源版本
      */
-    Version: number;
+    Version?: number;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1381,11 +1381,11 @@ export interface DescribeResourcesResponse {
     /**
      * 资源详细信息集合
      */
-    ResourceSet: Array<ResourceItem>;
+    ResourceSet?: Array<ResourceItem>;
     /**
      * 总数量
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2839,6 +2839,16 @@ export interface JobConfig {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     JobGraph?: JobGraph;
+    /**
+     * es索引
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    EsServerlessIndex?: string;
+    /**
+     * es空间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    EsServerlessSpace?: string;
 }
 /**
  * DescribeResourceConfigs请求参数结构体
@@ -3020,22 +3030,22 @@ export interface TriggerJobSavepointResponse {
     /**
      * 是否成功
      */
-    SavepointTrigger: boolean;
+    SavepointTrigger?: boolean;
     /**
      * 错误消息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ErrorMsg: string;
+    ErrorMsg?: string;
     /**
      * 快照路径
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    FinalSavepointPath: string;
+    FinalSavepointPath?: string;
     /**
      * 快照 ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SavepointId: string;
+    SavepointId?: string;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -3350,11 +3360,11 @@ export interface DescribeJobConfigsResponse {
     /**
      * 总的配置版本数量
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 作业配置列表
      */
-    JobConfigSet: Array<JobConfig>;
+    JobConfigSet?: Array<JobConfig>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */

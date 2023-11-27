@@ -48,7 +48,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeTenantDepartmentList(req: DescribeTenantDepartmentListRequest, cb?: (error: string, rep: DescribeTenantDepartmentListResponse) => void): Promise<DescribeTenantDepartmentListResponse>;
     /**
-     * 单条消息上报
+     * 上报应用消息
      */
     ReportAppMessage(req: ReportAppMessageRequest, cb?: (error: string, rep: ReportAppMessageResponse) => void): Promise<ReportAppMessageResponse>;
     /**
@@ -136,7 +136,7 @@ export declare class Client extends AbstractClient {
      */
     ControlDevice(req: ControlDeviceRequest, cb?: (error: string, rep: ControlDeviceResponse) => void): Promise<ControlDeviceResponse>;
     /**
-     * 批量消息上报
+     * 批量上报应用消息
      */
     BatchReportAppMessage(req: BatchReportAppMessageRequest, cb?: (error: string, rep: BatchReportAppMessageResponse) => void): Promise<BatchReportAppMessageResponse>;
     /**

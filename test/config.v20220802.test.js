@@ -38,4 +38,14 @@ it("config.v20220802.ListAggregateConfigRules", async function () {
     }
 })
 
+it("config.v20220802.PutEvaluations", async function () {
+    try {
+       const data = await client.PutEvaluations({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 })

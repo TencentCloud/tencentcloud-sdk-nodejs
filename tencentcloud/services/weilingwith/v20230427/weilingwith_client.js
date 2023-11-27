@@ -88,7 +88,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeTenantDepartmentList", req, cb);
     }
     /**
-     * 单条消息上报
+     * 上报应用消息
      */
     async ReportAppMessage(req, cb) {
         return this.request("ReportAppMessage", req, cb);
@@ -220,7 +220,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ControlDevice", req, cb);
     }
     /**
-     * 批量消息上报
+     * 批量上报应用消息
      */
     async BatchReportAppMessage(req, cb) {
         return this.request("BatchReportAppMessage", req, cb);

@@ -19,15 +19,18 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   ConfigRule,
+  Tag,
   ListConfigRulesResponse,
   InputParameterForManage,
+  ListConfigRulesRequest,
   SourceConditionForManage,
   TriggerType,
+  PutEvaluationsRequest,
   ListAggregateConfigRulesRequest,
   ListAggregateConfigRulesResponse,
-  Tag,
+  PutEvaluationsResponse,
   InputParameter,
-  ListConfigRulesRequest,
+  Evaluation,
   Annotation,
 } from "./config_models"
 
@@ -58,5 +61,15 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ListAggregateConfigRulesResponse) => void
   ): Promise<ListAggregateConfigRulesResponse> {
     return this.request("ListAggregateConfigRules", req, cb)
+  }
+
+  /**
+   * 上报自定义规则评估结果
+   */
+  async PutEvaluations(
+    req: PutEvaluationsRequest,
+    cb?: (error: string, rep: PutEvaluationsResponse) => void
+  ): Promise<PutEvaluationsResponse> {
+    return this.request("PutEvaluations", req, cb)
   }
 }

@@ -394,6 +394,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeBatchTask", req, cb);
     }
     /**
+     * 查询资源组节点列表
+     */
+    async DescribeBillingResourceGroup(req, cb) {
+        return this.request("DescribeBillingResourceGroup", req, cb);
+    }
+    /**
      * 查询最近上报的训练自定义指标
      */
     async DescribeLatestTrainingMetrics(req, cb) {

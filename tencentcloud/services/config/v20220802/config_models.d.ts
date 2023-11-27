@@ -152,6 +152,21 @@ export interface ConfigRule {
     ManageTriggerType?: Array<string>;
 }
 /**
+ * 标签
+ */
+export interface Tag {
+    /**
+     * 标签key
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TagKey?: string;
+    /**
+     * 标签value
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TagValue?: string;
+}
+/**
  * ListConfigRules返回参数结构体
  */
 export interface ListConfigRulesResponse {
@@ -199,6 +214,42 @@ export interface InputParameterForManage {
     Description?: string;
 }
 /**
+ * ListConfigRules请求参数结构体
+ */
+export interface ListConfigRulesRequest {
+    /**
+     * 每页限制
+     */
+    Limit: number;
+    /**
+     * 偏移量
+     */
+    Offset: number;
+    /**
+     * 排序类型, 倒序：desc，顺序：asc
+     */
+    OrderType?: string;
+    /**
+     * 风险等级
+  1：高风险。
+  2：中风险。
+  3：低风险。
+     */
+    RiskLevel?: Array<number | bigint>;
+    /**
+     * 规则状态
+     */
+    State?: string;
+    /**
+     * 评估结果
+     */
+    ComplianceResult?: Array<string>;
+    /**
+     * 规则名
+     */
+    RuleName?: string;
+}
+/**
  * 管理端规则条件
  */
 export interface SourceConditionForManage {
@@ -241,6 +292,19 @@ export interface TriggerType {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     MaximumExecutionFrequency?: string;
+}
+/**
+ * PutEvaluations请求参数结构体
+ */
+export interface PutEvaluationsRequest {
+    /**
+     * 回调令牌。从自定义规则所选的scf云函数Context中取参数ResultToken值
+     */
+    ResultToken: string;
+    /**
+     * 自定义规则评估结果信息。
+     */
+    Evaluations: Array<Evaluation>;
 }
 /**
  * ListAggregateConfigRules请求参数结构体
@@ -304,19 +368,13 @@ export interface ListAggregateConfigRulesResponse {
     RequestId?: string;
 }
 /**
- * 标签
+ * PutEvaluations返回参数结构体
  */
-export interface Tag {
+export interface PutEvaluationsResponse {
     /**
-     * 标签key
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
-    TagKey?: string;
-    /**
-     * 标签value
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    TagValue?: string;
+    RequestId?: string;
 }
 /**
  * 参数值
@@ -337,40 +395,34 @@ export interface InputParameter {
     Value?: string;
 }
 /**
- * ListConfigRules请求参数结构体
+ * 自定义规则评估结果
  */
-export interface ListConfigRulesRequest {
+export interface Evaluation {
     /**
-     * 每页限制
+     * 已评估资源ID。长度为0~256个字符
      */
-    Limit: number;
+    ComplianceResourceId: string;
     /**
-     * 偏移量
+     * 已评估资源类型。
+  支持:
+  QCS::CVM::Instance、 QCS::CBS::Disk、QCS::VPC::Vpc、QCS::VPC::Subnet、QCS::VPC::SecurityGroup、 QCS::CAM::User、QCS::CAM::Group、QCS::CAM::Policy、QCS::CAM::Role、QCS::COS::Bucket
      */
-    Offset: number;
+    ComplianceResourceType: string;
     /**
-     * 排序类型, 倒序：desc，顺序：asc
+     * 已评估资源地域。
+  长度为0~32个字符
      */
-    OrderType?: string;
+    ComplianceRegion: string;
     /**
-     * 风险等级
-  1：高风险。
-  2：中风险。
-  3：低风险。
+     * 合规类型。取值：
+  COMPLIANT：合规、
+  NON_COMPLIANT：不合规
      */
-    RiskLevel?: Array<number | bigint>;
+    ComplianceType: string;
     /**
-     * 规则状态
+     * 不合规资源的补充信息。
      */
-    State?: string;
-    /**
-     * 评估结果
-     */
-    ComplianceResult?: Array<string>;
-    /**
-     * 规则名
-     */
-    RuleName?: string;
+    Annotation?: Annotation;
 }
 /**
  * 合规详情

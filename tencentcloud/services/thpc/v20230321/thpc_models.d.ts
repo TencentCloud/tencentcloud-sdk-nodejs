@@ -618,7 +618,7 @@ export interface GooseFSOptionOverview {
     Masters: Array<string>;
 }
 /**
- * 描述了实例的增强服务启用情况与其设置，如云安全，云监控等实例 Agent
+ * 描述了实例的增强服务启用情况与其设置，如云安全，腾讯云可观测平台等实例 Agent
  */
 export interface EnhancedService {
     /**
@@ -627,7 +627,7 @@ export interface EnhancedService {
      */
     SecurityService?: RunSecurityServiceEnabled;
     /**
-     * 开启云监控服务。若不指定该参数，则默认开启云监控服务。
+     * 开启腾讯云可观测平台服务。若不指定该参数，则默认开启腾讯云可观测平台服务。
   注意：此字段可能返回 null，表示取不到有效值。
      */
     MonitorService?: RunMonitorServiceEnabled;
@@ -804,7 +804,7 @@ export interface ManagerNode {
      */
     ProjectId?: number;
     /**
-     * 增强服务。通过该参数可以指定是否开启云安全、云监控等服务。若不指定该参数，则默认开启云监控、云安全服务、自动化助手服务。
+     * 增强服务。通过该参数可以指定是否开启云安全、腾讯云可观测平台等服务。若不指定该参数，则默认开启腾讯云可观测平台、云安全服务、自动化助手服务。
      */
     EnhancedService?: EnhancedService;
 }
@@ -1087,11 +1087,11 @@ export interface GooseFSxOption {
     LocalPath: string;
 }
 /**
- * 描述了 “云监控” 服务相关的信息。
+ * 描述了 “腾讯云可观测平台” 服务相关的信息。
  */
 export interface RunMonitorServiceEnabled {
     /**
-     * 是否开启[云监控](/document/product/248)服务。取值范围：<br><li>TRUE：表示开启云监控服务<br><li>FALSE：表示不开启云监控服务<br><br>默认取值：TRUE。
+     * 是否开启[腾讯云可观测平台](/document/product/248)服务。取值范围：<br><li>TRUE：表示开启腾讯云可观测平台服务<br><li>FALSE：表示不开启腾讯云可观测平台服务<br><br>默认取值：TRUE。
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Enabled?: boolean;
@@ -1322,7 +1322,7 @@ export interface QueueConfig {
      */
     ScaleUpMemRatio?: number;
     /**
-     * 增强服务。通过该参数可以指定是否开启云安全、云监控等服务。若不指定该参数，则默认开启云监控、云安全服务、自动化助手服务。
+     * 增强服务。通过该参数可以指定是否开启云安全、腾讯云可观测平台等服务。若不指定该参数，则默认开启腾讯云可观测平台、云安全服务、自动化助手服务。
      */
     EnhancedService?: EnhancedService;
 }

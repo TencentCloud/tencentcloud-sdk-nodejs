@@ -529,7 +529,7 @@ export interface ModifyCmqSubscriptionAttributeResponse {
  */
 export interface CreateCmqTopicRequest {
   /**
-   * 主题名字，在单个地域同一帐号下唯一。主题名称是一个不超过64个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线（-）。
+   * 主题名字，在单个地域同一账号下唯一。主题名称是一个不超过64个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线（-）。
    */
   TopicName: string
   /**
@@ -2466,7 +2466,7 @@ export interface CreateEnvironmentRequest {
  */
 export interface ClearCmqQueueRequest {
   /**
-   * 队列名字，在单个地域同一帐号下唯一。队列名称是一个不超过64个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-)。
+   * 队列名字，在单个地域同一账号下唯一。队列名称是一个不超过64个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-)。
    */
   QueueName: string
 }
@@ -2774,7 +2774,7 @@ export interface VpcBindRecord {
  */
 export interface RewindCmqQueueRequest {
   /**
-   * 队列名字，在单个地域同一帐号下唯一。队列名称是一个不超过64个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-)。
+   * 队列名字，在单个地域同一账号下唯一。队列名称是一个不超过64个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-)。
    */
   QueueName: string
   /**
@@ -3255,7 +3255,7 @@ export interface CreateProClusterRequest {
  */
 export interface ModifyCmqTopicAttributeRequest {
   /**
-   * 主题名字，在单个地域同一帐号下唯一。主题名称是一个不超过64个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-)。
+   * 主题名字，在单个地域同一账号下唯一。主题名称是一个不超过64个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-)。
    */
   TopicName: string
   /**
@@ -3321,7 +3321,7 @@ export interface CreateCmqSubscribeResponse {
   /**
    * 订阅id
    */
-  SubscriptionId: string
+  SubscriptionId?: string
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4457,11 +4457,11 @@ export interface RocketMQConsumerConnection {
  */
 export interface ClearCmqSubscriptionFilterTagsRequest {
   /**
-   * 主题名字，在单个地域同一帐号下唯一。主题名称是一个不超过64个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线（-）。
+   * 主题名字，在单个地域同一账号下唯一。主题名称是一个不超过64个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线（-）。
    */
   TopicName: string
   /**
-   * 订阅名字，在单个地域同一帐号的同一主题下唯一。订阅名称是一个不超过64个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-)。
+   * 订阅名字，在单个地域同一账号的同一主题下唯一。订阅名称是一个不超过64个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-)。
    */
   SubscriptionName: string
 }
@@ -5572,7 +5572,7 @@ export interface DescribeRabbitMQVipInstanceResponse {
  */
 export interface ModifyCmqSubscriptionAttributeRequest {
   /**
-   * 主题名字，在单个地域同一帐号下唯一。主题名称是一个不超过64个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线（-）。
+   * 主题名字，在单个地域同一账号下唯一。主题名称是一个不超过64个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线（-）。
    */
   TopicName: string
   /**
@@ -6245,11 +6245,11 @@ export interface PrometheusEndpointInfo {
  */
 export interface CreateCmqSubscribeRequest {
   /**
-   * 主题名字，在单个地域同一帐号下唯一。主题名称是一个不超过64个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线（-）。
+   * 主题名字，在单个地域同一账号下唯一。主题名称是一个不超过64个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线（-）。
    */
   TopicName: string
   /**
-   * 订阅名字，在单个地域同一帐号的同一主题下唯一。订阅名称是一个不超过64个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-)。
+   * 订阅名字，在单个地域同一账号的同一主题下唯一。订阅名称是一个不超过64个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-)。
    */
   SubscriptionName: string
   /**
@@ -6283,11 +6283,11 @@ export interface CreateCmqSubscribeRequest {
  */
 export interface DeleteCmqSubscribeRequest {
   /**
-   * 主题名字，在单个地域同一帐号下唯一。主题名称是一个不超过64个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-)。
+   * 主题名字，在单个地域同一账号下唯一。主题名称是一个不超过64个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-)。
    */
   TopicName: string
   /**
-   * 订阅名字，在单个地域同一帐号的同一主题下唯一。订阅名称是一个不超过64个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-)。
+   * 订阅名字，在单个地域同一账号的同一主题下唯一。订阅名称是一个不超过64个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-)。
    */
   SubscriptionName: string
 }
@@ -7483,7 +7483,7 @@ export interface DescribeRabbitMQQueueDetailRequest {
  */
 export interface DeleteCmqQueueRequest {
   /**
-   * 队列名字，在单个地域同一帐号下唯一。队列名称是一个不超过64个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-)。
+   * 队列名字，在单个地域同一账号下唯一。队列名称是一个不超过64个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-)。
    */
   QueueName: string
 }
@@ -7955,7 +7955,7 @@ export interface SendBatchMessagesRequest {
  */
 export interface DeleteCmqTopicRequest {
   /**
-   * 主题名字，在单个地域同一帐号下唯一。主题名称是一个不超过64个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-)。
+   * 主题名字，在单个地域同一账号下唯一。主题名称是一个不超过64个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-)。
    */
   TopicName: string
 }
@@ -8153,7 +8153,7 @@ export interface UnbindCmqDeadLetterRequest {
  */
 export interface ModifyCmqQueueAttributeRequest {
   /**
-   * 队列名字，在单个地域同一帐号下唯一。队列名称是一个不超过 64 个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-)。
+   * 队列名字，在单个地域同一账号下唯一。队列名称是一个不超过 64 个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-)。
    */
   QueueName: string
   /**

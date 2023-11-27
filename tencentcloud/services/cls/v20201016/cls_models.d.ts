@@ -2960,13 +2960,33 @@ export interface DeleteConfigResponse {
     RequestId?: string;
 }
 /**
- * ModifyIndex返回参数结构体
+ * CreateDeliverCloudFunction请求参数结构体
  */
-export interface ModifyIndexResponse {
+export interface CreateDeliverCloudFunctionRequest {
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     * 投递规则属于的 topic id
      */
-    RequestId?: string;
+    TopicId: string;
+    /**
+     * 投递的云函数名字
+     */
+    FunctionName: string;
+    /**
+     * 命名空间
+     */
+    Namespace: string;
+    /**
+     * 函数版本
+     */
+    Qualifier: string;
+    /**
+     * 投递最长等待时间，单位：秒
+     */
+    Timeout?: number;
+    /**
+     * 投递最大消息数
+     */
+    MaxMsgNum?: number;
 }
 /**
  * DeleteConsumer请求参数结构体
@@ -3479,6 +3499,15 @@ export interface DeleteConfigExtraRequest {
      * 采集规则扩展配置ID
      */
     ConfigExtraId: string;
+}
+/**
+ * CreateDeliverCloudFunction返回参数结构体
+ */
+export interface CreateDeliverCloudFunctionResponse {
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * ModifyConfig请求参数结构体
@@ -4120,6 +4149,15 @@ export interface ExportInfo {
   0：Lucene语法，1：CQL语法。
      */
     SyntaxRule?: number;
+}
+/**
+ * ModifyIndex返回参数结构体
+ */
+export interface ModifyIndexResponse {
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * 分组触发条件

@@ -1723,7 +1723,7 @@ export interface CreateSavingPlanOrderRequest {
    */
   CommodityCode: string
   /**
-   * 承诺时长内的小额金额（单位：分）
+   * 承诺时长内的小额金额（单位：元）
    */
   PromiseUseAmount: number
   /**

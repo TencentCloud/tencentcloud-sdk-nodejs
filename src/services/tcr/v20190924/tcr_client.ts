@@ -39,7 +39,7 @@ import {
   RetentionRule,
   CreateInstanceResponse,
   DeleteInstanceTokenRequest,
-  TaskDetail,
+  TagInfoResp,
   ModifyRepositoryRequest,
   RegistryCondition,
   DescribeInternalEndpointDnsStatusRequest,
@@ -49,7 +49,6 @@ import {
   ValidateNamespaceExistPersonalRequest,
   ModifyInstanceRequest,
   RenewInstanceResponse,
-  CreateCustomAccountRequest,
   ManageInternalEndpointRequest,
   CreateImmutableTagRulesRequest,
   DescribeRepositoriesResponse,
@@ -64,6 +63,7 @@ import {
   ModifyImmutableTagRulesResponse,
   Region,
   ModifyServiceAccountRequest,
+  CreateImageAccelerationServiceResponse,
   CreateMultipleSecurityPolicyResponse,
   TriggerResp,
   CreateTagRetentionRuleResponse,
@@ -77,7 +77,6 @@ import {
   DescribeWebhookTriggerLogResponse,
   DownloadHelmChartResponse,
   ManageReplicationRequest,
-  DescribeInstanceStatusResponse,
   DeleteWebhookTriggerResponse,
   DeleteImageLifecycleGlobalPersonalResponse,
   ModifySecurityPolicyRequest,
@@ -101,7 +100,7 @@ import {
   DuplicateImagePersonalResponse,
   DescribeCustomAccountsRequest,
   DescribeImageLifecyclePersonalResponse,
-  DeleteReplicationInstanceRequest,
+  DescribeInstanceStatusResponse,
   CreateImageAccelerationServiceRequest,
   DescribeWebhookTriggerResponse,
   ModifyInstanceTokenRequest,
@@ -123,9 +122,9 @@ import {
   DeleteImageLifecycleGlobalPersonalRequest,
   DescribeInstanceStatusRequest,
   ModifyWebhookTriggerRequest,
-  CreateImageAccelerationServiceResponse,
+  DeleteReplicationInstanceRequest,
   DeleteNamespaceResponse,
-  TagInfoResp,
+  DeleteNamespacePersonalResponse,
   Favors,
   CreateWebhookTriggerRequest,
   DescribeRepositoryPersonalResponse,
@@ -158,7 +157,6 @@ import {
   DeleteRepositoryPersonalResponse,
   CreateInstanceTokenResponse,
   DescribeApplicationTriggerLogPersonalResp,
-  TagSpecification,
   DeleteImagePersonalRequest,
   DescribeApplicationTriggerPersonalResponse,
   RetentionTask,
@@ -178,7 +176,7 @@ import {
   ModifyNamespaceRequest,
   DeleteImageRequest,
   ModifyRepositoryAccessPersonalRequest,
-  ModifyCustomAccountRequest,
+  TagSpecification,
   CreateMultipleSecurityPolicyRequest,
   KeyValueString,
   DescribeNamespacesRequest,
@@ -197,7 +195,6 @@ import {
   Registry,
   DescribeChartDownloadInfoRequest,
   DescribeCustomAccountsResponse,
-  ModifyCustomAccountResponse,
   DeleteImageAccelerateServiceRequest,
   CheckInstanceResponse,
   NamespaceIsExistsResp,
@@ -214,6 +211,7 @@ import {
   RepoInfo,
   ManageImageLifecycleGlobalPersonalRequest,
   DescribeUserQuotaPersonalResponse,
+  TaskDetail,
   DescribeImagePersonalRequest,
   CreateServiceAccountRequest,
   DescribeRepositoryFilterPersonalResponse,
@@ -222,7 +220,7 @@ import {
   DeleteInstanceRequest,
   DescribeImageManifestsResponse,
   DescribeNamespacePersonalResponse,
-  DeleteNamespacePersonalResponse,
+  DeleteReplicationInstanceResponse,
   DescribeWebhookTriggerRequest,
   ImmutableTagRule,
   Header,
@@ -241,13 +239,11 @@ import {
   ManageInternalEndpointResponse,
   CreateRepositoryPersonalResponse,
   CreateInstanceCustomizedDomainRequest,
-  ReplicationLog,
   CreateTagRetentionExecutionResponse,
   DescribeFavorRepositoryPersonalResponse,
   CheckInstanceNameResponse,
   DeleteTagRetentionRuleResponse,
   DescribeRepositoryOwnerPersonalRequest,
-  DeleteReplicationInstanceResponse,
   DescribeExternalEndpointStatusResponse,
   DescribeTagRetentionRulesResponse,
   DescribeRegionsRequest,
@@ -255,7 +251,6 @@ import {
   DescribeImmutableTagRulesResponse,
   ModifyApplicationTriggerPersonalRequest,
   CreateReplicationInstanceResponse,
-  CreateCustomAccountResponse,
   CreateInstanceTokenRequest,
   DescribeServiceAccountsResponse,
   CreateInstanceCustomizedDomainResponse,
@@ -270,7 +265,6 @@ import {
   TagInfo,
   CreateRepositoryRequest,
   DeleteImageResponse,
-  DeleteCustomAccountResponse,
   DescribeImageAccelerateServiceRequest,
   DeleteNamespaceRequest,
   BatchDeleteImagePersonalRequest,
@@ -301,7 +295,7 @@ import {
   CreateInternalEndpointDnsResponse,
   DuplicateImageRequest,
   CreateTagRetentionExecutionRequest,
-  DeleteCustomAccountRequest,
+  ReplicationLog,
   DescribeInstanceAllNamespacesResponse,
   CreateApplicationTriggerPersonalResponse,
   Limit,
@@ -512,18 +506,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 接口未使用
-
-更新自定义账户
-     */
-  async ModifyCustomAccount(
-    req: ModifyCustomAccountRequest,
-    cb?: (error: string, rep: ModifyCustomAccountResponse) => void
-  ): Promise<ModifyCustomAccountResponse> {
-    return this.request("ModifyCustomAccount", req, cb)
-  }
-
-  /**
    * 删除镜像加速服务
    */
   async DeleteImageAccelerateService(
@@ -664,13 +646,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 用于个人版镜像仓库中删除
+   * 删除自定义域名
    */
-  async DeleteRepositoryPersonal(
-    req: DeleteRepositoryPersonalRequest,
-    cb?: (error: string, rep: DeleteRepositoryPersonalResponse) => void
-  ): Promise<DeleteRepositoryPersonalResponse> {
-    return this.request("DeleteRepositoryPersonal", req, cb)
+  async DeleteInstanceCustomizedDomain(
+    req: DeleteInstanceCustomizedDomainRequest,
+    cb?: (error: string, rep: DeleteInstanceCustomizedDomainResponse) => void
+  ): Promise<DeleteInstanceCustomizedDomainResponse> {
+    return this.request("DeleteInstanceCustomizedDomain", req, cb)
   }
 
   /**
@@ -791,18 +773,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeRegionsResponse) => void
   ): Promise<DescribeRegionsResponse> {
     return this.request("DescribeRegions", req, cb)
-  }
-
-  /**
-     * 接口未使用
-
-删除自定义账号
-     */
-  async DeleteCustomAccount(
-    req: DeleteCustomAccountRequest,
-    cb?: (error: string, rep: DeleteCustomAccountResponse) => void
-  ): Promise<DeleteCustomAccountResponse> {
-    return this.request("DeleteCustomAccount", req, cb)
   }
 
   /**
@@ -1005,18 +975,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeChartDownloadInfoResponse) => void
   ): Promise<DescribeChartDownloadInfoResponse> {
     return this.request("DescribeChartDownloadInfo", req, cb)
-  }
-
-  /**
-     * 接口未使用
-
-创建自定义账户
-     */
-  async CreateCustomAccount(
-    req: CreateCustomAccountRequest,
-    cb?: (error: string, rep: CreateCustomAccountResponse) => void
-  ): Promise<CreateCustomAccountResponse> {
-    return this.request("CreateCustomAccount", req, cb)
   }
 
   /**
@@ -1300,13 +1258,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除自定义域名
+   * 用于个人版镜像仓库中删除
    */
-  async DeleteInstanceCustomizedDomain(
-    req: DeleteInstanceCustomizedDomainRequest,
-    cb?: (error: string, rep: DeleteInstanceCustomizedDomainResponse) => void
-  ): Promise<DeleteInstanceCustomizedDomainResponse> {
-    return this.request("DeleteInstanceCustomizedDomain", req, cb)
+  async DeleteRepositoryPersonal(
+    req: DeleteRepositoryPersonalRequest,
+    cb?: (error: string, rep: DeleteRepositoryPersonalResponse) => void
+  ): Promise<DeleteRepositoryPersonalResponse> {
+    return this.request("DeleteRepositoryPersonal", req, cb)
   }
 
   /**

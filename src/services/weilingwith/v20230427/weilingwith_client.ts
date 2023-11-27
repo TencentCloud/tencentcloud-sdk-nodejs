@@ -356,7 +356,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 单条消息上报
+   * 上报应用消息
    */
   async ReportAppMessage(
     req: ReportAppMessageRequest,
@@ -576,7 +576,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 批量消息上报
+   * 批量上报应用消息
    */
   async BatchReportAppMessage(
     req: BatchReportAppMessageRequest,

@@ -208,16 +208,6 @@ it("tcr.v20190924.DescribeReplicationInstanceCreateTasks", async function () {
     }
 })
 
-it("tcr.v20190924.ModifyCustomAccount", async function () {
-    try {
-       const data = await client.ModifyCustomAccount({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("tcr.v20190924.DeleteImageAccelerateService", async function () {
     try {
        const data = await client.DeleteImageAccelerateService({})
@@ -358,9 +348,9 @@ it("tcr.v20190924.DescribeTagRetentionExecution", async function () {
     }
 })
 
-it("tcr.v20190924.DeleteRepositoryPersonal", async function () {
+it("tcr.v20190924.DeleteInstanceCustomizedDomain", async function () {
     try {
-       const data = await client.DeleteRepositoryPersonal({})
+       const data = await client.DeleteInstanceCustomizedDomain({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -481,16 +471,6 @@ it("tcr.v20190924.CreateInstance", async function () {
 it("tcr.v20190924.DescribeRegions", async function () {
     try {
        const data = await client.DescribeRegions({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("tcr.v20190924.DeleteCustomAccount", async function () {
-    try {
-       const data = await client.DeleteCustomAccount({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -691,16 +671,6 @@ it("tcr.v20190924.ModifyRepository", async function () {
 it("tcr.v20190924.DescribeChartDownloadInfo", async function () {
     try {
        const data = await client.DescribeChartDownloadInfo({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("tcr.v20190924.CreateCustomAccount", async function () {
-    try {
-       const data = await client.CreateCustomAccount({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -988,9 +958,9 @@ it("tcr.v20190924.DescribeInstances", async function () {
     }
 })
 
-it("tcr.v20190924.DeleteInstanceCustomizedDomain", async function () {
+it("tcr.v20190924.DeleteRepositoryPersonal", async function () {
     try {
-       const data = await client.DeleteInstanceCustomizedDomain({})
+       const data = await client.DeleteRepositoryPersonal({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

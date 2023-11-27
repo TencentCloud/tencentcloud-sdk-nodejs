@@ -52,6 +52,7 @@ import {
   TrainingTaskDetail,
   SendChatMessageResponse,
   ModifyNotebookTagsResponse,
+  DescribeBillingResourceGroupResponse,
   DescribeNotebookImageRecordsResponse,
   CosPathInfo,
   DescribeBillingResourceGroupsResponse,
@@ -231,6 +232,7 @@ import {
   DeleteModelServiceGroupRequest,
   TrainingModelVersionDTO,
   StopBatchTaskResponse,
+  DescribeBillingResourceGroupRequest,
   PushTrainingMetricsRequest,
   DescribeTrainingTaskRequest,
   ChatCompletionResponse,
@@ -887,6 +889,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeBatchTaskResponse) => void
   ): Promise<DescribeBatchTaskResponse> {
     return this.request("DescribeBatchTask", req, cb)
+  }
+
+  /**
+   * 查询资源组节点列表
+   */
+  async DescribeBillingResourceGroup(
+    req: DescribeBillingResourceGroupRequest,
+    cb?: (error: string, rep: DescribeBillingResourceGroupResponse) => void
+  ): Promise<DescribeBillingResourceGroupResponse> {
+    return this.request("DescribeBillingResourceGroup", req, cb)
   }
 
   /**
