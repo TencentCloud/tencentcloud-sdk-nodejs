@@ -1093,8 +1093,9 @@ Web链接访问后，会根据子客企业(**Agent中ProxyOrganizationOpenId表�
   }
 
   /**
-   * 通过此接口，绑定员工角色，支持以电子签userId、客户系统userId两种方式调用。
-   */
+     * 使用此接口，用来绑定企业实名员工的角色，
+支持以电子签userId、客户系统openId两种方式进行绑定。
+     */
   async ChannelCreateUserRoles(
     req: ChannelCreateUserRolesRequest,
     cb?: (error: string, rep: ChannelCreateUserRolesResponse) => void

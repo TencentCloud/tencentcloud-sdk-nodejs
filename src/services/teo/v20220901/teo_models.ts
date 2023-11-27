@@ -4446,7 +4446,7 @@ export interface Identification {
   /**
    * 站点名称。
    */
-  ZoneName: string
+  ZoneName?: string
   /**
    * 验证子域名。验证站点时，该值为空。验证子域名是为具体子域名。
 注意：此字段可能返回 null，表示取不到有效值。
@@ -4457,20 +4457,20 @@ export interface Identification {
 <li> pending：验证中；</li>
 <li> finished：验证完成。</li>
    */
-  Status: string
+  Status?: string
   /**
    * 站点归属权校验：Dns校验信息。
    */
-  Ascription: AscriptionInfo
+  Ascription?: AscriptionInfo
   /**
    * 域名当前的 NS 记录。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  OriginalNameServers: Array<string>
+  OriginalNameServers?: Array<string>
   /**
    * 站点归属权校验：文件校验信息。
    */
-  FileAscription: FileAscriptionInfo
+  FileAscription?: FileAscriptionInfo
 }
 
 /**

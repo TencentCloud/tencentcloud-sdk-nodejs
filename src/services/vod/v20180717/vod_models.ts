@@ -11827,8 +11827,6 @@ export interface MediaBasicInfo {
   Category?: string
   /**
    * 文件状态：Normal：正常，Forbidden：封禁。
-
-*注意：此字段暂不支持。	
    */
   Status?: string
   /**
@@ -15506,6 +15504,10 @@ export interface DomainHTTPSConfig {
 <li>格式按照 ISO 8601标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。</li>
    */
   CertExpireTime: string
+  /**
+   * 腾讯云 SSL 产品中的证书 ID。
+   */
+  CloudCertId?: string
 }
 
 /**

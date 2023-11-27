@@ -21560,7 +21560,7 @@ export interface ModifyLogKafkaDeliverTypeRequest {
      */
     SecurityType: number;
     /**
-     * 安全模块下的日志类型，http://tapd.woa.com/Teneyes/markdown_wikis/show/#1210131751002328905
+     * 安全模块下的日志类型，
      */
     LogType: Array<number | bigint>;
     /**

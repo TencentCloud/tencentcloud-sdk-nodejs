@@ -34,10 +34,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("GetNetMonitor", req, cb);
     }
     /**
-     * 在用量统计页面下载流量数据
+     * 更新硬件信息
      */
-    async GetStatisticData(req, cb) {
-        return this.request("GetStatisticData", req, cb);
+    async UpdateHardware(req, cb) {
+        return this.request("UpdateHardware", req, cb);
+    }
+    /**
+     * 添加硬件设备，生成未激活的硬件设备，可支持批量添加
+     */
+    async AddHardware(req, cb) {
+        return this.request("AddHardware", req, cb);
+    }
+    /**
+     * 租户获取厂商硬件列表
+     */
+    async GetHardwareList(req, cb) {
+        return this.request("GetHardwareList", req, cb);
     }
     /**
      * 更新设备信息
@@ -50,6 +62,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async AddDevice(req, cb) {
         return this.request("AddDevice", req, cb);
+    }
+    /**
+     * 获取厂商硬件设备列表
+     */
+    async GetVendorHardware(req, cb) {
+        return this.request("GetVendorHardware", req, cb);
     }
     /**
      * 获取Qos加速状态
@@ -100,6 +118,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteQos", req, cb);
     }
     /**
+     * 在用量统计页面下载流量数据
+     */
+    async GetStatisticData(req, cb) {
+        return this.request("GetStatisticData", req, cb);
+    }
+    /**
      * 通过指定设备的ID查找设备详细信息
      */
     async GetDevice(req, cb) {
@@ -110,6 +134,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CreateQos(req, cb) {
         return this.request("CreateQos", req, cb);
+    }
+    /**
+     * 激活硬件设备
+     */
+    async ActivateHardware(req, cb) {
+        return this.request("ActivateHardware", req, cb);
     }
 }
 exports.Client = Client;

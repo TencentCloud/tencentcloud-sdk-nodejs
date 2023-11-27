@@ -421,6 +421,32 @@ export interface CreateRocketMQGroupRequest {
 }
 
 /**
+ * CreateRocketMQNamespace请求参数结构体
+ */
+export interface CreateRocketMQNamespaceRequest {
+  /**
+   * 集群ID
+   */
+  ClusterId: string
+  /**
+   * 命名空间名称，3-64个字符，只能包含字母、数字、“-”及“_”
+   */
+  NamespaceId: string
+  /**
+   * 已废弃
+   */
+  Ttl?: number
+  /**
+   * 已废弃
+   */
+  RetentionTime?: number
+  /**
+   * 说明，最大128个字符
+   */
+  Remark?: string
+}
+
+/**
  * ModifyRabbitMQVirtualHost请求参数结构体
  */
 export interface ModifyRabbitMQVirtualHostRequest {
@@ -1617,29 +1643,13 @@ export interface CreateSubscriptionRequest {
 }
 
 /**
- * CreateRocketMQNamespace请求参数结构体
+ * DeleteProCluster请求参数结构体
  */
-export interface CreateRocketMQNamespaceRequest {
+export interface DeleteProClusterRequest {
   /**
-   * 集群ID
+   * 集群Id
    */
   ClusterId: string
-  /**
-   * 命名空间名称，3-64个字符，只能包含字母、数字、“-”及“_”
-   */
-  NamespaceId: string
-  /**
-   * 已废弃
-   */
-  Ttl?: number
-  /**
-   * 已废弃
-   */
-  RetentionTime?: number
-  /**
-   * 说明，最大128个字符
-   */
-  Remark?: string
 }
 
 /**
@@ -3207,11 +3217,11 @@ export interface DeleteRocketMQTopicResponse {
  */
 export interface CreateProClusterRequest {
   /**
-   * 多可用区部署选择三个可用区，示例"200002","200003","200004"
+   * 多可用区部署选择三个可用区，示例[200002,200003,200004]
 
-单可用区部署选择一个可用区，示例"200002"
+单可用区部署选择一个可用区，示例[200002]
    */
-  ZoneIds: string
+  ZoneIds: Array<number | bigint>
   /**
    * 集群规格代号
 参考 [专业集群规格](https://cloud.tencent.com/document/product/1179/83705)
@@ -4427,29 +4437,37 @@ export interface DescribeClustersResponse {
 }
 
 /**
- * 在线消费者情况
+ * DescribeAMQPClusters请求参数结构体
  */
-export interface RocketMQConsumerConnection {
+export interface DescribeAMQPClustersRequest {
   /**
-   * 消费者实例ID
+   * 偏移量
    */
-  ClientId?: string
+  Offset: number
   /**
-   * 消费者实例的地址和端口
+   * 限制数目
    */
-  ClientAddr?: string
+  Limit: number
   /**
-   * 消费者应用的语言版本
+   * 按照集群ID关键字搜索
    */
-  Language?: string
+  IdKeyword?: string
   /**
-   * 消息堆积量
+   * 按照集群名称关键字搜索
    */
-  Accumulative?: number
+  NameKeyword?: string
   /**
-   * 消费端版本
+   * 集群ID列表过滤
    */
-  Version?: string
+  ClusterIdList?: Array<string>
+  /**
+   * 标签过滤查找时，需要设置为true
+   */
+  IsTagFilter?: boolean
+  /**
+   * 过滤器。目前支持按标签过滤。
+   */
+  Filters?: Array<Filter>
 }
 
 /**
@@ -5400,37 +5418,17 @@ export interface DescribeRabbitMQVirtualHostListRequest {
 }
 
 /**
- * DescribeAMQPClusters请求参数结构体
+ * DeleteProCluster返回参数结构体
  */
-export interface DescribeAMQPClustersRequest {
+export interface DeleteProClusterResponse {
   /**
-   * 偏移量
+   * 退还实例订单号
    */
-  Offset: number
+  DealName?: string
   /**
-   * 限制数目
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  Limit: number
-  /**
-   * 按照集群ID关键字搜索
-   */
-  IdKeyword?: string
-  /**
-   * 按照集群名称关键字搜索
-   */
-  NameKeyword?: string
-  /**
-   * 集群ID列表过滤
-   */
-  ClusterIdList?: Array<string>
-  /**
-   * 标签过滤查找时，需要设置为true
-   */
-  IsTagFilter?: boolean
-  /**
-   * 过滤器。目前支持按标签过滤。
-   */
-  Filters?: Array<Filter>
+  RequestId?: string
 }
 
 /**
@@ -8477,6 +8475,32 @@ export interface DeleteRabbitMQVipInstanceRequest {
    * 实例Id
    */
   InstanceId: string
+}
+
+/**
+ * 在线消费者情况
+ */
+export interface RocketMQConsumerConnection {
+  /**
+   * 消费者实例ID
+   */
+  ClientId?: string
+  /**
+   * 消费者实例的地址和端口
+   */
+  ClientAddr?: string
+  /**
+   * 消费者应用的语言版本
+   */
+  Language?: string
+  /**
+   * 消息堆积量
+   */
+  Accumulative?: number
+  /**
+   * 消费端版本
+   */
+  Version?: string
 }
 
 /**

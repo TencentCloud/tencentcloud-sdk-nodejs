@@ -100,6 +100,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteRocketMQGroup", req, cb);
     }
     /**
+     * 删除专业集群——预付费，仅通过API 调用
+     */
+    async DeleteProCluster(req, cb) {
+        return this.request("DeleteProCluster", req, cb);
+    }
+    /**
      * 用于查询RocketMQ平滑迁移任务列表
      */
     async DescribeRocketMQSmoothMigrationTaskList(req, cb) {

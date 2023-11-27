@@ -191,6 +191,56 @@ export interface NetDetails {
     Time: string;
 }
 /**
+ * 厂商硬件详细信息
+ */
+export interface VendorHardware {
+    /**
+     * 硬件id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    HardwareId?: string;
+    /**
+     * 硬件序列号
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SN?: string;
+    /**
+     * 创建时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CreateTime?: string;
+    /**
+     * 激活状态， 空：全部； 1:待激活； 2:已激活
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Status?: number;
+    /**
+     * 激活时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ActiveTime?: string;
+    /**
+     * 厂商备注
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Description?: string;
+    /**
+     * 设备id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DeviceId?: string;
+    /**
+     * license计费模式： 1，租户月付费 2，厂商月付费 3，license永久授权
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    LicenseChargingMode?: number;
+    /**
+     * 最后在线时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    LastOnlineTime?: string;
+}
+/**
  * 设备网络状态信息
  */
 export interface DeviceNetInfo {
@@ -392,6 +442,34 @@ export interface DescribeQosResponse {
  */
 export declare type CreateEncryptedKeyRequest = null;
 /**
+ * 激活设备
+ */
+export interface ActivateHardware {
+    /**
+     * 厂商名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Vendor: string;
+    /**
+     * 设备SN序列号
+     */
+    SN: string;
+    /**
+     * 设备名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DeviceName: string;
+    /**
+     * 备注
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Description?: string;
+    /**
+     * 设备密钥
+     */
+    DataKey?: string;
+}
+/**
  * DeleteDevice请求参数结构体
  */
 export interface DeleteDeviceRequest {
@@ -399,6 +477,23 @@ export interface DeleteDeviceRequest {
      * 删除设备的唯一ID
      */
     DeviceId: string;
+}
+/**
+ * GetHardwareList请求参数结构体
+ */
+export interface GetHardwareListRequest {
+    /**
+     * 页码
+     */
+    PageNumber: number;
+    /**
+     * 页面设备数量
+     */
+    PageSize: number;
+    /**
+     * 关键字
+     */
+    Keyword?: string;
 }
 /**
  * CreateEncryptedKey返回参数结构体
@@ -532,6 +627,27 @@ export interface GetStatisticDataRequest {
     TimeGranularity: number;
 }
 /**
+ * GetVendorHardware返回参数结构体
+ */
+export interface GetVendorHardwareResponse {
+    /**
+     * 硬件信息列表
+     */
+    VendorHardware?: Array<VendorHardware>;
+    /**
+     * 设备总数
+     */
+    Length?: number;
+    /**
+     * 总页数
+     */
+    TotalPage?: number;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * UpdateDevice请求参数结构体
  */
 export interface UpdateDeviceRequest {
@@ -560,6 +676,28 @@ export interface GetPublicKeyResponse {
      * 非对称公钥
      */
     PublicKey: string;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * ActivateHardware请求参数结构体
+ */
+export interface ActivateHardwareRequest {
+    /**
+     * 待激活的设备列表
+     */
+    Hardware: Array<ActivateHardware>;
+}
+/**
+ * AddHardware返回参数结构体
+ */
+export interface AddHardwareResponse {
+    /**
+     * 硬件设备
+     */
+    Hardware?: Array<Hardware>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -689,6 +827,30 @@ export interface AddDeviceResponse {
     RequestId?: string;
 }
 /**
+ * GetVendorHardware请求参数结构体
+ */
+export interface GetVendorHardwareRequest {
+    /**
+     * 页码
+     */
+    PageNumber: number;
+    /**
+     * 页面数量
+     */
+    PageSize: number;
+    /**
+     * 关键字
+     */
+    Keyword?: string;
+    /**
+     * 激活状态，
+  空：全部；
+  1:待激活；
+  2:已激活；
+     */
+    Status?: number;
+}
+/**
  * GetDevice请求参数结构体
  */
 export interface GetDeviceRequest {
@@ -696,6 +858,87 @@ export interface GetDeviceRequest {
      * 搜索指定设备的id
      */
     DeviceId: string;
+}
+/**
+ * ActivateHardware返回参数结构体
+ */
+export interface ActivateHardwareResponse {
+    /**
+     * 完成激活的设备信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    HardwareInfo?: Array<ActivateHardware>;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * UpdateHardware请求参数结构体
+ */
+export interface UpdateHardwareRequest {
+    /**
+     * 硬件ID
+     */
+    HardwareId: string;
+    /**
+     * 硬件序列号
+     */
+    SN?: string;
+    /**
+     * 设备备注
+     */
+    Description?: string;
+}
+/**
+ * 硬件信息
+ */
+export interface HardwareInfo {
+    /**
+     * 设备ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DeviceId?: string;
+    /**
+     * 设备名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DeviceName?: string;
+    /**
+     * 激活时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ActiveTime?: string;
+    /**
+     * 最后在线时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    LastOnlineTime?: string;
+    /**
+     * 备注
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Description?: string;
+    /**
+     * 厂商备注
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    VendorDescription?: string;
+    /**
+     * license计费模式： 1，租户月付费 2，厂商月付费 3，license永久授权
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    LicenseChargingMode?: number;
+    /**
+     * 创建时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CreateTime?: string;
+    /**
+     * 硬件序列号
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SN?: string;
 }
 /**
  * GetDevices返回参数结构体
@@ -808,6 +1051,43 @@ export interface DeviceInfo {
     Wireless?: number;
 }
 /**
+ * AddHardware请求参数结构体
+ */
+export interface AddHardwareRequest {
+    /**
+     * 硬件列表
+     */
+    Hardware: Array<Hardware>;
+}
+/**
+ * 新建Hardware入参
+ */
+export interface Hardware {
+    /**
+     * 硬件序列号
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SN: string;
+    /**
+     * license计费模式：
+  1，租户月付费
+  2，厂商月付费
+  3，license永久授权
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    LicenseChargingMode: number;
+    /**
+     * 设备描述
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Description?: string;
+    /**
+     * 硬件ID，入参无需传递
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    HardwareId?: string;
+}
+/**
  * GetDevices请求参数结构体
  */
 export interface GetDevicesRequest {
@@ -832,6 +1112,27 @@ export interface GetDevicesRequest {
     DeviceType?: number;
 }
 /**
+ * GetHardwareList返回参数结构体
+ */
+export interface GetHardwareListResponse {
+    /**
+     * 硬件信息列表
+     */
+    HardwareInfos?: Array<HardwareInfo>;
+    /**
+     * 硬件总数
+     */
+    Length?: number;
+    /**
+     * 总页数
+     */
+    TotalPage?: number;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * 测速数据
  */
 export interface NetworkData {
@@ -851,6 +1152,15 @@ export interface NetworkData {
      * 10位秒级时间戳
      */
     Timestamp: number;
+}
+/**
+ * UpdateHardware返回参数结构体
+ */
+export interface UpdateHardwareResponse {
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * AddDevice请求参数结构体

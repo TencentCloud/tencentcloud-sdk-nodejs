@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { GetDeviceResponse, GetFlowStatisticResponse, GetFlowStatisticRequest, GetNetMonitorResponse, DeleteQosRequest, GetNetMonitorRequest, GetMultiFlowStatisticResponse, CreateQosResponse, DescribeQosResponse, CreateEncryptedKeyRequest, DeleteDeviceRequest, CreateEncryptedKeyResponse, UpdateDeviceResponse, CreateQosRequest, GetStatisticDataRequest, UpdateDeviceRequest, GetPublicKeyResponse, GetMultiFlowStatisticRequest, DeleteQosResponse, AddDeviceResponse, GetDeviceRequest, GetDevicesResponse, DescribeQosRequest, DeleteDeviceResponse, GetStatisticDataResponse, GetDevicesRequest, AddDeviceRequest, GetPublicKeyRequest } from "./mna_models";
+import { GetDeviceResponse, GetFlowStatisticResponse, GetFlowStatisticRequest, GetNetMonitorResponse, DeleteQosRequest, GetNetMonitorRequest, GetMultiFlowStatisticResponse, CreateQosResponse, DescribeQosResponse, CreateEncryptedKeyRequest, DeleteDeviceRequest, GetHardwareListRequest, CreateEncryptedKeyResponse, UpdateDeviceResponse, CreateQosRequest, GetStatisticDataRequest, GetVendorHardwareResponse, UpdateDeviceRequest, GetPublicKeyResponse, ActivateHardwareRequest, AddHardwareResponse, GetMultiFlowStatisticRequest, DeleteQosResponse, AddDeviceResponse, GetVendorHardwareRequest, GetDeviceRequest, ActivateHardwareResponse, UpdateHardwareRequest, GetDevicesResponse, DescribeQosRequest, DeleteDeviceResponse, GetStatisticDataResponse, AddHardwareRequest, GetDevicesRequest, GetHardwareListResponse, UpdateHardwareResponse, AddDeviceRequest, GetPublicKeyRequest } from "./mna_models";
 /**
  * mna client
  * @class
@@ -12,9 +12,17 @@ export declare class Client extends AbstractClient {
      */
     GetNetMonitor(req: GetNetMonitorRequest, cb?: (error: string, rep: GetNetMonitorResponse) => void): Promise<GetNetMonitorResponse>;
     /**
-     * 在用量统计页面下载流量数据
+     * 更新硬件信息
      */
-    GetStatisticData(req: GetStatisticDataRequest, cb?: (error: string, rep: GetStatisticDataResponse) => void): Promise<GetStatisticDataResponse>;
+    UpdateHardware(req: UpdateHardwareRequest, cb?: (error: string, rep: UpdateHardwareResponse) => void): Promise<UpdateHardwareResponse>;
+    /**
+     * 添加硬件设备，生成未激活的硬件设备，可支持批量添加
+     */
+    AddHardware(req: AddHardwareRequest, cb?: (error: string, rep: AddHardwareResponse) => void): Promise<AddHardwareResponse>;
+    /**
+     * 租户获取厂商硬件列表
+     */
+    GetHardwareList(req: GetHardwareListRequest, cb?: (error: string, rep: GetHardwareListResponse) => void): Promise<GetHardwareListResponse>;
     /**
      * 更新设备信息
      */
@@ -23,6 +31,10 @@ export declare class Client extends AbstractClient {
      * 新建设备记录
      */
     AddDevice(req: AddDeviceRequest, cb?: (error: string, rep: AddDeviceResponse) => void): Promise<AddDeviceResponse>;
+    /**
+     * 获取厂商硬件设备列表
+     */
+    GetVendorHardware(req: GetVendorHardwareRequest, cb?: (error: string, rep: GetVendorHardwareResponse) => void): Promise<GetVendorHardwareResponse>;
     /**
      * 获取Qos加速状态
      */
@@ -56,6 +68,10 @@ export declare class Client extends AbstractClient {
      */
     DeleteQos(req: DeleteQosRequest, cb?: (error: string, rep: DeleteQosResponse) => void): Promise<DeleteQosResponse>;
     /**
+     * 在用量统计页面下载流量数据
+     */
+    GetStatisticData(req: GetStatisticDataRequest, cb?: (error: string, rep: GetStatisticDataResponse) => void): Promise<GetStatisticDataResponse>;
+    /**
      * 通过指定设备的ID查找设备详细信息
      */
     GetDevice(req: GetDeviceRequest, cb?: (error: string, rep: GetDeviceResponse) => void): Promise<GetDeviceResponse>;
@@ -63,4 +79,8 @@ export declare class Client extends AbstractClient {
      * 移动网络发起Qos加速过程
      */
     CreateQos(req: CreateQosRequest, cb?: (error: string, rep: CreateQosResponse) => void): Promise<CreateQosResponse>;
+    /**
+     * 激活硬件设备
+     */
+    ActivateHardware(req: ActivateHardwareRequest, cb?: (error: string, rep: ActivateHardwareResponse) => void): Promise<ActivateHardwareResponse>;
 }

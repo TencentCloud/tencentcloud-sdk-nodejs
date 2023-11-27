@@ -3580,15 +3580,15 @@ export interface DescribeUnHandleEventTabListResponse {
      * 租户伪攻击链未处置事件
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Data: UnHandleEvent;
+    Data?: UnHandleEvent;
     /**
      * 错误码，0成功 非0错误
      */
-    ReturnCode: number;
+    ReturnCode?: number;
     /**
      * 返回信息 success成功
      */
-    ReturnMsg: string;
+    ReturnMsg?: string;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -4143,19 +4143,19 @@ export interface DescribeResourceGroupNewResponse {
     /**
      * 返回树形结构
      */
-    Data: string;
+    Data?: string;
     /**
      * 未分类实例数量
      */
-    UnResourceNum: number;
+    UnResourceNum?: number;
     /**
      * 接口返回消息
      */
-    ReturnMsg: string;
+    ReturnMsg?: string;
     /**
      * 返回码；0为请求成功
      */
-    ReturnCode: number;
+    ReturnCode?: number;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -5891,7 +5891,7 @@ export interface DescribeResourceGroupResponse {
     /**
      * 返回树形结构
      */
-    Data: string;
+    Data?: string;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -6444,6 +6444,10 @@ export interface DescribeResourceGroupRequest {
      * 资产组id  全部传0
      */
     GroupId?: string;
+    /**
+     * all  包含子组 own自己
+     */
+    ShowType?: string;
 }
 /**
  * CreateAcRules请求参数结构体

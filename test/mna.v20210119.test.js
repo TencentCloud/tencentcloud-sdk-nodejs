@@ -28,9 +28,29 @@ it("mna.v20210119.GetNetMonitor", async function () {
     }
 })
 
-it("mna.v20210119.GetStatisticData", async function () {
+it("mna.v20210119.UpdateHardware", async function () {
     try {
-       const data = await client.GetStatisticData({})
+       const data = await client.UpdateHardware({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mna.v20210119.AddHardware", async function () {
+    try {
+       const data = await client.AddHardware({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mna.v20210119.GetHardwareList", async function () {
+    try {
+       const data = await client.GetHardwareList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -51,6 +71,16 @@ it("mna.v20210119.UpdateDevice", async function () {
 it("mna.v20210119.AddDevice", async function () {
     try {
        const data = await client.AddDevice({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mna.v20210119.GetVendorHardware", async function () {
+    try {
+       const data = await client.GetVendorHardware({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -138,6 +168,16 @@ it("mna.v20210119.DeleteQos", async function () {
     }
 })
 
+it("mna.v20210119.GetStatisticData", async function () {
+    try {
+       const data = await client.GetStatisticData({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mna.v20210119.GetDevice", async function () {
     try {
        const data = await client.GetDevice({})
@@ -151,6 +191,16 @@ it("mna.v20210119.GetDevice", async function () {
 it("mna.v20210119.CreateQos", async function () {
     try {
        const data = await client.CreateQos({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mna.v20210119.ActivateHardware", async function () {
+    try {
+       const data = await client.ActivateHardware({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -6596,7 +6596,7 @@ export interface DescribeVpcEndPointServiceRequest {
    */
   EndPointServiceIds?: Array<string>
   /**
-   * <li>不支持同时传入参数 Filters 。</li> <li>列出授权给当前账号的的终端节点服务信息。可以配合EndPointServiceIds参数进行过滤，那些终端节点服务授权了该账户。</li>
+   * <li>不支持同时传入参数 Filters 。</li> <li>列出授权给当前账号的终端节点服务信息。可以配合EndPointServiceIds参数进行过滤，那些终端节点服务授权了该账户。</li>
    */
   IsListAuthorizedEndPointService?: boolean
 }
@@ -7262,56 +7262,56 @@ export interface EndPoint {
   /**
    * 终端节点ID。
    */
-  EndPointId: string
+  EndPointId?: string
   /**
    * VPCID。
    */
-  VpcId: string
+  VpcId?: string
   /**
    * 子网ID。
    */
-  SubnetId: string
+  SubnetId?: string
   /**
    * APPID。
    */
-  EndPointOwner: string
+  EndPointOwner?: string
   /**
    * 终端节点名称。
    */
-  EndPointName: string
+  EndPointName?: string
   /**
    * 终端节点服务的VPCID。
    */
-  ServiceVpcId: string
+  ServiceVpcId?: string
   /**
    * 终端节点服务的VIP。
    */
-  ServiceVip: string
+  ServiceVip?: string
   /**
    * 终端节点服务的ID。
    */
-  EndPointServiceId: string
+  EndPointServiceId?: string
   /**
    * 终端节点的VIP。
    */
-  EndPointVip: string
+  EndPointVip?: string
   /**
    * 终端节点状态，ACTIVE：可用，PENDING：待接受，ACCEPTING：接受中，REJECTED：已拒绝，FAILED：失败。
    */
-  State: string
+  State?: string
   /**
    * 创建时间。
    */
-  CreateTime: string
+  CreateTime?: string
   /**
    * 终端节点绑定的安全组实例ID列表。
    */
-  GroupSet: Array<string>
+  GroupSet?: Array<string>
   /**
    * 终端节点服务名称。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ServiceName: string
+  ServiceName?: string
 }
 
 /**
@@ -7569,49 +7569,59 @@ export interface EndPointService {
   /**
    * 终端节点服务ID
    */
-  EndPointServiceId: string
+  EndPointServiceId?: string
   /**
    * VPCID。
    */
-  VpcId: string
+  VpcId?: string
   /**
    * APPID。
    */
-  ServiceOwner: string
+  ServiceOwner?: string
   /**
    * 终端节点服务名称。
    */
-  ServiceName: string
+  ServiceName?: string
   /**
    * 后端服务的VIP。
    */
-  ServiceVip: string
+  ServiceVip?: string
   /**
    * 后端服务的ID，比如lb-xxx。
    */
-  ServiceInstanceId: string
+  ServiceInstanceId?: string
   /**
    * 是否自动接受。
    */
-  AutoAcceptFlag: boolean
+  AutoAcceptFlag?: boolean
   /**
    * 关联的终端节点个数。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  EndPointCount: number
+  EndPointCount?: number
   /**
    * 终端节点对象数组。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  EndPointSet: Array<EndPoint>
+  EndPointSet?: Array<EndPoint>
   /**
    * 创建时间。
    */
-  CreateTime: string
+  CreateTime?: string
   /**
    * 挂载的PAAS服务类型，CLB,CDB,CRS
    */
-  ServiceType: string
+  ServiceType?: string
+  /**
+   * Uin
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ServiceUin?: string
+  /**
+   * 服务IP类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BusinessIpType?: number
 }
 
 /**

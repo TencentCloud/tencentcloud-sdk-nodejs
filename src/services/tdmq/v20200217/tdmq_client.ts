@@ -31,6 +31,7 @@ import {
   DescribeSubscriptionsRequest,
   DescribeRocketMQGroupsRequest,
   CreateRocketMQGroupRequest,
+  CreateRocketMQNamespaceRequest,
   ModifyRabbitMQVirtualHostRequest,
   ModifyEnvironmentAttributesRequest,
   DeleteClusterResponse,
@@ -77,7 +78,7 @@ import {
   DescribeRocketMQConsumeStatsResponse,
   DeleteCmqTopicResponse,
   CreateSubscriptionRequest,
-  CreateRocketMQNamespaceRequest,
+  DeleteProClusterRequest,
   RocketMQSubscription,
   RabbitMQVirtualHostInfo,
   InstanceNodeDistribution,
@@ -179,7 +180,7 @@ import {
   ConsumerLogs,
   DescribeBindVpcsRequest,
   DescribeClustersResponse,
-  RocketMQConsumerConnection,
+  DescribeAMQPClustersRequest,
   ClearCmqSubscriptionFilterTagsRequest,
   TopicRecord,
   SendCmqMsgResponse,
@@ -216,7 +217,7 @@ import {
   CreateClusterRequest,
   DescribeRocketMQSourceClusterTopicListResponse,
   DescribeRabbitMQVirtualHostListRequest,
-  DescribeAMQPClustersRequest,
+  DeleteProClusterResponse,
   ModifyCmqQueueAttributeResponse,
   CreateTopicResponse,
   DescribeCmqQueuesRequest,
@@ -334,6 +335,7 @@ import {
   TraceResult,
   ProducerLog,
   DeleteRabbitMQVipInstanceRequest,
+  RocketMQConsumerConnection,
   DescribePublisherSummaryRequest,
   DeleteSubscriptionsRequest,
   DeleteProClustersResponse,
@@ -481,6 +483,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteRocketMQGroupResponse) => void
   ): Promise<DeleteRocketMQGroupResponse> {
     return this.request("DeleteRocketMQGroup", req, cb)
+  }
+
+  /**
+   * 删除专业集群——预付费，仅通过API 调用
+   */
+  async DeleteProCluster(
+    req: DeleteProClusterRequest,
+    cb?: (error: string, rep: DeleteProClusterResponse) => void
+  ): Promise<DeleteProClusterResponse> {
+    return this.request("DeleteProCluster", req, cb)
   }
 
   /**

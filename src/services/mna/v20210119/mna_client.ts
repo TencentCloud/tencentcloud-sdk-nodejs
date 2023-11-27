@@ -29,6 +29,7 @@ import {
   DeleteQosRequest,
   GetNetMonitorRequest,
   NetDetails,
+  VendorHardware,
   DeviceNetInfo,
   GetMultiFlowStatisticResponse,
   SrcAddressInfo,
@@ -36,29 +37,42 @@ import {
   CreateQosResponse,
   DescribeQosResponse,
   CreateEncryptedKeyRequest,
+  ActivateHardware,
   DeleteDeviceRequest,
+  GetHardwareListRequest,
   CreateEncryptedKeyResponse,
   UpdateDeviceResponse,
   DeviceDetails,
   CreateQosRequest,
   GetStatisticDataRequest,
+  GetVendorHardwareResponse,
   UpdateDeviceRequest,
   GetPublicKeyResponse,
+  ActivateHardwareRequest,
+  AddHardwareResponse,
   GetMultiFlowStatisticRequest,
   DeviceBaseInfo,
   ExpectedThreshold,
   DeleteQosResponse,
   Context,
   AddDeviceResponse,
+  GetVendorHardwareRequest,
   GetDeviceRequest,
+  ActivateHardwareResponse,
+  UpdateHardwareRequest,
+  HardwareInfo,
   GetDevicesResponse,
   DescribeQosRequest,
   MonitorData,
   DeleteDeviceResponse,
   GetStatisticDataResponse,
   DeviceInfo,
+  AddHardwareRequest,
+  Hardware,
   GetDevicesRequest,
+  GetHardwareListResponse,
   NetworkData,
+  UpdateHardwareResponse,
   AddDeviceRequest,
   GetPublicKeyRequest,
 } from "./mna_models"
@@ -83,13 +97,33 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 在用量统计页面下载流量数据
+   * 更新硬件信息
    */
-  async GetStatisticData(
-    req: GetStatisticDataRequest,
-    cb?: (error: string, rep: GetStatisticDataResponse) => void
-  ): Promise<GetStatisticDataResponse> {
-    return this.request("GetStatisticData", req, cb)
+  async UpdateHardware(
+    req: UpdateHardwareRequest,
+    cb?: (error: string, rep: UpdateHardwareResponse) => void
+  ): Promise<UpdateHardwareResponse> {
+    return this.request("UpdateHardware", req, cb)
+  }
+
+  /**
+   * 添加硬件设备，生成未激活的硬件设备，可支持批量添加
+   */
+  async AddHardware(
+    req: AddHardwareRequest,
+    cb?: (error: string, rep: AddHardwareResponse) => void
+  ): Promise<AddHardwareResponse> {
+    return this.request("AddHardware", req, cb)
+  }
+
+  /**
+   * 租户获取厂商硬件列表
+   */
+  async GetHardwareList(
+    req: GetHardwareListRequest,
+    cb?: (error: string, rep: GetHardwareListResponse) => void
+  ): Promise<GetHardwareListResponse> {
+    return this.request("GetHardwareList", req, cb)
   }
 
   /**
@@ -110,6 +144,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: AddDeviceResponse) => void
   ): Promise<AddDeviceResponse> {
     return this.request("AddDevice", req, cb)
+  }
+
+  /**
+   * 获取厂商硬件设备列表
+   */
+  async GetVendorHardware(
+    req: GetVendorHardwareRequest,
+    cb?: (error: string, rep: GetVendorHardwareResponse) => void
+  ): Promise<GetVendorHardwareResponse> {
+    return this.request("GetVendorHardware", req, cb)
   }
 
   /**
@@ -193,6 +237,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 在用量统计页面下载流量数据
+   */
+  async GetStatisticData(
+    req: GetStatisticDataRequest,
+    cb?: (error: string, rep: GetStatisticDataResponse) => void
+  ): Promise<GetStatisticDataResponse> {
+    return this.request("GetStatisticData", req, cb)
+  }
+
+  /**
    * 通过指定设备的ID查找设备详细信息
    */
   async GetDevice(
@@ -210,5 +264,15 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateQosResponse) => void
   ): Promise<CreateQosResponse> {
     return this.request("CreateQos", req, cb)
+  }
+
+  /**
+   * 激活硬件设备
+   */
+  async ActivateHardware(
+    req: ActivateHardwareRequest,
+    cb?: (error: string, rep: ActivateHardwareResponse) => void
+  ): Promise<ActivateHardwareResponse> {
+    return this.request("ActivateHardware", req, cb)
   }
 }

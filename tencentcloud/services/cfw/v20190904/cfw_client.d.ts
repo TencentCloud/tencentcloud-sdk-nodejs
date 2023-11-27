@@ -76,7 +76,6 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
     DeleteVpcInstance(req?: DeleteVpcInstanceRequest, cb?: (error: string, rep: DeleteVpcInstanceResponse) => void): Promise<DeleteVpcInstanceResponse>;
     /**
      * DescribeUnHandleEventTabList 告警中心伪攻击链事件未处置接口
-
      */
     DescribeUnHandleEventTabList(req: DescribeUnHandleEventTabListRequest, cb?: (error: string, rep: DescribeUnHandleEventTabListResponse) => void): Promise<DescribeUnHandleEventTabListResponse>;
     /**

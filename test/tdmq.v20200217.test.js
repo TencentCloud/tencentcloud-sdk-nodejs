@@ -138,6 +138,16 @@ it("tdmq.v20200217.DeleteRocketMQGroup", async function () {
     }
 })
 
+it("tdmq.v20200217.DeleteProCluster", async function () {
+    try {
+       const data = await client.DeleteProCluster({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tdmq.v20200217.DescribeRocketMQSmoothMigrationTaskList", async function () {
     try {
        const data = await client.DescribeRocketMQSmoothMigrationTaskList({})

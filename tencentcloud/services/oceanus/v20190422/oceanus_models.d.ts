@@ -311,6 +311,14 @@ export interface CreateJobConfigRequest {
      * 算子拓扑图
      */
     JobGraph?: JobGraph;
+    /**
+     * es索引名称
+     */
+    EsServerlessIndex?: string;
+    /**
+     * es索引空间
+     */
+    EsServerlessSpace?: string;
 }
 /**
  * 集群的版本相关信息
@@ -733,15 +741,15 @@ export interface ResourceRefJobInfo {
     /**
      * Job id
      */
-    JobId: string;
+    JobId?: string;
     /**
      * Job配置版本
      */
-    JobConfigVersion: number;
+    JobConfigVersion?: number;
     /**
      * 资源版本
      */
-    ResourceVersion: number;
+    ResourceVersion?: number;
 }
 /**
  * SqlGateway返回LogicalType类型
@@ -1437,11 +1445,11 @@ export interface DescribeResourceRelatedJobsResponse {
     /**
      * 总数
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 关联作业信息
      */
-    RefJobInfos: Array<ResourceRefJobInfo>;
+    RefJobInfos?: Array<ResourceRefJobInfo>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */

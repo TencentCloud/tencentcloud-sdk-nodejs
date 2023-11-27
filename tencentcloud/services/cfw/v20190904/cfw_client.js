@@ -128,7 +128,6 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
     }
     /**
      * DescribeUnHandleEventTabList 告警中心伪攻击链事件未处置接口
-
      */
     async DescribeUnHandleEventTabList(req, cb) {
         return this.request("DescribeUnHandleEventTabList", req, cb);
