@@ -16,7 +16,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeDSPAAssessmentRiskDealedOverview(req: DescribeDSPAAssessmentRiskDealedOverviewRequest, cb?: (error: string, rep: DescribeDSPAAssessmentRiskDealedOverviewResponse) => void): Promise<DescribeDSPAAssessmentRiskDealedOverviewResponse>;
     /**
-     * 复制合规组模版
+     * 复制合规组模板
      */
     CopyDSPATemplate(req: CopyDSPATemplateRequest, cb?: (error: string, rep: CopyDSPATemplateResponse) => void): Promise<CopyDSPATemplateResponse>;
     /**
@@ -24,7 +24,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeDSPAAssessmentRiskLevelDetail(req: DescribeDSPAAssessmentRiskLevelDetailRequest, cb?: (error: string, rep: DescribeDSPAAssessmentRiskLevelDetailResponse) => void): Promise<DescribeDSPAAssessmentRiskLevelDetailResponse>;
     /**
-     * 风险项页面--查看评估模版详情
+     * 风险项页面--查看评估模板详情
      */
     DescribeDSPAAssessmentRiskTemplateDetail(req: DescribeDSPAAssessmentRiskTemplateDetailRequest, cb?: (error: string, rep: DescribeDSPAAssessmentRiskTemplateDetailResponse) => void): Promise<DescribeDSPAAssessmentRiskTemplateDetailResponse>;
     /**
@@ -198,7 +198,7 @@ export declare class Client extends AbstractClient {
      */
     CreateNewClassification(req?: CreateNewClassificationRequest, cb?: (error: string, rep: CreateNewClassificationResponse) => void): Promise<CreateNewClassificationResponse>;
     /**
-     * 风险模版---修改风险模版
+     * 风险模板---修改风险模板
      */
     ModifyDSPAAssessmentRiskTemplate(req: ModifyDSPAAssessmentRiskTemplateRequest, cb?: (error: string, rep: ModifyDSPAAssessmentRiskTemplateResponse) => void): Promise<ModifyDSPAAssessmentRiskTemplateResponse>;
     /**
@@ -351,7 +351,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeDSPACategoryRules(req: DescribeDSPACategoryRulesRequest, cb?: (error: string, rep: DescribeDSPACategoryRulesResponse) => void): Promise<DescribeDSPACategoryRulesResponse>;
     /**
-     * 风险模版页面--查询风险模版中的脆弱项配置
+     * 风险模板页面--查询风险模板中的脆弱项配置
      */
     DescribeDSPAAssessmentRiskTemplateVulnerableList(req: DescribeDSPAAssessmentRiskTemplateVulnerableListRequest, cb?: (error: string, rep: DescribeDSPAAssessmentRiskTemplateVulnerableListResponse) => void): Promise<DescribeDSPAAssessmentRiskTemplateVulnerableListResponse>;
     /**
@@ -391,7 +391,7 @@ export declare class Client extends AbstractClient {
      */
     VerifyDSPACOSRule(req: VerifyDSPACOSRuleRequest, cb?: (error: string, rep: VerifyDSPACOSRuleResponse) => void): Promise<VerifyDSPACOSRuleResponse>;
     /**
-     * 风险评估模版---创建风险评估模版
+     * 风险评估模板---创建风险评估模板
      */
     CreateDSPAAssessmentRiskTemplate(req: CreateDSPAAssessmentRiskTemplateRequest, cb?: (error: string, rep: CreateDSPAAssessmentRiskTemplateResponse) => void): Promise<CreateDSPAAssessmentRiskTemplateResponse>;
     /**

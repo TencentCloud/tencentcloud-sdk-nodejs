@@ -1199,6 +1199,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("SimpleHlsClip", req, cb);
     }
     /**
+     * 设置点播域名 HTTPS 证书。
+     */
+    async SetVodDomainCertificate(req, cb) {
+        return this.request("SetVodDomainCertificate", req, cb);
+    }
+    /**
      * 1. 该接口可以获取多个媒体文件的多种信息，包括：
     1. 基础信息（basicInfo）：包括媒体名称、分类、播放地址、封面图片等。
     2. 元信息（metaData）：包括大小、时长、视频流信息、音频流信息等。

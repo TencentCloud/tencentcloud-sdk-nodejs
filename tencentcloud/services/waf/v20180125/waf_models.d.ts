@@ -4503,7 +4503,8 @@ export interface DescribeFlowTrendResponse {
  */
 export interface UpsertIpAccessControlRequest {
     /**
-     * 域名
+     * 具体域名如：test.qcloudwaf.com
+  全局域名为：global
      */
     Domain: string;
     /**

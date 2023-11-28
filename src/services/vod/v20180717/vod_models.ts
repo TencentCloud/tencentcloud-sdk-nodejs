@@ -3539,6 +3539,11 @@ export interface AiAnalysisTaskHighlightResult {
 }
 
 /**
+ * SetVodDomainCertificate请求参数结构体
+ */
+export type SetVodDomainCertificateRequest = null
+
+/**
  * CreateRebuildMediaTemplate返回参数结构体
  */
 export interface CreateRebuildMediaTemplateResponse {
@@ -8291,6 +8296,19 @@ export interface BlurConfigureInfoForUpdate {
  */
 export interface EditMediaVideoStream {
   /**
+   * 视频流的编码格式，可选值：
+<li>libx264：H.264 编码；</li>
+<li>libx265：H.265 编码；</li>
+<li>av1：AOMedia Video 1 编码；</li>
+<li>H.266：H.266 编码。</li>
+   */
+  Codec?: string
+  /**
+   * 视频流的码率，取值范围：0 和 [128, 35000]，单位：kbps。
+当取值为 0 或不填时，表示自动选择最佳视频码率。
+   */
+  Bitrate?: number
+  /**
    * 分辨率自适应，可选值：
 <li>open：开启，此时，Width 代表视频的长边，Height 表示视频的短边；</li>
 <li>close：关闭，此时，Width 代表视频的宽度，Height 表示视频的高度。</li>
@@ -9146,6 +9164,16 @@ export interface AiRecognitionTaskHeadTailResultOutput {
  * ModifyImageSpriteTemplate返回参数结构体
  */
 export interface ModifyImageSpriteTemplateResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * SetVodDomainCertificate返回参数结构体
+ */
+export interface SetVodDomainCertificateResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

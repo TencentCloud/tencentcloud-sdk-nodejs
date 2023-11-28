@@ -4996,27 +4996,27 @@ export interface DescribeMachinesResponse {
   /**
    * 机器状态信息组
    */
-  Machines: Array<MachineInfo>
+  Machines?: Array<MachineInfo>
   /**
    * 机器组是否开启自动升级功能
    */
-  AutoUpdate: number
+  AutoUpdate?: number
   /**
    * 机器组自动升级功能预设开始时间
    */
-  UpdateStartTime: string
+  UpdateStartTime?: string
   /**
    * 机器组自动升级功能预设结束时间
    */
-  UpdateEndTime: string
+  UpdateEndTime?: string
   /**
    * 当前用户可用最新的Loglistener版本
    */
-  LatestAgentVersion: string
+  LatestAgentVersion?: string
   /**
    * 是否开启服务日志
    */
-  ServiceLogging: boolean
+  ServiceLogging?: boolean
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5610,7 +5610,15 @@ export interface DescribeScheduledSqlInfoRequest {
    */
   TaskId?: string
   /**
-   * <li>srcTopicName按照【源日志主题名称】进行过滤，模糊匹配，类型：String必选：否<br><li>dstTopicName按照【目标日志主题名称】进行过滤，模糊匹配，类型：String必选：否<br><li>srcTopicId按照【源日志主题ID】进行过滤。类型：String必选：否<br><li>dstTopicId按照【目标日志主题ID】进行过滤。类型：String必选：否<br><li>bizType按照【主题类型】进行过滤,0日志主题1指标主题,，。类型：String必选：否<br><li>status按照【任务状态】进行过滤。类型：String必选：否<br><li>taskName按照【任务名称】进行过滤，模糊匹配，。类型：String必选：否<br><li>taskId按照【任务ID】进行过滤，模糊匹配，。类型：String必选：否每次请求的Filters的上限为10，Filter.Values的上限为100。
+   * <li>srcTopicName按照【源日志主题名称】进行过滤，模糊匹配，类型：String必选：否</li>
+<li>dstTopicName按照【目标日志主题名称】进行过滤，模糊匹配，类型：String必选：否</li>
+<li>srcTopicId按照【源日志主题ID】进行过滤。类型：String必选：否</li>
+<li>dstTopicId按照【目标日志主题ID】进行过滤。类型：String必选：否</li>
+<li>bizType按照【主题类型】进行过滤,0日志主题1指标主题,。类型：String必选：否</li>
+<li>status按照【任务状态】进行过滤。类型：String必选：否</li>
+<li>taskName按照【任务名称】进行过滤，模糊匹配，。类型：String必选：否</li>
+<li>taskId按照【任务ID】进行过滤，模糊匹配，。类型：String必选：否</li>
+
    */
   Filters?: Array<Filter>
 }

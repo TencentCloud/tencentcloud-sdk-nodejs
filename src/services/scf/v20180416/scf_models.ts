@@ -1815,6 +1815,14 @@ export interface CreateFunctionRequest {
    * 单实例多并发配置。只支持Web函数。
    */
   InstanceConcurrencyConfig?: InstanceConcurrencyConfig
+  /**
+   * 是否开启Dns缓存能力。只支持EVENT函数。默认为FALSE，TRUE 为开启，FALSE为关闭
+   */
+  DnsCache?: string
+  /**
+   * 内网访问配置
+   */
+  IntranetConfig?: IntranetConfigIn
 }
 
 /**
@@ -3421,6 +3429,19 @@ export interface GetFunctionLogsResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 内网配置
+ */
+export interface IntranetConfigIn {
+  /**
+   * 是否开启固定内网IP
+ENABLE 为开启
+DISABLE 为不开启
+
+   */
+  IpFixed: string
 }
 
 /**

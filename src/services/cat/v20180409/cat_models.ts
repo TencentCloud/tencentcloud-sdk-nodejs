@@ -398,11 +398,11 @@ AnalyzeTaskType_MediaStream：音视频体验
    */
   AnalyzeTaskType?: string
   /**
-   * 指标类型，指标查询默认传gauge
+   * 指标类型（counter、gauge以及histogram），指标查询默认传gauge
    */
   MetricType?: string
   /**
-   * 指标详细字段，可以传递传具体的指标也可以对指标进行聚合查询例如："avg(ping_time)"代表整体时延(ms)
+   * 指标详细字段，可以传递传具体的指标也可以对指标进行聚合查询例如："avg(ping_time)"代表整体时延(ms)；不同的任务类型支持不同的field查询，以及聚合规则，详情可联系云拨测。
    */
   Field?: string
   /**

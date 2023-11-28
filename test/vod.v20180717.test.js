@@ -1538,6 +1538,16 @@ it("vod.v20180717.SimpleHlsClip", async function () {
     }
 })
 
+it("vod.v20180717.SetVodDomainCertificate", async function () {
+    try {
+       const data = await client.SetVodDomainCertificate({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vod.v20180717.DescribeMediaInfos", async function () {
     try {
        const data = await client.DescribeMediaInfos({})

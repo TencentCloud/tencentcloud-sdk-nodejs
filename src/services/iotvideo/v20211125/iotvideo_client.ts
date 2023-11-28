@@ -25,7 +25,7 @@ import {
   CreateCloudStorageRequest,
   MessageCntStats,
   DescribeDeviceDataStatsRequest,
-  VideoBatch,
+  ThumbnailURLInfoList,
   ImportModelDefinitionResponse,
   ApplyAIModelRequest,
   CreateBatchRequest,
@@ -33,7 +33,7 @@ import {
   ModifyProductDynamicRegisterResponse,
   CancelAIModelApplicationResponse,
   DescribeCloudStorageTimeResponse,
-  DescribeDeviceStatusLogResponse,
+  DescribeCloudStorageThumbnailListRequest,
   DescribeDevicePackagesRequest,
   ReportAliveDeviceRequest,
   DescribeProductsRequest,
@@ -56,6 +56,7 @@ import {
   DescribeBatchRequest,
   DescribeForwardRuleRequest,
   ModifyDeviceRequest,
+  VideoBatch,
   CreateCOSCredentialsResponse,
   ProductModelDefinition,
   ActionHistory,
@@ -71,6 +72,7 @@ import {
   CheckForwardAuthRequest,
   DescribeDeviceDataRequest,
   CreateBatchResponse,
+  DescribePackageConsumeTasksResponse,
   DescribeDeviceActionHistoryResponse,
   DescribeCategoryRequest,
   CreateCOSCredentialsRequest,
@@ -104,7 +106,7 @@ import {
   GetAllFirmwareVersionRequest,
   DescribeFirmwareTaskDevicesRequest,
   DescribeFirmwareResponse,
-  DescribePackageConsumeTasksResponse,
+  DescribeDeviceStatusLogResponse,
   DescribeDeviceCommLogRequest,
   WakeUpDeviceResponse,
   DeleteForwardRuleRequest,
@@ -199,6 +201,7 @@ import {
   ImportModelDefinitionRequest,
   CreateTaskFileUrlRequest,
   ModifyModelDefinitionResponse,
+  DescribeCloudStorageThumbnailListResponse,
   CallTRTCDeviceResponse,
   ModifyDeviceLogLevelResponse,
   CreateDataForwardRequest,
@@ -428,6 +431,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ImportModelDefinitionResponse) => void
   ): Promise<ImportModelDefinitionResponse> {
     return this.request("ImportModelDefinition", req, cb)
+  }
+
+  /**
+   * 批量拉取云存事件缩略图
+   */
+  async DescribeCloudStorageThumbnailList(
+    req: DescribeCloudStorageThumbnailListRequest,
+    cb?: (error: string, rep: DescribeCloudStorageThumbnailListResponse) => void
+  ): Promise<DescribeCloudStorageThumbnailListResponse> {
+    return this.request("DescribeCloudStorageThumbnailList", req, cb)
   }
 
   /**

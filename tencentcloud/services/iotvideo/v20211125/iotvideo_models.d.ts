@@ -161,49 +161,19 @@ export interface DescribeDeviceDataStatsRequest {
     ProductId?: string;
 }
 /**
- * 批次元数据
+ * 缩略图信息
  */
-export interface VideoBatch {
+export interface ThumbnailURLInfoList {
     /**
-     * 批次ID
+     * 缩略图访问地址
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Id: number;
+    ThumbnailURL?: string;
     /**
-     * 用户ID
+     * 缩略图访问地址的过期时间
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    UserId: string;
-    /**
-     * 产品ID
-     */
-    ProductId: string;
-    /**
-     * 状态：1：待创建设备 2：创建中 3：已完成
-     */
-    Status: number;
-    /**
-     * 设备前缀
-     */
-    DevPre: string;
-    /**
-     * 设备数量
-     */
-    DevNum: number;
-    /**
-     * 已创建设备数量
-     */
-    DevNumCreated: number;
-    /**
-     * 批次下载地址
-     */
-    BatchURL: string;
-    /**
-     * 创建时间。unix时间戳
-     */
-    CreateTime: number;
-    /**
-     * 修改时间。unix时间戳
-     */
-    UpdateTime: number;
+    ExpireTime?: number;
 }
 /**
  * ImportModelDefinition返回参数结构体
@@ -297,33 +267,21 @@ export interface DescribeCloudStorageTimeResponse {
     RequestId?: string;
 }
 /**
- * DescribeDeviceStatusLog返回参数结构体
+ * DescribeCloudStorageThumbnailList请求参数结构体
  */
-export interface DescribeDeviceStatusLogResponse {
+export interface DescribeCloudStorageThumbnailListRequest {
     /**
-     * 数据是否已全部返回，true 表示数据全部返回，false 表示还有数据待返回，可将 Context 作为入参，继续查询返回结果。
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 产品ID
      */
-    Listover: boolean;
+    ProductId: string;
     /**
-     * 检索上下文，当 ListOver 为false时，可以用此上下文，继续读取后续数据
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 设备名称
      */
-    Context: string;
+    DeviceName: string;
     /**
-     * 日志数据结果数组，返回对应时间点及取值。
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 缩略图文件名列表
      */
-    Results: Array<DeviceStatusLogItem>;
-    /**
-     * 日志数据结果总条数
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    TotalCount: number;
-    /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
+    ThumbnailList: Array<string>;
 }
 /**
  * DescribeDevicePackages请求参数结构体
@@ -754,6 +712,51 @@ export interface ModifyDeviceRequest {
     EnableState?: number;
 }
 /**
+ * 批次元数据
+ */
+export interface VideoBatch {
+    /**
+     * 批次ID
+     */
+    Id: number;
+    /**
+     * 用户ID
+     */
+    UserId: string;
+    /**
+     * 产品ID
+     */
+    ProductId: string;
+    /**
+     * 状态：1：待创建设备 2：创建中 3：已完成
+     */
+    Status: number;
+    /**
+     * 设备前缀
+     */
+    DevPre: string;
+    /**
+     * 设备数量
+     */
+    DevNum: number;
+    /**
+     * 已创建设备数量
+     */
+    DevNumCreated: number;
+    /**
+     * 批次下载地址
+     */
+    BatchURL: string;
+    /**
+     * 创建时间。unix时间戳
+     */
+    CreateTime: number;
+    /**
+     * 修改时间。unix时间戳
+     */
+    UpdateTime: number;
+}
+/**
  * CreateCOSCredentials返回参数结构体
  */
 export interface CreateCOSCredentialsResponse {
@@ -1076,6 +1079,23 @@ export interface CreateBatchResponse {
      * 批次ID
      */
     BatchId: number;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * DescribePackageConsumeTasks返回参数结构体
+ */
+export interface DescribePackageConsumeTasksResponse {
+    /**
+     * 总数
+     */
+    TotalCount: number;
+    /**
+     * 任务列表
+     */
+    List: Array<PackageConsumeTask>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1740,17 +1760,29 @@ export interface DescribeFirmwareResponse {
     RequestId?: string;
 }
 /**
- * DescribePackageConsumeTasks返回参数结构体
+ * DescribeDeviceStatusLog返回参数结构体
  */
-export interface DescribePackageConsumeTasksResponse {
+export interface DescribeDeviceStatusLogResponse {
     /**
-     * 总数
+     * 数据是否已全部返回，true 表示数据全部返回，false 表示还有数据待返回，可将 Context 作为入参，继续查询返回结果。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Listover: boolean;
+    /**
+     * 检索上下文，当 ListOver 为false时，可以用此上下文，继续读取后续数据
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Context: string;
+    /**
+     * 日志数据结果数组，返回对应时间点及取值。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Results: Array<DeviceStatusLogItem>;
+    /**
+     * 日志数据结果总条数
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     TotalCount: number;
-    /**
-     * 任务列表
-     */
-    List: Array<PackageConsumeTask>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -3626,6 +3658,19 @@ export interface CreateTaskFileUrlRequest {
  * ModifyModelDefinition返回参数结构体
  */
 export interface ModifyModelDefinitionResponse {
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * DescribeCloudStorageThumbnailList返回参数结构体
+ */
+export interface DescribeCloudStorageThumbnailListResponse {
+    /**
+     * 缩略图访问地址
+     */
+    ThumbnailURLInfoList?: Array<ThumbnailURLInfoList>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */

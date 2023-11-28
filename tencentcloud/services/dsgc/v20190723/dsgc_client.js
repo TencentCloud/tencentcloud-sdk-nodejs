@@ -40,7 +40,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDSPAAssessmentRiskDealedOverview", req, cb);
     }
     /**
-     * 复制合规组模版
+     * 复制合规组模板
      */
     async CopyDSPATemplate(req, cb) {
         return this.request("CopyDSPATemplate", req, cb);
@@ -52,7 +52,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDSPAAssessmentRiskLevelDetail", req, cb);
     }
     /**
-     * 风险项页面--查看评估模版详情
+     * 风险项页面--查看评估模板详情
      */
     async DescribeDSPAAssessmentRiskTemplateDetail(req, cb) {
         return this.request("DescribeDSPAAssessmentRiskTemplateDetail", req, cb);
@@ -306,7 +306,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateNewClassification", req, cb);
     }
     /**
-     * 风险模版---修改风险模版
+     * 风险模板---修改风险模板
      */
     async ModifyDSPAAssessmentRiskTemplate(req, cb) {
         return this.request("ModifyDSPAAssessmentRiskTemplate", req, cb);
@@ -529,7 +529,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDSPACategoryRules", req, cb);
     }
     /**
-     * 风险模版页面--查询风险模版中的脆弱项配置
+     * 风险模板页面--查询风险模板中的脆弱项配置
      */
     async DescribeDSPAAssessmentRiskTemplateVulnerableList(req, cb) {
         return this.request("DescribeDSPAAssessmentRiskTemplateVulnerableList", req, cb);
@@ -589,7 +589,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("VerifyDSPACOSRule", req, cb);
     }
     /**
-     * 风险评估模版---创建风险评估模版
+     * 风险评估模板---创建风险评估模板
      */
     async CreateDSPAAssessmentRiskTemplate(req, cb) {
         return this.request("CreateDSPAAssessmentRiskTemplate", req, cb);

@@ -460,7 +460,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 复制合规组模版
+   * 复制合规组模板
    */
   async CopyDSPATemplate(
     req: CopyDSPATemplateRequest,
@@ -480,7 +480,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 风险项页面--查看评估模版详情
+   * 风险项页面--查看评估模板详情
    */
   async DescribeDSPAAssessmentRiskTemplateDetail(
     req: DescribeDSPAAssessmentRiskTemplateDetailRequest,
@@ -894,7 +894,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 风险模版---修改风险模版
+   * 风险模板---修改风险模板
    */
   async ModifyDSPAAssessmentRiskTemplate(
     req: ModifyDSPAAssessmentRiskTemplateRequest,
@@ -1257,7 +1257,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 风险模版页面--查询风险模版中的脆弱项配置
+   * 风险模板页面--查询风险模板中的脆弱项配置
    */
   async DescribeDSPAAssessmentRiskTemplateVulnerableList(
     req: DescribeDSPAAssessmentRiskTemplateVulnerableListRequest,
@@ -1357,7 +1357,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 风险评估模版---创建风险评估模版
+   * 风险评估模板---创建风险评估模板
    */
   async CreateDSPAAssessmentRiskTemplate(
     req: CreateDSPAAssessmentRiskTemplateRequest,

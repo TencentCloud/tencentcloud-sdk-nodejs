@@ -504,7 +504,7 @@ cls.pb.cc cls.pb.h cls.proto
      */
     DescribeConsumer(req: DescribeConsumerRequest, cb?: (error: string, rep: DescribeConsumerResponse) => void): Promise<DescribeConsumerResponse>;
     /**
-     * 获取制定机器组下的机器状态
+     * 获取指定机器组下的机器状态
      */
     DescribeMachines(req: DescribeMachinesRequest, cb?: (error: string, rep: DescribeMachinesResponse) => void): Promise<DescribeMachinesResponse>;
     /**

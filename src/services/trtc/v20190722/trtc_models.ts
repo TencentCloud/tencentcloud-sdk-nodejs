@@ -813,11 +813,11 @@ export interface DescribeTrtcUsageResponse {
   /**
    * 用量类型，与UsageValue中各个位置的值对应。
    */
-  UsageKey: Array<string>
+  UsageKey?: Array<string>
   /**
    * 各个时间点用量明细。
    */
-  UsageList: Array<TrtcUsage>
+  UsageList?: Array<TrtcUsage>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1614,11 +1614,11 @@ export interface DescribeRelayUsageResponse {
   /**
    * 用量类型，与UsageValue中各个位置的值对应。
    */
-  UsageKey: Array<string>
+  UsageKey?: Array<string>
   /**
    * 各个时间点用量明细。
    */
-  UsageList: Array<TrtcUsage>
+  UsageList?: Array<TrtcUsage>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1677,11 +1677,11 @@ export interface DescribeRecordingUsageResponse {
   /**
    * 用量类型，与UsageValue中各个位置的值对应。
    */
-  UsageKey: Array<string>
+  UsageKey?: Array<string>
   /**
    * 各个时间点用量明细。
    */
-  UsageList: Array<TrtcUsage>
+  UsageList?: Array<TrtcUsage>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1889,11 +1889,11 @@ export interface DescribeMixTranscodingUsageResponse {
   /**
    * 用量类型，与UsageValue中各个位置的值对应。
    */
-  UsageKey: Array<string>
+  UsageKey?: Array<string>
   /**
    * 各个时间点用量明细。
    */
-  UsageList: Array<TrtcUsage>
+  UsageList?: Array<TrtcUsage>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

@@ -69,15 +69,15 @@ export interface ModifyDSPAAssessmentRiskTemplateRequest {
      */
     DspaId: string;
     /**
-     * 模版名称
+     * 模板名称
      */
     TemplateName: string;
     /**
-     * 模版的描述
+     * 模板的描述
      */
     TemplateDescription: string;
     /**
-     * 模版id
+     * 模板id
      */
     TemplateId: number;
     /**
@@ -240,7 +240,7 @@ export interface DescribeDSPAAssessmentRiskLevelDetailResponse {
      */
     IdentifyComplianceId?: number;
     /**
-     * 分类分级模版名称
+     * 分类分级模板名称
      */
     IdentifyComplianceName?: string;
     /**
@@ -373,7 +373,7 @@ export interface DescribeDSPAAssessmentLatestRiskDetailInfoRequest {
      */
     DspaId: string;
     /**
-     * 评估模版id
+     * 评估模板id
      */
     TemplateId: number;
     /**
@@ -2123,7 +2123,7 @@ export interface DescribeDSPAAssessmentRiskTemplateDetailRequest {
      */
     DspaId: string;
     /**
-     * 模版id
+     * 模板id
      */
     TemplateId: number;
     /**
@@ -2334,7 +2334,7 @@ export interface DescribeDSPAAssessmentNewDiscoveredRiskOverviewRequest {
      */
     DspaId: string;
     /**
-     * 评估模版id
+     * 评估模板id
      */
     TemplateId: number;
 }
@@ -3667,7 +3667,7 @@ export interface DescribeDSPAAssessmentRiskDistributionOverviewRequest {
      */
     DspaId: string;
     /**
-     * 评估模版id
+     * 评估模板id
      */
     TemplateId: number;
     /**
@@ -4228,7 +4228,7 @@ export interface DescribeDSPAComplianceGroupsResponse {
  */
 export interface CopyDSPATemplateResponse {
     /**
-     * 模版id
+     * 模板id
      */
     TemplateId?: number;
     /**
@@ -4347,7 +4347,7 @@ export interface DescribeDSPAAssessmentRiskLevelTrendRequest {
      */
     EndTime: string;
     /**
-     * 评估模版id
+     * 评估模板id
      */
     TemplateId?: string;
 }
@@ -4374,7 +4374,7 @@ export interface DescribeDSPAAssessmentProcessingRiskOverviewRequest {
      */
     DspaId: string;
     /**
-     * 评估模版id
+     * 评估模板id
      */
     TemplateId: number;
 }
@@ -4832,11 +4832,11 @@ export interface DescribeDSPAAssessmentTemplatesResponse {
     /**
      * 符合条件的模板数目
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 模板列表。
      */
-    Items: Array<AssessmentTemplate>;
+    Items?: Array<AssessmentTemplate>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -5309,7 +5309,7 @@ export interface GetUserQuotaInfoResponse {
      */
     CosRemainQuota?: number;
     /**
-     * COS存储量单位，比如TB。
+     * COS存储量单位，例如TB。
      */
     CosQuotaUnit?: string;
     /**
@@ -5517,7 +5517,7 @@ export interface DescribeDSPAAssessmentRiskSideListRequest {
      */
     DspaId: string;
     /**
-     * 评估模版id
+     * 评估模板id
      */
     TemplateId: number;
 }
@@ -5838,7 +5838,7 @@ export interface DescribeDSPAAssessmentLatestRiskListRequest {
      */
     DspaId: string;
     /**
-     * 评估模版id
+     * 评估模板id
      */
     TemplateId: number;
     /**
@@ -6090,12 +6090,12 @@ export interface DescribeDSPAAssessmentLatestRiskDetailInfoResponse {
      */
     AssetName?: string;
     /**
-     * 风险评估模版id
+     * 风险评估模板id
   注意：此字段可能返回 null，表示取不到有效值。
      */
     AssessmentTemplateId?: number;
     /**
-     * 分类分级的模版id
+     * 分类分级的模板id
   注意：此字段可能返回 null，表示取不到有效值。
      */
     IdentifyTemplateId?: number;
@@ -6495,7 +6495,7 @@ export interface DescribeDSPAAssessmentHighRiskTop10OverviewRequest {
      */
     DspaId: string;
     /**
-     * 评估模版id
+     * 评估模板id
      */
     TemplateId: number;
     /**
@@ -6511,11 +6511,11 @@ export interface DescribeDSPAAssessmentTemplateControlItemsResponse {
     /**
      * 符合条件的评估项数目
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
-     * 模版关联的评估项列表
+     * 模板关联的评估项列表
      */
-    Items: Array<AssessmentControlItem>;
+    Items?: Array<AssessmentControlItem>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -6585,7 +6585,7 @@ export interface DescribeDSPAAssessmentPendingRiskOverviewRequest {
      */
     DspaId: string;
     /**
-     * 评估模版id
+     * 评估模板id
      */
     TemplateId: number;
 }
@@ -6633,7 +6633,7 @@ export interface DescribeDSPAAssessmentRiskDealedTrendRequest {
      */
     EndTime: string;
     /**
-     * 评估模版id
+     * 评估模板id
      */
     TemplateId?: string;
 }
@@ -7062,7 +7062,7 @@ export interface DescribeDSPAAssessmentTemplateControlItemsRequest {
      */
     DspaId: string;
     /**
-     * 评估模版Id。格式“template-xxxxxxxx”
+     * 评估模板Id。格式“template-xxxxxxxx”
      */
     TemplateId: string;
     /**
@@ -7419,7 +7419,7 @@ export interface DescribeDSPAAssessmentRiskSideDistributedRequest {
      */
     DspaId: string;
     /**
-     * 评估模版id
+     * 评估模板id
      */
     TemplateId: number;
 }
@@ -7453,7 +7453,7 @@ export interface DescribeDSPAAssessmentRiskAmountOverviewRequest {
      */
     DspaId: string;
     /**
-     * 评估模版id
+     * 评估模板id
      */
     TemplateId: number;
 }
@@ -7544,15 +7544,15 @@ export interface DescribeDSPACOSDataAssetDetailRequest {
  */
 export interface DescribeDSPAAssessmentRiskTemplateDetailResponse {
     /**
-     * 模版id
+     * 模板id
      */
     TemplateId?: number;
     /**
-     * 模版名称
+     * 模板名称
      */
     TemplateName?: string;
     /**
-     * 模版的描述
+     * 模板的描述
   注意：此字段可能返回 null，表示取不到有效值。
      */
     TemplateDescription?: string;
@@ -7726,7 +7726,7 @@ export interface CreateDSPAAssessmentTaskRequest {
      */
     Name: string;
     /**
-     * 评估模版Id，格式“template-xxxxxxxx”
+     * 评估模板Id，格式“template-xxxxxxxx”
      */
     TemplateId: string;
     /**
@@ -7745,7 +7745,7 @@ export interface CreateDSPAAssessmentTaskRequest {
      */
     BusinessOwner?: string;
     /**
-     * 分类分级模版Id
+     * 分类分级模板Id
      */
     ComplianceId?: number;
     /**
@@ -8151,7 +8151,7 @@ export interface CreateDSPAAssessmentRiskLevelRequest {
      */
     RiskLevelName: string;
     /**
-     * 识别模版
+     * 识别模板
      */
     IdentifyComplianceId: number;
     /**

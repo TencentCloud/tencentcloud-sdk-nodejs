@@ -188,6 +188,16 @@ it("iotvideo.v20211125.ImportModelDefinition", async function () {
     }
 })
 
+it("iotvideo.v20211125.DescribeCloudStorageThumbnailList", async function () {
+    try {
+       const data = await client.DescribeCloudStorageThumbnailList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotvideo.v20211125.CancelDeviceFirmwareTask", async function () {
     try {
        const data = await client.CancelDeviceFirmwareTask({})

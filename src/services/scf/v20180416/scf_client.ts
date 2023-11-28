@@ -152,6 +152,7 @@ import {
   Alias,
   GetLayerVersionRequest,
   GetFunctionLogsResponse,
+  IntranetConfigIn,
   ImageConfig,
   DeleteTriggerResponse,
   SearchKey,

@@ -130,6 +130,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ImportModelDefinition", req, cb);
     }
     /**
+     * 批量拉取云存事件缩略图
+     */
+    async DescribeCloudStorageThumbnailList(req, cb) {
+        return this.request("DescribeCloudStorageThumbnailList", req, cb);
+    }
+    /**
      * 本接口用于取消设备升级任务
      */
     async CancelDeviceFirmwareTask(req, cb) {

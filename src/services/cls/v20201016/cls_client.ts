@@ -1293,7 +1293,7 @@ cls.pb.cc cls.pb.h cls.proto
   }
 
   /**
-   * 获取制定机器组下的机器状态
+   * 获取指定机器组下的机器状态
    */
   async DescribeMachines(
     req: DescribeMachinesRequest,

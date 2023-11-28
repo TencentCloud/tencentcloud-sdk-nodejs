@@ -154,6 +154,7 @@ import {
   ResourceTag,
   AiRecognitionTaskOcrFullTextResultOutput,
   AiAnalysisTaskHighlightResult,
+  SetVodDomainCertificateRequest,
   CreateRebuildMediaTemplateResponse,
   AiRecognitionTaskOcrWordsResultOutput,
   AiSampleFaceInfo,
@@ -378,6 +379,7 @@ import {
   CopyRightWatermarkInput,
   AiRecognitionTaskHeadTailResultOutput,
   ModifyImageSpriteTemplateResponse,
+  SetVodDomainCertificateResponse,
   ExtractTraceWatermarkTaskOutput,
   MediaProcessTaskCoverBySnapshotResult,
   CreateWatermarkTemplateRequest,
@@ -2577,6 +2579,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: SimpleHlsClipResponse) => void
   ): Promise<SimpleHlsClipResponse> {
     return this.request("SimpleHlsClip", req, cb)
+  }
+
+  /**
+   * 设置点播域名 HTTPS 证书。
+   */
+  async SetVodDomainCertificate(
+    req?: SetVodDomainCertificateRequest,
+    cb?: (error: string, rep: SetVodDomainCertificateResponse) => void
+  ): Promise<SetVodDomainCertificateResponse> {
+    return this.request("SetVodDomainCertificate", req, cb)
   }
 
   /**

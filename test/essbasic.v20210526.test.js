@@ -228,6 +228,16 @@ it("essbasic.v20210526.DescribeTemplates", async function () {
     }
 })
 
+it("essbasic.v20210526.UploadFiles", async function () {
+    try {
+       const data = await client.UploadFiles({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("essbasic.v20210526.CreateSignUrls", async function () {
     try {
        const data = await client.CreateSignUrls({})
@@ -488,9 +498,9 @@ it("essbasic.v20210526.ChannelCancelUserAutoSignEnableUrl", async function () {
     }
 })
 
-it("essbasic.v20210526.UploadFiles", async function () {
+it("essbasic.v20210526.DescribeChannelSealPolicyWorkflowUrl", async function () {
     try {
-       const data = await client.UploadFiles({})
+       const data = await client.DescribeChannelSealPolicyWorkflowUrl({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

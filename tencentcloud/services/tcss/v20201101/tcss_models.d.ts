@@ -3738,7 +3738,18 @@ export interface DescribeAssetSyncLastTimeResponse {
     /**
      * 资产最近同步时间
      */
-    AssetSyncLastTime: string;
+    AssetSyncLastTime?: string;
+    /**
+     * 任务状态
+  PENDING:待处理
+  PROCESSING:处理中
+  PROCESSED:已完成
+     */
+    TaskStatus?: string;
+    /**
+     * 任务进度(百分比)
+     */
+    TaskProcess?: number;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -13521,127 +13532,127 @@ export interface VulDefenceEventDetail {
     /**
      * 漏洞CVEID
      */
-    CVEID: string;
+    CVEID?: string;
     /**
      * 漏洞名称
      */
-    VulName: string;
+    VulName?: string;
     /**
      * 漏洞PocID
      */
-    PocID: string;
+    PocID?: string;
     /**
      * 入侵状态
      */
-    EventType: string;
+    EventType?: string;
     /**
      * 攻击源IP
      */
-    SourceIP: string;
+    SourceIP?: string;
     /**
      * 攻击源ip地址所在城市
      */
-    City: string;
+    City?: string;
     /**
      * 事件数量
      */
-    EventCount: number;
+    EventCount?: number;
     /**
      * 容器ID
      */
-    ContainerID: string;
+    ContainerID?: string;
     /**
      * 容器名称
      */
-    ContainerName: string;
+    ContainerName?: string;
     /**
      * 镜像ID
      */
-    ImageID: string;
+    ImageID?: string;
     /**
      * 镜像名称
      */
-    ImageName: string;
+    ImageName?: string;
     /**
      * 处理状态
      */
-    Status: string;
+    Status?: string;
     /**
      * 攻击源端口
      */
-    SourcePort: Array<string>;
+    SourcePort?: Array<string>;
     /**
      * 事件ID
      */
-    EventID: number;
+    EventID?: number;
     /**
      * 主机名称/超级节点名称
      */
-    HostName: string;
+    HostName?: string;
     /**
      * 主机内网IP
      */
-    HostIP: string;
+    HostIP?: string;
     /**
      * 主机外网IP
      */
-    PublicIP: string;
+    PublicIP?: string;
     /**
      * Pod名称
      */
-    PodName: string;
+    PodName?: string;
     /**
      * 危害描述
      */
-    Description: string;
+    Description?: string;
     /**
      * 修复建议
      */
-    OfficialSolution: string;
+    OfficialSolution?: string;
     /**
      * 攻击包
      */
-    NetworkPayload: string;
+    NetworkPayload?: string;
     /**
      * 进程PID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    PID: number;
+    PID?: number;
     /**
      * 进程主类名
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    MainClass: string;
+    MainClass?: string;
     /**
      * 堆栈信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    StackTrace: string;
+    StackTrace?: string;
     /**
      * 监听账号
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ServerAccount: string;
+    ServerAccount?: string;
     /**
      * 监听端口
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ServerPort: string;
+    ServerPort?: string;
     /**
      * 进程路径
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ServerExe: string;
+    ServerExe?: string;
     /**
      * 进程命令行参数
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ServerArg: string;
+    ServerArg?: string;
     /**
      * 主机QUUID/超级节点ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    QUUID: string;
+    QUUID?: string;
     /**
      * 隔离状态
   未隔离  	NORMAL
@@ -13652,7 +13663,7 @@ export interface VulDefenceEventDetail {
   解除隔离失败 RESTORE_FAILED
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ContainerNetStatus: string;
+    ContainerNetStatus?: string;
     /**
      * 容器子状态
   "AGENT_OFFLINE"       //Agent离线
@@ -13664,12 +13675,12 @@ export interface VulDefenceEventDetail {
       "UNKNOW"              // 原因未知
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ContainerNetSubStatus: string;
+    ContainerNetSubStatus?: string;
     /**
      * 容器隔离操作来源
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ContainerIsolateOperationSrc: string;
+    ContainerIsolateOperationSrc?: string;
     /**
      * 容器状态
   正在运行: RUNNING
@@ -13681,17 +13692,17 @@ export interface VulDefenceEventDetail {
   迁移中: REMOVING
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ContainerStatus: string;
+    ContainerStatus?: string;
     /**
      * 接口Url
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    JNDIUrl: string;
+    JNDIUrl?: string;
     /**
      * rasp detail
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    RaspDetail: Array<RaspInfo>;
+    RaspDetail?: Array<RaspInfo>;
     /**
      * 超级节点子网名称
      */
@@ -13728,6 +13739,14 @@ export interface VulDefenceEventDetail {
      * 集群名称
      */
     ClusterName?: string;
+    /**
+     * Namespace
+     */
+    Namespace?: string;
+    /**
+     * 工作负载
+     */
+    WorkloadType?: string;
 }
 /**
  * UpdateNetworkFirewallPolicyYamlDetail请求参数结构体
@@ -13950,6 +13969,14 @@ export interface RunTimeEventBaseInfo {
      * uuid
      */
     HostID?: string;
+    /**
+     * Namespace
+     */
+    Namespace?: string;
+    /**
+     * WorkloadType
+     */
+    WorkloadType?: string;
 }
 /**
  * DescribeSystemVulList返回参数结构体
@@ -16821,6 +16848,14 @@ export interface DescribeRiskDnsEventDetailResponse {
      */
     ClusterName?: string;
     /**
+     * Namespace
+     */
+    Namespace?: string;
+    /**
+     * 工作负载类型
+     */
+    WorkloadType?: string;
+    /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
@@ -19518,6 +19553,14 @@ export interface DescribeVirusDetailResponse {
      * 集群名称
      */
     ClusterName?: string;
+    /**
+     * Namespace
+     */
+    Namespace?: string;
+    /**
+     * 工作负载类型
+     */
+    WorkloadType?: string;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */

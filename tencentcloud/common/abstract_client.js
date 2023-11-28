@@ -6,6 +6,7 @@ const interface_1 = require("./interface");
 const sign_1 = require("./sign");
 const http_connection_1 = require("./http/http_connection");
 const tencent_cloud_sdk_exception_1 = require("./exception/tencent_cloud_sdk_exception");
+const sse_response_model_1 = require("./sse_response_model");
 /**
  * @inner
  */
@@ -149,14 +150,19 @@ class AbstractClient {
             throw tcError;
         }
         else {
-            const data = await res.json();
-            if (data.Response.Error) {
-                const tcError = new tencent_cloud_sdk_exception_1.default(data.Response.Error.Message, data.Response.RequestId);
-                tcError.code = data.Response.Error.Code;
-                throw tcError;
+            if (res.headers.get("content-type") === "text/event-stream") {
+                return new sse_response_model_1.SSEResponseModel(res.body);
             }
             else {
-                return data.Response;
+                const data = await res.json();
+                if (data.Response.Error) {
+                    const tcError = new tencent_cloud_sdk_exception_1.default(data.Response.Error.Message, data.Response.RequestId);
+                    tcError.code = data.Response.Error.Code;
+                    throw tcError;
+                }
+                else {
+                    return data.Response;
+                }
             }
         }
     }

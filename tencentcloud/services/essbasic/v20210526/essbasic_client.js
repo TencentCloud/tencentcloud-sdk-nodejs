@@ -406,6 +406,24 @@ https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/launchAp
         return this.request("DescribeTemplates", req, cb);
     }
     /**
+     * 此接口（UploadFiles）文件上传。<br/>
+
+适用场景：用于合同，印章的文件上传。文件上传以后，
+如果是PDF格式文件可配合<a href="https://qian.tencent.com/developers/partnerApis/startFlows/ChannelCreateFlowByFiles" target="_blank">用PDF文件创建签署流程</a>接口进行合同流程的发起
+如果是其他类型可以配合<a href="https://qian.tencent.com/developers/partnerApis/files/ChannelCreateConvertTaskApi" target="_blank">创建文件转换任务</a>接口转换成PDF文件
+
+注:
+1. 图片类型(png/jpg/jpeg)限制大小为5M以下, PDF/word/excel等其他格式限制大小为60M以下
+2. <font color='red'>此接口调用时需要单独设置Domain请求域名 </font>,  联调开发环境为 <font color='red'>file.test.ess.tencent.cn</font>，正式环境需要设置为<font color='red'>file.ess.tencent.cn</font>，代码示例
+```
+HttpProfile httpProfile = new HttpProfile();
+httpProfile.setEndpoint("file.test.ess.tencent.cn");
+```
+     */
+    async UploadFiles(req, cb) {
+        return this.request("UploadFiles", req, cb);
+    }
+    /**
      * 创建跳转小程序查看或签署的链接
 
 **腾讯电子签小程序的AppID 和 原始Id如下:**
@@ -737,22 +755,10 @@ Web链接访问后，会根据子客企业(**Agent中ProxyOrganizationOpenId表�
         return this.request("ChannelCancelUserAutoSignEnableUrl", req, cb);
     }
     /**
-     * 此接口（UploadFiles）文件上传。<br/>
-
-适用场景：用于合同，印章的文件上传。文件上传以后，
-如果是PDF格式文件可配合<a href="https://qian.tencent.com/developers/partnerApis/startFlows/ChannelCreateFlowByFiles" target="_blank">用PDF文件创建签署流程</a>接口进行合同流程的发起
-如果是其他类型可以配合<a href="https://qian.tencent.com/developers/partnerApis/files/ChannelCreateConvertTaskApi" target="_blank">创建文件转换任务</a>接口转换成PDF文件
-
-注:
-1. 图片类型(png/jpg/jpeg)限制大小为5M以下, PDF/word/excel等其他格式限制大小为60M以下
-2. <font color='red'>此接口调用时需要单独设置Domain请求域名 </font>,  联调开发环境为 <font color='red'>file.test.ess.tencent.cn</font>，正式环境需要设置为<font color='red'>file.ess.tencent.cn</font>，代码示例
-```
-HttpProfile httpProfile = new HttpProfile();
-httpProfile.setEndpoint("file.test.ess.tencent.cn");
-```
+     * 生成渠道子客用印申请审批小程序链接，链接类型（通过H5唤起小程序方式查看）
      */
-    async UploadFiles(req, cb) {
-        return this.request("UploadFiles", req, cb);
+    async DescribeChannelSealPolicyWorkflowUrl(req, cb) {
+        return this.request("DescribeChannelSealPolicyWorkflowUrl", req, cb);
     }
     /**
      * 指定需要批量催办的签署流程ID，批量催办合同，最多100个。需要符合以下条件的合同才可被催办
