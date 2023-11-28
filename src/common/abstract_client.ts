@@ -11,6 +11,7 @@ import Sign from "./sign"
 import { HttpConnection } from "./http/http_connection"
 import TencentCloudSDKHttpException from "./exception/tencent_cloud_sdk_exception"
 import { Response } from "node-fetch"
+import { SSEResponseModel } from "./sse_response_model"
 
 export type ResponseCallback<TReuslt = any> = (error: string, rep: TReuslt) => void
 export interface RequestOptions extends Partial<Pick<HttpProfile, "headers">> {
@@ -215,16 +216,20 @@ export class AbstractClient {
       tcError.httpCode = res.status
       throw tcError
     } else {
-      const data = await res.json()
-      if (data.Response.Error) {
-        const tcError = new TencentCloudSDKHttpException(
-          data.Response.Error.Message,
-          data.Response.RequestId
-        )
-        tcError.code = data.Response.Error.Code
-        throw tcError
+      if (res.headers.get("content-type") === "text/event-stream") {
+        return new SSEResponseModel(res.body)
       } else {
-        return data.Response
+        const data = await res.json()
+        if (data.Response.Error) {
+          const tcError = new TencentCloudSDKHttpException(
+            data.Response.Error.Message,
+            data.Response.RequestId
+          )
+          tcError.code = data.Response.Error.Code
+          throw tcError
+        } else {
+          return data.Response
+        }
       }
     }
   }
