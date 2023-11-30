@@ -18,6 +18,16 @@ const client = new tencentcloud.captcha.v20190722.Client({
 })
 describe("captcha.v20190722.test.js", function () {
 
+it("captcha.v20190722.DescribeCaptchaRceResult", async function () {
+    try {
+       const data = await client.DescribeCaptchaRceResult({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("captcha.v20190722.DescribeCaptchaMiniRiskResult", async function () {
     try {
        const data = await client.DescribeCaptchaMiniRiskResult({})

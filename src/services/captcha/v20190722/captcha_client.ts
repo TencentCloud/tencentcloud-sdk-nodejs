@@ -24,8 +24,10 @@ import {
   DescribeCaptchaMiniOperDataResponse,
   GetTotalTicketStatisticsRequest,
   DescribeCaptchaMiniDataSumResponse,
+  DescribeCaptchaRceResultResponse,
   GetRequestStatisticsResponse,
   GetRequestStatisticsRequest,
+  RceResult,
   OutputManageMarketingRiskValue,
   CaptchaOperDataRes,
   GetTicketStatisticsRequest,
@@ -61,6 +63,7 @@ import {
   DescribeCaptchaMiniOperDataRequest,
   DescribeCaptchaAppIdInfoRequest,
   DescribeCaptchaAppIdInfoResponse,
+  DescribeCaptchaRceResultRequest,
   DescribeCaptchaUserAllAppIdResponse,
   DescribeCaptchaDataRequest,
   DescribeCaptchaMiniResultRequest,
@@ -77,6 +80,16 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("captcha.tencentcloudapi.com", "2019-07-22", clientConfig)
+  }
+
+  /**
+   * Rce融合验证核查验证码票据结果(Web及APP)
+   */
+  async DescribeCaptchaRceResult(
+    req: DescribeCaptchaRceResultRequest,
+    cb?: (error: string, rep: DescribeCaptchaRceResultResponse) => void
+  ): Promise<DescribeCaptchaRceResultResponse> {
+    return this.request("DescribeCaptchaRceResult", req, cb)
   }
 
   /**

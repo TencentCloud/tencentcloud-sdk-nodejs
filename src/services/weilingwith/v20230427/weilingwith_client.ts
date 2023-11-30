@@ -105,6 +105,7 @@ import {
   DescribeWorkspaceListRequest,
   BuildingProfile,
   DescribeDeviceTypeListResponse,
+  AlarmStatusData,
   RecordInfo,
   DescribeVideoRecordStreamResponse,
   CreateDeviceSucceeded,
@@ -227,6 +228,7 @@ import {
   SpaceDataListStatsRes,
   RawInfo,
   FileDownloadURL,
+  DescribeAlarmStatusListRes,
   DescribeVideoLiveStreamRequest,
   ModelSet,
   ChangeAlarmStatusRequest,
@@ -309,7 +311,7 @@ export class Client extends AbstractClient {
    * 用来查询系统中的告警状态列表
    */
   async DescribeAlarmStatusList(
-    req?: DescribeAlarmStatusListRequest,
+    req: DescribeAlarmStatusListRequest,
     cb?: (error: string, rep: DescribeAlarmStatusListResponse) => void
   ): Promise<DescribeAlarmStatusListResponse> {
     return this.request("DescribeAlarmStatusList", req, cb)

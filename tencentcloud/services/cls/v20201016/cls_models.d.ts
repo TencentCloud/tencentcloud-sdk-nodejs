@@ -1595,7 +1595,7 @@ export interface ExtractRuleInfo {
      */
     MetaTags?: Array<MetaTagInfo>;
     /**
-     * windows事件日志采集
+     * Windows事件日志采集
      */
     EventLogRules?: Array<EventLog>;
 }
@@ -5588,7 +5588,7 @@ export interface CreateMachineGroupRequest {
      */
     MetaTags?: Array<MetaTagInfo>;
     /**
-     * 系统类型，默认0，0：Linux，1: windows
+     * 系统类型，默认0，0：Linux，1: Windows
      */
     OSType?: number;
 }

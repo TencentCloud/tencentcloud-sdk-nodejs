@@ -20,7 +20,7 @@ import { ClientConfig } from "../../../common/interface"
 import {
   FlowDetails,
   GetDeviceResponse,
-  GetFlowStatisticResponse,
+  GetDevicePayModeRequest,
   Capacity,
   GetFlowStatisticRequest,
   DestAddressInfo,
@@ -28,41 +28,49 @@ import {
   SlotNetInfo,
   DeleteQosRequest,
   GetNetMonitorRequest,
-  NetDetails,
+  GetMultiFlowStatisticResponse,
   VendorHardware,
   DeviceNetInfo,
-  GetMultiFlowStatisticResponse,
+  GetFlowStatisticResponse,
   SrcAddressInfo,
-  UpdateNetInfo,
+  NetDetails,
   CreateQosResponse,
   DescribeQosResponse,
+  GetVendorHardwareRequest,
   CreateEncryptedKeyRequest,
   ActivateHardware,
   DeleteDeviceRequest,
+  GetFlowPackagesRequest,
   GetHardwareListRequest,
   CreateEncryptedKeyResponse,
+  OrderFlowPackageResponse,
   UpdateDeviceResponse,
+  ModifyPackageRenewFlagRequest,
   DeviceDetails,
   CreateQosRequest,
   GetStatisticDataRequest,
+  GetFlowPackagesResponse,
   GetVendorHardwareResponse,
   UpdateDeviceRequest,
   GetPublicKeyResponse,
   ActivateHardwareRequest,
   AddHardwareResponse,
+  ModifyPackageRenewFlagResponse,
   GetMultiFlowStatisticRequest,
   DeviceBaseInfo,
   ExpectedThreshold,
   DeleteQosResponse,
   Context,
   AddDeviceResponse,
-  GetVendorHardwareRequest,
+  GetDevicePayModeResponse,
   GetDeviceRequest,
   ActivateHardwareResponse,
-  UpdateHardwareRequest,
+  OrderFlowPackageRequest,
+  UpdateHardwareResponse,
   HardwareInfo,
   GetDevicesResponse,
   DescribeQosRequest,
+  DevicePayModeInfo,
   MonitorData,
   DeleteDeviceResponse,
   GetStatisticDataResponse,
@@ -70,11 +78,13 @@ import {
   AddHardwareRequest,
   Hardware,
   GetDevicesRequest,
+  FlowPackageInfo,
   GetHardwareListResponse,
   NetworkData,
-  UpdateHardwareResponse,
+  UpdateHardwareRequest,
   AddDeviceRequest,
   GetPublicKeyRequest,
+  UpdateNetInfo,
 } from "./mna_models"
 
 /**
@@ -84,16 +94,6 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("mna.tencentcloudapi.com", "2021-01-19", clientConfig)
-  }
-
-  /**
-   * 获取单设备的实时流量统计指标
-   */
-  async GetNetMonitor(
-    req: GetNetMonitorRequest,
-    cb?: (error: string, rep: GetNetMonitorResponse) => void
-  ): Promise<GetNetMonitorResponse> {
-    return this.request("GetNetMonitor", req, cb)
   }
 
   /**
@@ -107,63 +107,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 添加硬件设备，生成未激活的硬件设备，可支持批量添加
+   * 可开启/关闭流量包自动续费，不影响当前周期正在生效的流量包。
    */
-  async AddHardware(
-    req: AddHardwareRequest,
-    cb?: (error: string, rep: AddHardwareResponse) => void
-  ): Promise<AddHardwareResponse> {
-    return this.request("AddHardware", req, cb)
-  }
-
-  /**
-   * 租户获取厂商硬件列表
-   */
-  async GetHardwareList(
-    req: GetHardwareListRequest,
-    cb?: (error: string, rep: GetHardwareListResponse) => void
-  ): Promise<GetHardwareListResponse> {
-    return this.request("GetHardwareList", req, cb)
-  }
-
-  /**
-   * 更新设备信息
-   */
-  async UpdateDevice(
-    req: UpdateDeviceRequest,
-    cb?: (error: string, rep: UpdateDeviceResponse) => void
-  ): Promise<UpdateDeviceResponse> {
-    return this.request("UpdateDevice", req, cb)
-  }
-
-  /**
-   * 新建设备记录
-   */
-  async AddDevice(
-    req: AddDeviceRequest,
-    cb?: (error: string, rep: AddDeviceResponse) => void
-  ): Promise<AddDeviceResponse> {
-    return this.request("AddDevice", req, cb)
-  }
-
-  /**
-   * 获取厂商硬件设备列表
-   */
-  async GetVendorHardware(
-    req: GetVendorHardwareRequest,
-    cb?: (error: string, rep: GetVendorHardwareResponse) => void
-  ): Promise<GetVendorHardwareResponse> {
-    return this.request("GetVendorHardware", req, cb)
-  }
-
-  /**
-   * 获取Qos加速状态
-   */
-  async DescribeQos(
-    req: DescribeQosRequest,
-    cb?: (error: string, rep: DescribeQosResponse) => void
-  ): Promise<DescribeQosResponse> {
-    return this.request("DescribeQos", req, cb)
+  async ModifyPackageRenewFlag(
+    req: ModifyPackageRenewFlagRequest,
+    cb?: (error: string, rep: ModifyPackageRenewFlagResponse) => void
+  ): Promise<ModifyPackageRenewFlagResponse> {
+    return this.request("ModifyPackageRenewFlag", req, cb)
   }
 
   /**
@@ -174,6 +124,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: GetFlowStatisticResponse) => void
   ): Promise<GetFlowStatisticResponse> {
     return this.request("GetFlowStatistic", req, cb)
+  }
+
+  /**
+   * 批量获取设备流量统计曲线
+   */
+  async GetMultiFlowStatistic(
+    req: GetMultiFlowStatisticRequest,
+    cb?: (error: string, rep: GetMultiFlowStatisticResponse) => void
+  ): Promise<GetMultiFlowStatisticResponse> {
+    return this.request("GetMultiFlowStatistic", req, cb)
   }
 
   /**
@@ -197,63 +157,33 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 通过此接口设置和更新预置密钥
+   * 激活硬件设备
    */
-  async CreateEncryptedKey(
-    req?: CreateEncryptedKeyRequest,
-    cb?: (error: string, rep: CreateEncryptedKeyResponse) => void
-  ): Promise<CreateEncryptedKeyResponse> {
-    return this.request("CreateEncryptedKey", req, cb)
+  async ActivateHardware(
+    req: ActivateHardwareRequest,
+    cb?: (error: string, rep: ActivateHardwareResponse) => void
+  ): Promise<ActivateHardwareResponse> {
+    return this.request("ActivateHardware", req, cb)
   }
 
   /**
-   * 批量获取设备流量统计曲线
+   * 获取流量包列表
    */
-  async GetMultiFlowStatistic(
-    req: GetMultiFlowStatisticRequest,
-    cb?: (error: string, rep: GetMultiFlowStatisticResponse) => void
-  ): Promise<GetMultiFlowStatisticResponse> {
-    return this.request("GetMultiFlowStatistic", req, cb)
+  async GetFlowPackages(
+    req: GetFlowPackagesRequest,
+    cb?: (error: string, rep: GetFlowPackagesResponse) => void
+  ): Promise<GetFlowPackagesResponse> {
+    return this.request("GetFlowPackages", req, cb)
   }
 
   /**
-   * 删除设备信息
+   * 添加硬件设备，生成未激活的硬件设备，可支持批量添加
    */
-  async DeleteDevice(
-    req: DeleteDeviceRequest,
-    cb?: (error: string, rep: DeleteDeviceResponse) => void
-  ): Promise<DeleteDeviceResponse> {
-    return this.request("DeleteDevice", req, cb)
-  }
-
-  /**
-   * 移动网络停止Qos加速过程
-   */
-  async DeleteQos(
-    req: DeleteQosRequest,
-    cb?: (error: string, rep: DeleteQosResponse) => void
-  ): Promise<DeleteQosResponse> {
-    return this.request("DeleteQos", req, cb)
-  }
-
-  /**
-   * 在用量统计页面下载流量数据
-   */
-  async GetStatisticData(
-    req: GetStatisticDataRequest,
-    cb?: (error: string, rep: GetStatisticDataResponse) => void
-  ): Promise<GetStatisticDataResponse> {
-    return this.request("GetStatisticData", req, cb)
-  }
-
-  /**
-   * 通过指定设备的ID查找设备详细信息
-   */
-  async GetDevice(
-    req: GetDeviceRequest,
-    cb?: (error: string, rep: GetDeviceResponse) => void
-  ): Promise<GetDeviceResponse> {
-    return this.request("GetDevice", req, cb)
+  async AddHardware(
+    req: AddHardwareRequest,
+    cb?: (error: string, rep: AddHardwareResponse) => void
+  ): Promise<AddHardwareResponse> {
+    return this.request("AddHardware", req, cb)
   }
 
   /**
@@ -267,12 +197,132 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 激活硬件设备
+   * 删除设备信息
    */
-  async ActivateHardware(
-    req: ActivateHardwareRequest,
-    cb?: (error: string, rep: ActivateHardwareResponse) => void
-  ): Promise<ActivateHardwareResponse> {
-    return this.request("ActivateHardware", req, cb)
+  async DeleteDevice(
+    req: DeleteDeviceRequest,
+    cb?: (error: string, rep: DeleteDeviceResponse) => void
+  ): Promise<DeleteDeviceResponse> {
+    return this.request("DeleteDevice", req, cb)
+  }
+
+  /**
+   * 更新设备信息
+   */
+  async UpdateDevice(
+    req: UpdateDeviceRequest,
+    cb?: (error: string, rep: UpdateDeviceResponse) => void
+  ): Promise<UpdateDeviceResponse> {
+    return this.request("UpdateDevice", req, cb)
+  }
+
+  /**
+   * 获取单设备的实时流量统计指标
+   */
+  async GetNetMonitor(
+    req: GetNetMonitorRequest,
+    cb?: (error: string, rep: GetNetMonitorResponse) => void
+  ): Promise<GetNetMonitorResponse> {
+    return this.request("GetNetMonitor", req, cb)
+  }
+
+  /**
+   * 获取设备付费模式
+   */
+  async GetDevicePayMode(
+    req: GetDevicePayModeRequest,
+    cb?: (error: string, rep: GetDevicePayModeResponse) => void
+  ): Promise<GetDevicePayModeResponse> {
+    return this.request("GetDevicePayMode", req, cb)
+  }
+
+  /**
+   * 获取厂商硬件设备列表
+   */
+  async GetVendorHardware(
+    req: GetVendorHardwareRequest,
+    cb?: (error: string, rep: GetVendorHardwareResponse) => void
+  ): Promise<GetVendorHardwareResponse> {
+    return this.request("GetVendorHardware", req, cb)
+  }
+
+  /**
+   * 通过此接口设置和更新预置密钥
+   */
+  async CreateEncryptedKey(
+    req?: CreateEncryptedKeyRequest,
+    cb?: (error: string, rep: CreateEncryptedKeyResponse) => void
+  ): Promise<CreateEncryptedKeyResponse> {
+    return this.request("CreateEncryptedKey", req, cb)
+  }
+
+  /**
+   * 移动网络停止Qos加速过程
+   */
+  async DeleteQos(
+    req: DeleteQosRequest,
+    cb?: (error: string, rep: DeleteQosResponse) => void
+  ): Promise<DeleteQosResponse> {
+    return this.request("DeleteQos", req, cb)
+  }
+
+  /**
+   * 通过指定设备的ID查找设备详细信息
+   */
+  async GetDevice(
+    req: GetDeviceRequest,
+    cb?: (error: string, rep: GetDeviceResponse) => void
+  ): Promise<GetDeviceResponse> {
+    return this.request("GetDevice", req, cb)
+  }
+
+  /**
+   * 购买预付费流量包
+   */
+  async OrderFlowPackage(
+    req: OrderFlowPackageRequest,
+    cb?: (error: string, rep: OrderFlowPackageResponse) => void
+  ): Promise<OrderFlowPackageResponse> {
+    return this.request("OrderFlowPackage", req, cb)
+  }
+
+  /**
+   * 在用量统计页面下载流量数据
+   */
+  async GetStatisticData(
+    req: GetStatisticDataRequest,
+    cb?: (error: string, rep: GetStatisticDataResponse) => void
+  ): Promise<GetStatisticDataResponse> {
+    return this.request("GetStatisticData", req, cb)
+  }
+
+  /**
+   * 获取厂商硬件列表
+   */
+  async GetHardwareList(
+    req: GetHardwareListRequest,
+    cb?: (error: string, rep: GetHardwareListResponse) => void
+  ): Promise<GetHardwareListResponse> {
+    return this.request("GetHardwareList", req, cb)
+  }
+
+  /**
+   * 新建设备记录
+   */
+  async AddDevice(
+    req: AddDeviceRequest,
+    cb?: (error: string, rep: AddDeviceResponse) => void
+  ): Promise<AddDeviceResponse> {
+    return this.request("AddDevice", req, cb)
+  }
+
+  /**
+   * 获取Qos加速状态
+   */
+  async DescribeQos(
+    req: DescribeQosRequest,
+    cb?: (error: string, rep: DescribeQosResponse) => void
+  ): Promise<DescribeQosResponse> {
+    return this.request("DescribeQos", req, cb)
   }
 }

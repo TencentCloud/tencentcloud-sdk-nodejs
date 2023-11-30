@@ -284,6 +284,12 @@ export interface WaterMarkChar {
      * 水印文字的背景色，为空代表背景透明，默认为空
      */
     BackGroundColor?: string;
+    /**
+     * 文字水印的字体，支持设置以下值：
+  1. Tencent （默认）
+  2. SourceHanSans
+     */
+    Font?: string;
 }
 /**
  * DescribeTrtcRoomUsage返回参数结构体
@@ -3122,6 +3128,12 @@ export interface WaterMarkTimestamp {
      * 显示时间戳的时区，默认东八区
      */
     TimeZone?: number;
+    /**
+     * 文字水印的字体，支持设置以下值：
+  1. Tencent （默认）
+  2. SourceHanSans
+     */
+    Font?: string;
 }
 /**
  * 单流旁路转推的用户上行信息。

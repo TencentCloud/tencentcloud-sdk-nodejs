@@ -629,6 +629,16 @@ export interface DistributionBillDetail {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     FormulaUrl?: string;
+    /**
+     * 账单归属月
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    BillMonth?: string;
+    /**
+     * 账单归属日
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    BillDay?: string;
 }
 /**
  * DescribeDosageCosDetailByDate请求参数结构体
@@ -884,6 +894,11 @@ export interface BillDistributionResourceSummary {
      * 节省计划抵扣组件原价：节省计划抵扣原价=节省计划包抵扣金额/节省计划抵扣率
      */
     OriginalCostWithSP?: string;
+    /**
+     * 账单归属月
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    BillMonth?: string;
 }
 /**
  * 产品汇总信息
@@ -1630,6 +1645,16 @@ export interface BillDetail {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     FormulaUrl?: string;
+    /**
+     * 账单归属日
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    BillDay?: string;
+    /**
+     * 账单归属月
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    BillMonth?: string;
 }
 /**
  * CreateSavingPlanOrder请求参数结构体
@@ -2067,95 +2092,95 @@ export interface BillResourceSummary {
     /**
      * 产品名称：用户所采购的各类云产品，例如：云服务器 CVM
      */
-    BusinessCodeName: string;
+    BusinessCodeName?: string;
     /**
      * 子产品名称：用户采购的具体产品细分类型，例如：云服务器 CVM-标准型 S1
      */
-    ProductCodeName: string;
+    ProductCodeName?: string;
     /**
      * 计费模式：资源的计费模式，区分为包年包月和按量计费
      */
-    PayModeName: string;
+    PayModeName?: string;
     /**
      * 项目名称：资源归属的项目，用户在控制台给资源自主分配项目，未分配则是默认项目
      */
-    ProjectName: string;
+    ProjectName?: string;
     /**
      * 地域：资源所属地域，如华南地区（广州）
      */
-    RegionName: string;
+    RegionName?: string;
     /**
      * 可用区：资源所属可用区，如广州三区
      */
-    ZoneName: string;
+    ZoneName?: string;
     /**
      * 资源 ID：账单中出账对象 ID，不同产品因资源形态不同，资源内容不完全相同，如云服务器 CVM 为对应的实例 ID
      */
-    ResourceId: string;
+    ResourceId?: string;
     /**
      * 资源别名：用户在控制台为资源设置的名称，如果未设置，则默认为空
      */
-    ResourceName: string;
+    ResourceName?: string;
     /**
      * 交易类型：如包年包月新购、包年包月续费、按量计费扣费等类型
      */
-    ActionTypeName: string;
+    ActionTypeName?: string;
     /**
      * 订单ID：包年包月计费模式下订购的订单号
      */
-    OrderId: string;
+    OrderId?: string;
     /**
      * 扣费时间：结算扣费时间
      */
-    PayTime: string;
+    PayTime?: string;
     /**
      * 开始使用时间：产品服务开始使用时间
      */
-    FeeBeginTime: string;
+    FeeBeginTime?: string;
     /**
      * 结束使用时间：产品服务结束使用时间
      */
-    FeeEndTime: string;
+    FeeEndTime?: string;
     /**
      * 配置描述：该资源下的计费项名称和用量合并展示，仅在资源账单体现
      */
-    ConfigDesc: string;
+    ConfigDesc?: string;
     /**
      * 扩展字段1：产品对应的扩展属性信息，仅在资源账单体现
      */
-    ExtendField1: string;
+    ExtendField1?: string;
     /**
      * 扩展字段2：产品对应的扩展属性信息，仅在资源账单体现
      */
-    ExtendField2: string;
+    ExtendField2?: string;
     /**
      * 原价：原价 = 组件刊例价 * 组件用量 * 使用时长（如果客户享受一口价/合同价则默认不展示，退费类场景也默认不展示）
      */
-    TotalCost: string;
+    TotalCost?: string;
     /**
      * 折扣率：本资源享受的折扣率（如果客户享受一口价/合同价则默认不展示，退费场景也默认不展示）
      */
-    Discount: string;
+    Discount?: string;
     /**
      * 优惠类型
      */
-    ReduceType: string;
+    ReduceType?: string;
     /**
      * 优惠后总价
      */
-    RealTotalCost: string;
+    RealTotalCost?: string;
     /**
      * 优惠券支出：使用各类优惠券（如代金券、现金券等）支付的金额
      */
-    VoucherPayAmount: string;
+    VoucherPayAmount?: string;
     /**
      * 现金账户支出：通过现金账户支付的金额
      */
-    CashPayAmount: string;
+    CashPayAmount?: string;
     /**
      * 赠送账户支出：使用赠送金支付的金额
      */
-    IncentivePayAmount: string;
+    IncentivePayAmount?: string;
     /**
      * 分成金账户支出：通过分成金账户支付的金额
   注意：此字段可能返回 null，表示取不到有效值。
@@ -2164,52 +2189,52 @@ export interface BillResourceSummary {
     /**
      * 扩展字段3：产品对应的扩展属性信息，仅在资源账单体现
      */
-    ExtendField3: string;
+    ExtendField3?: string;
     /**
      * 扩展字段4：产品对应的扩展属性信息，仅在资源账单体现
      */
-    ExtendField4: string;
+    ExtendField4?: string;
     /**
      * 扩展字段5：产品对应的扩展属性信息，仅在资源账单体现
      */
-    ExtendField5: string;
+    ExtendField5?: string;
     /**
      * 标签信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Tags: Array<BillTagInfo>;
+    Tags?: Array<BillTagInfo>;
     /**
      * 支付者UIN：支付者的账号 ID，账号 ID 是用户在腾讯云的唯一账号标识
      */
-    PayerUin: string;
+    PayerUin?: string;
     /**
      * 使用者UIN：实际使用资源的账号 ID
      */
-    OwnerUin: string;
+    OwnerUin?: string;
     /**
      * 操作者UIN：操作者账号 ID（预付费资源下单或后付费操作开通资源账号的 ID 或者角色 ID ）
      */
-    OperateUin: string;
+    OperateUin?: string;
     /**
      * 产品编码
      */
-    BusinessCode: string;
+    BusinessCode?: string;
     /**
      * 子产品编码
      */
-    ProductCode: string;
+    ProductCode?: string;
     /**
      * 地域ID
      */
-    RegionId: number;
+    RegionId?: number;
     /**
      * 实例类型：购买的产品服务对应的实例类型，包括资源包、RI、SP、竞价实例。正常的实例展示默认为不展示
      */
-    InstanceType: string;
+    InstanceType?: string;
     /**
      * 预留实例抵扣组件原价：本产品或服务使用预留实例抵扣的组件原价金额
      */
-    OriginalCostWithRI: string;
+    OriginalCostWithRI?: string;
     /**
      * 节省计划抵扣金额（已废弃）
      * @deprecated
@@ -2218,7 +2243,12 @@ export interface BillResourceSummary {
     /**
      * 节省计划抵扣组件原价：节省计划抵扣原价=节省计划包抵扣金额/节省计划抵扣率
      */
-    OriginalCostWithSP: string;
+    OriginalCostWithSP?: string;
+    /**
+     * 账单归属月
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    BillMonth?: string;
 }
 /**
  * 账单筛选条件对象

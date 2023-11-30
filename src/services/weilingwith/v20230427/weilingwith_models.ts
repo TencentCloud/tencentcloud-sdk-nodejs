@@ -1085,7 +1085,16 @@ export interface ModifyDeviceNameRequest {
 /**
  * DescribeAlarmStatusList请求参数结构体
  */
-export type DescribeAlarmStatusListRequest = null
+export interface DescribeAlarmStatusListRequest {
+  /**
+   * 应用token
+   */
+  ApplicationToken: string
+  /**
+   * 工作空间ID
+   */
+  WorkspaceId: string
+}
 
 /**
  * DescribeFileDownloadURL返回参数结构体
@@ -2265,6 +2274,27 @@ export interface DescribeDeviceTypeListResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 告警状态返回结构体
+ */
+export interface AlarmStatusData {
+  /**
+   * 告警状态ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StatusID?: string
+  /**
+   * 告警状态名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StatusName?: string
+  /**
+   * 告警状态类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StatusType?: string
 }
 
 /**
@@ -4493,6 +4523,10 @@ export interface ApiInfoList {
  */
 export interface DescribeAlarmStatusListResponse {
   /**
+   * 告警状态返回结构
+   */
+  Result?: DescribeAlarmStatusListRes
+  /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -5244,6 +5278,17 @@ export interface FileDownloadURL {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   FileURL?: string
+}
+
+/**
+ * 告警状态列表返回
+ */
+export interface DescribeAlarmStatusListRes {
+  /**
+   * 告警状态返回结构
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  List?: Array<AlarmStatusData>
 }
 
 /**

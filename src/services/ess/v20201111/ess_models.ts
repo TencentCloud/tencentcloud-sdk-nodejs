@@ -3179,6 +3179,10 @@ export interface DescribeFileUrlsRequest {
  * 电子文档的控件填充信息。按照控件类型进行相应的填充。
 
 当控件的 ComponentType=‘SIGN_SEAL'时，FormField.ComponentValue填入印章id。
+
+* 可用于指定自动签模版未设置自动签印章时，可由接口传入自动签印章
+* 若指定的控件上已设置ComponentValue，那以已经设置的ComponentValue为准
+
 ```
 FormField输入示例：
 {
@@ -3186,7 +3190,9 @@ FormField输入示例：
     "ComponentValue": "sealId（印章id）"
 }
 ```
+
 当控件的 ComponentType='TEXT'时，FormField.ComponentValue填入文本内容
+
 ```
 FormField输入示例：
 {
@@ -3194,7 +3200,9 @@ FormField输入示例：
     "ComponentValue": "文本内容"
 }
 ```
+
 当控件的 ComponentType='MULTI_LINE_TEXT'时，FormField.ComponentValue填入文本内容，支持自动换行。
+
 ```
 FormField输入示例：
 {
@@ -3202,7 +3210,9 @@ FormField输入示例：
     "ComponentValue": "多行文本内容"
 }
 ```
+
 当控件的 ComponentType='CHECK_BOX'时，FormField.ComponentValue填入true或false文本
+
 ```
 FormField输入示例：
 {
@@ -3210,7 +3220,9 @@ FormField输入示例：
     "ComponentValue": "true"
 }
 ```
+
 当控件的 ComponentType='FILL_IMAGE'时，FormField.ComponentValue填入图片的资源ID
+
 ```
 FormField输入示例：
 {
@@ -3218,7 +3230,9 @@ FormField输入示例：
     "ComponentValue": "yDwhsxxxxxxxxxxxxxxxxxxxxxxxxxxx"
 }
 ```
+
 当控件的 ComponentType='ATTACHMENT'时，FormField.ComponentValue填入附件图片的资源ID列表，以逗号分隔，单个附件控件最多支持6个资源ID；
+
 ```
 FormField输入示例：
 {
@@ -3226,7 +3240,9 @@ FormField输入示例：
     "ComponentValue": "yDwhsxxxxxxxxxxxxxxxxxxxxxxxxxx1,yDwhsxxxxxxxxxxxxxxxxxxxxxxxxxx2,yDwhsxxxxxxxxxxxxxxxxxxxxxxxxxx3"
 }
 ```
+
 当控件的 ComponentType='SELECTOR'时，FormField.ComponentValue填入选择的选项内容；
+
 ```
 FormField输入示例：
 {
@@ -3234,7 +3250,9 @@ FormField输入示例：
     "ComponentValue": "选择的内容"
 }
 ```
+
 当控件的 ComponentType='DATE'时，FormField.ComponentValue填入日期内容；
+
 ```
 FormField输入示例：
 {
@@ -3242,7 +3260,9 @@ FormField输入示例：
     "ComponentValue": "2023年01月01日"
 }
 ```
+
 当控件的 ComponentType='DISTRICT'时，FormField.ComponentValue填入省市区内容；
+
 ```
 FormField输入示例：
 {
@@ -3250,6 +3270,7 @@ FormField输入示例：
     "ComponentValue": "广东省深圳市福田区"
 }
 ```
+
 【数据表格传参说明】
 当控件的 ComponentType='DYNAMIC_TABLE'时，FormField.ComponentValue需要传递json格式的字符串参数，用于确定表头&填充数据表格（支持内容的单元格合并）
 输入示例1：
@@ -3294,7 +3315,6 @@ FormField输入示例：
         ]
     }
 }
-
 ```
 
 输入示例2（表格表头宽度比例配置）：
@@ -3342,8 +3362,8 @@ FormField输入示例：
         ]
     }
 }
-
 ```
+
 表格参数说明
 
 | 名称                | 类型    | 描述                                              |
@@ -4105,7 +4125,8 @@ export interface CreateEmbedWebUrlRequest {
    * WEB嵌入的业务资源ID
 <ul><li>PREVIEW_SEAL_DETAIL，必填，取值为印章id</li>
 <li>MODIFY_TEMPLATE，PREVIEW_TEMPLATE，必填，取值为模板id</li>
-<li>PREVIEW_FLOW，PREVIEW_FLOW_DETAIL，必填，取值为合同id</li><ul>
+<li>PREVIEW_FLOW，PREVIEW_FLOW_DETAIL，必填，取值为合同id</li>
+</ul>
    */
   BusinessId?: string
   /**
@@ -4121,6 +4142,20 @@ export interface CreateEmbedWebUrlRequest {
    * 个性化参数，用于控制页面展示内容
    */
   Option?: EmbedUrlOption
+  /**
+   * 用户自定义参数
+<ul>
+<li>目前仅支持EmbedType=CREATE_TEMPLATE时传入</li>
+<li>指定后，创建，编辑，删除模版时，回调都会携带该userData</li>
+<li>支持的格式：json字符串的BASE64编码字符串</li>
+<li>示例：<ul>
+                 <li>json字符串：{"ComeFrom":"xxx"}，BASE64编码：eyJDb21lRnJvbSI6Inh4eCJ9</li>
+                 <li>eyJDb21lRnJvbSI6Inh4eCJ9，为符合要求的userData数据格式</li>
+</ul>
+</li>
+</ul>
+   */
+  UserData?: string
 }
 
 /**

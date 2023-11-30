@@ -455,6 +455,32 @@ export interface ProductSpec {
     Info: Array<SpecInfo>;
 }
 /**
+ * SSL加密配置
+ */
+export interface SSLConfig {
+    /**
+     * SSL加密状态，
+  enable-已开启
+  disable-未开启
+  enable_doing-开启中
+  disable_doing-关闭中
+  renew_doing-更新中
+  wait_doing-等待维护时间内执行
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Encryption?: string;
+    /**
+     * SSL证书有效期，时间格式 YYYY-MM-DD HH:MM:SS
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SSLValidityPeriod?: string;
+    /**
+     * SSL证书有效性，0-无效，1-有效
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SSLValidity?: number;
+}
+/**
  * DescribeFlowStatus请求参数结构体
  */
 export interface DescribeFlowStatusRequest {
@@ -1260,6 +1286,19 @@ export interface UpgradeDBInstanceRequest {
      * 执行变配的方式，默认为 1。支持值包括：0 - 立刻执行，1 - 维护时间窗执行
      */
     WaitSwitch?: number;
+}
+/**
+ * ModifyDBInstanceSSL返回参数结构体
+ */
+export interface ModifyDBInstanceSSLResponse {
+    /**
+     * 异步任务流程ID
+     */
+    FlowId?: number;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * 账号的数据库权限信息
@@ -3438,6 +3477,10 @@ export interface DescribeDBInstancesAttributeResponse {
      */
     TDEConfig?: TDEConfigAttribute;
     /**
+     * SSL加密
+     */
+    SSLConfig?: SSLConfig;
+    /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
@@ -5430,6 +5473,23 @@ export interface DescribeDBsNormalRequest {
      * 实例ID，形如mssql-7vfv3rk3
      */
     InstanceId: string;
+}
+/**
+ * ModifyDBInstanceSSL请求参数结构体
+ */
+export interface ModifyDBInstanceSSLRequest {
+    /**
+     * 实例ID
+     */
+    InstanceId: string;
+    /**
+     * 操作类型。enable-开启SSL，disable-关闭SSL，renew-更新证书有效期
+     */
+    Type: string;
+    /**
+     * 操作设置。0-立即执行，1- 维护时间内执行，默认取值0。
+     */
+    WaitSwitch: number;
 }
 /**
  * ModifyPublishSubscribeName请求参数结构体

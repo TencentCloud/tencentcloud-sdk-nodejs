@@ -909,6 +909,7 @@ import {
   OrderField,
   TaskTypeDsVO,
   BatchSuspendIntegrationTasksResponse,
+  EventBatchCaseDTO,
   DescribeWorkflowExecuteByIdRequest,
   WorkflowExtOpsDtoPage,
   RegisterEventResponse,

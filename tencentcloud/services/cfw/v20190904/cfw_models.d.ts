@@ -347,6 +347,19 @@ export interface DescribeNatAcRuleResponse {
     RequestId?: string;
 }
 /**
+ * ModifyBlockTop请求参数结构体
+ */
+export interface ModifyBlockTopRequest {
+    /**
+     * 记录id
+     */
+    UniqueId: string;
+    /**
+     * 操作类型 1 置顶 0取消
+     */
+    OpeType: string;
+}
+/**
  * ModifyPublicIPSwitchStatus返回参数结构体
  */
 export interface ModifyPublicIPSwitchStatusResponse {
@@ -1466,22 +1479,14 @@ export interface SecurityGroupRule {
     Enable?: string;
 }
 /**
- * DeleteSecurityGroupRule返回参数结构体
+ * DeleteIdsWhiteRule请求参数结构体
  */
-export interface DeleteSecurityGroupRuleResponse {
+export interface DeleteIdsWhiteRuleRequest {
     /**
-     * 状态值，0：成功，非0：失败
+     * 入侵防御白名单id
+  参考DescribeIdsWhiteRule接口返回的Id字段
      */
-    Status: number;
-    /**
-     * 返回多余的信息
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Info: string;
-    /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
+    Id: number;
 }
 /**
  * ModifySequenceRules请求参数结构体
@@ -1535,17 +1540,45 @@ export interface SequenceData {
     NewOrderIndex: number;
 }
 /**
- * DescribeEnterpriseSGRuleProgress返回参数结构体
+ * CreateNatFwInstance请求参数结构体
  */
-export interface DescribeEnterpriseSGRuleProgressResponse {
+export interface CreateNatFwInstanceRequest {
     /**
-     * 0-100，代表下发进度百分比
+     * 防火墙实例名称
      */
-    Progress: number;
+    Name: string;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     * 带宽
      */
-    RequestId?: string;
+    Width: number;
+    /**
+     * 模式 1：接入模式；0：新增模式
+     */
+    Mode: number;
+    /**
+     * 新增模式传递参数，其中NewModeItems和NatgwList至少传递一种。
+     */
+    NewModeItems?: NewModeItems;
+    /**
+     * 接入模式接入的nat网关列表，其中NewModeItems和NatgwList至少传递一种。
+     */
+    NatGwList?: Array<string>;
+    /**
+     * 主可用区，为空则选择默认可用区
+     */
+    Zone?: string;
+    /**
+     * 备可用区，为空则选择默认可用区
+     */
+    ZoneBak?: string;
+    /**
+     * 异地灾备 1：使用异地灾备；0：不使用异地灾备；为空则默认不使用异地灾备
+     */
+    CrossAZone?: number;
+    /**
+     * 指定防火墙使用网段信息
+     */
+    FwCidrInfo?: FwCidrInfo;
 }
 /**
  * ModifySecurityGroupItemRuleStatus返回参数结构体
@@ -2230,56 +2263,22 @@ export interface SetNatFwEipResponse {
     RequestId?: string;
 }
 /**
- * 访问控制列表对象
+ * DeleteSecurityGroupRule返回参数结构体
  */
-export interface AcListsData {
+export interface DeleteSecurityGroupRuleResponse {
     /**
-     * 规则id
+     * 状态值，0：成功，非0：失败
      */
-    Id: number;
+    Status: number;
     /**
-     * 访问源
+     * 返回多余的信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SourceIp: string;
+    Info: string;
     /**
-     * 访问目的
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
-    TargetIp: string;
-    /**
-     * 协议
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Protocol: string;
-    /**
-     * 端口
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Port: string;
-    /**
-     * 策略
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Strategy: number;
-    /**
-     * 描述
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Detail: string;
-    /**
-     * 命中次数
-     */
-    Count: number;
-    /**
-     * 执行顺序
-     */
-    OrderIndex: number;
-    /**
-     * 告警规则id
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    LogId: string;
+    RequestId?: string;
 }
 /**
  * ModifyPublicIPSwitchStatus请求参数结构体
@@ -2355,6 +2354,58 @@ export interface ModifyStorageSettingResponse {
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * 访问控制列表对象
+ */
+export interface AcListsData {
+    /**
+     * 规则id
+     */
+    Id: number;
+    /**
+     * 访问源
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SourceIp: string;
+    /**
+     * 访问目的
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TargetIp: string;
+    /**
+     * 协议
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Protocol: string;
+    /**
+     * 端口
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Port: string;
+    /**
+     * 策略
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Strategy: number;
+    /**
+     * 描述
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Detail: string;
+    /**
+     * 命中次数
+     */
+    Count: number;
+    /**
+     * 执行顺序
+     */
+    OrderIndex: number;
+    /**
+     * 告警规则id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    LogId: string;
 }
 /**
  * ModifySecurityGroupItemRuleStatus请求参数结构体
@@ -2991,6 +3042,33 @@ export interface ModifyEnterpriseSecurityDispatchStatusResponse {
     /**
      * 0: 修改成功, 其他: 修改失败
   注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Status?: number;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * CreateIdsWhiteRule返回参数结构体
+ */
+export interface CreateIdsWhiteRuleResponse {
+    /**
+     * 返回状态码：
+  0 成功
+  非0 失败
+     */
+    ReturnCode?: number;
+    /**
+     * 返回信息：
+  success 成功
+  其他
+     */
+    ReturnMsg?: string;
+    /**
+     * 返回状态码：
+  0  处置成功
+  -1 通用错误，不用处理
      */
     Status?: number;
     /**
@@ -3764,47 +3842,6 @@ export interface DeleteResourceGroupRequest {
     GroupId: string;
 }
 /**
- * CreateNatFwInstance请求参数结构体
- */
-export interface CreateNatFwInstanceRequest {
-    /**
-     * 防火墙实例名称
-     */
-    Name: string;
-    /**
-     * 带宽
-     */
-    Width: number;
-    /**
-     * 模式 1：接入模式；0：新增模式
-     */
-    Mode: number;
-    /**
-     * 新增模式传递参数，其中NewModeItems和NatgwList至少传递一种。
-     */
-    NewModeItems?: NewModeItems;
-    /**
-     * 接入模式接入的nat网关列表，其中NewModeItems和NatgwList至少传递一种。
-     */
-    NatGwList?: Array<string>;
-    /**
-     * 主可用区，为空则选择默认可用区
-     */
-    Zone?: string;
-    /**
-     * 备可用区，为空则选择默认可用区
-     */
-    ZoneBak?: string;
-    /**
-     * 异地灾备 1：使用异地灾备；0：不使用异地灾备；为空则默认不使用异地灾备
-     */
-    CrossAZone?: number;
-    /**
-     * 指定防火墙使用网段信息
-     */
-    FwCidrInfo?: FwCidrInfo;
-}
-/**
  * DescribeBlockByIpTimesList请求参数结构体
  */
 export interface DescribeBlockByIpTimesListRequest {
@@ -3949,17 +3986,25 @@ export interface VpcRuleItem {
     BetaList?: Array<BetaInfoByACL>;
 }
 /**
- * ModifyBlockTop请求参数结构体
+ * DescribeIdsWhiteRule返回参数结构体
  */
-export interface ModifyBlockTopRequest {
+export interface DescribeIdsWhiteRuleResponse {
     /**
-     * 记录id
+     * 总条数
      */
-    UniqueId: string;
+    Total?: number;
     /**
-     * 操作类型 1 置顶 0取消
+     * 返回状态码 0 成功 非0不成功
      */
-    OpeType: string;
+    ReturnCode?: number;
+    /**
+     * 返回信息  success 成功 其他 不成功
+     */
+    ReturnMsg?: string;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * RemoveEnterpriseSecurityGroupRule返回参数结构体
@@ -4106,6 +4151,33 @@ export interface ModifyEdgeIpSwitchRequest {
   2 不切换模式，此次操作开关
      */
     SwitchMode?: number;
+}
+/**
+ * DeleteIdsWhiteRule返回参数结构体
+ */
+export interface DeleteIdsWhiteRuleResponse {
+    /**
+     * 返回状态码：
+  0 成功
+  非0 失败
+     */
+    ReturnCode?: number;
+    /**
+     * 返回信息：
+  success 成功
+  其他
+     */
+    ReturnMsg?: string;
+    /**
+     * 返回状态码：
+  0  处置成功
+  -1 通用错误，不用处理
+     */
+    Status?: number;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * CreateAlertCenterOmit返回参数结构体
@@ -5425,6 +5497,31 @@ export interface ModifyVpcFwSequenceRulesRequest {
  */
 export declare type ModifyStorageSettingRequest = null;
 /**
+ * DescribeIdsWhiteRule请求参数结构体
+ */
+export interface DescribeIdsWhiteRuleRequest {
+    /**
+     * 每页条数
+     */
+    Limit: number;
+    /**
+     * 偏移值
+     */
+    Offset: number;
+    /**
+     * 过滤条件组合
+     */
+    Filters?: Array<CommonFilter>;
+    /**
+     * desc：降序；asc：升序。根据By字段的值进行排序，这里传参的话则By也必须有值
+     */
+    Order?: string;
+    /**
+     * 排序所用到的字段
+     */
+    By?: string;
+}
+/**
  * ModifyAssetSync请求参数结构体
  */
 export declare type ModifyAssetSyncRequest = null;
@@ -6102,6 +6199,19 @@ export interface CreateAcRulesResponse {
     RequestId?: string;
 }
 /**
+ * DescribeEnterpriseSGRuleProgress返回参数结构体
+ */
+export interface DescribeEnterpriseSGRuleProgressResponse {
+    /**
+     * 0-100，代表下发进度百分比
+     */
+    Progress: number;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * NAT防火墙开关列表数据
  */
 export interface NatSwitchListData {
@@ -6684,4 +6794,36 @@ export interface DescribeAddressTemplateListResponse {
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * CreateIdsWhiteRule请求参数结构体
+ */
+export interface CreateIdsWhiteRuleRequest {
+    /**
+     * 入侵防御规则ID
+     */
+    IdsRuleId: string;
+    /**
+     * 白名单类型：
+  src 针对源放通
+  dst 针对目的放通
+  srcdst 针对源和目的放通
+     */
+    WhiteRuleType: string;
+    /**
+     * 白名单生效防火墙范围：
+  1 边界防火墙
+  2 nat防火墙
+  4 vpc防火墙
+  7 = 1+2+4  所有防火墙
+     */
+    FwType: number;
+    /**
+     * 源IP
+     */
+    SrcIp?: string;
+    /**
+     * 目的IP
+     */
+    DstIp?: string;
 }

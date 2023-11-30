@@ -61,29 +61,13 @@ export interface GetDeviceResponse {
 }
 
 /**
- * GetFlowStatistic返回参数结构体
+ * GetDevicePayMode请求参数结构体
  */
-export interface GetFlowStatisticResponse {
+export interface GetDevicePayModeRequest {
   /**
-   * 流量详细信息
+   * 设备ID列表
    */
-  NetDetails?: Array<NetDetails>
-  /**
-   * 查找时间段流量使用最大值（单位：byte）
-   */
-  MaxValue?: number
-  /**
-   * 查找时间段流量使用平均值（单位：byte）
-   */
-  AvgValue?: number
-  /**
-   * 查找时间段流量使用总量（单位：byte）
-   */
-  TotalValue?: number
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  DeviceIdList: Array<string>
 }
 
 /**
@@ -205,17 +189,17 @@ export interface GetNetMonitorRequest {
 }
 
 /**
- * 网络详细信息
+ * GetMultiFlowStatistic返回参数结构体
  */
-export interface NetDetails {
+export interface GetMultiFlowStatisticResponse {
   /**
-   * 流量值（bit）
+   * 批量设备流量信息
    */
-  Current: number
+  FlowDetails?: Array<FlowDetails>
   /**
-   * 时间点，单位：s
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  Time: string
+  RequestId?: string
 }
 
 /**
@@ -360,13 +344,25 @@ export interface DeviceNetInfo {
 }
 
 /**
- * GetMultiFlowStatistic返回参数结构体
+ * GetFlowStatistic返回参数结构体
  */
-export interface GetMultiFlowStatisticResponse {
+export interface GetFlowStatisticResponse {
   /**
-   * 批量设备流量信息
+   * 流量详细信息
    */
-  FlowDetails?: Array<FlowDetails>
+  NetDetails?: Array<NetDetails>
+  /**
+   * 查找时间段流量使用最大值（单位：byte）
+   */
+  MaxValue?: number
+  /**
+   * 查找时间段流量使用平均值（单位：byte）
+   */
+  AvgValue?: number
+  /**
+   * 查找时间段流量使用总量（单位：byte）
+   */
+  TotalValue?: number
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -392,31 +388,17 @@ export interface SrcAddressInfo {
 }
 
 /**
- * 更新设备网络状态信息
+ * 网络详细信息
  */
-export interface UpdateNetInfo {
+export interface NetDetails {
   /**
-   * 网络类型：
-0:数据
-1:Wi-Fi
+   * 流量值（bit）
    */
-  Type?: number
+  Current: number
   /**
-   * 启用/禁用
+   * 时间点，单位：s
    */
-  DataEnable?: boolean
-  /**
-   * 上行限速：bit
-   */
-  UploadLimit?: number
-  /**
-   * 下行限速：bit
-   */
-  DownloadLimit?: number
-  /**
-   * 网卡名
-   */
-  NetInfoName?: string
+  Time: string
 }
 
 /**
@@ -473,6 +455,31 @@ export interface DescribeQosResponse {
 }
 
 /**
+ * GetVendorHardware请求参数结构体
+ */
+export interface GetVendorHardwareRequest {
+  /**
+   * 页码
+   */
+  PageNumber: number
+  /**
+   * 页面数量
+   */
+  PageSize: number
+  /**
+   * 关键字
+   */
+  Keyword?: string
+  /**
+   * 激活状态，
+空：全部；
+1:待激活；
+2:已激活；
+   */
+  Status?: number
+}
+
+/**
  * CreateEncryptedKey请求参数结构体
  */
 export type CreateEncryptedKeyRequest = null
@@ -517,6 +524,33 @@ export interface DeleteDeviceRequest {
 }
 
 /**
+ * GetFlowPackages请求参数结构体
+ */
+export interface GetFlowPackagesRequest {
+  /**
+   * 页码，从1开始
+   */
+  PageNumber: number
+  /**
+   * 每页个数
+   */
+  PageSize: number
+  /**
+   * 流量包的唯一资源ID
+   */
+  ResourceId?: string
+  /**
+   * 流量包绑定的设备ID
+   */
+  DeviceId?: string
+  /**
+   * 流量包状态，0：未生效，1：有效期内，2：已过期
+
+   */
+  Status?: number
+}
+
+/**
  * GetHardwareList请求参数结构体
  */
 export interface GetHardwareListRequest {
@@ -549,6 +583,20 @@ export interface CreateEncryptedKeyResponse {
 }
 
 /**
+ * OrderFlowPackage返回参数结构体
+ */
+export interface OrderFlowPackageResponse {
+  /**
+   * 流量包的唯一资源ID
+   */
+  ResourceId?: string
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * UpdateDevice返回参数结构体
  */
 export interface UpdateDeviceResponse {
@@ -556,6 +604,20 @@ export interface UpdateDeviceResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ModifyPackageRenewFlag请求参数结构体
+ */
+export interface ModifyPackageRenewFlagRequest {
+  /**
+   * 流量包的唯一资源ID
+   */
+  ResourceId: string
+  /**
+   * 自动续费标识。true代表自动续费，false代表不自动续费
+   */
+  RenewFlag: boolean
 }
 
 /**
@@ -671,6 +733,24 @@ export interface GetStatisticDataRequest {
 }
 
 /**
+ * GetFlowPackages返回参数结构体
+ */
+export interface GetFlowPackagesResponse {
+  /**
+   * 流量包列表
+   */
+  PackageList?: Array<FlowPackageInfo>
+  /**
+   * 总数
+   */
+  Total?: number
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * GetVendorHardware返回参数结构体
  */
 export interface GetVendorHardwareResponse {
@@ -746,6 +826,16 @@ export interface AddHardwareResponse {
    * 硬件设备
    */
   Hardware?: Array<Hardware>
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyPackageRenewFlag返回参数结构体
+ */
+export interface ModifyPackageRenewFlagResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -882,28 +972,17 @@ export interface AddDeviceResponse {
 }
 
 /**
- * GetVendorHardware请求参数结构体
+ * GetDevicePayMode返回参数结构体
  */
-export interface GetVendorHardwareRequest {
+export interface GetDevicePayModeResponse {
   /**
-   * 页码
+   * 结果信息
    */
-  PageNumber: number
+  Result?: Array<DevicePayModeInfo>
   /**
-   * 页面数量
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  PageSize: number
-  /**
-   * 关键字
-   */
-  Keyword?: string
-  /**
-   * 激活状态，
-空：全部；
-1:待激活；
-2:已激活；
-   */
-  Status?: number
+  RequestId?: string
 }
 
 /**
@@ -932,21 +1011,47 @@ export interface ActivateHardwareResponse {
 }
 
 /**
- * UpdateHardware请求参数结构体
+ * OrderFlowPackage请求参数结构体
  */
-export interface UpdateHardwareRequest {
+export interface OrderFlowPackageRequest {
   /**
-   * 硬件ID
+   * 流量包规格类型。可取值如下：
+DEVICE_1_FLOW_20G、DEVICE_2_FLOW_50G、
+DEVICE_3_FLOW_100G、
+DEVICE_5_FLOW_500G，分别代表20G、50G、100G、500G档位的流量包。
+档位也影响流量包可绑定的设备数量上限：
+20G：最多绑定1个设备
+50G：最多绑定2个设备
+100G：最多绑定3个设备
+500G：最多绑定5个设备
    */
-  HardwareId: string
+  PackageType: string
   /**
-   * 硬件序列号
+   * 流量包绑定的设备ID列表。捆绑设备个数上限取决于包的规格档位：
+20G：最多绑定1个设备
+50G：最多绑定2个设备
+100G：最多绑定3个设备
+500G：最多绑定5个设备
    */
-  SN?: string
+  DeviceList: Array<string>
   /**
-   * 设备备注
+   * 是否自动续费
    */
-  Description?: string
+  AutoRenewFlag: boolean
+  /**
+   * 区域标识，0：国内，1：国外
+   */
+  PackageRegion: number
+}
+
+/**
+ * UpdateHardware返回参数结构体
+ */
+export interface UpdateHardwareResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1030,6 +1135,31 @@ export interface DescribeQosRequest {
    * 单次加速唯一 Id
    */
   SessionId: string
+}
+
+/**
+ * 设备付费模式信息
+ */
+export interface DevicePayModeInfo {
+  /**
+   * 设备ID
+   */
+  DeviceId?: string
+  /**
+   * 付费模式。
+1：预付费流量包
+0：按流量后付费
+   */
+  PayMode?: number
+  /**
+   * 付费模式描述
+   */
+  PayModeDesc?: string
+  /**
+   * 流量包ID，仅当付费模式为流量包类型时才有。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResourceId?: string
 }
 
 /**
@@ -1181,6 +1311,60 @@ export interface GetDevicesRequest {
 }
 
 /**
+ * 流量包信息
+ */
+export interface FlowPackageInfo {
+  /**
+   * 流量包的唯一资源ID
+   */
+  ResourceId?: string
+  /**
+   * 流量包所属的用户AppId
+   */
+  AppId?: number
+  /**
+   * 流量包规格类型。可取值如下：
+DEVICE_1_FLOW_20G、DEVICE_2_FLOW_50G、
+DEVICE_3_FLOW_100G、
+DEVICE_5_FLOW_500G，分别代表20G、50G、100G、500G档位的流量包。
+档位也影响流量包可绑定的设备数量上限：
+20G：最多绑定1个设备
+50G：最多绑定2个设备
+100G：最多绑定3个设备
+500G：最多绑定5个设备
+   */
+  PackageType?: string
+  /**
+   * 流量包状态，0：未生效，1：有效期内，2：已过期
+   */
+  Status?: number
+  /**
+   * 生效时间，Unix时间戳格式，单位：秒
+   */
+  ActiveTime?: number
+  /**
+   * 过期时间，Unix时间戳格式，单位：秒
+   */
+  ExpireTime?: number
+  /**
+   * 流量包绑定的设备ID列表
+   */
+  DeviceList?: Array<string>
+  /**
+   * 流量包总容量，单位：MB
+   */
+  CapacitySize?: number
+  /**
+   * 流量包余量，单位：MB
+   */
+  CapacityRemain?: number
+  /**
+   * 自动续费标识。true代表自动续费，false代表不自动续费
+   */
+  RenewFlag?: boolean
+}
+
+/**
  * GetHardwareList返回参数结构体
  */
 export interface GetHardwareListResponse {
@@ -1225,13 +1409,21 @@ export interface NetworkData {
 }
 
 /**
- * UpdateHardware返回参数结构体
+ * UpdateHardware请求参数结构体
  */
-export interface UpdateHardwareResponse {
+export interface UpdateHardwareRequest {
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 硬件ID
    */
-  RequestId?: string
+  HardwareId: string
+  /**
+   * 硬件序列号
+   */
+  SN?: string
+  /**
+   * 设备备注
+   */
+  Description?: string
 }
 
 /**
@@ -1260,3 +1452,31 @@ export interface AddDeviceRequest {
  * GetPublicKey请求参数结构体
  */
 export type GetPublicKeyRequest = null
+
+/**
+ * 更新设备网络状态信息
+ */
+export interface UpdateNetInfo {
+  /**
+   * 网络类型：
+0:数据
+1:Wi-Fi
+   */
+  Type?: number
+  /**
+   * 启用/禁用
+   */
+  DataEnable?: boolean
+  /**
+   * 上行限速：bit
+   */
+  UploadLimit?: number
+  /**
+   * 下行限速：bit
+   */
+  DownloadLimit?: number
+  /**
+   * 网卡名
+   */
+  NetInfoName?: string
+}

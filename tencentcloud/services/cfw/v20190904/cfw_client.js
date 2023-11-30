@@ -272,6 +272,12 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
         return this.request("DescribeNatFwInstanceWithRegion", req, cb);
     }
     /**
+     * 删除入侵防御规则白名单接口
+     */
+    async DeleteIdsWhiteRule(req, cb) {
+        return this.request("DeleteIdsWhiteRule", req, cb);
+    }
+    /**
      * DescribeSourceAsset-查询资产组全部资产信息
 
      */
@@ -301,6 +307,12 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
      */
     async CreateAlertCenterOmit(req, cb) {
         return this.request("CreateAlertCenterOmit", req, cb);
+    }
+    /**
+     * 创建入侵防御规则白名单接口
+     */
+    async CreateIdsWhiteRule(req, cb) {
+        return this.request("CreateIdsWhiteRule", req, cb);
     }
     /**
      * 查询内网间访问控制列表
@@ -651,6 +663,12 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
         return this.request("ModifyAcRule", req, cb);
     }
     /**
+     * 串行防火墙IP开关列表
+     */
+    async DescribeFwEdgeIps(req, cb) {
+        return this.request("DescribeFwEdgeIps", req, cb);
+    }
+    /**
      * 修改企业安全组下发状态
      */
     async ModifyEnterpriseSecurityDispatchStatus(req, cb) {
@@ -683,10 +701,10 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
         return this.request("DescribeBlockStaticList", req, cb);
     }
     /**
-     * 串行防火墙IP开关列表
+     * 查询入侵防御规则白名单接口
      */
-    async DescribeFwEdgeIps(req, cb) {
-        return this.request("DescribeFwEdgeIps", req, cb);
+    async DescribeIdsWhiteRule(req, cb) {
+        return this.request("DescribeIdsWhiteRule", req, cb);
     }
 }
 exports.Client = Client;

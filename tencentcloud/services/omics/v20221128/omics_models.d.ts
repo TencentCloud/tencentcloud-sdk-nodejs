@@ -122,7 +122,7 @@ export interface RunApplicationRequest {
      */
     InputBase64: string;
     /**
-     * 任务缓存清理时间。不填表示不清理。
+     * 任务缓存清理时间（小时）。不填表示不清理。
      */
     CacheClearDelay: number;
     /**
@@ -296,7 +296,7 @@ export interface RunWorkflowRequest {
      */
     InputCosUri?: string;
     /**
-     * 任务缓存清理时间。不填表示不清理。
+     * 任务缓存清理时间（小时）。不填表示不清理。
      */
     CacheClearDelay?: number;
 }

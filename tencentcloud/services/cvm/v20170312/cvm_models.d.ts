@@ -1655,6 +1655,13 @@ export interface ModifyInstancesAttributeRequest {
   该参数默认值为user，若CameRoleName为非service_linked类型，本参数可不传递。
      */
     CamRoleType?: string;
+    /**
+     * 修改实例主机名是否自动重启实例，不传默认自动重启。
+  - true: 修改主机名，并自动重启实例；
+  - false: 修改主机名，不自动重启实例，需要手动重启使新主机名生效。
+  注意点：本参数仅对修改主机名生效。
+     */
+    AutoReboot?: boolean;
 }
 /**
  * RenewHosts请求参数结构体
@@ -2213,23 +2220,23 @@ export interface Image {
     /**
      * 镜像创建时间
      */
-    CreatedTime: string;
+    CreatedTime?: string;
     /**
      * 镜像名称
      */
-    ImageName: string;
+    ImageName?: string;
     /**
      * 镜像描述
      */
-    ImageDescription: string;
+    ImageDescription?: string;
     /**
      * 镜像大小
      */
-    ImageSize: number;
+    ImageSize?: number;
     /**
      * 镜像架构
      */
-    Architecture: string;
+    Architecture?: string;
     /**
      * 镜像状态:
   CREATING-创建中
@@ -2240,7 +2247,7 @@ export interface Image {
   IMPORTING-导入中
   IMPORTFAILED-导入失败
      */
-    ImageState: string;
+    ImageState?: string;
     /**
      * 镜像来源平台，包括如TencentOS、 CentOS、 Windows、 Ubuntu、 Debian、Fedora等。
      */
@@ -2257,22 +2264,22 @@ export interface Image {
      * 同步百分比
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SyncPercent: number;
+    SyncPercent?: number;
     /**
      * 镜像是否支持cloud-init
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    IsSupportCloudinit: boolean;
+    IsSupportCloudinit?: boolean;
     /**
      * 镜像关联的快照信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SnapshotSet: Array<Snapshot>;
+    SnapshotSet?: Array<Snapshot>;
     /**
      * 镜像关联的标签列表。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Tags: Array<Tag>;
+    Tags?: Array<Tag>;
     /**
      * 镜像许可类型
      */
@@ -2457,7 +2464,37 @@ export interface DataDisk {
      */
     DiskSize: number;
     /**
-     * 数据盘类型。数据盘类型限制详见[存储概述](https://cloud.tencent.com/document/product/213/4952)。取值范围：<br><li>LOCAL_BASIC：本地硬盘<br><li>LOCAL_SSD：本地SSD硬盘<br><li>LOCAL_NVME：本地NVME硬盘，与InstanceType强相关，不支持指定<br><li>LOCAL_PRO：本地HDD硬盘，与InstanceType强相关，不支持指定<br><li>CLOUD_BASIC：普通云硬盘<br><li>CLOUD_PREMIUM：高性能云硬盘<br><li>CLOUD_SSD：SSD云硬盘<br><li>CLOUD_HSSD：增强型SSD云硬盘<br><li>CLOUD_TSSD：极速型SSD云硬盘<br><li>CLOUD_BSSD：通用型SSD云硬盘<br><br>默认取值：LOCAL_BASIC。<br><br>该参数对`ResizeInstanceDisk`接口无效。
+     * 数据盘类型。数据盘类型限制详见[存储概述](https://cloud.tencent.com/document/product/213/4952)。取值范围：<br />
+  <li>
+    LOCAL_BASIC：本地硬盘<br />
+    <li>
+      LOCAL_SSD：本地SSD硬盘<br />
+      <li>
+        LOCAL_NVME：本地NVME硬盘，与InstanceType强相关，不支持指定<br />
+        <li>
+          LOCAL_PRO：本地HDD硬盘，与InstanceType强相关，不支持指定<br />
+          <li>
+            CLOUD_BASIC：普通云硬盘<br />
+            <li>
+              CLOUD_PREMIUM：高性能云硬盘<br />
+              <li>
+                CLOUD_SSD：SSD云硬盘<br />
+                <li>
+                  CLOUD_HSSD：增强型SSD云硬盘<br />
+                  <li>
+                    CLOUD_TSSD：极速型SSD云硬盘<br />
+                    <li>
+                      CLOUD_BSSD：通用型SSD云硬盘<br /><br />默认取值：LOCAL_BASIC。<br /><br />该参数对`ResizeInstanceDisk`接口无效。
+                    </li>
+                  </li>
+                </li>
+              </li>
+            </li>
+          </li>
+        </li>
+      </li>
+    </li>
+  </li>
      */
     DiskType?: string;
     /**
@@ -2467,10 +2504,12 @@ export interface DataDisk {
     DiskId?: string;
     /**
      * 数据盘是否随子机销毁。取值范围：
-  <li>TRUE：子机销毁时，销毁数据盘，只支持按小时后付费云盘
-  <li>FALSE：子机销毁时，保留数据盘<br>
-  默认取值：TRUE<br>
-  该参数目前仅用于 `RunInstances` 接口。
+  <li>TRUE：子机销毁时，销毁数据盘，只支持按小时后付费云盘</li>
+  <li>
+    FALSE：子机销毁时，保留数据盘<br />
+    默认取值：TRUE<br />
+    该参数目前仅用于 `RunInstances` 接口。
+  </li>
   注意：此字段可能返回 null，表示取不到有效值。
      */
     DeleteWithInstance?: boolean;
@@ -2481,10 +2520,12 @@ export interface DataDisk {
     SnapshotId?: string;
     /**
      * 数据盘是加密。取值范围：
-  <li>true：加密
-  <li>false：不加密<br>
-  默认取值：false<br>
-  该参数目前仅用于 `RunInstances` 接口。
+  <li>true：加密</li>
+  <li>
+    false：不加密<br />
+    默认取值：false<br />
+    该参数目前仅用于 `RunInstances` 接口。
+  </li>
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Encrypt?: boolean;
@@ -2505,6 +2546,13 @@ export interface DataDisk {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     CdcId?: string;
+    /**
+     * 突发性能
+  
+   <b>注：内测中。</b>
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    BurstPerformance?: boolean;
 }
 /**
  * DescribeKeyPairs请求参数结构体

@@ -35,6 +35,7 @@ import {
   StaticInfo,
   SyncFwOperateResponse,
   DescribeNatAcRuleResponse,
+  ModifyBlockTopRequest,
   ModifyPublicIPSwitchStatusResponse,
   AddAclRuleRequest,
   DescribeVpcFwGroupSwitchRequest,
@@ -79,11 +80,11 @@ import {
   FwGateway,
   ModifySecurityGroupSequenceRulesResponse,
   SecurityGroupRule,
-  DeleteSecurityGroupRuleResponse,
+  DeleteIdsWhiteRuleRequest,
   ModifySequenceRulesRequest,
   ModifyAclRuleResponse,
   SequenceData,
-  DescribeEnterpriseSGRuleProgressResponse,
+  CreateNatFwInstanceRequest,
   ModifySecurityGroupItemRuleStatusResponse,
   DescribeEnterpriseSecurityGroupRuleResponse,
   VpcFwGroupInfo,
@@ -102,10 +103,11 @@ import {
   AddAclRuleResponse,
   NatInstanceInfo,
   SetNatFwEipResponse,
-  AcListsData,
+  DeleteSecurityGroupRuleResponse,
   ModifyPublicIPSwitchStatusRequest,
   CreateNatRuleItem,
   ModifyStorageSettingResponse,
+  AcListsData,
   ModifySecurityGroupItemRuleStatusRequest,
   VpcFwJoinInstanceType,
   DescribeSourceAssetRequest,
@@ -134,6 +136,7 @@ import {
   DescribeDefenseSwitchRequest,
   ModifyVpcFwGroupRequest,
   ModifyEnterpriseSecurityDispatchStatusResponse,
+  CreateIdsWhiteRuleResponse,
   ModifyResourceGroupRequest,
   SecurityGroupListData,
   EdgeIpSwitch,
@@ -172,16 +175,16 @@ import {
   UnHandleEventDetail,
   RemoveEnterpriseSecurityGroupRuleRequest,
   DeleteResourceGroupRequest,
-  CreateNatFwInstanceRequest,
   DescribeBlockByIpTimesListRequest,
   VpcRuleItem,
-  ModifyBlockTopRequest,
+  DescribeIdsWhiteRuleResponse,
   RemoveEnterpriseSecurityGroupRuleResponse,
   NetInstancesInfo,
   VpcDnsInfo,
   CreateAddressTemplateResponse,
   DescribeTableStatusResponse,
   ModifyEdgeIpSwitchRequest,
+  DeleteIdsWhiteRuleResponse,
   CreateAlertCenterOmitResponse,
   DescribeResourceGroupNewResponse,
   DescribeNatFwInstanceWithRegionResponse,
@@ -241,6 +244,7 @@ import {
   DeleteNatFwInstanceRequest,
   ModifyVpcFwSequenceRulesRequest,
   ModifyStorageSettingRequest,
+  DescribeIdsWhiteRuleRequest,
   ModifyAssetSyncRequest,
   DescribeNatFwVpcDnsLstResponse,
   DescAcItem,
@@ -269,6 +273,7 @@ import {
   ModifyRunSyncAssetRequest,
   DeleteAddressTemplateRequest,
   CreateAcRulesResponse,
+  DescribeEnterpriseSGRuleProgressResponse,
   NatSwitchListData,
   DescribeSwitchListsResponse,
   ModifyAcRuleRequest,
@@ -291,6 +296,7 @@ import {
   VpcFwInstance,
   CreateAlertCenterRuleResponse,
   DescribeAddressTemplateListResponse,
+  CreateIdsWhiteRuleRequest,
 } from "./cfw_models"
 
 /**
@@ -707,6 +713,16 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
   }
 
   /**
+   * 删除入侵防御规则白名单接口
+   */
+  async DeleteIdsWhiteRule(
+    req: DeleteIdsWhiteRuleRequest,
+    cb?: (error: string, rep: DeleteIdsWhiteRuleResponse) => void
+  ): Promise<DeleteIdsWhiteRuleResponse> {
+    return this.request("DeleteIdsWhiteRule", req, cb)
+  }
+
+  /**
      * DescribeSourceAsset-查询资产组全部资产信息
 
      */
@@ -755,6 +771,16 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
     cb?: (error: string, rep: CreateAlertCenterOmitResponse) => void
   ): Promise<CreateAlertCenterOmitResponse> {
     return this.request("CreateAlertCenterOmit", req, cb)
+  }
+
+  /**
+   * 创建入侵防御规则白名单接口
+   */
+  async CreateIdsWhiteRule(
+    req: CreateIdsWhiteRuleRequest,
+    cb?: (error: string, rep: CreateIdsWhiteRuleResponse) => void
+  ): Promise<CreateIdsWhiteRuleResponse> {
+    return this.request("CreateIdsWhiteRule", req, cb)
   }
 
   /**
@@ -1334,6 +1360,16 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
   }
 
   /**
+   * 串行防火墙IP开关列表
+   */
+  async DescribeFwEdgeIps(
+    req: DescribeFwEdgeIpsRequest,
+    cb?: (error: string, rep: DescribeFwEdgeIpsResponse) => void
+  ): Promise<DescribeFwEdgeIpsResponse> {
+    return this.request("DescribeFwEdgeIps", req, cb)
+  }
+
+  /**
    * 修改企业安全组下发状态
    */
   async ModifyEnterpriseSecurityDispatchStatus(
@@ -1386,12 +1422,12 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
   }
 
   /**
-   * 串行防火墙IP开关列表
+   * 查询入侵防御规则白名单接口
    */
-  async DescribeFwEdgeIps(
-    req: DescribeFwEdgeIpsRequest,
-    cb?: (error: string, rep: DescribeFwEdgeIpsResponse) => void
-  ): Promise<DescribeFwEdgeIpsResponse> {
-    return this.request("DescribeFwEdgeIps", req, cb)
+  async DescribeIdsWhiteRule(
+    req: DescribeIdsWhiteRuleRequest,
+    cb?: (error: string, rep: DescribeIdsWhiteRuleResponse) => void
+  ): Promise<DescribeIdsWhiteRuleResponse> {
+    return this.request("DescribeIdsWhiteRule", req, cb)
   }
 }

@@ -28,58 +28,28 @@ class Client extends abstract_client_1.AbstractClient {
         super("mna.tencentcloudapi.com", "2021-01-19", clientConfig);
     }
     /**
-     * 获取单设备的实时流量统计指标
-     */
-    async GetNetMonitor(req, cb) {
-        return this.request("GetNetMonitor", req, cb);
-    }
-    /**
      * 更新硬件信息
      */
     async UpdateHardware(req, cb) {
         return this.request("UpdateHardware", req, cb);
     }
     /**
-     * 添加硬件设备，生成未激活的硬件设备，可支持批量添加
+     * 可开启/关闭流量包自动续费，不影响当前周期正在生效的流量包。
      */
-    async AddHardware(req, cb) {
-        return this.request("AddHardware", req, cb);
-    }
-    /**
-     * 租户获取厂商硬件列表
-     */
-    async GetHardwareList(req, cb) {
-        return this.request("GetHardwareList", req, cb);
-    }
-    /**
-     * 更新设备信息
-     */
-    async UpdateDevice(req, cb) {
-        return this.request("UpdateDevice", req, cb);
-    }
-    /**
-     * 新建设备记录
-     */
-    async AddDevice(req, cb) {
-        return this.request("AddDevice", req, cb);
-    }
-    /**
-     * 获取厂商硬件设备列表
-     */
-    async GetVendorHardware(req, cb) {
-        return this.request("GetVendorHardware", req, cb);
-    }
-    /**
-     * 获取Qos加速状态
-     */
-    async DescribeQos(req, cb) {
-        return this.request("DescribeQos", req, cb);
+    async ModifyPackageRenewFlag(req, cb) {
+        return this.request("ModifyPackageRenewFlag", req, cb);
     }
     /**
      * 获取指定设备Id，指定时间点数据流量使用情况
      */
     async GetFlowStatistic(req, cb) {
         return this.request("GetFlowStatistic", req, cb);
+    }
+    /**
+     * 批量获取设备流量统计曲线
+     */
+    async GetMultiFlowStatistic(req, cb) {
+        return this.request("GetMultiFlowStatistic", req, cb);
     }
     /**
      * 获取设备信息列表
@@ -94,40 +64,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("GetPublicKey", req, cb);
     }
     /**
-     * 通过此接口设置和更新预置密钥
+     * 激活硬件设备
      */
-    async CreateEncryptedKey(req, cb) {
-        return this.request("CreateEncryptedKey", req, cb);
+    async ActivateHardware(req, cb) {
+        return this.request("ActivateHardware", req, cb);
     }
     /**
-     * 批量获取设备流量统计曲线
+     * 获取流量包列表
      */
-    async GetMultiFlowStatistic(req, cb) {
-        return this.request("GetMultiFlowStatistic", req, cb);
+    async GetFlowPackages(req, cb) {
+        return this.request("GetFlowPackages", req, cb);
     }
     /**
-     * 删除设备信息
+     * 添加硬件设备，生成未激活的硬件设备，可支持批量添加
      */
-    async DeleteDevice(req, cb) {
-        return this.request("DeleteDevice", req, cb);
-    }
-    /**
-     * 移动网络停止Qos加速过程
-     */
-    async DeleteQos(req, cb) {
-        return this.request("DeleteQos", req, cb);
-    }
-    /**
-     * 在用量统计页面下载流量数据
-     */
-    async GetStatisticData(req, cb) {
-        return this.request("GetStatisticData", req, cb);
-    }
-    /**
-     * 通过指定设备的ID查找设备详细信息
-     */
-    async GetDevice(req, cb) {
-        return this.request("GetDevice", req, cb);
+    async AddHardware(req, cb) {
+        return this.request("AddHardware", req, cb);
     }
     /**
      * 移动网络发起Qos加速过程
@@ -136,10 +88,82 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateQos", req, cb);
     }
     /**
-     * 激活硬件设备
+     * 删除设备信息
      */
-    async ActivateHardware(req, cb) {
-        return this.request("ActivateHardware", req, cb);
+    async DeleteDevice(req, cb) {
+        return this.request("DeleteDevice", req, cb);
+    }
+    /**
+     * 更新设备信息
+     */
+    async UpdateDevice(req, cb) {
+        return this.request("UpdateDevice", req, cb);
+    }
+    /**
+     * 获取单设备的实时流量统计指标
+     */
+    async GetNetMonitor(req, cb) {
+        return this.request("GetNetMonitor", req, cb);
+    }
+    /**
+     * 获取设备付费模式
+     */
+    async GetDevicePayMode(req, cb) {
+        return this.request("GetDevicePayMode", req, cb);
+    }
+    /**
+     * 获取厂商硬件设备列表
+     */
+    async GetVendorHardware(req, cb) {
+        return this.request("GetVendorHardware", req, cb);
+    }
+    /**
+     * 通过此接口设置和更新预置密钥
+     */
+    async CreateEncryptedKey(req, cb) {
+        return this.request("CreateEncryptedKey", req, cb);
+    }
+    /**
+     * 移动网络停止Qos加速过程
+     */
+    async DeleteQos(req, cb) {
+        return this.request("DeleteQos", req, cb);
+    }
+    /**
+     * 通过指定设备的ID查找设备详细信息
+     */
+    async GetDevice(req, cb) {
+        return this.request("GetDevice", req, cb);
+    }
+    /**
+     * 购买预付费流量包
+     */
+    async OrderFlowPackage(req, cb) {
+        return this.request("OrderFlowPackage", req, cb);
+    }
+    /**
+     * 在用量统计页面下载流量数据
+     */
+    async GetStatisticData(req, cb) {
+        return this.request("GetStatisticData", req, cb);
+    }
+    /**
+     * 获取厂商硬件列表
+     */
+    async GetHardwareList(req, cb) {
+        return this.request("GetHardwareList", req, cb);
+    }
+    /**
+     * 新建设备记录
+     */
+    async AddDevice(req, cb) {
+        return this.request("AddDevice", req, cb);
+    }
+    /**
+     * 获取Qos加速状态
+     */
+    async DescribeQos(req, cb) {
+        return this.request("DescribeQos", req, cb);
     }
 }
 exports.Client = Client;

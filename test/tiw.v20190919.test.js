@@ -38,16 +38,6 @@ it("tiw.v20190919.SetOnlineRecordCallback", async function () {
     }
 })
 
-it("tiw.v20190919.StopOnlineRecord", async function () {
-    try {
-       const data = await client.StopOnlineRecord({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("tiw.v20190919.DescribeBoardSDKLog", async function () {
     try {
        const data = await client.DescribeBoardSDKLog({})
@@ -128,16 +118,6 @@ it("tiw.v20190919.SetTranscodeCallback", async function () {
     }
 })
 
-it("tiw.v20190919.StartOnlineRecord", async function () {
-    try {
-       const data = await client.StartOnlineRecord({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("tiw.v20190919.ResumeOnlineRecord", async function () {
     try {
        const data = await client.ResumeOnlineRecord({})
@@ -181,16 +161,6 @@ it("tiw.v20190919.DescribeTIWRoomDailyUsage", async function () {
 it("tiw.v20190919.SetTranscodeCallbackKey", async function () {
     try {
        const data = await client.SetTranscodeCallbackKey({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("tiw.v20190919.SetOfflineRecordCallback", async function () {
-    try {
-       const data = await client.SetOfflineRecordCallback({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -348,9 +318,9 @@ it("tiw.v20190919.DescribeApplicationInfos", async function () {
     }
 })
 
-it("tiw.v20190919.DescribeWarningCallback", async function () {
+it("tiw.v20190919.StartOnlineRecord", async function () {
     try {
-       const data = await client.DescribeWarningCallback({})
+       const data = await client.StartOnlineRecord({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -408,9 +378,9 @@ it("tiw.v20190919.SetWhiteboardPushCallback", async function () {
     }
 })
 
-it("tiw.v20190919.DescribeOfflineRecordCallback", async function () {
+it("tiw.v20190919.DescribeWarningCallback", async function () {
     try {
-       const data = await client.DescribeOfflineRecordCallback({})
+       const data = await client.DescribeWarningCallback({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -438,9 +408,9 @@ it("tiw.v20190919.DescribeTranscode", async function () {
     }
 })
 
-it("tiw.v20190919.CreateOfflineRecord", async function () {
+it("tiw.v20190919.StopOnlineRecord", async function () {
     try {
-       const data = await client.CreateOfflineRecord({})
+       const data = await client.StopOnlineRecord({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -541,16 +511,6 @@ it("tiw.v20190919.DescribeIMApplications", async function () {
 it("tiw.v20190919.DescribeQualityMetrics", async function () {
     try {
        const data = await client.DescribeQualityMetrics({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("tiw.v20190919.DescribeOfflineRecord", async function () {
-    try {
-       const data = await client.DescribeOfflineRecord({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

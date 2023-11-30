@@ -537,7 +537,7 @@ export interface CreateProbeTasksRequest {
    */
   Tag?: Array<Tag>
   /**
-   * 测试类型，包含定时测试与即时测试。1-定时拨测，其它表示即时拨测。
+   * 测试类型，包含定时测试与即时测试。0-定时拨测，其它表示即时拨测。
    */
   ProbeType?: number
   /**

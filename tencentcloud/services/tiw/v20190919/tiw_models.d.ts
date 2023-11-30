@@ -1,13 +1,4 @@
 /**
- * DescribeOfflineRecordCallback请求参数结构体
- */
-export interface DescribeOfflineRecordCallbackRequest {
-    /**
-     * 应用的SdkAppId
-     */
-    SdkAppId: number;
-}
-/**
  * 混流画布参数
  */
 export interface Canvas {
@@ -215,15 +206,6 @@ export interface CreateSnapshotTaskResponse {
     RequestId?: string;
 }
 /**
- * DescribeOfflineRecord返回参数结构体
- */
-export interface DescribeOfflineRecordResponse {
-    /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
-/**
  * ModifyApplication返回参数结构体
  */
 export interface ModifyApplicationResponse {
@@ -264,54 +246,21 @@ export interface DescribeUserResourcesResponse {
     RequestId?: string;
 }
 /**
- * 视频信息
+ * 日志查询里返回的白板用户数据
  */
-export interface VideoInfo {
+export interface UserListItem {
     /**
-     * 视频开始播放的时间（单位：毫秒）
-     */
-    VideoPlayTime: number;
-    /**
-     * 视频大小（字节）
-     */
-    VideoSize: number;
-    /**
-     * 视频格式
-     */
-    VideoFormat: string;
-    /**
-     * 视频播放时长（单位：毫秒）
-     */
-    VideoDuration: number;
-    /**
-     * 视频文件URL
-     */
-    VideoUrl: string;
-    /**
-     * 视频文件Id
-     */
-    VideoId: string;
-    /**
-     * 视频流类型
-  - 0：摄像头视频
-  - 1：屏幕分享视频
-  - 2：白板视频
-  - 3：混流视频
-  - 4：纯音频（mp3)
-     */
-    VideoType: number;
-    /**
-     * 摄像头/屏幕分享视频所属用户的 Id（白板视频为空、混流视频tic_mixstream_房间号_混流布局类型、辅路视频tic_substream_用户Id）
+     * 房间内的用户ID
      */
     UserId: string;
     /**
-     * 视频分辨率的宽
+     * 用户在查询时间段内最早出现的时间，Unix时间戳，单位毫秒
      */
-    Width: number;
+    StartTime: number;
     /**
-     * 视频分辨率的高
+     * 用户在查询时间段内最晚出现的时间，Unix时间戳，单位毫秒
      */
-    Height: number;
+    EndTime: number;
 }
 /**
  * DescribePPTCheck返回参数结构体
@@ -724,60 +673,13 @@ export interface DescribeRunningTasksResponse {
     RequestId?: string;
 }
 /**
- * DescribeWhiteboardPush返回参数结构体
+ * DescribeApplicationUsage返回参数结构体
  */
-export interface DescribeWhiteboardPushResponse {
+export interface DescribeApplicationUsageResponse {
     /**
-     * 推流结束原因，
-  - AUTO: 房间内长时间没有音视频上行及白板操作导致自动停止推流
-  - USER_CALL: 主动调用了停止推流接口
-  - EXCEPTION: 推流异常结束
+     * 画图所需的用量数据
      */
-    FinishReason?: string;
-    /**
-     * 需要查询结果的白板推流任务Id
-     */
-    TaskId?: string;
-    /**
-     * 推流任务状态
-  - PREPARED: 表示推流正在准备中（进房/启动推流服务等操作）
-  - PUSHING: 表示推流已开始
-  - STOPPED: 表示推流已停止
-     */
-    Status?: string;
-    /**
-     * 房间号
-     */
-    RoomId?: number;
-    /**
-     * 白板的群组 Id
-     */
-    GroupId?: string;
-    /**
-     * 推流用户Id
-     */
-    PushUserId?: string;
-    /**
-     * 实际开始推流时间，Unix 时间戳，单位秒
-     */
-    PushStartTime?: number;
-    /**
-     * 实际停止推流时间，Unix 时间戳，单位秒
-     */
-    PushStopTime?: number;
-    /**
-     * 推流过程中出现异常的次数
-     */
-    ExceptionCnt?: number;
-    /**
-     * 白板推流首帧对应的IM时间戳，可用于录制回放时IM聊天消息与白板推流视频进行同步对时。
-     */
-    IMSyncTime?: number;
-    /**
-     * 备份推流任务结果信息
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Backup?: string;
+    Data: Array<DataItem>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -989,27 +891,9 @@ export interface SnapshotResult {
     Snapshots: Array<string>;
 }
 /**
- * DescribeOfflineRecordCallback返回参数结构体
- */
-export interface DescribeOfflineRecordCallbackResponse {
-    /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
-/**
  * SetWarningCallback返回参数结构体
  */
 export interface SetWarningCallbackResponse {
-    /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
-/**
- * CreateOfflineRecord返回参数结构体
- */
-export interface CreateOfflineRecordResponse {
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1649,47 +1533,22 @@ export interface StartWhiteboardPushRequest {
     GroupId?: string;
 }
 /**
- * CreateOfflineRecord请求参数结构体
+ * SetWarningCallback请求参数结构体
  */
-export interface CreateOfflineRecordRequest {
+export interface SetWarningCallbackRequest {
     /**
      * 客户的SdkAppId
      */
     SdkAppId: number;
     /**
-     * 录制任务对应的房间号
+     * 告警回调地址，如果传空字符串会删除原来的回调地址配置，回调地址仅支持http或https协议，即回调地址以http://或https://开头。
+  回调数据格式请参考文档：https://cloud.tencent.com/document/product/1137/90112
      */
-    RoomId: number;
+    Callback: string;
     /**
-     * 录制任务对应的群组Id
+     * 设置告警回调鉴权密钥，最长64字符，如果传入空字符串，那么删除现有的鉴权回调密钥，回调鉴权方式请参考文档：https://cloud.tencent.com/document/product/1137/40257
      */
-    GroupId?: string;
-    /**
-     * 混流参数配置
-  目前课后录制暂未支持自定义混流布局Custom参数
-     */
-    MixStream?: MixStream;
-    /**
-     * 白板参数配置
-     */
-    Whiteboard?: Whiteboard;
-}
-/**
- * 日志查询里返回的白板用户数据
- */
-export interface UserListItem {
-    /**
-     * 房间内的用户ID
-     */
-    UserId: string;
-    /**
-     * 用户在查询时间段内最早出现的时间，Unix时间戳，单位毫秒
-     */
-    StartTime: number;
-    /**
-     * 用户在查询时间段内最晚出现的时间，Unix时间戳，单位毫秒
-     */
-    EndTime: number;
+    CallbackKey: string;
 }
 /**
  * DescribeVideoGenerationTaskCallback返回参数结构体
@@ -1960,19 +1819,6 @@ export interface StopOnlineRecordRequest {
     TaskId: string;
 }
 /**
- * SetOfflineRecordCallback请求参数结构体
- */
-export interface SetOfflineRecordCallbackRequest {
-    /**
-     * 客户的SdkAppId
-     */
-    SdkAppId: number;
-    /**
-     * 课后录制任务结果回调地址，如果传空字符串会删除原来的回调地址配置，回调地址仅支持 http或https协议，即回调地址以http://或https://开头
-     */
-    Callback: string;
-}
-/**
  * SetVideoGenerationTaskCallback返回参数结构体
  */
 export interface SetVideoGenerationTaskCallbackResponse {
@@ -2048,6 +1894,56 @@ export interface CreatePPTCheckTaskRequest {
   3. 已损坏音视频：移除PPT上对损坏音视频的引用
      */
     AutoHandleUnsupportedElement?: boolean;
+}
+/**
+ * 视频信息
+ */
+export interface VideoInfo {
+    /**
+     * 视频开始播放的时间（单位：毫秒）
+     */
+    VideoPlayTime: number;
+    /**
+     * 视频大小（字节）
+     */
+    VideoSize: number;
+    /**
+     * 视频格式
+     */
+    VideoFormat: string;
+    /**
+     * 视频播放时长（单位：毫秒）
+     */
+    VideoDuration: number;
+    /**
+     * 视频文件URL
+     */
+    VideoUrl: string;
+    /**
+     * 视频文件Id
+     */
+    VideoId: string;
+    /**
+     * 视频流类型
+  - 0：摄像头视频
+  - 1：屏幕分享视频
+  - 2：白板视频
+  - 3：混流视频
+  - 4：纯音频（mp3)
+     */
+    VideoType: number;
+    /**
+     * 摄像头/屏幕分享视频所属用户的 Id（白板视频为空、混流视频tic_mixstream_房间号_混流布局类型、辅路视频tic_substream_用户Id）
+     */
+    UserId: string;
+    /**
+     * 视频分辨率的宽
+     */
+    Width: number;
+    /**
+     * 视频分辨率的高
+     */
+    Height: number;
 }
 /**
  * SetWhiteboardPushCallback请求参数结构体
@@ -2380,15 +2276,6 @@ export interface DescribeOnlineRecordCallbackResponse {
     RequestId?: string;
 }
 /**
- * SetOfflineRecordCallback返回参数结构体
- */
-export interface SetOfflineRecordCallbackResponse {
-    /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
-/**
  * 录制控制参数， 用于指定全局录制控制及具体流录制控制参数，比如设置需要对哪些流进行录制，是否只录制小画面等
  */
 export interface RecordControl {
@@ -2590,22 +2477,24 @@ export interface DescribeTranscodeByUrlRequest {
     Url: string;
 }
 /**
- * SetWarningCallback请求参数结构体
+ * Excel转码相关参数
  */
-export interface SetWarningCallbackRequest {
+export interface ExcelParam {
     /**
-     * 客户的SdkAppId
+     * 表格转码纸张（画布）大小，默认为0。
+  0 -- A4
+  1 -- A2
+  2 -- A0
+  
+  注：当设置的值超出合法取值范围时，将采用默认值。
      */
-    SdkAppId: number;
+    PaperSize?: number;
     /**
-     * 告警回调地址，如果传空字符串会删除原来的回调地址配置，回调地址仅支持http或https协议，即回调地址以http://或https://开头。
-  回调数据格式请参考文档：https://cloud.tencent.com/document/product/1137/90112
+     * 表格文件转换纸张方向，默认为0。
+  0 -- 代表垂直方向
+  非0 -- 代表水平方向
      */
-    Callback: string;
-    /**
-     * 设置告警回调鉴权密钥，最长64字符，如果传入空字符串，那么删除现有的鉴权回调密钥，回调鉴权方式请参考文档：https://cloud.tencent.com/document/product/1137/40257
-     */
-    CallbackKey: string;
+    PaperDirection?: number;
 }
 /**
  * DescribePostpaidUsage请求参数结构体
@@ -2958,13 +2847,60 @@ export interface SetPPTCheckCallbackRequest {
     Callback: string;
 }
 /**
- * DescribeApplicationUsage返回参数结构体
+ * DescribeWhiteboardPush返回参数结构体
  */
-export interface DescribeApplicationUsageResponse {
+export interface DescribeWhiteboardPushResponse {
     /**
-     * 画图所需的用量数据
+     * 推流结束原因，
+  - AUTO: 房间内长时间没有音视频上行及白板操作导致自动停止推流
+  - USER_CALL: 主动调用了停止推流接口
+  - EXCEPTION: 推流异常结束
      */
-    Data: Array<DataItem>;
+    FinishReason?: string;
+    /**
+     * 需要查询结果的白板推流任务Id
+     */
+    TaskId?: string;
+    /**
+     * 推流任务状态
+  - PREPARED: 表示推流正在准备中（进房/启动推流服务等操作）
+  - PUSHING: 表示推流已开始
+  - STOPPED: 表示推流已停止
+     */
+    Status?: string;
+    /**
+     * 房间号
+     */
+    RoomId?: number;
+    /**
+     * 白板的群组 Id
+     */
+    GroupId?: string;
+    /**
+     * 推流用户Id
+     */
+    PushUserId?: string;
+    /**
+     * 实际开始推流时间，Unix 时间戳，单位秒
+     */
+    PushStartTime?: number;
+    /**
+     * 实际停止推流时间，Unix 时间戳，单位秒
+     */
+    PushStopTime?: number;
+    /**
+     * 推流过程中出现异常的次数
+     */
+    ExceptionCnt?: number;
+    /**
+     * 白板推流首帧对应的IM时间戳，可用于录制回放时IM聊天消息与白板推流视频进行同步对时。
+     */
+    IMSyncTime?: number;
+    /**
+     * 备份推流任务结果信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Backup?: string;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -3122,6 +3058,10 @@ export interface CreateTranscodeRequest {
   3. 已损坏音视频：移除PPT上对损坏音视频的引用
      */
     AutoHandleUnsupportedElement?: boolean;
+    /**
+     * Excel表格转码参数，可设置转码时表格纸张大小及纸张方向等参数（仅对转码文件为Excel表格文件的静态转码任务生效）
+     */
+    ExcelParam?: ExcelParam;
 }
 /**
  * SetTranscodeCallbackKey请求参数结构体
@@ -3292,19 +3232,6 @@ export interface StopWhiteboardPushRequest {
     SdkAppId: number;
     /**
      * 需要停止的白板推流任务 Id
-     */
-    TaskId: string;
-}
-/**
- * DescribeOfflineRecord请求参数结构体
- */
-export interface DescribeOfflineRecordRequest {
-    /**
-     * 客户的SdkAppId
-     */
-    SdkAppId: number;
-    /**
-     * 课后录制任务的Id
      */
     TaskId: string;
 }

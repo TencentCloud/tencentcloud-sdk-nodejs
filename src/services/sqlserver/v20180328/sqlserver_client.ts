@@ -43,6 +43,7 @@ import {
   RestoreInstanceResponse,
   InstanceTask,
   ProductSpec,
+  SSLConfig,
   DescribeFlowStatusRequest,
   ModifyAccountPrivilegeResponse,
   ModifyMigrationResponse,
@@ -81,6 +82,7 @@ import {
   CreateIncrementalMigrationResponse,
   DescribeZonesResponse,
   UpgradeDBInstanceRequest,
+  ModifyDBInstanceSSLResponse,
   DBPrivilege,
   DescribeReadOnlyGroupDetailsResponse,
   ResourceTag,
@@ -263,6 +265,7 @@ import {
   DescribeReadOnlyGroupListRequest,
   CreateBackupRequest,
   DescribeDBsNormalRequest,
+  ModifyDBInstanceSSLRequest,
   ModifyPublishSubscribeNameRequest,
   MigrationAction,
   DescribeCrossRegionZoneRequest,
@@ -1557,6 +1560,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteAccountResponse) => void
   ): Promise<DeleteAccountResponse> {
     return this.request("DeleteAccount", req, cb)
+  }
+
+  /**
+   * 本接口（DescribeDBInstancesAttribute）用于开启\关闭\更新SSL加密
+   */
+  async ModifyDBInstanceSSL(
+    req: ModifyDBInstanceSSLRequest,
+    cb?: (error: string, rep: ModifyDBInstanceSSLResponse) => void
+  ): Promise<ModifyDBInstanceSSLResponse> {
+    return this.request("ModifyDBInstanceSSL", req, cb)
   }
 
   /**

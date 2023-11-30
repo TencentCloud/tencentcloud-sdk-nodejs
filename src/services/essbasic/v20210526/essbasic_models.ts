@@ -966,6 +966,13 @@ export interface CreateFlowOption {
 **false**：（默认）允许编辑填写控件
    */
   ForbidEditFillComponent?: boolean
+  /**
+   * 跳过上传文件步骤
+
+**true**：跳过
+**false**：（默认）不跳过，需要传ResourceId
+   */
+  SkipUploadFile?: string
 }
 
 /**
@@ -1281,11 +1288,17 @@ export interface SyncProxyOrganizationRequest {
  */
 export interface ChannelCreatePrepareFlowRequest {
   /**
-   * 合同模板ID，为32位字符串。
+   * 资源id，与ResourceType相对应，取值范围：
+<ul>
+<li>文件Id（通过UploadFiles获取文件资源Id）</li>
+<li>模板Id</li>
+</ul>
    */
   ResourceId: string
   /**
-   * 资源类型，此接口固定为**1**表示为用模板发起
+   * 资源类型，取值有：
+<ul><li> **1**：模板</li>
+<li> **2**：文件（默认值）</li></ul>
    */
   ResourceType: number
   /**
@@ -1313,7 +1326,8 @@ export interface ChannelCreatePrepareFlowRequest {
    */
   FlowApproverList?: Array<CommonFlowApprover>
   /**
-   * 用过去已经通过此接口发起的合同的ID复制个新的合同创建链接
+   * 合同Id：用于通过一个已发起的合同快速生成一个发起流程web链接
+注: `该参数必须是一个待发起审核的合同id，并且还未审核通过`
    */
   FlowId?: string
   /**
@@ -7006,6 +7020,20 @@ export interface ChannelCreateEmbedWebUrlRequest {
    * @deprecated
    */
   Operator?: UserInfo
+  /**
+   * 用户自定义参数
+<ul>
+<li>目前仅支持EmbedType=CREATE_TEMPLATE时传入</li>
+<li>指定后，创建，编辑，删除模版时，回调都会携带该userData</li>
+<li>支持的格式：json字符串的BASE64编码字符串</li>
+<li>示例：<ul>
+                 <li>json字符串：{"ComeFrom":"xxx"}，BASE64编码：eyJDb21lRnJvbSI6Inh4eCJ9</li>
+                 <li>eyJDb21lRnJvbSI6Inh4eCJ9，为符合要求的userData数据格式</li>
+</ul>
+</li>
+</ul>
+   */
+  UserData?: string
 }
 
 /**

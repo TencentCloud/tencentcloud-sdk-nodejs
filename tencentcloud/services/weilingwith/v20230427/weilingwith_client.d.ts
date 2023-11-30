@@ -30,7 +30,7 @@ export declare class Client extends AbstractClient {
     /**
      * 用来查询系统中的告警状态列表
      */
-    DescribeAlarmStatusList(req?: DescribeAlarmStatusListRequest, cb?: (error: string, rep: DescribeAlarmStatusListResponse) => void): Promise<DescribeAlarmStatusListResponse>;
+    DescribeAlarmStatusList(req: DescribeAlarmStatusListRequest, cb?: (error: string, rep: DescribeAlarmStatusListResponse) => void): Promise<DescribeAlarmStatusListResponse>;
     /**
      * 设备状态统计
      */

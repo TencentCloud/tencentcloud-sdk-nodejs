@@ -2213,7 +2213,11 @@ export interface DescribeEventCasesRequest {
    */
   ProjectId: string
   /**
-   * 事件实例目录
+   * 事件实例目录,示例取值:
+- 已过期: expired
+- 未过期: consuming
+- 全部: all
+
    */
   Category: string
   /**
@@ -2230,6 +2234,7 @@ export interface DescribeEventCasesRequest {
   EventName?: string
   /**
    * 事件类型
+   * @deprecated
    */
   EventType?: string
   /**
@@ -2238,10 +2243,16 @@ export interface DescribeEventCasesRequest {
   EventSubType?: string
   /**
    * 事件广播类型
+   * @deprecated
    */
   EventBroadcastType?: string
   /**
-   * 事件实例状态
+   * 事件实例状态,示例取值:
+- 已消费: COMSUMED
+- 已过期: EXPIRED
+- 待消费: ACTIVE
+- 消费中: CONSUMING
+   * @deprecated
    */
   Status?: string
   /**
@@ -2272,6 +2283,18 @@ export interface DescribeEventCasesRequest {
    * 事件实例数据时间
    */
   Dimension?: string
+  /**
+   * 事件实例有效时间
+   */
+  TimeToLive?: string
+  /**
+   * 排序字段
+   */
+  SortItem?: string
+  /**
+   * 排序顺序
+   */
+  SortType?: string
 }
 
 /**
@@ -2529,6 +2552,21 @@ export interface AlarmEventInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SendResult?: string
+  /**
+   * 监控对象id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MonitorObjectId?: string
+  /**
+   * 监控对象名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MonitorObjectName?: string
+  /**
+   * 指标阈值
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Threshold?: number
 }
 
 /**
@@ -6090,6 +6128,10 @@ export interface BatchUpdateIntegrationTasksRequest {
    * 项目id
    */
   ProjectId: string
+  /**
+   * 责任人Id（多个责任人用小写分号隔开）
+   */
+  InchargeIds?: string
 }
 
 /**
@@ -11467,15 +11509,15 @@ export interface BatchUpdateIntegrationTasksResponse {
   /**
    * 操作成功的任务数
    */
-  SuccessCount: number
+  SuccessCount?: number
   /**
    * 操作失败的任务数
    */
-  FailedCount: number
+  FailedCount?: number
   /**
    * 任务总数
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -12016,6 +12058,10 @@ export interface DescribeAlarmReceiverRequest {
    * 告警时间
    */
   AlarmTime?: string
+  /**
+   * 监控对象类型(1:所有任务,2:指定任务,3:指定责任人,4:指定资源组)
+   */
+  MonitorType?: number
 }
 
 /**
@@ -12877,7 +12923,7 @@ export interface CommitRuleGroupExecResultRequest {
  */
 export interface DescribeDataSourceInfoListRequest {
   /**
-   * 工作空间id
+   * 项目id
    */
   ProjectId: string
   /**
@@ -12889,7 +12935,7 @@ export interface DescribeDataSourceInfoListRequest {
    */
   PageSize?: number
   /**
-   * 可选过滤条件，Filter可选配置(参考): "Name": { "type": "string", "description": "数据源名称" }, "Type": { "type": "string", "description": "类型" }, "ClusterId": { "type": "string", "description": "集群id" }, "CategoryId": { "type": "string", "description": "分类，项目或空间id" }
+   * 过滤条件（暂不支持）
    */
   Filters?: Filter
   /**
@@ -12897,11 +12943,11 @@ export interface DescribeDataSourceInfoListRequest {
    */
   OrderFields?: OrderField
   /**
-   * 数据源类型
+   * 数据源类型，必选（如MYSQL、DLC等）
    */
   Type?: string
   /**
-   * 数据源名称过滤用
+   * 数据源名称过滤
    */
   DatasourceName?: string
 }
@@ -14440,11 +14486,11 @@ export interface DescribeAlarmEventsResponse {
    * 告警事件列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  AlarmEventInfoList: Array<AlarmEventInfo>
+  AlarmEventInfoList?: Array<AlarmEventInfo>
   /**
    * 总记录数
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -18155,7 +18201,7 @@ export interface AlarmIndicatorInfo {
    */
   Id?: string
   /**
-   * 告警指标,0表示任务失败，1表示任务运行超时，2表示任务停止，3表示任务暂停
+   * 告警指标,0任务失败,1任务运行超时,2任务停止,3任务暂停, 4读取速度,5写入速度,6读取吞吐 7写入吞吐, 8脏数据字节数,9脏数据条数,10任务异常,11任务检测异常, 12重启次数, 13任务延时, 14近20分内的重启次数 15传输延迟,16业务延迟, 50离线包CPU使用率, 51离线包内存使用率, 52离线包并行度使用率, 53离线包排队中的实例数, 54实时包资源使用率, 55实时包运行中的任务数
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AlarmIndicator?: number
@@ -18175,7 +18221,7 @@ export interface AlarmIndicatorInfo {
    */
   EstimatedTime?: number
   /**
-   * 实时任务告警需要的参数
+   * 告警阈值的算子,1 大于,2 小于
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Operator?: number
@@ -18189,13 +18235,18 @@ export interface AlarmIndicatorInfo {
    */
   Duration?: number
   /**
-   * 告警周期单位
+   * 告警周期单位:hour,minute,day
    */
   DurationUnit?: string
   /**
    * 周期内最多告警次数
    */
   MaxTimes?: number
+  /**
+   * 指标阈值
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Threshold?: number
 }
 
 /**
@@ -18601,26 +18652,6 @@ export interface SubmitTaskTestRunRequest {
  */
 export interface DescribeAlarmEventsRequest {
   /**
-   * 过滤条件(key可以是：AlarmLevel,AlarmIndicator,KeyWord)
-   */
-  Filters: Array<Filter>
-  /**
-   * 排序字段（AlarmTime）
-   */
-  OrderFields: Array<OrderField>
-  /**
-   * 类型(201表示实时，202表示离线)
-   */
-  TaskType: number
-  /**
-   * 开始时间
-   */
-  StartTime: string
-  /**
-   * 结束时间
-   */
-  EndTime: string
-  /**
    * 项目ID
    */
   ProjectId: string
@@ -18632,6 +18663,30 @@ export interface DescribeAlarmEventsRequest {
    * 每页记录数
    */
   PageSize: number
+  /**
+   * 过滤条件(key可以是：AlarmLevel,AlarmIndicator,KeyWord)
+   */
+  Filters?: Array<Filter>
+  /**
+   * 排序字段（AlarmTime）
+   */
+  OrderFields?: Array<OrderField>
+  /**
+   * 类型(201表示实时，202表示离线)
+   */
+  TaskType?: number
+  /**
+   * 开始时间
+   */
+  StartTime?: string
+  /**
+   * 结束时间
+   */
+  EndTime?: string
+  /**
+   * 监控对象类型(1:所有任务,2:指定任务,3:指定责任人,4:指定资源组)
+   */
+  MonitorType?: number
 }
 
 /**
@@ -20644,6 +20699,10 @@ export interface CheckAlarmRegularNameExistRequest {
    * 任务类型:201.实时,202.离线
    */
   TaskType?: number
+  /**
+   * 监控对象类型(1:所有任务,2:指定任务,3:指定责任人,4:指定资源组)
+   */
+  MonitorType?: number
 }
 
 /**
@@ -23342,11 +23401,11 @@ export interface DescribeAlarmReceiverResponse {
    * 告警接收人列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  AlarmReceiverInfoList: Array<AlarmReceiverInfo>
+  AlarmReceiverInfoList?: Array<AlarmReceiverInfo>
   /**
    * 总记录数
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -24722,7 +24781,11 @@ export interface TriggerDsEventRequest {
   /**
    * 事件实例信息
    */
-  EventCaseList: Array<EventCaseDTO>
+  EventCaseList?: Array<EventCaseDTO>
+  /**
+   * 事件实例信息(连续时间)
+   */
+  EventBatchCaseList?: Array<EventBatchCaseDTO>
 }
 
 /**
@@ -26519,6 +26582,44 @@ export interface BatchSuspendIntegrationTasksResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 事件连续时间实例信息
+ */
+export interface EventBatchCaseDTO {
+  /**
+   * 事件实例id
+   */
+  CaseId?: string
+  /**
+   * 事件名
+   */
+  Name?: string
+  /**
+   * 事件触发起始时间
+   */
+  StartDimension?: string
+  /**
+   * 创建时间
+   */
+  CreationTs?: string
+  /**
+   * 消费者id
+   */
+  ConsumerId?: string
+  /**
+   * 描述信息
+   */
+  Description?: string
+  /**
+   * 事件触发结束时间
+   */
+  EndDimension?: string
+  /**
+   * 事件周期
+   */
+  EventSubType?: string
 }
 
 /**

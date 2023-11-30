@@ -10956,6 +10956,7 @@ export interface IPSECOptionsSpecification {
   /**
    * 认证算法：可选值：'MD5', 'SHA1'，'SHA-256' 默认为
 注意：此字段可能返回 null，表示取不到有效值。
+   * @deprecated
    */
   IntegrityAlgorith?: string
   /**
@@ -10973,6 +10974,11 @@ export interface IPSECOptionsSpecification {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IPSECSaLifetimeTraffic?: number
+  /**
+   * 认证算法：可选值：'MD5', 'SHA1'，'SHA-256' 默认为
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IntegrityAlgorithm?: string
 }
 
 /**

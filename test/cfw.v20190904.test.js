@@ -418,6 +418,16 @@ it("cfw.v20190904.DescribeNatFwInstanceWithRegion", async function () {
     }
 })
 
+it("cfw.v20190904.DeleteIdsWhiteRule", async function () {
+    try {
+       const data = await client.DeleteIdsWhiteRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cfw.v20190904.DescribeSourceAsset", async function () {
     try {
        const data = await client.DescribeSourceAsset({})
@@ -461,6 +471,16 @@ it("cfw.v20190904.ModifyVpcFwSequenceRules", async function () {
 it("cfw.v20190904.CreateAlertCenterOmit", async function () {
     try {
        const data = await client.CreateAlertCenterOmit({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cfw.v20190904.CreateIdsWhiteRule", async function () {
+    try {
+       const data = await client.CreateIdsWhiteRule({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1038,6 +1058,16 @@ it("cfw.v20190904.ModifyAcRule", async function () {
     }
 })
 
+it("cfw.v20190904.DescribeFwEdgeIps", async function () {
+    try {
+       const data = await client.DescribeFwEdgeIps({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cfw.v20190904.ModifyEnterpriseSecurityDispatchStatus", async function () {
     try {
        const data = await client.ModifyEnterpriseSecurityDispatchStatus({})
@@ -1088,9 +1118,9 @@ it("cfw.v20190904.DescribeBlockStaticList", async function () {
     }
 })
 
-it("cfw.v20190904.DescribeFwEdgeIps", async function () {
+it("cfw.v20190904.DescribeIdsWhiteRule", async function () {
     try {
-       const data = await client.DescribeFwEdgeIps({})
+       const data = await client.DescribeIdsWhiteRule({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

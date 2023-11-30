@@ -18,7 +18,6 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
-  DescribeOfflineRecordCallbackRequest,
   Canvas,
   StopOnlineRecordResponse,
   SetVideoGenerationTaskCallbackKeyRequest,
@@ -30,12 +29,11 @@ import {
   DescribeWhiteboardApplicationConfigResponse,
   WhiteboardPushResult,
   CreateSnapshotTaskResponse,
-  DescribeOfflineRecordResponse,
   ModifyApplicationResponse,
   SetPPTCheckCallbackKeyResponse,
   CreateTranscodeResponse,
   DescribeUserResourcesResponse,
-  VideoInfo,
+  UserListItem,
   DescribePPTCheckResponse,
   CustomLayout,
   Interrupt,
@@ -58,7 +56,7 @@ import {
   PPTErrSlide,
   PauseOnlineRecordRequest,
   DescribeRunningTasksResponse,
-  DescribeWhiteboardPushResponse,
+  DescribeApplicationUsageResponse,
   DescribeAPIServiceResponse,
   TimeValue,
   DescribeWarningCallbackResponse,
@@ -68,9 +66,7 @@ import {
   DescribeRunningTasksRequest,
   DescribeApplicationUsageRequest,
   SnapshotResult,
-  DescribeOfflineRecordCallbackResponse,
   SetWarningCallbackResponse,
-  CreateOfflineRecordResponse,
   SetVideoGenerationTaskCallbackKeyResponse,
   DescribeVideoGenerationTaskResponse,
   SetPPTCheckCallbackKeyRequest,
@@ -98,8 +94,7 @@ import {
   AuthParam,
   Detail,
   StartWhiteboardPushRequest,
-  CreateOfflineRecordRequest,
-  UserListItem,
+  SetWarningCallbackRequest,
   DescribeVideoGenerationTaskCallbackResponse,
   WhiteboardPushTaskSearchResult,
   ModifyWhiteboardApplicationConfigRequest,
@@ -112,11 +107,11 @@ import {
   DescribeWarningCallbackRequest,
   SetTranscodeCallbackResponse,
   StopOnlineRecordRequest,
-  SetOfflineRecordCallbackRequest,
   SetVideoGenerationTaskCallbackResponse,
   ApplicationItem,
   DescribeTranscodeByUrlResponse,
   CreatePPTCheckTaskRequest,
+  VideoInfo,
   SetWhiteboardPushCallbackRequest,
   DescribeTIWDailyUsageResponse,
   Concat,
@@ -133,7 +128,6 @@ import {
   SetOnlineRecordCallbackKeyRequest,
   ModifyApplicationRequest,
   DescribeOnlineRecordCallbackResponse,
-  SetOfflineRecordCallbackResponse,
   RecordControl,
   DescribeQualityMetricsResponse,
   TranscodeTaskResult,
@@ -145,7 +139,7 @@ import {
   DescribeOnlineRecordRequest,
   StopWhiteboardPushResponse,
   DescribeTranscodeByUrlRequest,
-  SetWarningCallbackRequest,
+  ExcelParam,
   DescribePostpaidUsageRequest,
   LayoutParams,
   StreamControl,
@@ -163,7 +157,7 @@ import {
   RunningTaskItem,
   SetTranscodeCallbackKeyResponse,
   SetPPTCheckCallbackRequest,
-  DescribeApplicationUsageResponse,
+  DescribeWhiteboardPushResponse,
   StartOnlineRecordResponse,
   Tag,
   DescribeUsageSummaryRequest,
@@ -179,7 +173,6 @@ import {
   TranscodeTaskSearchResult,
   CreateApplicationResponse,
   StopWhiteboardPushRequest,
-  DescribeOfflineRecordRequest,
   DescribeRecordSearchRequest,
   DescribePPTCheckRequest,
 } from "./tiw_models"
@@ -211,16 +204,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: SetOnlineRecordCallbackResponse) => void
   ): Promise<SetOnlineRecordCallbackResponse> {
     return this.request("SetOnlineRecordCallback", req, cb)
-  }
-
-  /**
-   * 停止实时录制
-   */
-  async StopOnlineRecord(
-    req: StopOnlineRecordRequest,
-    cb?: (error: string, rep: StopOnlineRecordResponse) => void
-  ): Promise<StopOnlineRecordResponse> {
-    return this.request("StopOnlineRecord", req, cb)
   }
 
   /**
@@ -304,16 +287,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 发起一个实时录制任务
-   */
-  async StartOnlineRecord(
-    req: StartOnlineRecordRequest,
-    cb?: (error: string, rep: StartOnlineRecordResponse) => void
-  ): Promise<StartOnlineRecordResponse> {
-    return this.request("StartOnlineRecord", req, cb)
-  }
-
-  /**
    * 恢复实时录制
    */
   async ResumeOnlineRecord(
@@ -364,18 +337,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: SetTranscodeCallbackKeyResponse) => void
   ): Promise<SetTranscodeCallbackKeyResponse> {
     return this.request("SetTranscodeCallbackKey", req, cb)
-  }
-
-  /**
-     * 课后录制服务已下线
-
-设置课后录制回调地址
-     */
-  async SetOfflineRecordCallback(
-    req: SetOfflineRecordCallbackRequest,
-    cb?: (error: string, rep: SetOfflineRecordCallbackResponse) => void
-  ): Promise<SetOfflineRecordCallbackResponse> {
-    return this.request("SetOfflineRecordCallback", req, cb)
   }
 
   /**
@@ -529,13 +490,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询告警回调地址。此功能需要申请白名单使用。
+   * 发起一个实时录制任务
    */
-  async DescribeWarningCallback(
-    req: DescribeWarningCallbackRequest,
-    cb?: (error: string, rep: DescribeWarningCallbackResponse) => void
-  ): Promise<DescribeWarningCallbackResponse> {
-    return this.request("DescribeWarningCallback", req, cb)
+  async StartOnlineRecord(
+    req: StartOnlineRecordRequest,
+    cb?: (error: string, rep: StartOnlineRecordResponse) => void
+  ): Promise<StartOnlineRecordResponse> {
+    return this.request("StartOnlineRecord", req, cb)
   }
 
   /**
@@ -589,15 +550,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 课后录制服务已下线
-
-查询课后录制回调地址
-     */
-  async DescribeOfflineRecordCallback(
-    req: DescribeOfflineRecordCallbackRequest,
-    cb?: (error: string, rep: DescribeOfflineRecordCallbackResponse) => void
-  ): Promise<DescribeOfflineRecordCallbackResponse> {
-    return this.request("DescribeOfflineRecordCallback", req, cb)
+   * 查询告警回调地址。此功能需要申请白名单使用。
+   */
+  async DescribeWarningCallback(
+    req: DescribeWarningCallbackRequest,
+    cb?: (error: string, rep: DescribeWarningCallbackResponse) => void
+  ): Promise<DescribeWarningCallbackResponse> {
+    return this.request("DescribeWarningCallback", req, cb)
   }
 
   /**
@@ -621,15 +580,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 课后录制服务已下线
-
-创建课后录制任务
-     */
-  async CreateOfflineRecord(
-    req: CreateOfflineRecordRequest,
-    cb?: (error: string, rep: CreateOfflineRecordResponse) => void
-  ): Promise<CreateOfflineRecordResponse> {
-    return this.request("CreateOfflineRecord", req, cb)
+   * 停止实时录制
+   */
+  async StopOnlineRecord(
+    req: StopOnlineRecordRequest,
+    cb?: (error: string, rep: StopOnlineRecordResponse) => void
+  ): Promise<StopOnlineRecordResponse> {
+    return this.request("StopOnlineRecord", req, cb)
   }
 
   /**
@@ -733,18 +690,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeQualityMetricsResponse) => void
   ): Promise<DescribeQualityMetricsResponse> {
     return this.request("DescribeQualityMetrics", req, cb)
-  }
-
-  /**
-     * 课后录制服务已下线
-
-查询课后录制任务的进度与录制结果等相关信息
-     */
-  async DescribeOfflineRecord(
-    req: DescribeOfflineRecordRequest,
-    cb?: (error: string, rep: DescribeOfflineRecordResponse) => void
-  ): Promise<DescribeOfflineRecordResponse> {
-    return this.request("DescribeOfflineRecord", req, cb)
   }
 
   /**

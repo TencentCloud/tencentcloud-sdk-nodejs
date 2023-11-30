@@ -732,6 +732,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteAccount", req, cb);
     }
     /**
+     * 本接口（DescribeDBInstancesAttribute）用于开启\关闭\更新SSL加密
+     */
+    async ModifyDBInstanceSSL(req, cb) {
+        return this.request("ModifyDBInstanceSSL", req, cb);
+    }
+    /**
      * 本接口（ModifyBackupStrategy）用于修改备份策略
      */
     async ModifyBackupStrategy(req, cb) {

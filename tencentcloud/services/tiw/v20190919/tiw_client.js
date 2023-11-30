@@ -40,12 +40,6 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("SetOnlineRecordCallback", req, cb);
     }
     /**
-     * 停止实时录制
-     */
-    async StopOnlineRecord(req, cb) {
-        return this.request("StopOnlineRecord", req, cb);
-    }
-    /**
      * 查询客户端白板日志
      */
     async DescribeBoardSDKLog(req, cb) {
@@ -94,12 +88,6 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("SetTranscodeCallback", req, cb);
     }
     /**
-     * 发起一个实时录制任务
-     */
-    async StartOnlineRecord(req, cb) {
-        return this.request("StartOnlineRecord", req, cb);
-    }
-    /**
      * 恢复实时录制
      */
     async ResumeOnlineRecord(req, cb) {
@@ -131,14 +119,6 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async SetTranscodeCallbackKey(req, cb) {
         return this.request("SetTranscodeCallbackKey", req, cb);
-    }
-    /**
-     * 课后录制服务已下线
-
-设置课后录制回调地址
-     */
-    async SetOfflineRecordCallback(req, cb) {
-        return this.request("SetOfflineRecordCallback", req, cb);
     }
     /**
      * 设置PPT检测任务回调密钥，回调鉴权方式请参考文档：https://cloud.tencent.com/document/product/1137/40257
@@ -231,10 +211,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeApplicationInfos", req, cb);
     }
     /**
-     * 查询告警回调地址。此功能需要申请白名单使用。
+     * 发起一个实时录制任务
      */
-    async DescribeWarningCallback(req, cb) {
-        return this.request("DescribeWarningCallback", req, cb);
+    async StartOnlineRecord(req, cb) {
+        return this.request("StartOnlineRecord", req, cb);
     }
     /**
      * 查询用户后付费用量
@@ -267,12 +247,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("SetWhiteboardPushCallback", req, cb);
     }
     /**
-     * 课后录制服务已下线
-
-查询课后录制回调地址
+     * 查询告警回调地址。此功能需要申请白名单使用。
      */
-    async DescribeOfflineRecordCallback(req, cb) {
-        return this.request("DescribeOfflineRecordCallback", req, cb);
+    async DescribeWarningCallback(req, cb) {
+        return this.request("DescribeWarningCallback", req, cb);
     }
     /**
      * 创建视频生成任务
@@ -287,12 +265,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeTranscode", req, cb);
     }
     /**
-     * 课后录制服务已下线
-
-创建课后录制任务
+     * 停止实时录制
      */
-    async CreateOfflineRecord(req, cb) {
-        return this.request("CreateOfflineRecord", req, cb);
+    async StopOnlineRecord(req, cb) {
+        return this.request("StopOnlineRecord", req, cb);
     }
     /**
      * 查询指定时间段内子产品的用量汇总
@@ -356,14 +332,6 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeQualityMetrics(req, cb) {
         return this.request("DescribeQualityMetrics", req, cb);
-    }
-    /**
-     * 课后录制服务已下线
-
-查询课后录制任务的进度与录制结果等相关信息
-     */
-    async DescribeOfflineRecord(req, cb) {
-        return this.request("DescribeOfflineRecord", req, cb);
     }
     /**
      * 发起一个白板推流任务

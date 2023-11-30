@@ -597,7 +597,7 @@ export interface DescribeGroupReleaseRequest {
  */
 export interface DescribeConfigTemplateResponse {
   /**
-   * Result
+   * 导入结果
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: ConfigTemplate
@@ -3489,7 +3489,7 @@ export interface TsfPageInstance {
  */
 export interface ModifyLaneResponse {
   /**
-   * 编辑成功: true / 编辑失败: false
+   * 更新成功: true / 更新失败: false
    */
   Result?: boolean
   /**
@@ -6818,7 +6818,7 @@ export interface UnitRuleItem {
  */
 export interface UpdateConfigTemplateResponse {
   /**
-   * 结果true：成功；false：失败；
+   * 更新成功: true / 更新失败: false
    */
   Result?: boolean
   /**
@@ -15196,7 +15196,7 @@ export interface CreatePathRewritesResponse {
  */
 export interface DescribeConfigTemplateRequest {
   /**
-   * 无
+   * 配置模板Id
    */
   ConfigTemplateId: string
 }

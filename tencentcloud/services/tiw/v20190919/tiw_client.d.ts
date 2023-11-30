@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeOfflineRecordCallbackRequest, StopOnlineRecordResponse, SetVideoGenerationTaskCallbackKeyRequest, DescribeTIWRoomDailyUsageRequest, DescribeWhiteboardPushRequest, DescribeWhiteboardPushSearchResponse, ResumeOnlineRecordResponse, DescribeWhiteboardApplicationConfigResponse, CreateSnapshotTaskResponse, DescribeOfflineRecordResponse, ModifyApplicationResponse, SetPPTCheckCallbackKeyResponse, CreateTranscodeResponse, DescribeUserResourcesResponse, DescribePPTCheckResponse, CreateApplicationRequest, ModifyWhiteboardBucketConfigRequest, SetOnlineRecordCallbackKeyResponse, DescribeRecordSearchResponse, DescribeAPIServiceRequest, DescribeQualityMetricsRequest, CreateVideoGenerationTaskRequest, DescribeTranscodeCallbackRequest, DescribeTranscodeSearchResponse, ResumeOnlineRecordRequest, SetWhiteboardPushCallbackKeyResponse, DescribeRoomListRequest, SetWhiteboardPushCallbackResponse, ApplyTiwTrialResponse, PauseOnlineRecordRequest, DescribeRunningTasksResponse, DescribeWhiteboardPushResponse, DescribeAPIServiceResponse, DescribeWarningCallbackResponse, DescribeWhiteboardBucketConfigRequest, DescribeUsageSummaryResponse, DescribeRunningTasksRequest, DescribeApplicationUsageRequest, DescribeOfflineRecordCallbackResponse, SetWarningCallbackResponse, CreateOfflineRecordResponse, SetVideoGenerationTaskCallbackKeyResponse, DescribeVideoGenerationTaskResponse, SetPPTCheckCallbackKeyRequest, DescribeVideoGenerationTaskRequest, DescribeWhiteboardPushCallbackRequest, DescribeOnlineRecordResponse, DescribeTranscodeRequest, DescribeBoardSDKLogResponse, SetOnlineRecordCallbackResponse, DescribePPTCheckCallbackResponse, DescribeTranscodeCallbackResponse, DescribeUserListResponse, ModifyAutoRenewFlagResponse, DescribeApplicationInfosResponse, DescribeTIWDailyUsageRequest, DescribeWhiteboardBucketConfigResponse, DescribeBoardSDKLogRequest, DescribeVideoGenerationTaskCallbackRequest, SetVideoGenerationTaskCallbackRequest, SetWhiteboardPushCallbackKeyRequest, DescribeTranscodeSearchRequest, ApplyTiwTrialRequest, StartWhiteboardPushRequest, CreateOfflineRecordRequest, DescribeVideoGenerationTaskCallbackResponse, ModifyWhiteboardApplicationConfigRequest, DescribeSnapshotTaskRequest, StartOnlineRecordRequest, DescribeUserStatusRequest, DescribeOnlineRecordCallbackRequest, DescribeWarningCallbackRequest, SetTranscodeCallbackResponse, StopOnlineRecordRequest, SetOfflineRecordCallbackRequest, SetVideoGenerationTaskCallbackResponse, DescribeTranscodeByUrlResponse, CreatePPTCheckTaskRequest, SetWhiteboardPushCallbackRequest, DescribeTIWDailyUsageResponse, DescribeWhiteboardApplicationConfigRequest, CreateVideoGenerationTaskResponse, DescribePPTCheckCallbackRequest, PauseOnlineRecordResponse, ModifyWhiteboardApplicationConfigResponse, CreateSnapshotTaskRequest, DescribeTranscodeResponse, SetOnlineRecordCallbackKeyRequest, ModifyApplicationRequest, DescribeOnlineRecordCallbackResponse, SetOfflineRecordCallbackResponse, DescribeQualityMetricsResponse, DescribeIMApplicationsResponse, SetOnlineRecordCallbackRequest, DescribeUserListRequest, DescribeUserResourcesRequest, SetPPTCheckCallbackResponse, DescribeOnlineRecordRequest, StopWhiteboardPushResponse, DescribeTranscodeByUrlRequest, SetWarningCallbackRequest, DescribePostpaidUsageRequest, DescribeRoomListResponse, DescribeIMApplicationsRequest, ModifyAutoRenewFlagRequest, DescribeSnapshotTaskResponse, DescribeUserStatusResponse, DescribeTIWRoomDailyUsageResponse, DescribeWhiteboardPushCallbackResponse, DescribeApplicationInfosRequest, DescribeWhiteboardPushSearchRequest, SetTranscodeCallbackKeyResponse, SetPPTCheckCallbackRequest, DescribeApplicationUsageResponse, StartOnlineRecordResponse, DescribeUsageSummaryRequest, CreatePPTCheckTaskResponse, ModifyWhiteboardBucketConfigResponse, CreateTranscodeRequest, SetTranscodeCallbackKeyRequest, SetTranscodeCallbackRequest, DescribePostpaidUsageResponse, StartWhiteboardPushResponse, CreateApplicationResponse, StopWhiteboardPushRequest, DescribeOfflineRecordRequest, DescribeRecordSearchRequest, DescribePPTCheckRequest } from "./tiw_models";
+import { StopOnlineRecordResponse, SetVideoGenerationTaskCallbackKeyRequest, DescribeTIWRoomDailyUsageRequest, DescribeWhiteboardPushRequest, DescribeWhiteboardPushSearchResponse, ResumeOnlineRecordResponse, DescribeWhiteboardApplicationConfigResponse, CreateSnapshotTaskResponse, ModifyApplicationResponse, SetPPTCheckCallbackKeyResponse, CreateTranscodeResponse, DescribeUserResourcesResponse, DescribePPTCheckResponse, CreateApplicationRequest, ModifyWhiteboardBucketConfigRequest, SetOnlineRecordCallbackKeyResponse, DescribeRecordSearchResponse, DescribeAPIServiceRequest, DescribeQualityMetricsRequest, CreateVideoGenerationTaskRequest, DescribeTranscodeCallbackRequest, DescribeTranscodeSearchResponse, ResumeOnlineRecordRequest, SetWhiteboardPushCallbackKeyResponse, DescribeRoomListRequest, SetWhiteboardPushCallbackResponse, ApplyTiwTrialResponse, PauseOnlineRecordRequest, DescribeRunningTasksResponse, DescribeApplicationUsageResponse, DescribeAPIServiceResponse, DescribeWarningCallbackResponse, DescribeWhiteboardBucketConfigRequest, DescribeUsageSummaryResponse, DescribeRunningTasksRequest, DescribeApplicationUsageRequest, SetWarningCallbackResponse, SetVideoGenerationTaskCallbackKeyResponse, DescribeVideoGenerationTaskResponse, SetPPTCheckCallbackKeyRequest, DescribeVideoGenerationTaskRequest, DescribeWhiteboardPushCallbackRequest, DescribeOnlineRecordResponse, DescribeTranscodeRequest, DescribeBoardSDKLogResponse, SetOnlineRecordCallbackResponse, DescribePPTCheckCallbackResponse, DescribeTranscodeCallbackResponse, DescribeUserListResponse, ModifyAutoRenewFlagResponse, DescribeApplicationInfosResponse, DescribeTIWDailyUsageRequest, DescribeWhiteboardBucketConfigResponse, DescribeBoardSDKLogRequest, DescribeVideoGenerationTaskCallbackRequest, SetVideoGenerationTaskCallbackRequest, SetWhiteboardPushCallbackKeyRequest, DescribeTranscodeSearchRequest, ApplyTiwTrialRequest, StartWhiteboardPushRequest, SetWarningCallbackRequest, DescribeVideoGenerationTaskCallbackResponse, ModifyWhiteboardApplicationConfigRequest, DescribeSnapshotTaskRequest, StartOnlineRecordRequest, DescribeUserStatusRequest, DescribeOnlineRecordCallbackRequest, DescribeWarningCallbackRequest, SetTranscodeCallbackResponse, StopOnlineRecordRequest, SetVideoGenerationTaskCallbackResponse, DescribeTranscodeByUrlResponse, CreatePPTCheckTaskRequest, SetWhiteboardPushCallbackRequest, DescribeTIWDailyUsageResponse, DescribeWhiteboardApplicationConfigRequest, CreateVideoGenerationTaskResponse, DescribePPTCheckCallbackRequest, PauseOnlineRecordResponse, ModifyWhiteboardApplicationConfigResponse, CreateSnapshotTaskRequest, DescribeTranscodeResponse, SetOnlineRecordCallbackKeyRequest, ModifyApplicationRequest, DescribeOnlineRecordCallbackResponse, DescribeQualityMetricsResponse, DescribeIMApplicationsResponse, SetOnlineRecordCallbackRequest, DescribeUserListRequest, DescribeUserResourcesRequest, SetPPTCheckCallbackResponse, DescribeOnlineRecordRequest, StopWhiteboardPushResponse, DescribeTranscodeByUrlRequest, DescribePostpaidUsageRequest, DescribeRoomListResponse, DescribeIMApplicationsRequest, ModifyAutoRenewFlagRequest, DescribeSnapshotTaskResponse, DescribeUserStatusResponse, DescribeTIWRoomDailyUsageResponse, DescribeWhiteboardPushCallbackResponse, DescribeApplicationInfosRequest, DescribeWhiteboardPushSearchRequest, SetTranscodeCallbackKeyResponse, SetPPTCheckCallbackRequest, DescribeWhiteboardPushResponse, StartOnlineRecordResponse, DescribeUsageSummaryRequest, CreatePPTCheckTaskResponse, ModifyWhiteboardBucketConfigResponse, CreateTranscodeRequest, SetTranscodeCallbackKeyRequest, SetTranscodeCallbackRequest, DescribePostpaidUsageResponse, StartWhiteboardPushResponse, CreateApplicationResponse, StopWhiteboardPushRequest, DescribeRecordSearchRequest, DescribePPTCheckRequest } from "./tiw_models";
 /**
  * tiw client
  * @class
@@ -15,10 +15,6 @@ export declare class Client extends AbstractClient {
      * 设置实时录制回调地址，回调数据格式请参考文档：https://cloud.tencent.com/document/product/1137/40258
      */
     SetOnlineRecordCallback(req: SetOnlineRecordCallbackRequest, cb?: (error: string, rep: SetOnlineRecordCallbackResponse) => void): Promise<SetOnlineRecordCallbackResponse>;
-    /**
-     * 停止实时录制
-     */
-    StopOnlineRecord(req: StopOnlineRecordRequest, cb?: (error: string, rep: StopOnlineRecordResponse) => void): Promise<StopOnlineRecordResponse>;
     /**
      * 查询客户端白板日志
      */
@@ -52,10 +48,6 @@ export declare class Client extends AbstractClient {
      */
     SetTranscodeCallback(req: SetTranscodeCallbackRequest, cb?: (error: string, rep: SetTranscodeCallbackResponse) => void): Promise<SetTranscodeCallbackResponse>;
     /**
-     * 发起一个实时录制任务
-     */
-    StartOnlineRecord(req: StartOnlineRecordRequest, cb?: (error: string, rep: StartOnlineRecordResponse) => void): Promise<StartOnlineRecordResponse>;
-    /**
      * 恢复实时录制
      */
     ResumeOnlineRecord(req: ResumeOnlineRecordRequest, cb?: (error: string, rep: ResumeOnlineRecordResponse) => void): Promise<ResumeOnlineRecordResponse>;
@@ -78,12 +70,6 @@ export declare class Client extends AbstractClient {
      * 设置文档转码回调鉴权密钥，回调鉴权方式请参考文档：https://cloud.tencent.com/document/product/1137/40257
      */
     SetTranscodeCallbackKey(req: SetTranscodeCallbackKeyRequest, cb?: (error: string, rep: SetTranscodeCallbackKeyResponse) => void): Promise<SetTranscodeCallbackKeyResponse>;
-    /**
-     * 课后录制服务已下线
-
-设置课后录制回调地址
-     */
-    SetOfflineRecordCallback(req: SetOfflineRecordCallbackRequest, cb?: (error: string, rep: SetOfflineRecordCallbackResponse) => void): Promise<SetOfflineRecordCallbackResponse>;
     /**
      * 设置PPT检测任务回调密钥，回调鉴权方式请参考文档：https://cloud.tencent.com/document/product/1137/40257
      */
@@ -145,9 +131,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeApplicationInfos(req?: DescribeApplicationInfosRequest, cb?: (error: string, rep: DescribeApplicationInfosResponse) => void): Promise<DescribeApplicationInfosResponse>;
     /**
-     * 查询告警回调地址。此功能需要申请白名单使用。
+     * 发起一个实时录制任务
      */
-    DescribeWarningCallback(req: DescribeWarningCallbackRequest, cb?: (error: string, rep: DescribeWarningCallbackResponse) => void): Promise<DescribeWarningCallbackResponse>;
+    StartOnlineRecord(req: StartOnlineRecordRequest, cb?: (error: string, rep: StartOnlineRecordResponse) => void): Promise<StartOnlineRecordResponse>;
     /**
      * 查询用户后付费用量
      */
@@ -169,11 +155,9 @@ export declare class Client extends AbstractClient {
      */
     SetWhiteboardPushCallback(req: SetWhiteboardPushCallbackRequest, cb?: (error: string, rep: SetWhiteboardPushCallbackResponse) => void): Promise<SetWhiteboardPushCallbackResponse>;
     /**
-     * 课后录制服务已下线
-
-查询课后录制回调地址
+     * 查询告警回调地址。此功能需要申请白名单使用。
      */
-    DescribeOfflineRecordCallback(req: DescribeOfflineRecordCallbackRequest, cb?: (error: string, rep: DescribeOfflineRecordCallbackResponse) => void): Promise<DescribeOfflineRecordCallbackResponse>;
+    DescribeWarningCallback(req: DescribeWarningCallbackRequest, cb?: (error: string, rep: DescribeWarningCallbackResponse) => void): Promise<DescribeWarningCallbackResponse>;
     /**
      * 创建视频生成任务
      */
@@ -183,11 +167,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeTranscode(req: DescribeTranscodeRequest, cb?: (error: string, rep: DescribeTranscodeResponse) => void): Promise<DescribeTranscodeResponse>;
     /**
-     * 课后录制服务已下线
-
-创建课后录制任务
+     * 停止实时录制
      */
-    CreateOfflineRecord(req: CreateOfflineRecordRequest, cb?: (error: string, rep: CreateOfflineRecordResponse) => void): Promise<CreateOfflineRecordResponse>;
+    StopOnlineRecord(req: StopOnlineRecordRequest, cb?: (error: string, rep: StopOnlineRecordResponse) => void): Promise<StopOnlineRecordResponse>;
     /**
      * 查询指定时间段内子产品的用量汇总
      */
@@ -231,12 +213,6 @@ export declare class Client extends AbstractClient {
      * 查询互动白板质量数据
      */
     DescribeQualityMetrics(req: DescribeQualityMetricsRequest, cb?: (error: string, rep: DescribeQualityMetricsResponse) => void): Promise<DescribeQualityMetricsResponse>;
-    /**
-     * 课后录制服务已下线
-
-查询课后录制任务的进度与录制结果等相关信息
-     */
-    DescribeOfflineRecord(req: DescribeOfflineRecordRequest, cb?: (error: string, rep: DescribeOfflineRecordResponse) => void): Promise<DescribeOfflineRecordResponse>;
     /**
      * 发起一个白板推流任务
      */

@@ -1,12 +1,16 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeCaptchaOperDataResponse, DescribeCaptchaMiniOperDataResponse, GetTotalTicketStatisticsRequest, DescribeCaptchaMiniDataSumResponse, GetRequestStatisticsResponse, GetRequestStatisticsRequest, GetTicketStatisticsRequest, DescribeCaptchaUserAllAppIdRequest, GetTotalTicketStatisticsResponse, DescribeCaptchaMiniDataResponse, DescribeCaptchaMiniRiskResultRequest, UpdateCaptchaAppIdInfoResponse, DescribeCaptchaDataSumResponse, DescribeCaptchaTicketDataRequest, DescribeCaptchaResultResponse, DescribeCaptchaMiniDataSumRequest, DescribeCaptchaOperDataRequest, DescribeCaptchaDataSumRequest, DescribeCaptchaMiniRiskResultResponse, GetTicketStatisticsResponse, GetTotalRequestStatisticsRequest, GetTotalRequestStatisticsResponse, DescribeCaptchaDataResponse, DescribeCaptchaResultRequest, UpdateCaptchaAppIdInfoRequest, DescribeCaptchaMiniOperDataRequest, DescribeCaptchaAppIdInfoRequest, DescribeCaptchaAppIdInfoResponse, DescribeCaptchaUserAllAppIdResponse, DescribeCaptchaDataRequest, DescribeCaptchaMiniResultRequest, DescribeCaptchaTicketDataResponse, DescribeCaptchaMiniResultResponse, DescribeCaptchaMiniDataRequest } from "./captcha_models";
+import { DescribeCaptchaOperDataResponse, DescribeCaptchaMiniOperDataResponse, GetTotalTicketStatisticsRequest, DescribeCaptchaMiniDataSumResponse, DescribeCaptchaRceResultResponse, GetRequestStatisticsResponse, GetRequestStatisticsRequest, GetTicketStatisticsRequest, DescribeCaptchaUserAllAppIdRequest, GetTotalTicketStatisticsResponse, DescribeCaptchaMiniDataResponse, DescribeCaptchaMiniRiskResultRequest, UpdateCaptchaAppIdInfoResponse, DescribeCaptchaDataSumResponse, DescribeCaptchaTicketDataRequest, DescribeCaptchaResultResponse, DescribeCaptchaMiniDataSumRequest, DescribeCaptchaOperDataRequest, DescribeCaptchaDataSumRequest, DescribeCaptchaMiniRiskResultResponse, GetTicketStatisticsResponse, GetTotalRequestStatisticsRequest, GetTotalRequestStatisticsResponse, DescribeCaptchaDataResponse, DescribeCaptchaResultRequest, UpdateCaptchaAppIdInfoRequest, DescribeCaptchaMiniOperDataRequest, DescribeCaptchaAppIdInfoRequest, DescribeCaptchaAppIdInfoResponse, DescribeCaptchaRceResultRequest, DescribeCaptchaUserAllAppIdResponse, DescribeCaptchaDataRequest, DescribeCaptchaMiniResultRequest, DescribeCaptchaTicketDataResponse, DescribeCaptchaMiniResultResponse, DescribeCaptchaMiniDataRequest } from "./captcha_models";
 /**
  * captcha client
  * @class
  */
 export declare class Client extends AbstractClient {
     constructor(clientConfig: ClientConfig);
+    /**
+     * Rce融合验证核查验证码票据结果(Web及APP)
+     */
+    DescribeCaptchaRceResult(req: DescribeCaptchaRceResultRequest, cb?: (error: string, rep: DescribeCaptchaRceResultResponse) => void): Promise<DescribeCaptchaRceResultResponse>;
     /**
      * 核查验证码小程序插件票据接入风控结果(已停用)
      */

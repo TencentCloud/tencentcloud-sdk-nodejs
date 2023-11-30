@@ -28,6 +28,12 @@ class Client extends abstract_client_1.AbstractClient {
         super("captcha.tencentcloudapi.com", "2019-07-22", clientConfig);
     }
     /**
+     * Rce融合验证核查验证码票据结果(Web及APP)
+     */
+    async DescribeCaptchaRceResult(req, cb) {
+        return this.request("DescribeCaptchaRceResult", req, cb);
+    }
+    /**
      * 核查验证码小程序插件票据接入风控结果(已停用)
      */
     async DescribeCaptchaMiniRiskResult(req, cb) {

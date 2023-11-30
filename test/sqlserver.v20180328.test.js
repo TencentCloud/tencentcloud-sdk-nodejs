@@ -1188,6 +1188,16 @@ it("sqlserver.v20180328.DeleteAccount", async function () {
     }
 })
 
+it("sqlserver.v20180328.ModifyDBInstanceSSL", async function () {
+    try {
+       const data = await client.ModifyDBInstanceSSL({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("sqlserver.v20180328.ModifyBackupStrategy", async function () {
     try {
        const data = await client.ModifyBackupStrategy({})
