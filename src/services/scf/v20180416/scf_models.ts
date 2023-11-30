@@ -50,7 +50,7 @@ export interface UpdateAliasRequest {
    */
   Namespace?: string
   /**
-   * 别名的路由信息，需要为别名指定附加版本时，必须提供此参数
+   * 别名的路由信息，需要为别名指定附加版本时，必须提供此参数；	  附加版本指的是：除主版本 FunctionVersion 外，为此别名再指定一个函数可正常使用的版本；   这里附加版本中的 Version 值 不能是别名指向的主版本；  要注意的是：如果想要某个版本的流量全部指向这个别名，不需配置此参数； 目前一个别名最多只能指定一个附加版本
    */
   RoutingConfig?: RoutingConfig
   /**
@@ -195,6 +195,7 @@ export interface ProtocolParams {
 
 /**
  * 别名的版本路由配置
+其中：随机权重路由附加版本和规则路由附加版本不可以同时配置
  */
 export interface RoutingConfig {
   /**
@@ -1037,6 +1038,14 @@ export interface UpdateFunctionConfigurationRequest {
    * 单实例多并发配置。只支持Web函数。
    */
   InstanceConcurrencyConfig?: InstanceConcurrencyConfig
+  /**
+   * 是否开启Dns缓存能力。只支持EVENT函数。默认为FALSE，TRUE 为开启，FALSE为关闭
+   */
+  DnsCache?: string
+  /**
+   * 内网访问配置
+   */
+  IntranetConfig?: IntranetConfigIn
 }
 
 /**
@@ -2040,7 +2049,7 @@ export interface CreateAliasRequest {
    */
   Namespace?: string
   /**
-   * 别名的请求路由配置
+   * 别名的路由信息，需要为别名指定附加版本时，必须提供此参数；	  附加版本指的是：除主版本 FunctionVersion 外，为此别名再指定一个函数可正常使用的版本；   这里附加版本中的 Version 值 不能是别名指向的主版本；  要注意的是：如果想要某个版本的流量全部指向这个别名，不需配置此参数； 目前一个别名最多只能指定一个附加版本
    */
   RoutingConfig?: RoutingConfig
   /**

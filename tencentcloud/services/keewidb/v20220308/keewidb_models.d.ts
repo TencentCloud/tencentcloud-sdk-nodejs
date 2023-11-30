@@ -207,19 +207,23 @@ export interface ModifyNetworkConfigResponse {
     /**
      * 执行状态。<ul><li>true：执行成功。</li><li>false：执行失败。</li></ul>
      */
-    Status: boolean;
+    Status?: boolean;
     /**
      * 修改后的子网 ID。
      */
-    SubnetId: string;
+    SubnetId?: string;
     /**
      * 修改后的私有网络 ID。
      */
-    VpcId: string;
+    VpcId?: string;
     /**
      * 修改后的 VIP 地址。
      */
-    Vip: string;
+    Vip?: string;
+    /**
+     * 任务ID。
+     */
+    TaskId?: number;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1059,9 +1063,19 @@ export interface DescribeConnectionConfigResponse {
      */
     OutNetLimit?: number;
     /**
-     * 单分片连接数限制。
+     * 实例当前单分片连接数限制。
      */
     ClientLimit?: number;
+    /**
+     * 单分片连接数限制最小值。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ClientLimitMin?: number;
+    /**
+     * 单分片连接数限制最大值。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ClientLimitMax?: number;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */

@@ -331,6 +331,42 @@ export interface Step {
 }
 
 /**
+ * 日志开关详细信息
+ */
+export interface SwitchInfo {
+  /**
+   * 开启标识符 true代表开启
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Enable?: boolean
+  /**
+   * CLS日志集ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LogsetId?: string
+  /**
+   * CLS日志主题ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TopicId?: string
+  /**
+   * 当前log-agent版本
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Version?: string
+  /**
+   * 是否可升级
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UpgradeAble?: boolean
+  /**
+   * CLS日志主题所属region
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TopicRegion?: string
+}
+
+/**
  * CreateClusterNodePool请求参数结构体
  */
 export interface CreateClusterNodePoolRequest {
@@ -5878,6 +5914,21 @@ export interface CreateClusterInstancesResponse {
 }
 
 /**
+ * DescribeLogSwitches返回参数结构体
+ */
+export interface DescribeLogSwitchesResponse {
+  /**
+   * 集群日志开关集合
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SwitchSet?: Array<Switch>
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyClusterVirtualNodePool返回参数结构体
  */
 export interface ModifyClusterVirtualNodePoolResponse {
@@ -6542,6 +6593,32 @@ export interface ModifyClusterEndpointSPRequest {
    * 修改外网访问安全组
    */
   SecurityGroup?: string
+}
+
+/**
+ * DescribePrometheusConfig返回参数结构体
+ */
+export interface DescribePrometheusConfigResponse {
+  /**
+   * 全局配置
+   */
+  Config?: string
+  /**
+   * ServiceMonitor配置
+   */
+  ServiceMonitors?: Array<PrometheusConfigItem>
+  /**
+   * PodMonitor配置
+   */
+  PodMonitors?: Array<PrometheusConfigItem>
+  /**
+   * 原生Job
+   */
+  RawJobs?: Array<PrometheusConfigItem>
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -8655,6 +8732,36 @@ open  = 已开启外网访问
 }
 
 /**
+ * 集群日志开关集合
+ */
+export interface Switch {
+  /**
+   * 集群ID
+   */
+  ClusterId: string
+  /**
+   * 审计开关的详细信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Audit: SwitchInfo
+  /**
+   * 事件开关的详细信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Event: SwitchInfo
+  /**
+   * 普通日志的详细信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Log: SwitchInfo
+  /**
+   * master 日志详细信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MasterLog?: SwitchInfo
+}
+
+/**
  * 镜像信息
  */
 export interface ImageInstance {
@@ -9531,29 +9638,17 @@ export interface DescribeClusterAsGroupsResponse {
 }
 
 /**
- * DescribePrometheusConfig返回参数结构体
+ * DescribeLogSwitches请求参数结构体
  */
-export interface DescribePrometheusConfigResponse {
+export interface DescribeLogSwitchesRequest {
   /**
-   * 全局配置
+   * 集群ID列表
    */
-  Config?: string
+  ClusterIds: Array<string>
   /**
-   * ServiceMonitor配置
+   * 集群类型，tke 或eks
    */
-  ServiceMonitors?: Array<PrometheusConfigItem>
-  /**
-   * PodMonitor配置
-   */
-  PodMonitors?: Array<PrometheusConfigItem>
-  /**
-   * 原生Job
-   */
-  RawJobs?: Array<PrometheusConfigItem>
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  ClusterType?: string
 }
 
 /**

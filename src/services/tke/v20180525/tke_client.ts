@@ -35,6 +35,7 @@ import {
   DescribePrometheusInstancesOverviewRequest,
   ServiceAccountAuthenticationOptions,
   Step,
+  SwitchInfo,
   CreateClusterNodePoolRequest,
   UpgradeClusterReleaseRequest,
   Addon,
@@ -280,6 +281,7 @@ import {
   UpdateTKEEdgeClusterRequest,
   DescribeTKEEdgeExternalKubeconfigResponse,
   CreateClusterInstancesResponse,
+  DescribeLogSwitchesResponse,
   ModifyClusterVirtualNodePoolResponse,
   SuperNodeResource,
   InstanceUpgradeClusterStatus,
@@ -314,6 +316,7 @@ import {
   ModifyNodePoolDesiredCapacityAboutAsgResponse,
   CreateClusterRouteRequest,
   ModifyClusterEndpointSPRequest,
+  DescribePrometheusConfigResponse,
   DeleteClusterEndpointResponse,
   PrometheusTemplateModify,
   RollbackClusterReleaseResponse,
@@ -406,6 +409,7 @@ import {
   DescribePrometheusInstanceInitStatusRequest,
   DescribeClusterLevelAttributeResponse,
   PrometheusGrafanaInfo,
+  Switch,
   ImageInstance,
   CreatePrometheusAlertPolicyRequest,
   DescribeImageCachesResponse,
@@ -449,7 +453,7 @@ import {
   ModifyClusterAsGroupAttributeRequest,
   DescribeClusterExtraArgsRequest,
   DescribeClusterAsGroupsResponse,
-  DescribePrometheusConfigResponse,
+  DescribeLogSwitchesRequest,
   ScaleOutClusterMasterRequest,
   DeleteClusterInstancesResponse,
   CreatePrometheusGlobalNotificationRequest,
@@ -1785,13 +1789,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询路由表冲突列表
+   * 查询集群日志（审计、事件、普通日志）开关列表
    */
-  async DescribeRouteTableConflicts(
-    req: DescribeRouteTableConflictsRequest,
-    cb?: (error: string, rep: DescribeRouteTableConflictsResponse) => void
-  ): Promise<DescribeRouteTableConflictsResponse> {
-    return this.request("DescribeRouteTableConflicts", req, cb)
+  async DescribeLogSwitches(
+    req: DescribeLogSwitchesRequest,
+    cb?: (error: string, rep: DescribeLogSwitchesResponse) => void
+  ): Promise<DescribeLogSwitchesResponse> {
+    return this.request("DescribeLogSwitches", req, cb)
   }
 
   /**
@@ -2772,5 +2776,15 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateClusterEndpointVipResponse) => void
   ): Promise<CreateClusterEndpointVipResponse> {
     return this.request("CreateClusterEndpointVip", req, cb)
+  }
+
+  /**
+   * 查询路由表冲突列表
+   */
+  async DescribeRouteTableConflicts(
+    req: DescribeRouteTableConflictsRequest,
+    cb?: (error: string, rep: DescribeRouteTableConflictsResponse) => void
+  ): Promise<DescribeRouteTableConflictsResponse> {
+    return this.request("DescribeRouteTableConflicts", req, cb)
   }
 }

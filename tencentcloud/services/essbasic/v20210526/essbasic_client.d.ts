@@ -639,7 +639,7 @@ Web链接访问后，会根据子客企业(**Agent中ProxyOrganizationOpenId表�
      */
     ChannelCancelUserAutoSignEnableUrl(req: ChannelCancelUserAutoSignEnableUrlRequest, cb?: (error: string, rep: ChannelCancelUserAutoSignEnableUrlResponse) => void): Promise<ChannelCancelUserAutoSignEnableUrlResponse>;
     /**
-     * 生成渠道子客用印申请审批小程序链接，链接类型（通过H5唤起小程序方式查看）
+     * 生成渠道子客用印申请审批小程序链接，链接类型（通过H5唤起小程序或通过APP跳转的方式查看）
      */
     DescribeChannelSealPolicyWorkflowUrl(req: DescribeChannelSealPolicyWorkflowUrlRequest, cb?: (error: string, rep: DescribeChannelSealPolicyWorkflowUrlResponse) => void): Promise<DescribeChannelSealPolicyWorkflowUrlResponse>;
     /**

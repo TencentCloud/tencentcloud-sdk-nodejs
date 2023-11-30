@@ -113,6 +113,7 @@ import {
   Workflow,
   DescribeRuleExecResultsRequest,
   DescribeStandardRuleDetailInfoListResponse,
+  EventCaseDTO,
   DescribeDrSonInstanceResponse,
   InstanceOpsDto,
   RunTaskResponse,
@@ -556,6 +557,7 @@ import {
   ModifyDsFolderRequest,
   AdhocRecord,
   OperateResult,
+  TriggerDsEventResponse,
   CreateTaskRequest,
   DescribeDatabaseMetasRequest,
   SearchColumnDocVO,
@@ -584,6 +586,7 @@ import {
   BatchStopOpsTasksResponse,
   InstanceLogInfoOpsDto,
   DeleteFilePathResponse,
+  FailMessage,
   InstanceReportWriteNode,
   RunRerunScheduleInstancesResponse,
   BatchModifyOwnersNewResponse,
@@ -773,6 +776,7 @@ import {
   SchemaDetail,
   CheckIntegrationTaskNameExistsRequest,
   DescribeRuleRequest,
+  BatchOpsDTO,
   TaskTypeMap,
   DescribeRuleDataSourcesResponse,
   DescribeAlarmReceiverResponse,
@@ -833,6 +837,7 @@ import {
   DeleteRuleTemplateResponse,
   DescribeRuleTemplateRequest,
   DescribeTaskByCycleRequest,
+  TriggerDsEventRequest,
   CommonId,
   CreateRuleTemplateRequest,
   DlcRewriteDataInfo,
@@ -1905,6 +1910,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeIntegrationVersionNodesInfoResponse) => void
   ): Promise<DescribeIntegrationVersionNodesInfoResponse> {
     return this.request("DescribeIntegrationVersionNodesInfo", req, cb)
+  }
+
+  /**
+   * 事件管理-触发事件
+   */
+  async TriggerDsEvent(
+    req: TriggerDsEventRequest,
+    cb?: (error: string, rep: TriggerDsEventResponse) => void
+  ): Promise<TriggerDsEventResponse> {
+    return this.request("TriggerDsEvent", req, cb)
   }
 
   /**

@@ -618,6 +618,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeIntegrationVersionNodesInfo", req, cb);
     }
     /**
+     * 事件管理-触发事件
+     */
+    async TriggerDsEvent(req, cb) {
+        return this.request("TriggerDsEvent", req, cb);
+    }
+    /**
      * 查询事件类型列表
      */
     async DescribeEventTypes(req, cb) {

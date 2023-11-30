@@ -14,12 +14,12 @@ export declare class SSEResponseModel {
     private eventSource;
     constructor(stream: NodeJS.ReadableStream);
     /**
-    * @inner
-    */
+     * @inner
+     */
     private init;
     /**
-    * @inner
-    */
+     * @inner
+     */
     private parseSSEMessage;
     on(event: "message", listener: (message: EventSourceMessage) => void): this;
     on(event: "close", listener: () => void): this;

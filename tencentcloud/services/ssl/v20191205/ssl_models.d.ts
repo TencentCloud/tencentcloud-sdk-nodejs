@@ -627,6 +627,26 @@ export interface Certificates {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     AllowDownload?: boolean;
+    /**
+     * 证书域名是否全部在DNSPOD托管解析
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IsDNSPODResolve?: boolean;
+    /**
+     * 是否是权益点购买的证书
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IsPackage?: boolean;
+    /**
+     * 是否存在私钥密码
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    KeyPasswordCustomFlag?: boolean;
+    /**
+     * 支持下载的WEB服务器类型： nginx、apache、iis、tomcat、jks、root、other
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SupportDownloadType?: SupportDownloadType;
 }
 /**
  * 获取证书列表（DescribeCertificates）返回参数键为 Certificates 数组下，key为CertificateExtra 的内容。
@@ -1463,6 +1483,39 @@ export interface ModifyCertificateResubmitRequest {
     CertificateId: string;
 }
 /**
+ * 支持下载的类型
+ */
+export interface SupportDownloadType {
+    /**
+     * 是否可以下载nginx可用格式
+     */
+    NGINX?: boolean;
+    /**
+     * 是否可以下载apache可用格式
+     */
+    APACHE?: boolean;
+    /**
+     * 是否可以下载tomcat可用格式
+     */
+    TOMCAT?: boolean;
+    /**
+     * 是否可以下载iis可用格式
+     */
+    IIS?: boolean;
+    /**
+     * 是否可以下载JKS可用格式
+     */
+    JKS?: boolean;
+    /**
+     * 是否可以下载其他格式
+     */
+    OTHER?: boolean;
+    /**
+     * 是否可以下载根证书
+     */
+    ROOT?: boolean;
+}
+/**
  * DownloadCertificate请求参数结构体
  */
 export interface DownloadCertificateRequest {
@@ -1670,6 +1723,31 @@ export interface DescribeHostDeployRecordRequest {
     ResourceType?: string;
 }
 /**
+ * 更新异步任务进度
+ */
+export interface UpdateSyncProgressRegion {
+    /**
+     * 资源类型
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Region?: string;
+    /**
+     * 总数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TotalCount?: number;
+    /**
+     * 执行完成数量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    OffsetCount?: number;
+    /**
+     * 异步更新进度状态：0， 待处理， 1 已处理， 3 处理中
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Status?: number;
+}
+/**
  * CreateCertificateBindResourceSyncTask请求参数结构体
  */
 export interface CreateCertificateBindResourceSyncTaskRequest {
@@ -1802,6 +1880,26 @@ export interface ClbInstanceDetail {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Listeners: Array<ClbListener>;
+}
+/**
+ * 更新异步任务进度
+ */
+export interface UpdateSyncProgress {
+    /**
+     * 资源类型
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ResourceType?: string;
+    /**
+     * 地域结果列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    UpdateSyncProgressRegions?: Array<UpdateSyncProgressRegion>;
+    /**
+     * 异步更新进度状态：0， 待处理， 1 已处理， 3 处理中
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Status?: number;
 }
 /**
  * DescribeManagers返回参数结构体
@@ -3078,15 +3176,15 @@ export interface DescribeHostDeployRecordDetailRequest {
  */
 export interface UpdateCertificateInstanceRequest {
     /**
-     * 一键更新原证书ID
+     * 一键更新原证书ID， 查询绑定该证书的云资源然后进行证书更新
      */
     OldCertificateId: string;
     /**
-     * 需要部署的资源类型，参数值可选：clb、cdn、waf、live、ddos、teo、apigateway、vod、tke、tcb
+     * 需要部署的资源类型，参数值可选（小写）：clb、cdn、waf、live、ddos、teo、apigateway、vod、tke、tcb、tse
      */
     ResourceTypes: Array<string>;
     /**
-     * 一键更新新证书ID
+     * 一键更新新证书ID，不传该则证书公钥和私钥必传
      */
     CertificateId?: string;
     /**
@@ -3095,7 +3193,7 @@ export interface UpdateCertificateInstanceRequest {
      */
     Regions?: Array<string>;
     /**
-     * 云资源需要部署的地域列表
+     * 云资源需要部署的地域列表，支持地域的云资源类型必传，如：clb、tke、apigateway、waf、tcb、tse等
      */
     ResourceTypesRegions?: Array<ResourceTypeRegions>;
     /**
@@ -3103,27 +3201,27 @@ export interface UpdateCertificateInstanceRequest {
      */
     CertificatePublicKey?: string;
     /**
-     * 证书私钥，若上传证书公钥， 则证书私钥必填
+     * 证书私钥，若上传证书公钥， 则CertificateId不用传
      */
     CertificatePrivateKey?: string;
     /**
-     * 旧证书是否忽略到期提醒  0:不忽略通知。1:忽略通知
+     * 旧证书是否忽略到期提醒  0:不忽略通知。1:忽略通知，忽略OldCertificateId到期提醒
      */
     ExpiringNotificationSwitch?: number;
     /**
-     * 相同的证书是否允许重复上传，若上传证书公钥， 则可以配置该参数
+     * 相同的证书是否允许重复上传，若选择上传证书， 则可以配置该参数
      */
     Repeatable?: boolean;
     /**
-     * 是否允许下载，若上传证书公钥， 则可以配置该参数
+     * 是否允许下载，若选择上传证书， 则可以配置该参数
      */
     AllowDownload?: boolean;
     /**
-     * 标签列表，若上传证书公钥， 则可以配置该参数
+     * 标签列表，若选择上传证书， 则可以配置该参数
      */
     Tags?: Array<Tags>;
     /**
-     * 项目 ID，若上传证书公钥， 则可以配置该参数
+     * 项目 ID，若选择上传证书， 则可以配置该参数
      */
     ProjectId?: number;
 }
@@ -4146,6 +4244,11 @@ export interface UpdateCertificateInstanceResponse {
      * 部署状态，1表示部署成功，0表示部署失败
      */
     DeployStatus?: number;
+    /**
+     * 更新异步创建任务进度详情
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    UpdateSyncProgress?: Array<UpdateSyncProgress>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */

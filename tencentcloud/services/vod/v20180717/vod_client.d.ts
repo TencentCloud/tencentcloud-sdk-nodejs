@@ -877,7 +877,7 @@ export declare class Client extends AbstractClient {
     /**
      * 设置点播域名 HTTPS 证书。
      */
-    SetVodDomainCertificate(req?: SetVodDomainCertificateRequest, cb?: (error: string, rep: SetVodDomainCertificateResponse) => void): Promise<SetVodDomainCertificateResponse>;
+    SetVodDomainCertificate(req: SetVodDomainCertificateRequest, cb?: (error: string, rep: SetVodDomainCertificateResponse) => void): Promise<SetVodDomainCertificateResponse>;
     /**
      * 1. 该接口可以获取多个媒体文件的多种信息，包括：
     1. 基础信息（basicInfo）：包括媒体名称、分类、播放地址、封面图片等。

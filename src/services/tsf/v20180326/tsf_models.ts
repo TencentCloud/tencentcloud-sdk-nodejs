@@ -480,10 +480,11 @@ export interface ClusterV2 {
  */
 export interface ModifyApplicationResponse {
   /**
-   * true/false
+   * true：操作成功
+false：操作失败
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Result: boolean
+  Result?: boolean
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -572,7 +573,7 @@ export interface DeletePathRewritesRequest {
  */
 export interface DeleteLaneResponse {
   /**
-   * true / false
+   * 删除成功: true / 删除失败: false
    */
   Result?: boolean
   /**
@@ -2834,7 +2835,7 @@ export interface DescribeSimpleNamespacesResponse {
    * 命名空间分页列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Result: TsfPageNamespace
+  Result?: TsfPageNamespace
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3432,7 +3433,7 @@ export interface DescribeBasicResourceUsageResponse {
    * TSF基本资源信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Result: OverviewBasicResourceUsage
+  Result?: OverviewBasicResourceUsage
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3488,7 +3489,7 @@ export interface TsfPageInstance {
  */
 export interface ModifyLaneResponse {
   /**
-   * 操作状态
+   * 编辑成功: true / 编辑失败: false
    */
   Result?: boolean
   /**
@@ -4898,77 +4899,77 @@ export interface Namespace {
    * 命名空间ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  NamespaceId: string
+  NamespaceId?: string
   /**
    * 命名空间编码
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  NamespaceCode: string
+  NamespaceCode?: string
   /**
    * 命名空间名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  NamespaceName: string
+  NamespaceName?: string
   /**
    * 命名空间描述
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  NamespaceDesc: string
+  NamespaceDesc?: string
   /**
    * 默认命名空间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  IsDefault: string
+  IsDefault?: string
   /**
    * 命名空间状态
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  NamespaceStatus: string
+  NamespaceStatus?: string
   /**
    * 删除标识
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DeleteFlag: boolean
+  DeleteFlag?: boolean
   /**
    * 创建时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CreateTime: string
+  CreateTime?: string
   /**
    * 更新时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  UpdateTime: string
+  UpdateTime?: string
   /**
    * 集群数组，仅携带集群ID，集群名称，集群类型等基础信息。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ClusterList: Array<Cluster>
+  ClusterList?: Array<Cluster>
   /**
    * 集群ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ClusterId: string
+  ClusterId?: string
   /**
    * 集群资源类型
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  NamespaceResourceType: string
+  NamespaceResourceType?: string
   /**
    * 命名空间类型
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  NamespaceType: string
+  NamespaceType?: string
   /**
    * 是否开启高可用
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  IsHaEnable: string
+  IsHaEnable?: string
   /**
    * KubeInjectEnable值
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  KubeInjectEnable: boolean
+  KubeInjectEnable?: boolean
 }
 
 /**
@@ -5157,7 +5158,7 @@ export interface DeleteImageTagsResponse {
 true：成功。
 false：失败。
    */
-  Result: boolean
+  Result?: boolean
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6057,7 +6058,7 @@ export interface DescribeSimpleNamespacesRequest {
    */
   NamespaceName?: string
   /**
-   * 通过是否是默认命名空间过滤，不传表示拉取全部命名空间。0：默认，命名空间。1：非默认命名空间
+   * 通过是否是默认命名空间过滤，不传表示拉取全部命名空间。0：默认命名空间。1：非默认命名空间
    */
   IsDefault?: string
   /**
@@ -7491,7 +7492,7 @@ export interface CreateLaneRuleResponse {
    * 泳道规则Id
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Result: string
+  Result?: string
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -14504,7 +14505,7 @@ export interface TsfPageApiDetailInfo {
  */
 export interface DescribeBasicResourceUsageRequest {
   /**
-   * 是否无视权限查询全租户的，默认 true。注：无论 true 还是 false，PackageSpaceUsed 和 ConsulInstanceCount  都是全租户的
+   * 是否拥有权限查询全租户的，默认 true。注：无论 true 还是 false，PackageSpaceUsed 和 ConsulInstanceCount  都是全租户的
    */
   All?: boolean
 }
@@ -14669,37 +14670,37 @@ export interface LaneRuleTag {
    * 标签ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TagId: string
+  TagId?: string
   /**
    * 标签名
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TagName: string
+  TagName?: string
   /**
    * 标签操作符
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TagOperator: string
+  TagOperator?: string
   /**
    * 标签值
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TagValue: string
+  TagValue?: string
   /**
    * 泳道规则ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  LaneRuleId: string
+  LaneRuleId?: string
   /**
    * 创建时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CreateTime: number
+  CreateTime?: number
   /**
    * 更新时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  UpdateTime: number
+  UpdateTime?: number
 }
 
 /**

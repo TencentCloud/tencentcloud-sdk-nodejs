@@ -978,6 +978,16 @@ it("wedata.v20210820.DescribeIntegrationVersionNodesInfo", async function () {
     }
 })
 
+it("wedata.v20210820.TriggerDsEvent", async function () {
+    try {
+       const data = await client.TriggerDsEvent({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("wedata.v20210820.DescribeEventTypes", async function () {
     try {
        const data = await client.DescribeEventTypes({})

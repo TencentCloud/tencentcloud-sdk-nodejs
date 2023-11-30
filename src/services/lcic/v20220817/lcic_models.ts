@@ -1915,8 +1915,8 @@ export interface CreateDocumentRequest {
   Owner: string
   /**
    * 转码类型，可以有如下取值：
-0 无需转码（默认）
-1 需要转码的文档，ppt，pptx，pdf，doc，docx
+0 无需转码（默认），bmp，jpg，jpeg，png，gif
+1 需要转码的文档，ppt，pptx，pdf，doc，docx，xls，xlsx
 2 需要转码的视频，mp4，3pg，mpeg，avi，flv，wmv，rm，h264等
 2 需要转码的音频，mp3，wav，wma，aac，flac，opus
    */

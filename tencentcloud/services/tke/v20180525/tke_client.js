@@ -724,10 +724,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeEKSContainerInstances", req, cb);
     }
     /**
-     * 查询路由表冲突列表
+     * 查询集群日志（审计、事件、普通日志）开关列表
      */
-    async DescribeRouteTableConflicts(req, cb) {
-        return this.request("DescribeRouteTableConflicts", req, cb);
+    async DescribeLogSwitches(req, cb) {
+        return this.request("DescribeLogSwitches", req, cb);
     }
     /**
      * 通过此接口，可以获取集群的tke:admin的ClusterRole，即管理员角色，可以用于CAM侧高权限的用户，通过CAM策略给予子账户此接口权限，进而可以通过此接口直接获取到kubernetes集群内的管理员角色。
@@ -1316,6 +1316,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CreateClusterEndpointVip(req, cb) {
         return this.request("CreateClusterEndpointVip", req, cb);
+    }
+    /**
+     * 查询路由表冲突列表
+     */
+    async DescribeRouteTableConflicts(req, cb) {
+        return this.request("DescribeRouteTableConflicts", req, cb);
     }
 }
 exports.Client = Client;

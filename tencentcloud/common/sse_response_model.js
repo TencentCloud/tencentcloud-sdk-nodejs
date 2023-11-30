@@ -11,13 +11,13 @@ class SSEResponseModel {
         this.init();
     }
     /**
-    * @inner
-    */
+     * @inner
+     */
     init() {
         const { stream, eventSource } = this;
         stream.on("data", (chunk) => {
             if (chunk !== null) {
-                const messages = chunk.toString().split('\n\n');
+                const messages = chunk.toString().split("\n\n");
                 for (let i = 0; i < messages.length; i++) {
                     if (messages[i].length > 0) {
                         eventSource.emit("message", this.parseSSEMessage(messages[i]));
@@ -33,8 +33,8 @@ class SSEResponseModel {
         });
     }
     /**
-    * @inner
-    */
+     * @inner
+     */
     parseSSEMessage(chunk) {
         const message = {
             data: "",
@@ -83,7 +83,7 @@ class SSEResponseModel {
     async *[Symbol.asyncIterator]() {
         for await (const chunk of this.stream) {
             if (chunk !== null) {
-                const messages = chunk.toString().split('\n\n');
+                const messages = chunk.toString().split("\n\n");
                 for (let i = 0; i < messages.length; i++) {
                     if (messages[i].length > 0) {
                         yield this.parseSSEMessage(messages[i]);

@@ -2585,7 +2585,7 @@ export class Client extends AbstractClient {
    * 设置点播域名 HTTPS 证书。
    */
   async SetVodDomainCertificate(
-    req?: SetVodDomainCertificateRequest,
+    req: SetVodDomainCertificateRequest,
     cb?: (error: string, rep: SetVodDomainCertificateResponse) => void
   ): Promise<SetVodDomainCertificateResponse> {
     return this.request("SetVodDomainCertificate", req, cb)

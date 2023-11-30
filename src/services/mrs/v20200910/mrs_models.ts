@@ -651,42 +651,48 @@ export interface Hospitalization {
    * 入院时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  AdmissionTime: string
+  AdmissionTime?: string
   /**
    * 出院时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DischargeTime: string
+  DischargeTime?: string
   /**
    * 住院天数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  AdmissionDays: string
+  AdmissionDays?: string
   /**
    * 入院诊断
 注意：此字段可能返回 null，表示取不到有效值。
+   * @deprecated
    */
-  AdmissionDignosis: string
+  AdmissionDignosis?: string
   /**
    * 入院情况
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  AdmissionCondition: string
+  AdmissionCondition?: string
   /**
    * 诊疗经过
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DiagnosisTreatment: string
+  DiagnosisTreatment?: string
   /**
    * 出院诊断
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DischargeDiagnosis: string
+  DischargeDiagnosis?: string
   /**
    * 出院医嘱
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DischargeInstruction: string
+  DischargeInstruction?: string
+  /**
+   * 入院诊断
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AdmissionDiagnosis?: string
 }
 
 /**
@@ -1381,138 +1387,144 @@ export interface TreatmentRecord {
   /**
    * 入院
 注意：此字段可能返回 null，表示取不到有效值。
+   * @deprecated
    */
-  DmissionCondition: string
+  DmissionCondition?: string
   /**
    * 主诉
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ChiefComplaint: string
+  ChiefComplaint?: string
   /**
    * 现病史
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DiseasePresent: string
+  DiseasePresent?: string
   /**
    * 主要症状体征
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SymptomsAndSigns: string
+  SymptomsAndSigns?: string
   /**
    * 辅助检查
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  AuxiliaryExamination: string
+  AuxiliaryExamination?: string
   /**
    * 体格检查
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  BodyExamination: string
+  BodyExamination?: string
   /**
    * 专科检查
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SpecialistExamination: string
+  SpecialistExamination?: string
   /**
    * 精神检查
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  MentalExamination: string
+  MentalExamination?: string
   /**
    * 检查记录
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CheckRecord: string
+  CheckRecord?: string
   /**
    * 化验结果
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  InspectResult: string
+  InspectResult?: string
   /**
    * 切口愈合情况
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  IncisionHealing: string
+  IncisionHealing?: string
   /**
    * 处理意见
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TreatmentSuggestion: string
+  TreatmentSuggestion?: string
   /**
    * 门诊随访要求
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  FollowUpRequirements: string
+  FollowUpRequirements?: string
   /**
    * 诊疗经过
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CheckAndTreatmentProcess: string
+  CheckAndTreatmentProcess?: string
   /**
    * 手术经过
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SurgeryCondition: string
+  SurgeryCondition?: string
   /**
    * 入院情况
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ConditionChanges: string
+  ConditionChanges?: string
   /**
    * 出院情况
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DischargeCondition: string
+  DischargeCondition?: string
   /**
    * pTNM信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  PTNM: string
+  PTNM?: string
   /**
    * pTNMM信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  PTNMM: string
+  PTNMM?: string
   /**
    * pTNMN信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  PTNMN: string
+  PTNMN?: string
   /**
    * pTNMT信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  PTNMT: string
+  PTNMT?: string
   /**
    * ECOG信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ECOG: string
+  ECOG?: string
   /**
    * NRS信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  NRS: string
+  NRS?: string
   /**
    * KPS信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  KPS: string
+  KPS?: string
   /**
    * 死亡日期
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DeathDate: string
+  DeathDate?: string
   /**
    * 复发日期
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RelapseDate: string
+  RelapseDate?: string
   /**
    * 观测天数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ObservationDays: string
+  ObservationDays?: string
+  /**
+   * 入院
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AdmissionCondition?: string
 }
 
 /**
@@ -7297,6 +7309,7 @@ export interface IndicatorV3 {
   /**
    * 检验报告V3结论
 注意：此字段可能返回 null，表示取不到有效值。
+   * @deprecated
    */
   TableIndictors?: Array<TableIndicators>
   /**
@@ -7304,6 +7317,11 @@ export interface IndicatorV3 {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Version?: string
+  /**
+   * 检验报告V3结论
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TableIndicators?: Array<TableIndicators>
 }
 
 /**

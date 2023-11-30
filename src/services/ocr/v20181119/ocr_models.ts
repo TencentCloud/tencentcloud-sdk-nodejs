@@ -947,6 +947,104 @@ export interface TextDetectionEn {
 }
 
 /**
+ * 电子发票（机票行程单）
+ */
+export interface ElectronicFlightTicketFull {
+  /**
+   * 旅客姓名
+   */
+  UserName?: string
+  /**
+   * 有效身份证件号码
+   */
+  UserID?: string
+  /**
+   * 签注
+   */
+  Endorsement?: string
+  /**
+   * GP单号
+   */
+  GPOrder?: string
+  /**
+   * 发票号码
+   */
+  Number?: string
+  /**
+   * 票价
+   */
+  Fare?: string
+  /**
+   * 燃油附加费
+   */
+  FuelSurcharge?: string
+  /**
+   * 增值税税率
+   */
+  TaxRate?: string
+  /**
+   * 增值税税额
+   */
+  Tax?: string
+  /**
+   * 民航发展基金
+   */
+  DevelopmentFund?: string
+  /**
+   * 其他税费
+   */
+  OtherTax?: string
+  /**
+   * 合计
+   */
+  Total?: string
+  /**
+   * 电子客票号码
+   */
+  ElectronicTicketNum?: string
+  /**
+   * 验证码
+   */
+  VerificationCode?: string
+  /**
+   * 提示信息
+   */
+  PromptInformation?: string
+  /**
+   * 保险费
+   */
+  Insurance?: string
+  /**
+   * 填开单位
+   */
+  Issuer?: string
+  /**
+   * 填开时间
+   */
+  Date?: string
+  /**
+   * 国内国际标识
+   */
+  DomesticInternationalTag?: string
+  /**
+   * 购买方名称
+   */
+  Buyer?: string
+  /**
+   * 销售方名称
+   */
+  Seller?: string
+  /**
+   * 统一社会信用代码
+   */
+  BuyerTaxID?: string
+  /**
+   * 机票详细信息元组
+   */
+  FlightItems?: Array<FlightItemInfo>
+}
+
+/**
  * PermitOCR返回参数结构体
  */
 export interface PermitOCRResponse {
@@ -2030,6 +2128,48 @@ export interface OnlineTaxiItineraryInfo {
 }
 
 /**
+ * 机票详细信息元组
+ */
+export interface FlightItemInfo {
+  /**
+   * 出发站
+   */
+  TerminalGetOn?: string
+  /**
+   * 到达站
+   */
+  TerminalGetOff?: string
+  /**
+   * 承运人
+   */
+  Carrier?: string
+  /**
+   * 航班号
+   */
+  FlightNumber?: string
+  /**
+   * 座位等级
+   */
+  Seat?: string
+  /**
+   * 乘机日期
+   */
+  DateGetOn?: string
+  /**
+   * 乘机时间
+   */
+  TimeGetOn?: string
+  /**
+   * 客票级别/客票类别
+   */
+  FareBasis?: string
+  /**
+   * 免费行李额
+   */
+  Allow?: string
+}
+
+/**
  * VehicleRegCertOCR请求参数结构体
  */
 export interface VehicleRegCertOCRRequest {
@@ -2602,30 +2742,89 @@ export interface GeneralAccurateOCRResponse {
 }
 
 /**
- * HmtResidentPermitOCR请求参数结构体
+ * 电子发票（火车票）
  */
-export interface HmtResidentPermitOCRRequest {
+export interface ElectronicTrainTicketFull {
   /**
-   * 图片的 Base64 值。
-支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。
-图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
+   * 电子发票类型
    */
-  ImageBase64?: string
+  TypeOfVoucher?: string
   /**
-   * 图片的 Url 地址。
-支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。
-图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
-非腾讯云存储的 Url 速度和稳定性可能受一定影响。
+   * 电子客票号
    */
-  ImageUrl?: string
+  ElectronicTicketNum?: string
   /**
-   * FRONT：有照片的一面（人像面），
-BACK：无照片的一面（国徽面），
-该参数如果不填或填错，将为您自动判断正反面。
+   * 开票日期
    */
-  CardSide?: string
+  Date?: string
+  /**
+   * 始发站
+   */
+  StationGetOn?: string
+  /**
+   * 到达站
+   */
+  StationGetOff?: string
+  /**
+   * 火车号
+   */
+  TrainNumber?: string
+  /**
+   * 乘车日期
+   */
+  DateGetOn?: string
+  /**
+   * 始发时间
+   */
+  TimeGetOn?: string
+  /**
+   * 座位类型
+   */
+  Seat?: string
+  /**
+   * 座位号
+   */
+  SeatNumber?: string
+  /**
+   * 票价
+   */
+  Fare?: string
+  /**
+   * 发票号码
+   */
+  Number?: string
+  /**
+   * 身份证号
+   */
+  UserID?: string
+  /**
+   * 乘车人姓名
+   */
+  UserName?: string
+  /**
+   * 金额
+   */
+  Total?: string
+  /**
+   * 税率
+   */
+  TaxRate?: string
+  /**
+   * 税额
+   */
+  Tax?: string
+  /**
+   * 购买方名称
+   */
+  Buyer?: string
+  /**
+   * 统一社会信用代码
+   */
+  BuyerTaxID?: string
+  /**
+   * 原发票号码
+   */
+  OriginalNumber?: string
 }
 
 /**
@@ -3657,6 +3856,16 @@ export interface SingleInvoiceItem {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   VatSalesList?: VatInvoiceInfo
+  /**
+   * 电子发票（火车票）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ElectronicTrainTicketFull?: ElectronicTrainTicketFull
+  /**
+   * 电子发票（机票行程单）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ElectronicFlightTicketFull?: ElectronicFlightTicketFull
 }
 
 /**
@@ -5964,6 +6173,48 @@ GeneralBasicOcr接口返回段落信息Parag，包含ParagNo。
 }
 
 /**
+ * 表格识别结果
+ */
+export interface TextTable {
+  /**
+   * 单元格左上角的列索引
+   */
+  ColTl: number
+  /**
+   * 单元格左上角的行索引
+   */
+  RowTl: number
+  /**
+   * 单元格右下角的列索引
+   */
+  ColBr: number
+  /**
+   * 单元格右下角的行索引
+   */
+  RowBr: number
+  /**
+   * 单元格文字
+   */
+  Text: string
+  /**
+   * 单元格类型，包含body（表格主体）、header（表头）、footer（表尾）三种
+   */
+  Type: string
+  /**
+   * 置信度 0 ~100
+   */
+  Confidence: number
+  /**
+   * 文本行坐标，以四个顶点坐标表示
+   */
+  Polygon: Array<Coord>
+  /**
+   * 此字段为扩展字段
+   */
+  AdvancedInfo: string
+}
+
+/**
  * 金融票据切片识别单个字段的内容
  */
 export interface FinanBillSliceInfo {
@@ -7722,45 +7973,30 @@ export interface MedicalInvoice {
 }
 
 /**
- * 表格识别结果
+ * HmtResidentPermitOCR请求参数结构体
  */
-export interface TextTable {
+export interface HmtResidentPermitOCRRequest {
   /**
-   * 单元格左上角的列索引
+   * 图片的 Base64 值。
+支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
+支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。
+图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
    */
-  ColTl: number
+  ImageBase64?: string
   /**
-   * 单元格左上角的行索引
+   * 图片的 Url 地址。
+支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
+支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。
+图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
+非腾讯云存储的 Url 速度和稳定性可能受一定影响。
    */
-  RowTl: number
+  ImageUrl?: string
   /**
-   * 单元格右下角的列索引
+   * FRONT：有照片的一面（人像面），
+BACK：无照片的一面（国徽面），
+该参数如果不填或填错，将为您自动判断正反面。
    */
-  ColBr: number
-  /**
-   * 单元格右下角的行索引
-   */
-  RowBr: number
-  /**
-   * 单元格文字
-   */
-  Text: string
-  /**
-   * 单元格类型，包含body（表格主体）、header（表头）、footer（表尾）三种
-   */
-  Type: string
-  /**
-   * 置信度 0 ~100
-   */
-  Confidence: number
-  /**
-   * 文本行坐标，以四个顶点坐标表示
-   */
-  Polygon: Array<Coord>
-  /**
-   * 此字段为扩展字段
-   */
-  AdvancedInfo: string
+  CardSide?: string
 }
 
 /**

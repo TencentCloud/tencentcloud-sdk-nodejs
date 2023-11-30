@@ -184,10 +184,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDatabases", req, cb);
     }
     /**
-     * DMS元数据更新分区
+     * 本接口（DescribeNotebookSessions）用于查询交互式 session列表
      */
-    async AlterDMSPartition(req, cb) {
-        return this.request("AlterDMSPartition", req, cb);
+    async DescribeNotebookSessions(req, cb) {
+        return this.request("DescribeNotebookSessions", req, cb);
     }
     /**
      * 创建用户
@@ -208,10 +208,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifySparkAppBatch", req, cb);
     }
     /**
-     * 本接口（DescribeNotebookSessions）用于查询交互式 session列表
+     * DMS元数据更新分区
      */
-    async DescribeNotebookSessions(req, cb) {
-        return this.request("DescribeNotebookSessions", req, cb);
+    async AlterDMSPartition(req, cb) {
+        return this.request("AlterDMSPartition", req, cb);
     }
     /**
      * 获取LakeFs上task执行结果访问信息
@@ -554,6 +554,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CreateDMSTable(req, cb) {
         return this.request("CreateDMSTable", req, cb);
+    }
+    /**
+     * 分配原生表表属性
+     */
+    async AssignMangedTableProperties(req, cb) {
+        return this.request("AssignMangedTableProperties", req, cb);
     }
     /**
      * 升级引擎镜像

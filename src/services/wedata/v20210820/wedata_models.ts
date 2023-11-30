@@ -3166,6 +3166,36 @@ export interface DescribeStandardRuleDetailInfoListResponse {
 }
 
 /**
+ * 事件实例信息
+ */
+export interface EventCaseDTO {
+  /**
+   * 事件实例id
+   */
+  CaseId?: string
+  /**
+   * 事件名
+   */
+  Name?: string
+  /**
+   * 事件格式
+   */
+  Dimension?: string
+  /**
+   * 创建时间
+   */
+  CreationTs?: string
+  /**
+   * 消费者id
+   */
+  ConsumerId?: string
+  /**
+   * 描述信息
+   */
+  Description?: string
+}
+
+/**
  * DescribeDrSonInstance返回参数结构体
  */
 export interface DescribeDrSonInstanceResponse {
@@ -7783,7 +7813,7 @@ export interface ModifyApproveStatusResponse {
   /**
    * 修改审批单状态
    */
-  Data: Array<ApproveModify>
+  Data?: Array<ApproveModify>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -16146,6 +16176,21 @@ export interface OperateResult {
 }
 
 /**
+ * TriggerDsEvent返回参数结构体
+ */
+export interface TriggerDsEventResponse {
+  /**
+   * 操作结果
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Data?: BatchOpsDTO
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateTask请求参数结构体
  */
 export interface CreateTaskRequest {
@@ -16881,6 +16926,22 @@ export interface DeleteFilePathResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 错误处理结果信息
+ */
+export interface FailMessage {
+  /**
+   * 数据唯一标识
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Key?: string
+  /**
+   * 失败原因
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ErrorMessage?: string
 }
 
 /**
@@ -23219,6 +23280,32 @@ export interface DescribeRuleRequest {
 }
 
 /**
+ * 批量操作结果，带失败原因
+ */
+export interface BatchOpsDTO {
+  /**
+   * 总数量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalCount?: number
+  /**
+   * 成功数量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SuccessCount?: number
+  /**
+   * 失败数量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FailCount?: number
+  /**
+   * 失败原因
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FailMessageList?: Array<FailMessage>
+}
+
+/**
  * 任务类型map
  */
 export interface TaskTypeMap {
@@ -24622,6 +24709,20 @@ export interface DescribeTaskByCycleRequest {
    * 1
    */
   InCharge?: string
+}
+
+/**
+ * TriggerDsEvent请求参数结构体
+ */
+export interface TriggerDsEventRequest {
+  /**
+   * 项目id
+   */
+  ProjectId: string
+  /**
+   * 事件实例信息
+   */
+  EventCaseList: Array<EventCaseDTO>
 }
 
 /**

@@ -278,9 +278,9 @@ it("dlc.v20210125.DescribeDatabases", async function () {
     }
 })
 
-it("dlc.v20210125.AlterDMSPartition", async function () {
+it("dlc.v20210125.DescribeNotebookSessions", async function () {
     try {
-       const data = await client.AlterDMSPartition({})
+       const data = await client.DescribeNotebookSessions({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -318,9 +318,9 @@ it("dlc.v20210125.ModifySparkAppBatch", async function () {
     }
 })
 
-it("dlc.v20210125.DescribeNotebookSessions", async function () {
+it("dlc.v20210125.AlterDMSPartition", async function () {
     try {
-       const data = await client.DescribeNotebookSessions({})
+       const data = await client.AlterDMSPartition({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -891,6 +891,16 @@ it("dlc.v20210125.DescribeDataEngineImageVersions", async function () {
 it("dlc.v20210125.CreateDMSTable", async function () {
     try {
        const data = await client.CreateDMSTable({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dlc.v20210125.AssignMangedTableProperties", async function () {
+    try {
+       const data = await client.AssignMangedTableProperties({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

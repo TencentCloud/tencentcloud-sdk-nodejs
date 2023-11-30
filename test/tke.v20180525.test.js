@@ -1178,9 +1178,9 @@ it("tke.v20180525.DescribeEKSContainerInstances", async function () {
     }
 })
 
-it("tke.v20180525.DescribeRouteTableConflicts", async function () {
+it("tke.v20180525.DescribeLogSwitches", async function () {
     try {
-       const data = await client.DescribeRouteTableConflicts({})
+       const data = await client.DescribeLogSwitches({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -2161,6 +2161,16 @@ it("tke.v20180525.CheckEdgeClusterCIDR", async function () {
 it("tke.v20180525.CreateClusterEndpointVip", async function () {
     try {
        const data = await client.CreateClusterEndpointVip({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tke.v20180525.DescribeRouteTableConflicts", async function () {
+    try {
+       const data = await client.DescribeRouteTableConflicts({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
