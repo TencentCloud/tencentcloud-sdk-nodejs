@@ -402,7 +402,7 @@ AnalyzeTaskType_MediaStream：音视频体验
    */
   MetricType?: string
   /**
-   * 指标详细字段，可以传递传具体的指标也可以对指标进行聚合查询例如："avg(ping_time)"代表整体时延(ms)；不同的任务类型支持不同的field查询，以及聚合规则，详情可联系云拨测。
+   * 指标详细字段，可以传递传具体的指标也可以对指标进行聚合查询例如："avg(ping_time)"代表整体时延(ms)；不同的任务类型支持不同的field查询，以及聚合规则，详情可见https://cloud.tencent.com/document/product/248/87584。
    */
   Field?: string
   /**

@@ -478,7 +478,7 @@ export declare class Client extends AbstractClient {
      */
     DeleteAccount(req: DeleteAccountRequest, cb?: (error: string, rep: DeleteAccountResponse) => void): Promise<DeleteAccountResponse>;
     /**
-     * 本接口（DescribeDBInstancesAttribute）用于开启\关闭\更新SSL加密
+     * 本接口（ModifyDBInstanceSSL）用于开启\关闭\更新SSL加密
      */
     ModifyDBInstanceSSL(req: ModifyDBInstanceSSLRequest, cb?: (error: string, rep: ModifyDBInstanceSSLResponse) => void): Promise<ModifyDBInstanceSSLResponse>;
     /**

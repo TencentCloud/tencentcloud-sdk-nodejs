@@ -1462,11 +1462,11 @@ export interface DescribeClustersResponse {
     /**
      * 集群总数
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 集群列表
      */
-    ClusterSet: Array<Cluster>;
+    ClusterSet?: Array<Cluster>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2549,157 +2549,157 @@ export interface JobV1 {
      * 作业ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    JobId: string;
+    JobId?: string;
     /**
      * 地域
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Region: string;
+    Region?: string;
     /**
      * 可用区
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Zone: string;
+    Zone?: string;
     /**
      * 用户AppId
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    AppId: number;
+    AppId?: number;
     /**
      * 用户UIN
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    OwnerUin: string;
+    OwnerUin?: string;
     /**
      * 创建者UIN
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CreatorUin: string;
+    CreatorUin?: string;
     /**
      * 作业名字
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Name: string;
+    Name?: string;
     /**
      * 作业类型，1：sql作业，2：Jar作业
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    JobType: number;
+    JobType?: number;
     /**
      * 作业状态，1：未初始化，2：未发布，3：操作中，4：运行中，5：停止，6：暂停，-1：故障
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Status: number;
+    Status?: number;
     /**
      * 作业创建时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CreateTime: string;
+    CreateTime?: string;
     /**
      * 作业启动时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    StartTime: string;
+    StartTime?: string;
     /**
      * 作业停止时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    StopTime: string;
+    StopTime?: string;
     /**
      * 作业更新时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    UpdateTime: string;
+    UpdateTime?: string;
     /**
      * 作业累计运行时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TotalRunMillis: number;
+    TotalRunMillis?: number;
     /**
      * 备注信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Remark: string;
+    Remark?: string;
     /**
      * 操作错误提示信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    LastOpResult: string;
+    LastOpResult?: string;
     /**
      * 集群名字
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ClusterName: string;
+    ClusterName?: string;
     /**
      * 最新配置版本号
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    LatestJobConfigVersion: number;
+    LatestJobConfigVersion?: number;
     /**
      * 已发布的配置版本
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    PublishedJobConfigVersion: number;
+    PublishedJobConfigVersion?: number;
     /**
      * 运行的CU数量
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    RunningCuNum: number;
+    RunningCuNum?: number;
     /**
      * 作业内存规格
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CuMem: number;
+    CuMem?: number;
     /**
      * 作业状态描述
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    StatusDesc: string;
+    StatusDesc?: string;
     /**
      * 运行状态时表示单次运行时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CurrentRunMillis: number;
+    CurrentRunMillis?: number;
     /**
      * 作业所在的集群ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ClusterId: string;
+    ClusterId?: string;
     /**
      * 作业管理WEB UI 入口
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    WebUIUrl: string;
+    WebUIUrl?: string;
     /**
      * 作业所在集群类型
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SchedulerType: number;
+    SchedulerType?: number;
     /**
      * 作业所在集群状态
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ClusterStatus: number;
+    ClusterStatus?: number;
     /**
      * 细粒度下的运行的CU数量
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    RunningCu: number;
+    RunningCu?: number;
     /**
      * 作业运行的 Flink 版本
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    FlinkVersion: string;
+    FlinkVersion?: string;
     /**
      * 工作空间 SerialId
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    WorkSpaceId: string;
+    WorkSpaceId?: string;
     /**
      * 工作空间名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    WorkSpaceName: string;
+    WorkSpaceName?: string;
     /**
      * 作业标签
   注意：此字段可能返回 null，表示取不到有效值。
@@ -3259,11 +3259,11 @@ export interface DescribeJobsResponse {
     /**
      * 作业总数
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 作业列表
      */
-    JobSet: Array<JobV1>;
+    JobSet?: Array<JobV1>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */

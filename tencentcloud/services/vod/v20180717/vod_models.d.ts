@@ -12847,7 +12847,7 @@ export interface EventContent {
     /**
      * 事件句柄，调用方必须调用 ConfirmEvents 来确认消息已经收到，确认有效时间 30 秒。失效后，事件可重新被获取。
      */
-    EventHandle: string;
+    EventHandle?: string;
     /**
      * <b>支持事件类型：</b>
   <li>NewFileUpload：视频上传完成；</li>
@@ -12860,12 +12860,13 @@ export interface EventContent {
   <li>ComposeMediaComplete：制作媒体文件完成；</li>
   <li>WechatMiniProgramPublishComplete：微信小程序发布完成。</li>
   <li>RemoveWatermark：智能去除水印完成。</li>
-  <li>RebuildMediaComplete：音画质重生完成事件。</li>
+  <li>RebuildMediaComplete：音画质重生完成事件（不推荐使用）。</li>
   <li>ReviewAudioVideoComplete：音视频审核完成；</li>
   <li>ExtractTraceWatermarkComplete：提取溯源水印完成；</li>
   <li>ExtractCopyRightWatermarkComplete：提取版权水印完成；</li>
   <li>DescribeFileAttributesComplete：获取文件属性完成；</li>
-  <li>QualityInspectComplete：音画质检测完成。</li>
+  <li>QualityInspectComplete：音画质检测完成；</li>
+  <li>QualityEnhanceComplete：音画质重生任务完成。</li>
   <b>兼容 2017 版的事件类型：</b>
   <li>TranscodeComplete：视频转码完成；</li>
   <li>ConcatComplete：视频拼接完成；</li>
@@ -12873,97 +12874,97 @@ export interface EventContent {
   <li>CreateImageSpriteComplete：视频截取雪碧图完成；</li>
   <li>CreateSnapshotByTimeOffsetComplete：视频按时间点截图完成。</li>
      */
-    EventType: string;
+    EventType?: string;
     /**
      * 视频上传完成事件，当事件类型为 NewFileUpload 时有效。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    FileUploadEvent: FileUploadTask;
+    FileUploadEvent?: FileUploadTask;
     /**
      * 任务流状态变更事件，当事件类型为 ProcedureStateChanged 时有效。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ProcedureStateChangeEvent: ProcedureTask;
+    ProcedureStateChangeEvent?: ProcedureTask;
     /**
      * 文件删除事件，当事件类型为 FileDeleted 时有效。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    FileDeleteEvent: FileDeleteTask;
+    FileDeleteEvent?: FileDeleteTask;
     /**
      * 视频转拉完成事件，当事件类型为 PullComplete 时有效。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    PullCompleteEvent: PullUploadTask;
+    PullCompleteEvent?: PullUploadTask;
     /**
      * 视频编辑完成事件，当事件类型为 EditMediaComplete 时有效。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    EditMediaCompleteEvent: EditMediaTask;
+    EditMediaCompleteEvent?: EditMediaTask;
     /**
      * 视频拆分完成事件，当事件类型为 SplitMediaComplete 时有效。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SplitMediaCompleteEvent: SplitMediaTask;
+    SplitMediaCompleteEvent?: SplitMediaTask;
     /**
      * 制作媒体文件任务完成事件，当事件类型为 ComposeMediaComplete 时有效。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ComposeMediaCompleteEvent: ComposeMediaTask;
+    ComposeMediaCompleteEvent?: ComposeMediaTask;
     /**
      * 视频剪辑完成事件，当事件类型为 ClipComplete 时有效。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ClipCompleteEvent: ClipTask2017;
+    ClipCompleteEvent?: ClipTask2017;
     /**
      * 视频转码完成事件，当事件类型为 TranscodeComplete 时有效。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TranscodeCompleteEvent: TranscodeTask2017;
+    TranscodeCompleteEvent?: TranscodeTask2017;
     /**
      * 视频截取雪碧图完成事件，当事件类型为 CreateImageSpriteComplete 时有效。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CreateImageSpriteCompleteEvent: CreateImageSpriteTask2017;
+    CreateImageSpriteCompleteEvent?: CreateImageSpriteTask2017;
     /**
      * 视频拼接完成事件，当事件类型为 ConcatComplete 时有效。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ConcatCompleteEvent: ConcatTask2017;
+    ConcatCompleteEvent?: ConcatTask2017;
     /**
      * 视频按时间点截图完成事件，当事件类型为 CreateSnapshotByTimeOffsetComplete 时有效。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SnapshotByTimeOffsetCompleteEvent: SnapshotByTimeOffsetTask2017;
+    SnapshotByTimeOffsetCompleteEvent?: SnapshotByTimeOffsetTask2017;
     /**
      * 微信发布完成事件，当事件类型为 WechatPublishComplete 时有效。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    WechatPublishCompleteEvent: WechatPublishTask;
+    WechatPublishCompleteEvent?: WechatPublishTask;
     /**
      * 微信小程序发布任务完成事件，当事件类型为 WechatMiniProgramPublishComplete 时有效。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    WechatMiniProgramPublishCompleteEvent: WechatMiniProgramPublishTask;
+    WechatMiniProgramPublishCompleteEvent?: WechatMiniProgramPublishTask;
     /**
      * 智能去除水印完成事件，当事件类型为 RemoveWatermark 有效。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    RemoveWatermarkCompleteEvent: RemoveWatermarkTask;
+    RemoveWatermarkCompleteEvent?: RemoveWatermarkTask;
     /**
      * 视频取回完成事件，当事件类型为 RestoreMediaComplete 时有效。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    RestoreMediaCompleteEvent: RestoreMediaTask;
+    RestoreMediaCompleteEvent?: RestoreMediaTask;
     /**
      * 音画质重生完成事件，当事件类型为 RebuildMediaComplete 时有效。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    RebuildMediaCompleteEvent: RebuildMediaTask;
+    RebuildMediaCompleteEvent?: RebuildMediaTask;
     /**
      * 溯源水印提取完成事件，当事件类型为 ExtractTraceWatermarkComplete 时有效。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ExtractTraceWatermarkCompleteEvent: ExtractTraceWatermarkTask;
+    ExtractTraceWatermarkCompleteEvent?: ExtractTraceWatermarkTask;
     /**
      * 版权水印提取完成事件，当事件类型为 ExtractCopyRightWatermarkComplete 时有效。
   注意：此字段可能返回 null，表示取不到有效值。
@@ -12973,22 +12974,27 @@ export interface EventContent {
      * 音视频审核完成事件，当事件类型为 ReviewAudioVideoComplete 时有效。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ReviewAudioVideoCompleteEvent: ReviewAudioVideoTask;
+    ReviewAudioVideoCompleteEvent?: ReviewAudioVideoTask;
     /**
      * 该字段已无效。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ReduceMediaBitrateCompleteEvent: ReduceMediaBitrateTask;
+    ReduceMediaBitrateCompleteEvent?: ReduceMediaBitrateTask;
     /**
      * 获取文件属性完成事件，当事件类型为 DescribeFileAttributesComplete 时有效。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DescribeFileAttributesCompleteEvent: DescribeFileAttributesTask;
+    DescribeFileAttributesCompleteEvent?: DescribeFileAttributesTask;
     /**
      * 音画质检测完成事件，当事件类型为 QualityInspectComplete 时有效。
   注意：此字段可能返回 null，表示取不到有效值。
      */
     QualityInspectCompleteEvent?: QualityInspectTask;
+    /**
+     * 音画质重生完成事件，当事件类型为 QualityEnhanceComplete 时有效。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    QualityEnhanceCompleteEvent?: QualityEnhanceTask;
 }
 /**
  * 智能精彩片段任务控制参数

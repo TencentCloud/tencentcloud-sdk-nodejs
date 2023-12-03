@@ -1563,7 +1563,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（DescribeDBInstancesAttribute）用于开启\关闭\更新SSL加密
+   * 本接口（ModifyDBInstanceSSL）用于开启\关闭\更新SSL加密
    */
   async ModifyDBInstanceSSL(
     req: ModifyDBInstanceSSLRequest,
