@@ -383,6 +383,19 @@ export interface CreateEncryptInstanceResponse {
     RequestId?: string;
 }
 /**
+ * DestroyResourceInstances请求参数结构体
+ */
+export interface DestroyResourceInstancesRequest {
+    /**
+     * ResourceId 资源id，在创建订单时，返回的resourceId
+     */
+    ResourceId: string;
+    /**
+     * 资源绑定的包名，为了防止误删除，需要指定绑定时的包名
+     */
+    AppPkgName: string;
+}
+/**
  * 渠道合作加固sdk加固结果
  */
 export interface SDKResult {
@@ -1277,6 +1290,31 @@ export interface DeleteShieldInstancesResponse {
      * 任务状态: 1-已完成,2-处理中,3-处理出错,4-处理超时
      */
     Progress: number;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * DestroyResourceInstances返回参数结构体
+ */
+export interface DestroyResourceInstancesResponse {
+    /**
+     * 资源id
+     */
+    ResourceId?: string;
+    /**
+     * 返回状态
+     */
+    Result?: string;
+    /**
+     * 平台类型  1.android安卓加固   2.ios源码混淆  3.sdk加固  4.applet小程序加固
+     */
+    PlatformType?: number;
+    /**
+     * 订单采购类型 1-免费试用 2-按年收费 3-按次收费
+     */
+    OrderType?: number;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */

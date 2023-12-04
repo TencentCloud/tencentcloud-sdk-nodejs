@@ -285,5 +285,11 @@ class Client extends abstract_client_1.AbstractClient {
     async DescribeIndexMeta(req, cb) {
         return this.request("DescribeIndexMeta", req, cb);
     }
+    /**
+     * 集群续费询价接口，续费前通过调用该接口，可获取集群续费的价格。
+     */
+    async InquirePriceRenewInstance(req, cb) {
+        return this.request("InquirePriceRenewInstance", req, cb);
+    }
 }
 exports.Client = Client;

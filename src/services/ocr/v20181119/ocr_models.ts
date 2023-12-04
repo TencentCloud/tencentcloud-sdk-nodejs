@@ -9222,6 +9222,12 @@ WARN_RESHOOT_SCREENED_CARD 翻拍件告警
    */
   RegistrationDate?: string
   /**
+   *  图片旋转角度(角度制)，文本的水平方向为0度；顺时针为正，角度范围是0-360度
+
+
+   */
+  Angle?: number
+  /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string

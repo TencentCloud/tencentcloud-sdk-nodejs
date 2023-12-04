@@ -305,50 +305,50 @@ export interface DescribeSitesRequest {
  */
 export interface HostInfo {
   /**
-   * 宿主机IP
+   * 宿主机IP（废弃）
    */
-  HostIp: string
+  HostIp?: string
   /**
    * 云服务类型
    */
-  ServiceType: string
+  ServiceType?: string
   /**
    * 宿主机运行状态
    */
-  HostStatus: string
+  HostStatus?: string
   /**
    * 宿主机类型
    */
-  HostType: string
+  HostType?: string
   /**
    * cpu可用数
    */
-  CpuAvailable: number
+  CpuAvailable?: number
   /**
    * cpu总数
    */
-  CpuTotal: number
+  CpuTotal?: number
   /**
    * 内存可用数
    */
-  MemAvailable: number
+  MemAvailable?: number
   /**
    * 内存总数
    */
-  MemTotal: number
+  MemTotal?: number
   /**
    * 运行时间
    */
-  RunTime: string
+  RunTime?: string
   /**
    * 到期时间
    */
-  ExpireTime: string
+  ExpireTime?: string
   /**
    * 宿主机id
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  HostId: string
+  HostId?: string
 }
 
 /**

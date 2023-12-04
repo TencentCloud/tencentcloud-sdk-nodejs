@@ -178,6 +178,16 @@ it("ms.v20180408.UpdateClientState", async function () {
     }
 })
 
+it("ms.v20180408.DestroyResourceInstances", async function () {
+    try {
+       const data = await client.DestroyResourceInstances({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ms.v20180408.CreateCosSecKeyInstance", async function () {
     try {
        const data = await client.CreateCosSecKeyInstance({})

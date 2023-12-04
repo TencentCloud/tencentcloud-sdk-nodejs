@@ -701,27 +701,27 @@ export interface DiscountDetail {
     /**
      * 计费时长。
      */
-    TimeSpan: number;
+    TimeSpan?: number;
     /**
      * 计费单元。
      */
-    TimeUnit: string;
+    TimeUnit?: string;
     /**
      * 总价。
      */
-    TotalCost: number;
+    TotalCost?: number;
     /**
      * 折后总价。
      */
-    RealTotalCost: number;
+    RealTotalCost?: number;
     /**
      * 折扣。
      */
-    Discount: number;
+    Discount?: number;
     /**
      * 具体折扣详情。
      */
-    PolicyDetail: PolicyDetail;
+    PolicyDetail?: PolicyDetail;
 }
 /**
  * DescribeDiskConfigs请求参数结构体
@@ -1015,23 +1015,23 @@ export interface DiskBackup {
     /**
      * 云硬盘备份点ID。
      */
-    DiskBackupId: string;
+    DiskBackupId?: string;
     /**
      * 创建此云硬盘备份点的云硬盘类型。取值：<li>DATA_DISK：数据盘</li>
      */
-    DiskUsage: string;
+    DiskUsage?: string;
     /**
      * 创建此云硬盘备份点的云硬盘 ID。
      */
-    DiskId: string;
+    DiskId?: string;
     /**
      * 创建此云硬盘备份点的云硬盘大小，单位 GB。
      */
-    DiskSize: number;
+    DiskSize?: number;
     /**
      * 云硬盘备份点名称，用户自定义的云硬盘备份点别名。
      */
-    DiskBackupName: string;
+    DiskBackupName?: string;
     /**
      * 云硬盘备份点的状态。取值范围：
   <li>NORMAL：正常。 </li>
@@ -1039,31 +1039,31 @@ export interface DiskBackup {
   <li>ROLLBACKING：回滚中。</li>
   <li>DELETING：删除中。</li>
      */
-    DiskBackupState: string;
+    DiskBackupState?: string;
     /**
      * 创建或回滚云硬盘备份点进度百分比，成功后此字段取值为 100。
      */
-    Percent: number;
+    Percent?: number;
     /**
      * 上一次操作
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    LatestOperation: string;
+    LatestOperation?: string;
     /**
      * 上一次操作状态
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    LatestOperationState: string;
+    LatestOperationState?: string;
     /**
      * 上一次请求ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    LatestOperationRequestId: string;
+    LatestOperationRequestId?: string;
     /**
      * 创建时间。按照 ISO8601 标准表示，并且使用 UTC 时间。
   格式为： YYYY-MM-DDThh:mm:ssZ。
      */
-    CreatedTime: string;
+    CreatedTime?: string;
 }
 /**
  * DescribeInstancesTrafficPackages返回参数结构体
@@ -1072,11 +1072,11 @@ export interface DescribeInstancesTrafficPackagesResponse {
     /**
      * 符合条件的实例流量包详情数量。
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 实例流量包详情列表。
      */
-    InstanceTrafficPackageSet: Array<InstanceTrafficPackage>;
+    InstanceTrafficPackageSet?: Array<InstanceTrafficPackage>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1456,11 +1456,11 @@ export interface InstanceTrafficPackage {
     /**
      * 实例ID。
      */
-    InstanceId: string;
+    InstanceId?: string;
     /**
      * 流量包详情列表。
      */
-    TrafficPackageSet: Array<TrafficPackage>;
+    TrafficPackageSet?: Array<TrafficPackage>;
 }
 /**
  * 快照操作限制列表。
@@ -3337,40 +3337,40 @@ export interface Snapshot {
     /**
      * 快照 ID。
      */
-    SnapshotId: string;
+    SnapshotId?: string;
     /**
      * 创建此快照的磁盘类型。取值：<li>SYSTEM_DISK：系统盘</li>
      */
-    DiskUsage: string;
+    DiskUsage?: string;
     /**
      * 创建此快照的磁盘 ID。
      */
-    DiskId: string;
+    DiskId?: string;
     /**
      * 创建此快照的磁盘大小，单位 GB。
      */
-    DiskSize: number;
+    DiskSize?: number;
     /**
      * 快照名称，用户自定义的快照别名。
      */
-    SnapshotName: string;
+    SnapshotName?: string;
     /**
      * 快照的状态。取值范围：
   <li>NORMAL：正常 </li>
   <li>CREATING：创建中</li>
   <li>ROLLBACKING：回滚中。</li>
      */
-    SnapshotState: string;
+    SnapshotState?: string;
     /**
      * 创建或回滚快照进度百分比，成功后此字段取值为 100。
      */
-    Percent: number;
+    Percent?: number;
     /**
      * 快照的最新操作，只有创建、回滚快照时记录。
   取值如 CreateInstanceSnapshot，RollbackInstanceSnapshot。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    LatestOperation: string;
+    LatestOperation?: string;
     /**
      * 快照的最新操作状态，只有创建、回滚快照时记录。
   取值范围：
@@ -3379,17 +3379,17 @@ export interface Snapshot {
   <li>FAILED：表示操作失败</li>
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    LatestOperationState: string;
+    LatestOperationState?: string;
     /**
      * 快照最新操作的唯一请求 ID，只有创建、回滚快照时记录。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    LatestOperationRequestId: string;
+    LatestOperationRequestId?: string;
     /**
      * 快照的创建时间。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CreatedTime: string;
+    CreatedTime?: string;
 }
 /**
  * ApplyFirewallTemplate请求参数结构体
@@ -3580,47 +3580,47 @@ export interface TrafficPackage {
     /**
      * 流量包ID。
      */
-    TrafficPackageId: string;
+    TrafficPackageId?: string;
     /**
      * 流量包生效周期内已使用流量，单位字节。
      */
-    TrafficUsed: number;
+    TrafficUsed?: number;
     /**
      * 流量包生效周期内的总流量，单位字节。
      */
-    TrafficPackageTotal: number;
+    TrafficPackageTotal?: number;
     /**
      * 流量包生效周期内的剩余流量，单位字节。
      */
-    TrafficPackageRemaining: number;
+    TrafficPackageRemaining?: number;
     /**
      * 流量包生效周期内超出流量包额度的流量，单位字节。
      */
-    TrafficOverflow: number;
+    TrafficOverflow?: number;
     /**
      * 流量包生效周期开始时间。按照 ISO8601 标准表示，并且使用 UTC 时间。
   格式为： YYYY-MM-DDThh:mm:ssZ。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    StartTime: string;
+    StartTime?: string;
     /**
      * 流量包生效周期结束时间。按照 ISO8601 标准表示，并且使用 UTC 时间。
   格式为： YYYY-MM-DDThh:mm:ssZ。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    EndTime: string;
+    EndTime?: string;
     /**
      * 流量包到期时间。按照 ISO8601 标准表示，并且使用 UTC 时间。
   格式为： YYYY-MM-DDThh:mm:ssZ。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Deadline: string;
+    Deadline?: string;
     /**
      * 流量包状态：
   <li>NETWORK_NORMAL：正常</li>
   <li>OVERDUE_NETWORK_DISABLED：欠费断网</li>
      */
-    Status: string;
+    Status?: string;
 }
 /**
  * 描述防火墙规则信息。

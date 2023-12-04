@@ -95,7 +95,7 @@ export interface ApplyConcurrentRequest {
      */
     ProjectId: string;
     /**
-     * 应用版本ID
+     * 应用版本ID。如果请求应用的当前版本，可以不用填写该字段。如果请求应用的其它版本时，才需要通过该字段来指定应用的版本。
      */
     ApplicationVersionId?: string;
     /**

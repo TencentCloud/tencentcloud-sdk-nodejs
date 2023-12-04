@@ -573,26 +573,26 @@ export interface DescribeDashboardsRequest {
      */
     Limit?: number;
     /**
-     * <br><li> dashboardId
+     * <br><li>dashboardId
   
   按照【仪表盘id】进行过滤。
   类型：String
   
-  必选：否
+  必选：否</li>
   
   <br><li> dashboardName
   
   按照【仪表盘名字】进行模糊搜索过滤。
   类型：String
   
-  必选：否
+  必选：否</li>
   
   <br><li> dashboardRegion
   
   按照【仪表盘地域】进行过滤，为了兼容老的仪表盘，通过云API创建的仪表盘没有地域属性
   类型：String
   
-  必选：否
+  必选：否</li>
   
   <br><li> tagKey
   
@@ -600,7 +600,7 @@ export interface DescribeDashboardsRequest {
   
   类型：String
   
-  必选：否
+  必选：否</li>
   
   <br><li> tag:tagKey
   
@@ -608,7 +608,7 @@ export interface DescribeDashboardsRequest {
   
   类型：String
   
-  必选：否
+  必选：否</li>
   
   每次请求的Filters的上限为10，Filter.Values的上限为100。
      */
@@ -1035,11 +1035,11 @@ export interface DescribeConfigExtrasResponse {
      * 采集配置列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Configs: Array<ConfigExtraInfo>;
+    Configs?: Array<ConfigExtraInfo>;
     /**
      * 过滤到的总数目
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1855,7 +1855,7 @@ export interface DescribeConfigMachineGroupsResponse {
      * 采集规则配置绑定的机器组列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    MachineGroups: Array<MachineGroupInfo>;
+    MachineGroups?: Array<MachineGroupInfo>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2463,7 +2463,7 @@ export interface DescribeMachineGroupConfigsResponse {
      * 采集规则配置列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Configs: Array<ConfigInfo>;
+    Configs?: Array<ConfigInfo>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -4831,11 +4831,11 @@ export interface DescribeDashboardsResponse {
     /**
      * 仪表盘的数量
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 仪表盘详细明细
      */
-    DashboardInfos: Array<DashboardInfo>;
+    DashboardInfos?: Array<DashboardInfo>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */

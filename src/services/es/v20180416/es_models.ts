@@ -1341,6 +1341,16 @@ export interface Dimension {
 }
 
 /**
+ * InquirePriceRenewInstance请求参数结构体
+ */
+export interface InquirePriceRenewInstanceRequest {
+  /**
+   * 集群实例Id
+   */
+  InstanceId: string
+}
+
+/**
  * UpdateJdk返回参数结构体
  */
 export interface UpdateJdkResponse {
@@ -1648,6 +1658,32 @@ export interface CreateIndexResponse {
 }
 
 /**
+ * InquirePriceRenewInstance返回参数结构体
+ */
+export interface InquirePriceRenewInstanceResponse {
+  /**
+   * 刊例价，即集群原始价格
+   */
+  OriginalPrice?: number
+  /**
+   * 折后价
+   */
+  DiscountPrice?: number
+  /**
+   * 折扣，如65折
+   */
+  Discount?: number
+  /**
+   * 货币，如CNY代表人民币
+   */
+  Currency?: string
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteLogstashPipelines请求参数结构体
  */
 export interface DeleteLogstashPipelinesRequest {
@@ -1716,17 +1752,26 @@ export interface UpdateDictionariesRequest {
 }
 
 /**
- * ES cos自动备份信息
+ * 集群可运维时间
  */
-export interface CosBackup {
+export interface OperationDuration {
   /**
-   * 是否开启cos自动备份
+   * 维护周期，表示周一到周日，可取值[0, 6]
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  IsAutoBackup: boolean
+  Periods: Array<number | bigint>
   /**
-   * 自动备份执行时间（精确到小时）, e.g. "22:00"
+   * 维护开始时间
    */
-  BackupTime: string
+  TimeStart: string
+  /**
+   * 维护结束时间
+   */
+  TimeEnd: string
+  /**
+   * 时区，以UTC形式表示
+   */
+  TimeZone: string
 }
 
 /**
@@ -1863,26 +1908,17 @@ export interface NodeInfo {
 }
 
 /**
- * 集群可运维时间
+ * ES cos自动备份信息
  */
-export interface OperationDuration {
+export interface CosBackup {
   /**
-   * 维护周期，表示周一到周日，可取值[0, 6]
-注意：此字段可能返回 null，表示取不到有效值。
+   * 是否开启cos自动备份
    */
-  Periods: Array<number | bigint>
+  IsAutoBackup: boolean
   /**
-   * 维护开始时间
+   * 自动备份执行时间（精确到小时）, e.g. "22:00"
    */
-  TimeStart: string
-  /**
-   * 维护结束时间
-   */
-  TimeEnd: string
-  /**
-   * 时区，以UTC形式表示
-   */
-  TimeZone: string
+  BackupTime: string
 }
 
 /**
@@ -1981,7 +2017,7 @@ export interface CreateInstanceRequest {
   NodeType?: string
   /**
    * 已废弃请使用NodeInfoList
-节点磁盘类型<li>CLOUD_SSD：SSD云硬盘</li><li>CLOUD_PREMIUM：高性能云硬盘</li>默认值CLOUD_SSD
+节点磁盘类型<li>CLOUD_SSD：SSD云硬盘</li><li>CLOUD_PREMIUM：高性能云硬盘</li><li> CLOUD_HSSD：增强型SSD云硬盘</li><li> CLOUD_BSSD：通用型SSD云硬盘</li>默认值CLOUD_SSD
    */
   DiskType?: string
   /**
@@ -2026,7 +2062,7 @@ export interface CreateInstanceRequest {
    */
   ClusterNameInConf?: string
   /**
-   * 集群部署方式<li>0：单可用区部署</li><li>1：多可用区部署</li>默认为0
+   * 集群部署方式<li>0：单可用区部署</li><li>1：多可用区部署，北京、上海、上海金融、广州、南京、香港、新加坡、法兰克福（白名单控制）</li>默认为0
    */
   DeployMode?: number
   /**

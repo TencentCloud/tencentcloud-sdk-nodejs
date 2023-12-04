@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { CreateShieldPlanInstanceResponse, DescribeEncryptInstancesResponse, CreateResourceInstancesRequest, DescribeShieldInstancesResponse, UpdateClientStateRequest, DescribeShieldResultRequest, CancelEncryptTaskResponse, DescribeOrderInstancesResponse, CreateCosSecKeyInstanceRequest, DescribeUserBaseInfoInstanceResponse, UpdateLocalTaskResultResponse, CreateShieldPlanInstanceRequest, CreateEncryptInstanceResponse, RequestLocalTaskResponse, UpdateLocalTaskResultRequest, CreateBindInstanceRequest, CreateShieldInstanceResponse, DeleteShieldInstancesRequest, DescribeUserBaseInfoInstanceRequest, DescribeShieldInstancesRequest, DescribeUrlDetectionResultRequest, DescribeShieldPlanInstanceResponse, DescribeEncryptPlanRequest, DescribeEncryptInstancesRequest, DescribeApkDetectionResultRequest, DeleteShieldInstancesResponse, DescribeUrlDetectionResultResponse, CreateShieldInstanceRequest, DescribeShieldPlanInstanceRequest, DescribeEncryptPlanResponse, CreateResourceInstancesResponse, RequestLocalTaskRequest, DescribeOrderInstancesRequest, DescribeResourceInstancesRequest, CreateOrderInstanceRequest, DescribeApkDetectionResultResponse, DescribeResourceInstancesResponse, CreateOrderInstanceResponse, CancelEncryptTaskRequest, CreateCosSecKeyInstanceResponse, CreateEncryptInstanceRequest, DescribeShieldResultResponse, CreateBindInstanceResponse, UpdateClientStateResponse } from "./ms_models";
+import { CreateShieldPlanInstanceResponse, DescribeEncryptInstancesResponse, CreateResourceInstancesRequest, DescribeShieldInstancesResponse, UpdateClientStateRequest, DescribeShieldResultRequest, CancelEncryptTaskResponse, DescribeOrderInstancesResponse, CreateCosSecKeyInstanceRequest, DescribeUserBaseInfoInstanceResponse, UpdateLocalTaskResultResponse, CreateShieldPlanInstanceRequest, CreateEncryptInstanceResponse, DestroyResourceInstancesRequest, RequestLocalTaskResponse, UpdateLocalTaskResultRequest, CreateBindInstanceRequest, CreateShieldInstanceResponse, DeleteShieldInstancesRequest, DescribeUserBaseInfoInstanceRequest, DescribeShieldInstancesRequest, DescribeUrlDetectionResultRequest, DescribeShieldPlanInstanceResponse, DescribeEncryptPlanRequest, DescribeEncryptInstancesRequest, DescribeApkDetectionResultRequest, DeleteShieldInstancesResponse, DestroyResourceInstancesResponse, DescribeUrlDetectionResultResponse, CreateShieldInstanceRequest, DescribeShieldPlanInstanceRequest, DescribeEncryptPlanResponse, CreateResourceInstancesResponse, RequestLocalTaskRequest, DescribeOrderInstancesRequest, DescribeResourceInstancesRequest, CreateOrderInstanceRequest, DescribeApkDetectionResultResponse, DescribeResourceInstancesResponse, CreateOrderInstanceResponse, CancelEncryptTaskRequest, CreateCosSecKeyInstanceResponse, CreateEncryptInstanceRequest, DescribeShieldResultResponse, CreateBindInstanceResponse, UpdateClientStateResponse } from "./ms_models";
 /**
  * ms client
  * @class
@@ -77,6 +77,11 @@ export declare class Client extends AbstractClient {
      * 更新client状态，需要白名单
      */
     UpdateClientState(req: UpdateClientStateRequest, cb?: (error: string, rep: UpdateClientStateResponse) => void): Promise<UpdateClientStateResponse>;
+    /**
+     * 渠道合作资源销毁
+安卓应用加固-按年收费资源销毁，其他类型暂不支持
+     */
+    DestroyResourceInstances(req: DestroyResourceInstancesRequest, cb?: (error: string, rep: DestroyResourceInstancesResponse) => void): Promise<DestroyResourceInstancesResponse>;
     /**
      * 获取云COS文件存储临时密钥，密钥仅限于临时上传文件，有访问限制和时效性，请保管好临时密钥。
      */

@@ -3838,13 +3838,13 @@ export interface CreateGrafanaNotificationChannelRequest {
      */
     ChannelName: string;
     /**
-     * 默认为1，建议使用 OrganizationIds
-     */
-    OrgId: number;
-    /**
      * 接受告警通道 ID 数组，值为告警管理/基础配置/通知模板中的模板 ID
      */
     Receivers: Array<string>;
+    /**
+     * 默认为1，建议使用 OrganizationIds
+     */
+    OrgId?: number;
     /**
      * 额外组织 ID 数组，已废弃，请使用 OrganizationIds
      */
@@ -4785,13 +4785,13 @@ export interface UpdateGrafanaNotificationChannelRequest {
      */
     InstanceId: string;
     /**
-     * 告警通道名称，例如：test
-     */
-    ChannelName: string;
-    /**
      * 接受告警通道 ID 数组
      */
     Receivers: Array<string>;
+    /**
+     * 告警通道名称，已废弃，名称不可修改。
+     */
+    ChannelName?: string;
     /**
      * 已废弃，请使用 OrganizationIds
      */
@@ -6321,7 +6321,7 @@ export interface DescribeAlarmHistoriesRequest {
      */
     EndTime?: number;
     /**
-     * 根据监控类型过滤，不选默认查所有类型。"MT_QCE"=云产品监控，支持的枚举值有："MT_QCE"=云产品监控；"MT_TAW"=应用性能观测；"MT_RUM"=前端性能监控；"MT_PROBE"=云拨测
+     * 根据监控类型过滤，不选默认查所有类型。"MT_QCE"=云产品监控，支持的枚举值有："MT_QCE"=云产品监控；"MT_TAW"=应用性能监控；"MT_RUM"=前端性能监控；"MT_PROBE"=云拨测
      */
     MonitorTypes?: Array<string>;
     /**
@@ -7085,106 +7085,146 @@ export interface AlarmHistory {
     /**
      * 告警历史Id
      */
-    AlarmId: string;
+    AlarmId?: string;
     /**
      * 监控类型
      */
-    MonitorType: string;
+    MonitorType?: string;
     /**
      * 策略类型
      */
-    Namespace: string;
+    Namespace?: string;
     /**
      * 告警对象
      */
-    AlarmObject: string;
+    AlarmObject?: string;
     /**
      * 告警内容
      */
-    Content: string;
+    Content?: string;
     /**
      * 时间戳，首次出现时间
      */
-    FirstOccurTime: number;
+    FirstOccurTime?: number;
     /**
      * 时间戳，最后出现时间
      */
-    LastOccurTime: number;
+    LastOccurTime?: number;
     /**
      * 告警状态，ALARM=未恢复 OK=已恢复 NO_CONF=已失效 NO_DATA=数据不足
      */
-    AlarmStatus: string;
+    AlarmStatus?: string;
     /**
      * 告警策略 Id
      */
-    PolicyId: string;
+    PolicyId?: string;
     /**
      * 策略名称
      */
-    PolicyName: string;
+    PolicyName?: string;
     /**
      * 基础产品告警的告警对象所属网络
      */
-    VPC: string;
+    VPC?: string;
     /**
      * 项目 Id
      */
-    ProjectId: number;
+    ProjectId?: number;
     /**
      * 项目名字
      */
-    ProjectName: string;
+    ProjectName?: string;
     /**
      * 告警对象所属实例组
      */
-    InstanceGroup: Array<InstanceGroups>;
+    InstanceGroup?: Array<InstanceGroups>;
     /**
      * 接收人列表
      */
-    ReceiverUids: Array<number | bigint>;
+    ReceiverUids?: Array<number | bigint>;
     /**
      * 接收组列表
      */
-    ReceiverGroups: Array<number | bigint>;
+    ReceiverGroups?: Array<number | bigint>;
     /**
      * 告警渠道列表 SMS=短信 EMAIL=邮件 CALL=电话 WECHAT=微信
      */
-    NoticeWays: Array<string>;
+    NoticeWays?: Array<string>;
     /**
      * 可用于实例、实例组的绑定和解绑接口（[BindingPolicyObject](https://cloud.tencent.com/document/product/248/40421)、[UnBindingAllPolicyObject](https://cloud.tencent.com/document/product/248/40568)、[UnBindingPolicyObject](https://cloud.tencent.com/document/product/248/40567)）的策略 ID
      */
-    OriginId: string;
+    OriginId?: string;
     /**
      * 告警类型
      */
-    AlarmType: string;
+    AlarmType?: string;
     /**
      * 事件Id
      */
-    EventId: number;
+    EventId?: number;
     /**
      * 地域
      */
-    Region: string;
+    Region?: string;
     /**
      * 策略是否存在 0=不存在 1=存在
      */
-    PolicyExists: number;
+    PolicyExists?: number;
     /**
      * 指标信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    MetricsInfo: Array<AlarmHistoryMetric>;
+    MetricsInfo?: Array<AlarmHistoryMetric>;
     /**
      * 告警实例的维度信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Dimensions: string;
+    Dimensions?: string;
     /**
      * 告警等级
   注意：此字段可能返回 null，表示取不到有效值。
      */
     AlarmLevel?: string;
+    /**
+     * 是否有配置告警屏蔽规则
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ShieldFlag?: number;
+    /**
+     * 屏蔽类型（英文）
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AlarmShieldingType?: string;
+    /**
+     * 屏蔽时间（英文）
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AlarmShieldingTime?: string;
+    /**
+     * 屏蔽类型（中文）
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AlarmShieldingShowType?: string;
+    /**
+     * 屏蔽时间（中文）
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AlarmShieldingShowTime?: string;
+    /**
+     * 屏蔽原因
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AlarmShieldReason?: string;
+    /**
+     * 告警实例的维度信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InternalDimensions?: string;
+    /**
+     * 指标名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MetricName?: string;
 }
 /**
  * 与腾讯云可观测平台融合托管 Prometheus 实例，关联集群基础信息

@@ -38,6 +38,7 @@ import {
   Filter,
   CreateShieldPlanInstanceRequest,
   CreateEncryptInstanceResponse,
+  DestroyResourceInstancesRequest,
   SDKResult,
   RequestLocalTaskResponse,
   UpdateLocalTaskResultRequest,
@@ -64,6 +65,7 @@ import {
   DescribeApkDetectionResultRequest,
   ResultListItem,
   DeleteShieldInstancesResponse,
+  DestroyResourceInstancesResponse,
   AndroidAppInfo,
   DescribeUrlDetectionResultResponse,
   CreateShieldInstanceRequest,
@@ -266,6 +268,17 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: UpdateClientStateResponse) => void
   ): Promise<UpdateClientStateResponse> {
     return this.request("UpdateClientState", req, cb)
+  }
+
+  /**
+     * 渠道合作资源销毁
+安卓应用加固-按年收费资源销毁，其他类型暂不支持
+     */
+  async DestroyResourceInstances(
+    req: DestroyResourceInstancesRequest,
+    cb?: (error: string, rep: DestroyResourceInstancesResponse) => void
+  ): Promise<DestroyResourceInstancesResponse> {
+    return this.request("DestroyResourceInstances", req, cb)
   }
 
   /**

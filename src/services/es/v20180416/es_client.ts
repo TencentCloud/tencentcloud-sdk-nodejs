@@ -71,6 +71,7 @@ import {
   LogstashPipelineInfo,
   UpdatePluginsRequest,
   Dimension,
+  InquirePriceRenewInstanceRequest,
   UpdateJdkResponse,
   Metric,
   UpdateInstanceResponse,
@@ -84,15 +85,16 @@ import {
   SaveAndDeployLogstashPipelineRequest,
   ClusterView,
   CreateIndexResponse,
+  InquirePriceRenewInstanceResponse,
   DeleteLogstashPipelinesRequest,
   RestartKibanaRequest,
   SaveAndDeployLogstashPipelineResponse,
   UpdateDictionariesRequest,
-  CosBackup,
+  OperationDuration,
   UpgradeLicenseRequest,
   DescribeIndexListRequest,
   NodeInfo,
-  OperationDuration,
+  CosBackup,
   DescribeLogstashPipelinesResponse,
   OperationDurationUpdated,
   CreateInstanceRequest,
@@ -579,5 +581,15 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeIndexMetaResponse) => void
   ): Promise<DescribeIndexMetaResponse> {
     return this.request("DescribeIndexMeta", req, cb)
+  }
+
+  /**
+   * 集群续费询价接口，续费前通过调用该接口，可获取集群续费的价格。
+   */
+  async InquirePriceRenewInstance(
+    req: InquirePriceRenewInstanceRequest,
+    cb?: (error: string, rep: InquirePriceRenewInstanceResponse) => void
+  ): Promise<InquirePriceRenewInstanceResponse> {
+    return this.request("InquirePriceRenewInstance", req, cb)
   }
 }

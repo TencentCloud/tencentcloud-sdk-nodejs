@@ -428,4 +428,14 @@ it("es.v20180416.DescribeIndexMeta", async function () {
     }
 })
 
+it("es.v20180416.InquirePriceRenewInstance", async function () {
+    try {
+       const data = await client.InquirePriceRenewInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 })

@@ -461,17 +461,17 @@ export interface Endpoint {
    */
   RoleExternalId?: string
   /**
-   * 临时密钥Id，如果为跨账号实例此项必填
+   * 临时密钥Id，可通过获取联合身份临时访问凭证获取临时密钥https://cloud.tencent.com/document/product/1312/48195，如果为跨账号实例此项必填
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TmpSecretId?: string
   /**
-   * 临时密钥Key，如果为跨账号实例此项必填
+   * 临时密钥Key，可通过获取联合身份临时访问凭证获取临时密钥https://cloud.tencent.com/document/product/1312/48195，，如果为跨账号实例此项必填
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TmpSecretKey?: string
   /**
-   * 临时Token，如果为跨账号实例此项必填
+   * 临时Token，可通过获取联合身份临时访问凭证获取临时密钥https://cloud.tencent.com/document/product/1312/48195，，如果为跨账号实例此项必填
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TmpToken?: string
@@ -1743,17 +1743,17 @@ export interface DBInfo {
    */
   AccountMode?: string
   /**
-   * 临时密钥Id
+   * 临时密钥Id，可通过 获取联合身份临时访问凭证获取临时密钥https://cloud.tencent.com/document/product/1312/48195
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TmpSecretId?: string
   /**
-   * 临时密钥Key
+   * 临时密钥Key，可通过 获取联合身份临时访问凭证获取临时密钥https://cloud.tencent.com/document/product/1312/48195
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TmpSecretKey?: string
   /**
-   * 临时Token
+   * 临时Token，可通过 获取联合身份临时访问凭证获取临时密钥https://cloud.tencent.com/document/product/1312/48195
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TmpToken?: string
@@ -3210,7 +3210,7 @@ export interface Objects {
    */
   Databases?: Array<Database>
   /**
-   * 高级对象类型，如function、procedure，当需要同步高级对象时，初始化类型必须包含结构初始化类型，即任务的Options.InitType字段值为Structure或Full
+   * 高级对象类型，如function、procedure。注意：如果要迁移同步高级对象，此配置中应该包含对应的高级对象类型。当需要同步高级对象时，初始化类型必须包含结构初始化类型，即任务的Options.InitType字段值为Structure或Full
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AdvancedObjects?: Array<string>
@@ -3900,7 +3900,7 @@ export interface DatabaseTableObject {
    */
   Databases?: Array<DBItem>
   /**
-   * 高级对象类型，如trigger、function、procedure、event
+   * 高级对象类型，如trigger、function、procedure、event。注意：如果要迁移同步高级对象，此配置中应该包含对应的高级对象类型
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AdvancedObjects?: Array<string>

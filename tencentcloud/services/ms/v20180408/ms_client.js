@@ -130,6 +130,13 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UpdateClientState", req, cb);
     }
     /**
+     * 渠道合作资源销毁
+安卓应用加固-按年收费资源销毁，其他类型暂不支持
+     */
+    async DestroyResourceInstances(req, cb) {
+        return this.request("DestroyResourceInstances", req, cb);
+    }
+    /**
      * 获取云COS文件存储临时密钥，密钥仅限于临时上传文件，有访问限制和时效性，请保管好临时密钥。
      */
     async CreateCosSecKeyInstance(req, cb) {
