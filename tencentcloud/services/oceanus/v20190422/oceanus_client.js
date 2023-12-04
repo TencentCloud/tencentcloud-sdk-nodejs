@@ -76,6 +76,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteTableConfig", req, cb);
     }
     /**
+     * 查询指定文件夹及其相应的子文件夹信息
+     */
+    async DescribeFolder(req, cb) {
+        return this.request("DescribeFolder", req, cb);
+    }
+    /**
      * 删除工作空间
      */
     async DeleteWorkSpace(req, cb) {

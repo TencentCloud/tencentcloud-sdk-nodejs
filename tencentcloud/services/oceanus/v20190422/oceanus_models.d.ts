@@ -684,6 +684,40 @@ export interface ResourceItem {
     RefJobStatusCountSet?: Array<RefJobStatusCountItem>;
 }
 /**
+ * DescribeFolder返回参数结构体
+ */
+export interface DescribeFolderResponse {
+    /**
+     * folder id
+     */
+    FolderId?: string;
+    /**
+     * folder name
+     */
+    FolderName?: string;
+    /**
+     * 父文件夹id
+     */
+    ParentId?: string;
+    /**
+     * 文件夹类型
+     */
+    FolderType?: number;
+    /**
+     * workspace id
+     */
+    WorkSpaceId?: string;
+    /**
+     * 子文件夹信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SubFolderInfo?: Array<SubFolderInfo>;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * 资源位置描述
  */
 export interface ResourceLoc {
@@ -1658,6 +1692,34 @@ export interface DeleteWorkSpaceResponse {
      * 是否删除
      */
     Delete: boolean;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * TriggerJobSavepoint返回参数结构体
+ */
+export interface TriggerJobSavepointResponse {
+    /**
+     * 是否成功
+     */
+    SavepointTrigger?: boolean;
+    /**
+     * 错误消息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ErrorMsg?: string;
+    /**
+     * 快照路径
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    FinalSavepointPath?: string;
+    /**
+     * 快照 ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SavepointId?: string;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -3023,6 +3085,24 @@ export interface DeleteTableConfigResponse {
     RequestId?: string;
 }
 /**
+ * DescribeFolder请求参数结构体
+ */
+export interface DescribeFolderRequest {
+    /**
+     * folder id
+     */
+    FolderId: string;
+    /**
+     * workspace id
+     */
+    WorkSpaceId: string;
+    /**
+     * 1:资源文件夹
+  其他:作业文件夹
+     */
+    FolderType: number;
+}
+/**
  * DeleteFolders返回参数结构体
  */
 export interface DeleteFoldersResponse {
@@ -3032,32 +3112,17 @@ export interface DeleteFoldersResponse {
     RequestId?: string;
 }
 /**
- * TriggerJobSavepoint返回参数结构体
+ * 子目录信息
  */
-export interface TriggerJobSavepointResponse {
+export interface SubFolderInfo {
     /**
-     * 是否成功
+     * folder id
      */
-    SavepointTrigger?: boolean;
+    FolderId?: string;
     /**
-     * 错误消息
-  注意：此字段可能返回 null，表示取不到有效值。
+     * folder name
      */
-    ErrorMsg?: string;
-    /**
-     * 快照路径
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    FinalSavepointPath?: string;
-    /**
-     * 快照 ID
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    SavepointId?: string;
-    /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
+    FolderName?: string;
 }
 /**
  * session集群信息

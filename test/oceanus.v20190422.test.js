@@ -98,6 +98,16 @@ it("oceanus.v20190422.DeleteTableConfig", async function () {
     }
 })
 
+it("oceanus.v20190422.DescribeFolder", async function () {
+    try {
+       const data = await client.DescribeFolder({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("oceanus.v20190422.DeleteWorkSpace", async function () {
     try {
        const data = await client.DeleteWorkSpace({})

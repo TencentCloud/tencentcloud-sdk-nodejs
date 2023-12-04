@@ -39,6 +39,7 @@ import {
   ResultColumn,
   TreeJobSets,
   ResourceItem,
+  DescribeFolderResponse,
   ResourceLoc,
   CCN,
   DescribeWorkSpacesRequest,
@@ -88,6 +89,7 @@ import {
   TraceModeConfiguration,
   RunJobsRequest,
   DeleteWorkSpaceResponse,
+  TriggerJobSavepointResponse,
   DeleteJobsResponse,
   Property,
   JobGraphEdge,
@@ -121,8 +123,9 @@ import {
   CreateJobRequest,
   JobInstanceForSubmissionLog,
   DeleteTableConfigResponse,
+  DescribeFolderRequest,
   DeleteFoldersResponse,
-  TriggerJobSavepointResponse,
+  SubFolderInfo,
   ClusterSession,
   CreateResourceConfigRequest,
   StopJobsResponse,
@@ -226,6 +229,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteTableConfigResponse) => void
   ): Promise<DeleteTableConfigResponse> {
     return this.request("DeleteTableConfig", req, cb)
+  }
+
+  /**
+   * 查询指定文件夹及其相应的子文件夹信息
+   */
+  async DescribeFolder(
+    req: DescribeFolderRequest,
+    cb?: (error: string, rep: DescribeFolderResponse) => void
+  ): Promise<DescribeFolderResponse> {
+    return this.request("DescribeFolder", req, cb)
   }
 
   /**
