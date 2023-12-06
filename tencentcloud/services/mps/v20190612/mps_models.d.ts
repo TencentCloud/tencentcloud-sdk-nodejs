@@ -220,73 +220,17 @@ export interface SvgWatermarkInput {
     Height?: string;
 }
 /**
- * 工作流信息详情。
+ * 流的统计数据列表。
  */
-export interface WorkflowInfo {
+export interface FlowStatisticsArray {
     /**
-     * 工作流 ID。
+     * 时间戳。
      */
-    WorkflowId: number;
+    Timestamp: number;
     /**
-     * 工作流名称。
+     * 每个会话的统计数据。
      */
-    WorkflowName: string;
-    /**
-     * 工作流状态，取值范围：
-  <li>Enabled：已启用，</li>
-  <li>Disabled：已禁用。</li>
-     */
-    Status: string;
-    /**
-     * 工作流绑定的输入规则，当上传视频命中该规则到该对象时即触发工作流。
-     */
-    Trigger: WorkflowTrigger;
-    /**
-     * 媒体处理的文件输出存储位置。
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    OutputStorage: TaskOutputStorage;
-    /**
-     * 媒体处理类型任务参数。
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    MediaProcessTask: MediaProcessTaskInput;
-    /**
-     * 视频内容审核类型任务参数。
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    AiContentReviewTask: AiContentReviewTaskInput;
-    /**
-     * 视频内容分析类型任务参数。
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    AiAnalysisTask: AiAnalysisTaskInput;
-    /**
-     * 视频内容识别类型任务参数。
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    AiRecognitionTask: AiRecognitionTaskInput;
-    /**
-     * 任务的事件通知信息，不填代表不获取事件通知。
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    TaskNotifyConfig: TaskNotifyConfig;
-    /**
-     * 任务流的优先级，数值越大优先级越高，取值范围是 -10 到 10，不填代表 0。
-     */
-    TaskPriority: number;
-    /**
-     * 媒体处理生成的文件输出的目标目录，如`/movie/201907/`。
-     */
-    OutputDir: string;
-    /**
-     * 工作流创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。
-     */
-    CreateTime: string;
-    /**
-     * 工作流最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。
-     */
-    UpdateTime: string;
+    FlowStatistics: Array<FlowStatistics>;
 }
 /**
  * CreateTranscodeTemplate请求参数结构体
@@ -532,6 +476,24 @@ export interface AdaptiveDynamicStreamingTemplate {
      * 模板最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
      */
     UpdateTime: string;
+}
+/**
+ * 智能描述信息
+ */
+export interface MediaAiAnalysisDescriptionItem {
+    /**
+     * 智能描述。
+     */
+    Description?: string;
+    /**
+     * 智能描述的可信度，取值范围是 0 到 100。
+     */
+    Confidence?: number;
+    /**
+     * 分段结果。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Paragraphs?: Array<AiParagraphInfo>;
 }
 /**
  * DeleteAnimatedGraphicsTemplate返回参数结构体
@@ -1617,6 +1579,75 @@ export interface AudioTemplateInfoForUpdate {
     StreamSelects?: Array<number | bigint>;
 }
 /**
+ * 工作流信息详情。
+ */
+export interface WorkflowInfo {
+    /**
+     * 工作流 ID。
+     */
+    WorkflowId: number;
+    /**
+     * 工作流名称。
+     */
+    WorkflowName: string;
+    /**
+     * 工作流状态，取值范围：
+  <li>Enabled：已启用，</li>
+  <li>Disabled：已禁用。</li>
+     */
+    Status: string;
+    /**
+     * 工作流绑定的输入规则，当上传视频命中该规则到该对象时即触发工作流。
+     */
+    Trigger: WorkflowTrigger;
+    /**
+     * 媒体处理的文件输出存储位置。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    OutputStorage: TaskOutputStorage;
+    /**
+     * 媒体处理类型任务参数。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MediaProcessTask: MediaProcessTaskInput;
+    /**
+     * 视频内容审核类型任务参数。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AiContentReviewTask: AiContentReviewTaskInput;
+    /**
+     * 视频内容分析类型任务参数。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AiAnalysisTask: AiAnalysisTaskInput;
+    /**
+     * 视频内容识别类型任务参数。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AiRecognitionTask: AiRecognitionTaskInput;
+    /**
+     * 任务的事件通知信息，不填代表不获取事件通知。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TaskNotifyConfig: TaskNotifyConfig;
+    /**
+     * 任务流的优先级，数值越大优先级越高，取值范围是 -10 到 10，不填代表 0。
+     */
+    TaskPriority: number;
+    /**
+     * 媒体处理生成的文件输出的目标目录，如`/movie/201907/`。
+     */
+    OutputDir: string;
+    /**
+     * 工作流创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。
+     */
+    CreateTime: string;
+    /**
+     * 工作流最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。
+     */
+    UpdateTime: string;
+}
+/**
  * 超分配置
  */
 export interface SuperResolutionConfig {
@@ -2513,17 +2544,24 @@ export interface AiRecognitionTaskOcrWordsResultOutput {
     ResultSet: Array<AiRecognitionTaskOcrWordsResultItem>;
 }
 /**
- * 流的统计数据列表。
+ * 分段信息。
  */
-export interface FlowStatisticsArray {
+export interface AiParagraphInfo {
     /**
-     * 时间戳。
+     * 分段摘要
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Timestamp: number;
+    Summary?: string;
     /**
-     * 每个会话的统计数据。
+     * 分段起始时间点，秒
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    FlowStatistics: Array<FlowStatistics>;
+    StartTimeOffset?: number;
+    /**
+     * 分段结束时间点，秒
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    EndTimeOffset?: number;
 }
 /**
  * 音频分离配置
@@ -4191,6 +4229,15 @@ export interface MediaProcessTaskImageSpriteResult {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     FinishTime?: string;
+}
+/**
+ * 智能描述结果信息
+ */
+export interface AiAnalysisTaskDescriptionOutput {
+    /**
+     * 视频智能描述列表。
+     */
+    DescriptionSet: Array<MediaAiAnalysisDescriptionItem>;
 }
 /**
  * DescribeStreamLinkEventAttachedFlows请求参数结构体
@@ -7257,6 +7304,8 @@ export interface AiAnalysisResult {
   <li>Tag：智能标签</li>
   <li>FrameTag：智能按帧标签</li>
   <li>Highlight：智能精彩集锦</li>
+  <li>DeLogo：智能去水印</li>
+  <li>Description：大模型摘要</li>
      */
     Type?: string;
     /**
@@ -7289,6 +7338,11 @@ export interface AiAnalysisResult {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     DeLogoTask?: AiAnalysisTaskDelLogoResult;
+    /**
+     * 视频内容分析摘要任务的查询结果，当任务类型为 Description 时有效。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DescriptionTask?: AiAnalysisTaskDescriptionResult;
 }
 /**
  * 图片水印模板输入参数
@@ -7389,6 +7443,32 @@ export interface AiAnalysisTaskTagInput {
      * 视频智能标签模板 ID。
      */
     Definition: number;
+}
+/**
+ * 智能描述结果类型
+ */
+export interface AiAnalysisTaskDescriptionResult {
+    /**
+     * 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。
+     */
+    Status?: string;
+    /**
+     * 错误码，0：成功，其他值：失败。
+     */
+    ErrCode?: number;
+    /**
+     * 错误信息。
+     */
+    Message?: string;
+    /**
+     * 智能描述任务输入。
+     */
+    Input?: AiAnalysisTaskDescriptionInput;
+    /**
+     * 智能描述任务输出。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Output?: AiAnalysisTaskDescriptionOutput;
 }
 /**
  * ResetWorkflow请求参数结构体
@@ -10329,6 +10409,15 @@ export interface HeadTailParameter {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     TailSet?: Array<MediaInputInfo>;
+}
+/**
+ * 智能分类任务输入类型
+ */
+export interface AiAnalysisTaskDescriptionInput {
+    /**
+     * 视频智能描述模板 ID。
+     */
+    Definition: number;
 }
 /**
  * DescribeTaskDetail返回参数结构体

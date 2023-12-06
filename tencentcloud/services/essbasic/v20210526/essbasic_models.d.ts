@@ -930,7 +930,7 @@ export interface CreateFlowOption {
   **true**：跳过
   **false**：（默认）不跳过，需要传ResourceId
      */
-    SkipUploadFile?: string;
+    SkipUploadFile?: boolean;
 }
 /**
  * ChannelCreateRole请求参数结构体

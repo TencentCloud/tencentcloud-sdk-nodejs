@@ -207,6 +207,11 @@ export interface DeleteSpecifyPrivateZoneVpcResponse {
      */
     AccountVpcSet?: Array<AccountVpcInfo>;
     /**
+     * 唯一id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    UniqId?: string;
+    /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
@@ -319,6 +324,11 @@ export interface AddSpecifyPrivateZoneVpcResponse {
      */
     AccountVpcSet?: Array<AccountVpcInfo>;
     /**
+     * 唯一id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    UniqId?: string;
+    /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
@@ -365,6 +375,10 @@ export interface AddSpecifyPrivateZoneVpcRequest {
      * 本次新增关联账户vpc信息
      */
     AccountVpcSet?: Array<AccountVpcInfo>;
+    /**
+     * 是否为同步操作
+     */
+    Sync?: boolean;
 }
 /**
  * DescribeRequestData请求参数结构体
@@ -605,6 +619,10 @@ export interface DeleteSpecifyPrivateZoneVpcRequest {
      * 本次删除的关联账户VPC
      */
     AccountVpcSet?: Array<AccountVpcInfo>;
+    /**
+     * 是否为同步操作
+     */
+    Sync?: boolean;
 }
 /**
  * SubscribePrivateZoneService请求参数结构体

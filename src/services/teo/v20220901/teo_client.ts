@@ -38,6 +38,7 @@ import {
   VerifyOwnershipRequest,
   DeleteSecurityIPGroupResponse,
   ModifyRuleRequest,
+  OwnershipVerification,
   OriginRecord,
   DescribePrefetchTasksResponse,
   AdvancedFilter,
@@ -86,6 +87,7 @@ import {
   ImageOptimize,
   AliasDomain,
   WebSocket,
+  ModifyAliasDomainRequest,
   AclCondition,
   DescribeAliasDomainsRequest,
   SkipCondition,
@@ -255,7 +257,7 @@ import {
   DeleteZoneRequest,
   SecurityType,
   BotManagedRule,
-  NormalAction,
+  IPRegionInfo,
   TopDetailData,
   DescribeConfigGroupVersionsRequest,
   DescribeOriginGroupRequest,
@@ -276,7 +278,7 @@ import {
   ModifyAliasDomainResponse,
   EntityStatus,
   RewriteAction,
-  ModifyAliasDomainRequest,
+  DescribeIPRegionResponse,
   CheckCnameStatusRequest,
   TopDataRecord,
   DeleteAliasDomainRequest,
@@ -297,7 +299,7 @@ import {
   SubRuleItem,
   CreateSecurityIPGroupResponse,
   CreateSharedCNAMEResponse,
-  OwnershipVerification,
+  NormalAction,
   DescribePurgeTasksResponse,
   DescribeAvailablePlansResponse,
   DescribeDDoSAttackEventRequest,
@@ -317,6 +319,7 @@ import {
   OfflineCache,
   DescribeDDoSAttackTopDataResponse,
   DeleteAliasDomainResponse,
+  DescribeIPRegionRequest,
   ModifyAccelerationDomainStatusesRequest,
   BotConfig,
   TimingTypeValue,
@@ -404,13 +407,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * DescribePurgeTasks 用于查询提交的 URL 刷新、目录刷新记录及执行进度，通过 CreatePurgeTasks 接口提交的任务均可通过此接口进行查询。
+   * 该接口可用于查询 IP 是否为 EdgeOne IP。
    */
-  async DescribePurgeTasks(
-    req: DescribePurgeTasksRequest,
-    cb?: (error: string, rep: DescribePurgeTasksResponse) => void
-  ): Promise<DescribePurgeTasksResponse> {
-    return this.request("DescribePurgeTasks", req, cb)
+  async DescribeIPRegion(
+    req: DescribeIPRegionRequest,
+    cb?: (error: string, rep: DescribeIPRegionResponse) => void
+  ): Promise<DescribeIPRegionResponse> {
+    return this.request("DescribeIPRegion", req, cb)
   }
 
   /**
@@ -1019,6 +1022,16 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
     cb?: (error: string, rep: DescribeRulesResponse) => void
   ): Promise<DescribeRulesResponse> {
     return this.request("DescribeRules", req, cb)
+  }
+
+  /**
+   * DescribePurgeTasks 用于查询提交的 URL 刷新、目录刷新记录及执行进度，通过 CreatePurgeTasks 接口提交的任务均可通过此接口进行查询。
+   */
+  async DescribePurgeTasks(
+    req: DescribePurgeTasksRequest,
+    cb?: (error: string, rep: DescribePurgeTasksResponse) => void
+  ): Promise<DescribePurgeTasksResponse> {
+    return this.request("DescribePurgeTasks", req, cb)
   }
 
   /**

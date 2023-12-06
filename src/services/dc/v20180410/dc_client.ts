@@ -138,7 +138,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 用于创建专用通道的接口
+   * 创建专用通道。
    */
   async CreateDirectConnectTunnel(
     req: CreateDirectConnectTunnelRequest,

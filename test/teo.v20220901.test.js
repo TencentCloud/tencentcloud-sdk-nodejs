@@ -88,9 +88,9 @@ it("teo.v20220901.CreateSecurityIPGroup", async function () {
     }
 })
 
-it("teo.v20220901.DescribePurgeTasks", async function () {
+it("teo.v20220901.DescribeIPRegion", async function () {
     try {
-       const data = await client.DescribePurgeTasks({})
+       const data = await client.DescribeIPRegion({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -691,6 +691,16 @@ it("teo.v20220901.ModifySecurityIPGroup", async function () {
 it("teo.v20220901.DescribeRules", async function () {
     try {
        const data = await client.DescribeRules({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("teo.v20220901.DescribePurgeTasks", async function () {
+    try {
+       const data = await client.DescribePurgeTasks({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

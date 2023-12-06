@@ -520,6 +520,29 @@ export interface ModifyRuleRequest {
 }
 
 /**
+ * 该结构体表示各种场景、模式下，用于验证用户对站点域名的归属权内容。
+ */
+export interface OwnershipVerification {
+  /**
+   * CNAME 接入，使用 DNS 解析验证时所需的信息。详情参考 [站点/域名归属权验证
+](https://cloud.tencent.com/document/product/1552/70789#7af6ecf8-afca-4e35-8811-b5797ed1bde5)。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DnsVerification?: DnsVerification
+  /**
+   * CNAME 接入，使用文件验证时所需的信息。详情参考 [站点/域名归属权验证
+](https://cloud.tencent.com/document/product/1552/70789#7af6ecf8-afca-4e35-8811-b5797ed1bde5)。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FileVerification?: FileVerification
+  /**
+   * NS 接入，切换 DNS 服务器所需的信息。详情参考 [修改 DNS 服务器](https://cloud.tencent.com/document/product/1552/90452)。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NsVerification?: NsVerification
+}
+
+/**
  * 源站组记录
  */
 export interface OriginRecord {
@@ -1620,6 +1643,35 @@ export interface WebSocket {
    * 超时时间，单位为秒，最大超时时间120秒。
    */
   Timeout?: number
+}
+
+/**
+ * ModifyAliasDomain请求参数结构体
+ */
+export interface ModifyAliasDomainRequest {
+  /**
+   * 站点 ID。
+   */
+  ZoneId: string
+  /**
+   * 别称域名名称。
+   */
+  AliasName: string
+  /**
+   * 目标域名名称。
+   */
+  TargetName: string
+  /**
+   * 证书配置，取值有：
+<li> none：不配置；</li>
+<li> hosting：SSL托管证书；</li>
+<li> apply：申请免费证书。</li>不填写保持原有配置。
+   */
+  CertType?: string
+  /**
+   * 当 CertType 取值为 hosting 时填入相应证书 ID。
+   */
+  CertId?: Array<string>
 }
 
 /**
@@ -6367,17 +6419,19 @@ export interface BotManagedRule {
 }
 
 /**
- * 规则引擎常规类型的动作
+ * IP 归属信息查询
  */
-export interface NormalAction {
+export interface IPRegionInfo {
   /**
-   * 功能名称，功能名称填写规范可调用接口 [查询规则引擎的设置参数](https://cloud.tencent.com/document/product/1552/80618) 查看。
+   * IP 地址，IPV4 或 IPV6。
    */
-  Action: string
+  IP?: string
   /**
-   * 参数。
+   * IP 是否属于 EdgeOne 节点，取值有：
+<li>yes：该 IP 属于 EdgeOne 节点；</li>
+<li>no：该 IP 不属于 EdgeOne 节点。</li>
    */
-  Parameters: Array<RuleNormalActionParams>
+  IsEdgeOneIP?: string
 }
 
 /**
@@ -6760,32 +6814,17 @@ export interface RewriteAction {
 }
 
 /**
- * ModifyAliasDomain请求参数结构体
+ * DescribeIPRegion返回参数结构体
  */
-export interface ModifyAliasDomainRequest {
+export interface DescribeIPRegionResponse {
   /**
-   * 站点 ID。
+   * IP 归属信息列表。
    */
-  ZoneId: string
+  IPRegionInfo?: Array<IPRegionInfo>
   /**
-   * 别称域名名称。
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  AliasName: string
-  /**
-   * 目标域名名称。
-   */
-  TargetName: string
-  /**
-   * 证书配置，取值有：
-<li> none：不配置；</li>
-<li> hosting：SSL托管证书；</li>
-<li> apply：申请免费证书。</li>不填写保持原有配置。
-   */
-  CertType?: string
-  /**
-   * 当 CertType 取值为 hosting 时填入相应证书 ID。
-   */
-  CertId?: Array<string>
+  RequestId?: string
 }
 
 /**
@@ -7308,26 +7347,17 @@ export interface CreateSharedCNAMEResponse {
 }
 
 /**
- * 该结构体表示各种场景、模式下，用于验证用户对站点域名的归属权内容。
+ * 规则引擎常规类型的动作
  */
-export interface OwnershipVerification {
+export interface NormalAction {
   /**
-   * CNAME 接入，使用 DNS 解析验证时所需的信息。详情参考 [站点/域名归属权验证
-](https://cloud.tencent.com/document/product/1552/70789#7af6ecf8-afca-4e35-8811-b5797ed1bde5)。
-注意：此字段可能返回 null，表示取不到有效值。
+   * 功能名称，功能名称填写规范可调用接口 [查询规则引擎的设置参数](https://cloud.tencent.com/document/product/1552/80618) 查看。
    */
-  DnsVerification?: DnsVerification
+  Action: string
   /**
-   * CNAME 接入，使用文件验证时所需的信息。详情参考 [站点/域名归属权验证
-](https://cloud.tencent.com/document/product/1552/70789#7af6ecf8-afca-4e35-8811-b5797ed1bde5)。
-注意：此字段可能返回 null，表示取不到有效值。
+   * 参数。
    */
-  FileVerification?: FileVerification
-  /**
-   * NS 接入，切换 DNS 服务器所需的信息。详情参考 [修改 DNS 服务器](https://cloud.tencent.com/document/product/1552/90452)。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  NsVerification?: NsVerification
+  Parameters: Array<RuleNormalActionParams>
 }
 
 /**
@@ -7789,6 +7819,16 @@ export interface DeleteAliasDomainResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeIPRegion请求参数结构体
+ */
+export interface DescribeIPRegionRequest {
+  /**
+   * 待查询的 IP 列表，支持 IPV4 和 IPV6，最大可查询 100 条。
+   */
+  IPs: Array<string>
 }
 
 /**

@@ -72,10 +72,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateSecurityIPGroup", req, cb);
     }
     /**
-     * DescribePurgeTasks 用于查询提交的 URL 刷新、目录刷新记录及执行进度，通过 CreatePurgeTasks 接口提交的任务均可通过此接口进行查询。
+     * 该接口可用于查询 IP 是否为 EdgeOne IP。
      */
-    async DescribePurgeTasks(req, cb) {
-        return this.request("DescribePurgeTasks", req, cb);
+    async DescribeIPRegion(req, cb) {
+        return this.request("DescribeIPRegion", req, cb);
     }
     /**
      * 用于修改站点配置
@@ -444,6 +444,12 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
      */
     async DescribeRules(req, cb) {
         return this.request("DescribeRules", req, cb);
+    }
+    /**
+     * DescribePurgeTasks 用于查询提交的 URL 刷新、目录刷新记录及执行进度，通过 CreatePurgeTasks 接口提交的任务均可通过此接口进行查询。
+     */
+    async DescribePurgeTasks(req, cb) {
+        return this.request("DescribePurgeTasks", req, cb);
     }
     /**
      * 创建应用代理

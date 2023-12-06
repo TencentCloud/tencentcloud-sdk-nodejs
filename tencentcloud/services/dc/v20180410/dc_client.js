@@ -59,7 +59,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyDirectConnectAttribute", req, cb);
     }
     /**
-     * 用于创建专用通道的接口
+     * 创建专用通道。
      */
     async CreateDirectConnectTunnel(req, cb) {
         return this.request("CreateDirectConnectTunnel", req, cb);

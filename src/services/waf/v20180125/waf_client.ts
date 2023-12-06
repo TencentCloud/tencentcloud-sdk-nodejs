@@ -193,6 +193,7 @@ import {
   DeleteAttackDownloadRecordResponse,
   DescribeFlowTrendRequest,
   DescribeWafAutoDenyStatusRequest,
+  MiniPkg,
   AddDomainWhiteRuleResponse,
   DescribeIpAccessControlResponse,
   ModifyProtectionStatusRequest,

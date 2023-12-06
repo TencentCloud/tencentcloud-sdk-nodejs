@@ -1792,7 +1792,7 @@ export interface UpdateAlertRuleResponse {
     /**
      * 规则 ID
      */
-    RuleId: string;
+    RuleId?: string;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2726,11 +2726,11 @@ export interface UpdateRecordingRuleRequest {
      */
     Group: string;
     /**
-     * Prometheus 实例 ID
+     * Prometheus 实例 ID(可通过 DescribePrometheusInstances 接口获取)
      */
     InstanceId: string;
     /**
-     * Prometheus 聚合规则 ID
+     * Prometheus 聚合规则 ID(可通过 DescribeRecordingRules 接口获取)
      */
     RuleId: string;
     /**
@@ -3679,18 +3679,18 @@ export interface DescribeExporterIntegrationsRequest {
      */
     InstanceId: string;
     /**
-     * Kubernetes 集群类型，取值如下：
+     * Kubernetes 集群类型，可不填。取值如下：
   <li> 1= 容器集群(TKE) </li>
-  <li> 2=弹性集群<EKS> </li>
-  <li> 3= Prometheus管理的弹性集群<MEKS> </li>
+  <li> 2=弹性集群(EKS) </li>
+  <li> 3= Prometheus管理的弹性集群(MEKS) </li>
      */
     KubeType?: number;
     /**
-     * 集群 ID
+     * 集群 ID，可不填
      */
     ClusterId?: string;
     /**
-     * 类型
+     * 类型(不填返回全部集成。可通过 DescribePrometheusIntegrations 接口获取，取每一项中的 ExporterType 字段)
      */
     Kind?: string;
     /**
@@ -3893,19 +3893,19 @@ export interface DescribePrometheusClusterAgentsResponse {
  */
 export interface UpdatePrometheusScrapeJobRequest {
     /**
-     * Prometheus 实例 ID，例如：prom-abcd1234
+     * Prometheus 实例 ID(可通过 DescribePrometheusInstances 接口获取)
      */
     InstanceId: string;
     /**
-     * Agent ID，例如：agent-abcd1234，可在控制台 Agent 管理中获取
+     * Agent ID(可通过DescribePrometheusAgents 接口获取)
      */
     AgentId: string;
     /**
-     * 抓取任务 ID，例如：job-abcd1234，可在控制台 Agent 管理-抓取任务配置中获取
+     * 抓取任务 ID(可通过 DescribePrometheusScrapeJobs 接口获取)
      */
     JobId: string;
     /**
-     * 抓取任务配置，格式：job_name:xx
+     * 抓取任务配置
      */
     Config: string;
 }
@@ -3914,15 +3914,15 @@ export interface UpdatePrometheusScrapeJobRequest {
  */
 export interface PrometheusAgentInfo {
     /**
-     * 集群类型
+     * 集群类型。可填入tke、eks、tkeedge、tdcc，分别代表标准集群、弹性集群、边缘集群、注册集群
      */
     ClusterType: string;
     /**
-     * 集群id
+     * 集成容器服务中关联的集群ID
      */
     ClusterId: string;
     /**
-     * 备注
+     * 该参数未使用，不需要填写
      */
     Describe?: string;
 }
@@ -4050,7 +4050,7 @@ export interface UpdateRecordingRuleResponse {
      * 规则 ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    RuleId: string;
+    RuleId?: string;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -4171,7 +4171,7 @@ export interface CreateGrafanaInstanceResponse {
  */
 export interface UpdateAlertRuleRequest {
     /**
-     * Prometheus 报警规则 ID
+     * Prometheus 高警规则 ID
      */
     RuleId: string;
     /**
@@ -4187,19 +4187,19 @@ export interface UpdateAlertRuleRequest {
      */
     RuleState: number;
     /**
-     * 报警规则名称
+     * 告警规则名称
      */
     RuleName: string;
     /**
-     * 报警规则表达式
+     * 告警规则表达式
      */
     Expr: string;
     /**
-     * 报警规则持续时间
+     * 告警规则持续时间
      */
     Duration: string;
     /**
-     * 报警规则接收组列表
+     * 告警规则接收组列表(当前规则绑定的接收组列表可通过 DescribeAlertRules 接口获取；用户已有的接收组列表可通过 DescribeAlarmNotices 接口获取)
      */
     Receivers: Array<string>;
     /**
@@ -4213,7 +4213,7 @@ export interface UpdateAlertRuleRequest {
      */
     Annotations?: Array<PrometheusRuleKV>;
     /**
-     * 报警策略模板分类
+     * 报警策略模板分类(自定义，可不填)
      */
     Type?: string;
 }
@@ -4362,7 +4362,7 @@ export interface DescribeDNSConfigResponse {
  */
 export interface DeleteRecordingRulesRequest {
     /**
-     * 规则 ID 列表
+     * 规则 ID 列表(规则 ID 可通过 DescribeRecordingRules 接口获取)
      */
     RuleIds: Array<string>;
     /**
@@ -7460,26 +7460,26 @@ export interface RunPrometheusInstanceResponse {
  */
 export interface UpdateExporterIntegrationRequest {
     /**
-     * 实例 ID
+     * Prometheus 实例 ID
      */
     InstanceId: string;
     /**
-     * 类型
+     * 类型(可通过 DescribeExporterIntegrations 获取对应集成的 Kind)
      */
     Kind: string;
     /**
-     * 配置内容
+     * 配置内容(可通过 DescribeExporterIntegrations 接口获取对应集成的 Content，并在此基础上做修改)
      */
     Content: string;
     /**
-     * Kubernetes 集群类型，取值如下：
+     * Kubernetes 集群类型，可不填。取值如下：
   <li> 1= 容器集群(TKE) </li>
-  <li> 2=弹性集群<EKS> </li>
-  <li> 3= Prometheus管理的弹性集群<MEKS> </li>
+  <li> 2=弹性集群(EKS) </li>
+  <li> 3= Prometheus管理的弹性集群(MEKS) </li>
      */
     KubeType?: number;
     /**
-     * 集群 ID
+     * 集群 ID，可不填
      */
     ClusterId?: string;
 }

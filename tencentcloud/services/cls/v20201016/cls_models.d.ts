@@ -1194,7 +1194,7 @@ export interface ScheduledSqlResouceInfo {
      */
     MetricNames?: Array<string>;
     /**
-     * 指标标签，从SQL结果字段中选择，一般是分组(group by) 的字段。
+     * 指标维度，不接受时间类型。
      */
     MetricLabels?: Array<string>;
     /**
@@ -1202,7 +1202,8 @@ export interface ScheduledSqlResouceInfo {
      */
     CustomTime?: string;
     /**
-     * 除了MetricLabels，您还可以使用该参数，为指标补充静态的标签。
+     * 除了MetricLabels，您还可以使用该参数，为指标补充静态的维度。
+  维度名以字母或下划线开头，后面可以跟字母、数字或下划线，长度小于等于1024 字节
      */
     CustomMetricLabels?: Array<MetricLabel>;
 }
@@ -6407,7 +6408,7 @@ export interface CreateScheduledSqlRequest {
      */
     ProcessPeriod: number;
     /**
-     * 单次查询的时间窗口
+     * 单次查询的时间窗口,如果您的目标主题为指标主题，建议该参数的大小不超过30分钟，否则可能转指标失败。
      */
     ProcessTimeWindow: string;
     /**

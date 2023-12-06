@@ -26,7 +26,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeBindingPolicyObjectList(req: DescribeBindingPolicyObjectListRequest, cb?: (error: string, rep: DescribeBindingPolicyObjectListResponse) => void): Promise<DescribeBindingPolicyObjectListResponse>;
     /**
-     * 更新 Prometheus 的报警规则。
+     * 更新 Prometheus 的告警规则。
 
 请注意，**告警对象和告警消息是 Prometheus Rule Annotations 的特殊字段，需要通过 annotations 来传递，对应的 Key 分别为summary/description**，，请参考 [Prometheus Rule更多配置请参考](https://prometheus.io/docs/prometheus/latest/configuration/alerting_rules/)。
      */
@@ -190,7 +190,7 @@ export declare class Client extends AbstractClient {
      */
     UpdateExporterIntegration(req: UpdateExporterIntegrationRequest, cb?: (error: string, rep: UpdateExporterIntegrationResponse) => void): Promise<UpdateExporterIntegrationResponse>;
     /**
-     * 更新 Prometheus 抓取任务
+     * 更新 Prometheus Agent 抓取任务
      */
     UpdatePrometheusScrapeJob(req: UpdatePrometheusScrapeJobRequest, cb?: (error: string, rep: UpdatePrometheusScrapeJobResponse) => void): Promise<UpdatePrometheusScrapeJobResponse>;
     /**
@@ -363,7 +363,7 @@ export declare class Client extends AbstractClient {
      */
     RunPrometheusInstance(req: RunPrometheusInstanceRequest, cb?: (error: string, rep: RunPrometheusInstanceResponse) => void): Promise<RunPrometheusInstanceResponse>;
     /**
-     * 查询 exporter 集成列表
+     * 查询集成中心 exporter 集成列表
      */
     DescribeExporterIntegrations(req: DescribeExporterIntegrationsRequest, cb?: (error: string, rep: DescribeExporterIntegrationsResponse) => void): Promise<DescribeExporterIntegrationsResponse>;
     /**

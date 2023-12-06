@@ -8493,6 +8493,18 @@ export interface DescribeDsFolderTreeRequest {
      * 是否包含虚拟任务，当 IncludeTask 为 true 的时候，该参数才生效，默认为 true
      */
     IncludeVirtualTask?: boolean;
+    /**
+     * 任务目录id
+     */
+    TaskFolderId?: string;
+    /**
+     * classification.分类展示  catalog.目录展示
+     */
+    DisplayType?: string;
+    /**
+     * 是否包含任务目录
+     */
+    IncludeTaskFolder?: boolean;
 }
 /**
  * BatchDeleteIntegrationTasks请求参数结构体
@@ -9133,6 +9145,10 @@ export interface DescribeDsParentFolderTreeRequest {
      * 任务id
      */
     TaskId?: string;
+    /**
+     *  classification:分类展示  catalog:目录展示
+     */
+    DisplayType?: string;
 }
 /**
  * KillScheduleInstances返回参数结构体

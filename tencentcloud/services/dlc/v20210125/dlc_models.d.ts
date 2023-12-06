@@ -1739,6 +1739,11 @@ export interface TableResponseInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     MapMaterializedViewName?: string;
+    /**
+     * 访问热点
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    HeatValue?: number;
 }
 /**
  * ModifyUserType返回参数结构体
@@ -1948,25 +1953,25 @@ export interface ModifyUserRequest {
  */
 export interface LakeFileSystemToken {
     /**
-     * Token使用的临时秘钥的ID
+     * Token使用的临时密钥的ID
      */
-    SecretId: string;
+    SecretId?: string;
     /**
-     * Token使用的临时秘钥
+     * Token使用的临时密钥
      */
-    SecretKey: string;
+    SecretKey?: string;
     /**
      * Token信息
      */
-    Token: string;
+    Token?: string;
     /**
      * 过期时间
      */
-    ExpiredTime: number;
+    ExpiredTime?: number;
     /**
      * 颁布时间
      */
-    IssueTime: number;
+    IssueTime?: number;
 }
 /**
  * AddDMSPartitions返回参数结构体
@@ -2184,7 +2189,7 @@ export interface DataEngineConfigInstanceInfo {
      */
     DataEngineConfigPairs?: Array<DataEngineConfigPair>;
     /**
-     * 作业集群资源参数配置模版
+     * 作业集群资源参数配置模板
      */
     SessionResourceTemplate?: SessionResourceTemplate;
 }
@@ -2215,51 +2220,51 @@ export interface NotebookSessions {
     /**
      * 类型，当前支持：spark、pyspark、sparkr、sql
      */
-    Kind: string;
+    Kind?: string;
     /**
      * Session唯一标识
      */
-    SessionId: string;
+    SessionId?: string;
     /**
      * 代理用户，默认为root
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ProxyUser: string;
+    ProxyUser?: string;
     /**
      * Session状态，包含：not_started（未启动）、starting（已启动）、idle（等待输入）、busy(正在运行statement)、shutting_down（停止）、error（异常）、dead（已退出）、killed（被杀死）、success（正常停止）
      */
-    State: string;
+    State?: string;
     /**
      * Spark任务返回的AppId
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SparkAppId: string;
+    SparkAppId?: string;
     /**
      * Session名称
      */
-    Name: string;
+    Name?: string;
     /**
      * Session创建时间
      */
-    CreateTime: string;
+    CreateTime?: string;
     /**
      * 引擎名称
      */
-    DataEngineName: string;
+    DataEngineName?: string;
     /**
      * 最新的运行时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    LastRunningTime: string;
+    LastRunningTime?: string;
     /**
      * 创建者
      */
-    Creator: string;
+    Creator?: string;
     /**
      * spark ui地址
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SparkUiUrl: string;
+    SparkUiUrl?: string;
 }
 /**
  * CreateNotebookSessionStatementSupportBatchSQL请求参数结构体
@@ -4103,92 +4108,92 @@ export interface NotebookSessionInfo {
     /**
      * Session名称
      */
-    Name: string;
+    Name?: string;
     /**
      * 类型，当前支持：spark、pyspark、sparkr、sql
      */
-    Kind: string;
+    Kind?: string;
     /**
      * DLC Spark作业引擎名称
      */
-    DataEngineName: string;
+    DataEngineName?: string;
     /**
      * Session相关配置，当前支持：eni、roleArn以及用户指定的配置
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Arguments: Array<KVPair>;
+    Arguments?: Array<KVPair>;
     /**
      * 运行程序地址，当前支持：cosn://和lakefs://两种路径
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ProgramDependentFiles: Array<string>;
+    ProgramDependentFiles?: Array<string>;
     /**
      * 依赖的jar程序地址，当前支持：cosn://和lakefs://两种路径
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ProgramDependentJars: Array<string>;
+    ProgramDependentJars?: Array<string>;
     /**
      * 依赖的python程序地址，当前支持：cosn://和lakefs://两种路径
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ProgramDependentPython: Array<string>;
+    ProgramDependentPython?: Array<string>;
     /**
      * 依赖的pyspark虚拟环境地址，当前支持：cosn://和lakefs://两种路径
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ProgramArchives: Array<string>;
+    ProgramArchives?: Array<string>;
     /**
      * 指定的Driver规格，当前支持：small（默认，1cu）、medium（2cu）、large（4cu）、xlarge（8cu）
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DriverSize: string;
+    DriverSize?: string;
     /**
      * 指定的Executor规格，当前支持：small（默认，1cu）、medium（2cu）、large（4cu）、xlarge（8cu）
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ExecutorSize: string;
+    ExecutorSize?: string;
     /**
      * 指定的Executor数量，默认为1
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ExecutorNumbers: number;
+    ExecutorNumbers?: number;
     /**
      * 代理用户，默认为root
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ProxyUser: string;
+    ProxyUser?: string;
     /**
      * 指定的Session超时时间，单位秒，默认3600秒
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TimeoutInSecond: number;
+    TimeoutInSecond?: number;
     /**
      * Spark任务返回的AppId
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SparkAppId: string;
+    SparkAppId?: string;
     /**
      * Session唯一标识
      */
-    SessionId: string;
+    SessionId?: string;
     /**
      * Session状态，包含：not_started（未启动）、starting（已启动）、idle（等待输入）、busy(正在运行statement)、shutting_down（停止）、error（异常）、dead（已退出）、killed（被杀死）、success（正常停止）
      */
-    State: string;
+    State?: string;
     /**
      * Session创建时间
      */
-    CreateTime: string;
+    CreateTime?: string;
     /**
      * 其它信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    AppInfo: Array<KVPair>;
+    AppInfo?: Array<KVPair>;
     /**
      * Spark ui地址
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SparkUiUrl: string;
+    SparkUiUrl?: string;
     /**
      * 指定的Executor数量（最大值），默认为1，当开启动态分配有效，若未开启，则该值等于ExecutorNumbers
   注意：此字段可能返回 null，表示取不到有效值。
@@ -7563,6 +7568,11 @@ export interface TaskResponseInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     PrestoMonitorMetrics?: PrestoMonitorMetrics;
+    /**
+     * 结果文件格式：默认为csv
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ResultFormat?: string;
 }
 /**
  * DescribeStoreLocation返回参数结构体
