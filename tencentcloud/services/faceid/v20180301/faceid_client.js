@@ -95,6 +95,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("BankCardVerification", req, cb);
     }
     /**
+     * 传入照片和身份信息，判断该照片与权威库的证件照是否属于同一个人。
+     */
+    async ImageRecognitionV2(req, cb) {
+        return this.request("ImageRecognitionV2", req, cb);
+    }
+    /**
      * 传入视频和照片，先判断视频中是否为真人，判断为真人后，再判断该视频中的人与上传照片是否属于同一个人。
      */
     async LivenessCompare(req, cb) {

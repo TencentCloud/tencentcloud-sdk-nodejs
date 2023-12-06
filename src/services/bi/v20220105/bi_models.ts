@@ -371,6 +371,11 @@ export interface EmbedTokenInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   UserId?: string
+  /**
+   * 访问次数限制，限制范围1-99999，为空则不设置访问次数限制
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TicketNum?: number
 }
 
 /**
@@ -693,6 +698,10 @@ export interface CreateEmbedTokenRequest {
    * 使用者Id(仅用于多用户)
    */
   UserId?: string
+  /**
+   * 访问次数限制，限制范围1-99999，为空则不设置访问次数限制
+   */
+  TicketNum?: number
 }
 
 /**
@@ -964,6 +973,10 @@ export interface ModifyDatasourceCloudRequest {
    * 第三方数据源id
    */
   DataOriginDatasourceId?: string
+  /**
+   * 集群id
+   */
+  ClusterId?: string
 }
 
 /**
@@ -2003,6 +2016,10 @@ export interface CreateDatasourceCloudRequest {
    * 第三方数据源id
    */
   DataOriginDatasourceId?: string
+  /**
+   * 集群id
+   */
+  ClusterId?: string
 }
 
 /**

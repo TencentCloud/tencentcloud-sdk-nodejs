@@ -60,6 +60,27 @@ export interface IdCardVerificationRequest {
     Encryption?: Encryption;
 }
 /**
+ * ImageRecognitionV2返回参数结构体
+ */
+export interface ImageRecognitionV2Response {
+    /**
+     * 相似度，取值范围 [0.00, 100.00]。推荐相似度大于等于70时可判断为同一人，可根据具体场景自行调整阈值（阈值70的误通过率为千分之一，阈值80的误通过率是万分之一）
+     */
+    Sim?: number;
+    /**
+     * 业务错误码，成功情况返回Success, 错误情况请参考下方错误码 列表中FailedOperation部分
+     */
+    Result?: string;
+    /**
+     * 业务结果描述。
+     */
+    Description?: string;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * GetDetectInfoEnhanced返回参数结构体
  */
 export interface GetDetectInfoEnhancedResponse {
@@ -1502,31 +1523,29 @@ export interface PhoneVerificationCMCCResponse {
     RequestId?: string;
 }
 /**
- * LivenessRecognition返回参数结构体
+ * MobileNetworkTimeVerification返回参数结构体
  */
-export interface LivenessRecognitionResponse {
+export interface MobileNetworkTimeVerificationResponse {
     /**
-     * 验证通过后的视频最佳截图照片，照片为BASE64编码后的值，jpg格式。
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 认证结果码，收费情况如下。
+  收费结果码：
+  0: 成功
+  -2: 手机号不存在
+  -3: 手机号存在，但无法查询到在网时长
+  不收费结果码：
+  -1: 手机号格式不正确
+  -4: 验证中心服务繁忙
      */
-    BestFrameBase64?: string;
-    /**
-     * 相似度，取值范围 [0.00, 100.00]。推荐相似度大于等于70时可判断为同一人，可根据具体场景自行调整阈值（阈值70的误通过率为千分之一，阈值80的误通过率是万分之一）
-     */
-    Sim?: number;
-    /**
-     * 业务错误码，成功情况返回Success, 错误情况请参考下方错误码 列表中FailedOperation部分
-     */
-    Result?: string;
+    Result: string;
     /**
      * 业务结果描述。
      */
-    Description?: string;
+    Description: string;
     /**
-     * 最佳截图列表，仅在配置了返回多张最佳截图时返回。
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 在网时长区间。
+  格式为(a,b]，表示在网时长在a个月以上，b个月以下。若b为+时表示没有上限。
      */
-    BestFrameList?: Array<string>;
+    Range: string;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2027,6 +2046,61 @@ export interface GetDetectInfoResponse {
     RequestId?: string;
 }
 /**
+ * IdCardOCRVerification返回参数结构体
+ */
+export interface IdCardOCRVerificationResponse {
+    /**
+     * 认证结果码，收费情况如下。
+  收费结果码：
+  0: 姓名和身份证号一致
+  -1: 姓名和身份证号不一致
+  不收费结果码：
+  -2: 非法身份证号（长度、校验位等不正确）
+  -3: 非法姓名（长度、格式等不正确）
+  -4: 证件库服务异常
+  -5: 证件库中无此身份证记录
+  -6: 权威比对系统升级中，请稍后再试
+  -7: 认证次数超过当日限制
+     */
+    Result: string;
+    /**
+     * 业务结果描述。
+     */
+    Description: string;
+    /**
+     * 用于验证的姓名
+     */
+    Name: string;
+    /**
+     * 用于验证的身份证号
+     */
+    IdCard: string;
+    /**
+     * OCR得到的性别
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Sex: string;
+    /**
+     * OCR得到的民族
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Nation: string;
+    /**
+     * OCR得到的生日
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Birth: string;
+    /**
+     * OCR得到的地址
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Address: string;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * IdCardVerification返回参数结构体
  */
 export interface IdCardVerificationResponse {
@@ -2097,29 +2171,31 @@ export interface GetDetectInfoEnhancedRequest {
     IsEncryptResponse?: boolean;
 }
 /**
- * MobileNetworkTimeVerification返回参数结构体
+ * LivenessRecognition返回参数结构体
  */
-export interface MobileNetworkTimeVerificationResponse {
+export interface LivenessRecognitionResponse {
     /**
-     * 认证结果码，收费情况如下。
-  收费结果码：
-  0: 成功
-  -2: 手机号不存在
-  -3: 手机号存在，但无法查询到在网时长
-  不收费结果码：
-  -1: 手机号格式不正确
-  -4: 验证中心服务繁忙
+     * 验证通过后的视频最佳截图照片，照片为BASE64编码后的值，jpg格式。
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Result: string;
+    BestFrameBase64?: string;
+    /**
+     * 相似度，取值范围 [0.00, 100.00]。推荐相似度大于等于70时可判断为同一人，可根据具体场景自行调整阈值（阈值70的误通过率为千分之一，阈值80的误通过率是万分之一）
+     */
+    Sim?: number;
+    /**
+     * 业务错误码，成功情况返回Success, 错误情况请参考下方错误码 列表中FailedOperation部分
+     */
+    Result?: string;
     /**
      * 业务结果描述。
      */
-    Description: string;
+    Description?: string;
     /**
-     * 在网时长区间。
-  格式为(a,b]，表示在网时长在a个月以上，b个月以下。若b为+时表示没有上限。
+     * 最佳截图列表，仅在配置了返回多张最佳截图时返回。
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Range: string;
+    BestFrameList?: Array<string>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2360,59 +2436,31 @@ export interface BankCard2EVerificationRequest {
     Encryption?: Encryption;
 }
 /**
- * IdCardOCRVerification返回参数结构体
+ * ImageRecognitionV2请求参数结构体
  */
-export interface IdCardOCRVerificationResponse {
+export interface ImageRecognitionV2Request {
     /**
-     * 认证结果码，收费情况如下。
-  收费结果码：
-  0: 姓名和身份证号一致
-  -1: 姓名和身份证号不一致
-  不收费结果码：
-  -2: 非法身份证号（长度、校验位等不正确）
-  -3: 非法姓名（长度、格式等不正确）
-  -4: 证件库服务异常
-  -5: 证件库中无此身份证记录
-  -6: 权威比对系统升级中，请稍后再试
-  -7: 认证次数超过当日限制
-     */
-    Result: string;
-    /**
-     * 业务结果描述。
-     */
-    Description: string;
-    /**
-     * 用于验证的姓名
-     */
-    Name: string;
-    /**
-     * 用于验证的身份证号
+     * 身份证号
      */
     IdCard: string;
     /**
-     * OCR得到的性别
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 姓名。中文请使用UTF-8编码。
      */
-    Sex: string;
+    Name: string;
     /**
-     * OCR得到的民族
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 用于人脸比对的照片，图片的Base64值；
+  Base64编码后的图片数据大小不超过3M，仅支持jpg、png格式。
+  请使用标准的Base64编码方式(带=补位)，编码规范参考RFC4648。
      */
-    Nation: string;
+    ImageBase64: string;
     /**
-     * OCR得到的生日
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 本接口不需要传递此参数。
      */
-    Birth: string;
+    Optional?: string;
     /**
-     * OCR得到的地址
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 敏感数据加密信息。对传入信息（姓名、身份证号）有加密需求的用户可使用此参数，详情请点击左侧链接。
      */
-    Address: string;
-    /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
+    Encryption?: Encryption;
 }
 /**
  * PhoneVerificationCTCC返回参数结构体

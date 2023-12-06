@@ -21,6 +21,7 @@ import {
   AttackRiskDetail,
   CheckIdNameDateResponse,
   IdCardVerificationRequest,
+  ImageRecognitionV2Response,
   GetDetectInfoEnhancedResponse,
   IntentionQuestionResult,
   RuleIdConfig,
@@ -66,7 +67,7 @@ import {
   Encryption,
   MobileNetworkTimeVerificationRequest,
   PhoneVerificationCMCCResponse,
-  LivenessRecognitionResponse,
+  MobileNetworkTimeVerificationResponse,
   PhoneVerificationCUCCResponse,
   CheckIdCardInformationRequest,
   GetEidTokenConfig,
@@ -78,9 +79,10 @@ import {
   DetectInfoText,
   ImageRecognitionResponse,
   GetDetectInfoResponse,
+  IdCardOCRVerificationResponse,
   IdCardVerificationResponse,
   GetDetectInfoEnhancedRequest,
-  MobileNetworkTimeVerificationResponse,
+  LivenessRecognitionResponse,
   GetLiveCodeRequest,
   GetEidResultResponse,
   WeChatBillDetail,
@@ -90,7 +92,7 @@ import {
   GetFaceIdTokenRequest,
   IntentionActionResult,
   BankCard2EVerificationRequest,
-  IdCardOCRVerificationResponse,
+  ImageRecognitionV2Request,
   PhoneVerificationCTCCResponse,
   ChargeDetail,
   ParseNfcDataRequest,
@@ -224,6 +226,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: BankCardVerificationResponse) => void
   ): Promise<BankCardVerificationResponse> {
     return this.request("BankCardVerification", req, cb)
+  }
+
+  /**
+   * 传入照片和身份信息，判断该照片与权威库的证件照是否属于同一个人。
+   */
+  async ImageRecognitionV2(
+    req: ImageRecognitionV2Request,
+    cb?: (error: string, rep: ImageRecognitionV2Response) => void
+  ): Promise<ImageRecognitionV2Response> {
+    return this.request("ImageRecognitionV2", req, cb)
   }
 
   /**

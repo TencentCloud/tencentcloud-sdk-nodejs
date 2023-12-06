@@ -128,6 +128,16 @@ it("faceid.v20180301.BankCardVerification", async function () {
     }
 })
 
+it("faceid.v20180301.ImageRecognitionV2", async function () {
+    try {
+       const data = await client.ImageRecognitionV2({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("faceid.v20180301.LivenessCompare", async function () {
     try {
        const data = await client.LivenessCompare({})
