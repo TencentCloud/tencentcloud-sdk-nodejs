@@ -85,6 +85,12 @@ export interface ModifyApmInstanceRequest {
      * 用户自定义展示标签列表
      */
     CustomShowTags?: Array<string>;
+    /**
+     * 修改计费模式
+  1为预付费
+  0为按量付费
+     */
+    PayMode?: number;
 }
 /**
  * apm实例信息
@@ -223,6 +229,18 @@ export interface ApmInstanceDetail {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     CustomShowTags?: Array<string>;
+    /**
+     * 实例计费模式
+  1为预付费
+  0为按量付费
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PayMode?: number;
+    /**
+     * 实例计费模式是否生效
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PayModeEffective?: boolean;
 }
 /**
  * CreateApmInstance请求参数结构体
@@ -248,6 +266,10 @@ export interface CreateApmInstanceRequest {
      * 实例上报额度值
      */
     SpanDailyCounters?: number;
+    /**
+     * 实例的计费模式
+     */
+    PayMode?: number;
 }
 /**
  * DescribeServiceOverview返回参数结构体
@@ -831,7 +853,7 @@ export interface CreateApmInstanceResponse {
      * 实例ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    InstanceId: string;
+    InstanceId?: string;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */

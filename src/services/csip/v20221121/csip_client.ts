@@ -35,7 +35,6 @@ import {
   StopRiskCenterTaskRequest,
   DataSearchBug,
   AssetTag,
-  RiskCenterStatusKey,
   DescribeVULRiskAdvanceCFGListRequest,
   DescribeRiskCenterAssetViewCFGRiskListRequest,
   DescribeDomainAssetsRequest,
@@ -43,6 +42,7 @@ import {
   DeleteDomainAndIpRequest,
   DescribeScanTaskListRequest,
   TaskIdListKey,
+  GateWayAsset,
   DescribeRiskCenterWebsiteRiskListResponse,
   DescribeScanReportListResponse,
   DescribeSearchBugInfoRequest,
@@ -56,7 +56,7 @@ import {
   DescribeSubnetAssetsResponse,
   DescribeRiskCenterAssetViewPortRiskListRequest,
   StopRiskCenterTaskResponse,
-  ServerRisk,
+  RiskCenterStatusKey,
   TaskAssetObject,
   IpAssetListVO,
   FilterDataObject,
@@ -92,10 +92,12 @@ import {
   DescribeSubnetAssetsRequest,
   DescribeClusterPodAssetsResponse,
   AssetBaseInfoResponse,
+  DescribeGatewayAssetsResponse,
   AssetViewPortRisk,
   DescribeRiskCenterPortViewPortRiskListRequest,
   DescribeRiskCenterPortViewPortRiskListResponse,
   DeleteDomainAndIpResponse,
+  ServerRisk,
   ReportTaskIdList,
   AddNewBindRoleUserResponse,
   WhereFilter,
@@ -119,6 +121,7 @@ import {
   DescribeRiskCenterServerRiskListResponse,
   DescribeListenerListRequest,
   DeleteRiskScanTaskResponse,
+  DescribeGatewayAssetsRequest,
   ModifyRiskCenterRiskStatusResponse,
   DescribeTaskLogListRequest,
   DescribeRiskCenterAssetViewPortRiskListResponse,
@@ -312,6 +315,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateRiskCenterScanTaskResponse) => void
   ): Promise<CreateRiskCenterScanTaskResponse> {
     return this.request("CreateRiskCenterScanTask", req, cb)
+  }
+
+  /**
+   * 获取网关列表
+   */
+  async DescribeGatewayAssets(
+    req: DescribeGatewayAssetsRequest,
+    cb?: (error: string, rep: DescribeGatewayAssetsResponse) => void
+  ): Promise<DescribeGatewayAssetsResponse> {
+    return this.request("DescribeGatewayAssets", req, cb)
   }
 
   /**

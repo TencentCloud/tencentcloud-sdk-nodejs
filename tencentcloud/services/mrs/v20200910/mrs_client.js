@@ -48,6 +48,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("TextToObject", req, cb);
     }
     /**
+     * 医疗报告图片脱敏接口
+     */
+    async ImageMask(req, cb) {
+        return this.request("ImageMask", req, cb);
+    }
+    /**
      * 图片转结构化对象
      */
     async ImageToObject(req, cb) {

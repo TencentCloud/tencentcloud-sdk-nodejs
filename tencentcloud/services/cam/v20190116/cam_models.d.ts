@@ -32,7 +32,7 @@ export interface SubAccountUser {
      */
     LastLoginIp: string;
     /**
-     * 最近登录时间
+     * 最近登录时间，回参为空，即为未登录过控制台
   注意：此字段可能返回 null，表示取不到有效值。
      */
     LastLoginTime: string;
@@ -3266,7 +3266,7 @@ export interface DescribeSubAccountsResponse {
     /**
      * 子用户列表
      */
-    SubAccounts: Array<SubAccountUser>;
+    SubAccounts?: Array<SubAccountUser>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */

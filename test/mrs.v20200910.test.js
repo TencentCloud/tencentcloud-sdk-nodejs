@@ -48,6 +48,16 @@ it("mrs.v20200910.TextToObject", async function () {
     }
 })
 
+it("mrs.v20200910.ImageMask", async function () {
+    try {
+       const data = await client.ImageMask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mrs.v20200910.ImageToObject", async function () {
     try {
        const data = await client.ImageToObject({})

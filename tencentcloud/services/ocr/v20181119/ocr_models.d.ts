@@ -5086,57 +5086,63 @@ export interface TextVehicleBack {
      * 号牌号码
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    PlateNo: string;
+    PlateNo?: string;
     /**
      * 档案编号
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    FileNo: string;
+    FileNo?: string;
     /**
      * 核定人数
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    AllowNum: string;
+    AllowNum?: string;
     /**
      * 总质量
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TotalMass: string;
+    TotalMass?: string;
     /**
      * 整备质量
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CurbWeight: string;
+    CurbWeight?: string;
     /**
      * 核定载质量
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    LoadQuality: string;
+    LoadQuality?: string;
     /**
      * 外廓尺寸
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ExternalSize: string;
+    ExternalSize?: string;
     /**
      * 备注
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Marks: string;
+    Marks?: string;
     /**
      * 检验记录
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Record: string;
+    Record?: string;
     /**
      * 准牵引总质量
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TotalQuasiMass: string;
+    TotalQuasiMass?: string;
     /**
      * 副页编码
   注意：此字段可能返回 null，表示取不到有效值。
      */
     SubPageCode?: string;
+    /**
+     * 燃料种类
+  
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    FuelType?: string;
 }
 /**
  * RecognizeIndonesiaIDCardOCR返回参数结构体

@@ -22,6 +22,7 @@ import {
   LastMenstrualPeriodBlock,
   Vaccination,
   TimelineEvent,
+  ImageMaskResponse,
   IHCBlock,
   GynaecologyVagina,
   BodyTemperatureBlock,
@@ -86,6 +87,7 @@ import {
   TransfusionHistoryBlock,
   MolecularValue,
   ChiefComplaintDetailBlock,
+  ImageMaskFlags,
   TurnPDFToObjectResponse,
   InternalMedicineHeart,
   ReportInfo,
@@ -169,6 +171,7 @@ import {
   RelativeHistoryDetailBlock,
   PoslistBlock,
   GynaecologyMenstrualHistory,
+  ImageMaskRequest,
   Endoscopy,
   Prescription,
   InternalMedicineBaseItem,
@@ -293,6 +296,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: TextToObjectResponse) => void
   ): Promise<TextToObjectResponse> {
     return this.request("TextToObject", req, cb)
+  }
+
+  /**
+   * 医疗报告图片脱敏接口
+   */
+  async ImageMask(
+    req: ImageMaskRequest,
+    cb?: (error: string, rep: ImageMaskResponse) => void
+  ): Promise<ImageMaskResponse> {
+    return this.request("ImageMask", req, cb)
   }
 
   /**

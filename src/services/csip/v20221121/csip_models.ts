@@ -895,28 +895,6 @@ export interface AssetTag {
 }
 
 /**
- * 风险中心状态处理Key
- */
-export interface RiskCenterStatusKey {
-  /**
-   * 风险ID
-   */
-  Id: string
-  /**
-   * APP ID
-   */
-  AppId: string
-  /**
-   * 公网IP/域名
-   */
-  PublicIPDomain?: string
-  /**
-   * 实例ID
-   */
-  InstanceId?: string
-}
-
-/**
  * DescribeVULRiskAdvanceCFGList请求参数结构体
  */
 export interface DescribeVULRiskAdvanceCFGListRequest {
@@ -1020,6 +998,135 @@ export interface TaskIdListKey {
    * 任务ID
    */
   TaskId: string
+}
+
+/**
+ * 网关资产
+ */
+export interface GateWayAsset {
+  /**
+   * appid
+   */
+  AppId?: string
+  /**
+   * uin
+   */
+  Uin?: string
+  /**
+   * 资产ID
+   */
+  AssetId?: string
+  /**
+   * 资产名
+   */
+  AssetName?: string
+  /**
+   * 资产类型
+   */
+  AssetType?: string
+  /**
+   * 私有ip
+   */
+  PrivateIp?: string
+  /**
+   * 公网ip
+   */
+  PublicIp?: string
+  /**
+   * 区域
+   */
+  Region?: string
+  /**
+   * 私有网络id
+   */
+  VpcId?: string
+  /**
+   * 私有网络名
+   */
+  VpcName?: string
+  /**
+   * 标签
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Tag?: Array<Tag>
+  /**
+   * 出向峰值带宽
+   */
+  OutboundPeakBandwidth?: string
+  /**
+   * 入向峰值带宽
+   */
+  InboundPeakBandwidth?: string
+  /**
+   * 出站累计流量
+   */
+  OutboundCumulativeFlow?: string
+  /**
+   * 入站累计流量
+   */
+  InboundCumulativeFlow?: string
+  /**
+   * 网络攻击
+   */
+  NetworkAttack?: number
+  /**
+   * 暴露端口
+   */
+  ExposedPort?: number
+  /**
+   * 暴露漏洞
+   */
+  ExposedVUL?: number
+  /**
+   * 配置风险
+   */
+  ConfigureRisk?: number
+  /**
+   * 创建时间
+   */
+  CreateTime?: string
+  /**
+   * 任务数
+   */
+  ScanTask?: number
+  /**
+   * 最后扫描时间
+   */
+  LastScanTime?: string
+  /**
+   * 昵称
+   */
+  Nick?: string
+  /**
+   * ipv6地址
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AddressIPV6?: string
+  /**
+   * 是否核心
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsCore?: number
+  /**
+   * 风险服务暴露
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RiskExposure?: number
+  /**
+   * 是否新资产 1新
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsNewAsset?: number
+  /**
+   * 网关状态
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status?: string
+  /**
+   * TSE的网关真实地域
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EngineRegion?: string
 }
 
 /**
@@ -1492,119 +1599,25 @@ export interface StopRiskCenterTaskResponse {
 }
 
 /**
- * 服务风险
+ * 风险中心状态处理Key
  */
-export interface ServerRisk {
+export interface RiskCenterStatusKey {
   /**
-   * 测绘标签
+   * 风险ID
    */
-  ServiceTag?: string
+  Id: string
   /**
-   * 端口
-注意：此字段可能返回 null，表示取不到有效值。
+   * APP ID
    */
-  Port?: number
+  AppId: string
   /**
-   * 影响资产
+   * 公网IP/域名
    */
-  AffectAsset?: string
+  PublicIPDomain?: string
   /**
-   * 实例id
+   * 实例ID
    */
   InstanceId?: string
-  /**
-   * 实例名
-   */
-  InstanceName?: string
-  /**
-   * 资产类型
-   */
-  InstanceType?: string
-  /**
-   * 风险等级
-   */
-  Level?: string
-  /**
-   * 协议
-   */
-  Protocol?: string
-  /**
-   * 组件
-   */
-  Component?: string
-  /**
-   * 服务
-   */
-  Service?: string
-  /**
-   * 最近识别时间
-   */
-  RecentTime?: string
-  /**
-   * 首次识别时间
-   */
-  FirstTime?: string
-  /**
-   * 风险详情
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  RiskDetails?: string
-  /**
-   * 处置建议
-   */
-  Suggestion?: string
-  /**
-   * 状态，0未处理、1已处置、2已忽略
-   */
-  Status?: number
-  /**
-   * 资产唯一id
-   */
-  Id?: string
-  /**
-   * 用户appid
-   */
-  AppId?: string
-  /**
-   * 用户昵称
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Nick?: string
-  /**
-   * 用户uin
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Uin?: string
-  /**
-   * 服务快照
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ServiceSnapshot?: string
-  /**
-   * 服务访问的url
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Url?: string
-  /**
-   * 列表索引值
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Index?: string
-  /**
-   * 风险列表
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  RiskList?: Array<ServerRiskSuggestion>
-  /**
-   * 建议列表
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SuggestionList?: Array<ServerRiskSuggestion>
-  /**
-   * HTTP响应状态码
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  StatusCode?: string
 }
 
 /**
@@ -3114,6 +3127,40 @@ export interface AssetBaseInfoResponse {
 }
 
 /**
+ * DescribeGatewayAssets返回参数结构体
+ */
+export interface DescribeGatewayAssetsResponse {
+  /**
+   * 列表
+   */
+  Data?: Array<GateWayAsset>
+  /**
+   * 总数
+   */
+  TotalCount?: number
+  /**
+   * 地域列表
+   */
+  RegionList?: Array<FilterDataObject>
+  /**
+   * 资产类型列表
+   */
+  AssetTypeList?: Array<FilterDataObject>
+  /**
+   * vpc列表
+   */
+  VpcList?: Array<FilterDataObject>
+  /**
+   * appid列表
+   */
+  AppIdList?: Array<FilterDataObject>
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 资产视角的端口风险对象
  */
 export interface AssetViewPortRisk {
@@ -3253,6 +3300,122 @@ export interface DeleteDomainAndIpResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 服务风险
+ */
+export interface ServerRisk {
+  /**
+   * 测绘标签
+   */
+  ServiceTag?: string
+  /**
+   * 端口
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Port?: number
+  /**
+   * 影响资产
+   */
+  AffectAsset?: string
+  /**
+   * 实例id
+   */
+  InstanceId?: string
+  /**
+   * 实例名
+   */
+  InstanceName?: string
+  /**
+   * 资产类型
+   */
+  InstanceType?: string
+  /**
+   * 风险等级
+   */
+  Level?: string
+  /**
+   * 协议
+   */
+  Protocol?: string
+  /**
+   * 组件
+   */
+  Component?: string
+  /**
+   * 服务
+   */
+  Service?: string
+  /**
+   * 最近识别时间
+   */
+  RecentTime?: string
+  /**
+   * 首次识别时间
+   */
+  FirstTime?: string
+  /**
+   * 风险详情
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RiskDetails?: string
+  /**
+   * 处置建议
+   */
+  Suggestion?: string
+  /**
+   * 状态，0未处理、1已处置、2已忽略
+   */
+  Status?: number
+  /**
+   * 资产唯一id
+   */
+  Id?: string
+  /**
+   * 用户appid
+   */
+  AppId?: string
+  /**
+   * 用户昵称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Nick?: string
+  /**
+   * 用户uin
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Uin?: string
+  /**
+   * 服务快照
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ServiceSnapshot?: string
+  /**
+   * 服务访问的url
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Url?: string
+  /**
+   * 列表索引值
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Index?: string
+  /**
+   * 风险列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RiskList?: Array<ServerRiskSuggestion>
+  /**
+   * 建议列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SuggestionList?: Array<ServerRiskSuggestion>
+  /**
+   * HTTP响应状态码
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StatusCode?: string
 }
 
 /**
@@ -4272,6 +4435,16 @@ export interface DeleteRiskScanTaskResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeGatewayAssets请求参数结构体
+ */
+export interface DescribeGatewayAssetsRequest {
+  /**
+   * 过滤参数
+   */
+  Filter?: Filter
 }
 
 /**

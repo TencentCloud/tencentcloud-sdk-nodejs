@@ -175,6 +175,20 @@ export interface TimelineEvent {
 }
 
 /**
+ * ImageMask返回参数结构体
+ */
+export interface ImageMaskResponse {
+  /**
+   * 脱敏后图片的Base64信息
+   */
+  MaskedImage?: string
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * IHC块
  */
 export interface IHCBlock {
@@ -2479,6 +2493,29 @@ export interface ChiefComplaintDetailBlock {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TimeType?: string
+}
+
+/**
+ * 图片脱敏选项
+不填默认敏感信息都脱敏
+ */
+export interface ImageMaskFlags {
+  /**
+   * 是否对医院信息进行脱敏
+   */
+  HospitalFlag?: boolean
+  /**
+   * 是否对医生信息进行脱敏
+   */
+  DoctorFlag?: boolean
+  /**
+   * 是否对患者信息进行脱敏
+   */
+  PatientFlag?: boolean
+  /**
+   * 是否对二维码信息进行脱敏
+   */
+  BarFlag?: boolean
 }
 
 /**
@@ -5425,6 +5462,20 @@ export interface GynaecologyMenstrualHistory {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Text?: KeyValueItem
+}
+
+/**
+ * ImageMask请求参数结构体
+ */
+export interface ImageMaskRequest {
+  /**
+   * 图片信息,目前只支持传图片base64
+   */
+  Image: ImageInfo
+  /**
+   * 图片脱敏选项, 不传默认都脱敏
+   */
+  MaskFlag?: ImageMaskFlags
 }
 
 /**

@@ -136,6 +136,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateRiskCenterScanTask", req, cb);
     }
     /**
+     * 获取网关列表
+     */
+    async DescribeGatewayAssets(req, cb) {
+        return this.request("DescribeGatewayAssets", req, cb);
+    }
+    /**
      * 立体防护中心查询漏洞信息
      */
     async DescribeSearchBugInfo(req, cb) {
