@@ -70,6 +70,27 @@ export interface EnableReplicaReadonlyRequest {
 }
 
 /**
+ * ModifyInstanceAvailabilityZones请求参数结构体
+ */
+export interface ModifyInstanceAvailabilityZonesRequest {
+  /**
+   * 指定实例 ID。例如：crs-xjhsdj****，请登录[Redis控制台](https://console.cloud.tencent.com/redis#/)在实例列表复制实例 ID。
+   */
+  InstanceId: string
+  /**
+   * 切换时间。
+- 1：维护时间窗切换。
+- 2：立即切换。
+   */
+  SwitchOption: number
+  /**
+   * 实例的节点信息，包含节点 ID、节点类型、节点可用区 ID等。具体信息，请参见[RedisNodeInfo ](https://cloud.tencent.com/document/product/239/20022)。
+单可用区实例无需传NodeId，多可用区实例NodeId必传
+   */
+  NodeSet: Array<RedisNodeInfo>
+}
+
+/**
  * 实例的备份数组
  */
 export interface RedisBackupSet {
@@ -2303,6 +2324,16 @@ export interface KillMasterGroupRequest {
 }
 
 /**
+ * SwitchAccessNewInstance返回参数结构体
+ */
+export interface SwitchAccessNewInstanceResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CloneInstances返回参数结构体
  */
 export interface CloneInstancesResponse {
@@ -3946,6 +3977,23 @@ export interface ChangeInstanceRoleRequest {
 }
 
 /**
+ * DescribeInstanceSupportFeature请求参数结构体
+ */
+export interface DescribeInstanceSupportFeatureRequest {
+  /**
+   * 指定实例 ID。例如：crs-xjhsdj****。请登录[Redis控制台](https://console.cloud.tencent.com/redis#/)在实例列表复制实例 ID。
+示例值：crs-asdasdas
+   */
+  InstanceId: string
+  /**
+   * 功能特性名称
+- read-local-node-only 就近接入功能
+- multi-account 多账号功能
+   */
+  FeatureName: string
+}
+
+/**
  * DeleteInstanceAccount请求参数结构体
  */
 export interface DeleteInstanceAccountRequest {
@@ -4022,6 +4070,17 @@ export interface UpgradeInstanceResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * SwitchAccessNewInstance请求参数结构体
+ */
+export interface SwitchAccessNewInstanceRequest {
+  /**
+   * 指定实例 ID。例如：crs-xjhsdj****。请登录[Redis控制台](https://console.cloud.tencent.com/redis#/)在实例列表复制实例 ID。
+示例值：crs-asdasdas
+   */
+  InstanceId: string
 }
 
 /**
@@ -4656,6 +4715,20 @@ export interface DescribeMaintenanceWindowRequest {
 }
 
 /**
+ * DescribeInstanceSupportFeature返回参数结构体
+ */
+export interface DescribeInstanceSupportFeatureResponse {
+  /**
+   * 是否支持
+   */
+  Support?: boolean
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * AddReplicationInstance请求参数结构体
  */
 export interface AddReplicationInstanceRequest {
@@ -4833,6 +4906,20 @@ export interface DescribeProxySlowLogRequest {
    * 偏移量，取Limit整数倍。
    */
   Offset?: number
+}
+
+/**
+ * ModifyInstanceAvailabilityZones返回参数结构体
+ */
+export interface ModifyInstanceAvailabilityZonesResponse {
+  /**
+   * 任务ID。
+   */
+  TaskId?: number
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

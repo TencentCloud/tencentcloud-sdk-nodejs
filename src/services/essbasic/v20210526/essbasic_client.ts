@@ -121,12 +121,14 @@ import {
   SyncProxyOrganizationOperatorsRequest,
   ChannelCreateFlowApproversResponse,
   DescribeBillUsageDetailResponse,
+  DescribeUsageResponse,
   CreateSignUrlsRequest,
   ChannelCreateMultiFlowSignQRCodeRequest,
   SignQrCode,
   FlowApproverInfo,
   ChannelCreateUserAutoSignEnableUrlResponse,
   ChannelGetTaskResultApiRequest,
+  DescribeChannelOrganizationsRequest,
   ChannelCreatePreparedPersonalEsignRequest,
   FillError,
   ChannelDescribeBillUsageDetailResponse,
@@ -144,6 +146,7 @@ import {
   Filter,
   FilledComponent,
   FlowApproverItem,
+  ChannelOrganizationInfo,
   CreateSignUrlsResponse,
   ChannelDeleteRoleRequest,
   ChannelCreateBatchQuickSignUrlResponse,
@@ -187,7 +190,7 @@ import {
   OccupiedSeal,
   CreateFlowsByTemplatesRequest,
   UploadFilesRequest,
-  DescribeUsageResponse,
+  DescribeChannelOrganizationsResponse,
   ChannelCreateOrganizationBatchSignUrlResponse,
   UsageDetail,
   ChannelCreateBatchCancelFlowUrlResponse,
@@ -1144,6 +1147,16 @@ Web链接访问后，会根据子客企业(**Agent中ProxyOrganizationOpenId表�
     cb?: (error: string, rep: DescribeChannelSealPolicyWorkflowUrlResponse) => void
   ): Promise<DescribeChannelSealPolicyWorkflowUrlResponse> {
     return this.request("DescribeChannelSealPolicyWorkflowUrl", req, cb)
+  }
+
+  /**
+   * 查询渠道子客企业信息
+   */
+  async DescribeChannelOrganizations(
+    req: DescribeChannelOrganizationsRequest,
+    cb?: (error: string, rep: DescribeChannelOrganizationsResponse) => void
+  ): Promise<DescribeChannelOrganizationsResponse> {
+    return this.request("DescribeChannelOrganizations", req, cb)
   }
 
   /**

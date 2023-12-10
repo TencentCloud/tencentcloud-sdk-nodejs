@@ -4236,6 +4236,25 @@ export interface DescribeBillUsageDetailResponse {
 }
 
 /**
+ * DescribeUsage返回参数结构体
+ */
+export interface DescribeUsageResponse {
+  /**
+   * 用量明细条数
+   */
+  Total?: number
+  /**
+   * 用量明细
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Details?: Array<UsageDetail>
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateSignUrls请求参数结构体
  */
 export interface CreateSignUrlsRequest {
@@ -4744,6 +4763,47 @@ export interface ChannelGetTaskResultApiRequest {
 }
 
 /**
+ * DescribeChannelOrganizations请求参数结构体
+ */
+export interface DescribeChannelOrganizationsRequest {
+  /**
+   * 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。
+
+此接口下面信息必填。
+
+渠道应用标识: Agent.AppId
+第三方平台子客企业标识: Agent.ProxyOrganizationOpenId
+第三方平台子客企业中的员工标识: Agent. ProxyOperator.OpenId
+第三方平台子客企业和员工必须已经经过实名认证
+   */
+  Agent: Agent
+  /**
+   * 指定分页每页返回的数据条数，单页最大支持 200。
+   */
+  Limit: number
+  /**
+   * 子客OrganizationOpenId，定向查询某个子客的企业数据。
+   */
+  OrganizationOpenId?: string
+  /**
+   * 企业认证状态过滤字段。可值如下：
+<ul>
+  <li>**"UNVERIFIED"**： 未认证的企业</li>
+  <li>**"VERIFYINGLEGALPENDINGAUTHORIZATION"**： 认证中待法人授权的企业</li>
+  <li>**"VERIFYINGAUTHORIZATIONFILEPENDING"**： 认证中授权书审核中的企业</li>
+  <li>**"VERIFYINGAUTHORIZATIONFILEREJECT"**： 认证中授权书已驳回的企业</li>
+  <li>**"VERIFYING"**： 认证中的企业</li>
+  <li>**"VERIFIED"**： 已认证的企业</li>
+</ul>
+   */
+  AuthorizationStatusList?: Array<string>
+  /**
+   * 指定分页返回第几页的数据，如果不传默认返回第一页。 页码从 0 开始，即首页为 0，最大20000。
+   */
+  Offset?: number
+}
+
+/**
  * ChannelCreatePreparedPersonalEsign请求参数结构体
  */
 export interface ChannelCreatePreparedPersonalEsignRequest {
@@ -5184,6 +5244,81 @@ export interface FlowApproverItem {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Approvers?: Array<ApproverItem>
+}
+
+/**
+ * 渠道企业信息
+ */
+export interface ChannelOrganizationInfo {
+  /**
+   * 电子签企业Id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OrganizationId?: string
+  /**
+   * 电子签企业OpenId
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OrganizationOpenId?: string
+  /**
+   * 企业名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OrganizationName?: string
+  /**
+   * 企业信用代码
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UnifiedSocialCreditCode?: string
+  /**
+   * 法人姓名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LegalName?: string
+  /**
+   * 法人OpenId
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LegalOpenId?: string
+  /**
+   * 超管姓名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AdminName?: string
+  /**
+   * 超管OpenId
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AdminOpenId?: string
+  /**
+   * 超管手机号，脱敏后返回
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AdminMobile?: string
+  /**
+   * 企业认证状态字段。值如下：
+<ul>
+  <li>**"UNVERIFIED"**： 未认证的企业</li>
+  <li>**"VERIFYINGLEGALPENDINGAUTHORIZATION"**： 认证中待法人授权的企业</li>
+  <li>**"VERIFYINGAUTHORIZATIONFILEPENDING"**： 认证中授权书审核中的企业</li>
+  <li>**"VERIFYINGAUTHORIZATIONFILEREJECT"**： 认证中授权书已驳回的企业</li>
+  <li>**"VERIFYING"**： 认证中的企业</li>
+  <li>**"VERIFIED"**： 已认证的企业</li>
+</ul>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AuthorizationStatus?: string
+  /**
+   * 企业认证方式字段。值如下：
+<ul>
+  <li>**"AuthorizationInit"**： 暂未选择授权方式</li>
+  <li>**"AuthorizationFile"**： 授权书</li>
+  <li>**"AuthorizationLegalPerson"**： 法人授权超管</li>
+  <li>**"AuthorizationLegalIdentity"**： 法人直接认证</li>
+</ul>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AuthorizationType?: string
 }
 
 /**
@@ -6451,18 +6586,25 @@ export interface UploadFilesRequest {
 }
 
 /**
- * DescribeUsage返回参数结构体
+ * DescribeChannelOrganizations返回参数结构体
  */
-export interface DescribeUsageResponse {
+export interface DescribeChannelOrganizationsResponse {
   /**
-   * 用量明细条数
+   * 企业企业信息列表。
+   */
+  ChannelOrganizationInfos?: Array<ChannelOrganizationInfo>
+  /**
+   * 指定分页返回第几页的数据。页码从 0 开始，即首页为 0，最大20000。
+   */
+  Offset?: number
+  /**
+   * 指定分页每页返回的数据条数，单页最大支持 200。
+   */
+  Limit?: number
+  /**
+   * 符合条件的企业数量。
    */
   Total?: number
-  /**
-   * 用量明细
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Details?: Array<UsageDetail>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

@@ -88,6 +88,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("AddSpecifyPrivateZoneVpc", req, cb);
     }
     /**
+     * 查询异步绑定vpc操作状态
+     */
+    async QueryAsyncBindVpcStatus(req, cb) {
+        return this.request("QueryAsyncBindVpcStatus", req, cb);
+    }
+    /**
      * 修改私有域信息
      */
     async ModifyPrivateZone(req, cb) {

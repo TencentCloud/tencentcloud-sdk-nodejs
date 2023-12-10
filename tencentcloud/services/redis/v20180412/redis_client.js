@@ -64,6 +64,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeInstanceAccount", req, cb);
     }
     /**
+     * 本接口（SwitchAccessNewInstance）针对处于时间窗口中待切换操作的实例，用户可主动发起该操作。
+     */
+    async SwitchAccessNewInstance(req, cb) {
+        return this.request("SwitchAccessNewInstance", req, cb);
+    }
+    /**
      * 本接口（ChangeReplicaToMaster）适用于实例副本组提主或副本提主。
      */
     async ChangeReplicaToMaster(req, cb) {
@@ -266,6 +272,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async InquiryPriceCreateInstance(req, cb) {
         return this.request("InquiryPriceCreateInstance", req, cb);
+    }
+    /**
+     * 本接口（DescribeInstanceSupportFeature）用于查询实例支持的功能特性。
+     */
+    async DescribeInstanceSupportFeature(req, cb) {
+        return this.request("DescribeInstanceSupportFeature", req, cb);
     }
     /**
      * 本接口（DescribeInstanceParams）用于查询实例参数列表。
@@ -524,6 +536,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeProxySlowLog(req, cb) {
         return this.request("DescribeProxySlowLog", req, cb);
+    }
+    /**
+     * 本接口（ModifyInstanceAvailabilityZones）用于变更实例可用区
+     */
+    async ModifyInstanceAvailabilityZones(req, cb) {
+        return this.request("ModifyInstanceAvailabilityZones", req, cb);
     }
     /**
      * 本接口(ModifyDBInstanceSecurityGroups)用于修改实例绑定的安全组。

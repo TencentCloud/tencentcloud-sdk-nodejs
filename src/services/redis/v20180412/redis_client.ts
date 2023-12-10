@@ -21,6 +21,7 @@ import {
   UpgradeSmallVersionRequest,
   ModifyInstanceParamsResponse,
   EnableReplicaReadonlyRequest,
+  ModifyInstanceAvailabilityZonesRequest,
   RedisBackupSet,
   DescribeInstanceMonitorTopNCmdResponse,
   ModifyAutoBackupConfigResponse,
@@ -118,6 +119,7 @@ import {
   DescribeInstanceMonitorTookDistRequest,
   DeleteReplicationInstanceRequest,
   KillMasterGroupRequest,
+  SwitchAccessNewInstanceResponse,
   CloneInstancesResponse,
   ParamTemplateInfo,
   DescribeInstanceMonitorTopNCmdTookResponse,
@@ -183,10 +185,12 @@ import {
   DescribeInstanceMonitorSIPResponse,
   DestroyPostpaidInstanceRequest,
   ChangeInstanceRoleRequest,
+  DescribeInstanceSupportFeatureRequest,
   DeleteInstanceAccountRequest,
   DescribeInstanceMonitorHotKeyRequest,
   DescribeBackupDownloadRestrictionResponse,
   UpgradeInstanceResponse,
+  SwitchAccessNewInstanceRequest,
   ManualBackupInstanceRequest,
   DescribeReplicationGroupResponse,
   ModifyParamTemplateRequest,
@@ -210,11 +214,13 @@ import {
   BigKeyTypeInfo,
   DescribeInstanceNodeInfoRequest,
   DescribeMaintenanceWindowRequest,
+  DescribeInstanceSupportFeatureResponse,
   AddReplicationInstanceRequest,
   InstanceClusterNode,
   DescribeSSLStatusResponse,
   DescribeTendisSlowLogRequest,
   DescribeProxySlowLogRequest,
+  ModifyInstanceAvailabilityZonesResponse,
   DescribeProxySlowLogResponse,
   ModifyInstanceReadOnlyRequest,
   DescribeInstanceAccountResponse,
@@ -320,6 +326,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeInstanceAccountResponse) => void
   ): Promise<DescribeInstanceAccountResponse> {
     return this.request("DescribeInstanceAccount", req, cb)
+  }
+
+  /**
+   * 本接口（SwitchAccessNewInstance）针对处于时间窗口中待切换操作的实例，用户可主动发起该操作。
+   */
+  async SwitchAccessNewInstance(
+    req: SwitchAccessNewInstanceRequest,
+    cb?: (error: string, rep: SwitchAccessNewInstanceResponse) => void
+  ): Promise<SwitchAccessNewInstanceResponse> {
+    return this.request("SwitchAccessNewInstance", req, cb)
   }
 
   /**
@@ -660,6 +676,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: InquiryPriceCreateInstanceResponse) => void
   ): Promise<InquiryPriceCreateInstanceResponse> {
     return this.request("InquiryPriceCreateInstance", req, cb)
+  }
+
+  /**
+   * 本接口（DescribeInstanceSupportFeature）用于查询实例支持的功能特性。
+   */
+  async DescribeInstanceSupportFeature(
+    req: DescribeInstanceSupportFeatureRequest,
+    cb?: (error: string, rep: DescribeInstanceSupportFeatureResponse) => void
+  ): Promise<DescribeInstanceSupportFeatureResponse> {
+    return this.request("DescribeInstanceSupportFeature", req, cb)
   }
 
   /**
@@ -1090,6 +1116,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeProxySlowLogResponse) => void
   ): Promise<DescribeProxySlowLogResponse> {
     return this.request("DescribeProxySlowLog", req, cb)
+  }
+
+  /**
+   * 本接口（ModifyInstanceAvailabilityZones）用于变更实例可用区
+   */
+  async ModifyInstanceAvailabilityZones(
+    req: ModifyInstanceAvailabilityZonesRequest,
+    cb?: (error: string, rep: ModifyInstanceAvailabilityZonesResponse) => void
+  ): Promise<ModifyInstanceAvailabilityZonesResponse> {
+    return this.request("ModifyInstanceAvailabilityZones", req, cb)
   }
 
   /**

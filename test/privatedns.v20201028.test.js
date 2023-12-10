@@ -118,6 +118,16 @@ it("privatedns.v20201028.AddSpecifyPrivateZoneVpc", async function () {
     }
 })
 
+it("privatedns.v20201028.QueryAsyncBindVpcStatus", async function () {
+    try {
+       const data = await client.QueryAsyncBindVpcStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("privatedns.v20201028.ModifyPrivateZone", async function () {
     try {
        const data = await client.ModifyPrivateZone({})

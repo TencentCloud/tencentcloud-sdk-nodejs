@@ -1644,6 +1644,10 @@ export interface LoginActionFlag {
    * 自定义
    */
   Custom?: number
+  /**
+   * 邮箱
+   */
+  Mail?: number
 }
 
 /**

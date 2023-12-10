@@ -78,6 +78,16 @@ it("redis.v20180412.DescribeInstanceAccount", async function () {
     }
 })
 
+it("redis.v20180412.SwitchAccessNewInstance", async function () {
+    try {
+       const data = await client.SwitchAccessNewInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("redis.v20180412.ChangeReplicaToMaster", async function () {
     try {
        const data = await client.ChangeReplicaToMaster({})
@@ -411,6 +421,16 @@ it("redis.v20180412.ModifyParamTemplate", async function () {
 it("redis.v20180412.InquiryPriceCreateInstance", async function () {
     try {
        const data = await client.InquiryPriceCreateInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("redis.v20180412.DescribeInstanceSupportFeature", async function () {
+    try {
+       const data = await client.DescribeInstanceSupportFeature({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -841,6 +861,16 @@ it("redis.v20180412.StartupInstance", async function () {
 it("redis.v20180412.DescribeProxySlowLog", async function () {
     try {
        const data = await client.DescribeProxySlowLog({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("redis.v20180412.ModifyInstanceAvailabilityZones", async function () {
+    try {
+       const data = await client.ModifyInstanceAvailabilityZones({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

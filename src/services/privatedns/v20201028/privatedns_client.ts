@@ -24,6 +24,7 @@ import {
   DescribePrivateDNSAccountListResponse,
   DescribePrivateZoneRecordListRequest,
   PrivateDNSAccount,
+  QueryAsyncBindVpcStatusResponse,
   DescribePrivateZoneRecordListResponse,
   DescribePrivateZoneListResponse,
   AccountVpcInfoOutput,
@@ -70,6 +71,7 @@ import {
   DeletePrivateZoneResponse,
   ModifyRecordsStatusRequest,
   CreatePrivateDNSAccountRequest,
+  QueryAsyncBindVpcStatusRequest,
   MetricData,
   DescribePrivateDNSAccountListRequest,
   PrivateZone,
@@ -190,6 +192,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: AddSpecifyPrivateZoneVpcResponse) => void
   ): Promise<AddSpecifyPrivateZoneVpcResponse> {
     return this.request("AddSpecifyPrivateZoneVpc", req, cb)
+  }
+
+  /**
+   * 查询异步绑定vpc操作状态
+   */
+  async QueryAsyncBindVpcStatus(
+    req: QueryAsyncBindVpcStatusRequest,
+    cb?: (error: string, rep: QueryAsyncBindVpcStatusResponse) => void
+  ): Promise<QueryAsyncBindVpcStatusResponse> {
+    return this.request("QueryAsyncBindVpcStatus", req, cb)
   }
 
   /**

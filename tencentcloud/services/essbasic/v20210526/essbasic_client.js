@@ -760,6 +760,12 @@ Web链接访问后，会根据子客企业(**Agent中ProxyOrganizationOpenId表�
         return this.request("DescribeChannelSealPolicyWorkflowUrl", req, cb);
     }
     /**
+     * 查询渠道子客企业信息
+     */
+    async DescribeChannelOrganizations(req, cb) {
+        return this.request("DescribeChannelOrganizations", req, cb);
+    }
+    /**
      * 指定需要批量催办的签署流程ID，批量催办合同，最多100个。需要符合以下条件的合同才可被催办
 1. 合同中当前状态为 **待签署** 的签署人是催办的对象
 2. **每个合同只能催办一次**

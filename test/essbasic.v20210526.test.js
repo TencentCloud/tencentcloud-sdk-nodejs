@@ -508,6 +508,16 @@ it("essbasic.v20210526.DescribeChannelSealPolicyWorkflowUrl", async function () 
     }
 })
 
+it("essbasic.v20210526.DescribeChannelOrganizations", async function () {
+    try {
+       const data = await client.DescribeChannelOrganizations({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("essbasic.v20210526.ChannelCreateFlowReminds", async function () {
     try {
        const data = await client.ChannelCreateFlowReminds({})

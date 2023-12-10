@@ -838,6 +838,16 @@ export interface AlarmPolicy {
      */
     TagInstances?: Array<TagInstance>;
     /**
+     * 过滤条件
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Filter?: AlarmConditionFilter;
+    /**
+     * 聚合条件
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    GroupBy?: Array<AlarmGroupByItem>;
+    /**
      * 策略关联的过滤维度信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
@@ -1360,6 +1370,21 @@ export interface DescribeProductEventListResponse {
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * 聚合条件
+ */
+export interface AlarmGroupByItem {
+    /**
+     * Item Id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Id?: string;
+    /**
+     * 名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Name?: string;
 }
 /**
  * DescribeAlarmNoticeCallbacks返回参数结构体
@@ -6552,6 +6577,26 @@ export interface DescribePrometheusInstanceInitStatusRequest {
      * 实例ID
      */
     InstanceId: string;
+}
+/**
+ * 策略过滤条件
+ */
+export interface AlarmConditionFilter {
+    /**
+     * 类型
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Type?: string;
+    /**
+     * 表达式
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Expression?: string;
+    /**
+     * 过滤条件
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Dimensions?: string;
 }
 /**
  * CreatePrometheusAlertPolicy请求参数结构体

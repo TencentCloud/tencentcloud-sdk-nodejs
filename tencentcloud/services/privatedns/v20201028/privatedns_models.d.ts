@@ -97,6 +97,25 @@ export interface PrivateDNSAccount {
     Nickname?: string;
 }
 /**
+ * QueryAsyncBindVpcStatus返回参数结构体
+ */
+export interface QueryAsyncBindVpcStatusResponse {
+    /**
+     * processing 处理中，success 执行成功，
+  fail 执行失败
+     */
+    Status?: string;
+    /**
+     * 错误信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ErrorMsg?: string;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * DescribePrivateZoneRecordList返回参数结构体
  */
 export interface DescribePrivateZoneRecordListResponse {
@@ -867,6 +886,15 @@ export interface CreatePrivateDNSAccountRequest {
      * 私有域解析账号
      */
     Account: PrivateDNSAccount;
+}
+/**
+ * QueryAsyncBindVpcStatus请求参数结构体
+ */
+export interface QueryAsyncBindVpcStatusRequest {
+    /**
+     * 唯一ID
+     */
+    UniqId: string;
 }
 /**
  * 统计数据表
