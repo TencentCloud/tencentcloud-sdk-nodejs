@@ -93,7 +93,7 @@ export interface DescribeSampleMatrixQueryResponse {
    * 指标矩阵
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  MetricSampleMatrix: CustomSampleMatrix
+  MetricSampleMatrix?: CustomSampleMatrix
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -175,7 +175,7 @@ export interface DescribeSampleLogsRequest {
  */
 export interface DeleteJobsRequest {
   /**
-   * 任务ID数组
+   * 待删除的任务的 ID（所有任务的 ID 可以从 DescribeJobs 获取）
    */
   JobIds: Array<string>
   /**
@@ -300,11 +300,11 @@ export interface DescribeLabelValuesRequest {
    */
   ScenarioId: string
   /**
-   * 指标名称
+   * 指标名。取值范围参见 DescribeMetricLabelWithValues 接口返回的所有指标名
    */
   Metric: string
   /**
-   * 查询标签名称
+   * 标签名。取值范围参见 DescribeMetricLabelWithValues 接口返回的指标及其支持的标签名
    */
   LabelName: string
   /**
@@ -615,7 +615,7 @@ export interface UpdateScenarioRequest {
    */
   Description?: string
   /**
-   * 压测引擎类型
+   * 压测场景的模式类型。取值范围：pts-http 代表简单模式，pts-js 代表脚本模式，pts-jmeter 代表 JMeter 模式。
    */
   Type?: string
   /**
@@ -912,7 +912,7 @@ export interface AdjustJobSpeedRequest {
    */
   JobId: string
   /**
-   * 目标RPS
+   * 目标 RPS。其取值应大于起始 RPS，并且小于最大 RPS
    */
   TargetRequestsPerSecond: number
 }
@@ -1008,11 +1008,11 @@ export interface LabelWithValues {
  */
 export interface Label {
   /**
-   * label名字
+   * 标签名
    */
   LabelName: string
   /**
-   * label值
+   * 标签值
    */
   LabelValue: string
 }
@@ -1190,7 +1190,7 @@ export interface DescribeLabelValuesResponse {
    * 标签值数组
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  LabelValueSet: Array<string>
+  LabelValueSet?: Array<string>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1206,7 +1206,7 @@ export interface InternalMetricQuery {
    */
   Metric: string
   /**
-   * 聚合函数
+   * 聚合函数。取值范围：Rate,Count,Avg,P90,P95,P99,Gauge
    */
   Aggregation: string
   /**
@@ -1214,7 +1214,7 @@ export interface InternalMetricQuery {
    */
   Labels?: Array<Label>
   /**
-   * 指标过滤
+   * 用标签过滤规则来过滤指标，规则中包含标签名 LabelName、标签值 LabelValue、操作符 Operator（0代表相等，1代表不等）
    */
   Filters?: Array<Filter>
   /**
@@ -1482,15 +1482,15 @@ export interface DescribeSampleMatrixQueryRequest {
    */
   ScenarioId: string
   /**
-   * 指标名字
+   * 指标名。取值范围参见 DescribeMetricLabelWithValues 接口返回的所有指标名
    */
   Metric: string
   /**
-   * 聚合函数
+   * 聚合函数。取值范围：Rate,Count,Avg,P90,P95,P99,Gauge
    */
   Aggregation: string
   /**
-   * 指标过滤
+   * 用标签过滤规则来过滤指标，规则中包含标签名 LabelName、标签值 LabelValue、操作符 Operator（0代表相等，1代表不等）
    */
   Filters?: Array<Filter>
   /**
@@ -1580,7 +1580,7 @@ export interface DeleteProjectsRequest {
  */
 export interface UpdateFileScenarioRelationRequest {
   /**
-   * 文件 ID
+   * 文件 ID。其值应为前序步骤上传该文件到 cos 桶后，文件在 cos 桶中的相应目录
    */
   FileId: string
   /**
@@ -1708,11 +1708,11 @@ export interface DescribeSampleQueryRequest {
    */
   ScenarioId: string
   /**
-   * 指标名
+   * 指标名。取值范围参见 DescribeMetricLabelWithValues 接口返回的所有指标名
    */
   Metric: string
   /**
-   * 聚合条件
+   * 聚合函数。取值范围：Rate,Count,Avg,P90,P95,P99,Gauge
    */
   Aggregation: string
   /**
@@ -1720,7 +1720,7 @@ export interface DescribeSampleQueryRequest {
    */
   ProjectId: string
   /**
-   * 过滤条件
+   * 标签过滤条件。各指标支持的标签参见 DescribeMetricLabelWithValues 接口返回的所有指标及其支持的标签
    */
   Labels?: Array<Label>
 }
@@ -1897,7 +1897,7 @@ export interface DeleteFilesRequest {
    */
   ProjectId: string
   /**
-   * 文件 ID 数组
+   * 待删除的文件的 ID（所有文件 ID 可从接口 DescribeFiles 获取）
    */
   FileIds: Array<string>
 }
@@ -2053,11 +2053,11 @@ export interface Notification {
  */
 export interface DescribeSampleBatchQueryRequest {
   /**
-   * job id
+   * 压测任务的 ID
    */
   JobId: string
   /**
-   * 场景id
+   * 场景的 ID
    */
   ScenarioId: string
   /**
@@ -2065,7 +2065,7 @@ export interface DescribeSampleBatchQueryRequest {
    */
   Queries: Array<InternalMetricQuery>
   /**
-   * 项目ID
+   * 项目的 ID
    */
   ProjectId: string
 }
@@ -2152,7 +2152,7 @@ export interface MetricInfo {
  */
 export interface CreateAlertChannelRequest {
   /**
-   * Notice ID
+   * monitor 服务的告警通知模板的 NoticeId，可从 monitor 服务的云 API 的 DescribeAlarmNotices 接口响应里的 Id 字段获取。（CreateAlertChannel 接口的入参里用于标识一个告警通知模板的 AMPConsumerId 与 NoticeId 二选一即可）
    */
   NoticeId: string
   /**
@@ -2160,7 +2160,7 @@ export interface CreateAlertChannelRequest {
    */
   ProjectId: string
   /**
-   * AMP Consumer ID
+   * monitor 服务的告警通知模板的 AMPConsumerId，可从 monitor 服务的云 API 的 DescribeAlarmNotices 接口响应里的 AMPConsumerId 字段获取。（CreateAlertChannel 接口的入参里用于标识一个告警通知模板的 AMPConsumerId 与 NoticeId 二选一即可）
    */
   AMPConsumerId?: string
 }
@@ -2630,7 +2630,7 @@ export interface Load {
  */
 export interface CreateFileRequest {
   /**
-   * 文件 ID
+   * 文件 ID。其值应为前序步骤上传该文件到 cos 桶后，文件在 cos 桶中的相应目录
    */
   FileId: string
   /**
@@ -3018,7 +3018,7 @@ export interface DescribeSampleQueryResponse {
    * 返回指标内容
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  MetricSample: CustomSample
+  MetricSample?: CustomSample
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3480,7 +3480,7 @@ export interface CreateScenarioResponse {
  */
 export interface AbortJobRequest {
   /**
-   * 任务ID
+   * 待停止的压测任务的 ID（所有的压测任务 ID 可以从 DescribeJobs 接口获取）
    */
   JobId: string
   /**
@@ -3603,7 +3603,7 @@ export interface DescribeSampleBatchQueryResponse {
    * 返回指标内容
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  MetricSampleSet: Array<CustomSample>
+  MetricSampleSet?: Array<CustomSample>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3747,7 +3747,7 @@ export interface DeleteAlertChannelRequest {
    */
   ProjectId: string
   /**
-   * Notice ID
+   * 待删除的通知渠道的 Notice ID（所有通知渠道的 Notice ID 可以从 DescribeAlertChannels 接口获取）
    */
   NoticeId: string
 }

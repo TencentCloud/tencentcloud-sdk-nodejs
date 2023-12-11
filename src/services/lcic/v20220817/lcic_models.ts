@@ -680,7 +680,7 @@ export interface RoomItem {
    */
   RoomId?: number
   /**
-   * 房间状态。0 未开始 ；1进行中  ；2 已结束
+   * 房间状态。0 未开始 ；1进行中  ；2 已结束；3已过期
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Status?: number
@@ -776,6 +776,11 @@ export interface RoomItem {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   EnableAutoStart?: number
+  /**
+   * 录制文件背景图片，支持png、jpg、jpeg、bmp格式，暂不支持透明通道
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RecordBackground?: string
 }
 
 /**

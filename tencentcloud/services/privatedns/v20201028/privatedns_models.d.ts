@@ -102,7 +102,7 @@ export interface PrivateDNSAccount {
 export interface QueryAsyncBindVpcStatusResponse {
     /**
      * processing 处理中，success 执行成功，
-  fail 执行失败
+  failed 执行失败
      */
     Status?: string;
     /**

@@ -372,14 +372,6 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateUserPersonal", req, cb);
     }
     /**
-     * 接口未使用
-
-查询自定义账号
-     */
-    async DescribeCustomAccounts(req, cb) {
-        return this.request("DescribeCustomAccounts", req, cb);
-    }
-    /**
      * 查询实例自定义域名列表
      */
     async DescribeInstanceCustomizedDomain(req, cb) {

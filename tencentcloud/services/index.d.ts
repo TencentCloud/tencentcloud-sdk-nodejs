@@ -43,6 +43,7 @@ export { cdc } from "./cdc";
 export { cdn } from "./cdn";
 export { cds } from "./cds";
 export { cdwch } from "./cdwch";
+export { cdwdoris } from "./cdwdoris";
 export { cdwpg } from "./cdwpg";
 export { cfg } from "./cfg";
 export { cfs } from "./cfs";

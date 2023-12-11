@@ -3313,7 +3313,7 @@ FormField输入示例：
 | cells.N.columnStart | Integer | 单元格坐标：列起始index                           |
 | cells.N.columnEnd   | Integer | 单元格坐标：列结束index                           |
 | cells.N.content     | String  | 单元格内容，字数不超过100                         |
-| cells.N.style         | String  | 单元格字体风格配置 ，风格配置的json字符串  如： {"font":"黑体","fontSize":12,"color":"FFFFFF","bold":true,"align":"CENTER"}      |
+| cells.N.style         | String  | 单元格字体风格配置 ，风格配置的json字符串  如： {"font":"黑体","fontSize":12,"color":"#FFFFFF","bold":true,"align":"CENTER"}      |
 
 表格参数headers说明
 widthPercent Integer 表头单元格列占总表头的比例，例如1：30表示 此列占表头的30%，不填写时列宽度平均拆分；例如2：总2列，某一列填写40，剩余列可以为空，按照60计算。；例如3：总3列，某一列填写30，剩余2列可以为空，分别为(100-30)/2=35
@@ -3321,7 +3321,7 @@ widthPercent Integer 表头单元格列占总表头的比例，例如1：30表�
 content String 表头单元格内容，字数不超过100
 
 
-style String 为字体风格设置 风格支持： font : 目前支持 黑体、宋体; fontSize： 6-72; color：000000-FFFFFF  字符串形如：  "FFFFFF"; bold ： 是否加粗， true ： 加粗 false： 不加粗; align: 对其方式， 支持 LEFT / RIGHT / CENTER
+style String 为字体风格设置 风格支持： font : 目前支持 黑体、宋体; fontSize： 6-72; color：000000-FFFFFF  字符串形如：  "#FFFFFF" 或者 "0xFFFFFF"; bold ： 是否加粗， true ： 加粗 false： 不加粗; align: 对其方式， 支持 LEFT / RIGHT / CENTER
  */
 export interface FormField {
     /**
@@ -6882,11 +6882,6 @@ export interface FilledComponent {
  */
 export interface CreateBatchQuickSignUrlRequest {
     /**
-     * 批量签署的合同流程ID数组。
-  注: `在调用此接口时，请确保合同流程均为本企业发起，且合同数量不超过100个。`
-     */
-    FlowIds: Array<string>;
-    /**
      * 批量签署的流程签署人，其中姓名(ApproverName)、参与人类型(ApproverType)必传，手机号(ApproverMobile)和证件信息(ApproverIdCardType、ApproverIdCardNumber)可任选一种或全部传入。
   注:
   `1. ApproverType目前只支持个人类型的签署人。`
@@ -6904,6 +6899,16 @@ export interface CreateBatchQuickSignUrlRequest {
   注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。`
      */
     Operator?: UserInfo;
+    /**
+     * 批量签署的合同流程ID数组。
+  注: `在调用此接口时，请确保合同流程均为本企业发起，且合同数量不超过100个。`
+     */
+    FlowIds?: Array<string>;
+    /**
+     * 合同组编号
+  注：`该参数和合同流程ID数组必须二选一`
+     */
+    FlowGroupId?: string;
     /**
      * 签署完之后的H5页面的跳转链接，此链接及支持http://和https://，最大长度1000个字符。(建议https协议)
      */

@@ -40,6 +40,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDbAssetInfo", req, cb);
     }
     /**
+     * 获取网卡列表
+     */
+    async DescribeNICAssets(req, cb) {
+        return this.request("DescribeNICAssets", req, cb);
+    }
+    /**
      * 获取漏洞视角的漏洞风险列表
      */
     async DescribeRiskCenterVULViewVULRiskList(req, cb) {

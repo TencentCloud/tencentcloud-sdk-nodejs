@@ -1606,14 +1606,14 @@ FormField输入示例：
 | cells.N.columnStart | Integer | 单元格坐标：列起始index                           |
 | cells.N.columnEnd   | Integer | 单元格坐标：列结束index                           |
 | cells.N.content     | String  | 单元格内容，字数不超过100                         |
-| cells.N.style         | String  | 单元格字体风格配置 ，风格配置的json字符串  如： {"font":"黑体","fontSize":12,"color":"FFFFFF","bold":true,"align":"CENTER"}      |
+| cells.N.style         | String  | 单元格字体风格配置 ，风格配置的json字符串  如： {"font":"黑体","fontSize":12,"color":"#FFFFFF","bold":true,"align":"CENTER"}      |
 
 表格参数headers说明
 widthPercent Integer 表头单元格列占总表头的比例，例如1：30表示 此列占表头的30%，不填写时列宽度平均拆分；例如2：总2列，某一列填写40，剩余列可以为空，按照60计算。；例如3：总3列，某一列填写30，剩余2列可以为空，分别为(100-30)/2=35
 
 content String 表头单元格内容，字数不超过100
 
-style String 为字体风格设置 风格支持： font : 目前支持 黑体、宋体; fontSize： 6-72; color：000000-FFFFFF  字符串形如：  "FFFFFF"; bold ： 是否加粗， true ： 加粗 false： 不加粗; align: 对其方式， 支持 LEFT / RIGHT / CENTER
+style String 为字体风格设置 风格支持： font : 目前支持 黑体、宋体; fontSize： 6-72; color：000000-FFFFFF  字符串形如：  "#FFFFFF" 或者 "0xFFFFFF"; bold ： 是否加粗， true ： 加粗 false： 不加粗; align: 对其方式， 支持 LEFT / RIGHT / CENTER
  */
 export interface FormField {
   /**
@@ -4034,11 +4034,6 @@ export interface ResourceUrlInfo {
  */
 export interface ChannelCreateBatchQuickSignUrlRequest {
   /**
-   * 批量签署的合同流程ID数组。
-注: `在调用此接口时，请确保合同流程均为本企业发起，且合同数量不超过100个。`
-   */
-  FlowIds: Array<string>
-  /**
    * 批量签署的流程签署人，其中姓名(ApproverName)、参与人类型(ApproverType)必传，手机号(ApproverMobile)和证件信息(ApproverIdCardType、ApproverIdCardNumber)可任选一种或全部传入。
 注:
 `1. ApproverType目前只支持个人类型的签署人。`
@@ -4050,6 +4045,16 @@ export interface ChannelCreateBatchQuickSignUrlRequest {
    * 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。
    */
   Agent?: Agent
+  /**
+   * 批量签署的合同流程ID数组。
+注: `在调用此接口时，请确保合同流程均为本企业发起，且合同数量不超过100个。`
+   */
+  FlowIds?: Array<string>
+  /**
+   * 合同组编号
+注：`该参数和合同流程ID数组必须二选一`
+   */
+  FlowGroupId?: string
   /**
    * 签署完之后的H5页面的跳转链接，此链接及支持http://和https://，最大长度1000个字符。(建议https协议)
    */
@@ -4774,6 +4779,7 @@ export interface DescribeChannelOrganizationsRequest {
 渠道应用标识: Agent.AppId
 第三方平台子客企业标识: Agent.ProxyOrganizationOpenId
 第三方平台子客企业中的员工标识: Agent. ProxyOperator.OpenId
+
 第三方平台子客企业和员工必须已经经过实名认证
    */
   Agent: Agent
@@ -4782,19 +4788,19 @@ export interface DescribeChannelOrganizationsRequest {
    */
   Limit: number
   /**
-   * 子客OrganizationOpenId，定向查询某个子客的企业数据。
+   * 该字段是指第三方平台子客企业的唯一标识，用于查询单独某个子客的企业数据。
+
+**注**：`如果需要批量查询本应用下的所有企业的信息，则该字段不需要赋值`
    */
   OrganizationOpenId?: string
   /**
-   * 企业认证状态过滤字段。可值如下：
-<ul>
-  <li>**"UNVERIFIED"**： 未认证的企业</li>
+   * 可以按照当前企业的认证状态进行过滤。可值如下：
+<ul><li>**"UNVERIFIED"**： 未认证的企业</li>
   <li>**"VERIFYINGLEGALPENDINGAUTHORIZATION"**： 认证中待法人授权的企业</li>
   <li>**"VERIFYINGAUTHORIZATIONFILEPENDING"**： 认证中授权书审核中的企业</li>
   <li>**"VERIFYINGAUTHORIZATIONFILEREJECT"**： 认证中授权书已驳回的企业</li>
-  <li>**"VERIFYING"**： 认证中的企业</li>
-  <li>**"VERIFIED"**： 已认证的企业</li>
-</ul>
+  <li>**"VERIFYING"**： 认证进行中的企业</li>
+  <li>**"VERIFIED"**： 已认证完成的企业</li></ul>
    */
   AuthorizationStatusList?: Array<string>
   /**
@@ -4864,6 +4870,10 @@ export interface ChannelCreatePreparedPersonalEsignRequest {
    * 设置用户开通自动签时是否绑定个人自动签账号许可。一旦绑定后，将扣减购买的个人自动签账号许可一次（1年有效期），不可解绑释放。不传默认为绑定自动签账号许可。 0-绑定个人自动签账号许可，开通后将扣减购买的个人自动签账号许可一次 1-不绑定，发起合同时将按标准合同套餐进行扣减
    */
   LicenseType?: number
+  /**
+   * <ul><li> **E_PRESCRIPTION_AUTO_SIGN** :  电子处方场景</li><li> **OTHER** :  通用场景</li></ul>
+   */
+  SceneKey?: string
 }
 
 /**
@@ -5251,48 +5261,40 @@ export interface FlowApproverItem {
  */
 export interface ChannelOrganizationInfo {
   /**
-   * 电子签企业Id
-注意：此字段可能返回 null，表示取不到有效值。
+   * 电子签平台给企业分配的ID（在不同应用下同一个企业会分配通用的ID）
    */
   OrganizationId?: string
   /**
-   * 电子签企业OpenId
-注意：此字段可能返回 null，表示取不到有效值。
+   * 第三方平台子客企业的唯一标识
    */
   OrganizationOpenId?: string
   /**
-   * 企业名称
-注意：此字段可能返回 null，表示取不到有效值。
+   * 第三方平台子客企业名称
    */
   OrganizationName?: string
   /**
-   * 企业信用代码
-注意：此字段可能返回 null，表示取不到有效值。
+   * 企业的统一社会信用代码
    */
   UnifiedSocialCreditCode?: string
   /**
-   * 法人姓名
-注意：此字段可能返回 null，表示取不到有效值。
+   * 企业法定代表人的姓名
    */
   LegalName?: string
   /**
-   * 法人OpenId
-注意：此字段可能返回 null，表示取不到有效值。
+   * 企业法定代表人作为第三方平台子客企业员工的唯一标识
    */
   LegalOpenId?: string
   /**
-   * 超管姓名
-注意：此字段可能返回 null，表示取不到有效值。
+   * 企业超级管理员的姓名
    */
   AdminName?: string
   /**
-   * 超管OpenId
-注意：此字段可能返回 null，表示取不到有效值。
+   * 企业超级管理员作为第三方平台子客企业员工的唯一标识
    */
   AdminOpenId?: string
   /**
-   * 超管手机号，脱敏后返回
-注意：此字段可能返回 null，表示取不到有效值。
+   * 企业超级管理员的手机号码
+   **注**：`手机号码脱敏（隐藏部分用*替代）`
    */
   AdminMobile?: string
   /**
@@ -5305,7 +5307,6 @@ export interface ChannelOrganizationInfo {
   <li>**"VERIFYING"**： 认证中的企业</li>
   <li>**"VERIFIED"**： 已认证的企业</li>
 </ul>
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AuthorizationStatus?: string
   /**
@@ -5316,7 +5317,6 @@ export interface ChannelOrganizationInfo {
   <li>**"AuthorizationLegalPerson"**： 法人授权超管</li>
   <li>**"AuthorizationLegalIdentity"**： 法人直接认证</li>
 </ul>
-注意：此字段可能返回 null，表示取不到有效值。
    */
   AuthorizationType?: string
 }
@@ -5991,6 +5991,7 @@ export interface ChannelCreateBatchSignUrlRequest {
 <li>请确认该名称与企业营业执照中注册的名称一致。</li>
 <li>如果名称中包含英文括号()，请使用中文括号（）代替。</li>
 <li>请确保此企业已完成腾讯电子签企业认证。</li>
+<li>若为子客企业，请确保员工已经加入企业。</li>
 </ul>
    */
   OrganizationName?: string
@@ -6590,7 +6591,7 @@ export interface UploadFilesRequest {
  */
 export interface DescribeChannelOrganizationsResponse {
   /**
-   * 企业企业信息列表。
+   * 满足查询条件的企业信息列表。
    */
   ChannelOrganizationInfos?: Array<ChannelOrganizationInfo>
   /**
@@ -6602,7 +6603,7 @@ export interface DescribeChannelOrganizationsResponse {
    */
   Limit?: number
   /**
-   * 符合条件的企业数量。
+   * 满足查询条件的企业总数量。
    */
   Total?: number
   /**

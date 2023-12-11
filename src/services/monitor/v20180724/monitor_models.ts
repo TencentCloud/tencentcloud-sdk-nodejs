@@ -368,11 +368,11 @@ export interface CreatePrometheusMultiTenantInstancePostPayModeRequest {
    */
   InstanceName: string
   /**
-   * VPC ID
+   * VPC ID(可通过 vpc:DescribeVpcs 接口获取，与实例同地域)
    */
   VpcId: string
   /**
-   * 子网 ID
+   * 子网 ID(可通过 vpc:DescribeSubnets 接口获取)
    */
   SubnetId: string
   /**
@@ -380,7 +380,7 @@ export interface CreatePrometheusMultiTenantInstancePostPayModeRequest {
    */
   DataRetentionTime: number
   /**
-   * 可用区
+   * 可用区(与子网同可用区)
    */
   Zone: string
   /**
@@ -665,7 +665,7 @@ export interface CreatePrometheusMultiTenantInstancePostPayModeResponse {
   /**
    * 实例 ID
    */
-  InstanceId: string
+  InstanceId?: string
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -944,7 +944,7 @@ export interface DeleteExporterIntegrationRequest {
    */
   InstanceId: string
   /**
-   * 类型
+   * 类型(可通过 DescribeExporterIntegrations获取)
    */
   Kind: string
   /**
@@ -954,12 +954,12 @@ export interface DeleteExporterIntegrationRequest {
   /**
    * Kubernetes 集群类型，取值如下：
 <li> 1= 容器集群(TKE) </li>
-<li> 2=弹性集群<EKS> </li>
-<li> 3= Prometheus管理的弹性集群<MEKS> </li>
+<li> 2=弹性集群(EKS) </li>
+<li> 3= Prometheus管理的弹性集群(MEKS) </li>
    */
   KubeType?: number
   /**
-   * 集群 ID
+   * 集群 ID，可不填
    */
   ClusterId?: string
 }
@@ -1496,11 +1496,11 @@ export interface DeletePrometheusScrapeJobsRequest {
    */
   InstanceId: string
   /**
-   * Agent ID
+   * Agent ID(可通过 DescribePrometheusAgents 接口获取)
    */
   AgentId: string
   /**
-   * 任务 ID 列表
+   * 任务 ID 列表(可通过 DescribePrometheusScrapeJobs 接口获取)
    */
   JobIds: Array<string>
 }
@@ -2699,7 +2699,7 @@ export interface CreateExporterIntegrationResponse {
   /**
    * 返回创建成功的集成名称列表
    */
-  Names: Array<string>
+  Names?: Array<string>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3283,7 +3283,7 @@ export interface CreatePrometheusScrapeJobResponse {
   /**
    * 成功创建抓取任务 Id
    */
-  JobId: string
+  JobId?: string
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5207,7 +5207,7 @@ export interface CreateExporterIntegrationRequest {
    */
   InstanceId: string
   /**
-   * 类型
+   * 类型(可通过 DescribePrometheusIntegrations 接口获取，取每一项中的 ExporterType 字段)
    */
   Kind: string
   /**
@@ -5215,14 +5215,14 @@ export interface CreateExporterIntegrationRequest {
    */
   Content: string
   /**
-   * Kubernetes 集群类型，取值如下：
+   * Kubernetes 集群类型，可不填，取值如下：
 <li> 1= 容器集群(TKE) </li>
-<li> 2=弹性集群<EKS> </li>
-<li> 3= Prometheus管理的弹性集群<MEKS> </li>
+<li> 2=弹性集群(EKS) </li>
+<li> 3= Prometheus管理的弹性集群(MEKS) </li>
    */
   KubeType?: number
   /**
-   * 集群 ID
+   * 集群 ID，可不填
    */
   ClusterId?: string
 }
@@ -5669,7 +5669,7 @@ export interface CreateRecordingRuleRequest {
    */
   Name: string
   /**
-   * 聚合规则组内容，格式为 yaml
+   * 聚合规则组内容，格式为 yaml，通过 base64 进行编码。
    */
   Group: string
   /**
@@ -7698,15 +7698,15 @@ export interface CreatePolicyGroupRequest {
  */
 export interface CreatePrometheusScrapeJobRequest {
   /**
-   * Prometheus 实例 ID，例如：prom-abcd1234
+   * Prometheus 实例 ID
    */
   InstanceId: string
   /**
-   * Agent ID，例如：agent-abcd1234，可在控制台 Agent 管理中获取
+   * Agent ID(可通过DescribePrometheusAgents 接口获取)
    */
   AgentId: string
   /**
-   * 抓取任务配置，格式：job_name:xx
+   * 抓取任务配置
    */
   Config?: string
 }
@@ -8054,6 +8054,13 @@ export interface UpgradeGrafanaDashboardRequest {
   InstanceId: string
   /**
    * Prometheus 集成项 Code，升级对应的 Dashboard，取值如下：
+<li>qcloud</li>
+<li>cvm_process_exporter</li>
+<li>cvm_node_exporter</li>
+<li>cvm</li>
+<li>kubernetes</li>
+<li>cdwch</li>
+<li>rocketmq</li>
 <li>spring_mvc</li>
 <li>mysql</li>
 <li>go</li>
@@ -8071,6 +8078,8 @@ export interface UpgradeGrafanaDashboardRequest {
 <li>tps</li>
 <li>istio</li>
 <li>etcd</li>
+<li>pts</li>
+<li>kong</li>
    */
   IntegrationCodes?: Array<string>
 }

@@ -613,47 +613,47 @@ export interface TemplateInfo {
     /**
      * 模板ID
      */
-    TemplateId: string;
+    TemplateId?: string;
     /**
      * 认证状态：未实名认证:NotUpload, 实名审核中:InAudit，已实名认证:Approved，实名审核失败:Reject
      */
-    AuditStatus: string;
+    AuditStatus?: string;
     /**
      * 创建时间
      */
-    CreatedOn: string;
+    CreatedOn?: string;
     /**
      * 更新时间
      */
-    UpdatedOn: string;
+    UpdatedOn?: string;
     /**
      * 用户UIN
      */
-    UserUin: string;
+    UserUin?: string;
     /**
      * 是否是默认模板: 是:yes，否:no
      */
-    IsDefault: string;
+    IsDefault?: string;
     /**
      * 认证失败原因
      */
-    AuditReason: string;
+    AuditReason?: string;
     /**
      * 认证信息
      */
-    CertificateInfo: CertificateInfo;
+    CertificateInfo?: CertificateInfo;
     /**
      * 联系人信息
      */
-    ContactInfo: ContactInfo;
+    ContactInfo?: ContactInfo;
     /**
      * 模板是否符合规范， 1是 0 否
      */
-    IsValidTemplate: number;
+    IsValidTemplate?: number;
     /**
      * 不符合规范原因
      */
-    InvalidReason: string;
+    InvalidReason?: string;
     /**
      * 是包含黑名单手机或邮箱
      */

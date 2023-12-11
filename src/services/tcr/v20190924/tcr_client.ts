@@ -98,7 +98,6 @@ import {
   SearchUserRepositoryResp,
   CreateTagRetentionRuleRequest,
   DuplicateImagePersonalResponse,
-  DescribeCustomAccountsRequest,
   DescribeImageLifecyclePersonalResponse,
   DescribeInstanceStatusResponse,
   CreateImageAccelerationServiceRequest,
@@ -126,20 +125,19 @@ import {
   DeleteNamespaceResponse,
   DeleteNamespacePersonalResponse,
   Favors,
-  CreateWebhookTriggerRequest,
+  CreateSignatureRequest,
   DescribeRepositoryPersonalResponse,
   CreateSecurityPolicyResponse,
   DescribeRepositoriesRequest,
   CreateUserPersonalRequest,
   DeleteServiceAccountResponse,
-  ValidateRepositoryExistPersonalResponse,
   ModifyNamespaceResponse,
   ValidateRepositoryExistPersonalRequest,
   ModifyUserPasswordPersonalResponse,
   TcrNamespaceInfo,
   DescribeImagesResponse,
   ModifyRepositoryInfoPersonalResponse,
-  CreateSignatureRequest,
+  DescribeWebhookTriggerLogRequest,
   RenewInstanceRequest,
   DescribeImageFilterPersonalRequest,
   DescribeTagRetentionExecutionTaskRequest,
@@ -194,7 +192,7 @@ import {
   GCJobInfo,
   Registry,
   DescribeChartDownloadInfoRequest,
-  DescribeCustomAccountsResponse,
+  ValidateRepositoryExistPersonalResponse,
   DeleteImageAccelerateServiceRequest,
   CheckInstanceResponse,
   NamespaceIsExistsResp,
@@ -204,7 +202,6 @@ import {
   DescribeImmutableTagRulesRequest,
   Filter,
   RetentionExecution,
-  DescribeWebhookTriggerLogRequest,
   DuplicateImageResponse,
   DescribeReplicationInstanceCreateTasksRequest,
   ModifyWebhookTriggerResponse,
@@ -227,7 +224,7 @@ import {
   DescribeReplicationInstancesResponse,
   CreateSecurityPolicyRequest,
   ManageReplicationResponse,
-  CustomAccount,
+  CreateWebhookTriggerRequest,
   DeleteImageAccelerateServiceResponse,
   CVEWhitelistItem,
   ModifyRepositoryInfoPersonalRequest,
@@ -883,18 +880,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateUserPersonalResponse) => void
   ): Promise<CreateUserPersonalResponse> {
     return this.request("CreateUserPersonal", req, cb)
-  }
-
-  /**
-     * 接口未使用
-
-查询自定义账号
-     */
-  async DescribeCustomAccounts(
-    req: DescribeCustomAccountsRequest,
-    cb?: (error: string, rep: DescribeCustomAccountsResponse) => void
-  ): Promise<DescribeCustomAccountsResponse> {
-    return this.request("DescribeCustomAccounts", req, cb)
   }
 
   /**

@@ -2185,6 +2185,24 @@ export interface KubeJarvisStateInspectionResult {
 }
 
 /**
+ * CreateEksLogConfig请求参数结构体
+ */
+export interface CreateEksLogConfigRequest {
+  /**
+   * 集群ID
+   */
+  ClusterId: string
+  /**
+   * 日志采集配置的json表达
+   */
+  LogConfig: string
+  /**
+   * 日志集ID
+   */
+  LogsetId?: string
+}
+
+/**
  * CreateCluster返回参数结构体
  */
 export interface CreateClusterResponse {
@@ -2867,6 +2885,16 @@ export interface DeleteClusterRouteRequest {
    * 目的端CIDR。
    */
   DestinationCidrBlock: string
+}
+
+/**
+ * CreateCLSLogConfig返回参数结构体
+ */
+export interface CreateCLSLogConfigResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -7327,6 +7355,21 @@ export interface DescribePrometheusTemplateSyncResponse {
 }
 
 /**
+ * CreateEksLogConfig返回参数结构体
+ */
+export interface CreateEksLogConfigResponse {
+  /**
+   * 日志采集topicid
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TopicId?: string
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyPrometheusTemplate返回参数结构体
  */
 export interface ModifyPrometheusTemplateResponse {
@@ -7740,6 +7783,28 @@ export interface CreatePrometheusConfigRequest {
    * prometheus原生Job配置
    */
   RawJobs?: Array<PrometheusConfigItem>
+}
+
+/**
+ * CreateCLSLogConfig请求参数结构体
+ */
+export interface CreateCLSLogConfigRequest {
+  /**
+   * 日志采集配置的json表达
+   */
+  LogConfig: string
+  /**
+   * 集群ID
+   */
+  ClusterId: string
+  /**
+   * CLS日志集ID
+   */
+  LogsetId?: string
+  /**
+   * 当前集群类型支持tke、eks
+   */
+  ClusterType?: string
 }
 
 /**

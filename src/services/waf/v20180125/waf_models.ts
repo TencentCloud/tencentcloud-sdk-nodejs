@@ -6410,7 +6410,7 @@ export interface UpsertCCRuleRequest {
    */
   Status: number
   /**
-   * 高级模式
+   * 高级模式（是否使用Session检测），0表示不启用，1表示启用
    */
   Advance: string
   /**
@@ -6426,11 +6426,11 @@ export interface UpsertCCRuleRequest {
    */
   Url: string
   /**
-   * 匹配方法
+   * 匹配方法，0表示等于，1表示前缀匹配，2表示包含
    */
   MatchFunc: number
   /**
-   * 动作
+   * 动作，20表示观察，21表示人机识别，22表示拦截，23表示精准拦截
    */
   ActionType: string
   /**
@@ -6446,7 +6446,7 @@ export interface UpsertCCRuleRequest {
    */
   OptionsArr?: string
   /**
-   * waf版本
+   * waf版本，sparta-waf或者clb-waf
    */
   Edition?: string
   /**

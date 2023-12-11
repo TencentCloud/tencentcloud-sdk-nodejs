@@ -136,6 +136,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeClusterCommonNames", req, cb);
     }
     /**
+     * 获取2.0实例初始化任务状态
+     */
+    async DescribePrometheusInstanceInitStatus(req, cb) {
+        return this.request("DescribePrometheusInstanceInitStatus", req, cb);
+    }
+    /**
      * 开启事件持久化功能
      */
     async EnableEventPersistence(req, cb) {
@@ -262,6 +268,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeTKEEdgeExternalKubeconfig", req, cb);
     }
     /**
+     * 创建日志采集配置
+     */
+    async CreateCLSLogConfig(req, cb) {
+        return this.request("CreateCLSLogConfig", req, cb);
+    }
+    /**
      * 开启集群审计
      */
     async EnableClusterAudit(req, cb) {
@@ -280,10 +292,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyClusterVirtualNodePool", req, cb);
     }
     /**
-     * 查询节点池列表
+     * 获取集群可以升级的所有版本
      */
-    async DescribeClusterNodePools(req, cb) {
-        return this.request("DescribeClusterNodePools", req, cb);
+    async DescribeAvailableClusterVersion(req, cb) {
+        return this.request("DescribeAvailableClusterVersion", req, cb);
     }
     /**
      * 本接口查询当前用户和地域在指定可用区下的机型可支持的最大 TKE VPC-CNI 网络模式的 Pod 数量
@@ -308,12 +320,6 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CreatePrometheusRecordRuleYaml(req, cb) {
         return this.request("CreatePrometheusRecordRuleYaml", req, cb);
-    }
-    /**
-     * 获取集群可以升级的所有版本
-     */
-    async DescribeAvailableClusterVersion(req, cb) {
-        return this.request("DescribeAvailableClusterVersion", req, cb);
     }
     /**
      * 批量删除镜像缓存
@@ -430,10 +436,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ListClusterInspectionResults", req, cb);
     }
     /**
-     * 获取2.0实例初始化任务状态
+     * 查询节点池列表
      */
-    async DescribePrometheusInstanceInitStatus(req, cb) {
-        return this.request("DescribePrometheusInstanceInitStatus", req, cb);
+    async DescribeClusterNodePools(req, cb) {
+        return this.request("DescribeClusterNodePools", req, cb);
     }
     /**
      * 获取边缘计算集群的认证信息
@@ -602,6 +608,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DeleteAddon(req, cb) {
         return this.request("DeleteAddon", req, cb);
+    }
+    /**
+     * 为弹性集群创建日志采集配置
+     */
+    async CreateEksLogConfig(req, cb) {
+        return this.request("CreateEksLogConfig", req, cb);
     }
     /**
      * 驱逐超级节点

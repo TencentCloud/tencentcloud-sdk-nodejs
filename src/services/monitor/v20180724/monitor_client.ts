@@ -690,7 +690,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除 Prometheus 抓取任务
+   * 删除 Prometheus Agent 抓取任务
    */
   async DeletePrometheusScrapeJobs(
     req: DeletePrometheusScrapeJobsRequest,
@@ -770,7 +770,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建 Prometheus 抓取任务
+   * 创建 Prometheus Agent 抓取任务
    */
   async CreatePrometheusScrapeJob(
     req: CreatePrometheusScrapeJobRequest,
@@ -1024,7 +1024,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建 exporter 集成
+   * 创建集成中心 exporter 集成，因集成较多，建议控制台创建集成。(前提：已授权创建托管 EKS 集群，验证方式：1. 控制台界面确认，未提示授权则表示已授权创建；2. 通过 DescribePrometheusInstanceInitStatus 接口查询集群状态，如果托管集群不存在，可通过 RunPrometheusInstance 接口创建)
    */
   async CreateExporterIntegration(
     req: CreateExporterIntegrationRequest,
@@ -1541,7 +1541,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除 exporter 集成
+   * 删除集成中心 exporter 集成
    */
   async DeleteExporterIntegration(
     req: DeleteExporterIntegrationRequest,
@@ -1851,7 +1851,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 彻底删除 Prometheus 实例相关数据，给定的实例必须先被 Terminate
+   * 彻底删除 Prometheus 实例相关数据，给定的实例必须先被 Terminate(该接口是异步接口，实例是否释放需要通过 DescribePrometheusInstances 接口返回的状态来判断)。
    */
   async DestroyPrometheusInstance(
     req: DestroyPrometheusInstanceRequest,

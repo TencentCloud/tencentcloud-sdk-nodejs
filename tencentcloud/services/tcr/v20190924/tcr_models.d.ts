@@ -1418,35 +1418,6 @@ export interface DuplicateImagePersonalResponse {
     RequestId?: string;
 }
 /**
- * DescribeCustomAccounts请求参数结构体
- */
-export interface DescribeCustomAccountsRequest {
-    /**
-     * 实例Id
-     */
-    RegistryId: string;
-    /**
-     * 列出所有自定义账户
-     */
-    All?: boolean;
-    /**
-     * 填充策略
-     */
-    EmbedPermission?: boolean;
-    /**
-     * 过滤条件
-     */
-    Filters?: Array<Filter>;
-    /**
-     * 偏移量,默认0
-     */
-    Offset?: number;
-    /**
-     * 最大输出条数，默认20，最大为100
-     */
-    Limit?: number;
-}
-/**
  * DescribeImageLifecyclePersonal返回参数结构体
  */
 export interface DescribeImageLifecyclePersonalResponse {
@@ -1916,21 +1887,25 @@ export interface Favors {
     RegionId: number;
 }
 /**
- * CreateWebhookTrigger请求参数结构体
+ * CreateSignature请求参数结构体
  */
-export interface CreateWebhookTriggerRequest {
+export interface CreateSignatureRequest {
     /**
-     * 实例 Id
+     * 实例ID
      */
     RegistryId: string;
     /**
-     * 触发器参数
+     * 命名空间名称
      */
-    Trigger: WebhookTrigger;
+    NamespaceName: string;
     /**
-     * 命名空间
+     * 仓库名称
      */
-    Namespace: string;
+    RepositoryName: string;
+    /**
+     * Tag名称
+     */
+    ImageVersion: string;
 }
 /**
  * DescribeRepositoryPersonal返回参数结构体
@@ -2000,19 +1975,6 @@ export interface CreateUserPersonalRequest {
  * DeleteServiceAccount返回参数结构体
  */
 export interface DeleteServiceAccountResponse {
-    /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
-/**
- * ValidateRepositoryExistPersonal返回参数结构体
- */
-export interface ValidateRepositoryExistPersonalResponse {
-    /**
-     * 验证个人版仓库是否存在返回信息
-     */
-    Data: RepoIsExistResp;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2119,25 +2081,29 @@ export interface ModifyRepositoryInfoPersonalResponse {
     RequestId?: string;
 }
 /**
- * CreateSignature请求参数结构体
+ * DescribeWebhookTriggerLog请求参数结构体
  */
-export interface CreateSignatureRequest {
+export interface DescribeWebhookTriggerLogRequest {
     /**
-     * 实例ID
+     * 实例 Id
      */
     RegistryId: string;
     /**
-     * 命名空间名称
+     * 命名空间
      */
-    NamespaceName: string;
+    Namespace: string;
     /**
-     * 仓库名称
+     * 触发器 Id
      */
-    RepositoryName: string;
+    Id?: number;
     /**
-     * Tag名称
+     * 分页单页数量
      */
-    ImageVersion: string;
+    Limit?: number;
+    /**
+     * 分页偏移量
+     */
+    Offset?: number;
 }
 /**
  * RenewInstance请求参数结构体
@@ -3179,18 +3145,13 @@ export interface DescribeChartDownloadInfoRequest {
     ChartVersion: string;
 }
 /**
- * DescribeCustomAccounts返回参数结构体
+ * ValidateRepositoryExistPersonal返回参数结构体
  */
-export interface DescribeCustomAccountsResponse {
+export interface ValidateRepositoryExistPersonalResponse {
     /**
-     * 自定义账户列表
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 验证个人版仓库是否存在返回信息
      */
-    CustomAccounts?: Array<CustomAccount>;
-    /**
-     * 自定义账户数量
-     */
-    TotalCount?: number;
+    Data: RepoIsExistResp;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -3352,31 +3313,6 @@ export interface RetentionExecution {
      * 执行的状态，Failed, Succeed, Stopped, InProgress
      */
     Status: string;
-}
-/**
- * DescribeWebhookTriggerLog请求参数结构体
- */
-export interface DescribeWebhookTriggerLogRequest {
-    /**
-     * 实例 Id
-     */
-    RegistryId: string;
-    /**
-     * 命名空间
-     */
-    Namespace: string;
-    /**
-     * 触发器 Id
-     */
-    Id?: number;
-    /**
-     * 分页单页数量
-     */
-    Limit?: number;
-    /**
-     * 分页偏移量
-     */
-    Offset?: number;
 }
 /**
  * DuplicateImage返回参数结构体
@@ -3772,44 +3708,21 @@ export interface ManageReplicationResponse {
     RequestId?: string;
 }
 /**
- * 自定义账户
+ * CreateWebhookTrigger请求参数结构体
  */
-export interface CustomAccount {
+export interface CreateWebhookTriggerRequest {
     /**
-     * 自定义账户名
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 实例 Id
      */
-    Name?: string;
+    RegistryId: string;
     /**
-     * 描述
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 触发器参数
      */
-    Description?: string;
+    Trigger: WebhookTrigger;
     /**
-     * 是否禁用
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 命名空间
      */
-    Disable?: boolean;
-    /**
-     * 过期时间
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ExpiresAt?: number;
-    /**
-     * 创建时间
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    CreateTime?: string;
-    /**
-     * 更新时间
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    UpdateTime?: string;
-    /**
-     * 策略
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Permissions?: Array<Permission>;
+    Namespace: string;
 }
 /**
  * DeleteImageAccelerateService返回参数结构体

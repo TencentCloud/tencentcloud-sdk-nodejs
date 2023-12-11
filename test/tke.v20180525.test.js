@@ -198,6 +198,16 @@ it("tke.v20180525.DescribeClusterCommonNames", async function () {
     }
 })
 
+it("tke.v20180525.DescribePrometheusInstanceInitStatus", async function () {
+    try {
+       const data = await client.DescribePrometheusInstanceInitStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tke.v20180525.EnableEventPersistence", async function () {
     try {
        const data = await client.EnableEventPersistence({})
@@ -408,6 +418,16 @@ it("tke.v20180525.DescribeTKEEdgeExternalKubeconfig", async function () {
     }
 })
 
+it("tke.v20180525.CreateCLSLogConfig", async function () {
+    try {
+       const data = await client.CreateCLSLogConfig({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tke.v20180525.EnableClusterAudit", async function () {
     try {
        const data = await client.EnableClusterAudit({})
@@ -438,9 +458,9 @@ it("tke.v20180525.ModifyClusterVirtualNodePool", async function () {
     }
 })
 
-it("tke.v20180525.DescribeClusterNodePools", async function () {
+it("tke.v20180525.DescribeAvailableClusterVersion", async function () {
     try {
-       const data = await client.DescribeClusterNodePools({})
+       const data = await client.DescribeAvailableClusterVersion({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -481,16 +501,6 @@ it("tke.v20180525.DescribeClusterPendingReleases", async function () {
 it("tke.v20180525.CreatePrometheusRecordRuleYaml", async function () {
     try {
        const data = await client.CreatePrometheusRecordRuleYaml({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("tke.v20180525.DescribeAvailableClusterVersion", async function () {
-    try {
-       const data = await client.DescribeAvailableClusterVersion({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -688,9 +698,9 @@ it("tke.v20180525.ListClusterInspectionResults", async function () {
     }
 })
 
-it("tke.v20180525.DescribePrometheusInstanceInitStatus", async function () {
+it("tke.v20180525.DescribeClusterNodePools", async function () {
     try {
-       const data = await client.DescribePrometheusInstanceInitStatus({})
+       const data = await client.DescribeClusterNodePools({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -971,6 +981,16 @@ it("tke.v20180525.DescribePrometheusTemp", async function () {
 it("tke.v20180525.DeleteAddon", async function () {
     try {
        const data = await client.DeleteAddon({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tke.v20180525.CreateEksLogConfig", async function () {
+    try {
+       const data = await client.CreateEksLogConfig({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -938,6 +938,15 @@ export interface DeleteDomainAndIpRequest {
     Type?: string;
 }
 /**
+ * DescribeNICAssets请求参数结构体
+ */
+export interface DescribeNICAssetsRequest {
+    /**
+     * 过滤参数
+     */
+    Filter?: Filter;
+}
+/**
  * DescribeScanTaskList请求参数结构体
  */
 export interface DescribeScanTaskListRequest {
@@ -1185,6 +1194,114 @@ export interface TaskLogURL {
  * AddNewBindRoleUser请求参数结构体
  */
 export declare type AddNewBindRoleUserRequest = null;
+/**
+ * 网卡资产
+ */
+export interface NICAsset {
+    /**
+     * appid
+     */
+    AppId?: string;
+    /**
+     * uin
+     */
+    Uin?: string;
+    /**
+     * 资产ID
+     */
+    AssetId?: string;
+    /**
+     * 资产名
+     */
+    AssetName?: string;
+    /**
+     * 资产类型
+     */
+    AssetType?: string;
+    /**
+     * 私有ip
+     */
+    PrivateIp?: string;
+    /**
+     * 公网ip
+     */
+    PublicIp?: string;
+    /**
+     * 区域
+     */
+    Region?: string;
+    /**
+     * 私有网络id
+     */
+    VpcId?: string;
+    /**
+     * 私有网络名
+     */
+    VpcName?: string;
+    /**
+     * 标签
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Tag?: Array<Tag>;
+    /**
+     * 出向峰值带宽
+     */
+    OutboundPeakBandwidth?: string;
+    /**
+     * 入向峰值带宽
+     */
+    InboundPeakBandwidth?: string;
+    /**
+     * 出站累计流量
+     */
+    OutboundCumulativeFlow?: string;
+    /**
+     * 入站累计流量
+     */
+    InboundCumulativeFlow?: string;
+    /**
+     * 网络攻击
+     */
+    NetworkAttack?: number;
+    /**
+     * 暴露端口
+     */
+    ExposedPort?: number;
+    /**
+     * 暴露漏洞
+     */
+    ExposedVUL?: number;
+    /**
+     * 配置风险
+     */
+    ConfigureRisk?: number;
+    /**
+     * 创建时间
+     */
+    CreateTime?: string;
+    /**
+     * 任务数
+     */
+    ScanTask?: number;
+    /**
+     * 最后扫描时间
+     */
+    LastScanTime?: string;
+    /**
+     * 昵称
+     */
+    Nick?: string;
+    /**
+     * 是否核心
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IsCore?: number;
+    /**
+     * 是否新资产 1新
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IsNewAsset?: number;
+}
 /**
  * DescribeListenerList返回参数结构体
  */
@@ -1544,25 +1661,13 @@ export interface StopRiskCenterTaskResponse {
     RequestId?: string;
 }
 /**
- * 风险中心状态处理Key
+ * DescribeVpcAssets请求参数结构体
  */
-export interface RiskCenterStatusKey {
+export interface DescribeVpcAssetsRequest {
     /**
-     * 风险ID
+     * 过滤参数
      */
-    Id: string;
-    /**
-     * APP ID
-     */
-    AppId: string;
-    /**
-     * 公网IP/域名
-     */
-    PublicIPDomain?: string;
-    /**
-     * 实例ID
-     */
-    InstanceId?: string;
+    Filter?: Filter;
 }
 /**
  * 任务资产项
@@ -1792,13 +1897,25 @@ export interface FilterDataObject {
     Text?: string;
 }
 /**
- * DescribeVpcAssets请求参数结构体
+ * 风险中心状态处理Key
  */
-export interface DescribeVpcAssetsRequest {
+export interface RiskCenterStatusKey {
     /**
-     * 过滤参数
+     * 风险ID
      */
-    Filter?: Filter;
+    Id: string;
+    /**
+     * APP ID
+     */
+    AppId: string;
+    /**
+     * 公网IP/域名
+     */
+    PublicIPDomain?: string;
+    /**
+     * 实例ID
+     */
+    InstanceId?: string;
 }
 /**
  * DescribeRiskCenterAssetViewWeakPasswordRiskList请求参数结构体
@@ -4142,6 +4259,39 @@ export interface DescribeDbAssetsResponse {
     /**
      * Appid枚举
   注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AppIdList?: Array<FilterDataObject>;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * DescribeNICAssets返回参数结构体
+ */
+export interface DescribeNICAssetsResponse {
+    /**
+     * 列表
+     */
+    Data?: Array<NICAsset>;
+    /**
+     * 总数
+     */
+    TotalCount?: number;
+    /**
+     * 地域列表
+     */
+    RegionList?: Array<FilterDataObject>;
+    /**
+     * 资产类型列表
+     */
+    AssetTypeList?: Array<FilterDataObject>;
+    /**
+     * vpc列表
+     */
+    VpcList?: Array<FilterDataObject>;
+    /**
+     * appid列表
      */
     AppIdList?: Array<FilterDataObject>;
     /**

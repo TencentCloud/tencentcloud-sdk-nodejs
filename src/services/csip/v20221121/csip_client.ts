@@ -40,6 +40,7 @@ import {
   DescribeDomainAssetsRequest,
   Tag,
   DeleteDomainAndIpRequest,
+  DescribeNICAssetsRequest,
   DescribeScanTaskListRequest,
   TaskIdListKey,
   GateWayAsset,
@@ -48,6 +49,7 @@ import {
   DescribeSearchBugInfoRequest,
   TaskLogURL,
   AddNewBindRoleUserRequest,
+  NICAsset,
   DescribeListenerListResponse,
   DBAssetVO,
   AssetInfoDetail,
@@ -56,11 +58,11 @@ import {
   DescribeSubnetAssetsResponse,
   DescribeRiskCenterAssetViewPortRiskListRequest,
   StopRiskCenterTaskResponse,
-  RiskCenterStatusKey,
+  DescribeVpcAssetsRequest,
   TaskAssetObject,
   IpAssetListVO,
   FilterDataObject,
-  DescribeVpcAssetsRequest,
+  RiskCenterStatusKey,
   DescribeRiskCenterAssetViewWeakPasswordRiskListRequest,
   PublicIpDomainListKey,
   DescribeCVMAssetsResponse,
@@ -114,6 +116,7 @@ import {
   BugInfoDetail,
   DescribeDomainAssetsResponse,
   DescribeDbAssetsResponse,
+  DescribeNICAssetsResponse,
   DescribeRiskCenterAssetViewVULRiskListResponse,
   DescribeCVMAssetsRequest,
   DescribeRiskCenterServerRiskListRequest,
@@ -155,6 +158,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDbAssetInfoResponse) => void
   ): Promise<DescribeDbAssetInfoResponse> {
     return this.request("DescribeDbAssetInfo", req, cb)
+  }
+
+  /**
+   * 获取网卡列表
+   */
+  async DescribeNICAssets(
+    req: DescribeNICAssetsRequest,
+    cb?: (error: string, rep: DescribeNICAssetsResponse) => void
+  ): Promise<DescribeNICAssetsResponse> {
+    return this.request("DescribeNICAssets", req, cb)
   }
 
   /**

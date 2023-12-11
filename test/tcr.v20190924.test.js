@@ -588,16 +588,6 @@ it("tcr.v20190924.CreateUserPersonal", async function () {
     }
 })
 
-it("tcr.v20190924.DescribeCustomAccounts", async function () {
-    try {
-       const data = await client.DescribeCustomAccounts({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("tcr.v20190924.DescribeInstanceCustomizedDomain", async function () {
     try {
        const data = await client.DescribeInstanceCustomizedDomain({})

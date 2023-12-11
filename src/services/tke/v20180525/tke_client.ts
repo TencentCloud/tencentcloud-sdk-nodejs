@@ -112,6 +112,7 @@ import {
   Instance,
   ModifyClusterAttributeResponse,
   KubeJarvisStateInspectionResult,
+  CreateEksLogConfigRequest,
   CreateClusterResponse,
   PrometheusClusterAgentPodConfig,
   RunSecurityServiceEnabled,
@@ -146,6 +147,7 @@ import {
   DescribeClusterNodePoolsRequest,
   DescribeClusterRouteTablesRequest,
   DeleteClusterRouteRequest,
+  CreateCLSLogConfigResponse,
   DeleteClusterEndpointRequest,
   DeleteClusterVirtualNodeRequest,
   DescribeClusterNodePoolDetailRequest,
@@ -349,6 +351,7 @@ import {
   DescribePrometheusGlobalNotificationRequest,
   ClusterPublicLB,
   DescribePrometheusTemplateSyncResponse,
+  CreateEksLogConfigResponse,
   ModifyPrometheusTemplateResponse,
   ModifyPrometheusAlertPolicyResponse,
   Cluster,
@@ -361,6 +364,7 @@ import {
   UpdateImageCacheResponse,
   DescribeIPAMDResponse,
   CreatePrometheusConfigRequest,
+  CreateCLSLogConfigRequest,
   CreateClusterVirtualNodeResponse,
   ImageCacheEvent,
   CreatePrometheusClusterAgentRequest,
@@ -809,6 +813,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取2.0实例初始化任务状态
+   */
+  async DescribePrometheusInstanceInitStatus(
+    req: DescribePrometheusInstanceInitStatusRequest,
+    cb?: (error: string, rep: DescribePrometheusInstanceInitStatusResponse) => void
+  ): Promise<DescribePrometheusInstanceInitStatusResponse> {
+    return this.request("DescribePrometheusInstanceInitStatus", req, cb)
+  }
+
+  /**
    * 开启事件持久化功能
    */
   async EnableEventPersistence(
@@ -1019,6 +1033,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 创建日志采集配置
+   */
+  async CreateCLSLogConfig(
+    req: CreateCLSLogConfigRequest,
+    cb?: (error: string, rep: CreateCLSLogConfigResponse) => void
+  ): Promise<CreateCLSLogConfigResponse> {
+    return this.request("CreateCLSLogConfig", req, cb)
+  }
+
+  /**
    * 开启集群审计
    */
   async EnableClusterAudit(
@@ -1049,13 +1073,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询节点池列表
+   * 获取集群可以升级的所有版本
    */
-  async DescribeClusterNodePools(
-    req: DescribeClusterNodePoolsRequest,
-    cb?: (error: string, rep: DescribeClusterNodePoolsResponse) => void
-  ): Promise<DescribeClusterNodePoolsResponse> {
-    return this.request("DescribeClusterNodePools", req, cb)
+  async DescribeAvailableClusterVersion(
+    req: DescribeAvailableClusterVersionRequest,
+    cb?: (error: string, rep: DescribeAvailableClusterVersionResponse) => void
+  ): Promise<DescribeAvailableClusterVersionResponse> {
+    return this.request("DescribeAvailableClusterVersion", req, cb)
   }
 
   /**
@@ -1096,16 +1120,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreatePrometheusRecordRuleYamlResponse) => void
   ): Promise<CreatePrometheusRecordRuleYamlResponse> {
     return this.request("CreatePrometheusRecordRuleYaml", req, cb)
-  }
-
-  /**
-   * 获取集群可以升级的所有版本
-   */
-  async DescribeAvailableClusterVersion(
-    req: DescribeAvailableClusterVersionRequest,
-    cb?: (error: string, rep: DescribeAvailableClusterVersionResponse) => void
-  ): Promise<DescribeAvailableClusterVersionResponse> {
-    return this.request("DescribeAvailableClusterVersion", req, cb)
   }
 
   /**
@@ -1299,13 +1313,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取2.0实例初始化任务状态
+   * 查询节点池列表
    */
-  async DescribePrometheusInstanceInitStatus(
-    req: DescribePrometheusInstanceInitStatusRequest,
-    cb?: (error: string, rep: DescribePrometheusInstanceInitStatusResponse) => void
-  ): Promise<DescribePrometheusInstanceInitStatusResponse> {
-    return this.request("DescribePrometheusInstanceInitStatus", req, cb)
+  async DescribeClusterNodePools(
+    req: DescribeClusterNodePoolsRequest,
+    cb?: (error: string, rep: DescribeClusterNodePoolsResponse) => void
+  ): Promise<DescribeClusterNodePoolsResponse> {
+    return this.request("DescribeClusterNodePools", req, cb)
   }
 
   /**
@@ -1586,6 +1600,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteAddonResponse) => void
   ): Promise<DeleteAddonResponse> {
     return this.request("DeleteAddon", req, cb)
+  }
+
+  /**
+   * 为弹性集群创建日志采集配置
+   */
+  async CreateEksLogConfig(
+    req: CreateEksLogConfigRequest,
+    cb?: (error: string, rep: CreateEksLogConfigResponse) => void
+  ): Promise<CreateEksLogConfigResponse> {
+    return this.request("CreateEksLogConfig", req, cb)
   }
 
   /**

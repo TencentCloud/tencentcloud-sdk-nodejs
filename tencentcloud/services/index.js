@@ -90,6 +90,8 @@ var cds_1 = require("./cds");
 Object.defineProperty(exports, "cds", { enumerable: true, get: function () { return cds_1.cds; } });
 var cdwch_1 = require("./cdwch");
 Object.defineProperty(exports, "cdwch", { enumerable: true, get: function () { return cdwch_1.cdwch; } });
+var cdwdoris_1 = require("./cdwdoris");
+Object.defineProperty(exports, "cdwdoris", { enumerable: true, get: function () { return cdwdoris_1.cdwdoris; } });
 var cdwpg_1 = require("./cdwpg");
 Object.defineProperty(exports, "cdwpg", { enumerable: true, get: function () { return cdwpg_1.cdwpg; } });
 var cfg_1 = require("./cfg");
