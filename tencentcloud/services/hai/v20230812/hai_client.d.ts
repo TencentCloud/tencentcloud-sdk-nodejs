@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { InquirePriceRunInstancesResponse, TerminateInstancesRequest, DescribeServiceLoginSettingsResponse, DescribeInstanceNetworkStatusResponse, TerminateInstancesResponse, DescribeRegionsRequest, DescribeScenesResponse, DescribeApplicationsRequest, RunInstancesRequest, DescribeInstancesResponse, RunInstancesResponse, DescribeInstancesRequest, DescribeScenesRequest, DescribeRegionsResponse, InquirePriceRunInstancesRequest, DescribeServiceLoginSettingsRequest, DescribeApplicationsResponse, DescribeInstanceNetworkStatusRequest } from "./hai_models";
+import { InquirePriceRunInstancesResponse, StopInstanceRequest, DescribeServiceLoginSettingsResponse, DescribeInstanceNetworkStatusResponse, TerminateInstancesResponse, DescribeRegionsRequest, StartInstanceRequest, TerminateInstancesRequest, DescribeScenesResponse, DescribeApplicationsRequest, RunInstancesRequest, DescribeInstancesResponse, RunInstancesResponse, DescribeInstancesRequest, DescribeScenesRequest, DescribeRegionsResponse, InquirePriceRunInstancesRequest, StartInstanceResponse, DescribeServiceLoginSettingsRequest, DescribeApplicationsResponse, DescribeInstanceNetworkStatusRequest, StopInstanceResponse } from "./hai_models";
 /**
  * hai client
  * @class
@@ -28,6 +28,14 @@ export declare class Client extends AbstractClient {
      */
     RunInstances(req: RunInstancesRequest, cb?: (error: string, rep: RunInstancesResponse) => void): Promise<RunInstancesResponse>;
     /**
+     * 本接口 (StartInstance) 用于主动启动实例。
+     */
+    StartInstance(req: StartInstanceRequest, cb?: (error: string, rep: StartInstanceResponse) => void): Promise<StartInstanceResponse>;
+    /**
+     * 本接口 (TerminateInstances) 用于主动退还实例。
+     */
+    TerminateInstances(req: TerminateInstancesRequest, cb?: (error: string, rep: TerminateInstancesResponse) => void): Promise<TerminateInstancesResponse>;
+    /**
      * 查询实例的网络配置及消耗情况
      */
     DescribeInstanceNetworkStatus(req: DescribeInstanceNetworkStatusRequest, cb?: (error: string, rep: DescribeInstanceNetworkStatusResponse) => void): Promise<DescribeInstanceNetworkStatusResponse>;
@@ -40,7 +48,7 @@ export declare class Client extends AbstractClient {
      */
     InquirePriceRunInstances(req: InquirePriceRunInstancesRequest, cb?: (error: string, rep: InquirePriceRunInstancesResponse) => void): Promise<InquirePriceRunInstancesResponse>;
     /**
-     * 本接口 (TerminateInstances) 用于主动退还实例。
+     * 本接口 (StopInstance) 用于主动关闭实例。
      */
-    TerminateInstances(req: TerminateInstancesRequest, cb?: (error: string, rep: TerminateInstancesResponse) => void): Promise<TerminateInstancesResponse>;
+    StopInstance(req: StopInstanceRequest, cb?: (error: string, rep: StopInstanceResponse) => void): Promise<StopInstanceResponse>;
 }

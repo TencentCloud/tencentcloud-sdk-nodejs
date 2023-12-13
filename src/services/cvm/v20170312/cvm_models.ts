@@ -736,7 +736,7 @@ export interface DescribeHostsResponse {
  */
 export interface DeleteKeyPairsRequest {
   /**
-   * 一个或多个待操作的密钥对ID。每次请求批量密钥对的上限为100。<br>可以通过以下方式获取可用的密钥ID：<br><li>通过登录[控制台](https://console.cloud.tencent.com/cvm/sshkey)查询密钥ID。<br><li>通过调用接口 [DescribeKeyPairs](https://cloud.tencent.com/document/api/213/15699) ，取返回信息中的 `KeyId` 获取密钥对ID。
+   * 一个或多个待操作的密钥对ID。每次请求批量密钥对的上限为100。<br>可以通过以下方式获取可用的密钥ID：<br><li>通过登录[控制台](https://console.cloud.tencent.com/cvm/sshkey)查询密钥ID。</li><br><li>通过调用接口 [DescribeKeyPairs](https://cloud.tencent.com/document/api/213/15699) ，取返回信息中的 `KeyId` 获取密钥对ID。</li>
    */
   KeyIds: Array<string>
 }
@@ -3505,11 +3505,11 @@ export interface DescribeDisasterRecoverGroupsResponse {
   /**
    * 分散置放群组信息列表。
    */
-  DisasterRecoverGroupSet: Array<DisasterRecoverGroup>
+  DisasterRecoverGroupSet?: Array<DisasterRecoverGroup>
   /**
    * 用户置放群组总量。
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4929,11 +4929,11 @@ export interface InquiryPriceResizeInstanceDisksResponse {
  */
 export interface TerminateInstancesRequest {
   /**
-   * 一个或多个待操作的实例ID。可通过[`DescribeInstances`](https://cloud.tencent.com/document/api/213/15728)接口返回值中的`InstanceId`获取。每次请求批量实例的上限为100。
+   * 一个或多个待操作的实例ID。可通过 [DescribeInstances](https://cloud.tencent.com/document/api/213/15728) 接口返回值中的`InstanceId`获取。每次请求批量实例的上限为100。
    */
   InstanceIds: Array<string>
   /**
-   * 释放实例挂载的包年包月数据盘。
+   * 释放实例挂载的包年包月数据盘。true表示销毁实例同时释放包年包月数据盘，false表示只销毁实例。
    */
   ReleasePrepaidDataDisks?: boolean
 }
@@ -5805,33 +5805,33 @@ export interface DisasterRecoverGroup {
   /**
    * 分散置放群组id。
    */
-  DisasterRecoverGroupId: string
+  DisasterRecoverGroupId?: string
   /**
    * 分散置放群组名称，长度1-60个字符。
    */
-  Name: string
+  Name?: string
   /**
    * 分散置放群组类型，取值范围：<br><li>HOST：物理机<br><li>SW：交换机<br><li>RACK：机架
    */
-  Type: string
+  Type?: string
   /**
    * 分散置放群组内最大容纳云服务器数量。
    */
-  CvmQuotaTotal: number
+  CvmQuotaTotal?: number
   /**
    * 分散置放群组内云服务器当前数量。
    */
-  CurrentNum: number
+  CurrentNum?: number
   /**
    * 分散置放群组内，云服务器id列表。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  InstanceIds: Array<string>
+  InstanceIds?: Array<string>
   /**
    * 分散置放群组创建时间。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CreateTime: string
+  CreateTime?: string
 }
 
 /**

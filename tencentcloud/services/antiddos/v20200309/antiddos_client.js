@@ -228,6 +228,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeNewL7Rules", req, cb);
     }
     /**
+     * 获取IP封堵列表
+     */
+    async DescribeIpBlockList(req, cb) {
+        return this.request("DescribeIpBlockList", req, cb);
+    }
+    /**
      * 修改CC防护等级
      */
     async ModifyCCLevelPolicy(req, cb) {
@@ -463,7 +469,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreatePortAclConfigList", req, cb);
     }
     /**
-     * 新建cc防护的地域封禁配置
+     * 新建CC防护的地域封禁配置
      */
     async CreateCcGeoIPBlockConfig(req, cb) {
         return this.request("CreateCcGeoIPBlockConfig", req, cb);
@@ -585,16 +591,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateWaterPrintKey", req, cb);
     }
     /**
-     * 删除CC频率限制策略
-     */
-    async DeleteCCRequestLimitPolicy(req, cb) {
-        return this.request("DeleteCCRequestLimitPolicy", req, cb);
-    }
-    /**
      * 修改DDoS防护的区域封禁配置
      */
     async ModifyDDoSGeoIPBlockConfig(req, cb) {
         return this.request("ModifyDDoSGeoIPBlockConfig", req, cb);
+    }
+    /**
+     * 删除CC频率限制策略
+     */
+    async DeleteCCRequestLimitPolicy(req, cb) {
+        return this.request("DeleteCCRequestLimitPolicy", req, cb);
     }
 }
 exports.Client = Client;

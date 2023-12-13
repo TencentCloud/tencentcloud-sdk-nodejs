@@ -58,6 +58,18 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("RunInstances", req, cb);
     }
     /**
+     * 本接口 (StartInstance) 用于主动启动实例。
+     */
+    async StartInstance(req, cb) {
+        return this.request("StartInstance", req, cb);
+    }
+    /**
+     * 本接口 (TerminateInstances) 用于主动退还实例。
+     */
+    async TerminateInstances(req, cb) {
+        return this.request("TerminateInstances", req, cb);
+    }
+    /**
      * 查询实例的网络配置及消耗情况
      */
     async DescribeInstanceNetworkStatus(req, cb) {
@@ -76,10 +88,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("InquirePriceRunInstances", req, cb);
     }
     /**
-     * 本接口 (TerminateInstances) 用于主动退还实例。
+     * 本接口 (StopInstance) 用于主动关闭实例。
      */
-    async TerminateInstances(req, cb) {
-        return this.request("TerminateInstances", req, cb);
+    async StopInstance(req, cb) {
+        return this.request("StopInstance", req, cb);
     }
 }
 exports.Client = Client;

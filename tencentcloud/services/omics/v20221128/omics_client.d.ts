@@ -16,7 +16,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeEnvironments(req: DescribeEnvironmentsRequest, cb?: (error: string, rep: DescribeEnvironmentsResponse) => void): Promise<DescribeEnvironmentsResponse>;
     /**
-     * 查询任务详情文件。
+     * 获取任务详情文件。
      */
     GetRunMetadataFile(req: GetRunMetadataFileRequest, cb?: (error: string, rep: GetRunMetadataFileResponse) => void): Promise<GetRunMetadataFileResponse>;
     /**

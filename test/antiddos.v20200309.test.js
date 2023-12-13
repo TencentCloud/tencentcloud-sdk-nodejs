@@ -348,6 +348,16 @@ it("antiddos.v20200309.DescribeNewL7Rules", async function () {
     }
 })
 
+it("antiddos.v20200309.DescribeIpBlockList", async function () {
+    try {
+       const data = await client.DescribeIpBlockList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("antiddos.v20200309.ModifyCCLevelPolicy", async function () {
     try {
        const data = await client.ModifyCCLevelPolicy({})
@@ -938,9 +948,9 @@ it("antiddos.v20200309.CreateWaterPrintKey", async function () {
     }
 })
 
-it("antiddos.v20200309.DeleteCCRequestLimitPolicy", async function () {
+it("antiddos.v20200309.ModifyDDoSGeoIPBlockConfig", async function () {
     try {
-       const data = await client.DeleteCCRequestLimitPolicy({})
+       const data = await client.ModifyDDoSGeoIPBlockConfig({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -948,9 +958,9 @@ it("antiddos.v20200309.DeleteCCRequestLimitPolicy", async function () {
     }
 })
 
-it("antiddos.v20200309.ModifyDDoSGeoIPBlockConfig", async function () {
+it("antiddos.v20200309.DeleteCCRequestLimitPolicy", async function () {
     try {
-       const data = await client.ModifyDDoSGeoIPBlockConfig({})
+       const data = await client.DeleteCCRequestLimitPolicy({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

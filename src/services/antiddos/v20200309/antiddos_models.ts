@@ -1255,6 +1255,56 @@ export interface DescribeNewL7RulesResponse {
 }
 
 /**
+ * 防护概览DDoS攻击事件
+ */
+export interface OverviewDDoSEvent {
+  /**
+   * 事件Id
+   */
+  Id: string
+  /**
+   * ip
+   */
+  Vip: string
+  /**
+   * 开始时间
+   */
+  StartTime: string
+  /**
+   * 结束时间
+   */
+  EndTime: string
+  /**
+   * 攻击类型
+   */
+  AttackType: string
+  /**
+   * 攻击状态，0：攻击中；1：攻击结束
+   */
+  AttackStatus: number
+  /**
+   * 攻击流量，单位Mbps
+   */
+  Mbps: number
+  /**
+   * 攻击包量，单位pps
+   */
+  Pps: number
+  /**
+   * 业务类型，bgp-multip：高防包；bgpip：高防ip；basic：基础防护
+   */
+  Business: string
+  /**
+   * 高防实例Id
+   */
+  InstanceId: string
+  /**
+   * 高防实例名称
+   */
+  InstanceName: string
+}
+
+/**
  * 三网高防套餐详情
  */
 export interface StaticPackRelation {
@@ -1343,6 +1393,36 @@ export interface TagFilter {
    * 标签键值列表
    */
   TagValue: Array<string>
+}
+
+/**
+ * IP封堵记录
+ */
+export interface IpBlockData {
+  /**
+   * 状态（Blocked：被封堵；UnBlocking：解封中；UnBlockFailed：解封失败）
+   */
+  Status: string
+  /**
+   * 资源IP
+   */
+  Ip: string
+  /**
+   * 封堵时间
+   */
+  BlockTime: string
+  /**
+   * 解封时间（预计解封时间）
+   */
+  UnBlockTime: string
+  /**
+   * 解封类型（user：自助解封；auto：自动解封； update：升级解封；bind：绑定高防包解封）
+   */
+  ActionType: string
+  /**
+   * 高防标记，0：非高防，1：高防
+   */
+  ProtectFlag: number
 }
 
 /**
@@ -3290,6 +3370,11 @@ export interface DeletePortAclConfigRequest {
    */
   AclConfig: AclConfig
 }
+
+/**
+ * DescribeIpBlockList请求参数结构体
+ */
+export type DescribeIpBlockListRequest = null
 
 /**
  * DescribePendingRiskInfo请求参数结构体
@@ -5343,53 +5428,17 @@ export interface DescribeListPortAclListRequest {
 }
 
 /**
- * 防护概览DDoS攻击事件
+ * DescribeIpBlockList返回参数结构体
  */
-export interface OverviewDDoSEvent {
+export interface DescribeIpBlockListResponse {
   /**
-   * 事件Id
+   * IP封堵列表
    */
-  Id: string
+  List: Array<IpBlockData>
   /**
-   * ip
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  Vip: string
-  /**
-   * 开始时间
-   */
-  StartTime: string
-  /**
-   * 结束时间
-   */
-  EndTime: string
-  /**
-   * 攻击类型
-   */
-  AttackType: string
-  /**
-   * 攻击状态，0：攻击中；1：攻击结束
-   */
-  AttackStatus: number
-  /**
-   * 攻击流量，单位Mbps
-   */
-  Mbps: number
-  /**
-   * 攻击包量，单位pps
-   */
-  Pps: number
-  /**
-   * 业务类型，bgp-multip：高防包；bgpip：高防ip；basic：基础防护
-   */
-  Business: string
-  /**
-   * 高防实例Id
-   */
-  InstanceId: string
-  /**
-   * 高防实例名称
-   */
-  InstanceName: string
+  RequestId?: string
 }
 
 /**

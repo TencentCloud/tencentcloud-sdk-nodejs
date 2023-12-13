@@ -62,13 +62,19 @@ export interface InquirePriceRunInstancesResponse {
 }
 
 /**
- * TerminateInstances请求参数结构体
+ * StopInstance请求参数结构体
  */
-export interface TerminateInstancesRequest {
+export interface StopInstanceRequest {
   /**
-   * 实例ID列表
+   * 实例ID
    */
-  InstanceIds: Array<string>
+  InstanceId: string
+  /**
+   * hai实例关机的模式，目前仅支持关机不收费：
+STOP_CHARGE -- 关闭hai实例，释放计算资源，停止收取计算资源的费用。
+注意：默认值为STOP_CHARGE
+   */
+  StopMode?: string
   /**
    * 默认为False，True代表只验证接口连通性
    */
@@ -251,6 +257,20 @@ export interface TerminateInstancesResponse {
 export type DescribeRegionsRequest = null
 
 /**
+ * StartInstance请求参数结构体
+ */
+export interface StartInstanceRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+  /**
+   * 默认为False，True代表只验证接口连通性
+   */
+  DryRun?: boolean
+}
+
+/**
  * 某服务的登录配置
  */
 export interface LoginSetting {
@@ -280,6 +300,20 @@ export interface Price {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CloudDiskPrice?: ItemPrice
+}
+
+/**
+ * TerminateInstances请求参数结构体
+ */
+export interface TerminateInstancesRequest {
+  /**
+   * 实例ID列表
+   */
+  InstanceIds: Array<string>
+  /**
+   * 默认为False，True代表只验证接口连通性
+   */
+  DryRun?: boolean
 }
 
 /**
@@ -546,6 +580,20 @@ export interface InquirePriceRunInstancesRequest {
 }
 
 /**
+ * StartInstance返回参数结构体
+ */
+export interface StartInstanceResponse {
+  /**
+   * task任务id
+   */
+  TaskId?: number
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeServiceLoginSettings请求参数结构体
  */
 export interface DescribeServiceLoginSettingsRequest {
@@ -663,6 +711,20 @@ export interface LoginService {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ServiceName?: string
+}
+
+/**
+ * StopInstance返回参数结构体
+ */
+export interface StopInstanceResponse {
+  /**
+   * task任务id
+   */
+  TaskId?: number
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

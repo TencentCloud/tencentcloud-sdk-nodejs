@@ -946,6 +946,10 @@ export interface DescribeBackupDecryptionKeyRequest {
      * 实例的备份ID，可通过DescribeBackups接口查询备份的ID。
      */
     BackupId: number;
+    /**
+     * 备份类型 data: 数据备份 binlog:日志备份，默认为data
+     */
+    BackupType?: string;
 }
 /**
  * CreateCdbProxyAddress返回参数结构体

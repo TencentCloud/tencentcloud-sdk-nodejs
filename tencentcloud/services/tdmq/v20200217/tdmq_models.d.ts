@@ -6978,27 +6978,35 @@ export interface PulsarNetworkAccessPointInfo {
      * vpc的id，支撑网和公网接入点，该字段为空
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    VpcId: string;
+    VpcId?: string;
     /**
      * 子网id，支撑网和公网接入点，该字段为空
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SubnetId: string;
+    SubnetId?: string;
     /**
      * 接入地址
      */
-    Endpoint: string;
+    Endpoint?: string;
     /**
      * 实例id
      */
-    InstanceId: string;
+    InstanceId?: string;
     /**
      * 接入点类型：
   0：支撑网接入点
   1：VPC接入点
   2：公网接入点
      */
-    RouteType: number;
+    RouteType?: number;
+    /**
+     * 0：本地域访问，由于并没有配置跨地域容灾，所该类型的接入点，无法进行异地切换、异地访问切回；
+  1：本地域访问，由于配置了跨地域容灾，随时可以进行异地切换，该状态用于主集群的接入点
+  2：跨地域访问，已经完成了异地切换，该状态用于源集群的接入点，该状态下的接入点不可删除
+  3：跨地域访问，随时可以进行异地访问切回，该状态用于目标集群的接入点，该状态下的接入点不可删除
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    OperationType?: number;
 }
 /**
  * CreateRocketMQTopic返回参数结构体

@@ -180,6 +180,11 @@ export interface GetRunMetadataFileResponse {
    */
   CosSignedUrl?: string
   /**
+   * 批量文件预签名链接，一分钟内有效。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CosSignedUrls?: Array<string>
+  /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -1078,6 +1083,11 @@ export interface GetRunMetadataFileRequest {
    */
   RunUuid: string
   /**
+   * 项目ID。
+（不填使用指定地域下的默认项目）
+   */
+  ProjectId?: string
+  /**
    * 需要获取的文件名。
 
 默认支持以下文件：
@@ -1089,12 +1099,20 @@ export interface GetRunMetadataFileRequest {
 - execution_trace.txt
 - pipeline_dag.html
    */
-  Key: string
+  Key?: string
   /**
-   * 项目ID。
-（不填使用指定地域下的默认项目）
+   * 需要批量获取的文件名。
+
+默认支持以下文件：
+- nextflow.log
+
+提交时NFOption中report指定为true时，额外支持以下文件：
+- execution_report.html
+- execution_timeline.html
+- execution_trace.txt
+- pipeline_dag.html
    */
-  ProjectId?: string
+  Keys?: Array<string>
 }
 
 /**

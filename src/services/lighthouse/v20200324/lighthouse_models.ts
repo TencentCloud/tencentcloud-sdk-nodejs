@@ -368,11 +368,11 @@ export interface InstanceDeniedActions {
    * 实例 ID。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  InstanceId: string
+  InstanceId?: string
   /**
    * 操作限制列表。
    */
-  DeniedActions: Array<DeniedAction>
+  DeniedActions?: Array<DeniedAction>
 }
 
 /**
@@ -1174,30 +1174,30 @@ export interface KeyPair {
   /**
    * 密钥对 ID ，是密钥对的唯一标识。
    */
-  KeyId: string
+  KeyId?: string
   /**
    * 密钥对名称。
    */
-  KeyName: string
+  KeyName?: string
   /**
    * 密钥对的纯文本公钥。
    */
-  PublicKey: string
+  PublicKey?: string
   /**
    * 密钥对关联的实例 ID 列表。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  AssociatedInstanceIds: Array<string>
+  AssociatedInstanceIds?: Array<string>
   /**
    * 创建时间。按照 ISO8601 标准表示，并且使用 UTC 时间。格式为：YYYY-MM-DDThh:mm:ssZ
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CreatedTime: string
+  CreatedTime?: string
   /**
    * 密钥对私钥。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  PrivateKey: string
+  PrivateKey?: string
 }
 
 /**
@@ -1565,11 +1565,11 @@ export interface SnapshotDeniedActions {
   /**
    * 快照 ID。
    */
-  SnapshotId: string
+  SnapshotId?: string
   /**
    * 操作限制列表。
    */
-  DeniedActions: Array<DeniedAction>
+  DeniedActions?: Array<DeniedAction>
 }
 
 /**
@@ -2435,19 +2435,19 @@ export interface DiskReturnable {
   /**
    * 云硬盘ID。
    */
-  DiskId: string
+  DiskId?: string
   /**
    * 云硬盘是否可退还。
    */
-  IsReturnable: boolean
+  IsReturnable?: boolean
   /**
    * 云硬盘退还失败错误码。
    */
-  ReturnFailCode: number
+  ReturnFailCode?: number
   /**
    * 云硬盘退还失败错误信息。
    */
-  ReturnFailMessage: string
+  ReturnFailMessage?: string
 }
 
 /**
@@ -2761,11 +2761,11 @@ export interface DescribeDockerActivitiesResponse {
   /**
    * 总数量。
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * Docker活动列表。
    */
-  DockerActivitySet: Array<DockerActivity>
+  DockerActivitySet?: Array<DockerActivity>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2986,15 +2986,15 @@ export interface DeniedAction {
   /**
    * 限制操作名。
    */
-  Action: string
+  Action?: string
   /**
    * 限制操作消息码。
    */
-  Code: string
+  Code?: string
   /**
    * 限制操作消息。
    */
-  Message: string
+  Message?: string
 }
 
 /**
@@ -3441,11 +3441,11 @@ export interface DockerActivity {
   /**
    * 活动ID。
    */
-  ActivityId: string
+  ActivityId?: string
   /**
    * 活动名称。
    */
-  ActivityName: string
+  ActivityName?: string
   /**
    * 活动状态。取值范围： 
 <li>INIT：表示初始化，活动尚未执行</li>
@@ -3453,24 +3453,24 @@ export interface DockerActivity {
 <li>SUCCESS：表示活动执行成功</li>
 <li>FAILED：表示活动执行失败</li>
    */
-  ActivityState: string
+  ActivityState?: string
   /**
    * 活动执行的命令输出，以base64编码。
    */
-  ActivityCommandOutput: string
+  ActivityCommandOutput?: string
   /**
    * 容器ID列表。
    */
-  ContainerIds: Array<string>
+  ContainerIds?: Array<string>
   /**
    * 创建时间。按照 ISO8601 标准表示，并且使用 UTC 时间。
    */
-  CreatedTime: string
+  CreatedTime?: string
   /**
    * 结束时间。按照 ISO8601 标准表示，并且使用 UTC 时间。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  EndTime: string
+  EndTime?: string
 }
 
 /**
@@ -4328,6 +4328,14 @@ export interface ResetInstanceRequest {
    * 镜像 ID。可通过[DescribeBlueprints](https://cloud.tencent.com/document/product/1207/47689)接口返回值中的BlueprintId获取。
    */
   BlueprintId?: string
+  /**
+   * 要创建的容器配置列表。
+   */
+  Containers?: Array<DockerContainerConfiguration>
+  /**
+   * 实例登录信息配置。默认缺失情况下代表用户选择实例创建后设置登录密码或绑定密钥。
+   */
+  LoginConfiguration?: LoginConfiguration
 }
 
 /**
@@ -5152,7 +5160,7 @@ export interface InstanceChargePrepaid {
    */
   Period: number
   /**
-   * 自动续费标识。取值范围：<br><li>NOTIFY_AND_AUTO_RENEW：通知过期且自动续费<br><li>NOTIFY_AND_MANUAL_RENEW：通知过期不自动续费，用户需要手动续费<br><li>DISABLE_NOTIFY_AND_MANUAL_RENEW：不自动续费，且不通知<br><br>默认取值：NOTIFY_AND_MANUAL_RENEW。若该参数指定为NOTIFY_AND_AUTO_RENEW，在账户余额充足的情况下，实例到期后将按月自动续费。
+   * 自动续费标识。取值范围：<br><li>NOTIFY_AND_AUTO_RENEW：通知过期且自动续费</li><br><li>NOTIFY_AND_MANUAL_RENEW：通知过期不自动续费，用户需要手动续费</li><br><li>DISABLE_NOTIFY_AND_MANUAL_RENEW：不自动续费，且不通知</li><br><br>默认取值：NOTIFY_AND_MANUAL_RENEW。若该参数指定为NOTIFY_AND_AUTO_RENEW，在账户余额充足的情况下，实例到期后将按月自动续费。
    */
   RenewFlag?: string
 }

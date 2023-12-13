@@ -20,14 +20,16 @@ import { ClientConfig } from "../../../common/interface"
 import {
   NetworkStatus,
   InquirePriceRunInstancesResponse,
-  TerminateInstancesRequest,
+  StopInstanceRequest,
   DescribeServiceLoginSettingsResponse,
   DescribeInstanceNetworkStatusResponse,
   Instance,
   TerminateInstancesResponse,
   DescribeRegionsRequest,
+  StartInstanceRequest,
   LoginSetting,
   Price,
+  TerminateInstancesRequest,
   RegionInfo,
   DescribeScenesResponse,
   DescribeApplicationsRequest,
@@ -40,12 +42,14 @@ import {
   DescribeScenesRequest,
   DescribeRegionsResponse,
   InquirePriceRunInstancesRequest,
+  StartInstanceResponse,
   DescribeServiceLoginSettingsRequest,
   ApplicationInfo,
   DescribeApplicationsResponse,
   ItemPrice,
   DescribeInstanceNetworkStatusRequest,
   LoginService,
+  StopInstanceResponse,
   SceneInfo,
 } from "./hai_models"
 
@@ -109,6 +113,26 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口 (StartInstance) 用于主动启动实例。
+   */
+  async StartInstance(
+    req: StartInstanceRequest,
+    cb?: (error: string, rep: StartInstanceResponse) => void
+  ): Promise<StartInstanceResponse> {
+    return this.request("StartInstance", req, cb)
+  }
+
+  /**
+   * 本接口 (TerminateInstances) 用于主动退还实例。
+   */
+  async TerminateInstances(
+    req: TerminateInstancesRequest,
+    cb?: (error: string, rep: TerminateInstancesResponse) => void
+  ): Promise<TerminateInstancesResponse> {
+    return this.request("TerminateInstances", req, cb)
+  }
+
+  /**
    * 查询实例的网络配置及消耗情况
    */
   async DescribeInstanceNetworkStatus(
@@ -139,12 +163,12 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口 (TerminateInstances) 用于主动退还实例。
+   * 本接口 (StopInstance) 用于主动关闭实例。
    */
-  async TerminateInstances(
-    req: TerminateInstancesRequest,
-    cb?: (error: string, rep: TerminateInstancesResponse) => void
-  ): Promise<TerminateInstancesResponse> {
-    return this.request("TerminateInstances", req, cb)
+  async StopInstance(
+    req: StopInstanceRequest,
+    cb?: (error: string, rep: StopInstanceResponse) => void
+  ): Promise<StopInstanceResponse> {
+    return this.request("StopInstance", req, cb)
   }
 }

@@ -105,7 +105,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询任务详情文件。
+   * 获取任务详情文件。
    */
   async GetRunMetadataFile(
     req: GetRunMetadataFileRequest,

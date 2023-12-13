@@ -71,11 +71,13 @@ import {
   DescribeOverviewAttackTrendRequest,
   DescribeListBGPIPInstancesRequest,
   DescribeNewL7RulesResponse,
+  OverviewDDoSEvent,
   StaticPackRelation,
   CreatePortAclConfigRequest,
   DescribeCCThresholdListResponse,
   DescribeL7RulesBySSLCertIdRequest,
   TagFilter,
+  IpBlockData,
   DescribeListPacketFilterConfigResponse,
   CreateSchedulingDomainRequest,
   ModifyPortAclConfigRequest,
@@ -167,6 +169,7 @@ import {
   DescribeCcBlackWhiteIpListRequest,
   DescribeListListenerResponse,
   DeletePortAclConfigRequest,
+  DescribeIpBlockListRequest,
   DescribePendingRiskInfoRequest,
   CreatePortAclConfigResponse,
   ModifyDDoSLevelResponse,
@@ -250,7 +253,7 @@ import {
   DescribeCCPrecisionPlyListResponse,
   DescribeBizTrendRequest,
   DescribeListPortAclListRequest,
-  OverviewDDoSEvent,
+  DescribeIpBlockListResponse,
   DescribeCCLevelPolicyResponse,
   DescribeBizMonitorTrendRequest,
   DescribeOverviewDDoSTrendResponse,
@@ -616,6 +619,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeNewL7RulesResponse) => void
   ): Promise<DescribeNewL7RulesResponse> {
     return this.request("DescribeNewL7Rules", req, cb)
+  }
+
+  /**
+   * 获取IP封堵列表
+   */
+  async DescribeIpBlockList(
+    req?: DescribeIpBlockListRequest,
+    cb?: (error: string, rep: DescribeIpBlockListResponse) => void
+  ): Promise<DescribeIpBlockListResponse> {
+    return this.request("DescribeIpBlockList", req, cb)
   }
 
   /**
@@ -1010,7 +1023,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 新建cc防护的地域封禁配置
+   * 新建CC防护的地域封禁配置
    */
   async CreateCcGeoIPBlockConfig(
     req: CreateCcGeoIPBlockConfigRequest,
@@ -1212,16 +1225,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除CC频率限制策略
-   */
-  async DeleteCCRequestLimitPolicy(
-    req: DeleteCCRequestLimitPolicyRequest,
-    cb?: (error: string, rep: DeleteCCRequestLimitPolicyResponse) => void
-  ): Promise<DeleteCCRequestLimitPolicyResponse> {
-    return this.request("DeleteCCRequestLimitPolicy", req, cb)
-  }
-
-  /**
    * 修改DDoS防护的区域封禁配置
    */
   async ModifyDDoSGeoIPBlockConfig(
@@ -1229,5 +1232,15 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyDDoSGeoIPBlockConfigResponse) => void
   ): Promise<ModifyDDoSGeoIPBlockConfigResponse> {
     return this.request("ModifyDDoSGeoIPBlockConfig", req, cb)
+  }
+
+  /**
+   * 删除CC频率限制策略
+   */
+  async DeleteCCRequestLimitPolicy(
+    req: DeleteCCRequestLimitPolicyRequest,
+    cb?: (error: string, rep: DeleteCCRequestLimitPolicyResponse) => void
+  ): Promise<DeleteCCRequestLimitPolicyResponse> {
+    return this.request("DeleteCCRequestLimitPolicy", req, cb)
   }
 }

@@ -68,6 +68,26 @@ it("hai.v20230812.RunInstances", async function () {
     }
 })
 
+it("hai.v20230812.StartInstance", async function () {
+    try {
+       const data = await client.StartInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("hai.v20230812.TerminateInstances", async function () {
+    try {
+       const data = await client.TerminateInstances({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("hai.v20230812.DescribeInstanceNetworkStatus", async function () {
     try {
        const data = await client.DescribeInstanceNetworkStatus({})
@@ -98,9 +118,9 @@ it("hai.v20230812.InquirePriceRunInstances", async function () {
     }
 })
 
-it("hai.v20230812.TerminateInstances", async function () {
+it("hai.v20230812.StopInstance", async function () {
     try {
-       const data = await client.TerminateInstances({})
+       const data = await client.StopInstance({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

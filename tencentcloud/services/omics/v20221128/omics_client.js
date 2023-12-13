@@ -40,7 +40,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeEnvironments", req, cb);
     }
     /**
-     * 查询任务详情文件。
+     * 获取任务详情文件。
      */
     async GetRunMetadataFile(req, cb) {
         return this.request("GetRunMetadataFile", req, cb);

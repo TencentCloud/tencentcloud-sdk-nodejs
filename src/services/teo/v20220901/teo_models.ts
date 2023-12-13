@@ -214,7 +214,7 @@ export interface DescribeTopL7CacheDataRequest {
    */
   ZoneIds?: Array<string>
   /**
-   * 查询前多少个数据，最大值为1000，不填默认默认为10， 表示查询前top 10的数据。
+   * 查询前多少个数据，最大值为1000，不填默认为10， 表示查询前top 10的数据。
    */
   Limit?: number
   /**
@@ -2097,6 +2097,7 @@ export interface Zone {
 <li> full：NS 接入；</li>
 <li> partial：CNAME 接入；</li>
 <li> noDomainAccess：无域名接入；</li>
+<li> vodeo：开启 VODEO 后默认接入。</li>
    */
   Type?: string
   /**
@@ -3098,7 +3099,7 @@ export interface DescribeTopL7AnalysisDataRequest {
    */
   ZoneIds?: Array<string>
   /**
-   * 查询前多少个数据，最大值为1000，不填默认默认为: 10， 表示查询前top10的数据。
+   * 查询前多少个数据，最大值为1000，不填默认为10， 表示查询前top10的数据。
    */
   Limit?: number
   /**
