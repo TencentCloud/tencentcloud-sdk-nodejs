@@ -478,6 +478,16 @@ it("tdmq.v20200217.DescribeRocketMQSourceClusterTopicList", async function () {
     }
 })
 
+it("tdmq.v20200217.DescribeRocketMQConsumerConnectionDetail", async function () {
+    try {
+       const data = await client.DescribeRocketMQConsumerConnectionDetail({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tdmq.v20200217.DescribeRabbitMQVipInstance", async function () {
     try {
        const data = await client.DescribeRabbitMQVipInstance({})

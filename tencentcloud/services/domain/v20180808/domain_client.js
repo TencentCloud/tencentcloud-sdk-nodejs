@@ -71,7 +71,6 @@ class Client extends abstract_client_1.AbstractClient {
     }
     /**
      * 本接口 (  DescribeDomainNameList ) 我的域名列表。
-
      */
     async DescribeDomainNameList(req, cb) {
         return this.request("DescribeDomainNameList", req, cb);
@@ -90,7 +89,6 @@ class Client extends abstract_client_1.AbstractClient {
     }
     /**
      * 本接口 (  DescribeDomainBaseInfo) 获取域名基本信息。
-
      */
     async DescribeDomainBaseInfo(req, cb) {
         return this.request("DescribeDomainBaseInfo", req, cb);

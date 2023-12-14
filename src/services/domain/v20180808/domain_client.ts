@@ -178,9 +178,8 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 本接口 (  DescribeDomainNameList ) 我的域名列表。
-
-     */
+   * 本接口 (  DescribeDomainNameList ) 我的域名列表。
+   */
   async DescribeDomainNameList(
     req: DescribeDomainNameListRequest,
     cb?: (error: string, rep: DescribeDomainNameListResponse) => void
@@ -209,9 +208,8 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 本接口 (  DescribeDomainBaseInfo) 获取域名基本信息。
-
-     */
+   * 本接口 (  DescribeDomainBaseInfo) 获取域名基本信息。
+   */
   async DescribeDomainBaseInfo(
     req: DescribeDomainBaseInfoRequest,
     cb?: (error: string, rep: DescribeDomainBaseInfoResponse) => void

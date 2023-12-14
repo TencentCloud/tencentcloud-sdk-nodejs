@@ -78,6 +78,16 @@ it("essbasic.v20210526.ChannelCreateFlowByFiles", async function () {
     }
 })
 
+it("essbasic.v20210526.DescribeBatchOrganizationRegistrationUrls", async function () {
+    try {
+       const data = await client.DescribeBatchOrganizationRegistrationUrls({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("essbasic.v20210526.CreateSealByImage", async function () {
     try {
        const data = await client.CreateSealByImage({})
@@ -221,6 +231,16 @@ it("essbasic.v20210526.ChannelDeleteRoleUsers", async function () {
 it("essbasic.v20210526.DescribeTemplates", async function () {
     try {
        const data = await client.DescribeTemplates({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("essbasic.v20210526.CreateBatchOrganizationRegistrationTasks", async function () {
+    try {
+       const data = await client.CreateBatchOrganizationRegistrationTasks({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

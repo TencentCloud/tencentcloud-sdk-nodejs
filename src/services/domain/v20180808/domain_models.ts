@@ -311,7 +311,7 @@ export interface CreateDomainBatchResponse {
    * 批量日志ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  LogId: number
+  LogId?: number
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -326,6 +326,10 @@ export interface DomainBatchDetailSet {
    * 详情ID
    */
   Id: number
+  /**
+   * 类型  new: 注册域名 batch_transfer_prohibition_on:开启禁止转移  batch_transfer_prohibition_off:关闭禁止转移 batch_update_prohibition_on:开启禁止更新   batch_update_prohibition_off:关闭禁止更新
+   */
+  Action: string
   /**
    * 域名
    */
@@ -350,6 +354,11 @@ success  操作成功。
    * 更新时间
    */
   UpdatedOn: string
+  /**
+   * 订单号
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BigDealId?: string
 }
 
 /**
@@ -384,11 +393,11 @@ export interface DescribeCustomDnsHostSetResponse {
    * 自定义DNS Host 列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DnsHostSet: Array<CustomDnsHost>
+  DnsHostSet?: Array<CustomDnsHost>
   /**
    * 自定义DNS Host总数
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -711,12 +720,12 @@ export interface DescribeDomainBaseInfoResponse {
   /**
    * 域名信息
    */
-  DomainInfo: DomainBaseInfo
+  DomainInfo?: DomainBaseInfo
   /**
    * 用户Uin
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Uin: string
+  Uin?: string
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1429,11 +1438,11 @@ export interface DescribeDomainNameListResponse {
    * 域名信息集合
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DomainSet: Array<DomainList>
+  DomainSet?: Array<DomainList>
   /**
    * 域名总数量
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1499,12 +1508,12 @@ export interface DescribeBatchOperationLogsResponse {
   /**
    * 总数量
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 日志列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DomainBatchLogSet: Array<DomainBatchLogSet>
+  DomainBatchLogSet?: Array<DomainBatchLogSet>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1624,12 +1633,12 @@ export interface DescribeBatchOperationLogDetailsResponse {
   /**
    * 总数量。
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 日志详情列表。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DomainBatchDetailSet: Array<DomainBatchDetailSet>
+  DomainBatchDetailSet?: Array<DomainBatchDetailSet>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1675,7 +1684,7 @@ export interface CheckBatchStatusResponse {
   /**
    * 批量任务状态集
    */
-  StatusSet: Array<BatchStatus>
+  StatusSet?: Array<BatchStatus>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1763,7 +1772,7 @@ export interface ModifyIntlCustomDnsHostResponse {
   /**
    * 任务ID
    */
-  LogId: number
+  LogId?: number
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1792,4 +1801,16 @@ done 执行完成。
    * 提交时间
    */
   CreatedOn: string
+  /**
+   * 批量操作成功个数
+   */
+  Success?: number
+  /**
+   * 批量操作处理中个数
+   */
+  Doing?: number
+  /**
+   * 批量操作失败个数
+   */
+  Failed?: number
 }

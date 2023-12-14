@@ -1053,6 +1053,37 @@ export interface CreateRabbitMQVirtualHostResponse {
 }
 
 /**
+ * 消费者详情中的主题信息
+ */
+export interface RocketMQConsumerTopic {
+  /**
+   * 主题名称
+   */
+  Topic: string
+  /**
+   * 主题类型，Default表示普通，GlobalOrder表示全局顺序，PartitionedOrder表示局部顺序，Transaction表示事务，Retry表示重试，DeadLetter表示死信
+   */
+  Type: string
+  /**
+   * 分区数
+   */
+  PartitionNum: number
+  /**
+   * 消息堆积数
+   */
+  Accumulative: number
+  /**
+   * 最后消费时间，以毫秒为单位
+   */
+  LastConsumptionTime: number
+  /**
+   * 订阅规则
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SubRule: string
+}
+
+/**
  * DescribeRabbitMQNodeList请求参数结构体
  */
 export interface DescribeRabbitMQNodeListRequest {
@@ -3033,6 +3064,22 @@ export interface DescribePublishersRequest {
    * 排序器
    */
   Sort?: Sort
+}
+
+/**
+ * 迁移主题的阶段分布
+ */
+export interface RocketMQMigrationTopicDistribution {
+  /**
+   * 迁移主题阶段
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Stage?: string
+  /**
+   * 数量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Count?: number
 }
 
 /**
@@ -5215,19 +5262,21 @@ export interface DescribeRocketMQGroupsResponse {
 }
 
 /**
- * 迁移主题的阶段分布
+ * DescribeRocketMQConsumerConnectionDetail返回参数结构体
  */
-export interface RocketMQMigrationTopicDistribution {
+export interface DescribeRocketMQConsumerConnectionDetailResponse {
   /**
-   * 迁移主题阶段
-注意：此字段可能返回 null，表示取不到有效值。
+   * 总条数
    */
-  Stage?: string
+  TotalCount: number
   /**
-   * 数量
-注意：此字段可能返回 null，表示取不到有效值。
+   * 消费端主题信息列表
    */
-  Count?: number
+  Details: Array<RocketMQConsumerTopic>
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -6455,6 +6504,36 @@ export interface ConsumersSchedule {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   MsgRateExpired: string
+}
+
+/**
+ * ModifyRocketMQNamespace请求参数结构体
+ */
+export interface ModifyRocketMQNamespaceRequest {
+  /**
+   * 集群ID
+   */
+  ClusterId: string
+  /**
+   * 命名空间名称，3-64个字符，只能包含字母、数字、“-”及“_”
+   */
+  NamespaceId: string
+  /**
+   * 已废弃
+   */
+  Ttl?: number
+  /**
+   * 已废弃
+   */
+  RetentionTime?: number
+  /**
+   * 说明，最大128个字符
+   */
+  Remark?: string
+  /**
+   * 是否开启公网访问
+   */
+  PublicAccessEnabled?: boolean
 }
 
 /**
@@ -8790,33 +8869,37 @@ export interface ImportRocketMQTopicsRequest {
 }
 
 /**
- * ModifyRocketMQNamespace请求参数结构体
+ * DescribeRocketMQConsumerConnectionDetail请求参数结构体
  */
-export interface ModifyRocketMQNamespaceRequest {
+export interface DescribeRocketMQConsumerConnectionDetailRequest {
   /**
    * 集群ID
    */
   ClusterId: string
   /**
-   * 命名空间名称，3-64个字符，只能包含字母、数字、“-”及“_”
+   * 命名空间名称
    */
   NamespaceId: string
   /**
-   * 已废弃
+   * 消费组名称
    */
-  Ttl?: number
+  GroupId: string
   /**
-   * 已废弃
+   * 消费端实例ID
    */
-  RetentionTime?: number
+  ClientId: string
   /**
-   * 说明，最大128个字符
+   * 偏移量
    */
-  Remark?: string
+  Offset: number
   /**
-   * 是否开启公网访问
+   * 限制数目
    */
-  PublicAccessEnabled?: boolean
+  Limit: number
+  /**
+   * 按主题类型过滤查询结果，可选择Normal, GlobalOrder, PartitionedOrder, Retry, Transaction, DeadLetter
+   */
+  FilterType?: Array<string>
 }
 
 /**

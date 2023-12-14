@@ -58,6 +58,7 @@ import {
   CreateRabbitMQVipInstanceRequest,
   DescribeAllTenantsResponse,
   CreateRabbitMQVirtualHostResponse,
+  RocketMQConsumerTopic,
   DescribeRabbitMQNodeListRequest,
   DescribeNamespaceBundlesOptResponse,
   ReceiveMessageRequest,
@@ -126,6 +127,7 @@ import {
   DescribeRocketMQVipInstanceDetailResponse,
   PublishCmqMsgResponse,
   DescribePublishersRequest,
+  RocketMQMigrationTopicDistribution,
   RabbitMQQueueListInfo,
   CreateRocketMQClusterRequest,
   CreateRabbitMQUserResponse,
@@ -206,7 +208,7 @@ import {
   DescribeMsgTraceResponse,
   PartitionsTopic,
   DescribeRocketMQGroupsResponse,
-  RocketMQMigrationTopicDistribution,
+  DescribeRocketMQConsumerConnectionDetailResponse,
   ResetMsgSubOffsetByTimestampResponse,
   CreateClusterResponse,
   DescribeRocketMQSmoothMigrationTaskListRequest,
@@ -261,6 +263,7 @@ import {
   DeleteSubscriptionsResponse,
   DeleteRocketMQTopicRequest,
   ConsumersSchedule,
+  ModifyRocketMQNamespaceRequest,
   Cluster,
   RabbitMQQueueListConsumerDetailInfo,
   RocketMQClusterConfig,
@@ -349,7 +352,7 @@ import {
   VerifyRocketMQConsumeRequest,
   SendBatchMessagesResponse,
   ImportRocketMQTopicsRequest,
-  ModifyRocketMQNamespaceRequest,
+  DescribeRocketMQConsumerConnectionDetailRequest,
   CreateEnvironmentRoleRequest,
   DeleteRabbitMQVipInstanceResponse,
   DescribeAllTenantsRequest,
@@ -824,6 +827,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeRocketMQSourceClusterTopicListResponse) => void
   ): Promise<DescribeRocketMQSourceClusterTopicListResponse> {
     return this.request("DescribeRocketMQSourceClusterTopicList", req, cb)
+  }
+
+  /**
+   * 获取在线消费端详情
+   */
+  async DescribeRocketMQConsumerConnectionDetail(
+    req: DescribeRocketMQConsumerConnectionDetailRequest,
+    cb?: (error: string, rep: DescribeRocketMQConsumerConnectionDetailResponse) => void
+  ): Promise<DescribeRocketMQConsumerConnectionDetailResponse> {
+    return this.request("DescribeRocketMQConsumerConnectionDetail", req, cb)
   }
 
   /**

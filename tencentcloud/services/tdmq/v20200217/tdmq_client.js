@@ -305,6 +305,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeRocketMQSourceClusterTopicList", req, cb);
     }
     /**
+     * 获取在线消费端详情
+     */
+    async DescribeRocketMQConsumerConnectionDetail(req, cb) {
+        return this.request("DescribeRocketMQConsumerConnectionDetail", req, cb);
+    }
+    /**
      * 获取单个RabbitMQ专享实例信息
      */
     async DescribeRabbitMQVipInstance(req, cb) {

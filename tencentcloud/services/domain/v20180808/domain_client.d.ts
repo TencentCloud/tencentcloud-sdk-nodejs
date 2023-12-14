@@ -37,7 +37,6 @@ export declare class Client extends AbstractClient {
     DescribeCustomDnsHostSet(req: DescribeCustomDnsHostSetRequest, cb?: (error: string, rep: DescribeCustomDnsHostSetResponse) => void): Promise<DescribeCustomDnsHostSetResponse>;
     /**
      * 本接口 (  DescribeDomainNameList ) 我的域名列表。
-
      */
     DescribeDomainNameList(req: DescribeDomainNameListRequest, cb?: (error: string, rep: DescribeDomainNameListResponse) => void): Promise<DescribeDomainNameListResponse>;
     /**
@@ -50,7 +49,6 @@ export declare class Client extends AbstractClient {
     CreateDomainBatch(req: CreateDomainBatchRequest, cb?: (error: string, rep: CreateDomainBatchResponse) => void): Promise<CreateDomainBatchResponse>;
     /**
      * 本接口 (  DescribeDomainBaseInfo) 获取域名基本信息。
-
      */
     DescribeDomainBaseInfo(req: DescribeDomainBaseInfoRequest, cb?: (error: string, rep: DescribeDomainBaseInfoResponse) => void): Promise<DescribeDomainBaseInfoResponse>;
     /**

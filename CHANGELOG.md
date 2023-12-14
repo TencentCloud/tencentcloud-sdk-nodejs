@@ -1,3 +1,28 @@
+# Release 4.0.759
+
+## 域名注册(domain) 版本：2018-08-08
+
+### 第 29 次发布
+
+发布时间：2023-12-15 01:10:52
+
+本次发布包含了以下内容：
+
+改善已有的文档。
+
+修改数据结构：
+
+* [DomainBatchDetailSet](https://cloud.tencent.com/document/api/242/38895#DomainBatchDetailSet)
+
+	* 新增成员：Action, BigDealId
+
+* [DomainBatchLogSet](https://cloud.tencent.com/document/api/242/38895#DomainBatchLogSet)
+
+	* 新增成员：Success, Doing, Failed
+
+
+
+
 # Release 4.0.758
 
 ## 腾讯电子签企业版(ess) 版本：2020-11-11
