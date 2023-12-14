@@ -20,30 +20,18 @@ exports.Client = void 0;
  */
 const abstract_client_1 = require("../../../common/abstract_client");
 /**
- * cdwdoris client
+ * ioa client
  * @class
  */
 class Client extends abstract_client_1.AbstractClient {
     constructor(clientConfig) {
-        super("cdwdoris.tencentcloudapi.com", "2021-12-28", clientConfig);
+        super("ioa.tencentcloudapi.com", "2022-06-01", clientConfig);
     }
     /**
-     * 获取集群列表
+     * 查询满足条件的终端数据详情，私有化调用path为：/capi/Assets/Device/DescribeDevices
      */
-    async DescribeInstances(req, cb) {
-        return this.request("DescribeInstances", req, cb);
-    }
-    /**
-     * 根据实例ID查询某个实例的具体信息
-     */
-    async DescribeInstance(req, cb) {
-        return this.request("DescribeInstance", req, cb);
-    }
-    /**
-     * 获取实例节点信息列表
-     */
-    async DescribeInstanceNodes(req, cb) {
-        return this.request("DescribeInstanceNodes", req, cb);
+    async DescribeDevices(req, cb) {
+        return this.request("DescribeDevices", req, cb);
     }
 }
 exports.Client = Client;

@@ -390,11 +390,11 @@ export interface DescribeInstancesResponse {
     /**
      * 实例总数
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 实例数组
      */
-    InstancesList: Array<InstanceInfo>;
+    InstancesList?: Array<InstanceInfo>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */

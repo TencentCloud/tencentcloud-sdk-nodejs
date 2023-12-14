@@ -3781,7 +3781,7 @@ export interface DescribeSimpleApplicationsRequest {
  */
 export interface DescribeDeliveryConfigByGroupIdResponse {
   /**
-   * 投递kafak配置项
+   * 投递kafka配置项
    */
   Result?: SimpleKafkaDeliveryConfig
   /**
@@ -10871,11 +10871,11 @@ export interface DescribeInvocationMetricScatterPlotRequest {
    */
   Period?: number
   /**
-   * 查询指标维度
+   * 查询指标维度, 不能为空。可选 NamespaceId, GroupId, InstanceId, OperationName, ServiceName, PeerServiceName, PeerOperationName
    */
   MetricDimensions?: Array<MetricDimension>
   /**
-   * 查询指标名
+   * 查询指标名， 不能为空。仅支持 range_count_duratioin 为 key 下的 sum 方法
    */
   Metrics?: Array<Metric>
   /**
@@ -12773,10 +12773,10 @@ export interface DescribeUnitApiUseDetailResponse {
  */
 export interface DescribeInvocationMetricScatterPlotResponse {
   /**
-   * 多值时间抽统计指标
+   * 多值时间统计指标
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Result: InvocationMetricScatterPlot
+  Result?: InvocationMetricScatterPlot
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

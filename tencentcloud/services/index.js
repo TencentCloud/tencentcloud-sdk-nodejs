@@ -240,6 +240,8 @@ var iir_1 = require("./iir");
 Object.defineProperty(exports, "iir", { enumerable: true, get: function () { return iir_1.iir; } });
 var ims_1 = require("./ims");
 Object.defineProperty(exports, "ims", { enumerable: true, get: function () { return ims_1.ims; } });
+var ioa_1 = require("./ioa");
+Object.defineProperty(exports, "ioa", { enumerable: true, get: function () { return ioa_1.ioa; } });
 var iot_1 = require("./iot");
 Object.defineProperty(exports, "iot", { enumerable: true, get: function () { return iot_1.iot; } });
 var iotcloud_1 = require("./iotcloud");

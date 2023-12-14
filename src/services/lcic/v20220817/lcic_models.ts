@@ -141,6 +141,10 @@ video 纯视频
    * 是否自动开始上课：0 不自动上课（默认） 1 自动上课 live_type=1的时候有效
    */
   EnableAutoStart?: number
+  /**
+   * 录制文件背景图片，支持png、jpg、jpeg、bmp格式，暂不支持透明通道
+   */
+  RecordBackground?: string
 }
 
 /**
@@ -2129,6 +2133,10 @@ video 纯视频
    * 是否自动开始上课：0 不自动上课（默认） 1 自动上课 live_type=1的时候有效
    */
   EnableAutoStart?: number
+  /**
+   * 录制文件背景图片，支持png、jpg、jpeg、bmp格式，暂不支持透明通道
+   */
+  RecordBackground?: string
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

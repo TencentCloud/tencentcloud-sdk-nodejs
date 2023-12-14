@@ -532,7 +532,7 @@ export interface CreateConnectionResponse {
   /**
    * 连接器ID
    */
-  ConnectionId: string
+  ConnectionId?: string
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1745,7 +1745,7 @@ export interface CreateConnectionRequest {
    */
   Enable?: boolean
   /**
-   * 类型
+   * 连接器类型，目前支持以下类型:apigw/ckafka/dts/tdmq
    */
   Type?: string
 }

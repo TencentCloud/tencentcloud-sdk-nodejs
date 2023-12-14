@@ -958,7 +958,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建参数模板,并返回模板详细信息
+   * 创建参数模版，并返回模版详细信息
    */
   async CreateConfigTemplateWithDetailResp(
     req: CreateConfigTemplateWithDetailRespRequest,

@@ -129,6 +129,7 @@ export interface CreateSealRequest {
   <li>**CONTRACT**: 合同专用章;</li>
   <li>**FINANCE**: 财务专用章;</li>
   <li>**PERSONNEL**: 人事专用章</li>
+  <li>**INVOICE**: 发票专用章</li>
   </ul>
   注: `同企业下只能有一个公章, 重复创建会报错`
      */
@@ -192,9 +193,16 @@ export interface CreateSealRequest {
      * 印章尺寸取值描述, 可以选择的尺寸如下:
   <ul><li> **42_42**: 圆形企业公章直径42mm, 当SealStyle是圆形的时候才有效</li>
   <li> **40_40**: 圆形企业印章直径40mm, 当SealStyle是圆形的时候才有效</li>
-  <li> **45_30**: 椭圆形印章45mm x 30mm, 当SealStyle是椭圆的时候才有效</li></ul>
+  <li> **45_30**: 椭圆形印章45mm x 30mm, 当SealStyle是椭圆的时候才有效</li>
+  <li> **40_30**: 椭圆形印章40mm x 30mm, 当SealStyle是椭圆的时候才有效</li></ul>
      */
     SealSize?: string;
+    /**
+     * 企业税号
+  注: `1.印章类型SealType是INVOICE类型时，此参数才会生效`
+  `2.印章类型SealType是INVOICE类型，且该字段没有传入值或传入空时，会取该企业对应的统一社会信用代码作为默认的企业税号`
+     */
+    TaxIdentifyCode?: string;
 }
 /**
  * ModifyIntegrationDepartment返回参数结构体

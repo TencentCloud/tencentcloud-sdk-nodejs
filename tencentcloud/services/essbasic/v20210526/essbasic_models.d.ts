@@ -1112,7 +1112,7 @@ export interface ReleasedApprover {
 export interface CreateConsoleLoginUrlResponse {
     /**
      * 跳转链接, 链接的有效期根据企业,员工状态和终端等有区别, 可以参考下表
-  <table> <thead> <tr> <th>子客企业状态</th> <th>子客企业员工状态</th> <th>Endpoint</th> <th>链接有效期限</th> </tr> </thead>  <tbody> <tr> <td>企业未激活</td> <td>员工未认证</td> <td>PC/CHANNEL/APP</td> <td>一年</td>  </tr>  <tr> <td>企业已激活</td> <td>员工未认证</td> <td>PC/CHANNEL/APP</td> <td>一年</td>  </tr>  <tr> <td>企业已激活</td> <td>员工已认证</td> <td>PC</td> <td>5分钟</td>  </tr>  <tr> <td>企业已激活</td> <td>员工已认证</td> <td>CHANNEL/APP</td> <td>一年</td>  </tr> </tbody> </table>
+  <table> <thead> <tr> <th>子客企业状态</th> <th>子客企业员工状态</th> <th>Endpoint</th> <th>链接有效期限</th> </tr> </thead>  <tbody> <tr> <td>企业未激活</td> <td>员工未认证</td> <td>PC/PC_SHORT_URL</td> <td>5分钟</td>  </tr>  <tr> <td>企业未激活</td> <td>员工未认证</td> <td>CHANNEL/APP</td> <td>一年</td>  </tr>  <tr> <td>企业已激活</td> <td>员工未认证</td> <td>PC/PC_SHORT_URL</td> <td>5分钟</td>  </tr> <tr> <td>企业已激活</td> <td>员工未认证</td> <td>PC/CHANNEL/APP</td> <td>一年</td>  </tr>  <tr> <td>企业已激活</td> <td>员工已认证</td> <td>PC</td> <td>5分钟</td>  </tr>  <tr> <td>企业已激活</td> <td>员工已认证</td> <td>CHANNEL/APP</td> <td>一年</td>  </tr> </tbody> </table>
   注：
   `1.链接仅单次有效，每次登录需要需要重新创建新的链接`
   `2.创建的链接应避免被转义，如：&被转义为\u0026；如使用Postman请求后，请选择响应类型为 JSON，否则链接将被转义`
@@ -3049,9 +3049,9 @@ export interface CreateConsoleLoginUrlRequest {
     MenuStatus?: string;
     /**
      * 生成链接的类型：
-  生成链接的类型
   <ul><li>**PC**：(默认)web控制台链接, 需要在PC浏览器中打开</li>
-  <li>**CHANNEL**：H5跳转到电子签小程序链接,  一般用于发送短信中带的链接,  打开后进入腾讯电子签小程序</li>
+  <li>**CHANNEL**：H5跳转到电子签小程序链接, 一般用于发送短信中带的链接, 打开后进入腾讯电子签小程序</li>
+  <li>**SHORT_URL**：H5跳转到电子签小程序链接的短链形式, 一般用于发送短信中带的链接, 打开后进入腾讯电子签小程序</li>
   <li>**APP**：第三方APP或小程序跳转电子签小程序链接, 一般用于贵方小程序或者APP跳转过来,  打开后进入腾讯电子签小程序</li></ul>
      */
     Endpoint?: string;
@@ -6729,6 +6729,7 @@ export interface CreateSealByImageRequest {
   <li>**CONTRACT**: 合同专用章;</li>
   <li>**FINANCE**: 财务专用章;</li>
   <li>**PERSONNEL**: 人事专用章</li>
+  <li>**INVOICE**: 发票专用章</li>
   </ul>
   注: `同企业下只能有一个公章, 重复创建会报错`
      */
@@ -6754,6 +6755,12 @@ export interface CreateSealByImageRequest {
   <li> **45_30**: 椭圆形印章45mm x 30mm, 当SealStyle是椭圆的时候才有效</li></ul>
      */
     SealSize?: string;
+    /**
+     * 企业税号
+  注: `1.印章类型SealType是INVOICE类型时，此参数才会生效`
+  `2.印章类型SealType是INVOICE类型，且该字段没有传入值或传入空时，会取该企业对应的统一社会信用代码作为默认的企业税号`
+     */
+    TaxIdentifyCode?: string;
 }
 /**
  * ChannelCreateFlowApprovers请求参数结构体

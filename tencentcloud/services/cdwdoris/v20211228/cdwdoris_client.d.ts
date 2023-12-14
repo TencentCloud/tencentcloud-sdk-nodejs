@@ -8,7 +8,7 @@ import { DescribeInstancesRequest, DescribeInstanceNodesResponse, DescribeInstan
 export declare class Client extends AbstractClient {
     constructor(clientConfig: ClientConfig);
     /**
-     * 获取实例列表
+     * 获取集群列表
      */
     DescribeInstances(req: DescribeInstancesRequest, cb?: (error: string, rep: DescribeInstancesResponse) => void): Promise<DescribeInstancesResponse>;
     /**

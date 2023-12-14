@@ -42,7 +42,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取实例列表
+   * 获取集群列表
    */
   async DescribeInstances(
     req: DescribeInstancesRequest,

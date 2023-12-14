@@ -1,3 +1,112 @@
+# Release 4.0.758
+
+## 腾讯电子签企业版(ess) 版本：2020-11-11
+
+### 第 141 次发布
+
+发布时间：2023-12-14 01:47:26
+
+本次发布包含了以下内容：
+
+改善已有的文档。
+
+修改接口：
+
+* [CreateSeal](https://cloud.tencent.com/document/api/1323/94136)
+
+	* 新增入参：TaxIdentifyCode
+
+
+
+
+## 腾讯电子签（基础版）(essbasic) 版本：2021-05-26
+
+### 第 142 次发布
+
+发布时间：2023-12-14 01:49:14
+
+本次发布包含了以下内容：
+
+改善已有的文档。
+
+修改接口：
+
+* [CreateSealByImage](https://cloud.tencent.com/document/api/1420/73067)
+
+	* 新增入参：TaxIdentifyCode
+
+
+
+
+## 腾讯电子签（基础版）(essbasic) 版本：2020-12-22
+
+
+
+## iOA 零信任安全管理系统(ioa) 版本：2022-06-01
+
+### 第 2 次发布
+
+发布时间：2023-12-14 12:16:14
+
+本次发布包含了以下内容：
+
+改善已有的文档。
+
+修改接口：
+
+* [DescribeDevices](https://cloud.tencent.com/document/api/1092/102467)
+
+	* 新增入参：Condition, GroupId, OsType, OnlineStatus, Filters, Sort, PageNum, PageSize, Status
+
+	* 新增出参：Data
+
+
+新增数据结构：
+
+* [Condition](https://cloud.tencent.com/document/api/1092/102488#Condition)
+* [DescribeDevicesPageRsp](https://cloud.tencent.com/document/api/1092/102488#DescribeDevicesPageRsp)
+* [Filter](https://cloud.tencent.com/document/api/1092/102488#Filter)
+* [FilterGroup](https://cloud.tencent.com/document/api/1092/102488#FilterGroup)
+* [Paging](https://cloud.tencent.com/document/api/1092/102488#Paging)
+* [Sort](https://cloud.tencent.com/document/api/1092/102488#Sort)
+
+### 第 1 次发布
+
+发布时间：2023-12-13 17:22:42
+
+本次发布包含了以下内容：
+
+改善已有的文档。
+
+新增接口：
+
+* [DescribeDevices](https://cloud.tencent.com/document/api/1092/102467)
+
+
+
+## 实时互动-教育版(lcic) 版本：2022-08-17
+
+### 第 48 次发布
+
+发布时间：2023-12-14 02:03:05
+
+本次发布包含了以下内容：
+
+改善已有的文档。
+
+修改接口：
+
+* [CreateRoom](https://cloud.tencent.com/document/api/1639/80942)
+
+	* 新增入参：RecordBackground
+
+* [DescribeRoom](https://cloud.tencent.com/document/api/1639/80941)
+
+	* 新增出参：RecordBackground
+
+
+
+
 # Release 4.0.757
 
 ## T-Sec-DDoS防护(Anti-DDoS)(antiddos) 版本：2020-03-09

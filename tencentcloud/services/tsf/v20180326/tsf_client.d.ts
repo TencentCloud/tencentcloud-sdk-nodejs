@@ -132,7 +132,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeFileConfigs(req: DescribeFileConfigsRequest, cb?: (error: string, rep: DescribeFileConfigsResponse) => void): Promise<DescribeFileConfigsResponse>;
     /**
-     * 创建参数模板,并返回模板详细信息
+     * 创建参数模版，并返回模版详细信息
      */
     CreateConfigTemplateWithDetailResp(req: CreateConfigTemplateWithDetailRespRequest, cb?: (error: string, rep: CreateConfigTemplateWithDetailRespResponse) => void): Promise<CreateConfigTemplateWithDetailRespResponse>;
     /**
