@@ -60,7 +60,7 @@ export interface PreviewReplacedCommandContentResponse {
   /**
    * 自定义参数替换后的，经Base64编码的命令内容。
    */
-  ReplacedContent: string
+  ReplacedContent?: string
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -121,7 +121,7 @@ export interface RegisterInstanceInfo {
    */
   SystemName?: string
   /**
-   * 主机IP。
+   * 主机名。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   HostName?: string
@@ -159,27 +159,25 @@ export interface AutomationAgentInfo {
   /**
    * 实例ID。
    */
-  InstanceId: string
+  InstanceId?: string
   /**
    * Agent 版本号。
    */
-  Version: string
+  Version?: string
   /**
    * 上次心跳时间
    */
-  LastHeartbeatTime: string
+  LastHeartbeatTime?: string
   /**
    * Agent状态，取值范围：
-<li> Online：在线
-<li> Offline：离线
+Online：在线，Offline：离线
+
    */
-  AgentStatus: string
+  AgentStatus?: string
   /**
-   * Agent运行环境，取值范围：
-<li> Linux：Linux实例
-<li> Windows：Windows实例
+   * Agent运行环境，取值范围：Linux：Linux实例Windows：Windows实例
    */
-  Environment: string
+  Environment?: string
   /**
    * Agent 支持的功能列表。
    */
@@ -224,6 +222,12 @@ export interface DescribeRegisterInstancesRequest {
 按照【注册码ID】进行过滤。
 类型：String
 必选：否
+
+- sys-name
+
+按照【操作系统类型】进行过滤，取值：Linux | Windows。
+类型：String
+必选：否
    */
   Filters?: Array<Filter>
   /**
@@ -253,93 +257,89 @@ export interface Invocation {
   /**
    * 执行活动ID。
    */
-  InvocationId: string
+  InvocationId?: string
   /**
    * 命令ID。
    */
-  CommandId: string
+  CommandId?: string
   /**
    * 执行任务状态。取值范围：
-<li> PENDING：等待下发 
-<li> RUNNING：命令运行中
-<li> SUCCESS：命令成功
-<li> FAILED：命令失败
-<li> TIMEOUT：命令超时
-<li> PARTIAL_FAILED：命令部分失败
+
+<ul> <li>PENDING：等待下发</li> <li>RUNNING：命令运行中</li> <li>SUCCESS：命令成功</li> <li>FAILED：命令失败</li> <li>TIMEOUT：命令超时</li> <li>PARTIAL_FAILED：命令部分失败</li> </ul>
    */
-  InvocationStatus: string
+  InvocationStatus?: string
   /**
    * 执行任务信息列表。
    */
-  InvocationTaskBasicInfoSet: Array<InvocationTaskBasicInfo>
+  InvocationTaskBasicInfoSet?: Array<InvocationTaskBasicInfo>
   /**
    * 执行活动描述。
    */
-  Description: string
+  Description?: string
   /**
    * 执行活动开始时间。
    */
-  StartTime: string
+  StartTime?: string
   /**
    * 执行活动结束时间。
    */
-  EndTime: string
+  EndTime?: string
   /**
    * 执行活动创建时间。
    */
-  CreatedTime: string
+  CreatedTime?: string
   /**
    * 执行活动更新时间。
    */
-  UpdatedTime: string
+  UpdatedTime?: string
   /**
    * 自定义参数取值。
    */
-  Parameters: string
+  Parameters?: string
   /**
    * 自定义参数的默认取值。
    */
-  DefaultParameters: string
+  DefaultParameters?: string
   /**
    * 执行命令的实例类型，取值范围：CVM、LIGHTHOUSE。
    */
-  InstanceKind: string
+  InstanceKind?: string
   /**
    * 在实例上执行命令时使用的用户名。
    */
-  Username: string
+  Username?: string
   /**
    * 调用来源。
    */
-  InvocationSource: string
+  InvocationSource?: string
   /**
    * base64编码的命令内容
    */
-  CommandContent: string
+  CommandContent?: string
   /**
    * 命令类型
    */
-  CommandType: string
+  CommandType?: string
   /**
    * 执行命令过期时间， 单位秒
    */
-  Timeout: number
+  Timeout?: number
   /**
    * 执行命令的工作路径
    */
-  WorkingDirectory: string
+  WorkingDirectory?: string
   /**
    * 日志上传的cos bucket 地址。
    */
-  OutputCOSBucketUrl: string
+  OutputCOSBucketUrl?: string
   /**
    * 日志在cos bucket中的目录。
    */
-  OutputCOSKeyPrefix: string
+  OutputCOSKeyPrefix?: string
 }
 
 /**
- * GeneralResourceQuotaSet数据结构
+ * 用户配额信息。
  */
 export interface GeneralResourceQuotaSet {
   /**
@@ -369,8 +369,8 @@ export interface RunCommandRequest {
   Content: string
   /**
    * 待执行命令的实例ID列表，上限200。支持实例类型：
-<li> CVM
-<li> LIGHTHOUSE
+<li> CVM </li>
+<li> LIGHTHOUSE </li>
    */
   InstanceIds: Array<string>
   /**
@@ -395,8 +395,8 @@ export interface RunCommandRequest {
   Timeout?: number
   /**
    * 是否保存命令，取值范围：
-<li> true：保存
-<li> false：不保存
+<li> true：保存</li>
+<li> false：不保存</li>
 默认为 false。
    */
   SaveCommand?: boolean
@@ -404,9 +404,9 @@ export interface RunCommandRequest {
    * 是否启用自定义参数功能。
 一旦创建，此值不提供修改。
 取值范围：
-<li> true：启用
-<li> false：不启用
-默认值：false。
+<li> true：启用 </li>
+<li> false：不启用 </li>
+默认值：false。 
    */
   EnableParameter?: boolean
   /**
@@ -506,7 +506,9 @@ export interface DescribeInvocationTasksRequest {
    */
   InvocationTaskIds?: Array<string>
   /**
-   * 过滤条件。<br> <li> invocation-id - String - 是否必填：否 -（过滤条件）按照执行活动ID过滤。<br> <li> invocation-task-id - String - 是否必填：否 -（过滤条件）按照执行任务ID过滤。<br> <li> instance-id - String - 是否必填：否 -（过滤条件）按照实例ID过滤。 <br> <li> command-id - String - 是否必填：否 -（过滤条件）按照命令ID过滤。 <br>每次请求的 `Filters` 的上限为10， `Filter.Values` 的上限为5。参数不支持同时指定 `InvocationTaskIds` 和 `Filters` 。
+   * 过滤条件。<br>
+
+<li> invocation-id - String - 是否必填：否 -（过滤条件）按照执行活动ID过滤。</li> <li> invocation-task-id - String - 是否必填：否 -（过滤条件）按照执行任务ID过滤。</li> <li> instance-id - String - 是否必填：否 -（过滤条件）按照实例ID过滤。</li> <li> command-id - String - 是否必填：否 -（过滤条件）按照命令ID过滤。</li> <br>每次请求的 `Filters` 的上限为10， `Filter.Values` 的上限为5。参数不支持同时指定 `InvocationTaskIds` 和 `Filters` 。
    */
   Filters?: Array<Filter>
   /**
@@ -518,7 +520,9 @@ export interface DescribeInvocationTasksRequest {
    */
   Offset?: number
   /**
-   * 是否隐藏输出，取值范围：<br><li>true：隐藏输出 <br><li>false：不隐藏 <br>默认为 true。
+   * 是否隐藏输出，取值范围：
+
+<ul> <li>true：隐藏输出</li> <li>false：不隐藏</li> </ul> 默认为 true。
    */
   HideOutput?: boolean
 }
@@ -545,23 +549,23 @@ export interface CommandDocument {
   /**
    * Base64 编码后的执行命令。
    */
-  Content: string
+  Content?: string
   /**
    * 命令类型。
    */
-  CommandType: string
+  CommandType?: string
   /**
    * 超时时间。
    */
-  Timeout: number
+  Timeout?: number
   /**
    * 执行路径。
    */
-  WorkingDirectory: string
+  WorkingDirectory?: string
   /**
    * 执行用户。
    */
-  Username: string
+  Username?: string
   /**
    * 保存输出的 COS Bucket 链接。
    */
@@ -597,33 +601,33 @@ export interface TaskResult {
   /**
    * 命令执行ExitCode。
    */
-  ExitCode: number
+  ExitCode?: number
   /**
    * Base64编码后的命令输出。最大长度24KB。
    */
-  Output: string
+  Output?: string
   /**
    * 命令执行开始时间。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ExecStartTime: string
+  ExecStartTime?: string
   /**
    * 命令执行结束时间。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ExecEndTime: string
+  ExecEndTime?: string
   /**
    * 命令最终输出被截断的字节数。
    */
-  Dropped: number
+  Dropped?: number
   /**
    * 日志在cos中的地址
    */
-  OutputUrl: string
+  OutputUrl?: string
   /**
    * 日志上传cos的错误信息。
    */
-  OutputUploadCOSErrorInfo: string
+  OutputUploadCOSErrorInfo?: string
 }
 
 /**
@@ -867,11 +871,11 @@ export interface DescribeCommandsResponse {
   /**
    * 符合条件的命令总数。
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 命令详情列表。
    */
-  CommandSet: Array<Command>
+  CommandSet?: Array<Command>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1075,10 +1079,10 @@ export interface DescribeCommandsRequest {
   CommandIds?: Array<string>
   /**
    * 过滤条件。
-<li> command-id - String - 是否必填：否 -（过滤条件）按照命令ID过滤。
-<li> command-name - String - 是否必填：否 -（过滤条件）按照命令名称过滤。
-<li> command-type - String - 是否必填：否 -（过滤条件）按照命令类型过滤，取值为 SHELL 或 POWERSHELL。
-<li> created-by - String - 是否必填：否 -（过滤条件）按照命令创建者过滤，取值为 TAT 或 USER，TAT 代表公共命令，USER 代表由用户创建的命令。
+<li> command-id - String - 是否必填：否 -（过滤条件）按照命令ID过滤。</li>
+<li> command-name - String - 是否必填：否 -（过滤条件）按照命令名称过滤。</li>
+<li> command-type - String - 是否必填：否 -（过滤条件）按照命令类型过滤，取值为 SHELL 或 POWERSHELL。</li>
+<li> created-by - String - 是否必填：否 -（过滤条件）按照命令创建者过滤，取值为 TAT 或 USER，TAT 代表公共命令，USER 代表由用户创建的命令。</li>
 <li> tag-key - String - 是否必填：否 -（过滤条件）按照标签键进行过滤。</li>
 <li> tag-value - String - 是否必填：否 -（过滤条件）按照标签值进行过滤。</li>
 <li> tag:tag-key - String - 是否必填：否 -（过滤条件）按照标签键值对进行过滤。 tag-key使用具体的标签键进行替换。使用请参考示例4</li>
@@ -1115,11 +1119,13 @@ export interface DescribeInvocationsRequest {
    */
   InvocationIds?: Array<string>
   /**
-   * 过滤条件。<br> <li> invocation-id - String - 是否必填：否 -（过滤条件）按照执行活动ID过滤。<br> 
-<li> command-id - String - 是否必填：否 -（过滤条件）按照命令ID过滤。 
-<li> command-created-by - String - 是否必填：否 -（过滤条件）按照执行的命令类型过滤，取值为 TAT 或 USER，TAT 代表公共命令，USER 代表由用户创建的命令。
-<li> instance-kind - String - 是否必填：否 -（过滤条件）按照运行实例类型过滤，取值为 CVM 或 LIGHTHOUSE，CVM 代表实例为云服务器， LIGHTHOUSE 代表实例为轻量应用服务器。
-<br>每次请求的 `Filters` 的上限为10， `Filter.Values` 的上限为5。参数不支持同时指定 `InvocationIds` 和 `Filters` 。
+   * 过滤条件。<br>
+
+<li> invocation-id - String - 是否必填：否 -（过滤条件）按照执行活动ID过滤。</li>
+ <li> command-id - String - 是否必填：否 -（过滤条件）按照命令ID过滤。</li> 
+<li> command-created-by - String - 是否必填：否 -（过滤条件）按照执行的命令类型过滤，取值为 TAT 或 USER，TAT 代表公共命令，USER 代表由用户创建的命令。</li>
+ <li> instance-kind - String - 是否必填：否 -（过滤条件）按照运行实例类型过滤，取值为 CVM 或 LIGHTHOUSE，CVM 代表实例为云服务器， LIGHTHOUSE 代表实例为轻量应用服务器。</li>
+ <br>每次请求的 `Filters` 的上限为10， `Filter.Values` 的上限为5。参数不支持同时指定 `InvocationIds` 和 `Filters` 。
    */
   Filters?: Array<Filter>
   /**
@@ -1164,11 +1170,11 @@ export interface DescribeInvocationsResponse {
   /**
    * 符合条件的执行活动总数。
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 执行活动列表。
    */
-  InvocationSet: Array<Invocation>
+  InvocationSet?: Array<Invocation>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1303,70 +1309,59 @@ export interface InvocationTask {
   /**
    * 执行活动ID。
    */
-  InvocationId: string
+  InvocationId?: string
   /**
    * 执行任务ID。
    */
-  InvocationTaskId: string
+  InvocationTaskId?: string
   /**
    * 命令ID。
    */
-  CommandId: string
+  CommandId?: string
   /**
    * 执行任务状态。取值范围：
-<li> PENDING：等待下发 
-<li> DELIVERING：下发中
-<li> DELIVER_DELAYED：延时下发 
-<li> DELIVER_FAILED：下发失败
-<li> START_FAILED：命令启动失败
-<li> RUNNING：命令运行中
-<li> SUCCESS：命令成功
-<li> FAILED：命令执行失败，执行完退出码不为 0
-<li> TIMEOUT：命令超时
-<li> TASK_TIMEOUT：执行任务超时
-<li> CANCELLING：取消中
-<li> CANCELLED：已取消（命令启动前就被取消）
-<li> TERMINATED：已中止（命令执行期间被取消）
+
+<ul> <li>PENDING：等待下发</li> <li>DELIVERING：下发中</li> <li>DELIVER_DELAYED：延时下发</li> <li>DELIVER_FAILED：下发失败</li> <li>START_FAILED：命令启动失败</li> <li>RUNNING：命令运行中</li> <li>SUCCESS：命令成功</li> <li>FAILED：命令执行失败，执行完退出码不为 0</li> <li>TIMEOUT：命令超时</li> <li>TASK_TIMEOUT：执行任务超时</li> <li>CANCELLING：取消中</li> <li>CANCELLED：已取消（命令启动前就被取消）</li> <li>TERMINATED：已中止（命令执行期间被取消）</li> </ul>
    */
-  TaskStatus: string
+  TaskStatus?: string
   /**
    * 实例ID。
    */
-  InstanceId: string
+  InstanceId?: string
   /**
    * 执行结果。
    */
-  TaskResult: TaskResult
+  TaskResult?: TaskResult
   /**
    * 执行任务开始时间。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  StartTime: string
+  StartTime?: string
   /**
    * 执行任务结束时间。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  EndTime: string
+  EndTime?: string
   /**
    * 创建时间。
    */
-  CreatedTime: string
+  CreatedTime?: string
   /**
    * 更新时间。
    */
-  UpdatedTime: string
+  UpdatedTime?: string
   /**
    * 执行任务所执行的命令详情。
    */
-  CommandDocument: CommandDocument
+  CommandDocument?: CommandDocument
   /**
    * 执行任务失败时的错误信息。
    */
-  ErrorInfo: string
+  ErrorInfo?: string
   /**
    * 调用来源。
    */
-  InvocationSource: string
+  InvocationSource?: string
 }
 
 /**
@@ -1476,8 +1471,8 @@ export interface CancelInvocationRequest {
   InvocationId: string
   /**
    * 实例ID列表，上限100。支持实例类型：
-<li> CVM
-<li> LIGHTHOUSE
+<li> CVM </li>
+<li> LIGHTHOUSE </li>
    */
   InstanceIds?: Array<string>
 }

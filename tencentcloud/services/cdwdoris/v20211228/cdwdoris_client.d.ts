@@ -12,11 +12,11 @@ export declare class Client extends AbstractClient {
      */
     DescribeInstances(req: DescribeInstancesRequest, cb?: (error: string, rep: DescribeInstancesResponse) => void): Promise<DescribeInstancesResponse>;
     /**
-     * 根据实例ID查询某个实例的具体信息
+     * 根据集群ID查询某个集群的具体信息
      */
     DescribeInstance(req: DescribeInstanceRequest, cb?: (error: string, rep: DescribeInstanceResponse) => void): Promise<DescribeInstanceResponse>;
     /**
-     * 获取实例节点信息列表
+     * 获取集群节点信息列表
      */
     DescribeInstanceNodes(req: DescribeInstanceNodesRequest, cb?: (error: string, rep: DescribeInstanceNodesResponse) => void): Promise<DescribeInstanceNodesResponse>;
 }

@@ -25,6 +25,7 @@ import {
   Filter,
   DescribeDevicesRequest,
   Paging,
+  DeviceDetail,
   Condition,
 } from "./ioa_models"
 

@@ -719,12 +719,12 @@ export interface DescribeDDoSAttackDataResponse {
   /**
    * 查询结果的总条数。
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * DDoS攻击数据内容列表。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Data: Array<SecEntry>
+  Data?: Array<SecEntry>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2389,7 +2389,7 @@ export interface DescribeDDoSAttackTopDataRequest {
    */
   MetricName: string
   /**
-   * 站点ID集合，不填默认选择全部站点。
+   * 站点ID集合，此参数必填。
    */
   ZoneIds?: Array<string>
   /**
@@ -4591,7 +4591,7 @@ export interface DescribeDDoSAttackDataRequest {
    */
   MetricNames: Array<string>
   /**
-   * 站点集合，不填默认选择全部站点。
+   * 站点集合，此参数必填。
    */
   ZoneIds?: Array<string>
   /**
@@ -7410,11 +7410,11 @@ export interface DescribeAvailablePlansResponse {
  */
 export interface DescribeDDoSAttackEventRequest {
   /**
-   * 开始时间。
+   * 开始时间，时间范围为 30 天。
    */
   StartTime: string
   /**
-   * 结束时间。
+   * 结束时间，时间范围为 30 天。
    */
   EndTime: string
   /**
@@ -7422,7 +7422,7 @@ export interface DescribeDDoSAttackEventRequest {
    */
   PolicyIds?: Array<number | bigint>
   /**
-   * 站点集合，此参数必填，不填默认查询为空。
+   * 站点集合，此参数必填。
    */
   ZoneIds?: Array<string>
   /**
@@ -7434,7 +7434,7 @@ export interface DescribeDDoSAttackEventRequest {
    */
   Offset?: number
   /**
-   * 是否展示详细信息。
+   * 展示攻击详情的参数，若填false，默认只返回攻击次数，不返回攻击详情；若填true，返回攻击详情。
    */
   ShowDetail?: boolean
   /**
@@ -7812,11 +7812,11 @@ export interface DescribeDDoSAttackTopDataResponse {
    * DDoS攻击Top数据列表。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Data: Array<TopEntry>
+  Data?: Array<TopEntry>
   /**
    * 查询结果的总条数。
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

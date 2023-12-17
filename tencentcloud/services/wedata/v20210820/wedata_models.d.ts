@@ -11686,42 +11686,52 @@ export interface ColumnMeta {
      * 字段英文名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    NameEn: string;
+    NameEn?: string;
     /**
      * 字段中文名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    NameCn: string;
+    NameCn?: string;
     /**
      * 字段类型
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Type: string;
+    Type?: string;
     /**
      * 字段描述
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Description: string;
+    Description?: string;
     /**
      * 字段序号
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Position: number;
+    Position?: number;
     /**
      * 是否为分区字段
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    IsPartition: boolean;
+    IsPartition?: boolean;
     /**
      * 字段名
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Name: string;
+    Name?: string;
     /**
      * HBase列簇属性集合
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ColumnFamiliesFieldSet: Array<Pair>;
+    ColumnFamiliesFieldSet?: Array<Pair>;
+    /**
+     * 对应码表字典ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DictionaryId?: string;
+    /**
+     * 对应码表字典名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DictionaryName?: string;
 }
 /**
  * 集成离线任务实例信息
@@ -14557,6 +14567,10 @@ export interface CreateTaskVersionDsRequest {
      * 项目ID
      */
     ProjectId: string;
+    /**
+     * 请求来源，WEB 前端；CLIENT 客户端
+     */
+    RequestFromSource?: string;
     /**
      * 告警方式:email-邮件;sms-短信;wecom-企业微信
      */
@@ -22182,6 +22196,10 @@ export interface UploadContentRequest {
      * 脚本上传信息
      */
     ScriptRequestInfo: ScriptRequestInfo;
+    /**
+     * 请求来源，WEB 前端；CLIENT 客户端
+     */
+    RequestFromSource?: string;
 }
 /**
  * DescribeTaskReportDetailList请求参数结构体

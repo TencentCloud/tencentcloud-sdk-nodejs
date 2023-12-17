@@ -26,6 +26,7 @@ import {
   ChannelDeleteSealPoliciesRequest,
   ChannelBatchCancelFlowsResponse,
   ChannelDisableUserAutoSignResponse,
+  DescribeExtendedServiceAuthDetailResponse,
   Department,
   CommonApproverOption,
   ChannelCreateFlowGroupByTemplatesResponse,
@@ -35,9 +36,11 @@ import {
   ChannelCancelUserAutoSignEnableUrlResponse,
   ModifyExtendedServiceRequest,
   DescribeResourceUrlsByFlowsRequest,
+  AuthInfoDetail,
   CreateChannelOrganizationInfoChangeUrlResponse,
   RemindFlowRecords,
   ChannelCreateFlowSignUrlResponse,
+  HasAuthUser,
   ChannelCreateBatchSignUrlResponse,
   ChannelCreatePrepareFlowResponse,
   WebThemeConfig,
@@ -89,7 +92,7 @@ import {
   ChannelDescribeBillUsageDetailRequest,
   ChannelCancelUserAutoSignEnableUrlRequest,
   Permission,
-  DescribeTemplatesRequest,
+  DescribeExtendedServiceAuthDetailRequest,
   OrganizationAuthUrl,
   Staff,
   ComponentLimit,
@@ -109,12 +112,14 @@ import {
   DescribeUsageRequest,
   DescribeExtendedServiceAuthInfoRequest,
   DescribeChannelSealPolicyWorkflowUrlRequest,
+  CreatePartnerAutoSignAuthUrlResponse,
   FlowInfo,
   UserInfo,
   TaskInfo,
   ChannelCreateBoundFlowsResponse,
   ChannelCreateUserAutoSignSealUrlResponse,
   ApproverComponentLimitType,
+  HasAuthOrganization,
   ResourceUrlInfo,
   ChannelCreateBatchQuickSignUrlRequest,
   ChannelCreateBoundFlowsRequest,
@@ -155,6 +160,7 @@ import {
   ChannelDeleteRoleRequest,
   CreateBatchOrganizationRegistrationTasksRequest,
   ChannelCreateBatchQuickSignUrlResponse,
+  CreatePartnerAutoSignAuthUrlRequest,
   ChannelCreateBatchCancelFlowUrlRequest,
   ApproverRestriction,
   PrepareFlowsRequest,
@@ -212,6 +218,7 @@ import {
   ChannelCreateFlowApproversRequest,
   ChannelUpdateSealStatusResponse,
   ChannelCreateFlowSignUrlRequest,
+  DescribeTemplatesRequest,
   DescribeExtendedServiceAuthInfoResponse,
   ChannelCreateEmbedWebUrlRequest,
   CcInfo,
@@ -498,6 +505,22 @@ https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/launchAp
     cb?: (error: string, rep: DescribeUsageResponse) => void
   ): Promise<DescribeUsageResponse> {
     return this.request("DescribeUsage", req, cb)
+  }
+
+  /**
+     * 查询企业扩展服务的授权详情（列表），当前支持查询以下内容：
+
+1. **企业自动签**
+2. **批量签署**
+
+
+注: <font color='red'>所在企业的超管、法人才有权限调用此接口</font>(Agent.ProxyOperator.OpenId 需要传递超管或者法人的OpenId)
+     */
+  async DescribeExtendedServiceAuthDetail(
+    req: DescribeExtendedServiceAuthDetailRequest,
+    cb?: (error: string, rep: DescribeExtendedServiceAuthDetailResponse) => void
+  ): Promise<DescribeExtendedServiceAuthDetailResponse> {
+    return this.request("DescribeExtendedServiceAuthDetail", req, cb)
   }
 
   /**
@@ -1127,6 +1150,23 @@ Web链接访问后，会根据子客企业(**Agent中ProxyOrganizationOpenId表�
     cb?: (error: string, rep: ChannelCreateFlowApproversResponse) => void
   ): Promise<ChannelCreateFlowApproversResponse> {
     return this.request("ChannelCreateFlowApprovers", req, cb)
+  }
+
+  /**
+     * 创建他方自动签授权链接，通过该链接可进入小程序进行合作方企业的自动签授权，若当前企业未开通企业自动签，通过该链接会先引导开通本企业自动签。
+该接口效果同控制台： 企业设置-> 扩展服务 -> 企业自动签署 -> 合作企业方授权
+
+
+
+注: 
+1. <font color='red'>所在企业的超管、法人才有权限调用此接口</font>(Agent.ProxyOperator.OpenId 需要传递超管或者法人的OpenId)
+2. 已经在授权中或者授权成功的企业，无法重复授权
+     */
+  async CreatePartnerAutoSignAuthUrl(
+    req: CreatePartnerAutoSignAuthUrlRequest,
+    cb?: (error: string, rep: CreatePartnerAutoSignAuthUrlResponse) => void
+  ): Promise<CreatePartnerAutoSignAuthUrlResponse> {
+    return this.request("CreatePartnerAutoSignAuthUrl", req, cb)
   }
 
   /**

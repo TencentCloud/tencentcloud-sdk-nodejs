@@ -118,11 +118,11 @@ export interface MergeInfo {
      */
     InputImageFaceRect?: FaceRect;
     /**
-     * 控制台上传的素材人脸ID，不填默认取最大人脸。此字段仅适用于控制台上传素材的有素材场景。
+     * 素材人脸ID，不填默认取最大人脸。
      */
     TemplateFaceID?: string;
     /**
-     * 模版图片人脸位置信息(人脸框)，不填默认取最大人脸。此字段仅适用于自定义模版素材场景。
+     * 模版中人脸位置信息(人脸框)，不填默认取最大人脸。此字段仅适用于图片融合自定义模版素材场景。
      */
     TemplateFaceRect?: FaceRect;
 }

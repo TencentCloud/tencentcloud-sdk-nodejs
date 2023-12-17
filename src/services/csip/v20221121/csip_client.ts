@@ -23,6 +23,7 @@ import {
   DescribeRiskCenterAssetViewWeakPasswordRiskListResponse,
   DescribeVULRiskAdvanceCFGListResponse,
   TaskCenterWeakPwdRiskInputParam,
+  DescribeOrganizationUserInfoRequest,
   ModifyRiskCenterRiskStatusRequest,
   ReportItemKey,
   CVMAssetVO,
@@ -34,6 +35,7 @@ import {
   VULRiskAdvanceCFGList,
   StopRiskCenterTaskRequest,
   DataSearchBug,
+  OrganizationUserInfo,
   AssetTag,
   DescribeVULRiskAdvanceCFGListRequest,
   DescribeRiskCenterAssetViewCFGRiskListRequest,
@@ -49,6 +51,7 @@ import {
   DescribeSearchBugInfoRequest,
   TaskLogURL,
   AddNewBindRoleUserRequest,
+  DescribeOrganizationUserInfoResponse,
   NICAsset,
   DescribeListenerListResponse,
   DBAssetVO,
@@ -438,6 +441,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyRiskCenterRiskStatusResponse) => void
   ): Promise<ModifyRiskCenterRiskStatusResponse> {
     return this.request("ModifyRiskCenterRiskStatus", req, cb)
+  }
+
+  /**
+   * 查询集团账号用户列表
+   */
+  async DescribeOrganizationUserInfo(
+    req: DescribeOrganizationUserInfoRequest,
+    cb?: (error: string, rep: DescribeOrganizationUserInfoResponse) => void
+  ): Promise<DescribeOrganizationUserInfoResponse> {
+    return this.request("DescribeOrganizationUserInfo", req, cb)
   }
 
   /**

@@ -408,6 +408,16 @@ it("ess.v20201111.GetTaskResultApi", async function () {
     }
 })
 
+it("ess.v20201111.DescribeExtendedServiceAuthDetail", async function () {
+    try {
+       const data = await client.DescribeExtendedServiceAuthDetail({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ess.v20201111.CreateExtendedServiceAuthInfos", async function () {
     try {
        const data = await client.CreateExtendedServiceAuthInfos({})

@@ -249,6 +249,18 @@ https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/launchAp
         return this.request("DescribeUsage", req, cb);
     }
     /**
+     * 查询企业扩展服务的授权详情（列表），当前支持查询以下内容：
+
+1. **企业自动签**
+2. **批量签署**
+
+
+注: <font color='red'>所在企业的超管、法人才有权限调用此接口</font>(Agent.ProxyOperator.OpenId 需要传递超管或者法人的OpenId)
+     */
+    async DescribeExtendedServiceAuthDetail(req, cb) {
+        return this.request("DescribeExtendedServiceAuthDetail", req, cb);
+    }
+    /**
      * 撤销签署流程接口
 
 适用场景：如果某个合同流程当前至少还有一方没有签署，则可通过该接口取消该合同流程。常用于合同发错、内容填错，需要及时撤销的场景。
@@ -744,6 +756,19 @@ Web链接访问后，会根据子客企业(**Agent中ProxyOrganizationOpenId表�
      */
     async ChannelCreateFlowApprovers(req, cb) {
         return this.request("ChannelCreateFlowApprovers", req, cb);
+    }
+    /**
+     * 创建他方自动签授权链接，通过该链接可进入小程序进行合作方企业的自动签授权，若当前企业未开通企业自动签，通过该链接会先引导开通本企业自动签。
+该接口效果同控制台： 企业设置-> 扩展服务 -> 企业自动签署 -> 合作企业方授权
+
+
+
+注:
+1. <font color='red'>所在企业的超管、法人才有权限调用此接口</font>(Agent.ProxyOperator.OpenId 需要传递超管或者法人的OpenId)
+2. 已经在授权中或者授权成功的企业，无法重复授权
+     */
+    async CreatePartnerAutoSignAuthUrl(req, cb) {
+        return this.request("CreatePartnerAutoSignAuthUrl", req, cb);
     }
     /**
      * 此接口（ChannelCreateRole）用来创建企业自定义角色。

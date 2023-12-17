@@ -463,6 +463,20 @@ export interface ChannelDisableUserAutoSignResponse {
     RequestId?: string;
 }
 /**
+ * DescribeExtendedServiceAuthDetail返回参数结构体
+ */
+export interface DescribeExtendedServiceAuthDetailResponse {
+    /**
+     * 服务授权的信息列表，根据查询类型返回特定扩展服务的开通和授权状况。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AuthInfoDetail?: AuthInfoDetail;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * 第三方应用集成员工部门信息
  */
 export interface Department {
@@ -675,6 +689,41 @@ export interface DescribeResourceUrlsByFlowsRequest {
     Operator?: UserInfo;
 }
 /**
+ * 企业扩展服务授权列表详情
+ */
+export interface AuthInfoDetail {
+    /**
+     * 扩展服务类型，和入参一致
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Type?: string;
+    /**
+     * 扩展服务名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Name?: string;
+    /**
+     * 授权员工列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    HasAuthUserList?: Array<HasAuthUser>;
+    /**
+     * 授权企业列表（企业自动签时，该字段有值）
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    HasAuthOrganizationList?: Array<HasAuthOrganization>;
+    /**
+     * 授权员工列表总数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AuthUserTotal?: number;
+    /**
+     * 授权企业列表总数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AuthOrganizationTotal?: number;
+}
+/**
  * CreateChannelOrganizationInfoChangeUrl返回参数结构体
  */
 export interface CreateChannelOrganizationInfoChangeUrlResponse {
@@ -720,6 +769,18 @@ export interface ChannelCreateFlowSignUrlResponse {
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * 被授权的用户信息
+ */
+export interface HasAuthUser {
+    /**
+     * 第三方应用平台自定义，对应第三方平台子客企业员工的唯一标识。
+  
+  
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    OpenId?: string;
 }
 /**
  * ChannelCreateBatchSignUrl返回参数结构体
@@ -1014,7 +1075,6 @@ export interface BaseFlowInfo {
     /**
      * 合同流程的抄送人列表，最多可支持50个抄送人，抄送人可查看合同内容及签署进度，但无需参与合同签署。
   
-  注:`此功能为白名单功能，使用前请联系对接的客户经理沟通。`
      */
     CcInfos?: Array<CcInfo>;
     /**
@@ -2819,9 +2879,9 @@ export interface Permission {
     Children?: Array<Permission>;
 }
 /**
- * DescribeTemplates请求参数结构体
+ * DescribeExtendedServiceAuthDetail请求参数结构体
  */
-export interface DescribeTemplatesRequest {
+export interface DescribeExtendedServiceAuthDetailRequest {
     /**
      * 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。
   
@@ -2835,83 +2895,22 @@ export interface DescribeTemplatesRequest {
      */
     Agent: Agent;
     /**
-     * 合同模板ID，为32位字符串。
-  
-  可以通过<a href="https://qian.tencent.com/developers/partnerApis/accounts/CreateConsoleLoginUrl" target="_blank">生成子客登录链接</a>登录企业控制台, 在企业模板中得到合同模板ID。
-     */
-    TemplateId?: string;
-    /**
-     * 查询模板的内容
-  
-  <ul><li>**0**：（默认）模板列表及详情</li>
-  <li>**1**：仅模板列表, 不会返回模板中的签署控件, 填写控件, 参与方角色列表等信息</li></ul>
-     */
-    ContentType?: number;
-    /**
-     * 合同模板ID数组，每一个合同模板ID为32位字符串,  最多支持200个模板的批量查询。
-  
-  注意:
-  1.` 此参数TemplateIds与TemplateId互为独立，若两者均传入，以TemplateId为准。`
-  2. `请确保每个模板均正确且属于当前企业，若有任一模板不存在，则返回错误。`
-  4. `若传递此参数，分页参数(Limit,Offset)无效`
+     * 要查询的扩展服务类型。
+  如下所示：
+  <ul><li> AUTO_SIGN：企业静默签署</li>
+  <li>BATCH_SIGN：批量签署</li>
+  </ul>
   
      */
-    TemplateIds?: Array<string>;
+    ExtendServiceType: string;
     /**
-     * 指定每页返回的数据条数，和Offset参数配合使用。
-  
-  注：`1.默认值为20，单页做大值为200。`
+     * 指定每页返回的数据条数，和Offset参数配合使用。 注：`1.默认值为20，单页做大值为200。`
      */
     Limit?: number;
     /**
-     * 查询结果分页返回，指定从第几页返回数据，和Limit参数配合使用。
-  
-  注：`1.offset从0开始，即第一页为0。`
-  `2.默认从第一页返回。`
+     * 查询结果分页返回，指定从第几页返回数据，和Limit参数配合使用。 注：`1.offset从0开始，即第一页为0。` `2.默认从第一页返回。`
      */
     Offset?: number;
-    /**
-     * 模糊搜索的模板名称，注意是模板名的连续部分，长度不能超过200，可支持由中文、字母、数字和下划线组成字符串。
-     */
-    TemplateName?: string;
-    /**
-     * 对应第三方应用平台企业的模板ID，通过此值可以搜索由第三方应用平台模板ID下发或领取得到的子客模板列表。
-     */
-    ChannelTemplateId?: string;
-    /**
-     * 返回控件的范围, 是只返回发起方自己的还是所有参与方的
-  
-  <ul><li>**false**：（默认）只返回发起方控件</li>
-  <li>**true**：返回所有参与方(包括发起方和签署方)控件</li></ul>
-     */
-    QueryAllComponents?: boolean;
-    /**
-     * 是否获取模板预览链接。
-  
-  <ul><li>**false**：不获取（默认）</li>
-  <li>**true**：获取</li></ul>
-  
-  设置为true之后， 返回参数PreviewUrl，为模板的H5预览链接,  有效期5分钟。可以通过浏览器打开此链接预览模板，或者嵌入到iframe中预览模板。
-  
-  注: `此功能为白名单功能，使用前请联系对接的客户经理沟通。`
-     */
-    WithPreviewUrl?: boolean;
-    /**
-     * 是否获取模板的PDF文件链接。
-  
-  <ul><li>**false**：不获取（默认）</li>
-  <li>**true**：获取</li></ul>
-  
-  设置为true之后， 返回参数PdfUrl，为模板PDF文件链接，有效期5分钟, 可以用于将PDF文件下载到本地
-  
-  注: `此功能为白名单功能，使用前请联系对接的客户经理沟通。`
-     */
-    WithPdfUrl?: boolean;
-    /**
-     * 操作者的信息
-     * @deprecated
-     */
-    Operator?: UserInfo;
 }
 /**
  * 企业批量注册链接信息
@@ -3754,6 +3753,29 @@ export interface DescribeChannelSealPolicyWorkflowUrlRequest {
     Endpoint?: string;
 }
 /**
+ * CreatePartnerAutoSignAuthUrl返回参数结构体
+ */
+export interface CreatePartnerAutoSignAuthUrlResponse {
+    /**
+     * 授权链接，以短链形式返回，短链的有效期参考回参中的 ExpiredTime。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Url?: string;
+    /**
+     * 从客户小程序或者客户APP跳转至腾讯电子签小程序进行批量签署的跳转路径
+  
+     */
+    MiniAppPath?: string;
+    /**
+     * 链接过期时间以 Unix 时间戳格式表示，从生成链接时间起，往后7天有效期。过期后短链将失效，无法打开。
+     */
+    ExpireTime?: number;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * 此结构体 (FlowInfo) 用于描述签署流程信息。
  */
 export interface FlowInfo {
@@ -3959,6 +3981,36 @@ export interface ApproverComponentLimitType {
     Values?: Array<string>;
 }
 /**
+ * 授权企业列表（目前仅用于“企业自动签 -> 合作企业授权”）
+ */
+export interface HasAuthOrganization {
+    /**
+     * 授权企业openid，
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    OrganizationOpenId?: string;
+    /**
+     * 授权企业名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    OrganizationName?: string;
+    /**
+     * 被授权企业openid，
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AuthorizedOrganizationOpenId?: string;
+    /**
+     * 被授权企业名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AuthorizedOrganizationName?: string;
+    /**
+     * 授权时间，格式为时间戳，单位s
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AuthorizeTime?: number;
+}
+/**
  * 资源链接信息
  */
 export interface ResourceUrlInfo {
@@ -4027,6 +4079,14 @@ export interface ChannelCreateBatchQuickSignUrlRequest {
   <li>您可以传递多种值，表示可用多种认证校验方式。</li></ul>
      */
     ApproverSignTypes?: Array<number | bigint>;
+    /**
+     * 生成H5签署链接时，你可以指定签署方签署合同的认证校验方式的选择模式，可传递一下值：
+  <ul><li>**0**：签署方自行选择，签署方可以从预先指定的认证方式中自由选择；</li>
+  <li>**1**：自动按顺序首位推荐，签署方无需选择，系统会优先推荐使用第一种认证方式。</li></ul>
+  注：
+  `不指定该值时，默认为签署方自行选择。`
+     */
+    SignTypeSelector?: number;
 }
 /**
  * ChannelCreateBoundFlows请求参数结构体
@@ -4683,6 +4743,14 @@ export interface FlowApproverInfo {
   注: `如果是用模板发起, 优先使用此处上传的, 如果不传则用模板的配置的`
      */
     ApproverRoleName?: string;
+    /**
+     * 生成H5签署链接时，你可以指定签署方签署合同的认证校验方式的选择模式，可传递一下值：
+  <ul><li>**0**：签署方自行选择，签署方可以从预先指定的认证方式中自由选择；</li>
+  <li>**1**：自动按顺序首位推荐，签署方无需选择，系统会优先推荐使用第一种认证方式。</li></ul>
+  注：
+  `不指定该值时，默认为签署方自行选择。`
+     */
+    SignTypeSelector?: number;
 }
 /**
  * ChannelCreateUserAutoSignEnableUrl返回参数结构体
@@ -5375,6 +5443,33 @@ export interface ChannelCreateBatchQuickSignUrlResponse {
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * CreatePartnerAutoSignAuthUrl请求参数结构体
+ */
+export interface CreatePartnerAutoSignAuthUrlRequest {
+    /**
+     * 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。
+  
+  此接口下面信息必填。
+  <ul>
+  <li>渠道应用标识:  Agent.AppId</li>
+  <li>第三方平台子客企业标识: Agent.ProxyOrganizationOpenId</li>
+  <li>第三方平台子客企业中的员工标识: Agent. ProxyOperator.OpenId</li>
+  </ul>
+  第三方平台子客企业和员工必须已经经过实名认证
+     */
+    Agent: Agent;
+    /**
+     * 被授企业id，和AuthorizedOrganizationName二选一，不能同时为空
+  注：`被授权企业必须和当前企业在同一应用号下`
+     */
+    AuthorizedOrganizationId?: string;
+    /**
+     * 被授权企业名，和AuthorizedOrganizationId二选一，不能同时为空
+  注：`被授权企业必须和当前企业在同一应用号下`
+     */
+    AuthorizedOrganizationName?: string;
 }
 /**
  * ChannelCreateBatchCancelFlowUrl请求参数结构体
@@ -6915,7 +7010,8 @@ export interface CreateSealByImageRequest {
      * 印章尺寸取值描述, 可以选择的尺寸如下:
   <ul><li> **42_42**: 圆形企业公章直径42mm, 当SealStyle是圆形的时候才有效</li>
   <li> **40_40**: 圆形企业印章直径40mm, 当SealStyle是圆形的时候才有效</li>
-  <li> **45_30**: 椭圆形印章45mm x 30mm, 当SealStyle是椭圆的时候才有效</li></ul>
+  <li> **45_30**: 椭圆形印章45mm x 30mm, 当SealStyle是椭圆的时候才有效</li>
+  <li> **40_30**: 椭圆形印章40mm x 30mm, 当SealStyle是椭圆的时候才有效</li></ul>
      */
     SealSize?: string;
     /**
@@ -7016,6 +7112,101 @@ export interface ChannelCreateFlowSignUrlRequest {
      * 签署完之后的H5页面的跳转链接，此链接及支持http://和https://，最大长度1000个字符。(建议https协议)
      */
     JumpUrl?: string;
+}
+/**
+ * DescribeTemplates请求参数结构体
+ */
+export interface DescribeTemplatesRequest {
+    /**
+     * 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。
+  
+  此接口下面信息必填。
+  <ul>
+  <li>渠道应用标识:  Agent.AppId</li>
+  <li>第三方平台子客企业标识: Agent.ProxyOrganizationOpenId</li>
+  <li>第三方平台子客企业中的员工标识: Agent. ProxyOperator.OpenId</li>
+  </ul>
+  第三方平台子客企业和员工必须已经经过实名认证
+     */
+    Agent: Agent;
+    /**
+     * 合同模板ID，为32位字符串。
+  
+  可以通过<a href="https://qian.tencent.com/developers/partnerApis/accounts/CreateConsoleLoginUrl" target="_blank">生成子客登录链接</a>登录企业控制台, 在企业模板中得到合同模板ID。
+     */
+    TemplateId?: string;
+    /**
+     * 查询模板的内容
+  
+  <ul><li>**0**：（默认）模板列表及详情</li>
+  <li>**1**：仅模板列表, 不会返回模板中的签署控件, 填写控件, 参与方角色列表等信息</li></ul>
+     */
+    ContentType?: number;
+    /**
+     * 合同模板ID数组，每一个合同模板ID为32位字符串,  最多支持200个模板的批量查询。
+  
+  注意:
+  1.` 此参数TemplateIds与TemplateId互为独立，若两者均传入，以TemplateId为准。`
+  2. `请确保每个模板均正确且属于当前企业，若有任一模板不存在，则返回错误。`
+  4. `若传递此参数，分页参数(Limit,Offset)无效`
+  
+     */
+    TemplateIds?: Array<string>;
+    /**
+     * 指定每页返回的数据条数，和Offset参数配合使用。
+  
+  注：`1.默认值为20，单页做大值为200。`
+     */
+    Limit?: number;
+    /**
+     * 查询结果分页返回，指定从第几页返回数据，和Limit参数配合使用。
+  
+  注：`1.offset从0开始，即第一页为0。`
+  `2.默认从第一页返回。`
+     */
+    Offset?: number;
+    /**
+     * 模糊搜索的模板名称，注意是模板名的连续部分，长度不能超过200，可支持由中文、字母、数字和下划线组成字符串。
+     */
+    TemplateName?: string;
+    /**
+     * 对应第三方应用平台企业的模板ID，通过此值可以搜索由第三方应用平台模板ID下发或领取得到的子客模板列表。
+     */
+    ChannelTemplateId?: string;
+    /**
+     * 返回控件的范围, 是只返回发起方自己的还是所有参与方的
+  
+  <ul><li>**false**：（默认）只返回发起方控件</li>
+  <li>**true**：返回所有参与方(包括发起方和签署方)控件</li></ul>
+     */
+    QueryAllComponents?: boolean;
+    /**
+     * 是否获取模板预览链接。
+  
+  <ul><li>**false**：不获取（默认）</li>
+  <li>**true**：获取</li></ul>
+  
+  设置为true之后， 返回参数PreviewUrl，为模板的H5预览链接,  有效期5分钟。可以通过浏览器打开此链接预览模板，或者嵌入到iframe中预览模板。
+  
+  注: `此功能为白名单功能，使用前请联系对接的客户经理沟通。`
+     */
+    WithPreviewUrl?: boolean;
+    /**
+     * 是否获取模板的PDF文件链接。
+  
+  <ul><li>**false**：不获取（默认）</li>
+  <li>**true**：获取</li></ul>
+  
+  设置为true之后， 返回参数PdfUrl，为模板PDF文件链接，有效期5分钟, 可以用于将PDF文件下载到本地
+  
+  注: `此功能为白名单功能，使用前请联系对接的客户经理沟通。`
+     */
+    WithPdfUrl?: boolean;
+    /**
+     * 操作者的信息
+     * @deprecated
+     */
+    Operator?: UserInfo;
 }
 /**
  * DescribeExtendedServiceAuthInfo返回参数结构体

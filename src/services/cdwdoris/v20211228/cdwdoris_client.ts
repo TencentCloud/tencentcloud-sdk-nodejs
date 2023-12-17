@@ -52,7 +52,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 根据实例ID查询某个实例的具体信息
+   * 根据集群ID查询某个集群的具体信息
    */
   async DescribeInstance(
     req: DescribeInstanceRequest,
@@ -62,7 +62,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取实例节点信息列表
+   * 获取集群节点信息列表
    */
   async DescribeInstanceNodes(
     req: DescribeInstanceNodesRequest,

@@ -40,6 +40,11 @@ export interface DescribeDevicesPageRsp {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Paging?: Paging
+  /**
+   * 业务响应数据
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Items?: Array<DeviceDetail>
 }
 
 /**
@@ -174,6 +179,227 @@ export interface Paging {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Total?: number
+}
+
+/**
+ * 业务响应数据
+ */
+export interface DeviceDetail {
+  /**
+   * 设备ID(只支持32位)
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Id?: number
+  /**
+   * 设备唯一标识符
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Mid?: string
+  /**
+   * 终端名（设备名）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name?: string
+  /**
+   * 设备所在分组ID(只支持32位)
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  GroupId?: number
+  /**
+   * OS平台(只支持32位)
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OsType?: number
+  /**
+   * 设备IP地址（出口IP）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Ip?: string
+  /**
+   * 在线状态 2 在线 0，1 离线(只支持32位)
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OnlineStatus?: number
+  /**
+   * 客户端版本号-大整数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Version?: string
+  /**
+   * 客户端版本号-点分字符串
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StrVersion?: string
+  /**
+   * 首次在线时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Itime?: string
+  /**
+   * 最后一次在线时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ConnActiveTime?: string
+  /**
+   * 设备是否加锁 1 锁定 0 2 非锁定(只支持32位)
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Locked?: number
+  /**
+   * 设备本地IP列表, 包括IP
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LocalIpList?: string
+  /**
+   * 主机ID(只支持32位)
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HostId?: number
+  /**
+   * 设备所属分组名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  GroupName?: string
+  /**
+   * 设备所属分组路径
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  GroupNamePath?: string
+  /**
+   * 未修复高危漏洞数(只支持32位)
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CriticalVulListCount?: number
+  /**
+   * 设备名 和Name相同，保留参数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ComputerName?: string
+  /**
+   * 登录域名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DomainName?: string
+  /**
+   * MAC地址
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MacAddr?: string
+  /**
+   * 漏洞数(只支持32位)
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VulCount?: number
+  /**
+   * 病毒风险数(只支持32位)
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RiskCount?: number
+  /**
+   * 病毒库版本
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VirusVer?: string
+  /**
+   * 漏洞库版本
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VulVersion?: string
+  /**
+   * 系统修复引擎版本
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SysRepVersion?: string
+  /**
+   * 高危补丁列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VulCriticalList?: Array<string>
+  /**
+   * 标签
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Tags?: string
+  /**
+   * 终端用户名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UserName?: string
+  /**
+   * 防火墙状态(只支持32位)
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FirewallStatus?: number
+  /**
+   * SN序列号
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SerialNum?: string
+  /**
+   * 设备管控策略版本
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DeviceStrategyVer?: string
+  /**
+   * NGN策略版本
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NGNStrategyVer?: string
+  /**
+   * 最近登录账号
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IOAUserName?: string
+  /**
+   * 设备管控新策略
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DeviceNewStrategyVer?: string
+  /**
+   * NGN策略新版本
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NGNNewStrategyVer?: string
+  /**
+   * 主机名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HostName?: string
+  /**
+   * 主板序列号
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BaseBoardSn?: string
+  /**
+   * 绑定账户只有名字
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AccountUsers?: string
+  /**
+   * 身份策略版本
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IdentityStrategyVer?: string
+  /**
+   * 身份策略新版本
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IdentityNewStrategyVer?: string
+  /**
+   * 最近登录账号部门
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AccountGroupName?: string
+  /**
+   * 登录账号姓名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AccountName?: string
+  /**
+   * 账号组id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AccountGroupId?: number
 }
 
 /**

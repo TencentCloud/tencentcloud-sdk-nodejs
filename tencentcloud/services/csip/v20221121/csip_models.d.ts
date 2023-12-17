@@ -105,6 +105,19 @@ export interface TaskCenterWeakPwdRiskInputParam {
     Enable: number;
 }
 /**
+ * DescribeOrganizationUserInfo请求参数结构体
+ */
+export interface DescribeOrganizationUserInfoRequest {
+    /**
+     * 过滤内容
+     */
+    Filter?: Filter;
+    /**
+     * 不支持多云
+     */
+    NotSupportCloud?: boolean;
+}
+/**
  * ModifyRiskCenterRiskStatus请求参数结构体
  */
 export interface ModifyRiskCenterRiskStatusRequest {
@@ -846,6 +859,123 @@ export interface DataSearchBug {
     CWPFix?: number;
 }
 /**
+ * 集团账号成员详情
+ */
+export interface OrganizationUserInfo {
+    /**
+     * 成员账号Uin
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Uin?: string;
+    /**
+     * 成员账号名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    NickName?: string;
+    /**
+     * 部门节点名称，账号所属部门
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    NodeName?: string;
+    /**
+     * 资产数量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AssetCount?: number;
+    /**
+     * 风险数量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RiskCount?: number;
+    /**
+     * 攻击数量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AttackCount?: number;
+    /**
+     * Member/Admin/;成员或者管理员
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Role?: string;
+    /**
+     * 成员账号id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MemberId?: string;
+    /**
+     * 成员账号Appid
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AppId?: string;
+    /**
+     * 账号加入方式,create/invite
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    JoinType?: string;
+    /**
+     * 空则未开启，否则不同字符串对应不同版本，common为通用，不区分版本
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CFWProtect?: string;
+    /**
+     * 空则未开启，否则不同字符串对应不同版本，common为通用，不区分版本
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    WAFProtect?: string;
+    /**
+     * 空则未开启，否则不同字符串对应不同版本，common为通用，不区分版本
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CWPProtect?: string;
+    /**
+     * 1启用，0未启用
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Enable?: number;
+    /**
+     * "Free"       //免费版  "Advanced"   //高级版 "Enterprise" //企业版 "Ultimate"   //旗舰版
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CSIPProtect?: string;
+    /**
+     * 1为配额消耗者
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    QuotaConsumer?: number;
+    /**
+     * 账户类型，0为腾讯云账户，1为AWS账户
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CloudType?: number;
+    /**
+     * 0为缺省值，1为10分钟，2为1小时，3为24小时
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SyncFrequency?: number;
+    /**
+     * 多云账户是否过期
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IsExpired?: boolean;
+    /**
+     * 多云账户 权限列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PermissionList?: Array<string>;
+    /**
+     * 1
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AuthType?: number;
+    /**
+     * 0 腾讯云集团账户
+  1 腾讯云接入账户
+  2 非腾讯云
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TcMemberType?: number;
+}
+/**
  * 安全中心资产标签
  */
 export interface AssetTag {
@@ -1194,6 +1324,25 @@ export interface TaskLogURL {
  * AddNewBindRoleUser请求参数结构体
  */
 export declare type AddNewBindRoleUserRequest = null;
+/**
+ * DescribeOrganizationUserInfo返回参数结构体
+ */
+export interface DescribeOrganizationUserInfoResponse {
+    /**
+     * 总条数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TotalCount?: number;
+    /**
+     * 集团用户列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Data?: Array<OrganizationUserInfo>;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
 /**
  * 网卡资产
  */

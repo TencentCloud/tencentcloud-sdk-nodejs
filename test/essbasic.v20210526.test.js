@@ -148,6 +148,16 @@ it("essbasic.v20210526.DescribeUsage", async function () {
     }
 })
 
+it("essbasic.v20210526.DescribeExtendedServiceAuthDetail", async function () {
+    try {
+       const data = await client.DescribeExtendedServiceAuthDetail({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("essbasic.v20210526.ChannelCancelFlow", async function () {
     try {
        const data = await client.ChannelCancelFlow({})
@@ -471,6 +481,16 @@ it("essbasic.v20210526.GetDownloadFlowUrl", async function () {
 it("essbasic.v20210526.ChannelCreateFlowApprovers", async function () {
     try {
        const data = await client.ChannelCreateFlowApprovers({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("essbasic.v20210526.CreatePartnerAutoSignAuthUrl", async function () {
+    try {
+       const data = await client.CreatePartnerAutoSignAuthUrl({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

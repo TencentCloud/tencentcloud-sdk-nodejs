@@ -3516,15 +3516,15 @@ export interface DimensionsDesc {
  */
 export interface DeletePrometheusAlertPolicyRequest {
     /**
-     * 实例id
+     * 实例ID(可通过 DescribePrometheusInstances 接口获取)
      */
     InstanceId: string;
     /**
-     * 告警策略id列表
+     * 告警策略ID列表(可通过 DescribePrometheusAlertPolicy 接口获取)
      */
     AlertIds: Array<string>;
     /**
-     * 告警策略名称
+     * 告警策略名称(可通过 DescribePrometheusAlertPolicy 接口获取)，名称完全相同的告警策略才会删除
      */
     Names?: Array<string>;
 }
@@ -3905,9 +3905,13 @@ export interface DescribePrometheusClusterAgentsResponse {
      */
     Total?: number;
     /**
-     * 是否为首次绑定，需要安装预聚合规则
+     * 是否为首次绑定，如果是首次绑定则需要安装预聚合规则
      */
     IsFirstBind?: boolean;
+    /**
+     * 实例组件是否需要更新镜像版本
+     */
+    ImageNeedUpdate?: boolean;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -5462,6 +5466,11 @@ export interface ModifyPrometheusConfigRequest {
      * prometheus原生Job配置
      */
     RawJobs?: Array<PrometheusConfigItem>;
+    /**
+     * 0: 更新实例组件镜像版本；
+  1: 不更新实例组件镜像版本
+     */
+    UpdateImage?: number;
 }
 /**
  * DescribeGrafanaEnvironments返回参数结构体
@@ -5560,13 +5569,14 @@ export interface DescribePrometheusTargetsTMPRequest {
      */
     InstanceId: string;
     /**
-     * 集群类型
-     */
-    ClusterType: string;
-    /**
-     * 集群id
+     * 集成容器服务填绑定的集群id；
+  集成中心填 non-cluster
      */
     ClusterId: string;
+    /**
+     * 集群类型(可不填)
+     */
+    ClusterType?: string;
     /**
      * 过滤条件，当前支持
   Name=state
@@ -7092,7 +7102,24 @@ export interface ModifyAlarmNoticeResponse {
 /**
  * prometheus一个job的targets
  */
-export declare type PrometheusJobTargets = null;
+export interface PrometheusJobTargets {
+    /**
+     * 该Job的targets列表
+     */
+    Targets?: Array<PrometheusTarget>;
+    /**
+     * job的名称
+     */
+    JobName?: string;
+    /**
+     * targets总数
+     */
+    Total?: number;
+    /**
+     * 健康的target总数
+     */
+    Up?: number;
+}
 /**
  * UpdateGrafanaConfig请求参数结构体
  */
@@ -7866,6 +7893,10 @@ export interface DescribePrometheusConfigResponse {
      */
     Probes?: Array<PrometheusConfigItem>;
     /**
+     * 实例组件是否需要升级
+     */
+    ImageNeedUpdate?: boolean;
+    /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
@@ -7949,7 +7980,7 @@ export interface DescribeProductEventListRequest {
  */
 export interface CreatePrometheusGlobalNotificationRequest {
     /**
-     * 实例ID
+     * 实例ID(可通过 DescribePrometheusInstances 接口获取)
      */
     InstanceId: string;
     /**
@@ -8947,6 +8978,10 @@ export interface PrometheusScrapeJob {
      */
     Config: string;
 }
+/**
+ * prometheus一个抓取目标的信息
+ */
+export declare type PrometheusTarget = null;
 /**
  * 通知模板ID及通知等级列表，["Remind","Serious"]表示该通知模板仅接收提醒和严重类别的告警
  */

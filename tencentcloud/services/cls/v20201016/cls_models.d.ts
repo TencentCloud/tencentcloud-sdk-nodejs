@@ -1481,7 +1481,7 @@ export interface CreateCosRechargeRequest {
      */
     LogType: string;
     /**
-     * supported: "", "gzip", "lzop", "snappy”; 默认空
+     * supported: "", "gzip", "lzop", "snappy"; 默认空
      */
     Compress?: string;
     /**

@@ -208,6 +208,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyRiskCenterRiskStatus", req, cb);
     }
     /**
+     * 查询集团账号用户列表
+     */
+    async DescribeOrganizationUserInfo(req, cb) {
+        return this.request("DescribeOrganizationUserInfo", req, cb);
+    }
+    /**
      * 停止扫风险中心扫描任务
      */
     async StopRiskCenterTask(req, cb) {

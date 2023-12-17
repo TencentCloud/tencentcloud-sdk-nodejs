@@ -2815,6 +2815,14 @@ export interface DescribeCertificatesRequest {
      * 是否可托管，可选值：1 = 可托管，0 =  不可托管。
      */
     Hostable?: number;
+    /**
+     * 筛选指定标签的证书
+     */
+    Tags?: Array<Tags>;
+    /**
+     * //是否筛选等待签发的证书，传1是筛选，0和null不筛选
+     */
+    IsPendingIssue?: number;
 }
 /**
  * UpdateCertificateRecordRollback请求参数结构体

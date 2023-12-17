@@ -34,13 +34,13 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeInstances", req, cb);
     }
     /**
-     * 根据实例ID查询某个实例的具体信息
+     * 根据集群ID查询某个集群的具体信息
      */
     async DescribeInstance(req, cb) {
         return this.request("DescribeInstance", req, cb);
     }
     /**
-     * 获取实例节点信息列表
+     * 获取集群节点信息列表
      */
     async DescribeInstanceNodes(req, cb) {
         return this.request("DescribeInstanceNodes", req, cb);

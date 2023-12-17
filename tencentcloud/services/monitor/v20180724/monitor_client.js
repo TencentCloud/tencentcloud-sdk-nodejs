@@ -525,7 +525,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("SyncPrometheusTemp", req, cb);
     }
     /**
-     * 创建全局告警通知渠道
+     * 创建全局告警通知渠道。集群内创建的告警规则如果未配置告警通知渠道，默认走全局告警通知渠道（建议在控制台创建告警，集群内创建告警不易维护）
      */
     async CreatePrometheusGlobalNotification(req, cb) {
         return this.request("CreatePrometheusGlobalNotification", req, cb);
@@ -751,7 +751,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeGrafanaWhiteList", req, cb);
     }
     /**
-     * 创建告警策略
+     * 创建 Prometheus 告警策略(将逐步废弃，建议使用 CreatePrometheusAlertGroup 创建告警策略)
      */
     async CreatePrometheusAlertPolicy(req, cb) {
         return this.request("CreatePrometheusAlertPolicy", req, cb);

@@ -245,23 +245,17 @@ export interface CancelFlowResponse {
 }
 
 /**
- * DescribeFlowEvidenceReport请求参数结构体
+ * DescribeExtendedServiceAuthDetail返回参数结构体
  */
-export interface DescribeFlowEvidenceReportRequest {
+export interface DescribeExtendedServiceAuthDetailResponse {
   /**
-   * 执行本接口操作的员工信息。
-注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。`
+   * 服务授权的信息列表，根据查询类型返回特定扩展服务的授权状况。
    */
-  Operator: UserInfo
+  AuthInfoDetail?: AuthInfoDetail
   /**
-   * 签署报告编号, 由<a href="https://qian.tencent.com/developers/companyApis/certificate/CreateFlowEvidenceReport" target="_blank">提交申请出证报告任务</a>产生
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  ReportId: string
-  /**
-   * 代理企业和员工的信息。
-在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。
-   */
-  Agent?: Agent
+  RequestId?: string
 }
 
 /**
@@ -473,6 +467,42 @@ export interface CreateExtendedServiceAuthInfosRequest {
 在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。
    */
   Agent?: Agent
+}
+
+/**
+ * 企业扩展服务授权列表详情
+ */
+export interface AuthInfoDetail {
+  /**
+   * 扩展服务类型，和入参一致
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Type?: string
+  /**
+   * 扩展服务名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name?: string
+  /**
+   * 授权员工列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HasAuthUserList?: Array<HasAuthUser>
+  /**
+   * 授权企业列表（企业自动签时，该字段有值）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HasAuthOrganizationList?: Array<HasAuthOrganization>
+  /**
+   * 授权员工列表总数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AuthUserTotal?: number
+  /**
+   * 授权企业列表总数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AuthOrganizationTotal?: number
 }
 
 /**
@@ -2052,18 +2082,36 @@ export interface Permission {
 }
 
 /**
- * DescribeFlowBriefs返回参数结构体
+ * DescribeExtendedServiceAuthDetail请求参数结构体
  */
-export interface DescribeFlowBriefsResponse {
+export interface DescribeExtendedServiceAuthDetailRequest {
   /**
-   * 合同流程基础信息列表，包含流程的名称、状态、创建日期等基本信息。 
-注：`与入参 FlowIds 的顺序可能存在不一致的情况。`
+   * 执行本接口操作的员工信息。
+注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。`
    */
-  FlowBriefs?: Array<FlowBrief>
+  Operator: UserInfo
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 要查询的扩展服务类型。
+如下所示：
+<ul><li>OPEN_SERVER_SIGN：企业静默签署</li>
+<li>BATCH_SIGN：批量签署</li>
+</ul>
+
    */
-  RequestId?: string
+  ExtendServiceType?: string
+  /**
+   * 代理企业和员工的信息。
+在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。
+   */
+  Agent?: Agent
+  /**
+   * 指定每页返回的数据条数，和Offset参数配合使用。 注：`1.默认值为20，单页做大值为200。`
+   */
+  Limit?: number
+  /**
+   * 查询结果分页返回，指定从第几页返回数据，和Limit参数配合使用。 注：`1.offset从0开始，即第一页为0。` `2.默认从第一页返回。`
+   */
+  Offset?: number
 }
 
 /**
@@ -3810,6 +3858,14 @@ export interface FlowCreateApprover {
 `此参数仅针对文件发起设置生效,模板发起合同签署流程, 请以模板配置为主`
    */
   ApproverSignTypes?: Array<number | bigint>
+  /**
+   * 生成H5签署链接时，你可以指定签署方签署合同的认证校验方式的选择模式，可传递一下值：
+<ul><li>**0**：签署方自行选择，签署方可以从预先指定的认证方式中自由选择；</li>
+<li>**1**：自动按顺序首位推荐，签署方无需选择，系统会优先推荐使用第一种认证方式。</li></ul>
+注：
+`不指定该值时，默认为签署方自行选择。`
+   */
+  SignTypeSelector?: number
 }
 
 /**
@@ -3832,6 +3888,47 @@ export interface ApproverComponentLimitType {
 </ul>
    */
   Values: Array<string>
+}
+
+/**
+ * 授权企业列表（目前仅用于“企业自动签 -> 合作企业授权”）
+ */
+export interface HasAuthOrganization {
+  /**
+   * 授权企业id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OrganizationId?: string
+  /**
+   * 授权企业名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OrganizationName?: string
+  /**
+   * 被授权企业id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AuthorizedOrganizationId?: string
+  /**
+   * 被授权企业名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AuthorizedOrganizationName?: string
+  /**
+   * 授权模板id（仅当授权方式为模板授权时有值）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TemplateId?: string
+  /**
+   * 授权模板名称（仅当授权方式为模板授权时有值）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TemplateName?: string
+  /**
+   * 授权时间，格式为时间戳，单位s
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AuthorizeTime?: number
 }
 
 /**
@@ -4320,6 +4417,21 @@ export interface FlowGroupOptions {
 }
 
 /**
+ * DescribeFlowBriefs返回参数结构体
+ */
+export interface DescribeFlowBriefsResponse {
+  /**
+   * 合同流程基础信息列表，包含流程的名称、状态、创建日期等基本信息。 
+注：`与入参 FlowIds 的顺序可能存在不一致的情况。`
+   */
+  FlowBriefs?: Array<FlowBrief>
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyIntegrationRole请求参数结构体
  */
 export interface ModifyIntegrationRoleRequest {
@@ -4805,19 +4917,18 @@ WECHAT-微信通知
 }
 
 /**
- * VerifyPdf请求参数结构体
+ * DescribeFlowEvidenceReport请求参数结构体
  */
-export interface VerifyPdfRequest {
-  /**
-   * 合同流程ID，为32位字符串。
-可登录腾讯电子签控制台，在 "合同"->"合同中心" 中查看某个合同的FlowId(在页面中展示为合同ID)。
-   */
-  FlowId: string
+export interface DescribeFlowEvidenceReportRequest {
   /**
    * 执行本接口操作的员工信息。
-注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。
+注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。`
    */
-  Operator?: UserInfo
+  Operator: UserInfo
+  /**
+   * 签署报告编号, 由<a href="https://qian.tencent.com/developers/companyApis/certificate/CreateFlowEvidenceReport" target="_blank">提交申请出证报告任务</a>产生
+   */
+  ReportId: string
   /**
    * 代理企业和员工的信息。
 在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。
@@ -6684,7 +6795,6 @@ export interface UploadFilesRequest {
    * 文件对应业务类型,可以选择的类型如下
 <ul><li> **TEMPLATE** : 此上传的文件用户生成合同模板，文件类型支持.pdf/.doc/.docx/.html格式，如果非pdf文件需要通过<a href="https://qian.tencent.com/developers/companyApis/templatesAndFiles/CreateConvertTaskApi" target="_blank">创建文件转换任务</a>转换后才能使用</li>
 <li> **DOCUMENT** : 此文件用来发起合同流程，文件类型支持.pdf/.doc/.docx/.jpg/.png/.xls.xlsx/.html，如果非pdf文件需要通过<a href="https://qian.tencent.com/developers/companyApis/templatesAndFiles/CreateConvertTaskApi" target="_blank">创建文件转换任务</a>转换后才能使用</li>
-<li> **DOCUMENT** : 此文件用于合同图片控件的填充，文件类型支持.jpg/.png</li>
 <li> **SEAL** : 此文件用于印章的生成，文件类型支持.jpg/.jpeg/.png</li></ul>
    */
   BusinessType: string
@@ -6902,6 +7012,27 @@ export interface CreateMultiFlowSignQRCodeRequest {
    * 指定签署方在使用个人印章签署控件（SIGN_SIGNATURE） 时可使用的签署方式：自由书写、正楷临摹、系统签名、个人印章。
    */
   ApproverComponentLimitTypes?: Array<ApproverComponentLimitType>
+}
+
+/**
+ * VerifyPdf请求参数结构体
+ */
+export interface VerifyPdfRequest {
+  /**
+   * 合同流程ID，为32位字符串。
+可登录腾讯电子签控制台，在 "合同"->"合同中心" 中查看某个合同的FlowId(在页面中展示为合同ID)。
+   */
+  FlowId: string
+  /**
+   * 执行本接口操作的员工信息。
+注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。
+   */
+  Operator?: UserInfo
+  /**
+   * 代理企业和员工的信息。
+在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。
+   */
+  Agent?: Agent
 }
 
 /**
@@ -7155,6 +7286,14 @@ export interface CreateBatchQuickSignUrlRequest {
 <li>您可以传递多种值，表示可用多种认证校验方式。</li></ul>
    */
   ApproverSignTypes?: Array<number | bigint>
+  /**
+   * 生成H5签署链接时，你可以指定签署方签署合同的认证校验方式的选择模式，可传递一下值：
+<ul><li>**0**：签署方自行选择，签署方可以从预先指定的认证方式中自由选择；</li>
+<li>**1**：自动按顺序首位推荐，签署方无需选择，系统会优先推荐使用第一种认证方式。</li></ul>
+注：
+`不指定该值时，默认为签署方自行选择。`
+   */
+  SignTypeSelector?: number
 }
 
 /**

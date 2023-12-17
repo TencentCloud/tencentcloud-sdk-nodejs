@@ -343,7 +343,7 @@ export declare class Client extends AbstractClient {
      */
     SyncPrometheusTemp(req: SyncPrometheusTempRequest, cb?: (error: string, rep: SyncPrometheusTempResponse) => void): Promise<SyncPrometheusTempResponse>;
     /**
-     * 创建全局告警通知渠道
+     * 创建全局告警通知渠道。集群内创建的告警规则如果未配置告警通知渠道，默认走全局告警通知渠道（建议在控制台创建告警，集群内创建告警不易维护）
      */
     CreatePrometheusGlobalNotification(req: CreatePrometheusGlobalNotificationRequest, cb?: (error: string, rep: CreatePrometheusGlobalNotificationResponse) => void): Promise<CreatePrometheusGlobalNotificationResponse>;
     /**
@@ -495,7 +495,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeGrafanaWhiteList(req: DescribeGrafanaWhiteListRequest, cb?: (error: string, rep: DescribeGrafanaWhiteListResponse) => void): Promise<DescribeGrafanaWhiteListResponse>;
     /**
-     * 创建告警策略
+     * 创建 Prometheus 告警策略(将逐步废弃，建议使用 CreatePrometheusAlertGroup 创建告警策略)
      */
     CreatePrometheusAlertPolicy(req: CreatePrometheusAlertPolicyRequest, cb?: (error: string, rep: CreatePrometheusAlertPolicyResponse) => void): Promise<CreatePrometheusAlertPolicyResponse>;
     /**

@@ -96,12 +96,12 @@ export interface DescribeInstanceNodesResponse {
     /**
      * 总数
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 实例节点总数
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    InstanceNodesList: Array<InstanceNode>;
+    InstanceNodesList?: Array<InstanceNode>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -377,7 +377,7 @@ export interface DescribeInstanceResponse {
     /**
      * 实例描述信息
      */
-    InstanceInfo: InstanceInfo;
+    InstanceInfo?: InstanceInfo;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
