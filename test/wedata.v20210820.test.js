@@ -108,9 +108,9 @@ it("wedata.v20210820.CheckDuplicateRuleName", async function () {
     }
 })
 
-it("wedata.v20210820.ModifyDataSource", async function () {
+it("wedata.v20210820.DescribeTaskScript", async function () {
     try {
-       const data = await client.ModifyDataSource({})
+       const data = await client.DescribeTaskScript({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1358,9 +1358,9 @@ it("wedata.v20210820.DescribeInstanceList", async function () {
     }
 })
 
-it("wedata.v20210820.DescribeTaskScript", async function () {
+it("wedata.v20210820.DescribeTableMeta", async function () {
     try {
-       const data = await client.DescribeTaskScript({})
+       const data = await client.DescribeTableMeta({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1711,6 +1711,16 @@ it("wedata.v20210820.CreateRule", async function () {
 it("wedata.v20210820.DescribeInstanceLogFile", async function () {
     try {
        const data = await client.DescribeInstanceLogFile({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("wedata.v20210820.ModifyDataSource", async function () {
+    try {
+       const data = await client.ModifyDataSource({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

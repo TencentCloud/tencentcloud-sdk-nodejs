@@ -1059,6 +1059,10 @@ export interface DescribeRiskCenterAssetViewCFGRiskListRequest {
  */
 export interface DescribeDomainAssetsRequest {
   /**
+   * 集团账号的成员id
+   */
+  MemberId?: Array<string>
+  /**
    * -
    */
   Filter?: Filter
@@ -1112,6 +1116,10 @@ export interface DeleteDomainAndIpRequest {
  * DescribeNICAssets请求参数结构体
  */
 export interface DescribeNICAssetsRequest {
+  /**
+   * 集团账号的成员id
+   */
+  MemberId?: Array<string>
   /**
    * 过滤参数
    */
@@ -2285,6 +2293,10 @@ export interface DbAssetInfo {
  * DescribePublicIpAssets请求参数结构体
  */
 export interface DescribePublicIpAssetsRequest {
+  /**
+   * 集团账号的成员id
+   */
+  MemberId?: Array<string>
   /**
    * filte过滤条件
    */
@@ -4727,6 +4739,10 @@ export interface DescribeRiskCenterServerRiskListResponse {
  */
 export interface DescribeListenerListRequest {
   /**
+   * 集团账号的成员id
+   */
+  MemberId?: Array<string>
+  /**
    * -
    */
   Filter?: Filter
@@ -4746,6 +4762,10 @@ export interface DeleteRiskScanTaskResponse {
  * DescribeGatewayAssets请求参数结构体
  */
 export interface DescribeGatewayAssetsRequest {
+  /**
+   * 集团账号的成员id
+   */
+  MemberId?: Array<string>
   /**
    * 过滤参数
    */

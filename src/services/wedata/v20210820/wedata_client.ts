@@ -210,6 +210,7 @@ import {
   DescribeIntegrationStatisticsInstanceTrendResponse,
   DescribeInstanceLogListRequest,
   RerunOpsMakePlanInstancesResponse,
+  DescribeTableMetaRequest,
   RunnerRuleExecResult,
   DescribeAllTaskTypeResponse,
   DescribeRuleGroupResponse,
@@ -659,6 +660,7 @@ import {
   ModifyTaskInfoRequest,
   DescribeOperateOpsTasksRequest,
   DataSourceInfo,
+  DescribeTableMetaResponse,
   DescribeTaskDetailRequest,
   TaskOpsDto,
   DescribeOfflineTaskTokenRequest,
@@ -1032,13 +1034,13 @@ export class Client extends AbstractClient {
 
   /**
      * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
-修改数据源
+查询任务脚本
      */
-  async ModifyDataSource(
-    req: ModifyDataSourceRequest,
-    cb?: (error: string, rep: ModifyDataSourceResponse) => void
-  ): Promise<ModifyDataSourceResponse> {
-    return this.request("ModifyDataSource", req, cb)
+  async DescribeTaskScript(
+    req: DescribeTaskScriptRequest,
+    cb?: (error: string, rep: DescribeTaskScriptResponse) => void
+  ): Promise<DescribeTaskScriptResponse> {
+    return this.request("DescribeTaskScript", req, cb)
   }
 
   /**
@@ -2300,14 +2302,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
-查询任务脚本
-     */
-  async DescribeTaskScript(
-    req: DescribeTaskScriptRequest,
-    cb?: (error: string, rep: DescribeTaskScriptResponse) => void
-  ): Promise<DescribeTaskScriptResponse> {
-    return this.request("DescribeTaskScript", req, cb)
+   * 查询表元数据详情
+   */
+  async DescribeTableMeta(
+    req: DescribeTableMetaRequest,
+    cb?: (error: string, rep: DescribeTableMetaResponse) => void
+  ): Promise<DescribeTableMetaResponse> {
+    return this.request("DescribeTableMeta", req, cb)
   }
 
   /**
@@ -2660,6 +2661,17 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeInstanceLogFileResponse) => void
   ): Promise<DescribeInstanceLogFileResponse> {
     return this.request("DescribeInstanceLogFile", req, cb)
+  }
+
+  /**
+     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
+修改数据源
+     */
+  async ModifyDataSource(
+    req: ModifyDataSourceRequest,
+    cb?: (error: string, rep: ModifyDataSourceResponse) => void
+  ): Promise<ModifyDataSourceResponse> {
+    return this.request("ModifyDataSource", req, cb)
   }
 
   /**

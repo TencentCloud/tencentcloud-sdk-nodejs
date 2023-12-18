@@ -7725,7 +7725,7 @@ export interface CreateInstancePreRequest {
      */
     RenewFlag?: number;
     /**
-     * CKafka版本号[0.10.2、1.1.1、2.4.1、2.4.2、2.8.1], 默认是1.1.1。2.4.1 与 2.4.2 属于同一个版本，传任意一个均可。
+     * CKafka版本号[0.10.2、1.1.1、2.4.1、2.4.2、2.8.1、3.2.3], 默认是1.1.1。2.4.1 与 2.4.2 属于同一个版本，传任意一个均可。
      */
     KafkaVersion?: string;
     /**

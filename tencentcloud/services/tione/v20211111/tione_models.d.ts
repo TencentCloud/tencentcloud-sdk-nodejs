@@ -203,6 +203,11 @@ export interface ModelInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     ModelFormat?: string;
+    /**
+     * 是否为私有化大模型
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IsPrivateModel?: boolean;
 }
 /**
  * DescribeLogs请求参数结构体
@@ -5888,15 +5893,16 @@ export interface SendChatMessageRequest {
     Question: string;
     /**
      * 会话模型版本。
-  多行业客服大模型：填写demo_big_model_version_id。
-  默认为demo_big_model_version_id，即多行业客服大模型。
+  金融大模型：填写sn-finllm-13b-chat-v1。
+  默认为sn-finllm-13b-chat-v1，即金融大模型。
      */
     ModelVersion?: string;
     /**
-     * 使用模式(仅多场景客服大模型支持)。
+     * 使用模式。
   通用问答：填写General。
   搜索增强问答：填写WithSearchPlugin。
   默认为General，即通用问答。
+  当前可体验模型仅支持General。
      */
     Mode?: string;
     /**

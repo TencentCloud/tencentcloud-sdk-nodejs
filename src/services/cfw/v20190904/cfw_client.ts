@@ -723,9 +723,8 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
   }
 
   /**
-     * DescribeSourceAsset-查询资产组全部资产信息
-
-     */
+   * DescribeSourceAsset-查询资产组全部资产信息
+   */
   async DescribeSourceAsset(
     req: DescribeSourceAssetRequest,
     cb?: (error: string, rep: DescribeSourceAssetResponse) => void

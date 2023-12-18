@@ -4049,7 +4049,7 @@ export interface DescribeBackupDownloadRestrictionResponse {
    */
   LimitVpc?: Array<BackupLimitVpcItem>
   /**
-   * 自定义的可下载备份文件的 VPC ID。当参数**LimitType**为**Customize **时，显示该参数。
+   * 自定义的可下载备份文件的 VPC IP 地址。当参数**LimitType**为**Customize **时，显示该参数。
    */
   LimitIp?: Array<string>
   /**

@@ -399,7 +399,7 @@ export interface AddLiveWatermarkRequest {
     PictureUrl: string;
     /**
      * 水印名称。
-  最长16字节。
+  最长30字节。
      */
     WatermarkName: string;
     /**
@@ -3602,7 +3602,7 @@ export interface UpdateLiveWatermarkRequest {
     YPosition: number;
     /**
      * 水印名称。
-  最长16字节。
+  最长30字节。
      */
     WatermarkName?: string;
     /**
@@ -7961,51 +7961,52 @@ export interface TranscodeDetailInfo {
     /**
      * 流名称。
      */
-    StreamName: string;
+    StreamName?: string;
     /**
      * 开始时间（北京时间），格式：yyyy-mm-dd HH:MM。
      */
-    StartTime: string;
+    StartTime?: string;
     /**
      * 结束时间（北京时间），格式：yyyy-mm-dd HH:MM。
      */
-    EndTime: string;
+    EndTime?: string;
     /**
      * 转码时长，单位：分钟。
   注意：因推流过程中可能有中断重推情况，此处时长为真实转码时长累加值，并非结束时间和开始时间的间隔。
      */
-    Duration: number;
+    Duration?: number;
     /**
      * 编码方式，带模块，
   示例：
+  liveprocessor_ACC:  音频转码，
   liveprocessor_H264：直播转码-H264，
   liveprocessor_H265： 直播转码-H265，
   topspeed_H264：极速高清-H264，
   topspeed_H265：极速高清-H265。
      */
-    ModuleCodec: string;
+    ModuleCodec?: string;
     /**
      * 码率。
      */
-    Bitrate: number;
+    Bitrate?: number;
     /**
      * 类型，包含：转码（Transcode），混流（MixStream），水印（WaterMark），快直播（Webrtc）。
      */
-    Type: string;
+    Type?: string;
     /**
      * 推流域名。
      */
-    PushDomain: string;
+    PushDomain?: string;
     /**
      * 分辨率。
      */
-    Resolution: string;
+    Resolution?: string;
     /**
      * 地域：
   Mainland：国内。
   Overseas：海外。
      */
-    MainlandOrOversea: string;
+    MainlandOrOversea?: string;
 }
 /**
  * ModifyLiveRecordTemplate返回参数结构体

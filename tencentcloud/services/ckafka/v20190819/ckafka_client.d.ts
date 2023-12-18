@@ -136,7 +136,7 @@ export declare class Client extends AbstractClient {
      */
     CancelAuthorizationToken(req: CancelAuthorizationTokenRequest, cb?: (error: string, rep: CancelAuthorizationTokenResponse) => void): Promise<CancelAuthorizationTokenResponse>;
     /**
-     * 创建实例(预付费包年包月)
+     * 创建实例(预付费包年包月),  仅支持创建专业版实例
      */
     CreateInstancePre(req: CreateInstancePreRequest, cb?: (error: string, rep: CreateInstancePreResponse) => void): Promise<CreateInstancePreResponse>;
     /**

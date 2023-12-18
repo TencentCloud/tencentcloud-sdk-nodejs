@@ -2449,6 +2449,10 @@ export interface CreateNatRuleItem {
    * 描述
    */
   Description?: string
+  /**
+   * 端口协议组ID
+   */
+  ParamTemplateId?: string
 }
 
 /**
@@ -2619,15 +2623,15 @@ export interface DescribeSourceAssetResponse {
   /**
    * 地域集合
    */
-  ZoneList: Array<AssetZone>
+  ZoneList?: Array<AssetZone>
   /**
    * 数据
    */
-  Data: Array<InstanceInfo>
+  Data?: Array<InstanceInfo>
   /**
    * 返回数据总数
    */
-  Total: number
+  Total?: number
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4159,6 +4163,16 @@ log：观察
 注意：此字段可能返回 null，表示取不到有效值。
    */
   BetaList?: Array<BetaInfoByACL>
+  /**
+   * 端口协议组ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ParamTemplateId?: string
+  /**
+   * 端口协议组名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ParamTemplateName?: string
 }
 
 /**
@@ -5932,6 +5946,16 @@ export interface DescAcItem {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   InternetBorderUuid?: string
+  /**
+   * 协议端口组名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ParamTemplateName?: string
+  /**
+   * 协议端口组ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ParamTemplateId?: string
 }
 
 /**
@@ -6288,7 +6312,7 @@ export interface DescribeCfwEipsResponse {
   /**
    * 返回值信息
    */
-  NatFwEipList: Array<NatFwEipsInfo>
+  NatFwEipList?: Array<NatFwEipsInfo>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6824,6 +6848,10 @@ export interface CreateRuleItem {
    * 告警Id
    */
   LogId?: string
+  /**
+   * 端都协议组ID
+   */
+  ParamTemplateId?: string
 }
 
 /**

@@ -177,7 +177,6 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
     DeleteIdsWhiteRule(req: DeleteIdsWhiteRuleRequest, cb?: (error: string, rep: DeleteIdsWhiteRuleResponse) => void): Promise<DeleteIdsWhiteRuleResponse>;
     /**
      * DescribeSourceAsset-查询资产组全部资产信息
-
      */
     DescribeSourceAsset(req: DescribeSourceAssetRequest, cb?: (error: string, rep: DescribeSourceAssetResponse) => void): Promise<DescribeSourceAssetResponse>;
     /**

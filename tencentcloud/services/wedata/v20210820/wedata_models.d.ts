@@ -5001,6 +5001,10 @@ export interface BatchSuspendIntegrationTasksRequest {
      * 项目id
      */
     ProjectId: string;
+    /**
+     * 事件类型(START, STOP, SUSPEND, SUSPEND_WITHOUT_SP,RESUME, COMMIT, TIMESTAMP)
+     */
+    Event?: string;
 }
 /**
  * DeleteDsFolder返回参数结构体
@@ -6237,6 +6241,15 @@ export interface RerunOpsMakePlanInstancesResponse {
     RequestId?: string;
 }
 /**
+ * DescribeTableMeta请求参数结构体
+ */
+export interface DescribeTableMetaRequest {
+    /**
+     * 表唯一id
+     */
+    TableId: string;
+}
+/**
  * 规则执行结果
  */
 export interface RunnerRuleExecResult {
@@ -7101,6 +7114,10 @@ export interface CommitIntegrationTaskRequest {
      * 提交版本号
      */
     InstanceVersion?: number;
+    /**
+     * 前端操作类型描述
+     */
+    EventDesc?: string;
 }
 /**
  * DescribeTableInfoList请求参数结构体
@@ -8919,6 +8936,10 @@ export interface SuspendIntegrationTaskRequest {
      * 项目id
      */
     ProjectId: string;
+    /**
+     * 事件类型(START, STOP, SUSPEND, SUSPEND_WITHOUT_SP,RESUME, COMMIT, TIMESTAMP)
+     */
+    Event?: string;
 }
 /**
  * CreateHiveTableByDDL返回参数结构体
@@ -10394,6 +10415,11 @@ export interface TaskAlarmInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Description?: string;
+    /**
+     * 飞书群Hook地址，多个hook地址使用,隔开
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    LarkWebHooks?: string;
 }
 /**
  * DescribeClusterNamespaceList请求参数结构体
@@ -10449,6 +10475,11 @@ export interface AlarmReceiverInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     WecomGroup?: number;
+    /**
+     * 飞书群，0：未设置，1：成功，2：失败
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    LarkGroup?: number;
 }
 /**
  * Spark SQL配置参数
@@ -18912,6 +18943,20 @@ export interface DataSourceInfo {
     ShowType?: string;
 }
 /**
+ * DescribeTableMeta返回参数结构体
+ */
+export interface DescribeTableMetaResponse {
+    /**
+     * 表的元数据信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TableMeta: TableMeta;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * DescribeTaskDetail请求参数结构体
  */
 export interface DescribeTaskDetailRequest {
@@ -20973,6 +21018,10 @@ export interface StartIntegrationTaskRequest {
      * 额外参数
      */
     ExtConfig?: Array<RecordField>;
+    /**
+     * 操作类型描述
+     */
+    EventDesc?: string;
 }
 /**
  * DescribeTaskDetail返回参数结构体
@@ -22106,7 +22155,7 @@ export interface SuspendIntegrationTaskResponse {
     /**
      * 操作成功与否标识
      */
-    Data: boolean;
+    Data?: boolean;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -24291,6 +24340,10 @@ export interface ResumeIntegrationTaskRequest {
      * 额外参数
      */
     ExtConfig?: Array<RecordField>;
+    /**
+     * 前端操作类型描述
+     */
+    EventDesc?: string;
 }
 /**
  * DescribeInstanceByCycle请求参数结构体
@@ -25696,15 +25749,15 @@ export interface BatchSuspendIntegrationTasksResponse {
     /**
      * 操作成功的任务数
      */
-    SuccessCount: number;
+    SuccessCount?: number;
     /**
      * 操作失败的任务数
      */
-    FailedCount: number;
+    FailedCount?: number;
     /**
      * 任务总数
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */

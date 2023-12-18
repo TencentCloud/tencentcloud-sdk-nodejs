@@ -1038,7 +1038,7 @@ export interface Options {
      */
     KafkaOption?: KafkaOption;
     /**
-     * 任务限速信息、该字段仅用作出参、入参该字段无效
+     * 任务限速信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
     RateLimitOption?: RateLimitOption;
@@ -1509,7 +1509,7 @@ export interface CreateMigrationServiceResponse {
  */
 export interface KafkaOption {
     /**
-     * 投递到kafka的数据类型，如Avro,Json
+     * 投递到kafka的数据类型，如Avro,Json,canal-pb,canal-json
      */
     DataType?: string;
     /**
@@ -2549,57 +2549,57 @@ export interface CreateCompareTaskResponse {
  */
 export interface RateLimitOption {
     /**
-     * 当前生效的全量导出线程数
+     * 当前生效的全量导出线程数，配置任务时可调整该字段值，注意：如果不设置或设置为0则表示保持当前值，最大值为16
   注意：此字段可能返回 null，表示取不到有效值。
      */
     CurrentDumpThread: number;
     /**
-     * 默认的全量导出线程数
+     * 默认的全量导出线程数，该字段仅在出参有意义
   注意：此字段可能返回 null，表示取不到有效值。
      */
     DefaultDumpThread: number;
     /**
-     * 当前生效的全量导出Rps
+     * 当前生效的全量导出Rps，配置任务时可调整该字段值，注意：如果不设置或设置为0则表示保持当前值，最大值为50000000
   注意：此字段可能返回 null，表示取不到有效值。
      */
     CurrentDumpRps: number;
     /**
-     * 默认的全量导出Rps
+     * 默认的全量导出Rps，该字段仅在出参有意义
   注意：此字段可能返回 null，表示取不到有效值。
      */
     DefaultDumpRps: number;
     /**
-     * 当前生效的全量导入线程数
+     * 当前生效的全量导入线程数，配置任务时可调整该字段值，注意：如果不设置或设置为0则表示保持当前值，最大值为16
   注意：此字段可能返回 null，表示取不到有效值。
      */
     CurrentLoadThread: number;
     /**
-     * 默认的全量导入线程数
+     * 默认的全量导入线程数，该字段仅在出参有意义
   注意：此字段可能返回 null，表示取不到有效值。
      */
     DefaultLoadThread: number;
     /**
-     * 当前生效的全量导入Rps
+     * 当前生效的全量导入Rps，配置任务时可调整该字段值，注意：如果不设置或设置为0则表示保持当前值，最大值为50000000
   注意：此字段可能返回 null，表示取不到有效值。
      */
     CurrentLoadRps: number;
     /**
-     * 默认的全量导入Rps
+     * 默认的全量导入Rps，该字段仅在出参有意义
   注意：此字段可能返回 null，表示取不到有效值。
      */
     DefaultLoadRps: number;
     /**
-     * 当前生效的增量导入线程数
+     * 当前生效的增量导入线程数，配置任务时可调整该字段值，注意：如果不设置或设置为0则表示保持当前值，最大值为128
   注意：此字段可能返回 null，表示取不到有效值。
      */
     CurrentSinkerThread: number;
     /**
-     * 默认的增量导入线程数
+     * 默认的增量导入线程数，该字段仅在出参有意义
   注意：此字段可能返回 null，表示取不到有效值。
      */
     DefaultSinkerThread: number;
     /**
-     * enum:"no"/"yes"、no表示用户未设置过限速、yes表示设置过限速
+     * enum:"no"/"yes"、no表示用户未设置过限速、yes表示设置过限速，该字段仅在出参有意义
   注意：此字段可能返回 null，表示取不到有效值。
      */
     HasUserSetRateLimit: string;

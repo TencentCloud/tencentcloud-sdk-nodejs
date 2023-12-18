@@ -1,3 +1,229 @@
+# Release 4.0.761
+
+## 腾讯云数据仓库 TCHouse-D(cdwdoris) 版本：2021-12-28
+
+### 第 2 次发布
+
+发布时间：2023-12-19 01:19:18
+
+本次发布包含了以下内容：
+
+改善已有的文档。
+
+修改数据结构：
+
+* [InstanceInfo](https://cloud.tencent.com/document/api/1387/102385#InstanceInfo)
+
+	* 新增成员：IfExistCatalog
+
+
+
+
+## 云防火墙(cfw) 版本：2019-09-04
+
+### 第 51 次发布
+
+发布时间：2023-12-19 01:19:59
+
+本次发布包含了以下内容：
+
+改善已有的文档。
+
+修改数据结构：
+
+* [CreateNatRuleItem](https://cloud.tencent.com/document/api/1132/49071#CreateNatRuleItem)
+
+	* 新增成员：ParamTemplateId
+
+* [CreateRuleItem](https://cloud.tencent.com/document/api/1132/49071#CreateRuleItem)
+
+	* 新增成员：ParamTemplateId
+
+* [DescAcItem](https://cloud.tencent.com/document/api/1132/49071#DescAcItem)
+
+	* 新增成员：ParamTemplateName, ParamTemplateId
+
+* [VpcRuleItem](https://cloud.tencent.com/document/api/1132/49071#VpcRuleItem)
+
+	* 新增成员：ParamTemplateId, ParamTemplateName
+
+
+
+
+## 云安全一体化平台(csip) 版本：2022-11-21
+
+### 第 27 次发布
+
+发布时间：2023-12-19 01:25:03
+
+本次发布包含了以下内容：
+
+改善已有的文档。
+
+修改接口：
+
+* [DescribeDomainAssets](https://cloud.tencent.com/document/api/664/93511)
+
+	* 新增入参：MemberId
+
+* [DescribeGatewayAssets](https://cloud.tencent.com/document/api/664/102291)
+
+	* 新增入参：MemberId
+
+* [DescribeListenerList](https://cloud.tencent.com/document/api/664/96103)
+
+	* 新增入参：MemberId
+
+* [DescribeNICAssets](https://cloud.tencent.com/document/api/664/102406)
+
+	* 新增入参：MemberId
+
+* [DescribePublicIpAssets](https://cloud.tencent.com/document/api/664/93510)
+
+	* 新增入参：MemberId
+
+
+
+
+## 弹性 MapReduce(emr) 版本：2019-01-03
+
+### 第 54 次发布
+
+发布时间：2023-12-19 01:39:39
+
+本次发布包含了以下内容：
+
+改善已有的文档。
+
+修改数据结构：
+
+* [PreExecuteFileSettings](https://cloud.tencent.com/document/api/589/33981#PreExecuteFileSettings)
+
+	* 新增成员：Remark
+
+
+
+
+## 腾讯云可观测平台(monitor) 版本：2018-07-24
+
+### 第 100 次发布
+
+发布时间：2023-12-19 01:56:30
+
+本次发布包含了以下内容：
+
+改善已有的文档。
+
+修改数据结构：
+
+* [AlarmHierarchicalNotice](https://cloud.tencent.com/document/api/248/30354#AlarmHierarchicalNotice)
+
+	* 新增成员：PolicyId
+
+
+
+
+## 消息队列 TDMQ(tdmq) 版本：2020-02-17
+
+### 第 99 次发布
+
+发布时间：2023-12-19 02:14:52
+
+本次发布包含了以下内容：
+
+改善已有的文档。
+
+修改接口：
+
+* [DescribeRocketMQTopics](https://cloud.tencent.com/document/api/1179/63418)
+
+	* 新增入参：FilterGroup
+
+
+修改数据结构：
+
+* [RabbitMQClusterAccessInfo](https://cloud.tencent.com/document/api/1179/46089#RabbitMQClusterAccessInfo)
+
+	* 新增成员：WebConsoleDomainEndpoint
+
+	* <font color="#dd0000">**修改成员**：</font>PublicWebConsoleSwitchStatus, VpcWebConsoleSwitchStatus, PublicDataStreamStatus, PrometheusEndpointInfo
+
+
+
+
+## TI-ONE 训练平台(tione) 版本：2021-11-11
+
+### 第 46 次发布
+
+发布时间：2023-12-19 02:18:26
+
+本次发布包含了以下内容：
+
+改善已有的文档。
+
+修改数据结构：
+
+* [ModelInfo](https://cloud.tencent.com/document/api/851/75051#ModelInfo)
+
+	* 新增成员：IsPrivateModel
+
+
+
+
+## TI-ONE 训练平台(tione) 版本：2019-10-22
+
+
+
+## 数据开发治理平台 WeData(wedata) 版本：2021-08-20
+
+### 第 64 次发布
+
+发布时间：2023-12-19 02:31:16
+
+本次发布包含了以下内容：
+
+改善已有的文档。
+
+新增接口：
+
+* [DescribeTableMeta](https://cloud.tencent.com/document/api/1267/102541)
+
+修改接口：
+
+* [BatchSuspendIntegrationTasks](https://cloud.tencent.com/document/api/1267/82532)
+
+	* 新增入参：Event
+
+* [CommitIntegrationTask](https://cloud.tencent.com/document/api/1267/82526)
+
+	* 新增入参：EventDesc
+
+* [ResumeIntegrationTask](https://cloud.tencent.com/document/api/1267/82473)
+
+	* 新增入参：EventDesc
+
+* [StartIntegrationTask](https://cloud.tencent.com/document/api/1267/82471)
+
+	* 新增入参：EventDesc
+
+* [SuspendIntegrationTask](https://cloud.tencent.com/document/api/1267/82469)
+
+	* 新增入参：Event
+
+
+修改数据结构：
+
+* [AlarmReceiverInfo](https://cloud.tencent.com/document/api/1267/76336#AlarmReceiverInfo)
+
+	* 新增成员：LarkGroup
+
+* [TaskAlarmInfo](https://cloud.tencent.com/document/api/1267/76336#TaskAlarmInfo)
+
+	* 新增成员：LarkWebHooks
+
+
+
+
 # Release 4.0.760
 
 ## 云安全一体化平台(csip) 版本：2022-11-21

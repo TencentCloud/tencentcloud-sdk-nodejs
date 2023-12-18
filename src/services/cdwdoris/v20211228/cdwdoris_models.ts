@@ -394,6 +394,11 @@ Modify 集群变更中；
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Components?: string
+  /**
+   * 判断审计日志表是否有catalog字段
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IfExistCatalog?: number
 }
 
 /**

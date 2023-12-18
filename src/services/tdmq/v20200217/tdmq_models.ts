@@ -41,35 +41,35 @@ export interface RabbitMQClusterAccessInfo {
    * 集群公网接入地址
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  PublicAccessEndpoint: string
+  PublicAccessEndpoint?: string
   /**
    * 集群控制台访问地址
    */
-  WebConsoleEndpoint: string
+  WebConsoleEndpoint?: string
   /**
    * 集群控制台登录用户名
    */
-  WebConsoleUsername: string
+  WebConsoleUsername?: string
   /**
    * 集群控制台登录密码
    */
-  WebConsolePassword: string
+  WebConsolePassword?: string
   /**
    * 已废弃
    */
-  PublicAccessEndpointStatus: boolean
+  PublicAccessEndpointStatus?: boolean
   /**
    * 已废弃
    */
-  PublicControlConsoleSwitchStatus: boolean
+  PublicControlConsoleSwitchStatus?: boolean
   /**
    * 已废弃
    */
-  VpcControlConsoleSwitchStatus: boolean
+  VpcControlConsoleSwitchStatus?: boolean
   /**
    * Vpc管控台访问地址，示例值，http://1.1.1.1:15672
    */
-  VpcWebConsoleEndpoint: string
+  VpcWebConsoleEndpoint?: string
   /**
    * 公网管控台开关状态，示例值，OFF/ON/CREATING/DELETING
 注意：此字段可能返回 null，表示取不到有效值。
@@ -91,6 +91,12 @@ OFF/ON/CREATING/DELETING
 注意：此字段可能返回 null，表示取不到有效值。
    */
   PrometheusEndpointInfo?: PrometheusEndpointInfo
+  /**
+   * http://amqp-k3eb47gm.dashboard.rabbitmq.cq.public.tencenttdmq.com:15672/
+公网域名接入点
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WebConsoleDomainEndpoint?: string
 }
 
 /**
@@ -2342,6 +2348,10 @@ export interface DescribeRocketMQTopicsRequest {
    * 按主题名称搜索，支持模糊查询
    */
   FilterName?: string
+  /**
+   * 按订阅消费组名称过滤
+   */
+  FilterGroup?: string
 }
 
 /**
@@ -4955,11 +4965,11 @@ export interface DescribeRocketMQTopicsResponse {
   /**
    * 总记录数
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 主题信息列表
    */
-  Topics: Array<RocketMQTopic>
+  Topics?: Array<RocketMQTopic>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

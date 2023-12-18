@@ -84,10 +84,10 @@ class Client extends abstract_client_1.AbstractClient {
     }
     /**
      * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
-修改数据源
+查询任务脚本
      */
-    async ModifyDataSource(req, cb) {
-        return this.request("ModifyDataSource", req, cb);
+    async DescribeTaskScript(req, cb) {
+        return this.request("DescribeTaskScript", req, cb);
     }
     /**
      * 创建规则模版
@@ -852,11 +852,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeInstanceList", req, cb);
     }
     /**
-     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
-查询任务脚本
+     * 查询表元数据详情
      */
-    async DescribeTaskScript(req, cb) {
-        return this.request("DescribeTaskScript", req, cb);
+    async DescribeTableMeta(req, cb) {
+        return this.request("DescribeTableMeta", req, cb);
     }
     /**
      * 告警接收人详情
@@ -1069,6 +1068,13 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeInstanceLogFile(req, cb) {
         return this.request("DescribeInstanceLogFile", req, cb);
+    }
+    /**
+     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
+修改数据源
+     */
+    async ModifyDataSource(req, cb) {
+        return this.request("ModifyDataSource", req, cb);
     }
     /**
      * 编辑规则模板
