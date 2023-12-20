@@ -3312,7 +3312,7 @@ export interface KongUpstreamList {
 }
 
 /**
- * 引擎的初始管理帐号
+ * 引擎的初始管理账号
  */
 export interface EngineAdmin {
   /**
@@ -4535,7 +4535,7 @@ polarismesh - STANDARD版本
    */
   EngineTags?: Array<InstanceTagInfo>
   /**
-   * 引擎的初始帐号信息。可设置参数：
+   * 引擎的初始账号信息。可设置参数：
 - Name：控制台初始用户名
 - Password：控制台初始密码
 - Token：引擎接口的管理员 Token

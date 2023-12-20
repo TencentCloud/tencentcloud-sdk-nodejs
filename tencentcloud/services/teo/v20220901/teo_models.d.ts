@@ -2424,12 +2424,12 @@ export interface DescribeContentQuotaResponse {
      * 刷新相关配额。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    PurgeQuota: Array<Quota>;
+    PurgeQuota?: Array<Quota>;
     /**
      * 预热相关配额。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    PrefetchQuota: Array<Quota>;
+    PrefetchQuota?: Array<Quota>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */

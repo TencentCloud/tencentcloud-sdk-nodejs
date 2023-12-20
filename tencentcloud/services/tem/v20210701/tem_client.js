@@ -217,7 +217,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeEnvironments", req, cb);
     }
     /**
-     * 生成Cos临时秘钥
+     * 生成Cos临时密钥
      */
     async CreateCosToken(req, cb) {
         return this.request("CreateCosToken", req, cb);

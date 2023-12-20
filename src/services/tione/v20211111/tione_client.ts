@@ -22,12 +22,13 @@ import {
   CreateNotebookImageResponse,
   ModelInfo,
   DescribeLogsRequest,
+  DescribeModelAccelerateVersionsRequest,
   StopModelAccelerateTaskRequest,
   DeleteTrainingModelVersionResponse,
   BatchTaskDetail,
   DeleteNotebookImageRecordRequest,
   NotebookSetItem,
-  StartTrainingTaskRequest,
+  ModifyNotebookTagsRequest,
   DescribeDatasetDetailStructuredResponse,
   ModifyServiceGroupWeightsResponse,
   RestartModelAccelerateTaskRequest,
@@ -72,7 +73,9 @@ import {
   CreateNotebookImageRequest,
   APIConfigDetail,
   InferTemplate,
-  ModifyNotebookTagsRequest,
+  DescribeModelAccelerateVersionsResponse,
+  StartNotebookRequest,
+  StartTrainingTaskRequest,
   StopBatchTaskRequest,
   ContainerStatus,
   TextLabelDistributionDetailInfoThirdClass,
@@ -98,7 +101,7 @@ import {
   CreateNotebookRequest,
   ModifyNotebookRequest,
   DescribeModelServicesRequest,
-  StopCreatingImageResponse,
+  RestartModelAccelerateTaskResponse,
   ModelAccEngineVersion,
   ResourceConfigInfo,
   Spec,
@@ -114,7 +117,7 @@ import {
   DescribeModelServiceHistoryRequest,
   Tag,
   DescribeDatasetsRequest,
-  StartNotebookRequest,
+  ModelAccelerateVersion,
   DeleteTrainingModelResponse,
   DescribeInferTemplatesResponse,
   DescribeBillingSpecsRequest,
@@ -123,6 +126,7 @@ import {
   DescribeInferTemplatesRequest,
   DeleteModelServiceGroupResponse,
   GpuDetail,
+  StopCreatingImageResponse,
   DescribeTrainingFrameworksRequest,
   DescribeBatchTasksResponse,
   CronScaleJob,
@@ -152,7 +156,7 @@ import {
   ModifyNotebookResponse,
   DescribeModelServiceResponse,
   DescribeDatasetsResponse,
-  RestartModelAccelerateTaskResponse,
+  ModelSource,
   CreateBatchModelAccTasksRequest,
   IntranetCallInfo,
   DescribeBillingSpecsPriceRequest,
@@ -682,6 +686,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查看notebook镜像保存记录
+   */
+  async DescribeNotebookImageRecords(
+    req: DescribeNotebookImageRecordsRequest,
+    cb?: (error: string, rep: DescribeNotebookImageRecordsResponse) => void
+  ): Promise<DescribeNotebookImageRecordsResponse> {
+    return this.request("DescribeNotebookImageRecords", req, cb)
+  }
+
+  /**
    * 保存镜像
    */
   async CreateNotebookImage(
@@ -862,13 +876,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查看notebook镜像保存记录
+   * 模型加速之后的模型版本列表
    */
-  async DescribeNotebookImageRecords(
-    req: DescribeNotebookImageRecordsRequest,
-    cb?: (error: string, rep: DescribeNotebookImageRecordsResponse) => void
-  ): Promise<DescribeNotebookImageRecordsResponse> {
-    return this.request("DescribeNotebookImageRecords", req, cb)
+  async DescribeModelAccelerateVersions(
+    req: DescribeModelAccelerateVersionsRequest,
+    cb?: (error: string, rep: DescribeModelAccelerateVersionsResponse) => void
+  ): Promise<DescribeModelAccelerateVersionsResponse> {
+    return this.request("DescribeModelAccelerateVersions", req, cb)
   }
 
   /**

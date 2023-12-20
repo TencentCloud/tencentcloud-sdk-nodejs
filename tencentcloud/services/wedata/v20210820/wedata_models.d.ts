@@ -9602,6 +9602,11 @@ export interface InstanceLogInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceStatus?: string;
+    /**
+     * 实例代码文件，为空表示对应代码文件不存在，可能是因为执行机未升级/对应类型任务无代码。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CodeFileName?: string;
 }
 /**
  * GetFileInfo请求参数结构体

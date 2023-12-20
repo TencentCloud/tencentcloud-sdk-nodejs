@@ -397,8 +397,14 @@ Modify 集群变更中；
   /**
    * 判断审计日志表是否有catalog字段
 注意：此字段可能返回 null，表示取不到有效值。
+   * @deprecated
    */
   IfExistCatalog?: number
+  /**
+   * 页面特性，用于前端屏蔽一些页面入口
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Characteristic?: Array<string>
 }
 
 /**

@@ -457,6 +457,36 @@ export interface ResourceLocParam {
     Region?: string;
 }
 /**
+ * 专家模式  计算节点的配置信息
+ */
+export interface NodeConfig {
+    /**
+     * Node ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Id: number;
+    /**
+     * Node parallelism
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Parallelism?: number;
+    /**
+     * Slot sharing group
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SlotSharingGroup?: string;
+    /**
+     * Configuration properties
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Configuration?: Array<Property>;
+    /**
+     * 节点的状态ttl配置, 多个用 ; 分割
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    StateTTL?: string;
+}
+/**
  * 工作空间详情
  */
 export interface WorkSpaceSetItem {
@@ -682,6 +712,40 @@ export interface ResourceItem {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     RefJobStatusCountSet?: Array<RefJobStatusCountItem>;
+}
+/**
+ * DescribeClusters返回参数结构体
+ */
+export interface DescribeClustersResponse {
+    /**
+     * 集群总数
+     */
+    TotalCount?: number;
+    /**
+     * 集群列表
+     */
+    ClusterSet?: Array<Cluster>;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * RunSqlGatewayStatement请求参数结构体
+ */
+export interface RunSqlGatewayStatementRequest {
+    /**
+     * 集群ID
+     */
+    ClusterId: string;
+    /**
+     * 需要执行的sql，该sql会被Sql Gateway执行，当前支持的是paimon修改需求，因此主要是DDL语句
+     */
+    Sql: string;
+    /**
+     * Sql Gateway会话ID，可不填，如果不填则会自动创建一个会话ID，每个会话ID都有一个存活时间，测试环境为10分钟，线上默认是30分钟
+     */
+    SessionId?: string;
 }
 /**
  * DescribeFolder返回参数结构体
@@ -1333,31 +1397,6 @@ export interface GatewayRefItem {
     Type: number;
 }
 /**
- * DescribeJobs请求参数结构体
- */
-export interface DescribeJobsRequest {
-    /**
-     * 按照一个或者多个作业ID查询。作业ID形如：cql-11112222，每次请求的作业上限为100。参数不支持同时指定JobIds和Filters。
-     */
-    JobIds?: Array<string>;
-    /**
-     * 过滤条件，支持的 Filter.Name 为：作业名 Name、作业状态 Status、所属集群 ClusterId、作业id JobId、集群名称 ClusterName。 每次请求的 Filters 个数的上限为 5，Filter.Values 的个数上限为 5。参数不支持同时指定 JobIds 和 Filters。
-     */
-    Filters?: Array<Filter>;
-    /**
-     * 偏移量，默认为0
-     */
-    Offset?: number;
-    /**
-     * 分页大小，默认为20，最大值为100
-     */
-    Limit?: number;
-    /**
-     * 工作空间 SerialId
-     */
-    WorkSpaceId?: string;
-}
-/**
  * CreateResource返回参数结构体
  */
 export interface CreateResourceResponse {
@@ -1490,21 +1529,36 @@ export interface DescribeResourceRelatedJobsResponse {
     RequestId?: string;
 }
 /**
- * DescribeClusters返回参数结构体
+ * 描述作业发生的一个事件
  */
-export interface DescribeClustersResponse {
+export interface JobEvent {
     /**
-     * 集群总数
+     * 内部定义的事件类型
      */
-    TotalCount?: number;
+    Type: string;
     /**
-     * 集群列表
+     * 事件类型的说明文字
      */
-    ClusterSet?: Array<Cluster>;
+    Description: string;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     * 事件发生的 Unix 时间戳（秒）
      */
-    RequestId?: string;
+    Timestamp: number;
+    /**
+     * 事件发生时的运行 ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RunningOrderId: number;
+    /**
+     * 事件的一些可选说明
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Message: string;
+    /**
+     * 异常事件的排查手册链接
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SolutionLink: string;
 }
 /**
  * 资源引用参数
@@ -2574,34 +2628,29 @@ export interface DescribeJobSubmissionLogRequest {
     Limit?: number;
 }
 /**
- * 专家模式  计算节点的配置信息
+ * DescribeJobs请求参数结构体
  */
-export interface NodeConfig {
+export interface DescribeJobsRequest {
     /**
-     * Node ID
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 按照一个或者多个作业ID查询。作业ID形如：cql-11112222，每次请求的作业上限为100。参数不支持同时指定JobIds和Filters。
      */
-    Id: number;
+    JobIds?: Array<string>;
     /**
-     * Node parallelism
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 过滤条件，支持的 Filter.Name 为：作业名 Name、作业状态 Status、所属集群 ClusterId、作业id JobId、集群名称 ClusterName。 每次请求的 Filters 个数的上限为 5，Filter.Values 的个数上限为 5。参数不支持同时指定 JobIds 和 Filters。
      */
-    Parallelism?: number;
+    Filters?: Array<Filter>;
     /**
-     * Slot sharing group
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 偏移量，默认为0
      */
-    SlotSharingGroup?: string;
+    Offset?: number;
     /**
-     * Configuration properties
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 分页大小，默认为20，最大值为100
      */
-    Configuration?: Array<Property>;
+    Limit?: number;
     /**
-     * 节点的状态ttl配置, 多个用 ; 分割
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 工作空间 SerialId
      */
-    StateTTL?: string;
+    WorkSpaceId?: string;
 }
 /**
  * Job详细信息
@@ -3284,21 +3333,33 @@ export interface DescribeResourcesRequest {
     WorkSpaceId?: string;
 }
 /**
- * RunSqlGatewayStatement请求参数结构体
+ * DescribeJobEvents请求参数结构体
  */
-export interface RunSqlGatewayStatementRequest {
+export interface DescribeJobEventsRequest {
     /**
-     * 集群ID
+     * 作业的 ID
      */
-    ClusterId: string;
+    JobId: string;
     /**
-     * 需要执行的sql，该sql会被Sql Gateway执行，当前支持的是paimon修改需求，因此主要是DDL语句
+     * 筛选条件：起始 Unix 时间戳（秒）
      */
-    Sql: string;
+    StartTimestamp: number;
     /**
-     * Sql Gateway会话ID，可不填，如果不填则会自动创建一个会话ID，每个会话ID都有一个存活时间，测试环境为10分钟，线上默认是30分钟
+     * 筛选条件：结束 Unix 时间戳（秒）
      */
-    SessionId?: string;
+    EndTimestamp: number;
+    /**
+     * 事件类型。如果不传则返回所有类型的数据
+     */
+    Types?: Array<string>;
+    /**
+     * 运行实例 ID 数组
+     */
+    RunningOrderIds?: Array<number | bigint>;
+    /**
+     * 工作空间 SerialId
+     */
+    WorkSpaceId?: string;
 }
 /**
  * CheckSavepoint返回参数结构体
@@ -3463,4 +3524,28 @@ export interface FetchSqlGatewayStatementResultRequest {
      * 下一条结果的获取url，首次获取执行结果时可以为空，当获取下一批查询结果时需要传递
      */
     ResultUri?: string;
+}
+/**
+ * DescribeJobEvents返回参数结构体
+ */
+export interface DescribeJobEventsResponse {
+    /**
+     * 该作业指定范围内的事件列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Events: Array<JobEvent>;
+    /**
+     * 该作业指定范围内运行实例 ID 数组，仅当入参没有传入 RunningOrderIds 参数时才会返回。倒序输出
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RunningOrderIds: Array<number | bigint>;
+    /**
+     * 事件的总数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TotalCount: number;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }

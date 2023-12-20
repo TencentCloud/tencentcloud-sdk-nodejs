@@ -268,6 +268,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeTrainingModelVersions", req, cb);
     }
     /**
+     * 查看notebook镜像保存记录
+     */
+    async DescribeNotebookImageRecords(req, cb) {
+        return this.request("DescribeNotebookImageRecords", req, cb);
+    }
+    /**
      * 保存镜像
      */
     async CreateNotebookImage(req, cb) {
@@ -376,10 +382,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteTrainingTask", req, cb);
     }
     /**
-     * 查看notebook镜像保存记录
+     * 模型加速之后的模型版本列表
      */
-    async DescribeNotebookImageRecords(req, cb) {
-        return this.request("DescribeNotebookImageRecords", req, cb);
+    async DescribeModelAccelerateVersions(req, cb) {
+        return this.request("DescribeModelAccelerateVersions", req, cb);
     }
     /**
      * 批量创建模型加速任务

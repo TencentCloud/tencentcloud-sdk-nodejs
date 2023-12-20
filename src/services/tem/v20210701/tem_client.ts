@@ -493,7 +493,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 生成Cos临时秘钥
+   * 生成Cos临时密钥
    */
   async CreateCosToken(
     req: CreateCosTokenRequest,

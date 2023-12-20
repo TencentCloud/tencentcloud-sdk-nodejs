@@ -135,7 +135,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeEnvironments(req: DescribeEnvironmentsRequest, cb?: (error: string, rep: DescribeEnvironmentsResponse) => void): Promise<DescribeEnvironmentsResponse>;
     /**
-     * 生成Cos临时秘钥
+     * 生成Cos临时密钥
      */
     CreateCosToken(req: CreateCosTokenRequest, cb?: (error: string, rep: CreateCosTokenResponse) => void): Promise<CreateCosTokenResponse>;
     /**

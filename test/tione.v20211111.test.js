@@ -418,6 +418,16 @@ it("tione.v20211111.DescribeTrainingModelVersions", async function () {
     }
 })
 
+it("tione.v20211111.DescribeNotebookImageRecords", async function () {
+    try {
+       const data = await client.DescribeNotebookImageRecords({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tione.v20211111.CreateNotebookImage", async function () {
     try {
        const data = await client.CreateNotebookImage({})
@@ -598,9 +608,9 @@ it("tione.v20211111.DeleteTrainingTask", async function () {
     }
 })
 
-it("tione.v20211111.DescribeNotebookImageRecords", async function () {
+it("tione.v20211111.DescribeModelAccelerateVersions", async function () {
     try {
-       const data = await client.DescribeNotebookImageRecords({})
+       const data = await client.DescribeModelAccelerateVersions({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

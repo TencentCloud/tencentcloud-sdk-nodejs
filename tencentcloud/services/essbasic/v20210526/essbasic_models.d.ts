@@ -1912,7 +1912,7 @@ export interface ChannelCreateFlowByFilesRequest {
     CcNotifyType?: number;
     /**
      * 个人自动签名的使用场景包括以下, 个人自动签署(即ApproverType设置成个人自动签署时)业务此值必传：
-  <ul><li> **E_PRESCRIPTION_AUTO_SIGN**：处方单（医疗自动签）  </li></ul>
+  <ul><li> **E_PRESCRIPTION_AUTO_SIGN**：电子处方单（医疗自动签）  </li><li> **OTHER** :  通用场景</li></ul>
   注: `个人自动签名场景是白名单功能，使用前请与对接的客户经理联系沟通。`
      */
     AutoSignScene?: string;
@@ -3054,9 +3054,9 @@ export interface CreateConsoleLoginUrlRequest {
   <li>第三方平台子客企业标识: Agent.ProxyOrganizationOpenId</li>
   <li>第三方平台子客企业中的员工标识: Agent.ProxyOperator.OpenId</li>
   </ul>注:
-  `1. 企业激活时,  此时的Agent.ProxyOrganizationOpenId将会是企业激活后企业的唯一标识, 建议开发者保存企业ProxyOrganizationOpenId，后续各项接口调用皆需要此参数。 `
-  `2. 员工认证时,  此时的Agent.ProxyOrganizationOpenId将会是员工认证加入企业后的唯一标识, 建议开发者保存此员工的penId, 后续各项接口调用皆需要此参数。 `
-  `3. 同渠道应用(Agent.AppId)下,企业唯一标识ProxyOrganizationOpenId需要保持唯一, 员工唯一标识OpenId也要保持唯一 (而不是企业下唯一)`
+  `1. 企业激活时， 此时的Agent.ProxyOrganizationOpenId将会是企业激活后企业的唯一标识，建议开发者保存企业ProxyOrganizationOpenId，后续各项接口调用皆需要此参数。 `
+  `2. 员工认证时， 此时的Agent.ProxyOperator.OpenId将会是员工认证加入企业后的唯一标识，建议开发者保存此员工的OpenId，后续各项接口调用皆需要此参数。 `
+  `3. 同渠道应用(Agent.AppId)下，企业唯一标识ProxyOrganizationOpenId需要保持唯一，员工唯一标识OpenId也要保持唯一 (而不是企业下唯一)。 `
      */
     Agent: Agent;
     /**
@@ -3874,7 +3874,7 @@ export interface FlowInfo {
     CcNotifyType?: number;
     /**
      * 个人自动签名的使用场景包括以下, 个人自动签署(即ApproverType设置成个人自动签署时)业务此值必传：
-  <ul><li> **E_PRESCRIPTION_AUTO_SIGN**：处方单（医疗自动签）  </li></ul>
+  <ul><li> **E_PRESCRIPTION_AUTO_SIGN**：电子处方单（医疗自动签）  </li><li> **OTHER** :  通用场景</li></ul>
   注: `个人自动签名场景是白名单功能，使用前请与对接的客户经理联系沟通。`
      */
     AutoSignScene?: string;
@@ -5968,7 +5968,7 @@ export interface ChannelGetTaskResultApiResponse {
      */
     TaskMessage?: string;
     /**
-     * 资源Id，也是FileId，用于文件发起时使用
+     * 资源Id（即FileId），用于[用PDF文件创建签署流程](https://qian.tencent.com/developers/partnerApis/startFlows/ChannelCreateFlowByFiles)
      */
     ResourceId?: string;
     /**

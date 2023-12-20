@@ -4475,11 +4475,31 @@ export interface OperationLog {
   /**
    * 操作证书动作。
    */
-  Action: string
+  Action?: string
   /**
    * 操作时间。
    */
-  CreatedOn: string
+  CreatedOn?: string
+  /**
+   * 主账号
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Uin?: string
+  /**
+   * 子账号
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SubAccountUin?: string
+  /**
+   * 证书ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CertId?: string
+  /**
+   * 操作
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Type?: string
 }
 
 /**

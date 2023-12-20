@@ -118,10 +118,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("FetchSqlGatewayStatementResult", req, cb);
     }
     /**
-     * 查询集群
+     * 获取指定作业的事件，包括作业启动停止、运行失败、快照失败、作业异常等各种事件类型
      */
-    async DescribeClusters(req, cb) {
-        return this.request("DescribeClusters", req, cb);
+    async DescribeJobEvents(req, cb) {
+        return this.request("DescribeJobEvents", req, cb);
     }
     /**
      * 描述资源配置接口
@@ -182,6 +182,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CreateJobConfig(req, cb) {
         return this.request("CreateJobConfig", req, cb);
+    }
+    /**
+     * 查询集群
+     */
+    async DescribeClusters(req, cb) {
+        return this.request("DescribeClusters", req, cb);
     }
     /**
      * 删除作业配置

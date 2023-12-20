@@ -34,11 +34,14 @@ import {
   TriggerJobSavepointRequest,
   RefJobStatusCountItem,
   ResourceLocParam,
+  NodeConfig,
   WorkSpaceSetItem,
   DescribeJobSavepointRequest,
   ResultColumn,
   TreeJobSets,
   ResourceItem,
+  DescribeClustersResponse,
+  RunSqlGatewayStatementRequest,
   DescribeFolderResponse,
   ResourceLoc,
   CCN,
@@ -71,14 +74,13 @@ import {
   DeleteWorkSpaceRequest,
   DescribeWorkSpacesResponse,
   GatewayRefItem,
-  DescribeJobsRequest,
   CreateResourceResponse,
   DescribeSystemResourcesRequest,
   CreateFolderResponse,
   DescribeResourcesResponse,
   RunJobDescription,
   DescribeResourceRelatedJobsResponse,
-  DescribeClustersResponse,
+  JobEvent,
   ResourceRef,
   DescribeSystemResourcesResponse,
   ClazzLevel,
@@ -112,7 +114,7 @@ import {
   DeleteResourceConfigsResponse,
   Cluster,
   DescribeJobSubmissionLogRequest,
-  NodeConfig,
+  DescribeJobsRequest,
   JobV1,
   JobConfig,
   DescribeResourceConfigsRequest,
@@ -131,7 +133,7 @@ import {
   StopJobsResponse,
   LogContent,
   DescribeResourcesRequest,
-  RunSqlGatewayStatementRequest,
+  DescribeJobEventsRequest,
   CheckSavepointResponse,
   DescribeJobsResponse,
   ExpertModeConfiguration,
@@ -140,6 +142,7 @@ import {
   DescribeTreeJobsRequest,
   DescribeJobConfigsResponse,
   FetchSqlGatewayStatementResultRequest,
+  DescribeJobEventsResponse,
 } from "./oceanus_models"
 
 /**
@@ -302,13 +305,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询集群
+   * 获取指定作业的事件，包括作业启动停止、运行失败、快照失败、作业异常等各种事件类型
    */
-  async DescribeClusters(
-    req: DescribeClustersRequest,
-    cb?: (error: string, rep: DescribeClustersResponse) => void
-  ): Promise<DescribeClustersResponse> {
-    return this.request("DescribeClusters", req, cb)
+  async DescribeJobEvents(
+    req: DescribeJobEventsRequest,
+    cb?: (error: string, rep: DescribeJobEventsResponse) => void
+  ): Promise<DescribeJobEventsResponse> {
+    return this.request("DescribeJobEvents", req, cb)
   }
 
   /**
@@ -409,6 +412,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateJobConfigResponse) => void
   ): Promise<CreateJobConfigResponse> {
     return this.request("CreateJobConfig", req, cb)
+  }
+
+  /**
+   * 查询集群
+   */
+  async DescribeClusters(
+    req: DescribeClustersRequest,
+    cb?: (error: string, rep: DescribeClustersResponse) => void
+  ): Promise<DescribeClustersResponse> {
+    return this.request("DescribeClusters", req, cb)
   }
 
   /**

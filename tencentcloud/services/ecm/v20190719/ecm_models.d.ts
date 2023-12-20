@@ -6526,71 +6526,71 @@ export interface Image {
     /**
      * 镜像ID
      */
-    ImageId: string;
+    ImageId?: string;
     /**
      * 镜像名称
      */
-    ImageName: string;
+    ImageName?: string;
     /**
      * 镜像状态
      */
-    ImageState: string;
+    ImageState?: string;
     /**
      * 镜像类型
      */
-    ImageType: string;
+    ImageType?: string;
     /**
      * 操作系统名称
      */
-    ImageOsName: string;
+    ImageOsName?: string;
     /**
      * 镜像描述
      */
-    ImageDescription: string;
+    ImageDescription?: string;
     /**
      * 镜像导入时间
      */
-    ImageCreateTime: string;
+    ImageCreateTime?: string;
     /**
      * 操作系统位数
      */
-    Architecture: string;
+    Architecture?: string;
     /**
      * 操作系统类型
      */
-    OsType: string;
+    OsType?: string;
     /**
      * 操作系统版本
      */
-    OsVersion: string;
+    OsVersion?: string;
     /**
      * 操作系统平台
      */
-    Platform: string;
+    Platform?: string;
     /**
      * 镜像所有者
      */
-    ImageOwner: number;
+    ImageOwner?: number;
     /**
      * 镜像大小。单位：GB
      */
-    ImageSize: number;
+    ImageSize?: number;
     /**
      * 镜像来源信息
      */
-    SrcImage: SrcImage;
+    SrcImage?: SrcImage;
     /**
      * 镜像来源类型
      */
-    ImageSource: string;
+    ImageSource?: string;
     /**
      * 中间态和失败时候的任务ID
      */
-    TaskId: string;
+    TaskId?: string;
     /**
      * 是否支持CloudInit
      */
-    IsSupportCloudInit: boolean;
+    IsSupportCloudInit?: boolean;
 }
 /**
  * DetachNetworkInterface请求参数结构体

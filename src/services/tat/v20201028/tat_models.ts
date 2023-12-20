@@ -1643,7 +1643,7 @@ export interface RegisterCodeInfo {
    */
   InstanceNamePrefix?: string
   /**
-   * 该注册码允许注册的实列数目。
+   * 该注册码允许注册的实例数目。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RegisterLimit?: number

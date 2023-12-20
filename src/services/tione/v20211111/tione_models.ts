@@ -302,6 +302,39 @@ export interface DescribeLogsRequest {
 }
 
 /**
+ * DescribeModelAccelerateVersions请求参数结构体
+ */
+export interface DescribeModelAccelerateVersionsRequest {
+  /**
+   * 过滤条件
+    Filter.Name: 枚举值: ModelJobName (任务名称)|TrainingModelVersionId (模型版本id)
+    Filter.Values: 当长度为1时，支持模糊查询; 不为1时，精确查询
+每次请求的Filters的上限为10，Filter.Values的上限为100
+   */
+  Filters?: Array<Filter>
+  /**
+   * 排序字段; 枚举值: CreateTime (创建时间) ；默认CreateTime
+   */
+  OrderField?: string
+  /**
+   * 排序方向; 枚举值: ASC | DESC；默认DESC
+   */
+  Order?: string
+  /**
+   * 分页查询起始位置，如：Limit为100，第一页Offset为0，第二页Offset为100....即每页左边为闭区间; 默认0
+   */
+  Offset?: number
+  /**
+   * 分页查询每页大小，最大20000; 默认10
+   */
+  Limit?: number
+  /**
+   * 模型ID
+   */
+  TrainingModelId?: string
+}
+
+/**
  * StopModelAccelerateTask请求参数结构体
  */
 export interface StopModelAccelerateTaskRequest {
@@ -622,13 +655,17 @@ export interface NotebookSetItem {
 }
 
 /**
- * StartTrainingTask请求参数结构体
+ * ModifyNotebookTags请求参数结构体
  */
-export interface StartTrainingTaskRequest {
+export interface ModifyNotebookTagsRequest {
   /**
-   * 训练任务ID
+   * Notebook Id
    */
   Id: string
+  /**
+   * Notebook修改标签集合
+   */
+  Tags?: Array<Tag>
 }
 
 /**
@@ -2106,17 +2143,44 @@ export interface InferTemplate {
 }
 
 /**
- * ModifyNotebookTags请求参数结构体
+ * DescribeModelAccelerateVersions返回参数结构体
  */
-export interface ModifyNotebookTagsRequest {
+export interface DescribeModelAccelerateVersionsResponse {
   /**
-   * Notebook Id
+   * 优化模型总数； 注意接口是分页拉取的，total是指优化模型节点总数，不是本次返回中ModelAccelerateVersions数组的大小
+注意：此字段可能返回 null，表示取不到有效值。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalCount?: number
+  /**
+   * 优化模型列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ModelAccelerateVersions?: Array<ModelAccelerateVersion>
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * StartNotebook请求参数结构体
+ */
+export interface StartNotebookRequest {
+  /**
+   * notebook id
    */
   Id: string
+}
+
+/**
+ * StartTrainingTask请求参数结构体
+ */
+export interface StartTrainingTaskRequest {
   /**
-   * Notebook修改标签集合
+   * 训练任务ID
    */
-  Tags?: Array<Tag>
+  Id: string
 }
 
 /**
@@ -3007,9 +3071,9 @@ export interface DescribeModelServicesRequest {
 }
 
 /**
- * StopCreatingImage返回参数结构体
+ * RestartModelAccelerateTask返回参数结构体
  */
-export interface StopCreatingImageResponse {
+export interface RestartModelAccelerateTaskResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3388,13 +3452,84 @@ DatasetScope，数据集范围，SCOPE_DATASET_PRIVATE或SCOPE_DATASET_PUBLIC
 }
 
 /**
- * StartNotebook请求参数结构体
+ * 优化模型版本列表
  */
-export interface StartNotebookRequest {
+export interface ModelAccelerateVersion {
   /**
-   * notebook id
+   * 模型id
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Id: string
+  ModelId: string
+  /**
+   * 优化模型版本id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ModelVersionId: string
+  /**
+   * 优化任务id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ModelJobId: string
+  /**
+   * 优化任务名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ModelJobName: string
+  /**
+   * 优化后模型版本
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ModelVersion: string
+  /**
+   * 加速比
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SpeedUp: string
+  /**
+   * 模型来源/任务名称/任务版本
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ModelSource: ModelSource
+  /**
+   * 模型cos路径
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CosPathInfo: CosPathInfo
+  /**
+   * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateTime: string
+  /**
+   * 模型规范
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ModelFormat: string
+  /**
+   * 状态
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status: string
+  /**
+   * 进度
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Progress: number
+  /**
+   * 错误信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ErrorMsg: string
+  /**
+   * GPU类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  GPUType: string
+  /**
+   * 模型cos路径
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ModelCosPath: CosPathInfo
 }
 
 /**
@@ -3491,6 +3626,16 @@ export interface GpuDetail {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Value?: number
+}
+
+/**
+ * StopCreatingImage返回参数结构体
+ */
+export interface StopCreatingImageResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -4594,13 +4739,64 @@ export interface DescribeDatasetsResponse {
 }
 
 /**
- * RestartModelAccelerateTask返回参数结构体
+ * 模型来源
  */
-export interface RestartModelAccelerateTaskResponse {
+export interface ModelSource {
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 来源
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  RequestId?: string
+  Source: string
+  /**
+   * 来源任务名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  JobName: string
+  /**
+   * 来源任务版本
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  JobVersion: string
+  /**
+   * 来源任务id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  JobId: string
+  /**
+   * 模型名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ModelName: string
+  /**
+   * 算法框架
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AlgorithmFramework: string
+  /**
+   * 训练偏好
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TrainingPreference: string
+  /**
+   * 推理环境来源，SYSTEM/CUSTOM
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ReasoningEnvironmentSource: string
+  /**
+   * 推理环境
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ReasoningEnvironment: string
+  /**
+   * 推理环境id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ReasoningEnvironmentId: string
+  /**
+   * 自定义推理环境
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ReasoningImageInfo: ImageInfo
 }
 
 /**

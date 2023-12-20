@@ -1,3 +1,128 @@
+# Release 4.0.762
+
+## 腾讯云数据仓库 TCHouse-D(cdwdoris) 版本：2021-12-28
+
+### 第 3 次发布
+
+发布时间：2023-12-20 01:16:54
+
+本次发布包含了以下内容：
+
+改善已有的文档。
+
+修改数据结构：
+
+* [InstanceInfo](https://cloud.tencent.com/document/api/1387/102385#InstanceInfo)
+
+	* 新增成员：Characteristic
+
+
+
+
+## 腾讯电子签企业版(ess) 版本：2020-11-11
+
+### 第 143 次发布
+
+发布时间：2023-12-20 01:38:18
+
+本次发布包含了以下内容：
+
+改善已有的文档。
+
+修改接口：
+
+* [CreatePrepareFlow](https://cloud.tencent.com/document/api/1323/83412)
+
+	* 新增入参：CcInfos
+
+
+
+
+## 流计算 Oceanus(oceanus) 版本：2019-04-22
+
+### 第 50 次发布
+
+发布时间：2023-12-20 01:57:04
+
+本次发布包含了以下内容：
+
+改善已有的文档。
+
+新增接口：
+
+* [DescribeJobEvents](https://cloud.tencent.com/document/api/849/102554)
+
+新增数据结构：
+
+* [JobEvent](https://cloud.tencent.com/document/api/849/52010#JobEvent)
+
+
+
+## SSL 证书(ssl) 版本：2019-12-05
+
+### 第 51 次发布
+
+发布时间：2023-12-20 02:05:02
+
+本次发布包含了以下内容：
+
+改善已有的文档。
+
+修改数据结构：
+
+* [OperationLog](https://cloud.tencent.com/document/api/400/41679#OperationLog)
+
+	* 新增成员：Uin, SubAccountUin, CertId, Type
+
+
+
+
+## TI-ONE 训练平台(tione) 版本：2021-11-11
+
+### 第 47 次发布
+
+发布时间：2023-12-20 02:15:59
+
+本次发布包含了以下内容：
+
+改善已有的文档。
+
+新增接口：
+
+* [DescribeModelAccelerateVersions](https://cloud.tencent.com/document/api/851/102555)
+
+新增数据结构：
+
+* [ModelAccelerateVersion](https://cloud.tencent.com/document/api/851/75051#ModelAccelerateVersion)
+* [ModelSource](https://cloud.tencent.com/document/api/851/75051#ModelSource)
+
+
+
+## TI-ONE 训练平台(tione) 版本：2019-10-22
+
+
+
+## 数据开发治理平台 WeData(wedata) 版本：2021-08-20
+
+### 第 65 次发布
+
+发布时间：2023-12-20 02:28:42
+
+本次发布包含了以下内容：
+
+改善已有的文档。
+
+修改数据结构：
+
+* [InstanceLogInfo](https://cloud.tencent.com/document/api/1267/76336#InstanceLogInfo)
+
+	* 新增成员：CodeFileName
+
+	* <font color="#dd0000">**修改成员**：</font>TaskId, CurRunDate, Tries, LastUpdate, BrokerIp, FileSize, OriginFileName, CreateTime, InstanceLogType, TaskName, CostTime, InstanceStatus
+
+
+
+
 # Release 4.0.761
 
 ## 腾讯云数据仓库 TCHouse-D(cdwdoris) 版本：2021-12-28
