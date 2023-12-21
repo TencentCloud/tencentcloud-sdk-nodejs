@@ -688,6 +688,16 @@ it("vod.v20180717.ProcessImage", async function () {
     }
 })
 
+it("vod.v20180717.EnhanceMediaQuality", async function () {
+    try {
+       const data = await client.EnhanceMediaQuality({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vod.v20180717.CreateProcedureTemplate", async function () {
     try {
        const data = await client.CreateProcedureTemplate({})

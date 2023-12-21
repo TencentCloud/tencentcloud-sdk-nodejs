@@ -219,44 +219,6 @@ export interface CmqDeadLetterPolicy {
 }
 
 /**
- * DescribeNamespaceBundlesOpt请求参数结构体
- */
-export interface DescribeNamespaceBundlesOptRequest {
-  /**
-   * 物理集群名
-   */
-  ClusterName: string
-  /**
-   * 虚拟集群（租户）ID
-   */
-  TenantId: string
-  /**
-   * 命名空间名
-   */
-  NamespaceName: string
-  /**
-   * 是否需要监控指标，若传false，则不需要传Limit和Offset分页参数
-   */
-  NeedMetrics: boolean
-  /**
-   * 查询限制条数
-   */
-  Limit?: number
-  /**
-   * 查询偏移量
-   */
-  Offset?: number
-  /**
-   * 过滤的 bundle
-   */
-  Bundle?: string
-  /**
-   * bundle 所属的 broker ip 地址，支持模糊查询
-   */
-  OwnerBroker?: string
-}
-
-/**
  * DeleteRabbitMQUser请求参数结构体
  */
 export interface DeleteRabbitMQUserRequest {
@@ -1137,10 +1099,6 @@ export interface DescribeNamespaceBundlesOptResponse {
    * 记录条数
    */
   TotalCount?: number
-  /**
-   * bundle列表
-   */
-  BundleSet?: Array<BundleSetOpt>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6179,9 +6137,42 @@ export interface CmqTransactionPolicy {
 }
 
 /**
- * 运营端命名空间bundle实体
+ * DescribeNamespaceBundlesOpt请求参数结构体
  */
-export type BundleSetOpt = null
+export interface DescribeNamespaceBundlesOptRequest {
+  /**
+   * 物理集群名
+   */
+  ClusterName: string
+  /**
+   * 虚拟集群（租户）ID
+   */
+  TenantId: string
+  /**
+   * 命名空间名
+   */
+  NamespaceName: string
+  /**
+   * 是否需要监控指标，若传false，则不需要传Limit和Offset分页参数
+   */
+  NeedMetrics: boolean
+  /**
+   * 查询限制条数
+   */
+  Limit?: number
+  /**
+   * 查询偏移量
+   */
+  Offset?: number
+  /**
+   * 过滤的 bundle
+   */
+  Bundle?: string
+  /**
+   * bundle 所属的 broker IP 地址，支持模糊查询
+   */
+  OwnerBroker?: string
+}
 
 /**
  * ModifyTopic请求参数结构体

@@ -1298,14 +1298,6 @@ export interface SyncProxyOrganizationRequest {
  */
 export interface ChannelCreatePrepareFlowRequest {
     /**
-     * 资源id，与ResourceType相对应，取值范围：
-  <ul>
-  <li>文件Id（通过UploadFiles获取文件资源Id）</li>
-  <li>模板Id</li>
-  </ul>
-     */
-    ResourceId: string;
-    /**
      * 资源类型，取值有：
   <ul><li> **1**：模板</li>
   <li> **2**：文件（默认值）</li></ul>
@@ -1327,6 +1319,14 @@ export interface ChannelCreatePrepareFlowRequest {
   第三方平台子客企业和员工必须已经经过实名认证
      */
     Agent?: Agent;
+    /**
+     * 资源id，与ResourceType相对应，取值范围：
+  <ul>
+  <li>文件Id（通过UploadFiles获取文件资源Id）</li>
+  <li>模板Id</li>
+  </ul>
+     */
+    ResourceId?: string;
     /**
      * 合同流程配置信息，用于配置发起合同时定制化如是否允许修改，某些按钮的隐藏等逻辑
      */
@@ -3264,6 +3264,8 @@ export interface CommonFlowApprover {
   **3** :企业/企业员工自动签（他方企业自动签署或文件发起时的本方企业自动签）
   
   注：类型为3（企业/企业员工自动签）时，此接口会默认完成该签署方的签署。静默签署仅进行盖章操作，不能自动签名。
+  使用自动签时，请确保企业已经开通自动签功能，开通方式：控制台 -> 企业设置 -> 扩展服务 -> 企业自动签。
+  使用文件发起自动签时使用前请联系对接的客户经理沟通。
   
      */
     ApproverType?: number;

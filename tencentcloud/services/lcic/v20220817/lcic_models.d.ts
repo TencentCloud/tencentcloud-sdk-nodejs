@@ -113,7 +113,7 @@ export interface CreateRoomRequest {
      */
     EndDelayTime?: number;
     /**
-     * 直播方式：0 常规模式（默认）1 回放直播模式（伪直播）
+     * 直播类型：0 常规（默认）1 伪直播
      */
     LiveType?: number;
     /**
@@ -721,7 +721,7 @@ export interface RoomItem {
      */
     EndDelayTime?: number;
     /**
-     * 直播方式：0 常规模式（默认）1 回放直播模式（伪直播）
+     * 直播类型：0 常规（默认）1 伪直播
   注意：此字段可能返回 null，表示取不到有效值。
      */
     LiveType?: number;
@@ -2019,7 +2019,7 @@ export interface DescribeRoomResponse {
      */
     EndDelayTime?: number;
     /**
-     * 直播方式：0 常规模式（默认）1 回放直播模式（伪直播）
+     * 直播类型：0 常规（默认）1 伪直播
      */
     LiveType?: number;
     /**
@@ -2563,7 +2563,7 @@ export interface RoomInfo {
      */
     EndDelayTime?: number;
     /**
-     * 直播方式：0 常规模式（默认）1 回放直播模式（伪直播）
+     * 直播类型：0 常规（默认）1 伪直播
      */
     LiveType?: number;
     /**
@@ -2574,6 +2574,10 @@ export interface RoomInfo {
      * 是否自动开始上课：0 不自动上课（默认） 1 自动上课 live_type=1的时候有效
      */
     EnableAutoStart?: number;
+    /**
+     * 录制文件背景图片，支持png、jpg、jpeg、bmp格式，暂不支持透明通道
+     */
+    RecordBackground?: string;
 }
 /**
  * ModifyRoom请求参数结构体

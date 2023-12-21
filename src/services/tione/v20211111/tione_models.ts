@@ -827,7 +827,7 @@ export interface DescribeBillingResourceGroupsRequest {
   /**
    * 资源组类型; 枚举值 TRAIN:训练 INFERENCE:推理
    */
-  Type: string
+  Type?: string
   /**
    * Filter.Name: 枚举值: ResourceGroupId (资源组id列表)
                     ResourceGroupName (资源组名称列表)
@@ -1619,12 +1619,12 @@ export interface DescribeBillingResourceGroupsResponse {
   /**
    * 资源组总数； 注意接口是分页拉取的，total是指资源组总数，不是本次返回中ResourceGroupSet数组的大小
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 资源组详情
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ResourceGroupSet: Array<ResourceGroup>
+  ResourceGroupSet?: Array<ResourceGroup>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3344,39 +3344,39 @@ export interface ResourceGroup {
   /**
    * 资源组id
    */
-  ResourceGroupId: string
+  ResourceGroupId?: string
   /**
    * 资源组名称
    */
-  ResourceGroupName: string
+  ResourceGroupName?: string
   /**
    * 可用节点个数(运行中的节点)
    */
-  FreeInstance: number
+  FreeInstance?: number
   /**
    * 总节点个数(所有节点)
    */
-  TotalInstance: number
+  TotalInstance?: number
   /**
    * 资资源组已用的资源
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  UsedResource: GroupResource
+  UsedResource?: GroupResource
   /**
    * 资源组总资源
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TotalResource: GroupResource
+  TotalResource?: GroupResource
   /**
    * 节点信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  InstanceSet: Array<Instance>
+  InstanceSet?: Array<Instance>
   /**
    * 标签列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TagSet: Array<Tag>
+  TagSet?: Array<Tag>
 }
 
 /**
@@ -3562,13 +3562,13 @@ export interface DescribeInferTemplatesResponse {
  */
 export interface DescribeBillingSpecsRequest {
   /**
-   * 枚举值：TRAIN、NOTEBOOK、INFERENCE
-   */
-  TaskType: string
-  /**
    * 付费模式：POSTPAID_BY_HOUR按量计费、PREPAID包年包月
    */
   ChargeType: string
+  /**
+   * 枚举值：TRAIN、NOTEBOOK、INFERENCE
+   */
+  TaskType?: string
   /**
    * 资源类型：CALC 计算资源、CPU CPU资源、GPU GPU资源、CBS云硬盘
    */

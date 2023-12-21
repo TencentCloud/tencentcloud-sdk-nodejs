@@ -559,6 +559,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ProcessImage", req, cb);
     }
     /**
+     * 对点播中的音视频媒体发起音画质重生任务。
+     */
+    async EnhanceMediaQuality(req, cb) {
+        return this.request("EnhanceMediaQuality", req, cb);
+    }
+    /**
      * 创建用户自定义的任务流模板，模板上限：50。
      */
     async CreateProcedureTemplate(req, cb) {

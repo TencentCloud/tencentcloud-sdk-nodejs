@@ -1365,6 +1365,71 @@ export interface VehicleRegCertInfo {
 }
 
 /**
+ * IDCardOCR返回参数结构体
+ */
+export interface IDCardOCRResponse {
+  /**
+   * 姓名（人像面）
+   */
+  Name?: string
+  /**
+   * 性别（人像面）
+   */
+  Sex?: string
+  /**
+   * 民族（人像面）
+   */
+  Nation?: string
+  /**
+   * 出生日期（人像面）
+   */
+  Birth?: string
+  /**
+   * 地址（人像面）
+   */
+  Address?: string
+  /**
+   * 身份证号（人像面）
+   */
+  IdNum?: string
+  /**
+   * 发证机关（国徽面）
+   */
+  Authority?: string
+  /**
+   * 证件有效期（国徽面）
+   */
+  ValidDate?: string
+  /**
+   * 扩展信息，不请求则不返回，具体输入参考示例3和示例4。
+IdCard，裁剪后身份证照片的base64编码，请求 Config.CropIdCard 时返回；
+Portrait，身份证头像照片的base64编码，请求 Config.CropPortrait 时返回；
+
+Quality，图片质量分数，请求 Config.Quality 时返回（取值范围：0 ~ 100，分数越低越模糊，建议阈值≥50）;
+BorderCodeValue，身份证边框不完整告警阈值分数，请求 Config.BorderCheckWarn时返回（取值范围：0 ~ 100，分数越低边框遮挡可能性越低，建议阈值≤50）;
+
+WarnInfos，告警信息，Code 告警码列表和释义：
+-9100	身份证有效日期不合法告警，
+-9101	身份证边框不完整告警，
+-9102	身份证复印件告警，
+-9103	身份证翻拍告警，
+-9105	身份证框内遮挡告警，
+-9104	临时身份证告警，
+-9106	身份证疑似存在PS痕迹告警，
+-9107       身份证反光告警。
+   */
+  AdvancedInfo?: string
+  /**
+   * 反光点覆盖区域详情结果，具体内容请点击左侧链接
+   */
+  ReflectDetailInfos?: Array<ReflectDetailInfo>
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 机票行程卡条目
  */
 export interface FlightItem {
@@ -3374,68 +3439,91 @@ export interface Key {
 }
 
 /**
- * IDCardOCR返回参数结构体
+ * 全电发票（航空运输电子客票行程单）
  */
-export interface IDCardOCRResponse {
+export interface ElectronicAirTransport {
   /**
-   * 姓名（人像面）
+   * 发票代码
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Name?: string
+  Code?: string
   /**
-   * 性别（人像面）
+   * 发票号码
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Sex?: string
+  Number?: string
   /**
-   * 民族（人像面）
+   * 开票日期
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Nation?: string
+  Date?: string
   /**
-   * 出生日期（人像面）
+   * 金额
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Birth?: string
+  Amount?: string
   /**
-   * 地址（人像面）
+   * 校验码
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Address?: string
+  CheckCode?: string
   /**
-   * 身份证号（人像面）
+   * 价税合计
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  IdNum?: string
+  Total?: string
   /**
-   * 发证机关（国徽面）
+   * 抵扣标志
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Authority?: string
+  DeductionMark?: string
   /**
-   * 证件有效期（国徽面）
+   * 发票状态代码，0正常 1 未更新  2作废 3已红冲
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  ValidDate?: string
+  StateCode?: string
   /**
-   * 扩展信息，不请求则不返回，具体输入参考示例3和示例4。
-IdCard，裁剪后身份证照片的base64编码，请求 Config.CropIdCard 时返回；
-Portrait，身份证头像照片的base64编码，请求 Config.CropPortrait 时返回；
+   * 购方识别号
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BuyerTaxCode?: string
+  /**
+   * 购方名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BuyerName?: string
+  /**
+   * 合计税额
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Tax?: string
+  /**
+   * 国内国际标识
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DomesticInternationalMark?: string
+  /**
+   * 旅客姓名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PassengerName?: string
+  /**
+   * 有效身份证件号码
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PassengerNo?: string
+  /**
+   * 电子客票号码
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ElectronicNumber?: string
+  /**
+   * 全电发票（航空运输电子客票行程单）详细信息
 
-Quality，图片质量分数，请求 Config.Quality 时返回（取值范围：0 ~ 100，分数越低越模糊，建议阈值≥50）;
-BorderCodeValue，身份证边框不完整告警阈值分数，请求 Config.BorderCheckWarn时返回（取值范围：0 ~ 100，分数越低边框遮挡可能性越低，建议阈值≤50）;
 
-WarnInfos，告警信息，Code 告警码列表和释义：
--9100	身份证有效日期不合法告警，
--9101	身份证边框不完整告警，
--9102	身份证复印件告警，
--9103	身份证翻拍告警，
--9105	身份证框内遮挡告警，
--9104	临时身份证告警，
--9106	身份证疑似存在PS痕迹告警，
--9107       身份证反光告警。
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  AdvancedInfo?: string
-  /**
-   * 反光点覆盖区域详情结果，具体内容请点击左侧链接
-   */
-  ReflectDetailInfos?: Array<ReflectDetailInfo>
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  ElectronicAirTransportDetails?: Array<ElectronicAirTransportDetail>
 }
 
 /**
@@ -3905,21 +3993,30 @@ export interface SmartFormFileUrl {
  */
 export interface VatInvoiceVerifyNewResponse {
   /**
-   * 增值税发票信息，详情请点击左侧链接。
+   * 增值税发票、购车发票、全电发票的基础要素字段信息。
    */
   Invoice?: VatInvoice
   /**
-   * 机动车销售统一发票信息
+   * 机动车销售统一发票详细字段信息。
    */
   VehicleInvoiceInfo?: VehicleInvoiceInfo
   /**
-   * 二手车销售统一发票信息
+   * 二手车销售统一发票详细字段信息。
    */
   UsedVehicleInvoiceInfo?: UsedVehicleInvoiceInfo
   /**
-   * 通行费发票信息
+   * 通行费发票详细字段信息。
    */
   PassInvoiceInfoList?: Array<PassInvoiceInfo>
+  /**
+   * 全电发票（铁路电子客票）详细字段信息。
+
+   */
+  ElectronicTrainTicket?: ElectronicTrainTicket
+  /**
+   * 全电发票（航空运输电子客票行程单）详细字段信息。
+   */
+  ElectronicAirTransport?: ElectronicAirTransport
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5143,6 +5240,57 @@ export interface RecognizeTravelCardOCRResponse {
 }
 
 /**
+ * 全电发票（航空运输电子客票行程单）详细信息
+ */
+export interface ElectronicAirTransportDetail {
+  /**
+   * 航段序号
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FlightSegment?: string
+  /**
+   * 始发站
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StationGetOn?: string
+  /**
+   * 目的站
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StationGetOff?: string
+  /**
+   * 承运人
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Carrier?: string
+  /**
+   * 航班号
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FlightNumber?: string
+  /**
+   * 座位等级
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SeatLevel?: string
+  /**
+   * 承运日期
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FlightDate?: string
+  /**
+   * 起飞时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DepartureTime?: string
+  /**
+   * 客票级别/客票类别
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FareBasis?: string
+}
+
+/**
  * 英文OCR识别出的单词在原图中的四点坐标数组
  */
 export interface WordCoordPoint {
@@ -6249,6 +6397,132 @@ export interface RideHailingDriverLicenseOCRRequest {
 建议图片存储于腾讯云，可保障更高的下载速度和稳定性。
    */
   ImageUrl?: string
+}
+
+/**
+ * 全电发票（铁路电子客票）
+ */
+export interface ElectronicTrainTicket {
+  /**
+   * 购方名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BuyerName?: string
+  /**
+   * 购方识别号
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BuyerTaxCode?: string
+  /**
+   * 发票号码
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Number?: string
+  /**
+   * 开票日期
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Date?: string
+  /**
+   * 价税合计（中文大写）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalCN?: string
+  /**
+   * 税额
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Tax?: string
+  /**
+   * 业务类型，0：退票，1:售票
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ServiceType?: string
+  /**
+   * 出发时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TimeGetOn?: string
+  /**
+   * 车次
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TrainNumber?: string
+  /**
+   * 发票代码
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Code?: string
+  /**
+   * 席别
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SeatType?: string
+  /**
+   * 乘车日期
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DateGetOn?: string
+  /**
+   * 车厢
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TrainCabin?: string
+  /**
+   * 出发站
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StationGetOn?: string
+  /**
+   * 电子客票号
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ElectronicNumber?: string
+  /**
+   * 姓名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PassengerName?: string
+  /**
+   * 证件号
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PassengerNo?: string
+  /**
+   * 金额
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Amount?: string
+  /**
+   * 到达站
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StationGetOff?: string
+  /**
+   * 税率
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaxRate?: string
+  /**
+   * 席位
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Seat?: string
+  /**
+   * 价税合计
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Total?: string
+  /**
+   * 校验码
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CheckCode?: string
+  /**
+   * 发票状态代码，0正常 1 未更新  2作废 3已红冲
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StateCode?: string
 }
 
 /**
@@ -8150,7 +8424,7 @@ export interface MainlandPermitOCRResponse {
 }
 
 /**
- * 增值税发票信息
+ * 增值税发票、购车发票、全电发票的基础要素字段信息。
  */
 export interface VatInvoice {
   /**
@@ -8167,18 +8441,22 @@ export interface VatInvoice {
   Date?: string
   /**
    * 购方抬头
+通用机打发票类型时不返回
    */
   BuyerName?: string
   /**
    * 购方税号
+通用机打发票类型时不返回
    */
   BuyerTaxCode?: string
   /**
    * 购方地址电话
+通用机打发票类型做不返回
    */
   BuyerAddressPhone?: string
   /**
    * 购方银行账号
+通用机打发票类型时不返回
    */
   BuyerBankAccount?: string
   /**
@@ -8218,8 +8496,14 @@ export interface VatInvoice {
 15：二手车销售统一发票，
 32：深圳区块链发票，
 102：通用机打电子发票
+61：电子发票（航空运输电子客票行程单）
+83：电子发票（铁路电子发票）
    */
   Type?: string
+  /**
+   * 具体的全电发票类型：01: 全电专用发票；02：全电普通发票；03：全电火车票；04：全电机票行程单
+   */
+  ElectronicType?: string
   /**
    * 检验码
    */

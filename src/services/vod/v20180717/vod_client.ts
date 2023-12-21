@@ -203,6 +203,7 @@ import {
   DeleteRoundPlayRequest,
   SuperResolutionInfo,
   MediaImageSpriteInfo,
+  EnhanceMediaQualityRequest,
   ProductInstanceRecource,
   AiRecognitionTaskFaceSegmentItem,
   ProcessMediaResponse,
@@ -469,6 +470,7 @@ import {
   CreateAdaptiveDynamicStreamingTemplateResponse,
   DeleteSampleSnapshotTemplateRequest,
   DescribeTranscodeTemplatesResponse,
+  MediaAiAnalysisTagItem,
   AbnormalLightingConfigureInfoForUpdate,
   AiRecognitionTaskOcrFullTextSegmentTextItem,
   ImageProcessingTemplate,
@@ -602,7 +604,7 @@ import {
   AiRecognitionTaskAsrWordsResultItem,
   CreateQualityInspectTemplateResponse,
   RebuildMediaTaskOutput,
-  MediaAiAnalysisTagItem,
+  EnhanceMediaQualityOutputConfig,
   RebuildMediaRequest,
   DescribeTaskDetailResponse,
   MediaKeyFrameDescInfo,
@@ -768,6 +770,7 @@ import {
   DeleteEnhanceMediaTemplateRequest,
   SetDrmKeyProviderInfoResponse,
   DescribeStorageDetailsRequest,
+  EnhanceMediaQualityResponse,
   SubtitleFormatsOperation,
   MediaTrack,
   StorageStatData,
@@ -1599,6 +1602,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ProcessImageResponse) => void
   ): Promise<ProcessImageResponse> {
     return this.request("ProcessImage", req, cb)
+  }
+
+  /**
+   * 对点播中的音视频媒体发起音画质重生任务。
+   */
+  async EnhanceMediaQuality(
+    req: EnhanceMediaQualityRequest,
+    cb?: (error: string, rep: EnhanceMediaQualityResponse) => void
+  ): Promise<EnhanceMediaQualityResponse> {
+    return this.request("EnhanceMediaQuality", req, cb)
   }
 
   /**
