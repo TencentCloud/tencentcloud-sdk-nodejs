@@ -150,7 +150,7 @@ export interface BucketInfo {
      */
     Region: string;
     /**
-     * 该字段用于标识腾讯云对象存储的对象Key,对象z作为基本单元被存放在存储桶中；用户可以通过腾讯云控制台、API、SDK 等多种方式管理对象。有关对象的详细描述敬请参阅相应 [产品文档](https://cloud.tencent.com/document/product/436/13324)。
+     * 该字段用于标识腾讯云对象存储的对象Key,对象作为基本单元被存放在存储桶中；用户可以通过腾讯云控制台、API、SDK 等多种方式管理对象。有关对象的详细描述敬请参阅相应 [产品文档](https://cloud.tencent.com/document/product/436/13324)。
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Object: string;
@@ -317,6 +317,10 @@ export interface CreateAudioModerationTaskRequest {
      * 可选参数，该字段表示接受审核信息回调的地址，格式为URL链接默认格式。配置成功后，审核过程中产生的违规音频片段将通过此接口发送。回调返回内容格式请参考 [回调签名示例](https://cloud.tencent.com/document/product/1219/53257#.E7.A4.BA.E4.BE.8B2-.E5.9B.9E.E8.B0.83.E7.AD.BE.E5.90.8D.E7.A4.BA.E4.BE.8B)
      */
     CallbackUrl?: string;
+    /**
+     * 该字段表示待检测对象对应的用户相关信息，若填入则可甄别相应违规风险用户
+     */
+    User?: User;
 }
 /**
  * 音视频任务数据结构
@@ -442,6 +446,67 @@ export interface CreateAudioModerationSyncTaskResponse {
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * User结果
+ */
+export interface User {
+    /**
+     * 用户等级，默认0 未知 1 低 2 中 3 高
+     */
+    Level?: number;
+    /**
+     * 性别 默认0 未知 1 男性 2 女性
+     */
+    Gender?: number;
+    /**
+     * 年龄 默认0 未知
+     */
+    Age?: number;
+    /**
+     * 业务用户ID 如填写，会根据账号历史恶意情况，判定消息有害结果，特别是有利于可疑恶意情况下的辅助判断。账号可以填写微信uin、QQ号、微信openid、QQopenid、字符串等。该字段和账号类别确定唯一账号。
+     */
+    UserId?: string;
+    /**
+     * 手机号
+     */
+    Phone?: string;
+    /**
+     * 业务用户ID类型 "1-微信uin 2-QQ号 3-微信群uin 4-qq群号 5-微信openid 6-QQopenid 7-其它string"
+     */
+    AccountType?: string;
+    /**
+     * 用户昵称
+     */
+    Nickname?: string;
+    /**
+     * 用户头像图片链接
+     */
+    HeadUrl?: string;
+    /**
+     * 用户简介，长度不超过5000字
+     */
+    Desc?: string;
+    /**
+     * 群聊场景房间ID
+     */
+    RoomId?: string;
+    /**
+     * 群聊场景群ID
+     */
+    GroupId?: string;
+    /**
+     * 群聊场景群用户数
+     */
+    GroupSize?: number;
+    /**
+     * 消息接收者ID
+     */
+    ReceiverId?: string;
+    /**
+     * 消息生成时间，毫秒
+     */
+    SendTime?: string;
 }
 /**
  * 用于返回审核任务输出的标签

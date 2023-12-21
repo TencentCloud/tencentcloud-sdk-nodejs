@@ -1577,6 +1577,11 @@ export interface DatasourceInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DataOriginDatasourceId?: string
+  /**
+   * 集群id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ClusterId?: string
 }
 
 /**

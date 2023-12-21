@@ -23,77 +23,78 @@ export interface CodeBatch {
    * 批次号
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  BatchId: string
+  BatchId?: string
   /**
    * 企业ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CorpId: number
+  CorpId?: number
   /**
    * 批次编码(未使用)
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  BatchCode: string
+  BatchCode?: string
   /**
    * 码数量
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CodeCnt: number
+  CodeCnt?: number
   /**
    * 所属商户ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  MerchantId: string
+  MerchantId?: string
   /**
    * 产品ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ProductId: string
+  ProductId?: string
   /**
    * 批次类型
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  BatchType: number
+  BatchType?: number
   /**
    * 备注
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Remark: string
+  Remark?: string
   /**
    * 微信模板
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  MpTpl: string
+  MpTpl?: string
   /**
    * 批次状态 0: 未激活 1: 已激活 -1: 已冻结
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Status: number
+  Status?: number
   /**
    * 创建时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CreateTime: string
+  CreateTime?: string
   /**
    * 修改时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  UpdateTime: string
+  UpdateTime?: string
   /**
    * 所属商户名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  MerchantName: string
+  MerchantName?: string
   /**
    * 产品名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ProductName: string
+  ProductName?: string
   /**
    * 未使用
 注意：此字段可能返回 null，表示取不到有效值。
+   * @deprecated
    */
-  Ext: Ext
+  Ext?: Ext
   /**
    * 模板名称
 注意：此字段可能返回 null，表示取不到有效值。
@@ -1026,6 +1027,56 @@ export interface CorpQuota {
 }
 
 /**
+ * 扫码统计
+ */
+export interface ScanStat {
+  /**
+   * 安心码
+   */
+  Code?: string
+  /**
+   * 企业ID
+   */
+  CorpId?: number
+  /**
+   * 商户ID
+   */
+  MerchantId?: string
+  /**
+   * 产品ID
+   */
+  ProductId?: string
+  /**
+   * 批次ID
+   */
+  BatchId?: string
+  /**
+   * 扫码次数
+   */
+  Pv?: number
+  /**
+   * 扫码人数
+   */
+  Uv?: number
+  /**
+   * 创建时间
+   */
+  CreateTime?: string
+  /**
+   * 更新时间
+   */
+  UpdateTime?: string
+  /**
+   * 商户名称
+   */
+  MerchantName?: string
+  /**
+   * 产品名称
+   */
+  ProductName?: string
+}
+
+/**
  * CreateCustomRule请求参数结构体
  */
 export interface CreateCustomRuleRequest {
@@ -1727,7 +1778,14 @@ export interface CreateCustomPackRequest {
 /**
  * 预留字段
  */
-export type Ext = null
+export interface Ext {
+  /**
+   * 字符串
+注意：此字段可能返回 null，表示取不到有效值。
+   * @deprecated
+   */
+  Value?: string
+}
 
 /**
  * CreateCodeBatch请求参数结构体
@@ -2299,6 +2357,28 @@ export interface CreateCustomRuleResponse {
 }
 
 /**
+ * DescribePlanQRCodeScanRecords返回参数结构体
+ */
+export interface DescribePlanQRCodeScanRecordsResponse {
+  /**
+   * 返回码
+   */
+  Ret?: number
+  /**
+   * 总数
+   */
+  Total?: number
+  /**
+   * 数据
+   */
+  Data?: Array<PlanQRCodeRecord>
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyTraceCodeUnlink请求参数结构体
  */
 export interface ModifyTraceCodeUnlinkRequest {
@@ -2377,6 +2457,28 @@ export interface CreateTraceCodesAsyncResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribePlanQRCodeScanRecords请求参数结构体
+ */
+export interface DescribePlanQRCodeScanRecordsRequest {
+  /**
+   * 开始时间
+   */
+  StartTime: string
+  /**
+   * 结束时间
+   */
+  EndTime: string
+  /**
+   * 页码
+   */
+  PageNo: number
+  /**
+   * 页大小
+   */
+  PageSize: number
 }
 
 /**
@@ -3264,53 +3366,44 @@ export interface ModifyCodeBatchResponse {
 }
 
 /**
- * 扫码统计
+ * 安心计划二维码扫码记录
  */
-export interface ScanStat {
+export interface PlanQRCodeRecord {
   /**
-   * 安心码
+   * 二维码
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Code?: string
+  Url: string
   /**
-   * 企业ID
+   * OpenID
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  CorpId?: number
+  OpenId: string
   /**
-   * 商户ID
+   * 扫码时间
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  MerchantId?: string
+  ScanTime: string
   /**
-   * 产品ID
+   * IP 地址
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  ProductId?: string
+  Ip: string
   /**
-   * 批次ID
+   * 国家
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  BatchId?: string
+  Country: string
   /**
-   * 扫码次数
+   * 省份
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Pv?: number
+  Province: string
   /**
-   * 扫码人数
+   * 城市
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Uv?: number
-  /**
-   * 创建时间
-   */
-  CreateTime?: string
-  /**
-   * 更新时间
-   */
-  UpdateTime?: string
-  /**
-   * 商户名称
-   */
-  MerchantName?: string
-  /**
-   * 产品名称
-   */
-  ProductName?: string
+  City: string
 }
 
 /**

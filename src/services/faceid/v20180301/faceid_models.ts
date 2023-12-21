@@ -34,6 +34,17 @@ SuspectedWatermark：疑似存在水印
 }
 
 /**
+ * 额外的详细信息
+ */
+export interface ExtraInfo {
+  /**
+   * 命中模板的详细信息，仅返回命中的相似度最高的模板信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RetrievalLivenessExtraInfo?: Array<RetrievalLivenessExtraInfo>
+}
+
+/**
  * CheckIdNameDate返回参数结构体
  */
 export interface CheckIdNameDateResponse {
@@ -1023,6 +1034,10 @@ High：高度疑似攻击
    */
   AttackRiskDetailList?: Array<AttackRiskDetail>
   /**
+   * 额外信息
+   */
+  ExtraInfo?: ExtraInfo
+  /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -1204,6 +1219,27 @@ export interface DetectDetail {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   LivenessMode?: number
+}
+
+/**
+ * 模版检索详细信息
+ */
+export interface RetrievalLivenessExtraInfo {
+  /**
+   * 命中的模版类型，其中Common-公共库；Auto-自动聚类库；Owner-自建模版库
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HitGroup?: string
+  /**
+   * 命中的相似度
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SimilarityScore?: number
+  /**
+   * 命中的模板id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HitTemplate?: string
 }
 
 /**

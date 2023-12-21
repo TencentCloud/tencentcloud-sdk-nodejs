@@ -29,6 +29,7 @@ import {
   DescribeTasksRequest,
   TaskInput,
   DescribeTaskDetailRequest,
+  User,
   TaskLabel,
   ImageResultsResultDetail,
   InputInfo,

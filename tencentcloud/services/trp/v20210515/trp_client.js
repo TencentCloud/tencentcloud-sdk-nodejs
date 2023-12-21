@@ -119,6 +119,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateProduct", req, cb);
     }
     /**
+     * 修改自定义码规则
+     */
+    async ModifyCustomRule(req, cb) {
+        return this.request("ModifyCustomRule", req, cb);
+    }
+    /**
      * 查询渠道企业列表
      */
     async DescribeAgentCorps(req, cb) {
@@ -137,10 +143,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ReportBatchCallbackStatus", req, cb);
     }
     /**
-     * 修改自定义码规则
+     * 查询安心计划二维码扫码记录
      */
-    async ModifyCustomRule(req, cb) {
-        return this.request("ModifyCustomRule", req, cb);
+    async DescribePlanQRCodeScanRecords(req, cb) {
+        return this.request("DescribePlanQRCodeScanRecords", req, cb);
     }
     /**
      * 修改溯源信息

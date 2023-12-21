@@ -171,6 +171,8 @@ export declare class Client extends AbstractClient {
     EnableVpcEndPointConnect(req: EnableVpcEndPointConnectRequest, cb?: (error: string, rep: EnableVpcEndPointConnectResponse) => void): Promise<EnableVpcEndPointConnectResponse>;
     /**
      * 本接口（ModifyAddressTemplateGroupAttribute）用于修改IP地址模板集合。
+>?本接口为异步接口，可调用 [DescribeVpcTaskResult](https://cloud.tencent.com/document/api/215/59037) 接口查询任务执行结果，待任务执行成功后再进行其他操作。
+>
      */
     ModifyAddressTemplateGroupAttribute(req: ModifyAddressTemplateGroupAttributeRequest, cb?: (error: string, rep: ModifyAddressTemplateGroupAttributeResponse) => void): Promise<ModifyAddressTemplateGroupAttributeResponse>;
     /**
@@ -403,6 +405,8 @@ export declare class Client extends AbstractClient {
     LockCcnBandwidths(req: LockCcnBandwidthsRequest, cb?: (error: string, rep: LockCcnBandwidthsResponse) => void): Promise<LockCcnBandwidthsResponse>;
     /**
      * 本接口（ModifyAddressTemplateAttribute）用于修改IP地址模板。
+>?本接口为异步接口，可调用 [DescribeVpcTaskResult](https://cloud.tencent.com/document/api/215/59037) 接口查询任务执行结果，待任务执行成功后再进行其他操作。
+>
      */
     ModifyAddressTemplateAttribute(req: ModifyAddressTemplateAttributeRequest, cb?: (error: string, rep: ModifyAddressTemplateAttributeResponse) => void): Promise<ModifyAddressTemplateAttributeResponse>;
     /**
@@ -415,6 +419,8 @@ export declare class Client extends AbstractClient {
     DeleteTemplateMember(req: DeleteTemplateMemberRequest, cb?: (error: string, rep: DeleteTemplateMemberResponse) => void): Promise<DeleteTemplateMemberResponse>;
     /**
      * 本接口（DeleteServiceTemplateGroup）用于删除协议端口模板集合。
+>?本接口为异步接口，可调用 [DescribeVpcTaskResult](https://cloud.tencent.com/document/api/215/59037) 接口查询任务执行结果，待任务执行成功后再进行其他操作。
+>
      */
     DeleteServiceTemplateGroup(req: DeleteServiceTemplateGroupRequest, cb?: (error: string, rep: DeleteServiceTemplateGroupResponse) => void): Promise<DeleteServiceTemplateGroupResponse>;
     /**
@@ -659,6 +665,8 @@ export declare class Client extends AbstractClient {
     ModifyNetworkAclQuintupleEntries(req: ModifyNetworkAclQuintupleEntriesRequest, cb?: (error: string, rep: ModifyNetworkAclQuintupleEntriesResponse) => void): Promise<ModifyNetworkAclQuintupleEntriesResponse>;
     /**
      * 本接口（ModifyServiceTemplateGroupAttribute）用于修改协议端口模板集合。
+>?本接口为异步接口，可调用 [DescribeVpcTaskResult](https://cloud.tencent.com/document/api/215/59037) 接口查询任务执行结果，待任务执行成功后再进行其他操作。
+>
      */
     ModifyServiceTemplateGroupAttribute(req: ModifyServiceTemplateGroupAttributeRequest, cb?: (error: string, rep: ModifyServiceTemplateGroupAttributeResponse) => void): Promise<ModifyServiceTemplateGroupAttributeResponse>;
     /**
@@ -763,6 +771,8 @@ export declare class Client extends AbstractClient {
     AssociateDhcpIpWithAddressIp(req: AssociateDhcpIpWithAddressIpRequest, cb?: (error: string, rep: AssociateDhcpIpWithAddressIpResponse) => void): Promise<AssociateDhcpIpWithAddressIpResponse>;
     /**
      * 本接口（DeleteServiceTemplate）用于删除协议端口模板。
+>?本接口为异步接口，可调用 [DescribeVpcTaskResult](https://cloud.tencent.com/document/api/215/59037) 接口查询任务执行结果，待任务执行成功后再进行其他操作。
+>
      */
     DeleteServiceTemplate(req: DeleteServiceTemplateRequest, cb?: (error: string, rep: DeleteServiceTemplateResponse) => void): Promise<DeleteServiceTemplateResponse>;
     /**
@@ -778,6 +788,8 @@ export declare class Client extends AbstractClient {
     ModifyIpv6AddressesAttribute(req: ModifyIpv6AddressesAttributeRequest, cb?: (error: string, rep: ModifyIpv6AddressesAttributeResponse) => void): Promise<ModifyIpv6AddressesAttributeResponse>;
     /**
      * 本接口（DeleteAddressTemplateGroup）用于删除IP地址模板集合。
+>?本接口为异步接口，可调用 [DescribeVpcTaskResult](https://cloud.tencent.com/document/api/215/59037) 接口查询任务执行结果，待任务执行成功后再进行其他操作。
+>
      */
     DeleteAddressTemplateGroup(req: DeleteAddressTemplateGroupRequest, cb?: (error: string, rep: DeleteAddressTemplateGroupResponse) => void): Promise<DeleteAddressTemplateGroupResponse>;
     /**
@@ -856,6 +868,8 @@ export declare class Client extends AbstractClient {
     ModifySecurityGroupAttribute(req: ModifySecurityGroupAttributeRequest, cb?: (error: string, rep: ModifySecurityGroupAttributeResponse) => void): Promise<ModifySecurityGroupAttributeResponse>;
     /**
      * 本接口（DeleteAddressTemplate）用于删除IP地址模板。
+>?本接口为异步接口，可调用 [DescribeVpcTaskResult](https://cloud.tencent.com/document/api/215/59037) 接口查询任务执行结果，待任务执行成功后再进行其他操作。
+>
      */
     DeleteAddressTemplate(req: DeleteAddressTemplateRequest, cb?: (error: string, rep: DeleteAddressTemplateResponse) => void): Promise<DeleteAddressTemplateResponse>;
     /**
@@ -1303,6 +1317,8 @@ LimitTypes取值范围：
     CreateHaVip(req: CreateHaVipRequest, cb?: (error: string, rep: CreateHaVipResponse) => void): Promise<CreateHaVipResponse>;
     /**
      * 本接口（ModifyServiceTemplateAttribute）用于修改协议端口模板。
+>?本接口为异步接口，可调用 [DescribeVpcTaskResult](https://cloud.tencent.com/document/api/215/59037) 接口查询任务执行结果，待任务执行成功后再进行其他操作。
+>
      */
     ModifyServiceTemplateAttribute(req: ModifyServiceTemplateAttributeRequest, cb?: (error: string, rep: ModifyServiceTemplateAttributeResponse) => void): Promise<ModifyServiceTemplateAttributeResponse>;
     /**

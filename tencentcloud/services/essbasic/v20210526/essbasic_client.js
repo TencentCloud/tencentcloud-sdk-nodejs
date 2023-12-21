@@ -645,7 +645,9 @@ Web链接访问后，会根据子客企业(**Agent中ProxyOrganizationOpenId表�
 可以<a href="https://qian.tencent.com/developers/partnerApis/accounts/CreateConsoleLoginUrl" target="_blank">生成子客登录链接</a>登录控制台查看带领取的合同
 ![image](https://qcloudimg.tencent-cloud.cn/raw/a34d0cc56ec871613e94dfc6252bc072.png)
 
-注: `支持批量领取,  如果有一个合同流程无法领取会导致接口报错,  使得所有合同都领取失败`
+注:
+1. 支持批量领取,  如果有一个合同流程无法领取会导致接口报错,  使得所有合同都领取失败
+2. 只有企业的<font color="red">超管或者法人</font>才能进行合同的领取
      */
     async ChannelCreateBoundFlows(req, cb) {
         return this.request("ChannelCreateBoundFlows", req, cb);

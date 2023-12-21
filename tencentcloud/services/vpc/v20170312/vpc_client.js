@@ -265,6 +265,8 @@ class Client extends abstract_client_1.AbstractClient {
     }
     /**
      * 本接口（ModifyAddressTemplateGroupAttribute）用于修改IP地址模板集合。
+>?本接口为异步接口，可调用 [DescribeVpcTaskResult](https://cloud.tencent.com/document/api/215/59037) 接口查询任务执行结果，待任务执行成功后再进行其他操作。
+>
      */
     async ModifyAddressTemplateGroupAttribute(req, cb) {
         return this.request("ModifyAddressTemplateGroupAttribute", req, cb);
@@ -595,6 +597,8 @@ class Client extends abstract_client_1.AbstractClient {
     }
     /**
      * 本接口（ModifyAddressTemplateAttribute）用于修改IP地址模板。
+>?本接口为异步接口，可调用 [DescribeVpcTaskResult](https://cloud.tencent.com/document/api/215/59037) 接口查询任务执行结果，待任务执行成功后再进行其他操作。
+>
      */
     async ModifyAddressTemplateAttribute(req, cb) {
         return this.request("ModifyAddressTemplateAttribute", req, cb);
@@ -613,6 +617,8 @@ class Client extends abstract_client_1.AbstractClient {
     }
     /**
      * 本接口（DeleteServiceTemplateGroup）用于删除协议端口模板集合。
+>?本接口为异步接口，可调用 [DescribeVpcTaskResult](https://cloud.tencent.com/document/api/215/59037) 接口查询任务执行结果，待任务执行成功后再进行其他操作。
+>
      */
     async DeleteServiceTemplateGroup(req, cb) {
         return this.request("DeleteServiceTemplateGroup", req, cb);
@@ -955,6 +961,8 @@ class Client extends abstract_client_1.AbstractClient {
     }
     /**
      * 本接口（ModifyServiceTemplateGroupAttribute）用于修改协议端口模板集合。
+>?本接口为异步接口，可调用 [DescribeVpcTaskResult](https://cloud.tencent.com/document/api/215/59037) 接口查询任务执行结果，待任务执行成功后再进行其他操作。
+>
      */
     async ModifyServiceTemplateGroupAttribute(req, cb) {
         return this.request("ModifyServiceTemplateGroupAttribute", req, cb);
@@ -1105,6 +1113,8 @@ class Client extends abstract_client_1.AbstractClient {
     }
     /**
      * 本接口（DeleteServiceTemplate）用于删除协议端口模板。
+>?本接口为异步接口，可调用 [DescribeVpcTaskResult](https://cloud.tencent.com/document/api/215/59037) 接口查询任务执行结果，待任务执行成功后再进行其他操作。
+>
      */
     async DeleteServiceTemplate(req, cb) {
         return this.request("DeleteServiceTemplate", req, cb);
@@ -1126,6 +1136,8 @@ class Client extends abstract_client_1.AbstractClient {
     }
     /**
      * 本接口（DeleteAddressTemplateGroup）用于删除IP地址模板集合。
+>?本接口为异步接口，可调用 [DescribeVpcTaskResult](https://cloud.tencent.com/document/api/215/59037) 接口查询任务执行结果，待任务执行成功后再进行其他操作。
+>
      */
     async DeleteAddressTemplateGroup(req, cb) {
         return this.request("DeleteAddressTemplateGroup", req, cb);
@@ -1234,6 +1246,8 @@ class Client extends abstract_client_1.AbstractClient {
     }
     /**
      * 本接口（DeleteAddressTemplate）用于删除IP地址模板。
+>?本接口为异步接口，可调用 [DescribeVpcTaskResult](https://cloud.tencent.com/document/api/215/59037) 接口查询任务执行结果，待任务执行成功后再进行其他操作。
+>
      */
     async DeleteAddressTemplate(req, cb) {
         return this.request("DeleteAddressTemplate", req, cb);
@@ -1861,6 +1875,8 @@ LimitTypes取值范围：
     }
     /**
      * 本接口（ModifyServiceTemplateAttribute）用于修改协议端口模板。
+>?本接口为异步接口，可调用 [DescribeVpcTaskResult](https://cloud.tencent.com/document/api/215/59037) 接口查询任务执行结果，待任务执行成功后再进行其他操作。
+>
      */
     async ModifyServiceTemplateAttribute(req, cb) {
         return this.request("ModifyServiceTemplateAttribute", req, cb);

@@ -168,6 +168,16 @@ it("trp.v20210515.CreateProduct", async function () {
     }
 })
 
+it("trp.v20210515.ModifyCustomRule", async function () {
+    try {
+       const data = await client.ModifyCustomRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("trp.v20210515.DescribeAgentCorps", async function () {
     try {
        const data = await client.DescribeAgentCorps({})
@@ -198,9 +208,9 @@ it("trp.v20210515.ReportBatchCallbackStatus", async function () {
     }
 })
 
-it("trp.v20210515.ModifyCustomRule", async function () {
+it("trp.v20210515.DescribePlanQRCodeScanRecords", async function () {
     try {
-       const data = await client.ModifyCustomRule({})
+       const data = await client.DescribePlanQRCodeScanRecords({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

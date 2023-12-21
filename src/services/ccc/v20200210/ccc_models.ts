@@ -387,11 +387,11 @@ export interface DescribeExtensionsResponse {
   /**
    * 查询总数
    */
-  Total: number
+  Total?: number
   /**
    * 话机信息列表
    */
-  ExtensionList: Array<ExtensionInfo>
+  ExtensionList?: Array<ExtensionInfo>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -577,11 +577,11 @@ export interface DescribeAutoCalloutTasksResponse {
   /**
    * 总数
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 任务列表
    */
-  Tasks: Array<AutoCalloutTaskInfo>
+  Tasks?: Array<AutoCalloutTaskInfo>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -836,36 +836,36 @@ export interface DescribeAutoCalloutTaskResponse {
   /**
    * 任务名
    */
-  Name: string
+  Name?: string
   /**
    * 任务描述
    */
-  Description: string
+  Description?: string
   /**
    * 任务起始时间戳
    */
-  NotBefore: number
+  NotBefore?: number
   /**
    * 任务结束时间戳
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  NotAfter: number
+  NotAfter?: number
   /**
    * 主叫列表
    */
-  Callers: Array<string>
+  Callers?: Array<string>
   /**
    * 被叫信息列表
    */
-  Callees: Array<AutoCalloutTaskCalleeInfo>
+  Callees?: Array<AutoCalloutTaskCalleeInfo>
   /**
    * 任务使用的IvrId
    */
-  IvrId: number
+  IvrId?: number
   /**
    * 任务状态 0初始 1运行中 2已完成 3结束中 4已终止
    */
-  State: number
+  State?: number
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1205,36 +1205,36 @@ export interface AutoCalloutTaskInfo {
   /**
    * 任务名
    */
-  Name: string
+  Name?: string
   /**
    * 被叫数量
    */
-  CalleeCount: number
+  CalleeCount?: number
   /**
    * 主叫号码列表
    */
-  Callers: Array<string>
+  Callers?: Array<string>
   /**
    * 起始时间戳
    */
-  NotBefore: number
+  NotBefore?: number
   /**
    * 结束时间戳
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  NotAfter: number
+  NotAfter?: number
   /**
    * 任务使用的IvrId
    */
-  IvrId: number
+  IvrId?: number
   /**
    * 任务状态0初始 1运行中 2已完成 3结束中 4已结束
    */
-  State: number
+  State?: number
   /**
    * 任务Id
    */
-  TaskId: number
+  TaskId?: number
 }
 
 /**
@@ -1632,6 +1632,8 @@ export interface TelCdrInfo {
                          
 电话呼出             201            unknown	未知状态
 
+电话呼出             202            notAnswer	未接听
+
 电话呼出            203	    userReject	拒接挂断
 
 电话呼出	          204	    powerOff	关机
@@ -1727,6 +1729,8 @@ export interface TelCdrInfo {
                          
 电话呼出             201            unknown	未知状态
 
+电话呼出             202            notAnswer	未接听
+
 电话呼出            203	    userReject	拒接挂断
 
 电话呼出	          204	    powerOff	关机
@@ -1744,7 +1748,6 @@ export interface TelCdrInfo {
 电话呼出	        210	           notInService	不在服务区
 
 电话呼入&呼出	211    clientError    客户端错误
-
 
 注意：此字段可能返回 null，表示取不到有效值。
    */
@@ -1963,15 +1966,15 @@ export interface CallInNumberMetrics {
   /**
    * 线路号码
    */
-  Number: string
+  Number?: string
   /**
    * 线路相关指标
    */
-  Metrics: CallInMetrics
+  Metrics?: CallInMetrics
   /**
    * 所属技能组相关指标
    */
-  SkillGroupMetrics: Array<CallInSkillGroupMetrics>
+  SkillGroupMetrics?: Array<CallInSkillGroupMetrics>
 }
 
 /**
@@ -2453,7 +2456,7 @@ export interface DeleteStaffResponse {
    * 无法删除的状态为在线的客服列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  OnlineStaffList: Array<string>
+  OnlineStaffList?: Array<string>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2567,11 +2570,11 @@ export interface DescribePSTNActiveSessionListResponse {
   /**
    * 列表总条数
    */
-  Total: number
+  Total?: number
   /**
    * 列表内容
    */
-  Sessions: Array<PSTNSessionInfo>
+  Sessions?: Array<PSTNSessionInfo>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2730,7 +2733,7 @@ export interface DescribeTelSessionResponse {
   /**
    * 会话信息
    */
-  Session: PSTNSession
+  Session?: PSTNSession
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

@@ -19,6 +19,7 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   AttackRiskDetail,
+  ExtraInfo,
   CheckIdNameDateResponse,
   IdCardVerificationRequest,
   ImageRecognitionV2Response,
@@ -53,6 +54,7 @@ import {
   IntentionVerifyData,
   LivenessCompareRequest,
   DetectDetail,
+  RetrievalLivenessExtraInfo,
   IntentionActionConfig,
   CheckBankCardInformationRequest,
   BankCardVerificationRequest,

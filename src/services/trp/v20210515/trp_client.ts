@@ -49,6 +49,7 @@ import {
   CreateCodeBatchResponse,
   DescribeCustomRulesRequest,
   CorpQuota,
+  ScanStat,
   CreateCustomRuleRequest,
   DescribeCodePackStatusRequest,
   ModifyTraceDataRequest,
@@ -104,11 +105,13 @@ import {
   DescribeCustomRuleByIdResponse,
   DescribeCodeBatchsResponse,
   CreateCustomRuleResponse,
+  DescribePlanQRCodeScanRecordsResponse,
   ModifyTraceCodeUnlinkRequest,
   DescribeCodePacksResponse,
   DescribeCodesByPackRequest,
   DescribeJobFileUrlRequest,
   CreateTraceCodesAsyncResponse,
+  DescribePlanQRCodeScanRecordsRequest,
   RawScanLog,
   DescribePlanQRCodesRequest,
   ModifyCodeBatchRequest,
@@ -143,7 +146,7 @@ import {
   DescribePlanQRCodesResponse,
   DescribeTraceCodeByIdRequest,
   ModifyCodeBatchResponse,
-  ScanStat,
+  PlanQRCodeRecord,
   ModifyTraceCodeResponse,
   DescribeCodePackUrlResponse,
   DeleteMerchantRequest,
@@ -310,6 +313,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 修改自定义码规则
+   */
+  async ModifyCustomRule(
+    req: ModifyCustomRuleRequest,
+    cb?: (error: string, rep: ModifyCustomRuleResponse) => void
+  ): Promise<ModifyCustomRuleResponse> {
+    return this.request("ModifyCustomRule", req, cb)
+  }
+
+  /**
    * 查询渠道企业列表
    */
   async DescribeAgentCorps(
@@ -340,13 +353,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改自定义码规则
+   * 查询安心计划二维码扫码记录
    */
-  async ModifyCustomRule(
-    req: ModifyCustomRuleRequest,
-    cb?: (error: string, rep: ModifyCustomRuleResponse) => void
-  ): Promise<ModifyCustomRuleResponse> {
-    return this.request("ModifyCustomRule", req, cb)
+  async DescribePlanQRCodeScanRecords(
+    req: DescribePlanQRCodeScanRecordsRequest,
+    cb?: (error: string, rep: DescribePlanQRCodeScanRecordsResponse) => void
+  ): Promise<DescribePlanQRCodeScanRecordsResponse> {
+    return this.request("DescribePlanQRCodeScanRecords", req, cb)
   }
 
   /**
