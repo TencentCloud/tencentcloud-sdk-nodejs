@@ -976,8 +976,9 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改视频重生模板。
-   */
+     * 该 API 已经<font color=red>不再维护</font>，新版 [音画质重生](https://cloud.tencent.com/document/product/266/102571) 接口使用预置模板，详情请参见 [音画质重生模板](https://cloud.tencent.com/document/product/266/102586#50604b3f-0286-4a10-a3f7-18218116aff7)。
+修改视频重生模板。
+     */
   async ModifyRebuildMediaTemplate(
     req: ModifyRebuildMediaTemplateRequest,
     cb?: (error: string, rep: ModifyRebuildMediaTemplateResponse) => void
@@ -1392,8 +1393,9 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 发起音画质重生
-   */
+     * 该 API 已经<font color=red>不再维护</font>，请使用新版接口 [音画质重生](https://cloud.tencent.com/document/api/266/102571)。
+发起音画质重生
+     */
   async RebuildMedia(
     req: RebuildMediaRequest,
     cb?: (error: string, rep: RebuildMediaResponse) => void
@@ -1434,8 +1436,9 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除视频重生模板。
-   */
+     * 该 API 已经<font color=red>不再维护</font>，新版 [音画质重生](https://cloud.tencent.com/document/product/266/102571) 接口使用预置模板，详情请参见 [音画质重生模板](https://cloud.tencent.com/document/product/266/102586#50604b3f-0286-4a10-a3f7-18218116aff7)。
+删除视频重生模板。
+     */
   async DeleteRebuildMediaTemplate(
     req: DeleteRebuildMediaTemplateRequest,
     cb?: (error: string, rep: DeleteRebuildMediaTemplateResponse) => void
@@ -1663,8 +1666,9 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 使用模板发起音画质重生。
-   */
+     * 该 API 已经<font color=red>不再维护</font>，请使用新版接口 [音画质重生](https://cloud.tencent.com/document/api/266/102571)。
+使用模板发起音画质重生。
+     */
   async EnhanceMediaByTemplate(
     req: EnhanceMediaByTemplateRequest,
     cb?: (error: string, rep: EnhanceMediaByTemplateResponse) => void
@@ -1683,8 +1687,9 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建音画质重生模板。
-   */
+     * 该 API 已经<font color=red>不再维护</font>，新版 [音画质重生](https://cloud.tencent.com/document/product/266/102571) 接口使用预置模板，详情请参见 [音画质重生模板](https://cloud.tencent.com/document/product/266/102586#50604b3f-0286-4a10-a3f7-18218116aff7)。
+创建音画质重生模板。
+     */
   async CreateEnhanceMediaTemplate(
     req: CreateEnhanceMediaTemplateRequest,
     cb?: (error: string, rep: CreateEnhanceMediaTemplateResponse) => void
@@ -1693,8 +1698,9 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建视频重生模板。
-   */
+     * 该 API 已经<font color=red>不再维护</font>，新版 [音画质重生](https://cloud.tencent.com/document/product/266/102571) 接口使用预置模板，详情请参见 [音画质重生模板](https://cloud.tencent.com/document/product/266/102586#50604b3f-0286-4a10-a3f7-18218116aff7)。
+创建视频重生模板。
+     */
   async CreateRebuildMediaTemplate(
     req: CreateRebuildMediaTemplateRequest,
     cb?: (error: string, rep: CreateRebuildMediaTemplateResponse) => void
@@ -2190,8 +2196,9 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改音画质重生模板。
-   */
+     * 该 API 已经<font color=red>不再维护</font>，新版 [音画质重生](https://cloud.tencent.com/document/product/266/102571) 接口使用预置模板，详情请参见 [音画质重生模板](https://cloud.tencent.com/document/product/266/102586#50604b3f-0286-4a10-a3f7-18218116aff7)。
+修改音画质重生模板。
+     */
   async ModifyEnhanceMediaTemplate(
     req: ModifyEnhanceMediaTemplateRequest,
     cb?: (error: string, rep: ModifyEnhanceMediaTemplateResponse) => void
@@ -2463,8 +2470,9 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取音画质重生模板列表。
-   */
+     * 该 API 已经<font color=red>不再维护</font>，新版 [音画质重生](https://cloud.tencent.com/document/product/266/102571) 接口使用预置模板，详情请参见 [音画质重生模板](https://cloud.tencent.com/document/product/266/102586#50604b3f-0286-4a10-a3f7-18218116aff7)。
+获取音画质重生模板列表。
+     */
   async DescribeEnhanceMediaTemplates(
     req: DescribeEnhanceMediaTemplatesRequest,
     cb?: (error: string, rep: DescribeEnhanceMediaTemplatesResponse) => void
@@ -2626,8 +2634,9 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 使用模板发起视频重生。
-   */
+     * 该 API 已经<font color=red>不再维护</font>，请使用新版接口 [音画质重生](https://cloud.tencent.com/document/api/266/102571)。
+使用模板发起视频重生。
+     */
   async RebuildMediaByTemplate(
     req: RebuildMediaByTemplateRequest,
     cb?: (error: string, rep: RebuildMediaByTemplateResponse) => void
@@ -2708,8 +2717,9 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除音画质重生模板。
-   */
+     * 该 API 已经<font color=red>不再维护</font>，新版 [音画质重生](https://cloud.tencent.com/document/product/266/102571) 接口使用预置模板，详情请参见 [音画质重生模板](https://cloud.tencent.com/document/product/266/102586#50604b3f-0286-4a10-a3f7-18218116aff7)。
+删除音画质重生模板。
+     */
   async DeleteEnhanceMediaTemplate(
     req: DeleteEnhanceMediaTemplateRequest,
     cb?: (error: string, rep: DeleteEnhanceMediaTemplateResponse) => void
@@ -2718,8 +2728,9 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取视频重生模板列表。
-   */
+     * 该 API 已经<font color=red>不再维护</font>，新版 [音画质重生](https://cloud.tencent.com/document/product/266/102571) 接口使用预置模板，详情请参见 [音画质重生模板](https://cloud.tencent.com/document/product/266/102586#50604b3f-0286-4a10-a3f7-18218116aff7)。
+获取视频重生模板列表。
+     */
   async DescribeRebuildMediaTemplates(
     req: DescribeRebuildMediaTemplatesRequest,
     cb?: (error: string, rep: DescribeRebuildMediaTemplatesResponse) => void

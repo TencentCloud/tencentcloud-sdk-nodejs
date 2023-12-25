@@ -583,6 +583,107 @@ export interface KeyValue {
 }
 
 /**
+ * EMR产品配置
+ */
+export interface EmrProductConfigDetail {
+  /**
+   * 软件信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SoftInfo?: Array<string>
+  /**
+   * Master节点个数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MasterNodeSize?: number
+  /**
+   * Core节点个数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CoreNodeSize?: number
+  /**
+   * Task节点个数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskNodeSize?: number
+  /**
+   * Common节点个数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ComNodeSize?: number
+  /**
+   * Master节点资源
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MasterResource?: ResourceDetail
+  /**
+   * Core节点资源
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CoreResource?: ResourceDetail
+  /**
+   * Task节点资源
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskResource?: ResourceDetail
+  /**
+   * Common节点资源
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ComResource?: ResourceDetail
+  /**
+   * 是否使用COS
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OnCos?: boolean
+  /**
+   * 收费类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ChargeType?: number
+  /**
+   * Router节点个数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RouterNodeSize?: number
+  /**
+   * 是否支持HA
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SupportHA?: boolean
+  /**
+   * 是否支持安全模式
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SecurityOn?: boolean
+  /**
+   * 安全组名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SecurityGroup?: string
+  /**
+   * 是否开启Cbs加密
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CbsEncrypt?: number
+  /**
+   * 自定义应用角色。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ApplicationRole?: string
+  /**
+   * 安全组
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SecurityGroups?: Array<string>
+  /**
+   * SSH密钥Id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PublicKeyId?: string
+}
+
+/**
  * DescribeEmrApplicationStatics请求参数结构体
  */
 export interface DescribeEmrApplicationStaticsRequest {
@@ -725,57 +826,58 @@ export interface ClusterInstancesInfo {
    * ID号
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Id: number
+  Id?: number
   /**
    * 集群ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ClusterId: string
+  ClusterId?: string
   /**
    * 标题
 注意：此字段可能返回 null，表示取不到有效值。
+   * @deprecated
    */
-  Ftitle: string
+  Ftitle?: string
   /**
    * 集群名
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ClusterName: string
+  ClusterName?: string
   /**
    * 地域ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RegionId: number
+  RegionId?: number
   /**
    * 地区ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ZoneId: number
+  ZoneId?: number
   /**
    * 用户APPID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  AppId: number
+  AppId?: number
   /**
    * 用户UIN
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Uin: string
+  Uin?: string
   /**
    * 项目Id
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ProjectId: number
+  ProjectId?: number
   /**
    * 集群VPCID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  VpcId: number
+  VpcId?: number
   /**
    * 子网ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SubnetId: number
+  SubnetId?: number
   /**
    * 实例的状态码。取值范围：
 <li>2：表示集群运行中。</li>
@@ -807,157 +909,168 @@ export interface ClusterInstancesInfo {
 <li>302：表示扩容失败。</li>
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Status: number
+  Status?: number
   /**
    * 添加时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  AddTime: string
+  AddTime?: string
   /**
    * 已经运行时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RunTime: string
+  RunTime?: string
   /**
    * 集群产品配置信息
 注意：此字段可能返回 null，表示取不到有效值。
+   * @deprecated
    */
-  Config: EmrProductConfigOutter
+  Config?: EmrProductConfigOutter
   /**
    * 主节点外网IP
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  MasterIp: string
+  MasterIp?: string
   /**
    * EMR版本
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  EmrVersion: string
+  EmrVersion?: string
   /**
    * 收费类型
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ChargeType: number
+  ChargeType?: number
   /**
    * 交易版本
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TradeVersion: number
+  TradeVersion?: number
   /**
    * 资源订单ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ResourceOrderId: number
+  ResourceOrderId?: number
   /**
    * 是否计费集群
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  IsTradeCluster: number
+  IsTradeCluster?: number
   /**
    * 集群错误状态告警信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  AlarmInfo: string
+  AlarmInfo?: string
   /**
    * 是否采用新架构
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  IsWoodpeckerCluster: number
+  IsWoodpeckerCluster?: number
   /**
    * 元数据库信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  MetaDb: string
+  MetaDb?: string
   /**
    * 标签信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Tags: Array<Tag>
+  Tags?: Array<Tag>
   /**
    * Hive元数据信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  HiveMetaDb: string
+  HiveMetaDb?: string
   /**
    * 集群类型:EMR,CLICKHOUSE,DRUID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ServiceClass: string
+  ServiceClass?: string
   /**
    * 集群所有节点的别名序列化
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  AliasInfo: string
+  AliasInfo?: string
   /**
    * 集群版本Id
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ProductId: number
+  ProductId?: number
   /**
    * 地区ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Zone: string
+  Zone?: string
   /**
    * 场景名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SceneName: string
+  SceneName?: string
   /**
    * 场景化集群类型
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SceneServiceClass: string
+  SceneServiceClass?: string
   /**
    * 场景化EMR版本
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SceneEmrVersion: string
+  SceneEmrVersion?: string
   /**
    * 场景化集群类型
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DisplayName: string
+  DisplayName?: string
   /**
    * vpc name
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  VpcName: string
+  VpcName?: string
   /**
    * subnet name
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SubnetName: string
+  SubnetName?: string
   /**
    * 集群依赖关系
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ClusterExternalServiceInfo: Array<ClusterExternalServiceInfo>
+  ClusterExternalServiceInfo?: Array<ClusterExternalServiceInfo>
   /**
    * 集群vpcid 字符串类型
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  UniqVpcId: string
+  UniqVpcId?: string
   /**
    * 子网id 字符串类型
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  UniqSubnetId: string
+  UniqSubnetId?: string
   /**
    * 节点信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TopologyInfoList: Array<TopologyInfo>
+  TopologyInfoList?: Array<TopologyInfo>
   /**
    * 是否是跨AZ集群
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  IsMultiZoneCluster: boolean
+  IsMultiZoneCluster?: boolean
   /**
    * 是否开通异常节点自动补偿
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  IsCvmReplace: boolean
+  IsCvmReplace?: boolean
+  /**
+   * 标题
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ClusterTitle?: string
+  /**
+   * 集群产品配置信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ConfigDetail?: EmrProductConfigDetail
 }
 
 /**
@@ -2168,6 +2281,16 @@ export interface AutoScaleRecord {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CompensateCount?: number
+  /**
+   * 重试次数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RetryCount?: number
+  /**
+   * 重试信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RetryInfo?: string
 }
 
 /**
@@ -2742,22 +2865,22 @@ export interface DescribeClusterNodesResponse {
   /**
    * 查询到的节点总数
    */
-  TotalCnt: number
+  TotalCnt?: number
   /**
    * 节点详细信息列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  NodeList: Array<NodeHardwareInfo>
+  NodeList?: Array<NodeHardwareInfo>
   /**
    * 用户所有的标签键列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TagKeys: Array<string>
+  TagKeys?: Array<string>
   /**
    * 资源类型列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  HardwareResourceTypeList: Array<string>
+  HardwareResourceTypeList?: Array<string>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3270,10 +3393,12 @@ export interface DescribeCvmQuotaResponse {
 export interface SearchItem {
   /**
    * 支持搜索的类型
+注意：此字段可能返回 null，表示取不到有效值。
    */
   SearchType: string
   /**
    * 支持搜索的值
+注意：此字段可能返回 null，表示取不到有效值。
    */
   SearchValue: string
 }
@@ -3400,6 +3525,57 @@ export interface UserAndGroup {
 }
 
 /**
+ * 资源详情
+ */
+export interface ResourceDetail {
+  /**
+   * 规格
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Spec: string
+  /**
+   * 规格名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SpecName: string
+  /**
+   * 硬盘类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StorageType: number
+  /**
+   * 硬盘类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DiskType: string
+  /**
+   * 系统盘大小
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RootSize: number
+  /**
+   * 内存大小
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MemSize: number
+  /**
+   * CPU个数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Cpu: number
+  /**
+   * 硬盘大小
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DiskSize: number
+  /**
+   * 规格
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceType: string
+}
+
+/**
  * 引导脚本
  */
 export interface BootstrapAction {
@@ -3442,6 +3618,10 @@ export interface DescribeClusterNodesRequest {
 注意：现在只支持以上取值，输入其他值会导致错误。
    */
   NodeFlag: string
+  /**
+   * 导出全部节点信息csv时是否携带cdb信息
+   */
+  ExportDb?: boolean
   /**
    * 页编号，默认值为0，表示第一页。
    */
@@ -3759,6 +3939,10 @@ export interface ScriptBootstrapActionConfig {
    * 脚本文件名
    */
   CosFileName?: string
+  /**
+   * 备注
+   */
+  Remark?: string
 }
 
 /**

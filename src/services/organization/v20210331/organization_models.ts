@@ -508,7 +508,7 @@ export interface CreateOrganizationMemberResponse {
    * 成员Uin。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Uin: number
+  Uin?: number
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1081,82 +1081,82 @@ export interface DescribeOrganizationResponse {
    * 企业组织ID。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  OrgId: number
+  OrgId?: number
   /**
    * 创建者UIN。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  HostUin: number
+  HostUin?: number
   /**
    * 创建者昵称。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  NickName: string
+  NickName?: string
   /**
    * 企业组织类型。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  OrgType: number
+  OrgType?: number
   /**
    * 是否组织管理员。是：true ，否：false
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  IsManager: boolean
+  IsManager?: boolean
   /**
    * 策略类型。财务管理：Financial
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  OrgPolicyType: string
+  OrgPolicyType?: string
   /**
    * 策略名。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  OrgPolicyName: string
+  OrgPolicyName?: string
   /**
    * 成员财务权限列表。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  OrgPermission: Array<OrgPermission>
+  OrgPermission?: Array<OrgPermission>
   /**
    * 组织根节点ID。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RootNodeId: number
+  RootNodeId?: number
   /**
    * 组织创建时间。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CreateTime: string
+  CreateTime?: string
   /**
    * 成员加入时间。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  JoinTime: string
+  JoinTime?: string
   /**
    * 成员是否允许退出。允许：Allow，不允许：Denied
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  IsAllowQuit: string
+  IsAllowQuit?: string
   /**
    * 代付者Uin。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  PayUin: string
+  PayUin?: string
   /**
    * 代付者名称。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  PayName: string
+  PayName?: string
   /**
    * 是否可信服务管理员。是：true，否：false
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  IsAssignManager: boolean
+  IsAssignManager?: boolean
   /**
    * 是否实名主体管理员。是：true，否：false
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  IsAuthManager: boolean
+  IsAuthManager?: boolean
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

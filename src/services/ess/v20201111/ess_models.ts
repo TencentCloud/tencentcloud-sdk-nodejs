@@ -4176,6 +4176,8 @@ export interface CreateDocumentRequest {
 <ul>
 <li>支持自动签传递印章，可通过指定自动签控件id，指定印章id来完成</li>
 </ul>
+注：只有在控制台编辑模板时，<font color="red">归属给发起方</font>的填写控件（如下图）才能在创建文档的时候进行内容填充。
+![image](https://qcloudimg.tencent-cloud.cn/raw/a54a76a58c454593d06d8e9883ecc9b3.png)
    */
   FormFields?: Array<FormField>
   /**
@@ -4275,8 +4277,8 @@ export interface CreateEmbedWebUrlRequest {
 <li>PREVIEW_SEAL_LIST：生成预览印章列表的嵌入页面</li>
 <li>PREVIEW_SEAL_DETAIL：生成预览印章详情的嵌入页面</li>
 <li>EXTEND_SERVICE：生成拓展服务的嵌入页面</li>
-<li>PREVIEW_FLOW：生成预览合同的嵌入页面</li>
-<li>PREVIEW_FLOW_DETAIL：生成查看合同详情的嵌入页面</li></ul>
+<li>PREVIEW_FLOW：生成预览合同的嵌入页面（支持移动端）</li>
+<li>PREVIEW_FLOW_DETAIL：生成查看合同详情的嵌入页面（仅支持PC端）</li></ul>
    */
   EmbedType: string
   /**
@@ -6045,10 +6047,6 @@ export interface Component {
    */
   ComponentType: string
   /**
-   * <font color="red">【暂未使用】</font>控件所属文件的序号（取值为：0-N）。 目前单文件的情况下，值一直为0
-   */
-  FileIndex: number
-  /**
    * **在绝对定位方式和关键字定位方式下**，指定控件的高度， 控件高度是指控件在PDF文件中的高度，单位为pt（点）。
 
    */
@@ -6074,6 +6072,17 @@ export interface Component {
    * **在绝对定位方式和关键字定位方式下**，可以指定控件纵向位置的位置，单位为pt（点）。
    */
   ComponentPosY: number
+  /**
+   * <font color="red">【暂未使用】</font>控件所属文件的序号（取值为：0-N）。 目前单文件的情况下，值一直为0
+   */
+  FileIndex: number
+  /**
+   * 控件生成的方式：
+<ul><li> <b>NORMAL</b> : 绝对定位控件</li>
+<li> <b>FIELD</b> : 表单域</li>
+<li> <b>KEYWORD</b> : 关键字（设置关键字时，请确保PDF原始文件内是关键字以文字形式保存在PDF文件中，不支持对图片内文字进行关键字查找）</li></ul>
+   */
+  GenerateMode?: string
   /**
    * 控件唯一ID。
 
@@ -6176,21 +6185,6 @@ export interface Component {
    */
   ComponentValue?: string
   /**
-   * 控件生成的方式：
-<ul><li> <b>NORMAL</b> : 绝对定位控件</li>
-<li> <b>FIELD</b> : 表单域</li>
-<li> <b>KEYWORD</b> : 关键字（设置关键字时，请确保PDF原始文件内是关键字以文字形式保存在PDF文件中，不支持对图片内文字进行关键字查找）</li></ul>
-   */
-  GenerateMode?: string
-  /**
-   * <font color="red">【暂未使用】</font>日期签署控件的字号，默认为 12
-   */
-  ComponentDateFontSize?: number
-  /**
-   * <font color="red">【暂未使用】</font>第三方应用集成平台模板控件 ID 标识
-   */
-  ChannelComponentId?: string
-  /**
    * **如果控件是关键字定位方式**，可以对关键字定位出来的区域进行横坐标方向的调整，单位为pt（点）。例如，如果关键字定位出来的区域偏左或偏右，可以通过调整横坐标方向的参数来使控件位置更加准确。
 注意： `向左调整设置为负数， 向右调整设置成正数`
 注意：此字段可能返回 null，表示取不到有效值。
@@ -6202,12 +6196,6 @@ export interface Component {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   OffsetY?: number
-  /**
-   * <font color="red">【暂未使用】</font>第三方应用集成中子客企业控件来源。
-<ul><li> <b>0</b> :平台指定；</li>
-<li> <b>1</b> :用户自定义</li></ul>
-   */
-  ChannelComponentSource?: number
   /**
    * **如果控件是关键字定位方式**，指定关键字排序规则时，可以选择Positive或Reverse两种排序方式。
 <ul><li> <b>Positive</b> :表示正序，即根据关键字在PDF文件内的顺序进行排列</li>
@@ -6250,6 +6238,20 @@ export interface Component {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ForbidMoveAndDelete?: boolean
+  /**
+   * <font color="red">【暂未使用】</font>日期签署控件的字号，默认为 12
+   */
+  ComponentDateFontSize?: number
+  /**
+   * <font color="red">【暂未使用】</font>第三方应用集成平台模板控件 ID 标识
+   */
+  ChannelComponentId?: string
+  /**
+   * <font color="red">【暂未使用】</font>第三方应用集成中子客企业控件来源。
+<ul><li> <b>0</b> :平台指定；</li>
+<li> <b>1</b> :用户自定义</li></ul>
+   */
+  ChannelComponentSource?: number
 }
 
 /**
