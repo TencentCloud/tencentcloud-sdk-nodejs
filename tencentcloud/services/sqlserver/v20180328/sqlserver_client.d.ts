@@ -68,7 +68,7 @@ export declare class Client extends AbstractClient {
      */
     ModifyDBInstanceNetwork(req: ModifyDBInstanceNetworkRequest, cb?: (error: string, rep: ModifyDBInstanceNetworkResponse) => void): Promise<ModifyDBInstanceNetworkResponse>;
     /**
-     * 本接口（CreateCloudReadOnlyDBInstances）用于添加只读副本实例(虚拟机版本)。
+     * 本接口（CreateCloudReadOnlyDBInstances）用于创建只读实例 (云盘)。
      */
     CreateCloudReadOnlyDBInstances(req: CreateCloudReadOnlyDBInstancesRequest, cb?: (error: string, rep: CreateCloudReadOnlyDBInstancesResponse) => void): Promise<CreateCloudReadOnlyDBInstancesResponse>;
     /**
@@ -148,7 +148,7 @@ export declare class Client extends AbstractClient {
      */
     DeleteDBInstance(req: DeleteDBInstanceRequest, cb?: (error: string, rep: DeleteDBInstanceResponse) => void): Promise<DeleteDBInstanceResponse>;
     /**
-     * 本接口（CreateBusinessDBInstances）用于创建商业智能服务实例。
+     * 本接口（CreateBusinessDBInstances）用于创建商业智能服务实例 (云盘)。
      */
     CreateBusinessDBInstances(req: CreateBusinessDBInstancesRequest, cb?: (error: string, rep: CreateBusinessDBInstancesResponse) => void): Promise<CreateBusinessDBInstancesResponse>;
     /**
@@ -252,7 +252,7 @@ export declare class Client extends AbstractClient {
      */
     CreateDB(req: CreateDBRequest, cb?: (error: string, rep: CreateDBResponse) => void): Promise<CreateDBResponse>;
     /**
-     * 本接口（CreateCloudDBInstances）用于创建高可用实例(虚拟机版本)。
+     * 本接口（CreateCloudDBInstances）用于创建高可用实例 (云盘)。
      */
     CreateCloudDBInstances(req: CreateCloudDBInstancesRequest, cb?: (error: string, rep: CreateCloudDBInstancesResponse) => void): Promise<CreateCloudDBInstancesResponse>;
     /**
@@ -318,7 +318,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeFlowStatus(req: DescribeFlowStatusRequest, cb?: (error: string, rep: DescribeFlowStatusResponse) => void): Promise<DescribeFlowStatusResponse>;
     /**
-     * 本接口（CreateBasicDBInstances）用于创建SQL server基础版实例。
+     * 本接口（CreateBasicDBInstances）用于创建基础版实例 (云盘)。
      */
     CreateBasicDBInstances(req: CreateBasicDBInstancesRequest, cb?: (error: string, rep: CreateBasicDBInstancesResponse) => void): Promise<CreateBasicDBInstancesResponse>;
     /**
@@ -326,7 +326,7 @@ export declare class Client extends AbstractClient {
      */
     RestartDBInstance(req: RestartDBInstanceRequest, cb?: (error: string, rep: RestartDBInstanceResponse) => void): Promise<RestartDBInstanceResponse>;
     /**
-     * 本接口（CreateDBInstances）用于创建实例。
+     * 本接口（CreateDBInstances）用于创建高可用实例 (本地盘)
      */
     CreateDBInstances(req: CreateDBInstancesRequest, cb?: (error: string, rep: CreateDBInstancesResponse) => void): Promise<CreateDBInstancesResponse>;
     /**
@@ -422,7 +422,7 @@ export declare class Client extends AbstractClient {
      */
     RecycleDBInstance(req: RecycleDBInstanceRequest, cb?: (error: string, rep: RecycleDBInstanceResponse) => void): Promise<RecycleDBInstanceResponse>;
     /**
-     * 本接口（CreateReadOnlyDBInstances）用于添加只读副本实例。
+     * 本接口（CreateReadOnlyDBInstances）用于创建只读实例 (本地盘)。
      */
     CreateReadOnlyDBInstances(req: CreateReadOnlyDBInstancesRequest, cb?: (error: string, rep: CreateReadOnlyDBInstancesResponse) => void): Promise<CreateReadOnlyDBInstancesResponse>;
     /**

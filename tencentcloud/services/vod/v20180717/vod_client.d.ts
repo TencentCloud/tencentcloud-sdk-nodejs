@@ -27,7 +27,7 @@ export declare class Client extends AbstractClient {
     ExtractTraceWatermark(req: ExtractTraceWatermarkRequest, cb?: (error: string, rep: ExtractTraceWatermarkResponse) => void): Promise<ExtractTraceWatermarkResponse>;
     /**
      * 用于异步获取文件属性。
-- 当前仅支持获取源文件的 Md5。
+- 当前仅支持获取源文件的 Md5、Sha1。
 - 对输入文件为 HLS 或 DASH 的情况，仅获取索引文件的属性。
      */
     DescribeFileAttributes(req: DescribeFileAttributesRequest, cb?: (error: string, rep: DescribeFileAttributesResponse) => void): Promise<DescribeFileAttributesResponse>;
@@ -576,6 +576,7 @@ export declare class Client extends AbstractClient {
     ProcessMedia(req: ProcessMediaRequest, cb?: (error: string, rep: ProcessMediaResponse) => void): Promise<ProcessMediaResponse>;
     /**
      * 创建片头片尾模板。
+- 最大支持模版数量为 100 个。
      */
     CreateHeadTailTemplate(req: CreateHeadTailTemplateRequest, cb?: (error: string, rep: CreateHeadTailTemplateResponse) => void): Promise<CreateHeadTailTemplateResponse>;
     /**

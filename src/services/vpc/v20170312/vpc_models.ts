@@ -11057,6 +11057,14 @@ export interface ModifyCcnAttributeRequest {
    * CCN描述信息，最大长度不能超过100个字节，限制：CcnName和CcnDescription必须至少选择一个参数输入，否则报错。
    */
   CcnDescription?: string
+  /**
+   * 是否开启等价路由功能。`False` 不开启，`True` 开启。
+   */
+  RouteECMPFlag?: boolean
+  /**
+   * 是否开启路由重叠功能。`False` 不开启，`True` 开启。
+   */
+  RouteOverlapFlag?: boolean
 }
 
 /**

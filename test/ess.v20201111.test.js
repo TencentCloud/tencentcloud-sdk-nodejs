@@ -118,9 +118,9 @@ it("ess.v20201111.CreateUserAutoSignEnableUrl", async function () {
     }
 })
 
-it("ess.v20201111.CreateIntegrationRole", async function () {
+it("ess.v20201111.CreateFlowGroupSignReview", async function () {
     try {
-       const data = await client.CreateIntegrationRole({})
+       const data = await client.CreateFlowGroupSignReview({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -481,6 +481,16 @@ it("ess.v20201111.CreateConvertTaskApi", async function () {
 it("ess.v20201111.DescribeFlowBriefs", async function () {
     try {
        const data = await client.DescribeFlowBriefs({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ess.v20201111.CreateIntegrationRole", async function () {
+    try {
+       const data = await client.CreateIntegrationRole({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

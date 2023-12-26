@@ -118,7 +118,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyDBInstanceNetwork", req, cb);
     }
     /**
-     * 本接口（CreateCloudReadOnlyDBInstances）用于添加只读副本实例(虚拟机版本)。
+     * 本接口（CreateCloudReadOnlyDBInstances）用于创建只读实例 (云盘)。
      */
     async CreateCloudReadOnlyDBInstances(req, cb) {
         return this.request("CreateCloudReadOnlyDBInstances", req, cb);
@@ -238,7 +238,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteDBInstance", req, cb);
     }
     /**
-     * 本接口（CreateBusinessDBInstances）用于创建商业智能服务实例。
+     * 本接口（CreateBusinessDBInstances）用于创建商业智能服务实例 (云盘)。
      */
     async CreateBusinessDBInstances(req, cb) {
         return this.request("CreateBusinessDBInstances", req, cb);
@@ -394,7 +394,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateDB", req, cb);
     }
     /**
-     * 本接口（CreateCloudDBInstances）用于创建高可用实例(虚拟机版本)。
+     * 本接口（CreateCloudDBInstances）用于创建高可用实例 (云盘)。
      */
     async CreateCloudDBInstances(req, cb) {
         return this.request("CreateCloudDBInstances", req, cb);
@@ -492,7 +492,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeFlowStatus", req, cb);
     }
     /**
-     * 本接口（CreateBasicDBInstances）用于创建SQL server基础版实例。
+     * 本接口（CreateBasicDBInstances）用于创建基础版实例 (云盘)。
      */
     async CreateBasicDBInstances(req, cb) {
         return this.request("CreateBasicDBInstances", req, cb);
@@ -504,7 +504,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("RestartDBInstance", req, cb);
     }
     /**
-     * 本接口（CreateDBInstances）用于创建实例。
+     * 本接口（CreateDBInstances）用于创建高可用实例 (本地盘)
      */
     async CreateDBInstances(req, cb) {
         return this.request("CreateDBInstances", req, cb);
@@ -648,7 +648,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("RecycleDBInstance", req, cb);
     }
     /**
-     * 本接口（CreateReadOnlyDBInstances）用于添加只读副本实例。
+     * 本接口（CreateReadOnlyDBInstances）用于创建只读实例 (本地盘)。
      */
     async CreateReadOnlyDBInstances(req, cb) {
         return this.request("CreateReadOnlyDBInstances", req, cb);

@@ -466,6 +466,25 @@ export interface DescribeBackupDownloadTaskResponse {
 }
 
 /**
+ * 修改实例节点详情
+ */
+export interface AddNodeList {
+  /**
+   * 需要删除的节点角色。
+- SECONDARY：Mongod 节点。
+- READONLY：只读节点。
+- MONGOS：Mongos 节点。
+   */
+  Role: string
+  /**
+   * 节点所对应的可用区。
+- 单可用区，所有节点在同一可用区。
+- 多可用区：当前标准规格是三可用区分布，主从节点不在同一可用区，需注意配置新增节点对应的可用区，且新增后必须满足任意2个可用区节点数大于第3个可用区原则。
+   */
+  Zone: string
+}
+
+/**
  * FlushInstanceRouterConfig请求参数结构体
  */
 export interface FlushInstanceRouterConfigRequest {
@@ -997,6 +1016,14 @@ export interface ModifyDBInstanceSpecRequest {
 <b>说明</b>：调整节点数和分片数不支持在<b>维护时间窗内</b>变更。</li></ul>
    */
   InMaintenance?: number
+  /**
+   * 新增节点属性列表。
+   */
+  AddNodeList?: Array<AddNodeList>
+  /**
+   * 删除节点属性列表。
+   */
+  RemoveNodeList?: Array<RemoveNodeList>
 }
 
 /**
@@ -1369,13 +1396,29 @@ export interface UserInfo {
 }
 
 /**
- * DescribeInstanceParams请求参数结构体
+ * 修改实例节点详情
  */
-export interface DescribeInstanceParamsRequest {
+export interface RemoveNodeList {
   /**
-   * 指定待查询参数列表的实例ID。例如：cmgo-p8vn****。请登录 [MongoDB 控制台](https://console.cloud.tencent.com/mongodb)在实例列表复制实例 ID。
+   * 需要删除的节点角色。
+- SECONDARY：Mongod 节点。
+- READONLY：只读节点。
+- MONGOS：Mongos 节点。
    */
-  InstanceId: string
+  Role: string
+  /**
+   * 要删除的节点 ID。分片集群须指定一组分片要删除的节点名称即可，其余分片对改组对齐。
+
+- 获取方式：登录 [MongoDB控制台](https://console.cloud.tencent.com/)，在**节点管理**页签，可获取**节点 ID**。
+- 特别说明：分片集群同一节点上的分片，仅需指定0分片节点 ID 即可。例如：cmgo-6hfk****_0-node-primary。
+   */
+  NodeName: string
+  /**
+   * 节点所对应的可用区。
+- 单可用区，所有节点在同一可用区。
+- 多可用区：当前标准规格是三可用区分布，主从节点不在同一可用区，需注意配置所删除节点对应的可用区，且删除后必须满足任意2个可用区节点数大于第3个可用区原则。
+   */
+  Zone: string
 }
 
 /**
@@ -2428,6 +2471,16 @@ export interface DescribeInstanceParamsResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeInstanceParams请求参数结构体
+ */
+export interface DescribeInstanceParamsRequest {
+  /**
+   * 指定待查询参数列表的实例ID。例如：cmgo-p8vn****。请登录 [MongoDB 控制台](https://console.cloud.tencent.com/mongodb)在实例列表复制实例 ID。
+   */
+  InstanceId: string
 }
 
 /**

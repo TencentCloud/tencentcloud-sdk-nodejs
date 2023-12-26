@@ -849,7 +849,7 @@ export class Client extends AbstractClient {
 
   /**
      * 用于异步获取文件属性。
-- 当前仅支持获取源文件的 Md5。
+- 当前仅支持获取源文件的 Md5、Sha1。
 - 对输入文件为 HLS 或 DASH 的情况，仅获取索引文件的属性。
      */
   async DescribeFileAttributes(
@@ -1961,8 +1961,9 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建片头片尾模板。
-   */
+     * 创建片头片尾模板。
+- 最大支持模版数量为 100 个。
+     */
   async CreateHeadTailTemplate(
     req: CreateHeadTailTemplateRequest,
     cb?: (error: string, rep: CreateHeadTailTemplateResponse) => void

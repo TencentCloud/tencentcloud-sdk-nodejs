@@ -188,7 +188,7 @@ export interface IntentionQuestionResult {
 -301: "意愿核验不通过"   
 -800: "前端不兼容错误"    
 -801: "用户未授权摄像头和麦克风权限"   
--802: "获取视频流失败"   
+-802: "核验流程异常中断，请勿切屏或进行其他操作"   
 -803: "用户主动关闭链接/异常断开链接"   
 -998: "系统数据异常"   
 -999: "系统未知错误，请联系人工核实"   
@@ -204,34 +204,34 @@ export interface IntentionQuestionResult {
    * 视频base64（其中包含全程问题和回答音频，mp4格式）
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Video: string
+  Video?: string
   /**
    * 屏幕截图base64列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ScreenShot: Array<string>
+  ScreenShot?: Array<string>
   /**
    * 和答案匹配结果列表
 0：成功，-1：不匹配
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ResultCode: Array<string>
+  ResultCode?: Array<string>
   /**
    * 回答问题语音识别结果列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  AsrResult: Array<string>
+  AsrResult?: Array<string>
   /**
    * 答案录音音频
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Audios: Array<string>
+  Audios?: Array<string>
   /**
    * 意愿核身最终结果：
 0：认证通过，-1：认证未通过，-2：浏览器内核不兼容，无法进行意愿校验。建议使用“FinalResultDetailCode”参数获取详细的错误码信息。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  FinalResultCode: string
+  FinalResultCode?: string
 }
 
 /**
@@ -2525,7 +2525,7 @@ export interface IntentionActionResult {
 -301: "意愿核验不通过"   
 -800: "前端不兼容错误"    
 -801: "用户未授权摄像头和麦克风权限"   
--802: "获取视频流失败"   
+-802: "核验流程异常中断，请勿切屏或进行其他操作"   
 -803: "用户主动关闭链接/异常断开链接"   
 -998: "系统数据异常"   
 -999: "系统未知错误，请联系人工核实"   

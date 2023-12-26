@@ -3317,7 +3317,7 @@ export interface ExportAssetCoreModuleListRequest {
   /**
    * 过滤条件。
 <li>Name- string - 是否必填：否 - 包名</li>
-<li>User- string - 是否必填：否 - 用户</li>
+<li>User- string - 是否必填：否 - 用户名</li>
    */
   Filters?: Array<AssetFilters>
   /**
@@ -4233,9 +4233,9 @@ jar: Jar包
 initservice: 启动服务
 planTask:计划任务
 env:环境变量
-coremoudle:内核模块
+coremodule:内核模块
    */
-  Types: Array<AssetKeyVal>
+  Types?: Array<AssetKeyVal>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6734,7 +6734,7 @@ export interface DescribeAssetMachineDetailResponse {
   /**
    * 主机详情
    */
-  MachineDetail: AssetMachineDetail
+  MachineDetail?: AssetMachineDetail
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -8653,7 +8653,7 @@ export interface ExportAssetWebFrameListResponse {
   /**
    * 异步下载任务ID，需要配合ExportTasks接口使用
    */
-  TaskId: string
+  TaskId?: string
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -18747,11 +18747,11 @@ export interface DescribeFileTamperRulesResponse {
    * 规则列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  List: Array<FileTamperRuleInfo>
+  List?: Array<FileTamperRuleInfo>
   /**
    * 总数
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -18971,7 +18971,7 @@ export interface ExportAssetSystemPackageListRequest {
 <li>StartTime - String - 是否必填：否 - 安装开始时间</li>
 <li>EndTime - String - 是否必填：否 - 安装开始时间</li>
 <li>Type - int - 是否必填：否 - 安装包类型：
-1:rmp
+1:rpm
 2:dpkg
 3:java
 4:system</li>
@@ -22690,11 +22690,11 @@ export interface DescribeMalWareListResponse {
    * 木马列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  MalWareList: Array<MalWareList>
+  MalWareList?: Array<MalWareList>
   /**
    * 总数量
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -23365,15 +23365,9 @@ export interface KeysLocalStorageResponse {
 export interface DescribeAssetMachineListRequest {
   /**
    * 过滤条件。
-<li>MachineName  主机名称
-
-
-
-InstanceID  实例ID  
-
- 
-
-IP   内网IP或公网IP</li>
+<li>MachineName  主机名称</li>
+<li>InstanceID  实例ID  </li>
+<li>IP   内网IP或公网IP</li>
 <li>OsType - String - 是否必填：否 - windows或linux</li>
 <li>CpuLoad - Int - 是否必填：否 - 
 0: 未知  1: 低负载
@@ -24676,7 +24670,7 @@ export interface ExportAssetCoreModuleListResponse {
   /**
    * 异步下载任务ID，需要配合ExportTasks接口使用
    */
-  TaskId: string
+  TaskId?: string
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -29268,7 +29262,7 @@ export interface DescribeFileTamperRulesRequest {
   /**
    * 过滤条件。
 <li>RuleCategory- string- 规则类别  0=系统规则，1=用户规则</li>
-<li>Name- String - 规则名称/li>
+<li>Name- String - 规则名称</li>
    */
   Filters?: Array<Filters>
   /**
@@ -30506,8 +30500,8 @@ export interface DescribeAssetUserListRequest {
 <li>OsType - String - 是否必填：否 - windows或linux</li>
 <li>Status - uint64 - 是否必填：否 - 账号状态：0-禁用；1-启用</li>
 <li>UserType - uint64 - 是否必填：否 - 账号类型：0访客用户，1标准用户，2管理员用户 仅windows</li>
-<li>IsDomain - uint64 - 是否必填：否 - 是否域账号：0 不是，1是 仅windows
-<li>IsRoot - uint64 - 是否必填：否 - 是否Root权限：0 不是，1是 仅linux
+<li>IsDomain - uint64 - 是否必填：否 - 是否域账号：0 不是，1是 仅windows</li>
+<li>IsRoot - uint64 - 是否必填：否 - 是否Root权限：0 不是，1是 仅linux</li>
 <li>IsSudo - uint64 - 是否必填：否 - 是否Sudo权限：0 不是，1是 仅linux</li>
 <li>IsSshLogin - uint64 - 是否必填：否 - 是否ssh登录：0 不是，1是 仅linux</li>
 <li>ShellLoginStatus - uint64 - 是否必填：否 - 是否shell登录性，0不是；1是 仅linux</li>

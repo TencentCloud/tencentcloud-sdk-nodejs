@@ -1655,6 +1655,11 @@ export interface BillDetail {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     BillMonth?: string;
+    /**
+     * 账单记录ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Id?: string;
 }
 /**
  * CreateSavingPlanOrder请求参数结构体
@@ -2455,22 +2460,22 @@ export interface DescribeDosageDetailByDateResponse {
      * 计量单位
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Unit: string;
+    Unit?: string;
     /**
      * 用量数组
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DetailSets: Array<DetailSet>;
+    DetailSets?: Array<DetailSet>;
     /**
      * 错误码
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    RetCode: number;
+    RetCode?: number;
     /**
      * 错误信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    RetMsg: string;
+    RetMsg?: string;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -3088,6 +3093,8 @@ export interface DescribeDosageDetailByDateRequest {
   10227 视频直播带宽(国内)
   100763 视频直播流量(海外)
   100762 视频直播宽带(海外)
+  
+  仅支持以上产品
      */
     ProductCode: string;
     /**
@@ -3100,6 +3107,10 @@ export interface DescribeDosageDetailByDateRequest {
   2、如果传入实例名，则返回该实例明细
      */
     InstanceID?: string;
+    /**
+     * 支付者的账号 ID（账号 ID 是用户在腾讯云的唯一账号标识），默认查询本账号账单，如集团管理账号需查询成员账号自付的账单，该字段需入参成员账号UIN
+     */
+    PayerUin?: string;
 }
 /**
  * 地域过滤条件

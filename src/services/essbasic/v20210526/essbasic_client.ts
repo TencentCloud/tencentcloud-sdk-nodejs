@@ -62,6 +62,8 @@ import {
   DownloadFlowInfo,
   FlowApproverUrlInfo,
   ChannelCreateWebThemeConfigRequest,
+  NeedReviewApproverInfo,
+  CreateFlowGroupSignReviewResponse,
   ChannelCreateConvertTaskApiRequest,
   ChannelCreateFlowByFilesRequest,
   UploadFilesResponse,
@@ -194,6 +196,7 @@ import {
   ChannelUpdateSealStatusRequest,
   ChannelCreateFlowGroupByTemplatesRequest,
   SignUrl,
+  CreateFlowGroupSignReviewRequest,
   ChannelBillUsageDetail,
   DescribeBillUsageDetailRequest,
   RelieveInfo,
@@ -245,11 +248,22 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 提交企业流程审批结果
-目前存在两种审核操作，签署审核，发起审核
-签署审核：通过接口（CreateFlowsByTemplates或ChannelCreateFlowByFiles或ChannelCreatePrepareFlow）发起签署流程后，若指定了参数 NeedSignReview 为true,则可以调用此接口，指定operate=SignReview，提交企业内部签署审批结果；若签署流程状态正常，且本企业存在签署方未签署，同一签署流程可以多次提交签署审批结果，签署时的最后一个“审批结果”有效
-
-发起审核：通过接口ChannelCreatePrepareFlow指定发起后需要审核，则可以通过调用此接口，指定operate=CreateReview，提交企业内部审批结果，可多次提交，当通过后，后续提交结果无效
+     * 提交企业流程审批结果 
+**当前存在两种审核操作：**
+<ul>
+<li>签署审核
+<ul>
+<li>在通过接口<ul><li>CreateFlowsByTemplates</li><li>ChannelCreateFlowByFiles</li><li>ChannelCreateFlowGroupByTemplates</li><li>ChannelCreateFlowGroupByFiles</li><li>ChannelCreatePrepareFlow</li></ul> 发起签署流程时，通过指定NeedSignReview为true，则可以调用此接口，并指定operate=SignReview，以提交企业内部签署审批结果</li>
+<li>在通过接口<ul><li>CreateFlowsByTemplates</li><li>ChannelCreateFlowByFiles</li><li>ChannelCreateFlowGroupByTemplates</li><li>ChannelCreateFlowGroupByFiles</li></ul>发起签署流程时，通过指定签署人ApproverNeedSignReview为true，则可以调用此接口，并指定operate=SignReview，并指定RecipientId，以提交企业内部签署审批结果</li>
+</ul>
+</li>
+<li>发起审核
+ <ul>
+<li>通过接口ChannelCreatePrepareFlow指定发起后需要审核，那么可以调用此接口，并指定operate=CreateReview，以提交企业内部审批结果。可以多次提交审批结果，但一旦审批通过，后续提交的结果将无效
+</li>
+</ul>
+</li>
+</ul>
      */
   async ChannelCreateFlowSignReview(
     req: ChannelCreateFlowSignReviewRequest,
@@ -1215,6 +1229,21 @@ Web链接访问后，会根据子客企业(**Agent中ProxyOrganizationOpenId表�
     cb?: (error: string, rep: DescribeResourceUrlsByFlowsResponse) => void
   ): Promise<DescribeResourceUrlsByFlowsResponse> {
     return this.request("DescribeResourceUrlsByFlows", req, cb)
+  }
+
+  /**
+     * 1. 在使用[通过多文件创建合同组签署流程](https://qian.tencent.com/developers/partnerApis/startFlows/ChannelCreateFlowGroupByFiles)或[通过多模板创建合同组签署流程](https://qian.tencent.com/developers/partnerApis/startFlows/ChannelCreateFlowGroupByTemplates)创建合同组签署流程时，若指定了参数以下参数为true,则可以调用此接口提交企业内部签署审批结果,即使是自动签署也需要进行审核通过才会进行签署。
+  - [FlowInfo.NeedSignReview](https://qian.tencent.com/developers/partnerApis/dataTypes/#flowinfo)
+  - [FlowFileInfo.NeedSignReview](https://qian.tencent.com/developers/partnerApis/dataTypes/#flowfileinfo)
+  - [FlowApproverInfo.ApproverNeedSignReview](https://qian.tencent.com/developers/partnerApis/dataTypes/#flowapproverinfo) 
+
+2. 同一合同组，同一签署人可以多次提交签署审批结果，签署时的最后一个“审批结果”有效。
+     */
+  async CreateFlowGroupSignReview(
+    req: CreateFlowGroupSignReviewRequest,
+    cb?: (error: string, rep: CreateFlowGroupSignReviewResponse) => void
+  ): Promise<CreateFlowGroupSignReviewResponse> {
+    return this.request("CreateFlowGroupSignReview", req, cb)
   }
 
   /**

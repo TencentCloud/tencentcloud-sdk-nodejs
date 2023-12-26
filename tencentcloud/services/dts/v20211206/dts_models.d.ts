@@ -163,52 +163,52 @@ export interface DifferenceItem {
      * 数据库名
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Db: string;
+    Db?: string;
     /**
      * 表名
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Table: string;
+    Table?: string;
     /**
      * 分块号
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Chunk: number;
+    Chunk?: number;
     /**
      * 源库数值
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SrcItem: string;
+    SrcItem?: string;
     /**
      * 目标库数值
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DstItem: string;
+    DstItem?: string;
     /**
      * 索引名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    IndexName: string;
+    IndexName?: string;
     /**
      * 索引下边界
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    LowerBoundary: string;
+    LowerBoundary?: string;
     /**
      * 索引上边界
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    UpperBoundary: string;
+    UpperBoundary?: string;
     /**
      * 对比消耗时间,单位为 ms
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CostTime: number;
+    CostTime?: number;
     /**
      * 完成时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    FinishedAt: string;
+    FinishedAt?: string;
 }
 /**
  * CreateModifyCheckSyncJob请求参数结构体
@@ -520,12 +520,12 @@ export interface DescribeMigrateDBInstancesResponse {
      * 符合筛选条件的数量
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 实例列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Instances: Array<MigrateDBItem>;
+    Instances?: Array<MigrateDBItem>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -788,42 +788,42 @@ export interface DetailCheckItem {
      * 检查项的名称，如：源实例权限检查
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CheckItemName: string;
+    CheckItemName?: string;
     /**
      * 检查项详细内容
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Description: string;
+    Description?: string;
     /**
      * pass(通过)，failed(失败), warning(校验有警告，但仍通过)
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CheckResult: string;
+    CheckResult?: string;
     /**
      * 检查项失败原因
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    FailureReason: string;
+    FailureReason?: string;
     /**
      * 解决方案
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Solution: string;
+    Solution?: string;
     /**
      * 运行报错日志
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ErrorLog: Array<string>;
+    ErrorLog?: Array<string>;
     /**
      * 详细帮助的文档链接
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    HelpDoc: Array<string>;
+    HelpDoc?: Array<string>;
     /**
      * 跳过风险文案
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SkipInfo: string;
+    SkipInfo?: string;
 }
 /**
  * DescribeCompareTasks请求参数结构体
@@ -878,22 +878,22 @@ export interface ErrorInfoItem {
      * 错误码
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Code: string;
+    Code?: string;
     /**
      * 解决方案
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Solution: string;
+    Solution?: string;
     /**
      * 错误日志信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ErrorLog: string;
+    ErrorLog?: string;
     /**
      * 文档提示
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    HelpDoc: string;
+    HelpDoc?: string;
 }
 /**
  * RecoverSyncJob返回参数结构体
@@ -1321,32 +1321,32 @@ export interface ProcessProgress {
      * 步骤的状态， 包括：notStarted(未开始)、running(运行中)、success(成功)、failed(失败)等
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Status: string;
+    Status?: string;
     /**
      * 进度信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Percent: number;
+    Percent?: number;
     /**
      * 总的步骤数
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    StepAll: number;
+    StepAll?: number;
     /**
      * 当前进行的步骤
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    StepNow: number;
+    StepNow?: number;
     /**
      * 当前步骤输出提示信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Message: string;
+    Message?: string;
     /**
      * 步骤信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Steps: Array<StepDetailInfo>;
+    Steps?: Array<StepDetailInfo>;
 }
 /**
  * SkipSyncCheckItem请求参数结构体
@@ -1931,17 +1931,17 @@ export interface ProcessStepTip {
      * 提示信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Message: string;
+    Message?: string;
     /**
      * 解决方案
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Solution: string;
+    Solution?: string;
     /**
      * 文档提示
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    HelpDoc: string;
+    HelpDoc?: string;
 }
 /**
  * ModifyCompareTask请求参数结构体
@@ -2094,94 +2094,94 @@ export interface JobItem {
      * 数据迁移任务ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    JobId: string;
+    JobId?: string;
     /**
      * 数据迁移任务名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    JobName: string;
+    JobName?: string;
     /**
      * 任务创建(提交)时间，格式为 yyyy-mm-dd hh:mm:ss
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CreateTime: string;
+    CreateTime?: string;
     /**
      * 任务更新时间，格式为 yyyy-mm-dd hh:mm:ss
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    UpdateTime: string;
+    UpdateTime?: string;
     /**
      * 任务开始执行时间，格式为 yyyy-mm-dd hh:mm:ss
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    StartTime: string;
+    StartTime?: string;
     /**
      * 任务执行结束时间，格式为 yyyy-mm-dd hh:mm:ss
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    EndTime: string;
+    EndTime?: string;
     /**
      * 迁移任务错误信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    BriefMsg: string;
+    BriefMsg?: string;
     /**
      * 任务状态，取值为：creating(创建中)、created(创建完成)、checking(校验中)、checkPass(校验通过)、checkNotPass(校验不通过)、readyRun(准备运行)、running(任务运行)、readyComplete(准备完成)、success(任务成功)、failed(任务失败)、stopping(中止中)、completing(完成中)、
   pausing(暂停中)、
   manualPaused(已暂停)
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Status: string;
+    Status?: string;
     /**
      * 任务运行模式，值包括：immediate(立即运行)，timed(定时运行)
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    RunMode: string;
+    RunMode?: string;
     /**
      * 期待启动时间，当RunMode取值为timed时，此值必填，形如：2022-07-11 16:20:49
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ExpectRunTime: string;
+    ExpectRunTime?: string;
     /**
      * 任务操作信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Action: MigrateAction;
+    Action?: MigrateAction;
     /**
      * 迁移执行过程信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    StepInfo: MigrateDetailInfo;
+    StepInfo?: MigrateDetailInfo;
     /**
      * 源实例信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SrcInfo: DBEndpointInfo;
+    SrcInfo?: DBEndpointInfo;
     /**
      * 目标端信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DstInfo: DBEndpointInfo;
+    DstInfo?: DBEndpointInfo;
     /**
      * 数据一致性校验结果
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CompareTask: CompareTaskInfo;
+    CompareTask?: CompareTaskInfo;
     /**
      * 计费状态信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TradeInfo: TradeInfo;
+    TradeInfo?: TradeInfo;
     /**
      * 标签信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Tags: Array<TagItem>;
+    Tags?: Array<TagItem>;
     /**
      * 自动重试时间段信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    AutoRetryTimeRangeMinutes: number;
+    AutoRetryTimeRangeMinutes?: number;
     /**
      * 全量导出可重入标识：enum::"yes"/"no"。yes表示当前任务可重入、no表示当前任务处于全量导出且不可重入阶段；如果在该值为no时重启任务导出流程不支持断点续传
   注意：此字段可能返回 null，表示取不到有效值。
@@ -2444,57 +2444,57 @@ export interface TradeInfo {
      * 交易订单号
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DealName: string;
+    DealName?: string;
     /**
      * 上一次交易订单号
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    LastDealName: string;
+    LastDealName?: string;
     /**
      * 实例规格，包括：micro、small、medium、large、xlarge、2xlarge等
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    InstanceClass: string;
+    InstanceClass?: string;
     /**
      * 计费任务状态， normal(计费或待计费)、resizing(变配中)、reversing(冲正中，比较短暂的状态)、isolating(隔离中，比较短暂的状态)、isolated(已隔离)、offlining(下线中)、offlined(已下线)、notBilled(未计费)
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TradeStatus: string;
+    TradeStatus?: string;
     /**
      * 到期时间，格式为"yyyy-mm-dd hh:mm:ss"
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ExpireTime: string;
+    ExpireTime?: string;
     /**
      * 下线时间，格式为"yyyy-mm-dd hh:mm:ss"
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    OfflineTime: string;
+    OfflineTime?: string;
     /**
      * 隔离时间，格式为"yyyy-mm-dd hh:mm:ss"
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    IsolateTime: string;
+    IsolateTime?: string;
     /**
      * 下线原因
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    OfflineReason: string;
+    OfflineReason?: string;
     /**
      * 隔离原因
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    IsolateReason: string;
+    IsolateReason?: string;
     /**
      * 付费类型，包括：postpay(后付费)、prepay(预付费)
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    PayType: string;
+    PayType?: string;
     /**
      * 任务计费类型，包括：billing(计费)、notBilling(不计费)、 promotions(促销活动中)
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    BillingType: string;
+    BillingType?: string;
 }
 /**
  * StartCompare返回参数结构体
@@ -2538,7 +2538,7 @@ export interface CreateCompareTaskResponse {
      * 数据对比任务 ID，形如：dts-8yv4w2i1-cmp-37skmii9
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CompareTaskId: string;
+    CompareTaskId?: string;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2629,72 +2629,72 @@ export interface CompareAbstractInfo {
      * 校验配置参数
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Options: CompareOptions;
+    Options?: CompareOptions;
     /**
      * 一致性校验对比对象
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Objects: CompareObject;
+    Objects?: CompareObject;
     /**
      * 对比结论: same,different
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Conclusion: string;
+    Conclusion?: string;
     /**
      * 任务状态: success,failed
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Status: string;
+    Status?: string;
     /**
      * 总的表数量
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TotalTables: number;
+    TotalTables?: number;
     /**
      * 已校验的表数量
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CheckedTables: number;
+    CheckedTables?: number;
     /**
      * 不一致的表数量
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DifferentTables: number;
+    DifferentTables?: number;
     /**
      * 跳过校验的表数量
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SkippedTables: number;
+    SkippedTables?: number;
     /**
      * 预估表总数
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    NearlyTableCount: number;
+    NearlyTableCount?: number;
     /**
      * 不一致的数据行数量
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DifferentRows: number;
+    DifferentRows?: number;
     /**
      * 源库行数，当对比类型为**行数对比**时此项有意义
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SrcSampleRows: number;
+    SrcSampleRows?: number;
     /**
      * 目标库行数，当对比类型为**行数对比**时此项有意义
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DstSampleRows: number;
+    DstSampleRows?: number;
     /**
      * 开始时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    StartedAt: string;
+    StartedAt?: string;
     /**
      * 结束时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    FinishedAt: string;
+    FinishedAt?: string;
 }
 /**
  * 检查步骤
@@ -2704,37 +2704,37 @@ export interface CheckStep {
      * 步骤编号
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    StepNo: number;
+    StepNo?: number;
     /**
      * 步骤Id， 如：ConnectDBCheck、VersionCheck、SrcPrivilegeCheck等，具体校验项和源目标实例相关
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    StepId: string;
+    StepId?: string;
     /**
      * 步骤名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    StepName: string;
+    StepName?: string;
     /**
      * 此检查步骤的结果，pass(校验通过)、failed(校验失败)、notStarted(校验还未开始进行)、blocked(检验阻塞)、warning(校验有告警，但仍通过)
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    StepStatus: string;
+    StepStatus?: string;
     /**
      * 此检查步骤的错误消息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    StepMessage: string;
+    StepMessage?: string;
     /**
      * 每个检查步骤里的具体检查项
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DetailCheckItems: Array<DetailCheckItem>;
+    DetailCheckItems?: Array<DetailCheckItem>;
     /**
      * 是否已跳过
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    HasSkipped: boolean;
+    HasSkipped?: boolean;
 }
 /**
  * 一致性校验对象信息
@@ -3435,7 +3435,7 @@ export interface SyncJobInfo {
  */
 export interface CompareOptions {
     /**
-     * 对比类型：dataCheck(完整数据对比)、sampleDataCheck(抽样数据对比)、rowsCount(行数对比)
+     * 对比方式：dataCheck(完整数据对比)、sampleDataCheck(抽样数据对比)、rowsCount(行数对比)
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Method?: string;
@@ -3495,47 +3495,47 @@ export interface StepDetailInfo {
      * 步骤序列
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    StepNo: number;
+    StepNo?: number;
     /**
      * 步骤展现名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    StepName: string;
+    StepName?: string;
     /**
      * 步骤英文标识
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    StepId: string;
+    StepId?: string;
     /**
      * 步骤状态:success(成功)、failed(失败)、running(执行中)、notStarted(未执行)、默认为notStarted
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Status: string;
+    Status?: string;
     /**
      * 当前步骤开始的时间，格式为"yyyy-mm-dd hh:mm:ss"，该字段不存在或者为空是无意义 注意：此字段可能返回 null，表示取不到有效值。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    StartTime: string;
+    StartTime?: string;
     /**
      * 步骤错误信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    StepMessage: string;
+    StepMessage?: string;
     /**
      * 执行进度
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Percent: number;
+    Percent?: number;
     /**
      * 错误信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Errors: Array<ProcessStepTip>;
+    Errors?: Array<ProcessStepTip>;
     /**
      * 告警提示
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Warnings: Array<ProcessStepTip>;
+    Warnings?: Array<ProcessStepTip>;
 }
 /**
  * CreateSyncJob请求参数结构体
@@ -3658,17 +3658,17 @@ export interface SkippedItem {
      * 数据库名
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Db: string;
+    Db?: string;
     /**
      * 表名
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Table: string;
+    Table?: string;
     /**
      * 未发起检查的原因
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Reason: string;
+    Reason?: string;
 }
 /**
  * 数据同步view的描述

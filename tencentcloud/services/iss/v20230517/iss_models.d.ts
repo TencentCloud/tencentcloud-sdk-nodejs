@@ -24,7 +24,11 @@ export interface ListDevicesRequest {
      */
     IsContainSubLevel?: boolean;
     /**
-     * 设备接入协议。1:RTMP，2:GB，3:GW
+     * 是否包含当前用户已关联的设备，默认false
+     */
+    IsContainUser?: boolean;
+    /**
+     * 设备接入协议。1:RTMP，2:GB，3:GW，4:IVCP(私有协议)
      */
     AccessProtocol?: number;
     /**
@@ -40,7 +44,7 @@ export interface ListDevicesRequest {
      */
     ClusterId?: string;
     /**
-     * 模糊搜索设备关键字
+     * 模糊搜索设备的关键字
      */
     Keyword?: string;
     /**
@@ -1242,7 +1246,7 @@ export interface GatewayVersion {
  */
 export interface UpdateRecordBackupPlanModify {
     /**
-     * 录像计划名称（仅支持中文、英文、数字、_、-，长度不超过32个字符，计划名称全局唯一，不能为空，不能重复，不修改名称时，不需要该字段）
+     * 录像上云计划名称（仅支持中文、英文、数字、_、-，长度不超过32个字符，计划名称全局唯一，不能为空，不能重复，不修改名称时，不需要该字段）
      */
     PlanName?: string;
     /**
@@ -1250,7 +1254,7 @@ export interface UpdateRecordBackupPlanModify {
      */
     TemplateId?: string;
     /**
-     * 录像计划描述（仅支持中文、英文、数字、_、-，长度不超过128个字符， 不修改描述时，不需要该字段）
+     * 录像上云计划描述（仅支持中文、英文、数字、_、-，长度不超过128个字符， 不修改描述时，不需要该字段）
      */
     Describe?: string;
     /**
@@ -1291,7 +1295,7 @@ export interface UpdateAITaskRequest {
      */
     ChannelList?: Array<string>;
     /**
-     * AI 结果回调地址。类似 "http://ip:port/xxx或者https://domain/xxx
+     * AI 结果回调地址。类似 "http://ip:port/***或者https://domain/***
      */
     CallbackUrl?: string;
     /**
@@ -2192,7 +2196,7 @@ export interface ListDeviceInfo {
      */
     DeviceId?: string;
     /**
-     * 设备国标编码
+     * 设备编码
      */
     Code?: string;
     /**
@@ -2554,7 +2558,7 @@ export interface DescribeDeviceData {
      */
     DeviceId?: string;
     /**
-     * 设备编码（即我们为设备生成的20位国标编码）
+     * 设备编码（国标设备即我们为设备生成的20位国标编码，rtmp 设备为10 位设备编码）
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Code?: string;
@@ -3091,7 +3095,7 @@ export interface AddAITaskRequest {
      */
     Desc?: string;
     /**
-     * AI 结果回调地址。类似 "http://ip:port/xxx或者https://domain/xxx
+     * AI 结果回调地址。类似 "http://ip:port/***或者https://domain/***
      */
     CallbackUrl?: string;
     /**

@@ -2011,9 +2011,9 @@ export interface CreateWxCloudBaseRunServerDBClusterRequest {
      */
     DbVersion?: string;
     /**
-     * 0: 非大小写敏感
-  1: 大小写敏感
-  默认 0
+     * 0: 大小写敏感
+  1: 非大小写敏感
+  默认为0
      */
     LowerCaseTableName?: string;
 }

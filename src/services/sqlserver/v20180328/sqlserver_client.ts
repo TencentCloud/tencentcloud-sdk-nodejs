@@ -541,7 +541,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（CreateCloudReadOnlyDBInstances）用于添加只读副本实例(虚拟机版本)。
+   * 本接口（CreateCloudReadOnlyDBInstances）用于创建只读实例 (云盘)。
    */
   async CreateCloudReadOnlyDBInstances(
     req: CreateCloudReadOnlyDBInstancesRequest,
@@ -741,7 +741,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（CreateBusinessDBInstances）用于创建商业智能服务实例。
+   * 本接口（CreateBusinessDBInstances）用于创建商业智能服务实例 (云盘)。
    */
   async CreateBusinessDBInstances(
     req: CreateBusinessDBInstancesRequest,
@@ -1001,7 +1001,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（CreateCloudDBInstances）用于创建高可用实例(虚拟机版本)。
+   * 本接口（CreateCloudDBInstances）用于创建高可用实例 (云盘)。
    */
   async CreateCloudDBInstances(
     req: CreateCloudDBInstancesRequest,
@@ -1163,7 +1163,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（CreateBasicDBInstances）用于创建SQL server基础版实例。
+   * 本接口（CreateBasicDBInstances）用于创建基础版实例 (云盘)。
    */
   async CreateBasicDBInstances(
     req: CreateBasicDBInstancesRequest,
@@ -1183,7 +1183,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（CreateDBInstances）用于创建实例。
+   * 本接口（CreateDBInstances）用于创建高可用实例 (本地盘)
    */
   async CreateDBInstances(
     req: CreateDBInstancesRequest,
@@ -1423,7 +1423,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（CreateReadOnlyDBInstances）用于添加只读副本实例。
+   * 本接口（CreateReadOnlyDBInstances）用于创建只读实例 (本地盘)。
    */
   async CreateReadOnlyDBInstances(
     req: CreateReadOnlyDBInstancesRequest,

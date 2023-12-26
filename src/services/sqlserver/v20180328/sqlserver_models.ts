@@ -1914,11 +1914,11 @@ export interface CreateDBInstancesResponse {
   /**
    * 订单名称
    */
-  DealName: string
+  DealName?: string
   /**
    * 订单名称数组
    */
-  DealNames: Array<string>
+  DealNames?: Array<string>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

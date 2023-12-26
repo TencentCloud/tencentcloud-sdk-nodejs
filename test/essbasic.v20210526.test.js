@@ -518,6 +518,16 @@ it("essbasic.v20210526.DescribeResourceUrlsByFlows", async function () {
     }
 })
 
+it("essbasic.v20210526.CreateFlowGroupSignReview", async function () {
+    try {
+       const data = await client.CreateFlowGroupSignReview({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("essbasic.v20210526.ChannelCreateUserRoles", async function () {
     try {
        const data = await client.ChannelCreateUserRoles({})
