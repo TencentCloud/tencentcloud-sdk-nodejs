@@ -292,6 +292,45 @@ export interface CreateKTVRobotResponse {
 }
 
 /**
+ * DescribeKTVMusicAccompanySegmentUrlVip返回参数结构体
+ */
+export interface DescribeKTVMusicAccompanySegmentUrlVipResponse {
+  /**
+   * 0:成功获取 1:歌曲下架 2:无权限 3: 非包月会员 4:没有对应的链接
+   */
+  Status?: number
+  /**
+   * 伴奏链接
+
+   */
+  Url?: string
+  /**
+   * 伴奏类型，如mkv，mp3等
+
+   */
+  ExtName?: string
+  /**
+   * 高潮开始时间
+
+   */
+  SegmentBegin?: number
+  /**
+   * 高潮结束时间
+
+   */
+  SegmentEnd?: number
+  /**
+   * 链接文件大小 (单位:字节)
+
+   */
+  FileSize?: number
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 直播会员用户信息
  */
 export interface LiveVipUserInfo {
@@ -541,6 +580,28 @@ String：字符串类型
 }
 
 /**
+ * RechargeVip返回参数结构体
+ */
+export interface RechargeVipResponse {
+  /**
+   * 厂商订单号。
+   */
+  PartnerNo?: string
+  /**
+   * TME订单号。
+   */
+  OrderNo?: string
+  /**
+   * 订单创建时间。
+   */
+  CreateTime?: string
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 其它片段时间（可用于抢唱）
  */
 export interface KTVOtherSegments {
@@ -617,6 +678,20 @@ export interface KTVTagGroupInfo {
    * 标签列表。
    */
   TagInfoSet: Array<KTVTagInfo>
+}
+
+/**
+ * DescribeVipUserInfo请求参数结构体
+ */
+export interface DescribeVipUserInfoRequest {
+  /**
+   * 应用名称。
+   */
+  AppName: string
+  /**
+   * 用户标识。
+   */
+  UserId: string
 }
 
 /**
@@ -781,17 +856,29 @@ export interface SyncRobotCommand {
 }
 
 /**
- * SearchKTVMusics返回参数结构体
+ * DescribeVipUserInfo返回参数结构体
  */
-export interface SearchKTVMusicsResponse {
+export interface DescribeVipUserInfoResponse {
   /**
-   * 歌曲信息列表。
+   * 是否是会员。（0:不是会员 1:是会员）
    */
-  KTVMusicInfoSet?: Array<KTVMusicBaseInfo>
+  IsVip?: number
   /**
-   * 滚动标记，用于设置下次请求的 ScrollToken 参数。
+   * 主播id
    */
-  ScrollToken?: string
+  AnchorId?: string
+  /**
+   * 房间id
+   */
+  RoomId?: string
+  /**
+   * 会员过期时间
+   */
+  EndTime?: string
+  /**
+   * 会员状态。（-1:未开通过；1:已开通，未过期；2:已开通，已过期）
+   */
+  Status?: number
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -921,6 +1008,24 @@ export interface RechargeLiveVipRequest {
 }
 
 /**
+ * SearchKTVMusics返回参数结构体
+ */
+export interface SearchKTVMusicsResponse {
+  /**
+   * 歌曲信息列表。
+   */
+  KTVMusicInfoSet?: Array<KTVMusicBaseInfo>
+  /**
+   * 滚动标记，用于设置下次请求的 ScrollToken 参数。
+   */
+  ScrollToken?: string
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 副歌片段信息。
  */
 export interface ChorusClip {
@@ -932,6 +1037,32 @@ export interface ChorusClip {
    * 结束时间，单位：毫秒。
    */
   EndTime: number
+}
+
+/**
+ * RechargeVip请求参数结构体
+ */
+export interface RechargeVipRequest {
+  /**
+   * 应用名称。
+   */
+  AppName: string
+  /**
+   * 用户标识。
+   */
+  UserId: string
+  /**
+   * 房间Id。
+   */
+  RoomId: string
+  /**
+   * 充值会员天数。(取值有：31、93、186、372)
+   */
+  VipDays: number
+  /**
+   * 主播id。
+   */
+  AnchorId: string
 }
 
 /**
@@ -1264,6 +1395,24 @@ export interface SendMessageCommandInput {
    * 消息重复次数，默认为 1。
    */
   Repeat?: number
+}
+
+/**
+ * DescribeKTVMusicAccompanySegmentUrlVip请求参数结构体
+ */
+export interface DescribeKTVMusicAccompanySegmentUrlVipRequest {
+  /**
+   * 应用名称
+   */
+  AppName: string
+  /**
+   * 用户标识
+   */
+  UserId: string
+  /**
+   * 歌曲 Id
+   */
+  MusicId: string
 }
 
 /**

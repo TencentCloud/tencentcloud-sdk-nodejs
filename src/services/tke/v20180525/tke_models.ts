@@ -383,7 +383,7 @@ export interface CreateClusterNodePoolRequest {
    */
   LaunchConfigurePara: string
   /**
-   * InstanceAdvancedSettings 示例参数
+   * InstanceAdvancedSettings
    */
   InstanceAdvancedSettings: InstanceAdvancedSettings
   /**
@@ -402,6 +402,10 @@ export interface CreateClusterNodePoolRequest {
    * Taints互斥
    */
   Taints?: Array<Taint>
+  /**
+   * 节点Annotation 列表
+   */
+  Annotations?: Array<AnnotationValue>
   /**
    * 节点池纬度运行时类型及版本
    */
@@ -3890,6 +3894,10 @@ export interface NodePool {
    */
   Taints?: Array<Taint>
   /**
+   * 节点 Annotation 列表
+   */
+  Annotations?: Array<AnnotationValue>
+  /**
    * NodeCountSummary 节点列表
    */
   NodeCountSummary?: NodeCountSummary
@@ -5939,6 +5947,16 @@ export interface CreateClusterInstancesResponse {
    * 节点实例ID
    */
   InstanceIdSet?: Array<string>
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeleteReservedInstances返回参数结构体
+ */
+export interface DeleteReservedInstancesResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -10725,13 +10743,17 @@ export interface ClusterExtraArgs {
 }
 
 /**
- * DeleteClusterVirtualNodePool返回参数结构体
+ * 注释
  */
-export interface DeleteClusterVirtualNodePoolResponse {
+export interface AnnotationValue {
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 注释键
    */
-  RequestId?: string
+  Name: string
+  /**
+   * 注释值
+   */
+  Value: string
 }
 
 /**
@@ -11551,9 +11573,9 @@ export interface ModifyPrometheusAgentExternalLabelsRequest {
 }
 
 /**
- * DeleteReservedInstances返回参数结构体
+ * DeleteClusterVirtualNodePool返回参数结构体
  */
-export interface DeleteReservedInstancesResponse {
+export interface DeleteClusterVirtualNodePoolResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -12125,6 +12147,10 @@ export interface ModifyClusterNodePoolRequest {
    * 污点
    */
   Taints?: Array<Taint>
+  /**
+   * 节点 Annotation 列表
+   */
+  Annotations?: Array<AnnotationValue>
   /**
    * 是否开启伸缩
    */

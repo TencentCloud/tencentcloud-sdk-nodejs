@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { ApplyChorusResponse, DescribeKTVSuggestionsResponse, DestroyKTVRobotResponse, CreateKTVRobotRequest, SyncKTVRobotCommandRequest, DescribeKTVPlaylistDetailRequest, SyncKTVRobotCommandResponse, CreateKTVRobotResponse, DescribeKTVSuggestionsRequest, DescribeKTVMatchMusicsRequest, DescribeKTVPlaylistsResponse, RechargeLiveVipResponse, DescribeKTVPlaylistsRequest, DescribeKTVPlaylistDetailResponse, DescribeLiveVipTradeInfosRequest, DescribeKTVRobotsResponse, DescribeKTVMusicAccompanySegmentUrlRequest, BatchDescribeKTVMusicDetailsRequest, DescribeKTVMusicsByTagResponse, DescribeLiveVipTradeInfosResponse, SearchKTVMusicsResponse, DescribeKTVMatchMusicsResponse, DescribeKTVTagsResponse, RechargeLiveVipRequest, ApplyChorusRequest, BatchDescribeKTVMusicDetailsResponse, DescribeKTVMusicsByTagRequest, SearchKTVMusicsRequest, DescribeKTVMusicAccompanySegmentUrlResponse, DescribeUserInfoRequest, DestroyKTVRobotRequest, DescribeUserInfoResponse, DescribeKTVRobotsRequest, DescribeKTVTagsRequest } from "./yinsuda_models";
+import { ApplyChorusResponse, DescribeKTVSuggestionsResponse, DestroyKTVRobotResponse, CreateKTVRobotRequest, SyncKTVRobotCommandRequest, DescribeKTVPlaylistDetailRequest, SyncKTVRobotCommandResponse, CreateKTVRobotResponse, DescribeKTVMusicAccompanySegmentUrlVipResponse, DescribeKTVSuggestionsRequest, DescribeKTVMatchMusicsRequest, DescribeKTVPlaylistsResponse, RechargeLiveVipResponse, DescribeKTVPlaylistsRequest, DescribeKTVPlaylistDetailResponse, DescribeLiveVipTradeInfosRequest, RechargeVipResponse, DescribeKTVRobotsResponse, DescribeKTVMusicAccompanySegmentUrlRequest, DescribeVipUserInfoRequest, BatchDescribeKTVMusicDetailsRequest, DescribeKTVMusicsByTagResponse, DescribeLiveVipTradeInfosResponse, DescribeVipUserInfoResponse, DescribeKTVMatchMusicsResponse, DescribeKTVTagsResponse, RechargeLiveVipRequest, SearchKTVMusicsResponse, RechargeVipRequest, ApplyChorusRequest, BatchDescribeKTVMusicDetailsResponse, DescribeKTVMusicsByTagRequest, SearchKTVMusicsRequest, DescribeKTVMusicAccompanySegmentUrlResponse, DescribeUserInfoRequest, DescribeKTVMusicAccompanySegmentUrlVipRequest, DestroyKTVRobotRequest, DescribeUserInfoResponse, DescribeKTVRobotsRequest, DescribeKTVTagsRequest } from "./yinsuda_models";
 /**
  * yinsuda client
  * @class
@@ -20,17 +20,25 @@ export declare class Client extends AbstractClient {
      */
     DescribeKTVTags(req: DescribeKTVTagsRequest, cb?: (error: string, rep: DescribeKTVTagsResponse) => void): Promise<DescribeKTVTagsResponse>;
     /**
+     * 充值会员
+     */
+    RechargeVip(req: RechargeVipRequest, cb?: (error: string, rep: RechargeVipResponse) => void): Promise<RechargeVipResponse>;
+    /**
      * 根据歌单 Id 获取歌单详情。
      */
     DescribeKTVPlaylistDetail(req: DescribeKTVPlaylistDetailRequest, cb?: (error: string, rep: DescribeKTVPlaylistDetailResponse) => void): Promise<DescribeKTVPlaylistDetailResponse>;
     /**
-     * 下发操作机器人指令，支持播放、暂停、恢复、歌单设置等操作指令，实现对机器人行为的控制。
+     * 获取会员信息：获取用户是否开通会员
      */
-    SyncKTVRobotCommand(req: SyncKTVRobotCommandRequest, cb?: (error: string, rep: SyncKTVRobotCommandResponse) => void): Promise<SyncKTVRobotCommandResponse>;
+    DescribeVipUserInfo(req: DescribeVipUserInfoRequest, cb?: (error: string, rep: DescribeVipUserInfoResponse) => void): Promise<DescribeVipUserInfoResponse>;
     /**
      * 销毁机器人，机器人退出 RTC 房间。
      */
     DestroyKTVRobot(req: DestroyKTVRobotRequest, cb?: (error: string, rep: DestroyKTVRobotResponse) => void): Promise<DestroyKTVRobotResponse>;
+    /**
+     * 获取歌曲伴奏高潮的开始、结束时间，可用于抢唱
+     */
+    DescribeKTVMusicAccompanySegmentUrlVip(req: DescribeKTVMusicAccompanySegmentUrlVipRequest, cb?: (error: string, rep: DescribeKTVMusicAccompanySegmentUrlVipResponse) => void): Promise<DescribeKTVMusicAccompanySegmentUrlVipResponse>;
     /**
      * 根据关键词获取联想词列表。
      */
@@ -63,6 +71,10 @@ export declare class Client extends AbstractClient {
      * 获取歌曲伴奏片段链接，可用于抢唱
      */
     DescribeKTVMusicAccompanySegmentUrl(req: DescribeKTVMusicAccompanySegmentUrlRequest, cb?: (error: string, rep: DescribeKTVMusicAccompanySegmentUrlResponse) => void): Promise<DescribeKTVMusicAccompanySegmentUrlResponse>;
+    /**
+     * 下发操作机器人指令，支持播放、暂停、恢复、歌单设置等操作指令，实现对机器人行为的控制。
+     */
+    SyncKTVRobotCommand(req: SyncKTVRobotCommandRequest, cb?: (error: string, rep: SyncKTVRobotCommandResponse) => void): Promise<SyncKTVRobotCommandResponse>;
     /**
      * 根据输入的规则匹配曲库中的歌曲。
      */

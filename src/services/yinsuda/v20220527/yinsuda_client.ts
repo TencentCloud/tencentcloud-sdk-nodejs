@@ -33,6 +33,7 @@ import {
   SyncKTVRobotCommandResponse,
   KTVMusicDetailInfo,
   CreateKTVRobotResponse,
+  DescribeKTVMusicAccompanySegmentUrlVipResponse,
   LiveVipUserInfo,
   DescribeKTVSuggestionsRequest,
   DescribeKTVMatchMusicsRequest,
@@ -45,10 +46,12 @@ import {
   SetAudioParamCommandInput,
   KTVMatchMusic,
   TRTCJoinRoomInput,
+  RechargeVipResponse,
   KTVOtherSegments,
   DescribeKTVRobotsResponse,
   DescribeKTVMusicAccompanySegmentUrlRequest,
   KTVTagGroupInfo,
+  DescribeVipUserInfoRequest,
   BatchDescribeKTVMusicDetailsRequest,
   AMEMusicBaseInfo,
   DescribeKTVMusicsByTagResponse,
@@ -56,12 +59,14 @@ import {
   MusicAlbumInfo,
   SetPlayModeCommandInput,
   SyncRobotCommand,
-  SearchKTVMusicsResponse,
+  DescribeVipUserInfoResponse,
   KTVRobotInfo,
   DescribeKTVMatchMusicsResponse,
   DescribeKTVTagsResponse,
   RechargeLiveVipRequest,
+  SearchKTVMusicsResponse,
   ChorusClip,
+  RechargeVipRequest,
   SetPlaylistCommandInput,
   ApplyChorusRequest,
   BatchDescribeKTVMusicDetailsResponse,
@@ -75,6 +80,7 @@ import {
   KTVPlaylistBaseInfo,
   DescribeUserInfoRequest,
   SendMessageCommandInput,
+  DescribeKTVMusicAccompanySegmentUrlVipRequest,
   DestroyKTVRobotRequest,
   LiveVipTradeInfo,
   UserInfo,
@@ -124,6 +130,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 充值会员
+   */
+  async RechargeVip(
+    req: RechargeVipRequest,
+    cb?: (error: string, rep: RechargeVipResponse) => void
+  ): Promise<RechargeVipResponse> {
+    return this.request("RechargeVip", req, cb)
+  }
+
+  /**
    * 根据歌单 Id 获取歌单详情。
    */
   async DescribeKTVPlaylistDetail(
@@ -134,13 +150,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 下发操作机器人指令，支持播放、暂停、恢复、歌单设置等操作指令，实现对机器人行为的控制。
+   * 获取会员信息：获取用户是否开通会员
    */
-  async SyncKTVRobotCommand(
-    req: SyncKTVRobotCommandRequest,
-    cb?: (error: string, rep: SyncKTVRobotCommandResponse) => void
-  ): Promise<SyncKTVRobotCommandResponse> {
-    return this.request("SyncKTVRobotCommand", req, cb)
+  async DescribeVipUserInfo(
+    req: DescribeVipUserInfoRequest,
+    cb?: (error: string, rep: DescribeVipUserInfoResponse) => void
+  ): Promise<DescribeVipUserInfoResponse> {
+    return this.request("DescribeVipUserInfo", req, cb)
   }
 
   /**
@@ -151,6 +167,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DestroyKTVRobotResponse) => void
   ): Promise<DestroyKTVRobotResponse> {
     return this.request("DestroyKTVRobot", req, cb)
+  }
+
+  /**
+   * 获取歌曲伴奏高潮的开始、结束时间，可用于抢唱
+   */
+  async DescribeKTVMusicAccompanySegmentUrlVip(
+    req: DescribeKTVMusicAccompanySegmentUrlVipRequest,
+    cb?: (error: string, rep: DescribeKTVMusicAccompanySegmentUrlVipResponse) => void
+  ): Promise<DescribeKTVMusicAccompanySegmentUrlVipResponse> {
+    return this.request("DescribeKTVMusicAccompanySegmentUrlVip", req, cb)
   }
 
   /**
@@ -231,6 +257,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeKTVMusicAccompanySegmentUrlResponse) => void
   ): Promise<DescribeKTVMusicAccompanySegmentUrlResponse> {
     return this.request("DescribeKTVMusicAccompanySegmentUrl", req, cb)
+  }
+
+  /**
+   * 下发操作机器人指令，支持播放、暂停、恢复、歌单设置等操作指令，实现对机器人行为的控制。
+   */
+  async SyncKTVRobotCommand(
+    req: SyncKTVRobotCommandRequest,
+    cb?: (error: string, rep: SyncKTVRobotCommandResponse) => void
+  ): Promise<SyncKTVRobotCommandResponse> {
+    return this.request("SyncKTVRobotCommand", req, cb)
   }
 
   /**

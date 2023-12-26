@@ -46,22 +46,34 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeKTVTags", req, cb);
     }
     /**
+     * 充值会员
+     */
+    async RechargeVip(req, cb) {
+        return this.request("RechargeVip", req, cb);
+    }
+    /**
      * 根据歌单 Id 获取歌单详情。
      */
     async DescribeKTVPlaylistDetail(req, cb) {
         return this.request("DescribeKTVPlaylistDetail", req, cb);
     }
     /**
-     * 下发操作机器人指令，支持播放、暂停、恢复、歌单设置等操作指令，实现对机器人行为的控制。
+     * 获取会员信息：获取用户是否开通会员
      */
-    async SyncKTVRobotCommand(req, cb) {
-        return this.request("SyncKTVRobotCommand", req, cb);
+    async DescribeVipUserInfo(req, cb) {
+        return this.request("DescribeVipUserInfo", req, cb);
     }
     /**
      * 销毁机器人，机器人退出 RTC 房间。
      */
     async DestroyKTVRobot(req, cb) {
         return this.request("DestroyKTVRobot", req, cb);
+    }
+    /**
+     * 获取歌曲伴奏高潮的开始、结束时间，可用于抢唱
+     */
+    async DescribeKTVMusicAccompanySegmentUrlVip(req, cb) {
+        return this.request("DescribeKTVMusicAccompanySegmentUrlVip", req, cb);
     }
     /**
      * 根据关键词获取联想词列表。
@@ -110,6 +122,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeKTVMusicAccompanySegmentUrl(req, cb) {
         return this.request("DescribeKTVMusicAccompanySegmentUrl", req, cb);
+    }
+    /**
+     * 下发操作机器人指令，支持播放、暂停、恢复、歌单设置等操作指令，实现对机器人行为的控制。
+     */
+    async SyncKTVRobotCommand(req, cb) {
+        return this.request("SyncKTVRobotCommand", req, cb);
     }
     /**
      * 根据输入的规则匹配曲库中的歌曲。

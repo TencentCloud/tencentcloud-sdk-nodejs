@@ -193,7 +193,7 @@ export interface DescribeDetailedSingleProbeDataRequest {
      */
     Ascending: boolean;
     /**
-     * 选中字段
+     * 选中字段，如ProbeTime、TransferTime、TransferSize等。
      */
     SelectedFields: Array<string>;
     /**
@@ -248,6 +248,10 @@ export interface DescribeDetailedSingleProbeDataRequest {
      * es scroll查询id
      */
     ScrollID?: string;
+    /**
+     * 详情数据下载
+     */
+    QueryFlag?: string;
 }
 /**
  * DescribeProbeTasks返回参数结构体

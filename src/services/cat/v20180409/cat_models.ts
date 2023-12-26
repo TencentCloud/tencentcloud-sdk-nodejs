@@ -218,7 +218,7 @@ AnalyzeTaskType_MediaStream：音视频体验
    */
   Ascending: boolean
   /**
-   * 选中字段
+   * 选中字段，如ProbeTime、TransferTime、TransferSize等。
    */
   SelectedFields: Array<string>
   /**
@@ -273,6 +273,10 @@ AnalyzeTaskType_MediaStream：音视频体验
    * es scroll查询id
    */
   ScrollID?: string
+  /**
+   * 详情数据下载
+   */
+  QueryFlag?: string
 }
 
 /**

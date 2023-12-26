@@ -48,6 +48,16 @@ it("yinsuda.v20220527.DescribeKTVTags", async function () {
     }
 })
 
+it("yinsuda.v20220527.RechargeVip", async function () {
+    try {
+       const data = await client.RechargeVip({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("yinsuda.v20220527.DescribeKTVPlaylistDetail", async function () {
     try {
        const data = await client.DescribeKTVPlaylistDetail({})
@@ -58,9 +68,9 @@ it("yinsuda.v20220527.DescribeKTVPlaylistDetail", async function () {
     }
 })
 
-it("yinsuda.v20220527.SyncKTVRobotCommand", async function () {
+it("yinsuda.v20220527.DescribeVipUserInfo", async function () {
     try {
-       const data = await client.SyncKTVRobotCommand({})
+       const data = await client.DescribeVipUserInfo({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -71,6 +81,16 @@ it("yinsuda.v20220527.SyncKTVRobotCommand", async function () {
 it("yinsuda.v20220527.DestroyKTVRobot", async function () {
     try {
        const data = await client.DestroyKTVRobot({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("yinsuda.v20220527.DescribeKTVMusicAccompanySegmentUrlVip", async function () {
+    try {
+       const data = await client.DescribeKTVMusicAccompanySegmentUrlVip({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -151,6 +171,16 @@ it("yinsuda.v20220527.DescribeKTVRobots", async function () {
 it("yinsuda.v20220527.DescribeKTVMusicAccompanySegmentUrl", async function () {
     try {
        const data = await client.DescribeKTVMusicAccompanySegmentUrl({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("yinsuda.v20220527.SyncKTVRobotCommand", async function () {
+    try {
+       const data = await client.SyncKTVRobotCommand({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

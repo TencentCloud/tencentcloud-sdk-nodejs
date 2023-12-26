@@ -166,7 +166,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateDBInstance", req, cb);
     }
     /**
-     * 本接口(ModifyDBInstanceSpec)用于调整MongoDB云数据库实例配置。接口支持的售卖规格，可从查询云数据库的售卖规格（DescribeSpecInfo）获取。
+     * 本接口（ModifyDBInstanceSpec）用于调整MongoDB云数据库实例配置。接口支持的售卖规格，可从查询云数据库的售卖规格（DescribeSpecInfo）获取。
      */
     async ModifyDBInstanceSpec(req, cb) {
         return this.request("ModifyDBInstanceSpec", req, cb);

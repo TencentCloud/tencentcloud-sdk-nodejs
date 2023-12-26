@@ -5413,6 +5413,11 @@ export interface InstanceInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     MiniMaxQPS?: number;
+    /**
+     * 最近一次超量时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    LastQpsExceedTime?: string;
 }
 /**
  * CLB回调WAF接口（获取、删除）的参数

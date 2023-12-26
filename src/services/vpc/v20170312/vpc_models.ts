@@ -1067,6 +1067,10 @@ export interface AssignIpv6SubnetCidrBlockRequest {
    * 分配 `IPv6` 子网段列表。
    */
   Ipv6SubnetCidrBlocks: Array<Ipv6SubnetCidrBlock>
+  /**
+   * 用于保证请求幂等性的字符串。该字符串由客户生成，需保证不同请求之间唯一，最大值不超过64个ASCII字符。若不指定该参数，则无法保证请求的幂等性。
+   */
+  ClientToken?: string
 }
 
 /**
