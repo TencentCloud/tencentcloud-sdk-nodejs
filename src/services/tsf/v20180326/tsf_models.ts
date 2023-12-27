@@ -6204,7 +6204,7 @@ export interface DescribeUnitNamespacesResponse {
  */
 export interface ContinueRunFailedTaskBatchResponse {
   /**
-   * 成功或失败
+   * true：操作成功、false：操作失败
    */
   Result?: boolean
   /**

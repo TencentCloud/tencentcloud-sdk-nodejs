@@ -37,6 +37,7 @@ import {
   DescribeRuleDimStatResponse,
   DescribeInstanceLogsRequest,
   DescribeTaskAlarmRegulationsResponse,
+  DescribeTableLineageInfoRequest,
   CheckIntegrationTaskNameExistsResponse,
   DescribeWorkflowInfoByIdRequest,
   CreateDataSourceRequest,
@@ -84,6 +85,7 @@ import {
   EventPage,
   ModifyDimensionWeightResponse,
   DescribeInstanceByCycleReportResponse,
+  DescribeFieldBasicInfoResponse,
   DescribeRuleExecResultsByPageResponse,
   RuleGroupExecResult,
   MakeUpTasksByWorkflowResponse,
@@ -91,6 +93,7 @@ import {
   TaskInstanceDetail,
   BytesSpeed,
   CheckTaskNameExistRequest,
+  TablePropertyScore,
   ThresholdValue,
   DescribeFunctionKindsRequest,
   DescribeFunctionKindsResponse,
@@ -123,6 +126,7 @@ import {
   WorkflowTaskCountOpsDto,
   StageCloudApiRequest,
   DescribeDependOpsTasksRequest,
+  ColumnBasicInfo,
   DescribeClusterNamespaceListResponse,
   CreateInLongAgentResponse,
   RuleGroupTable,
@@ -208,7 +212,7 @@ import {
   DescribeTaskReportDetailListResponse,
   DescribeBaselineInstanceDagRequest,
   DescribeIntegrationStatisticsInstanceTrendResponse,
-  DescribeInstanceLogListRequest,
+  BatchReturn,
   RerunOpsMakePlanInstancesResponse,
   DescribeTableMetaRequest,
   RunnerRuleExecResult,
@@ -267,7 +271,7 @@ import {
   CreateTaskAlarmRegularRequest,
   ModifyRuleRequest,
   DescribeTableMetasResponse,
-  BatchReturn,
+  DescribeInstanceLogListRequest,
   DescribeDiagnosticInfoResponse,
   AlarmDsVO,
   DependencyConfigDsDTONoRecurV2,
@@ -327,6 +331,7 @@ import {
   SimpleDataSourceInfo,
   InstanceLogInfo,
   GetFileInfoRequest,
+  TableLineageBaseInfo,
   DescribeSonInstancesRequest,
   DescribeBaselinesResponse,
   DescribeTaskInstancesData,
@@ -355,6 +360,7 @@ import {
   AlarmReceiverInfo,
   GeneralTaskParam,
   CandidateDsDTo,
+  DescribeTableBasicInfoResponse,
   DescribeDiagnosticInfoByBaselineIdResponse,
   CompareRuleItem,
   ModifyRuleTemplateRequest,
@@ -443,6 +449,7 @@ import {
   RuleExecConfig,
   BaselineTaskDto,
   SearchConditionInstance,
+  TableBasicInfo,
   DescribeSchedulerRunTimeInstanceCntByStatusResponse,
   DescribeDataTypesRequest,
   RecordField,
@@ -481,7 +488,7 @@ import {
   RealTimeTaskInstanceNodeInfo,
   DeleteResourceFilesResponse,
   RerunInstancesRequest,
-  TablePropertyScore,
+  DescribeFieldBasicInfoRequest,
   DescribeEventIsAlarmTypesRequest,
   CreateOpsMakePlanResponse,
   DescribeStreamTaskLogListResponse,
@@ -597,6 +604,7 @@ import {
   ModifyTaskInfoResponse,
   DataCheckStat,
   CreateRuleRequest,
+  IntegrationNodeSchema,
   DescribeColumnsMetaResponse,
   DescribeRuleExecResultsResponse,
   DescribeTaskByStatusReportRequest,
@@ -743,7 +751,7 @@ import {
   ModifyExecStrategyResponse,
   BatchStartIntegrationTasksRequest,
   DescribeDatasourceResponse,
-  IntegrationNodeSchema,
+  DescribeTableBasicInfoRequest,
   DescribeDatasourceRequest,
   RuleExecStat,
   KillInstancesResponse,
@@ -782,6 +790,7 @@ import {
   TaskTypeMap,
   DescribeRuleDataSourcesResponse,
   DescribeAlarmReceiverResponse,
+  DescribeTableLineageInfoResponse,
   DlcExpiredSnapshotsInfo,
   DescribeWorkflowCanvasInfoResponse,
   DependencyConfig,
@@ -1255,13 +1264,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 提交自定义函数
+   * 元数据模型-字段基础信息查询接口
    */
-  async SubmitCustomFunction(
-    req: SubmitCustomFunctionRequest,
-    cb?: (error: string, rep: SubmitCustomFunctionResponse) => void
-  ): Promise<SubmitCustomFunctionResponse> {
-    return this.request("SubmitCustomFunction", req, cb)
+  async DescribeFieldBasicInfo(
+    req: DescribeFieldBasicInfoRequest,
+    cb?: (error: string, rep: DescribeFieldBasicInfoResponse) => void
+  ): Promise<DescribeFieldBasicInfoResponse> {
+    return this.request("DescribeFieldBasicInfo", req, cb)
   }
 
   /**
@@ -2302,13 +2311,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询表元数据详情
+   * 元数据模型-表基础信息查询接口
    */
-  async DescribeTableMeta(
-    req: DescribeTableMetaRequest,
-    cb?: (error: string, rep: DescribeTableMetaResponse) => void
-  ): Promise<DescribeTableMetaResponse> {
-    return this.request("DescribeTableMeta", req, cb)
+  async DescribeTableBasicInfo(
+    req: DescribeTableBasicInfoRequest,
+    cb?: (error: string, rep: DescribeTableBasicInfoResponse) => void
+  ): Promise<DescribeTableBasicInfoResponse> {
+    return this.request("DescribeTableBasicInfo", req, cb)
   }
 
   /**
@@ -2930,6 +2939,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: UploadContentResponse) => void
   ): Promise<UploadContentResponse> {
     return this.request("UploadContent", req, cb)
+  }
+
+  /**
+   * 提交自定义函数
+   */
+  async SubmitCustomFunction(
+    req: SubmitCustomFunctionRequest,
+    cb?: (error: string, rep: SubmitCustomFunctionResponse) => void
+  ): Promise<SubmitCustomFunctionResponse> {
+    return this.request("SubmitCustomFunction", req, cb)
   }
 
   /**
@@ -3985,6 +4004,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询表元数据详情
+   */
+  async DescribeTableMeta(
+    req: DescribeTableMetaRequest,
+    cb?: (error: string, rep: DescribeTableMetaResponse) => void
+  ): Promise<DescribeTableMetaResponse> {
+    return this.request("DescribeTableMeta", req, cb)
+  }
+
+  /**
      * 没用到
 
 获取kafka的topic信息
@@ -4034,6 +4063,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: BatchRerunIntegrationTaskInstancesResponse) => void
   ): Promise<BatchRerunIntegrationTaskInstancesResponse> {
     return this.request("BatchRerunIntegrationTaskInstances", req, cb)
+  }
+
+  /**
+   * 列出表血缘信息
+   */
+  async DescribeTableLineageInfo(
+    req: DescribeTableLineageInfoRequest,
+    cb?: (error: string, rep: DescribeTableLineageInfoResponse) => void
+  ): Promise<DescribeTableLineageInfoResponse> {
+    return this.request("DescribeTableLineageInfo", req, cb)
   }
 
   /**

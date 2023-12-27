@@ -214,7 +214,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeFileConfigs", req, cb);
     }
     /**
-     * 创建参数模版，并返回模版详细信息
+     * 创建参数模板，并返回模板详细信息
      */
     async CreateConfigTemplateWithDetailResp(req, cb) {
         return this.request("CreateConfigTemplateWithDetailResp", req, cb);

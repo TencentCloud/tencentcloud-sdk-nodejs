@@ -328,9 +328,9 @@ it("wedata.v20210820.ModifyRule", async function () {
     }
 })
 
-it("wedata.v20210820.SubmitCustomFunction", async function () {
+it("wedata.v20210820.DescribeFieldBasicInfo", async function () {
     try {
-       const data = await client.SubmitCustomFunction({})
+       const data = await client.DescribeFieldBasicInfo({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1358,9 +1358,9 @@ it("wedata.v20210820.DescribeInstanceList", async function () {
     }
 })
 
-it("wedata.v20210820.DescribeTableMeta", async function () {
+it("wedata.v20210820.DescribeTableBasicInfo", async function () {
     try {
-       const data = await client.DescribeTableMeta({})
+       const data = await client.DescribeTableBasicInfo({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1971,6 +1971,16 @@ it("wedata.v20210820.BatchMakeUpIntegrationTasks", async function () {
 it("wedata.v20210820.UploadContent", async function () {
     try {
        const data = await client.UploadContent({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("wedata.v20210820.SubmitCustomFunction", async function () {
+    try {
+       const data = await client.SubmitCustomFunction({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -3018,6 +3028,16 @@ it("wedata.v20210820.DescribeProject", async function () {
     }
 })
 
+it("wedata.v20210820.DescribeTableMeta", async function () {
+    try {
+       const data = await client.DescribeTableMeta({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("wedata.v20210820.DescribeKafkaTopicInfo", async function () {
     try {
        const data = await client.DescribeKafkaTopicInfo({})
@@ -3061,6 +3081,16 @@ it("wedata.v20210820.CreateOrUpdateResource", async function () {
 it("wedata.v20210820.BatchRerunIntegrationTaskInstances", async function () {
     try {
        const data = await client.BatchRerunIntegrationTaskInstances({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("wedata.v20210820.DescribeTableLineageInfo", async function () {
+    try {
+       const data = await client.DescribeTableLineageInfo({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

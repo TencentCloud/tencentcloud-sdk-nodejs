@@ -20,6 +20,11 @@
  */
 export interface RetryRunsResponse {
   /**
+   * 新的任务批次ID。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RunGroupId?: string
+  /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -595,13 +600,25 @@ export interface ResourceQuota {
  */
 export interface RetryRunsRequest {
   /**
-   * 关联项目ID。
+   * 项目ID。（不填使用指定地域下的默认项目）
    */
-  ProjectId: string
+  ProjectId?: string
   /**
-   * 任务UUID。
+   * 需要重试的任务批次ID。
    */
-  RunUuids: Array<string>
+  RunGroupId?: string
+  /**
+   * 需要重试的任务UUID。
+   */
+  RunUuids?: Array<string>
+  /**
+   * WDL运行选项，不填使用被重试的任务批次运行选项。
+   */
+  WDLOption?: RunOption
+  /**
+   * Nextflow运行选项，不填使用被重试的任务批次运行选项。
+   */
+  NFOption?: NFOption
 }
 
 /**

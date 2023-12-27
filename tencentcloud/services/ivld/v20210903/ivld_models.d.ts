@@ -1453,11 +1453,11 @@ export interface AppearIndexPair {
     /**
      * 出现信息，取值范围为[1，3]
      */
-    AppearIndex: number;
+    AppearIndex?: number;
     /**
-     * AppearInfo中AppearIndex对应元素的第Index元素，从0开始技术
+     * AppearInfo中AppearIndex对应元素的第Index元素，从0开始计数
      */
-    Index: number;
+    Index?: number;
 }
 /**
  * CreateTask返回参数结构体

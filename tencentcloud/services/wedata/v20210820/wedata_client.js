@@ -217,10 +217,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyRule", req, cb);
     }
     /**
-     * 提交自定义函数
+     * 元数据模型-字段基础信息查询接口
      */
-    async SubmitCustomFunction(req, cb) {
-        return this.request("SubmitCustomFunction", req, cb);
+    async DescribeFieldBasicInfo(req, cb) {
+        return this.request("DescribeFieldBasicInfo", req, cb);
     }
     /**
      * 规则组执行结果分页查询接口不带鉴权
@@ -852,10 +852,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeInstanceList", req, cb);
     }
     /**
-     * 查询表元数据详情
+     * 元数据模型-表基础信息查询接口
      */
-    async DescribeTableMeta(req, cb) {
-        return this.request("DescribeTableMeta", req, cb);
+    async DescribeTableBasicInfo(req, cb) {
+        return this.request("DescribeTableBasicInfo", req, cb);
     }
     /**
      * 告警接收人详情
@@ -1233,6 +1233,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async UploadContent(req, cb) {
         return this.request("UploadContent", req, cb);
+    }
+    /**
+     * 提交自定义函数
+     */
+    async SubmitCustomFunction(req, cb) {
+        return this.request("SubmitCustomFunction", req, cb);
     }
     /**
      * 获取关联父实例
@@ -1871,6 +1877,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeProject", req, cb);
     }
     /**
+     * 查询表元数据详情
+     */
+    async DescribeTableMeta(req, cb) {
+        return this.request("DescribeTableMeta", req, cb);
+    }
+    /**
      * 没用到
 
 获取kafka的topic信息
@@ -1901,6 +1913,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async BatchRerunIntegrationTaskInstances(req, cb) {
         return this.request("BatchRerunIntegrationTaskInstances", req, cb);
+    }
+    /**
+     * 列出表血缘信息
+     */
+    async DescribeTableLineageInfo(req, cb) {
+        return this.request("DescribeTableLineageInfo", req, cb);
     }
     /**
      * 离线任务实例详情

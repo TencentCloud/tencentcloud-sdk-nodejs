@@ -492,6 +492,39 @@ export interface DescribeTaskAlarmRegulationsResponse {
     RequestId?: string;
 }
 /**
+ * DescribeTableLineageInfo请求参数结构体
+ */
+export interface DescribeTableLineageInfoRequest {
+    /**
+     * 查询方向，INPUT,OUTPUT,BOTH枚举值
+     */
+    Direction: string;
+    /**
+     * 表信息
+     */
+    Data: TableLineageInfo;
+    /**
+     * 单次查询入度,默认 1
+     */
+    InputDepth?: number;
+    /**
+     * 单次查询出度,默认 1
+     */
+    OutputDepth?: number;
+    /**
+     * 额外参数（传递调用方信息）
+     */
+    ExtParams?: Array<LineageParamRecord>;
+    /**
+     * 是否过滤临时表,默认true
+     */
+    IgnoreTemp?: boolean;
+    /**
+     * 是否递归查询二级节点数目，默认为true
+     */
+    RecursiveSecond?: boolean;
+}
+/**
  * CheckIntegrationTaskNameExists返回参数结构体
  */
 export interface CheckIntegrationTaskNameExistsResponse {
@@ -2259,6 +2292,25 @@ export interface DescribeInstanceByCycleReportResponse {
     RequestId?: string;
 }
 /**
+ * DescribeFieldBasicInfo返回参数结构体
+ */
+export interface DescribeFieldBasicInfoResponse {
+    /**
+     * 字段元数据
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ColumnBasicInfoList?: Array<ColumnBasicInfo>;
+    /**
+     * 总条数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TotalCount?: number;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * DescribeRuleExecResultsByPage返回参数结构体
  */
 export interface DescribeRuleExecResultsByPageResponse {
@@ -2607,6 +2659,43 @@ export interface CheckTaskNameExistRequest {
      * 任务名
      */
     TaskName: string;
+}
+/**
+ * 按天更新的表的资产评分
+ */
+export interface TablePropertyScore {
+    /**
+     * 表ID
+     */
+    TableId: string;
+    /**
+     * 统计日期
+     */
+    DayTime: string;
+    /**
+     * 表完整性评分
+     */
+    Integrity: number;
+    /**
+     * 表保障性评分
+     */
+    Safety: number;
+    /**
+     * 表及时性评分
+     */
+    Timeliness: number;
+    /**
+     * 表稳定性评分
+     */
+    Stability: number;
+    /**
+     * 表规范性评分
+     */
+    Normative: number;
+    /**
+     * 资产评分平均分
+     */
+    Average: number;
 }
 /**
  * 数据质量阈值
@@ -3575,6 +3664,106 @@ export interface DescribeDependOpsTasksRequest {
      * 任务工作流id
      */
     WorkflowId: string;
+}
+/**
+ * 表的元数据信息
+ */
+export interface ColumnBasicInfo {
+    /**
+     * 表的全局唯一ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TableId?: string;
+    /**
+     * 数据源全局唯一ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DatasourceId?: string;
+    /**
+     * 数据源名
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DatasourceName?: string;
+    /**
+     * 数据库ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DatabaseId?: string;
+    /**
+     * 数据库名
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DatabaseName?: string;
+    /**
+     * 表名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TableName?: string;
+    /**
+     * 字段名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ColumnName?: string;
+    /**
+     * 数据类型,string/int等
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DataType?: string;
+    /**
+     * 字段类型, varchar(32)/int(10)等
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ColumnType?: string;
+    /**
+     * 字段默认值
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ColumnDefault?: string;
+    /**
+     * 索引类型, PRI/MUL/PARTITION等,普通字段该值为空串
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ColumnKey?: string;
+    /**
+     * 字段顺序标识
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ColumnPosition?: number;
+    /**
+     * 字段注释
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ColumnComment?: string;
+    /**
+     * 数据类型
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    StoreType?: string;
+    /**
+     * 所属项目ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ProjectId?: string;
+    /**
+     * 所属项目英文名
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ProjectName?: string;
+    /**
+     * 所属项目中文名
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ProjectDisplayName?: string;
+    /**
+     * 创建时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CreateTime?: string;
+    /**
+     * 更新时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    UpdateTime?: string;
 }
 /**
  * DescribeClusterNamespaceList返回参数结构体
@@ -6214,17 +6403,23 @@ export interface DescribeIntegrationStatisticsInstanceTrendResponse {
     RequestId?: string;
 }
 /**
- * DescribeInstanceLogList请求参数结构体
+ * 操作结果
  */
-export interface DescribeInstanceLogListRequest {
+export interface BatchReturn {
     /**
-     * 任务id
+     * 执行结果
      */
-    TaskId: string;
+    Result: boolean;
     /**
-     * 数据时间
+     * 执行情况备注
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    CurRunDate: string;
+    ErrorDesc: string;
+    /**
+     * 执行情况id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ErrorId: string;
 }
 /**
  * RerunOpsMakePlanInstances返回参数结构体
@@ -8117,23 +8312,17 @@ export interface DescribeTableMetasResponse {
     RequestId?: string;
 }
 /**
- * 操作结果
+ * DescribeInstanceLogList请求参数结构体
  */
-export interface BatchReturn {
+export interface DescribeInstanceLogListRequest {
     /**
-     * 执行结果
+     * 任务id
      */
-    Result: boolean;
+    TaskId: string;
     /**
-     * 执行情况备注
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 数据时间
      */
-    ErrorDesc: string;
-    /**
-     * 执行情况id
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ErrorId: string;
+    CurRunDate: string;
 }
 /**
  * DescribeDiagnosticInfoResponse
@@ -9622,6 +9811,106 @@ export interface GetFileInfoRequest {
     FilePath: string;
 }
 /**
+ * 表血缘详细信息
+ */
+export interface TableLineageBaseInfo {
+    /**
+     * 元数据类型
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MetastoreType: string;
+    /**
+     * 由中心节点到该节点的路径
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PrefixPath: string;
+    /**
+     * 空间id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ProjectId?: string;
+    /**
+     * 数据源id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DatasourceId?: string;
+    /**
+     * 表id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TableId?: string;
+    /**
+     * 表血缘参数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Params?: Array<LineageParamRecord>;
+    /**
+     * 父节点列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ParentSet?: string;
+    /**
+     * 子节点列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ChildSet?: string;
+    /**
+     * 额外参数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ExtParams?: Array<RecordField>;
+    /**
+     * 血缘id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Id?: string;
+    /**
+     * 元数据类型名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MetastoreTypeName?: string;
+    /**
+     * 表名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TableName?: string;
+    /**
+     * 表全称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    QualifiedName?: string;
+    /**
+     * 血缘下游节点数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DownStreamCount?: number;
+    /**
+     * 血缘上游节点数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    UpStreamCount?: number;
+    /**
+     * 血缘描述
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Description?: string;
+    /**
+     * 血缘创建时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CreateTime?: string;
+    /**
+     * 血缘更新时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ModifyTime?: string;
+    /**
+     * 修改血缘的任务id列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Tasks?: Array<string>;
+}
+/**
  * DescribeSonInstances请求参数结构体
  */
 export interface DescribeSonInstancesRequest {
@@ -10514,6 +10803,25 @@ export interface CandidateDsDTo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     ValueDesc?: string;
+}
+/**
+ * DescribeTableBasicInfo返回参数结构体
+ */
+export interface DescribeTableBasicInfoResponse {
+    /**
+     * 表元数据
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TableBasicInfoList?: Array<TableBasicInfo>;
+    /**
+     * 总条数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TotalCount?: number;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * DescribeDiagnosticInfoByBaselineId返回参数结构体
@@ -12899,6 +13207,151 @@ export interface SearchConditionInstance {
     ResourceGroup?: number;
 }
 /**
+ * 表的元数据信息
+ */
+export interface TableBasicInfo {
+    /**
+     * 表的全局唯一ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TableId?: string;
+    /**
+     * 数据源全局唯一ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DatasourceId?: string;
+    /**
+     * 数据源名
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DatasourceName?: string;
+    /**
+     * 数据库ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DatabaseId?: string;
+    /**
+     * 数据库名
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DatabaseName?: string;
+    /**
+     * 表名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TableName?: string;
+    /**
+     * 引擎/存储类型
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    EngineType?: string;
+    /**
+     * 表类型，视图，外部表等
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TableType?: string;
+    /**
+     * 项目Id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ProjectId?: string;
+    /**
+     * 所属项目英文名
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ProjectName?: string;
+    /**
+     * 所属项目英中文名
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ProjectDisplayName?: string;
+    /**
+     * 责任人ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TableOwnerId?: string;
+    /**
+     * 责任人名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TableOwnerName?: string;
+    /**
+     * 存储位置
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    StorageLocation?: number;
+    /**
+     * 表描述
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Description?: string;
+    /**
+     * 是否分区表，0-全量表 1-分区表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IsPartitionTable?: number;
+    /**
+     * 分区字段list
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PartitionColumns?: Array<string>;
+    /**
+     * 存储格式
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    StorageFormat?: string;
+    /**
+     * 存储量，字节数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    StorageSize?: number;
+    /**
+     * 存储量，单位
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    StorageSizeWithUnit?: string;
+    /**
+     * 累计存储【MB】
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TotalSizeMb?: number;
+    /**
+     * 副本数量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ReplicaCount?: number;
+    /**
+     * 文件数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    FileCount?: number;
+    /**
+     * 分区总数（包含hive，iceberg）
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PartitionCount?: number;
+    /**
+     * 分区字段数量（包含hive，iceberg）
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PartitionFieldCount?: number;
+    /**
+     * 生命周期-分区保留天数【分区保留策略时有效】
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PartitionExpireDays?: number;
+    /**
+     * 创建时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CreateTime?: string;
+    /**
+     * 更新时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    UpdateTime?: string;
+}
+/**
  * DescribeSchedulerRunTimeInstanceCntByStatus返回参数结构体
  */
 export interface DescribeSchedulerRunTimeInstanceCntByStatusResponse {
@@ -13783,41 +14236,25 @@ export interface RerunInstancesRequest {
     SonInstanceType: string;
 }
 /**
- * 按天更新的表的资产评分
+ * DescribeFieldBasicInfo请求参数结构体
  */
-export interface TablePropertyScore {
+export interface DescribeFieldBasicInfoRequest {
     /**
-     * 表ID
+     * 分页页码
      */
-    TableId: string;
+    PageNumber?: number;
     /**
-     * 统计日期
+     * 分页大小
      */
-    DayTime: string;
+    PageSize?: number;
     /**
-     * 表完整性评分
+     * 过滤字段
      */
-    Integrity: number;
+    Filters?: Array<Filter>;
     /**
-     * 表保障性评分
+     * 排序字段
      */
-    Safety: number;
-    /**
-     * 表及时性评分
-     */
-    Timeliness: number;
-    /**
-     * 表稳定性评分
-     */
-    Stability: number;
-    /**
-     * 表规范性评分
-     */
-    Normative: number;
-    /**
-     * 资产评分平均分
-     */
-    Average: number;
+    OrderFields?: Array<OrderField>;
 }
 /**
  * DescribeEventIsAlarmTypes请求参数结构体
@@ -16717,6 +17154,43 @@ export interface CreateRuleRequest {
      * 该规则支持的执行引擎列表
      */
     SourceEngineTypes?: Array<number | bigint>;
+}
+/**
+ * 集成节点schema
+ */
+export interface IntegrationNodeSchema {
+    /**
+     * schema id
+     */
+    Id: string;
+    /**
+     * schema名称
+     */
+    Name: string;
+    /**
+     * schema类型
+     */
+    Type: string;
+    /**
+     * schema值
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Value?: string;
+    /**
+     * schema拓展属性
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Properties?: Array<RecordField>;
+    /**
+     * schema别名
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Alias?: string;
+    /**
+     * 字段备注
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Comment?: string;
 }
 /**
  * DescribeColumnsMeta返回参数结构体
@@ -21919,41 +22393,25 @@ export interface DescribeDatasourceResponse {
     RequestId?: string;
 }
 /**
- * 集成节点schema
+ * DescribeTableBasicInfo请求参数结构体
  */
-export interface IntegrationNodeSchema {
+export interface DescribeTableBasicInfoRequest {
     /**
-     * schema id
+     * 分页页码
      */
-    Id: string;
+    PageNumber?: number;
     /**
-     * schema名称
+     * 分页大小
      */
-    Name: string;
+    PageSize?: number;
     /**
-     * schema类型
+     * 过滤字段
      */
-    Type: string;
+    Filters?: Array<Filter>;
     /**
-     * schema值
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 排序字段
      */
-    Value?: string;
-    /**
-     * schema拓展属性
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Properties?: Array<RecordField>;
-    /**
-     * schema别名
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Alias?: string;
-    /**
-     * 字段备注
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Comment?: string;
+    OrderFields?: Array<OrderField>;
 }
 /**
  * DescribeDatasource请求参数结构体
@@ -22716,6 +23174,20 @@ export interface DescribeAlarmReceiverResponse {
      * 总记录数
      */
     TotalCount?: number;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * DescribeTableLineageInfo返回参数结构体
+ */
+export interface DescribeTableLineageInfoResponse {
+    /**
+     * 表血缘信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TableLineageBasicInfo?: TableLineageBaseInfo;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
