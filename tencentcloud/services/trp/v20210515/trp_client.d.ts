@@ -152,7 +152,7 @@ export declare class Client extends AbstractClient {
     /**
      * 查询批次列表
 
-旧版接口已经弃用，新业务请使用用新版的接口 DescribeCodeBatches
+旧版接口已经弃用，新业务请使用新版的接口 DescribeCodeBatches
      */
     DescribeCodeBatchs(req: DescribeCodeBatchsRequest, cb?: (error: string, rep: DescribeCodeBatchsResponse) => void): Promise<DescribeCodeBatchsResponse>;
     /**

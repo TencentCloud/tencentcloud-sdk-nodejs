@@ -4880,7 +4880,7 @@ export class Client extends AbstractClient {
    * 同步基线检测进度概要
    */
   async SyncBaselineDetectSummary(
-    req?: SyncBaselineDetectSummaryRequest,
+    req: SyncBaselineDetectSummaryRequest,
     cb?: (error: string, rep: SyncBaselineDetectSummaryResponse) => void
   ): Promise<SyncBaselineDetectSummaryResponse> {
     return this.request("SyncBaselineDetectSummary", req, cb)

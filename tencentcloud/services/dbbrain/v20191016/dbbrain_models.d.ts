@@ -1596,7 +1596,7 @@ export interface DescribeMailProfileResponse {
      */
     ProfileList?: Array<UserProfile>;
     /**
-     * 邮件模版总数。
+     * 邮件模板总数。
   注意：此字段可能返回 null，表示取不到有效值。
      */
     TotalCount?: number;

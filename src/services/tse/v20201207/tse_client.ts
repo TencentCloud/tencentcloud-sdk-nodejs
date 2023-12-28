@@ -21,6 +21,7 @@ import {
   ListCloudNativeAPIGatewayResult,
   DescribeCloudNativeAPIGatewayResponse,
   CreateCloudNativeAPIGatewayServiceResponse,
+  DeleteCloudNativeAPIGatewayPublicNetworkResponse,
   DeleteCloudNativeAPIGatewayRouteRateLimitResponse,
   ApolloEnvParam,
   DeleteWafDomainsRequest,
@@ -40,6 +41,7 @@ import {
   DescribeUpstreamHealthCheckConfigRequest,
   CreateNativeGatewayServerGroupRequest,
   DescribeCloudNativeAPIGatewayCertificatesRequest,
+  ModifyCloudNativeAPIGatewayRouteRateLimitRequest,
   DeleteCloudNativeAPIGatewayResult,
   QpsThreshold,
   ModifyCloudNativeAPIGatewayResponse,
@@ -53,12 +55,13 @@ import {
   DeleteCloudNativeAPIGatewayCertificateResponse,
   DeleteCloudNativeAPIGatewayCanaryRuleRequest,
   GatewayInstanceSchemeAndPorts,
-  ModifyCloudNativeAPIGatewayRouteRateLimitRequest,
+  DescribeZookeeperServerInterfacesRequest,
   UpstreamHealthCheckConfig,
   NacosServerInterface,
   DescribeNacosReplicasRequest,
   CreateCloudNativeAPIGatewayServiceRequest,
   CloudNativeAPIGatewayBalancedService,
+  ModifyConsoleNetworkRequest,
   ExternalRedis,
   ModifyCloudNativeAPIGatewayCertificateRequest,
   EnvAddressInfo,
@@ -85,7 +88,7 @@ import {
   DescribeWafDomainsResult,
   InstancePort,
   DescribeCloudNativeAPIGatewayResult,
-  PolarisCLSTopicInfo,
+  ModifyNetworkAccessStrategyRequest,
   DeleteCloudNativeAPIGatewayRouteResponse,
   DescribeCloudNativeAPIGatewayPortsResponse,
   CreateCloudNativeAPIGatewayRouteRateLimitRequest,
@@ -132,8 +135,9 @@ import {
   AutoScalerBehavior,
   ListFilter,
   DeleteEngineRequest,
+  CreateCloudNativeAPIGatewayPublicNetworkResponse,
   DescribeWafDomainsResponse,
-  ZookeeperReplica,
+  ModifyNetworkBasicInfoRequest,
   ModifyCloudNativeAPIGatewayServiceRateLimitRequest,
   DescribeSREInstanceAccessAddressRequest,
   DescribeCloudNativeAPIGatewayCanaryRulesResponse,
@@ -148,6 +152,7 @@ import {
   UpdateCloudNativeAPIGatewaySpecResponse,
   CloudNativeAPIGatewayConfig,
   DescribeZookeeperServerInterfacesResponse,
+  ModifyNetworkAccessStrategyResponse,
   DescribeNativeGatewayServerGroupsRequest,
   CertificateInfo,
   DescribeGatewayInstancePortResult,
@@ -166,7 +171,7 @@ import {
   DescribeWafProtectionRequest,
   ModifyUpstreamNodeStatusResponse,
   NetworkAccessControl,
-  DescribeZookeeperServerInterfacesRequest,
+  CreateCloudNativeAPIGatewayPublicNetworkRequest,
   DescribeCloudNativeAPIGatewayRouteRateLimitResponse,
   UpdateCloudNativeAPIGatewayResult,
   DescribeCloudNativeAPIGatewayRequest,
@@ -174,6 +179,7 @@ import {
   RouteWafStatus,
   CloudNativeAPIGatewayStrategyCronScalerConfigParam,
   OpenWafProtectionRequest,
+  DeleteCloudNativeAPIGatewayPublicNetworkRequest,
   DeleteCloudNativeAPIGatewayRouteRequest,
   InternetConfig,
   DescribeCloudNativeAPIGatewayRoutesRequest,
@@ -183,6 +189,7 @@ import {
   CloudNativeAPIGatewayCanaryRule,
   ModifyCloudNativeAPIGatewayServiceRateLimitResponse,
   CloudNativeAPIGatewayStrategyAutoScalerConfig,
+  ZookeeperReplica,
   DescribeNacosServerInterfacesRequest,
   CloudNativeAPIGatewayCanaryRuleCondition,
   UpdateUpstreamHealthCheckConfigResponse,
@@ -199,11 +206,13 @@ import {
   KongCertificatesPreview,
   CreateCloudNativeAPIGatewayServiceRateLimitRequest,
   DescribeZookeeperReplicasResponse,
+  PolarisCLSTopicInfo,
   NativeGatewayServerGroups,
   CreateEngineRequest,
   ModifyCloudNativeAPIGatewayCanaryRuleRequest,
   VpcInfo,
   KongServiceRouteList,
+  ModifyConsoleNetworkResponse,
   DeleteWafDomainsResponse,
   CreateCloudNativeAPIGatewayResult,
   ModifyCloudNativeAPIGatewayRequest,
@@ -216,6 +225,7 @@ import {
   ModifyNativeGatewayServerGroupResponse,
   EngineRegionInfo,
   UpdateCloudNativeAPIGatewayCertificateInfoResponse,
+  ModifyNetworkBasicInfoResponse,
   DescribeWafProtectionResult,
   KongServiceDetail,
 } from "./tse_models"
@@ -230,13 +240,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取云原生网关服务详情下的Upstream列表
+   * 修改网关实例Konga网络配置
    */
-  async DescribeCloudNativeAPIGatewayUpstream(
-    req: DescribeCloudNativeAPIGatewayUpstreamRequest,
-    cb?: (error: string, rep: DescribeCloudNativeAPIGatewayUpstreamResponse) => void
-  ): Promise<DescribeCloudNativeAPIGatewayUpstreamResponse> {
-    return this.request("DescribeCloudNativeAPIGatewayUpstream", req, cb)
+  async ModifyConsoleNetwork(
+    req: ModifyConsoleNetworkRequest,
+    cb?: (error: string, rep: ModifyConsoleNetworkResponse) => void
+  ): Promise<ModifyConsoleNetworkResponse> {
+    return this.request("ModifyConsoleNetwork", req, cb)
+  }
+
+  /**
+   * 创建公网网络配置
+   */
+  async CreateCloudNativeAPIGatewayPublicNetwork(
+    req: CreateCloudNativeAPIGatewayPublicNetworkRequest,
+    cb?: (error: string, rep: CreateCloudNativeAPIGatewayPublicNetworkResponse) => void
+  ): Promise<CreateCloudNativeAPIGatewayPublicNetworkResponse> {
+    return this.request("CreateCloudNativeAPIGatewayPublicNetwork", req, cb)
   }
 
   /**
@@ -320,6 +340,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取云原生网关服务详情下的Upstream列表
+   */
+  async DescribeCloudNativeAPIGatewayUpstream(
+    req: DescribeCloudNativeAPIGatewayUpstreamRequest,
+    cb?: (error: string, rep: DescribeCloudNativeAPIGatewayUpstreamResponse) => void
+  ): Promise<DescribeCloudNativeAPIGatewayUpstreamResponse> {
+    return this.request("DescribeCloudNativeAPIGatewayUpstream", req, cb)
+  }
+
+  /**
    * 查询云原生网关证书列表
    */
   async DescribeCloudNativeAPIGatewayCertificates(
@@ -357,6 +387,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyCloudNativeAPIGatewayCanaryRuleResponse) => void
   ): Promise<ModifyCloudNativeAPIGatewayCanaryRuleResponse> {
     return this.request("ModifyCloudNativeAPIGatewayCanaryRule", req, cb)
+  }
+
+  /**
+   * 删除公网网络配置
+   */
+  async DeleteCloudNativeAPIGatewayPublicNetwork(
+    req: DeleteCloudNativeAPIGatewayPublicNetworkRequest,
+    cb?: (error: string, rep: DeleteCloudNativeAPIGatewayPublicNetworkResponse) => void
+  ): Promise<DeleteCloudNativeAPIGatewayPublicNetworkResponse> {
+    return this.request("DeleteCloudNativeAPIGatewayPublicNetwork", req, cb)
   }
 
   /**
@@ -650,6 +690,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 更新网关上游实例列表，仅支持IPList服务类型
+   */
+  async UpdateUpstreamTargets(
+    req: UpdateUpstreamTargetsRequest,
+    cb?: (error: string, rep: UpdateUpstreamTargetsResponse) => void
+  ): Promise<UpdateUpstreamTargetsResponse> {
+    return this.request("UpdateUpstreamTargets", req, cb)
+  }
+
+  /**
    * 修改云原生API网关实例基础信息
    */
   async ModifyCloudNativeAPIGateway(
@@ -680,13 +730,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 更新网关上游实例列表，仅支持IPList服务类型
+   * 修改云原生API网关实例网络基本信息，比如带宽以及描述，只支持修改客户端公网/内网的信息。
    */
-  async UpdateUpstreamTargets(
-    req: UpdateUpstreamTargetsRequest,
-    cb?: (error: string, rep: UpdateUpstreamTargetsResponse) => void
-  ): Promise<UpdateUpstreamTargetsResponse> {
-    return this.request("UpdateUpstreamTargets", req, cb)
+  async ModifyNetworkBasicInfo(
+    req: ModifyNetworkBasicInfoRequest,
+    cb?: (error: string, rep: ModifyNetworkBasicInfoResponse) => void
+  ): Promise<ModifyNetworkBasicInfoResponse> {
+    return this.request("ModifyNetworkBasicInfo", req, cb)
+  }
+
+  /**
+   * 修改云原生API网关实例Kong访问策略，支持白名单或者黑名单。
+   */
+  async ModifyNetworkAccessStrategy(
+    req: ModifyNetworkAccessStrategyRequest,
+    cb?: (error: string, rep: ModifyNetworkAccessStrategyResponse) => void
+  ): Promise<ModifyNetworkAccessStrategyResponse> {
+    return this.request("ModifyNetworkAccessStrategy", req, cb)
   }
 
   /**

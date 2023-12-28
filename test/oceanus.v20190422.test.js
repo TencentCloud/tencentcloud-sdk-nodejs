@@ -378,6 +378,16 @@ it("oceanus.v20190422.DescribeSystemResources", async function () {
     }
 })
 
+it("oceanus.v20190422.GetMetaTable", async function () {
+    try {
+       const data = await client.GetMetaTable({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("oceanus.v20190422.DescribeJobConfigs", async function () {
     try {
        const data = await client.DescribeJobConfigs({})

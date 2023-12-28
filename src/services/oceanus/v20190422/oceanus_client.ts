@@ -24,6 +24,7 @@ import {
   DescribeJobSubmissionLogResponse,
   DeleteJobsRequest,
   ModifyWorkSpaceRequest,
+  ModifyJobResponse,
   CreateJobConfigResponse,
   CreateResourceConfigResponse,
   CreateJobConfigRequest,
@@ -62,9 +63,10 @@ import {
   StatementResult,
   DescribeTreeJobsRsp,
   DeleteResourcesResponse,
-  ModifyJobResponse,
+  DeleteTableConfigResponse,
   SlotSharingGroupSpec,
   Tag,
+  GetMetaTableResponse,
   FetchSqlGatewayStatementResultResponse,
   JobGraphNode,
   CreateWorkSpaceRequest,
@@ -110,6 +112,7 @@ import {
   ClusterGroupSetItem,
   DescribeJobConfigsRequest,
   ModifyJobRequest,
+  GetMetaTableRequest,
   ResultData,
   DeleteResourceConfigsResponse,
   Cluster,
@@ -124,7 +127,6 @@ import {
   RunSqlGatewayStatementResponse,
   CreateJobRequest,
   JobInstanceForSubmissionLog,
-  DeleteTableConfigResponse,
   DescribeFolderRequest,
   DeleteFoldersResponse,
   SubFolderInfo,
@@ -520,6 +522,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeSystemResourcesResponse) => void
   ): Promise<DescribeSystemResourcesResponse> {
     return this.request("DescribeSystemResources", req, cb)
+  }
+
+  /**
+   * 查询元数据表
+   */
+  async GetMetaTable(
+    req: GetMetaTableRequest,
+    cb?: (error: string, rep: GetMetaTableResponse) => void
+  ): Promise<GetMetaTableResponse> {
+    return this.request("GetMetaTable", req, cb)
   }
 
   /**

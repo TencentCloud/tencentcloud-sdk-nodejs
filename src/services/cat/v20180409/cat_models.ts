@@ -523,7 +523,7 @@ export interface CreateProbeTasksRequest {
    */
   Interval: number
   /**
-   * 拨测参数，如{}，详细可参考云拨测官方文档。
+   * 拨测参数，详细可参考云拨测官方文档,链接:https://cloud.tencent.com/document/product/248/87308#createprobetasks。
    */
   Parameters: string
   /**

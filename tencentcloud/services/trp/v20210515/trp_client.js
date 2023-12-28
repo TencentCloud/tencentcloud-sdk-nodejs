@@ -242,7 +242,7 @@ class Client extends abstract_client_1.AbstractClient {
     /**
      * 查询批次列表
 
-旧版接口已经弃用，新业务请使用用新版的接口 DescribeCodeBatches
+旧版接口已经弃用，新业务请使用新版的接口 DescribeCodeBatches
      */
     async DescribeCodeBatchs(req, cb) {
         return this.request("DescribeCodeBatchs", req, cb);

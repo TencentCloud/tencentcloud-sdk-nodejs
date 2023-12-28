@@ -18,9 +18,19 @@ const client = new tencentcloud.tse.v20201207.Client({
 })
 describe("tse.v20201207.test.js", function () {
 
-it("tse.v20201207.DescribeCloudNativeAPIGatewayUpstream", async function () {
+it("tse.v20201207.ModifyConsoleNetwork", async function () {
     try {
-       const data = await client.DescribeCloudNativeAPIGatewayUpstream({})
+       const data = await client.ModifyConsoleNetwork({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tse.v20201207.CreateCloudNativeAPIGatewayPublicNetwork", async function () {
+    try {
+       const data = await client.CreateCloudNativeAPIGatewayPublicNetwork({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -108,6 +118,16 @@ it("tse.v20201207.DescribeOneCloudNativeAPIGatewayService", async function () {
     }
 })
 
+it("tse.v20201207.DescribeCloudNativeAPIGatewayUpstream", async function () {
+    try {
+       const data = await client.DescribeCloudNativeAPIGatewayUpstream({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tse.v20201207.DescribeCloudNativeAPIGatewayCertificates", async function () {
     try {
        const data = await client.DescribeCloudNativeAPIGatewayCertificates({})
@@ -141,6 +161,16 @@ it("tse.v20201207.CreateEngine", async function () {
 it("tse.v20201207.ModifyCloudNativeAPIGatewayCanaryRule", async function () {
     try {
        const data = await client.ModifyCloudNativeAPIGatewayCanaryRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tse.v20201207.DeleteCloudNativeAPIGatewayPublicNetwork", async function () {
+    try {
+       const data = await client.DeleteCloudNativeAPIGatewayPublicNetwork({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -438,6 +468,16 @@ it("tse.v20201207.OpenWafProtection", async function () {
     }
 })
 
+it("tse.v20201207.UpdateUpstreamTargets", async function () {
+    try {
+       const data = await client.UpdateUpstreamTargets({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tse.v20201207.ModifyCloudNativeAPIGateway", async function () {
     try {
        const data = await client.ModifyCloudNativeAPIGateway({})
@@ -468,9 +508,19 @@ it("tse.v20201207.DeleteCloudNativeAPIGateway", async function () {
     }
 })
 
-it("tse.v20201207.UpdateUpstreamTargets", async function () {
+it("tse.v20201207.ModifyNetworkBasicInfo", async function () {
     try {
-       const data = await client.UpdateUpstreamTargets({})
+       const data = await client.ModifyNetworkBasicInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tse.v20201207.ModifyNetworkAccessStrategy", async function () {
+    try {
+       const data = await client.ModifyNetworkAccessStrategy({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

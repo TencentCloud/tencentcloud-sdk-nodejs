@@ -220,8 +220,9 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取某个域名下的解析记录列表
-   */
+     * 获取某个域名下的解析记录列表
+备注：新添加的解析记录存在短暂的索引延迟，如果查询不到新增记录，请在 30 秒后重试
+     */
   async DescribeRecordList(
     req: DescribeRecordListRequest,
     cb?: (error: string, rep: DescribeRecordListResponse) => void
@@ -690,8 +691,9 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 添加记录
-   */
+     * 添加记录
+备注：新添加的解析记录存在短暂的索引延迟，如果查询不到新增记录，请在 30 秒后重试
+     */
   async CreateRecord(
     req: CreateRecordRequest,
     cb?: (error: string, rep: CreateRecordResponse) => void
@@ -820,8 +822,9 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取域名筛选列表
-   */
+     * 获取域名筛选列表
+备注：新添加的解析记录存在短暂的索引延迟，如果查询不到新增记录，请在 30 秒后重试
+     */
   async DescribeDomainFilterList(
     req: DescribeDomainFilterListRequest,
     cb?: (error: string, rep: DescribeDomainFilterListResponse) => void

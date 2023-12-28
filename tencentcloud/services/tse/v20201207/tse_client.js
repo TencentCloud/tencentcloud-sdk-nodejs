@@ -28,10 +28,16 @@ class Client extends abstract_client_1.AbstractClient {
         super("tse.tencentcloudapi.com", "2020-12-07", clientConfig);
     }
     /**
-     * 获取云原生网关服务详情下的Upstream列表
+     * 修改网关实例Konga网络配置
      */
-    async DescribeCloudNativeAPIGatewayUpstream(req, cb) {
-        return this.request("DescribeCloudNativeAPIGatewayUpstream", req, cb);
+    async ModifyConsoleNetwork(req, cb) {
+        return this.request("ModifyConsoleNetwork", req, cb);
+    }
+    /**
+     * 创建公网网络配置
+     */
+    async CreateCloudNativeAPIGatewayPublicNetwork(req, cb) {
+        return this.request("CreateCloudNativeAPIGatewayPublicNetwork", req, cb);
     }
     /**
      * 获取云原生网关服务健康检查配置
@@ -82,6 +88,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeOneCloudNativeAPIGatewayService", req, cb);
     }
     /**
+     * 获取云原生网关服务详情下的Upstream列表
+     */
+    async DescribeCloudNativeAPIGatewayUpstream(req, cb) {
+        return this.request("DescribeCloudNativeAPIGatewayUpstream", req, cb);
+    }
+    /**
      * 查询云原生网关证书列表
      */
     async DescribeCloudNativeAPIGatewayCertificates(req, cb) {
@@ -104,6 +116,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ModifyCloudNativeAPIGatewayCanaryRule(req, cb) {
         return this.request("ModifyCloudNativeAPIGatewayCanaryRule", req, cb);
+    }
+    /**
+     * 删除公网网络配置
+     */
+    async DeleteCloudNativeAPIGatewayPublicNetwork(req, cb) {
+        return this.request("DeleteCloudNativeAPIGatewayPublicNetwork", req, cb);
     }
     /**
      * 删除 WAF 防护域名
@@ -280,6 +298,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("OpenWafProtection", req, cb);
     }
     /**
+     * 更新网关上游实例列表，仅支持IPList服务类型
+     */
+    async UpdateUpstreamTargets(req, cb) {
+        return this.request("UpdateUpstreamTargets", req, cb);
+    }
+    /**
      * 修改云原生API网关实例基础信息
      */
     async ModifyCloudNativeAPIGateway(req, cb) {
@@ -298,10 +322,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteCloudNativeAPIGateway", req, cb);
     }
     /**
-     * 更新网关上游实例列表，仅支持IPList服务类型
+     * 修改云原生API网关实例网络基本信息，比如带宽以及描述，只支持修改客户端公网/内网的信息。
      */
-    async UpdateUpstreamTargets(req, cb) {
-        return this.request("UpdateUpstreamTargets", req, cb);
+    async ModifyNetworkBasicInfo(req, cb) {
+        return this.request("ModifyNetworkBasicInfo", req, cb);
+    }
+    /**
+     * 修改云原生API网关实例Kong访问策略，支持白名单或者黑名单。
+     */
+    async ModifyNetworkAccessStrategy(req, cb) {
+        return this.request("ModifyNetworkAccessStrategy", req, cb);
     }
     /**
      * 删除云原生网关证书

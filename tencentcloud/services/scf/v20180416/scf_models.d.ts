@@ -685,9 +685,9 @@ export interface Namespace {
  */
 export interface GetFunctionRequest {
     /**
-     * 需要获取详情的函数名称
+     * 需要获取详情的函数名称，ResourceId和FunctionName只能传一个
      */
-    FunctionName: string;
+    FunctionName?: string;
     /**
      * 函数的版本号
   默认值: $LATEST
@@ -984,6 +984,10 @@ export interface UpdateFunctionConfigurationRequest {
      * 内网访问配置
      */
     IntranetConfig?: IntranetConfigIn;
+    /**
+     * 忽略系统日志上报
+     */
+    IgnoreSysLog?: boolean;
 }
 /**
  * DeleteReservedConcurrencyConfig请求参数结构体

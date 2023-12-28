@@ -160,39 +160,39 @@ export interface DeleteClusterResponse {
     RequestId?: string;
 }
 /**
- * cos临时帐号信息
+ * cos临时账号信息
  */
 export interface CosCredentials {
     /**
      * 会话Token
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SessionToken: string;
+    SessionToken?: string;
     /**
      * 临时应用ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TmpAppId: string;
+    TmpAppId?: string;
     /**
      * 临时调用者身份ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TmpSecretId: string;
+    TmpSecretId?: string;
     /**
      * 临时密钥
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TmpSecretKey: string;
+    TmpSecretKey?: string;
     /**
      * 过期时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ExpiredTime: number;
+    ExpiredTime?: number;
     /**
      * 所在域
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Domain: string;
+    Domain?: string;
 }
 /**
  * DeletePathRewrites返回参数结构体
@@ -5302,51 +5302,55 @@ export interface ContainerGroupOther {
     /**
      * 实例总数
      */
-    InstanceNum: number;
+    InstanceNum?: number;
     /**
      * 已启动实例总数
      */
-    CurrentNum: number;
+    CurrentNum?: number;
+    /**
+     * 负载均衡DNS地址
+     */
+    LbDns?: string;
     /**
      * 负载均衡ip
      */
-    LbIp: string;
+    LbIp?: string;
     /**
      * Service ip
      */
-    ClusterIp: string;
+    ClusterIp?: string;
     /**
-     * 服务状态，请参考后面的的状态定义
+     * 服务状态，请参考后面的状态定义
      */
-    Status: string;
+    Status?: string;
     /**
-     * 服务状态，请参考后面的的状态定义
+     * 服务状态，请参考后面的状态定义
      */
-    Message: string;
+    Message?: string;
     /**
      * 环境变量
      */
-    Envs: Array<Env>;
+    Envs?: Array<Env>;
     /**
      * Service NodePort
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    NodePort: number;
+    NodePort?: number;
     /**
      * 子网ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SubnetId: string;
+    SubnetId?: string;
     /**
      * 健康检查相关字段
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    HealthCheckSettings: HealthCheckSettings;
+    HealthCheckSettings?: HealthCheckSettings;
     /**
      * 服务配置信息是否匹配
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    IsNotEqualServiceConfig: boolean;
+    IsNotEqualServiceConfig?: boolean;
 }
 /**
  * AddClusterInstances请求参数结构体

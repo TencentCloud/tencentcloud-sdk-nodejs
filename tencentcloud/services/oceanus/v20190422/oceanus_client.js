@@ -252,6 +252,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeSystemResources", req, cb);
     }
     /**
+     * 查询元数据表
+     */
+    async GetMetaTable(req, cb) {
+        return this.request("GetMetaTable", req, cb);
+    }
+    /**
      * 查询作业配置列表，一次最多查询100个
      */
     async DescribeJobConfigs(req, cb) {

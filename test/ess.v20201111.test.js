@@ -148,6 +148,16 @@ it("ess.v20201111.VerifyPdf", async function () {
     }
 })
 
+it("ess.v20201111.ModifyExtendedService", async function () {
+    try {
+       const data = await client.ModifyExtendedService({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ess.v20201111.UnbindEmployeeUserIdWithClientOpenId", async function () {
     try {
        const data = await client.UnbindEmployeeUserIdWithClientOpenId({})

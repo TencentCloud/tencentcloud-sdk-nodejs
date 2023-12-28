@@ -1433,7 +1433,7 @@ export declare class Client extends AbstractClient {
     /**
      * 同步基线检测进度概要
      */
-    SyncBaselineDetectSummary(req?: SyncBaselineDetectSummaryRequest, cb?: (error: string, rep: SyncBaselineDetectSummaryResponse) => void): Promise<SyncBaselineDetectSummaryResponse>;
+    SyncBaselineDetectSummary(req: SyncBaselineDetectSummaryRequest, cb?: (error: string, rep: SyncBaselineDetectSummaryResponse) => void): Promise<SyncBaselineDetectSummaryResponse>;
     /**
      * 查询授权绑定任务的进度
      */

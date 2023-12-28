@@ -6419,7 +6419,15 @@ export interface ClusterInfoItem {
    */
   TaskCreateTime?: string
   /**
-   * 接入状态
+   * 接入状态:
+未接入: AccessedNone
+已防护: AccessedDefended
+未防护: AccessedInstalled
+部分防护: AccessedPartialDefence
+接入异常: AccessedException
+卸载异常: AccessedUninstallException
+接入中: AccessedInstalling
+卸载中: AccessedUninstalling
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AccessedStatus?: string
@@ -6443,6 +6451,11 @@ export interface ClusterInfoItem {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   UnInstallAgentNodeCount?: number
+  /**
+   * 计费核数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ChargeCoresCnt?: number
 }
 
 /**
@@ -9265,6 +9278,16 @@ export interface HostInfo {
    * 集群接入状态
    */
   ClusterAccessedStatus?: string
+  /**
+   * 计费核数
+   */
+  ChargeCoresCnt?: number
+  /**
+   * 防护状态:
+已防护: Defended
+未防护: UnDefended
+   */
+  DefendStatus?: string
 }
 
 /**
@@ -16714,7 +16737,8 @@ export interface DescribeExportJobManageListRequest {
   /**
    * 过滤条件。
 <li>ExportStatus- string -是否必填: 否 - 导出状态 RUNNING: 导出中 SUCCESS:导出完成 FAILURE:失败
-<li>ExportSource- string -是否必填: 否 - 导出来源 LocalImage: 本地镜像
+</li>
+<li>ExportSource- string -是否必填: 否 - 导出来源 LocalImage: 本地镜像 RegistryImage: 仓库镜像
 </li>
    */
   Filters?: Array<RunTimeFilters>
@@ -17650,11 +17674,11 @@ export interface DescribeExportJobManageListResponse {
   /**
    * 总数
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 任务列表
    */
-  List: Array<ExportJobInfo>
+  List?: Array<ExportJobInfo>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -21590,7 +21614,7 @@ export interface DescribeAssetImageRegistryListExportResponse {
    * excel文件下载地址
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DownloadUrl: string
+  DownloadUrl?: string
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

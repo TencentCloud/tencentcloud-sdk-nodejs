@@ -201,6 +201,16 @@ export interface ModifyWorkSpaceRequest {
 }
 
 /**
+ * ModifyJob返回参数结构体
+ */
+export interface ModifyJobResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateJobConfig返回参数结构体
  */
 export interface CreateJobConfigResponse {
@@ -1217,9 +1227,9 @@ export interface DeleteResourcesResponse {
 }
 
 /**
- * ModifyJob返回参数结构体
+ * DeleteTableConfig返回参数结构体
  */
-export interface ModifyJobResponse {
+export interface DeleteTableConfigResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1266,6 +1276,42 @@ export interface Tag {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TagValue?: string
+}
+
+/**
+ * GetMetaTable返回参数结构体
+ */
+export interface GetMetaTableResponse {
+  /**
+   * 元数据表唯一标识
+   */
+  SerialId?: string
+  /**
+   * Catalog名
+   */
+  Catalog?: string
+  /**
+   * Database名
+   */
+  Database?: string
+  /**
+   * Table名
+   */
+  Table?: string
+  /**
+   * 建表语句,使用 Base64 编码。
+例如
+Q1JFQVRFIFRBQkxFIGRhdGFnZW5fc291cmNlX3RhYmxlICggCiAgICBpZCBJTlQsIAogICAgbmFtZSBTVFJJTkcgCikgV0lUSCAoCidjb25uZWN0b3InPSdkYXRhZ2VuJywKJ3Jvd3MtcGVyLXNlY29uZCcgPSAnMScKKTs=
+   */
+  DDL?: string
+  /**
+   * 场景时间
+   */
+  CreateTime?: string
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1524,7 +1570,7 @@ export interface CreateFolderResponse {
   /**
    * 新建文件夹的唯一ID
    */
-  FolderId: string
+  FolderId?: string
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2483,6 +2529,28 @@ export interface ModifyJobRequest {
 }
 
 /**
+ * GetMetaTable请求参数结构体
+ */
+export interface GetMetaTableRequest {
+  /**
+   * Catalog名
+   */
+  Catalog: string
+  /**
+   * Database名
+   */
+  Database: string
+  /**
+   * Table名
+   */
+  Table: string
+  /**
+   * 空间唯一标识
+   */
+  WorkSpaceId: string
+}
+
+/**
  * Sql Gateway返回数据
  */
 export interface ResultData {
@@ -3245,16 +3313,6 @@ export interface JobInstanceForSubmissionLog {
    * 作业实例启动的时间（毫秒）
    */
   StartingMillis: number
-}
-
-/**
- * DeleteTableConfig返回参数结构体
- */
-export interface DeleteTableConfigResponse {
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**

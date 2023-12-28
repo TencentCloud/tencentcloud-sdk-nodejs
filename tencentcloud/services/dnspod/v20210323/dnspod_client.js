@@ -29,6 +29,7 @@ class Client extends abstract_client_1.AbstractClient {
     }
     /**
      * 获取某个域名下的解析记录列表
+备注：新添加的解析记录存在短暂的索引延迟，如果查询不到新增记录，请在 30 秒后重试
      */
     async DescribeRecordList(req, cb) {
         return this.request("DescribeRecordList", req, cb);
@@ -311,6 +312,7 @@ class Client extends abstract_client_1.AbstractClient {
     }
     /**
      * 添加记录
+备注：新添加的解析记录存在短暂的索引延迟，如果查询不到新增记录，请在 30 秒后重试
      */
     async CreateRecord(req, cb) {
         return this.request("CreateRecord", req, cb);
@@ -389,6 +391,7 @@ class Client extends abstract_client_1.AbstractClient {
     }
     /**
      * 获取域名筛选列表
+备注：新添加的解析记录存在短暂的索引延迟，如果查询不到新增记录，请在 30 秒后重试
      */
     async DescribeDomainFilterList(req, cb) {
         return this.request("DescribeDomainFilterList", req, cb);

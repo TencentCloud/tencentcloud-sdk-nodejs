@@ -9,6 +9,7 @@ export declare class Client extends AbstractClient {
     constructor(clientConfig: ClientConfig);
     /**
      * 获取某个域名下的解析记录列表
+备注：新添加的解析记录存在短暂的索引延迟，如果查询不到新增记录，请在 30 秒后重试
      */
     DescribeRecordList(req: DescribeRecordListRequest, cb?: (error: string, rep: DescribeRecordListResponse) => void): Promise<DescribeRecordListResponse>;
     /**
@@ -197,6 +198,7 @@ export declare class Client extends AbstractClient {
     CreateDomainAlias(req: CreateDomainAliasRequest, cb?: (error: string, rep: CreateDomainAliasResponse) => void): Promise<CreateDomainAliasResponse>;
     /**
      * 添加记录
+备注：新添加的解析记录存在短暂的索引延迟，如果查询不到新增记录，请在 30 秒后重试
      */
     CreateRecord(req: CreateRecordRequest, cb?: (error: string, rep: CreateRecordResponse) => void): Promise<CreateRecordResponse>;
     /**
@@ -249,6 +251,7 @@ export declare class Client extends AbstractClient {
     ModifyDomainCustomLine(req: ModifyDomainCustomLineRequest, cb?: (error: string, rep: ModifyDomainCustomLineResponse) => void): Promise<ModifyDomainCustomLineResponse>;
     /**
      * 获取域名筛选列表
+备注：新添加的解析记录存在短暂的索引延迟，如果查询不到新增记录，请在 30 秒后重试
      */
     DescribeDomainFilterList(req: DescribeDomainFilterListRequest, cb?: (error: string, rep: DescribeDomainFilterListResponse) => void): Promise<DescribeDomainFilterListResponse>;
     /**

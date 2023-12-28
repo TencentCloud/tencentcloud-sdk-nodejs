@@ -59,6 +59,16 @@ export interface CreateCloudNativeAPIGatewayServiceResponse {
 }
 
 /**
+ * DeleteCloudNativeAPIGatewayPublicNetwork返回参数结构体
+ */
+export interface DeleteCloudNativeAPIGatewayPublicNetworkResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteCloudNativeAPIGatewayRouteRateLimit返回参数结构体
  */
 export interface DeleteCloudNativeAPIGatewayRouteRateLimitResponse {
@@ -563,6 +573,25 @@ export interface DescribeCloudNativeAPIGatewayCertificatesRequest {
 }
 
 /**
+ * ModifyCloudNativeAPIGatewayRouteRateLimit请求参数结构体
+ */
+export interface ModifyCloudNativeAPIGatewayRouteRateLimitRequest {
+  /**
+   * 网关ID
+   */
+  GatewayId: string
+  /**
+   * 路由id，或路由名称。
+不支持“未命名”
+   */
+  Id: string
+  /**
+   * 限流配置
+   */
+  LimitDetail: CloudNativeAPIGatewayRateLimitDetail
+}
+
+/**
  * 删除云原生API网关响应结果。
  */
 export interface DeleteCloudNativeAPIGatewayResult {
@@ -751,22 +780,21 @@ export interface GatewayInstanceSchemeAndPorts {
 }
 
 /**
- * ModifyCloudNativeAPIGatewayRouteRateLimit请求参数结构体
+ * DescribeZookeeperServerInterfaces请求参数结构体
  */
-export interface ModifyCloudNativeAPIGatewayRouteRateLimitRequest {
+export interface DescribeZookeeperServerInterfacesRequest {
   /**
-   * 网关ID
+   * 实例id
    */
-  GatewayId: string
+  InstanceId?: string
   /**
-   * 路由id，或路由名称。
-不支持“未命名”
+   * 返回的列表个数
    */
-  Id: string
+  Limit?: number
   /**
-   * 限流配置
+   * 返回的列表起始偏移量
    */
-  LimitDetail: CloudNativeAPIGatewayRateLimitDetail
+  Offset?: number
 }
 
 /**
@@ -920,6 +948,32 @@ export interface CloudNativeAPIGatewayBalancedService {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Percent?: number
+}
+
+/**
+ * ModifyConsoleNetwork请求参数结构体
+ */
+export interface ModifyConsoleNetworkRequest {
+  /**
+   * 云原生API网关实例ID。
+   */
+  GatewayId: string
+  /**
+   * 网络类型：
+- Open 公网
+- Internal 内网（暂不支持）
+   */
+  NetworkType: string
+  /**
+   * 开启Konga网络，不填时默认为Open
+- Open，开启
+- Close，关闭
+   */
+  Operate?: string
+  /**
+   * 访问控制策略
+   */
+  AccessControl?: NetworkAccessControl
 }
 
 /**
@@ -1675,29 +1729,31 @@ export interface DescribeCloudNativeAPIGatewayResult {
 }
 
 /**
- * 北极星日志主题信息
+ * ModifyNetworkAccessStrategy请求参数结构体
  */
-export interface PolarisCLSTopicInfo {
+export interface ModifyNetworkAccessStrategyRequest {
   /**
-   * 日志集ID
-注意：此字段可能返回 null，表示取不到有效值。
+   * 云原生API网关实例ID。
    */
-  LogSetId?: string
+  GatewayId: string
   /**
-   * 日志集名称
-注意：此字段可能返回 null，表示取不到有效值。
+   * 分组id
    */
-  LogSetName?: string
+  GroupId: string
   /**
-   * 日志主题ID
-注意：此字段可能返回 null，表示取不到有效值。
+   * 网络类型： 
+- Open 公网
+- Internal 内网	（暂不支持）
    */
-  TopicId?: string
+  NetworkType: string
   /**
-   * 日志主题名称
-注意：此字段可能返回 null，表示取不到有效值。
+   * ip地址
    */
-  TopicName?: string
+  Vip: string
+  /**
+   * 访问控制策略
+   */
+  AccessControl: NetworkAccessControl
 }
 
 /**
@@ -2752,6 +2808,16 @@ export interface DeleteEngineRequest {
 }
 
 /**
+ * CreateCloudNativeAPIGatewayPublicNetwork返回参数结构体
+ */
+export interface CreateCloudNativeAPIGatewayPublicNetworkResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeWafDomains返回参数结构体
  */
 export interface DescribeWafDomainsResponse {
@@ -2767,46 +2833,36 @@ export interface DescribeWafDomainsResponse {
 }
 
 /**
- * Zookeeper副本信息
+ * ModifyNetworkBasicInfo请求参数结构体
  */
-export interface ZookeeperReplica {
+export interface ModifyNetworkBasicInfoRequest {
   /**
-   * 名称
+   * 云原生API网关实例ID。
    */
-  Name: string
+  GatewayId: string
   /**
-   * 角色
+   * 分组id
    */
-  Role: string
+  GroupId: string
   /**
-   * 状态
+   * 网络类型：
+- Open 公网ipv4
+- Open-IPv6 公网ipv6
+- Internal 内网
    */
-  Status: string
+  NetworkType: string
   /**
-   * 子网ID
-注意：此字段可能返回 null，表示取不到有效值。
+   * ip地址
    */
-  SubnetId: string
+  Vip: string
   /**
-   * 可用区ID
-注意：此字段可能返回 null，表示取不到有效值。
+   * 公网出流量带宽[1,2048]Mbps
    */
-  Zone: string
+  InternetMaxBandwidthOut?: number
   /**
-   * 可用区ID
-注意：此字段可能返回 null，表示取不到有效值。
+   * 负载均衡描述
    */
-  ZoneId: string
-  /**
-   * 别名
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  AliasName: string
-  /**
-   * VPC ID
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  VpcId?: string
+  Description?: string
 }
 
 /**
@@ -3201,6 +3257,16 @@ export interface DescribeZookeeperServerInterfacesResponse {
 }
 
 /**
+ * ModifyNetworkAccessStrategy返回参数结构体
+ */
+export interface ModifyNetworkAccessStrategyResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeNativeGatewayServerGroups请求参数结构体
  */
 export interface DescribeNativeGatewayServerGroupsRequest {
@@ -3534,21 +3600,21 @@ export interface NetworkAccessControl {
 }
 
 /**
- * DescribeZookeeperServerInterfaces请求参数结构体
+ * CreateCloudNativeAPIGatewayPublicNetwork请求参数结构体
  */
-export interface DescribeZookeeperServerInterfacesRequest {
+export interface CreateCloudNativeAPIGatewayPublicNetworkRequest {
   /**
-   * 实例id
+   * 云原生API网关实例ID。
    */
-  InstanceId?: string
+  GatewayId: string
   /**
-   * 返回的列表个数
+   * 分组id。
    */
-  Limit?: number
+  GroupId?: string
   /**
-   * 返回的列表起始偏移量
+   * 公网负载均衡配置。
    */
-  Offset?: number
+  InternetConfig?: InternetConfig
 }
 
 /**
@@ -3700,6 +3766,30 @@ export interface OpenWafProtectionRequest {
    * 当资源类型 Type 是 Service 或 Route 的时候，传入的服务或路由的列表
    */
   List?: Array<string>
+}
+
+/**
+ * DeleteCloudNativeAPIGatewayPublicNetwork请求参数结构体
+ */
+export interface DeleteCloudNativeAPIGatewayPublicNetworkRequest {
+  /**
+   * 云原生API网关实例ID。
+   */
+  GatewayId: string
+  /**
+   * 分组id，kong类型时必填
+   */
+  GroupId?: string
+  /**
+   * 公网类型
+- IPV4 （默认值）
+- IPV6
+   */
+  InternetAddressVersion?: string
+  /**
+   * 公网ip，存在多个公网时必填
+   */
+  Vip?: string
 }
 
 /**
@@ -3916,6 +4006,49 @@ export interface CloudNativeAPIGatewayStrategyAutoScalerConfig {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Behavior?: AutoScalerBehavior
+}
+
+/**
+ * Zookeeper副本信息
+ */
+export interface ZookeeperReplica {
+  /**
+   * 名称
+   */
+  Name: string
+  /**
+   * 角色
+   */
+  Role: string
+  /**
+   * 状态
+   */
+  Status: string
+  /**
+   * 子网ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SubnetId: string
+  /**
+   * 可用区ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Zone: string
+  /**
+   * 可用区ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ZoneId: string
+  /**
+   * 别名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AliasName: string
+  /**
+   * VPC ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VpcId?: string
 }
 
 /**
@@ -4418,6 +4551,32 @@ export interface DescribeZookeeperReplicasResponse {
 }
 
 /**
+ * 北极星日志主题信息
+ */
+export interface PolarisCLSTopicInfo {
+  /**
+   * 日志集ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LogSetId?: string
+  /**
+   * 日志集名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LogSetName?: string
+  /**
+   * 日志主题ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TopicId?: string
+  /**
+   * 日志主题名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TopicName?: string
+}
+
+/**
  * 网关分组列表
  */
 export interface NativeGatewayServerGroups {
@@ -4612,6 +4771,16 @@ export interface KongServiceRouteList {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalCount?: number
+}
+
+/**
+ * ModifyConsoleNetwork返回参数结构体
+ */
+export interface ModifyConsoleNetworkResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -4821,6 +4990,16 @@ export interface EngineRegionInfo {
  * UpdateCloudNativeAPIGatewayCertificateInfo返回参数结构体
  */
 export interface UpdateCloudNativeAPIGatewayCertificateInfoResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyNetworkBasicInfo返回参数结构体
+ */
+export interface ModifyNetworkBasicInfoResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

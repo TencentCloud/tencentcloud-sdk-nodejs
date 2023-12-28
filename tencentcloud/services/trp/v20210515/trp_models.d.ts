@@ -194,6 +194,11 @@ export interface Quota {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Version?: string;
+    /**
+     * 是否开启企业认证
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ProductCertify?: number;
 }
 /**
  * 安心计划二维码
@@ -332,6 +337,10 @@ export interface DescribeProductsRequest {
      * 企业ID
      */
     CorpId?: number;
+    /**
+     * 认证状态
+     */
+    CertState?: number;
 }
 /**
  * CreateCorporationOrder返回参数结构体
@@ -754,12 +763,12 @@ export interface DescribeProductsResponse {
      * 商品列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Products: Array<Product>;
+    Products?: Array<Product>;
     /**
      * 总数
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1740,7 +1749,7 @@ export interface CreateCodeBatchRequest {
      */
     Remark?: string;
     /**
-     * 模版ID，或者活动ID
+     * 模板ID，或者活动ID
      */
     MpTpl?: string;
     /**
@@ -2854,6 +2863,11 @@ export interface Product {
      * 商户名称
      */
     MerchantName?: string;
+    /**
+     * 认证状态
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CertState?: number;
 }
 /**
  * DescribeTmpToken请求参数结构体

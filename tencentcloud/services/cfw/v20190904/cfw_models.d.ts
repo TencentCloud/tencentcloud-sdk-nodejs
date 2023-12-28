@@ -3422,7 +3422,7 @@ export interface RuleInfoData {
      */
     Strategy: string;
     /**
-     * 访问源类型，1是IP，3是域名，4是IP地址模版，5是域名地址模版
+     * 访问源类型，1是IP，3是域名，4是IP地址模板，5是域名地址模板
      */
     SourceType: number;
     /**
@@ -3434,7 +3434,7 @@ export interface RuleInfoData {
      */
     Detail: string;
     /**
-     * 访问目的类型，1是IP，3是域名，4是IP地址模版，5是域名地址模版
+     * 访问目的类型，1是IP，3是域名，4是IP地址模板，5是域名地址模板
      */
     TargetType: number;
     /**
@@ -4966,16 +4966,16 @@ export interface FwGroupSwitch {
     SwitchId?: string;
 }
 /**
- * 地址模版列表数据
+ * 地址模板列表数据
  */
 export interface TemplateListInfo {
     /**
-     * 模版ID
+     * 模板ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Uuid?: string;
     /**
-     * 模版名称
+     * 模板名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Name?: string;
@@ -4985,7 +4985,7 @@ export interface TemplateListInfo {
      */
     Detail?: string;
     /**
-     * IP模版
+     * IP模板
   注意：此字段可能返回 null，表示取不到有效值。
      */
     IpString?: string;
@@ -5000,7 +5000,7 @@ export interface TemplateListInfo {
      */
     UpdateTime?: string;
     /**
-     * 模版类型
+     * 模板类型
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Type?: number;

@@ -4683,11 +4683,11 @@ export interface DescribeBaselineItemInfoResponse {
     /**
      * 结果列表
      */
-    List: Array<BaselineItemInfo>;
+    List?: Array<BaselineItemInfo>;
     /**
      * 总条目数
      */
-    Total: number;
+    Total?: number;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -11546,8 +11546,7 @@ export interface RansomDefenseStrategyMachineBackupInfo {
  */
 export interface DescribeBaselineItemInfoRequest {
     /**
-     * <li>ItemId - int64 - 是否必填：否 - 项Id</i>
-  <li>PolicyId - int64 - 是否必填：否 - 项Id</i>
+     * <li>ItemId - int64 - 是否必填：否 - 项Id</li>
   <li>Level - int - 是否必填：否 - 风险等级</li>
   <li>ItemName - string - 是否必填：否 - 检测项名字</li>
   <li>RuleId - int - 是否必填：否 - 规则Id</li>
@@ -24672,35 +24671,35 @@ export interface SyncBaselineDetectSummaryResponse {
     /**
      * 处理进度
      */
-    ProgressRate: number;
+    ProgressRate?: number;
     /**
      * 未通过策略总数
      */
-    NotPassPolicyCount: number;
+    NotPassPolicyCount?: number;
     /**
      * 主机总数
      */
-    HostCount: number;
+    HostCount?: number;
     /**
      * 开始时间
      */
-    StartTime: string;
+    StartTime?: string;
     /**
      * 结束时间
      */
-    EndTime: string;
+    EndTime?: string;
     /**
      * 1:即将进行首次扫描   0:已经扫描过了
      */
-    WillFirstScan: number;
+    WillFirstScan?: number;
     /**
      * 正在检测的任务ID
      */
-    DetectingTaskIds: Array<number | bigint>;
+    DetectingTaskIds?: Array<number | bigint>;
     /**
      * 扫描中剩余时间(分钟)
      */
-    LeftMins: number;
+    LeftMins?: number;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -25103,7 +25102,12 @@ export interface KeyValueArrayInfo {
 /**
  * SyncBaselineDetectSummary请求参数结构体
  */
-export declare type SyncBaselineDetectSummaryRequest = null;
+export interface SyncBaselineDetectSummaryRequest {
+    /**
+     * 用于计算检测中和进度的任务ID集合，一般不用传入
+     */
+    TaskIds?: Array<number | bigint>;
+}
 /**
  * DescribeExpertServiceOrderList返回参数结构体
  */

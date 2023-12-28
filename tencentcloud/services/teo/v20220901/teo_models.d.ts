@@ -2882,7 +2882,7 @@ export interface CreatePrefetchTaskRequest {
     ZoneId: string;
     /**
      * 要预热的资源列表，每个元素格式类似如下:
-  http://www.example.com/example.txt。
+  http://www.example.com/example.txt。参数值当前必填。
   注意：提交任务数受计费套餐配额限制，请查看 [EO计费套餐](https://cloud.tencent.com/document/product/1552/77380)。
      */
     Targets?: Array<string>;
@@ -3461,11 +3461,11 @@ export interface DescribePrefetchTasksRequest {
      */
     ZoneId?: string;
     /**
-     * 查询起始时间。
+     * 查询起始时间，时间与 job-id 必填一个。
      */
     StartTime?: string;
     /**
-     * 查询结束时间。
+     * 查询结束时间，时间与 job-id 必填一个。
      */
     EndTime?: string;
     /**
@@ -4460,11 +4460,11 @@ export interface DescribePurgeTasksRequest {
      */
     ZoneId?: string;
     /**
-     * 查询起始时间。
+     * 查询起始时间，时间与job-id必填一个。
      */
     StartTime?: string;
     /**
-     * 查询结束时间。
+     * 查询结束时间，时间与job-id必填一个。
      */
     EndTime?: string;
     /**
