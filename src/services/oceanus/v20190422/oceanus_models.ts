@@ -465,19 +465,14 @@ export interface TriggerJobSavepointRequest {
 }
 
 /**
- * 依赖作业分状态计数信息
+ * 事件信息
  */
-export interface RefJobStatusCountItem {
+export interface JobEventInfo {
   /**
-   * 作业状态
+   * 异常事件总数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  JobStatus?: number
-  /**
-   * 作业数量
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Count?: number
+  ErrorEventTotal?: number
 }
 
 /**
@@ -778,6 +773,22 @@ export interface DescribeClustersResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 依赖作业分状态计数信息
+ */
+export interface RefJobStatusCountItem {
+  /**
+   * 作业状态
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  JobStatus?: number
+  /**
+   * 作业数量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Count?: number
 }
 
 /**
@@ -2832,6 +2843,10 @@ export interface DescribeJobsRequest {
    * 工作空间 SerialId
    */
   WorkSpaceId?: string
+  /**
+   * 查询额外的作业信息,例如 JobEventInfo
+   */
+  ExtraResult?: Array<string>
 }
 
 /**
@@ -2998,6 +3013,11 @@ export interface JobV1 {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Tags?: Array<Tag>
+  /**
+   * 作业异常事件信息	
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EventInfo?: JobEventInfo
 }
 
 /**

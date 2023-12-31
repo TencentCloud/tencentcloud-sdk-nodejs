@@ -663,7 +663,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeEventConfig(req: DescribeEventConfigRequest, cb?: (error: string, rep: DescribeEventConfigResponse) => void): Promise<DescribeEventConfigResponse>;
     /**
-     * 该接口用于修改子应用信息，但不允许修改主应用信息。
+     * 该接口用于修改应用信息，但不允许修改默认应用信息。
      */
     ModifySubAppIdInfo(req: ModifySubAppIdInfoRequest, cb?: (error: string, rep: ModifySubAppIdInfoResponse) => void): Promise<ModifySubAppIdInfoResponse>;
     /**
@@ -920,7 +920,7 @@ export declare class Client extends AbstractClient {
      */
     CreatePersonSample(req: CreatePersonSampleRequest, cb?: (error: string, rep: CreatePersonSampleResponse) => void): Promise<CreatePersonSampleResponse>;
     /**
-     * 该接口用于启用、停用子应用。被停用的子应用将封停对应域名，并限制控制台访问。
+     * 该接口用于启用、停用应用。被停用的应用将封停对应域名，并限制控制台访问。
      */
     ModifySubAppIdStatus(req: ModifySubAppIdStatusRequest, cb?: (error: string, rep: ModifySubAppIdStatusResponse) => void): Promise<ModifySubAppIdStatusResponse>;
     /**

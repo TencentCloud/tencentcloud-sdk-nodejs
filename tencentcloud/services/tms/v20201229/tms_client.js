@@ -28,6 +28,12 @@ class Client extends abstract_client_1.AbstractClient {
         super("tms.tencentcloudapi.com", "2020-12-29", clientConfig);
     }
     /**
+     * 天御文本内容安全审核接口，改接口会按照客户定制标签输出审核结果
+     */
+    async ModerateText(req, cb) {
+        return this.request("ModerateText", req, cb);
+    }
+    /**
      * 本接口（Text Moderation）用于提交文本内容进行智能审核任务。使用前请您使用腾讯云主账号登录控制台 [开通文本内容安全服务](https://console.cloud.tencent.com/cms) 并调整好对应的业务配置。
 
 ### 接口使用说明

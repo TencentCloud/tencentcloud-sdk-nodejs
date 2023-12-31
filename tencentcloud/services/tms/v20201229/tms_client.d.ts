@@ -1,12 +1,16 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { TextModerationRequest, TextModerationResponse } from "./tms_models";
+import { ModerateTextResponse, TextModerationRequest, ModerateTextRequest, TextModerationResponse } from "./tms_models";
 /**
  * tms client
  * @class
  */
 export declare class Client extends AbstractClient {
     constructor(clientConfig: ClientConfig);
+    /**
+     * 天御文本内容安全审核接口，改接口会按照客户定制标签输出审核结果
+     */
+    ModerateText(req: ModerateTextRequest, cb?: (error: string, rep: ModerateTextResponse) => void): Promise<ModerateTextResponse>;
     /**
      * 本接口（Text Moderation）用于提交文本内容进行智能审核任务。使用前请您使用腾讯云主账号登录控制台 [开通文本内容安全服务](https://console.cloud.tencent.com/cms) 并调整好对应的业务配置。
 

@@ -4372,7 +4372,7 @@ export interface InstanceTypeQuotaItem {
      */
     InstanceType?: string;
     /**
-     * 实例计费模式。取值范围： <br><li>PREPAID：表示预付费，即包年包月<br><li>POSTPAID_BY_HOUR：表示后付费，即按量计费<br><li>CDHPAID：表示[专用宿主机](https://cloud.tencent.com/document/product/416)付费，即只对`专用宿主机`计费，不对`专用宿主机`上的实例计费。<br><li>`SPOTPAID`：表示竞价实例付费。
+     * 实例计费模式。取值范围： <br><li>PREPAID：表示预付费，即包年包月<br></li>POSTPAID_BY_HOUR：表示后付费，即按量计费<br><li>CDHPAID：表示[专用宿主机](https://cloud.tencent.com/document/product/416)付费，即只对`专用宿主机`计费，不对`专用宿主机`上的实例计费。<br></li>`SPOTPAID`：表示竞价实例付费。
      */
     InstanceChargeType?: string;
     /**
@@ -4405,7 +4405,7 @@ export interface InstanceTypeQuotaItem {
      */
     LocalDiskTypeList?: Array<LocalDiskType>;
     /**
-     * 实例是否售卖。取值范围： <br><li>SELL：表示实例可购买<br><li>SOLD_OUT：表示实例已售罄。
+     * 实例是否售卖。取值范围： <br><li>SELL：表示实例可购买<br></li>SOLD_OUT：表示实例已售罄。
      */
     Status?: string;
     /**
@@ -4454,7 +4454,7 @@ export interface InstanceTypeQuotaItem {
      */
     Frequency?: string;
     /**
-     * 描述库存情况。取值范围： <br><li> UnderStock：表示对应库存即将售罄<br><li> NormalStock：表示对应库存供应有保障<br><li> EnoughStock：表示对应库存非常充足<br><li> WithoutStock：表示对应库存已经售罄
+     * 描述库存情况。取值范围： <br><li> UnderStock：表示对应库存即将售罄<br></li> NormalStock：表示对应库存供应有保障<br><li> EnoughStock：表示对应库存非常充足<br></li> WithoutStock：表示对应库存已经售罄
   注意：此字段可能返回 null，表示取不到有效值。
      */
     StatusCategory?: string;
@@ -5859,7 +5859,7 @@ export interface InstanceChargePrepaid {
      */
     Period: number;
     /**
-     * 自动续费标识。取值范围：<br><li>NOTIFY_AND_AUTO_RENEW：通知过期且自动续费<br><li>NOTIFY_AND_MANUAL_RENEW：通知过期不自动续费<br><li>DISABLE_NOTIFY_AND_MANUAL_RENEW：不通知过期不自动续费<br><br>默认取值：NOTIFY_AND_MANUAL_RENEW。若该参数指定为NOTIFY_AND_AUTO_RENEW，在账户余额充足的情况下，实例到期后将按月自动续费。
+     * 自动续费标识。取值范围：<br><li>NOTIFY_AND_AUTO_RENEW：通知过期且自动续费</li><br><li>NOTIFY_AND_MANUAL_RENEW：通知过期不自动续费</li><br><li>DISABLE_NOTIFY_AND_MANUAL_RENEW：不通知过期不自动续费</li><br><br>默认取值：NOTIFY_AND_MANUAL_RENEW。若该参数指定为NOTIFY_AND_AUTO_RENEW，在账户余额充足的情况下，实例到期后将按月自动续费。
   注意：此字段可能返回 null，表示取不到有效值。
      */
     RenewFlag?: string;

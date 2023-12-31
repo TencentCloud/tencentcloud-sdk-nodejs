@@ -18,17 +18,23 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  LabelGrade,
+  Tag,
   SentimentAnalysis,
   Positions,
   RiskDetails,
+  ModerateTextResponse,
   TextModerationRequest,
   DetailResults,
+  ModelResult,
   HitInfo,
-  Tag,
-  User,
+  ModerationDetail,
+  ModerateTextRequest,
   Device,
   SentimentDetail,
   TextModerationResponse,
+  LibCheckResult,
+  User,
 } from "./tms_models"
 
 /**
@@ -38,6 +44,16 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("tms.tencentcloudapi.com", "2020-12-29", clientConfig)
+  }
+
+  /**
+   * 天御文本内容安全审核接口，改接口会按照客户定制标签输出审核结果
+   */
+  async ModerateText(
+    req: ModerateTextRequest,
+    cb?: (error: string, rep: ModerateTextResponse) => void
+  ): Promise<ModerateTextResponse> {
+    return this.request("ModerateText", req, cb)
   }
 
   /**

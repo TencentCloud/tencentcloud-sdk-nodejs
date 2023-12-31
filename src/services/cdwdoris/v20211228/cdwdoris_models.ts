@@ -507,7 +507,10 @@ export interface CreateInstanceNewRequest {
    */
   Tags?: Array<Tag>
   /**
-   * 高可用类型：0：非高可用，1：读高可用，2：读写高可用。
+   * 高可用类型：
+0：非高可用（只有1个FE，FeSpec.CreateInstanceSpec.Count=1），
+1：读高可用（至少需部署3个FE，FeSpec.CreateInstanceSpec.Count>=3，且为奇数），
+2：读写高可用（至少需部署5个FE，FeSpec.CreateInstanceSpec.Count>=5，且为奇数）。
    */
   HaType?: number
   /**
