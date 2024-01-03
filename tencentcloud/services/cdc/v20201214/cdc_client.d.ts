@@ -52,7 +52,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeDedicatedClusters(req: DescribeDedicatedClustersRequest, cb?: (error: string, rep: DescribeDedicatedClustersResponse) => void): Promise<DescribeDedicatedClustersResponse>;
     /**
-     * 专用集群宿主机信息
+     * 查询专用集群宿主机信息
      */
     DescribeDedicatedClusterHosts(req: DescribeDedicatedClusterHostsRequest, cb?: (error: string, rep: DescribeDedicatedClusterHostsResponse) => void): Promise<DescribeDedicatedClusterHostsResponse>;
     /**
@@ -64,7 +64,7 @@ export declare class Client extends AbstractClient {
      */
     CreateDedicatedClusterOrder(req: CreateDedicatedClusterOrderRequest, cb?: (error: string, rep: CreateDedicatedClusterOrderResponse) => void): Promise<CreateDedicatedClusterOrderResponse>;
     /**
-     * 专用集群概览信息
+     * 查询专用集群概览信息
      */
     DescribeDedicatedClusterOverview(req: DescribeDedicatedClusterOverviewRequest, cb?: (error: string, rep: DescribeDedicatedClusterOverviewResponse) => void): Promise<DescribeDedicatedClusterOverviewResponse>;
     /**

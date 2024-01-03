@@ -954,25 +954,125 @@ export interface DescribeAccessControlEventsExportResponse {
 }
 
 /**
- * DescribeImageRiskSummary返回参数结构体
+ * 集群的pod详细信息
  */
-export interface DescribeImageRiskSummaryResponse {
+export interface ClusterPodInfo {
   /**
-   * 安全漏洞
+   * Pod名称.
    */
-  VulnerabilityCnt: Array<RunTimeRiskInfo>
+  PodName?: string
   /**
-   * 木马病毒
+   * Pod状态
    */
-  MalwareVirusCnt: Array<RunTimeRiskInfo>
+  Status?: string
   /**
-   * 敏感信息
+   * Pod IP
    */
-  RiskCnt: Array<RunTimeRiskInfo>
+  PodIP?: string
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 节点内网Ip
    */
-  RequestId?: string
+  NodeLanIP?: string
+  /**
+   * 所属的工作负载名字
+   */
+  WorkloadName?: string
+  /**
+   * 所属工作负载类型
+   */
+  WorkloadKind?: string
+  /**
+   * 所属集群名字
+   */
+  ClusterName?: string
+  /**
+   * 所属集群ID
+   */
+  ClusterId?: string
+  /**
+   * 所属命名空间
+   */
+  Namespace?: string
+  /**
+   * 所属地域
+   */
+  Region?: string
+  /**
+   * 运行时间
+   */
+  Age?: string
+  /**
+   * 创建时间
+   */
+  StartTime?: string
+  /**
+   * 重启次数
+   */
+  Restarts?: number
+  /**
+   * 关联的service名字
+   */
+  ServiceName?: string
+  /**
+   * 关联的service数量
+   */
+  ServiceCount?: number
+  /**
+   * 关联的容器名字
+   */
+  ContainerName?: string
+  /**
+   * 关联的容器数量
+   */
+  ContainerCount?: number
+  /**
+   * CPU占用率
+   */
+  CPU?: number
+  /**
+   * 内存占用量
+   */
+  Memory?: number
+  /**
+   * Pod标签
+   */
+  Labels?: string
+  /**
+   * 集群状态
+   */
+  ClusterStatus?: string
+  /**
+   * 工作负载标签
+   */
+  WorkloadLabels?: string
+  /**
+   * 容器Id
+   */
+  ContainerId?: string
+  /**
+   * 主机名称
+   */
+  HostName?: string
+  /**
+   * 主机Id
+   */
+  HostId?: string
+  /**
+   * 集群类型
+   */
+  ClusterType?: string
+  /**
+   * abc
+   */
+  NodeName?: string
+  /**
+   * NORMAL：普通节点 SUPER：超级节点
+   */
+  NodeType?: string
+  /**
+   * 计费核数
+   */
+  ChargeCoresCnt?: number
 }
 
 /**
@@ -1537,21 +1637,34 @@ export interface DescribeRiskSyscallWhiteListDetailRequest {
 }
 
 /**
- * DescribeK8sApiAbnormalRuleScopeList返回参数结构体
+ * DescribeAffectedWorkloadList请求参数结构体
  */
-export interface DescribeK8sApiAbnormalRuleScopeListResponse {
+export interface DescribeAffectedWorkloadListRequest {
   /**
-   * 总数
+   * 唯一的检测项的ID
    */
-  TotalCount: number
+  CheckItemId: number
   /**
-   * 列表
+   * 偏移量
    */
-  List: Array<K8sApiAbnormalRuleScopeInfo>
+  Offset?: number
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 每次查询的最大记录数量
    */
-  RequestId?: string
+  Limit?: number
+  /**
+   * Name - String
+Name 可取值：WorkloadType,ClusterId
+   */
+  Filters?: Array<ComplianceFilters>
+  /**
+   * 排序字段
+   */
+  By?: string
+  /**
+   * 排序方式 asc,desc
+   */
+  Order?: string
 }
 
 /**
@@ -3104,26 +3217,25 @@ export interface DescribeAssetImageRiskListExportRequest {
 }
 
 /**
- * DescribeAffectedWorkloadList请求参数结构体
+ * DescribeAssetSuperNodeList请求参数结构体
  */
-export interface DescribeAffectedWorkloadListRequest {
+export interface DescribeAssetSuperNodeListRequest {
   /**
-   * 唯一的检测项的ID
+   * 过滤条件。
+<li>NodeID- String - 是否必填：否 - ID </li>
+<li>NodeName- String - 是否必填：否 - 超级节点名称 </li>
+<li>SubnetName- String - 是否必填：否 - VPC子网 </li>
+<li>AgentStatus- String - 是否必填：否 - 安装状态UNINSTALL:未安装;INSTALLED:已安装;INSTALLING:安装中; </li>
    */
-  CheckItemId: number
+  Filters?: Array<RunTimeFilters>
   /**
-   * 偏移量
-   */
-  Offset?: number
-  /**
-   * 每次查询的最大记录数量
+   * 需要返回的数量，默认为10，最大值为100
    */
   Limit?: number
   /**
-   * Name - String
-Name 可取值：WorkloadType,ClusterId
+   * 偏移量，默认为0。
    */
-  Filters?: Array<ComplianceFilters>
+  Offset?: number
   /**
    * 排序字段
    */
@@ -3744,6 +3856,24 @@ export interface DescribeVulScanInfoRequest {
    * 仓库镜像漏洞扫描任务ID，无则返回最近一次的漏洞任务扫描
    */
   RegistryTaskID?: number
+}
+
+/**
+ * DescribeClusterNodes返回参数结构体
+ */
+export interface DescribeClusterNodesResponse {
+  /**
+   * 总数
+   */
+  TotalCount?: number
+  /**
+   * 节点列表
+   */
+  ClusterNodeList?: Array<ClusterNodeInfo>
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -8243,25 +8373,51 @@ export interface ScanComplianceAssetsResponse {
 }
 
 /**
- * DescribeCompliancePeriodTaskList请求参数结构体
+ * DescribeClusterNodes请求参数结构体
  */
-export interface DescribeCompliancePeriodTaskListRequest {
+export interface DescribeClusterNodesRequest {
   /**
-   * 资产的类型，取值为：
-ASSET_CONTAINER, 容器
-ASSET_IMAGE, 镜像
-ASSET_HOST, 主机
-ASSET_K8S, K8S资产
+   * 集群Id,不输入表示查询所有
    */
-  AssetType?: string
+  ClusterId?: string
   /**
-   * 偏移量，默认为0。
+   * 偏移量
    */
   Offset?: number
   /**
-   * 需要返回的数量，默认为10，最大值为100。
+   * 每次查询的最大记录数量
    */
   Limit?: number
+  /**
+   * Name 可取值：
+DefendStatus（防护状态）:
+	Defended 已防护
+	UnDefended 未防护
+AgentStatus (容器agent状态):
+ 	OFFLINE 离线
+ 	ONLINE 在线
+ 	UNINSTALL 未安装
+InstanceState (节点状态):
+  	Running 运行中
+  	Ready 准备
+  	Notready 未准备好
+  	Initializing 初始化
+  	Failed 失败
+  	Error 错误
+InstanceRole (节点角色)
+    WORKER 工作节点
+    MASTER_ETCD 主节点
+    SUPER 超级节点
+   */
+  Filters?: Array<ComplianceFilters>
+  /**
+   * 排序字段
+   */
+  By?: string
+  /**
+   * 排序方式 asc,desc
+   */
+  Order?: string
 }
 
 /**
@@ -8797,6 +8953,77 @@ USER_DEFINED: 用户自定义
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IsDelete?: boolean
+}
+
+/**
+ * 集群的节点信息
+ */
+export interface ClusterNodeInfo {
+  /**
+   * 实例id
+   */
+  InstanceId?: string
+  /**
+   * 内网ip地址
+   */
+  PrivateIpAddresses?: string
+  /**
+   * 节点的角色，Master、Work等
+   */
+  InstanceRole?: string
+  /**
+   * 实例的状态（running 运行中，initializing 初始化中，failed 异常）
+   */
+  InstanceState?: string
+  /**
+   * 节点名称
+   */
+  NodeName?: string
+  /**
+   * agent安装状态
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AgentStatus?: string
+  /**
+   * 公网ip
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PublicIP?: string
+  /**
+   * 节点ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HostID?: string
+  /**
+   * 主机类型(普通节点情况)
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MachineType?: string
+  /**
+   * 节点类型(
+NORMAL: 普通节点
+SUPER:超级节点
+)
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NodeType?: string
+  /**
+   * uuid
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UUID?: string
+  /**
+   * 计费核数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ChargeCoresCnt?: number
+  /**
+   * 防护状态:
+已防护: Defended
+未防护: UnDefended
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DefendStatus?: string
 }
 
 /**
@@ -9516,6 +9743,28 @@ export interface DescribeAccessControlEventsRequest {
 }
 
 /**
+ * DescribeCompliancePeriodTaskList请求参数结构体
+ */
+export interface DescribeCompliancePeriodTaskListRequest {
+  /**
+   * 资产的类型，取值为：
+ASSET_CONTAINER, 容器
+ASSET_IMAGE, 镜像
+ASSET_HOST, 主机
+ASSET_K8S, K8S资产
+   */
+  AssetType?: string
+  /**
+   * 偏移量，默认为0。
+   */
+  Offset?: number
+  /**
+   * 需要返回的数量，默认为10，最大值为100。
+   */
+  Limit?: number
+}
+
+/**
  * DescribeAccessControlRuleDetail请求参数结构体
  */
 export interface DescribeAccessControlRuleDetailRequest {
@@ -10136,13 +10385,36 @@ export interface DescribeAbnormalProcessRulesExportResponse {
 }
 
 /**
- * SyncAssetImageRegistryAsset返回参数结构体
+ * DescribeSuperNodePodList请求参数结构体
  */
-export interface SyncAssetImageRegistryAssetResponse {
+export interface DescribeSuperNodePodListRequest {
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 过滤条件。
+<li>NodeUniqueID- String - 是否必填：否 - 节点唯一id </li>
+<li>PodName- String - 是否必填：否 - Pod示例名称 </li>
+<li>PodIP- String - 是否必填：否 - POD IP </li>
+<li>Namespace- String - 是否必填：否 - 命名空间 </li>
+<li>Deployment- String - 是否必填：否 - 所属工作负载 </li>
+<li>Status- String - 是否必填：否 - 状态 </li>
+
    */
-  RequestId?: string
+  Filters?: Array<RunTimeFilters>
+  /**
+   * 需要返回的数量，默认为10，最大值为100
+   */
+  Limit?: number
+  /**
+   * 偏移量，默认为0。
+   */
+  Offset?: number
+  /**
+   * 排序字段
+   */
+  By?: string
+  /**
+   * 排序方式 asc,desc
+   */
+  Order?: string
 }
 
 /**
@@ -11303,6 +11575,16 @@ export interface CreateVulContainerExportJobResponse {
 }
 
 /**
+ * SyncAssetImageRegistryAsset返回参数结构体
+ */
+export interface SyncAssetImageRegistryAssetResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeAssetImageRegistryListExport请求参数结构体
  */
 export interface DescribeAssetImageRegistryListExportRequest {
@@ -11852,49 +12134,17 @@ EVENT_ADD_WHITE：已加白
 }
 
 /**
- * DescribeNetworkFirewallPolicyYamlDetail返回参数结构体
+ * DescribeK8sApiAbnormalRuleScopeList返回参数结构体
  */
-export interface DescribeNetworkFirewallPolicyYamlDetailResponse {
+export interface DescribeK8sApiAbnormalRuleScopeListResponse {
   /**
-   * 集群Id
+   * 总数
    */
-  ClusterId: string
+  TotalCount: number
   /**
-   * 策略名
+   * 列表
    */
-  PolicyName: string
-  /**
-   * base64编码的yaml字符串
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Yaml: string
-  /**
-   * 策略描述
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Description: string
-  /**
-   * 策略创建时间
-   */
-  PolicyCreateTime: string
-  /**
-   * 策略源类型，分为System和Manual，分别代表手动和系统添加
-   */
-  PolicySourceType: string
-  /**
-   * 网络策略对应的网络插件
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  NetworkPolicyPlugin: string
-  /**
-   * 网络策略状态
-   */
-  PublishStatus: string
-  /**
-   * 网络发布结果
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  PublishResult: string
+  List: Array<K8sApiAbnormalRuleScopeInfo>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -12807,6 +13057,56 @@ export interface DescribeVulDefenceSettingResponse {
 }
 
 /**
+ * DescribeNetworkFirewallPolicyYamlDetail返回参数结构体
+ */
+export interface DescribeNetworkFirewallPolicyYamlDetailResponse {
+  /**
+   * 集群Id
+   */
+  ClusterId: string
+  /**
+   * 策略名
+   */
+  PolicyName: string
+  /**
+   * base64编码的yaml字符串
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Yaml: string
+  /**
+   * 策略描述
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Description: string
+  /**
+   * 策略创建时间
+   */
+  PolicyCreateTime: string
+  /**
+   * 策略源类型，分为System和Manual，分别代表手动和系统添加
+   */
+  PolicySourceType: string
+  /**
+   * 网络策略对应的网络插件
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NetworkPolicyPlugin: string
+  /**
+   * 网络策略状态
+   */
+  PublishStatus: string
+  /**
+   * 网络发布结果
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PublishResult: string
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeImageComponentList请求参数结构体
  */
 export interface DescribeImageComponentListRequest {
@@ -13385,6 +13685,20 @@ export interface CompliancePolicyAssetSetItem {
    * 需要忽略指定检查项内的资产ID列表，为空表示所有
    */
   CustomerAssetItemIdSet?: Array<number | bigint>
+}
+
+/**
+ * 网络集群网络空间标签返回的结构体
+ */
+export interface NetworkClusterNamespaceLabelInfo {
+  /**
+   * 网络空间标签
+   */
+  Labels: string
+  /**
+   * 网络空间名字
+   */
+  Name: string
 }
 
 /**
@@ -14108,6 +14422,28 @@ export interface DescribeAssetImageListExportRequest {
  * ModifyAssetImageRegistryScanStopOneKey返回参数结构体
  */
 export interface ModifyAssetImageRegistryScanStopOneKeyResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeImageRiskSummary返回参数结构体
+ */
+export interface DescribeImageRiskSummaryResponse {
+  /**
+   * 安全漏洞
+   */
+  VulnerabilityCnt: Array<RunTimeRiskInfo>
+  /**
+   * 木马病毒
+   */
+  MalwareVirusCnt: Array<RunTimeRiskInfo>
+  /**
+   * 敏感信息
+   */
+  RiskCnt: Array<RunTimeRiskInfo>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -15433,6 +15769,84 @@ export interface DeleteSearchTemplateResponse {
 }
 
 /**
+ * 超级节点Pod列表Item信息
+ */
+export interface SuperNodePodListItem {
+  /**
+   * pod名称
+   */
+  PodName?: string
+  /**
+   * podIP
+   */
+  PodIP?: string
+  /**
+   * 节点唯一id
+   */
+  NodeUniqueID?: string
+  /**
+   * 运行状态
+   */
+  Status?: string
+  /**
+   * cpu需求核数
+   */
+  CpuRequest?: number
+  /**
+   * cpu限制核数
+   */
+  CpuLimit?: number
+  /**
+   * 内存需求大小
+   */
+  MemRequest?: number
+  /**
+   * 内存限制大小
+   */
+  MemLimit?: number
+  /**
+   * 命名空间
+   */
+  Namespace?: string
+  /**
+   * 工作负载名称
+   */
+  DeploymentName?: string
+  /**
+   * 工作负载id
+   */
+  DeploymentID?: string
+  /**
+   * 启动时间
+   */
+  StartTime?: string
+  /**
+   * 创建时间
+   */
+  CreateTime?: string
+  /**
+   * 关联容器个数
+   */
+  RelateContainerCount?: number
+  /**
+   * 运行时间
+   */
+  RunningTime?: string
+  /**
+   * PodUid
+   */
+  PodUid?: string
+  /**
+   * 计费核数
+   */
+  ChargeCoresCnt?: number
+  /**
+   * 防护状态
+   */
+  DefendStatus?: string
+}
+
+/**
  * AddComplianceAssetPolicySetToWhitelist请求参数结构体
  */
 export interface AddComplianceAssetPolicySetToWhitelistRequest {
@@ -15621,17 +16035,21 @@ export interface ModifyEscapeWhiteListResponse {
 }
 
 /**
- * 网络集群网络空间标签返回的结构体
+ * DescribeUserPodList返回参数结构体
  */
-export interface NetworkClusterNamespaceLabelInfo {
+export interface DescribeUserPodListResponse {
   /**
-   * 网络空间标签
+   * Pod列表详细信息
    */
-  Labels: string
+  PodList?: Array<ClusterPodInfo>
   /**
-   * 网络空间名字
+   * Pod列表总数量
    */
-  Name: string
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -17925,6 +18343,44 @@ export interface DescribeImageAutoAuthorizedLogListResponse {
 }
 
 /**
+ * DescribeUserPodList请求参数结构体
+ */
+export interface DescribeUserPodListRequest {
+  /**
+   * 集群Id,不填表示获取用户所有pod
+   */
+  ClusterId?: string
+  /**
+   * 偏移量
+   */
+  Offset?: number
+  /**
+   * 每次查询的最大记录数量
+   */
+  Limit?: number
+  /**
+   * Name 可取值：ClusterId集群id,Namespace命名空间等
+   */
+  Filters?: Array<ComplianceFilters>
+  /**
+   * 排序字段
+   */
+  By?: string
+  /**
+   * 排序方式 asc,desc
+   */
+  Order?: string
+  /**
+   * Service名称
+   */
+  ServiceName?: string
+  /**
+   * 命名空间
+   */
+  Namespace?: string
+}
+
+/**
  * DeleteComplianceAssetPolicySetFromWhitelist请求参数结构体
  */
 export interface DeleteComplianceAssetPolicySetFromWhitelistRequest {
@@ -18499,6 +18955,24 @@ export interface DescribeVulIgnoreLocalImageListResponse {
    * 镜像列表
    */
   List: Array<VulIgnoreLocalImage>
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeAssetSuperNodeList返回参数结构体
+ */
+export interface DescribeAssetSuperNodeListResponse {
+  /**
+   * 超级节点列表
+   */
+  List?: Array<SuperNodeListItem>
+  /**
+   * 总数
+   */
+  TotalCount?: number
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -20417,6 +20891,24 @@ export interface DescribeComplianceAssetListResponse {
 }
 
 /**
+ * DescribeSuperNodePodList返回参数结构体
+ */
+export interface DescribeSuperNodePodListResponse {
+  /**
+   * 列表
+   */
+  List?: Array<SuperNodePodListItem>
+  /**
+   * 总数
+   */
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateVulContainerExportJob请求参数结构体
  */
 export interface CreateVulContainerExportJobRequest {
@@ -21819,6 +22311,86 @@ export interface UpdateNetworkFirewallPolicyDetailRequest {
    * 自定义规则
    */
   CustomPolicy?: Array<NetworkCustomPolicy>
+}
+
+/**
+ * 超级节点信息
+ */
+export interface SuperNodeListItem {
+  /**
+   * 超级节点ID
+   */
+  NodeID?: string
+  /**
+   * 超级节点名称
+   */
+  NodeName?: string
+  /**
+   * 所属集群名
+   */
+  ClusterName?: string
+  /**
+   * 所属集群ID
+   */
+  ClusterID?: string
+  /**
+   * 节点状态:Running,Ready,Notready,Initializing,Failed,Error
+   */
+  Status?: string
+  /**
+   * 子网ID
+   */
+  SubNetID?: string
+  /**
+   * 子网名称
+   */
+  SubNetName?: string
+  /**
+   * 子网网段
+   */
+  SubNetCidr?: string
+  /**
+   * 可用区ID
+   */
+  ZoneID?: string
+  /**
+   * 可用区
+   */
+  Zone?: string
+  /**
+   * 创建时间
+   */
+  CreateTime?: string
+  /**
+   * 关联pod数
+   */
+  RelatePodCount?: number
+  /**
+   * 关联容器数
+   */
+  RelateContainerCount?: number
+  /**
+   * agent安装状态UNINSTALL:未安装;INSTALLED:已安装;INSTALLING:安装中;
+   */
+  AgentStatus?: string
+  /**
+   * 节点唯一id
+   */
+  NodeUniqueID?: string
+  /**
+   * 集群接入状态
+   */
+  ClusterAccessedStatus?: string
+  /**
+   * 计费核数
+   */
+  ChargeCoresCnt?: number
+  /**
+   * 防护状态:
+已防护: Defended
+未防护: UnDefended
+   */
+  DefendStatus?: string
 }
 
 /**

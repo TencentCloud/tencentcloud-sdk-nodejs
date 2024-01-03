@@ -1939,7 +1939,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeLogHistogram", req, cb);
     }
     /**
-     * 查询主机相关核心文件监控规则列 表
+     * 查询主机相关核心文件监控规则列表
      */
     async DescribeMachineFileTamperRules(req, cb) {
         return this.request("DescribeMachineFileTamperRules", req, cb);

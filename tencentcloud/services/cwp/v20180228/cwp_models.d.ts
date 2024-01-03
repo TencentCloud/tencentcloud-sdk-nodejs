@@ -3475,11 +3475,11 @@ export interface DescribeMachineFileTamperRulesResponse {
     /**
      * 总数
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 查询主机相关核心文件监控规则详情
      */
-    List: Array<MachineFileTamperRule>;
+    List?: Array<MachineFileTamperRule>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -12457,7 +12457,7 @@ export interface DescribeLicenseListRequest {
  */
 export interface CreateMalwareWhiteListRequest {
     /**
-     * 白名单模式； 0MD5白名单，1自定义
+     * 白名单模式； 0 MD5白名单，1自定义
      */
     Mode: number;
     /**
@@ -14464,7 +14464,9 @@ export interface DescribeBaselineRuleIgnoreListResponse {
  */
 export interface ExportJavaMemShellsRequest {
     /**
-     * 过滤条件：Keywords: ip或者主机名模糊查询, Type，Status精确匹配，CreateBeginTime，CreateEndTime时间段
+     * 过滤条件：InstanceID、IP、
+  
+  MachineName主机名模糊查询, Type，Status精确匹配，CreateBeginTime，CreateEndTime时间段
      */
     Filters?: Array<Filter>;
     /**
@@ -22362,16 +22364,16 @@ export interface DescribeAssetMachineListRequest {
   <li>IP   内网IP或公网IP</li>
   <li>OsType - String - 是否必填：否 - windows或linux</li>
   <li>CpuLoad - Int - 是否必填：否 -
-  0: 未知  1: 低负载
-  2: 中负载  3: 高负载</li>
+      0: 未知  1: 低负载
+      2: 中负载  3: 高负载</li>
   <li>DiskLoad - Int - 是否必填：否 -
-  0: 0%或未知  1: 0%～20%
-  2: 20%～50%  3: 50%～80%
-  4: 80%～100%</li>
+      0: 0%或未知  1: 0%～20%
+      2: 20%～50%  3: 50%～80%
+      4: 80%～100%</li>
   <li>MemLoad - Int - 是否必填：否 -
-  0: 0%或未知  1: 0%～20%
-  2: 20%～50%  3: 50%～80%
-  4: 80%～100%</li>
+      0: 0%或未知  1: 0%～20%
+      2: 20%～50%  3: 50%～80%
+      4: 80%～100%</li>
   <li>Quuid：主机Quuid</li>
   <li>Os -String 是否必填: 否 - 操作系统( DescribeMachineOsList 接口 值 )</li>
      */
@@ -26675,7 +26677,7 @@ export interface DescribePublicProxyInstallCommandRequest {
  */
 export interface ExportJavaMemShellsResponse {
     /**
-     * 任务ID,需要到接口“异步导出任务”ExportTasks获取DownloadUrl下载地址
+     * 任务ID,需要到接口“异步导出任务”https://cloud.tencent.com/document/product/296/52508 获取DownloadUrl下载地址
      */
     TaskId?: string;
     /**
@@ -29229,8 +29231,8 @@ export interface DescribeAssetUserListRequest {
      */
     Order?: string;
     /**
-     * 可选排序：[FirstTime|LoginTime|PasswordChangeTime|PasswordDuaTime]
-  PasswordLockDays
+     * 可选排序：[FirstTime|LoginTime|PasswordChangeTime|PasswordDuaTime|PasswordLockDays]
+  
      */
     By?: string;
 }

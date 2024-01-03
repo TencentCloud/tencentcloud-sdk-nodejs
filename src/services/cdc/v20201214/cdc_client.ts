@@ -56,6 +56,7 @@ import {
   DescribeDedicatedClusterOrdersRequest,
   DescribeDedicatedClustersResponse,
   HostStatistic,
+  HostDetailInfo,
   CbsInfo,
   ModifySiteDeviceInfoResponse,
   CreateDedicatedClusterRequest,
@@ -200,7 +201,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 专用集群宿主机信息
+   * 查询专用集群宿主机信息
    */
   async DescribeDedicatedClusterHosts(
     req: DescribeDedicatedClusterHostsRequest,
@@ -230,7 +231,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 专用集群概览信息
+   * 查询专用集群概览信息
    */
   async DescribeDedicatedClusterOverview(
     req: DescribeDedicatedClusterOverviewRequest,

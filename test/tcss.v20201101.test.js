@@ -528,9 +528,9 @@ it("tcss.v20201101.DescribeAssetImageRegistryRegistryList", async function () {
     }
 })
 
-it("tcss.v20201101.ModifyAssetImageRegistryScanStop", async function () {
+it("tcss.v20201101.ExportVirusList", async function () {
     try {
-       const data = await client.ModifyAssetImageRegistryScanStop({})
+       const data = await client.ExportVirusList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -661,6 +661,16 @@ it("tcss.v20201101.DescribeAssetImageScanSetting", async function () {
 it("tcss.v20201101.CreateCheckComponent", async function () {
     try {
        const data = await client.CreateCheckComponent({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcss.v20201101.SetCheckMode", async function () {
+    try {
+       const data = await client.SetCheckMode({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1058,6 +1068,16 @@ it("tcss.v20201101.DescribeContainerAssetSummary", async function () {
     }
 })
 
+it("tcss.v20201101.DescribeAssetSuperNodeList", async function () {
+    try {
+       const data = await client.DescribeAssetSuperNodeList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcss.v20201101.DescribeImageRegistryTimingScanTask", async function () {
     try {
        const data = await client.DescribeImageRegistryTimingScanTask({})
@@ -1331,6 +1351,16 @@ it("tcss.v20201101.CreateSearchTemplate", async function () {
 it("tcss.v20201101.DescribePostPayDetail", async function () {
     try {
        const data = await client.DescribePostPayDetail({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcss.v20201101.DescribeSuperNodePodList", async function () {
+    try {
+       const data = await client.DescribeSuperNodePodList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -2438,9 +2468,9 @@ it("tcss.v20201101.DescribeComplianceAssetPolicyItemList", async function () {
     }
 })
 
-it("tcss.v20201101.SetCheckMode", async function () {
+it("tcss.v20201101.DescribeClusterNodes", async function () {
     try {
-       const data = await client.SetCheckMode({})
+       const data = await client.DescribeClusterNodes({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -3168,6 +3198,16 @@ it("tcss.v20201101.DescribeVulContainerList", async function () {
     }
 })
 
+it("tcss.v20201101.ModifyAssetImageRegistryScanStop", async function () {
+    try {
+       const data = await client.ModifyAssetImageRegistryScanStop({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcss.v20201101.DescribeSecLogVasInfo", async function () {
     try {
        const data = await client.DescribeSecLogVasInfo({})
@@ -3178,9 +3218,9 @@ it("tcss.v20201101.DescribeSecLogVasInfo", async function () {
     }
 })
 
-it("tcss.v20201101.ExportVirusList", async function () {
+it("tcss.v20201101.DescribeUserPodList", async function () {
     try {
-       const data = await client.ExportVirusList({})
+       const data = await client.DescribeUserPodList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

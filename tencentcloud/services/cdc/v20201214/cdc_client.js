@@ -94,7 +94,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDedicatedClusters", req, cb);
     }
     /**
-     * 专用集群宿主机信息
+     * 查询专用集群宿主机信息
      */
     async DescribeDedicatedClusterHosts(req, cb) {
         return this.request("DescribeDedicatedClusterHosts", req, cb);
@@ -112,7 +112,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateDedicatedClusterOrder", req, cb);
     }
     /**
-     * 专用集群概览信息
+     * 查询专用集群概览信息
      */
     async DescribeDedicatedClusterOverview(req, cb) {
         return this.request("DescribeDedicatedClusterOverview", req, cb);

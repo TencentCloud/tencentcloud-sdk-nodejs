@@ -1283,7 +1283,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeLogHistogram(req: DescribeLogHistogramRequest, cb?: (error: string, rep: DescribeLogHistogramResponse) => void): Promise<DescribeLogHistogramResponse>;
     /**
-     * 查询主机相关核心文件监控规则列 表
+     * 查询主机相关核心文件监控规则列表
      */
     DescribeMachineFileTamperRules(req: DescribeMachineFileTamperRulesRequest, cb?: (error: string, rep: DescribeMachineFileTamperRulesResponse) => void): Promise<DescribeMachineFileTamperRulesResponse>;
     /**

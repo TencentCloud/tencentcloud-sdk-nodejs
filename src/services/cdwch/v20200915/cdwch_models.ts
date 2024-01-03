@@ -271,16 +271,16 @@ export interface DescribeSpecResponse {
   /**
    * zookeeper节点规格描述
    */
-  CommonSpec: Array<ResourceSpec>
+  CommonSpec?: Array<ResourceSpec>
   /**
    * 数据节点规格描述
    */
-  DataSpec: Array<ResourceSpec>
+  DataSpec?: Array<ResourceSpec>
   /**
    * 云盘列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  AttachCBSSpec: Array<DiskSpec>
+  AttachCBSSpec?: Array<DiskSpec>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -303,6 +303,10 @@ export interface DescribeSpecRequest {
    * 是否弹性ck
    */
   IsElastic?: boolean
+  /**
+   * 是否是购买页面需要的spec
+   */
+  CaseType?: number
 }
 
 /**

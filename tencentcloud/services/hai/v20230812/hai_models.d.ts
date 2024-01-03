@@ -340,9 +340,10 @@ export interface DescribeApplicationsRequest {
     ApplicationIds?: Array<string>;
     /**
      * 过滤器，跟ApplicationIds不能共用，支持的filter主要有：
-  application-id，精确匹配
-  scene-id，精确匹配
-  application-name，模糊匹配
+  application-id: 精确匹配;
+  scene-id: 精确匹配;
+  application-name: 模糊匹配;
+  application-type: 精确匹配;
      */
     Filters?: Array<Filter>;
     /**
@@ -356,6 +357,14 @@ export interface DescribeApplicationsRequest {
   
      */
     Limit?: number;
+    /**
+     * 应用列表排序的依据字段。取值范围："CREATED_TIME"：依据应用的创建时间排序。 "APPLICATION_SIZE"：依据应用的大小排序。默认按应用的创建时间排序。
+     */
+    OrderField?: string;
+    /**
+     * 输出应用列表的排列顺序。取值范围："ASC"：升序排列。 "DESC"：降序排列。默认按降序排列。
+     */
+    Order?: string;
 }
 /**
  * RunInstances请求参数结构体
@@ -595,6 +604,27 @@ export interface ApplicationInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     MinSystemDiskSize?: number;
+    /**
+     * 应用类型，目前该项取值可以为PRIVATE_APPLICATION或者PUBLIC_APPLICATION
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ApplicationType?: string;
+    /**
+     * 应用状态：CREATING-创建中；ONLINE -正常在线；DELETING -删除中；ARREARS - 欠费隔离
+  示例值：ONLINE
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ApplicationState?: string;
+    /**
+     * 应用创建时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CreateTime?: string;
+    /**
+     * 应用大小
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ApplicationSize?: number;
 }
 /**
  * DescribeApplications返回参数结构体

@@ -335,10 +335,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeAssetImageRegistryRegistryList", req, cb);
     }
     /**
-     * 镜像仓库停止镜像扫描任务
+     * 运行时文件查杀事件列表导出
      */
-    async ModifyAssetImageRegistryScanStop(req, cb) {
-        return this.request("ModifyAssetImageRegistryScanStop", req, cb);
+    async ExportVirusList(req, cb) {
+        return this.request("ExportVirusList", req, cb);
     }
     /**
      * 查询单个集群的详细信息
@@ -417,6 +417,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CreateCheckComponent(req, cb) {
         return this.request("CreateCheckComponent", req, cb);
+    }
+    /**
+     * 设置检测模式和自动检查
+     */
+    async SetCheckMode(req, cb) {
+        return this.request("SetCheckMode", req, cb);
     }
     /**
      * 查询最新披露漏洞列表
@@ -654,6 +660,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeContainerAssetSummary", req, cb);
     }
     /**
+     * 查询超级节点列表
+     */
+    async DescribeAssetSuperNodeList(req, cb) {
+        return this.request("DescribeAssetSuperNodeList", req, cb);
+    }
+    /**
      * 镜像仓库查看定时任务
      */
     async DescribeImageRegistryTimingScanTask(req, cb) {
@@ -820,6 +832,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribePostPayDetail(req, cb) {
         return this.request("DescribePostPayDetail", req, cb);
+    }
+    /**
+     * 查询超级节点pod列表
+     */
+    async DescribeSuperNodePodList(req, cb) {
+        return this.request("DescribeSuperNodePodList", req, cb);
     }
     /**
      * 容器网络创建Yaml网络策略添加任务
@@ -1483,10 +1501,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeComplianceAssetPolicyItemList", req, cb);
     }
     /**
-     * 设置检测模式和自动检查
+     * 查询集群节点信息
      */
-    async SetCheckMode(req, cb) {
-        return this.request("SetCheckMode", req, cb);
+    async DescribeClusterNodes(req, cb) {
+        return this.request("DescribeClusterNodes", req, cb);
     }
     /**
      * 获取ES查询文档列表
@@ -1921,16 +1939,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeVulContainerList", req, cb);
     }
     /**
+     * 镜像仓库停止镜像扫描任务
+     */
+    async ModifyAssetImageRegistryScanStop(req, cb) {
+        return this.request("ModifyAssetImageRegistryScanStop", req, cb);
+    }
+    /**
      * 查询安全日志商品信息
      */
     async DescribeSecLogVasInfo(req, cb) {
         return this.request("DescribeSecLogVasInfo", req, cb);
     }
     /**
-     * 运行时文件查杀事件列表导出
+     * 获取用户的pod列表
      */
-    async ExportVirusList(req, cb) {
-        return this.request("ExportVirusList", req, cb);
+    async DescribeUserPodList(req, cb) {
+        return this.request("DescribeUserPodList", req, cb);
     }
     /**
      * 查询木马样本下载url

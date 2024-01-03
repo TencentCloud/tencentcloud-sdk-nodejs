@@ -4507,7 +4507,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询主机相关核心文件监控规则列 表
+   * 查询主机相关核心文件监控规则列表
    */
   async DescribeMachineFileTamperRules(
     req: DescribeMachineFileTamperRulesRequest,

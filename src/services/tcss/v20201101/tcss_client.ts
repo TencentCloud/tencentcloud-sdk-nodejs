@@ -60,7 +60,7 @@ import {
   DescribeAssetImageRegistryVirusListExportResponse,
   DescribeSecEventsTendencyResponse,
   DescribeAccessControlEventsExportResponse,
-  DescribeImageRiskSummaryResponse,
+  ClusterPodInfo,
   DescribeNetworkFirewallPolicyDetailRequest,
   CreateAccessControlsRuleExportJobResponse,
   ModifyAssetImageRegistryScanStopResponse,
@@ -85,7 +85,7 @@ import {
   DescribeAssetImageListRequest,
   DescribeSecLogDeliveryClsOptionsRequest,
   DescribeRiskSyscallWhiteListDetailRequest,
-  DescribeK8sApiAbnormalRuleScopeListResponse,
+  DescribeAffectedWorkloadListRequest,
   ModifyAbnormalProcessRuleStatusRequest,
   DescribeVulTendencyResponse,
   ProcessDetailInfo,
@@ -150,7 +150,7 @@ import {
   DescribeRiskDnsListRequest,
   SetCheckModeRequest,
   DescribeAssetImageRiskListExportRequest,
-  DescribeAffectedWorkloadListRequest,
+  DescribeAssetSuperNodeListRequest,
   DescribeVulDefenceHostRequest,
   EmergencyVulInfo,
   ExportVirusListRequest,
@@ -168,6 +168,7 @@ import {
   DescribeSecLogJoinObjectListResponse,
   CreateSystemVulExportJobRequest,
   DescribeVulScanInfoRequest,
+  DescribeClusterNodesResponse,
   DescribeRiskSyscallDetailRequest,
   ScanComplianceAssetsByPolicyItemRequest,
   DescribeAbnormalProcessRulesRequest,
@@ -340,7 +341,7 @@ import {
   AddNetworkFirewallPolicyYamlDetailRequest,
   DescribeVulLevelImageSummaryResponse,
   ScanComplianceAssetsResponse,
-  DescribeCompliancePeriodTaskListRequest,
+  DescribeClusterNodesRequest,
   CreateAssetImageVirusExportJobResponse,
   DescribeIndexListRequest,
   CreateWebVulExportJobResponse,
@@ -361,6 +362,7 @@ import {
   DescribeAssetHostListResponse,
   DescribeABTestConfigRequest,
   K8sApiAbnormalRuleScopeInfo,
+  ClusterNodeInfo,
   StopVulScanTaskRequest,
   DescribeNetworkFirewallNamespaceListResponse,
   ImageRepoInfo,
@@ -385,6 +387,7 @@ import {
   DescribeAssetImageRiskListExportResponse,
   ModifySecLogCleanSettingInfoRequest,
   DescribeAccessControlEventsRequest,
+  DescribeCompliancePeriodTaskListRequest,
   DescribeAccessControlRuleDetailRequest,
   ModifyVirusScanTimeoutSettingRequest,
   CreateProcessEventsExportJobResponse,
@@ -414,7 +417,7 @@ import {
   DeleteK8sApiAbnormalRuleRequest,
   ModifyVirusFileStatusResponse,
   DescribeAbnormalProcessRulesExportResponse,
-  SyncAssetImageRegistryAssetResponse,
+  DescribeSuperNodePodListRequest,
   DescribeAbnormalProcessEventTendencyRequest,
   DescribeEscapeEventDetailResponse,
   ScanCompliancePolicyItemsResponse,
@@ -462,6 +465,7 @@ import {
   ModifyVirusFileStatusRequest,
   VulAffectedRegistryImageInfo,
   CreateVulContainerExportJobResponse,
+  SyncAssetImageRegistryAssetResponse,
   DescribeAssetImageRegistryListExportRequest,
   CreateK8sApiAbnormalRuleInfoResponse,
   ProcessBaseInfo,
@@ -481,7 +485,7 @@ import {
   DescribeRiskDnsListResponse,
   DescribeNetworkFirewallPolicyDiscoverRequest,
   RiskDnsEventInfo,
-  DescribeNetworkFirewallPolicyYamlDetailResponse,
+  DescribeK8sApiAbnormalRuleScopeListResponse,
   CreateOrModifyPostPayCoresRequest,
   ModifyImageAuthorizedRequest,
   DescribeAssetImageScanTaskRequest,
@@ -507,6 +511,7 @@ import {
   CreateSearchTemplateResponse,
   DescribeAssetContainerDetailResponse,
   DescribeVulDefenceSettingResponse,
+  DescribeNetworkFirewallPolicyYamlDetailResponse,
   DescribeImageComponentListRequest,
   AbnormalProcessChildRuleInfo,
   DescribeNetworkFirewallPolicyListResponse,
@@ -537,6 +542,7 @@ import {
   EscapeEventTendencyInfo,
   DescribeImageRiskTendencyResponse,
   CompliancePolicyAssetSetItem,
+  NetworkClusterNamespaceLabelInfo,
   SyncAssetImageRegistryAssetRequest,
   DescribeComplianceScanFailedAssetListRequest,
   DescribeSearchLogsRequest,
@@ -567,6 +573,7 @@ import {
   DescribeAbnormalProcessDetailResponse,
   DescribeAssetImageListExportRequest,
   ModifyAssetImageRegistryScanStopOneKeyResponse,
+  DescribeImageRiskSummaryResponse,
   VulDefenceEventDetail,
   UpdateNetworkFirewallPolicyYamlDetailRequest,
   DescribeK8sApiAbnormalRuleInfoRequest,
@@ -605,6 +612,7 @@ import {
   ConfirmNetworkFirewallPolicyRequest,
   ContainerMount,
   DeleteSearchTemplateResponse,
+  SuperNodePodListItem,
   AddComplianceAssetPolicySetToWhitelistRequest,
   DescribeVirusAutoIsolateSampleDownloadURLResponse,
   DescribeSecLogVasInfoRequest,
@@ -615,7 +623,7 @@ import {
   ImageVirusInfo,
   StopVulScanTaskResponse,
   ModifyEscapeWhiteListResponse,
-  NetworkClusterNamespaceLabelInfo,
+  DescribeUserPodListResponse,
   ImagesInfo,
   ModifyVirusAutoIsolateExampleSwitchRequest,
   ImageVirus,
@@ -701,6 +709,7 @@ import {
   CkafkaRouteInfo,
   ComponentsInfo,
   DescribeImageAutoAuthorizedLogListResponse,
+  DescribeUserPodListRequest,
   DeleteComplianceAssetPolicySetFromWhitelistRequest,
   DeleteRiskSyscallWhiteListsResponse,
   DescribeAssetImageVirusListRequest,
@@ -728,6 +737,7 @@ import {
   DescribeExportJobDownloadURLResponse,
   DescribeAssetImageRegistryRiskInfoListResponse,
   DescribeVulIgnoreLocalImageListResponse,
+  DescribeAssetSuperNodeListResponse,
   DescribeAssetImageRegistryDetailResponse,
   AddCompliancePolicyItemToWhitelistResponse,
   ComplianceAssetPolicySetItem,
@@ -792,6 +802,7 @@ import {
   DescribeVirusDetailResponse,
   DescribeImageAutoAuthorizedTaskListResponse,
   DescribeComplianceAssetListResponse,
+  DescribeSuperNodePodListResponse,
   CreateVulContainerExportJobRequest,
   DescribeSecLogDeliveryClsSettingResponse,
   DescribeComplianceAssetDetailInfoResponse,
@@ -839,6 +850,7 @@ import {
   DescribeRefreshTaskResponse,
   ReverseShellWhiteListInfo,
   UpdateNetworkFirewallPolicyDetailRequest,
+  SuperNodeListItem,
   EscapeRuleEnabled,
   DescribeK8sApiAbnormalEventInfoRequest,
   DescribeSearchTemplatesRequest,
@@ -1365,13 +1377,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 镜像仓库停止镜像扫描任务
+   * 运行时文件查杀事件列表导出
    */
-  async ModifyAssetImageRegistryScanStop(
-    req: ModifyAssetImageRegistryScanStopRequest,
-    cb?: (error: string, rep: ModifyAssetImageRegistryScanStopResponse) => void
-  ): Promise<ModifyAssetImageRegistryScanStopResponse> {
-    return this.request("ModifyAssetImageRegistryScanStop", req, cb)
+  async ExportVirusList(
+    req: ExportVirusListRequest,
+    cb?: (error: string, rep: ExportVirusListResponse) => void
+  ): Promise<ExportVirusListResponse> {
+    return this.request("ExportVirusList", req, cb)
   }
 
   /**
@@ -1502,6 +1514,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateCheckComponentResponse) => void
   ): Promise<CreateCheckComponentResponse> {
     return this.request("CreateCheckComponent", req, cb)
+  }
+
+  /**
+   * 设置检测模式和自动检查
+   */
+  async SetCheckMode(
+    req: SetCheckModeRequest,
+    cb?: (error: string, rep: SetCheckModeResponse) => void
+  ): Promise<SetCheckModeResponse> {
+    return this.request("SetCheckMode", req, cb)
   }
 
   /**
@@ -1896,6 +1918,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询超级节点列表
+   */
+  async DescribeAssetSuperNodeList(
+    req: DescribeAssetSuperNodeListRequest,
+    cb?: (error: string, rep: DescribeAssetSuperNodeListResponse) => void
+  ): Promise<DescribeAssetSuperNodeListResponse> {
+    return this.request("DescribeAssetSuperNodeList", req, cb)
+  }
+
+  /**
    * 镜像仓库查看定时任务
    */
   async DescribeImageRegistryTimingScanTask(
@@ -2173,6 +2205,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribePostPayDetailResponse) => void
   ): Promise<DescribePostPayDetailResponse> {
     return this.request("DescribePostPayDetail", req, cb)
+  }
+
+  /**
+   * 查询超级节点pod列表
+   */
+  async DescribeSuperNodePodList(
+    req: DescribeSuperNodePodListRequest,
+    cb?: (error: string, rep: DescribeSuperNodePodListResponse) => void
+  ): Promise<DescribeSuperNodePodListResponse> {
+    return this.request("DescribeSuperNodePodList", req, cb)
   }
 
   /**
@@ -3277,13 +3319,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 设置检测模式和自动检查
+   * 查询集群节点信息
    */
-  async SetCheckMode(
-    req: SetCheckModeRequest,
-    cb?: (error: string, rep: SetCheckModeResponse) => void
-  ): Promise<SetCheckModeResponse> {
-    return this.request("SetCheckMode", req, cb)
+  async DescribeClusterNodes(
+    req: DescribeClusterNodesRequest,
+    cb?: (error: string, rep: DescribeClusterNodesResponse) => void
+  ): Promise<DescribeClusterNodesResponse> {
+    return this.request("DescribeClusterNodes", req, cb)
   }
 
   /**
@@ -4007,6 +4049,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 镜像仓库停止镜像扫描任务
+   */
+  async ModifyAssetImageRegistryScanStop(
+    req: ModifyAssetImageRegistryScanStopRequest,
+    cb?: (error: string, rep: ModifyAssetImageRegistryScanStopResponse) => void
+  ): Promise<ModifyAssetImageRegistryScanStopResponse> {
+    return this.request("ModifyAssetImageRegistryScanStop", req, cb)
+  }
+
+  /**
    * 查询安全日志商品信息
    */
   async DescribeSecLogVasInfo(
@@ -4017,13 +4069,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 运行时文件查杀事件列表导出
+   * 获取用户的pod列表
    */
-  async ExportVirusList(
-    req: ExportVirusListRequest,
-    cb?: (error: string, rep: ExportVirusListResponse) => void
-  ): Promise<ExportVirusListResponse> {
-    return this.request("ExportVirusList", req, cb)
+  async DescribeUserPodList(
+    req: DescribeUserPodListRequest,
+    cb?: (error: string, rep: DescribeUserPodListResponse) => void
+  ): Promise<DescribeUserPodListResponse> {
+    return this.request("DescribeUserPodList", req, cb)
   }
 
   /**

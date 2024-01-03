@@ -154,44 +154,44 @@ export interface DedicatedClusterType {
   /**
    * 配置id
    */
-  DedicatedClusterTypeId: string
+  DedicatedClusterTypeId?: string
   /**
    * 配置描述，对应描述
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Description: string
+  Description?: string
   /**
    * 配置名称，对应计算资源类型
    */
-  Name: string
+  Name?: string
   /**
    * 创建配置的时间
    */
-  CreateTime: string
+  CreateTime?: string
   /**
    * 支持的存储类型列表
    */
-  SupportedStorageType: Array<string>
+  SupportedStorageType?: Array<string>
   /**
    * 支持的上连交换机的链路传输速率
    */
-  SupportedUplinkGiB: Array<number | bigint>
+  SupportedUplinkGiB?: Array<number | bigint>
   /**
    * 支持的实例族列表
    */
-  SupportedInstanceFamily: Array<string>
+  SupportedInstanceFamily?: Array<string>
   /**
    * 地板承重要求(KG)
    */
-  Weight: number
+  Weight?: number
   /**
    * 功率要求(KW)
    */
-  PowerDrawKva: number
+  PowerDrawKva?: number
   /**
-   * 显示计算资源规格详情，存储等资源不显示；对应规格
+   * 显示计算资源规格详情，存储等资源不显示
    */
-  ComputeFormatDesc: string
+  ComputeFormatDesc?: string
 }
 
 /**
@@ -247,31 +247,46 @@ export interface DescribeDedicatedClusterOverviewResponse {
   /**
    * 云服务器数量
    */
-  CvmCount: number
+  CvmCount?: number
   /**
    * 宿主机数量
    */
-  HostCount: number
+  HostCount?: number
   /**
    * vpn通道状态
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  VpnConnectionState: string
+  VpnConnectionState?: string
   /**
    * vpn网关监控数据
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  VpngwBandwidthData: VpngwBandwidthData
+  VpngwBandwidthData?: VpngwBandwidthData
   /**
    * 本地网关信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  LocalNetInfo: LocalNetInfo
+  LocalNetInfo?: LocalNetInfo
   /**
    * vpn网关通道监控数据
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  VpnConnectionBandwidthData: Array<VpngwBandwidthData>
+  VpnConnectionBandwidthData?: Array<VpngwBandwidthData>
+  /**
+   * 宿主机资源概览信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HostDetailInfo?: Array<HostDetailInfo>
+  /**
+   * 热备宿主机数量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HostStandbyCount?: number
+  /**
+   * 普通宿主机数量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HostNormalCount?: number
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1103,6 +1118,37 @@ export interface HostStatistic {
 }
 
 /**
+ * 宿主机资源的概览详细信息。
+ */
+export interface HostDetailInfo {
+  /**
+   * 类型族
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HostTypeFamily?: string
+  /**
+   * 总CPU
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CpuTotal?: number
+  /**
+   * 可用CPU
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CpuAvailable?: number
+  /**
+   * 总内存
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MemTotal?: number
+  /**
+   * 可用内存
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MemAvailable?: number
+}
+
+/**
  * 购买的cbs信息
  */
 export interface CbsInfo {
@@ -1156,11 +1202,11 @@ export interface DescribeDedicatedClusterHostsResponse {
    * 宿主机信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  HostInfoSet: Array<HostInfo>
+  HostInfoSet?: Array<HostInfo>
   /**
    * 宿主机总数
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
