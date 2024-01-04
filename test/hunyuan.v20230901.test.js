@@ -48,4 +48,14 @@ it("hunyuan.v20230901.GetTokenCount", async function () {
     }
 })
 
+it("hunyuan.v20230901.GetEmbedding", async function () {
+    try {
+       const data = await client.GetEmbedding({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 })

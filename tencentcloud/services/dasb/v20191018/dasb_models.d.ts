@@ -718,6 +718,11 @@ export interface SearchCommandResult {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     DeviceDepartmentName?: string;
+    /**
+     * 会话大小
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Size?: number;
 }
 /**
  * 资产标签
@@ -1228,6 +1233,11 @@ export interface Command {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     DeviceDepartmentName?: string;
+    /**
+     * 会话大小
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Size?: number;
 }
 /**
  * ModifyAcl请求参数结构体

@@ -356,14 +356,6 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
         return this.request("DescribeSwitchLists", req, cb);
     }
     /**
-     * 已上新接口，支持串行
-
-单个修改互联网边界防火墙开关
-     */
-    async ModifyPublicIPSwitchStatus(req, cb) {
-        return this.request("ModifyPublicIPSwitchStatus", req, cb);
-    }
-    /**
      * 修改规则表状态
      */
     async ModifyTableStatus(req, cb) {

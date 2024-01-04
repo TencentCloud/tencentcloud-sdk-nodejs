@@ -764,6 +764,11 @@ export interface SearchCommandResult {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DeviceDepartmentName?: string
+  /**
+   * 会话大小
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Size?: number
 }
 
 /**
@@ -1295,6 +1300,11 @@ export interface Command {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DeviceDepartmentName?: string
+  /**
+   * 会话大小
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Size?: number
 }
 
 /**

@@ -19,11 +19,15 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   GetTokenCountResponse,
+  GetEmbeddingResponse,
   ErrorMsg,
   ChatStdResponse,
+  GetEmbeddingRequest,
   ChatProResponse,
   Choice,
   ChatProRequest,
+  EmbeddingData,
+  EmbeddingUsage,
   Delta,
   Usage,
   Message,
@@ -76,5 +80,15 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: GetTokenCountResponse) => void
   ): Promise<GetTokenCountResponse> {
     return this.request("GetTokenCount", req, cb)
+  }
+
+  /**
+   * 腾讯混元-Embedding接口，可以将文本转化为高质量的向量数据。
+   */
+  async GetEmbedding(
+    req: GetEmbeddingRequest,
+    cb?: (error: string, rep: GetEmbeddingResponse) => void
+  ): Promise<GetEmbeddingResponse> {
+    return this.request("GetEmbedding", req, cb)
   }
 }

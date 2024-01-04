@@ -2432,15 +2432,15 @@ export interface ModifyJobRequest {
  */
 export interface GetMetaTableRequest {
     /**
-     * Catalog名
+     * 目录名
      */
     Catalog: string;
     /**
-     * Database名
+     * 库名
      */
     Database: string;
     /**
-     * Table名
+     * 表名
      */
     Table: string;
     /**

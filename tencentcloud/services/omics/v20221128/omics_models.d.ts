@@ -111,10 +111,6 @@ export interface RunApplicationRequest {
      */
     ApplicationId: string;
     /**
-     * 项目ID。
-     */
-    ProjectId: string;
-    /**
      * 任务批次名称。
      */
     Name: string;
@@ -131,9 +127,9 @@ export interface RunApplicationRequest {
      */
     CacheClearDelay: number;
     /**
-     * 运行选项。
+     * 项目ID。（不填使用指定地域下的默认项目）
      */
-    Option: RunOption;
+    ProjectId?: string;
     /**
      * 任务批次描述。
      */
@@ -150,6 +146,14 @@ export interface RunApplicationRequest {
      * 应用版本ID。不填表示使用当前最新版本。
      */
     ApplicationVersionId?: string;
+    /**
+     * WDL运行选项。
+     */
+    Option?: RunOption;
+    /**
+     * Nextflow运行选项。
+     */
+    NFOption?: NFOption;
 }
 /**
  * GetRunMetadataFile返回参数结构体

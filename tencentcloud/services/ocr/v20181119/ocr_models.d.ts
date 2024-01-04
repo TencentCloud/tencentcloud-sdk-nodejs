@@ -569,8 +569,14 @@ export interface SmartStructuralOCRV2Request {
   WayBill -- 快递运单
   AccountOpeningPermit -- 银行开户许可证
   InvoiceEng -- 海外发票模版
+  Coin --钱币识别模板
+  OnboardingDocuments -- 入职材料识别
      */
     ConfigId?: string;
+    /**
+     * 是否打开印章识别
+     */
+    EnableSealRecognize?: boolean;
 }
 /**
  * TextDetect返回参数结构体

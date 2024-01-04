@@ -3751,7 +3751,7 @@ export interface ModifyAuditServiceRequest {
      */
     AuditRuleFilters?: Array<AuditRuleFilters>;
     /**
-     * 规则模版ID。
+     * 规则模板ID。
      */
     RuleTemplateIds?: Array<string>;
 }
@@ -5395,7 +5395,7 @@ export interface CreateAccountsRequest {
  */
 export interface DeleteAuditRuleTemplatesRequest {
     /**
-     * 审计规则模版ID。
+     * 审计规则模板ID。
      */
     RuleTemplateIds: Array<string>;
 }

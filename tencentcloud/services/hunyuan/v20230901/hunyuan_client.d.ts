@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { GetTokenCountResponse, ChatStdResponse, ChatProResponse, ChatProRequest, GetTokenCountRequest, ChatStdRequest } from "./hunyuan_models";
+import { GetTokenCountResponse, GetEmbeddingResponse, ChatStdResponse, GetEmbeddingRequest, ChatProResponse, ChatProRequest, GetTokenCountRequest, ChatStdRequest } from "./hunyuan_models";
 /**
  * hunyuan client
  * @class
@@ -27,4 +27,8 @@ export declare class Client extends AbstractClient {
      * 该接口用于计算文本对应Token数、字符数。
      */
     GetTokenCount(req: GetTokenCountRequest, cb?: (error: string, rep: GetTokenCountResponse) => void): Promise<GetTokenCountResponse>;
+    /**
+     * 腾讯混元-Embedding接口，可以将文本转化为高质量的向量数据。
+     */
+    GetEmbedding(req: GetEmbeddingRequest, cb?: (error: string, rep: GetEmbeddingResponse) => void): Promise<GetEmbeddingResponse>;
 }

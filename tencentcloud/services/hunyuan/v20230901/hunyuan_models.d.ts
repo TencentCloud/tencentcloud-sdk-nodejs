@@ -20,6 +20,23 @@ export interface GetTokenCountResponse {
     RequestId?: string;
 }
 /**
+ * GetEmbedding返回参数结构体
+ */
+export interface GetEmbeddingResponse {
+    /**
+     * 返回的 embedding 信息。
+     */
+    Data?: Array<EmbeddingData>;
+    /**
+     * token 使用计数，按照总token数量收费。
+     */
+    Usage?: EmbeddingUsage;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * 运行时异常信息。
  */
 export interface ErrorMsg {
@@ -70,6 +87,15 @@ export interface ChatStdResponse {
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。本接口为流式响应接口，当请求成功时，RequestId 会被放在 HTTP 响应的 Header "X-TC-RequestId" 中。
      */
     RequestId?: string;
+}
+/**
+ * GetEmbedding请求参数结构体
+ */
+export interface GetEmbeddingRequest {
+    /**
+     * 输入文本。总长度不超过1024 个token, 超过则会截断最后面的内容。
+     */
+    Input: string;
 }
 /**
  * ChatPro返回参数结构体
@@ -146,6 +172,39 @@ export interface ChatProRequest {
   3.非必要不建议使用,不合理的取值会影响效果。
      */
     Temperature?: number;
+}
+/**
+ * embedding 信息，当前不支持批量，所以数组元素数目为1。
+ */
+export interface EmbeddingData {
+    /**
+     * embedding 信息。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Embedding?: Array<number>;
+    /**
+     * 下标。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Index?: number;
+    /**
+     * embedding
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Object?: string;
+}
+/**
+ * token 使用计数。
+ */
+export interface EmbeddingUsage {
+    /**
+     * 输入Token数。
+     */
+    PromptTokens?: number;
+    /**
+     * 总Token数。
+     */
+    TotalTokens?: number;
 }
 /**
  * 返回的内容（流式返回）

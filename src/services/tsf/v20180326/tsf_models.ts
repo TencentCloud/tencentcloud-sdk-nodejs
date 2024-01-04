@@ -9099,57 +9099,57 @@ export interface BusinesLogConfigAssociatedGroup {
    * 部署组ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  GroupId: string
+  GroupId?: string
   /**
    * 部署组名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  GroupName: string
+  GroupName?: string
   /**
    * 部署组所属应用ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ApplicationId: string
+  ApplicationId?: string
   /**
    * 部署组所属应用名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ApplicationName: string
+  ApplicationName?: string
   /**
    * 部署组所属应用类型
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ApplicationType: string
+  ApplicationType?: string
   /**
    * 部署组所属命名空间ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  NamespaceId: string
+  NamespaceId?: string
   /**
    * 部署组所属命名空间名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  NamespaceName: string
+  NamespaceName?: string
   /**
    * 部署组所属集群ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ClusterId: string
+  ClusterId?: string
   /**
    * 部署组所属集群名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ClusterName: string
+  ClusterName?: string
   /**
    * 部署组所属集群类型
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ClusterType: string
+  ClusterType?: string
   /**
    * 部署组关联日志配置时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  AssociatedTime: string
+  AssociatedTime?: string
 }
 
 /**
@@ -11115,6 +11115,67 @@ export interface GatewayGroupApiVo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   NamespaceName: string
+}
+
+/**
+ * 业务日志配置关联部署组信息
+ */
+export interface BusinessLogConfigAssociatedGroup {
+  /**
+   * 部署组ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  GroupId: string
+  /**
+   * 部署组名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  GroupName: string
+  /**
+   * 部署组所属应用ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ApplicationId: string
+  /**
+   * 部署组所属应用名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ApplicationName: string
+  /**
+   * 部署组所属应用类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ApplicationType: string
+  /**
+   * 部署组所属命名空间ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NamespaceId: string
+  /**
+   * 部署组所属命名空间名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NamespaceName: string
+  /**
+   * 部署组所属集群ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ClusterId: string
+  /**
+   * 部署组所属集群名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ClusterName: string
+  /**
+   * 部署组所属集群类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ClusterType: string
+  /**
+   * 部署组关联日志配置时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AssociatedTime: string
 }
 
 /**
@@ -13793,8 +13854,14 @@ export interface BusinessLogConfig {
   /**
    * 配置项关联部署组
 注意：此字段可能返回 null，表示取不到有效值。
+   * @deprecated
    */
   ConfigAssociatedGroups?: Array<BusinesLogConfigAssociatedGroup>
+  /**
+   * 配置项关联部署组
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ConfigAssociatedGroupList?: Array<BusinessLogConfigAssociatedGroup>
 }
 
 /**

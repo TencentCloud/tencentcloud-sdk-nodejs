@@ -53,5 +53,11 @@ class Client extends abstract_client_1.AbstractClient {
     async GetTokenCount(req, cb) {
         return this.request("GetTokenCount", req, cb);
     }
+    /**
+     * 腾讯混元-Embedding接口，可以将文本转化为高质量的向量数据。
+     */
+    async GetEmbedding(req, cb) {
+        return this.request("GetEmbedding", req, cb);
+    }
 }
 exports.Client = Client;

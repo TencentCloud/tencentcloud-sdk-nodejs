@@ -954,7 +954,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除审计规则模版
+   * 删除审计规则模板
    */
   async DeleteAuditRuleTemplates(
     req: DeleteAuditRuleTemplatesRequest,

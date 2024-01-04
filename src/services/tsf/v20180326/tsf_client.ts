@@ -461,6 +461,7 @@ import {
   DescribeTaskLastStatusResponse,
   DescribePublicConfigsRequest,
   GatewayGroupApiVo,
+  BusinessLogConfigAssociatedGroup,
   DescribeApplicationsRequest,
   DescribeTaskDetailRequest,
   MultiValue,

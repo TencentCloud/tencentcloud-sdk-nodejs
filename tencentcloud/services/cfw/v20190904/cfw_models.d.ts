@@ -360,24 +360,6 @@ export interface ModifyBlockTopRequest {
     OpeType: string;
 }
 /**
- * ModifyPublicIPSwitchStatus返回参数结构体
- */
-export interface ModifyPublicIPSwitchStatusResponse {
-    /**
-     * 接口返回信息
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ReturnMsg: string;
-    /**
-     * 接口返回错误码，0请求成功  非0失败
-     */
-    ReturnCode: number;
-    /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
-/**
  * AddAclRule请求参数结构体
  */
 export interface AddAclRuleRequest {
@@ -2279,19 +2261,6 @@ export interface DeleteSecurityGroupRuleResponse {
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
-}
-/**
- * ModifyPublicIPSwitchStatus请求参数结构体
- */
-export interface ModifyPublicIPSwitchStatusRequest {
-    /**
-     * 公网IP
-     */
-    FireWallPublicIP: string;
-    /**
-     * 状态值，0: 关闭 ,1:开启
-     */
-    Status: number;
 }
 /**
  * 创建NAT ACL规则参数结构

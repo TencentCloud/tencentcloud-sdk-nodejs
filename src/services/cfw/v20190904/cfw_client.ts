@@ -36,7 +36,6 @@ import {
   SyncFwOperateResponse,
   DescribeNatAcRuleResponse,
   ModifyBlockTopRequest,
-  ModifyPublicIPSwitchStatusResponse,
   AddAclRuleRequest,
   DescribeVpcFwGroupSwitchRequest,
   FwDeploy,
@@ -104,7 +103,6 @@ import {
   NatInstanceInfo,
   SetNatFwEipResponse,
   DeleteSecurityGroupRuleResponse,
-  ModifyPublicIPSwitchStatusRequest,
   CreateNatRuleItem,
   ModifyStorageSettingResponse,
   AcListsData,
@@ -850,18 +848,6 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
     cb?: (error: string, rep: DescribeSwitchListsResponse) => void
   ): Promise<DescribeSwitchListsResponse> {
     return this.request("DescribeSwitchLists", req, cb)
-  }
-
-  /**
-     * 已上新接口，支持串行
-
-单个修改互联网边界防火墙开关
-     */
-  async ModifyPublicIPSwitchStatus(
-    req: ModifyPublicIPSwitchStatusRequest,
-    cb?: (error: string, rep: ModifyPublicIPSwitchStatusResponse) => void
-  ): Promise<ModifyPublicIPSwitchStatusResponse> {
-    return this.request("ModifyPublicIPSwitchStatus", req, cb)
   }
 
   /**

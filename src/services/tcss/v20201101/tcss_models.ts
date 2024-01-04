@@ -1355,58 +1355,63 @@ export interface DescribePurchaseStateInfoResponse {
   /**
    * 0：可申请试用可购买；1：只可购买(含试用审核不通过和试用过期)；2：试用生效中；3：专业版生效中；4：专业版过期
    */
-  State: number
+  State?: number
   /**
    * 总核数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CoresCnt: number
+  CoresCnt?: number
   /**
    * 已购买核数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  AuthorizedCoresCnt: number
+  AuthorizedCoresCnt?: number
   /**
    * 镜像数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ImageCnt: number
+  ImageCnt?: number
   /**
    * 已授权镜像数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  AuthorizedImageCnt: number
+  AuthorizedImageCnt?: number
   /**
    * 已购买镜像授权数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  PurchasedAuthorizedCnt: number
+  PurchasedAuthorizedCnt?: number
   /**
    * 过期时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ExpirationTime: string
+  ExpirationTime?: string
   /**
    * 0表示默认状态(用户未设置，即初始状态)， 1表示自动续费，2表示明确不自动续费(用户设置)
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  AutomaticRenewal: number
+  AutomaticRenewal?: number
   /**
    * 试用期间赠送镜像授权数，可能会过期
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  GivenAuthorizedCnt: number
+  GivenAuthorizedCnt?: number
   /**
    * 起始时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  BeginTime: string
+  BeginTime?: string
   /**
    * 子状态(具体意义依据State字段而定)
 State为4时，有效值为: ISOLATE(隔离) DESTROED(已销毁)
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SubState: string
+  SubState?: string
+  /**
+   * 计费key
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InquireKey?: string
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

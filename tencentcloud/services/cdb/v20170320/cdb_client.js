@@ -341,7 +341,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("SwitchForUpgrade", req, cb);
     }
     /**
-     * 删除审计规则模版
+     * 删除审计规则模板
      */
     async DeleteAuditRuleTemplates(req, cb) {
         return this.request("DeleteAuditRuleTemplates", req, cb);

@@ -223,7 +223,7 @@ export declare class Client extends AbstractClient {
      */
     SwitchForUpgrade(req: SwitchForUpgradeRequest, cb?: (error: string, rep: SwitchForUpgradeResponse) => void): Promise<SwitchForUpgradeResponse>;
     /**
-     * 删除审计规则模版
+     * 删除审计规则模板
      */
     DeleteAuditRuleTemplates(req: DeleteAuditRuleTemplatesRequest, cb?: (error: string, rep: DeleteAuditRuleTemplatesResponse) => void): Promise<DeleteAuditRuleTemplatesResponse>;
     /**

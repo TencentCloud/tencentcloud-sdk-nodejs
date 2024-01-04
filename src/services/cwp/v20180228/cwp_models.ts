@@ -8220,13 +8220,16 @@ export interface ExportFileTamperEventsResponse {
  */
 export interface DescribeBanStatusResponse {
   /**
-   * 阻断开关状态 0:关闭 1:开启
+   * 阻断开关状态:
+ 0 -- 关闭 
+ 1 -- 高级阻断
+ 2 -- 基础阻断(只阻断情报库黑ip)
    */
-  Status: number
+  Status?: number
   /**
    * 是否弹窗提示信息 false: 关闭，true: 开启
    */
-  ShowTips: boolean
+  ShowTips?: boolean
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -11168,7 +11171,7 @@ export interface DescribeMalWareListRequest {
 <li>VirusName - String - 是否必填：否 - 描述筛选</li>
 <li>CreateBeginTime - String - 是否必填：否 - 创建时间筛选-开始时间</li>
 <li>CreateEndTime - String - 是否必填：否 - 创建时间筛选-结束时间</li>
-<li>Status - String - 是否必填：否 - 状态筛选 4待处理,5信任,6已隔离,10隔离中,11恢复隔离中</li>
+<li>Status - String - 是否必填：否 - 状态筛选 4待处理,5信任,6已隔离,10隔离中,11恢复隔离中,14 已处理</li>
    */
   Filters?: Array<Filter>
   /**
@@ -29796,6 +29799,11 @@ export interface BruteAttackInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RiskLevel?: number
+  /**
+   * 事件来源：0--阻断规则，1--威胁情报
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DataFrom?: number
 }
 
 /**
