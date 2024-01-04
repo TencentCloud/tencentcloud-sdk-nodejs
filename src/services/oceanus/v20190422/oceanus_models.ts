@@ -1298,15 +1298,15 @@ export interface GetMetaTableResponse {
    */
   SerialId?: string
   /**
-   * Catalog名
+   * 目录名
    */
   Catalog?: string
   /**
-   * Database名
+   * 库名
    */
   Database?: string
   /**
-   * Table名
+   * 表名
    */
   Table?: string
   /**
@@ -1316,7 +1316,7 @@ Q1JFQVRFIFRBQkxFIGRhdGFnZW5fc291cmNlX3RhYmxlICggCiAgICBpZCBJTlQsIAogICAgbmFtZSBT
    */
   DDL?: string
   /**
-   * 场景时间
+   * 创建时间
    */
   CreateTime?: string
   /**

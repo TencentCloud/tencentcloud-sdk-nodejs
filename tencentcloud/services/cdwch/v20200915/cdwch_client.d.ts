@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeInstanceShardsRequest, ScaleOutInstanceRequest, ScaleOutInstanceResponse, ResizeDiskRequest, DescribeInstanceKeyValConfigsRequest, OpenBackUpResponse, DescribeClusterConfigsResponse, ActionAlterCkUserRequest, DescribeCkSqlApisRequest, DescribeBackUpScheduleRequest, DescribeSpecResponse, DescribeSpecRequest, DestroyInstanceRequest, ModifyUserNewPrivilegeRequest, DescribeBackUpTablesResponse, OpenBackUpRequest, ModifyInstanceKeyValConfigsResponse, CreateInstanceNewResponse, DescribeInstanceClustersResponse, CreateInstanceNewRequest, DescribeBackUpJobDetailResponse, ModifyClusterConfigsRequest, ScaleUpInstanceRequest, DescribeInstanceKeyValConfigsResponse, ModifyClusterConfigsResponse, RecoverBackUpJobRequest, DescribeInstancesNewRequest, DeleteBackUpDataResponse, ModifyInstanceKeyValConfigsRequest, DescribeInstancesNewResponse, DescribeClusterConfigsRequest, CreateBackUpScheduleResponse, RecoverBackUpJobResponse, DescribeInstanceResponse, DescribeBackUpJobResponse, DescribeInstanceClustersRequest, DescribeInstanceStateRequest, DescribeInstanceShardsResponse, DescribeBackUpJobDetailRequest, CreateBackUpScheduleRequest, DeleteBackUpDataRequest, DescribeInstanceRequest, ActionAlterCkUserResponse, DescribeInstanceStateResponse, DescribeBackUpTablesRequest, DestroyInstanceResponse, ResizeDiskResponse, DescribeBackUpScheduleResponse, DescribeCkSqlApisResponse, DescribeBackUpJobRequest, ScaleUpInstanceResponse, ModifyUserNewPrivilegeResponse } from "./cdwch_models";
+import { DescribeInstanceShardsRequest, ScaleOutInstanceRequest, ScaleOutInstanceResponse, DescribeInstancesNewResponse, DescribeInstanceKeyValConfigsRequest, DescribeInstanceNodesRequest, DescribeClusterConfigsResponse, ActionAlterCkUserRequest, DescribeCkSqlApisRequest, DescribeBackUpScheduleRequest, DescribeSpecResponse, DescribeSpecRequest, DestroyInstanceRequest, ModifyUserNewPrivilegeRequest, DescribeBackUpTablesResponse, OpenBackUpRequest, ModifyInstanceKeyValConfigsResponse, OpenBackUpResponse, CreateInstanceNewResponse, DescribeInstanceClustersResponse, CreateInstanceNewRequest, DescribeBackUpJobDetailResponse, ModifyClusterConfigsRequest, ScaleUpInstanceRequest, DescribeInstanceKeyValConfigsResponse, ModifyClusterConfigsResponse, RecoverBackUpJobRequest, DescribeInstancesNewRequest, DeleteBackUpDataResponse, ModifyInstanceKeyValConfigsRequest, DescribeInstanceNodesResponse, DescribeClusterConfigsRequest, CreateBackUpScheduleResponse, RecoverBackUpJobResponse, DescribeInstanceResponse, DescribeBackUpJobResponse, DescribeInstanceClustersRequest, ResizeDiskRequest, DescribeInstanceStateRequest, DescribeInstanceShardsResponse, DescribeBackUpJobDetailRequest, CreateBackUpScheduleRequest, DeleteBackUpDataRequest, DescribeInstanceRequest, ActionAlterCkUserResponse, DescribeInstanceStateResponse, DescribeBackUpTablesRequest, DestroyInstanceResponse, ResizeDiskResponse, DescribeBackUpScheduleResponse, DescribeCkSqlApisResponse, DescribeBackUpJobRequest, ScaleUpInstanceResponse, ModifyUserNewPrivilegeResponse } from "./cdwch_models";
 /**
  * cdwch client
  * @class
@@ -23,6 +23,10 @@ export declare class Client extends AbstractClient {
      * 在集群详情页面获取所有参数列表
      */
     DescribeInstanceKeyValConfigs(req: DescribeInstanceKeyValConfigsRequest, cb?: (error: string, rep: DescribeInstanceKeyValConfigsResponse) => void): Promise<DescribeInstanceKeyValConfigsResponse>;
+    /**
+     * 开启或者关闭策略
+     */
+    OpenBackUp(req: OpenBackUpRequest, cb?: (error: string, rep: OpenBackUpResponse) => void): Promise<OpenBackUpResponse>;
     /**
      * KV模式修改配置接口
      */
@@ -52,10 +56,6 @@ export declare class Client extends AbstractClient {
      */
     DeleteBackUpData(req: DeleteBackUpDataRequest, cb?: (error: string, rep: DeleteBackUpDataResponse) => void): Promise<DeleteBackUpDataResponse>;
     /**
-     * 在集群配置页面修改集群配置文件接口，xml模式
-     */
-    ModifyClusterConfigs(req: ModifyClusterConfigsRequest, cb?: (error: string, rep: ModifyClusterConfigsResponse) => void): Promise<ModifyClusterConfigsResponse>;
-    /**
      * 新增和修改用户接口
      */
     ActionAlterCkUser(req: ActionAlterCkUserRequest, cb?: (error: string, rep: ActionAlterCkUserResponse) => void): Promise<ActionAlterCkUserResponse>;
@@ -68,9 +68,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeClusterConfigs(req: DescribeClusterConfigsRequest, cb?: (error: string, rep: DescribeClusterConfigsResponse) => void): Promise<DescribeClusterConfigsResponse>;
     /**
-     * 开启或者关闭策略
+     * 在集群配置页面修改集群配置文件接口，xml模式
      */
-    OpenBackUp(req: OpenBackUpRequest, cb?: (error: string, rep: OpenBackUpResponse) => void): Promise<OpenBackUpResponse>;
+    ModifyClusterConfigs(req: ModifyClusterConfigsRequest, cb?: (error: string, rep: ModifyClusterConfigsResponse) => void): Promise<ModifyClusterConfigsResponse>;
     /**
      * 备份恢复
      */
@@ -103,6 +103,10 @@ export declare class Client extends AbstractClient {
      * 根据实例ID查询某个实例的具体信息
      */
     DescribeInstance(req: DescribeInstanceRequest, cb?: (error: string, rep: DescribeInstanceResponse) => void): Promise<DescribeInstanceResponse>;
+    /**
+     * 获取实例节点信息列表
+     */
+    DescribeInstanceNodes(req: DescribeInstanceNodesRequest, cb?: (error: string, rep: DescribeInstanceNodesResponse) => void): Promise<DescribeInstanceNodesResponse>;
     /**
      * 针对集群账号的权限做管控（新版）
      */

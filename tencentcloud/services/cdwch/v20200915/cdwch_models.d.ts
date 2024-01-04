@@ -66,21 +66,21 @@ export interface ScaleOutInstanceResponse {
     RequestId?: string;
 }
 /**
- * ResizeDisk请求参数结构体
+ * DescribeInstancesNew返回参数结构体
  */
-export interface ResizeDiskRequest {
+export interface DescribeInstancesNewResponse {
     /**
-     * 实例唯一ID
+     * 实例总数
      */
-    InstanceId: string;
+    TotalCount?: number;
     /**
-     * 节点类型，DATA：clickhouse节点，COMMON：为zookeeper节点
+     * 实例数组
      */
-    Type: string;
+    InstancesList?: Array<InstanceInfo>;
     /**
-     * 磁盘扩容后容量，不能小于原有用量。clickhouse最小200，且为100的整数倍。 zk最小100，且为10的整数倍；
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
-    DiskSize: number;
+    RequestId?: string;
 }
 /**
  * 数据库权限信息
@@ -115,13 +115,33 @@ export interface DescribeInstanceKeyValConfigsRequest {
     SearchConfigName?: string;
 }
 /**
- * OpenBackUp返回参数结构体
+ * DescribeInstanceNodes请求参数结构体
  */
-export interface OpenBackUpResponse {
+export interface DescribeInstanceNodesRequest {
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     * 集群实例ID
      */
-    RequestId?: string;
+    InstanceId: string;
+    /**
+     * 集群角色类型，默认为 "data"数据节点
+     */
+    NodeRole?: string;
+    /**
+     * 分页参数，第一页为0，第二页为10
+     */
+    Offset?: number;
+    /**
+     * 分页参数，分页步长，默认为10
+     */
+    Limit?: number;
+    /**
+     * 展现策略，All时显示所有
+     */
+    DisplayPolicy?: string;
+    /**
+     * 当true的时候返回所有节点，即Limit无限大
+     */
+    ForceAll?: boolean;
 }
 /**
  * 集群计费相关信息
@@ -447,6 +467,15 @@ export interface BackupTableContent {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Rip?: string;
+}
+/**
+ * OpenBackUp返回参数结构体
+ */
+export interface OpenBackUpResponse {
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * CreateInstanceNew返回参数结构体
@@ -938,6 +967,23 @@ export interface ScaleUpInstanceRequest {
     ScaleUpEnableRolling: boolean;
 }
 /**
+ * 集群分组信息描述
+ */
+export interface GroupInfo {
+    /**
+     * 分组名称
+     */
+    GroupName: string;
+    /**
+     * 分片变量名称
+     */
+    ShardName: string;
+    /**
+     * 副本变量名称
+     */
+    ReplicaName: string;
+}
+/**
  * DescribeInstanceKeyValConfigs返回参数结构体
  */
 export interface DescribeInstanceKeyValConfigsResponse {
@@ -1116,17 +1162,18 @@ export interface ModifyInstanceKeyValConfigsRequest {
     Remark?: string;
 }
 /**
- * DescribeInstancesNew返回参数结构体
+ * DescribeInstanceNodes返回参数结构体
  */
-export interface DescribeInstancesNewResponse {
+export interface DescribeInstanceNodesResponse {
     /**
-     * 实例总数
+     * 总数
      */
-    TotalCount?: number;
+    TotalCount: number;
     /**
-     * 实例数组
+     * 实例节点总数
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    InstancesList?: Array<InstanceInfo>;
+    InstanceNodesList: Array<InstanceNode>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1329,6 +1376,23 @@ export interface DescribeInstanceClustersRequest {
     InstanceId: string;
 }
 /**
+ * ResizeDisk请求参数结构体
+ */
+export interface ResizeDiskRequest {
+    /**
+     * 实例唯一ID
+     */
+    InstanceId: string;
+    /**
+     * 节点类型，DATA：clickhouse节点，COMMON：为zookeeper节点
+     */
+    Type: string;
+    /**
+     * 磁盘扩容后容量，不能小于原有用量。clickhouse最小200，且为100的整数倍。 zk最小100，且为10的整数倍；
+     */
+    DiskSize: number;
+}
+/**
  * DescribeInstanceState请求参数结构体
  */
 export interface DescribeInstanceStateRequest {
@@ -1418,6 +1482,53 @@ export interface DescribeInstanceShardsResponse {
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * 实例节点描述信息
+ */
+export interface InstanceNode {
+    /**
+     * IP地址
+     */
+    Ip: string;
+    /**
+     * 机型，如 S1
+     */
+    Spec: string;
+    /**
+     * cpu核数
+     */
+    Core: number;
+    /**
+     * 内存大小
+     */
+    Memory: number;
+    /**
+     * 磁盘类型
+     */
+    DiskType: string;
+    /**
+     * 磁盘大小
+     */
+    DiskSize: number;
+    /**
+     * 所属clickhouse cluster名称
+     */
+    Cluster: string;
+    /**
+     * 节点所属的分组信息
+     */
+    NodeGroups: Array<GroupInfo>;
+    /**
+     * VPC IP
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Rip: string;
+    /**
+     * ture的时候表示该节点上部署了chproxy进程
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IsCHProxy: boolean;
 }
 /**
  * 集群配置信息

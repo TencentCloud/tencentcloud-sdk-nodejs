@@ -66,6 +66,18 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("TurnPDFToObjectAsync", req, cb);
     }
     /**
+     * 图片脱敏-异步接口
+     */
+    async ImageMaskAsync(req, cb) {
+        return this.request("ImageMaskAsync", req, cb);
+    }
+    /**
+     * 图片脱敏-异步获取结果接口
+     */
+    async ImageMaskAsyncGetResult(req, cb) {
+        return this.request("ImageMaskAsyncGetResult", req, cb);
+    }
+    /**
      * 将PDF格式的体检报告文件结构化，解析关键信息。
 注意：该接口是按照体检报告 PDF 页面数量统计次数，不是按照 PDF 文件数量统计次数。通过该接口传入的报告必须是体检报告，非体检报告可能无法正确解析。
      */

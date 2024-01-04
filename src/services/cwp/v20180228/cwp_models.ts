@@ -27867,7 +27867,7 @@ export interface DescribePublicProxyInstallCommandRequest {
  */
 export interface ExportJavaMemShellsResponse {
   /**
-   * 任务ID,需要到接口“异步导出任务”https://cloud.tencent.com/document/product/296/52508 获取DownloadUrl下载地址
+   * 任务ID,需要到接口 <a href="https://cloud.tencent.com/document/product/296/52508" target="_blank" >异步导出任务</a>获取DownloadUrl下载地址
    */
   TaskId?: string
   /**

@@ -52,6 +52,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeInstanceKeyValConfigs", req, cb);
     }
     /**
+     * 开启或者关闭策略
+     */
+    async OpenBackUp(req, cb) {
+        return this.request("OpenBackUp", req, cb);
+    }
+    /**
      * KV模式修改配置接口
      */
     async ModifyInstanceKeyValConfigs(req, cb) {
@@ -94,12 +100,6 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteBackUpData", req, cb);
     }
     /**
-     * 在集群配置页面修改集群配置文件接口，xml模式
-     */
-    async ModifyClusterConfigs(req, cb) {
-        return this.request("ModifyClusterConfigs", req, cb);
-    }
-    /**
      * 新增和修改用户接口
      */
     async ActionAlterCkUser(req, cb) {
@@ -118,10 +118,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeClusterConfigs", req, cb);
     }
     /**
-     * 开启或者关闭策略
+     * 在集群配置页面修改集群配置文件接口，xml模式
      */
-    async OpenBackUp(req, cb) {
-        return this.request("OpenBackUp", req, cb);
+    async ModifyClusterConfigs(req, cb) {
+        return this.request("ModifyClusterConfigs", req, cb);
     }
     /**
      * 备份恢复
@@ -170,6 +170,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeInstance(req, cb) {
         return this.request("DescribeInstance", req, cb);
+    }
+    /**
+     * 获取实例节点信息列表
+     */
+    async DescribeInstanceNodes(req, cb) {
+        return this.request("DescribeInstanceNodes", req, cb);
     }
     /**
      * 针对集群账号的权限做管控（新版）

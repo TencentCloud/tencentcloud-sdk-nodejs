@@ -42,9 +42,9 @@ import {
   PTNM,
   TableIndicators,
   BlockInfoV2,
-  NormPart,
+  ImageMaskAsyncGetResultResponse,
   Lymph,
-  StomatologyBaseItem,
+  ImageMaskAsyncRequest,
   BaseItem,
   OtolaryngologyBaseItem,
   Fp2NdItem,
@@ -148,6 +148,7 @@ import {
   AdmissionDiagnosisBlock,
   TreatmentRecordBlock,
   Elastic,
+  ImageMaskAsyncGetResultRequest,
   ChestCircumferenceItem,
   SurgeryAnorectal,
   IHCInfo,
@@ -157,6 +158,7 @@ import {
   NeglistBlock,
   Medicine,
   PathologicalDiagnosisBlock,
+  StomatologyBaseItem,
   ReportTypeVersion,
   Rectangle,
   IHCV2,
@@ -170,6 +172,7 @@ import {
   ParagraphBlock,
   RelativeHistoryDetailBlock,
   PoslistBlock,
+  NormPart,
   GynaecologyMenstrualHistory,
   ImageMaskRequest,
   Endoscopy,
@@ -195,6 +198,7 @@ import {
   InternalMedicineRespiratorySystem,
   TurnPDFToObjectAsyncGetResultRequest,
   BloodPressureItem,
+  SymptomInfo,
   TextToClassRequest,
   TextTypeListBlock,
   ObstetricalHistoryBlock,
@@ -210,7 +214,7 @@ import {
   OphthalmologyFundoscopy,
   SurgeryBreast,
   InternalMedicineBriefSummary,
-  SymptomInfo,
+  ImageMaskAsyncResponse,
   DeathDateBlock,
   BirthCert,
   KeyValueItem,
@@ -326,6 +330,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: TurnPDFToObjectAsyncResponse) => void
   ): Promise<TurnPDFToObjectAsyncResponse> {
     return this.request("TurnPDFToObjectAsync", req, cb)
+  }
+
+  /**
+   * 图片脱敏-异步接口
+   */
+  async ImageMaskAsync(
+    req: ImageMaskAsyncRequest,
+    cb?: (error: string, rep: ImageMaskAsyncResponse) => void
+  ): Promise<ImageMaskAsyncResponse> {
+    return this.request("ImageMaskAsync", req, cb)
+  }
+
+  /**
+   * 图片脱敏-异步获取结果接口
+   */
+  async ImageMaskAsyncGetResult(
+    req: ImageMaskAsyncGetResultRequest,
+    cb?: (error: string, rep: ImageMaskAsyncGetResultResponse) => void
+  ): Promise<ImageMaskAsyncGetResultResponse> {
+    return this.request("ImageMaskAsyncGetResult", req, cb)
   }
 
   /**

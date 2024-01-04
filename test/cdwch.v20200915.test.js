@@ -58,6 +58,16 @@ it("cdwch.v20200915.DescribeInstanceKeyValConfigs", async function () {
     }
 })
 
+it("cdwch.v20200915.OpenBackUp", async function () {
+    try {
+       const data = await client.OpenBackUp({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cdwch.v20200915.ModifyInstanceKeyValConfigs", async function () {
     try {
        const data = await client.ModifyInstanceKeyValConfigs({})
@@ -128,16 +138,6 @@ it("cdwch.v20200915.DeleteBackUpData", async function () {
     }
 })
 
-it("cdwch.v20200915.ModifyClusterConfigs", async function () {
-    try {
-       const data = await client.ModifyClusterConfigs({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("cdwch.v20200915.ActionAlterCkUser", async function () {
     try {
        const data = await client.ActionAlterCkUser({})
@@ -168,9 +168,9 @@ it("cdwch.v20200915.DescribeClusterConfigs", async function () {
     }
 })
 
-it("cdwch.v20200915.OpenBackUp", async function () {
+it("cdwch.v20200915.ModifyClusterConfigs", async function () {
     try {
-       const data = await client.OpenBackUp({})
+       const data = await client.ModifyClusterConfigs({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -251,6 +251,16 @@ it("cdwch.v20200915.DescribeInstanceClusters", async function () {
 it("cdwch.v20200915.DescribeInstance", async function () {
     try {
        const data = await client.DescribeInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cdwch.v20200915.DescribeInstanceNodes", async function () {
+    try {
+       const data = await client.DescribeInstanceNodes({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

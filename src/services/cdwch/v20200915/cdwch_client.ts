@@ -21,10 +21,10 @@ import {
   DescribeInstanceShardsRequest,
   ScaleOutInstanceRequest,
   ScaleOutInstanceResponse,
-  ResizeDiskRequest,
+  DescribeInstancesNewResponse,
   DatabasePrivilegeInfo,
   DescribeInstanceKeyValConfigsRequest,
-  OpenBackUpResponse,
+  DescribeInstanceNodesRequest,
   Charge,
   DescribeClusterConfigsResponse,
   ActionAlterCkUserRequest,
@@ -41,6 +41,7 @@ import {
   OpenBackUpRequest,
   ModifyInstanceKeyValConfigsResponse,
   BackupTableContent,
+  OpenBackUpResponse,
   CreateInstanceNewResponse,
   ConfigSubmitContext,
   InstanceStateInfo,
@@ -52,6 +53,7 @@ import {
   DescribeBackUpJobDetailResponse,
   ModifyClusterConfigsRequest,
   ScaleUpInstanceRequest,
+  GroupInfo,
   DescribeInstanceKeyValConfigsResponse,
   ServiceInfo,
   MapConfigItem,
@@ -61,7 +63,7 @@ import {
   DescribeInstancesNewRequest,
   DeleteBackUpDataResponse,
   ModifyInstanceKeyValConfigsRequest,
-  DescribeInstancesNewResponse,
+  DescribeInstanceNodesResponse,
   Tag,
   BackUpJobDisplay,
   DescribeClusterConfigsRequest,
@@ -73,9 +75,11 @@ import {
   DescribeInstanceResponse,
   DescribeBackUpJobResponse,
   DescribeInstanceClustersRequest,
+  ResizeDiskRequest,
   DescribeInstanceStateRequest,
   NodesSummary,
   DescribeInstanceShardsResponse,
+  InstanceNode,
   InstanceConfigInfo,
   DescribeBackUpJobDetailRequest,
   CreateBackUpScheduleRequest,
@@ -142,6 +146,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeInstanceKeyValConfigsResponse) => void
   ): Promise<DescribeInstanceKeyValConfigsResponse> {
     return this.request("DescribeInstanceKeyValConfigs", req, cb)
+  }
+
+  /**
+   * 开启或者关闭策略
+   */
+  async OpenBackUp(
+    req: OpenBackUpRequest,
+    cb?: (error: string, rep: OpenBackUpResponse) => void
+  ): Promise<OpenBackUpResponse> {
+    return this.request("OpenBackUp", req, cb)
   }
 
   /**
@@ -215,16 +229,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 在集群配置页面修改集群配置文件接口，xml模式
-   */
-  async ModifyClusterConfigs(
-    req: ModifyClusterConfigsRequest,
-    cb?: (error: string, rep: ModifyClusterConfigsResponse) => void
-  ): Promise<ModifyClusterConfigsResponse> {
-    return this.request("ModifyClusterConfigs", req, cb)
-  }
-
-  /**
    * 新增和修改用户接口
    */
   async ActionAlterCkUser(
@@ -255,13 +259,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 开启或者关闭策略
+   * 在集群配置页面修改集群配置文件接口，xml模式
    */
-  async OpenBackUp(
-    req: OpenBackUpRequest,
-    cb?: (error: string, rep: OpenBackUpResponse) => void
-  ): Promise<OpenBackUpResponse> {
-    return this.request("OpenBackUp", req, cb)
+  async ModifyClusterConfigs(
+    req: ModifyClusterConfigsRequest,
+    cb?: (error: string, rep: ModifyClusterConfigsResponse) => void
+  ): Promise<ModifyClusterConfigsResponse> {
+    return this.request("ModifyClusterConfigs", req, cb)
   }
 
   /**
@@ -342,6 +346,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeInstanceResponse) => void
   ): Promise<DescribeInstanceResponse> {
     return this.request("DescribeInstance", req, cb)
+  }
+
+  /**
+   * 获取实例节点信息列表
+   */
+  async DescribeInstanceNodes(
+    req: DescribeInstanceNodesRequest,
+    cb?: (error: string, rep: DescribeInstanceNodesResponse) => void
+  ): Promise<DescribeInstanceNodesResponse> {
+    return this.request("DescribeInstanceNodes", req, cb)
   }
 
   /**

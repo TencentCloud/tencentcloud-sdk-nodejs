@@ -903,39 +903,17 @@ export interface BlockInfoV2 {
 }
 
 /**
- * 标准部位
+ * ImageMaskAsyncGetResult返回参数结构体
  */
-export interface NormPart {
+export interface ImageMaskAsyncGetResultResponse {
   /**
-   * 部位值
-注意：此字段可能返回 null，表示取不到有效值。
+   * 脱敏后图片的base64编码
    */
-  Part?: string
+  MaskedImage?: string
   /**
-   * 部位方向
-注意：此字段可能返回 null，表示取不到有效值。
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  PartDirection?: string
-  /**
-   * 组织值
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Tissue?: string
-  /**
-   * 组织方向
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TissueDirection?: string
-  /**
-   * 上级部位
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Upper?: string
-  /**
-   * 部位详情
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  PartDetail?: PartDesc
+  RequestId?: string
 }
 
 /**
@@ -970,34 +948,17 @@ export interface Lymph {
 }
 
 /**
- * 体检报告-口腔科
+ * ImageMaskAsync请求参数结构体
  */
-export interface StomatologyBaseItem {
+export interface ImageMaskAsyncRequest {
   /**
-   * 龋齿
-注意：此字段可能返回 null，表示取不到有效值。
+   * 图片信息,目前只支持传图片base64
    */
-  ToothDecay?: StomatologyToothDecay
+  Image: ImageInfo
   /**
-   * 牙龈
-注意：此字段可能返回 null，表示取不到有效值。
+   * 图片脱敏选项, 不传默认都脱敏
    */
-  Gingiva?: StomatologyGingiva
-  /**
-   * 牙周
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Periodontics?: StomatologyPeriodontics
-  /**
-   * 口腔其他
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Others?: Array<KeyValueItem>
-  /**
-   * 小结
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  BriefSummary?: StomatologyBriefSummary
+  MaskFlag?: ImageMaskFlags
 }
 
 /**
@@ -4808,6 +4769,16 @@ export interface Elastic {
 }
 
 /**
+ * ImageMaskAsyncGetResult请求参数结构体
+ */
+export interface ImageMaskAsyncGetResultRequest {
+  /**
+   * 异步任务ID
+   */
+  TaskID: string
+}
+
+/**
  * 体检报告-胸围信息
  */
 export interface ChestCircumferenceItem {
@@ -5058,6 +5029,37 @@ export interface PathologicalDiagnosisBlock {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Value?: string
+}
+
+/**
+ * 体检报告-口腔科
+ */
+export interface StomatologyBaseItem {
+  /**
+   * 龋齿
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ToothDecay?: StomatologyToothDecay
+  /**
+   * 牙龈
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Gingiva?: StomatologyGingiva
+  /**
+   * 牙周
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Periodontics?: StomatologyPeriodontics
+  /**
+   * 口腔其他
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Others?: Array<KeyValueItem>
+  /**
+   * 小结
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BriefSummary?: StomatologyBriefSummary
 }
 
 /**
@@ -5451,6 +5453,42 @@ export interface PoslistBlock {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Value?: string
+}
+
+/**
+ * 标准部位
+ */
+export interface NormPart {
+  /**
+   * 部位值
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Part?: string
+  /**
+   * 部位方向
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PartDirection?: string
+  /**
+   * 组织值
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Tissue?: string
+  /**
+   * 组织方向
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TissueDirection?: string
+  /**
+   * 上级部位
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Upper?: string
+  /**
+   * 部位详情
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PartDetail?: PartDesc
 }
 
 /**
@@ -6095,6 +6133,47 @@ export interface BloodPressureItem {
 }
 
 /**
+ * 病症描述信息
+ */
+export interface SymptomInfo {
+  /**
+   * 等级
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Grade?: BlockInfo
+  /**
+   * 部位
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Part?: Part
+  /**
+   * 原文位置
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Index?: Array<number | bigint>
+  /**
+   * 病变
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Symptom?: BlockInfo
+  /**
+   * 属性
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Attrs?: Array<BlockInfo>
+  /**
+   * 原文
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Src?: string
+  /**
+   * 坐标
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Coords?: Array<Coord>
+}
+
+/**
  * TextToClass请求参数结构体
  */
 export interface TextToClassRequest {
@@ -6407,44 +6486,17 @@ export interface InternalMedicineBriefSummary {
 }
 
 /**
- * 病症描述信息
+ * ImageMaskAsync返回参数结构体
  */
-export interface SymptomInfo {
+export interface ImageMaskAsyncResponse {
   /**
-   * 等级
-注意：此字段可能返回 null，表示取不到有效值。
+   * 加密任务ID
    */
-  Grade?: BlockInfo
+  TaskID?: string
   /**
-   * 部位
-注意：此字段可能返回 null，表示取不到有效值。
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  Part?: Part
-  /**
-   * 原文位置
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Index?: Array<number | bigint>
-  /**
-   * 病变
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Symptom?: BlockInfo
-  /**
-   * 属性
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Attrs?: Array<BlockInfo>
-  /**
-   * 原文
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Src?: string
-  /**
-   * 坐标
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Coords?: Array<Coord>
+  RequestId?: string
 }
 
 /**

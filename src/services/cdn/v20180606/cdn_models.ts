@@ -6910,7 +6910,7 @@ export interface StatisticItem {
    */
   BpsThreshold?: number
   /**
-   * 关闭方式 返回404:RETURN_404, dns回源：RESOLVE_DNS_TO_ORIGIN
+   * 关闭方式 返回404:RETURN_404
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CounterMeasure?: string

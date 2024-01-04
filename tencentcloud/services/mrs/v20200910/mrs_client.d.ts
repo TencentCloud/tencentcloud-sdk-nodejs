@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { ImageMaskResponse, ImageToObjectRequest, TurnPDFToObjectAsyncRequest, TurnPDFToObjectAsyncResponse, TextToObjectResponse, TurnPDFToObjectResponse, TurnPDFToObjectAsyncGetResultResponse, TextToObjectRequest, ImageToClassResponse, TextToClassResponse, ImageMaskRequest, ImageToClassRequest, TurnPDFToObjectAsyncGetResultRequest, TextToClassRequest, TurnPDFToObjectRequest, ImageToObjectResponse } from "./mrs_models";
+import { ImageMaskResponse, ImageToObjectRequest, ImageMaskAsyncGetResultResponse, ImageMaskAsyncRequest, TurnPDFToObjectAsyncRequest, TurnPDFToObjectAsyncResponse, TextToObjectResponse, TurnPDFToObjectResponse, TurnPDFToObjectAsyncGetResultResponse, TextToObjectRequest, ImageToClassResponse, TextToClassResponse, ImageMaskAsyncGetResultRequest, ImageMaskRequest, ImageToClassRequest, TurnPDFToObjectAsyncGetResultRequest, TextToClassRequest, TurnPDFToObjectRequest, ImageMaskAsyncResponse, ImageToObjectResponse } from "./mrs_models";
 /**
  * mrs client
  * @class
@@ -33,6 +33,14 @@ export declare class Client extends AbstractClient {
      * 体检报告PDF文件结构化-异步接口
      */
     TurnPDFToObjectAsync(req: TurnPDFToObjectAsyncRequest, cb?: (error: string, rep: TurnPDFToObjectAsyncResponse) => void): Promise<TurnPDFToObjectAsyncResponse>;
+    /**
+     * 图片脱敏-异步接口
+     */
+    ImageMaskAsync(req: ImageMaskAsyncRequest, cb?: (error: string, rep: ImageMaskAsyncResponse) => void): Promise<ImageMaskAsyncResponse>;
+    /**
+     * 图片脱敏-异步获取结果接口
+     */
+    ImageMaskAsyncGetResult(req: ImageMaskAsyncGetResultRequest, cb?: (error: string, rep: ImageMaskAsyncGetResultResponse) => void): Promise<ImageMaskAsyncGetResultResponse>;
     /**
      * 将PDF格式的体检报告文件结构化，解析关键信息。
 注意：该接口是按照体检报告 PDF 页面数量统计次数，不是按照 PDF 文件数量统计次数。通过该接口传入的报告必须是体检报告，非体检报告可能无法正确解析。
