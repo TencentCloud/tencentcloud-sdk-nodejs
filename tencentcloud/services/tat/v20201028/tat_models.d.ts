@@ -203,6 +203,8 @@ export interface DescribeRegisterInstancesRequest {
   按照【操作系统类型】进行过滤，取值：Linux | Windows。
   类型：String
   必选：否
+  
+  
      */
     Filters?: Array<Filter>;
     /**

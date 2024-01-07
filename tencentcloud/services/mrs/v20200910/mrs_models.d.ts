@@ -6738,112 +6738,113 @@ export interface PatientInfo {
      * 患者姓名
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Name: string;
+    Name?: string;
     /**
      * 患者性别
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Sex: string;
+    Sex?: string;
     /**
      * 患者年龄
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Age: string;
+    Age?: string;
     /**
      * 患者手机号码
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Phone: string;
+    Phone?: string;
     /**
      * 患者地址
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Address: string;
+    Address?: string;
     /**
      * 患者身份证
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    IdCard: string;
+    IdCard?: string;
     /**
      * 健康卡号
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    HealthCardNo: string;
+    HealthCardNo?: string;
     /**
      * 社保卡号
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SocialSecurityCardNo: string;
+    SocialSecurityCardNo?: string;
     /**
      * 出生日期
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Birthday: string;
+    Birthday?: string;
     /**
      * 民族
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Ethnicity: string;
+    Ethnicity?: string;
     /**
      * 婚姻状况
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Married: string;
+    Married?: string;
     /**
      * 职业
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Profession: string;
+    Profession?: string;
     /**
      * 教育程度
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    EducationBackground: string;
+    EducationBackground?: string;
     /**
      * 国籍
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Nationality: string;
+    Nationality?: string;
     /**
      * 籍贯
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    BirthPlace: string;
+    BirthPlace?: string;
     /**
      * 医保类型
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    MedicalInsuranceType: string;
+    MedicalInsuranceType?: string;
     /**
      * 标准化年龄
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    AgeNorm: string;
+    AgeNorm?: string;
     /**
-     * 民族
+     * 民族。该字段已不再使用，请从Ethnicity取值
   注意：此字段可能返回 null，表示取不到有效值。
+     * @deprecated
      */
-    Nation: string;
+    Nation?: string;
     /**
      * 婚姻代码
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    MarriedCode: string;
+    MarriedCode?: string;
     /**
      * 职业代码
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ProfessionCode: string;
+    ProfessionCode?: string;
     /**
      * 居民医保代码
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    MedicalInsuranceTypeCode: string;
+    MedicalInsuranceTypeCode?: string;
     /**
      * 床号
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    BedNo: string;
+    BedNo?: string;
 }
 /**
  * 组织学类型

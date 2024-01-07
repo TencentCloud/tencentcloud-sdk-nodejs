@@ -186,6 +186,8 @@ TRTC 的一个房间中可能会同时存在多路音视频流，您可以通过
     StartMCUMixTranscodeByStrRoomId(req: StartMCUMixTranscodeByStrRoomIdRequest, cb?: (error: string, rep: StartMCUMixTranscodeByStrRoomIdResponse) => void): Promise<StartMCUMixTranscodeByStrRoomIdResponse>;
     /**
      * 将一个在线媒体流推到TRTC房间。
+使用此接口的前提条件：需要购买 [尊享版或旗舰版套餐包](https://cloud.tencent.com/document/product/647/85386
+)
      */
     StartStreamIngest(req: StartStreamIngestRequest, cb?: (error: string, rep: StartStreamIngestResponse) => void): Promise<StartStreamIngestResponse>;
     /**
