@@ -203,6 +203,7 @@ import {
   DescribeRuleOverviewRequest,
   DescribeDefenseSwitchResponse,
   DescribeAcListsRequest,
+  IdsWhiteInfo,
   DescribeGuideScanInfoRequest,
   SyncFwOperateRequest,
   UnHandleEvent,

@@ -34,6 +34,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateImageProcessingTemplate", req, cb);
     }
     /**
+     * 查询 VOD 创建的 CLS 日志集。
+     */
+    async DescribeCLSLogsets(req, cb) {
+        return this.request("DescribeCLSLogsets", req, cb);
+    }
+    /**
      * 该接口用于创建轮播播单，数量上限：100。
 轮播播单的每个文件可以指定源文件，也可以指定某个转码文件。
 指定的文件必须是hls格式，所有的播单文件最好保持相同的码率和分辨率。
@@ -243,10 +249,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeCdnLogs", req, cb);
     }
     /**
-     * 修改媒体分类属性。
+     * 由 VOD 创建新的日志集。
      */
-    async ModifyClass(req, cb) {
-        return this.request("ModifyClass", req, cb);
+    async CreateCLSLogset(req, cb) {
+        return this.request("CreateCLSLogset", req, cb);
+    }
+    /**
+     * 为点播域名设置投递 CLS 的目标。
+     */
+    async SetCLSPushTarget(req, cb) {
+        return this.request("SetCLSPushTarget", req, cb);
     }
     /**
      * * 该接口用于查询任务列表；
@@ -263,6 +275,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CreateStorageRegion(req, cb) {
         return this.request("CreateStorageRegion", req, cb);
+    }
+    /**
+     * 删除点播开通的日志主题。
+     */
+    async DeleteCLSTopic(req, cb) {
+        return this.request("DeleteCLSTopic", req, cb);
     }
     /**
      * 重新设置用户自定义任务流模板的内容。
@@ -600,6 +618,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeImageReviewUsageData", req, cb);
     }
     /**
+     * 查询点播域名下日志投递的目标主题。
+     */
+    async DescribeCLSPushTargets(req, cb) {
+        return this.request("DescribeCLSPushTargets", req, cb);
+    }
+    /**
      * 该 API 已经<font color=red>不再维护</font>，请使用新版接口 [音画质重生](https://cloud.tencent.com/document/api/266/102571)。
 使用模板发起音画质重生。
      */
@@ -646,6 +670,18 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DeleteAnimatedGraphicsTemplate(req, cb) {
         return this.request("DeleteAnimatedGraphicsTemplate", req, cb);
+    }
+    /**
+     * 查询 VOD 创建的 CLS 日志主题列表。
+     */
+    async DescribeCLSTopics(req, cb) {
+        return this.request("DescribeCLSTopics", req, cb);
+    }
+    /**
+     * 创建 VOD 下新的 CLS 日志主题
+     */
+    async CreateCLSTopic(req, cb) {
+        return this.request("CreateCLSTopic", req, cb);
     }
     /**
      * 该 API 已经<font color=red>不再维护</font>，新版审核模板支持音视频审核和图片审核，详细请参考 [删除审核模板](https://cloud.tencent.com/document/api/266/84390)。
@@ -1266,6 +1302,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DeleteRoundPlay(req, cb) {
         return this.request("DeleteRoundPlay", req, cb);
+    }
+    /**
+     * 修改媒体分类属性。
+     */
+    async ModifyClass(req, cb) {
+        return this.request("ModifyClass", req, cb);
     }
     /**
      * 该 API 已经<font color=red>不再维护</font>，新版审核模板支持音视频审核和图片审核，详细请参考 [修改审核模板](https://cloud.tencent.com/document/api/266/84388)。

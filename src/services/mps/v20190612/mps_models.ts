@@ -1613,6 +1613,8 @@ export interface ModifyWordSampleResponse {
 export interface AudioTemplateInfoForUpdate {
   /**
    * 音频流的编码格式。
+当不需要对音频进行转码时，可选值为：
+<li>copy。</li>
 当外层参数 Container 为 mp3 时，可选值为：
 <li>libmp3lame。</li>
 当外层参数 Container 为 ogg 或 flac 时，可选值为：
@@ -1965,6 +1967,8 @@ export interface AiRecognitionTaskInput {
 export interface AudioTemplateInfo {
   /**
    * 音频流的编码格式。
+当不需要对音频进行转码时，可选值为：
+<li>copy。</li>
 当外层参数 Container 为 mp3 时，可选值为：
 <li>libmp3lame。</li>
 当外层参数 Container 为 ogg 或 flac 时，可选值为：
@@ -1975,7 +1979,8 @@ export interface AudioTemplateInfo {
 <li>ac3。</li>
 当外层参数 Container 为 mp4 或 flv 时，可选值为：
 <li>libfdk_aac：更适合 mp4；</li>
-<li>libmp3lame：更适合 flv。</li>
+<li>libmp3lame：更适合 flv；</li>
+<li>mp2。</li>
 当外层参数 Container 为 hls 时，可选值为：
 <li>libfdk_aac；</li>
 <li>libmp3lame。</li>
@@ -4093,6 +4098,12 @@ export interface ComposeVideoStream {
 默认值：0，表示和第一个视频帧率一致。
    */
   Fps?: number
+  /**
+   * 参考码率，单位 kbps，范围：50~35000。
+如果设置，编码时会尽量按该码率进行编码。
+如果不设置，服务将通过画面复杂度自动采用合适的码率。
+   */
+  Bitrate?: number
 }
 
 /**
@@ -9907,6 +9918,11 @@ export interface AiRecognitionTaskAsrFullTextResult {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Output?: AiRecognitionTaskAsrFullTextResultOutput
+  /**
+   * 任务进度。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Progress?: number
 }
 
 /**
@@ -13530,6 +13546,12 @@ export interface ComposeAudioStream {
 <li>2：双声道（默认）。</li>
    */
   AudioChannel?: number
+  /**
+   * 参考码率，单位 kbps，范围：26~10000。
+如果设置，编码时会尽量按该码率进行编码。
+如果不设置，服务将根据音频参数自动采用合适的码率。
+   */
+  Bitrate?: number
 }
 
 /**
@@ -14327,6 +14349,11 @@ export interface AiRecognitionTaskTransTextResult {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Output?: AiRecognitionTaskTransTextResultOutput
+  /**
+   * 任务进度。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Progress?: number
 }
 
 /**

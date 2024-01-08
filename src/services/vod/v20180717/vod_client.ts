@@ -21,6 +21,7 @@ import {
   Canvas,
   ModifySampleSnapshotTemplateResponse,
   ModifyWatermarkTemplateRequest,
+  DomainCLSTargetInfo,
   CreateStorageRegionRequest,
   AiRecognitionTaskAsrFullTextSegmentItem,
   DescribeFileAttributesTask,
@@ -87,7 +88,8 @@ import {
   DescribeLicenseUsageDataResponse,
   DrmStreamingsInfoForUpdate,
   ClassificationConfigureInfo,
-  DescribeStorageDataResponse,
+  AbnormalLightingConfigureInfoForUpdate,
+  ModifyWordSampleResponse,
   AudioTemplateInfoForUpdate,
   DescribeDailyMediaPlayStatResponse,
   ModifySubAppIdInfoRequest,
@@ -103,6 +105,7 @@ import {
   DescribeClientUploadAccelerationUsageDataResponse,
   ModifyRebuildMediaTemplateRequest,
   ComposeMediaRequest,
+  DescribeCLSTopicsRequest,
   AIRecognitionTemplateItem,
   AiReviewPornAsrTaskInput,
   AiRecognitionTaskFaceResult,
@@ -118,6 +121,7 @@ import {
   DeleteAIAnalysisTemplateResponse,
   DeleteImageProcessingTemplateRequest,
   DescribeDailyPlayStatFileListResponse,
+  CLSTopicInfo,
   AbnormalLightingConfigureInfo,
   TextWatermarkTemplateInputForUpdate,
   DeleteSuperPlayerConfigRequest,
@@ -214,6 +218,7 @@ import {
   BlurConfigureInfo,
   PoliticalAsrReviewTemplateInfoForUpdate,
   WechatMiniProgramPublishTaskInput,
+  SetCLSPushTargetRequest,
   AiSampleFaceOperation,
   SvgWatermarkInputForUpdate,
   AiReviewTaskTerrorismOcrResult,
@@ -223,9 +228,10 @@ import {
   AiRecognitionTaskSegmentResult,
   JitterConfigureInfo,
   MediaSubtitleItem,
+  ReviewAudioVideoTaskOutput,
   ProhibitedAsrReviewTemplateInfoForUpdate,
   ModifyAnimatedGraphicsTemplateResponse,
-  ModifyAIAnalysisTemplateResponse,
+  DeleteCLSTopicResponse,
   LiveRealTimeClipRequest,
   DeleteAdaptiveDynamicStreamingTemplateRequest,
   AiRecognitionTaskOcrFullTextSegmentItem,
@@ -311,7 +317,7 @@ import {
   DeleteHeadTailTemplateRequest,
   AiAnalysisTaskTagResult,
   SearchMediaResponse,
-  ReviewAudioVideoTaskOutput,
+  ModifyAIAnalysisTemplateResponse,
   RemoveWaterMarkTaskOutput,
   ModifyMediaStorageClassRequest,
   AiAnalysisTaskTagOutput,
@@ -319,6 +325,7 @@ import {
   AiAnalysisTaskHighlightOutput,
   DescribeRebuildMediaTemplatesRequest,
   ReviewImageSegmentItem,
+  CreateCLSTopicResponse,
   CreateRoundPlayResponse,
   MediaSubtitleInput,
   FileVerifyInfo,
@@ -329,6 +336,7 @@ import {
   ModifyMediaInfoResponse,
   ModifyReviewTemplateRequest,
   AiRecognitionTaskOcrFullTextResult,
+  DescribeCLSTopicsResponse,
   MediaTrackItem,
   RestoreMediaResponse,
   MediaProcessTaskSnapshotByTimeOffsetResult,
@@ -354,6 +362,7 @@ import {
   ImageWatermarkTemplate,
   ModifySubAppIdInfoResponse,
   AsrWordsConfigureInfo,
+  AreaCLSTargetInfo,
   DeleteRebuildMediaTemplateResponse,
   DescribeSubAppIdsResponse,
   SimpleHlsClipRequest,
@@ -471,7 +480,7 @@ import {
   DeleteSampleSnapshotTemplateRequest,
   DescribeTranscodeTemplatesResponse,
   MediaAiAnalysisTagItem,
-  AbnormalLightingConfigureInfoForUpdate,
+  DescribeStorageDataResponse,
   AiRecognitionTaskOcrFullTextSegmentTextItem,
   ImageProcessingTemplate,
   SegmentConfigureInfo,
@@ -481,6 +490,7 @@ import {
   RefererAuthPolicy,
   TaskStatDataItem,
   AiRecognitionTaskObjectSegmentItem,
+  CreateCLSTopicRequest,
   AiReviewPornOcrTaskOutput,
   ApplyUploadRequest,
   CreateSampleSnapshotTemplateResponse,
@@ -493,6 +503,7 @@ import {
   ProcessMediaByProcedureRequest,
   RebuildMediaTargetVideoStream,
   VoiceConfigureInfo,
+  SetCLSPushTargetResponse,
   ClipTask2017,
   TranscodeTemplate,
   DescribeCDNUsageDataRequest,
@@ -504,7 +515,7 @@ import {
   DescribeReviewDetailsRequest,
   PornConfigureInfoForUpdate,
   AiReviewProhibitedAsrTaskInput,
-  MediaContentReviewSegmentItem,
+  DeleteCLSTopicRequest,
   ParseStreamingManifestResponse,
   TerrorismOcrReviewTemplateInfo,
   CreateRoundPlayRequest,
@@ -596,6 +607,7 @@ import {
   DescribeContentReviewTemplatesRequest,
   AdaptiveDynamicStreamingTaskInput,
   DescribeImageSpriteTemplatesResponse,
+  DescribeCLSLogsetsRequest,
   InspectMediaQualityRequest,
   TransitionOperation,
   WatermarkConfigureInfo,
@@ -614,6 +626,7 @@ import {
   UserDefineFaceReviewTemplateInfoForUpdate,
   ModifyRoundPlayResponse,
   CreateProcedureTemplateResponse,
+  DescribeCLSLogsetsResponse,
   ModifyEnhanceMediaTemplateRequest,
   RebuildMediaResponse,
   DomainHTTPSConfig,
@@ -637,6 +650,7 @@ import {
   DescribeStorageRegionsResponse,
   ModifySnapshotByTimeOffsetTemplateRequest,
   ProcedureTask,
+  CreateCLSLogsetRequest,
   ExtractTraceWatermarkRequest,
   TaskSimpleInfo,
   ReviewAudioVideoTask,
@@ -646,7 +660,7 @@ import {
   SnapshotByTimeOffsetTemplate,
   DeleteSnapshotByTimeOffsetTemplateResponse,
   ProhibitedOcrReviewTemplateInfoForUpdate,
-  DescribeVodDomainsRequest,
+  DescribeCLSPushTargetsRequest,
   DescribeTasksRequest,
   DescribeReviewDetailsResponse,
   CreateTranscodeTemplateResponse,
@@ -671,7 +685,7 @@ import {
   CommitUploadResponse,
   ExtractCopyRightWatermarkTaskInput,
   DescribeSampleSnapshotTemplatesResponse,
-  ModifyWordSampleResponse,
+  MediaContentReviewSegmentItem,
   AiContentReviewResult,
   ReduceMediaBitrateTask,
   TerrorismImgReviewTemplateInfo,
@@ -703,9 +717,11 @@ import {
   DescribeLicenseUsageDataRequest,
   DeleteTranscodeTemplateResponse,
   MediaTranscodeItem,
+  CLSLogsetInfo,
   DescribePersonSamplesResponse,
   ExtractCopyRightWatermarkTaskOutput,
   SplitMediaTaskInput,
+  DescribeVodDomainsRequest,
   PornConfigureInfo,
   AiRecognitionTaskObjectSeqmentItem,
   SplitMediaResponse,
@@ -752,6 +768,7 @@ import {
   ExtractCopyRightWatermarkTask,
   MediaAiAnalysisFrameTagItem,
   QualityInspectItem,
+  DescribeCLSPushTargetsResponse,
   PullUploadTask,
   DescribeImageProcessingTemplatesResponse,
   UserDefineOcrTextReviewTemplateInfoForUpdate,
@@ -760,6 +777,7 @@ import {
   RebuildVideoInfo,
   DescribeHeadTailTemplatesResponse,
   TerrorismConfigureInfo,
+  CreateCLSLogsetResponse,
   PoliticalAsrReviewTemplateInfo,
   CreateAnimatedGraphicsTemplateResponse,
   SampleSnapshotTemplate,
@@ -813,6 +831,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateImageProcessingTemplateResponse) => void
   ): Promise<CreateImageProcessingTemplateResponse> {
     return this.request("CreateImageProcessingTemplate", req, cb)
+  }
+
+  /**
+   * 查询 VOD 创建的 CLS 日志集。
+   */
+  async DescribeCLSLogsets(
+    req: DescribeCLSLogsetsRequest,
+    cb?: (error: string, rep: DescribeCLSLogsetsResponse) => void
+  ): Promise<DescribeCLSLogsetsResponse> {
+    return this.request("DescribeCLSLogsets", req, cb)
   }
 
   /**
@@ -1137,13 +1165,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改媒体分类属性。
+   * 由 VOD 创建新的日志集。
    */
-  async ModifyClass(
-    req: ModifyClassRequest,
-    cb?: (error: string, rep: ModifyClassResponse) => void
-  ): Promise<ModifyClassResponse> {
-    return this.request("ModifyClass", req, cb)
+  async CreateCLSLogset(
+    req: CreateCLSLogsetRequest,
+    cb?: (error: string, rep: CreateCLSLogsetResponse) => void
+  ): Promise<CreateCLSLogsetResponse> {
+    return this.request("CreateCLSLogset", req, cb)
+  }
+
+  /**
+   * 为点播域名设置投递 CLS 的目标。
+   */
+  async SetCLSPushTarget(
+    req: SetCLSPushTargetRequest,
+    cb?: (error: string, rep: SetCLSPushTargetResponse) => void
+  ): Promise<SetCLSPushTargetResponse> {
+    return this.request("SetCLSPushTarget", req, cb)
   }
 
   /**
@@ -1168,6 +1206,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateStorageRegionResponse) => void
   ): Promise<CreateStorageRegionResponse> {
     return this.request("CreateStorageRegion", req, cb)
+  }
+
+  /**
+   * 删除点播开通的日志主题。
+   */
+  async DeleteCLSTopic(
+    req: DeleteCLSTopicRequest,
+    cb?: (error: string, rep: DeleteCLSTopicResponse) => void
+  ): Promise<DeleteCLSTopicResponse> {
+    return this.request("DeleteCLSTopic", req, cb)
   }
 
   /**
@@ -1666,6 +1714,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询点播域名下日志投递的目标主题。
+   */
+  async DescribeCLSPushTargets(
+    req: DescribeCLSPushTargetsRequest,
+    cb?: (error: string, rep: DescribeCLSPushTargetsResponse) => void
+  ): Promise<DescribeCLSPushTargetsResponse> {
+    return this.request("DescribeCLSPushTargets", req, cb)
+  }
+
+  /**
      * 该 API 已经<font color=red>不再维护</font>，请使用新版接口 [音画质重生](https://cloud.tencent.com/document/api/266/102571)。
 使用模板发起音画质重生。
      */
@@ -1739,6 +1797,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteAnimatedGraphicsTemplateResponse) => void
   ): Promise<DeleteAnimatedGraphicsTemplateResponse> {
     return this.request("DeleteAnimatedGraphicsTemplate", req, cb)
+  }
+
+  /**
+   * 查询 VOD 创建的 CLS 日志主题列表。
+   */
+  async DescribeCLSTopics(
+    req: DescribeCLSTopicsRequest,
+    cb?: (error: string, rep: DescribeCLSTopicsResponse) => void
+  ): Promise<DescribeCLSTopicsResponse> {
+    return this.request("DescribeCLSTopics", req, cb)
+  }
+
+  /**
+   * 创建 VOD 下新的 CLS 日志主题
+   */
+  async CreateCLSTopic(
+    req: CreateCLSTopicRequest,
+    cb?: (error: string, rep: CreateCLSTopicResponse) => void
+  ): Promise<CreateCLSTopicResponse> {
+    return this.request("CreateCLSTopic", req, cb)
   }
 
   /**
@@ -2683,6 +2761,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteRoundPlayResponse) => void
   ): Promise<DeleteRoundPlayResponse> {
     return this.request("DeleteRoundPlay", req, cb)
+  }
+
+  /**
+   * 修改媒体分类属性。
+   */
+  async ModifyClass(
+    req: ModifyClassRequest,
+    cb?: (error: string, rep: ModifyClassResponse) => void
+  ): Promise<ModifyClassResponse> {
+    return this.request("ModifyClass", req, cb)
   }
 
   /**

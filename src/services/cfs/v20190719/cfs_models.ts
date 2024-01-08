@@ -1515,6 +1515,10 @@ export interface DescribeCfsFileSystemsRequest {
    * Limit 页面大小
    */
   Limit?: number
+  /**
+   * 用户自定义名称
+   */
+  CreationToken?: string
 }
 
 /**

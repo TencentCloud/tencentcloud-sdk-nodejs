@@ -626,6 +626,11 @@ export interface NotebookSetItem {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     SSHConfig?: SSHConfig;
+    /**
+     * GooseFS存储配置
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    VolumeSourceGooseFS?: GooseFS;
 }
 /**
  * ModifyNotebookTags请求参数结构体
@@ -1205,7 +1210,9 @@ export interface DescribeTrainingTasksRequest {
   取值范围：
   Name（名称）：task1
   Id（task ID）：train-23091792777383936
-  Status（状态）：STARTING / RUNNING / STOPPING / STOPPED / FAILED / SUCCEED / SUBMIT_FAILED
+  Status（状态）：SUBMITTING/PENDING/STARTING / RUNNING / STOPPING / STOPPED / FAILED / SUCCEED / SUBMIT_FAILED
+  ResourceGroupId（资源组 Id）：trsg-kvvfrwl7
+  Creator（创建者 uin）：100014761913
   ChargeType（计费类型）：PREPAID（预付费）/ POSTPAID_BY_HOUR（后付费）
   CHARGE_STATUS（计费状态）：NOT_BILLING（未开始计费）/ BILLING（计费中）/ ARREARS_STOP（欠费停止）
      */
@@ -1227,7 +1234,7 @@ export interface DescribeTrainingTasksRequest {
      */
     Order?: string;
     /**
-     * 排序的依据字段， 取值范围 "CreateTime" "UpdateTime"
+     * 排序的依据字段， 取值范围 "CreateTime" 、"UpdateTime"、"StartTime"，默认为UpdateTime
      */
     OrderField?: string;
 }
@@ -2778,14 +2785,16 @@ export interface CreateNotebookRequest {
     SubnetId?: string;
     /**
      * 存储的类型。取值包含：
-      FREE:    预付费的免费存储
-      CLOUD_PREMIUM： 高性能云硬盘
-      CLOUD_SSD： SSD云硬盘
-      CFS:     CFS存储，包含NFS和turbo
+  FREE：预付费的免费存储
+  CLOUD_PREMIUM：高性能云硬盘
+  CLOUD_SSD：SSD云硬盘
+  CFS：CFS存储
+  CFS_TURBO：CFS Turbo存储
+  GooseFSx：GooseFSx存储
      */
     VolumeSourceType?: string;
     /**
-     * 存储卷大小，单位GB
+     * 云硬盘存储卷大小，单位GB
      */
     VolumeSizeInGB?: number;
     /**
@@ -2817,7 +2826,7 @@ export interface CreateNotebookRequest {
      */
     Tags?: Array<Tag>;
     /**
-     * 数据配置
+     * 数据配置，只支持WEDATA_HDFS存储类型
      */
     DataConfigs?: Array<DataConfig>;
     /**
@@ -2825,13 +2834,17 @@ export interface CreateNotebookRequest {
      */
     ImageInfo?: ImageInfo;
     /**
-     * 镜像类型
+     * 镜像类型，包括SYSTEM、TCR、CCR
      */
     ImageType?: string;
     /**
      * SSH配置信息
      */
     SSHConfig?: SSHConfig;
+    /**
+     * GooseFS存储配置
+     */
+    VolumeSourceGooseFS?: GooseFS;
 }
 /**
  * ModifyNotebook请求参数结构体
@@ -2842,11 +2855,11 @@ export interface ModifyNotebookRequest {
      */
     Id: string;
     /**
-     * 名称
+     * 名称。不超过60个字符，仅支持中英文、数字、下划线"_"、短横"-"，只能以中英文、数字开头
      */
     Name: string;
     /**
-     * 计算资源付费模式 ，可选值为：
+     * （不允许修改）计算资源付费模式 ，可选值为：
   PREPAID：预付费，即包年包月
   POSTPAID_BY_HOUR：按小时后付费
      */
@@ -2876,11 +2889,11 @@ export interface ModifyNotebookRequest {
      */
     ResourceGroupId?: string;
     /**
-     * Vpc-Id
+     * （不允许修改）Vpc-Id
      */
     VpcId?: string;
     /**
-     * 子网Id
+     * （不允许修改）子网Id
      */
     SubnetId?: string;
     /**
@@ -2888,7 +2901,7 @@ export interface ModifyNotebookRequest {
      */
     VolumeSizeInGB?: number;
     /**
-     * 存储的类型。取值包含：
+     * （不允许修改）存储的类型。取值包含：
       FREE:    预付费的免费存储
       CLOUD_PREMIUM： 高性能云硬盘
       CLOUD_SSD： SSD云硬盘
@@ -2896,7 +2909,7 @@ export interface ModifyNotebookRequest {
      */
     VolumeSourceType?: string;
     /**
-     * CFS存储的配置
+     * （不允许修改）CFS存储的配置
      */
     VolumeSourceCFS?: CFSConfig;
     /**
@@ -2924,7 +2937,7 @@ export interface ModifyNotebookRequest {
      */
     Tags?: Array<Tag>;
     /**
-     * 数据配置
+     * 数据配置，只支持WEDATA_HDFS
      */
     DataConfigs?: Array<DataConfig>;
     /**
@@ -2932,7 +2945,7 @@ export interface ModifyNotebookRequest {
      */
     ImageInfo?: ImageInfo;
     /**
-     * 镜像类型
+     * 镜像类型，包括SYSTEM、TCR、CCR
      */
     ImageType?: string;
     /**
@@ -3003,19 +3016,19 @@ export interface ResourceConfigInfo {
      */
     Role: string;
     /**
-     * cpu核数，1000=1核
+     * cpu核数，使用资源组时需配置。单位：1/1000，即1000=1核
      */
     Cpu?: number;
     /**
-     * 内存，单位为MB
+     * 内存，使用资源组时需配置。单位为MB
      */
     Memory?: number;
     /**
-     * gpu卡类型
+     * gpu卡类型，使用资源组时需配置
      */
     GpuType?: string;
     /**
-     * gpu数
+     * gpu卡数，使用资源组时需配置。单位：1/100，即100=1卡
      */
     Gpu?: number;
     /**
@@ -3124,6 +3137,16 @@ export interface GooseFS {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Id?: string;
+    /**
+     * GooseFS类型，包括GooseFS和GooseFSx
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Type?: string;
+    /**
+     * GooseFSx实例需要挂载的路径
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Path?: string;
 }
 /**
  * 文本标签
@@ -4228,7 +4251,8 @@ export interface TrainingTaskSetItem {
      */
     TrainingMode?: string;
     /**
-     * 任务状态，eg：STARTING启动中、RUNNING运行中、STOPPING停止中、STOPPED已停止、FAILED异常、SUCCEED已完成
+     * 任务状态，eg：SUBMITTING提交中、PENDING排队中、
+  STARTING启动中、RUNNING运行中、STOPPING停止中、STOPPED已停止、FAILED异常、SUCCEED已完成
      */
     Status?: string;
     /**
@@ -4342,7 +4366,7 @@ export interface NotebookImageRecord {
      */
     ImageUrl?: string;
     /**
-     * 状态
+     * 状态。eg：creating导出中/success已完成/stopped已停止/fail异常
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Status?: string;
@@ -4443,7 +4467,7 @@ export interface CreateTrainingTaskRequest {
      */
     TrainingMode?: string;
     /**
-     * 数据配置，依赖DataSource字段
+     * 数据配置，依赖DataSource字段，数量不超过10个
      */
     DataConfigs?: Array<DataConfig>;
     /**
@@ -4463,7 +4487,7 @@ export interface CreateTrainingTaskRequest {
      */
     LogConfig?: LogConfig;
     /**
-     * 调优参数
+     * 调优参数，不超过2048个字符
      */
     TuningParameters?: string;
     /**
@@ -4471,11 +4495,11 @@ export interface CreateTrainingTaskRequest {
      */
     LogEnable?: boolean;
     /**
-     * 备注，最多500个字
+     * 备注，不超过1024个字符
      */
     Remark?: string;
     /**
-     * 数据来源，eg：DATASET、COS、CFS、HDFS
+     * 数据来源，eg：DATASET、COS、CFS、CFSTurbo、HDFS、GooseFSx
      */
     DataSource?: string;
     /**
@@ -5080,7 +5104,18 @@ export interface DescribeTrainingModelsRequest {
 /**
  * 训练数据
  */
-export declare type TrainingDataPoint = null;
+export interface TrainingDataPoint {
+    /**
+     * 时间戳
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Timestamp?: number;
+    /**
+     * 训练上报的值。可以为训练指标（双精度浮点数，也可以为Epoch/Step（两者皆保证是整数）
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Value?: number;
+}
 /**
  * 四级标签
  */
@@ -5363,6 +5398,7 @@ export interface DescribeNotebooksRequest {
   Name（名称）：notebook1
   Id（notebook ID）：nb-123456789
   Status（状态）：Starting / Running / Stopped / Stopping / Failed / SubmitFailed
+  Creator（创建者 uin）：100014761913
   ChargeType（计费类型）：PREPAID（预付费）/ POSTPAID_BY_HOUR（后付费）
   ChargeStatus（计费状态）：NOT_BILLING（未开始计费）/ BILLING（计费中）/ BILLING_STORAGE（存储计费中）/ARREARS_STOP（欠费停止）
   DefaultCodeRepoId（默认代码仓库ID）：cr-123456789
@@ -5512,7 +5548,7 @@ export interface PodInfo {
      */
     IP?: string;
     /**
-     * pod状态
+     * pod状态。eg：SUBMITTING提交中、PENDING排队中、RUNNING运行中、SUCCEEDED已完成、FAILED异常、TERMINATING停止中、TERMINATED已停止
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Status?: string;
@@ -5871,6 +5907,14 @@ export interface ServiceLimit {
      * 每个服务实例的 request per second 限速, 0 为不限流
      */
     InstanceRpsLimit?: number;
+    /**
+     * 是否开启单实例最大并发数限制，true or false。true 则 InstanceReqLimit 必填， false 则 InstanceReqLimit 不生效
+     */
+    EnableInstanceReqLimit?: boolean;
+    /**
+     * 每个服务实例的最大并发
+     */
+    InstanceReqLimit?: number;
 }
 /**
  * 服务历史版本
@@ -6226,7 +6270,9 @@ export interface HorizontalPodAutoscaler {
      */
     MaxReplicas: number;
     /**
-     * 扩缩容指标
+     * 支持：
+  "gpu-util": GPU利用率。范围{10, 100}      "cpu-util": CPU利用率。范围{10, 100}	      "memory-util": 内存利用率。范围{10, 100}      "service-qps": 单个实例QPS值。范围{1, 5000}
+  "concurrency-util":单个实例请求数量值。范围{1,100000}
   注意：此字段可能返回 null，表示取不到有效值。
      */
     HpaMetrics: Array<Option>;
@@ -6314,142 +6360,142 @@ export interface NotebookDetail {
     /**
      * notebook  ID
      */
-    Id: string;
+    Id?: string;
     /**
      * notebook 名称
      */
-    Name: string;
+    Name?: string;
     /**
      * 生命周期脚本
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    LifecycleScriptId: string;
+    LifecycleScriptId?: string;
     /**
      * Pod-Name
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    PodName: string;
+    PodName?: string;
     /**
      * Update-Time
      */
-    UpdateTime: string;
+    UpdateTime?: string;
     /**
      * 是否访问公网
      */
-    DirectInternetAccess: boolean;
+    DirectInternetAccess?: boolean;
     /**
      * 预付费专用资源组
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ResourceGroupId: string;
+    ResourceGroupId?: string;
     /**
      * 标签配置
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Tags: Array<Tag>;
+    Tags?: Array<Tag>;
     /**
      * 是否自动停止
      */
-    AutoStopping: boolean;
+    AutoStopping?: boolean;
     /**
      * 其他GIT存储库，最多3个，单个
   长度不超过512字符
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    AdditionalCodeRepoIds: Array<string>;
+    AdditionalCodeRepoIds?: Array<string>;
     /**
      * 自动停止时间，单位小时
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    AutomaticStopTime: number;
+    AutomaticStopTime?: number;
     /**
      * 资源配置
      */
-    ResourceConf: ResourceConf;
+    ResourceConf?: ResourceConf;
     /**
      * 默认GIT存储库，长度不超过512字符
      */
-    DefaultCodeRepoId: string;
+    DefaultCodeRepoId?: string;
     /**
      * 训练输出
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    EndTime: string;
+    EndTime?: string;
     /**
      * 是否上报日志
      */
-    LogEnable: boolean;
+    LogEnable?: boolean;
     /**
      * 日志配置
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    LogConfig: LogConfig;
+    LogConfig?: LogConfig;
     /**
      * VPC ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    VpcId: string;
+    VpcId?: string;
     /**
      * 子网ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SubnetId: string;
+    SubnetId?: string;
     /**
      * 任务状态
      */
-    Status: string;
+    Status?: string;
     /**
      * 运行时长
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    RuntimeInSeconds: number;
+    RuntimeInSeconds?: number;
     /**
      * 创建时间
      */
-    CreateTime: string;
+    CreateTime?: string;
     /**
      * 训练开始时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    StartTime: string;
+    StartTime?: string;
     /**
      * 计费状态，eg：BILLING计费中，ARREARS_STOP欠费停止，NOT_BILLING不在计费中
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ChargeStatus: string;
+    ChargeStatus?: string;
     /**
      * 是否ROOT权限
      */
-    RootAccess: boolean;
+    RootAccess?: boolean;
     /**
      * 计贺金额信息，eg:2.00元/小时
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    BillingInfos: Array<string>;
+    BillingInfos?: Array<string>;
     /**
      * 存储卷大小 （单位时GB，最小10GB，必须是10G的倍数）
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    VolumeSizeInGB: number;
+    VolumeSizeInGB?: number;
     /**
      * 失败原因
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    FailureReason: string;
+    FailureReason?: string;
     /**
      * 计算资源付费模式 (- PREPAID：预付费，即包年包月 - POSTPAID_BY_HOUR：按小时后付费)
      */
-    ChargeType: string;
+    ChargeType?: string;
     /**
      * 后付费资源规格说明
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    InstanceTypeAlias: string;
+    InstanceTypeAlias?: string;
     /**
      * 预付费资源组名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ResourceGroupName: string;
+    ResourceGroupName?: string;
     /**
      * 存储的类型。取值包含：
       FREE:        预付费的免费存储
@@ -6458,27 +6504,27 @@ export interface NotebookDetail {
       CFS:     CFS存储，包含NFS和turbo
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    VolumeSourceType: string;
+    VolumeSourceType?: string;
     /**
      * CFS存储的配置
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    VolumeSourceCFS: CFSConfig;
+    VolumeSourceCFS?: CFSConfig;
     /**
      * 数据配置
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DataConfigs: Array<DataConfig>;
+    DataConfigs?: Array<DataConfig>;
     /**
      * notebook 信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Message: string;
+    Message?: string;
     /**
      * 数据源来源，eg：WeData_HDFS
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DataSource: string;
+    DataSource?: string;
     /**
      * 镜像信息
      */
@@ -6488,6 +6534,16 @@ export interface NotebookDetail {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     ImageType?: string;
+    /**
+     * SSH配置
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SSHConfig?: SSHConfig;
+    /**
+     * GooseFS存储配置
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    VolumeSourceGooseFS?: GooseFS;
 }
 /**
  * DescribeTrainingTasks返回参数结构体
@@ -6897,7 +6953,7 @@ export interface DataConfig {
      */
     MappingPath?: string;
     /**
-     * DATASET、COS、CFS、HDFS、WEDATA_HDFS
+     * DATASET、COS、CFS、CFSTurbo、GooseFSx、HDFS、WEDATA_HDFS
   注意：此字段可能返回 null，表示取不到有效值。
      */
     DataSourceType?: string;
@@ -6956,12 +7012,12 @@ export interface ResourceConf {
      */
     Memory?: number;
     /**
-     * gpu Gpu卡资源，单位为1单位的GpuType，例如GpuType=T4时，1 Gpu = 1/100 T4卡，GpuType=vcuda时，1 Gpu = 1/100 vcuda-core (for预付费)
+     * gpu Gpu卡资源，单位为1/100卡，例如GpuType=T4时，1 Gpu = 1/100 T4卡 (for预付费)
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Gpu?: number;
     /**
-     * GpuType 卡类型 vcuda, T4,P4,V100等 (for预付费)
+     * GpuType 卡类型，参考资源组上对应的卡类型。eg: H800,A800,A100,T4,P4,V100等 (for预付费)
   注意：此字段可能返回 null，表示取不到有效值。
      */
     GpuType?: string;

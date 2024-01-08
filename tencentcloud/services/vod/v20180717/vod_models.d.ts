@@ -83,6 +83,23 @@ export interface ModifyWatermarkTemplateRequest {
     SvgTemplate?: SvgWatermarkInputForUpdate;
 }
 /**
+ * 域名推送 CLS 目标。
+ */
+export interface DomainCLSTargetInfo {
+    /**
+     * 域名。
+     */
+    Domain?: string;
+    /**
+     * 中国大陆地区的日志推送目标。
+     */
+    ChineseMainlandCLSTargetInfo?: AreaCLSTargetInfo;
+    /**
+     * 中国大陆以外地区的日志推送目标。
+     */
+    OutsideChineseMainlandCLSTargetInfo?: AreaCLSTargetInfo;
+}
+/**
  * CreateStorageRegion请求参数结构体
  */
 export interface CreateStorageRegionRequest {
@@ -1791,37 +1808,20 @@ export interface ClassificationConfigureInfo {
     Switch: string;
 }
 /**
- * DescribeStorageData返回参数结构体
+ * 视频画面低光、过曝检测的控制参数。
  */
-export interface DescribeStorageDataResponse {
+export interface AbnormalLightingConfigureInfoForUpdate {
     /**
-     * 当前媒体总量。
+     * 视频画面低光、过曝检测开关，可选值：
+  <li>ON：开启；</li>
+  <li>OFF：关闭。</li>
      */
-    MediaCount?: number;
-    /**
-     * 当前总存储量，单位是字节。
-     */
-    TotalStorage?: number;
-    /**
-     * 当前标准存储量，单位是字节。
-     */
-    StandardStorage?: number;
-    /**
-     * 当前低频存储量，单位是字节。
-     */
-    InfrequentStorage?: number;
-    /**
-     * 当前归档存储量，单位是字节。
-     */
-    ArchiveStorage?: number;
-    /**
-     * 当前深度归档存储量，单位是字节。
-     */
-    DeepArchiveStorage?: number;
-    /**
-     * 各计费区域的存储用量。
-     */
-    StorageStat?: Array<StorageStatData>;
+    Switch?: string;
+}
+/**
+ * ModifyWordSample返回参数结构体
+ */
+export interface ModifyWordSampleResponse {
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2169,6 +2169,33 @@ export interface ComposeMediaRequest {
      * 用于任务去重的识别码，如果三天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。
      */
     SessionId?: string;
+}
+/**
+ * DescribeCLSTopics请求参数结构体
+ */
+export interface DescribeCLSTopicsRequest {
+    /**
+     * 日志集所属地区：
+  ap-guangzhou：广州；
+  ap-singapore：新加坡。
+     */
+    CLSRegion: string;
+    /**
+     * 日志主题所属日志集 ID。
+     */
+    LogsetId: string;
+    /**
+     * 日志主题 ID 列表。如果不填，表示查询所有的日志主题。
+     */
+    TopicIds?: Array<string>;
+    /**
+     * 分页偏移量，默认值：0。
+     */
+    Offset?: number;
+    /**
+     * 返回记录条数，默认值：20，最大值：100。
+     */
+    Limit?: number;
 }
 /**
  * 视频内容识别模板详情
@@ -2607,6 +2634,26 @@ export interface DescribeDailyPlayStatFileListResponse {
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * CLS日志主题信息。
+ */
+export interface CLSTopicInfo {
+    /**
+     * 日志主题 ID。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TopicId?: string;
+    /**
+     * 日志主题名。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TopicName?: string;
+    /**
+     * 日志集 ID。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    LogsetId?: string;
 }
 /**
  * 视频画面低光、过曝检测的控制参数。
@@ -4829,6 +4876,27 @@ export interface WechatMiniProgramPublishTaskInput {
     SourceDefinition: number;
 }
 /**
+ * SetCLSPushTarget请求参数结构体
+ */
+export interface SetCLSPushTargetRequest {
+    /**
+     * 域名。
+     */
+    Domain: string;
+    /**
+     * 点播应用 ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
+     */
+    SubAppId?: number;
+    /**
+     * 要设置的中国大陆地区的日志推送目标。
+     */
+    ChineseMainlandCLSTargetInfo?: AreaCLSTargetInfo;
+    /**
+     * 要设置的中国大陆以外地区的日志推送目标。
+     */
+    OutsideChineseMainlandCLSTargetInfo?: AreaCLSTargetInfo;
+}
+/**
  * AI 样本管理，人脸数据操作。
  */
 export interface AiSampleFaceOperation {
@@ -5100,6 +5168,55 @@ export interface MediaSubtitleItem {
     Url?: string;
 }
 /**
+ * 音视频审核任务的输出。
+ */
+export interface ReviewAudioVideoTaskOutput {
+    /**
+     * 音视频内容审核的结果建议，取值范围：
+  <li>pass：建议通过；</li>
+  <li>review：建议复审；</li>
+  <li>block：建议封禁。</li>
+     */
+    Suggestion?: string;
+    /**
+     * 当 Suggestion 为 review 或 block 时有效，表示音视频最可能的违规的标签，取值范围：
+  <li>Porn：色情；</li>
+  <li>Terror：暴力；</li>
+  <li>Polity：不适宜的信息；</li>
+  <li>Ad：广告；</li>
+  <li>Illegal：违法；</li>
+  <li>Abuse：谩骂；</li>
+  <li>Moan：娇喘。</li>
+     */
+    Label?: string;
+    /**
+     * 当 Suggestion 为 review 或 block 时有效，表示音视频最可能的违禁的形式，取值范围：
+  <li>Image：画面上的人物或图标；</li>
+  <li>OCR：画面上的文字；</li>
+  <li>ASR：语音中的文字；</li>
+  <li>Voice：声音。</li>
+     */
+    Form?: string;
+    /**
+     * 有违规信息的嫌疑的视频片段列表。
+  <font color=red>注意</font> ：该列表最多仅展示前 10个 元素。如希望获得完整结果，请从 SegmentSetFileUrl 对应的文件中获取。
+     */
+    SegmentSet?: Array<ReviewAudioVideoSegmentItem>;
+    /**
+     * 涉及违规信息的嫌疑的视频片段列表文件 URL。文件的内容为 JSON，数据结构与 SegmentSet 字段一致。 （文件不会永久存储，到达SegmentSetFileUrlExpireTime 时间点后文件将被删除）。
+     */
+    SegmentSetFileUrl?: string;
+    /**
+     * 涉及违规信息的嫌疑的视频片段列表文件 URL 失效时间，使用  [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+     */
+    SegmentSetFileUrlExpireTime?: string;
+    /**
+     * 封面审核结果。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CoverReviewResult?: ReviewImageResult;
+}
+/**
  * 语音违禁任务控制参数
  */
 export interface ProhibitedAsrReviewTemplateInfoForUpdate {
@@ -5128,9 +5245,9 @@ export interface ModifyAnimatedGraphicsTemplateResponse {
     RequestId?: string;
 }
 /**
- * ModifyAIAnalysisTemplate返回参数结构体
+ * DeleteCLSTopic返回参数结构体
  */
-export interface ModifyAIAnalysisTemplateResponse {
+export interface DeleteCLSTopicResponse {
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -7239,53 +7356,13 @@ export interface SearchMediaResponse {
     RequestId?: string;
 }
 /**
- * 音视频审核任务的输出。
+ * ModifyAIAnalysisTemplate返回参数结构体
  */
-export interface ReviewAudioVideoTaskOutput {
+export interface ModifyAIAnalysisTemplateResponse {
     /**
-     * 音视频内容审核的结果建议，取值范围：
-  <li>pass：建议通过；</li>
-  <li>review：建议复审；</li>
-  <li>block：建议封禁。</li>
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
-    Suggestion?: string;
-    /**
-     * 当 Suggestion 为 review 或 block 时有效，表示音视频最可能的违规的标签，取值范围：
-  <li>Porn：色情；</li>
-  <li>Terror：暴力；</li>
-  <li>Polity：不适宜的信息；</li>
-  <li>Ad：广告；</li>
-  <li>Illegal：违法；</li>
-  <li>Abuse：谩骂；</li>
-  <li>Moan：娇喘。</li>
-     */
-    Label?: string;
-    /**
-     * 当 Suggestion 为 review 或 block 时有效，表示音视频最可能的违禁的形式，取值范围：
-  <li>Image：画面上的人物或图标；</li>
-  <li>OCR：画面上的文字；</li>
-  <li>ASR：语音中的文字；</li>
-  <li>Voice：声音。</li>
-     */
-    Form?: string;
-    /**
-     * 有违规信息的嫌疑的视频片段列表。
-  <font color=red>注意</font> ：该列表最多仅展示前 10个 元素。如希望获得完整结果，请从 SegmentSetFileUrl 对应的文件中获取。
-     */
-    SegmentSet?: Array<ReviewAudioVideoSegmentItem>;
-    /**
-     * 涉及违规信息的嫌疑的视频片段列表文件 URL。文件的内容为 JSON，数据结构与 SegmentSet 字段一致。 （文件不会永久存储，到达SegmentSetFileUrlExpireTime 时间点后文件将被删除）。
-     */
-    SegmentSetFileUrl?: string;
-    /**
-     * 涉及违规信息的嫌疑的视频片段列表文件 URL 失效时间，使用  [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
-     */
-    SegmentSetFileUrlExpireTime?: string;
-    /**
-     * 封面审核结果。
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    CoverReviewResult?: ReviewImageResult;
+    RequestId?: string;
 }
 /**
  * 智能去除水印任务的输出。
@@ -7464,6 +7541,19 @@ export interface ReviewImageSegmentItem {
      * 当 Form 为 OCR 时有效，表示嫌疑片段命中的违规关键词列表。
      */
     KeywordSet?: Array<string>;
+}
+/**
+ * CreateCLSTopic返回参数结构体
+ */
+export interface CreateCLSTopicResponse {
+    /**
+     * 日志主题 ID。
+     */
+    TopicId?: string;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * CreateRoundPlay返回参数结构体
@@ -7697,6 +7787,23 @@ export interface AiRecognitionTaskOcrFullTextResult {
      * 文本全文识别任务执行完毕的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
      */
     FinishTime?: string;
+}
+/**
+ * DescribeCLSTopics返回参数结构体
+ */
+export interface DescribeCLSTopicsResponse {
+    /**
+     * 日志主题总数量。
+     */
+    TotalCount?: number;
+    /**
+     * 日志主题列表。
+     */
+    Topics?: Array<CLSTopicInfo>;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * 媒体轨道的片段信息
@@ -8322,6 +8429,31 @@ export interface AsrWordsConfigureInfo {
   标签个数最多 10 个，每个标签长度最多 16 个字符。
      */
     LabelSet?: Array<string>;
+}
+/**
+ * 日志推送目标。
+ */
+export interface AreaCLSTargetInfo {
+    /**
+     * 日志集所属地区：
+  ap-guangzhou：广州；
+  ap-singapore：新加坡。
+     */
+    CLSRegion: string;
+    /**
+     * 投递的目标主题 ID。
+     */
+    TopicId: string;
+    /**
+     * 投递的目标集 ID。
+     */
+    LogsetId: string;
+    /**
+     * 日志投递状态。
+   ON：启用；
+   OFF：停用。
+     */
+    Switch?: string;
 }
 /**
  * DeleteRebuildMediaTemplate返回参数结构体
@@ -11058,15 +11190,41 @@ export interface MediaAiAnalysisTagItem {
     Confidence: number;
 }
 /**
- * 视频画面低光、过曝检测的控制参数。
+ * DescribeStorageData返回参数结构体
  */
-export interface AbnormalLightingConfigureInfoForUpdate {
+export interface DescribeStorageDataResponse {
     /**
-     * 视频画面低光、过曝检测开关，可选值：
-  <li>ON：开启；</li>
-  <li>OFF：关闭。</li>
+     * 当前媒体总量。
      */
-    Switch?: string;
+    MediaCount?: number;
+    /**
+     * 当前总存储量，单位是字节。
+     */
+    TotalStorage?: number;
+    /**
+     * 当前标准存储量，单位是字节。
+     */
+    StandardStorage?: number;
+    /**
+     * 当前低频存储量，单位是字节。
+     */
+    InfrequentStorage?: number;
+    /**
+     * 当前归档存储量，单位是字节。
+     */
+    ArchiveStorage?: number;
+    /**
+     * 当前深度归档存储量，单位是字节。
+     */
+    DeepArchiveStorage?: number;
+    /**
+     * 各计费区域的存储用量。
+     */
+    StorageStat?: Array<StorageStatData>;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * 文本全文识别片段。
@@ -11253,6 +11411,25 @@ export interface AiRecognitionTaskObjectSegmentItem {
      * 识别结果的区域坐标。数组包含 4 个元素 [x1,y1,x2,y2]，依次表示区域左上点、右下点的横纵坐标。
      */
     AreaCoordSet?: Array<number | bigint>;
+}
+/**
+ * CreateCLSTopic请求参数结构体
+ */
+export interface CreateCLSTopicRequest {
+    /**
+     * 日志集所属地区：
+  ap-guangzhou：广州；
+  ap-singapore：新加坡。
+     */
+    CLSRegion: string;
+    /**
+     * 日志主题名。
+     */
+    TopicName: string;
+    /**
+     * 日志集 ID。
+     */
+    LogsetId: string;
 }
 /**
  * Ocr 文字涉及令人反感的信息
@@ -11692,6 +11869,15 @@ export interface VoiceConfigureInfo {
     Switch: string;
 }
 /**
+ * SetCLSPushTarget返回参数结构体
+ */
+export interface SetCLSPushTargetResponse {
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * 视频剪辑任务信息，该结构仅用于对 2017 版[视频剪辑](https://cloud.tencent.com/document/product/266/10156)接口发起的任务。
  */
 export interface ClipTask2017 {
@@ -11972,45 +12158,19 @@ export interface AiReviewProhibitedAsrTaskInput {
     Definition?: number;
 }
 /**
- * 音视频审核涉及令人反感的信息、涉及令人不安全的信息的嫌疑片段
+ * DeleteCLSTopic请求参数结构体
  */
-export interface MediaContentReviewSegmentItem {
+export interface DeleteCLSTopicRequest {
     /**
-     * 嫌疑片段起始的偏移时间，单位：秒。
+     * 日志集所属地区：
+  ap-guangzhou：广州；
+  ap-singapore：新加坡。
      */
-    StartTimeOffset?: number;
+    CLSRegion?: string;
     /**
-     * 嫌疑片段结束的偏移时间，单位：秒。
+     * 日志主题 ID。
      */
-    EndTimeOffset?: number;
-    /**
-     * 嫌疑片段涉及令人反感的信息的分数。
-     */
-    Confidence?: number;
-    /**
-     * 嫌疑片段涉及令人反感的信息的结果标签。
-     */
-    Label?: string;
-    /**
-     * 嫌疑片段鉴别涉及令人反感的信息的结果建议，取值范围：
-  <li>pass。</li>
-  <li>review。</li>
-  <li>block。</li>
-     */
-    Suggestion?: string;
-    /**
-     * 嫌疑图片 URL （图片不会永久存储，到达
-   PicUrlExpireTime 时间点后图片将被删除）。
-     */
-    Url?: string;
-    /**
-     * 该字段已废弃，请使用 PicUrlExpireTime。
-     */
-    PicUrlExpireTimeStamp?: number;
-    /**
-     * 嫌疑图片 URL 失效时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
-     */
-    PicUrlExpireTime?: string;
+    TopicId?: string;
 }
 /**
  * ParseStreamingManifest返回参数结构体
@@ -14357,6 +14517,17 @@ export interface DescribeImageSpriteTemplatesResponse {
     RequestId?: string;
 }
 /**
+ * DescribeCLSLogsets请求参数结构体
+ */
+export interface DescribeCLSLogsetsRequest {
+    /**
+     * CLS 日志集所属的地域，取值有：
+  ap-guangzhou：广州；
+  ap-singapore：新加坡。
+     */
+    CLSRegion: string;
+}
+/**
  * InspectMediaQuality请求参数结构体
  */
 export interface InspectMediaQualityRequest {
@@ -14914,6 +15085,19 @@ export interface ModifyRoundPlayResponse {
  * CreateProcedureTemplate返回参数结构体
  */
 export interface CreateProcedureTemplateResponse {
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * DescribeCLSLogsets返回参数结构体
+ */
+export interface DescribeCLSLogsetsResponse {
+    /**
+     * 查询到的日志集列表。
+     */
+    Logsets?: Array<CLSLogsetInfo>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -15486,6 +15670,17 @@ export interface ProcedureTask {
     OperationType?: string;
 }
 /**
+ * CreateCLSLogset请求参数结构体
+ */
+export interface CreateCLSLogsetRequest {
+    /**
+     * 日志集所属地区：
+  ap-guangzhou：广州；
+  ap-singapore：新加坡。
+     */
+    CLSRegion: string;
+}
+/**
  * ExtractTraceWatermark请求参数结构体
  */
 export interface ExtractTraceWatermarkRequest {
@@ -15751,24 +15946,15 @@ export interface ProhibitedOcrReviewTemplateInfoForUpdate {
     ReviewConfidence?: number;
 }
 /**
- * DescribeVodDomains请求参数结构体
+ * DescribeCLSPushTargets请求参数结构体
  */
-export interface DescribeVodDomainsRequest {
+export interface DescribeCLSPushTargetsRequest {
     /**
-     * 域名列表。当该字段不填时，则默认列出所有域名信息。本字段限制如下：
-  <li>域名个数度最大为 20。</li>
+     * 点播域名。
      */
-    Domains?: Array<string>;
+    Domains: Array<string>;
     /**
-     * 分页拉取的最大返回结果数。默认值：20。
-     */
-    Limit?: number;
-    /**
-     * 分页拉取的起始偏移量。默认值：0。
-     */
-    Offset?: number;
-    /**
-     * <b>点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b>
+     * 点播应用 ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
      */
     SubAppId?: number;
 }
@@ -16327,13 +16513,45 @@ export interface DescribeSampleSnapshotTemplatesResponse {
     RequestId?: string;
 }
 /**
- * ModifyWordSample返回参数结构体
+ * 音视频审核涉及令人反感的信息、涉及令人不安全的信息的嫌疑片段
  */
-export interface ModifyWordSampleResponse {
+export interface MediaContentReviewSegmentItem {
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     * 嫌疑片段起始的偏移时间，单位：秒。
      */
-    RequestId?: string;
+    StartTimeOffset?: number;
+    /**
+     * 嫌疑片段结束的偏移时间，单位：秒。
+     */
+    EndTimeOffset?: number;
+    /**
+     * 嫌疑片段涉及令人反感的信息的分数。
+     */
+    Confidence?: number;
+    /**
+     * 嫌疑片段涉及令人反感的信息的结果标签。
+     */
+    Label?: string;
+    /**
+     * 嫌疑片段鉴别涉及令人反感的信息的结果建议，取值范围：
+  <li>pass。</li>
+  <li>review。</li>
+  <li>block。</li>
+     */
+    Suggestion?: string;
+    /**
+     * 嫌疑图片 URL （图片不会永久存储，到达
+   PicUrlExpireTime 时间点后图片将被删除）。
+     */
+    Url?: string;
+    /**
+     * 该字段已废弃，请使用 PicUrlExpireTime。
+     */
+    PicUrlExpireTimeStamp?: number;
+    /**
+     * 嫌疑图片 URL 失效时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+     */
+    PicUrlExpireTime?: string;
 }
 /**
  * 音视频审核结果
@@ -17286,6 +17504,19 @@ export interface MediaTranscodeItem {
     CopyRightWatermarkText?: string;
 }
 /**
+ * CLS 日志集信息
+ */
+export interface CLSLogsetInfo {
+    /**
+     * 日志集 ID。
+     */
+    LogsetId?: string;
+    /**
+     * 日志集名。
+     */
+    LogsetName?: string;
+}
+/**
  * DescribePersonSamples返回参数结构体
  */
 export interface DescribePersonSamplesResponse {
@@ -17341,6 +17572,28 @@ export interface SplitMediaTaskInput {
      * 视频拆条输出信息。
      */
     OutputConfig: SplitMediaOutputConfig;
+}
+/**
+ * DescribeVodDomains请求参数结构体
+ */
+export interface DescribeVodDomainsRequest {
+    /**
+     * 域名列表。当该字段不填时，则默认列出所有域名信息。本字段限制如下：
+  <li>域名个数度最大为 20。</li>
+     */
+    Domains?: Array<string>;
+    /**
+     * 分页拉取的最大返回结果数。默认值：20。
+     */
+    Limit?: number;
+    /**
+     * 分页拉取的起始偏移量。默认值：0。
+     */
+    Offset?: number;
+    /**
+     * <b>点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b>
+     */
+    SubAppId?: number;
 }
 /**
  * 鉴别涉及令人反感的信息的任务控制参数
@@ -18618,6 +18871,23 @@ export interface QualityInspectItem {
     Confidence?: number;
 }
 /**
+ * DescribeCLSPushTargets返回参数结构体
+ */
+export interface DescribeCLSPushTargetsResponse {
+    /**
+     * 域名推送总数量。
+     */
+    TotalCount?: number;
+    /**
+     * 域名推送 CLS 目标列表。
+     */
+    DomainCLSTargets?: Array<DomainCLSTargetInfo>;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * 拉取上传任务信息
  */
 export interface PullUploadTask {
@@ -18843,6 +19113,19 @@ export interface TerrorismConfigureInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     OcrReviewInfo?: TerrorismOcrReviewTemplateInfo;
+}
+/**
+ * CreateCLSLogset返回参数结构体
+ */
+export interface CreateCLSLogsetResponse {
+    /**
+     * 日志集 ID。
+     */
+    LogsetId?: string;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * 语音鉴别涉及令人不适宜的信息的任务控制参数

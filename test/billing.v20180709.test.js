@@ -68,6 +68,16 @@ it("billing.v20180709.DescribeSavingPlanOverview", async function () {
     }
 })
 
+it("billing.v20180709.DescribeDosageDetailList", async function () {
+    try {
+       const data = await client.DescribeDosageDetailList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("billing.v20180709.CreateAllocationTag", async function () {
     try {
        const data = await client.CreateAllocationTag({})

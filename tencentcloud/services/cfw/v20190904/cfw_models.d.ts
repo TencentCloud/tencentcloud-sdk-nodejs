@@ -3977,6 +3977,10 @@ export interface DescribeIdsWhiteRuleResponse {
      */
     Total?: number;
     /**
+     * 规则详情
+     */
+    Data?: Array<IdsWhiteInfo>;
+    /**
      * 返回状态码 0 成功 非0不成功
      */
     ReturnCode?: number;
@@ -4656,6 +4660,41 @@ export interface DescribeAcListsRequest {
      * 实例ID
      */
     InstanceId?: string;
+}
+/**
+ * 入侵防御规则白名单详情
+ */
+export interface IdsWhiteInfo {
+    /**
+     * 白名单唯一ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Id?: number;
+    /**
+     * 源IP
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SrcIp?: string;
+    /**
+     * 目的IP
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DstIp?: string;
+    /**
+     * 规则类型
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    WhiteRuleType?: string;
+    /**
+     * 白名单生效防火墙范围： 1 边界防火墙 2 nat防火墙 4 vpc防火墙 7 = 1+2+4 所有防火墙
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    FwType?: number;
+    /**
+     * 入侵防御规则ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RuleId?: string;
 }
 /**
  * DescribeGuideScanInfo请求参数结构体

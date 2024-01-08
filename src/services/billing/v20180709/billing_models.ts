@@ -981,6 +981,20 @@ export interface BusinessSummaryInfo {
 }
 
 /**
+ * DescribeDosageDetailList返回参数结构体
+ */
+export interface DescribeDosageDetailListResponse {
+  /**
+   * 用量明细集合
+   */
+  Record?: Array<DescribeDosageDetail>
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeBillSummaryByProduct请求参数结构体
  */
 export interface DescribeBillSummaryByProductRequest {
@@ -1111,6 +1125,25 @@ export interface DescribeCostDetailResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 使用记录
+ */
+export interface UsageRecords {
+  /**
+   * 使用金额（微分）
+   */
+  UsedAmount: number
+  /**
+   * 使用时间
+   */
+  UsedTime: string
+  /**
+   * 使用记录细节
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UsageDetails: Array<UsageDetails>
 }
 
 /**
@@ -2133,6 +2166,20 @@ export interface CostComponentSet {
    * 赠送金支付金额
    */
   IncentivePayAmount: string
+}
+
+/**
+ * Json对象
+ */
+export interface JsonObject {
+  /**
+   * key值
+   */
+  Key?: string
+  /**
+   * value值
+   */
+  Value?: string
 }
 
 /**
@@ -3849,22 +3896,45 @@ export interface DescribeSavingPlanUsageResponse {
 }
 
 /**
- * 使用记录
+ * DescribeDosageDetailList请求参数结构体
  */
-export interface UsageRecords {
+export interface DescribeDosageDetailListRequest {
   /**
-   * 使用金额（微分）
+   * 用量起始时间，如：2023-02-01
    */
-  UsedAmount: number
+  StartTime: string
   /**
-   * 使用时间
+   * 用量截止时间，如：2023-02-28
    */
-  UsedTime: string
+  EndTime: string
   /**
-   * 使用记录细节
-注意：此字段可能返回 null，表示取不到有效值。
+   * 产品编码，已支持查询的产品如下：
+p_ccc（云联络中心）
+p_rav（实时音视频）
+p_pstn（号码保护）
+p_smh（智能媒资托管）
+p_coding_devops（CODING DevOps）
+p_dsa（全球IP应用加速）
    */
-  UsageDetails: Array<UsageDetails>
+  ProductCode: string
+  /**
+   * 数据偏移量（从0开始）
+   */
+  Offset: number
+  /**
+   * 单次数据量（最大3000）
+   */
+  Limit: number
+  /**
+   * 用量统计类型：用量明细的数据统计汇总周期类型，包括minute-按5分钟汇总、hour-按小时汇总、day-按天汇总、month-按月汇总、comm-其他，默认查询所有类型明细，目前各产品已支持的统计类型如下：
+p_ccc（云联络中心）：comm、day
+p_rav（实时音视频）：minute、day
+p_pstn（号码保护）：comm
+p_smh（智能媒资托管）：day
+p_coding_devops（CODING DevOps）：comm、day
+p_dsa（全球IP应用加速）：minute
+   */
+  DosageType?: string
 }
 
 /**
@@ -4135,6 +4205,113 @@ export interface CosDetailSets {
    * 单位
    */
   Unit: string
+}
+
+/**
+ * 计量标准接入类产品支持API接口获取用量明细返回数据结构
+ */
+export interface DescribeDosageDetail {
+  /**
+   * 日期
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Date?: string
+  /**
+   * 账号 ID 是用户在腾讯云的唯一账号标识
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Uin?: string
+  /**
+   * 用量统计类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DosageType?: string
+  /**
+   * 产品编码
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProductCode?: string
+  /**
+   * 子产品编码
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SubProductCode?: string
+  /**
+   * 组件类型编码
+
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BillingItemCode?: string
+  /**
+   * 组件编码
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SubBillingItemCode?: string
+  /**
+   * 产品名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProductCodeName?: string
+  /**
+   * 子产品名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SubProductCodeName?: string
+  /**
+   * 组件类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BillingItemCodeName?: string
+  /**
+   * 组件
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SubBillingItemCodeName?: string
+  /**
+   * 用量单位
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DosageUnit?: string
+  /**
+   * 用量起始时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DosageBeginTime?: string
+  /**
+   * 用量截止时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DosageEndTime?: string
+  /**
+   * 标准用量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DosageValue?: number
+  /**
+   * 抵扣用量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DeductValue?: number
+  /**
+   * 抵扣余量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RemainValue?: number
+  /**
+   * sdkAppId
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SdkAppId?: string
+  /**
+   * 其他信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AttrStr?: Array<JsonObject>
+  /**
+   * 用量模板名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SheetName?: Array<string>
 }
 
 /**

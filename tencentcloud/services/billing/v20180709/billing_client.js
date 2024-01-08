@@ -58,6 +58,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeSavingPlanOverview", req, cb);
     }
     /**
+     * 获取已接入标准用量明细模板产品的用量明细数据，目前已接入并支持查询的产品包括：云联络中心、实时音视频、实时音视频、智能媒资托管、CODING DevOps、全球IP应用加速
+     */
+    async DescribeDosageDetailList(req, cb) {
+        return this.request("DescribeDosageDetailList", req, cb);
+    }
+    /**
      * 批量设置分账标签
      */
     async CreateAllocationTag(req, cb) {

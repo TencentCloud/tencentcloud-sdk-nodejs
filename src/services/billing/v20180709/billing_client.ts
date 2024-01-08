@@ -42,11 +42,13 @@ import {
   DescribeSavingPlanOverviewResponse,
   BillDistributionResourceSummary,
   BusinessSummaryInfo,
+  DescribeDosageDetailListResponse,
   DescribeBillSummaryByProductRequest,
   DescribeVoucherUsageDetailsResponse,
   ConsumptionSummaryTotal,
   SavingPlanCoverageDetail,
   DescribeCostDetailResponse,
+  UsageRecords,
   VoucherInfos,
   DescribeCostSummaryByProjectResponse,
   DescribeBillSummaryByTagResponse,
@@ -76,6 +78,7 @@ import {
   SummaryTotal,
   BusinessSummaryTotal,
   CostComponentSet,
+  JsonObject,
   DetailPoint,
   DescribeBillSummaryResponse,
   BillResourceSummary,
@@ -118,7 +121,7 @@ import {
   DescribeAccountBalanceResponse,
   BusinessSummaryOverviewItem,
   DescribeSavingPlanUsageResponse,
-  UsageRecords,
+  DescribeDosageDetailListRequest,
   DescribeSavingPlanCoverageResponse,
   DescribeVoucherInfoRequest,
   DescribeSavingPlanUsageRequest,
@@ -128,6 +131,7 @@ import {
   ConditionProject,
   DescribeTagListResponse,
   CosDetailSets,
+  DescribeDosageDetail,
   ProjectSummaryOverviewItem,
   DescribeCostSummaryByRegionResponse,
 } from "./billing_models"
@@ -189,6 +193,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeSavingPlanOverviewResponse) => void
   ): Promise<DescribeSavingPlanOverviewResponse> {
     return this.request("DescribeSavingPlanOverview", req, cb)
+  }
+
+  /**
+   * 获取已接入标准用量明细模板产品的用量明细数据，目前已接入并支持查询的产品包括：云联络中心、实时音视频、实时音视频、智能媒资托管、CODING DevOps、全球IP应用加速
+   */
+  async DescribeDosageDetailList(
+    req: DescribeDosageDetailListRequest,
+    cb?: (error: string, rep: DescribeDosageDetailListResponse) => void
+  ): Promise<DescribeDosageDetailListResponse> {
+    return this.request("DescribeDosageDetailList", req, cb)
   }
 
   /**
