@@ -18,6 +18,36 @@ const client = new tencentcloud.dts.v20211206.Client({
 })
 describe("dts.v20211206.test.js", function () {
 
+it("dts.v20211206.ResumeSubscribe", async function () {
+    try {
+       const data = await client.ResumeSubscribe({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dts.v20211206.SkipSyncCheckItem", async function () {
+    try {
+       const data = await client.SkipSyncCheckItem({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dts.v20211206.DestroyIsolatedSubscribe", async function () {
+    try {
+       const data = await client.DestroyIsolatedSubscribe({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dts.v20211206.CreateModifyCheckSyncJob", async function () {
     try {
        const data = await client.CreateModifyCheckSyncJob({})
@@ -68,9 +98,29 @@ it("dts.v20211206.CreateMigrationService", async function () {
     }
 })
 
+it("dts.v20211206.DescribeSubscribeJobs", async function () {
+    try {
+       const data = await client.DescribeSubscribeJobs({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dts.v20211206.ModifyMigrateRateLimit", async function () {
     try {
        const data = await client.ModifyMigrateRateLimit({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dts.v20211206.DescribeSubscribeReturnable", async function () {
+    try {
+       const data = await client.DescribeSubscribeReturnable({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -108,9 +158,59 @@ it("dts.v20211206.CreateSyncJob", async function () {
     }
 })
 
+it("dts.v20211206.ConfigureSubscribeJob", async function () {
+    try {
+       const data = await client.ConfigureSubscribeJob({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dts.v20211206.DescribeConsumerGroups", async function () {
+    try {
+       const data = await client.DescribeConsumerGroups({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dts.v20211206.CreateConsumerGroup", async function () {
+    try {
+       const data = await client.CreateConsumerGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dts.v20211206.ResetConsumerGroupOffset", async function () {
+    try {
+       const data = await client.ResetConsumerGroupOffset({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dts.v20211206.DeleteCompareTask", async function () {
     try {
        const data = await client.DeleteCompareTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dts.v20211206.StartSubscribe", async function () {
+    try {
+       const data = await client.StartSubscribe({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -178,9 +278,9 @@ it("dts.v20211206.PauseMigrateJob", async function () {
     }
 })
 
-it("dts.v20211206.SkipSyncCheckItem", async function () {
+it("dts.v20211206.ModifySubscribeObjects", async function () {
     try {
-       const data = await client.SkipSyncCheckItem({})
+       const data = await client.ModifySubscribeObjects({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -191,6 +291,16 @@ it("dts.v20211206.SkipSyncCheckItem", async function () {
 it("dts.v20211206.ConfigureSyncJob", async function () {
     try {
        const data = await client.ConfigureSyncJob({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dts.v20211206.IsolateSubscribe", async function () {
+    try {
+       const data = await client.IsolateSubscribe({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -211,6 +321,16 @@ it("dts.v20211206.StartModifySyncJob", async function () {
 it("dts.v20211206.ResizeSyncJob", async function () {
     try {
        const data = await client.ResizeSyncJob({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dts.v20211206.ModifySubscribeAutoRenewFlag", async function () {
+    try {
+       const data = await client.ModifySubscribeAutoRenewFlag({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -278,6 +398,16 @@ it("dts.v20211206.StartCompare", async function () {
     }
 })
 
+it("dts.v20211206.DescribeSubscribeCheckJob", async function () {
+    try {
+       const data = await client.DescribeSubscribeCheckJob({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dts.v20211206.ContinueSyncJob", async function () {
     try {
        const data = await client.ContinueSyncJob({})
@@ -298,6 +428,16 @@ it("dts.v20211206.IsolateMigrateJob", async function () {
     }
 })
 
+it("dts.v20211206.ModifyConsumerGroupDescription", async function () {
+    try {
+       const data = await client.ModifyConsumerGroupDescription({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dts.v20211206.DescribeMigrateDBInstances", async function () {
     try {
        const data = await client.DescribeMigrateDBInstances({})
@@ -311,6 +451,26 @@ it("dts.v20211206.DescribeMigrateDBInstances", async function () {
 it("dts.v20211206.SkipCheckItem", async function () {
     try {
        const data = await client.SkipCheckItem({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dts.v20211206.ModifyConsumerGroupPassword", async function () {
+    try {
+       const data = await client.ModifyConsumerGroupPassword({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dts.v20211206.CreateSubscribeCheckJob", async function () {
+    try {
+       const data = await client.CreateSubscribeCheckJob({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -358,6 +518,26 @@ it("dts.v20211206.ModifyCompareTask", async function () {
     }
 })
 
+it("dts.v20211206.DescribeSubscribeDetail", async function () {
+    try {
+       const data = await client.DescribeSubscribeDetail({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dts.v20211206.DeleteConsumerGroup", async function () {
+    try {
+       const data = await client.DeleteConsumerGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dts.v20211206.DescribeMigrationJobs", async function () {
     try {
        const data = await client.DescribeMigrationJobs({})
@@ -378,9 +558,29 @@ it("dts.v20211206.RecoverMigrateJob", async function () {
     }
 })
 
+it("dts.v20211206.CreateSubscribe", async function () {
+    try {
+       const data = await client.CreateSubscribe({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dts.v20211206.RecoverSyncJob", async function () {
     try {
        const data = await client.RecoverSyncJob({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dts.v20211206.ResetSubscribe", async function () {
+    try {
+       const data = await client.ResetSubscribe({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -408,6 +608,16 @@ it("dts.v20211206.DescribeModifyCheckSyncJobResult", async function () {
     }
 })
 
+it("dts.v20211206.ModifySubscribeName", async function () {
+    try {
+       const data = await client.ModifySubscribeName({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dts.v20211206.DestroyMigrateJob", async function () {
     try {
        const data = await client.DestroyMigrateJob({})
@@ -421,6 +631,16 @@ it("dts.v20211206.DestroyMigrateJob", async function () {
 it("dts.v20211206.DescribeMigrationDetail", async function () {
     try {
        const data = await client.DescribeMigrationDetail({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dts.v20211206.DescribeOffsetByTime", async function () {
+    try {
+       const data = await client.DescribeOffsetByTime({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

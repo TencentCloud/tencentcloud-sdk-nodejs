@@ -25,6 +25,26 @@ export interface RemoveClusterSlaveZoneRequest {
     SlaveZone: string;
 }
 /**
+ * 备可用区库存信息
+ */
+export interface SlaveZoneStockInfo {
+    /**
+     * 备可用区
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SlaveZone?: string;
+    /**
+     * 备可用区的库存数量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    StockCount?: number;
+    /**
+     * 备可用区是否有库存
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    HasStock?: boolean;
+}
+/**
  * ModifyClusterName请求参数结构体
  */
 export interface ModifyClusterNameRequest {
@@ -1790,6 +1810,11 @@ export interface ZoneStockInfo {
      * 库存数量
      */
     StockCount?: number;
+    /**
+     * 备可用区库存信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SlaveZoneStockInfos?: Array<SlaveZoneStockInfo>;
 }
 /**
  * ActivateInstance请求参数结构体
@@ -2581,6 +2606,14 @@ export interface IsolateInstanceRequest {
      * 该参数已废弃
      */
     DbType?: string;
+    /**
+     * 实例退还原因类型
+     */
+    IsolateReasonTypes?: Array<number | bigint>;
+    /**
+     * 实例退还原因补充
+     */
+    IsolateReason?: string;
 }
 /**
  * SetRenewFlag返回参数结构体
@@ -3349,6 +3382,11 @@ export interface CynosdbInstance {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceIndexMode?: string;
+    /**
+     * 当前实例支持的能力
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InstanceAbility?: InstanceAbility;
 }
 /**
  * SearchClusterDatabases请求参数结构体
@@ -5369,6 +5407,19 @@ export interface UpgradeProxyResponse {
      * 异步任务ID
      */
     TaskId?: number;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * OpenReadOnlyInstanceExclusiveAccess返回参数结构体
+ */
+export interface OpenReadOnlyInstanceExclusiveAccessResponse {
+    /**
+     * 开通流程ID
+     */
+    FlowId?: number;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -7467,17 +7518,19 @@ export interface DescribeInstanceParamsResponse {
     RequestId?: string;
 }
 /**
- * OpenReadOnlyInstanceExclusiveAccess返回参数结构体
+ * 实例允许的操作列表
  */
-export interface OpenReadOnlyInstanceExclusiveAccessResponse {
+export interface InstanceAbility {
     /**
-     * 开通流程ID
+     * 实例是否支持强制重启，可选值：yes：支持，no：不支持
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    FlowId?: number;
+    IsSupportForceRestart?: string;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     * 不支持强制重启的原因
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    RequestId?: string;
+    NonsupportForceRestartReason?: string;
 }
 /**
  * DisassociateSecurityGroups请求参数结构体
@@ -7992,6 +8045,14 @@ export interface IsolateClusterRequest {
      * 该参数已废用
      */
     DbType?: string;
+    /**
+     * 实例退还原因类型
+     */
+    IsolateReasonTypes?: Array<number | bigint>;
+    /**
+     * 实例退还原因补充
+     */
+    IsolateReason?: string;
 }
 /**
  * DeleteAuditRuleTemplates返回参数结构体

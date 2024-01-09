@@ -24,9 +24,7 @@ import {
   CreateTawInstanceResponse,
   DeleteProjectRequest,
   DescribeProjectLimitsResponse,
-  DescribeTawInstancesRequest,
   DeleteOfflineLogConfigResponse,
-  ResumeProjectResponse,
   DescribeRumLogListResponse,
   DescribeAppMetricsDataRequest,
   DescribeDataPvUrlInfoResponse,
@@ -43,7 +41,6 @@ import {
   CreateLogExportRequest,
   DescribePvListResponse,
   RumUvInfo,
-  DescribeOfflineLogsRequest,
   DescribeScoresRequest,
   DescribeDataReportCountRequest,
   DeleteOfflineLogRecordRequest,
@@ -56,7 +53,6 @@ import {
   CreateProjectRequest,
   DescribeDataStaticUrlRequest,
   ModifyInstanceResponse,
-  DescribeOfflineLogRecordsResponse,
   DeleteStarProjectRequest,
   DescribeWhitelistsRequest,
   DescribeLogExportsResponse,
@@ -64,7 +60,7 @@ import {
   DescribeTawAreasResponse,
   DescribeDataRequest,
   StopProjectRequest,
-  CreateOfflineLogConfigResponse,
+  ResumeProjectResponse,
   ModifyProjectLimitRequest,
   DeleteInstanceResponse,
   DescribeAppSingleCaseListResponse,
@@ -76,10 +72,9 @@ import {
   DescribeDataLogUrlStatisticsResponse,
   CreateProjectResponse,
   StopInstanceResponse,
-  DescribeDataCustomUrlResponse,
+  DescribeProjectLimitsRequest,
   CreateStarProjectResponse,
   DeleteProjectResponse,
-  DescribeOfflineLogRecordsRequest,
   DescribeDataPvUrlStatisticsRequest,
   ReleaseFile,
   ModifyProjectLimitResponse,
@@ -94,7 +89,7 @@ import {
   CreateWhitelistRequest,
   DescribeDataPvUrlStatisticsResponse,
   DescribeDataLogUrlInfoRequest,
-  DescribeProjectLimitsRequest,
+  DescribeDataCustomUrlResponse,
   RumAreaInfo,
   DescribeDataSetUrlStatisticsRequest,
   DescribeDataPerformanceProjectResponse,
@@ -112,7 +107,7 @@ import {
   DescribeOfflineLogConfigsResponse,
   DeleteLogExportResponse,
   DescribeReleaseFileSignResponse,
-  DescribeOfflineLogsResponse,
+  DescribeTawInstancesRequest,
   DescribeTawAreasRequest,
   Filter,
   DescribeDataLogUrlStatisticsRequest,
@@ -126,7 +121,6 @@ import {
   DescribeDataFetchUrlInfoRequest,
   DescribeLogListResponse,
   DescribeReleaseFilesResponse,
-  CreateOfflineLogConfigRequest,
   DescribeDataStaticUrlResponse,
   CreateWhitelistResponse,
   ScoreInfo,
@@ -252,13 +246,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除 rum 离线日志监听 - 对应用户的离线日志将不会上报
+   * 获取DescribeDataFetchProject信息。已下线，请使用DescribeDataFetchUrl
    */
-  async DeleteOfflineLogConfig(
-    req: DeleteOfflineLogConfigRequest,
-    cb?: (error: string, rep: DeleteOfflineLogConfigResponse) => void
-  ): Promise<DeleteOfflineLogConfigResponse> {
-    return this.request("DeleteOfflineLogConfig", req, cb)
+  async DescribeDataFetchProject(
+    req: DescribeDataFetchProjectRequest,
+    cb?: (error: string, rep: DescribeDataFetchProjectResponse) => void
+  ): Promise<DescribeDataFetchProjectResponse> {
+    return this.request("DescribeDataFetchProject", req, cb)
   }
 
   /**
@@ -349,16 +343,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeLogListResponse) => void
   ): Promise<DescribeLogListResponse> {
     return this.request("DescribeLogList", req, cb)
-  }
-
-  /**
-   * 获取对应离线日志
-   */
-  async DescribeOfflineLogs(
-    req: DescribeOfflineLogsRequest,
-    cb?: (error: string, rep: DescribeOfflineLogsResponse) => void
-  ): Promise<DescribeOfflineLogsResponse> {
-    return this.request("DescribeOfflineLogs", req, cb)
   }
 
   /**
@@ -725,13 +709,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取项目上报量
+   * 获取DescribeDataStaticProject信息
    */
-  async DescribeDataReportCount(
-    req: DescribeDataReportCountRequest,
-    cb?: (error: string, rep: DescribeDataReportCountResponse) => void
-  ): Promise<DescribeDataReportCountResponse> {
-    return this.request("DescribeDataReportCount", req, cb)
+  async DescribeDataStaticProject(
+    req: DescribeDataStaticProjectRequest,
+    cb?: (error: string, rep: DescribeDataStaticProjectResponse) => void
+  ): Promise<DescribeDataStaticProjectResponse> {
+    return this.request("DescribeDataStaticProject", req, cb)
   }
 
   /**
@@ -745,16 +729,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取DescribeDataStaticProject信息
-   */
-  async DescribeDataStaticProject(
-    req: DescribeDataStaticProjectRequest,
-    cb?: (error: string, rep: DescribeDataStaticProjectResponse) => void
-  ): Promise<DescribeDataStaticProjectResponse> {
-    return this.request("DescribeDataStaticProject", req, cb)
-  }
-
-  /**
    * 删除给定的 rum 的项目
    */
   async DeleteProject(
@@ -762,16 +736,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteProjectResponse) => void
   ): Promise<DeleteProjectResponse> {
     return this.request("DeleteProject", req, cb)
-  }
-
-  /**
-   * 获取所有离线日志记录(最多100条)
-   */
-  async DescribeOfflineLogRecords(
-    req: DescribeOfflineLogRecordsRequest,
-    cb?: (error: string, rep: DescribeOfflineLogRecordsResponse) => void
-  ): Promise<DescribeOfflineLogRecordsResponse> {
-    return this.request("DescribeOfflineLogRecords", req, cb)
   }
 
   /**
@@ -785,13 +749,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取DescribeDataFetchProject信息。已下线，请使用DescribeDataFetchUrl
+   * 删除 rum 离线日志监听 - 对应用户的离线日志将不会上报
    */
-  async DescribeDataFetchProject(
-    req: DescribeDataFetchProjectRequest,
-    cb?: (error: string, rep: DescribeDataFetchProjectResponse) => void
-  ): Promise<DescribeDataFetchProjectResponse> {
-    return this.request("DescribeDataFetchProject", req, cb)
+  async DeleteOfflineLogConfig(
+    req: DeleteOfflineLogConfigRequest,
+    cb?: (error: string, rep: DeleteOfflineLogConfigResponse) => void
+  ): Promise<DeleteOfflineLogConfigResponse> {
+    return this.request("DeleteOfflineLogConfig", req, cb)
   }
 
   /**
@@ -805,13 +769,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建离线日志监听，对应用户的离线日志将上报
+   * 获取项目上报量
    */
-  async CreateOfflineLogConfig(
-    req: CreateOfflineLogConfigRequest,
-    cb?: (error: string, rep: CreateOfflineLogConfigResponse) => void
-  ): Promise<CreateOfflineLogConfigResponse> {
-    return this.request("CreateOfflineLogConfig", req, cb)
+  async DescribeDataReportCount(
+    req: DescribeDataReportCountRequest,
+    cb?: (error: string, rep: DescribeDataReportCountResponse) => void
+  ): Promise<DescribeDataReportCountResponse> {
+    return this.request("DescribeDataReportCount", req, cb)
   }
 
   /**

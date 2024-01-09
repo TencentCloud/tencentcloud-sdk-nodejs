@@ -76,10 +76,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDataLogUrlStatistics", req, cb);
     }
     /**
-     * 删除 rum 离线日志监听 - 对应用户的离线日志将不会上报
+     * 获取DescribeDataFetchProject信息。已下线，请使用DescribeDataFetchUrl
      */
-    async DeleteOfflineLogConfig(req, cb) {
-        return this.request("DeleteOfflineLogConfig", req, cb);
+    async DescribeDataFetchProject(req, cb) {
+        return this.request("DescribeDataFetchProject", req, cb);
     }
     /**
      * 删除实例，谨慎操作，不可恢复
@@ -134,12 +134,6 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeLogList(req, cb) {
         return this.request("DescribeLogList", req, cb);
-    }
-    /**
-     * 获取对应离线日志
-     */
-    async DescribeOfflineLogs(req, cb) {
-        return this.request("DescribeOfflineLogs", req, cb);
     }
     /**
      * 查询 app 监控个例聚合列表
@@ -365,10 +359,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateProject", req, cb);
     }
     /**
-     * 获取项目上报量
+     * 获取DescribeDataStaticProject信息
      */
-    async DescribeDataReportCount(req, cb) {
-        return this.request("DescribeDataReportCount", req, cb);
+    async DescribeDataStaticProject(req, cb) {
+        return this.request("DescribeDataStaticProject", req, cb);
     }
     /**
      * 获取PvUrlInfo信息
@@ -377,22 +371,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDataPvUrlInfo", req, cb);
     }
     /**
-     * 获取DescribeDataStaticProject信息
-     */
-    async DescribeDataStaticProject(req, cb) {
-        return this.request("DescribeDataStaticProject", req, cb);
-    }
-    /**
      * 删除给定的 rum 的项目
      */
     async DeleteProject(req, cb) {
         return this.request("DeleteProject", req, cb);
-    }
-    /**
-     * 获取所有离线日志记录(最多100条)
-     */
-    async DescribeOfflineLogRecords(req, cb) {
-        return this.request("DescribeOfflineLogRecords", req, cb);
     }
     /**
      * 获取项目下的UV列表
@@ -401,10 +383,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeUvList", req, cb);
     }
     /**
-     * 获取DescribeDataFetchProject信息。已下线，请使用DescribeDataFetchUrl
+     * 删除 rum 离线日志监听 - 对应用户的离线日志将不会上报
      */
-    async DescribeDataFetchProject(req, cb) {
-        return this.request("DescribeDataFetchProject", req, cb);
+    async DeleteOfflineLogConfig(req, cb) {
+        return this.request("DeleteOfflineLogConfig", req, cb);
     }
     /**
      * 将对应 sourcemap 文件删除
@@ -413,10 +395,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteReleaseFile", req, cb);
     }
     /**
-     * 创建离线日志监听，对应用户的离线日志将上报
+     * 获取项目上报量
      */
-    async CreateOfflineLogConfig(req, cb) {
-        return this.request("CreateOfflineLogConfig", req, cb);
+    async DescribeDataReportCount(req, cb) {
+        return this.request("DescribeDataReportCount", req, cb);
     }
     /**
      * 获取DescribeDataFetchUrl信息

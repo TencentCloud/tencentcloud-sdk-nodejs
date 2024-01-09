@@ -36,9 +36,27 @@ export interface ModifyMigrationJobResponse {
     RequestId?: string;
 }
 /**
+ * ResetConsumerGroupOffset返回参数结构体
+ */
+export interface ResetConsumerGroupOffsetResponse {
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * ModifyMigrateRateLimit返回参数结构体
  */
 export interface ModifyMigrateRateLimitResponse {
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * IsolateMigrateJob返回参数结构体
+ */
+export interface IsolateMigrateJobResponse {
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -58,13 +76,38 @@ export interface ModifyMigrateJobSpecRequest {
     NewInstanceClass: string;
 }
 /**
- * StartMigrateJob请求参数结构体
+ * IsolateSubscribe返回参数结构体
  */
-export interface StartMigrateJobRequest {
+export interface IsolateSubscribeResponse {
     /**
-     * 数据迁移任务ID
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
-    JobId: string;
+    RequestId?: string;
+}
+/**
+ * ModifyConsumerGroupPassword请求参数结构体
+ */
+export interface ModifyConsumerGroupPasswordRequest {
+    /**
+     * 数据订阅实例的 ID
+     */
+    SubscribeId: string;
+    /**
+     * 账号名称。实际的账户全称形如：account-#{SubscribeId}-#{AccountName}
+     */
+    AccountName: string;
+    /**
+     * 消费组名称。实际的消费组全称形如：consumer-grp-#{SubscribeId}-#{ConsumerGroupName}
+     */
+    ConsumerGroupName: string;
+    /**
+     * 旧密码
+     */
+    OldPassword: string;
+    /**
+     * 新密码。字符长度不小于3，不大于32
+     */
+    NewPassword: string;
 }
 /**
  * 当前步骤错误信息或者警告信息
@@ -115,6 +158,34 @@ export interface DestroyMigrateJobRequest {
     JobId?: string;
 }
 /**
+ * ModifySubscribeName请求参数结构体
+ */
+export interface ModifySubscribeNameRequest {
+    /**
+     * 数据订阅实例的ID
+     */
+    SubscribeId: string;
+    /**
+     * 修改后的数据订阅实例的名称，长度限制为[1,60]
+     */
+    SubscribeName: string;
+}
+/**
+ * 数据订阅kafka分区中checkpoint信息
+ */
+export interface OffsetTimeMap {
+    /**
+     * kafka分区编号
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PartitionNo?: number;
+    /**
+     * kafka offset
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Offset?: number;
+}
+/**
  * SkipCheckItem返回参数结构体
  */
 export interface SkipCheckItemResponse {
@@ -129,13 +200,27 @@ export interface SkipCheckItemResponse {
     RequestId?: string;
 }
 /**
- * IsolateMigrateJob请求参数结构体
+ * ResumeSyncJob请求参数结构体
  */
-export interface IsolateMigrateJobRequest {
+export interface ResumeSyncJobRequest {
     /**
-     * 任务id
+     * 同步任务id
      */
     JobId: string;
+}
+/**
+ * 数据订阅中kafka消费者组的分区分配情况。该数据是实时查询的，如果需要最新数据，需重新掉接口查询。
+ */
+export interface PartitionAssignment {
+    /**
+     * 消费者的clientId
+     */
+    ClientId: string;
+    /**
+     * 该消费者正在消费的分区
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PartitionNo: Array<number | bigint>;
 }
 /**
  * ResizeSyncJob返回参数结构体
@@ -145,6 +230,15 @@ export interface ResizeSyncJobResponse {
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * CreateSubscribeCheckJob请求参数结构体
+ */
+export interface CreateSubscribeCheckJobRequest {
+    /**
+     * 数据订阅实例的 ID
+     */
+    SubscribeId: string;
 }
 /**
  * ResumeMigrateJob返回参数结构体
@@ -247,6 +341,35 @@ export interface ContinueMigrateJobRequest {
     JobId: string;
 }
 /**
+ * ResetConsumerGroupOffset请求参数结构体
+ */
+export interface ResetConsumerGroupOffsetRequest {
+    /**
+     * 订阅实例id
+     */
+    SubscribeId: string;
+    /**
+     * 订阅的kafka topic
+     */
+    TopicName: string;
+    /**
+     * 消费组名称。实际的消费组全称形如：consumer-grp-#{SubscribeId}-#{ConsumerGroupName}
+     */
+    ConsumerGroupName: string;
+    /**
+     * 需要修改offset的分区编号
+     */
+    PartitionNos: Array<number | bigint>;
+    /**
+     * 重置方式。枚举值为 earliest-从最开始位置开始消费；latest-从最新位置开始消费；datetime-从指定时间前最近的checkpoint开始消费
+     */
+    ResetMode: string;
+    /**
+     * 当 ResetMode 为 datetime 时，该项需要填，格式为：Y-m-d h:m:s。如果不填，默认用0时间，效果与earliest相同。
+     */
+    ResetDatetime?: string;
+}
+/**
  * ModifySyncRateLimit请求参数结构体
  */
 export interface ModifySyncRateLimitRequest {
@@ -285,6 +408,15 @@ export interface DescribeCheckSyncJobResultRequest {
     JobId?: string;
 }
 /**
+ * ModifySubscribeAutoRenewFlag返回参数结构体
+ */
+export interface ModifySubscribeAutoRenewFlagResponse {
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * DestroySyncJob返回参数结构体
  */
 export interface DestroySyncJobResponse {
@@ -294,163 +426,38 @@ export interface DestroySyncJobResponse {
     RequestId?: string;
 }
 /**
- * DescribeCompareReport返回参数结构体
+ * 任务错误信息
  */
-export interface DescribeCompareReportResponse {
+export interface ErrorInfoItem {
     /**
-     * 一致性校验摘要信息
+     * 错误码
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Abstract: CompareAbstractInfo;
+    Code?: string;
     /**
-     * 一致性校验详细信息
+     * 解决方案
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Detail: CompareDetailInfo;
+    Solution?: string;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     * 错误日志信息
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    RequestId?: string;
+    ErrorLog?: string;
+    /**
+     * 文档提示
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    HelpDoc?: string;
 }
 /**
- * 数据同步中的描述源端和目的端的信息
+ * IsolateMigrateJob请求参数结构体
  */
-export interface Endpoint {
+export interface IsolateMigrateJobRequest {
     /**
-     * 地域英文名，如：ap-guangzhou
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 任务id
      */
-    Region?: string;
-    /**
-     * tdsql mysql版的节点类型，枚举值为proxy、set
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Role?: string;
-    /**
-     * 数据库内核类型，tdsql中用于区分不同内核：percona,mariadb,mysql
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    DbKernel?: string;
-    /**
-     * 数据库实例ID，格式如：cdb-powiqx8q
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    InstanceId?: string;
-    /**
-     * 实例的IP地址，接入类型为非cdb时此项必填
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Ip?: string;
-    /**
-     * 实例端口，接入类型为非cdb时此项必填
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Port?: number;
-    /**
-     * 用户名，对于访问需要用户名密码认证的实例必填
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    User?: string;
-    /**
-     * 密码，对于访问需要用户名密码认证的实例必填
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Password?: string;
-    /**
-     * 数据库名，数据库为cdwpg时，需要提供
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    DbName?: string;
-    /**
-     * 私有网络ID，对于私有网络、专线、VPN的接入方式此项必填，格式如：vpc-92jblxto
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    VpcId?: string;
-    /**
-     * 私有网络下的子网ID，对于私有网络、专线、VPN的接入方式此项必填，格式如：subnet-3paxmkdz
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    SubnetId?: string;
-    /**
-     * CVM实例短ID，格式如：ins-olgl39y8，与云服务器控制台页面显示的实例ID相同。如果是CVM自建实例，需要传递此字段
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    CvmInstanceId?: string;
-    /**
-     * 专线网关ID，对于专线接入类型此项必填，格式如：dcg-0rxtqqxb
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    UniqDcgId?: string;
-    /**
-     * VPN网关ID，对于vpn接入类型此项必填，格式如：vpngw-9ghexg7q
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    UniqVpnGwId?: string;
-    /**
-     * 云联网ID，对于云联网接入类型此项必填，如：ccn-afp6kltc
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    CcnId?: string;
-    /**
-     * 云厂商类型，当实例为RDS实例时，填写为aliyun, 其他情况均填写others，默认为others
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Supplier?: string;
-    /**
-     * 数据库版本，当实例为RDS实例时才有效，其他实例忽略，格式如：5.6或者5.7，默认为5.6
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    EngineVersion?: string;
-    /**
-     * 实例所属账号，如果为跨账号实例此项必填
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Account?: string;
-    /**
-     * 资源所属账号 为空或self(表示本账号内资源)、other(表示跨账号资源)
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    AccountMode?: string;
-    /**
-     * 跨账号同步时的角色，只允许[a-zA-Z0-9\-\_]+，如果为跨账号实例此项必填
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    AccountRole?: string;
-    /**
-     * 外部角色id
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    RoleExternalId?: string;
-    /**
-     * 临时密钥Id，可通过获取联合身份临时访问凭证获取临时密钥https://cloud.tencent.com/document/product/1312/48195，如果为跨账号实例此项必填
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    TmpSecretId?: string;
-    /**
-     * 临时密钥Key，可通过获取联合身份临时访问凭证获取临时密钥https://cloud.tencent.com/document/product/1312/48195，，如果为跨账号实例此项必填
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    TmpSecretKey?: string;
-    /**
-     * 临时Token，可通过获取联合身份临时访问凭证获取临时密钥https://cloud.tencent.com/document/product/1312/48195，，如果为跨账号实例此项必填
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    TmpToken?: string;
-    /**
-     * 是否走加密传输、UnEncrypted表示不走加密传输，Encrypted表示走加密传输，默认UnEncrypted
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    EncryptConn?: string;
-    /**
-     * 数据库所属网络环境，AccessType为云联网(ccn)时必填， UserIDC表示用户IDC、TencentVPC表示腾讯云VPC；
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    DatabaseNetEnv?: string;
-    /**
-     * 数据库为跨账号云联网下的实例时、表示云联网所属主账号
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    CcnOwnerUin?: string;
+    JobId: string;
 }
 /**
  * StopMigrateJob返回参数结构体
@@ -485,6 +492,108 @@ export interface TableItem {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     TableEditMode?: string;
+}
+/**
+ * 订阅实例信息
+ */
+export interface SubscribeInfo {
+    /**
+     * 数据订阅的实例ID
+     */
+    SubscribeId?: string;
+    /**
+     * 数据订阅实例的名称
+     */
+    SubscribeName?: string;
+    /**
+     * 订阅实例发送数据的kafka topic
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Topic?: string;
+    /**
+     * 订阅实例的类型，目前支持 cynosdbmysql,mariadb,mongodb,mysql,percona,tdpg,tdsqlpercona(tdsqlmysql)
+     */
+    Product?: string;
+    /**
+     * 订阅的数据库实例ID（如果订阅的是云数据库）如果实例不是腾讯云上的，此值为空。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InstanceId?: string;
+    /**
+     * 云数据库状态：running 运行中，isolated 已隔离，offline 已下线。如果不是云上，此值为空
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InstanceStatus?: string;
+    /**
+     * 数据订阅生命周期状态，可能的值为：正常 normal, 隔离中 isolating, 已隔离 isolated, 下线中 offlining, 按量转包年包月中 post2PrePayIng
+     */
+    Status?: string;
+    /**
+     * 数据订阅状态，可能的值为：未启动 notStarted, 校验中 checking, 校验不通过 checkNotPass, 校验通过 checkPass, 启动中 starting, 运行中 running, 异常出错 error
+     */
+    SubsStatus?: string;
+    /**
+     * 上次修改时间，时间格式如：Y-m-d h:m:s
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ModifyTime?: string;
+    /**
+     * 创建时间，时间格式如：Y-m-d h:m:s
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CreateTime?: string;
+    /**
+     * 隔离时间，时间格式如：Y-m-d h:m:s。默认：0000-00-00 00:00:00
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IsolateTime?: string;
+    /**
+     * 包年包月任务的到期时间，时间格式如：Y-m-d h:m:s。默认：0000-00-00 00:00:00
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ExpireTime?: string;
+    /**
+     * 下线时间，时间格式如：Y-m-d h:m:s。默认：0000-00-00 00:00:00
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    OfflineTime?: string;
+    /**
+     * 计费方式，0 - 包年包月，1 - 按量计费
+     */
+    PayType?: number;
+    /**
+     * 自动续费标识。只有当 PayType=0，该值才有意义。枚举值：0-不自动续费，1-自动续费
+     */
+    AutoRenewFlag?: number;
+    /**
+     * 数据订阅实例所属地域
+     */
+    Region?: string;
+    /**
+     * 接入方式。枚举值：extranet(公网) vpncloud(vpn接入) dcg(专线接入) ccn(云联网) cdb(云数据库) cvm(云主机自建) intranet(自研上云) vpc(私有网络vpc)
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AccessType?: string;
+    /**
+     * 数据库节点信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Endpoints?: Array<EndpointItem>;
+    /**
+     * 数据订阅版本, 当前只支持 kafka 版本。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SubscribeVersion?: string;
+    /**
+     * 标签
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Tags?: Array<TagItem>;
+    /**
+     * 任务报错信息，如果有的话。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Errors?: Array<SubsErr>;
 }
 /**
  * ModifyCompareTaskName请求参数结构体
@@ -589,13 +698,22 @@ export interface DescribeModifyCheckSyncJobResultResponse {
     RequestId?: string;
 }
 /**
- * StopSyncJob请求参数结构体
+ * StartSubscribe返回参数结构体
  */
-export interface StopSyncJobRequest {
+export interface StartSubscribeResponse {
     /**
-     * 同步任务id
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
-    JobId: string;
+    RequestId?: string;
+}
+/**
+ * DescribeSubscribeReturnable请求参数结构体
+ */
+export interface DescribeSubscribeReturnableRequest {
+    /**
+     * 数据订阅实例的ID
+     */
+    SubscribeId: string;
 }
 /**
  * DescribeMigrationDetail请求参数结构体
@@ -607,13 +725,29 @@ export interface DescribeMigrationDetailRequest {
     JobId: string;
 }
 /**
- * DestroySyncJob请求参数结构体
+ * CreateConsumerGroup请求参数结构体
  */
-export interface DestroySyncJobRequest {
+export interface CreateConsumerGroupRequest {
     /**
-     * 同步任务id
+     * 订阅实例id
      */
-    JobId: string;
+    SubscribeId: string;
+    /**
+     * 消费组名称，以数字、字母(大小写)或者_ - .开头，以数字、字母(大小写)结尾。实际生成的消费组全称形如：consumer-grp-#{SubscribeId}-#{ConsumerGroupName}
+     */
+    ConsumerGroupName: string;
+    /**
+     * 账号名称。以数字、字母(大小写)或者_ - .开头，以数字、字母(大小写)结尾。实际生成的账户全称形如：account-#{SubscribeId}-#{AccountName}
+     */
+    AccountName: string;
+    /**
+     * 消费组密码，长度必须大于3
+     */
+    Password: string;
+    /**
+     * 消费组备注
+     */
+    Description?: string;
 }
 /**
  * ResizeSyncJob请求参数结构体
@@ -627,6 +761,15 @@ export interface ResizeSyncJobRequest {
      * 任务规格
      */
     NewInstanceClass: string;
+}
+/**
+ * ModifySubscribeName返回参数结构体
+ */
+export interface ModifySubscribeNameResponse {
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * 数据同步中的ddl同步处理
@@ -664,9 +807,33 @@ export interface ConflictHandleOption {
     ConditionOrderInSrcAndDst?: string;
 }
 /**
+ * mongo输出聚合设置。输出默认 Change Event
+ */
+export interface PipelineInfo {
+    /**
+     * 聚合运算符：$addFields、$match、$project、$replaceRoot、$redact、$replaceWith、$set、$unset。其中 $replaceWith、$set、$unset 只有当订阅实例是4.2及以上版本可选。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AggOp?: string;
+    /**
+     * 聚合表达式。必须是json格式
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AggCmd?: string;
+}
+/**
  * ResumeSyncJob返回参数结构体
  */
 export interface ResumeSyncJobResponse {
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * RecoverMigrateJob返回参数结构体
+ */
+export interface RecoverMigrateJobResponse {
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -691,9 +858,31 @@ export interface StartSyncJobRequest {
     JobId?: string;
 }
 /**
+ * StartSubscribe请求参数结构体
+ */
+export interface StartSubscribeRequest {
+    /**
+     * 数据订阅实例的 ID
+     */
+    SubscribeId: string;
+}
+/**
  * ModifyMigrateRuntimeAttribute返回参数结构体
  */
 export interface ModifyMigrateRuntimeAttributeResponse {
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * DescribeOffsetByTime返回参数结构体
+ */
+export interface DescribeOffsetByTimeResponse {
+    /**
+     * 时间与Offset的对应
+     */
+    Items?: Array<OffsetTimeMap>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -851,6 +1040,24 @@ export interface DescribeCompareTasksRequest {
     Status?: Array<string>;
 }
 /**
+ * DestroyIsolatedSubscribe请求参数结构体
+ */
+export interface DestroyIsolatedSubscribeRequest {
+    /**
+     * 数据订阅实例的ID
+     */
+    SubscribeId: string;
+}
+/**
+ * ResetSubscribe返回参数结构体
+ */
+export interface ResetSubscribeResponse {
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * 一致性对比对象配置
  */
 export interface CompareObject {
@@ -871,29 +1078,23 @@ export interface CompareObject {
     AdvancedObjects?: Array<string>;
 }
 /**
- * 任务错误信息
+ * DescribeCompareReport返回参数结构体
  */
-export interface ErrorInfoItem {
+export interface DescribeCompareReportResponse {
     /**
-     * 错误码
+     * 一致性校验摘要信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Code?: string;
+    Abstract: CompareAbstractInfo;
     /**
-     * 解决方案
+     * 一致性校验详细信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Solution?: string;
+    Detail: CompareDetailInfo;
     /**
-     * 错误日志信息
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
-    ErrorLog?: string;
-    /**
-     * 文档提示
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    HelpDoc?: string;
+    RequestId?: string;
 }
 /**
  * RecoverSyncJob返回参数结构体
@@ -918,6 +1119,83 @@ export interface MigrateAction {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     AllowedAction: Array<string>;
+}
+/**
+ * ConfigureSubscribeJob返回参数结构体
+ */
+export interface ConfigureSubscribeJobResponse {
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * DescribeConsumerGroups请求参数结构体
+ */
+export interface DescribeConsumerGroupsRequest {
+    /**
+     * 订阅实例id
+     */
+    SubscribeId: string;
+    /**
+     * 返回记录的起始偏移量。默认0
+     */
+    Offset?: number;
+    /**
+     * 单次返回的记录数量。默认10
+     */
+    Limit?: number;
+}
+/**
+ * kafka消费者组详情
+ */
+export interface GroupInfo {
+    /**
+     * 消费者组账号
+     */
+    Account: string;
+    /**
+     * 消费者组名称
+     */
+    ConsumerGroupName: string;
+    /**
+     * 消费者组备注
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Description: string;
+    /**
+     * 消费组偏移量。该字段是为了兼容以前单Partition的情况，取值为最后一个分区的偏移量。各分区的偏移量详见StateOfPartition字段
+     */
+    ConsumerGroupOffset: number;
+    /**
+     * 消费组未消费的数据量。该字段是为了兼容以前单Partition的情况，取值为最后一个分区未消费的数据量。各分区未消费数据量详见StateOfPartition字段
+     */
+    ConsumerGroupLag: number;
+    /**
+     * 消费延迟(单位为秒)
+     */
+    Latency: number;
+    /**
+     * 各分区的消费状态
+     */
+    StateOfPartition: Array<MonitorInfo>;
+    /**
+     * 消费者组创建时间，格式为YYYY-MM-DD hh:mm:ss
+     */
+    CreatedAt: string;
+    /**
+     * 消费者组修改时间，格式为YYYY-MM-DD hh:mm:ss
+     */
+    UpdatedAt: string;
+    /**
+     * 消费者组状态，包括Dead、Empty、Stable等，只有Dead和Empty两种状态可以执行reset操作
+     */
+    ConsumerGroupState: string;
+    /**
+     * 每个消费者正在消费的分区
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PartitionAssignment: Array<PartitionAssignment>;
 }
 /**
  * DeleteCompareTask返回参数结构体
@@ -975,6 +1253,24 @@ export interface DBEndpointInfo {
     DatabaseNetEnv?: string;
 }
 /**
+ * ResumeSubscribe请求参数结构体
+ */
+export interface ResumeSubscribeRequest {
+    /**
+     * 数据订阅实例的 ID
+     */
+    SubscribeId: string;
+}
+/**
+ * ModifySyncJobConfig返回参数结构体
+ */
+export interface ModifySyncJobConfigResponse {
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * 列选项
  */
 export interface CompareColumnItem {
@@ -985,6 +1281,144 @@ export interface CompareColumnItem {
     ColumnName?: string;
 }
 /**
+ * DescribeSubscribeDetail返回参数结构体
+ */
+export interface DescribeSubscribeDetailResponse {
+    /**
+     * 数据订阅的ID，形如subs-b6x64o31tm
+     */
+    SubscribeId?: string;
+    /**
+     * 数据订阅实例的名称
+     */
+    SubscribeName?: string;
+    /**
+     * 订阅的数据库类型，目前支持 cynosdbmysql(tdsql-c mysql版),mariadb,mongodb,mysql,percona,tdpg(tdsql postgresql版),tdsqlpercona(tdsql mysql版)
+     */
+    Product?: string;
+    /**
+     * 订阅的云数据库实例ID，只有订阅云数据库该值才有意义
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InstanceId?: string;
+    /**
+     * 订阅的云数据库实例状态，只有订阅云数据库该值才有意义。可能值为：running, isolated, offline
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InstanceStatus?: string;
+    /**
+     * 订阅任务计费状态，可能值为：正常normal, 隔离中isolating, 已隔离isolated, 下线中offlining, 按量转包年包月中 post2PrePayIng
+     */
+    Status?: string;
+    /**
+     * 订阅任务状态，可能值为：未启动notStarted, 校验中checking, 校验不通过checkNotPass, 校验通过checkPass, 启动中starting, 运行中running, 异常出错error
+     */
+    SubsStatus?: string;
+    /**
+     * 修改时间，时间格式如：Y-m-d h:m:s
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ModifyTime?: string;
+    /**
+     * 创建时间，时间格式如：Y-m-d h:m:s
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CreateTime?: string;
+    /**
+     * 隔离时间，时间格式如：Y-m-d h:m:s。默认：0000-00-00 00:00:00
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IsolateTime?: string;
+    /**
+     * 包年包月任务的到期时间，时间格式如：Y-m-d h:m:s。默认：0000-00-00 00:00:00
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ExpireTime?: string;
+    /**
+     * 下线时间，时间格式如：Y-m-d h:m:s。默认：0000-00-00 00:00:00
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    OfflineTime?: string;
+    /**
+     * 付费方式，可能值为：0-包年包月，1-按量计费
+     */
+    PayType?: number;
+    /**
+     * 自动续费标识。只有当 PayType=0，该值才有意义。枚举值：0-不自动续费，1-自动续费
+     */
+    AutoRenewFlag?: number;
+    /**
+     * 任务所在地域
+     */
+    Region?: string;
+    /**
+     * Kafka topic
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Topic?: string;
+    /**
+     * Kafka服务Broker地址
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Broker?: string;
+    /**
+     * 数据订阅的类型，当 Product 不为 mongodb 时，可能值为：all-全实例更新；dml-数据更新；ddl-结构更新；dmlAndDdl-数据更新+结构更新。当 Product 为 mongodb 时，可能值为 all-全实例更新；database-订阅单库；collection-订阅单集合
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SubscribeMode?: string;
+    /**
+     * 订阅数据格式。如果为空则用的默认格式: mysql\cynosdbmysql\mariadb\percona\tdsqlpercona\tdpg是protobuf，mongo是json。当 DatabaseType 为 mysql和cynosdbmysql 时有三种可选协议：protobuf\avro\json。数据格式详情参考官网的消费demo文档
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Protocol?: string;
+    /**
+     * 订阅的数据库表信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SubscribeObjects?: Array<SubscribeObject>;
+    /**
+     * kafka配置信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    KafkaConfig?: SubscribeKafkaConfig;
+    /**
+     * 源数据库接入类型，如：extranet(公网)、vpncloud(vpn接入)、dcg(专线接入)、ccn(云联网)、cdb(云数据库)、cvm(云主机自建)、intranet(自研上云)、vpc(私有网络vpc)。注意具体可选值依赖当前链路支持能力
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AccessType?: string;
+    /**
+     * 接入类型信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Endpoints?: Array<EndpointItem>;
+    /**
+     * mongo输出聚合设置
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PipelineInfo?: Array<PipelineInfo>;
+    /**
+     * 标签
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Tags?: Array<TagItem>;
+    /**
+     * 订阅任务报错信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Errors?: Array<SubsErr>;
+    /**
+     * 为业务添加的额外信息。参数名作key，参数值作value。
+  mysql选填参数：ProcessXA-是否处理XA事务，为true处理，其他不处理。
+  mongo选填参数：SubscribeType-订阅类型，目前只支持changeStream。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ExtraAttr?: Array<KeyValuePairOption>;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * ContinueSyncJob返回参数结构体
  */
 export interface ContinueSyncJobResponse {
@@ -992,6 +1426,66 @@ export interface ContinueSyncJobResponse {
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * 计费状态信息
+ */
+export interface TradeInfo {
+    /**
+     * 交易订单号
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DealName?: string;
+    /**
+     * 上一次交易订单号
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    LastDealName?: string;
+    /**
+     * 实例规格，包括：micro、small、medium、large、xlarge、2xlarge等
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InstanceClass?: string;
+    /**
+     * 计费任务状态， normal(计费或待计费)、resizing(变配中)、reversing(冲正中，比较短暂的状态)、isolating(隔离中，比较短暂的状态)、isolated(已隔离)、offlining(下线中)、offlined(已下线)、notBilled(未计费)
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TradeStatus?: string;
+    /**
+     * 到期时间，格式为"yyyy-mm-dd hh:mm:ss"
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ExpireTime?: string;
+    /**
+     * 下线时间，格式为"yyyy-mm-dd hh:mm:ss"
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    OfflineTime?: string;
+    /**
+     * 隔离时间，格式为"yyyy-mm-dd hh:mm:ss"
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IsolateTime?: string;
+    /**
+     * 下线原因
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    OfflineReason?: string;
+    /**
+     * 隔离原因
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IsolateReason?: string;
+    /**
+     * 付费类型，包括：postpay(后付费)、prepay(预付费)
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PayType?: string;
+    /**
+     * 任务计费类型，包括：billing(计费)、notBilling(不计费)、 promotions(促销活动中)
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    BillingType?: string;
 }
 /**
  * 数据同步中的选项
@@ -1049,6 +1543,38 @@ export interface Options {
     AutoRetryTimeRangeMinutes?: number;
 }
 /**
+ * DeleteConsumerGroup请求参数结构体
+ */
+export interface DeleteConsumerGroupRequest {
+    /**
+     * 数据订阅实例的 ID
+     */
+    SubscribeId: string;
+    /**
+     * 消费组名称。实际的消费组全称形如：consumer-grp-#{SubscribeId}-#{ConsumerGroupName}。
+  请务必保证消费组名称正确。
+     */
+    ConsumerGroupName: string;
+    /**
+     * 账号名称。实际的账户全称形如：account-#{SubscribeId}-#{AccountName}。
+  请务必保证账户名称正确。
+     */
+    AccountName: string;
+}
+/**
+ * ModifySubscribeAutoRenewFlag请求参数结构体
+ */
+export interface ModifySubscribeAutoRenewFlagRequest {
+    /**
+     * 订阅实例ID
+     */
+    SubscribeId: string;
+    /**
+     * 自动续费标识。1-自动续费，0-不自动续费
+     */
+    AutoRenewFlag: number;
+}
+/**
  * CompleteMigrateJob请求参数结构体
  */
 export interface CompleteMigrateJobRequest {
@@ -1062,19 +1588,9 @@ export interface CompleteMigrateJobRequest {
     CompleteMode?: string;
 }
 /**
- * DescribeCompareTasks返回参数结构体
+ * CreateConsumerGroup返回参数结构体
  */
-export interface DescribeCompareTasksResponse {
-    /**
-     * 数量
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    TotalCount?: number;
-    /**
-     * 一致性校验列表
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Items?: Array<CompareTaskItem>;
+export interface CreateConsumerGroupResponse {
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1171,21 +1687,6 @@ export interface StopSyncJobResponse {
     RequestId?: string;
 }
 /**
- * 跳过校验的表详情
- */
-export interface SkippedDetail {
-    /**
-     * 跳过的表数量
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    TotalCount: number;
-    /**
-     * 跳过校验的表详情
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Items: Array<SkippedItem>;
-}
-/**
  * 迁移选项，描述任务如何执行迁移等一系列配置信息
  */
 export interface MigrateOption {
@@ -1225,6 +1726,73 @@ export interface MigrateOption {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     ExtraAttr?: Array<KeyValuePairOption>;
+}
+/**
+ * DescribeSubscribeDetail请求参数结构体
+ */
+export interface DescribeSubscribeDetailRequest {
+    /**
+     * 订阅实例ID
+     */
+    SubscribeId: string;
+}
+/**
+ * 跳过校验的表详情
+ */
+export interface SkippedDetail {
+    /**
+     * 跳过的表数量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TotalCount: number;
+    /**
+     * 跳过校验的表详情
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Items: Array<SkippedItem>;
+}
+/**
+ * 订阅报错信息
+ */
+export interface SubsErr {
+    /**
+     * 报错信息
+     */
+    Message?: string;
+}
+/**
+ * CreateSubscribe返回参数结构体
+ */
+export interface CreateSubscribeResponse {
+    /**
+     * 数据订阅实例的ID数组
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SubscribeIds?: Array<string>;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * 一致性校验选项
+ */
+export interface CompareOptions {
+    /**
+     * 对比方式：dataCheck(完整数据对比)、sampleDataCheck(抽样数据对比)、rowsCount(行数对比)
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Method?: string;
+    /**
+     * 抽样比例;范围0,100
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SampleRate?: number;
+    /**
+     * 线程数，取值1-5，默认为1
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ThreadCount?: number;
 }
 /**
  * ModifyMigrateName返回参数结构体
@@ -1398,6 +1966,15 @@ export interface CreateMigrateCheckJobRequest {
     JobId: string;
 }
 /**
+ * ModifyConsumerGroupPassword返回参数结构体
+ */
+export interface ModifyConsumerGroupPasswordResponse {
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * DescribeMigrationJobs请求参数结构体
  */
 export interface DescribeMigrationJobsRequest {
@@ -1482,6 +2059,29 @@ export interface CompareTaskInfo {
     Status: string;
 }
 /**
+ * ModifyConsumerGroupDescription请求参数结构体
+ */
+export interface ModifyConsumerGroupDescriptionRequest {
+    /**
+     * 数据订阅实例的 ID
+     */
+    SubscribeId: string;
+    /**
+     * 消费组名称。实际的消费组全称形如：consumer-grp-#{SubscribeId}-#{ConsumerGroupName}。
+  请务必保证消费组名称正确。
+     */
+    ConsumerGroupName: string;
+    /**
+     * 账户名称。实际的账户全称形如：account-#{SubscribeId}-#{AccountName}。
+  请务必保证账户名称正确。
+     */
+    AccountName: string;
+    /**
+     * 修改之后的消费组描述
+     */
+    Description: string;
+}
+/**
  * ContinueSyncJob请求参数结构体
  */
 export interface ContinueSyncJobRequest {
@@ -1489,6 +2089,15 @@ export interface ContinueSyncJobRequest {
      * 同步任务id
      */
     JobId: string;
+}
+/**
+ * ModifySubscribeObjects返回参数结构体
+ */
+export interface ModifySubscribeObjectsResponse {
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * CreateMigrationService返回参数结构体
@@ -1552,6 +2161,30 @@ export interface DescribeMigrationCheckJobResponse {
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * StopSyncJob请求参数结构体
+ */
+export interface StopSyncJobRequest {
+    /**
+     * 同步任务id
+     */
+    JobId: string;
+}
+/**
+ * 数据不一致的表详情
+ */
+export interface DifferenceDetail {
+    /**
+     * 数据不一致的表数量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TotalCount: number;
+    /**
+     * 校验不一致的表详情
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Items: Array<DifferenceItem>;
 }
 /**
  * 数据库信息
@@ -1688,24 +2321,51 @@ export interface TopicRule {
     TableName?: string;
 }
 /**
- * 数据不一致的表详情
+ * DestroySyncJob请求参数结构体
  */
-export interface DifferenceDetail {
+export interface DestroySyncJobRequest {
     /**
-     * 数据不一致的表数量
+     * 同步任务id
+     */
+    JobId: string;
+}
+/**
+ * 视图对象
+ */
+export interface ViewItem {
+    /**
+     * 视图名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TotalCount: number;
+    ViewName?: string;
     /**
-     * 校验不一致的表详情
+     * 迁移后的视图名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Items: Array<DifferenceItem>;
+    NewViewName?: string;
 }
 /**
  * CreateCheckSyncJob返回参数结构体
  */
 export interface CreateCheckSyncJobResponse {
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * CreateSubscribeCheckJob返回参数结构体
+ */
+export interface CreateSubscribeCheckJobResponse {
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * ModifyConsumerGroupDescription返回参数结构体
+ */
+export interface ModifyConsumerGroupDescriptionResponse {
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1828,6 +2488,46 @@ export interface StartModifySyncJobResponse {
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * 订阅校验任务的各步骤信息。
+ */
+export interface SubscribeCheckStepInfo {
+    /**
+     * 步骤名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    StepName?: string;
+    /**
+     * 步骤Id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    StepId?: string;
+    /**
+     * 步骤编号，从 1 开始
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    StepNo?: number;
+    /**
+     * 当前步骤状态，可能值为 notStarted,running,finished,failed
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Status?: string;
+    /**
+     * 当前步骤进度
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Percent?: number;
+    /**
+     * 错误提示
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Errors?: Array<SubscribeCheckStepTip>;
+    /**
+     * 告警提示
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Warnings?: Array<SubscribeCheckStepTip>;
 }
 /**
  * 查询迁移实例列表的实例对象
@@ -2189,6 +2889,64 @@ export interface JobItem {
     DumperResumeCtrl?: string;
 }
 /**
+ * DestroyIsolatedSubscribe返回参数结构体
+ */
+export interface DestroyIsolatedSubscribeResponse {
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * 数据数据订阅的对象，用于修改订阅对象接口。与SubscribeObject结构类似，只是类型和参数名不同。
+ */
+export interface ModifiedSubscribeObject {
+    /**
+     * 订阅对象的类型，枚举值为：0-库，1-表(该值对于mongo任务来说，是集合) 。
+  注意：mongo只支持全实例、单库或者单集合订阅，因此该字段不要与SubscribeObjectType冲突。如：SubscribeObjectType=4，表示mongo单库订阅，那么该字段应该传0。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ObjectsType: number;
+    /**
+     * 订阅数据库的名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DatabaseName: string;
+    /**
+     * 订阅数据库中表(或集合)的名称。如果 ObjectsType 为 1，那么此字段为必填，且不为空；
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TableNames?: Array<string>;
+}
+/**
+ * DescribeCompareTasks返回参数结构体
+ */
+export interface DescribeCompareTasksResponse {
+    /**
+     * 数量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TotalCount?: number;
+    /**
+     * 一致性校验列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Items?: Array<CompareTaskItem>;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * ResumeSubscribe返回参数结构体
+ */
+export interface ResumeSubscribeResponse {
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * DescribeSyncJobs请求参数结构体
  */
 export interface DescribeSyncJobsRequest {
@@ -2293,13 +3051,21 @@ export interface SyncDetailInfo {
     ErrInfo?: ErrInfo;
 }
 /**
- * ResumeSyncJob请求参数结构体
+ * DescribeConsumerGroups返回参数结构体
  */
-export interface ResumeSyncJobRequest {
+export interface DescribeConsumerGroupsResponse {
     /**
-     * 同步任务id
+     * 指定实例下的消费者组总数
      */
-    JobId: string;
+    TotalCount?: number;
+    /**
+     * 消费者组列表
+     */
+    Items?: Array<GroupInfo>;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * ModifyMigrateRateLimit请求参数结构体
@@ -2415,6 +3181,26 @@ export interface StepInfo {
     Progress?: number;
 }
 /**
+ * 订阅的的数据库表信息，用于配置和查询订阅任务接口。
+ */
+export interface SubscribeObject {
+    /**
+     * 订阅数据的类型，枚举值：database-数据库，table-数据库的表(如果 DatabaseType 为 mongodb，则表示集合)
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ObjectType: string;
+    /**
+     * 订阅的数据库名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Database: string;
+    /**
+     * 订阅数据库中表的名称。如果 DatabaseType 为 mongodb，填集合名。mongodb只支持订阅单库或者单集合。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Tables?: Array<string>;
+}
+/**
  * ResumeMigrateJob请求参数结构体
  */
 export interface ResumeMigrateJobRequest {
@@ -2437,64 +3223,93 @@ export interface PauseSyncJobResponse {
     RequestId?: string;
 }
 /**
- * 计费状态信息
+ * DescribeSubscribeCheckJob请求参数结构体
  */
-export interface TradeInfo {
+export interface DescribeSubscribeCheckJobRequest {
     /**
-     * 交易订单号
+     * 数据订阅实例的 ID
+     */
+    SubscribeId: string;
+}
+/**
+ * ModifySubscribeObjects请求参数结构体
+ */
+export interface ModifySubscribeObjectsRequest {
+    /**
+     * 数据订阅实例的ID
+     */
+    SubscribeId: string;
+    /**
+     * 数据订阅的类型，非mongo任务的枚举值：0-全实例更新；1-数据更新；2-结构更新；3-数据更新+结构更新。mongo任务的枚举值：0-全实例更新；4-订阅单库；5-订阅单集合
+     */
+    SubscribeObjectType: number;
+    /**
+     * 修改后的订阅数据库表信息。会覆盖原来的订阅对象，所以除非 SubscribeObjectType = 0或2，否则改字段必填。
+     */
+    Objects?: Array<ModifiedSubscribeObject>;
+    /**
+     * kafka分区策略。如果不填，默认不修改。如果填了，会覆盖原来的策略。
+     */
+    DistributeRules?: Array<DistributeRule>;
+    /**
+     * 默认分区策略。不满足DistributeRules中正则表达式的数据，将按照默认分区策略计算分区。
+  非mongo产品支持的默认策略: table-按表名分区，pk-按表名+主键分区。mongo的默认策略仅支持：collection-按集合名分区。
+  该字段与DistributeRules搭配使用。如果配置了DistributeRules，该字段也必填。如果配置了该字段，视为配置了一条DistributeRules，原来的分区策略也会被覆盖。
+     */
+    DefaultRuleType?: string;
+    /**
+     * mongo输出聚合设置，mongo任务可选。如果不填，默认不修改。
+     */
+    PipelineInfo?: Array<PipelineInfo>;
+}
+/**
+ * 数据同步view的描述
+ */
+export interface View {
+    /**
+     * view名
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DealName?: string;
+    ViewName?: string;
     /**
-     * 上一次交易订单号
+     * 预留字段、目前暂时不支持view的重命名
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    LastDealName?: string;
+    NewViewName?: string;
+}
+/**
+ * kafka消费者组的分区详情
+ */
+export interface MonitorInfo {
     /**
-     * 实例规格，包括：micro、small、medium、large、xlarge、2xlarge等
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 当前分区的编号，从0开始
      */
-    InstanceClass?: string;
+    PartitionNo: number;
     /**
-     * 计费任务状态， normal(计费或待计费)、resizing(变配中)、reversing(冲正中，比较短暂的状态)、isolating(隔离中，比较短暂的状态)、isolated(已隔离)、offlining(下线中)、offlined(已下线)、notBilled(未计费)
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 当前分区的偏移量
      */
-    TradeStatus?: string;
+    ConsumerGroupOffset: number;
     /**
-     * 到期时间，格式为"yyyy-mm-dd hh:mm:ss"
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 当前分区未消费的数据量
      */
-    ExpireTime?: string;
+    ConsumerGroupLag: number;
     /**
-     * 下线时间，格式为"yyyy-mm-dd hh:mm:ss"
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 当前分区的消费延迟(单位为秒)
      */
-    OfflineTime?: string;
+    Latency: number;
+}
+/**
+ * DescribeOffsetByTime请求参数结构体
+ */
+export interface DescribeOffsetByTimeRequest {
     /**
-     * 隔离时间，格式为"yyyy-mm-dd hh:mm:ss"
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 数据订阅实例的 ID
      */
-    IsolateTime?: string;
+    SubscribeId: string;
     /**
-     * 下线原因
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 时间点，格式为：Y-m-d h:m:s。如果输入时间比当前时间晚的多，相当于查询最新offset；如果输入时间比当前时间早的多，相当于查询最老offset；如果输入空，默认0时间，等价于查询最老offset。
      */
-    OfflineReason?: string;
-    /**
-     * 隔离原因
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    IsolateReason?: string;
-    /**
-     * 付费类型，包括：postpay(后付费)、prepay(预付费)
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    PayType?: string;
-    /**
-     * 任务计费类型，包括：billing(计费)、notBilling(不计费)、 promotions(促销活动中)
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    BillingType?: string;
+    Time: string;
 }
 /**
  * StartCompare返回参数结构体
@@ -2891,6 +3706,91 @@ export interface StartCompareRequest {
     CompareTaskId: string;
 }
 /**
+ * 数据订阅的实例节点信息
+ */
+export interface EndpointItem {
+    /**
+     * 源库所在地域。如果 AccessType 为 ccn，请填vpc所在地域，因为此时不知道源库在哪个地域。其他接入方式，请填订阅任务所在地域，因为确保订阅任务与源库在同一地域是最优的网络方案。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DatabaseRegion: string;
+    /**
+     * 用户名
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    User: string;
+    /**
+     * 密码。作为入参时必填，作为出参时为空。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Password: string;
+    /**
+     * 目标实例ID。如果 AccessType 为 cdb，此项必填。配置InstanceId时会查询并校验实例信息。mysql的查询接口经过了鉴权，请确保子用户有 cdb:DescribeDBInstances 的接口权限。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InstanceId?: string;
+    /**
+     * 云主机ID。如果 AccessType 为 cvm，此项必填。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CvmInstanceId?: string;
+    /**
+     * 专线网关ID。如果 AccessType 为 dcg，此项必填。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    UniqDcgId?: string;
+    /**
+     * 云联网ID。如果 AccessType 为 ccn，此项必填。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CcnId?: string;
+    /**
+     * vpn网关ID。如果 AccessType 为 vpncloud，此项必填。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    UniqVpnGwId?: string;
+    /**
+     * VpcID。如果 AccessType 为 dcg\ccn\vpncloud\vpc，此项必填。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    VpcId?: string;
+    /**
+     * 子网ID。如果 AccessType 为 dcg\ccn\vpncloud\vpc，此项必填。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SubnetId?: string;
+    /**
+     * 数据库地址，支持域名与IP。如果 AccessType 为 dcg\ccn\vpncloud\vpc\extranet\intranet，此项必填。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    HostName?: string;
+    /**
+     * 数据库端口。如果 AccessType 为 dcg\ccn\vpncloud\vpc\extranet\intranet\cvm，此项必填。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Port?: number;
+    /**
+     * 是否走加密传输，枚举值：UnEncrypted-不加密，Encrypted-加密。只有mysql支持，不填默认不加密，其他产品不填。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    EncryptConn?: string;
+    /**
+     * 数据库网络环境。如果 AccessType 为 ccn 此项必填。枚举值：UserIDC-自建idc，TencentVPC-腾讯云，Aws-aws，AliYun-阿里云，Others-其他。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DatabaseNetEnv?: string;
+    /**
+     * 云联网网关所属的主账号uin、跨账号云联网需要。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CcnOwnerUin?: string;
+    /**
+     * 为业务添加的额外信息。参数名作key，参数值作value。 tdpg必填参数：PgDatabase-订阅的库名。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ExtraAttr?: Array<KeyValuePairOption>;
+}
+/**
  * DescribeMigrationCheckJob请求参数结构体
  */
 export interface DescribeMigrationCheckJobRequest {
@@ -3042,6 +3942,39 @@ export interface ModifyMigrateNameRequest {
     JobName: string;
 }
 /**
+ * CreateSubscribe请求参数结构体
+ */
+export interface CreateSubscribeRequest {
+    /**
+     * 订阅的数据库类型，目前支持 cynosdbmysql(tdsql-c mysql版),mariadb,mongodb,mysql,percona,tdpg(tdsql postgresql版),tdsqlpercona(tdsql mysql版)
+     */
+    Product: string;
+    /**
+     * 付费方式，枚举值：0-包年包月，1-按量计费
+     */
+    PayType: number;
+    /**
+     * 购买时长。当 payType 为包年包月时，该项需要填，单位为月，最小值为 1，最大值为 120。不填默认1
+     */
+    Duration?: number;
+    /**
+     * 是否自动续费。当 payType 为包年包月时，该项需要填。枚举值：0-不自动续费，1-自动续费。默认不自动续费。按量计费设置该标识无效。
+     */
+    AutoRenew?: number;
+    /**
+     * 购买数量,默认为1，最大为10
+     */
+    Count?: number;
+    /**
+     * 实例资源标签
+     */
+    Tags?: Array<TagItem>;
+    /**
+     * 任务名，自定义
+     */
+    Name?: string;
+}
+/**
  * StartSyncJob返回参数结构体
  */
 export interface StartSyncJobResponse {
@@ -3049,6 +3982,40 @@ export interface StartSyncJobResponse {
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * StartMigrateJob请求参数结构体
+ */
+export interface StartMigrateJobRequest {
+    /**
+     * 数据迁移任务ID
+     */
+    JobId: string;
+}
+/**
+ * 订阅任务的kafka分区规则。符合库名和表名正则表达式的数据将按照RuleType计算该条数据将被投递的kafka分区。如果配置了多个规则，将按照配置的顺序，第一条命中的规则生效。
+ */
+export interface DistributeRule {
+    /**
+     * 规则类型。非mongo产品的枚举值为: table-按表名分区，pk-按表名+主键分区，cols-按列名分区。mongo的枚举值为：collection-按集合名分区、collectionAndObjectId-按集合+主键分区。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RuleType: string;
+    /**
+     * 库名匹配规则，请填写正则表达式
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DbPattern: string;
+    /**
+     * 表名匹配规则，如果 DatabaseType 为 mongodb，则匹配集合名
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TablePattern: string;
+    /**
+     * 列名。如果 RuleType 为 cols，此项必填。订阅任务会用该列的值计算分区。mongo没有按列分区，因此也不用传这个字段。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Columns?: Array<string>;
 }
 /**
  * 同步的数据库对对象描述
@@ -3076,9 +4043,9 @@ export interface Objects {
     OnlineDDL?: OnlineDDL;
 }
 /**
- * RecoverMigrateJob返回参数结构体
+ * DeleteConsumerGroup返回参数结构体
  */
-export interface RecoverMigrateJobResponse {
+export interface DeleteConsumerGroupResponse {
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -3242,13 +4209,188 @@ export interface StopMigrateJobRequest {
     JobId: string;
 }
 /**
- * IsolateMigrateJob返回参数结构体
+ * 数据同步中的描述源端和目的端的信息
  */
-export interface IsolateMigrateJobResponse {
+export interface Endpoint {
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     * 地域英文名，如：ap-guangzhou
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    RequestId?: string;
+    Region?: string;
+    /**
+     * tdsql mysql版的节点类型，枚举值为proxy、set
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Role?: string;
+    /**
+     * 数据库内核类型，tdsql中用于区分不同内核：percona,mariadb,mysql
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DbKernel?: string;
+    /**
+     * 数据库实例ID，格式如：cdb-powiqx8q
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InstanceId?: string;
+    /**
+     * 实例的IP地址，接入类型为非cdb时此项必填
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Ip?: string;
+    /**
+     * 实例端口，接入类型为非cdb时此项必填
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Port?: number;
+    /**
+     * 用户名，对于访问需要用户名密码认证的实例必填
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    User?: string;
+    /**
+     * 密码，对于访问需要用户名密码认证的实例必填
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Password?: string;
+    /**
+     * 数据库名，数据库为cdwpg时，需要提供
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DbName?: string;
+    /**
+     * 私有网络ID，对于私有网络、专线、VPN的接入方式此项必填，格式如：vpc-92jblxto
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    VpcId?: string;
+    /**
+     * 私有网络下的子网ID，对于私有网络、专线、VPN的接入方式此项必填，格式如：subnet-3paxmkdz
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SubnetId?: string;
+    /**
+     * CVM实例短ID，格式如：ins-olgl39y8，与云服务器控制台页面显示的实例ID相同。如果是CVM自建实例，需要传递此字段
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CvmInstanceId?: string;
+    /**
+     * 专线网关ID，对于专线接入类型此项必填，格式如：dcg-0rxtqqxb
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    UniqDcgId?: string;
+    /**
+     * VPN网关ID，对于vpn接入类型此项必填，格式如：vpngw-9ghexg7q
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    UniqVpnGwId?: string;
+    /**
+     * 云联网ID，对于云联网接入类型此项必填，如：ccn-afp6kltc
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CcnId?: string;
+    /**
+     * 云厂商类型，当实例为RDS实例时，填写为aliyun, 其他情况均填写others，默认为others
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Supplier?: string;
+    /**
+     * 数据库版本，当实例为RDS实例时才有效，其他实例忽略，格式如：5.6或者5.7，默认为5.6
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    EngineVersion?: string;
+    /**
+     * 实例所属账号，如果为跨账号实例此项必填
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Account?: string;
+    /**
+     * 资源所属账号 为空或self(表示本账号内资源)、other(表示跨账号资源)
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AccountMode?: string;
+    /**
+     * 跨账号同步时的角色，只允许[a-zA-Z0-9\-\_]+，如果为跨账号实例此项必填
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AccountRole?: string;
+    /**
+     * 外部角色id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RoleExternalId?: string;
+    /**
+     * 临时密钥Id，可通过获取联合身份临时访问凭证获取临时密钥https://cloud.tencent.com/document/product/1312/48195，如果为跨账号实例此项必填
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TmpSecretId?: string;
+    /**
+     * 临时密钥Key，可通过获取联合身份临时访问凭证获取临时密钥https://cloud.tencent.com/document/product/1312/48195，，如果为跨账号实例此项必填
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TmpSecretKey?: string;
+    /**
+     * 临时Token，可通过获取联合身份临时访问凭证获取临时密钥https://cloud.tencent.com/document/product/1312/48195，，如果为跨账号实例此项必填
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TmpToken?: string;
+    /**
+     * 是否走加密传输、UnEncrypted表示不走加密传输，Encrypted表示走加密传输，默认UnEncrypted
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    EncryptConn?: string;
+    /**
+     * 数据库所属网络环境，AccessType为云联网(ccn)时必填， UserIDC表示用户IDC、TencentVPC表示腾讯云VPC；
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DatabaseNetEnv?: string;
+    /**
+     * 数据库为跨账号云联网下的实例时、表示云联网所属主账号
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CcnOwnerUin?: string;
+}
+/**
+ * ConfigureSubscribeJob请求参数结构体
+ */
+export interface ConfigureSubscribeJobRequest {
+    /**
+     * 数据订阅实例的 ID
+     */
+    SubscribeId: string;
+    /**
+     * 数据订阅的类型，当 DatabaseType 不为 mongodb 时，枚举值为：all-全实例更新；dml-数据更新；ddl-结构更新；dmlAndDdl-数据更新+结构更新。当 DatabaseType 为 mongodb 时，枚举值为 all-全实例更新；database-订阅单库；collection-订阅单集合
+     */
+    SubscribeMode: string;
+    /**
+     * 源数据库接入类型，如：extranet(公网)、vpncloud(vpn接入)、dcg(专线接入)、ccn(云联网)、cdb(云数据库)、cvm(云主机自建)、intranet(自研上云)、vpc(私有网络vpc)。注意具体可选值依赖当前链路支持能力
+     */
+    AccessType: string;
+    /**
+     * 数据库节点信息
+     */
+    Endpoints: Array<EndpointItem>;
+    /**
+     * Kafka配置
+     */
+    KafkaConfig: SubscribeKafkaConfig;
+    /**
+     * 订阅的数据库表信息，当 SubscribeMode 不为 all和ddl 时，SubscribeObjects 为必选参数
+     */
+    SubscribeObjects?: Array<SubscribeObject>;
+    /**
+     * 订阅数据格式，如：protobuf、json、avro。注意具体可选值依赖当前链路支持能力，数据格式详情参考官网的消费demo文档
+     */
+    Protocol?: string;
+    /**
+     * mongo选填参数：输出聚合设置。
+     */
+    PipelineInfo?: Array<PipelineInfo>;
+    /**
+     * 为业务添加的额外信息。参数名作key，参数值作value。
+  mysql选填参数：ProcessXA-是否处理XA事务，填true处理，不填或填其他值不处理。
+  mongo选填参数：SubscribeType-订阅类型，目前只支持changeStream，不填也是默认changeStream。
+  其他业务暂没有可选参数。
+     */
+    ExtraAttr?: Array<KeyValuePairOption>;
 }
 /**
  * 同步任务信息
@@ -3431,29 +4573,39 @@ export interface SyncJobInfo {
     DumperResumeCtrl?: string;
 }
 /**
- * 一致性校验选项
+ * DescribeSubscribeCheckJob返回参数结构体
  */
-export interface CompareOptions {
+export interface DescribeSubscribeCheckJobResponse {
     /**
-     * 对比方式：dataCheck(完整数据对比)、sampleDataCheck(抽样数据对比)、rowsCount(行数对比)
+     * 订阅实例ID
+     */
+    SubscribeId?: string;
+    /**
+     * 失败或者报错提示，成功则提示success。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Method?: string;
+    Message?: string;
     /**
-     * 抽样比例;范围0,100
+     * 任务运行状态，可能值为 running,failed,success
+     */
+    Status?: string;
+    /**
+     * 当前总体进度，范围 0~100
+     */
+    Progress?: number;
+    /**
+     * 校验总步骤数
+     */
+    StepAll?: number;
+    /**
+     * 当前执行步骤
+     */
+    StepNow?: number;
+    /**
+     * 各个步骤运行状态
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SampleRate?: number;
-    /**
-     * 线程数，取值1-5，默认为1
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ThreadCount?: number;
-}
-/**
- * ModifySyncJobConfig返回参数结构体
- */
-export interface ModifySyncJobConfigResponse {
+    Steps?: Array<SubscribeCheckStepInfo>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -3591,19 +4743,26 @@ export interface CreateSyncJobRequest {
     ExistedJobId?: string;
 }
 /**
- * 视图对象
+ * 订阅的kafka分区数和分区规则。mariadb，percona，tdsqlmysql，tdpg不支持自定义分区，所以DistributeRules和DefaultRuleType可以不填，但是NumberOfPartitions是必填。
  */
-export interface ViewItem {
+export interface SubscribeKafkaConfig {
     /**
-     * 视图名称
+     * kafka分区数量，枚举值为1，4，8
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ViewName?: string;
+    NumberOfPartitions: number;
     /**
-     * 迁移后的视图名称
+     * 分区规则。当NumberOfPartitions > 1时，该项必填。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    NewViewName?: string;
+    DistributeRules?: Array<DistributeRule>;
+    /**
+     * 默认分区策略。当NumberOfPartitions > 1时，该项必填。不满足DistributeRules中正则表达式的数据，将按照默认分区策略计算分区。
+  非mongo产品的枚举值为: table-按表名分区，pk-按表名+主键分区。mongo的枚举值为：collection-按集合名分区。
+  该字段与DistributeRules搭配使用，如果配置了该字段，视为配置了一条DistributeRules。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DefaultRuleType?: string;
 }
 /**
  * DescribeCompareReport请求参数结构体
@@ -3671,19 +4830,31 @@ export interface SkippedItem {
     Reason?: string;
 }
 /**
- * 数据同步view的描述
+ * IsolateSubscribe请求参数结构体
  */
-export interface View {
+export interface IsolateSubscribeRequest {
     /**
-     * view名
+     * 订阅实例ID
+     */
+    SubscribeId: string;
+}
+/**
+ * DescribeSubscribeReturnable返回参数结构体
+ */
+export interface DescribeSubscribeReturnableResponse {
+    /**
+     * 实例是否支持退还/退货
+     */
+    IsReturnable?: boolean;
+    /**
+     * 不支持退还的原因
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ViewName?: string;
+    ReturnFailMessage?: string;
     /**
-     * 预留字段、目前暂时不支持view的重命名
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
-    NewViewName?: string;
+    RequestId?: string;
 }
 /**
  * 标签
@@ -3718,6 +4889,32 @@ export interface OnlineDDL {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Status: string;
+}
+/**
+ * DescribeSubscribeJobs返回参数结构体
+ */
+export interface DescribeSubscribeJobsResponse {
+    /**
+     * 符合查询条件的实例总数
+     */
+    TotalCount?: number;
+    /**
+     * 数据订阅实例的信息列表
+     */
+    Items?: Array<SubscribeInfo>;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * ResetSubscribe请求参数结构体
+ */
+export interface ResetSubscribeRequest {
+    /**
+     * 数据订阅实例的ID
+     */
+    SubscribeId: string;
 }
 /**
  * 迁移对象选项，需要告知迁移服务迁移哪些库表对象
@@ -3802,6 +4999,21 @@ export interface Table {
     TableEditMode?: string;
 }
 /**
+ * 订阅校验任务的提示信息
+ */
+export interface SubscribeCheckStepTip {
+    /**
+     * 错误或告警的详细信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Message?: string;
+    /**
+     * 帮助文档
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    HelpDoc?: string;
+}
+/**
  * 一致性校验详细信息
  */
 export interface CompareDetailInfo {
@@ -3815,6 +5027,55 @@ export interface CompareDetailInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Skipped: SkippedDetail;
+}
+/**
+ * DescribeSubscribeJobs请求参数结构体
+ */
+export interface DescribeSubscribeJobsRequest {
+    /**
+     * 订阅 ID 筛选，精确匹配
+     */
+    SubscribeId?: string;
+    /**
+     * 订阅名称，前缀模糊匹配
+     */
+    SubscribeName?: string;
+    /**
+     * 订阅的云上数据库实例的 ID，精确匹配
+     */
+    InstanceId?: string;
+    /**
+     * 计费模式筛选，可能的值：0-包年包月，1-按量计费
+     */
+    PayType?: number;
+    /**
+     * 订阅的数据库产品，目前支持 cynosdbmysql,mariadb,mongodb,mysql,percona,tdpg,tdsqlpercona(tdsqlmysql)
+     */
+    Product?: string;
+    /**
+     * 数据订阅生命周期状态，可能的值为：正常 normal, 隔离中 isolating, 已隔离 isolated, 下线中 offlining，按量转包年包月中 post2PrePayIng
+     */
+    Status?: Array<string>;
+    /**
+     * 数据订阅状态，可能的值为：未启动 notStarted, 校验中 checking, 校验不通过 checkNotPass, 校验通过 checkPass, 启动中 starting, 运行中 running, 异常出错 error
+     */
+    SubsStatus?: Array<string>;
+    /**
+     * 返回记录的起始偏移量。默认0
+     */
+    Offset?: number;
+    /**
+     * 单次返回的记录数量。默认20，最大100
+     */
+    Limit?: number;
+    /**
+     * 排序方向，可选的值为"DESC"和"ASC"，默认为"DESC"，按创建时间逆序排序
+     */
+    OrderDirection?: string;
+    /**
+     * tag 过滤条件，多个 TagFilter 之间关系为且
+     */
+    TagFilters?: Array<TagFilter>;
 }
 /**
  * StartMigrateJob返回参数结构体

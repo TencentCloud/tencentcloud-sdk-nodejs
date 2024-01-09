@@ -233,48 +233,6 @@ export interface DescribeProjectLimitsResponse {
 }
 
 /**
- * DescribeTawInstances请求参数结构体
- */
-export interface DescribeTawInstancesRequest {
-  /**
-   * 计费状态
-   */
-  ChargeStatuses?: Array<number | bigint>
-  /**
-   * 计费类型
-   */
-  ChargeTypes?: Array<number | bigint>
-  /**
-   * 分页Limit
-   */
-  Limit?: number
-  /**
-   * 分页Offset
-   */
-  Offset?: number
-  /**
-   * 片区Id
-   */
-  AreaIds?: Array<number | bigint>
-  /**
-   * 实例状态(1=创建中，2=运行中，3=异常，4=重启中，5=停止中，6=已停止，7=销毁中，8=已销毁), 该参数已废弃，请在Filters内注明
-   */
-  InstanceStatuses?: Array<number | bigint>
-  /**
-   * 实例Id, 该参数已废弃，请在Filters内注明
-   */
-  InstanceIds?: Array<string>
-  /**
-   * 过滤参数；demo模式传{"Name": "IsDemo", "Values":["1"]}
-   */
-  Filters?: Array<Filter>
-  /**
-   * 该参数已废弃，demo模式请在Filters内注明
-   */
-  IsDemo?: number
-}
-
-/**
  * DeleteOfflineLogConfig返回参数结构体
  */
 export interface DeleteOfflineLogConfigResponse {
@@ -282,16 +240,6 @@ export interface DeleteOfflineLogConfigResponse {
    * 接口调用信息
    */
   Msg: string
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * ResumeProject返回参数结构体
- */
-export interface ResumeProjectResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -605,20 +553,6 @@ export interface RumUvInfo {
    * 创建时间
    */
   CreateTime: string
-}
-
-/**
- * DescribeOfflineLogs请求参数结构体
- */
-export interface DescribeOfflineLogsRequest {
-  /**
-   * 项目唯一上报 key
-   */
-  ProjectKey: string
-  /**
-   * 离线日志文件 id 列表
-   */
-  FileIDs: Array<string>
 }
 
 /**
@@ -998,24 +932,6 @@ export interface ModifyInstanceResponse {
 }
 
 /**
- * DescribeOfflineLogRecords返回参数结构体
- */
-export interface DescribeOfflineLogRecordsResponse {
-  /**
-   * 接口调用信息
-   */
-  Msg: string
-  /**
-   * 记录 ID 数组
-   */
-  RecordSet: Array<string>
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * DeleteStarProject请求参数结构体
  */
 export interface DeleteStarProjectRequest {
@@ -1118,13 +1034,9 @@ export interface StopProjectRequest {
 }
 
 /**
- * CreateOfflineLogConfig返回参数结构体
+ * ResumeProject返回参数结构体
  */
-export interface CreateOfflineLogConfigResponse {
-  /**
-   * 接口返回信息
-   */
-  Msg: string
+export interface ResumeProjectResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1482,17 +1394,13 @@ export interface StopInstanceResponse {
 }
 
 /**
- * DescribeDataCustomUrl返回参数结构体
+ * DescribeProjectLimits请求参数结构体
  */
-export interface DescribeDataCustomUrlResponse {
+export interface DescribeProjectLimitsRequest {
   /**
-   * 返回值
+   * 项目ID
    */
-  Result: string
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  ProjectID: number
 }
 
 /**
@@ -1521,16 +1429,6 @@ export interface DeleteProjectResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * DescribeOfflineLogRecords请求参数结构体
- */
-export interface DescribeOfflineLogRecordsRequest {
-  /**
-   * 项目唯一上报 key
-   */
-  ProjectKey: string
 }
 
 /**
@@ -1945,13 +1843,17 @@ export interface DescribeDataLogUrlInfoRequest {
 }
 
 /**
- * DescribeProjectLimits请求参数结构体
+ * DescribeDataCustomUrl返回参数结构体
  */
-export interface DescribeProjectLimitsRequest {
+export interface DescribeDataCustomUrlResponse {
   /**
-   * 项目ID
+   * 返回值
    */
-  ProjectID: number
+  Result: string
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2347,21 +2249,45 @@ export interface DescribeReleaseFileSignResponse {
 }
 
 /**
- * DescribeOfflineLogs返回参数结构体
+ * DescribeTawInstances请求参数结构体
  */
-export interface DescribeOfflineLogsResponse {
+export interface DescribeTawInstancesRequest {
   /**
-   * 接口调用返回信息
+   * 计费状态
    */
-  Msg: string
+  ChargeStatuses?: Array<number | bigint>
   /**
-   * 日志列表
+   * 计费类型
    */
-  LogSet: Array<string>
+  ChargeTypes?: Array<number | bigint>
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 分页Limit
    */
-  RequestId?: string
+  Limit?: number
+  /**
+   * 分页Offset
+   */
+  Offset?: number
+  /**
+   * 片区Id
+   */
+  AreaIds?: Array<number | bigint>
+  /**
+   * 实例状态(1=创建中，2=运行中，3=异常，4=重启中，5=停止中，6=已停止，7=销毁中，8=已销毁), 该参数已废弃，请在Filters内注明
+   */
+  InstanceStatuses?: Array<number | bigint>
+  /**
+   * 实例Id, 该参数已废弃，请在Filters内注明
+   */
+  InstanceIds?: Array<string>
+  /**
+   * 过滤参数；demo模式传{"Name": "IsDemo", "Values":["1"]}
+   */
+  Filters?: Array<Filter>
+  /**
+   * 该参数已废弃，demo模式请在Filters内注明
+   */
+  IsDemo?: number
 }
 
 /**
@@ -2836,20 +2762,6 @@ export interface DescribeReleaseFilesResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * CreateOfflineLogConfig请求参数结构体
- */
-export interface CreateOfflineLogConfigRequest {
-  /**
-   * 项目唯一上报 key
-   */
-  ProjectKey: string
-  /**
-   * 需要监听的用户唯一标示(aid 或 uin)
-   */
-  UniqueID: string
 }
 
 /**

@@ -947,7 +947,7 @@ export interface DescribeIntegrationRolesRequest {
 分页参数, 需要limit, offset 配合使用
 例如:
 您希望得到第三页的数据, 且每页限制最多10条
-你可以使用 LIMIT 10 OFFSET 20
+您可以使用 LIMIT 10 OFFSET 20
 
    */
   Offset?: number
@@ -5824,8 +5824,9 @@ export interface CreatePrepareFlowRequest {
    * 资源id，与ResourceType相对应，取值范围：
 <ul>
 <li>文件Id（通过UploadFiles获取文件资源Id）</li>
-<li>模板Id</li>
+<li>模板Id（通过控制台创建模板后获取模板Id）</li>
 </ul>
+注意：需要同时设置 ResourceType 参数指定资源类型
    */
   ResourceId: string
   /**
@@ -5833,6 +5834,12 @@ export interface CreatePrepareFlowRequest {
 
    */
   FlowName: string
+  /**
+   * 资源类型，取值有：
+<ul><li> **1**：模板</li>
+<li> **2**：文件（默认值）</li></ul>
+   */
+  ResourceType?: number
   /**
    * 合同流程的签署顺序类型：
 <ul><li> **false**：(默认)有序签署, 本合同多个参与人需要依次签署 </li>
@@ -5867,12 +5874,6 @@ export interface CreatePrepareFlowRequest {
 <li> **CLOSE**：关闭</li></ul>
    */
   IntelligentStatus?: string
-  /**
-   * 资源类型，取值有：
-<ul><li> **1**：模板</li>
-<li> **2**：文件（默认值）</li></ul>
-   */
-  ResourceType?: number
   /**
    * 该字段已废弃，请使用InitiatorComponents
    */
@@ -6490,7 +6491,7 @@ export interface DescribeIntegrationRolesResponse {
 分页参数, 需要limit, offset 配合使用
 例如:
 您希望得到第三页的数据, 且每页限制最多10条
-你可以使用 LIMIT 10 OFFSET 20
+您可以使用 LIMIT 10 OFFSET 20
    */
   Offset?: number
   /**

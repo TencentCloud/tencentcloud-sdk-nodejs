@@ -4038,6 +4038,10 @@ export interface CreateGrafanaInstanceRequest {
      * 标签
      */
     TagSpecification?: Array<PrometheusTag>;
+    /**
+     * 是否自动选择代金券，默认为 false
+     */
+    AutoVoucher?: boolean;
 }
 /**
  * DescribePrometheusInstanceUsage返回参数结构体

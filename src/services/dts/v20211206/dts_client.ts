@@ -21,44 +21,60 @@ import {
   ModifyCompareTaskResponse,
   DescribeSyncJobsResponse,
   ModifyMigrationJobResponse,
+  ResetConsumerGroupOffsetResponse,
   ModifyMigrateRateLimitResponse,
+  IsolateMigrateJobResponse,
   ModifyMigrateJobSpecRequest,
-  StartMigrateJobRequest,
+  IsolateSubscribeResponse,
+  ModifyConsumerGroupPasswordRequest,
   StepTip,
   ModifySyncRateLimitResponse,
   DestroyMigrateJobRequest,
+  ModifySubscribeNameRequest,
+  OffsetTimeMap,
   SkipCheckItemResponse,
-  IsolateMigrateJobRequest,
+  ResumeSyncJobRequest,
+  PartitionAssignment,
   ResizeSyncJobResponse,
+  CreateSubscribeCheckJobRequest,
   ResumeMigrateJobResponse,
   DifferenceItem,
   CreateModifyCheckSyncJobRequest,
   IsolateSyncJobRequest,
   PauseMigrateJobRequest,
   ContinueMigrateJobRequest,
+  ResetConsumerGroupOffsetRequest,
   ModifySyncRateLimitRequest,
   DescribeCheckSyncJobResultRequest,
+  ModifySubscribeAutoRenewFlagResponse,
   DestroySyncJobResponse,
-  DescribeCompareReportResponse,
-  Endpoint,
+  ErrorInfoItem,
+  IsolateMigrateJobRequest,
   StopMigrateJobResponse,
   TableItem,
+  SubscribeInfo,
   ModifyCompareTaskNameRequest,
   CompleteMigrateJobResponse,
   DescribeMigrateDBInstancesResponse,
   KeyValuePairOption,
   CreateCheckSyncJobRequest,
   DescribeModifyCheckSyncJobResultResponse,
-  StopSyncJobRequest,
+  StartSubscribeResponse,
+  DescribeSubscribeReturnableRequest,
   DescribeMigrationDetailRequest,
-  DestroySyncJobRequest,
+  CreateConsumerGroupRequest,
   ResizeSyncJobRequest,
+  ModifySubscribeNameResponse,
   DdlOption,
   ConflictHandleOption,
+  PipelineInfo,
   ResumeSyncJobResponse,
+  RecoverMigrateJobResponse,
   ModifyCompareTaskNameResponse,
   StartSyncJobRequest,
+  StartSubscribeRequest,
   ModifyMigrateRuntimeAttributeResponse,
+  DescribeOffsetByTimeResponse,
   PauseSyncJobRequest,
   CreateMigrateCheckJobResponse,
   ModifySyncJobConfigRequest,
@@ -66,24 +82,39 @@ import {
   CreateMigrationServiceRequest,
   DetailCheckItem,
   DescribeCompareTasksRequest,
+  DestroyIsolatedSubscribeRequest,
+  ResetSubscribeResponse,
   CompareObject,
-  ErrorInfoItem,
+  DescribeCompareReportResponse,
   RecoverSyncJobResponse,
   MigrateAction,
+  ConfigureSubscribeJobResponse,
+  DescribeConsumerGroupsRequest,
+  GroupInfo,
   DeleteCompareTaskResponse,
   DBEndpointInfo,
+  ResumeSubscribeRequest,
+  ModifySyncJobConfigResponse,
   CompareColumnItem,
+  DescribeSubscribeDetailResponse,
   ContinueSyncJobResponse,
+  TradeInfo,
   Options,
+  DeleteConsumerGroupRequest,
+  ModifySubscribeAutoRenewFlagRequest,
   CompleteMigrateJobRequest,
-  DescribeCompareTasksResponse,
+  CreateConsumerGroupResponse,
   StopCompareRequest,
   SyncDBEndpointInfos,
   StartModifySyncJobRequest,
   DescribeCheckSyncJobResultResponse,
   StopSyncJobResponse,
-  SkippedDetail,
   MigrateOption,
+  DescribeSubscribeDetailRequest,
+  SkippedDetail,
+  SubsErr,
+  CreateSubscribeResponse,
+  CompareOptions,
   ModifyMigrateNameResponse,
   DescribeMigrationJobsResponse,
   ModifyMigrationJobRequest,
@@ -95,19 +126,28 @@ import {
   SkipSyncCheckItemResponse,
   IsolateSyncJobResponse,
   CreateMigrateCheckJobRequest,
+  ModifyConsumerGroupPasswordResponse,
   DescribeMigrationJobsRequest,
   CompareTaskInfo,
+  ModifyConsumerGroupDescriptionRequest,
   ContinueSyncJobRequest,
+  ModifySubscribeObjectsResponse,
   CreateMigrationServiceResponse,
   KafkaOption,
   DescribeMigrationCheckJobResponse,
+  StopSyncJobRequest,
+  DifferenceDetail,
   DBInfo,
   TopicRule,
-  DifferenceDetail,
+  DestroySyncJobRequest,
+  ViewItem,
   CreateCheckSyncJobResponse,
+  CreateSubscribeCheckJobResponse,
+  ModifyConsumerGroupDescriptionResponse,
   CompareObjectItem,
   ConfigureSyncJobRequest,
   StartModifySyncJobResponse,
+  SubscribeCheckStepInfo,
   MigrateDBItem,
   DescribeMigrateDBInstancesRequest,
   CheckStepInfo,
@@ -117,17 +157,26 @@ import {
   Database,
   Column,
   JobItem,
+  DestroyIsolatedSubscribeResponse,
+  ModifiedSubscribeObject,
+  DescribeCompareTasksResponse,
+  ResumeSubscribeResponse,
   DescribeSyncJobsRequest,
   SyncDetailInfo,
-  ResumeSyncJobRequest,
+  DescribeConsumerGroupsResponse,
   ModifyMigrateRateLimitRequest,
   CompareTableItem,
   ConfigureSyncJobResponse,
   CompareViewItem,
   StepInfo,
+  SubscribeObject,
   ResumeMigrateJobRequest,
   PauseSyncJobResponse,
-  TradeInfo,
+  DescribeSubscribeCheckJobRequest,
+  ModifySubscribeObjectsRequest,
+  View,
+  MonitorInfo,
+  DescribeOffsetByTimeRequest,
   StartCompareResponse,
   DynamicOptions,
   CreateCompareTaskResponse,
@@ -141,37 +190,46 @@ import {
   CreateCompareTaskRequest,
   ErrInfo,
   StartCompareRequest,
+  EndpointItem,
   DescribeMigrationCheckJobRequest,
   DescribeMigrationDetailResponse,
   CreateModifyCheckSyncJobResponse,
   ModifyMigrateNameRequest,
+  CreateSubscribeRequest,
   StartSyncJobResponse,
+  StartMigrateJobRequest,
+  DistributeRule,
   Objects,
-  RecoverMigrateJobResponse,
+  DeleteConsumerGroupResponse,
   DBItem,
   DeleteCompareTaskRequest,
   MigrateDetailInfo,
   StopMigrateJobRequest,
-  IsolateMigrateJobResponse,
+  Endpoint,
+  ConfigureSubscribeJobRequest,
   SyncJobInfo,
-  CompareOptions,
-  ModifySyncJobConfigResponse,
+  DescribeSubscribeCheckJobResponse,
   RoleItem,
   TagFilter,
   StepDetailInfo,
   CreateSyncJobRequest,
-  ViewItem,
+  SubscribeKafkaConfig,
   DescribeCompareReportRequest,
   SkippedItem,
-  View,
+  IsolateSubscribeRequest,
+  DescribeSubscribeReturnableResponse,
   TagItem,
   RecoverMigrateJobRequest,
   OnlineDDL,
+  DescribeSubscribeJobsResponse,
+  ResetSubscribeRequest,
   DatabaseTableObject,
   ModifyMigrateRuntimeAttributeRequest,
   PauseMigrateJobResponse,
   Table,
+  SubscribeCheckStepTip,
   CompareDetailInfo,
+  DescribeSubscribeJobsRequest,
   StartMigrateJobResponse,
   ConsistencyOption,
 } from "./dts_models"
@@ -183,6 +241,36 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("dts.tencentcloudapi.com", "2021-12-06", clientConfig)
+  }
+
+  /**
+   * 本接口(ResumeSubscribe) 用于恢复报错的订阅任务。当订阅任务的状态为error时，可通过本接口尝试对任务进行恢复。
+   */
+  async ResumeSubscribe(
+    req: ResumeSubscribeRequest,
+    cb?: (error: string, rep: ResumeSubscribeResponse) => void
+  ): Promise<ResumeSubscribeResponse> {
+    return this.request("ResumeSubscribe", req, cb)
+  }
+
+  /**
+   * 本接口用于校验检查项不通过后，可进行跳过此校验项操作，后端将不再校验该项。任何校验步骤都是不应该跳过的，通过校验是能正确执行的前置条件。支持跳过的产品及链路的校验项可 [参考文档](https://cloud.tencent.com/document/product/571/61639)。
+   */
+  async SkipSyncCheckItem(
+    req: SkipSyncCheckItemRequest,
+    cb?: (error: string, rep: SkipSyncCheckItemResponse) => void
+  ): Promise<SkipSyncCheckItemResponse> {
+    return this.request("SkipSyncCheckItem", req, cb)
+  }
+
+  /**
+   * 本接口（DestroyIsolatedSubscribe）用于下线已隔离的数据订阅实例
+   */
+  async DestroyIsolatedSubscribe(
+    req: DestroyIsolatedSubscribeRequest,
+    cb?: (error: string, rep: DestroyIsolatedSubscribeResponse) => void
+  ): Promise<DestroyIsolatedSubscribeResponse> {
+    return this.request("DestroyIsolatedSubscribe", req, cb)
   }
 
   /**
@@ -236,6 +324,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口(DescribeSubscribes)获取数据订阅实例信息列表，默认分页，每次返回20条
+   */
+  async DescribeSubscribeJobs(
+    req: DescribeSubscribeJobsRequest,
+    cb?: (error: string, rep: DescribeSubscribeJobsResponse) => void
+  ): Promise<DescribeSubscribeJobsResponse> {
+    return this.request("DescribeSubscribeJobs", req, cb)
+  }
+
+  /**
    * 用户在发现迁移任务对用户的数据库的负载影响较大时、可通过该接口限制任务的传输速率
    */
   async ModifyMigrateRateLimit(
@@ -243,6 +341,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyMigrateRateLimitResponse) => void
   ): Promise<ModifyMigrateRateLimitResponse> {
     return this.request("ModifyMigrateRateLimit", req, cb)
+  }
+
+  /**
+   * 本接口(DescribeSubscribeReturnable)用于查询订阅任务是否可以销毁和退货。
+   */
+  async DescribeSubscribeReturnable(
+    req: DescribeSubscribeReturnableRequest,
+    cb?: (error: string, rep: DescribeSubscribeReturnableResponse) => void
+  ): Promise<DescribeSubscribeReturnableResponse> {
+    return this.request("DescribeSubscribeReturnable", req, cb)
   }
 
   /**
@@ -276,6 +384,46 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口(ConfigureSubscribeJob)用于配置数据订阅实例。
+   */
+  async ConfigureSubscribeJob(
+    req: ConfigureSubscribeJobRequest,
+    cb?: (error: string, rep: ConfigureSubscribeJobResponse) => void
+  ): Promise<ConfigureSubscribeJobResponse> {
+    return this.request("ConfigureSubscribeJob", req, cb)
+  }
+
+  /**
+   * 本接口(DescribeConsumerGroups)用于获取订阅实例配置的消费者组详情。
+   */
+  async DescribeConsumerGroups(
+    req: DescribeConsumerGroupsRequest,
+    cb?: (error: string, rep: DescribeConsumerGroupsResponse) => void
+  ): Promise<DescribeConsumerGroupsResponse> {
+    return this.request("DescribeConsumerGroups", req, cb)
+  }
+
+  /**
+   * 为订阅实例创建消费者组
+   */
+  async CreateConsumerGroup(
+    req: CreateConsumerGroupRequest,
+    cb?: (error: string, rep: CreateConsumerGroupResponse) => void
+  ): Promise<CreateConsumerGroupResponse> {
+    return this.request("CreateConsumerGroup", req, cb)
+  }
+
+  /**
+   * 本接口(ResetConsumerGroupOffset)用于重置订阅消费组的offset。掉用DescribeConsumerGroups接口查询消费组状态，只有消费组状态为 Dead 或 Empty 才可以执行重置该操作。否则重置不会生效，接口也不会报错。
+   */
+  async ResetConsumerGroupOffset(
+    req: ResetConsumerGroupOffsetRequest,
+    cb?: (error: string, rep: ResetConsumerGroupOffsetResponse) => void
+  ): Promise<ResetConsumerGroupOffsetResponse> {
+    return this.request("ResetConsumerGroupOffset", req, cb)
+  }
+
+  /**
    * 删除一致性校验任务。当一致性校验任务状态为success、failed、canceled 时可以执行此操作。
    */
   async DeleteCompareTask(
@@ -283,6 +431,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteCompareTaskResponse) => void
   ): Promise<DeleteCompareTaskResponse> {
     return this.request("DeleteCompareTask", req, cb)
+  }
+
+  /**
+   * 本接口(StartSubscribe)用于启动一个kafka版本的数据订阅实例。只有当订阅任务的状态为checkPass时，才能调用本接口。
+   */
+  async StartSubscribe(
+    req: StartSubscribeRequest,
+    cb?: (error: string, rep: StartSubscribeResponse) => void
+  ): Promise<StartSubscribeResponse> {
+    return this.request("StartSubscribe", req, cb)
   }
 
   /**
@@ -346,13 +504,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口用于校验检查项不通过后，可进行跳过此校验项操作，后端将不再校验该项。任何校验步骤都是不应该跳过的，通过校验是能正确执行的前置条件。支持跳过的产品及链路的校验项可 [参考文档](https://cloud.tencent.com/document/product/571/61639)。
+   * 本接口(ModifySubscribeObjects)用于修改数据订阅对象和kafka分区规则，如果是mongo订阅，还可以修改输出聚合规则。
    */
-  async SkipSyncCheckItem(
-    req: SkipSyncCheckItemRequest,
-    cb?: (error: string, rep: SkipSyncCheckItemResponse) => void
-  ): Promise<SkipSyncCheckItemResponse> {
-    return this.request("SkipSyncCheckItem", req, cb)
+  async ModifySubscribeObjects(
+    req: ModifySubscribeObjectsRequest,
+    cb?: (error: string, rep: ModifySubscribeObjectsResponse) => void
+  ): Promise<ModifySubscribeObjectsResponse> {
+    return this.request("ModifySubscribeObjects", req, cb)
   }
 
   /**
@@ -363,6 +521,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ConfigureSyncJobResponse) => void
   ): Promise<ConfigureSyncJobResponse> {
     return this.request("ConfigureSyncJob", req, cb)
+  }
+
+  /**
+   * 本接口（IsolateSubscribe）用于隔离订阅任务。调用后，订阅任务将不能使用。按量计费的任务会停止计费，包年包月的任务会自动退费
+   */
+  async IsolateSubscribe(
+    req: IsolateSubscribeRequest,
+    cb?: (error: string, rep: IsolateSubscribeResponse) => void
+  ): Promise<IsolateSubscribeResponse> {
+    return this.request("IsolateSubscribe", req, cb)
   }
 
   /**
@@ -383,6 +551,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ResizeSyncJobResponse) => void
   ): Promise<ResizeSyncJobResponse> {
     return this.request("ResizeSyncJob", req, cb)
+  }
+
+  /**
+   * 修改订阅实例自动续费标识。只有包年包月的任务修改才有意义，按量计费任务修改后无影响。
+   */
+  async ModifySubscribeAutoRenewFlag(
+    req: ModifySubscribeAutoRenewFlagRequest,
+    cb?: (error: string, rep: ModifySubscribeAutoRenewFlagResponse) => void
+  ): Promise<ModifySubscribeAutoRenewFlagResponse> {
+    return this.request("ModifySubscribeAutoRenewFlag", req, cb)
   }
 
   /**
@@ -448,6 +626,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口(DescribeSubscribeCheckJob)用于查询订阅校验任务结果。
+   */
+  async DescribeSubscribeCheckJob(
+    req: DescribeSubscribeCheckJobRequest,
+    cb?: (error: string, rep: DescribeSubscribeCheckJobResponse) => void
+  ): Promise<DescribeSubscribeCheckJobResponse> {
+    return this.request("DescribeSubscribeCheckJob", req, cb)
+  }
+
+  /**
    * 恢复处于已暂停状态的数据同步任务。
    */
   async ContinueSyncJob(
@@ -468,6 +656,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口(ModifyConsumerGroupDescription)用于修改指定订阅消费组备注。
+   */
+  async ModifyConsumerGroupDescription(
+    req: ModifyConsumerGroupDescriptionRequest,
+    cb?: (error: string, rep: ModifyConsumerGroupDescriptionResponse) => void
+  ): Promise<ModifyConsumerGroupDescriptionResponse> {
+    return this.request("ModifyConsumerGroupDescription", req, cb)
+  }
+
+  /**
    * 本接口用于查询支持迁移的云数据库实例
    */
   async DescribeMigrateDBInstances(
@@ -485,6 +683,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: SkipCheckItemResponse) => void
   ): Promise<SkipCheckItemResponse> {
     return this.request("SkipCheckItem", req, cb)
+  }
+
+  /**
+   * 本接口(ModifyConsumerGroupPassword)用于修改指定订阅消费组密码。
+   */
+  async ModifyConsumerGroupPassword(
+    req: ModifyConsumerGroupPasswordRequest,
+    cb?: (error: string, rep: ModifyConsumerGroupPasswordResponse) => void
+  ): Promise<ModifyConsumerGroupPasswordResponse> {
+    return this.request("ModifyConsumerGroupPassword", req, cb)
+  }
+
+  /**
+   * 本接口(CreateSubscribeCheckJob)用于创建一个订阅校验任务。任务必须已经成功调用ConfigureSubscribeJob接口配置了所有的必要信息才能启动校验。
+   */
+  async CreateSubscribeCheckJob(
+    req: CreateSubscribeCheckJobRequest,
+    cb?: (error: string, rep: CreateSubscribeCheckJobResponse) => void
+  ): Promise<CreateSubscribeCheckJobResponse> {
+    return this.request("CreateSubscribeCheckJob", req, cb)
   }
 
   /**
@@ -531,6 +749,26 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口(DescribeSubscribeDetail)获取数据订阅实例的配置信息。
+   */
+  async DescribeSubscribeDetail(
+    req: DescribeSubscribeDetailRequest,
+    cb?: (error: string, rep: DescribeSubscribeDetailResponse) => void
+  ): Promise<DescribeSubscribeDetailResponse> {
+    return this.request("DescribeSubscribeDetail", req, cb)
+  }
+
+  /**
+   * 本接口(DeleteConsumerGroup)用于删除一个订阅任务的消费组。
+   */
+  async DeleteConsumerGroup(
+    req: DeleteConsumerGroupRequest,
+    cb?: (error: string, rep: DeleteConsumerGroupResponse) => void
+  ): Promise<DeleteConsumerGroupResponse> {
+    return this.request("DeleteConsumerGroup", req, cb)
+  }
+
+  /**
    * 查询数据迁移任务列表
    */
   async DescribeMigrationJobs(
@@ -551,6 +789,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口(CreateSubscribe)用于创建一个数据订阅任务。
+   */
+  async CreateSubscribe(
+    req: CreateSubscribeRequest,
+    cb?: (error: string, rep: CreateSubscribeResponse) => void
+  ): Promise<CreateSubscribeResponse> {
+    return this.request("CreateSubscribe", req, cb)
+  }
+
+  /**
    * 解除隔离同步任务，任务在已隔离状态下可调用该接口解除隔离状态任务，同时可通过查询同步任务信息接口DescribeSyncJobs，获取操作后状态。
    */
   async RecoverSyncJob(
@@ -558,6 +806,17 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: RecoverSyncJobResponse) => void
   ): Promise<RecoverSyncJobResponse> {
     return this.request("RecoverSyncJob", req, cb)
+  }
+
+  /**
+     * 本接口(ResetSubscribe)用于重置订阅实例，重置后，可以重新配置订阅任务。
+可以调用 DescribeSubscribeDetail 查询订阅信息判断是否置成功。当SubsStatus变为notStarted时，表示重置成功。
+     */
+  async ResetSubscribe(
+    req: ResetSubscribeRequest,
+    cb?: (error: string, rep: ResetSubscribeResponse) => void
+  ): Promise<ResetSubscribeResponse> {
+    return this.request("ResetSubscribe", req, cb)
   }
 
   /**
@@ -581,6 +840,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口(ModifySubscribeName)用于修改数据订阅实例的名称
+   */
+  async ModifySubscribeName(
+    req: ModifySubscribeNameRequest,
+    cb?: (error: string, rep: ModifySubscribeNameResponse) => void
+  ): Promise<ModifySubscribeNameResponse> {
+    return this.request("ModifySubscribeName", req, cb)
+  }
+
+  /**
    * 下线数据迁移任务。计费任务必须先调用隔离(IsolateMigrateJob)接口，且只有是**已隔离**状态下，才能调用此接口销毁任务。对于不计费任务，调用隔离(IsolateMigrateJob)接口删除任务操作。
    */
   async DestroyMigrateJob(
@@ -598,6 +867,20 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeMigrationDetailResponse) => void
   ): Promise<DescribeMigrationDetailResponse> {
     return this.request("DescribeMigrationDetail", req, cb)
+  }
+
+  /**
+     * 本接口(DescribeOffsetByTime)查询KafkaTopic中指定时间前最近的offset。
+接口输出的offset是离这个时间最近的offset。
+如果输入时间比当前时间晚的多，相当于输出的就是最新的offset；
+如果输入时间比当前时间早的多，相当于输出的就是最老的offset；
+如果输入空，默认0时间，也就是查询最老的offset。
+     */
+  async DescribeOffsetByTime(
+    req: DescribeOffsetByTimeRequest,
+    cb?: (error: string, rep: DescribeOffsetByTimeResponse) => void
+  ): Promise<DescribeOffsetByTimeResponse> {
+    return this.request("DescribeOffsetByTime", req, cb)
   }
 
   /**
