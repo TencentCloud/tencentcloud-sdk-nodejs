@@ -28,7 +28,7 @@ class Client extends abstract_client_1.AbstractClient {
         super("cloudaudit.tencentcloudapi.com", "2019-03-19", clientConfig);
     }
     /**
-     * 修改云审计跟踪
+     * 修改操作审计跟踪集
      */
     async ModifyAuditTrack(req, cb) {
         return this.request("ModifyAuditTrack", req, cb);
@@ -40,7 +40,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("StartLogging", req, cb);
     }
     /**
-     * 查询云审计跟踪集详情
+     * 查询操作审计跟踪集详情
      */
     async DescribeAuditTrack(req, cb) {
         return this.request("DescribeAuditTrack", req, cb);
@@ -52,7 +52,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("GetAttributeKey", req, cb);
     }
     /**
-     * 创建跟踪集
+     * 创建操作审计跟踪集
      */
     async CreateAuditTrack(req, cb) {
         return this.request("CreateAuditTrack", req, cb);
@@ -70,7 +70,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteAudit", req, cb);
     }
     /**
-     * 查询云审计日志
+     * 查询操作审计日志
      */
     async DescribeEvents(req, cb) {
         return this.request("DescribeEvents", req, cb);
@@ -88,7 +88,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ListCosEnableRegion", req, cb);
     }
     /**
-     * 查询云审计跟踪集列表
+     * 查询操作审计跟踪集列表
      */
     async DescribeAuditTracks(req, cb) {
         return this.request("DescribeAuditTracks", req, cb);
@@ -132,7 +132,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateAudit", req, cb);
     }
     /**
-     * 删除云审计跟踪集
+     * 删除操作审计跟踪集
      */
     async DeleteAuditTrack(req, cb) {
         return this.request("DeleteAuditTrack", req, cb);

@@ -8,7 +8,7 @@ import { InquireAuditCreditResponse, StopLoggingRequest, GetAttributeKeyRequest,
 export declare class Client extends AbstractClient {
     constructor(clientConfig: ClientConfig);
     /**
-     * 修改云审计跟踪
+     * 修改操作审计跟踪集
      */
     ModifyAuditTrack(req: ModifyAuditTrackRequest, cb?: (error: string, rep: ModifyAuditTrackResponse) => void): Promise<ModifyAuditTrackResponse>;
     /**
@@ -16,7 +16,7 @@ export declare class Client extends AbstractClient {
      */
     StartLogging(req: StartLoggingRequest, cb?: (error: string, rep: StartLoggingResponse) => void): Promise<StartLoggingResponse>;
     /**
-     * 查询云审计跟踪集详情
+     * 查询操作审计跟踪集详情
      */
     DescribeAuditTrack(req: DescribeAuditTrackRequest, cb?: (error: string, rep: DescribeAuditTrackResponse) => void): Promise<DescribeAuditTrackResponse>;
     /**
@@ -24,7 +24,7 @@ export declare class Client extends AbstractClient {
      */
     GetAttributeKey(req: GetAttributeKeyRequest, cb?: (error: string, rep: GetAttributeKeyResponse) => void): Promise<GetAttributeKeyResponse>;
     /**
-     * 创建跟踪集
+     * 创建操作审计跟踪集
      */
     CreateAuditTrack(req: CreateAuditTrackRequest, cb?: (error: string, rep: CreateAuditTrackResponse) => void): Promise<CreateAuditTrackResponse>;
     /**
@@ -36,7 +36,7 @@ export declare class Client extends AbstractClient {
      */
     DeleteAudit(req: DeleteAuditRequest, cb?: (error: string, rep: DeleteAuditResponse) => void): Promise<DeleteAuditResponse>;
     /**
-     * 查询云审计日志
+     * 查询操作审计日志
      */
     DescribeEvents(req: DescribeEventsRequest, cb?: (error: string, rep: DescribeEventsResponse) => void): Promise<DescribeEventsResponse>;
     /**
@@ -48,7 +48,7 @@ export declare class Client extends AbstractClient {
      */
     ListCosEnableRegion(req: ListCosEnableRegionRequest, cb?: (error: string, rep: ListCosEnableRegionResponse) => void): Promise<ListCosEnableRegionResponse>;
     /**
-     * 查询云审计跟踪集列表
+     * 查询操作审计跟踪集列表
      */
     DescribeAuditTracks(req: DescribeAuditTracksRequest, cb?: (error: string, rep: DescribeAuditTracksResponse) => void): Promise<DescribeAuditTracksResponse>;
     /**
@@ -80,7 +80,7 @@ export declare class Client extends AbstractClient {
      */
     CreateAudit(req: CreateAuditRequest, cb?: (error: string, rep: CreateAuditResponse) => void): Promise<CreateAuditResponse>;
     /**
-     * 删除云审计跟踪集
+     * 删除操作审计跟踪集
      */
     DeleteAuditTrack(req: DeleteAuditTrackRequest, cb?: (error: string, rep: DeleteAuditTrackResponse) => void): Promise<DeleteAuditTrackResponse>;
     /**

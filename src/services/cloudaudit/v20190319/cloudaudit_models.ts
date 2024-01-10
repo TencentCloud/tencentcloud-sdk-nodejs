@@ -83,6 +83,16 @@ export interface Storage {
    * 存储目录前缀，cos日志文件前缀仅支持字母和数字的组合，3-40个字符
    */
   StoragePrefix: string
+  /**
+   * 被指定存储用户ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StorageAccountId?: string
+  /**
+   * 被指定存储用户appid
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StorageAppId?: string
 }
 
 /**
@@ -433,7 +443,7 @@ export interface CreateAuditTrackResponse {
   /**
    * 跟踪集 ID
    */
-  TrackId: number
+  TrackId?: number
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -446,10 +456,12 @@ export interface CreateAuditTrackResponse {
 export interface Resource {
   /**
    * 资源类型
+注意：此字段可能返回 null，表示取不到有效值。
    */
   ResourceType?: string
   /**
    * 资源名称
+注意：此字段可能返回 null，表示取不到有效值。
    */
   ResourceName?: string
 }
@@ -609,7 +621,7 @@ export interface DescribeEventsRequest {
    */
   MaxResults?: number
   /**
-   * 检索条件（目前支持 RequestId：请求 ID、EventName：事件名称、ActionType：操作类型（Write：写；Read：读）、PrincipalId：子账号、ResourceType：资源类型、ResourceName：资源名称、AccessKeyId：密钥 ID、SensitiveAction：是否敏感操作、ApiErrorCode：API 错误码、CamErrorCode：CAM 错误码、Tags：标签（AttributeValue格式：[{"key":"*","value":"*"}]）备注:检索的各个条件间是与的关系,EventName传多个值内部是或的关系）
+   * 检索条件（目前支持 RequestId：请求 ID、EventName：事件名称、ActionType：操作类型（Write：写；Read：读）、PrincipalId：子账号、ResourceType：资源类型、ResourceId：资源Id、ResourceName：资源名称、AccessKeyId：密钥 ID、SensitiveAction：是否敏感操作、ApiErrorCode：API 错误码、CamErrorCode：CAM 错误码、Tags：标签（AttributeValue格式：[{"key":"*","value":"*"}]）备注:检索的各个条件间是与的关系,EventName传多个值内部是或的关系）
    */
   LookupAttributes?: Array<LookupAttribute>
   /**
@@ -822,36 +834,36 @@ export interface DescribeAuditTrackResponse {
   /**
    * 跟踪集名称
    */
-  Name: string
+  Name?: string
   /**
    * 跟踪事件类型（读：Read；写：Write；全部：*）
    */
-  ActionType: string
+  ActionType?: string
   /**
    * 跟踪事件所属产品（如：cos，全部：*）
    */
-  ResourceType: string
+  ResourceType?: string
   /**
    * 跟踪集状态（未开启：0；开启：1）
    */
-  Status: number
+  Status?: number
   /**
    * 跟踪事件接口名列表（全部：[*]）
    */
-  EventNames: Array<string>
+  EventNames?: Array<string>
   /**
    * 数据投递存储（目前支持 cos、cls）
    */
-  Storage: Storage
+  Storage?: Storage
   /**
    * 跟踪集创建时间
    */
-  CreateTime: string
+  CreateTime?: string
   /**
    * 是否开启将集团成员操作日志投递到集团管理账号或者可信服务管理账号
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TrackForAllMembers: number
+  TrackForAllMembers?: number
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

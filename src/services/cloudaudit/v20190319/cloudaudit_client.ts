@@ -78,7 +78,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改云审计跟踪
+   * 修改操作审计跟踪集
    */
   async ModifyAuditTrack(
     req: ModifyAuditTrackRequest,
@@ -98,7 +98,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询云审计跟踪集详情
+   * 查询操作审计跟踪集详情
    */
   async DescribeAuditTrack(
     req: DescribeAuditTrackRequest,
@@ -118,7 +118,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建跟踪集
+   * 创建操作审计跟踪集
    */
   async CreateAuditTrack(
     req: CreateAuditTrackRequest,
@@ -148,7 +148,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询云审计日志
+   * 查询操作审计日志
    */
   async DescribeEvents(
     req: DescribeEventsRequest,
@@ -178,7 +178,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询云审计跟踪集列表
+   * 查询操作审计跟踪集列表
    */
   async DescribeAuditTracks(
     req: DescribeAuditTracksRequest,
@@ -246,7 +246,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除云审计跟踪集
+   * 删除操作审计跟踪集
    */
   async DeleteAuditTrack(
     req: DeleteAuditTrackRequest,

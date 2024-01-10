@@ -3241,7 +3241,8 @@ export interface PresetLayoutConfig {
  */
 export interface McuPublishCdnParam {
   /**
-   * CDN转推URL。注：若更新转推时，URL有任何变化，都会断流重推。
+   * CDN转推URL，只支持rtmp链接。
+注：若更新转推时，URL有任何变化，都会断流重推。
    */
   PublishCdnUrl: string
   /**
