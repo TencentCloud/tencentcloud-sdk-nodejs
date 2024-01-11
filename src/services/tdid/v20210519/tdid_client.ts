@@ -18,37 +18,27 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
-  CredentialStatus,
-  CreateTDidRequest,
-  CreateSelectiveCredentialRequest,
-  CreateTDidByPrivateKeyResponse,
-  CheckChainResponse,
-  CreateTDidByPublicKeyRequest,
-  CreateCredentialResponse,
-  GetAuthorityIssuerRequest,
-  CreateCredentialRequest,
-  GetDidDocumentRequest,
-  GetCredentialStatusRequest,
-  VerifyCredentialResponse,
-  SetCredentialStatusResponse,
-  GetCptInfoResponse,
-  TransactionArg,
-  CheckChainRequest,
-  GetAuthorityIssuerResponse,
-  GetDidDocumentResponse,
-  CreateTDidResponse,
-  CreateSelectiveCredentialResponse,
-  RegisterCptRequest,
-  CreateTDidByPublicKeyResponse,
-  Proof,
-  VerifyFunctionArg,
-  FunctionArg,
-  CreateTDidByPrivateKeyRequest,
-  VerifyCredentialRequest,
-  SetCredentialStatusRequest,
-  GetCptInfoRequest,
-  GetCredentialStatusResponse,
-  RegisterCptResponse,
+  CreateTDidByPubKeyResponse,
+  GetTDidDocumentResponse,
+  GetCredentialStateRequest,
+  CheckNewPurchaseRequest,
+  VerifyCredentialsRequest,
+  CRDLArg,
+  GetTDidDocumentRequest,
+  IssueCredentialResponse,
+  GetCredentialStateResponse,
+  CreateTDidByHostRequest,
+  IssueCredentialRequest,
+  VerifyCredentialsResponse,
+  UpdateCredentialStateRequest,
+  CredentialState,
+  CreateTDidByPubKeyRequest,
+  DeactivateTDidRequest,
+  CheckNewPurchaseResponse,
+  UpdateCredentialStateResponse,
+  ChainTransaction,
+  DeactivateTDidResponse,
+  CreateTDidByHostResponse,
 } from "./tdid_models"
 
 /**
@@ -61,159 +51,92 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 该接口不再使用
-
-凭证模版详情
-     */
-  async GetCptInfo(
-    req: GetCptInfoRequest,
-    cb?: (error: string, rep: GetCptInfoResponse) => void
-  ): Promise<GetCptInfoResponse> {
-    return this.request("GetCptInfo", req, cb)
+   * 验证已签名的可验证凭证
+   */
+  async VerifyCredentials(
+    req: VerifyCredentialsRequest,
+    cb?: (error: string, rep: VerifyCredentialsResponse) => void
+  ): Promise<VerifyCredentialsResponse> {
+    return this.request("VerifyCredentials", req, cb)
   }
 
   /**
-     * 该接口不再使用
-
-查看DID文档
-
-     */
-  async GetDidDocument(
-    req: GetDidDocumentRequest,
-    cb?: (error: string, rep: GetDidDocumentResponse) => void
-  ): Promise<GetDidDocumentResponse> {
-    return this.request("GetDidDocument", req, cb)
+   * 自动生成公私钥对托管在DID平台，并注册DID标识
+   */
+  async CreateTDidByHost(
+    req: CreateTDidByHostRequest,
+    cb?: (error: string, rep: CreateTDidByHostResponse) => void
+  ): Promise<CreateTDidByHostResponse> {
+    return this.request("CreateTDidByHost", req, cb)
   }
 
   /**
-     * 该接口不再使用
-
-创建选择性批露凭证
-     */
-  async CreateSelectiveCredential(
-    req: CreateSelectiveCredentialRequest,
-    cb?: (error: string, rep: CreateSelectiveCredentialResponse) => void
-  ): Promise<CreateSelectiveCredentialResponse> {
-    return this.request("CreateSelectiveCredential", req, cb)
+   * 使用导入的公钥文件注册DID标识
+   */
+  async CreateTDidByPubKey(
+    req: CreateTDidByPubKeyRequest,
+    cb?: (error: string, rep: CreateTDidByPubKeyResponse) => void
+  ): Promise<CreateTDidByPubKeyResponse> {
+    return this.request("CreateTDidByPubKey", req, cb)
   }
 
   /**
-     * 该接口不再使用
-
-创建机构DID
-     */
-  async CreateTDid(
-    req: CreateTDidRequest,
-    cb?: (error: string, rep: CreateTDidResponse) => void
-  ): Promise<CreateTDidResponse> {
-    return this.request("CreateTDid", req, cb)
+   * 获取DID标识的文档
+   */
+  async GetTDidDocument(
+    req: GetTDidDocumentRequest,
+    cb?: (error: string, rep: GetTDidDocumentResponse) => void
+  ): Promise<GetTDidDocumentResponse> {
+    return this.request("GetTDidDocument", req, cb)
   }
 
   /**
-     * 该接口不再使用
-
-创建凭证
-     */
-  async CreateCredential(
-    req: CreateCredentialRequest,
-    cb?: (error: string, rep: CreateCredentialResponse) => void
-  ): Promise<CreateCredentialResponse> {
-    return this.request("CreateCredential", req, cb)
+   * 更新凭证的链上状态
+   */
+  async UpdateCredentialState(
+    req: UpdateCredentialStateRequest,
+    cb?: (error: string, rep: UpdateCredentialStateResponse) => void
+  ): Promise<UpdateCredentialStateResponse> {
+    return this.request("UpdateCredentialState", req, cb)
   }
 
   /**
-     * 该接口不再使用
-
- 新建DID根据公钥生成Tdid
-     */
-  async CreateTDidByPublicKey(
-    req: CreateTDidByPublicKeyRequest,
-    cb?: (error: string, rep: CreateTDidByPublicKeyResponse) => void
-  ): Promise<CreateTDidByPublicKeyResponse> {
-    return this.request("CreateTDidByPublicKey", req, cb)
+   * 更新DID标识的禁用状态
+   */
+  async DeactivateTDid(
+    req: DeactivateTDidRequest,
+    cb?: (error: string, rep: DeactivateTDidResponse) => void
+  ): Promise<DeactivateTDidResponse> {
+    return this.request("DeactivateTDid", req, cb)
   }
 
   /**
-     * 该接口不再使用
-
-获取凭证链上状态信息
-     */
-  async GetCredentialStatus(
-    req: GetCredentialStatusRequest,
-    cb?: (error: string, rep: GetCredentialStatusResponse) => void
-  ): Promise<GetCredentialStatusResponse> {
-    return this.request("GetCredentialStatus", req, cb)
+   * 获取凭证链上状态信息
+   */
+  async GetCredentialState(
+    req: GetCredentialStateRequest,
+    cb?: (error: string, rep: GetCredentialStateResponse) => void
+  ): Promise<GetCredentialStateResponse> {
+    return this.request("GetCredentialState", req, cb)
   }
 
   /**
-     * 该接口不再使用
-
-新建DID根据私钥生成Tdid
-     */
-  async CreateTDidByPrivateKey(
-    req: CreateTDidByPrivateKeyRequest,
-    cb?: (error: string, rep: CreateTDidByPrivateKeyResponse) => void
-  ): Promise<CreateTDidByPrivateKeyResponse> {
-    return this.request("CreateTDidByPrivateKey", req, cb)
+   * 颁发可验证凭证
+   */
+  async IssueCredential(
+    req: IssueCredentialRequest,
+    cb?: (error: string, rep: IssueCredentialResponse) => void
+  ): Promise<IssueCredentialResponse> {
+    return this.request("IssueCredential", req, cb)
   }
 
   /**
-     * 该接口不再使用
-
-检查区块链信息
-     */
-  async CheckChain(
-    req: CheckChainRequest,
-    cb?: (error: string, rep: CheckChainResponse) => void
-  ): Promise<CheckChainResponse> {
-    return this.request("CheckChain", req, cb)
-  }
-
-  /**
-     * 该接口不再使用
-
-凭证模版新建
-     */
-  async RegisterCpt(
-    req: RegisterCptRequest,
-    cb?: (error: string, rep: RegisterCptResponse) => void
-  ): Promise<RegisterCptResponse> {
-    return this.request("RegisterCpt", req, cb)
-  }
-
-  /**
-     * 该接口不再使用
-
-验证凭证
-     */
-  async VerifyCredential(
-    req: VerifyCredentialRequest,
-    cb?: (error: string, rep: VerifyCredentialResponse) => void
-  ): Promise<VerifyCredentialResponse> {
-    return this.request("VerifyCredential", req, cb)
-  }
-
-  /**
-     * 该接口不再使用
-
-获取权威机构信息
-     */
-  async GetAuthorityIssuer(
-    req: GetAuthorityIssuerRequest,
-    cb?: (error: string, rep: GetAuthorityIssuerResponse) => void
-  ): Promise<GetAuthorityIssuerResponse> {
-    return this.request("GetAuthorityIssuer", req, cb)
-  }
-
-  /**
-     * 该接口不再使用
-
-设置凭证链上状态
-     */
-  async SetCredentialStatus(
-    req: SetCredentialStatusRequest,
-    cb?: (error: string, rep: SetCredentialStatusResponse) => void
-  ): Promise<SetCredentialStatusResponse> {
-    return this.request("SetCredentialStatus", req, cb)
+   * 检查用户套餐购买状态
+   */
+  async CheckNewPurchase(
+    req?: CheckNewPurchaseRequest,
+    cb?: (error: string, rep: CheckNewPurchaseResponse) => void
+  ): Promise<CheckNewPurchaseResponse> {
+    return this.request("CheckNewPurchase", req, cb)
   }
 }

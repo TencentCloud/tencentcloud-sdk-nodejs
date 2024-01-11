@@ -16,78 +16,17 @@
  */
 
 /**
- * 凭证链上状态信息
+ * CreateTDidByPubKey返回参数结构体
  */
-export interface CredentialStatus {
+export interface CreateTDidByPubKeyResponse {
   /**
-   * 凭证唯一id
+   * did标识
    */
-  CredentialId: string
+  Did?: string
   /**
-   * 凭证状态（0：吊销；1：有效）
+   * 链上交易信息
    */
-  Status: number
-  /**
-   * 凭证颁发者Did
-   */
-  Issuer: string
-  /**
-   * 凭证摘要
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Digest: string
-  /**
-   * 凭证签名
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Signature: string
-  /**
-   * 更新时间戳
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TimeStamp: number
-}
-
-/**
- * CreateTDid请求参数结构体
- */
-export interface CreateTDidRequest {
-  /**
-   * 群组ID
-   */
-  GroupId: number
-  /**
-   * 网络ID
-   */
-  ClusterId: string
-  /**
-   * 部署机构为1，否则为0
-   */
-  Relegation: number
-}
-
-/**
- * CreateSelectiveCredential请求参数结构体
- */
-export interface CreateSelectiveCredentialRequest {
-  /**
-   * 参数集合
-   */
-  FunctionArg: VerifyFunctionArg
-  /**
-   * 批露策略id
-   */
-  PolicyId: number
-}
-
-/**
- * CreateTDidByPrivateKey返回参数结构体
- */
-export interface CreateTDidByPrivateKeyResponse {
-  /**
-   * did的具体信息
-   */
-  Did: string
+  Transaction?: ChainTransaction
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -95,21 +34,13 @@ export interface CreateTDidByPrivateKeyResponse {
 }
 
 /**
- * CheckChain返回参数结构体
+ * GetTDidDocument返回参数结构体
  */
-export interface CheckChainResponse {
+export interface GetTDidDocumentResponse {
   /**
-   * 1为盟主，0为非盟主
+   * DID文档内容
    */
-  RoleType: number
-  /**
-   * 链ID
-   */
-  ChainId: string
-  /**
-   * 应用名称
-   */
-  AppName: string
+  Document?: string
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -117,363 +48,50 @@ export interface CheckChainResponse {
 }
 
 /**
- * CreateTDidByPublicKey请求参数结构体
+ * GetCredentialState请求参数结构体
  */
-export interface CreateTDidByPublicKeyRequest {
+export interface GetCredentialStateRequest {
   /**
-   * 网络ID
+   * 凭证唯一Id
    */
-  ClusterId: string
+  CredentialId?: string
   /**
-   * 群组ID
+   * 用户应用Id
    */
-  GroupId: number
-  /**
-   * 身份公钥
-   */
-  PublicKey: string
-  /**
-   * 加密公钥
-   */
-  EncryptPubKey?: string
+  DAPId?: number
 }
 
 /**
- * CreateCredential返回参数结构体
+ * CheckNewPurchase请求参数结构体
  */
-export interface CreateCredentialResponse {
+export type CheckNewPurchaseRequest = null
+
+/**
+ * VerifyCredentials请求参数结构体
+ */
+export interface VerifyCredentialsRequest {
   /**
-   * Credential的具体信息
+   * 0:仅验证签名，1:验证签名和链上状态，2, 仅验证链上状态，默认为0, 3.验证DID和凭证状态以及签名，4. 验证历史凭证有效性
    */
-  CredentialData: string
+  VerifyType?: number
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 凭证内容
    */
-  RequestId?: string
+  CredentialData?: string
+  /**
+   * DID应用id
+   */
+  DAPId?: number
 }
 
 /**
- * GetAuthorityIssuer请求参数结构体
+ * 颁发凭证的数据参数
  */
-export interface GetAuthorityIssuerRequest {
-  /**
-   * tdid
-   */
-  Did: string
-}
-
-/**
- * CreateCredential请求参数结构体
- */
-export interface CreateCredentialRequest {
-  /**
-   * 参数集合，详见示例
-   */
-  FunctionArg: FunctionArg
-  /**
-   * 参数集合，详见示例
-   */
-  TransactionArg: TransactionArg
-  /**
-   * 版本
-   */
-  VersionCredential: string
-  /**
-   * 是否未签名
-   */
-  UnSigned?: boolean
-}
-
-/**
- * GetDidDocument请求参数结构体
- */
-export interface GetDidDocumentRequest {
-  /**
-   * tdid
-   */
-  Did: string
-}
-
-/**
- * GetCredentialStatus请求参数结构体
- */
-export interface GetCredentialStatusRequest {
-  /**
-   * 凭证id
-   */
-  CredentialId: string
-}
-
-/**
- * VerifyCredential返回参数结构体
- */
-export interface VerifyCredentialResponse {
-  /**
-   * 是否验证成功
-   */
-  Result: boolean
-  /**
-   * 验证返回码
-   */
-  VerifyCode: number
-  /**
-   * 验证消息
-   */
-  VerifyMessage: string
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * SetCredentialStatus返回参数结构体
- */
-export interface SetCredentialStatusResponse {
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * GetCptInfo返回参数结构体
- */
-export interface GetCptInfoResponse {
-  /**
-   * CptJsonData的具体信息
-   */
-  CptJsonData: string
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * 创建凭证第二个
- */
-export interface TransactionArg {
-  /**
-   * 凭证did
-   */
-  InvokerTDid: string
-}
-
-/**
- * CheckChain请求参数结构体
- */
-export interface CheckChainRequest {
-  /**
-   * 群组ID
-   */
-  GroupId: number
-  /**
-   * 网络ID
-   */
-  ClusterId: string
-  /**
-   * did服务机构名称
-   */
-  AgencyName: string
-}
-
-/**
- * GetAuthorityIssuer返回参数结构体
- */
-export interface GetAuthorityIssuerResponse {
-  /**
-   * 名称
-   */
-  Name: string
-  /**
-   * 区块链网络id
-   */
-  ClusterId: string
-  /**
-   * 区块链群组id
-   */
-  GroupId: number
-  /**
-   * 权威机构did
-   */
-  Did: string
-  /**
-   * 机构备注信息
-   */
-  Remark: string
-  /**
-   * 注册时间
-   */
-  RegisterTime: string
-  /**
-   * 认证时间
-   */
-  RecognizeTime: string
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * GetDidDocument返回参数结构体
- */
-export interface GetDidDocumentResponse {
-  /**
-   * 名称
-   */
-  Name: string
-  /**
-   * DID文档
-   */
-  Document: string
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * CreateTDid返回参数结构体
- */
-export interface CreateTDidResponse {
-  /**
-   * TDID
-   */
-  Did: string
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * CreateSelectiveCredential返回参数结构体
- */
-export interface CreateSelectiveCredentialResponse {
-  /**
-   * 凭证字符串
-   */
-  CredentialData: string
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * RegisterCpt请求参数结构体
- */
-export interface RegisterCptRequest {
-  /**
-   * 群组ID
-   */
-  GroupId: number
-  /**
-   * 网络ID
-   */
-  ClusterId: string
-  /**
-   * CptJson的具体信息
-   */
-  CptJson: string
-  /**
-   * cptId 不填默认自增
-   */
-  CptId?: number
-}
-
-/**
- * CreateTDidByPublicKey返回参数结构体
- */
-export interface CreateTDidByPublicKeyResponse {
-  /**
-   * did具体信息
-   */
-  Did: string
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * 验证凭证签名
- */
-export interface Proof {
-  /**
-   * 创建时间
-   */
-  Created: number
-  /**
-   * 创建着did
-   */
-  Creator: string
-  /**
-   * salt值
-   */
-  SaltJson: string
-  /**
-   * 签名
-   */
-  SignatureValue: string
-  /**
-   * type类型
-   */
-  Type: string
-}
-
-/**
- * 验证凭证参数值
- */
-export interface VerifyFunctionArg {
+export interface CRDLArg {
   /**
    * CPT ID
    */
-  CptId: number
-  /**
-   * issuer did
-   */
-  Issuer: string
-  /**
-   * 过期时间
-   */
-  ExpirationDate: number
-  /**
-   * 声明
-   */
-  ClaimJson: string
-  /**
-   * 颁发时间
-   */
-  IssuanceDate: number
-  /**
-   * context值
-   */
-  Context: string
-  /**
-   * id值
-   */
-  Id: string
-  /**
-   * 签名值
-   */
-  Proof: Proof
-  /**
-   * type值
-   */
-  Type: Array<string>
-}
-
-/**
- * 创建凭证入参的FunctionArg
- */
-export interface FunctionArg {
-  /**
-   * CPT ID
-   */
-  CptId: number
+  CPTId: number
   /**
    * 签发者 did
    */
@@ -486,64 +104,38 @@ export interface FunctionArg {
    * 声明
    */
   ClaimJson: string
+  /**
+   * 凭证类型
+   */
+  Type?: Array<string>
+  /**
+   * 多方签名的用户did
+   */
+  Parties?: Array<string>
 }
 
 /**
- * CreateTDidByPrivateKey请求参数结构体
+ * GetTDidDocument请求参数结构体
  */
-export interface CreateTDidByPrivateKeyRequest {
+export interface GetTDidDocumentRequest {
   /**
-   * 网络ID
+   * DID标识
    */
-  ClusterId: string
+  Did?: string
   /**
-   * 群组ID
+   * DID应用ID
    */
-  GroupId: number
-  /**
-   * 私钥
-   */
-  PrivateKey: string
+  DAPId?: number
 }
 
 /**
- * VerifyCredential请求参数结构体
+ * IssueCredential返回参数结构体
  */
-export interface VerifyCredentialRequest {
+export interface IssueCredentialResponse {
   /**
-   * 参数集合
+   * 可验证凭证内容
    */
-  FunctionArg: VerifyFunctionArg
-}
-
-/**
- * SetCredentialStatus请求参数结构体
- */
-export interface SetCredentialStatusRequest {
-  /**
-   * 凭证状态
-   */
-  CredentialStatus: CredentialStatus
-}
-
-/**
- * GetCptInfo请求参数结构体
- */
-export interface GetCptInfoRequest {
-  /**
-   * Cpt索引
-   */
-  CptIndex: number
-}
-
-/**
- * GetCredentialStatus返回参数结构体
- */
-export interface GetCredentialStatusResponse {
-  /**
-   * 凭证状态信息
-   */
-  CredentialStatus: CredentialStatus
+  CredentialData?: string
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -551,17 +143,239 @@ export interface GetCredentialStatusResponse {
 }
 
 /**
- * RegisterCpt返回参数结构体
+ * GetCredentialState返回参数结构体
  */
-export interface RegisterCptResponse {
+export interface GetCredentialStateResponse {
   /**
-   * 凭证模板索引
+   * 凭证状态信息
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Id: number
+  CredentialState?: CredentialState
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateTDidByHost请求参数结构体
+ */
+export interface CreateTDidByHostRequest {
+  /**
+   * DID应用ID
+   */
+  DAPId?: number
+  /**
+   * 自定义DID文档json属性
+   */
+  CustomAttribute?: string
+}
+
+/**
+ * IssueCredential请求参数结构体
+ */
+export interface IssueCredentialRequest {
+  /**
+   * 参数集合，详见示例
+   */
+  CRDLArg?: CRDLArg
+  /**
+   * 是否未签名
+   */
+  UnSigned?: boolean
+  /**
+   * DID应用id
+   */
+  DAPId?: number
+}
+
+/**
+ * VerifyCredentials返回参数结构体
+ */
+export interface VerifyCredentialsResponse {
+  /**
+   * 是否验证成功
+   */
+  Result?: boolean
+  /**
+   * 验证返回码
+   */
+  VerifyCode?: number
+  /**
+   * 验证结果信息
+   */
+  VerifyMessage?: string
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * UpdateCredentialState请求参数结构体
+ */
+export interface UpdateCredentialStateRequest {
+  /**
+   * DID应用Id
+   */
+  DAPId?: number
+  /**
+   * 更新VC状态的临时凭证内容，通过创建凭证接口(CreateCredential)生成并签名，凭证类型为：OperateCredential, 为安全起见凭证过期时间不适合太长，建议设置为1分钟内
+   */
+  OperateCredential?: string
+}
+
+/**
+ * 凭证链上状态信息
+ */
+export interface CredentialState {
+  /**
+   * 凭证唯一id
+   */
+  Id?: string
+  /**
+   * 凭证状态（0：吊销；1：有效）
+   */
+  Status?: number
+  /**
+   * 凭证颁发者Did
+   */
+  Issuer?: string
+  /**
+   * VC摘要，对应凭证Proof的vcDigest字段
+   */
+  VCDigest?: string
+  /**
+   * 交易摘要，对应凭证Proof的txDigest字段
+   */
+  TXDigest?: string
+  /**
+   * 颁布凭证的UTC时间戳
+   */
+  IssueTime?: number
+  /**
+   * 凭证过期的UTC时间戳
+   */
+  ExpireTime?: number
   /**
    * 凭证模板id
    */
-  CptId: number
+  CPTId?: number
+  /**
+   * 凭证签名
+   */
+  Signature?: string
+  /**
+   * 元数据摘要
+   */
+  MetaDigest?: string
+}
+
+/**
+ * CreateTDidByPubKey请求参数结构体
+ */
+export interface CreateTDidByPubKeyRequest {
+  /**
+   * DID应用id
+   */
+  DAPId?: number
+  /**
+   * pem格式的认证公钥
+   */
+  PublicKey?: string
+  /**
+   * 自定义DID初始化属性json字符串
+   */
+  CustomAttribute?: string
+  /**
+   * 0:did存在返回错误，1:did存在返回该did，默认:0
+   */
+  IgnoreExisted?: number
+}
+
+/**
+ * DeactivateTDid请求参数结构体
+ */
+export interface DeactivateTDidRequest {
+  /**
+   * DID标识符
+   */
+  Did?: string
+  /**
+   * 设置DID禁用状态的临时凭证内容，通过创建凭证接口(CreateCredential)生成并签名，凭证类型为：OperateCredential, 为安全起见凭证过期时间不适合太长，建议设置为1分钟内
+   */
+  OperateCredential?: string
+  /**
+   * DID应用Id
+   */
+  DAPId?: number
+  /**
+   * 是否禁用
+   */
+  Deactivated?: string
+}
+
+/**
+ * CheckNewPurchase返回参数结构体
+ */
+export interface CheckNewPurchaseResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * UpdateCredentialState返回参数结构体
+ */
+export interface UpdateCredentialStateResponse {
+  /**
+   * 更新是否成功
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Result?: boolean
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 链上交易信息
+ */
+export interface ChainTransaction {
+  /**
+   * 交易哈希
+   */
+  TransactionHash: string
+}
+
+/**
+ * DeactivateTDid返回参数结构体
+ */
+export interface DeactivateTDidResponse {
+  /**
+   * 上链交易信息
+   */
+  Transaction?: ChainTransaction
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateTDidByHost返回参数结构体
+ */
+export interface CreateTDidByHostResponse {
+  /**
+   * DID标识
+   */
+  Did?: string
+  /**
+   * 链上交易信息
+   */
+  Transaction?: ChainTransaction
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

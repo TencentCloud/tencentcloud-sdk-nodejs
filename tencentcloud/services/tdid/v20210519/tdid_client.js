@@ -28,109 +28,58 @@ class Client extends abstract_client_1.AbstractClient {
         super("tdid.tencentcloudapi.com", "2021-05-19", clientConfig);
     }
     /**
-     * 该接口不再使用
-
-凭证模版详情
+     * 验证已签名的可验证凭证
      */
-    async GetCptInfo(req, cb) {
-        return this.request("GetCptInfo", req, cb);
+    async VerifyCredentials(req, cb) {
+        return this.request("VerifyCredentials", req, cb);
     }
     /**
-     * 该接口不再使用
-
-查看DID文档
-
+     * 自动生成公私钥对托管在DID平台，并注册DID标识
      */
-    async GetDidDocument(req, cb) {
-        return this.request("GetDidDocument", req, cb);
+    async CreateTDidByHost(req, cb) {
+        return this.request("CreateTDidByHost", req, cb);
     }
     /**
-     * 该接口不再使用
-
-创建选择性批露凭证
+     * 使用导入的公钥文件注册DID标识
      */
-    async CreateSelectiveCredential(req, cb) {
-        return this.request("CreateSelectiveCredential", req, cb);
+    async CreateTDidByPubKey(req, cb) {
+        return this.request("CreateTDidByPubKey", req, cb);
     }
     /**
-     * 该接口不再使用
-
-创建机构DID
+     * 获取DID标识的文档
      */
-    async CreateTDid(req, cb) {
-        return this.request("CreateTDid", req, cb);
+    async GetTDidDocument(req, cb) {
+        return this.request("GetTDidDocument", req, cb);
     }
     /**
-     * 该接口不再使用
-
-创建凭证
+     * 更新凭证的链上状态
      */
-    async CreateCredential(req, cb) {
-        return this.request("CreateCredential", req, cb);
+    async UpdateCredentialState(req, cb) {
+        return this.request("UpdateCredentialState", req, cb);
     }
     /**
-     * 该接口不再使用
-
- 新建DID根据公钥生成Tdid
+     * 更新DID标识的禁用状态
      */
-    async CreateTDidByPublicKey(req, cb) {
-        return this.request("CreateTDidByPublicKey", req, cb);
+    async DeactivateTDid(req, cb) {
+        return this.request("DeactivateTDid", req, cb);
     }
     /**
-     * 该接口不再使用
-
-获取凭证链上状态信息
+     * 获取凭证链上状态信息
      */
-    async GetCredentialStatus(req, cb) {
-        return this.request("GetCredentialStatus", req, cb);
+    async GetCredentialState(req, cb) {
+        return this.request("GetCredentialState", req, cb);
     }
     /**
-     * 该接口不再使用
-
-新建DID根据私钥生成Tdid
+     * 颁发可验证凭证
      */
-    async CreateTDidByPrivateKey(req, cb) {
-        return this.request("CreateTDidByPrivateKey", req, cb);
+    async IssueCredential(req, cb) {
+        return this.request("IssueCredential", req, cb);
     }
     /**
-     * 该接口不再使用
-
-检查区块链信息
+     * 检查用户套餐购买状态
      */
-    async CheckChain(req, cb) {
-        return this.request("CheckChain", req, cb);
-    }
-    /**
-     * 该接口不再使用
-
-凭证模版新建
-     */
-    async RegisterCpt(req, cb) {
-        return this.request("RegisterCpt", req, cb);
-    }
-    /**
-     * 该接口不再使用
-
-验证凭证
-     */
-    async VerifyCredential(req, cb) {
-        return this.request("VerifyCredential", req, cb);
-    }
-    /**
-     * 该接口不再使用
-
-获取权威机构信息
-     */
-    async GetAuthorityIssuer(req, cb) {
-        return this.request("GetAuthorityIssuer", req, cb);
-    }
-    /**
-     * 该接口不再使用
-
-设置凭证链上状态
-     */
-    async SetCredentialStatus(req, cb) {
-        return this.request("SetCredentialStatus", req, cb);
+    async CheckNewPurchase(req, cb) {
+        return this.request("CheckNewPurchase", req, cb);
     }
 }
 exports.Client = Client;

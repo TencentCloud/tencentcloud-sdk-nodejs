@@ -18,9 +18,9 @@ const client = new tencentcloud.tdid.v20210519.Client({
 })
 describe("tdid.v20210519.test.js", function () {
 
-it("tdid.v20210519.GetCptInfo", async function () {
+it("tdid.v20210519.VerifyCredentials", async function () {
     try {
-       const data = await client.GetCptInfo({})
+       const data = await client.VerifyCredentials({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -28,9 +28,9 @@ it("tdid.v20210519.GetCptInfo", async function () {
     }
 })
 
-it("tdid.v20210519.GetDidDocument", async function () {
+it("tdid.v20210519.CreateTDidByHost", async function () {
     try {
-       const data = await client.GetDidDocument({})
+       const data = await client.CreateTDidByHost({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -38,9 +38,9 @@ it("tdid.v20210519.GetDidDocument", async function () {
     }
 })
 
-it("tdid.v20210519.CreateSelectiveCredential", async function () {
+it("tdid.v20210519.CreateTDidByPubKey", async function () {
     try {
-       const data = await client.CreateSelectiveCredential({})
+       const data = await client.CreateTDidByPubKey({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -48,9 +48,9 @@ it("tdid.v20210519.CreateSelectiveCredential", async function () {
     }
 })
 
-it("tdid.v20210519.CreateTDid", async function () {
+it("tdid.v20210519.GetTDidDocument", async function () {
     try {
-       const data = await client.CreateTDid({})
+       const data = await client.GetTDidDocument({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -58,9 +58,9 @@ it("tdid.v20210519.CreateTDid", async function () {
     }
 })
 
-it("tdid.v20210519.CreateCredential", async function () {
+it("tdid.v20210519.UpdateCredentialState", async function () {
     try {
-       const data = await client.CreateCredential({})
+       const data = await client.UpdateCredentialState({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -68,9 +68,9 @@ it("tdid.v20210519.CreateCredential", async function () {
     }
 })
 
-it("tdid.v20210519.CreateTDidByPublicKey", async function () {
+it("tdid.v20210519.DeactivateTDid", async function () {
     try {
-       const data = await client.CreateTDidByPublicKey({})
+       const data = await client.DeactivateTDid({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -78,9 +78,9 @@ it("tdid.v20210519.CreateTDidByPublicKey", async function () {
     }
 })
 
-it("tdid.v20210519.GetCredentialStatus", async function () {
+it("tdid.v20210519.GetCredentialState", async function () {
     try {
-       const data = await client.GetCredentialStatus({})
+       const data = await client.GetCredentialState({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -88,9 +88,9 @@ it("tdid.v20210519.GetCredentialStatus", async function () {
     }
 })
 
-it("tdid.v20210519.CreateTDidByPrivateKey", async function () {
+it("tdid.v20210519.IssueCredential", async function () {
     try {
-       const data = await client.CreateTDidByPrivateKey({})
+       const data = await client.IssueCredential({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -98,49 +98,9 @@ it("tdid.v20210519.CreateTDidByPrivateKey", async function () {
     }
 })
 
-it("tdid.v20210519.CheckChain", async function () {
+it("tdid.v20210519.CheckNewPurchase", async function () {
     try {
-       const data = await client.CheckChain({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("tdid.v20210519.RegisterCpt", async function () {
-    try {
-       const data = await client.RegisterCpt({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("tdid.v20210519.VerifyCredential", async function () {
-    try {
-       const data = await client.VerifyCredential({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("tdid.v20210519.GetAuthorityIssuer", async function () {
-    try {
-       const data = await client.GetAuthorityIssuer({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("tdid.v20210519.SetCredentialStatus", async function () {
-    try {
-       const data = await client.SetCredentialStatus({})
+       const data = await client.CheckNewPurchase({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
