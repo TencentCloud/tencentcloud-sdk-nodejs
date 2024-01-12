@@ -7885,6 +7885,14 @@ export interface SealOCRRequest {
   建议图片存储于腾讯云，可保障更高的下载速度和稳定性。
      */
     ImageUrl?: string;
+    /**
+     * 是否开启PDF识别，默认值为true，开启后可同时支持图片和PDF的识别。
+     */
+    EnablePdf?: boolean;
+    /**
+     * 需要识别的PDF页面的对应页码，传入时仅支持PDF单页识别，当上传文件为PDF且EnablePdf参数值为true时有效，默认值为1。
+     */
+    PdfPageNumber?: number;
 }
 /**
  * VerifyOfdVatInvoiceOCR返回参数结构体

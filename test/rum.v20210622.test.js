@@ -248,9 +248,9 @@ it("rum.v20210622.DescribeDataStaticUrl", async function () {
     }
 })
 
-it("rum.v20210622.DescribeDataFetchUrlInfo", async function () {
+it("rum.v20210622.ModifyProjectLimit", async function () {
     try {
-       const data = await client.DescribeDataFetchUrlInfo({})
+       const data = await client.ModifyProjectLimit({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -311,16 +311,6 @@ it("rum.v20210622.DescribeDataSetUrlStatistics", async function () {
 it("rum.v20210622.ModifyInstance", async function () {
     try {
        const data = await client.ModifyInstance({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("rum.v20210622.ModifyProjectLimit", async function () {
-    try {
-       const data = await client.ModifyProjectLimit({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -428,9 +418,9 @@ it("rum.v20210622.DeleteWhitelist", async function () {
     }
 })
 
-it("rum.v20210622.CreateTawInstance", async function () {
+it("rum.v20210622.DescribeDataFetchUrlInfo", async function () {
     try {
-       const data = await client.CreateTawInstance({})
+       const data = await client.DescribeDataFetchUrlInfo({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -498,26 +488,6 @@ it("rum.v20210622.DescribeDataEventUrl", async function () {
     }
 })
 
-it("rum.v20210622.DeleteOfflineLogRecord", async function () {
-    try {
-       const data = await client.DeleteOfflineLogRecord({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("rum.v20210622.DescribeOfflineLogConfigs", async function () {
-    try {
-       const data = await client.DescribeOfflineLogConfigs({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("rum.v20210622.DescribeReleaseFileSign", async function () {
     try {
        const data = await client.DescribeReleaseFileSign({})
@@ -531,6 +501,16 @@ it("rum.v20210622.DescribeReleaseFileSign", async function () {
 it("rum.v20210622.DescribeDataLogUrlInfo", async function () {
     try {
        const data = await client.DescribeDataLogUrlInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("rum.v20210622.DescribeUvList", async function () {
+    try {
+       const data = await client.DescribeUvList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -578,9 +558,9 @@ it("rum.v20210622.DeleteProject", async function () {
     }
 })
 
-it("rum.v20210622.DescribeUvList", async function () {
+it("rum.v20210622.CreateTawInstance", async function () {
     try {
-       const data = await client.DescribeUvList({})
+       const data = await client.CreateTawInstance({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -588,9 +568,9 @@ it("rum.v20210622.DescribeUvList", async function () {
     }
 })
 
-it("rum.v20210622.DeleteOfflineLogConfig", async function () {
+it("rum.v20210622.DescribeDataFetchUrl", async function () {
     try {
-       const data = await client.DeleteOfflineLogConfig({})
+       const data = await client.DescribeDataFetchUrl({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -611,16 +591,6 @@ it("rum.v20210622.DeleteReleaseFile", async function () {
 it("rum.v20210622.DescribeDataReportCount", async function () {
     try {
        const data = await client.DescribeDataReportCount({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("rum.v20210622.DescribeDataFetchUrl", async function () {
-    try {
-       const data = await client.DescribeDataFetchUrl({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

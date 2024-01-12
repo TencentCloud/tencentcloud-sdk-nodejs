@@ -608,6 +608,11 @@ export interface DescribeListBGPInstancesRequest {
      * 是否包含基础防护增强版 0: 不包含 1: 包含
      */
     FilterBasicPlusFlag?: number;
+    /**
+     * 是否商业模式优化-普惠版 0: 包含商业模式优化-普惠版 1: 只查询商业模式优化-普惠版
+  
+     */
+    FilterPlanCntFlag?: number;
 }
 /**
  * 字段值，K-V形式
@@ -3020,30 +3025,30 @@ export interface ListenerCcThreholdConfig {
  */
 export interface EipAddressRelation {
     /**
-     * 高防弹性公网IP绑定的实例地区，例如hk代表香港
+     * 高防弹性公网IP绑定的实例地区，例如hk代表中国香港
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    EipAddressRegion: string;
+    EipAddressRegion?: string;
     /**
      * 绑定的资源实例ID。可能是一个CVM。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    EipBoundRscIns: string;
+    EipBoundRscIns?: string;
     /**
      * 绑定的弹性网卡ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    EipBoundRscEni: string;
+    EipBoundRscEni?: string;
     /**
      * 绑定的资源内网ip
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    EipBoundRscVip: string;
+    EipBoundRscVip?: string;
     /**
      * 修改时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ModifyTime: string;
+    ModifyTime?: string;
 }
 /**
  * DeleteDDoSBlackWhiteIpList请求参数结构体
@@ -5029,6 +5034,11 @@ export interface BGPInstance {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     BasicPlusFlag?: number;
+    /**
+     * 是否是商业模式优化-普惠版
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PlanCntFlag?: number;
 }
 /**
  * DescribeBizMonitorTrend返回参数结构体

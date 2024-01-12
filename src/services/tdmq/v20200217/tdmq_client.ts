@@ -32,6 +32,7 @@ import {
   CreateRocketMQGroupRequest,
   CreateRocketMQNamespaceRequest,
   ModifyRabbitMQVirtualHostRequest,
+  ExportRocketMQMessageDetailRequest,
   ModifyEnvironmentAttributesRequest,
   DeleteClusterResponse,
   ResetRocketMQConsumerOffSetResponse,
@@ -89,6 +90,7 @@ import {
   CmqQueue,
   CreateEnvironmentResponse,
   RabbitMQVirtualHostStatistics,
+  ExportRocketMQMessageDetailResponse,
   CreateSubscriptionResponse,
   ModifyEnvironmentRoleRequest,
   DescribeRabbitMQQueuesResponse,
@@ -1046,6 +1048,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteRocketMQTopicResponse) => void
   ): Promise<DeleteRocketMQTopicResponse> {
     return this.request("DeleteRocketMQTopic", req, cb)
+  }
+
+  /**
+   * 导出RocketMQ消息详情
+   */
+  async ExportRocketMQMessageDetail(
+    req: ExportRocketMQMessageDetailRequest,
+    cb?: (error: string, rep: ExportRocketMQMessageDetailResponse) => void
+  ): Promise<ExportRocketMQMessageDetailResponse> {
+    return this.request("ExportRocketMQMessageDetail", req, cb)
   }
 
   /**

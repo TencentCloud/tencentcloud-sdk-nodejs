@@ -1418,21 +1418,17 @@ export interface DescribePrometheusInstanceUsageRequest {
     EndCalcDate: string;
 }
 /**
- * DeletePrometheusScrapeJobs请求参数结构体
+ * DeleteSSOAccount请求参数结构体
  */
-export interface DeletePrometheusScrapeJobsRequest {
+export interface DeleteSSOAccountRequest {
     /**
-     * 实例 ID
+     * Grafana 实例 ID，例如：grafana-abcdefgh
      */
     InstanceId: string;
     /**
-     * Agent ID(可通过 DescribePrometheusAgents 接口获取)
+     * 用户账号 ID ，例如：10000000
      */
-    AgentId: string;
-    /**
-     * 任务 ID 列表(可通过 DescribePrometheusScrapeJobs 接口获取)
-     */
-    JobIds: Array<string>;
+    UserId: string;
 }
 /**
  * CreatePrometheusRecordRuleYaml请求参数结构体
@@ -1493,6 +1489,19 @@ export interface PrometheusClusterAgentPodConfig {
      * 容忍污点
      */
     Tolerations?: Array<Toleration>;
+}
+/**
+ * DeletePrometheusAlertGroups请求参数结构体
+ */
+export interface DeletePrometheusAlertGroupsRequest {
+    /**
+     * prometheus实例id
+     */
+    InstanceId?: string;
+    /**
+     * 需要删除的告警分组ID，形如alert-xxxxx
+     */
+    GroupIds?: Array<string>;
 }
 /**
  * 查询 Grafana 实例时的实例类型
@@ -1798,6 +1807,15 @@ export interface DescribePrometheusRecordRulesRequest {
     Filters?: Array<Filter>;
 }
 /**
+ * ModifyAlarmPolicyStatus返回参数结构体
+ */
+export interface ModifyAlarmPolicyStatusResponse {
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * DescribeExporterIntegrations返回参数结构体
  */
 export interface DescribeExporterIntegrationsResponse {
@@ -1909,13 +1927,13 @@ export interface GrafanaAccountRole {
     Role?: string;
 }
 /**
- * DestroyPrometheusInstance请求参数结构体
+ * DeleteRecordingRules返回参数结构体
  */
-export interface DestroyPrometheusInstanceRequest {
+export interface DeleteRecordingRulesResponse {
     /**
-     * 实例 ID，该实例必须先被 terminate
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
-    InstanceId: string;
+    RequestId?: string;
 }
 /**
  * 2018版策略模板列表接收人信息
@@ -2061,17 +2079,33 @@ export interface MidQueryCondition {
     Value: Array<string>;
 }
 /**
- * DeleteSSOAccount请求参数结构体
+ * DescribeGrafanaInstances请求参数结构体
  */
-export interface DeleteSSOAccountRequest {
+export interface DescribeGrafanaInstancesRequest {
     /**
-     * Grafana 实例 ID，例如：grafana-abcdefgh
+     * 查询偏移量
      */
-    InstanceId: string;
+    Offset: number;
     /**
-     * 用户账号 ID ，例如：10000000
+     * 查询数量
      */
-    UserId: string;
+    Limit: number;
+    /**
+     * Grafana 实例 ID 数组
+     */
+    InstanceIds?: Array<string>;
+    /**
+     * Grafana 实例名，支持前缀模糊搜索
+     */
+    InstanceName?: string;
+    /**
+     * 查询状态
+     */
+    InstanceStatus?: Array<number | bigint>;
+    /**
+     * 标签过滤数组
+     */
+    TagFilters?: Array<PrometheusTag>;
 }
 /**
  * DescribePrometheusAgentInstances返回参数结构体
@@ -2342,42 +2376,23 @@ export interface DescribeBasicAlarmListRequest {
     MetricNames?: Array<string>;
 }
 /**
- * ModifyAlarmPolicyStatus返回参数结构体
+ * DescribePrometheusAlertGroups返回参数结构体
  */
-export interface ModifyAlarmPolicyStatusResponse {
+export interface DescribePrometheusAlertGroupsResponse {
+    /**
+     * 告警分组信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AlertGroupSet?: Array<PrometheusAlertGroupSet>;
+    /**
+     * 告警分组总数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TotalCount?: number;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
-}
-/**
- * DescribeGrafanaInstances请求参数结构体
- */
-export interface DescribeGrafanaInstancesRequest {
-    /**
-     * 查询偏移量
-     */
-    Offset: number;
-    /**
-     * 查询数量
-     */
-    Limit: number;
-    /**
-     * Grafana 实例 ID 数组
-     */
-    InstanceIds?: Array<string>;
-    /**
-     * Grafana 实例名，支持前缀模糊搜索
-     */
-    InstanceName?: string;
-    /**
-     * 查询状态
-     */
-    InstanceStatus?: Array<number | bigint>;
-    /**
-     * 标签过滤数组
-     */
-    TagFilters?: Array<PrometheusTag>;
 }
 /**
  * DescribePrometheusTempSync请求参数结构体
@@ -2665,69 +2680,17 @@ export interface DescribeGrafanaChannelsRequest {
     ChannelState?: number;
 }
 /**
- * DescribePolicyGroupList请求参数结构体
+ * 通知模板与策略绑定关系
  */
-export interface DescribePolicyGroupListRequest {
+export interface NoticeBindPolicys {
     /**
-     * 固定值，为"monitor"
+     * 告警通知模板 ID
      */
-    Module: string;
+    NoticeId?: string;
     /**
-     * 分页参数，每页返回的数量，取值1~100
+     * 告警通知模板绑定的告警策略ID列表
      */
-    Limit: number;
-    /**
-     * 分页参数，页偏移量，从0开始计数
-     */
-    Offset: number;
-    /**
-     * 按策略名搜索
-     */
-    Like?: string;
-    /**
-     * 实例分组id
-     */
-    InstanceGroupId?: number;
-    /**
-     * 按更新时间排序, asc 或者 desc
-     */
-    UpdateTimeOrder?: string;
-    /**
-     * 项目id列表
-     */
-    ProjectIds?: Array<number | bigint>;
-    /**
-     * 告警策略类型列表
-     */
-    ViewNames?: Array<string>;
-    /**
-     * 是否过滤无接收人策略组, 1表示过滤, 0表示不过滤
-     */
-    FilterUnuseReceiver?: number;
-    /**
-     * 过滤条件, 接收组列表
-     */
-    Receivers?: Array<string>;
-    /**
-     * 过滤条件, 接收人列表
-     */
-    ReceiverUserList?: Array<string>;
-    /**
-     * 维度组合字段(json字符串), 例如[[{"name":"unInstanceId","value":"ins-6e4b2aaa"}]]
-     */
-    Dimensions?: string;
-    /**
-     * 模板策略组id, 多个id用逗号分隔
-     */
-    ConditionTempGroupId?: string;
-    /**
-     * 过滤条件, 接收人或者接收组, user表示接收人, group表示接收组
-     */
-    ReceiverType?: string;
-    /**
-     * 过滤条件，告警策略是否已启动或停止
-     */
-    IsOpen?: boolean;
+    PolicyIds?: Array<string>;
 }
 /**
  * DescribeGrafanaConfig请求参数结构体
@@ -3068,6 +3031,46 @@ export interface CreateServiceDiscoveryResponse {
  */
 export declare type DescribeClusterAgentCreatingProgressRequest = null;
 /**
+ * UpdatePrometheusAlertGroup请求参数结构体
+ */
+export interface UpdatePrometheusAlertGroupRequest {
+    /**
+     * prometheus实例ID
+     */
+    InstanceId?: string;
+    /**
+     * 告警分组ID，形如alert-xxxx
+     */
+    GroupId?: string;
+    /**
+     * 告警分组名称，不能与其他告警分组重名
+     */
+    GroupName?: string;
+    /**
+     * 告警分组状态：
+  2 -- 启用
+  3 -- 禁用
+  不为空时会覆盖 `Rules`字段下所有告警规则状态
+     */
+    GroupState?: number;
+    /**
+     * 云监控告警通知模板ID列表，形如Consumer-xxxx或notice-xxxx
+     */
+    AMPReceivers?: Array<string>;
+    /**
+     * 自定义告警通知模板
+     */
+    CustomReceiver?: PrometheusAlertCustomReceiver;
+    /**
+     * 告警通知周期（收敛时间），为空默认1h
+     */
+    RepeatInterval?: string;
+    /**
+     * 要创建的告警规则列表
+     */
+    Rules?: Array<PrometheusAlertGroupRuleSet>;
+}
+/**
  * EnableSSOCamCheck返回参数结构体
  */
 export interface EnableSSOCamCheckResponse {
@@ -3252,6 +3255,38 @@ export interface PrometheusZoneItem {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     ZoneResourceState?: number;
+}
+/**
+ * Prometheus告警自定义通知模板
+ */
+export interface PrometheusAlertCustomReceiver {
+    /**
+     * 自定义通知类型
+  alertmanager -- vpc内自建alertmanager
+  webhook -- vpc内webhook地址
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Type?: string;
+    /**
+     * alertmanager/webhook地址。（prometheus实例同vpc内ip）
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Url?: string;
+    /**
+     * 允许发送告警的时间范围
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AllowedTimeRanges?: Array<PrometheusAlertAllowTimeRange>;
+    /**
+     * alertmanager所在的内网集群ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ClusterId?: string;
+    /**
+     * alertmanager所在的内网集群类型(tke/eks/tdcc)
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ClusterType?: string;
 }
 /**
  * ModifyPrometheusAlertPolicy请求参数结构体
@@ -3492,6 +3527,46 @@ export interface DescribePrometheusGlobalNotificationResponse {
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * 告警分组内告警规则信息
+ */
+export interface PrometheusAlertGroupRuleSet {
+    /**
+     * 告警规则名称，同一告警分组下不允许重名
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RuleName?: string;
+    /**
+     * 标签列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Labels?: Array<PrometheusRuleKV>;
+    /**
+     * 注释列表
+  
+  告警对象和告警消息是 Prometheus Rule Annotations 的特殊字段，需要通过 annotations 来传递，对应的 Key 分别为summary/description。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Annotations?: Array<PrometheusRuleKV>;
+    /**
+     * 规则报警持续时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Duration?: string;
+    /**
+     * 规则表达式，可参考<a href="https://cloud.tencent.com/document/product/1416/56008">告警规则说明</a>
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Expr?: string;
+    /**
+     * 告警规则状态:
+  2-启用
+  3-禁用
+  为空默认启用
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    State?: number;
 }
 /**
  * DescribeMonitorTypes请求参数结构体
@@ -3965,6 +4040,21 @@ export interface CreatePrometheusClusterAgentResponse {
     RequestId?: string;
 }
 /**
+ * Prometheus自定义告警通知时间段
+ */
+export interface PrometheusAlertAllowTimeRange {
+    /**
+     * 从0点开始的秒数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Start?: string;
+    /**
+     * 从0点开始的秒数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    End?: string;
+}
+/**
  * CreateGrafanaIntegration返回参数结构体
  */
 export interface CreateGrafanaIntegrationResponse {
@@ -3990,6 +4080,25 @@ export interface BindPrometheusManagedGrafanaRequest {
      * Grafana 可视化服务实例 ID
      */
     GrafanaId: string;
+}
+/**
+ * UpdatePrometheusAlertGroupState请求参数结构体
+ */
+export interface UpdatePrometheusAlertGroupStateRequest {
+    /**
+     * Prometheus 实例 ID
+     */
+    InstanceId?: string;
+    /**
+     * 告警分组ID列表，形如alert-xxxx
+     */
+    GroupIds?: Array<string>;
+    /**
+     * 告警分组状态
+  2 -- 启用
+  3 -- 禁用
+     */
+    GroupState?: number;
 }
 /**
  * 告警渠道使用自建alertmanager的配置
@@ -4389,6 +4498,15 @@ export interface DescribeDNSConfigResponse {
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * DestroyPrometheusInstance请求参数结构体
+ */
+export interface DestroyPrometheusInstanceRequest {
+    /**
+     * 实例 ID，该实例必须先被 terminate
+     */
+    InstanceId: string;
 }
 /**
  * DeleteRecordingRules请求参数结构体
@@ -5743,6 +5861,43 @@ export interface DeleteGrafanaNotificationChannelRequest {
     InstanceId: string;
 }
 /**
+ * CreatePrometheusAlertGroup请求参数结构体
+ */
+export interface CreatePrometheusAlertGroupRequest {
+    /**
+     * prometheus实例ID
+     */
+    InstanceId?: string;
+    /**
+     * 告警分组名称，不能与其他告警分组重名
+     */
+    GroupName?: string;
+    /**
+     * 告警分组状态：
+  2 -- 启用
+  3 -- 禁用
+  不为空时会覆盖 `Rules`字段下所有告警规则状态
+  
+     */
+    GroupState?: number;
+    /**
+     * 云监控告警通知模板ID列表，形如Consumer-xxxx或notice-xxxx
+     */
+    AMPReceivers?: Array<string>;
+    /**
+     * 自定义告警通知模板
+     */
+    CustomReceiver?: PrometheusAlertCustomReceiver;
+    /**
+     * 告警通知周期（收敛时间），为空默认1h
+     */
+    RepeatInterval?: string;
+    /**
+     * 要创建的告警规则列表
+     */
+    Rules?: Array<PrometheusAlertGroupRuleSet>;
+}
+/**
  * 告警通知模板详情
  */
 export interface AlarmNotice {
@@ -6965,6 +7120,15 @@ export interface DescribeConditionsTemplateListResponse {
     RequestId?: string;
 }
 /**
+ * DeletePrometheusAlertGroups返回参数结构体
+ */
+export interface DeletePrometheusAlertGroupsResponse {
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * CreatePrometheusTemp请求参数结构体
  */
 export interface CreatePrometheusTempRequest {
@@ -7448,17 +7612,69 @@ export interface DescribePolicyConditionListEventMetric {
     Type: number;
 }
 /**
- * 通知模板与策略绑定关系
+ * DescribePolicyGroupList请求参数结构体
  */
-export interface NoticeBindPolicys {
+export interface DescribePolicyGroupListRequest {
     /**
-     * 告警通知模板 ID
+     * 固定值，为"monitor"
      */
-    NoticeId?: string;
+    Module: string;
     /**
-     * 告警通知模板绑定的告警策略ID列表
+     * 分页参数，每页返回的数量，取值1~100
      */
-    PolicyIds?: Array<string>;
+    Limit: number;
+    /**
+     * 分页参数，页偏移量，从0开始计数
+     */
+    Offset: number;
+    /**
+     * 按策略名搜索
+     */
+    Like?: string;
+    /**
+     * 实例分组id
+     */
+    InstanceGroupId?: number;
+    /**
+     * 按更新时间排序, asc 或者 desc
+     */
+    UpdateTimeOrder?: string;
+    /**
+     * 项目id列表
+     */
+    ProjectIds?: Array<number | bigint>;
+    /**
+     * 告警策略类型列表
+     */
+    ViewNames?: Array<string>;
+    /**
+     * 是否过滤无接收人策略组, 1表示过滤, 0表示不过滤
+     */
+    FilterUnuseReceiver?: number;
+    /**
+     * 过滤条件, 接收组列表
+     */
+    Receivers?: Array<string>;
+    /**
+     * 过滤条件, 接收人列表
+     */
+    ReceiverUserList?: Array<string>;
+    /**
+     * 维度组合字段(json字符串), 例如[[{"name":"unInstanceId","value":"ins-6e4b2aaa"}]]
+     */
+    Dimensions?: string;
+    /**
+     * 模板策略组id, 多个id用逗号分隔
+     */
+    ConditionTempGroupId?: string;
+    /**
+     * 过滤条件, 接收人或者接收组, user表示接收人, group表示接收组
+     */
+    ReceiverType?: string;
+    /**
+     * 过滤条件，告警策略是否已启动或停止
+     */
+    IsOpen?: boolean;
 }
 /**
  * UnBindingAllPolicyObject返回参数结构体
@@ -8020,15 +8236,6 @@ export interface DescribeRecordingRulesResponse {
     RequestId?: string;
 }
 /**
- * DeleteRecordingRules返回参数结构体
- */
-export interface DeleteRecordingRulesResponse {
-    /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
-/**
  * UpdateGrafanaWhiteList请求参数结构体
  */
 export interface UpdateGrafanaWhiteListRequest {
@@ -8347,6 +8554,23 @@ export interface DeleteAlertRulesResponse {
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * DeletePrometheusScrapeJobs请求参数结构体
+ */
+export interface DeletePrometheusScrapeJobsRequest {
+    /**
+     * 实例 ID
+     */
+    InstanceId: string;
+    /**
+     * Agent ID(可通过 DescribePrometheusAgents 接口获取)
+     */
+    AgentId: string;
+    /**
+     * 任务 ID 列表(可通过 DescribePrometheusScrapeJobs 接口获取)
+     */
+    JobIds: Array<string>;
 }
 /**
  * ModifyAlarmPolicyStatus请求参数结构体
@@ -8785,6 +9009,33 @@ export interface DescribePrometheusZonesRequest {
     RegionName?: string;
 }
 /**
+ * DescribePrometheusAlertGroups请求参数结构体
+ */
+export interface DescribePrometheusAlertGroupsRequest {
+    /**
+     * Prometheus 实例 ID
+     */
+    InstanceId?: string;
+    /**
+     * 返回数量，默认为 20，最大值为 100
+     */
+    Limit?: number;
+    /**
+     * 偏移量，默认为 0
+     */
+    Offset?: number;
+    /**
+     * 告警分组ID，形如alert-xxxx。
+  查询给定ID的告警分组
+     */
+    GroupId?: string;
+    /**
+     * 告警分组名称。
+  查询名称中包含给定字符串的告警分组
+     */
+    GroupName?: string;
+}
+/**
  * 修改告警策略组传入的指标阈值条件
  */
 export interface ModifyPolicyGroupCondition {
@@ -9058,6 +9309,15 @@ export interface UpdateServiceDiscoveryResponse {
      * 更新成功之后，返回对应服务发现的信息
      */
     ServiceDiscovery?: ServiceDiscoveryItem;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * UpdatePrometheusAlertGroupState返回参数结构体
+ */
+export interface UpdatePrometheusAlertGroupStateResponse {
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -9350,25 +9610,17 @@ export interface DescribeProductEventListEventsGroupInfo {
     GroupName: string;
 }
 /**
- * UpdateSSOAccount请求参数结构体
+ * UpdatePrometheusAlertGroup返回参数结构体
  */
-export interface UpdateSSOAccountRequest {
+export interface UpdatePrometheusAlertGroupResponse {
     /**
-     * Grafana 实例 ID，例如：grafana-abcdefgh
+     * 更新的告警分组ID，满足正则表达式`alert-[a-z0-9]{8}`
      */
-    InstanceId: string;
+    GroupId?: string;
     /**
-     * 用户账号 ID ，例如：10000000
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
-    UserId: string;
-    /**
-     * 权限
-     */
-    Role?: Array<GrafanaAccountRole>;
-    /**
-     * 备注
-     */
-    Notes?: string;
+    RequestId?: string;
 }
 /**
  * CreateSSOAccount返回参数结构体
@@ -9509,6 +9761,27 @@ export interface DescribeAlarmPoliciesRequest {
      * 根据排班表搜索
      */
     ReceiverOnCallFormIDs?: Array<string>;
+}
+/**
+ * UpdateSSOAccount请求参数结构体
+ */
+export interface UpdateSSOAccountRequest {
+    /**
+     * Grafana 实例 ID，例如：grafana-abcdefgh
+     */
+    InstanceId: string;
+    /**
+     * 用户账号 ID ，例如：10000000
+     */
+    UserId: string;
+    /**
+     * 权限
+     */
+    Role?: Array<GrafanaAccountRole>;
+    /**
+     * 备注
+     */
+    Notes?: string;
 }
 /**
  * DescribePolicyConditionList.ConfigManual.StatType
@@ -9752,6 +10025,19 @@ export interface UpdateGrafanaIntegrationRequest {
     Content: string;
 }
 /**
+ * CreatePrometheusAlertGroup返回参数结构体
+ */
+export interface CreatePrometheusAlertGroupResponse {
+    /**
+     * 创建的告警分组ID，满足正则表达式`alert-[a-z0-9]{8}`
+     */
+    GroupId?: string;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * DeletePrometheusRecordRuleYaml请求参数结构体
  */
 export interface DeletePrometheusRecordRuleYamlRequest {
@@ -9859,6 +10145,56 @@ export interface GrafanaNotificationChannel {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     OrganizationIds: Array<string>;
+}
+/**
+ * Prometheus告警规则分组信息
+ */
+export interface PrometheusAlertGroupSet {
+    /**
+     * 告警分组ID，满足正则表达式`alert-[a-z0-9]{8}`
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    GroupId?: string;
+    /**
+     * 告警分组名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    GroupName?: string;
+    /**
+     * 云监控告警模板ID ，返回告警模板转换后的notice ID。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AMPReceivers?: Array<string>;
+    /**
+     * 自定义告警模板
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CustomReceiver?: PrometheusAlertCustomReceiver;
+    /**
+     * 告警通知间隔
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RepeatInterval?: string;
+    /**
+     * 若告警分组通过模板创建，则返回模板ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TemplateId?: string;
+    /**
+     * 分组内告警规则详情
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Rules?: Array<PrometheusAlertGroupRuleSet>;
+    /**
+     * 分组创建时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CreatedAt?: string;
+    /**
+     * 分组更新时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    UpdatedAt?: string;
 }
 /**
  * SetDefaultAlarmPolicy请求参数结构体

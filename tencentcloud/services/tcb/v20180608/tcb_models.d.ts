@@ -1226,18 +1226,22 @@ export interface CloudBaseRunEmptyDirVolumeSource {
 export interface CloudBaseRunVolumeMount {
     /**
      * 资源名
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     Name?: string;
     /**
      * 挂载路径
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     MountPath?: string;
     /**
      * 是否只读
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     ReadOnly?: boolean;
     /**
      * Nfs挂载信息
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     NfsVolumes?: Array<CloudBaseRunNfsVolumeSource>;
 }
@@ -4407,22 +4411,27 @@ export interface StandaloneGatewayPackageInfo {
 export interface CloudBaseRunNfsVolumeSource {
     /**
      * NFS挂载Server
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     Server?: string;
     /**
      * Server路径
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     Path?: string;
     /**
      * 是否只读
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     ReadOnly?: boolean;
     /**
      * secret名称
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     SecretName?: string;
     /**
      * 临时目录
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     EnableEmptyDirVolume?: boolean;
 }

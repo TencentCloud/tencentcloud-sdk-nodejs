@@ -437,6 +437,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteRocketMQTopic", req, cb);
     }
     /**
+     * 导出RocketMQ消息详情
+     */
+    async ExportRocketMQMessageDetail(req, cb) {
+        return this.request("ExportRocketMQMessageDetail", req, cb);
+    }
+    /**
      * 查询RabbitMQ队列列表
      */
     async DescribeRabbitMQQueues(req, cb) {

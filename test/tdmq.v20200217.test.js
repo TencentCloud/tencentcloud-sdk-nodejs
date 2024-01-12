@@ -698,6 +698,16 @@ it("tdmq.v20200217.DeleteRocketMQTopic", async function () {
     }
 })
 
+it("tdmq.v20200217.ExportRocketMQMessageDetail", async function () {
+    try {
+       const data = await client.ExportRocketMQMessageDetail({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tdmq.v20200217.DescribeRabbitMQQueues", async function () {
     try {
        const data = await client.DescribeRabbitMQQueues({})

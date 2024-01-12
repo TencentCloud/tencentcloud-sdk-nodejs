@@ -68,6 +68,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyPrometheusAlertPolicy", req, cb);
     }
     /**
+     * 查询给定prometheus下的告警分组
+     */
+    async DescribePrometheusAlertGroups(req, cb) {
+        return this.request("DescribePrometheusAlertGroups", req, cb);
+    }
+    /**
      *  查询Prometheus按量实例用量
      */
     async DescribePrometheusInstanceUsage(req, cb) {
@@ -84,6 +90,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async BindingPolicyObject(req, cb) {
         return this.request("BindingPolicyObject", req, cb);
+    }
+    /**
+     * 删除Prometheus告警规则分组
+     */
+    async DeletePrometheusAlertGroups(req, cb) {
+        return this.request("DeletePrometheusAlertGroups", req, cb);
     }
     /**
      * 本接口（CreateGrafanaInstance）用于创建 Grafana 包年包月实例，默认基础版、到期自动续费、不可使用代金券。
@@ -398,16 +410,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeAlarmHistories", req, cb);
     }
     /**
-     * 创建通知模板
+     * 创建全局告警通知渠道。集群内创建的告警规则如果未配置告警通知渠道，默认走全局告警通知渠道（建议在控制台创建告警，集群内创建告警不易维护）
      */
-    async CreateAlarmNotice(req, cb) {
-        return this.request("CreateAlarmNotice", req, cb);
+    async CreatePrometheusGlobalNotification(req, cb) {
+        return this.request("CreatePrometheusGlobalNotification", req, cb);
     }
     /**
      * Grafana可视化服务 删除授权用户
      */
     async DeleteSSOAccount(req, cb) {
         return this.request("DeleteSSOAccount", req, cb);
+    }
+    /**
+     * 批量更新告警分组状态，将分组中全部告警规则更新为目标状态
+     */
+    async UpdatePrometheusAlertGroupState(req, cb) {
+        return this.request("UpdatePrometheusAlertGroupState", req, cb);
     }
     /**
      * 查询单个通知模板的详情
@@ -525,10 +543,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("SyncPrometheusTemp", req, cb);
     }
     /**
-     * 创建全局告警通知渠道。集群内创建的告警规则如果未配置告警通知渠道，默认走全局告警通知渠道（建议在控制台创建告警，集群内创建告警不易维护）
+     * 创建通知模板
      */
-    async CreatePrometheusGlobalNotification(req, cb) {
-        return this.request("CreatePrometheusGlobalNotification", req, cb);
+    async CreateAlarmNotice(req, cb) {
+        return this.request("CreateAlarmNotice", req, cb);
     }
     /**
      * 更新 Prometheus 报警策略状态
@@ -591,6 +609,15 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDNSConfig", req, cb);
     }
     /**
+     * 创建Prometheus告警规则分组
+
+告警分组中可包含多条告警规则，分组内告警消息通过告警分组的通知模板发送。
+支持单个告警分组下分别创建启用/禁用的告警规则。
+     */
+    async CreatePrometheusAlertGroup(req, cb) {
+        return this.request("CreatePrometheusAlertGroup", req, cb);
+    }
+    /**
      * 修改全局告警通知渠道
      */
     async ModifyPrometheusGlobalNotification(req, cb) {
@@ -635,6 +662,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async UpdateGrafanaConfig(req, cb) {
         return this.request("UpdateGrafanaConfig", req, cb);
+    }
+    /**
+     * 更新Prometheus告警规则分组
+     */
+    async UpdatePrometheusAlertGroup(req, cb) {
+        return this.request("UpdatePrometheusAlertGroup", req, cb);
     }
     /**
      * 列出 Grafana 告警通道

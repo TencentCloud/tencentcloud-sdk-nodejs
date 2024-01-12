@@ -78,6 +78,16 @@ it("monitor.v20180724.ModifyPrometheusAlertPolicy", async function () {
     }
 })
 
+it("monitor.v20180724.DescribePrometheusAlertGroups", async function () {
+    try {
+       const data = await client.DescribePrometheusAlertGroups({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("monitor.v20180724.DescribePrometheusInstanceUsage", async function () {
     try {
        const data = await client.DescribePrometheusInstanceUsage({})
@@ -101,6 +111,16 @@ it("monitor.v20180724.ModifyAlarmReceivers", async function () {
 it("monitor.v20180724.BindingPolicyObject", async function () {
     try {
        const data = await client.BindingPolicyObject({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("monitor.v20180724.DeletePrometheusAlertGroups", async function () {
+    try {
+       const data = await client.DeletePrometheusAlertGroups({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -618,9 +638,9 @@ it("monitor.v20180724.DescribeAlarmHistories", async function () {
     }
 })
 
-it("monitor.v20180724.CreateAlarmNotice", async function () {
+it("monitor.v20180724.CreatePrometheusGlobalNotification", async function () {
     try {
-       const data = await client.CreateAlarmNotice({})
+       const data = await client.CreatePrometheusGlobalNotification({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -631,6 +651,16 @@ it("monitor.v20180724.CreateAlarmNotice", async function () {
 it("monitor.v20180724.DeleteSSOAccount", async function () {
     try {
        const data = await client.DeleteSSOAccount({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("monitor.v20180724.UpdatePrometheusAlertGroupState", async function () {
+    try {
+       const data = await client.UpdatePrometheusAlertGroupState({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -828,9 +858,9 @@ it("monitor.v20180724.SyncPrometheusTemp", async function () {
     }
 })
 
-it("monitor.v20180724.CreatePrometheusGlobalNotification", async function () {
+it("monitor.v20180724.CreateAlarmNotice", async function () {
     try {
-       const data = await client.CreatePrometheusGlobalNotification({})
+       const data = await client.CreateAlarmNotice({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -938,6 +968,16 @@ it("monitor.v20180724.DescribeDNSConfig", async function () {
     }
 })
 
+it("monitor.v20180724.CreatePrometheusAlertGroup", async function () {
+    try {
+       const data = await client.CreatePrometheusAlertGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("monitor.v20180724.ModifyPrometheusGlobalNotification", async function () {
     try {
        const data = await client.ModifyPrometheusGlobalNotification({})
@@ -1001,6 +1041,16 @@ it("monitor.v20180724.ModifyPrometheusRecordRuleYaml", async function () {
 it("monitor.v20180724.UpdateGrafanaConfig", async function () {
     try {
        const data = await client.UpdateGrafanaConfig({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("monitor.v20180724.UpdatePrometheusAlertGroup", async function () {
+    try {
+       const data = await client.UpdatePrometheusAlertGroup({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

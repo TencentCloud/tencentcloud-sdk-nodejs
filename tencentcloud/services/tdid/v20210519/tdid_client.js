@@ -28,10 +28,34 @@ class Client extends abstract_client_1.AbstractClient {
         super("tdid.tencentcloudapi.com", "2021-05-19", clientConfig);
     }
     /**
+     * 获取某个应用关键指标统计数据
+     */
+    async GetOverSummary(req, cb) {
+        return this.request("GetOverSummary", req, cb);
+    }
+    /**
+     * 查询权威机构信息
+     */
+    async QueryAuthorityInfo(req, cb) {
+        return this.request("QueryAuthorityInfo", req, cb);
+    }
+    /**
      * 验证已签名的可验证凭证
      */
     async VerifyCredentials(req, cb) {
         return this.request("VerifyCredentials", req, cb);
+    }
+    /**
+     * 查询凭证模版内容
+     */
+    async QueryCPT(req, cb) {
+        return this.request("QueryCPT", req, cb);
+    }
+    /**
+     * 创建凭证持有人的可验证表达
+     */
+    async CreatePresentation(req, cb) {
+        return this.request("CreatePresentation", req, cb);
     }
     /**
      * 自动生成公私钥对托管在DID平台，并注册DID标识
@@ -40,16 +64,52 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateTDidByHost", req, cb);
     }
     /**
+     * 通过业务层绑定的对象ID获取DID标识
+     */
+    async GetTDidByObjectId(req, cb) {
+        return this.request("GetTDidByObjectId", req, cb);
+    }
+    /**
      * 使用导入的公钥文件注册DID标识
      */
     async CreateTDidByPubKey(req, cb) {
         return this.request("CreateTDidByPubKey", req, cb);
     }
     /**
+     * 验证可验证表达的内容
+     */
+    async VerifyPresentation(req, cb) {
+        return this.request("VerifyPresentation", req, cb);
+    }
+    /**
+     * 根据披露策略创建选择性披露凭证
+     */
+    async CreateDisclosedCredential(req, cb) {
+        return this.request("CreateDisclosedCredential", req, cb);
+    }
+    /**
+     * 获取某个应用关键指标统计数据
+     */
+    async GetAppSummary(req, cb) {
+        return this.request("GetAppSummary", req, cb);
+    }
+    /**
      * 获取DID标识的文档
      */
     async GetTDidDocument(req, cb) {
         return this.request("GetTDidDocument", req, cb);
+    }
+    /**
+     * 查询DID标识的认证公钥
+     */
+    async GetTDidPubKey(req, cb) {
+        return this.request("GetTDidPubKey", req, cb);
+    }
+    /**
+     * 设置DID文档的自定义属性
+     */
+    async SetTDidAttribute(req, cb) {
+        return this.request("SetTDidAttribute", req, cb);
     }
     /**
      * 更新凭证的链上状态
@@ -74,12 +134,6 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async IssueCredential(req, cb) {
         return this.request("IssueCredential", req, cb);
-    }
-    /**
-     * 检查用户套餐购买状态
-     */
-    async CheckNewPurchase(req, cb) {
-        return this.request("CheckNewPurchase", req, cb);
     }
 }
 exports.Client = Client;

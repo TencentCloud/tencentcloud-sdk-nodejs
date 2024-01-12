@@ -233,20 +233,6 @@ export interface DescribeProjectLimitsResponse {
 }
 
 /**
- * DeleteOfflineLogConfig返回参数结构体
- */
-export interface DeleteOfflineLogConfigResponse {
-  /**
-   * 接口调用信息
-   */
-  Msg: string
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * DescribeRumLogList返回参数结构体
  */
 export interface DescribeRumLogListResponse {
@@ -604,20 +590,6 @@ export interface DescribeDataReportCountRequest {
 }
 
 /**
- * DeleteOfflineLogRecord请求参数结构体
- */
-export interface DeleteOfflineLogRecordRequest {
-  /**
-   * 项目唯一上报 key
-   */
-  ProjectKey: string
-  /**
-   * 离线日志文件 id
-   */
-  FileID: string
-}
-
-/**
  * DescribeReleaseFiles请求参数结构体
  */
 export interface DescribeReleaseFilesRequest {
@@ -643,20 +615,6 @@ export interface CreateReleaseFileRequest {
    * 文件信息列表
    */
   Files: Array<ReleaseFile>
-}
-
-/**
- * DeleteOfflineLogRecord返回参数结构体
- */
-export interface DeleteOfflineLogRecordResponse {
-  /**
-   * 接口调用信息
-   */
-  Msg: string
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**
@@ -786,41 +744,17 @@ export interface Tag {
 }
 
 /**
- * CreateProject请求参数结构体
+ * DescribeRumGroupLog返回参数结构体
  */
-export interface CreateProjectRequest {
+export interface DescribeRumGroupLogResponse {
   /**
-   * 创建的项目名(不为空且最长为 200)
+   * 返回字符串
    */
-  Name: string
+  Result: string
   /**
-   * 业务系统 ID
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  InstanceID: string
-  /**
-   * 项目抽样率(大于等于 0)
-   */
-  Rate: string
-  /**
-   * 是否开启聚类
-   */
-  EnableURLGroup: number
-  /**
-   * 项目类型("web", "mp", "android", "ios", "node", "hippy", "weex", "viola", "rn")
-   */
-  Type: string
-  /**
-   * 项目对应仓库地址(可选，最长为 256)
-   */
-  Repo?: string
-  /**
-   * 项目对应网页地址(可选，最长为 256)
-   */
-  URL?: string
-  /**
-   * 创建的项目描述(可选，最长为 1000)
-   */
-  Desc?: string
+  RequestId?: string
 }
 
 /**
@@ -1761,17 +1695,41 @@ export interface DeleteLogExportRequest {
 }
 
 /**
- * DescribeRumGroupLog返回参数结构体
+ * CreateProject请求参数结构体
  */
-export interface DescribeRumGroupLogResponse {
+export interface CreateProjectRequest {
   /**
-   * 返回字符串
+   * 创建的项目名(不为空且最长为 200)
    */
-  Result: string
+  Name: string
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 业务系统 ID
    */
-  RequestId?: string
+  InstanceID: string
+  /**
+   * 项目抽样率(大于等于 0)
+   */
+  Rate: string
+  /**
+   * 是否开启聚类
+   */
+  EnableURLGroup: number
+  /**
+   * 项目类型("web", "mp", "android", "ios", "node", "hippy", "weex", "viola", "rn")
+   */
+  Type: string
+  /**
+   * 项目对应仓库地址(可选，最长为 256)
+   */
+  Repo?: string
+  /**
+   * 项目对应网页地址(可选，最长为 256)
+   */
+  URL?: string
+  /**
+   * 创建的项目描述(可选，最长为 1000)
+   */
+  Desc?: string
 }
 
 /**
@@ -2179,24 +2137,6 @@ export interface DescribeScoresResponse {
    * 数组
    */
   ScoreSet: Array<ScoreInfo>
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DescribeOfflineLogConfigs返回参数结构体
- */
-export interface DescribeOfflineLogConfigsResponse {
-  /**
-   * 接口调用信息
-   */
-  Msg: string
-  /**
-   * 用户唯一标示数组
-   */
-  UniqueIDSet: Array<string>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3004,16 +2944,6 @@ export interface DescribeAppDimensionMetricsResponse {
 }
 
 /**
- * DescribeOfflineLogConfigs请求参数结构体
- */
-export interface DescribeOfflineLogConfigsRequest {
-  /**
-   * 项目唯一上报 key
-   */
-  ProjectKey: string
-}
-
-/**
  * DescribeAppSingleCaseDetailList请求参数结构体
  */
 export interface DescribeAppSingleCaseDetailListRequest {
@@ -3091,20 +3021,6 @@ export interface DescribeRumGroupLogRequest {
    * 聚合字段
    */
   GroupField: string
-}
-
-/**
- * DeleteOfflineLogConfig请求参数结构体
- */
-export interface DeleteOfflineLogConfigRequest {
-  /**
-   * 项目唯一上报 key
-   */
-  ProjectKey: string
-  /**
-   * 用户唯一标示(uin or aid)
-   */
-  UniqueID: string
 }
 
 /**

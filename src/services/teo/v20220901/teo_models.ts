@@ -1578,11 +1578,11 @@ export interface ExceptConfig {
  */
 export interface DeleteOriginGroupRequest {
   /**
-   * 站点ID。
+   * 站点 ID
    */
   ZoneId: string
   /**
-   * 源站组ID，此参数必填。
+   * 源站组 ID，此参数必填。
    */
   GroupId?: string
 }

@@ -171,10 +171,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDataStaticUrl", req, cb);
     }
     /**
-     * 获取DescribeDataFetchUrlInfo信息
+     * 新增修改限流
      */
-    async DescribeDataFetchUrlInfo(req, cb) {
-        return this.request("DescribeDataFetchUrlInfo", req, cb);
+    async ModifyProjectLimit(req, cb) {
+        return this.request("ModifyProjectLimit", req, cb);
     }
     /**
      * 获取DescribeDataPvUrlStatistics信息
@@ -215,12 +215,6 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ModifyInstance(req, cb) {
         return this.request("ModifyInstance", req, cb);
-    }
-    /**
-     * 新增修改限流
-     */
-    async ModifyProjectLimit(req, cb) {
-        return this.request("ModifyProjectLimit", req, cb);
     }
     /**
      * 获取DescribeDataStaticResource信息
@@ -283,10 +277,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteWhitelist", req, cb);
     }
     /**
-     * 创建 RUM 业务系统
+     * 获取DescribeDataFetchUrlInfo信息
      */
-    async CreateTawInstance(req, cb) {
-        return this.request("CreateTawInstance", req, cb);
+    async DescribeDataFetchUrlInfo(req, cb) {
+        return this.request("DescribeDataFetchUrlInfo", req, cb);
     }
     /**
      * 停止实例
@@ -329,18 +323,6 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDataEventUrl", req, cb);
     }
     /**
-     * 删除对应的离线日志记录
-     */
-    async DeleteOfflineLogRecord(req, cb) {
-        return this.request("DeleteOfflineLogRecord", req, cb);
-    }
-    /**
-     * 获取设置的离线日志监听配置 - 返回设置的用户唯一标识
-     */
-    async DescribeOfflineLogConfigs(req, cb) {
-        return this.request("DescribeOfflineLogConfigs", req, cb);
-    }
-    /**
      * 获取上传文件存储的临时密钥
      */
     async DescribeReleaseFileSign(req, cb) {
@@ -351,6 +333,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeDataLogUrlInfo(req, cb) {
         return this.request("DescribeDataLogUrlInfo", req, cb);
+    }
+    /**
+     * 获取项目下的UV列表
+     */
+    async DescribeUvList(req, cb) {
+        return this.request("DescribeUvList", req, cb);
     }
     /**
      * 创建 RUM 应用（归属于某个团队）
@@ -377,16 +365,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteProject", req, cb);
     }
     /**
-     * 获取项目下的UV列表
+     * 创建 RUM 业务系统
      */
-    async DescribeUvList(req, cb) {
-        return this.request("DescribeUvList", req, cb);
+    async CreateTawInstance(req, cb) {
+        return this.request("CreateTawInstance", req, cb);
     }
     /**
-     * 删除 rum 离线日志监听 - 对应用户的离线日志将不会上报
+     * 获取DescribeDataFetchUrl信息
      */
-    async DeleteOfflineLogConfig(req, cb) {
-        return this.request("DeleteOfflineLogConfig", req, cb);
+    async DescribeDataFetchUrl(req, cb) {
+        return this.request("DescribeDataFetchUrl", req, cb);
     }
     /**
      * 将对应 sourcemap 文件删除
@@ -399,12 +387,6 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeDataReportCount(req, cb) {
         return this.request("DescribeDataReportCount", req, cb);
-    }
-    /**
-     * 获取DescribeDataFetchUrl信息
-     */
-    async DescribeDataFetchUrl(req, cb) {
-        return this.request("DescribeDataFetchUrl", req, cb);
     }
     /**
      * 转发monitor查询

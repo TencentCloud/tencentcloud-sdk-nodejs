@@ -24,7 +24,6 @@ import {
   CreateTawInstanceResponse,
   DeleteProjectRequest,
   DescribeProjectLimitsResponse,
-  DeleteOfflineLogConfigResponse,
   DescribeRumLogListResponse,
   DescribeAppMetricsDataRequest,
   DescribeDataPvUrlInfoResponse,
@@ -43,14 +42,12 @@ import {
   RumUvInfo,
   DescribeScoresRequest,
   DescribeDataReportCountRequest,
-  DeleteOfflineLogRecordRequest,
   DescribeReleaseFilesRequest,
   CreateReleaseFileRequest,
-  DeleteOfflineLogRecordResponse,
   DescribeDataCustomUrlRequest,
   DescribeUvListResponse,
   Tag,
-  CreateProjectRequest,
+  DescribeRumGroupLogResponse,
   DescribeDataStaticUrlRequest,
   ModifyInstanceResponse,
   DeleteStarProjectRequest,
@@ -84,7 +81,7 @@ import {
   ResumeProjectRequest,
   ProjectLimit,
   DeleteLogExportRequest,
-  DescribeRumGroupLogResponse,
+  CreateProjectRequest,
   DescribeRumStatsLogListResponse,
   CreateWhitelistRequest,
   DescribeDataPvUrlStatisticsResponse,
@@ -104,7 +101,6 @@ import {
   RumPvInfo,
   DeleteReleaseFileResponse,
   DescribeScoresResponse,
-  DescribeOfflineLogConfigsResponse,
   DeleteLogExportResponse,
   DescribeReleaseFileSignResponse,
   DescribeTawInstancesRequest,
@@ -128,10 +124,8 @@ import {
   DescribeProjectsRequest,
   DescribeDataEventUrlRequest,
   DescribeAppDimensionMetricsResponse,
-  DescribeOfflineLogConfigsRequest,
   DescribeAppSingleCaseDetailListRequest,
   DescribeRumGroupLogRequest,
-  DeleteOfflineLogConfigRequest,
   DescribeWhitelistsResponse,
   DescribeProjectsResponse,
   ModifyProjectResponse,
@@ -401,13 +395,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取DescribeDataFetchUrlInfo信息
+   * 新增修改限流
    */
-  async DescribeDataFetchUrlInfo(
-    req: DescribeDataFetchUrlInfoRequest,
-    cb?: (error: string, rep: DescribeDataFetchUrlInfoResponse) => void
-  ): Promise<DescribeDataFetchUrlInfoResponse> {
-    return this.request("DescribeDataFetchUrlInfo", req, cb)
+  async ModifyProjectLimit(
+    req: ModifyProjectLimitRequest,
+    cb?: (error: string, rep: ModifyProjectLimitResponse) => void
+  ): Promise<ModifyProjectLimitResponse> {
+    return this.request("ModifyProjectLimit", req, cb)
   }
 
   /**
@@ -472,16 +466,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyInstanceResponse) => void
   ): Promise<ModifyInstanceResponse> {
     return this.request("ModifyInstance", req, cb)
-  }
-
-  /**
-   * 新增修改限流
-   */
-  async ModifyProjectLimit(
-    req: ModifyProjectLimitRequest,
-    cb?: (error: string, rep: ModifyProjectLimitResponse) => void
-  ): Promise<ModifyProjectLimitResponse> {
-    return this.request("ModifyProjectLimit", req, cb)
   }
 
   /**
@@ -585,13 +569,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建 RUM 业务系统
+   * 获取DescribeDataFetchUrlInfo信息
    */
-  async CreateTawInstance(
-    req: CreateTawInstanceRequest,
-    cb?: (error: string, rep: CreateTawInstanceResponse) => void
-  ): Promise<CreateTawInstanceResponse> {
-    return this.request("CreateTawInstance", req, cb)
+  async DescribeDataFetchUrlInfo(
+    req: DescribeDataFetchUrlInfoRequest,
+    cb?: (error: string, rep: DescribeDataFetchUrlInfoResponse) => void
+  ): Promise<DescribeDataFetchUrlInfoResponse> {
+    return this.request("DescribeDataFetchUrlInfo", req, cb)
   }
 
   /**
@@ -659,26 +643,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除对应的离线日志记录
-   */
-  async DeleteOfflineLogRecord(
-    req: DeleteOfflineLogRecordRequest,
-    cb?: (error: string, rep: DeleteOfflineLogRecordResponse) => void
-  ): Promise<DeleteOfflineLogRecordResponse> {
-    return this.request("DeleteOfflineLogRecord", req, cb)
-  }
-
-  /**
-   * 获取设置的离线日志监听配置 - 返回设置的用户唯一标识
-   */
-  async DescribeOfflineLogConfigs(
-    req: DescribeOfflineLogConfigsRequest,
-    cb?: (error: string, rep: DescribeOfflineLogConfigsResponse) => void
-  ): Promise<DescribeOfflineLogConfigsResponse> {
-    return this.request("DescribeOfflineLogConfigs", req, cb)
-  }
-
-  /**
    * 获取上传文件存储的临时密钥
    */
   async DescribeReleaseFileSign(
@@ -696,6 +660,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDataLogUrlInfoResponse) => void
   ): Promise<DescribeDataLogUrlInfoResponse> {
     return this.request("DescribeDataLogUrlInfo", req, cb)
+  }
+
+  /**
+   * 获取项目下的UV列表
+   */
+  async DescribeUvList(
+    req: DescribeUvListRequest,
+    cb?: (error: string, rep: DescribeUvListResponse) => void
+  ): Promise<DescribeUvListResponse> {
+    return this.request("DescribeUvList", req, cb)
   }
 
   /**
@@ -739,23 +713,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取项目下的UV列表
+   * 创建 RUM 业务系统
    */
-  async DescribeUvList(
-    req: DescribeUvListRequest,
-    cb?: (error: string, rep: DescribeUvListResponse) => void
-  ): Promise<DescribeUvListResponse> {
-    return this.request("DescribeUvList", req, cb)
+  async CreateTawInstance(
+    req: CreateTawInstanceRequest,
+    cb?: (error: string, rep: CreateTawInstanceResponse) => void
+  ): Promise<CreateTawInstanceResponse> {
+    return this.request("CreateTawInstance", req, cb)
   }
 
   /**
-   * 删除 rum 离线日志监听 - 对应用户的离线日志将不会上报
+   * 获取DescribeDataFetchUrl信息
    */
-  async DeleteOfflineLogConfig(
-    req: DeleteOfflineLogConfigRequest,
-    cb?: (error: string, rep: DeleteOfflineLogConfigResponse) => void
-  ): Promise<DeleteOfflineLogConfigResponse> {
-    return this.request("DeleteOfflineLogConfig", req, cb)
+  async DescribeDataFetchUrl(
+    req: DescribeDataFetchUrlRequest,
+    cb?: (error: string, rep: DescribeDataFetchUrlResponse) => void
+  ): Promise<DescribeDataFetchUrlResponse> {
+    return this.request("DescribeDataFetchUrl", req, cb)
   }
 
   /**
@@ -776,16 +750,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDataReportCountResponse) => void
   ): Promise<DescribeDataReportCountResponse> {
     return this.request("DescribeDataReportCount", req, cb)
-  }
-
-  /**
-   * 获取DescribeDataFetchUrl信息
-   */
-  async DescribeDataFetchUrl(
-    req: DescribeDataFetchUrlRequest,
-    cb?: (error: string, rep: DescribeDataFetchUrlResponse) => void
-  ): Promise<DescribeDataFetchUrlResponse> {
-    return this.request("DescribeDataFetchUrl", req, cb)
   }
 
   /**

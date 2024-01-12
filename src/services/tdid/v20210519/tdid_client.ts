@@ -18,27 +18,48 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
-  CreateTDidByPubKeyResponse,
   GetTDidDocumentResponse,
-  GetCredentialStateRequest,
-  CheckNewPurchaseRequest,
-  VerifyCredentialsRequest,
-  CRDLArg,
-  GetTDidDocumentRequest,
+  VerifyPresentationRequest,
+  SetTDidAttributeResponse,
   IssueCredentialResponse,
-  GetCredentialStateResponse,
-  CreateTDidByHostRequest,
-  IssueCredentialRequest,
+  ResourceCounterData,
+  SetTDidAttributeRequest,
+  CreateDisclosedCredentialRequest,
+  QueryCPTResponse,
+  CreateTDidByPubKeyResponse,
+  QueryAuthorityInfoResponse,
   VerifyCredentialsResponse,
-  UpdateCredentialStateRequest,
+  GetCredentialStateResponse,
+  IssueCredentialRequest,
+  GetTDidByObjectIdResponse,
+  CreateDisclosedCredentialResponse,
+  GetOverSummaryRequest,
+  GetTDidPubKeyRequest,
+  GetTDidDocumentRequest,
+  CreateTDidByHostResponse,
+  VerifyCredentialsRequest,
+  QueryAuthorityInfoRequest,
+  VerifyPresentationResponse,
+  GetCredentialStateRequest,
+  QueryCPTRequest,
+  CreatePresentationRequest,
+  CreateTDidByHostRequest,
+  GetAppSummaryResponse,
+  CRDLArg,
+  GetTDidPubKeyResponse,
+  UpdateCredentialStateResponse,
+  DeactivateTDidResponse,
+  CredentialProof,
   CredentialState,
+  ChainTransaction,
+  CreatePresentationResponse,
+  DidAttribute,
+  UpdateCredentialStateRequest,
+  GetOverSummaryResponse,
   CreateTDidByPubKeyRequest,
   DeactivateTDidRequest,
-  CheckNewPurchaseResponse,
-  UpdateCredentialStateResponse,
-  ChainTransaction,
-  DeactivateTDidResponse,
-  CreateTDidByHostResponse,
+  GetTDidByObjectIdRequest,
+  GetAppSummaryRequest,
 } from "./tdid_models"
 
 /**
@@ -48,6 +69,26 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("tdid.tencentcloudapi.com", "2021-05-19", clientConfig)
+  }
+
+  /**
+   * 获取某个应用关键指标统计数据
+   */
+  async GetOverSummary(
+    req?: GetOverSummaryRequest,
+    cb?: (error: string, rep: GetOverSummaryResponse) => void
+  ): Promise<GetOverSummaryResponse> {
+    return this.request("GetOverSummary", req, cb)
+  }
+
+  /**
+   * 查询权威机构信息
+   */
+  async QueryAuthorityInfo(
+    req: QueryAuthorityInfoRequest,
+    cb?: (error: string, rep: QueryAuthorityInfoResponse) => void
+  ): Promise<QueryAuthorityInfoResponse> {
+    return this.request("QueryAuthorityInfo", req, cb)
   }
 
   /**
@@ -61,6 +102,26 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询凭证模版内容
+   */
+  async QueryCPT(
+    req: QueryCPTRequest,
+    cb?: (error: string, rep: QueryCPTResponse) => void
+  ): Promise<QueryCPTResponse> {
+    return this.request("QueryCPT", req, cb)
+  }
+
+  /**
+   * 创建凭证持有人的可验证表达
+   */
+  async CreatePresentation(
+    req: CreatePresentationRequest,
+    cb?: (error: string, rep: CreatePresentationResponse) => void
+  ): Promise<CreatePresentationResponse> {
+    return this.request("CreatePresentation", req, cb)
+  }
+
+  /**
    * 自动生成公私钥对托管在DID平台，并注册DID标识
    */
   async CreateTDidByHost(
@@ -68,6 +129,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateTDidByHostResponse) => void
   ): Promise<CreateTDidByHostResponse> {
     return this.request("CreateTDidByHost", req, cb)
+  }
+
+  /**
+   * 通过业务层绑定的对象ID获取DID标识
+   */
+  async GetTDidByObjectId(
+    req: GetTDidByObjectIdRequest,
+    cb?: (error: string, rep: GetTDidByObjectIdResponse) => void
+  ): Promise<GetTDidByObjectIdResponse> {
+    return this.request("GetTDidByObjectId", req, cb)
   }
 
   /**
@@ -81,6 +152,36 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 验证可验证表达的内容
+   */
+  async VerifyPresentation(
+    req: VerifyPresentationRequest,
+    cb?: (error: string, rep: VerifyPresentationResponse) => void
+  ): Promise<VerifyPresentationResponse> {
+    return this.request("VerifyPresentation", req, cb)
+  }
+
+  /**
+   * 根据披露策略创建选择性披露凭证
+   */
+  async CreateDisclosedCredential(
+    req: CreateDisclosedCredentialRequest,
+    cb?: (error: string, rep: CreateDisclosedCredentialResponse) => void
+  ): Promise<CreateDisclosedCredentialResponse> {
+    return this.request("CreateDisclosedCredential", req, cb)
+  }
+
+  /**
+   * 获取某个应用关键指标统计数据
+   */
+  async GetAppSummary(
+    req: GetAppSummaryRequest,
+    cb?: (error: string, rep: GetAppSummaryResponse) => void
+  ): Promise<GetAppSummaryResponse> {
+    return this.request("GetAppSummary", req, cb)
+  }
+
+  /**
    * 获取DID标识的文档
    */
   async GetTDidDocument(
@@ -88,6 +189,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: GetTDidDocumentResponse) => void
   ): Promise<GetTDidDocumentResponse> {
     return this.request("GetTDidDocument", req, cb)
+  }
+
+  /**
+   * 查询DID标识的认证公钥
+   */
+  async GetTDidPubKey(
+    req: GetTDidPubKeyRequest,
+    cb?: (error: string, rep: GetTDidPubKeyResponse) => void
+  ): Promise<GetTDidPubKeyResponse> {
+    return this.request("GetTDidPubKey", req, cb)
+  }
+
+  /**
+   * 设置DID文档的自定义属性
+   */
+  async SetTDidAttribute(
+    req: SetTDidAttributeRequest,
+    cb?: (error: string, rep: SetTDidAttributeResponse) => void
+  ): Promise<SetTDidAttributeResponse> {
+    return this.request("SetTDidAttribute", req, cb)
   }
 
   /**
@@ -128,15 +249,5 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: IssueCredentialResponse) => void
   ): Promise<IssueCredentialResponse> {
     return this.request("IssueCredential", req, cb)
-  }
-
-  /**
-   * 检查用户套餐购买状态
-   */
-  async CheckNewPurchase(
-    req?: CheckNewPurchaseRequest,
-    cb?: (error: string, rep: CheckNewPurchaseResponse) => void
-  ): Promise<CheckNewPurchaseResponse> {
-    return this.request("CheckNewPurchase", req, cb)
   }
 }

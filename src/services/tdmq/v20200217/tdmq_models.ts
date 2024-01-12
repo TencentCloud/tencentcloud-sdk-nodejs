@@ -437,6 +437,37 @@ export interface ModifyRabbitMQVirtualHostRequest {
 }
 
 /**
+ * ExportRocketMQMessageDetail请求参数结构体
+ */
+export interface ExportRocketMQMessageDetailRequest {
+  /**
+   * 集群id
+   */
+  ClusterId: string
+  /**
+   * 应用命名空间
+   */
+  EnvironmentId: string
+  /**
+   * Topic名称
+如果是死信消息 isDlqMsg=true
+   */
+  TopicName: string
+  /**
+   * 消息id
+   */
+  MsgId: string
+  /**
+   * 是否包含消息体
+   */
+  IncludeMsgBody: boolean
+  /**
+   * 是否死信消息
+   */
+  DeadLetterMsg?: boolean
+}
+
+/**
  * ModifyEnvironmentAttributes请求参数结构体
  */
 export interface ModifyEnvironmentAttributesRequest {
@@ -2088,6 +2119,70 @@ export interface RabbitMQVirtualHostStatistics {
    * 当前vhost的用户数量
    */
   CurrentUsers?: number
+}
+
+/**
+ * ExportRocketMQMessageDetail返回参数结构体
+ */
+export interface ExportRocketMQMessageDetailResponse {
+  /**
+   * 消息id
+   */
+  MsgId?: string
+  /**
+   * 消息生成时间戳
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BornTimestamp?: number
+  /**
+   * 消息存储时间戳
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StoreTimestamp?: number
+  /**
+   * 消息生产客户端地址
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BornHost?: string
+  /**
+   * 消息Tag
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MsgTag?: string
+  /**
+   * 消息Key
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MsgKey?: string
+  /**
+   * 消息属性
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Properties?: string
+  /**
+   * 消息重试次数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ReConsumeTimes?: number
+  /**
+   * Base64编码格式字符串
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MsgBody?: string
+  /**
+   * 消息内容的CRC32 Code
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MsgBodyCRC?: number
+  /**
+   * 消息体大小（单位K）
+当大于2048时不返回消息
+   */
+  MsgBodySize?: number
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

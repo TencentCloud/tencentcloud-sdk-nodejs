@@ -18,9 +18,49 @@ const client = new tencentcloud.tdid.v20210519.Client({
 })
 describe("tdid.v20210519.test.js", function () {
 
+it("tdid.v20210519.GetOverSummary", async function () {
+    try {
+       const data = await client.GetOverSummary({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tdid.v20210519.QueryAuthorityInfo", async function () {
+    try {
+       const data = await client.QueryAuthorityInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tdid.v20210519.VerifyCredentials", async function () {
     try {
        const data = await client.VerifyCredentials({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tdid.v20210519.QueryCPT", async function () {
+    try {
+       const data = await client.QueryCPT({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tdid.v20210519.CreatePresentation", async function () {
+    try {
+       const data = await client.CreatePresentation({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -38,6 +78,16 @@ it("tdid.v20210519.CreateTDidByHost", async function () {
     }
 })
 
+it("tdid.v20210519.GetTDidByObjectId", async function () {
+    try {
+       const data = await client.GetTDidByObjectId({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tdid.v20210519.CreateTDidByPubKey", async function () {
     try {
        const data = await client.CreateTDidByPubKey({})
@@ -48,9 +98,59 @@ it("tdid.v20210519.CreateTDidByPubKey", async function () {
     }
 })
 
+it("tdid.v20210519.VerifyPresentation", async function () {
+    try {
+       const data = await client.VerifyPresentation({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tdid.v20210519.CreateDisclosedCredential", async function () {
+    try {
+       const data = await client.CreateDisclosedCredential({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tdid.v20210519.GetAppSummary", async function () {
+    try {
+       const data = await client.GetAppSummary({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tdid.v20210519.GetTDidDocument", async function () {
     try {
        const data = await client.GetTDidDocument({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tdid.v20210519.GetTDidPubKey", async function () {
+    try {
+       const data = await client.GetTDidPubKey({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tdid.v20210519.SetTDidAttribute", async function () {
+    try {
+       const data = await client.SetTDidAttribute({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -91,16 +191,6 @@ it("tdid.v20210519.GetCredentialState", async function () {
 it("tdid.v20210519.IssueCredential", async function () {
     try {
        const data = await client.IssueCredential({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("tdid.v20210519.CheckNewPurchase", async function () {
-    try {
-       const data = await client.CheckNewPurchase({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

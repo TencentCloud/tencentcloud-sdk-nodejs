@@ -1421,6 +1421,14 @@ export interface GetEidResultRequest {
    * 从活体视频中截取一定张数的最佳帧。默认为0，最大为3，超出3的最多只给3张。（InfoType需要包含3）
    */
   BestFramesCount?: number
+  /**
+   * 是否对身份证照片进行裁边。默认为false。（InfoType需要包含2）
+   */
+  IsCutIdCardImage?: boolean
+  /**
+   * 是否需要从身份证中抠出头像。默认为false。（InfoType需要包含2）
+   */
+  IsNeedIdCardAvatar?: boolean
 }
 
 /**
