@@ -10095,12 +10095,12 @@ export interface DescribeAlarmPoliciesRequest {
    */
   PolicyName?: string
   /**
-   * 根据监控类型过滤 不选默认查所有类型 "MT_QCE"=云产品监控
+   * 根据监控类型过滤 不选默认查所有类型 "MT_QCE"=云产品监控,当Dimension不为空时，该项为必填项
    */
   MonitorTypes?: Array<string>
   /**
    * 根据命名空间过滤，不同策略类型的值详见
-[策略类型列表](https://cloud.tencent.com/document/product/248/50397)
+[策略类型列表](https://cloud.tencent.com/document/product/248/50397)当Dimension不为空时，该项为必填项
    */
   Namespaces?: Array<string>
   /**

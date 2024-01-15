@@ -5068,42 +5068,47 @@ export interface LaneInfo {
      * 泳道ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    LaneId: string;
+    LaneId?: string;
     /**
      * 泳道名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    LaneName: string;
+    LaneName?: string;
     /**
      * 泳道备注
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Remark: string;
+    Remark?: string;
     /**
      * 创建时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CreateTime: number;
+    CreateTime?: number;
     /**
      * 更新时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    UpdateTime: number;
+    UpdateTime?: number;
     /**
      * 泳道部署组
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    LaneGroupList: Array<LaneGroup>;
+    LaneGroupList?: Array<LaneGroup>;
     /**
      * 是否入口应用
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Entrance: boolean;
+    Entrance?: boolean;
     /**
      * 泳道已经关联部署组的命名空间列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    NamespaceIdList: Array<string>;
+    NamespaceIdList?: Array<string>;
+    /**
+     * 泳道部署组ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    LaneGroupId?: string;
 }
 /**
  * DescribeConfigReleaseLogs返回参数结构体
