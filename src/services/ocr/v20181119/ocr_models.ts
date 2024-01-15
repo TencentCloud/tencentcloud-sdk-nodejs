@@ -8708,6 +8708,44 @@ export interface EnglishOCRResponse {
 }
 
 /**
+ * RecognizeForeignPermanentResidentIdCard返回参数结构体
+ */
+export interface RecognizeForeignPermanentResidentIdCardResponse {
+  /**
+   * 中文姓名。
+   */
+  CnName?: string
+  /**
+   * 英文名。
+   */
+  EnName?: string
+  /**
+   * 性别。
+   */
+  Sex?: string
+  /**
+   * 出生日期。规范格式为 XXXX年XX月XX日。
+   */
+  DateOfBirth?: string
+  /**
+   * 国籍。
+   */
+  Nationality?: string
+  /**
+   * 有效期限。
+   */
+  PeriodOfValidity?: string
+  /**
+   * 证件号码。
+   */
+  No?: string
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * BusInvoiceOCR请求参数结构体
  */
 export interface BusInvoiceOCRRequest {
@@ -9983,6 +10021,39 @@ export interface UsedCarPurchaseInvoice {
    * 机打发票号码
    */
   MachineNumber?: string
+}
+
+/**
+ * RecognizeForeignPermanentResidentIdCard请求参数结构体
+ */
+export interface RecognizeForeignPermanentResidentIdCardRequest {
+  /**
+   * 图片的 Url 地址。
+支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
+支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。
+支持的图片像素：需介于20-10000px之间。
+图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
+非腾讯云存储的 Url 速度和稳定性可能受一定影响。
+示例值：https://ocr-demo-1254418846.cos.ap-guangzhou.myqcloud.com/docume
+   */
+  ImageUrl?: string
+  /**
+   * 图片的 Base64 值。
+支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
+支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。
+支持的图片像素：需介于20-10000px之间。
+图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
+   */
+  ImageBase64?: string
+  /**
+   * 是否开启PDF识别，默认值为false，开启后可同时支持图片和PDF的识别。
+   */
+  EnablePdf?: boolean
+  /**
+   * 需要识别的PDF页面的对应页码，传入时仅支持PDF单页识别，当上传文件为PDF且EnablePdf参数值为true时有效，默认值为1。
+示例值：1
+   */
+  PdfPageNumber?: number
 }
 
 /**

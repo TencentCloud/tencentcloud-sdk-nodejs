@@ -3038,16 +3038,6 @@ it("wedata.v20210820.DescribeTableMeta", async function () {
     }
 })
 
-it("wedata.v20210820.DescribeKafkaTopicInfo", async function () {
-    try {
-       const data = await client.DescribeKafkaTopicInfo({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("wedata.v20210820.GetIntegrationNodeColumnSchema", async function () {
     try {
        const data = await client.GetIntegrationNodeColumnSchema({})

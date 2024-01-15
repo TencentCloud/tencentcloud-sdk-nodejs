@@ -3833,19 +3833,6 @@ export interface DescribeInstanceLogRequest {
     OriginFileName: string;
 }
 /**
- * DescribeKafkaTopicInfo请求参数结构体
- */
-export interface DescribeKafkaTopicInfoRequest {
-    /**
-     * 数据源id
-     */
-    DatasourceId: string;
-    /**
-     * 数据源类型
-     */
-    Type: string;
-}
-/**
  * DescribeRuleGroupSubscription返回参数结构体
  */
 export interface DescribeRuleGroupSubscriptionResponse {
@@ -6964,15 +6951,6 @@ export interface DescribeRuleTemplateResponse {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Data: RuleTemplate;
-    /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
-/**
- * DescribeKafkaTopicInfo返回参数结构体
- */
-export interface DescribeKafkaTopicInfoResponse {
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */

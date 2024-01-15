@@ -167,8 +167,9 @@ export interface Component {
   <li> <b>DATE</b> : 日期控件；默认是格式化为xxxx年xx月xx日字符串；</li>
   <li> <b>DISTRICT</b> : 省市区行政区控件，ComponentValue填写省市区行政区字符串内容；</li></ul>
   
-  **如果是SignComponent签署控件类型，则可选的字段为**
-  
+  **如果是SignComponent签署控件类型，
+  需要根据签署人的类型可选的字段为**
+  * 企业方
   <ul><li> <b>SIGN_SEAL</b> : 签署印章控件；</li>
   <li> <b>SIGN_DATE</b> : 签署日期控件；</li>
   <li> <b>SIGN_SIGNATURE</b> : 用户签名控件；</li>
@@ -176,6 +177,12 @@ export interface Component {
   <li> <b>SIGN_PAGING_SEAL</b> : 骑缝章；若文件发起，需要对应填充ComponentPosY、ComponentWidth、ComponentHeight</li>
   <li> <b>SIGN_OPINION</b> : 签署意见控件，用户需要根据配置的签署意见内容，完成对意见内容的确认；</li>
   <li> <b>SIGN_LEGAL_PERSON_SEAL</b> : 企业法定代表人控件。</li></ul>
+  
+  * 个人方
+  <ul><li> <b>SIGN_DATE</b> : 签署日期控件；</li>
+  <li> <b>SIGN_SIGNATURE</b> : 用户签名控件；</li>
+  <li> <b>SIGN_PERSONAL_SEAL</b> : 个人签署印章控件（使用文件发起暂不支持此类型）；</li></ul>
+   
   注：` 表单域的控件不能作为印章和签名控件`
      */
     ComponentType?: string;
@@ -1151,7 +1158,8 @@ export interface ReleasedApprover {
 export interface CreateConsoleLoginUrlResponse {
     /**
      * 跳转链接, 链接的有效期根据企业,员工状态和终端等有区别, 可以参考下表
-  <table> <thead> <tr> <th>子客企业状态</th> <th>子客企业员工状态</th> <th>Endpoint</th> <th>链接有效期限</th> </tr> </thead>  <tbody> <tr> <td>企业未激活</td> <td>员工未认证</td> <td>PC/PC_SHORT_URL</td> <td>5分钟</td>  </tr>  <tr> <td>企业未激活</td> <td>员工未认证</td> <td>CHANNEL/APP</td> <td>一年</td>  </tr>  <tr> <td>企业已激活</td> <td>员工未认证</td> <td>PC/PC_SHORT_URL</td> <td>5分钟</td>  </tr> <tr> <td>企业已激活</td> <td>员工未认证</td> <td>PC/CHANNEL/APP</td> <td>一年</td>  </tr>  <tr> <td>企业已激活</td> <td>员工已认证</td> <td>PC</td> <td>5分钟</td>  </tr>  <tr> <td>企业已激活</td> <td>员工已认证</td> <td>CHANNEL/APP</td> <td>一年</td>  </tr> </tbody> </table>
+  <table> <thead> <tr> <th>子客企业状态</th> <th>子客企业员工状态</th>
+  <th>Endpoint</th> <th>链接有效期限</th> </tr> </thead>  <tbody> <tr> <td>企业未激活</td> <td>员工未认证</td> <td>PC/PC_SHORT_URL</td> <td>5分钟</td>  </tr>  <tr> <td>企业未激活</td> <td>员工未认证</td> <td>CHANNEL/APP/H5/SHORT_H5</td> <td>30天</td>  </tr>  <tr> <td>企业已激活</td> <td>员工未认证</td> <td>PC/PC_SHORT_URL</td> <td>5分钟</td>  </tr> <tr> <td>企业已激活</td> <td>员工未认证</td> <td>PC/CHANNEL/APP/H5/SHORT_H5</td> <td>30天</td>  </tr>  <tr> <td>企业已激活</td> <td>员工已认证</td> <td>PC</td> <td>5分钟</td>  </tr>  <tr> <td>企业已激活</td> <td>员工已认证</td> <td>CHANNEL/APP/H5/SHORT_H5</td> <td>30天</td>  </tr> </tbody> </table>
   
   注：
   1. <font color="red">链接仅单次有效</font>，每次登录需要需要重新创建新的链接
@@ -3151,7 +3159,9 @@ export interface CreateConsoleLoginUrlRequest {
   <ul><li>**PC**：(默认)<font color="red">web控制台</font>链接, 需要在PC浏览器中打开</li>
   <li>**CHANNEL**：H5跳转到电子签小程序链接, 一般用于发送短信中带的链接, 打开后进入腾讯电子签小程序</li>
   <li>**SHORT_URL**：<font color="red">H5</font>跳转到电子签小程序链接的短链形式, 一般用于发送短信中带的链接, 打开后进入腾讯电子签小程序</li>
-  <li>**APP**：<font color="red">APP或小程序</font>跳转电子签小程序链接, 一般用于贵方小程序或者APP跳转过来,  打开后进入腾讯电子签小程序</li></ul>
+  <li>**APP**：<font color="red">APP或小程序</font>跳转电子签小程序链接, 一般用于贵方小程序或者APP跳转过来,  打开后进入腾讯电子签小程序</li>
+  <li>**H5**：<font color="red">H5长链接</font>跳转H5链接, 一般用于贵方H5跳转过来,  打开后进入腾讯电子签H5页面</li>
+  <li>**SHORT_H5**：<font color="red">H5短链</font>跳转H5的短链形式, 一般用于发送短信中带的链接, 打开后进入腾讯电子签H5页面</li></ul>
      */
     Endpoint?: string;
     /**
@@ -3176,6 +3186,16 @@ export interface CreateConsoleLoginUrlRequest {
      * @deprecated
      */
     Operator?: UserInfo;
+    /**
+     * 子客经办人身份证
+  注意：`如果已同步，这里非空会更新同步的经办人身份证号，暂时只支持居民身份证类型`。
+     */
+    ProxyOperatorIdCardNumber?: string;
+    /**
+     * 认证完成跳转链接
+  注意：`只在H5生效，域名需要联系我们开白`。
+     */
+    AutoJumpUrl?: string;
 }
 /**
  * 机构信息
@@ -4496,6 +4516,18 @@ export interface RegistrationOrganizationInfo {
   `2. 如果当前的企业类型是政府/事业单位, 则只支持上传授权书+对公打款`
      */
     AuthorizationTypes?: Array<number | bigint>;
+    /**
+     * 经办人的证件类型，支持以下类型
+  <ul><li>ID_CARD : 居民身份证  (默认值)</li>
+  <li>HONGKONG_AND_MACAO : 港澳居民来往内地通行证</li>
+  <li>HONGKONG_MACAO_AND_TAIWAN : 港澳台居民居住证(格式同居民身份证)</li></ul>
+  
+     */
+    AdminIdCardType?: string;
+    /**
+     * 经办人的证件号
+     */
+    AdminIdCardNumber?: string;
 }
 /**
  * ChannelCreateMultiFlowSignQRCode请求参数结构体
@@ -5499,7 +5531,9 @@ export interface CreateBatchOrganizationRegistrationTasksRequest {
   <ul><li>**PC**：(默认)web控制台链接, 需要在PC浏览器中打开</li>
   <li>**CHANNEL**：H5跳转到电子签小程序链接, 一般用于发送短信中带的链接, 打开后进入腾讯电子签小程序</li>
   <li>**SHORT_URL**：H5跳转到电子签小程序链接的短链形式, 一般用于发送短信中带的链接, 打开后进入腾讯电子签小程序</li>
-  <li>**APP**：第三方APP或小程序跳转电子签小程序链接, 一般用于贵方小程序或者APP跳转过来,  打开后进入腾讯电子签小程序</li></ul>
+  <li>**APP**：第三方APP或小程序跳转电子签小程序链接, 一般用于贵方小程序或者APP跳转过来,  打开后进入腾讯电子签小程序</li>
+  <li>**H5**：第三方H5跳转到电子签H5长链接, 一般用于贵方H5跳转过来,  打开后进入腾讯电子签H5页面</li>
+  <li>**SHORT_H5**：第三方H5跳转到电子签H5短链接, 一般用于贵方H5跳转过来,  打开后进入腾讯电子签H5页面</li></ul>
   示例值：PC
   
      */
@@ -7232,12 +7266,13 @@ export interface ChannelCreateFlowSignUrlRequest {
      */
     FlowId: string;
     /**
-     * 流程签署人列表，其中结构体的Name，Mobile和ApproverType必传，其他可不传。
+     * 流程签署人列表，其中结构体的Name，Mobile和ApproverType必传，企业签署人则还需传OrganizationName、OpenId、OrganizationOpenId，其他可不传。
+  
   注:
-  `1. ApproverType目前只支持个人(PERSON)类型的签署人。`
-  `2. 签署人只能有手写签名和时间类型的签署控件，其他类型的填写控件和签署控件暂时都未支持。`
+  `1. 签署人只能有手写签名、时间类型和印章类型的签署控件，其他类型的填写控件和签署控件暂时都未支持。`
+  `2. 生成发起方预览链接时，该字段（FlowApproverInfos）传空或者不传`
      */
-    FlowApproverInfos: Array<FlowApproverInfo>;
+    FlowApproverInfos?: Array<FlowApproverInfo>;
     /**
      * 用户信息，暂未开放
      * @deprecated
@@ -7252,6 +7287,15 @@ export interface ChannelCreateFlowSignUrlRequest {
      * 签署完之后的H5页面的跳转链接，此链接及支持http://和https://，最大长度1000个字符。(建议https协议)
      */
     JumpUrl?: string;
+    /**
+     * 链接类型，支持指定以下类型
+  <ul><li>0 : 签署链接 (默认值)</li>
+  <li>1 : 预览链接</li></ul>
+  注:
+  `1. 当指定链接类型为1时，链接为预览链接，打开链接无法签署仅支持预览以及查看当前合同状态。`
+  `2. 如需生成发起方预览链接，则签署方信息传空，即FlowApproverInfos传空或者不传。`
+     */
+    UrlType?: number;
 }
 /**
  * DescribeTemplates请求参数结构体

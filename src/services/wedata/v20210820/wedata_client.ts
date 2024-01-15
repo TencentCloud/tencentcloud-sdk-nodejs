@@ -131,7 +131,6 @@ import {
   CreateInLongAgentResponse,
   RuleGroupTable,
   DescribeInstanceLogRequest,
-  DescribeKafkaTopicInfoRequest,
   DescribeRuleGroupSubscriptionResponse,
   DescribeIntegrationStatisticsTaskStatusTrendResponse,
   DeleteResourceFileRequest,
@@ -232,7 +231,6 @@ import {
   DescribeColumnsMetaRequest,
   DescribeOrganizationalFunctionsRequest,
   DescribeRuleTemplateResponse,
-  DescribeKafkaTopicInfoResponse,
   OpsTaskCanvasInfoList,
   DescribeDependTaskListsRequest,
   DatabaseMeta,
@@ -4011,18 +4009,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeTableMetaResponse) => void
   ): Promise<DescribeTableMetaResponse> {
     return this.request("DescribeTableMeta", req, cb)
-  }
-
-  /**
-     * 没用到
-
-获取kafka的topic信息
-     */
-  async DescribeKafkaTopicInfo(
-    req: DescribeKafkaTopicInfoRequest,
-    cb?: (error: string, rep: DescribeKafkaTopicInfoResponse) => void
-  ): Promise<DescribeKafkaTopicInfoResponse> {
-    return this.request("DescribeKafkaTopicInfo", req, cb)
   }
 
   /**

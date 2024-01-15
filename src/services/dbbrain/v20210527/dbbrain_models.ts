@@ -644,11 +644,11 @@ export interface DescribeRedisTopBigKeysResponse {
   /**
    * top key列表。
    */
-  TopKeys: Array<RedisKeySpaceData>
+  TopKeys?: Array<RedisKeySpaceData>
   /**
    * 采集时间戳（秒）。
    */
-  Timestamp: number
+  Timestamp?: number
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2182,6 +2182,11 @@ export interface InstanceConfs {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   KeyDelimiters?: Array<string>
+  /**
+   * 分片节点数量。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ShardNum?: string
 }
 
 /**
@@ -3191,6 +3196,14 @@ export interface DescribeRedisTopBigKeysRequest {
    * 查询数目，默认为20，最大值为100。
    */
   Limit?: number
+  /**
+   * 异步任务ID。当为空时，选择最近任务的ID。
+   */
+  AsyncRequestId?: number
+  /**
+   * 分片节点序号列表。当列表为空时，选择所有分片节点。
+   */
+  ShardIds?: Array<number | bigint>
 }
 
 /**

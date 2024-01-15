@@ -285,6 +285,14 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("QuotaInvoiceOCR", req, cb);
     }
     /**
+     * 本接口支持市面上主流版式电子运单的识别，包括收件人和寄件人的姓名、电话、地址以及运单号等字段。
+
+默认接口请求频率限制：10次/秒。
+     */
+    async WaybillOCR(req, cb) {
+        return this.request("WaybillOCR", req, cb);
+    }
+    /**
      * 菲律宾UMID识别
      */
     async RecognizePhilippinesUMIDOCR(req, cb) {
@@ -333,12 +341,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("GeneralHandwritingOCR", req, cb);
     }
     /**
-     * 本接口支持市面上主流版式电子运单的识别，包括收件人和寄件人的姓名、电话、地址以及运单号等字段。
-
-默认接口请求频率限制：10次/秒。
+     * 外国人永久居留身份证识别
      */
-    async WaybillOCR(req, cb) {
-        return this.request("WaybillOCR", req, cb);
+    async RecognizeForeignPermanentResidentIdCard(req, cb) {
+        return this.request("RecognizeForeignPermanentResidentIdCard", req, cb);
     }
     /**
      * 本接口支持增值税发票的准确性核验，您可以通过输入增值税发票的关键字段提供所需的验证信息，接口返回真实的票面相关信息，包括发票代码、发票号码、开票日期、金额、消费类型、购方名称、购方税号、销方名称、销方税号等多个常用字段。支持多种发票类型核验，包括增值税专用发票、增值税普通发票（含电子普通发票、卷式发票、通行费发票）、全电发票、机动车销售统一发票、货物运输业增值税专用发票、二手车销售统一发票。

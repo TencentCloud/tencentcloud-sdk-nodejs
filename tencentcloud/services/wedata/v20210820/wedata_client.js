@@ -1883,14 +1883,6 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeTableMeta", req, cb);
     }
     /**
-     * 没用到
-
-获取kafka的topic信息
-     */
-    async DescribeKafkaTopicInfo(req, cb) {
-        return this.request("DescribeKafkaTopicInfo", req, cb);
-    }
-    /**
      * 提取数据集成节点字段Schema
      */
     async GetIntegrationNodeColumnSchema(req, cb) {

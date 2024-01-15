@@ -253,6 +253,7 @@ import {
   MLIDCardOCRRequest,
   TaxiTicket,
   EnglishOCRResponse,
+  RecognizeForeignPermanentResidentIdCardResponse,
   BusInvoiceOCRRequest,
   OrgCodeCertOCRResponse,
   RideHailingTransportLicenseOCRResponse,
@@ -290,6 +291,7 @@ import {
   FinanBillOCRRequest,
   QuotaInvoiceOCRResponse,
   UsedCarPurchaseInvoice,
+  RecognizeForeignPermanentResidentIdCardRequest,
   GeneralFastOCRResponse,
   QrcodePositionObj,
 } from "./ocr_models"
@@ -637,6 +639,18 @@ export class Client extends AbstractClient {
   }
 
   /**
+     * 本接口支持市面上主流版式电子运单的识别，包括收件人和寄件人的姓名、电话、地址以及运单号等字段。
+
+默认接口请求频率限制：10次/秒。
+     */
+  async WaybillOCR(
+    req: WaybillOCRRequest,
+    cb?: (error: string, rep: WaybillOCRResponse) => void
+  ): Promise<WaybillOCRResponse> {
+    return this.request("WaybillOCR", req, cb)
+  }
+
+  /**
    * 菲律宾UMID识别
    */
   async RecognizePhilippinesUMIDOCR(
@@ -709,15 +723,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 本接口支持市面上主流版式电子运单的识别，包括收件人和寄件人的姓名、电话、地址以及运单号等字段。
-
-默认接口请求频率限制：10次/秒。
-     */
-  async WaybillOCR(
-    req: WaybillOCRRequest,
-    cb?: (error: string, rep: WaybillOCRResponse) => void
-  ): Promise<WaybillOCRResponse> {
-    return this.request("WaybillOCR", req, cb)
+   * 外国人永久居留身份证识别
+   */
+  async RecognizeForeignPermanentResidentIdCard(
+    req: RecognizeForeignPermanentResidentIdCardRequest,
+    cb?: (error: string, rep: RecognizeForeignPermanentResidentIdCardResponse) => void
+  ): Promise<RecognizeForeignPermanentResidentIdCardResponse> {
+    return this.request("RecognizeForeignPermanentResidentIdCard", req, cb)
   }
 
   /**
