@@ -2530,11 +2530,11 @@ export interface DescribeProductConfigResponse {
     /**
      * 规格信息数组
      */
-    SpecInfoList: Array<SpecInfo>;
+    SpecInfoList?: Array<SpecInfo>;
     /**
      * 返回总共多少条数据
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -4333,7 +4333,7 @@ export interface DescribeProductConfigRequest {
      */
     Zone: string;
     /**
-     * 购买实例的类型 HA-高可用型(包括双机高可用，alwaysOn集群)，RO-只读副本型，SI-基础版本型
+     * 购买实例的类型 HA-本地盘高可用(包括双机高可用，alwaysOn集群)，RO-本地盘只读副本，SI-云盘版单节点,BI-商业智能服务，cvmHA-云盘版高可用，cvmRO-云盘版只读副本
      */
     InstanceType?: string;
 }

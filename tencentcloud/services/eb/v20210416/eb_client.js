@@ -148,7 +148,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UpdateRule", req, cb);
     }
     /**
-     * 查询日志索引维度值
+     * 前置条件：需开启事件存储；事件查询维度值
      */
     async DescribeLogTagValue(req, cb) {
         return this.request("DescribeLogTagValue", req, cb);
@@ -172,7 +172,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("GetRule", req, cb);
     }
     /**
-     * 日志检索
+     * 前置条件：开启事件存储；查询历史推送事件
      */
     async SearchLog(req, cb) {
         return this.request("SearchLog", req, cb);

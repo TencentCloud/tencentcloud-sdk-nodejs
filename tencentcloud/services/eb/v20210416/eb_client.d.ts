@@ -88,7 +88,7 @@ export declare class Client extends AbstractClient {
      */
     UpdateRule(req: UpdateRuleRequest, cb?: (error: string, rep: UpdateRuleResponse) => void): Promise<UpdateRuleResponse>;
     /**
-     * 查询日志索引维度值
+     * 前置条件：需开启事件存储；事件查询维度值
      */
     DescribeLogTagValue(req: DescribeLogTagValueRequest, cb?: (error: string, rep: DescribeLogTagValueResponse) => void): Promise<DescribeLogTagValueResponse>;
     /**
@@ -104,7 +104,7 @@ export declare class Client extends AbstractClient {
      */
     GetRule(req: GetRuleRequest, cb?: (error: string, rep: GetRuleResponse) => void): Promise<GetRuleResponse>;
     /**
-     * 日志检索
+     * 前置条件：开启事件存储；查询历史推送事件
      */
     SearchLog(req: SearchLogRequest, cb?: (error: string, rep: SearchLogResponse) => void): Promise<SearchLogResponse>;
     /**

@@ -46,6 +46,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ListOrganizationIdentity", req, cb);
     }
     /**
+     * 更新共享单元。
+     */
+    async UpdateShareUnit(req, cb) {
+        return this.request("UpdateShareUnit", req, cb);
+    }
+    /**
      * 更新组织成员信息
      */
     async UpdateOrganizationMember(req, cb) {
@@ -56,6 +62,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeOrganizationMemberAuthAccounts(req, cb) {
         return this.request("DescribeOrganizationMemberAuthAccounts", req, cb);
+    }
+    /**
+     * 获取共享单元资源列表。
+     */
+    async DescribeShareUnitResources(req, cb) {
+        return this.request("DescribeShareUnitResources", req, cb);
     }
     /**
      * 删除组织成员访问策略
@@ -76,6 +88,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UpdateOrganizationMemberEmailBind", req, cb);
     }
     /**
+     * 获取共享单元成员列表。
+     */
+    async DescribeShareUnitMembers(req, cb) {
+        return this.request("DescribeShareUnitMembers", req, cb);
+    }
+    /**
      * 获取组织成员访问授权列表
      */
     async DescribeOrganizationMemberAuthIdentities(req, cb) {
@@ -88,16 +106,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UpdateOrganizationNode", req, cb);
     }
     /**
-     * 添加组织成员访问授权
+     * 删除共享单元成员
      */
-    async CreateOrganizationMemberAuthIdentity(req, cb) {
-        return this.request("CreateOrganizationMemberAuthIdentity", req, cb);
+    async DeleteShareUnitMembers(req, cb) {
+        return this.request("DeleteShareUnitMembers", req, cb);
     }
     /**
      * 批量删除企业组织成员
      */
     async DeleteOrganizationMembers(req, cb) {
         return this.request("DeleteOrganizationMembers", req, cb);
+    }
+    /**
+     * 更新组织身份
+     */
+    async UpdateOrganizationIdentity(req, cb) {
+        return this.request("UpdateOrganizationIdentity", req, cb);
     }
     /**
      * 以月维度获取组织财务信息趋势
@@ -116,6 +140,18 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DeleteOrganizationNodes(req, cb) {
         return this.request("DeleteOrganizationNodes", req, cb);
+    }
+    /**
+     * 删除共享单元资源
+     */
+    async DeleteShareUnitResources(req, cb) {
+        return this.request("DeleteShareUnitResources", req, cb);
+    }
+    /**
+     * 获取共享单元列表。
+     */
+    async DescribeShareUnits(req, cb) {
+        return this.request("DescribeShareUnits", req, cb);
     }
     /**
      * 获取组织成员的授权策略列表
@@ -143,16 +179,28 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeOrganizationFinancialByMember", req, cb);
     }
     /**
-     * 更新组织身份
+     * 添加组织成员访问授权
      */
-    async UpdateOrganizationIdentity(req, cb) {
-        return this.request("UpdateOrganizationIdentity", req, cb);
+    async CreateOrganizationMemberAuthIdentity(req, cb) {
+        return this.request("CreateOrganizationMemberAuthIdentity", req, cb);
+    }
+    /**
+     * 添加共享单元资源
+     */
+    async AddShareUnitResources(req, cb) {
+        return this.request("AddShareUnitResources", req, cb);
     }
     /**
      * 创建组织成员访问策略
      */
     async CreateOrganizationMembersPolicy(req, cb) {
         return this.request("CreateOrganizationMembersPolicy", req, cb);
+    }
+    /**
+     * 获取可共享地域列表
+     */
+    async DescribeShareAreas(req, cb) {
+        return this.request("DescribeShareAreas", req, cb);
     }
     /**
      * 获取企业组织信息
@@ -167,10 +215,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("MoveOrganizationNodeMembers", req, cb);
     }
     /**
-     * 创建企业组织
+     * 删除共享单元。
      */
-    async CreateOrganization(req, cb) {
-        return this.request("CreateOrganization", req, cb);
+    async DeleteShareUnit(req, cb) {
+        return this.request("DeleteShareUnit", req, cb);
     }
     /**
      * 添加组织身份
@@ -209,6 +257,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("BindOrganizationMemberAuthAccount", req, cb);
     }
     /**
+     * 创建共享单元，只有企业组织管理员可创建。
+     */
+    async AddShareUnit(req, cb) {
+        return this.request("AddShareUnit", req, cb);
+    }
+    /**
      * 以产品维度获取组织财务信息
      */
     async DescribeOrganizationFinancialByProduct(req, cb) {
@@ -221,10 +275,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeOrganizationAuthNode", req, cb);
     }
     /**
+     * 添加共享单元成员
+     */
+    async AddShareUnitMembers(req, cb) {
+        return this.request("AddShareUnitMembers", req, cb);
+    }
+    /**
      * 获取组织节点列表
      */
     async DescribeOrganizationNodes(req, cb) {
         return this.request("DescribeOrganizationNodes", req, cb);
+    }
+    /**
+     * 创建企业组织
+     */
+    async CreateOrganization(req, cb) {
+        return this.request("CreateOrganization", req, cb);
     }
     /**
      * 创建组织成员访问授权策略

@@ -1658,6 +1658,10 @@ export interface DeployResourceRequest {
    * 需要开通服务的子网名称
    */
   SubnetName?: string
+  /**
+   * 需要开通实例所属的CDC集群ID
+   */
+  CdcClusterId?: string
 }
 
 /**

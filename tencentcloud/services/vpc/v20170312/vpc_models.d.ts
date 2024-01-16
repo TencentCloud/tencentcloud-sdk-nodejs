@@ -9534,6 +9534,10 @@ export interface DescribeUsedIpAddressRequest {
      */
     IpAddresses?: Array<string>;
     /**
+     * 过滤条件，不支持同时指定IpAddresses和Filters参数。 支持的过滤条件如下： <li>ip-addresses：IP地址。</li> <li>resource-id：资源ID。</li>
+     */
+    Filters?: Array<Filter>;
+    /**
      * 偏移量，默认为0。
      */
     Offset?: number;

@@ -3438,15 +3438,30 @@ export interface DataPoint {
     /**
      * 实例对象维度组合
      */
-    Dimensions: Array<Dimension>;
+    Dimensions?: Array<Dimension>;
     /**
      * 时间戳数组，表示那些时间点有数据，缺失的时间戳，没有数据点，可以理解为掉点了
      */
-    Timestamps: Array<number>;
+    Timestamps?: Array<number>;
     /**
      * 监控值数组，该数组和Timestamps一一对应
      */
-    Values: Array<number>;
+    Values?: Array<number>;
+    /**
+     * 监控值数组，该数组和Timestamps一一对应
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MaxValues?: Array<number>;
+    /**
+     * 监控值数组，该数组和Timestamps一一对应
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MinValues?: Array<number>;
+    /**
+     * 监控值数组，该数组和Timestamps一一对应
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AvgValues?: Array<number>;
 }
 /**
  * DescribeAlarmPolicies返回参数结构体
@@ -5534,6 +5549,10 @@ export interface GetMonitorDataRequest {
      * 结束时间，如2018-09-22T20:51:23+08:00，默认为当前时间。 EndTime不能小于StartTime
      */
     EndTime?: string;
+    /**
+     * 返回多种统计方式数据。avg, max, min (1,2,4)可以自由组合
+     */
+    SpecifyStatistics?: number;
 }
 /**
  * CreateRecordingRule请求参数结构体

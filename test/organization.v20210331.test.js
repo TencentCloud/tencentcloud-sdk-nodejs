@@ -48,6 +48,16 @@ it("organization.v20210331.ListOrganizationIdentity", async function () {
     }
 })
 
+it("organization.v20210331.UpdateShareUnit", async function () {
+    try {
+       const data = await client.UpdateShareUnit({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("organization.v20210331.UpdateOrganizationMember", async function () {
     try {
        const data = await client.UpdateOrganizationMember({})
@@ -61,6 +71,16 @@ it("organization.v20210331.UpdateOrganizationMember", async function () {
 it("organization.v20210331.DescribeOrganizationMemberAuthAccounts", async function () {
     try {
        const data = await client.DescribeOrganizationMemberAuthAccounts({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("organization.v20210331.DescribeShareUnitResources", async function () {
+    try {
+       const data = await client.DescribeShareUnitResources({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -98,6 +118,16 @@ it("organization.v20210331.UpdateOrganizationMemberEmailBind", async function ()
     }
 })
 
+it("organization.v20210331.DescribeShareUnitMembers", async function () {
+    try {
+       const data = await client.DescribeShareUnitMembers({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("organization.v20210331.DescribeOrganizationMemberAuthIdentities", async function () {
     try {
        const data = await client.DescribeOrganizationMemberAuthIdentities({})
@@ -118,9 +148,9 @@ it("organization.v20210331.UpdateOrganizationNode", async function () {
     }
 })
 
-it("organization.v20210331.CreateOrganizationMemberAuthIdentity", async function () {
+it("organization.v20210331.DeleteShareUnitMembers", async function () {
     try {
-       const data = await client.CreateOrganizationMemberAuthIdentity({})
+       const data = await client.DeleteShareUnitMembers({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -131,6 +161,16 @@ it("organization.v20210331.CreateOrganizationMemberAuthIdentity", async function
 it("organization.v20210331.DeleteOrganizationMembers", async function () {
     try {
        const data = await client.DeleteOrganizationMembers({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("organization.v20210331.UpdateOrganizationIdentity", async function () {
+    try {
+       const data = await client.UpdateOrganizationIdentity({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -161,6 +201,26 @@ it("organization.v20210331.DeleteAccount", async function () {
 it("organization.v20210331.DeleteOrganizationNodes", async function () {
     try {
        const data = await client.DeleteOrganizationNodes({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("organization.v20210331.DeleteShareUnitResources", async function () {
+    try {
+       const data = await client.DeleteShareUnitResources({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("organization.v20210331.DescribeShareUnits", async function () {
+    try {
+       const data = await client.DescribeShareUnits({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -208,9 +268,19 @@ it("organization.v20210331.DescribeOrganizationFinancialByMember", async functio
     }
 })
 
-it("organization.v20210331.UpdateOrganizationIdentity", async function () {
+it("organization.v20210331.CreateOrganizationMemberAuthIdentity", async function () {
     try {
-       const data = await client.UpdateOrganizationIdentity({})
+       const data = await client.CreateOrganizationMemberAuthIdentity({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("organization.v20210331.AddShareUnitResources", async function () {
+    try {
+       const data = await client.AddShareUnitResources({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -221,6 +291,16 @@ it("organization.v20210331.UpdateOrganizationIdentity", async function () {
 it("organization.v20210331.CreateOrganizationMembersPolicy", async function () {
     try {
        const data = await client.CreateOrganizationMembersPolicy({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("organization.v20210331.DescribeShareAreas", async function () {
+    try {
+       const data = await client.DescribeShareAreas({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -248,9 +328,9 @@ it("organization.v20210331.MoveOrganizationNodeMembers", async function () {
     }
 })
 
-it("organization.v20210331.CreateOrganization", async function () {
+it("organization.v20210331.DeleteShareUnit", async function () {
     try {
-       const data = await client.CreateOrganization({})
+       const data = await client.DeleteShareUnit({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -318,6 +398,16 @@ it("organization.v20210331.BindOrganizationMemberAuthAccount", async function ()
     }
 })
 
+it("organization.v20210331.AddShareUnit", async function () {
+    try {
+       const data = await client.AddShareUnit({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("organization.v20210331.DescribeOrganizationFinancialByProduct", async function () {
     try {
        const data = await client.DescribeOrganizationFinancialByProduct({})
@@ -338,9 +428,29 @@ it("organization.v20210331.DescribeOrganizationAuthNode", async function () {
     }
 })
 
+it("organization.v20210331.AddShareUnitMembers", async function () {
+    try {
+       const data = await client.AddShareUnitMembers({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("organization.v20210331.DescribeOrganizationNodes", async function () {
     try {
        const data = await client.DescribeOrganizationNodes({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("organization.v20210331.CreateOrganization", async function () {
+    try {
+       const data = await client.CreateOrganization({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

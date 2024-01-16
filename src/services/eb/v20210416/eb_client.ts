@@ -326,7 +326,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询日志索引维度值
+   * 前置条件：需开启事件存储；事件查询维度值
    */
   async DescribeLogTagValue(
     req: DescribeLogTagValueRequest,
@@ -366,7 +366,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 日志检索
+   * 前置条件：开启事件存储；查询历史推送事件
    */
   async SearchLog(
     req: SearchLogRequest,

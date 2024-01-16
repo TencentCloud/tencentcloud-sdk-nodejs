@@ -161,12 +161,12 @@ export interface CreateTransformationRequest {
  */
 export interface SearchLogResponse {
   /**
-   * 日志总数
+   * 事件总数
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Total?: number
   /**
-   * 每页日志条数
+   * 每页事件条数
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Limit?: number
@@ -176,7 +176,7 @@ export interface SearchLogResponse {
    */
   Page?: number
   /**
-   * 日志检索结果
+   * 事件查询结果
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Results?: Array<SearchLogResult>
@@ -1862,7 +1862,7 @@ export interface DeleteTargetRequest {
  */
 export interface DescribeLogTagValueResponse {
   /**
-   * 索引检索维度值
+   * 事件查询维度值结果
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Results?: Array<string>

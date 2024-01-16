@@ -3006,6 +3006,10 @@ export interface ControlDeviceRequest {
      * 应用token
      */
     ApplicationToken: string;
+    /**
+     * 是否同步返回设备下控ack结果
+     */
+    IsSynchronized?: boolean;
 }
 /**
  * 应用Token令牌信息

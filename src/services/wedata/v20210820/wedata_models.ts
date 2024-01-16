@@ -665,6 +665,10 @@ export interface CreateDataSourceRequest {
    * cos region
    */
   COSRegion?: string
+  /**
+   * 连接测试结果
+   */
+  ConnectResult?: string
 }
 
 /**
@@ -1686,11 +1690,6 @@ export interface ColumnLineageInfo {
    */
   Id: string
   /**
-   * 由中心节点出发的路径信息
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  PrefixPath: string
-  /**
    * 数据源ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
@@ -1765,6 +1764,11 @@ export interface ColumnLineageInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Description?: string
+  /**
+   * 由中心节点出发的路径信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PrefixPath?: string
   /**
    * 创建时间
 注意：此字段可能返回 null，表示取不到有效值。
@@ -4782,11 +4786,6 @@ export interface TableLineageInfo {
    */
   MetastoreType: string
   /**
-   * 由中心节点到该节点的路径
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  PrefixPath: string
-  /**
    * 空间id
 注意：此字段可能返回 null，表示取不到有效值。
    */
@@ -4857,6 +4856,11 @@ export interface TableLineageInfo {
    */
   Description?: string
   /**
+   * 由中心节点到该节点的路径
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PrefixPath?: string
+  /**
    * 血缘创建时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
@@ -4871,6 +4875,11 @@ export interface TableLineageInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Tasks?: Array<string>
+  /**
+   * 模块/应用类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ChannelType?: string
 }
 
 /**
@@ -6582,6 +6591,10 @@ export interface DescribeBaselineInstanceDagRequest {
    * 向上展开层级
    */
   Level?: number
+  /**
+   * 保障任务id
+   */
+  PromiseTaskId?: string
 }
 
 /**
@@ -9104,6 +9117,10 @@ export interface DescribeBaselineAllTaskDagRequest {
    * 1
    */
   ProjectId: string
+  /**
+   * 1
+   */
+  BaselineTaskId?: string
 }
 
 /**
@@ -17850,6 +17867,10 @@ export interface DescribeTaskByStatusReportRequest {
    * 无
    */
   InCharge?: string
+  /**
+   * 工作流ID
+   */
+  WorkflowId?: string
 }
 
 /**
@@ -18329,6 +18350,10 @@ export interface DescribeSchedulerTaskCntByStatusRequest {
    * 1
    */
   InCharge?: string
+  /**
+   * 工作流ID
+   */
+  WorkflowId?: string
 }
 
 /**
@@ -20753,6 +20778,11 @@ WAITINT_TO_RUN:等待运行 / RUNNING: 正在运行 / COMPLETED: 执行成功 / 
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AppId?: string
+  /**
+   * 关键路径依赖
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CriticalDependency?: string
 }
 
 /**
@@ -21129,6 +21159,11 @@ export interface RuntimeInstanceCntTop {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CurRunTime?: string
+  /**
+   * 等待调度耗时
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WaitScheduleTime?: number
 }
 
 /**
@@ -23298,6 +23333,10 @@ export interface DescribeStatisticInstanceStatusTrendOpsRequest {
    * 1
    */
   AverageWindowSize?: number
+  /**
+   * 工作流ID
+   */
+  WorkflowId?: string
 }
 
 /**
@@ -23598,7 +23637,7 @@ export interface CreateDataSourceResponse {
    * 主键ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Data: number
+  Data?: number
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -24351,6 +24390,10 @@ export interface DescribeSchedulerInstanceStatusRequest {
    * 责任人
    */
   InCharge?: string
+  /**
+   * 工作流ID
+   */
+  WorkflowId?: string
 }
 
 /**
@@ -24570,6 +24613,18 @@ export interface DescribeSchedulerRunTimeInstanceCntByStatusRequest {
    * 1
    */
   InCharge?: string
+  /**
+   * 工作流ID
+   */
+  WorkflowId?: string
+  /**
+   * 排序字段
+   */
+  SortItem?: string
+  /**
+   * 升序降序
+   */
+  SortType?: string
 }
 
 /**
@@ -25315,6 +25370,10 @@ export interface DescribeTaskByCycleRequest {
    * 1
    */
   InCharge?: string
+  /**
+   * 工作流ID
+   */
+  WorkflowId?: string
 }
 
 /**
@@ -26869,6 +26928,10 @@ export interface DescribeBaselineInstanceGanttRequest {
    * 项目id
    */
   ProjectId: string
+  /**
+   * 保障任务id
+   */
+  PromiseTaskId?: string
 }
 
 /**
