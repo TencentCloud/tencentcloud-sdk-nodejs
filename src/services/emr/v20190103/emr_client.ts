@@ -49,12 +49,13 @@ import {
   PodNewSpec,
   NodeResourceSpec,
   ModifyResourceScheduleConfigResponse,
-  TopologyInfo,
+  InsightResult,
   NodeDetailPriceResult,
   Tag,
   ClusterIDToFlowID,
   EmrListInstance,
   AddUsersForUserManagerResponse,
+  TopologyInfo,
   EmrProductConfigOutter,
   VPCSettings,
   CustomServiceDefine,
@@ -79,6 +80,7 @@ import {
   AllNodeResourceSpec,
   DescribeUsersForUserManagerRequest,
   RenewInstancesInfo,
+  DescribeInsightListRequest,
   RunJobFlowResponse,
   StartStopServiceOrMonitorResponse,
   DescribeHiveQueriesResponse,
@@ -100,6 +102,7 @@ import {
   LoginSettings,
   RunJobFlowRequest,
   PriceResource,
+  DescribeInsightListResponse,
   DescribeHiveQueriesRequest,
   CreateClusterResponse,
   DescribeAutoScaleRecordsResponse,
@@ -526,6 +529,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyResourcePoolsResponse) => void
   ): Promise<ModifyResourcePoolsResponse> {
     return this.request("ModifyResourcePools", req, cb)
+  }
+
+  /**
+   * 获取洞察结果信息
+   */
+  async DescribeInsightList(
+    req: DescribeInsightListRequest,
+    cb?: (error: string, rep: DescribeInsightListResponse) => void
+  ): Promise<DescribeInsightListResponse> {
+    return this.request("DescribeInsightList", req, cb)
   }
 
   /**

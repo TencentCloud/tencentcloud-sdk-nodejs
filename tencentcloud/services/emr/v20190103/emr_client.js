@@ -234,6 +234,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyResourcePools", req, cb);
     }
     /**
+     * 获取洞察结果信息
+     */
+    async DescribeInsightList(req, cb) {
+        return this.request("DescribeInsightList", req, cb);
+    }
+    /**
      * 扩容集群节点
      */
     async ScaleOutCluster(req, cb) {

@@ -4117,62 +4117,62 @@ export interface RuleGroupExecStrategy {
    * 规则组Id
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RuleGroupId: number
+  RuleGroupId?: number
   /**
    * 监控类型 1.未配置, 2.关联生产调度, 3.离线周期检测
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  MonitorType: number
+  MonitorType?: number
   /**
    * 计算队列
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ExecQueue: string
+  ExecQueue?: string
   /**
    * 执行资源组ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ExecutorGroupId: string
+  ExecutorGroupId?: string
   /**
    * 执行资源组名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ExecutorGroupName: string
+  ExecutorGroupName?: string
   /**
    * 关联的生产调度任务列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Tasks: Array<ProdSchedulerTask>
+  Tasks?: Array<ProdSchedulerTask>
   /**
    * 周期开始时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  StartTime: string
+  StartTime?: string
   /**
    * 周期结束时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  EndTime: string
+  EndTime?: string
   /**
    * 调度周期类型
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CycleType: string
+  CycleType?: string
   /**
    * 延迟调度时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DelayTime: number
+  DelayTime?: number
   /**
    * 间隔
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CycleStep: number
+  CycleStep?: number
   /**
    * 时间指定
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TaskAction: string
+  TaskAction?: string
   /**
    * 运行的执行引擎，不传时会请求该数据源下默认的执行引擎
 注意：此字段可能返回 null，表示取不到有效值。
@@ -4183,6 +4183,16 @@ export interface RuleGroupExecStrategy {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ExecPlan?: string
+  /**
+   * 规则id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RuleId?: number
+  /**
+   * 规则名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RuleName?: string
 }
 
 /**
@@ -4483,87 +4493,97 @@ export interface RuleTemplate {
   /**
    * 规则模版ID
    */
-  RuleTemplateId: number
+  RuleTemplateId?: number
   /**
    * 规则模版名称
    */
-  Name: string
+  Name?: string
   /**
    * 规则模版描述
    */
-  Description: string
+  Description?: string
   /**
    * 模版类型（1：系统模版，2：自定义）
    */
-  Type: number
+  Type?: number
   /**
    * 规则适用的源数据对象类型（1：常量，2：离线表级，3：离线字段级别）
    */
-  SourceObjectType: number
+  SourceObjectType?: number
   /**
    * 规则适用的源数据对象类型（1：数值，2：字符串）
    */
-  SourceObjectDataType: number
+  SourceObjectDataType?: number
   /**
    * 规则模版源侧内容，区分引擎，JSON 结构
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SourceContent: string
+  SourceContent?: string
   /**
    * 源数据适用类型
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SourceEngineTypes: Array<number | bigint>
+  SourceEngineTypes?: Array<number | bigint>
   /**
    * 规则所属质量维度（1：准确性，2：唯一性，3：完整性，4：一致性，5：及时性，6：有效性）
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  QualityDim: number
+  QualityDim?: number
   /**
    * 规则支持的比较方式类型（1：固定值比较，大于、小于，大于等于等 2：波动值比较，绝对值、上升、下降）
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CompareType: number
+  CompareType?: number
   /**
    * 引用次数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CitationCount: number
+  CitationCount?: number
   /**
    * 创建人id
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  UserId: number
+  UserId?: number
   /**
    * 创建人昵称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  UserName: string
+  UserName?: string
   /**
    * 更新时间yyyy-MM-dd HH:mm:ss
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  UpdateTime: string
+  UpdateTime?: string
   /**
    * 是否添加where参数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  WhereFlag: boolean
+  WhereFlag?: boolean
   /**
    * 是否关联多个库表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  MultiSourceFlag: boolean
+  MultiSourceFlag?: boolean
   /**
    * 自定义模板SQL表达式
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SqlExpression: string
+  SqlExpression?: string
   /**
    * 模版子维度，0.父维度类型,1.一致性: 枚举范围一致性,2.一致性：数值范围一致性,3.一致性：字段数据相关性
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SubQualityDim: number
+  SubQualityDim?: number
+  /**
+   * sql表达式解析对象
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResolvedSqlExpression?: SqlExpression
+  /**
+   * 支持的数据源类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DatasourceTypes?: Array<number | bigint>
 }
 
 /**
@@ -5172,6 +5192,46 @@ export interface Rule {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SourceEngineTypes?: Array<number | bigint>
+  /**
+   * 表名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TableName?: string
+  /**
+   * 表负责人名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TableOwnerName?: string
+  /**
+   * 执行策略信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExecStrategy?: RuleGroupExecStrategy
+  /**
+   * 订阅信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Subscription?: RuleGroupSubscribe
+  /**
+   * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateTime?: string
+  /**
+   * 数据源 id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DatasourceId?: number
+  /**
+   * 数据库 id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DatabaseId?: string
+  /**
+   * 监控是否开启.0false,1true
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MonitorStatus?: number
 }
 
 /**
@@ -5786,12 +5846,12 @@ export interface DeleteCustomFunctionResponse {
    * 函数 ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  FunctionId: string
+  FunctionId?: string
   /**
    * 无
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ErrorMessage: string
+  ErrorMessage?: string
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -7980,6 +8040,16 @@ export interface IntegrationTaskInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceVersion?: number
+  /**
+   * 离线任务导入到编排空间的任务id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ArrangeSpaceTaskId?: string
+  /**
+   * 离线任务状态区分1.未提交2.已提交3.已导出
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OfflineTaskStatus?: number
 }
 
 /**
@@ -9879,15 +9949,35 @@ export interface DeleteCustomFunctionRequest {
   /**
    * 集群实例 ID
    */
-  ClusterIdentifier: string
+  ClusterIdentifier?: string
   /**
    * 函数 ID
    */
-  FunctionId: string
+  FunctionId?: string
   /**
    * 项目ID，必须填
    */
   ProjectId?: string
+  /**
+   * 函数名称
+   */
+  FunctionName?: string
+  /**
+   * 函数类型，HIVE，SPARK，DLC，CDW_POSTGRESQL
+   */
+  FunctionType?: string
+  /**
+   * 数据库名
+   */
+  DatabaseName?: string
+  /**
+   * 模式名
+   */
+  SchemaName?: string
+  /**
+   * 函数命令格式
+   */
+  CommandFormat?: string
 }
 
 /**
@@ -10369,6 +10459,22 @@ export interface DescribeIntegrationStatisticsAgentStatusRequest {
    * 资源组id
    */
   ExecutorGroupId?: string
+}
+
+/**
+ * 数据质量自定义规则时的sql表达式解析表对象
+ */
+export interface SqlExpressionTable {
+  /**
+   * sql表达式表名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TableExpression?: string
+  /**
+   * sql表达式字段名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ColumnExpression?: Array<string>
 }
 
 /**
@@ -17501,31 +17607,36 @@ export interface InstanceReportWriteNode {
   /**
    * 节点名称
    */
-  NodeName: string
+  NodeName?: string
   /**
    * 数据来源
    */
-  DataSource: string
+  DataSource?: string
   /**
    * 总条数
    */
-  TotalWriteRecords: number
+  TotalWriteRecords?: number
   /**
    * 总字节数
    */
-  TotalWriteBytes: number
+  TotalWriteBytes?: number
   /**
    * 速度（条/秒）
    */
-  RecordSpeed: number
+  RecordSpeed?: number
   /**
    * 吞吐（Byte/秒）
    */
-  ByteSpeed: number
+  ByteSpeed?: number
   /**
    * 脏数据条数
    */
-  TotalErrorRecords: number
+  TotalErrorRecords?: number
+  /**
+   * 等待上游数据发送过来的时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WaitReaderTime?: number
 }
 
 /**
@@ -19349,6 +19460,11 @@ export interface BooleanResponse {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   BaselineId?: number
+  /**
+   * 错误码
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Code?: string
 }
 
 /**
@@ -19469,31 +19585,36 @@ export interface InstanceReportReadNode {
   /**
    * 节点名称
    */
-  NodeName: string
+  NodeName?: string
   /**
    * 数据来源
    */
-  DataSource: string
+  DataSource?: string
   /**
    * 总条数
    */
-  TotalReadRecords: number
+  TotalReadRecords?: number
   /**
    * 总字节数
    */
-  TotalReadBytes: number
+  TotalReadBytes?: number
   /**
    * 速度（条/秒）
    */
-  RecordSpeed: number
+  RecordSpeed?: number
   /**
    * 吞吐（Byte/秒）
    */
-  ByteSpeed: number
+  ByteSpeed?: number
   /**
    * 脏数据条数
    */
-  TotalErrorRecords: number
+  TotalErrorRecords?: number
+  /**
+   * 等待数据发送到下游的时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WaitWriterTime?: number
 }
 
 /**
@@ -20610,6 +20731,16 @@ export interface RuleGroupSubscribe {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   WebHooks?: Array<SubscribeWebHook>
+  /**
+   * 规则Id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RuleId?: number
+  /**
+   * 规则名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RuleName?: string
 }
 
 /**
@@ -25356,6 +25487,22 @@ export interface DescribeRuleTemplateRequest {
    * 规则模板Id
    */
   TemplateId?: number
+}
+
+/**
+ * 数据质量自定义规则时的sql表达式解析对象
+ */
+export interface SqlExpression {
+  /**
+   * sql表达式表名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TableExpressions?: Array<SqlExpressionTable>
+  /**
+   * sql表达式字段名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ParamExpressions?: Array<string>
 }
 
 /**

@@ -3538,6 +3538,27 @@ export interface DescribeBillDetailRequest {
     PayerUin?: string;
 }
 /**
+ * DescribeSavingPlanResourceInfo请求参数结构体
+ */
+export interface DescribeSavingPlanResourceInfoRequest {
+    /**
+     * 数量，最大值为100
+     */
+    Limit: number;
+    /**
+     * 偏移量
+     */
+    Offset: number;
+    /**
+     * 购买开始时间，格式yyyy-MM-dd
+     */
+    CreateStartDate?: string;
+    /**
+     * 购买结束时间，格式yyyy-MM-dd
+     */
+    CreateEndDate?: string;
+}
+/**
  * DescribeVoucherInfo返回参数结构体
  */
 export interface DescribeVoucherInfoResponse {
@@ -3934,6 +3955,19 @@ export interface DescribeSavingPlanUsageRequest {
      * 查询结果数据的时间间隔
      */
     TimeInterval: string;
+}
+/**
+ * DescribeSavingPlanResourceInfo返回参数结构体
+ */
+export interface DescribeSavingPlanResourceInfoResponse {
+    /**
+     * 记录数
+     */
+    Total?: number;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * DescribeDealsByCond请求参数结构体

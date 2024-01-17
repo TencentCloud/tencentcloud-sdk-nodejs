@@ -2875,6 +2875,10 @@ export interface ResetCloudStorageEventRequest {
      * 用户ID
      */
     UserId?: string;
+    /**
+     * 通道ID
+     */
+    ChannelId?: number;
 }
 /**
  * DescribeFirmwareTaskDistribution返回参数结构体
@@ -3864,6 +3868,10 @@ export interface DeleteCloudStorageEventRequest {
      * 用户ID
      */
     UserId?: string;
+    /**
+     * 通道ID
+     */
+    ChannelId?: number;
 }
 /**
  * DescribeMessageDataStats请求参数结构体
@@ -4377,6 +4385,10 @@ export interface DescribeCloudStorageOrderResponse {
   2:生效
      */
     Status?: number;
+    /**
+     * 通道id
+     */
+    ChannelId?: number;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */

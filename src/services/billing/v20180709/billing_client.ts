@@ -115,6 +115,7 @@ import {
   ConsumptionResourceSummaryDataItem,
   DescribeAccountBalanceRequest,
   DescribeBillDetailRequest,
+  DescribeSavingPlanResourceInfoRequest,
   DescribeVoucherInfoResponse,
   BillDetailAssociatedOrder,
   DescribeBillListResponse,
@@ -125,6 +126,7 @@ import {
   DescribeSavingPlanCoverageResponse,
   DescribeVoucherInfoRequest,
   DescribeSavingPlanUsageRequest,
+  DescribeSavingPlanResourceInfoResponse,
   DescribeDealsByCondRequest,
   DescribeDosageCosDetailByDateResponse,
   DescribeBillSummaryForOrganizationResponse,
@@ -417,6 +419,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeBillSummaryForOrganizationResponse) => void
   ): Promise<DescribeBillSummaryForOrganizationResponse> {
     return this.request("DescribeBillSummaryForOrganization", req, cb)
+  }
+
+  /**
+   * 查询节省计划详情
+   */
+  async DescribeSavingPlanResourceInfo(
+    req: DescribeSavingPlanResourceInfoRequest,
+    cb?: (error: string, rep: DescribeSavingPlanResourceInfoResponse) => void
+  ): Promise<DescribeSavingPlanResourceInfoResponse> {
+    return this.request("DescribeSavingPlanResourceInfo", req, cb)
   }
 
   /**

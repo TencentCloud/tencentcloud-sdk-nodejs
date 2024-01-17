@@ -194,6 +194,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeBillSummaryForOrganization", req, cb);
     }
     /**
+     * 查询节省计划详情
+     */
+    async DescribeSavingPlanResourceInfo(req, cb) {
+        return this.request("DescribeSavingPlanResourceInfo", req, cb);
+    }
+    /**
      * 获取分账标签
      */
     async DescribeTagList(req, cb) {

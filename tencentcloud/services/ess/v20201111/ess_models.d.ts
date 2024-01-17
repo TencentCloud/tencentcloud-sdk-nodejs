@@ -1768,7 +1768,7 @@ export interface CreateFlowRequest {
      */
     Unordered?: boolean;
     /**
-     * 您可以自定义腾讯电子签小程序合同列表页展示的合同内容模板，模板中支持以下变量：
+     * 您可以自定义**腾讯电子签小程序合同列表页**展示的合同内容模板，模板中支持以下变量：
   <ul><li>{合同名称}   </li>
   <li>{发起方企业} </li>
   <li>{发起方姓名} </li>
@@ -1781,6 +1781,8 @@ export interface CreateFlowRequest {
   合同名称：租房合同
   发起方：腾讯公司(张三)
   签署方：李四
+  
+  ![image](https://qcloudimg.tencent-cloud.cn/raw/628f0928cac15d2e3bfa6088f53f5998.png)
   
   
      */
@@ -3045,6 +3047,9 @@ export interface CreateFlowByFilesRequest {
   合同名称：租房合同
   发起方：腾讯公司(张三)
   签署方：李四
+  
+  
+  ![image](https://qcloudimg.tencent-cloud.cn/raw/628f0928cac15d2e3bfa6088f53f5998.png)
   
   
      */
@@ -6111,6 +6116,8 @@ export interface Component {
   
   注：`控件ID可以在一个PDF中不可重复`
   
+  <a href="https://qcloudimg.tencent-cloud.cn/raw/93178569d07b4d7dbbe0967ae679e35c.png" target="_blank">点击查看ComponentId在模板编辑页面的位置</a>
+  
      */
     ComponentId?: string;
     /**
@@ -6120,6 +6127,7 @@ export interface Component {
   
   注：`控件名可以在一个PDF中可以重复`
   
+  <a href="https://qcloudimg.tencent-cloud.cn/raw/93178569d07b4d7dbbe0967ae679e35c.png" target="_blank">点击查看ComponentName在模板页面的位置</a>
      */
     ComponentName?: string;
     /**

@@ -1293,29 +1293,97 @@ export interface ModifyResourceScheduleConfigResponse {
     RequestId?: string;
 }
 /**
- * 集群节点拓扑信息
+ * 洞察结果项
  */
-export interface TopologyInfo {
+export interface InsightResult {
     /**
-     * 可用区ID
+     * 当Type为HIVE时，是Hive查询ID，当Type为MAPREDUCE，SPARK，TEZ时则是YarnAppID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ZoneId?: number;
+    ID?: string;
     /**
-     * 可用区信息
+     * 洞察应用的类型，HIVE,SPARK,MAPREDUCE,TEZ
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Zone?: string;
+    Type?: string;
     /**
-     * 子网信息
+     * 洞察规则ID
+  HIVE-ScanManyMeta:元数据扫描过多
+  HIVE-ScanManyPartition:大表扫描
+  HIVE-SlowCompile:编译耗时过长
+  HIVE-UnSuitableConfig:不合理参数
+  MAPREDUCE-MapperDataSkew:Map数据倾斜
+  MAPREDUCE-MapperMemWaste:MapMemory资源浪费
+  MAPREDUCE-MapperSlowTask:Map慢Task
+  MAPREDUCE-MapperTaskGC:MapperTaskGC
+  MAPREDUCE-MemExceeded:峰值内存超限
+  MAPREDUCE-ReducerDataSkew:Reduce数据倾斜
+  MAPREDUCE-ReducerMemWaste:ReduceMemory资源浪费
+  MAPREDUCE-ReducerSlowTask:Reduce慢Task
+  MAPREDUCE-ReducerTaskGC:ReducerTaskGC
+  MAPREDUCE-SchedulingDelay:调度延迟
+  SPARK-CpuWaste:CPU资源浪费
+  SPARK-DataSkew:数据倾斜
+  SPARK-ExecutorGC:ExecutorGC
+  SPARK-MemExceeded:峰值内存超限
+  SPARK-MemWaste:Memory资源浪费
+  SPARK-ScheduleOverhead:ScheduleOverhead
+  SPARK-ScheduleSkew:调度倾斜
+  SPARK-SlowTask:慢Task
+  TEZ-DataSkew:数据倾斜
+  TEZ-MapperDataSkew:Map数据倾斜
+  TEZ-ReducerDataSkew:Reduce数据倾斜
+  TEZ-TezMemWaste:Memory资源浪费
+  TEZ-TezSlowTask:慢Task
+  TEZ-TezTaskGC:TasksGC
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SubnetInfoList?: Array<SubnetInfo>;
+    RuleID?: string;
     /**
-     * 节点信息
+     * 洞察规则名字，可参考RuleID的说明
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    NodeInfoList?: Array<ShortNodeInfo>;
+    RuleName?: string;
+    /**
+     * 洞察规则解释
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RuleExplain?: string;
+    /**
+     * 详情
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Detail?: string;
+    /**
+     * 建议信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Suggestion?: string;
+    /**
+     * 洞察异常衡量值，同类型的洞察项越大越严重，不同类型的洞察项无对比意义
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Value?: number;
+    /**
+     * 调度任务执行ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ScheduleTaskExecID?: string;
+    /**
+     * 调度流，DAG
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ScheduleFlowName?: string;
+    /**
+     * 调度flow中的某个task节点
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ScheduleTaskName?: string;
+    /**
+     * Yarn任务的部分核心配置
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    JobConf?: string;
 }
 /**
  * 用于创建集群价格清单 节点价格详情
@@ -1522,6 +1590,31 @@ export interface AddUsersForUserManagerResponse {
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * 集群节点拓扑信息
+ */
+export interface TopologyInfo {
+    /**
+     * 可用区ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ZoneId?: number;
+    /**
+     * 可用区信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Zone?: string;
+    /**
+     * 子网信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SubnetInfoList?: Array<SubnetInfo>;
+    /**
+     * 节点信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    NodeInfoList?: Array<ShortNodeInfo>;
 }
 /**
  * EMR产品配置
@@ -2559,6 +2652,31 @@ export interface RenewInstancesInfo {
     StorageType: number;
 }
 /**
+ * DescribeInsightList请求参数结构体
+ */
+export interface DescribeInsightListRequest {
+    /**
+     * 集群ID
+     */
+    InstanceId: string;
+    /**
+     * 获取的洞察结果开始时间，此时间针对对App或者Hive查询的开始时间的过滤
+     */
+    StartTime: number;
+    /**
+     * 获取的洞察结果结束时间，此时间针对对App或者Hive查询的开始时间的过滤
+     */
+    EndTime: number;
+    /**
+     * 分页查询时的分页大小，最小1，最大100
+     */
+    PageSize: number;
+    /**
+     * 分页查询时的页号，从1开始
+     */
+    Page: number;
+}
+/**
  * RunJobFlow返回参数结构体
  */
 export interface RunJobFlowResponse {
@@ -3203,6 +3321,24 @@ export interface PriceResource {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     LocalDiskNum: number;
+}
+/**
+ * DescribeInsightList返回参数结构体
+ */
+export interface DescribeInsightListResponse {
+    /**
+     * 总数，分页查询时使用
+     */
+    TotalCount?: number;
+    /**
+     * 洞察结果数组
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ResultList?: Array<InsightResult>;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * DescribeHiveQueries请求参数结构体

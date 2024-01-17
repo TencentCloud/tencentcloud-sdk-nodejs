@@ -172,6 +172,7 @@ export interface Component {
 
 
 注：`控件ID可以在一个PDF中不可重复`
+<a href="https://qcloudimg.tencent-cloud.cn/raw/93178569d07b4d7dbbe0967ae679e35c.png" target="_blank">点击查看ComponentId在模板页面的位置</a>
 
    */
   ComponentId?: string
@@ -214,6 +215,7 @@ export interface Component {
 
 注：`控件名可以在一个PDF中可以重复`
 
+<a href="https://qcloudimg.tencent-cloud.cn/raw/93178569d07b4d7dbbe0967ae679e35c.png" target="_blank">点击查看ComponentName在模板页面的位置</a>
    */
   ComponentName?: string
   /**
@@ -4030,6 +4032,7 @@ export interface FlowInfo {
 发起方：腾讯公司(张三) 
 签署方：李四
 
+![image](https://qcloudimg.tencent-cloud.cn/raw/628f0928cac15d2e3bfa6088f53f5998.png)
 
    */
   CustomShowMap?: string

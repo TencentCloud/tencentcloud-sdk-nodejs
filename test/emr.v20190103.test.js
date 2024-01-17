@@ -358,6 +358,16 @@ it("emr.v20190103.ModifyResourcePools", async function () {
     }
 })
 
+it("emr.v20190103.DescribeInsightList", async function () {
+    try {
+       const data = await client.DescribeInsightList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("emr.v20190103.ScaleOutCluster", async function () {
     try {
        const data = await client.ScaleOutCluster({})
