@@ -52,6 +52,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeL7RulesBySSLCertId", req, cb);
     }
     /**
+     * 高防IP获取7层规则
+     */
+    async DescribeBGPIPL7Rules(req, cb) {
+        return this.request("DescribeBGPIPL7Rules", req, cb);
+    }
+    /**
      * 获取单IP告警阈值配置列表
      */
     async DescribeListIPAlarmConfig(req, cb) {

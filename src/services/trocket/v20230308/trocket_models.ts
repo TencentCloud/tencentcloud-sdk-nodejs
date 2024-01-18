@@ -99,6 +99,34 @@ export interface CreateRoleResponse {
 }
 
 /**
+ * CreateMQTTInstance返回参数结构体
+ */
+export interface CreateMQTTInstanceResponse {
+  /**
+   * 实例ID
+   */
+  InstanceId?: string
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ImportSourceClusterConsumerGroups请求参数结构体
+ */
+export interface ImportSourceClusterConsumerGroupsRequest {
+  /**
+   * 任务ID
+   */
+  TaskId: string
+  /**
+   * 待导入的消费组列表
+   */
+  GroupList: Array<SourceClusterGroupConfig>
+}
+
+/**
  * DescribeRoleList返回参数结构体
  */
 export interface DescribeRoleListResponse {
@@ -207,6 +235,82 @@ export interface CreateInstanceResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * CreateMQTTInstance请求参数结构体
+ */
+export interface CreateMQTTInstanceRequest {
+  /**
+   * 实例类型，
+EXPERIMENT 体验版
+BASIC 基础版
+PRO  专业版
+PLATINUM 铂金版
+   */
+  InstanceType: string
+  /**
+   * 实例名称
+   */
+  Name: string
+  /**
+   * 商品规格，可用规格如下：
+experiment_500,
+basic_1k,
+basic_2k,
+basic_4k,
+basic_6k,
+pro_4k,
+pro_6k,
+pro_1w,
+pro_2w,
+pro_3w,
+pro_4w,
+pro_5w,
+platinum_6k,
+platinum_1w,
+platinum_2w,
+platinum_4w,
+platinum_10w,
+platinum_15w,
+platinum_20w,
+platinum_40w,
+platinum_60w,
+platinum_100w
+   */
+  SkuCode: string
+  /**
+   * 备注信息
+   */
+  Remark?: string
+  /**
+   * 标签列表
+   */
+  TagList?: Array<Tag>
+  /**
+   * 实例绑定的VPC信息
+   */
+  VpcList?: Array<VpcInfo>
+  /**
+   * 是否开启公网
+   */
+  EnablePublic?: boolean
+  /**
+   * 公网带宽（单位：兆）
+   */
+  Bandwidth?: number
+  /**
+   * 公网访问白名单
+   */
+  IpRules?: Array<IpRule>
+  /**
+   * 是否自动续费（0: 不自动续费；1: 自动续费）
+   */
+  RenewFlag?: number
+  /**
+   * 购买时长（单位：月）
+   */
+  TimeSpan?: number
 }
 
 /**
@@ -716,6 +820,62 @@ TRANSACTION:事务消息
 }
 
 /**
+ * MQTT ProductSkuItem
+ */
+export interface MQTTProductSkuItem {
+  /**
+   * 类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceType?: string
+  /**
+   * cide
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SkuCode?: string
+  /**
+   * sale
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OnSale?: boolean
+  /**
+   * topic num限制
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TopicNumLimit?: number
+  /**
+   * tps
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TpsLimit?: number
+  /**
+   * 客户端连接数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ClientNumLimit?: number
+  /**
+   * 订阅数限制
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SubscriptionNumLimit?: number
+  /**
+   * 代理核
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProxySpecCore?: number
+  /**
+   * 代理内存
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProxySpecMemory?: number
+  /**
+   * 代理总数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProxySpecCount?: number
+}
+
+/**
  * 接入点信息
  */
 export interface Endpoint {
@@ -1016,6 +1176,26 @@ export interface DeleteRoleRequest {
 }
 
 /**
+ * DescribeMQTTProductSKUList返回参数结构体
+ */
+export interface DescribeMQTTProductSKUListResponse {
+  /**
+   * 查询总数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalCount?: number
+  /**
+   * mqtt商品配置信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MQTTProductSkuList?: Array<MQTTProductSkuItem>
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeRoleList请求参数结构体
  */
 export interface DescribeRoleListRequest {
@@ -1035,6 +1215,16 @@ export interface DescribeRoleListRequest {
    * 查询条件列表
    */
   Filters?: Array<Filter>
+}
+
+/**
+ * ModifyTopic返回参数结构体
+ */
+export interface ModifyTopicResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1245,18 +1435,9 @@ export interface CreateConsumerGroupResponse {
 }
 
 /**
- * ImportSourceClusterConsumerGroups请求参数结构体
+ * DescribeMQTTProductSKUList请求参数结构体
  */
-export interface ImportSourceClusterConsumerGroupsRequest {
-  /**
-   * 任务ID
-   */
-  TaskId: string
-  /**
-   * 待导入的消费组列表
-   */
-  GroupList: Array<SourceClusterGroupConfig>
-}
+export type DescribeMQTTProductSKUListRequest = null
 
 /**
  * DeleteInstance请求参数结构体
@@ -1266,32 +1447,6 @@ export interface DeleteInstanceRequest {
    * 实例ID
    */
   InstanceId: string
-}
-
-/**
- * DescribeInstance请求参数结构体
- */
-export interface DescribeInstanceRequest {
-  /**
-   * 实例ID
-   */
-  InstanceId: string
-}
-
-/**
- * 标签数据
- */
-export interface Tag {
-  /**
-   * 标签名称
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TagKey: string
-  /**
-   * 标签值
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TagValue: string
 }
 
 /**
@@ -1396,13 +1551,143 @@ PREPAID，包年包月
 }
 
 /**
- * ModifyTopic返回参数结构体
+ * DescribeInstance请求参数结构体
  */
-export interface ModifyTopicResponse {
+export interface DescribeInstanceRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+}
+
+/**
+ * 标签数据
+ */
+export interface Tag {
+  /**
+   * 标签名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TagKey: string
+  /**
+   * 标签值
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TagValue: string
+}
+
+/**
+ * DescribeMQTTInstanceList请求参数结构体
+ */
+export interface DescribeMQTTInstanceListRequest {
+  /**
+   * 查询条件列表
+   */
+  Filters?: Array<Filter>
+  /**
+   * 查询起始位置
+   */
+  Offset?: number
+  /**
+   * 查询结果限制数量
+   */
+  Limit?: number
+}
+
+/**
+ * DescribeMQTTInstanceList返回参数结构体
+ */
+export interface DescribeMQTTInstanceListResponse {
+  /**
+   * 查询总数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalCount?: number
+  /**
+   * 实例列表
+   */
+  Data?: Array<MQTTInstanceItem>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * MQTT 实例信息
+ */
+export interface MQTTInstanceItem {
+  /**
+   * 实例ID
+   */
+  InstanceId?: string
+  /**
+   * 实例名称
+   */
+  InstanceName?: string
+  /**
+   * 实例版本
+   */
+  Version?: string
+  /**
+   * 实例类型，
+EXPERIMENT，体验版
+BASIC，基础版
+PRO，专业版
+PLATINUM，铂金版
+   */
+  InstanceType?: string
+  /**
+   * 实例状态，
+RUNNING, 运行中
+MAINTAINING，维护中
+ABNORMAL，异常
+OVERDUE，欠费
+DESTROYED，已删除
+CREATING，创建中
+MODIFYING，变配中
+CREATE_FAILURE，创建失败
+MODIFY_FAILURE，变配失败
+DELETING，删除中
+   */
+  InstanceStatus?: string
+  /**
+   * 实例主题数上限
+   */
+  TopicNumLimit?: number
+  /**
+   * 备注信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Remark?: string
+  /**
+   * 主题数量
+   */
+  TopicNum?: number
+  /**
+   * 商品规格
+   */
+  SkuCode?: string
+  /**
+   * 弹性TPS限流值
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TpsLimit?: number
+  /**
+   * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateTime?: number
+  /**
+   * 订阅关系上限
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SubscriptionNumLimit?: number
+  /**
+   * 客户端连接数上线
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ClientNumLimit?: number
 }
 
 /**

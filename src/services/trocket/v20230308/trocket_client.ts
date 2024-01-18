@@ -23,11 +23,14 @@ import {
   ImportSourceClusterTopicsResponse,
   CreateConsumerGroupRequest,
   CreateRoleResponse,
+  CreateMQTTInstanceResponse,
+  ImportSourceClusterConsumerGroupsRequest,
   DescribeRoleListResponse,
   ModifyInstanceRequest,
   DescribeTopicListRequest,
   DescribeInstanceListRequest,
   CreateInstanceResponse,
+  CreateMQTTInstanceRequest,
   DescribeTopicListResponse,
   DeleteInstanceResponse,
   ConsumeGroupItem,
@@ -46,6 +49,7 @@ import {
   DeleteConsumerGroupResponse,
   ImportSourceClusterTopicsRequest,
   DescribeTopicResponse,
+  MQTTProductSkuItem,
   Endpoint,
   ImportSourceClusterConsumerGroupsResponse,
   DeleteRoleResponse,
@@ -58,7 +62,9 @@ import {
   TagFilter,
   DescribeConsumerGroupListResponse,
   DeleteRoleRequest,
+  DescribeMQTTProductSKUListResponse,
   DescribeRoleListRequest,
+  ModifyTopicResponse,
   ModifyConsumerGroupResponse,
   ModifyTopicRequest,
   DescribeInstanceResponse,
@@ -67,12 +73,14 @@ import {
   DeleteTopicResponse,
   Filter,
   CreateConsumerGroupResponse,
-  ImportSourceClusterConsumerGroupsRequest,
+  DescribeMQTTProductSKUListRequest,
   DeleteInstanceRequest,
+  InstanceItem,
   DescribeInstanceRequest,
   Tag,
-  InstanceItem,
-  ModifyTopicResponse,
+  DescribeMQTTInstanceListRequest,
+  DescribeMQTTInstanceListResponse,
+  MQTTInstanceItem,
   DescribeInstanceListResponse,
   DescribeTopicRequest,
 } from "./trocket_models"
@@ -159,6 +167,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 非对外接口，获取产品售卖规格
+   */
+  async DescribeMQTTProductSKUList(
+    req?: DescribeMQTTProductSKUListRequest,
+    cb?: (error: string, rep: DescribeMQTTProductSKUListResponse) => void
+  ): Promise<DescribeMQTTProductSKUListResponse> {
+    return this.request("DescribeMQTTProductSKUList", req, cb)
+  }
+
+  /**
    * 删除消费组
    */
   async DeleteConsumerGroup(
@@ -239,6 +257,22 @@ export class Client extends AbstractClient {
   }
 
   /**
+     * 获取实例列表，Filters参数使用说明如下：
+1. InstanceName, 名称模糊查询
+2. InstanceId，实例ID查询
+3. InstanceType, 实例类型查询，支持多选
+3. InstanceStatus，实例状态查询，支持多选
+
+当使用TagFilters查询时，Filters参数失效。
+     */
+  async DescribeMQTTInstanceList(
+    req: DescribeMQTTInstanceListRequest,
+    cb?: (error: string, rep: DescribeMQTTInstanceListResponse) => void
+  ): Promise<DescribeMQTTInstanceListResponse> {
+    return this.request("DescribeMQTTInstanceList", req, cb)
+  }
+
+  /**
    * 导入topic列表
    */
   async ImportSourceClusterTopics(
@@ -246,6 +280,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ImportSourceClusterTopicsResponse) => void
   ): Promise<ImportSourceClusterTopicsResponse> {
     return this.request("ImportSourceClusterTopics", req, cb)
+  }
+
+  /**
+   * 购买新的MQTT实例
+   */
+  async CreateMQTTInstance(
+    req: CreateMQTTInstanceRequest,
+    cb?: (error: string, rep: CreateMQTTInstanceResponse) => void
+  ): Promise<CreateMQTTInstanceResponse> {
+    return this.request("CreateMQTTInstance", req, cb)
   }
 
   /**

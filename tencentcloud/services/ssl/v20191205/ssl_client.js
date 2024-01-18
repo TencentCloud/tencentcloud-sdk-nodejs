@@ -220,14 +220,6 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeployCertificateRecordRollback", req, cb);
     }
     /**
-     * 证书托管接口已重构， 旧接口预下线， 近30天无请求
-
-云资源托管
-     */
-    async HostCertificate(req, cb) {
-        return this.request("HostCertificate", req, cb);
-    }
-    /**
      * 云资源部署重试部署记录
      */
     async DeployCertificateRecordRetry(req, cb) {

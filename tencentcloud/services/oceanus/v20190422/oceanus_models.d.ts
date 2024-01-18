@@ -390,6 +390,10 @@ export interface CopyJobsRequest {
      * 工作空间 SerialId
      */
     WorkSpaceId?: string;
+    /**
+     * 目标工作空间 SerialId
+     */
+    TargetWorkspaceId?: string;
 }
 /**
  * CopyJobs返回参数结构体
@@ -399,17 +403,17 @@ export interface CopyJobsResponse {
      * 成功条数
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SuccessCount: number;
+    SuccessCount?: number;
     /**
      * 失败条数
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    FailCount: number;
+    FailCount?: number;
     /**
      * 结果列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CopyJobsResults: Array<CopyJobResult>;
+    CopyJobsResults?: Array<CopyJobResult>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -3052,6 +3056,16 @@ export interface JobConfig {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     EsServerlessSpace?: string;
+    /**
+     * es索引中文
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IndexName?: string;
+    /**
+     * es空间中文
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    WorkspaceName?: string;
 }
 /**
  * DescribeResourceConfigs请求参数结构体

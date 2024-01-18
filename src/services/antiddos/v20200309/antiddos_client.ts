@@ -42,6 +42,7 @@ import {
   DescribeListProtocolBlockConfigResponse,
   DescribeListBGPInstancesRequest,
   KeyValue,
+  DescribeBGPIPL7RulesRequest,
   ModifyCcBlackWhiteIpListRequest,
   DeleteDDoSSpeedLimitConfigRequest,
   CreatePacketFilterConfigResponse,
@@ -152,6 +153,7 @@ import {
   ConnectLimitRelation,
   DescribeListBlackWhiteIpListResponse,
   DDoSAIRelation,
+  CreateBlackWhiteIpListRequest,
   DescribeCCReqLimitPolicyListRequest,
   AclConfigRelation,
   DescribeListDDoSSpeedLimitConfigResponse,
@@ -163,6 +165,7 @@ import {
   EipAddressRelation,
   DeleteDDoSBlackWhiteIpListRequest,
   PackInfo,
+  DescribeBGPIPL7RulesResponse,
   CreateDDoSConnectLimitResponse,
   WaterPrintRelation,
   IPLineInfo,
@@ -218,7 +221,7 @@ import {
   AssociateDDoSEipAddressRequest,
   AssociateDDoSEipLoadBalancerResponse,
   DescribeCCThresholdListRequest,
-  CreateBlackWhiteIpListRequest,
+  BGPIPL7RuleEntry,
   ModifyDDoSGeoIPBlockConfigRequest,
   DescribeBizTrendResponse,
   NewL7RuleEntry,
@@ -327,6 +330,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeL7RulesBySSLCertIdResponse) => void
   ): Promise<DescribeL7RulesBySSLCertIdResponse> {
     return this.request("DescribeL7RulesBySSLCertId", req, cb)
+  }
+
+  /**
+   * 高防IP获取7层规则
+   */
+  async DescribeBGPIPL7Rules(
+    req: DescribeBGPIPL7RulesRequest,
+    cb?: (error: string, rep: DescribeBGPIPL7RulesResponse) => void
+  ): Promise<DescribeBGPIPL7RulesResponse> {
+    return this.request("DescribeBGPIPL7Rules", req, cb)
   }
 
   /**

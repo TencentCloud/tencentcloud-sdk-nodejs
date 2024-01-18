@@ -536,11 +536,6 @@ export interface TaskGroupInstance {
      */
     TaskGroupInstanceStatus: number;
     /**
-     * 实例动作执行日志
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    TaskGroupInstanceExecuteLog: string;
-    /**
      * 实例创建时间
      */
     TaskGroupInstanceCreateTime: string;
@@ -562,6 +557,12 @@ export interface TaskGroupInstance {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     TaskGroupInstanceEndTime: string;
+    /**
+     * 实例动作执行日志
+  注意：此字段可能返回 null，表示取不到有效值。
+     * @deprecated
+     */
+    TaskGroupInstanceExecuteLog?: string;
     /**
      * 实例是否可重试
   注意：此字段可能返回 null，表示取不到有效值。

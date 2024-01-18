@@ -72,6 +72,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeTopicStatsOp", req, cb);
     }
     /**
+     * 非对外接口，获取产品售卖规格
+     */
+    async DescribeMQTTProductSKUList(req, cb) {
+        return this.request("DescribeMQTTProductSKUList", req, cb);
+    }
+    /**
      * 删除消费组
      */
     async DeleteConsumerGroup(req, cb) {
@@ -120,10 +126,28 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteTopic", req, cb);
     }
     /**
+     * 获取实例列表，Filters参数使用说明如下：
+1. InstanceName, 名称模糊查询
+2. InstanceId，实例ID查询
+3. InstanceType, 实例类型查询，支持多选
+3. InstanceStatus，实例状态查询，支持多选
+
+当使用TagFilters查询时，Filters参数失效。
+     */
+    async DescribeMQTTInstanceList(req, cb) {
+        return this.request("DescribeMQTTInstanceList", req, cb);
+    }
+    /**
      * 导入topic列表
      */
     async ImportSourceClusterTopics(req, cb) {
         return this.request("ImportSourceClusterTopics", req, cb);
+    }
+    /**
+     * 购买新的MQTT实例
+     */
+    async CreateMQTTInstance(req, cb) {
+        return this.request("CreateMQTTInstance", req, cb);
     }
     /**
      * 获取实例列表，Filters参数使用说明如下：

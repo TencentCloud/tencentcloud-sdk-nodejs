@@ -3141,6 +3141,20 @@ export interface DescribeTaskLogURLResponse {
 }
 
 /**
+ * ModifyOrganizationAccountStatus返回参数结构体
+ */
+export interface ModifyOrganizationAccountStatusResponse {
+  /**
+   * 返回值为0，则修改成功
+   */
+  Status?: number
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeDbAssetInfo请求参数结构体
  */
 export interface DescribeDbAssetInfoRequest {
@@ -4046,13 +4060,9 @@ export interface TaskLogInfo {
 }
 
 /**
- * CreateDomainAndIp返回参数结构体
+ * ModifyRiskCenterRiskStatus返回参数结构体
  */
-export interface CreateDomainAndIpResponse {
-  /**
-   * 返回创建成功的数量
-   */
-  Data?: number
+export interface ModifyRiskCenterRiskStatusResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4327,6 +4337,16 @@ export interface DescribeSearchBugInfoResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ModifyOrganizationAccountStatus请求参数结构体
+ */
+export interface ModifyOrganizationAccountStatusRequest {
+  /**
+   * 修改集团账号状态，1 开启， 2关闭
+   */
+  Status: number
 }
 
 /**
@@ -4773,9 +4793,13 @@ export interface DescribeGatewayAssetsRequest {
 }
 
 /**
- * ModifyRiskCenterRiskStatus返回参数结构体
+ * CreateDomainAndIp返回参数结构体
  */
-export interface ModifyRiskCenterRiskStatusResponse {
+export interface CreateDomainAndIpResponse {
+  /**
+   * 返回创建成功的数量
+   */
+  Data?: number
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

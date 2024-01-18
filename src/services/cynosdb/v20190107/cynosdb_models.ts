@@ -807,7 +807,7 @@ export interface CloseWanResponse {
   /**
    * 任务流ID
    */
-  FlowId: number
+  FlowId?: number
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1085,8 +1085,17 @@ export interface DescribeClusterParamsResponse {
 export interface CloseWanRequest {
   /**
    * 实例组id
+   * @deprecated
    */
-  InstanceGrpId: string
+  InstanceGrpId?: string
+  /**
+   * 实例组id
+   */
+  InstanceGroupId?: string
+  /**
+   * 实例id
+   */
+  InstanceId?: string
 }
 
 /**
@@ -1319,6 +1328,10 @@ export interface DescribeInstanceParamsRequest {
    * 参数名搜索条件，支持模糊匹配
    */
   ParamKeyword?: string
+  /**
+   * 是否为全局参数
+   */
+  IsGlobal?: string
 }
 
 /**
@@ -2100,8 +2113,13 @@ export interface ModifyVipVportRequest {
   ClusterId: string
   /**
    * 实例组id
+   * @deprecated
    */
-  InstanceGrpId: string
+  InstanceGrpId?: string
+  /**
+   * 实例组id
+   */
+  InstanceGroupId?: string
   /**
    * 需要修改的目的ip
    */
@@ -2518,11 +2536,11 @@ export interface InstanceParamItem {
   /**
    * 实例ID
    */
-  InstanceId: string
+  InstanceId?: string
   /**
    * 实例参数列表
    */
-  ParamsItems: Array<ParamItemDetail>
+  ParamsItems?: Array<ParamItemDetail>
 }
 
 /**
@@ -2585,6 +2603,11 @@ export interface Ability {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   NonsupportRoReason: string
+  /**
+   * 是否支持手动发起快照备份
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsSupportManualSnapshot: string
 }
 
 /**
@@ -2901,7 +2924,7 @@ export interface OpenWanResponse {
   /**
    * 任务流ID
    */
-  FlowId: number
+  FlowId?: number
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3707,53 +3730,53 @@ export interface ParamItemDetail {
   /**
    * 当前值
    */
-  CurrentValue: string
+  CurrentValue?: string
   /**
    * 默认值
    */
-  Default: string
+  Default?: string
   /**
    * 参数的可选枚举值。如果为非枚举值，则为空
    */
-  EnumValue: Array<string>
+  EnumValue?: Array<string>
   /**
    * 1：全局参数，0：非全局参数
    */
-  IsGlobal: number
+  IsGlobal?: number
   /**
    * 最大值
    */
-  Max: string
+  Max?: string
   /**
    * 最小值
    */
-  Min: string
+  Min?: string
   /**
    * 修改参数后，是否需要重启数据库以使参数生效。0-不需要重启，1-需要重启。
    */
-  NeedReboot: number
+  NeedReboot?: number
   /**
    * 参数名称
    */
-  ParamName: string
+  ParamName?: string
   /**
    * 参数类型：integer，enum，float，string，func
    */
-  ParamType: string
+  ParamType?: string
   /**
    * 参数描述
    */
-  Description: string
+  Description?: string
   /**
    * 类型是否为公式
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  IsFunc: boolean
+  IsFunc?: boolean
   /**
    * 参数配置公式
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Func: string
+  Func?: string
 }
 
 /**
@@ -4398,68 +4421,68 @@ export interface ParamInfo {
   /**
    * 当前值
    */
-  CurrentValue: string
+  CurrentValue?: string
   /**
    * 默认值
    */
-  Default: string
+  Default?: string
   /**
    * 参数为enum/string/bool时，可选值列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  EnumValue: Array<string>
+  EnumValue?: Array<string>
   /**
    * 参数类型为float/integer时的最大值
    */
-  Max: string
+  Max?: string
   /**
    * 参数类型为float/integer时的最小值
    */
-  Min: string
+  Min?: string
   /**
    * 参数名称
    */
-  ParamName: string
+  ParamName?: string
   /**
    * 是否需要重启生效
    */
-  NeedReboot: number
+  NeedReboot?: number
   /**
    * 参数类型：integer/float/string/enum/bool
    */
-  ParamType: string
+  ParamType?: string
   /**
    * 匹配类型，multiVal, regex在参数类型是string时使用
    */
-  MatchType: string
+  MatchType?: string
   /**
    * 匹配目标值，当multiVal时，各个key用;分割
    */
-  MatchValue: string
+  MatchValue?: string
   /**
    * 参数描述
    */
-  Description: string
+  Description?: string
   /**
    * 是否为全局参数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  IsGlobal: number
+  IsGlobal?: number
   /**
    * 参数是否可修改
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ModifiableInfo: ModifiableInfo
+  ModifiableInfo?: ModifiableInfo
   /**
    * 是否为函数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  IsFunc: boolean
+  IsFunc?: boolean
   /**
    * 函数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Func: string
+  Func?: string
 }
 
 /**
@@ -4505,31 +4528,31 @@ export interface SecurityGroup {
   /**
    * 项目ID
    */
-  ProjectId: number
+  ProjectId?: number
   /**
    * 创建时间，时间格式：yyyy-mm-dd hh:mm:ss
    */
-  CreateTime: string
+  CreateTime?: string
   /**
    * 入站规则
    */
-  Inbound: Array<PolicyRule>
+  Inbound?: Array<PolicyRule>
   /**
    * 出站规则
    */
-  Outbound: Array<PolicyRule>
+  Outbound?: Array<PolicyRule>
   /**
    * 安全组ID
    */
-  SecurityGroupId: string
+  SecurityGroupId?: string
   /**
    * 安全组名称
    */
-  SecurityGroupName: string
+  SecurityGroupName?: string
   /**
    * 安全组备注
    */
-  SecurityGroupRemark: string
+  SecurityGroupRemark?: string
 }
 
 /**
@@ -4691,8 +4714,17 @@ export interface RevokeAccountPrivilegesRequest {
 export interface OpenWanRequest {
   /**
    * 实例组id
+   * @deprecated
    */
-  InstanceGrpId: string
+  InstanceGrpId?: string
+  /**
+   * 实例ID
+   */
+  InstanceId?: string
+  /**
+   * 实例组id
+   */
+  InstanceGroupId?: string
 }
 
 /**
@@ -4855,7 +4887,7 @@ export interface PolicyRule {
    */
   Action?: string
   /**
-   * 来源IP或IP段，例如192.168.0.0/16
+   * 来源Ip或Ip段，例如192.168.0.0/16
    */
   CidrIp?: string
   /**
@@ -5377,7 +5409,7 @@ export interface ModifyAccountHostResponse {
  */
 export interface DescribeInstancesRequest {
   /**
-   * 返回数量，默认为 20，最大值为 100
+   * 返回数量，默认为 20，取值范围为(0,100]
    */
   Limit?: number
   /**
@@ -5401,7 +5433,7 @@ export interface DescribeInstancesRequest {
    */
   Filters?: Array<QueryFilter>
   /**
-   * 引擎类型：目前支持“MYSQL”， “POSTGRESQL”
+   * 引擎类型：目前支持“MYSQL”
    */
   DbType?: string
   /**
@@ -7034,7 +7066,8 @@ export interface AddInstancesRequest {
    */
   ReadOnlyCount: number
   /**
-   * 实例组ID，在已有RO组中新增实例时使用，不传则新增RO组。当前版本不建议传输该值。当前版本已废弃。
+   * 实例组ID，在已有RO组中新增实例时使用，不传则新增RO组。当前版本不建议传输该值。
+   * @deprecated
    */
   InstanceGrpId?: string
   /**
@@ -7483,6 +7516,99 @@ export interface LogicBackupConfigInfo {
 }
 
 /**
+ * 实例组信息
+ */
+export interface CynosdbInstanceGroup {
+  /**
+   * 用户appId
+   */
+  AppId?: number
+  /**
+   * 集群ID
+   */
+  ClusterId?: string
+  /**
+   * 创建时间
+   */
+  CreatedTime?: string
+  /**
+   * 删除时间
+   */
+  DeletedTime?: string
+  /**
+   * 实例组ID
+   */
+  InstanceGroupId?: string
+  /**
+   * 状态
+   */
+  Status?: string
+  /**
+   * 实例组类型。ha-ha组；ro-只读组
+   */
+  Type?: string
+  /**
+   * 更新时间
+   */
+  UpdatedTime?: string
+  /**
+   * 内网IP
+   */
+  Vip?: string
+  /**
+   * 内网端口
+   */
+  Vport?: number
+  /**
+   * 外网域名
+   */
+  WanDomain?: string
+  /**
+   * 外网ip
+   */
+  WanIP?: string
+  /**
+   * 外网端口
+   */
+  WanPort?: number
+  /**
+   * 外网状态
+   */
+  WanStatus?: string
+  /**
+   * 实例组包含实例信息
+   */
+  InstanceSet?: Array<CynosdbInstance>
+  /**
+   * VPC的ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UniqVpcId?: string
+  /**
+   * 子网ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UniqSubnetId?: string
+  /**
+   * 正在回收IP信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OldAddrInfo?: OldAddrInfo
+  /**
+   * 正在进行的任务
+   */
+  ProcessingTasks?: Array<string>
+  /**
+   * 任务列表
+   */
+  Tasks?: Array<ObjectTask>
+  /**
+   * biz_net_service表id
+   */
+  NetServiceId?: number
+}
+
+/**
  * RefundResourcePackage返回参数结构体
  */
 export interface RefundResourcePackageResponse {
@@ -7818,7 +7944,12 @@ export interface DeleteClusterDatabaseRequest {
 /**
  * 参数是否可修改的详细信息
  */
-export type ModifiableInfo = null
+export interface ModifiableInfo {
+  /**
+   * 参数是否可被修改, 1:可以 0:不可以
+   */
+  IsModifiable?: number
+}
 
 /**
  * DescribeInstanceParams返回参数结构体
@@ -8137,6 +8268,10 @@ export interface DescribeClusterParamsRequest {
    * 参数名字
    */
   ParamName?: string
+  /**
+   * 是否为全局参数
+   */
+  IsGlobal?: string
 }
 
 /**
@@ -8255,9 +8390,14 @@ export interface DescribeInstanceSpecsResponse {
  */
 export interface DescribeDBSecurityGroupsRequest {
   /**
-   * 实例组ID。可以通过接口DescribeClusterInstanceGrps获取。
+   * 实例ID
+   * @deprecated
    */
-  InstanceId: string
+  InstanceId?: string
+  /**
+   * 实例组ID
+   */
+  InstanceGroupId?: string
 }
 
 /**
@@ -8464,11 +8604,16 @@ export interface DescribeClusterInstanceGrpsResponse {
   /**
    * 实例组个数
    */
-  TotalCount: number
+  TotalCount?: number
+  /**
+   * 实例组列表
+   * @deprecated
+   */
+  InstanceGrpInfoList?: Array<CynosdbInstanceGrp>
   /**
    * 实例组列表
    */
-  InstanceGrpInfoList: Array<CynosdbInstanceGrp>
+  InstanceGroupInfoList?: Array<CynosdbInstanceGroup>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

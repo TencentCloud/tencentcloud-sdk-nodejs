@@ -124,7 +124,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeBinlogSaveDays(req: DescribeBinlogSaveDaysRequest, cb?: (error: string, rep: DescribeBinlogSaveDaysResponse) => void): Promise<DescribeBinlogSaveDaysResponse>;
     /**
-     * 本接口（DescribeClusterInstanceGrps）用于查询实例组信息。
+     * 本接口（DescribeClusterInstanceGrps）用于查询实例组信息。 该接口已废弃，推荐使用DescribeClusterInstanceGroups
      */
     DescribeClusterInstanceGrps(req: DescribeClusterInstanceGrpsRequest, cb?: (error: string, rep: DescribeClusterInstanceGrpsResponse) => void): Promise<DescribeClusterInstanceGrpsResponse>;
     /**
@@ -208,7 +208,7 @@ export declare class Client extends AbstractClient {
      */
     ModifyParamTemplate(req: ModifyParamTemplateRequest, cb?: (error: string, rep: ModifyParamTemplateResponse) => void): Promise<ModifyParamTemplateResponse>;
     /**
-     * 该接口(DescribeInstanceParams)查询实例参数
+     * 该接口(DescribeInstanceParams)查询实例参数列表
      */
     DescribeInstanceParams(req: DescribeInstanceParamsRequest, cb?: (error: string, rep: DescribeInstanceParamsResponse) => void): Promise<DescribeInstanceParamsResponse>;
     /**

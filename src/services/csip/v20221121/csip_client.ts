@@ -90,6 +90,7 @@ import {
   DescribeCVMAssetInfoResponse,
   DescribePublicIpAssetsResponse,
   DescribeTaskLogURLResponse,
+  ModifyOrganizationAccountStatusResponse,
   DescribeDbAssetInfoRequest,
   Filter,
   DescribeRiskCenterWebsiteRiskListRequest,
@@ -109,12 +110,13 @@ import {
   ScanTaskInfoList,
   DescribeDbAssetsRequest,
   TaskLogInfo,
-  CreateDomainAndIpResponse,
+  ModifyRiskCenterRiskStatusResponse,
   DescribeRiskCenterAssetViewVULRiskListRequest,
   TaskCenterCFGRiskInputParam,
   CreateDomainAndIpRequest,
   DomainAssetVO,
   DescribeSearchBugInfoResponse,
+  ModifyOrganizationAccountStatusRequest,
   DescribeTaskLogListResponse,
   BugInfoDetail,
   DescribeDomainAssetsResponse,
@@ -128,7 +130,7 @@ import {
   DescribeListenerListRequest,
   DeleteRiskScanTaskResponse,
   DescribeGatewayAssetsRequest,
-  ModifyRiskCenterRiskStatusResponse,
+  CreateDomainAndIpResponse,
   DescribeTaskLogListRequest,
   DescribeRiskCenterAssetViewPortRiskListResponse,
   DescribeTaskLogURLRequest,
@@ -441,6 +443,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyRiskCenterRiskStatusResponse) => void
   ): Promise<ModifyRiskCenterRiskStatusResponse> {
     return this.request("ModifyRiskCenterRiskStatus", req, cb)
+  }
+
+  /**
+   * 修改集团账号状态
+   */
+  async ModifyOrganizationAccountStatus(
+    req: ModifyOrganizationAccountStatusRequest,
+    cb?: (error: string, rep: ModifyOrganizationAccountStatusResponse) => void
+  ): Promise<ModifyOrganizationAccountStatusResponse> {
+    return this.request("ModifyOrganizationAccountStatus", req, cb)
   }
 
   /**

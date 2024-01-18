@@ -1014,31 +1014,6 @@ export interface DescribeHostCosInstanceListResponse {
 }
 
 /**
- * 云资源配置详情
- */
-export interface CertHostingInfo {
-  /**
-   * 证书ID
-   */
-  CertId: string
-  /**
-   * 已替换的新证书ID
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  RenewCertId: string
-  /**
-   * 云资源托管 ，CDN或CLB：部分开启，CDN,CLB：已开启，null：未开启托管
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ResourceType: string
-  /**
-   * 创建时间
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CreateTime: string
-}
-
-/**
  * 返回参数键为 DvAuths 的内容。
  */
 export interface DvAuths {
@@ -3142,20 +3117,6 @@ export interface DescribeManagerDetailResponse {
 }
 
 /**
- * HostCertificate返回参数结构体
- */
-export interface HostCertificateResponse {
-  /**
-   * 云资源配置详情
-   */
-  CertHostingInfo?: CertHostingInfo
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * CLB证书详情
  */
 export interface Certificate {
@@ -4124,20 +4085,6 @@ export interface DescribeHostCdnInstanceListResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * HostCertificate请求参数结构体
- */
-export interface HostCertificateRequest {
-  /**
-   * 证书ID
-   */
-  CertificateId: string
-  /**
-   * 资源类型：目前仅限于CLB,CDN
-   */
-  ResourceType?: Array<string>
 }
 
 /**

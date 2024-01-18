@@ -338,16 +338,6 @@ it("ssl.v20191205.DeployCertificateRecordRollback", async function () {
     }
 })
 
-it("ssl.v20191205.HostCertificate", async function () {
-    try {
-       const data = await client.HostCertificate({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("ssl.v20191205.DeployCertificateRecordRetry", async function () {
     try {
        const data = await client.DeployCertificateRecordRetry({})

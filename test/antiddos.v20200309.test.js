@@ -58,6 +58,16 @@ it("antiddos.v20200309.DescribeL7RulesBySSLCertId", async function () {
     }
 })
 
+it("antiddos.v20200309.DescribeBGPIPL7Rules", async function () {
+    try {
+       const data = await client.DescribeBGPIPL7Rules({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("antiddos.v20200309.DescribeListIPAlarmConfig", async function () {
     try {
        const data = await client.DescribeListIPAlarmConfig({})

@@ -88,6 +88,16 @@ it("trocket.v20230308.DescribeTopicStatsOp", async function () {
     }
 })
 
+it("trocket.v20230308.DescribeMQTTProductSKUList", async function () {
+    try {
+       const data = await client.DescribeMQTTProductSKUList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("trocket.v20230308.DeleteConsumerGroup", async function () {
     try {
        const data = await client.DeleteConsumerGroup({})
@@ -168,9 +178,29 @@ it("trocket.v20230308.DeleteTopic", async function () {
     }
 })
 
+it("trocket.v20230308.DescribeMQTTInstanceList", async function () {
+    try {
+       const data = await client.DescribeMQTTInstanceList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("trocket.v20230308.ImportSourceClusterTopics", async function () {
     try {
        const data = await client.ImportSourceClusterTopics({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("trocket.v20230308.CreateMQTTInstance", async function () {
+    try {
+       const data = await client.CreateMQTTInstance({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

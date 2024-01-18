@@ -3659,10 +3659,14 @@ export interface NoCache {
  */
 export interface DescribeDefaultCertificatesRequest {
     /**
+     * 站点 ID。
+     */
+    ZoneId?: string;
+    /**
      * 过滤条件，Filters.Values的上限为5。详细的过滤条件如下：
   <li>zone-id<br>   按照【<strong>站点ID</strong>】进行过滤。站点ID形如：zone-xxx。<br>   类型：String<br>   必选：是 </li>
      */
-    Filters: Array<Filter>;
+    Filters?: Array<Filter>;
     /**
      * 分页查询偏移量。默认值：0。
      */
@@ -5947,11 +5951,11 @@ export interface DescribeDefaultCertificatesResponse {
     /**
      * 证书总数。
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 默认证书列表。
      */
-    DefaultServerCertInfo: Array<DefaultServerCertInfo>;
+    DefaultServerCertInfo?: Array<DefaultServerCertInfo>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */

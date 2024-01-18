@@ -310,6 +310,7 @@ import {
   UpgradeClusterVersionRequest,
   ExportInstanceSlowQueriesResponse,
   LogicBackupConfigInfo,
+  CynosdbInstanceGroup,
   RefundResourcePackageResponse,
   DeleteClusterDatabaseResponse,
   CynosdbClusterDetail,
@@ -660,7 +661,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（DescribeClusterInstanceGrps）用于查询实例组信息。
+   * 本接口（DescribeClusterInstanceGrps）用于查询实例组信息。 该接口已废弃，推荐使用DescribeClusterInstanceGroups
    */
   async DescribeClusterInstanceGrps(
     req: DescribeClusterInstanceGrpsRequest,
@@ -870,7 +871,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 该接口(DescribeInstanceParams)查询实例参数
+   * 该接口(DescribeInstanceParams)查询实例参数列表
    */
   async DescribeInstanceParams(
     req: DescribeInstanceParamsRequest,

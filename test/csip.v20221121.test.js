@@ -318,6 +318,16 @@ it("csip.v20221121.ModifyRiskCenterRiskStatus", async function () {
     }
 })
 
+it("csip.v20221121.ModifyOrganizationAccountStatus", async function () {
+    try {
+       const data = await client.ModifyOrganizationAccountStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("csip.v20221121.DescribeOrganizationUserInfo", async function () {
     try {
        const data = await client.DescribeOrganizationUserInfo({})

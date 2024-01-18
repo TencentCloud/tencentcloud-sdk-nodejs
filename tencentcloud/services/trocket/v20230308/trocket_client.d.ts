@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { ModifyInstanceResponse, CreateTopicResponse, ImportSourceClusterTopicsResponse, CreateConsumerGroupRequest, CreateRoleResponse, DescribeRoleListResponse, ModifyInstanceRequest, DescribeTopicListRequest, DescribeInstanceListRequest, CreateInstanceResponse, DescribeTopicListResponse, DeleteInstanceResponse, ModifyConsumerGroupRequest, DescribeConsumerGroupRequest, DescribeConsumerGroupListRequest, ModifyRoleResponse, DescribeConsumerGroupResponse, CreateInstanceRequest, CreateRoleRequest, DeleteTopicRequest, DeleteConsumerGroupResponse, ImportSourceClusterTopicsRequest, DescribeTopicResponse, ImportSourceClusterConsumerGroupsResponse, DeleteRoleResponse, ModifyRoleRequest, DescribeTopicStatsOpRequest, CreateTopicRequest, DescribeConsumerGroupListResponse, DeleteRoleRequest, DescribeRoleListRequest, ModifyConsumerGroupResponse, ModifyTopicRequest, DescribeInstanceResponse, DescribeTopicStatsOpResponse, DeleteConsumerGroupRequest, DeleteTopicResponse, CreateConsumerGroupResponse, ImportSourceClusterConsumerGroupsRequest, DeleteInstanceRequest, DescribeInstanceRequest, ModifyTopicResponse, DescribeInstanceListResponse, DescribeTopicRequest } from "./trocket_models";
+import { ModifyInstanceResponse, CreateTopicResponse, ImportSourceClusterTopicsResponse, CreateConsumerGroupRequest, CreateRoleResponse, CreateMQTTInstanceResponse, ImportSourceClusterConsumerGroupsRequest, DescribeRoleListResponse, ModifyInstanceRequest, DescribeTopicListRequest, DescribeInstanceListRequest, CreateInstanceResponse, CreateMQTTInstanceRequest, DescribeTopicListResponse, DeleteInstanceResponse, ModifyConsumerGroupRequest, DescribeConsumerGroupRequest, DescribeConsumerGroupListRequest, ModifyRoleResponse, DescribeConsumerGroupResponse, CreateInstanceRequest, CreateRoleRequest, DeleteTopicRequest, DeleteConsumerGroupResponse, ImportSourceClusterTopicsRequest, DescribeTopicResponse, ImportSourceClusterConsumerGroupsResponse, DeleteRoleResponse, ModifyRoleRequest, DescribeTopicStatsOpRequest, CreateTopicRequest, DescribeConsumerGroupListResponse, DeleteRoleRequest, DescribeMQTTProductSKUListResponse, DescribeRoleListRequest, ModifyTopicResponse, ModifyConsumerGroupResponse, ModifyTopicRequest, DescribeInstanceResponse, DescribeTopicStatsOpResponse, DeleteConsumerGroupRequest, DeleteTopicResponse, CreateConsumerGroupResponse, DescribeMQTTProductSKUListRequest, DeleteInstanceRequest, DescribeInstanceRequest, DescribeMQTTInstanceListRequest, DescribeMQTTInstanceListResponse, DescribeInstanceListResponse, DescribeTopicRequest } from "./trocket_models";
 /**
  * trocket client
  * @class
@@ -38,6 +38,10 @@ export declare class Client extends AbstractClient {
      */
     DescribeTopicStatsOp(req: DescribeTopicStatsOpRequest, cb?: (error: string, rep: DescribeTopicStatsOpResponse) => void): Promise<DescribeTopicStatsOpResponse>;
     /**
+     * 非对外接口，获取产品售卖规格
+     */
+    DescribeMQTTProductSKUList(req?: DescribeMQTTProductSKUListRequest, cb?: (error: string, rep: DescribeMQTTProductSKUListResponse) => void): Promise<DescribeMQTTProductSKUListResponse>;
+    /**
      * 删除消费组
      */
     DeleteConsumerGroup(req: DeleteConsumerGroupRequest, cb?: (error: string, rep: DeleteConsumerGroupResponse) => void): Promise<DeleteConsumerGroupResponse>;
@@ -70,9 +74,23 @@ export declare class Client extends AbstractClient {
      */
     DeleteTopic(req: DeleteTopicRequest, cb?: (error: string, rep: DeleteTopicResponse) => void): Promise<DeleteTopicResponse>;
     /**
+     * 获取实例列表，Filters参数使用说明如下：
+1. InstanceName, 名称模糊查询
+2. InstanceId，实例ID查询
+3. InstanceType, 实例类型查询，支持多选
+3. InstanceStatus，实例状态查询，支持多选
+
+当使用TagFilters查询时，Filters参数失效。
+     */
+    DescribeMQTTInstanceList(req: DescribeMQTTInstanceListRequest, cb?: (error: string, rep: DescribeMQTTInstanceListResponse) => void): Promise<DescribeMQTTInstanceListResponse>;
+    /**
      * 导入topic列表
      */
     ImportSourceClusterTopics(req: ImportSourceClusterTopicsRequest, cb?: (error: string, rep: ImportSourceClusterTopicsResponse) => void): Promise<ImportSourceClusterTopicsResponse>;
+    /**
+     * 购买新的MQTT实例
+     */
+    CreateMQTTInstance(req: CreateMQTTInstanceRequest, cb?: (error: string, rep: CreateMQTTInstanceResponse) => void): Promise<CreateMQTTInstanceResponse>;
     /**
      * 获取实例列表，Filters参数使用说明如下：
 1. InstanceName, 名称模糊查询

@@ -3881,6 +3881,10 @@ export interface CreateShipperRequest {
    * 投递数据范围的结束时间点，不能填写未来时间。如果用户不填写，默认为持续投递，即无限。
    */
   EndTime?: number
+  /**
+   * cos桶存储类型
+   */
+  StorageType?: string
 }
 
 /**
@@ -4624,6 +4628,10 @@ export interface ModifyShipperRequest {
    * 投递文件命名配置，0：随机数命名，1：投递时间命名，默认0（随机数命名）
    */
   FilenameMode?: number
+  /**
+   * cos桶类型
+   */
+  StorageType?: string
 }
 
 /**
@@ -5250,83 +5258,83 @@ export interface ShipperInfo {
   /**
    * 投递规则ID
    */
-  ShipperId: string
+  ShipperId?: string
   /**
    * 日志主题ID
    */
-  TopicId: string
+  TopicId?: string
   /**
    * 投递的bucket地址
    */
-  Bucket: string
+  Bucket?: string
   /**
    * 投递的前缀目录
    */
-  Prefix: string
+  Prefix?: string
   /**
    * 投递规则的名字
    */
-  ShipperName: string
+  ShipperName?: string
   /**
    * 投递的时间间隔，单位 秒
    */
-  Interval: number
+  Interval?: number
   /**
    * 投递的文件的最大值，单位 MB
    */
-  MaxSize: number
+  MaxSize?: number
   /**
    * 是否生效
    */
-  Status: boolean
+  Status?: boolean
   /**
    * 投递日志的过滤规则
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  FilterRules: Array<FilterRuleInfo>
+  FilterRules?: Array<FilterRuleInfo>
   /**
    * 投递日志的分区规则，支持strftime的时间格式表示
    */
-  Partition: string
+  Partition?: string
   /**
    * 投递日志的压缩配置
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Compress: CompressInfo
+  Compress?: CompressInfo
   /**
    * 投递日志的内容格式配置
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Content: ContentInfo
+  Content?: ContentInfo
   /**
    * 投递日志的创建时间
    */
-  CreateTime: string
+  CreateTime?: string
   /**
    * 投递文件命名配置，0：随机数命名，1：投递时间命名，默认0（随机数命名）
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  FilenameMode: number
+  FilenameMode?: number
   /**
    * 投递数据范围的开始时间点
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  StartTime: number
+  StartTime?: number
   /**
    * 投递数据范围的结束时间点
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  EndTime: number
+  EndTime?: number
   /**
    * 历史数据投递的进度（仅当用户选择的数据内中历史数据时才有效）
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Progress: number
+  Progress?: number
   /**
    * 历史数据全部投递完成剩余的时间（仅当用户选择的数据中有历史数据时才有效）
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RemainTime: number
+  RemainTime?: number
   /**
    * 历史任务状态：
 0：实时任务
@@ -5336,7 +5344,12 @@ export interface ShipperInfo {
 4：任务运行结束
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  HistoryStatus: number
+  HistoryStatus?: number
+  /**
+   * cos桶类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StorageType?: string
 }
 
 /**
