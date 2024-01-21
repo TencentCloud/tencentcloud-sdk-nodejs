@@ -1681,7 +1681,7 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
    * 获取转码模板列表。
    */
   async DescribeLiveTranscodeTemplates(
-    req?: DescribeLiveTranscodeTemplatesRequest,
+    req: DescribeLiveTranscodeTemplatesRequest,
     cb?: (error: string, rep: DescribeLiveTranscodeTemplatesResponse) => void
   ): Promise<DescribeLiveTranscodeTemplatesResponse> {
     return this.request("DescribeLiveTranscodeTemplates", req, cb)

@@ -104,7 +104,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeInstanceNodeInfo(req: DescribeInstanceNodeInfoRequest, cb?: (error: string, rep: DescribeInstanceNodeInfoResponse) => void): Promise<DescribeInstanceNodeInfoResponse>;
     /**
-     * 创建实例子账号
+     * 该接口（CreateInstanceAccount）用于自定义访问实例的账号。
      */
     CreateInstanceAccount(req: CreateInstanceAccountRequest, cb?: (error: string, rep: CreateInstanceAccountResponse) => void): Promise<CreateInstanceAccountResponse>;
     /**

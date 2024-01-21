@@ -76,7 +76,9 @@ mac为空返回对应GroupCode和MallId全量配置
      */
     CreateCameraState(req: CreateCameraStateRequest, cb?: (error: string, rep: CreateCameraStateResponse) => void): Promise<CreateCameraStateResponse>;
     /**
-     * 场内抓拍上报接口
+     * 优mall产品下线
+
+场内抓拍上报接口
      */
     CreateCapture(req: CreateCaptureRequest, cb?: (error: string, rep: CreateCaptureResponse) => void): Promise<CreateCaptureResponse>;
 }

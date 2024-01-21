@@ -49,7 +49,14 @@ export interface DeleteLiveRecordTemplateRequest {
 /**
  * DescribeLiveTranscodeTemplates请求参数结构体
  */
-export declare type DescribeLiveTranscodeTemplatesRequest = null;
+export interface DescribeLiveTranscodeTemplatesRequest {
+    /**
+     * 转码模板类型，默认0。
+  0：普通转码模板。
+  1：自适应码率转码模板。
+     */
+    TemplateType?: number;
+}
 /**
  * DescribeBackupStreamList返回参数结构体
  */
@@ -6439,7 +6446,7 @@ export interface DescribeLiveTranscodeTemplatesResponse {
     /**
      * 转码模板列表。
      */
-    Templates: Array<TemplateInfo>;
+    Templates?: Array<TemplateInfo>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */

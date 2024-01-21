@@ -178,6 +178,16 @@ it("csip.v20221121.DescribeCVMAssets", async function () {
     }
 })
 
+it("csip.v20221121.ModifyRiskCenterScanTask", async function () {
+    try {
+       const data = await client.ModifyRiskCenterScanTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("csip.v20221121.DescribeRiskCenterWebsiteRiskList", async function () {
     try {
        const data = await client.DescribeRiskCenterWebsiteRiskList({})

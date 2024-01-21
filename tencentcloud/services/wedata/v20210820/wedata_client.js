@@ -1205,6 +1205,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("FreezeTasksByMultiWorkflow", req, cb);
     }
     /**
+     * 删除项目用户
+     */
+    async DeleteProjectUsers(req, cb) {
+        return this.request("DeleteProjectUsers", req, cb);
+    }
+    /**
      * 查询基线实例列表
      */
     async DescribeBaselineInstances(req, cb) {

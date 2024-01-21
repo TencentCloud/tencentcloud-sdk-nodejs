@@ -568,7 +568,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeAddonValues", req, cb);
     }
     /**
-     * 给GR集群增加可用的ClusterCIDR
+     * 给GR集群增加可用的ClusterCIDR（开白才能使用此功能，如需要请联系我们）
      */
     async AddClusterCIDR(req, cb) {
         return this.request("AddClusterCIDR", req, cb);

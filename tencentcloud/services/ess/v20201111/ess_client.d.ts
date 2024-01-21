@@ -307,7 +307,8 @@ export declare class Client extends AbstractClient {
 
 注：**静默（自动）签署不支持合同签署方存在填写**功能
 <br>
-**相关视频指引**
+
+<font color="red">相关视频指引</font>
 <a href="https://dyn.ess.tencent.cn/guide/apivideo/createflow_seversign.mp4" target="_blank">创建静默（自动）签署模板和开通自动签署</a>
      */
     CreateFlow(req: CreateFlowRequest, cb?: (error: string, rep: CreateFlowResponse) => void): Promise<CreateFlowResponse>;

@@ -128,7 +128,9 @@ mac为空返回对应GroupCode和MallId全量配置
         return this.request("CreateCameraState", req, cb);
     }
     /**
-     * 场内抓拍上报接口
+     * 优mall产品下线
+
+场内抓拍上报接口
      */
     async CreateCapture(req, cb) {
         return this.request("CreateCapture", req, cb);

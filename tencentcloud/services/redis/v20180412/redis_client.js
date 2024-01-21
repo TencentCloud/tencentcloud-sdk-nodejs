@@ -172,7 +172,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeInstanceNodeInfo", req, cb);
     }
     /**
-     * 创建实例子账号
+     * 该接口（CreateInstanceAccount）用于自定义访问实例的账号。
      */
     async CreateInstanceAccount(req, cb) {
         return this.request("CreateInstanceAccount", req, cb);

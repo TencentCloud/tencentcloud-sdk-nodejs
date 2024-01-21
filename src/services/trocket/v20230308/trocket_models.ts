@@ -16,117 +16,6 @@
  */
 
 /**
- * ModifyInstance返回参数结构体
- */
-export interface ModifyInstanceResponse {
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * CreateTopic返回参数结构体
- */
-export interface CreateTopicResponse {
-  /**
-   * 实例ID
-   */
-  InstanceId?: string
-  /**
-   * 主题
-   */
-  Topic?: string
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * ImportSourceClusterTopics返回参数结构体
- */
-export interface ImportSourceClusterTopicsResponse {
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * CreateConsumerGroup请求参数结构体
- */
-export interface CreateConsumerGroupRequest {
-  /**
-   * 实例ID
-   */
-  InstanceId: string
-  /**
-   * 消费组名称
-   */
-  ConsumerGroup: string
-  /**
-   * 最大重试次数
-   */
-  MaxRetryTimes: number
-  /**
-   * 是否开启消费
-   */
-  ConsumeEnable: boolean
-  /**
-   * 顺序投递：true
-并发投递：false
-   */
-  ConsumeMessageOrderly: boolean
-  /**
-   * 备注
-   */
-  Remark?: string
-}
-
-/**
- * CreateRole返回参数结构体
- */
-export interface CreateRoleResponse {
-  /**
-   * 角色名
-   */
-  Role?: string
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * CreateMQTTInstance返回参数结构体
- */
-export interface CreateMQTTInstanceResponse {
-  /**
-   * 实例ID
-   */
-  InstanceId?: string
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * ImportSourceClusterConsumerGroups请求参数结构体
- */
-export interface ImportSourceClusterConsumerGroupsRequest {
-  /**
-   * 任务ID
-   */
-  TaskId: string
-  /**
-   * 待导入的消费组列表
-   */
-  GroupList: Array<SourceClusterGroupConfig>
-}
-
-/**
  * DescribeRoleList返回参数结构体
  */
 export interface DescribeRoleListResponse {
@@ -146,81 +35,17 @@ export interface DescribeRoleListResponse {
 }
 
 /**
- * ModifyInstance请求参数结构体
+ * DeleteMQTTTopic请求参数结构体
  */
-export interface ModifyInstanceRequest {
+export interface DeleteMQTTTopicRequest {
   /**
    * 实例ID
    */
   InstanceId: string
   /**
-   * 实例名称
+   * 主题
    */
-  Name?: string
-  /**
-   * 备注信息
-   */
-  Remark?: string
-  /**
-   * 消息发送和接收的比例
-   */
-  SendReceiveRatio?: number
-  /**
-   * 调整实例规格的商品代号
-   */
-  SkuCode?: string
-  /**
-   * 消息保留时长，小时为单位
-   */
-  MessageRetention?: number
-  /**
-   * 是否开启弹性TPS
-   */
-  ScaledTpsEnabled?: boolean
-}
-
-/**
- * DescribeTopicList请求参数结构体
- */
-export interface DescribeTopicListRequest {
-  /**
-   * 实例ID
-   */
-  InstanceId: string
-  /**
-   * 查询起始位置
-   */
-  Offset: number
-  /**
-   * 查询结果限制数量
-   */
-  Limit: number
-  /**
-   * 查询条件列表
-   */
-  Filters?: Array<Filter>
-}
-
-/**
- * DescribeInstanceList请求参数结构体
- */
-export interface DescribeInstanceListRequest {
-  /**
-   * 查询起始位置
-   */
-  Offset: number
-  /**
-   * 查询结果限制数量
-   */
-  Limit: number
-  /**
-   * 查询条件列表
-   */
-  Filters?: Array<Filter>
-  /**
-   * 标签过滤器
-   */
-  TagFilters?: Array<TagFilter>
+  Topic: string
 }
 
 /**
@@ -238,108 +63,61 @@ export interface CreateInstanceResponse {
 }
 
 /**
- * CreateMQTTInstance请求参数结构体
+ * 源集群主题配置
  */
-export interface CreateMQTTInstanceRequest {
+export interface SourceClusterTopicConfig {
   /**
-   * 实例类型，
-EXPERIMENT 体验版
-BASIC 基础版
-PRO  专业版
-PLATINUM 铂金版
+   * 主题名称
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  InstanceType: string
+  TopicName: string
   /**
-   * 实例名称
+   * 主题类型，
+5.x版本
+UNSPECIFIED 未指定
+NORMAL 普通消息
+FIFO 顺序消息
+DELAY 延迟消息
+TRANSACTION 事务消息
+
+4.x版本
+Normal 普通消息
+PartitionedOrder 分区顺序消息
+Transaction 事务消息
+DelayScheduled 延时消息
+
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Name: string
+  TopicType: string
   /**
-   * 商品规格，可用规格如下：
-experiment_500,
-basic_1k,
-basic_2k,
-basic_4k,
-basic_6k,
-pro_4k,
-pro_6k,
-pro_1w,
-pro_2w,
-pro_3w,
-pro_4w,
-pro_5w,
-platinum_6k,
-platinum_1w,
-platinum_2w,
-platinum_4w,
-platinum_10w,
-platinum_15w,
-platinum_20w,
-platinum_40w,
-platinum_60w,
-platinum_100w
+   * 队列数
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  SkuCode: string
+  QueueNum: number
   /**
    * 备注信息
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Remark?: string
   /**
-   * 标签列表
-   */
-  TagList?: Array<Tag>
-  /**
-   * 实例绑定的VPC信息
-   */
-  VpcList?: Array<VpcInfo>
-  /**
-   * 是否开启公网
-   */
-  EnablePublic?: boolean
-  /**
-   * 公网带宽（单位：兆）
-   */
-  Bandwidth?: number
-  /**
-   * 公网访问白名单
-   */
-  IpRules?: Array<IpRule>
-  /**
-   * 是否自动续费（0: 不自动续费；1: 自动续费）
-   */
-  RenewFlag?: number
-  /**
-   * 购买时长（单位：月）
-   */
-  TimeSpan?: number
-}
-
-/**
- * DescribeTopicList返回参数结构体
- */
-export interface DescribeTopicListResponse {
-  /**
-   * 查询总数
+   * 是否已导入，作为入参时无效
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TotalCount?: number
+  Imported?: boolean
   /**
-   * 主题列表
+   * 命名空间，仅4.x集群有效
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Data?: Array<TopicItem>
+  Namespace?: string
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 导入状态，
+Unknown 未知，
+AlreadyExists 已存在，
+Success 成功，
+Failure 失败
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  RequestId?: string
-}
-
-/**
- * DeleteInstance返回参数结构体
- */
-export interface DeleteInstanceResponse {
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  ImportStatus?: string
 }
 
 /**
@@ -374,104 +152,6 @@ export interface ConsumeGroupItem {
 }
 
 /**
- * 列表上的主题信息
- */
-export interface TopicItem {
-  /**
-   * 实例ID
-   */
-  InstanceId?: string
-  /**
-   * 主题名称
-   */
-  Topic?: string
-  /**
-   * 主题类型
-   */
-  TopicType?: string
-  /**
-   * 队列数量
-   */
-  QueueNum?: number
-  /**
-   * 描述
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Remark?: string
-}
-
-/**
- * ModifyConsumerGroup请求参数结构体
- */
-export interface ModifyConsumerGroupRequest {
-  /**
-   * 实例ID
-   */
-  InstanceId: string
-  /**
-   * 消费组名称
-   */
-  ConsumerGroup?: string
-  /**
-   * 是否开启消费
-   */
-  ConsumeEnable?: boolean
-  /**
-   * 顺序投递：true
-并发投递：false
-   */
-  ConsumeMessageOrderly?: boolean
-  /**
-   * 最大重试次数
-   */
-  MaxRetryTimes?: number
-  /**
-   * 备注
-   */
-  Remark?: string
-}
-
-/**
- * DescribeConsumerGroup请求参数结构体
- */
-export interface DescribeConsumerGroupRequest {
-  /**
-   * 实例ID
-   */
-  InstanceId: string
-  /**
-   * 消费组名称
-   */
-  ConsumerGroup?: string
-}
-
-/**
- * DescribeConsumerGroupList请求参数结构体
- */
-export interface DescribeConsumerGroupListRequest {
-  /**
-   * 实例ID
-   */
-  InstanceId: string
-  /**
-   * 查询起始位置
-   */
-  Offset: number
-  /**
-   * 查询结果限制数量
-   */
-  Limit: number
-  /**
-   * 查询条件列表
-   */
-  Filters?: Array<Filter>
-  /**
-   * 查询指定主题下的消费组
-   */
-  FromTopic?: string
-}
-
-/**
  * ModifyRole返回参数结构体
  */
 export interface ModifyRoleResponse {
@@ -479,6 +159,50 @@ export interface ModifyRoleResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DeleteMQTTInsPublicEndpoint请求参数结构体
+ */
+export interface DeleteMQTTInsPublicEndpointRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+}
+
+/**
+ * ModifyInstance请求参数结构体
+ */
+export interface ModifyInstanceRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+  /**
+   * 实例名称
+   */
+  Name?: string
+  /**
+   * 备注信息
+   */
+  Remark?: string
+  /**
+   * 消息发送和接收的比例
+   */
+  SendReceiveRatio?: number
+  /**
+   * 调整实例规格的商品代号
+   */
+  SkuCode?: string
+  /**
+   * 消息保留时长，小时为单位
+   */
+  MessageRetention?: number
+  /**
+   * 是否开启弹性TPS
+   */
+  ScaledTpsEnabled?: boolean
 }
 
 /**
@@ -558,46 +282,9 @@ export interface SubscriptionData {
 }
 
 /**
- * DescribeConsumerGroup返回参数结构体
+ * CreateMQTTInsPublicEndpoint返回参数结构体
  */
-export interface DescribeConsumerGroupResponse {
-  /**
-   * 在线消费者数量
-   */
-  ConsumerNum?: number
-  /**
-   * TPS
-   */
-  Tps?: number
-  /**
-   * 消息堆积数量
-   */
-  ConsumerLag?: number
-  /**
-   * 消费者类型
-   */
-  ConsumeType?: string
-  /**
-   * 创建时间，秒为单位
-   */
-  CreatedTime?: number
-  /**
-   * 顺序投递：true
-并发投递：false
-   */
-  ConsumeMessageOrderly?: boolean
-  /**
-   * 是否开启消费
-   */
-  ConsumeEnable?: boolean
-  /**
-   * 最大重试次数
-   */
-  MaxRetryTimes?: number
-  /**
-   * 备注
-   */
-  Remark?: string
+export interface CreateMQTTInsPublicEndpointResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -605,133 +292,13 @@ export interface DescribeConsumerGroupResponse {
 }
 
 /**
- * CreateInstance请求参数结构体
+ * ImportSourceClusterConsumerGroups返回参数结构体
  */
-export interface CreateInstanceRequest {
+export interface ImportSourceClusterConsumerGroupsResponse {
   /**
-   * 实例类型，
-EXPERIMENT 体验版
-BASIC 基础版
-PRO  专业版
-PLATINUM 铂金版
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  InstanceType: string
-  /**
-   * 实例名称
-   */
-  Name: string
-  /**
-   * 商品规格，可用规格如下：
-experiment_500,
-basic_1k,
-basic_2k,
-basic_4k,
-basic_6k
-   */
-  SkuCode: string
-  /**
-   * 备注信息
-   */
-  Remark?: string
-  /**
-   * 标签列表
-   */
-  TagList?: Array<Tag>
-  /**
-   * 实例绑定的VPC信息
-   */
-  VpcList?: Array<VpcInfo>
-  /**
-   * 是否开启公网
-   */
-  EnablePublic?: boolean
-  /**
-   * 公网带宽
-   */
-  Bandwidth?: number
-  /**
-   * 公网访问白名单
-   */
-  IpRules?: Array<IpRule>
-  /**
-   * 消息保留时长，小时为单位
-   */
-  MessageRetention?: number
-}
-
-/**
- * CreateRole请求参数结构体
- */
-export interface CreateRoleRequest {
-  /**
-   * 实例ID
-   */
-  InstanceId: string
-  /**
-   * 角色名称
-   */
-  Role: string
-  /**
-   * 备注
-   */
-  Remark: string
-  /**
-   * 是否开启生产权限
-   */
-  PermWrite: boolean
-  /**
-   * 是否开启消费权限
-   */
-  PermRead: boolean
-}
-
-/**
- * VPC信息
- */
-export interface VpcInfo {
-  /**
-   * VPC ID
-   */
-  VpcId: string
-  /**
-   * 子网ID
-   */
-  SubnetId: string
-}
-
-/**
- * 消费组配置信息
- */
-export interface SourceClusterGroupConfig {
-  /**
-   * 消费组名称
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  GroupName: string
-  /**
-   * 备注信息
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Remark?: string
-  /**
-   * 是否已导入，作为入参时无效
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Imported?: boolean
-  /**
-   * 命名空间，仅4.x集群有效
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Namespace?: string
-  /**
-   * 导入状态
-Unknown 未知
-Success 成功
-Failure 失败
-AlreadyExists 已存在
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ImportStatus?: string
+  RequestId?: string
 }
 
 /**
@@ -749,13 +316,579 @@ export interface DeleteTopicRequest {
 }
 
 /**
- * DeleteConsumerGroup返回参数结构体
+ * ModifyMQTTInstance请求参数结构体
  */
-export interface DeleteConsumerGroupResponse {
+export interface ModifyMQTTInstanceRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+  /**
+   * 实例名称
+   */
+  Name?: string
+  /**
+   * 备注信息
+   */
+  Remark?: string
+}
+
+/**
+ * 公网访问安全规则
+ */
+export interface PublicAccessRule {
+  /**
+   * ip网段信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IpRule: string
+  /**
+   * 允许或者拒绝
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Allow: boolean
+  /**
+   * 备注信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Remark?: string
+}
+
+/**
+ * VPC信息
+ */
+export interface VpcInfo {
+  /**
+   * VPC ID
+   */
+  VpcId: string
+  /**
+   * 子网ID
+   */
+  SubnetId: string
+}
+
+/**
+ * DescribeMQTTProductSKUList返回参数结构体
+ */
+export interface DescribeMQTTProductSKUListResponse {
+  /**
+   * 查询总数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalCount?: number
+  /**
+   * mqtt商品配置信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MQTTProductSkuList?: Array<MQTTProductSkuItem>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeTopicStatsOp返回参数结构体
+ */
+export interface DescribeTopicStatsOpResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeMQTTClient返回参数结构体
+ */
+export interface DescribeMQTTClientResponse {
+  /**
+   * 客户端唯一标识
+   */
+  ClientId?: string
+  /**
+   * 客户端网络地址
+   */
+  ClientAddress?: string
+  /**
+   * MQTT 协议版本，4 表示 MQTT 3.1.1
+   */
+  ProtocolVersion?: number
+  /**
+   * 保持连接时间，单位：秒
+   */
+  Keepalive?: number
+  /**
+   * 连接状态，CONNECTED 已连接，DISCONNECTED 未连接
+   */
+  ConnectionStatus?: string
+  /**
+   * 客户端创建时间
+   */
+  CreateTime?: number
+  /**
+   * 上次建立连接时间
+   */
+  ConnectTime?: number
+  /**
+   * 上次断开连接时间，仅对持久会话（cleanSession=false）并且客户端当前未连接时有意义
+   */
+  DisconnectTime?: number
+  /**
+   * 客户端的订阅列表
+   */
+  MQTTClientSubscriptions?: Array<MQTTClientSubscription>
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeMQTTMessageList返回参数结构体
+ */
+export interface DescribeMQTTMessageListResponse {
+  /**
+   * 查询总数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalCount?: number
+  /**
+   * 消息记录列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Data?: Array<MQTTMessageItem>
+  /**
+   * 请求任务id
+   */
+  TaskRequestId?: string
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeMQTTProductSKUList请求参数结构体
+ */
+export type DescribeMQTTProductSKUListRequest = null
+
+/**
+ * ImportSourceClusterConsumerGroups请求参数结构体
+ */
+export interface ImportSourceClusterConsumerGroupsRequest {
+  /**
+   * 任务ID
+   */
+  TaskId: string
+  /**
+   * 待导入的消费组列表
+   */
+  GroupList: Array<SourceClusterGroupConfig>
+}
+
+/**
+ * 标签数据
+ */
+export interface Tag {
+  /**
+   * 标签名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TagKey: string
+  /**
+   * 标签值
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TagValue: string
+}
+
+/**
+ * DescribeMQTTMessage返回参数结构体
+ */
+export interface DescribeMQTTMessageResponse {
+  /**
+   * 消息体
+   */
+  Body?: string
+  /**
+   * 详情参数
+   */
+  Properties?: Array<CustomMapEntry>
+  /**
+   * 生产时间
+   */
+  ProduceTime?: string
+  /**
+   * 消息ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MessageId?: string
+  /**
+   * 生产者地址
+   */
+  ProducerAddr?: string
+  /**
+   * Topic
+   */
+  ShowTopicName?: string
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeMQTTInstanceList返回参数结构体
+ */
+export interface DescribeMQTTInstanceListResponse {
+  /**
+   * 查询总数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalCount?: number
+  /**
+   * 实例列表
+   */
+  Data?: Array<MQTTInstanceItem>
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * MQTT 实例信息
+ */
+export interface MQTTInstanceItem {
+  /**
+   * 实例ID
+   */
+  InstanceId?: string
+  /**
+   * 实例名称
+   */
+  InstanceName?: string
+  /**
+   * 实例版本
+   */
+  Version?: string
+  /**
+   * 实例类型，
+EXPERIMENT，体验版
+BASIC，基础版
+PRO，专业版
+PLATINUM，铂金版
+   */
+  InstanceType?: string
+  /**
+   * 实例状态，
+RUNNING, 运行中
+MAINTAINING，维护中
+ABNORMAL，异常
+OVERDUE，欠费
+DESTROYED，已删除
+CREATING，创建中
+MODIFYING，变配中
+CREATE_FAILURE，创建失败
+MODIFY_FAILURE，变配失败
+DELETING，删除中
+   */
+  InstanceStatus?: string
+  /**
+   * 实例主题数上限
+   */
+  TopicNumLimit?: number
+  /**
+   * 备注信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Remark?: string
+  /**
+   * 主题数量
+   */
+  TopicNum?: number
+  /**
+   * 商品规格
+   */
+  SkuCode?: string
+  /**
+   * 弹性TPS限流值
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TpsLimit?: number
+  /**
+   * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateTime?: number
+  /**
+   * 订阅关系上限
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SubscriptionNumLimit?: number
+  /**
+   * 客户端连接数上线
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ClientNumLimit?: number
+}
+
+/**
+ * DescribeInstanceList返回参数结构体
+ */
+export interface DescribeInstanceListResponse {
+  /**
+   * 查询总数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalCount?: number
+  /**
+   * 实例列表
+   */
+  Data?: Array<InstanceItem>
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyInstance返回参数结构体
+ */
+export interface ModifyInstanceResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateConsumerGroup请求参数结构体
+ */
+export interface CreateConsumerGroupRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+  /**
+   * 消费组名称
+   */
+  ConsumerGroup: string
+  /**
+   * 最大重试次数
+   */
+  MaxRetryTimes: number
+  /**
+   * 是否开启消费
+   */
+  ConsumeEnable: boolean
+  /**
+   * 顺序投递：true
+并发投递：false
+   */
+  ConsumeMessageOrderly: boolean
+  /**
+   * 备注
+   */
+  Remark?: string
+}
+
+/**
+ * ModifyMQTTTopic返回参数结构体
+ */
+export interface ModifyMQTTTopicResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 消息记录
+ */
+export interface MQTTMessageItem {
+  /**
+   * 消息ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MsgId?: string
+  /**
+   * 消息tag
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Tags?: string
+  /**
+   * 消息key
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Keys?: string
+  /**
+   * 客户端地址	
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProducerAddr?: string
+  /**
+   * 消息发送时间	
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProduceTime?: string
+  /**
+   * 死信重发次数	
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DeadLetterResendTimes?: number
+  /**
+   * 死信重发成功次数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DeadLetterResendSuccessTimes?: number
+  /**
+   * 子topic
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SubTopic?: string
+  /**
+   * 消息质量等级
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Qos?: string
+}
+
+/**
+ * DescribeMQTTClient请求参数结构体
+ */
+export interface DescribeMQTTClientRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+  /**
+   * 客户端详情
+   */
+  ClientId: string
+}
+
+/**
+ * DescribeMQTTInsVPCEndpoints返回参数结构体
+ */
+export interface DescribeMQTTInsVPCEndpointsResponse {
+  /**
+   * 接入点
+   */
+  Endpoints?: Array<MQTTEndpointItem>
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeMQTTInsPublicEndpoints返回参数结构体
+ */
+export interface DescribeMQTTInsPublicEndpointsResponse {
+  /**
+   * 接入点
+   */
+  Endpoints?: Array<MQTTEndpointItem>
+  /**
+   * 实例id
+   */
+  InstanceId?: string
+  /**
+   * 带宽
+   */
+  Bandwidth?: number
+  /**
+   * 公网访问规则
+   */
+  Rules?: Array<PublicAccessRule>
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeInstanceList请求参数结构体
+ */
+export interface DescribeInstanceListRequest {
+  /**
+   * 查询起始位置
+   */
+  Offset: number
+  /**
+   * 查询结果限制数量
+   */
+  Limit: number
+  /**
+   * 查询条件列表
+   */
+  Filters?: Array<Filter>
+  /**
+   * 标签过滤器
+   */
+  TagFilters?: Array<TagFilter>
+}
+
+/**
+ * DeleteMQTTUser请求参数结构体
+ */
+export interface DeleteMQTTUserRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+  /**
+   * 用户名
+   */
+  Username: string
+}
+
+/**
+ * ModifyMQTTInstanceCertBinding请求参数结构体
+ */
+export interface ModifyMQTTInstanceCertBindingRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+  /**
+   * 服务端证书id
+   */
+  SSLServerCertId: string
+  /**
+   * CA证书id
+   */
+  SSLCaCertId: string
+}
+
+/**
+ * CreateMQTTTopic返回参数结构体
+ */
+export interface CreateMQTTTopicResponse {
+  /**
+   * 实例ID
+   */
+  InstanceId?: string
+  /**
+   * 主题
+   */
+  Topic?: string
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeMQTTInstance请求参数结构体
+ */
+export interface DescribeMQTTInstanceRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
 }
 
 /**
@@ -770,6 +903,26 @@ export interface ImportSourceClusterTopicsRequest {
    * 待导入的主题列表
    */
   TopicList: Array<SourceClusterTopicConfig>
+}
+
+/**
+ * CreateMQTTUser返回参数结构体
+ */
+export interface CreateMQTTUserResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeleteInstance返回参数结构体
+ */
+export interface DeleteInstanceResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -817,6 +970,107 @@ TRANSACTION:事务消息
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DeleteMQTTInsPublicEndpoint返回参数结构体
+ */
+export interface DeleteMQTTInsPublicEndpointResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeleteInstance请求参数结构体
+ */
+export interface DeleteInstanceRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+}
+
+/**
+ * ModifyRole请求参数结构体
+ */
+export interface ModifyRoleRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+  /**
+   * 角色名称
+   */
+  Role: string
+  /**
+   * 是否开启消费
+   */
+  PermRead: boolean
+  /**
+   * 是否开启生产
+   */
+  PermWrite: boolean
+  /**
+   * 备注
+   */
+  Remark?: string
+}
+
+/**
+ * DescribeMQTTInsVPCEndpoints请求参数结构体
+ */
+export interface DescribeMQTTInsVPCEndpointsRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+}
+
+/**
+ * CreateTopic请求参数结构体
+ */
+export interface CreateTopicRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+  /**
+   * 主题
+   */
+  Topic: string
+  /**
+   * 主题类型
+UNSPECIFIED:未指定,
+NORMAL:普通消息,
+FIFO:顺序消息,
+DELAY:延时消息,
+TRANSACTION:事务消息
+   */
+  TopicType: string
+  /**
+   * 队列数量
+   */
+  QueueNum: number
+  /**
+   * 备注
+   */
+  Remark?: string
+}
+
+/**
+ * DeleteRole请求参数结构体
+ */
+export interface DeleteRoleRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+  /**
+   * 角色名称
+   */
+  Role: string
 }
 
 /**
@@ -876,205 +1130,108 @@ export interface MQTTProductSkuItem {
 }
 
 /**
- * 接入点信息
+ * map结构返回
  */
-export interface Endpoint {
+export interface CustomMapEntry {
   /**
-   * 接入点类型，
-VPC，
-PUBLIC 公网
-   */
-  Type?: string
-  /**
-   * 状态，
-OPEN 开启，
-CLOSE 关闭，
-PROCESSING 操作中，
-   */
-  Status?: string
-  /**
-   * 付费类型，仅公网
-PREPAID 包年包月
-POSTPAID 按量付费
+   * key
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  PayMode?: string
+  Key?: string
   /**
-   * 接入点地址
+   * value
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  EndpointUrl?: string
-  /**
-   * VPC ID
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  VpcId?: string
-  /**
-   * 子网ID
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SubnetId?: string
-  /**
-   * 公网带宽，Mbps为单位
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Bandwidth?: number
-  /**
-   * 公网放通规则
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  IpRules?: Array<IpRule>
+  Value?: string
 }
 
 /**
- * ImportSourceClusterConsumerGroups返回参数结构体
+ * 标签过滤器
  */
-export interface ImportSourceClusterConsumerGroupsResponse {
+export interface TagFilter {
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 标签键名称
    */
-  RequestId?: string
+  TagKey: string
+  /**
+   * 标签值列表
+   */
+  TagValues: Array<string>
 }
 
 /**
- * DeleteRole返回参数结构体
+ * DeleteConsumerGroup请求参数结构体
  */
-export interface DeleteRoleResponse {
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * ModifyRole请求参数结构体
- */
-export interface ModifyRoleRequest {
+export interface DeleteConsumerGroupRequest {
   /**
    * 实例ID
    */
   InstanceId: string
   /**
-   * 角色名称
+   * 消费组名称
    */
-  Role: string
-  /**
-   * 是否开启消费
-   */
-  PermRead: boolean
-  /**
-   * 是否开启生产
-   */
-  PermWrite: boolean
-  /**
-   * 备注
-   */
-  Remark?: string
+  ConsumerGroup: string
 }
 
 /**
- * IP规则
+ * CreateConsumerGroup返回参数结构体
  */
-export interface IpRule {
+export interface CreateConsumerGroupResponse {
   /**
-   * IP地址
+   * 实例ID
    */
-  Ip: string
+  InstanceId?: string
   /**
-   * 是否允许放行
+   * 消费组
    */
-  Allow: boolean
+  ConsumerGroup?: string
   /**
-   * 备注信息
-注意：此字段可能返回 null，表示取不到有效值。
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  Remark: string
+  RequestId?: string
 }
 
 /**
- * 源集群主题配置
+ * DescribeMQTTUserList返回参数结构体
  */
-export interface SourceClusterTopicConfig {
+export interface DescribeMQTTUserListResponse {
   /**
-   * 主题名称
+   * 查询总数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TopicName: string
+  TotalCount?: number
   /**
-   * 主题类型，
-5.x版本
-UNSPECIFIED 未指定
-NORMAL 普通消息
-FIFO 顺序消息
-DELAY 延迟消息
-TRANSACTION 事务消息
-
-4.x版本
-Normal 普通消息
-PartitionedOrder 分区顺序消息
-Transaction 事务消息
-DelayScheduled 延时消息
-
-注意：此字段可能返回 null，表示取不到有效值。
+   * 角色信息列表
    */
-  TopicType: string
+  Data?: Array<MQTTUserItem>
   /**
-   * 队列数
-注意：此字段可能返回 null，表示取不到有效值。
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  QueueNum: number
-  /**
-   * 备注信息
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Remark?: string
-  /**
-   * 是否已导入，作为入参时无效
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Imported?: boolean
-  /**
-   * 命名空间，仅4.x集群有效
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Namespace?: string
-  /**
-   * 导入状态，
-Unknown 未知，
-AlreadyExists 已存在，
-Success 成功，
-Failure 失败
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ImportStatus?: string
+  RequestId?: string
 }
 
 /**
- * DescribeTopicStatsOp请求参数结构体
+ * ModifyMQTTUser返回参数结构体
  */
-export interface DescribeTopicStatsOpRequest {
+export interface ModifyMQTTUserResponse {
   /**
-   * 主题
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  Topic: string
+  RequestId?: string
 }
 
 /**
- * 角色信息
+ * MQTT集群用户信息
  */
-export interface RoleItem {
+export interface MQTTUserItem {
   /**
-   * 角色名称
+   * 用户名
    */
-  RoleName?: string
+  Username?: string
   /**
-   * Access Key
+   * 密码
    */
-  AccessKey?: string
-  /**
-   * Secret Key
-   */
-  SecretKey?: string
+  Password?: string
   /**
    * 是否开启消费
    */
@@ -1098,9 +1255,148 @@ export interface RoleItem {
 }
 
 /**
- * CreateTopic请求参数结构体
+ * ModifyMQTTInsPublicEndpoint请求参数结构体
  */
-export interface CreateTopicRequest {
+export interface ModifyMQTTInsPublicEndpointRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+  /**
+   * 带宽
+   */
+  Bandwidth: number
+  /**
+   * 公网访问规则
+   */
+  Rules: Array<PublicAccessRule>
+}
+
+/**
+ * ModifyMQTTInstanceCertBinding返回参数结构体
+ */
+export interface ModifyMQTTInstanceCertBindingResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 实例列表页中的实例信息
+ */
+export interface InstanceItem {
+  /**
+   * 实例ID
+   */
+  InstanceId?: string
+  /**
+   * 实例名称
+   */
+  InstanceName?: string
+  /**
+   * 实例版本
+   */
+  Version?: string
+  /**
+   * 实例类型，
+EXPERIMENT，体验版
+BASIC，基础版
+PRO，专业版
+PLATINUM，铂金版
+   */
+  InstanceType?: string
+  /**
+   * 实例状态，
+RUNNING, 运行中
+MAINTAINING，维护中
+ABNORMAL，异常
+OVERDUE，欠费
+DESTROYED，已删除
+CREATING，创建中
+MODIFYING，变配中
+CREATE_FAILURE，创建失败
+MODIFY_FAILURE，变配失败
+DELETING，删除中
+   */
+  InstanceStatus?: string
+  /**
+   * 实例主题数上限
+   */
+  TopicNumLimit?: number
+  /**
+   * 实例消费组数量上限
+   */
+  GroupNumLimit?: number
+  /**
+   * 计费模式，
+POSTPAID，按量计费
+PREPAID，包年包月
+   */
+  PayMode?: string
+  /**
+   * 到期时间，秒为单位
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExpiryTime?: number
+  /**
+   * 备注信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Remark?: string
+  /**
+   * 主题数量
+   */
+  TopicNum?: number
+  /**
+   * 消费组数量
+   */
+  GroupNum?: number
+  /**
+   * 标签列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TagList?: Array<Tag>
+  /**
+   * 商品规格
+   */
+  SkuCode?: string
+  /**
+   * TPS限流值
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TpsLimit?: number
+  /**
+   * 弹性TPS限流值
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ScaledTpsLimit?: number
+  /**
+   * 消息保留时间，小时为单位
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MessageRetention?: number
+  /**
+   * 延迟消息最大时长，小时为单位
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MaxMessageDelay?: number
+}
+
+/**
+ * DeleteMQTTInstance返回参数结构体
+ */
+export interface DeleteMQTTInstanceResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeTopic请求参数结构体
+ */
+export interface DescribeTopicRequest {
   /**
    * 实例ID
    */
@@ -1110,85 +1406,41 @@ export interface CreateTopicRequest {
    */
   Topic: string
   /**
-   * 主题类型
-UNSPECIFIED:未指定,
-NORMAL:普通消息,
-FIFO:顺序消息,
-DELAY:延时消息,
-TRANSACTION:事务消息
+   * 查询起始位置
    */
-  TopicType: string
+  Offset: number
   /**
-   * 队列数量
+   * 查询结果限制数量
    */
-  QueueNum: number
+  Limit: number
   /**
-   * 备注
+   * 查询条件列表
    */
-  Remark?: string
+  Filters?: Array<Filter>
 }
 
 /**
- * 标签过滤器
+ * DeleteMQTTInstance请求参数结构体
  */
-export interface TagFilter {
-  /**
-   * 标签键名称
-   */
-  TagKey: string
-  /**
-   * 标签值列表
-   */
-  TagValues: Array<string>
-}
-
-/**
- * DescribeConsumerGroupList返回参数结构体
- */
-export interface DescribeConsumerGroupListResponse {
-  /**
-   * 查询总数
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TotalCount?: number
-  /**
-   * 消费组列表
-   */
-  Data?: Array<ConsumeGroupItem>
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DeleteRole请求参数结构体
- */
-export interface DeleteRoleRequest {
+export interface DeleteMQTTInstanceRequest {
   /**
    * 实例ID
    */
   InstanceId: string
-  /**
-   * 角色名称
-   */
-  Role: string
 }
 
 /**
- * DescribeMQTTProductSKUList返回参数结构体
+ * CreateTopic返回参数结构体
  */
-export interface DescribeMQTTProductSKUListResponse {
+export interface CreateTopicResponse {
   /**
-   * 查询总数
-注意：此字段可能返回 null，表示取不到有效值。
+   * 实例ID
    */
-  TotalCount?: number
+  InstanceId?: string
   /**
-   * mqtt商品配置信息
-注意：此字段可能返回 null，表示取不到有效值。
+   * 主题
    */
-  MQTTProductSkuList?: Array<MQTTProductSkuItem>
+  Topic?: string
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1196,9 +1448,159 @@ export interface DescribeMQTTProductSKUListResponse {
 }
 
 /**
- * DescribeRoleList请求参数结构体
+ * DescribeMQTTInstanceList请求参数结构体
  */
-export interface DescribeRoleListRequest {
+export interface DescribeMQTTInstanceListRequest {
+  /**
+   * 查询条件列表
+   */
+  Filters?: Array<Filter>
+  /**
+   * 查询起始位置
+   */
+  Offset?: number
+  /**
+   * 查询结果限制数量
+   */
+  Limit?: number
+}
+
+/**
+ * CreateMQTTInstance返回参数结构体
+ */
+export interface CreateMQTTInstanceResponse {
+  /**
+   * 实例ID
+   */
+  InstanceId?: string
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeMQTTInstance返回参数结构体
+ */
+export interface DescribeMQTTInstanceResponse {
+  /**
+   * 实例类型，
+EXPERIMENT 体验版
+BASIC 基础版
+PRO  专业版
+PLATINUM 铂金版
+   */
+  InstanceType?: string
+  /**
+   * 实例ID
+   */
+  InstanceId?: string
+  /**
+   * 实例名称
+   */
+  InstanceName?: string
+  /**
+   * 主题数量
+   */
+  TopicNum?: number
+  /**
+   * 实例最大主题数量
+   */
+  TopicNumLimit?: number
+  /**
+   * TPS限流值
+   */
+  TpsLimit?: number
+  /**
+   * 创建时间，秒为单位
+   */
+  CreatedTime?: number
+  /**
+   * 备注信息
+   */
+  Remark?: string
+  /**
+   * 实例状态
+   */
+  InstanceStatus?: string
+  /**
+   * 实例规格
+   */
+  SkuCode?: string
+  /**
+   * 订阅数上限
+   */
+  SubscriptionNumLimit?: number
+  /**
+   * 客户端数量上限
+   */
+  ClientNumLimit?: number
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * MQTTEndpoint
+ */
+export interface MQTTEndpointItem {
+  /**
+   * 类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Type?: string
+  /**
+   * 接入点
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Url?: string
+  /**
+   * vpc信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VpcId?: string
+  /**
+   * 子网信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SubnetId?: string
+  /**
+   * 主机
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Host?: string
+  /**
+   * 端口
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Port?: number
+}
+
+/**
+ * DeleteMQTTUser返回参数结构体
+ */
+export interface DeleteMQTTUserResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ImportSourceClusterTopics返回参数结构体
+ */
+export interface ImportSourceClusterTopicsResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeTopicList请求参数结构体
+ */
+export interface DescribeTopicListRequest {
   /**
    * 实例ID
    */
@@ -1218,6 +1620,206 @@ export interface DescribeRoleListRequest {
 }
 
 /**
+ * ModifyConsumerGroup请求参数结构体
+ */
+export interface ModifyConsumerGroupRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+  /**
+   * 消费组名称
+   */
+  ConsumerGroup?: string
+  /**
+   * 是否开启消费
+   */
+  ConsumeEnable?: boolean
+  /**
+   * 顺序投递：true
+并发投递：false
+   */
+  ConsumeMessageOrderly?: boolean
+  /**
+   * 最大重试次数
+   */
+  MaxRetryTimes?: number
+  /**
+   * 备注
+   */
+  Remark?: string
+}
+
+/**
+ * DescribeConsumerGroup请求参数结构体
+ */
+export interface DescribeConsumerGroupRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+  /**
+   * 消费组名称
+   */
+  ConsumerGroup?: string
+}
+
+/**
+ * DescribeConsumerGroupList请求参数结构体
+ */
+export interface DescribeConsumerGroupListRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+  /**
+   * 查询起始位置
+   */
+  Offset: number
+  /**
+   * 查询结果限制数量
+   */
+  Limit: number
+  /**
+   * 查询条件列表
+   */
+  Filters?: Array<Filter>
+  /**
+   * 查询指定主题下的消费组
+   */
+  FromTopic?: string
+}
+
+/**
+ * 列表上的主题信息
+ */
+export interface TopicItem {
+  /**
+   * 实例ID
+   */
+  InstanceId?: string
+  /**
+   * 主题名称
+   */
+  Topic?: string
+  /**
+   * 主题类型
+   */
+  TopicType?: string
+  /**
+   * 队列数量
+   */
+  QueueNum?: number
+  /**
+   * 描述
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Remark?: string
+}
+
+/**
+ * CreateInstance请求参数结构体
+ */
+export interface CreateInstanceRequest {
+  /**
+   * 实例类型，
+EXPERIMENT 体验版
+BASIC 基础版
+PRO  专业版
+PLATINUM 铂金版
+   */
+  InstanceType: string
+  /**
+   * 实例名称
+   */
+  Name: string
+  /**
+   * 商品规格，可用规格如下：
+experiment_500,
+basic_1k,
+basic_2k,
+basic_4k,
+basic_6k
+   */
+  SkuCode: string
+  /**
+   * 备注信息
+   */
+  Remark?: string
+  /**
+   * 标签列表
+   */
+  TagList?: Array<Tag>
+  /**
+   * 实例绑定的VPC信息
+   */
+  VpcList?: Array<VpcInfo>
+  /**
+   * 是否开启公网
+   */
+  EnablePublic?: boolean
+  /**
+   * 公网带宽
+   */
+  Bandwidth?: number
+  /**
+   * 公网访问白名单
+   */
+  IpRules?: Array<IpRule>
+  /**
+   * 消息保留时长，小时为单位
+   */
+  MessageRetention?: number
+}
+
+/**
+ * DescribeConsumerGroup返回参数结构体
+ */
+export interface DescribeConsumerGroupResponse {
+  /**
+   * 在线消费者数量
+   */
+  ConsumerNum?: number
+  /**
+   * TPS
+   */
+  Tps?: number
+  /**
+   * 消息堆积数量
+   */
+  ConsumerLag?: number
+  /**
+   * 消费者类型
+   */
+  ConsumeType?: string
+  /**
+   * 创建时间，秒为单位
+   */
+  CreatedTime?: number
+  /**
+   * 顺序投递：true
+并发投递：false
+   */
+  ConsumeMessageOrderly?: boolean
+  /**
+   * 是否开启消费
+   */
+  ConsumeEnable?: boolean
+  /**
+   * 最大重试次数
+   */
+  MaxRetryTimes?: number
+  /**
+   * 备注
+   */
+  Remark?: string
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyTopic返回参数结构体
  */
 export interface ModifyTopicResponse {
@@ -1228,13 +1830,98 @@ export interface ModifyTopicResponse {
 }
 
 /**
- * ModifyConsumerGroup返回参数结构体
+ * DescribeMQTTInsPublicEndpoints请求参数结构体
  */
-export interface ModifyConsumerGroupResponse {
+export interface DescribeMQTTInsPublicEndpointsRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+}
+
+/**
+ * DeleteRole返回参数结构体
+ */
+export interface DeleteRoleResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 查询过滤器
+ */
+export interface Filter {
+  /**
+   * 过滤条件名
+   */
+  Name: string
+  /**
+   * 过滤条件的值
+   */
+  Values: Array<string>
+}
+
+/**
+ * DescribeMQTTInstanceCert返回参数结构体
+ */
+export interface DescribeMQTTInstanceCertResponse {
+  /**
+   * 集群id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceId?: string
+  /**
+   * 服务端证书id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SSLServerCertId?: string
+  /**
+   * CA证书id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SSLCaCertId?: string
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeMQTTTopicList请求参数结构体
+ */
+export interface DescribeMQTTTopicListRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+  /**
+   * 查询条件列表
+   */
+  Filters?: Array<Filter>
+  /**
+   * 查询起始位置
+   */
+  Offset?: number
+  /**
+   * 查询结果限制数量
+   */
+  Limit?: number
+}
+
+/**
+ * MQTT 订阅关系
+ */
+export interface MQTTClientSubscription {
+  /**
+   * topic 订阅
+   */
+  TopicFilter?: string
+  /**
+   * 服务质量等级
+   */
+  Qos?: number
 }
 
 /**
@@ -1369,9 +2056,9 @@ PLATINUM 铂金版
 }
 
 /**
- * DescribeTopicStatsOp返回参数结构体
+ * DeleteMQTTTopic返回参数结构体
  */
-export interface DescribeTopicStatsOpResponse {
+export interface DeleteMQTTTopicResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1379,23 +2066,9 @@ export interface DescribeTopicStatsOpResponse {
 }
 
 /**
- * DeleteConsumerGroup请求参数结构体
+ * ModifyConsumerGroup返回参数结构体
  */
-export interface DeleteConsumerGroupRequest {
-  /**
-   * 实例ID
-   */
-  InstanceId: string
-  /**
-   * 消费组名称
-   */
-  ConsumerGroup: string
-}
-
-/**
- * DeleteTopic返回参数结构体
- */
-export interface DeleteTopicResponse {
+export interface ModifyConsumerGroupResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1403,46 +2076,9 @@ export interface DeleteTopicResponse {
 }
 
 /**
- * 查询过滤器
+ * DescribeMQTTInstanceCert请求参数结构体
  */
-export interface Filter {
-  /**
-   * 过滤条件名
-   */
-  Name: string
-  /**
-   * 过滤条件的值
-   */
-  Values: Array<string>
-}
-
-/**
- * CreateConsumerGroup返回参数结构体
- */
-export interface CreateConsumerGroupResponse {
-  /**
-   * 实例ID
-   */
-  InstanceId?: string
-  /**
-   * 消费组
-   */
-  ConsumerGroup?: string
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DescribeMQTTProductSKUList请求参数结构体
- */
-export type DescribeMQTTProductSKUListRequest = null
-
-/**
- * DeleteInstance请求参数结构体
- */
-export interface DeleteInstanceRequest {
+export interface DescribeMQTTInstanceCertRequest {
   /**
    * 实例ID
    */
@@ -1450,136 +2086,139 @@ export interface DeleteInstanceRequest {
 }
 
 /**
- * 实例列表页中的实例信息
+ * ModifyMQTTInsPublicEndpoint返回参数结构体
  */
-export interface InstanceItem {
+export interface ModifyMQTTInsPublicEndpointResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateMQTTUser请求参数结构体
+ */
+export interface CreateMQTTUserRequest {
   /**
    * 实例ID
    */
-  InstanceId?: string
+  InstanceId: string
   /**
-   * 实例名称
+   * 备注
    */
-  InstanceName?: string
+  Remark: string
   /**
-   * 实例版本
+   * 是否开启生产权限
    */
-  Version?: string
+  PermWrite: boolean
   /**
-   * 实例类型，
-EXPERIMENT，体验版
-BASIC，基础版
-PRO，专业版
-PLATINUM，铂金版
+   * 是否开启消费权限
    */
-  InstanceType?: string
+  PermRead: boolean
   /**
-   * 实例状态，
-RUNNING, 运行中
-MAINTAINING，维护中
-ABNORMAL，异常
-OVERDUE，欠费
-DESTROYED，已删除
-CREATING，创建中
-MODIFYING，变配中
-CREATE_FAILURE，创建失败
-MODIFY_FAILURE，变配失败
-DELETING，删除中
+   * 用户名
    */
-  InstanceStatus?: string
+  Username: string
   /**
-   * 实例主题数上限
+   * 密码，该字段为空时候则后端会默认生成
    */
-  TopicNumLimit?: number
+  Password?: string
+}
+
+/**
+ * DescribeMQTTMessage请求参数结构体
+ */
+export interface DescribeMQTTMessageRequest {
   /**
-   * 实例消费组数量上限
+   * 实例ID
    */
-  GroupNumLimit?: number
+  InstanceId: string
   /**
-   * 计费模式，
-POSTPAID，按量计费
-PREPAID，包年包月
+   * 主题
    */
-  PayMode?: string
+  Topic: string
   /**
-   * 到期时间，秒为单位
+   * 消息ID
+   */
+  MsgId: string
+}
+
+/**
+ * CreateRole返回参数结构体
+ */
+export interface CreateRoleResponse {
+  /**
+   * 角色名
+   */
+  Role?: string
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeMQTTTopicList返回参数结构体
+ */
+export interface DescribeMQTTTopicListResponse {
+  /**
+   * 查询总数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ExpiryTime?: number
+  TotalCount?: number
+  /**
+   * 主题列表
+   */
+  Data?: Array<MQTTTopicItem>
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 消费组配置信息
+ */
+export interface SourceClusterGroupConfig {
+  /**
+   * 消费组名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  GroupName: string
   /**
    * 备注信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Remark?: string
   /**
-   * 主题数量
-   */
-  TopicNum?: number
-  /**
-   * 消费组数量
-   */
-  GroupNum?: number
-  /**
-   * 标签列表
+   * 是否已导入，作为入参时无效
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TagList?: Array<Tag>
+  Imported?: boolean
   /**
-   * 商品规格
-   */
-  SkuCode?: string
-  /**
-   * TPS限流值
+   * 命名空间，仅4.x集群有效
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TpsLimit?: number
+  Namespace?: string
   /**
-   * 弹性TPS限流值
+   * 导入状态
+Unknown 未知
+Success 成功
+Failure 失败
+AlreadyExists 已存在
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ScaledTpsLimit?: number
-  /**
-   * 消息保留时间，小时为单位
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  MessageRetention?: number
-  /**
-   * 延迟消息最大时长，小时为单位
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  MaxMessageDelay?: number
+  ImportStatus?: string
 }
 
 /**
- * DescribeInstance请求参数结构体
+ * DescribeMQTTUserList请求参数结构体
  */
-export interface DescribeInstanceRequest {
+export interface DescribeMQTTUserListRequest {
   /**
    * 实例ID
    */
   InstanceId: string
-}
-
-/**
- * 标签数据
- */
-export interface Tag {
-  /**
-   * 标签名称
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TagKey: string
-  /**
-   * 标签值
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TagValue: string
-}
-
-/**
- * DescribeMQTTInstanceList请求参数结构体
- */
-export interface DescribeMQTTInstanceListRequest {
   /**
    * 查询条件列表
    */
@@ -1595,18 +2234,9 @@ export interface DescribeMQTTInstanceListRequest {
 }
 
 /**
- * DescribeMQTTInstanceList返回参数结构体
+ * ModifyMQTTInstance返回参数结构体
  */
-export interface DescribeMQTTInstanceListResponse {
-  /**
-   * 查询总数
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TotalCount?: number
-  /**
-   * 实例列表
-   */
-  Data?: Array<MQTTInstanceItem>
+export interface ModifyMQTTInstanceResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1614,95 +2244,94 @@ export interface DescribeMQTTInstanceListResponse {
 }
 
 /**
- * MQTT 实例信息
+ * CreateMQTTInstance请求参数结构体
  */
-export interface MQTTInstanceItem {
+export interface CreateMQTTInstanceRequest {
   /**
-   * 实例ID
+   * 实例类型，
+EXPERIMENT 体验版
+BASIC 基础版
+PRO  专业版
+PLATINUM 铂金版
    */
-  InstanceId?: string
+  InstanceType: string
   /**
    * 实例名称
    */
-  InstanceName?: string
+  Name: string
   /**
-   * 实例版本
+   * 商品规格，可用规格如下：
+experiment_500,
+basic_1k,
+basic_2k,
+basic_4k,
+basic_6k,
+pro_4k,
+pro_6k,
+pro_1w,
+pro_2w,
+pro_3w,
+pro_4w,
+pro_5w,
+platinum_6k,
+platinum_1w,
+platinum_2w,
+platinum_4w,
+platinum_10w,
+platinum_15w,
+platinum_20w,
+platinum_40w,
+platinum_60w,
+platinum_100w
    */
-  Version?: string
-  /**
-   * 实例类型，
-EXPERIMENT，体验版
-BASIC，基础版
-PRO，专业版
-PLATINUM，铂金版
-   */
-  InstanceType?: string
-  /**
-   * 实例状态，
-RUNNING, 运行中
-MAINTAINING，维护中
-ABNORMAL，异常
-OVERDUE，欠费
-DESTROYED，已删除
-CREATING，创建中
-MODIFYING，变配中
-CREATE_FAILURE，创建失败
-MODIFY_FAILURE，变配失败
-DELETING，删除中
-   */
-  InstanceStatus?: string
-  /**
-   * 实例主题数上限
-   */
-  TopicNumLimit?: number
+  SkuCode: string
   /**
    * 备注信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Remark?: string
   /**
-   * 主题数量
+   * 标签列表
    */
-  TopicNum?: number
+  TagList?: Array<Tag>
   /**
-   * 商品规格
+   * 实例绑定的VPC信息
    */
-  SkuCode?: string
+  VpcList?: Array<VpcInfo>
   /**
-   * 弹性TPS限流值
-注意：此字段可能返回 null，表示取不到有效值。
+   * 是否开启公网
    */
-  TpsLimit?: number
+  EnablePublic?: boolean
   /**
-   * 创建时间
-注意：此字段可能返回 null，表示取不到有效值。
+   * 公网带宽（单位：兆）
    */
-  CreateTime?: number
+  Bandwidth?: number
   /**
-   * 订阅关系上限
-注意：此字段可能返回 null，表示取不到有效值。
+   * 公网访问白名单
    */
-  SubscriptionNumLimit?: number
+  IpRules?: Array<IpRule>
   /**
-   * 客户端连接数上线
-注意：此字段可能返回 null，表示取不到有效值。
+   * 是否自动续费（0: 不自动续费；1: 自动续费）
    */
-  ClientNumLimit?: number
+  RenewFlag?: number
+  /**
+   * 购买时长（单位：月）
+   */
+  TimeSpan?: number
 }
 
 /**
- * DescribeInstanceList返回参数结构体
+ * DescribeTopicList返回参数结构体
  */
-export interface DescribeInstanceListResponse {
+export interface DescribeTopicListResponse {
   /**
    * 查询总数
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalCount?: number
   /**
-   * 实例列表
+   * 主题列表
    */
-  Data?: Array<InstanceItem>
+  Data?: Array<TopicItem>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1710,9 +2339,9 @@ export interface DescribeInstanceListResponse {
 }
 
 /**
- * DescribeTopic请求参数结构体
+ * DescribeMQTTTopic请求参数结构体
  */
-export interface DescribeTopicRequest {
+export interface DescribeMQTTTopicRequest {
   /**
    * 实例ID
    */
@@ -1721,6 +2350,368 @@ export interface DescribeTopicRequest {
    * 主题
    */
   Topic: string
+}
+
+/**
+ * CreateRole请求参数结构体
+ */
+export interface CreateRoleRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+  /**
+   * 角色名称
+   */
+  Role: string
+  /**
+   * 备注
+   */
+  Remark: string
+  /**
+   * 是否开启生产权限
+   */
+  PermWrite: boolean
+  /**
+   * 是否开启消费权限
+   */
+  PermRead: boolean
+}
+
+/**
+ * DeleteConsumerGroup返回参数结构体
+ */
+export interface DeleteConsumerGroupResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 接入点信息
+ */
+export interface Endpoint {
+  /**
+   * 接入点类型，
+VPC，
+PUBLIC 公网
+   */
+  Type?: string
+  /**
+   * 状态，
+OPEN 开启，
+CLOSE 关闭，
+PROCESSING 操作中，
+   */
+  Status?: string
+  /**
+   * 付费类型，仅公网
+PREPAID 包年包月
+POSTPAID 按量付费
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PayMode?: string
+  /**
+   * 接入点地址
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EndpointUrl?: string
+  /**
+   * VPC ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VpcId?: string
+  /**
+   * 子网ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SubnetId?: string
+  /**
+   * 公网带宽，Mbps为单位
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Bandwidth?: number
+  /**
+   * 公网放通规则
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IpRules?: Array<IpRule>
+}
+
+/**
+ * ModifyMQTTTopic请求参数结构体
+ */
+export interface ModifyMQTTTopicRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+  /**
+   * 主题
+   */
+  Topic: string
+  /**
+   * 备注信息
+   */
+  Remark?: string
+}
+
+/**
+ * DescribeTopicStatsOp请求参数结构体
+ */
+export interface DescribeTopicStatsOpRequest {
+  /**
+   * 主题
+   */
+  Topic: string
+}
+
+/**
+ * 角色信息
+ */
+export interface RoleItem {
+  /**
+   * 角色名称
+   */
+  RoleName?: string
+  /**
+   * Access Key
+   */
+  AccessKey?: string
+  /**
+   * Secret Key
+   */
+  SecretKey?: string
+  /**
+   * 是否开启消费
+   */
+  PermRead?: boolean
+  /**
+   * 是否开启生产
+   */
+  PermWrite?: boolean
+  /**
+   * 备注信息
+   */
+  Remark?: string
+  /**
+   * 创建时间，秒为单位
+   */
+  CreatedTime?: number
+  /**
+   * 修改时间，秒为单位
+   */
+  ModifiedTime?: number
+}
+
+/**
+ * MQTT 主题详情
+ */
+export interface MQTTTopicItem {
+  /**
+   * 实例 ID
+   */
+  InstanceId?: string
+  /**
+   * 主题名称
+   */
+  Topic?: string
+  /**
+   * 主题描述
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Remark?: string
+}
+
+/**
+ * DescribeConsumerGroupList返回参数结构体
+ */
+export interface DescribeConsumerGroupListResponse {
+  /**
+   * 查询总数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalCount?: number
+  /**
+   * 消费组列表
+   */
+  Data?: Array<ConsumeGroupItem>
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyMQTTUser请求参数结构体
+ */
+export interface ModifyMQTTUserRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+  /**
+   * 用户名
+   */
+  Username: string
+  /**
+   * 是否开启消费
+   */
+  PermRead: boolean
+  /**
+   * 是否开启生产
+   */
+  PermWrite: boolean
+  /**
+   * 备注
+   */
+  Remark?: string
+}
+
+/**
+ * CreateMQTTInsPublicEndpoint请求参数结构体
+ */
+export interface CreateMQTTInsPublicEndpointRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+  /**
+   * 带宽
+   */
+  Bandwidth: number
+  /**
+   * 公网访问规则
+   */
+  Rules: Array<PublicAccessRule>
+}
+
+/**
+ * CreateMQTTTopic请求参数结构体
+ */
+export interface CreateMQTTTopicRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+  /**
+   * 主题
+   */
+  Topic: string
+  /**
+   * 备注
+   */
+  Remark?: string
+}
+
+/**
+ * DeleteTopic返回参数结构体
+ */
+export interface DeleteTopicResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeMQTTMessageList请求参数结构体
+ */
+export interface DescribeMQTTMessageListRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+  /**
+   * 主题
+   */
+  Topic: string
+  /**
+   * 开始时间
+   */
+  StartTime: number
+  /**
+   * 结束时间
+   */
+  EndTime: number
+  /**
+   * 请求任务id
+   */
+  TaskRequestId: string
+  /**
+   * 查询起始位置
+   */
+  Offset?: number
+  /**
+   * 查询结果限制数量
+   */
+  Limit?: number
+}
+
+/**
+ * DescribeMQTTTopic返回参数结构体
+ */
+export interface DescribeMQTTTopicResponse {
+  /**
+   * 实例ID
+   */
+  InstanceId?: string
+  /**
+   * 主题名称
+   */
+  Topic?: string
+  /**
+   * 备注
+   */
+  Remark?: string
+  /**
+   * 创建时间，秒为单位
+   */
+  CreatedTime?: number
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeInstance请求参数结构体
+ */
+export interface DescribeInstanceRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+}
+
+/**
+ * IP规则
+ */
+export interface IpRule {
+  /**
+   * IP地址
+   */
+  Ip: string
+  /**
+   * 是否允许放行
+   */
+  Allow: boolean
+  /**
+   * 备注信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Remark: string
+}
+
+/**
+ * DescribeRoleList请求参数结构体
+ */
+export interface DescribeRoleListRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
   /**
    * 查询起始位置
    */

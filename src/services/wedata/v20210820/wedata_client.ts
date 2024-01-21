@@ -408,6 +408,7 @@ import {
   DescribeProjectRequest,
   CreateIntegrationTaskResponse,
   DescribeIntegrationTasksResponse,
+  DeleteProjectUsersResponse,
   DescribeAlarmReceiverRequest,
   ColumnMeta,
   SchedulerTaskInstanceInfo,
@@ -565,6 +566,7 @@ import {
   AdhocRecord,
   OperateResult,
   TriggerDsEventResponse,
+  EventBatchCaseDTO,
   CreateTaskRequest,
   DescribeDatabaseMetasRequest,
   SearchColumnDocVO,
@@ -920,7 +922,7 @@ import {
   OrderField,
   TaskTypeDsVO,
   BatchSuspendIntegrationTasksResponse,
-  EventBatchCaseDTO,
+  DeleteProjectUsersRequest,
   DescribeWorkflowExecuteByIdRequest,
   WorkflowExtOpsDtoPage,
   RegisterEventResponse,
@@ -2889,6 +2891,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: FreezeTasksByMultiWorkflowResponse) => void
   ): Promise<FreezeTasksByMultiWorkflowResponse> {
     return this.request("FreezeTasksByMultiWorkflow", req, cb)
+  }
+
+  /**
+   * 删除项目用户
+   */
+  async DeleteProjectUsers(
+    req?: DeleteProjectUsersRequest,
+    cb?: (error: string, rep: DeleteProjectUsersResponse) => void
+  ): Promise<DeleteProjectUsersResponse> {
+    return this.request("DeleteProjectUsers", req, cb)
   }
 
   /**

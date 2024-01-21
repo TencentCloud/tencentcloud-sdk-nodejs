@@ -8164,22 +8164,22 @@ export interface DescribeClusterPendingReleasesResponse {
    * 正在安装中应用列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ReleaseSet: Array<PendingRelease>
+  ReleaseSet?: Array<PendingRelease>
   /**
    * 每页返回数量限制
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Limit: number
+  Limit?: number
   /**
    * 页偏移量
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Offset: number
+  Offset?: number
   /**
    * 总数量
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Total: number
+  Total?: number
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -12388,7 +12388,7 @@ export interface ForwardApplicationRequestV3Response {
   /**
    * 请求集群addon后返回的数据
    */
-  ResponseBody: string
+  ResponseBody?: string
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

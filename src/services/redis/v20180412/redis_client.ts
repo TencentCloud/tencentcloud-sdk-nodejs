@@ -509,7 +509,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建实例子账号
+   * 该接口（CreateInstanceAccount）用于自定义访问实例的账号。
    */
   async CreateInstanceAccount(
     req: CreateInstanceAccountRequest,

@@ -28,10 +28,35 @@ class Client extends abstract_client_1.AbstractClient {
         super("trocket.tencentcloudapi.com", "2023-03-08", clientConfig);
     }
     /**
+     * 查询消息列表，如查询死信，请设置ConsumerGroup参数
+     */
+    async DescribeMQTTMessageList(req, cb) {
+        return this.request("DescribeMQTTMessageList", req, cb);
+    }
+    /**
+     * 更新MQTT集群绑定证书
+参数传空，则为删除证书
+     */
+    async ModifyMQTTInstanceCertBinding(req, cb) {
+        return this.request("ModifyMQTTInstanceCertBinding", req, cb);
+    }
+    /**
      * 修改主题属性
      */
     async ModifyTopic(req, cb) {
         return this.request("ModifyTopic", req, cb);
+    }
+    /**
+     * 修改主题属性
+     */
+    async ModifyMQTTTopic(req, cb) {
+        return this.request("ModifyMQTTTopic", req, cb);
+    }
+    /**
+     * 删除MQTT访问用户
+     */
+    async DeleteMQTTUser(req, cb) {
+        return this.request("DeleteMQTTUser", req, cb);
     }
     /**
      * 添加角色
@@ -58,12 +83,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateConsumerGroup", req, cb);
     }
     /**
-     * 查询角色列表，Filter参数使用说明如下：
-
-1. RoleName，角色名称模糊搜索
+     * 非对外接口，获取产品售卖规格
      */
-    async DescribeRoleList(req, cb) {
-        return this.request("DescribeRoleList", req, cb);
+    async DescribeMQTTProductSKUList(req, cb) {
+        return this.request("DescribeMQTTProductSKUList", req, cb);
+    }
+    /**
+     * 导入topic列表
+     */
+    async ImportSourceClusterTopics(req, cb) {
+        return this.request("ImportSourceClusterTopics", req, cb);
     }
     /**
      * 运营端查询topicStata
@@ -72,10 +101,32 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeTopicStatsOp", req, cb);
     }
     /**
-     * 非对外接口，获取产品售卖规格
+     * 查询用户列表，Filter参数使用说明如下：
+
+1. Username，用户名称模糊搜索
      */
-    async DescribeMQTTProductSKUList(req, cb) {
-        return this.request("DescribeMQTTProductSKUList", req, cb);
+    async DescribeMQTTUserList(req, cb) {
+        return this.request("DescribeMQTTUserList", req, cb);
+    }
+    /**
+     * 删除MQTT实例的公网接入点
+     */
+    async DeleteMQTTInsPublicEndpoint(req, cb) {
+        return this.request("DeleteMQTTInsPublicEndpoint", req, cb);
+    }
+    /**
+     * 查询角色列表，Filter参数使用说明如下：
+
+1. RoleName，角色名称模糊搜索
+     */
+    async DescribeRoleList(req, cb) {
+        return this.request("DescribeRoleList", req, cb);
+    }
+    /**
+     * 修改MQTT角色
+     */
+    async ModifyMQTTUser(req, cb) {
+        return this.request("ModifyMQTTUser", req, cb);
     }
     /**
      * 删除消费组
@@ -90,10 +141,40 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyConsumerGroup", req, cb);
     }
     /**
+     * 查询MQTT实例公网接入点
+     */
+    async DescribeMQTTInsVPCEndpoints(req, cb) {
+        return this.request("DescribeMQTTInsVPCEndpoints", req, cb);
+    }
+    /**
      * 删除角色
      */
     async DeleteRole(req, cb) {
         return this.request("DeleteRole", req, cb);
+    }
+    /**
+     * 删除实例
+     */
+    async DeleteMQTTInstance(req, cb) {
+        return this.request("DeleteMQTTInstance", req, cb);
+    }
+    /**
+     * 查询MQTT消息详情
+     */
+    async DescribeMQTTMessage(req, cb) {
+        return this.request("DescribeMQTTMessage", req, cb);
+    }
+    /**
+     * 查询mqtt主题详情
+     */
+    async DescribeMQTTTopic(req, cb) {
+        return this.request("DescribeMQTTTopic", req, cb);
+    }
+    /**
+     * 为MQTT实例创建公网接入点
+     */
+    async ModifyMQTTInsPublicEndpoint(req, cb) {
+        return this.request("ModifyMQTTInsPublicEndpoint", req, cb);
     }
     /**
      * 查询消费组详情
@@ -108,10 +189,37 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateTopic", req, cb);
     }
     /**
+     * 获取主题列表，Filter参数使用说明如下：
+
+1. TopicName，主题名称模糊搜索
+2. TopicType，主题类型查询，支持多选，可选值：Normal,Order,Transaction,DelayScheduled
+     */
+    async DescribeMQTTTopicList(req, cb) {
+        return this.request("DescribeMQTTTopicList", req, cb);
+    }
+    /**
+     * 查询实例信息
+     */
+    async DescribeMQTTInstance(req, cb) {
+        return this.request("DescribeMQTTInstance", req, cb);
+    }
+    /**
+     * 创建主题
+     */
+    async CreateMQTTTopic(req, cb) {
+        return this.request("CreateMQTTTopic", req, cb);
+    }
+    /**
      * 购买新实例
      */
     async CreateInstance(req, cb) {
         return this.request("CreateInstance", req, cb);
+    }
+    /**
+     * 删除主题
+     */
+    async DeleteMQTTTopic(req, cb) {
+        return this.request("DeleteMQTTTopic", req, cb);
     }
     /**
      * 查询实例信息
@@ -120,10 +228,25 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeInstance", req, cb);
     }
     /**
-     * 删除主题
+     * 获取主题列表，Filter参数使用说明如下：
+
+1. TopicName，主题名称模糊搜索
+2. TopicType，主题类型查询，支持多选，可选值：Normal,Order,Transaction,DelayScheduled
      */
-    async DeleteTopic(req, cb) {
-        return this.request("DeleteTopic", req, cb);
+    async DescribeTopicList(req, cb) {
+        return this.request("DescribeTopicList", req, cb);
+    }
+    /**
+     * 查询MQTT集群证书列表
+     */
+    async DescribeMQTTInstanceCert(req, cb) {
+        return this.request("DescribeMQTTInstanceCert", req, cb);
+    }
+    /**
+     * 修改实例属性
+     */
+    async ModifyMQTTInstance(req, cb) {
+        return this.request("ModifyMQTTInstance", req, cb);
     }
     /**
      * 获取实例列表，Filters参数使用说明如下：
@@ -138,10 +261,13 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeMQTTInstanceList", req, cb);
     }
     /**
-     * 导入topic列表
+     * 获取消费组列表，Filter参数使用说明如下：
+
+1. ConsumerGroupName，名称模糊查询
+2. ConsumeMessageOrderly，投递顺序性。"true":顺序投递；"false":并发投递
      */
-    async ImportSourceClusterTopics(req, cb) {
-        return this.request("ImportSourceClusterTopics", req, cb);
+    async DescribeConsumerGroupList(req, cb) {
+        return this.request("DescribeConsumerGroupList", req, cb);
     }
     /**
      * 购买新的MQTT实例
@@ -162,19 +288,28 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeInstanceList", req, cb);
     }
     /**
-     * 获取消费组列表，Filter参数使用说明如下：
-
-1. ConsumerGroupName，名称模糊查询
-2. ConsumeMessageOrderly，投递顺序性。"true":顺序投递；"false":并发投递
+     * 查询MQTT实例公网接入点
      */
-    async DescribeConsumerGroupList(req, cb) {
-        return this.request("DescribeConsumerGroupList", req, cb);
+    async DescribeMQTTInsPublicEndpoints(req, cb) {
+        return this.request("DescribeMQTTInsPublicEndpoints", req, cb);
+    }
+    /**
+     * 添加mqtt角色
+     */
+    async CreateMQTTUser(req, cb) {
+        return this.request("CreateMQTTUser", req, cb);
     }
     /**
      * 修改角色
      */
     async ModifyRole(req, cb) {
         return this.request("ModifyRole", req, cb);
+    }
+    /**
+     * 查询 MQTT 客户端详情
+     */
+    async DescribeMQTTClient(req, cb) {
+        return this.request("DescribeMQTTClient", req, cb);
     }
     /**
      * 查询主题详情，Offset和Limit参数是指订阅该主题的消费组查询分页参数，Filter参数使用说明如下：
@@ -185,19 +320,22 @@ ConsumerGroup，消费组名称过滤
         return this.request("DescribeTopic", req, cb);
     }
     /**
-     * 获取主题列表，Filter参数使用说明如下：
-
-1. TopicName，主题名称模糊搜索
-2. TopicType，主题类型查询，支持多选，可选值：Normal,Order,Transaction,DelayScheduled
-     */
-    async DescribeTopicList(req, cb) {
-        return this.request("DescribeTopicList", req, cb);
-    }
-    /**
      * 修改实例属性
      */
     async ModifyInstance(req, cb) {
         return this.request("ModifyInstance", req, cb);
+    }
+    /**
+     * 删除主题
+     */
+    async DeleteTopic(req, cb) {
+        return this.request("DeleteTopic", req, cb);
+    }
+    /**
+     * 为MQTT实例创建公网接入点
+     */
+    async CreateMQTTInsPublicEndpoint(req, cb) {
+        return this.request("CreateMQTTInsPublicEndpoint", req, cb);
     }
 }
 exports.Client = Client;

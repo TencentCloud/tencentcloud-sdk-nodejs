@@ -12078,6 +12078,15 @@ export interface DescribeIntegrationTasksResponse {
     RequestId?: string;
 }
 /**
+ * DeleteProjectUsers返回参数结构体
+ */
+export interface DeleteProjectUsersResponse {
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * DescribeAlarmReceiver请求参数结构体
  */
 export interface DescribeAlarmReceiverRequest {
@@ -16281,6 +16290,43 @@ export interface TriggerDsEventResponse {
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * 事件连续时间实例信息
+ */
+export interface EventBatchCaseDTO {
+    /**
+     * 事件实例id
+     */
+    CaseId?: string;
+    /**
+     * 事件名
+     */
+    Name?: string;
+    /**
+     * 事件触发起始时间
+     */
+    StartDimension?: string;
+    /**
+     * 创建时间
+     */
+    CreationTs?: string;
+    /**
+     * 消费者id
+     */
+    ConsumerId?: string;
+    /**
+     * 描述信息
+     */
+    Description?: string;
+    /**
+     * 事件触发结束时间
+     */
+    EndDimension?: string;
+    /**
+     * 事件周期
+     */
+    EventSubType?: string;
 }
 /**
  * CreateTask请求参数结构体
@@ -26427,42 +26473,9 @@ export interface BatchSuspendIntegrationTasksResponse {
     RequestId?: string;
 }
 /**
- * 事件连续时间实例信息
+ * DeleteProjectUsers请求参数结构体
  */
-export interface EventBatchCaseDTO {
-    /**
-     * 事件实例id
-     */
-    CaseId?: string;
-    /**
-     * 事件名
-     */
-    Name?: string;
-    /**
-     * 事件触发起始时间
-     */
-    StartDimension?: string;
-    /**
-     * 创建时间
-     */
-    CreationTs?: string;
-    /**
-     * 消费者id
-     */
-    ConsumerId?: string;
-    /**
-     * 描述信息
-     */
-    Description?: string;
-    /**
-     * 事件触发结束时间
-     */
-    EndDimension?: string;
-    /**
-     * 事件周期
-     */
-    EventSubType?: string;
-}
+export declare type DeleteProjectUsersRequest = null;
 /**
  * DescribeWorkflowExecuteById请求参数结构体
  */

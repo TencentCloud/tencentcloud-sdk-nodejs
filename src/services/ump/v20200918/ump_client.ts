@@ -249,8 +249,10 @@ mac为空返回对应GroupCode和MallId全量配置
   }
 
   /**
-   * 场内抓拍上报接口
-   */
+     * 优mall产品下线
+
+场内抓拍上报接口
+     */
   async CreateCapture(
     req: CreateCaptureRequest,
     cb?: (error: string, rep: CreateCaptureResponse) => void

@@ -1928,6 +1928,16 @@ it("wedata.v20210820.FreezeTasksByMultiWorkflow", async function () {
     }
 })
 
+it("wedata.v20210820.DeleteProjectUsers", async function () {
+    try {
+       const data = await client.DeleteProjectUsers({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("wedata.v20210820.DescribeBaselineInstances", async function () {
     try {
        const data = await client.DescribeBaselineInstances({})

@@ -368,7 +368,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeAddonValues(req: DescribeAddonValuesRequest, cb?: (error: string, rep: DescribeAddonValuesResponse) => void): Promise<DescribeAddonValuesResponse>;
     /**
-     * 给GR集群增加可用的ClusterCIDR
+     * 给GR集群增加可用的ClusterCIDR（开白才能使用此功能，如需要请联系我们）
      */
     AddClusterCIDR(req: AddClusterCIDRRequest, cb?: (error: string, rep: AddClusterCIDRResponse) => void): Promise<AddClusterCIDRResponse>;
     /**

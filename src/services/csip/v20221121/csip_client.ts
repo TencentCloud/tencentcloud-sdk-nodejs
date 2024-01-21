@@ -38,6 +38,7 @@ import {
   OrganizationUserInfo,
   AssetTag,
   DescribeVULRiskAdvanceCFGListRequest,
+  ModifyRiskCenterScanTaskResponse,
   DescribeRiskCenterAssetViewCFGRiskListRequest,
   DescribeDomainAssetsRequest,
   Tag,
@@ -125,6 +126,7 @@ import {
   DescribeRiskCenterAssetViewVULRiskListResponse,
   DescribeCVMAssetsRequest,
   DescribeRiskCenterServerRiskListRequest,
+  ModifyRiskCenterScanTaskRequest,
   ClbListenerListInfo,
   DescribeRiskCenterServerRiskListResponse,
   DescribeListenerListRequest,
@@ -303,6 +305,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeCVMAssetsResponse) => void
   ): Promise<DescribeCVMAssetsResponse> {
     return this.request("DescribeCVMAssets", req, cb)
+  }
+
+  /**
+   * 修改风险中心扫描任务
+   */
+  async ModifyRiskCenterScanTask(
+    req: ModifyRiskCenterScanTaskRequest,
+    cb?: (error: string, rep: ModifyRiskCenterScanTaskResponse) => void
+  ): Promise<ModifyRiskCenterScanTaskResponse> {
+    return this.request("ModifyRiskCenterScanTask", req, cb)
   }
 
   /**

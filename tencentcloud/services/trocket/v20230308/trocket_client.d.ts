@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { ModifyInstanceResponse, CreateTopicResponse, ImportSourceClusterTopicsResponse, CreateConsumerGroupRequest, CreateRoleResponse, CreateMQTTInstanceResponse, ImportSourceClusterConsumerGroupsRequest, DescribeRoleListResponse, ModifyInstanceRequest, DescribeTopicListRequest, DescribeInstanceListRequest, CreateInstanceResponse, CreateMQTTInstanceRequest, DescribeTopicListResponse, DeleteInstanceResponse, ModifyConsumerGroupRequest, DescribeConsumerGroupRequest, DescribeConsumerGroupListRequest, ModifyRoleResponse, DescribeConsumerGroupResponse, CreateInstanceRequest, CreateRoleRequest, DeleteTopicRequest, DeleteConsumerGroupResponse, ImportSourceClusterTopicsRequest, DescribeTopicResponse, ImportSourceClusterConsumerGroupsResponse, DeleteRoleResponse, ModifyRoleRequest, DescribeTopicStatsOpRequest, CreateTopicRequest, DescribeConsumerGroupListResponse, DeleteRoleRequest, DescribeMQTTProductSKUListResponse, DescribeRoleListRequest, ModifyTopicResponse, ModifyConsumerGroupResponse, ModifyTopicRequest, DescribeInstanceResponse, DescribeTopicStatsOpResponse, DeleteConsumerGroupRequest, DeleteTopicResponse, CreateConsumerGroupResponse, DescribeMQTTProductSKUListRequest, DeleteInstanceRequest, DescribeInstanceRequest, DescribeMQTTInstanceListRequest, DescribeMQTTInstanceListResponse, DescribeInstanceListResponse, DescribeTopicRequest } from "./trocket_models";
+import { DescribeRoleListResponse, DeleteMQTTTopicRequest, CreateInstanceResponse, ModifyRoleResponse, DeleteMQTTInsPublicEndpointRequest, ModifyInstanceRequest, CreateMQTTInsPublicEndpointResponse, ImportSourceClusterConsumerGroupsResponse, DeleteTopicRequest, ModifyMQTTInstanceRequest, DescribeMQTTProductSKUListResponse, DescribeTopicStatsOpResponse, DescribeMQTTClientResponse, DescribeMQTTMessageListResponse, DescribeMQTTProductSKUListRequest, ImportSourceClusterConsumerGroupsRequest, DescribeMQTTMessageResponse, DescribeMQTTInstanceListResponse, DescribeInstanceListResponse, ModifyInstanceResponse, CreateConsumerGroupRequest, ModifyMQTTTopicResponse, DescribeMQTTClientRequest, DescribeMQTTInsVPCEndpointsResponse, DescribeMQTTInsPublicEndpointsResponse, DescribeInstanceListRequest, DeleteMQTTUserRequest, ModifyMQTTInstanceCertBindingRequest, CreateMQTTTopicResponse, DescribeMQTTInstanceRequest, ImportSourceClusterTopicsRequest, CreateMQTTUserResponse, DeleteInstanceResponse, DescribeTopicResponse, DeleteMQTTInsPublicEndpointResponse, DeleteInstanceRequest, ModifyRoleRequest, DescribeMQTTInsVPCEndpointsRequest, CreateTopicRequest, DeleteRoleRequest, DeleteConsumerGroupRequest, CreateConsumerGroupResponse, DescribeMQTTUserListResponse, ModifyMQTTUserResponse, ModifyMQTTInsPublicEndpointRequest, ModifyMQTTInstanceCertBindingResponse, DeleteMQTTInstanceResponse, DescribeTopicRequest, DeleteMQTTInstanceRequest, CreateTopicResponse, DescribeMQTTInstanceListRequest, CreateMQTTInstanceResponse, DescribeMQTTInstanceResponse, DeleteMQTTUserResponse, ImportSourceClusterTopicsResponse, DescribeTopicListRequest, ModifyConsumerGroupRequest, DescribeConsumerGroupRequest, DescribeConsumerGroupListRequest, CreateInstanceRequest, DescribeConsumerGroupResponse, ModifyTopicResponse, DescribeMQTTInsPublicEndpointsRequest, DeleteRoleResponse, DescribeMQTTInstanceCertResponse, DescribeMQTTTopicListRequest, ModifyTopicRequest, DescribeInstanceResponse, DeleteMQTTTopicResponse, ModifyConsumerGroupResponse, DescribeMQTTInstanceCertRequest, ModifyMQTTInsPublicEndpointResponse, CreateMQTTUserRequest, DescribeMQTTMessageRequest, CreateRoleResponse, DescribeMQTTTopicListResponse, DescribeMQTTUserListRequest, ModifyMQTTInstanceResponse, CreateMQTTInstanceRequest, DescribeTopicListResponse, DescribeMQTTTopicRequest, CreateRoleRequest, DeleteConsumerGroupResponse, ModifyMQTTTopicRequest, DescribeTopicStatsOpRequest, DescribeConsumerGroupListResponse, ModifyMQTTUserRequest, CreateMQTTInsPublicEndpointRequest, CreateMQTTTopicRequest, DeleteTopicResponse, DescribeMQTTMessageListRequest, DescribeMQTTTopicResponse, DescribeInstanceRequest, DescribeRoleListRequest } from "./trocket_models";
 /**
  * trocket client
  * @class
@@ -8,9 +8,26 @@ import { ModifyInstanceResponse, CreateTopicResponse, ImportSourceClusterTopicsR
 export declare class Client extends AbstractClient {
     constructor(clientConfig: ClientConfig);
     /**
+     * 查询消息列表，如查询死信，请设置ConsumerGroup参数
+     */
+    DescribeMQTTMessageList(req: DescribeMQTTMessageListRequest, cb?: (error: string, rep: DescribeMQTTMessageListResponse) => void): Promise<DescribeMQTTMessageListResponse>;
+    /**
+     * 更新MQTT集群绑定证书
+参数传空，则为删除证书
+     */
+    ModifyMQTTInstanceCertBinding(req: ModifyMQTTInstanceCertBindingRequest, cb?: (error: string, rep: ModifyMQTTInstanceCertBindingResponse) => void): Promise<ModifyMQTTInstanceCertBindingResponse>;
+    /**
      * 修改主题属性
      */
     ModifyTopic(req: ModifyTopicRequest, cb?: (error: string, rep: ModifyTopicResponse) => void): Promise<ModifyTopicResponse>;
+    /**
+     * 修改主题属性
+     */
+    ModifyMQTTTopic(req: ModifyMQTTTopicRequest, cb?: (error: string, rep: ModifyMQTTTopicResponse) => void): Promise<ModifyMQTTTopicResponse>;
+    /**
+     * 删除MQTT访问用户
+     */
+    DeleteMQTTUser(req: DeleteMQTTUserRequest, cb?: (error: string, rep: DeleteMQTTUserResponse) => void): Promise<DeleteMQTTUserResponse>;
     /**
      * 添加角色
      */
@@ -28,19 +45,37 @@ export declare class Client extends AbstractClient {
      */
     CreateConsumerGroup(req: CreateConsumerGroupRequest, cb?: (error: string, rep: CreateConsumerGroupResponse) => void): Promise<CreateConsumerGroupResponse>;
     /**
+     * 非对外接口，获取产品售卖规格
+     */
+    DescribeMQTTProductSKUList(req?: DescribeMQTTProductSKUListRequest, cb?: (error: string, rep: DescribeMQTTProductSKUListResponse) => void): Promise<DescribeMQTTProductSKUListResponse>;
+    /**
+     * 导入topic列表
+     */
+    ImportSourceClusterTopics(req: ImportSourceClusterTopicsRequest, cb?: (error: string, rep: ImportSourceClusterTopicsResponse) => void): Promise<ImportSourceClusterTopicsResponse>;
+    /**
+     * 运营端查询topicStata
+     */
+    DescribeTopicStatsOp(req: DescribeTopicStatsOpRequest, cb?: (error: string, rep: DescribeTopicStatsOpResponse) => void): Promise<DescribeTopicStatsOpResponse>;
+    /**
+     * 查询用户列表，Filter参数使用说明如下：
+
+1. Username，用户名称模糊搜索
+     */
+    DescribeMQTTUserList(req: DescribeMQTTUserListRequest, cb?: (error: string, rep: DescribeMQTTUserListResponse) => void): Promise<DescribeMQTTUserListResponse>;
+    /**
+     * 删除MQTT实例的公网接入点
+     */
+    DeleteMQTTInsPublicEndpoint(req: DeleteMQTTInsPublicEndpointRequest, cb?: (error: string, rep: DeleteMQTTInsPublicEndpointResponse) => void): Promise<DeleteMQTTInsPublicEndpointResponse>;
+    /**
      * 查询角色列表，Filter参数使用说明如下：
 
 1. RoleName，角色名称模糊搜索
      */
     DescribeRoleList(req: DescribeRoleListRequest, cb?: (error: string, rep: DescribeRoleListResponse) => void): Promise<DescribeRoleListResponse>;
     /**
-     * 运营端查询topicStata
+     * 修改MQTT角色
      */
-    DescribeTopicStatsOp(req: DescribeTopicStatsOpRequest, cb?: (error: string, rep: DescribeTopicStatsOpResponse) => void): Promise<DescribeTopicStatsOpResponse>;
-    /**
-     * 非对外接口，获取产品售卖规格
-     */
-    DescribeMQTTProductSKUList(req?: DescribeMQTTProductSKUListRequest, cb?: (error: string, rep: DescribeMQTTProductSKUListResponse) => void): Promise<DescribeMQTTProductSKUListResponse>;
+    ModifyMQTTUser(req: ModifyMQTTUserRequest, cb?: (error: string, rep: ModifyMQTTUserResponse) => void): Promise<ModifyMQTTUserResponse>;
     /**
      * 删除消费组
      */
@@ -50,9 +85,29 @@ export declare class Client extends AbstractClient {
      */
     ModifyConsumerGroup(req: ModifyConsumerGroupRequest, cb?: (error: string, rep: ModifyConsumerGroupResponse) => void): Promise<ModifyConsumerGroupResponse>;
     /**
+     * 查询MQTT实例公网接入点
+     */
+    DescribeMQTTInsVPCEndpoints(req: DescribeMQTTInsVPCEndpointsRequest, cb?: (error: string, rep: DescribeMQTTInsVPCEndpointsResponse) => void): Promise<DescribeMQTTInsVPCEndpointsResponse>;
+    /**
      * 删除角色
      */
     DeleteRole(req: DeleteRoleRequest, cb?: (error: string, rep: DeleteRoleResponse) => void): Promise<DeleteRoleResponse>;
+    /**
+     * 删除实例
+     */
+    DeleteMQTTInstance(req: DeleteMQTTInstanceRequest, cb?: (error: string, rep: DeleteMQTTInstanceResponse) => void): Promise<DeleteMQTTInstanceResponse>;
+    /**
+     * 查询MQTT消息详情
+     */
+    DescribeMQTTMessage(req: DescribeMQTTMessageRequest, cb?: (error: string, rep: DescribeMQTTMessageResponse) => void): Promise<DescribeMQTTMessageResponse>;
+    /**
+     * 查询mqtt主题详情
+     */
+    DescribeMQTTTopic(req: DescribeMQTTTopicRequest, cb?: (error: string, rep: DescribeMQTTTopicResponse) => void): Promise<DescribeMQTTTopicResponse>;
+    /**
+     * 为MQTT实例创建公网接入点
+     */
+    ModifyMQTTInsPublicEndpoint(req: ModifyMQTTInsPublicEndpointRequest, cb?: (error: string, rep: ModifyMQTTInsPublicEndpointResponse) => void): Promise<ModifyMQTTInsPublicEndpointResponse>;
     /**
      * 查询消费组详情
      */
@@ -62,17 +117,47 @@ export declare class Client extends AbstractClient {
      */
     CreateTopic(req: CreateTopicRequest, cb?: (error: string, rep: CreateTopicResponse) => void): Promise<CreateTopicResponse>;
     /**
+     * 获取主题列表，Filter参数使用说明如下：
+
+1. TopicName，主题名称模糊搜索
+2. TopicType，主题类型查询，支持多选，可选值：Normal,Order,Transaction,DelayScheduled
+     */
+    DescribeMQTTTopicList(req: DescribeMQTTTopicListRequest, cb?: (error: string, rep: DescribeMQTTTopicListResponse) => void): Promise<DescribeMQTTTopicListResponse>;
+    /**
+     * 查询实例信息
+     */
+    DescribeMQTTInstance(req: DescribeMQTTInstanceRequest, cb?: (error: string, rep: DescribeMQTTInstanceResponse) => void): Promise<DescribeMQTTInstanceResponse>;
+    /**
+     * 创建主题
+     */
+    CreateMQTTTopic(req: CreateMQTTTopicRequest, cb?: (error: string, rep: CreateMQTTTopicResponse) => void): Promise<CreateMQTTTopicResponse>;
+    /**
      * 购买新实例
      */
     CreateInstance(req: CreateInstanceRequest, cb?: (error: string, rep: CreateInstanceResponse) => void): Promise<CreateInstanceResponse>;
+    /**
+     * 删除主题
+     */
+    DeleteMQTTTopic(req: DeleteMQTTTopicRequest, cb?: (error: string, rep: DeleteMQTTTopicResponse) => void): Promise<DeleteMQTTTopicResponse>;
     /**
      * 查询实例信息
      */
     DescribeInstance(req: DescribeInstanceRequest, cb?: (error: string, rep: DescribeInstanceResponse) => void): Promise<DescribeInstanceResponse>;
     /**
-     * 删除主题
+     * 获取主题列表，Filter参数使用说明如下：
+
+1. TopicName，主题名称模糊搜索
+2. TopicType，主题类型查询，支持多选，可选值：Normal,Order,Transaction,DelayScheduled
      */
-    DeleteTopic(req: DeleteTopicRequest, cb?: (error: string, rep: DeleteTopicResponse) => void): Promise<DeleteTopicResponse>;
+    DescribeTopicList(req: DescribeTopicListRequest, cb?: (error: string, rep: DescribeTopicListResponse) => void): Promise<DescribeTopicListResponse>;
+    /**
+     * 查询MQTT集群证书列表
+     */
+    DescribeMQTTInstanceCert(req: DescribeMQTTInstanceCertRequest, cb?: (error: string, rep: DescribeMQTTInstanceCertResponse) => void): Promise<DescribeMQTTInstanceCertResponse>;
+    /**
+     * 修改实例属性
+     */
+    ModifyMQTTInstance(req: ModifyMQTTInstanceRequest, cb?: (error: string, rep: ModifyMQTTInstanceResponse) => void): Promise<ModifyMQTTInstanceResponse>;
     /**
      * 获取实例列表，Filters参数使用说明如下：
 1. InstanceName, 名称模糊查询
@@ -84,9 +169,12 @@ export declare class Client extends AbstractClient {
      */
     DescribeMQTTInstanceList(req: DescribeMQTTInstanceListRequest, cb?: (error: string, rep: DescribeMQTTInstanceListResponse) => void): Promise<DescribeMQTTInstanceListResponse>;
     /**
-     * 导入topic列表
+     * 获取消费组列表，Filter参数使用说明如下：
+
+1. ConsumerGroupName，名称模糊查询
+2. ConsumeMessageOrderly，投递顺序性。"true":顺序投递；"false":并发投递
      */
-    ImportSourceClusterTopics(req: ImportSourceClusterTopicsRequest, cb?: (error: string, rep: ImportSourceClusterTopicsResponse) => void): Promise<ImportSourceClusterTopicsResponse>;
+    DescribeConsumerGroupList(req: DescribeConsumerGroupListRequest, cb?: (error: string, rep: DescribeConsumerGroupListResponse) => void): Promise<DescribeConsumerGroupListResponse>;
     /**
      * 购买新的MQTT实例
      */
@@ -102,16 +190,21 @@ export declare class Client extends AbstractClient {
      */
     DescribeInstanceList(req: DescribeInstanceListRequest, cb?: (error: string, rep: DescribeInstanceListResponse) => void): Promise<DescribeInstanceListResponse>;
     /**
-     * 获取消费组列表，Filter参数使用说明如下：
-
-1. ConsumerGroupName，名称模糊查询
-2. ConsumeMessageOrderly，投递顺序性。"true":顺序投递；"false":并发投递
+     * 查询MQTT实例公网接入点
      */
-    DescribeConsumerGroupList(req: DescribeConsumerGroupListRequest, cb?: (error: string, rep: DescribeConsumerGroupListResponse) => void): Promise<DescribeConsumerGroupListResponse>;
+    DescribeMQTTInsPublicEndpoints(req: DescribeMQTTInsPublicEndpointsRequest, cb?: (error: string, rep: DescribeMQTTInsPublicEndpointsResponse) => void): Promise<DescribeMQTTInsPublicEndpointsResponse>;
+    /**
+     * 添加mqtt角色
+     */
+    CreateMQTTUser(req: CreateMQTTUserRequest, cb?: (error: string, rep: CreateMQTTUserResponse) => void): Promise<CreateMQTTUserResponse>;
     /**
      * 修改角色
      */
     ModifyRole(req: ModifyRoleRequest, cb?: (error: string, rep: ModifyRoleResponse) => void): Promise<ModifyRoleResponse>;
+    /**
+     * 查询 MQTT 客户端详情
+     */
+    DescribeMQTTClient(req: DescribeMQTTClientRequest, cb?: (error: string, rep: DescribeMQTTClientResponse) => void): Promise<DescribeMQTTClientResponse>;
     /**
      * 查询主题详情，Offset和Limit参数是指订阅该主题的消费组查询分页参数，Filter参数使用说明如下：
 
@@ -119,14 +212,15 @@ ConsumerGroup，消费组名称过滤
      */
     DescribeTopic(req: DescribeTopicRequest, cb?: (error: string, rep: DescribeTopicResponse) => void): Promise<DescribeTopicResponse>;
     /**
-     * 获取主题列表，Filter参数使用说明如下：
-
-1. TopicName，主题名称模糊搜索
-2. TopicType，主题类型查询，支持多选，可选值：Normal,Order,Transaction,DelayScheduled
-     */
-    DescribeTopicList(req: DescribeTopicListRequest, cb?: (error: string, rep: DescribeTopicListResponse) => void): Promise<DescribeTopicListResponse>;
-    /**
      * 修改实例属性
      */
     ModifyInstance(req: ModifyInstanceRequest, cb?: (error: string, rep: ModifyInstanceResponse) => void): Promise<ModifyInstanceResponse>;
+    /**
+     * 删除主题
+     */
+    DeleteTopic(req: DeleteTopicRequest, cb?: (error: string, rep: DeleteTopicResponse) => void): Promise<DeleteTopicResponse>;
+    /**
+     * 为MQTT实例创建公网接入点
+     */
+    CreateMQTTInsPublicEndpoint(req: CreateMQTTInsPublicEndpointRequest, cb?: (error: string, rep: CreateMQTTInsPublicEndpointResponse) => void): Promise<CreateMQTTInsPublicEndpointResponse>;
 }
