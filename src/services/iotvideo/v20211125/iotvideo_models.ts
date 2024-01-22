@@ -460,6 +460,20 @@ export interface DescribeDeviceActionHistoryRequest {
 }
 
 /**
+ * DescribeCloudStorageMultiThumbnail返回参数结构体
+ */
+export interface DescribeCloudStorageMultiThumbnailResponse {
+  /**
+   * 缩略图访问地址
+   */
+  ThumbnailURLInfoList?: Array<ThumbnailURLInfoList>
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyDataForward请求参数结构体
  */
 export interface ModifyDataForwardRequest {
@@ -1260,6 +1274,24 @@ export interface DescribeBonusesResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeCloudStorageMultiThumbnail请求参数结构体
+ */
+export interface DescribeCloudStorageMultiThumbnailRequest {
+  /**
+   * 产品ID
+   */
+  ProductId: string
+  /**
+   * 设备名称
+   */
+  DeviceName: string
+  /**
+   * 多个缩略图文件名根据 | 分割
+   */
+  MultiThumbnail: string
 }
 
 /**

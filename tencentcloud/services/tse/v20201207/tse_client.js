@@ -322,7 +322,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteCloudNativeAPIGateway", req, cb);
     }
     /**
-     * 修改云原生API网关实例网络基本信息，比如带宽以及描述，只支持修改客户端公网/内网的信息。
+     * 修改云原生API网关实例网络基本信息，例如带宽以及描述，只支持修改客户端公网/内网的信息。
      */
     async ModifyNetworkBasicInfo(req, cb) {
         return this.request("ModifyNetworkBasicInfo", req, cb);
@@ -406,7 +406,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeCloudNativeAPIGatewayCanaryRules", req, cb);
     }
     /**
-     * 修改云原生API网关实例的节点规格信息，比如节点扩缩容或者升降配
+     * 修改云原生API网关实例的节点规格信息，例如节点扩缩容或者升降配
      */
     async UpdateCloudNativeAPIGatewaySpec(req, cb) {
         return this.request("UpdateCloudNativeAPIGatewaySpec", req, cb);

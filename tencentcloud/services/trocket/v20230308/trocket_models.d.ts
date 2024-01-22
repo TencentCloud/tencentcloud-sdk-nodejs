@@ -2459,7 +2459,7 @@ export interface CreateMQTTInsPublicEndpointRequest {
     /**
      * 公网访问规则
      */
-    Rules: Array<PublicAccessRule>;
+    Rules?: Array<PublicAccessRule>;
 }
 /**
  * CreateMQTTTopic请求参数结构体

@@ -40,6 +40,7 @@ import {
   DescribeAIModelChannelResponse,
   DescribeMessageDataStatsResponse,
   DescribeDeviceActionHistoryRequest,
+  DescribeCloudStorageMultiThumbnailResponse,
   ModifyDataForwardRequest,
   DescribeCloudStorageThumbnailRequest,
   DescribeDevicesResponse,
@@ -78,6 +79,7 @@ import {
   CreateCOSCredentialsRequest,
   DeviceCommLogItem,
   DescribeBonusesResponse,
+  DescribeCloudStorageMultiThumbnailRequest,
   GenSingleDeviceSignatureOfPublicResponse,
   DescribeDataForwardListResponse,
   DeleteFirmwareResponse,
@@ -771,6 +773,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeCloudStorageThumbnailResponse) => void
   ): Promise<DescribeCloudStorageThumbnailResponse> {
     return this.request("DescribeCloudStorageThumbnail", req, cb)
+  }
+
+  /**
+   * 拉取多个云存事件缩略图
+   */
+  async DescribeCloudStorageMultiThumbnail(
+    req: DescribeCloudStorageMultiThumbnailRequest,
+    cb?: (error: string, rep: DescribeCloudStorageMultiThumbnailResponse) => void
+  ): Promise<DescribeCloudStorageMultiThumbnailResponse> {
+    return this.request("DescribeCloudStorageMultiThumbnail", req, cb)
   }
 
   /**

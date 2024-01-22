@@ -28,19 +28,25 @@ class Client extends abstract_client_1.AbstractClient {
         super("ump.tencentcloudapi.com", "2020-09-18", clientConfig);
     }
     /**
-     * 上报服务注册自身的服务地址作为回调地址, 用于信息回传。
+     * 优mall产品启动下线流程
+
+上报服务注册自身的服务地址作为回调地址, 用于信息回传。
      */
     async ReportServiceRegister(req, cb) {
         return this.request("ReportServiceRegister", req, cb);
     }
     /**
-     * 集团广场的多经点位配置更新
+     * 优mall产品启动下线流程
+
+集团广场的多经点位配置更新
      */
     async ModifyMultiBizConfig(req, cb) {
         return this.request("ModifyMultiBizConfig", req, cb);
     }
     /**
-     * 上报相机移动、遮挡等告警信息
+     * 优mall产品启动下线流程
+
+上报相机移动、遮挡等告警信息
 
 
      */
@@ -48,7 +54,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateCameraAlerts", req, cb);
     }
     /**
-     * 获取摄像头配置信息
+     * 优mall产品启动下线流程
+
+获取摄像头配置信息
 mac不为空返回指定相机配置
 mac为空返回对应GroupCode和MallId全量配置
      */
@@ -56,73 +64,97 @@ mac为空返回对应GroupCode和MallId全量配置
         return this.request("DescribeConfig", req, cb);
     }
     /**
-     * 实时获取底图接口
+     * 优mall产品启动下线流程
+
+实时获取底图接口
      */
     async DescribeImage(req, cb) {
         return this.request("DescribeImage", req, cb);
     }
     /**
-     * 集团广场的多经点位消警
+     * 优mall产品启动下线流程
+
+集团广场的多经点位消警
      */
     async DeleteMultiBizAlert(req, cb) {
         return this.request("DeleteMultiBizAlert", req, cb);
     }
     /**
-     * 获取集团广场对应的摄像头列表
+     * 优mall产品启动下线流程
+
+获取集团广场对应的摄像头列表
      */
     async DescribeCameras(req, cb) {
         return this.request("DescribeCameras", req, cb);
     }
     /**
-     * 获取集团广场的点位列表
+     * 优mall产品启动下线流程
+
+获取集团广场的点位列表
      */
     async DescribeZones(req, cb) {
         return this.request("DescribeZones", req, cb);
     }
     /**
-     * 删除集团广场对应的任务
+     * 优mall产品启动下线流程
+
+删除集团广场对应的任务
      */
     async DeleteTask(req, cb) {
         return this.request("DeleteTask", req, cb);
     }
     /**
-     * 上报所有进程监控信息
+     * 优mall产品启动下线流程
+
+上报所有进程监控信息
      */
     async CreateProgramState(req, cb) {
         return this.request("CreateProgramState", req, cb);
     }
     /**
-     * 查询集团广场对应的任务列表
+     * 优mall产品启动下线流程
+
+查询集团广场对应的任务列表
      */
     async DescribeTasks(req, cb) {
         return this.request("DescribeTasks", req, cb);
     }
     /**
-     * 集团广场的多经点位告警
+     * 优mall产品启动下线流程
+
+集团广场的多经点位告警
      */
     async CreateMultiBizAlert(req, cb) {
         return this.request("CreateMultiBizAlert", req, cb);
     }
     /**
-     * 以图搜图
+     * 优mall产品启动下线流程
+
+以图搜图
      */
     async SearchImage(req, cb) {
         return this.request("SearchImage", req, cb);
     }
     /**
-     * 上报所有服务器硬件监控信息
+     * 优mall产品启动下线流程
+
+上报所有服务器硬件监控信息
      */
     async CreateServerState(req, cb) {
         return this.request("CreateServerState", req, cb);
     }
     /**
-     * 获取多经点位底图
+     * 优mall产品启动下线流程
+
+获取多经点位底图
      */
     async DescribeMultiBizBaseImage(req, cb) {
         return this.request("DescribeMultiBizBaseImage", req, cb);
     }
     /**
-     * 上报当前场内所有相机的当前状态
+     * 优mall产品启动下线流程
+
+上报当前场内所有相机的当前状态
      */
     async CreateCameraState(req, cb) {
         return this.request("CreateCameraState", req, cb);

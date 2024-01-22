@@ -528,6 +528,16 @@ it("iotvideo.v20211125.DescribeCloudStorageThumbnail", async function () {
     }
 })
 
+it("iotvideo.v20211125.DescribeCloudStorageMultiThumbnail", async function () {
+    try {
+       const data = await client.DescribeCloudStorageMultiThumbnail({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotvideo.v20211125.DeleteFirmware", async function () {
     try {
        const data = await client.DeleteFirmware({})

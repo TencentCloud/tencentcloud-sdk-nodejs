@@ -224,11 +224,11 @@ export interface DescribeAgentDealsByCacheResponse {
     /**
      * 订单数组
      */
-    AgentDealSet: Array<AgentDealNewElem>;
+    AgentDealSet?: Array<AgentDealNewElem>;
     /**
      * 符合条件的订单总数量
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -270,11 +270,11 @@ export interface DescribeAgentPayDealsV2Response {
     /**
      * 订单数组
      */
-    AgentPayDealSet: Array<AgentDealNewElem>;
+    AgentPayDealSet?: Array<AgentDealNewElem>;
     /**
      * 符合条件的订单总数量
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -636,6 +636,11 @@ export interface AgentDealNewElem {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     RefundMap?: Array<RefundMap>;
+    /**
+     * 子产品名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SubGoodsName?: string;
 }
 /**
  * DescribeAgentClients请求参数结构体
@@ -937,11 +942,11 @@ export interface DescribeAgentSelfPayDealsV2Response {
     /**
      * 订单数组
      */
-    AgentPayDealSet: Array<AgentDealNewElem>;
+    AgentPayDealSet?: Array<AgentDealNewElem>;
     /**
      * 符合条件的订单总数量
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */

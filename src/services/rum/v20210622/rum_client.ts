@@ -32,12 +32,10 @@ import {
   DescribeErrorRequest,
   StopInstanceRequest,
   ModifyInstanceRequest,
-  DescribeLogListRequest,
   DescribeErrorResponse,
   DescribeAppMetricsDataResponse,
   DescribeAppSingleCaseDetailListResponse,
   DeleteWhitelistResponse,
-  CreateLogExportRequest,
   DescribePvListResponse,
   RumUvInfo,
   DescribeScoresRequest,
@@ -52,7 +50,6 @@ import {
   ModifyInstanceResponse,
   DeleteStarProjectRequest,
   DescribeWhitelistsRequest,
-  DescribeLogExportsResponse,
   DescribeUvListRequest,
   DescribeTawAreasResponse,
   DescribeDataRequest,
@@ -80,7 +77,6 @@ import {
   DescribeRumStatsLogListRequest,
   ResumeProjectRequest,
   ProjectLimit,
-  DeleteLogExportRequest,
   CreateProjectRequest,
   DescribeRumStatsLogListResponse,
   CreateWhitelistRequest,
@@ -90,7 +86,6 @@ import {
   RumAreaInfo,
   DescribeDataSetUrlStatisticsRequest,
   DescribeDataPerformanceProjectResponse,
-  DescribeDataFetchUrlInfoResponse,
   ResumeInstanceResponse,
   DescribeDataStaticProjectResponse,
   CreateStarProjectRequest,
@@ -101,21 +96,19 @@ import {
   RumPvInfo,
   DeleteReleaseFileResponse,
   DescribeScoresResponse,
-  DeleteLogExportResponse,
+  DescribeDataLogUrlStatisticsRequest,
   DescribeReleaseFileSignResponse,
   DescribeTawInstancesRequest,
   DescribeTawAreasRequest,
   Filter,
-  DescribeDataLogUrlStatisticsRequest,
   DeleteStarProjectResponse,
   DescribeDataPerformancePageResponse,
   DeleteInstanceRequest,
-  LogExport,
   DescribeDataStaticResourceResponse,
   DescribeDataEventUrlResponse,
   DescribeDataWebVitalsPageRequest,
   DescribeDataFetchUrlInfoRequest,
-  DescribeLogListResponse,
+  DescribeDataFetchUrlInfoResponse,
   DescribeReleaseFilesResponse,
   DescribeDataStaticUrlResponse,
   CreateWhitelistResponse,
@@ -129,7 +122,6 @@ import {
   DescribeWhitelistsResponse,
   DescribeProjectsResponse,
   ModifyProjectResponse,
-  DescribeLogExportsRequest,
   DescribeDataReportCountResponse,
   DescribeDataPerformanceProjectRequest,
   DescribeRumLogExportResponse,
@@ -141,7 +133,6 @@ import {
   DescribePvListRequest,
   DescribeDataPvUrlInfoRequest,
   CreateReleaseFileResponse,
-  CreateLogExportResponse,
   DescribeDataFetchProjectResponse,
   Whitelist,
   RumProject,
@@ -330,13 +321,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * (已下线，请用DescribeRumLogList)
+   * 停止项目使用与上报数据
    */
-  async DescribeLogList(
-    req: DescribeLogListRequest,
-    cb?: (error: string, rep: DescribeLogListResponse) => void
-  ): Promise<DescribeLogListResponse> {
-    return this.request("DescribeLogList", req, cb)
+  async StopProject(
+    req: StopProjectRequest,
+    cb?: (error: string, rep: StopProjectResponse) => void
+  ): Promise<StopProjectResponse> {
+    return this.request("StopProject", req, cb)
   }
 
   /**
@@ -357,20 +348,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribePvListResponse) => void
   ): Promise<DescribePvListResponse> {
     return this.request("DescribePvList", req, cb)
-  }
-
-  /**
-     * 接口请求域名： rum.tencentcloudapi.com 。
-
-本接口用于获取日志下载任务列表
-
-默认接口请求频率限制：20次/秒
-     */
-  async DescribeLogExports(
-    req: DescribeLogExportsRequest,
-    cb?: (error: string, rep: DescribeLogExportsResponse) => void
-  ): Promise<DescribeLogExportsResponse> {
-    return this.request("DescribeLogExports", req, cb)
   }
 
   /**
@@ -432,20 +409,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAppMetricsDataResponse) => void
   ): Promise<DescribeAppMetricsDataResponse> {
     return this.request("DescribeAppMetricsData", req, cb)
-  }
-
-  /**
-     * 接口请求域名： rum.tencentcloudapi.com 。
-
-本接口用于创建日志下载任务
-
-默认接口请求频率限制：20次/秒。
-     */
-  async CreateLogExport(
-    req: CreateLogExportRequest,
-    cb?: (error: string, rep: CreateLogExportResponse) => void
-  ): Promise<CreateLogExportResponse> {
-    return this.request("CreateLogExport", req, cb)
   }
 
   /**
@@ -539,16 +502,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 停止项目使用与上报数据
-   */
-  async StopProject(
-    req: StopProjectRequest,
-    cb?: (error: string, rep: StopProjectResponse) => void
-  ): Promise<StopProjectResponse> {
-    return this.request("StopProject", req, cb)
-  }
-
-  /**
    * 个人用户添加星标项目
    */
   async CreateStarProject(
@@ -606,20 +559,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeReleaseFilesResponse) => void
   ): Promise<DescribeReleaseFilesResponse> {
     return this.request("DescribeReleaseFiles", req, cb)
-  }
-
-  /**
-     * 接口请求域名： rum.tencentcloudapi.com 。
-
-本接口用于删除日志下载任务
-
-默认接口请求频率限制：20次/秒。
-     */
-  async DeleteLogExport(
-    req: DeleteLogExportRequest,
-    cb?: (error: string, rep: DeleteLogExportResponse) => void
-  ): Promise<DeleteLogExportResponse> {
-    return this.request("DeleteLogExport", req, cb)
   }
 
   /**

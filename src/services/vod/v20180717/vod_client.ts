@@ -912,8 +912,9 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改即时转码模板。
-   */
+     * 修改即时转码模板。
+- 注意：即时转码模板创建后，不推荐修改，如需修改参数，推荐使用新增模板。
+     */
   async ModifyJustInTimeTranscodeTemplate(
     req: ModifyJustInTimeTranscodeTemplateRequest,
     cb?: (error: string, rep: ModifyJustInTimeTranscodeTemplateResponse) => void

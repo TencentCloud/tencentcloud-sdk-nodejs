@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { FaceFusionResponse, DescribeMaterialListResponse, FaceFusionRequest, FaceFusionLiteResponse, FaceFusionLiteRequest, FuseFaceResponse, FuseFaceRequest, DescribeMaterialListRequest } from "./facefusion_models";
+import { FaceFusionRequest, FaceFusionResponse, DescribeMaterialListResponse, FuseFaceResponse, FuseFaceRequest, DescribeMaterialListRequest } from "./facefusion_models";
 /**
  * facefusion client
  * @class
@@ -25,10 +25,4 @@ export declare class Client extends AbstractClient {
 - 公共参数中的签名方式必须指定为V3版本，即配置SignatureMethod参数为TC3-HMAC-SHA256。
      */
     FuseFace(req: FuseFaceRequest, cb?: (error: string, rep: FuseFaceResponse) => void): Promise<FuseFaceResponse>;
-    /**
-     * 接口不再使用
-
-人脸融合活动专用版，不推荐使用。人脸融合接口建议使用[人脸融合](https://cloud.tencent.com/document/product/670/31061)或[选脸融合](https://cloud.tencent.com/document/product/670/37736)接口
-     */
-    FaceFusionLite(req: FaceFusionLiteRequest, cb?: (error: string, rep: FaceFusionLiteResponse) => void): Promise<FaceFusionLiteResponse>;
 }

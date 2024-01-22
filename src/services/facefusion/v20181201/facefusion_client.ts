@@ -19,16 +19,14 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   PublicMaterialInfos,
-  FaceInfo,
+  FaceFusionRequest,
   FaceFusionResponse,
   DescribeMaterialListResponse,
   MaterialFaceList,
-  FaceFusionRequest,
-  FaceFusionLiteResponse,
+  FaceInfo,
   MergeInfo,
   FuseFaceReviewDetail,
   ImageCodecParam,
-  FaceFusionLiteRequest,
   FuseFaceReviewResult,
   FuseFaceResponse,
   FuseFaceRequest,
@@ -81,17 +79,5 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: FuseFaceResponse) => void
   ): Promise<FuseFaceResponse> {
     return this.request("FuseFace", req, cb)
-  }
-
-  /**
-     * 接口不再使用
-
-人脸融合活动专用版，不推荐使用。人脸融合接口建议使用[人脸融合](https://cloud.tencent.com/document/product/670/31061)或[选脸融合](https://cloud.tencent.com/document/product/670/37736)接口
-     */
-  async FaceFusionLite(
-    req: FaceFusionLiteRequest,
-    cb?: (error: string, rep: FaceFusionLiteResponse) => void
-  ): Promise<FaceFusionLiteResponse> {
-    return this.request("FaceFusionLite", req, cb)
   }
 }

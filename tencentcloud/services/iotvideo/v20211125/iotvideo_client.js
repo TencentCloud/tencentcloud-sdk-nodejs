@@ -334,6 +334,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeCloudStorageThumbnail", req, cb);
     }
     /**
+     * 拉取多个云存事件缩略图
+     */
+    async DescribeCloudStorageMultiThumbnail(req, cb) {
+        return this.request("DescribeCloudStorageMultiThumbnail", req, cb);
+    }
+    /**
      * 本接口（DeleteFirmware）用于删除固件
      */
     async DeleteFirmware(req, cb) {

@@ -204,7 +204,7 @@ export declare class Client extends AbstractClient {
      */
     DeleteCloudNativeAPIGateway(req: DeleteCloudNativeAPIGatewayRequest, cb?: (error: string, rep: DeleteCloudNativeAPIGatewayResponse) => void): Promise<DeleteCloudNativeAPIGatewayResponse>;
     /**
-     * 修改云原生API网关实例网络基本信息，比如带宽以及描述，只支持修改客户端公网/内网的信息。
+     * 修改云原生API网关实例网络基本信息，例如带宽以及描述，只支持修改客户端公网/内网的信息。
      */
     ModifyNetworkBasicInfo(req: ModifyNetworkBasicInfoRequest, cb?: (error: string, rep: ModifyNetworkBasicInfoResponse) => void): Promise<ModifyNetworkBasicInfoResponse>;
     /**
@@ -260,7 +260,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeCloudNativeAPIGatewayCanaryRules(req: DescribeCloudNativeAPIGatewayCanaryRulesRequest, cb?: (error: string, rep: DescribeCloudNativeAPIGatewayCanaryRulesResponse) => void): Promise<DescribeCloudNativeAPIGatewayCanaryRulesResponse>;
     /**
-     * 修改云原生API网关实例的节点规格信息，比如节点扩缩容或者升降配
+     * 修改云原生API网关实例的节点规格信息，例如节点扩缩容或者升降配
      */
     UpdateCloudNativeAPIGatewaySpec(req: UpdateCloudNativeAPIGatewaySpecRequest, cb?: (error: string, rep: UpdateCloudNativeAPIGatewaySpecResponse) => void): Promise<UpdateCloudNativeAPIGatewaySpecResponse>;
     /**

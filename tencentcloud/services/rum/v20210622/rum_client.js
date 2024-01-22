@@ -130,10 +130,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeRumGroupLog", req, cb);
     }
     /**
-     * (已下线，请用DescribeRumLogList)
+     * 停止项目使用与上报数据
      */
-    async DescribeLogList(req, cb) {
-        return this.request("DescribeLogList", req, cb);
+    async StopProject(req, cb) {
+        return this.request("StopProject", req, cb);
     }
     /**
      * 查询 app 监控个例聚合列表
@@ -146,16 +146,6 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribePvList(req, cb) {
         return this.request("DescribePvList", req, cb);
-    }
-    /**
-     * 接口请求域名： rum.tencentcloudapi.com 。
-
-本接口用于获取日志下载任务列表
-
-默认接口请求频率限制：20次/秒
-     */
-    async DescribeLogExports(req, cb) {
-        return this.request("DescribeLogExports", req, cb);
     }
     /**
      * 获取DescribeDataWebVitalsPage信息，用户核心活动信息
@@ -193,16 +183,6 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeAppMetricsData(req, cb) {
         return this.request("DescribeAppMetricsData", req, cb);
-    }
-    /**
-     * 接口请求域名： rum.tencentcloudapi.com 。
-
-本接口用于创建日志下载任务
-
-默认接口请求频率限制：20次/秒。
-     */
-    async CreateLogExport(req, cb) {
-        return this.request("CreateLogExport", req, cb);
     }
     /**
      * 获取DescribeDataSetUrlStatistics信息
@@ -259,12 +239,6 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ResumeProject", req, cb);
     }
     /**
-     * 停止项目使用与上报数据
-     */
-    async StopProject(req, cb) {
-        return this.request("StopProject", req, cb);
-    }
-    /**
      * 个人用户添加星标项目
      */
     async CreateStarProject(req, cb) {
@@ -299,16 +273,6 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeReleaseFiles(req, cb) {
         return this.request("DescribeReleaseFiles", req, cb);
-    }
-    /**
-     * 接口请求域名： rum.tencentcloudapi.com 。
-
-本接口用于删除日志下载任务
-
-默认接口请求频率限制：20次/秒。
-     */
-    async DeleteLogExport(req, cb) {
-        return this.request("DeleteLogExport", req, cb);
     }
     /**
      * 获取白名单列表

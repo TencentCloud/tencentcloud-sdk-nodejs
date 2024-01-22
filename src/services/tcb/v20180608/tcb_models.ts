@@ -492,7 +492,7 @@ export interface DescribeGraphDataResponse {
    */
   Period?: number
   /**
-   * 有效的监控数据, 每个有效监控数据的上报时间可以从时间数组中的对应位置上获取到.
+   * 有效的监控数据, 每个有效监控数据的上报时间可以从时间数组中的对应位置上获取到。
    */
   Values?: Array<number>
   /**
@@ -542,34 +542,34 @@ export interface DescribeCloudBaseBuildServiceResponse {
   /**
    * 上传url
    */
-  UploadUrl: string
+  UploadUrl?: string
   /**
-   * 上传heder
+   * 上传header
    */
-  UploadHeaders: Array<KVPair>
+  UploadHeaders?: Array<KVPair>
   /**
    * 包名
    */
-  PackageName: string
+  PackageName?: string
   /**
    * 包版本
    */
-  PackageVersion: string
+  PackageVersion?: string
   /**
    * 下载链接
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DownloadUrl: string
+  DownloadUrl?: string
   /**
    * 下载Httpheader
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DownloadHeaders: Array<KVPair>
+  DownloadHeaders?: Array<KVPair>
   /**
    * 下载链接是否过期
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  OutDate: boolean
+  OutDate?: boolean
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -992,7 +992,7 @@ export interface DescribeCurveDataResponse {
    */
   Period?: number
   /**
-   * 有效的监控数据, 每个有效监控数据的上报时间可以从时间数组中的对应位置上获取到.
+   * 有效的监控数据, 每个有效监控数据的上报时间可以从时间数组中的对应位置上获取到。
    */
   Values?: Array<number | bigint>
   /**
@@ -2176,14 +2176,14 @@ StorageWrite: 存储写请求次数
 StorageCdnOriginFlux: CDN回源流量, 单位字节 
 CDNFlux: CDN回源流量, 单位字节 
 FunctionInvocation: 云函数调用次数 
-FunctionGBs: 云函数资源使用量, 单位Mb*Ms 
+FunctionGBs: 云函数资源使用量, 单位MB*ms 
 FunctionFlux: 云函数流量, 单位千字节(KB) 
 FunctionError: 云函数调用错误次数 
 FunctionDuration: 云函数运行时间, 单位毫秒 
 DbRead: 数据库读请求数 
 DbWrite: 数据库写请求数 
-DbCostTime10ms: 数据库耗时在10ms~50ms请求数 
-DbCostTime50ms: 数据库耗时在50ms~100ms请求数 
+DbCostTime10ms: 数据库耗时在10ms-50ms请求数 
+DbCostTime50ms: 数据库耗时在50ms-100ms请求数 
 DbCostTime100ms: 数据库耗时在100ms以上请求数 
 TkeCpuRatio: 容器CPU占用率 
 TkeMemRatio: 容器内存占用率 
@@ -2947,11 +2947,11 @@ export interface DescribeCloudBaseProjectVersionListRequest {
    */
   PageNum?: number
   /**
-   * 起始时间 2021-03-27 12:00:00
+   * 起始时间
    */
   StartTime?: string
   /**
-   * 终止时间 2021-03-27 12:00:00
+   * 终止时间
    */
   EndTime?: string
 }
@@ -3564,12 +3564,12 @@ export interface DescribeCloudBaseProjectVersionListResponse {
    * 版本列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ProjectVersions: Array<CloudBaseProjectVersion>
+  ProjectVersions?: Array<CloudBaseProjectVersion>
   /**
    * 总个数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4525,12 +4525,12 @@ export interface DescribeCloudBaseProjectLatestVersionListResponse {
    * 项目列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ProjectList: Array<CloudBaseProjectVersion>
+  ProjectList?: Array<CloudBaseProjectVersion>
   /**
    * 总数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4686,8 +4686,8 @@ export interface DescribeCurveDataRequest {
 <li> FunctionDuration: 云函数运行时间, 单位毫秒 </li>
 <li> DbRead: 数据库读请求数 </li>
 <li> DbWrite: 数据库写请求数 </li>
-<li> DbCostTime10ms: 数据库耗时在10ms~50ms请求数 </li>
-<li> DbCostTime50ms: 数据库耗时在50ms~100ms请求数 </li>
+<li> DbCostTime10ms: 数据库耗时在10ms-50ms请求数 </li>
+<li> DbCostTime50ms: 数据库耗时在50ms-100ms请求数 </li>
 <li> DbCostTime100ms: 数据库耗时在100ms以上请求数 </li>
 <li> TkeCpuRatio: 容器CPU占用率 </li>
 <li> TkeMemRatio: 容器内存占用率 </li>
@@ -6302,27 +6302,27 @@ export interface CloudBaseProjectVersion {
   /**
    * 项目名
    */
-  Name: string
+  Name?: string
   /**
    * SAM json
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Sam: string
+  Sam?: string
   /**
    * 来源类型
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Source: CodeSource
+  Source?: CodeSource
   /**
    * 创建时间, unix时间戳
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CreateTime: number
+  CreateTime?: number
   /**
    * 更新时间 ,unix时间戳
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  UpdateTime: number
+  UpdateTime?: number
   /**
    * 项目状态, 枚举值: 
         "creatingEnv"-创建环境中
@@ -6334,12 +6334,12 @@ export interface CloudBaseProjectVersion {
 	 "success"-部署成功
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Status: string
+  Status?: string
   /**
    * 环境变量
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Parameters: Array<KVPair>
+  Parameters?: Array<KVPair>
   /**
    * 项目类型, 枚举值:
 "framework-oneclick" 控制台一键部署
@@ -6347,77 +6347,112 @@ export interface CloudBaseProjectVersion {
 "qci-extension-cicd" 内网coding ci cd
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Type: string
+  Type?: string
   /**
    * ci的id
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CIId: string
+  CIId?: string
   /**
    * cd的id
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CDId: string
+  CDId?: string
   /**
    * 环境id
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  EnvId: string
+  EnvId?: string
   /**
    * 版本号
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  VersionNum: number
+  VersionNum?: number
   /**
    * 错误原因
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  FailReason: string
+  FailReason?: string
   /**
    * rc.json内容
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RcJson: string
+  RcJson?: string
   /**
    * 插件配置内容
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  AddonConfig: string
+  AddonConfig?: string
   /**
    * 标签
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Tags: Array<string>
+  Tags?: Array<string>
   /**
    * 网络配置
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  NetworkConfig: string
+  NetworkConfig?: string
   /**
    * 扩展id
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ExtensionId: string
+  ExtensionId?: string
   /**
    * 错误类型
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  FailType: string
+  FailType?: string
   /**
    * 私有仓库地址
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RepoUrl: string
+  RepoUrl?: string
   /**
    * 是否私有仓库代码变更触发自动部署
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  AutoDeployOnCodeChange: boolean
+  AutoDeployOnCodeChange?: boolean
   /**
    * ci部署进度（%）
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  BuildPercent: number
+  BuildPercent?: number
+  /**
+   * Uin
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Uin?: string
+  /**
+   * BuildFinishTime
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BuildFinishTime?: string
+  /**
+   * DeployFinishTime
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DeployFinishTime?: string
+  /**
+   * BuildId
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BuildId?: string
+  /**
+   * SourceUrl
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SourceUrl?: string
+  /**
+   * FailReasonShort
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FailReasonShort?: string
+  /**
+   * FirstInitRepo
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FirstInitRepo?: string
 }
 
 /**
@@ -6764,6 +6799,7 @@ export interface RollUpdateCloudBaseRunServerVersionRequest {
   MaxNum?: string
   /**
    * 策略类型
+cpu/mem
    */
   PolicyType?: string
   /**

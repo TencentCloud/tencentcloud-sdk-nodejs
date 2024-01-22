@@ -48,14 +48,4 @@ it("facefusion.v20181201.FuseFace", async function () {
     }
 })
 
-it("facefusion.v20181201.FaceFusionLite", async function () {
-    try {
-       const data = await client.FaceFusionLite({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 })

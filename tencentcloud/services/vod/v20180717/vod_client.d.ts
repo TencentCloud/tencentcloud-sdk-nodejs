@@ -55,6 +55,7 @@ export declare class Client extends AbstractClient {
     EditMedia(req: EditMediaRequest, cb?: (error: string, rep: EditMediaResponse) => void): Promise<EditMediaResponse>;
     /**
      * 修改即时转码模板。
+- 注意：即时转码模板创建后，不推荐修改，如需修改参数，推荐使用新增模板。
      */
     ModifyJustInTimeTranscodeTemplate(req: ModifyJustInTimeTranscodeTemplateRequest, cb?: (error: string, rep: ModifyJustInTimeTranscodeTemplateResponse) => void): Promise<ModifyJustInTimeTranscodeTemplateResponse>;
     /**

@@ -188,9 +188,9 @@ it("rum.v20210622.DescribeRumGroupLog", async function () {
     }
 })
 
-it("rum.v20210622.DescribeLogList", async function () {
+it("rum.v20210622.StopProject", async function () {
     try {
-       const data = await client.DescribeLogList({})
+       const data = await client.StopProject({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -211,16 +211,6 @@ it("rum.v20210622.DescribeAppSingleCaseList", async function () {
 it("rum.v20210622.DescribePvList", async function () {
     try {
        const data = await client.DescribePvList({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("rum.v20210622.DescribeLogExports", async function () {
-    try {
-       const data = await client.DescribeLogExports({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -281,16 +271,6 @@ it("rum.v20210622.DescribeAppSingleCaseDetailList", async function () {
 it("rum.v20210622.DescribeAppMetricsData", async function () {
     try {
        const data = await client.DescribeAppMetricsData({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("rum.v20210622.CreateLogExport", async function () {
-    try {
-       const data = await client.CreateLogExport({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -388,16 +368,6 @@ it("rum.v20210622.ResumeProject", async function () {
     }
 })
 
-it("rum.v20210622.StopProject", async function () {
-    try {
-       const data = await client.StopProject({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("rum.v20210622.CreateStarProject", async function () {
     try {
        const data = await client.CreateStarProject({})
@@ -451,16 +421,6 @@ it("rum.v20210622.ModifyProject", async function () {
 it("rum.v20210622.DescribeReleaseFiles", async function () {
     try {
        const data = await client.DescribeReleaseFiles({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("rum.v20210622.DeleteLogExport", async function () {
-    try {
-       const data = await client.DeleteLogExport({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

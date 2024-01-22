@@ -342,43 +342,6 @@ export interface ModifyInstanceRequest {
     InstanceDesc?: string;
 }
 /**
- * DescribeLogList请求参数结构体
- */
-export interface DescribeLogListRequest {
-    /**
-     * 排序方式  desc  asc（必填）
-     */
-    Sort: string;
-    /**
-     * searchlog  histogram（必填）
-     */
-    ActionType: string;
-    /**
-     * 项目ID（必填）
-     */
-    ID: number;
-    /**
-     * 开始时间（必填）
-     */
-    StartTime?: string;
-    /**
-     * 单次查询返回的原始日志条数，最大值为100（必填）
-     */
-    Limit?: number;
-    /**
-     * 上下文，加载更多日志时使用，透传上次返回的 Context 值，获取后续的日志内容，总计最多可获取1万条原始日志。过期时间1小时
-     */
-    Context?: string;
-    /**
-     * 查询语句，参考控制台请求参数，语句长度最大为4096（必填）例："id:120001 AND type:\"log\""
-     */
-    Query?: string;
-    /**
-     * 结束时间（必填）
-     */
-    EndTime?: string;
-}
-/**
  * DescribeError返回参数结构体
  */
 export interface DescribeErrorResponse {
@@ -437,39 +400,6 @@ export interface DeleteWhitelistResponse {
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
-}
-/**
- * CreateLogExport请求参数结构体
- */
-export interface CreateLogExportRequest {
-    /**
-     * 项目ID
-     */
-    ID: number;
-    /**
-     * 日志导出起始时间
-     */
-    StartTime: string;
-    /**
-     * 日志导出结束时间
-     */
-    EndTime: string;
-    /**
-     * 日志导出检索语句
-     */
-    Query: string;
-    /**
-     * 日志导出数量, 最大值1000万
-     */
-    Count: number;
-    /**
-     * 日志导出时间排序。desc，asc，默认为desc
-     */
-    Order?: string;
-    /**
-     * 日志导出数据格式。json，csv，默认为json
-     */
-    Format?: string;
 }
 /**
  * DescribePvList返回参数结构体
@@ -837,19 +767,6 @@ export interface DescribeWhitelistsRequest {
      * 实例instance-ID
      */
     InstanceID: string;
-}
-/**
- * DescribeLogExports返回参数结构体
- */
-export interface DescribeLogExportsResponse {
-    /**
-     * 日志导出记录列表
-     */
-    LogExportSet: Array<LogExport>;
-    /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
 }
 /**
  * DescribeUvList请求参数结构体
@@ -1602,19 +1519,6 @@ export interface ProjectLimit {
     ProjectID?: number;
 }
 /**
- * DeleteLogExport请求参数结构体
- */
-export interface DeleteLogExportRequest {
-    /**
-     * 项目ID
-     */
-    ID: number;
-    /**
-     * 日志导出ID
-     */
-    ExportID: string;
-}
-/**
  * CreateProject请求参数结构体
  */
 export interface CreateProjectRequest {
@@ -1872,19 +1776,6 @@ export interface DescribeDataPerformanceProjectResponse {
     RequestId?: string;
 }
 /**
- * DescribeDataFetchUrlInfo返回参数结构体
- */
-export interface DescribeDataFetchUrlInfoResponse {
-    /**
-     * 返回值
-     */
-    Result: string;
-    /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
-/**
  * ResumeInstance返回参数结构体
  */
 export interface ResumeInstanceResponse {
@@ -2044,18 +1935,93 @@ export interface DescribeScoresResponse {
     RequestId?: string;
 }
 /**
- * DeleteLogExport返回参数结构体
+ * DescribeDataLogUrlStatistics请求参数结构体
  */
-export interface DeleteLogExportResponse {
+export interface DescribeDataLogUrlStatisticsRequest {
     /**
-     * 是否成功，成功则为success；失败则直接返回Error，不返回该参数
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 开始时间
      */
-    Msg: string;
+    StartTime: number;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     * analysis：异常分析，compare：异常列表对比，allcount：性能视图，condition：条件列表，nettype/version/platform/isp/region/device/browser/ext1/ext2/ext3/ret/status/from/url/env/：网络平台视图/Version视图/设备视图/ISP视图/地区视图/浏览器视图/ext1视图等等
      */
-    RequestId?: string;
+    Type: string;
+    /**
+     * 结束时间
+     */
+    EndTime: number;
+    /**
+     * 项目ID
+     */
+    ID: number;
+    /**
+     * 自定义2
+     */
+    ExtSecond?: string;
+    /**
+     * 浏览器引擎
+     */
+    Engine?: string;
+    /**
+     * 运营商
+     */
+    Isp?: string;
+    /**
+     * 来源页面
+     */
+    From?: string;
+    /**
+     * 日志等级
+     */
+    Level?: string;
+    /**
+     * 品牌
+     */
+    Brand?: string;
+    /**
+     * 地区
+     */
+    Area?: string;
+    /**
+     * 版本
+     */
+    VersionNum?: string;
+    /**
+     * 平台
+     */
+    Platform?: string;
+    /**
+     * 自定义3
+     */
+    ExtThird?: string;
+    /**
+     * 自定义1
+     */
+    ExtFirst?: string;
+    /**
+     * 网络类型
+     */
+    NetType?: string;
+    /**
+     * 机型
+     */
+    Device?: string;
+    /**
+     * 是否海外
+     */
+    IsAbroad?: string;
+    /**
+     * 操作系统
+     */
+    Os?: string;
+    /**
+     * 浏览器
+     */
+    Browser?: string;
+    /**
+     * 环境区分
+     */
+    Env?: string;
 }
 /**
  * DescribeReleaseFileSign返回参数结构体
@@ -2169,95 +2135,6 @@ export interface Filter {
     Name?: string;
 }
 /**
- * DescribeDataLogUrlStatistics请求参数结构体
- */
-export interface DescribeDataLogUrlStatisticsRequest {
-    /**
-     * 开始时间
-     */
-    StartTime: number;
-    /**
-     * analysis：异常分析，compare：异常列表对比，allcount：性能视图，condition：条件列表，nettype/version/platform/isp/region/device/browser/ext1/ext2/ext3/ret/status/from/url/env/：网络平台视图/Version视图/设备视图/ISP视图/地区视图/浏览器视图/ext1视图等等
-     */
-    Type: string;
-    /**
-     * 结束时间
-     */
-    EndTime: number;
-    /**
-     * 项目ID
-     */
-    ID: number;
-    /**
-     * 自定义2
-     */
-    ExtSecond?: string;
-    /**
-     * 浏览器引擎
-     */
-    Engine?: string;
-    /**
-     * 运营商
-     */
-    Isp?: string;
-    /**
-     * 来源页面
-     */
-    From?: string;
-    /**
-     * 日志等级
-     */
-    Level?: string;
-    /**
-     * 品牌
-     */
-    Brand?: string;
-    /**
-     * 地区
-     */
-    Area?: string;
-    /**
-     * 版本
-     */
-    VersionNum?: string;
-    /**
-     * 平台
-     */
-    Platform?: string;
-    /**
-     * 自定义3
-     */
-    ExtThird?: string;
-    /**
-     * 自定义1
-     */
-    ExtFirst?: string;
-    /**
-     * 网络类型
-     */
-    NetType?: string;
-    /**
-     * 机型
-     */
-    Device?: string;
-    /**
-     * 是否海外
-     */
-    IsAbroad?: string;
-    /**
-     * 操作系统
-     */
-    Os?: string;
-    /**
-     * 浏览器
-     */
-    Browser?: string;
-    /**
-     * 环境区分
-     */
-    Env?: string;
-}
-/**
  * DeleteStarProject返回参数结构体
  */
 export interface DeleteStarProjectResponse {
@@ -2292,59 +2169,6 @@ export interface DeleteInstanceRequest {
      * 需要删除的实例id
      */
     InstanceId: string;
-}
-/**
- * 日志导出记录
- */
-export interface LogExport {
-    /**
-     * 日志导出路径
-     */
-    CosPath: string;
-    /**
-     * 日志导出数量
-     */
-    Count: number;
-    /**
-     * 日志导出任务创建时间
-     */
-    CreateTime: string;
-    /**
-     * 日志导出任务ID
-     */
-    ExportID: string;
-    /**
-     * 日志导出文件名
-     */
-    FileName: string;
-    /**
-     * 日志文件大小
-     */
-    FileSize: number;
-    /**
-     * 日志导出格式
-     */
-    Format: string;
-    /**
-     * 日志导出时间排序
-     */
-    Order: string;
-    /**
-     * 日志导出查询语句
-     */
-    Query: string;
-    /**
-     * 日志导出起始时间
-     */
-    StartTime: string;
-    /**
-     * 日志导出结束时间
-     */
-    EndTime: string;
-    /**
-     * 日志下载状态。Queuing:导出正在排队中，Processing:导出正在进行中，Complete:导出完成，Failed:导出失败，Expired:日志导出已过期（三天有效期）。
-     */
-    Status: string;
 }
 /**
  * DescribeDataStaticResource返回参数结构体
@@ -2563,11 +2387,11 @@ export interface DescribeDataFetchUrlInfoRequest {
     Env?: string;
 }
 /**
- * DescribeLogList返回参数结构体
+ * DescribeDataFetchUrlInfo返回参数结构体
  */
-export interface DescribeLogListResponse {
+export interface DescribeDataFetchUrlInfoResponse {
     /**
-     * 返回字符串
+     * 返回值
      */
     Result: string;
     /**
@@ -2944,15 +2768,6 @@ export interface ModifyProjectResponse {
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
-}
-/**
- * DescribeLogExports请求参数结构体
- */
-export interface DescribeLogExportsRequest {
-    /**
-     * 项目ID
-     */
-    ID: number;
 }
 /**
  * DescribeDataReportCount返回参数结构体
@@ -3396,19 +3211,6 @@ export interface CreateReleaseFileResponse {
      * 调用结果
      */
     Msg: string;
-    /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
-/**
- * CreateLogExport返回参数结构体
- */
-export interface CreateLogExportResponse {
-    /**
-     * 日志导出ID
-     */
-    ExportID: string;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */

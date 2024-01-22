@@ -85,8 +85,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 上报服务注册自身的服务地址作为回调地址, 用于信息回传。
-   */
+     * 优mall产品启动下线流程
+
+上报服务注册自身的服务地址作为回调地址, 用于信息回传。
+     */
   async ReportServiceRegister(
     req: ReportServiceRegisterRequest,
     cb?: (error: string, rep: ReportServiceRegisterResponse) => void
@@ -95,8 +97,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 集团广场的多经点位配置更新
-   */
+     * 优mall产品启动下线流程
+
+集团广场的多经点位配置更新
+     */
   async ModifyMultiBizConfig(
     req: ModifyMultiBizConfigRequest,
     cb?: (error: string, rep: ModifyMultiBizConfigResponse) => void
@@ -105,7 +109,9 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 上报相机移动、遮挡等告警信息
+     * 优mall产品启动下线流程
+
+上报相机移动、遮挡等告警信息
 
 
      */
@@ -117,7 +123,9 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 获取摄像头配置信息
+     * 优mall产品启动下线流程
+
+获取摄像头配置信息
 mac不为空返回指定相机配置
 mac为空返回对应GroupCode和MallId全量配置
      */
@@ -129,8 +137,10 @@ mac为空返回对应GroupCode和MallId全量配置
   }
 
   /**
-   * 实时获取底图接口
-   */
+     * 优mall产品启动下线流程
+
+实时获取底图接口
+     */
   async DescribeImage(
     req: DescribeImageRequest,
     cb?: (error: string, rep: DescribeImageResponse) => void
@@ -139,8 +149,10 @@ mac为空返回对应GroupCode和MallId全量配置
   }
 
   /**
-   * 集团广场的多经点位消警
-   */
+     * 优mall产品启动下线流程
+
+集团广场的多经点位消警
+     */
   async DeleteMultiBizAlert(
     req: DeleteMultiBizAlertRequest,
     cb?: (error: string, rep: DeleteMultiBizAlertResponse) => void
@@ -149,8 +161,10 @@ mac为空返回对应GroupCode和MallId全量配置
   }
 
   /**
-   * 获取集团广场对应的摄像头列表
-   */
+     * 优mall产品启动下线流程
+
+获取集团广场对应的摄像头列表
+     */
   async DescribeCameras(
     req: DescribeCamerasRequest,
     cb?: (error: string, rep: DescribeCamerasResponse) => void
@@ -159,8 +173,10 @@ mac为空返回对应GroupCode和MallId全量配置
   }
 
   /**
-   * 获取集团广场的点位列表
-   */
+     * 优mall产品启动下线流程
+
+获取集团广场的点位列表
+     */
   async DescribeZones(
     req: DescribeZonesRequest,
     cb?: (error: string, rep: DescribeZonesResponse) => void
@@ -169,8 +185,10 @@ mac为空返回对应GroupCode和MallId全量配置
   }
 
   /**
-   * 删除集团广场对应的任务
-   */
+     * 优mall产品启动下线流程
+
+删除集团广场对应的任务
+     */
   async DeleteTask(
     req: DeleteTaskRequest,
     cb?: (error: string, rep: DeleteTaskResponse) => void
@@ -179,8 +197,10 @@ mac为空返回对应GroupCode和MallId全量配置
   }
 
   /**
-   * 上报所有进程监控信息
-   */
+     * 优mall产品启动下线流程
+
+上报所有进程监控信息
+     */
   async CreateProgramState(
     req: CreateProgramStateRequest,
     cb?: (error: string, rep: CreateProgramStateResponse) => void
@@ -189,8 +209,10 @@ mac为空返回对应GroupCode和MallId全量配置
   }
 
   /**
-   * 查询集团广场对应的任务列表
-   */
+     * 优mall产品启动下线流程
+
+查询集团广场对应的任务列表
+     */
   async DescribeTasks(
     req: DescribeTasksRequest,
     cb?: (error: string, rep: DescribeTasksResponse) => void
@@ -199,8 +221,10 @@ mac为空返回对应GroupCode和MallId全量配置
   }
 
   /**
-   * 集团广场的多经点位告警
-   */
+     * 优mall产品启动下线流程
+
+集团广场的多经点位告警
+     */
   async CreateMultiBizAlert(
     req: CreateMultiBizAlertRequest,
     cb?: (error: string, rep: CreateMultiBizAlertResponse) => void
@@ -209,8 +233,10 @@ mac为空返回对应GroupCode和MallId全量配置
   }
 
   /**
-   * 以图搜图
-   */
+     * 优mall产品启动下线流程
+
+以图搜图
+     */
   async SearchImage(
     req: SearchImageRequest,
     cb?: (error: string, rep: SearchImageResponse) => void
@@ -219,8 +245,10 @@ mac为空返回对应GroupCode和MallId全量配置
   }
 
   /**
-   * 上报所有服务器硬件监控信息
-   */
+     * 优mall产品启动下线流程
+
+上报所有服务器硬件监控信息
+     */
   async CreateServerState(
     req: CreateServerStateRequest,
     cb?: (error: string, rep: CreateServerStateResponse) => void
@@ -229,8 +257,10 @@ mac为空返回对应GroupCode和MallId全量配置
   }
 
   /**
-   * 获取多经点位底图
-   */
+     * 优mall产品启动下线流程
+
+获取多经点位底图
+     */
   async DescribeMultiBizBaseImage(
     req: DescribeMultiBizBaseImageRequest,
     cb?: (error: string, rep: DescribeMultiBizBaseImageResponse) => void
@@ -239,8 +269,10 @@ mac为空返回对应GroupCode和MallId全量配置
   }
 
   /**
-   * 上报当前场内所有相机的当前状态
-   */
+     * 优mall产品启动下线流程
+
+上报当前场内所有相机的当前状态
+     */
   async CreateCameraState(
     req: CreateCameraStateRequest,
     cb?: (error: string, rep: CreateCameraStateResponse) => void

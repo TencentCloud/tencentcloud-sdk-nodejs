@@ -693,7 +693,7 @@ export interface CreateRecTaskRequest {
   /**
    * 是否开启说话人分离
 0：不开启；
-1：开启（仅支持以下引擎：8k_zh/16k_zh/16k_ms/16k_en/16k_id，且ChannelNum=1时可用）；
+1：开启（仅支持以下引擎：8k_zh/16k_zh/16k_ms/16k_en/16k_id/16k_zh_large/16k_dialect_large，且ChannelNum=1时可用）；
 默认值为 0
 
 注意：
