@@ -230,7 +230,7 @@ class Client extends abstract_client_1.AbstractClient {
      * 分页查询企业角色列表，法人的角色是系统保留角色，不会返回，按照角色创建时间升序排列。
 
 
-<font color="red">**系统默认角色**</font>说明可参考下表
+<font color="red">系统默认角色</font>说明可参考下表
 
 | 角色名称| 建议授予对象 | 角色描述 |
 | --- | --- | --- |
@@ -238,6 +238,8 @@ class Client extends abstract_client_1.AbstractClient {
 | **业务管理员**|IT 系统负责人，可以授权给CTO等 | 企业合同模块、印章模块、模板模块等全量功能及数据权限。 |
 | **经办人**|企业法务负责人等 | 发起合同、签署合同（含填写、拒签）、撤销合同、持有印章等权限能力，可查看企业所有合同数据。 |
 | **业务员**|销售员、采购员 等| 发起合同、签署合同（含填写、拒签）、撤销合同、持有印章等权限能力，可查看自己相关所有合同数据。 |
+
+附件：<a href="https://dyn.ess.tencent.cn/guide/apivideo/roles.xlsx" target="_blank">点击下载角色对应的权限点的excel文档</a>
      */
     async ChannelDescribeRoles(req, cb) {
         return this.request("ChannelDescribeRoles", req, cb);
@@ -274,6 +276,22 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeExtendedServiceAuthDetail(req, cb) {
         return this.request("DescribeExtendedServiceAuthDetail", req, cb);
+    }
+    /**
+     * 在已发起的签署流程中，支持对签署截止日期进行延期操作，主要涉及以下两个维度：
+1. 合同（流程）维度：只需要传递签署流程ID。这将对签署流程和发起时未单独设定签署截止时间的签署人进行延期操作。
+2. 签署人维度：需要传递流程ID和签署人ID。此操作将对签署人进行延期操作，尤其对于有序的合同（流程），签署截止时间不能超过后一位合同（流程）签署人的流程截止时间。
+
+此接口有如下限制条件：
+1. 执行操作的员工需为发起方企业的超级管理员、法定代表人或签署流程的发起人。
+2. 在延长整个签署流程时，签署流程应至少还有一方未签署（即签署流程不能处于已全部签署完成、已拒签、已过期、已撤回、拒绝填写、已解除等合同状态）。
+3. 在延长整个签署流程时，新的签署截止日期应晚于合同已设定的签署截止日期和当前日期。
+4. 在延长签署方的截止时间时，签署方不能处于流程完结或已终止状态（即签署人不能处于已签署、已拒签、已过期、已撤回、拒绝填写、已解除等状态）。
+5. 在延长签署方的截止时间时，签署方的新签署截止日期应晚于当前日期和签署方已设定的截止日期。若为有序合同，还应早于或等于下一签署人的截止日期，且早于签署流程整体的截止日期。
+6. 不支持操作合同组合同。
+     */
+    async ModifyFlowDeadline(req, cb) {
+        return this.request("ModifyFlowDeadline", req, cb);
     }
     /**
      * 撤销签署流程接口
@@ -409,6 +427,9 @@ class Client extends abstract_client_1.AbstractClient {
     }
     /**
      * 通过此接口，删除员工绑定的角色，支持以电子签userId、客户系统userId两种方式调用。
+
+对应控制台的操作如下图
+![image](https://qcloudimg.tencent-cloud.cn/raw/5b41194d3cb3f2058ec0ba0fb5ebc6a6.png)
      */
     async ChannelDeleteRoleUsers(req, cb) {
         return this.request("ChannelDeleteRoleUsers", req, cb);
@@ -868,6 +889,9 @@ Web链接访问后，会根据子客企业(**Agent中ProxyOrganizationOpenId表�
     /**
      * 使用此接口，用来绑定企业实名员工的角色，
 支持以电子签userId、客户系统openId两种方式进行绑定。
+
+对应控制台的操作如下图
+![image](https://qcloudimg.tencent-cloud.cn/raw/5b41194d3cb3f2058ec0ba0fb5ebc6a6.png)
      */
     async ChannelCreateUserRoles(req, cb) {
         return this.request("ChannelCreateUserRoles", req, cb);

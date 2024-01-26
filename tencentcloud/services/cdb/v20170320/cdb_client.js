@@ -860,7 +860,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("InitDBInstances", req, cb);
     }
     /**
-     * 本接口(DescribeDBInstanceLogToCLS)用于查询实例慢日志、错误日志投递CLS的配置，通过appId、Region以及实例ID过滤出当前实例日志投递CLS的配置。
+     * 本接口(DescribeDBInstanceLogToCLS)用于查询实例慢日志、错误日志投递CLS的配置，通过AppId、Region以及实例ID过滤出当前实例日志投递CLS的配置。
      */
     async DescribeDBInstanceLogToCLS(req, cb) {
         return this.request("DescribeDBInstanceLogToCLS", req, cb);

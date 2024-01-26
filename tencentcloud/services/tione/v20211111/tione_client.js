@@ -34,7 +34,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeTrainingModelVersion", req, cb);
     }
     /**
-     * 删除跑批任务
+     * 删除批量预测任务
      */
     async DeleteBatchTask(req, cb) {
         return this.request("DeleteBatchTask", req, cb);
@@ -124,7 +124,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateTrainingTask", req, cb);
     }
     /**
-     * 停止跑批任务
+     * 停止批量预测任务
      */
     async StopBatchTask(req, cb) {
         return this.request("StopBatchTask", req, cb);
@@ -202,7 +202,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateDataset", req, cb);
     }
     /**
-     * 查询跑批实例列表
+     * 查询批量预测任务实例列表
      */
     async DescribeBatchTaskInstances(req, cb) {
         return this.request("DescribeBatchTaskInstances", req, cb);
@@ -256,7 +256,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("PushTrainingMetrics", req, cb);
     }
     /**
-     * 批量预测任务列表信息
+     * 查询批量预测任务列表信息
      */
     async DescribeBatchTasks(req, cb) {
         return this.request("DescribeBatchTasks", req, cb);
@@ -364,7 +364,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeNotebooks", req, cb);
     }
     /**
-     * 创建跑批任务
+     * 创建批量预测任务
      */
     async CreateBatchTask(req, cb) {
         return this.request("CreateBatchTask", req, cb);
@@ -394,7 +394,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateBatchModelAccTasks", req, cb);
     }
     /**
-     * 查询跑批任务
+     * 查询批量预测任务
      */
     async DescribeBatchTask(req, cb) {
         return this.request("DescribeBatchTask", req, cb);

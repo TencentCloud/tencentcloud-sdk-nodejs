@@ -234,6 +234,34 @@ export interface LoadBalancerPackageNew {
   Protocol: string
   /**
    * 地区
+"多伦多": "ca",
+    "广州": "gz",
+    "成都": "cd",
+    "福州": "fzec",
+    "深圳": "szx",
+    "印度": "in",
+    "济南": "jnec",
+    "重庆": "cq",
+    "天津": "tsn",
+    "欧洲东北": "ru",
+    "南京": "nj",
+    "美国硅谷": "usw",
+    "泰国": "th",
+    "广州Open": "gzopen",
+    "深圳金融": "szjr",
+    "法兰克福": "de",
+    "日本": "jp",
+    "弗吉尼亚": "use",
+    "北京": "bj",
+    "香港": "hk",
+    "杭州": "hzec",
+    "北京金融": "bjjr",
+    "上海金融": "shjr",
+    "台北": "tpe",
+    "首尔": "kr",
+    "上海": "sh",
+    "新加坡": "sg",
+    "清远": "qy"
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Region: string
@@ -284,22 +312,28 @@ export interface DeleteHostRequest {
  */
 export interface DescribeCertificateVerifyResultResponse {
   /**
-   * 状态码
+   * 状态码。
+0：证书正常
+310：证书异常
+311：证书过期
+312：证书即将过期
    */
-  Status: number
+  Status?: number
   /**
    * 错误详情
    */
-  Detail: Array<string>
+  Detail?: Array<string>
   /**
    * 过期时间
    */
-  NotAfter: string
+  NotAfter?: string
   /**
-   * 证书是否改变:1有改变，0没有改变
+   * 证书是否改变。
+0：未变化
+1：有变化
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Changed: number
+  Changed?: number
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -718,10 +752,6 @@ export interface ModifyAttackWhiteRuleRequest {
    */
   Domain: string
   /**
-   * 规则Id
-   */
-  SignatureId: string
-  /**
    * 规则状态
    */
   Status: number
@@ -729,10 +759,18 @@ export interface ModifyAttackWhiteRuleRequest {
    * 匹配规则项列表
    */
   Rules: Array<UserWhiteRuleItem>
+  /**
+   * 规则Id
+   */
+  SignatureId?: string
+  /**
+   * 编辑的加白的规则ID列表
+   */
+  SignatureIds?: Array<string>
 }
 
 /**
- * clb-waf防护域名
+ * 负载均衡型WAF域名信息
  */
 export interface HostRecord {
   /**
@@ -740,7 +778,7 @@ export interface HostRecord {
    */
   Domain: string
   /**
-   * 域名ID
+   * 域名唯一ID
    */
   DomainId: string
   /**
@@ -748,43 +786,64 @@ export interface HostRecord {
    */
   MainDomain: string
   /**
-   * 规则引擎防护模式，0 观察模式，1拦截模式
+   * 规则引擎防护模式。
+0：观察模式
+1：拦截模式
    */
   Mode: number
   /**
-   * waf和LD的绑定，0：没有绑定，1：绑定
+   * waf和负载均衡器的绑定关系。
+0：未绑定
+1：已绑定
    */
   Status: number
   /**
-   * 域名状态，0：正常，1：未检测到流量，2：即将过期，3：过期
+   * clbwaf域名监听器状态。
+0：操作成功
+4：正在绑定LB
+6：正在解绑LB 
+7：解绑LB失败 
+8：绑定LB失败 
+10：内部错误
    */
   State: number
   /**
-   * 规则引擎和AI引擎防护模式联合状态,10规则引擎观察&&AI引擎关闭模式 11规则引擎观察&&AI引擎观察模式 12规则引擎观察&&AI引擎拦截模式 20规则引擎拦截&&AI引擎关闭模式 21规则引擎拦截&&AI引擎观察模式 22规则引擎拦截&&AI引擎拦截模式
+   * 规则引擎和AI引擎防护模式联合状态。
+1:初始状态,规则引擎拦截&&AI引擎未操作开关状态
+10：规则引擎观察&&AI引擎关闭模式 
+11：规则引擎观察&&AI引擎观察模式 
+12：规则引擎观察&&AI引擎拦截模式 
+20：规则引擎拦截&&AI引擎关闭模式 
+21：规则引擎拦截&&AI引擎观察模式 
+22：规则引擎拦截&&AI引擎拦截模式
    */
   Engine: number
   /**
-   * 是否开启代理，0：不开启，1：开启
+   * waf前是否部署有七层代理服务。 0：没有部署代理服务 1：有部署代理服务，waf将使用XFF获取客户端IP 2：有部署代理服务，waf将使用remote_addr获取客户端IP 3：有部署代理服务，waf将使用ip_headers中的自定义header获取客户端IP
    */
   IsCdn: number
   /**
-   * 绑定的LB列表
+   * 绑定的负载均衡器信息列表
    */
   LoadBalancerSet: Array<LoadBalancer>
   /**
-   * 域名绑定的LB的地域，以,分割多个地域
+   * 域名绑定的LB的地域，以逗号分割多个地域
    */
   Region: string
   /**
-   * 产品分类，取值为：sparta-waf、clb-waf、cdn-waf
+   * 域名所属实例类型。负载均衡型WAF为"clb-waf"
    */
   Edition: string
   /**
-   * WAF的流量模式，1：清洗模式，0：镜像模式
+   * 负载均衡型WAF域名的流量模式。
+1：清洗模式
+0：镜像模式
    */
   FlowMode: number
   /**
-   * 是否开启访问日志，1：开启，0：关闭
+   * 是否开启访问日志。
+1：开启
+0：关闭
    */
   ClsStatus: number
   /**
@@ -793,12 +852,14 @@ export interface HostRecord {
    */
   Level?: number
   /**
-   * 域名需要下发到的cdc集群列表
+   * 域名需要下发到的cdc集群列表。仅CDC场景下填充
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CdcClusters?: Array<string>
   /**
-   * 应用型负载均衡类型: clb或者apisix，默认clb
+   * 应用型负载均衡类型，默认clb。 
+clb：七层负载均衡器类型 
+apisix：apisix网关型
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AlbType?: string
@@ -808,15 +869,25 @@ export interface HostRecord {
    */
   IpHeaders?: Array<string>
   /**
-   * 规则引擎类型， 1: menshen,   2:tiga
+   * 规则引擎类型。
+1: menshen
+2: tiga
 注意：此字段可能返回 null，表示取不到有效值。
    */
   EngineType?: number
   /**
-   * 云类型:public:公有云；private:私有云;hybrid:混合云
+   * 云类型。
+public:公有云
+private:私有云
+hybrid:混合云
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CloudType?: string
+  /**
+   * 域名备注信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Note?: string
 }
 
 /**
@@ -975,6 +1046,21 @@ export interface PeakPointsItem {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   WxAccess?: number
+  /**
+   * 小程序请求数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WxCount?: number
+  /**
+   * 小程序上行带宽峰值，单位B
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WxUp?: number
+  /**
+   * 小程序下行带宽峰值，单位B
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WxDown?: number
 }
 
 /**
@@ -1139,6 +1225,10 @@ export interface DeleteIpAccessControlRequest {
    * 是否为多域名黑白名单
    */
   SourceType?: string
+  /**
+   * IP黑白名单类型，40为IP白名单，42为IP黑名单
+   */
+  ActionType?: number
 }
 
 /**
@@ -1862,31 +1952,40 @@ export interface ModifySpartaProtectionRequest {
    */
   Domain: string
   /**
-   * 域名ID
+   * 必填项。域名唯一ID
    */
   DomainId?: string
   /**
-   * 证书类型，0表示没有证书，CertType=1表示自有证书,2 为托管证书
+   * 必填项。证书类型。
+0：仅配置HTTP监听端口，没有证书
+1：证书来源为自有证书
+2：证书来源为托管证书
    */
   CertType?: number
   /**
-   * CertType=1时，需要填次参数，表示证书内容
+   * CertType为1时，需要填充此参数，表示自有证书的证书链
    */
   Cert?: string
   /**
-   * CertType=1时，需要填次参数，表示证书的私钥
+   * CertType为1时，需要填充此参数，表示自有证书的私钥
    */
   PrivateKey?: string
   /**
-   * CertType=2时，需要填次参数，表示证书的ID
+   * CertType为2时，需要填充此参数，表示腾讯云SSL平台托管的证书id
    */
   SSLId?: string
   /**
-   * 表示是否开启了CDN代理
+   * 必填项。waf前是否部署有七层代理服务。
+0：没有部署代理服务
+1：有部署代理服务，waf将使用XFF获取客户端IP
+2：有部署代理服务，waf将使用remote_addr获取客户端IP
+3：有部署代理服务，waf将使用ip_headers中的自定义header获取客户端IP
    */
   IsCdn?: number
   /**
-   * HTTPS回源协议
+   * 服务配置有HTTPS端口时，HTTPS的回源协议。
+http：使用http协议回源，和HttpsUpstreamPort配合使用
+https：使用https协议回源
    */
   UpstreamScheme?: string
   /**
@@ -1894,63 +1993,78 @@ export interface ModifySpartaProtectionRequest {
    */
   HttpsUpstreamPort?: string
   /**
-   * 表示是否强制跳转到HTTPS，1表示开启，0表示不开启
+   * 必填项。是否开启HTTP强制跳转到HTTPS。
+0：不强制跳转
+1：开启强制跳转
    */
   HttpsRewrite?: number
   /**
-   * 回源类型，0表示通过IP回源,1 表示通过域名回源
+   * 必填项。回源类型。
+0：通过IP回源
+1：通过域名回源
    */
   UpstreamType?: number
   /**
-   * UpstreamType=1时，填次字段表示回源域名
+   * 域名回源时的回源域名。UpstreamType为1时，需要填充此字段
    */
   UpstreamDomain?: string
   /**
-   * UpstreamType=0时，填次字段表示回源ip
+   * IP回源时的回源IP列表。UpstreamType为0时，需要填充此字段
    */
   SrcList?: Array<string>
   /**
-   * 是否开启HTTP2，1表示开启，0表示不开启http2。开启HTTP2需要HTTPS支持
+   * 必填项。是否开启HTTP2，需要开启HTTPS协议支持。
+0：关闭
+1：开启
    */
   IsHttp2?: number
   /**
-   * 是否开启WebSocket， 1：开启WebSocket，0：不开启WebSocket
+   * 必填项。是否开启WebSocket支持。
+0：关闭
+1：开启
    */
   IsWebsocket?: number
   /**
-   * 负载均衡策略，0表示轮徇，1表示IP hash
+   * 必填项。回源负载均衡策略。
+0：轮询
+1：IP hash
+2：加权轮询
    */
   LoadBalance?: number
   /**
-   * 是否灰度
+   * 待废弃，可不填。是否开启灰度，0表示不开启灰度。
    */
   IsGray?: number
   /**
-   * WAF版本
+   * 域名所属实例类型
    */
   Edition?: string
   /**
-   * 端口信息
+   * 必填项。端口信息，可通过DescribeDomains接口获取具体参数信息。
    */
   Ports?: Array<SpartaProtectionPort>
   /**
-   * 长短连接标志，仅IP回源时有效
+   * 必填项。是否开启长连接。
+0： 短连接
+1： 长连接
    */
   IsKeepAlive?: string
   /**
-   * 实例id
+   * 必填项。域名所属实例id
    */
   InstanceID?: string
   /**
-   * 是否为Anycast ip类型：1 Anycast 0 普通ip
+   * 必填项，待废弃。目前填0即可。anycast IP类型开关： 0 普通IP 1 Anycast IP
    */
   Anycast?: number
   /**
-   * src的权重
+   * 回源IP列表各IP的权重，和SrcList一一对应。当且仅当UpstreamType为0，并且SrcList有多个IP，并且LoadBalance为2时需要填写，否则填 []
    */
   Weights?: Array<number | bigint>
   /**
-   * 是否开启源站的主动健康检测，1表示开启，0表示不开启
+   * 必填项，是否开启主动健康检测。
+0：不开启
+1：开启
    */
   ActiveCheck?: number
   /**
@@ -1962,23 +2076,31 @@ export interface ModifySpartaProtectionRequest {
    */
   Ciphers?: Array<number | bigint>
   /**
-   * 0:不支持选择：默认模板  1:通用型模板 2:安全型模板 3:自定义模板
+   * 必填项。加密套件模板。
+0：不支持选择，使用默认模板  
+1：通用型模板 
+2：安全型模板
+3：自定义模板
    */
   CipherTemplate?: number
   /**
-   * 300s
+   * WAF与源站的读超时时间，默认300s。
    */
   ProxyReadTimeout?: number
   /**
-   * 300s
+   * WAF与源站的写超时时间，默认300s。
    */
   ProxySendTimeout?: number
   /**
-   * 0:关闭SNI；1:开启SNI，SNI=源请求host；2:开启SNI，SNI=修改为源站host；3：开启SNI，自定义host，SNI=SniHost；
+   * WAF回源时的SNI类型。
+0：关闭SNI，不配置client_hello中的server_name
+1：开启SNI，client_hello中的server_name为防护域名
+2：开启SNI，SNI为域名回源时的源站域名
+3：开启SNI，SNI为自定义域名
    */
   SniType?: number
   /**
-   * SniType=3时，需要填此参数，表示自定义的host；
+   * SniType为3时，需要填此参数，表示自定义的SNI；
    */
   SniHost?: string
   /**
@@ -1986,9 +2108,19 @@ export interface ModifySpartaProtectionRequest {
    */
   IpHeaders?: Array<string>
   /**
-   * 0:关闭xff重置；1:开启xff重置，只有在IsCdn=0时可以开启
+   * 必填项。是否开启XFF重置。
+0：关闭
+1：开启
    */
   XFFReset?: number
+  /**
+   * 域名备注信息
+   */
+  Note?: string
+  /**
+   * 自定义回源Host。默认为空字符串，表示使用防护域名作为回源Host。
+   */
+  UpstreamHost?: string
 }
 
 /**
@@ -2141,7 +2273,7 @@ export interface DescribeUserDomainInfoResponse {
   /**
    * saas和clb域名信息
    */
-  UsersInfo: Array<UserDomainInfo>
+  UsersInfo?: Array<UserDomainInfo>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2481,11 +2613,42 @@ export interface DomainInfo {
    */
   Cname: string
   /**
-   * 实例类型,sparta-waf表示saaswaf实例域名,clb-waf表示clbwaf实例域名,cdc-clb-waf表示CDC环境下clbwaf实例域名,cdn-waf表示cdnwaf实例域名
+   * 域名所属实例类型。
+sparta-waf：SaaS型WAF实例
+clb-waf：负载均衡型WAF实例
+cdc-clb-waf：CDC环境下负载均衡型WAF实例
    */
   Edition: string
   /**
-   * 地域
+   * 地域。
+"多伦多": "ca"
+"广州": "gz"
+"成都": "cd"
+"福州": "fzec"
+"深圳": "szx"
+"印度": "in"
+"济南": "jnec"
+"重庆": "cq"
+"天津": "tsn"
+"欧洲东北": "ru"
+"南京": "nj"
+"美国硅谷": "usw"
+"泰国": "th"
+"广州Open": "gzopen"
+"深圳金融": "szjr"
+"法兰克福": "de"
+"日本": "jp"
+"弗吉尼亚": "use"
+"北京": "bj"
+"香港": "hk"
+"杭州": "hzec"
+"北京金融": "bjjr"
+"上海金融": "shjr"
+"台北": "tpe"
+"首尔": "kr"
+"上海": "sh"
+"新加坡": "sg"
+"清远": "qy"
    */
   Region: string
   /**
@@ -2493,31 +2656,46 @@ export interface DomainInfo {
    */
   InstanceName: string
   /**
-   * 日志包
+   * 访问日志开关状态。
+0：关闭
+1：开启
    */
   ClsStatus: number
   /**
-   * clbwaf使用模式,0镜像模式 1清洗模式
+   * 负载均衡型WAF使用模式。
+0：镜像模式 
+1：清洗模式
    */
   FlowMode: number
   /**
-   * waf开关,0关闭 1开启
+   * waf开关状态。
+0：关闭 
+1：开启
    */
   Status: number
   /**
-   * 规则引擎防护模式,0观察模式 1拦截模式
+   * 规则引擎防护模式。
+0：观察模式 
+1：拦截模式
    */
   Mode: number
   /**
-   * 规则引擎和AI引擎防护模式联合状态,10规则引擎观察&&AI引擎关闭模式 11规则引擎观察&&AI引擎观察模式 12规则引擎观察&&AI引擎拦截模式 20规则引擎拦截&&AI引擎关闭模式 21规则引擎拦截&&AI引擎观察模式 22规则引擎拦截&&AI引擎拦截模式
+   * 规则引擎和AI引擎防护模式联合状态。
+1:初始状态,规则引擎拦截&&AI引擎未操作开关状态
+10：规则引擎观察&&AI引擎关闭模式 
+11：规则引擎观察&&AI引擎观察模式 
+12：规则引擎观察&&AI引擎拦截模式 
+20：规则引擎拦截&&AI引擎关闭模式 
+21：规则引擎拦截&&AI引擎观察模式 
+22：规则引擎拦截&&AI引擎拦截模式
    */
   Engine: number
   /**
-   * CC列表
+   * 沙箱集群回源出口IP列表
    */
   CCList: Array<string>
   /**
-   * 回源ip
+   * 生产集群回源出口IP列表
    */
   RsList: Array<string>
   /**
@@ -2525,7 +2703,7 @@ export interface DomainInfo {
    */
   Ports: Array<PortInfo>
   /**
-   * 负载均衡器
+   * 负载均衡器相关配置
    */
   LoadBalancerSet: Array<LoadBalancerPackageNew>
   /**
@@ -2533,7 +2711,13 @@ export interface DomainInfo {
    */
   AppId: number
   /**
-   * clbwaf域名监听器状态,0操作成功 4正在绑定LB 6正在解绑LB 7解绑LB失败 8绑定LB失败 10内部错误
+   * 负载均衡型WAF域名LB监听器状态。
+0：操作成功 
+4：正在绑定LB 
+6：正在解绑LB 
+7：解绑LB失败 
+8：绑定LB失败 
+10：内部错误
    */
   State: number
   /**
@@ -2541,42 +2725,66 @@ export interface DomainInfo {
    */
   CreateTime?: string
   /**
-   * Ipv6开关状态,0关闭 1开启
+   * Ipv6开关状态。
+0：关闭 
+1：开启
    */
   Ipv6Status?: number
   /**
-   * BOT开关状态,0关闭 1开启
+   * BOT开关状态。
+0：关闭 
+1：关闭
+2：开启
+3：开启
    */
   BotStatus?: number
   /**
-   * 版本信息
+   * 实例版本信息。
+101：小微敏捷版 
+102：小微超轻版
+2：高级版
+3：企业版
+4：旗舰版
+6：独享版
    */
   Level?: number
   /**
-   * 是否开启投递CLS功能,0关闭 1开启
+   * 投递CLS状态。
+0：关闭 
+1：开启
    */
   PostCLSStatus?: number
   /**
-   * 是否开启投递CKafka功能,0关闭 1开启
+   * 投递CKafka状态。
+0：关闭 
+1：开启
    */
   PostCKafkaStatus?: number
   /**
-   * cdc实例域名接入的集群信息,非cdc实例忽略
+   * cdc实例域名接入的集群信息,非cdc实例忽略。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CdcClusters?: string
   /**
-   * api安全开关状态,0关闭 1开启
+   * api安全开关状态。
+0：关闭 
+1：开启
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ApiStatus?: number
   /**
-   * 应用型负载均衡类型,clb或者apisix，默认clb
+   * 应用型负载均衡类型，默认clb。
+clb：七层负载均衡器类型
+apisix：apisix网关型
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AlbType?: string
   /**
-   * 安全组状态,0不展示 1非腾讯云源站 2安全组绑定失败 3安全组发生变更
+   * 安全组状态。
+0：不展示
+1：非腾讯云源站
+2：安全组绑定失败
+3：安全组发生变更
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SgState?: number
@@ -2586,10 +2794,31 @@ export interface DomainInfo {
    */
   SgDetail?: string
   /**
-   * 域名类型:hybrid表示混合云域名，public表示公有云域名
+   * 域名云环境。hybrid：混合云域名
+public：公有云域名
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CloudType?: string
+  /**
+   * 域名备注信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Note?: string
+  /**
+   * SAASWAF源站IP列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SrcList?: Array<string>
+  /**
+   * SAASWAF源站域名列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UpstreamDomainList?: Array<string>
+  /**
+   * 安全组ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SgID?: string
 }
 
 /**
@@ -2807,7 +3036,7 @@ export interface ModifyAttackWhiteRuleResponse {
   /**
    * 规则总数
    */
-  RuleId: number
+  RuleId?: number
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2900,10 +3129,6 @@ export interface CreateHostResponse {
  */
 export interface ModifyBotStatusRequest {
   /**
-   * 域名
-   */
-  Domain: string
-  /**
    * 类别
    */
   Category: string
@@ -2911,6 +3136,10 @@ export interface ModifyBotStatusRequest {
    * 状态
    */
   Status: string
+  /**
+   * 域名
+   */
+  Domain?: string
   /**
    * 实例id
    */
@@ -2923,6 +3152,10 @@ export interface ModifyBotStatusRequest {
    * 传入Bot版本号，场景化版本为"4.1.0"
    */
   BotVersion?: string
+  /**
+   * 批量开启BOT开关的域名列表
+   */
+  DomainList?: Array<string>
 }
 
 /**
@@ -2938,7 +3171,9 @@ export interface ModifyHostFlowModeRequest {
    */
   DomainId: string
   /**
-   * WAF流量模式，1：清洗模式，0：镜像模式（默认）
+   * WAF流量模式。
+0：镜像模式（默认）
+1：清洗模式
    */
   FlowMode: number
   /**
@@ -3208,6 +3443,24 @@ export interface ModifyInstanceRenewFlagRequest {
    * 续费开关
    */
   RenewFlag: number
+}
+
+/**
+ * 用户规则白名单规则子项
+ */
+export interface UserWhiteRuleItem {
+  /**
+   * 匹配域
+   */
+  MatchField: string
+  /**
+   * 匹配方法
+   */
+  MatchMethod: string
+  /**
+   * 匹配内容
+   */
+  MatchContent: string
 }
 
 /**
@@ -3549,10 +3802,6 @@ export interface AddAttackWhiteRuleRequest {
    */
   Domain: string
   /**
-   * 规则Id
-   */
-  SignatureId: string
-  /**
    * 规则状态
    */
   Status: number
@@ -3564,6 +3813,14 @@ export interface AddAttackWhiteRuleRequest {
    * 规则序号
    */
   RuleId?: number
+  /**
+   * 规则Id
+   */
+  SignatureId?: string
+  /**
+   * 加白的规则ID列表
+   */
+  SignatureIds?: Array<string>
 }
 
 /**
@@ -4194,7 +4451,7 @@ export interface ModifyHostRequest {
    */
   Host: HostRecord
   /**
-   * 实例id
+   * 实例唯一ID
    */
   InstanceID?: string
 }
@@ -4337,19 +4594,19 @@ export interface DescribeCertificateVerifyResultRequest {
    */
   Domain: string
   /**
-   * 证书类型
+   * 证书类型。 0：仅配置HTTP监听端口，没有证书 1：证书来源为自有证书 2：证书来源为托管证书
    */
   CertType: number
   /**
-   * 证书公钥
+   * CertType为1时，需要填充此参数，表示自有证书的证书链
    */
   Certificate?: string
   /**
-   * 证书ID
+   * CertType为2时，需要填充此参数，表示腾讯云SSL平台托管的证书id
    */
   CertID?: string
   /**
-   * 私钥信息
+   * CertType为1时，需要填充此参数，表示自有证书的私钥
    */
   PrivateKey?: string
 }
@@ -4654,7 +4911,7 @@ export interface AccessLogItem {
  */
 export interface DeleteHostResponse {
   /**
-   * 操作的状态码，如果所有的资源操作成功则返回的是成功的状态码，如果有资源操作失败则需要解析Message的内容来查看哪个资源失败
+   * 域名删除结果。Code表示状态码，Message表示详细信息。
    */
   Success?: ResponseCode
   /**
@@ -4842,7 +5099,7 @@ export interface ModifyObjectRequest {
    */
   ObjectId: string
   /**
-   * 改动作类型:Status修改开关，InstanceId绑定实例
+   * 改动作类型:Status修改开关，InstanceId绑定实例, Proxy设置代理状态
    */
   OpType: string
   /**
@@ -4853,6 +5110,14 @@ export interface ModifyObjectRequest {
    * 新的实例ID，如果和已绑定的实例相同认为修改成功
    */
   InstanceId?: string
+  /**
+   * 是否开启代理，0:不开启,1:以XFF的第一个IP地址作为客户端IP,2:以remote_addr作为客户端IP,3:从指定的头部字段获取客户端IP，字段通过IpHeaders字段给出(OpType为Status或Proxy时，该值有效)
+   */
+  Proxy?: number
+  /**
+   * IsCdn=3时，需要填此参数，表示自定义header(OpType为Status或Proxy时，该值有效)
+   */
+  IpHeaders?: Array<string>
 }
 
 /**
@@ -5034,7 +5299,7 @@ export interface DeleteSpartaProtectionRequest {
    */
   Edition?: string
   /**
-   * 实例id
+   * 必填项。域名所属实例ID
    */
   InstanceID?: string
 }
@@ -5312,7 +5577,21 @@ export interface ModifyBotStatusResponse {
    * 正常情况为null
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Data: string
+  Data?: string
+  /**
+   * 未购买BOT的域名列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UnSupportedList?: Array<string>
+  /**
+   * 已购买但操作失败的域名列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FailDomainList?: Array<string>
+  /**
+   * 成功数目
+   */
+  Count?: number
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6519,6 +6798,24 @@ export interface DescribeDomainsRequest {
 }
 
 /**
+ * ModifyDomainPostAction请求参数结构体
+ */
+export interface ModifyDomainPostActionRequest {
+  /**
+   * www.tx.com
+   */
+  Domain: string
+  /**
+   * 0-关闭投递，1-开启投递
+   */
+  PostCLSAction: number
+  /**
+   * 0-关闭投递，1-开启投递
+   */
+  PostCKafkaAction: number
+}
+
+/**
  * Bot资源信息
  */
 export interface BotPkg {
@@ -6998,7 +7295,7 @@ export interface ModifyHostFlowModeResponse {
   /**
    * 成功的状态码
    */
-  Success: ResponseCode
+  Success?: ResponseCode
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -7305,7 +7602,7 @@ export interface AddAttackWhiteRuleResponse {
   /**
    * 规则总数
    */
-  RuleId: number
+  RuleId?: number
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -7353,7 +7650,7 @@ export interface DescribeWafThreatenIntelligenceResponse {
 }
 
 /**
- * saas域名详情
+ * SaaS型WAF域名详情
  */
 export interface DomainsPartInfo {
   /**
@@ -7361,19 +7658,19 @@ export interface DomainsPartInfo {
    */
   Domain?: string
   /**
-   * 域名id
+   * 域名唯一ID
    */
   DomainId?: string
   /**
-   * 实例id
+   * 域名所属实例唯一ID
    */
   InstanceId?: string
   /**
-   * 类型
+   * 域名所属实例类型
    */
   Edition?: string
   /**
-   * 实例名
+   * 域名所属实例名
    */
   InstanceName?: string
   /**
@@ -7385,87 +7682,122 @@ export interface DomainsPartInfo {
    */
   CreateTime?: string
   /**
-   * AI防御模式
+   * 规则引擎和AI引擎防护模式联合状态。
+1:初始状态,规则引擎拦截&&AI引擎未操作开关状态
+10：规则引擎观察&&AI引擎关闭模式 
+11：规则引擎观察&&AI引擎观察模式 
+12：规则引擎观察&&AI引擎拦截模式 
+20：规则引擎拦截&&AI引擎关闭模式 
+21：规则引擎拦截&&AI引擎观察模式 
+22：规则引擎拦截&&AI引擎拦截模式
    */
   Engine?: number
   /**
-   * 是否开启httpRewrite
+   * 是否开启HTTP强制跳转到HTTPS。
+0：不强制跳转
+1：开启强制跳转
    */
   HttpsRewrite?: number
   /**
-   * https回源端口
+   * HTTPS回源端口
    */
   HttpsUpstreamPort?: string
   /**
-   * 是否是cdn
+   * waf前是否部署有七层代理服务。
+0：没有部署代理服务
+1：有部署代理服务，waf将使用XFF获取客户端IP
+2：有部署代理服务，waf将使用remote_addr获取客户端IP
+3：有部署代理服务，waf将使用ip_headers中的自定义header获取客户端IP
    */
   IsCdn?: number
   /**
-   * 是否开启gray
+   * 是否开启灰度，已废弃。
    */
   IsGray?: number
   /**
-   * 是否是http2
+   * 是否开启HTTP2，需要开启HTTPS协议支持。
+0：关闭
+1：开启
    */
   IsHttp2?: number
   /**
-   * 是否开启websocket
+   * 是否开启WebSocket支持。
+0：关闭
+1：开启
    */
   IsWebsocket?: number
   /**
-   * 负载均衡
+   * 回源负载均衡策略。
+0：轮询
+1：IP hash
+2：加权轮询
    */
   LoadBalance?: number
   /**
-   * 防御模式
+   * 防护模式。
+0：观察模式
+1：拦截模式
    */
   Mode?: number
   /**
-   * 私钥
+   * 自有证书的私钥
    */
   PrivateKey?: string
   /**
-   * ssl id
+   * CertType为2时，需要填充此参数，表示腾讯云SSL平台托管的证书id
    */
   SSLId?: string
   /**
-   * 回源域名
+   * 域名回源时的回源域名。UpstreamType为1时，需要填充此字段
    */
   UpstreamDomain?: string
   /**
-   * 回源类型
+   * 回源类型。
+0：通过IP回源
+1：通过域名回源
    */
   UpstreamType?: number
   /**
-   * 回源ip
+   * IP回源时的回源IP列表。UpstreamType为0时，需要填充此字段
    */
   SrcList?: Array<string>
   /**
-   * 服务端口配置
+   * 域名端口配置
    */
   Ports?: Array<PortInfo>
   /**
-   * 证书类型
+   * 证书类型。
+0：仅配置HTTP监听端口，没有证书
+1：证书来源为自有证书
+2：证书来源为托管证书
    */
   CertType?: number
   /**
-   * 回源方式
+   * 服务配置有HTTPS端口时，HTTPS的回源协议。
+http：使用http协议回源，和HttpsUpstreamPort配合使用
+https：使用https协议回源
    */
   UpstreamScheme?: string
   /**
-   * 日志包
+   * 日志包是否开启。
+0：关闭
+1：开启
    */
   Cls?: number
   /**
-   * 一级cname
+   * 接入Cname，SaaS型域名使用此Cname进行接入
    */
   Cname?: string
   /**
-   * 是否长连接
+   * 是否开启长连接。
+0： 短连接
+1： 长连接
    */
   IsKeepAlive?: number
   /**
-   * 是否开启主动健康检测，1表示开启，0表示不开启
+   * 是否开启主动健康检测。
+0：不开启
+1：开启
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ActiveCheck?: number
@@ -7475,37 +7807,45 @@ export interface DomainsPartInfo {
    */
   TLSVersion?: number
   /**
-   * 加密套件信息
+   * 自定义的加密套件列表。CipherTemplate为3时需要填此字段，表示自定义的加密套件，值通过DescribeCiphersDetail接口获取。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Ciphers?: Array<number | bigint>
   /**
-   * 模板
+   * 加密套件模板。
+0：不支持选择，使用默认模板  
+1：通用型模板 
+2：安全型模板
+3：自定义模板
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CipherTemplate?: number
   /**
-   * 300s
+   * WAF与源站的读超时时间，默认300s。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ProxyReadTimeout?: number
   /**
-   * 300s
+   * WAF与源站的写超时时间，默认300s。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ProxySendTimeout?: number
   /**
-   * 0:关闭SNI；1:开启SNI，SNI=源请求host；2:开启SNI，SNI=修改为源站host；3：开启SNI，自定义host，SNI=SniHost；
+   * WAF回源时的SNI类型。
+0：关闭SNI，不配置client_hello中的server_name
+1：开启SNI，client_hello中的server_name为防护域名
+2：开启SNI，SNI为域名回源时的源站域名
+3：开启SNI，SNI为自定义域名
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SniType?: number
   /**
-   * SniType=3时，需要填此参数，表示自定义的host；
+   * SniType为3时，需要填此参数，表示自定义的SNI；
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SniHost?: string
   /**
-   * 无
+   * 回源IP权重
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Weights?: Array<string>
@@ -7515,10 +7855,27 @@ export interface DomainsPartInfo {
    */
   IpHeaders?: Array<string>
   /**
-   * 0:关闭xff重置；1:开启xff重置
+   * 是否开启XFF重置。
+0：关闭
+1：开启
 注意：此字段可能返回 null，表示取不到有效值。
    */
   XFFReset?: number
+  /**
+   * 域名备注信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Note?: string
+  /**
+   * 自定义回源Host。默认为空字符串，表示使用防护域名作为回源Host。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UpstreamHost?: string
+  /**
+   * 防护规则
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Level?: string
 }
 
 /**
@@ -7656,7 +8013,7 @@ https：使用https协议回源
    */
   GrayAreas?: Array<string>
   /**
-   * 是否开启HTTP强制跳转到HTTPS。
+   * 必填项，是否开启HTTP强制跳转到HTTPS。
 0：不强制跳转
 1：开启强制跳转
    */
@@ -7670,7 +8027,7 @@ https：使用https协议回源
    */
   SrcList?: Array<string>
   /**
-   * 是否开启HTTP2，需要开启HTTPS协议支持。
+   * 必填项，是否开启HTTP2，需要开启HTTPS协议支持。
 0：关闭
 1：开启
    */
@@ -7692,13 +8049,13 @@ cdn-waf：CDN上的Web防护能力
    */
   Edition?: string
   /**
-   * 是否开启长连接。
+   * 必填项，是否开启长连接。
 0： 短连接
 1： 长连接
    */
   IsKeepAlive?: string
   /**
-   * 域名所属实例id
+   * 必填项，域名所属实例id
    */
   InstanceID?: string
   /**
@@ -7710,7 +8067,7 @@ cdn-waf：CDN上的Web防护能力
    */
   Weights?: Array<number | bigint>
   /**
-   * 是否开启主动健康检测。
+   * 必填项，是否开启主动健康检测。
 0：不开启
 1：开启
    */
@@ -7720,7 +8077,7 @@ cdn-waf：CDN上的Web防护能力
    */
   TLSVersion?: number
   /**
-   * 加密套件模板。
+   * 必填项，加密套件模板。
 0：不支持选择，使用默认模板  
 1：通用型模板 
 2：安全型模板
@@ -7757,6 +8114,14 @@ cdn-waf：CDN上的Web防护能力
 1：开启
    */
   XFFReset?: number
+  /**
+   * 域名备注信息
+   */
+  Note?: string
+  /**
+   * 自定义回源Host。默认为空字符串，表示使用防护域名作为回源Host。
+   */
+  UpstreamHost?: string
 }
 
 /**
@@ -8239,6 +8604,12 @@ export interface DescribeWafAutoDenyRulesResponse {
    */
   DefenseStatus?: number
   /**
+   * 数据来源Source字段 custom-自定义(默认)、batch-domain-批量域名
+
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Source?: string
+  /**
    * 重保护网域名状态
    */
   HWState?: number
@@ -8504,21 +8875,13 @@ export interface DescribeRuleLimitRequest {
 }
 
 /**
- * 用户规则白名单规则子项
+ * ModifyDomainPostAction返回参数结构体
  */
-export interface UserWhiteRuleItem {
+export interface ModifyDomainPostActionResponse {
   /**
-   * 匹配域
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  MatchField: string
-  /**
-   * 匹配方法
-   */
-  MatchMethod: string
-  /**
-   * 匹配内容
-   */
-  MatchContent: string
+  RequestId?: string
 }
 
 /**
@@ -8556,7 +8919,7 @@ export interface DescribeTlsVersionResponse {
   /**
    * TLS key value
    */
-  TLS: Array<TLSVersion>
+  TLS?: Array<TLSVersion>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -8661,7 +9024,7 @@ export interface DescribeHostLimitRequest {
 }
 
 /**
- * clb域名详情
+ * 负载均衡型WAF域名详情
  */
 export interface ClbDomainsInfo {
   /**
@@ -8669,35 +9032,35 @@ export interface ClbDomainsInfo {
    */
   Domain?: string
   /**
-   * 域名id
+   * 域名唯一ID
    */
   DomainId?: string
   /**
-   * 实例id
+   * 域名所属实例ID
    */
   InstanceId?: string
   /**
-   * 实例名
+   * 域名所属实例名
    */
   InstanceName?: string
   /**
-   * waf类型
+   * 域名所属实例类型
    */
   Edition?: string
   /**
-   * 是否是cdn
+   * waf前是否部署有七层代理服务。 0：没有部署代理服务 1：有部署代理服务，waf将使用XFF获取客户端IP 2：有部署代理服务，waf将使用remote_addr获取客户端IP 3：有部署代理服务，waf将使用ip_headers中的自定义header获取客户端IP
    */
   IsCdn?: number
   /**
-   * 负载均衡算法
+   * 负载均衡类型为clb时，对应的负载均衡器信息
    */
   LoadBalancerSet?: Array<LoadBalancerPackageNew>
   /**
-   * 镜像模式
+   * 负载均衡型WAF的流量模式，1：清洗模式，0：镜像模式
    */
   FlowMode?: number
   /**
-   * 绑定clb状态
+   * 域名绑定负载均衡器状态
 注意：此字段可能返回 null，表示取不到有效值。
    */
   State?: number
@@ -8712,7 +9075,7 @@ export interface ClbDomainsInfo {
    */
   IpHeaders?: Array<string>
   /**
-   * cdc类型会增加集群信息
+   * cdc-clb-waf类型WAF的CDC集群信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CdcClusters?: string
@@ -8721,6 +9084,11 @@ export interface ClbDomainsInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CloudType?: string
+  /**
+   * 域名备注信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Note?: string
 }
 
 /**

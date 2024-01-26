@@ -38,15 +38,19 @@ export interface AudioEncodeParams {
     /**
      * 音频采样率，取值为[48000, 44100]，单位是Hz。
      */
-    SampleRate: number;
+    SampleRate?: number;
     /**
      * 音频声道数，取值范围[1,2]，1表示音频为单声道，2表示音频为双声道。
      */
-    Channel: number;
+    Channel?: number;
     /**
      * 音频码率，取值范围[8,500]，单位为kbps。
      */
-    BitRate: number;
+    BitRate?: number;
+    /**
+     * 音量，取值范围[0,300]。默认100，表示原始音量；0表示静音。
+     */
+    Volume?: number;
 }
 /**
  * DescribeTRTCMarketQualityMetricData返回参数结构体
@@ -384,23 +388,23 @@ export interface VideoEncodeParams {
     /**
      * 宽。取值范围[0,1920]，单位为像素值。
      */
-    Width: number;
+    Width?: number;
     /**
      * 高。取值范围[0,1080]，单位为像素值。
      */
-    Height: number;
+    Height?: number;
     /**
      * 帧率。取值范围[1,60]，表示帧率可选范围为1到60fps。
      */
-    Fps: number;
+    Fps?: number;
     /**
      * 码率。取值范围[1,10000]，单位为kbps。
      */
-    BitRate: number;
+    BitRate?: number;
     /**
      * gop。取值范围[1,2]，单位为秒。
      */
-    Gop: number;
+    Gop?: number;
 }
 /**
  * DescribeUserEvent返回参数结构体
@@ -1573,11 +1577,11 @@ export interface StartStreamIngestRequest {
      */
     RoomIdType: number;
     /**
-     * 拉流转推机器人的UserId，用于进房发起拉流转推任务。
+     * 输入在线媒体流机器人的UserId，用于进房发起拉流转推任务。
      */
     UserId: string;
     /**
-     * 拉流转推机器人UserId对应的校验签名，即UserId和UserSig相当于机器人进房的登录密码，具体计算方法请参考TRTC计算[UserSig](https://cloud.tencent.com/document/product/647/45910#UserSig)的方案。
+     * 输入在线媒体流机器人UserId对应的校验签名，即UserId和UserSig相当于机器人进房的登录密码，具体计算方法请参考TRTC计算[UserSig](https://cloud.tencent.com/document/product/647/45910#UserSig)的方案。
      */
     UserSig: string;
     /**
@@ -2386,7 +2390,7 @@ export interface CreateCloudRecordingResponse {
  */
 export interface StartStreamIngestResponse {
     /**
-     * 拉流转推的任务 ID。任务 ID 是对一次拉流转推生命周期过程的唯一标识，结束任务时会失去意义。任务 ID 需要业务保存下来，作为下次针对这个任务操作的参数。
+     * 输入在线媒体流的任务 ID。任务 ID 是对一次输入在线媒体流生命周期过程的唯一标识，结束任务时会失去意义。任务 ID 需要业务保存下来，作为下次针对这个任务操作的参数。
      */
     TaskId?: string;
     /**

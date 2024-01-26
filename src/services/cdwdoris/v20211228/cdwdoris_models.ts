@@ -248,6 +248,21 @@ export interface SlowQueryRecord {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IsQuery?: number
+  /**
+   * ResultBytes的MB格式
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResultBytesMB?: number
+  /**
+   * MemoryUsage的MB表示
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MemoryUsageMB?: number
+  /**
+   * DurationMs的秒表示
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DurationSec?: number
 }
 
 /**

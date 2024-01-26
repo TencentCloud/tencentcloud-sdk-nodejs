@@ -1198,6 +1198,16 @@ it("waf.v20180125.ModifyHostMode", async function () {
     }
 })
 
+it("waf.v20180125.ModifyDomainPostAction", async function () {
+    try {
+       const data = await client.ModifyDomainPostAction({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("waf.v20180125.DescribeUserClbWafRegions", async function () {
     try {
        const data = await client.DescribeUserClbWafRegions({})

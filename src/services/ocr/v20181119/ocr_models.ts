@@ -533,11 +533,16 @@ export interface MLIDPassportOCRRequest {
   /**
    * 图片的 Base64 值。要求图片经Base64编码后不超过 7M，分辨率建议500*800以上，支持PNG、JPG、JPEG、BMP格式。建议卡片部分占据图片2/3以上。
    */
-  ImageBase64: string
+  ImageBase64?: string
   /**
    * 是否返回图片，默认false
    */
   RetImage?: boolean
+  /**
+   * 图片的 Url 地址。要求图片经Base64编码后不超过 7M，分辨率建议500*800以上，支持PNG、JPG、JPEG、BMP格式。建议卡片部分占据图片2/3以上。图片下载时间不超过 3 秒。
+建议图片存储于腾讯云，可保障更高的下载速度和稳定性。
+   */
+  ImageUrl?: string
 }
 
 /**
@@ -2664,7 +2669,7 @@ export interface BizLicenseOCRRequest {
    */
   ImageUrl?: string
   /**
-   * 是否返回黑白复印件告警码，默认为false
+   * 是否返回告警码，默认为false
    */
   EnableCopyWarn?: boolean
 }
@@ -4918,24 +4923,129 @@ export interface MotorVehicleSaleInvoice {
 }
 
 /**
- * TableOCR请求参数结构体
+ * 全电发票（铁路电子客票）
  */
-export interface TableOCRRequest {
+export interface ElectronicTrainTicket {
   /**
-   * 图片的 Base64 值。
-支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经Base64编码后不超过 3M。图片下载时间不超过 3 秒。
-图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
+   * 购方名称
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  ImageBase64?: string
+  BuyerName?: string
   /**
-   * 图片的 Url 地址。
-支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经 Base64 编码后不超过 3M。图片下载时间不超过 3 秒。
-图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
-非腾讯云存储的 Url 速度和稳定性可能受一定影响。
+   * 购方识别号
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  ImageUrl?: string
+  BuyerTaxCode?: string
+  /**
+   * 发票号码
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Number?: string
+  /**
+   * 开票日期
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Date?: string
+  /**
+   * 价税合计（中文大写）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalCN?: string
+  /**
+   * 税额
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Tax?: string
+  /**
+   * 业务类型，0：退票，1:售票
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ServiceType?: string
+  /**
+   * 出发时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TimeGetOn?: string
+  /**
+   * 车次
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TrainNumber?: string
+  /**
+   * 发票代码
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Code?: string
+  /**
+   * 席别
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SeatType?: string
+  /**
+   * 乘车日期
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DateGetOn?: string
+  /**
+   * 车厢
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TrainCabin?: string
+  /**
+   * 出发站
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StationGetOn?: string
+  /**
+   * 电子客票号
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ElectronicNumber?: string
+  /**
+   * 姓名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PassengerName?: string
+  /**
+   * 证件号
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PassengerNo?: string
+  /**
+   * 金额
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Amount?: string
+  /**
+   * 到达站
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StationGetOff?: string
+  /**
+   * 税率
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaxRate?: string
+  /**
+   * 席位
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Seat?: string
+  /**
+   * 价税合计
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Total?: string
+  /**
+   * 校验码
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CheckCode?: string
+  /**
+   * 发票状态代码，0正常 1 未更新  2作废 3已红冲
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StateCode?: string
 }
 
 /**
@@ -5088,6 +5198,24 @@ export interface PassportRecognizeInfos {
    * 截止日期（护照信息页识别结果）
    */
   DateOfExpiration?: string
+  /**
+   * 持证人签名（护照信息页识别结果）
+
+仅中国大陆护照支持返回此字段，港澳台及境外护照不支持
+   */
+  Signature?: string
+  /**
+   * 签发地点（护照信息页识别结果）
+
+仅中国大陆护照支持返回此字段，港澳台及境外护照不支持
+   */
+  IssuePlace?: string
+  /**
+   * 签发机关（护照信息页识别结果）
+
+仅中国大陆护照支持返回此字段，港澳台及境外护照不支持
+   */
+  IssuingAuthority?: string
 }
 
 /**
@@ -6406,129 +6534,34 @@ export interface RideHailingDriverLicenseOCRRequest {
 }
 
 /**
- * 全电发票（铁路电子客票）
+ * 敏感数据加密
  */
-export interface ElectronicTrainTicket {
+export interface Encryption {
   /**
-   * 购方名称
+   * 有加密需求的用户，接入传入kms的CiphertextBlob，关于数据加密可查阅数据加密 文档。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  BuyerName?: string
+  CiphertextBlob: string
   /**
-   * 购方识别号
+   * 有加密需求的用户，传入CBC加密的初始向量（客户自定义字符串，长度16字符）。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  BuyerTaxCode?: string
+  Iv: string
   /**
-   * 发票号码
+   * 加密使用的算法（支持'AES-256-CBC'、'SM4-GCM'），不传默认为'AES-256-CBC'
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Number?: string
+  Algorithm?: string
   /**
-   * 开票日期
+   * SM4-GCM算法生成的消息摘要（校验消息完整性时使用）
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Date?: string
+  TagList?: Array<string>
   /**
-   * 价税合计（中文大写）
+   * 在使用加密服务时，指定要被加密的字段。本接口默认为EncryptedBody
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TotalCN?: string
-  /**
-   * 税额
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Tax?: string
-  /**
-   * 业务类型，0：退票，1:售票
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ServiceType?: string
-  /**
-   * 出发时间
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TimeGetOn?: string
-  /**
-   * 车次
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TrainNumber?: string
-  /**
-   * 发票代码
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Code?: string
-  /**
-   * 席别
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SeatType?: string
-  /**
-   * 乘车日期
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  DateGetOn?: string
-  /**
-   * 车厢
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TrainCabin?: string
-  /**
-   * 出发站
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  StationGetOn?: string
-  /**
-   * 电子客票号
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ElectronicNumber?: string
-  /**
-   * 姓名
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  PassengerName?: string
-  /**
-   * 证件号
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  PassengerNo?: string
-  /**
-   * 金额
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Amount?: string
-  /**
-   * 到达站
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  StationGetOff?: string
-  /**
-   * 税率
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TaxRate?: string
-  /**
-   * 席位
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Seat?: string
-  /**
-   * 价税合计
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Total?: string
-  /**
-   * 校验码
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CheckCode?: string
-  /**
-   * 发票状态代码，0正常 1 未更新  2作废 3已红冲
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  StateCode?: string
+  EncryptList?: Array<string>
 }
 
 /**
@@ -7099,6 +7132,79 @@ export interface BankSlipOCRResponse {
 }
 
 /**
+ * RecognizeEncryptedIDCardOCR返回参数结构体
+ */
+export interface RecognizeEncryptedIDCardOCRResponse {
+  /**
+   * 姓名（人像面）
+   */
+  Name?: string
+  /**
+   * 性别（人像面）
+   */
+  Sex?: string
+  /**
+   * 民族（人像面）
+   */
+  Nation?: string
+  /**
+   * 出生日期（人像面）
+   */
+  Birth?: string
+  /**
+   * 地址（人像面）
+   */
+  Address?: string
+  /**
+   * 身份证号（人像面）
+   */
+  IdNum?: string
+  /**
+   * 发证机关（国徽面）
+   */
+  Authority?: string
+  /**
+   * 证件有效期（国徽面）
+   */
+  ValidDate?: string
+  /**
+   * 扩展信息，不请求则不返回，具体输入参考示例3和示例4。
+IdCard，裁剪后身份证照片的base64编码，请求 Config.CropIdCard 时返回；
+Portrait，身份证头像照片的base64编码，请求 Config.CropPortrait 时返回；
+
+Quality，图片质量分数，请求 Config.Quality 时返回（取值范围：0 ~ 100，分数越低越模糊，建议阈值≥50）;
+BorderCodeValue，身份证边框不完整告警阈值分数，请求 Config.BorderCheckWarn时返回（取值范围：0 ~ 100，分数越低边框遮挡可能性越低，建议阈值≤50）;
+
+WarnInfos，告警信息，Code 告警码列表和释义：
+-9100	身份证有效日期不合法告警，
+-9101	身份证边框不完整告警，
+-9102	身份证复印件告警，
+-9103	身份证翻拍告警，
+-9105	身份证框内遮挡告警，
+-9104	临时身份证告警，
+-9106	身份证疑似存在PS痕迹告警，
+-9107       身份证反光告警。
+   */
+  AdvancedInfo?: string
+  /**
+   * 反光点覆盖区域详情结果，具体内容请点击左侧链接
+   */
+  ReflectDetailInfos?: Array<ReflectDetailInfo>
+  /**
+   * 加密后的数据
+   */
+  EncryptedBody?: string
+  /**
+   * 敏感数据加密信息
+   */
+  Encryption?: Encryption
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 通行费发票信息
  */
 export interface PassInvoiceInfo {
@@ -7371,6 +7477,66 @@ export interface LineInfo {
    * 每行的一个元素
    */
   Lines?: Array<ItemInfo>
+}
+
+/**
+ * RecognizeEncryptedIDCardOCR请求参数结构体
+ */
+export interface RecognizeEncryptedIDCardOCRRequest {
+  /**
+   * 请求体被加密后的密文，本接口只支持加密传输
+   */
+  EncryptedBody: string
+  /**
+   * 敏感数据加密信息。对传入信息有加密需求的用户可使用此参数，详情请点击左侧链接。
+   */
+  Encryption: Encryption
+  /**
+   * 图片的 Base64 值。要求图片经Base64编码后不超过 7M，分辨率建议500*800以上，支持PNG、JPG、JPEG、BMP格式。建议卡片部分占据图片2/3以上。
+图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
+   */
+  ImageBase64?: string
+  /**
+   * 图片的 Url 地址。要求图片经Base64编码后不超过 7M，分辨率建议500*800以上，支持PNG、JPG、JPEG、BMP格式。建议卡片部分占据图片2/3以上。
+建议图片存储于腾讯云，可保障更高的下载速度和稳定性。
+   */
+  ImageUrl?: string
+  /**
+   * FRONT：身份证有照片的一面（人像面），
+BACK：身份证有国徽的一面（国徽面），
+该参数如果不填，将为您自动判断身份证正反面。
+   */
+  CardSide?: string
+  /**
+   * 以下可选字段均为bool 类型，默认false：
+CropIdCard，身份证照片裁剪（去掉证件外多余的边缘、自动矫正拍摄角度）
+CropPortrait，人像照片裁剪（自动抠取身份证头像区域）
+CopyWarn，复印件告警
+BorderCheckWarn，边框和框内遮挡告警
+ReshootWarn，翻拍告警
+DetectPsWarn，疑似存在PS痕迹告警
+TempIdWarn，临时身份证告警
+InvalidDateWarn，身份证有效日期不合法告警
+Quality，图片质量分数（评价图片的模糊程度）
+MultiCardDetect，是否开启正反面同框识别（仅支持二代身份证正反页同框识别或临时身份证正反页同框识别）
+ReflectWarn，是否开启反光检测
+
+SDK 设置方式参考：
+Config = Json.stringify({"CropIdCard":true,"CropPortrait":true})
+API 3.0 Explorer 设置方式参考：
+Config = {"CropIdCard":true,"CropPortrait":true}
+   */
+  Config?: string
+  /**
+   * 默认值为true，打开识别结果纠正开关。开关开启后，身份证号、出生日期、性别，三个字段会进行矫正补齐，统一结果输出；若关闭此开关，以上三个字段不会进行矫正补齐，保持原始识别结果输出，若原图出现篡改情况，这三个字段的识别结果可能会不统一。
+   */
+  EnableRecognitionRectify?: boolean
+  /**
+   * 默认值为false。
+
+此开关需要在反光检测开关开启下才会生效（即此开关生效的前提是config入参里的"ReflectWarn":true），若EnableReflectDetail设置为true，则会返回反光点覆盖区域详情。反光点覆盖区域详情分为四部分：人像照片位置、国徽位置、识别字段位置、其他位置。一个反光点允许覆盖多个区域，且一张图片可能存在多个反光点。
+   */
+  EnableReflectDetail?: boolean
 }
 
 /**
@@ -9554,7 +9720,7 @@ export interface BizLicenseOCRResponse {
   /**
    * 告警码说明：
 WARN_COPY_CARD 黑白复印件告警
-WARN_RESHOOT_SCREENED_CARD 翻拍件告警
+WARN_RESHOOT_CARD翻拍件告警
    */
   RecognizeWarnMsg?: Array<string>
   /**
@@ -9575,6 +9741,27 @@ WARN_RESHOOT_SCREENED_CARD 翻拍件告警
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * TableOCR请求参数结构体
+ */
+export interface TableOCRRequest {
+  /**
+   * 图片的 Base64 值。
+支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
+支持的图片大小：所下载图片经Base64编码后不超过 3M。图片下载时间不超过 3 秒。
+图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
+   */
+  ImageBase64?: string
+  /**
+   * 图片的 Url 地址。
+支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
+支持的图片大小：所下载图片经 Base64 编码后不超过 3M。图片下载时间不超过 3 秒。
+图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
+非腾讯云存储的 Url 速度和稳定性可能受一定影响。
+   */
+  ImageUrl?: string
 }
 
 /**

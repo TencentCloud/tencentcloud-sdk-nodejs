@@ -142,7 +142,7 @@ ver：可以忽略。
      */
     DescribeCallDetailInfo(req: DescribeCallDetailInfoRequest, cb?: (error: string, rep: DescribeCallDetailInfoResponse) => void): Promise<DescribeCallDetailInfoResponse>;
     /**
-     * 您可以查询转推任务的状态。
+     * 您可以查询输入在线媒体流任务的状态。
      */
     DescribeStreamIngest(req: DescribeStreamIngestRequest, cb?: (error: string, rep: DescribeStreamIngestResponse) => void): Promise<DescribeStreamIngestResponse>;
     /**
@@ -157,7 +157,7 @@ peakCurrentUsers：峰值同时在线人数。
      */
     DescribeTRTCMarketScaleMetricData(req: DescribeTRTCMarketScaleMetricDataRequest, cb?: (error: string, rep: DescribeTRTCMarketScaleMetricDataResponse) => void): Promise<DescribeTRTCMarketScaleMetricDataResponse>;
     /**
-     * 停止一个拉流转推任务。
+     * 停止一个输入在线媒体流任务。
      */
     StopStreamIngest(req: StopStreamIngestRequest, cb?: (error: string, rep: StopStreamIngestResponse) => void): Promise<StopStreamIngestResponse>;
     /**

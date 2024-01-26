@@ -84,7 +84,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyCustomRule", req, cb);
     }
     /**
-     * clb-waf 设置防护域名的流量模式
+     * 设置负载均衡型WAF防护域名的流量模式，切换镜像模式和清洗模式
      */
     async ModifyHostFlowMode(req, cb) {
         return this.request("ModifyHostFlowMode", req, cb);
@@ -138,7 +138,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyAntiFakeUrl", req, cb);
     }
     /**
-     * 修改域名配置
+     * 编辑SaaS型WAF域名配置
      */
     async ModifySpartaProtection(req, cb) {
         return this.request("ModifySpartaProtection", req, cb);
@@ -295,8 +295,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeVipInfo", req, cb);
     }
     /**
-     * 删除CLB-WAF防护域名
-支持批量操作
+     * 删除负载均衡型域名，支持批量操作。
      */
     async DeleteHost(req, cb) {
         return this.request("DeleteHost", req, cb);
@@ -431,7 +430,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeTopAttackDomain", req, cb);
     }
     /**
-     * clb-waf编辑防护域名配置
+     * 编辑负载均衡型WAF防护域名配置
      */
     async ModifyHost(req, cb) {
         return this.request("ModifyHost", req, cb);
@@ -487,7 +486,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteDownloadRecord", req, cb);
     }
     /**
-     * 查询用户TLS版本
+     * 查询SaaS型WAF支持的TLS版本
      */
     async DescribeTlsVersion(req, cb) {
         return this.request("DescribeTlsVersion", req, cb);
@@ -555,7 +554,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDomainCountInfo", req, cb);
     }
     /**
-     * Saas型WAF删除防护域名
+     * SaaS型WAF删除防护域名
      */
     async DeleteSpartaProtection(req, cb) {
         return this.request("DeleteSpartaProtection", req, cb);
@@ -745,6 +744,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ModifyHostMode(req, cb) {
         return this.request("ModifyHostMode", req, cb);
+    }
+    /**
+     * 修改域名投递状态
+     */
+    async ModifyDomainPostAction(req, cb) {
+        return this.request("ModifyDomainPostAction", req, cb);
     }
     /**
      * 在负载均衡型WAF的添加、编辑域名配置的时候，需要展示负载均衡型WAF（clb-waf)支持的地域列表，通过DescribeUserClbWafRegions既可以获得当前对客户已经开放的地域列表

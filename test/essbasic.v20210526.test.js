@@ -158,6 +158,16 @@ it("essbasic.v20210526.DescribeExtendedServiceAuthDetail", async function () {
     }
 })
 
+it("essbasic.v20210526.ModifyFlowDeadline", async function () {
+    try {
+       const data = await client.ModifyFlowDeadline({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("essbasic.v20210526.ChannelCancelFlow", async function () {
     try {
        const data = await client.ChannelCancelFlow({})

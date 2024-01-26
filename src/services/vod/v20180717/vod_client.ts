@@ -588,6 +588,7 @@ import {
   AiRecognitionTaskOcrWordsSegmentItem,
   MediaProcessTaskResult,
   DeleteWordSamplesResponse,
+  MediaCastEvent,
   DeleteProcedureTemplateRequest,
   WatermarkInput,
   AiSampleWordInfo,

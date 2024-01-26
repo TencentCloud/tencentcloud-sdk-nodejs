@@ -444,7 +444,7 @@ lo（老挝语）：zh（简体中文）、zh-HK（繁体中文）、 zh-TW（�
    */
   BasicDocumentType?: string
   /**
-   * 回调url，文件大于10MB，建议采用回调方式；回调时，所有内容会放入 Body 中。
+   * 回调url，文件大于10MB，建议采用回调方式；回调时，所有内容会放入 Body 中，具体请参见[文件翻译回调说明](https://cloud.tencent.com/document/product/551/91138)。
    */
   CallbackUrl?: string
   /**

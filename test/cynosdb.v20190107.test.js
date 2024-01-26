@@ -728,6 +728,16 @@ it("cynosdb.v20190107.DescribeInstanceDetail", async function () {
     }
 })
 
+it("cynosdb.v20190107.DescribeAuditInstanceList", async function () {
+    try {
+       const data = await client.DescribeAuditInstanceList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cynosdb.v20190107.DescribeRollbackTimeRange", async function () {
     try {
        const data = await client.DescribeRollbackTimeRange({})

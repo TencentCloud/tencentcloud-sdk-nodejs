@@ -1768,8 +1768,8 @@ export interface ModifyDBInstanceSpecRequest {
     Storage: number;
     /**
      * 是否自动使用代金券：
-  <li>0：否
-  <li>1：是
+  <li>0：否</li>
+  <li>1：是</li>
   默认值：0
      */
     AutoVoucher?: number;
@@ -1783,9 +1783,9 @@ export interface ModifyDBInstanceSpecRequest {
     ActivityId?: number;
     /**
      * 指定实例配置完成变更后的切换时间。
-  <li>0：立即切换
-  <li>1：指定时间切换
-  <li>2：维护时间窗口内切换
+  <li>0：立即切换 </li>
+  <li>1：指定时间切换</li>
+  <li>2：维护时间窗口内</li>切换
   默认值：0
      */
     SwitchTag?: number;
@@ -4486,15 +4486,15 @@ export interface InquiryPriceUpgradeDBInstanceResponse {
     /**
      * 刊例价费用
      */
-    OriginalPrice: number;
+    OriginalPrice?: number;
     /**
      * 折后实际付款金额
      */
-    Price: number;
+    Price?: number;
     /**
      * 币种。例如，CNY：人民币。
      */
-    Currency: string;
+    Currency?: string;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */

@@ -578,7 +578,7 @@ export declare class Client extends AbstractClient {
      */
     InitDBInstances(req: InitDBInstancesRequest, cb?: (error: string, rep: InitDBInstancesResponse) => void): Promise<InitDBInstancesResponse>;
     /**
-     * 本接口(DescribeDBInstanceLogToCLS)用于查询实例慢日志、错误日志投递CLS的配置，通过appId、Region以及实例ID过滤出当前实例日志投递CLS的配置。
+     * 本接口(DescribeDBInstanceLogToCLS)用于查询实例慢日志、错误日志投递CLS的配置，通过AppId、Region以及实例ID过滤出当前实例日志投递CLS的配置。
      */
     DescribeDBInstanceLogToCLS(req: DescribeDBInstanceLogToCLSRequest, cb?: (error: string, rep: DescribeDBInstanceLogToCLSResponse) => void): Promise<DescribeDBInstanceLogToCLSResponse>;
     /**

@@ -879,7 +879,7 @@ export interface CreateCCCSkillGroupResponse {
   /**
    * 技能组ID
    */
-  SkillGroupId: number
+  SkillGroupId?: number
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1287,7 +1287,7 @@ export interface ResetExtensionPasswordResponse {
   /**
    * 重置后密码
    */
-  Password: string
+  Password?: string
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2239,15 +2239,15 @@ export interface DescribeCCCBuyInfoListResponse {
   /**
    * 应用总数
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 应用购买信息列表
    */
-  SdkAppIdBuyList: Array<SdkAppIdBuyInfo>
+  SdkAppIdBuyList?: Array<SdkAppIdBuyInfo>
   /**
    * 套餐包购买信息列表
    */
-  PackageBuyList: Array<PackageBuyInfo>
+  PackageBuyList?: Array<PackageBuyInfo>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2954,23 +2954,23 @@ export interface DescribeExtensionResponse {
   /**
    * 分机号
    */
-  ExtensionId: string
+  ExtensionId?: string
   /**
    * 域名
    */
-  ExtensionDomain: string
+  ExtensionDomain?: string
   /**
    * 注册密码
    */
-  Password: string
+  Password?: string
   /**
    * 代理服务器地址
    */
-  OutboundProxy: string
+  OutboundProxy?: string
   /**
    * 传输协议
    */
-  Transport: string
+  Transport?: string
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

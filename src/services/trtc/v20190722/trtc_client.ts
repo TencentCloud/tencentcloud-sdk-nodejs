@@ -346,7 +346,7 @@ ver：可以忽略。
   }
 
   /**
-   * 您可以查询转推任务的状态。
+   * 您可以查询输入在线媒体流任务的状态。
    */
   async DescribeStreamIngest(
     req: DescribeStreamIngestRequest,
@@ -373,7 +373,7 @@ peakCurrentUsers：峰值同时在线人数。
   }
 
   /**
-   * 停止一个拉流转推任务。
+   * 停止一个输入在线媒体流任务。
    */
   async StopStreamIngest(
     req: StopStreamIngestRequest,

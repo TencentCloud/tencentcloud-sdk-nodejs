@@ -216,6 +216,7 @@ import {
   ModifyNatFwSwitchRequest,
   ModifyFwGroupSwitchResponse,
   RemoveNatAcRuleResponse,
+  CustomWhiteRule,
   DescribeFwEdgeIpsResponse,
   DescribeIPStatusListResponse,
   CreateDatabaseWhiteListRulesRequest,

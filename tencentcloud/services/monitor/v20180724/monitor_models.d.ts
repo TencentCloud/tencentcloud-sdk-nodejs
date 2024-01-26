@@ -1344,6 +1344,11 @@ export interface DescribePrometheusInstanceInitStatusResponse {
      */
     EksClusterId?: string;
     /**
+     * eks集群内pod的安全组
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SecurityGroupId?: string;
+    /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
@@ -9546,47 +9551,52 @@ export interface PrometheusAgentOverview {
     /**
      * 集群类型
      */
-    ClusterType: string;
+    ClusterType?: string;
     /**
      * 集群id
      */
-    ClusterId: string;
+    ClusterId?: string;
     /**
      * agent状态
   normal = 正常
   abnormal = 异常
      */
-    Status: string;
+    Status?: string;
     /**
      * 集群名称
      */
-    ClusterName: string;
+    ClusterName?: string;
     /**
      * 额外labels
   本集群的所有指标都会带上这几个label
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ExternalLabels: Array<Label>;
+    ExternalLabels?: Array<Label>;
     /**
      * 集群所在地域
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Region: string;
+    Region?: string;
     /**
      * 集群所在VPC ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    VpcId: string;
+    VpcId?: string;
     /**
      * 记录关联等操作的失败信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    FailedReason: string;
+    FailedReason?: string;
     /**
      * agent名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Name?: string;
+    /**
+     * 是否已开启公网访问，true 开启，false 未开启
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    EnableExternal?: boolean;
 }
 /**
  * 查询过滤参数
@@ -10091,7 +10101,8 @@ export interface DescribeStatisticDataRequest {
      */
     Namespace: string;
     /**
-     * 指标名列表
+     * 指标名列表，相关指标信息可参考对应 云产品指标文档
+  https://cloud.tencent.com/document/product/248/62458
      */
     MetricNames: Array<string>;
     /**

@@ -3687,6 +3687,38 @@ export interface CreateUserAutoSignSealUrlRequest {
 }
 
 /**
+ * ModifyFlowDeadline请求参数结构体
+ */
+export interface ModifyFlowDeadlineRequest {
+  /**
+   * 执行本接口操作的员工信息。
+注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。`
+   */
+  Operator: UserInfo
+  /**
+   * 合同流程ID，为32位字符串。
+<ul><li>建议开发者妥善保存此流程ID，以便于顺利进行后续操作。</li>
+<li>可登录腾讯电子签控制台，在 "合同"->"合同中心" 中查看某个合同的FlowId(在页面中展示为合同ID)。</li></ul>
+   */
+  FlowId: string
+  /**
+   * 签署流程或签署人新的签署截止时间，格式为Unix标准时间戳（秒）
+   */
+  Deadline: number
+  /**
+   * 代理相关应用信息，如集团主企业代子企业操作的场景中ProxyOrganizationId必填
+   */
+  Agent?: Agent
+  /**
+   * 签署方角色编号，为32位字符串
+<ul><li>若指定了此参数，则只调整签署流程中此签署人的签署截止时间，否则调整合同整体的签署截止时间（合同截止时间+发起时未设置签署人截止时间的参与人的签署截止时间）</li>
+<li>通过[用PDF文件创建签署流程](https://qian.tencent.com/developers/companyApis/startFlows/CreateFlowByFiles)发起合同，或通过[模板发起合同-创建电子文档](https://qian.tencent.com/developers/companyApis/startFlows/CreateDocument)时，返回参数[Approvers](https://qian.tencent.com/developers/companyApis/dataTypes/#approveritem)会返回此信息，建议开发者妥善保存</li>
+<li>也可通过[查询合同流程的详情信息](https://qian.tencent.com/developers/companyApis/queryFlows/DescribeFlowInfo)接口查询签署人的RecipientId编号</li></ul>
+   */
+  RecipientId?: string
+}
+
+/**
  * 用户信息
  */
 export interface UserInfo {
@@ -3759,13 +3791,9 @@ export interface CreateFlowApproversRequest {
 }
 
 /**
- * ModifyIntegrationRole返回参数结构体
+ * ModifyFlowDeadline返回参数结构体
  */
-export interface ModifyIntegrationRoleResponse {
-  /**
-   * 角色id
-   */
-  RoleId?: string
+export interface ModifyFlowDeadlineResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4021,6 +4049,13 @@ export interface FlowCreateApprover {
 `不指定该值时，默认为签署方自行选择。`
    */
   SignTypeSelector?: number
+  /**
+   * Deadline
+签署人的签署截止时间，格式为Unix标准时间戳（秒）
+
+注: `若不设置此参数，则默认使用合同的截止时间，此参数暂不支持合同组子合同`
+   */
+  Deadline?: number
 }
 
 /**
@@ -4313,15 +4348,16 @@ export interface CreateDocumentRequest {
    */
   Operator: UserInfo
   /**
+   * 用户配置的合同模板ID，会基于此模板创建合同文档，为32位字符串。
+
+[点击查看模板Id在控制台上的位置](https://qcloudimg.tencent-cloud.cn/raw/253071cc2f7becb063c7cf71b37b7861.png)
+   */
+  TemplateId: string
+  /**
    * 合同流程ID，为32位字符串。
 此接口的合同流程ID需要由[创建签署流程](https://qian.tencent.com/developers/companyApis/startFlows/CreateFlow)接口创建得到。
    */
-  FlowId: string
-  /**
-   * 用户配置的合同模板ID，会基于此模板创建合同文档，为32位字符串。
-可登录腾讯电子签控制台，在 "模板"->"模板中心"->"列表展示设置"选中模板 ID 中查看某个模板的TemplateId(在页面中展示为模板ID)。
-   */
-  TemplateId: string
+  FlowId?: string
   /**
    * 文件名列表，单个文件名最大长度200个字符，暂时仅支持单文件发起。设置后流程对应的文件名称当前设置的值。
    */
@@ -4940,9 +4976,10 @@ export interface CreateFlowByFilesResponse {
   /**
    * 合同流程ID，为32位字符串。
 建议开发者妥善保存此流程ID，以便于顺利进行后续操作。
-可登录腾讯电子签控制台，在 "合同"->"合同中心" 中查看某个合同的FlowId(在页面中展示为合同ID)。
 
 注: 如果是预览模式(即NeedPreview设置为true)时, 此处不会有值返回。
+
+[点击产看FlowId在控制台中的位置](https://qcloudimg.tencent-cloud.cn/raw/0a83015166cfe1cb043d14f9ec4bd75e.png)
    */
   FlowId?: string
   /**
@@ -5291,6 +5328,12 @@ export interface ApproverInfo {
    * 签署须知：支持传入富文本，最长字数：500个中文字符
    */
   SignInstructionContent?: string
+  /**
+   * 签署人的签署截止时间，格式为Unix标准时间戳（秒）
+
+注: `若不设置此参数，则默认使用合同的截止时间，此参数暂不支持合同组子合同`
+   */
+  Deadline?: number
 }
 
 /**
@@ -6713,6 +6756,8 @@ export interface DescribeFlowBriefsRequest {
 如果某个合同流程ID不存在，系统会跳过此ID的查询，继续查询剩余存在的合同流程。
 
 可登录腾讯电子签控制台，在 "合同"->"合同中心" 中查看某个合同的FlowId(在页面中展示为合同ID)。
+
+[点击产看FlowId在控制台中的位置](https://qcloudimg.tencent-cloud.cn/raw/0a83015166cfe1cb043d14f9ec4bd75e.png)
    */
   FlowIds: Array<string>
   /**
@@ -7030,6 +7075,20 @@ export interface DescribeFlowTemplatesResponse {
 }
 
 /**
+ * ModifyIntegrationRole返回参数结构体
+ */
+export interface ModifyIntegrationRoleResponse {
+  /**
+   * 角色id
+   */
+  RoleId?: string
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * UploadFiles请求参数结构体
  */
 export interface UploadFilesRequest {
@@ -7288,6 +7347,11 @@ export interface DescribeFlowInfoRequest {
   /**
    * 需要查询的流程ID列表，最多可传入100个ID。
 如果要查询合同组的信息，则不需要传入此参数，只需传入 FlowGroupId 参数即可。
+
+
+可登录腾讯电子签控制台，在 "合同"->"合同中心" 中查看某个合同的FlowId(在页面中展示为合同ID)。
+
+[点击产看FlowId在控制台中的位置](https://qcloudimg.tencent-cloud.cn/raw/0a83015166cfe1cb043d14f9ec4bd75e.png)
    */
   FlowIds?: Array<string>
   /**
@@ -7401,7 +7465,7 @@ export interface CreateFlowResponse {
 建议开发者妥善保存此流程ID，以便于顺利进行后续操作。
 
 注:
-此返回的合同流程ID，需再次调用<a href="https://qian.tencent.com/developers/companyApis/startFlows/CreateDocument" target="_blank">创建电子文档</a>和<a href="https://qian.tencent.com/developers/companyApis/startFlows/StartFlow" target="_blank">发起签署流程</a>接口将合同开始后，合同才能进入签署环节
+此返回的合同流程ID，需再次调用<a href="https://qian.tencent.com/developers/companyApis/startFlows/CreateDocument" target="_blank">创建电子文档</a>和<a href="https://qian.tencent.com/developers/companyApis/startFlows/StartFlow" target="_blank">发起签署流程</a>接口将合同开始后，合同才能进入签署环节，[点击产看FlowId在控制台中的位置（只在进如签署环节后有效）](https://qcloudimg.tencent-cloud.cn/raw/0a83015166cfe1cb043d14f9ec4bd75e.png)
 
 
    */

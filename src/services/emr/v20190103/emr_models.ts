@@ -273,6 +273,16 @@ export interface ImpalaQuery {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   NumRowsFetchedFromCache?: number
+  /**
+   * 会话ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SessionId?: string
+  /**
+   * 单节点内存峰值和(Bytes)
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PerNodePeakMemoryBytesSum?: number
 }
 
 /**

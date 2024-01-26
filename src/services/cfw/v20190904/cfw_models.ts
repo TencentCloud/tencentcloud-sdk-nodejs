@@ -733,6 +733,26 @@ export interface DescribeTLogInfoRequest {
  */
 export interface BlockIgnoreRule {
   /**
+   * 1 封禁 2外部IP 3域名 4情报 5assets 6udf  7入侵防御规则id （2-7属于白名单类型）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RuleType?: number
+  /**
+   * 规则ip或白名单内容
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Ioc?: string
+  /**
+   * 资产实例名称、自定义策略名称等
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IocName?: string
+  /**
+   * 白名单信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IocInfo?: string
+  /**
    * 域名
 注意：此字段可能返回 null，表示取不到有效值。
    */
@@ -742,11 +762,6 @@ export interface BlockIgnoreRule {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IP?: string
-  /**
-   * 规则ip
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Ioc?: string
   /**
    * 危险等级
 注意：此字段可能返回 null，表示取不到有效值。
@@ -762,6 +777,11 @@ export interface BlockIgnoreRule {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Direction?: number
+  /**
+   * 所有方向聚合成字符串
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DirectionList?: string
   /**
    * 协议
 注意：此字段可能返回 null，表示取不到有效值。
@@ -817,6 +837,16 @@ export interface BlockIgnoreRule {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Comment?: string
+  /**
+   * 上次命中时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LastHitTime?: string
+  /**
+   * 自定义规则细节
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CustomRule?: CustomWhiteRule
 }
 
 /**
@@ -1425,9 +1455,17 @@ export interface AddEnterpriseSecurityGroupRulesRequest {
    */
   ClientToken?: string
   /**
-   * 是否延迟下发，1则延迟下发，否则立即下发
+   * （IsDelay为老版参数，新版无需输入）是否延迟下发，1则延迟下发，否则立即下发
    */
   IsDelay?: number
+  /**
+   * 来源 默认空 覆盖导入是 batch_import_cover
+   */
+  From?: string
+  /**
+   * 是否使用id 默认不需要
+   */
+  IsUseId?: number
 }
 
 /**
@@ -1536,6 +1574,10 @@ drop：拒绝
 规则状态，true表示启用，false表示禁用
    */
   Enable?: string
+  /**
+   * 规则对应的唯一内部id
+   */
+  Uid?: string
 }
 
 /**
@@ -2420,6 +2462,10 @@ export interface CreateNatRuleItem {
    * 端口协议组ID
    */
   ParamTemplateId?: string
+  /**
+   * 内部id
+   */
+  InternalUuid?: number
 }
 
 /**
@@ -3330,6 +3376,10 @@ export interface SecurityGroupListData {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ParameterName?: string
+  /**
+   * 端口协议类型参数模板名称
+   */
+  ProtocolPortName?: string
 }
 
 /**
@@ -4140,6 +4190,16 @@ log：观察
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ParamTemplateName?: string
+  /**
+   * 访问目的名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TargetName?: string
+  /**
+   * 访问源名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SourceName?: string
 }
 
 /**
@@ -4970,6 +5030,10 @@ export interface DescribeBlockIgnoreListResponse {
    */
   SourceList?: Array<string>
   /**
+   * 对应规则类型的数量，示例：[0,122,30,55,12,232,0]，封禁0个，IP地址122个，域名30个，威胁情报55个，资产实例12个，自定义策略232个，入侵防御规则0个
+   */
+  RuleTypeDataList?: Array<number | bigint>
+  /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -5110,6 +5174,32 @@ export interface RemoveNatAcRuleResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 自定义白名单规则
+ */
+export interface CustomWhiteRule {
+  /**
+   * 访问源
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SrcIP?: string
+  /**
+   * 访问目的
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DstIP?: string
+  /**
+   * 规则名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IdsRuleName?: string
+  /**
+   * 规则ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IdsRuleId?: string
 }
 
 /**
@@ -5694,10 +5784,6 @@ export interface DescribeBlockIgnoreListRequest {
    */
   Direction: string
   /**
-   * 规则类型：1封禁，2放通
-   */
-  RuleType: number
-  /**
    * 排序类型：desc降序，asc正序
    */
   Order: string
@@ -5709,6 +5795,15 @@ export interface DescribeBlockIgnoreListRequest {
    * 搜索参数，json格式字符串，空则传"{}"，域名：domain，危险等级：level，放通原因：ignore_reason，安全事件来源：rule_source，地理位置：address，模糊搜索：common
    */
   SearchValue?: string
+  /**
+   * 规则类型：1封禁，2放通
+   */
+  RuleType?: number
+  /**
+   * blocklist 封禁列表
+whitelist 白名单列表
+   */
+  ShowType?: string
 }
 
 /**
@@ -5963,6 +6058,16 @@ export interface DescAcItem {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ParamTemplateId?: string
+  /**
+   * 访问源名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SourceName?: string
+  /**
+   * 访问目的名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TargetName?: string
 }
 
 /**
@@ -6508,7 +6613,7 @@ export interface DescribeEnterpriseSGRuleProgressResponse {
   /**
    * 0-100，代表下发进度百分比
    */
-  Progress: number
+  Progress?: number
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

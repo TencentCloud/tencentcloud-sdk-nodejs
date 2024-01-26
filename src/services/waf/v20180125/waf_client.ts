@@ -151,6 +151,7 @@ import {
   DescribeDomainWhiteRulesRequest,
   DescribePeakPointsResponse,
   ModifyInstanceRenewFlagRequest,
+  UserWhiteRuleItem,
   GoodsDetailNew,
   GoodsDetail,
   DeleteIpAccessControlResponse,
@@ -286,6 +287,7 @@ import {
   ModifyAntiInfoLeakRuleStatusRequest,
   ModifyProtectionStatusResponse,
   DescribeDomainsRequest,
+  ModifyDomainPostActionRequest,
   BotPkg,
   UpsertCCAutoStatusRequest,
   SearchAttackLogResponse,
@@ -359,7 +361,7 @@ import {
   DeleteAntiInfoLeakRuleRequest,
   DescribeVipInfoResponse,
   DescribeRuleLimitRequest,
-  UserWhiteRuleItem,
+  ModifyDomainPostActionResponse,
   ModifyDomainsCLSStatusRequest,
   DeleteAccessExportRequest,
   DescribeTlsVersionResponse,
@@ -479,7 +481,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * clb-waf 设置防护域名的流量模式
+   * 设置负载均衡型WAF防护域名的流量模式，切换镜像模式和清洗模式
    */
   async ModifyHostFlowMode(
     req: ModifyHostFlowModeRequest,
@@ -569,7 +571,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改域名配置
+   * 编辑SaaS型WAF域名配置
    */
   async ModifySpartaProtection(
     req: ModifySpartaProtectionRequest,
@@ -830,9 +832,8 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 删除CLB-WAF防护域名
-支持批量操作
-     */
+   * 删除负载均衡型域名，支持批量操作。
+   */
   async DeleteHost(
     req: DeleteHostRequest,
     cb?: (error: string, rep: DeleteHostResponse) => void
@@ -1054,7 +1055,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * clb-waf编辑防护域名配置
+   * 编辑负载均衡型WAF防护域名配置
    */
   async ModifyHost(
     req: ModifyHostRequest,
@@ -1146,7 +1147,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询用户TLS版本
+   * 查询SaaS型WAF支持的TLS版本
    */
   async DescribeTlsVersion(
     req?: DescribeTlsVersionRequest,
@@ -1258,7 +1259,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * Saas型WAF删除防护域名
+   * SaaS型WAF删除防护域名
    */
   async DeleteSpartaProtection(
     req: DeleteSpartaProtectionRequest,
@@ -1575,6 +1576,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyHostModeResponse) => void
   ): Promise<ModifyHostModeResponse> {
     return this.request("ModifyHostMode", req, cb)
+  }
+
+  /**
+   * 修改域名投递状态
+   */
+  async ModifyDomainPostAction(
+    req: ModifyDomainPostActionRequest,
+    cb?: (error: string, rep: ModifyDomainPostActionResponse) => void
+  ): Promise<ModifyDomainPostActionResponse> {
+    return this.request("ModifyDomainPostAction", req, cb)
   }
 
   /**

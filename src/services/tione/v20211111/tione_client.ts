@@ -296,7 +296,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除跑批任务
+   * 删除批量预测任务
    */
   async DeleteBatchTask(
     req: DeleteBatchTaskRequest,
@@ -446,7 +446,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 停止跑批任务
+   * 停止批量预测任务
    */
   async StopBatchTask(
     req: StopBatchTaskRequest,
@@ -576,7 +576,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询跑批实例列表
+   * 查询批量预测任务实例列表
    */
   async DescribeBatchTaskInstances(
     req: DescribeBatchTaskInstancesRequest,
@@ -666,7 +666,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 批量预测任务列表信息
+   * 查询批量预测任务列表信息
    */
   async DescribeBatchTasks(
     req: DescribeBatchTasksRequest,
@@ -846,7 +846,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建跑批任务
+   * 创建批量预测任务
    */
   async CreateBatchTask(
     req: CreateBatchTaskRequest,
@@ -896,7 +896,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询跑批任务
+   * 查询批量预测任务
    */
   async DescribeBatchTask(
     req: DescribeBatchTaskRequest,

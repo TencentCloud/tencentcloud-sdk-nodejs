@@ -12,7 +12,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeTrainingModelVersion(req: DescribeTrainingModelVersionRequest, cb?: (error: string, rep: DescribeTrainingModelVersionResponse) => void): Promise<DescribeTrainingModelVersionResponse>;
     /**
-     * 删除跑批任务
+     * 删除批量预测任务
      */
     DeleteBatchTask(req: DeleteBatchTaskRequest, cb?: (error: string, rep: DeleteBatchTaskResponse) => void): Promise<DeleteBatchTaskResponse>;
     /**
@@ -72,7 +72,7 @@ export declare class Client extends AbstractClient {
      */
     CreateTrainingTask(req: CreateTrainingTaskRequest, cb?: (error: string, rep: CreateTrainingTaskResponse) => void): Promise<CreateTrainingTaskResponse>;
     /**
-     * 停止跑批任务
+     * 停止批量预测任务
      */
     StopBatchTask(req: StopBatchTaskRequest, cb?: (error: string, rep: StopBatchTaskResponse) => void): Promise<StopBatchTaskResponse>;
     /**
@@ -124,7 +124,7 @@ export declare class Client extends AbstractClient {
      */
     CreateDataset(req: CreateDatasetRequest, cb?: (error: string, rep: CreateDatasetResponse) => void): Promise<CreateDatasetResponse>;
     /**
-     * 查询跑批实例列表
+     * 查询批量预测任务实例列表
      */
     DescribeBatchTaskInstances(req: DescribeBatchTaskInstancesRequest, cb?: (error: string, rep: DescribeBatchTaskInstancesResponse) => void): Promise<DescribeBatchTaskInstancesResponse>;
     /**
@@ -160,7 +160,7 @@ export declare class Client extends AbstractClient {
      */
     PushTrainingMetrics(req: PushTrainingMetricsRequest, cb?: (error: string, rep: PushTrainingMetricsResponse) => void): Promise<PushTrainingMetricsResponse>;
     /**
-     * 批量预测任务列表信息
+     * 查询批量预测任务列表信息
      */
     DescribeBatchTasks(req: DescribeBatchTasksRequest, cb?: (error: string, rep: DescribeBatchTasksResponse) => void): Promise<DescribeBatchTasksResponse>;
     /**
@@ -232,7 +232,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeNotebooks(req: DescribeNotebooksRequest, cb?: (error: string, rep: DescribeNotebooksResponse) => void): Promise<DescribeNotebooksResponse>;
     /**
-     * 创建跑批任务
+     * 创建批量预测任务
      */
     CreateBatchTask(req: CreateBatchTaskRequest, cb?: (error: string, rep: CreateBatchTaskResponse) => void): Promise<CreateBatchTaskResponse>;
     /**
@@ -252,7 +252,7 @@ export declare class Client extends AbstractClient {
      */
     CreateBatchModelAccTasks(req: CreateBatchModelAccTasksRequest, cb?: (error: string, rep: CreateBatchModelAccTasksResponse) => void): Promise<CreateBatchModelAccTasksResponse>;
     /**
-     * 查询跑批任务
+     * 查询批量预测任务
      */
     DescribeBatchTask(req: DescribeBatchTaskRequest, cb?: (error: string, rep: DescribeBatchTaskResponse) => void): Promise<DescribeBatchTaskResponse>;
     /**

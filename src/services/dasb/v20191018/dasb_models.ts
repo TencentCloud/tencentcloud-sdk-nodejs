@@ -1833,21 +1833,21 @@ export interface Group {
   /**
    * 组ID
    */
-  Id: number
+  Id?: number
   /**
    * 组名称
    */
-  Name: string
+  Name?: string
   /**
    * 所属部门信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Department: Department
+  Department?: Department
   /**
    * 个数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Count: number
+  Count?: number
 }
 
 /**
@@ -2042,6 +2042,11 @@ export interface User {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Status?: string
+  /**
+   * 权限版本
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AclVersion?: number
 }
 
 /**
@@ -3025,6 +3030,11 @@ export interface Acl {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ACTemplateSet?: Array<ACTemplate>
+  /**
+   * 关联的白命令命令
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WhiteCmds?: Array<string>
 }
 
 /**

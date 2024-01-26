@@ -46,6 +46,15 @@ export interface DescribeEnvironmentsRequest {
     ZoneId: string;
 }
 /**
+ * ModifyL4ProxyRulesStatus返回参数结构体
+ */
+export interface ModifyL4ProxyRulesStatusResponse {
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * 智能压缩配置。
  */
 export interface Compression {
@@ -136,6 +145,23 @@ export interface CheckCnameStatusResponse {
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * DeleteL4ProxyRules请求参数结构体
+ */
+export interface DeleteL4ProxyRulesRequest {
+    /**
+     * 站点 ID。
+     */
+    ZoneId: string;
+    /**
+     * 四层代理实例 ID。
+     */
+    ProxyId: string;
+    /**
+     * 转发规则 ID 列表。单次最多支持 200 条转发规则。
+     */
+    RuleIds: Array<string>;
 }
 /**
  * ModifyZone返回参数结构体
@@ -505,6 +531,36 @@ export interface OwnershipVerification {
     NsVerification?: NsVerification;
 }
 /**
+ * DescribePurgeTasks请求参数结构体
+ */
+export interface DescribePurgeTasksRequest {
+    /**
+     * 站点ID。
+  必填参数。
+     */
+    ZoneId?: string;
+    /**
+     * 查询起始时间，时间与job-id必填一个。
+     */
+    StartTime?: string;
+    /**
+     * 查询结束时间，时间与job-id必填一个。
+     */
+    EndTime?: string;
+    /**
+     * 分页查询偏移量，默认为0。
+     */
+    Offset?: number;
+    /**
+     * 分页查限制数目，默认值：20，最大值：1000。
+     */
+    Limit?: number;
+    /**
+     * 过滤条件，Filters.Values的上限为20。详细的过滤条件如下：<li>job-id<br>   按照【<strong>任务ID</strong>】进行过滤。job-id形如：1379afjk91u32h，暂不支持多值。<br>   类型：String<br>   必选：否<br>   模糊查询：不支持</li><li>target<br>   按照【<strong>目标资源信息</strong>】进行过滤，target形如：http://www.qq.com/1.txt或者tag1，暂不支持多值<br>   类型：String<br>   必选：否<br>   模糊查询：不支持</li><li>domains<br>   按照【<strong>域名</strong>】进行过滤，domains形如：www.qq.com<br>   类型：String<br>   必选：否<br>   模糊查询：不支持。</li><li>statuses<br>   按照【<strong>任务状态</strong>】进行过滤<br>   必选：否<br>   模糊查询：不支持。<br>   可选项：<br>   processing：处理中<br>   success：成功<br>   failed：失败<br>   timeout：超时</li><li>type<br>   按照【<strong>清除缓存类型</strong>】进行过滤，暂不支持多值。<br>   类型：String<br>   必选：否<br>   模糊查询：不支持<br>   可选项：<br>   purge_url：URL<br>   purge_prefix：前缀<br>   purge_all：全部缓存内容<br>   purge_host：Hostname<br>   purge_cache_tag：CacheTag</li>
+     */
+    Filters?: Array<AdvancedFilter>;
+}
+/**
  * 源站组记录
  */
 export interface OriginRecord {
@@ -696,19 +752,13 @@ export interface DescribeZoneSettingRequest {
     ZoneId: string;
 }
 /**
- * ModifyZoneStatus请求参数结构体
+ * ModifyL4ProxyStatus返回参数结构体
  */
-export interface ModifyZoneStatusRequest {
+export interface ModifyL4ProxyStatusResponse {
     /**
-     * 站点 ID。
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
-    ZoneId: string;
-    /**
-     * 站点状态，取值有：
-  <li> false：开启站点；</li>
-  <li> true：关闭站点。</li>
-     */
-    Paused: boolean;
+    RequestId?: string;
 }
 /**
  * CNAME 接入，使用文件验证时所需的信息。
@@ -762,19 +812,13 @@ export interface ModifySecurityPolicyRequest {
     TemplateId?: string;
 }
 /**
- * 无
+ * DeleteL4Proxy返回参数结构体
  */
-export interface Waf {
+export interface DeleteL4ProxyResponse {
     /**
-     * Waf开关，取值为：
-  <li> on：开启；</li>
-  <li> off：关闭。</li>
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
-    Switch: string;
-    /**
-     * 策略ID。
-     */
-    PolicyId?: number;
+    RequestId?: string;
 }
 /**
  * ModifyApplicationProxyRuleStatus返回参数结构体
@@ -786,112 +830,21 @@ export interface ModifyApplicationProxyRuleStatusResponse {
     RequestId?: string;
 }
 /**
- * ModifyZoneSetting请求参数结构体
+ * DescribeL4Proxy返回参数结构体
  */
-export interface ModifyZoneSettingRequest {
+export interface DescribeL4ProxyResponse {
     /**
-     * 待变更的站点 ID。
+     * 四层代理实例的数量。
      */
-    ZoneId: string;
+    TotalCount?: number;
     /**
-     * 缓存过期时间配置。
-  不填写表示保持原有配置。
+     * 四层代理实例列表。
      */
-    CacheConfig?: CacheConfig;
+    L4Proxies?: Array<L4Proxy>;
     /**
-     * 节点缓存键配置。
-  不填写表示保持原有配置。
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
-    CacheKey?: CacheKey;
-    /**
-     * 浏览器缓存配置。
-  不填写表示保持原有配置。
-     */
-    MaxAge?: MaxAge;
-    /**
-     * 离线缓存配置。
-  不填写表示保持原有配置。
-     */
-    OfflineCache?: OfflineCache;
-    /**
-     * Quic 访问配置。
-  不填写表示保持原有配置。
-     */
-    Quic?: Quic;
-    /**
-     * Post 请求传输配置。
-  不填写表示保持原有配置。
-     */
-    PostMaxSize?: PostMaxSize;
-    /**
-     * 智能压缩配置。
-  不填写表示保持原有配置。
-     */
-    Compression?: Compression;
-    /**
-     * Http2 回源配置。
-  不填写表示保持原有配置。
-     */
-    UpstreamHttp2?: UpstreamHttp2;
-    /**
-     * 访问协议强制 Https 跳转配置。
-  不填写表示保持原有配置。
-     */
-    ForceRedirect?: ForceRedirect;
-    /**
-     * Https 加速配置。
-  不填写表示保持原有配置。
-     */
-    Https?: Https;
-    /**
-     * 源站配置。
-  不填写表示保持原有配置。
-     */
-    Origin?: Origin;
-    /**
-     * 智能加速配置。
-  不填写表示保持原有配置。
-     */
-    SmartRouting?: SmartRouting;
-    /**
-     * WebSocket 配置。
-  不填写表示保持原有配置。
-     */
-    WebSocket?: WebSocket;
-    /**
-     * 客户端 IP 回源请求头配置。
-  不填写表示保持原有配置。
-     */
-    ClientIpHeader?: ClientIpHeader;
-    /**
-     * 缓存预刷新配置。
-  不填写表示保持原有配置。
-     */
-    CachePrefresh?: CachePrefresh;
-    /**
-     * Ipv6 访问配置。
-  不填写表示保持原有配置。
-     */
-    Ipv6?: Ipv6;
-    /**
-     * 回源时是否携带客户端 IP 所属地域信息的配置。
-  不填写表示保持原有配置。
-     */
-    ClientIpCountry?: ClientIpCountry;
-    /**
-     * Grpc 协议支持配置。
-  不填写表示保持原有配置。
-     */
-    Grpc?: Grpc;
-    /**
-     * 图片优化配置。
-  不填写表示关闭。
-     */
-    ImageOptimize?: ImageOptimize;
-    /**
-     * 标准 Debug 配置。
-     */
-    StandardDebug?: StandardDebug;
+    RequestId?: string;
 }
 /**
  * 规则引擎条件 HTTP 请求/响应头操作动作参数。
@@ -1051,35 +1004,21 @@ export interface DescribeApplicationProxiesResponse {
     RequestId?: string;
 }
 /**
- * 例外规则的生效范围。
+ * DescribeL4ProxyRules返回参数结构体
  */
-export interface ExceptUserRuleScope {
+export interface DescribeL4ProxyRulesResponse {
     /**
-     * 例外规则类型。其中complete模式代表全量数据进行例外，partial模式代表可选择指定模块指定字段进行例外，该字段取值有：
-  <li>complete：完全跳过模式；</li>
-  <li>partial：部分跳过模式。</li>
+     * 转发规则总数。
      */
-    Type?: string;
+    TotalCount?: number;
     /**
-     * 生效的模块，该字段取值有：
-  <li>waf：托管规则；</li>
-  <li>rate：速率限制；</li>
-  <li>acl：自定义规则；</li>
-  <li>cc：cc攻击防护；</li>
-  <li>bot：Bot防护。</li>
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 转发规则列表。
      */
-    Modules?: Array<string>;
+    L4ProxyRules?: Array<L4ProxyRule>;
     /**
-     * 跳过部分规则ID的例外规则详情。如果为null，默认使用历史配置。
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
-    PartialModules?: Array<PartialModule>;
-    /**
-     * 跳过具体字段不去扫描的例外规则详情。如果为null，默认使用历史配置。
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    SkipConditions?: Array<SkipCondition>;
+    RequestId?: string;
 }
 /**
  * DescribeDeployHistory请求参数结构体
@@ -1375,6 +1314,114 @@ export interface DeleteApplicationProxyRuleResponse {
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * ModifyZoneSetting请求参数结构体
+ */
+export interface ModifyZoneSettingRequest {
+    /**
+     * 待变更的站点 ID。
+     */
+    ZoneId: string;
+    /**
+     * 缓存过期时间配置。
+  不填写表示保持原有配置。
+     */
+    CacheConfig?: CacheConfig;
+    /**
+     * 节点缓存键配置。
+  不填写表示保持原有配置。
+     */
+    CacheKey?: CacheKey;
+    /**
+     * 浏览器缓存配置。
+  不填写表示保持原有配置。
+     */
+    MaxAge?: MaxAge;
+    /**
+     * 离线缓存配置。
+  不填写表示保持原有配置。
+     */
+    OfflineCache?: OfflineCache;
+    /**
+     * Quic 访问配置。
+  不填写表示保持原有配置。
+     */
+    Quic?: Quic;
+    /**
+     * Post 请求传输配置。
+  不填写表示保持原有配置。
+     */
+    PostMaxSize?: PostMaxSize;
+    /**
+     * 智能压缩配置。
+  不填写表示保持原有配置。
+     */
+    Compression?: Compression;
+    /**
+     * Http2 回源配置。
+  不填写表示保持原有配置。
+     */
+    UpstreamHttp2?: UpstreamHttp2;
+    /**
+     * 访问协议强制 Https 跳转配置。
+  不填写表示保持原有配置。
+     */
+    ForceRedirect?: ForceRedirect;
+    /**
+     * Https 加速配置。
+  不填写表示保持原有配置。
+     */
+    Https?: Https;
+    /**
+     * 源站配置。
+  不填写表示保持原有配置。
+     */
+    Origin?: Origin;
+    /**
+     * 智能加速配置。
+  不填写表示保持原有配置。
+     */
+    SmartRouting?: SmartRouting;
+    /**
+     * WebSocket 配置。
+  不填写表示保持原有配置。
+     */
+    WebSocket?: WebSocket;
+    /**
+     * 客户端 IP 回源请求头配置。
+  不填写表示保持原有配置。
+     */
+    ClientIpHeader?: ClientIpHeader;
+    /**
+     * 缓存预刷新配置。
+  不填写表示保持原有配置。
+     */
+    CachePrefresh?: CachePrefresh;
+    /**
+     * Ipv6 访问配置。
+  不填写表示保持原有配置。
+     */
+    Ipv6?: Ipv6;
+    /**
+     * 回源时是否携带客户端 IP 所属地域信息的配置。
+  不填写表示保持原有配置。
+     */
+    ClientIpCountry?: ClientIpCountry;
+    /**
+     * Grpc 协议支持配置。
+  不填写表示保持原有配置。
+     */
+    Grpc?: Grpc;
+    /**
+     * 图片优化配置。
+  不填写表示关闭。
+     */
+    ImageOptimize?: ImageOptimize;
+    /**
+     * 标准 Debug 配置。
+     */
+    StandardDebug?: StandardDebug;
 }
 /**
  * DescribeRules返回参数结构体
@@ -2192,6 +2239,15 @@ export interface RulesSettingAction {
     Properties: Array<RulesProperties>;
 }
 /**
+ * ModifyL4ProxyRules返回参数结构体
+ */
+export interface ModifyL4ProxyRulesResponse {
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * DDoS攻击事件对象
  */
 export interface DDoSAttackEvent {
@@ -2364,45 +2420,31 @@ export interface DownloadL7LogsResponse {
     RequestId?: string;
 }
 /**
- * ModifyAccelerationDomain请求参数结构体
+ * DescribeL4ProxyRules请求参数结构体
  */
-export interface ModifyAccelerationDomainRequest {
+export interface DescribeL4ProxyRulesRequest {
     /**
-     * 加速域名所属站点ID。
+     * 站点 ID。
      */
     ZoneId: string;
     /**
-     * 加速域名名称。
+     * 四层代理实例 ID。
      */
-    DomainName: string;
+    ProxyId: string;
     /**
-     * 源站信息。
+     * 分页查询偏移量，不填写时默认为 0。
      */
-    OriginInfo?: OriginInfo;
+    Offset: number;
     /**
-     * 回源协议，取值有：
-  <li>FOLLOW: 协议跟随；</li>
-  <li>HTTP: HTTP协议回源；</li>
-  <li>HTTPS: HTTPS协议回源。</li>
-  <li>不填保持原有配置。</li>
+     * 分页查询限制数目。默认值：20，最大值：1000。
      */
-    OriginProtocol?: string;
+    Limit: number;
     /**
-     * HTTP回源端口，取值为1-65535，当OriginProtocol=FOLLOW/HTTP时生效, 不填保持原有配置。
+     * 过滤条件，Filters.Values的上限为20。不填写时返回当前四层实例下所有的规则信息，详细的过滤条件如下：
+   <li>rule-tag：按照规则标签对四层代理实例下的规则进行过滤。</li>
+  
      */
-    HttpOriginPort?: number;
-    /**
-     * HTTPS回源端口，取值为1-65535，当OriginProtocol=FOLLOW/HTTPS时生效，不填保持原有配置。
-     */
-    HttpsOriginPort?: number;
-    /**
-     * IPv6状态，取值有：
-  <li>follow：遵循站点IPv6配置；</li>
-  <li>on：开启状态；</li>
-  <li>off：关闭状态。</li>
-  <li>不填保持原有配置。</li>
-     */
-    IPv6Status?: string;
+    Filters?: Array<Filter>;
 }
 /**
  * DescribeRules请求参数结构体
@@ -2691,38 +2733,30 @@ export interface Origin {
     CosPrivateAccess?: string;
 }
 /**
- * Waf配置。
+ * ModifyL4Proxy请求参数结构体
  */
-export interface WafConfig {
+export interface ModifyL4ProxyRequest {
     /**
-     * WafConfig开关，取值有：
-  <li> on：开启；</li>
-  <li> off：关闭。</li>开关仅与配置是否生效有关，即使为off（关闭），也可以正常修改配置的内容。
+     * 站点 ID。
      */
-    Switch: string;
+    ZoneId: string;
     /**
-     * 上一次设置的防护级别，取值有：
-  <li> loose：宽松；</li>
-  <li> normal：正常；</li>
-  <li> strict：严格；</li>
-  <li> stricter：超严格；</li>
-  <li> custom：自定义。</li>
+     * 应用 ID。
      */
-    Level: string;
+    ProxyId: string;
     /**
-     * 全局WAF模式，取值有：
-  <li> block：阻断（全局阻断，但可对详细规则配置观察）；</li>
-  <li> observe：观察（无论详细规则配置什么，都为观察）。</li>
+     * 是否开启 IPv6 访问。 不填该参数时，表示不修改该配置。该配置仅在部分加速区域和安全防护配置下支持开启，详情请参考 [新建四层代理实例](https://cloud.tencent.com/document/product/1552/90025) 。取值为：
+  <li>on：开启；</li>
+  <li>off：关闭。</li>
+  
      */
-    Mode: string;
+    Ipv6?: string;
     /**
-     * 托管规则详细配置。如果为null，默认使用历史配置。
+     * 是否开启中国大陆网络优化。不填该参数时，表示不修改该配置。该配置仅在部分加速区域和安全防护配置下支持开启，详情请参考 [新建四层代理实例](https://cloud.tencent.com/document/product/1552/90025) 。取值为：
+  <li>on：开启；</li>
+  <li>off：关闭。</li>
      */
-    WafRule?: WafRule;
-    /**
-     * AI规则引擎防护配置。如果为null，默认使用历史配置。
-     */
-    AiRule?: AiRule;
+    AccelerateMainland?: string;
 }
 /**
  * Grpc配置项
@@ -3303,6 +3337,91 @@ export interface DeleteSharedCNAMEResponse {
     RequestId?: string;
 }
 /**
+ * 四层代理转发规则详情。
+ */
+export interface L4ProxyRule {
+    /**
+     * 转发规则 ID。
+  注意：L4ProxyRule 在 CreateL4ProxyRules 作为入参使用时，该参数请勿填写；在 ModifyL4ProxyRules 作为入参使用时，该参数必填。
+     */
+    RuleId?: string;
+    /**
+     * 转发协议。取值有：
+  <li>TCP：TCP 协议；</li>
+  <li>UDP：UDP 协议。</li>
+  注意：L4ProxyRule 在 CreateL4ProxyRules 作为入参使用时，该参数必填；在 ModifyL4ProxyRules 作为入参使用时，该参数选填，不填写时表示不修改。
+     */
+    Protocol?: string;
+    /**
+     * 转发端口，支持按照以下形式填写：
+  <li>单端口，如：80；</li>
+  <li>端口段，如：81-85。表示 81、82、83、84、85 五个端口。</li>
+  注意：L4ProxyRule 在 CreateL4ProxyRules 作为入参使用时，该参数必填；在 ModifyL4ProxyRules 作为入参使用时，该参数选填，不填写时表示不修改。
+     */
+    PortRange?: Array<string>;
+    /**
+     * 源站类型，取值有：
+  <li>IP_DOMAIN：IP/域名源站；</li>
+  <li>ORIGIN_GROUP：源站组；</li>
+  <li>LB：负载均衡，当前仅白名单开放。</li>
+  注意：L4ProxyRule 在 CreateL4ProxyRules 作为入参使用时，该参数必填；在 ModifyL4ProxyRules 作为入参使用时，该参数选填，不填写时表示不修改。
+     */
+    OriginType?: string;
+    /**
+     * 源站地址：
+  <li>当 OriginType 为 IP_DOMAIN 时，填写 IP 或域名，如 8.8.8.8 或 test.com ；</li>
+  <li>当 OriginType 为 ORIGIN_GROUP 时，填写源站组 ID，如 og-537y24vf5b41；</li>
+  <li>当 OriginType 为 LB 时，填写负载均衡实例 ID，如 lb-2qwk30xf7s9g。</li>
+  注意：L4ProxyRule 在 CreateL4ProxyRules 作为入参使用时，该参数必填；在 ModifyL4ProxyRules 作为入参使用时，该参数选填，不填写时表示不修改。
+  
+     */
+    OriginValue?: Array<string>;
+    /**
+     * 源站端口，支持按照以下形式填写：
+  <li>单端口，如：80；</li>
+  <li>端口段，如：81-85，表示 81、82、83、84、85 五个端口。填写端口段时，则需要与转发端口段长度保持一致，例如转发端口：80-90，则转发端口：90-100。</li>
+  注意：L4ProxyRule 在 CreateL4ProxyRules 作为入参使用时，该参数必填；在 ModifyL4ProxyRules 作为入参使用时，该参数选填，不填写时表示不修改。
+     */
+    OriginPortRange?: string;
+    /**
+     * 传递客户端 IP 的形式，取值有：
+  <li>TOA：TOA（仅 Protocol = TCP 时可选）；</li>
+  <li>PPV1：Proxy Protocol 传递，协议版本 V1（仅 Protocol = TCP 时可选）；</li>
+  <li>PPV2：Proxy Protocol 传递，协议版本 V2；</li>
+  <li>SPP：Simple Proxy Protocol 传递，（仅 Protocol = UDP 时可选）；</li>
+  <li>OFF：不传递。</li>
+  注意：L4ProxyRule 在 CreateL4ProxyRules 作为入参使用时，该参数选填，不填写时默认为 OFF；在 ModifyL4ProxyRules 作为入参使用时，该参数选填，不填写表示不修改。
+     */
+    ClientIPPassThroughMode?: string;
+    /**
+     * 是否开启会话保持，取值有：
+  <li>on：开启；</li>
+  <li>off：关闭。</li>
+  注意：L4ProxyRule 在 CreateL4ProxyRules 作为入参使用时，该参数选填，不填写时默认为 off；在 ModifyL4ProxyRules 作为入参使用时，该参数选填，不填写表示不修改。
+     */
+    SessionPersist?: string;
+    /**
+     * 会话保持时间，取值范围为 30-3600，单位为秒。
+  注意：L4ProxyRule 在 CreateL4ProxyRules 作为入参使用时，该参数选填，仅当 SessionPersist = on 时，该值才会生效，且当 SessionPersist = on ，该值不填写默认为 3600；在 ModifyL4ProxyRules 作为入参使用时，该参数选填，不填写表示不修改。
+     */
+    SessionPersistTime?: number;
+    /**
+     * 规则标签。可输入1-50 个任意字符。
+  注意：L4ProxyRule 在 CreateL4ProxyRules 作为入参使用时，该参数选填；在 ModifyL4ProxyRules 作为入参使用时，该参数选填，不填写表示不修改。
+     */
+    RuleTag?: string;
+    /**
+     * 规则状态，取值有：
+  <li>online：已启用；</li>
+  <li>offline：已停用；</li>
+  <li>progress：部署中；</li>
+  <li>stopping：停用中；</li>
+  <li>fail：部署失败/停用失败。</li>
+  注意：L4ProxyRule 在 CreateL4ProxyRules、ModifyL4ProxyRules 作为入参使用时，该参数请勿填写。
+     */
+    Status?: string;
+}
+/**
  * DDoS封禁解封信息
  */
 export interface DDoSBlockData {
@@ -3380,6 +3499,15 @@ export interface RuleChoicePropertiesItem {
     ExtraParameter: RuleExtraParameter;
 }
 /**
+ * ModifyL4Proxy返回参数结构体
+ */
+export interface ModifyL4ProxyResponse {
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * Waf规则
  */
 export interface WafRule {
@@ -3454,34 +3582,13 @@ export interface SecurityConfig {
     SlowPostConfig?: SlowPostConfig;
 }
 /**
- * DescribePrefetchTasks请求参数结构体
+ * DeleteL4ProxyRules返回参数结构体
  */
-export interface DescribePrefetchTasksRequest {
+export interface DeleteL4ProxyRulesResponse {
     /**
-     * 站点ID。
-  必填参数。
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
-    ZoneId?: string;
-    /**
-     * 查询起始时间，时间与 job-id 必填一个。
-     */
-    StartTime?: string;
-    /**
-     * 查询结束时间，时间与 job-id 必填一个。
-     */
-    EndTime?: string;
-    /**
-     * 分页查询偏移量，默认为 0。
-     */
-    Offset?: number;
-    /**
-     * 分页查询限制数目，默认值：20，上限：1000。
-     */
-    Limit?: number;
-    /**
-     * 过滤条件，Filters.Values的上限为20。详细的过滤条件如下：<li>job-id<br>   按照【<strong>任务ID</strong>】进行过滤。job-id形如：1379afjk91u32h，暂不支持多值。<br>   类型：String<br>   必选：否。<br>   模糊查询：不支持。</li><li>target<br>   按照【<strong>目标资源信息</strong>】进行过滤。target形如：http://www.qq.com/1.txt，暂不支持多值。<br>   类型：String<br>   必选：否。<br>   模糊查询：不支持。</li><li>domains<br>   按照【<strong>域名</strong>】进行过滤。domains形如：www.qq.com。<br>   类型：String<br>   必选：否。<br>   模糊查询：不支持。</li><li>statuses<br>   按照【<strong>任务状态</strong>】进行过滤。<br>   必选：否<br>   模糊查询：不支持。<br>   可选项：<br>   processing：处理中<br>   success：成功<br>   failed：失败<br>   timeout：超时</li>
-     */
-    Filters?: Array<AdvancedFilter>;
+    RequestId?: string;
 }
 /**
  * DescribeSecurityTemplateBindings返回参数结构体
@@ -3519,9 +3626,9 @@ export interface MaxAge {
     MaxAgeTime?: number;
 }
 /**
- * ModifyAliasDomainStatus返回参数结构体
+ * ModifyAccelerationDomain返回参数结构体
  */
-export interface ModifyAliasDomainStatusResponse {
+export interface ModifyAccelerationDomainResponse {
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -3560,6 +3667,40 @@ export interface IPGroup {
      * IP 组内容，仅支持 IP 及 IP 掩码。
      */
     Content: Array<string>;
+}
+/**
+ * Waf配置。
+ */
+export interface WafConfig {
+    /**
+     * WafConfig开关，取值有：
+  <li> on：开启；</li>
+  <li> off：关闭。</li>开关仅与配置是否生效有关，即使为off（关闭），也可以正常修改配置的内容。
+     */
+    Switch: string;
+    /**
+     * 上一次设置的防护级别，取值有：
+  <li> loose：宽松；</li>
+  <li> normal：正常；</li>
+  <li> strict：严格；</li>
+  <li> stricter：超严格；</li>
+  <li> custom：自定义。</li>
+     */
+    Level: string;
+    /**
+     * 全局WAF模式，取值有：
+  <li> block：阻断（全局阻断，但可对详细规则配置观察）；</li>
+  <li> observe：观察（无论详细规则配置什么，都为观察）。</li>
+     */
+    Mode: string;
+    /**
+     * 托管规则详细配置。如果为null，默认使用历史配置。
+     */
+    WafRule?: WafRule;
+    /**
+     * AI规则引擎防护配置。如果为null，默认使用历史配置。
+     */
+    AiRule?: AiRule;
 }
 /**
  * DescribeTimingL7AnalysisData请求参数结构体
@@ -3911,6 +4052,15 @@ export interface DescribeTimingL7CacheDataRequest {
     Area?: string;
 }
 /**
+ * ModifyAliasDomainStatus返回参数结构体
+ */
+export interface ModifyAliasDomainStatusResponse {
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * 内容管理任务结果
  */
 export interface Task {
@@ -3940,6 +4090,21 @@ export interface Task {
     UpdateTime: string;
 }
 /**
+ * 无
+ */
+export interface Waf {
+    /**
+     * Waf开关，取值为：
+  <li> on：开启；</li>
+  <li> off：关闭。</li>
+     */
+    Switch: string;
+    /**
+     * 策略ID。
+     */
+    PolicyId?: number;
+}
+/**
  * ModifyRule返回参数结构体
  */
 export interface ModifyRuleResponse {
@@ -3964,6 +4129,19 @@ export interface CreateConfigGroupVersionResponse {
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * DeleteL4Proxy请求参数结构体
+ */
+export interface DeleteL4ProxyRequest {
+    /**
+     * 站点 ID。
+     */
+    ZoneId: string;
+    /**
+     * 四层代理实例 ID。
+     */
+    ProxyId: string;
 }
 /**
  * 站点归属信息
@@ -4399,6 +4577,33 @@ export interface Identification {
     FileAscription?: FileAscriptionInfo;
 }
 /**
+ * 适用于四层代理或 Web 站点服务的独立 DDoS 防护规格配置。
+ */
+export interface DDosProtectionConfig {
+    /**
+     * 中国大陆地区独立 DDoS 防护的规格。详情请参考 [独立 DDoS 防护相关费用](https://cloud.tencent.com/document/product/1552/94162)
+  <li>PLATFORM：平台默认防护，即不开启独立 DDoS 防护；</li>
+  <li>BASE30_MAX300：开启独立 DDoS 防护，提供 30 Gbps 保底防护带宽，可配置最高 300 Gpbs 弹性防护带宽；</li>
+  <li>BASE60_MAX600：开启独立 DDoS 防护，提供 60 Gbps 保底防护带宽，可配置最高 600 Gpbs 弹性防护带宽。</li>不填写参数时，取默认值 PLATFORM。
+     */
+    LevelMainland?: string;
+    /**
+     * 中国大陆地区独立 DDoS 防护的弹性防护带宽配置。
+  仅当开启中国大陆区域独立 DDos 防护时有效（详见 LevelMainland 参数配置），且取值范围有如下限制：
+  <li>开启中国大陆地区独立 DDoS 防护，使用 30 Gbps 保底防护带宽规格时（ LevelMainland 参数值为 BASE30_MAX300 ）：有效取值范围为 30 至 300，单位为 Gbps；</li>
+  <li>开启中国大陆地区独立 DDoS 防护，使用 60 Gbps 保底防护带宽规格时（ LevelMainland 参数值为 BASE60_MAX600 ）：有效取值范围为 60 至 600，单位为 Gbps；</li>
+  <li>使用平台默认防护（ LevelMainland 参数值为 PLATFORM ）：不支持配置，本参数值无效。</li>
+     */
+    MaxBandwidthMainland?: number;
+    /**
+     * 全球（除中国大陆以外）地区独立 DDoS 防护的规格。
+  <li>PLATFORM：平台默认防护，即不开启独立 DDoS 防护；</li>
+  <li>ANYCAST300：开启独立 DDoS 防护，提供合计最大 300 Gbps 防护带宽；</li>
+  <li>ANYCAST_ALLIN：开启独立 DDoS 防护，使用全部可用防护资源进行防护。</li>不填写参数时，取默认值 PLATFORM。
+     */
+    LevelOverseas?: string;
+}
+/**
  * DescribeDDoSAttackData请求参数结构体
  */
 export interface DescribeDDoSAttackDataRequest {
@@ -4459,34 +4664,51 @@ export interface CachePrefresh {
     Percent?: number;
 }
 /**
- * DescribePurgeTasks请求参数结构体
+ * CreateL4Proxy请求参数结构体
  */
-export interface DescribePurgeTasksRequest {
+export interface CreateL4ProxyRequest {
     /**
-     * 站点ID。
-  必填参数。
+     * 站点 ID。
      */
-    ZoneId?: string;
+    ZoneId: string;
     /**
-     * 查询起始时间，时间与job-id必填一个。
+     * 四层代理实例名称，可输入 1-50 个字符，允许的字符为 a-z、0-9、-，且 - 不能单独注册或连续使用，不能放在开头或结尾。创建完成后不支持修改。
+  
      */
-    StartTime?: string;
+    ProxyName: string;
     /**
-     * 查询结束时间，时间与job-id必填一个。
+     * 四层代理实例加速区域。
+  <li>mainland：中国大陆可用区；</li>
+  <li>overseas：全球可用区（不含中国大陆）；</li>
+  <li>global：全球可用区。</li>
      */
-    EndTime?: string;
+    Area: string;
     /**
-     * 分页查询偏移量，默认为0。
+     * 是否开启 IPv6 访问，不填写时默认为 off。该配置仅在部分加速区域和安全防护配置下支持开启，详情请参考 [新建四层代理实例](https://cloud.tencent.com/document/product/1552/90025) 。取值为：
+  <li>on：开启；</li>
+  <li>off：关闭。</li>
+  
+  
      */
-    Offset?: number;
+    Ipv6?: string;
     /**
-     * 分页查限制数目，默认值：20，最大值：1000。
+     * 是否开启固定 IP，不填写时默认为 off。该配置仅在部分加速区域和安全防护配置下支持开启，详情请参考 [新建四层代理实例](https://cloud.tencent.com/document/product/1552/90025) 。取值为：
+  <li>on：开启；</li>
+  <li>off：关闭。</li>
+  
      */
-    Limit?: number;
+    StaticIp?: string;
     /**
-     * 过滤条件，Filters.Values的上限为20。详细的过滤条件如下：<li>job-id<br>   按照【<strong>任务ID</strong>】进行过滤。job-id形如：1379afjk91u32h，暂不支持多值。<br>   类型：String<br>   必选：否<br>   模糊查询：不支持</li><li>target<br>   按照【<strong>目标资源信息</strong>】进行过滤，target形如：http://www.qq.com/1.txt或者tag1，暂不支持多值<br>   类型：String<br>   必选：否<br>   模糊查询：不支持</li><li>domains<br>   按照【<strong>域名</strong>】进行过滤，domains形如：www.qq.com<br>   类型：String<br>   必选：否<br>   模糊查询：不支持。</li><li>statuses<br>   按照【<strong>任务状态</strong>】进行过滤<br>   必选：否<br>   模糊查询：不支持。<br>   可选项：<br>   processing：处理中<br>   success：成功<br>   failed：失败<br>   timeout：超时</li><li>type<br>   按照【<strong>清除缓存类型</strong>】进行过滤，暂不支持多值。<br>   类型：String<br>   必选：否<br>   模糊查询：不支持<br>   可选项：<br>   purge_url：URL<br>   purge_prefix：前缀<br>   purge_all：全部缓存内容<br>   purge_host：Hostname<br>   purge_cache_tag：CacheTag</li>
+     * 是否开启中国大陆网络优化，不填写时默认为 off。该配置仅在部分加速区域和安全防护配置下支持开启，详情请参考 [新建四层代理实例](https://cloud.tencent.com/document/product/1552/90025) 。取值为：
+  <li>on：开启；</li>
+  <li>off：关闭。</li>
+  
      */
-    Filters?: Array<AdvancedFilter>;
+    AccelerateMainland?: string;
+    /**
+     * L3/L4 DDoS 防护配置，不填写时默认使用平台默认防护选项。详情参考 [独立 DDoS 防护](https://cloud.tencent.com/document/product/1552/95994)。
+     */
+    DDosProtectionConfig?: DDosProtectionConfig;
 }
 /**
  * DescribeTimingL7AnalysisData返回参数结构体
@@ -4810,17 +5032,23 @@ export interface CreateRuleRequest {
     Tags?: Array<string>;
 }
 /**
- * 安全模板配置
+ * ModifyL4ProxyStatus请求参数结构体
  */
-export interface TemplateConfig {
+export interface ModifyL4ProxyStatusRequest {
     /**
-     * 模板ID。
+     * 站点 ID。
      */
-    TemplateId: string;
+    ZoneId: string;
     /**
-     * 模板名称。
+     * 四层代理实例 ID。
      */
-    TemplateName: string;
+    ProxyId: string;
+    /**
+     * 四层代理实例状态，取值有：
+  <li>online：启用；</li>
+  <li>offline：停用。</li>
+     */
+    Status: string;
 }
 /**
  * TopN的Entry数据
@@ -5055,6 +5283,25 @@ export interface RateLimitUserRule {
      * 重定向时候的地址。Action 是 redirect 时必填，且不能为空。
      */
     RedirectUrl?: string;
+}
+/**
+ * 支持标准debug结构体
+ */
+export interface StandardDebug {
+    /**
+     * Debug 功能开关，取值有：
+  <li>on：开启；</li>
+  <li>off：关闭。</li>
+     */
+    Switch: string;
+    /**
+     * 允许的客户端来源。支持填写 IPv4 以及 IPv6 的 IP/IP 段。0.0.0.0/0 表示允许所有 IPv4 客户端进行调试，::/0 表示允许所有 IPv6 客户端进行调试。
+     */
+    AllowClientIPList: Array<string>;
+    /**
+     * Debug 功能到期时间。超出设置的时间，则功能失效。
+     */
+    ExpireTime: string;
 }
 /**
  * 嵌套规则信息。
@@ -5446,6 +5693,29 @@ export interface Rule {
     SubRules?: Array<SubRuleItem>;
 }
 /**
+ * ModifyL4ProxyRulesStatus请求参数结构体
+ */
+export interface ModifyL4ProxyRulesStatusRequest {
+    /**
+     * 站点 ID。
+     */
+    ZoneId: string;
+    /**
+     * 四层代理实例 ID。
+     */
+    ProxyId: string;
+    /**
+     * 转发规则 ID 列表。单次最多支持 200 条转发规则。
+     */
+    RuleIds: Array<string>;
+    /**
+     * 转发规则状态，取值有：
+  <li>online：启用；</li>
+  <li>offline：停用。</li>
+     */
+    Status: string;
+}
+/**
  * 描述键值对过滤器，用于条件过滤查询。例如过滤ID、名称、状态等。
 若存在多个Filter时，Filter间的关系为逻辑与（AND）关系。
 若同一个Filter存在多个Values，同一Filter下Values间的关系为逻辑或（OR）关系。
@@ -5469,6 +5739,19 @@ export interface CreateAccelerationDomainResponse {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     OwnershipVerification?: OwnershipVerification;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * CreateL4ProxyRules返回参数结构体
+ */
+export interface CreateL4ProxyRulesResponse {
+    /**
+     * 新增转发规则的 ID，以数组的形式返回。
+     */
+    L4ProxyRuleIds?: Array<string>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -5515,6 +5798,47 @@ export interface CreateZoneResponse {
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * ModifyAccelerationDomain请求参数结构体
+ */
+export interface ModifyAccelerationDomainRequest {
+    /**
+     * 加速域名所属站点ID。
+     */
+    ZoneId: string;
+    /**
+     * 加速域名名称。
+     */
+    DomainName: string;
+    /**
+     * 源站信息。
+     */
+    OriginInfo?: OriginInfo;
+    /**
+     * 回源协议，取值有：
+  <li>FOLLOW: 协议跟随；</li>
+  <li>HTTP: HTTP协议回源；</li>
+  <li>HTTPS: HTTPS协议回源。</li>
+  <li>不填保持原有配置。</li>
+     */
+    OriginProtocol?: string;
+    /**
+     * HTTP回源端口，取值为1-65535，当OriginProtocol=FOLLOW/HTTP时生效, 不填保持原有配置。
+     */
+    HttpOriginPort?: number;
+    /**
+     * HTTPS回源端口，取值为1-65535，当OriginProtocol=FOLLOW/HTTPS时生效，不填保持原有配置。
+     */
+    HttpsOriginPort?: number;
+    /**
+     * IPv6状态，取值有：
+  <li>follow：遵循站点IPv6配置；</li>
+  <li>on：开启状态；</li>
+  <li>off：关闭状态。</li>
+  <li>不填保持原有配置。</li>
+     */
+    IPv6Status?: string;
 }
 /**
  * 规则引擎功能项操作，对于一种功能只对应下面三种类型的其中一种，RuleAction 数组中的每一项只能是其中一个类型，更多功能项的填写规范可调用接口 [查询规则引擎的设置参数](https://cloud.tencent.com/document/product/1552/80618) 查看。
@@ -5914,6 +6238,31 @@ export interface DropPageConfig {
     AclDropPageDetail?: DropPageDetail;
 }
 /**
+ * DescribeL4Proxy请求参数结构体
+ */
+export interface DescribeL4ProxyRequest {
+    /**
+     * 四层代理实例所属站点的 ID。
+     */
+    ZoneId: string;
+    /**
+     * 分页查询偏移量，不填写时默认为 0。
+     */
+    Offset?: number;
+    /**
+     * 分页查询限制数目。默认值：20，最大值：1000。
+     */
+    Limit?: number;
+    /**
+     * 过滤条件，Filters.Values 的上限为 20。该参数不填写时，返回当前 zone-id 下所有四层代理实例信息。详细的过滤条件如下：
+  <li>proxy-id：按照四层代理实例 ID 进行过滤；</li>
+  <li>ddos-protection-type：按照安全防护类型进行过滤。</li>
+  
+  
+     */
+    Filters?: Array<Filter>;
+}
+/**
  * 安全数据Entry返回值
  */
 export interface SecEntry {
@@ -5943,6 +6292,21 @@ export interface DescribeIdentificationsRequest {
      * 分页查询限制数目。默认值：20，最大值：1000。
      */
     Limit?: number;
+}
+/**
+ * ModifyZoneStatus请求参数结构体
+ */
+export interface ModifyZoneStatusRequest {
+    /**
+     * 站点 ID。
+     */
+    ZoneId: string;
+    /**
+     * 站点状态，取值有：
+  <li> false：开启站点；</li>
+  <li> true：关闭站点。</li>
+     */
+    Paused: boolean;
 }
 /**
  * DescribeDefaultCertificates返回参数结构体
@@ -6472,13 +6836,35 @@ export interface ModifyApplicationProxyRuleRequest {
     RuleTag?: string;
 }
 /**
- * ModifyAccelerationDomain返回参数结构体
+ * 例外规则的生效范围。
  */
-export interface ModifyAccelerationDomainResponse {
+export interface ExceptUserRuleScope {
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     * 例外规则类型。其中complete模式代表全量数据进行例外，partial模式代表可选择指定模块指定字段进行例外，该字段取值有：
+  <li>complete：完全跳过模式；</li>
+  <li>partial：部分跳过模式。</li>
      */
-    RequestId?: string;
+    Type?: string;
+    /**
+     * 生效的模块，该字段取值有：
+  <li>waf：托管规则；</li>
+  <li>rate：速率限制；</li>
+  <li>acl：自定义规则；</li>
+  <li>cc：cc攻击防护；</li>
+  <li>bot：Bot防护。</li>
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Modules?: Array<string>;
+    /**
+     * 跳过部分规则ID的例外规则详情。如果为null，默认使用历史配置。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PartialModules?: Array<PartialModule>;
+    /**
+     * 跳过具体字段不去扫描的例外规则详情。如果为null，默认使用历史配置。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SkipConditions?: Array<SkipCondition>;
 }
 /**
  * 失败原因
@@ -6492,6 +6878,54 @@ export interface FailReason {
      * 处理失败的资源列表。
      */
     Targets: Array<string>;
+}
+/**
+ * DescribePrefetchTasks请求参数结构体
+ */
+export interface DescribePrefetchTasksRequest {
+    /**
+     * 站点ID。
+  必填参数。
+     */
+    ZoneId?: string;
+    /**
+     * 查询起始时间，时间与 job-id 必填一个。
+     */
+    StartTime?: string;
+    /**
+     * 查询结束时间，时间与 job-id 必填一个。
+     */
+    EndTime?: string;
+    /**
+     * 分页查询偏移量，默认为 0。
+     */
+    Offset?: number;
+    /**
+     * 分页查询限制数目，默认值：20，上限：1000。
+     */
+    Limit?: number;
+    /**
+     * 过滤条件，Filters.Values的上限为20。详细的过滤条件如下：<li>job-id<br>   按照【<strong>任务ID</strong>】进行过滤。job-id形如：1379afjk91u32h，暂不支持多值。<br>   类型：String<br>   必选：否。<br>   模糊查询：不支持。</li><li>target<br>   按照【<strong>目标资源信息</strong>】进行过滤。target形如：http://www.qq.com/1.txt，暂不支持多值。<br>   类型：String<br>   必选：否。<br>   模糊查询：不支持。</li><li>domains<br>   按照【<strong>域名</strong>】进行过滤。domains形如：www.qq.com。<br>   类型：String<br>   必选：否。<br>   模糊查询：不支持。</li><li>statuses<br>   按照【<strong>任务状态</strong>】进行过滤。<br>   必选：否<br>   模糊查询：不支持。<br>   可选项：<br>   processing：处理中<br>   success：成功<br>   failed：失败<br>   timeout：超时</li>
+     */
+    Filters?: Array<AdvancedFilter>;
+}
+/**
+ * ModifyL4ProxyRules请求参数结构体
+ */
+export interface ModifyL4ProxyRulesRequest {
+    /**
+     * 站点 ID。
+     */
+    ZoneId: string;
+    /**
+     * 四层代理实例 ID。
+     */
+    ProxyId: string;
+    /**
+     * 转发规则列表。单次最多支持 200 条转发规则。
+  注意：L4ProxyRule 在此处使用时，RuleId 为必填字段；Protocol、PortRange、OriginType、OriginValue、OriginPortRange、ClientIPPassThroughMode、SessionPersist、SessionPersistTime、RuleTag 均为选填字段，不填写表示不修改；Status 请勿填写。
+     */
+    L4ProxyRules: Array<L4ProxyRule>;
 }
 /**
  * DescribeRulesSetting请求参数结构体
@@ -6540,6 +6974,19 @@ export interface EntityStatus {
      * 实例配置下发信息提示。
      */
     Message?: string;
+}
+/**
+ * 安全模板配置
+ */
+export interface TemplateConfig {
+    /**
+     * 模板ID。
+     */
+    TemplateId: string;
+    /**
+     * 模板名称。
+     */
+    TemplateName: string;
 }
 /**
  * 规则引擎HTTP请求头/响应头类型的动作
@@ -6655,23 +7102,15 @@ export interface DescribeTopL7AnalysisDataResponse {
     RequestId?: string;
 }
 /**
- * 支持标准debug结构体
+ * 离线缓存是否开启
  */
-export interface StandardDebug {
+export interface OfflineCache {
     /**
-     * Debug 功能开关，取值有：
+     * 离线缓存是否开启，取值有：
   <li>on：开启；</li>
   <li>off：关闭。</li>
      */
     Switch: string;
-    /**
-     * 允许的客户端来源。支持填写 IPv4 以及 IPv6 的 IP/IP 段。0.0.0.0/0 表示允许所有 IPv4 客户端进行调试，::/0 表示允许所有 IPv6 客户端进行调试。
-     */
-    AllowClientIPList: Array<string>;
-    /**
-     * Debug 功能到期时间。超出设置的时间，则功能失效。
-     */
-    ExpireTime: string;
 }
 /**
  * 规则引擎条件常规动作参数
@@ -7104,7 +7543,7 @@ export interface DescribeAvailablePlansResponse {
      * 当前账户可购买套餐类型及相关信息。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    PlanInfo: Array<PlanInfo>;
+    PlanInfo?: Array<PlanInfo>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -7263,6 +7702,19 @@ export interface DescribeSecurityTemplateBindingsRequest {
     TemplateId: Array<string>;
 }
 /**
+ * CreateL4Proxy返回参数结构体
+ */
+export interface CreateL4ProxyResponse {
+    /**
+     * 四层实例 ID。
+     */
+    ProxyId?: string;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * Bot主动特征识别校验结果。
  */
 export interface AlgDetectResult {
@@ -7305,6 +7757,77 @@ export interface DescribeDeployHistoryResponse {
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * 四层代理实例。
+ */
+export interface L4Proxy {
+    /**
+     * 站点 ID。
+     */
+    ZoneId?: string;
+    /**
+     * 四层代理实例 ID。
+     */
+    ProxyId?: string;
+    /**
+     * 四层代理实例名称。
+     */
+    ProxyName?: string;
+    /**
+     * 四层代理实例的加速区域。
+  <li>mainland：中国大陆可用区；</li>
+  <li>overseas： 全球可用区（不含中国大陆）；</li>
+   <li>global：全球可用区。</li>
+     */
+    Area?: string;
+    /**
+     * 接入 CNAME。
+     */
+    Cname?: string;
+    /**
+     * 开启固定 IP 后，该值会返回对应的接入 IP；未开启时，该值为空。
+     */
+    Ips?: Array<string>;
+    /**
+     * 四层代理实例状态。
+  <li>online：已启用；</li>
+  <li>offline：已停用；</li>
+  <li>progress：部署中；</li>
+  <li>stopping：停用中；</li>
+  <li>banned：已封禁；</li>
+  <li>fail：部署失败/停用失败。</li>
+     */
+    Status?: string;
+    /**
+     * 是否开启 IPv6 访问。
+  <li>on：开启；</li>
+  <li>off：关闭。</li>
+     */
+    Ipv6?: string;
+    /**
+     * 是否开启固定 IP。
+   <li>on：开启；</li> <li>off：关闭。</li>
+     */
+    StaticIp?: string;
+    /**
+     * 是否开启中国大陆网络优化。
+   <li>on：开启</li> <li>off：关闭</li>
+     */
+    AccelerateMainland?: string;
+    /**
+     * 安全防护配置。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DDosProtectionConfig?: DDosProtectionConfig;
+    /**
+     * 四层代理实例下的转发规则数量。
+     */
+    L4ProxyRuleCount?: number;
+    /**
+     * 最新变更时间。
+     */
+    UpdateTime?: string;
 }
 /**
  * CacheKey中包含请求参数
@@ -7484,15 +8007,22 @@ export interface TopEntryValue {
     Count: number;
 }
 /**
- * 离线缓存是否开启
+ * CreateL4ProxyRules请求参数结构体
  */
-export interface OfflineCache {
+export interface CreateL4ProxyRulesRequest {
     /**
-     * 离线缓存是否开启，取值有：
-  <li>on：开启；</li>
-  <li>off：关闭。</li>
+     * 站点 ID。
      */
-    Switch: string;
+    ZoneId: string;
+    /**
+     * 四层代理实例 ID。
+     */
+    ProxyId: string;
+    /**
+     * 转发规则列表。单次最多支持 200 条转发规则。
+  注意：L4ProxyRule 在此处使用时，Protocol、PortRange、OriginType、OriginValue、OriginPortRange 为必填字段；ClientIPPassThroughMode、SessionPersist、SessionPersistTime、RuleTag 均为选填字段；RuleId、Status 请勿填写。
+     */
+    L4ProxyRules: Array<L4ProxyRule>;
 }
 /**
  * DescribeDDoSAttackTopData返回参数结构体

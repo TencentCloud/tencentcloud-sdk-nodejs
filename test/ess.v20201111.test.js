@@ -348,6 +348,16 @@ it("ess.v20201111.DescribeExtendedServiceAuthInfos", async function () {
     }
 })
 
+it("ess.v20201111.ModifyFlowDeadline", async function () {
+    try {
+       const data = await client.ModifyFlowDeadline({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ess.v20201111.UploadFiles", async function () {
     try {
        const data = await client.UploadFiles({})

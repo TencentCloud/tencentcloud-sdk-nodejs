@@ -3022,6 +3022,8 @@ export interface DescribeMediaProcessUsageDataRequest {
 <li> VideoClassification:  视频智能分类</li>
 <li> VideoCover: 视频智能封面</li>
 <li> VideoSegment: 视频智能拆条</li>
+<li> VideoProduce: 视频制作</li>
+<li> MediaCast: 媒体转推</li>
 <li>Transcode: 转码，包含普通转码、极速高清和视频编辑（不推荐使用）</li>
    */
   Type?: string
@@ -13753,6 +13755,11 @@ export interface EventContent {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   QualityEnhanceCompleteEvent?: QualityEnhanceTask
+  /**
+   * 媒体转推状态变化事件，当事件类型为 MediaCastStatusChanged 时有效。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MediaCastStatusChangedEvent?: MediaCastEvent
 }
 
 /**
@@ -14589,6 +14596,25 @@ export interface DeleteWordSamplesResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 媒体转推事件通知消息。
+ */
+export interface MediaCastEvent {
+  /**
+   * 媒体转推 ID。
+   */
+  CastId?: string
+  /**
+   * 转推状态，取值有：
+<li>Working ：运行中；</li>
+<li>Scheduled ：等待定时时间到达后启动；</li>
+<li>Stopped ：已经停止转推；</li>
+<li>Idle ：空闲。</li>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status?: string
 }
 
 /**

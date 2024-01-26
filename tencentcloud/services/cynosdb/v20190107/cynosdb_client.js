@@ -454,6 +454,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeInstanceDetail", req, cb);
     }
     /**
+     * 获取审计实例列表
+     */
+    async DescribeAuditInstanceList(req, cb) {
+        return this.request("DescribeAuditInstanceList", req, cb);
+    }
+    /**
      * 查询回档时间范围
      */
     async DescribeRollbackTimeRange(req, cb) {

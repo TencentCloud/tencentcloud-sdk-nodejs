@@ -331,151 +331,156 @@ export interface DeleteTrainingModelVersionResponse {
     RequestId?: string;
 }
 /**
- * 跑批任务详情
+ * 批量预测任务详情
  */
 export interface BatchTaskDetail {
     /**
-     * 跑批任务ID
+     * 批量预测任务ID
      */
-    BatchTaskId: string;
+    BatchTaskId?: string;
     /**
-     * 跑批任务名称
+     * 批量预测任务名称
      */
-    BatchTaskName: string;
+    BatchTaskName?: string;
     /**
      * 主账号uin
      */
-    Uin: string;
+    Uin?: string;
     /**
      * 子账号uin
      */
-    SubUin: string;
+    SubUin?: string;
     /**
      * 地域
      */
-    Region: string;
+    Region?: string;
     /**
      * 计费模式
      */
-    ChargeType: string;
+    ChargeType?: string;
     /**
      * 包年包月资源组ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ResourceGroupId: string;
+    ResourceGroupId?: string;
     /**
      * 包年包月资源组名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ResourceGroupName: string;
+    ResourceGroupName?: string;
     /**
      * 资源配置
      */
-    ResourceConfigInfo: ResourceConfigInfo;
+    ResourceConfigInfo?: ResourceConfigInfo;
     /**
      * 标签
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Tags: Array<Tag>;
+    Tags?: Array<Tag>;
     /**
      * 服务对应的模型信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ModelInfo: ModelInfo;
+    ModelInfo?: ModelInfo;
     /**
      * 自定义镜像信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ImageInfo: ImageInfo;
+    ImageInfo?: ImageInfo;
     /**
      * 代码包
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CodePackagePath: CosPathInfo;
+    CodePackagePath?: CosPathInfo;
     /**
      * 启动命令
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    StartCmd: string;
+    StartCmd?: string;
     /**
      * 输入数据配置
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DataConfigs: Array<DataConfig>;
+    DataConfigs?: Array<DataConfig>;
     /**
      * 输出数据配置
      */
-    Outputs: Array<DataConfig>;
+    Outputs?: Array<DataConfig>;
     /**
      * 是否上报日志
      */
-    LogEnable: boolean;
+    LogEnable?: boolean;
     /**
      * 日志配置
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    LogConfig: LogConfig;
+    LogConfig?: LogConfig;
     /**
      * vpc id
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    VpcId: string;
+    VpcId?: string;
     /**
      * 子网id
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SubnetId: string;
+    SubnetId?: string;
     /**
      * 任务状态
      */
-    Status: string;
+    Status?: string;
     /**
      * 运行时长
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    RuntimeInSeconds: number;
+    RuntimeInSeconds?: number;
     /**
      * 创建时间
      */
-    CreateTime: string;
+    CreateTime?: string;
     /**
      * 更新时间
      */
-    UpdateTime: string;
+    UpdateTime?: string;
     /**
      * 任务开始时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    StartTime: string;
+    StartTime?: string;
     /**
      * 任务结束时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    EndTime: string;
+    EndTime?: string;
     /**
-     * 计费状态，eg：BILLING计费中，ARREARS_STOP欠费停止，NOT_BILLING不在计费中
+     * 计费状态，取值范围:
+  BILLING: 计费中
+  NOT_BILLING: 未计费
+  WHITELIST_USING: 白名单使用中
+  WHITELIST_STOP: 白名单到期
+  ARREARS_STOP: 欠费停止
      */
-    ChargeStatus: string;
+    ChargeStatus?: string;
     /**
      * 最近一次实例ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    LatestInstanceId: string;
+    LatestInstanceId?: string;
     /**
      * 备注
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Remark: string;
+    Remark?: string;
     /**
      * 失败原因
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    FailureReason: string;
+    FailureReason?: string;
     /**
      * 计费金额信息，eg：2.00元/小时 (for 按量计费)
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    BillingInfo: string;
+    BillingInfo?: string;
     /**
      * 运行中的Pod的名字
   注意：此字段可能返回 null，表示取不到有效值。
@@ -1243,7 +1248,7 @@ export interface DescribeTrainingTasksRequest {
  */
 export interface DescribeBatchTaskRequest {
     /**
-     * 跑批任务ID
+     * 批量预测任务ID
      */
     BatchTaskId: string;
 }
@@ -1659,7 +1664,7 @@ export interface RowValue {
  */
 export interface CreateBatchTaskRequest {
     /**
-     * 跑批任务名称，不超过60个字符，仅支持中英文、数字、下划线"_"、短横"-"，只能以中英文、数字开头
+     * 批量预测任务名称，不超过60个字符，仅支持中英文、数字、下划线"_"、短横"-"，只能以中英文、数字开头
      */
     BatchTaskName: string;
     /**
@@ -1671,7 +1676,7 @@ export interface CreateBatchTaskRequest {
      */
     ResourceConfigInfo: ResourceConfigInfo;
     /**
-     * 结果输出
+     * 结果输出存储信息
      */
     Outputs: Array<DataConfig>;
     /**
@@ -1680,10 +1685,12 @@ export interface CreateBatchTaskRequest {
     LogEnable: boolean;
     /**
      * 工作类型 1:单次 2:周期
+     * @deprecated
      */
     JobType?: number;
     /**
      * 任务周期描述
+     * @deprecated
      */
     CronInfo?: CronInfo;
     /**
@@ -2120,7 +2127,7 @@ export interface StartTrainingTaskRequest {
  */
 export interface StopBatchTaskRequest {
     /**
-     * 跑批任务ID
+     * 批量预测任务ID
      */
     BatchTaskId: string;
 }
@@ -2728,10 +2735,10 @@ export interface DescribeTrainingModelsResponse {
  */
 export interface DescribeBatchTaskInstancesResponse {
     /**
-     * 实例集
+     * 批量预测实例结果
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    BatchInstances: Array<BatchTaskInstance>;
+    BatchInstances?: Array<BatchTaskInstance>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -3295,7 +3302,7 @@ export interface ResourceGroup {
  */
 export interface DescribeBatchTaskInstancesRequest {
     /**
-     * 跑批任务id
+     * 批量预测任务id
      */
     BatchTaskId: string;
 }
@@ -3544,11 +3551,11 @@ export declare type DescribeTrainingFrameworksRequest = null;
  */
 export interface DescribeBatchTasksResponse {
     /**
-     * 数量
+     * 批量预测任务总数
      */
     TotalCount?: number;
     /**
-     * 任务集
+     * 批量预测任务列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
     BatchTaskSet?: Array<BatchTaskSetItem>;
@@ -3921,89 +3928,95 @@ export interface PreTrainModel {
  */
 export interface BatchTaskSetItem {
     /**
-     * 跑批任务ID
+     * 批量预测任务ID
      */
-    BatchTaskId: string;
+    BatchTaskId?: string;
     /**
-     * 跑批任务名称
+     * 批量预测任务名称
      */
-    BatchTaskName: string;
+    BatchTaskName?: string;
     /**
      * 模型信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ModelInfo: ModelInfo;
+    ModelInfo?: ModelInfo;
     /**
      * 镜像信息
      */
-    ImageInfo: ImageInfo;
+    ImageInfo?: ImageInfo;
     /**
      * 计费模式
      */
-    ChargeType: string;
+    ChargeType?: string;
     /**
-     * 计费状态，eg：BILLING计费中，ARREARS_STOP欠费停止，NOT_BILLING不在计费中
+     * 计费状态，取值范围:
+  BILLING: 计费中
+  NOT_BILLING: 未计费
+  WHITELIST_USING: 白名单使用中
+  WHITELIST_STOP: 白名单到期
+  ARREARS_STOP: 欠费停止
      */
-    ChargeStatus: string;
+    ChargeStatus?: string;
     /**
      * 包年包月资源组ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ResourceGroupId: string;
+    ResourceGroupId?: string;
     /**
      * 资源配置
      */
-    ResourceConfigInfo: ResourceConfigInfo;
+    ResourceConfigInfo?: ResourceConfigInfo;
     /**
      * 标签配置
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Tags: Array<Tag>;
+    Tags?: Array<Tag>;
     /**
-     * 任务状态
+     * 任务状态, 取值范围:
+  INIT, STARTING, RUNNING, FAILED, STOPPING, STOPPED, SUCCEED
      */
-    Status: string;
+    Status?: string;
     /**
      * 运行时长
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    RuntimeInSeconds: number;
+    RuntimeInSeconds?: number;
     /**
-     * 创建时间
+     * 任务创建时间
      */
-    CreateTime: string;
+    CreateTime?: string;
     /**
-     * 开始时间
+     * 任务开始运行时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    StartTime: string;
+    StartTime?: string;
     /**
-     * 结束时间
+     * 任务结束时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    EndTime: string;
+    EndTime?: string;
     /**
-     * 更新时间
+     * 任务更新时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    UpdateTime: string;
+    UpdateTime?: string;
     /**
      * 输出
      */
-    Outputs: Array<DataConfig>;
+    Outputs?: Array<DataConfig>;
     /**
      * 包年包月资源组名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ResourceGroupName: string;
+    ResourceGroupName?: string;
     /**
      * 失败原因
      */
-    FailureReason: string;
+    FailureReason?: string;
     /**
-     * 计费金额信息，eg：2.00元/小时 (for 按量计费)
+     * 按量计费信息
      */
-    BillingInfo: string;
+    BillingInfo?: string;
 }
 /**
  * 镜像描述信息
@@ -4887,7 +4900,7 @@ export interface BatchTaskInstance {
  */
 export interface CreateBatchTaskResponse {
     /**
-     * 跑批任务ID
+     * 批量预测任务ID
      */
     BatchTaskId?: string;
     /**
@@ -5288,7 +5301,7 @@ export interface OcrLabelInfo {
  */
 export interface DeleteBatchTaskRequest {
     /**
-     * 跑批任务ID
+     * 批量预测任务ID
      */
     BatchTaskId: string;
 }
@@ -5607,18 +5620,17 @@ export interface EngineVersion {
  */
 export interface DescribeBatchTasksRequest {
     /**
-     * 过滤器，eg：[{ "Name": "Id", "Values": ["train-23091792777383936"] }]
+     * 过滤器
   
-  取值范围：
-  Name（名称）：task1
-  Id（task ID）：train-23091792777383936
-  Status（状态）：STARTING / RUNNING / STOPPING / STOPPED / FAILED / SUCCEED / SUBMIT_FAILED
-  ChargeType（计费类型）：PREPAID 包年包月 / POSTPAID_BY_HOUR 按量计费
-  CHARGE_STATUS（计费状态）：NOT_BILLING（未开始计费）/ BILLING（计费中）/ ARREARS_STOP（欠费停止）
+  Name支持的取值范围：
+  BatchTaskId, BatchTaskName, Status, ModelVersionId
+  
+  其中Status 的有效取值范围:
+  INIT, STARTING, RUNNING, FAILED, STOPPING, STOPPED, SUCCEED
      */
     Filters?: Array<Filter>;
     /**
-     * 标签过滤器，eg：[{ "TagKey": "TagKeyA", "TagValue": ["TagValueA"] }]
+     * 标签过滤器
      */
     TagFilters?: Array<TagFilter>;
     /**
@@ -5626,7 +5638,7 @@ export interface DescribeBatchTasksRequest {
      */
     Offset?: number;
     /**
-     * 返回数量，默认为10，最大为50
+     * 限制数目，默认为20
      */
     Limit?: number;
     /**
@@ -5634,7 +5646,8 @@ export interface DescribeBatchTasksRequest {
      */
     Order?: string;
     /**
-     * 排序的依据字段， 取值范围 "CreateTime" "UpdateTime"
+     * 排序字段。当前仅支持 "CreateTime"。
+  不传此字段则按照DB默认排序结果返回
      */
     OrderField?: string;
 }
@@ -7457,7 +7470,7 @@ export interface DescribeTrainingTaskResponse {
  */
 export interface DescribeBatchTaskResponse {
     /**
-     * 跑批任务详情
+     * 批量预测任务详情
   注意：此字段可能返回 null，表示取不到有效值。
      */
     BatchTaskDetail?: BatchTaskDetail;

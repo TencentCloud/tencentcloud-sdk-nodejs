@@ -407,7 +407,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建技能组
+   * 新建技能组
    */
   async CreateCCCSkillGroup(
     req: CreateCCCSkillGroupRequest,

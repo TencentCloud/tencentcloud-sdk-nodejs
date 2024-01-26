@@ -505,20 +505,26 @@ export interface ChannelCreateFlowGroupByTemplatesResponse {
  */
 export interface ChannelCreateFlowSignReviewRequest {
     /**
-     * 应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 必填。
+     * 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。
+  
+  此接口下面信息必填。
+  <ul>
+  <li>渠道应用标识:  Agent.AppId</li>
+  <li>第三方平台子客企业标识: Agent.ProxyOrganizationOpenId</li>
+  <li>第三方平台子客企业中的员工标识: Agent. ProxyOperator.OpenId</li>
+  </ul>
+  第三方平台子客企业和员工必须已经经过实名认证
      */
     Agent: Agent;
     /**
      * 合同流程ID，为32位字符串。
-  <ul><li>建议开发者妥善保存此流程ID，以便于顺利进行后续操作。</li>
-  <li>可登录腾讯电子签控制台，在 "合同"->"合同中心" 中查看某个合同的FlowId(在页面中展示为合同ID)。</li></ul>
      */
     FlowId: string;
     /**
      * 企业内部审核结果
-  <ul><li>PASS: 审核通过</li>
-  <li>REJECT: 审核拒绝</li>
-  <li>SIGN_REJECT:拒签(流程结束)</li></ul>
+  <ul><li>PASS: 审核通过（流程可以继续签署或者发起）</li>
+  <li>REJECT: 审核拒绝（流程状态不变，可以继续调用审核接口通过审核）</li>
+  <li>SIGN_REJECT:拒签(流程终止，流程状态变为拒签状态)</li></ul>
      */
     ReviewType: string;
     /**
@@ -828,6 +834,23 @@ export interface WebThemeConfig {
   <br/>
      */
     WebEmbedThemeColor?: string;
+    /**
+     * 企业认证页背景图（base64图片）
+  
+     */
+    AuthenticateBackground?: string;
+    /**
+     * 隐藏企业认证页面导航栏，取值如下：
+  <ul><li> **true**：隐藏企业认证页面导航栏</li>
+  <li> **false**：显示企业认证页面导航栏（默认）</li></ul>
+     */
+    HideAuthenticateNavigationBar?: boolean;
+    /**
+     * 隐藏企业认证顶部logo，取值如下：
+  <ul><li> **true**：隐藏企业认证顶部logo</li>
+  <li> **false**：显示企业认证顶部logo（默认）</li></ul>
+     */
+    HideAuthenticateTopLogo?: boolean;
 }
 /**
  * OperateChannelTemplate返回参数结构体
@@ -1160,8 +1183,7 @@ export interface ReleasedApprover {
 export interface CreateConsoleLoginUrlResponse {
     /**
      * 跳转链接, 链接的有效期根据企业,员工状态和终端等有区别, 可以参考下表
-  <table> <thead> <tr> <th>子客企业状态</th> <th>子客企业员工状态</th>
-  <th>Endpoint</th> <th>链接有效期限</th> </tr> </thead>  <tbody> <tr> <td>企业未激活</td> <td>员工未认证</td> <td>PC/PC_SHORT_URL</td> <td>5分钟</td>  </tr>  <tr> <td>企业未激活</td> <td>员工未认证</td> <td>CHANNEL/APP/H5/SHORT_H5</td> <td>30天</td>  </tr>  <tr> <td>企业已激活</td> <td>员工未认证</td> <td>PC/PC_SHORT_URL</td> <td>5分钟</td>  </tr> <tr> <td>企业已激活</td> <td>员工未认证</td> <td>PC/CHANNEL/APP/H5/SHORT_H5</td> <td>30天</td>  </tr>  <tr> <td>企业已激活</td> <td>员工已认证</td> <td>PC</td> <td>5分钟</td>  </tr>  <tr> <td>企业已激活</td> <td>员工已认证</td> <td>CHANNEL/APP/H5/SHORT_H5</td> <td>30天</td>  </tr> </tbody> </table>
+  <table> <thead> <tr> <th>子客企业状态</th> <th>子客企业员工状态</th> <th>Endpoint</th> <th>链接有效期限</th> </tr> </thead>  <tbody> <tr> <td>企业未激活</td> <td>员工未认证</td> <td>PC/PC_SHORT_URL</td> <td>5分钟</td>  </tr>  <tr> <td>企业未激活</td> <td>员工未认证</td> <td>CHANNEL/APP/H5/SHORT_H5</td> <td>30天</td>  </tr>  <tr> <td>企业已激活</td> <td>员工未认证</td> <td>PC/PC_SHORT_URL</td> <td>5分钟</td>  </tr> <tr> <td>企业已激活</td> <td>员工未认证</td> <td>PC/CHANNEL/APP/H5/SHORT_H5</td> <td>30天</td>  </tr>  <tr> <td>企业已激活</td> <td>员工已认证</td> <td>PC</td> <td>5分钟</td>  </tr>  <tr> <td>企业已激活</td> <td>员工已认证</td> <td>CHANNEL/APP/H5/SHORT_H5</td> <td>30天</td>  </tr> </tbody> </table>
   
   注：
   1. <font color="red">链接仅单次有效</font>，每次登录需要需要重新创建新的链接
@@ -2199,6 +2221,8 @@ export interface ChannelCreateFlowByFilesResponse {
     /**
      * 合同流程ID，为32位字符串。
   建议开发者妥善保存此流程ID，以便于顺利进行后续操作。
+  
+  [点击产看FlowId在控制台上的位置](https://qcloudimg.tencent-cloud.cn/raw/05af26573d5106763b4cfbb9f7c64b41.png)
   注意：此字段可能返回 null，表示取不到有效值。
      */
     FlowId?: string;
@@ -2833,6 +2857,7 @@ export interface ChannelDescribeBillUsageDetailRequest {
   <li>**OrgEssAuth**: 签署企业实名</li>
   <li>**FlowNotify**: 短信通知</li>
   <li>**AuthService**: 企业工商信息查询</li>
+  <li>**NoAuthSign**: 形式签</li>
   </ul>
      */
     QuotaType?: string;
@@ -3869,6 +3894,9 @@ export interface FlowInfo {
   如果使用模板发起接口，此参数为必填。
   
   可以通过<a href="https://qian.tencent.com/developers/partnerApis/accounts/CreateConsoleLoginUrl" target="_blank">生成子客登录链接</a>登录企业控制台, 在**企业模板**中得到合同模板ID。
+  
+  [点击产看模板Id在控制台上的位置](https://qcloudimg.tencent-cloud.cn/raw/e988be12bf28a89b4716aed4502c2e02.png)
+  
      */
     TemplateId?: string;
     /**
@@ -3984,6 +4012,15 @@ export interface UserInfo {
      * @deprecated
      */
     ProxyIp?: string;
+}
+/**
+ * ModifyFlowDeadline返回参数结构体
+ */
+export interface ModifyFlowDeadlineResponse {
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * 复杂文档合成任务的任务信息
@@ -4750,8 +4787,9 @@ export interface FlowApproverInfo {
      */
     RecipientId?: string;
     /**
-     * 本签署人在此合同流程的签署截止时间，格式为Unix标准时间戳（秒），如果未设置签署截止时间，则默认为合同流程创建后的365天时截止。
-  如果在签署截止时间前未完成签署，则合同状态会变为已过期，导致合同作废。
+     * 签署人的签署截止时间，格式为Unix标准时间戳（秒）
+  
+  注: `若不设置此参数，则默认使用合同的截止时间，此参数暂不支持合同组子合同`
      */
     Deadline?: number;
     /**
@@ -5140,6 +5178,8 @@ export interface CreateFlowsByTemplatesResponse {
     /**
      * 生成的合同流程ID数组，合同流程ID为32位字符串。
   建议开发者妥善保存此流程ID数组，以便于顺利进行后续操作。
+  
+  [点击产看FlowId在控制台上的位置](https://qcloudimg.tencent-cloud.cn/raw/05af26573d5106763b4cfbb9f7c64b41.png)
      */
     FlowIds?: Array<string>;
     /**
@@ -5798,6 +5838,9 @@ export interface ChannelCreateReleaseFlowRequest {
     Agent: Agent;
     /**
      * 待解除的签署流程编号(即原签署流程的编号)。
+  
+  
+  [点击产看流程编号在控制台上的位置](https://qcloudimg.tencent-cloud.cn/raw/05af26573d5106763b4cfbb9f7c64b41.png)
      */
     NeedRelievedFlowId: string;
     /**
@@ -6020,7 +6063,15 @@ export interface ModifyExtendedServiceResponse {
  */
 export interface ChannelCreateUserRolesRequest {
     /**
-     * 应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 必填。
+     * 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。
+  
+  此接口下面信息必填。
+  <ul>
+  <li>渠道应用标识:  Agent.AppId</li>
+  <li>第三方平台子客企业标识: Agent.ProxyOrganizationOpenId</li>
+  <li>第三方平台子客企业中的员工标识: Agent. ProxyOperator.OpenId</li>
+  </ul>
+  第三方平台子客企业和员工必须已经经过实名认证
      */
     Agent: Agent;
     /**
@@ -6383,6 +6434,33 @@ export interface ChannelModifyRoleRequest {
     PermissionGroups?: Array<PermissionGroup>;
 }
 /**
+ * ModifyFlowDeadline请求参数结构体
+ */
+export interface ModifyFlowDeadlineRequest {
+    /**
+     * 应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 必填。
+     */
+    Agent: Agent;
+    /**
+     * 合同流程ID，为32位字符串。
+  <ul><li>建议开发者妥善保存此流程ID，以便于顺利进行后续操作。</li>
+  <li>可登录腾讯电子签控制台，在 "合同"->"合同中心" 中查看某个合同的FlowId(在页面中展示为合同ID)。</li></ul>
+     */
+    FlowId: string;
+    /**
+     * 签署流程或签署人新的签署截止时间，格式为Unix标准时间戳（秒）
+  
+     */
+    Deadline: number;
+    /**
+     * 签署方角色编号，为32位字符串
+  <ul><li>若指定了此参数，则只调整签署流程中此签署人的签署截止时间，否则调整合同整体的签署截止时间（合同截止时间+发起时未设置签署人截止时间的参与人的签署截止时间）</li>
+  <li>通过[用PDF文件创建签署流程](https://test.qian.tencent.cn/developers/partnerApis/startFlows/ChannelCreateFlowByFiles)发起合同，或通过[用模板创建签署流程](https://test.qian.tencent.cn/developers/partnerApis/startFlows/CreateFlowsByTemplates)时，返回参数[FlowApprovers](https://test.qian.tencent.cn/developers/partnerApis/dataTypes/#approveritem)会返回此信息，建议开发者妥善保存</li>
+  <li>也可通过[获取合同信息](https://test.qian.tencent.cn/developers/partnerApis/flows/DescribeFlowDetailInfo)接口查询签署人的RecipientId编号</li></ul>
+     */
+    RecipientId?: string;
+}
+/**
  * ChannelUpdateSealStatus请求参数结构体
  */
 export interface ChannelUpdateSealStatusRequest {
@@ -6552,6 +6630,7 @@ export interface ChannelBillUsageDetail {
   <li>**OrgEssAuth**: 签署企业实名</li>
   <li>**FlowNotify**: 短信通知</li>
   <li>**AuthService**: 企业工商信息查询</li>
+  <li>**NoAuthSign**: 形式签</li>
   </ul>
      */
     QuotaType?: string;
@@ -7320,6 +7399,8 @@ export interface DescribeTemplatesRequest {
      * 合同模板ID，为32位字符串。
   
   可以通过<a href="https://qian.tencent.com/developers/partnerApis/accounts/CreateConsoleLoginUrl" target="_blank">生成子客登录链接</a>登录企业控制台, 在企业模板中得到合同模板ID。
+  
+  [点击产看模板Id在控制台上的位置](https://qcloudimg.tencent-cloud.cn/raw/e988be12bf28a89b4716aed4502c2e02.png)
      */
     TemplateId?: string;
     /**
@@ -7336,6 +7417,9 @@ export interface DescribeTemplatesRequest {
   1.` 此参数TemplateIds与TemplateId互为独立，若两者均传入，以TemplateId为准。`
   2. `请确保每个模板均正确且属于当前企业，若有任一模板不存在，则返回错误。`
   4. `若传递此参数，分页参数(Limit,Offset)无效`
+  
+  
+  [点击产看模板Id在控制台上的位置](https://qcloudimg.tencent-cloud.cn/raw/e988be12bf28a89b4716aed4502c2e02.png)
   
      */
     TemplateIds?: Array<string>;

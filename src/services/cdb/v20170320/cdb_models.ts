@@ -3319,7 +3319,7 @@ export interface ModifyDBInstanceLogToCLSRequest {
    */
   InstanceId: string
   /**
-   * 日志类型：error/slowLog
+   * 日志类型：error/slowlog
    */
   LogType: string
   /**
@@ -3350,6 +3350,10 @@ export interface ModifyDBInstanceLogToCLSRequest {
    * 创建日志主题时，是否创建索引
    */
   CreateIndex?: boolean
+  /**
+   * CLS所在地域
+   */
+  ClsRegion?: string
 }
 
 /**
@@ -3890,6 +3894,11 @@ export interface LogToCLSConfig {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   LogTopicId?: string
+  /**
+   * CLS服务所在地域
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ClsRegion?: string
 }
 
 /**
@@ -4077,6 +4086,10 @@ export interface DescribeDBInstanceLogToCLSRequest {
    * 实例ID
    */
   InstanceId: string
+  /**
+   * CLS服务所在地域
+   */
+  ClsRegion?: string
 }
 
 /**
