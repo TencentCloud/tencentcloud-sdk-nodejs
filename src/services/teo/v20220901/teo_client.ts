@@ -67,7 +67,7 @@ import {
   DescribeDeployHistoryRequest,
   DescribeAvailablePlansRequest,
   OriginInfo,
-  Tag,
+  BillingData,
   ModifySecurityPolicyResponse,
   DescribeHostsSettingResponse,
   ModifyZoneStatusResponse,
@@ -78,21 +78,24 @@ import {
   DeleteZoneResponse,
   CreateRuleResponse,
   BotExtendAction,
+  TimingDataRecord,
   CreatePurgeTaskResponse,
   DeleteApplicationProxyRuleResponse,
   ModifyZoneSettingRequest,
   DescribeRulesResponse,
-  TimingDataRecord,
+  DownloadL4LogsResponse,
   OriginProtectionInfo,
   DescribeOriginProtectionResponse,
   BindZoneToPlanResponse,
   ExceptConfig,
   DeleteOriginGroupRequest,
   ImageOptimize,
+  DescribeBillingDataRequest,
   AliasDomain,
   WebSocket,
   ModifyAliasDomainRequest,
   AclCondition,
+  TimingTypeValue,
   DescribeAliasDomainsRequest,
   SkipCondition,
   IpTableRule,
@@ -166,6 +169,7 @@ import {
   CreatePrefetchTaskResponse,
   NoCache,
   DescribeDefaultCertificatesRequest,
+  SlowPostConfig,
   BindZoneToPlanRequest,
   EnvInfo,
   IPWhitelist,
@@ -214,7 +218,7 @@ import {
   DescribeEnvironmentsResponse,
   VanityNameServersIps,
   NsVerification,
-  SlowPostConfig,
+  Rule,
   AccelerateMainland,
   ExceptUserRule,
   CreateApplicationProxyRuleResponse,
@@ -234,7 +238,7 @@ import {
   IntelligenceRule,
   PostMaxSize,
   Sv,
-  Rule,
+  DescribeBillingDataResponse,
   ModifyL4ProxyRulesStatusRequest,
   Filter,
   CreateAccelerationDomainResponse,
@@ -248,7 +252,7 @@ import {
   ModifySecurityIPGroupResponse,
   CacheKey,
   ModifyOriginGroupRequest,
-  DownloadL4LogsResponse,
+  BillingDataFilter,
   DescribeTimingL7CacheDataResponse,
   BindSharedCNAMERequest,
   RateLimitIntelligence,
@@ -345,7 +349,7 @@ import {
   DescribeIPRegionRequest,
   ModifyAccelerationDomainStatusesRequest,
   BotConfig,
-  TimingTypeValue,
+  Tag,
 } from "./teo_models"
 
 /**
@@ -574,13 +578,13 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
   }
 
   /**
-   * 用于修改站点配置
+   * 在版本管理模式下，用于获取版本的详细信息，包括版本 ID、描述、状态、创建时间、所属配置组信息以及版本配置文件的内容。版本管理功能内测中，当前仅白名单开放。
    */
-  async ModifyZoneSetting(
-    req: ModifyZoneSettingRequest,
-    cb?: (error: string, rep: ModifyZoneSettingResponse) => void
-  ): Promise<ModifyZoneSettingResponse> {
-    return this.request("ModifyZoneSetting", req, cb)
+  async DescribeConfigGroupVersionDetail(
+    req: DescribeConfigGroupVersionDetailRequest,
+    cb?: (error: string, rep: DescribeConfigGroupVersionDetailResponse) => void
+  ): Promise<DescribeConfigGroupVersionDetailResponse> {
+    return this.request("DescribeConfigGroupVersionDetail", req, cb)
   }
 
   /**
@@ -694,13 +698,13 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
   }
 
   /**
-   * 在版本管理模式下，用于获取版本的详细信息，包括版本 ID、描述、状态、创建时间、所属配置组信息以及版本配置文件的内容。版本管理功能内测中，当前仅白名单开放。
+   * 用于修改站点配置
    */
-  async DescribeConfigGroupVersionDetail(
-    req: DescribeConfigGroupVersionDetailRequest,
-    cb?: (error: string, rep: DescribeConfigGroupVersionDetailResponse) => void
-  ): Promise<DescribeConfigGroupVersionDetailResponse> {
-    return this.request("DescribeConfigGroupVersionDetail", req, cb)
+  async ModifyZoneSetting(
+    req: ModifyZoneSettingRequest,
+    cb?: (error: string, rep: ModifyZoneSettingResponse) => void
+  ): Promise<ModifyZoneSettingResponse> {
+    return this.request("ModifyZoneSetting", req, cb)
   }
 
   /**
@@ -1245,5 +1249,15 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
     cb?: (error: string, rep: DescribeAliasDomainsResponse) => void
   ): Promise<DescribeAliasDomainsResponse> {
     return this.request("DescribeAliasDomains", req, cb)
+  }
+
+  /**
+   * 通过本接口查询计费数据。
+   */
+  async DescribeBillingData(
+    req: DescribeBillingDataRequest,
+    cb?: (error: string, rep: DescribeBillingDataResponse) => void
+  ): Promise<DescribeBillingDataResponse> {
+    return this.request("DescribeBillingData", req, cb)
   }
 }

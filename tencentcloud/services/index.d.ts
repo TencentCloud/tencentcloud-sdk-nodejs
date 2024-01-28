@@ -180,6 +180,7 @@ export { ssl } from "./ssl";
 export { sslpod } from "./sslpod";
 export { ssm } from "./ssm";
 export { sts } from "./sts";
+export { svp } from "./svp";
 export { taf } from "./taf";
 export { tag } from "./tag";
 export { tan } from "./tan";

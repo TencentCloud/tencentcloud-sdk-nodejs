@@ -228,9 +228,9 @@ it("teo.v20220901.CreateAccelerationDomain", async function () {
     }
 })
 
-it("teo.v20220901.ModifyZoneSetting", async function () {
+it("teo.v20220901.DescribeConfigGroupVersionDetail", async function () {
     try {
-       const data = await client.ModifyZoneSetting({})
+       const data = await client.DescribeConfigGroupVersionDetail({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -348,9 +348,9 @@ it("teo.v20220901.DescribeConfigGroupVersions", async function () {
     }
 })
 
-it("teo.v20220901.DescribeConfigGroupVersionDetail", async function () {
+it("teo.v20220901.ModifyZoneSetting", async function () {
     try {
-       const data = await client.DescribeConfigGroupVersionDetail({})
+       const data = await client.ModifyZoneSetting({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -891,6 +891,16 @@ it("teo.v20220901.DeleteSharedCNAME", async function () {
 it("teo.v20220901.DescribeAliasDomains", async function () {
     try {
        const data = await client.DescribeAliasDomains({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("teo.v20220901.DescribeBillingData", async function () {
+    try {
+       const data = await client.DescribeBillingData({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -1099,19 +1099,17 @@ export interface OriginInfo {
     VodeoBucketId?: string;
 }
 /**
- * 标签配置
+ * 计费数据项
  */
-export interface Tag {
+export interface BillingData {
     /**
-     * 标签键。
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 时间。
      */
-    TagKey: string;
+    Time?: string;
     /**
-     * 标签值。
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 数值。
      */
-    TagValue: string;
+    Value?: number;
 }
 /**
  * ModifySecurityPolicy返回参数结构体
@@ -1289,6 +1287,19 @@ export interface BotExtendAction {
     Percent?: number;
 }
 /**
+ * 时序数据信息
+ */
+export interface TimingDataRecord {
+    /**
+     * 查询维度值。
+     */
+    TypeKey: string;
+    /**
+     * 详细时序数据。
+     */
+    TypeValue: Array<TimingTypeValue>;
+}
+/**
  * CreatePurgeTask返回参数结构体
  */
 export interface CreatePurgeTaskResponse {
@@ -1441,17 +1452,21 @@ export interface DescribeRulesResponse {
     RequestId?: string;
 }
 /**
- * 时序数据信息
+ * DownloadL4Logs返回参数结构体
  */
-export interface TimingDataRecord {
+export interface DownloadL4LogsResponse {
     /**
-     * 查询维度值。
+     * 查询结果的总条数。
      */
-    TypeKey: string;
+    TotalCount?: number;
     /**
-     * 详细时序数据。
+     * 四层离线日志数据列表。
      */
-    TypeValue: Array<TimingTypeValue>;
+    Data?: Array<L4OfflineLog>;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * 源站防护信息
@@ -1561,6 +1576,57 @@ export interface ImageOptimize {
   <li>off：关闭。</li>
      */
     Switch: string;
+}
+/**
+ * DescribeBillingData请求参数结构体
+ */
+export interface DescribeBillingDataRequest {
+    /**
+     * 起始时间。
+     */
+    StartTime: string;
+    /**
+     * 结束时间。
+     */
+    EndTime: string;
+    /**
+     * 站点 ID 集合，此参数必填。
+     */
+    ZoneIds: Array<string>;
+    /**
+     * 指标列表，取值有：
+  <li>acc_flux: 内容加速流量，单位为 Byte；</li>
+  <li>smt_flux: 智能加速流量，单位为 Byte；</li>
+  <li>l4_flux: 四层加速流量，单位为 Byte；</li>
+  <li>sec_flux: 独立防护流量，单位为 Byte；</li>
+  <li>zxctg_flux: 中国大陆网络优化流量，单位为 Byte；</li>
+  <li>acc_bandwidth: 内容加速带宽，单位为 bps；</li>
+  <li>smt_bandwidth: 智能加速带宽，单位为 bps；</li>
+  <li>l4_bandwidth: 四层加速带宽，单位为 bps；</li>
+  <li>sec_bandwidth: 独立防护带宽，单位为 bps；</li>
+  <li>zxctg_bandwidth: 中国大陆网络优化带宽，单位为 bps；</li>
+  <li>sec_request_clean: HTTP/HTTPS 请求，单位为次；</li>
+  <li>smt_request_clean: 智能加速请求，单位为次；</li>
+  <li>quic_request: QUIC 请求，单位为次；</li>
+  <li>bot_request_clean: Bot 请求，单位为次；</li>
+  <li>cls_count: 实时日志推送条数，单位为条；</li>
+  <li>ddos_bandwidth: 弹性 DDoS 防护带宽，单位为 bps。</li>
+     */
+    MetricName: string;
+    /**
+     * 查询时间粒度，取值有：
+  <li>5min：5 分钟粒度；</li>
+  <li>hour：1 小时粒度；</li>
+  <li>day：1 天粒度。</li>
+     */
+    Interval: string;
+    /**
+     * 过滤条件，详细的过滤条件取值如下：
+  <li>host<br>   按照【<strong>域名</strong>】进行过滤。示例值：test.example.com。<br>   类型：String<br>   必选：否</li>
+  <li>proxy-id<br>   按照【<strong>四层代理实例 ID</strong>】进行过滤。示例值：sid-2rugn89bkla9。<br>   类型：String<br>   必选：否</li>
+  <li>region-id<br>   按照【<strong>计费大区</strong>】进行过滤。<br>   类型：String<br>   必选：否<br>   可选项如下：<br>   CH：中国大陆境内<br>   AF：非洲<br>   AS1：亚太一区<br>   AS2：亚太二区<br>   AS3：亚太三区<br>   EU：欧洲<br>   MidEast：中东<br>   NA：北美<br>   SA：南美</li>
+     */
+    Filters?: Array<BillingDataFilter>;
 }
 /**
  * 别称域名信息。
@@ -1699,6 +1765,32 @@ export interface AclCondition {
      * 匹配内容。
      */
     MatchContent: string;
+}
+/**
+ * 时序类型详细数据
+ */
+export interface TimingTypeValue {
+    /**
+     * 数据和。
+     */
+    Sum: number;
+    /**
+     * 最大值。
+     */
+    Max: number;
+    /**
+     * 平均值。
+     */
+    Avg: number;
+    /**
+     * 指标名。
+     */
+    MetricName: string;
+    /**
+     * 详细数据。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Detail: Array<TimingDataItem>;
 }
 /**
  * DescribeAliasDomains请求参数结构体
@@ -3818,6 +3910,39 @@ export interface DescribeDefaultCertificatesRequest {
     Limit?: number;
 }
 /**
+ * 慢速攻击配置。
+ */
+export interface SlowPostConfig {
+    /**
+     * 开关，取值有：
+  <li>on：开启；</li>
+  <li>off：关闭。</li>
+     */
+    Switch: string;
+    /**
+     * 首包配置。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    FirstPartConfig?: FirstPartConfig;
+    /**
+     * 基础配置。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SlowRateConfig?: SlowRateConfig;
+    /**
+     * 慢速攻击的处置动作，取值有：
+  <li>monitor：观察；</li>
+  <li>drop：拦截。</li>
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Action?: string;
+    /**
+     * 本规则的Id。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RuleId?: number;
+}
+/**
  * BindZoneToPlan请求参数结构体
  */
 export interface BindZoneToPlanRequest {
@@ -5103,37 +5228,22 @@ export interface NsVerification {
     NameServers?: Array<string>;
 }
 /**
- * 慢速攻击配置。
+ * 规则引擎规则项，Conditions 数组内多个项的关系为 或，内层 Conditions 列表内多个项的关系为 且。
  */
-export interface SlowPostConfig {
+export interface Rule {
     /**
-     * 开关，取值有：
-  <li>on：开启；</li>
-  <li>off：关闭。</li>
+     * 执行的功能。
      */
-    Switch: string;
+    Actions: Array<Action>;
     /**
-     * 首包配置。
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 执行功能判断条件。
+  注意：满足该数组内任意一项条件，功能即可执行。
      */
-    FirstPartConfig?: FirstPartConfig;
+    Conditions: Array<RuleAndConditions>;
     /**
-     * 基础配置。
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 嵌套规则。
      */
-    SlowRateConfig?: SlowRateConfig;
-    /**
-     * 慢速攻击的处置动作，取值有：
-  <li>monitor：观察；</li>
-  <li>drop：拦截。</li>
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Action?: string;
-    /**
-     * 本规则的Id。
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    RuleId?: number;
+    SubRules?: Array<SubRuleItem>;
 }
 /**
  * 中国大陆加速优化配置。
@@ -5675,22 +5785,18 @@ export interface Sv {
     ProtectionSpecs?: string;
 }
 /**
- * 规则引擎规则项，Conditions 数组内多个项的关系为 或，内层 Conditions 列表内多个项的关系为 且。
+ * DescribeBillingData返回参数结构体
  */
-export interface Rule {
+export interface DescribeBillingDataResponse {
     /**
-     * 执行的功能。
+     * 数据点列表。
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Actions: Array<Action>;
+    Data?: Array<BillingData>;
     /**
-     * 执行功能判断条件。
-  注意：满足该数组内任意一项条件，功能即可执行。
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
-    Conditions: Array<RuleAndConditions>;
-    /**
-     * 嵌套规则。
-     */
-    SubRules?: Array<SubRuleItem>;
+    RequestId?: string;
 }
 /**
  * ModifyL4ProxyRulesStatus请求参数结构体
@@ -6062,21 +6168,17 @@ export interface ModifyOriginGroupRequest {
     HostHeader?: string;
 }
 /**
- * DownloadL4Logs返回参数结构体
+ * 计费数据过滤条件。
  */
-export interface DownloadL4LogsResponse {
+export interface BillingDataFilter {
     /**
-     * 查询结果的总条数。
+     * 参数名称。
      */
-    TotalCount?: number;
+    Type: string;
     /**
-     * 四层离线日志数据列表。
+     * 参数值。
      */
-    Data?: Array<L4OfflineLog>;
-    /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
+    Value: string;
 }
 /**
  * DescribeTimingL7CacheData返回参数结构体
@@ -8123,28 +8225,17 @@ export interface BotConfig {
     Customizes?: Array<BotUserRule>;
 }
 /**
- * 时序类型详细数据
+ * 标签配置
  */
-export interface TimingTypeValue {
+export interface Tag {
     /**
-     * 数据和。
-     */
-    Sum: number;
-    /**
-     * 最大值。
-     */
-    Max: number;
-    /**
-     * 平均值。
-     */
-    Avg: number;
-    /**
-     * 指标名。
-     */
-    MetricName: string;
-    /**
-     * 详细数据。
+     * 标签键。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Detail: Array<TimingDataItem>;
+    TagKey: string;
+    /**
+     * 标签值。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TagValue: string;
 }

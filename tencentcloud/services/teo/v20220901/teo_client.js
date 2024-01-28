@@ -160,10 +160,10 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
         return this.request("CreateAccelerationDomain", req, cb);
     }
     /**
-     * 用于修改站点配置
+     * 在版本管理模式下，用于获取版本的详细信息，包括版本 ID、描述、状态、创建时间、所属配置组信息以及版本配置文件的内容。版本管理功能内测中，当前仅白名单开放。
      */
-    async ModifyZoneSetting(req, cb) {
-        return this.request("ModifyZoneSetting", req, cb);
+    async DescribeConfigGroupVersionDetail(req, cb) {
+        return this.request("DescribeConfigGroupVersionDetail", req, cb);
     }
     /**
      * 操作安全策略模板，支持将域名绑定或换绑到指定的策略模板，或者从指定的策略模板解绑。
@@ -232,10 +232,10 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
         return this.request("DescribeConfigGroupVersions", req, cb);
     }
     /**
-     * 在版本管理模式下，用于获取版本的详细信息，包括版本 ID、描述、状态、创建时间、所属配置组信息以及版本配置文件的内容。版本管理功能内测中，当前仅白名单开放。
+     * 用于修改站点配置
      */
-    async DescribeConfigGroupVersionDetail(req, cb) {
-        return this.request("DescribeConfigGroupVersionDetail", req, cb);
+    async ModifyZoneSetting(req, cb) {
+        return this.request("ModifyZoneSetting", req, cb);
     }
     /**
      * 用于修改四层代理转发规则，支持单条或者批量修改。
@@ -564,6 +564,12 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
      */
     async DescribeAliasDomains(req, cb) {
         return this.request("DescribeAliasDomains", req, cb);
+    }
+    /**
+     * 通过本接口查询计费数据。
+     */
+    async DescribeBillingData(req, cb) {
+        return this.request("DescribeBillingData", req, cb);
     }
 }
 exports.Client = Client;

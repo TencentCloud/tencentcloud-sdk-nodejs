@@ -2525,6 +2525,11 @@ export interface InstanceDetail {
      */
     RealInstanceId?: string;
     /**
+     * 实例当前可用区信息。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ZoneList?: Array<string>;
+    /**
      * mongos节点个数。
   注意：此字段可能返回 null，表示取不到有效值。
      */

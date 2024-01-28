@@ -10547,13 +10547,11 @@ export interface DescribeStatisticDataRequest {
    */
   Namespace: string
   /**
-   * 指标名列表，相关指标信息可参考对应 云产品指标文档
-https://cloud.tencent.com/document/product/248/62458
+   * 指标名列表，相关指标信息可参考对应 [云产品指标文档](https://cloud.tencent.com/document/product/248/62458)
    */
   MetricNames: Array<string>
   /**
-   * 维度条件，操作符支持=、in
-配置文档参考：https://cloud.tencent.com/document/product/248/53821
+   * 维度条件，操作符支持=、in，详情请参考对应 [指标维度信息](https://cloud.tencent.com/document/product/248/53821)
    */
   Conditions?: Array<MidQueryCondition>
   /**

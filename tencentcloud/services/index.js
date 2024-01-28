@@ -364,6 +364,8 @@ var ssm_1 = require("./ssm");
 Object.defineProperty(exports, "ssm", { enumerable: true, get: function () { return ssm_1.ssm; } });
 var sts_1 = require("./sts");
 Object.defineProperty(exports, "sts", { enumerable: true, get: function () { return sts_1.sts; } });
+var svp_1 = require("./svp");
+Object.defineProperty(exports, "svp", { enumerable: true, get: function () { return svp_1.svp; } });
 var taf_1 = require("./taf");
 Object.defineProperty(exports, "taf", { enumerable: true, get: function () { return taf_1.taf; } });
 var tag_1 = require("./tag");

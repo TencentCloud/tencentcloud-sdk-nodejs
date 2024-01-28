@@ -3518,6 +3518,11 @@ export interface DeleteCertificateResponse {
    */
   DeleteResult?: boolean
   /**
+   * 异步删除的任务ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskId?: string
+  /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -4181,6 +4186,10 @@ export interface DeleteCertificateRequest {
    * 证书 ID。
    */
   CertificateId: string
+  /**
+   * 删除时是否检查证书关联了云资源。默认不检查。如选择检查(需要授权服务角色SSL_QCSLinkedRoleInReplaceLoadCertificate)删除将变成异步,接口会返回异步任务ID。需使用DescribeDeleteCertificatesTaskResult接口查询删除是否成功。
+   */
+  IsCheckResource?: boolean
 }
 
 /**

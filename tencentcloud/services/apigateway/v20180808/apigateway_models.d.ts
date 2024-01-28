@@ -3236,7 +3236,7 @@ export interface ModifyApiRequest {
      */
     ServiceTimeout?: number;
     /**
-     * API 的前端请求类型，如 HTTP 或 HTTPS 或者 HTTP 和 HTTPS。
+     * API 的前端请求类型，如 HTTP 或 HTTPS 或者 HTTP 和 HTTPS。修改api时推荐必填
      */
     Protocol?: string;
     /**

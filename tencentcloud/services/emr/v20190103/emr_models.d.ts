@@ -1444,143 +1444,148 @@ export interface EmrListInstance {
     /**
      * 集群ID
      */
-    ClusterId: string;
+    ClusterId?: string;
     /**
      * 状态描述
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    StatusDesc: string;
+    StatusDesc?: string;
     /**
      * 集群名字
      */
-    ClusterName: string;
+    ClusterName?: string;
     /**
      * 集群地域
      */
-    ZoneId: number;
+    ZoneId?: number;
     /**
      * 用户APPID
      */
-    AppId: number;
+    AppId?: number;
     /**
      * 创建时间
      */
-    AddTime: string;
+    AddTime?: string;
     /**
      * 运行时间
      */
-    RunTime: string;
+    RunTime?: string;
     /**
      * 集群IP
      */
-    MasterIp: string;
+    MasterIp?: string;
     /**
      * 集群版本
      */
-    EmrVersion: string;
+    EmrVersion?: string;
     /**
      * 集群计费类型
      */
-    ChargeType: number;
+    ChargeType?: number;
     /**
      * emr ID
      */
-    Id: number;
+    Id?: number;
     /**
      * 产品ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ProductId: number;
+    ProductId?: number;
     /**
      * 项目ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ProjectId: number;
+    ProjectId?: number;
     /**
      * 区域
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    RegionId: number;
+    RegionId?: number;
     /**
      * 子网ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SubnetId: number;
+    SubnetId?: number;
     /**
      * 网络ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    VpcId: number;
+    VpcId?: number;
     /**
      * 地区
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Zone: string;
+    Zone?: string;
     /**
      * 状态码
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Status: number;
+    Status?: number;
     /**
      * 实例标签
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Tags: Array<Tag>;
+    Tags?: Array<Tag>;
     /**
      * 告警信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    AlarmInfo: string;
+    AlarmInfo?: string;
     /**
      * 是否是woodpecker集群
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    IsWoodpeckerCluster: number;
+    IsWoodpeckerCluster?: number;
     /**
      * Vpc中文
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    VpcName: string;
+    VpcName?: string;
     /**
      * 子网中文
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SubnetName: string;
+    SubnetName?: string;
     /**
      * 字符串VpcId
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    UniqVpcId: string;
+    UniqVpcId?: string;
     /**
      * 字符串子网
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    UniqSubnetId: string;
+    UniqSubnetId?: string;
     /**
      * 集群类型
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ClusterClass: string;
+    ClusterClass?: string;
     /**
      * 是否为跨AZ集群
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    IsMultiZoneCluster: boolean;
+    IsMultiZoneCluster?: boolean;
     /**
      * 是否手戳集群
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    IsHandsCluster: boolean;
+    IsHandsCluster?: boolean;
     /**
      * 体外客户端组件信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    OutSideSoftInfo: Array<SoftDependInfo>;
+    OutSideSoftInfo?: Array<SoftDependInfo>;
     /**
      * 当前集群的应用场景是否支持体外客户端
   注意：此字段可能返回 null，表示取不到有效值。
      */
     IsSupportOutsideCluster?: boolean;
+    /**
+     * 是否专有集群场景集群
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IsDedicatedCluster?: boolean;
 }
 /**
  * AddUsersForUserManager返回参数结构体
