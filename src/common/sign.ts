@@ -36,6 +36,7 @@ export default class Sign {
     secretKey,
     multipart,
     boundary,
+    headers: configHeaders = {},
   }: {
     method?: string
     url?: string
@@ -45,22 +46,24 @@ export default class Sign {
     secretId: string
     secretKey: string
     multipart: boolean
-    boundary: string
+    boundary: string,
+    headers: Record<string, string>
   }): string {
     const urlObj = new URL(url)
+    const contentType = configHeaders["Content-Type"]
 
     // 通用头部
     let headers = ""
     let signedHeaders = ""
     if (method === "GET") {
       signedHeaders = "content-type"
-      headers = "content-type:application/x-www-form-urlencoded\n"
+      headers = `content-type:${contentType}\n`
     } else if (method === "POST") {
       signedHeaders = "content-type"
       if (multipart) {
         headers = `content-type:multipart/form-data; boundary=${boundary}\n`
       } else {
-        headers = "content-type:application/json\n"
+        headers = `content-type:${contentType}\n`
       }
     }
     headers += `host:${urlObj.hostname}\n`
@@ -90,7 +93,8 @@ export default class Sign {
       hash.update(`--\r\n`)
       payload_hash = hash.digest("hex")
     } else {
-      payload_hash = payload ? getHash(JSONbigNative.stringify(payload)) : getHash("")
+      const hashMessage = Buffer.isBuffer(payload) ? payload : JSONbigNative.stringify(payload)
+      payload_hash = payload ? getHash(hashMessage) : getHash("")
     }
 
     const canonicalRequest =
@@ -130,7 +134,7 @@ function sha256(message: string, secret = "", encoding?: string): string {
   return hmac.update(message).digest(encoding as any)
 }
 
-function getHash(message: string, encoding = "hex"): string {
+function getHash(message: crypto.BinaryLike, encoding = "hex"): string {
   const hash = crypto.createHash("sha256")
   return hash.update(message).digest(encoding as any)
 }

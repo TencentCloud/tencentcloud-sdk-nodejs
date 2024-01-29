@@ -145,6 +145,38 @@ export class AbstractClient {
   /**
    * @inner
    */
+  async requestOctetStream(
+    action: string,
+    req: any,
+    options?: ResponseCallback | RequestOptions,
+    cb?: ResponseCallback
+  ) {
+    if (typeof options === "function") {
+      cb = options
+      options = {} as RequestOptions
+    }
+
+    try {
+      const result = await this.doRequest(
+        action,
+        req ?? {},
+        Object.assign({}, options, {
+          headers: {
+            "Content-Type": "application/octet-stream; charset=utf-8",
+          },
+        })
+      )
+      cb && cb(null, result)
+      return result
+    } catch (e) {
+      cb && cb(e as any, null)
+      throw e
+    }
+  }
+
+  /**
+   * @inner
+   */
   private async doRequest(
     action: string,
     req: any,
