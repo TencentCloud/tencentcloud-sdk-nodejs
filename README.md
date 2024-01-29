@@ -53,6 +53,9 @@ const client = new CvmClient({
     httpProfile: {
       reqMethod: "POST", // 请求方法
       reqTimeout: 30, // 请求超时时间，默认60s
+      headers: {
+        // 自定义 header
+      },
       // proxy: "http://127.0.0.1:8899" // http请求代理
     },
   },
@@ -139,3 +142,6 @@ new XxxClient({
   # MacOS
   http_proxy=http://代理地址:代理端口 node app.js
   ```
+
+- 整数类型值超出 JavaScript 最大安全整数
+  使用新的数据类型 `BigInt`
