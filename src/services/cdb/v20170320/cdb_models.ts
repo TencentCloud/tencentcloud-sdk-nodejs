@@ -2308,6 +2308,11 @@ export interface AuditRule {
 }
 
 /**
+ * DescribeInstanceAlarmEvents请求参数结构体
+ */
+export type DescribeInstanceAlarmEventsRequest = null
+
+/**
  * DescribeBinlogs请求参数结构体
  */
 export interface DescribeBinlogsRequest {
@@ -7662,6 +7667,16 @@ export interface DeviceDiskInfo {
    * 磁盘空间容量，每两个一组，第一个为已使用容量，第二个为磁盘总容量
    */
   CapacityRatio: Array<number | bigint>
+}
+
+/**
+ * DescribeInstanceAlarmEvents返回参数结构体
+ */
+export interface DescribeInstanceAlarmEventsResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

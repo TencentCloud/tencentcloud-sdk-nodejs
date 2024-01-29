@@ -108,6 +108,7 @@ import {
   ReleaseResult,
   CreateAuditLogFileRequest,
   AuditRule,
+  DescribeInstanceAlarmEventsRequest,
   DescribeBinlogsRequest,
   DescribeCdbProxyInfoRequest,
   RollbackDBName,
@@ -336,6 +337,7 @@ import {
   DescribeCdbProxyInfoResponse,
   ModifyAuditConfigRequest,
   DeviceDiskInfo,
+  DescribeInstanceAlarmEventsResponse,
   DescribeRoMinScaleResponse,
   RoWeightValue,
   DescribeSlowLogDataResponse,
@@ -1461,6 +1463,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 修改置放群组的名称或者描述
+   */
+  async ModifyNameOrDescByDpId(
+    req: ModifyNameOrDescByDpIdRequest,
+    cb?: (error: string, rep: ModifyNameOrDescByDpIdResponse) => void
+  ): Promise<ModifyNameOrDescByDpIdResponse> {
+    return this.request("ModifyNameOrDescByDpId", req, cb)
+  }
+
+  /**
    * 本接口(ModifyAccountMaxUserConnections)用于修改云数据库账户最大可用连接数。
    */
   async ModifyAccountMaxUserConnections(
@@ -2023,13 +2035,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改置放群组的名称或者描述
+   * 查询实例发生的事件信息
    */
-  async ModifyNameOrDescByDpId(
-    req: ModifyNameOrDescByDpIdRequest,
-    cb?: (error: string, rep: ModifyNameOrDescByDpIdResponse) => void
-  ): Promise<ModifyNameOrDescByDpIdResponse> {
-    return this.request("ModifyNameOrDescByDpId", req, cb)
+  async DescribeInstanceAlarmEvents(
+    req?: DescribeInstanceAlarmEventsRequest,
+    cb?: (error: string, rep: DescribeInstanceAlarmEventsResponse) => void
+  ): Promise<DescribeInstanceAlarmEventsResponse> {
+    return this.request("DescribeInstanceAlarmEvents", req, cb)
   }
 
   /**

@@ -998,6 +998,16 @@ it("cdb.v20170320.CloseCDBProxy", async function () {
     }
 })
 
+it("cdb.v20170320.ModifyNameOrDescByDpId", async function () {
+    try {
+       const data = await client.ModifyNameOrDescByDpId({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cdb.v20170320.ModifyAccountMaxUserConnections", async function () {
     try {
        const data = await client.ModifyAccountMaxUserConnections({})
@@ -1548,9 +1558,9 @@ it("cdb.v20170320.DescribeCloneList", async function () {
     }
 })
 
-it("cdb.v20170320.ModifyNameOrDescByDpId", async function () {
+it("cdb.v20170320.DescribeInstanceAlarmEvents", async function () {
     try {
-       const data = await client.ModifyNameOrDescByDpId({})
+       const data = await client.DescribeInstanceAlarmEvents({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

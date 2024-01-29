@@ -46,7 +46,7 @@ export default class Sign {
     secretId: string
     secretKey: string
     multipart: boolean
-    boundary: string,
+    boundary: string
     headers: Record<string, string>
   }): string {
     const urlObj = new URL(url)

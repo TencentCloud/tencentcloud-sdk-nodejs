@@ -652,6 +652,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CloseCDBProxy", req, cb);
     }
     /**
+     * 修改置放群组的名称或者描述
+     */
+    async ModifyNameOrDescByDpId(req, cb) {
+        return this.request("ModifyNameOrDescByDpId", req, cb);
+    }
+    /**
      * 本接口(ModifyAccountMaxUserConnections)用于修改云数据库账户最大可用连接数。
      */
     async ModifyAccountMaxUserConnections(req, cb) {
@@ -994,10 +1000,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeCloneList", req, cb);
     }
     /**
-     * 修改置放群组的名称或者描述
+     * 查询实例发生的事件信息
      */
-    async ModifyNameOrDescByDpId(req, cb) {
-        return this.request("ModifyNameOrDescByDpId", req, cb);
+    async DescribeInstanceAlarmEvents(req, cb) {
+        return this.request("DescribeInstanceAlarmEvents", req, cb);
     }
     /**
      * 本接口(UpgradeDBInstance)用于升级或降级云数据库实例的配置，实例类型支持主实例、灾备实例和只读实例。

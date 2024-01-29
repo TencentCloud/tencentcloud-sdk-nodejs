@@ -1373,7 +1373,8 @@ export interface DescribeDataPvUrlStatisticsRequest {
    */
   GroupByType?: number
   /**
-   * 无需关注，是否查询zhiyan
+   * 1: 查询智研
+0: 走旧逻辑，已下线，勿使用
    */
   IsNewData?: number
 }

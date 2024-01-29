@@ -36,6 +36,10 @@ export declare class AbstractClient {
     /**
      * @inner
      */
+    requestOctetStream(action: string, req: any, options?: ResponseCallback | RequestOptions, cb?: ResponseCallback): Promise<any>;
+    /**
+     * @inner
+     */
     private doRequest;
     /**
      * @inner

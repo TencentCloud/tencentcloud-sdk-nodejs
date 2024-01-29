@@ -360,13 +360,13 @@ export interface SrcAddressInfo {
  */
 export interface NetDetails {
     /**
-     * 流量值（bit）
+     * 流量值（byte）
      */
-    Current: number;
+    Current?: number;
     /**
      * 时间点，单位：s
      */
-    Time: string;
+    Time?: string;
 }
 /**
  * CreateQos返回参数结构体

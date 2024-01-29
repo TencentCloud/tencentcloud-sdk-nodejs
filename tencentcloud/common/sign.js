@@ -20,14 +20,15 @@ class Sign {
         const hmac = crypto.createHmac(signMethodMap[signMethod], secretKey || "");
         return hmac.update(Buffer.from(signStr, "utf8")).digest("base64");
     }
-    static sign3({ method = "POST", url = "", payload, timestamp, service, secretId, secretKey, multipart, boundary, }) {
+    static sign3({ method = "POST", url = "", payload, timestamp, service, secretId, secretKey, multipart, boundary, headers: configHeaders = {}, }) {
         const urlObj = new url_1.URL(url);
+        const contentType = configHeaders["Content-Type"];
         // 通用头部
         let headers = "";
         let signedHeaders = "";
         if (method === "GET") {
             signedHeaders = "content-type";
-            headers = "content-type:application/x-www-form-urlencoded\n";
+            headers = `content-type:${contentType}\n`;
         }
         else if (method === "POST") {
             signedHeaders = "content-type";
@@ -35,7 +36,7 @@ class Sign {
                 headers = `content-type:multipart/form-data; boundary=${boundary}\n`;
             }
             else {
-                headers = "content-type:application/json\n";
+                headers = `content-type:${contentType}\n`;
             }
         }
         headers += `host:${urlObj.hostname}\n`;
@@ -63,7 +64,8 @@ class Sign {
             payload_hash = hash.digest("hex");
         }
         else {
-            payload_hash = payload ? getHash(JSONbigNative.stringify(payload)) : getHash("");
+            const hashMessage = Buffer.isBuffer(payload) ? payload : JSONbigNative.stringify(payload);
+            payload_hash = payload ? getHash(hashMessage) : getHash("");
         }
         const canonicalRequest = method +
             "\n" +

@@ -80,8 +80,11 @@ class HttpConnection {
             config.headers["Content-Type"] = "application/x-www-form-urlencoded";
         }
         if (method === "POST" && !multipart) {
-            config.body = JSONbigNative.stringify(data);
-            config.headers["Content-Type"] = "application/json";
+            config.body = data;
+            const contentType = config.headers["Content-Type"] || "application/json";
+            if (!isBuffer(data))
+                config.body = JSONbigNative.stringify(data);
+            config.headers["Content-Type"] = contentType;
         }
         if (method === "POST" && multipart) {
             form = new FormData();
@@ -101,6 +104,7 @@ class HttpConnection {
             secretKey,
             multipart,
             boundary: form ? form.getBoundary() : undefined,
+            headers: config.headers,
         });
         config.headers["Authorization"] = signature;
         return await fetch_1.default(url, config);

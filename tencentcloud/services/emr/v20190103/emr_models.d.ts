@@ -102,27 +102,27 @@ export interface ScaleOutInstanceResponse {
     /**
      * 实例ID。
      */
-    InstanceId: string;
+    InstanceId?: string;
     /**
      * 订单号。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DealNames: Array<string>;
+    DealNames?: Array<string>;
     /**
      * 客户端Token。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ClientToken: string;
+    ClientToken?: string;
     /**
      * 扩容流程ID。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    FlowId: number;
+    FlowId?: number;
     /**
      * 大订单号。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    BillId: string;
+    BillId?: string;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1083,7 +1083,7 @@ export interface ScaleOutInstanceRequest {
      */
     PayMode: number;
     /**
-     * 客户端Token。
+     * 唯一随机标识，时效5分钟，需要调用者指定 防止客户端重新创建资源，例如 a9a90aa6-751a-41b6-aad6-fae36063280
      */
     ClientToken?: string;
     /**
@@ -3837,7 +3837,7 @@ export interface CreateInstanceRequest {
      */
     AutoRenew?: number;
     /**
-     * 客户端Token。
+     * 唯一随机标识，时效5分钟，需要调用者指定 防止客户端重新创建资源，例如 a9a90aa6-751a-41b6-aad6-fae36063280
      */
     ClientToken?: string;
     /**

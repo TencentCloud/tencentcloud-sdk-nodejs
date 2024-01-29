@@ -336,6 +336,10 @@ export interface DescribeDevicePackagesRequest {
    * 分页拉取偏移
    */
   Offset: number
+  /**
+   * 通道id
+   */
+  ChannelId?: number
 }
 
 /**
@@ -1065,6 +1069,10 @@ export interface PackageInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   OrderId?: string
+  /**
+   * 通道id
+   */
+  ChannelId?: number
 }
 
 /**

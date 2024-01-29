@@ -86,6 +86,28 @@ class AbstractClient {
     /**
      * @inner
      */
+    async requestOctetStream(action, req, options, cb) {
+        if (typeof options === "function") {
+            cb = options;
+            options = {};
+        }
+        try {
+            const result = await this.doRequest(action, req !== null && req !== void 0 ? req : {}, Object.assign({}, options, {
+                headers: {
+                    "Content-Type": "application/octet-stream; charset=utf-8",
+                },
+            }));
+            cb && cb(null, result);
+            return result;
+        }
+        catch (e) {
+            cb && cb(e, null);
+            throw e;
+        }
+    }
+    /**
+     * @inner
+     */
     async doRequest(action, req, options = {}) {
         if (this.profile.signMethod === "TC3-HMAC-SHA256") {
             return this.doRequestWithSign3(action, req, options);

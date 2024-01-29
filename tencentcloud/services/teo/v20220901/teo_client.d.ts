@@ -52,7 +52,8 @@ export declare class Client extends AbstractClient {
      */
     ModifyOriginGroup(req: ModifyOriginGroupRequest, cb?: (error: string, rep: ModifyOriginGroupResponse) => void): Promise<ModifyOriginGroupResponse>;
     /**
-     * 删除应用代理
+     * 本接口为旧版，如需调用请尽快迁移至新版，详情请参考 [删除四层代理实例
+](https://cloud.tencent.com/document/product/1552/103415) 。
      */
     DeleteApplicationProxy(req: DeleteApplicationProxyRequest, cb?: (error: string, rep: DeleteApplicationProxyResponse) => void): Promise<DeleteApplicationProxyResponse>;
     /**
@@ -68,7 +69,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeEnvironments(req: DescribeEnvironmentsRequest, cb?: (error: string, rep: DescribeEnvironmentsResponse) => void): Promise<DescribeEnvironmentsResponse>;
     /**
-     * 删除应用代理规则
+     * 本接口为旧版，如需调用请尽快迁移至新版，详情请参考 [删除四层代理转发规则](https://cloud.tencent.com/document/product/1552/103414) 。
      */
     DeleteApplicationProxyRule(req: DeleteApplicationProxyRuleRequest, cb?: (error: string, rep: DeleteApplicationProxyRuleResponse) => void): Promise<DeleteApplicationProxyRuleResponse>;
     /**
@@ -106,7 +107,8 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
      */
     BindSecurityTemplateToEntity(req: BindSecurityTemplateToEntityRequest, cb?: (error: string, rep: BindSecurityTemplateToEntityResponse) => void): Promise<BindSecurityTemplateToEntityResponse>;
     /**
-     * 修改应用代理规则的状态
+     * 本接口为旧版，如需调用请尽快迁移至新版，详情请参考 [修改四层代理转发规则状态
+](https://cloud.tencent.com/document/product/1552/103409) 。
      */
     ModifyApplicationProxyRuleStatus(req: ModifyApplicationProxyRuleStatusRequest, cb?: (error: string, rep: ModifyApplicationProxyRuleStatusResponse) => void): Promise<ModifyApplicationProxyRuleStatusResponse>;
     /**
@@ -202,7 +204,7 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
      */
     CreateL4Proxy(req: CreateL4ProxyRequest, cb?: (error: string, rep: CreateL4ProxyResponse) => void): Promise<CreateL4ProxyResponse>;
     /**
-     * 修改应用代理的状态
+     * 本接口为旧版，如需调用请尽快迁移至新版，详情请参考 [修改四层代理实例状态](https://cloud.tencent.com/document/product/1552/103408) 。
      */
     ModifyApplicationProxyStatus(req: ModifyApplicationProxyStatusRequest, cb?: (error: string, rep: ModifyApplicationProxyStatusResponse) => void): Promise<ModifyApplicationProxyStatusResponse>;
     /**
@@ -210,7 +212,7 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
      */
     DescribeTimingL7AnalysisData(req: DescribeTimingL7AnalysisDataRequest, cb?: (error: string, rep: DescribeTimingL7AnalysisDataResponse) => void): Promise<DescribeTimingL7AnalysisDataResponse>;
     /**
-     * 查询应用代理列表。
+     * 本接口为旧版，如需调用请尽快迁移至新版，新版接口中将四层代理实例列表的查询和四层转发规则的查询拆分成两个接口，详情请参考 [查询四层代理实例列表](https://cloud.tencent.com/document/product/1552/103413) 和 [查询四层代理转发规则列表](https://cloud.tencent.com/document/product/1552/103412)。
      */
     DescribeApplicationProxies(req: DescribeApplicationProxiesRequest, cb?: (error: string, rep: DescribeApplicationProxiesResponse) => void): Promise<DescribeApplicationProxiesResponse>;
     /**
@@ -226,7 +228,8 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
      */
     CreateConfigGroupVersion(req: CreateConfigGroupVersionRequest, cb?: (error: string, rep: CreateConfigGroupVersionResponse) => void): Promise<CreateConfigGroupVersionResponse>;
     /**
-     * 修改应用代理
+     * 本接口为旧版，如需调用请尽快迁移至新版，详情请参考 [修改四层代理实例
+](https://cloud.tencent.com/document/product/1552/103411) 。
      */
     ModifyApplicationProxy(req: ModifyApplicationProxyRequest, cb?: (error: string, rep: ModifyApplicationProxyResponse) => void): Promise<ModifyApplicationProxyResponse>;
     /**
@@ -268,7 +271,7 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
      */
     DeleteRules(req: DeleteRulesRequest, cb?: (error: string, rep: DeleteRulesResponse) => void): Promise<DeleteRulesResponse>;
     /**
-     * 查询四层代理实例下的规则列表。
+     * 查询四层代理实例下的转发规则列表。
      */
     DescribeL4ProxyRules(req: DescribeL4ProxyRulesRequest, cb?: (error: string, rep: DescribeL4ProxyRulesResponse) => void): Promise<DescribeL4ProxyRulesResponse>;
     /**
@@ -280,7 +283,7 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
      */
     DescribeRules(req: DescribeRulesRequest, cb?: (error: string, rep: DescribeRulesResponse) => void): Promise<DescribeRulesResponse>;
     /**
-     * 创建应用代理
+     * 本接口为旧版，如需调用请尽快迁移至新版 [创建四层代理实例](https://cloud.tencent.com/document/product/1552/103417) 。
      */
     CreateApplicationProxy(req: CreateApplicationProxyRequest, cb?: (error: string, rep: CreateApplicationProxyResponse) => void): Promise<CreateApplicationProxyResponse>;
     /**
@@ -292,7 +295,8 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
      */
     ModifyAliasDomain(req: ModifyAliasDomainRequest, cb?: (error: string, rep: ModifyAliasDomainResponse) => void): Promise<ModifyAliasDomainResponse>;
     /**
-     * 修改应用代理规则
+     * 本接口为旧版，如需调用请尽快迁移至新版，详情请参考 [修改四层代理转发规则
+](https://cloud.tencent.com/document/product/1552/103410) 。
      */
     ModifyApplicationProxyRule(req: ModifyApplicationProxyRuleRequest, cb?: (error: string, rep: ModifyApplicationProxyRuleResponse) => void): Promise<ModifyApplicationProxyRuleResponse>;
     /**
@@ -346,7 +350,8 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
      */
     DeleteSecurityIPGroup(req: DeleteSecurityIPGroupRequest, cb?: (error: string, rep: DeleteSecurityIPGroupResponse) => void): Promise<DeleteSecurityIPGroupResponse>;
     /**
-     * 创建应用代理规则
+     * 本接口为旧版，如需调用请尽快迁移至新版，详情请参考 [创建四层代理转发规则
+](https://cloud.tencent.com/document/product/1552/103416) 。
      */
     CreateApplicationProxyRule(req: CreateApplicationProxyRuleRequest, cb?: (error: string, rep: CreateApplicationProxyRuleResponse) => void): Promise<CreateApplicationProxyRuleResponse>;
     /**
