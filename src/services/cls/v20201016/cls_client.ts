@@ -24,6 +24,7 @@ import {
   LogInfo,
   DeleteAlarmNoticeResponse,
   DescribeLogHistogramRequest,
+  DeleteAlarmShieldRequest,
   DescribeLogContextRequest,
   DeleteShipperRequest,
   DeleteScheduledSqlRequest,
@@ -34,7 +35,7 @@ import {
   DescribeShipperTasksResponse,
   CheckFunctionRequest,
   Filter,
-  DescribeConfigMachineGroupsRequest,
+  DescribeAlarmShieldsResponse,
   ModifyConfigExtraResponse,
   SearchCosRechargeInfoRequest,
   KafkaRechargeInfo,
@@ -80,23 +81,25 @@ import {
   DeleteMachineGroupResponse,
   KafkaProtocolInfo,
   ScheduledSqlTaskInfo,
-  DescribeCosRechargesRequest,
+  DescribeConfigMachineGroupsRequest,
   MetaTagInfo,
   CreateCosRechargeRequest,
   DescribeKafkaUserRequest,
   ExtractRuleInfo,
-  TopicInfo,
+  CreateAlarmShieldResponse,
   DeleteDataTransformResponse,
   DeleteConfigExtraResponse,
   ModifyConsumerRequest,
   CreateIndexResponse,
   DeleteConfigFromMachineGroupResponse,
   CreateConsumerResponse,
+  CreateConfigResponse,
   ModifyMachineGroupResponse,
   DataTransformResouceInfo,
   DeleteMachineGroupRequest,
   FullTextInfo,
   QueryMetricResponse,
+  DescribeAlarmShieldsRequest,
   DescribePartitionsResponse,
   DescribeConfigMachineGroupsResponse,
   ModifyAlarmRequest,
@@ -117,10 +120,11 @@ import {
   SplitPartitionRequest,
   DescribeMachineGroupConfigsResponse,
   CheckRechargeKafkaServerRequest,
+  CreateAlarmShieldRequest,
   MachineGroupInfo,
   DescribeLogHistogramResponse,
   CloseKafkaConsumerResponse,
-  DescribeMachineGroupsRequest,
+  DeleteAlarmShieldResponse,
   DescribeConsumerRequest,
   CreateIndexRequest,
   DescribeLogsetsResponse,
@@ -129,10 +133,13 @@ import {
   GetAlarmLogResponse,
   CreateTopicRequest,
   DescribeExportsRequest,
+  DescribeMachineGroupsRequest,
+  DescribeCosRechargesRequest,
   AlarmTarget,
   CreateKafkaRechargeResponse,
   ModifyScheduledSqlRequest,
   DeleteConfigResponse,
+  ModifyAlarmShieldResponse,
   CreateDeliverCloudFunctionRequest,
   DeleteConsumerRequest,
   QueryRangeMetricResponse,
@@ -186,6 +193,7 @@ import {
   ModifyKafkaConsumerRequest,
   ExportInfo,
   ModifyIndexResponse,
+  TopicInfo,
   GroupTriggerConditionInfo,
   DescribeLogContextResponse,
   CheckFunctionResponse,
@@ -215,7 +223,7 @@ import {
   ApplyConfigToMachineGroupResponse,
   AlertHistoryNotice,
   DeleteAlarmRequest,
-  CreateConfigResponse,
+  AlarmShieldInfo,
   ModifyKafkaConsumerResponse,
   MachineGroupTypeInfo,
   DeleteConfigFromMachineGroupRequest,
@@ -243,6 +251,7 @@ import {
   SearchLogRequest,
   CreateMachineGroupRequest,
   Tag,
+  ModifyAlarmShieldRequest,
   DescribeExportsResponse,
   ApplyConfigToMachineGroupRequest,
   GetAlarmLogRequest,
@@ -324,6 +333,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateIndexResponse) => void
   ): Promise<CreateIndexResponse> {
     return this.request("CreateIndex", req, cb)
+  }
+
+  /**
+   * 查询指定时刻指标的最新值
+   */
+  async QueryMetric(
+    req: QueryMetricRequest,
+    cb?: (error: string, rep: QueryMetricResponse) => void
+  ): Promise<QueryMetricResponse> {
+    return this.request("QueryMetric", req, cb)
   }
 
   /**
@@ -447,13 +466,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询指定时刻指标的最新值
+   * 获取机器组绑定的采集规则配置
    */
-  async QueryMetric(
-    req: QueryMetricRequest,
-    cb?: (error: string, rep: QueryMetricResponse) => void
-  ): Promise<QueryMetricResponse> {
-    return this.request("QueryMetric", req, cb)
+  async DescribeMachineGroupConfigs(
+    req: DescribeMachineGroupConfigsRequest,
+    cb?: (error: string, rep: DescribeMachineGroupConfigsResponse) => void
+  ): Promise<DescribeMachineGroupConfigsResponse> {
+    return this.request("DescribeMachineGroupConfigs", req, cb)
   }
 
   /**
@@ -537,6 +556,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 该接口用于创建告警屏蔽规则。
+   */
+  async CreateAlarmShield(
+    req: CreateAlarmShieldRequest,
+    cb?: (error: string, rep: CreateAlarmShieldResponse) => void
+  ): Promise<CreateAlarmShieldResponse> {
+    return this.request("CreateAlarmShield", req, cb)
+  }
+
+  /**
    * 新建投递到COS的任务，【！！！注意】使用此接口，需要检查是否配置了投递COS的角色和权限。如果没有配置，请参考文档投递权限查看和配置https://cloud.tencent.com/document/product/614/71623。
    */
   async CreateShipper(
@@ -614,6 +643,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ApplyConfigToMachineGroupResponse) => void
   ): Promise<ApplyConfigToMachineGroupResponse> {
     return this.request("ApplyConfigToMachineGroup", req, cb)
+  }
+
+  /**
+   * 该接口用于删除告警屏蔽规则。
+   */
+  async DeleteAlarmShield(
+    req: DeleteAlarmShieldRequest,
+    cb?: (error: string, rep: DeleteAlarmShieldResponse) => void
+  ): Promise<DeleteAlarmShieldResponse> {
+    return this.request("DeleteAlarmShield", req, cb)
   }
 
   /**
@@ -697,6 +736,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 该接口用于修改告警屏蔽规则。
+   */
+  async ModifyAlarmShield(
+    req: ModifyAlarmShieldRequest,
+    cb?: (error: string, rep: ModifyAlarmShieldResponse) => void
+  ): Promise<ModifyAlarmShieldResponse> {
+    return this.request("ModifyAlarmShield", req, cb)
+  }
+
+  /**
    * 本接口用于创建特殊采集配置任务，特殊采集配置应用于自建K8S环境的采集Agent
    */
   async CreateConfigExtra(
@@ -704,6 +753,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateConfigExtraResponse) => void
   ): Promise<CreateConfigExtraResponse> {
     return this.request("CreateConfigExtra", req, cb)
+  }
+
+  /**
+   * 获取告警屏蔽配置规则
+   */
+  async DescribeAlarmShields(
+    req: DescribeAlarmShieldsRequest,
+    cb?: (error: string, rep: DescribeAlarmShieldsResponse) => void
+  ): Promise<DescribeAlarmShieldsResponse> {
+    return this.request("DescribeAlarmShields", req, cb)
   }
 
   /**
@@ -1240,16 +1299,6 @@ cls.pb.cc cls.pb.h cls.proto
     cb?: (error: string, rep: ModifyLogsetResponse) => void
   ): Promise<ModifyLogsetResponse> {
     return this.request("ModifyLogset", req, cb)
-  }
-
-  /**
-   * 获取机器组绑定的采集规则配置
-   */
-  async DescribeMachineGroupConfigs(
-    req: DescribeMachineGroupConfigsRequest,
-    cb?: (error: string, rep: DescribeMachineGroupConfigsResponse) => void
-  ): Promise<DescribeMachineGroupConfigsResponse> {
-    return this.request("DescribeMachineGroupConfigs", req, cb)
   }
 
   /**

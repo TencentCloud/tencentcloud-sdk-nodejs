@@ -779,6 +779,10 @@ export interface DescribeRoomRequest {
      * 房间Id。
      */
     RoomId: number;
+    /**
+     * 请求RTMP推流链接，0：否，1：是，默认为0。
+     */
+    RTMPStreamingURL?: number;
 }
 /**
  * BatchDescribeDocument请求参数结构体
@@ -2034,6 +2038,10 @@ export interface DescribeRoomResponse {
      * 录制文件背景图片，支持png、jpg、jpeg、bmp格式，暂不支持透明通道
      */
     RecordBackground?: string;
+    /**
+     * RTMP推流链接
+     */
+    RTMPStreamingURL?: string;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */

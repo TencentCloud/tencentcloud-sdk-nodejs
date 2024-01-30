@@ -414,6 +414,23 @@ export interface UpdateProductPrivateCAResponse {
     RequestId?: string;
 }
 /**
+ * UpdateOtaTaskStatus请求参数结构体
+ */
+export interface UpdateOtaTaskStatusRequest {
+    /**
+     * 产品ID
+     */
+    ProductId: string;
+    /**
+     * 固件升级任务ID
+     */
+    TaskId: number;
+    /**
+     * 固件任务取消状态
+     */
+    Status: number;
+}
+/**
  * UpdateDeviceShadow请求参数结构体
  */
 export interface UpdateDeviceShadowRequest {
@@ -626,6 +643,15 @@ export interface UpdateDeviceLogLevelRequest {
     LogLevel: number;
 }
 /**
+ * UpdateOtaTaskStatus返回参数结构体
+ */
+export interface UpdateOtaTaskStatusResponse {
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * PublishRRPCMessage请求参数结构体
  */
 export interface PublishRRPCMessageRequest {
@@ -802,7 +828,7 @@ export interface BatchUpdateFirmwareResponse {
     /**
      * 任务ID
      */
-    TaskId: number;
+    TaskId?: number;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -899,6 +925,10 @@ export interface EditFirmwareRequest {
      * 固件描述
      */
     FirmwareDescription?: string;
+    /**
+     * 固件用户自定义配置信息
+     */
+    FirmwareUserDefined?: string;
 }
 /**
  * 子设备信息
@@ -1031,11 +1061,11 @@ export interface ListFirmwaresResponse {
     /**
      * 固件总数
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 固件列表
      */
-    Firmwares: Array<FirmwareInfo>;
+    Firmwares?: Array<FirmwareInfo>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2767,6 +2797,10 @@ export interface BatchUpdateFirmwareRequest {
      * 固件升级任务，默认超时时间。 最小取值60秒，最大为3600秒
      */
     TimeoutInterval?: number;
+    /**
+     * 固件升级任务类型，默认静态升级值为空或1，动态升级值为7。
+     */
+    Type?: number;
 }
 /**
  * X509证书信息
@@ -3076,6 +3110,10 @@ export interface UploadFirmwareRequest {
      * 固件描述
      */
     FirmwareDescription?: string;
+    /**
+     * 固件用户自定义配置信息
+     */
+    FirmwareUserDefined?: string;
 }
 /**
  * UpdateDeviceLogLevel返回参数结构体

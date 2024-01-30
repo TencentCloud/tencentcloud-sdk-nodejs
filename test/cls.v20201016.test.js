@@ -58,6 +58,16 @@ it("cls.v20201016.CreateIndex", async function () {
     }
 })
 
+it("cls.v20201016.QueryMetric", async function () {
+    try {
+       const data = await client.QueryMetric({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cls.v20201016.ModifyShipper", async function () {
     try {
        const data = await client.ModifyShipper({})
@@ -178,9 +188,9 @@ it("cls.v20201016.CreateConfig", async function () {
     }
 })
 
-it("cls.v20201016.QueryMetric", async function () {
+it("cls.v20201016.DescribeMachineGroupConfigs", async function () {
     try {
-       const data = await client.QueryMetric({})
+       const data = await client.DescribeMachineGroupConfigs({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -268,6 +278,16 @@ it("cls.v20201016.DescribeIndex", async function () {
     }
 })
 
+it("cls.v20201016.CreateAlarmShield", async function () {
+    try {
+       const data = await client.CreateAlarmShield({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cls.v20201016.CreateShipper", async function () {
     try {
        const data = await client.CreateShipper({})
@@ -341,6 +361,16 @@ it("cls.v20201016.DescribeCosRecharges", async function () {
 it("cls.v20201016.ApplyConfigToMachineGroup", async function () {
     try {
        const data = await client.ApplyConfigToMachineGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cls.v20201016.DeleteAlarmShield", async function () {
+    try {
+       const data = await client.DeleteAlarmShield({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -428,9 +458,29 @@ it("cls.v20201016.ModifyConfigExtra", async function () {
     }
 })
 
+it("cls.v20201016.ModifyAlarmShield", async function () {
+    try {
+       const data = await client.ModifyAlarmShield({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cls.v20201016.CreateConfigExtra", async function () {
     try {
        const data = await client.CreateConfigExtra({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cls.v20201016.DescribeAlarmShields", async function () {
+    try {
+       const data = await client.DescribeAlarmShields({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -811,16 +861,6 @@ it("cls.v20201016.CreateScheduledSql", async function () {
 it("cls.v20201016.ModifyLogset", async function () {
     try {
        const data = await client.ModifyLogset({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("cls.v20201016.DescribeMachineGroupConfigs", async function () {
-    try {
-       const data = await client.DescribeMachineGroupConfigs({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

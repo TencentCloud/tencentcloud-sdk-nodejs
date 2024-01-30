@@ -123,6 +123,10 @@ export interface GetLicensesRequest {
    * DeviceId
    */
   DeviceId?: string
+  /**
+   * license状态：0:未绑定；1:已绑定；2:已停服；3:已退费
+   */
+  Status?: number
 }
 
 /**
@@ -429,6 +433,10 @@ export interface GetLicenseStatResponse {
    */
   Expire?: number
   /**
+   * 当月用量超时授权个数
+   */
+  MonthlyExpire?: number
+  /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -523,6 +531,11 @@ export interface Device {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   LicenseIds?: Array<string>
+  /**
+   * 每月license的限定时长
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MonthlyRemainTime?: number
 }
 
 /**

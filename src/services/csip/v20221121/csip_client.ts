@@ -32,6 +32,7 @@ import {
   DescribeScanReportListRequest,
   DescribeVpcAssetsResponse,
   Vpc,
+  PortRiskAdvanceCFGParamItem,
   VULRiskAdvanceCFGList,
   StopRiskCenterTaskRequest,
   DataSearchBug,

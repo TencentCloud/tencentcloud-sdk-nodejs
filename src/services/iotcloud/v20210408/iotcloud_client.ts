@@ -40,6 +40,7 @@ import {
   DeviceLabel,
   DescribeProductTasksRequest,
   UpdateProductPrivateCAResponse,
+  UpdateOtaTaskStatusRequest,
   UpdateDeviceShadowRequest,
   DescribeGatewayBindDevicesResponse,
   ProductResourceInfo,
@@ -52,6 +53,7 @@ import {
   EnableTopicRuleResponse,
   DescribePushResourceTaskStatisticsResponse,
   UpdateDeviceLogLevelRequest,
+  UpdateOtaTaskStatusResponse,
   PublishRRPCMessageRequest,
   ProductProperties,
   DeviceUpdateStatus,
@@ -526,6 +528,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: UpdateDevicesEnableStateResponse) => void
   ): Promise<UpdateDevicesEnableStateResponse> {
     return this.request("UpdateDevicesEnableState", req, cb)
+  }
+
+  /**
+   * 本接口（UpdateOtaTask）当固件升级大任务处于没有在全部成功的状态时，可修改为取消状态，取消部分或全部设备的升级;或其它允许的可修改的状态
+   */
+  async UpdateOtaTaskStatus(
+    req: UpdateOtaTaskStatusRequest,
+    cb?: (error: string, rep: UpdateOtaTaskStatusResponse) => void
+  ): Promise<UpdateOtaTaskStatusResponse> {
+    return this.request("UpdateOtaTaskStatus", req, cb)
   }
 
   /**

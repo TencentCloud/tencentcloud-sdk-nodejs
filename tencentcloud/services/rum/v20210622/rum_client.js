@@ -112,12 +112,6 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ResumeInstance", req, cb);
     }
     /**
-     * 获取PerformanceProject信息
-     */
-    async DescribeDataPerformanceProject(req, cb) {
-        return this.request("DescribeDataPerformanceProject", req, cb);
-    }
-    /**
      * 获取首页错误信息
      */
     async DescribeError(req, cb) {

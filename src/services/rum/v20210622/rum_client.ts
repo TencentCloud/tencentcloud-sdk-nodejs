@@ -85,7 +85,6 @@ import {
   DescribeDataCustomUrlResponse,
   RumAreaInfo,
   DescribeDataSetUrlStatisticsRequest,
-  DescribeDataPerformanceProjectResponse,
   ResumeInstanceResponse,
   DescribeDataStaticProjectResponse,
   CreateStarProjectRequest,
@@ -123,7 +122,6 @@ import {
   DescribeProjectsResponse,
   ModifyProjectResponse,
   DescribeDataReportCountResponse,
-  DescribeDataPerformanceProjectRequest,
   DescribeRumLogExportResponse,
   DescribeRumLogExportsRequest,
   ModifyProjectRequest,
@@ -288,16 +286,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ResumeInstanceResponse) => void
   ): Promise<ResumeInstanceResponse> {
     return this.request("ResumeInstance", req, cb)
-  }
-
-  /**
-   * 获取PerformanceProject信息
-   */
-  async DescribeDataPerformanceProject(
-    req: DescribeDataPerformanceProjectRequest,
-    cb?: (error: string, rep: DescribeDataPerformanceProjectResponse) => void
-  ): Promise<DescribeDataPerformanceProjectResponse> {
-    return this.request("DescribeDataPerformanceProject", req, cb)
   }
 
   /**

@@ -1848,20 +1848,6 @@ export interface DescribeDataSetUrlStatisticsRequest {
 }
 
 /**
- * DescribeDataPerformanceProject返回参数结构体
- */
-export interface DescribeDataPerformanceProjectResponse {
-  /**
-   * 返回值
-   */
-  Result: string
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * ResumeInstance返回参数结构体
  */
 export interface ResumeInstanceResponse {
@@ -2903,100 +2889,6 @@ export interface DescribeDataReportCountResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * DescribeDataPerformanceProject请求参数结构体
- */
-export interface DescribeDataPerformanceProjectRequest {
-  /**
-   * 开始时间
-   */
-  StartTime: number
-  /**
-   * allcount：性能视图，falls：页面加载瀑布图，samp：首屏时间，day：14天数据，nettype：网络/平台视图，performance：页面性能TOP视图，condition：条件列表，area：请求速度分布，version/platform/isp/region/device/browser/ext1/ext2/ext3/ret/status/from/url/env/：ISP视图/地区视图/浏览器视图等
-   */
-  Type: string
-  /**
-   * 结束时间
-   */
-  EndTime: number
-  /**
-   * 项目ID
-   */
-  ID: number
-  /**
-   * 自定义2
-   */
-  ExtSecond?: string
-  /**
-   * 浏览器引擎
-   */
-  Engine?: string
-  /**
-   * 运营商
-   */
-  Isp?: string
-  /**
-   * 来源页面
-   */
-  From?: string
-  /**
-   * 日志等级
-   */
-  Level?: string
-  /**
-   * 品牌
-   */
-  Brand?: string
-  /**
-   * 地区
-   */
-  Area?: string
-  /**
-   * 版本
-   */
-  VersionNum?: string
-  /**
-   * 平台
-   */
-  Platform?: string
-  /**
-   * 自定义3
-   */
-  ExtThird?: string
-  /**
-   * 自定义1
-   */
-  ExtFirst?: string
-  /**
-   * 网络类型
-   */
-  NetType?: string
-  /**
-   * 机型
-   */
-  Device?: string
-  /**
-   * 是否海外
-   */
-  IsAbroad?: string
-  /**
-   * 操作系统
-   */
-  Os?: string
-  /**
-   * 浏览器
-   */
-  Browser?: string
-  /**
-   * 耗时计算
-   */
-  CostType?: string
-  /**
-   * 环境
-   */
-  Env?: string
 }
 
 /**

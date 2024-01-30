@@ -242,7 +242,7 @@ export interface DeviceDataInfo {
    */
   ProductName?: string
   /**
-   * 产品能力:信令数据、音视频。第0位表示信令数据、第1表示音视频 ，默认为1（信令数据）
+   * 产品能力:信令数据、音视频。二进制数值中第0位表示信令数据、第1位表示音视频 。1（信令数据），3（具有信令数据以及音视频能力）。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ProductAbility?: number
@@ -311,6 +311,16 @@ export interface DeviceDataInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   GroupInfo?: string
+  /**
+   * 通信在/离线状态（online=normal+fault，offline）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DeviceStatus?: string
+  /**
+   * 设备业务状态（normal、fault、offline）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status?: string
 }
 
 /**
@@ -738,7 +748,7 @@ export interface ProductInfo {
    */
   ProductType?: string
   /**
-   * 产品能力:信令数据、音视频，用二进制表示，第0位表示信令数据、第1表示音视频 ，默认为1（信令数据）
+   * 产品能力:信令数据、音视频。二进制数值中第0位表示信令数据、第1位表示音视频 。1（信令数据），3（具有信令数据以及音视频能力）。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ProductAbility?: number
@@ -1305,6 +1315,14 @@ export interface DescribeDeviceListRequest {
    * 分组id列表，非必填
    */
   GroupIdSet?: Array<number | bigint>
+  /**
+   * 是否激活，默认全部，"1"激活，"0"未激活
+   */
+  IsActive?: string
+  /**
+   * 是否为摄像头，默认全部，"true"摄像头，"false"非摄像头
+   */
+  IsCamera?: string
 }
 
 /**

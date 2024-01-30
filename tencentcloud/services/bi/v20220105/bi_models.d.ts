@@ -13,6 +13,11 @@ export interface DataId {
  */
 export interface DescribeUserRoleListResponse {
     /**
+     * 自定义错误信息对象
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ErrorInfo?: ErrorInfo;
+    /**
      * 扩展
   注意：此字段可能返回 null，表示取不到有效值。
      */
@@ -36,6 +41,11 @@ export interface DescribeUserRoleListResponse {
  * ModifyProject返回参数结构体
  */
 export interface ModifyProjectResponse {
+    /**
+     * 自定义错误信息对象
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ErrorInfo?: ErrorInfo;
     /**
      * 额外信息
   注意：此字段可能返回 null，表示取不到有效值。
@@ -77,6 +87,11 @@ export interface DeleteProjectRequest {
  * DescribeUserProjectList返回参数结构体
  */
 export interface DescribeUserProjectListResponse {
+    /**
+     * 自定义错误信息对象
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ErrorInfo?: ErrorInfo;
     /**
      * 数据
   注意：此字段可能返回 null，表示取不到有效值。
@@ -195,6 +210,11 @@ export interface DeleteDatasourceRequest {
  * ModifyDatasource返回参数结构体
  */
 export interface ModifyDatasourceResponse {
+    /**
+     * 自定义错误信息对象
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ErrorInfo?: ErrorInfo;
     /**
      * 无
   注意：此字段可能返回 null，表示取不到有效值。
@@ -375,6 +395,11 @@ export interface ProjectConfigResult {
  */
 export interface DeleteUserRoleResponse {
     /**
+     * 自定义错误信息对象
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ErrorInfo?: ErrorInfo;
+    /**
      * 扩展
   注意：此字段可能返回 null，表示取不到有效值。
      */
@@ -416,9 +441,52 @@ export interface DescribeUserProjectListRequest {
     PageSize?: number;
 }
 /**
+ * 自定义错误信息对象
+ */
+export interface ErrorInfo {
+    /**
+     * 错误说明字段
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ErrorTip?: string;
+    /**
+     * 原始异常信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ErrorMessage?: string;
+    /**
+     * 错误等级字段
+  ERROR
+  WARN
+  INFO
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ErrorLevel?: string;
+    /**
+     * 指引文档链接
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DocLink?: string;
+    /**
+     * 快速指引说明
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    FAQ?: string;
+    /**
+     * 预留字段1
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ReservedField?: string;
+}
+/**
  * CreateDatasourceCloud返回参数结构体
  */
 export interface CreateDatasourceCloudResponse {
+    /**
+     * 自定义错误信息对象
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ErrorInfo?: ErrorInfo;
     /**
      * 成功无
   注意：此字段可能返回 null，表示取不到有效值。
@@ -508,6 +576,10 @@ export interface ModifyUserRoleRequest {
      * 手机区号
      */
     AreaCode?: string;
+    /**
+     * 企业微信应用用户id
+     */
+    AppUserId?: string;
 }
 /**
  * 数据源详情列表
@@ -533,6 +605,11 @@ export interface DatasourceInfoData {
  * DescribeProjectList返回参数结构体
  */
 export interface DescribeProjectListResponse {
+    /**
+     * 自定义错误信息对象
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ErrorInfo?: ErrorInfo;
     /**
      * 额外信息
   注意：此字段可能返回 null，表示取不到有效值。
@@ -606,6 +683,11 @@ export interface IdDTO {
  */
 export interface ModifyUserRoleResponse {
     /**
+     * 自定义错误信息对象
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ErrorInfo?: ErrorInfo;
+    /**
      * 扩展
   注意：此字段可能返回 null，表示取不到有效值。
      */
@@ -666,6 +748,11 @@ export interface CreateEmbedTokenRequest {
  * CreateUserRoleProject返回参数结构体
  */
 export interface CreateUserRoleProjectResponse {
+    /**
+     * 自定义错误信息对象
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ErrorInfo?: ErrorInfo;
     /**
      * 扩展
   注意：此字段可能返回 null，表示取不到有效值。
@@ -773,6 +860,11 @@ export interface Data {
  */
 export interface ModifyUserRoleProjectResponse {
     /**
+     * 自定义错误信息对象
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ErrorInfo?: ErrorInfo;
+    /**
      * 扩展
   注意：此字段可能返回 null，表示取不到有效值。
      */
@@ -797,6 +889,11 @@ export interface ModifyUserRoleProjectResponse {
  */
 export interface DescribeUserRoleProjectListResponse {
     /**
+     * 自定义错误信息对象
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ErrorInfo?: ErrorInfo;
+    /**
      * 扩展
   注意：此字段可能返回 null，表示取不到有效值。
      */
@@ -820,6 +917,11 @@ export interface DescribeUserRoleProjectListResponse {
  * ModifyDatasourceCloud返回参数结构体
  */
 export interface ModifyDatasourceCloudResponse {
+    /**
+     * 自定义错误信息对象
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ErrorInfo?: ErrorInfo;
     /**
      * 成功无
   注意：此字段可能返回 null，表示取不到有效值。
@@ -1079,11 +1181,20 @@ export interface ModifyUserRoleProjectRequest {
      * 用户名
      */
     UserName?: string;
+    /**
+     * 企业微信应用用户id
+     */
+    AppUserId?: string;
 }
 /**
  * CreateUserRole返回参数结构体
  */
 export interface CreateUserRoleResponse {
+    /**
+     * 自定义错误信息对象
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ErrorInfo?: ErrorInfo;
     /**
      * 扩展
   注意：此字段可能返回 null，表示取不到有效值。
@@ -1146,84 +1257,104 @@ export interface UserRoleListDataUserRoleInfo {
     /**
      * 业务ID
      */
-    Id: number;
+    Id?: number;
     /**
      * 角色列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    RoleList: Array<UserRoleListDataRoleInfo>;
+    RoleList?: Array<UserRoleListDataRoleInfo>;
     /**
      * 角色ID列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    RoleIdList: Array<number | bigint>;
+    RoleIdList?: Array<number | bigint>;
     /**
      * 用户ID
      */
-    UserId: string;
+    UserId?: string;
     /**
      * 用户名
      */
-    UserName: string;
+    UserName?: string;
     /**
      * 企业ID
      */
-    CorpId: string;
+    CorpId?: string;
     /**
      * 邮箱
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Email: string;
+    Email?: string;
     /**
      * 创建人
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CreatedUser: string;
+    CreatedUser?: string;
     /**
      * 创建时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CreatedAt: string;
+    CreatedAt?: string;
     /**
      * 更新人
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    UpdatedUser: string;
+    UpdatedUser?: string;
     /**
      * 更新时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    UpdatedAt: string;
+    UpdatedAt?: string;
     /**
      * 最后一次登录时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    LastLogin: string;
+    LastLogin?: string;
     /**
      * 账号状态
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Status: number;
+    Status?: number;
     /**
      * 手机号码
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    PhoneNumber: string;
+    PhoneNumber?: string;
     /**
      * 手机号区号
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    AreaCode: string;
+    AreaCode?: string;
     /**
      * 是否为主账号
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    RootAccount: boolean;
+    RootAccount?: boolean;
     /**
      * 是否为企业管理员
   注意：此字段可能返回 null，表示取不到有效值。
      */
     CorpAdmin?: boolean;
+    /**
+     * 企微用户id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AppUserId?: string;
+    /**
+     * 昵称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AppUserAliasName?: string;
+    /**
+     * 应用用户名
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AppUserName?: string;
+    /**
+     * 是否在可见范围内
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InValidateAppRange?: boolean;
 }
 /**
  * 用户角色信息
@@ -1542,6 +1673,11 @@ export interface DeleteUserRoleProjectRequest {
  */
 export interface CreateProjectResponse {
     /**
+     * 自定义错误信息对象
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ErrorInfo?: ErrorInfo;
+    /**
      * 额外数据
      */
     Extra?: string;
@@ -1562,6 +1698,11 @@ export interface CreateProjectResponse {
  * DescribeProjectInfo返回参数结构体
  */
 export interface DescribeProjectInfoResponse {
+    /**
+     * 自定义错误信息对象
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ErrorInfo?: ErrorInfo;
     /**
      * ""
   注意：此字段可能返回 null，表示取不到有效值。
@@ -1640,11 +1781,20 @@ export interface DescribeUserRoleListRequest {
      * 项目id
      */
     ProjectId?: string;
+    /**
+     * 是否只获取绑定企微应用的
+     */
+    IsOnlyBindAppUser?: boolean;
 }
 /**
  * DeleteProject返回参数结构体
  */
 export interface DeleteProjectResponse {
+    /**
+     * 自定义错误信息对象
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ErrorInfo?: ErrorInfo;
     /**
      * ”“
      */
@@ -1700,6 +1850,10 @@ export interface DescribeUserRoleProjectListRequest {
      * 项目ID
      */
     ProjectId: number;
+    /**
+     * 是否只获取绑定企微应用的
+     */
+    IsOnlyBindAppUser?: boolean;
 }
 /**
  * 商业化版本权限分组
@@ -1720,6 +1874,11 @@ export interface PermissionGroup {
  * CreateEmbedToken返回参数结构体
  */
 export interface CreateEmbedTokenResponse {
+    /**
+     * 自定义错误信息对象
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ErrorInfo?: ErrorInfo;
     /**
      * 额外信息
   注意：此字段可能返回 null，表示取不到有效值。
@@ -1799,6 +1958,11 @@ export interface DescribeDatasourceListRequest {
  */
 export interface ApplyEmbedIntervalResponse {
     /**
+     * 自定义错误信息对象
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ErrorInfo?: ErrorInfo;
+    /**
      * 额外参数
   注意：此字段可能返回 null，表示取不到有效值。
      */
@@ -1823,6 +1987,11 @@ export interface ApplyEmbedIntervalResponse {
  */
 export interface CreateDatasourceResponse {
     /**
+     * 自定义错误信息对象
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ErrorInfo?: ErrorInfo;
+    /**
      * 数据源id
   注意：此字段可能返回 null，表示取不到有效值。
      */
@@ -1846,6 +2015,11 @@ export interface CreateDatasourceResponse {
  * DeleteUserRoleProject返回参数结构体
  */
 export interface DeleteUserRoleProjectResponse {
+    /**
+     * 自定义错误信息对象
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ErrorInfo?: ErrorInfo;
     /**
      * 扩展
   注意：此字段可能返回 null，表示取不到有效值。
@@ -1984,6 +2158,11 @@ export interface UserInfo {
  */
 export interface DescribeDatasourceListResponse {
     /**
+     * 自定义错误信息对象
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ErrorInfo?: ErrorInfo;
+    /**
      * 列表详情
   注意：此字段可能返回 null，表示取不到有效值。
      */
@@ -2078,11 +2257,41 @@ export interface UserIdAndUserName {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Mobile?: string;
+    /**
+     * 1
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AppId?: string;
+    /**
+     * 1
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AppUserId?: string;
+    /**
+     * 1
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AppUserAliasName?: string;
+    /**
+     * 1
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AppUserName?: string;
+    /**
+     * 1
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InValidateAppRange?: boolean;
 }
 /**
  * DeleteDatasource返回参数结构体
  */
 export interface DeleteDatasourceResponse {
+    /**
+     * 自定义错误信息对象
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ErrorInfo?: ErrorInfo;
     /**
      * 数据
   注意：此字段可能返回 null，表示取不到有效值。

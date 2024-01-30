@@ -1539,7 +1539,9 @@ export declare class Client extends AbstractClient {
      */
     ModifyBaselineRule(req: ModifyBaselineRuleRequest, cb?: (error: string, rep: ModifyBaselineRuleResponse) => void): Promise<ModifyBaselineRuleResponse>;
     /**
-     * 网络攻击日志详情
+     * DescribeAttackEventInfo 接口替代
+
+网络攻击日志详情
      */
     DescribeAttackLogInfo(req: DescribeAttackLogInfoRequest, cb?: (error: string, rep: DescribeAttackLogInfoResponse) => void): Promise<DescribeAttackLogInfoResponse>;
     /**

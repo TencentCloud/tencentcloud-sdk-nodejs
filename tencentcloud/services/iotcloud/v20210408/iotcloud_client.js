@@ -226,6 +226,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UpdateDevicesEnableState", req, cb);
     }
     /**
+     * 本接口（UpdateOtaTask）当固件升级大任务处于没有在全部成功的状态时，可修改为取消状态，取消部分或全部设备的升级;或其它允许的可修改的状态
+     */
+    async UpdateOtaTaskStatus(req, cb) {
+        return this.request("UpdateOtaTaskStatus", req, cb);
+    }
+    /**
      * 本接口（ListFirmwares）用于获取固件列表
      */
     async ListFirmwares(req, cb) {

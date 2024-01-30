@@ -204,6 +204,19 @@ export interface DescribeLogHistogramRequest {
     SyntaxRule?: number;
 }
 /**
+ * DeleteAlarmShield请求参数结构体
+ */
+export interface DeleteAlarmShieldRequest {
+    /**
+     * 屏蔽规则id。
+     */
+    TaskId: string;
+    /**
+     * 通知渠道组id。
+     */
+    AlarmNoticeId: string;
+}
+/**
  * DescribeLogContext请求参数结构体
  */
 export interface DescribeLogContextRequest {
@@ -350,13 +363,21 @@ export interface Filter {
     Values: Array<string>;
 }
 /**
- * DescribeConfigMachineGroups请求参数结构体
+ * DescribeAlarmShields返回参数结构体
  */
-export interface DescribeConfigMachineGroupsRequest {
+export interface DescribeAlarmShieldsResponse {
     /**
-     * 采集配置ID
+     * 符合条件的规则总数目
      */
-    ConfigId: string;
+    TotalCount?: number;
+    /**
+     * 告警屏蔽规则详情
+     */
+    AlarmShields?: Array<AlarmShieldInfo>;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * ModifyConfigExtra返回参数结构体
@@ -1424,21 +1445,13 @@ export interface ScheduledSqlTaskInfo {
     SyntaxRule?: number;
 }
 /**
- * DescribeCosRecharges请求参数结构体
+ * DescribeConfigMachineGroups请求参数结构体
  */
-export interface DescribeCosRechargesRequest {
+export interface DescribeConfigMachineGroupsRequest {
     /**
-     * 日志主题 ID
+     * 采集配置ID
      */
-    TopicId: string;
-    /**
-     * 状态   status 0: 已创建, 1: 运行中, 2: 已停止, 3: 已完成, 4: 运行失败。
-     */
-    Status?: number;
-    /**
-     * 是否启用:   0： 未启用  ， 1：启用
-     */
-    Enable?: number;
+    ConfigId: string;
 }
 /**
  * 元数据信息
@@ -1608,97 +1621,17 @@ export interface ExtractRuleInfo {
     EventLogRules?: Array<EventLog>;
 }
 /**
- * 日志主题信息
+ * CreateAlarmShield返回参数结构体
  */
-export interface TopicInfo {
+export interface CreateAlarmShieldResponse {
     /**
-     * 日志集ID
+     * 屏蔽规则ID。
      */
-    LogsetId?: string;
+    TaskId?: string;
     /**
-     * 日志主题ID
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
-    TopicId?: string;
-    /**
-     * 日志主题名称
-     */
-    TopicName?: string;
-    /**
-     * 主题分区个数
-     */
-    PartitionCount?: number;
-    /**
-     * 是否开启索引
-     */
-    Index?: boolean;
-    /**
-     * 云产品标识，日志主题由其它云产品创建时，该字段会显示云产品名称，例如CDN、TKE
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    AssumerName?: string;
-    /**
-     * 创建时间
-     */
-    CreateTime?: string;
-    /**
-     * 日主主题是否开启采集
-     */
-    Status?: boolean;
-    /**
-     * 日志主题绑定的标签信息
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Tags?: Array<Tag>;
-    /**
-     * 该主题是否开启自动分裂
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    AutoSplit?: boolean;
-    /**
-     * 若开启自动分裂的话，该主题能够允许的最大分区数
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    MaxSplitPartitions?: number;
-    /**
-     * 日主题的存储类型
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    StorageType?: string;
-    /**
-     * 生命周期，单位天，可取值范围1~3600。取值为3640时代表永久保存
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Period?: number;
-    /**
-     * 云产品二级标识，日志主题由其它云产品创建时，该字段会显示云产品名称及其日志类型的二级分类，例如TKE-Audit、TKE-Event。部分云产品仅有云产品标识(AssumerName)，无该字段。
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    SubAssumerName?: string;
-    /**
-     * 日志主题描述
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Describes?: string;
-    /**
-     * 开启日志沉降，热存储的生命周期， hotPeriod < Period。
-  热存储为 hotPeriod, 冷存储则为 Period-hotPeriod。
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    HotPeriod?: number;
-    /**
-     * 主题类型。
-  - 0: 日志主题
-  - 1: 指标主题
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    BizType?: number;
-    /**
-     * 免鉴权开关。
-  - false: 关闭
-  - true: 开启
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    IsWebTracking?: boolean;
+    RequestId?: string;
 }
 /**
  * DeleteDataTransform返回参数结构体
@@ -1775,6 +1708,19 @@ export interface CreateConsumerResponse {
     RequestId?: string;
 }
 /**
+ * CreateConfig返回参数结构体
+ */
+export interface CreateConfigResponse {
+    /**
+     * 采集配置ID
+     */
+    ConfigId?: string;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * ModifyMachineGroup返回参数结构体
  */
 export interface ModifyMachineGroupResponse {
@@ -1841,6 +1787,29 @@ export interface QueryMetricResponse {
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * DescribeAlarmShields请求参数结构体
+ */
+export interface DescribeAlarmShieldsRequest {
+    /**
+     * 通知渠道组id。
+     */
+    AlarmNoticeId: string;
+    /**
+     * - taskId:按照【规则id】进行过滤。类型：String  必选：否
+  - status:按照【规则状态】进行过滤。类型：String。 支持 0:暂未生效，1:生效中，2:已失效。 必选：否
+  每次请求的Filters的上限为10，Filter.Values的上限为100。
+     */
+    Filters?: Array<Filter>;
+    /**
+     * 分页的偏移量，默认值为0。
+     */
+    Offset?: number;
+    /**
+     * 分页单页限制数目，默认值为20，最大值100。
+     */
+    Limit?: number;
 }
 /**
  * DescribePartitions返回参数结构体
@@ -2505,6 +2474,35 @@ export interface CheckRechargeKafkaServerRequest {
     Protocol?: KafkaProtocolInfo;
 }
 /**
+ * CreateAlarmShield请求参数结构体
+ */
+export interface CreateAlarmShieldRequest {
+    /**
+     * 通知渠道组id。
+     */
+    AlarmNoticeId: string;
+    /**
+     * 屏蔽开始时间（秒级时间戳）。
+     */
+    StartTime: number;
+    /**
+     * 屏蔽结束时间（秒级时间戳）。
+     */
+    EndTime: number;
+    /**
+     * 屏蔽类型。1：屏蔽所有通知，2：按照Rule参数屏蔽匹配规则的通知。
+     */
+    Type: number;
+    /**
+     * 屏蔽原因。
+     */
+    Reason: string;
+    /**
+     * 屏蔽规则，当Type为2时必填。规则填写方式详见[产品文档](https://cloud.tencent.com/document/product/614/103178#rule)。
+     */
+    Rule?: string;
+}
+/**
  * 机器组信息
  */
 export interface MachineGroupInfo {
@@ -2589,46 +2587,13 @@ export interface CloseKafkaConsumerResponse {
     RequestId?: string;
 }
 /**
- * DescribeMachineGroups请求参数结构体
+ * DeleteAlarmShield返回参数结构体
  */
-export interface DescribeMachineGroupsRequest {
+export interface DeleteAlarmShieldResponse {
     /**
-     * machineGroupName
-  - 按照【机器组名称】进行过滤。
-  - 类型：String
-  - 必选：否
-  
-  machineGroupId
-  - 按照【机器组ID】进行过滤。
-  - 类型：String
-  - 必选：否
-  
-  osType
-  - 按照【操作系统类型】进行过滤。
-  - 类型：Int
-  - 必选：否
-  
-  tagKey
-  - 按照【标签键】进行过滤。
-  - 类型：String
-  - 必选：否
-  
-  tag:tagKey
-  - 按照【标签键值对】进行过滤。tagKey使用具体的标签键进行替换。
-  - 类型：String
-  - 必选：否
-  
-  每次请求的Filters的上限为10，Filter.Values的上限为5。
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
-    Filters?: Array<Filter>;
-    /**
-     * 分页的偏移量，默认值为0
-     */
-    Offset?: number;
-    /**
-     * 分页单页的限制数目，默认值为20，最大值100
-     */
-    Limit?: number;
+    RequestId?: string;
 }
 /**
  * DescribeConsumer请求参数结构体
@@ -2846,6 +2811,65 @@ export interface DescribeExportsRequest {
     Limit?: number;
 }
 /**
+ * DescribeMachineGroups请求参数结构体
+ */
+export interface DescribeMachineGroupsRequest {
+    /**
+     * machineGroupName
+  - 按照【机器组名称】进行过滤。
+  - 类型：String
+  - 必选：否
+  
+  machineGroupId
+  - 按照【机器组ID】进行过滤。
+  - 类型：String
+  - 必选：否
+  
+  osType
+  - 按照【操作系统类型】进行过滤。
+  - 类型：Int
+  - 必选：否
+  
+  tagKey
+  - 按照【标签键】进行过滤。
+  - 类型：String
+  - 必选：否
+  
+  tag:tagKey
+  - 按照【标签键值对】进行过滤。tagKey使用具体的标签键进行替换。
+  - 类型：String
+  - 必选：否
+  
+  每次请求的Filters的上限为10，Filter.Values的上限为5。
+     */
+    Filters?: Array<Filter>;
+    /**
+     * 分页的偏移量，默认值为0
+     */
+    Offset?: number;
+    /**
+     * 分页单页的限制数目，默认值为20，最大值100
+     */
+    Limit?: number;
+}
+/**
+ * DescribeCosRecharges请求参数结构体
+ */
+export interface DescribeCosRechargesRequest {
+    /**
+     * 日志主题 ID
+     */
+    TopicId: string;
+    /**
+     * 状态   status 0: 已创建, 1: 运行中, 2: 已停止, 3: 已完成, 4: 运行失败。
+     */
+    Status?: number;
+    /**
+     * 是否启用:   0： 未启用  ， 1：启用
+     */
+    Enable?: number;
+}
+/**
  * 告警对象
  */
 export interface AlarmTarget {
@@ -2953,6 +2977,15 @@ export interface ModifyScheduledSqlRequest {
  * DeleteConfig返回参数结构体
  */
 export interface DeleteConfigResponse {
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * ModifyAlarmShield返回参数结构体
+ */
+export interface ModifyAlarmShieldResponse {
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -4205,6 +4238,99 @@ export interface ModifyIndexResponse {
     RequestId?: string;
 }
 /**
+ * 日志主题信息
+ */
+export interface TopicInfo {
+    /**
+     * 日志集ID
+     */
+    LogsetId?: string;
+    /**
+     * 日志主题ID
+     */
+    TopicId?: string;
+    /**
+     * 日志主题名称
+     */
+    TopicName?: string;
+    /**
+     * 主题分区个数
+     */
+    PartitionCount?: number;
+    /**
+     * 是否开启索引
+     */
+    Index?: boolean;
+    /**
+     * 云产品标识，日志主题由其它云产品创建时，该字段会显示云产品名称，例如CDN、TKE
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AssumerName?: string;
+    /**
+     * 创建时间
+     */
+    CreateTime?: string;
+    /**
+     * 日主主题是否开启采集
+     */
+    Status?: boolean;
+    /**
+     * 日志主题绑定的标签信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Tags?: Array<Tag>;
+    /**
+     * 该主题是否开启自动分裂
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AutoSplit?: boolean;
+    /**
+     * 若开启自动分裂的话，该主题能够允许的最大分区数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MaxSplitPartitions?: number;
+    /**
+     * 日主题的存储类型
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    StorageType?: string;
+    /**
+     * 生命周期，单位天，可取值范围1~3600。取值为3640时代表永久保存
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Period?: number;
+    /**
+     * 云产品二级标识，日志主题由其它云产品创建时，该字段会显示云产品名称及其日志类型的二级分类，例如TKE-Audit、TKE-Event。部分云产品仅有云产品标识(AssumerName)，无该字段。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SubAssumerName?: string;
+    /**
+     * 日志主题描述
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Describes?: string;
+    /**
+     * 开启日志沉降，热存储的生命周期， hotPeriod < Period。
+  热存储为 hotPeriod, 冷存储则为 Period-hotPeriod。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    HotPeriod?: number;
+    /**
+     * 主题类型。
+  - 0: 日志主题
+  - 1: 指标主题
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    BizType?: number;
+    /**
+     * 免鉴权开关。
+  - false: 关闭
+  - true: 开启
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IsWebTracking?: boolean;
+}
+/**
  * 分组触发条件
  */
 export interface GroupTriggerConditionInfo {
@@ -4953,17 +5079,60 @@ export interface DeleteAlarmRequest {
     AlarmId: string;
 }
 /**
- * CreateConfig返回参数结构体
+ * 告警屏蔽任务配置
  */
-export interface CreateConfigResponse {
+export interface AlarmShieldInfo {
     /**
-     * 采集配置ID
+     * 通知渠道组Id
      */
-    ConfigId?: string;
+    AlarmNoticeId?: string;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     * 屏蔽规则id
      */
-    RequestId?: string;
+    TaskId?: string;
+    /**
+     * 屏蔽开始时间（秒级时间戳）。
+     */
+    StartTime?: number;
+    /**
+     * 屏蔽结束时间（秒级时间戳）。
+     */
+    EndTime?: number;
+    /**
+     * 屏蔽类型。1：屏蔽所有通知，2：按照Rule参数屏蔽匹配规则的通知。
+     */
+    Type?: number;
+    /**
+     * 屏蔽规则，当Type为2时必填。规则填写方式详见[产品文档](https://cloud.tencent.com/document/product/614/103178#rule)。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Rule?: string;
+    /**
+     * 屏蔽原因。
+     */
+    Reason?: string;
+    /**
+     * 规则创建来源。
+  1. 控制台，2.api，3.告警通知
+     */
+    Source?: number;
+    /**
+     * 操作者。
+     */
+    Operator?: string;
+    /**
+     * 规则状态。
+  0：暂未生效，1：生效中，2：已失效
+     */
+    Status?: number;
+    /**
+     * 规则创建时间。
+     */
+    CreateTime?: number;
+    /**
+     * 规则更新时间。
+     */
+    UpdateTime?: number;
 }
 /**
  * ModifyKafkaConsumer返回参数结构体
@@ -5682,6 +5851,43 @@ export interface Tag {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Value: string;
+}
+/**
+ * ModifyAlarmShield请求参数结构体
+ */
+export interface ModifyAlarmShieldRequest {
+    /**
+     * 屏蔽规则ID。
+     */
+    TaskId: string;
+    /**
+     * 通知渠道组id。
+     */
+    AlarmNoticeId: string;
+    /**
+     * 屏蔽开始时间（秒级时间戳）。
+     */
+    StartTime?: number;
+    /**
+     * 屏蔽结束时间（秒级时间戳）。
+     */
+    EndTime?: number;
+    /**
+     * 屏蔽类型。1：屏蔽所有通知，2：按照Rule参数屏蔽匹配规则的通知。
+     */
+    Type?: number;
+    /**
+     * 屏蔽规则，当Type为2时必填。规则填写方式详见[产品文档](https://cloud.tencent.com/document/product/614/103178#rule)。
+     */
+    Rule?: string;
+    /**
+     * 屏蔽原因。
+     */
+    Reason?: string;
+    /**
+     * 规则状态。只有规则状态为生效中（status:1）时，才能将其修改为已失效（status:2）。
+     */
+    Status?: number;
 }
 /**
  * DescribeExports返回参数结构体

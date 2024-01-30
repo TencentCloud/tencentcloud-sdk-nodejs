@@ -32,6 +32,7 @@ import {
   ProjectConfigResult,
   DeleteUserRoleResponse,
   DescribeUserProjectListRequest,
+  ErrorInfo,
   CreateDatasourceCloudResponse,
   ProjectConfigList,
   DeleteUserRoleRequest,

@@ -52,6 +52,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateIndex", req, cb);
     }
     /**
+     * 查询指定时刻指标的最新值
+     */
+    async QueryMetric(req, cb) {
+        return this.request("QueryMetric", req, cb);
+    }
+    /**
      * 修改现有的投递规则，客户如果使用此接口，需要自行处理CLS对指定bucket的写权限。
      */
     async ModifyShipper(req, cb) {
@@ -124,10 +130,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateConfig", req, cb);
     }
     /**
-     * 查询指定时刻指标的最新值
+     * 获取机器组绑定的采集规则配置
      */
-    async QueryMetric(req, cb) {
-        return this.request("QueryMetric", req, cb);
+    async DescribeMachineGroupConfigs(req, cb) {
+        return this.request("DescribeMachineGroupConfigs", req, cb);
     }
     /**
      * 本接口用于获取日志主题列表，支持分页
@@ -178,6 +184,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeIndex", req, cb);
     }
     /**
+     * 该接口用于创建告警屏蔽规则。
+     */
+    async CreateAlarmShield(req, cb) {
+        return this.request("CreateAlarmShield", req, cb);
+    }
+    /**
      * 新建投递到COS的任务，【！！！注意】使用此接口，需要检查是否配置了投递COS的角色和权限。如果没有配置，请参考文档投递权限查看和配置https://cloud.tencent.com/document/product/614/71623。
      */
     async CreateShipper(req, cb) {
@@ -224,6 +236,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ApplyConfigToMachineGroup(req, cb) {
         return this.request("ApplyConfigToMachineGroup", req, cb);
+    }
+    /**
+     * 该接口用于删除告警屏蔽规则。
+     */
+    async DeleteAlarmShield(req, cb) {
+        return this.request("DeleteAlarmShield", req, cb);
     }
     /**
      * 本接口用于构建日志数量直方图
@@ -274,10 +292,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyConfigExtra", req, cb);
     }
     /**
+     * 该接口用于修改告警屏蔽规则。
+     */
+    async ModifyAlarmShield(req, cb) {
+        return this.request("ModifyAlarmShield", req, cb);
+    }
+    /**
      * 本接口用于创建特殊采集配置任务，特殊采集配置应用于自建K8S环境的采集Agent
      */
     async CreateConfigExtra(req, cb) {
         return this.request("CreateConfigExtra", req, cb);
+    }
+    /**
+     * 获取告警屏蔽配置规则
+     */
+    async DescribeAlarmShields(req, cb) {
+        return this.request("DescribeAlarmShields", req, cb);
     }
     /**
      * 本接口用于修改定时SQL分析任务
@@ -662,12 +692,6 @@ cls.pb.cc cls.pb.h cls.proto
      */
     async ModifyLogset(req, cb) {
         return this.request("ModifyLogset", req, cb);
-    }
-    /**
-     * 获取机器组绑定的采集规则配置
-     */
-    async DescribeMachineGroupConfigs(req, cb) {
-        return this.request("DescribeMachineGroupConfigs", req, cb);
     }
     /**
      * 本接口用于修改数据加工任务

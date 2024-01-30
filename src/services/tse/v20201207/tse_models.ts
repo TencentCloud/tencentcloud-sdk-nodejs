@@ -245,6 +245,7 @@ export interface CloudNativeAPIGatewayStrategyCronScalerConfig {
   /**
    * 是否开启定时伸缩
 注意：此字段可能返回 null，表示取不到有效值。
+   * @deprecated
    */
   Enabled?: boolean
   /**
@@ -780,21 +781,24 @@ export interface GatewayInstanceSchemeAndPorts {
 }
 
 /**
- * DescribeZookeeperServerInterfaces请求参数结构体
+ * 创建kong客户端公网结果
  */
-export interface DescribeZookeeperServerInterfacesRequest {
+export interface CreatePublicNetworkResult {
   /**
-   * 实例id
+   * 网关实例ID
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  InstanceId?: string
+  GatewayId?: string
   /**
-   * 返回的列表个数
+   * 分组ID
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Limit?: number
+  GroupId?: string
   /**
-   * 返回的列表起始偏移量
+   * 客户端公网网络ID
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Offset?: number
+  NetworkId?: string
 }
 
 /**
@@ -1534,6 +1538,24 @@ export interface DescribeZookeeperReplicasRequest {
   Limit?: number
   /**
    * 副本列表Offset
+   */
+  Offset?: number
+}
+
+/**
+ * DescribeZookeeperServerInterfaces请求参数结构体
+ */
+export interface DescribeZookeeperServerInterfacesRequest {
+  /**
+   * 实例id
+   */
+  InstanceId?: string
+  /**
+   * 返回的列表个数
+   */
+  Limit?: number
+  /**
+   * 返回的列表起始偏移量
    */
   Offset?: number
 }
@@ -2292,7 +2314,7 @@ export interface DescribeCloudNativeAPIGatewaysRequest {
  */
 export interface AutoScalerPolicy {
   /**
-   * 类型，Pods或Percent
+   * 类型，Pods
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Type?: string
@@ -2812,6 +2834,11 @@ export interface DeleteEngineRequest {
  */
 export interface CreateCloudNativeAPIGatewayPublicNetworkResponse {
   /**
+   * 返回结果
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Result?: CreatePublicNetworkResult
+  /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -3057,16 +3084,18 @@ export interface UpdateUpstreamHealthCheckConfigRequest {
 export interface CloudNativeAPIGatewayStrategyAutoScalerConfigMetric {
   /**
    * 指标类型
-注意：此字段可能返回 null，表示取不到有效值。
+- Resource
    */
   Type?: string
   /**
    * 指标资源名称
+- cpu
+- memory
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ResourceName?: string
   /**
-   * 指标目标类型
+   * 指标目标类型，目前只支持百分比Utilization
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TargetType?: string
@@ -3735,12 +3764,12 @@ export interface CloudNativeAPIGatewayStrategyCronScalerConfigParam {
    */
   StartAt?: string
   /**
-   * 定时伸缩目标节点数
+   * 定时伸缩目标节点数，不超过指标伸缩中定义的最大节点数
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TargetReplicas?: number
   /**
-   * 定时伸缩cron表达式
+   * 定时伸缩cron表达式，无需输入
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Crontab?: string
@@ -3975,6 +4004,7 @@ export interface CloudNativeAPIGatewayStrategyAutoScalerConfig {
   /**
    * 是否开启指标伸缩
 注意：此字段可能返回 null，表示取不到有效值。
+   * @deprecated
    */
   Enabled?: boolean
   /**
@@ -4222,7 +4252,7 @@ export interface DescribeCloudNativeAPIGatewayCertificateDetailsRequest {
  */
 export interface AutoScalerRules {
   /**
-   * 稳定窗口时间
+   * 稳定窗口时间，扩容时默认0，缩容时默认300
 注意：此字段可能返回 null，表示取不到有效值。
    */
   StabilizationWindowSeconds?: number
@@ -4232,7 +4262,7 @@ export interface AutoScalerRules {
    */
   SelectPolicy?: string
   /**
-   * 扩容策略
+   * 扩缩容策略
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Policies?: Array<AutoScalerPolicy>

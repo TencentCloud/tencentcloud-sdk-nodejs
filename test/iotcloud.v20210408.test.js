@@ -348,6 +348,16 @@ it("iotcloud.v20210408.UpdateDevicesEnableState", async function () {
     }
 })
 
+it("iotcloud.v20210408.UpdateOtaTaskStatus", async function () {
+    try {
+       const data = await client.UpdateOtaTaskStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotcloud.v20210408.ListFirmwares", async function () {
     try {
        const data = await client.ListFirmwares({})

@@ -769,6 +769,28 @@ export interface Vpc {
 }
 
 /**
+ * 端口风险高级配置项
+ */
+export interface PortRiskAdvanceCFGParamItem {
+  /**
+   * 端口集合,以逗号分隔
+   */
+  PortSets: string
+  /**
+   * 检测项类型，0-系统定义，1-用户自定义
+   */
+  CheckType: number
+  /**
+   * 检测项描述
+   */
+  Detail?: string
+  /**
+   * 是否启用，1-启用，0-禁用
+   */
+  Enable?: number
+}
+
+/**
  * 漏洞风险高级配置列表
  */
 export interface VULRiskAdvanceCFGList {
@@ -2770,6 +2792,10 @@ export interface TaskCenterVulRiskInputParam {
  * 任务高级配置
  */
 export interface TaskAdvanceCFG {
+  /**
+   * 端口风险高级配置
+   */
+  PortRisk?: Array<PortRiskAdvanceCFGParamItem>
   /**
    * 漏洞风险高级配置
    */

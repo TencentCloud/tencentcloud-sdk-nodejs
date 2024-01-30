@@ -5147,8 +5147,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 网络攻击日志详情
-   */
+     * DescribeAttackEventInfo 接口替代
+
+网络攻击日志详情
+     */
   async DescribeAttackLogInfo(
     req: DescribeAttackLogInfoRequest,
     cb?: (error: string, rep: DescribeAttackLogInfoResponse) => void

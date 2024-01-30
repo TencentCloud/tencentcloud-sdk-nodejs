@@ -158,16 +158,6 @@ it("rum.v20210622.ResumeInstance", async function () {
     }
 })
 
-it("rum.v20210622.DescribeDataPerformanceProject", async function () {
-    try {
-       const data = await client.DescribeDataPerformanceProject({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("rum.v20210622.DescribeError", async function () {
     try {
        const data = await client.DescribeError({})
