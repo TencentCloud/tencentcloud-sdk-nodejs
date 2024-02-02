@@ -274,25 +274,34 @@ export interface CloudNativeAPIGatewayStrategyCronScalerConfig {
 }
 
 /**
- * DescribeCloudNativeAPIGatewayNodes请求参数结构体
+ * 策略绑定的网关分组信息
  */
-export interface DescribeCloudNativeAPIGatewayNodesRequest {
+export interface CloudNativeAPIGatewayStrategyBindingGroupInfo {
   /**
-   * 云原生API网关实例ID。
+   * 网关分组ID
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  GatewayId: string
+  GroupId: string
   /**
-   * 实例分组id
+   * 节点配置
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  GroupId?: string
+  NodeConfig: CloudNativeAPIGatewayNodeConfig
   /**
-   * 翻页获取多少个
+   * 绑定时间
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Limit?: number
+  BindTime: string
   /**
-   * 翻页从第几个开始获取
+   * 网关分组名称
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Offset?: number
+  GroupName: string
+  /**
+   * 绑定状态
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status: string
 }
 
 /**
@@ -503,17 +512,35 @@ export interface CloudNativeAPIGatewayNodeConfig {
 }
 
 /**
- * DescribeUpstreamHealthCheckConfig请求参数结构体
+ * CreateCloudNativeAPIGatewayCertificate请求参数结构体
  */
-export interface DescribeUpstreamHealthCheckConfigRequest {
+export interface CreateCloudNativeAPIGatewayCertificateRequest {
   /**
    * 网关ID
    */
   GatewayId: string
   /**
-   * 网关服务名称
+   * 绑定的域名
    */
-  Name: string
+  BindDomains: Array<string>
+  /**
+   * ssl平台证书 Id
+   */
+  CertId: string
+  /**
+   * 证书名称
+   */
+  Name?: string
+  /**
+   * 证书私钥
+   * @deprecated
+   */
+  Key?: string
+  /**
+   * 证书pem格式
+   * @deprecated
+   */
+  Crt?: string
 }
 
 /**
@@ -574,6 +601,20 @@ export interface DescribeCloudNativeAPIGatewayCertificatesRequest {
 }
 
 /**
+ * 云原生网关限流插件Qps阈值
+ */
+export interface QpsThreshold {
+  /**
+   * qps阈值控制维度,包含:second、minute、hour、day、month、year
+   */
+  Unit: string
+  /**
+   * 阈值
+   */
+  Max: number
+}
+
+/**
  * ModifyCloudNativeAPIGatewayRouteRateLimit请求参数结构体
  */
 export interface ModifyCloudNativeAPIGatewayRouteRateLimitRequest {
@@ -607,17 +648,17 @@ export interface DeleteCloudNativeAPIGatewayResult {
 }
 
 /**
- * 云原生网关限流插件Qps阈值
+ * 获取云原生API网关实例策略响应结果。
  */
-export interface QpsThreshold {
+export interface ListCloudNativeAPIGatewayStrategyResult {
   /**
-   * qps阈值控制维度,包含:second、minute、hour、day、month、year
+   * 总数。
    */
-  Unit: string
+  TotalCount: number
   /**
-   * 阈值
+   * 云原生API网关实例策略列表。
    */
-  Max: number
+  StrategyList: Array<CloudNativeAPIGatewayStrategy>
 }
 
 /**
@@ -677,6 +718,17 @@ export interface DescribeCloudNativeAPIGatewayNodesResponse {
 }
 
 /**
+ * nacos服务端接口列表，用于云监控
+ */
+export interface NacosServerInterface {
+  /**
+   * 接口名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Interface: string
+}
+
+/**
  * CreateCloudNativeAPIGateway返回参数结构体
  */
 export interface CreateCloudNativeAPIGatewayResponse {
@@ -706,13 +758,21 @@ export interface DescribeUpstreamHealthCheckConfigResponse {
 }
 
 /**
- * OpenWafProtection返回参数结构体
+ * 网络访问策略
  */
-export interface OpenWafProtectionResponse {
+export interface NetworkAccessControl {
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 访问模式：Whitelist|Blacklist
    */
-  RequestId?: string
+  Mode: string
+  /**
+   * 白名单列表
+   */
+  CidrWhiteList?: Array<string>
+  /**
+   * 黑名单列表
+   */
+  CidrBlackList?: Array<string>
 }
 
 /**
@@ -734,6 +794,27 @@ export interface KongActiveHealthCheck {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   HttpPath?: string
+}
+
+/**
+ * 查询客户端公网信息
+ */
+export interface DescribePublicNetworkResult {
+  /**
+   * 网关实例ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  GatewayId?: string
+  /**
+   * 网关分组ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  GroupId?: string
+  /**
+   * 客户端公网信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PublicNetwork?: CloudNativeAPIGatewayConfig
 }
 
 /**
@@ -853,14 +934,17 @@ export interface UpstreamHealthCheckConfig {
 }
 
 /**
- * nacos服务端接口列表，用于云监控
+ * DescribeAutoScalerResourceStrategyBindingGroups返回参数结构体
  */
-export interface NacosServerInterface {
+export interface DescribeAutoScalerResourceStrategyBindingGroupsResponse {
   /**
-   * 接口名
-注意：此字段可能返回 null，表示取不到有效值。
+   * 云原生API网关实例策略绑定网关分组列表响应结果
    */
-  Interface: string
+  Result?: ListCloudNativeAPIGatewayStrategyBindingGroupInfoResult
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1309,6 +1393,20 @@ export interface DescribeCloudNativeAPIGatewayServicesRequest {
 }
 
 /**
+ * UnbindAutoScalerResourceStrategyFromGroups返回参数结构体
+ */
+export interface UnbindAutoScalerResourceStrategyFromGroupsResponse {
+  /**
+   * 是否成功
+   */
+  Result: boolean
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeCloudNativeAPIGatewayUpstream返回参数结构体
  */
 export interface DescribeCloudNativeAPIGatewayUpstreamResponse {
@@ -1323,17 +1421,17 @@ export interface DescribeCloudNativeAPIGatewayUpstreamResponse {
 }
 
 /**
- * DescribeCloudNativeAPIGatewayCertificates返回参数结构体
+ * DeleteAutoScalerResourceStrategy请求参数结构体
  */
-export interface DescribeCloudNativeAPIGatewayCertificatesResponse {
+export interface DeleteAutoScalerResourceStrategyRequest {
   /**
-   * 无
+   * 网关实例ID
    */
-  Result?: KongCertificatesList
+  GatewayId: string
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 策略ID
    */
-  RequestId?: string
+  StrategyId: string
 }
 
 /**
@@ -1396,21 +1494,25 @@ export interface KongUpstreamPreview {
 }
 
 /**
- * UpdateEngineInternetAccess请求参数结构体
+ * DescribeCloudNativeAPIGatewayNodes请求参数结构体
  */
-export interface UpdateEngineInternetAccessRequest {
+export interface DescribeCloudNativeAPIGatewayNodesRequest {
   /**
-   * 引擎ID
+   * 云原生API网关实例ID。
    */
-  InstanceId: string
+  GatewayId: string
   /**
-   * 引擎类型
+   * 实例分组id
    */
-  EngineType: string
+  GroupId?: string
   /**
-   * 是否开启客户端公网访问，true开 false关
+   * 翻页获取多少个
    */
-  EnableClientInternetAccess?: boolean
+  Limit?: number
+  /**
+   * 翻页从第几个开始获取
+   */
+  Offset?: number
 }
 
 /**
@@ -1600,29 +1702,31 @@ export interface DescribeWafDomainsResult {
 }
 
 /**
- * 实例监听端口信息
+ * BindAutoScalerResourceStrategyToGroups返回参数结构体
  */
-export interface InstancePort {
+export interface BindAutoScalerResourceStrategyToGroupsResponse {
   /**
-   * 监听的 http 端口范围。
-注意：此字段可能返回 null，表示取不到有效值。
+   * 是否成功
    */
-  HttpPort?: string
+  Result: boolean
   /**
-   * 监听的 https 端口范围。
-注意：此字段可能返回 null，表示取不到有效值。
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  HttpsPort?: string
+  RequestId?: string
+}
+
+/**
+ * DescribeAutoScalerResourceStrategies返回参数结构体
+ */
+export interface DescribeAutoScalerResourceStrategiesResponse {
   /**
-   * 监听的 tcp 端口范围。
-注意：此字段可能返回 null，表示取不到有效值。
+   * 获取云原生API网关实例弹性伸缩策略列表响应结果。
    */
-  TcpPort?: string
+  Result?: ListCloudNativeAPIGatewayStrategyResult
   /**
-   * 监听的 udp 端口范围。
-注意：此字段可能返回 null，表示取不到有效值。
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  UdpPort?: string
+  RequestId?: string
 }
 
 /**
@@ -1958,17 +2062,13 @@ export interface KongPassiveHealthCheck {
 }
 
 /**
- * 引擎实例的标签信息
+ * DescribeCloudNativeAPIGateway请求参数结构体
  */
-export interface InstanceTagInfo {
+export interface DescribeCloudNativeAPIGatewayRequest {
   /**
-   * 标签键
+   * 云原生API网关实例ID
    */
-  TagKey?: string
-  /**
-   * 标签值
-   */
-  TagValue?: string
+  GatewayId: string
 }
 
 /**
@@ -2292,6 +2392,16 @@ export interface KongTarget {
 }
 
 /**
+ * UpdateEngineInternetAccess返回参数结构体
+ */
+export interface UpdateEngineInternetAccessResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeCloudNativeAPIGateways请求参数结构体
  */
 export interface DescribeCloudNativeAPIGatewaysRequest {
@@ -2394,6 +2504,24 @@ export interface KVMapping {
 }
 
 /**
+ * BindAutoScalerResourceStrategyToGroups请求参数结构体
+ */
+export interface BindAutoScalerResourceStrategyToGroupsRequest {
+  /**
+   * 网关实例ID
+   */
+  GatewayId: string
+  /**
+   * 策略ID
+   */
+  StrategyId: string
+  /**
+   * 网关分组ID列表
+   */
+  GroupIds: Array<string>
+}
+
+/**
  * 云原生网关限流插件自定义响应
  */
 export interface RateLimitResponse {
@@ -2440,6 +2568,20 @@ export interface DeleteCloudNativeAPIGatewayServiceRequest {
    * 服务名字，服务ID
    */
   Name: string
+}
+
+/**
+ * ModifyAutoScalerResourceStrategy返回参数结构体
+ */
+export interface ModifyAutoScalerResourceStrategyResponse {
+  /**
+   * 是否成功
+   */
+  Result?: boolean
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2561,6 +2703,21 @@ export interface CreateCloudNativeAPIGatewayCanaryRuleRequest {
    * 灰度规则配置
    */
   CanaryRule: CloudNativeAPIGatewayCanaryRule
+}
+
+/**
+ * DescribePublicNetwork返回参数结构体
+ */
+export interface DescribePublicNetworkResponse {
+  /**
+   * 获取云原生API网关公网详情响应结果。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Result?: DescribePublicNetworkResult
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2731,13 +2888,19 @@ export interface DescribeCloudNativeAPIGatewaysResponse {
 }
 
 /**
- * UpdateEngineInternetAccess返回参数结构体
+ * kong服务路由列表
  */
-export interface UpdateEngineInternetAccessResponse {
+export interface KongServiceRouteList {
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 无
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  RequestId?: string
+  RouteList?: Array<KongRoutePreview>
+  /**
+   * 总数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalCount?: number
 }
 
 /**
@@ -2893,21 +3056,17 @@ export interface ModifyNetworkBasicInfoRequest {
 }
 
 /**
- * ModifyCloudNativeAPIGatewayServiceRateLimit请求参数结构体
+ * DescribeUpstreamHealthCheckConfig请求参数结构体
  */
-export interface ModifyCloudNativeAPIGatewayServiceRateLimitRequest {
+export interface DescribeUpstreamHealthCheckConfigRequest {
   /**
    * 网关ID
    */
   GatewayId: string
   /**
-   * 服务名称，或服务ID
+   * 网关服务名称
    */
   Name: string
-  /**
-   * 限流配置
-   */
-  LimitDetail: CloudNativeAPIGatewayRateLimitDetail
 }
 
 /**
@@ -2934,6 +3093,20 @@ export interface DescribeSREInstanceAccessAddressRequest {
    * 部署地域
    */
   EngineRegion?: string
+}
+
+/**
+ * DeleteAutoScalerResourceStrategy返回参数结构体
+ */
+export interface DeleteAutoScalerResourceStrategyResponse {
+  /**
+   * 是否成功
+   */
+  Result: boolean
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3296,6 +3469,46 @@ export interface ModifyNetworkAccessStrategyResponse {
 }
 
 /**
+ * ModifyAutoScalerResourceStrategy请求参数结构体
+ */
+export interface ModifyAutoScalerResourceStrategyRequest {
+  /**
+   * 网关实例ID
+   */
+  GatewayId: string
+  /**
+   * 策略ID
+   */
+  StrategyId: string
+  /**
+   * 策略名称
+   */
+  StrategyName?: string
+  /**
+   * 策略描述
+   */
+  Description?: string
+  /**
+   * 指标伸缩配置
+   */
+  Config?: CloudNativeAPIGatewayStrategyAutoScalerConfig
+  /**
+   * 定时伸缩配置
+   * @deprecated
+   */
+  CronScalerConfig?: CloudNativeAPIGatewayStrategyCronScalerConfig
+  /**
+   * 最大节点数
+   * @deprecated
+   */
+  MaxReplicas?: number
+  /**
+   * 指标伸缩配置
+   */
+  CronConfig?: CloudNativeAPIGatewayStrategyCronScalerConfig
+}
+
+/**
  * DescribeNativeGatewayServerGroups请求参数结构体
  */
 export interface DescribeNativeGatewayServerGroupsRequest {
@@ -3345,6 +3558,42 @@ export interface DescribeGatewayInstancePortResult {
 }
 
 /**
+ * UnbindAutoScalerResourceStrategyFromGroups请求参数结构体
+ */
+export interface UnbindAutoScalerResourceStrategyFromGroupsRequest {
+  /**
+   * 网关实例ID
+   */
+  GatewayId: string
+  /**
+   * 策略ID
+   */
+  StrategyId: string
+  /**
+   * 网关分组ID列表
+   */
+  GroupIds: Array<string>
+}
+
+/**
+ * DescribePublicNetwork请求参数结构体
+ */
+export interface DescribePublicNetworkRequest {
+  /**
+   * 云原生API网关实例ID。
+   */
+  GatewayId: string
+  /**
+   * 网关分组ID
+   */
+  GroupId: string
+  /**
+   * 网络ID
+   */
+  NetworkId: string
+}
+
+/**
  * DeleteCloudNativeAPIGateway请求参数结构体
  */
 export interface DeleteCloudNativeAPIGatewayRequest {
@@ -3359,18 +3608,27 @@ export interface DeleteCloudNativeAPIGatewayRequest {
 }
 
 /**
- * DescribeCloudNativeAPIGatewayCertificateDetails返回参数结构体
+ * DeleteCloudNativeAPIGatewayPublicNetwork请求参数结构体
  */
-export interface DescribeCloudNativeAPIGatewayCertificateDetailsResponse {
+export interface DeleteCloudNativeAPIGatewayPublicNetworkRequest {
   /**
-   * 无
-注意：此字段可能返回 null，表示取不到有效值。
+   * 云原生API网关实例ID。
    */
-  Result?: KongCertificate
+  GatewayId: string
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 分组id，kong类型时必填
    */
-  RequestId?: string
+  GroupId?: string
+  /**
+   * 公网类型
+- IPV4 （默认值）
+- IPV6
+   */
+  InternetAddressVersion?: string
+  /**
+   * 公网ip，存在多个公网时必填
+   */
+  Vip?: string
 }
 
 /**
@@ -3404,6 +3662,16 @@ export interface KongUpstreamList {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   UpstreamList?: Array<KongUpstreamPreview>
+}
+
+/**
+ * OpenWafProtection返回参数结构体
+ */
+export interface OpenWafProtectionResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3531,35 +3799,25 @@ export interface KongServices {
 }
 
 /**
- * CreateCloudNativeAPIGatewayCertificate请求参数结构体
+ * DescribeAutoScalerResourceStrategyBindingGroups请求参数结构体
  */
-export interface CreateCloudNativeAPIGatewayCertificateRequest {
+export interface DescribeAutoScalerResourceStrategyBindingGroupsRequest {
   /**
-   * 网关ID
+   * 网关实例ID
    */
   GatewayId: string
   /**
-   * 绑定的域名
+   * 策略ID
    */
-  BindDomains: Array<string>
+  StrategyId: string
   /**
-   * ssl平台证书 Id
+   * 查询偏移量
    */
-  CertId: string
+  Offset?: number
   /**
-   * 证书名称
+   * 查询数量限制
    */
-  Name?: string
-  /**
-   * 证书私钥
-   * @deprecated
-   */
-  Key?: string
-  /**
-   * 证书pem格式
-   * @deprecated
-   */
-  Crt?: string
+  Limit?: number
 }
 
 /**
@@ -3611,21 +3869,17 @@ export interface ModifyUpstreamNodeStatusResponse {
 }
 
 /**
- * 网络访问策略
+ * DescribeAutoScalerResourceStrategies请求参数结构体
  */
-export interface NetworkAccessControl {
+export interface DescribeAutoScalerResourceStrategiesRequest {
   /**
-   * 访问模式：Whitelist|Blacklist
+   * 网关实例ID
    */
-  Mode: string
+  GatewayId: string
   /**
-   * 白名单列表
+   * 策略ID
    */
-  CidrWhiteList?: Array<string>
-  /**
-   * 黑名单列表
-   */
-  CidrBlackList?: Array<string>
+  StrategyId?: string
 }
 
 /**
@@ -3680,13 +3934,18 @@ export interface UpdateCloudNativeAPIGatewayResult {
 }
 
 /**
- * DescribeCloudNativeAPIGateway请求参数结构体
+ * DescribeCloudNativeAPIGatewayCertificateDetails返回参数结构体
  */
-export interface DescribeCloudNativeAPIGatewayRequest {
+export interface DescribeCloudNativeAPIGatewayCertificateDetailsResponse {
   /**
-   * 云原生API网关实例ID
+   * 无
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  GatewayId: string
+  Result?: KongCertificate
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3704,49 +3963,29 @@ export interface DescribeNativeGatewayServerGroupsResponse {
 }
 
 /**
- * 路由 WAF 状态
+ * 实例监听端口信息
  */
-export interface RouteWafStatus {
+export interface InstancePort {
   /**
-   * 路由的名字
+   * 监听的 http 端口范围。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Name?: string
+  HttpPort?: string
   /**
-   * 路由的 ID
+   * 监听的 https 端口范围。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Id?: string
+  HttpsPort?: string
   /**
-   *  路由是否开启 WAF 防护
+   * 监听的 tcp 端口范围。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Status?: string
+  TcpPort?: string
   /**
-   * 方法
+   * 监听的 udp 端口范围。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Methods?: Array<string>
-  /**
-   * 路径
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Paths?: Array<string>
-  /**
-   * 域名
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Hosts?: Array<string>
-  /**
-   * 路由对应服务的名字
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ServiceName?: string
-  /**
-   * 路由对应服务的ID
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ServiceId?: string
+  UdpPort?: string
 }
 
 /**
@@ -3798,41 +4037,73 @@ export interface OpenWafProtectionRequest {
 }
 
 /**
- * DeleteCloudNativeAPIGatewayPublicNetwork请求参数结构体
+ * DescribeCloudNativeAPIGatewayCertificates返回参数结构体
  */
-export interface DeleteCloudNativeAPIGatewayPublicNetworkRequest {
+export interface DescribeCloudNativeAPIGatewayCertificatesResponse {
   /**
-   * 云原生API网关实例ID。
+   * 无
    */
-  GatewayId: string
+  Result?: KongCertificatesList
   /**
-   * 分组id，kong类型时必填
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  GroupId?: string
-  /**
-   * 公网类型
-- IPV4 （默认值）
-- IPV6
-   */
-  InternetAddressVersion?: string
-  /**
-   * 公网ip，存在多个公网时必填
-   */
-  Vip?: string
+  RequestId?: string
 }
 
 /**
- * DeleteCloudNativeAPIGatewayRoute请求参数结构体
+ * CreateCloudNativeAPIGatewayServiceRateLimit返回参数结构体
  */
-export interface DeleteCloudNativeAPIGatewayRouteRequest {
+export interface CreateCloudNativeAPIGatewayServiceRateLimitResponse {
   /**
-   * 网关ID
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyNativeGatewayServerGroup返回参数结构体
+ */
+export interface ModifyNativeGatewayServerGroupResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateAutoScalerResourceStrategy请求参数结构体
+ */
+export interface CreateAutoScalerResourceStrategyRequest {
+  /**
+   * 网关实例ID
    */
   GatewayId: string
   /**
-   * 路由的ID或名字，不支持名称“未命名”
+   * 策略名称
    */
-  Name: string
+  StrategyName: string
+  /**
+   * 策略描述
+   */
+  Description?: string
+  /**
+   * 指标伸缩配置
+   */
+  Config?: CloudNativeAPIGatewayStrategyAutoScalerConfig
+  /**
+   * 定时伸缩配置列表
+   * @deprecated
+   */
+  CronScalerConfig?: CloudNativeAPIGatewayStrategyCronScalerConfig
+  /**
+   * 最大节点数
+   * @deprecated
+   */
+  MaxReplicas?: number
+  /**
+   * 定时伸缩配置
+   */
+  CronConfig?: CloudNativeAPIGatewayStrategyCronScalerConfig
 }
 
 /**
@@ -3918,13 +4189,35 @@ export interface CreateEngineResponse {
 }
 
 /**
- * CreateCloudNativeAPIGatewayServiceRateLimit返回参数结构体
+ * ModifyCloudNativeAPIGatewayServiceRateLimit请求参数结构体
  */
-export interface CreateCloudNativeAPIGatewayServiceRateLimitResponse {
+export interface ModifyCloudNativeAPIGatewayServiceRateLimitRequest {
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 网关ID
    */
-  RequestId?: string
+  GatewayId: string
+  /**
+   * 服务名称，或服务ID
+   */
+  Name: string
+  /**
+   * 限流配置
+   */
+  LimitDetail: CloudNativeAPIGatewayRateLimitDetail
+}
+
+/**
+ * DeleteCloudNativeAPIGatewayRoute请求参数结构体
+ */
+export interface DeleteCloudNativeAPIGatewayRouteRequest {
+  /**
+   * 网关ID
+   */
+  GatewayId: string
+  /**
+   * 路由的ID或名字，不支持名称“未命名”
+   */
+  Name: string
 }
 
 /**
@@ -3975,6 +4268,20 @@ export interface CloudNativeAPIGatewayCanaryRule {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ServiceName?: string
+}
+
+/**
+ * 获取云原生API网关实例策略绑定网关分组列表响应结果。
+ */
+export interface ListCloudNativeAPIGatewayStrategyBindingGroupInfoResult {
+  /**
+   * 数量
+   */
+  TotalCount: number
+  /**
+   * 云原生API网关实例策略绑定网关分组列表
+   */
+  GroupInfos: Array<CloudNativeAPIGatewayStrategyBindingGroupInfo>
 }
 
 /**
@@ -4245,6 +4552,52 @@ export interface DescribeCloudNativeAPIGatewayCertificateDetailsRequest {
    * 证书Id
    */
   Id: string
+}
+
+/**
+ * 路由 WAF 状态
+ */
+export interface RouteWafStatus {
+  /**
+   * 路由的名字
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name?: string
+  /**
+   * 路由的 ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Id?: string
+  /**
+   *  路由是否开启 WAF 防护
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status?: string
+  /**
+   * 方法
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Methods?: Array<string>
+  /**
+   * 路径
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Paths?: Array<string>
+  /**
+   * 域名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Hosts?: Array<string>
+  /**
+   * 路由对应服务的名字
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ServiceName?: string
+  /**
+   * 路由对应服务的ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ServiceId?: string
 }
 
 /**
@@ -4788,19 +5141,23 @@ export interface VpcInfo {
 }
 
 /**
- * kong服务路由列表
+ * CreateAutoScalerResourceStrategy返回参数结构体
  */
-export interface KongServiceRouteList {
+export interface CreateAutoScalerResourceStrategyResponse {
   /**
-   * 无
+   * 是否成功
+   * @deprecated
+   */
+  Result?: boolean
+  /**
+   * 策略Id
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RouteList?: Array<KongRoutePreview>
+  StrategyId?: string
   /**
-   * 总数
-注意：此字段可能返回 null，表示取不到有效值。
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  TotalCount?: number
+  RequestId?: string
 }
 
 /**
@@ -4971,6 +5328,24 @@ export interface DeleteCloudNativeAPIGatewayCanaryRuleResponse {
 }
 
 /**
+ * UpdateEngineInternetAccess请求参数结构体
+ */
+export interface UpdateEngineInternetAccessRequest {
+  /**
+   * 引擎ID
+   */
+  InstanceId: string
+  /**
+   * 引擎类型
+   */
+  EngineType: string
+  /**
+   * 是否开启客户端公网访问，true开 false关
+   */
+  EnableClientInternetAccess?: boolean
+}
+
+/**
  * DescribeCloudNativeAPIGatewayPorts请求参数结构体
  */
 export interface DescribeCloudNativeAPIGatewayPortsRequest {
@@ -4981,13 +5356,17 @@ export interface DescribeCloudNativeAPIGatewayPortsRequest {
 }
 
 /**
- * ModifyNativeGatewayServerGroup返回参数结构体
+ * 引擎实例的标签信息
  */
-export interface ModifyNativeGatewayServerGroupResponse {
+export interface InstanceTagInfo {
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 标签键
    */
-  RequestId?: string
+  TagKey?: string
+  /**
+   * 标签值
+   */
+  TagValue?: string
 }
 
 /**

@@ -1,12 +1,16 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { SetVocabStateResponse, CreateCustomizationResponse, VoicePrintDeleteRequest, DescribeAsyncRecognitionTasksRequest, ModifyCustomizationStateRequest, GetAsrVocabResponse, VoicePrintEnrollResponse, VoicePrintUpdateRequest, CreateAsyncRecognitionTaskRequest, GetAsrVocabRequest, DescribeTaskStatusResponse, SentenceRecognitionRequest, CloseAsyncRecognitionTaskResponse, CreateCustomizationRequest, DownloadAsrVocabResponse, CreateRecTaskResponse, ModifyCustomizationResponse, GetModelInfoRequest, CreateAsyncRecognitionTaskResponse, VoicePrintDeleteResponse, DeleteAsrVocabResponse, DownloadCustomizationResponse, CreateRecTaskRequest, GetAsrVocabListRequest, GetCustomizationListResponse, VoicePrintVerifyRequest, DownloadAsrVocabRequest, SetVocabStateRequest, CloseAsyncRecognitionTaskRequest, ModifyCustomizationRequest, DeleteCustomizationResponse, DeleteAsrVocabRequest, GetCustomizationListRequest, UpdateAsrVocabResponse, VoicePrintEnrollRequest, VoicePrintVerifyResponse, CreateAsrVocabResponse, CreateAsrVocabRequest, GetModelInfoResponse, UpdateAsrVocabRequest, VoicePrintCountRequest, DescribeTaskStatusRequest, SentenceRecognitionResponse, VoicePrintUpdateResponse, DeleteCustomizationRequest, VoicePrintCountResponse, ModifyCustomizationStateResponse, DescribeAsyncRecognitionTasksResponse, GetAsrVocabListResponse, DownloadCustomizationRequest } from "./asr_models";
+import { SetVocabStateResponse, CreateCustomizationResponse, VoicePrintDeleteRequest, DescribeAsyncRecognitionTasksRequest, ModifyCustomizationStateRequest, GetAsrVocabResponse, VoicePrintEnrollResponse, VoicePrintUpdateRequest, CreateAsyncRecognitionTaskRequest, GetAsrVocabRequest, DescribeTaskStatusResponse, SentenceRecognitionRequest, CloseAsyncRecognitionTaskResponse, CreateCustomizationRequest, DownloadAsrVocabResponse, CreateRecTaskResponse, ModifyCustomizationResponse, GetModelInfoRequest, CreateAsyncRecognitionTaskResponse, VoicePrintDeleteResponse, VoicePrintEnrollRequest, DeleteAsrVocabResponse, DownloadCustomizationResponse, CreateRecTaskRequest, GetAsrVocabListRequest, GetCustomizationListResponse, VoicePrintVerifyRequest, DownloadAsrVocabRequest, SetVocabStateRequest, CloseAsyncRecognitionTaskRequest, ModifyCustomizationRequest, DeleteCustomizationResponse, DeleteAsrVocabRequest, GetCustomizationListRequest, UpdateAsrVocabResponse, VoicePrintVerifyResponse, CreateAsrVocabResponse, CreateAsrVocabRequest, GetModelInfoResponse, UpdateAsrVocabRequest, VoicePrintCountRequest, DescribeTaskStatusRequest, SentenceRecognitionResponse, VoicePrintUpdateResponse, VoicePrintCompareRequest, VoicePrintCompareResponse, DeleteCustomizationRequest, VoicePrintCountResponse, ModifyCustomizationStateResponse, DescribeAsyncRecognitionTasksResponse, GetAsrVocabListResponse, DownloadCustomizationRequest } from "./asr_models";
 /**
  * asr client
  * @class
  */
 export declare class Client extends AbstractClient {
     constructor(clientConfig: ClientConfig);
+    /**
+     * 通过比对两段音频内说话人的声纹，得到一个打分，可通过打分判断两段音频声纹相似度,  打分区间[0 - 100]。 音频要求：16k采样率， 16bit位深，pcm或者wav格式， 单声道，总时长不超过30秒的音频，base64编码数据大小不超过2M，音频内容只有一个说话人声音，并且尽可能清晰，这样结果更加准确。
+     */
+    VoicePrintCompare(req: VoicePrintCompareRequest, cb?: (error: string, rep: VoicePrintCompareResponse) => void): Promise<VoicePrintCompareResponse>;
     /**
      * 用户通过本接口进行对应的词表信息更新。
      */

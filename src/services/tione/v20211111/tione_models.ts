@@ -835,7 +835,9 @@ export interface Usage {
  */
 export interface DescribeBillingResourceGroupsRequest {
   /**
-   * 资源组类型; 枚举值 TRAIN:训练 INFERENCE:推理
+   * 资源组类型;
+枚举值:
+空: 通用, TRAIN: 训练, INFERENCE: 推理
    */
   Type?: string
   /**
@@ -854,8 +856,7 @@ Filter.Values: 长度为1且Filter.Fuzzy=true时，支持模糊查询; 不为1�
    */
   Offset?: number
   /**
-   * 返回数量，默认为20，最大值为30;
-注意：小于0则默认为20；大于30则默认为30
+   * 分页查询每页大小，默认20
    */
   Limit?: number
   /**
@@ -1113,13 +1114,15 @@ export interface Service {
    */
   BusinessStatus?: string
   /**
-   * 已废弃
+   * 已废弃,以ServiceInfo中的对应为准
 注意：此字段可能返回 null，表示取不到有效值。
+   * @deprecated
    */
   ServiceLimit?: ServiceLimit
   /**
-   * 已废弃
+   * 已废弃,以ServiceInfo中的对应为准
 注意：此字段可能返回 null，表示取不到有效值。
+   * @deprecated
    */
   ScheduledAction?: ScheduledAction
   /**
@@ -1167,6 +1170,11 @@ DEFAULT: 其他来源
 注意：此字段可能返回 null，表示取不到有效值。
    */
   LatestVersion?: string
+  /**
+   * 资源组类别 托管 NORMAL，纳管 SW
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResourceGroupSWType?: string
 }
 
 /**
@@ -2185,6 +2193,32 @@ export interface StartNotebookRequest {
    * notebook id
    */
   Id: string
+}
+
+/**
+ * notebook ssh端口配置
+ */
+export interface SSHConfig {
+  /**
+   * 是否开启ssh
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Enable?: boolean
+  /**
+   * 公钥信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PublicKey?: string
+  /**
+   * 端口号
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Port?: number
+  /**
+   * 登录命令
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LoginCommand?: string
 }
 
 /**
@@ -3323,29 +3357,19 @@ export interface StopCreatingImageRequest {
 }
 
 /**
- * notebook ssh端口配置
+ * 默认内网调用信息
  */
-export interface SSHConfig {
+export interface DefaultInnerCallInfo {
   /**
-   * 是否开启ssh
+   * 可以进行调用的VPC-ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Enable?: boolean
+  VpcIds?: Array<string>
   /**
-   * 公钥信息
+   * 默认内网调用地址
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  PublicKey?: string
-  /**
-   * 端口号
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Port?: number
-  /**
-   * 登录命令
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  LoginCommand?: string
+  InnerHttpAddr?: string
 }
 
 /**
@@ -3624,13 +3648,44 @@ export interface InferCodeInfo {
    * 推理代码所在的cos详情
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CosPathInfo?: CosPathInfo
+  CosPathInfo: CosPathInfo
 }
 
 /**
  * DescribeInferTemplates请求参数结构体
  */
 export type DescribeInferTemplatesRequest = null
+
+/**
+ * 私有连接信息
+ */
+export interface PrivateLinkInfo {
+  /**
+   * 私有连接所在的VPCID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VpcId?: string
+  /**
+   * 私有连接所在的子网ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SubnetId?: string
+  /**
+   * HTTP内网调用地址
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InnerHttpAddr?: Array<string>
+  /**
+   * HTTPS内网调用地址
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InnerHttpsAddr?: Array<string>
+  /**
+   * 私有连接状态
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  State?: string
+}
 
 /**
  * DeleteModelServiceGroup返回参数结构体
@@ -4264,11 +4319,6 @@ HYBRID_PAID:
    */
   Weight: number
   /**
-   * 实例列表
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  PodList: Array<string>
-  /**
    * 资源总量
 注意：此字段可能返回 null，表示取不到有效值。
    */
@@ -4315,8 +4365,15 @@ HYBRID_PAID:
    */
   ScheduledAction?: string
   /**
+   * 实例列表
+注意：此字段可能返回 null，表示取不到有效值。
+   * @deprecated
+   */
+  PodList?: Array<string>
+  /**
    * Pod列表信息
 注意：此字段可能返回 null，表示取不到有效值。
+   * @deprecated
    */
   Pods?: Pod
   /**
@@ -4884,6 +4941,16 @@ export interface IntranetCallInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ServiceEIPInfo?: Array<ServiceEIPInfo>
+  /**
+   * 私有连接信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PrivateLinkInfos?: Array<PrivateLinkInfo>
+  /**
+   * 默认内网调用信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DefaultInnerCallInfos?: Array<DefaultInnerCallInfo>
 }
 
 /**
@@ -5990,42 +6057,42 @@ export interface ServiceGroup {
   /**
    * 服务组id
    */
-  ServiceGroupId: string
+  ServiceGroupId?: string
   /**
    * 服务组名
    */
-  ServiceGroupName: string
+  ServiceGroupName?: string
   /**
    * 创建者
    */
-  CreatedBy: string
+  CreatedBy?: string
   /**
    * 创建时间
    */
-  CreateTime: string
+  CreateTime?: string
   /**
    * 更新时间
    */
-  UpdateTime: string
+  UpdateTime?: string
   /**
    * 主账号
    */
-  Uin: string
+  Uin?: string
   /**
    * 服务组下服务总数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ServiceCount: number
+  ServiceCount?: number
   /**
    * 服务组下在运行的服务数量
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RunningServiceCount: number
+  RunningServiceCount?: number
   /**
    * 服务描述
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Services: Array<Service>
+  Services?: Array<Service>
   /**
    * 服务组状态，与服务一致
  CREATING 创建中
@@ -6038,17 +6105,17 @@ export interface ServiceGroup {
      Waiting 就绪中
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Status: string
+  Status?: string
   /**
    * 服务组标签
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Tags: Array<Tag>
+  Tags?: Array<Tag>
   /**
    * 服务组下最高版本
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  LatestVersion: string
+  LatestVersion?: string
   /**
    * 服务的业务状态
 CREATING 创建中
@@ -6059,17 +6126,17 @@ CREATING 创建中
      WHITELIST_STOP 白名单额度不足
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  BusinessStatus: string
+  BusinessStatus?: string
   /**
    * 服务的计费信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  BillingInfo: string
+  BillingInfo?: string
   /**
    * 服务的创建来源
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CreateSource: string
+  CreateSource?: string
   /**
    * 服务组的权重更新状态 
 UPDATING 更新中
@@ -6077,7 +6144,17 @@ UPDATING 更新中
      UPDATE_FAILED 更新失败
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  WeightUpdateStatus: string
+  WeightUpdateStatus?: string
+  /**
+   * 服务组下运行的pod数量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ReplicasCount?: number
+  /**
+   * 服务组下期望的pod数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AvailableReplicasCount?: number
 }
 
 /**
@@ -6301,6 +6378,11 @@ export interface IngressPrivateLinkInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   InnerHttpsAddr?: Array<string>
+  /**
+   * 私有连接状态
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  State?: string
 }
 
 /**
@@ -6519,37 +6601,42 @@ export interface ServiceCallInfo {
    * 服务组id
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ServiceGroupId: string
+  ServiceGroupId?: string
   /**
    * 内网http调用地址
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  InnerHttpAddr: string
+  InnerHttpAddr?: string
   /**
    * 内网https调用地址
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  InnerHttpsAddr: string
+  InnerHttpsAddr?: string
   /**
    * 内网http调用地址
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  OuterHttpAddr: string
+  OuterHttpAddr?: string
   /**
    * 内网https调用地址
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  OuterHttpsAddr: string
+  OuterHttpsAddr?: string
   /**
    * 调用key
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  AppKey: string
+  AppKey?: string
   /**
    * 调用secret
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  AppSecret: string
+  AppSecret?: string
+  /**
+   * 鉴权是否开启
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AuthorizationEnable?: boolean
 }
 
 /**
@@ -7069,7 +7156,7 @@ export interface DescribeBillingResourceGroupRequest {
    */
   Offset?: number
   /**
-   * 分页查询每页大小，最大30; 默认20
+   * 分页查询每页大小，默认20
    */
   Limit?: number
   /**

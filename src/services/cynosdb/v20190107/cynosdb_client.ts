@@ -896,7 +896,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取database列表
+   * 获取集群数据库列表
    */
   async DescribeClusterDatabases(
     req: DescribeClusterDatabasesRequest,
@@ -1296,7 +1296,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口(SearchClusterDatabases)搜索集群database列表
+   * 本接口(SearchClusterDatabases)搜索集群数据库列表
    */
   async SearchClusterDatabases(
     req: SearchClusterDatabasesRequest,

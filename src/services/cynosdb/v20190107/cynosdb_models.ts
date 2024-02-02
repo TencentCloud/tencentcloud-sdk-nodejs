@@ -1068,19 +1068,19 @@ export interface DescribeClusterDatabasesResponse {
   /**
    * 总条数
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 分页偏移
    */
-  Offset: number
+  Offset?: number
   /**
    * 数据库列表
    */
-  Databases: Array<string>
+  Databases?: Array<string>
   /**
    * 分页限制数
    */
-  Limit: number
+  Limit?: number
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

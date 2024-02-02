@@ -144,7 +144,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("AddUsersForUserManager", req, cb);
     }
     /**
-     *  yarn application 统计接口查询
+     * yarn application 统计接口查询
      */
     async DescribeEmrApplicationStatics(req, cb) {
         return this.request("DescribeEmrApplicationStatics", req, cb);

@@ -34,10 +34,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyConsoleNetwork", req, cb);
     }
     /**
-     * 创建公网网络配置
+     * 删除引擎实例
      */
-    async CreateCloudNativeAPIGatewayPublicNetwork(req, cb) {
-        return this.request("CreateCloudNativeAPIGatewayPublicNetwork", req, cb);
+    async DeleteEngine(req, cb) {
+        return this.request("DeleteEngine", req, cb);
     }
     /**
      * 获取云原生网关服务健康检查配置
@@ -52,10 +52,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeZookeeperReplicas", req, cb);
     }
     /**
-     * 修改云原生API网关实例分组基础信息
+     * 修改云原生网关的灰度规则
      */
-    async ModifyNativeGatewayServerGroup(req, cb) {
-        return this.request("ModifyNativeGatewayServerGroup", req, cb);
+    async ModifyCloudNativeAPIGatewayCanaryRule(req, cb) {
+        return this.request("ModifyCloudNativeAPIGatewayCanaryRule", req, cb);
     }
     /**
      * 修改云原生网关上游实例节点健康状态
@@ -112,16 +112,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateEngine", req, cb);
     }
     /**
-     * 修改云原生网关的灰度规则
+     * 修改云原生API网关实例基础信息
      */
-    async ModifyCloudNativeAPIGatewayCanaryRule(req, cb) {
-        return this.request("ModifyCloudNativeAPIGatewayCanaryRule", req, cb);
+    async ModifyCloudNativeAPIGateway(req, cb) {
+        return this.request("ModifyCloudNativeAPIGateway", req, cb);
     }
     /**
-     * 删除公网网络配置
+     * 弹性伸缩策略批量解绑网关分组
      */
-    async DeleteCloudNativeAPIGatewayPublicNetwork(req, cb) {
-        return this.request("DeleteCloudNativeAPIGatewayPublicNetwork", req, cb);
+    async UnbindAutoScalerResourceStrategyFromGroups(req, cb) {
+        return this.request("UnbindAutoScalerResourceStrategyFromGroups", req, cb);
+    }
+    /**
+     * 弹性伸缩策略批量绑定网关分组
+     */
+    async BindAutoScalerResourceStrategyToGroups(req, cb) {
+        return this.request("BindAutoScalerResourceStrategyToGroups", req, cb);
     }
     /**
      * 删除 WAF 防护域名
@@ -130,10 +136,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteWafDomains", req, cb);
     }
     /**
+     * 删除公网网络配置
+     */
+    async DeleteCloudNativeAPIGatewayPublicNetwork(req, cb) {
+        return this.request("DeleteCloudNativeAPIGatewayPublicNetwork", req, cb);
+    }
+    /**
      * 删除云原生网关服务
      */
     async DeleteCloudNativeAPIGatewayService(req, cb) {
         return this.request("DeleteCloudNativeAPIGatewayService", req, cb);
+    }
+    /**
+     * 更新云原生网关健康检查配置
+     */
+    async UpdateUpstreamHealthCheckConfig(req, cb) {
+        return this.request("UpdateUpstreamHealthCheckConfig", req, cb);
     }
     /**
      * 创建云原生网关服务
@@ -166,10 +184,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteCloudNativeAPIGatewayRoute", req, cb);
     }
     /**
-     * 删除引擎实例
+     * 创建公网网络配置
      */
-    async DeleteEngine(req, cb) {
-        return this.request("DeleteEngine", req, cb);
+    async CreateCloudNativeAPIGatewayPublicNetwork(req, cb) {
+        return this.request("CreateCloudNativeAPIGatewayPublicNetwork", req, cb);
+    }
+    /**
+     * 更新弹性伸缩策略
+     */
+    async ModifyAutoScalerResourceStrategy(req, cb) {
+        return this.request("ModifyAutoScalerResourceStrategy", req, cb);
     }
     /**
      * 更新云原生网关证书
@@ -208,10 +232,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyCloudNativeAPIGatewayRouteRateLimit", req, cb);
     }
     /**
+     * 修改云原生API网关实例分组基础信息
+     */
+    async ModifyNativeGatewayServerGroup(req, cb) {
+        return this.request("ModifyNativeGatewayServerGroup", req, cb);
+    }
+    /**
      * 查询nacos服务接口列表
      */
     async DescribeNacosServerInterfaces(req, cb) {
         return this.request("DescribeNacosServerInterfaces", req, cb);
+    }
+    /**
+     * 查看弹性伸缩策略绑定的网关分组
+     */
+    async DescribeAutoScalerResourceStrategyBindingGroups(req, cb) {
+        return this.request("DescribeAutoScalerResourceStrategyBindingGroups", req, cb);
     }
     /**
      * 修改云原生网关路由
@@ -304,10 +340,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UpdateUpstreamTargets", req, cb);
     }
     /**
-     * 修改云原生API网关实例基础信息
+     * 查看弹性伸缩策略列表
      */
-    async ModifyCloudNativeAPIGateway(req, cb) {
-        return this.request("ModifyCloudNativeAPIGateway", req, cb);
+    async DescribeAutoScalerResourceStrategies(req, cb) {
+        return this.request("DescribeAutoScalerResourceStrategies", req, cb);
     }
     /**
      * 创建云原生网关限流插件(服务)
@@ -332,6 +368,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ModifyNetworkAccessStrategy(req, cb) {
         return this.request("ModifyNetworkAccessStrategy", req, cb);
+    }
+    /**
+     * 查询云原生API网关实例公网详情
+     */
+    async DescribePublicNetwork(req, cb) {
+        return this.request("DescribePublicNetwork", req, cb);
     }
     /**
      * 删除云原生网关证书
@@ -364,6 +406,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteCloudNativeAPIGatewayRouteRateLimit", req, cb);
     }
     /**
+     * 创建弹性伸缩策略
+     */
+    async CreateAutoScalerResourceStrategy(req, cb) {
+        return this.request("CreateAutoScalerResourceStrategy", req, cb);
+    }
+    /**
      * 创建云原生网关限流插件(路由)
      */
     async CreateCloudNativeAPIGatewayRouteRateLimit(req, cb) {
@@ -382,10 +430,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeNacosReplicas", req, cb);
     }
     /**
-     * 更新云原生网关健康检查配置
+     * 删除弹性伸缩策略
      */
-    async UpdateUpstreamHealthCheckConfig(req, cb) {
-        return this.request("UpdateUpstreamHealthCheckConfig", req, cb);
+    async DeleteAutoScalerResourceStrategy(req, cb) {
+        return this.request("DeleteAutoScalerResourceStrategy", req, cb);
     }
     /**
      * 查询引擎实例访问地址

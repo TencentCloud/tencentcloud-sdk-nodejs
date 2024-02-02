@@ -216,7 +216,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeInstanceSlowQueries(req: DescribeInstanceSlowQueriesRequest, cb?: (error: string, rep: DescribeInstanceSlowQueriesResponse) => void): Promise<DescribeInstanceSlowQueriesResponse>;
     /**
-     * 获取database列表
+     * 获取集群数据库列表
      */
     DescribeClusterDatabases(req: DescribeClusterDatabasesRequest, cb?: (error: string, rep: DescribeClusterDatabasesResponse) => void): Promise<DescribeClusterDatabasesResponse>;
     /**
@@ -376,7 +376,7 @@ export declare class Client extends AbstractClient {
      */
     ReloadBalanceProxyNode(req: ReloadBalanceProxyNodeRequest, cb?: (error: string, rep: ReloadBalanceProxyNodeResponse) => void): Promise<ReloadBalanceProxyNodeResponse>;
     /**
-     * 本接口(SearchClusterDatabases)搜索集群database列表
+     * 本接口(SearchClusterDatabases)搜索集群数据库列表
      */
     SearchClusterDatabases(req: SearchClusterDatabasesRequest, cb?: (error: string, rep: SearchClusterDatabasesResponse) => void): Promise<SearchClusterDatabasesResponse>;
     /**

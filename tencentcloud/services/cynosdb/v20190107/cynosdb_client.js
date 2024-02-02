@@ -340,7 +340,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeInstanceSlowQueries", req, cb);
     }
     /**
-     * 获取database列表
+     * 获取集群数据库列表
      */
     async DescribeClusterDatabases(req, cb) {
         return this.request("DescribeClusterDatabases", req, cb);
@@ -580,7 +580,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ReloadBalanceProxyNode", req, cb);
     }
     /**
-     * 本接口(SearchClusterDatabases)搜索集群database列表
+     * 本接口(SearchClusterDatabases)搜索集群数据库列表
      */
     async SearchClusterDatabases(req, cb) {
         return this.request("SearchClusterDatabases", req, cb);

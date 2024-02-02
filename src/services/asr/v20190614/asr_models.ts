@@ -569,6 +569,28 @@ export interface VoicePrintDeleteResponse {
 }
 
 /**
+ * VoicePrintEnroll请求参数结构体
+ */
+export interface VoicePrintEnrollRequest {
+  /**
+   * 音频格式 0: pcm, 1: wav
+   */
+  VoiceFormat: number
+  /**
+   * 音频采样率，目前支持16000，单位：Hz，必填
+   */
+  SampleRate: number
+  /**
+   * 音频数据, base64 编码, 音频时长不能超过30s，数据大小不超过2M
+   */
+  Data: string
+  /**
+   * 说话人昵称  不超过32字节
+   */
+  SpeakerNick?: string
+}
+
+/**
  * DeleteAsrVocab返回参数结构体
  */
 export interface DeleteAsrVocabResponse {
@@ -1062,25 +1084,19 @@ export interface UpdateAsrVocabResponse {
 }
 
 /**
- * VoicePrintEnroll请求参数结构体
+ * 音频声纹比对结果，包含比对分数
  */
-export interface VoicePrintEnrollRequest {
+export interface VoicePrintCompareData {
   /**
-   * 音频格式 0: pcm, 1: wav
+   * 匹配度 取值范围(0.0 - 100.0)
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  VoiceFormat: number
+  Score?: string
   /**
-   * 音频采样率，目前支持16000，单位：Hz，必填
+   * 验证结果 0: 未通过 1: 通过
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  SampleRate: number
-  /**
-   * 音频数据, base64 编码, 音频时长不能超过30s，数据大小不超过2M
-   */
-  Data: string
-  /**
-   * 说话人昵称  不超过32字节
-   */
-  SpeakerNick?: string
+  Decision?: number
 }
 
 /**
@@ -1292,6 +1308,42 @@ export interface VoicePrintBaseData {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SpeakerNick?: string
+}
+
+/**
+ * VoicePrintCompare请求参数结构体
+ */
+export interface VoicePrintCompareRequest {
+  /**
+   * 音频格式 0: pcm, 1: wav；pcm和wav音频无损压缩，识别准确度更高
+   */
+  VoiceFormat: number
+  /**
+   * 音频采样率，目前仅支持16k，请填写16000
+   */
+  SampleRate: number
+  /**
+   * 对比源音频数据, 音频要求：base64 编码,16k采样率， 16bit位深，pcm或者wav格式， 单声道，音频时长不超过30秒的音频，base64编码数据大小不超过2M
+   */
+  SrcAudioData: string
+  /**
+   * 对比目标音频数据, 音频要求：base64 编码,16k采样率， 16bit位深，pcm或者wav格式， 单声道，音频时长不超过30秒的音频，base64编码数据大小不超过2M
+   */
+  DestAudioData: string
+}
+
+/**
+ * VoicePrintCompare返回参数结构体
+ */
+export interface VoicePrintCompareResponse {
+  /**
+   * 音频声纹比对结果，包含相似度打分
+   */
+  Data?: VoicePrintCompareData
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

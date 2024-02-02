@@ -570,6 +570,11 @@ export interface FakeURLData {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AuditStatus?: number
+  /**
+   * 下线时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OfflineTime?: string
 }
 
 /**

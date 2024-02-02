@@ -2693,11 +2693,11 @@ export interface AddUserDeviceRequest {
      */
     Name: string;
     /**
-     * 设备接入协议（1:RTMP,2:GB,3:GW）
+     * 设备接入协议（1:RTMP,2:GB,3:GW,4:IVCP）
      */
     AccessProtocol: number;
     /**
-     * 设备类型，1:IPC,2:NVR；（若设备接入协议选择RTMP，则设备类型只能选择IPC）
+     * 设备类型，1:IPC,2:NVR；（若设备接入协议选择RTMP,IVCP，则设备类型只能选择IPC）
      */
     Type: number;
     /**
@@ -2740,6 +2740,10 @@ export interface AddUserDeviceRequest {
      * 设备用户名（仅网关接入需要）
      */
     Username?: string;
+    /**
+     * 设备 SN，仅IVCP 协议设备需要
+     */
+    SNCode?: string;
 }
 /**
  * ListRecordBackupPlanDevices返回参数结构体
@@ -4895,7 +4899,7 @@ export interface AddDeviceData {
      */
     DeviceId?: string;
     /**
-     * 设备编码（即我们为设备生成的20位国标编码）
+     * 设备编码（国标设备即我们为设备生成的20位国标编码，rtmp 设备为10 位设备编码）
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Code?: string;

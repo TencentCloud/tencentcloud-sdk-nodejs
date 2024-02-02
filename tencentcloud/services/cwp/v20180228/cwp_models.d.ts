@@ -2911,6 +2911,24 @@ export interface DescribeNetAttackSettingResponse {
      */
     NetAttackAlarmStatus?: number;
     /**
+     * 1 全部旗舰版主机，0 InstanceIds列表主机
+     */
+    Scope?: number;
+    /**
+     * 自选主机
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InstanceIds?: Array<string>;
+    /**
+     * 自选排除主机
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ExcludeInstanceIds?: Array<string>;
+    /**
+     * 新增资产自动包含 0 不包含 1包含
+     */
+    AutoInclude?: number;
+    /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
@@ -13730,20 +13748,34 @@ export interface DescribeVulDefenceSettingResponse {
     /**
      * 防御开关，0 关闭 1 开启
      */
-    Enable: number;
+    Enable?: number;
     /**
      * 影响范围：1 全网旗舰版主机，0 quuid列表主机
      */
-    Scope: number;
+    Scope?: number;
     /**
      * 影响主机quuid列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Quuids: Array<string>;
+    Quuids?: Array<string>;
     /**
      * 当前旗舰版主机数量
      */
-    FlagshipCount: number;
+    FlagshipCount?: number;
+    /**
+     * 影响主机id列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InstanceIds?: Array<string>;
+    /**
+     * 新增旗舰版主机自动加入;1是，0否
+     */
+    AutoInclude?: number;
+    /**
+     * 排除的主机id列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ExcludeInstanceIds?: Array<string>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -15320,6 +15352,22 @@ export interface ModifyNetAttackSettingRequest {
      * 0 新增告警事件默认待处理，1新增告警事件默认已处理，3新增告警事件默认忽略
      */
     NetAttackAlarmStatus: number;
+    /**
+     * 1 全部旗舰版主机，0 Quuids列表主机
+     */
+    Scope?: number;
+    /**
+     * 自选主机
+     */
+    InstanceIds?: Array<string>;
+    /**
+     * 自选排除的主机
+     */
+    ExcludeInstanceIds?: Array<string>;
+    /**
+     * 新增资产自动包含 0 不包含 1包含
+     */
+    AutoInclude?: number;
 }
 /**
  * DescribeRiskDnsList返回参数结构体
@@ -20443,9 +20491,21 @@ export interface ModifyVulDefenceSettingRequest {
      */
     Scope: number;
     /**
-     * 作用弄范围内旗舰版主机列表
+     * 作用范围内旗舰版主机列表
      */
     Quuids?: Array<string>;
+    /**
+     * 排除作用范围内旗舰版主机列表
+     */
+    ExcludeInstanceIds?: Array<string>;
+    /**
+     * 新增资产自动包含 0 不包含 1包含
+     */
+    AutoInclude?: number;
+    /**
+     * 作用范围内旗舰版主机列表
+     */
+    InstanceIds?: Array<string>;
 }
 /**
  * ModifyLoginWhiteRecord返回参数结构体

@@ -382,7 +382,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   *  yarn application 统计接口查询
+   * yarn application 统计接口查询
    */
   async DescribeEmrApplicationStatics(
     req: DescribeEmrApplicationStaticsRequest,

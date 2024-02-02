@@ -4564,12 +4564,15 @@ export interface RegistrationOrganizationInfo {
     AdminMobile?: string;
     /**
      * 可选的此企业允许的授权方式, 可以设置的方式有:
-  1：上传授权书+对公打款
-  2：法人授权/认证  会根据当前操作人的身份判定,如果当前操作人是法人,则是法人认证, 如果当前操作人不是法人,则走法人授权
+  1：上传授权书
+  2：法人授权超管
+  5：授权书+对公打款
+  
   
   注:
   `1. 当前仅支持一种认证方式`
   `2. 如果当前的企业类型是政府/事业单位, 则只支持上传授权书+对公打款`
+  `3. 如果当前操作人是法人,则是法人认证`
      */
     AuthorizationTypes?: Array<number | bigint>;
     /**
@@ -4584,6 +4587,10 @@ export interface RegistrationOrganizationInfo {
      * 经办人的证件号
      */
     AdminIdCardNumber?: string;
+    /**
+     * 营业执照正面照(PNG或JPG) base64格式, 大小不超过5M
+     */
+    BusinessLicense?: string;
 }
 /**
  * ChannelCreateMultiFlowSignQRCode请求参数结构体

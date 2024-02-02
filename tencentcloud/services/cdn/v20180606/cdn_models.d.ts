@@ -4768,7 +4768,7 @@ export interface DescribeCdnDataRequest {
     Interval?: string;
     /**
      * 多域名查询时，默认（false)返回多个域名的汇总数据
-  可按需指定为 true，返回每一个 Domain 的明细数据（statusCode 指标暂不支持）
+  可按需指定为 true，返回每一个 Domain 的明细数据（statusCode、2xx、3xx、4xx、5xx 指标暂不支持）
      */
     Detail?: boolean;
     /**
@@ -8409,11 +8409,11 @@ export interface DescribeCdnDataResponse {
   hour：1 小时粒度
   day：天粒度
      */
-    Interval: string;
+    Interval?: string;
     /**
      * 指定条件查询得到的数据明细
      */
-    Data: Array<ResourceData>;
+    Data?: Array<ResourceData>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -8479,7 +8479,7 @@ export interface DescribeOriginDataRequest {
     Interval?: string;
     /**
      * Domains 传入多个时，默认（false)返回多个域名的汇总数据
-  可按需指定为 true，返回每一个 Domain 的明细数据（statusCode 指标暂不支持）
+  可按需指定为 true，返回每一个 Domain 的明细数据（statusCode、2xx、3xx、4xx、5xx 指标暂不支持）
      */
     Detail?: boolean;
     /**
@@ -9361,11 +9361,11 @@ export interface DescribeOriginDataResponse {
     /**
      * 数据统计的时间粒度，支持min, 5min, hour, day，分别表示1分钟，5分钟，1小时和1天的时间粒度。
      */
-    Interval: string;
+    Interval?: string;
     /**
      * 各个资源的回源数据详情。
      */
-    Data: Array<ResourceOriginData>;
+    Data?: Array<ResourceOriginData>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */

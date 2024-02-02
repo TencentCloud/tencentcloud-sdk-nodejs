@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeCloudNativeAPIGatewayResponse, CreateCloudNativeAPIGatewayServiceResponse, DeleteCloudNativeAPIGatewayPublicNetworkResponse, DeleteCloudNativeAPIGatewayRouteRateLimitResponse, DeleteWafDomainsRequest, DescribeCloudNativeAPIGatewayServiceRateLimitRequest, CreateCloudNativeAPIGatewayRequest, DescribeCloudNativeAPIGatewayNodesRequest, ModifyCloudNativeAPIGatewayRouteRequest, DescribeCloudNativeAPIGatewayUpstreamRequest, DeleteNativeGatewayServerGroupResponse, ModifyCloudNativeAPIGatewayCertificateResponse, CreateCloudNativeAPIGatewayRouteRateLimitResponse, DescribeSREInstanceAccessAddressResponse, ModifyCloudNativeAPIGatewayCanaryRuleResponse, DescribeUpstreamHealthCheckConfigRequest, CreateNativeGatewayServerGroupRequest, DescribeCloudNativeAPIGatewayCertificatesRequest, ModifyCloudNativeAPIGatewayRouteRateLimitRequest, ModifyCloudNativeAPIGatewayResponse, CloseWafProtectionRequest, ModifyCloudNativeAPIGatewayServiceResponse, DescribeCloudNativeAPIGatewayNodesResponse, CreateCloudNativeAPIGatewayResponse, DescribeUpstreamHealthCheckConfigResponse, OpenWafProtectionResponse, DeleteCloudNativeAPIGatewayCertificateResponse, DeleteCloudNativeAPIGatewayCanaryRuleRequest, DescribeNacosReplicasRequest, CreateCloudNativeAPIGatewayServiceRequest, ModifyConsoleNetworkRequest, ModifyCloudNativeAPIGatewayCertificateRequest, CreateWafDomainsResponse, DescribeCloudNativeAPIGatewayServicesRequest, DescribeCloudNativeAPIGatewayUpstreamResponse, DescribeCloudNativeAPIGatewayCertificatesResponse, UpdateEngineInternetAccessRequest, CreateCloudNativeAPIGatewayCanaryRuleResponse, DescribeSREInstancesRequest, DeleteEngineResponse, DescribeCloudNativeAPIGatewayRoutesResponse, DescribeWafProtectionResponse, DescribeZookeeperReplicasRequest, DescribeZookeeperServerInterfacesRequest, UpdateUpstreamTargetsRequest, DeleteCloudNativeAPIGatewayServiceResponse, ModifyNetworkAccessStrategyRequest, DeleteCloudNativeAPIGatewayRouteResponse, DescribeCloudNativeAPIGatewayPortsResponse, CreateCloudNativeAPIGatewayRouteRateLimitRequest, DeleteNativeGatewayServerGroupRequest, ModifyCloudNativeAPIGatewayRouteResponse, DescribeNacosReplicasResponse, DeleteCloudNativeAPIGatewayServiceRateLimitRequest, ModifyUpstreamNodeStatusRequest, DescribeCloudNativeAPIGatewayConfigResponse, CreateCloudNativeAPIGatewayRouteResponse, DescribeCloudNativeAPIGatewayConfigRequest, DescribeCloudNativeAPIGatewaysRequest, DescribeNacosServerInterfacesResponse, DescribeCloudNativeAPIGatewayServiceRateLimitResponse, DeleteCloudNativeAPIGatewayServiceRequest, CreateCloudNativeAPIGatewayCertificateResponse, CreateCloudNativeAPIGatewayCanaryRuleRequest, ModifyNativeGatewayServerGroupRequest, DescribeCloudNativeAPIGatewayRouteRateLimitRequest, DescribeOneCloudNativeAPIGatewayServiceRequest, DescribeCloudNativeAPIGatewaysResponse, UpdateEngineInternetAccessResponse, UpdateCloudNativeAPIGatewaySpecRequest, DescribeCloudNativeAPIGatewayServicesResponse, DeleteCloudNativeAPIGatewayRouteRateLimitRequest, DeleteEngineRequest, CreateCloudNativeAPIGatewayPublicNetworkResponse, DescribeWafDomainsResponse, ModifyNetworkBasicInfoRequest, ModifyCloudNativeAPIGatewayServiceRateLimitRequest, DescribeSREInstanceAccessAddressRequest, DescribeCloudNativeAPIGatewayCanaryRulesResponse, UpdateUpstreamTargetsResponse, DeleteCloudNativeAPIGatewayCertificateRequest, DeleteCloudNativeAPIGatewayServiceRateLimitResponse, CloseWafProtectionResponse, UpdateUpstreamHealthCheckConfigRequest, UpdateCloudNativeAPIGatewaySpecResponse, DescribeZookeeperServerInterfacesResponse, ModifyNetworkAccessStrategyResponse, DescribeNativeGatewayServerGroupsRequest, DeleteCloudNativeAPIGatewayRequest, DescribeCloudNativeAPIGatewayCertificateDetailsResponse, UpdateCloudNativeAPIGatewayCertificateInfoRequest, DescribeOneCloudNativeAPIGatewayServiceResponse, ModifyCloudNativeAPIGatewayServiceRequest, DeleteCloudNativeAPIGatewayResponse, CreateCloudNativeAPIGatewayCertificateRequest, DescribeWafDomainsRequest, DescribeWafProtectionRequest, ModifyUpstreamNodeStatusResponse, CreateCloudNativeAPIGatewayPublicNetworkRequest, DescribeCloudNativeAPIGatewayRouteRateLimitResponse, DescribeCloudNativeAPIGatewayRequest, DescribeNativeGatewayServerGroupsResponse, OpenWafProtectionRequest, DeleteCloudNativeAPIGatewayPublicNetworkRequest, DeleteCloudNativeAPIGatewayRouteRequest, DescribeCloudNativeAPIGatewayRoutesRequest, CreateEngineResponse, CreateCloudNativeAPIGatewayServiceRateLimitResponse, ModifyCloudNativeAPIGatewayServiceRateLimitResponse, DescribeNacosServerInterfacesRequest, UpdateUpstreamHealthCheckConfigResponse, DescribeSREInstancesResponse, DescribeCloudNativeAPIGatewayCertificateDetailsRequest, CreateWafDomainsRequest, CreateCloudNativeAPIGatewayRouteRequest, CreateNativeGatewayServerGroupResponse, CreateCloudNativeAPIGatewayServiceRateLimitRequest, DescribeZookeeperReplicasResponse, CreateEngineRequest, ModifyCloudNativeAPIGatewayCanaryRuleRequest, ModifyConsoleNetworkResponse, DeleteWafDomainsResponse, ModifyCloudNativeAPIGatewayRequest, ModifyCloudNativeAPIGatewayRouteRateLimitResponse, DescribeCloudNativeAPIGatewayCanaryRulesRequest, DeleteCloudNativeAPIGatewayCanaryRuleResponse, DescribeCloudNativeAPIGatewayPortsRequest, ModifyNativeGatewayServerGroupResponse, UpdateCloudNativeAPIGatewayCertificateInfoResponse, ModifyNetworkBasicInfoResponse } from "./tse_models";
+import { DescribeCloudNativeAPIGatewayResponse, CreateCloudNativeAPIGatewayServiceResponse, DeleteCloudNativeAPIGatewayPublicNetworkResponse, DeleteCloudNativeAPIGatewayRouteRateLimitResponse, DeleteWafDomainsRequest, DescribeCloudNativeAPIGatewayServiceRateLimitRequest, CreateCloudNativeAPIGatewayRequest, ModifyCloudNativeAPIGatewayRouteRequest, DescribeCloudNativeAPIGatewayUpstreamRequest, DeleteNativeGatewayServerGroupResponse, ModifyCloudNativeAPIGatewayCertificateResponse, CreateCloudNativeAPIGatewayRouteRateLimitResponse, DescribeSREInstanceAccessAddressResponse, ModifyCloudNativeAPIGatewayCanaryRuleResponse, CreateCloudNativeAPIGatewayCertificateRequest, CreateNativeGatewayServerGroupRequest, DescribeCloudNativeAPIGatewayCertificatesRequest, ModifyCloudNativeAPIGatewayRouteRateLimitRequest, ModifyCloudNativeAPIGatewayResponse, CloseWafProtectionRequest, ModifyCloudNativeAPIGatewayServiceResponse, DescribeCloudNativeAPIGatewayNodesResponse, CreateCloudNativeAPIGatewayResponse, DescribeUpstreamHealthCheckConfigResponse, DeleteCloudNativeAPIGatewayCertificateResponse, DeleteCloudNativeAPIGatewayCanaryRuleRequest, DescribeAutoScalerResourceStrategyBindingGroupsResponse, DescribeNacosReplicasRequest, CreateCloudNativeAPIGatewayServiceRequest, ModifyConsoleNetworkRequest, ModifyCloudNativeAPIGatewayCertificateRequest, CreateWafDomainsResponse, DescribeCloudNativeAPIGatewayServicesRequest, UnbindAutoScalerResourceStrategyFromGroupsResponse, DescribeCloudNativeAPIGatewayUpstreamResponse, DeleteAutoScalerResourceStrategyRequest, DescribeCloudNativeAPIGatewayNodesRequest, CreateCloudNativeAPIGatewayCanaryRuleResponse, DescribeSREInstancesRequest, DeleteEngineResponse, DescribeCloudNativeAPIGatewayRoutesResponse, DescribeWafProtectionResponse, DescribeZookeeperReplicasRequest, DescribeZookeeperServerInterfacesRequest, UpdateUpstreamTargetsRequest, DeleteCloudNativeAPIGatewayServiceResponse, BindAutoScalerResourceStrategyToGroupsResponse, DescribeAutoScalerResourceStrategiesResponse, ModifyNetworkAccessStrategyRequest, DeleteCloudNativeAPIGatewayRouteResponse, DescribeCloudNativeAPIGatewayPortsResponse, CreateCloudNativeAPIGatewayRouteRateLimitRequest, DeleteNativeGatewayServerGroupRequest, ModifyCloudNativeAPIGatewayRouteResponse, DescribeNacosReplicasResponse, DeleteCloudNativeAPIGatewayServiceRateLimitRequest, DescribeCloudNativeAPIGatewayRequest, ModifyUpstreamNodeStatusRequest, DescribeCloudNativeAPIGatewayConfigResponse, CreateCloudNativeAPIGatewayRouteResponse, DescribeCloudNativeAPIGatewayConfigRequest, UpdateEngineInternetAccessResponse, DescribeCloudNativeAPIGatewaysRequest, DescribeNacosServerInterfacesResponse, BindAutoScalerResourceStrategyToGroupsRequest, DescribeCloudNativeAPIGatewayServiceRateLimitResponse, DeleteCloudNativeAPIGatewayServiceRequest, ModifyAutoScalerResourceStrategyResponse, CreateCloudNativeAPIGatewayCertificateResponse, CreateCloudNativeAPIGatewayCanaryRuleRequest, DescribePublicNetworkResponse, ModifyNativeGatewayServerGroupRequest, DescribeCloudNativeAPIGatewayRouteRateLimitRequest, DescribeOneCloudNativeAPIGatewayServiceRequest, DescribeCloudNativeAPIGatewaysResponse, UpdateCloudNativeAPIGatewaySpecRequest, DescribeCloudNativeAPIGatewayServicesResponse, DeleteCloudNativeAPIGatewayRouteRateLimitRequest, DeleteEngineRequest, CreateCloudNativeAPIGatewayPublicNetworkResponse, DescribeWafDomainsResponse, ModifyNetworkBasicInfoRequest, DescribeUpstreamHealthCheckConfigRequest, DescribeSREInstanceAccessAddressRequest, DeleteAutoScalerResourceStrategyResponse, DescribeCloudNativeAPIGatewayCanaryRulesResponse, UpdateUpstreamTargetsResponse, DeleteCloudNativeAPIGatewayCertificateRequest, DeleteCloudNativeAPIGatewayServiceRateLimitResponse, CloseWafProtectionResponse, UpdateUpstreamHealthCheckConfigRequest, UpdateCloudNativeAPIGatewaySpecResponse, DescribeZookeeperServerInterfacesResponse, ModifyNetworkAccessStrategyResponse, ModifyAutoScalerResourceStrategyRequest, DescribeNativeGatewayServerGroupsRequest, UnbindAutoScalerResourceStrategyFromGroupsRequest, DescribePublicNetworkRequest, DeleteCloudNativeAPIGatewayRequest, DeleteCloudNativeAPIGatewayPublicNetworkRequest, UpdateCloudNativeAPIGatewayCertificateInfoRequest, OpenWafProtectionResponse, DescribeOneCloudNativeAPIGatewayServiceResponse, ModifyCloudNativeAPIGatewayServiceRequest, DeleteCloudNativeAPIGatewayResponse, DescribeAutoScalerResourceStrategyBindingGroupsRequest, DescribeWafDomainsRequest, DescribeWafProtectionRequest, ModifyUpstreamNodeStatusResponse, DescribeAutoScalerResourceStrategiesRequest, CreateCloudNativeAPIGatewayPublicNetworkRequest, DescribeCloudNativeAPIGatewayRouteRateLimitResponse, DescribeCloudNativeAPIGatewayCertificateDetailsResponse, DescribeNativeGatewayServerGroupsResponse, OpenWafProtectionRequest, DescribeCloudNativeAPIGatewayCertificatesResponse, CreateCloudNativeAPIGatewayServiceRateLimitResponse, ModifyNativeGatewayServerGroupResponse, CreateAutoScalerResourceStrategyRequest, DescribeCloudNativeAPIGatewayRoutesRequest, CreateEngineResponse, ModifyCloudNativeAPIGatewayServiceRateLimitRequest, DeleteCloudNativeAPIGatewayRouteRequest, ModifyCloudNativeAPIGatewayServiceRateLimitResponse, DescribeNacosServerInterfacesRequest, UpdateUpstreamHealthCheckConfigResponse, DescribeSREInstancesResponse, DescribeCloudNativeAPIGatewayCertificateDetailsRequest, CreateWafDomainsRequest, CreateCloudNativeAPIGatewayRouteRequest, CreateNativeGatewayServerGroupResponse, CreateCloudNativeAPIGatewayServiceRateLimitRequest, DescribeZookeeperReplicasResponse, CreateEngineRequest, ModifyCloudNativeAPIGatewayCanaryRuleRequest, CreateAutoScalerResourceStrategyResponse, ModifyConsoleNetworkResponse, DeleteWafDomainsResponse, ModifyCloudNativeAPIGatewayRequest, ModifyCloudNativeAPIGatewayRouteRateLimitResponse, DescribeCloudNativeAPIGatewayCanaryRulesRequest, DeleteCloudNativeAPIGatewayCanaryRuleResponse, UpdateEngineInternetAccessRequest, DescribeCloudNativeAPIGatewayPortsRequest, UpdateCloudNativeAPIGatewayCertificateInfoResponse, ModifyNetworkBasicInfoResponse } from "./tse_models";
 /**
  * tse client
  * @class
@@ -12,9 +12,9 @@ export declare class Client extends AbstractClient {
      */
     ModifyConsoleNetwork(req: ModifyConsoleNetworkRequest, cb?: (error: string, rep: ModifyConsoleNetworkResponse) => void): Promise<ModifyConsoleNetworkResponse>;
     /**
-     * 创建公网网络配置
+     * 删除引擎实例
      */
-    CreateCloudNativeAPIGatewayPublicNetwork(req: CreateCloudNativeAPIGatewayPublicNetworkRequest, cb?: (error: string, rep: CreateCloudNativeAPIGatewayPublicNetworkResponse) => void): Promise<CreateCloudNativeAPIGatewayPublicNetworkResponse>;
+    DeleteEngine(req: DeleteEngineRequest, cb?: (error: string, rep: DeleteEngineResponse) => void): Promise<DeleteEngineResponse>;
     /**
      * 获取云原生网关服务健康检查配置
      */
@@ -24,9 +24,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeZookeeperReplicas(req: DescribeZookeeperReplicasRequest, cb?: (error: string, rep: DescribeZookeeperReplicasResponse) => void): Promise<DescribeZookeeperReplicasResponse>;
     /**
-     * 修改云原生API网关实例分组基础信息
+     * 修改云原生网关的灰度规则
      */
-    ModifyNativeGatewayServerGroup(req: ModifyNativeGatewayServerGroupRequest, cb?: (error: string, rep: ModifyNativeGatewayServerGroupResponse) => void): Promise<ModifyNativeGatewayServerGroupResponse>;
+    ModifyCloudNativeAPIGatewayCanaryRule(req: ModifyCloudNativeAPIGatewayCanaryRuleRequest, cb?: (error: string, rep: ModifyCloudNativeAPIGatewayCanaryRuleResponse) => void): Promise<ModifyCloudNativeAPIGatewayCanaryRuleResponse>;
     /**
      * 修改云原生网关上游实例节点健康状态
      */
@@ -64,21 +64,33 @@ export declare class Client extends AbstractClient {
      */
     CreateEngine(req: CreateEngineRequest, cb?: (error: string, rep: CreateEngineResponse) => void): Promise<CreateEngineResponse>;
     /**
-     * 修改云原生网关的灰度规则
+     * 修改云原生API网关实例基础信息
      */
-    ModifyCloudNativeAPIGatewayCanaryRule(req: ModifyCloudNativeAPIGatewayCanaryRuleRequest, cb?: (error: string, rep: ModifyCloudNativeAPIGatewayCanaryRuleResponse) => void): Promise<ModifyCloudNativeAPIGatewayCanaryRuleResponse>;
+    ModifyCloudNativeAPIGateway(req: ModifyCloudNativeAPIGatewayRequest, cb?: (error: string, rep: ModifyCloudNativeAPIGatewayResponse) => void): Promise<ModifyCloudNativeAPIGatewayResponse>;
     /**
-     * 删除公网网络配置
+     * 弹性伸缩策略批量解绑网关分组
      */
-    DeleteCloudNativeAPIGatewayPublicNetwork(req: DeleteCloudNativeAPIGatewayPublicNetworkRequest, cb?: (error: string, rep: DeleteCloudNativeAPIGatewayPublicNetworkResponse) => void): Promise<DeleteCloudNativeAPIGatewayPublicNetworkResponse>;
+    UnbindAutoScalerResourceStrategyFromGroups(req: UnbindAutoScalerResourceStrategyFromGroupsRequest, cb?: (error: string, rep: UnbindAutoScalerResourceStrategyFromGroupsResponse) => void): Promise<UnbindAutoScalerResourceStrategyFromGroupsResponse>;
+    /**
+     * 弹性伸缩策略批量绑定网关分组
+     */
+    BindAutoScalerResourceStrategyToGroups(req: BindAutoScalerResourceStrategyToGroupsRequest, cb?: (error: string, rep: BindAutoScalerResourceStrategyToGroupsResponse) => void): Promise<BindAutoScalerResourceStrategyToGroupsResponse>;
     /**
      * 删除 WAF 防护域名
      */
     DeleteWafDomains(req: DeleteWafDomainsRequest, cb?: (error: string, rep: DeleteWafDomainsResponse) => void): Promise<DeleteWafDomainsResponse>;
     /**
+     * 删除公网网络配置
+     */
+    DeleteCloudNativeAPIGatewayPublicNetwork(req: DeleteCloudNativeAPIGatewayPublicNetworkRequest, cb?: (error: string, rep: DeleteCloudNativeAPIGatewayPublicNetworkResponse) => void): Promise<DeleteCloudNativeAPIGatewayPublicNetworkResponse>;
+    /**
      * 删除云原生网关服务
      */
     DeleteCloudNativeAPIGatewayService(req: DeleteCloudNativeAPIGatewayServiceRequest, cb?: (error: string, rep: DeleteCloudNativeAPIGatewayServiceResponse) => void): Promise<DeleteCloudNativeAPIGatewayServiceResponse>;
+    /**
+     * 更新云原生网关健康检查配置
+     */
+    UpdateUpstreamHealthCheckConfig(req: UpdateUpstreamHealthCheckConfigRequest, cb?: (error: string, rep: UpdateUpstreamHealthCheckConfigResponse) => void): Promise<UpdateUpstreamHealthCheckConfigResponse>;
     /**
      * 创建云原生网关服务
      */
@@ -100,9 +112,13 @@ export declare class Client extends AbstractClient {
      */
     DeleteCloudNativeAPIGatewayRoute(req: DeleteCloudNativeAPIGatewayRouteRequest, cb?: (error: string, rep: DeleteCloudNativeAPIGatewayRouteResponse) => void): Promise<DeleteCloudNativeAPIGatewayRouteResponse>;
     /**
-     * 删除引擎实例
+     * 创建公网网络配置
      */
-    DeleteEngine(req: DeleteEngineRequest, cb?: (error: string, rep: DeleteEngineResponse) => void): Promise<DeleteEngineResponse>;
+    CreateCloudNativeAPIGatewayPublicNetwork(req: CreateCloudNativeAPIGatewayPublicNetworkRequest, cb?: (error: string, rep: CreateCloudNativeAPIGatewayPublicNetworkResponse) => void): Promise<CreateCloudNativeAPIGatewayPublicNetworkResponse>;
+    /**
+     * 更新弹性伸缩策略
+     */
+    ModifyAutoScalerResourceStrategy(req: ModifyAutoScalerResourceStrategyRequest, cb?: (error: string, rep: ModifyAutoScalerResourceStrategyResponse) => void): Promise<ModifyAutoScalerResourceStrategyResponse>;
     /**
      * 更新云原生网关证书
      */
@@ -128,9 +144,17 @@ export declare class Client extends AbstractClient {
      */
     ModifyCloudNativeAPIGatewayRouteRateLimit(req: ModifyCloudNativeAPIGatewayRouteRateLimitRequest, cb?: (error: string, rep: ModifyCloudNativeAPIGatewayRouteRateLimitResponse) => void): Promise<ModifyCloudNativeAPIGatewayRouteRateLimitResponse>;
     /**
+     * 修改云原生API网关实例分组基础信息
+     */
+    ModifyNativeGatewayServerGroup(req: ModifyNativeGatewayServerGroupRequest, cb?: (error: string, rep: ModifyNativeGatewayServerGroupResponse) => void): Promise<ModifyNativeGatewayServerGroupResponse>;
+    /**
      * 查询nacos服务接口列表
      */
     DescribeNacosServerInterfaces(req: DescribeNacosServerInterfacesRequest, cb?: (error: string, rep: DescribeNacosServerInterfacesResponse) => void): Promise<DescribeNacosServerInterfacesResponse>;
+    /**
+     * 查看弹性伸缩策略绑定的网关分组
+     */
+    DescribeAutoScalerResourceStrategyBindingGroups(req: DescribeAutoScalerResourceStrategyBindingGroupsRequest, cb?: (error: string, rep: DescribeAutoScalerResourceStrategyBindingGroupsResponse) => void): Promise<DescribeAutoScalerResourceStrategyBindingGroupsResponse>;
     /**
      * 修改云原生网关路由
      */
@@ -192,9 +216,9 @@ export declare class Client extends AbstractClient {
      */
     UpdateUpstreamTargets(req: UpdateUpstreamTargetsRequest, cb?: (error: string, rep: UpdateUpstreamTargetsResponse) => void): Promise<UpdateUpstreamTargetsResponse>;
     /**
-     * 修改云原生API网关实例基础信息
+     * 查看弹性伸缩策略列表
      */
-    ModifyCloudNativeAPIGateway(req: ModifyCloudNativeAPIGatewayRequest, cb?: (error: string, rep: ModifyCloudNativeAPIGatewayResponse) => void): Promise<ModifyCloudNativeAPIGatewayResponse>;
+    DescribeAutoScalerResourceStrategies(req: DescribeAutoScalerResourceStrategiesRequest, cb?: (error: string, rep: DescribeAutoScalerResourceStrategiesResponse) => void): Promise<DescribeAutoScalerResourceStrategiesResponse>;
     /**
      * 创建云原生网关限流插件(服务)
      */
@@ -211,6 +235,10 @@ export declare class Client extends AbstractClient {
      * 修改云原生API网关实例Kong访问策略，支持白名单或者黑名单。
      */
     ModifyNetworkAccessStrategy(req: ModifyNetworkAccessStrategyRequest, cb?: (error: string, rep: ModifyNetworkAccessStrategyResponse) => void): Promise<ModifyNetworkAccessStrategyResponse>;
+    /**
+     * 查询云原生API网关实例公网详情
+     */
+    DescribePublicNetwork(req: DescribePublicNetworkRequest, cb?: (error: string, rep: DescribePublicNetworkResponse) => void): Promise<DescribePublicNetworkResponse>;
     /**
      * 删除云原生网关证书
      */
@@ -232,6 +260,10 @@ export declare class Client extends AbstractClient {
      */
     DeleteCloudNativeAPIGatewayRouteRateLimit(req: DeleteCloudNativeAPIGatewayRouteRateLimitRequest, cb?: (error: string, rep: DeleteCloudNativeAPIGatewayRouteRateLimitResponse) => void): Promise<DeleteCloudNativeAPIGatewayRouteRateLimitResponse>;
     /**
+     * 创建弹性伸缩策略
+     */
+    CreateAutoScalerResourceStrategy(req: CreateAutoScalerResourceStrategyRequest, cb?: (error: string, rep: CreateAutoScalerResourceStrategyResponse) => void): Promise<CreateAutoScalerResourceStrategyResponse>;
+    /**
      * 创建云原生网关限流插件(路由)
      */
     CreateCloudNativeAPIGatewayRouteRateLimit(req: CreateCloudNativeAPIGatewayRouteRateLimitRequest, cb?: (error: string, rep: CreateCloudNativeAPIGatewayRouteRateLimitResponse) => void): Promise<CreateCloudNativeAPIGatewayRouteRateLimitResponse>;
@@ -244,9 +276,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeNacosReplicas(req: DescribeNacosReplicasRequest, cb?: (error: string, rep: DescribeNacosReplicasResponse) => void): Promise<DescribeNacosReplicasResponse>;
     /**
-     * 更新云原生网关健康检查配置
+     * 删除弹性伸缩策略
      */
-    UpdateUpstreamHealthCheckConfig(req: UpdateUpstreamHealthCheckConfigRequest, cb?: (error: string, rep: UpdateUpstreamHealthCheckConfigResponse) => void): Promise<UpdateUpstreamHealthCheckConfigResponse>;
+    DeleteAutoScalerResourceStrategy(req: DeleteAutoScalerResourceStrategyRequest, cb?: (error: string, rep: DeleteAutoScalerResourceStrategyResponse) => void): Promise<DeleteAutoScalerResourceStrategyResponse>;
     /**
      * 查询引擎实例访问地址
      */

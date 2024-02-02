@@ -5996,23 +5996,43 @@ export interface DescribeImageAuthorizedInfoResponse {
   /**
    * 总共有效的镜像授权数
    */
-  TotalAuthorizedCnt: number
+  TotalAuthorizedCnt?: number
   /**
    * 已使用镜像授权数
    */
-  UsedAuthorizedCnt: number
+  UsedAuthorizedCnt?: number
   /**
    * 已开启扫描镜像数
    */
-  ScannedImageCnt: number
+  ScannedImageCnt?: number
   /**
    * 未开启扫描镜像数
    */
-  NotScannedImageCnt: number
+  NotScannedImageCnt?: number
   /**
    * 本地未开启扫描镜像数
    */
-  NotScannedLocalImageCnt: number
+  NotScannedLocalImageCnt?: number
+  /**
+   * 试用镜像授权数
+   */
+  TrialAuthorizedCnt?: number
+  /**
+   * 已使用试用镜像授权数
+   */
+  UsedTrialAuthorizedCnt?: number
+  /**
+   * 已购镜像授权数
+   */
+  PurchasedAuthorizedCnt?: number
+  /**
+   * 已使用已购镜像授权数
+   */
+  UsedPurchasedAuthorizedCnt?: number
+  /**
+   * 是否可免费领取镜像授权数
+   */
+  CanApplyFreeImageAuthorize?: boolean
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

@@ -87,6 +87,11 @@ export interface DescribeVULRiskAdvanceCFGListResponse {
      */
     CheckFromLists?: Array<FilterDataObject>;
     /**
+     * 漏洞标签列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    VulTagList?: Array<FilterDataObject>;
+    /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
@@ -118,21 +123,17 @@ export interface DescribeOrganizationUserInfoRequest {
     NotSupportCloud?: boolean;
 }
 /**
- * ModifyRiskCenterRiskStatus请求参数结构体
+ * 过滤数据对象
  */
-export interface ModifyRiskCenterRiskStatusRequest {
+export interface FilterDataObject {
     /**
-     * 风险资产相关数据
+     * 英文翻译
      */
-    RiskStatusKeys: Array<RiskCenterStatusKey>;
+    Value?: string;
     /**
-     * 处置状态，1为已处置、2为已忽略，3为取消已处置，4为取消已忽略
+     * 中文翻译
      */
-    Status: number;
-    /**
-     * 风险类型，0-端口风险， 1-漏洞风险，2-弱口令风险， 3-网站内容风险，4-配置风险，5-风险服务暴露
-     */
-    Type: number;
+    Text?: string;
 }
 /**
  * 报告项key
@@ -402,6 +403,66 @@ export interface CVMAssetVO {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     IsNewAsset?: number;
+    /**
+     * 0 未安装  1安装 2:安装中
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CVMAgentStatus?: number;
+    /**
+     * 1:开启 0:未开启
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CVMStatus?: number;
+    /**
+     * 1:客户端已安装 0：未安装 2: Agentless
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DefenseModel?: number;
+    /**
+     * 1:已安装 0:未安装
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TatStatus?: number;
+    /**
+     * cpu趋势图
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CpuTrend?: Array<Element>;
+    /**
+     * 内存趋势图
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MemoryTrend?: Array<Element>;
+    /**
+     * 1:agent在线 0:agent离线 2:主机离线
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AgentStatus?: number;
+    /**
+     * 本月防护关闭次数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CloseDefenseCount?: number;
+    /**
+     * 运行状态
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InstanceState?: string;
+    /**
+     * 安全组数据
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SecurityGroupIds?: Array<string>;
+    /**
+     * 物理内存占用KB
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AgentMemRss?: number;
+    /**
+     * CPU使用率百分比
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AgentCpuPer?: number;
 }
 /**
  * 资产视角配置风险
@@ -825,6 +886,36 @@ export interface VULRiskAdvanceCFGList {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     ImpactComponent?: string;
+    /**
+     * 漏洞Payload
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Payload?: string;
+    /**
+     * 技术参考
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    References?: string;
+    /**
+     * cvss评分
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CVSS?: string;
+    /**
+     * 攻击热度
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AttackHeat?: string;
+    /**
+     * 安全产品支持情况
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ServiceSupport?: Array<ServiceSupport>;
+    /**
+     * 最新检测时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RecentScanTime?: string;
 }
 /**
  * StopRiskCenterTask请求参数结构体
@@ -1015,6 +1106,10 @@ export interface AssetTag {
  * DescribeVULRiskAdvanceCFGList请求参数结构体
  */
 export interface DescribeVULRiskAdvanceCFGListRequest {
+    /**
+     * 集团账号的成员id
+     */
+    MemberId?: Array<string>;
     /**
      * 任务ID
      */
@@ -2083,17 +2178,21 @@ export interface IpAssetListVO {
     VerifyStatus?: number;
 }
 /**
- * 过滤数据对象
+ * ModifyRiskCenterRiskStatus请求参数结构体
  */
-export interface FilterDataObject {
+export interface ModifyRiskCenterRiskStatusRequest {
     /**
-     * 英文翻译
+     * 风险资产相关数据
      */
-    Value?: string;
+    RiskStatusKeys: Array<RiskCenterStatusKey>;
     /**
-     * 中文翻译
+     * 处置状态，1为已处置、2为已忽略，3为取消已处置，4为取消已忽略
      */
-    Text?: string;
+    Status: number;
+    /**
+     * 风险类型，0-端口风险， 1-漏洞风险，2-弱口令风险， 3-网站内容风险，4-配置风险，5-风险服务暴露
+     */
+    Type: number;
 }
 /**
  * 风险中心状态处理Key
@@ -2104,10 +2203,6 @@ export interface RiskCenterStatusKey {
      */
     Id: string;
     /**
-     * APP ID
-     */
-    AppId: string;
-    /**
      * 公网IP/域名
      */
     PublicIPDomain?: string;
@@ -2115,6 +2210,10 @@ export interface RiskCenterStatusKey {
      * 实例ID
      */
     InstanceId?: string;
+    /**
+     * APP ID
+     */
+    AppId?: string;
 }
 /**
  * DescribeRiskCenterAssetViewWeakPasswordRiskList请求参数结构体
@@ -2197,6 +2296,11 @@ export interface DescribeCVMAssetsResponse {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     OsList?: Array<FilterDataObject>;
+    /**
+     * 资产类型和实例类型的对应关系
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AssetMapInstanceTypeList?: Array<AssetInstanceTypeMap>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2563,6 +2667,32 @@ export interface WebsiteRisk {
     SourceURLPath?: string;
 }
 /**
+ * 产品支持情况
+ */
+export interface ServiceSupport {
+    /**
+     * 产品名称:
+  "cfw_waf_virtual", "cwp_detect", "cwp_defense", "cwp_fix"
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ServiceName?: string;
+    /**
+     * 已处理的资产总数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SupportHandledCount?: number;
+    /**
+     * 支持的资产总数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SupportTotalCount?: number;
+    /**
+     * 是否支持该产品1支持；0不支持
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IsSupport?: boolean;
+}
+/**
  * CreateRiskCenterScanTask请求参数结构体
  */
 export interface CreateRiskCenterScanTaskRequest {
@@ -2821,6 +2951,26 @@ export interface ScanTaskInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     UserName?: string;
+}
+/**
+ * 资产类型和实例类型的映射
+ */
+export interface AssetInstanceTypeMap {
+    /**
+     * 资产类型
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Text?: string;
+    /**
+     * 资产类型
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Value?: string;
+    /**
+     * 资产类型和实例类型映射关系
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InstanceTypeList?: Array<FilterDataObject>;
 }
 /**
  * 主机标签信息
@@ -4566,6 +4716,10 @@ export interface DescribeRiskCenterAssetViewVULRiskListResponse {
  */
 export interface DescribeCVMAssetsRequest {
     /**
+     * 集团账号的成员id
+     */
+    MemberId?: Array<string>;
+    /**
      * -
      */
     Filter?: Filter;
@@ -4697,6 +4851,21 @@ export interface ClbListenerListInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     LoadBalancerDomain?: string;
+}
+/**
+ * 统计条目
+ */
+export interface Element {
+    /**
+     * 统计类型
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Key?: string;
+    /**
+     * 统计对象
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Value?: string;
 }
 /**
  * DescribeRiskCenterServerRiskList返回参数结构体

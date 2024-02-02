@@ -703,7 +703,7 @@ export interface DescribeEmrApplicationStaticsRequest {
      */
     Offset?: number;
     /**
-     * 页容量
+     * 页容量，范围为[10,100]
      */
     Limit?: number;
 }
@@ -2612,7 +2612,8 @@ export interface DescribeUsersForUserManagerRequest {
      */
     PageNo: number;
     /**
-     * 分页的大小
+     * 分页的大小。
+  默认查询全部；PageNo和PageSize不合理的设置，都是查询全部
      */
     PageSize: number;
     /**
@@ -3671,6 +3672,7 @@ export interface DescribeClusterNodesRequest {
     Offset?: number;
     /**
      * 每页返回数量，默认值为100，最大值为100。
+  如果offset和limit都不填，或者都填0，则返回全部数据
      */
     Limit?: number;
     /**
@@ -4000,7 +4002,7 @@ export interface DescribeInstancesRequest {
      */
     Offset?: number;
     /**
-     * 每页返回数量，默认值为10，最大值为100。
+     * 每页返回数量，默认值为100，最大值为100。
      */
     Limit?: number;
     /**
@@ -4107,7 +4109,8 @@ export interface DescribeInstancesListRequest {
      */
     Offset?: number;
     /**
-     * 每页返回数量，默认值为10，最大值为100。
+     * 每页返回数量，默认值为100，最大值为100。
+  如果limit和offset都为0，则查询全部记录；
      */
     Limit?: number;
     /**
@@ -4283,12 +4286,12 @@ export interface DescribeUsersForUserManagerResponse {
     /**
      * 总数
      */
-    TotalCnt: number;
+    TotalCnt?: number;
     /**
      * 用户信息列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    UserManagerUserList: Array<UserManagerUserBriefInfo>;
+    UserManagerUserList?: Array<UserManagerUserBriefInfo>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -5069,23 +5072,23 @@ export interface DescribeEmrApplicationStaticsResponse {
     /**
      * 作业统计信息
      */
-    Statics: Array<ApplicationStatics>;
+    Statics?: Array<ApplicationStatics>;
     /**
      * 总数
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 可选择的队列名
      */
-    Queues: Array<string>;
+    Queues?: Array<string>;
     /**
      * 可选择的用户名
      */
-    Users: Array<string>;
+    Users?: Array<string>;
     /**
      * 可选择的作业类型
      */
-    ApplicationTypes: Array<string>;
+    ApplicationTypes?: Array<string>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */

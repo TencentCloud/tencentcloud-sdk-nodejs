@@ -29,7 +29,7 @@ import {
   DescribeCloudNativeAPIGatewayServiceRateLimitRequest,
   CreateCloudNativeAPIGatewayRequest,
   CloudNativeAPIGatewayStrategyCronScalerConfig,
-  DescribeCloudNativeAPIGatewayNodesRequest,
+  CloudNativeAPIGatewayStrategyBindingGroupInfo,
   ModifyCloudNativeAPIGatewayRouteRequest,
   DescribeCloudNativeAPIGatewayUpstreamRequest,
   DeleteNativeGatewayServerGroupResponse,
@@ -38,26 +38,29 @@ import {
   DescribeSREInstanceAccessAddressResponse,
   ModifyCloudNativeAPIGatewayCanaryRuleResponse,
   CloudNativeAPIGatewayNodeConfig,
-  DescribeUpstreamHealthCheckConfigRequest,
+  CreateCloudNativeAPIGatewayCertificateRequest,
   CreateNativeGatewayServerGroupRequest,
   DescribeCloudNativeAPIGatewayCertificatesRequest,
+  QpsThreshold,
   ModifyCloudNativeAPIGatewayRouteRateLimitRequest,
   DeleteCloudNativeAPIGatewayResult,
-  QpsThreshold,
+  ListCloudNativeAPIGatewayStrategyResult,
   ModifyCloudNativeAPIGatewayResponse,
   CloseWafProtectionRequest,
   ModifyCloudNativeAPIGatewayServiceResponse,
   DescribeCloudNativeAPIGatewayNodesResponse,
+  NacosServerInterface,
   CreateCloudNativeAPIGatewayResponse,
   DescribeUpstreamHealthCheckConfigResponse,
-  OpenWafProtectionResponse,
+  NetworkAccessControl,
   KongActiveHealthCheck,
+  DescribePublicNetworkResult,
   DeleteCloudNativeAPIGatewayCertificateResponse,
   DeleteCloudNativeAPIGatewayCanaryRuleRequest,
   GatewayInstanceSchemeAndPorts,
   CreatePublicNetworkResult,
   UpstreamHealthCheckConfig,
-  NacosServerInterface,
+  DescribeAutoScalerResourceStrategyBindingGroupsResponse,
   DescribeNacosReplicasRequest,
   CreateCloudNativeAPIGatewayServiceRequest,
   CloudNativeAPIGatewayBalancedService,
@@ -69,11 +72,12 @@ import {
   SREInstance,
   CreateWafDomainsResponse,
   DescribeCloudNativeAPIGatewayServicesRequest,
+  UnbindAutoScalerResourceStrategyFromGroupsResponse,
   DescribeCloudNativeAPIGatewayUpstreamResponse,
-  DescribeCloudNativeAPIGatewayCertificatesResponse,
+  DeleteAutoScalerResourceStrategyRequest,
   NacosReplica,
   KongUpstreamPreview,
-  UpdateEngineInternetAccessRequest,
+  DescribeCloudNativeAPIGatewayNodesRequest,
   CreateCloudNativeAPIGatewayCanaryRuleResponse,
   DescribeSREInstancesRequest,
   CreateGatewayServiceResult,
@@ -87,7 +91,8 @@ import {
   UpdateUpstreamTargetsRequest,
   DeleteCloudNativeAPIGatewayServiceResponse,
   DescribeWafDomainsResult,
-  InstancePort,
+  BindAutoScalerResourceStrategyToGroupsResponse,
+  DescribeAutoScalerResourceStrategiesResponse,
   DescribeCloudNativeAPIGatewayResult,
   ModifyNetworkAccessStrategyRequest,
   DeleteCloudNativeAPIGatewayRouteResponse,
@@ -100,7 +105,7 @@ import {
   DescribeNacosReplicasResponse,
   DeleteCloudNativeAPIGatewayServiceRateLimitRequest,
   KongPassiveHealthCheck,
-  InstanceTagInfo,
+  DescribeCloudNativeAPIGatewayRequest,
   CloudNativeAPIGatewayVpcConfig,
   CloudAPIGatewayCanaryRuleList,
   ModifyUpstreamNodeStatusRequest,
@@ -111,25 +116,29 @@ import {
   CreateCloudNativeAPIGatewayRouteResponse,
   DescribeCloudNativeAPIGatewayConfigRequest,
   KongTarget,
+  UpdateEngineInternetAccessResponse,
   DescribeCloudNativeAPIGatewaysRequest,
   AutoScalerPolicy,
   DescribeNacosServerInterfacesResponse,
   DescribeCloudNativeAPIGatewayConfigResult,
   KVMapping,
+  BindAutoScalerResourceStrategyToGroupsRequest,
   RateLimitResponse,
   DescribeCloudNativeAPIGatewayServiceRateLimitResponse,
   DeleteCloudNativeAPIGatewayServiceRequest,
+  ModifyAutoScalerResourceStrategyResponse,
   CreateCloudNativeAPIGatewayCertificateResponse,
   StorageOption,
   EnvInfo,
   CreateCloudNativeAPIGatewayCanaryRuleRequest,
+  DescribePublicNetworkResponse,
   ModifyNativeGatewayServerGroupRequest,
   DescribeCloudNativeAPIGatewayRouteRateLimitRequest,
   DescribeOneCloudNativeAPIGatewayServiceRequest,
   DescribeInstanceRegionInfo,
   CloudNativeAPIGatewayStrategy,
   DescribeCloudNativeAPIGatewaysResponse,
-  UpdateEngineInternetAccessResponse,
+  KongServiceRouteList,
   UpdateCloudNativeAPIGatewaySpecRequest,
   DescribeCloudNativeAPIGatewayServicesResponse,
   DeleteCloudNativeAPIGatewayRouteRateLimitRequest,
@@ -139,8 +148,9 @@ import {
   CreateCloudNativeAPIGatewayPublicNetworkResponse,
   DescribeWafDomainsResponse,
   ModifyNetworkBasicInfoRequest,
-  ModifyCloudNativeAPIGatewayServiceRateLimitRequest,
+  DescribeUpstreamHealthCheckConfigRequest,
   DescribeSREInstanceAccessAddressRequest,
+  DeleteAutoScalerResourceStrategyResponse,
   DescribeCloudNativeAPIGatewayCanaryRulesResponse,
   UpdateUpstreamTargetsResponse,
   DeleteCloudNativeAPIGatewayCertificateRequest,
@@ -154,40 +164,48 @@ import {
   CloudNativeAPIGatewayConfig,
   DescribeZookeeperServerInterfacesResponse,
   ModifyNetworkAccessStrategyResponse,
+  ModifyAutoScalerResourceStrategyRequest,
   DescribeNativeGatewayServerGroupsRequest,
   CertificateInfo,
   DescribeGatewayInstancePortResult,
+  UnbindAutoScalerResourceStrategyFromGroupsRequest,
+  DescribePublicNetworkRequest,
   DeleteCloudNativeAPIGatewayRequest,
-  DescribeCloudNativeAPIGatewayCertificateDetailsResponse,
+  DeleteCloudNativeAPIGatewayPublicNetworkRequest,
   UpdateCloudNativeAPIGatewayCertificateInfoRequest,
   KongUpstreamList,
+  OpenWafProtectionResponse,
   EngineAdmin,
   PolarisLimiterAddress,
   DescribeOneCloudNativeAPIGatewayServiceResponse,
   ModifyCloudNativeAPIGatewayServiceRequest,
   DeleteCloudNativeAPIGatewayResponse,
   KongServices,
-  CreateCloudNativeAPIGatewayCertificateRequest,
+  DescribeAutoScalerResourceStrategyBindingGroupsRequest,
   DescribeWafDomainsRequest,
   DescribeWafProtectionRequest,
   ModifyUpstreamNodeStatusResponse,
-  NetworkAccessControl,
+  DescribeAutoScalerResourceStrategiesRequest,
   CreateCloudNativeAPIGatewayPublicNetworkRequest,
   DescribeCloudNativeAPIGatewayRouteRateLimitResponse,
   UpdateCloudNativeAPIGatewayResult,
-  DescribeCloudNativeAPIGatewayRequest,
+  DescribeCloudNativeAPIGatewayCertificateDetailsResponse,
   DescribeNativeGatewayServerGroupsResponse,
-  RouteWafStatus,
+  InstancePort,
   CloudNativeAPIGatewayStrategyCronScalerConfigParam,
   OpenWafProtectionRequest,
-  DeleteCloudNativeAPIGatewayPublicNetworkRequest,
-  DeleteCloudNativeAPIGatewayRouteRequest,
+  DescribeCloudNativeAPIGatewayCertificatesResponse,
+  CreateCloudNativeAPIGatewayServiceRateLimitResponse,
+  ModifyNativeGatewayServerGroupResponse,
+  CreateAutoScalerResourceStrategyRequest,
   InternetConfig,
   DescribeCloudNativeAPIGatewayRoutesRequest,
   CreateEngineResponse,
-  CreateCloudNativeAPIGatewayServiceRateLimitResponse,
+  ModifyCloudNativeAPIGatewayServiceRateLimitRequest,
+  DeleteCloudNativeAPIGatewayRouteRequest,
   DescribeCloudNativeAPIGatewayNodesResult,
   CloudNativeAPIGatewayCanaryRule,
+  ListCloudNativeAPIGatewayStrategyBindingGroupInfoResult,
   ModifyCloudNativeAPIGatewayServiceRateLimitResponse,
   CloudNativeAPIGatewayStrategyAutoScalerConfig,
   ZookeeperReplica,
@@ -199,6 +217,7 @@ import {
   CreateCloudNativeAPIGatewayServerGroupResult,
   BoundK8SInfo,
   DescribeCloudNativeAPIGatewayCertificateDetailsRequest,
+  RouteWafStatus,
   AutoScalerRules,
   CreateWafDomainsRequest,
   KongUpstreamInfo,
@@ -212,7 +231,7 @@ import {
   CreateEngineRequest,
   ModifyCloudNativeAPIGatewayCanaryRuleRequest,
   VpcInfo,
-  KongServiceRouteList,
+  CreateAutoScalerResourceStrategyResponse,
   ModifyConsoleNetworkResponse,
   DeleteWafDomainsResponse,
   CreateCloudNativeAPIGatewayResult,
@@ -222,8 +241,9 @@ import {
   Filter,
   DescribeCloudNativeAPIGatewayCanaryRulesRequest,
   DeleteCloudNativeAPIGatewayCanaryRuleResponse,
+  UpdateEngineInternetAccessRequest,
   DescribeCloudNativeAPIGatewayPortsRequest,
-  ModifyNativeGatewayServerGroupResponse,
+  InstanceTagInfo,
   EngineRegionInfo,
   UpdateCloudNativeAPIGatewayCertificateInfoResponse,
   ModifyNetworkBasicInfoResponse,
@@ -251,13 +271,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建公网网络配置
+   * 删除引擎实例
    */
-  async CreateCloudNativeAPIGatewayPublicNetwork(
-    req: CreateCloudNativeAPIGatewayPublicNetworkRequest,
-    cb?: (error: string, rep: CreateCloudNativeAPIGatewayPublicNetworkResponse) => void
-  ): Promise<CreateCloudNativeAPIGatewayPublicNetworkResponse> {
-    return this.request("CreateCloudNativeAPIGatewayPublicNetwork", req, cb)
+  async DeleteEngine(
+    req: DeleteEngineRequest,
+    cb?: (error: string, rep: DeleteEngineResponse) => void
+  ): Promise<DeleteEngineResponse> {
+    return this.request("DeleteEngine", req, cb)
   }
 
   /**
@@ -281,13 +301,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改云原生API网关实例分组基础信息
+   * 修改云原生网关的灰度规则
    */
-  async ModifyNativeGatewayServerGroup(
-    req: ModifyNativeGatewayServerGroupRequest,
-    cb?: (error: string, rep: ModifyNativeGatewayServerGroupResponse) => void
-  ): Promise<ModifyNativeGatewayServerGroupResponse> {
-    return this.request("ModifyNativeGatewayServerGroup", req, cb)
+  async ModifyCloudNativeAPIGatewayCanaryRule(
+    req: ModifyCloudNativeAPIGatewayCanaryRuleRequest,
+    cb?: (error: string, rep: ModifyCloudNativeAPIGatewayCanaryRuleResponse) => void
+  ): Promise<ModifyCloudNativeAPIGatewayCanaryRuleResponse> {
+    return this.request("ModifyCloudNativeAPIGatewayCanaryRule", req, cb)
   }
 
   /**
@@ -381,23 +401,33 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改云原生网关的灰度规则
+   * 修改云原生API网关实例基础信息
    */
-  async ModifyCloudNativeAPIGatewayCanaryRule(
-    req: ModifyCloudNativeAPIGatewayCanaryRuleRequest,
-    cb?: (error: string, rep: ModifyCloudNativeAPIGatewayCanaryRuleResponse) => void
-  ): Promise<ModifyCloudNativeAPIGatewayCanaryRuleResponse> {
-    return this.request("ModifyCloudNativeAPIGatewayCanaryRule", req, cb)
+  async ModifyCloudNativeAPIGateway(
+    req: ModifyCloudNativeAPIGatewayRequest,
+    cb?: (error: string, rep: ModifyCloudNativeAPIGatewayResponse) => void
+  ): Promise<ModifyCloudNativeAPIGatewayResponse> {
+    return this.request("ModifyCloudNativeAPIGateway", req, cb)
   }
 
   /**
-   * 删除公网网络配置
+   * 弹性伸缩策略批量解绑网关分组
    */
-  async DeleteCloudNativeAPIGatewayPublicNetwork(
-    req: DeleteCloudNativeAPIGatewayPublicNetworkRequest,
-    cb?: (error: string, rep: DeleteCloudNativeAPIGatewayPublicNetworkResponse) => void
-  ): Promise<DeleteCloudNativeAPIGatewayPublicNetworkResponse> {
-    return this.request("DeleteCloudNativeAPIGatewayPublicNetwork", req, cb)
+  async UnbindAutoScalerResourceStrategyFromGroups(
+    req: UnbindAutoScalerResourceStrategyFromGroupsRequest,
+    cb?: (error: string, rep: UnbindAutoScalerResourceStrategyFromGroupsResponse) => void
+  ): Promise<UnbindAutoScalerResourceStrategyFromGroupsResponse> {
+    return this.request("UnbindAutoScalerResourceStrategyFromGroups", req, cb)
+  }
+
+  /**
+   * 弹性伸缩策略批量绑定网关分组
+   */
+  async BindAutoScalerResourceStrategyToGroups(
+    req: BindAutoScalerResourceStrategyToGroupsRequest,
+    cb?: (error: string, rep: BindAutoScalerResourceStrategyToGroupsResponse) => void
+  ): Promise<BindAutoScalerResourceStrategyToGroupsResponse> {
+    return this.request("BindAutoScalerResourceStrategyToGroups", req, cb)
   }
 
   /**
@@ -411,6 +441,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 删除公网网络配置
+   */
+  async DeleteCloudNativeAPIGatewayPublicNetwork(
+    req: DeleteCloudNativeAPIGatewayPublicNetworkRequest,
+    cb?: (error: string, rep: DeleteCloudNativeAPIGatewayPublicNetworkResponse) => void
+  ): Promise<DeleteCloudNativeAPIGatewayPublicNetworkResponse> {
+    return this.request("DeleteCloudNativeAPIGatewayPublicNetwork", req, cb)
+  }
+
+  /**
    * 删除云原生网关服务
    */
   async DeleteCloudNativeAPIGatewayService(
@@ -418,6 +458,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteCloudNativeAPIGatewayServiceResponse) => void
   ): Promise<DeleteCloudNativeAPIGatewayServiceResponse> {
     return this.request("DeleteCloudNativeAPIGatewayService", req, cb)
+  }
+
+  /**
+   * 更新云原生网关健康检查配置
+   */
+  async UpdateUpstreamHealthCheckConfig(
+    req: UpdateUpstreamHealthCheckConfigRequest,
+    cb?: (error: string, rep: UpdateUpstreamHealthCheckConfigResponse) => void
+  ): Promise<UpdateUpstreamHealthCheckConfigResponse> {
+    return this.request("UpdateUpstreamHealthCheckConfig", req, cb)
   }
 
   /**
@@ -471,13 +521,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除引擎实例
+   * 创建公网网络配置
    */
-  async DeleteEngine(
-    req: DeleteEngineRequest,
-    cb?: (error: string, rep: DeleteEngineResponse) => void
-  ): Promise<DeleteEngineResponse> {
-    return this.request("DeleteEngine", req, cb)
+  async CreateCloudNativeAPIGatewayPublicNetwork(
+    req: CreateCloudNativeAPIGatewayPublicNetworkRequest,
+    cb?: (error: string, rep: CreateCloudNativeAPIGatewayPublicNetworkResponse) => void
+  ): Promise<CreateCloudNativeAPIGatewayPublicNetworkResponse> {
+    return this.request("CreateCloudNativeAPIGatewayPublicNetwork", req, cb)
+  }
+
+  /**
+   * 更新弹性伸缩策略
+   */
+  async ModifyAutoScalerResourceStrategy(
+    req: ModifyAutoScalerResourceStrategyRequest,
+    cb?: (error: string, rep: ModifyAutoScalerResourceStrategyResponse) => void
+  ): Promise<ModifyAutoScalerResourceStrategyResponse> {
+    return this.request("ModifyAutoScalerResourceStrategy", req, cb)
   }
 
   /**
@@ -541,6 +601,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 修改云原生API网关实例分组基础信息
+   */
+  async ModifyNativeGatewayServerGroup(
+    req: ModifyNativeGatewayServerGroupRequest,
+    cb?: (error: string, rep: ModifyNativeGatewayServerGroupResponse) => void
+  ): Promise<ModifyNativeGatewayServerGroupResponse> {
+    return this.request("ModifyNativeGatewayServerGroup", req, cb)
+  }
+
+  /**
    * 查询nacos服务接口列表
    */
   async DescribeNacosServerInterfaces(
@@ -548,6 +618,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeNacosServerInterfacesResponse) => void
   ): Promise<DescribeNacosServerInterfacesResponse> {
     return this.request("DescribeNacosServerInterfaces", req, cb)
+  }
+
+  /**
+   * 查看弹性伸缩策略绑定的网关分组
+   */
+  async DescribeAutoScalerResourceStrategyBindingGroups(
+    req: DescribeAutoScalerResourceStrategyBindingGroupsRequest,
+    cb?: (error: string, rep: DescribeAutoScalerResourceStrategyBindingGroupsResponse) => void
+  ): Promise<DescribeAutoScalerResourceStrategyBindingGroupsResponse> {
+    return this.request("DescribeAutoScalerResourceStrategyBindingGroups", req, cb)
   }
 
   /**
@@ -701,13 +781,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改云原生API网关实例基础信息
+   * 查看弹性伸缩策略列表
    */
-  async ModifyCloudNativeAPIGateway(
-    req: ModifyCloudNativeAPIGatewayRequest,
-    cb?: (error: string, rep: ModifyCloudNativeAPIGatewayResponse) => void
-  ): Promise<ModifyCloudNativeAPIGatewayResponse> {
-    return this.request("ModifyCloudNativeAPIGateway", req, cb)
+  async DescribeAutoScalerResourceStrategies(
+    req: DescribeAutoScalerResourceStrategiesRequest,
+    cb?: (error: string, rep: DescribeAutoScalerResourceStrategiesResponse) => void
+  ): Promise<DescribeAutoScalerResourceStrategiesResponse> {
+    return this.request("DescribeAutoScalerResourceStrategies", req, cb)
   }
 
   /**
@@ -748,6 +828,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyNetworkAccessStrategyResponse) => void
   ): Promise<ModifyNetworkAccessStrategyResponse> {
     return this.request("ModifyNetworkAccessStrategy", req, cb)
+  }
+
+  /**
+   * 查询云原生API网关实例公网详情
+   */
+  async DescribePublicNetwork(
+    req: DescribePublicNetworkRequest,
+    cb?: (error: string, rep: DescribePublicNetworkResponse) => void
+  ): Promise<DescribePublicNetworkResponse> {
+    return this.request("DescribePublicNetwork", req, cb)
   }
 
   /**
@@ -801,6 +891,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 创建弹性伸缩策略
+   */
+  async CreateAutoScalerResourceStrategy(
+    req: CreateAutoScalerResourceStrategyRequest,
+    cb?: (error: string, rep: CreateAutoScalerResourceStrategyResponse) => void
+  ): Promise<CreateAutoScalerResourceStrategyResponse> {
+    return this.request("CreateAutoScalerResourceStrategy", req, cb)
+  }
+
+  /**
    * 创建云原生网关限流插件(路由)
    */
   async CreateCloudNativeAPIGatewayRouteRateLimit(
@@ -831,13 +931,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 更新云原生网关健康检查配置
+   * 删除弹性伸缩策略
    */
-  async UpdateUpstreamHealthCheckConfig(
-    req: UpdateUpstreamHealthCheckConfigRequest,
-    cb?: (error: string, rep: UpdateUpstreamHealthCheckConfigResponse) => void
-  ): Promise<UpdateUpstreamHealthCheckConfigResponse> {
-    return this.request("UpdateUpstreamHealthCheckConfig", req, cb)
+  async DeleteAutoScalerResourceStrategy(
+    req: DeleteAutoScalerResourceStrategyRequest,
+    cb?: (error: string, rep: DeleteAutoScalerResourceStrategyResponse) => void
+  ): Promise<DeleteAutoScalerResourceStrategyResponse> {
+    return this.request("DeleteAutoScalerResourceStrategy", req, cb)
   }
 
   /**
