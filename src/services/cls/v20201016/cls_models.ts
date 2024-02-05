@@ -4430,7 +4430,7 @@ export interface ModifyIndexResponse {
 }
 
 /**
- * 日志主题信息
+ * 主题基本信息
  */
 export interface TopicInfo {
   /**
@@ -4438,11 +4438,11 @@ export interface TopicInfo {
    */
   LogsetId?: string
   /**
-   * 日志主题ID
+   * 主题ID
    */
   TopicId?: string
   /**
-   * 日志主题名称
+   * 主题名称
    */
   TopicName?: string
   /**
@@ -4450,11 +4450,11 @@ export interface TopicInfo {
    */
   PartitionCount?: number
   /**
-   * 是否开启索引
+   * 主题是否开启索引（主题类型需为日志主题）
    */
   Index?: boolean
   /**
-   * 云产品标识，日志主题由其它云产品创建时，该字段会显示云产品名称，例如CDN、TKE
+   * 云产品标识，主题由其它云产品创建时，该字段会显示云产品名称，例如CDN、TKE
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AssumerName?: string
@@ -4463,11 +4463,11 @@ export interface TopicInfo {
    */
   CreateTime?: string
   /**
-   * 日主主题是否开启采集
+   * 主题是否开启采集
    */
   Status?: boolean
   /**
-   * 日志主题绑定的标签信息
+   * 主题绑定的标签信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Tags?: Array<Tag>
@@ -4482,7 +4482,7 @@ export interface TopicInfo {
    */
   MaxSplitPartitions?: number
   /**
-   * 日主题的存储类型
+   * 主题的存储类型
 注意：此字段可能返回 null，表示取不到有效值。
    */
   StorageType?: string
@@ -4497,13 +4497,13 @@ export interface TopicInfo {
    */
   SubAssumerName?: string
   /**
-   * 日志主题描述
+   * 主题描述
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Describes?: string
   /**
-   * 开启日志沉降，热存储的生命周期， hotPeriod < Period。
-热存储为 hotPeriod, 冷存储则为 Period-hotPeriod。
+   * 开启日志沉降，标准存储的生命周期， hotPeriod < Period。
+标准存储为 hotPeriod, 低频存储则为 Period-hotPeriod。（主题类型需为日志主题）
 注意：此字段可能返回 null，表示取不到有效值。
    */
   HotPeriod?: number
@@ -4708,6 +4708,11 @@ export interface LogContextInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IndexStatus?: string
+  /**
+   * 日志内容的高亮描述信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HighLights?: Array<HighLightItem>
 }
 
 /**
@@ -6858,6 +6863,20 @@ export interface ConsumerContent {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TimestampAccuracy?: number
+}
+
+/**
+ * 日志内容高亮描述信息
+ */
+export interface HighLightItem {
+  /**
+   * 高亮的日志Key
+   */
+  Key: string
+  /**
+   * 高亮的语法
+   */
+  Values: Array<string>
 }
 
 /**

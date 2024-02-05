@@ -18,15 +18,20 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  ManagePortraitRiskOutput,
   InputBusinessEncryptData,
   RecognizeCustomizedAudienceRequest,
+  RecognizePreciseTargetAudienceRequest,
+  ManagePortraitRiskResponse,
   RecognizeTargetAudienceResponse,
+  ManagePortraitRiskValueOutput,
   OutputRecognizeTargetAudienceValue,
   OutputRecognizeTargetAudience,
   RecognizeCustomizedAudienceResponse,
   InputRecognizeTargetAudience,
   Device,
-  RecognizePreciseTargetAudienceRequest,
+  ManagePortraitRiskInput,
+  ManagePortraitRiskRequest,
   RecognizeTargetAudienceRequest,
   RecognizePreciseTargetAudienceResponse,
 } from "./taf_models"
@@ -48,6 +53,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: RecognizeCustomizedAudienceResponse) => void
   ): Promise<RecognizeCustomizedAudienceResponse> {
     return this.request("RecognizeCustomizedAudience", req, cb)
+  }
+
+  /**
+   * 虚假流量识别
+   */
+  async ManagePortraitRisk(
+    req: ManagePortraitRiskRequest,
+    cb?: (error: string, rep: ManagePortraitRiskResponse) => void
+  ): Promise<ManagePortraitRiskResponse> {
+    return this.request("ManagePortraitRisk", req, cb)
   }
 
   /**

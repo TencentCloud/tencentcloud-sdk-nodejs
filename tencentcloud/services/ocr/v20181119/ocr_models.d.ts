@@ -3238,7 +3238,7 @@ export interface VatInvoiceVerifyNewRequest {
      */
     InvoiceKind?: string;
     /**
-     * 校验码后 6 位，增值税普通发票、增值税电子普通发票、增值税普通发票(卷式)、增值税电子普通发票(通行费)时必填;
+     * 校验码后 6 位，增值税普通发票、增值税电子普通发票、增值税普通发票(卷式)、增值税电子普通发票(通行费)、全电纸质发票（增值税普通发票）时必填;
   区块链为 5 位
      */
     CheckCode?: string;
