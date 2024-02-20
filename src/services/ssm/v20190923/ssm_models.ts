@@ -394,78 +394,79 @@ export interface SecretMetadata {
   /**
    * 凭据名称
    */
-  SecretName: string
+  SecretName?: string
   /**
    * 凭据的描述信息
    */
-  Description: string
+  Description?: string
   /**
    * 用于加密凭据的KMS KeyId
    */
-  KmsKeyId: string
+  KmsKeyId?: string
   /**
    * 创建者UIN
    */
-  CreateUin: number
+  CreateUin?: number
   /**
    * 凭据状态：Enabled、Disabled、PendingDelete、Creating、Failed
    */
-  Status: string
+  Status?: string
   /**
    * 凭据删除日期，对于status为PendingDelete 的有效，unix时间戳
    */
-  DeleteTime: number
+  DeleteTime?: number
   /**
    * 凭据创建时间，unix时间戳
    */
-  CreateTime: number
+  CreateTime?: number
   /**
    * 用于加密凭据的KMS CMK类型，DEFAULT 表示SecretsManager 创建的默认密钥， CUSTOMER 表示用户指定的密钥
    */
-  KmsKeyType: string
+  KmsKeyType?: string
   /**
    * 1:--开启轮转；0--禁止轮转
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RotationStatus: number
+  RotationStatus?: number
   /**
    * 下一次轮转开始时间，uinx 时间戳
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  NextRotationTime: number
+  NextRotationTime?: number
   /**
    * 0 -- 用户自定义凭据；
 1 -- 云产品凭据；
 2 -- SSH密钥对凭据；
 3 -- 云API密钥对凭据；
+4 -- Redis类型凭据；
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SecretType: number
+  SecretType?: number
   /**
    * 云产品名称，仅在SecretType为1，即凭据类型为云产品凭据时生效
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ProductName: string
+  ProductName?: string
   /**
    * 当凭据类型为SSH密钥对凭据时，此字段有效，用于表示SSH密钥对凭据的名称。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ResourceName: string
+  ResourceName?: string
   /**
    * 当凭据类型为SSH密钥对凭据时，此字段有效，用于表示SSH密钥对所属的项目ID。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ProjectID: number
+  ProjectID?: number
   /**
    * 当凭据类型为SSH密钥对凭据时，此字段有效，用于表示SSH密钥对所关联的CVM实例ID。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  AssociatedInstanceIDs: Array<string>
+  AssociatedInstanceIDs?: Array<string>
   /**
    * 当凭据类型为云API密钥对凭据时，此字段有效，用于表示云API密钥对所属的用户UIN。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TargetUin: number
+  TargetUin?: number
   /**
    * 轮转的频率，以天作为单位，在轮转开启状态下生效。
 注意：此字段可能返回 null，表示取不到有效值。

@@ -434,6 +434,10 @@ export interface ScaleOutClusterRequest {
      * 子网，默认是集群创建时的子网
      */
     SubnetId?: string;
+    /**
+     * 扩容指定配置组
+     */
+    ScaleOutServiceConfGroupsInfo?: Array<ScaleOutServiceConfGroupsInfo>;
 }
 /**
  * 节点磁盘信息
@@ -2907,6 +2911,20 @@ export interface ModifyResourcesTagsResponse {
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * 扩容指定配置组
+ */
+export interface ScaleOutServiceConfGroupsInfo {
+    /**
+     * 组件版本名称 如 HDFS-2.8.5
+     */
+    ServiceComponentName?: string;
+    /**
+     * 配置组名 如hdfs-core-defaultGroup    ConfGroupName参数传入 代表配置组维度
+                                                               ConfGroupName参数不传 默认 代表集群维度
+     */
+    ConfGroupName?: string;
 }
 /**
  * DescribeClusterNodes返回参数结构体

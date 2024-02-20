@@ -8683,6 +8683,8 @@ export interface VatInvoice {
 102：通用机打电子发票
 61：电子发票（航空运输电子客票行程单）
 83：电子发票（铁路电子发票）
+0915：全电纸质（二手车统一销售发票）
+0903：全电纸质（机动车统一发票）
    */
   Type?: string
   /**
@@ -8908,6 +8910,14 @@ export interface RecognizeForeignPermanentResidentIdCardResponse {
    * 证件号码。
    */
   No?: string
+  /**
+   * 曾持证件号码。
+   */
+  PreviousNumber?: string
+  /**
+   * 签发机关。
+   */
+  IssuedAuthority?: string
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

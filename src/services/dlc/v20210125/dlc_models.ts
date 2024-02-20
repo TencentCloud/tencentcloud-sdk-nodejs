@@ -6329,7 +6329,7 @@ export interface DescribeTaskResultResponse {
    * 查询的任务信息，返回为空表示输入任务ID对应的任务不存在。只有当任务状态为成功（2）的时候，才会返回任务的结果。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TaskInfo: TaskResultInfo
+  TaskInfo?: TaskResultInfo
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6575,83 +6575,88 @@ export interface TaskResultInfo {
   /**
    * 任务唯一ID
    */
-  TaskId: string
+  TaskId?: string
   /**
    * 数据源名称，当前任务执行时候选中的默认数据源
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DatasourceConnectionName: string
+  DatasourceConnectionName?: string
   /**
    * 数据库名称，当前任务执行时候选中的默认数据库
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DatabaseName: string
+  DatabaseName?: string
   /**
    * 当前执行的SQL，一个任务包含一个SQL
    */
-  SQL: string
+  SQL?: string
   /**
    * 执行任务的类型，现在分为DDL、DML、DQL
    */
-  SQLType: string
+  SQLType?: string
   /**
    * 任务当前的状态，0：初始化 1：任务运行中 2：任务执行成功  3：数据写入中 4：排队中 -1：任务执行失败 -3：用户手动终止 。只有任务执行成功的情况下，才会返回任务执行的结果
    */
-  State: number
+  State?: number
   /**
    * 扫描的数据量，单位byte
    */
-  DataAmount: number
+  DataAmount?: number
   /**
    * 计算耗时，单位： ms
    */
-  UsedTime: number
+  UsedTime?: number
   /**
    * 任务结果输出的COS桶地址
    */
-  OutputPath: string
+  OutputPath?: string
   /**
    * 任务创建时间，时间戳
    */
-  CreateTime: string
+  CreateTime?: string
   /**
    * 任务执行信息，成功时返回success，失败时返回失败原因
    */
-  OutputMessage: string
+  OutputMessage?: string
   /**
    * 被影响的行数
    */
-  RowAffectInfo: string
+  RowAffectInfo?: string
   /**
    * 结果的schema信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ResultSchema: Array<Column>
+  ResultSchema?: Array<Column>
   /**
    * 结果信息，反转义后，外层数组的每个元素为一行数据
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ResultSet: string
+  ResultSet?: string
   /**
    * 分页信息，如果没有更多结果数据，nextToken为空
    */
-  NextToken: string
+  NextToken?: string
   /**
    * 任务执行进度num/100(%)
    */
-  Percentage: number
+  Percentage?: number
   /**
    * 任务进度明细
    */
-  ProgressDetail: string
+  ProgressDetail?: string
   /**
    * 控制台展示格式。table：表格展示 text：文本展示
    */
-  DisplayFormat: string
+  DisplayFormat?: string
   /**
    * 任务耗时，单位： ms
    */
-  TotalTime: number
+  TotalTime?: number
+  /**
+   * 获取结果消耗的时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  QueryResultTime?: number
 }
 
 /**

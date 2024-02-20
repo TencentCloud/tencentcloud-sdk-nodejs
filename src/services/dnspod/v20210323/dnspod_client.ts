@@ -581,7 +581,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取帐户信息
+   * 获取账户信息
    */
   async DescribeUserDetail(
     req?: DescribeUserDetailRequest,

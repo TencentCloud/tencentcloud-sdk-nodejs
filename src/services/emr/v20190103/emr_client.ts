@@ -87,6 +87,7 @@ import {
   PodNewParameter,
   DescribeInstanceRenewNodesResponse,
   ModifyResourcesTagsResponse,
+  ScaleOutServiceConfGroupsInfo,
   DescribeClusterNodesResponse,
   DescribeYarnApplicationsRequest,
   InquiryPriceUpdateInstanceResponse,

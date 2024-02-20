@@ -245,7 +245,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateDomainCustomLine", req, cb);
     }
     /**
-     * 获取帐户信息
+     * 获取账户信息
      */
     async DescribeUserDetail(req, cb) {
         return this.request("DescribeUserDetail", req, cb);

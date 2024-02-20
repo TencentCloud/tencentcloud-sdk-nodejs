@@ -37,6 +37,20 @@ export interface ModifyMaintainPeriodConfigRequest {
     MaintainWeekDays: Array<string>;
 }
 /**
+ * 实例参数修改任务详情
+ */
+export interface BizTaskModifyInstanceParam {
+    /**
+     * 实例ID
+     */
+    InstanceId?: string;
+    /**
+     * 实例参数修改任务详情
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ModifyInstanceParamList?: Array<ModifyParamItem>;
+}
+/**
  * ModifyClusterStorage请求参数结构体
  */
 export interface ModifyClusterStorageRequest {
@@ -1036,6 +1050,39 @@ export interface DescribeClusterDatabasesResponse {
     RequestId?: string;
 }
 /**
+ * 实例变配任务信息
+ */
+export interface ModifyInstanceData {
+    /**
+     * 变配后CPU
+     */
+    Cpu?: number;
+    /**
+     * 变配后内存
+     */
+    Memory?: number;
+    /**
+     * 变配后存储上限
+     */
+    StorageLimit?: number;
+    /**
+     * 变配前CPU
+     */
+    OldCpu?: number;
+    /**
+     * 变配前内存
+     */
+    OldMemory?: number;
+    /**
+     * 变配前存储上限
+     */
+    OldStorageLimit?: number;
+    /**
+     * 升级方式。升级完成后切换或维护时间内切换
+     */
+    UpgradeType?: string;
+}
+/**
  * DescribeInstanceParams请求参数结构体
  */
 export interface DescribeInstanceParamsRequest {
@@ -1880,6 +1927,23 @@ export interface DescribeAccountAllGrantPrivilegesRequest {
     Account: InputAccount;
 }
 /**
+ * 手动备份任务信息
+ */
+export interface ManualBackupData {
+    /**
+     * 备份类型。snapshot-快照备份
+     */
+    BackupType?: string;
+    /**
+     * 备份方式。auto-自动备份，manual-手动
+     */
+    BackupMethod?: string;
+    /**
+     * 备份时间
+     */
+    SnapshotTime?: string;
+}
+/**
  * DescribeBinlogs请求参数结构体
  */
 export interface DescribeBinlogsRequest {
@@ -2073,6 +2137,23 @@ export interface ModifyAuditRuleTemplatesRequest {
      * 告警策略。0-不告警，1-告警。
      */
     AlarmPolicy?: number;
+}
+/**
+ * 创建集群任务信息
+ */
+export interface CreateClustersData {
+    /**
+     * 实例CPU
+     */
+    Cpu?: number;
+    /**
+     * 实例内存
+     */
+    Memory?: number;
+    /**
+     * 集群存储上限
+     */
+    StorageLimit?: number;
 }
 /**
  * DescribeProxies请求参数结构体
@@ -2354,6 +2435,23 @@ export interface DescribeAccountAllGrantPrivilegesResponse {
     RequestId?: string;
 }
 /**
+ * 修改数据库内核版本任务信息
+ */
+export interface ModifyDbVersionData {
+    /**
+     * 修改前版本
+     */
+    OldVersion?: string;
+    /**
+     * 修改后版本
+     */
+    NewVersion?: string;
+    /**
+     * 升级方式
+     */
+    UpgradeType?: string;
+}
+/**
  * 数据库权限列表
  */
 export interface DatabasePrivileges {
@@ -2498,6 +2596,110 @@ export interface DescribeDBSecurityGroupsRequest {
      * 实例组ID
      */
     InstanceGroupId?: string;
+}
+/**
+ * 回档任务信息
+ */
+export interface RollbackData {
+    /**
+     * 实例CPU
+     */
+    Cpu?: number;
+    /**
+     * 实例内存
+     */
+    Memory?: number;
+    /**
+     * 集群存储上限
+     */
+    StorageLimit?: number;
+    /**
+     * 原集群id
+     */
+    OriginalClusterId?: string;
+    /**
+     * 原集群名
+     */
+    OriginalClusterName?: string;
+    /**
+     * 回档方式
+     */
+    RollbackStrategy?: string;
+    /**
+     * 快照时间
+     */
+    SnapshotTime?: string;
+    /**
+     * 回档到serverlessls集群时最小CPU
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MinCpu?: number;
+    /**
+     * 回档到serverlessls集群时最大CPU
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MaxCpu?: number;
+    /**
+     * 快照ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SnapShotId?: number;
+    /**
+     * 回档数据库
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RollbackDatabases?: Array<RollbackDatabase>;
+    /**
+     * 回档数据表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RollbackTables?: Array<RollbackTable>;
+    /**
+     * 备份文件名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    BackupFileName?: string;
+}
+/**
+ * UpgradeInstance请求参数结构体
+ */
+export interface UpgradeInstanceRequest {
+    /**
+     * 实例ID
+     */
+    InstanceId: string;
+    /**
+     * 数据库CPU
+     */
+    Cpu: number;
+    /**
+     * 数据库内存，单位GB
+     */
+    Memory: number;
+    /**
+     * 升级类型：upgradeImmediate，upgradeInMaintain
+     */
+    UpgradeType: string;
+    /**
+     * 该参数已废弃
+     */
+    StorageLimit?: number;
+    /**
+     * 是否自动选择代金券 1是 0否 默认为0
+     */
+    AutoVoucher?: number;
+    /**
+     * 该参数已废弃
+     */
+    DbType?: string;
+    /**
+     * 交易模式 0-下单并支付 1-下单
+     */
+    DealMode?: number;
+    /**
+     * NormalUpgrade：普通变配，FastUpgrade：极速变配，若变配过程判断会造成闪断，变配流程会终止。
+     */
+    UpgradeMode?: string;
 }
 /**
  * DescribeInstanceParams返回参数结构体
@@ -4109,6 +4311,25 @@ export interface CreateProxyResponse {
     RequestId?: string;
 }
 /**
+ * 修改参数任务数据
+ */
+export interface BizTaskModifyParamsData {
+    /**
+     * 集群ID
+     */
+    ClusterId?: string;
+    /**
+     * 集群参数修改数据
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ClusterParamList?: Array<ModifyParamItem>;
+    /**
+     * 实例参数修改数据
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ModifyInstanceParams?: Array<BizTaskModifyInstanceParam>;
+}
+/**
  * 实例初始化配置信息
  */
 export interface InstanceInitInfo {
@@ -5096,6 +5317,160 @@ export interface RollBackClusterRequest {
     RollbackMode?: string;
 }
 /**
+ * 任务信息
+ */
+export interface BizTaskInfo {
+    /**
+     * 任务id
+     */
+    ID?: number;
+    /**
+     * 用户appid
+     */
+    AppId?: number;
+    /**
+     * 集群id
+     */
+    ClusterId?: string;
+    /**
+     * 任务创建时间
+     */
+    CreateTime?: string;
+    /**
+     * 延迟执行时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DelayTime?: string;
+    /**
+     * 任务失败信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ErrMsg?: string;
+    /**
+     * 异步任务流id
+     */
+    FlowId?: number;
+    /**
+     * 任务输入信息
+     */
+    Input?: string;
+    /**
+     * 实例组id
+     * @deprecated
+     */
+    InstanceGrpId?: string;
+    /**
+     * 实例组id
+     */
+    InstanceGroupId?: string;
+    /**
+     * 实例id
+     */
+    InstanceId?: string;
+    /**
+     * 任务操作对象id
+     */
+    ObjectId?: string;
+    /**
+     * 任务操作对象类型
+     */
+    ObjectType?: string;
+    /**
+     * 操作者uin
+     */
+    Operator?: string;
+    /**
+     * 任务输出信息
+     */
+    Output?: string;
+    /**
+     * 任务状态
+     */
+    Status?: string;
+    /**
+     * 任务类型
+     */
+    TaskType?: string;
+    /**
+     * 触发本任务的父任务ID
+     */
+    TriggerTaskId?: number;
+    /**
+     * 更新时间
+     */
+    UpdateTime?: string;
+    /**
+     * 任务开始时间
+     */
+    StartTime?: string;
+    /**
+     * 任务结束时间
+     */
+    EndTime?: string;
+    /**
+     * 集群名称
+     */
+    ClusterName?: string;
+    /**
+     * 实例名称
+     */
+    InstanceName?: string;
+    /**
+     * 任务进度
+     */
+    Process?: number;
+    /**
+     * 修改参数任务信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ModifyParamsData?: Array<ModifyParamsData>;
+    /**
+     * 创建集群任务信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CreateClustersData?: CreateClustersData;
+    /**
+     * 集群回档任务信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RollbackData?: RollbackData;
+    /**
+     * 实例变配任务信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ModifyInstanceData?: ModifyInstanceData;
+    /**
+     * 手动备份任务信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ManualBackupData?: ManualBackupData;
+    /**
+     * 修改内核版本任务信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ModifyDbVersionData?: ModifyDbVersionData;
+    /**
+     * 集群可用区信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ClusterSlaveData?: ClusterSlaveData;
+    /**
+     * 转换集群日志
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SwitchClusterLogBin?: SwitchClusterLogBin;
+    /**
+     * 修改实例参数数据
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ModifyInstanceParamsData?: BizTaskModifyParamsData;
+    /**
+     * 维护时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TaskMaintainInfo?: TaskMaintainInfo;
+}
+/**
  * RemoveClusterSlaveZone返回参数结构体
  */
 export interface RemoveClusterSlaveZoneResponse {
@@ -5160,6 +5535,23 @@ export interface NewAccount {
     MaxUserConnections?: number;
 }
 /**
+ * 修改参数信息
+ */
+export interface ModifyParamsData {
+    /**
+     * 参数名
+     */
+    Name?: string;
+    /**
+     * 修改前参数值
+     */
+    OldValue?: string;
+    /**
+     * 修改后参数值
+     */
+    CurValue?: string;
+}
+/**
  * 资源包绑定的实例信息
  */
 export interface BindInstanceInfo {
@@ -5183,27 +5575,6 @@ export interface BindInstanceInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     ExtendIds?: Array<string>;
-}
-/**
- * DescribeAuditLogFiles请求参数结构体
- */
-export interface DescribeAuditLogFilesRequest {
-    /**
-     * 实例ID
-     */
-    InstanceId: string;
-    /**
-     * 分页大小参数。默认值为 20，最小值为 1，最大值为 100。
-     */
-    Limit?: number;
-    /**
-     * 分页偏移量。
-     */
-    Offset?: number;
-    /**
-     * 审计日志文件名。
-     */
-    FileName?: string;
 }
 /**
  * DescribeAuditRuleWithInstanceIds返回参数结构体
@@ -6824,6 +7195,31 @@ export interface ClusterInstanceDetail {
     ServerlessStatus?: string;
 }
 /**
+ * 集群从可用区信息
+ */
+export interface ClusterSlaveData {
+    /**
+     * 旧主可用区
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    OldMasterZone?: string;
+    /**
+     * 旧从可用区
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    OldSlaveZone?: Array<string>;
+    /**
+     * 新主可用区
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    NewMasterZone?: string;
+    /**
+     * 新从可用区
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    NewSlaveZone?: Array<string>;
+}
+/**
  * 数据库地址
  */
 export interface OldAddrInfo {
@@ -6842,6 +7238,23 @@ export interface OldAddrInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     ReturnTime?: string;
+}
+/**
+ * DescribeTasks返回参数结构体
+ */
+export interface DescribeTasksResponse {
+    /**
+     * 任务列表总条数
+     */
+    TotalCount?: number;
+    /**
+     * 任务列表
+     */
+    TaskList?: Array<BizTaskInfo>;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * OpenClusterPasswordComplexity请求参数结构体
@@ -6987,6 +7400,31 @@ export interface RollbackDatabase {
     NewDatabase: string;
 }
 /**
+ * DescribeTasks请求参数结构体
+ */
+export interface DescribeTasksRequest {
+    /**
+     * 任务开始时间起始值
+     */
+    StartTimeBegin?: string;
+    /**
+     * 任务开始时间结束值
+     */
+    StartTimeEnd?: string;
+    /**
+     * 过滤条件
+     */
+    Filters?: Array<QueryFilter>;
+    /**
+     * 查询列表长度
+     */
+    Limit?: number;
+    /**
+     * 查询列表偏移量
+     */
+    Offset?: number;
+}
+/**
  * ModifyClusterStorage返回参数结构体
  */
 export interface ModifyClusterStorageResponse {
@@ -7037,29 +7475,39 @@ export interface ModifyAccountParamsRequest {
     AccountParams: Array<AccountParam>;
 }
 /**
- * IsolateInstance请求参数结构体
+ * 审计日志文件
  */
-export interface IsolateInstanceRequest {
+export interface AuditLogFile {
     /**
-     * 集群ID
+     * 审计日志文件名称
      */
-    ClusterId: string;
+    FileName: string;
     /**
-     * 实例ID数组，例如["cynosdbbmysql-ins-asd","cynosdbmysql-ins-zxc"]
+     * 审计日志文件创建时间。格式为 : "2019-03-20 17:09:13"。
      */
-    InstanceIdList: Array<string>;
+    CreateTime: string;
     /**
-     * 该参数已废弃
+     * 文件状态值。可能返回的值为：
+  "creating" - 生成中;
+  "failed" - 创建失败;
+  "success" - 已生成;
      */
-    DbType?: string;
+    Status: string;
     /**
-     * 实例退还原因类型
+     * 文件大小，单位为 KB。
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    IsolateReasonTypes?: Array<number | bigint>;
+    FileSize: number;
     /**
-     * 实例退还原因补充
+     * 审计日志下载地址。
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    IsolateReason?: string;
+    DownloadUrl: string;
+    /**
+     * 错误信息。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ErrMsg: string;
 }
 /**
  * DescribeAuditRuleTemplates返回参数结构体
@@ -7334,6 +7782,16 @@ export interface DescribeBackupListRequest {
      * 是否跨地域备份
      */
     IsCrossRegionsBackup?: string;
+}
+/**
+ * 转换集群log bin开关
+ */
+export interface SwitchClusterLogBin {
+    /**
+     * 状态
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Status?: string;
 }
 /**
  * ExportInstanceErrorLogs返回参数结构体
@@ -8063,76 +8521,50 @@ export interface InstanceSpec {
     StockCount: number;
 }
 /**
- * 审计日志文件
+ * IsolateInstance请求参数结构体
  */
-export interface AuditLogFile {
+export interface IsolateInstanceRequest {
     /**
-     * 审计日志文件名称
+     * 集群ID
      */
-    FileName: string;
+    ClusterId: string;
     /**
-     * 审计日志文件创建时间。格式为 : "2019-03-20 17:09:13"。
+     * 实例ID数组，例如["cynosdbbmysql-ins-asd","cynosdbmysql-ins-zxc"]
      */
-    CreateTime: string;
+    InstanceIdList: Array<string>;
     /**
-     * 文件状态值。可能返回的值为：
-  "creating" - 生成中;
-  "failed" - 创建失败;
-  "success" - 已生成;
+     * 该参数已废弃
      */
-    Status: string;
+    DbType?: string;
     /**
-     * 文件大小，单位为 KB。
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 实例退还原因类型
      */
-    FileSize: number;
+    IsolateReasonTypes?: Array<number | bigint>;
     /**
-     * 审计日志下载地址。
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 实例退还原因补充
      */
-    DownloadUrl: string;
-    /**
-     * 错误信息。
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ErrMsg: string;
+    IsolateReason?: string;
 }
 /**
- * 安全组规则
+ * DescribeAuditLogFiles请求参数结构体
  */
-export interface PolicyRule {
+export interface DescribeAuditLogFilesRequest {
     /**
-     * 策略，ACCEPT或者DROP
+     * 实例ID
      */
-    Action?: string;
+    InstanceId: string;
     /**
-     * 来源Ip或Ip段，例如192.168.0.0/16
+     * 分页大小参数。默认值为 20，最小值为 1，最大值为 100。
      */
-    CidrIp?: string;
+    Limit?: number;
     /**
-     * 端口
+     * 分页偏移量。
      */
-    PortRange?: string;
+    Offset?: number;
     /**
-     * 网络协议，支持udp、tcp等
+     * 审计日志文件名。
      */
-    IpProtocol?: string;
-    /**
-     * 协议端口ID或者协议端口组ID。
-     */
-    ServiceModule?: string;
-    /**
-     * IP地址ID或者ID地址组ID。
-     */
-    AddressModule?: string;
-    /**
-     * id
-     */
-    Id?: string;
-    /**
-     * 描述
-     */
-    Desc?: string;
+    FileName?: string;
 }
 /**
  * 售卖地域信息
@@ -8345,6 +8777,26 @@ export interface ModifiableInfo {
     IsModifiable?: number;
 }
 /**
+ * TaskMaintainInfo
+ */
+export interface TaskMaintainInfo {
+    /**
+     * 执行开始时间(距离0点的秒数)
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MaintainStartTime?: number;
+    /**
+     * 持续的时间(单位：秒)
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MaintainDuration?: number;
+    /**
+     * 可以执行的时间，枚举值：["Mon","Tue","Wed","Thu","Fri", "Sat", "Sun"]
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MaintainWeekDays?: Array<string>;
+}
+/**
  * mysql表权限
  */
 export interface TablePrivileges {
@@ -8470,45 +8922,41 @@ export interface DeleteAuditRuleTemplatesResponse {
     RequestId?: string;
 }
 /**
- * UpgradeInstance请求参数结构体
+ * 安全组规则
  */
-export interface UpgradeInstanceRequest {
+export interface PolicyRule {
     /**
-     * 实例ID
+     * 策略，ACCEPT或者DROP
      */
-    InstanceId: string;
+    Action?: string;
     /**
-     * 数据库CPU
+     * 来源Ip或Ip段，例如192.168.0.0/16
      */
-    Cpu: number;
+    CidrIp?: string;
     /**
-     * 数据库内存，单位GB
+     * 端口
      */
-    Memory: number;
+    PortRange?: string;
     /**
-     * 升级类型：upgradeImmediate，upgradeInMaintain
+     * 网络协议，支持udp、tcp等
      */
-    UpgradeType: string;
+    IpProtocol?: string;
     /**
-     * 该参数已废弃
+     * 协议端口ID或者协议端口组ID。
      */
-    StorageLimit?: number;
+    ServiceModule?: string;
     /**
-     * 是否自动选择代金券 1是 0否 默认为0
+     * IP地址ID或者ID地址组ID。
      */
-    AutoVoucher?: number;
+    AddressModule?: string;
     /**
-     * 该参数已废弃
+     * id
      */
-    DbType?: string;
+    Id?: string;
     /**
-     * 交易模式 0-下单并支付 1-下单
+     * 描述
      */
-    DealMode?: number;
-    /**
-     * NormalUpgrade：普通变配，FastUpgrade：极速变配，若变配过程判断会造成闪断，变配流程会终止。
-     */
-    UpgradeMode?: string;
+    Desc?: string;
 }
 /**
  * 可用区库存信息

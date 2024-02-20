@@ -153,7 +153,7 @@ export declare class Client extends AbstractClient {
      */
     CreateDomainCustomLine(req: CreateDomainCustomLineRequest, cb?: (error: string, rep: CreateDomainCustomLineResponse) => void): Promise<CreateDomainCustomLineResponse>;
     /**
-     * 获取帐户信息
+     * 获取账户信息
      */
     DescribeUserDetail(req?: DescribeUserDetailRequest, cb?: (error: string, rep: DescribeUserDetailResponse) => void): Promise<DescribeUserDetailResponse>;
     /**

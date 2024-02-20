@@ -929,12 +929,12 @@ export interface Instance {
   /**
    * 实例ID。
    */
-  InstanceId: string
+  InstanceId?: string
   /**
    * 实例名称，如ens-34241f3s。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  InstanceName: string
+  InstanceName?: string
   /**
    * 实例状态。取值范围：
 PENDING：表示创建中
@@ -947,52 +947,52 @@ REBOOTING：表示重启中
 SHUTDOWN：表示停止待销毁
 TERMINATING：表示销毁中。
    */
-  InstanceState: string
+  InstanceState?: string
   /**
    * 实例当前使用的镜像的信息。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Image: Image
+  Image?: Image
   /**
    * 实例当前所属的模块简要信息。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SimpleModule: SimpleModule
+  SimpleModule?: SimpleModule
   /**
    * 实例所在的位置相关信息。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Position: Position
+  Position?: Position
   /**
    * 实例的网络相关信息。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Internet: Internet
+  Internet?: Internet
   /**
    * 实例的配置相关信息。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  InstanceTypeConfig: InstanceTypeConfig
+  InstanceTypeConfig?: InstanceTypeConfig
   /**
    * 实例的创建时间。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CreateTime: string
+  CreateTime?: string
   /**
    * 实例的标签信息。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TagSet: Array<Tag>
+  TagSet?: Array<Tag>
   /**
    * 实例最后一次操作。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  LatestOperation: string
+  LatestOperation?: string
   /**
    * 实例最后一次操作结果。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  LatestOperationState: string
+  LatestOperationState?: string
   /**
    * 实例业务状态。取值范围：
 NORMAL：表示正常状态的实例
@@ -1000,46 +1000,46 @@ EXPIRED：表示过期的实例
 PROTECTIVELY_ISOLATED：表示被安全隔离的实例。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RestrictState: string
+  RestrictState?: string
   /**
    * 系统盘大小，单位GB。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SystemDiskSize: number
+  SystemDiskSize?: number
   /**
    * 数据盘大小，单位GB。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DataDiskSize: number
+  DataDiskSize?: number
   /**
    * 实例UUID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  UUID: string
+  UUID?: string
   /**
    * 付费方式。
     0为后付费。
     1为预付费。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  PayMode: number
+  PayMode?: number
   /**
    * 过期时间。格式为yyyy-mm-dd HH:mm:ss。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ExpireTime: string
+  ExpireTime?: string
   /**
    * 隔离时间。格式为yyyy-mm-dd HH:mm:ss。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  IsolatedTime: string
+  IsolatedTime?: string
   /**
    * 是否自动续费。
       0为不自动续费。
       1为自动续费。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RenewFlag: number
+  RenewFlag?: number
   /**
    * 过期状态。
     NORMAL 表示机器运行正常。
@@ -1047,42 +1047,42 @@ PROTECTIVELY_ISOLATED：表示被安全隔离的实例。
     EXPIRED 表示已过期。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ExpireState: string
+  ExpireState?: string
   /**
    * 系统盘信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SystemDisk: DiskInfo
+  SystemDisk?: DiskInfo
   /**
    * 数据盘信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DataDisks: Array<DiskInfo>
+  DataDisks?: Array<DiskInfo>
   /**
    * 新实例标志
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  NewFlag: number
+  NewFlag?: number
   /**
    * 实例所属安全组。该参数可以通过调用 DescribeSecurityGroups 的返回值中的sgId字段来获取。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SecurityGroupIds: Array<string>
+  SecurityGroupIds?: Array<string>
   /**
    * VPC属性
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  VirtualPrivateCloud: VirtualPrivateCloud
+  VirtualPrivateCloud?: VirtualPrivateCloud
   /**
    * 实例运营商字段。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ISP: string
+  ISP?: string
   /**
    * 物理位置信息。注意该字段目前为保留字段，均为空值。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  PhysicalPosition: PhysicalPosition
+  PhysicalPosition?: PhysicalPosition
 }
 
 /**
@@ -2610,63 +2610,71 @@ export interface NetworkStorageRange {
   /**
    * 网络带宽上限
    */
-  MaxBandwidth: number
+  MaxBandwidth?: number
   /**
    * 数据盘上限
    */
-  MaxSystemDiskSize: number
+  MaxSystemDiskSize?: number
   /**
    * 网络带宽下限
    */
-  MinBandwidth: number
+  MinBandwidth?: number
   /**
    * 数据盘下限
    */
-  MinSystemDiskSize: number
+  MinSystemDiskSize?: number
   /**
    * 最大数据盘大小
    */
-  MaxDataDiskSize: number
+  MaxDataDiskSize?: number
   /**
    * 最小数据盘大小
    */
-  MinDataDiskSize: number
+  MinDataDiskSize?: number
   /**
    * 建议带宽
    */
-  SuggestBandwidth: number
+  SuggestBandwidth?: number
   /**
    * 建议硬盘大小
    */
-  SuggestDataDiskSize: number
+  SuggestDataDiskSize?: number
   /**
    * 建议系统盘大小
    */
-  SuggestSystemDiskSize: number
+  SuggestSystemDiskSize?: number
   /**
    * Cpu核数峰值
    */
-  MaxVcpu: number
+  MaxVcpu?: number
   /**
    * Cpu核最小值
    */
-  MinVcpu: number
+  MinVcpu?: number
   /**
    * 单次请求最大cpu核数
    */
-  MaxVcpuPerReq: number
+  MaxVcpuPerReq?: number
   /**
    * 带宽步长
    */
-  PerBandwidth: number
+  PerBandwidth?: number
   /**
    * 数据盘步长
    */
-  PerDataDisk: number
+  PerDataDisk?: number
   /**
    * 总模块数量
    */
-  MaxModuleNum: number
+  MaxModuleNum?: number
+  /**
+   * 是否支持cbs
+   */
+  CBSSupported?: boolean
+  /**
+   * 磁盘数量限制
+   */
+  DiskNumLimit?: number
 }
 
 /**
@@ -3795,71 +3803,71 @@ export interface Module {
   /**
    * 模块Id。
    */
-  ModuleId: string
+  ModuleId?: string
   /**
    * 模块名称。
    */
-  ModuleName: string
+  ModuleName?: string
   /**
    * 模块状态：
 NORMAL：正常。
 DELETING：删除中 
 DELETEFAILED：删除失败。
    */
-  ModuleState: string
+  ModuleState?: string
   /**
    * 默认系统盘大小。
    */
-  DefaultSystemDiskSize: number
+  DefaultSystemDiskSize?: number
   /**
    * 默认数据盘大小。
    */
-  DefaultDataDiskSize: number
+  DefaultDataDiskSize?: number
   /**
    * 默认机型。
    */
-  InstanceTypeConfig: InstanceTypeConfig
+  InstanceTypeConfig?: InstanceTypeConfig
   /**
    * 默认镜像。
    */
-  DefaultImage: Image
+  DefaultImage?: Image
   /**
    * 创建时间。
    */
-  CreateTime: string
+  CreateTime?: string
   /**
    * 默认出带宽。
    */
-  DefaultBandwidth: number
+  DefaultBandwidth?: number
   /**
    * 标签集合。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TagSet: Array<Tag>
+  TagSet?: Array<Tag>
   /**
    * 是否关闭IP直通。
    */
-  CloseIpDirect: number
+  CloseIpDirect?: number
   /**
    * 默认安全组id列表。
    */
-  SecurityGroupIds: Array<string>
+  SecurityGroupIds?: Array<string>
   /**
    * 默认入带宽。
    */
-  DefaultBandwidthIn: number
+  DefaultBandwidthIn?: number
   /**
    * 自定义脚本数据
    */
-  UserData: string
+  UserData?: string
   /**
    * 系统盘信息。
    */
-  SystemDisk: SystemDisk
+  SystemDisk?: SystemDisk
   /**
    * 数据盘信息。
    */
-  DataDisks: Array<DataDisk>
+  DataDisks?: Array<DataDisk>
   /**
    * 是否禁止外网ip
    */
@@ -4387,46 +4395,46 @@ export interface InstanceTypeConfig {
   /**
    * 机型族配置信息
    */
-  InstanceFamilyConfig: InstanceFamilyConfig
+  InstanceFamilyConfig?: InstanceFamilyConfig
   /**
    * 机型
    */
-  InstanceType: string
+  InstanceType?: string
   /**
    * CPU核数
    */
-  Vcpu: number
+  Vcpu?: number
   /**
    * 内存大小
    */
-  Memory: number
+  Memory?: number
   /**
    * 主频
    */
-  Frequency: string
+  Frequency?: string
   /**
    * 处理器型号
    */
-  CpuModelName: string
+  CpuModelName?: string
   /**
    * 机型族类别配置信息
    */
-  InstanceFamilyTypeConfig: InstanceFamilyTypeConfig
+  InstanceFamilyTypeConfig?: InstanceFamilyTypeConfig
   /**
    * 机型额外信息 是一个json字符串，如果存在则表示特殊机型，格式如下：{"dataDiskSize":3200,"systemDiskSize":60, "systemDiskSizeShow":"系统盘默认60G","dataDiskSizeShow":"本地NVMe SSD 硬盘3200 GB"}
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ExtInfo: string
+  ExtInfo?: string
   /**
    * GPU卡数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Vgpu: number
+  Vgpu?: number
   /**
    * GPU型号
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  GpuModelName: string
+  GpuModelName?: string
 }
 
 /**
@@ -5973,6 +5981,11 @@ FALSE：表示不用作公网网关
    * 为弹性网卡指定随机生成的 IPv6 地址数量。
    */
   Ipv6AddressCount?: number
+  /**
+   * runInstances接口创建三网ipv6地址使用
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Ipv6SubnetIds?: Array<string>
 }
 
 /**
@@ -6122,12 +6135,12 @@ export interface DescribeModuleResponse {
    * 符合条件的模块数量。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 模块详情信息的列表。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ModuleItemSet: Array<ModuleItem>
+  ModuleItemSet?: Array<ModuleItem>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6250,6 +6263,11 @@ export interface Position {
    * 实例所在的Region的信息。
    */
   RegionInfo: RegionInfo
+  /**
+   * 实例是否支持ipv6
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Ipv6Supported?: boolean
 }
 
 /**

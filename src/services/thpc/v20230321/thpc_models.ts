@@ -635,7 +635,7 @@ export interface DescribeQueuesResponse {
    */
   QueueSet?: Array<QueueOverview>
   /**
-   * 符合条件的节点数量。
+   * 符合条件的队列数量。
    */
   TotalCount?: number
   /**

@@ -20,6 +20,7 @@ import { ClientConfig } from "../../../common/interface"
 import {
   UpgradeProxyVersionResponse,
   ModifyMaintainPeriodConfigRequest,
+  BizTaskModifyInstanceParam,
   ModifyClusterStorageRequest,
   DescribeResourcePackageDetailResponse,
   SearchClusterTablesRequest,
@@ -53,6 +54,7 @@ import {
   DescribeClusterPasswordComplexityResponse,
   DescribeAuditRuleWithInstanceIdsRequest,
   DescribeClusterDatabasesResponse,
+  ModifyInstanceData,
   DescribeInstanceParamsRequest,
   ModifyBinlogSaveDaysRequest,
   ProxySpec,
@@ -91,12 +93,14 @@ import {
   DescribeClusterParamsRequest,
   ModifyAccountHostResponse,
   DescribeAccountAllGrantPrivilegesRequest,
+  ManualBackupData,
   DescribeBinlogsRequest,
   InstanceAuditLogFilter,
   ModifyProxyRwSplitRequest,
   DescribeResourcePackageListResponse,
   RuleFilters,
   ModifyAuditRuleTemplatesRequest,
+  CreateClustersData,
   DescribeProxiesRequest,
   ModifyParamItem,
   AssociateSecurityGroupsRequest,
@@ -113,6 +117,7 @@ import {
   DescribeClusterDetailDatabasesResponse,
   CreateParamTemplateResponse,
   DescribeAccountAllGrantPrivilegesResponse,
+  ModifyDbVersionData,
   DatabasePrivileges,
   DescribeSupportProxyVersionRequest,
   DescribeProxySpecsRequest,
@@ -122,6 +127,8 @@ import {
   ModifyClusterDatabaseResponse,
   InstanceParamItem,
   DescribeDBSecurityGroupsRequest,
+  RollbackData,
+  UpgradeInstanceRequest,
   DescribeInstanceParamsResponse,
   SwitchClusterVpcResponse,
   DescribeZonesRequest,
@@ -175,6 +182,7 @@ import {
   OfflineInstanceRequest,
   AuditLog,
   CreateProxyResponse,
+  BizTaskModifyParamsData,
   InstanceInitInfo,
   Module,
   ModifyBackupConfigRequest,
@@ -222,12 +230,13 @@ import {
   SwitchClusterZoneRequest,
   Ability,
   RollBackClusterRequest,
+  BizTaskInfo,
   RemoveClusterSlaveZoneResponse,
   OpenClusterReadOnlyInstanceGroupAccessResponse,
   QueryParamFilter,
   NewAccount,
+  ModifyParamsData,
   BindInstanceInfo,
-  DescribeAuditLogFilesRequest,
   DescribeAuditRuleWithInstanceIdsResponse,
   SearchClusterDatabasesRequest,
   ModifyProxyDescResponse,
@@ -290,7 +299,9 @@ import {
   DescribeDBSecurityGroupsResponse,
   DeleteParamTemplateResponse,
   ClusterInstanceDetail,
+  ClusterSlaveData,
   OldAddrInfo,
+  DescribeTasksResponse,
   OpenClusterPasswordComplexityRequest,
   DescribeAuditLogsResponse,
   ModifyAccountDescriptionResponse,
@@ -298,10 +309,11 @@ import {
   ProxyGroup,
   AddClusterSlaveZoneRequest,
   RollbackDatabase,
+  DescribeTasksRequest,
   ModifyClusterStorageResponse,
   CloseClusterPasswordComplexityRequest,
   ModifyAccountParamsRequest,
-  IsolateInstanceRequest,
+  AuditLogFile,
   DescribeAuditRuleTemplatesResponse,
   LogicBackupConfigInfo,
   DeleteBackupResponse,
@@ -312,6 +324,7 @@ import {
   OpenAuditServiceRequest,
   ModifyResourcePackageNameResponse,
   DescribeBackupListRequest,
+  SwitchClusterLogBin,
   ExportInstanceErrorLogsResponse,
   ParamItemDetail,
   SlaveZoneStockInfo,
@@ -344,8 +357,8 @@ import {
   OpenClusterReadOnlyInstanceGroupAccessRequest,
   DescribeAuditRuleTemplatesRequest,
   InstanceSpec,
-  AuditLogFile,
-  PolicyRule,
+  IsolateInstanceRequest,
+  DescribeAuditLogFilesRequest,
   SaleRegion,
   DeleteAuditLogFileRequest,
   GrantAccountPrivilegesResponse,
@@ -353,6 +366,7 @@ import {
   CynosdbInstanceGroup,
   ResetAccountPasswordRequest,
   ModifiableInfo,
+  TaskMaintainInfo,
   TablePrivileges,
   RemoveClusterSlaveZoneRequest,
   DeleteBackupRequest,
@@ -360,7 +374,7 @@ import {
   DescribeParamTemplateDetailResponse,
   ModifyBinlogSaveDaysResponse,
   DeleteAuditRuleTemplatesResponse,
-  UpgradeInstanceRequest,
+  PolicyRule,
   ZoneStockInfo,
   InquirePriceRenewResponse,
   ModifyAuditRuleTemplatesResponse,
@@ -543,6 +557,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeClusterDetailResponse) => void
   ): Promise<DescribeClusterDetailResponse> {
     return this.request("DescribeClusterDetail", req, cb)
+  }
+
+  /**
+   * 查询任务列表
+   */
+  async DescribeTasks(
+    req: DescribeTasksRequest,
+    cb?: (error: string, rep: DescribeTasksResponse) => void
+  ): Promise<DescribeTasksResponse> {
+    return this.request("DescribeTasks", req, cb)
   }
 
   /**

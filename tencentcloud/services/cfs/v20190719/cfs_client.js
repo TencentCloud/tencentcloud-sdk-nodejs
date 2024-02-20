@@ -58,7 +58,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeCfsPGroups", req, cb);
     }
     /**
-     * 更新文件系统带宽
+     * 更新文件系统吞吐
 仅吞吐型支持此接口
      */
     async UpdateFileSystemBandwidthLimit(req, cb) {

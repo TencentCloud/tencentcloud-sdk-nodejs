@@ -130,6 +130,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeClusterDetail", req, cb);
     }
     /**
+     * 查询任务列表
+     */
+    async DescribeTasks(req, cb) {
+        return this.request("DescribeTasks", req, cb);
+    }
+    /**
      * 本接口（DescribeInstanceSpecs）用于查询购买页可购买的实例规格
      */
     async DescribeInstanceSpecs(req, cb) {
