@@ -338,6 +338,16 @@ it("tcr.v20190924.DescribeApplicationTriggerPersonal", async function () {
     }
 })
 
+it("tcr.v20190924.ModifyServiceAccountPassword", async function () {
+    try {
+       const data = await client.ModifyServiceAccountPassword({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcr.v20190924.DescribeTagRetentionExecution", async function () {
     try {
        const data = await client.DescribeTagRetentionExecution({})

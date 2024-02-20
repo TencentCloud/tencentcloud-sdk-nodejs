@@ -222,6 +222,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeApplicationTriggerPersonal", req, cb);
     }
     /**
+     * 更新服务级账号密码
+     */
+    async ModifyServiceAccountPassword(req, cb) {
+        return this.request("ModifyServiceAccountPassword", req, cb);
+    }
+    /**
      * 查询版本保留执行记录
      */
     async DescribeTagRetentionExecution(req, cb) {

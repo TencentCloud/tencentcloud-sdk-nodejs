@@ -1045,35 +1045,35 @@ export interface Node {
     /**
      * zone信息。
      */
-    ZoneInfo: ZoneInfo;
+    ZoneInfo?: ZoneInfo;
     /**
      * 国家信息。
      */
-    Country: Country;
+    Country?: Country;
     /**
      * 区域信息。
      */
-    Area: Area;
+    Area?: Area;
     /**
      * 省份信息。
      */
-    Province: Province;
+    Province?: Province;
     /**
      * 城市信息。
      */
-    City: City;
+    City?: City;
     /**
      * Region信息。
      */
-    RegionInfo: RegionInfo;
+    RegionInfo?: RegionInfo;
     /**
      * 运营商列表。
      */
-    ISPSet: Array<ISP>;
+    ISPSet?: Array<ISP>;
     /**
      * 运营商数量。
      */
-    ISPNum: number;
+    ISPNum?: number;
     /**
      * 节点是否支持LB
      */
@@ -1677,42 +1677,42 @@ export interface KeyPair {
      * 密钥对的ID，是密钥对的唯一标识。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    KeyId: string;
+    KeyId?: string;
     /**
      * 密钥对名称。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    KeyName: string;
+    KeyName?: string;
     /**
      * 密钥对所属的项目ID。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ProjectId: number;
+    ProjectId?: number;
     /**
      * 密钥对描述信息。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Description: string;
+    Description?: string;
     /**
      * 密钥对的纯文本公钥。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    PublicKey: string;
+    PublicKey?: string;
     /**
      * 钥对的纯文本私钥。腾讯云不会保管私钥，请用户自行妥善保存。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    PrivateKey: string;
+    PrivateKey?: string;
     /**
      * 钥关联的实例ID列表。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    AssociatedInstanceIds: Array<string>;
+    AssociatedInstanceIds?: Array<string>;
     /**
      * 创建时间。按照ISO8601标准表示，并且使用UTC时间。格式为：YYYY-MM-DDThh:mm:ssZ。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CreatedTime: string;
+    CreatedTime?: string;
 }
 /**
  * DescribeVpcs返回参数结构体
@@ -4480,17 +4480,17 @@ export interface PhysicalPosition {
      * 机位
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    PosId: string;
+    PosId?: string;
     /**
      * 机架
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    RackId: string;
+    RackId?: string;
     /**
      * 交换机
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SwitchId: string;
+    SwitchId?: string;
 }
 /**
  * 负载均衡监听器

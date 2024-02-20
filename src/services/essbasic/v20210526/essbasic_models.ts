@@ -26,98 +26,6 @@ export interface SyncProxyOrganizationResponse {
 }
 
 /**
- * 用户计费使用情况详情
- */
-export interface BillUsageDetail {
-  /**
-   * 合同流程ID，为32位字符串。
-建议开发者妥善保存此流程ID，以便于顺利进行后续操作。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  FlowId?: string
-  /**
-   * 合同经办人名称
-如果有多个经办人用分号隔开。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  OperatorName?: string
-  /**
-   * 发起方组织机构名称
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CreateOrganizationName?: string
-  /**
-   * 合同流程的名称（可自定义此名称），长度不能超过200，只能由中文、字母、数字和下划线组成。
-该名称还将用于合同签署完成后的下载文件名。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  FlowName?: string
-  /**
-   * 当前合同状态,如下是状态码对应的状态。
-0-还没有发起
-1-等待签署
-2-部分签署 
-3-拒签
-4-已签署 
-5-已过期 
-6-已撤销 
-7-还没有预发起
-8-等待填写
-9-部分填写 
-10-拒填
-11-已解除
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Status?: number
-  /**
-   * 套餐类型
-对应关系如下
-CloudEnterprise-企业版合同
-SingleSignature-单方签章
-CloudProve-签署报告
-CloudOnlineSign-腾讯会议在线签约
-ChannelWeCard-微工卡
-SignFlow-合同套餐
-SignFace-签署意愿（人脸识别）
-SignPassword-签署意愿（密码）
-SignSMS-签署意愿（短信）
-PersonalEssAuth-签署人实名（腾讯电子签认证）
-PersonalThirdAuth-签署人实名（信任第三方认证）
-OrgEssAuth-签署企业实名
-FlowNotify-短信通知
-AuthService-企业工商信息查询
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  QuotaType?: string
-  /**
-   * 合同使用量
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  UseCount?: number
-  /**
-   * 消耗的时间戳，格式为Unix标准时间戳（秒）。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CostTime?: number
-  /**
-   * 消耗的套餐名称
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  QuotaName?: string
-  /**
-   * 消耗类型
-1.扣费 2.撤销返还
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CostType?: number
-  /**
-   * 备注
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Remark?: string
-}
-
-/**
  * ChannelCreateConvertTaskApi返回参数结构体
  */
 export interface ChannelCreateConvertTaskApiResponse {
@@ -1806,7 +1714,11 @@ export interface ChannelCreateWebThemeConfigRequest {
   Agent: Agent
   /**
    * 主题类型<br/>EMBED_WEB_THEME：嵌入式主题
-<br/>目前只支持EMBED_WEB_THEME，web页面嵌入的主题风格配置
+<ul>
+<li>EMBED_WEB_THEME，web页面嵌入的主题风格配置</li>
+<li>COMPANY_AUTHENTICATE，子客认证主题配置， 对当前第三方应用号生效，
+目前支持的有，背景图替换，隐藏企业认证页面导航栏和隐藏企业认证顶部logo</li>
+</ul>
    */
   ThemeType: string
   /**
@@ -4489,24 +4401,6 @@ export interface ChannelCreateFlowApproversResponse {
 }
 
 /**
- * DescribeBillUsageDetail返回参数结构体
- */
-export interface DescribeBillUsageDetailResponse {
-  /**
-   * 返回查询记录总数
-   */
-  Total?: number
-  /**
-   * 消耗记录详情
-   */
-  Details?: Array<BillUsageDetail>
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * DescribeUsage返回参数结构体
  */
 export interface DescribeUsageResponse {
@@ -4560,7 +4454,8 @@ export interface CreateSignUrlsRequest {
 
 **注：**动态签署人场景，如果签署链接类型设置为`APP`，则仅支持跳转到封面页。
 
-详细使用场景可以参数接口说明中的 **主要使用场景可以更加EndPoint分类如下**
+详细使用场景可以参考接口描述说明中的 **主要使用场景EndPoint分类**
+
    */
   Endpoint?: string
   /**
@@ -6887,48 +6782,103 @@ export interface ChannelBillUsageDetail {
 }
 
 /**
- * DescribeBillUsageDetail请求参数结构体
+ * DescribeTemplates请求参数结构体
  */
-export interface DescribeBillUsageDetailRequest {
+export interface DescribeTemplatesRequest {
   /**
    * 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。
+
+此接口下面信息必填。
+<ul>
+<li>渠道应用标识:  Agent.AppId</li>
+<li>第三方平台子客企业标识: Agent.ProxyOrganizationOpenId</li>
+<li>第三方平台子客企业中的员工标识: Agent. ProxyOperator.OpenId</li>
+</ul>
+第三方平台子客企业和员工必须已经经过实名认证
    */
   Agent: Agent
   /**
-   * 查询开始时间字符串，格式为yyyymmdd,时间跨度不能大于31天
+   * 合同模板ID，为32位字符串。
+
+可以通过<a href="https://qian.tencent.com/developers/partnerApis/accounts/CreateConsoleLoginUrl" target="_blank">生成子客登录链接</a>登录企业控制台, 在企业模板中得到合同模板ID。
+
+[点击产看模板Id在控制台上的位置](https://qcloudimg.tencent-cloud.cn/raw/e988be12bf28a89b4716aed4502c2e02.png)
    */
-  StartTime: string
+  TemplateId?: string
   /**
-   * 查询结束时间字符串，格式为yyyymmdd,时间跨度不能大于31天
+   * 查询模板的内容
+
+<ul><li>**0**：（默认）模板列表及详情</li>
+<li>**1**：仅模板列表, 不会返回模板中的签署控件, 填写控件, 参与方角色列表等信息</li></ul>
    */
-  EndTime: string
+  ContentType?: number
   /**
-   * 查询的套餐类型 （选填 ）不传则查询所有套餐；
-对应关系如下
-CloudEnterprise-企业版合同
-SingleSignature-单方签章
-CloudProve-签署报告
-CloudOnlineSign-腾讯会议在线签约
-ChannelWeCard-微工卡
-SignFlow-合同套餐
-SignFace-签署意愿（人脸识别）
-SignPassword-签署意愿（密码）
-SignSMS-签署意愿（短信）
-PersonalEssAuth-签署人实名（腾讯电子签认证）
-PersonalThirdAuth-签署人实名（信任第三方认证）
-OrgEssAuth-签署企业实名
-FlowNotify-短信通知
-AuthService-企业工商信息查询
+   * 合同模板ID数组，每一个合同模板ID为32位字符串,  最多支持200个模板的批量查询。
+
+注意: 
+1.` 此参数TemplateIds与TemplateId互为独立，若两者均传入，以TemplateId为准。`
+2. `请确保每个模板均正确且属于当前企业，若有任一模板不存在，则返回错误。`
+4. `若传递此参数，分页参数(Limit,Offset)无效`
+
+
+[点击产看模板Id在控制台上的位置](https://qcloudimg.tencent-cloud.cn/raw/e988be12bf28a89b4716aed4502c2e02.png)
+
    */
-  QuotaType?: string
+  TemplateIds?: Array<string>
   /**
-   * 指定分页返回第几页的数据，如果不传默认返回第一页，页码从 0 开始，即首页为 0
+   * 指定每页返回的数据条数，和Offset参数配合使用。
+
+注：`1.默认值为20，单页做大值为200。`
+   */
+  Limit?: number
+  /**
+   * 查询结果分页返回，指定从第几页返回数据，和Limit参数配合使用。
+
+注：`1.offset从0开始，即第一页为0。`
+`2.默认从第一页返回。`
    */
   Offset?: number
   /**
-   * 指定分页每页返回的数据条数，如果不传默认为 50，单页最大支持 50。
+   * 模糊搜索的模板名称，注意是模板名的连续部分，长度不能超过200，可支持由中文、字母、数字和下划线组成字符串。
    */
-  Limit?: number
+  TemplateName?: string
+  /**
+   * 对应第三方应用平台企业的模板ID，通过此值可以搜索由第三方应用平台模板ID下发或领取得到的子客模板列表。
+   */
+  ChannelTemplateId?: string
+  /**
+   * 返回控件的范围, 是只返回发起方自己的还是所有参与方的
+
+<ul><li>**false**：（默认）只返回发起方控件</li>
+<li>**true**：返回所有参与方(包括发起方和签署方)控件</li></ul>
+   */
+  QueryAllComponents?: boolean
+  /**
+   * 是否获取模板预览链接。
+
+<ul><li>**false**：不获取（默认）</li>
+<li>**true**：获取</li></ul>
+
+设置为true之后， 返回参数PreviewUrl，为模板的H5预览链接,  有效期5分钟。可以通过浏览器打开此链接预览模板，或者嵌入到iframe中预览模板。
+
+   */
+  WithPreviewUrl?: boolean
+  /**
+   * 是否获取模板的PDF文件链接。
+
+<ul><li>**false**：不获取（默认）</li>
+<li>**true**：获取</li></ul>
+
+设置为true之后， 返回参数PdfUrl，为模板PDF文件链接，有效期5分钟, 可以用于将PDF文件下载到本地
+
+注: `此功能为白名单功能，使用前请联系对接的客户经理沟通。`
+   */
+  WithPdfUrl?: boolean
+  /**
+   * 操作者的信息
+   * @deprecated
+   */
+  Operator?: UserInfo
 }
 
 /**
@@ -7628,106 +7578,6 @@ export interface ChannelCreateFlowSignUrlRequest {
 `2. 如需生成发起方预览链接，则签署方信息传空，即FlowApproverInfos传空或者不传。`
    */
   UrlType?: number
-}
-
-/**
- * DescribeTemplates请求参数结构体
- */
-export interface DescribeTemplatesRequest {
-  /**
-   * 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。
-
-此接口下面信息必填。
-<ul>
-<li>渠道应用标识:  Agent.AppId</li>
-<li>第三方平台子客企业标识: Agent.ProxyOrganizationOpenId</li>
-<li>第三方平台子客企业中的员工标识: Agent. ProxyOperator.OpenId</li>
-</ul>
-第三方平台子客企业和员工必须已经经过实名认证
-   */
-  Agent: Agent
-  /**
-   * 合同模板ID，为32位字符串。
-
-可以通过<a href="https://qian.tencent.com/developers/partnerApis/accounts/CreateConsoleLoginUrl" target="_blank">生成子客登录链接</a>登录企业控制台, 在企业模板中得到合同模板ID。
-
-[点击产看模板Id在控制台上的位置](https://qcloudimg.tencent-cloud.cn/raw/e988be12bf28a89b4716aed4502c2e02.png)
-   */
-  TemplateId?: string
-  /**
-   * 查询模板的内容
-
-<ul><li>**0**：（默认）模板列表及详情</li>
-<li>**1**：仅模板列表, 不会返回模板中的签署控件, 填写控件, 参与方角色列表等信息</li></ul>
-   */
-  ContentType?: number
-  /**
-   * 合同模板ID数组，每一个合同模板ID为32位字符串,  最多支持200个模板的批量查询。
-
-注意: 
-1.` 此参数TemplateIds与TemplateId互为独立，若两者均传入，以TemplateId为准。`
-2. `请确保每个模板均正确且属于当前企业，若有任一模板不存在，则返回错误。`
-4. `若传递此参数，分页参数(Limit,Offset)无效`
-
-
-[点击产看模板Id在控制台上的位置](https://qcloudimg.tencent-cloud.cn/raw/e988be12bf28a89b4716aed4502c2e02.png)
-
-   */
-  TemplateIds?: Array<string>
-  /**
-   * 指定每页返回的数据条数，和Offset参数配合使用。
-
-注：`1.默认值为20，单页做大值为200。`
-   */
-  Limit?: number
-  /**
-   * 查询结果分页返回，指定从第几页返回数据，和Limit参数配合使用。
-
-注：`1.offset从0开始，即第一页为0。`
-`2.默认从第一页返回。`
-   */
-  Offset?: number
-  /**
-   * 模糊搜索的模板名称，注意是模板名的连续部分，长度不能超过200，可支持由中文、字母、数字和下划线组成字符串。
-   */
-  TemplateName?: string
-  /**
-   * 对应第三方应用平台企业的模板ID，通过此值可以搜索由第三方应用平台模板ID下发或领取得到的子客模板列表。
-   */
-  ChannelTemplateId?: string
-  /**
-   * 返回控件的范围, 是只返回发起方自己的还是所有参与方的
-
-<ul><li>**false**：（默认）只返回发起方控件</li>
-<li>**true**：返回所有参与方(包括发起方和签署方)控件</li></ul>
-   */
-  QueryAllComponents?: boolean
-  /**
-   * 是否获取模板预览链接。
-
-<ul><li>**false**：不获取（默认）</li>
-<li>**true**：获取</li></ul>
-
-设置为true之后， 返回参数PreviewUrl，为模板的H5预览链接,  有效期5分钟。可以通过浏览器打开此链接预览模板，或者嵌入到iframe中预览模板。
-
-   */
-  WithPreviewUrl?: boolean
-  /**
-   * 是否获取模板的PDF文件链接。
-
-<ul><li>**false**：不获取（默认）</li>
-<li>**true**：获取</li></ul>
-
-设置为true之后， 返回参数PdfUrl，为模板PDF文件链接，有效期5分钟, 可以用于将PDF文件下载到本地
-
-注: `此功能为白名单功能，使用前请联系对接的客户经理沟通。`
-   */
-  WithPdfUrl?: boolean
-  /**
-   * 操作者的信息
-   * @deprecated
-   */
-  Operator?: UserInfo
 }
 
 /**

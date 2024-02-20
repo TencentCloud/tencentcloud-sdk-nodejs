@@ -576,6 +576,9 @@ export interface SmartStructuralOCRV2Request {
   InvoiceEng -- 海外发票模版
   Coin --钱币识别模板
   OnboardingDocuments -- 入职材料识别
+  PropertyOwnershipCertificate -- 房产证识别
+  RealEstateCertificate --不动产权证识别
+  HouseEncumbranceCertificate -- 他权证识别
      */
     ConfigId?: string;
     /**

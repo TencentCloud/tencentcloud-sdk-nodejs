@@ -2674,6 +2674,28 @@ export interface CreateRepositoryPersonalRequest {
 }
 
 /**
+ * ModifyServiceAccountPassword请求参数结构体
+ */
+export interface ModifyServiceAccountPasswordRequest {
+  /**
+   * 实例Id
+   */
+  RegistryId: string
+  /**
+   * 服务级账号名
+   */
+  Name: string
+  /**
+   * 是否随机生成密码
+   */
+  Random: boolean
+  /**
+   * 服务级账号密码，长度在8到20之间且需包含至少一个大写字符，一个小写字符和一个数字
+   */
+  Password?: string
+}
+
+/**
  * DescribeImageFilterPersonal返回参数结构体
  */
 export interface DescribeImageFilterPersonalResponse {
@@ -5189,6 +5211,20 @@ export interface ReplicationLog {
  * DescribeInstanceAllNamespaces返回参数结构体
  */
 export interface DescribeInstanceAllNamespacesResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyServiceAccountPassword返回参数结构体
+ */
+export interface ModifyServiceAccountPasswordResponse {
+  /**
+   * 自定义用户密码，仅展示一次，请注意留存
+   */
+  Password?: string
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

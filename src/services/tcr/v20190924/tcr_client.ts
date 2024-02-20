@@ -161,6 +161,7 @@ import {
   DescribeImageAccelerateServiceResponse,
   NamespaceInfoResp,
   CreateRepositoryPersonalRequest,
+  ModifyServiceAccountPasswordRequest,
   DescribeImageFilterPersonalResponse,
   DescribeReplicationInstancesRequest,
   DeleteWebhookTriggerRequest,
@@ -294,6 +295,7 @@ import {
   CreateTagRetentionExecutionRequest,
   ReplicationLog,
   DescribeInstanceAllNamespacesResponse,
+  ModifyServiceAccountPasswordResponse,
   CreateApplicationTriggerPersonalResponse,
   Limit,
   BatchDeleteImagePersonalResponse,
@@ -630,6 +632,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeApplicationTriggerPersonalResponse) => void
   ): Promise<DescribeApplicationTriggerPersonalResponse> {
     return this.request("DescribeApplicationTriggerPersonal", req, cb)
+  }
+
+  /**
+   * 更新服务级账号密码
+   */
+  async ModifyServiceAccountPassword(
+    req: ModifyServiceAccountPasswordRequest,
+    cb?: (error: string, rep: ModifyServiceAccountPasswordResponse) => void
+  ): Promise<ModifyServiceAccountPasswordResponse> {
+    return this.request("ModifyServiceAccountPassword", req, cb)
   }
 
   /**

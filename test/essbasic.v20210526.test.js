@@ -658,16 +658,6 @@ it("essbasic.v20210526.ChannelCreatePreparedPersonalEsign", async function () {
     }
 })
 
-it("essbasic.v20210526.DescribeBillUsageDetail", async function () {
-    try {
-       const data = await client.DescribeBillUsageDetail({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("essbasic.v20210526.ChannelCreateFlowGroupByFiles", async function () {
     try {
        const data = await client.ChannelCreateFlowGroupByFiles({})
