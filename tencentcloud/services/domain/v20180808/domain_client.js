@@ -58,10 +58,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeletePhoneEmail", req, cb);
     }
     /**
-     * 此接口用于发送手机邮箱验证码。
+     * 用户服务商提前获取预释放域名数据，查询数据根据结束时间进行倒序。
      */
-    async SendPhoneEmailCode(req, cb) {
-        return this.request("SendPhoneEmailCode", req, cb);
+    async DescribePreDomainList(req, cb) {
+        return this.request("DescribePreDomainList", req, cb);
     }
     /**
      * 查询自定义DNS Host
@@ -112,6 +112,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CheckDomain", req, cb);
     }
     /**
+     * 用于合作商对预释放域名进行预留。
+     */
+    async ReservedPreDomains(req, cb) {
+        return this.request("ReservedPreDomains", req, cb);
+    }
+    /**
      * 同步自定义DNS Host
      */
     async SyncCustomDnsHost(req, cb) {
@@ -154,6 +160,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeTemplateList", req, cb);
     }
     /**
+     * 用于清除多余的预定域名信息
+     */
+    async DeleteReservedPreDomainInfo(req, cb) {
+        return this.request("DeleteReservedPreDomainInfo", req, cb);
+    }
+    /**
      * 本接口 ( BatchModifyDomainInfo ) 用于批量域名信息修改 。
      */
     async BatchModifyDomainInfo(req, cb) {
@@ -184,10 +196,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateTemplate", req, cb);
     }
     /**
-     * 本接口 ( ModifyDomainOwnerBatch) 用于域名批量账号间转移 。
+     * 合作商用于查询预约预释放状态信息内容
      */
-    async ModifyDomainOwnerBatch(req, cb) {
-        return this.request("ModifyDomainOwnerBatch", req, cb);
+    async DescribeReservedPreDomainInfo(req, cb) {
+        return this.request("DescribeReservedPreDomainInfo", req, cb);
     }
     /**
      * 删除自定义DNS Host
@@ -202,6 +214,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribePhoneEmailList", req, cb);
     }
     /**
+     * 本接口 ( ModifyDomainOwnerBatch) 用于域名批量账号间转移 。
+     */
+    async ModifyDomainOwnerBatch(req, cb) {
+        return this.request("ModifyDomainOwnerBatch", req, cb);
+    }
+    /**
      * 本接口 ( RenewDomainBatch ) 用于批量续费域名 。
 
      */
@@ -213,6 +231,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeDomainSimpleInfo(req, cb) {
         return this.request("DescribeDomainSimpleInfo", req, cb);
+    }
+    /**
+     * 此接口用于发送手机邮箱验证码。
+     */
+    async SendPhoneEmailCode(req, cb) {
+        return this.request("SendPhoneEmailCode", req, cb);
     }
     /**
      * 按照域名后缀获取对应的价格列表

@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { UploadImageResponse, RenewDomainBatchResponse, SyncCustomDnsHostRequest, BatchModifyDomainInfoRequest, CreateDomainRedemptionResponse, UpdateProhibitionBatchRequest, TransferInDomainBatchResponse, DeleteTemplateResponse, TransferInDomainBatchRequest, CreateDomainBatchResponse, SendPhoneEmailCodeResponse, ModifyDomainDNSBatchResponse, DescribeCustomDnsHostSetResponse, DeletePhoneEmailRequest, DescribeTemplateResponse, CheckDomainResponse, DescribeDomainSimpleInfoRequest, CreatePhoneEmailRequest, DeleteCustomDnsHostResponse, DescribeTemplateRequest, RenewDomainBatchRequest, BatchModifyDomainInfoResponse, ModifyDomainOwnerBatchResponse, DescribeDomainBaseInfoResponse, DescribeTemplateListResponse, TransferProhibitionBatchRequest, DescribeTemplateListRequest, UpdateProhibitionBatchResponse, DescribeBatchOperationLogDetailsRequest, DescribeCustomDnsHostSetRequest, CreateCustomDnsHostResponse, DescribeDomainPriceListResponse, CreateTemplateResponse, DeleteTemplateRequest, CheckBatchStatusRequest, SetDomainAutoRenewResponse, CreateTemplateRequest, DescribeDomainPriceListRequest, SetDomainAutoRenewRequest, CreateDomainBatchRequest, ModifyIntlCustomDnsHostRequest, DescribeDomainSimpleInfoResponse, DescribeDomainBaseInfoRequest, DescribePhoneEmailListRequest, DescribeDomainNameListResponse, DescribeDomainNameListRequest, DescribeBatchOperationLogsRequest, UploadImageRequest, CheckDomainRequest, DescribeBatchOperationLogsResponse, TransferProhibitionBatchResponse, ModifyCustomDnsHostResponse, SyncCustomDnsHostResponse, ModifyCustomDnsHostRequest, CreateCustomDnsHostRequest, ModifyDomainDNSBatchRequest, DeleteCustomDnsHostRequest, DescribeBatchOperationLogDetailsResponse, SendPhoneEmailCodeRequest, DescribePhoneEmailListResponse, CheckBatchStatusResponse, DeletePhoneEmailResponse, CreateDomainRedemptionRequest, CreatePhoneEmailResponse, ModifyDomainOwnerBatchRequest, ModifyIntlCustomDnsHostResponse } from "./domain_models";
+import { DeleteReservedPreDomainInfoResponse, DeleteTemplateResponse, DescribeCustomDnsHostSetResponse, CheckDomainResponse, DeleteCustomDnsHostResponse, RenewDomainBatchRequest, DescribeTemplateListResponse, TransferProhibitionBatchRequest, DescribeCustomDnsHostSetRequest, CreateCustomDnsHostResponse, ModifyCustomDnsHostRequest, DescribeDomainPriceListResponse, CheckBatchStatusRequest, SetDomainAutoRenewResponse, DescribeBatchOperationLogsRequest, UploadImageRequest, ModifyCustomDnsHostResponse, ModifyDomainDNSBatchRequest, DescribeBatchOperationLogDetailsResponse, DeletePhoneEmailResponse, ReservedPreDomainsResponse, UploadImageResponse, CreateDomainRedemptionResponse, DeletePhoneEmailRequest, DescribeReservedPreDomainInfoResponse, RenewDomainBatchResponse, TransferInDomainBatchResponse, BatchModifyDomainInfoResponse, DescribeDomainBaseInfoResponse, CreateTemplateResponse, UpdateProhibitionBatchRequest, DescribePreDomainListResponse, SendPhoneEmailCodeRequest, DescribeDomainBaseInfoRequest, DescribeDomainNameListRequest, DescribeBatchOperationLogsResponse, ModifyDomainOwnerBatchRequest, DescribePhoneEmailListResponse, DescribePreDomainListRequest, CreatePhoneEmailResponse, ReservedPreDomainsRequest, BatchModifyDomainInfoRequest, CreateDomainBatchResponse, DeleteReservedPreDomainInfoRequest, SendPhoneEmailCodeResponse, DescribeTemplateResponse, DescribeDomainSimpleInfoRequest, DescribeDomainSimpleInfoResponse, ModifyDomainOwnerBatchResponse, TransferInDomainBatchRequest, ModifyDomainDNSBatchResponse, DescribeReservedPreDomainInfoRequest, DescribeDomainPriceListRequest, ModifyIntlCustomDnsHostRequest, CheckDomainRequest, TransferProhibitionBatchResponse, ModifyIntlCustomDnsHostResponse, DescribeTemplateListRequest, CreateTemplateRequest, UpdateProhibitionBatchResponse, CreatePhoneEmailRequest, DescribeTemplateRequest, DescribeBatchOperationLogDetailsRequest, DescribeDomainNameListResponse, SyncCustomDnsHostRequest, DeleteTemplateRequest, CreateDomainBatchRequest, DescribePhoneEmailListRequest, CreateCustomDnsHostRequest, DeleteCustomDnsHostRequest, CheckBatchStatusResponse, CreateDomainRedemptionRequest, SetDomainAutoRenewRequest, SyncCustomDnsHostResponse } from "./domain_models";
 /**
  * domain client
  * @class
@@ -28,9 +28,9 @@ export declare class Client extends AbstractClient {
      */
     DeletePhoneEmail(req: DeletePhoneEmailRequest, cb?: (error: string, rep: DeletePhoneEmailResponse) => void): Promise<DeletePhoneEmailResponse>;
     /**
-     * 此接口用于发送手机邮箱验证码。
+     * 用户服务商提前获取预释放域名数据，查询数据根据结束时间进行倒序。
      */
-    SendPhoneEmailCode(req: SendPhoneEmailCodeRequest, cb?: (error: string, rep: SendPhoneEmailCodeResponse) => void): Promise<SendPhoneEmailCodeResponse>;
+    DescribePreDomainList(req: DescribePreDomainListRequest, cb?: (error: string, rep: DescribePreDomainListResponse) => void): Promise<DescribePreDomainListResponse>;
     /**
      * 查询自定义DNS Host
      */
@@ -64,6 +64,10 @@ export declare class Client extends AbstractClient {
      */
     CheckDomain(req: CheckDomainRequest, cb?: (error: string, rep: CheckDomainResponse) => void): Promise<CheckDomainResponse>;
     /**
+     * 用于合作商对预释放域名进行预留。
+     */
+    ReservedPreDomains(req: ReservedPreDomainsRequest, cb?: (error: string, rep: ReservedPreDomainsResponse) => void): Promise<ReservedPreDomainsResponse>;
+    /**
      * 同步自定义DNS Host
      */
     SyncCustomDnsHost(req: SyncCustomDnsHostRequest, cb?: (error: string, rep: SyncCustomDnsHostResponse) => void): Promise<SyncCustomDnsHostResponse>;
@@ -92,6 +96,10 @@ export declare class Client extends AbstractClient {
      */
     DescribeTemplateList(req: DescribeTemplateListRequest, cb?: (error: string, rep: DescribeTemplateListResponse) => void): Promise<DescribeTemplateListResponse>;
     /**
+     * 用于清除多余的预定域名信息
+     */
+    DeleteReservedPreDomainInfo(req: DeleteReservedPreDomainInfoRequest, cb?: (error: string, rep: DeleteReservedPreDomainInfoResponse) => void): Promise<DeleteReservedPreDomainInfoResponse>;
+    /**
      * 本接口 ( BatchModifyDomainInfo ) 用于批量域名信息修改 。
      */
     BatchModifyDomainInfo(req: BatchModifyDomainInfoRequest, cb?: (error: string, rep: BatchModifyDomainInfoResponse) => void): Promise<BatchModifyDomainInfoResponse>;
@@ -112,9 +120,9 @@ export declare class Client extends AbstractClient {
      */
     CreateTemplate(req: CreateTemplateRequest, cb?: (error: string, rep: CreateTemplateResponse) => void): Promise<CreateTemplateResponse>;
     /**
-     * 本接口 ( ModifyDomainOwnerBatch) 用于域名批量账号间转移 。
+     * 合作商用于查询预约预释放状态信息内容
      */
-    ModifyDomainOwnerBatch(req: ModifyDomainOwnerBatchRequest, cb?: (error: string, rep: ModifyDomainOwnerBatchResponse) => void): Promise<ModifyDomainOwnerBatchResponse>;
+    DescribeReservedPreDomainInfo(req: DescribeReservedPreDomainInfoRequest, cb?: (error: string, rep: DescribeReservedPreDomainInfoResponse) => void): Promise<DescribeReservedPreDomainInfoResponse>;
     /**
      * 删除自定义DNS Host
      */
@@ -124,6 +132,10 @@ export declare class Client extends AbstractClient {
      */
     DescribePhoneEmailList(req: DescribePhoneEmailListRequest, cb?: (error: string, rep: DescribePhoneEmailListResponse) => void): Promise<DescribePhoneEmailListResponse>;
     /**
+     * 本接口 ( ModifyDomainOwnerBatch) 用于域名批量账号间转移 。
+     */
+    ModifyDomainOwnerBatch(req: ModifyDomainOwnerBatchRequest, cb?: (error: string, rep: ModifyDomainOwnerBatchResponse) => void): Promise<ModifyDomainOwnerBatchResponse>;
+    /**
      * 本接口 ( RenewDomainBatch ) 用于批量续费域名 。
 
      */
@@ -132,6 +144,10 @@ export declare class Client extends AbstractClient {
      * 获取域名实名信息详情
      */
     DescribeDomainSimpleInfo(req: DescribeDomainSimpleInfoRequest, cb?: (error: string, rep: DescribeDomainSimpleInfoResponse) => void): Promise<DescribeDomainSimpleInfoResponse>;
+    /**
+     * 此接口用于发送手机邮箱验证码。
+     */
+    SendPhoneEmailCode(req: SendPhoneEmailCodeRequest, cb?: (error: string, rep: SendPhoneEmailCodeResponse) => void): Promise<SendPhoneEmailCodeResponse>;
     /**
      * 按照域名后缀获取对应的价格列表
      */

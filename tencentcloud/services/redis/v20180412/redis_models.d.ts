@@ -621,9 +621,13 @@ export interface DescribeSlowLogResponse {
      */
     TotalCount?: number;
     /**
-     * 慢查询详情。
+     * 该参数存在命名不规范问题，建议用参数InstanceSlowLogDetail取代。慢查询详情。
      */
     InstanceSlowlogDetail?: Array<InstanceSlowlogDetail>;
+    /**
+     * 慢查询详情。
+     */
+    InstanceSlowLogDetail?: Array<InstanceSlowlogDetail>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */

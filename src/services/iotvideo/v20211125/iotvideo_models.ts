@@ -337,6 +337,10 @@ export interface DescribeDevicePackagesRequest {
    */
   Offset: number
   /**
+   * 用户id
+   */
+  CSUserId?: string
+  /**
    * 通道id
    */
   ChannelId?: number
@@ -1073,6 +1077,11 @@ export interface PackageInfo {
    * 通道id
    */
   ChannelId?: number
+  /**
+   * 用户id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CSUserId?: string
 }
 
 /**

@@ -409,7 +409,7 @@ export interface FileTranslateRequest {
      */
     Url?: string;
     /**
-     * 原始文档类型
+     * 原始文档类型。该参数为高级参数，请留空，如需使用，请与工作人员确认后再使用。
      */
     BasicDocumentType?: string;
     /**

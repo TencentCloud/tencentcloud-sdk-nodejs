@@ -1085,12 +1085,12 @@ export interface DescribeCompareReportResponse {
      * 一致性校验摘要信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Abstract: CompareAbstractInfo;
+    Abstract?: CompareAbstractInfo;
     /**
      * 一致性校验详细信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Detail: CompareDetailInfo;
+    Detail?: CompareDetailInfo;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -5026,12 +5026,12 @@ export interface CompareDetailInfo {
      * 数据不一致的表详情
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Difference: DifferenceDetail;
+    Difference?: DifferenceDetail;
     /**
      * 跳过校验的表详情
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Skipped: SkippedDetail;
+    Skipped?: SkippedDetail;
 }
 /**
  * DescribeSubscribeJobs请求参数结构体

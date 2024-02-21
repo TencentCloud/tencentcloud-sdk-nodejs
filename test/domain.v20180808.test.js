@@ -68,9 +68,9 @@ it("domain.v20180808.DeletePhoneEmail", async function () {
     }
 })
 
-it("domain.v20180808.SendPhoneEmailCode", async function () {
+it("domain.v20180808.DescribePreDomainList", async function () {
     try {
-       const data = await client.SendPhoneEmailCode({})
+       const data = await client.DescribePreDomainList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -158,6 +158,16 @@ it("domain.v20180808.CheckDomain", async function () {
     }
 })
 
+it("domain.v20180808.ReservedPreDomains", async function () {
+    try {
+       const data = await client.ReservedPreDomains({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("domain.v20180808.SyncCustomDnsHost", async function () {
     try {
        const data = await client.SyncCustomDnsHost({})
@@ -228,6 +238,16 @@ it("domain.v20180808.DescribeTemplateList", async function () {
     }
 })
 
+it("domain.v20180808.DeleteReservedPreDomainInfo", async function () {
+    try {
+       const data = await client.DeleteReservedPreDomainInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("domain.v20180808.BatchModifyDomainInfo", async function () {
     try {
        const data = await client.BatchModifyDomainInfo({})
@@ -278,9 +298,9 @@ it("domain.v20180808.CreateTemplate", async function () {
     }
 })
 
-it("domain.v20180808.ModifyDomainOwnerBatch", async function () {
+it("domain.v20180808.DescribeReservedPreDomainInfo", async function () {
     try {
-       const data = await client.ModifyDomainOwnerBatch({})
+       const data = await client.DescribeReservedPreDomainInfo({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -308,6 +328,16 @@ it("domain.v20180808.DescribePhoneEmailList", async function () {
     }
 })
 
+it("domain.v20180808.ModifyDomainOwnerBatch", async function () {
+    try {
+       const data = await client.ModifyDomainOwnerBatch({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("domain.v20180808.RenewDomainBatch", async function () {
     try {
        const data = await client.RenewDomainBatch({})
@@ -321,6 +351,16 @@ it("domain.v20180808.RenewDomainBatch", async function () {
 it("domain.v20180808.DescribeDomainSimpleInfo", async function () {
     try {
        const data = await client.DescribeDomainSimpleInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("domain.v20180808.SendPhoneEmailCode", async function () {
+    try {
+       const data = await client.SendPhoneEmailCode({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
