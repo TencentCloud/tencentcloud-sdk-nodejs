@@ -457,6 +457,26 @@ export interface SubTaskData {
    * 任务运行时间，单位ms
    */
   Runtime?: number
+  /**
+   * 设备ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DeviceId?: string
+  /**
+   * 设备名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DeviceName?: string
+  /**
+   * 通道ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ChannelId?: string
+  /**
+   * 通道名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ChannelName?: string
 }
 
 /**
@@ -1156,6 +1176,26 @@ export interface TaskData {
    * 任务运行时间，单位ms
    */
   Runtime?: number
+  /**
+   * 设备ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DeviceId?: string
+  /**
+   * 设备名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DeviceName?: string
+  /**
+   * 通道ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ChannelId?: string
+  /**
+   *  通道名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ChannelName?: string
 }
 
 /**
@@ -3375,17 +3415,28 @@ export interface ListTasksRequest {
    */
   PageNumber?: number
   /**
-   * 每页数量，默认为10
+   * 每页数量，默认为20
    */
   PageSize?: number
   /**
-   * 默认不根据该字段进行筛选，否则根据设备操作类型进行筛选，对应任务的Action字段，批量任务操作类型以Batch开头。目前值有：BatchDeleteUserDevice，BatchDisableDevice，BatchEnableDevice，DeleteUserDevice，DisableDevice，EnableDevice
+   * 默认不根据该字段进行筛选，否则根据设备操作类型进行筛选，目前值有：BatchDeleteUserDevice，BatchDisableDevice，BatchEnableDevice，
+BatchUpgradeDevice，
+BatchResetDevice,
+BatchRebootDevice
    */
   Operation?: string
   /**
-   * 默认不根据该字段进行筛选，否则根据任务状态进行筛选。状态码：1-NEW，2-RUNNING，3-COMPLETED，4-FAILED
+   * 默认不根据该字段进行筛选，否则根据任务状态进行筛选。状态码：1-未执行，2-执行中，3-完成，4-取消
    */
   Status?: number
+  /**
+   * 开始时间
+   */
+  BeginTime?: number
+  /**
+   * 结束时间
+   */
+  EndTime?: number
 }
 
 /**
@@ -4747,7 +4798,7 @@ export interface BatchOperateDeviceRequest {
    */
   DeviceIds: Array<string>
   /**
-   * 操作命令（enable：启用；disable：禁用；delete：删除）
+   * 操作命令（enable：启用；disable：禁用；delete：删除；upgrade：固件升级；reset：恢复出厂设置；reboot：重启）
    */
   Cmd: string
 }

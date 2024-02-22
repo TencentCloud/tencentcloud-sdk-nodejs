@@ -1380,6 +1380,10 @@ export interface DescribeTaskResultRequest {
    * 返回结果的最大行数，范围0~1000，默认为1000.
    */
   MaxResults?: number
+  /**
+   * 是否转化数据类型
+   */
+  IsTransformDataType?: boolean
 }
 
 /**

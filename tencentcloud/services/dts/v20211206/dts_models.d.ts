@@ -223,6 +223,31 @@ export interface PartitionAssignment {
     PartitionNo: Array<number | bigint>;
 }
 /**
+ * mongodb行校验不一致详细信息
+ */
+export interface RowsCountDifference {
+    /**
+     * 数据库名
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Db?: string;
+    /**
+     * 集合
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Table?: string;
+    /**
+     * 源端行数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SrcCount?: number;
+    /**
+     * 目标端行数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DstCount?: number;
+}
+/**
  * ResizeSyncJob返回参数结构体
  */
 export interface ResizeSyncJobResponse {
@@ -656,6 +681,46 @@ export interface KeyValuePairOption {
     Value?: string;
 }
 /**
+ * 数据不一致详情
+ */
+export interface DifferenceData {
+    /**
+     * 数据库名
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Db?: string;
+    /**
+     * 集合
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Table?: string;
+    /**
+     * 源端ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SrcChunk?: string;
+    /**
+     * 目标端ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DstChunk?: string;
+    /**
+     * 源端值
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SrcItem?: string;
+    /**
+     * 目标端值
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DstItem?: string;
+    /**
+     * 更新时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    UpdatedAt?: string;
+}
+/**
  * CreateCheckSyncJob请求参数结构体
  */
 export interface CreateCheckSyncJobRequest {
@@ -761,6 +826,21 @@ export interface ResizeSyncJobRequest {
      * 任务规格
      */
     NewInstanceClass: string;
+}
+/**
+ * mongodb行数校验不一致性详情结果
+ */
+export interface DifferenceRowDetail {
+    /**
+     * 不一致总数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TotalCount?: number;
+    /**
+     * 不一致列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Items?: Array<RowsCountDifference>;
 }
 /**
  * ModifySubscribeName返回参数结构体
@@ -1488,59 +1568,19 @@ export interface TradeInfo {
     BillingType?: string;
 }
 /**
- * 数据同步中的选项
+ * mongodb数据不一致性详情
  */
-export interface Options {
+export interface DifferenceDataDetail {
     /**
-     * 同步初始化选项，Data(全量数据初始化)、Structure(结构初始化)、Full(全量数据且结构初始化，默认)、None(仅增量)
+     * 总数
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    InitType?: string;
+    TotalCount?: number;
     /**
-     * 同名表的处理，ReportErrorAfterCheck(前置校验并报错，默认)、InitializeAfterDelete(删除并重新初始化)、ExecuteAfterIgnore(忽略并继续执行)
+     * mongo数据不一致详细列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DealOfExistSameTable?: string;
-    /**
-     * 冲突处理选项，ReportError(报错，默认为该值)、Ignore(忽略)、Cover(覆盖)、ConditionCover(条件覆盖)
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ConflictHandleType?: string;
-    /**
-     * 是否添加附加列
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    AddAdditionalColumn?: boolean;
-    /**
-     * 所要同步的DML和DDL的选项，Insert(插入操作)、Update(更新操作)、Delete(删除操作)、DDL(结构同步)， 不填（不选），PartialDDL(自定义,和DdlOptions一起起作用 )
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    OpTypes?: Array<string>;
-    /**
-     * 冲突处理的详细选项，如条件覆盖中的条件行和条件操作
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ConflictHandleOption?: ConflictHandleOption;
-    /**
-     * DDL同步选项，具体描述要同步那些DDL
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    DdlOptions?: Array<DdlOption>;
-    /**
-     * kafka同步选项
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    KafkaOption?: KafkaOption;
-    /**
-     * 任务限速信息
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    RateLimitOption?: RateLimitOption;
-    /**
-     * 自动重试的时间窗口设置
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    AutoRetryTimeRangeMinutes?: number;
+    Items?: Array<DifferenceData>;
 }
 /**
  * DeleteConsumerGroup请求参数结构体
@@ -2368,13 +2408,89 @@ export interface CreateSubscribeCheckJobResponse {
     RequestId?: string;
 }
 /**
- * ModifyConsumerGroupDescription返回参数结构体
+ * 数据库不一致的详情，mongodb业务用到
  */
-export interface ModifyConsumerGroupDescriptionResponse {
+export interface AdvancedObjectsItem {
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     * 对象类型,可能得值有：account,index,shardkey,schema
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    RequestId?: string;
+    ObjectType?: string;
+    /**
+     * 源端分块
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SrcChunk?: string;
+    /**
+     * 目标端分块
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DstChunk?: string;
+    /**
+     * 源端值
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SrcItem?: string;
+    /**
+     * 目标端值
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DstItem?: string;
+}
+/**
+ * 数据同步中的选项
+ */
+export interface Options {
+    /**
+     * 同步初始化选项，Data(全量数据初始化)、Structure(结构初始化)、Full(全量数据且结构初始化，默认)、None(仅增量)
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InitType?: string;
+    /**
+     * 同名表的处理，ReportErrorAfterCheck(前置校验并报错，默认)、InitializeAfterDelete(删除并重新初始化)、ExecuteAfterIgnore(忽略并继续执行)
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DealOfExistSameTable?: string;
+    /**
+     * 冲突处理选项，ReportError(报错，默认为该值)、Ignore(忽略)、Cover(覆盖)、ConditionCover(条件覆盖)
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ConflictHandleType?: string;
+    /**
+     * 是否添加附加列
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AddAdditionalColumn?: boolean;
+    /**
+     * 所要同步的DML和DDL的选项，Insert(插入操作)、Update(更新操作)、Delete(删除操作)、DDL(结构同步)， 不填（不选），PartialDDL(自定义,和DdlOptions一起起作用 )
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    OpTypes?: Array<string>;
+    /**
+     * 冲突处理的详细选项，如条件覆盖中的条件行和条件操作
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ConflictHandleOption?: ConflictHandleOption;
+    /**
+     * DDL同步选项，具体描述要同步那些DDL
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DdlOptions?: Array<DdlOption>;
+    /**
+     * kafka同步选项
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    KafkaOption?: KafkaOption;
+    /**
+     * 任务限速信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RateLimitOption?: RateLimitOption;
+    /**
+     * 自动重试的时间窗口设置
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AutoRetryTimeRangeMinutes?: number;
 }
 /**
  * 一致性校验库表对象
@@ -3184,6 +3300,30 @@ export interface StepInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Progress?: number;
+}
+/**
+ * ModifyConsumerGroupDescription返回参数结构体
+ */
+export interface ModifyConsumerGroupDescriptionResponse {
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * 数据库不一致的详情，mongodb业务用到
+ */
+export interface DifferenceAdvancedObjectsDetail {
+    /**
+     * 总数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TotalCount?: number;
+    /**
+     * 不一致详情
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Items?: Array<AdvancedObjectsItem>;
 }
 /**
  * 订阅的的数据库表信息，用于配置和查询订阅任务接口。
@@ -5032,6 +5172,21 @@ export interface CompareDetailInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Skipped?: SkippedDetail;
+    /**
+     * 数据库不一致的详情，mongodb业务用到
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DifferenceAdvancedObjects?: DifferenceAdvancedObjectsDetail;
+    /**
+     * 数据不一致的详情，mongodb业务用到
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DifferenceData?: DifferenceDataDetail;
+    /**
+     * 数据行不一致的详情，mongodb业务用到
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DifferenceRow?: DifferenceRowDetail;
 }
 /**
  * DescribeSubscribeJobs请求参数结构体

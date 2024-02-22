@@ -84,7 +84,7 @@ export declare class Client extends AbstractClient {
      */
     CreateSnapshots(req: CreateSnapshotsRequest, cb?: (error: string, rep: CreateSnapshotsResponse) => void): Promise<CreateSnapshotsResponse>;
     /**
-     * 当restful api为关闭状态时，可以通过此接口开启restful apu
+     * 当restful api为关闭状态时，可以通过此接口开启restful api。
      */
     EnableRestProxy(req: EnableRestProxyRequest, cb?: (error: string, rep: EnableRestProxyResponse) => void): Promise<EnableRestProxyResponse>;
     /**

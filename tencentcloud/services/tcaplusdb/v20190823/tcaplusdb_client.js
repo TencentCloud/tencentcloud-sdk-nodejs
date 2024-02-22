@@ -142,7 +142,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateSnapshots", req, cb);
     }
     /**
-     * 当restful api为关闭状态时，可以通过此接口开启restful apu
+     * 当restful api为关闭状态时，可以通过此接口开启restful api。
      */
     async EnableRestProxy(req, cb) {
         return this.request("EnableRestProxy", req, cb);

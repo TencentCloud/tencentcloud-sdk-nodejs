@@ -1605,7 +1605,7 @@ export interface ModifyTableGroupTagsRequest {
  */
 export interface EnableRestProxyRequest {
     /**
-     * 对应于appid
+     * 集群 ID。
      */
     ClusterId: string;
 }

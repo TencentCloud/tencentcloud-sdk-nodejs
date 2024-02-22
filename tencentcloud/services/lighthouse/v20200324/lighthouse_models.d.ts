@@ -4140,15 +4140,15 @@ export interface InternetAccessible {
   <li>按流量包付费：TRAFFIC_POSTPAID_BY_HOUR</li>
   <li>按带宽付费： BANDWIDTH_POSTPAID_BY_HOUR</li>
      */
-    InternetChargeType: string;
+    InternetChargeType?: string;
     /**
      * 公网出带宽上限，单位：Mbps。
      */
-    InternetMaxBandwidthOut: number;
+    InternetMaxBandwidthOut?: number;
     /**
      * 是否分配公网 IP。
      */
-    PublicIpAssigned: boolean;
+    PublicIpAssigned?: boolean;
 }
 /**
  * ReplaceFirewallTemplateRule请求参数结构体

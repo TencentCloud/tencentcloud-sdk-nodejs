@@ -3104,6 +3104,21 @@ export interface ModifyAlarmRuleRequest {
     ExtInfo?: string;
 }
 /**
+ * 实例生命周期detail
+ */
+export interface InstanceLifeDetailDto {
+    /**
+     * 实例状态
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    State: string;
+    /**
+     * 该状态开始时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    StartTime: string;
+}
+/**
  * 工作流信息
  */
 export interface Workflow {
@@ -3501,6 +3516,36 @@ export interface InstanceOpsDto {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     ExecutorGroupName?: string;
+    /**
+     * 关联实例信息。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RelatedInstanceList?: Array<InstanceOpsDto>;
+    /**
+     * 关联实例信息数量，不和RelatedInstanceList强关联。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RelatedInstanceSize?: number;
+    /**
+     * ownerId
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    OwnerId?: string;
+    /**
+     * 用户id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    UserId?: string;
+    /**
+     * 实例生命周期
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InstanceLifeCycleOpsDto?: InstanceLifeCycleOpsDto;
+    /**
+     * 自动重试次数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RetryAttempts?: number;
 }
 /**
  * RunTask返回参数结构体
@@ -4230,17 +4275,28 @@ export interface MakePlanOpsDtoCollection {
     Items?: Array<MakePlanOpsDto>;
 }
 /**
- * CheckAlarmRegularNameExist返回参数结构体
+ * BooleanResponse
  */
-export interface CheckAlarmRegularNameExistResponse {
+export interface BooleanResponse {
     /**
-     * 是否重名
+     * 是否成功
      */
-    Data?: boolean;
+    Success?: boolean;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     * 失败返回提示信息
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    RequestId?: string;
+    Message?: string;
+    /**
+     * 基线Id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    BaselineId?: number;
+    /**
+     * 错误码
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Code?: string;
 }
 /**
  * CreateAlarmRuleRequest
@@ -9886,6 +9942,11 @@ export interface InstanceLogInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     CodeFileName?: string;
+    /**
+     * 扩展属性
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ExtensionInfo?: Array<AttributeItemDTO>;
 }
 /**
  * GetFileInfo请求参数结构体
@@ -10670,156 +10731,59 @@ export interface BaselineTaskInfo {
     TaskInChargeUin?: string;
 }
 /**
- * 任务告警信息
+ * 实例生命周期详情
  */
-export interface TaskAlarmInfo {
+export interface InstanceLifeCycleOpsDto {
     /**
-     * 任务ID
+     * 任务id
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     TaskId: string;
     /**
-     * 规则名称
-     */
-    RegularName: string;
-    /**
-     * 规则状态(0表示关闭，1表示打开)
-     */
-    RegularStatus: number;
-    /**
-     * 告警级别(0表示普通，1表示重要，2表示紧急)
-     */
-    AlarmLevel: number;
-    /**
-     * 告警方式,多个用逗号隔开（1:邮件，2:短信，3:微信，4:语音，5:代表企业微信，6:http）
-     */
-    AlarmWay: string;
-    /**
-     * 任务类型(201表示实时，202表示离线)
-     */
-    TaskType: number;
-    /**
-     * 主键ID
+     * 数据时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Id?: string;
+    CurRunDate: string;
     /**
-     * 规则ID
-     */
-    RegularId?: string;
-    /**
-     * 告警指标,0表示任务失败，1表示任务运行超时，2表示任务停止，3表示任务暂停
-  ，4写入速度，5读取速度，6读取吞吐，7写入吞吐, 8脏数据字节数，9脏数据条数
-     */
-    AlarmIndicator?: number;
-    /**
-     * 指标阈值(1表示离线任务第一次运行失败，2表示离线任务所有重试完成后失败)
+     * 实例生命次数
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TriggerType?: number;
+    LifeRound: number;
     /**
-     * 预计的超时时间(分钟级别)
+     * 运行类型 重跑/补录/周期/非周期
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    EstimatedTime?: number;
+    RunType: string;
     /**
-     * 告警接收人ID，多个用逗号隔开
-     */
-    AlarmRecipientId?: string;
-    /**
-     * 项目ID
+     * 重跑次数
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ProjectId?: string;
+    Tries: number;
     /**
-     * 创建人
+     * 实例生命周期
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Creater?: string;
+    InstanceLifeDetailDtoList: Array<InstanceLifeDetailDto>;
     /**
-     * 告警接收人昵称，多个用逗号隔开
+     * Runner运行状态
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    AlarmRecipientName?: string;
+    RunnerState: string;
     /**
-     * 告警指标描述
+     * 错误码
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    AlarmIndicatorDesc?: string;
+    ErrorDesc: string;
     /**
-     * 实时任务告警需要的参数，1是大于2是小于
+     * 错误告警级别
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Operator?: number;
+    ErrorCodeLevel: string;
     /**
-     * 节点id，多个逗号分隔
+     * 实例日志简略信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    NodeId?: string;
-    /**
-     * 节点名称，多个逗号分隔
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    NodeName?: string;
-    /**
-     * 指标列表
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    AlarmIndicatorInfos?: Array<AlarmIndicatorInfo>;
-    /**
-     * 告警接收人类型，0指定人员；1任务责任人
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    AlarmRecipientType?: number;
-    /**
-     * 企业微信群Hook地址，多个hook地址使用,隔开
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    WeComHook?: string;
-    /**
-     * 最近操作时间
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    UpdateTime?: string;
-    /**
-     * 最近操作人Uin
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    OperatorUin?: string;
-    /**
-     * 关联任务数
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    TaskCount?: number;
-    /**
-     * 监控对象类型,1:所有任务,2:指定任务,3:指定责任人
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    MonitorType?: number;
-    /**
-     * 监控对象列表
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    MonitorObjectIds?: Array<string>;
-    /**
-     * 最近一次告警的实例ID
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    LatestAlarmInstanceId?: string;
-    /**
-     * 最近一次告警时间
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    LatestAlarmTime?: string;
-    /**
-     * 告警规则描述
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Description?: string;
-    /**
-     * 飞书群Hook地址，多个hook地址使用,隔开
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    LarkWebHooks?: string;
+    InstanceLogListOpsDto: InstanceLogInfo;
 }
 /**
  * DescribeClusterNamespaceList请求参数结构体
@@ -15472,6 +15436,26 @@ export interface DimensionCount {
     QualityDim?: number;
 }
 /**
+ * aiops基础信息
+ */
+export interface AttributeItemDTO {
+    /**
+     * key
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Key?: string;
+    /**
+     * value
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Value?: string;
+    /**
+     * 描述
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Description?: string;
+}
+/**
  * DescribeInstanceLog返回参数结构体
  */
 export interface DescribeInstanceLogResponse {
@@ -17915,6 +17899,158 @@ export interface TriggerEventResponse {
     RequestId?: string;
 }
 /**
+ * 任务告警信息
+ */
+export interface TaskAlarmInfo {
+    /**
+     * 任务ID
+     */
+    TaskId: string;
+    /**
+     * 规则名称
+     */
+    RegularName: string;
+    /**
+     * 规则状态(0表示关闭，1表示打开)
+     */
+    RegularStatus: number;
+    /**
+     * 告警级别(0表示普通，1表示重要，2表示紧急)
+     */
+    AlarmLevel: number;
+    /**
+     * 告警方式,多个用逗号隔开（1:邮件，2:短信，3:微信，4:语音，5:代表企业微信，6:http）
+     */
+    AlarmWay: string;
+    /**
+     * 任务类型(201表示实时，202表示离线)
+     */
+    TaskType: number;
+    /**
+     * 主键ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Id?: string;
+    /**
+     * 规则ID
+     */
+    RegularId?: string;
+    /**
+     * 告警指标,0表示任务失败，1表示任务运行超时，2表示任务停止，3表示任务暂停
+  ，4写入速度，5读取速度，6读取吞吐，7写入吞吐, 8脏数据字节数，9脏数据条数
+     */
+    AlarmIndicator?: number;
+    /**
+     * 指标阈值(1表示离线任务第一次运行失败，2表示离线任务所有重试完成后失败)
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TriggerType?: number;
+    /**
+     * 预计的超时时间(分钟级别)
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    EstimatedTime?: number;
+    /**
+     * 告警接收人ID，多个用逗号隔开
+     */
+    AlarmRecipientId?: string;
+    /**
+     * 项目ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ProjectId?: string;
+    /**
+     * 创建人
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Creater?: string;
+    /**
+     * 告警接收人昵称，多个用逗号隔开
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AlarmRecipientName?: string;
+    /**
+     * 告警指标描述
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AlarmIndicatorDesc?: string;
+    /**
+     * 实时任务告警需要的参数，1是大于2是小于
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Operator?: number;
+    /**
+     * 节点id，多个逗号分隔
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    NodeId?: string;
+    /**
+     * 节点名称，多个逗号分隔
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    NodeName?: string;
+    /**
+     * 指标列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AlarmIndicatorInfos?: Array<AlarmIndicatorInfo>;
+    /**
+     * 告警接收人类型，0指定人员；1任务责任人
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AlarmRecipientType?: number;
+    /**
+     * 企业微信群Hook地址，多个hook地址使用,隔开
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    WeComHook?: string;
+    /**
+     * 最近操作时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    UpdateTime?: string;
+    /**
+     * 最近操作人Uin
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    OperatorUin?: string;
+    /**
+     * 关联任务数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TaskCount?: number;
+    /**
+     * 监控对象类型,1:所有任务,2:指定任务,3:指定责任人
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MonitorType?: number;
+    /**
+     * 监控对象列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MonitorObjectIds?: Array<string>;
+    /**
+     * 最近一次告警的实例ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    LatestAlarmInstanceId?: string;
+    /**
+     * 最近一次告警时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    LatestAlarmTime?: string;
+    /**
+     * 告警规则描述
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Description?: string;
+    /**
+     * 飞书群Hook地址，多个hook地址使用,隔开
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    LarkWebHooks?: string;
+}
+/**
  * DescribeSchedulerTaskCntByStatus请求参数结构体
  */
 export interface DescribeSchedulerTaskCntByStatusRequest {
@@ -18886,28 +19022,17 @@ export interface InstanceReportSummary {
     EndRunTime: string;
 }
 /**
- * BooleanResponse
+ * CheckAlarmRegularNameExist返回参数结构体
  */
-export interface BooleanResponse {
+export interface CheckAlarmRegularNameExistResponse {
     /**
-     * 是否成功
+     * 是否重名
      */
-    Success?: boolean;
+    Data?: boolean;
     /**
-     * 失败返回提示信息
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
-    Message?: string;
-    /**
-     * 基线Id
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    BaselineId?: number;
-    /**
-     * 错误码
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Code?: string;
+    RequestId?: string;
 }
 /**
  * DeleteProjectParamDs请求参数结构体
