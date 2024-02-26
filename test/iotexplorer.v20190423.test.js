@@ -928,6 +928,16 @@ it("iotexplorer.v20190423.CreatePositionSpace", async function () {
     }
 })
 
+it("iotexplorer.v20190423.DescribeDeviceFirmWare", async function () {
+    try {
+       const data = await client.DescribeDeviceFirmWare({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotexplorer.v20190423.CreateFenceBind", async function () {
     try {
        const data = await client.CreateFenceBind({})

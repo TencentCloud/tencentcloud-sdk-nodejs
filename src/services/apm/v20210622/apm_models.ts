@@ -275,7 +275,7 @@ export interface CreateApmInstanceRequest {
    */
   Description?: string
   /**
-   * Trace数据保存时长
+   * Trace数据保存时长，单位为天默认存储为3天
    */
   TraceDuration?: number
   /**
@@ -283,7 +283,7 @@ export interface CreateApmInstanceRequest {
    */
   Tags?: Array<ApmTag>
   /**
-   * 实例上报额度值
+   * 实例上报额度值，默认赋值为0表示不限制上报额度
    */
   SpanDailyCounters?: number
   /**

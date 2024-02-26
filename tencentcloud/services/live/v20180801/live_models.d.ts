@@ -3268,35 +3268,35 @@ export interface ScreenshotTask {
     /**
      * 截图任务ID。
      */
-    TaskId: string;
+    TaskId?: string;
     /**
      * 推流域名。
      */
-    DomainName: string;
+    DomainName?: string;
     /**
      * 推流路径。
      */
-    AppName: string;
+    AppName?: string;
     /**
      * 流名称。
      */
-    StreamName: string;
+    StreamName?: string;
     /**
      * 任务开始时间，Unix时间戳。
      */
-    StartTime: number;
+    StartTime?: number;
     /**
      * 任务结束时间，Unix时间戳。
      */
-    EndTime: number;
+    EndTime?: number;
     /**
      * 截图模板ID。
      */
-    TemplateId: number;
+    TemplateId?: number;
     /**
      * 调用 StopScreenshotTask 停止任务时间，Unix时间戳。值为0表示未曾调用接口停止任务。
      */
-    Stopped: number;
+    Stopped?: number;
 }
 /**
  * DeletePullStreamConfig返回参数结构体

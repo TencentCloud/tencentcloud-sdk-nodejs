@@ -78,6 +78,14 @@ export interface DescribeHpcClustersRequest {
      * 本次请求量, 默认值20。
      */
     Limit?: number;
+    /**
+     * 高性能计算集群类型。
+     */
+    HpcClusterType?: string;
+    /**
+     * 高性能计算集群对应的业务场景标识，当前只支持CDC。
+     */
+    HpcClusterBusinessId?: string;
 }
 /**
  * DescribeImageQuota返回参数结构体
@@ -1000,6 +1008,15 @@ export interface ResetInstancesTypeResponse {
     RequestId?: string;
 }
 /**
+ * DeleteInstancesActionTimer请求参数结构体
+ */
+export interface DeleteInstancesActionTimerRequest {
+    /**
+     * 定时任务ID列表，可以通过DescribeInstancesActionTimer接口查询。只能删除未执行的定时任务。
+     */
+    ActionTimerIds: Array<string>;
+}
+/**
  * AssociateInstancesKeyPairs请求参数结构体
  */
 export interface AssociateInstancesKeyPairsRequest {
@@ -1192,13 +1209,13 @@ export interface InquiryPriceModifyInstancesChargeTypeResponse {
     RequestId?: string;
 }
 /**
- * ImportKeyPair返回参数结构体
+ * ImportInstancesActionTimer返回参数结构体
  */
-export interface ImportKeyPairResponse {
+export interface ImportInstancesActionTimerResponse {
     /**
-     * 密钥对ID。
+     * 定时器id列表
      */
-    KeyId?: string;
+    ActionTimerIds: Array<string>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1321,9 +1338,13 @@ export interface DeleteHpcClustersResponse {
     RequestId?: string;
 }
 /**
- * ModifyLaunchTemplateDefaultVersion返回参数结构体
+ * DescribeInstancesActionTimer返回参数结构体
  */
-export interface ModifyLaunchTemplateDefaultVersionResponse {
+export interface DescribeInstancesActionTimerResponse {
+    /**
+     * 定时任务信息列表。
+     */
+    ActionTimers: Array<ActionTimer>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1957,6 +1978,19 @@ export interface DescribeInstanceFamilyConfigsResponse {
     RequestId?: string;
 }
 /**
+ * ImportKeyPair返回参数结构体
+ */
+export interface ImportKeyPairResponse {
+    /**
+     * 密钥对ID。
+     */
+    KeyId?: string;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * CreateImage返回参数结构体
  */
 export interface CreateImageResponse {
@@ -1965,6 +1999,15 @@ export interface CreateImageResponse {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     ImageId?: string;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * DeleteInstancesActionTimer返回参数结构体
+ */
+export interface DeleteInstancesActionTimerResponse {
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2323,6 +2366,19 @@ export interface DescribeDisasterRecoverGroupQuotaResponse {
  * DescribeRegions请求参数结构体
  */
 export declare type DescribeRegionsRequest = null;
+/**
+ * ImportInstancesActionTimer请求参数结构体
+ */
+export interface ImportInstancesActionTimerRequest {
+    /**
+     * 实例id列表，可以通过DescribeInstances接口查询到。
+     */
+    InstanceIds: Array<string>;
+    /**
+     * 定时器任务信息，目前仅支持定时销毁。
+     */
+    ActionTimer: ActionTimer;
+}
 /**
  * CreateDisasterRecoverGroup请求参数结构体
  */
@@ -4045,6 +4101,14 @@ export interface CreateHpcClusterRequest {
      * 高性能计算集群备注。
      */
     Remark?: string;
+    /**
+     * 高性能计算集群类型。
+     */
+    HpcClusterType?: string;
+    /**
+     * 高性能计算集群对应的业务场景标识，当前只支持CDC。
+     */
+    HpcClusterBusinessId?: string;
 }
 /**
  * InquiryPriceResetInstancesInternetMaxBandwidth请求参数结构体
@@ -4178,6 +4242,33 @@ export interface ModifyInstancesChargeTypeRequest {
      * 是否同时切换弹性数据云盘计费模式。取值范围：<br><li>true：表示切换弹性数据云盘计费模式<br><li>false：表示不切换弹性数据云盘计费模式<br><br>默认取值：false。
      */
     ModifyPortableDataDisk?: boolean;
+}
+/**
+ * ResizeInstanceDisks请求参数结构体
+ */
+export interface ResizeInstanceDisksRequest {
+    /**
+     * 待操作的实例ID。可通过[`DescribeInstances`](https://cloud.tencent.com/document/api/213/15728)接口返回值中的`InstanceId`获取。
+     */
+    InstanceId: string;
+    /**
+     * 待扩容的数据盘配置信息。只支持扩容非弹性数据盘（[`DescribeDisks`](https://cloud.tencent.com/document/api/362/16315)接口返回值中的`Portable`为`false`表示非弹性）。数据盘容量单位：GB。最小扩容步长：10G。关于数据盘类型的选择请参考[硬盘产品简介](https://cloud.tencent.com/document/product/362/2353)。可选数据盘类型受到实例类型`InstanceType`限制。另外允许扩容的最大容量也因数据盘类型的不同而有所差异。
+  <dx-alert infotype="explain" title="">您必须指定参数DataDisks与SystemDisk的其中一个，但不能同时指定。</dx-alert>
+     */
+    DataDisks?: Array<DataDisk>;
+    /**
+     * 是否对运行中的实例选择强制关机。建议对运行中的实例先手动关机，然后再重置用户密码。取值范围：<br><li>true：表示在正常关机失败后进行强制关机</li><br><li>false：表示在正常关机失败后不进行强制关机</li><br><br>默认取值：false。<br><br>强制关机的效果等同于关闭物理计算机的电源开关。强制关机可能会导致数据丢失或文件系统损坏，请仅在服务器不能正常关机时使用。
+     */
+    ForceStop?: boolean;
+    /**
+     * 待扩容的系统盘配置信息。只支持扩容云盘。
+  <dx-alert infotype="explain" title="">您必须指定参数DataDisks与SystemDisk的其中一个，但不能同时指定。</dx-alert>
+     */
+    SystemDisk?: SystemDisk;
+    /**
+     * 扩容云盘的方式是否为在线扩容。
+     */
+    ResizeOnline?: boolean;
 }
 /**
  * DescribeInternetChargeTypeConfigs返回参数结构体
@@ -4679,6 +4770,15 @@ export interface DescribeReservedInstancesRequest {
  * ModifyInstancesRenewFlag返回参数结构体
  */
 export interface ModifyInstancesRenewFlagResponse {
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * ModifyLaunchTemplateDefaultVersion返回参数结构体
+ */
+export interface ModifyLaunchTemplateDefaultVersionResponse {
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -5642,31 +5742,33 @@ export interface DescribeInstanceTypeConfigsResponse {
     RequestId?: string;
 }
 /**
- * ResizeInstanceDisks请求参数结构体
+ * DescribeInstancesActionTimer请求参数结构体
  */
-export interface ResizeInstanceDisksRequest {
+export interface DescribeInstancesActionTimerRequest {
     /**
-     * 待操作的实例ID。可通过[`DescribeInstances`](https://cloud.tencent.com/document/api/213/15728)接口返回值中的`InstanceId`获取。
+     * 定时任务ID列表。
      */
-    InstanceId: string;
+    ActionTimerIds?: Array<string>;
     /**
-     * 待扩容的数据盘配置信息。只支持扩容非弹性数据盘（[`DescribeDisks`](https://cloud.tencent.com/document/api/362/16315)接口返回值中的`Portable`为`false`表示非弹性）。数据盘容量单位：GB。最小扩容步长：10G。关于数据盘类型的选择请参考[硬盘产品简介](https://cloud.tencent.com/document/product/362/2353)。可选数据盘类型受到实例类型`InstanceType`限制。另外允许扩容的最大容量也因数据盘类型的不同而有所差异。
-  <dx-alert infotype="explain" title="">您必须指定参数DataDisks与SystemDisk的其中一个，但不能同时指定。</dx-alert>
+     * 按照一个或者多个实例ID查询。
      */
-    DataDisks?: Array<DataDisk>;
+    InstanceIds?: Array<string>;
     /**
-     * 是否对运行中的实例选择强制关机。建议对运行中的实例先手动关机，然后再重置用户密码。取值范围：<br><li>true：表示在正常关机失败后进行强制关机</li><br><li>false：表示在正常关机失败后不进行强制关机</li><br><br>默认取值：false。<br><br>强制关机的效果等同于关闭物理计算机的电源开关。强制关机可能会导致数据丢失或文件系统损坏，请仅在服务器不能正常关机时使用。
+     * 定时任务执行时间，格式如：2018-05-01 19:00:00，必须大于当前时间5分钟。
      */
-    ForceStop?: boolean;
+    TimerAction?: string;
     /**
-     * 待扩容的系统盘配置信息。只支持扩容云盘。
-  <dx-alert infotype="explain" title="">您必须指定参数DataDisks与SystemDisk的其中一个，但不能同时指定。</dx-alert>
+     * 执行时间的结束范围，用于条件筛选，格式如2018-05-01 19:00:00。
      */
-    SystemDisk?: SystemDisk;
+    EndActionTime?: string;
     /**
-     * 扩容云盘的方式是否为在线扩容。
+     * 执行时间的开始范围，用于条件筛选，格式如2018-05-01 19:00:00。
      */
-    ResizeOnline?: boolean;
+    StartActionTime?: string;
+    /**
+     * 定时任务状态列表。<br><li>UNDO：未执行<br><li>DOING：正在执行<br><li>DONE：执行完成。
+     */
+    StatusList?: Array<string>;
 }
 /**
  * 实例启动模板简要信息。
@@ -5728,39 +5830,49 @@ export interface HpcClusterInfo {
     /**
      * 高性能计算集群ID
      */
-    HpcClusterId: string;
+    HpcClusterId?: string;
     /**
      * 高性能计算集群名
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Name: string;
+    Name?: string;
     /**
      * 高性能计算集群备注
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Remark: string;
+    Remark?: string;
     /**
      * 集群下设备容量
      */
-    CvmQuotaTotal: number;
+    CvmQuotaTotal?: number;
     /**
      * 集群所在可用区
      */
-    Zone: string;
+    Zone?: string;
     /**
      * 集群当前已有设备量
      */
-    CurrentNum: number;
+    CurrentNum?: number;
     /**
      * 集群创建时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CreateTime: string;
+    CreateTime?: string;
     /**
      * 集群内实例ID列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    InstanceIds: Array<string>;
+    InstanceIds?: Array<string>;
+    /**
+     * 高性能计算集群类型。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    HpcClusterType?: string;
+    /**
+     * 高性能计算集群对应的业务场景标识，当前只支持CDC。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    HpcClusterBusinessId?: string;
 }
 /**
  * HDD的本地存储信息

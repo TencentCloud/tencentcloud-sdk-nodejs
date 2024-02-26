@@ -978,6 +978,16 @@ export interface OrderFlowPackageRequest {
      * 区域标识，0：国内，1：国外
      */
     PackageRegion: number;
+    /**
+     * 是否自动选择代金券，默认false。
+  有多张券时的选择策略：按照可支付订单全部金额的券，先到期的券，可抵扣金额最大的券，余额最小的券，现金券 这个优先级进行扣券，且最多只抵扣一张券。
+     */
+    AutoVoucher?: boolean;
+    /**
+     * 指定代金券ID。自动选择代金券时此参数无效。目前只允许传入一张代金券。
+  注：若指定的代金券不符合订单抵扣条件，则正常支付，不扣券
+     */
+    VoucherIds?: Array<string>;
 }
 /**
  * UpdateHardware返回参数结构体

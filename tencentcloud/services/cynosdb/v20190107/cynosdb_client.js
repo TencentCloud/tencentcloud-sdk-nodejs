@@ -778,6 +778,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeBinlogs", req, cb);
     }
     /**
+     * 本接口（DescribeClusterInstanceGrps）用于查询实例组信息。
+     */
+    async DescribeClusterInstanceGroups(req, cb) {
+        return this.request("DescribeClusterInstanceGroups", req, cb);
+    }
+    /**
      * 指定时间和集群查询是否可回滚
      */
     async DescribeRollbackTimeValidity(req, cb) {

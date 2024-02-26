@@ -298,6 +298,16 @@ it("cvm.v20170312.DisassociateInstancesKeyPairs", async function () {
     }
 })
 
+it("cvm.v20170312.DeleteInstancesActionTimer", async function () {
+    try {
+       const data = await client.DeleteInstancesActionTimer({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cvm.v20170312.CreateLaunchTemplate", async function () {
     try {
        const data = await client.CreateLaunchTemplate({})
@@ -448,6 +458,16 @@ it("cvm.v20170312.ModifyImageSharePermission", async function () {
     }
 })
 
+it("cvm.v20170312.ImportInstancesActionTimer", async function () {
+    try {
+       const data = await client.ImportInstancesActionTimer({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cvm.v20170312.DeleteLaunchTemplate", async function () {
     try {
        const data = await client.DeleteLaunchTemplate({})
@@ -461,6 +481,16 @@ it("cvm.v20170312.DeleteLaunchTemplate", async function () {
 it("cvm.v20170312.CreateKeyPair", async function () {
     try {
        const data = await client.CreateKeyPair({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cvm.v20170312.DescribeInstancesActionTimer", async function () {
+    try {
+       const data = await client.DescribeInstancesActionTimer({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

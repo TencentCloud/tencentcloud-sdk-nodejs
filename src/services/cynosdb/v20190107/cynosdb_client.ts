@@ -150,6 +150,7 @@ import {
   DescribeBackupDownloadUrlRequest,
   InstanceAuditStatus,
   CopyClusterPasswordComplexityRequest,
+  DescribeClusterInstanceGroupsResponse,
   CreateProxyEndPointResponse,
   NetAddr,
   OpenWanRequest,
@@ -321,6 +322,7 @@ import {
   ParamDetail,
   OfflineClusterRequest,
   ResetAccountPasswordResponse,
+  DescribeClusterInstanceGroupsRequest,
   OpenAuditServiceRequest,
   ModifyResourcePackageNameResponse,
   DescribeBackupListRequest,
@@ -1637,6 +1639,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeBinlogsResponse) => void
   ): Promise<DescribeBinlogsResponse> {
     return this.request("DescribeBinlogs", req, cb)
+  }
+
+  /**
+   * 本接口（DescribeClusterInstanceGrps）用于查询实例组信息。
+   */
+  async DescribeClusterInstanceGroups(
+    req: DescribeClusterInstanceGroupsRequest,
+    cb?: (error: string, rep: DescribeClusterInstanceGroupsResponse) => void
+  ): Promise<DescribeClusterInstanceGroupsResponse> {
+    return this.request("DescribeClusterInstanceGroups", req, cb)
   }
 
   /**

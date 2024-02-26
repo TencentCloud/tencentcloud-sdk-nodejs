@@ -99,8 +99,10 @@ import {
   ModifyTopicPolicyResponse,
   GetPositionSpaceListRequest,
   ProductEntry,
+  DescribeDeviceFirmWareResponse,
   SearchTopicRuleResponse,
   DescribeFenceEventListResponse,
+  DescribeDeviceFirmWareRequest,
   UpdateDevicesEnableStateRequest,
   DescribeTopicRuleRequest,
   GetDeviceLocationHistoryRequest,
@@ -1158,6 +1160,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreatePositionSpaceResponse) => void
   ): Promise<CreatePositionSpaceResponse> {
     return this.request("CreatePositionSpace", req, cb)
+  }
+
+  /**
+   * 获取设备固件信息
+   */
+  async DescribeDeviceFirmWare(
+    req: DescribeDeviceFirmWareRequest,
+    cb?: (error: string, rep: DescribeDeviceFirmWareResponse) => void
+  ): Promise<DescribeDeviceFirmWareResponse> {
+    return this.request("DescribeDeviceFirmWare", req, cb)
   }
 
   /**

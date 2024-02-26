@@ -933,6 +933,11 @@ export interface AlarmPolicy {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IsSupportAlarmTag?: number
+  /**
+   * 多标签交/并集关系
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TagOperation?: string
 }
 
 /**
@@ -1807,6 +1812,10 @@ export interface BindingPolicyTagRequest {
    * 事件配置的告警
    */
   EbSubject?: string
+  /**
+   * 标识标签取交/并集关系
+   */
+  TagOperation?: string
 }
 
 /**

@@ -574,6 +574,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreatePositionSpace", req, cb);
     }
     /**
+     * 获取设备固件信息
+     */
+    async DescribeDeviceFirmWare(req, cb) {
+        return this.request("DescribeDeviceFirmWare", req, cb);
+    }
+    /**
      * 创建围栏绑定信息
      */
     async CreateFenceBind(req, cb) {

@@ -1666,6 +1666,20 @@ wifi、wifi-ble、cellular、5g、lorawan、ble、ethernet、wifi-ethernet、els
 }
 
 /**
+ * DescribeDeviceFirmWare返回参数结构体
+ */
+export interface DescribeDeviceFirmWareResponse {
+  /**
+   * 固件信息
+   */
+  Data: string
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * SearchTopicRule返回参数结构体
  */
 export interface SearchTopicRuleResponse {
@@ -1699,6 +1713,20 @@ export interface DescribeFenceEventListResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeDeviceFirmWare请求参数结构体
+ */
+export interface DescribeDeviceFirmWareRequest {
+  /**
+   * 产品ID。
+   */
+  ProductId: string
+  /**
+   * 设备名称。
+   */
+  DeviceName: string
 }
 
 /**
