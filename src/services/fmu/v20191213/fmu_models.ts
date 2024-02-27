@@ -187,7 +187,7 @@ export interface StyleImageRequest {
    */
   FilterDegree?: number
   /**
-   * 返回图像方式（base64 或 url ) ，二选一。url有效期为1天。
+   * 返回图像方式（base64 或 url ) ，二选一。url有效期为1天。默认值为base64。
    */
   RspImgType?: string
 }
@@ -410,7 +410,7 @@ export interface StyleImageProRequest {
    */
   FilterDegree?: number
   /**
-   * 返回图像方式（base64 或 url ) ，二选一。url有效期为1天。
+   * 返回图像方式（base64 或 url ) ，二选一。url有效期为1天。默认为base64。
    */
   RspImgType?: string
 }

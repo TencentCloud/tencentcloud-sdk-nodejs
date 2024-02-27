@@ -70,10 +70,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateAllocationTag", req, cb);
     }
     /**
-     * 支付订单
+     * 获取代金券相关信息
      */
-    async PayDeals(req, cb) {
-        return this.request("PayDeals", req, cb);
+    async DescribeVoucherInfo(req, cb) {
+        return this.request("DescribeVoucherInfo", req, cb);
     }
     /**
      * 获取按项目汇总消耗详情
@@ -82,10 +82,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeCostSummaryByProject", req, cb);
     }
     /**
-     * 获取代金券相关信息
+     * 查看成本分析明细
      */
-    async DescribeVoucherInfo(req, cb) {
-        return this.request("DescribeVoucherInfo", req, cb);
+    async DescribeCostExplorerSummary(req, cb) {
+        return this.request("DescribeCostExplorerSummary", req, cb);
     }
     /**
      * 成员账号获取管理账号代付账单（按资源汇总）
@@ -119,6 +119,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeBillList(req, cb) {
         return this.request("DescribeBillList", req, cb);
+    }
+    /**
+     * 支付订单
+     */
+    async PayDeals(req, cb) {
+        return this.request("PayDeals", req, cb);
     }
     /**
      * 该接口支持通过传参，获取L0-PDF、L1-汇总、L2-资源、L3-明细、账单包、五类账单文件下载链接

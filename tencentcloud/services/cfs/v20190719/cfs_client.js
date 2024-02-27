@@ -233,6 +233,7 @@ class Client extends abstract_client_1.AbstractClient {
     }
     /**
      * 本接口（DeleteMountTarget）用于删除挂载点
+说明：2022年6月1日之后创建的CFS文件系统删除时无需单独调用删除挂载点操作，此API仅适用老版本的CFS实例。
      */
     async DeleteMountTarget(req, cb) {
         return this.request("DeleteMountTarget", req, cb);

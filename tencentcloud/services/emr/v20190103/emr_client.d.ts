@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { ScaleOutInstanceResponse, ModifyUserManagerPwdResponse, SyncPodStateResponse, CreateInstanceResponse, TerminateTasksRequest, ScaleOutClusterRequest, DescribeEmrApplicationStaticsRequest, ModifyUserManagerPwdRequest, ScaleOutInstanceRequest, ModifyResourceScheduleConfigResponse, AddUsersForUserManagerResponse, DescribeInstanceRenewNodesRequest, InquiryPriceRenewInstanceResponse, DescribeJobFlowRequest, InquiryPriceCreateInstanceResponse, StartStopServiceOrMonitorRequest, TerminateInstanceRequest, DescribeResourceScheduleRequest, DescribeUsersForUserManagerRequest, DescribeInsightListRequest, RunJobFlowResponse, StartStopServiceOrMonitorResponse, DescribeHiveQueriesResponse, DescribeInstanceRenewNodesResponse, ModifyResourcesTagsResponse, DescribeClusterNodesResponse, DescribeYarnApplicationsRequest, InquiryPriceUpdateInstanceResponse, DeleteUserManagerUserListRequest, DescribeResourceScheduleResponse, TerminateClusterNodesResponse, ModifyResourceSchedulerRequest, RunJobFlowRequest, DescribeInsightListResponse, DescribeHiveQueriesRequest, CreateClusterResponse, DescribeAutoScaleRecordsResponse, DescribeCvmQuotaResponse, CreateClusterRequest, DescribeClusterNodesRequest, DescribeCvmQuotaRequest, DescribeImpalaQueriesRequest, CreateInstanceRequest, DescribeInstancesRequest, InquiryPriceUpdateInstanceRequest, TerminateClusterNodesRequest, DescribeInstancesListRequest, DescribeInstancesListResponse, DeleteUserManagerUserListResponse, ModifyResourcePoolsResponse, TerminateTasksResponse, DescribeInstancesResponse, DescribeYarnApplicationsResponse, DescribeUsersForUserManagerResponse, InquiryPriceRenewInstanceRequest, ModifyResourcesTagsRequest, InquirePriceRenewEmrResponse, AddUsersForUserManagerRequest, SyncPodStateRequest, InquiryPriceCreateInstanceRequest, ModifyResourceScheduleConfigRequest, ScaleOutClusterResponse, InquiryPriceScaleOutInstanceRequest, DescribeEmrApplicationStaticsResponse, InquirePriceRenewEmrRequest, DescribeImpalaQueriesResponse, InquiryPriceScaleOutInstanceResponse, ModifyResourceSchedulerResponse, DescribeAutoScaleRecordsRequest, ModifyResourcePoolsRequest, DescribeJobFlowResponse, TerminateInstanceResponse } from "./emr_models";
+import { ScaleOutInstanceResponse, ModifyUserManagerPwdResponse, SyncPodStateResponse, CreateInstanceResponse, TerminateTasksRequest, ScaleOutClusterRequest, ModifyUserManagerPwdRequest, ScaleOutInstanceRequest, DescribeAutoScaleGroupGlobalConfRequest, ModifyAutoScaleStrategyRequest, ModifyResourceScheduleConfigResponse, AddUsersForUserManagerResponse, AddMetricScaleStrategyRequest, DescribeInstanceRenewNodesRequest, DescribeClusterNodesRequest, DescribeAutoScaleStrategiesResponse, InquiryPriceRenewInstanceResponse, DescribeJobFlowRequest, InquiryPriceCreateInstanceResponse, StartStopServiceOrMonitorRequest, TerminateInstanceRequest, DescribeResourceScheduleRequest, DescribeUsersForUserManagerRequest, DescribeInsightListRequest, RunJobFlowResponse, StartStopServiceOrMonitorResponse, DescribeHiveQueriesResponse, DescribeInstanceRenewNodesResponse, ModifyResourcesTagsResponse, DescribeAutoScaleGroupGlobalConfResponse, DescribeEmrApplicationStaticsRequest, DescribeClusterNodesResponse, DescribeYarnApplicationsRequest, InquiryPriceUpdateInstanceResponse, DeleteUserManagerUserListRequest, DescribeResourceScheduleResponse, TerminateClusterNodesResponse, ModifyResourceSchedulerRequest, RunJobFlowRequest, DescribeInsightListResponse, DescribeHiveQueriesRequest, CreateClusterResponse, DescribeAutoScaleRecordsResponse, DescribeCvmQuotaResponse, CreateClusterRequest, AddMetricScaleStrategyResponse, DescribeCvmQuotaRequest, DescribeImpalaQueriesRequest, CreateInstanceRequest, DescribeInstancesRequest, InquiryPriceUpdateInstanceRequest, DescribeAutoScaleStrategiesRequest, TerminateClusterNodesRequest, DescribeInstancesListRequest, DeleteAutoScaleStrategyRequest, DescribeInstancesListResponse, DeleteUserManagerUserListResponse, ModifyResourcePoolsResponse, TerminateTasksResponse, DescribeInstancesResponse, DescribeYarnApplicationsResponse, DescribeUsersForUserManagerResponse, InquiryPriceRenewInstanceRequest, ModifyResourcesTagsRequest, InquirePriceRenewEmrResponse, AddUsersForUserManagerRequest, SyncPodStateRequest, InquiryPriceCreateInstanceRequest, ModifyResourceScheduleConfigRequest, DeleteAutoScaleStrategyResponse, ScaleOutClusterResponse, ModifyAutoScaleStrategyResponse, InquiryPriceScaleOutInstanceRequest, DescribeEmrApplicationStaticsResponse, InquirePriceRenewEmrRequest, DescribeImpalaQueriesResponse, InquiryPriceScaleOutInstanceResponse, ModifyResourceSchedulerResponse, DescribeAutoScaleRecordsRequest, ModifyResourcePoolsRequest, DescribeJobFlowResponse, TerminateInstanceResponse } from "./emr_models";
 /**
  * emr client
  * @class
@@ -86,6 +86,14 @@ export declare class Client extends AbstractClient {
      */
     AddUsersForUserManager(req: AddUsersForUserManagerRequest, cb?: (error: string, rep: AddUsersForUserManagerResponse) => void): Promise<AddUsersForUserManagerResponse>;
     /**
+     * 修改自动扩缩容规则
+     */
+    ModifyAutoScaleStrategy(req: ModifyAutoScaleStrategyRequest, cb?: (error: string, rep: ModifyAutoScaleStrategyResponse) => void): Promise<ModifyAutoScaleStrategyResponse>;
+    /**
+     * 删除自动扩缩容规则，后台销毁根据该规则扩缩容出来的节点
+     */
+    DeleteAutoScaleStrategy(req: DeleteAutoScaleStrategyRequest, cb?: (error: string, rep: DeleteAutoScaleStrategyResponse) => void): Promise<DeleteAutoScaleStrategyResponse>;
+    /**
      * yarn application 统计接口查询
      */
     DescribeEmrApplicationStatics(req: DescribeEmrApplicationStaticsRequest, cb?: (error: string, rep: DescribeEmrApplicationStaticsResponse) => void): Promise<DescribeEmrApplicationStaticsResponse>;
@@ -133,6 +141,18 @@ export declare class Client extends AbstractClient {
      * 销毁EMR实例。此接口仅支持弹性MapReduce正式计费版本。
      */
     TerminateInstance(req: TerminateInstanceRequest, cb?: (error: string, rep: TerminateInstanceResponse) => void): Promise<TerminateInstanceResponse>;
+    /**
+     * 获取自动扩缩容规则
+     */
+    DescribeAutoScaleStrategies(req: DescribeAutoScaleStrategiesRequest, cb?: (error: string, rep: DescribeAutoScaleStrategiesResponse) => void): Promise<DescribeAutoScaleStrategiesResponse>;
+    /**
+     * 添加扩缩容规则，按负载和时间
+     */
+    AddMetricScaleStrategy(req: AddMetricScaleStrategyRequest, cb?: (error: string, rep: AddMetricScaleStrategyResponse) => void): Promise<AddMetricScaleStrategyResponse>;
+    /**
+     * 获取自动扩缩容全局配置
+     */
+    DescribeAutoScaleGroupGlobalConf(req: DescribeAutoScaleGroupGlobalConfRequest, cb?: (error: string, rep: DescribeAutoScaleGroupGlobalConfResponse) => void): Promise<DescribeAutoScaleGroupGlobalConfResponse>;
     /**
      * 查询集群节点信息
      */

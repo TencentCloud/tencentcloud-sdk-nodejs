@@ -870,7 +870,7 @@ export interface ReservedPreDomainsRequest {
    */
   DomainList: Array<string>
   /**
-   * 模版ID
+   * 模板ID
    */
   TemplateId: string
 }

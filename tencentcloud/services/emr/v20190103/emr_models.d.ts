@@ -1,4 +1,19 @@
 /**
+ * 定时伸缩每月重复任务策略
+ */
+export interface MonthRepeatStrategy {
+    /**
+     * 重复任务执行的具体时刻，例如"01:02:00"
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ExecuteAtTimeOfDay: string;
+    /**
+     * 每月中的天数时间段描述，长度只能为2，例如[2,10]表示每月2-10号。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DaysOfMonthRange: Array<number | bigint>;
+}
+/**
  * 集群配置。
  */
 export interface ClusterSetting {
@@ -563,6 +578,65 @@ export interface KeyValue {
     Value: string;
 }
 /**
+ * 扩容容器资源时的资源描述
+ */
+export interface PodNewSpec {
+    /**
+     * 外部资源提供者的标识符，例如"cls-a1cd23fa"。
+     */
+    ResourceProviderIdentifier: string;
+    /**
+     * 外部资源提供者类型，例如"tke",当前仅支持"tke"。
+     */
+    ResourceProviderType: string;
+    /**
+     * 资源的用途，即节点类型，当前仅支持"TASK"。
+     */
+    NodeFlag: string;
+    /**
+     * CPU核数。
+     */
+    Cpu: number;
+    /**
+     * 内存大小，单位为GB。
+     */
+    Memory: number;
+    /**
+     * Eks集群-CPU类型，当前支持"intel"和"amd"
+     */
+    CpuType?: string;
+    /**
+     * Pod节点数据目录挂载信息。
+     */
+    PodVolumes?: Array<PodVolume>;
+    /**
+     * 是否浮动规格，默认否
+  <li>true：代表是</li>
+  <li>false：代表否</li>
+     */
+    EnableDynamicSpecFlag?: boolean;
+    /**
+     * 浮动规格
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DynamicPodSpec?: DynamicPodSpec;
+    /**
+     * 代表vpc网络唯一id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    VpcId?: string;
+    /**
+     * 代表vpc子网唯一id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SubnetId?: string;
+    /**
+     * pod name
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PodName?: string;
+}
+/**
  * EMR产品配置
  */
 export interface EmrProductConfigDetail {
@@ -663,53 +737,34 @@ export interface EmrProductConfigDetail {
     PublicKeyId?: string;
 }
 /**
- * DescribeEmrApplicationStatics请求参数结构体
+ * 弹性扩缩容按天重复任务描述
  */
-export interface DescribeEmrApplicationStaticsRequest {
+export interface DayRepeatStrategy {
     /**
-     * 集群id
+     * 重复任务执行的具体时刻，例如"01:02:00"
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    InstanceId: string;
+    ExecuteAtTimeOfDay: string;
     /**
-     * 起始时间，时间戳（秒）
+     * 每隔Step天执行一次
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    StartTime?: number;
+    Step: number;
+}
+/**
+ * 定时扩容每周重复任务策略
+ */
+export interface WeekRepeatStrategy {
     /**
-     * 结束时间，时间戳（秒）
+     * 重复任务执行的具体时刻，例如"01:02:00"
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    EndTime?: number;
+    ExecuteAtTimeOfDay: string;
     /**
-     * 过滤的队列名
+     * 每周几的数字描述，例如，[1,3,4]表示每周周一、周三、周四。
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Queues?: Array<string>;
-    /**
-     * 过滤的用户名
-     */
-    Users?: Array<string>;
-    /**
-     * 过滤的作业类型
-     */
-    ApplicationTypes?: Array<string>;
-    /**
-     * 分组字段，可选：queue, user, applicationType
-     */
-    GroupBy?: Array<string>;
-    /**
-     * 排序字段，可选：sumMemorySeconds, sumVCoreSeconds, sumHDFSBytesWritten, sumHDFSBytesRead
-     */
-    OrderBy?: string;
-    /**
-     * 是否顺序排序，0-逆序，1-正序
-     */
-    IsAsc?: number;
-    /**
-     * 页号
-     */
-    Offset?: number;
-    /**
-     * 页容量，范围为[10,100]
-     */
-    Limit?: number;
+    DaysOfWeek: Array<number | bigint>;
 }
 /**
  * 用户管理列表过滤器
@@ -722,21 +777,25 @@ export interface UserManagerFilter {
     UserName?: string;
 }
 /**
- * 元数据库信息
+ * POD浮动规格
  */
-export interface MetaDbInfo {
+export interface DynamicPodSpec {
     /**
-     * 元数据类型。
+     * 需求最小cpu核数
      */
-    MetaType: string;
+    RequestCpu?: number;
     /**
-     * 统一元数据库实例ID。
+     * 需求最大cpu核数
      */
-    UnifyMetaInstanceId: string;
+    LimitCpu?: number;
     /**
-     * 自建元数据库信息。
+     * 需求最小memory，单位MB
      */
-    MetaDBInfo: CustomMetaInfo;
+    RequestMemory?: number;
+    /**
+     * 需求最大memory，单位MB
+     */
+    LimitMemory?: number;
 }
 /**
  * 磁盘描述。
@@ -1195,63 +1254,34 @@ export interface ZoneDetailPriceResult {
     NodeDetailPrice: Array<NodeDetailPriceResult>;
 }
 /**
- * 扩容容器资源时的资源描述
+ * DescribeAutoScaleGroupGlobalConf请求参数结构体
  */
-export interface PodNewSpec {
+export interface DescribeAutoScaleGroupGlobalConfRequest {
     /**
-     * 外部资源提供者的标识符，例如"cls-a1cd23fa"。
+     * 实例ID。
      */
-    ResourceProviderIdentifier: string;
+    InstanceId: string;
+}
+/**
+ * ModifyAutoScaleStrategy请求参数结构体
+ */
+export interface ModifyAutoScaleStrategyRequest {
     /**
-     * 外部资源提供者类型，例如"tke",当前仅支持"tke"。
+     * 实例ID。
      */
-    ResourceProviderType: string;
+    InstanceId: string;
     /**
-     * 资源的用途，即节点类型，当前仅支持"TASK"。
+     * 自动扩缩容规则类型，1表示按负载指标扩缩容，2表示按时间扩缩容。
      */
-    NodeFlag: string;
+    StrategyType: number;
     /**
-     * CPU核数。
+     * 按时间扩缩容的规则。
      */
-    Cpu: number;
+    TimeAutoScaleStrategies?: Array<TimeAutoScaleStrategy>;
     /**
-     * 内存大小，单位为GB。
+     * 伸缩组Id
      */
-    Memory: number;
-    /**
-     * Eks集群-CPU类型，当前支持"intel"和"amd"
-     */
-    CpuType?: string;
-    /**
-     * Pod节点数据目录挂载信息。
-     */
-    PodVolumes?: Array<PodVolume>;
-    /**
-     * 是否浮动规格，默认否
-  <li>true：代表是</li>
-  <li>false：代表否</li>
-     */
-    EnableDynamicSpecFlag?: boolean;
-    /**
-     * 浮动规格
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    DynamicPodSpec?: DynamicPodSpec;
-    /**
-     * 代表vpc网络唯一id
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    VpcId?: string;
-    /**
-     * 代表vpc子网唯一id
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    SubnetId?: string;
-    /**
-     * pod name
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    PodName?: string;
+    GroupId?: number;
 }
 /**
  * 资源详情
@@ -1634,6 +1664,23 @@ export interface TopologyInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     NodeInfoList?: Array<ShortNodeInfo>;
+}
+/**
+ * AddMetricScaleStrategy请求参数结构体
+ */
+export interface AddMetricScaleStrategyRequest {
+    /**
+     * 实例ID。
+     */
+    InstanceId: string;
+    /**
+     * 1表示按负载规则扩容，2表示按时间规则扩容。
+     */
+    StrategyType: number;
+    /**
+     * 按时间扩缩容的规则。
+     */
+    TimeAutoScaleStrategy?: TimeAutoScaleStrategy;
 }
 /**
  * EMR产品配置
@@ -2053,39 +2100,70 @@ export interface JobResult {
     ApplicationId?: string;
 }
 /**
- * 用于创建集群价格清单-节点组成部分价格
+ * DescribeClusterNodes请求参数结构体
  */
-export interface PartDetailPriceItem {
+export interface DescribeClusterNodesRequest {
     /**
-     * 类型包括：节点->node、系统盘->rootDisk、云数据盘->dataDisk、metaDB
+     * 集群实例ID,实例ID形如: emr-xxxxxxxx
+     */
+    InstanceId: string;
+    /**
+     * 节点标识，取值为：
+  <li>all：表示获取全部类型节点，cdb信息除外。</li>
+  <li>master：表示获取master节点信息。</li>
+  <li>core：表示获取core节点信息。</li>
+  <li>task：表示获取task节点信息。</li>
+  <li>common：表示获取common节点信息。</li>
+  <li>router：表示获取router节点信息。</li>
+  <li>db：表示获取正常状态的cdb信息。</li>
+  <li>recyle：表示获取回收站隔离中的节点信息，包括cdb信息。</li>
+  <li>renew：表示获取所有待续费的节点信息，包括cdb信息，自动续费节点不会返回。</li>
+  注意：现在只支持以上取值，输入其他值会导致错误。
+     */
+    NodeFlag: string;
+    /**
+     * 导出全部节点信息csv时是否携带cdb信息
+     */
+    ExportDb?: boolean;
+    /**
+     * 页编号，默认值为0，表示第一页。
+     */
+    Offset?: number;
+    /**
+     * 每页返回数量，默认值为100，最大值为100。
+  如果offset和limit都不填，或者都填0，则返回全部数据
+     */
+    Limit?: number;
+    /**
+     * 资源类型:支持all/host/pod，默认为all
+     */
+    HardwareResourceType?: string;
+    /**
+     * 支持搜索的字段
+     */
+    SearchFields?: Array<SearchItem>;
+    /**
+     * 无
+     */
+    OrderField?: string;
+    /**
+     * 无
+     */
+    Asc?: number;
+}
+/**
+ * DescribeAutoScaleStrategies返回参数结构体
+ */
+export interface DescribeAutoScaleStrategiesResponse {
+    /**
+     * 按时间伸缩规则
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    InstanceType: string;
+    TimeBasedAutoScaleStrategies?: Array<TimeAutoScaleStrategy>;
     /**
-     * 单价（原价）
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
-    Price: number;
-    /**
-     * 单价（折扣价）
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    RealCost: number;
-    /**
-     * 总价（折扣价）
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    RealTotalCost: number;
-    /**
-     * 折扣
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Policy: number;
-    /**
-     * 数量
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    GoodsNum: number;
+    RequestId?: string;
 }
 /**
  * 共用组件信息
@@ -2927,6 +3005,74 @@ export interface ScaleOutServiceConfGroupsInfo {
     ConfGroupName?: string;
 }
 /**
+ * DescribeAutoScaleGroupGlobalConf返回参数结构体
+ */
+export interface DescribeAutoScaleGroupGlobalConfResponse {
+    /**
+     * 集群所有伸缩组全局信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    GroupGlobalConfs?: Array<GroupGlobalConfs>;
+    /**
+     * 总数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TotalCount?: number;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * DescribeEmrApplicationStatics请求参数结构体
+ */
+export interface DescribeEmrApplicationStaticsRequest {
+    /**
+     * 集群id
+     */
+    InstanceId: string;
+    /**
+     * 起始时间，时间戳（秒）
+     */
+    StartTime?: number;
+    /**
+     * 结束时间，时间戳（秒）
+     */
+    EndTime?: number;
+    /**
+     * 过滤的队列名
+     */
+    Queues?: Array<string>;
+    /**
+     * 过滤的用户名
+     */
+    Users?: Array<string>;
+    /**
+     * 过滤的作业类型
+     */
+    ApplicationTypes?: Array<string>;
+    /**
+     * 分组字段，可选：queue, user, applicationType
+     */
+    GroupBy?: Array<string>;
+    /**
+     * 排序字段，可选：sumMemorySeconds, sumVCoreSeconds, sumHDFSBytesWritten, sumHDFSBytesRead
+     */
+    OrderBy?: string;
+    /**
+     * 是否顺序排序，0-逆序，1-正序
+     */
+    IsAsc?: number;
+    /**
+     * 页号
+     */
+    Offset?: number;
+    /**
+     * 页容量，范围为[10,100]
+     */
+    Limit?: number;
+}
+/**
  * DescribeClusterNodes返回参数结构体
  */
 export interface DescribeClusterNodesResponse {
@@ -3357,6 +3503,115 @@ export interface PriceResource {
     LocalDiskNum: number;
 }
 /**
+ * 时间扩缩容规则
+ */
+export interface TimeAutoScaleStrategy {
+    /**
+     * 策略名字，集群内唯一。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    StrategyName: string;
+    /**
+     * 策略触发后的冷却时间，该段时间内，将不能触发弹性扩缩容。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IntervalTime: number;
+    /**
+     * 扩缩容动作，1表示扩容，2表示缩容。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ScaleAction: number;
+    /**
+     * 扩缩容数量。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ScaleNum: number;
+    /**
+     * 规则状态，1表示有效，2表示无效，3表示暂停。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    StrategyStatus: number;
+    /**
+     * 规则优先级，越小越高。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Priority: number;
+    /**
+     * 当多条规则同时触发，其中某些未真正执行时，在该时间范围内，将会重试。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RetryValidTime: number;
+    /**
+     * 时间扩缩容重复策略
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RepeatStrategy: RepeatStrategy;
+    /**
+     * 策略唯一ID。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    StrategyId?: number;
+    /**
+     * 优雅缩容开关
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    GraceDownFlag?: boolean;
+    /**
+     * 优雅缩容等待时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    GraceDownTime?: number;
+    /**
+     * 绑定标签列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Tags?: Array<Tag>;
+    /**
+     * 预设配置组
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ConfigGroupAssigned?: string;
+    /**
+     * 扩容资源计算方法，"DEFAULT","INSTANCE", "CPU", "MEMORYGB"。
+  "DEFAULT"表示默认方式，与"INSTANCE"意义相同。
+  "INSTANCE"表示按照节点计算，默认方式。
+  "CPU"表示按照机器的核数计算。
+  "MEMORYGB"表示按照机器内存数计算。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MeasureMethod?: string;
+    /**
+     * 销毁策略, "DEFAULT",默认销毁策略，由缩容规则触发缩容，"TIMING"表示定时销毁
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TerminatePolicy?: string;
+    /**
+     * 最长使用时间， 秒数，最短1小时，最长24小时
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MaxUse?: number;
+    /**
+     * 节点部署服务列表。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SoftDeployInfo?: Array<number | bigint>;
+    /**
+     * 启动进程列表。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ServiceNodeInfo?: Array<number | bigint>;
+    /**
+     * 补偿扩容，0表示不开启，1表示开启
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CompensateFlag?: number;
+    /**
+     * 伸缩组id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    GroupId?: number;
+}
+/**
  * DescribeInsightList返回参数结构体
  */
 export interface DescribeInsightListResponse {
@@ -3589,54 +3844,13 @@ export interface UserAndGroup {
     UserGroup: string;
 }
 /**
- * 资源详情
+ * AddMetricScaleStrategy返回参数结构体
  */
-export interface ResourceDetail {
+export interface AddMetricScaleStrategyResponse {
     /**
-     * 规格
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
-    Spec: string;
-    /**
-     * 规格名
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    SpecName: string;
-    /**
-     * 硬盘类型
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    StorageType: number;
-    /**
-     * 硬盘类型
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    DiskType: string;
-    /**
-     * 系统盘大小
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    RootSize: number;
-    /**
-     * 内存大小
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    MemSize: number;
-    /**
-     * CPU个数
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Cpu: number;
-    /**
-     * 硬盘大小
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    DiskSize: number;
-    /**
-     * 规格
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    InstanceType: string;
+    RequestId?: string;
 }
 /**
  * 引导脚本
@@ -3659,56 +3873,29 @@ export interface BootstrapAction {
     Args?: Array<string>;
 }
 /**
- * DescribeClusterNodes请求参数结构体
+ * 集群所有伸缩组全局参数信息
  */
-export interface DescribeClusterNodesRequest {
+export interface GroupGlobalConfs {
     /**
-     * 集群实例ID,实例ID形如: emr-xxxxxxxx
+     * 伸缩组信息
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    InstanceId: string;
+    GroupGlobalConf?: AutoScaleResourceConf;
     /**
-     * 节点标识，取值为：
-  <li>all：表示获取全部类型节点，cdb信息除外。</li>
-  <li>master：表示获取master节点信息。</li>
-  <li>core：表示获取core节点信息。</li>
-  <li>task：表示获取task节点信息。</li>
-  <li>common：表示获取common节点信息。</li>
-  <li>router：表示获取router节点信息。</li>
-  <li>db：表示获取正常状态的cdb信息。</li>
-  <li>recyle：表示获取回收站隔离中的节点信息，包括cdb信息。</li>
-  <li>renew：表示获取所有待续费的节点信息，包括cdb信息，自动续费节点不会返回。</li>
-  注意：现在只支持以上取值，输入其他值会导致错误。
+     * 当前伸缩组扩容出来的节点数量。
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    NodeFlag: string;
+    CurrentNodes?: number;
     /**
-     * 导出全部节点信息csv时是否携带cdb信息
+     * 当前伸缩组扩容出来的后付费节点数量。
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    ExportDb?: boolean;
+    CurrentPostPaidNodes?: number;
     /**
-     * 页编号，默认值为0，表示第一页。
+     * 当前伸缩组扩容出来的竞价实例节点数量。
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Offset?: number;
-    /**
-     * 每页返回数量，默认值为100，最大值为100。
-  如果offset和limit都不填，或者都填0，则返回全部数据
-     */
-    Limit?: number;
-    /**
-     * 资源类型:支持all/host/pod，默认为all
-     */
-    HardwareResourceType?: string;
-    /**
-     * 支持搜索的字段
-     */
-    SearchFields?: Array<SearchItem>;
-    /**
-     * 无
-     */
-    OrderField?: string;
-    /**
-     * 无
-     */
-    Asc?: number;
+    CurrentSpotPaidNodes?: number;
 }
 /**
  * DescribeCvmQuota请求参数结构体
@@ -3936,6 +4123,23 @@ export interface CreateInstanceRequest {
     MultiZoneSettings?: Array<MultiZoneSetting>;
 }
 /**
+ * 元数据库信息
+ */
+export interface MetaDbInfo {
+    /**
+     * 元数据类型。
+     */
+    MetaType: string;
+    /**
+     * 统一元数据库实例ID。
+     */
+    UnifyMetaInstanceId: string;
+    /**
+     * 自建元数据库信息。
+     */
+    MetaDBInfo: CustomMetaInfo;
+}
+/**
  * 执行动作。
  */
 export interface Execution {
@@ -4044,6 +4248,16 @@ export interface DescribeInstancesRequest {
     Asc?: number;
 }
 /**
+ * 弹性扩缩容执行一次规则上下文
+ */
+export interface NotRepeatStrategy {
+    /**
+     * 该次任务执行的具体完整时间，格式为"2020-07-13 00:00:00"
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ExecuteAt: string;
+}
+/**
  * InquiryPriceUpdateInstance请求参数结构体
  */
 export interface InquiryPriceUpdateInstanceRequest {
@@ -4082,6 +4296,19 @@ export interface InquiryPriceUpdateInstanceRequest {
      * 批量变配资源ID列表
      */
     ResourceIdList?: Array<string>;
+}
+/**
+ * DescribeAutoScaleStrategies请求参数结构体
+ */
+export interface DescribeAutoScaleStrategiesRequest {
+    /**
+     * 实例ID。
+     */
+    InstanceId: string;
+    /**
+     * 伸缩组id
+     */
+    GroupId?: number;
 }
 /**
  * TerminateClusterNodes请求参数结构体
@@ -4145,6 +4372,40 @@ export interface DescribeInstancesListRequest {
     Filters?: Array<Filters>;
 }
 /**
+ * 定时伸缩任务策略
+ */
+export interface RepeatStrategy {
+    /**
+     * 取值范围"DAY","DOW","DOM","NONE"，分别表示按天重复、按周重复、按月重复和一次执行。
+     */
+    RepeatType: string;
+    /**
+     * 按天重复规则，当RepeatType为"DAY"时有效
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DayRepeat?: DayRepeatStrategy;
+    /**
+     * 按周重复规则，当RepeatType为"DOW"时有效
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    WeekRepeat?: WeekRepeatStrategy;
+    /**
+     * 按月重复规则，当RepeatType为"DOM"时有效
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MonthRepeat?: MonthRepeatStrategy;
+    /**
+     * 一次执行规则，当RepeatType为"NONE"时有效
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    NotRepeat?: NotRepeatStrategy;
+    /**
+     * 规则过期时间，超过该时间后，规则将自动置为暂停状态，形式为"2020-07-23 00:00:00"。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Expire?: string;
+}
+/**
  * 资源详情
  */
 export interface OutterResource {
@@ -4203,6 +4464,27 @@ export interface OpScope {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     ServiceInfoList?: Array<ServiceBasicRestartInfo>;
+}
+/**
+ * DeleteAutoScaleStrategy请求参数结构体
+ */
+export interface DeleteAutoScaleStrategyRequest {
+    /**
+     * 实例ID。
+     */
+    InstanceId: string;
+    /**
+     * 自动扩缩容规则类型，1表示按照负载指标扩缩容，2表示按照时间规则扩缩容。
+     */
+    StrategyType: number;
+    /**
+     * 规则ID。
+     */
+    StrategyId: number;
+    /**
+     * 伸缩组Id
+     */
+    GroupId?: number;
 }
 /**
  * DescribeInstancesList返回参数结构体
@@ -4755,25 +5037,13 @@ export interface UserInfoForUserManager {
     ReMark?: string;
 }
 /**
- * POD浮动规格
+ * DeleteAutoScaleStrategy返回参数结构体
  */
-export interface DynamicPodSpec {
+export interface DeleteAutoScaleStrategyResponse {
     /**
-     * 需求最小cpu核数
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
-    RequestCpu?: number;
-    /**
-     * 需求最大cpu核数
-     */
-    LimitCpu?: number;
-    /**
-     * 需求最小memory，单位MB
-     */
-    RequestMemory?: number;
-    /**
-     * 需求最大memory，单位MB
-     */
-    LimitMemory?: number;
+    RequestId?: string;
 }
 /**
  * 单个pod状态
@@ -4826,6 +5096,41 @@ export interface ScaleOutClusterResponse {
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * 用于创建集群价格清单-节点组成部分价格
+ */
+export interface PartDetailPriceItem {
+    /**
+     * 类型包括：节点->node、系统盘->rootDisk、云数据盘->dataDisk、metaDB
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InstanceType: string;
+    /**
+     * 单价（原价）
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Price: number;
+    /**
+     * 单价（折扣价）
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RealCost: number;
+    /**
+     * 总价（折扣价）
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RealTotalCost: number;
+    /**
+     * 折扣
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Policy: number;
+    /**
+     * 数量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    GoodsNum: number;
 }
 /**
  * 共用组件信息
@@ -4942,6 +5247,15 @@ export interface SoftDependInfo {
      * 是否必选
      */
     Required: boolean;
+}
+/**
+ * ModifyAutoScaleStrategy返回参数结构体
+ */
+export interface ModifyAutoScaleStrategyResponse {
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * InquiryPriceScaleOutInstance请求参数结构体
@@ -5071,17 +5385,25 @@ export interface Resource {
     DiskNum?: number;
 }
 /**
- * Emr集群列表实例自定义查询过滤
+ * 机器资源描述。
  */
-export interface Filters {
+export interface JobFlowResource {
     /**
-     * 字段名称
+     * 机器类型描述。
      */
-    Name: string;
+    Spec: string;
     /**
-     * 过滤字段值
+     * 机器类型描述，可参考CVM的该含义。
      */
-    Values: Array<string>;
+    InstanceType: string;
+    /**
+     * 标签KV对。
+     */
+    Tags: Array<Tag>;
+    /**
+     * 磁盘描述列表。
+     */
+    DiskGroups: Array<DiskGroup>;
 }
 /**
  * DescribeEmrApplicationStatics返回参数结构体
@@ -5179,6 +5501,56 @@ export interface ModifyResourceTags {
      * 修改的标签列表
      */
     ModifyTags?: Array<Tag>;
+}
+/**
+ * 资源详情
+ */
+export interface ResourceDetail {
+    /**
+     * 规格
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Spec: string;
+    /**
+     * 规格名
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SpecName: string;
+    /**
+     * 硬盘类型
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    StorageType: number;
+    /**
+     * 硬盘类型
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DiskType: string;
+    /**
+     * 系统盘大小
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RootSize: number;
+    /**
+     * 内存大小
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MemSize: number;
+    /**
+     * CPU个数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Cpu: number;
+    /**
+     * 硬盘大小
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DiskSize: number;
+    /**
+     * 规格
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InstanceType: string;
 }
 /**
  * DescribeImpalaQueries返回参数结构体
@@ -5291,6 +5663,42 @@ export interface InquiryPriceScaleOutInstanceResponse {
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * 弹性扩缩容规格配置
+ */
+export interface AutoScaleResourceConf {
+    /**
+     * 配置ID。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Id?: number;
+    /**
+     * 集群实例ID。
+     */
+    ClusterId?: number;
+    /**
+     * 自动扩缩容保留最小实例数。
+     */
+    ScaleLowerBound?: number;
+    /**
+     * 自动扩缩容最大实例数。
+     */
+    ScaleUpperBound?: number;
+    /**
+     * 扩容规则类型，1为按负载指标扩容规则，2为按时间扩容规则
+     */
+    StrategyType?: number;
+    /**
+     * 下次能可扩容时间。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    NextTimeCanScale?: number;
+    /**
+     * 优雅缩容开关
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    GraceDownFlag?: boolean;
 }
 /**
  * ModifyResourceScheduler返回参数结构体
@@ -5700,25 +6108,17 @@ export interface DescribeAutoScaleRecordsRequest {
     Limit?: number;
 }
 /**
- * 机器资源描述。
+ * Emr集群列表实例自定义查询过滤
  */
-export interface JobFlowResource {
+export interface Filters {
     /**
-     * 机器类型描述。
+     * 字段名称
      */
-    Spec: string;
+    Name: string;
     /**
-     * 机器类型描述，可参考CVM的该含义。
+     * 过滤字段值
      */
-    InstanceType: string;
-    /**
-     * 标签KV对。
-     */
-    Tags: Array<Tag>;
-    /**
-     * 磁盘描述列表。
-     */
-    DiskGroups: Array<DiskGroup>;
+    Values: Array<string>;
 }
 /**
  * ModifyResourcePools请求参数结构体

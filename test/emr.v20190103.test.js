@@ -208,6 +208,26 @@ it("emr.v20190103.AddUsersForUserManager", async function () {
     }
 })
 
+it("emr.v20190103.ModifyAutoScaleStrategy", async function () {
+    try {
+       const data = await client.ModifyAutoScaleStrategy({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("emr.v20190103.DeleteAutoScaleStrategy", async function () {
+    try {
+       const data = await client.DeleteAutoScaleStrategy({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("emr.v20190103.DescribeEmrApplicationStatics", async function () {
     try {
        const data = await client.DescribeEmrApplicationStatics({})
@@ -321,6 +341,36 @@ it("emr.v20190103.TerminateTasks", async function () {
 it("emr.v20190103.TerminateInstance", async function () {
     try {
        const data = await client.TerminateInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("emr.v20190103.DescribeAutoScaleStrategies", async function () {
+    try {
+       const data = await client.DescribeAutoScaleStrategies({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("emr.v20190103.AddMetricScaleStrategy", async function () {
+    try {
+       const data = await client.AddMetricScaleStrategy({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("emr.v20190103.DescribeAutoScaleGroupGlobalConf", async function () {
+    try {
+       const data = await client.DescribeAutoScaleGroupGlobalConf({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

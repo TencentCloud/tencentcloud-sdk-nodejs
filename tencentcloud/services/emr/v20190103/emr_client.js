@@ -144,6 +144,18 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("AddUsersForUserManager", req, cb);
     }
     /**
+     * 修改自动扩缩容规则
+     */
+    async ModifyAutoScaleStrategy(req, cb) {
+        return this.request("ModifyAutoScaleStrategy", req, cb);
+    }
+    /**
+     * 删除自动扩缩容规则，后台销毁根据该规则扩缩容出来的节点
+     */
+    async DeleteAutoScaleStrategy(req, cb) {
+        return this.request("DeleteAutoScaleStrategy", req, cb);
+    }
+    /**
      * yarn application 统计接口查询
      */
     async DescribeEmrApplicationStatics(req, cb) {
@@ -214,6 +226,24 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async TerminateInstance(req, cb) {
         return this.request("TerminateInstance", req, cb);
+    }
+    /**
+     * 获取自动扩缩容规则
+     */
+    async DescribeAutoScaleStrategies(req, cb) {
+        return this.request("DescribeAutoScaleStrategies", req, cb);
+    }
+    /**
+     * 添加扩缩容规则，按负载和时间
+     */
+    async AddMetricScaleStrategy(req, cb) {
+        return this.request("AddMetricScaleStrategy", req, cb);
+    }
+    /**
+     * 获取自动扩缩容全局配置
+     */
+    async DescribeAutoScaleGroupGlobalConf(req, cb) {
+        return this.request("DescribeAutoScaleGroupGlobalConf", req, cb);
     }
     /**
      * 查询集群节点信息

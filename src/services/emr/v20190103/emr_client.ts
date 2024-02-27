@@ -18,6 +18,7 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  MonthRepeatStrategy,
   ClusterSetting,
   PodSpecInfo,
   PodSaleSpec,
@@ -35,10 +36,12 @@ import {
   HiveQuery,
   Step,
   KeyValue,
+  PodNewSpec,
   EmrProductConfigDetail,
-  DescribeEmrApplicationStaticsRequest,
+  DayRepeatStrategy,
+  WeekRepeatStrategy,
   UserManagerFilter,
-  MetaDbInfo,
+  DynamicPodSpec,
   DiskSpec,
   ModifyUserManagerPwdRequest,
   COSSettings,
@@ -46,7 +49,8 @@ import {
   SubnetInfo,
   ScaleOutInstanceRequest,
   ZoneDetailPriceResult,
-  PodNewSpec,
+  DescribeAutoScaleGroupGlobalConfRequest,
+  ModifyAutoScaleStrategyRequest,
   NodeResourceSpec,
   ModifyResourceScheduleConfigResponse,
   InsightResult,
@@ -56,13 +60,15 @@ import {
   EmrListInstance,
   AddUsersForUserManagerResponse,
   TopologyInfo,
+  AddMetricScaleStrategyRequest,
   EmrProductConfigOutter,
   VPCSettings,
   CustomServiceDefine,
   DescribeInstanceRenewNodesRequest,
   YarnApplication,
   JobResult,
-  PartDetailPriceItem,
+  DescribeClusterNodesRequest,
+  DescribeAutoScaleStrategiesResponse,
   DependService,
   PodSpec,
   InquiryPriceRenewInstanceResponse,
@@ -88,6 +94,8 @@ import {
   DescribeInstanceRenewNodesResponse,
   ModifyResourcesTagsResponse,
   ScaleOutServiceConfGroupsInfo,
+  DescribeAutoScaleGroupGlobalConfResponse,
+  DescribeEmrApplicationStaticsRequest,
   DescribeClusterNodesResponse,
   DescribeYarnApplicationsRequest,
   InquiryPriceUpdateInstanceResponse,
@@ -103,6 +111,7 @@ import {
   LoginSettings,
   RunJobFlowRequest,
   PriceResource,
+  TimeAutoScaleStrategy,
   DescribeInsightListResponse,
   DescribeHiveQueriesRequest,
   CreateClusterResponse,
@@ -111,22 +120,27 @@ import {
   SearchItem,
   CreateClusterRequest,
   UserAndGroup,
-  ResourceDetail,
+  AddMetricScaleStrategyResponse,
   BootstrapAction,
-  DescribeClusterNodesRequest,
+  GroupGlobalConfs,
   DescribeCvmQuotaRequest,
   DescribeImpalaQueriesRequest,
   ComponentBasicRestartInfo,
   CreateInstanceRequest,
+  MetaDbInfo,
   Execution,
   UpdateInstanceSettings,
   ScriptBootstrapActionConfig,
   DescribeInstancesRequest,
+  NotRepeatStrategy,
   InquiryPriceUpdateInstanceRequest,
+  DescribeAutoScaleStrategiesRequest,
   TerminateClusterNodesRequest,
   DescribeInstancesListRequest,
+  RepeatStrategy,
   OutterResource,
   OpScope,
+  DeleteAutoScaleStrategyRequest,
   DescribeInstancesListResponse,
   DeleteUserManagerUserListResponse,
   ModifyResourcePoolsResponse,
@@ -148,23 +162,27 @@ import {
   MultiZoneSetting,
   ModifyResourceScheduleConfigRequest,
   UserInfoForUserManager,
-  DynamicPodSpec,
+  DeleteAutoScaleStrategyResponse,
   PodState,
   ScaleOutClusterResponse,
+  PartDetailPriceItem,
   ExternalService,
   PreExecuteFileSettings,
   ClusterExternalServiceInfo,
   SoftDependInfo,
+  ModifyAutoScaleStrategyResponse,
   InquiryPriceScaleOutInstanceRequest,
   Resource,
-  Filters,
+  JobFlowResource,
   DescribeEmrApplicationStaticsResponse,
   InquirePriceRenewEmrRequest,
   ModifyResourceTags,
+  ResourceDetail,
   DescribeImpalaQueriesResponse,
   CustomMetaDBInfo,
   UserManagerUserBriefInfo,
   InquiryPriceScaleOutInstanceResponse,
+  AutoScaleResourceConf,
   ModifyResourceSchedulerResponse,
   VirtualPrivateCloud,
   StrategyConfig,
@@ -174,7 +192,7 @@ import {
   NodeHardwareInfo,
   ServiceBasicRestartInfo,
   DescribeAutoScaleRecordsRequest,
-  JobFlowResource,
+  Filters,
   ModifyResourcePoolsRequest,
   DescribeJobFlowResponse,
   InstanceChargePrepaid,
@@ -383,6 +401,26 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 修改自动扩缩容规则
+   */
+  async ModifyAutoScaleStrategy(
+    req: ModifyAutoScaleStrategyRequest,
+    cb?: (error: string, rep: ModifyAutoScaleStrategyResponse) => void
+  ): Promise<ModifyAutoScaleStrategyResponse> {
+    return this.request("ModifyAutoScaleStrategy", req, cb)
+  }
+
+  /**
+   * 删除自动扩缩容规则，后台销毁根据该规则扩缩容出来的节点
+   */
+  async DeleteAutoScaleStrategy(
+    req: DeleteAutoScaleStrategyRequest,
+    cb?: (error: string, rep: DeleteAutoScaleStrategyResponse) => void
+  ): Promise<DeleteAutoScaleStrategyResponse> {
+    return this.request("DeleteAutoScaleStrategy", req, cb)
+  }
+
+  /**
    * yarn application 统计接口查询
    */
   async DescribeEmrApplicationStatics(
@@ -500,6 +538,36 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: TerminateInstanceResponse) => void
   ): Promise<TerminateInstanceResponse> {
     return this.request("TerminateInstance", req, cb)
+  }
+
+  /**
+   * 获取自动扩缩容规则
+   */
+  async DescribeAutoScaleStrategies(
+    req: DescribeAutoScaleStrategiesRequest,
+    cb?: (error: string, rep: DescribeAutoScaleStrategiesResponse) => void
+  ): Promise<DescribeAutoScaleStrategiesResponse> {
+    return this.request("DescribeAutoScaleStrategies", req, cb)
+  }
+
+  /**
+   * 添加扩缩容规则，按负载和时间
+   */
+  async AddMetricScaleStrategy(
+    req: AddMetricScaleStrategyRequest,
+    cb?: (error: string, rep: AddMetricScaleStrategyResponse) => void
+  ): Promise<AddMetricScaleStrategyResponse> {
+    return this.request("AddMetricScaleStrategy", req, cb)
+  }
+
+  /**
+   * 获取自动扩缩容全局配置
+   */
+  async DescribeAutoScaleGroupGlobalConf(
+    req: DescribeAutoScaleGroupGlobalConfRequest,
+    cb?: (error: string, rep: DescribeAutoScaleGroupGlobalConfResponse) => void
+  ): Promise<DescribeAutoScaleGroupGlobalConfResponse> {
+    return this.request("DescribeAutoScaleGroupGlobalConf", req, cb)
   }
 
   /**

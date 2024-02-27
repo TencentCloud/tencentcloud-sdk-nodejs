@@ -19,16 +19,19 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   DescribeCostSummaryByProductRequest,
+  DescribeCostExplorerSummaryResponse,
   ConsumptionBusinessSummaryDataItem,
   BillTagInfo,
   SavingPlanCoverageRate,
   BillTransactionInfo,
   ConditionBusiness,
+  AnalyseActionTypeDetail,
+  DescribeCostExplorerSummaryRequest,
   DescribeCostSummaryByProductResponse,
   ProductInfo,
   DeleteAllocationTagResponse,
   DescribeBillDetailForOrganizationResponse,
-  BillDetailComponent,
+  BillDetailComponentConfig,
   DescribeCostSummaryByResourceResponse,
   DescribeBillSummaryByRegionRequest,
   DescribeCostSummaryByProjectRequest,
@@ -51,11 +54,15 @@ import {
   UsageRecords,
   VoucherInfos,
   DescribeCostSummaryByProjectResponse,
+  AnalyseProjectDetail,
   DescribeBillSummaryByTagResponse,
   DescribeBillSummaryByPayModeResponse,
   DescribeBillSummaryByTagRequest,
+  AnalyseOwnerUinDetail,
   SummaryDetail,
+  AnalyseAmountDetail,
   DescribeBillResourceSummaryForOrganizationRequest,
+  AnalyseDetail,
   DescribeCostSummaryByRegionRequest,
   ConsumptionSummaryTrend,
   DescribeBillDownloadUrlRequest,
@@ -63,14 +70,14 @@ import {
   SavingPlanOverviewDetail,
   DescribeBillSummaryByPayModeRequest,
   ApplicableProducts,
-  ConditionPayMode,
+  DescribeBillSummaryByProjectRequest,
   PayDealsResponse,
   BillDetail,
   CreateSavingPlanOrderRequest,
   DescribeBillDetailResponse,
   Deal,
   DescribeDealsByCondResponse,
-  DescribeBillSummaryByProjectRequest,
+  ConditionPayMode,
   DescribeBillSummaryByProjectResponse,
   DescribeBillDownloadUrlResponse,
   TagDataInfo,
@@ -78,14 +85,18 @@ import {
   SummaryTotal,
   BusinessSummaryTotal,
   CostComponentSet,
+  AnalyseHeaderDetail,
   JsonObject,
+  AnalysePayModeDetail,
   DetailPoint,
   DescribeBillSummaryResponse,
   BillResourceSummary,
   Conditions,
+  AnalyseTimeDetail,
   DescribeSavingPlanCoverageRequest,
   RegionSummaryOverviewItem,
   ConsumptionProjectSummaryDataItem,
+  AnalyseRegionDetail,
   DescribeDosageDetailByDateResponse,
   DescribeBillSummaryForOrganizationRequest,
   DescribeSavingPlanOverviewRequest,
@@ -94,7 +105,8 @@ import {
   DescribeVoucherUsageDetailsRequest,
   DescribeBillResourceSummaryRequest,
   DetailSet,
-  BillDetailComponentConfig,
+  BillDetailComponent,
+  ConditionRegion,
   TagSummaryOverviewItem,
   ConsumptionResourceSummaryConditionValue,
   DescribeCostDetailRequest,
@@ -106,7 +118,8 @@ import {
   PayModeSummaryOverviewItem,
   UsageDetails,
   DescribeDosageDetailByDateRequest,
-  ConditionRegion,
+  AnalyseBusinessDetail,
+  AnalyseConditions,
   CostDetail,
   DescribeBillSummaryByProductResponse,
   SavingPlanUsageDetail,
@@ -116,6 +129,7 @@ import {
   DescribeAccountBalanceRequest,
   DescribeBillDetailRequest,
   DescribeSavingPlanResourceInfoRequest,
+  AnalyseZoneDetail,
   DescribeVoucherInfoResponse,
   BillDetailAssociatedOrder,
   DescribeBillListResponse,
@@ -129,12 +143,14 @@ import {
   DescribeSavingPlanResourceInfoResponse,
   DescribeDealsByCondRequest,
   DescribeDosageCosDetailByDateResponse,
+  ProjectSummaryOverviewItem,
   DescribeBillSummaryForOrganizationResponse,
   ConditionProject,
   DescribeTagListResponse,
   CosDetailSets,
   DescribeDosageDetail,
-  ProjectSummaryOverviewItem,
+  AnalyseConditionDetail,
+  AnalyseHeaderTimeDetail,
   DescribeCostSummaryByRegionResponse,
 } from "./billing_models"
 
@@ -218,13 +234,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 支付订单
+   * 获取代金券相关信息
    */
-  async PayDeals(
-    req: PayDealsRequest,
-    cb?: (error: string, rep: PayDealsResponse) => void
-  ): Promise<PayDealsResponse> {
-    return this.request("PayDeals", req, cb)
+  async DescribeVoucherInfo(
+    req: DescribeVoucherInfoRequest,
+    cb?: (error: string, rep: DescribeVoucherInfoResponse) => void
+  ): Promise<DescribeVoucherInfoResponse> {
+    return this.request("DescribeVoucherInfo", req, cb)
   }
 
   /**
@@ -238,13 +254,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取代金券相关信息
+   * 查看成本分析明细
    */
-  async DescribeVoucherInfo(
-    req: DescribeVoucherInfoRequest,
-    cb?: (error: string, rep: DescribeVoucherInfoResponse) => void
-  ): Promise<DescribeVoucherInfoResponse> {
-    return this.request("DescribeVoucherInfo", req, cb)
+  async DescribeCostExplorerSummary(
+    req: DescribeCostExplorerSummaryRequest,
+    cb?: (error: string, rep: DescribeCostExplorerSummaryResponse) => void
+  ): Promise<DescribeCostExplorerSummaryResponse> {
+    return this.request("DescribeCostExplorerSummary", req, cb)
   }
 
   /**
@@ -298,6 +314,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeBillListResponse) => void
   ): Promise<DescribeBillListResponse> {
     return this.request("DescribeBillList", req, cb)
+  }
+
+  /**
+   * 支付订单
+   */
+  async PayDeals(
+    req: PayDealsRequest,
+    cb?: (error: string, rep: PayDealsResponse) => void
+  ): Promise<PayDealsResponse> {
+    return this.request("PayDeals", req, cb)
   }
 
   /**

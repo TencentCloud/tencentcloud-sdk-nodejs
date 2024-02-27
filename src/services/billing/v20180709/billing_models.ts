@@ -46,6 +46,41 @@ export interface DescribeCostSummaryByProductRequest {
 }
 
 /**
+ * DescribeCostExplorerSummary返回参数结构体
+ */
+export interface DescribeCostExplorerSummaryResponse {
+  /**
+   * 数据条数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Total?: number
+  /**
+   * 表头信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Header?: AnalyseHeaderDetail
+  /**
+   * 数据明细
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Detail?: Array<AnalyseDetail>
+  /**
+   * 数据总计
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalDetail?: AnalyseDetail
+  /**
+   * 筛选框
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ConditionValue?: AnalyseConditionDetail
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 消耗按产品汇总详情
  */
 export interface ConsumptionBusinessSummaryDataItem {
@@ -180,6 +215,85 @@ export interface ConditionBusiness {
 }
 
 /**
+ * 成本分析交易类型复杂类型
+ */
+export interface AnalyseActionTypeDetail {
+  /**
+   * 交易类型code
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ActionType?: string
+  /**
+   * 交易类型Name
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ActionTypeName?: string
+}
+
+/**
+ * DescribeCostExplorerSummary请求参数结构体
+ */
+export interface DescribeCostExplorerSummaryRequest {
+  /**
+   * 周期开始时间，格式为yyyy-mm-dd hh:ii:ss
+   */
+  BeginTime: string
+  /**
+   * 周期结束时间，格式为yyyy-mm-dd hh:ii:ss
+   */
+  EndTime: string
+  /**
+   * 账单类型：1-费用账单、2-消耗账单
+   */
+  BillType: string
+  /**
+   * 统计周期：日-day，月-month；
+   */
+  PeriodType: string
+  /**
+   * 分类维度（数据汇总维度），查询分类维度（请使用分类维度code入参）入参枚举值：
+default=仅总计
+feeType=费用类型
+billType=账单类型
+business=产品
+product=子产品
+region=地域
+zone=可用区
+actionType=交易类型
+payMode =计费模式
+tags=标签
+project =项目
+payerUin=支付者账号
+ownerUin=使用者账号
+   */
+  Dimensions: string
+  /**
+   * 费用类型：cost-总费用，totalCost-原价费用
+   */
+  FeeType: string
+  /**
+   * 数量，每页最大值为100
+   */
+  PageSize: number
+  /**
+   * 起始页，当PageNo=1表示第一页， PageNo=2表示第二页，依次类推。
+   */
+  PageNo: number
+  /**
+   * 分账标签值
+   */
+  TagKeyStr?: string
+  /**
+   * 是否需要筛选框， 1-表示需要， 0-表示不需要，若不传默认不需要。
+   */
+  NeedConditionValue?: string
+  /**
+   * 筛选参数
+   */
+  Conditions?: AnalyseConditions
+}
+
+/**
  * DescribeCostSummaryByProduct返回参数结构体
  */
 export interface DescribeCostSummaryByProductResponse {
@@ -256,145 +370,19 @@ export interface DescribeBillDetailForOrganizationResponse {
 }
 
 /**
- * 账单明细组件对象
+ * 明细账单配置描述结构
  */
-export interface BillDetailComponent {
+export interface BillDetailComponentConfig {
   /**
-   * 组件类型：用户购买的产品或服务对应的组件大类，例如：云服务器 CVM 的组件：CPU、内存等
-   */
-  ComponentCodeName?: string
-  /**
-   * 组件名称：用户购买的产品或服务，所包含的具体组件
-   */
-  ItemCodeName?: string
-  /**
-   * 组件刊例价：组件的官网原始单价（如果客户享受一口价/合同价则默认不展示）
-   */
-  SinglePrice?: string
-  /**
-   * 组件指定价（已废弃）
-   * @deprecated
-   */
-  SpecifiedPrice?: string
-  /**
-   * 组件价格单位：组件价格的单位，单位构成：元/用量单位/时长单位
-   */
-  PriceUnit?: string
-  /**
-   * 组件用量：该组件实际结算用量，组件用量 = 组件原始用量 - 抵扣用量（含资源包
-   */
-  UsedAmount?: string
-  /**
-   * 组件用量单位：组件用量对应的单位
-   */
-  UsedAmountUnit?: string
-  /**
-   * 原始用量/时长：组件被资源包抵扣前的原始用量/时长
+   * 配置描述名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RealTotalMeasure?: string
+  Name?: string
   /**
-   * 抵扣用量/时长（含资源包）：组件被资源包抵扣的用量/时长
+   * 配置描述值
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DeductedMeasure?: string
-  /**
-   * 使用时长：资源使用的时长
-   */
-  TimeSpan?: string
-  /**
-   * 时长单位：资源使用时长的单位
-   */
-  TimeUnitName?: string
-  /**
-   * 组件原价：原价 = 组件刊例价 * 组件用量 * 使用时长（如果客户享受一口价/合同价则默认不展示，退费类场景也默认不展示）
-   */
-  Cost?: string
-  /**
-   * 折扣率：本资源享受的折扣率（如果客户享受一口价/合同价则默认不展示，退费场景也默认不展示）
-   */
-  Discount?: string
-  /**
-   * 优惠类型
-   */
-  ReduceType?: string
-  /**
-   * 优惠后总价：优惠后总价=（原价 - 预留实例抵扣原价 - 节省计划抵扣原价）* 折扣率
-   */
-  RealCost?: string
-  /**
-   * 优惠券支出：使用各类优惠券（如代金券、现金券等）支付的金额
-   */
-  VoucherPayAmount?: string
-  /**
-   * 现金账户支出：通过现金账户支付的金额
-   */
-  CashPayAmount?: string
-  /**
-   * 赠送账户支出：使用赠送金支付的金额
-   */
-  IncentivePayAmount?: string
-  /**
-   * 分成金账户支出：通过分成金账户支付的金额
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TransferPayAmount?: string
-  /**
-   * 组件类型编码
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ItemCode?: string
-  /**
-   * 组件名称编码
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ComponentCode?: string
-  /**
-   * 组件单价：组件的折后单价，组件单价 = 刊例价 * 折扣
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ContractPrice?: string
-  /**
-   * 实例类型：购买的产品服务对应的实例类型，包括资源包、RI、SP、竞价实例。正常的实例展示默认为不展示
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  InstanceType?: string
-  /**
-   * 预留实例抵扣的使用时长：本产品或服务使用预留实例抵扣的使用时长
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  RiTimeSpan?: string
-  /**
-   * 预留实例抵扣组件原价：本产品或服务使用预留实例抵扣的组件原价金额
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  OriginalCostWithRI?: string
-  /**
-   * 节省计划抵扣率：节省计划可用余额额度范围内，节省计划对于此组件打的折扣率
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SPDeductionRate?: string
-  /**
-   * 节省计划抵扣金额（已废弃）
-注意：此字段可能返回 null，表示取不到有效值。
-   * @deprecated
-   */
-  SPDeduction?: string
-  /**
-   * 节省计划抵扣组件原价：节省计划抵扣原价=节省计划包抵扣金额/节省计划抵扣率
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  OriginalCostWithSP?: string
-  /**
-   * 混合折扣率：综合各类折扣抵扣信息后的最终折扣率，混合折扣率 = 优惠后总价 / 组件原价
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  BlendedDiscount?: string
-  /**
-   * 配置描述：资源配置规格信息
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ComponentConfig?: Array<BillDetailComponentConfig>
+  Value?: string
 }
 
 /**
@@ -1225,6 +1213,22 @@ export interface DescribeCostSummaryByProjectResponse {
 }
 
 /**
+ * 成本分析项目返回复杂类型
+ */
+export interface AnalyseProjectDetail {
+  /**
+   * 项目id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProjectId?: string
+  /**
+   * 默认项目
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProjectName?: string
+}
+
+/**
  * DescribeBillSummaryByTag返回参数结构体
  */
 export interface DescribeBillSummaryByTagResponse {
@@ -1294,6 +1298,17 @@ export interface DescribeBillSummaryByTagRequest {
 }
 
 /**
+ * 成本分析使用者uin复杂类型
+ */
+export interface AnalyseOwnerUinDetail {
+  /**
+   * 使用者uin
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OwnerUin?: string
+}
+
+/**
  * 账单多维度汇总消费详情
  */
 export interface SummaryDetail {
@@ -1337,6 +1352,22 @@ export interface SummaryDetail {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Business?: Array<BusinessSummaryInfo>
+}
+
+/**
+ * 成本分析金额返回数据模型
+ */
+export interface AnalyseAmountDetail {
+  /**
+   * 费用类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Key?: string
+  /**
+   * 是否展示
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Display?: number
 }
 
 /**
@@ -1419,6 +1450,25 @@ export interface DescribeBillResourceSummaryForOrganizationRequest {
 （支持2021-01以后账单查询）
    */
   TagValue?: string
+}
+
+/**
+ * 成本分析数据复杂类型
+ */
+export interface AnalyseDetail {
+  /**
+   * 时间
+   */
+  Name?: string
+  /**
+   * 金额
+   */
+  Total?: string
+  /**
+   * 日期明细金额
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TimeDetail?: Array<AnalyseTimeDetail>
 }
 
 /**
@@ -1580,17 +1630,21 @@ export interface ApplicableProducts {
 }
 
 /**
- * 付费模式过滤条件
+ * DescribeBillSummaryByProject请求参数结构体
  */
-export interface ConditionPayMode {
+export interface DescribeBillSummaryByProjectRequest {
   /**
-   * 付费模式
+   * 目前必须和EndTime相同月份，不支持跨月查询，且查询结果是整月数据，例如 BeginTime为2018-09，EndTime 为 2018-09，查询结果是 2018 年 9 月数据。
    */
-  PayMode: string
+  BeginTime: string
   /**
-   * 付费模式名称
+   * 目前必须和BeginTime为相同月份，不支持跨月查询，且查询结果是整月数据，例如 BeginTime为2018-09，EndTime 为 2018-09，查询结果是 2018 年 9 月数据。
    */
-  PayModeName: string
+  EndTime: string
+  /**
+   * 查询账单数据的用户UIN
+   */
+  PayerUin?: string
 }
 
 /**
@@ -1971,21 +2025,17 @@ export interface DescribeDealsByCondResponse {
 }
 
 /**
- * DescribeBillSummaryByProject请求参数结构体
+ * 付费模式过滤条件
  */
-export interface DescribeBillSummaryByProjectRequest {
+export interface ConditionPayMode {
   /**
-   * 目前必须和EndTime相同月份，不支持跨月查询，且查询结果是整月数据，例如 BeginTime为2018-09，EndTime 为 2018-09，查询结果是 2018 年 9 月数据。
+   * 付费模式
    */
-  BeginTime: string
+  PayMode: string
   /**
-   * 目前必须和BeginTime为相同月份，不支持跨月查询，且查询结果是整月数据，例如 BeginTime为2018-09，EndTime 为 2018-09，查询结果是 2018 年 9 月数据。
+   * 付费模式名称
    */
-  EndTime: string
-  /**
-   * 查询账单数据的用户UIN
-   */
-  PayerUin?: string
+  PayModeName: string
 }
 
 /**
@@ -2169,6 +2219,27 @@ export interface CostComponentSet {
 }
 
 /**
+ * 成本分析表头数据复杂类型
+ */
+export interface AnalyseHeaderDetail {
+  /**
+   * 表头日期
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HeadDetail?: Array<AnalyseHeaderTimeDetail>
+  /**
+   * 时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name?: string
+  /**
+   * 总计
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Total?: string
+}
+
+/**
  * Json对象
  */
 export interface JsonObject {
@@ -2180,6 +2251,22 @@ export interface JsonObject {
    * value值
    */
   Value?: string
+}
+
+/**
+ * 成本分析支付方式复杂类型
+ */
+export interface AnalysePayModeDetail {
+  /**
+   * 计费模式code
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PayMode?: string
+  /**
+   * 计费模式Name
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PayModeName?: string
 }
 
 /**
@@ -2463,6 +2550,22 @@ export interface Conditions {
 }
 
 /**
+ * 成本分返回值复杂类型
+ */
+export interface AnalyseTimeDetail {
+  /**
+   * 日期
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Time?: string
+  /**
+   * 金额
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Money?: string
+}
+
+/**
  * DescribeSavingPlanCoverage请求参数结构体
  */
 export interface DescribeSavingPlanCoverageRequest {
@@ -2579,6 +2682,22 @@ export interface ConsumptionProjectSummaryDataItem {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TransferPayAmount?: string
+}
+
+/**
+ * 成本分析地域返回复杂类型
+ */
+export interface AnalyseRegionDetail {
+  /**
+   * 地域id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RegionId?: string
+  /**
+   * 地域名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RegionName?: string
 }
 
 /**
@@ -2915,19 +3034,159 @@ export interface DetailSet {
 }
 
 /**
- * 明细账单配置描述结构
+ * 账单明细组件对象
  */
-export interface BillDetailComponentConfig {
+export interface BillDetailComponent {
   /**
-   * 配置描述名称
+   * 组件类型：用户购买的产品或服务对应的组件大类，例如：云服务器 CVM 的组件：CPU、内存等
+   */
+  ComponentCodeName?: string
+  /**
+   * 组件名称：用户购买的产品或服务，所包含的具体组件
+   */
+  ItemCodeName?: string
+  /**
+   * 组件刊例价：组件的官网原始单价（如果客户享受一口价/合同价则默认不展示）
+   */
+  SinglePrice?: string
+  /**
+   * 组件指定价（已废弃）
+   * @deprecated
+   */
+  SpecifiedPrice?: string
+  /**
+   * 组件价格单位：组件价格的单位，单位构成：元/用量单位/时长单位
+   */
+  PriceUnit?: string
+  /**
+   * 组件用量：该组件实际结算用量，组件用量 = 组件原始用量 - 抵扣用量（含资源包
+   */
+  UsedAmount?: string
+  /**
+   * 组件用量单位：组件用量对应的单位
+   */
+  UsedAmountUnit?: string
+  /**
+   * 原始用量/时长：组件被资源包抵扣前的原始用量/时长
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Name?: string
+  RealTotalMeasure?: string
   /**
-   * 配置描述值
+   * 抵扣用量/时长（含资源包）：组件被资源包抵扣的用量/时长
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Value?: string
+  DeductedMeasure?: string
+  /**
+   * 使用时长：资源使用的时长
+   */
+  TimeSpan?: string
+  /**
+   * 时长单位：资源使用时长的单位
+   */
+  TimeUnitName?: string
+  /**
+   * 组件原价：原价 = 组件刊例价 * 组件用量 * 使用时长（如果客户享受一口价/合同价则默认不展示，退费类场景也默认不展示）
+   */
+  Cost?: string
+  /**
+   * 折扣率：本资源享受的折扣率（如果客户享受一口价/合同价则默认不展示，退费场景也默认不展示）
+   */
+  Discount?: string
+  /**
+   * 优惠类型
+   */
+  ReduceType?: string
+  /**
+   * 优惠后总价：优惠后总价=（原价 - 预留实例抵扣原价 - 节省计划抵扣原价）* 折扣率
+   */
+  RealCost?: string
+  /**
+   * 优惠券支出：使用各类优惠券（如代金券、现金券等）支付的金额
+   */
+  VoucherPayAmount?: string
+  /**
+   * 现金账户支出：通过现金账户支付的金额
+   */
+  CashPayAmount?: string
+  /**
+   * 赠送账户支出：使用赠送金支付的金额
+   */
+  IncentivePayAmount?: string
+  /**
+   * 分成金账户支出：通过分成金账户支付的金额
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TransferPayAmount?: string
+  /**
+   * 组件类型编码
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ItemCode?: string
+  /**
+   * 组件名称编码
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ComponentCode?: string
+  /**
+   * 组件单价：组件的折后单价，组件单价 = 刊例价 * 折扣
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ContractPrice?: string
+  /**
+   * 实例类型：购买的产品服务对应的实例类型，包括资源包、RI、SP、竞价实例。正常的实例展示默认为不展示
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceType?: string
+  /**
+   * 预留实例抵扣的使用时长：本产品或服务使用预留实例抵扣的使用时长
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RiTimeSpan?: string
+  /**
+   * 预留实例抵扣组件原价：本产品或服务使用预留实例抵扣的组件原价金额
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OriginalCostWithRI?: string
+  /**
+   * 节省计划抵扣率：节省计划可用余额额度范围内，节省计划对于此组件打的折扣率
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SPDeductionRate?: string
+  /**
+   * 节省计划抵扣金额（已废弃）
+注意：此字段可能返回 null，表示取不到有效值。
+   * @deprecated
+   */
+  SPDeduction?: string
+  /**
+   * 节省计划抵扣组件原价：节省计划抵扣原价=节省计划包抵扣金额/节省计划抵扣率
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OriginalCostWithSP?: string
+  /**
+   * 混合折扣率：综合各类折扣抵扣信息后的最终折扣率，混合折扣率 = 优惠后总价 / 组件原价
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BlendedDiscount?: string
+  /**
+   * 配置描述：资源配置规格信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ComponentConfig?: Array<BillDetailComponentConfig>
+}
+
+/**
+ * 地域过滤条件
+ */
+export interface ConditionRegion {
+  /**
+   * 地域ID
+   */
+  RegionId: string
+  /**
+   * 地域名称
+   */
+  RegionName: string
 }
 
 /**
@@ -3262,17 +3521,95 @@ cdn业务：
 }
 
 /**
- * 地域过滤条件
+ * 成本分析产品返回复杂类型
  */
-export interface ConditionRegion {
+export interface AnalyseBusinessDetail {
   /**
-   * 地域ID
+   * 产品码code
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  RegionId: string
+  BusinessCode?: string
   /**
-   * 地域名称
+   * 产品名称
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  RegionName: string
+  BusinessCodeName?: string
+}
+
+/**
+ * 成本分析查询条件
+ */
+export interface AnalyseConditions {
+  /**
+   * 产品名称代码
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BusinessCodes?: string
+  /**
+   * 子产品名称代码
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProductCodes?: string
+  /**
+   * 组件类型代码
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ComponentCode?: string
+  /**
+   * 可用区ID：资源所属可用区ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ZoneIds?: string
+  /**
+   * 地域ID:资源所属地域ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RegionIds?: string
+  /**
+   * 项目ID:资源所属项目ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProjectIds?: string
+  /**
+   * 计费模式 prePay(表示包年包月)/postPay(表示按量计费)
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PayModes?: string
+  /**
+   * 交易类型，查询交易类型（请使用交易类型code入参）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ActionTypes?: string
+  /**
+   * 分账标签键
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Tags?: string
+  /**
+   * 费用类型，查询费用类型（请使用费用类型code入参)入参枚举如下：
+cashPayAmount:现金 
+incentivePayAmount:赠送金 
+voucherPayAmount:优惠券 
+tax:税金 
+costBeforeTax:税前价
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FeeType?: string
+  /**
+   * 查询成本分析数据的用户UIN
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PayerUins?: string
+  /**
+   * 使用资源的用户UIN
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OwnerUins?: string
+  /**
+   * 消耗类型，查询消耗类型（请使用消耗类型code入参）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ConsumptionTypes?: string
 }
 
 /**
@@ -3671,6 +4008,22 @@ export interface DescribeSavingPlanResourceInfoRequest {
    * 购买结束时间，格式yyyy-MM-dd
    */
   CreateEndDate?: string
+}
+
+/**
+ * 成本分析可用区复杂类型
+ */
+export interface AnalyseZoneDetail {
+  /**
+   * 可用区id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ZoneId?: string
+  /**
+   * 可用区Name
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ZoneName?: string
 }
 
 /**
@@ -4132,7 +4485,7 @@ export interface DescribeDealsByCondRequest {
    */
   Status?: number
   /**
-   * 订单号
+   * 子订单号
    */
   OrderId?: string
   /**
@@ -4157,6 +4510,52 @@ export interface DescribeDosageCosDetailByDateResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 按项目汇总消费详情
+ */
+export interface ProjectSummaryOverviewItem {
+  /**
+   * 项目ID
+   */
+  ProjectId: string
+  /**
+   * 项目名称：资源归属的项目，用户在控制台给资源自主分配项目，未分配则是默认项目
+   */
+  ProjectName: string
+  /**
+   * 费用所占百分比，两位小数
+   */
+  RealTotalCostRatio: string
+  /**
+   * 优惠后总价
+   */
+  RealTotalCost: string
+  /**
+   * 现金账户支出：通过现金账户支付的金额
+   */
+  CashPayAmount: string
+  /**
+   * 赠送账户支出：使用赠送金支付的金额
+   */
+  IncentivePayAmount: string
+  /**
+   * 优惠券支出：使用各类优惠券（如代金券、现金券等）支付的金额
+   */
+  VoucherPayAmount: string
+  /**
+   * 分成金账户支出：通过分成金账户支付的金额
+   */
+  TransferPayAmount: string
+  /**
+   * 账单月份，格式2019-08
+   */
+  BillMonth: string
+  /**
+   * 原价，单位为元。TotalCost字段自账单3.0（即2021-05）之后开始生效，账单3.0之前返回"-"。合同价的情况下，TotalCost字段与官网价格存在差异，也返回“-”。
+   */
+  TotalCost: string
 }
 
 /**
@@ -4351,49 +4750,60 @@ export interface DescribeDosageDetail {
 }
 
 /**
- * 按项目汇总消费详情
+ * 成本分析过滤框复杂类型
  */
-export interface ProjectSummaryOverviewItem {
+export interface AnalyseConditionDetail {
   /**
-   * 项目ID
+   * 产品
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  ProjectId: string
+  Business?: Array<AnalyseBusinessDetail>
   /**
-   * 项目名称：资源归属的项目，用户在控制台给资源自主分配项目，未分配则是默认项目
+   * 项目
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  ProjectName: string
+  Project?: Array<AnalyseProjectDetail>
   /**
-   * 费用所占百分比，两位小数
+   * 地域
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  RealTotalCostRatio: string
+  Region?: Array<AnalyseRegionDetail>
   /**
-   * 优惠后总价
+   * 计费模式
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  RealTotalCost: string
+  PayMode?: Array<AnalysePayModeDetail>
   /**
-   * 现金账户支出：通过现金账户支付的金额
+   * 交易类型
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  CashPayAmount: string
+  ActionType?: Array<AnalyseActionTypeDetail>
   /**
-   * 赠送账户支出：使用赠送金支付的金额
+   * 可用区
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  IncentivePayAmount: string
+  Zone?: Array<AnalyseZoneDetail>
   /**
-   * 优惠券支出：使用各类优惠券（如代金券、现金券等）支付的金额
+   * 资源所有者Uin
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  VoucherPayAmount: string
+  OwnerUin?: Array<AnalyseOwnerUinDetail>
   /**
-   * 分成金账户支出：通过分成金账户支付的金额
+   * 费用类型
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  TransferPayAmount: string
+  Amount?: Array<AnalyseAmountDetail>
+}
+
+/**
+ * 成本分析header表头数据
+ */
+export interface AnalyseHeaderTimeDetail {
   /**
-   * 账单月份，格式2019-08
+   * 日期
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  BillMonth: string
-  /**
-   * 原价，单位为元。TotalCost字段自账单3.0（即2021-05）之后开始生效，账单3.0之前返回"-"。合同价的情况下，TotalCost字段与官网价格存在差异，也返回“-”。
-   */
-  TotalCost: string
+  Name?: string
 }
 
 /**

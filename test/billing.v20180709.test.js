@@ -88,9 +88,9 @@ it("billing.v20180709.CreateAllocationTag", async function () {
     }
 })
 
-it("billing.v20180709.PayDeals", async function () {
+it("billing.v20180709.DescribeVoucherInfo", async function () {
     try {
-       const data = await client.PayDeals({})
+       const data = await client.DescribeVoucherInfo({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -108,9 +108,9 @@ it("billing.v20180709.DescribeCostSummaryByProject", async function () {
     }
 })
 
-it("billing.v20180709.DescribeVoucherInfo", async function () {
+it("billing.v20180709.DescribeCostExplorerSummary", async function () {
     try {
-       const data = await client.DescribeVoucherInfo({})
+       const data = await client.DescribeCostExplorerSummary({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -161,6 +161,16 @@ it("billing.v20180709.DescribeBillSummaryByPayMode", async function () {
 it("billing.v20180709.DescribeBillList", async function () {
     try {
        const data = await client.DescribeBillList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("billing.v20180709.PayDeals", async function () {
+    try {
+       const data = await client.PayDeals({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -2700,7 +2700,7 @@ export interface SwitchDBInstanceMasterSlaveResponse {
   /**
    * 异步任务 ID。
    */
-  AsyncRequestId: string
+  AsyncRequestId?: string
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3108,6 +3108,10 @@ export interface DescribeDBSecurityGroupsRequest {
    * 该值默认为False，表示当传入只读实例ID时，查询操作的是对应只读组的安全组。如果需要操作只读实例ID的安全组， 需要将该入参置为True。
    */
   ForReadonlyInstance?: boolean
+  /**
+   * 变更集群版实例只读组时，InstanceId传实例id，需要额外指定该参数表示操作只读组。 如果操作读写节点则不需指定该参数。
+   */
+  OpResourceId?: string
 }
 
 /**
@@ -5806,7 +5810,7 @@ export interface CloseWanServiceResponse {
   /**
    * 异步任务的请求 ID，可使用此 ID 查询异步任务的执行结果。
    */
-  AsyncRequestId: string
+  AsyncRequestId?: string
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6271,7 +6275,7 @@ export interface ModifyDBInstanceVipVportResponse {
    * 异步任务ID。(该返回字段目前已废弃)
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  AsyncRequestId: string
+  AsyncRequestId?: string
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -7556,7 +7560,7 @@ export interface OpenWanServiceResponse {
   /**
    * 异步任务的请求 ID，可使用此 ID 查询异步任务的执行结果。
    */
-  AsyncRequestId: string
+  AsyncRequestId?: string
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -7829,7 +7833,7 @@ export interface DescribeDBSecurityGroupsResponse {
   /**
    * 安全组详情。
    */
-  Groups: Array<SecurityGroup>
+  Groups?: Array<SecurityGroup>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
