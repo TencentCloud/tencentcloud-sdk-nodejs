@@ -139,6 +139,10 @@ lye1y30d：低功耗事件30天年套餐。
    * 通道ID
    */
   ChannelId?: number
+  /**
+   * 云存存储区域，国内默认为ap-guangzhou。海外默认为东南亚ap-singapore，可选美东na-ashburn、欧洲eu-frankfurt。
+   */
+  StorageRegion?: string
 }
 
 /**

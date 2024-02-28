@@ -106,10 +106,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UpdateOrganizationNode", req, cb);
     }
     /**
-     * 删除共享单元成员
+     * 删除共享单元。
      */
-    async DeleteShareUnitMembers(req, cb) {
-        return this.request("DeleteShareUnitMembers", req, cb);
+    async DeleteShareUnit(req, cb) {
+        return this.request("DeleteShareUnit", req, cb);
     }
     /**
      * 批量删除企业组织成员
@@ -146,12 +146,6 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DeleteShareUnitResources(req, cb) {
         return this.request("DeleteShareUnitResources", req, cb);
-    }
-    /**
-     * 获取共享单元列表。
-     */
-    async DescribeShareUnits(req, cb) {
-        return this.request("DescribeShareUnits", req, cb);
     }
     /**
      * 获取组织成员的授权策略列表
@@ -215,10 +209,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("MoveOrganizationNodeMembers", req, cb);
     }
     /**
-     * 删除共享单元。
+     * 创建企业组织
      */
-    async DeleteShareUnit(req, cb) {
-        return this.request("DeleteShareUnit", req, cb);
+    async CreateOrganization(req, cb) {
+        return this.request("CreateOrganization", req, cb);
     }
     /**
      * 添加组织身份
@@ -237,6 +231,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async AddOrganizationMemberEmail(req, cb) {
         return this.request("AddOrganizationMemberEmail", req, cb);
+    }
+    /**
+     * 删除共享单元成员
+     */
+    async DeleteShareUnitMembers(req, cb) {
+        return this.request("DeleteShareUnitMembers", req, cb);
     }
     /**
      * 查询成员邮箱绑定详细信息
@@ -287,10 +287,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeOrganizationNodes", req, cb);
     }
     /**
-     * 创建企业组织
+     * 获取共享单元列表。
      */
-    async CreateOrganization(req, cb) {
-        return this.request("CreateOrganization", req, cb);
+    async DescribeShareUnits(req, cb) {
+        return this.request("DescribeShareUnits", req, cb);
+    }
+    /**
+     * 成员账号删除检查
+     */
+    async CheckAccountDelete(req, cb) {
+        return this.request("CheckAccountDelete", req, cb);
     }
     /**
      * 创建组织成员访问授权策略

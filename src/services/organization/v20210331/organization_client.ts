@@ -28,6 +28,7 @@ import {
   AddOrganizationNodeResponse,
   DescribeOrganizationFinancialByMonthResponse,
   OrgFinancialByMonth,
+  MoveOrganizationNodeMembersResponse,
   DeleteShareUnitResponse,
   DeleteShareUnitMembersResponse,
   CreateOrganizationIdentityRequest,
@@ -41,6 +42,7 @@ import {
   MemberMainInfo,
   DescribeShareUnitResourcesRequest,
   DeleteShareUnitResourcesRequest,
+  MemberIdentity,
   UpdateOrganizationNodeRequest,
   DescribeShareAreasResponse,
   DescribeOrganizationAuthNodeResponse,
@@ -69,7 +71,7 @@ import {
   AddOrganizationNodeRequest,
   AddShareUnitMembersRequest,
   AddShareUnitRequest,
-  CreateOrganizationMemberRequest,
+  OrgMemberFinancial,
   DescribeOrganizationAuthNodeRequest,
   DescribeOrganizationMemberAuthAccountsRequest,
   DescribeShareUnitMembersResponse,
@@ -83,14 +85,13 @@ import {
   UpdateShareUnitRequest,
   DescribeShareUnitsRequest,
   OrgPermission,
-  OrgMemberFinancial,
   AddOrganizationMemberEmailResponse,
   AddShareUnitMembersResponse,
   CreateOrganizationMemberPolicyRequest,
   CreateOrganizationRequest,
   ShareResource,
   CreateOrganizationMembersPolicyRequest,
-  MemberIdentity,
+  CheckAccountDeleteRequest,
   OrgProductFinancial,
   AddShareUnitResponse,
   DescribeOrganizationFinancialByProductResponse,
@@ -108,9 +109,11 @@ import {
   DeleteOrganizationIdentityResponse,
   DescribeOrganizationMemberEmailBindRequest,
   OrgMember,
-  MoveOrganizationNodeMembersResponse,
+  CreateOrganizationMemberRequest,
   OrgMemberAuthIdentity,
+  NotAllowReason,
   OrgNode,
+  CheckAccountDeleteResponse,
   DeleteAccountRequest,
   CreateOrganizationMemberAuthIdentityRequest,
   DescribeOrganizationFinancialByMemberRequest,
@@ -273,13 +276,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除共享单元成员
+   * 删除共享单元。
    */
-  async DeleteShareUnitMembers(
-    req: DeleteShareUnitMembersRequest,
-    cb?: (error: string, rep: DeleteShareUnitMembersResponse) => void
-  ): Promise<DeleteShareUnitMembersResponse> {
-    return this.request("DeleteShareUnitMembers", req, cb)
+  async DeleteShareUnit(
+    req: DeleteShareUnitRequest,
+    cb?: (error: string, rep: DeleteShareUnitResponse) => void
+  ): Promise<DeleteShareUnitResponse> {
+    return this.request("DeleteShareUnit", req, cb)
   }
 
   /**
@@ -340,16 +343,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteShareUnitResourcesResponse) => void
   ): Promise<DeleteShareUnitResourcesResponse> {
     return this.request("DeleteShareUnitResources", req, cb)
-  }
-
-  /**
-   * 获取共享单元列表。
-   */
-  async DescribeShareUnits(
-    req: DescribeShareUnitsRequest,
-    cb?: (error: string, rep: DescribeShareUnitsResponse) => void
-  ): Promise<DescribeShareUnitsResponse> {
-    return this.request("DescribeShareUnits", req, cb)
   }
 
   /**
@@ -454,13 +447,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除共享单元。
+   * 创建企业组织
    */
-  async DeleteShareUnit(
-    req: DeleteShareUnitRequest,
-    cb?: (error: string, rep: DeleteShareUnitResponse) => void
-  ): Promise<DeleteShareUnitResponse> {
-    return this.request("DeleteShareUnit", req, cb)
+  async CreateOrganization(
+    req?: CreateOrganizationRequest,
+    cb?: (error: string, rep: CreateOrganizationResponse) => void
+  ): Promise<CreateOrganizationResponse> {
+    return this.request("CreateOrganization", req, cb)
   }
 
   /**
@@ -491,6 +484,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: AddOrganizationMemberEmailResponse) => void
   ): Promise<AddOrganizationMemberEmailResponse> {
     return this.request("AddOrganizationMemberEmail", req, cb)
+  }
+
+  /**
+   * 删除共享单元成员
+   */
+  async DeleteShareUnitMembers(
+    req: DeleteShareUnitMembersRequest,
+    cb?: (error: string, rep: DeleteShareUnitMembersResponse) => void
+  ): Promise<DeleteShareUnitMembersResponse> {
+    return this.request("DeleteShareUnitMembers", req, cb)
   }
 
   /**
@@ -574,13 +577,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建企业组织
+   * 获取共享单元列表。
    */
-  async CreateOrganization(
-    req?: CreateOrganizationRequest,
-    cb?: (error: string, rep: CreateOrganizationResponse) => void
-  ): Promise<CreateOrganizationResponse> {
-    return this.request("CreateOrganization", req, cb)
+  async DescribeShareUnits(
+    req: DescribeShareUnitsRequest,
+    cb?: (error: string, rep: DescribeShareUnitsResponse) => void
+  ): Promise<DescribeShareUnitsResponse> {
+    return this.request("DescribeShareUnits", req, cb)
+  }
+
+  /**
+   * 成员账号删除检查
+   */
+  async CheckAccountDelete(
+    req: CheckAccountDeleteRequest,
+    cb?: (error: string, rep: CheckAccountDeleteResponse) => void
+  ): Promise<CheckAccountDeleteResponse> {
+    return this.request("CheckAccountDelete", req, cb)
   }
 
   /**

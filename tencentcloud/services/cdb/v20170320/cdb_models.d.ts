@@ -72,91 +72,91 @@ export interface CdbZoneSellConf {
     /**
      * 可用区状态。可能的返回值为：1-上线；3-停售；4-不展示
      */
-    Status: number;
+    Status?: number;
     /**
      * 可用区中文名称
      */
-    ZoneName: string;
+    ZoneName?: string;
     /**
      * 实例类型是否为自定义类型
      */
-    IsCustom: boolean;
+    IsCustom?: boolean;
     /**
      * 是否支持灾备
      */
-    IsSupportDr: boolean;
+    IsSupportDr?: boolean;
     /**
      * 是否支持私有网络
      */
-    IsSupportVpc: boolean;
+    IsSupportVpc?: boolean;
     /**
      * 小时计费实例最大售卖数量
      */
-    HourInstanceSaleMaxNum: number;
+    HourInstanceSaleMaxNum?: number;
     /**
      * 是否为默认可用区
      */
-    IsDefaultZone: boolean;
+    IsDefaultZone?: boolean;
     /**
      * 是否为黑石区
      */
-    IsBm: boolean;
+    IsBm?: boolean;
     /**
      * 支持的付费类型。可能的返回值为：0-包年包月；1-小时计费；2-后付费
      */
-    PayType: Array<string>;
+    PayType?: Array<string>;
     /**
      * 数据复制类型。0-异步复制；1-半同步复制；2-强同步复制
      */
-    ProtectMode: Array<string>;
+    ProtectMode?: Array<string>;
     /**
      * 可用区名称
      */
-    Zone: string;
+    Zone?: string;
     /**
      * 多可用区信息
      */
-    ZoneConf: ZoneConf;
+    ZoneConf?: ZoneConf;
     /**
      * 可支持的灾备可用区信息
      */
-    DrZone: Array<string>;
+    DrZone?: Array<string>;
     /**
      * 是否支持跨可用区只读
      */
-    IsSupportRemoteRo: boolean;
+    IsSupportRemoteRo?: boolean;
     /**
      * 可支持的跨可用区只读区信息
      */
-    RemoteRoZone: Array<string>;
+    RemoteRoZone?: Array<string>;
     /**
      * 独享型可用区状态。可能的返回值为：1-上线；3-停售；4-不展示
      */
-    ExClusterStatus: number;
+    ExClusterStatus?: number;
     /**
      * 独享型可支持的跨可用区只读区信息
      */
-    ExClusterRemoteRoZone: Array<string>;
+    ExClusterRemoteRoZone?: Array<string>;
     /**
      * 独享型多可用区信息
      */
-    ExClusterZoneConf: ZoneConf;
+    ExClusterZoneConf?: ZoneConf;
     /**
      * 售卖实例类型数组，其中configIds的值与configs结构体中的id一一对应。
      */
-    SellType: Array<CdbSellType>;
+    SellType?: Array<CdbSellType>;
     /**
      * 可用区id
      */
-    ZoneId: number;
+    ZoneId?: number;
     /**
      * 是否支持ipv6
      */
-    IsSupportIpv6: boolean;
+    IsSupportIpv6?: boolean;
     /**
      * 可支持的售卖数据库引擎类型
      */
-    EngineType: Array<string>;
+    EngineType?: Array<string>;
 }
 /**
  * CreateDBImportJob请求参数结构体
@@ -4338,7 +4338,7 @@ export interface ModifyBackupConfigRequest {
      */
     StartBackupPeriodSaveDate?: string;
     /**
-     * 是否开启数据备份归档策略，off-关闭，on-打开，默认为off
+     * 是否开启数据备份归档策略，off-关闭，on-打开，如果不指定该入参， 则保持不变。
      */
     EnableBackupArchive?: string;
     /**
@@ -4350,11 +4350,11 @@ export interface ModifyBackupConfigRequest {
      */
     BinlogArchiveDays?: number;
     /**
-     * 是否开启日志备份归档策略，off-关闭，on-打开，默认为off
+     * 是否开启日志备份归档策略，off-关闭，on-打开，如果不指定该入参， 则保持不变。
      */
     EnableBinlogArchive?: string;
     /**
-     * 是否开启数据备份标准存储策略，off-关闭，on-打开，默认为off
+     * 是否开启数据备份标准存储策略，off-关闭，on-打开，如果不指定该入参， 则保持不变。
      */
     EnableBackupStandby?: string;
     /**
@@ -4362,7 +4362,7 @@ export interface ModifyBackupConfigRequest {
      */
     BackupStandbyDays?: number;
     /**
-     * 是否开启日志备份标准存储策略，off-关闭，on-打开，默认为off
+     * 是否开启日志备份标准存储策略，off-关闭，on-打开，如果不指定该入参， 则保持不变。
      */
     EnableBinlogStandby?: string;
     /**

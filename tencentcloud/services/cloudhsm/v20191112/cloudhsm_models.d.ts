@@ -76,12 +76,12 @@ export interface DescribeVsmsResponse {
     /**
      * 获取实例的总个数
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 资源信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    VsmList: Array<ResourceInfo>;
+    VsmList?: Array<ResourceInfo>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -341,112 +341,112 @@ export interface ResourceInfo {
      * 资源Id
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ResourceId: string;
+    ResourceId?: string;
     /**
      * 资源名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ResourceName: string;
+    ResourceName?: string;
     /**
      * 资源状态，1-正常，2-隔离，3-销毁
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Status: number;
+    Status?: number;
     /**
      * 资源IP
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Vip: string;
+    Vip?: string;
     /**
      * 资源所属Vpc
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    VpcId: string;
+    VpcId?: string;
     /**
      * 资源所属子网
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SubnetId: string;
+    SubnetId?: string;
     /**
      * 资源所属HSM规格
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Model: string;
+    Model?: string;
     /**
      * 云加密机类型id
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    VsmType: number;
+    VsmType?: number;
     /**
      * 地域Id
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    RegionId: number;
+    RegionId?: number;
     /**
      * 区域Id
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ZoneId: number;
+    ZoneId?: number;
     /**
      * 过期时间（Epoch Unix Timestamp）
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ExpireTime: number;
+    ExpireTime?: number;
     /**
      * 地域名
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    RegionName: string;
+    RegionName?: string;
     /**
      * 区域名
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ZoneName: string;
+    ZoneName?: string;
     /**
      * 实例的安全组列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SgList: Array<SgUnit>;
+    SgList?: Array<SgUnit>;
     /**
      * 子网名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SubnetName: string;
+    SubnetName?: string;
     /**
      * 当前实例是否已经过期
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Expired: boolean;
+    Expired?: boolean;
     /**
      * 为正数表示实例距离过期时间还剩余多少秒，为负数表示已经过期多少秒
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    RemainSeconds: number;
+    RemainSeconds?: number;
     /**
      * Vpc名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    VpcName: string;
+    VpcName?: string;
     /**
      * 创建者Uin账号
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CreateUin: string;
+    CreateUin?: string;
     /**
      * 自动续费状态标识， 0-手动续费，1-自动续费，2-到期不续
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    RenewFlag: number;
+    RenewFlag?: number;
     /**
      * 标签列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Tags: Array<Tag>;
+    Tags?: Array<Tag>;
     /**
      * 厂商
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Manufacturer: string;
+    Manufacturer?: string;
     /**
      * 告警状态，0：停用，1：启用
   注意：此字段可能返回 null，表示取不到有效值。
@@ -565,107 +565,107 @@ export interface DescribeVsmAttributesResponse {
     /**
      * 资源Id
      */
-    ResourceId: string;
+    ResourceId?: string;
     /**
      * 资源名称
      */
-    ResourceName: string;
+    ResourceName?: string;
     /**
      * 资源状态，1表示资源为正常，2表示资源处于隔离状态
      */
-    Status: number;
+    Status?: number;
     /**
      * 资源IP
      */
-    Vip: string;
+    Vip?: string;
     /**
      * 资源所属Vpc
      */
-    VpcId: string;
+    VpcId?: string;
     /**
      * 资源所属子网
      */
-    SubnetId: string;
+    SubnetId?: string;
     /**
      * 资源所属HSM的规格
      */
-    Model: string;
+    Model?: string;
     /**
      * 资源类型，17表示EVSM，33表示GVSM，49表示SVSM
      */
-    VsmType: number;
+    VsmType?: number;
     /**
      * 地域Id，返回腾讯云地域代码，如广州为1，北京为8
      */
-    RegionId: number;
+    RegionId?: number;
     /**
      * 区域Id，返回腾讯云每个地域的可用区代码
      */
-    ZoneId: number;
+    ZoneId?: number;
     /**
      * 资源过期时间，以时间戳形式展示。
      */
-    ExpireTime: number;
+    ExpireTime?: number;
     /**
      * 安全组详情信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SgList: Array<UsgRuleDetail>;
+    SgList?: Array<UsgRuleDetail>;
     /**
      * 子网名
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SubnetName: string;
+    SubnetName?: string;
     /**
      * 地域名
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    RegionName: string;
+    RegionName?: string;
     /**
      * 区域名
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ZoneName: string;
+    ZoneName?: string;
     /**
      * 实例是否已经过期
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Expired: boolean;
+    Expired?: boolean;
     /**
      * 为正数表示实例距离过期时间剩余秒数，为负数表示实例已经过期多少秒
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    RemainSeconds: number;
+    RemainSeconds?: number;
     /**
      * 私有虚拟网络名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    VpcName: string;
+    VpcName?: string;
     /**
      * VPC的IPv4 CIDR
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    VpcCidrBlock: string;
+    VpcCidrBlock?: string;
     /**
      * 子网的CIDR
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SubnetCidrBlock: string;
+    SubnetCidrBlock?: string;
     /**
      * 资源所关联的Tag
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Tags: Array<Tag>;
+    Tags?: Array<Tag>;
     /**
      * 资源续费标识，0表示默认状态(用户未设置，即初始状态)， 1表示自动续费，2表示明确不自动续费(用户设置)
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    RenewFlag: number;
+    RenewFlag?: number;
     /**
      * 厂商
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Manufacturer: string;
+    Manufacturer?: string;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -710,37 +710,37 @@ export interface UsgRuleDetail {
      * 入站规则
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    InBound: Array<UsgPolicy>;
+    InBound?: Array<UsgPolicy>;
     /**
      * 出站规则
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    OutBound: Array<UsgPolicy>;
+    OutBound?: Array<UsgPolicy>;
     /**
      * 安全组Id
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SgId: string;
+    SgId?: string;
     /**
      * 安全组名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SgName: string;
+    SgName?: string;
     /**
      * 备注
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SgRemark: string;
+    SgRemark?: string;
     /**
      * 创建时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CreateTime: string;
+    CreateTime?: string;
     /**
      * 版本
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Version: number;
+    Version?: number;
 }
 /**
  * InquiryPriceBuyVsm返回参数结构体
@@ -871,7 +871,7 @@ export interface DescribeVsmsRequest {
      */
     Limit: number;
     /**
-     * 查询关键字
+     * 资源ID或者资源名字模糊查询的关键字
      */
     SearchWord?: string;
     /**
@@ -935,40 +935,40 @@ export interface UsgPolicy {
      * cidr格式地址
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Ip: string;
+    Ip?: string;
     /**
      * 安全组id代表的地址集合
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Id: string;
+    Id?: string;
     /**
      * 地址组id代表的地址集合
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    AddressModule: string;
+    AddressModule?: string;
     /**
      * 协议
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Proto: string;
+    Proto?: string;
     /**
      * 端口
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Port: string;
+    Port?: string;
     /**
      * 服务组id代表的协议和端口集合
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ServiceModule: string;
+    ServiceModule?: string;
     /**
      * 备注
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Desc: string;
+    Desc?: string;
     /**
      * 匹配后行为:ACCEPT/DROP
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Action: string;
+    Action?: string;
 }

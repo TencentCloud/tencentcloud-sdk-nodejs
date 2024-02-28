@@ -1817,6 +1817,20 @@ export interface ModifyDisksAttributeRequest {
 }
 
 /**
+ * ModifyDisksBackupQuota请求参数结构体
+ */
+export interface ModifyDisksBackupQuotaRequest {
+  /**
+   * 云硬盘ID列表，可通过[DescribeDisks](https://cloud.tencent.com/document/api/1207/66093)接口查询。列表最大长度为15。
+   */
+  DiskIds: Array<string>
+  /**
+   * 云硬盘备份点配额。取值范围: [0, 500]。调整后的配额必须不小于已存在的备份点数量。
+   */
+  DiskBackupQuota: number
+}
+
+/**
  * DescribeKeyPairs返回参数结构体
  */
 export interface DescribeKeyPairsResponse {
@@ -3248,6 +3262,20 @@ unless-stopped: 始终重新启动容器，包括在守护进程启动时，除�
 }
 
 /**
+ * ResizeDisks请求参数结构体
+ */
+export interface ResizeDisksRequest {
+  /**
+   * 云硬盘ID列表，可通过[DescribeDisks](https://cloud.tencent.com/document/api/1207/66093)接口查询。列表最大长度为15。
+   */
+  DiskIds: Array<string>
+  /**
+   * 扩容后的云硬盘大小。单位: GB。高性能云硬盘大小取值范围：[10, 4000] ,SSD云硬盘大小取值范围：[20, 4000]。扩容后的云硬盘大小必须大于当前云硬盘大小。
+   */
+  DiskSize: number
+}
+
+/**
  * 云硬盘包年包月相关参数设置
  */
 export interface DiskChargePrepaid {
@@ -4345,6 +4373,16 @@ export interface ResetInstanceRequest {
 }
 
 /**
+ * ResizeDisks返回参数结构体
+ */
+export interface ResizeDisksResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeDiskConfigs返回参数结构体
  */
 export interface DescribeDiskConfigsResponse {
@@ -4772,6 +4810,16 @@ export interface Tag {
  * ModifySnapshotAttribute返回参数结构体
  */
 export interface ModifySnapshotAttributeResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyDisksBackupQuota返回参数结构体
+ */
+export interface ModifyDisksBackupQuotaResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

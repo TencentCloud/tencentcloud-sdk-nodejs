@@ -3662,6 +3662,10 @@ export interface L4ProxyRule {
 注意：L4ProxyRule 在 CreateL4ProxyRules、ModifyL4ProxyRules 作为入参使用时，该参数请勿填写。
    */
   Status?: string
+  /**
+   * BuID。
+   */
+  BuId?: string
 }
 
 /**

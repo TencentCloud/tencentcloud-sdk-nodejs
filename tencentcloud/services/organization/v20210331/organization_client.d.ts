@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeShareUnitResourcesResponse, UpdateOrganizationIdentityRequest, DeleteOrganizationRequest, ListOrganizationIdentityRequest, DeleteOrganizationMembersRequest, CreateOrganizationResponse, AddShareUnitResourcesResponse, AddOrganizationNodeResponse, DescribeOrganizationFinancialByMonthResponse, DeleteShareUnitResponse, DeleteShareUnitMembersResponse, CreateOrganizationIdentityRequest, DescribeOrganizationResponse, DescribeOrganizationMemberPoliciesRequest, DeleteOrganizationMembersPolicyResponse, CancelOrganizationMemberAuthAccountRequest, DeleteOrganizationResponse, DescribeShareUnitResourcesRequest, DeleteShareUnitResourcesRequest, UpdateOrganizationNodeRequest, DescribeShareAreasResponse, DescribeOrganizationAuthNodeResponse, BindOrganizationMemberAuthAccountRequest, DescribeShareUnitsResponse, UpdateOrganizationMemberEmailBindResponse, DeleteOrganizationMembersResponse, DescribeOrganizationMemberAuthIdentitiesRequest, CreateOrganizationMemberAuthIdentityResponse, DescribeOrganizationRequest, DescribeOrganizationNodesRequest, BindOrganizationMemberAuthAccountResponse, CreateOrganizationMemberResponse, MoveOrganizationNodeMembersRequest, UpdateOrganizationMemberResponse, DescribeOrganizationMemberEmailBindResponse, DeleteOrganizationNodesRequest, QuitOrganizationResponse, AddOrganizationMemberEmailRequest, ListOrganizationIdentityResponse, DescribeOrganizationMembersResponse, QuitOrganizationRequest, AddOrganizationNodeRequest, AddShareUnitMembersRequest, AddShareUnitRequest, CreateOrganizationMemberRequest, DescribeOrganizationAuthNodeRequest, DescribeOrganizationMemberAuthAccountsRequest, DescribeShareUnitMembersResponse, DescribeShareAreasRequest, DescribeOrganizationMemberAuthAccountsResponse, DescribeOrganizationMembersRequest, UpdateShareUnitResponse, DeleteOrganizationMemberAuthIdentityResponse, UpdateOrganizationMemberEmailBindRequest, UpdateShareUnitRequest, DescribeShareUnitsRequest, AddOrganizationMemberEmailResponse, AddShareUnitMembersResponse, CreateOrganizationMemberPolicyRequest, CreateOrganizationRequest, CreateOrganizationMembersPolicyRequest, AddShareUnitResponse, DescribeOrganizationFinancialByProductResponse, DescribeOrganizationFinancialByProductRequest, CreateOrganizationMemberPolicyResponse, DescribeShareUnitMembersRequest, CancelOrganizationMemberAuthAccountResponse, UpdateOrganizationMemberRequest, AddShareUnitResourcesRequest, DeleteShareUnitMembersRequest, DescribeOrganizationMemberAuthIdentitiesResponse, DeleteOrganizationIdentityResponse, DescribeOrganizationMemberEmailBindRequest, MoveOrganizationNodeMembersResponse, DeleteAccountRequest, CreateOrganizationMemberAuthIdentityRequest, DescribeOrganizationFinancialByMemberRequest, DescribeOrganizationFinancialByMonthRequest, CreateOrganizationMembersPolicyResponse, DeleteShareUnitResourcesResponse, CreateOrganizationIdentityResponse, UpdateOrganizationIdentityResponse, DescribeOrganizationNodesResponse, DeleteOrganizationMembersPolicyRequest, DeleteOrganizationIdentityRequest, UpdateOrganizationNodeResponse, DeleteOrganizationNodesResponse, DescribeOrganizationFinancialByMemberResponse, DeleteShareUnitRequest, DescribeOrganizationMemberPoliciesResponse, DeleteOrganizationMemberAuthIdentityRequest, DeleteAccountResponse } from "./organization_models";
+import { DescribeShareUnitResourcesResponse, UpdateOrganizationIdentityRequest, DeleteOrganizationRequest, ListOrganizationIdentityRequest, DeleteOrganizationMembersRequest, CreateOrganizationResponse, AddShareUnitResourcesResponse, AddOrganizationNodeResponse, DescribeOrganizationFinancialByMonthResponse, MoveOrganizationNodeMembersResponse, DeleteShareUnitResponse, DeleteShareUnitMembersResponse, CreateOrganizationIdentityRequest, DescribeOrganizationResponse, DescribeOrganizationMemberPoliciesRequest, DeleteOrganizationMembersPolicyResponse, CancelOrganizationMemberAuthAccountRequest, DeleteOrganizationResponse, DescribeShareUnitResourcesRequest, DeleteShareUnitResourcesRequest, UpdateOrganizationNodeRequest, DescribeShareAreasResponse, DescribeOrganizationAuthNodeResponse, BindOrganizationMemberAuthAccountRequest, DescribeShareUnitsResponse, UpdateOrganizationMemberEmailBindResponse, DeleteOrganizationMembersResponse, DescribeOrganizationMemberAuthIdentitiesRequest, CreateOrganizationMemberAuthIdentityResponse, DescribeOrganizationRequest, DescribeOrganizationNodesRequest, BindOrganizationMemberAuthAccountResponse, CreateOrganizationMemberResponse, MoveOrganizationNodeMembersRequest, UpdateOrganizationMemberResponse, DescribeOrganizationMemberEmailBindResponse, DeleteOrganizationNodesRequest, QuitOrganizationResponse, AddOrganizationMemberEmailRequest, ListOrganizationIdentityResponse, DescribeOrganizationMembersResponse, QuitOrganizationRequest, AddOrganizationNodeRequest, AddShareUnitMembersRequest, AddShareUnitRequest, DescribeOrganizationAuthNodeRequest, DescribeOrganizationMemberAuthAccountsRequest, DescribeShareUnitMembersResponse, DescribeShareAreasRequest, DescribeOrganizationMemberAuthAccountsResponse, DescribeOrganizationMembersRequest, UpdateShareUnitResponse, DeleteOrganizationMemberAuthIdentityResponse, UpdateOrganizationMemberEmailBindRequest, UpdateShareUnitRequest, DescribeShareUnitsRequest, AddOrganizationMemberEmailResponse, AddShareUnitMembersResponse, CreateOrganizationMemberPolicyRequest, CreateOrganizationRequest, CreateOrganizationMembersPolicyRequest, CheckAccountDeleteRequest, AddShareUnitResponse, DescribeOrganizationFinancialByProductResponse, DescribeOrganizationFinancialByProductRequest, CreateOrganizationMemberPolicyResponse, DescribeShareUnitMembersRequest, CancelOrganizationMemberAuthAccountResponse, UpdateOrganizationMemberRequest, AddShareUnitResourcesRequest, DeleteShareUnitMembersRequest, DescribeOrganizationMemberAuthIdentitiesResponse, DeleteOrganizationIdentityResponse, DescribeOrganizationMemberEmailBindRequest, CreateOrganizationMemberRequest, CheckAccountDeleteResponse, DeleteAccountRequest, CreateOrganizationMemberAuthIdentityRequest, DescribeOrganizationFinancialByMemberRequest, DescribeOrganizationFinancialByMonthRequest, CreateOrganizationMembersPolicyResponse, DeleteShareUnitResourcesResponse, CreateOrganizationIdentityResponse, UpdateOrganizationIdentityResponse, DescribeOrganizationNodesResponse, DeleteOrganizationMembersPolicyRequest, DeleteOrganizationIdentityRequest, UpdateOrganizationNodeResponse, DeleteOrganizationNodesResponse, DescribeOrganizationFinancialByMemberResponse, DeleteShareUnitRequest, DescribeOrganizationMemberPoliciesResponse, DeleteOrganizationMemberAuthIdentityRequest, DeleteAccountResponse } from "./organization_models";
 /**
  * organization client
  * @class
@@ -60,9 +60,9 @@ export declare class Client extends AbstractClient {
      */
     UpdateOrganizationNode(req: UpdateOrganizationNodeRequest, cb?: (error: string, rep: UpdateOrganizationNodeResponse) => void): Promise<UpdateOrganizationNodeResponse>;
     /**
-     * 删除共享单元成员
+     * 删除共享单元。
      */
-    DeleteShareUnitMembers(req: DeleteShareUnitMembersRequest, cb?: (error: string, rep: DeleteShareUnitMembersResponse) => void): Promise<DeleteShareUnitMembersResponse>;
+    DeleteShareUnit(req: DeleteShareUnitRequest, cb?: (error: string, rep: DeleteShareUnitResponse) => void): Promise<DeleteShareUnitResponse>;
     /**
      * 批量删除企业组织成员
      */
@@ -87,10 +87,6 @@ export declare class Client extends AbstractClient {
      * 删除共享单元资源
      */
     DeleteShareUnitResources(req: DeleteShareUnitResourcesRequest, cb?: (error: string, rep: DeleteShareUnitResourcesResponse) => void): Promise<DeleteShareUnitResourcesResponse>;
-    /**
-     * 获取共享单元列表。
-     */
-    DescribeShareUnits(req: DescribeShareUnitsRequest, cb?: (error: string, rep: DescribeShareUnitsResponse) => void): Promise<DescribeShareUnitsResponse>;
     /**
      * 获取组织成员的授权策略列表
      */
@@ -133,9 +129,9 @@ export declare class Client extends AbstractClient {
      */
     MoveOrganizationNodeMembers(req: MoveOrganizationNodeMembersRequest, cb?: (error: string, rep: MoveOrganizationNodeMembersResponse) => void): Promise<MoveOrganizationNodeMembersResponse>;
     /**
-     * 删除共享单元。
+     * 创建企业组织
      */
-    DeleteShareUnit(req: DeleteShareUnitRequest, cb?: (error: string, rep: DeleteShareUnitResponse) => void): Promise<DeleteShareUnitResponse>;
+    CreateOrganization(req?: CreateOrganizationRequest, cb?: (error: string, rep: CreateOrganizationResponse) => void): Promise<CreateOrganizationResponse>;
     /**
      * 添加组织身份
      */
@@ -148,6 +144,10 @@ export declare class Client extends AbstractClient {
      * 添加组织成员邮箱
      */
     AddOrganizationMemberEmail(req: AddOrganizationMemberEmailRequest, cb?: (error: string, rep: AddOrganizationMemberEmailResponse) => void): Promise<AddOrganizationMemberEmailResponse>;
+    /**
+     * 删除共享单元成员
+     */
+    DeleteShareUnitMembers(req: DeleteShareUnitMembersRequest, cb?: (error: string, rep: DeleteShareUnitMembersResponse) => void): Promise<DeleteShareUnitMembersResponse>;
     /**
      * 查询成员邮箱绑定详细信息
      */
@@ -181,9 +181,13 @@ export declare class Client extends AbstractClient {
      */
     DescribeOrganizationNodes(req: DescribeOrganizationNodesRequest, cb?: (error: string, rep: DescribeOrganizationNodesResponse) => void): Promise<DescribeOrganizationNodesResponse>;
     /**
-     * 创建企业组织
+     * 获取共享单元列表。
      */
-    CreateOrganization(req?: CreateOrganizationRequest, cb?: (error: string, rep: CreateOrganizationResponse) => void): Promise<CreateOrganizationResponse>;
+    DescribeShareUnits(req: DescribeShareUnitsRequest, cb?: (error: string, rep: DescribeShareUnitsResponse) => void): Promise<DescribeShareUnitsResponse>;
+    /**
+     * 成员账号删除检查
+     */
+    CheckAccountDelete(req: CheckAccountDeleteRequest, cb?: (error: string, rep: CheckAccountDeleteResponse) => void): Promise<CheckAccountDeleteResponse>;
     /**
      * 创建组织成员访问授权策略
      */

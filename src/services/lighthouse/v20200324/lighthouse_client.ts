@@ -112,6 +112,7 @@ import {
   RemoveDockerContainersRequest,
   RenewDisksRequest,
   ModifyDisksAttributeRequest,
+  ModifyDisksBackupQuotaRequest,
   DescribeKeyPairsResponse,
   FirewallTemplate,
   DescribeSnapshotsDeniedActionsResponse,
@@ -186,6 +187,7 @@ import {
   DescribeDiskDiscountResponse,
   CreateFirewallTemplateRulesResponse,
   ModifyDockerContainerRequest,
+  ResizeDisksRequest,
   DiskChargePrepaid,
   RunDockerContainersResponse,
   CreateKeyPairRequest,
@@ -240,6 +242,7 @@ import {
   TerminateDisksRequest,
   RenewDisksResponse,
   ResetInstanceRequest,
+  ResizeDisksResponse,
   DescribeDiskConfigsResponse,
   CreateFirewallTemplateRulesRequest,
   InternetAccessible,
@@ -267,6 +270,7 @@ import {
   InstancePrice,
   Tag,
   ModifySnapshotAttributeResponse,
+  ModifyDisksBackupQuotaResponse,
   DescribeGeneralResourceQuotasResponse,
   ModifyInstancesRenewFlagRequest,
   StartDockerContainersRequest,
@@ -577,6 +581,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口(ResizeDisks)用于扩容云硬盘。该操作目前仅支持云硬盘类型为数据盘的云硬盘。
+   */
+  async ResizeDisks(
+    req: ResizeDisksRequest,
+    cb?: (error: string, rep: ResizeDisksResponse) => void
+  ): Promise<ResizeDisksResponse> {
+    return this.request("ResizeDisks", req, cb)
+  }
+
+  /**
    * 本接口 ( CreateDiskBackup  ) 用于创建指定云硬盘（当前只支持数据盘）的备份点。
    */
   async CreateDiskBackup(
@@ -748,6 +762,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateInstanceSnapshotResponse) => void
   ): Promise<CreateInstanceSnapshotResponse> {
     return this.request("CreateInstanceSnapshot", req, cb)
+  }
+
+  /**
+   * 本接口(ModifyDisksBackupQuota)用于调整云硬盘备份点配额。该操作目前仅支持云硬盘类型为数据盘的云硬盘。
+   */
+  async ModifyDisksBackupQuota(
+    req: ModifyDisksBackupQuotaRequest,
+    cb?: (error: string, rep: ModifyDisksBackupQuotaResponse) => void
+  ): Promise<ModifyDisksBackupQuotaResponse> {
+    return this.request("ModifyDisksBackupQuota", req, cb)
   }
 
   /**

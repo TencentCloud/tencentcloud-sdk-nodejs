@@ -1695,11 +1695,6 @@ export interface ColumnLineageInfo {
    */
   DatasourceId: string
   /**
-   * 表ID
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TableId: string
-  /**
    * 字段名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
@@ -1799,6 +1794,11 @@ export interface ColumnLineageInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ExtParams?: Array<LineageParamRecord>
+  /**
+   * 表ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TableId?: string
 }
 
 /**
@@ -3939,6 +3939,11 @@ export interface ColumnBasicInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   UpdateTime?: string
+  /**
+   * 精度
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Scale?: number
 }
 
 /**
@@ -4957,6 +4962,21 @@ export interface TableLineageInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ChannelType?: string
+  /**
+   * 展示类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DisplayType?: string
+  /**
+   * 表类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EngineType?: string
+  /**
+   * 表类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TableType?: string
 }
 
 /**
@@ -5455,6 +5475,14 @@ export interface DescribeInstanceLogDetailRequest {
    * 文件Name
    */
   OriginFileName: string
+  /**
+   * 起始行
+   */
+  StartCount?: number
+  /**
+   * 每次查询行数
+   */
+  LineCount?: number
 }
 
 /**
@@ -7277,6 +7305,10 @@ export interface DescribeColumnsMetaRequest {
    * 是否查询分区字段，默认false
    */
   IsPartitionQuery?: boolean
+  /**
+   * 合规组ID
+   */
+  ComplianceId?: number
 }
 
 /**
@@ -8324,6 +8356,16 @@ export interface RuleGroup {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateTime?: string
+  /**
+   * 是否已配置执行策略
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StrategyConfig?: boolean
+  /**
+   * 是否已配置执行策略
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SubscribeConfig?: boolean
 }
 
 /**
@@ -11278,7 +11320,16 @@ export interface CompareRuleItem {
    */
   CompareType?: number
   /**
-   * 比较操作类型 <  <=  ==  =>  >
+   * 比较操作类型
+<  <=  ==  =>  > !=
+IRLCRO:在区间内(左闭右开)
+IRLORC:在区间内(左开右闭)
+IRLCRC:在区间内(左闭右闭)
+IRLORO:在区间内(左开右开)
+NRLCRO:不在区间内(左闭右开)
+NRLORC:不在区间内(左开右闭)
+NRLCRC:不在在区间内(左闭右闭)
+NRLORO:不在在区间内(左开右开)
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Operator?: string
@@ -12565,6 +12616,16 @@ export interface ColumnMeta {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DictionaryName?: string
+  /**
+   * 安全等级：名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LevelName?: string
+  /**
+   * 安全等级：值范围1-10
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LevelRank?: number
 }
 
 /**
@@ -13878,6 +13939,11 @@ export interface TableBasicInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   UpdateTime?: string
+  /**
+   * 存储位置
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Location?: string
 }
 
 /**
@@ -17621,27 +17687,32 @@ export interface InstanceLogInfoOpsDto {
    * 实例运行日志
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  LogInfo: string
+  LogInfo?: string
   /**
    * 实例运行提交的yarn日志地址
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  YarnLogInfo: Array<string>
+  YarnLogInfo?: Array<string>
   /**
    * 实例运行产生的datax日志
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DataLogInfo: string
+  DataLogInfo?: string
   /**
    * 第三方任务运行日志
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ThirdTaskRunLogInfo: string
+  ThirdTaskRunLogInfo?: string
   /**
    * 第三方任务日志链接描述
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ThirdTaskLogUrlDesc: string
+  ThirdTaskLogUrlDesc?: string
+  /**
+   * 日志行数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LineCount?: number
 }
 
 /**
@@ -17983,11 +18054,11 @@ export interface DescribeColumnsMetaResponse {
    * 分页返回的
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ColumnMetaSet: Array<ColumnMeta>
+  ColumnMetaSet?: Array<ColumnMeta>
   /**
    * 总记录数
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -19164,227 +19235,227 @@ export interface TableMeta {
    * 表的全局唯一ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TableId: string
+  TableId?: string
   /**
    * 表名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TableName: string
+  TableName?: string
   /**
    * 责任人
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TableOwnerName: string
+  TableOwnerName?: string
   /**
    * 数据源全局唯一ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DatasourceId: number
+  DatasourceId?: number
   /**
    * 所属集群名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ClusterName: string
+  ClusterName?: string
   /**
    * 数据源名
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DatasourceName: string
+  DatasourceName?: string
   /**
    * 数据库名
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DatabaseName: string
+  DatabaseName?: string
   /**
    * 表路径
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TablePath: string
+  TablePath?: string
   /**
    * 表中文名
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TableNameCn: string
+  TableNameCn?: string
   /**
    * 元数据租户ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  MetastoreId: number
+  MetastoreId?: number
   /**
    * 技术类型，可用值:HIVE,MYSQL,KAFKA, HBASE
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  MetastoreType: string
+  MetastoreType?: string
   /**
    * 表描述
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Description: string
+  Description?: string
   /**
    * 列分隔符
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ColumnSeparator: string
+  ColumnSeparator?: string
   /**
    * 存储格式
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  StorageFormat: string
+  StorageFormat?: string
   /**
    * 存储量，字节数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  StorageSize: number
+  StorageSize?: number
   /**
    * 表类型，如hive MANAGED_TABLE;EXTERNAL_TABLE
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TableType: string
+  TableType?: string
   /**
    * 创建时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CreateTime: string
+  CreateTime?: string
   /**
    * 最近数据变更时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ModifyTime: string
+  ModifyTime?: string
   /**
    * 最近DDL变更时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DdlModifyTime: string
+  DdlModifyTime?: string
   /**
    * 数据最后访问时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  LastAccessTime: string
+  LastAccessTime?: string
   /**
    * 所属项目英文名
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ProjectName: string
+  ProjectName?: string
   /**
    * 所属数据目录id（可能多个）
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  BizCatalogIds: Array<string>
+  BizCatalogIds?: Array<string>
   /**
    * 所属数据目录（可能多个）
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  BizCatalogNames: Array<string>
+  BizCatalogNames?: Array<string>
   /**
    * true已收藏/false表示未收藏状态
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  HasFavorite: boolean
+  HasFavorite?: boolean
   /**
    * 生命周期
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  LifeCycleTime: number
+  LifeCycleTime?: number
   /**
    * 存储量，已转为适合的单位展示
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  StorageSizeWithUnit: string
+  StorageSizeWithUnit?: string
   /**
    * 数据源引擎的实例ID：如EMR集群实例ID/数据源实例ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  InstanceId: string
+  InstanceId?: string
   /**
    * 数据来源技术类型：HIVE/MYSQL/HBASE/KAFKA等
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TechnologyType: string
+  TechnologyType?: string
   /**
    * 表英文名
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TableNameEn: string
+  TableNameEn?: string
   /**
    * 项目Id
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ProjectId: string
+  ProjectId?: string
   /**
    * Kafka Topic 分区数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Partitions: string
+  Partitions?: string
   /**
    * Kafka Topic 副本数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ReplicationFactor: string
+  ReplicationFactor?: string
   /**
    * 所属项目英中文名
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ProjectDisplayName: string
+  ProjectDisplayName?: string
   /**
    * 数据最后修改时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DataModifyTime: string
+  DataModifyTime?: string
   /**
    * 集群ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ClusterId: string
+  ClusterId?: string
   /**
    * 当前用户是否有管理员权限
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  HasAdminAuthority: boolean
+  HasAdminAuthority?: boolean
   /**
    * 数据源展示名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DatasourceDisplayName: string
+  DatasourceDisplayName?: string
   /**
    * 数据库ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DatabaseId: string
+  DatabaseId?: string
   /**
    * 租户下对表的收藏总次数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  FavoriteCount: number
+  FavoriteCount?: number
   /**
    * 租户下对表的点赞总次数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  LikeCount: number
+  LikeCount?: number
   /**
    * true已点赞/false表示未点赞状态
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  HasLike: boolean
+  HasLike?: boolean
   /**
    * 表的资产评分
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TablePropertyScore: TablePropertyScore
+  TablePropertyScore?: TablePropertyScore
   /**
    * 表的热度值
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TableHeat: TableHeat
+  TableHeat?: TableHeat
   /**
    * 数据源ownerProjectId
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  OwnerProjectId: string
+  OwnerProjectId?: string
   /**
    * 表负责人ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TableOwnerId: string
+  TableOwnerId?: string
   /**
    * 系统源-CLUSTER, DB-自定义源
 注意：此字段可能返回 null，表示取不到有效值。
@@ -19395,6 +19466,22 @@ export interface TableMeta {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Columns?: Array<SearchColumnDocVO>
+  /**
+   * 表采集类型
+TABLE, VIEW, MANAGED_TABLE(Hive管理表), EXTERNAL_TABLE(Hive外部表), VIRTUAL_VIEW(虚拟视图), MATERIALIZED_VIEW(物化视图), LATERAL_VIEW, INDEX_TABLE(索引表), END_SELECT(查询结构), INSTANCE(中间临时表类型(数据血缘)), CDW(CDW表类型)
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MetaCrawlType?: string
+  /**
+   * 是否视图
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsView?: boolean
+  /**
+   * 存储位置
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Location?: string
 }
 
 /**
@@ -21300,6 +21387,11 @@ export interface CompareRule {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CycleStep?: number
+  /**
+   * o 表示 或，a 表示 且，数字表示items下标
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ComputeExpression?: string
 }
 
 /**

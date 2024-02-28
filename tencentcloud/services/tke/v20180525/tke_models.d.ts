@@ -4658,7 +4658,7 @@ export interface CreateClusterRequest {
  */
 export interface CreateEdgeCVMInstancesRequest {
     /**
-     * 集群id
+     * 集群id，边缘集群需要先开启公网访问才能添加cvm节点
      */
     ClusterID: string;
     /**
@@ -7662,11 +7662,11 @@ export interface KubeJarvisStateResultsItem {
  */
 export interface CreateECMInstancesRequest {
     /**
-     * 集群id
+     * 集群id，边缘集群需要先开启公网访问才能添加ecm节点
      */
     ClusterID: string;
     /**
-     * 模块id
+     * 边缘模块id
      */
     ModuleId: string;
     /**
@@ -8533,11 +8533,11 @@ export interface CheckEdgeClusterCIDRResponse {
   2 vpc 和 podCIDR 冲突
   3 serviceCIDR  和 podCIDR 冲突
      */
-    ConflictCode: number;
+    ConflictCode?: number;
     /**
      * CIDR冲突描述信息。
      */
-    ConflictMsg: string;
+    ConflictMsg?: string;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -10936,30 +10936,30 @@ export interface DeleteECMInstancesResponse {
  */
 export interface DescribeEdgeClusterUpgradeInfoResponse {
     /**
-     * 可升级的集群组件和
+     * 可升级的集群组件及其版本
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ComponentVersion: string;
+    ComponentVersion?: string;
     /**
      * 边缘集群当前版本
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    EdgeVersionCurrent: string;
+    EdgeVersionCurrent?: string;
     /**
      * 边缘组件镜像仓库地址前缀，包含域名和命名空间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    RegistryPrefix: string;
+    RegistryPrefix?: string;
     /**
      * 集群升级状态，可能值：running、updating、failed
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ClusterUpgradeStatus: string;
+    ClusterUpgradeStatus?: string;
     /**
      * 集群升级中状态或者失败原因
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ClusterUpgradeStatusReason: string;
+    ClusterUpgradeStatusReason?: string;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -12013,7 +12013,7 @@ export interface DescribeTKEEdgeScriptRequest {
      */
     ClusterId: string;
     /**
-     * 网卡名
+     * 网卡名,指定边缘节点上kubelet向apiserver注册使用的网卡
      */
     Interface: string;
     /**

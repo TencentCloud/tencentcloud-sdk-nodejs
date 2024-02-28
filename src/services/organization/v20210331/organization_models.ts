@@ -178,6 +178,16 @@ export interface OrgFinancialByMonth {
 }
 
 /**
+ * MoveOrganizationNodeMembers返回参数结构体
+ */
+export interface MoveOrganizationNodeMembersResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteShareUnit返回参数结构体
  */
 export interface DeleteShareUnitResponse {
@@ -497,6 +507,22 @@ export interface DeleteShareUnitResourcesRequest {
    * 共享资源列表。最大10个。
    */
   Resources: Array<ShareResource>
+}
+
+/**
+ * 成员管理身份
+ */
+export interface MemberIdentity {
+  /**
+   * 身份ID。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IdentityId: number
+  /**
+   * 身份名称。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IdentityAliasName: string
 }
 
 /**
@@ -1010,49 +1036,29 @@ export interface AddShareUnitRequest {
 }
 
 /**
- * CreateOrganizationMember请求参数结构体
+ * 组织成员财务信息。
  */
-export interface CreateOrganizationMemberRequest {
+export interface OrgMemberFinancial {
   /**
-   * 成员名称。最大长度为25个字符，支持英文字母、数字、汉字、符号+@、&._[]-:,
+   * 成员Uin。
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Name: string
+  MemberUin: number
   /**
-   * 关系策略。取值：Financial
+   * 成员名称。
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  PolicyType: string
+  MemberName: string
   /**
-   * 成员财务权限ID列表。取值：1-查看账单、2-查看余额、3-资金划拨、4-合并出账、5-开票、6-优惠继承、7-代付费，1、2 默认必须
+   * 消耗金额，单位：元。
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  PermissionIds: Array<number | bigint>
+  TotalCost: number
   /**
-   * 成员所属部门的节点ID。可以调用DescribeOrganizationNodes获取
+   * 占比%。
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  NodeId: number
-  /**
-   * 账号名称。最大长度为25个字符，支持英文字母、数字、汉字、符号+@、&._[]-:,
-   */
-  AccountName: string
-  /**
-   * 备注。
-   */
-  Remark?: string
-  /**
-   * 成员创建记录ID。创建异常重试时需要
-   */
-  RecordId?: number
-  /**
-   * 代付者Uin。成员代付费时需要
-   */
-  PayUin?: string
-  /**
-   * 成员访问身份ID列表。可以调用ListOrganizationIdentity获取，1默认支持
-   */
-  IdentityRoleID?: Array<number | bigint>
-  /**
-   * 认证主体关系ID。给不同主体创建成员时需要，可以调用DescribeOrganizationAuthNode获取
-   */
-  AuthRelationId?: number
+  Ratio?: string
 }
 
 /**
@@ -1312,32 +1318,6 @@ export interface OrgPermission {
 }
 
 /**
- * 组织成员财务信息。
- */
-export interface OrgMemberFinancial {
-  /**
-   * 成员Uin。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  MemberUin: number
-  /**
-   * 成员名称。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  MemberName: string
-  /**
-   * 消耗金额，单位：元。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TotalCost: number
-  /**
-   * 占比%。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Ratio?: string
-}
-
-/**
  * AddOrganizationMemberEmail返回参数结构体
  */
 export interface AddOrganizationMemberEmailResponse {
@@ -1428,19 +1408,13 @@ export interface CreateOrganizationMembersPolicyRequest {
 }
 
 /**
- * 成员管理身份
+ * CheckAccountDelete请求参数结构体
  */
-export interface MemberIdentity {
+export interface CheckAccountDeleteRequest {
   /**
-   * 身份ID。
-注意：此字段可能返回 null，表示取不到有效值。
+   * 成员uin。
    */
-  IdentityId: number
-  /**
-   * 身份名称。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  IdentityAliasName: string
+  MemberUin: number
 }
 
 /**
@@ -1890,13 +1864,49 @@ export interface OrgMember {
 }
 
 /**
- * MoveOrganizationNodeMembers返回参数结构体
+ * CreateOrganizationMember请求参数结构体
  */
-export interface MoveOrganizationNodeMembersResponse {
+export interface CreateOrganizationMemberRequest {
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 成员名称。最大长度为25个字符，支持英文字母、数字、汉字、符号+@、&._[]-:,
    */
-  RequestId?: string
+  Name: string
+  /**
+   * 关系策略。取值：Financial
+   */
+  PolicyType: string
+  /**
+   * 成员财务权限ID列表。取值：1-查看账单、2-查看余额、3-资金划拨、4-合并出账、5-开票、6-优惠继承、7-代付费，1、2 默认必须
+   */
+  PermissionIds: Array<number | bigint>
+  /**
+   * 成员所属部门的节点ID。可以调用DescribeOrganizationNodes获取
+   */
+  NodeId: number
+  /**
+   * 账号名称。最大长度为25个字符，支持英文字母、数字、汉字、符号+@、&._[]-:,
+   */
+  AccountName: string
+  /**
+   * 备注。
+   */
+  Remark?: string
+  /**
+   * 成员创建记录ID。创建异常重试时需要
+   */
+  RecordId?: number
+  /**
+   * 代付者Uin。成员代付费时需要
+   */
+  PayUin?: string
+  /**
+   * 成员访问身份ID列表。可以调用ListOrganizationIdentity获取，1默认支持
+   */
+  IdentityRoleID?: Array<number | bigint>
+  /**
+   * 认证主体关系ID。给不同主体创建成员时需要，可以调用DescribeOrganizationAuthNode获取
+   */
+  AuthRelationId?: number
 }
 
 /**
@@ -1956,6 +1966,57 @@ export interface OrgMemberAuthIdentity {
 }
 
 /**
+ * 不允许删除的原因。
+ */
+export interface NotAllowReason {
+  /**
+   * 是否创建的成员。true-是、false-否；成员不是创建的成员不允许删除
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsCreateMember?: boolean
+  /**
+   * 成员删除许可。true-开启、false-关闭；成员删除许可关闭时不允许删除
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DeletionPermission?: boolean
+  /**
+   * 是否可信服务委派管理员。true-是、false-否；成员是可信服务委派管理员不允许删除
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsAssignManager?: boolean
+  /**
+   * 是否主体管理员。true-是、false-否；成员是主体管理员不允许删除
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsAuthManager?: boolean
+  /**
+   * 是否共享资源管理员。true-是、false-否；成员是共享资源管理员不允许删除
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsShareManager?: boolean
+  /**
+   * 成员是否设置了操作审批。true-是、false-否；成员设置了操作审批时不允许删除
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OperateProcess?: boolean
+  /**
+   * 是否允许解除成员财务权限。true-是、false-否；成员不能解除财务权限时不允许删除
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BillingPermission?: boolean
+  /**
+   * 存在的资源列表。账号存在资源时不允许删除
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExistResources?: Array<string>
+  /**
+   * 检测失败的资源列表。账号有资源检测失败时不允许删除。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DetectFailedResources?: Array<string>
+}
+
+/**
  * 企业组织单元
  */
 export interface OrgNode {
@@ -1989,6 +2050,24 @@ export interface OrgNode {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   UpdateTime: string
+}
+
+/**
+ * CheckAccountDelete返回参数结构体
+ */
+export interface CheckAccountDeleteResponse {
+  /**
+   * 成员是否允许删除。 true-是、false-否
+   */
+  AllowDelete?: boolean
+  /**
+   * 不允许删除原因。
+   */
+  NotAllowReason?: NotAllowReason
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

@@ -446,6 +446,16 @@ export interface DisassociateTargetGroupsResponse {
 }
 
 /**
+ * SetLoadBalancerStartStatus返回参数结构体
+ */
+export interface SetLoadBalancerStartStatusResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * SetLoadBalancerClsLog返回参数结构体
  */
 export interface SetLoadBalancerClsLogResponse {
@@ -4101,6 +4111,37 @@ export interface DescribeLoadBalancersDetailResponse {
 }
 
 /**
+ * 描述一个Target的健康信息
+ */
+export interface TargetHealth {
+  /**
+   * Target的内网IP
+   */
+  IP: string
+  /**
+   * Target绑定的端口
+   */
+  Port: number
+  /**
+   * 当前健康状态，true：健康，false：不健康（包括尚未开始探测、探测中、状态异常等几种状态）。只有处于健康状态（且权重大于0），负载均衡才会向其转发流量。
+   */
+  HealthStatus: boolean
+  /**
+   * Target的实例ID，如 ins-12345678
+   */
+  TargetId: string
+  /**
+   * 当前健康状态的详细信息。如：Alive、Dead、Unknown。Alive状态为健康，Dead状态为异常，Unknown状态包括尚未开始探测、探测中、状态未知。
+   */
+  HealthStatusDetail: string
+  /**
+   * (**该参数对象即将下线，不推荐使用，请使用HealthStatusDetail获取健康详情**) 当前健康状态的详细信息。如：Alive、Dead、Unknown。Alive状态为健康，Dead状态为异常，Unknown状态包括尚未开始探测、探测中、状态未知。
+   * @deprecated
+   */
+  HealthStatusDetial?: string
+}
+
+/**
  * 负载均衡详细信息
  */
 export interface LoadBalancerDetail {
@@ -5432,34 +5473,21 @@ export interface DescribeClassicalLBListenersRequest {
 }
 
 /**
- * 描述一个Target的健康信息
+ * SetLoadBalancerStartStatus请求参数结构体
  */
-export interface TargetHealth {
+export interface SetLoadBalancerStartStatusRequest {
   /**
-   * Target的内网IP
+   * 操作类型。Start：启动实例，Stop：停止实例。
    */
-  IP: string
+  OperationType: string
   /**
-   * Target绑定的端口
+   * 负载均衡实例ID。
    */
-  Port: number
+  LoadBalancerId: string
   /**
-   * 当前健康状态，true：健康，false：不健康（包括尚未开始探测、探测中、状态异常等几种状态）。只有处于健康状态（且权重大于0），负载均衡才会向其转发流量。
+   * 监听器ID。如果该字段为空，则表示操作负载均衡实例，如果不为空，则表示操作监听器。
    */
-  HealthStatus: boolean
-  /**
-   * Target的实例ID，如 ins-12345678
-   */
-  TargetId: string
-  /**
-   * 当前健康状态的详细信息。如：Alive、Dead、Unknown。Alive状态为健康，Dead状态为异常，Unknown状态包括尚未开始探测、探测中、状态未知。
-   */
-  HealthStatusDetail: string
-  /**
-   * (**该参数对象即将下线，不推荐使用，请使用HealthStatusDetail获取健康详情**) 当前健康状态的详细信息。如：Alive、Dead、Unknown。Alive状态为健康，Dead状态为异常，Unknown状态包括尚未开始探测、探测中、状态未知。
-   * @deprecated
-   */
-  HealthStatusDetial?: string
+  ListenerIds?: Array<string>
 }
 
 /**

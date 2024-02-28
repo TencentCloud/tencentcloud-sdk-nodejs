@@ -4296,11 +4296,11 @@ export interface DescribeLicenseListResponse {
   /**
    * 总条数
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 授权数列表信息
    */
-  List: Array<LicenseDetail>
+  List?: Array<LicenseDetail>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -13032,7 +13032,7 @@ export interface DeleteLoginWhiteListRequest {
  */
 export interface DescribeLicenseListRequest {
   /**
-   * 多个条件筛选时 LicenseStatus,DeadlineStatus,ResourceId,Keywords 取交集
+   * 多个条件筛选时取交集
 <li> LicenseStatus 授权状态信息,0 未使用,1 部分使用, 2 已用完, 3 不可用  4 可使用</li>
 <li> BuyTime 购买时间</li>
 <li> LicenseType  授权类型, 0 专业版-按量计费, 1专业版-包年包月 , 2 旗舰版-包年包月</li>
@@ -13041,6 +13041,7 @@ export interface DescribeLicenseListRequest {
 <li>Keywords IP筛选</li>
 <li>PayMode 付费模式 0 按量计费 , 1 包年包月</li>
 <li>OrderStatus 订单状态 1 正常 2 隔离 3 销毁</li>
+<li>DealNames 子订单号,最大长度10个,超出会失败</li>
    */
   Filters?: Array<Filters>
   /**

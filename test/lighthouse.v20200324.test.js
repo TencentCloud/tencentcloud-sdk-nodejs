@@ -258,6 +258,16 @@ it("lighthouse.v20200324.ModifyFirewallRules", async function () {
     }
 })
 
+it("lighthouse.v20200324.ResizeDisks", async function () {
+    try {
+       const data = await client.ResizeDisks({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("lighthouse.v20200324.CreateDiskBackup", async function () {
     try {
        const data = await client.CreateDiskBackup({})
@@ -411,6 +421,16 @@ it("lighthouse.v20200324.InquirePriceCreateInstances", async function () {
 it("lighthouse.v20200324.CreateInstanceSnapshot", async function () {
     try {
        const data = await client.CreateInstanceSnapshot({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("lighthouse.v20200324.ModifyDisksBackupQuota", async function () {
+    try {
+       const data = await client.ModifyDisksBackupQuota({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

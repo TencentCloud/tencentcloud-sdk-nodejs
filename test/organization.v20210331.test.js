@@ -148,9 +148,9 @@ it("organization.v20210331.UpdateOrganizationNode", async function () {
     }
 })
 
-it("organization.v20210331.DeleteShareUnitMembers", async function () {
+it("organization.v20210331.DeleteShareUnit", async function () {
     try {
-       const data = await client.DeleteShareUnitMembers({})
+       const data = await client.DeleteShareUnit({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -211,16 +211,6 @@ it("organization.v20210331.DeleteOrganizationNodes", async function () {
 it("organization.v20210331.DeleteShareUnitResources", async function () {
     try {
        const data = await client.DeleteShareUnitResources({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("organization.v20210331.DescribeShareUnits", async function () {
-    try {
-       const data = await client.DescribeShareUnits({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -328,9 +318,9 @@ it("organization.v20210331.MoveOrganizationNodeMembers", async function () {
     }
 })
 
-it("organization.v20210331.DeleteShareUnit", async function () {
+it("organization.v20210331.CreateOrganization", async function () {
     try {
-       const data = await client.DeleteShareUnit({})
+       const data = await client.CreateOrganization({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -361,6 +351,16 @@ it("organization.v20210331.DeleteOrganizationIdentity", async function () {
 it("organization.v20210331.AddOrganizationMemberEmail", async function () {
     try {
        const data = await client.AddOrganizationMemberEmail({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("organization.v20210331.DeleteShareUnitMembers", async function () {
+    try {
+       const data = await client.DeleteShareUnitMembers({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -448,9 +448,19 @@ it("organization.v20210331.DescribeOrganizationNodes", async function () {
     }
 })
 
-it("organization.v20210331.CreateOrganization", async function () {
+it("organization.v20210331.DescribeShareUnits", async function () {
     try {
-       const data = await client.CreateOrganization({})
+       const data = await client.DescribeShareUnits({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("organization.v20210331.CheckAccountDelete", async function () {
+    try {
+       const data = await client.CheckAccountDelete({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

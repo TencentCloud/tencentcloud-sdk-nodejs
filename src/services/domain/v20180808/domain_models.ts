@@ -833,6 +833,10 @@ export interface DescribePreDomainListRequest {
    * 条数
    */
   Size?: number
+  /**
+   * 用于结束时间筛选
+   */
+  EndTime?: string
 }
 
 /**

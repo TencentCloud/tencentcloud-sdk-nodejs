@@ -147,10 +147,6 @@ export interface RunApplicationRequest {
    */
   InputBase64: string
   /**
-   * 任务缓存清理时间（小时）。不填表示不清理。
-   */
-  CacheClearDelay: number
-  /**
    * 项目ID。（不填使用指定地域下的默认项目）
    */
   ProjectId?: string
@@ -167,6 +163,10 @@ export interface RunApplicationRequest {
    */
   TableRowUuids?: Array<string>
   /**
+   * 任务缓存清理时间（小时）。不填或0表示不清理。
+   */
+  CacheClearDelay?: number
+  /**
    * 应用版本ID。不填表示使用当前最新版本。
    */
   ApplicationVersionId?: string
@@ -178,6 +178,10 @@ export interface RunApplicationRequest {
    * Nextflow运行选项。
    */
   NFOption?: NFOption
+  /**
+   * 工作目录，使用缓存卷内的相对路径 (暂时仅支持Nextflow)
+   */
+  WorkDir?: string
 }
 
 /**
@@ -253,6 +257,14 @@ export interface Environment {
    * 环境是否可用。环境需要可用才能投递计算任务。
    */
   Available?: boolean
+  /**
+   * 环境是否为默认环境。
+   */
+  IsDefault?: boolean
+  /**
+   * 环境是否为托管环境。
+   */
+  IsManaged?: boolean
   /**
    * 环境信息。
    */
@@ -339,9 +351,13 @@ export interface RunWorkflowRequest {
    */
   InputCosUri?: string
   /**
-   * 任务缓存清理时间（小时）。不填表示不清理。
+   * 任务缓存清理时间（小时）。不填或0表示不清理。
    */
   CacheClearDelay?: number
+  /**
+   * 工作目录，使用缓存卷内的相对路径 (暂时仅支持Nextflow)
+   */
+  WorkDir?: string
 }
 
 /**
@@ -685,6 +701,10 @@ export interface ClusterOption {
 - KUBERNETES
    */
   Type: string
+  /**
+   * 计算集群Service CIDR，不能与VPC网段重合。
+   */
+  ServiceCidr?: string
   /**
    * 资源配额。
    */
@@ -1329,6 +1349,14 @@ export interface NFOption {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Resume?: boolean
+  /**
+   * Nextflow引擎版本，取值范围：
+- 22.10.4
+- 22.10.8 
+- 23.10.1
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NFVersion?: string
 }
 
 /**

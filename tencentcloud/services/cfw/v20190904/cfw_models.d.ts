@@ -3921,7 +3921,7 @@ export interface VpcRuleItem {
      */
     DestContent: string;
     /**
-     * 访问目的类型，类型可以为：net，domain
+     * 访问目的类型，类型可以为：net，domain，dnsparse
      */
     DestType: string;
     /**
@@ -5116,6 +5116,11 @@ export interface TemplateListInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     ProtocolType?: string;
+    /**
+     * 模板包含地址数量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IPNum?: number;
 }
 /**
  * DescribeVpcFwGroupSwitch返回参数结构体
@@ -5713,7 +5718,7 @@ export interface DescAcItem {
      */
     SourceType?: string;
     /**
-     * 访问目的类型：入向规则时类型可以为ip,net,template,instance,group,tag；出向规则时可以为 ip,net,domain,template,location
+     * 访问目的类型：入向规则时类型可以为ip,net,template,instance,group,tag；出向规则时可以为 ip,net,domain,template,location,dnsparse
   注意：此字段可能返回 null，表示取不到有效值。
      */
     TargetType?: string;
