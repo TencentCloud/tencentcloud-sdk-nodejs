@@ -39,6 +39,11 @@ export interface ModifyEWRuleStatusResponse {
 export type DescribeNatFwInstanceRequest = null
 
 /**
+ * DescribeNatFwInstanceWithRegion请求参数结构体
+ */
+export type DescribeNatFwInstanceWithRegionRequest = null
+
+/**
  * DescribeLogs请求参数结构体
  */
 export interface DescribeLogsRequest {
@@ -157,9 +162,22 @@ export interface ModifyNatFwVpcDnsSwitchResponse {
 }
 
 /**
- * DescribeNatFwInstanceWithRegion请求参数结构体
+ * CreateBlockIgnoreRuleNew请求参数结构体
  */
-export type DescribeNatFwInstanceWithRegionRequest = null
+export interface CreateBlockIgnoreRuleNewRequest {
+  /**
+   * 非自定义类型规则列表
+   */
+  Rules: Array<BanAndAllowRule>
+  /**
+   * RuleType: 1黑名单 2外部IP 3域名 4情报 5资产 6自定义规则  7入侵防御规则
+   */
+  RuleType: number
+  /**
+   * 是否覆盖重复数据，1覆盖，非1不覆盖，跳过重复数据
+   */
+  CoverDuplicate?: number
+}
 
 /**
  * ModifyAddressTemplate请求参数结构体
@@ -850,17 +868,13 @@ export interface BlockIgnoreRule {
 }
 
 /**
- * ModifyNatFwVpcDnsSwitch请求参数结构体
+ * ModifyFwGroupSwitch返回参数结构体
  */
-export interface ModifyNatFwVpcDnsSwitchRequest {
+export interface ModifyFwGroupSwitchResponse {
   /**
-   * nat 防火墙 id
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  NatFwInsId: string
-  /**
-   * DNS 开关切换列表
-   */
-  DnsVpcSwitchLst: Array<DnsVpcSwitch>
+  RequestId?: string
 }
 
 /**
@@ -874,41 +888,13 @@ export interface DeleteNatFwInstanceResponse {
 }
 
 /**
- * DescribeNatSwitchList请求参数结构体
+ * DeleteBlockIgnoreRuleNew返回参数结构体
  */
-export interface DescribeNatSwitchListRequest {
+export interface DeleteBlockIgnoreRuleNewResponse {
   /**
-   * 偏移量，分页用
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  Offset: number
-  /**
-   * 条数，分页用
-   */
-  Limit: number
-  /**
-   * 搜索值
-   */
-  SearchValue?: string
-  /**
-   * 开关，1打开，0关闭
-   */
-  Status?: number
-  /**
-   * 筛选NAT防火墙子网开关所属VPC
-   */
-  VpcId?: string
-  /**
-   * 筛选NAT防火墙子网开关所属NAT网关
-   */
-  NatId?: string
-  /**
-   * 筛选NAT防火墙子网开关所属NAT防火墙实例
-   */
-  NatInsId?: string
-  /**
-   * 筛选NAT防火墙子网开关所属地域
-   */
-  Area?: string
+  RequestId?: string
 }
 
 /**
@@ -1436,6 +1422,27 @@ export interface DnsVpcSwitch {
    * 0：设置为关闭 1:设置为打开
    */
   Status: number
+}
+
+/**
+ * 封禁列表和放通列表结构体
+ */
+export interface BanAndAllowRuleDel {
+  /**
+   * 封禁和放通对象
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Ioc?: string
+  /**
+   * 0互联网出站 1互联网入站 5内网访问源 6内网访问目的
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DirectionList?: string
+  /**
+   * 规则类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RuleType?: number
 }
 
 /**
@@ -2231,23 +2238,13 @@ export interface DescribeSwitchListsRequest {
 }
 
 /**
- * Nat防火墙弹性公网ip列表
+ * ModifyEdgeIpSwitch返回参数结构体
  */
-export interface NatFwEipsInfo {
+export interface ModifyEdgeIpSwitchResponse {
   /**
-   * 弹性公网ip
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  Eip: string
-  /**
-   * 所属的Nat网关Id
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  NatGatewayId: string
-  /**
-   * Nat网关名称
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  NatGatewayName: string
+  RequestId?: string
 }
 
 /**
@@ -2550,19 +2547,13 @@ export interface ModifySecurityGroupItemRuleStatusRequest {
 }
 
 /**
- * VPC防火墙接入的网络实例类型及数量
+ * ModifyBlockIgnoreRuleNew返回参数结构体
  */
-export interface VpcFwJoinInstanceType {
+export interface ModifyBlockIgnoreRuleNewResponse {
   /**
-   * 接入实例类型，VPC、DIRECTCONNECT、 VPNGW 等
-注意：此字段可能返回 null，表示取不到有效值。
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  JoinType: string
-  /**
-   * 接入的对应网络实例类型的数量
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Num: number
+  RequestId?: string
 }
 
 /**
@@ -3727,17 +3718,33 @@ Type为5，域名模板eg：www.qq.com,www.tencent.com
 }
 
 /**
- * DescribeBlockStaticList返回参数结构体
+ * CreateBlockIgnoreRuleNew返回参数结构体
  */
-export interface DescribeBlockStaticListResponse {
-  /**
-   * 无
-   */
-  Data: Array<StaticInfo>
+export interface CreateBlockIgnoreRuleNewResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * Nat防火墙弹性公网ip列表
+ */
+export interface NatFwEipsInfo {
+  /**
+   * 弹性公网ip
+   */
+  Eip: string
+  /**
+   * 所属的Nat网关Id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NatGatewayId: string
+  /**
+   * Nat网关名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NatGatewayName: string
 }
 
 /**
@@ -4750,6 +4757,20 @@ export interface ModifyNatFwSwitchResponse {
 }
 
 /**
+ * ModifyNatFwVpcDnsSwitch请求参数结构体
+ */
+export interface ModifyNatFwVpcDnsSwitchRequest {
+  /**
+   * nat 防火墙 id
+   */
+  NatFwInsId: string
+  /**
+   * DNS 开关切换列表
+   */
+  DnsVpcSwitchLst: Array<DnsVpcSwitch>
+}
+
+/**
  * DescribeFwSyncStatus返回参数结构体
  */
 export interface DescribeFwSyncStatusResponse {
@@ -4764,17 +4785,13 @@ export interface DescribeFwSyncStatusResponse {
 }
 
 /**
- * DescribeBlockByIpTimesList返回参数结构体
+ * DeleteNatFwInstance请求参数结构体
  */
-export interface DescribeBlockByIpTimesListResponse {
+export interface DeleteNatFwInstanceRequest {
   /**
-   * 返回数据
+   * 防火墙实例id
    */
-  Data: Array<IpStatic>
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  CfwInstance: string
 }
 
 /**
@@ -5006,37 +5023,41 @@ export interface UnHandleEvent {
 }
 
 /**
- * DescribeBlockIgnoreList返回参数结构体
+ * DescribeAssociatedInstanceList请求参数结构体
  */
-export interface DescribeBlockIgnoreListResponse {
+export interface DescribeAssociatedInstanceListRequest {
   /**
-   * 列表数据
+   * 列表偏移量
    */
-  Data?: Array<BlockIgnoreRule>
+  Offset: number
   /**
-   * 查询结果总数，用于分页
+   * 每页记录条数
    */
-  Total?: number
+  Limit: number
   /**
-   * 状态值，0：查询成功，非0：查询失败
+   * 地域代码（例：ap-guangzhou）,支持腾讯云全地域
    */
-  ReturnCode?: number
+  Area: string
   /**
-   * 状态信息，success：查询成功，fail：查询失败
+   * 额外检索条件（JSON字符串）
    */
-  ReturnMsg?: string
+  SearchValue?: string
   /**
-   * 安全事件来源下拉框
+   * 排序字段
    */
-  SourceList?: Array<string>
+  By?: string
   /**
-   * 对应规则类型的数量，示例：[0,122,30,55,12,232,0]，封禁0个，IP地址122个，域名30个，威胁情报55个，资产实例12个，自定义策略232个，入侵防御规则0个
+   * 排序方式（asc:升序,desc:降序）
    */
-  RuleTypeDataList?: Array<number | bigint>
+  Order?: string
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 安全组ID
    */
-  RequestId?: string
+  SecurityGroupId?: string
+  /**
+   * 实例类型,'3'是cvm实例,'4'是clb实例,'5'是eni实例,'6'是云数据库
+   */
+  Type?: string
 }
 
 /**
@@ -5054,13 +5075,17 @@ export interface ModifyVpcAcRuleResponse {
 }
 
 /**
- * ModifyEdgeIpSwitch返回参数结构体
+ * ModifyBlockIgnoreRuleNew请求参数结构体
  */
-export interface ModifyEdgeIpSwitchResponse {
+export interface ModifyBlockIgnoreRuleNewRequest {
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 规则
    */
-  RequestId?: string
+  Rule: BanAndAllowRule
+  /**
+   * RuleType: 1放通列表 2外部IP 3域名 4情报 5资产 6自定义规则  7入侵防御规则
+   */
+  RuleType: number
 }
 
 /**
@@ -5153,13 +5178,26 @@ export interface ModifyNatFwSwitchRequest {
 }
 
 /**
- * ModifyFwGroupSwitch返回参数结构体
+ * DeleteBlockIgnoreRuleNew请求参数结构体
  */
-export interface ModifyFwGroupSwitchResponse {
+export interface DeleteBlockIgnoreRuleNewRequest {
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 是否删除全部
    */
-  RequestId?: string
+  DeleteAll: number
+  /**
+   * 规则列表
+   */
+  Rules?: Array<BanAndAllowRuleDel>
+  /**
+   * 封禁：1，放通：100，
+主要用于全部删除时区分列表类型
+   */
+  RuleType?: number
+  /**
+   * blocklist 封禁列表 whitelist 白名单列表
+   */
+  ShowType?: string
 }
 
 /**
@@ -5200,6 +5238,44 @@ export interface CustomWhiteRule {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IdsRuleId?: string
+}
+
+/**
+ * DescribeNatSwitchList请求参数结构体
+ */
+export interface DescribeNatSwitchListRequest {
+  /**
+   * 偏移量，分页用
+   */
+  Offset: number
+  /**
+   * 条数，分页用
+   */
+  Limit: number
+  /**
+   * 搜索值
+   */
+  SearchValue?: string
+  /**
+   * 开关，1打开，0关闭
+   */
+  Status?: number
+  /**
+   * 筛选NAT防火墙子网开关所属VPC
+   */
+  VpcId?: string
+  /**
+   * 筛选NAT防火墙子网开关所属NAT网关
+   */
+  NatId?: string
+  /**
+   * 筛选NAT防火墙子网开关所属NAT防火墙实例
+   */
+  NatInsId?: string
+  /**
+   * 筛选NAT防火墙子网开关所属地域
+   */
+  Area?: string
 }
 
 /**
@@ -5344,6 +5420,22 @@ export interface TemplateListInfo {
 }
 
 /**
+ * VPC防火墙接入的网络实例类型及数量
+ */
+export interface VpcFwJoinInstanceType {
+  /**
+   * 接入实例类型，VPC、DIRECTCONNECT、 VPNGW 等
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  JoinType: string
+  /**
+   * 接入的对应网络实例类型的数量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Num: number
+}
+
+/**
  * DescribeVpcFwGroupSwitch返回参数结构体
  */
 export interface DescribeVpcFwGroupSwitchResponse {
@@ -5406,6 +5498,37 @@ export interface StopSecurityGroupRuleDispatchResponse {
  * DescribeNatFwInfoCount请求参数结构体
  */
 export type DescribeNatFwInfoCountRequest = null
+
+/**
+ * 封禁列表和放通列表结构体
+ */
+export interface BanAndAllowRule {
+  /**
+   * 封禁和放通对象
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Ioc?: string
+  /**
+   * 0互联网出站 1互联网入站 5内网访问源 6内网访问目的
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DirectionList?: string
+  /**
+   * 规则截止时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EndTime?: string
+  /**
+   * 规则评论
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Comment?: string
+  /**
+   * 自定义白名单规则
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CustomRule?: CustomWhiteRule
+}
 
 /**
  * RemoveAcRule请求参数结构体
@@ -5836,13 +5959,17 @@ export interface RemoveAclRuleResponse {
 }
 
 /**
- * DeleteNatFwInstance请求参数结构体
+ * DescribeBlockByIpTimesList返回参数结构体
  */
-export interface DeleteNatFwInstanceRequest {
+export interface DescribeBlockByIpTimesListResponse {
   /**
-   * 防火墙实例id
+   * 返回数据
    */
-  CfwInstance: string
+  Data: Array<IpStatic>
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -6515,7 +6642,7 @@ export interface CreateAlertCenterIsolateRequest {
    */
   IsolateType: Array<number | bigint>
   /**
-   * 运维模式 1 IP白名单 2 身份认证
+   * 运维模式 1 IP白名单 2 身份认证  0 非运维模式
    */
   OmMode?: number
 }
@@ -7042,41 +7169,37 @@ export interface ModifyEnterpriseSecurityDispatchStatusRequest {
 }
 
 /**
- * DescribeAssociatedInstanceList请求参数结构体
+ * DescribeBlockIgnoreList返回参数结构体
  */
-export interface DescribeAssociatedInstanceListRequest {
+export interface DescribeBlockIgnoreListResponse {
   /**
-   * 列表偏移量
+   * 列表数据
    */
-  Offset: number
+  Data?: Array<BlockIgnoreRule>
   /**
-   * 每页记录条数
+   * 查询结果总数，用于分页
    */
-  Limit: number
+  Total?: number
   /**
-   * 地域代码（例：ap-guangzhou）,支持腾讯云全地域
+   * 状态值，0：查询成功，非0：查询失败
    */
-  Area: string
+  ReturnCode?: number
   /**
-   * 额外检索条件（JSON字符串）
+   * 状态信息，success：查询成功，fail：查询失败
    */
-  SearchValue?: string
+  ReturnMsg?: string
   /**
-   * 排序字段
+   * 安全事件来源下拉框
    */
-  By?: string
+  SourceList?: Array<string>
   /**
-   * 排序方式（asc:升序,desc:降序）
+   * 对应规则类型的数量，示例：[0,122,30,55,12,232,0]，封禁0个，IP地址122个，域名30个，威胁情报55个，资产实例12个，自定义策略232个，入侵防御规则0个
    */
-  Order?: string
+  RuleTypeDataList?: Array<number | bigint>
   /**
-   * 安全组ID
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  SecurityGroupId?: string
-  /**
-   * 实例类型,'3'是cvm实例,'4'是clb实例,'5'是eni实例,'6'是云数据库
-   */
-  Type?: string
+  RequestId?: string
 }
 
 /**
@@ -7129,6 +7252,20 @@ export interface ModifyTableStatusResponse {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Status: number
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeBlockStaticList返回参数结构体
+ */
+export interface DescribeBlockStaticListResponse {
+  /**
+   * 无
+   */
+  Data: Array<StaticInfo>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

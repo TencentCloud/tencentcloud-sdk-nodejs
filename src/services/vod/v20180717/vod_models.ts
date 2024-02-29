@@ -1223,6 +1223,16 @@ export interface TempCertificate {
 }
 
 /**
+ * DescribeDefaultDistributionConfig请求参数结构体
+ */
+export interface DescribeDefaultDistributionConfigRequest {
+  /**
+   * <b>点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b>
+   */
+  SubAppId?: number
+}
+
+/**
  * 音视频审核 Ocr 文字涉及令人不适宜信息、违规任务结果类型
  */
 export interface AiReviewTaskPoliticalOcrResult {
@@ -11078,6 +11088,28 @@ export interface OutputVideoStream {
 }
 
 /**
+ * ModifyDefaultDistributionConfig请求参数结构体
+ */
+export interface ModifyDefaultDistributionConfigRequest {
+  /**
+   * <b>点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b>
+   */
+  SubAppId?: number
+  /**
+   * 分发域名，取值为点播域名列表里的域名。不填或者填空，表示不修改域名。
+   */
+  Domain?: string
+  /**
+   * 分发协议，取值为 HTTP 或者 HTTPS。
+   */
+  Scheme?: string
+  /**
+   * 播放密钥，由大小写字母（a - Z）或者数字（0 - 9）组成，长度在8 - 20个字符之间。
+   */
+  PlayKey?: string
+}
+
+/**
  * 任务流模板详情
  */
 export interface ProcedureTemplate {
@@ -14620,6 +14652,33 @@ export interface MediaCastEvent {
 }
 
 /**
+ * DescribeDefaultDistributionConfig返回参数结构体
+ */
+export interface DescribeDefaultDistributionConfigResponse {
+  /**
+   * 分发配置的域名(已废弃）。
+   * @deprecated
+   */
+  DomainName?: string
+  /**
+   * 分发配置的域名。
+   */
+  Domain?: string
+  /**
+   * 分发配置的协议，为 HTTP 或 HTTPS。
+   */
+  Scheme?: string
+  /**
+   * 播放密钥，由大小写字母（a - Z）或者数字（0 - 9）组成，长度在8 - 20个字符之间。
+   */
+  PlayKey?: string
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteProcedureTemplate请求参数结构体
  */
 export interface DeleteProcedureTemplateRequest {
@@ -14882,7 +14941,12 @@ export interface DeleteRebuildMediaTemplateRequest {
 /**
  * CreateDomainVerifyRecord请求参数结构体
  */
-export type CreateDomainVerifyRecordRequest = null
+export interface CreateDomainVerifyRecordRequest {
+  /**
+   * 需要接入点播的加速域名。
+   */
+  Domain: string
+}
 
 /**
  * 点播文件信息
@@ -15658,6 +15722,16 @@ export interface DeleteImageSpriteTemplateRequest {
    * <b>点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b>
    */
   SubAppId?: number
+}
+
+/**
+ * ModifyDefaultDistributionConfig返回参数结构体
+ */
+export interface ModifyDefaultDistributionConfigResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

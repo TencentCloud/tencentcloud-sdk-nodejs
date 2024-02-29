@@ -222,10 +222,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteAntiInfoLeakRule", req, cb);
     }
     /**
-     * 查看防护对象列表
+     * 计费资源购买、续费下单接口
      */
-    async DescribeObjects(req, cb) {
-        return this.request("DescribeObjects", req, cb);
+    async CreateDeals(req, cb) {
+        return this.request("CreateDeals", req, cb);
     }
     /**
      * Waf 斯巴达版本更新cc自动封堵状态
@@ -516,6 +516,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeAntiFakeUrl(req, cb) {
         return this.request("DescribeAntiFakeUrl", req, cb);
+    }
+    /**
+     * 查看防护对象列表
+     */
+    async DescribeObjects(req, cb) {
+        return this.request("DescribeObjects", req, cb);
     }
     /**
      * 更改某一条规则

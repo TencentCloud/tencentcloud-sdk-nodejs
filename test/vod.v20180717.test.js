@@ -308,6 +308,16 @@ it("vod.v20180717.RemoveWatermark", async function () {
     }
 })
 
+it("vod.v20180717.ModifyDefaultDistributionConfig", async function () {
+    try {
+       const data = await client.ModifyDefaultDistributionConfig({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vod.v20180717.DescribeCdnLogs", async function () {
     try {
        const data = await client.DescribeCdnLogs({})
@@ -1421,6 +1431,16 @@ it("vod.v20180717.DescribeSubAppIds", async function () {
 it("vod.v20180717.DescribeHeadTailTemplates", async function () {
     try {
        const data = await client.DescribeHeadTailTemplates({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("vod.v20180717.DescribeDefaultDistributionConfig", async function () {
+    try {
+       const data = await client.DescribeDefaultDistributionConfig({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -28,9 +28,9 @@ it("cfw.v20190904.RemoveVpcAcRule", async function () {
     }
 })
 
-it("cfw.v20190904.StopSecurityGroupRuleDispatch", async function () {
+it("cfw.v20190904.DeleteBlockIgnoreRuleNew", async function () {
     try {
-       const data = await client.StopSecurityGroupRuleDispatch({})
+       const data = await client.DeleteBlockIgnoreRuleNew({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -51,6 +51,16 @@ it("cfw.v20190904.DescribeVpcFwGroupSwitch", async function () {
 it("cfw.v20190904.ModifyEWRuleStatus", async function () {
     try {
        const data = await client.ModifyEWRuleStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cfw.v20190904.StopSecurityGroupRuleDispatch", async function () {
+    try {
+       const data = await client.StopSecurityGroupRuleDispatch({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -231,6 +241,16 @@ it("cfw.v20190904.DeleteNatFwInstance", async function () {
 it("cfw.v20190904.CreateBlockIgnoreRuleList", async function () {
     try {
        const data = await client.CreateBlockIgnoreRuleList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cfw.v20190904.ModifyBlockIgnoreRuleNew", async function () {
+    try {
+       const data = await client.ModifyBlockIgnoreRuleNew({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -421,6 +441,16 @@ it("cfw.v20190904.DescribeNatFwInstanceWithRegion", async function () {
 it("cfw.v20190904.DeleteIdsWhiteRule", async function () {
     try {
        const data = await client.DeleteIdsWhiteRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cfw.v20190904.CreateBlockIgnoreRuleNew", async function () {
+    try {
+       const data = await client.CreateBlockIgnoreRuleNew({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -928,9 +958,9 @@ it("cfw.v20190904.CreateAcRules", async function () {
     }
 })
 
-it("cfw.v20190904.ModifyNatFwSwitch", async function () {
+it("cfw.v20190904.ModifyEnterpriseSecurityDispatchStatus", async function () {
     try {
-       const data = await client.ModifyNatFwSwitch({})
+       const data = await client.ModifyEnterpriseSecurityDispatchStatus({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1058,9 +1088,9 @@ it("cfw.v20190904.DescribeFwEdgeIps", async function () {
     }
 })
 
-it("cfw.v20190904.ModifyEnterpriseSecurityDispatchStatus", async function () {
+it("cfw.v20190904.ModifyNatFwSwitch", async function () {
     try {
-       const data = await client.ModifyEnterpriseSecurityDispatchStatus({})
+       const data = await client.ModifyNatFwSwitch({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

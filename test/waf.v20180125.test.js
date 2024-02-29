@@ -338,9 +338,9 @@ it("waf.v20180125.DeleteAntiInfoLeakRule", async function () {
     }
 })
 
-it("waf.v20180125.DescribeObjects", async function () {
+it("waf.v20180125.CreateDeals", async function () {
     try {
-       const data = await client.DescribeObjects({})
+       const data = await client.CreateDeals({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -811,6 +811,16 @@ it("waf.v20180125.DescribeFlowTrend", async function () {
 it("waf.v20180125.DescribeAntiFakeUrl", async function () {
     try {
        const data = await client.DescribeAntiFakeUrl({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("waf.v20180125.DescribeObjects", async function () {
+    try {
+       const data = await client.DescribeObjects({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -127,7 +127,7 @@ import {
   CCRuleLists,
   PostAttackDownloadTaskRequest,
   ModifyAntiFakeUrlStatusRequest,
-  TLSCiphers,
+  DescribeCCRuleListRequest,
   ResponseCode,
   ModifyAccessPeriodResponse,
   ModifyAttackWhiteRuleResponse,
@@ -138,6 +138,7 @@ import {
   ModifyHostFlowModeRequest,
   CreateHostRequest,
   GetInstanceQpsLimitResponse,
+  CreateDealsRequest,
   ModifyCustomWhiteRuleResponse,
   SearchItem,
   ApiPkg,
@@ -147,6 +148,7 @@ import {
   DealData,
   DescribeDomainDetailsSaasRequest,
   DescribeDomainCountInfoRequest,
+  CreateDealsGoodsDetail,
   WafThreatenIntelligenceDetails,
   DescribeDomainWhiteRulesRequest,
   DescribePeakPointsResponse,
@@ -328,6 +330,7 @@ import {
   LogHistogramInfo,
   DeleteDomainWhiteRulesRequest,
   DescribeDomainVerifyResultRequest,
+  CreateDealsGoods,
   ModifySpartaProtectionModeResponse,
   ModifyCustomWhiteRuleStatusResponse,
   DescribeTopAttackDomainRequest,
@@ -342,7 +345,8 @@ import {
   CdcRegion,
   GetAttackTotalCountResponse,
   DescribeDomainRulesResponse,
-  DescribeCCRuleListRequest,
+  CreateDealsResponse,
+  TLSCiphers,
   DescribeDomainVerifyResultResponse,
   AddCustomRuleRequest,
   DescribeWafAutoDenyRulesResponse,
@@ -711,13 +715,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查看防护对象列表
+   * 计费资源购买、续费下单接口
    */
-  async DescribeObjects(
-    req: DescribeObjectsRequest,
-    cb?: (error: string, rep: DescribeObjectsResponse) => void
-  ): Promise<DescribeObjectsResponse> {
-    return this.request("DescribeObjects", req, cb)
+  async CreateDeals(
+    req: CreateDealsRequest,
+    cb?: (error: string, rep: CreateDealsResponse) => void
+  ): Promise<CreateDealsResponse> {
+    return this.request("CreateDeals", req, cb)
   }
 
   /**
@@ -1196,6 +1200,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAntiFakeUrlResponse) => void
   ): Promise<DescribeAntiFakeUrlResponse> {
     return this.request("DescribeAntiFakeUrl", req, cb)
+  }
+
+  /**
+   * 查看防护对象列表
+   */
+  async DescribeObjects(
+    req: DescribeObjectsRequest,
+    cb?: (error: string, rep: DescribeObjectsResponse) => void
+  ): Promise<DescribeObjectsResponse> {
+    return this.request("DescribeObjects", req, cb)
   }
 
   /**

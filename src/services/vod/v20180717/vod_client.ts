@@ -64,6 +64,7 @@ import {
   CreateImageSpriteTask2017,
   ClipFileInfo2017,
   TempCertificate,
+  DescribeDefaultDistributionConfigRequest,
   AiReviewTaskPoliticalOcrResult,
   QualityEnhanceTask,
   AiSampleWord,
@@ -459,6 +460,7 @@ import {
   DescribeCdnLogsRequest,
   MediaProcessTaskInput,
   OutputVideoStream,
+  ModifyDefaultDistributionConfigRequest,
   ProcedureTemplate,
   DomainDetailInfo,
   AiReviewTaskTerrorismResult,
@@ -589,6 +591,7 @@ import {
   MediaProcessTaskResult,
   DeleteWordSamplesResponse,
   MediaCastEvent,
+  DescribeDefaultDistributionConfigResponse,
   DeleteProcedureTemplateRequest,
   WatermarkInput,
   AiSampleWordInfo,
@@ -622,6 +625,7 @@ import {
   DescribeTaskDetailResponse,
   MediaKeyFrameDescInfo,
   DeleteImageSpriteTemplateRequest,
+  ModifyDefaultDistributionConfigResponse,
   CreateClassRequest,
   AiSampleFailFaceInfo,
   UserDefineFaceReviewTemplateInfoForUpdate,
@@ -1154,6 +1158,18 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 该接口用于修改默认分发配置。
+   * 分发域名和分发协议，即媒体文件分发 URL 中的域名和协议。媒体文件按默认分发配置进行分发。
+   * 播放密钥，用于计算播放器签名。
+   */
+  async ModifyDefaultDistributionConfig(
+    req: ModifyDefaultDistributionConfigRequest,
+    cb?: (error: string, rep: ModifyDefaultDistributionConfigResponse) => void
+  ): Promise<ModifyDefaultDistributionConfigResponse> {
+    return this.request("ModifyDefaultDistributionConfig", req, cb)
+  }
+
+  /**
      * 查询点播域名的 CDN 访问日志的下载链接。
     1. 可以查询最近30天内的 CDN 日志下载链接。
     2. 默认情况下 CDN 每小时生成一个日志文件，如果某一个小时没有 CDN 访问，不会生成日志文件。    
@@ -1394,7 +1410,7 @@ export class Client extends AbstractClient {
    * 该接口用于生成一条子域名解析，提示客户添加到域名解析上，用于泛域名及域名取回校验归属权。
    */
   async CreateDomainVerifyRecord(
-    req?: CreateDomainVerifyRecordRequest,
+    req: CreateDomainVerifyRecordRequest,
     cb?: (error: string, rep: CreateDomainVerifyRecordResponse) => void
   ): Promise<CreateDomainVerifyRecordResponse> {
     return this.request("CreateDomainVerifyRecord", req, cb)
@@ -2427,6 +2443,18 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeHeadTailTemplatesResponse) => void
   ): Promise<DescribeHeadTailTemplatesResponse> {
     return this.request("DescribeHeadTailTemplates", req, cb)
+  }
+
+  /**
+   * 该接口用于查询默认分发配置。
+   * 分发域名和分发协议，即媒体文件分发 URL 中的域名和协议。媒体文件按默认分发配置进行分发。
+   * 播放密钥，用于计算播放器签名。
+   */
+  async DescribeDefaultDistributionConfig(
+    req: DescribeDefaultDistributionConfigRequest,
+    cb?: (error: string, rep: DescribeDefaultDistributionConfigResponse) => void
+  ): Promise<DescribeDefaultDistributionConfigResponse> {
+    return this.request("DescribeDefaultDistributionConfig", req, cb)
   }
 
   /**

@@ -1886,6 +1886,10 @@ export interface ModifyDBInstanceSpecRequest {
    * 切换截止时间，时间格式：HH:MM:SS，例如：01:30:00。当SwitchTag为0或2时，该参数失效。
    */
   SwitchEndTime?: string
+  /**
+   * 修改后的实例CPU大小，单位Core。
+   */
+  Cpu?: number
 }
 
 /**
@@ -3275,6 +3279,10 @@ export interface InquiryPriceUpgradeDBInstanceRequest {
    * 【废弃参数，不再生效】，实例计费类型。
    */
   InstanceChargeType?: string
+  /**
+   * 实例的Cpu大小，单位Core
+   */
+  Cpu?: number
 }
 
 /**
@@ -4647,6 +4655,10 @@ export interface ModifyBackupPlanRequest {
    * 实例备份周期，按照星期维度，格式为小写星期英文单词
    */
   BackupPeriod?: Array<string>
+  /**
+   * 实例日志备份保留时长，取值范围为7-1830，单位是天
+   */
+  LogBackupRetentionPeriod?: number
 }
 
 /**

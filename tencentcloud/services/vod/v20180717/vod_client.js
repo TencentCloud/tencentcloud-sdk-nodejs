@@ -241,6 +241,14 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("RemoveWatermark", req, cb);
     }
     /**
+     * 该接口用于修改默认分发配置。
+* 分发域名和分发协议，即媒体文件分发 URL 中的域名和协议。媒体文件按默认分发配置进行分发。
+* 播放密钥，用于计算播放器签名。
+     */
+    async ModifyDefaultDistributionConfig(req, cb) {
+        return this.request("ModifyDefaultDistributionConfig", req, cb);
+    }
+    /**
      * 查询点播域名的 CDN 访问日志的下载链接。
     1. 可以查询最近30天内的 CDN 日志下载链接。
     2. 默认情况下 CDN 每小时生成一个日志文件，如果某一个小时没有 CDN 访问，不会生成日志文件。
@@ -1067,6 +1075,14 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeHeadTailTemplates(req, cb) {
         return this.request("DescribeHeadTailTemplates", req, cb);
+    }
+    /**
+     * 该接口用于查询默认分发配置。
+* 分发域名和分发协议，即媒体文件分发 URL 中的域名和协议。媒体文件按默认分发配置进行分发。
+* 播放密钥，用于计算播放器签名。
+     */
+    async DescribeDefaultDistributionConfig(req, cb) {
+        return this.request("DescribeDefaultDistributionConfig", req, cb);
     }
     /**
      * 获取审核模板列表。

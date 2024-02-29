@@ -52,10 +52,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeStaffInfoList", req, cb);
     }
     /**
-     * 挂断电话
+     * 停用号码
      */
-    async HangUpCall(req, cb) {
-        return this.request("HangUpCall", req, cb);
+    async DisableCCCPhoneNumber(req, cb) {
+        return this.request("DisableCCCPhoneNumber", req, cb);
     }
     /**
      * 获取当前正在通话的会话列表
@@ -130,22 +130,34 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeCarrierPrivilegeNumberApplicants", req, cb);
     }
     /**
-     * 创建外呼会话，当前仅支持双呼，即先使用平台号码呼出到坐席手机上，坐席接听后，然后再外呼用户，而且由于运营商频率限制，坐席手机号必须先加白名单，避免频控导致外呼失败。
-     */
-    async CreateCallOutSession(req, cb) {
-        return this.request("CreateCallOutSession", req, cb);
-    }
-    /**
      * 获取 PSTN 会话信息
      */
     async DescribeTelSession(req, cb) {
         return this.request("DescribeTelSession", req, cb);
     }
     /**
+     * 创建外呼会话，当前仅支持双呼，即先使用平台号码呼出到坐席手机上，坐席接听后，然后再外呼用户，而且由于运营商频率限制，坐席手机号必须先加白名单，避免频控导致外呼失败。
+     */
+    async CreateCallOutSession(req, cb) {
+        return this.request("CreateCallOutSession", req, cb);
+    }
+    /**
+     * 查询预测式外呼任务列表
+     */
+    async DescribePredictiveDialingCampaigns(req, cb) {
+        return this.request("DescribePredictiveDialingCampaigns", req, cb);
+    }
+    /**
      * 查询自动外呼任务详情
      */
     async DescribeAutoCalloutTask(req, cb) {
         return this.request("DescribeAutoCalloutTask", req, cb);
+    }
+    /**
+     * 查询预测式外呼呼叫列表
+     */
+    async DescribePredictiveDialingSessions(req, cb) {
+        return this.request("DescribePredictiveDialingSessions", req, cb);
     }
     /**
      * 获取电话服务记录与录音
@@ -164,6 +176,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async StopAutoCalloutTask(req, cb) {
         return this.request("StopAutoCalloutTask", req, cb);
+    }
+    /**
+     * 创建预测式外呼任务
+     */
+    async CreatePredictiveDialingCampaign(req, cb) {
+        return this.request("CreatePredictiveDialingCampaign", req, cb);
     }
     /**
      * 用于无限频率地呼叫坐席手机
@@ -186,6 +204,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeCCCBuyInfoList", req, cb);
     }
     /**
+     * 恢复预测式外呼任务
+     */
+    async ResumePredictiveDialingCampaign(req, cb) {
+        return this.request("ResumePredictiveDialingCampaign", req, cb);
+    }
+    /**
      * 新建技能组
      */
     async CreateCCCSkillGroup(req, cb) {
@@ -198,10 +222,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UnbindStaffSkillGroupList", req, cb);
     }
     /**
-     * 停用号码
+     * 查询预测式外呼任务
      */
-    async DisableCCCPhoneNumber(req, cb) {
-        return this.request("DisableCCCPhoneNumber", req, cb);
+    async DescribePredictiveDialingCampaign(req, cb) {
+        return this.request("DescribePredictiveDialingCampaign", req, cb);
     }
     /**
      * 获取坐席实时状态统计指标
@@ -232,6 +256,18 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CreateUserSig(req, cb) {
         return this.request("CreateUserSig", req, cb);
+    }
+    /**
+     * 挂断电话
+     */
+    async HangUpCall(req, cb) {
+        return this.request("HangUpCall", req, cb);
+    }
+    /**
+     * 暂停预测式外呼任务
+     */
+    async PausePredictiveDialingCampaign(req, cb) {
+        return this.request("PausePredictiveDialingCampaign", req, cb);
     }
     /**
      * 创建管理端访问链接
@@ -274,6 +310,24 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeNumbers(req, cb) {
         return this.request("DescribeNumbers", req, cb);
+    }
+    /**
+     * 停止预测式外呼任务
+     */
+    async AbortPredictiveDialingCampaign(req, cb) {
+        return this.request("AbortPredictiveDialingCampaign", req, cb);
+    }
+    /**
+     * 删除预测式外呼任务
+     */
+    async DeletePredictiveDialingCampaign(req, cb) {
+        return this.request("DeletePredictiveDialingCampaign", req, cb);
+    }
+    /**
+     * 任务未启动前，更新预测式外呼任务。
+     */
+    async UpdatePredictiveDialingCampaign(req, cb) {
+        return this.request("UpdatePredictiveDialingCampaign", req, cb);
     }
 }
 exports.Client = Client;

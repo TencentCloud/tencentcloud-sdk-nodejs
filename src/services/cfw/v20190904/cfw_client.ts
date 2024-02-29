@@ -20,12 +20,13 @@ import { ClientConfig } from "../../../common/interface"
 import {
   ModifyEWRuleStatusResponse,
   DescribeNatFwInstanceRequest,
+  DescribeNatFwInstanceWithRegionRequest,
   DescribeLogsRequest,
   ModifyFwGroupSwitchRequest,
   ModifySecurityGroupRuleRequest,
   ModifyAssetSyncResponse,
   ModifyNatFwVpcDnsSwitchResponse,
-  DescribeNatFwInstanceWithRegionRequest,
+  CreateBlockIgnoreRuleNewRequest,
   ModifyAddressTemplateRequest,
   DescribeRuleOverviewResponse,
   CfwNatDnatRule,
@@ -49,9 +50,9 @@ import {
   AddAcRuleRequest,
   DescribeTLogInfoRequest,
   BlockIgnoreRule,
-  ModifyNatFwVpcDnsSwitchRequest,
+  ModifyFwGroupSwitchResponse,
   DeleteNatFwInstanceResponse,
-  DescribeNatSwitchListRequest,
+  DeleteBlockIgnoreRuleNewResponse,
   DeleteAllAccessControlRuleRequest,
   ModifyBlockIgnoreListRequest,
   ModifyAllVPCSwitchStatusResponse,
@@ -75,6 +76,7 @@ import {
   DeleteVpcInstanceResponse,
   ModifyAssetScanRequest,
   DnsVpcSwitch,
+  BanAndAllowRuleDel,
   AddEnterpriseSecurityGroupRulesRequest,
   FwGateway,
   ModifySecurityGroupSequenceRulesResponse,
@@ -98,7 +100,7 @@ import {
   DescribeVpcAcRuleRequest,
   VpcFwInstanceInfo,
   DescribeSwitchListsRequest,
-  NatFwEipsInfo,
+  ModifyEdgeIpSwitchResponse,
   AddAclRuleResponse,
   NatInstanceInfo,
   SetNatFwEipResponse,
@@ -107,7 +109,7 @@ import {
   ModifyStorageSettingResponse,
   AcListsData,
   ModifySecurityGroupItemRuleStatusRequest,
-  VpcFwJoinInstanceType,
+  ModifyBlockIgnoreRuleNewResponse,
   DescribeSourceAssetRequest,
   SecurityGroupOrderIndexData,
   DescribeFwGroupInstanceInfoResponse,
@@ -154,7 +156,8 @@ import {
   ModifyAllPublicIPSwitchStatusRequest,
   ModifySequenceAclRulesResponse,
   CreateAddressTemplateRequest,
-  DescribeBlockStaticListResponse,
+  CreateBlockIgnoreRuleNewResponse,
+  NatFwEipsInfo,
   AddNatAcRuleRequest,
   ModifySecurityGroupSequenceRulesRequest,
   CreateDatabaseWhiteListRulesResponse,
@@ -195,8 +198,9 @@ import {
   InstanceInfo,
   DescribeIPStatusListRequest,
   ModifyNatFwSwitchResponse,
+  ModifyNatFwVpcDnsSwitchRequest,
   DescribeFwSyncStatusResponse,
-  DescribeBlockByIpTimesListResponse,
+  DeleteNatFwInstanceRequest,
   ModifyAllRuleStatusRequest,
   SetNatFwDnatRuleResponse,
   VpcFwInstanceShow,
@@ -207,26 +211,29 @@ import {
   DescribeGuideScanInfoRequest,
   SyncFwOperateRequest,
   UnHandleEvent,
-  DescribeBlockIgnoreListResponse,
+  DescribeAssociatedInstanceListRequest,
   ModifyVpcAcRuleResponse,
-  ModifyEdgeIpSwitchResponse,
+  ModifyBlockIgnoreRuleNewRequest,
   ModifyEWRuleStatusRequest,
   DeleteAcRuleRequest,
   DeleteAllAccessControlRuleResponse,
   ModifyNatFwSwitchRequest,
-  ModifyFwGroupSwitchResponse,
+  DeleteBlockIgnoreRuleNewRequest,
   RemoveNatAcRuleResponse,
   CustomWhiteRule,
+  DescribeNatSwitchListRequest,
   DescribeFwEdgeIpsResponse,
   DescribeIPStatusListResponse,
   CreateDatabaseWhiteListRulesRequest,
   FwGroupSwitch,
   TemplateListInfo,
+  VpcFwJoinInstanceType,
   DescribeVpcFwGroupSwitchResponse,
   ModifyBlockIgnoreRuleResponse,
   DescribeTLogIpListResponse,
   StopSecurityGroupRuleDispatchResponse,
   DescribeNatFwInfoCountRequest,
+  BanAndAllowRule,
   RemoveAcRuleRequest,
   AddAcRuleResponse,
   FwGroupSwitchShow,
@@ -241,7 +248,7 @@ import {
   DescribeBlockIgnoreListRequest,
   ModifyBlockTopResponse,
   RemoveAclRuleResponse,
-  DeleteNatFwInstanceRequest,
+  DescribeBlockByIpTimesListResponse,
   ModifyVpcFwSequenceRulesRequest,
   ModifyStorageSettingRequest,
   DescribeIdsWhiteRuleRequest,
@@ -288,10 +295,11 @@ import {
   DescribeResourceGroupRequest,
   CreateAcRulesRequest,
   ModifyEnterpriseSecurityDispatchStatusRequest,
-  DescribeAssociatedInstanceListRequest,
+  DescribeBlockIgnoreListResponse,
   ModifyNatInstanceResponse,
   ModifyTableStatusRequest,
   ModifyTableStatusResponse,
+  DescribeBlockStaticListResponse,
   DescribeGuideScanInfoResponse,
   VpcFwInstance,
   CreateAlertCenterRuleResponse,
@@ -319,13 +327,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 中止安全组规则下发
+   * 批量删除入侵防御封禁列表、放通列表规则（新）
    */
-  async StopSecurityGroupRuleDispatch(
-    req: StopSecurityGroupRuleDispatchRequest,
-    cb?: (error: string, rep: StopSecurityGroupRuleDispatchResponse) => void
-  ): Promise<StopSecurityGroupRuleDispatchResponse> {
-    return this.request("StopSecurityGroupRuleDispatch", req, cb)
+  async DeleteBlockIgnoreRuleNew(
+    req: DeleteBlockIgnoreRuleNewRequest,
+    cb?: (error: string, rep: DeleteBlockIgnoreRuleNewResponse) => void
+  ): Promise<DeleteBlockIgnoreRuleNewResponse> {
+    return this.request("DeleteBlockIgnoreRuleNew", req, cb)
   }
 
   /**
@@ -347,6 +355,16 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
     cb?: (error: string, rep: ModifyEWRuleStatusResponse) => void
   ): Promise<ModifyEWRuleStatusResponse> {
     return this.request("ModifyEWRuleStatus", req, cb)
+  }
+
+  /**
+   * 中止安全组规则下发
+   */
+  async StopSecurityGroupRuleDispatch(
+    req: StopSecurityGroupRuleDispatchRequest,
+    cb?: (error: string, rep: StopSecurityGroupRuleDispatchResponse) => void
+  ): Promise<StopSecurityGroupRuleDispatchResponse> {
+    return this.request("StopSecurityGroupRuleDispatch", req, cb)
   }
 
   /**
@@ -529,6 +547,16 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
     cb?: (error: string, rep: CreateBlockIgnoreRuleListResponse) => void
   ): Promise<CreateBlockIgnoreRuleListResponse> {
     return this.request("CreateBlockIgnoreRuleList", req, cb)
+  }
+
+  /**
+   * 编辑单条入侵防御封禁列表、放通列表规则（新）
+   */
+  async ModifyBlockIgnoreRuleNew(
+    req: ModifyBlockIgnoreRuleNewRequest,
+    cb?: (error: string, rep: ModifyBlockIgnoreRuleNewResponse) => void
+  ): Promise<ModifyBlockIgnoreRuleNewResponse> {
+    return this.request("ModifyBlockIgnoreRuleNew", req, cb)
   }
 
   /**
@@ -720,6 +748,16 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
     cb?: (error: string, rep: DeleteIdsWhiteRuleResponse) => void
   ): Promise<DeleteIdsWhiteRuleResponse> {
     return this.request("DeleteIdsWhiteRule", req, cb)
+  }
+
+  /**
+   * 批量添加入侵防御封禁列表、放通列表规则
+   */
+  async CreateBlockIgnoreRuleNew(
+    req: CreateBlockIgnoreRuleNewRequest,
+    cb?: (error: string, rep: CreateBlockIgnoreRuleNewResponse) => void
+  ): Promise<CreateBlockIgnoreRuleNewResponse> {
+    return this.request("CreateBlockIgnoreRuleNew", req, cb)
   }
 
   /**
@@ -1226,13 +1264,13 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
   }
 
   /**
-   * 修改NAT防火墙开关
+   * 修改企业安全组下发状态
    */
-  async ModifyNatFwSwitch(
-    req: ModifyNatFwSwitchRequest,
-    cb?: (error: string, rep: ModifyNatFwSwitchResponse) => void
-  ): Promise<ModifyNatFwSwitchResponse> {
-    return this.request("ModifyNatFwSwitch", req, cb)
+  async ModifyEnterpriseSecurityDispatchStatus(
+    req: ModifyEnterpriseSecurityDispatchStatusRequest,
+    cb?: (error: string, rep: ModifyEnterpriseSecurityDispatchStatusResponse) => void
+  ): Promise<ModifyEnterpriseSecurityDispatchStatusResponse> {
+    return this.request("ModifyEnterpriseSecurityDispatchStatus", req, cb)
   }
 
   /**
@@ -1357,13 +1395,13 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
   }
 
   /**
-   * 修改企业安全组下发状态
+   * 修改NAT防火墙开关
    */
-  async ModifyEnterpriseSecurityDispatchStatus(
-    req: ModifyEnterpriseSecurityDispatchStatusRequest,
-    cb?: (error: string, rep: ModifyEnterpriseSecurityDispatchStatusResponse) => void
-  ): Promise<ModifyEnterpriseSecurityDispatchStatusResponse> {
-    return this.request("ModifyEnterpriseSecurityDispatchStatus", req, cb)
+  async ModifyNatFwSwitch(
+    req: ModifyNatFwSwitchRequest,
+    cb?: (error: string, rep: ModifyNatFwSwitchResponse) => void
+  ): Promise<ModifyNatFwSwitchResponse> {
+    return this.request("ModifyNatFwSwitch", req, cb)
   }
 
   /**

@@ -23,6 +23,7 @@ import {
   HangUpCallRequest,
   CreateSDKLoginTokenResponse,
   ModifyStaffRequest,
+  BindNumberCallOutSkillGroupResponse,
   ResetExtensionPasswordRequest,
   DisableCCCPhoneNumberResponse,
   DescribeProtectedTelCdrResponse,
@@ -30,13 +31,17 @@ import {
   CreateUserSigResponse,
   DescribeIMCdrsResponse,
   CreateAdminURLResponse,
+  PausePredictiveDialingCampaignRequest,
   CreateCallOutSessionResponse,
   DescribeCarrierPrivilegeNumberApplicantsRequest,
   DisableCCCPhoneNumberRequest,
+  CreatePredictiveDialingCampaignRequest,
   ServeParticipant,
+  DescribeTelCallInfoResponse,
   DescribeExtensionsResponse,
   DeleteExtensionRequest,
-  DescribeTelCallInfoResponse,
+  AutoCalloutTaskCalleeInfo,
+  DescribePredictiveDialingCampaignResponse,
   StaffStatusMetrics,
   DescribeTelCdrRequest,
   DescribeAutoCalloutTasksResponse,
@@ -44,11 +49,14 @@ import {
   ModifyExtensionResponse,
   DescribeIMCdrListResponse,
   CreateStaffResponse,
+  DescribePredictiveDialingCampaignsRequest,
   DescribeSkillGroupInfoListResponse,
   DescribeNumbersResponse,
+  DeletePredictiveDialingCampaignRequest,
   DescribeStaffInfoListResponse,
   UnbindNumberCallOutSkillGroupRequest,
-  CreateCarrierPrivilegeNumberApplicantRequest,
+  CreateAutoCalloutTaskRequest,
+  ResumePredictiveDialingCampaignResponse,
   CallInSkillGroupMetrics,
   CreateExtensionResponse,
   CreateUserSigRequest,
@@ -59,22 +67,29 @@ import {
   DescribeIMCdrsRequest,
   DescribeSkillGroupInfoListRequest,
   CreateCarrierPrivilegeNumberApplicantResponse,
-  AutoCalloutTaskCalleeInfo,
+  DescribePredictiveDialingCampaignRequest,
   SeatUserInfo,
+  DescribePredictiveDialingSessionsResponse,
   CarrierPrivilegeNumberApplicant,
   ErrStaffItem,
+  PausePredictiveDialingCampaignResponse,
   PSTNSession,
+  UpdatePredictiveDialingCampaignRequest,
   DescribeStaffInfoListRequest,
   AutoCalloutTaskInfo,
   SkillGroupInfoItem,
   ResetExtensionPasswordResponse,
   ModifyStaffResponse,
   ModifyExtensionRequest,
+  CreatePredictiveDialingCampaignResponse,
+  UpdatePredictiveDialingCampaignResponse,
   PSTNSessionInfo,
   Message,
+  AbortPredictiveDialingCampaignResponse,
   DescribeNumbersRequest,
   ExtensionInfo,
   BindNumberCallOutSkillGroupRequest,
+  DeletePredictiveDialingCampaignResponse,
   IVRKeyPressedElement,
   UnbindNumberCallOutSkillGroupResponse,
   StaffInfo,
@@ -84,23 +99,26 @@ import {
   DeleteStaffRequest,
   CallInMetrics,
   DescribeCCCBuyInfoListRequest,
+  DescribePredictiveDialingCampaignsResponse,
   DescribeTelCallInfoRequest,
   Variable,
   CallInNumberMetrics,
   CreateExtensionRequest,
   StaffSkillGroupList,
-  CreateAutoCalloutTaskRequest,
+  CreateCarrierPrivilegeNumberApplicantRequest,
   Filter,
   UnbindStaffSkillGroupListRequest,
-  BindNumberCallOutSkillGroupResponse,
-  CreateCallOutSessionRequest,
+  DescribePredictiveDialingCampaignsElement,
+  HangUpCallResponse,
   StopAutoCalloutTaskResponse,
+  AbortPredictiveDialingCampaignRequest,
   SkillGroupItem,
   MessageBody,
   PhoneNumBuyInfo,
   DescribeCCCBuyInfoListResponse,
   ActiveCarrierPrivilegeNumber,
   UnbindStaffSkillGroupListResponse,
+  ResumePredictiveDialingCampaignRequest,
   DeleteExtensionResponse,
   BindStaffSkillGroupListRequest,
   DescribePSTNActiveSessionListRequest,
@@ -124,10 +142,11 @@ import {
   CreateAdminURLRequest,
   DescribeStaffStatusMetricsResponse,
   DescribeCarrierPrivilegeNumberApplicantsResponse,
-  HangUpCallResponse,
+  CreateCallOutSessionRequest,
   BindStaffSkillGroupListResponse,
   DescribeExtensionsRequest,
   DescribeProtectedTelCdrRequest,
+  DescribePredictiveDialingSessionsRequest,
   CreateSDKLoginTokenRequest,
   DescribeActiveCarrierPrivilegeNumberRequest,
   StaffBuyInfo,
@@ -185,13 +204,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 挂断电话
+   * 停用号码
    */
-  async HangUpCall(
-    req: HangUpCallRequest,
-    cb?: (error: string, rep: HangUpCallResponse) => void
-  ): Promise<HangUpCallResponse> {
-    return this.request("HangUpCall", req, cb)
+  async DisableCCCPhoneNumber(
+    req: DisableCCCPhoneNumberRequest,
+    cb?: (error: string, rep: DisableCCCPhoneNumberResponse) => void
+  ): Promise<DisableCCCPhoneNumberResponse> {
+    return this.request("DisableCCCPhoneNumber", req, cb)
   }
 
   /**
@@ -315,16 +334,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建外呼会话，当前仅支持双呼，即先使用平台号码呼出到坐席手机上，坐席接听后，然后再外呼用户，而且由于运营商频率限制，坐席手机号必须先加白名单，避免频控导致外呼失败。
-   */
-  async CreateCallOutSession(
-    req: CreateCallOutSessionRequest,
-    cb?: (error: string, rep: CreateCallOutSessionResponse) => void
-  ): Promise<CreateCallOutSessionResponse> {
-    return this.request("CreateCallOutSession", req, cb)
-  }
-
-  /**
    * 获取 PSTN 会话信息
    */
   async DescribeTelSession(
@@ -335,6 +344,26 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 创建外呼会话，当前仅支持双呼，即先使用平台号码呼出到坐席手机上，坐席接听后，然后再外呼用户，而且由于运营商频率限制，坐席手机号必须先加白名单，避免频控导致外呼失败。
+   */
+  async CreateCallOutSession(
+    req: CreateCallOutSessionRequest,
+    cb?: (error: string, rep: CreateCallOutSessionResponse) => void
+  ): Promise<CreateCallOutSessionResponse> {
+    return this.request("CreateCallOutSession", req, cb)
+  }
+
+  /**
+   * 查询预测式外呼任务列表
+   */
+  async DescribePredictiveDialingCampaigns(
+    req: DescribePredictiveDialingCampaignsRequest,
+    cb?: (error: string, rep: DescribePredictiveDialingCampaignsResponse) => void
+  ): Promise<DescribePredictiveDialingCampaignsResponse> {
+    return this.request("DescribePredictiveDialingCampaigns", req, cb)
+  }
+
+  /**
    * 查询自动外呼任务详情
    */
   async DescribeAutoCalloutTask(
@@ -342,6 +371,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAutoCalloutTaskResponse) => void
   ): Promise<DescribeAutoCalloutTaskResponse> {
     return this.request("DescribeAutoCalloutTask", req, cb)
+  }
+
+  /**
+   * 查询预测式外呼呼叫列表
+   */
+  async DescribePredictiveDialingSessions(
+    req: DescribePredictiveDialingSessionsRequest,
+    cb?: (error: string, rep: DescribePredictiveDialingSessionsResponse) => void
+  ): Promise<DescribePredictiveDialingSessionsResponse> {
+    return this.request("DescribePredictiveDialingSessions", req, cb)
   }
 
   /**
@@ -372,6 +411,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: StopAutoCalloutTaskResponse) => void
   ): Promise<StopAutoCalloutTaskResponse> {
     return this.request("StopAutoCalloutTask", req, cb)
+  }
+
+  /**
+   * 创建预测式外呼任务
+   */
+  async CreatePredictiveDialingCampaign(
+    req: CreatePredictiveDialingCampaignRequest,
+    cb?: (error: string, rep: CreatePredictiveDialingCampaignResponse) => void
+  ): Promise<CreatePredictiveDialingCampaignResponse> {
+    return this.request("CreatePredictiveDialingCampaign", req, cb)
   }
 
   /**
@@ -407,6 +456,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 恢复预测式外呼任务
+   */
+  async ResumePredictiveDialingCampaign(
+    req: ResumePredictiveDialingCampaignRequest,
+    cb?: (error: string, rep: ResumePredictiveDialingCampaignResponse) => void
+  ): Promise<ResumePredictiveDialingCampaignResponse> {
+    return this.request("ResumePredictiveDialingCampaign", req, cb)
+  }
+
+  /**
    * 新建技能组
    */
   async CreateCCCSkillGroup(
@@ -427,13 +486,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 停用号码
+   * 查询预测式外呼任务
    */
-  async DisableCCCPhoneNumber(
-    req: DisableCCCPhoneNumberRequest,
-    cb?: (error: string, rep: DisableCCCPhoneNumberResponse) => void
-  ): Promise<DisableCCCPhoneNumberResponse> {
-    return this.request("DisableCCCPhoneNumber", req, cb)
+  async DescribePredictiveDialingCampaign(
+    req: DescribePredictiveDialingCampaignRequest,
+    cb?: (error: string, rep: DescribePredictiveDialingCampaignResponse) => void
+  ): Promise<DescribePredictiveDialingCampaignResponse> {
+    return this.request("DescribePredictiveDialingCampaign", req, cb)
   }
 
   /**
@@ -484,6 +543,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateUserSigResponse) => void
   ): Promise<CreateUserSigResponse> {
     return this.request("CreateUserSig", req, cb)
+  }
+
+  /**
+   * 挂断电话
+   */
+  async HangUpCall(
+    req: HangUpCallRequest,
+    cb?: (error: string, rep: HangUpCallResponse) => void
+  ): Promise<HangUpCallResponse> {
+    return this.request("HangUpCall", req, cb)
+  }
+
+  /**
+   * 暂停预测式外呼任务
+   */
+  async PausePredictiveDialingCampaign(
+    req: PausePredictiveDialingCampaignRequest,
+    cb?: (error: string, rep: PausePredictiveDialingCampaignResponse) => void
+  ): Promise<PausePredictiveDialingCampaignResponse> {
+    return this.request("PausePredictiveDialingCampaign", req, cb)
   }
 
   /**
@@ -554,5 +633,35 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeNumbersResponse) => void
   ): Promise<DescribeNumbersResponse> {
     return this.request("DescribeNumbers", req, cb)
+  }
+
+  /**
+   * 停止预测式外呼任务
+   */
+  async AbortPredictiveDialingCampaign(
+    req: AbortPredictiveDialingCampaignRequest,
+    cb?: (error: string, rep: AbortPredictiveDialingCampaignResponse) => void
+  ): Promise<AbortPredictiveDialingCampaignResponse> {
+    return this.request("AbortPredictiveDialingCampaign", req, cb)
+  }
+
+  /**
+   * 删除预测式外呼任务
+   */
+  async DeletePredictiveDialingCampaign(
+    req: DeletePredictiveDialingCampaignRequest,
+    cb?: (error: string, rep: DeletePredictiveDialingCampaignResponse) => void
+  ): Promise<DeletePredictiveDialingCampaignResponse> {
+    return this.request("DeletePredictiveDialingCampaign", req, cb)
+  }
+
+  /**
+   * 任务未启动前，更新预测式外呼任务。
+   */
+  async UpdatePredictiveDialingCampaign(
+    req: UpdatePredictiveDialingCampaignRequest,
+    cb?: (error: string, rep: UpdatePredictiveDialingCampaignResponse) => void
+  ): Promise<UpdatePredictiveDialingCampaignResponse> {
+    return this.request("UpdatePredictiveDialingCampaign", req, cb)
   }
 }

@@ -96,6 +96,15 @@ export interface ModifyStaffRequest {
     UseMobileAccept?: number;
 }
 /**
+ * BindNumberCallOutSkillGroup返回参数结构体
+ */
+export interface BindNumberCallOutSkillGroupResponse {
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * ResetExtensionPassword请求参数结构体
  */
 export interface ResetExtensionPasswordRequest {
@@ -202,6 +211,19 @@ export interface CreateAdminURLResponse {
     RequestId?: string;
 }
 /**
+ * PausePredictiveDialingCampaign请求参数结构体
+ */
+export interface PausePredictiveDialingCampaignRequest {
+    /**
+     * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
+     */
+    SdkAppId: number;
+    /**
+     * 任务 ID
+     */
+    CampaignId: number;
+}
+/**
  * CreateCallOutSession返回参数结构体
  */
 export interface CreateCallOutSessionResponse {
@@ -251,6 +273,63 @@ export interface DisableCCCPhoneNumberRequest {
      * TCCC 实例应用 ID
      */
     SdkAppId?: number;
+}
+/**
+ * CreatePredictiveDialingCampaign请求参数结构体
+ */
+export interface CreatePredictiveDialingCampaignRequest {
+    /**
+     * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
+     */
+    SdkAppId: number;
+    /**
+     * 任务名称
+     */
+    Name: string;
+    /**
+     * 被叫列表，支持 E.164 或不带国家码形式的号码
+     */
+    Callees: Array<string>;
+    /**
+     * 主叫列表，使用管理端展示的号码格式
+     */
+    Callers: Array<string>;
+    /**
+     * 被叫呼叫顺序 0 随机 1 顺序
+     */
+    CallOrder: number;
+    /**
+     * 使用的座席技能组 ID
+     */
+    SkillGroupId: number;
+    /**
+     * 相同应用内多个任务运行优先级，从高到底 1 - 5
+     */
+    Priority: number;
+    /**
+     * 预期呼损率，百分比，5 - 50
+     */
+    ExpectedAbandonRate: number;
+    /**
+     * 呼叫重试间隔时间，单位秒，60 - 86400
+     */
+    RetryInterval: number;
+    /**
+     * 任务启动时间，Unix 时间戳，到此时间后会自动启动任务
+     */
+    StartTime: number;
+    /**
+     * 任务结束时间，Unix 时间戳，到此时间后会自动终止任务
+     */
+    EndTime: number;
+    /**
+     * 指定的 IVR Id
+     */
+    IVRId?: number;
+    /**
+     * 呼叫重试次数，0 - 2
+     */
+    RetryTimes?: number;
 }
 /**
  * 参与者信息
@@ -348,36 +427,6 @@ export interface ServeParticipant {
     CustomRecordURL: string;
 }
 /**
- * DescribeExtensions返回参数结构体
- */
-export interface DescribeExtensionsResponse {
-    /**
-     * 查询总数
-     */
-    Total?: number;
-    /**
-     * 话机信息列表
-     */
-    ExtensionList?: Array<ExtensionInfo>;
-    /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
-/**
- * DeleteExtension请求参数结构体
- */
-export interface DeleteExtensionRequest {
-    /**
-     * TCCC 实例应用 ID
-     */
-    SdkAppId: number;
-    /**
-     * 分机号
-     */
-    ExtensionId: string;
-}
-/**
  * DescribeTelCallInfo返回参数结构体
  */
 export interface DescribeTelCallInfoResponse {
@@ -410,6 +459,106 @@ export interface DescribeTelCallInfoResponse {
      * 实时语音转文字套餐包消耗分钟数
      */
     AsrRealtimeCount?: number;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * DescribeExtensions返回参数结构体
+ */
+export interface DescribeExtensionsResponse {
+    /**
+     * 查询总数
+     */
+    Total?: number;
+    /**
+     * 话机信息列表
+     */
+    ExtensionList?: Array<ExtensionInfo>;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * DeleteExtension请求参数结构体
+ */
+export interface DeleteExtensionRequest {
+    /**
+     * TCCC 实例应用 ID
+     */
+    SdkAppId: number;
+    /**
+     * 分机号
+     */
+    ExtensionId: string;
+}
+/**
+ * 外呼任务被叫信息
+ */
+export interface AutoCalloutTaskCalleeInfo {
+    /**
+     * 被叫号码
+     */
+    Callee: string;
+    /**
+     * 呼叫状态 0初始 1已接听 2未接听 3呼叫中 4待重试
+     */
+    State: number;
+    /**
+     * 会话ID列表
+     */
+    Sessions: Array<string>;
+}
+/**
+ * DescribePredictiveDialingCampaign返回参数结构体
+ */
+export interface DescribePredictiveDialingCampaignResponse {
+    /**
+     * 任务 ID
+     */
+    CampaignId?: number;
+    /**
+     * 任务名称
+     */
+    Name?: string;
+    /**
+     * 被叫呼叫顺序 0 随机 1 顺序
+     */
+    CallOrder?: number;
+    /**
+     * 使用的座席技能组 ID
+     */
+    SkillGroupId?: number;
+    /**
+     * 指定的 IVR ID
+     */
+    IVRId?: number;
+    /**
+     * 相同应用内多个任务运行优先级，从高到底 1 - 5
+     */
+    Priority?: number;
+    /**
+     * 预期呼损率，百分比，5 - 50
+     */
+    ExpectedAbandonRate?: number;
+    /**
+     * 呼叫重试次数，0 - 2
+     */
+    RetryTimes?: number;
+    /**
+     * 呼叫重试间隔时间，单位秒，60 - 86400
+     */
+    RetryInterval?: number;
+    /**
+     * 任务启动时间，Unix 时间戳，到此时间后会自动启动任务
+     */
+    StartTime?: number;
+    /**
+     * 任务结束时间，Unix 时间戳，到此时间后会自动终止任务
+     */
+    EndTime?: number;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -620,6 +769,31 @@ export interface CreateStaffResponse {
     RequestId?: string;
 }
 /**
+ * DescribePredictiveDialingCampaigns请求参数结构体
+ */
+export interface DescribePredictiveDialingCampaignsRequest {
+    /**
+     * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
+     */
+    SdkAppId: number;
+    /**
+     * 分页尺寸，最大为 100
+     */
+    PageSize: number;
+    /**
+     * 分页页码，从 0 开始
+     */
+    PageNumber: number;
+    /**
+     * 查询任务列表名称关键字
+     */
+    Name?: string;
+    /**
+     * 查询任务列表技能组 ID
+     */
+    SkillGroupId?: number;
+}
+/**
  * DescribeSkillGroupInfoList返回参数结构体
  */
 export interface DescribeSkillGroupInfoListResponse {
@@ -652,6 +826,19 @@ export interface DescribeNumbersResponse {
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * DeletePredictiveDialingCampaign请求参数结构体
+ */
+export interface DeletePredictiveDialingCampaignRequest {
+    /**
+     * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
+     */
+    SdkAppId: number;
+    /**
+     * 任务 ID
+     */
+    CampaignId: number;
 }
 /**
  * DescribeStaffInfoList返回参数结构体
@@ -688,25 +875,66 @@ export interface UnbindNumberCallOutSkillGroupRequest {
     SkillGroupIds: Array<number | bigint>;
 }
 /**
- * CreateCarrierPrivilegeNumberApplicant请求参数结构体
+ * CreateAutoCalloutTask请求参数结构体
  */
-export interface CreateCarrierPrivilegeNumberApplicantRequest {
+export interface CreateAutoCalloutTaskRequest {
     /**
-     * SdkAppId
+     * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
      */
     SdkAppId: number;
     /**
-     * 主叫号码，必须为实例中存在的号码，格式为0086xxxx（暂时只支持国内号码）
+     * 任务起始时间戳，Unix 秒级时间戳
      */
-    Callers: Array<string>;
+    NotBefore: number;
     /**
-     * 被叫号码，必须为实例中坐席绑定的手机号码，格式为0086xxxx（暂时只支持国内号码）
+     * 被叫号码列表
      */
     Callees: Array<string>;
     /**
-     * 描述
+     * 主叫号码列表
+     */
+    Callers: Array<string>;
+    /**
+     * 呼叫使用的Ivr
+     */
+    IvrId: number;
+    /**
+     * 任务名
+     */
+    Name?: string;
+    /**
+     * 任务描述
      */
     Description?: string;
+    /**
+     * 任务停止时间戳，Unix 秒级时间戳
+     */
+    NotAfter?: number;
+    /**
+     * 最大尝试次数
+     */
+    Tries?: number;
+    /**
+     * 自定义变量（仅高级版支持）
+     */
+    Variables?: Array<Variable>;
+    /**
+     * UUI
+     */
+    UUI?: string;
+    /**
+     * 被叫属性
+     */
+    CalleeAttributes?: Array<CalleeAttribute>;
+}
+/**
+ * ResumePredictiveDialingCampaign返回参数结构体
+ */
+export interface ResumePredictiveDialingCampaignResponse {
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * 呼入技能组相关指标
@@ -922,21 +1150,17 @@ export interface CreateCarrierPrivilegeNumberApplicantResponse {
     RequestId?: string;
 }
 /**
- * 外呼任务被叫信息
+ * DescribePredictiveDialingCampaign请求参数结构体
  */
-export interface AutoCalloutTaskCalleeInfo {
+export interface DescribePredictiveDialingCampaignRequest {
     /**
-     * 被叫号码
+     * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
      */
-    Callee: string;
+    SdkAppId: number;
     /**
-     * 呼叫状态 0初始 1已接听 2未接听 3呼叫中 4待重试
+     * 任务 ID
      */
-    State: number;
-    /**
-     * 会话ID列表
-     */
-    Sessions: Array<string>;
+    CampaignId: number;
 }
 /**
  * 坐席用户信息
@@ -980,6 +1204,23 @@ export interface SeatUserInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Role?: number;
+}
+/**
+ * DescribePredictiveDialingSessions返回参数结构体
+ */
+export interface DescribePredictiveDialingSessionsResponse {
+    /**
+     * 数据总量
+     */
+    TotalCount?: number;
+    /**
+     * 呼叫的 session id 列表，通过 https://cloud.tencent.com/document/product/679/47714 可以批量获取呼叫详细话单
+     */
+    SessionList?: Array<string>;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * 运营商白名单号码申请单
@@ -1035,6 +1276,15 @@ export interface ErrStaffItem {
      * 错误描述
      */
     Message: string;
+}
+/**
+ * PausePredictiveDialingCampaign返回参数结构体
+ */
+export interface PausePredictiveDialingCampaignResponse {
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * PSTN 会话类型。
@@ -1104,6 +1354,67 @@ export interface PSTNSession {
      * 被叫号码保护ID，开启号码保护映射功能时有效，且Callee字段置空
      */
     ProtectedCallee: string;
+}
+/**
+ * UpdatePredictiveDialingCampaign请求参数结构体
+ */
+export interface UpdatePredictiveDialingCampaignRequest {
+    /**
+     * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
+     */
+    SdkAppId: number;
+    /**
+     * 生成的任务 ID
+     */
+    CampaignId: number;
+    /**
+     * 任务名称
+     */
+    Name: string;
+    /**
+     * 被叫列表，支持 E.164 或不带国家码形式的号码
+     */
+    Callees: Array<string>;
+    /**
+     * 主叫列表，使用管理端展示的号码格式
+     */
+    Callers: Array<string>;
+    /**
+     * 被叫呼叫顺序 0 随机 1 顺序
+     */
+    CallOrder: number;
+    /**
+     * 使用的座席技能组 ID
+     */
+    SkillGroupId: number;
+    /**
+     * 相同应用内多个任务运行优先级，从高到底 1 - 5
+     */
+    Priority: number;
+    /**
+     * 预期呼损率，百分比，5 - 50
+     */
+    ExpectedAbandonRate: number;
+    /**
+     * 呼叫重试间隔时间，单位秒，60 - 86400
+     */
+    RetryInterval: number;
+    /**
+     * 任务启动时间，Unix 时间戳，到此时间后会自动启动任务
+     */
+    StartTime: number;
+    /**
+     * 任务结束时间，Unix 时间戳，到此时间后会自动终止任务
+     */
+    EndTime: number;
+    /**
+     * 指定的 IVR ID
+     */
+    IVRId?: number;
+    /**
+     * 呼叫重试次数，0 - 2
+     */
+    RetryTimes?: number;
 }
 /**
  * DescribeStaffInfoList请求参数结构体
@@ -1262,6 +1573,28 @@ export interface ModifyExtensionRequest {
     Relation?: string;
 }
 /**
+ * CreatePredictiveDialingCampaign返回参数结构体
+ */
+export interface CreatePredictiveDialingCampaignResponse {
+    /**
+     * 生成的任务 ID
+     */
+    CampaignId?: number;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * UpdatePredictiveDialingCampaign返回参数结构体
+ */
+export interface UpdatePredictiveDialingCampaignResponse {
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * PSTN 会话信息
  */
 export interface PSTNSessionInfo {
@@ -1330,6 +1663,15 @@ export interface Message {
      * 消息内容
      */
     Content: string;
+}
+/**
+ * AbortPredictiveDialingCampaign返回参数结构体
+ */
+export interface AbortPredictiveDialingCampaignResponse {
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * DescribeNumbers请求参数结构体
@@ -1413,6 +1755,15 @@ export interface BindNumberCallOutSkillGroupRequest {
      * 待绑定的技能组Id列表
      */
     SkillGroupIds: Array<number | bigint>;
+}
+/**
+ * DeletePredictiveDialingCampaign返回参数结构体
+ */
+export interface DeletePredictiveDialingCampaignResponse {
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * ivr 按键信息
@@ -1845,6 +2196,25 @@ export interface DescribeCCCBuyInfoListRequest {
     SdkAppIds?: Array<number | bigint>;
 }
 /**
+ * DescribePredictiveDialingCampaigns返回参数结构体
+ */
+export interface DescribePredictiveDialingCampaignsResponse {
+    /**
+     * 数据总量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TotalCount?: number;
+    /**
+     * 数据
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CampaignList?: Array<DescribePredictiveDialingCampaignsElement>;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * DescribeTelCallInfo请求参数结构体
  */
 export interface DescribeTelCallInfoRequest {
@@ -1930,57 +2300,25 @@ export interface StaffSkillGroupList {
     Priority?: number;
 }
 /**
- * CreateAutoCalloutTask请求参数结构体
+ * CreateCarrierPrivilegeNumberApplicant请求参数结构体
  */
-export interface CreateAutoCalloutTaskRequest {
+export interface CreateCarrierPrivilegeNumberApplicantRequest {
     /**
-     * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
+     * SdkAppId
      */
     SdkAppId: number;
     /**
-     * 任务起始时间戳，Unix 秒级时间戳
-     */
-    NotBefore: number;
-    /**
-     * 被叫号码列表
-     */
-    Callees: Array<string>;
-    /**
-     * 主叫号码列表
+     * 主叫号码，必须为实例中存在的号码，格式为0086xxxx（暂时只支持国内号码）
      */
     Callers: Array<string>;
     /**
-     * 呼叫使用的Ivr
+     * 被叫号码，必须为实例中坐席绑定的手机号码，格式为0086xxxx（暂时只支持国内号码）
      */
-    IvrId: number;
+    Callees: Array<string>;
     /**
-     * 任务名
-     */
-    Name?: string;
-    /**
-     * 任务描述
+     * 描述
      */
     Description?: string;
-    /**
-     * 任务停止时间戳，Unix 秒级时间戳
-     */
-    NotAfter?: number;
-    /**
-     * 最大尝试次数
-     */
-    Tries?: number;
-    /**
-     * 自定义变量（仅高级版支持）
-     */
-    Variables?: Array<Variable>;
-    /**
-     * UUI
-     */
-    UUI?: string;
-    /**
-     * 被叫属性
-     */
-    CalleeAttributes?: Array<CalleeAttribute>;
 }
 /**
  * 筛选条件
@@ -2013,51 +2351,58 @@ export interface UnbindStaffSkillGroupListRequest {
     SkillGroupList: Array<number | bigint>;
 }
 /**
- * BindNumberCallOutSkillGroup返回参数结构体
+ * 查询预测式外呼任务列表元素
  */
-export interface BindNumberCallOutSkillGroupResponse {
+export interface DescribePredictiveDialingCampaignsElement {
+    /**
+     * 任务 ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CampaignId?: number;
+    /**
+     * 任务名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Name?: string;
+    /**
+     * 任务状态 0 待开始 1 进行中 2 已暂停 3 已终止 4 已完成
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Status?: number;
+    /**
+     * 任务状态原因 0 正常 1 手动结束 2 超时结束
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    StatusReason?: number;
+    /**
+     * 被叫号码个数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CalleeCount?: number;
+    /**
+     * 已完成的被叫个数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    FinishedCalleeCount?: number;
+    /**
+     * 相同应用内多个任务运行优先级，从高到底 1 - 5
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Priority?: number;
+    /**
+     * 使用的座席技能组 ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SkillGroupId?: number;
+}
+/**
+ * HangUpCall返回参数结构体
+ */
+export interface HangUpCallResponse {
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
-}
-/**
- * CreateCallOutSession请求参数结构体
- */
-export interface CreateCallOutSessionRequest {
-    /**
-     * 应用 ID
-     */
-    SdkAppId: number;
-    /**
-     * 客服用户 ID，一般为客服邮箱
-     */
-    UserId: string;
-    /**
-     * 被叫号码，须带 0086 前缀
-     */
-    Callee: string;
-    /**
-     * 主叫号码（废弃，使用Callers），须带 0086 前缀
-     */
-    Caller?: string;
-    /**
-     * 指定主叫号码列表，如果前面的号码失败了会自动换成下一个号码，须带 0086 前缀
-     */
-    Callers?: Array<string>;
-    /**
-     * 是否强制使用手机外呼，当前只支持 true，若为 true 请确保已配置白名单
-     */
-    IsForceUseMobile?: boolean;
-    /**
-     * 自定义数据，长度限制 1024 字节
-     * @deprecated
-     */
-    Uui?: string;
-    /**
-     * 自定义数据，长度限制 1024 字节
-     */
-    UUI?: string;
 }
 /**
  * StopAutoCalloutTask返回参数结构体
@@ -2067,6 +2412,19 @@ export interface StopAutoCalloutTaskResponse {
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * AbortPredictiveDialingCampaign请求参数结构体
+ */
+export interface AbortPredictiveDialingCampaignRequest {
+    /**
+     * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
+     */
+    SdkAppId: number;
+    /**
+     * 任务 ID
+     */
+    CampaignId: number;
 }
 /**
  * 技能组信息
@@ -2185,6 +2543,19 @@ export interface UnbindStaffSkillGroupListResponse {
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * ResumePredictiveDialingCampaign请求参数结构体
+ */
+export interface ResumePredictiveDialingCampaignRequest {
+    /**
+     * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
+     */
+    SdkAppId: number;
+    /**
+     * 任务 ID
+     */
+    CampaignId: number;
 }
 /**
  * DeleteExtension返回参数结构体
@@ -2664,13 +3035,42 @@ export interface DescribeCarrierPrivilegeNumberApplicantsResponse {
     RequestId?: string;
 }
 /**
- * HangUpCall返回参数结构体
+ * CreateCallOutSession请求参数结构体
  */
-export interface HangUpCallResponse {
+export interface CreateCallOutSessionRequest {
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     * 应用 ID
      */
-    RequestId?: string;
+    SdkAppId: number;
+    /**
+     * 客服用户 ID，一般为客服邮箱
+     */
+    UserId: string;
+    /**
+     * 被叫号码，须带 0086 前缀
+     */
+    Callee: string;
+    /**
+     * 主叫号码（废弃，使用Callers），须带 0086 前缀
+     */
+    Caller?: string;
+    /**
+     * 指定主叫号码列表，如果前面的号码失败了会自动换成下一个号码，须带 0086 前缀
+     */
+    Callers?: Array<string>;
+    /**
+     * 是否强制使用手机外呼，当前只支持 true，若为 true 请确保已配置白名单
+     */
+    IsForceUseMobile?: boolean;
+    /**
+     * 自定义数据，长度限制 1024 字节
+     * @deprecated
+     */
+    Uui?: string;
+    /**
+     * 自定义数据，长度限制 1024 字节
+     */
+    UUI?: string;
 }
 /**
  * BindStaffSkillGroupList返回参数结构体
@@ -2728,6 +3128,27 @@ export interface DescribeProtectedTelCdrRequest {
     SdkAppId: number;
     /**
      * 分页尺寸，上限 100
+     */
+    PageSize: number;
+    /**
+     * 分页页码，从 0 开始
+     */
+    PageNumber: number;
+}
+/**
+ * DescribePredictiveDialingSessions请求参数结构体
+ */
+export interface DescribePredictiveDialingSessionsRequest {
+    /**
+     * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
+     */
+    SdkAppId: number;
+    /**
+     * 生成的任务 ID
+     */
+    CampaignId: number;
+    /**
+     * 分页尺寸，最大为 1000
      */
     PageSize: number;
     /**

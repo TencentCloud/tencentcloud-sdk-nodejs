@@ -34,10 +34,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("RemoveVpcAcRule", req, cb);
     }
     /**
-     * 中止安全组规则下发
+     * 批量删除入侵防御封禁列表、放通列表规则（新）
      */
-    async StopSecurityGroupRuleDispatch(req, cb) {
-        return this.request("StopSecurityGroupRuleDispatch", req, cb);
+    async DeleteBlockIgnoreRuleNew(req, cb) {
+        return this.request("DeleteBlockIgnoreRuleNew", req, cb);
     }
     /**
      * VPC防火墙(组)开关列表
@@ -51,6 +51,12 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
      */
     async ModifyEWRuleStatus(req, cb) {
         return this.request("ModifyEWRuleStatus", req, cb);
+    }
+    /**
+     * 中止安全组规则下发
+     */
+    async StopSecurityGroupRuleDispatch(req, cb) {
+        return this.request("StopSecurityGroupRuleDispatch", req, cb);
     }
     /**
      * ModifyResourceGroup-资产中心资产组信息修改
@@ -161,6 +167,12 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
      */
     async CreateBlockIgnoreRuleList(req, cb) {
         return this.request("CreateBlockIgnoreRuleList", req, cb);
+    }
+    /**
+     * 编辑单条入侵防御封禁列表、放通列表规则（新）
+     */
+    async ModifyBlockIgnoreRuleNew(req, cb) {
+        return this.request("ModifyBlockIgnoreRuleNew", req, cb);
     }
     /**
      * 修改边界防火墙开关(旁路、串行)
@@ -276,6 +288,12 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
      */
     async DeleteIdsWhiteRule(req, cb) {
         return this.request("DeleteIdsWhiteRule", req, cb);
+    }
+    /**
+     * 批量添加入侵防御封禁列表、放通列表规则
+     */
+    async CreateBlockIgnoreRuleNew(req, cb) {
+        return this.request("CreateBlockIgnoreRuleNew", req, cb);
     }
     /**
      * DescribeSourceAsset-查询资产组全部资产信息
@@ -581,10 +599,10 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
         return this.request("CreateAcRules", req, cb);
     }
     /**
-     * 修改NAT防火墙开关
+     * 修改企业安全组下发状态
      */
-    async ModifyNatFwSwitch(req, cb) {
-        return this.request("ModifyNatFwSwitch", req, cb);
+    async ModifyEnterpriseSecurityDispatchStatus(req, cb) {
+        return this.request("ModifyEnterpriseSecurityDispatchStatus", req, cb);
     }
     /**
      * DescribeTLogInfo告警中心概况
@@ -660,10 +678,10 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
         return this.request("DescribeFwEdgeIps", req, cb);
     }
     /**
-     * 修改企业安全组下发状态
+     * 修改NAT防火墙开关
      */
-    async ModifyEnterpriseSecurityDispatchStatus(req, cb) {
-        return this.request("ModifyEnterpriseSecurityDispatchStatus", req, cb);
+    async ModifyNatFwSwitch(req, cb) {
+        return this.request("ModifyNatFwSwitch", req, cb);
     }
     /**
      * DescribeTLogIpList告警中心IP柱形图

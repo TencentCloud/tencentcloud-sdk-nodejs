@@ -58,9 +58,9 @@ it("ccc.v20200210.DescribeStaffInfoList", async function () {
     }
 })
 
-it("ccc.v20200210.HangUpCall", async function () {
+it("ccc.v20200210.DisableCCCPhoneNumber", async function () {
     try {
-       const data = await client.HangUpCall({})
+       const data = await client.DisableCCCPhoneNumber({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -188,16 +188,6 @@ it("ccc.v20200210.DescribeCarrierPrivilegeNumberApplicants", async function () {
     }
 })
 
-it("ccc.v20200210.CreateCallOutSession", async function () {
-    try {
-       const data = await client.CreateCallOutSession({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("ccc.v20200210.DescribeTelSession", async function () {
     try {
        const data = await client.DescribeTelSession({})
@@ -208,9 +198,39 @@ it("ccc.v20200210.DescribeTelSession", async function () {
     }
 })
 
+it("ccc.v20200210.CreateCallOutSession", async function () {
+    try {
+       const data = await client.CreateCallOutSession({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ccc.v20200210.DescribePredictiveDialingCampaigns", async function () {
+    try {
+       const data = await client.DescribePredictiveDialingCampaigns({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ccc.v20200210.DescribeAutoCalloutTask", async function () {
     try {
        const data = await client.DescribeAutoCalloutTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ccc.v20200210.DescribePredictiveDialingSessions", async function () {
+    try {
+       const data = await client.DescribePredictiveDialingSessions({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -248,6 +268,16 @@ it("ccc.v20200210.StopAutoCalloutTask", async function () {
     }
 })
 
+it("ccc.v20200210.CreatePredictiveDialingCampaign", async function () {
+    try {
+       const data = await client.CreatePredictiveDialingCampaign({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ccc.v20200210.CreateCarrierPrivilegeNumberApplicant", async function () {
     try {
        const data = await client.CreateCarrierPrivilegeNumberApplicant({})
@@ -278,6 +308,16 @@ it("ccc.v20200210.DescribeCCCBuyInfoList", async function () {
     }
 })
 
+it("ccc.v20200210.ResumePredictiveDialingCampaign", async function () {
+    try {
+       const data = await client.ResumePredictiveDialingCampaign({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ccc.v20200210.CreateCCCSkillGroup", async function () {
     try {
        const data = await client.CreateCCCSkillGroup({})
@@ -298,9 +338,9 @@ it("ccc.v20200210.UnbindStaffSkillGroupList", async function () {
     }
 })
 
-it("ccc.v20200210.DisableCCCPhoneNumber", async function () {
+it("ccc.v20200210.DescribePredictiveDialingCampaign", async function () {
     try {
-       const data = await client.DisableCCCPhoneNumber({})
+       const data = await client.DescribePredictiveDialingCampaign({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -351,6 +391,26 @@ it("ccc.v20200210.ModifyExtension", async function () {
 it("ccc.v20200210.CreateUserSig", async function () {
     try {
        const data = await client.CreateUserSig({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ccc.v20200210.HangUpCall", async function () {
+    try {
+       const data = await client.HangUpCall({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ccc.v20200210.PausePredictiveDialingCampaign", async function () {
+    try {
+       const data = await client.PausePredictiveDialingCampaign({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -421,6 +481,36 @@ it("ccc.v20200210.DescribeActiveCarrierPrivilegeNumber", async function () {
 it("ccc.v20200210.DescribeNumbers", async function () {
     try {
        const data = await client.DescribeNumbers({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ccc.v20200210.AbortPredictiveDialingCampaign", async function () {
+    try {
+       const data = await client.AbortPredictiveDialingCampaign({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ccc.v20200210.DeletePredictiveDialingCampaign", async function () {
+    try {
+       const data = await client.DeletePredictiveDialingCampaign({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ccc.v20200210.UpdatePredictiveDialingCampaign", async function () {
+    try {
+       const data = await client.UpdatePredictiveDialingCampaign({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -5505,6 +5505,10 @@ export interface BatchSuspendIntegrationTasksRequest {
    * 事件类型(START, STOP, SUSPEND, SUSPEND_WITHOUT_SP,RESUME, COMMIT, TIMESTAMP)
    */
   Event?: string
+  /**
+   * 本次批量操作涉及任务，用于审计
+   */
+  TaskNames?: Array<string>
 }
 
 /**
@@ -6469,6 +6473,10 @@ export interface BatchUpdateIntegrationTasksRequest {
    * 责任人Id（多个责任人用小写分号隔开）
    */
   InchargeIds?: string
+  /**
+   * 本次批量操作涉及任务，用于审计
+   */
+  TaskNames?: Array<string>
 }
 
 /**
@@ -6684,6 +6692,32 @@ export interface FreezeTasksResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 批量运行集成任务配置
+ */
+export interface StartTaskInfo {
+  /**
+   * 批量运行任务类型，比如START，TIMESTAMP，RESTORE，RESUME等
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Event?: string
+  /**
+   * 任务Id列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskIds?: Array<string>
+  /**
+   * 批量运行任务配置，目前仅用与实时集成基于时间位点启动。基于时间位点启动，需要设置一个name=timestamp, value=具体时间戳的RecordField的配置
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Config?: Array<RecordField>
+  /**
+   * 操作类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Description?: string
 }
 
 /**
@@ -9179,6 +9213,14 @@ export interface BatchDeleteIntegrationTasksRequest {
    * 是否删除开发态任务。默认不删除开发态，为 0 不删除 , 为 1 删除
    */
   DeleteKFFlag?: number
+  /**
+   * 操作名称
+   */
+  Name?: string
+  /**
+   * 本次批量操作涉及任务，用于审计
+   */
+  TaskNames?: Array<string>
 }
 
 /**
@@ -13285,15 +13327,19 @@ export interface BatchStopIntegrationTasksResponse {
   /**
    * 操作成功的任务数
    */
-  SuccessCount: number
+  SuccessCount?: number
   /**
    * 操作失败的任务数
    */
-  FailedCount: number
+  FailedCount?: number
   /**
    * 任务总数
    */
-  TotalCount: number
+  TotalCount?: number
+  /**
+   * 本次批量操作涉及成功任务，用于审计
+   */
+  TaskNames?: Array<string>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -13394,6 +13440,10 @@ export interface BatchResumeIntegrationTasksResponse {
    * 任务总数
    */
   TotalCount?: number
+  /**
+   * 本次批量操作涉及任务，用于审计
+   */
+  TaskNames?: Array<string>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -23568,10 +23618,6 @@ export interface ModifyExecStrategyResponse {
  */
 export interface BatchStartIntegrationTasksRequest {
   /**
-   * 任务id
-   */
-  TaskIds: Array<string>
-  /**
    * 任务类型
    */
   TaskType: number
@@ -23579,6 +23625,14 @@ export interface BatchStartIntegrationTasksRequest {
    * 项目id
    */
   ProjectId: string
+  /**
+   * 任务id
+   */
+  TaskIds?: Array<string>
+  /**
+   * 批量运行集成任务，目前仅实时集成用到了这个参数
+   */
+  StartTaskInfoSet?: Array<StartTaskInfo>
 }
 
 /**
@@ -24748,15 +24802,19 @@ export interface BatchStartIntegrationTasksResponse {
   /**
    * 操作成功的任务数
    */
-  SuccessCount: number
+  SuccessCount?: number
   /**
    * 操作失败的任务数
    */
-  FailedCount: number
+  FailedCount?: number
   /**
    * 任务总数
    */
-  TotalCount: number
+  TotalCount?: number
+  /**
+   * 本次批量操作成功任务id，用于审计
+   */
+  TaskNames?: Array<string>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

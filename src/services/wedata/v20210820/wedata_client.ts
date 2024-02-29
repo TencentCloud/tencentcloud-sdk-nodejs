@@ -209,6 +209,7 @@ import {
   LineageParamRecord,
   BatchResult,
   FreezeTasksResponse,
+  StartTaskInfo,
   DescribeTaskReportDetailListResponse,
   DescribeBaselineInstanceDagRequest,
   DescribeIntegrationStatisticsInstanceTrendResponse,

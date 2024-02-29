@@ -8076,11 +8076,11 @@ export interface DescribeBackupListRequest {
    */
   ClusterId: string
   /**
-   * 备份文件列表大小，取值范围(0,100]
+   * 返回数量，取值范围(0,100]
    */
   Limit?: number
   /**
-   * 备份文件列表偏移，取值范围[0,INF)
+   * 记录偏移量，取值范围[0,INF)
    */
   Offset?: number
   /**
@@ -8097,7 +8097,7 @@ export interface DescribeBackupListRequest {
    */
   BackupType?: string
   /**
-   * 备份方式，可选值：auto，自动备份；manual，手动备
+   * 备份方式，可选值：auto，自动备份；manual，手动备份
    */
   BackupMethod?: string
   /**

@@ -2341,7 +2341,7 @@ export interface StartPublishCdnStreamRequest {
      */
     SeiParams?: McuSeiParams;
     /**
-     * 回推房间信息，和转推CDN参数必须要有一个。注：回推房间需使用特殊的SDK版本，如您有需求，请联系腾讯云技术支持。
+     * 回推房间信息，和转推CDN参数必须要有一个。注：回推房间需使用10.4及以上SDK版本，如您有需求，请联系腾讯云技术支持。
      */
     FeedBackRoomParams?: Array<McuFeedBackRoomParams>;
 }
@@ -2913,6 +2913,10 @@ export interface McuWaterMarkText {
      * 动态水印类型，默认为0。0:关闭；1:随机位置，每秒变动一次；2:边界扫描反弹，每帧变动一次。
      */
     DynamicPosType?: number;
+    /**
+     * 水印在输出时的层级，不填默认为0。
+     */
+    ZOrder?: number;
 }
 /**
  * SeriesInfos类型

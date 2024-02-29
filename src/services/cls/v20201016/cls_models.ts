@@ -295,11 +295,11 @@ export interface DeleteScheduledSqlRequest {
 }
 
 /**
- * 动态索引配置，启用后将自动把日志内的字段添加到键值索引字段列表中，包括日志中新增的字段。
+ * 键值索引自动配置，启用后自动将日志内的字段添加到键值索引中，包括日志中后续新增的字段。
  */
 export interface DynamicIndex {
   /**
-   * 动态索引配置开关
+   * 键值索引自动配置开关
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Status?: boolean
@@ -2629,44 +2629,49 @@ export interface MachineGroupInfo {
   /**
    * 机器组ID
    */
-  GroupId: string
+  GroupId?: string
   /**
    * 机器组名称
    */
-  GroupName: string
+  GroupName?: string
   /**
    * 机器组类型
    */
-  MachineGroupType: MachineGroupTypeInfo
+  MachineGroupType?: MachineGroupTypeInfo
   /**
    * 创建时间
    */
-  CreateTime: string
+  CreateTime?: string
   /**
    * 机器组绑定的标签列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Tags: Array<Tag>
+  Tags?: Array<Tag>
   /**
    * 是否开启机器组自动更新
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  AutoUpdate: string
+  AutoUpdate?: string
   /**
    * 升级开始时间，建议业务低峰期升级LogListener
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  UpdateStartTime: string
+  UpdateStartTime?: string
   /**
    * 升级结束时间，建议业务低峰期升级LogListener
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  UpdateEndTime: string
+  UpdateEndTime?: string
   /**
    * 是否开启服务日志，用于记录因Loglistener 服务自身产生的log，开启后，会创建内部日志集cls_service_logging和日志主题loglistener_status,loglistener_alarm,loglistener_business，不产生计费
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ServiceLogging: boolean
+  ServiceLogging?: boolean
+  /**
+   * 机器组中机器离线定期清理时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DelayCleanupTime?: number
   /**
    * 机器组元数据信息列表
    */
@@ -4844,23 +4849,23 @@ export interface DeleteKafkaRechargeRequest {
  */
 export interface RuleInfo {
   /**
-   * 全文索引配置, 如果为空时代表未开启全文索引
+   * 全文索引配置, 为空时代表未开启全文索引
 注意：此字段可能返回 null，表示取不到有效值。
    */
   FullText?: FullTextInfo
   /**
-   * 键值索引配置，如果为空时代表未开启键值索引
+   * 键值索引配置，为空时代表未开启键值索引
 注意：此字段可能返回 null，表示取不到有效值。
    */
   KeyValue?: RuleKeyValueInfo
   /**
-   * 元字段索引配置，如果为空时代表未开启元字段索引
+   * 元字段索引配置，为空时代表未开启元字段索引
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Tag?: RuleTagInfo
   /**
-   * 动态索引配置，为空时代表未开启动态索引。
-启用后将自动把日志内的字段添加到键值索引字段列表中，包括日志中新增的字段。
+   * 键值索引自动配置，为空时代表未开启该功能。
+启用后自动将日志内的字段添加到键值索引中，包括日志中后续新增的字段。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DynamicIndex?: DynamicIndex
@@ -5634,6 +5639,10 @@ export interface ModifyMachineGroupRequest {
    */
   ServiceLogging?: boolean
   /**
+   * 机器组中机器定期离线清理时间
+   */
+  DelayCleanupTime?: number
+  /**
    * 机器组元数据信息列表
    */
   MetaTags?: Array<MetaTagInfo>
@@ -6081,6 +6090,10 @@ export interface CreateMachineGroupRequest {
    * 是否开启服务日志，用于记录因Loglistener 服务自身产生的log，开启后，会创建内部日志集cls_service_logging和日志主题loglistener_status,loglistener_alarm,loglistener_business，不产生计费
    */
   ServiceLogging?: boolean
+  /**
+   * 机器组中机器离线清理时间
+   */
+  DelayCleanupTime?: number
   /**
    * 机器组元数据信息列表
    */

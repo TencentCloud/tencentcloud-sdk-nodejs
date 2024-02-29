@@ -87,6 +87,14 @@ export interface GetFlowStatisticRequest {
      * 时间粒度（1：按小时统计，2：按天统计）
      */
     TimeGranularity: number;
+    /**
+     * 接入区域。取值范围：['MC','AP','EU','AM'] MC=中国大陆 AP=亚太 EU=欧洲 AM=美洲。不填默认中国大陆
+     */
+    AccessRegion?: string;
+    /**
+     * 网关类型。0：公有云网关；1：自有网关。不传默认为0。
+     */
+    GatewayType?: number;
 }
 /**
  * 多网聚合加速目标地址结构体
@@ -106,6 +114,14 @@ export interface GetNetMonitorResponse {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     MonitorData?: Array<MonitorData>;
+    /**
+     * 接入区域。取值范围：['MC','AP','EU','AM']
+  MC=中国大陆
+  AP=亚太
+  EU=欧洲
+  AM=美洲
+     */
+    AccessRegion?: string;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -160,6 +176,10 @@ export interface GetNetMonitorRequest {
      * 统计指标（上行速率："TxRate":bit/s，下行速率："RxRate":bit/s，丢包："Loss":%，时延："RTT":ms）
      */
     Metrics: string;
+    /**
+     * 网关类型。0：公有云网关；1：自有网关。不传默认为0。
+     */
+    GatewayType?: number;
 }
 /**
  * GetMultiFlowStatistic返回参数结构体
@@ -474,6 +494,10 @@ export interface ActivateHardware {
      * 设备密钥
      */
     DataKey?: string;
+    /**
+     * 接入环境。0：公有云网关；1：自有网关；2：公有云网关和自有网关。不填默认公有云网关。 具体含义： 公有云网关：即该设备只能接入公有云网关（就近接入） 自有网关：即该设备只能接入已经注册上线的自有网关（就近接入或固定ip接入） 公有云网关和自有网关：即该设备同时可以接入公有云网关和已经注册上线的自有网关（就近接入或固定ip接入）
+     */
+    AccessScope?: number;
 }
 /**
  * DeleteDevice请求参数结构体
@@ -666,7 +690,7 @@ export interface CreateQosRequest {
  */
 export interface GetStatisticDataRequest {
     /**
-     * 设备ID
+     * 设备ID。若不指定设备，可传"-1"
      */
     DeviceId: string;
     /**
@@ -683,6 +707,14 @@ export interface GetStatisticDataRequest {
   2:按天统计
      */
     TimeGranularity: number;
+    /**
+     * 接入区域。取值范围：['MC','AP','EU','AM'] MC=中国大陆 AP=亚太 EU=欧洲 AM=美洲。不填默认中国大陆
+     */
+    AccessRegion?: string;
+    /**
+     * 网关类型。0：公有云网关；1：自有网关。不传默认为0。
+     */
+    GatewayType?: number;
 }
 /**
  * GetFlowPackages返回参数结构体
@@ -811,6 +843,14 @@ export interface GetMultiFlowStatisticRequest {
      * 统计时间粒度（1：按小时统计，2：按天统计）
      */
     TimeGranularity: number;
+    /**
+     * 接入区域。取值范围：['MC','AP','EU','AM'] MC=中国大陆 AP=亚太 EU=欧洲 AM=美洲。不填默认中国大陆
+     */
+    AccessRegion?: string;
+    /**
+     * 网关类型。0：公有云网关；1：自有网关。不传默认为0。
+     */
+    GatewayType?: number;
 }
 /**
  * 设备的基本信息
@@ -819,23 +859,27 @@ export interface DeviceBaseInfo {
     /**
      * 设备唯一ID
      */
-    DeviceId: string;
+    DeviceId?: string;
     /**
      * 设备名称
      */
-    DeviceName: string;
+    DeviceName?: string;
     /**
      * 设备创建的时间，单位：ms
      */
-    CreateTime: string;
+    CreateTime?: string;
     /**
      * 设备最后在线时间，单位：ms
      */
-    LastTime: string;
+    LastTime?: string;
     /**
      * 设备的备注
      */
-    Remark: string;
+    Remark?: string;
+    /**
+     * 接入环境。0：公有云网关；1：自有网关；2：公有云网关和自有网关。默认公有云网关。 具体含义： 公有云网关：即该设备只能接入公有云网关（就近接入） 自有网关：即该设备只能接入已经注册上线的自有网关（就近接入或固定ip接入） 公有云网关和自有网关：即该设备同时可以接入公有云网关和已经注册上线的自有网关（就近接入或固定ip接入）
+     */
+    AccessScope?: number;
 }
 /**
  * 用户期望门限
@@ -895,16 +939,16 @@ export interface AddDeviceResponse {
     /**
      * 经过加密算法加密后的base64格式密钥
      */
-    DataKey: string;
+    DataKey?: string;
     /**
      * 设备ID
      */
-    DeviceId: string;
+    DeviceId?: string;
     /**
      * 签名字符串
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Signature: string;
+    Signature?: string;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1272,6 +1316,11 @@ export interface FlowPackageInfo {
      */
     Status?: number;
     /**
+     * 购买时间，Unix时间戳格式，单位：秒
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CreateTime?: number;
+    /**
      * 生效时间，Unix时间戳格式，单位：秒
      */
     ActiveTime?: number;
@@ -1295,6 +1344,10 @@ export interface FlowPackageInfo {
      * 自动续费标识。true代表自动续费，false代表不自动续费
      */
     RenewFlag?: boolean;
+    /**
+     * 资源包变更状态，0：未发生变配；1：变配中；2：已变配或已续费
+     */
+    ModifyStatus?: number;
 }
 /**
  * GetHardwareList返回参数结构体
@@ -1375,6 +1428,14 @@ export interface AddDeviceRequest {
      * 是否设置预置密钥
      */
     Encrypted?: boolean;
+    /**
+     * 接入环境。0：公有云网关；1：自有网关；2：公有云网关和自有网关。不填默认公有云网关。
+  具体含义：
+  公有云网关：即该设备只能接入公有云网关（就近接入）
+  自有网关：即该设备只能接入已经注册上线的自有网关（就近接入或固定ip接入）
+  公有云网关和自有网关：即该设备同时可以接入公有云网关和已经注册上线的自有网关（就近接入或固定ip接入）
+     */
+    AccessScope?: number;
 }
 /**
  * GetPublicKey请求参数结构体
