@@ -1231,6 +1231,10 @@ export interface DescribeCodeBatchsRequest {
    * 企业ID
    */
   CorpId?: number
+  /**
+   * 批次状态
+   */
+  Status?: number
 }
 
 /**
@@ -2857,6 +2861,10 @@ export interface DescribeCodeBatchesRequest {
    * 企业ID
    */
   CorpId?: number
+  /**
+   * 批次状态
+   */
+  Status?: number
 }
 
 /**

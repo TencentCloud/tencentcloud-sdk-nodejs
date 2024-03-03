@@ -10030,6 +10030,16 @@ abnormal = 异常
 注意：此字段可能返回 null，表示取不到有效值。
    */
   EnableExternal?: boolean
+  /**
+   * 采集agent期望pod数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DesiredAgentNum?: number
+  /**
+   * 采集agent已正常启动pod数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ReadyAgentNum?: number
 }
 
 /**

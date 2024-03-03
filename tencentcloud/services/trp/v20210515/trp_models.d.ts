@@ -1179,6 +1179,10 @@ export interface DescribeCodeBatchsRequest {
      * 企业ID
      */
     CorpId?: number;
+    /**
+     * 批次状态
+     */
+    Status?: number;
 }
 /**
  * DescribeAgentCorps返回参数结构体
@@ -2735,6 +2739,10 @@ export interface DescribeCodeBatchesRequest {
      * 企业ID
      */
     CorpId?: number;
+    /**
+     * 批次状态
+     */
+    Status?: number;
 }
 /**
  * 业务加密入参

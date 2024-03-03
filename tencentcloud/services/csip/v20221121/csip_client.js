@@ -154,6 +154,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeGatewayAssets", req, cb);
     }
     /**
+     * 查询TOP攻击信息
+     */
+    async DescribeTopAttackInfo(req, cb) {
+        return this.request("DescribeTopAttackInfo", req, cb);
+    }
+    /**
      * 立体防护中心查询漏洞信息
      */
     async DescribeSearchBugInfo(req, cb) {

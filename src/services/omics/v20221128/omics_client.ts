@@ -18,6 +18,7 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  DeleteVolumeDataRequest,
   RetryRunsResponse,
   RunApplicationResponse,
   ExecutionTime,
@@ -27,6 +28,7 @@ import {
   ImportTableFileResponse,
   RunApplicationRequest,
   GetRunMetadataFileResponse,
+  CreateVolumeResponse,
   DeleteEnvironmentResponse,
   Environment,
   GetRunCallsRequest,
@@ -34,20 +36,25 @@ import {
   DescribeRunsRequest,
   Run,
   TableColumn,
+  CreateVolumeRequest,
   SecurityGroupOption,
   DescribeTablesRowsRequest,
   DescribeEnvironmentsResponse,
+  ModifyVolumeResponse,
   LimitRange,
   DescribeTablesResponse,
   VPCOption,
   ResourceQuota,
   RetryRunsRequest,
   ImportTableFileRequest,
+  DeleteVolumeResponse,
   CacheInfo,
   ClusterOption,
   TerminateRunGroupResponse,
+  DescribeVolumesResponse,
   GitInfo,
   ApplicationVersion,
+  DeleteVolumeRequest,
   DeleteEnvironmentRequest,
   RunGroup,
   DatabaseOption,
@@ -55,23 +62,27 @@ import {
   Filter,
   ResourceIds,
   DescribeRunGroupsResponse,
+  Volume,
   TerminateRunGroupRequest,
   EnvironmentConfig,
   DescribeTablesRowsResponse,
   CreateEnvironmentResponse,
   GetRunMetadataFileRequest,
   RunWorkflowResponse,
-  TableRow,
+  ModifyVolumeRequest,
   DescribeRunGroupsRequest,
   GetRunStatusResponse,
   StorageOption,
   DescribeTablesRequest,
+  TableRow,
+  DeleteVolumeDataResponse,
   DescribeEnvironmentsRequest,
   RunOption,
   NFOption,
   Table,
   CVMOption,
   RunMetadata,
+  DescribeVolumesRequest,
   CreateEnvironmentRequest,
 } from "./omics_models"
 
@@ -85,6 +96,26 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 导入表格文件。
+   */
+  async ImportTableFile(
+    req: ImportTableFileRequest,
+    cb?: (error: string, rep: ImportTableFileResponse) => void
+  ): Promise<ImportTableFileResponse> {
+    return this.request("ImportTableFile", req, cb)
+  }
+
+  /**
+   * 查询任务批次列表。
+   */
+  async DescribeRunGroups(
+    req: DescribeRunGroupsRequest,
+    cb?: (error: string, rep: DescribeRunGroupsResponse) => void
+  ): Promise<DescribeRunGroupsResponse> {
+    return this.request("DescribeRunGroups", req, cb)
+  }
+
+  /**
    * 查询表格行数据。
    */
   async DescribeTablesRows(
@@ -92,6 +123,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeTablesRowsResponse) => void
   ): Promise<DescribeTablesRowsResponse> {
     return this.request("DescribeTablesRows", req, cb)
+  }
+
+  /**
+   * 删除缓存卷数据。
+   */
+  async DeleteVolumeData(
+    req: DeleteVolumeDataRequest,
+    cb?: (error: string, rep: DeleteVolumeDataResponse) => void
+  ): Promise<DeleteVolumeDataResponse> {
+    return this.request("DeleteVolumeData", req, cb)
   }
 
   /**
@@ -115,13 +156,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 导入表格文件。
+   * 创建缓存卷。
    */
-  async ImportTableFile(
-    req: ImportTableFileRequest,
-    cb?: (error: string, rep: ImportTableFileResponse) => void
-  ): Promise<ImportTableFileResponse> {
-    return this.request("ImportTableFile", req, cb)
+  async CreateVolume(
+    req: CreateVolumeRequest,
+    cb?: (error: string, rep: CreateVolumeResponse) => void
+  ): Promise<CreateVolumeResponse> {
+    return this.request("CreateVolume", req, cb)
+  }
+
+  /**
+   * 查询缓存卷列表。
+   */
+  async DescribeVolumes(
+    req: DescribeVolumesRequest,
+    cb?: (error: string, rep: DescribeVolumesResponse) => void
+  ): Promise<DescribeVolumesResponse> {
+    return this.request("DescribeVolumes", req, cb)
   }
 
   /**
@@ -195,13 +246,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询任务批次列表。
+   * 删除缓存卷。
    */
-  async DescribeRunGroups(
-    req: DescribeRunGroupsRequest,
-    cb?: (error: string, rep: DescribeRunGroupsResponse) => void
-  ): Promise<DescribeRunGroupsResponse> {
-    return this.request("DescribeRunGroups", req, cb)
+  async DeleteVolume(
+    req: DeleteVolumeRequest,
+    cb?: (error: string, rep: DeleteVolumeResponse) => void
+  ): Promise<DeleteVolumeResponse> {
+    return this.request("DeleteVolume", req, cb)
+  }
+
+  /**
+   * 修改缓存卷。
+   */
+  async ModifyVolume(
+    req: ModifyVolumeRequest,
+    cb?: (error: string, rep: ModifyVolumeResponse) => void
+  ): Promise<ModifyVolumeResponse> {
+    return this.request("ModifyVolume", req, cb)
   }
 
   /**

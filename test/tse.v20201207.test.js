@@ -178,9 +178,9 @@ it("tse.v20201207.UnbindAutoScalerResourceStrategyFromGroups", async function ()
     }
 })
 
-it("tse.v20201207.BindAutoScalerResourceStrategyToGroups", async function () {
+it("tse.v20201207.DeleteCloudNativeAPIGatewayPublicNetwork", async function () {
     try {
-       const data = await client.BindAutoScalerResourceStrategyToGroups({})
+       const data = await client.DeleteCloudNativeAPIGatewayPublicNetwork({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -198,9 +198,9 @@ it("tse.v20201207.DeleteWafDomains", async function () {
     }
 })
 
-it("tse.v20201207.DeleteCloudNativeAPIGatewayPublicNetwork", async function () {
+it("tse.v20201207.BindAutoScalerResourceStrategyToGroups", async function () {
     try {
-       const data = await client.DeleteCloudNativeAPIGatewayPublicNetwork({})
+       const data = await client.BindAutoScalerResourceStrategyToGroups({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -408,6 +408,16 @@ it("tse.v20201207.CloseWafProtection", async function () {
     }
 })
 
+it("tse.v20201207.ModifyGovernanceInstances", async function () {
+    try {
+       const data = await client.ModifyGovernanceInstances({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tse.v20201207.CreateCloudNativeAPIGateway", async function () {
     try {
        const data = await client.CreateCloudNativeAPIGateway({})
@@ -431,6 +441,16 @@ it("tse.v20201207.DescribeSREInstances", async function () {
 it("tse.v20201207.DescribeCloudNativeAPIGatewayRouteRateLimit", async function () {
     try {
        const data = await client.DescribeCloudNativeAPIGatewayRouteRateLimit({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tse.v20201207.DeleteGovernanceInstances", async function () {
+    try {
+       const data = await client.DeleteGovernanceInstances({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -628,6 +648,16 @@ it("tse.v20201207.UpdateCloudNativeAPIGatewayCertificateInfo", async function ()
     }
 })
 
+it("tse.v20201207.CreateGovernanceInstances", async function () {
+    try {
+       const data = await client.CreateGovernanceInstances({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tse.v20201207.CreateNativeGatewayServerGroup", async function () {
     try {
        const data = await client.CreateNativeGatewayServerGroup({})
@@ -731,6 +761,16 @@ it("tse.v20201207.DescribeCloudNativeAPIGatewayCanaryRules", async function () {
 it("tse.v20201207.UpdateCloudNativeAPIGatewaySpec", async function () {
     try {
        const data = await client.UpdateCloudNativeAPIGatewaySpec({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tse.v20201207.DescribeGovernanceInstances", async function () {
+    try {
+       const data = await client.DescribeGovernanceInstances({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

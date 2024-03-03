@@ -16,6 +16,20 @@
  */
 
 /**
+ * DeleteVolumeData请求参数结构体
+ */
+export interface DeleteVolumeDataRequest {
+  /**
+   * 缓存卷ID。
+   */
+  VolumeId: string
+  /**
+   * 需要删除的路径
+   */
+  Path: string
+}
+
+/**
  * RetryRuns返回参数结构体
  */
 export interface RetryRunsResponse {
@@ -197,6 +211,21 @@ export interface GetRunMetadataFileResponse {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CosSignedUrls?: Array<string>
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateVolume返回参数结构体
+ */
+export interface CreateVolumeResponse {
+  /**
+   * 缓存卷ID。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VolumeId?: string
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -479,6 +508,42 @@ export interface TableColumn {
 }
 
 /**
+ * CreateVolume请求参数结构体
+ */
+export interface CreateVolumeRequest {
+  /**
+   * 环境ID。
+   */
+  EnvironmentId: string
+  /**
+   * 名称。
+   */
+  Name: string
+  /**
+   * 缓存卷类型，取值范围：
+   * SHARED：多点挂载共享存储
+   */
+  Type: string
+  /**
+   * 缓存卷规格，取值范围：
+
+- SD：通用标准型
+- HP：通用性能型
+- TB：turbo标准型
+- TP：turbo性能型
+   */
+  Spec: string
+  /**
+   * 描述。
+   */
+  Description?: string
+  /**
+   * 缓存卷大小（GB），Turbo系列需要指定。
+   */
+  Capacity?: number
+}
+
+/**
  * 安全组配置。
  */
 export interface SecurityGroupOption {
@@ -528,6 +593,16 @@ export interface DescribeEnvironmentsResponse {
    * 环境详情列表。
    */
   Environments?: Array<Environment>
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyVolume返回参数结构体
+ */
+export interface ModifyVolumeResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -668,6 +743,16 @@ export interface ImportTableFileRequest {
 }
 
 /**
+ * DeleteVolume返回参数结构体
+ */
+export interface DeleteVolumeResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 缓存信息。
  */
 export interface CacheInfo {
@@ -719,6 +804,26 @@ export interface ClusterOption {
  * TerminateRunGroup返回参数结构体
  */
 export interface TerminateRunGroupResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeVolumes返回参数结构体
+ */
+export interface DescribeVolumesResponse {
+  /**
+   * 缓存卷。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Volumes?: Array<Volume>
+  /**
+   * 符合条件的数量。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalCount?: number
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -800,6 +905,16 @@ export interface ApplicationVersion {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   GitInfo?: string
+}
+
+/**
+ * DeleteVolume请求参数结构体
+ */
+export interface DeleteVolumeRequest {
+  /**
+   * 缓存卷ID。
+   */
+  VolumeId: string
 }
 
 /**
@@ -1035,6 +1150,78 @@ export interface DescribeRunGroupsResponse {
 }
 
 /**
+ * 缓存卷。
+ */
+export interface Volume {
+  /**
+   * 缓存卷ID。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VolumeId?: string
+  /**
+   * 名称。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name?: string
+  /**
+   * 描述。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Description?: string
+  /**
+   * 环境ID。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EnvironmentId?: string
+  /**
+   * 缓存卷类型，取值范围：
+* SHARED：多点挂载共享存储
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Type?: string
+  /**
+   * 缓存卷规格，取值范围：
+
+- SD：通用标准型
+- HP：通用性能型
+- TB：turbo标准型
+- TP：turbo性能型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Spec?: string
+  /**
+   * 缓存卷大小（GB）。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Capacity?: number
+  /**
+   * 缓存卷使用量（Byte）。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Usage?: number
+  /**
+   * 缓存卷吞吐上限（MiB/s）。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BandwidthLimit?: number
+  /**
+   * 默认挂载路径。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DefaultMountPath?: string
+  /**
+   * 是否为默认缓存卷。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsDefault?: boolean
+  /**
+   * 状态。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status?: string
+}
+
+/**
  * TerminateRunGroup请求参数结构体
  */
 export interface TerminateRunGroupRequest {
@@ -1171,19 +1358,21 @@ export interface RunWorkflowResponse {
 }
 
 /**
- * 表格行。
+ * ModifyVolume请求参数结构体
  */
-export interface TableRow {
+export interface ModifyVolumeRequest {
   /**
-   * 表格行UUID。
-注意：此字段可能返回 null，表示取不到有效值。
+   * 缓存卷ID。
    */
-  TableRowUuid?: string
+  VolumeId: string
   /**
-   * 表格行内容。
-注意：此字段可能返回 null，表示取不到有效值。
+   * 名称。
    */
-  Content?: Array<string>
+  Name?: string
+  /**
+   * 描述。
+   */
+  Description?: string
 }
 
 /**
@@ -1272,6 +1461,32 @@ export interface DescribeTablesRequest {
 - TableId：表格ID
    */
   Filters?: Array<Filter>
+}
+
+/**
+ * 表格行。
+ */
+export interface TableRow {
+  /**
+   * 表格行UUID。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TableRowUuid?: string
+  /**
+   * 表格行内容。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Content?: Array<string>
+}
+
+/**
+ * DeleteVolumeData返回参数结构体
+ */
+export interface DeleteVolumeDataResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1523,6 +1738,30 @@ export interface RunMetadata {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Meta?: string
+}
+
+/**
+ * DescribeVolumes请求参数结构体
+ */
+export interface DescribeVolumesRequest {
+  /**
+   * 环境ID。
+   */
+  EnvironmentId: string
+  /**
+   * 返回数量，默认为20，最大值为100。
+   */
+  Limit?: number
+  /**
+   * 偏移量，默认为0。
+   */
+  Offset?: number
+  /**
+   * 过滤器，支持过滤字段：
+- Name：名称
+- IsDefault：是否为默认
+   */
+  Filters?: Array<Filter>
 }
 
 /**

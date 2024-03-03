@@ -6391,7 +6391,7 @@ export interface CreatePostPaidInstanceResponse {
  */
 export interface InquireCkafkaPriceRequest {
   /**
-   * 国内站标准版填写standards2, 国际站标准版填写standard，专业版填写profession
+   * 国内站标准版填写standards2, 国际站标准版填写standard,专业版填写profession,高级版填写premium
    */
   InstanceType: string
   /**
@@ -6403,11 +6403,11 @@ export interface InquireCkafkaPriceRequest {
    */
   InstanceNum?: number
   /**
-   * 实例内网带宽大小, 单位MB/s (购买时必填，专业版询价时带宽信息必填)
+   * 实例内网带宽大小, 单位MB/s (购买时必填，专业版/高级版询价时带宽信息必填)
    */
   Bandwidth?: number
   /**
-   * 实例的硬盘购买类型以及大小 (购买时必填，专业版询价时磁盘信息必填)
+   * 实例的硬盘购买类型以及大小 (购买时必填，专业版/高级版询价时磁盘信息必填)
    */
   InquiryDiskParam?: InquiryDiskParam
   /**
@@ -6419,7 +6419,7 @@ export interface InquireCkafkaPriceRequest {
    */
   Topic?: number
   /**
-   * 购买实例分区数, 单位个 (购买时必填，专业版询价时带宽信息必填)
+   * 购买实例分区数, 单位个 (购买时必填，专业版/高级版询价时带宽信息必填)
    */
   Partition?: number
   /**
@@ -6634,57 +6634,57 @@ export interface InquiryBasePrice {
    * 单位原价
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  UnitPrice: number
+  UnitPrice?: number
   /**
    * 折扣单位价格
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  UnitPriceDiscount: number
+  UnitPriceDiscount?: number
   /**
    * 合计原价
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  OriginalPrice: number
+  OriginalPrice?: number
   /**
    * 折扣合计价格
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DiscountPrice: number
+  DiscountPrice?: number
   /**
    * 折扣(单位是%)
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Discount: number
+  Discount?: number
   /**
    * 商品数量
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  GoodsNum: number
+  GoodsNum?: number
   /**
    * 付费货币
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Currency: string
+  Currency?: string
   /**
    * 硬盘专用返回参数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DiskType: string
+  DiskType?: string
   /**
    * 购买时长
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TimeSpan: number
+  TimeSpan?: number
   /**
    * 购买时长单位("m"按月, "h"按小时)
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TimeUnit: string
+  TimeUnit?: string
   /**
    * 购买数量
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Value: number
+  Value?: number
 }
 
 /**
@@ -8052,7 +8052,7 @@ export interface CreateInstancePreRequest {
    */
   KafkaVersion?: string
   /**
-   * 实例类型: [标准版实例]填写 "standard" (默认), [专业版实例]填写 "profession"
+   * 实例类型: [标准版实例]填写 "standard" (默认), [专业版实例]填写 "profession",[高级版实例]填写"premium"
    */
   SpecificationsType?: string
   /**
@@ -8072,7 +8072,7 @@ export interface CreateInstancePreRequest {
    */
   Tags?: Array<Tag>
   /**
-   * 专业版实例磁盘类型，标准版实例不需要填写。"CLOUD_SSD"：SSD云硬盘；"CLOUD_BASIC"：高性能云硬盘。不传默认为 "CLOUD_BASIC"
+   * 专业版/高级版实例磁盘类型，标准版实例不需要填写。"CLOUD_SSD"：SSD云硬盘；"CLOUD_BASIC"：高性能云硬盘。不传默认为 "CLOUD_BASIC"
    */
   DiskType?: string
   /**

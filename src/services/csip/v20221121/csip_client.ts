@@ -33,11 +33,12 @@ import {
   DescribeVpcAssetsResponse,
   Vpc,
   PortRiskAdvanceCFGParamItem,
-  VULRiskAdvanceCFGList,
   StopRiskCenterTaskRequest,
   DataSearchBug,
   OrganizationUserInfo,
   AssetTag,
+  IpAssetListVO,
+  DescribeTopAttackInfoResponse,
   DescribeVULRiskAdvanceCFGListRequest,
   ModifyRiskCenterScanTaskResponse,
   DescribeRiskCenterAssetViewCFGRiskListRequest,
@@ -47,6 +48,7 @@ import {
   DescribeNICAssetsRequest,
   DescribeScanTaskListRequest,
   TaskIdListKey,
+  TagCount,
   GateWayAsset,
   DescribeRiskCenterWebsiteRiskListResponse,
   DescribeScanReportListResponse,
@@ -65,13 +67,14 @@ import {
   StopRiskCenterTaskResponse,
   DescribeVpcAssetsRequest,
   TaskAssetObject,
-  IpAssetListVO,
+  DbAssetInfo,
   ModifyRiskCenterRiskStatusRequest,
   RiskCenterStatusKey,
   DescribeRiskCenterAssetViewWeakPasswordRiskListRequest,
   PublicIpDomainListKey,
+  DescribeTopAttackInfoRequest,
   DescribeCVMAssetsResponse,
-  DbAssetInfo,
+  VULRiskAdvanceCFGList,
   DescribePublicIpAssetsRequest,
   AssetClusterPod,
   DescribeCVMAssetInfoRequest,
@@ -359,6 +362,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeGatewayAssetsResponse) => void
   ): Promise<DescribeGatewayAssetsResponse> {
     return this.request("DescribeGatewayAssets", req, cb)
+  }
+
+  /**
+   * 查询TOP攻击信息
+   */
+  async DescribeTopAttackInfo(
+    req: DescribeTopAttackInfoRequest,
+    cb?: (error: string, rep: DescribeTopAttackInfoResponse) => void
+  ): Promise<DescribeTopAttackInfoResponse> {
+    return this.request("DescribeTopAttackInfo", req, cb)
   }
 
   /**

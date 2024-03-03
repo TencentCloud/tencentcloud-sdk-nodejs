@@ -28,10 +28,28 @@ class Client extends abstract_client_1.AbstractClient {
         super("omics.tencentcloudapi.com", "2022-11-28", clientConfig);
     }
     /**
+     * 导入表格文件。
+     */
+    async ImportTableFile(req, cb) {
+        return this.request("ImportTableFile", req, cb);
+    }
+    /**
+     * 查询任务批次列表。
+     */
+    async DescribeRunGroups(req, cb) {
+        return this.request("DescribeRunGroups", req, cb);
+    }
+    /**
      * 查询表格行数据。
      */
     async DescribeTablesRows(req, cb) {
         return this.request("DescribeTablesRows", req, cb);
+    }
+    /**
+     * 删除缓存卷数据。
+     */
+    async DeleteVolumeData(req, cb) {
+        return this.request("DeleteVolumeData", req, cb);
     }
     /**
      * 查询环境列表。
@@ -46,10 +64,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("GetRunMetadataFile", req, cb);
     }
     /**
-     * 导入表格文件。
+     * 创建缓存卷。
      */
-    async ImportTableFile(req, cb) {
-        return this.request("ImportTableFile", req, cb);
+    async CreateVolume(req, cb) {
+        return this.request("CreateVolume", req, cb);
+    }
+    /**
+     * 查询缓存卷列表。
+     */
+    async DescribeVolumes(req, cb) {
+        return this.request("DescribeVolumes", req, cb);
     }
     /**
      * 查询任务详情。
@@ -94,10 +118,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeRuns", req, cb);
     }
     /**
-     * 查询任务批次列表。
+     * 删除缓存卷。
      */
-    async DescribeRunGroups(req, cb) {
-        return this.request("DescribeRunGroups", req, cb);
+    async DeleteVolume(req, cb) {
+        return this.request("DeleteVolume", req, cb);
+    }
+    /**
+     * 修改缓存卷。
+     */
+    async ModifyVolume(req, cb) {
+        return this.request("ModifyVolume", req, cb);
     }
     /**
      * 删除环境。

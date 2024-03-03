@@ -820,104 +820,6 @@ export interface PortRiskAdvanceCFGParamItem {
     Enable?: number;
 }
 /**
- * 漏洞风险高级配置列表
- */
-export interface VULRiskAdvanceCFGList {
-    /**
-     * 风险ID
-     */
-    RiskId?: string;
-    /**
-     * 漏洞名称
-     */
-    VULName?: string;
-    /**
-     * 风险等级
-     */
-    RiskLevel?: string;
-    /**
-     * 识别来源
-     */
-    CheckFrom?: string;
-    /**
-     * 是否启用，1-启用，0-禁用
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Enable?: number;
-    /**
-     * 风险类型
-     */
-    VULType?: string;
-    /**
-     * 影响版本
-     */
-    ImpactVersion?: string;
-    /**
-     * CVE
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    CVE?: string;
-    /**
-     * 漏洞标签
-     */
-    VULTag?: Array<string>;
-    /**
-     * 修复方式
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    FixMethod?: Array<string>;
-    /**
-     * 披露时间
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ReleaseTime?: string;
-    /**
-     * 应急漏洞类型，1-应急漏洞，0-非应急漏洞
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    EMGCVulType?: number;
-    /**
-     * 漏洞描述
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    VULDescribe?: string;
-    /**
-     * 影响组件
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ImpactComponent?: string;
-    /**
-     * 漏洞Payload
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Payload?: string;
-    /**
-     * 技术参考
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    References?: string;
-    /**
-     * cvss评分
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    CVSS?: string;
-    /**
-     * 攻击热度
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    AttackHeat?: string;
-    /**
-     * 安全产品支持情况
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ServiceSupport?: Array<ServiceSupport>;
-    /**
-     * 最新检测时间
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    RecentScanTime?: string;
-}
-/**
  * StopRiskCenterTask请求参数结构体
  */
 export interface StopRiskCenterTaskRequest {
@@ -1103,6 +1005,199 @@ export interface AssetTag {
     TagValue?: string;
 }
 /**
+ * ip列表
+ */
+export interface IpAssetListVO {
+    /**
+     * 资产id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AssetId?: string;
+    /**
+     * 资产name
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AssetName?: string;
+    /**
+     * 资产类型
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AssetType?: string;
+    /**
+     * 地域
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Region?: string;
+    /**
+     * 云防状态
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CFWStatus?: number;
+    /**
+     * 资产创建时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AssetCreateTime?: string;
+    /**
+     * 公网ip
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PublicIp?: string;
+    /**
+     * 公网ip类型
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PublicIpType?: number;
+    /**
+     * vpc
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    VpcId?: string;
+    /**
+     * vpc名
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    VpcName?: string;
+    /**
+     * appid
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AppId?: number;
+    /**
+     * 用户uin
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Uin?: string;
+    /**
+     * 名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    NickName?: string;
+    /**
+     * 核心
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IsCore?: number;
+    /**
+     * 云上
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IsCloud?: number;
+    /**
+     * 网络攻击
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Attack?: number;
+    /**
+     * 网络访问
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Access?: number;
+    /**
+     * 网络拦截
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Intercept?: number;
+    /**
+     * 入向带宽
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InBandwidth?: string;
+    /**
+     * 出向带宽
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    OutBandwidth?: string;
+    /**
+     * 入向流量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InFlow?: string;
+    /**
+     * 出向流量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    OutFlow?: string;
+    /**
+     * 最近扫描时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    LastScanTime?: string;
+    /**
+     * 端口风险
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PortRisk?: number;
+    /**
+     * 漏洞风险
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    VulnerabilityRisk?: number;
+    /**
+     * 配置风险
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ConfigurationRisk?: number;
+    /**
+     * 扫描任务
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ScanTask?: number;
+    /**
+     * 弱口令
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    WeakPassword?: number;
+    /**
+     * 内容风险
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    WebContentRisk?: number;
+    /**
+     * 标签
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Tag?: Array<Tag>;
+    /**
+     * eip主键
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AddressId?: string;
+    /**
+     * memberid信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MemberId?: string;
+    /**
+     * 风险服务暴露
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RiskExposure?: number;
+    /**
+     * 是否新资产 1新
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IsNewAsset?: number;
+    /**
+     * 资产认证状态，0-待认证，1-认证成功，2-认证中，3+-认证失败
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    VerifyStatus?: number;
+}
+/**
+ * DescribeTopAttackInfo返回参数结构体
+ */
+export interface DescribeTopAttackInfoResponse {
+    /**
+     * Top攻击类型/攻击者次数
+     */
+    TopAttackInfo?: Array<TagCount>;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * DescribeVULRiskAdvanceCFGList请求参数结构体
  */
 export interface DescribeVULRiskAdvanceCFGListRequest {
@@ -1242,6 +1337,21 @@ export interface TaskIdListKey {
      * 任务ID
      */
     TaskId: string;
+}
+/**
+ * 产品日志条数
+ */
+export interface TagCount {
+    /**
+     * 产品名
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Name?: string;
+    /**
+     * 日志条数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Count?: number;
 }
 /**
  * 网关资产
@@ -1998,184 +2108,64 @@ export interface TaskAssetObject {
     Arn?: string;
 }
 /**
- * ip列表
+ * db资产详情
  */
-export interface IpAssetListVO {
-    /**
-     * 资产id
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    AssetId?: string;
-    /**
-     * 资产name
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    AssetName?: string;
-    /**
-     * 资产类型
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    AssetType?: string;
-    /**
-     * 地域
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Region?: string;
+export interface DbAssetInfo {
     /**
      * 云防状态
   注意：此字段可能返回 null，表示取不到有效值。
      */
     CFWStatus?: number;
     /**
-     * 资产创建时间
+     * 资产id
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    AssetCreateTime?: string;
+    AssetId?: string;
+    /**
+     * vpc信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    VpcName?: string;
+    /**
+     * 资产类型
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AssetType?: string;
     /**
      * 公网ip
   注意：此字段可能返回 null，表示取不到有效值。
      */
     PublicIp?: string;
     /**
-     * 公网ip类型
+     * 私网ip
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    PublicIpType?: number;
+    PrivateIp?: string;
     /**
-     * vpc
+     * 地域
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Region?: string;
+    /**
+     * vpc信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
     VpcId?: string;
     /**
-     * vpc名
+     * 资产名
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    VpcName?: string;
+    AssetName?: string;
     /**
-     * appid
+     * 云防保护版本
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    AppId?: number;
+    CFWProtectLevel?: number;
     /**
-     * 用户uin
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Uin?: string;
-    /**
-     * 名称
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    NickName?: string;
-    /**
-     * 核心
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    IsCore?: number;
-    /**
-     * 云上
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    IsCloud?: number;
-    /**
-     * 网络攻击
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Attack?: number;
-    /**
-     * 网络访问
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Access?: number;
-    /**
-     * 网络拦截
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Intercept?: number;
-    /**
-     * 入向带宽
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    InBandwidth?: string;
-    /**
-     * 出向带宽
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    OutBandwidth?: string;
-    /**
-     * 入向流量
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    InFlow?: string;
-    /**
-     * 出向流量
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    OutFlow?: string;
-    /**
-     * 最近扫描时间
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    LastScanTime?: string;
-    /**
-     * 端口风险
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    PortRisk?: number;
-    /**
-     * 漏洞风险
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    VulnerabilityRisk?: number;
-    /**
-     * 配置风险
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ConfigurationRisk?: number;
-    /**
-     * 扫描任务
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ScanTask?: number;
-    /**
-     * 弱口令
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    WeakPassword?: number;
-    /**
-     * 内容风险
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    WebContentRisk?: number;
-    /**
-     * 标签
+     * tag信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Tag?: Array<Tag>;
-    /**
-     * eip主键
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    AddressId?: string;
-    /**
-     * memberid信息
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    MemberId?: string;
-    /**
-     * 风险服务暴露
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    RiskExposure?: number;
-    /**
-     * 是否新资产 1新
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    IsNewAsset?: number;
-    /**
-     * 资产认证状态，0-待认证，1-认证成功，2-认证中，3+-认证失败
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    VerifyStatus?: number;
 }
 /**
  * ModifyRiskCenterRiskStatus请求参数结构体
@@ -2236,6 +2226,15 @@ export interface PublicIpDomainListKey {
      * 资产值
      */
     Asset: string;
+}
+/**
+ * DescribeTopAttackInfo请求参数结构体
+ */
+export interface DescribeTopAttackInfoRequest {
+    /**
+     * 被调用的集团账号的成员id
+     */
+    OperatedMemberId?: Array<string>;
 }
 /**
  * DescribeCVMAssets返回参数结构体
@@ -2307,64 +2306,102 @@ export interface DescribeCVMAssetsResponse {
     RequestId?: string;
 }
 /**
- * db资产详情
+ * 漏洞风险高级配置列表
  */
-export interface DbAssetInfo {
+export interface VULRiskAdvanceCFGList {
     /**
-     * 云防状态
+     * 风险ID
+     */
+    RiskId?: string;
+    /**
+     * 漏洞名称
+     */
+    VULName?: string;
+    /**
+     * 风险等级
+     */
+    RiskLevel?: string;
+    /**
+     * 识别来源
+     */
+    CheckFrom?: string;
+    /**
+     * 是否启用，1-启用，0-禁用
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CFWStatus?: number;
+    Enable?: number;
     /**
-     * 资产id
+     * 风险类型
+     */
+    VULType?: string;
+    /**
+     * 影响版本
+     */
+    ImpactVersion?: string;
+    /**
+     * CVE
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    AssetId?: string;
+    CVE?: string;
     /**
-     * vpc信息
+     * 漏洞标签
+     */
+    VULTag?: Array<string>;
+    /**
+     * 修复方式
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    VpcName?: string;
+    FixMethod?: Array<string>;
     /**
-     * 资产类型
+     * 披露时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    AssetType?: string;
+    ReleaseTime?: string;
     /**
-     * 公网ip
+     * 应急漏洞类型，1-应急漏洞，0-非应急漏洞
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    PublicIp?: string;
+    EMGCVulType?: number;
     /**
-     * 私网ip
+     * 漏洞描述
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    PrivateIp?: string;
+    VULDescribe?: string;
     /**
-     * 地域
+     * 影响组件
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Region?: string;
+    ImpactComponent?: string;
     /**
-     * vpc信息
+     * 漏洞Payload
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    VpcId?: string;
+    Payload?: string;
     /**
-     * 资产名
+     * 技术参考
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    AssetName?: string;
+    References?: string;
     /**
-     * 云防保护版本
+     * cvss评分
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CFWProtectLevel?: number;
+    CVSS?: string;
     /**
-     * tag信息
+     * 攻击热度
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Tag?: Array<Tag>;
+    AttackHeat?: string;
+    /**
+     * 安全产品支持情况
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ServiceSupport?: Array<ServiceSupport>;
+    /**
+     * 最新检测时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RecentScanTime?: string;
 }
 /**
  * DescribePublicIpAssets请求参数结构体

@@ -124,10 +124,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UnbindAutoScalerResourceStrategyFromGroups", req, cb);
     }
     /**
-     * 弹性伸缩策略批量绑定网关分组
+     * 删除公网网络配置
      */
-    async BindAutoScalerResourceStrategyToGroups(req, cb) {
-        return this.request("BindAutoScalerResourceStrategyToGroups", req, cb);
+    async DeleteCloudNativeAPIGatewayPublicNetwork(req, cb) {
+        return this.request("DeleteCloudNativeAPIGatewayPublicNetwork", req, cb);
     }
     /**
      * 删除 WAF 防护域名
@@ -136,10 +136,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteWafDomains", req, cb);
     }
     /**
-     * 删除公网网络配置
+     * 弹性伸缩策略批量绑定网关分组
      */
-    async DeleteCloudNativeAPIGatewayPublicNetwork(req, cb) {
-        return this.request("DeleteCloudNativeAPIGatewayPublicNetwork", req, cb);
+    async BindAutoScalerResourceStrategyToGroups(req, cb) {
+        return this.request("BindAutoScalerResourceStrategyToGroups", req, cb);
     }
     /**
      * 删除云原生网关服务
@@ -262,6 +262,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CloseWafProtection", req, cb);
     }
     /**
+     * 修改治理中心服务实例
+     */
+    async ModifyGovernanceInstances(req, cb) {
+        return this.request("ModifyGovernanceInstances", req, cb);
+    }
+    /**
      * 创建云原生API网关实例
      */
     async CreateCloudNativeAPIGateway(req, cb) {
@@ -278,6 +284,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeCloudNativeAPIGatewayRouteRateLimit(req, cb) {
         return this.request("DescribeCloudNativeAPIGatewayRouteRateLimit", req, cb);
+    }
+    /**
+     * 删除治理中心服务实例
+     */
+    async DeleteGovernanceInstances(req, cb) {
+        return this.request("DeleteGovernanceInstances", req, cb);
     }
     /**
      * 获取 WAF 防护状态
@@ -394,6 +406,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UpdateCloudNativeAPIGatewayCertificateInfo", req, cb);
     }
     /**
+     * 创建治理中心服务实例
+     */
+    async CreateGovernanceInstances(req, cb) {
+        return this.request("CreateGovernanceInstances", req, cb);
+    }
+    /**
      * 创建云原生网关引擎分组
      */
     async CreateNativeGatewayServerGroup(req, cb) {
@@ -458,6 +476,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async UpdateCloudNativeAPIGatewaySpec(req, cb) {
         return this.request("UpdateCloudNativeAPIGatewaySpec", req, cb);
+    }
+    /**
+     * 查询治理中心服务实例
+     */
+    async DescribeGovernanceInstances(req, cb) {
+        return this.request("DescribeGovernanceInstances", req, cb);
     }
     /**
      * 查询云原生网关的限流插件(服务)

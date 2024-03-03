@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { RetryRunsResponse, RunApplicationResponse, GetRunStatusRequest, DescribeRunsResponse, ImportTableFileResponse, RunApplicationRequest, GetRunMetadataFileResponse, DeleteEnvironmentResponse, GetRunCallsRequest, RunWorkflowRequest, DescribeRunsRequest, DescribeTablesRowsRequest, DescribeEnvironmentsResponse, DescribeTablesResponse, RetryRunsRequest, ImportTableFileRequest, TerminateRunGroupResponse, DeleteEnvironmentRequest, GetRunCallsResponse, DescribeRunGroupsResponse, TerminateRunGroupRequest, DescribeTablesRowsResponse, CreateEnvironmentResponse, GetRunMetadataFileRequest, RunWorkflowResponse, DescribeRunGroupsRequest, GetRunStatusResponse, DescribeTablesRequest, DescribeEnvironmentsRequest, CreateEnvironmentRequest } from "./omics_models";
+import { DeleteVolumeDataRequest, RetryRunsResponse, RunApplicationResponse, GetRunStatusRequest, DescribeRunsResponse, ImportTableFileResponse, RunApplicationRequest, GetRunMetadataFileResponse, CreateVolumeResponse, DeleteEnvironmentResponse, GetRunCallsRequest, RunWorkflowRequest, DescribeRunsRequest, CreateVolumeRequest, DescribeTablesRowsRequest, DescribeEnvironmentsResponse, ModifyVolumeResponse, DescribeTablesResponse, RetryRunsRequest, ImportTableFileRequest, DeleteVolumeResponse, TerminateRunGroupResponse, DescribeVolumesResponse, DeleteVolumeRequest, DeleteEnvironmentRequest, GetRunCallsResponse, DescribeRunGroupsResponse, TerminateRunGroupRequest, DescribeTablesRowsResponse, CreateEnvironmentResponse, GetRunMetadataFileRequest, RunWorkflowResponse, ModifyVolumeRequest, DescribeRunGroupsRequest, GetRunStatusResponse, DescribeTablesRequest, DeleteVolumeDataResponse, DescribeEnvironmentsRequest, DescribeVolumesRequest, CreateEnvironmentRequest } from "./omics_models";
 /**
  * omics client
  * @class
@@ -8,9 +8,21 @@ import { RetryRunsResponse, RunApplicationResponse, GetRunStatusRequest, Describ
 export declare class Client extends AbstractClient {
     constructor(clientConfig: ClientConfig);
     /**
+     * 导入表格文件。
+     */
+    ImportTableFile(req: ImportTableFileRequest, cb?: (error: string, rep: ImportTableFileResponse) => void): Promise<ImportTableFileResponse>;
+    /**
+     * 查询任务批次列表。
+     */
+    DescribeRunGroups(req: DescribeRunGroupsRequest, cb?: (error: string, rep: DescribeRunGroupsResponse) => void): Promise<DescribeRunGroupsResponse>;
+    /**
      * 查询表格行数据。
      */
     DescribeTablesRows(req: DescribeTablesRowsRequest, cb?: (error: string, rep: DescribeTablesRowsResponse) => void): Promise<DescribeTablesRowsResponse>;
+    /**
+     * 删除缓存卷数据。
+     */
+    DeleteVolumeData(req: DeleteVolumeDataRequest, cb?: (error: string, rep: DeleteVolumeDataResponse) => void): Promise<DeleteVolumeDataResponse>;
     /**
      * 查询环境列表。
      */
@@ -20,9 +32,13 @@ export declare class Client extends AbstractClient {
      */
     GetRunMetadataFile(req: GetRunMetadataFileRequest, cb?: (error: string, rep: GetRunMetadataFileResponse) => void): Promise<GetRunMetadataFileResponse>;
     /**
-     * 导入表格文件。
+     * 创建缓存卷。
      */
-    ImportTableFile(req: ImportTableFileRequest, cb?: (error: string, rep: ImportTableFileResponse) => void): Promise<ImportTableFileResponse>;
+    CreateVolume(req: CreateVolumeRequest, cb?: (error: string, rep: CreateVolumeResponse) => void): Promise<CreateVolumeResponse>;
+    /**
+     * 查询缓存卷列表。
+     */
+    DescribeVolumes(req: DescribeVolumesRequest, cb?: (error: string, rep: DescribeVolumesResponse) => void): Promise<DescribeVolumesResponse>;
     /**
      * 查询任务详情。
      */
@@ -52,9 +68,13 @@ export declare class Client extends AbstractClient {
      */
     DescribeRuns(req: DescribeRunsRequest, cb?: (error: string, rep: DescribeRunsResponse) => void): Promise<DescribeRunsResponse>;
     /**
-     * 查询任务批次列表。
+     * 删除缓存卷。
      */
-    DescribeRunGroups(req: DescribeRunGroupsRequest, cb?: (error: string, rep: DescribeRunGroupsResponse) => void): Promise<DescribeRunGroupsResponse>;
+    DeleteVolume(req: DeleteVolumeRequest, cb?: (error: string, rep: DeleteVolumeResponse) => void): Promise<DeleteVolumeResponse>;
+    /**
+     * 修改缓存卷。
+     */
+    ModifyVolume(req: ModifyVolumeRequest, cb?: (error: string, rep: ModifyVolumeResponse) => void): Promise<ModifyVolumeResponse>;
     /**
      * 删除环境。
      */

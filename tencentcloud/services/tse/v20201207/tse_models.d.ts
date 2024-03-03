@@ -382,6 +382,21 @@ export interface DeleteNativeGatewayServerGroupResponse {
     RequestId?: string;
 }
 /**
+ * 元数据信息
+ */
+export interface Metadata {
+    /**
+     * 元数据键名。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Key: string;
+    /**
+     * 元数据键值。不填则默认为空字符串。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Value?: string;
+}
+/**
  * ModifyCloudNativeAPIGatewayCertificate返回参数结构体
  */
 export interface ModifyCloudNativeAPIGatewayCertificateResponse {
@@ -389,6 +404,31 @@ export interface ModifyCloudNativeAPIGatewayCertificateResponse {
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * ModifyConsoleNetwork请求参数结构体
+ */
+export interface ModifyConsoleNetworkRequest {
+    /**
+     * 云原生API网关实例ID。
+     */
+    GatewayId: string;
+    /**
+     * 网络类型：
+  - Open 公网
+  - Internal 内网（暂不支持）
+     */
+    NetworkType: string;
+    /**
+     * 开启Konga网络，不填时默认为Open
+  - Open，开启
+  - Close，关闭
+     */
+    Operate?: string;
+    /**
+     * 访问控制策略
+     */
+    AccessControl?: NetworkAccessControl;
 }
 /**
  * CreateCloudNativeAPIGatewayRouteRateLimit返回参数结构体
@@ -475,35 +515,25 @@ export interface CloudNativeAPIGatewayNodeConfig {
     Number: number;
 }
 /**
- * CreateCloudNativeAPIGatewayCertificate请求参数结构体
+ * DescribeAutoScalerResourceStrategyBindingGroups请求参数结构体
  */
-export interface CreateCloudNativeAPIGatewayCertificateRequest {
+export interface DescribeAutoScalerResourceStrategyBindingGroupsRequest {
     /**
-     * 网关ID
+     * 网关实例ID
      */
     GatewayId: string;
     /**
-     * 绑定的域名
+     * 策略ID
      */
-    BindDomains: Array<string>;
+    StrategyId: string;
     /**
-     * ssl平台证书 Id
+     * 查询偏移量
      */
-    CertId: string;
+    Offset?: number;
     /**
-     * 证书名称
+     * 查询数量限制
      */
-    Name?: string;
-    /**
-     * 证书私钥
-     * @deprecated
-     */
-    Key?: string;
-    /**
-     * 证书pem格式
-     * @deprecated
-     */
-    Crt?: string;
+    Limit?: number;
 }
 /**
  * CreateNativeGatewayServerGroup请求参数结构体
@@ -976,29 +1006,21 @@ export interface CloudNativeAPIGatewayBalancedService {
     Percent?: number;
 }
 /**
- * ModifyConsoleNetwork请求参数结构体
+ * DescribeZookeeperServerInterfaces请求参数结构体
  */
-export interface ModifyConsoleNetworkRequest {
+export interface DescribeZookeeperServerInterfacesRequest {
     /**
-     * 云原生API网关实例ID。
+     * 实例id
      */
-    GatewayId: string;
+    InstanceId?: string;
     /**
-     * 网络类型：
-  - Open 公网
-  - Internal 内网（暂不支持）
+     * 返回的列表个数
      */
-    NetworkType: string;
+    Limit?: number;
     /**
-     * 开启Konga网络，不填时默认为Open
-  - Open，开启
-  - Close，关闭
+     * 返回的列表起始偏移量
      */
-    Operate?: string;
-    /**
-     * 访问控制策略
-     */
-    AccessControl?: NetworkAccessControl;
+    Offset?: number;
 }
 /**
  * 云原生网关限流插件外部redis配置
@@ -1418,6 +1440,19 @@ export interface KongUpstreamPreview {
     Target?: Array<KongTarget>;
 }
 /**
+ * CreateGovernanceInstances返回参数结构体
+ */
+export interface CreateGovernanceInstancesResponse {
+    /**
+     * 创建是否成功。
+     */
+    Result: boolean;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * DescribeCloudNativeAPIGatewayNodes请求参数结构体
  */
 export interface DescribeCloudNativeAPIGatewayNodesRequest {
@@ -1559,21 +1594,17 @@ export interface DescribeZookeeperReplicasRequest {
     Offset?: number;
 }
 /**
- * DescribeZookeeperServerInterfaces请求参数结构体
+ * DeleteGovernanceInstances返回参数结构体
  */
-export interface DescribeZookeeperServerInterfacesRequest {
+export interface DeleteGovernanceInstancesResponse {
     /**
-     * 实例id
+     * 操作是否成功。
      */
-    InstanceId?: string;
+    Result: boolean;
     /**
-     * 返回的列表个数
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
-    Limit?: number;
-    /**
-     * 返回的列表起始偏移量
-     */
-    Offset?: number;
+    RequestId?: string;
 }
 /**
  * UpdateUpstreamTargets请求参数结构体
@@ -1948,6 +1979,15 @@ export interface DeleteCloudNativeAPIGatewayServiceRateLimitRequest {
     Name: string;
 }
 /**
+ * OpenWafProtection返回参数结构体
+ */
+export interface OpenWafProtectionResponse {
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * Kong网关被动健康检查配置
  */
 export interface KongPassiveHealthCheck {
@@ -2020,6 +2060,23 @@ export interface ModifyUpstreamNodeStatusRequest {
      * HEALTHY或UNHEALTHY
      */
     Status: string;
+}
+/**
+ * DescribeGovernanceInstances返回参数结构体
+ */
+export interface DescribeGovernanceInstancesResponse {
+    /**
+     * 服务实例总数量。
+     */
+    TotalCount: number;
+    /**
+     * 服务里实例列表。
+     */
+    Content: Array<GovernanceInstance>;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * DescribeCloudNativeAPIGatewayConfig返回参数结构体
@@ -2219,6 +2276,19 @@ export interface CreateCloudNativeAPIGatewayRouteResponse {
     RequestId?: string;
 }
 /**
+ * DescribeCloudNativeAPIGatewayCanaryRules返回参数结构体
+ */
+export interface DescribeCloudNativeAPIGatewayCanaryRulesResponse {
+    /**
+     * 灰度规则列表
+     */
+    Result?: CloudAPIGatewayCanaryRuleList;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * DescribeCloudNativeAPIGatewayConfig请求参数结构体
  */
 export interface DescribeCloudNativeAPIGatewayConfigRequest {
@@ -2303,24 +2373,17 @@ export interface DescribeCloudNativeAPIGatewaysRequest {
     Filters?: Array<Filter>;
 }
 /**
- * 扩容策略
+ * CreateGovernanceInstances请求参数结构体
  */
-export interface AutoScalerPolicy {
+export interface CreateGovernanceInstancesRequest {
     /**
-     * 类型，Pods
-  注意：此字段可能返回 null，表示取不到有效值。
+     * tse实例id。
      */
-    Type?: string;
+    InstanceId: string;
     /**
-     * 数量
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 服务实例信息。
      */
-    Value?: number;
-    /**
-     * 扩容周期
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    PeriodSeconds?: number;
+    GovernanceInstances: Array<GovernanceInstanceInput>;
 }
 /**
  * DescribeNacosServerInterfaces返回参数结构体
@@ -2444,6 +2507,19 @@ export interface DeleteCloudNativeAPIGatewayServiceRequest {
      * 服务名字，服务ID
      */
     Name: string;
+}
+/**
+ * 网关分组列表
+ */
+export interface NativeGatewayServerGroups {
+    /**
+     * 总数
+     */
+    TotalCount: number;
+    /**
+     * 分组信息数组。
+     */
+    GatewayGroupList: Array<NativeGatewayServerGroup>;
 }
 /**
  * ModifyAutoScalerResourceStrategy返回参数结构体
@@ -2686,6 +2762,96 @@ export interface DescribeInstanceRegionInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     EKSClusterID?: string;
+}
+/**
+ * DeleteGovernanceInstances请求参数结构体
+ */
+export interface DeleteGovernanceInstancesRequest {
+    /**
+     * tse实例id。
+     */
+    InstanceId: string;
+    /**
+     * 要删除的服务实例信息。
+     */
+    GovernanceInstances: Array<GovernanceInstanceUpdate>;
+}
+/**
+ * 治理中心实例信息。
+ */
+export interface GovernanceInstance {
+    /**
+     * 实例id。
+     */
+    Id: string;
+    /**
+     * 实例所在服务名。
+     */
+    Service: string;
+    /**
+     * 实例所在命名空间名。
+     */
+    Namespace: string;
+    /**
+     * 实例ip地址。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Host: string;
+    /**
+     * 实例端口信息。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Port: number;
+    /**
+     * 通信协议。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Protocol: string;
+    /**
+     * 版本信息。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Version: string;
+    /**
+     * 负载均衡权重。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Weight: number;
+    /**
+     * 是否开启健康检查。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    EnableHealthCheck: boolean;
+    /**
+     * 实例是否健康。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Healthy: boolean;
+    /**
+     * 实例是否隔离。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Isolate: boolean;
+    /**
+     * 实例创建时间。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CreateTime: string;
+    /**
+     * 实例修改时间。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ModifyTime: string;
+    /**
+     * 元数据数组。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Metadatas: Array<Metadata>;
+    /**
+     * 上报心跳间隔。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Ttl: number;
 }
 /**
  * 网关实例策略
@@ -2960,17 +3126,24 @@ export interface DeleteAutoScalerResourceStrategyResponse {
     RequestId?: string;
 }
 /**
- * DescribeCloudNativeAPIGatewayCanaryRules返回参数结构体
+ * 扩容策略
  */
-export interface DescribeCloudNativeAPIGatewayCanaryRulesResponse {
+export interface AutoScalerPolicy {
     /**
-     * 灰度规则列表
+     * 类型，Pods
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Result?: CloudAPIGatewayCanaryRuleList;
+    Type?: string;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     * 数量
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    RequestId?: string;
+    Value?: number;
+    /**
+     * 扩容周期
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PeriodSeconds?: number;
 }
 /**
  * UpdateUpstreamTargets返回参数结构体
@@ -3366,6 +3539,63 @@ export interface DescribeNativeGatewayServerGroupsRequest {
     Filters?: Array<Filter>;
 }
 /**
+ * 实例信息
+ */
+export interface GovernanceInstanceUpdate {
+    /**
+     * 实例所在服务名。
+     */
+    Service: string;
+    /**
+     * 实例服务所在命名空间。
+     */
+    Namespace: string;
+    /**
+     * 治理中心服务实例id。
+     */
+    Id: string;
+    /**
+     * 实例负载均衡权重信息。不填默认为100。
+     */
+    Weight?: number;
+    /**
+     * 实例默认健康信息。不填默认为健康。
+     */
+    Healthy?: boolean;
+    /**
+     * 实例隔离信息。不填默认为非隔离。
+     */
+    Isolate?: boolean;
+    /**
+     * 实例ip。
+     */
+    Host?: string;
+    /**
+     * 实例监听端口。
+     */
+    Port?: number;
+    /**
+     * 实例使用协议。不填默认为空。
+     */
+    Protocol?: string;
+    /**
+     * 实例版本。不填默认为空。
+     */
+    InstanceVersion?: string;
+    /**
+     * 是否启用健康检查。不填默认不启用。
+     */
+    EnableHealthCheck?: boolean;
+    /**
+     * 上报心跳时间间隔。若 EnableHealthCheck 为不启用，则此参数不生效；若 EnableHealthCheck 启用，此参数不填，则默认 ttl 为 5s。
+     */
+    Ttl?: number;
+    /**
+     * 元数据信息。
+     */
+    Metadatas?: Array<Metadata>;
+}
+/**
  * 证书信息
  */
 export interface CertificateInfo {
@@ -3492,13 +3722,53 @@ export interface KongUpstreamList {
     UpstreamList?: Array<KongUpstreamPreview>;
 }
 /**
- * OpenWafProtection返回参数结构体
+ * 实例信息
  */
-export interface OpenWafProtectionResponse {
+export interface GovernanceInstanceInput {
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     * 实例所在服务名。
      */
-    RequestId?: string;
+    Service: string;
+    /**
+     * 实例服务所在命名空间。
+     */
+    Namespace: string;
+    /**
+     * 实例负载均衡权重信息。不填默认为100。
+     */
+    Weight?: number;
+    /**
+     * 实例默认健康信息。不填默认为健康。
+     */
+    Healthy?: boolean;
+    /**
+     * 实例隔离信息。不填默认为非隔离。
+     */
+    Isolate?: boolean;
+    /**
+     * 实例ip。
+     */
+    Host?: string;
+    /**
+     * 实例监听端口。
+     */
+    Port?: number;
+    /**
+     * 实例使用协议。不填默认为空。
+     */
+    Protocol?: string;
+    /**
+     * 实例版本。不填默认为空。
+     */
+    InstanceVersion?: string;
+    /**
+     * 是否启用健康检查。不填默认不启用。
+     */
+    EnableHealthCheck?: boolean;
+    /**
+     * 上报心跳时间间隔。若 EnableHealthCheck 为不启用，则此参数不生效；若 EnableHealthCheck 启用，此参数不填，则默认 ttl 为 5s。
+     */
+    Ttl?: number;
 }
 /**
  * 引擎的初始管理账号，当前仅支持Apollo引擎
@@ -3619,25 +3889,35 @@ export interface KongServices {
     TotalCount?: number;
 }
 /**
- * DescribeAutoScalerResourceStrategyBindingGroups请求参数结构体
+ * CreateCloudNativeAPIGatewayCertificate请求参数结构体
  */
-export interface DescribeAutoScalerResourceStrategyBindingGroupsRequest {
+export interface CreateCloudNativeAPIGatewayCertificateRequest {
     /**
-     * 网关实例ID
+     * 网关ID
      */
     GatewayId: string;
     /**
-     * 策略ID
+     * 绑定的域名
      */
-    StrategyId: string;
+    BindDomains: Array<string>;
     /**
-     * 查询偏移量
+     * ssl平台证书 Id
      */
-    Offset?: number;
+    CertId: string;
     /**
-     * 查询数量限制
+     * 证书名称
      */
-    Limit?: number;
+    Name?: string;
+    /**
+     * 证书私钥
+     * @deprecated
+     */
+    Key?: string;
+    /**
+     * 证书pem格式
+     * @deprecated
+     */
+    Crt?: string;
 }
 /**
  * DescribeWafDomains请求参数结构体
@@ -3715,6 +3995,55 @@ export interface CreateCloudNativeAPIGatewayPublicNetworkRequest {
     InternetConfig?: InternetConfig;
 }
 /**
+ * DescribeGovernanceInstances请求参数结构体
+ */
+export interface DescribeGovernanceInstancesRequest {
+    /**
+     * 实例所在的服务名。
+     */
+    Service: string;
+    /**
+     * 实例所在命名空间名。
+     */
+    Namespace: string;
+    /**
+     * tse实例id。
+     */
+    InstanceId: string;
+    /**
+     * 根据实例ip过滤，多个ip使用英文逗号分隔。
+     */
+    Host?: string;
+    /**
+     * 根据实例版本过滤。
+     */
+    InstanceVersion?: string;
+    /**
+     * 根据实例协议过滤。
+     */
+    Protocol?: string;
+    /**
+     * 根据实例健康状态过滤。false：表示不健康，true：表示健康。
+     */
+    HealthStatus?: boolean;
+    /**
+     * 根据实例隔离状态过滤。false：表示非隔离，true：表示隔离中。
+     */
+    Isolate?: boolean;
+    /**
+     * 根据元数据信息过滤。目前只支持一组元数据键值，若传了多个键值对，只会以第一个过滤。
+     */
+    Metadatas?: Array<Metadata>;
+    /**
+     * 偏移量，默认为0。
+     */
+    Offset?: number;
+    /**
+     * 返回数量，默认为20，最大值为100。
+     */
+    Limit?: number;
+}
+/**
  * DescribeCloudNativeAPIGatewayRouteRateLimit返回参数结构体
  */
 export interface DescribeCloudNativeAPIGatewayRouteRateLimitResponse {
@@ -3771,6 +4100,23 @@ export interface DescribeNativeGatewayServerGroupsResponse {
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * UpdateEngineInternetAccess请求参数结构体
+ */
+export interface UpdateEngineInternetAccessRequest {
+    /**
+     * 引擎ID
+     */
+    InstanceId: string;
+    /**
+     * 引擎类型
+     */
+    EngineType: string;
+    /**
+     * 是否开启客户端公网访问，true开 false关
+     */
+    EnableClientInternetAccess?: boolean;
 }
 /**
  * 实例监听端口信息
@@ -4734,17 +5080,17 @@ export interface PolarisCLSTopicInfo {
     TopicName?: string;
 }
 /**
- * 网关分组列表
+ * ModifyGovernanceInstances请求参数结构体
  */
-export interface NativeGatewayServerGroups {
+export interface ModifyGovernanceInstancesRequest {
     /**
-     * 总数
+     * tse实例id。
      */
-    TotalCount: number;
+    InstanceId: string;
     /**
-     * 分组信息数组。
+     * 服务实例信息。
      */
-    GatewayGroupList: Array<NativeGatewayServerGroup>;
+    GovernanceInstances: Array<GovernanceInstanceUpdate>;
 }
 /**
  * CreateEngine请求参数结构体
@@ -5088,21 +5434,17 @@ export interface DeleteCloudNativeAPIGatewayCanaryRuleResponse {
     RequestId?: string;
 }
 /**
- * UpdateEngineInternetAccess请求参数结构体
+ * ModifyGovernanceInstances返回参数结构体
  */
-export interface UpdateEngineInternetAccessRequest {
+export interface ModifyGovernanceInstancesResponse {
     /**
-     * 引擎ID
+     * 修改是否成功。
      */
-    InstanceId: string;
+    Result: boolean;
     /**
-     * 引擎类型
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
-    EngineType: string;
-    /**
-     * 是否开启客户端公网访问，true开 false关
-     */
-    EnableClientInternetAccess?: boolean;
+    RequestId?: string;
 }
 /**
  * DescribeCloudNativeAPIGatewayPorts请求参数结构体
