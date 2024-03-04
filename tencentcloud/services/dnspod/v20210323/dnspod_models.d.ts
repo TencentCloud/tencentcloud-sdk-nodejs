@@ -39,7 +39,7 @@ export interface CreateRecordRequest {
      */
     TTL?: number;
     /**
-     * 权重信息，0到100的整数。仅企业 VIP 域名可用，0 表示关闭，不传该参数，表示不设置权重信息。
+     * 权重信息，0到100的整数。0 表示关闭，不传该参数，表示不设置权重信息。
      */
     Weight?: number;
     /**
@@ -1181,7 +1181,7 @@ export interface ModifyRecordRequest {
      */
     TTL?: number;
     /**
-     * 权重信息，0到100的整数。仅企业 VIP 域名可用，0 表示关闭，不传该参数，表示不设置权重信息。
+     * 权重信息，0到100的整数。0 表示关闭，不传该参数，表示不设置权重信息。
      */
     Weight?: number;
     /**

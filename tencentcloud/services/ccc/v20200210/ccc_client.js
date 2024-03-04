@@ -252,6 +252,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyExtension", req, cb);
     }
     /**
+     * 更新技能组
+     */
+    async UpdateCCCSkillGroup(req, cb) {
+        return this.request("UpdateCCCSkillGroup", req, cb);
+    }
+    /**
      * 创建用户数据签名
      */
     async CreateUserSig(req, cb) {

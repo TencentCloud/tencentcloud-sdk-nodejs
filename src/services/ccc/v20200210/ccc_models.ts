@@ -1274,6 +1274,16 @@ else:自定义角色ID
 }
 
 /**
+ * UpdateCCCSkillGroup返回参数结构体
+ */
+export interface UpdateCCCSkillGroupResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribePredictiveDialingSessions返回参数结构体
  */
 export interface DescribePredictiveDialingSessionsResponse {
@@ -1614,6 +1624,32 @@ export interface ResetExtensionPasswordResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * UpdateCCCSkillGroup请求参数结构体
+ */
+export interface UpdateCCCSkillGroupRequest {
+  /**
+   * 应用 ID（必填）
+   */
+  SdkAppId: number
+  /**
+   * 技能组ID
+   */
+  SkillGroupID: number
+  /**
+   * 修改后的技能组名字
+   */
+  SkillGroupName?: string
+  /**
+   * 修改后的最大并发数,同振最大为2
+   */
+  MaxConcurrency?: number
+  /**
+   * true同振，false顺振
+   */
+  RingAll?: boolean
 }
 
 /**

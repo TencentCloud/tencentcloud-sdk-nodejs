@@ -94,7 +94,7 @@ video 纯视频
    */
   AudienceType?: number
   /**
-   * 录制模板。录制模板枚举值参考：https://cloud.tencent.com/document/product/1639/89744
+   * 录制模板。房间子类型为视频+白板（SubType=videodoc）时默认为3，房间子类型为纯视频（SubType=video）时默认为0。录制模板枚举值参考：https://cloud.tencent.com/document/product/1639/89744
    */
   RecordLayout?: number
   /**
@@ -191,6 +191,10 @@ export interface DescribeAppDetailResponse {
    * 场景配置
    */
   SceneConfig?: Array<SceneItem>
+  /**
+   * 转存配置
+   */
+  TransferConfig?: TransferItem
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1635,7 +1639,42 @@ export interface DescribeScoreListRequest {
 /**
  * 应用配置信息
  */
-export type AppConfig = null
+export interface AppConfig {
+  /**
+   * 应用ID
+   */
+  ApplicationId?: string
+  /**
+   * 应用名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AppName?: string
+  /**
+   * 应用状态 1正常 2停用
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  State?: number
+  /**
+   * 1试用 2轻量版 3标准版 4旗舰版
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AppVersion?: number
+  /**
+   * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreatedAt?: string
+  /**
+   * 回调
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Callback?: string
+  /**
+   * 回调Key
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CallbackKey?: string
+}
 
 /**
  * DeleteRecord返回参数结构体
@@ -2009,6 +2048,17 @@ export interface BatchAddGroupMemberRequest {
    * 待添加成员列表，最大值200
    */
   MemberIds: Array<string>
+}
+
+/**
+ * 转存配置
+ */
+export interface TransferItem {
+  /**
+   * 转存状态， 1正常 2停用
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  State?: number
 }
 
 /**
@@ -2484,6 +2534,14 @@ export interface ModifyAppRequest {
    * 回调key。
    */
   CallbackKey?: string
+  /**
+   * 转存id
+   */
+  TransferId?: string
+  /**
+   * 转存地址
+   */
+  TransferUrl?: string
 }
 
 /**
@@ -3272,7 +3330,32 @@ export interface CreateSupervisorResponse {
 /**
  * 场景配置
  */
-export type SceneItem = null
+export interface SceneItem {
+  /**
+   * 场景名称
+   */
+  Scene?: string
+  /**
+   * logo地址
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LogoUrl?: string
+  /**
+   * 主页地址
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HomeUrl?: string
+  /**
+   * 自定义的js
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  JSUrl?: string
+  /**
+   * 自定义的css
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CSSUrl?: string
+}
 
 /**
  * DeleteRoom请求参数结构体

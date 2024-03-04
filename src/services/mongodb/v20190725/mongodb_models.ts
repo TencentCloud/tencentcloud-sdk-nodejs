@@ -390,19 +390,23 @@ export interface DescribeDBInstanceDealResponse {
   /**
    * 订单状态，1：未支付，2：已支付，3：发货中，4：发货成功，5：发货失败，6：退款，7：订单关闭，8：超时未支付关闭。
    */
-  Status: number
+  Status?: number
   /**
    * 订单原价。
    */
-  OriginalPrice: number
+  OriginalPrice?: number
   /**
    * 订单折扣价格。
    */
-  DiscountPrice: number
+  DiscountPrice?: number
   /**
    * 订单行为，purchase：新购，renew：续费，upgrade：升配，downgrade：降配，refund：退货退款。
    */
-  Action: string
+  Action?: string
+  /**
+   * 当前订单的资源Id。
+   */
+  InstanceId?: string
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

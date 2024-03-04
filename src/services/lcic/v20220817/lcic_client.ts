@@ -104,6 +104,7 @@ import {
   GetRoomMessageResponse,
   BatchUserInfo,
   BatchAddGroupMemberRequest,
+  TransferItem,
   DescribeRoomResponse,
   DescribeCurrentMemberListRequest,
   SendRoomNotificationMessageRequest,

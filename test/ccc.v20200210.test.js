@@ -388,6 +388,16 @@ it("ccc.v20200210.ModifyExtension", async function () {
     }
 })
 
+it("ccc.v20200210.UpdateCCCSkillGroup", async function () {
+    try {
+       const data = await client.UpdateCCCSkillGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ccc.v20200210.CreateUserSig", async function () {
     try {
        const data = await client.CreateUserSig({})

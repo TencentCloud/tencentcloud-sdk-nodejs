@@ -69,6 +69,7 @@ import {
   CreateCarrierPrivilegeNumberApplicantResponse,
   DescribePredictiveDialingCampaignRequest,
   SeatUserInfo,
+  UpdateCCCSkillGroupResponse,
   DescribePredictiveDialingSessionsResponse,
   CarrierPrivilegeNumberApplicant,
   ErrStaffItem,
@@ -79,6 +80,7 @@ import {
   AutoCalloutTaskInfo,
   SkillGroupInfoItem,
   ResetExtensionPasswordResponse,
+  UpdateCCCSkillGroupRequest,
   ModifyStaffResponse,
   ModifyExtensionRequest,
   CreatePredictiveDialingCampaignResponse,
@@ -533,6 +535,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyExtensionResponse) => void
   ): Promise<ModifyExtensionResponse> {
     return this.request("ModifyExtension", req, cb)
+  }
+
+  /**
+   * 更新技能组
+   */
+  async UpdateCCCSkillGroup(
+    req: UpdateCCCSkillGroupRequest,
+    cb?: (error: string, rep: UpdateCCCSkillGroupResponse) => void
+  ): Promise<UpdateCCCSkillGroupResponse> {
+    return this.request("UpdateCCCSkillGroup", req, cb)
   }
 
   /**
