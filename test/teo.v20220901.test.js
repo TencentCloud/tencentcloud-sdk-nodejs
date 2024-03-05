@@ -68,6 +68,16 @@ it("teo.v20220901.DescribeIdentifications", async function () {
     }
 })
 
+it("teo.v20220901.DescribeRealtimeLogDeliveryTasks", async function () {
+    try {
+       const data = await client.DescribeRealtimeLogDeliveryTasks({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("teo.v20220901.VerifyOwnership", async function () {
     try {
        const data = await client.VerifyOwnership({})
@@ -301,6 +311,16 @@ it("teo.v20220901.DescribeIPRegion", async function () {
 it("teo.v20220901.DeleteAccelerationDomains", async function () {
     try {
        const data = await client.DeleteAccelerationDomains({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("teo.v20220901.CreateRealtimeLogDeliveryTask", async function () {
+    try {
+       const data = await client.CreateRealtimeLogDeliveryTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -608,6 +628,16 @@ it("teo.v20220901.ModifySecurityIPGroup", async function () {
     }
 })
 
+it("teo.v20220901.DeleteRealtimeLogDeliveryTask", async function () {
+    try {
+       const data = await client.DeleteRealtimeLogDeliveryTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("teo.v20220901.DescribeDDoSAttackTopData", async function () {
     try {
        const data = await client.DescribeDDoSAttackTopData({})
@@ -671,6 +701,16 @@ it("teo.v20220901.DescribeL4Proxy", async function () {
 it("teo.v20220901.DescribeRules", async function () {
     try {
        const data = await client.DescribeRules({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("teo.v20220901.CreateCLSIndex", async function () {
+    try {
+       const data = await client.CreateCLSIndex({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -791,6 +831,16 @@ it("teo.v20220901.DeleteL4Proxy", async function () {
 it("teo.v20220901.BindSharedCNAME", async function () {
     try {
        const data = await client.BindSharedCNAME({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("teo.v20220901.ModifyRealtimeLogDeliveryTask", async function () {
+    try {
+       const data = await client.ModifyRealtimeLogDeliveryTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

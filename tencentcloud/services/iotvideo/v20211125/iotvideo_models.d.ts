@@ -2224,6 +2224,23 @@ export interface GenSingleDeviceSignatureOfPublicRequest {
     Expire: number;
 }
 /**
+ * DescribeP2PInfo返回参数结构体
+ */
+export interface DescribeP2PInfoResponse {
+    /**
+     * xp2pinfo信息
+     */
+    P2PInfo?: string;
+    /**
+     * 上报时间
+     */
+    ReportTime?: number;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * ResetCloudStorage返回参数结构体
  */
 export interface ResetCloudStorageResponse {
@@ -2688,6 +2705,19 @@ export interface CloudStorageUserInfo {
      * 用户ID
      */
     UserId: string;
+}
+/**
+ * DescribeP2PInfo请求参数结构体
+ */
+export interface DescribeP2PInfoRequest {
+    /**
+     * 产品ID
+     */
+    ProductId: string;
+    /**
+     * 设备名称
+     */
+    DeviceName: string;
 }
 /**
  * DescribePackageConsumeTasks请求参数结构体

@@ -1168,72 +1168,81 @@ export interface ModifyDirectConnectAttributeResponse {
  */
 export interface ModifyDirectConnectTunnelExtraRequest {
   /**
-   * 专用通道ID
+   * 专用通道ID。
    */
   DirectConnectTunnelId: string
   /**
-   * 专用通道的Vlan
+   * 专用通道的Vlan。
    */
   Vlan?: number
   /**
-   * 用户侧BGP，Asn，AuthKey
+   * Bgp参数，包括Asn，AuthKey
    */
   BgpPeer?: BgpPeer
   /**
-   * 用户侧过滤网段地址
+   * 用户侧过滤网段地址。
    */
   RouteFilterPrefixes?: RouteFilterPrefix
   /**
-   * 腾讯侧互联IP
+   * 腾讯侧互联IP。
    */
   TencentAddress?: string
   /**
-   * 腾讯侧备用互联IP
+   * 腾讯侧备用互联IP。
    */
   TencentBackupAddress?: string
   /**
-   * 用户侧互联IP
+   * 用户侧互联IP。
    */
   CustomerAddress?: string
   /**
-   * 专用通道带宽值
+   * 专用通道带宽值。
    */
   Bandwidth?: number
   /**
-   * BGP community开关
+   * BGP community开关。
    */
   EnableBGPCommunity?: boolean
   /**
-   * 是否开启BFD
+   * 是否开启BFD。
    */
   BfdEnable?: number
   /**
-   * 是否开启NQA
+   * 是否开启NQA。
    */
   NqaEnable?: number
   /**
-   * BFD配置信息
+   * BFD配置信息。
    */
   BfdInfo?: BFDInfo
   /**
-   * NQA配置信息
+   * NQA配置信息。
    */
   NqaInfo?: NQAInfo
   /**
-   * 0：停用IPv6
-1: 启用IPv6
+   * IPV6使能。0：停用IPv6；1: 启用IPv6。
    */
   IPv6Enable?: number
   /**
-   * 去往用户侧的路由信息
+   * 去往用户侧的路由信息。
    */
   CustomerIDCRoutes?: Array<RouteFilterPrefix>
   /**
-   * 是否开启巨帧
-1：开启
-0：不开启
+   * 是否开启巨帧。1：开启；0：不开启。
    */
   JumboEnable?: number
+  /**
+   * 腾讯侧互联IPv6。
+   */
+  TencentIPv6Address?: string
+  /**
+   * 腾讯侧备用互联IPv6。
+   */
+  TencentBackupIPv6Address?: string
+  /**
+   * 用户侧互联IPv6。
+   */
+  CustomerIPv6Address?: string
 }
 
 /**

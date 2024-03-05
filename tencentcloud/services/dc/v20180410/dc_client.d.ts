@@ -8,7 +8,7 @@ import { DescribeInternetAddressQuotaRequest, RejectDirectConnectTunnelRequest, 
 export declare class Client extends AbstractClient {
     constructor(clientConfig: ClientConfig);
     /**
-     * 本接口（ModifyDirectConnectTunnelExtra）用于修改专用通道扩展信息
+     * 修改专用通道扩展信息。
      */
     ModifyDirectConnectTunnelExtra(req: ModifyDirectConnectTunnelExtraRequest, cb?: (error: string, rep: ModifyDirectConnectTunnelExtraResponse) => void): Promise<ModifyDirectConnectTunnelExtraResponse>;
     /**

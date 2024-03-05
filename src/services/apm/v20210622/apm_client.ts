@@ -95,7 +95,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取Apm Agent信息
+   * 获取APM Agent信息
    */
   async DescribeApmAgent(
     req: DescribeApmAgentRequest,

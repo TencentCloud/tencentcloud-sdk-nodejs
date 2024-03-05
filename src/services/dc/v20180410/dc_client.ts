@@ -87,7 +87,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（ModifyDirectConnectTunnelExtra）用于修改专用通道扩展信息
+   * 修改专用通道扩展信息。
    */
   async ModifyDirectConnectTunnelExtra(
     req: ModifyDirectConnectTunnelExtraRequest,

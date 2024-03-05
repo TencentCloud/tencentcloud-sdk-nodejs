@@ -788,6 +788,16 @@ it("tdmq.v20200217.CreateRabbitMQVipInstance", async function () {
     }
 })
 
+it("tdmq.v20200217.DescribeMqMsgTrace", async function () {
+    try {
+       const data = await client.DescribeMqMsgTrace({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tdmq.v20200217.DescribeRocketMQGroups", async function () {
     try {
        const data = await client.DescribeRocketMQGroups({})
@@ -931,6 +941,16 @@ it("tdmq.v20200217.ModifyRabbitMQUser", async function () {
 it("tdmq.v20200217.CreateRocketMQNamespace", async function () {
     try {
        const data = await client.CreateRocketMQNamespace({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tdmq.v20200217.DescribeMsg", async function () {
+    try {
+       const data = await client.DescribeMsg({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1201,16 +1221,6 @@ it("tdmq.v20200217.DeleteRocketMQVipInstance", async function () {
 it("tdmq.v20200217.SendRocketMQMessage", async function () {
     try {
        const data = await client.SendRocketMQMessage({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("tdmq.v20200217.DeleteProClusters", async function () {
-    try {
-       const data = await client.DeleteProClusters({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

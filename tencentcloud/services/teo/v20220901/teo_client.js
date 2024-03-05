@@ -60,6 +60,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeIdentifications", req, cb);
     }
     /**
+     * 通过本接口查询实时日志投递任务列表。
+     */
+    async DescribeRealtimeLogDeliveryTasks(req, cb) {
+        return this.request("DescribeRealtimeLogDeliveryTasks", req, cb);
+    }
+    /**
      * 在 CNAME 接入模式下，您需要对站点或者域名的归属权进行验证，可以通过本接口触发验证。若站点通过归属权验证后，后续添加域名无需再验证。详情参考 [站点/域名归属权验证](https://cloud.tencent.com/document/product/1552/70789)。
 
 在 NS 接入模式下，您也可以通过本接口来查询 NS 服务器是否切换成功，详情参考 [修改 DNS 服务器](https://cloud.tencent.com/document/product/1552/90452)。
@@ -208,6 +214,13 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
      */
     async DeleteAccelerationDomains(req, cb) {
         return this.request("DeleteAccelerationDomains", req, cb);
+    }
+    /**
+     * 通过本接口创建实时日志投递任务。本接口有如下限制：
+同一个实体（七层域名或者四层代理实例）在同种数据投递类型（LogType）和数据投递区域（Area）的组合下，只能被添加到一个实时日志投递任务中。建议先通过 [DescribeRealtimeLogDeliveryTasks](https://tcloud4api.woa.com/document/product/1657/343539?!preview&!document=1)  接口根据实体查询实时日志投递任务列表，检查实体是否已经被添加到另一实时日志投递任务中。
+     */
+    async CreateRealtimeLogDeliveryTask(req, cb) {
+        return this.request("CreateRealtimeLogDeliveryTask", req, cb);
     }
     /**
      * 用于修改四层代理实例的配置。
@@ -393,6 +406,12 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
         return this.request("ModifySecurityIPGroup", req, cb);
     }
     /**
+     * 通过本接口删除实时日志投递任务。
+     */
+    async DeleteRealtimeLogDeliveryTask(req, cb) {
+        return this.request("DeleteRealtimeLogDeliveryTask", req, cb);
+    }
+    /**
      * 本接口（DescribeDDoSAttackTopData）用于查询DDoS攻击Top数据。
      */
     async DescribeDDoSAttackTopData(req, cb) {
@@ -433,6 +452,12 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
      */
     async DescribeRules(req, cb) {
         return this.request("DescribeRules", req, cb);
+    }
+    /**
+     * 针对指定实时日志投递任务（task-id），在对应的腾讯云 CLS 日志主题中创建投递日志字段对应的键值索引。如果您在腾讯云 CLS 已经创建索引，本接口将采用合并的方式追加索引。
+     */
+    async CreateCLSIndex(req, cb) {
+        return this.request("CreateCLSIndex", req, cb);
     }
     /**
      * 本接口为旧版，如需调用请尽快迁移至新版 [创建四层代理实例](https://cloud.tencent.com/document/product/1552/103417) 。
@@ -508,6 +533,12 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
      */
     async BindSharedCNAME(req, cb) {
         return this.request("BindSharedCNAME", req, cb);
+    }
+    /**
+     * 通过本接口修改实时日志投递任务配置。本接口有如下限制：<li>不支持修改实时日志投递任务目的地类型（TaskType）；</li><li>不支持修改数据投递类型（LogType）</li><li>不支持修改数据投递区域（Area）</li><li>当原实时日志投递任务的目的地为腾讯云 CLS 时，不支持修改目的地详细配置，如日志集、日志主题。</li>
+     */
+    async ModifyRealtimeLogDeliveryTask(req, cb) {
+        return this.request("ModifyRealtimeLogDeliveryTask", req, cb);
     }
     /**
      * 查询源站防护信息

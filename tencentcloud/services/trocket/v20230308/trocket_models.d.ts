@@ -1855,7 +1855,6 @@ export interface DescribeInstanceResponse {
   BASIC 基础版
   PRO  专业版
   PLATINUM 铂金版
-  注意：此字段可能返回 null，表示取不到有效值。
      */
     InstanceType?: string;
     /**
@@ -1948,6 +1947,37 @@ export interface DescribeInstanceResponse {
      * 计费模式
      */
     PayMode?: string;
+    /**
+     * 是否开启弹性TPS
+     */
+    ScaledTpsEnabled?: boolean;
+    /**
+     * 是否自动续费
+     */
+    RenewFlag?: number;
+    /**
+     * 到期时间
+     */
+    ExpiryTime?: number;
+    /**
+     * 角色数量限制
+     */
+    RoleNumLimit?: number;
+    /**
+     * 是否开启 ACL
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AclEnabled?: boolean;
+    /**
+     * topic个数免费额度
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TopicNumLowerLimit?: number;
+    /**
+     * 最大可设置的topic个数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TopicNumUpperLimit?: number;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2275,9 +2305,10 @@ export interface DeleteConsumerGroupResponse {
  */
 export interface Endpoint {
     /**
-     * 接入点类型，
-  VPC，
-  PUBLIC 公网
+     * 接入点类型，枚举值如下
+  VPC: VPC;
+  PUBLIC: 公网;
+  INTERNAL: 支撑网;
      */
     Type?: string;
     /**

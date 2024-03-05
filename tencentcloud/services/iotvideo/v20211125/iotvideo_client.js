@@ -88,6 +88,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeFirmwareTaskStatistics", req, cb);
     }
     /**
+     * 更新设备日志级别
+     */
+    async ModifyDeviceLogLevel(req, cb) {
+        return this.request("ModifyDeviceLogLevel", req, cb);
+    }
+    /**
      * 同步调用设备行为
      */
     async CallDeviceActionSync(req, cb) {
@@ -214,10 +220,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeCloudStorageUsers", req, cb);
     }
     /**
-     * 查看AI模型资源包
+     * 转移云存服务
      */
-    async DescribeAIModelUsage(req, cb) {
-        return this.request("DescribeAIModelUsage", req, cb);
+    async TransferCloudStorage(req, cb) {
+        return this.request("TransferCloudStorage", req, cb);
     }
     /**
      * 本接口用于重试设备升级任务
@@ -370,10 +376,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyProduct", req, cb);
     }
     /**
-     * 更新设备日志级别
+     * 查看AI模型资源包
      */
-    async ModifyDeviceLogLevel(req, cb) {
-        return this.request("ModifyDeviceLogLevel", req, cb);
+    async DescribeAIModelUsage(req, cb) {
+        return this.request("DescribeAIModelUsage", req, cb);
     }
     /**
      * 修改转发规则
@@ -496,16 +502,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeMessageDataStats", req, cb);
     }
     /**
-     * 转移云存服务
-     */
-    async TransferCloudStorage(req, cb) {
-        return this.request("TransferCloudStorage", req, cb);
-    }
-    /**
      * 删除云存事件
      */
     async DeleteCloudStorageEvent(req, cb) {
         return this.request("DeleteCloudStorageEvent", req, cb);
+    }
+    /**
+     * 拉取设备p2p信息
+     */
+    async DescribeP2PInfo(req, cb) {
+        return this.request("DescribeP2PInfo", req, cb);
     }
     /**
      * 查询云存服务详情

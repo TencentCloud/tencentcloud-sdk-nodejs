@@ -129,6 +129,7 @@ import {
   DescribeAIModelsRequest,
   RetryDeviceFirmwareTaskResponse,
   GenSingleDeviceSignatureOfPublicRequest,
+  DescribeP2PInfoResponse,
   ResetCloudStorageResponse,
   InheritCloudStorageUserResponse,
   DescribeDeviceEventHistoryResponse,
@@ -149,6 +150,7 @@ import {
   DescribeFirmwareTaskDevicesResponse,
   DescribeFirmwareTasksResponse,
   CloudStorageUserInfo,
+  DescribeP2PInfoRequest,
   DescribePackageConsumeTasksRequest,
   DescribeAccountRequest,
   EditFirmwareResponse,
@@ -366,6 +368,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 更新设备日志级别
+   */
+  async ModifyDeviceLogLevel(
+    req: ModifyDeviceLogLevelRequest,
+    cb?: (error: string, rep: ModifyDeviceLogLevelResponse) => void
+  ): Promise<ModifyDeviceLogLevelResponse> {
+    return this.request("ModifyDeviceLogLevel", req, cb)
+  }
+
+  /**
    * 同步调用设备行为
    */
   async CallDeviceActionSync(
@@ -576,13 +588,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查看AI模型资源包
+   * 转移云存服务
    */
-  async DescribeAIModelUsage(
-    req: DescribeAIModelUsageRequest,
-    cb?: (error: string, rep: DescribeAIModelUsageResponse) => void
-  ): Promise<DescribeAIModelUsageResponse> {
-    return this.request("DescribeAIModelUsage", req, cb)
+  async TransferCloudStorage(
+    req: TransferCloudStorageRequest,
+    cb?: (error: string, rep: TransferCloudStorageResponse) => void
+  ): Promise<TransferCloudStorageResponse> {
+    return this.request("TransferCloudStorage", req, cb)
   }
 
   /**
@@ -836,13 +848,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 更新设备日志级别
+   * 查看AI模型资源包
    */
-  async ModifyDeviceLogLevel(
-    req: ModifyDeviceLogLevelRequest,
-    cb?: (error: string, rep: ModifyDeviceLogLevelResponse) => void
-  ): Promise<ModifyDeviceLogLevelResponse> {
-    return this.request("ModifyDeviceLogLevel", req, cb)
+  async DescribeAIModelUsage(
+    req: DescribeAIModelUsageRequest,
+    cb?: (error: string, rep: DescribeAIModelUsageResponse) => void
+  ): Promise<DescribeAIModelUsageResponse> {
+    return this.request("DescribeAIModelUsage", req, cb)
   }
 
   /**
@@ -1046,16 +1058,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 转移云存服务
-   */
-  async TransferCloudStorage(
-    req: TransferCloudStorageRequest,
-    cb?: (error: string, rep: TransferCloudStorageResponse) => void
-  ): Promise<TransferCloudStorageResponse> {
-    return this.request("TransferCloudStorage", req, cb)
-  }
-
-  /**
    * 删除云存事件
    */
   async DeleteCloudStorageEvent(
@@ -1063,6 +1065,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteCloudStorageEventResponse) => void
   ): Promise<DeleteCloudStorageEventResponse> {
     return this.request("DeleteCloudStorageEvent", req, cb)
+  }
+
+  /**
+   * 拉取设备p2p信息
+   */
+  async DescribeP2PInfo(
+    req: DescribeP2PInfoRequest,
+    cb?: (error: string, rep: DescribeP2PInfoResponse) => void
+  ): Promise<DescribeP2PInfoResponse> {
+    return this.request("DescribeP2PInfo", req, cb)
   }
 
   /**

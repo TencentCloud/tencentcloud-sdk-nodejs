@@ -28,7 +28,7 @@ class Client extends abstract_client_1.AbstractClient {
         super("dc.tencentcloudapi.com", "2018-04-10", clientConfig);
     }
     /**
-     * 本接口（ModifyDirectConnectTunnelExtra）用于修改专用通道扩展信息
+     * 修改专用通道扩展信息。
      */
     async ModifyDirectConnectTunnelExtra(req, cb) {
         return this.request("ModifyDirectConnectTunnelExtra", req, cb);

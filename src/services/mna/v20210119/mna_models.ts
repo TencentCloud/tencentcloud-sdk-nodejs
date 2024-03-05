@@ -109,7 +109,7 @@ export interface GetFlowStatisticRequest {
    */
   TimeGranularity: number
   /**
-   * 接入区域。取值范围：['MC','AP','EU','AM'] MC=中国大陆 AP=亚太 EU=欧洲 AM=美洲。不填默认中国大陆
+   * 接入区域。取值范围：['MC','AP','EU','AM'] MC=中国大陆 AP=亚太 EU=欧洲 AM=美洲。不填代表全量区域。
    */
   AccessRegion?: string
   /**
@@ -755,7 +755,7 @@ export interface GetStatisticDataRequest {
    */
   TimeGranularity: number
   /**
-   * 接入区域。取值范围：['MC','AP','EU','AM'] MC=中国大陆 AP=亚太 EU=欧洲 AM=美洲。不填默认中国大陆
+   * 接入区域。取值范围：['MC','AP','EU','AM'] MC=中国大陆 AP=亚太 EU=欧洲 AM=美洲。不填代表全量区域。
    */
   AccessRegion?: string
   /**
@@ -899,7 +899,7 @@ export interface GetMultiFlowStatisticRequest {
    */
   TimeGranularity: number
   /**
-   * 接入区域。取值范围：['MC','AP','EU','AM'] MC=中国大陆 AP=亚太 EU=欧洲 AM=美洲。不填默认中国大陆
+   * 接入区域。取值范围：['MC','AP','EU','AM'] MC=中国大陆 AP=亚太 EU=欧洲 AM=美洲。不填代表全量区域。
    */
   AccessRegion?: string
   /**

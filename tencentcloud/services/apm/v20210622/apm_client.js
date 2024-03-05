@@ -46,7 +46,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeApmInstances", req, cb);
     }
     /**
-     * 获取Apm Agent信息
+     * 获取APM Agent信息
      */
     async DescribeApmAgent(req, cb) {
         return this.request("DescribeApmAgent", req, cb);

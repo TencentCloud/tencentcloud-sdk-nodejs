@@ -112,12 +112,12 @@ export interface ExtraInfo {
      * 是否开通VIP直通
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ZhiTong: boolean;
+    ZhiTong?: boolean;
     /**
      * TgwGroup名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TgwGroupName: string;
+    TgwGroupName?: string;
 }
 /**
  * BatchModifyTargetWeight返回参数结构体
@@ -194,7 +194,7 @@ export interface CreateLoadBalancerRequest {
      */
     ZoneId?: string;
     /**
-     * 仅对内网属性的性能容量型实例和公网属性的所有实例生效。
+     * 网络计费模式，最大出带宽。仅对内网属性的性能容量型实例和公网属性的所有实例生效。
      */
     InternetAccessible?: InternetAccessible;
     /**
@@ -333,7 +333,7 @@ export interface CloneLoadBalancerRequest {
      */
     LoadBalancerName?: string;
     /**
-     * 负载均衡实例所属的项目 ID，可以通过 [DescribeProject](https://cloud.tencent.com/document/product/378/4400) 接口获取。不传此参数则视为默认项目。
+     * 负载均衡实例所属的项目 ID，可以通过 [DescribeLoadBalancers](https://cloud.tencent.com/document/product/214/30685) 接口获取。不传此参数则视为默认项目。
      */
     ProjectId?: number;
     /**
@@ -347,7 +347,7 @@ export interface CloneLoadBalancerRequest {
      */
     SlaveZoneId?: string;
     /**
-     * 仅适用于公网负载均衡。可用区ID，指定可用区以创建负载均衡实例。如：ap-guangzhou-1。
+     * 仅适用于公网负载均衡。可用区ID，指定可用区以创建负载均衡实例。如：ap-guangzhou-1。不传则查询所有可用区的 CVM 实例。如需指定可用区，可调用查询可用区列表[DescribeZones](https://cloud.tencent.com/document/product/213/15707)接口查询。
      */
     ZoneId?: string;
     /**
@@ -388,7 +388,8 @@ export interface CloneLoadBalancerRequest {
      */
     ClusterIds?: Array<string>;
     /**
-     * 性能容量型规格。
+     * 性能容量型规格。<li>clb.c2.medium（标准型）</li><li>clb.c3.small（高阶型1）</li><li>clb.c3.medium（高阶型2）</li>
+  <li>clb.c4.small（超强型1）</li><li>clb.c4.medium（超强型2）</li><li>clb.c4.large（超强型3）</li><li>clb.c4.xlarge（超强型4）</li>
      */
     SlaType?: string;
     /**
@@ -396,7 +397,7 @@ export interface CloneLoadBalancerRequest {
      */
     ClusterTag?: string;
     /**
-     * 仅适用于私有网络内网负载均衡。内网就近接入时，选择可用区下发。
+     * 仅适用于私有网络内网负载均衡。内网就近接入时，选择可用区下发。可调用[DescribeZones](https://cloud.tencent.com/document/product/213/15707)接口查询可用区列表。
      */
     Zones?: Array<string>;
     /**
@@ -509,11 +510,11 @@ export interface ModifyRuleRequest {
      */
     Scheduler?: string;
     /**
-     * 会话保持时间。
+     * 会话保持时间。取值范围0或30-86400（单位：秒）。
      */
     SessionExpireTime?: number;
     /**
-     * 负载均衡实例与后端服务之间的转发协议，默认HTTP，可取值：HTTP、HTTPS、TRPC。
+     * 负载均衡实例与后端服务之间的转发协议，默认HTTP，可取值：HTTP、HTTPS、GRPC。仅HTTPS监听器该参数有效。
      */
     ForwardType?: string;
     /**
@@ -713,7 +714,7 @@ export interface DescribeLoadBalancersRequest {
      */
     SecurityGroup?: string;
     /**
-     * 主可用区ID，如 ："100001" （对应的是广州一区）。
+     * 主可用区ID，如 ："100001" （对应的是广州一区）。可通过[DescribeZones](https://cloud.tencent.com/document/product/213/15707)获取可用区列表。
      */
     MasterZone?: string;
     /**
@@ -723,7 +724,6 @@ export interface DescribeLoadBalancersRequest {
   <li> master-zone-id - String - 是否必填：否 - （过滤条件）按照 CLB 的主可用区ID过滤，如 ："100001" （对应的是广州一区）。</li>
   <li> tag-key - String - 是否必填：否 - （过滤条件）按照 CLB 标签的键过滤。</li>
   <li> tag:tag-key - String - 是否必填：否 - （过滤条件）按照CLB标签键值对进行过滤，tag-key使用具体的标签键进行替换。</li>
-  <li> function-name - String - 是否必填：否 - （过滤条件）按照 CLB 后端绑定的SCF云函数的函数名称过滤。</li>
   <li> function-name - String - 是否必填：否 - （过滤条件）按照 CLB 后端绑定的SCF云函数的函数名称过滤。</li>
   <li> vip-isp - String - 是否必填：否 - （过滤条件）按照 CLB VIP的运营商类型过滤，如："BGP","INTERNAL","CMCC","CTCC","CUCC"等。</li>
   <li> sla-type - String - 是否必填：否 - （过滤条件）按照 CLB 的性能容量型规格过滤，包括"clb.c2.medium","clb.c3.small","clb.c3.medium","clb.c4.small","clb.c4.medium","clb.c4.large","clb.c4.xlarge"。</li>
@@ -818,10 +818,12 @@ export interface RsWeightRule {
     LocationId?: string;
     /**
      * 目标规则的域名，提供LocationId参数时本参数不生效。
+     * @deprecated
      */
     Domain?: string;
     /**
      * 目标规则的URL，提供LocationId参数时本参数不生效。
+     * @deprecated
      */
     Url?: string;
     /**
@@ -891,11 +893,11 @@ export interface BasicTargetGroupInfo {
     /**
      * 目标组ID
      */
-    TargetGroupId: string;
+    TargetGroupId?: string;
     /**
      * 目标组名称
      */
-    TargetGroupName: string;
+    TargetGroupName?: string;
 }
 /**
  * ModifyTargetWeight返回参数结构体
@@ -1018,37 +1020,37 @@ export interface CrossTargets {
     /**
      * 本地私有网络ID，即负载均衡的VpcId。
      */
-    LocalVpcId: string;
+    LocalVpcId?: string;
     /**
      * 子机或网卡所属的私有网络ID。
      */
-    VpcId: string;
+    VpcId?: string;
     /**
      * 子机或网卡的IP地址
      */
-    IP: string;
+    IP?: string;
     /**
      * 子机或网卡所属的私有网络名称。
      */
-    VpcName: string;
+    VpcName?: string;
     /**
      * 子机的网卡ID。
      */
-    EniId: string;
+    EniId?: string;
     /**
      * 子机实例ID。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    InstanceId: string;
+    InstanceId?: string;
     /**
      * 子机实例名称。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    InstanceName: string;
+    InstanceName?: string;
     /**
      * 子机或者网卡所属的地域。
      */
-    Region: string;
+    Region?: string;
 }
 /**
  * 一条转发规则的健康检查状态
@@ -1081,11 +1083,11 @@ export interface DescribeExclusiveClustersResponse {
     /**
      * 集群列表。
      */
-    ClusterSet: Array<Cluster>;
+    ClusterSet?: Array<Cluster>;
     /**
      * 集群总数量。
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1210,6 +1212,7 @@ export interface DescribeTargetsRequest {
      * 查询负载均衡绑定的后端服务列表，过滤条件如下：
   <li> location-id - String - 是否必填：否 - （过滤条件）按照 规则ID 过滤，如："loc-12345678"。</li>
   <li> private-ip-address - String - 是否必填：否 - （过滤条件）按照 后端服务内网IP 过滤，如："172.16.1.1"。</li>
+  <li> tag - String - 是否必填：否 - （过滤条件）按照 标签 过滤，如："tag-test"。</li>
      */
     Filters?: Array<Filter>;
 }
@@ -1221,32 +1224,32 @@ export interface ZoneInfo {
      * 可用区数值形式的唯一ID，如：100001
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ZoneId: number;
+    ZoneId?: number;
     /**
      * 可用区字符串形式的唯一ID，如：ap-guangzhou-1
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Zone: string;
+    Zone?: string;
     /**
      * 可用区名称，如：广州一区
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ZoneName: string;
+    ZoneName?: string;
     /**
      * 可用区所属地域，如：ap-guangzhou
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ZoneRegion: string;
+    ZoneRegion?: string;
     /**
      * 可用区是否是LocalZone可用区，如：false
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    LocalZone: boolean;
+    LocalZone?: boolean;
     /**
      * 可用区是否是EdgeZone可用区，如：false
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    EdgeZone: boolean;
+    EdgeZone?: boolean;
 }
 /**
  * RegisterTargetsWithClassicalLB返回参数结构体
@@ -1579,7 +1582,11 @@ export interface BatchRegisterTargetsResponse {
      * 绑定失败的监听器ID，如为空表示全部绑定成功。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    FailListenerIdSet: Array<string>;
+    FailListenerIdSet?: Array<string>;
+    /**
+     * 绑定失败错误原因信息。
+     */
+    Message?: string;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1832,7 +1839,7 @@ export interface Listener {
      */
     HealthCheck?: HealthCheck;
     /**
-     * 请求的调度方式
+     * 请求的调度方式。 WRR、LEAST_CONN、IP_HASH分别表示按权重轮询、最小连接数、IP Hash。
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Scheduler?: string;
@@ -1921,6 +1928,11 @@ export interface Listener {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     IdleConnectTimeout?: number;
+    /**
+     * 调度时间。触发强制重新调度后，长连接将会在设置的调度时间内断开并完成重新分配
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RescheduleInterval?: number;
 }
 /**
  * 负载均衡流量数据。
@@ -2076,10 +2088,11 @@ export interface ModifyListenerRequest {
     /**
      * 监听器转发的方式。可选值：WRR、LEAST_CONN
   分别表示按权重轮询、最小连接数， 默认为 WRR。
+  使用场景：适用于TCP/UDP/TCP_SSL/QUIC监听器。七层监听器的均衡方式应在转发规则中修改。
      */
     Scheduler?: string;
     /**
-     * 是否开启SNI特性，此参数仅适用于HTTPS监听器。注意：未开启SNI的监听器可以开启SNI；已开启SNI的监听器不能关闭SNI。
+     * 是否开启SNI特性，此参数仅适用于HTTPS监听器。默认0，表示不开启，1表示开启。注意：未开启SNI的监听器可以开启SNI；已开启SNI的监听器不能关闭SNI。
      */
     SniSwitch?: number;
     /**
@@ -2088,6 +2101,7 @@ export interface ModifyListenerRequest {
     TargetType?: string;
     /**
      * 是否开启长连接，此参数仅适用于HTTP/HTTPS监听器。
+  默认值0表示不开启，1表示开启。
      */
     KeepaliveEnable?: number;
     /**
@@ -2096,6 +2110,7 @@ export interface ModifyListenerRequest {
     DeregisterTargetRst?: boolean;
     /**
      * 会话保持类型。NORMAL表示默认会话保持类型。QUIC_CID表示根据Quic Connection ID做会话保持。QUIC_CID只支持UDP协议。
+  使用场景：适用于TCP/UDP/TCP_SSL/QUIC监听器。
      */
     SessionType?: string;
     /**
@@ -2163,7 +2178,7 @@ export interface HealthCheck {
      */
     HealthSwitch?: number;
     /**
-     * 健康检查的响应超时时间（仅适用于四层监听器），可选值：2~60，默认值：2，单位：秒。响应超时时间要小于检查间隔时间。
+     * 健康检查的响应超时时间，可选值：2~60，默认值：2，单位：秒。响应超时时间要小于检查间隔时间。
   注意：此字段可能返回 null，表示取不到有效值。
      */
     TimeOut?: number;
@@ -2225,7 +2240,7 @@ export interface HealthCheck {
      */
     RecvContext?: string;
     /**
-     * 健康检查使用的协议。取值 TCP | HTTP | HTTPS | GRPC | PING | CUSTOM，UDP监听器支持PING/CUSTOM，TCP监听器支持TCP/HTTP/CUSTOM，TCP_SSL/QUIC监听器支持TCP/HTTP，HTTP规则支持HTTP/GRPC，HTTPS规则支持HTTP/HTTPS/GRPC。
+     * 健康检查使用的协议。取值 TCP | HTTP | HTTPS | GRPC | PING | CUSTOM，UDP监听器支持PING/CUSTOM，TCP监听器支持TCP/HTTP/CUSTOM，TCP_SSL/QUIC监听器支持TCP/HTTP，HTTP规则支持HTTP/GRPC，HTTPS规则支持HTTP/HTTPS/GRPC。HTTP监听器默认值为HTTP;TCP、TCP_SSL、QUIC监听器默认值为TCP;UDP监听器默认为PING;HTTPS监听器的CheckType默认值与后端转发协议一致。
   注意：此字段可能返回 null，表示取不到有效值。
      */
     CheckType?: string;
@@ -2377,7 +2392,7 @@ export interface DescribeLoadBalancersDetailRequest {
      */
     Fields?: Array<string>;
     /**
-     * 当Fields包含TargetId、TargetAddress、TargetPort、TargetWeight等Fields时，必选选择导出目标组的Target或者非目标组Target，值范围NODE、GROUP。
+     * 当Fields包含TargetId、TargetAddress、TargetPort、TargetWeight、ListenerId、Protocol、Port、LocationId、Domain、Url等Fields时，必选选择导出目标组的Target或者非目标组Target，值范围NODE、GROUP。
      */
     TargetType?: string;
     /**
@@ -3094,12 +3109,12 @@ export interface RuleOutput {
      * 转发规则的域名。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Domain: string;
+    Domain?: string;
     /**
      * 转发规则的路径。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Url: string;
+    Url?: string;
     /**
      * 会话保持时间
      */
@@ -3115,81 +3130,82 @@ export interface RuleOutput {
      */
     Certificate?: CertificateOutput;
     /**
-     * 规则的请求转发方式
+     * 规则的请求转发方式。
+  WRR、LEAST_CONN、IP_HASH分别表示按权重轮询、最小连接数、IP Hash。
      */
     Scheduler?: string;
     /**
      * 转发规则所属的监听器 ID
      */
-    ListenerId: string;
+    ListenerId?: string;
     /**
      * 转发规则的重定向目标信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    RewriteTarget: RewriteTarget;
+    RewriteTarget?: RewriteTarget;
     /**
      * 是否开启gzip
      */
-    HttpGzip: boolean;
+    HttpGzip?: boolean;
     /**
      * 转发规则是否为自动创建
      */
-    BeAutoCreated: boolean;
+    BeAutoCreated?: boolean;
     /**
      * 是否作为默认域名
      */
-    DefaultServer: boolean;
+    DefaultServer?: boolean;
     /**
      * 是否开启Http2
      */
-    Http2: boolean;
+    Http2?: boolean;
     /**
      * 负载均衡与后端服务之间的转发协议
      */
-    ForwardType: string;
+    ForwardType?: string;
     /**
      * 转发规则的创建时间
      */
-    CreateTime: string;
+    CreateTime?: string;
     /**
-     * 后端服务器类型
+     * 后端服务器类型。NODE表示绑定普通节点，TARGETGROUP表示绑定目标组。
      */
-    TargetType: string;
+    TargetType?: string;
     /**
      * 绑定的目标组基本信息；当规则绑定目标组时，会返回该字段
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TargetGroup: BasicTargetGroupInfo;
+    TargetGroup?: BasicTargetGroupInfo;
     /**
      * WAF实例ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    WafDomainId: string;
+    WafDomainId?: string;
     /**
      * TRPC被调服务器路由，ForwardType为TRPC时有效。目前暂未对外开放。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TrpcCallee: string;
+    TrpcCallee?: string;
     /**
      * TRPC调用服务接口，ForwardType为TRPC时有效。目前暂未对外开放。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TrpcFunc: string;
+    TrpcFunc?: string;
     /**
-     * QUIC状态
+     * QUIC状态。QUIC_ACTIVE表示开启，QUIC_INACTIVE表示未开启。注意，只有HTTPS域名才能开启QUIC。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    QuicStatus: string;
+    QuicStatus?: string;
     /**
      * 转发规则的域名列表。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Domains: Array<string>;
+    Domains?: Array<string>;
     /**
      * 绑定的目标组列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TargetGroupList: Array<BasicTargetGroupInfo>;
+    TargetGroupList?: Array<BasicTargetGroupInfo>;
 }
 /**
  * RegisterFunctionTargets返回参数结构体
@@ -3259,25 +3275,25 @@ export interface RuleTargets {
     /**
      * 转发规则的 ID
      */
-    LocationId: string;
+    LocationId?: string;
     /**
      * 转发规则的域名
      */
-    Domain: string;
+    Domain?: string;
     /**
      * 转发规则的路径。
      */
-    Url: string;
+    Url?: string;
     /**
      * 后端服务的信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Targets: Array<Backend>;
+    Targets?: Array<Backend>;
     /**
      * 后端云函数的信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    FunctionTargets: Array<FunctionTarget>;
+    FunctionTargets?: Array<FunctionTarget>;
 }
 /**
  * BatchDeregisterTargets请求参数结构体
@@ -3392,7 +3408,8 @@ export interface CreateTargetGroupRequest {
      */
     VpcId?: string;
     /**
-     * 目标组的默认端口， 后续添加服务器时可使用该默认端口
+     * 目标组的默认端口， 后续添加服务器时可使用该默认端口。Port和TargetGroupInstances.N中的port二者必填其一。
+  
      */
     Port?: number;
     /**
@@ -3506,15 +3523,15 @@ export interface CreateListenerRequest {
      */
     Scheduler?: string;
     /**
-     * 是否开启SNI特性，此参数仅适用于HTTPS监听器。
+     * 是否开启SNI特性，此参数仅适用于HTTPS监听器。0表示开启，1表示未开启。
      */
     SniSwitch?: number;
     /**
-     * 后端目标类型，NODE表示绑定普通节点，TARGETGROUP表示绑定目标组。
+     * 后端目标类型，NODE表示绑定普通节点，TARGETGROUP表示绑定目标组。此参数仅适用于TCP/UDP监听器。七层监听器应在转发规则中设置。
      */
     TargetType?: string;
     /**
-     * 会话保持类型。不传或传NORMAL表示默认会话保持类型。QUIC_CID 表示根据Quic Connection ID做会话保持。QUIC_CID只支持UDP协议。
+     * 会话保持类型。不传或传NORMAL表示默认会话保持类型。QUIC_CID 表示根据Quic Connection ID做会话保持。QUIC_CID只支持UDP协议。此参数仅适用于TCP/UDP监听器。七层监听器应在转发规则中设置。（若选择QUIC_CID，则Protocol必须为UDP，Scheduler必须为WRR，同时只支持ipv4）
      */
     SessionType?: string;
     /**
@@ -3556,6 +3573,7 @@ export interface CreateClsLogSetRequest {
     LogsetName?: string;
     /**
      * 日志集的保存周期，单位：天。
+     * @deprecated
      */
     Period?: number;
     /**
@@ -3772,7 +3790,7 @@ export interface Cluster {
      */
     ClusterType?: string;
     /**
-     * 集群标签，只有STGW集群有标签
+     * 集群标签，只有TGW/STGW集群有标签
   注意：此字段可能返回 null，表示取不到有效值。
      */
     ClusterTag?: string;
@@ -3785,42 +3803,42 @@ export interface Cluster {
      */
     Network?: string;
     /**
-     * 最大连接数
+     * 最大连接数（个/秒）
   注意：此字段可能返回 null，表示取不到有效值。
      */
     MaxConn?: number;
     /**
-     * 最大入带宽
+     * 最大入带宽Mbps
   注意：此字段可能返回 null，表示取不到有效值。
      */
     MaxInFlow?: number;
     /**
-     * 最大入包量
+     * 最大入包量（个/秒）
   注意：此字段可能返回 null，表示取不到有效值。
      */
     MaxInPkg?: number;
     /**
-     * 最大出带宽
+     * 最大出带宽Mbps
   注意：此字段可能返回 null，表示取不到有效值。
      */
     MaxOutFlow?: number;
     /**
-     * 最大出包量
+     * 最大出包量（个/秒）
   注意：此字段可能返回 null，表示取不到有效值。
      */
     MaxOutPkg?: number;
     /**
-     * 最大新建连接数
+     * 最大新建连接数（个/秒）
   注意：此字段可能返回 null，表示取不到有效值。
      */
     MaxNewConn?: number;
     /**
-     * http最大新建连接数
+     * http最大新建连接数（个/秒）
   注意：此字段可能返回 null，表示取不到有效值。
      */
     HTTPMaxNewConn?: number;
     /**
-     * https最大新建连接数
+     * https最大新建连接数（个/秒）
   注意：此字段可能返回 null，表示取不到有效值。
      */
     HTTPSMaxNewConn?: number;
@@ -3873,6 +3891,11 @@ export interface Cluster {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Egress?: string;
+    /**
+     * IP版本
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IPVersion?: string;
 }
 /**
  * ModifyTargetWeight请求参数结构体
@@ -3914,12 +3937,12 @@ export interface DescribeLoadBalancersDetailResponse {
     /**
      * 负载均衡详情列表总数。
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 负载均衡详情列表。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    LoadBalancerDetailSet: Array<LoadBalancerDetail>;
+    LoadBalancerDetailSet?: Array<LoadBalancerDetail>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -4005,7 +4028,7 @@ export interface LoadBalancerDetail {
      */
     Zone?: string;
     /**
-     * 负载均衡实例IP地址所属的ISP。
+     * 负载均衡实例IP地址所属的ISP。取值范围：BGP（多线）、CMCC（中国移动）、CUCC（中国联通）、CTCC（中国电信）、INTERNAL（内网）。
   注意：此字段可能返回 null，表示取不到有效值。
      */
     AddressIsp?: string;
@@ -4025,7 +4048,7 @@ export interface LoadBalancerDetail {
      */
     CreateTime?: string;
     /**
-     * 负载均衡实例的计费类型。
+     * 负载均衡实例的计费类型。取值范围：PREPAID预付费、POSTPAID_BY_HOUR按量付费。
   注意：此字段可能返回 null，表示取不到有效值。
      */
     ChargeType?: string;
@@ -4115,7 +4138,7 @@ export interface LoadBalancerDetail {
      */
     SecurityGroup?: Array<string>;
     /**
-     * 负载均衡安全组上移特性是否开启标识。
+     * 负载均衡安全组上移特性是否开启标识。取值范围：1表示开启、0表示未开启。
   注意：此字段可能返回 null，表示取不到有效值。
      */
     LoadBalancerPassToTarget?: number;
@@ -4239,7 +4262,7 @@ export interface BatchTarget {
      */
     Weight?: number;
     /**
-     * 七层规则 ID。
+     * 七层规则 ID。7层负载均衡该参数必填
      */
     LocationId?: string;
     /**
@@ -4706,7 +4729,7 @@ export interface DescribeClassicalLBListenersResponse {
      * 监听器列表。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Listeners: Array<ClassicalListener>;
+    Listeners?: Array<ClassicalListener>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -5108,33 +5131,33 @@ export interface TargetGroupInfo {
     /**
      * 目标组ID
      */
-    TargetGroupId: string;
+    TargetGroupId?: string;
     /**
      * 目标组的vpcid
      */
-    VpcId: string;
+    VpcId?: string;
     /**
      * 目标组的名字
      */
-    TargetGroupName: string;
+    TargetGroupName?: string;
     /**
      * 目标组的默认端口
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Port: number;
+    Port?: number;
     /**
      * 目标组的创建时间
      */
-    CreatedTime: string;
+    CreatedTime?: string;
     /**
      * 目标组的修改时间
      */
-    UpdatedTime: string;
+    UpdatedTime?: string;
     /**
-     * 关联到的规则数组
+     * 关联到的规则数组。在DescribeTargetGroupList接口调用时无法获取到该参数。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    AssociatedRule: Array<AssociationItem>;
+    AssociatedRule?: Array<AssociationItem>;
 }
 /**
  * DeleteListener返回参数结构体
@@ -5174,21 +5197,21 @@ export interface CertificateOutput {
     /**
      * 认证类型，UNIDIRECTIONAL：单向认证，MUTUAL：双向认证
      */
-    SSLMode: string;
+    SSLMode?: string;
     /**
      * 服务端证书的ID。
      */
-    CertId: string;
+    CertId?: string;
     /**
      * 客户端证书的 ID。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CertCaId: string;
+    CertCaId?: string;
     /**
      * 多本服务器证书场景扩展的服务器证书ID。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ExtCertIds: Array<string>;
+    ExtCertIds?: Array<string>;
 }
 /**
  * DeleteTargetGroups请求参数结构体
@@ -5254,7 +5277,7 @@ export interface TargetGroupAssociation {
      */
     TargetGroupId: string;
     /**
-     * 监听器ID
+     * 监听器ID。访问AssociateTargetGroups和DisassociateTargetGroups接口时必传此参数。
      */
     ListenerId?: string;
     /**
@@ -5296,42 +5319,42 @@ export interface AssociationItem {
     /**
      * 关联到的负载均衡ID
      */
-    LoadBalancerId: string;
+    LoadBalancerId?: string;
     /**
      * 关联到的监听器ID
      */
-    ListenerId: string;
+    ListenerId?: string;
     /**
      * 关联到的转发规则ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    LocationId: string;
+    LocationId?: string;
     /**
      * 关联到的监听器协议类型，如HTTP,TCP,
      */
-    Protocol: string;
+    Protocol?: string;
     /**
      * 关联到的监听器端口
      */
-    Port: number;
+    Port?: number;
     /**
      * 关联到的转发规则域名
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Domain: string;
+    Domain?: string;
     /**
      * 关联到的转发规则URL
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Url: string;
+    Url?: string;
     /**
      * 负载均衡名称
      */
-    LoadBalancerName: string;
+    LoadBalancerName?: string;
     /**
      * 监听器名称
      */
-    ListenerName: string;
+    ListenerName?: string;
 }
 /**
  * DescribeCrossTargets请求参数结构体
@@ -5389,7 +5412,7 @@ export interface LoadBalancer {
      */
     Forward?: number;
     /**
-     * 负载均衡实例的域名，仅公网传统型负载均衡实例才提供该字段。逐步下线中，建议用LoadBalancerDomain替代。
+     * 负载均衡实例的域名，仅公网传统型和域名型负载均衡实例才提供该字段。逐步下线中，建议用LoadBalancerDomain替代。
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Domain?: string;
@@ -5441,6 +5464,7 @@ export interface LoadBalancer {
     /**
      * 用户开启日志的信息，日志只有公网属性创建了 HTTP 、HTTPS 监听器的负载均衡才会有日志。
   注意：此字段可能返回 null，表示取不到有效值。
+     * @deprecated
      */
     Log?: string;
     /**
@@ -5479,7 +5503,7 @@ export interface LoadBalancer {
      */
     NumericalVpcId?: number;
     /**
-     * 负载均衡IP地址所属的ISP
+     * 负载均衡IP地址所属的运营商。取值范围（BGP、CMCC、CTCC、CUCC）
   注意：此字段可能返回 null，表示取不到有效值。
      */
     VipIsp?: string;

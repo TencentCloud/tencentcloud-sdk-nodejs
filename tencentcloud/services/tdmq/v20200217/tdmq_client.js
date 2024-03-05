@@ -491,6 +491,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateRabbitMQVipInstance", req, cb);
     }
     /**
+     * 查询消息轨迹
+     */
+    async DescribeMqMsgTrace(req, cb) {
+        return this.request("DescribeMqMsgTrace", req, cb);
+    }
+    /**
      * 获取RocketMQ消费组列表
      */
     async DescribeRocketMQGroups(req, cb) {
@@ -599,6 +605,12 @@ BatchReceivePolicy 的接口会一次性返回多条消息：
      */
     async CreateRocketMQNamespace(req, cb) {
         return this.request("CreateRocketMQNamespace", req, cb);
+    }
+    /**
+     * 消息详情
+     */
+    async DescribeMsg(req, cb) {
+        return this.request("DescribeMsg", req, cb);
     }
     /**
      * 批量发送消息
@@ -763,14 +775,6 @@ BatchReceivePolicy 的接口会一次性返回多条消息：
      */
     async SendRocketMQMessage(req, cb) {
         return this.request("SendRocketMQMessage", req, cb);
-    }
-    /**
-     * 接口支持删除多个集群，目前已废弃
-
-删除专业集群——预付费，仅通过API 调用，支持同时删除多个集群
-     */
-    async DeleteProClusters(req, cb) {
-        return this.request("DeleteProClusters", req, cb);
     }
     /**
      * 清空订阅者消息标签

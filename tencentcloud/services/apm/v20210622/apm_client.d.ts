@@ -20,7 +20,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeApmInstances(req: DescribeApmInstancesRequest, cb?: (error: string, rep: DescribeApmInstancesResponse) => void): Promise<DescribeApmInstancesResponse>;
     /**
-     * 获取Apm Agent信息
+     * 获取APM Agent信息
      */
     DescribeApmAgent(req: DescribeApmAgentRequest, cb?: (error: string, rep: DescribeApmAgentResponse) => void): Promise<DescribeApmAgentResponse>;
     /**

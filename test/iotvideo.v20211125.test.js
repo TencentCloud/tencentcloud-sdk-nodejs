@@ -118,6 +118,16 @@ it("iotvideo.v20211125.DescribeFirmwareTaskStatistics", async function () {
     }
 })
 
+it("iotvideo.v20211125.ModifyDeviceLogLevel", async function () {
+    try {
+       const data = await client.ModifyDeviceLogLevel({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotvideo.v20211125.CallDeviceActionSync", async function () {
     try {
        const data = await client.CallDeviceActionSync({})
@@ -328,9 +338,9 @@ it("iotvideo.v20211125.DescribeCloudStorageUsers", async function () {
     }
 })
 
-it("iotvideo.v20211125.DescribeAIModelUsage", async function () {
+it("iotvideo.v20211125.TransferCloudStorage", async function () {
     try {
-       const data = await client.DescribeAIModelUsage({})
+       const data = await client.TransferCloudStorage({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -588,9 +598,9 @@ it("iotvideo.v20211125.ModifyProduct", async function () {
     }
 })
 
-it("iotvideo.v20211125.ModifyDeviceLogLevel", async function () {
+it("iotvideo.v20211125.DescribeAIModelUsage", async function () {
     try {
-       const data = await client.ModifyDeviceLogLevel({})
+       const data = await client.DescribeAIModelUsage({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -798,9 +808,9 @@ it("iotvideo.v20211125.DescribeMessageDataStats", async function () {
     }
 })
 
-it("iotvideo.v20211125.TransferCloudStorage", async function () {
+it("iotvideo.v20211125.DeleteCloudStorageEvent", async function () {
     try {
-       const data = await client.TransferCloudStorage({})
+       const data = await client.DeleteCloudStorageEvent({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -808,9 +818,9 @@ it("iotvideo.v20211125.TransferCloudStorage", async function () {
     }
 })
 
-it("iotvideo.v20211125.DeleteCloudStorageEvent", async function () {
+it("iotvideo.v20211125.DescribeP2PInfo", async function () {
     try {
-       const data = await client.DeleteCloudStorageEvent({})
+       const data = await client.DescribeP2PInfo({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
