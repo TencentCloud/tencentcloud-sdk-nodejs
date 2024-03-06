@@ -8681,15 +8681,15 @@ export interface ModifySecurityGroupAttributeResponse {
  */
 export interface AssociateDirectConnectGatewayNatGatewayRequest {
     /**
-     * VPC实例ID。可通过DescribeVpcs接口返回值中的VpcId获取。
+     * VPC实例ID。形如：vpc-xxx。
      */
     VpcId: string;
     /**
-     * NAT网关ID。
+     * NAT网关ID。形如：nat-xxx
      */
     NatGatewayId: string;
     /**
-     * 专线网关ID。
+     * 专线网关ID。形如：dcg-xxx
      */
     DirectConnectGatewayId: string;
 }
@@ -9908,15 +9908,15 @@ export interface DisableRoutesRequest {
  */
 export interface DisassociateDirectConnectGatewayNatGatewayRequest {
     /**
-     * 专线网关ID。
+     * VPC实例ID。形如：vpc-xxx。
      */
     VpcId: string;
     /**
-     * NAT网关ID。
+     * NAT网关ID。形如：nat-xxx
      */
     NatGatewayId: string;
     /**
-     * VPC实例ID。可通过DescribeVpcs接口返回值中的VpcId获取。
+     * 专线网关ID。形如：dcg-xxx
      */
     DirectConnectGatewayId: string;
 }
@@ -11068,7 +11068,7 @@ export interface BandwidthPackage {
  */
 export interface ModifyVpcAttributeRequest {
     /**
-     * VPC实例ID。形如：vpc-f49l6u0z。每次请求的实例的上限为100。参数不支持同时指定VpcIds和Filters。
+     * VPC实例ID。形如：vpc-f49l6u0z。
      */
     VpcId: string;
     /**

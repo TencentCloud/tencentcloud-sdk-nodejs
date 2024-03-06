@@ -11234,59 +11234,59 @@ export interface DescribeLogKafkaDeliverInfoResponse {
     /**
      * 实例环境
      */
-    KafkaEnvName: string;
+    KafkaEnvName?: string;
     /**
      * 实例id
      */
-    KafkaId: string;
+    KafkaId?: string;
     /**
      * 地域
      */
-    Zone: string;
+    Zone?: string;
     /**
      * 可用区
      */
-    Az: string;
+    Az?: string;
     /**
      * 所属网络
      */
-    VpcId: string;
+    VpcId?: string;
     /**
      * 所在子网
      */
-    SubnetId: string;
+    SubnetId?: string;
     /**
      * 接入方式，1公网域名接入，2支撑环境接入
      */
-    AccessType: number;
+    AccessType?: number;
     /**
      * 接入地址
      */
-    AccessAddr: string;
+    AccessAddr?: string;
     /**
      * 投递状态，1：健康，2：告警，3：异常
      */
-    DeliverStatus: number;
+    DeliverStatus?: number;
     /**
      * kafka版本
      */
-    InsVersion: string;
+    InsVersion?: string;
     /**
      * 峰值带宽
      */
-    BandWidth: number;
+    BandWidth?: number;
     /**
      * 磁盘容量
      */
-    DiskSize: number;
+    DiskSize?: number;
     /**
      * 用户名
      */
-    Username: string;
+    Username?: string;
     /**
      * xx
      */
-    DeliverTypeDetails: Array<DeliverTypeDetails>;
+    DeliverTypeDetails?: Array<DeliverTypeDetails>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -18966,7 +18966,7 @@ export interface AddLoginWhiteListsResponse {
  */
 export interface ModifyLogKafkaStateRequest {
     /**
-     * 实例名称 如 云镜测试环境
+     * 实例名称 如 主机安全测试环境
      */
     KafkaEnvName: string;
     /**
@@ -19875,7 +19875,7 @@ export interface BashEventsInfoNew {
  */
 export interface ModifyLogKafkaAccessRequest {
     /**
-     * 实例名称 如 云镜测试环境
+     * 实例名称 如 主机安全测试环境
      */
     KafkaEnvName: string;
     /**

@@ -760,6 +760,18 @@ httpProfile.setEndpoint("file.test.ess.tencent.cn");
         return this.request("CreateIntegrationUserRoles", req, cb);
     }
     /**
+     * 该接口用于在使用视频认证方式签署合同后，获取用户的签署人脸认证视频。
+
+1. 该接口**仅适用于在H5端签署**的合同，**在通过视频认证后**获取人脸图片。
+2. 该接口**不支持小程序端**的签署人脸图片获取。
+3. 请在**签署完成后的三天内**获取人脸图片，**过期后将无法获取**。
+
+**注意：该接口需要开通白名单，请联系客户经理开通后使用。**
+     */
+    async DescribeSignFaceVideo(req, cb) {
+        return this.request("DescribeSignFaceVideo", req, cb);
+    }
+    /**
      * 此接口（ModifyIntegrationRole）用来更新企业自定义的SaaS角色或集团角色。
 
 适用场景1：更新当前企业的自定义SaaS角色或集团角色，并且更新时不进行角色中权限的更新（PermissionGroups 参数不传）。

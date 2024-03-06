@@ -38,6 +38,16 @@ it("dasb.v20191018.DescribeDeviceGroupMembers", async function () {
     }
 })
 
+it("dasb.v20191018.ModifyOAuthSetting", async function () {
+    try {
+       const data = await client.ModifyOAuthSetting({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dasb.v20191018.ModifyCmdTemplate", async function () {
     try {
        const data = await client.ModifyCmdTemplate({})

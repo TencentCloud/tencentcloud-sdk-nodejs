@@ -1818,6 +1818,15 @@ export interface ModifyDeviceGroupResponse {
     RequestId?: string;
 }
 /**
+ * ModifyOAuthSetting返回参数结构体
+ */
+export interface ModifyOAuthSettingResponse {
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * DescribeUserGroupMembers返回参数结构体
  */
 export interface DescribeUserGroupMembersResponse {
@@ -2065,6 +2074,43 @@ export interface ModifyDeviceGroupRequest {
      * 资产组所属部门ID，如：1.2.3
      */
     DepartmentId?: string;
+}
+/**
+ * ModifyOAuthSetting请求参数结构体
+ */
+export interface ModifyOAuthSettingRequest {
+    /**
+     * 是否开启OAuth认证，false-不开启，true-开启。
+     */
+    Enable: boolean;
+    /**
+     * OAuth认证方式。
+     */
+    AuthMethod?: string;
+    /**
+     * OAuth认证客户端Id
+     */
+    ClientId?: string;
+    /**
+     * OAuth认证客户端密钥
+     */
+    ClientSecret?: string;
+    /**
+     * 获取OAuth认证授权码URL
+     */
+    CodeUrl?: string;
+    /**
+     * 获取OAuth令牌URL
+     */
+    TokenUrl?: string;
+    /**
+     * 获取OAuth用户信息URL
+     */
+    UserInfoUrl?: string;
+    /**
+     * 使用Okta认证时指定范围。为空时默认使用 openid、profile、email。
+     */
+    Scopes?: Array<string>;
 }
 /**
  * 描述键值对过滤器，用于条件过滤查询

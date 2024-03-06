@@ -528,6 +528,16 @@ it("ess.v20201111.CreateIntegrationUserRoles", async function () {
     }
 })
 
+it("ess.v20201111.DescribeSignFaceVideo", async function () {
+    try {
+       const data = await client.DescribeSignFaceVideo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ess.v20201111.ModifyIntegrationRole", async function () {
     try {
        const data = await client.ModifyIntegrationRole({})

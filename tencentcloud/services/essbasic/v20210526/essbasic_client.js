@@ -452,6 +452,18 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ChannelDisableUserAutoSign", req, cb);
     }
     /**
+     * 该接口用于在使用视频认证方式签署合同后，获取用户的签署人脸认证视频。
+
+1. 该接口**仅适用于在H5端签署**的合同，**在通过视频认证后**获取人脸图片。
+2. 该接口**不支持小程序端**的签署人脸图片获取。
+3. 请在**签署完成后的三天内**获取人脸图片，**过期后将无法获取**。
+
+**注意：该接口需要开通白名单，请联系客户经理开通后使用。**
+     */
+    async ChannelDescribeSignFaceVideo(req, cb) {
+        return this.request("ChannelDescribeSignFaceVideo", req, cb);
+    }
+    /**
      * 此接口（ChannelDescribeOrganizationSeals）查询子客企业电子印章。<br />
 注:
 1. `查询子客企业电子印章，需要操作者具有管理印章权限`

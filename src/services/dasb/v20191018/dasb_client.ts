@@ -94,6 +94,7 @@ import {
   DeleteDeviceAccountsRequest,
   DeleteDeviceGroupMembersResponse,
   ModifyDeviceGroupResponse,
+  ModifyOAuthSettingResponse,
   DescribeUserGroupMembersResponse,
   ImportExternalDeviceResponse,
   SearchSessionCommandResponse,
@@ -104,6 +105,7 @@ import {
   DescribeDasbImageIdsRequest,
   CreateDeviceAccountResponse,
   ModifyDeviceGroupRequest,
+  ModifyOAuthSettingRequest,
   Filter,
   DescribeUsersResponse,
   DeployResourceResponse,
@@ -181,6 +183,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDeviceGroupMembersResponse) => void
   ): Promise<DescribeDeviceGroupMembersResponse> {
     return this.request("DescribeDeviceGroupMembers", req, cb)
+  }
+
+  /**
+   * 设置OAuth认证参数
+   */
+  async ModifyOAuthSetting(
+    req: ModifyOAuthSettingRequest,
+    cb?: (error: string, rep: ModifyOAuthSettingResponse) => void
+  ): Promise<ModifyOAuthSettingResponse> {
+    return this.request("ModifyOAuthSetting", req, cb)
   }
 
   /**

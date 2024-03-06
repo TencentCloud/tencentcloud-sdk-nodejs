@@ -54,7 +54,7 @@ import {
   ConfigInfo,
   ModifyAlarmResponse,
   DescribeShipperTasksRequest,
-  DescribeAlarmsRequest,
+  CollectInfo,
   MergePartitionRequest,
   DescribeShippersResponse,
   TopicIdAndRegion,
@@ -128,10 +128,10 @@ import {
   DescribeConsumerRequest,
   CreateIndexRequest,
   DescribeLogsetsResponse,
-  DeleteConsumerResponse,
+  CreateTopicRequest,
   DescribeTopicsRequest,
   GetAlarmLogResponse,
-  CreateTopicRequest,
+  DeleteConsumerResponse,
   DescribeExportsRequest,
   DescribeMachineGroupsRequest,
   DescribeCosRechargesRequest,
@@ -228,6 +228,7 @@ import {
   MachineGroupTypeInfo,
   DeleteConfigFromMachineGroupRequest,
   SearchCosRechargeInfoResponse,
+  DescribeAlarmsRequest,
   ShipperInfo,
   CreateCosRechargeResponse,
   DescribeAlertRecordHistoryResponse,
@@ -254,7 +255,7 @@ import {
   ModifyAlarmShieldRequest,
   DescribeExportsResponse,
   ApplyConfigToMachineGroupRequest,
-  GetAlarmLogRequest,
+  CollectConfig,
   ContainerFileInfo,
   CsvInfo,
   DescribeConfigExtrasRequest,
@@ -283,6 +284,7 @@ import {
   CreateExportResponse,
   HostFileInfo,
   KeyRegexInfo,
+  GetAlarmLogRequest,
   MergePartitionResponse,
   CreateScheduledSqlRequest,
 } from "./cls_models"
@@ -577,7 +579,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口用于修改投递任务
+   * 本接口用于修改投递Ckafka任务
    */
   async ModifyConsumer(
     req: ModifyConsumerRequest,
@@ -989,7 +991,7 @@ API返回数据包最大49MB，建议启用 gzip 压缩（HTTP Request Header Ac
   }
 
   /**
-   * 本接口用于创建投递任务
+   * 本接口用于创建投递CKafka任务
    */
   async CreateConsumer(
     req: CreateConsumerRequest,
@@ -1323,7 +1325,7 @@ cls.pb.cc cls.pb.h cls.proto
   }
 
   /**
-     * 本接口用于搜索日志上下文附近的内容
+     * 本接口用于搜索日志上下文附近的内容，详情参考[上下文检索](https://cloud.tencent.com/document/product/614/53248)。
 API返回数据包最大49MB，建议启用 gzip 压缩（HTTP Request Header Accept-Encoding:gzip）。
      */
   async DescribeLogContext(

@@ -6599,7 +6599,7 @@ export interface MLIDPassportOCRResponse {
      */
     Warn?: Array<number | bigint>;
     /**
-     * 证件图片
+     * 证件中的人像图片base64
      */
     Image?: string;
     /**

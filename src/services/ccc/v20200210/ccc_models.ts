@@ -1924,36 +1924,40 @@ export interface StaffInfo {
    * 坐席名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Name: string
+  Name?: string
   /**
    * 坐席邮箱
    */
-  Mail: string
+  Mail?: string
   /**
    * 坐席电话号码
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Phone: string
+  Phone?: string
   /**
    * 坐席昵称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Nick: string
+  Nick?: string
   /**
    * 坐席工号
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  StaffNumber: string
+  StaffNumber?: string
+  /**
+   * 用户角色id
+   */
+  RoleId?: number
   /**
    * 所属技能组列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SkillGroupList: Array<SkillGroupItem>
+  SkillGroupList?: Array<SkillGroupItem>
   /**
    * 最后修改时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  LastModifyTimestamp: number
+  LastModifyTimestamp?: number
 }
 
 /**

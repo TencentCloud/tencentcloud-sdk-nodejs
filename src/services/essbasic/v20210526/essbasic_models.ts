@@ -369,6 +369,34 @@ export interface ChannelBatchCancelFlowsResponse {
 }
 
 /**
+ * ChannelDescribeSignFaceVideo请求参数结构体
+ */
+export interface ChannelDescribeSignFaceVideoRequest {
+  /**
+   * 合同流程ID，为32位字符串。
+建议开发者妥善保存此流程ID，以便于顺利进行后续操作。
+可登录腾讯电子签控制台，在 "合同"->"合同中心" 中查看某个合同的FlowId(在页面中展示为合同ID)。
+   */
+  FlowId: string
+  /**
+   * 签署参与人在本流程中的编号ID(每个流程不同)，可用此ID来定位签署参与人在本流程的签署节点，也可用于后续创建签署链接等操作。
+   */
+  SignId: string
+  /**
+   * 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。
+
+此接口下面信息必填。
+<ul>
+<li>渠道应用标识:  Agent.AppId</li>
+<li>第三方平台子客企业标识: Agent.ProxyOrganizationOpenId</li>
+<li>第三方平台子客企业中的员工标识: Agent. ProxyOperator.OpenId</li>
+</ul>
+第三方平台子客企业和员工必须已经经过实名认证
+   */
+  Agent: Agent
+}
+
+/**
  * ChannelDisableUserAutoSign返回参数结构体
  */
 export interface ChannelDisableUserAutoSignResponse {
@@ -628,6 +656,29 @@ export interface DescribeResourceUrlsByFlowsRequest {
    * @deprecated
    */
   Operator?: UserInfo
+}
+
+/**
+ * 意愿核身问答模式结果。若未使用该意愿核身功能，该字段返回值可以不处理。
+ */
+export interface IntentionQuestionResult {
+  /**
+   * 视频base64（其中包含全程问题和回答音频，mp4格式）
+
+注：`需进行base64解码获取视频文件`
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Video?: string
+  /**
+   *  和答案匹配结果列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResultCode?: Array<string>
+  /**
+   * 回答问题语音识别结果列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AsrResult?: Array<string>
 }
 
 /**
@@ -1379,272 +1430,51 @@ export interface ChannelCreateSealPolicyResponse {
 }
 
 /**
- * 电子文档的控件填充信息。按照控件类型进行相应的填充。
-
-当控件的 ComponentType='TEXT'时，FormField.ComponentValue填入文本内容
-```
-FormField输入示例：
-{
-    "ComponentId": "componentId1",
-    "ComponentValue": "文本内容"
-}
-```
-当控件的 ComponentType='MULTI_LINE_TEXT'时，FormField.ComponentValue填入文本内容，支持自动换行。
-```
-FormField输入示例：
-{
-    "ComponentId": "componentId1",
-    "ComponentValue": "多行文本内容"
-}
-```
-当控件的 ComponentType='CHECK_BOX'时，FormField.ComponentValue填入true或false文本
-```
-FormField输入示例：
-{
-    "ComponentId": "componentId1",
-    "ComponentValue": "true"
-}
-```
-当控件的 ComponentType='FILL_IMAGE'时，FormField.ComponentValue填入图片的资源ID
-```
-FormField输入示例：
-{
-    "ComponentId": "componentId1",
-    "ComponentValue": "yDwhsxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-}
-```
-当控件的 ComponentType='ATTACHMENT'时，FormField.ComponentValue填入附件图片的资源ID列表，以逗号分隔，单个附件控件最多支持6个资源ID；
-```
-FormField输入示例：
-{
-    "ComponentId": "componentId1",
-    "ComponentValue": "yDwhsxxxxxxxxxxxxxxxxxxxxxxxxxx1,yDwhsxxxxxxxxxxxxxxxxxxxxxxxxxx2,yDwhsxxxxxxxxxxxxxxxxxxxxxxxxxx3"
-}
-```
-当控件的 ComponentType='SELECTOR'时，FormField.ComponentValue填入选择的选项内容；
-```
-FormField输入示例：
-{
-    "ComponentId": "componentId1",
-    "ComponentValue": "选择的内容"
-}
-```
-当控件的 ComponentType='DATE'时，FormField.ComponentValue填入日期内容；
-```
-FormField输入示例：
-{
-    "ComponentId": "componentId1",
-    "ComponentValue": "2023年01月01日"
-}
-```
-当控件的 ComponentType='DISTRICT'时，FormField.ComponentValue填入省市区内容；
-```
-FormField输入示例：
-{
-    "ComponentId": "componentId1",
-    "ComponentValue": "广东省深圳市福田区"
-}
-```
-【数据表格传参说明】
-当控件的 ComponentType='DYNAMIC_TABLE'时，FormField.ComponentValue需要传递json格式的字符串参数，用于确定表头&填充数据表格（支持内容的单元格合并）
-输入示例1：
-
-```
-{
-    "headers":[
-        {
-            "content":"head1"
-        },
-        {
-            "content":"head2"
-        },
-        {
-            "content":"head3"
-        }
-    ],
-    "rowCount":3,
-    "body":{
-        "cells":[
-            {
-                "rowStart":1,
-                "rowEnd":1,
-                "columnStart":1,
-                "columnEnd":1,
-                "content":"123"
-            },
-            {
-                "rowStart":2,
-                "rowEnd":3,
-                "columnStart":1,
-                "columnEnd":2,
-                "content":"456"
-            },
-            {
-                "rowStart":3,
-                "rowEnd":3,
-                "columnStart":3,
-                "columnEnd":3,
-                "content":"789"
-            }
-        ]
-    }
-}
-
-```
-
-输入示例2（表格表头宽度比例配置）：
-
-```
-{
-    "headers":[
-        {
-            "content":"head1",
-            "widthPercent": 30
-        },
-        {
-            "content":"head2",
-            "widthPercent": 30
-        },
-        {
-            "content":"head3",
-            "widthPercent": 40
-        }
-    ],
-    "rowCount":3,
-    "body":{
-        "cells":[
-            {
-                "rowStart":1,
-                "rowEnd":1,
-                "columnStart":1,
-                "columnEnd":1,
-                "content":"123"
-            },
-            {
-                "rowStart":2,
-                "rowEnd":3,
-                "columnStart":1,
-                "columnEnd":2,
-                "content":"456"
-            },
-            {
-                "rowStart":3,
-                "rowEnd":3,
-                "columnStart":3,
-                "columnEnd":3,
-                "content":"789"
-            }
-        ]
-    }
-}
-
-```
-
-
-输入示例3（表格设置字体加粗颜色）：
-
-```
-{
-    "headers":[
-        {
-            "content":"head1"
-        },
-        {
-            "content":"head2"
-        },
-        {
-            "content":"head3"
-        }
-    ],
-    "rowCount":3,
-    "body":{
-        "cells":[
-            {
-                "rowStart":1,
-                "rowEnd":1,
-                "columnStart":1,
-                "columnEnd":1,
-                "content":"123",
-                "style": {"color": "#b50000", "fontSize": 12,"bold": true,"align": "CENTER"}
-            },
-            {
-                "rowStart":2,
-                "rowEnd":3,
-                "columnStart":1,
-                "columnEnd":2,
-                "content":"456",
-                "style": {"color": "#b50000", "fontSize": 12,"bold": true,"align": "LEFT"}
-            },
-            {
-                "rowStart":3,
-                "rowEnd":3,
-                "columnStart":3,
-                "columnEnd":3,
-                "content":"789",
-                "style": {"color": "#b500bf", "fontSize": 12,"bold": false,"align": "RIGHT"}
-            }
-        ]
-    }
-}
-
-```
-
-表格参数说明
-
-| 名称                | 类型    | 描述                                              |
-| ------------------- | ------- | ------------------------------------------------- |
-| headers             | Array   | 表头：不超过10列，不支持单元格合并，字数不超过100 |
-| rowCount            | Integer | 表格内容最大行数                                  |
-| cells.N.rowStart    | Integer | 单元格坐标：行起始index                           |
-| cells.N.rowEnd      | Integer | 单元格坐标：行结束index                           |
-| cells.N.columnStart | Integer | 单元格坐标：列起始index                           |
-| cells.N.columnEnd   | Integer | 单元格坐标：列结束index                           |
-| cells.N.content     | String  | 单元格内容，字数不超过100                         |
-| cells.N.style         | String  | 单元格字体风格配置 ，风格配置的json字符串  如： {"font":"黑体","fontSize":12,"color":"#FFFFFF","bold":true,"align":"CENTER"}      |
-
-表格参数headers说明
-widthPercent Integer 表头单元格列占总表头的比例，例如1：30表示 此列占表头的30%，不填写时列宽度平均拆分；例如2：总2列，某一列填写40，剩余列可以为空，按照60计算。；例如3：总3列，某一列填写30，剩余2列可以为空，分别为(100-30)/2=35
-
-content String 表头单元格内容，字数不超过100
-
-style String 为字体风格设置 风格支持： font : 目前支持 黑体、宋体; fontSize： 6-72; color：000000-FFFFFF  字符串形如：  "#FFFFFF" 或者 "0xFFFFFF"; bold ： 是否加粗， true ： 加粗 false： 不加粗; align: 对其方式， 支持 LEFT / RIGHT / CENTER
+ * PrepareFlows请求参数结构体
  */
-export interface FormField {
+export interface PrepareFlowsRequest {
   /**
-   * 控件填充值，ComponentType和传入值格式对应关系如下：
-<ul>
-<li>TEXT - 普通文本控件，需输入文本字符串；</li>
-<li>MULTI_LINE_TEXT - 多行文本控件，需输入文本字符串；</li>
-<li>CHECK_BOX - 勾选框控件，若选中需填写ComponentValue，填写 true或者 false 字符串；</li>
-<li>FILL_IMAGE - 图片控件，需填写ComponentValue为图片的资源 ID；</li>
-<li>DYNAMIC_TABLE - 动态表格控件；</li>
-<li>ATTACHMENT - 附件控件，需填写ComponentValue为附件图片的资源 ID列表，以逗号分割；</li>
-<li>DATE - 日期控件；格式为 <b>xxxx年xx月xx日</b> 字符串；</li>
-<li>DISTRICT - 省市区行政区控件，需填写ComponentValue为省市区行政区字符串内容；</li>
-</ul>
-
+   * 应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 必填。
    */
-  ComponentValue: string
+  Agent: Agent
   /**
-   * 表单域或控件的ID，跟ComponentName二选一，不能全为空；
-CreateFlowsByTemplates 接口不使用此字段。
+   * 多个合同（签署流程）信息，最大支持20个签署流程。
+   */
+  FlowInfos: Array<FlowInfo>
+  /**
+   * 操作完成后的跳转地址，最大长度200
+   */
+  JumpUrl: string
+  /**
+   * 暂未开放
+   * @deprecated
+   */
+  Operator?: UserInfo
+}
 
-<a href="https://dyn.ess.tencent.cn/guide/apivideo/channel_component_name.mp4" target="_blank">点击此处查看模板上控件ID的获取方式</a>
+/**
+ * ChannelDescribeSignFaceVideo返回参数结构体
+ */
+export interface ChannelDescribeSignFaceVideoResponse {
+  /**
+   * 核身视频结果。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ComponentId?: string
+  VideoData?: DetectInfoVideoData
   /**
-   * 控件的名字，跟ComponentId二选一，不能全为空
-
-<a href="https://dyn.ess.tencent.cn/guide/apivideo/channel_component_name.mp4" target="_blank">点击此处查看模板上控件名字的获取方式</a>
+   * 意愿核身问答模式结果。若未使用该意愿核身功能，该字段返回值可以不处理。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ComponentName?: string
+  IntentionQuestionResult?: IntentionQuestionResult
   /**
-   * 是否锁定模板控件值，锁定后无法修改（用于嵌入式发起合同），true-锁定，false-不锁定
+   * 意愿核身点头确认模式的结果信息，若未使用该意愿核身功能，该字段返回值可以不处理。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  LockComponentValue?: boolean
+  IntentionActionResult?: IntentionActionResult
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2299,6 +2129,19 @@ export interface RecipientComponentInfo {
 }
 
 /**
+ * 视频认证结果
+ */
+export interface DetectInfoVideoData {
+  /**
+   * 活体视频的base64编码，mp4格式
+
+注:`需进行base64解码获取活体视频文件`
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LiveNessVideo?: string
+}
+
+/**
  * ChannelDescribeRoles请求参数结构体
  */
 export interface ChannelDescribeRolesRequest {
@@ -2382,6 +2225,24 @@ export interface PrepareFlowsResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 流程签署二维码的签署信息，适用于客户系统整合二维码功能。 通过链接，用户可直接访问电子签名小程序并签署合同。
+ */
+export interface SignUrl {
+  /**
+   * 跳转至电子签名小程序签署的链接地址。 适用于客户端APP及小程序直接唤起电子签名小程序。
+   */
+  AppSignUrl?: string
+  /**
+   * 签署链接有效时间，格式类似"2022-08-05 15:55:01"
+   */
+  EffectiveTime?: string
+  /**
+   * 跳转至电子签名小程序签署的链接地址，格式类似于https://essurl.cn/xxx。 打开此链接将会展示H5中间页面，随后唤起电子签名小程序以进行合同签署。
+   */
+  HttpSignUrl?: string
 }
 
 /**
@@ -3526,6 +3387,17 @@ export interface FillApproverInfo {
 }
 
 /**
+ * 意愿核身点头确认模式结果详细数据
+ */
+export interface IntentionActionResultDetail {
+  /**
+   * 视频base64编码（其中包含全程提示文本和点头音频，mp4格式）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Video?: string
+}
+
+/**
  * ChannelCreateUserAutoSignSealUrl请求参数结构体
  */
 export interface ChannelCreateUserAutoSignSealUrlRequest {
@@ -4350,6 +4222,30 @@ export interface AuthorizedUser {
 }
 
 /**
+ * 视频核身意图配置，可指定问答模式或者点头模式的语音文本。
+
+注: `视频认证为白名单功能，使用前请联系对接的客户经理沟通。`
+ */
+export interface Intention {
+  /**
+   * 视频认证类型，支持以下类型
+<ul><li>1 : 问答模式</li>
+<li>2 : 点头模式</li></ul>
+
+注: `视频认证为白名单功能，使用前请联系对接的客户经理沟通。`
+   */
+  IntentionType?: number
+  /**
+   * 意愿核身语音问答模式（即语音播报+语音回答）使用的文案，包括：系统语音播报的文本、需要核验的标准文本。当前仅支持1轮问答。
+   */
+  IntentionQuestions?: Array<IntentionQuestion>
+  /**
+   * 意愿核身（点头确认模式）使用的文案，若未使用意愿核身（点头确认模式），则该字段无需传入。当前仅支持一个提示文本。
+   */
+  IntentionActions?: Array<IntentionAction>
+}
+
+/**
  * ChannelDeleteRoleUsers返回参数结构体
  */
 export interface ChannelDeleteRoleUsersResponse {
@@ -4978,6 +4874,14 @@ export interface FlowApproverInfo {
 注：`此参数仅在通过文件发起合同或者合同组时生效`
    */
   Components?: Array<Component>
+  /**
+   * 视频核身意图配置，可指定问答模式或者点头模式的语音文本。
+
+注:
+ `1.视频认证为白名单功能，使用前请联系对接的客户经理沟通。`
+`2.使用视频认证必须指定签署认证方式为人脸（即ApproverSignTypes）。`
+   */
+  Intention?: Intention
 }
 
 /**
@@ -5349,26 +5253,14 @@ export interface ChannelCreateRoleResponse {
 }
 
 /**
- * SyncProxyOrganizationOperators返回参数结构体
+ * 意愿核身点头确认模式结果
  */
-export interface SyncProxyOrganizationOperatorsResponse {
+export interface IntentionActionResult {
   /**
-   *  同步的状态,  全部同步失败接口是接口会直接报错
-
-<ul><li> **1** :全部成功</li>
-<li> **2** :部分成功</li></ul>
+   * 意愿核身结果详细数据，与每段点头确认过程一一对应
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Status?: number
-  /**
-   * 同步失败员工ID及其失败原因
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  FailedList?: Array<SyncFailReason>
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  Details?: Array<IntentionActionResultDetail>
 }
 
 /**
@@ -5786,26 +5678,13 @@ export interface ApproverRestriction {
 }
 
 /**
- * PrepareFlows请求参数结构体
+ * 意愿核身（点头确认模式）使用的文案，若未使用意愿核身（点头确认模式），则该字段无需传入。当前仅支持一个提示文本。
  */
-export interface PrepareFlowsRequest {
+export interface IntentionAction {
   /**
-   * 应用相关信息。 此接口Agent.ProxyOrganizationOpenId、Agent. ProxyOperator.OpenId、Agent.AppId 必填。
+   * 点头确认模式下，系统语音播报使用的问题文本，问题最大长度为150个字符。
    */
-  Agent: Agent
-  /**
-   * 多个合同（签署流程）信息，最大支持20个签署流程。
-   */
-  FlowInfos: Array<FlowInfo>
-  /**
-   * 操作完成后的跳转地址，最大长度200
-   */
-  JumpUrl: string
-  /**
-   * 暂未开放
-   * @deprecated
-   */
-  Operator?: UserInfo
+  Text?: string
 }
 
 /**
@@ -5879,6 +5758,29 @@ export interface ChannelDescribeOrganizationSealsResponse {
    * 查询到的印章结果数组
    */
   Seals?: Array<OccupiedSeal>
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * SyncProxyOrganizationOperators返回参数结构体
+ */
+export interface SyncProxyOrganizationOperatorsResponse {
+  /**
+   *  同步的状态,  全部同步失败接口是接口会直接报错
+
+<ul><li> **1** :全部成功</li>
+<li> **2** :部分成功</li></ul>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status?: number
+  /**
+   * 同步失败员工ID及其失败原因
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FailedList?: Array<SyncFailReason>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6658,21 +6560,272 @@ export interface ChannelCreateFlowGroupByTemplatesRequest {
 }
 
 /**
- * 流程签署二维码的签署信息，适用于客户系统整合二维码功能。 通过链接，用户可直接访问电子签名小程序并签署合同。
+ * 电子文档的控件填充信息。按照控件类型进行相应的填充。
+
+当控件的 ComponentType='TEXT'时，FormField.ComponentValue填入文本内容
+```
+FormField输入示例：
+{
+    "ComponentId": "componentId1",
+    "ComponentValue": "文本内容"
+}
+```
+当控件的 ComponentType='MULTI_LINE_TEXT'时，FormField.ComponentValue填入文本内容，支持自动换行。
+```
+FormField输入示例：
+{
+    "ComponentId": "componentId1",
+    "ComponentValue": "多行文本内容"
+}
+```
+当控件的 ComponentType='CHECK_BOX'时，FormField.ComponentValue填入true或false文本
+```
+FormField输入示例：
+{
+    "ComponentId": "componentId1",
+    "ComponentValue": "true"
+}
+```
+当控件的 ComponentType='FILL_IMAGE'时，FormField.ComponentValue填入图片的资源ID
+```
+FormField输入示例：
+{
+    "ComponentId": "componentId1",
+    "ComponentValue": "yDwhsxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+}
+```
+当控件的 ComponentType='ATTACHMENT'时，FormField.ComponentValue填入附件图片的资源ID列表，以逗号分隔，单个附件控件最多支持6个资源ID；
+```
+FormField输入示例：
+{
+    "ComponentId": "componentId1",
+    "ComponentValue": "yDwhsxxxxxxxxxxxxxxxxxxxxxxxxxx1,yDwhsxxxxxxxxxxxxxxxxxxxxxxxxxx2,yDwhsxxxxxxxxxxxxxxxxxxxxxxxxxx3"
+}
+```
+当控件的 ComponentType='SELECTOR'时，FormField.ComponentValue填入选择的选项内容；
+```
+FormField输入示例：
+{
+    "ComponentId": "componentId1",
+    "ComponentValue": "选择的内容"
+}
+```
+当控件的 ComponentType='DATE'时，FormField.ComponentValue填入日期内容；
+```
+FormField输入示例：
+{
+    "ComponentId": "componentId1",
+    "ComponentValue": "2023年01月01日"
+}
+```
+当控件的 ComponentType='DISTRICT'时，FormField.ComponentValue填入省市区内容；
+```
+FormField输入示例：
+{
+    "ComponentId": "componentId1",
+    "ComponentValue": "广东省深圳市福田区"
+}
+```
+【数据表格传参说明】
+当控件的 ComponentType='DYNAMIC_TABLE'时，FormField.ComponentValue需要传递json格式的字符串参数，用于确定表头&填充数据表格（支持内容的单元格合并）
+输入示例1：
+
+```
+{
+    "headers":[
+        {
+            "content":"head1"
+        },
+        {
+            "content":"head2"
+        },
+        {
+            "content":"head3"
+        }
+    ],
+    "rowCount":3,
+    "body":{
+        "cells":[
+            {
+                "rowStart":1,
+                "rowEnd":1,
+                "columnStart":1,
+                "columnEnd":1,
+                "content":"123"
+            },
+            {
+                "rowStart":2,
+                "rowEnd":3,
+                "columnStart":1,
+                "columnEnd":2,
+                "content":"456"
+            },
+            {
+                "rowStart":3,
+                "rowEnd":3,
+                "columnStart":3,
+                "columnEnd":3,
+                "content":"789"
+            }
+        ]
+    }
+}
+
+```
+
+输入示例2（表格表头宽度比例配置）：
+
+```
+{
+    "headers":[
+        {
+            "content":"head1",
+            "widthPercent": 30
+        },
+        {
+            "content":"head2",
+            "widthPercent": 30
+        },
+        {
+            "content":"head3",
+            "widthPercent": 40
+        }
+    ],
+    "rowCount":3,
+    "body":{
+        "cells":[
+            {
+                "rowStart":1,
+                "rowEnd":1,
+                "columnStart":1,
+                "columnEnd":1,
+                "content":"123"
+            },
+            {
+                "rowStart":2,
+                "rowEnd":3,
+                "columnStart":1,
+                "columnEnd":2,
+                "content":"456"
+            },
+            {
+                "rowStart":3,
+                "rowEnd":3,
+                "columnStart":3,
+                "columnEnd":3,
+                "content":"789"
+            }
+        ]
+    }
+}
+
+```
+
+
+输入示例3（表格设置字体加粗颜色）：
+
+```
+{
+    "headers":[
+        {
+            "content":"head1"
+        },
+        {
+            "content":"head2"
+        },
+        {
+            "content":"head3"
+        }
+    ],
+    "rowCount":3,
+    "body":{
+        "cells":[
+            {
+                "rowStart":1,
+                "rowEnd":1,
+                "columnStart":1,
+                "columnEnd":1,
+                "content":"123",
+                "style": {"color": "#b50000", "fontSize": 12,"bold": true,"align": "CENTER"}
+            },
+            {
+                "rowStart":2,
+                "rowEnd":3,
+                "columnStart":1,
+                "columnEnd":2,
+                "content":"456",
+                "style": {"color": "#b50000", "fontSize": 12,"bold": true,"align": "LEFT"}
+            },
+            {
+                "rowStart":3,
+                "rowEnd":3,
+                "columnStart":3,
+                "columnEnd":3,
+                "content":"789",
+                "style": {"color": "#b500bf", "fontSize": 12,"bold": false,"align": "RIGHT"}
+            }
+        ]
+    }
+}
+
+```
+
+表格参数说明
+
+| 名称                | 类型    | 描述                                              |
+| ------------------- | ------- | ------------------------------------------------- |
+| headers             | Array   | 表头：不超过10列，不支持单元格合并，字数不超过100 |
+| rowCount            | Integer | 表格内容最大行数                                  |
+| cells.N.rowStart    | Integer | 单元格坐标：行起始index                           |
+| cells.N.rowEnd      | Integer | 单元格坐标：行结束index                           |
+| cells.N.columnStart | Integer | 单元格坐标：列起始index                           |
+| cells.N.columnEnd   | Integer | 单元格坐标：列结束index                           |
+| cells.N.content     | String  | 单元格内容，字数不超过100                         |
+| cells.N.style         | String  | 单元格字体风格配置 ，风格配置的json字符串  如： {"font":"黑体","fontSize":12,"color":"#FFFFFF","bold":true,"align":"CENTER"}      |
+
+表格参数headers说明
+widthPercent Integer 表头单元格列占总表头的比例，例如1：30表示 此列占表头的30%，不填写时列宽度平均拆分；例如2：总2列，某一列填写40，剩余列可以为空，按照60计算。；例如3：总3列，某一列填写30，剩余2列可以为空，分别为(100-30)/2=35
+
+content String 表头单元格内容，字数不超过100
+
+style String 为字体风格设置 风格支持： font : 目前支持 黑体、宋体; fontSize： 6-72; color：000000-FFFFFF  字符串形如：  "#FFFFFF" 或者 "0xFFFFFF"; bold ： 是否加粗， true ： 加粗 false： 不加粗; align: 对其方式， 支持 LEFT / RIGHT / CENTER
  */
-export interface SignUrl {
+export interface FormField {
   /**
-   * 跳转至电子签名小程序签署的链接地址。 适用于客户端APP及小程序直接唤起电子签名小程序。
+   * 控件填充值，ComponentType和传入值格式对应关系如下：
+<ul>
+<li>TEXT - 普通文本控件，需输入文本字符串；</li>
+<li>MULTI_LINE_TEXT - 多行文本控件，需输入文本字符串；</li>
+<li>CHECK_BOX - 勾选框控件，若选中需填写ComponentValue，填写 true或者 false 字符串；</li>
+<li>FILL_IMAGE - 图片控件，需填写ComponentValue为图片的资源 ID；</li>
+<li>DYNAMIC_TABLE - 动态表格控件；</li>
+<li>ATTACHMENT - 附件控件，需填写ComponentValue为附件图片的资源 ID列表，以逗号分割；</li>
+<li>DATE - 日期控件；格式为 <b>xxxx年xx月xx日</b> 字符串；</li>
+<li>DISTRICT - 省市区行政区控件，需填写ComponentValue为省市区行政区字符串内容；</li>
+</ul>
+
    */
-  AppSignUrl?: string
+  ComponentValue: string
   /**
-   * 签署链接有效时间，格式类似"2022-08-05 15:55:01"
+   * 表单域或控件的ID，跟ComponentName二选一，不能全为空；
+CreateFlowsByTemplates 接口不使用此字段。
+
+<a href="https://dyn.ess.tencent.cn/guide/apivideo/channel_component_name.mp4" target="_blank">点击此处查看模板上控件ID的获取方式</a>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  EffectiveTime?: string
+  ComponentId?: string
   /**
-   * 跳转至电子签名小程序签署的链接地址，格式类似于https://essurl.cn/xxx。 打开此链接将会展示H5中间页面，随后唤起电子签名小程序以进行合同签署。
+   * 控件的名字，跟ComponentId二选一，不能全为空
+
+<a href="https://dyn.ess.tencent.cn/guide/apivideo/channel_component_name.mp4" target="_blank">点击此处查看模板上控件名字的获取方式</a>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  HttpSignUrl?: string
+  ComponentName?: string
+  /**
+   * 是否锁定模板控件值，锁定后无法修改（用于嵌入式发起合同），true-锁定，false-不锁定
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LockComponentValue?: boolean
 }
 
 /**
@@ -7414,6 +7567,20 @@ export interface DescribeChannelFlowEvidenceReportResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 意愿核身语音问答模式（即语音播报+语音回答）使用的文案，包括：系统语音播报的文本、需要核验的标准文本。当前仅支持1轮问答。
+ */
+export interface IntentionQuestion {
+  /**
+   * 当选择语音问答模式时，系统自动播报的问题文本，最大长度为150个字符。
+   */
+  Question?: string
+  /**
+   *  当选择语音问答模式时，用于判断用户回答是否通过的标准答案列表，传入后可自动判断用户回答文本是否在标准文本列表中。
+   */
+  Answers?: Array<string>
 }
 
 /**

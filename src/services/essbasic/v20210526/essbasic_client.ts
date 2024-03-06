@@ -24,6 +24,7 @@ import {
   Component,
   ChannelDeleteSealPoliciesRequest,
   ChannelBatchCancelFlowsResponse,
+  ChannelDescribeSignFaceVideoRequest,
   ChannelDisableUserAutoSignResponse,
   DescribeExtendedServiceAuthDetailResponse,
   Department,
@@ -35,6 +36,7 @@ import {
   ChannelCancelUserAutoSignEnableUrlResponse,
   ModifyExtendedServiceRequest,
   DescribeResourceUrlsByFlowsRequest,
+  IntentionQuestionResult,
   AuthInfoDetail,
   CreateChannelOrganizationInfoChangeUrlResponse,
   RemindFlowRecords,
@@ -56,7 +58,8 @@ import {
   ChannelCreatePrepareFlowRequest,
   ChannelCreateFlowRemindsRequest,
   ChannelCreateSealPolicyResponse,
-  FormField,
+  PrepareFlowsRequest,
+  ChannelDescribeSignFaceVideoResponse,
   ChannelCancelFlowResponse,
   DownloadFlowInfo,
   FlowApproverUrlInfo,
@@ -75,9 +78,11 @@ import {
   ChannelCreateFlowByFilesResponse,
   DescribeFlowDetailInfoResponse,
   RecipientComponentInfo,
+  DetectInfoVideoData,
   ChannelDescribeRolesRequest,
   DescribeBatchOrganizationRegistrationUrlsRequest,
   PrepareFlowsResponse,
+  SignUrl,
   ChannelCancelFlowRequest,
   TemplateInfo,
   ChannelCreateOrganizationBatchSignUrlRequest,
@@ -103,6 +108,7 @@ import {
   SignUrlInfo,
   CommonFlowApprover,
   FillApproverInfo,
+  IntentionActionResultDetail,
   ChannelCreateUserAutoSignSealUrlRequest,
   PdfVerifyResult,
   UserThreeFactor,
@@ -127,6 +133,7 @@ import {
   ChannelCreateBoundFlowsRequest,
   ChannelDescribeEmployeesRequest,
   AuthorizedUser,
+  Intention,
   ChannelDeleteRoleUsersResponse,
   SyncProxyOrganizationOperatorsRequest,
   ChannelCreateFlowApproversResponse,
@@ -146,7 +153,7 @@ import {
   CreateFlowsByTemplatesResponse,
   DescribeChannelFlowEvidenceReportRequest,
   ChannelCreateRoleResponse,
-  SyncProxyOrganizationOperatorsResponse,
+  IntentionActionResult,
   FailedCreateRoleData,
   ChannelDescribeUserAutoSignStatusRequest,
   FlowResourceUrlInfo,
@@ -164,11 +171,12 @@ import {
   CreatePartnerAutoSignAuthUrlRequest,
   ChannelCreateBatchCancelFlowUrlRequest,
   ApproverRestriction,
-  PrepareFlowsRequest,
+  IntentionAction,
   ApproverItem,
   ChannelCreateFlowSignReviewResponse,
   ChannelDisableUserAutoSignRequest,
   ChannelDescribeOrganizationSealsResponse,
+  SyncProxyOrganizationOperatorsResponse,
   CreateSealByImageResponse,
   ChannelCancelMultiFlowSignQRCodeResponse,
   ChannelDescribeRolesResponse,
@@ -195,7 +203,7 @@ import {
   ModifyFlowDeadlineRequest,
   ChannelUpdateSealStatusRequest,
   ChannelCreateFlowGroupByTemplatesRequest,
-  SignUrl,
+  FormField,
   CreateFlowGroupSignReviewRequest,
   ChannelBillUsageDetail,
   DescribeTemplatesRequest,
@@ -217,6 +225,7 @@ import {
   ChannelDeleteRoleResponse,
   ChannelCreateReleaseFlowResponse,
   DescribeChannelFlowEvidenceReportResponse,
+  IntentionQuestion,
   CreateSealByImageRequest,
   ChannelCreateFlowApproversRequest,
   ChannelUpdateSealStatusResponse,
@@ -742,6 +751,22 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ChannelDisableUserAutoSignResponse) => void
   ): Promise<ChannelDisableUserAutoSignResponse> {
     return this.request("ChannelDisableUserAutoSign", req, cb)
+  }
+
+  /**
+     * 该接口用于在使用视频认证方式签署合同后，获取用户的签署人脸认证视频。
+
+1. 该接口**仅适用于在H5端签署**的合同，**在通过视频认证后**获取人脸图片。
+2. 该接口**不支持小程序端**的签署人脸图片获取。
+3. 请在**签署完成后的三天内**获取人脸图片，**过期后将无法获取**。
+
+**注意：该接口需要开通白名单，请联系客户经理开通后使用。**
+     */
+  async ChannelDescribeSignFaceVideo(
+    req: ChannelDescribeSignFaceVideoRequest,
+    cb?: (error: string, rep: ChannelDescribeSignFaceVideoResponse) => void
+  ): Promise<ChannelDescribeSignFaceVideoResponse> {
+    return this.request("ChannelDescribeSignFaceVideo", req, cb)
   }
 
   /**

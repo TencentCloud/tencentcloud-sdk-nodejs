@@ -97,6 +97,16 @@ export interface BillUsageDetail {
     Remark?: string;
 }
 /**
+ * 意愿核身点头确认模式结果
+ */
+export interface IntentionActionResult {
+    /**
+     * 意愿核身结果详细数据，与每段点头确认过程一一对应
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Details?: Array<IntentionActionResultDetail>;
+}
+/**
  * CreateSeal请求参数结构体
  */
 export interface CreateSealRequest {
@@ -452,6 +462,28 @@ export interface CreateExtendedServiceAuthInfosRequest {
   在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。
      */
     Agent?: Agent;
+}
+/**
+ * 意愿核身问答模式结果。若未使用该意愿核身功能，该字段返回值可以不处理。
+ */
+export interface IntentionQuestionResult {
+    /**
+     * 视频base64（其中包含全程问题和回答音频，mp4格式）
+  
+  注：`需进行base64解码获取视频文件`
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Video?: string;
+    /**
+     *  和答案匹配结果列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ResultCode?: Array<string>;
+    /**
+     * 回答问题语音识别结果列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AsrResult?: Array<string>;
 }
 /**
  * 企业扩展服务授权列表详情
@@ -1441,6 +1473,15 @@ export interface DescribeFlowEvidenceReportResponse {
     RequestId?: string;
 }
 /**
+ * 意愿核身（点头确认模式）使用的文案，若未使用意愿核身（点头确认模式），则该字段无需传入。当前仅支持一个提示文本。
+ */
+export interface IntentionAction {
+    /**
+     * 点头确认模式下，系统语音播报使用的问题文本，问题最大长度为150个字符。
+     */
+    Text?: string;
+}
+/**
  * 企业应用回调信息
  */
 export interface CallbackInfo {
@@ -1461,6 +1502,28 @@ export interface CallbackInfo {
      * 回调验签token，用于回调通知校验。
      */
     CallbackToken?: string;
+}
+/**
+ * DescribeSignFaceVideo请求参数结构体
+ */
+export interface DescribeSignFaceVideoRequest {
+    /**
+     * 执行本接口操作的员工信息。使用此接口时，必须填写userId。<br/>注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。`
+     */
+    Operator: UserInfo;
+    /**
+     * 合同流程ID，为32位字符串。
+     */
+    FlowId: string;
+    /**
+     * 签署参与人在本流程中的编号ID(每个流程不同)，可用此ID来定位签署参与人在本流程的签署节点，也可用于后续创建签署链接等操作。
+     */
+    SignId: string;
+    /**
+     * 代理企业和员工的信息。
+  在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。
+     */
+    Agent?: Agent;
 }
 /**
  * DeleteSealPolicies请求参数结构体
@@ -1511,6 +1574,18 @@ export interface CreateFlowGroupByTemplatesResponse {
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * 视频认证结果
+ */
+export interface DetectInfoVideoData {
+    /**
+     * 活体视频的base64编码，mp4格式
+  
+  注:`需进行base64解码获取活体视频文件`
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    LiveNessVideo?: string;
 }
 /**
  * 此结构体 (TemplateInfo) 用于描述模板的信息。
@@ -2579,6 +2654,16 @@ export interface OccupiedSeal {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     AuthorizedUsers: Array<AuthorizedUser>;
+}
+/**
+ * 意愿核身点头确认模式结果详细数据
+ */
+export interface IntentionActionResultDetail {
+    /**
+     * 视频base64编码（其中包含全程提示文本和点头音频，mp4格式）
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Video?: string;
 }
 /**
  * CreatePersonAuthCertificateImage返回参数结构体
@@ -3980,6 +4065,14 @@ export interface FlowCreateApprover {
   注: `若不设置此参数，则默认使用合同的截止时间，此参数暂不支持合同组子合同`
      */
     Deadline?: number;
+    /**
+     * 视频核身意图配置，可指定问答模式或者点头模式的语音文本。
+  
+  注:
+   `1.视频认证为白名单功能，使用前请联系对接的客户经理沟通。`
+  `2.使用视频认证必须指定签署认证方式为人脸（即ApproverSignTypes）。`
+     */
+    Intention?: Intention;
 }
 /**
  * 签署方在使用个人印章签署控件（SIGN_SIGNATURE） 时可使用的签署方式
@@ -4252,6 +4345,29 @@ export interface AuthorizedUser {
      * 电子签系统中的用户id
      */
     UserId: string;
+}
+/**
+ * 视频核身意图配置，可指定问答模式或者点头模式的语音文本。
+
+注: `视频认证为白名单功能，使用前请联系对接的客户经理沟通。`
+ */
+export interface Intention {
+    /**
+     * 视频认证类型，支持以下类型
+  <ul><li>1 : 问答模式</li>
+  <li>2 : 点头模式</li></ul>
+  
+  注: `视频认证为白名单功能，使用前请联系对接的客户经理沟通。`
+     */
+    IntentionType?: number;
+    /**
+     * 意愿核身语音问答模式（即语音播报+语音回答）使用的文案，包括：系统语音播报的文本、需要核验的标准文本。当前仅支持1轮问答。
+     */
+    IntentionQuestions?: Array<IntentionQuestion>;
+    /**
+     * 意愿核身（点头确认模式）使用的文案，若未使用意愿核身（点头确认模式），则该字段无需传入。当前仅支持一个提示文本。
+     */
+    IntentionActions?: Array<IntentionAction>;
 }
 /**
  * CreateDocument请求参数结构体
@@ -6731,6 +6847,30 @@ export interface CreateUserAutoSignEnableUrlResponse {
     RequestId?: string;
 }
 /**
+ * DescribeSignFaceVideo返回参数结构体
+ */
+export interface DescribeSignFaceVideoResponse {
+    /**
+     * 核身视频结果。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    VideoData?: DetectInfoVideoData;
+    /**
+     * 意愿核身问答模式结果。若未使用该意愿核身功能，该字段返回值可以不处理。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IntentionQuestionResult?: IntentionQuestionResult;
+    /**
+     * 意愿核身点头确认模式的结果信息，若未使用该意愿核身功能，该字段返回值可以不处理。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IntentionActionResult?: IntentionActionResult;
+    /**
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * 流程签署二维码的签署信息，适用于客户系统整合二维码功能。
 通过链接，用户可直接访问电子签名小程序并签署合同。
  */
@@ -7570,4 +7710,17 @@ export interface CcInfo {
   <li> **none** : 不通知</li></ul>
      */
     NotifyType?: string;
+}
+/**
+ * 意愿核身语音问答模式（即语音播报+语音回答）使用的文案，包括：系统语音播报的文本、需要核验的标准文本。当前仅支持1轮问答。
+ */
+export interface IntentionQuestion {
+    /**
+     * 当选择语音问答模式时，系统自动播报的问题文本，最大长度为150个字符。
+     */
+    Question?: string;
+    /**
+     *  当选择语音问答模式时，用于判断用户回答是否通过的标准答案列表，传入后可自动判断用户回答文本是否在标准文本列表中。
+     */
+    Answers?: Array<string>;
 }

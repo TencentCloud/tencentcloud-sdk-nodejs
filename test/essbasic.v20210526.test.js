@@ -228,6 +228,16 @@ it("essbasic.v20210526.ChannelDisableUserAutoSign", async function () {
     }
 })
 
+it("essbasic.v20210526.ChannelDescribeSignFaceVideo", async function () {
+    try {
+       const data = await client.ChannelDescribeSignFaceVideo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("essbasic.v20210526.ChannelDescribeOrganizationSeals", async function () {
     try {
        const data = await client.ChannelDescribeOrganizationSeals({})

@@ -837,6 +837,15 @@ export interface DescribeDSPAESDataAssetByComplianceIdRequest {
    * 合规组id
    */
   ComplianceId: number
+  /**
+   * 云上还是自建
+
+   */
+  BuildType?: string
+  /**
+   * 数据源类型
+   */
+  DataSourceType?: string
 }
 
 /**
@@ -1736,26 +1745,31 @@ export interface DspaDiscoveryTaskDataSource {
   /**
    * 数据源ID
    */
-  DataSourceId: string
+  DataSourceId?: string
   /**
    * 用于传入的数据源的条件，可以选择多个数据库，数据库之间通过逗号分隔，如果为空，默认是全部数据库
    */
-  Condition: string
+  Condition?: string
   /**
    * 代理地址
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ProxyAddress: Array<string>
+  ProxyAddress?: Array<string>
   /**
    * 数据源名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DataSourceName: string
+  DataSourceName?: string
   /**
    * 资源所在地域
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ResourceRegion: string
+  ResourceRegion?: string
+  /**
+   * 无
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DataSourceType?: string
 }
 
 /**
@@ -1926,6 +1940,17 @@ clb - 通过LB的方式进行访问。
    * 资源名称，1-60个字符。
    */
   ResourceName?: string
+  /**
+   * 实例类型
+databse
+sid
+serviceName
+   */
+  InstanceType?: string
+  /**
+   * 实例值
+   */
+  InstanceValue?: string
 }
 
 /**
@@ -2651,81 +2676,93 @@ export interface DspaCOSDataAssetDetail {
   /**
    * 对象桶
    */
-  BucketName: string
+  BucketName?: string
   /**
    * 对象名称
    */
-  FileName: string
+  FileName?: string
   /**
    * 规则名称
    */
-  RuleName: string
+  RuleName?: string
   /**
    * 出现次数
    */
-  SensitiveDataCount: number
+  SensitiveDataCount?: number
   /**
    * 敏感数据分类
    */
-  CategoryName: string
+  CategoryName?: string
   /**
    * 敏感等级
    */
-  LevelRiskName: string
+  LevelRiskName?: string
   /**
    * KMS加密
    */
-  KMSEncrypted: boolean
+  KMSEncrypted?: boolean
   /**
    * 文件类型
    */
-  FileType: string
+  FileType?: string
   /**
    * 文件大小
    */
-  FileSize: string
+  FileSize?: string
   /**
    * 敏感数据分级分数
    */
-  LevelRiskScore: number
+  LevelRiskScore?: number
   /**
    * 数据源ID
    */
-  DataSourceId: string
+  DataSourceId?: string
   /**
    * 规则id
    */
-  RuleId: number
+  RuleId?: number
   /**
    * 资源所在地域
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ResourceRegion: string
+  ResourceRegion?: string
   /**
    * 分类ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CategoryId: number
+  CategoryId?: number
   /**
    * 分级ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  LevelId: number
+  LevelId?: number
   /**
    * 文件扫描结果ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  FileResultId: number
+  FileResultId?: number
   /**
    * 数据源名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DataSourceName: string
+  DataSourceName?: string
   /**
    * 分类路径
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CategoryFullPath: string
+  CategoryFullPath?: string
+  /**
+   * 0-系统识别
+1-人工识别
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IdentifyType?: number
+  /**
+   * 0-系统识别
+1-人工识别
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CheckStatus?: number
 }
 
 /**
@@ -3280,7 +3317,7 @@ export interface DescribeDSPARDBDataAssetByComplianceIdResponse {
    * 符合条件的RDB关系数据库敏感数据资产统计记录
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Stats: DspaRDBDataAssetCount
+  Stats?: DspaRDBDataAssetCount
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5132,6 +5169,10 @@ export interface DescribeDSPADataSourceDbInfoRequest {
    * 数据源ID
    */
   DataSourceId: string
+  /**
+   * 数据源类型
+   */
+  DataSourceType?: string
 }
 
 /**
@@ -5872,6 +5913,16 @@ export interface DspaUserResourceMeta {
    * 授权账号名
    */
   ResourceAuthAccount?: string
+  /**
+   * x
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceType?: string
+  /**
+   * x
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceValue?: string
 }
 
 /**
@@ -6748,11 +6799,11 @@ export interface CreateDSPASelfBuildMetaResourceResponse {
   /**
    * 连通性测试情况，success表示可正常访问，failed表示无法访问。
    */
-  ConnectivityStatus: string
+  ConnectivityStatus?: string
   /**
    * 连通性描述字段，如果连通性测试失败，这里会返回无法访问的相关信息说明。
    */
-  ConnectivityDescription: string
+  ConnectivityDescription?: string
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -7963,6 +8014,18 @@ export interface ModifyDSPACOSTaskResultRequest {
    * 是否设置为非敏感文件
    */
   IsSetNonSensitiveFile?: boolean
+  /**
+   * 文件名
+   */
+  FileName?: string
+  /**
+   * 桶名
+   */
+  BucketName?: string
+  /**
+   * 数据源id
+   */
+  DataSourceId?: string
 }
 
 /**
@@ -8406,7 +8469,7 @@ export interface DescribeDSPADataSourceDbInfoResponse {
    * 数据库信息列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Items: Array<DSPADataSourceDbInfo>
+  Items?: Array<DSPADataSourceDbInfo>
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -8524,6 +8587,10 @@ export interface DescribeDSPARDBDataAssetByComplianceIdRequest {
    * 数据源类型，不填默认过滤非自建的所有关系型数据源类型，填selfbuilt-db只过滤自建类型
    */
   DataSourceType?: string
+  /**
+   * 自建还是云上
+   */
+  BuildType?: string
 }
 
 /**

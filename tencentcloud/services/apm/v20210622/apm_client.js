@@ -28,7 +28,7 @@ class Client extends abstract_client_1.AbstractClient {
         super("apm.tencentcloudapi.com", "2021-06-22", clientConfig);
     }
     /**
-     * 修改Apm实例接口
+     * 修改APM实例接口
      */
     async ModifyApmInstance(req, cb) {
         return this.request("ModifyApmInstance", req, cb);

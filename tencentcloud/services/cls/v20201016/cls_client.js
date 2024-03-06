@@ -196,7 +196,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateShipper", req, cb);
     }
     /**
-     * 本接口用于修改投递任务
+     * 本接口用于修改投递Ckafka任务
      */
     async ModifyConsumer(req, cb) {
         return this.request("ModifyConsumer", req, cb);
@@ -444,7 +444,7 @@ API返回数据包最大49MB，建议启用 gzip 压缩（HTTP Request Header Ac
         return this.request("DescribeMachineGroups", req, cb);
     }
     /**
-     * 本接口用于创建投递任务
+     * 本接口用于创建投递CKafka任务
      */
     async CreateConsumer(req, cb) {
         return this.request("CreateConsumer", req, cb);
@@ -706,7 +706,7 @@ cls.pb.cc cls.pb.h cls.proto
         return this.request("DeleteAlarm", req, cb);
     }
     /**
-     * 本接口用于搜索日志上下文附近的内容
+     * 本接口用于搜索日志上下文附近的内容，详情参考[上下文检索](https://cloud.tencent.com/document/product/614/53248)。
 API返回数据包最大49MB，建议启用 gzip 压缩（HTTP Request Header Accept-Encoding:gzip）。
      */
     async DescribeLogContext(req, cb) {

@@ -117,41 +117,41 @@ export interface LogInfo {
     /**
      * 日志时间，单位ms
      */
-    Time: number;
+    Time?: number;
     /**
      * 日志主题ID
      */
-    TopicId: string;
+    TopicId?: string;
     /**
      * 日志主题名称
      */
-    TopicName: string;
+    TopicName?: string;
     /**
      * 日志来源IP
      */
-    Source: string;
+    Source?: string;
     /**
      * 日志文件名称
      */
-    FileName: string;
+    FileName?: string;
     /**
      * 日志上报请求包的ID
      */
-    PkgId: string;
+    PkgId?: string;
     /**
      * 请求包内日志的ID
      */
-    PkgLogId: string;
+    PkgLogId?: string;
     /**
      * 日志内容的Json序列化字符串
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    LogJson: string;
+    LogJson?: string;
     /**
      * 日志来源主机名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    HostName: string;
+    HostName?: string;
     /**
      * 原始日志(仅在日志创建索引异常时有值)
   注意：此字段可能返回 null，表示取不到有效值。
@@ -229,19 +229,20 @@ export interface DescribeLogContextRequest {
      */
     BTime: string;
     /**
-     * 日志包序号
+     * 日志包序号。SearchLog接口返回信息中Results结构体中的PkgId。
      */
     PkgId: string;
     /**
-     * 日志包内一条日志的序号
+     * 日志包内一条日志的序号。
+  SearchLog接口返回信息中Results结构中的PkgLogId。
      */
     PkgLogId: number;
     /**
-     * 上文日志条数,  默认值10
+     * 前${PrevLogs}条日志，默认值10。
      */
     PrevLogs?: number;
     /**
-     * 下文日志条数,  默认值10
+     * 后${NextLogs}条日志，默认值10。
      */
     NextLogs?: number;
 }
@@ -405,13 +406,11 @@ export interface SearchCosRechargeInfoRequest {
      */
     Name: string;
     /**
-     * 存储桶。
-  存储桶命名规范：https://cloud.tencent.com/document/product/436/13312
+     * COS存储桶，详见产品支持的[存储桶命名规范](https://cloud.tencent.com/document/product/436/13312)。
      */
     Bucket: string;
     /**
-     * 存储桶所在地域。
-  地域和访问域名：https://cloud.tencent.com/document/product/436/6224
+     * COS存储桶所在地域，详见产品支持的[地域列表](https://cloud.tencent.com/document/product/436/6224)。
      */
     BucketRegion: string;
     /**
@@ -477,7 +476,7 @@ export interface KafkaRechargeInfo {
      */
     ConsumerGroupName?: string;
     /**
-     * 状态   status 1: 运行中, 2: 暂停 ...
+     * 状态 ，1：运行中；2：暂停。
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Status?: number;
@@ -627,7 +626,7 @@ export interface DescribeDashboardsRequest {
   
   <br><li> tag:tagKey
   
-  按照【标签键值对】进行过滤。tag-key使用具体的标签键进行替换。使用请参考示例2。
+  按照【标签键值对】进行过滤。tagKey使用具体的标签键进行替换。使用请参考示例二。
   
   类型：String
   
@@ -889,42 +888,23 @@ export interface DescribeShipperTasksRequest {
     EndTime: number;
 }
 /**
- * DescribeAlarms请求参数结构体
+ * 采集配置信息
  */
-export interface DescribeAlarmsRequest {
+export interface CollectInfo {
     /**
-     * name
-  - 按照【告警策略名称】进行过滤。
-  - 类型：String
-  - 必选：否
-  
-  alarmId
-  - 按照【告警策略ID】进行过滤。
-  - 类型：String
-  - 必选：否
-  
-  topicId
-  - 按照【监控对象的日志主题ID】进行过滤。
-  - 类型：String
-  - 必选：否
-  
-  enable
-  - 按照【启用状态】进行过滤。
-  - 类型：String
-  - 备注：enable参数值范围: 1, t, T, TRUE, true, True, 0, f, F, FALSE, false, False。 其它值将返回参数错误信息.
-  - 必选：否
-  
-  每次请求的Filters的上限为10，Filter.Values的上限为5。
+     * 采集类型，必填字段。
+  <li>0：元数据配置。</li>
+  <li>1：指定Pod Label。</li>
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Filters?: Array<Filter>;
+    Type: number;
     /**
-     * 分页的偏移量，默认值为0。
+     * 指定采集类型的采集配置信息。
+  <li>当Type为0时，CollectConfigs不允许为空。</li>
+  <li>当Type为1时，CollectConfigs为空时，表示选择所有Pod Label；否则CollectConfigs为指定Pod Label。</li>
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Offset?: number;
-    /**
-     * 分页单页限制数目，默认值为20，最大值100。
-     */
-    Limit?: number;
+    CollectConfigs?: Array<CollectConfig>;
 }
 /**
  * MergePartition请求参数结构体
@@ -966,8 +946,30 @@ export interface TopicIdAndRegion {
      */
     TopicId: string;
     /**
-     * 日志主题id 所在的地域id
-  地域ID - 访问链接查看详情：https://iwiki.woa.com/pages/viewpage.action?pageId=780556968#id-地域码表-一.region大区（标准地域）
+     * 日志主题id所在的地域id。
+  
+  id,地域,简称信息如下：
+  - 1,   广州,ap-guangzhou
+  - 4,   上海,ap-shanghai
+  - 5,   中国香港,ap-hongkong
+  - 6,   多伦多,na-toronto
+  - 7,   上海金融,ap-shanghai-fsi
+  - 8,   北京,ap-beijing
+  - 9,   新加坡,ap-singapore
+  - 11,  深圳金融,ap-shenzhen-fsi
+  - 15,  硅谷,na-siliconvalley
+  - 16,  成都,ap-chengdu
+  - 17,  法兰克福,eu-frankfurt
+  - 18,  首尔,ap-seoul
+  - 19,  重庆,ap-chongqing
+  - 21,  孟买,ap-mumbai
+  - 22,  弗吉尼亚,na-ashburn
+  - 23,  曼谷,ap-bangkok
+  - 25,  东京,ap-tokyo
+  - 33,  南京,ap-nanjing
+  - 46,  北京金融,ap-beijing-fsi
+  - 72,  雅加达,ap-jakarta
+  - 74,  圣保罗,sa-saopaulo
      */
     RegionId: number;
 }
@@ -1483,12 +1485,11 @@ export interface CreateCosRechargeRequest {
      */
     Name: string;
     /**
-     * COS存储桶。
-  存储桶命名规范：https://cloud.tencent.com/document/product/436/13312
+     * COS存储桶，详见产品支持的[存储桶命名规范](https://cloud.tencent.com/document/product/436/13312)。
      */
     Bucket: string;
     /**
-     * COS存储桶所在地域。地域和访问域名：https://cloud.tencent.com/document/product/436/6224
+     * COS存储桶所在地域，详见产品支持的[地域列表](https://cloud.tencent.com/document/product/436/6224)。
      */
     BucketRegion: string;
     /**
@@ -1514,7 +1515,7 @@ export interface CreateCosRechargeRequest {
  */
 export interface DescribeKafkaUserRequest {
     /**
-     * kafka消费用户名
+     * kafka用户名。
      */
     UserName: string;
 }
@@ -1523,7 +1524,7 @@ export interface DescribeKafkaUserRequest {
  */
 export interface ExtractRuleInfo {
     /**
-     * 时间字段的key名字，time_key和time_format必须成对出现
+     * 时间字段的key名字，TikeKey和TimeFormat必须成对出现
   注意：此字段可能返回 null，表示取不到有效值。
      */
     TimeKey?: string;
@@ -1533,22 +1534,22 @@ export interface ExtractRuleInfo {
      */
     TimeFormat?: string;
     /**
-     * 分隔符类型日志的分隔符，只有log_type为delimiter_log时有效
+     * 分隔符类型日志的分隔符，只有LogType为delimiter_log时有效
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Delimiter?: string;
     /**
-     * 整条日志匹配规则，只有log_type为fullregex_log时有效
+     * 整条日志匹配规则，只有LogType为fullregex_log时有效
   注意：此字段可能返回 null，表示取不到有效值。
      */
     LogRegex?: string;
     /**
-     * 行首匹配规则，只有log_type为multiline_log或fullregex_log时有效
+     * 行首匹配规则，只有LogType为multiline_log或fullregex_log时有效
   注意：此字段可能返回 null，表示取不到有效值。
      */
     BeginRegex?: string;
     /**
-     * 取的每个字段的key名字，为空的key代表丢弃这个字段，只有log_type为delimiter_log时有效，json_log的日志使用json本身的key。限制100个。
+     * 取的每个字段的key名字，为空的key代表丢弃这个字段，只有LogType为delimiter_log时有效，json_log的日志使用json本身的key。限制100个。
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Keys?: Array<string>;
@@ -1568,7 +1569,7 @@ export interface ExtractRuleInfo {
      */
     UnMatchLogKey?: string;
     /**
-     * 增量采集模式下的回溯数据量，默认-1（全量采集）
+     * 增量采集模式下的回溯数据量，默认-1（全量采集）；其他非负数表示增量采集（从最新的位置，往前采集${Backtracking}字节（Byte）的日志）最大支持1073741824（1G）。
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Backtracking?: number;
@@ -1664,7 +1665,9 @@ export interface ModifyConsumerRequest {
      */
     Effective?: boolean;
     /**
-     * 是否投递日志的元数据信息，默认为 false
+     * 是否投递日志的元数据信息，默认为 true。
+  当NeedContent为true时：字段Content有效。
+  当NeedContent为false时：字段Content无效。
      */
     NeedContent?: boolean;
     /**
@@ -1676,7 +1679,7 @@ export interface ModifyConsumerRequest {
      */
     Ckafka?: Ckafka;
     /**
-     * 投递时压缩方式，取值0，2，3。[0:NONE；2:SNAPPY；3:LZ4]
+     * 投递时压缩方式，取值0，2，3。[0：NONE；2：SNAPPY；3：LZ4]
      */
     Compression?: number;
 }
@@ -2389,6 +2392,11 @@ export interface ConfigExtraInfo {
      */
     TopicName?: string;
     /**
+     * 采集相关配置信息。详情见 CollectInfo复杂类型配置。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CollectInfos?: Array<CollectInfo>;
+    /**
      * 高级采集配置。 Json字符串， Key/Value定义为如下：
   - ClsAgentFileTimeout(超时属性), 取值范围: 大于等于0的整数， 0为不超时
   - ClsAgentMaxDepth(最大目录深度)，取值范围: 大于等于0的整数
@@ -2657,13 +2665,57 @@ export interface DescribeLogsetsResponse {
     RequestId?: string;
 }
 /**
- * DeleteConsumer返回参数结构体
+ * CreateTopic请求参数结构体
  */
-export interface DeleteConsumerResponse {
+export interface CreateTopicRequest {
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     * 日志集ID
      */
-    RequestId?: string;
+    LogsetId: string;
+    /**
+     * 日志主题名称
+     */
+    TopicName: string;
+    /**
+     * 日志主题分区个数。默认创建1个，最大支持创建10个分区。
+     */
+    PartitionCount?: number;
+    /**
+     * 标签描述列表，通过指定该参数可以同时绑定标签到相应的日志主题。最大支持10个标签键值对，同一个资源只能绑定到同一个标签键下。
+     */
+    Tags?: Array<Tag>;
+    /**
+     * 是否开启自动分裂，默认值为true
+     */
+    AutoSplit?: boolean;
+    /**
+     * 开启自动分裂后，每个主题能够允许的最大分区数，默认值为50
+     */
+    MaxSplitPartitions?: number;
+    /**
+     * 日志主题的存储类型，可选值 hot（标准存储），cold（低频存储）；默认为hot。
+     */
+    StorageType?: string;
+    /**
+     * 生命周期，单位天，标准存储取值范围1\~3600，低频存储取值范围7\~3600天。取值为3640时代表永久保存。
+  不传此值，默认获取该日志主题对应日志集的Period值（当获取失败时默认为30天）。
+     */
+    Period?: number;
+    /**
+     * 日志主题描述
+     */
+    Describes?: string;
+    /**
+     * 0：关闭日志沉降。
+  非0：开启日志沉降后标准存储的天数，HotPeriod需要大于等于7，且小于Period。
+  仅在StorageType为 hot 时生效。
+     */
+    HotPeriod?: number;
+    /**
+     * 免鉴权开关。 false：关闭； true：开启。
+  开启后将支持指定操作匿名访问该日志主题。详情请参见[日志主题](https://cloud.tencent.com/document/product/614/41035)。
+     */
+    IsWebTracking?: boolean;
 }
 /**
  * DescribeTopics请求参数结构体
@@ -2728,13 +2780,13 @@ export interface GetAlarmLogResponse {
      */
     Results?: Array<LogInfo>;
     /**
-     * 执行详情统计分析结果。当Query字段有SQL语句时，返回sql统计结果，否则可能返回null。
+     * 执行详情统计分析结果。当Query字段有SQL语句时，返回SQL统计结果，否则可能返回null。
   
   注意：此字段可能返回 null，表示取不到有效值。
      */
     AnalysisResults?: Array<LogItems>;
     /**
-     * 执行详情统计分析结果; UseNewAnalysis为true有效
+     * 执行详情统计分析结果；UseNewAnalysis为true有效。
   注意：此字段可能返回 null，表示取不到有效值。
      */
     AnalysisRecords?: Array<string>;
@@ -2749,54 +2801,13 @@ export interface GetAlarmLogResponse {
     RequestId?: string;
 }
 /**
- * CreateTopic请求参数结构体
+ * DeleteConsumer返回参数结构体
  */
-export interface CreateTopicRequest {
+export interface DeleteConsumerResponse {
     /**
-     * 日志集ID
+     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
-    LogsetId: string;
-    /**
-     * 日志主题名称
-     */
-    TopicName: string;
-    /**
-     * 日志主题分区个数。默认创建1个，最大支持创建10个分区。
-     */
-    PartitionCount?: number;
-    /**
-     * 标签描述列表，通过指定该参数可以同时绑定标签到相应的日志主题。最大支持10个标签键值对，同一个资源只能绑定到同一个标签键下。
-     */
-    Tags?: Array<Tag>;
-    /**
-     * 是否开启自动分裂，默认值为true
-     */
-    AutoSplit?: boolean;
-    /**
-     * 开启自动分裂后，每个主题能够允许的最大分区数，默认值为50
-     */
-    MaxSplitPartitions?: number;
-    /**
-     * 日志主题的存储类型，可选值 hot（标准存储），cold（低频存储）；默认为hot。
-     */
-    StorageType?: string;
-    /**
-     * 生命周期，单位天，标准存储取值范围1\~3600，低频存储取值范围7\~3600天。取值为3640时代表永久保存
-     */
-    Period?: number;
-    /**
-     * 日志主题描述
-     */
-    Describes?: string;
-    /**
-     * 0：关闭日志沉降。
-  非0：开启日志沉降后标准存储的天数。HotPeriod需要大于等于7，且小于Period。仅在StorageType为 hot 时生效
-     */
-    HotPeriod?: number;
-    /**
-     * 免鉴权开关； false: 关闭 true： 开启
-     */
-    IsWebTracking?: boolean;
+    RequestId?: string;
 }
 /**
  * DescribeExports请求参数结构体
@@ -3176,7 +3187,7 @@ export interface DescribeConfigsRequest {
  */
 export interface KafkaConsumerContent {
     /**
-     * 消费格式 0:全文；1:json
+     * 消费数据格式。 0：原始内容；1：JSON。
      */
     Format: number;
     /**
@@ -3191,9 +3202,15 @@ export interface KafkaConsumerContent {
      */
     MetaFields: Array<string>;
     /**
-     * tag数据处理方式：
-  1:不平铺（默认值）
-  2:平铺
+     * tag数据处理方式：1:不平铺（默认值）；2:平铺。
+  
+  不平铺示例：
+  TAG信息：`{"__TAG__":{"fieldA":200,"fieldB":"text"}}`
+  不平铺：`{"__TAG__":{"fieldA":200,"fieldB":"text"}}`
+  
+  平铺示例：
+  TAG信息：`{"__TAG__":{"fieldA":200,"fieldB":"text"}}`
+  平铺：`{"__TAG__.fieldA":200,"__TAG__.fieldB":"text"}`
   注意：此字段可能返回 null，表示取不到有效值。
      */
     TagTransaction?: number;
@@ -3201,6 +3218,15 @@ export interface KafkaConsumerContent {
      * 消费数据Json格式：
   1：不转义（默认格式）
   2：转义
+  
+  投递Json格式。
+  JsonType为1：和原始日志一致，不转义。示例：
+  日志原文：`{"a":"aa", "b":{"b1":"b1b1", "c1":"c1c1"}}`
+  投递到Ckafka：`{"a":"aa", "b":{"b1":"b1b1", "c1":"c1c1"}}`
+  
+  JsonType为2：转义。示例：
+  日志原文：`{"a":"aa", "b":{"b1":"b1b1", "c1":"c1c1"}}`
+  投递到Ckafka：`{"a":"aa","b":"{\"b1\":\"b1b1\", \"c1\":\"c1c1\"}"}`
      */
     JsonType?: number;
 }
@@ -3288,8 +3314,6 @@ export interface AnalysisDimensional {
   "Key": "SyntaxRule",  // 语法规则
   "Value": "1"  //0：Lucene语法 ，1： CQL语法
   }
-  
-  
   
   当Analysis的Type字段为field（top5）时,  支持
    {
@@ -3947,12 +3971,25 @@ export interface DeleteIndexResponse {
  */
 export interface AlarmAnalysisConfig {
     /**
-     * 键
+     * 键。支持以下key：
+  SyntaxRule：语法规则，value支持 0：Lucene语法；1： CQL语法。
+  QueryIndex：执行语句序号。value支持  -1：自定义； 1：执行语句1； 2：执行语句2。
+  CustomQuery：检索语句。 QueryIndex为-1时有效且必填，value示例： "* | select count(*) as count"。
+  Fields：字段。value支持 __SOURCE__；__FILENAME__；__HOSTNAME__；__TIMESTAMP__；__INDEX_STATUS__；__PKG_LOGID__；__TOPIC__。
+  Format：显示形式。value支持 1：每条日志一行；2：每条日志每个字段一行。
+  Limit：最大日志条数。 value示例： 5。
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Key: string;
     /**
-     * 值
+     * 值。
+  键对应值如下：
+  SyntaxRule：语法规则，value支持 0：Lucene语法；1： CQL语法。
+  QueryIndex：执行语句序号。value支持  -1：自定义； 1：执行语句1； 2：执行语句2。
+  CustomQuery：检索语句。 QueryIndex为-1时有效且必填，value示例： "* | select count(*) as count"。
+  Fields：字段。value支持 __SOURCE__；__FILENAME__；__HOSTNAME__；__TIMESTAMP__；__INDEX_STATUS__；__PKG_LOGID__；__TOPIC__。
+  Format：显示形式。value支持 1：每条日志一行；2：每条日志每个字段一行。
+  Limit：最大日志条数。 value示例： 5。
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Value: string;
@@ -4220,7 +4257,7 @@ export interface ExportInfo {
      */
     To?: number;
     /**
-     * 日志导出路径
+     * 日志导出路径,有效期一个小时，请尽快使用该路径下载。
      */
     CosPath?: string;
     /**
@@ -4276,7 +4313,9 @@ export interface TopicInfo {
      */
     CreateTime?: string;
     /**
-     * 主题是否开启采集
+     * 主题是否开启采集，true：开启采集；false：关闭采集。
+  创建日志主题时默认开启，可通过SDK调用ModifyTopic修改此字段。
+  控制台目前不支持修改此参数。
      */
     Status?: boolean;
     /**
@@ -4328,9 +4367,8 @@ export interface TopicInfo {
      */
     BizType?: number;
     /**
-     * 免鉴权开关。
-  - false: 关闭
-  - true: 开启
+     * 免鉴权开关。 false：关闭； true：开启。
+  开启后将支持指定操作匿名访问该日志主题。详情请参见[日志主题](https://cloud.tencent.com/document/product/614/41035)。
   注意：此字段可能返回 null，表示取不到有效值。
      */
     IsWebTracking?: boolean;
@@ -4357,11 +4395,11 @@ export interface DescribeLogContextResponse {
      */
     LogContextInfos?: Array<LogContextInfo>;
     /**
-     * 上文日志是否已经返回
+     * 上文日志是否已经返回完成（当PrevOver为false，表示有上文日志还未全部返回）。
      */
     PrevOver?: boolean;
     /**
-     * 下文日志是否已经返回
+     * 下文日志是否已经返回完成（当NextOver为false，表示有下文日志还未全部返回）。
      */
     NextOver?: boolean;
     /**
@@ -4426,7 +4464,7 @@ export interface PreviewKafkaRechargeRequest {
      */
     ServerAddr?: string;
     /**
-     * ServerAddr是否为加密连接。。
+     * ServerAddr是否为加密连接。
   KafkaType为1时有效。
      */
     IsEncryptionAddr?: boolean;
@@ -4756,7 +4794,9 @@ export interface CreateConsumerRequest {
      */
     TopicId: string;
     /**
-     * 是否投递日志的元数据信息，默认为 true
+     * 是否投递日志的元数据信息，默认为 true。
+  当NeedContent为true时：字段Content有效。
+  当NeedContent为false时：字段Content无效。
      */
     NeedContent?: boolean;
     /**
@@ -4768,7 +4808,7 @@ export interface CreateConsumerRequest {
      */
     Ckafka?: Ckafka;
     /**
-     * 投递时压缩方式，取值0，2，3。[0:NONE；2:SNAPPY；3:LZ4]
+     * 投递时压缩方式，取值0，2，3。[0：NONE；2：SNAPPY；3：LZ4]
      */
     Compression?: number;
 }
@@ -4998,7 +5038,7 @@ export interface DescribeMachinesResponse {
      */
     Machines?: Array<MachineInfo>;
     /**
-     * 机器组是否开启自动升级功能
+     * 机器组是否开启自动升级功能。 0：未开启自动升级；1：开启了自动升级。
      */
     AutoUpdate?: number;
     /**
@@ -5210,6 +5250,44 @@ export interface SearchCosRechargeInfoResponse {
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * DescribeAlarms请求参数结构体
+ */
+export interface DescribeAlarmsRequest {
+    /**
+     * name
+  - 按照【告警策略名称】进行过滤。
+  - 类型：String
+  - 必选：否
+  
+  alarmId
+  - 按照【告警策略ID】进行过滤。
+  - 类型：String
+  - 必选：否
+  
+  topicId
+  - 按照【监控对象的日志主题ID】进行过滤。
+  - 类型：String
+  - 必选：否
+  
+  enable
+  - 按照【启用状态】进行过滤。
+  - 类型：String
+  - 备注：enable参数值范围: 1, t, T, TRUE, true, True, 0, f, F, FALSE, false, False。 其它值将返回参数错误信息.
+  - 必选：否
+  
+  每次请求的Filters的上限为10，Filter.Values的上限为5。
+     */
+    Filters?: Array<Filter>;
+    /**
+     * 分页的偏移量，默认值为0。
+     */
+    Offset?: number;
+    /**
+     * 分页单页限制数目，默认值为20，最大值100。
+     */
+    Limit?: number;
 }
 /**
  * 投递规则
@@ -5523,7 +5601,8 @@ export interface ModifyTopicRequest {
      */
     Tags?: Array<Tag>;
     /**
-     * 该日志主题是否开始采集
+     * 主题是否开启采集，true：开启采集；false：关闭采集。
+  控制台目前不支持修改此参数。
      */
     Status?: boolean;
     /**
@@ -5548,7 +5627,8 @@ export interface ModifyTopicRequest {
      */
     HotPeriod?: number;
     /**
-     * 免鉴权开关； false: 关闭 true: 开启
+     * 免鉴权开关。 false：关闭； true：开启。
+  开启后将支持指定操作匿名访问该日志主题。详情请参见[日志主题](https://cloud.tencent.com/document/product/614/41035)。
      */
     IsWebTracking?: boolean;
 }
@@ -5640,8 +5720,8 @@ export interface DescribeScheduledSqlInfoRequest {
   <li>dstTopicName按照【目标日志主题名称】进行过滤，模糊匹配。类型：String。必选：否</li>
   <li>srcTopicId按照【源日志主题ID】进行过滤。类型：String。必选：否</li>
   <li>dstTopicId按照【目标日志主题ID】进行过滤。类型：String。必选：否</li>
-  <li>bizType按照【主题类型】进行过滤,0日志主题 1指标主题。类型：String。必选：否</li>
-  <li>status按照【任务状态】进行过滤，1:运行 2:停止。类型：String。必选：否</li>
+  <li>bizType按照【主题类型】进行过滤，0日志主题 1指标主题。类型：String。必选：否</li>
+  <li>status按照【任务状态】进行过滤，1：运行；2：停止。类型：String。必选：否</li>
   <li>taskName按照【任务名称】进行过滤，模糊匹配。类型：String。必选：否</li>
   <li>taskId按照【任务ID】进行过滤，模糊匹配。类型：String。必选：否</li>
   
@@ -5687,15 +5767,17 @@ export interface MachineInfo {
      */
     Version?: string;
     /**
-     * 机器升级功能状态。
+     * 机器升级功能状态。 0：升级成功；1：升级中；-1：升级失败。
      */
     UpdateStatus?: number;
     /**
      * 机器升级结果标识。
+  0：成功；1200：升级成功；其他值表示异常。
      */
     ErrCode?: number;
     /**
      * 机器升级结果信息。
+  “ok”：成功；“update success”：升级成功；其他值为失败原因。
      */
     ErrMsg?: string;
 }
@@ -5938,41 +6020,17 @@ export interface ApplyConfigToMachineGroupRequest {
     GroupId: string;
 }
 /**
- * GetAlarmLog请求参数结构体
+ * 采集配置信息
  */
-export interface GetAlarmLogRequest {
+export interface CollectConfig {
     /**
-     * 要查询的执行详情的起始时间，Unix时间戳，单位ms
+     * 指定采集类型的采集配置名称信息。
+  <li>当CollectInfo中Type为0：表示元数据配置，name为元数据名称。
+  目前支持"container_id"，"container_name"，"image_name"，"namespace"，"pod_uid"，"pod_name"，"pod_ip"。
+  </li>
+  <li>当CollectInfo中Type为1：指定pod label，name为指定pod label名称。</li>
      */
-    From: number;
-    /**
-     * 要查询的执行详情的结束时间，Unix时间戳，单位ms
-     */
-    To: number;
-    /**
-     * 查询过滤条件，例如：
-  - 按告警策略ID查询：`alert_id:"alarm-0745ec00-e605-xxxx-b50b-54afe61fc971"`
-  - 按监控对象ID查询：`monitored_object:"823d8bfa-76a7-xxxx-8399-8cda74d4009b" `
-  - 按告警策略ID及监控对象ID查询：`alert_id:"alarm-0745ec00-e605-xxxx-b50b-54afe61fc971" AND monitored_object:"823d8bfa-76a7-xxxx-8399-8cda74d4009b"`
-  - 按告警策略ID及监控对象ID查询支持SQL语句：`(alert_id:"alarm-5ce45495-09e8-4d58-xxxx-768134bf330c") AND (monitored_object:"3c514e84-6f1f-46ec-xxxx-05de6163f7fe") AND NOT condition_evaluate_result: "Skip" AND condition_evaluate_result:[* TO *] | SELECT count(*) as top50StatisticsTotalCount, count_if(condition_evaluate_result='ProcessError') as top50StatisticsFailureCount, count_if(notification_send_result!='NotSend') as top50NoticeTotalCount, count_if(notification_send_result='SendPartFail' or notification_send_result='SendFail') as top50NoticeFailureCount, alert_id, alert_name, monitored_object, topic_type, happen_threshold, alert_threshold, notify_template group by alert_id, alert_name, monitored_object,topic_type, happen_threshold, alert_threshold, notify_template order by top50StatisticsTotalCount desc limit 1`
-     */
-    Query: string;
-    /**
-     * 单次查询返回的执行详情条数，最大值为1000
-     */
-    Limit?: number;
-    /**
-     * 加载更多详情时使用，透传上次返回的Context值，获取后续的执行详情
-     */
-    Context?: string;
-    /**
-     * 执行详情是否按时间排序返回；可选值：asc(升序)、desc(降序)，默认为 desc
-     */
-    Sort?: string;
-    /**
-     * 如果Query包含SQL语句，UseNewAnalysis为true时响应参数AnalysisRecords和Columns有效， UseNewAnalysis为false时响应参数AnalysisResults和ColNames有效
-     */
-    UseNewAnalysis?: boolean;
+    Name: string;
 }
 /**
  * 自建k8s-容器文件路径信息
@@ -6303,7 +6361,7 @@ export interface ModifyKafkaRechargeRequest {
  */
 export interface CreateDataTransformRequest {
     /**
-     * 任务类型. 1: 指定主题；2:动态创建
+     * 任务类型. 1: 指定主题；2:动态创建。详情请参考[创建加工任务文档](https://cloud.tencent.com/document/product/614/63940)。
      */
     FuncType: number;
     /**
@@ -6319,17 +6377,18 @@ export interface CreateDataTransformRequest {
      */
     EtlContent: string;
     /**
-     * 加工类型  1 使用源日志主题中的随机数据，进行加工预览 :2 使用用户自定义测试数据，进行加工预览 3 创建真实加工任务
+     * 加工类型。
+  1：使用源日志主题中的随机数据，进行加工预览；2：使用用户自定义测试数据，进行加工预览；3：创建真实加工任务。
      */
     TaskType: number;
+    /**
+     * 加工任务目的topic_id以及别名,当FuncType=1时，该参数必填，当FuncType=2时，无需填写。
+     */
+    DstResources?: Array<DataTransformResouceInfo>;
     /**
      * 任务启动状态.   默认为1:开启,  2:关闭
      */
     EnableFlag?: number;
-    /**
-     * 加工任务目的topic_id以及别名,当FuncType=1时，该参数必填，当FuncType=2时，无需填写
-     */
-    DstResources?: Array<DataTransformResouceInfo>;
     /**
      * 用于预览加工结果的测试数据
      */
@@ -6421,9 +6480,9 @@ export interface DescribeLogsetsRequest {
  */
 export interface DescribeKafkaUserResponse {
     /**
-     * kafka消费用户名
+     * 如果返回不为空，代表用户名UserName已经创建成功。
      */
-    UserName: string;
+    UserName?: string;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -6581,7 +6640,8 @@ export interface DescribeDataTransformInfoResponse {
  */
 export interface ConsumerContent {
     /**
-     * 是否投递 TAG 信息
+     * 是否投递 TAG 信息。
+  当EnableTag为true时，表示投递TAG元信息。
   注意：此字段可能返回 null，表示取不到有效值。
      */
     EnableTag: boolean;
@@ -6591,15 +6651,36 @@ export interface ConsumerContent {
      */
     MetaFields: Array<string>;
     /**
-     * 当EnableTag为true时，必须填写TagJsonNotTiled字段，TagJsonNotTiled用于标识tag信息是否json平铺，TagJsonNotTiled为true时不平铺，false时平铺
+     * 当EnableTag为true时，必须填写TagJsonNotTiled字段。
+  TagJsonNotTiled用于标识tag信息是否json平铺。
+  
+  TagJsonNotTiled为true时不平铺，示例：
+  TAG信息：`{"__TAG__":{"fieldA":200,"fieldB":"text"}}`
+  不平铺：`{"__TAG__":{"fieldA":200,"fieldB":"text"}}`
+  
+  TagJsonNotTiled为false时平铺，示例：
+  TAG信息：`{"__TAG__":{"fieldA":200,"fieldB":"text"}}`
+  平铺：`{"__TAG__.fieldA":200,"__TAG__.fieldB":"text"}`
   注意：此字段可能返回 null，表示取不到有效值。
      */
     TagJsonNotTiled?: boolean;
     /**
-     * 投递时间戳精度，可选项 [1:秒；2:毫秒] ，默认是秒
+     * 投递时间戳精度，可选项 [1：秒；2：毫秒] ，默认是1。
   注意：此字段可能返回 null，表示取不到有效值。
      */
     TimestampAccuracy?: number;
+    /**
+     * 投递Json格式。
+  JsonType为0：和原始日志一致，不转义。示例：
+  日志原文：`{"a":"aa", "b":{"b1":"b1b1", "c1":"c1c1"}}`
+  投递到Ckafka：`{"a":"aa", "b":{"b1":"b1b1", "c1":"c1c1"}}`
+  
+  JsonType为1：转义。示例：
+  日志原文：`{"a":"aa", "b":{"b1":"b1b1", "c1":"c1c1"}}`
+  投递到Ckafka：`{"a":"aa","b":"{\"b1\":\"b1b1\", \"c1\":\"c1c1\"}"}`
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    JsonType?: number;
 }
 /**
  * 日志内容高亮描述信息
@@ -6670,6 +6751,46 @@ export interface KeyRegexInfo {
      * key对应的过滤规则regex
      */
     Regex: string;
+}
+/**
+ * GetAlarmLog请求参数结构体
+ */
+export interface GetAlarmLogRequest {
+    /**
+     * 要查询的执行详情的起始时间，Unix时间戳，单位ms
+     */
+    From: number;
+    /**
+     * 要查询的执行详情的结束时间，Unix时间戳，单位ms
+     */
+    To: number;
+    /**
+     * 查询过滤条件，例如：
+  - 按告警策略ID查询：`alert_id:"alarm-0745ec00-e605-xxxx-b50b-54afe61fc971"`
+  - 按监控对象ID查询：`monitored_object:"823d8bfa-76a7-xxxx-8399-8cda74d4009b" `
+  - 按告警策略ID及监控对象ID查询：`alert_id:"alarm-0745ec00-e605-xxxx-b50b-54afe61fc971" AND monitored_object:"823d8bfa-76a7-xxxx-8399-8cda74d4009b"`
+  - 按告警策略ID及监控对象ID查询支持SQL语句：`(alert_id:"alarm-5ce45495-09e8-4d58-xxxx-768134bf330c") AND (monitored_object:"3c514e84-6f1f-46ec-xxxx-05de6163f7fe") AND NOT condition_evaluate_result: "Skip" AND condition_evaluate_result:[* TO *] | SELECT count(*) as top50StatisticsTotalCount, count_if(condition_evaluate_result='ProcessError') as top50StatisticsFailureCount, count_if(notification_send_result!='NotSend') as top50NoticeTotalCount, count_if(notification_send_result='SendPartFail' or notification_send_result='SendFail') as top50NoticeFailureCount, alert_id, alert_name, monitored_object, topic_type, happen_threshold, alert_threshold, notify_template group by alert_id, alert_name, monitored_object,topic_type, happen_threshold, alert_threshold, notify_template order by top50StatisticsTotalCount desc limit 1`
+     */
+    Query: string;
+    /**
+     * 单次查询返回的执行详情条数，最大值为1000
+     */
+    Limit?: number;
+    /**
+     * 加载更多详情时使用，透传上次返回的Context值，获取后续的执行详情
+     */
+    Context?: string;
+    /**
+     * 执行详情是否按时间排序返回；可选值：asc(升序)、desc(降序)，默认为 desc
+     */
+    Sort?: string;
+    /**
+     * 为true代表使用新的检索结果返回方式，输出参数AnalysisRecords和Columns有效；
+  为false代表使用老的检索结果返回方式，输出AnalysisResults和ColNames有效；
+  两种返回方式在编码格式上有少量区别，建议使用true。
+  示例值：false
+     */
+    UseNewAnalysis?: boolean;
 }
 /**
  * MergePartition返回参数结构体

@@ -4434,7 +4434,7 @@ export interface CreateRocketMQTopicRequest {
    */
   Namespaces: Array<string>
   /**
-   * 主题类型，可选值为Normal, PartitionedOrder, Transaction, DelayScheduled。
+   * 主题类型，可选值为Normal, GlobalOrder, PartitionedOrder, Transaction, DelayScheduled。Transaction仅在专享版支持。
    */
   Type: string
   /**

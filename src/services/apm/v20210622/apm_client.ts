@@ -65,7 +65,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改Apm实例接口
+   * 修改APM实例接口
    */
   async ModifyApmInstance(
     req: ModifyApmInstanceRequest,

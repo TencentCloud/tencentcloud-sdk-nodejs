@@ -8,7 +8,7 @@ import { ModifyApmInstanceRequest, CreateApmInstanceRequest, DescribeServiceOver
 export declare class Client extends AbstractClient {
     constructor(clientConfig: ClientConfig);
     /**
-     * 修改Apm实例接口
+     * 修改APM实例接口
      */
     ModifyApmInstance(req: ModifyApmInstanceRequest, cb?: (error: string, rep: ModifyApmInstanceResponse) => void): Promise<ModifyApmInstanceResponse>;
     /**

@@ -903,6 +903,11 @@ export interface UpstreamHealthCheckConfig {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     UnhealthyHttpStatuses?: Array<number | bigint>;
+    /**
+     * 健康检查屏蔽权重为0的节点
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IgnoreZeroWeightNodes?: boolean;
 }
 /**
  * DescribeAutoScalerResourceStrategyBindingGroups返回参数结构体
@@ -4866,6 +4871,11 @@ export interface KongUpstreamInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     HealthStatus?: string;
+    /**
+     * 云函数是否开启CAM鉴权，不填时默认为开启(true)
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ScfCamAuthEnable?: boolean;
 }
 /**
  * CreateCloudNativeAPIGatewayRoute请求参数结构体

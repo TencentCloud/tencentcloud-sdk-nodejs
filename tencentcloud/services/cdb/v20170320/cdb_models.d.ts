@@ -2808,12 +2808,12 @@ export interface DescribeErrorLogDataResponse {
     /**
      * 符合条件的记录总数。
      */
-    TotalCount: number;
+    TotalCount?: number;
     /**
      * 返回的记录。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Items: Array<ErrlogItem>;
+    Items?: Array<ErrlogItem>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */

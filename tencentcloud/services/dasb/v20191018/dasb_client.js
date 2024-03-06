@@ -40,6 +40,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDeviceGroupMembers", req, cb);
     }
     /**
+     * 设置OAuth认证参数
+     */
+    async ModifyOAuthSetting(req, cb) {
+        return this.request("ModifyOAuthSetting", req, cb);
+    }
+    /**
      * 修改高危命令模板
      */
     async ModifyCmdTemplate(req, cb) {

@@ -203,6 +203,10 @@ export interface ModifyInstanceRequest {
    * 是否开启弹性TPS
    */
   ScaledTpsEnabled?: boolean
+  /**
+   * 最大可创建主题数
+   */
+  MaxTopicNum?: number
 }
 
 /**
@@ -279,6 +283,13 @@ export interface SubscriptionData {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ConsumeMessageOrderly?: boolean
+  /**
+   * 消费模式: 
+BROADCASTING 广播模式;
+CLUSTERING 集群模式;
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MessageModel?: string
 }
 
 /**
@@ -967,6 +978,10 @@ TRANSACTION:事务消息
    */
   SubscriptionData?: Array<SubscriptionData>
   /**
+   * 消息保留时长
+   */
+  MsgTTL?: number
+  /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -1057,6 +1072,10 @@ TRANSACTION:事务消息
    * 备注
    */
   Remark?: string
+  /**
+   * 消息保留时长
+   */
+  MsgTTL?: number
 }
 
 /**
@@ -1406,17 +1425,17 @@ export interface DescribeTopicRequest {
    */
   Topic: string
   /**
-   * 查询起始位置
-   */
-  Offset: number
-  /**
-   * 查询结果限制数量
-   */
-  Limit: number
-  /**
    * 查询条件列表
    */
   Filters?: Array<Filter>
+  /**
+   * 查询起始位置
+   */
+  Offset?: number
+  /**
+   * 查询结果限制数量
+   */
+  Limit?: number
 }
 
 /**
@@ -1606,17 +1625,17 @@ export interface DescribeTopicListRequest {
    */
   InstanceId: string
   /**
-   * 查询起始位置
-   */
-  Offset: number
-  /**
-   * 查询结果限制数量
-   */
-  Limit: number
-  /**
    * 查询条件列表
    */
   Filters?: Array<Filter>
+  /**
+   * 查询起始位置
+   */
+  Offset?: number
+  /**
+   * 查询结果限制数量
+   */
+  Limit?: number
 }
 
 /**
@@ -1715,6 +1734,31 @@ export interface TopicItem {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Remark?: string
+  /**
+   * 4.x的集群id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ClusterIdV4?: string
+  /**
+   * 4.x的命名空间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NamespaceV4?: string
+  /**
+   * 4.x的主题名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TopicV4?: string
+  /**
+   * 4.x的完整命名空间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FullNamespaceV4?: string
+  /**
+   * 消息保留时长
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MsgTTL?: number
 }
 
 /**
@@ -1739,7 +1783,24 @@ experiment_500,
 basic_1k,
 basic_2k,
 basic_4k,
-basic_6k
+basic_6k,
+pro_4k,
+pro_6k,
+pro_1w,
+pro_2w,
+pro_3w,
+pro_4w,
+pro_5w,
+platinum_6k,
+platinum_1w,
+platinum_2w,
+platinum_4w,
+platinum_10w,
+platinum_15w,
+platinum_20w,
+platinum_40w,
+platinum_60w,
+platinum_100w
    */
   SkuCode: string
   /**
@@ -1759,7 +1820,7 @@ basic_6k
    */
   EnablePublic?: boolean
   /**
-   * 公网带宽
+   * 公网带宽（单位：兆）
    */
   Bandwidth?: number
   /**
@@ -1767,9 +1828,25 @@ basic_6k
    */
   IpRules?: Array<IpRule>
   /**
-   * 消息保留时长，小时为单位
+   * 消息保留时长（单位：小时）
    */
   MessageRetention?: number
+  /**
+   * 付费模式（0: 后付费；1: 预付费）
+   */
+  PayMode?: number
+  /**
+   * 是否自动续费（0: 不自动续费；1: 自动续费）
+   */
+  RenewFlag?: number
+  /**
+   * 购买时长（单位：月）
+   */
+  TimeSpan?: number
+  /**
+   * 最大可创建主题数
+   */
+  MaxTopicNum?: number
 }
 
 /**
