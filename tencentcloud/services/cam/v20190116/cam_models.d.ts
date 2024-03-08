@@ -289,7 +289,7 @@ export interface ListAttachedGroupPoliciesRequest {
  */
 export interface ListGroupsForUserRequest {
     /**
-     * 子用户 UID
+     * 子用户 UID，入参Uid和SubUin二选一
      */
     Uid?: number;
     /**
@@ -301,7 +301,7 @@ export interface ListGroupsForUserRequest {
      */
     Page?: number;
     /**
-     * 子账号UIN
+     * 子账号UIN，入参Uid和SubUin二选一
      */
     SubUin?: number;
 }
@@ -518,7 +518,7 @@ export interface ListPolicyVersionsRequest {
  */
 export interface GetCustomMFATokenInfoRequest {
     /**
-     * 自定义多因子验证Token
+     * 自定义多因子验证Token，针对用户自定义的安全校验方式而生成的，以供查询用户安全校验时使用。
      */
     MFAToken: string;
 }
@@ -803,11 +803,11 @@ export interface ListGroupsForUserResponse {
     /**
      * 子用户加入的用户组总数
      */
-    TotalNum: number;
+    TotalNum?: number;
     /**
      * 用户组信息
      */
-    GroupInfo: Array<GroupInfo>;
+    GroupInfo?: Array<GroupInfo>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1656,15 +1656,15 @@ export interface GetUserRequest {
  */
 export interface LoginActionMfaFlag {
     /**
-     * 手机
+     * 是否设置手机号为登陆和敏感操作安全校验方式， 1: 设置，0: 不设置
      */
     Phone?: number;
     /**
-     * 软token
+     * 是否设置软token为登陆和敏感操作安全校验方式， 1: 设置，0: 不设置
      */
     Stoken?: number;
     /**
-     * 微信
+     * 是否设置微信为登陆和敏感操作安全校验方式， 1: 设置，0: 不设置
      */
     Wechat?: number;
 }
@@ -2507,7 +2507,7 @@ export interface CreatePolicyRequest {
      */
     PolicyName: string;
     /**
-     * 策略文档，示例：{"version":"2.0","statement":[{"action":"name/sts:AssumeRole","effect":"allow","principal":{"service":["cloudaudit.cloud.tencent.com","cls.cloud.tencent.com"]}}]}，principal用于指定角色的授权对象。获取该参数可参阅 获取角色详情（https://cloud.tencent.com/document/product/598/36221） 输出参数RoleInfo
+     * 策略文档
      */
     PolicyDocument: string;
     /**
@@ -3153,26 +3153,26 @@ export interface AttachEntityOfPolicy {
     /**
      * 实体ID
      */
-    Id: string;
+    Id?: string;
     /**
      * 实体名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Name: string;
+    Name?: string;
     /**
      * 实体Uin
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Uin: number;
+    Uin?: number;
     /**
-     * 关联类型。1 用户关联 ； 2 用户组关联
+     * 关联类型。1 用户关联 ； 2 用户组关联 3 角色关联
      */
-    RelatedType: number;
+    RelatedType?: number;
     /**
      * 策略关联时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    AttachmentTime: string;
+    AttachmentTime?: string;
 }
 /**
  * DeleteOIDCConfig返回参数结构体
@@ -3390,11 +3390,11 @@ export interface ListCollaboratorsResponse {
     /**
      * 总数
      */
-    TotalNum: number;
+    TotalNum?: number;
     /**
      * 协作者信息
      */
-    Data: Array<SubAccountInfo>;
+    Data?: Array<SubAccountInfo>;
     /**
      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
      */
@@ -3461,7 +3461,7 @@ export interface UpdatePolicyRequest {
      */
     Description?: string;
     /**
-     * 策略文档，示例：{"version":"2.0","statement":[{"action":"name/sts:AssumeRole","effect":"allow","principal":{"service":["cloudaudit.cloud.tencent.com","cls.cloud.tencent.com"]}}]}，principal用于指定角色的授权对象。获取该参数可参阅 获取角色详情（https://cloud.tencent.com/document/product/598/36221） 输出参数RoleInfo
+     * 策略文档
      */
     PolicyDocument?: string;
     /**

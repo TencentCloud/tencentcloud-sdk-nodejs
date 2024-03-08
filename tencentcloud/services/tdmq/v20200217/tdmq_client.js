@@ -317,6 +317,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeRabbitMQVipInstance", req, cb);
     }
     /**
+     * 从腾讯云可观测平台拉取公网指标监控数据，目前仅支持客户端到 LB 的入带宽和出宽带指标。
+     */
+    async DescribeRocketMQPublicAccessMonitorData(req, cb) {
+        return this.request("DescribeRocketMQPublicAccessMonitorData", req, cb);
+    }
+    /**
      * 导入topic列表
      */
     async ImportRocketMQTopics(req, cb) {

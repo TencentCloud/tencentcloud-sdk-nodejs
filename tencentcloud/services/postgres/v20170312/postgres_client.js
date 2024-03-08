@@ -60,7 +60,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("RebalanceReadOnlyGroup", req, cb);
     }
     /**
-     * 本接口（ModifyAccountRemark）用于修改帐号备注。
+     * 本接口（ModifyAccountRemark）用于修改账号备注。
      */
     async ModifyAccountRemark(req, cb) {
         return this.request("ModifyAccountRemark", req, cb);
@@ -186,7 +186,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDBInstanceSecurityGroups", req, cb);
     }
     /**
-     * 本接口（CreateBaseBackup）用于创建实例的全量备份。
+     * 本接口（CreateBaseBackup）用于创建实例的数据备份。
      */
     async CreateBaseBackup(req, cb) {
         return this.request("CreateBaseBackup", req, cb);
@@ -222,7 +222,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyDBInstanceParameters", req, cb);
     }
     /**
-     * 本接口（DescribeBaseBackups）用于查询基础备份列表。
+     * 本接口（DescribeBaseBackups）用于查询数据备份列表。
      */
     async DescribeBaseBackups(req, cb) {
         return this.request("DescribeBaseBackups", req, cb);
@@ -398,7 +398,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("IsolateDBInstances", req, cb);
     }
     /**
-     * 本接口（ModifyBaseBackupExpireTime）用于修改实例指定全量备份的过期时间。
+     * 本接口（ModifyBaseBackupExpireTime）用于修改实例指定数据备份的过期时间。
      */
     async ModifyBaseBackupExpireTime(req, cb) {
         return this.request("ModifyBaseBackupExpireTime", req, cb);
@@ -551,7 +551,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyBackupDownloadRestriction", req, cb);
     }
     /**
-     * 本接口（DeleteBaseBackup）用于删除实例指定全量备份。
+     * 本接口（DeleteBaseBackup）用于删除实例指定数据备份。
      */
     async DeleteBaseBackup(req, cb) {
         return this.request("DeleteBaseBackup", req, cb);

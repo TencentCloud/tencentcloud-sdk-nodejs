@@ -920,6 +920,22 @@ export interface ModifyEnvironmentAttributesRequest {
 }
 
 /**
+ * 监控数据点
+ */
+export interface RocketMQDataPoint {
+  /**
+   * 监控值数组，该数组和Timestamps一一对应
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Timestamps?: Array<number | bigint>
+  /**
+   * 监控数据点位置，比如一天按分钟划分有1440个点，每个点的序号是0 - 1439之间的一个数，当某个序号不在该数组中，说明掉点了
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Values?: Array<number>
+}
+
+/**
  * DescribeSubscriptions返回参数结构体
  */
 export interface DescribeSubscriptionsResponse {
@@ -1166,8 +1182,25 @@ export interface DescribeRocketMQMsgRequest {
   PulsarMsgId: string
   /**
    * 查询死信时该值为true，只对Rocketmq有效
+   * @deprecated
    */
   QueryDlqMsg?: boolean
+  /**
+   * 查询死信时该值为true，只对Rocketmq有效
+   */
+  QueryDeadLetterMessage?: boolean
+  /**
+   * 分页Offset
+   */
+  Offset?: number
+  /**
+   * 分页Limit
+   */
+  Limit?: number
+  /**
+   * 根据消费组名称过滤消费详情
+   */
+  FilterTrackGroup?: string
 }
 
 /**
@@ -4947,41 +4980,29 @@ export interface ModifyEnvironmentAttributesResponse {
 }
 
 /**
- * DescribeAllTenants请求参数结构体
+ * DescribeRocketMQPublicAccessMonitorData请求参数结构体
  */
-export interface DescribeAllTenantsRequest {
+export interface DescribeRocketMQPublicAccessMonitorDataRequest {
   /**
-   * 查询偏移量
+   * 专享集群ID
    */
-  Offset: number
+  InstanceId: string
   /**
-   * 查询限制条数
+   * 指标名称，仅支持单指标拉取。目前仅支持：ClientIntraffic; ClientOuttraffic
    */
-  Limit: number
+  MetricName: string
   /**
-   * 物理集群名称
+   * 起始时间
    */
-  ClusterName?: string
+  StartTime?: string
   /**
-   * 虚拟集群ID
+   * 结束时间，默认为当前时间
    */
-  TenantId?: string
+  EndTime?: string
   /**
-   * 虚拟集群名称
+   * 监控统计周期，如60。默认为取值为300，单位为s。
    */
-  TenantName?: string
-  /**
-   * 协议类型数组
-   */
-  Types?: Array<string>
-  /**
-   * 排序字段名，支持createTime，updateTime
-   */
-  SortBy?: string
-  /**
-   * 升序排列ASC，降序排列DESC
-   */
-  SortOrder?: string
+  Period?: number
 }
 
 /**
@@ -5420,7 +5441,7 @@ export interface DescribeRocketMQMsgResponse {
    */
   ProducerAddr?: string
   /**
-   * 消费组消费情况
+   * 消费组消费情况列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
   MessageTracks?: Array<RocketMQMessageTrack>
@@ -5429,6 +5450,10 @@ export interface DescribeRocketMQMsgResponse {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ShowTopicName?: string
+  /**
+   * 消费组消费情况列表总数
+   */
+  MessageTracksCount?: number
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5664,7 +5689,13 @@ export interface RocketMQMessageTrack {
    */
   Group: string
   /**
-   * 消费状态
+   * 消费状态,
+CONSUMED: 已消费
+CONSUMED_BUT_FILTERED: 已过滤
+NOT_CONSUME: 未消费
+ENTER_RETRY: 进入重试队列
+ENTER_DLQ: 进入死信队列
+UNKNOWN: 查询不到消费状态
    */
   ConsumeStatus: string
   /**
@@ -7445,6 +7476,46 @@ export interface DescribeRocketMQConsumeStatsResponse {
 }
 
 /**
+ * DescribeRocketMQPublicAccessMonitorData返回参数结构体
+ */
+export interface DescribeRocketMQPublicAccessMonitorDataResponse {
+  /**
+   * 指标名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MetricName?: string
+  /**
+   * 监控统计周期，如60。默认为取值为300，单位为s。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Period?: number
+  /**
+   * 起始时间，如2018-09-22T19:51:23+08:00
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StartTime?: string
+  /**
+   * 结束时间，如2018-09-22T20:51:23+08:00，默认为当前时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EndTime?: string
+  /**
+   * 数据点数组
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DataPoints?: Array<RocketMQDataPoint>
+  /**
+   * 返回信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Msg?: string
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * RabbitMQ的vhost详情
  */
 export interface RabbitMQVirtualHostInfo {
@@ -9194,6 +9265,44 @@ export interface DeleteSubscriptionsRequest {
    * 是否强制删除，默认为false
    */
   Force?: boolean
+}
+
+/**
+ * DescribeAllTenants请求参数结构体
+ */
+export interface DescribeAllTenantsRequest {
+  /**
+   * 查询偏移量
+   */
+  Offset: number
+  /**
+   * 查询限制条数
+   */
+  Limit: number
+  /**
+   * 物理集群名称
+   */
+  ClusterName?: string
+  /**
+   * 虚拟集群ID
+   */
+  TenantId?: string
+  /**
+   * 虚拟集群名称
+   */
+  TenantName?: string
+  /**
+   * 协议类型数组
+   */
+  Types?: Array<string>
+  /**
+   * 排序字段名，支持createTime，updateTime
+   */
+  SortBy?: string
+  /**
+   * 升序排列ASC，降序排列DESC
+   */
+  SortOrder?: string
 }
 
 /**

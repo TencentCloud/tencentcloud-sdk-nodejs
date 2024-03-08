@@ -18,6 +18,16 @@ const client = new tencentcloud.billing.v20180709.Client({
 })
 describe("billing.v20180709.test.js", function () {
 
+it("billing.v20180709.DescribeBillDetailForOrganization", async function () {
+    try {
+       const data = await client.DescribeBillDetailForOrganization({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("billing.v20180709.DescribeCostSummaryByResource", async function () {
     try {
        const data = await client.DescribeCostSummaryByResource({})
@@ -28,9 +38,9 @@ it("billing.v20180709.DescribeCostSummaryByResource", async function () {
     }
 })
 
-it("billing.v20180709.DescribeCostSummaryByRegion", async function () {
+it("billing.v20180709.DescribeBillList", async function () {
     try {
-       const data = await client.DescribeCostSummaryByRegion({})
+       const data = await client.DescribeBillList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -48,6 +58,16 @@ it("billing.v20180709.DescribeSavingPlanCoverage", async function () {
     }
 })
 
+it("billing.v20180709.DescribeAllocationSummaryByResource", async function () {
+    try {
+       const data = await client.DescribeAllocationSummaryByResource({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("billing.v20180709.DescribeBillResourceSummary", async function () {
     try {
        const data = await client.DescribeBillResourceSummary({})
@@ -58,9 +78,39 @@ it("billing.v20180709.DescribeBillResourceSummary", async function () {
     }
 })
 
+it("billing.v20180709.DescribeAllocationSummaryByBusiness", async function () {
+    try {
+       const data = await client.DescribeAllocationSummaryByBusiness({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("billing.v20180709.DescribeAllocateConditions", async function () {
+    try {
+       const data = await client.DescribeAllocateConditions({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("billing.v20180709.DescribeSavingPlanOverview", async function () {
     try {
        const data = await client.DescribeSavingPlanOverview({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("billing.v20180709.DescribeAllocationOverview", async function () {
+    try {
+       const data = await client.DescribeAllocationOverview({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -158,9 +208,9 @@ it("billing.v20180709.DescribeBillSummaryByPayMode", async function () {
     }
 })
 
-it("billing.v20180709.DescribeBillList", async function () {
+it("billing.v20180709.DescribeCostSummaryByRegion", async function () {
     try {
-       const data = await client.DescribeBillList({})
+       const data = await client.DescribeCostSummaryByRegion({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -168,9 +218,9 @@ it("billing.v20180709.DescribeBillList", async function () {
     }
 })
 
-it("billing.v20180709.PayDeals", async function () {
+it("billing.v20180709.DescribeAllocationTrendByMonth", async function () {
     try {
-       const data = await client.PayDeals({})
+       const data = await client.DescribeAllocationTrendByMonth({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -198,9 +248,9 @@ it("billing.v20180709.DescribeDosageCosDetailByDate", async function () {
     }
 })
 
-it("billing.v20180709.DescribeBillDetailForOrganization", async function () {
+it("billing.v20180709.DescribeAllocationBillConditions", async function () {
     try {
-       const data = await client.DescribeBillDetailForOrganization({})
+       const data = await client.DescribeAllocationBillConditions({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -238,19 +288,9 @@ it("billing.v20180709.DescribeSavingPlanUsage", async function () {
     }
 })
 
-it("billing.v20180709.DescribeVoucherUsageDetails", async function () {
+it("billing.v20180709.DescribeAllocationBillDetail", async function () {
     try {
-       const data = await client.DescribeVoucherUsageDetails({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("billing.v20180709.CreateSavingPlanOrder", async function () {
-    try {
-       const data = await client.CreateSavingPlanOrder({})
+       const data = await client.DescribeAllocationBillDetail({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -278,6 +318,16 @@ it("billing.v20180709.DescribeBillSummaryByProject", async function () {
     }
 })
 
+it("billing.v20180709.DescribeAllocationMonthOverview", async function () {
+    try {
+       const data = await client.DescribeAllocationMonthOverview({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("billing.v20180709.DescribeBillSummaryByTag", async function () {
     try {
        const data = await client.DescribeBillSummaryByTag({})
@@ -291,6 +341,16 @@ it("billing.v20180709.DescribeBillSummaryByTag", async function () {
 it("billing.v20180709.DescribeBillSummaryForOrganization", async function () {
     try {
        const data = await client.DescribeBillSummaryForOrganization({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("billing.v20180709.DescribeGatherResource", async function () {
+    try {
+       const data = await client.DescribeGatherResource({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -318,9 +378,29 @@ it("billing.v20180709.DescribeTagList", async function () {
     }
 })
 
-it("billing.v20180709.DescribeCostSummaryByProduct", async function () {
+it("billing.v20180709.DescribeVoucherUsageDetails", async function () {
     try {
-       const data = await client.DescribeCostSummaryByProduct({})
+       const data = await client.DescribeVoucherUsageDetails({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("billing.v20180709.PayDeals", async function () {
+    try {
+       const data = await client.PayDeals({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("billing.v20180709.CreateSavingPlanOrder", async function () {
+    try {
+       const data = await client.CreateSavingPlanOrder({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -341,6 +421,26 @@ it("billing.v20180709.DeleteAllocationTag", async function () {
 it("billing.v20180709.DescribeDealsByCond", async function () {
     try {
        const data = await client.DescribeDealsByCond({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("billing.v20180709.DescribeCostSummaryByProduct", async function () {
+    try {
+       const data = await client.DescribeCostSummaryByProduct({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("billing.v20180709.DescribeAllocationSummaryByItem", async function () {
+    try {
+       const data = await client.DescribeAllocationSummaryByItem({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

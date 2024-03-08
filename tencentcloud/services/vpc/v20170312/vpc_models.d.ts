@@ -976,7 +976,7 @@ export interface AddBandwidthPackageResourcesRequest {
      */
     BandwidthPackageId?: string;
     /**
-     * 带宽包类型，当前支持'BGP'类型，表示内部资源是BGP IP。
+     * 带宽包类型，当前支持'BGP'、'HIGH_QUALITY_BGP'、'ANYCAST'、'SINGLEISP_CUCC'、'SINGLEISP_CMCC'、'SINGLEISP_CTCC'等类型。
      */
     NetworkType?: string;
     /**
@@ -2792,8 +2792,8 @@ export interface DescribeIp6AddressesRequest {
      */
     Ip6AddressIds?: Array<string>;
     /**
-     * 每次请求的`Filters`的上限为10，`Filter.Values`的上限为5。参数不支持同时指定`AddressIds`和`Filters`。详细的过滤条件如下：
-  <li> address-ip - String - 是否必填：否 - （过滤条件）按照 EIP 的 IP 地址过滤。</li>
+     * 每次请求的`Filters`的上限为10，`Filter.Values`的上限为100。参数不支持同时指定`AddressIds`和`Filters`。详细的过滤条件如下：
+  <li> address-ip - String - 是否必填：否 - （过滤条件）按照 IPV6 的 IP 地址过滤。</li>
   <li> network-interface-id - String - 是否必填：否 - （过滤条件）按照弹性网卡的唯一ID过滤。</li>
      */
     Filters?: Array<Filter>;
@@ -2953,7 +2953,7 @@ export interface DescribeNatGatewayDestinationIpPortTranslationNatRulesRequest {
  */
 export interface ReturnNormalAddressesRequest {
     /**
-     * EIP 的 IP 地址,示例：101.35.139.183
+     * 普通公网IP 的 IP 地址,示例：101.35.139.183
      */
     AddressIps?: Array<string>;
 }
@@ -3014,7 +3014,7 @@ export interface ModifyAddressInternetChargeTypeRequest {
      */
     AddressId: string;
     /**
-     * 弹性公网IP调整目标计费模式，只支持"BANDWIDTH_PREPAID_BY_MONTH"和"TRAFFIC_POSTPAID_BY_HOUR"
+     * 弹性公网IP调整目标计费模式，支持 "BANDWIDTH_PREPAID_BY_MONTH"、"TRAFFIC_POSTPAID_BY_HOUR"、"BANDWIDTH_POSTPAID_BY_HOUR"
      */
     InternetChargeType: string;
     /**
@@ -4383,7 +4383,7 @@ export interface AllocateIp6AddressesBandwidthRequest {
      */
     InternetMaxBandwidthOut?: number;
     /**
-     * 网络计费模式。IPV6当前对标准账户类型支持"TRAFFIC_POSTPAID_BY_HOUR"，对传统账户类型支持"BANDWIDTH_PACKAGE"。默认网络计费模式是"TRAFFIC_POSTPAID_BY_HOUR"。
+     * 网络计费模式。IPV6当前支持"TRAFFIC_POSTPAID_BY_HOUR"，"BANDWIDTH_PACKAGE"。默认网络计费模式是"TRAFFIC_POSTPAID_BY_HOUR"。
      */
     InternetChargeType?: string;
     /**
@@ -6081,7 +6081,7 @@ export interface CreateBandwidthPackageRequest {
      */
     NetworkType?: string;
     /**
-     * 带宽包计费类型, 默认为: TOP5_POSTPAID_BY_MONTH, 可选值:
+     * 带宽包计费类型, 默认为: ENHANCED95_POSTPAID_BY_MONTH, 可选值:
   <li>TOP5_POSTPAID_BY_MONTH: 按月后付费TOP5计费</li>
   <li>PERCENT95_POSTPAID_BY_MONTH: 按月后付费月95计费</li>
   <li>FIXED_PREPAID_BY_MONTH: 包月预付费计费</li>
@@ -6099,7 +6099,7 @@ export interface CreateBandwidthPackageRequest {
      */
     BandwidthPackageCount?: number;
     /**
-     * 带宽包限速大小。单位：Mbps，-1表示不限速。该功能当前内测中，暂不对外开放。
+     * 带宽包限速大小。单位：Mbps，-1表示不限速。不同计费类型的带宽包对应不同的带宽上下限。
      */
     InternetMaxBandwidth?: number;
     /**
@@ -6171,18 +6171,18 @@ export interface DescribeVpnGatewaysRequest {
   <li>vpc-id - String - （过滤条件）VPC实例ID形如：vpc-f49l6u0z。</li>
   <li>vpn-gateway-id - String - （过滤条件）VPN实例ID形如：vpngw-5aluhh9t。</li>
   <li>vpn-gateway-name - String - （过滤条件）VPN实例名称。</li>
-  <li>type - String - （过滤条件）VPN网关类型：'IPSEC', 'SSL'。</li>
+  <li>type - String - （过滤条件）VPN网关类型：'IPSEC', 'SSL', 'CCN', 'SSL_CCN'。</li>
   <li>public-ip-address- String - （过滤条件）公网IP。</li>
   <li>renew-flag - String - （过滤条件）网关续费类型，手动续费：'NOTIFY_AND_MANUAL_RENEW'、自动续费：'NOTIFY_AND_AUTO_RENEW'。</li>
   <li>zone - String - （过滤条件）VPN所在可用区，形如：ap-guangzhou-2。</li>
      */
     Filters?: Array<FilterObject>;
     /**
-     * 偏移量
+     * 偏移量，默认值为0。
      */
     Offset?: number;
     /**
-     * 请求对象个数
+     * 请求对象个数，默认值为20。
      */
     Limit?: number;
 }
@@ -6727,11 +6727,11 @@ export interface DescribeSpecificTrafficPackageUsedDetailsRequest {
      */
     EndTime?: string;
     /**
-     * 分页参数
+     * 偏移量，默认为0。关于Offset的更进一步介绍请参考 API 中的相关小节
      */
     Offset?: number;
     /**
-     * 分页参数
+     * 返回数量，默认为20。关于Limit的更进一步介绍请参考 API 中的相关小节。
      */
     Limit?: number;
 }
@@ -10132,7 +10132,7 @@ export interface ModifyAddressAttributeRequest {
      */
     AddressId: string;
     /**
-     * 修改后的 EIP 名称。长度上限为20个字符。
+     * 修改后的 EIP 名称。长度上限为128个字符。
      */
     AddressName?: string;
     /**

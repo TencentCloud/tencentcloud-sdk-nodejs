@@ -45,6 +45,7 @@ import {
   CreateCmqSubscribeResponse,
   DescribeClustersRequest,
   ModifyEnvironmentAttributesRequest,
+  RocketMQDataPoint,
   DescribeSubscriptionsResponse,
   ModifyRocketMQClusterRequest,
   SendBatchMessagesResponse,
@@ -195,7 +196,7 @@ import {
   CreateCmqQueueResponse,
   DeleteRabbitMQVipInstanceRequest,
   ModifyEnvironmentAttributesResponse,
-  DescribeAllTenantsRequest,
+  DescribeRocketMQPublicAccessMonitorDataRequest,
   DescribeRolesResponse,
   DeleteRabbitMQUserRequest,
   DescribeSubscriptionsRequest,
@@ -292,6 +293,7 @@ import {
   ModifyPublicNetworkAccessPointRequest,
   DescribeRocketMQSourceClusterGroupListResponse,
   DescribeRocketMQConsumeStatsResponse,
+  DescribeRocketMQPublicAccessMonitorDataResponse,
   RabbitMQVirtualHostInfo,
   CmqQueue,
   CreateEnvironmentResponse,
@@ -357,6 +359,7 @@ import {
   UnbindCmqDeadLetterRequest,
   DescribeRolesRequest,
   DeleteSubscriptionsRequest,
+  DescribeAllTenantsRequest,
   ResetRocketMQConsumerOffSetRequest,
   AMQPClusterDetail,
   CreateEnvironmentRoleRequest,
@@ -850,6 +853,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeRabbitMQVipInstanceResponse) => void
   ): Promise<DescribeRabbitMQVipInstanceResponse> {
     return this.request("DescribeRabbitMQVipInstance", req, cb)
+  }
+
+  /**
+   * 从腾讯云可观测平台拉取公网指标监控数据，目前仅支持客户端到 LB 的入带宽和出宽带指标。
+   */
+  async DescribeRocketMQPublicAccessMonitorData(
+    req: DescribeRocketMQPublicAccessMonitorDataRequest,
+    cb?: (error: string, rep: DescribeRocketMQPublicAccessMonitorDataResponse) => void
+  ): Promise<DescribeRocketMQPublicAccessMonitorDataResponse> {
+    return this.request("DescribeRocketMQPublicAccessMonitorData", req, cb)
   }
 
   /**

@@ -1560,7 +1560,7 @@ export interface DescribeSubscribeDetailResponse {
    */
   KafkaConfig?: SubscribeKafkaConfig
   /**
-   * 源数据库接入类型，如：extranet(公网)、vpncloud(vpn接入)、dcg(专线接入)、ccn(云联网)、cdb(云数据库)、cvm(云主机自建)、intranet(自研上云)、vpc(私有网络vpc)。注意具体可选值依赖当前链路支持能力
+   * 源数据库接入类型，如：extranet(公网)、vpncloud(vpn接入)、dcg(专线接入)、ccn(云联网)、cdb(云数据库)、cvm(云服务器自建)、intranet(自研上云)、vpc(私有网络vpc)。注意具体可选值依赖当前链路支持能力
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AccessType?: string
@@ -2477,33 +2477,38 @@ export interface DBInfo {
 }
 
 /**
- * 单topic和自定义topic的描述
+ * 单topic和自定义topic的描述。投递到单topic时，该数组的最后一项会被视为默认分区策略，所有未匹配到的数据都会按该策略投递，默认策略只支持 投递至partition0、按表名、表名+主键三种。
  */
 export interface TopicRule {
   /**
-   * topic名
+   * topic名。单topic时，所有的TopicName必须相同
    */
   TopicName?: string
   /**
-   * topic分区策略，如 自定义topic：Random（随机投递），集中投递到单Topic：AllInPartitionZero（全部投递至partition0）、PartitionByTable(按表名分区)、PartitionByTableAndKey(按表名加主键分区)
+   * topic分区策略，自定义topic时支持：Random（随机投递），集中投递到单Topic时支持：AllInPartitionZero（全部投递至partition0）、PartitionByTable(按表名分区)、PartitionByTableAndKey(按表名加主键分区)、PartitionByCols(按列分区)
    */
   PartitionType?: string
   /**
-   * 库名匹配规则，仅“自定义topic”生效，如Regular（正则匹配）, Default(不符合匹配规则的剩余库)，数组中必须有一项为‘Default’
+   * 库名匹配规则，如Regular（正则匹配）, Default(不符合匹配规则的剩余库)，数组中最后一项必须为‘Default’
    */
   DbMatchMode?: string
   /**
-   * 库名，仅“自定义topic”时，DbMatchMode=Regular生效
+   * 库名，DbMatchMode=Regular时生效
    */
   DbName?: string
   /**
-   * 表名匹配规则，仅“自定义topic”生效，如Regular（正则匹配）, Default(不符合匹配规则的剩余表)，数组中必须有一项为‘Default’
+   * 表名匹配规则，如Regular（正则匹配）, Default(不符合匹配规则的剩余表)，数组中最后一项必须为‘Default’
    */
   TableMatchMode?: string
   /**
-   * 表名，仅“自定义topic”时，TableMatchMode=Regular生效
+   * 表名，仅TableMatchMode=Regular时生效
    */
   TableName?: string
+  /**
+   * 按列分区时需要选择配置列名，可以选择多列
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Columns?: Array<string>
 }
 
 /**
@@ -2637,6 +2642,16 @@ export interface Options {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AutoRetryTimeRangeMinutes?: number
+  /**
+   * 同步到kafka链路是否过滤掉begin和commit消息。目前仅mysql2kafka链路支持
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FilterBeginCommit?: boolean
+  /**
+   * 同步到kafka链路是否过滤掉checkpoint消息。目前仅mysql2kafka链路支持
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FilterCheckpoint?: boolean
 }
 
 /**
@@ -3500,7 +3515,7 @@ export interface DifferenceAdvancedObjectsDetail {
 }
 
 /**
- * 订阅的的数据库表信息，用于配置和查询订阅任务接口。
+ * 订阅的数据库表信息，用于配置和查询订阅任务接口。
  */
 export interface SubscribeObject {
   /**
@@ -4717,7 +4732,7 @@ export interface ConfigureSubscribeJobRequest {
    */
   SubscribeMode: string
   /**
-   * 源数据库接入类型，如：extranet(公网)、vpncloud(vpn接入)、dcg(专线接入)、ccn(云联网)、cdb(云数据库)、cvm(云主机自建)、intranet(自研上云)、vpc(私有网络vpc)。注意具体可选值依赖当前链路支持能力
+   * 源数据库接入类型，如：extranet(公网)、vpncloud(vpn接入)、dcg(专线接入)、ccn(云联网)、cdb(云数据库)、cvm(云服务器自建)、intranet(自研上云)、vpc(私有网络vpc)。注意具体可选值依赖当前链路支持能力
    */
   AccessType: string
   /**

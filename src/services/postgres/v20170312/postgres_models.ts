@@ -626,19 +626,19 @@ export interface BackupPlan {
   /**
    * 备份周期
    */
-  BackupPeriod: string
+  BackupPeriod?: string
   /**
-   * 基础备份保留时长
+   * 数据备份保留时长
    */
-  BaseBackupRetentionPeriod: number
+  BaseBackupRetentionPeriod?: number
   /**
    * 开始备份的最早时间
    */
-  MinBackupStartTime: string
+  MinBackupStartTime?: string
   /**
    * 开始备份的最晚时间
    */
-  MaxBackupStartTime: string
+  MaxBackupStartTime?: string
 }
 
 /**
@@ -765,39 +765,39 @@ export interface BackupSummary {
   /**
    * 实例ID。
    */
-  DBInstanceId: string
+  DBInstanceId?: string
   /**
    * 实例日志备份数量。
    */
-  LogBackupCount: number
+  LogBackupCount?: number
   /**
    * 实例日志备份大小。
    */
-  LogBackupSize: number
+  LogBackupSize?: number
   /**
-   * 手动创建的实例基础备份数量。
+   * 手动创建的实例数据备份数量。
    */
-  ManualBaseBackupCount: number
+  ManualBaseBackupCount?: number
   /**
-   * 手动创建的实例基础备份大小。
+   * 手动创建的实例数据备份大小。
    */
-  ManualBaseBackupSize: number
+  ManualBaseBackupSize?: number
   /**
-   * 自动创建的实例基础备份数量。
+   * 自动创建的实例数据备份数量。
    */
-  AutoBaseBackupCount: number
+  AutoBaseBackupCount?: number
   /**
-   * 自动创建的实例基础备份大小。
+   * 自动创建的实例数据备份大小。
    */
-  AutoBaseBackupSize: number
+  AutoBaseBackupSize?: number
   /**
    * 总备份数量
    */
-  TotalBackupCount: number
+  TotalBackupCount?: number
   /**
    * 总备份大小
    */
-  TotalBackupSize: number
+  TotalBackupSize?: number
 }
 
 /**
@@ -1276,7 +1276,7 @@ export interface CloseServerlessDBExtranetAccessRequest {
  */
 export interface CreateBaseBackupResponse {
   /**
-   * 基础备份集ID
+   * 数据备份集ID
    */
   BaseBackupId?: string
   /**
@@ -1343,7 +1343,7 @@ export interface AddDBInstanceToReadOnlyGroupResponse {
 }
 
 /**
- * 数据库基础备份信息
+ * 数据库数据备份信息
  */
 export interface BaseBackup {
   /**
@@ -1983,44 +1983,44 @@ export interface ModifyBackupDownloadRestrictionResponse {
 }
 
 /**
- * 描述各版本下的参数信息
+ * 各版本下的参数信息
  */
 export interface ParamVersionRelation {
   /**
    * 参数名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Name: string
+  Name?: string
   /**
    * 参数信息所属内核版本
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DBKernelVersion: string
+  DBKernelVersion?: string
   /**
    * 参数在该版本该规格下的默认值
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Value: string
+  Value?: string
   /**
    * 参数值单位。参数没有单位时，该字段返回空
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Unit: string
+  Unit?: string
   /**
    * 数值类型（integer、real）参数，取值上界
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Max: number
+  Max?: number
   /**
    * 数值类型（integer、real）参数，取值下界
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Min: number
+  Min?: number
   /**
    * 枚举类型参数，取值范围
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  EnumValue: Array<string>
+  EnumValue?: Array<string>
 }
 
 /**
@@ -2177,44 +2177,44 @@ export interface DescribeParameterTemplatesResponse {
 }
 
 /**
- * 描述各规格下的参数信息
+ * 各规格下的参数信息
  */
 export interface ParamSpecRelation {
   /**
    * 参数名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Name: string
+  Name?: string
   /**
    * 参数信息所属规格
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Memory: string
+  Memory?: string
   /**
    * 参数在该规格下的默认值
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Value: string
+  Value?: string
   /**
    * 参数值单位。参数没有单位时，该字段返回空
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Unit: string
+  Unit?: string
   /**
    * 数值类型（integer、real）参数，取值上界
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Max: number
+  Max?: number
   /**
    * 数值类型（integer、real）参数，取值下界
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Min: number
+  Min?: number
   /**
    * 枚举类型参数，取值范围
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  EnumValue: Array<string>
+  EnumValue?: Array<string>
 }
 
 /**
@@ -3063,12 +3063,12 @@ export interface ParamInfo {
    * 参数ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ID: number
+  ID?: number
   /**
    * 参数名
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Name: string
+  Name?: string
   /**
    * 参数值类型：integer（整型）、real（浮点型）、bool（布尔型）、enum（枚举类型）、mutil_enum（枚举类型、支持多选）。
 当参数类型为integer（整型）、real（浮点型）时，参数的取值范围根据返回值的Max、Min确定； 
@@ -3076,92 +3076,92 @@ export interface ParamInfo {
 当参数类型为enum（枚举类型）、mutil_enum（多枚举类型）时，参数的取值范围由返回值中的EnumValue确定。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ParamValueType: string
+  ParamValueType?: string
   /**
    * 参数值 单位。参数没有单位时，该字段返回空
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Unit: string
+  Unit?: string
   /**
    * 参数默认值。以字符串形式返回
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DefaultValue: string
+  DefaultValue?: string
   /**
    * 参数当前运行值。以字符串形式返回
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CurrentValue: string
+  CurrentValue?: string
   /**
    * 数值类型（integer、real）参数，取值下界
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Max: number
+  Max?: number
   /**
    * 枚举类型参数，取值范围
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  EnumValue: Array<string>
+  EnumValue?: Array<string>
   /**
    * 数值类型（integer、real）参数，取值上界
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Min: number
+  Min?: number
   /**
    * 参数中文描述
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ParamDescriptionCH: string
+  ParamDescriptionCH?: string
   /**
    * 参数英文描述
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ParamDescriptionEN: string
+  ParamDescriptionEN?: string
   /**
    * 参数修改，是否重启生效。（true为需要，false为不需要）
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  NeedReboot: boolean
+  NeedReboot?: boolean
   /**
    * 参数中文分类
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ClassificationCN: string
+  ClassificationCN?: string
   /**
    * 参数英文分类
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ClassificationEN: string
+  ClassificationEN?: string
   /**
    * 是否和规格相关。（true为相关，false为不想关）
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SpecRelated: boolean
+  SpecRelated?: boolean
   /**
    * 是否为重点参数。（true为重点参数，修改是需要重点关注，可能会影响实例性能）
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Advanced: boolean
+  Advanced?: boolean
   /**
    * 参数最后一次修改时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  LastModifyTime: string
+  LastModifyTime?: string
   /**
-   * 参数存在主备制约，0：无主备制约关系，1:备机参数值需比主机大，2:主机参数值需比备机大
+   * 参数主备制约，0：无主备制约关系，1:备机参数值需比主机大，2:主机参数值需比备机大
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  StandbyRelated: number
+  StandbyRelated?: number
   /**
-   * 参数版本关联信息，存储具体内核版本下的具体参数信息
+   * 参数版本关联信息，内容为相应内核版本下的参数详细信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  VersionRelationSet: Array<ParamVersionRelation>
+  VersionRelationSet?: Array<ParamVersionRelation>
   /**
-   * 参数规格关联信息，存储具体规格下具体的参数信息
+   * 参数规格关联信息，内容为相应规格下的参数详细信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SpecRelationSet: Array<ParamSpecRelation>
+  SpecRelationSet?: Array<ParamSpecRelation>
 }
 
 /**
@@ -4670,7 +4670,7 @@ export interface DeleteBaseBackupRequest {
    */
   DBInstanceId: string
   /**
-   * 基础备份ID。
+   * 数据备份ID。
    */
   BaseBackupId: string
 }
@@ -4890,7 +4890,7 @@ export interface ModifyBaseBackupExpireTimeRequest {
    */
   DBInstanceId: string
   /**
-   * 基础备份ID。
+   * 数据备份ID。
    */
   BaseBackupId: string
   /**
@@ -5068,7 +5068,7 @@ export interface DescribeAccountsResponse {
    */
   TotalCount?: number
   /**
-   * 帐号列表详细信息。
+   * 账号列表详细信息。
    */
   Details?: Array<AccountInfo>
   /**
@@ -5331,11 +5331,11 @@ export interface ModifyDBInstanceSpecResponse {
  */
 export interface DescribeBaseBackupsResponse {
   /**
-   * 查询到的基础备份数量。
+   * 查询到的数据备份数量。
    */
   TotalCount?: number
   /**
-   * 基础备份详细信息列表。
+   * 数据备份详细信息列表。
    */
   BaseBackupSet?: Array<BaseBackup>
   /**

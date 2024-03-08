@@ -454,7 +454,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyDatabaseShrinkMDF", req, cb);
     }
     /**
-     * 本接口（ResetAccountPassword）用于重置实例的账户密码。
+     * 本接口（ResetAccountPassword）用于重置实例的账号密码。
      */
     async ResetAccountPassword(req, cb) {
         return this.request("ResetAccountPassword", req, cb);

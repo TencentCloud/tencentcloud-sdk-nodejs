@@ -2541,6 +2541,10 @@ export interface ModifyJobRequest {
    * 工作空间 SerialId
    */
   WorkSpaceId?: string
+  /**
+   * 作业描述
+   */
+  Description?: string
 }
 
 /**
@@ -3022,6 +3026,11 @@ export interface JobV1 {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   EventInfo?: JobEventInfo
+  /**
+   * 描述信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Description?: string
 }
 
 /**
@@ -3329,6 +3338,10 @@ export interface CreateJobRequest {
    * 作业标签
    */
   Tags?: Array<Tag>
+  /**
+   * 作业描述
+   */
+  Description?: string
 }
 
 /**

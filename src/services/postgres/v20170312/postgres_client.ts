@@ -304,7 +304,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（ModifyAccountRemark）用于修改帐号备注。
+   * 本接口（ModifyAccountRemark）用于修改账号备注。
    */
   async ModifyAccountRemark(
     req: ModifyAccountRemarkRequest,
@@ -514,7 +514,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（CreateBaseBackup）用于创建实例的全量备份。
+   * 本接口（CreateBaseBackup）用于创建实例的数据备份。
    */
   async CreateBaseBackup(
     req: CreateBaseBackupRequest,
@@ -574,7 +574,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（DescribeBaseBackups）用于查询基础备份列表。
+   * 本接口（DescribeBaseBackups）用于查询数据备份列表。
    */
   async DescribeBaseBackups(
     req: DescribeBaseBackupsRequest,
@@ -866,7 +866,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（ModifyBaseBackupExpireTime）用于修改实例指定全量备份的过期时间。
+   * 本接口（ModifyBaseBackupExpireTime）用于修改实例指定数据备份的过期时间。
    */
   async ModifyBaseBackupExpireTime(
     req: ModifyBaseBackupExpireTimeRequest,
@@ -1119,7 +1119,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（DeleteBaseBackup）用于删除实例指定全量备份。
+   * 本接口（DeleteBaseBackup）用于删除实例指定数据备份。
    */
   async DeleteBaseBackup(
     req: DeleteBaseBackupRequest,

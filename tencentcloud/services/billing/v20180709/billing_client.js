@@ -28,16 +28,23 @@ class Client extends abstract_client_1.AbstractClient {
         super("billing.tencentcloudapi.com", "2018-07-09", clientConfig);
     }
     /**
+     * 成员账号获取管理账号代付账单（费用明细）。
+注意事项：在请求接口时，由于网络不稳定或其它异常，可能会导致请求失败。如果您遇到这种情况，我们建议您在接口请求失败时，手动发起重试操作，这样可以更好地确保您的接口请求能够成功执行。
+     */
+    async DescribeBillDetailForOrganization(req, cb) {
+        return this.request("DescribeBillDetailForOrganization", req, cb);
+    }
+    /**
      * 获取按资源汇总消耗详情
      */
     async DescribeCostSummaryByResource(req, cb) {
         return this.request("DescribeCostSummaryByResource", req, cb);
     }
     /**
-     * 获取按地域汇总消耗详情
+     * 获取收支明细列表，支持翻页和参数过滤
      */
-    async DescribeCostSummaryByRegion(req, cb) {
-        return this.request("DescribeCostSummaryByRegion", req, cb);
+    async DescribeBillList(req, cb) {
+        return this.request("DescribeBillList", req, cb);
     }
     /**
      * 查询当前用户节省计划覆盖率明细数据，如无特别说明，金额单位均为元（国内站）或者美元（国际站）。
@@ -46,16 +53,40 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeSavingPlanCoverage", req, cb);
     }
     /**
+     * 查询分账账单按资源汇总
+     */
+    async DescribeAllocationSummaryByResource(req, cb) {
+        return this.request("DescribeAllocationSummaryByResource", req, cb);
+    }
+    /**
      * 获取账单资源汇总数据
      */
     async DescribeBillResourceSummary(req, cb) {
         return this.request("DescribeBillResourceSummary", req, cb);
     }
     /**
+     * 查询分账账单按产品汇总
+     */
+    async DescribeAllocationSummaryByBusiness(req, cb) {
+        return this.request("DescribeAllocationSummaryByBusiness", req, cb);
+    }
+    /**
+     * 查询资源目录筛选条件
+     */
+    async DescribeAllocateConditions(req, cb) {
+        return this.request("DescribeAllocateConditions", req, cb);
+    }
+    /**
      * 查用当前用户明细节省计划总览查询时段内的使用情况
      */
     async DescribeSavingPlanOverview(req, cb) {
         return this.request("DescribeSavingPlanOverview", req, cb);
+    }
+    /**
+     * 查询分账账单日概览
+     */
+    async DescribeAllocationOverview(req, cb) {
+        return this.request("DescribeAllocationOverview", req, cb);
     }
     /**
      * 获取已接入标准用量明细模板产品的用量明细数据，目前已接入并支持查询的产品包括：云联络中心、实时音视频、实时音视频、智能媒资托管、CODING DevOps、全球IP应用加速
@@ -115,16 +146,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeBillSummaryByPayMode", req, cb);
     }
     /**
-     * 获取收支明细列表，支持翻页和参数过滤
+     * 获取按地域汇总消耗详情
      */
-    async DescribeBillList(req, cb) {
-        return this.request("DescribeBillList", req, cb);
+    async DescribeCostSummaryByRegion(req, cb) {
+        return this.request("DescribeCostSummaryByRegion", req, cb);
     }
     /**
-     * 支付订单
+     * 查询分账账单费用趋势
      */
-    async PayDeals(req, cb) {
-        return this.request("PayDeals", req, cb);
+    async DescribeAllocationTrendByMonth(req, cb) {
+        return this.request("DescribeAllocationTrendByMonth", req, cb);
     }
     /**
      * 该接口支持通过传参，获取L0-PDF、L1-汇总、L2-资源、L3-明细、账单包、五类账单文件下载链接
@@ -139,11 +170,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDosageCosDetailByDate", req, cb);
     }
     /**
-     * 成员账号获取管理账号代付账单（费用明细）。
-注意事项：在请求接口时，由于网络不稳定或其它异常，可能会导致请求失败。如果您遇到这种情况，我们建议您在接口请求失败时，手动发起重试操作，这样可以更好地确保您的接口请求能够成功执行。
+     * 查询分账账单筛选条件
      */
-    async DescribeBillDetailForOrganization(req, cb) {
-        return this.request("DescribeBillDetailForOrganization", req, cb);
+    async DescribeAllocationBillConditions(req, cb) {
+        return this.request("DescribeAllocationBillConditions", req, cb);
     }
     /**
      * 获取云账户余额信息。
@@ -164,16 +194,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeSavingPlanUsage", req, cb);
     }
     /**
-     * 获取代金券使用记录
+     * 查询分账账单明细
      */
-    async DescribeVoucherUsageDetails(req, cb) {
-        return this.request("DescribeVoucherUsageDetails", req, cb);
-    }
-    /**
-     * 创建节省计划订单，创建订单完成需调用PayDeals接口完成订单支付
-     */
-    async CreateSavingPlanOrder(req, cb) {
-        return this.request("CreateSavingPlanOrder", req, cb);
+    async DescribeAllocationBillDetail(req, cb) {
+        return this.request("DescribeAllocationBillDetail", req, cb);
     }
     /**
      * 获取按地域汇总费用分布
@@ -188,6 +212,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeBillSummaryByProject", req, cb);
     }
     /**
+     * 查询分账账单月概览
+     */
+    async DescribeAllocationMonthOverview(req, cb) {
+        return this.request("DescribeAllocationMonthOverview", req, cb);
+    }
+    /**
      * 获取按标签汇总费用分布
      */
     async DescribeBillSummaryByTag(req, cb) {
@@ -198,6 +228,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeBillSummaryForOrganization(req, cb) {
         return this.request("DescribeBillSummaryForOrganization", req, cb);
+    }
+    /**
+     * 查询分账账单资源归集汇总
+     */
+    async DescribeGatherResource(req, cb) {
+        return this.request("DescribeGatherResource", req, cb);
     }
     /**
      * 查询节省计划详情
@@ -212,10 +248,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeTagList", req, cb);
     }
     /**
-     * 获取按产品汇总消耗详情
+     * 获取代金券使用记录
      */
-    async DescribeCostSummaryByProduct(req, cb) {
-        return this.request("DescribeCostSummaryByProduct", req, cb);
+    async DescribeVoucherUsageDetails(req, cb) {
+        return this.request("DescribeVoucherUsageDetails", req, cb);
+    }
+    /**
+     * 支付订单
+     */
+    async PayDeals(req, cb) {
+        return this.request("PayDeals", req, cb);
+    }
+    /**
+     * 创建节省计划订单，创建订单完成需调用PayDeals接口完成订单支付
+     */
+    async CreateSavingPlanOrder(req, cb) {
+        return this.request("CreateSavingPlanOrder", req, cb);
     }
     /**
      * 批量取消设置分账标签
@@ -228,6 +276,18 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeDealsByCond(req, cb) {
         return this.request("DescribeDealsByCond", req, cb);
+    }
+    /**
+     * 获取按产品汇总消耗详情
+     */
+    async DescribeCostSummaryByProduct(req, cb) {
+        return this.request("DescribeCostSummaryByProduct", req, cb);
+    }
+    /**
+     * 查询分账账单按组件汇总
+     */
+    async DescribeAllocationSummaryByItem(req, cb) {
+        return this.request("DescribeAllocationSummaryByItem", req, cb);
     }
     /**
      * 获取产品汇总费用分布

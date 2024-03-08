@@ -292,7 +292,7 @@ export declare class Client extends AbstractClient {
      */
     ModifyDatabaseShrinkMDF(req: ModifyDatabaseShrinkMDFRequest, cb?: (error: string, rep: ModifyDatabaseShrinkMDFResponse) => void): Promise<ModifyDatabaseShrinkMDFResponse>;
     /**
-     * 本接口（ResetAccountPassword）用于重置实例的账户密码。
+     * 本接口（ResetAccountPassword）用于重置实例的账号密码。
      */
     ResetAccountPassword(req: ResetAccountPasswordRequest, cb?: (error: string, rep: ResetAccountPasswordResponse) => void): Promise<ResetAccountPasswordResponse>;
     /**

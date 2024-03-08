@@ -2430,6 +2430,10 @@ export interface ModifyJobRequest {
      * 工作空间 SerialId
      */
     WorkSpaceId?: string;
+    /**
+     * 作业描述
+     */
+    Description?: string;
 }
 /**
  * GetMetaTable请求参数结构体
@@ -2904,6 +2908,11 @@ export interface JobV1 {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     EventInfo?: JobEventInfo;
+    /**
+     * 描述信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Description?: string;
 }
 /**
  * 作业配置详情
@@ -3204,6 +3213,10 @@ export interface CreateJobRequest {
      * 作业标签
      */
     Tags?: Array<Tag>;
+    /**
+     * 作业描述
+     */
+    Description?: string;
 }
 /**
  * 搜索启动日志时返回的作业实例

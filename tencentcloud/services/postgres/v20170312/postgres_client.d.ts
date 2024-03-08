@@ -30,7 +30,7 @@ export declare class Client extends AbstractClient {
      */
     RebalanceReadOnlyGroup(req: RebalanceReadOnlyGroupRequest, cb?: (error: string, rep: RebalanceReadOnlyGroupResponse) => void): Promise<RebalanceReadOnlyGroupResponse>;
     /**
-     * 本接口（ModifyAccountRemark）用于修改帐号备注。
+     * 本接口（ModifyAccountRemark）用于修改账号备注。
      */
     ModifyAccountRemark(req: ModifyAccountRemarkRequest, cb?: (error: string, rep: ModifyAccountRemarkResponse) => void): Promise<ModifyAccountRemarkResponse>;
     /**
@@ -114,7 +114,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeDBInstanceSecurityGroups(req: DescribeDBInstanceSecurityGroupsRequest, cb?: (error: string, rep: DescribeDBInstanceSecurityGroupsResponse) => void): Promise<DescribeDBInstanceSecurityGroupsResponse>;
     /**
-     * 本接口（CreateBaseBackup）用于创建实例的全量备份。
+     * 本接口（CreateBaseBackup）用于创建实例的数据备份。
      */
     CreateBaseBackup(req: CreateBaseBackupRequest, cb?: (error: string, rep: CreateBaseBackupResponse) => void): Promise<CreateBaseBackupResponse>;
     /**
@@ -138,7 +138,7 @@ export declare class Client extends AbstractClient {
      */
     ModifyDBInstanceParameters(req: ModifyDBInstanceParametersRequest, cb?: (error: string, rep: ModifyDBInstanceParametersResponse) => void): Promise<ModifyDBInstanceParametersResponse>;
     /**
-     * 本接口（DescribeBaseBackups）用于查询基础备份列表。
+     * 本接口（DescribeBaseBackups）用于查询数据备份列表。
      */
     DescribeBaseBackups(req: DescribeBaseBackupsRequest, cb?: (error: string, rep: DescribeBaseBackupsResponse) => void): Promise<DescribeBaseBackupsResponse>;
     /**
@@ -256,7 +256,7 @@ export declare class Client extends AbstractClient {
      */
     IsolateDBInstances(req: IsolateDBInstancesRequest, cb?: (error: string, rep: IsolateDBInstancesResponse) => void): Promise<IsolateDBInstancesResponse>;
     /**
-     * 本接口（ModifyBaseBackupExpireTime）用于修改实例指定全量备份的过期时间。
+     * 本接口（ModifyBaseBackupExpireTime）用于修改实例指定数据备份的过期时间。
      */
     ModifyBaseBackupExpireTime(req: ModifyBaseBackupExpireTimeRequest, cb?: (error: string, rep: ModifyBaseBackupExpireTimeResponse) => void): Promise<ModifyBaseBackupExpireTimeResponse>;
     /**
@@ -359,7 +359,7 @@ export declare class Client extends AbstractClient {
      */
     ModifyBackupDownloadRestriction(req: ModifyBackupDownloadRestrictionRequest, cb?: (error: string, rep: ModifyBackupDownloadRestrictionResponse) => void): Promise<ModifyBackupDownloadRestrictionResponse>;
     /**
-     * 本接口（DeleteBaseBackup）用于删除实例指定全量备份。
+     * 本接口（DeleteBaseBackup）用于删除实例指定数据备份。
      */
     DeleteBaseBackup(req: DeleteBaseBackupRequest, cb?: (error: string, rep: DeleteBaseBackupResponse) => void): Promise<DeleteBaseBackupResponse>;
     /**

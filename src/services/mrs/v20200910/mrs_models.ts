@@ -1838,6 +1838,12 @@ export interface TurnPDFToObjectAsyncRequest {
    * 体检报告PDF文件信息, 目前只支持传PDF文件的Base64编码字符(PDF文件不能超过10MB，如果超过建议先压缩PDF，再转成base64)
    */
   PdfInfo: PdfInfo
+  /**
+   * PDF文件中的文字是否为文本内容.
+如果该字段为true,那么就会自动判断是电子版还是图片，自动选择直接读取文字还是 OCR 方式.
+如果该字段为false, 那么始终采用 OCR 方式
+   */
+  TextBasedPdfFlag?: boolean
 }
 
 /**
@@ -6382,6 +6388,12 @@ export interface TurnPDFToObjectRequest {
    * 体检报告PDF文件信息, 目前只支持传PDF文件的Base64编码字符(PDF文件不能超过10MB，如果超过建议先压缩PDF，再转成base64)
    */
   PdfInfo: PdfInfo
+  /**
+   * PDF文件中的文字是否为文本内容.
+如果该字段为true,那么就会自动判断是电子版还是图片，自动选择直接读取文字还是 OCR 方式.
+如果该字段为false, 那么始终采用 OCR 方式
+   */
+  TextBasedPdfFlag?: boolean
 }
 
 /**

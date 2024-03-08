@@ -105,6 +105,7 @@ import {
   ModifyBackupNameRequest,
   CreateDBRequest,
   RollbackInstanceRequest,
+  DrReadableInfo,
   DescribeRollbackTimeRequest,
   DescribeIncrementalMigrationResponse,
   CreateDBInstancesResponse,
@@ -1101,7 +1102,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（ResetAccountPassword）用于重置实例的账户密码。
+   * 本接口（ResetAccountPassword）用于重置实例的账号密码。
    */
   async ResetAccountPassword(
     req: ResetAccountPasswordRequest,

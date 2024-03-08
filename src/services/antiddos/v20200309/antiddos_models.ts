@@ -4393,7 +4393,7 @@ export interface DescribeBizHttpStatusResponse {
  */
 export interface InsL7Rules {
   /**
-   * 规则在中间状态态不可修改，只可在（0， 2， 8）状态可编辑。
+   * 规则在中间状态不可修改，只可在（0， 2， 8）状态可编辑。
 规则状态，0: 正常运行中, 1: 配置规则中(配置生效中), 2: 配置规则失败（配置生效失败）, 3: 删除规则中(删除生效中), 5: 删除规则失败(删除失败), 6: 等待添加规则, 7: 等待删除规则, 8: 等待上传证书, 9: 规则对应的资源不存在，被隔离, 10:等待修改规则, 11:配置修改中
    */
   Status: number
@@ -4489,7 +4489,7 @@ export interface ModifyCCPrecisionPolicyResponse {
 export interface CcGeoIPBlockConfig {
   /**
    * 区域类型，取值[
-oversea(海外)
+oversea(境外)
 china(国内)
 customized(自定义地区)
 ]
@@ -5078,7 +5078,7 @@ export interface DescribeCCTrendResponse {
    */
   Count?: number
   /**
-   * 大禹子产品代号（bgpip表示高防IP；bgp表示独享包；bgp-multip表示共享包；net表示高防IP专业版；basic表示DDoS基础防护）
+   * DDoS防护子产品代号（bgpip表示高防IP；bgp表示独享包；bgp-multip表示共享包；net表示高防IP专业版；basic表示DDoS基础防护）
    */
   Business?: string
   /**
@@ -5282,7 +5282,7 @@ export interface TagInfo {
  */
 export interface DescribeDDoSTrendRequest {
   /**
-   * 大禹子产品代号（bgpip表示高防IP；bgp表示独享包；bgp-multip表示共享包；net表示高防IP专业版；basic表示DDoS基础防护）
+   * DDoS防护子产品代号（bgpip表示高防IP；bgp表示独享包；bgp-multip表示共享包；net表示高防IP专业版；basic表示DDoS基础防护）
    */
   Business: string
   /**
@@ -5881,40 +5881,40 @@ export interface DescribeDDoSTrendResponse {
   /**
    * 值个数
    */
-  Count: number
+  Count?: number
   /**
-   * 大禹子产品代号（bgpip表示高防IP；bgp表示独享包；bgp-multip表示共享包；net表示高防IP专业版；basic表示DDoS基础防护）
+   * DDoS防护子产品代号（bgpip表示高防IP；bgp表示独享包；bgp-multip表示共享包；net表示高防IP专业版；basic表示DDoS基础防护）
    */
-  Business: string
+  Business?: string
   /**
    * 资源的IP
    */
-  Ip: string
+  Ip?: string
   /**
    * 统计粒度，取值[300(5分钟)，3600(小时)，86400(天)]
    */
-  Period: number
+  Period?: number
   /**
    * 统计开始时间
    */
-  StartTime: string
+  StartTime?: string
   /**
    * 统计结束时间
    */
-  EndTime: string
+  EndTime?: string
   /**
    * 值数组，攻击流量带宽单位为Mbps，包速率单位为pps
    */
-  Data: Array<number | bigint>
+  Data?: Array<number | bigint>
   /**
    * 资源ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Id: string
+  Id?: string
   /**
    * 指标，取值[bps(攻击流量带宽，pps(攻击包速率))]
    */
-  MetricName: string
+  MetricName?: string
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

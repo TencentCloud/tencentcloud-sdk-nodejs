@@ -751,6 +751,16 @@ Modify 集群变更中；
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CaseSensitive?: number
+  /**
+   * 用户是否可以绑定安全组
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsWhiteSGs?: boolean
+  /**
+   * 已绑定的安全组信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BindSGs?: Array<string>
 }
 
 /**
