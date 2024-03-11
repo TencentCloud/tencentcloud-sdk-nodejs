@@ -2057,21 +2057,29 @@ export interface SummaryDetailRes {
 }
 
 /**
- * DescribeBackupUploadSize请求参数结构体
+ * ModifyDReadable请求参数结构体
  */
-export interface DescribeBackupUploadSizeRequest {
+export interface ModifyDReadableRequest {
   /**
-   * 导入目标实例ID
+   * 实例ID
    */
   InstanceId: string
   /**
-   * 备份导入任务ID，由CreateBackupMigration接口返回
+   * 操作类型。enable-开启备机只读，disable-关闭备机只读
    */
-  BackupMigrationId: string
+  Type: string
   /**
-   * 增量导入任务ID
+   * 备机网络ID，不填默认和主实例保持一致
    */
-  IncrementalMigrationId?: string
+  VpcId?: string
+  /**
+   * 备机网络子网ID，不填默认和主实例保持一致
+   */
+  SubnetId?: string
+  /**
+   * 指定的备机只读vip，不填自动分配
+   */
+  Vip?: string
 }
 
 /**
@@ -2137,6 +2145,24 @@ export interface SlaveZones {
    * 备可用区
    */
   SlaveZoneName: string
+}
+
+/**
+ * DescribeBackupUploadSize请求参数结构体
+ */
+export interface DescribeBackupUploadSizeRequest {
+  /**
+   * 导入目标实例ID
+   */
+  InstanceId: string
+  /**
+   * 备份导入任务ID，由CreateBackupMigration接口返回
+   */
+  BackupMigrationId: string
+  /**
+   * 增量导入任务ID
+   */
+  IncrementalMigrationId?: string
 }
 
 /**
@@ -8452,6 +8478,20 @@ export interface DescribeSlowlogsRequest {
    * 分页返回，页编号，默认值为第0页
    */
   Offset?: number
+}
+
+/**
+ * ModifyDReadable返回参数结构体
+ */
+export interface ModifyDReadableResponse {
+  /**
+   * 任务ID
+   */
+  FlowId?: number
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

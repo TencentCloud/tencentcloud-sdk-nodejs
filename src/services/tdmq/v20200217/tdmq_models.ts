@@ -1315,8 +1315,13 @@ export interface DescribeRocketMQMsgTraceRequest {
   GroupName?: string
   /**
    * 查询死信时该值为true
+   * @deprecated
    */
   QueryDLQMsg?: boolean
+  /**
+   * 查询死信时该值为true
+   */
+  QueryDeadLetterMessage?: string
 }
 
 /**

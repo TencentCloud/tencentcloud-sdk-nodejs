@@ -212,10 +212,9 @@ TRTC 的一个房间中可能会同时存在多路音视频流，您可以通过
 -userCount（在线用户数）
 -roomCount（在线房间数）
 注意：
-1.调用接口需开通监控仪表盘【基础版】和【进阶版】，监控仪表盘【免费版】不支持调用，监控仪表盘版本功能和计费说明：https://cloud.tencent.com/document/product/647/81331。
+1.调用接口需开通监控仪表盘【基础版】和【进阶版】，监控仪表盘【免费版】不支持调用，监控仪表盘[版本功能和计费说明](https://cloud.tencent.com/document/product/647/81331)。
 2.查询时间范围根据监控仪表盘功能版本而定，基础版可查近3小时，进阶版可查近12小时。
-xa0
-3.除此之外您也可以通过订阅TRTC包月套餐(https://buy.cloud.tencent.com/trtc)尊享版或旗舰版解锁此接口的调用能力，请在开通包月套餐后，请提交工单联系售后解锁调用能力https://console.cloud.tencent.com/workorder/category
+3.除此之外您也可以通过[订阅TRTC包月套餐](https://buy.cloud.tencent.com/trtc)尊享版或旗舰版解锁此接口的调用能力，请在开通包月套餐后，请[提交工单](https://console.cloud.tencent.com/workorder/category)联系售后解锁调用能力
      */
     DescribeTRTCRealTimeScaleData(req: DescribeTRTCRealTimeScaleDataRequest, cb?: (error: string, rep: DescribeTRTCRealTimeScaleDataResponse) => void): Promise<DescribeTRTCRealTimeScaleDataResponse>;
     /**
@@ -265,7 +264,7 @@ roomCount：通话房间数，从有用户加入频道到所有用户离开频�
 peakCurrentChannels：峰值同时在线频道数。
 peakCurrentUsers：峰值同时在线人数。
 注意：
-1.调用接口需开通监控仪表盘【基础版】和【进阶版】，监控仪表盘【免费版】不支持调用，监控仪表盘版本功能和计费说明：https://cloud.tencent.com/document/product/647/81331。
+1.调用接口需开通监控仪表盘【基础版】和【进阶版】，监控仪表盘【免费版】不支持调用，监控仪表盘[版本功能和计费说明](https://cloud.tencent.com/document/product/647/81331)。
 2.查询时间范围根据监控仪表盘功能版本而定，【基础版】可查近30天，【进阶版】可查近60天。
      */
     DescribeTRTCMarketScaleData(req: DescribeTRTCMarketScaleDataRequest, cb?: (error: string, rep: DescribeTRTCMarketScaleDataResponse) => void): Promise<DescribeTRTCMarketScaleDataResponse>;
@@ -382,7 +381,7 @@ peakCurrentUsers：峰值同时在线人数。
 -视频卡顿率
 -音频卡顿率
 注意：
-1.调用接口需开通监控仪表盘【基础版】和【进阶版】，监控仪表盘【免费版】不支持调用，监控仪表盘版本功能和计费说明：https://cloud.tencent.com/document/product/647/81331。
+1.调用接口需开通监控仪表盘【基础版】和【进阶版】，监控仪表盘【免费版】不支持调用，监控仪表盘[版本功能和计费说明]（https://cloud.tencent.com/document/product/647/81331）。
 2.查询时间范围根据监控仪表盘功能版本而定，基础版可查近3小时，进阶版可查近12小时。
      */
     DescribeTRTCRealTimeQualityData(req: DescribeTRTCRealTimeQualityDataRequest, cb?: (error: string, rep: DescribeTRTCRealTimeQualityDataResponse) => void): Promise<DescribeTRTCRealTimeQualityDataResponse>;
@@ -402,7 +401,7 @@ audioFreezeRate：音频卡顿率。
 videoFreezeRate：视频卡顿率。
 networkDelay ：网络延迟率。
 注意：
-1.调用接口需开通监控仪表盘【基础版】和【进阶版】，监控仪表盘【免费版】不支持调用，监控仪表盘版本功能和计费说明：https://cloud.tencent.com/document/product/647/81331。
+1.调用接口需开通监控仪表盘【基础版】和【进阶版】，监控仪表盘【免费版】不支持调用，监控仪表盘[版本功能和计费说明](https://cloud.tencent.com/document/product/647/81331)。
 2.查询时间范围根据监控仪表盘功能版本而定，【基础版】可查近30天，【进阶版】可查近60天。
      */
     DescribeTRTCMarketQualityData(req: DescribeTRTCMarketQualityDataRequest, cb?: (error: string, rep: DescribeTRTCMarketQualityDataResponse) => void): Promise<DescribeTRTCMarketQualityDataResponse>;

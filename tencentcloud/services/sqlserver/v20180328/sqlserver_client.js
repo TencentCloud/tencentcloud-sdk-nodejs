@@ -624,6 +624,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeCrossRegions", req, cb);
     }
     /**
+     * 本接口（ModifyDReadable）用于开通或者关闭备机只读
+     */
+    async ModifyDReadable(req, cb) {
+        return this.request("ModifyDReadable", req, cb);
+    }
+    /**
      * 本接口（RemoveBackups）可以删除用户手动创建的备份文件。待删除的备份策略可以是实例备份，也可以是多库备份。
      */
     async RemoveBackups(req, cb) {

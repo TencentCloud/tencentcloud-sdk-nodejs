@@ -1008,6 +1008,16 @@ it("sqlserver.v20180328.DescribeCrossRegions", async function () {
     }
 })
 
+it("sqlserver.v20180328.ModifyDReadable", async function () {
+    try {
+       const data = await client.ModifyDReadable({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("sqlserver.v20180328.RemoveBackups", async function () {
     try {
        const data = await client.RemoveBackups({})

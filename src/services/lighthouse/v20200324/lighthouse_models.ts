@@ -288,6 +288,10 @@ false（默认）：发送正常请求，通过检查后直接创建实例
 数组最多支持10个元素。
    */
   Tags?: Array<Tag>
+  /**
+   * 创建实例后自动执行的命令。
+   */
+  InitCommand?: Command
 }
 
 /**
@@ -2131,6 +2135,29 @@ export interface DataDiskPrice {
 }
 
 /**
+ * 用户执行TAT命令的数据结构。
+ */
+export interface Command {
+  /**
+   * Base64编码后的命令内容，长度不可超过64KB。
+   */
+  Content: string
+  /**
+   * 命令超时时间，默认60秒。取值范围[1, 86400]。
+   */
+  Timeout?: number
+  /**
+   * 命令执行路径，对于 SHELL 命令默认为 /root，对于 POWERSHELL 命令默认为 C:\Program Files\qcloud\tat_agent\workdir。
+   */
+  WorkingDirectory?: string
+  /**
+   * 在 Lighthouse 实例中执行命令的用户名称。
+默认情况下，在 Linux 实例中以 root 用户执行命令；在Windows 实例中以 System 用户执行命令。
+   */
+  Username?: string
+}
+
+/**
  * 使用场景详细信息
  */
 export interface SceneInfo {
@@ -2704,6 +2731,10 @@ FAILED：表示操作失败
 <li>NORMAL实例正常。</li><li>NETWORK_RESTRICT：网络封禁。</li>
    */
   InstanceRestrictState?: string
+  /**
+   * 创建实例后自动执行TAT命令的调用ID。
+   */
+  InitInvocationId?: string
 }
 
 /**

@@ -133,6 +133,7 @@ import {
   DisassociateInstancesKeyPairsRequest,
   DescribeFirewallTemplateQuotaRequest,
   DataDiskPrice,
+  Command,
   SceneInfo,
   ImportKeyPairRequest,
   DescribeDockerActivitiesRequest,

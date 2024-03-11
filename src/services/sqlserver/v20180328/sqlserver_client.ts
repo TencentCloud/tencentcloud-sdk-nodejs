@@ -112,11 +112,12 @@ import {
   DeleteAccountResponse,
   TDEConfigAttribute,
   SummaryDetailRes,
-  DescribeBackupUploadSizeRequest,
+  ModifyDReadableRequest,
   DeleteBusinessIntelligenceFileRequest,
   AssociateSecurityGroupsRequest,
   ModifyBackupStrategyResponse,
   SlaveZones,
+  DescribeBackupUploadSizeRequest,
   StartInstanceXEventResponse,
   DescribeDBInstanceInterResponse,
   ModifyPublishSubscribeNameResponse,
@@ -373,6 +374,7 @@ import {
   CreateBusinessDBInstancesRequest,
   ResetAccountPasswordRequest,
   DescribeSlowlogsRequest,
+  ModifyDReadableResponse,
   StopMigrationResponse,
   UpgradeDBInstanceResponse,
   DescribePublishSubscribeResponse,
@@ -1381,6 +1383,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeCrossRegionsResponse) => void
   ): Promise<DescribeCrossRegionsResponse> {
     return this.request("DescribeCrossRegions", req, cb)
+  }
+
+  /**
+   * 本接口（ModifyDReadable）用于开通或者关闭备机只读
+   */
+  async ModifyDReadable(
+    req: ModifyDReadableRequest,
+    cb?: (error: string, rep: ModifyDReadableResponse) => void
+  ): Promise<ModifyDReadableResponse> {
+    return this.request("ModifyDReadable", req, cb)
   }
 
   /**
