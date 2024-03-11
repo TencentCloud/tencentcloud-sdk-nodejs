@@ -28,7 +28,7 @@ import {
   ZoneInfo,
   DescribeDedicatedClusterOverviewResponse,
   DescribeSitesRequest,
-  HostInfo,
+  DescribeDedicatedClusterTypesRequest,
   CreateSiteResponse,
   DescribeDedicatedSupportedZonesResponse,
   ModifySiteInfoResponse,
@@ -39,13 +39,16 @@ import {
   DescribeDedicatedSupportedZonesRequest,
   DedicatedClusterTypeInfo,
   ModifyOrderStatusResponse,
+  SetInfo,
   InBandwidth,
   DescribeDedicatedClusterCosCapacityRequest,
+  VpngwBandwidthData,
   DescribeSitesResponse,
   DescribeSitesDetailRequest,
   DetailData,
   DedicatedClusterOrder,
   ModifyDedicatedClusterInfoRequest,
+  DescribeDedicatedClusterCbsStatisticsRequest,
   DescribeDedicatedClusterHostsRequest,
   CreateDedicatedClusterOrderResponse,
   DescribeDedicatedClusterCosCapacityResponse,
@@ -59,7 +62,7 @@ import {
   HostDetailInfo,
   CbsInfo,
   ModifySiteDeviceInfoResponse,
-  CreateDedicatedClusterRequest,
+  DescribeDedicatedClusterCbsStatisticsResponse,
   DescribeDedicatedClusterHostsResponse,
   LocalNetInfo,
   DescribeDedicatedClusterInstanceTypesRequest,
@@ -68,11 +71,11 @@ import {
   SiteDetail,
   DeleteSitesResponse,
   CosCapacity,
-  VpngwBandwidthData,
+  HostInfo,
   ModifySiteDeviceInfoRequest,
   DescribeDedicatedClusterHostStatisticsResponse,
   Site,
-  DescribeDedicatedClusterTypesRequest,
+  CreateDedicatedClusterRequest,
   DescribeDedicatedClusterOrdersResponse,
   DescribeDedicatedClusterHostStatisticsRequest,
   OutBandwidth,
@@ -101,6 +104,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 创建专用集群订单
+   */
+  async CreateDedicatedClusterOrder(
+    req: CreateDedicatedClusterOrderRequest,
+    cb?: (error: string, rep: CreateDedicatedClusterOrderResponse) => void
+  ): Promise<CreateDedicatedClusterOrderResponse> {
+    return this.request("CreateDedicatedClusterOrder", req, cb)
+  }
+
+  /**
    * 删除专用集群
    */
   async DeleteDedicatedClusters(
@@ -108,16 +121,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteDedicatedClustersResponse) => void
   ): Promise<DeleteDedicatedClustersResponse> {
     return this.request("DeleteDedicatedClusters", req, cb)
-  }
-
-  /**
-   * 查询专用集群内cos的容量信息
-   */
-  async DescribeDedicatedClusterCosCapacity(
-    req: DescribeDedicatedClusterCosCapacityRequest,
-    cb?: (error: string, rep: DescribeDedicatedClusterCosCapacityResponse) => void
-  ): Promise<DescribeDedicatedClusterCosCapacityResponse> {
-    return this.request("DescribeDedicatedClusterCosCapacity", req, cb)
   }
 
   /**
@@ -221,13 +224,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建专用集群订单
+   * 查询本地专用集群云硬盘仓库信息
    */
-  async CreateDedicatedClusterOrder(
-    req: CreateDedicatedClusterOrderRequest,
-    cb?: (error: string, rep: CreateDedicatedClusterOrderResponse) => void
-  ): Promise<CreateDedicatedClusterOrderResponse> {
-    return this.request("CreateDedicatedClusterOrder", req, cb)
+  async DescribeDedicatedClusterCbsStatistics(
+    req: DescribeDedicatedClusterCbsStatisticsRequest,
+    cb?: (error: string, rep: DescribeDedicatedClusterCbsStatisticsResponse) => void
+  ): Promise<DescribeDedicatedClusterCbsStatisticsResponse> {
+    return this.request("DescribeDedicatedClusterCbsStatistics", req, cb)
   }
 
   /**
@@ -258,6 +261,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeSitesDetailResponse) => void
   ): Promise<DescribeSitesDetailResponse> {
     return this.request("DescribeSitesDetail", req, cb)
+  }
+
+  /**
+   * 查询专用集群内cos的容量信息
+   */
+  async DescribeDedicatedClusterCosCapacity(
+    req: DescribeDedicatedClusterCosCapacityRequest,
+    cb?: (error: string, rep: DescribeDedicatedClusterCosCapacityResponse) => void
+  ): Promise<DescribeDedicatedClusterCosCapacityResponse> {
+    return this.request("DescribeDedicatedClusterCosCapacity", req, cb)
   }
 
   /**

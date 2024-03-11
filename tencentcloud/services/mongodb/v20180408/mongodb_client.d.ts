@@ -8,13 +8,11 @@ import { DescribeSpecInfoRequest, TerminateDBInstanceRequest, CreateDBInstanceRe
 export declare class Client extends AbstractClient {
     constructor(clientConfig: ClientConfig);
     /**
-     * 本接口(AssignProject)用于指定云数据库实例的所属项目。
-
-
+     * 本接口（AssignProject）用于指定云数据库实例的所属项目。
      */
     AssignProject(req: AssignProjectRequest, cb?: (error: string, rep: AssignProjectResponse) => void): Promise<AssignProjectResponse>;
     /**
-     * 本接口(TerminateDBInstance)用于销毁按量计费的MongoDB云数据库实例
+     * 本接口(TerminateDBInstance)用于销毁按量计费的MongoDB云数据库实例。
      */
     TerminateDBInstance(req: TerminateDBInstanceRequest, cb?: (error: string, rep: TerminateDBInstanceResponse) => void): Promise<TerminateDBInstanceResponse>;
     /**
@@ -50,7 +48,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeSpecInfo(req: DescribeSpecInfoRequest, cb?: (error: string, rep: DescribeSpecInfoResponse) => void): Promise<DescribeSpecInfoResponse>;
     /**
-     * 本接口(SetPassword)用于设置云数据库账户的密码。
+     * 本接口(SetPassword)用于设置（初始化）MongoDB云数据库实例账户密码。
 
 
      */

@@ -164,11 +164,11 @@ export interface CreateDBInstanceHourRequest {
  */
 export interface AssignProjectRequest {
     /**
-     * 实例ID列表，格式如：cmgo-p8vnipr5。与云数据库控制台页面中显示的实例ID相同
+     * 实例 ID 列表。格式如：cmgo-p8vn****，与云数据库控制台页面中显示的实例 ID 相同。
      */
     InstanceIds: Array<string>;
     /**
-     * 项目ID
+     * 项目ID。项目 ID 具有唯一性，请[登录 MongoDB 控制台](https://console.cloud.tencent.com/mongodb)，在右上角的账户信息的下拉菜单中，选择**项目管理**，即可获取项目ID。
      */
     ProjectId: number;
 }
@@ -190,47 +190,53 @@ export interface ClientConnection {
  */
 export interface DescribeDBInstancesRequest {
     /**
-     * 实例ID列表，格式如：cmgo-p8vnipr5。与云数据库控制台页面中显示的实例ID相同
+     * 实例ID列表，格式如：cmgo-p8vnipr5。与云数据库控制台页面中显示的实例ID相同。
      */
     InstanceIds?: Array<string>;
     /**
-     * 实例类型，取值范围：0-所有实例,1-正式实例，2-临时实例, 3-只读实例，-1-正式实例+只读+灾备实例
+     * 实例类型，取值范围：
+  <ul><li>0： 所有实例</li><li>1： 正式实例</li><li>2： 临时实例</li><li>3： 只读实例</li><li>-1： 正式实例+只读+灾备实例</li></ul>
      */
     InstanceType?: number;
     /**
-     * 集群类型，取值范围：0-副本集实例，1-分片实例，-1-所有实例
+     * 集群类型，取值范围：
+  <ul><li>0： 副本集实例</li><li>1： 正式实例</li> <li>-1： 所有实例</li></ul>
      */
     ClusterType?: number;
     /**
-     * 实例状态，取值范围：0-待初始化，1-流程执行中，2-实例有效，-2-实例已过期
+     * 实例状态，取值范围：
+  <ul><li>0： 待初始化</li><li>1： 流程执行中</li> <li>2： 有效实例</li><li>-2： 已过期实例</li></ul>
      */
     Status?: Array<number | bigint>;
     /**
-     * 私有网络的ID，基础网络则不传该参数
+     * 私有网络的ID，基础网络则不传该参数。
      */
     VpcId?: string;
     /**
-     * 私有网络的子网ID，基础网络则不传该参数。入参设置该参数的同时，必须设置相应的VpcId
+     * 私有网络的子网ID，基础网络则不传该参数。入参设置该参数的同时，必须设置相应的VpcId。
      */
     SubnetId?: string;
     /**
-     * 付费类型，取值范围：0-按量计费，1-包年包月，-1-按量计费+包年包月
+     * 付费类型，取值范围：
+  <ul><li>0： 按量计费</li><li>1：包年包月</li><li>-1： 按量计费+包年包月</li></ul>
      */
     PayMode?: number;
     /**
-     * 单次请求返回的数量，最小值为1，最大值为100，默认值为20
+     * 单次请求返回的数量，最小值为1，最大值为100，默认值为20。
      */
     Limit?: number;
     /**
-     * 偏移量，默认值为0
+     * 偏移量，默认值为0。
      */
     Offset?: number;
     /**
-     * 返回结果集排序的字段，目前支持："ProjectId", "InstanceName", "CreateTime"，默认为升序排序
+     * 返回结果集排序的字段，目前支持：
+  <ul><li>ProjectId： 按照项目ID排序</li><li>InstanceName：按照实例名称排序</li><li>CreateTime： 根据创建时间排序</li></ul>
      */
     OrderBy?: string;
     /**
-     * 返回结果集排序方式，目前支持："ASC"或者"DESC"
+     * 返回结果集排序方式，目前支持："ASC"或者"DESC"。
+  <ul><li>ASC： 顺序取值</li><li>DESC：倒序取值</li></ul>
      */
     OrderByType?: string;
 }
@@ -241,9 +247,9 @@ export interface SetPasswordResponse {
     /**
      * 返回的异步任务ID
      */
-    FlowId?: number;
+    FlowId: number;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
 }
@@ -435,7 +441,7 @@ export interface DescribeSpecInfoResponse {
      */
     SpecInfoList?: Array<SpecificationInfo>;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
 }
@@ -465,7 +471,7 @@ export interface DescribeSlowLogResponse {
      */
     SlowLogList?: Array<string>;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
 }
@@ -476,13 +482,13 @@ export interface DescribeDBInstancesResponse {
     /**
      * 符合查询条件的实例总数
      */
-    TotalCount?: number;
+    TotalCount: number;
     /**
      * 实例详细信息
      */
-    InstanceDetails?: Array<MongoDBInstanceDetail>;
+    InstanceDetails: Array<MongoDBInstanceDetail>;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
 }
@@ -499,7 +505,7 @@ export interface CreateDBInstanceResponse {
      */
     InstanceIds?: Array<string>;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
 }
@@ -512,7 +518,7 @@ export interface SetPasswordRequest {
      */
     InstanceId: string;
     /**
-     * 实例账户名称
+     * 实例账户名。初始化实例密码，本参数传mongouser。
      */
     UserName: string;
     /**
@@ -525,11 +531,11 @@ export interface SetPasswordRequest {
  */
 export interface AssignProjectResponse {
     /**
-     * 返回的异步任务ID列表
+     * 返回的异步任务ID列表。
      */
     FlowIds?: Array<number | bigint>;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
 }
@@ -576,7 +582,7 @@ export interface DescribeClientConnectionsRequest {
  */
 export interface SetAutoRenewResponse {
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
 }
@@ -602,7 +608,7 @@ export interface RenameInstanceRequest {
      */
     InstanceId: string;
     /**
-     * 实例名称
+     * 实例自定义名称
      */
     NewName: string;
 }
@@ -615,7 +621,7 @@ export interface UpgradeDBInstanceResponse {
      */
     DealId?: string;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
 }
@@ -628,7 +634,10 @@ export interface SetAutoRenewRequest {
      */
     InstanceIds: Array<string>;
     /**
-     * 续费选项，取值范围：0-手动续费，1-自动续费，2-确认不续费
+     * 配置自动续费标识。
+  - 0：手动续费。
+  - 1：自动续费。
+  - 2：确认不续费。
      */
     AutoRenewFlag: number;
 }
@@ -637,7 +646,7 @@ export interface SetAutoRenewRequest {
  */
 export interface RenameInstanceResponse {
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
 }
@@ -649,9 +658,14 @@ export interface DescribeClientConnectionsResponse {
      * 客户端连接信息，包括客户端IP和对应IP的连接数量
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Clients?: Array<ClientConnection>;
+    Clients: Array<ClientConnection>;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     * 连接数总结
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TotalCount: number;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
 }
@@ -664,7 +678,7 @@ export interface UpgradeDBInstanceHourResponse {
      */
     DealId?: string;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
 }
@@ -702,7 +716,7 @@ export interface CreateDBInstanceHourResponse {
      */
     InstanceIds?: Array<string>;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
 }
@@ -711,11 +725,11 @@ export interface CreateDBInstanceHourResponse {
  */
 export interface TerminateDBInstanceResponse {
     /**
-     * 订单ID，表示注销实例成功
+     * 订单ID，表示注销实例成功。
      */
-    AsyncRequestId?: string;
+    AsyncRequestId: string;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
 }

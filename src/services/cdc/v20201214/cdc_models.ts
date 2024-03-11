@@ -24,7 +24,7 @@ export interface DescribeDedicatedClusterInstanceTypesResponse {
    */
   DedicatedClusterInstanceTypeSet?: Array<DedicatedClusterInstanceType>
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
 }
@@ -76,7 +76,7 @@ export interface DescribeDedicatedClusterTypesResponse {
    */
   TotalCount?: number
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
 }
@@ -288,7 +288,7 @@ export interface DescribeDedicatedClusterOverviewResponse {
    */
   HostNormalCount?: number
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
 }
@@ -316,54 +316,29 @@ export interface DescribeSitesRequest {
 }
 
 /**
- * CDC宿主机的详细信息
+ * DescribeDedicatedClusterTypes请求参数结构体
  */
-export interface HostInfo {
+export interface DescribeDedicatedClusterTypesRequest {
   /**
-   * 宿主机IP（废弃）
+   * 模糊匹配专用集群配置名称
    */
-  HostIp?: string
+  Name?: string
   /**
-   * 云服务类型
+   * 待查询的专用集群配置id列表
    */
-  ServiceType?: string
+  DedicatedClusterTypeIds?: Array<string>
   /**
-   * 宿主机运行状态
+   * 偏移量，默认为0。关于`Offset`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。
    */
-  HostStatus?: string
+  Offset?: number
   /**
-   * 宿主机类型
+   * 返回数量，默认为20，最大值为100。关于`Limit`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。
    */
-  HostType?: string
+  Limit?: number
   /**
-   * cpu可用数
+   * 是否只查询计算规格类型
    */
-  CpuAvailable?: number
-  /**
-   * cpu总数
-   */
-  CpuTotal?: number
-  /**
-   * 内存可用数
-   */
-  MemAvailable?: number
-  /**
-   * 内存总数
-   */
-  MemTotal?: number
-  /**
-   * 运行时间
-   */
-  RunTime?: string
-  /**
-   * 到期时间
-   */
-  ExpireTime?: string
-  /**
-   * 宿主机id
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  HostId?: string
+  IsCompute?: boolean
 }
 
 /**
@@ -375,7 +350,7 @@ export interface CreateSiteResponse {
    */
   SiteId?: string
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
 }
@@ -389,7 +364,7 @@ export interface DescribeDedicatedSupportedZonesResponse {
    */
   ZoneSet: Array<RegionZoneInfo>
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
 }
@@ -399,7 +374,7 @@ export interface DescribeDedicatedSupportedZonesResponse {
  */
 export interface ModifySiteInfoResponse {
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
 }
@@ -672,9 +647,75 @@ export interface DedicatedClusterTypeInfo {
  */
 export interface ModifyOrderStatusResponse {
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 云硬盘的仓库级别信息
+ */
+export interface SetInfo {
+  /**
+   * 云硬盘仓库id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SetId?: string
+  /**
+   * 云硬盘仓库名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SetName?: string
+  /**
+   * 云硬盘仓库类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SetType?: string
+  /**
+   * 云硬盘仓库容量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SetSize?: number
+  /**
+   * 云硬盘仓库状态
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SetStatus?: string
+  /**
+   * 云硬盘仓库创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateTime?: string
+  /**
+   * 读流量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ReadTraffic?: DetailData
+  /**
+   * 写流量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WriteTraffic?: DetailData
+  /**
+   * 读IO
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ReadIO?: DetailData
+  /**
+   * 写IO
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WriteIO?: DetailData
+  /**
+   * 平均等待时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Await?: DetailData
+  /**
+   * 利用率
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Util?: DetailData
 }
 
 /**
@@ -704,6 +745,21 @@ export interface DescribeDedicatedClusterCosCapacityRequest {
 }
 
 /**
+ * VPN网关的流量监控数据。
+ */
+export interface VpngwBandwidthData {
+  /**
+   * 出带宽流量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OutBandwidth: OutBandwidth
+  /**
+   * 入带宽流量
+   */
+  InBandwidth: InBandwidth
+}
+
+/**
  * DescribeSites返回参数结构体
  */
 export interface DescribeSitesResponse {
@@ -716,7 +772,7 @@ export interface DescribeSitesResponse {
    */
   TotalCount?: number
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
 }
@@ -881,6 +937,40 @@ export interface ModifyDedicatedClusterInfoRequest {
 }
 
 /**
+ * DescribeDedicatedClusterCbsStatistics请求参数结构体
+ */
+export interface DescribeDedicatedClusterCbsStatisticsRequest {
+  /**
+   * 查询的专用集群id
+   */
+  DedicatedClusterId: string
+  /**
+   * 云硬盘仓库id
+   */
+  SetId?: string
+  /**
+   * 开始时间
+   */
+  StartTime?: string
+  /**
+   * 结束时间
+   */
+  EndTime?: string
+  /**
+   * 时间范围精度，1分钟/5分钟
+   */
+  Period?: string
+  /**
+   * 偏移量，默认为0。
+   */
+  Offset?: number
+  /**
+   * 返回数量，默认为20
+   */
+  Limit?: number
+}
+
+/**
  * DescribeDedicatedClusterHosts请求参数结构体
  */
 export interface DescribeDedicatedClusterHostsRequest {
@@ -908,7 +998,7 @@ export interface CreateDedicatedClusterOrderResponse {
    */
   DedicatedClusterOrderId?: string
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
 }
@@ -922,7 +1012,7 @@ export interface DescribeDedicatedClusterCosCapacityResponse {
    */
   CosCapacity?: CosCapacity
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
 }
@@ -950,7 +1040,7 @@ export interface CreateDedicatedClusterResponse {
    */
   DedicatedClusterId?: string
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
 }
@@ -1003,7 +1093,7 @@ export interface DescribeSitesDetailResponse {
    */
   TotalCount?: number
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
 }
@@ -1051,7 +1141,7 @@ export interface DescribeDedicatedClustersResponse {
    */
   TotalCount?: number
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
 }
@@ -1167,31 +1257,29 @@ export interface CbsInfo {
  */
 export interface ModifySiteDeviceInfoResponse {
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
 }
 
 /**
- * CreateDedicatedCluster请求参数结构体
+ * DescribeDedicatedClusterCbsStatistics返回参数结构体
  */
-export interface CreateDedicatedClusterRequest {
+export interface DescribeDedicatedClusterCbsStatisticsResponse {
   /**
-   * 专用集群所属的SiteId
+   * 云硬盘仓库信息
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  SiteId: string
+  SetList?: Array<SetInfo>
   /**
-   * 专用集群的名称
+   * 总数
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Name: string
+  TotalCount?: number
   /**
-   * 专用集群所属的可用区
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Zone: string
-  /**
-   * 专用集群的描述
-   */
-  Description?: string
+  RequestId?: string
 }
 
 /**
@@ -1208,7 +1296,7 @@ export interface DescribeDedicatedClusterHostsResponse {
    */
   TotalCount?: number
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
 }
@@ -1254,7 +1342,7 @@ export interface DescribeDedicatedClusterInstanceTypesRequest {
  */
 export interface ModifyDedicatedClusterInfoResponse {
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
 }
@@ -1416,7 +1504,7 @@ export interface SiteDetail {
  */
 export interface DeleteSitesResponse {
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
 }
@@ -1440,18 +1528,54 @@ export interface CosCapacity {
 }
 
 /**
- * VPN网关的流量监控数据。
+ * CDC宿主机的详细信息
  */
-export interface VpngwBandwidthData {
+export interface HostInfo {
   /**
-   * 出带宽流量
+   * 宿主机IP（废弃）
+   */
+  HostIp?: string
+  /**
+   * 云服务类型
+   */
+  ServiceType?: string
+  /**
+   * 宿主机运行状态
+   */
+  HostStatus?: string
+  /**
+   * 宿主机类型
+   */
+  HostType?: string
+  /**
+   * cpu可用数
+   */
+  CpuAvailable?: number
+  /**
+   * cpu总数
+   */
+  CpuTotal?: number
+  /**
+   * 内存可用数
+   */
+  MemAvailable?: number
+  /**
+   * 内存总数
+   */
+  MemTotal?: number
+  /**
+   * 运行时间
+   */
+  RunTime?: string
+  /**
+   * 到期时间
+   */
+  ExpireTime?: string
+  /**
+   * 宿主机id
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  OutBandwidth: OutBandwidth
-  /**
-   * 入带宽流量
-   */
-  InBandwidth: InBandwidth
+  HostId?: string
 }
 
 /**
@@ -1537,7 +1661,7 @@ export interface DescribeDedicatedClusterHostStatisticsResponse {
    */
   HostStatisticSet?: Array<HostStatistic>
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
 }
@@ -1566,29 +1690,25 @@ export interface Site {
 }
 
 /**
- * DescribeDedicatedClusterTypes请求参数结构体
+ * CreateDedicatedCluster请求参数结构体
  */
-export interface DescribeDedicatedClusterTypesRequest {
+export interface CreateDedicatedClusterRequest {
   /**
-   * 模糊匹配专用集群配置名称
+   * 专用集群所属的SiteId
    */
-  Name?: string
+  SiteId: string
   /**
-   * 待查询的专用集群配置id列表
+   * 专用集群的名称
    */
-  DedicatedClusterTypeIds?: Array<string>
+  Name: string
   /**
-   * 偏移量，默认为0。关于`Offset`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。
+   * 专用集群所属的可用区
    */
-  Offset?: number
+  Zone: string
   /**
-   * 返回数量，默认为20，最大值为100。关于`Limit`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。
+   * 专用集群的描述
    */
-  Limit?: number
-  /**
-   * 是否只查询计算规格类型
-   */
-  IsCompute?: boolean
+  Description?: string
 }
 
 /**
@@ -1604,7 +1724,7 @@ export interface DescribeDedicatedClusterOrdersResponse {
    */
   TotalCount?: number
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
 }
@@ -1676,7 +1796,7 @@ export interface DeleteDedicatedClustersRequest {
  */
 export interface DeleteDedicatedClustersResponse {
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
 }

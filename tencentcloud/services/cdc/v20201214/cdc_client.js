@@ -34,16 +34,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifySiteDeviceInfo", req, cb);
     }
     /**
+     * 创建专用集群订单
+     */
+    async CreateDedicatedClusterOrder(req, cb) {
+        return this.request("CreateDedicatedClusterOrder", req, cb);
+    }
+    /**
      * 删除专用集群
      */
     async DeleteDedicatedClusters(req, cb) {
         return this.request("DeleteDedicatedClusters", req, cb);
-    }
-    /**
-     * 查询专用集群内cos的容量信息
-     */
-    async DescribeDedicatedClusterCosCapacity(req, cb) {
-        return this.request("DescribeDedicatedClusterCosCapacity", req, cb);
     }
     /**
      * 修改机房信息
@@ -106,10 +106,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDedicatedSupportedZones", req, cb);
     }
     /**
-     * 创建专用集群订单
+     * 查询本地专用集群云硬盘仓库信息
      */
-    async CreateDedicatedClusterOrder(req, cb) {
-        return this.request("CreateDedicatedClusterOrder", req, cb);
+    async DescribeDedicatedClusterCbsStatistics(req, cb) {
+        return this.request("DescribeDedicatedClusterCbsStatistics", req, cb);
     }
     /**
      * 查询专用集群概览信息
@@ -128,6 +128,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeSitesDetail(req, cb) {
         return this.request("DescribeSitesDetail", req, cb);
+    }
+    /**
+     * 查询专用集群内cos的容量信息
+     */
+    async DescribeDedicatedClusterCosCapacity(req, cb) {
+        return this.request("DescribeDedicatedClusterCosCapacity", req, cb);
     }
     /**
      * 查询专用集群支持的实例规格列表

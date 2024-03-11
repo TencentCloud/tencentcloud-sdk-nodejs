@@ -63,10 +63,8 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 本接口(AssignProject)用于指定云数据库实例的所属项目。
-
-
-     */
+   * 本接口（AssignProject）用于指定云数据库实例的所属项目。
+   */
   async AssignProject(
     req: AssignProjectRequest,
     cb?: (error: string, rep: AssignProjectResponse) => void
@@ -75,7 +73,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口(TerminateDBInstance)用于销毁按量计费的MongoDB云数据库实例
+   * 本接口(TerminateDBInstance)用于销毁按量计费的MongoDB云数据库实例。
    */
   async TerminateDBInstance(
     req: TerminateDBInstanceRequest,
@@ -165,7 +163,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 本接口(SetPassword)用于设置云数据库账户的密码。
+     * 本接口(SetPassword)用于设置（初始化）MongoDB云数据库实例账户密码。
 
 
      */

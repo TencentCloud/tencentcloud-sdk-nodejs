@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeDedicatedClusterInstanceTypesResponse, DescribeDedicatedClustersRequest, DescribeDedicatedClusterTypesResponse, DeleteSitesRequest, DescribeDedicatedClusterOverviewResponse, DescribeSitesRequest, CreateSiteResponse, DescribeDedicatedSupportedZonesResponse, ModifySiteInfoResponse, CreateDedicatedClusterOrderRequest, ModifyOrderStatusRequest, CreateSiteRequest, DescribeDedicatedSupportedZonesRequest, ModifyOrderStatusResponse, DescribeDedicatedClusterCosCapacityRequest, DescribeSitesResponse, DescribeSitesDetailRequest, ModifyDedicatedClusterInfoRequest, DescribeDedicatedClusterHostsRequest, CreateDedicatedClusterOrderResponse, DescribeDedicatedClusterCosCapacityResponse, CreateDedicatedClusterResponse, DescribeSitesDetailResponse, DescribeDedicatedClusterOrdersRequest, DescribeDedicatedClustersResponse, ModifySiteDeviceInfoResponse, CreateDedicatedClusterRequest, DescribeDedicatedClusterHostsResponse, DescribeDedicatedClusterInstanceTypesRequest, ModifyDedicatedClusterInfoResponse, ModifySiteInfoRequest, DeleteSitesResponse, ModifySiteDeviceInfoRequest, DescribeDedicatedClusterHostStatisticsResponse, DescribeDedicatedClusterTypesRequest, DescribeDedicatedClusterOrdersResponse, DescribeDedicatedClusterHostStatisticsRequest, DescribeDedicatedClusterOverviewRequest, DeleteDedicatedClustersRequest, DeleteDedicatedClustersResponse } from "./cdc_models";
+import { DescribeDedicatedClusterInstanceTypesResponse, DescribeDedicatedClustersRequest, DescribeDedicatedClusterTypesResponse, DeleteSitesRequest, DescribeDedicatedClusterOverviewResponse, DescribeSitesRequest, DescribeDedicatedClusterTypesRequest, CreateSiteResponse, DescribeDedicatedSupportedZonesResponse, ModifySiteInfoResponse, CreateDedicatedClusterOrderRequest, ModifyOrderStatusRequest, CreateSiteRequest, DescribeDedicatedSupportedZonesRequest, ModifyOrderStatusResponse, DescribeDedicatedClusterCosCapacityRequest, DescribeSitesResponse, DescribeSitesDetailRequest, ModifyDedicatedClusterInfoRequest, DescribeDedicatedClusterCbsStatisticsRequest, DescribeDedicatedClusterHostsRequest, CreateDedicatedClusterOrderResponse, DescribeDedicatedClusterCosCapacityResponse, CreateDedicatedClusterResponse, DescribeSitesDetailResponse, DescribeDedicatedClusterOrdersRequest, DescribeDedicatedClustersResponse, ModifySiteDeviceInfoResponse, DescribeDedicatedClusterCbsStatisticsResponse, DescribeDedicatedClusterHostsResponse, DescribeDedicatedClusterInstanceTypesRequest, ModifyDedicatedClusterInfoResponse, ModifySiteInfoRequest, DeleteSitesResponse, ModifySiteDeviceInfoRequest, DescribeDedicatedClusterHostStatisticsResponse, CreateDedicatedClusterRequest, DescribeDedicatedClusterOrdersResponse, DescribeDedicatedClusterHostStatisticsRequest, DescribeDedicatedClusterOverviewRequest, DeleteDedicatedClustersRequest, DeleteDedicatedClustersResponse } from "./cdc_models";
 /**
  * cdc client
  * @class
@@ -12,13 +12,13 @@ export declare class Client extends AbstractClient {
      */
     ModifySiteDeviceInfo(req: ModifySiteDeviceInfoRequest, cb?: (error: string, rep: ModifySiteDeviceInfoResponse) => void): Promise<ModifySiteDeviceInfoResponse>;
     /**
+     * 创建专用集群订单
+     */
+    CreateDedicatedClusterOrder(req: CreateDedicatedClusterOrderRequest, cb?: (error: string, rep: CreateDedicatedClusterOrderResponse) => void): Promise<CreateDedicatedClusterOrderResponse>;
+    /**
      * 删除专用集群
      */
     DeleteDedicatedClusters(req: DeleteDedicatedClustersRequest, cb?: (error: string, rep: DeleteDedicatedClustersResponse) => void): Promise<DeleteDedicatedClustersResponse>;
-    /**
-     * 查询专用集群内cos的容量信息
-     */
-    DescribeDedicatedClusterCosCapacity(req: DescribeDedicatedClusterCosCapacityRequest, cb?: (error: string, rep: DescribeDedicatedClusterCosCapacityResponse) => void): Promise<DescribeDedicatedClusterCosCapacityResponse>;
     /**
      * 修改机房信息
      */
@@ -60,9 +60,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeDedicatedSupportedZones(req: DescribeDedicatedSupportedZonesRequest, cb?: (error: string, rep: DescribeDedicatedSupportedZonesResponse) => void): Promise<DescribeDedicatedSupportedZonesResponse>;
     /**
-     * 创建专用集群订单
+     * 查询本地专用集群云硬盘仓库信息
      */
-    CreateDedicatedClusterOrder(req: CreateDedicatedClusterOrderRequest, cb?: (error: string, rep: CreateDedicatedClusterOrderResponse) => void): Promise<CreateDedicatedClusterOrderResponse>;
+    DescribeDedicatedClusterCbsStatistics(req: DescribeDedicatedClusterCbsStatisticsRequest, cb?: (error: string, rep: DescribeDedicatedClusterCbsStatisticsResponse) => void): Promise<DescribeDedicatedClusterCbsStatisticsResponse>;
     /**
      * 查询专用集群概览信息
      */
@@ -75,6 +75,10 @@ export declare class Client extends AbstractClient {
      * 查询站点详情
      */
     DescribeSitesDetail(req: DescribeSitesDetailRequest, cb?: (error: string, rep: DescribeSitesDetailResponse) => void): Promise<DescribeSitesDetailResponse>;
+    /**
+     * 查询专用集群内cos的容量信息
+     */
+    DescribeDedicatedClusterCosCapacity(req: DescribeDedicatedClusterCosCapacityRequest, cb?: (error: string, rep: DescribeDedicatedClusterCosCapacityResponse) => void): Promise<DescribeDedicatedClusterCosCapacityResponse>;
     /**
      * 查询专用集群支持的实例规格列表
      */
