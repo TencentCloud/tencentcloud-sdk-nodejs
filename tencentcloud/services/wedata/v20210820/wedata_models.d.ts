@@ -26,7 +26,7 @@ export interface CreateRuleTemplateResponse {
      * 模板Id
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Data: number;
+    Data?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1185,10 +1185,10 @@ export interface DescribeDataObjectsResponse {
  */
 export interface DescribeRuleTemplatesResponse {
     /**
-     * 规则模版列表
+     * 规则模板列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Data: Array<RuleTemplate>;
+    Data?: Array<RuleTemplate>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -3111,12 +3111,22 @@ export interface InstanceLifeDetailDto {
      * 实例状态
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    State: string;
+    State?: string;
     /**
      * 该状态开始时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    StartTime: string;
+    StartTime?: string;
+    /**
+     * 实例生命周期阶段状态
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DetailState?: string;
+    /**
+     * 该状态结束时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    EndTime?: string;
 }
 /**
  * 工作流信息
@@ -10821,52 +10831,57 @@ export interface InstanceLifeCycleOpsDto {
      * 任务id
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TaskId: string;
+    TaskId?: string;
     /**
      * 数据时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CurRunDate: string;
+    CurRunDate?: string;
     /**
      * 实例生命次数
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    LifeRound: number;
+    LifeRound?: number;
     /**
      * 运行类型 重跑/补录/周期/非周期
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    RunType: string;
+    RunType?: string;
     /**
      * 重跑次数
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Tries: number;
+    Tries?: number;
     /**
      * 实例生命周期
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    InstanceLifeDetailDtoList: Array<InstanceLifeDetailDto>;
+    InstanceLifeDetailDtoList?: Array<InstanceLifeDetailDto>;
     /**
      * Runner运行状态
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    RunnerState: string;
+    RunnerState?: string;
     /**
      * 错误码
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ErrorDesc: string;
+    ErrorDesc?: string;
     /**
      * 错误告警级别
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ErrorCodeLevel: string;
+    ErrorCodeLevel?: string;
     /**
      * 实例日志简略信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    InstanceLogListOpsDto: InstanceLogInfo;
+    InstanceLogListOpsDto?: InstanceLogInfo;
+    /**
+     * 实例状态
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InstanceState?: string;
 }
 /**
  * DescribeClusterNamespaceList请求参数结构体
@@ -11008,8 +11023,8 @@ export interface CompareRuleItem {
   IRLORO:在区间内(左开右开)
   NRLCRO:不在区间内(左闭右开)
   NRLORC:不在区间内(左开右闭)
-  NRLCRC:不在在区间内(左闭右闭)
-  NRLORO:不在在区间内(左开右开)
+  NRLCRC:不在区间内(左闭右闭)
+  NRLORO:不在区间内(左开右开)
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Operator?: string;
@@ -11976,7 +11991,7 @@ export interface DeleteRuleTemplateRequest {
      */
     ProjectId?: string;
     /**
-     * 模版Id列表
+     * 模板Id列表
      */
     Ids?: Array<number | bigint>;
 }
@@ -15426,7 +15441,7 @@ export interface DescribeRuleTemplatesByPageResponse {
     /**
      * 结果
      */
-    Data: RuleTemplatePage;
+    Data?: RuleTemplatePage;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -18526,7 +18541,7 @@ export interface DatasourceBaseInfo {
  */
 export interface DescribeRuleTemplatesRequest {
     /**
-     * 模版类型 1.系统模版 2.自定义模版
+     * 模板类型 1.系统模板 2.自定义模板
      */
     Type?: number;
     /**
@@ -24989,7 +25004,7 @@ export interface DeleteRuleTemplateResponse {
      * 删除成功
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Data: boolean;
+    Data?: boolean;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -25072,11 +25087,11 @@ export interface CommonId {
  */
 export interface CreateRuleTemplateRequest {
     /**
-     * 模版类型  1.系统模版   2.自定义模版
+     * 模板类型  1.系统模板   2.自定义模板
      */
     Type?: number;
     /**
-     * 模版名称
+     * 模板名称
      */
     Name?: string;
     /**

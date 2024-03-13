@@ -9153,7 +9153,7 @@ export interface DescribeSlowLogDataRequest {
      */
     OrderBy?: string;
     /**
-     * 偏移量，默认为0。
+     * 偏移量，默认为0，最大为9999。
      */
     Offset?: number;
     /**

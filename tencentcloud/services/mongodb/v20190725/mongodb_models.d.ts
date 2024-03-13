@@ -180,6 +180,15 @@ export interface DescribeAccountUsersRequest {
     InstanceId: string;
 }
 /**
+ * SetInstanceMaintenance返回参数结构体
+ */
+export interface SetInstanceMaintenanceResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * CreateBackupDBInstance返回参数结构体
  */
 export interface CreateBackupDBInstanceResponse {
@@ -2370,6 +2379,26 @@ export interface DescribeInstanceParamsRequest {
      * 指定待查询参数列表的实例ID。例如：cmgo-p8vn****。请登录 [MongoDB 控制台](https://console.cloud.tencent.com/mongodb)在实例列表复制实例 ID。
      */
     InstanceId: string;
+}
+/**
+ * SetInstanceMaintenance请求参数结构体
+ */
+export interface SetInstanceMaintenanceRequest {
+    /**
+     * 指定实例ID。例如：cmgo-p8vn****。请登录 [MongoDB 控制台](https://console.cloud.tencent.com/mongodb)在实例列表复制实例 ID。
+  
+     */
+    InstanceId: string;
+    /**
+     * 维护时间窗开始时间。取值范围为"00:00-23:00"的任意整点或半点，如00:00或00:30。
+     */
+    MaintenanceStart: string;
+    /**
+     * 维护时间窗结束时间。
+  - 取值范围为"00:00-23:00"的任意整点或半点，维护时间持续时长最小为30分钟，最大为3小时。
+  - 结束时间务必是基于开始时间向后的时间。
+     */
+    MaintenanceEnd: string;
 }
 /**
  * 实例详情

@@ -3458,7 +3458,7 @@ export interface DescribeProxyProcessStatisticsRequest {
      */
     Offset?: number;
     /**
-     * 按照某字断排序。支持值包括："AllConn"，"ActiveConn"，"Ip"。
+     * 按照某字段排序。支持值包括："AllConn"，"ActiveConn"，"Ip"。
      */
     SortBy?: string;
     /**

@@ -1059,7 +1059,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建规则模版
+   * 创建规则模板
    */
   async CreateRuleTemplate(
     req: CreateRuleTemplateRequest,
@@ -1527,7 +1527,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除规则模版
+   * 删除规则模板
    */
   async DeleteRuleTemplate(
     req: DeleteRuleTemplateRequest,
@@ -3019,7 +3019,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 过滤条件】 {模版名称Name,支持模糊匹配} {模版类型type，1.系统模版 2.自定义模版} {质量检测维度QualityDims, 1.准确性 2.唯一性 3.完整性 4.一致性 5.及时性 6.有效性} 【排序字段】 { 引用数排序类型CitationOrderType，根据引用数量排序 ASC DESC}
+   * 【过滤条件】 {模板名称Name,支持模糊匹配} {模板类型type，1.系统模板 2.自定义模板} {质量检测维度QualityDims, 1.准确性 2.唯一性 3.完整性 4.一致性 5.及时性 6.有效性} 【排序字段】 { 引用数排序类型CitationOrderType，根据引用数量排序 ASC DESC}
    */
   async DescribeRuleTemplatesByPage(
     req: DescribeRuleTemplatesByPageRequest,
@@ -3960,7 +3960,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询规则模版列表
+   * 查询规则模板列表
    */
   async DescribeRuleTemplates(
     req: DescribeRuleTemplatesRequest,

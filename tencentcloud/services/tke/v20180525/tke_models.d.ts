@@ -4949,11 +4949,15 @@ export interface GetClusterLevelPriceResponse {
     /**
      * 询价结果，单位：分，打折后
      */
-    Cost: number;
+    Cost?: number;
     /**
      * 询价结果，单位：分，折扣前
      */
-    TotalCost: number;
+    TotalCost?: number;
+    /**
+     * 总的折扣，100表示100%不打折
+     */
+    Policy?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */

@@ -298,6 +298,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDatasets", req, cb);
     }
     /**
+     * 生成Notebook访问链接
+     */
+    async CreatePresignedNotebookUrl(req, cb) {
+        return this.request("CreatePresignedNotebookUrl", req, cb);
+    }
+    /**
      * 获取任务式建模训练任务，Notebook，在线服务和批量预测任务的日志API
      */
     async DescribeLogs(req, cb) {

@@ -104,7 +104,7 @@ export interface DescribeTopSpaceSchemasResponse {
    */
   Timestamp?: number
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
 }
@@ -154,7 +154,7 @@ export interface DescribeTopSpaceTableTimeSeriesResponse {
    */
   TopSpaceTableTimeSeries?: Array<TableSpaceTimeSeries>
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
 }
@@ -212,7 +212,7 @@ export interface DescribeHealthScoreResponse {
    */
   Data?: HealthScoreInfo
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
 }
@@ -226,7 +226,7 @@ export interface DescribeDBDiagHistoryResponse {
    */
   Events?: Array<DiagHistoryEventItem>
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
 }
@@ -323,7 +323,7 @@ export interface DescribeAllUserContactResponse {
    */
   Contacts?: Array<ContactItem>
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
 }
@@ -361,7 +361,7 @@ export interface DescribeUserSqlAdviceResponse {
    */
   Cost?: string
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
 }
@@ -558,7 +558,7 @@ export interface DescribeAllUserGroupResponse {
    */
   Groups?: Array<GroupItem>
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
 }
@@ -608,7 +608,7 @@ export interface SchemaItem {
  */
 export interface CreateMailProfileResponse {
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
 }
@@ -728,7 +728,7 @@ export interface DescribeDBSpaceStatusResponse {
    */
   AvailableDays?: number
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
 }
@@ -832,7 +832,7 @@ export interface DescribeDBDiagEventResponse {
    */
   EndTime?: string
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
 }
@@ -1062,7 +1062,7 @@ export interface DescribeSlowLogUserHostStatsResponse {
    */
   UserTotalCount?: number
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
 }
@@ -1080,7 +1080,7 @@ export interface DescribeDBDiagReportTasksResponse {
    */
   Tasks?: Array<HealthReportTask>
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
 }
@@ -1094,7 +1094,7 @@ export interface AddUserContactResponse {
    */
   Id?: number
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
 }
@@ -1189,7 +1189,7 @@ export interface CreateDBDiagReportTaskResponse {
    */
   AsyncRequestId?: number
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
 }
@@ -1213,7 +1213,7 @@ export interface MonitorMetricSeriesData {
  */
 export interface ModifyDiagDBInstanceConfResponse {
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
 }
@@ -1231,7 +1231,7 @@ export interface CreateDBDiagReportUrlResponse {
    */
   ExpireTime?: number
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
 }
@@ -1268,7 +1268,7 @@ export interface DescribeTopSpaceSchemaTimeSeriesResponse {
    */
   TopSpaceSchemaTimeSeries?: Array<SchemaSpaceTimeSeries>
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
 }
@@ -1296,7 +1296,7 @@ export interface DeleteSecurityAuditLogExportTasksRequest {
  */
 export interface CreateSchedulerMailProfileResponse {
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
 }
@@ -1308,101 +1308,101 @@ export interface SlowLogTopSqlItem {
   /**
    * sql总锁等待时间
    */
-  LockTime: number
+  LockTime?: number
   /**
    * 最大锁等待时间
    */
-  LockTimeMax: number
+  LockTimeMax?: number
   /**
    * 最小锁等待时间
    */
-  LockTimeMin: number
+  LockTimeMin?: number
   /**
    * 总扫描行数
    */
-  RowsExamined: number
+  RowsExamined?: number
   /**
    * 最大扫描行数
    */
-  RowsExaminedMax: number
+  RowsExaminedMax?: number
   /**
    * 最小扫描行数
    */
-  RowsExaminedMin: number
+  RowsExaminedMin?: number
   /**
    * 总耗时
    */
-  QueryTime: number
+  QueryTime?: number
   /**
    * 最大执行时间
    */
-  QueryTimeMax: number
+  QueryTimeMax?: number
   /**
    * 最小执行时间
    */
-  QueryTimeMin: number
+  QueryTimeMin?: number
   /**
    * 总返回行数
    */
-  RowsSent: number
+  RowsSent?: number
   /**
    * 最大返回行数
    */
-  RowsSentMax: number
+  RowsSentMax?: number
   /**
    * 最小返回行数
    */
-  RowsSentMin: number
+  RowsSentMin?: number
   /**
    * 执行次数
    */
-  ExecTimes: number
+  ExecTimes?: number
   /**
    * sql模板
    */
-  SqlTemplate: string
+  SqlTemplate?: string
   /**
    * 带参数SQL（随机）
    */
-  SqlText: string
+  SqlText?: string
   /**
    * 数据库名
    */
-  Schema: string
+  Schema?: string
   /**
    * 总耗时占比
    */
-  QueryTimeRatio: number
+  QueryTimeRatio?: number
   /**
    * sql总锁等待时间占比
    */
-  LockTimeRatio: number
+  LockTimeRatio?: number
   /**
    * 总扫描行数占比
    */
-  RowsExaminedRatio: number
+  RowsExaminedRatio?: number
   /**
    * 总返回行数占比
    */
-  RowsSentRatio: number
+  RowsSentRatio?: number
   /**
    * 平均执行时间
    */
-  QueryTimeAvg: number
+  QueryTimeAvg?: number
   /**
    * 平均返回行数
    */
-  RowsSentAvg: number
+  RowsSentAvg?: number
   /**
    * 平均锁等待时间
    */
-  LockTimeAvg: number
+  LockTimeAvg?: number
   /**
    * 平均扫描行数
    */
-  RowsExaminedAvg: number
+  RowsExaminedAvg?: number
   /**
-   * SOL模板的MD5值
+   * SQL模板的MD5值
    */
   Md5?: string
 }
@@ -1438,7 +1438,7 @@ export interface DescribeSlowLogTopSqlsResponse {
    */
   Rows?: Array<SlowLogTopSqlItem>
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
 }
@@ -1578,7 +1578,7 @@ export interface MailConfiguration {
    */
   SendMail: number
   /**
-   * 地域配置, 如["ap-guangzhou", "ap-shanghai"]。巡检的邮件发送模版，配置需要发送巡检邮件的地域；订阅的邮件发送模版，配置当前订阅实例的所属地域。
+   * 地域配置, 如["ap-guangzhou", "ap-shanghai"]。巡检的邮件发送模板，配置需要发送巡检邮件的地域；订阅的邮件发送模板，配置当前订阅实例的所属地域。
    */
   Region: Array<string>
   /**
@@ -1682,7 +1682,7 @@ export interface DescribeMailProfileResponse {
    */
   TotalCount?: number
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
 }
@@ -1742,7 +1742,7 @@ export interface DescribeSecurityAuditLogDownloadUrlsResponse {
    */
   Urls?: Array<string>
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
 }
@@ -1838,7 +1838,7 @@ export interface DescribeHealthScoreRequest {
  */
 export interface DeleteSecurityAuditLogExportTasksResponse {
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
 }
@@ -1897,7 +1897,7 @@ export interface DescribeDiagDBInstancesResponse {
    */
   Items?: Array<InstanceInfo>
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
 }
@@ -1992,7 +1992,7 @@ export interface DescribeSlowLogTimeSeriesStatsResponse {
    */
   SeriesData?: MonitorMetricSeriesData
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
 }
@@ -2010,7 +2010,7 @@ export interface DescribeSecurityAuditLogExportTasksResponse {
    */
   TotalCount?: number
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
 }
@@ -2024,7 +2024,7 @@ export interface CreateSecurityAuditLogExportTaskResponse {
    */
   AsyncRequestId?: number
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
 }
@@ -2111,7 +2111,7 @@ export interface DescribeTopSpaceTablesResponse {
    */
   Timestamp?: number
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
 }

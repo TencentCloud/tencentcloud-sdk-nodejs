@@ -93,6 +93,24 @@ export interface DescribeOriginGroupResponse {
 }
 
 /**
+ * DescribeSecurityIPGroupInfo返回参数结构体
+ */
+export interface DescribeSecurityIPGroupInfoResponse {
+  /**
+   * 返回的满足条件的 IP 组数量。
+   */
+  TotalCount?: number
+  /**
+   * IP 组的详细配置信息。包含每个 IP 组的 ID 、名称和 IP /网段列表信息。
+   */
+  IPGroups?: Array<IPGroup>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 慢速攻击配置。
  */
 export interface SlowPostConfig {
@@ -6575,6 +6593,24 @@ export interface DropPageConfig {
 }
 
 /**
+ * DescribeSecurityIPGroupInfo请求参数结构体
+ */
+export interface DescribeSecurityIPGroupInfoRequest {
+  /**
+   * 站点的 ID ，用于指定查询的站点范围。
+   */
+  ZoneId: string
+  /**
+   * 单次返回的最大条目数。默认值为 20 ，最大查询条目为 1000 。
+   */
+  Limit?: number
+  /**
+   * 分页查询的起始条目偏移量。默认值为 0 。
+   */
+  Offset?: number
+}
+
+/**
  * 例外规则的详细模块配置。
  */
 export interface PartialModule {
@@ -7995,9 +8031,19 @@ export interface DescribeRulesRequest {
 }
 
 /**
- * ModifyZoneStatus返回参数结构体
+ * DescribeContentQuota返回参数结构体
  */
-export interface ModifyZoneStatusResponse {
+export interface DescribeContentQuotaResponse {
+  /**
+   * 刷新相关配额。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PurgeQuota?: Array<Quota>
+  /**
+   * 预热相关配额。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PrefetchQuota?: Array<Quota>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -8765,19 +8811,9 @@ export interface CheckCnameStatusRequest {
 }
 
 /**
- * DescribeContentQuota返回参数结构体
+ * ModifyZoneStatus返回参数结构体
  */
-export interface DescribeContentQuotaResponse {
-  /**
-   * 刷新相关配额。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  PurgeQuota?: Array<Quota>
-  /**
-   * 预热相关配额。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  PrefetchQuota?: Array<Quota>
+export interface ModifyZoneStatusResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

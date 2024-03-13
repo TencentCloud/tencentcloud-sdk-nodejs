@@ -355,6 +355,22 @@ export interface DeleteTrainingModelVersionResponse {
 }
 
 /**
+ * 训练数据
+ */
+export interface TrainingDataPoint {
+  /**
+   * 时间戳
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Timestamp?: number
+  /**
+   * 训练上报的值。可以为训练指标（双精度浮点数，也可以为Epoch/Step（两者皆保证是整数）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Value?: number
+}
+
+/**
  * 批量预测任务详情
  */
 export interface BatchTaskDetail {
@@ -1859,38 +1875,14 @@ export interface DescribeLatestTrainingMetricsResponse {
 }
 
 /**
- * DescribeDatasetDetailUnstructured返回参数结构体
+ * 默认Nginx网关结构
  */
-export interface DescribeDatasetDetailUnstructuredResponse {
+export interface DefaultNginxGatewayCallInfo {
   /**
-   * 已标注数据量
+   * host
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  AnnotatedTotalCount: number
-  /**
-   * 没有标注数据量
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  NonAnnotatedTotalCount: number
-  /**
-   * 过滤数据总量
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  FilterTotalCount: number
-  /**
-   * 过滤数据详情
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  FilterLabelList: Array<FilterLabelInfo>
-  /**
-   * 数据文本行，默认返回前1000行
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  RowTexts: Array<string>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  Host?: string
 }
 
 /**
@@ -2983,6 +2975,20 @@ GooseFSx：GooseFSx存储
    * GooseFS存储配置
    */
   VolumeSourceGooseFS?: GooseFS
+}
+
+/**
+ * CreatePresignedNotebookUrl返回参数结构体
+ */
+export interface CreatePresignedNotebookUrlResponse {
+  /**
+   * 携带认证TOKEN的URL
+   */
+  AuthorizedUrl?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -4748,39 +4754,13 @@ export interface Message {
 }
 
 /**
- * 实例状况
+ * CreatePresignedNotebookUrl请求参数结构体
  */
-export interface StatefulSetCondition {
+export interface CreatePresignedNotebookUrlRequest {
   /**
-   * 信息
-注意：此字段可能返回 null，表示取不到有效值。
+   * Notebook ID
    */
-  Message: string
-  /**
-   * 原因
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Reason: string
-  /**
-   * Status of the condition, one of True, False, Unknown.
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Status: string
-  /**
-   * 类型
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Type: string
-  /**
-   * 上次更新的时间
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  LastTransitionTime: string
-  /**
-   * 上次更新的时间
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  LastUpdateTime?: string
+  Id: string
 }
 
 /**
@@ -5352,19 +5332,39 @@ Filter.Fuzzy取值：true/false，是否支持模糊匹配
 }
 
 /**
- * 训练数据
+ * 实例状况
  */
-export interface TrainingDataPoint {
+export interface StatefulSetCondition {
   /**
-   * 时间戳
+   * 信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Timestamp?: number
+  Message: string
   /**
-   * 训练上报的值。可以为训练指标（双精度浮点数，也可以为Epoch/Step（两者皆保证是整数）
+   * 原因
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Value?: number
+  Reason: string
+  /**
+   * Status of the condition, one of True, False, Unknown.
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status: string
+  /**
+   * 类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Type: string
+  /**
+   * 上次更新的时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LastTransitionTime: string
+  /**
+   * 上次更新的时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LastUpdateTime?: string
 }
 
 /**
@@ -5455,42 +5455,38 @@ export interface DescribeLatestTrainingMetricsRequest {
 }
 
 /**
- * 描述资源信息
+ * DescribeDatasetDetailUnstructured返回参数结构体
  */
-export interface ResourceInfo {
+export interface DescribeDatasetDetailUnstructuredResponse {
   /**
-   * 处理器资源, 单位为1/1000核
+   * 已标注数据量
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Cpu: number
+  AnnotatedTotalCount: number
   /**
-   * 内存资源, 单位为1M
+   * 没有标注数据量
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Memory: number
+  NonAnnotatedTotalCount: number
   /**
-   * Gpu卡个数资源, 单位为0.01单位的GpuType.
-Gpu=100表示使用了“一张”gpu卡, 但此处的“一张”卡有可能是虚拟化后的1/4卡, 也有可能是整张卡. 取决于实例的机型
-例1 实例的机型带有1张虚拟gpu卡, 每张虚拟gpu卡对应1/4张实际T4卡, 则此时 GpuType=T4, Gpu=100, RealGpu=25.
-例2 实例的机型带有4张gpu整卡, 每张卡对应1张实际T4卡, 则 此时 GpuType=T4, Gpu=400, RealGpu=400.
+   * 过滤数据总量
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Gpu?: number
+  FilterTotalCount: number
   /**
-   * Gpu卡型号 T4或者V100。仅展示当前 GPU 卡型号，若存在多类型同时使用，则参考 RealGpuDetailSet 的值。
+   * 过滤数据详情
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  GpuType?: string
+  FilterLabelList: Array<FilterLabelInfo>
   /**
-   * 创建或更新时无需填写，仅展示需要关注
-后付费非整卡实例对应的实际的Gpu卡资源, 表示gpu资源对应实际的gpu卡个数.
-RealGpu=100表示实际使用了一张gpu卡, 对应实际的实例机型, 有可能代表带有1/4卡的实例4个, 或者带有1/2卡的实例2个, 或者带有1卡的实力1个.
+   * 数据文本行，默认返回前1000行
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  RealGpu?: number
+  RowTexts: Array<string>
   /**
-   * 创建或更新时无需填写，仅展示需要关注。详细的GPU使用信息。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  RealGpuDetailSet?: Array<GpuDetail>
+  RequestId?: string
 }
 
 /**
@@ -5571,6 +5567,45 @@ export interface GroupResource {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   GpuDetailSet: Array<GpuDetail>
+}
+
+/**
+ * 描述资源信息
+ */
+export interface ResourceInfo {
+  /**
+   * 处理器资源, 单位为1/1000核
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Cpu: number
+  /**
+   * 内存资源, 单位为1M
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Memory: number
+  /**
+   * Gpu卡个数资源, 单位为0.01单位的GpuType.
+Gpu=100表示使用了“一张”gpu卡, 但此处的“一张”卡有可能是虚拟化后的1/4卡, 也有可能是整张卡. 取决于实例的机型
+例1 实例的机型带有1张虚拟gpu卡, 每张虚拟gpu卡对应1/4张实际T4卡, 则此时 GpuType=T4, Gpu=100, RealGpu=25.
+例2 实例的机型带有4张gpu整卡, 每张卡对应1张实际T4卡, 则 此时 GpuType=T4, Gpu=400, RealGpu=400.
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Gpu?: number
+  /**
+   * Gpu卡型号 T4或者V100。仅展示当前 GPU 卡型号，若存在多类型同时使用，则参考 RealGpuDetailSet 的值。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  GpuType?: string
+  /**
+   * 创建或更新时无需填写，仅展示需要关注
+后付费非整卡实例对应的实际的Gpu卡资源, 表示gpu资源对应实际的gpu卡个数.
+RealGpu=100表示实际使用了一张gpu卡, 对应实际的实例机型, 有可能代表带有1/4卡的实例4个, 或者带有1/2卡的实例2个, 或者带有1卡的实力1个.
+   */
+  RealGpu?: number
+  /**
+   * 创建或更新时无需填写，仅展示需要关注。详细的GPU使用信息。
+   */
+  RealGpuDetailSet?: Array<GpuDetail>
 }
 
 /**
@@ -6637,21 +6672,6 @@ export interface ServiceCallInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AuthorizationEnable?: boolean
-}
-
-/**
- * CreateBatchModelAccTasks返回参数结构体
- */
-export interface CreateBatchModelAccTasksResponse {
-  /**
-   * 模型优化任务ID列表
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ModelAccTaskIds: Array<string>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**
@@ -7829,14 +7849,18 @@ export interface DescribeBatchTaskResponse {
 }
 
 /**
- * 默认Nginx网关结构
+ * CreateBatchModelAccTasks返回参数结构体
  */
-export interface DefaultNginxGatewayCallInfo {
+export interface CreateBatchModelAccTasksResponse {
   /**
-   * host
+   * 模型优化任务ID列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Host?: string
+  ModelAccTaskIds: Array<string>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

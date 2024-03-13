@@ -22,6 +22,7 @@ import {
   CreateDBInstanceRequest,
   DescribeCurrentOpResponse,
   DescribeAccountUsersRequest,
+  SetInstanceMaintenanceResponse,
   CreateBackupDBInstanceResponse,
   DBInstancePrice,
   KillOpsRequest,
@@ -116,6 +117,7 @@ import {
   InquirePriceCreateDBInstancesRequest,
   DescribeInstanceParamsResponse,
   DescribeInstanceParamsRequest,
+  SetInstanceMaintenanceRequest,
   InstanceDetail,
   ModifyDBInstanceSpecResponse,
   InstanceChargePrepaid,
@@ -430,6 +432,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAccountUsersResponse) => void
   ): Promise<DescribeAccountUsersResponse> {
     return this.request("DescribeAccountUsers", req, cb)
+  }
+
+  /**
+   * 本接口（SetInstanceMaintenance ） 用于设置实例维护时间窗。
+   */
+  async SetInstanceMaintenance(
+    req: SetInstanceMaintenanceRequest,
+    cb?: (error: string, rep: SetInstanceMaintenanceResponse) => void
+  ): Promise<SetInstanceMaintenanceResponse> {
+    return this.request("SetInstanceMaintenance", req, cb)
   }
 
   /**

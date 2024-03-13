@@ -918,6 +918,16 @@ it("teo.v20220901.DeleteZone", async function () {
     }
 })
 
+it("teo.v20220901.DescribeSecurityIPGroupInfo", async function () {
+    try {
+       const data = await client.DescribeSecurityIPGroupInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("teo.v20220901.DescribeDDoSAttackData", async function () {
     try {
        const data = await client.DescribeDDoSAttackData({})

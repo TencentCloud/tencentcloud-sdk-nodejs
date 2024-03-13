@@ -837,6 +837,10 @@ export interface DescribePreDomainListRequest {
    * 用于结束时间筛选
    */
   EndTime?: string
+  /**
+   * 用户指定上架时间筛选
+   */
+  UpTime?: string
 }
 
 /**

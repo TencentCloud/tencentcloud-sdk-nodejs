@@ -25,6 +25,7 @@ import {
   DescribeModelAccelerateVersionsRequest,
   StopModelAccelerateTaskRequest,
   DeleteTrainingModelVersionResponse,
+  TrainingDataPoint,
   BatchTaskDetail,
   DeleteNotebookImageRecordRequest,
   NotebookSetItem,
@@ -65,7 +66,7 @@ import {
   CreateBatchTaskRequest,
   ResourceInstanceRunningJobInfo,
   DescribeLatestTrainingMetricsResponse,
-  DescribeDatasetDetailUnstructuredResponse,
+  DefaultNginxGatewayCallInfo,
   FilterLabelInfo,
   WorkloadStatus,
   CFSConfig,
@@ -100,6 +101,7 @@ import {
   DescribeTrainingModelsResponse,
   DescribeBatchTaskInstancesResponse,
   CreateNotebookRequest,
+  CreatePresignedNotebookUrlResponse,
   ModifyNotebookRequest,
   DescribeModelServicesRequest,
   RestartModelAccelerateTaskResponse,
@@ -154,7 +156,7 @@ import {
   DeleteModelAccelerateTaskRequest,
   CreateTrainingTaskRequest,
   Message,
-  StatefulSetCondition,
+  CreatePresignedNotebookUrlRequest,
   ModifyNotebookResponse,
   DescribeModelServiceResponse,
   DescribeDatasetsResponse,
@@ -173,14 +175,15 @@ import {
   DeleteModelServiceResponse,
   DatasetGroup,
   DescribeTrainingModelsRequest,
-  TrainingDataPoint,
+  StatefulSetCondition,
   TextLabelDistributionDetailInfoFourthClass,
   Pod,
   DescribeLatestTrainingMetricsRequest,
-  ResourceInfo,
+  DescribeDatasetDetailUnstructuredResponse,
   OcrLabelInfo,
   DeleteBatchTaskRequest,
   GroupResource,
+  ResourceInfo,
   DescribeModelServiceCallInfoResponse,
   DataSetConfig,
   ScheduledAction,
@@ -225,7 +228,6 @@ import {
   DeleteDatasetResponse,
   HorizontalPodAutoscaler,
   ServiceCallInfo,
-  CreateBatchModelAccTasksResponse,
   CustomTrainingPoint,
   DescribeNotebookRequest,
   NotebookDetail,
@@ -265,7 +267,7 @@ import {
   DescribeModelServiceHotUpdatedRequest,
   DescribeTrainingTaskResponse,
   DescribeBatchTaskResponse,
-  DefaultNginxGatewayCallInfo,
+  CreateBatchModelAccTasksResponse,
   MetricData,
   DeleteTrainingModelVersionRequest,
   DescribeModelAccEngineVersionsRequest,
@@ -735,6 +737,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDatasetsResponse) => void
   ): Promise<DescribeDatasetsResponse> {
     return this.request("DescribeDatasets", req, cb)
+  }
+
+  /**
+   * 生成Notebook访问链接
+   */
+  async CreatePresignedNotebookUrl(
+    req: CreatePresignedNotebookUrlRequest,
+    cb?: (error: string, rep: CreatePresignedNotebookUrlResponse) => void
+  ): Promise<CreatePresignedNotebookUrlResponse> {
+    return this.request("CreatePresignedNotebookUrl", req, cb)
   }
 
   /**

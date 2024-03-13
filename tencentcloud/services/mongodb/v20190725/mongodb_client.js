@@ -209,6 +209,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeAccountUsers", req, cb);
     }
     /**
+     * 本接口（SetInstanceMaintenance ） 用于设置实例维护时间窗。
+     */
+    async SetInstanceMaintenance(req, cb) {
+        return this.request("SetInstanceMaintenance", req, cb);
+    }
+    /**
      * 本接口(RenameInstance)用于修改云数据库实例的名称。
      */
     async RenameInstance(req, cb) {

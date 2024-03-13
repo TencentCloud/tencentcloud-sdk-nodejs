@@ -336,95 +336,95 @@ export interface CreatePredictiveDialingCampaignRequest {
  */
 export interface ServeParticipant {
     /**
-     * 坐席邮箱
+     * 座席邮箱
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Mail: string;
+    Mail?: string;
     /**
-     * 坐席电话
+     * 座席电话
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Phone: string;
+    Phone?: string;
     /**
      * 振铃时间戳，Unix 秒级时间戳
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    RingTimestamp: number;
+    RingTimestamp?: number;
     /**
      * 接听时间戳，Unix 秒级时间戳
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    AcceptTimestamp: number;
+    AcceptTimestamp?: number;
     /**
      * 结束时间戳，Unix 秒级时间戳
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    EndedTimestamp: number;
+    EndedTimestamp?: number;
     /**
-     * 录音 ID，能够索引到坐席侧的录音
+     * 录音 ID，能够索引到座席侧的录音
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    RecordId: string;
+    RecordId?: string;
     /**
      * 参与者类型，"staffSeat", "outboundSeat", "staffPhoneSeat"
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Type: string;
+    Type?: string;
     /**
-     * 转接来源坐席信息
+     * 转接来源座席信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TransferFrom: string;
+    TransferFrom?: string;
     /**
      * 转接来源参与者类型，取值与 Type 一致
   注意：此字段可能返回 null，表示取不到有效值。
      */
     TransferFromType?: string;
     /**
-     * 转接去向坐席信息
+     * 转接去向座席信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TransferTo: string;
+    TransferTo?: string;
     /**
      * 转接去向参与者类型，取值与 Type 一致
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TransferToType: string;
+    TransferToType?: string;
     /**
      * 技能组 ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SkillGroupId: number;
+    SkillGroupId?: number;
     /**
      * 结束状态
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    EndStatusString: string;
+    EndStatusString?: string;
     /**
      * 录音 URL
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    RecordURL: string;
+    RecordURL?: string;
     /**
      * 参与者序号，从 0 开始
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Sequence: number;
+    Sequence?: number;
     /**
      * 开始时间戳，Unix 秒级时间戳
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    StartTimestamp: number;
+    StartTimestamp?: number;
     /**
      * 技能组名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SkillGroupName: string;
+    SkillGroupName?: string;
     /**
      * 录音转存第三方COS地址
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CustomRecordURL: string;
+    CustomRecordURL?: string;
 }
 /**
  * DescribeTelCallInfo返回参数结构体
@@ -565,65 +565,65 @@ export interface DescribePredictiveDialingCampaignResponse {
     RequestId?: string;
 }
 /**
- * 坐席状态相关信息
+ * 座席状态相关信息
  */
 export interface StaffStatusMetrics {
     /**
-     * 坐席邮箱
+     * 座席邮箱
      */
-    Email: string;
+    Email?: string;
     /**
-     * 坐席状态 free 示闲 | busy 忙碌 | rest 小休 | notReady 示忙 | afterCallWork 话后调整 | offline 离线
+     * 座席状态 free 示闲 | busy 忙碌 | rest 小休 | notReady 示忙 | afterCallWork 话后调整 | offline 离线
      */
-    Status: string;
+    Status?: string;
     /**
-     * 坐席状态补充信息
+     * 座席状态补充信息
      */
-    StatusExtra: StaffStatusExtra;
+    StatusExtra?: StaffStatusExtra;
     /**
      * 当天在线总时长
      */
-    OnlineDuration: number;
+    OnlineDuration?: number;
     /**
      * 当天示闲总时长
      */
-    FreeDuration: number;
+    FreeDuration?: number;
     /**
      * 当天忙碌总时长
      */
-    BusyDuration: number;
+    BusyDuration?: number;
     /**
      * 当天示忙总时长
      */
-    NotReadyDuration: number;
+    NotReadyDuration?: number;
     /**
      * 当天小休总时长
      */
-    RestDuration: number;
+    RestDuration?: number;
     /**
      * 当天话后调整总时长
      */
-    AfterCallWorkDuration: number;
+    AfterCallWorkDuration?: number;
     /**
      * 小休原因
      */
-    Reason: string;
+    Reason?: string;
     /**
      * 是否预约小休
      */
-    ReserveRest: boolean;
+    ReserveRest?: boolean;
     /**
      * 是否预约示忙
      */
-    ReserveNotReady: boolean;
+    ReserveNotReady?: boolean;
     /**
      * 手机接听模式： 0 - 关闭 | 1 - 仅离线 | 2- 始终
      */
-    UseMobileAccept: number;
+    UseMobileAccept?: number;
     /**
      * 手机外呼开关
      */
-    UseMobileCallOut: boolean;
+    UseMobileCallOut?: boolean;
     /**
      * 最近一次上线时间戳
   注意：此字段可能返回 null，表示取不到有效值。
@@ -1163,15 +1163,15 @@ export interface DescribePredictiveDialingCampaignRequest {
     CampaignId: number;
 }
 /**
- * 坐席用户信息
+ * 座席用户信息
  */
 export interface SeatUserInfo {
     /**
-     * 坐席名称
+     * 座席名称
      */
     Name: string;
     /**
-     * 坐席邮箱
+     * 座席邮箱
      */
     Mail: string;
     /**
@@ -1180,11 +1180,11 @@ export interface SeatUserInfo {
      */
     StaffNumber: string;
     /**
-     * 坐席电话号码（带0086前缀）
+     * 座席电话号码（带0086前缀）
      */
     Phone?: string;
     /**
-     * 坐席昵称
+     * 座席昵称
      */
     Nick?: string;
     /**
@@ -1192,7 +1192,7 @@ export interface SeatUserInfo {
      */
     UserId?: string;
     /**
-     * 坐席关联的技能组列表
+     * 座席关联的技能组列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
     SkillGroupNameList?: Array<string>;
@@ -1274,17 +1274,17 @@ export interface CarrierPrivilegeNumberApplicant {
  */
 export interface ErrStaffItem {
     /**
-     * 坐席邮箱地址
+     * 座席邮箱地址
      */
-    StaffEmail: string;
+    StaffEmail?: string;
     /**
      * 错误码
      */
-    Code: string;
+    Code?: string;
     /**
      * 错误描述
      */
-    Message: string;
+    Message?: string;
 }
 /**
  * PausePredictiveDialingCampaign返回参数结构体
@@ -1302,67 +1302,67 @@ export interface PSTNSession {
     /**
      * 会话 ID
      */
-    SessionID: string;
+    SessionID?: string;
     /**
      * 会话临时房间 ID
      */
-    RoomID: string;
+    RoomID?: string;
     /**
      * 主叫
      */
-    Caller: string;
+    Caller?: string;
     /**
      * 被叫
      */
-    Callee: string;
+    Callee?: string;
     /**
      * 开始时间，Unix 时间戳
      */
-    StartTimestamp: number;
+    StartTimestamp?: number;
     /**
      * 振铃时间，Unix 时间戳
      */
-    RingTimestamp: number;
+    RingTimestamp?: number;
     /**
      * 接听时间，Unix 时间戳
      */
-    AcceptTimestamp: number;
+    AcceptTimestamp?: number;
     /**
-     * 坐席邮箱
+     * 座席邮箱
      */
-    StaffEmail: string;
+    StaffEmail?: string;
     /**
-     * 坐席工号
+     * 座席工号
      */
-    StaffNumber: string;
+    StaffNumber?: string;
     /**
      * 会话状态
   ringing 振铃中
-  seatJoining  等待坐席接听
+  seatJoining  等待座席接听
   inProgress 进行中
   finished 已完成
      */
-    SessionStatus: string;
+    SessionStatus?: string;
     /**
      * 会话呼叫方向， 0 呼入 | 1 - 呼出
      */
-    Direction: number;
+    Direction?: number;
     /**
      * 转外线使用的号码（转外线主叫）
      */
-    OutBoundCaller: string;
+    OutBoundCaller?: string;
     /**
      * 转外线被叫
      */
-    OutBoundCallee: string;
+    OutBoundCallee?: string;
     /**
      * 主叫号码保护ID，开启号码保护映射功能时有效，且Caller字段置空
      */
-    ProtectedCaller: string;
+    ProtectedCaller?: string;
     /**
      * 被叫号码保护ID，开启号码保护映射功能时有效，且Callee字段置空
      */
-    ProtectedCallee: string;
+    ProtectedCallee?: string;
 }
 /**
  * UpdatePredictiveDialingCampaign请求参数结构体
@@ -1514,7 +1514,7 @@ export interface SkillGroupInfoItem {
      */
     RoutePolicy?: string;
     /**
-     * 会话分配是否优先上次服务坐席
+     * 会话分配是否优先上次服务座席
   注意：此字段可能返回 null，表示取不到有效值。
      */
     UsingLastSeat?: number;
@@ -1635,55 +1635,55 @@ export interface PSTNSessionInfo {
     /**
      * 会话 ID
      */
-    SessionID: string;
+    SessionID?: string;
     /**
      * 会话临时房间 ID
      */
-    RoomID: string;
+    RoomID?: string;
     /**
      * 主叫
      */
-    Caller: string;
+    Caller?: string;
     /**
      * 被叫
      */
-    Callee: string;
+    Callee?: string;
     /**
      * 开始时间，Unix 时间戳
      */
-    StartTimestamp: string;
+    StartTimestamp?: string;
     /**
      * 接听时间，Unix 时间戳
      */
-    AcceptTimestamp: string;
+    AcceptTimestamp?: string;
     /**
-     * 坐席邮箱
+     * 座席邮箱
      */
-    StaffEmail: string;
+    StaffEmail?: string;
     /**
-     * 坐席工号
+     * 座席工号
      */
-    StaffNumber: string;
+    StaffNumber?: string;
     /**
-     * 坐席状态 inProgress 进行中
+     * 座席状态 inProgress 进行中
      */
-    SessionStatus: string;
+    SessionStatus?: string;
     /**
      * 会话呼叫方向， 0 呼入 | 1 - 呼出
      */
-    Direction: number;
+    Direction?: number;
     /**
      * 振铃时间，Unix 时间戳
      */
-    RingTimestamp: number;
+    RingTimestamp?: number;
     /**
      * 主叫号码保护ID，开启号码保护映射功能时有效，且Caller字段置空
      */
-    ProtectedCaller: string;
+    ProtectedCaller?: string;
     /**
      * 被叫号码保护ID，开启号码保护映射功能时有效，且Callee字段置空
      */
-    ProtectedCallee: string;
+    ProtectedCallee?: string;
 }
 /**
  * 单条消息
@@ -1731,47 +1731,47 @@ export interface ExtensionInfo {
     /**
      * 实例ID
      */
-    SdkAppId: number;
+    SdkAppId?: number;
     /**
      * 分机全名
      */
-    FullExtensionId: string;
+    FullExtensionId?: string;
     /**
      * 分机号
      */
-    ExtensionId: string;
+    ExtensionId?: string;
     /**
      * 所属技能组列表
      */
-    SkillGroupId: string;
+    SkillGroupId?: string;
     /**
      * 分机名称
      */
-    ExtensionName: string;
+    ExtensionName?: string;
     /**
      * 创建时间
      */
-    CreateTime: number;
+    CreateTime?: number;
     /**
      * 最后修改时间
      */
-    ModifyTime: number;
+    ModifyTime?: number;
     /**
      * 话机状态(0 离线、100 空闲、200忙碌）
      */
-    Status: number;
+    Status?: number;
     /**
      * 是否注册
      */
-    Register: boolean;
+    Register?: boolean;
     /**
-     * 绑定坐席邮箱
+     * 绑定座席邮箱
      */
-    Relation: string;
+    Relation?: string;
     /**
-     * 绑定坐席名称
+     * 绑定座席名称
      */
-    RelationName: string;
+    RelationName?: string;
 }
 /**
  * BindNumberCallOutSkillGroup请求参数结构体
@@ -1824,30 +1824,30 @@ export interface UnbindNumberCallOutSkillGroupResponse {
     RequestId?: string;
 }
 /**
- * 带有技能组优先级的坐席信息
+ * 带有技能组优先级的座席信息
  */
 export interface StaffInfo {
     /**
-     * 坐席名称
+     * 座席名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Name?: string;
     /**
-     * 坐席邮箱
+     * 座席邮箱
      */
     Mail?: string;
     /**
-     * 坐席电话号码
+     * 座席电话号码
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Phone?: string;
     /**
-     * 坐席昵称
+     * 座席昵称
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Nick?: string;
     /**
-     * 坐席工号
+     * 座席工号
   注意：此字段可能返回 null，表示取不到有效值。
      */
     StaffNumber?: string;
@@ -1913,7 +1913,7 @@ export interface TelCdrInfo {
      */
     RecordId?: string;
     /**
-     * 坐席信息
+     * 座席信息
      */
     SeatUser?: SeatUserInfo;
     /**
@@ -1931,7 +1931,7 @@ export interface TelCdrInfo {
   
   电话呼入	             104	        ringingGiveUp	       会话振铃期间用户放弃
   
-  电话呼入	             105	        noSeatOnline	       无坐席在线
+  电话呼入	             105	        noSeatOnline	       无座席在线
   
   电话呼入              106	       notWorkTime	       非工作时间
   
@@ -1999,7 +1999,7 @@ export interface TelCdrInfo {
      */
     IVRKeyPressed?: Array<string>;
     /**
-     * 挂机方 seat 坐席 user 用户 system 系统
+     * 挂机方 seat 座席 user 用户 system 系统
   注意：此字段可能返回 null，表示取不到有效值。
      */
     HungUpSide?: string;
@@ -2028,7 +2028,7 @@ export interface TelCdrInfo {
   
   电话呼入	             104	        ringingGiveUp	       会话振铃期间用户放弃
   
-  电话呼入	             105	        noSeatOnline	       无坐席在线
+  电话呼入	             105	        noSeatOnline	       无座席在线
   
   电话呼入              106	       notWorkTime	       非工作时间
   
@@ -2781,17 +2781,17 @@ export interface CalleeAttribute {
     Variables?: Array<Variable>;
 }
 /**
- * 坐席状态补充信息
+ * 座席状态补充信息
  */
 export interface StaffStatusExtra {
     /**
      * im - 文本 | tel - 电话 | all - 全媒体
      */
-    Type: string;
+    Type?: string;
     /**
      * in - 呼入 | out - 呼出
      */
-    Direct: string;
+    Direct?: string;
 }
 /**
  * CreateStaff请求参数结构体
@@ -2835,23 +2835,23 @@ export interface SdkAppIdBuyInfo {
     /**
      * 应用ID
      */
-    SdkAppId: number;
+    SdkAppId?: number;
     /**
      * 应用名称
      */
-    Name: string;
+    Name?: string;
     /**
-     * 坐席购买数（还在有效期内）
+     * 座席购买数（还在有效期内）
      */
-    StaffBuyNum: number;
+    StaffBuyNum?: number;
     /**
-     * 坐席购买列表 （还在有效期内）
+     * 座席购买列表 （还在有效期内）
      */
-    StaffBuyList: Array<StaffBuyInfo>;
+    StaffBuyList?: Array<StaffBuyInfo>;
     /**
      * 号码购买列表
      */
-    PhoneNumBuyList: Array<PhoneNumBuyInfo>;
+    PhoneNumBuyList?: Array<PhoneNumBuyInfo>;
     /**
      * 办公电话购买数（还在有效期内）
   注意：此字段可能返回 null，表示取不到有效值。
@@ -2882,59 +2882,59 @@ export interface IMCdrInfo {
     /**
      * 服务记录ID
      */
-    Id: string;
+    Id?: string;
     /**
      * 服务时长秒数
      */
-    Duration: number;
+    Duration?: number;
     /**
      * 结束状态
   0 异常结束
   1 正常结束
-  3 无坐席在线
-  17 坐席放弃接听
+  3 无座席在线
+  17 座席放弃接听
   100 黑名单
-  101 坐席手动转接
+  101 座席手动转接
   102 IVR阶段放弃
   108 用户超时自动结束
      */
-    EndStatus: number;
+    EndStatus?: number;
     /**
      * 用户昵称
      */
-    Nickname: string;
+    Nickname?: string;
     /**
      * 服务类型 1为全媒体，2为文本客服
      */
-    Type: number;
+    Type?: number;
     /**
      * 客服ID
      */
-    StaffId: string;
+    StaffId?: string;
     /**
      * 服务时间戳
      */
-    Timestamp: number;
+    Timestamp?: number;
     /**
      * 会话ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SessionId: string;
+    SessionId?: string;
     /**
      * 技能组ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SkillGroupId: string;
+    SkillGroupId?: string;
     /**
      * 技能组名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    SkillGroupName: string;
+    SkillGroupName?: string;
     /**
      * 满意度
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Satisfaction: IMSatisfaction;
+    Satisfaction?: IMSatisfaction;
 }
 /**
  * DescribeIMCdrList请求参数结构体
@@ -3233,21 +3233,21 @@ export interface DescribeActiveCarrierPrivilegeNumberRequest {
     Filters?: Array<Filter>;
 }
 /**
- * 坐席购买信息
+ * 座席购买信息
  */
 export interface StaffBuyInfo {
     /**
-     * 购买坐席数量
+     * 购买座席数量
      */
-    Num: number;
+    Num?: number;
     /**
      * 购买时间戳
      */
-    BuyTime: number;
+    BuyTime?: number;
     /**
      * 截止时间戳
      */
-    EndTime: number;
+    EndTime?: number;
     /**
      * 购买办公电话数量
   注意：此字段可能返回 null，表示取不到有效值。
