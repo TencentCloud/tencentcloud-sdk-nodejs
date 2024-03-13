@@ -19,11 +19,13 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   TaskDetail,
+  ServerlessSpaceUser,
   RestartLogstashInstanceRequest,
   DescribeInstanceOperationsRequest,
   LogstashInstanceInfo,
   OperationDetail,
   DiagnoseInstanceResponse,
+  CreateServerlessInstanceRequest,
   EsPublicAcl,
   DictInfo,
   DescribeDiagnoseResponse,
@@ -37,42 +39,55 @@ import {
   DescribeInstancesResponse,
   DescribeInstanceLogsResponse,
   IndexMetaField,
+  UpdateServerlessSpaceRequest,
   DiagnoseInstanceRequest,
   LogstashBindedES,
   UpdateDiagnoseSettingsRequest,
+  DeleteServerlessInstanceResponse,
+  VpcInfo,
   DescribeInstanceOperationsResponse,
-  IndexOptionsField,
+  LogstashPipeline,
   UpdateRequestTargetNodeTypesResponse,
   JobParam,
   DeleteLogstashInstanceResponse,
-  LogstashPipeline,
+  DescribeLogstashInstancesRequest,
+  IndexOptionsField,
+  CreateServerlessSpaceV2Response,
+  ServerlessSpace,
   SubTaskDetail,
   DiagnoseJobMeta,
   EsConfigSetInfo,
   GetRequestTargetNodeTypesResponse,
   Operation,
+  DiDataSourceCvm,
   InstanceLog,
   DiagnoseResult,
+  DescribeServerlessSpaceUserResponse,
   LogDetail,
-  DescribeIndexMetaResponse,
+  GetRequestTargetNodeTypesRequest,
   StartLogstashPipelinesRequest,
   GetDiagnoseSettingsResponse,
-  KibanaView,
-  IndexSettingsField,
+  CreateServerlessSpaceV2Request,
+  DescribeServerlessSpacesRequest,
+  DeleteServerlessSpaceUserResponse,
+  DiData,
   UpgradeLicenseResponse,
   LogstashExtendedFile,
   UpdateLogstashInstanceRequest,
   UpdateRequestTargetNodeTypesRequest,
   DescribeLogstashInstancesResponse,
+  DiDataSinkServerless,
   DeleteInstanceResponse,
   SettingDetail,
   DescribeLogstashInstanceOperationsResponse,
   CreateIndexRequest,
   LogstashPipelineInfo,
   UpdatePluginsRequest,
+  DescribeServerlessSpaceUserRequest,
   Dimension,
+  DescribeServerlessSpacesResponse,
   InquirePriceRenewInstanceRequest,
-  UpdateJdkResponse,
+  KibanaView,
   Metric,
   UpdateInstanceResponse,
   DeleteIndexRequest,
@@ -82,7 +97,9 @@ import {
   DescribeLogstashInstanceOperationsRequest,
   DescribeInstancePluginInfo,
   CreateLogstashInstanceResponse,
+  DeleteServerlessInstanceRequest,
   SaveAndDeployLogstashPipelineRequest,
+  DiDataSourceTke,
   ClusterView,
   CreateIndexResponse,
   InquirePriceRenewInstanceResponse,
@@ -101,27 +118,31 @@ import {
   CreateLogstashInstanceRequest,
   UpdateDictionariesResponse,
   InstanceInfo,
+  DiDataSourceCvmInstance,
   DeleteIndexResponse,
-  UpdatePluginsResponse,
+  DeleteServerlessSpaceUserRequest,
   DescribeInstancesRequest,
   EsDictionaryInfo,
   DescribeLogstashPipelinesRequest,
   RestartNodesRequest,
-  GetRequestTargetNodeTypesRequest,
+  DescribeIndexMetaResponse,
   ModifyEsVipSecurityGroupRequest,
   ProcessDetail,
-  DescribeLogstashInstancesRequest,
+  DiSourceTke,
   MasterNodeInfo,
   DeleteInstanceRequest,
   MetricDetail,
   UpgradeInstanceResponse,
   DescribeIndexMetaRequest,
+  UpdateJdkResponse,
   RestartKibanaResponse,
   UpdateIndexRequest,
   UpdateIndexResponse,
   WebNodeTypeInfo,
   LocalDiskInfo,
   IndexPolicyField,
+  UpdatePluginsResponse,
+  UpdateServerlessInstanceResponse,
   UpdateJdkRequest,
   UpdateLogstashInstanceResponse,
   StopLogstashPipelinesRequest,
@@ -129,15 +150,22 @@ import {
   LogstashNodeInfo,
   RestartInstanceResponse,
   BackingIndexMetaField,
+  IndexSettingsField,
+  UpdateServerlessSpaceResponse,
   UpdateLogstashPipelineDescRequest,
+  UpdateServerlessInstanceRequest,
   NodeView,
   ModifyEsVipSecurityGroupResponse,
   UpdateInstanceRequest,
+  CreateServerlessInstanceResponse,
   DescribeDiagnoseRequest,
   DescribeInstancePluginListResponse,
+  DiSourceCvm,
   DescribeLogstashInstanceLogsRequest,
+  DiSourceTkePodLabel,
   RestartInstanceRequest,
   ZoneDetail,
+  ServerlessDi,
   StopLogstashPipelinesResponse,
   KibanaNodeInfo,
   UpdateDiagnoseSettingsResponse,
@@ -148,6 +176,7 @@ import {
   DeleteLogstashInstanceRequest,
   UpgradeInstanceRequest,
   DescribeViewsResponse,
+  KibanaPublicAcl,
   RestartLogstashInstanceResponse,
   OptionalWebServiceInfo,
 } from "./es_models"
@@ -212,6 +241,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取Serverless索引空间列表
+   */
+  async DescribeServerlessSpaces(
+    req: DescribeServerlessSpacesRequest,
+    cb?: (error: string, rep: DescribeServerlessSpacesResponse) => void
+  ): Promise<DescribeServerlessSpacesResponse> {
+    return this.request("DescribeServerlessSpaces", req, cb)
+  }
+
+  /**
    * 获取索引列表
    */
   async DescribeIndexList(
@@ -219,6 +258,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeIndexListResponse) => void
   ): Promise<DescribeIndexListResponse> {
     return this.request("DescribeIndexList", req, cb)
+  }
+
+  /**
+   * 用于更新管道描述信息
+   */
+  async UpdateLogstashPipelineDesc(
+    req: UpdateLogstashPipelineDescRequest,
+    cb?: (error: string, rep: UpdateLogstashPipelineDescResponse) => void
+  ): Promise<UpdateLogstashPipelineDescResponse> {
+    return this.request("UpdateLogstashPipelineDesc", req, cb)
   }
 
   /**
@@ -314,6 +363,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: UpdateJdkResponse) => void
   ): Promise<UpdateJdkResponse> {
     return this.request("UpdateJdk", req, cb)
+  }
+
+  /**
+   * 删除Serverless索引
+   */
+  async DeleteServerlessInstance(
+    req: DeleteServerlessInstanceRequest,
+    cb?: (error: string, rep: DeleteServerlessInstanceResponse) => void
+  ): Promise<DeleteServerlessInstanceResponse> {
+    return this.request("DeleteServerlessInstance", req, cb)
   }
 
   /**
@@ -444,13 +503,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 用于更新管道描述信息
+   * 创建Serverless索引空间
    */
-  async UpdateLogstashPipelineDesc(
-    req: UpdateLogstashPipelineDescRequest,
-    cb?: (error: string, rep: UpdateLogstashPipelineDescResponse) => void
-  ): Promise<UpdateLogstashPipelineDescResponse> {
-    return this.request("UpdateLogstashPipelineDesc", req, cb)
+  async CreateServerlessSpaceV2(
+    req: CreateServerlessSpaceV2Request,
+    cb?: (error: string, rep: CreateServerlessSpaceV2Response) => void
+  ): Promise<CreateServerlessSpaceV2Response> {
+    return this.request("CreateServerlessSpaceV2", req, cb)
   }
 
   /**
@@ -471,6 +530,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateInstanceResponse) => void
   ): Promise<CreateInstanceResponse> {
     return this.request("CreateInstance", req, cb)
+  }
+
+  /**
+   * 更新Serverless索引
+   */
+  async UpdateServerlessInstance(
+    req: UpdateServerlessInstanceRequest,
+    cb?: (error: string, rep: UpdateServerlessInstanceResponse) => void
+  ): Promise<UpdateServerlessInstanceResponse> {
+    return this.request("UpdateServerlessInstance", req, cb)
   }
 
   /**
@@ -504,6 +573,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 更新Serverless索引空间
+   */
+  async UpdateServerlessSpace(
+    req: UpdateServerlessSpaceRequest,
+    cb?: (error: string, rep: UpdateServerlessSpaceResponse) => void
+  ): Promise<UpdateServerlessSpaceResponse> {
+    return this.request("UpdateServerlessSpace", req, cb)
+  }
+
+  /**
    * 删除索引
    */
   async DeleteIndex(
@@ -524,6 +603,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 删除Serverless空间子用户
+   */
+  async DeleteServerlessSpaceUser(
+    req: DeleteServerlessSpaceUserRequest,
+    cb?: (error: string, rep: DeleteServerlessSpaceUserResponse) => void
+  ): Promise<DeleteServerlessSpaceUserResponse> {
+    return this.request("DeleteServerlessSpaceUser", req, cb)
+  }
+
+  /**
    * 查询用户该地域下符合条件的Logstash实例的日志
    */
   async DescribeLogstashInstanceLogs(
@@ -531,6 +620,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeLogstashInstanceLogsResponse) => void
   ): Promise<DescribeLogstashInstanceLogsResponse> {
     return this.request("DescribeLogstashInstanceLogs", req, cb)
+  }
+
+  /**
+   * 查看Serverless空间子用户
+   */
+  async DescribeServerlessSpaceUser(
+    req: DescribeServerlessSpaceUserRequest,
+    cb?: (error: string, rep: DescribeServerlessSpaceUserResponse) => void
+  ): Promise<DescribeServerlessSpaceUserResponse> {
+    return this.request("DescribeServerlessSpaceUser", req, cb)
   }
 
   /**
@@ -581,6 +680,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeIndexMetaResponse) => void
   ): Promise<DescribeIndexMetaResponse> {
     return this.request("DescribeIndexMeta", req, cb)
+  }
+
+  /**
+   * 创建Serverless索引
+   */
+  async CreateServerlessInstance(
+    req: CreateServerlessInstanceRequest,
+    cb?: (error: string, rep: CreateServerlessInstanceResponse) => void
+  ): Promise<CreateServerlessInstanceResponse> {
+    return this.request("CreateServerlessInstance", req, cb)
   }
 
   /**

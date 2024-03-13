@@ -48,6 +48,42 @@ export interface TaskDetail {
 }
 
 /**
+ * ServerlessSpaceUser
+ */
+export interface ServerlessSpaceUser {
+  /**
+   * 用户名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Username?: string
+  /**
+   * 用户密码
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Password?: string
+  /**
+   * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateTime?: string
+  /**
+   * 用户状态
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status?: number
+  /**
+   * 有权限的索引数组
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IndicesScope?: Array<string>
+  /**
+   * 权限类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PrivilegeType?: number
+}
+
+/**
  * RestartLogstashInstance请求参数结构体
  */
 export interface RestartLogstashInstanceRequest {
@@ -237,6 +273,60 @@ export interface DiagnoseInstanceResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * CreateServerlessInstance请求参数结构体
+ */
+export interface CreateServerlessInstanceRequest {
+  /**
+   * 可用区
+   */
+  Zone: string
+  /**
+   * 私有网络ID
+   */
+  VpcId: string
+  /**
+   * 子网ID
+   */
+  SubnetId: string
+  /**
+   * 索引名，需以-AppId结尾
+   */
+  IndexName: string
+  /**
+   * 创建的索引元数据JSON，如mappings、settings
+   */
+  IndexMetaJson?: string
+  /**
+   * 创建索引的空间ID
+   */
+  SpaceId?: string
+  /**
+   * 创建索引的用户名
+   */
+  Username?: string
+  /**
+   * 创建索引的密码
+   */
+  Password?: string
+  /**
+   * 创建数据接入
+   */
+  ServerlessDi?: ServerlessDi
+  /**
+   * 是否自行添加白名单ip
+   */
+  AutoGetIp?: number
+  /**
+   * 标签信息
+   */
+  TagList?: Array<TagInfo>
+  /**
+   * kibana公网白名单
+   */
+  KibanaWhiteIpList?: Array<string>
 }
 
 /**
@@ -536,6 +626,32 @@ export interface IndexMetaField {
 }
 
 /**
+ * UpdateServerlessSpace请求参数结构体
+ */
+export interface UpdateServerlessSpaceRequest {
+  /**
+   * Serveless索引空间ID
+   */
+  SpaceId: string
+  /**
+   * Serveless索引空间名
+   */
+  SpaceName?: string
+  /**
+   * kibana内网开关
+   */
+  KibanaPrivateAccess?: string
+  /**
+   * kibana公网开关
+   */
+  KibanaPublicAccess?: string
+  /**
+   * kibana公网白名单
+   */
+  KibanaPublicAcl?: EsAcl
+}
+
+/**
  * DiagnoseInstance请求参数结构体
  */
 export interface DiagnoseInstanceRequest {
@@ -590,6 +706,47 @@ export interface UpdateDiagnoseSettingsRequest {
 }
 
 /**
+ * DeleteServerlessInstance返回参数结构体
+ */
+export interface DeleteServerlessInstanceResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * vpc信息
+ */
+export interface VpcInfo {
+  /**
+   * vpcId信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VpcId?: string
+  /**
+   * SubnetId信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SubnetId?: string
+  /**
+   * VpcUid信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VpcUid?: number
+  /**
+   * SubnetUid 信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SubnetUid?: number
+  /**
+   * 可用ip数量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AvailableIpAddressCount?: number
+}
+
+/**
  * DescribeInstanceOperations返回参数结构体
  */
 export interface DescribeInstanceOperationsResponse {
@@ -601,86 +758,6 @@ export interface DescribeInstanceOperationsResponse {
    * 操作记录
    */
   Operations?: Array<Operation>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * 索引自治字段
- */
-export interface IndexOptionsField {
-  /**
-   * 过期时间
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ExpireMaxAge?: string
-  /**
-   * 过期大小
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ExpireMaxSize?: string
-  /**
-   * 滚动周期
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  RolloverMaxAge?: string
-  /**
-   * 是否开启动态滚动
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  RolloverDynamic?: string
-  /**
-   * 是否开启动态分片
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ShardNumDynamic?: string
-  /**
-   * 时间分区字段
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TimestampField?: string
-  /**
-   * 写入模式
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  WriteMode?: string
-}
-
-/**
- * UpdateRequestTargetNodeTypes返回参数结构体
- */
-export interface UpdateRequestTargetNodeTypesResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * 智能运维诊断参数
- */
-export interface JobParam {
-  /**
-   * 诊断项列表
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Jobs: Array<string>
-  /**
-   * 诊断索引
-   */
-  Indices: string
-  /**
-   * 历史诊断时间
-   */
-  Interval: number
-}
-
-/**
- * DeleteLogstashInstance返回参数结构体
- */
-export interface DeleteLogstashInstanceResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -734,6 +811,228 @@ export interface LogstashPipeline {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   QueueCheckPointWrites: number
+}
+
+/**
+ * UpdateRequestTargetNodeTypes返回参数结构体
+ */
+export interface UpdateRequestTargetNodeTypesResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 智能运维诊断参数
+ */
+export interface JobParam {
+  /**
+   * 诊断项列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Jobs: Array<string>
+  /**
+   * 诊断索引
+   */
+  Indices: string
+  /**
+   * 历史诊断时间
+   */
+  Interval: number
+}
+
+/**
+ * DeleteLogstashInstance返回参数结构体
+ */
+export interface DeleteLogstashInstanceResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeLogstashInstances请求参数结构体
+ */
+export interface DescribeLogstashInstancesRequest {
+  /**
+   * 实例所属可用区，不传则默认所有可用区
+   */
+  Zone?: string
+  /**
+   * 实例ID列表
+   */
+  InstanceIds?: Array<string>
+  /**
+   * 实例名称列表
+   */
+  InstanceNames?: Array<string>
+  /**
+   * 分页起始值, 默认值0
+   */
+  Offset?: number
+  /**
+   * 分页大小，默认值20
+   */
+  Limit?: number
+  /**
+   * 排序字段<li>1：实例ID</li><li>2：实例名称</li><li>3：可用区</li><li>4：创建时间</li>若orderKey未传递则按创建时间降序排序
+   */
+  OrderByKey?: number
+  /**
+   * 排序方式<li>0：升序</li><li>1：降序</li>若传递了orderByKey未传递orderByType, 则默认升序
+   */
+  OrderByType?: number
+  /**
+   * VpcId 筛选项
+   */
+  VpcIds?: Array<string>
+  /**
+   * 标签信息列表
+   */
+  TagList?: Array<TagInfo>
+}
+
+/**
+ * 索引自治字段
+ */
+export interface IndexOptionsField {
+  /**
+   * 过期时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExpireMaxAge?: string
+  /**
+   * 过期大小
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExpireMaxSize?: string
+  /**
+   * 滚动周期
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RolloverMaxAge?: string
+  /**
+   * 是否开启动态滚动
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RolloverDynamic?: string
+  /**
+   * 是否开启动态分片
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ShardNumDynamic?: string
+  /**
+   * 时间分区字段
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TimestampField?: string
+  /**
+   * 写入模式
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WriteMode?: string
+}
+
+/**
+ * CreateServerlessSpaceV2返回参数结构体
+ */
+export interface CreateServerlessSpaceV2Response {
+  /**
+   * 空间ID
+   */
+  SpaceId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * Serverless索引空间信息
+ */
+export interface ServerlessSpace {
+  /**
+   * Serverless索引空间ID
+   */
+  SpaceId?: string
+  /**
+   * Serverless索引空间名
+   */
+  SpaceName?: string
+  /**
+   * Serverless索引空间状态，0正常，-1已删除
+   */
+  Status?: number
+  /**
+   * 创建日期
+   */
+  CreateTime?: string
+  /**
+   * 空间内索引数量
+   */
+  IndexCount?: number
+  /**
+   * kibana公网uri
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  KibanaUrl?: string
+  /**
+   * kibana内网url
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  KibanaPrivateUrl?: string
+  /**
+   * 空间内网访问地址
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IndexAccessUrl?: string
+  /**
+   * 空间白名单
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  KibanaPublicAcl?: EsAcl
+  /**
+   * 空间检索分析域名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  KibanaEmbedUrl?: string
+  /**
+   * 数据联路
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DiDataList?: DiData
+  /**
+   * 空间vpc信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VpcInfo?: Array<VpcInfo>
+  /**
+   * 地域
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Region?: string
+  /**
+   * 可用区
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Zone?: string
+  /**
+   * kibana公网开关，0关闭，1开启
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EnableKibanaPublicAccess?: number
+  /**
+   * kibana内网开关，0关闭，1开启
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EnableKibanaPrivateAccess?: number
+  /**
+   * 空间所属appid
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AppId?: number
 }
 
 /**
@@ -860,6 +1159,32 @@ export interface Operation {
 }
 
 /**
+ * 数据接入cvm数据源信息
+ */
+export interface DiDataSourceCvm {
+  /**
+   * vpc id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VpcId?: string
+  /**
+   * 采集路径列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LogPaths?: Array<string>
+  /**
+   * cvm实例信息列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CvmInstances?: Array<DiDataSourceCvmInstance>
+  /**
+   * 采集器id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CollectorId?: string
+}
+
+/**
  * ES集群日志详细信息
  */
 export interface InstanceLog {
@@ -924,6 +1249,24 @@ export interface DiagnoseResult {
 }
 
 /**
+ * DescribeServerlessSpaceUser返回参数结构体
+ */
+export interface DescribeServerlessSpaceUserResponse {
+  /**
+   * 用户数组
+   */
+  ServerlessSpaceUsers?: Array<ServerlessSpaceUser>
+  /**
+   * 用户总数
+   */
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 智能运维日志详情
  */
 export interface LogDetail {
@@ -942,18 +1285,13 @@ export interface LogDetail {
 }
 
 /**
- * DescribeIndexMeta返回参数结构体
+ * GetRequestTargetNodeTypes请求参数结构体
  */
-export interface DescribeIndexMetaResponse {
+export interface GetRequestTargetNodeTypesRequest {
   /**
-   * 索引元数据字段
-注意：此字段可能返回 null，表示取不到有效值。
+   * 实例ID
    */
-  IndexMetaField?: IndexMetaField
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  InstanceId: string
 }
 
 /**
@@ -1001,66 +1339,114 @@ export interface GetDiagnoseSettingsResponse {
 }
 
 /**
- * Kibana视图数据
+ * CreateServerlessSpaceV2请求参数结构体
  */
-export interface KibanaView {
+export interface CreateServerlessSpaceV2Request {
   /**
-   * Kibana节点IP
+   * vpc信息
    */
-  Ip: string
+  VpcInfo: Array<VpcInfo>
   /**
-   * 节点总磁盘大小
+   * 索引空间名
    */
-  DiskSize: number
+  SpaceName?: string
   /**
-   * 磁盘使用率
+   * 空间名称
    */
-  DiskUsage: number
+  Zone?: string
   /**
-   * 节点内存大小
+   * 白名单列表
    */
-  MemSize: number
+  KibanaWhiteIpList?: Array<string>
   /**
-   * 内存使用率
+   * 空间id
    */
-  MemUsage: number
-  /**
-   * 节点cpu个数
-   */
-  CpuNum: number
-  /**
-   * cpu使用率
-   */
-  CpuUsage: number
-  /**
-   * 可用区
-   */
-  Zone: string
-  /**
-   * ts-0noqayxu-az6-hot-03222010-0
-   */
-  NodeId?: string
+  ZoneId?: number
 }
 
 /**
- * 索引配置字段
+ * DescribeServerlessSpaces请求参数结构体
  */
-export interface IndexSettingsField {
+export interface DescribeServerlessSpacesRequest {
   /**
-   * 索引主分片数
+   * 过滤的空间ID
+   */
+  SpaceIds?: Array<string>
+  /**
+   * 过滤的空间名
+   */
+  SpaceNames?: Array<string>
+  /**
+   * 排序顺序，支持升序asc、降序desc
+   */
+  Order?: string
+  /**
+   * 排序字段，支持空间创建时间SpaceCreateTime
+   */
+  OrderBy?: string
+  /**
+   * vpcId信息数组
+   */
+  VpcIds?: Array<string>
+  /**
+   * 分页起始
+   */
+  Offset?: number
+  /**
+   * 分页条数
+   */
+  Limit?: number
+}
+
+/**
+ * DeleteServerlessSpaceUser返回参数结构体
+ */
+export interface DeleteServerlessSpaceUserResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 数据接入信息
+ */
+export interface DiData {
+  /**
+   * 数据接入id
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  NumberOfShards?: string
+  DiId?: string
   /**
-   * 索引副本分片数
+   * 数据接入创建时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  NumberOfReplicas?: string
+  CreateTime?: string
   /**
-   * 索引刷新频率
+   * 数据接入状态，0处理中，1正常，-2删除中，-3已删除
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RefreshInterval?: string
+  Status?: number
+  /**
+   * cvm数据源信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DiDataSourceCvm?: DiDataSourceCvm
+  /**
+   * tke数据源信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DiDataSourceTke?: DiDataSourceTke
+  /**
+   * serverless目的端信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DiDataSinkServerless?: DiDataSinkServerless
+  /**
+   * 数据接入类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DiDataSourceType?: string
 }
 
 /**
@@ -1164,6 +1550,17 @@ export interface DescribeLogstashInstancesResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 数据接入serverless目的端信息
+ */
+export interface DiDataSinkServerless {
+  /**
+   * serverless实例id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ServerlessId?: string
 }
 
 /**
@@ -1327,6 +1724,36 @@ export interface UpdatePluginsRequest {
 }
 
 /**
+ * DescribeServerlessSpaceUser请求参数结构体
+ */
+export interface DescribeServerlessSpaceUserRequest {
+  /**
+   * 空间的ID
+   */
+  SpaceId: string
+  /**
+   * 游标
+   */
+  Offset?: number
+  /**
+   * 页条数
+   */
+  Limit?: number
+  /**
+   * 用户名列表过滤
+   */
+  UserNames?: Array<string>
+  /**
+   * 用户类型
+   */
+  UserTypes?: Array<number | bigint>
+  /**
+   * 权限类型
+   */
+  PrivilegeTypes?: Array<number | bigint>
+}
+
+/**
  * 智能运维指标维度
  */
 export interface Dimension {
@@ -1341,6 +1768,26 @@ export interface Dimension {
 }
 
 /**
+ * DescribeServerlessSpaces返回参数结构体
+ */
+export interface DescribeServerlessSpacesResponse {
+  /**
+   * 查询总数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalCount?: number
+  /**
+   * Serverless空间信息列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ServerlessSpaces?: Array<ServerlessSpace>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * InquirePriceRenewInstance请求参数结构体
  */
 export interface InquirePriceRenewInstanceRequest {
@@ -1351,13 +1798,45 @@ export interface InquirePriceRenewInstanceRequest {
 }
 
 /**
- * UpdateJdk返回参数结构体
+ * Kibana视图数据
  */
-export interface UpdateJdkResponse {
+export interface KibanaView {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * Kibana节点IP
    */
-  RequestId?: string
+  Ip: string
+  /**
+   * 节点总磁盘大小
+   */
+  DiskSize: number
+  /**
+   * 磁盘使用率
+   */
+  DiskUsage: number
+  /**
+   * 节点内存大小
+   */
+  MemSize: number
+  /**
+   * 内存使用率
+   */
+  MemUsage: number
+  /**
+   * 节点cpu个数
+   */
+  CpuNum: number
+  /**
+   * cpu使用率
+   */
+  CpuUsage: number
+  /**
+   * 可用区
+   */
+  Zone: string
+  /**
+   * ts-0noqayxu-az6-hot-03222010-0
+   */
+  NodeId?: string
 }
 
 /**
@@ -1534,6 +2013,16 @@ export interface CreateLogstashInstanceResponse {
 }
 
 /**
+ * DeleteServerlessInstance请求参数结构体
+ */
+export interface DeleteServerlessInstanceRequest {
+  /**
+   * serverless实例ID
+   */
+  InstanceId: string
+}
+
+/**
  * SaveAndDeployLogstashPipeline请求参数结构体
  */
 export interface SaveAndDeployLogstashPipelineRequest {
@@ -1549,6 +2038,82 @@ export interface SaveAndDeployLogstashPipelineRequest {
    * 操作类型<li>1：只保存</li><li>2：保存并部署</li>
    */
   OpType?: number
+}
+
+/**
+ * 数据接入tke数据源信息
+ */
+export interface DiDataSourceTke {
+  /**
+   * vpc id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VpcId?: string
+  /**
+   * tke实例id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TkeId?: string
+  /**
+   * 采集器id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CollectorId?: string
+  /**
+   * 采集源名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CollectorName?: string
+  /**
+   * 采集器类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CollectorType?: string
+  /**
+   * 采集器版本
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CollectorVersion?: string
+  /**
+   * tke包含的命名空间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IncludeNamespaces?: Array<string>
+  /**
+   * tke不包含的命名空间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExcludeNamespaces?: Array<string>
+  /**
+   * tke pod标签名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PodLabelKeys?: Array<string>
+  /**
+   * tke pod标签值
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PodLabelValues?: Array<string>
+  /**
+   * tke容器名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ContainerName?: string
+  /**
+   * tke采集器beat配置
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ConfigContent?: string
+  /**
+   * /
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InputType?: string
+  /**
+   * TKE 日志采集路径
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InputPath?: string
 }
 
 /**
@@ -2608,6 +3173,32 @@ RENEW_FLAG_DEFAULT：不自动续费
 }
 
 /**
+ * 数据接入cvm实例信息
+ */
+export interface DiDataSourceCvmInstance {
+  /**
+   * cvm实例id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceId?: string
+  /**
+   * vpc id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VpcId?: string
+  /**
+   * 子网id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SubnetId?: string
+  /**
+   * 错误信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ErrMsg?: string
+}
+
+/**
  * DeleteIndex返回参数结构体
  */
 export interface DeleteIndexResponse {
@@ -2618,13 +3209,17 @@ export interface DeleteIndexResponse {
 }
 
 /**
- * UpdatePlugins返回参数结构体
+ * DeleteServerlessSpaceUser请求参数结构体
  */
-export interface UpdatePluginsResponse {
+export interface DeleteServerlessSpaceUserRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 空间的ID
    */
-  RequestId?: string
+  SpaceId: string
+  /**
+   * 创建索引的用户名
+   */
+  Username: string
 }
 
 /**
@@ -2744,13 +3339,18 @@ export interface RestartNodesRequest {
 }
 
 /**
- * GetRequestTargetNodeTypes请求参数结构体
+ * DescribeIndexMeta返回参数结构体
  */
-export interface GetRequestTargetNodeTypesRequest {
+export interface DescribeIndexMetaResponse {
   /**
-   * 实例ID
+   * 索引元数据字段
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  InstanceId: string
+  IndexMetaField?: IndexMetaField
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2797,45 +3397,49 @@ export interface ProcessDetail {
 }
 
 /**
- * DescribeLogstashInstances请求参数结构体
+ * 数据接入tke数据源
  */
-export interface DescribeLogstashInstancesRequest {
+export interface DiSourceTke {
   /**
-   * 实例所属可用区，不传则默认所有可用区
+   * 数据源所属vpc id，创建后不允许修改
    */
-  Zone?: string
+  VpcId?: string
   /**
-   * 实例ID列表
+   * tke实例id，创建后不允许修改
    */
-  InstanceIds?: Array<string>
+  TkeId?: string
   /**
-   * 实例名称列表
+   * tke包含的命名空间
    */
-  InstanceNames?: Array<string>
+  IncludeNamespaces?: Array<string>
   /**
-   * 分页起始值, 默认值0
+   * tke不包含的命名空间
    */
-  Offset?: number
+  ExcludeNamespaces?: Array<string>
   /**
-   * 分页大小，默认值20
+   * tke容器名称
    */
-  Limit?: number
+  ContainerName?: string
   /**
-   * 排序字段<li>1：实例ID</li><li>2：实例名称</li><li>3：可用区</li><li>4：创建时间</li>若orderKey未传递则按创建时间降序排序
+   * tke日志内容过滤
    */
-  OrderByKey?: number
+  LogFilters?: string
   /**
-   * 排序方式<li>0：升序</li><li>1：降序</li>若传递了orderByKey未传递orderByType, 则默认升序
+   * tke beats配置项
    */
-  OrderByType?: number
+  ConfigContent?: string
   /**
-   * VpcId 筛选项
+   * tke pod标签
    */
-  VpcIds?: Array<string>
+  PodLabel?: Array<DiSourceTkePodLabel>
   /**
-   * 标签信息列表
+   * /
    */
-  TagList?: Array<TagInfo>
+  InputType?: string
+  /**
+   * tke 日志采集路径
+   */
+  InputPath?: string
 }
 
 /**
@@ -2930,6 +3534,16 @@ export interface DescribeIndexMetaRequest {
    * 集群访问密码
    */
   Password?: string
+}
+
+/**
+ * UpdateJdk返回参数结构体
+ */
+export interface UpdateJdkResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3057,6 +3671,26 @@ export interface IndexPolicyField {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ColdAction?: string
+}
+
+/**
+ * UpdatePlugins返回参数结构体
+ */
+export interface UpdatePluginsResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * UpdateServerlessInstance返回参数结构体
+ */
+export interface UpdateServerlessInstanceResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3210,6 +3844,37 @@ export interface BackingIndexMetaField {
 }
 
 /**
+ * 索引配置字段
+ */
+export interface IndexSettingsField {
+  /**
+   * 索引主分片数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NumberOfShards?: string
+  /**
+   * 索引副本分片数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NumberOfReplicas?: string
+  /**
+   * 索引刷新频率
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RefreshInterval?: string
+}
+
+/**
+ * UpdateServerlessSpace返回参数结构体
+ */
+export interface UpdateServerlessSpaceResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * UpdateLogstashPipelineDesc请求参数结构体
  */
 export interface UpdateLogstashPipelineDescRequest {
@@ -3225,6 +3890,36 @@ export interface UpdateLogstashPipelineDescRequest {
    * 管道描述信息
    */
   PipelineDesc: string
+}
+
+/**
+ * UpdateServerlessInstance请求参数结构体
+ */
+export interface UpdateServerlessInstanceRequest {
+  /**
+   * Serveless实例ID
+   */
+  InstanceId: string
+  /**
+   * 更新的索引元数据JSON，如mappings、settings
+   */
+  UpdateMetaJson?: string
+  /**
+   * 实例访问密码
+   */
+  Password?: string
+  /**
+   * 开启kibana内网访问，如OPEN、CLOSE
+   */
+  KibanaPrivateAccess?: string
+  /**
+   * 开启kibana外网访问，如OPEN、CLOSE
+   */
+  KibanaPublicAccess?: string
+  /**
+   * 访问控制列表
+   */
+  KibanaPublicAcl?: KibanaPublicAcl
 }
 
 /**
@@ -3480,6 +4175,25 @@ CLOSE 关闭
 }
 
 /**
+ * CreateServerlessInstance返回参数结构体
+ */
+export interface CreateServerlessInstanceResponse {
+  /**
+   * 实例ID
+   */
+  InstanceId?: string
+  /**
+   * 订单号
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DealName?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeDiagnose请求参数结构体
  */
 export interface DescribeDiagnoseRequest {
@@ -3513,6 +4227,24 @@ export interface DescribeInstancePluginListResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 数据接入cvm数据源
+ */
+export interface DiSourceCvm {
+  /**
+   * 数据源所属vpc id，创建后不允许修改
+   */
+  VpcId?: string
+  /**
+   * cvm列表
+   */
+  CvmIds?: Array<string>
+  /**
+   * 采集路径列表，支持通配符
+   */
+  LogPaths?: Array<string>
 }
 
 /**
@@ -3559,6 +4291,22 @@ export interface DescribeLogstashInstanceLogsRequest {
 }
 
 /**
+ * tke pod标签
+ */
+export interface DiSourceTkePodLabel {
+  /**
+   * 标签key
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Key?: string
+  /**
+   * 标签value
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Value?: string
+}
+
+/**
  * RestartInstance请求参数结构体
  */
 export interface RestartInstanceRequest {
@@ -3592,6 +4340,24 @@ export interface ZoneDetail {
    * 子网ID
    */
   SubnetId: string
+}
+
+/**
+ * 创建serverless索引时创建数据接入
+ */
+export interface ServerlessDi {
+  /**
+   * 数据链路采集源类型，如cvm_collector、tke_collector
+   */
+  DiSourceType?: string
+  /**
+   * cvm数据源
+   */
+  DiSourceCvm?: DiSourceCvm
+  /**
+   * tke数据源
+   */
+  DiSourceTke?: DiSourceTke
 }
 
 /**
@@ -3779,6 +4545,16 @@ export interface DescribeViewsResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * kibana公网域名白名单参数
+ */
+export interface KibanaPublicAcl {
+  /**
+   * kibana访问白名单
+   */
+  WhiteIpList?: Array<string>
 }
 
 /**

@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { RestartLogstashInstanceRequest, DescribeInstanceOperationsRequest, DiagnoseInstanceResponse, DescribeDiagnoseResponse, DescribeLogstashInstanceLogsResponse, CreateInstanceResponse, DescribeInstanceLogsRequest, DeleteLogstashPipelinesResponse, UpdateLogstashPipelineDescResponse, DescribeInstancesResponse, DescribeInstanceLogsResponse, DiagnoseInstanceRequest, UpdateDiagnoseSettingsRequest, DescribeInstanceOperationsResponse, UpdateRequestTargetNodeTypesResponse, DeleteLogstashInstanceResponse, GetRequestTargetNodeTypesResponse, DescribeIndexMetaResponse, StartLogstashPipelinesRequest, GetDiagnoseSettingsResponse, UpgradeLicenseResponse, UpdateLogstashInstanceRequest, UpdateRequestTargetNodeTypesRequest, DescribeLogstashInstancesResponse, DeleteInstanceResponse, DescribeLogstashInstanceOperationsResponse, CreateIndexRequest, UpdatePluginsRequest, InquirePriceRenewInstanceRequest, UpdateJdkResponse, UpdateInstanceResponse, DeleteIndexRequest, DescribeViewsRequest, DescribeIndexListResponse, StartLogstashPipelinesResponse, DescribeLogstashInstanceOperationsRequest, CreateLogstashInstanceResponse, SaveAndDeployLogstashPipelineRequest, CreateIndexResponse, InquirePriceRenewInstanceResponse, DeleteLogstashPipelinesRequest, RestartKibanaRequest, SaveAndDeployLogstashPipelineResponse, UpdateDictionariesRequest, UpgradeLicenseRequest, DescribeIndexListRequest, DescribeLogstashPipelinesResponse, CreateInstanceRequest, CreateLogstashInstanceRequest, UpdateDictionariesResponse, DeleteIndexResponse, UpdatePluginsResponse, DescribeInstancesRequest, DescribeLogstashPipelinesRequest, RestartNodesRequest, GetRequestTargetNodeTypesRequest, ModifyEsVipSecurityGroupRequest, DescribeLogstashInstancesRequest, DeleteInstanceRequest, UpgradeInstanceResponse, DescribeIndexMetaRequest, RestartKibanaResponse, UpdateIndexRequest, UpdateIndexResponse, UpdateJdkRequest, UpdateLogstashInstanceResponse, StopLogstashPipelinesRequest, RestartInstanceResponse, UpdateLogstashPipelineDescRequest, ModifyEsVipSecurityGroupResponse, UpdateInstanceRequest, DescribeDiagnoseRequest, DescribeInstancePluginListResponse, DescribeLogstashInstanceLogsRequest, RestartInstanceRequest, StopLogstashPipelinesResponse, UpdateDiagnoseSettingsResponse, GetDiagnoseSettingsRequest, DescribeInstancePluginListRequest, RestartNodesResponse, DeleteLogstashInstanceRequest, UpgradeInstanceRequest, DescribeViewsResponse, RestartLogstashInstanceResponse } from "./es_models";
+import { RestartLogstashInstanceRequest, DescribeInstanceOperationsRequest, DiagnoseInstanceResponse, CreateServerlessInstanceRequest, DescribeDiagnoseResponse, DescribeLogstashInstanceLogsResponse, CreateInstanceResponse, DescribeInstanceLogsRequest, DeleteLogstashPipelinesResponse, UpdateLogstashPipelineDescResponse, DescribeInstancesResponse, DescribeInstanceLogsResponse, UpdateServerlessSpaceRequest, DiagnoseInstanceRequest, UpdateDiagnoseSettingsRequest, DeleteServerlessInstanceResponse, DescribeInstanceOperationsResponse, UpdateRequestTargetNodeTypesResponse, DeleteLogstashInstanceResponse, DescribeLogstashInstancesRequest, CreateServerlessSpaceV2Response, GetRequestTargetNodeTypesResponse, DescribeServerlessSpaceUserResponse, GetRequestTargetNodeTypesRequest, StartLogstashPipelinesRequest, GetDiagnoseSettingsResponse, CreateServerlessSpaceV2Request, DescribeServerlessSpacesRequest, DeleteServerlessSpaceUserResponse, UpgradeLicenseResponse, UpdateLogstashInstanceRequest, UpdateRequestTargetNodeTypesRequest, DescribeLogstashInstancesResponse, DeleteInstanceResponse, DescribeLogstashInstanceOperationsResponse, CreateIndexRequest, UpdatePluginsRequest, DescribeServerlessSpaceUserRequest, DescribeServerlessSpacesResponse, InquirePriceRenewInstanceRequest, UpdateInstanceResponse, DeleteIndexRequest, DescribeViewsRequest, DescribeIndexListResponse, StartLogstashPipelinesResponse, DescribeLogstashInstanceOperationsRequest, CreateLogstashInstanceResponse, DeleteServerlessInstanceRequest, SaveAndDeployLogstashPipelineRequest, CreateIndexResponse, InquirePriceRenewInstanceResponse, DeleteLogstashPipelinesRequest, RestartKibanaRequest, SaveAndDeployLogstashPipelineResponse, UpdateDictionariesRequest, UpgradeLicenseRequest, DescribeIndexListRequest, DescribeLogstashPipelinesResponse, CreateInstanceRequest, CreateLogstashInstanceRequest, UpdateDictionariesResponse, DeleteIndexResponse, DeleteServerlessSpaceUserRequest, DescribeInstancesRequest, DescribeLogstashPipelinesRequest, RestartNodesRequest, DescribeIndexMetaResponse, ModifyEsVipSecurityGroupRequest, DeleteInstanceRequest, UpgradeInstanceResponse, DescribeIndexMetaRequest, UpdateJdkResponse, RestartKibanaResponse, UpdateIndexRequest, UpdateIndexResponse, UpdatePluginsResponse, UpdateServerlessInstanceResponse, UpdateJdkRequest, UpdateLogstashInstanceResponse, StopLogstashPipelinesRequest, RestartInstanceResponse, UpdateServerlessSpaceResponse, UpdateLogstashPipelineDescRequest, UpdateServerlessInstanceRequest, ModifyEsVipSecurityGroupResponse, UpdateInstanceRequest, CreateServerlessInstanceResponse, DescribeDiagnoseRequest, DescribeInstancePluginListResponse, DescribeLogstashInstanceLogsRequest, RestartInstanceRequest, StopLogstashPipelinesResponse, UpdateDiagnoseSettingsResponse, GetDiagnoseSettingsRequest, DescribeInstancePluginListRequest, RestartNodesResponse, DeleteLogstashInstanceRequest, UpgradeInstanceRequest, DescribeViewsResponse, RestartLogstashInstanceResponse } from "./es_models";
 /**
  * es client
  * @class
@@ -28,9 +28,17 @@ export declare class Client extends AbstractClient {
      */
     StopLogstashPipelines(req: StopLogstashPipelinesRequest, cb?: (error: string, rep: StopLogstashPipelinesResponse) => void): Promise<StopLogstashPipelinesResponse>;
     /**
+     * 获取Serverless索引空间列表
+     */
+    DescribeServerlessSpaces(req: DescribeServerlessSpacesRequest, cb?: (error: string, rep: DescribeServerlessSpacesResponse) => void): Promise<DescribeServerlessSpacesResponse>;
+    /**
      * 获取索引列表
      */
     DescribeIndexList(req: DescribeIndexListRequest, cb?: (error: string, rep: DescribeIndexListResponse) => void): Promise<DescribeIndexListResponse>;
+    /**
+     * 用于更新管道描述信息
+     */
+    UpdateLogstashPipelineDesc(req: UpdateLogstashPipelineDescRequest, cb?: (error: string, rep: UpdateLogstashPipelineDescResponse) => void): Promise<UpdateLogstashPipelineDescResponse>;
     /**
      * 销毁集群实例
      */
@@ -72,6 +80,10 @@ export declare class Client extends AbstractClient {
      * 更新实例Jdk配置
      */
     UpdateJdk(req: UpdateJdkRequest, cb?: (error: string, rep: UpdateJdkResponse) => void): Promise<UpdateJdkResponse>;
+    /**
+     * 删除Serverless索引
+     */
+    DeleteServerlessInstance(req: DeleteServerlessInstanceRequest, cb?: (error: string, rep: DeleteServerlessInstanceResponse) => void): Promise<DeleteServerlessInstanceResponse>;
     /**
      * 查询智能运维诊断结果报告
      */
@@ -128,9 +140,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeLogstashInstances(req: DescribeLogstashInstancesRequest, cb?: (error: string, rep: DescribeLogstashInstancesResponse) => void): Promise<DescribeLogstashInstancesResponse>;
     /**
-     * 用于更新管道描述信息
+     * 创建Serverless索引空间
      */
-    UpdateLogstashPipelineDesc(req: UpdateLogstashPipelineDescRequest, cb?: (error: string, rep: UpdateLogstashPipelineDescResponse) => void): Promise<UpdateLogstashPipelineDescResponse>;
+    CreateServerlessSpaceV2(req: CreateServerlessSpaceV2Request, cb?: (error: string, rep: CreateServerlessSpaceV2Response) => void): Promise<CreateServerlessSpaceV2Response>;
     /**
      * 查询集群各视图数据，包括集群维度、节点维度、Kibana维度
      */
@@ -139,6 +151,10 @@ export declare class Client extends AbstractClient {
      * 创建指定规格的ES集群实例
      */
     CreateInstance(req: CreateInstanceRequest, cb?: (error: string, rep: CreateInstanceResponse) => void): Promise<CreateInstanceResponse>;
+    /**
+     * 更新Serverless索引
+     */
+    UpdateServerlessInstance(req: UpdateServerlessInstanceRequest, cb?: (error: string, rep: UpdateServerlessInstanceResponse) => void): Promise<UpdateServerlessInstanceResponse>;
     /**
      * 升级ES集群版本
      */
@@ -152,6 +168,10 @@ export declare class Client extends AbstractClient {
      */
     RestartNodes(req: RestartNodesRequest, cb?: (error: string, rep: RestartNodesResponse) => void): Promise<RestartNodesResponse>;
     /**
+     * 更新Serverless索引空间
+     */
+    UpdateServerlessSpace(req: UpdateServerlessSpaceRequest, cb?: (error: string, rep: UpdateServerlessSpaceResponse) => void): Promise<UpdateServerlessSpaceResponse>;
+    /**
      * 删除索引
      */
     DeleteIndex(req: DeleteIndexRequest, cb?: (error: string, rep: DeleteIndexResponse) => void): Promise<DeleteIndexResponse>;
@@ -160,9 +180,17 @@ export declare class Client extends AbstractClient {
      */
     RestartLogstashInstance(req: RestartLogstashInstanceRequest, cb?: (error: string, rep: RestartLogstashInstanceResponse) => void): Promise<RestartLogstashInstanceResponse>;
     /**
+     * 删除Serverless空间子用户
+     */
+    DeleteServerlessSpaceUser(req: DeleteServerlessSpaceUserRequest, cb?: (error: string, rep: DeleteServerlessSpaceUserResponse) => void): Promise<DeleteServerlessSpaceUserResponse>;
+    /**
      * 查询用户该地域下符合条件的Logstash实例的日志
      */
     DescribeLogstashInstanceLogs(req: DescribeLogstashInstanceLogsRequest, cb?: (error: string, rep: DescribeLogstashInstanceLogsResponse) => void): Promise<DescribeLogstashInstanceLogsResponse>;
+    /**
+     * 查看Serverless空间子用户
+     */
+    DescribeServerlessSpaceUser(req: DescribeServerlessSpaceUserRequest, cb?: (error: string, rep: DescribeServerlessSpaceUserResponse) => void): Promise<DescribeServerlessSpaceUserResponse>;
     /**
      * 用于下发并且部署管道
      */
@@ -183,6 +211,10 @@ export declare class Client extends AbstractClient {
      * 获取索引元数据
      */
     DescribeIndexMeta(req: DescribeIndexMetaRequest, cb?: (error: string, rep: DescribeIndexMetaResponse) => void): Promise<DescribeIndexMetaResponse>;
+    /**
+     * 创建Serverless索引
+     */
+    CreateServerlessInstance(req: CreateServerlessInstanceRequest, cb?: (error: string, rep: CreateServerlessInstanceResponse) => void): Promise<CreateServerlessInstanceResponse>;
     /**
      * 集群续费询价接口，续费前通过调用该接口，可获取集群续费的价格。
      */

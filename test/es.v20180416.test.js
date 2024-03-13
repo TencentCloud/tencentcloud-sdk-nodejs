@@ -68,9 +68,29 @@ it("es.v20180416.StopLogstashPipelines", async function () {
     }
 })
 
+it("es.v20180416.DescribeServerlessSpaces", async function () {
+    try {
+       const data = await client.DescribeServerlessSpaces({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("es.v20180416.DescribeIndexList", async function () {
     try {
        const data = await client.DescribeIndexList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("es.v20180416.UpdateLogstashPipelineDesc", async function () {
+    try {
+       const data = await client.UpdateLogstashPipelineDesc({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -161,6 +181,16 @@ it("es.v20180416.UpdateLogstashInstance", async function () {
 it("es.v20180416.UpdateJdk", async function () {
     try {
        const data = await client.UpdateJdk({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("es.v20180416.DeleteServerlessInstance", async function () {
+    try {
+       const data = await client.DeleteServerlessInstance({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -288,9 +318,9 @@ it("es.v20180416.DescribeLogstashInstances", async function () {
     }
 })
 
-it("es.v20180416.UpdateLogstashPipelineDesc", async function () {
+it("es.v20180416.CreateServerlessSpaceV2", async function () {
     try {
-       const data = await client.UpdateLogstashPipelineDesc({})
+       const data = await client.CreateServerlessSpaceV2({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -311,6 +341,16 @@ it("es.v20180416.DescribeViews", async function () {
 it("es.v20180416.CreateInstance", async function () {
     try {
        const data = await client.CreateInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("es.v20180416.UpdateServerlessInstance", async function () {
+    try {
+       const data = await client.UpdateServerlessInstance({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -348,6 +388,16 @@ it("es.v20180416.RestartNodes", async function () {
     }
 })
 
+it("es.v20180416.UpdateServerlessSpace", async function () {
+    try {
+       const data = await client.UpdateServerlessSpace({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("es.v20180416.DeleteIndex", async function () {
     try {
        const data = await client.DeleteIndex({})
@@ -368,9 +418,29 @@ it("es.v20180416.RestartLogstashInstance", async function () {
     }
 })
 
+it("es.v20180416.DeleteServerlessSpaceUser", async function () {
+    try {
+       const data = await client.DeleteServerlessSpaceUser({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("es.v20180416.DescribeLogstashInstanceLogs", async function () {
     try {
        const data = await client.DescribeLogstashInstanceLogs({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("es.v20180416.DescribeServerlessSpaceUser", async function () {
+    try {
+       const data = await client.DescribeServerlessSpaceUser({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -421,6 +491,16 @@ it("es.v20180416.DescribeInstancePluginList", async function () {
 it("es.v20180416.DescribeIndexMeta", async function () {
     try {
        const data = await client.DescribeIndexMeta({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("es.v20180416.CreateServerlessInstance", async function () {
+    try {
+       const data = await client.CreateServerlessInstance({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -58,10 +58,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("StopLogstashPipelines", req, cb);
     }
     /**
+     * 获取Serverless索引空间列表
+     */
+    async DescribeServerlessSpaces(req, cb) {
+        return this.request("DescribeServerlessSpaces", req, cb);
+    }
+    /**
      * 获取索引列表
      */
     async DescribeIndexList(req, cb) {
         return this.request("DescribeIndexList", req, cb);
+    }
+    /**
+     * 用于更新管道描述信息
+     */
+    async UpdateLogstashPipelineDesc(req, cb) {
+        return this.request("UpdateLogstashPipelineDesc", req, cb);
     }
     /**
      * 销毁集群实例
@@ -121,6 +133,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async UpdateJdk(req, cb) {
         return this.request("UpdateJdk", req, cb);
+    }
+    /**
+     * 删除Serverless索引
+     */
+    async DeleteServerlessInstance(req, cb) {
+        return this.request("DeleteServerlessInstance", req, cb);
     }
     /**
      * 查询智能运维诊断结果报告
@@ -202,10 +220,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeLogstashInstances", req, cb);
     }
     /**
-     * 用于更新管道描述信息
+     * 创建Serverless索引空间
      */
-    async UpdateLogstashPipelineDesc(req, cb) {
-        return this.request("UpdateLogstashPipelineDesc", req, cb);
+    async CreateServerlessSpaceV2(req, cb) {
+        return this.request("CreateServerlessSpaceV2", req, cb);
     }
     /**
      * 查询集群各视图数据，包括集群维度、节点维度、Kibana维度
@@ -218,6 +236,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CreateInstance(req, cb) {
         return this.request("CreateInstance", req, cb);
+    }
+    /**
+     * 更新Serverless索引
+     */
+    async UpdateServerlessInstance(req, cb) {
+        return this.request("UpdateServerlessInstance", req, cb);
     }
     /**
      * 升级ES集群版本
@@ -238,6 +262,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("RestartNodes", req, cb);
     }
     /**
+     * 更新Serverless索引空间
+     */
+    async UpdateServerlessSpace(req, cb) {
+        return this.request("UpdateServerlessSpace", req, cb);
+    }
+    /**
      * 删除索引
      */
     async DeleteIndex(req, cb) {
@@ -250,10 +280,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("RestartLogstashInstance", req, cb);
     }
     /**
+     * 删除Serverless空间子用户
+     */
+    async DeleteServerlessSpaceUser(req, cb) {
+        return this.request("DeleteServerlessSpaceUser", req, cb);
+    }
+    /**
      * 查询用户该地域下符合条件的Logstash实例的日志
      */
     async DescribeLogstashInstanceLogs(req, cb) {
         return this.request("DescribeLogstashInstanceLogs", req, cb);
+    }
+    /**
+     * 查看Serverless空间子用户
+     */
+    async DescribeServerlessSpaceUser(req, cb) {
+        return this.request("DescribeServerlessSpaceUser", req, cb);
     }
     /**
      * 用于下发并且部署管道
@@ -284,6 +326,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeIndexMeta(req, cb) {
         return this.request("DescribeIndexMeta", req, cb);
+    }
+    /**
+     * 创建Serverless索引
+     */
+    async CreateServerlessInstance(req, cb) {
+        return this.request("CreateServerlessInstance", req, cb);
     }
     /**
      * 集群续费询价接口，续费前通过调用该接口，可获取集群续费的价格。
