@@ -57,7 +57,8 @@ import {
   DescribeSnapshotRollbackResultResponse,
   TagItemFilter,
   DescribeRecordTypeResponse,
-  ModifyDomainRemarkResponse,
+  DescribeRecordLineCategoryListResponse,
+  ModifyRecordResponse,
   DeleteSnapshotRequest,
   DeleteRecordBatchResponse,
   DescribeDomainAliasListResponse,
@@ -67,7 +68,7 @@ import {
   RecordCountInfo,
   DeleteShareDomainResponse,
   PackageDetailItem,
-  ModifyRecordRequest,
+  ModifyDomainRemarkResponse,
   BatchRecordInfo,
   LineGroupInfo,
   DeleteDomainRequest,
@@ -106,7 +107,7 @@ import {
   CreateRecordBatchDetail,
   WhoisContact,
   DescribeRecordResponse,
-  ModifyRecordResponse,
+  DescribeRecordLineCategoryListRequest,
   ModifyRecordToGroupResponse,
   SnapshotRecord,
   ModifyDomainUnlockResponse,
@@ -192,6 +193,7 @@ import {
   DescribeRecordSnapshotRollbackResultRequest,
   ModifyDomainLockResponse,
   CreateDomainCustomLineRequest,
+  LineItem,
   CreateDealResponse,
   DescribeRecordExistExceptDefaultNSResponse,
   ModifyVasAutoRenewStatusRequest,
@@ -206,6 +208,7 @@ import {
   CreateDomainCustomLineResponse,
   DescribeDomainAnalyticsRequest,
   ModifyDynamicDNSResponse,
+  ModifyRecordRequest,
   DescribeSnapshotRollbackResultRequest,
   DescribeDomainWhoisResponse,
 } from "./dnspod_models"
@@ -511,6 +514,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 设置域名备注
+   */
+  async ModifyDomainRemark(
+    req: ModifyDomainRemarkRequest,
+    cb?: (error: string, rep: ModifyDomainRemarkResponse) => void
+  ): Promise<ModifyDomainRemarkResponse> {
+    return this.request("ModifyDomainRemark", req, cb)
+  }
+
+  /**
    * 获取域名信息
    */
   async DescribeDomain(
@@ -702,13 +715,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 设置域名备注
+   * 按分类返回线路列表
    */
-  async ModifyDomainRemark(
-    req: ModifyDomainRemarkRequest,
-    cb?: (error: string, rep: ModifyDomainRemarkResponse) => void
-  ): Promise<ModifyDomainRemarkResponse> {
-    return this.request("ModifyDomainRemark", req, cb)
+  async DescribeRecordLineCategoryList(
+    req: DescribeRecordLineCategoryListRequest,
+    cb?: (error: string, rep: DescribeRecordLineCategoryListResponse) => void
+  ): Promise<DescribeRecordLineCategoryListResponse> {
+    return this.request("DescribeRecordLineCategoryList", req, cb)
   }
 
   /**

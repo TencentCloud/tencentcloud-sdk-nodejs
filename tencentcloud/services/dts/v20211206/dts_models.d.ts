@@ -2236,7 +2236,7 @@ export interface DifferenceDetail {
  */
 export interface DBInfo {
     /**
-     * 表示节点角色，针对分布式数据库，如mongodb中的mongos节点
+     * 表示节点角色，针对分布式数据库，如mongodb中的mongos节点。如数据库是tdsql，枚举值为：proxy、set
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Role?: string;
@@ -2335,6 +2335,11 @@ export interface DBInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     TmpToken?: string;
+    /**
+     * tdsql分片id。tdsql set节点必填
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SetId?: string;
 }
 /**
  * 单topic和自定义topic的描述。投递到单topic时，该数组的最后一项会被视为默认分区策略，所有未匹配到的数据都会按该策略投递，默认策略只支持 投递至partition0、按表名、表名+主键三种。
@@ -4378,7 +4383,7 @@ export interface Endpoint {
      */
     Region?: string;
     /**
-     * tdsql mysql版的节点类型，枚举值为proxy、set
+     * tdsql mysql版的节点类型，枚举值为proxy、set。tdsqlmysql必填
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Role?: string;

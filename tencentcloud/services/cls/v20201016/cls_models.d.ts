@@ -1480,13 +1480,13 @@ export interface CreateCosRechargeRequest {
     ExtractRuleInfo?: ExtractRuleInfo;
 }
 /**
- * DescribeKafkaUser请求参数结构体
+ * ModifyAlarmShield返回参数结构体
  */
-export interface DescribeKafkaUserRequest {
+export interface ModifyAlarmShieldResponse {
     /**
-     * kafka用户名。
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
-    UserName: string;
+    RequestId?: string;
 }
 /**
  * 日志提取规则
@@ -2963,15 +2963,6 @@ export interface ModifyScheduledSqlRequest {
  * DeleteConfig返回参数结构体
  */
 export interface DeleteConfigResponse {
-    /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
-/**
- * ModifyAlarmShield返回参数结构体
- */
-export interface ModifyAlarmShieldResponse {
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -6449,19 +6440,6 @@ export interface DescribeLogsetsRequest {
      * 分页单页的限制数目，默认值为20，最大值100
      */
     Limit?: number;
-}
-/**
- * DescribeKafkaUser返回参数结构体
- */
-export interface DescribeKafkaUserResponse {
-    /**
-     * 如果返回不为空，代表用户名UserName已经创建成功。
-     */
-    UserName?: string;
-    /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
 }
 /**
  * Parquet内容

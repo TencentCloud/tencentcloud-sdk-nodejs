@@ -2375,7 +2375,7 @@ export interface DifferenceDetail {
  */
 export interface DBInfo {
   /**
-   * 表示节点角色，针对分布式数据库，如mongodb中的mongos节点
+   * 表示节点角色，针对分布式数据库，如mongodb中的mongos节点。如数据库是tdsql，枚举值为：proxy、set
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Role?: string
@@ -2474,6 +2474,11 @@ export interface DBInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TmpToken?: string
+  /**
+   * tdsql分片id。tdsql set节点必填
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SetId?: string
 }
 
 /**
@@ -4588,7 +4593,7 @@ export interface Endpoint {
    */
   Region?: string
   /**
-   * tdsql mysql版的节点类型，枚举值为proxy、set
+   * tdsql mysql版的节点类型，枚举值为proxy、set。tdsqlmysql必填
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Role?: string

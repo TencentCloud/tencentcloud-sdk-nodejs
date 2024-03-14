@@ -50,6 +50,10 @@ export interface CreateRecordRequest {
      * 备注
      */
     Remark?: string;
+    /**
+     * 开启DNSSEC时，强制添加CNAME/URL记录
+     */
+    DnssecConflictMode?: string;
 }
 /**
  * DescribeRecordFilterList返回参数结构体
@@ -947,9 +951,26 @@ export interface DescribeRecordTypeResponse {
     RequestId?: string;
 }
 /**
- * ModifyDomainRemark返回参数结构体
+ * DescribeRecordLineCategoryList返回参数结构体
  */
-export interface ModifyDomainRemarkResponse {
+export interface DescribeRecordLineCategoryListResponse {
+    /**
+     * 按分类返回的线路列表。
+     */
+    LineList?: Array<LineItem>;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * ModifyRecord返回参数结构体
+ */
+export interface ModifyRecordResponse {
+    /**
+     * 记录ID
+     */
+    RecordId?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1137,61 +1158,13 @@ export interface PackageDetailItem {
     DomainGrade: string;
 }
 /**
- * ModifyRecord请求参数结构体
+ * ModifyDomainRemark返回参数结构体
  */
-export interface ModifyRecordRequest {
+export interface ModifyDomainRemarkResponse {
     /**
-     * 域名
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
-    Domain: string;
-    /**
-     * 记录类型，通过 API 记录类型获得，大写英文，比如：A 。
-     */
-    RecordType: string;
-    /**
-     * 记录线路，通过 API 记录线路获得，中文，比如：默认。
-     */
-    RecordLine: string;
-    /**
-     * 记录值，如 IP : 200.200.200.200， CNAME : cname.dnspod.com.， MX : mail.dnspod.com.。
-     */
-    Value: string;
-    /**
-     * 记录 ID 。可以通过接口DescribeRecordList查到所有的解析记录列表以及对应的RecordId
-     */
-    RecordId: number;
-    /**
-     * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。可以通过接口DescribeDomainList查到所有的Domain以及DomainId
-     */
-    DomainId?: number;
-    /**
-     * 主机记录，如 www，如果不传，默认为 @。
-     */
-    SubDomain?: string;
-    /**
-     * 线路的 ID，通过 API 记录线路获得，英文字符串，比如：10=1。参数RecordLineId优先级高于RecordLine，如果同时传递二者，优先使用RecordLineId参数。
-     */
-    RecordLineId?: string;
-    /**
-     * MX 优先级，当记录类型是 MX 时有效，范围1-20，MX 记录时必选。
-     */
-    MX?: number;
-    /**
-     * TTL，范围1-604800，不同等级域名最小值不同。
-     */
-    TTL?: number;
-    /**
-     * 权重信息，0到100的整数。0 表示关闭，不传该参数，表示不设置权重信息。
-     */
-    Weight?: number;
-    /**
-     * 记录初始状态，取值范围为 ENABLE 和 DISABLE 。默认为 ENABLE ，如果传入 DISABLE，解析不会生效，也不会验证负载均衡的限制。
-     */
-    Status?: string;
-    /**
-     * 记录的备注信息。传空删除备注。
-     */
-    Remark?: string;
+    RequestId?: string;
 }
 /**
  * 批量任务中的记录信息
@@ -2048,17 +2021,17 @@ export interface DescribeRecordResponse {
     RequestId?: string;
 }
 /**
- * ModifyRecord返回参数结构体
+ * DescribeRecordLineCategoryList请求参数结构体
  */
-export interface ModifyRecordResponse {
+export interface DescribeRecordLineCategoryListRequest {
     /**
-     * 记录ID
+     * 要查询线路列表的域名。
      */
-    RecordId?: number;
+    Domain: string;
     /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     * 要查询线路列表的域名 ID。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain。可以通过接口 DescribeDomainList 查到所有的 Domain 以及 DomainId。
      */
-    RequestId?: string;
+    DomainId?: number;
 }
 /**
  * ModifyRecordToGroup返回参数结构体
@@ -3952,6 +3925,39 @@ export interface CreateDomainCustomLineRequest {
     DomainId?: number;
 }
 /**
+ * 域名解析记录线路信息
+ */
+export interface LineItem {
+    /**
+     * 解析线路名称。
+     */
+    LineName?: string;
+    /**
+     * 解析线路 ID。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    LineId?: string;
+    /**
+     * 当前线路在当前域名下是否可用。
+     */
+    Useful?: boolean;
+    /**
+     * 当前线路最低套餐等级要求。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Grade?: string;
+    /**
+     * 当前线路分类下的子线路列表。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SubGroup?: Array<LineItem>;
+    /**
+     * 自定义线路分组内包含的线路。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Lines?: Array<string>;
+}
+/**
  * CreateDeal返回参数结构体
  */
 export interface CreateDealResponse {
@@ -4247,6 +4253,67 @@ export interface ModifyDynamicDNSResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * ModifyRecord请求参数结构体
+ */
+export interface ModifyRecordRequest {
+    /**
+     * 域名
+     */
+    Domain: string;
+    /**
+     * 记录类型，通过 API 记录类型获得，大写英文，比如：A 。
+     */
+    RecordType: string;
+    /**
+     * 记录线路，通过 API 记录线路获得，中文，比如：默认。
+     */
+    RecordLine: string;
+    /**
+     * 记录值，如 IP : 200.200.200.200， CNAME : cname.dnspod.com.， MX : mail.dnspod.com.。
+     */
+    Value: string;
+    /**
+     * 记录 ID 。可以通过接口DescribeRecordList查到所有的解析记录列表以及对应的RecordId
+     */
+    RecordId: number;
+    /**
+     * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。可以通过接口DescribeDomainList查到所有的Domain以及DomainId
+     */
+    DomainId?: number;
+    /**
+     * 主机记录，如 www，如果不传，默认为 @。
+     */
+    SubDomain?: string;
+    /**
+     * 线路的 ID，通过 API 记录线路获得，英文字符串，比如：10=1。参数RecordLineId优先级高于RecordLine，如果同时传递二者，优先使用RecordLineId参数。
+     */
+    RecordLineId?: string;
+    /**
+     * MX 优先级，当记录类型是 MX 时有效，范围1-20，MX 记录时必选。
+     */
+    MX?: number;
+    /**
+     * TTL，范围1-604800，不同等级域名最小值不同。
+     */
+    TTL?: number;
+    /**
+     * 权重信息，0到100的整数。0 表示关闭，不传该参数，表示不设置权重信息。
+     */
+    Weight?: number;
+    /**
+     * 记录初始状态，取值范围为 ENABLE 和 DISABLE 。默认为 ENABLE ，如果传入 DISABLE，解析不会生效，也不会验证负载均衡的限制。
+     */
+    Status?: string;
+    /**
+     * 记录的备注信息。传空删除备注。
+     */
+    Remark?: string;
+    /**
+     * 开启DNSSEC时，强制将其它记录修改为CNAME/URL记录
+     */
+    DnssecConflictMode?: string;
 }
 /**
  * DescribeSnapshotRollbackResult请求参数结构体

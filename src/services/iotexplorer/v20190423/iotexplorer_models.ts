@@ -4531,6 +4531,46 @@ export interface InstanceDetail {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Status?: number
+  /**
+   * 消息上下行配置TPS
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UpDownTPS?: number
+  /**
+   * 当前消息上下行TPS
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UpDownCurrentTPS?: number
+  /**
+   * 消息转发配置TPS
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ForwardTPS?: number
+  /**
+   * 消息转发当前TPS
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ForwardCurrentTPS?: number
+  /**
+   * 实例单元数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CellNum?: number
+  /**
+   * 实例Tag
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BillingTag?: string
+  /**
+   * 每日消息数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EverydayFreeMessageCount?: number
+  /**
+   * 最大在线设备数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MaxDeviceOnlineCount?: number
 }
 
 /**

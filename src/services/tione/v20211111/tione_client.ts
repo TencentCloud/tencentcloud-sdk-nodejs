@@ -72,10 +72,11 @@ import {
   CFSConfig,
   DescribeTrainingMetricsRequest,
   CreateNotebookImageRequest,
+  StartNotebookRequest,
   APIConfigDetail,
   InferTemplate,
   DescribeModelAccelerateVersionsResponse,
-  StartNotebookRequest,
+  DescribeBuildInImagesRequest,
   SSHConfig,
   StartTrainingTaskRequest,
   StopBatchTaskRequest,
@@ -159,6 +160,7 @@ import {
   CreatePresignedNotebookUrlRequest,
   ModifyNotebookResponse,
   DescribeModelServiceResponse,
+  DescribeBuildInImagesResponse,
   DescribeDatasetsResponse,
   ModelSource,
   CreateBatchModelAccTasksRequest,
@@ -390,13 +392,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询单个服务组
+   * 获取内置镜像列表
    */
-  async DescribeModelServiceGroup(
-    req: DescribeModelServiceGroupRequest,
-    cb?: (error: string, rep: DescribeModelServiceGroupResponse) => void
-  ): Promise<DescribeModelServiceGroupResponse> {
-    return this.request("DescribeModelServiceGroup", req, cb)
+  async DescribeBuildInImages(
+    req?: DescribeBuildInImagesRequest,
+    cb?: (error: string, rep: DescribeBuildInImagesResponse) => void
+  ): Promise<DescribeBuildInImagesResponse> {
+    return this.request("DescribeBuildInImages", req, cb)
   }
 
   /**
@@ -917,6 +919,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeBatchTaskResponse) => void
   ): Promise<DescribeBatchTaskResponse> {
     return this.request("DescribeBatchTask", req, cb)
+  }
+
+  /**
+   * 查询单个服务组
+   */
+  async DescribeModelServiceGroup(
+    req: DescribeModelServiceGroupRequest,
+    cb?: (error: string, rep: DescribeModelServiceGroupResponse) => void
+  ): Promise<DescribeModelServiceGroupResponse> {
+    return this.request("DescribeModelServiceGroup", req, cb)
   }
 
   /**

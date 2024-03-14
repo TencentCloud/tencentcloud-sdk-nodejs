@@ -84,7 +84,7 @@ import {
   DescribeConfigMachineGroupsRequest,
   MetaTagInfo,
   CreateCosRechargeRequest,
-  DescribeKafkaUserRequest,
+  ModifyAlarmShieldResponse,
   ExtractRuleInfo,
   CreateAlarmShieldResponse,
   DeleteDataTransformResponse,
@@ -139,7 +139,6 @@ import {
   CreateKafkaRechargeResponse,
   ModifyScheduledSqlRequest,
   DeleteConfigResponse,
-  ModifyAlarmShieldResponse,
   CreateDeliverCloudFunctionRequest,
   DeleteConsumerRequest,
   QueryRangeMetricResponse,
@@ -270,7 +269,6 @@ import {
   CheckRechargeKafkaServerResponse,
   ModifyCosRechargeRequest,
   DescribeLogsetsRequest,
-  DescribeKafkaUserResponse,
   ParquetInfo,
   DeleteTopicResponse,
   CosRechargeInfo,
@@ -336,16 +334,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateIndexResponse) => void
   ): Promise<CreateIndexResponse> {
     return this.request("CreateIndex", req, cb)
-  }
-
-  /**
-   * 查询指定时刻指标的最新值
-   */
-  async QueryMetric(
-    req: QueryMetricRequest,
-    cb?: (error: string, rep: QueryMetricResponse) => void
-  ): Promise<QueryMetricResponse> {
-    return this.request("QueryMetric", req, cb)
   }
 
   /**
@@ -469,13 +457,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取机器组绑定的采集规则配置
+   * 查询指定时刻指标的最新值
    */
-  async DescribeMachineGroupConfigs(
-    req: DescribeMachineGroupConfigsRequest,
-    cb?: (error: string, rep: DescribeMachineGroupConfigsResponse) => void
-  ): Promise<DescribeMachineGroupConfigsResponse> {
-    return this.request("DescribeMachineGroupConfigs", req, cb)
+  async QueryMetric(
+    req: QueryMetricRequest,
+    cb?: (error: string, rep: QueryMetricResponse) => void
+  ): Promise<QueryMetricResponse> {
+    return this.request("QueryMetric", req, cb)
   }
 
   /**
@@ -1001,16 +989,6 @@ API返回数据包最大49MB，建议启用 gzip 压缩（HTTP Request Header Ac
   }
 
   /**
-   * 本接口用于获取kafka用户信息
-   */
-  async DescribeKafkaUser(
-    req: DescribeKafkaUserRequest,
-    cb?: (error: string, rep: DescribeKafkaUserResponse) => void
-  ): Promise<DescribeKafkaUserResponse> {
-    return this.request("DescribeKafkaUser", req, cb)
-  }
-
-  /**
    * 本接口用于修改日志主题。
    */
   async ModifyTopic(
@@ -1302,6 +1280,16 @@ cls.pb.cc cls.pb.h cls.proto
     cb?: (error: string, rep: ModifyLogsetResponse) => void
   ): Promise<ModifyLogsetResponse> {
     return this.request("ModifyLogset", req, cb)
+  }
+
+  /**
+   * 获取机器组绑定的采集规则配置
+   */
+  async DescribeMachineGroupConfigs(
+    req: DescribeMachineGroupConfigsRequest,
+    cb?: (error: string, rep: DescribeMachineGroupConfigsResponse) => void
+  ): Promise<DescribeMachineGroupConfigsResponse> {
+    return this.request("DescribeMachineGroupConfigs", req, cb)
   }
 
   /**

@@ -4830,6 +4830,21 @@ export interface TableLineageInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     TableType?: string;
+    /**
+     * datasourceName
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DatasourceName?: string;
+    /**
+     * DatabaseName
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DatabaseName?: string;
+    /**
+     * DatabaseId
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DatabaseId?: string;
 }
 /**
  * DescribeWorkflowTaskCount返回参数结构体
@@ -18905,6 +18920,21 @@ export interface TableMeta {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Location?: string;
+    /**
+     * 判断是否是分区表1 是 0否
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IsPartitionTable?: number;
+    /**
+     * 分区字段 key
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PartitionColumns?: Array<string>;
+    /**
+     * 生命周期-分区保留天数【分区保留策略时有效】
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PartitionExpireDays?: number;
 }
 /**
  * CountOpsInstanceState返回参数结构体

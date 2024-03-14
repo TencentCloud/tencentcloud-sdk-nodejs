@@ -76,6 +76,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UpdateLogstashPipelineDesc", req, cb);
     }
     /**
+     * 查询快照信息接口
+     */
+    async DescribeUserCosSnapshotList(req, cb) {
+        return this.request("DescribeUserCosSnapshotList", req, cb);
+    }
+    /**
      * 销毁集群实例
      */
     async DeleteInstance(req, cb) {
@@ -106,10 +112,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UpdateDiagnoseSettings", req, cb);
     }
     /**
-     * 查询用户该地域下符合条件的所有实例
+     * cos迁移流程
      */
-    async DescribeInstances(req, cb) {
-        return this.request("DescribeInstances", req, cb);
+    async CreateCosMigrateToServerlessInstance(req, cb) {
+        return this.request("CreateCosMigrateToServerlessInstance", req, cb);
     }
     /**
      * 变更插件列表
@@ -127,6 +133,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async UpdateLogstashInstance(req, cb) {
         return this.request("UpdateLogstashInstance", req, cb);
+    }
+    /**
+     * 检查cos迁移索引元数据
+     */
+    async CheckMigrateIndexMetaData(req, cb) {
+        return this.request("CheckMigrateIndexMetaData", req, cb);
     }
     /**
      * 更新实例Jdk配置
@@ -256,10 +268,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteLogstashPipelines", req, cb);
     }
     /**
-     * 用于重启集群节点
+     * 查询用户该地域下符合条件的所有实例
      */
-    async RestartNodes(req, cb) {
-        return this.request("RestartNodes", req, cb);
+    async DescribeInstances(req, cb) {
+        return this.request("DescribeInstances", req, cb);
     }
     /**
      * 更新Serverless索引空间
@@ -290,6 +302,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeLogstashInstanceLogs(req, cb) {
         return this.request("DescribeLogstashInstanceLogs", req, cb);
+    }
+    /**
+     * 用于重启集群节点
+     */
+    async RestartNodes(req, cb) {
+        return this.request("RestartNodes", req, cb);
     }
     /**
      * 查看Serverless空间子用户

@@ -92,6 +92,7 @@ import {
   ModifyLiveTranscodeTemplateRequest,
   ForbidLiveDomainResponse,
   CreateRecordTaskRequest,
+  TaskDurationInfo,
   CallBackRuleInfo,
   DescribeLivePadTemplateResponse,
   ResumeLiveStreamRequest,
@@ -216,6 +217,7 @@ import {
   DeleteLiveRecordRuleResponse,
   DeleteLiveRecordRuleRequest,
   StopScreenshotTaskRequest,
+  DescribePullTransformPushInfoRequest,
   PublishTime,
   FlvSpecialParam,
   DescribeLiveCallbackTemplateResponse,
@@ -280,6 +282,7 @@ import {
   DescribeLiveCallbackRulesRequest,
   DescribeConcurrentRecordStreamNumRequest,
   DeleteScreenshotTaskResponse,
+  DescribePullTransformPushInfoResponse,
   DescribeLiveStreamStateRequest,
   CreateLiveRecordTemplateResponse,
   EnableLiveDomainRequest,
@@ -1167,6 +1170,16 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
     cb?: (error: string, rep: ModifyLivePullStreamTaskResponse) => void
   ): Promise<ModifyLivePullStreamTaskResponse> {
     return this.request("ModifyLivePullStreamTask", req, cb)
+  }
+
+  /**
+   * 查询拉流转推任务的时长信息。
+   */
+  async DescribePullTransformPushInfo(
+    req: DescribePullTransformPushInfoRequest,
+    cb?: (error: string, rep: DescribePullTransformPushInfoResponse) => void
+  ): Promise<DescribePullTransformPushInfoResponse> {
+    return this.request("DescribePullTransformPushInfo", req, cb)
   }
 
   /**

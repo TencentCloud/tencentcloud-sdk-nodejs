@@ -276,57 +276,29 @@ export interface DiagnoseInstanceResponse {
 }
 
 /**
- * CreateServerlessInstance请求参数结构体
+ * CreateServerlessSpaceV2请求参数结构体
  */
-export interface CreateServerlessInstanceRequest {
+export interface CreateServerlessSpaceV2Request {
   /**
-   * 可用区
+   * vpc信息
    */
-  Zone: string
+  VpcInfo: Array<VpcInfo>
   /**
-   * 私有网络ID
+   * 索引空间名
    */
-  VpcId: string
+  SpaceName?: string
   /**
-   * 子网ID
+   * 空间名称
    */
-  SubnetId: string
+  Zone?: string
   /**
-   * 索引名，需以-AppId结尾
-   */
-  IndexName: string
-  /**
-   * 创建的索引元数据JSON，如mappings、settings
-   */
-  IndexMetaJson?: string
-  /**
-   * 创建索引的空间ID
-   */
-  SpaceId?: string
-  /**
-   * 创建索引的用户名
-   */
-  Username?: string
-  /**
-   * 创建索引的密码
-   */
-  Password?: string
-  /**
-   * 创建数据接入
-   */
-  ServerlessDi?: ServerlessDi
-  /**
-   * 是否自行添加白名单ip
-   */
-  AutoGetIp?: number
-  /**
-   * 标签信息
-   */
-  TagList?: Array<TagInfo>
-  /**
-   * kibana公网白名单
+   * 白名单列表
    */
   KibanaWhiteIpList?: Array<string>
+  /**
+   * 空间id
+   */
+  ZoneId?: number
 }
 
 /**
@@ -649,6 +621,40 @@ export interface UpdateServerlessSpaceRequest {
    * kibana公网白名单
    */
   KibanaPublicAcl?: EsAcl
+}
+
+/**
+ * 实例专用主节点相关信息
+ */
+export interface MasterNodeInfo {
+  /**
+   * 是否启用了专用主节点
+   */
+  EnableDedicatedMaster: boolean
+  /**
+   * 专用主节点规格<li>ES.S1.SMALL2：1核2G</li><li>ES.S1.MEDIUM4：2核4G</li><li>ES.S1.MEDIUM8：2核8G</li><li>ES.S1.LARGE16：4核16G</li><li>ES.S1.2XLARGE32：8核32G</li><li>ES.S1.4XLARGE32：16核32G</li><li>ES.S1.4XLARGE64：16核64G</li>
+   */
+  MasterNodeType: string
+  /**
+   * 专用主节点个数
+   */
+  MasterNodeNum: number
+  /**
+   * 专用主节点CPU核数
+   */
+  MasterNodeCpuNum: number
+  /**
+   * 专用主节点内存大小，单位GB
+   */
+  MasterNodeMemSize: number
+  /**
+   * 专用主节点磁盘大小，单位GB
+   */
+  MasterNodeDiskSize: number
+  /**
+   * 专用主节点磁盘类型
+   */
+  MasterNodeDiskType: string
 }
 
 /**
@@ -1074,21 +1080,25 @@ export interface SubTaskDetail {
 }
 
 /**
- * 智能运维支持的诊断项和元信息
+ * CheckMigrateIndexMetaData返回参数结构体
  */
-export interface DiagnoseJobMeta {
+export interface CheckMigrateIndexMetaDataResponse {
   /**
-   * 智能运维诊断项英文名
+   * 不存在于目标索引时间字段相同的字段
    */
-  JobName: string
+  MappingTimeFieldCheckFailedIndexArr?: Array<string>
   /**
-   * 智能运维诊断项中文名
+   * @timestamp不为date类型，与目标索引时间字段冲突
    */
-  JobZhName: string
+  MappingTimeTypeCheckFailedIndexArr?: Array<string>
   /**
-   * 智能运维诊断项描述
+   * 索引的创建时间不在 serverless的存储周期内
    */
-  JobDescription: string
+  SettingCheckFailedIndexArr?: Array<string>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1211,41 +1221,13 @@ export interface InstanceLog {
 }
 
 /**
- * 智能运维诊断结果
+ * CreateIndex返回参数结构体
  */
-export interface DiagnoseResult {
+export interface CreateIndexResponse {
   /**
-   * ES实例ID
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  InstanceId: string
-  /**
-   * 诊断报告ID
-   */
-  RequestId: string
-  /**
-   * 诊断触发时间
-   */
-  CreateTime: string
-  /**
-   * 诊断是否完成
-   */
-  Completed: boolean
-  /**
-   * 诊断总得分
-   */
-  Score: number
-  /**
-   * 诊断类型，2 定时诊断，3 客户手动触发诊断
-   */
-  JobType: number
-  /**
-   * 诊断参数，如诊断时间，诊断索引等
-   */
-  JobParam: JobParam
-  /**
-   * 诊断项结果列表
-   */
-  JobResults: Array<DiagnoseJobResult>
+  RequestId?: string
 }
 
 /**
@@ -1285,6 +1267,49 @@ export interface LogDetail {
 }
 
 /**
+ * DescribeLogstashInstanceLogs请求参数结构体
+ */
+export interface DescribeLogstashInstanceLogsRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+  /**
+   * 日志类型，默认值为1
+<li>1, 主日志</li>
+<li>2, 慢日志</li>
+<li>3, GC日志</li>
+   */
+  LogType?: number
+  /**
+   * 搜索词，支持LUCENE语法，如 level:WARN、ip:1.1.1.1、message:test-index等
+   */
+  SearchKey?: string
+  /**
+   * 日志开始时间，格式为YYYY-MM-DD HH:MM:SS, 如2019-01-22 20:15:53
+   */
+  StartTime?: string
+  /**
+   * 日志结束时间，格式为YYYY-MM-DD HH:MM:SS, 如2019-01-22 20:15:53
+   */
+  EndTime?: string
+  /**
+   * 分页起始值, 默认值为0
+   */
+  Offset?: number
+  /**
+   * 分页大小，默认值为100，最大值100
+   */
+  Limit?: number
+  /**
+   * 时间排序方式，默认值为0
+<li>0, 降序</li>
+<li>1, 升序</li>
+   */
+  OrderByType?: number
+}
+
+/**
  * GetRequestTargetNodeTypes请求参数结构体
  */
 export interface GetRequestTargetNodeTypesRequest {
@@ -1292,6 +1317,24 @@ export interface GetRequestTargetNodeTypesRequest {
    * 实例ID
    */
   InstanceId: string
+}
+
+/**
+ * 智能运维支持的诊断项和元信息
+ */
+export interface DiagnoseJobMeta {
+  /**
+   * 智能运维诊断项英文名
+   */
+  JobName: string
+  /**
+   * 智能运维诊断项中文名
+   */
+  JobZhName: string
+  /**
+   * 智能运维诊断项描述
+   */
+  JobDescription: string
 }
 
 /**
@@ -1339,29 +1382,57 @@ export interface GetDiagnoseSettingsResponse {
 }
 
 /**
- * CreateServerlessSpaceV2请求参数结构体
+ * CreateServerlessInstance请求参数结构体
  */
-export interface CreateServerlessSpaceV2Request {
+export interface CreateServerlessInstanceRequest {
   /**
-   * vpc信息
+   * 可用区
    */
-  VpcInfo: Array<VpcInfo>
+  Zone: string
   /**
-   * 索引空间名
+   * 私有网络ID
    */
-  SpaceName?: string
+  VpcId: string
   /**
-   * 空间名称
+   * 子网ID
    */
-  Zone?: string
+  SubnetId: string
   /**
-   * 白名单列表
+   * 索引名，需以-AppId结尾
+   */
+  IndexName: string
+  /**
+   * 创建的索引元数据JSON，如mappings、settings
+   */
+  IndexMetaJson?: string
+  /**
+   * 创建索引的空间ID
+   */
+  SpaceId?: string
+  /**
+   * 创建索引的用户名
+   */
+  Username?: string
+  /**
+   * 创建索引的密码
+   */
+  Password?: string
+  /**
+   * 创建数据接入
+   */
+  ServerlessDi?: ServerlessDi
+  /**
+   * 是否自行添加白名单ip
+   */
+  AutoGetIp?: number
+  /**
+   * 标签信息
+   */
+  TagList?: Array<TagInfo>
+  /**
+   * kibana公网白名单
    */
   KibanaWhiteIpList?: Array<string>
-  /**
-   * 空间id
-   */
-  ZoneId?: number
 }
 
 /**
@@ -2213,13 +2284,19 @@ export interface ClusterView {
 }
 
 /**
- * CreateIndex返回参数结构体
+ * 普通索引信息列表
  */
-export interface CreateIndexResponse {
+export interface CommonIndexInfo {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 普通索引名
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  RequestId?: string
+  IndexName?: string
+  /**
+   * 分片状态
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsShardComplete?: number
 }
 
 /**
@@ -2260,6 +2337,44 @@ export interface DeleteLogstashPipelinesRequest {
    * 管道ID列表
    */
   PipelineIds?: Array<string>
+}
+
+/**
+ * 智能运维诊断结果
+ */
+export interface DiagnoseResult {
+  /**
+   * ES实例ID
+   */
+  InstanceId: string
+  /**
+   * 诊断报告ID
+   */
+  RequestId: string
+  /**
+   * 诊断触发时间
+   */
+  CreateTime: string
+  /**
+   * 诊断是否完成
+   */
+  Completed: boolean
+  /**
+   * 诊断总得分
+   */
+  Score: number
+  /**
+   * 诊断类型，2 定时诊断，3 客户手动触发诊断
+   */
+  JobType: number
+  /**
+   * 诊断参数，如诊断时间，诊断索引等
+   */
+  JobParam: JobParam
+  /**
+   * 诊断项结果列表
+   */
+  JobResults: Array<DiagnoseJobResult>
 }
 
 /**
@@ -3277,6 +3392,40 @@ export interface DescribeInstancesRequest {
 }
 
 /**
+ * CheckMigrateIndexMetaData请求参数结构体
+ */
+export interface CheckMigrateIndexMetaDataRequest {
+  /**
+   * 索引 id
+   */
+  ServerlessId: string
+  /**
+   * 快照名
+   */
+  Snapshot: string
+  /**
+   * Cos桶名
+   */
+  CosBucket?: string
+  /**
+   * BasePath路径
+   */
+  BasePath?: string
+  /**
+   * 云上集群名
+   */
+  ClusterInstanceId?: string
+  /**
+   * 普通索引名列表
+   */
+  CommonIndexArr?: Array<string>
+  /**
+   * 自治索引名列表
+   */
+  DataStreamArr?: Array<string>
+}
+
+/**
  * ES 词库信息
  */
 export interface EsDictionaryInfo {
@@ -3336,6 +3485,22 @@ export interface RestartNodesRequest {
    * 节点状态，在蓝绿模式中使用；离线节点蓝绿有风险
    */
   IsOffline?: boolean
+}
+
+/**
+ * 自治索引信息
+ */
+export interface DataStreamInfo {
+  /**
+   * 自治索引名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DataStreamName?: string
+  /**
+   * 分片状态
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsShardComplete?: number
 }
 
 /**
@@ -3443,37 +3608,37 @@ export interface DiSourceTke {
 }
 
 /**
- * 实例专用主节点相关信息
+ * CreateCosMigrateToServerlessInstance请求参数结构体
  */
-export interface MasterNodeInfo {
+export interface CreateCosMigrateToServerlessInstanceRequest {
   /**
-   * 是否启用了专用主节点
+   * 快照名
    */
-  EnableDedicatedMaster: boolean
+  Snapshot: string
   /**
-   * 专用主节点规格<li>ES.S1.SMALL2：1核2G</li><li>ES.S1.MEDIUM4：2核4G</li><li>ES.S1.MEDIUM8：2核8G</li><li>ES.S1.LARGE16：4核16G</li><li>ES.S1.2XLARGE32：8核32G</li><li>ES.S1.4XLARGE32：16核32G</li><li>ES.S1.4XLARGE64：16核64G</li>
+   * 索引 id
    */
-  MasterNodeType: string
+  ServerlessId: string
   /**
-   * 专用主节点个数
+   * cos 桶名
    */
-  MasterNodeNum: number
+  CosBucket?: string
   /**
-   * 专用主节点CPU核数
+   * BasePath 路径
    */
-  MasterNodeCpuNum: number
+  BasePath?: string
   /**
-   * 专用主节点内存大小，单位GB
+   * 云上集群 id
    */
-  MasterNodeMemSize: number
+  ClusterInstanceId?: string
   /**
-   * 专用主节点磁盘大小，单位GB
+   * 待迁移普通索引名列表
    */
-  MasterNodeDiskSize: number
+  CommonIndexArr?: Array<string>
   /**
-   * 专用主节点磁盘类型
+   * 待迁移自治索引名列表
    */
-  MasterNodeDiskType: string
+  DataStreamArr?: Array<string>
 }
 
 /**
@@ -3550,6 +3715,16 @@ export interface UpdateJdkResponse {
  * RestartKibana返回参数结构体
  */
 export interface RestartKibanaResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * RestartNodes返回参数结构体
+ */
+export interface RestartNodesResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3800,6 +3975,20 @@ export interface LogstashNodeInfo {
    * 节点端口
    */
   Port: number
+}
+
+/**
+ * CreateCosMigrateToServerlessInstance返回参数结构体
+ */
+export interface CreateCosMigrateToServerlessInstanceResponse {
+  /**
+   * 迁移 taskid
+   */
+  TaskId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -4248,46 +4437,44 @@ export interface DiSourceCvm {
 }
 
 /**
- * DescribeLogstashInstanceLogs请求参数结构体
+ * 无
  */
-export interface DescribeLogstashInstanceLogsRequest {
+export interface CosSnapShotInfo {
   /**
-   * 实例ID
+   * cos 桶名
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  InstanceId: string
+  CosBucket?: string
   /**
-   * 日志类型，默认值为1
-<li>1, 主日志</li>
-<li>2, 慢日志</li>
-<li>3, GC日志</li>
+   * base path
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  LogType?: number
+  BasePath?: string
   /**
-   * 搜索词，支持LUCENE语法，如 level:WARN、ip:1.1.1.1、message:test-index等
+   * 快照名
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  SearchKey?: string
+  SnapshotName?: string
   /**
-   * 日志开始时间，格式为YYYY-MM-DD HH:MM:SS, 如2019-01-22 20:15:53
+   * 状态
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  StartTime?: string
+  State?: string
   /**
-   * 日志结束时间，格式为YYYY-MM-DD HH:MM:SS, 如2019-01-22 20:15:53
+   * 快照版本
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  EndTime?: string
+  Version?: string
   /**
-   * 分页起始值, 默认值为0
+   * 普通索引信息列表
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Offset?: number
+  CommonIndexArr?: Array<CommonIndexInfo>
   /**
-   * 分页大小，默认值为100，最大值100
+   * 自治索引信息列表
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Limit?: number
-  /**
-   * 时间排序方式，默认值为0
-<li>0, 降序</li>
-<li>1, 升序</li>
-   */
-  OrderByType?: number
+  DataStreamArr?: Array<DataStreamInfo>
 }
 
 /**
@@ -4368,6 +4555,24 @@ export interface StopLogstashPipelinesResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeUserCosSnapshotList请求参数结构体
+ */
+export interface DescribeUserCosSnapshotListRequest {
+  /**
+   * cos桶名
+   */
+  CosBucket?: string
+  /**
+   * bucket 桶下的备份路径
+   */
+  BasePath?: string
+  /**
+   * 云上集群迁移集群名
+   */
+  ClusterInstanceId?: string
 }
 
 /**
@@ -4465,9 +4670,17 @@ export interface DescribeInstancePluginListRequest {
 }
 
 /**
- * RestartNodes返回参数结构体
+ * DescribeUserCosSnapshotList返回参数结构体
  */
-export interface RestartNodesResponse {
+export interface DescribeUserCosSnapshotListResponse {
+  /**
+   * cos 快照信息列表
+   */
+  CosSnapshotInfoList?: Array<CosSnapShotInfo>
+  /**
+   * cos 快照数量
+   */
+  TotalCount?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

@@ -118,9 +118,9 @@ it("tione.v20211111.DescribeEvents", async function () {
     }
 })
 
-it("tione.v20211111.DescribeModelServiceGroup", async function () {
+it("tione.v20211111.DescribeBuildInImages", async function () {
     try {
-       const data = await client.DescribeModelServiceGroup({})
+       const data = await client.DescribeBuildInImages({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -641,6 +641,16 @@ it("tione.v20211111.CreateBatchModelAccTasks", async function () {
 it("tione.v20211111.DescribeBatchTask", async function () {
     try {
        const data = await client.DescribeBatchTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tione.v20211111.DescribeModelServiceGroup", async function () {
+    try {
+       const data = await client.DescribeModelServiceGroup({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

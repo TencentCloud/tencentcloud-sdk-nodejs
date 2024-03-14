@@ -4109,7 +4109,7 @@ export interface ImageInfo {
      */
     Id: number;
     /**
-     * 图片url
+     * 图片url(暂不支持传图片Url信息,请使用Base64字段传递图片的Base64编码)
      */
     Url?: string;
     /**

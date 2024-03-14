@@ -3653,6 +3653,18 @@ export interface DescribeHiveQueriesRequest {
      * 分页大小，合法范围[1,100]
      */
     Limit: number;
+    /**
+     * 执行状态,ERROR等
+     */
+    State?: Array<string>;
+    /**
+     * 结束时间大于的时间点
+     */
+    EndTimeGte?: number;
+    /**
+     * 结束时间小于时间点
+     */
+    EndTimeLte?: number;
 }
 /**
  * CreateCluster返回参数结构体
@@ -3934,6 +3946,18 @@ export interface DescribeImpalaQueriesRequest {
      * 分页大小，合法范围[1,100]
      */
     Limit: number;
+    /**
+     * 执行状态，CREATED、INITIALIZED、COMPILED、RUNNING、FINISHED、EXCEPTION
+     */
+    State?: Array<string>;
+    /**
+     * 结束时间大于的时间点
+     */
+    EndTimeGte?: number;
+    /**
+     * 结束时间小于的时间点
+     */
+    EndTimeLte?: number;
 }
 /**
  * 操作的进程范围

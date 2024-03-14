@@ -2077,6 +2077,16 @@ export interface CreateNotebookImageRequest {
 }
 
 /**
+ * StartNotebook请求参数结构体
+ */
+export interface StartNotebookRequest {
+  /**
+   * notebook id
+   */
+  Id: string
+}
+
+/**
  * 接口描述信息
  */
 export interface APIConfigDetail {
@@ -2178,14 +2188,9 @@ export interface DescribeModelAccelerateVersionsResponse {
 }
 
 /**
- * StartNotebook请求参数结构体
+ * DescribeBuildInImages请求参数结构体
  */
-export interface StartNotebookRequest {
-  /**
-   * notebook id
-   */
-  Id: string
-}
+export type DescribeBuildInImagesRequest = null
 
 /**
  * notebook ssh端口配置
@@ -4781,6 +4786,20 @@ export interface DescribeModelServiceResponse {
    * 服务信息
    */
   Service?: Service
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeBuildInImages返回参数结构体
+ */
+export interface DescribeBuildInImagesResponse {
+  /**
+   * 内置镜像详情列表
+   */
+  BuildInImageInfos?: Array<ImageInfo>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

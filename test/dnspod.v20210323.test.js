@@ -308,6 +308,16 @@ it("dnspod.v20210323.DeleteShareDomain", async function () {
     }
 })
 
+it("dnspod.v20210323.ModifyDomainRemark", async function () {
+    try {
+       const data = await client.ModifyDomainRemark({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dnspod.v20210323.DescribeDomain", async function () {
     try {
        const data = await client.DescribeDomain({})
@@ -498,9 +508,9 @@ it("dnspod.v20210323.CreateRecord", async function () {
     }
 })
 
-it("dnspod.v20210323.ModifyDomainRemark", async function () {
+it("dnspod.v20210323.DescribeRecordLineCategoryList", async function () {
     try {
-       const data = await client.ModifyDomainRemark({})
+       const data = await client.DescribeRecordLineCategoryList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

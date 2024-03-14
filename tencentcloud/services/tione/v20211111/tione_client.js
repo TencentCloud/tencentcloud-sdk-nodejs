@@ -88,10 +88,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeEvents", req, cb);
     }
     /**
-     * 查询单个服务组
+     * 获取内置镜像列表
      */
-    async DescribeModelServiceGroup(req, cb) {
-        return this.request("DescribeModelServiceGroup", req, cb);
+    async DescribeBuildInImages(req, cb) {
+        return this.request("DescribeBuildInImages", req, cb);
     }
     /**
      * 启动Notebook
@@ -404,6 +404,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeBatchTask(req, cb) {
         return this.request("DescribeBatchTask", req, cb);
+    }
+    /**
+     * 查询单个服务组
+     */
+    async DescribeModelServiceGroup(req, cb) {
+        return this.request("DescribeModelServiceGroup", req, cb);
     }
     /**
      * 查询资源组节点列表

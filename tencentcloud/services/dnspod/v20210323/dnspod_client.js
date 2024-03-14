@@ -203,6 +203,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteShareDomain", req, cb);
     }
     /**
+     * 设置域名备注
+     */
+    async ModifyDomainRemark(req, cb) {
+        return this.request("ModifyDomainRemark", req, cb);
+    }
+    /**
      * 获取域名信息
      */
     async DescribeDomain(req, cb) {
@@ -318,10 +324,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateRecord", req, cb);
     }
     /**
-     * 设置域名备注
+     * 按分类返回线路列表
      */
-    async ModifyDomainRemark(req, cb) {
-        return this.request("ModifyDomainRemark", req, cb);
+    async DescribeRecordLineCategoryList(req, cb) {
+        return this.request("DescribeRecordLineCategoryList", req, cb);
     }
     /**
      * 判断是否有除系统默认的@-NS记录之外的记录存在

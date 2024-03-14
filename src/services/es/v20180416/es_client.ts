@@ -25,7 +25,7 @@ import {
   LogstashInstanceInfo,
   OperationDetail,
   DiagnoseInstanceResponse,
-  CreateServerlessInstanceRequest,
+  CreateServerlessSpaceV2Request,
   EsPublicAcl,
   DictInfo,
   DescribeDiagnoseResponse,
@@ -40,6 +40,7 @@ import {
   DescribeInstanceLogsResponse,
   IndexMetaField,
   UpdateServerlessSpaceRequest,
+  MasterNodeInfo,
   DiagnoseInstanceRequest,
   LogstashBindedES,
   UpdateDiagnoseSettingsRequest,
@@ -55,19 +56,21 @@ import {
   CreateServerlessSpaceV2Response,
   ServerlessSpace,
   SubTaskDetail,
-  DiagnoseJobMeta,
+  CheckMigrateIndexMetaDataResponse,
   EsConfigSetInfo,
   GetRequestTargetNodeTypesResponse,
   Operation,
   DiDataSourceCvm,
   InstanceLog,
-  DiagnoseResult,
+  CreateIndexResponse,
   DescribeServerlessSpaceUserResponse,
   LogDetail,
+  DescribeLogstashInstanceLogsRequest,
   GetRequestTargetNodeTypesRequest,
+  DiagnoseJobMeta,
   StartLogstashPipelinesRequest,
   GetDiagnoseSettingsResponse,
-  CreateServerlessSpaceV2Request,
+  CreateServerlessInstanceRequest,
   DescribeServerlessSpacesRequest,
   DeleteServerlessSpaceUserResponse,
   DiData,
@@ -101,9 +104,10 @@ import {
   SaveAndDeployLogstashPipelineRequest,
   DiDataSourceTke,
   ClusterView,
-  CreateIndexResponse,
+  CommonIndexInfo,
   InquirePriceRenewInstanceResponse,
   DeleteLogstashPipelinesRequest,
+  DiagnoseResult,
   RestartKibanaRequest,
   SaveAndDeployLogstashPipelineResponse,
   UpdateDictionariesRequest,
@@ -122,20 +126,23 @@ import {
   DeleteIndexResponse,
   DeleteServerlessSpaceUserRequest,
   DescribeInstancesRequest,
+  CheckMigrateIndexMetaDataRequest,
   EsDictionaryInfo,
   DescribeLogstashPipelinesRequest,
   RestartNodesRequest,
+  DataStreamInfo,
   DescribeIndexMetaResponse,
   ModifyEsVipSecurityGroupRequest,
   ProcessDetail,
   DiSourceTke,
-  MasterNodeInfo,
+  CreateCosMigrateToServerlessInstanceRequest,
   DeleteInstanceRequest,
   MetricDetail,
   UpgradeInstanceResponse,
   DescribeIndexMetaRequest,
   UpdateJdkResponse,
   RestartKibanaResponse,
+  RestartNodesResponse,
   UpdateIndexRequest,
   UpdateIndexResponse,
   WebNodeTypeInfo,
@@ -148,6 +155,7 @@ import {
   StopLogstashPipelinesRequest,
   DiagnoseJobResult,
   LogstashNodeInfo,
+  CreateCosMigrateToServerlessInstanceResponse,
   RestartInstanceResponse,
   BackingIndexMetaField,
   IndexSettingsField,
@@ -161,18 +169,19 @@ import {
   DescribeDiagnoseRequest,
   DescribeInstancePluginListResponse,
   DiSourceCvm,
-  DescribeLogstashInstanceLogsRequest,
+  CosSnapShotInfo,
   DiSourceTkePodLabel,
   RestartInstanceRequest,
   ZoneDetail,
   ServerlessDi,
   StopLogstashPipelinesResponse,
+  DescribeUserCosSnapshotListRequest,
   KibanaNodeInfo,
   UpdateDiagnoseSettingsResponse,
   GetDiagnoseSettingsRequest,
   EsAcl,
   DescribeInstancePluginListRequest,
-  RestartNodesResponse,
+  DescribeUserCosSnapshotListResponse,
   DeleteLogstashInstanceRequest,
   UpgradeInstanceRequest,
   DescribeViewsResponse,
@@ -271,6 +280,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询快照信息接口
+   */
+  async DescribeUserCosSnapshotList(
+    req: DescribeUserCosSnapshotListRequest,
+    cb?: (error: string, rep: DescribeUserCosSnapshotListResponse) => void
+  ): Promise<DescribeUserCosSnapshotListResponse> {
+    return this.request("DescribeUserCosSnapshotList", req, cb)
+  }
+
+  /**
    * 销毁集群实例
    */
   async DeleteInstance(
@@ -321,13 +340,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询用户该地域下符合条件的所有实例
+   * cos迁移流程
    */
-  async DescribeInstances(
-    req: DescribeInstancesRequest,
-    cb?: (error: string, rep: DescribeInstancesResponse) => void
-  ): Promise<DescribeInstancesResponse> {
-    return this.request("DescribeInstances", req, cb)
+  async CreateCosMigrateToServerlessInstance(
+    req: CreateCosMigrateToServerlessInstanceRequest,
+    cb?: (error: string, rep: CreateCosMigrateToServerlessInstanceResponse) => void
+  ): Promise<CreateCosMigrateToServerlessInstanceResponse> {
+    return this.request("CreateCosMigrateToServerlessInstance", req, cb)
   }
 
   /**
@@ -353,6 +372,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: UpdateLogstashInstanceResponse) => void
   ): Promise<UpdateLogstashInstanceResponse> {
     return this.request("UpdateLogstashInstance", req, cb)
+  }
+
+  /**
+   * 检查cos迁移索引元数据
+   */
+  async CheckMigrateIndexMetaData(
+    req: CheckMigrateIndexMetaDataRequest,
+    cb?: (error: string, rep: CheckMigrateIndexMetaDataResponse) => void
+  ): Promise<CheckMigrateIndexMetaDataResponse> {
+    return this.request("CheckMigrateIndexMetaData", req, cb)
   }
 
   /**
@@ -563,13 +592,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 用于重启集群节点
+   * 查询用户该地域下符合条件的所有实例
    */
-  async RestartNodes(
-    req: RestartNodesRequest,
-    cb?: (error: string, rep: RestartNodesResponse) => void
-  ): Promise<RestartNodesResponse> {
-    return this.request("RestartNodes", req, cb)
+  async DescribeInstances(
+    req: DescribeInstancesRequest,
+    cb?: (error: string, rep: DescribeInstancesResponse) => void
+  ): Promise<DescribeInstancesResponse> {
+    return this.request("DescribeInstances", req, cb)
   }
 
   /**
@@ -620,6 +649,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeLogstashInstanceLogsResponse) => void
   ): Promise<DescribeLogstashInstanceLogsResponse> {
     return this.request("DescribeLogstashInstanceLogs", req, cb)
+  }
+
+  /**
+   * 用于重启集群节点
+   */
+  async RestartNodes(
+    req: RestartNodesRequest,
+    cb?: (error: string, rep: RestartNodesResponse) => void
+  ): Promise<RestartNodesResponse> {
+    return this.request("RestartNodes", req, cb)
   }
 
   /**

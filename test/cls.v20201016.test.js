@@ -58,16 +58,6 @@ it("cls.v20201016.CreateIndex", async function () {
     }
 })
 
-it("cls.v20201016.QueryMetric", async function () {
-    try {
-       const data = await client.QueryMetric({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("cls.v20201016.ModifyShipper", async function () {
     try {
        const data = await client.ModifyShipper({})
@@ -188,9 +178,9 @@ it("cls.v20201016.CreateConfig", async function () {
     }
 })
 
-it("cls.v20201016.DescribeMachineGroupConfigs", async function () {
+it("cls.v20201016.QueryMetric", async function () {
     try {
-       const data = await client.DescribeMachineGroupConfigs({})
+       const data = await client.QueryMetric({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -718,16 +708,6 @@ it("cls.v20201016.CreateConsumer", async function () {
     }
 })
 
-it("cls.v20201016.DescribeKafkaUser", async function () {
-    try {
-       const data = await client.DescribeKafkaUser({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("cls.v20201016.ModifyTopic", async function () {
     try {
        const data = await client.ModifyTopic({})
@@ -861,6 +841,16 @@ it("cls.v20201016.CreateScheduledSql", async function () {
 it("cls.v20201016.ModifyLogset", async function () {
     try {
        const data = await client.ModifyLogset({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cls.v20201016.DescribeMachineGroupConfigs", async function () {
+    try {
+       const data = await client.DescribeMachineGroupConfigs({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

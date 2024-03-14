@@ -502,6 +502,12 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
         return this.request("ModifyLivePullStreamTask", req, cb);
     }
     /**
+     * 查询拉流转推任务的时长信息。
+     */
+    async DescribePullTransformPushInfo(req, cb) {
+        return this.request("DescribePullTransformPushInfo", req, cb);
+    }
+    /**
      * 创建回调模板，数量上限：50，成功返回模板id后，需要调用[CreateLiveCallbackRule](/document/product/267/32638)接口将模板 ID 绑定到域名/路径使用。
 <br>回调协议相关文档：[事件消息通知](/document/product/267/32744)。
 注意：至少填写一个回调 URL。

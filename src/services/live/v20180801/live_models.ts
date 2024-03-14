@@ -1883,6 +1883,20 @@ export interface CreateRecordTaskRequest {
 }
 
 /**
+ * 拉流转推任务的时长分布信息
+ */
+export interface TaskDurationInfo {
+  /**
+   * 拉流转推任务的时间点
+   */
+  Time: string
+  /**
+   * 拉流转推任务的时长，单位为分钟
+   */
+  Duration: number
+}
+
+/**
  * 规则信息
  */
 export interface CallBackRuleInfo {
@@ -4836,6 +4850,32 @@ export interface StopScreenshotTaskRequest {
 }
 
 /**
+ * DescribePullTransformPushInfo请求参数结构体
+ */
+export interface DescribePullTransformPushInfoRequest {
+  /**
+   * 起始时间点，接口查询支持两种时间格式：
+1）YYYY-MM-DDThh:mm:ssZ：UTC时间格式，详见IOS日期格式说明文档: https://cloud.tencent.com/document/product/266/11732#I
+2）YYYY-MM-DD hh:mm:ss：使用此格式时，默认代表北京时间。
+   */
+  StartTime: string
+  /**
+   * 结束时间点，接口查询支持两种时间格式：
+1）YYYY-MM-DDThh:mm:ssZ：UTC时间格式，详见IOS日期格式说明文档: https://cloud.tencent.com/document/product/266/11732#I
+2）YYYY-MM-DD hh:mm:ss：使用此格式时，默认代表北京时间。
+支持最近三年的查询，查询开始和结束时间跨度不支持超过31天。
+   */
+  EndTime: string
+  /**
+   * 可选值：
+Mainland：查询国内数据，
+Oversea：则查询国外数据，
+默认：查询国内+国外的数据。
+   */
+  MainlandOrOversea?: string
+}
+
+/**
  * 推流时间。
  */
 export interface PublishTime {
@@ -6660,6 +6700,24 @@ NormalLive：普通直播。
  * DeleteScreenshotTask返回参数结构体
  */
 export interface DeleteScreenshotTaskResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribePullTransformPushInfo返回参数结构体
+ */
+export interface DescribePullTransformPushInfoResponse {
+  /**
+   * 时长统计数据列表
+   */
+  DataInfoList?: Array<TaskDurationInfo>
+  /**
+   * 拉流转推得总时长
+   */
+  TotalDuration?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

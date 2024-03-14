@@ -52,12 +52,6 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateIndex", req, cb);
     }
     /**
-     * 查询指定时刻指标的最新值
-     */
-    async QueryMetric(req, cb) {
-        return this.request("QueryMetric", req, cb);
-    }
-    /**
      * 修改现有的投递规则，客户如果使用此接口，需要自行处理CLS对指定bucket的写权限。
      */
     async ModifyShipper(req, cb) {
@@ -130,10 +124,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateConfig", req, cb);
     }
     /**
-     * 获取机器组绑定的采集规则配置
+     * 查询指定时刻指标的最新值
      */
-    async DescribeMachineGroupConfigs(req, cb) {
-        return this.request("DescribeMachineGroupConfigs", req, cb);
+    async QueryMetric(req, cb) {
+        return this.request("QueryMetric", req, cb);
     }
     /**
      * 本接口用于获取日志主题列表，支持分页
@@ -450,12 +444,6 @@ API返回数据包最大49MB，建议启用 gzip 压缩（HTTP Request Header Ac
         return this.request("CreateConsumer", req, cb);
     }
     /**
-     * 本接口用于获取kafka用户信息
-     */
-    async DescribeKafkaUser(req, cb) {
-        return this.request("DescribeKafkaUser", req, cb);
-    }
-    /**
      * 本接口用于修改日志主题。
      */
     async ModifyTopic(req, cb) {
@@ -692,6 +680,12 @@ cls.pb.cc cls.pb.h cls.proto
      */
     async ModifyLogset(req, cb) {
         return this.request("ModifyLogset", req, cb);
+    }
+    /**
+     * 获取机器组绑定的采集规则配置
+     */
+    async DescribeMachineGroupConfigs(req, cb) {
+        return this.request("DescribeMachineGroupConfigs", req, cb);
     }
     /**
      * 本接口用于修改数据加工任务

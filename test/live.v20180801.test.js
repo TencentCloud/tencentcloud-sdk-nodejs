@@ -708,6 +708,16 @@ it("live.v20180801.ModifyLivePullStreamTask", async function () {
     }
 })
 
+it("live.v20180801.DescribePullTransformPushInfo", async function () {
+    try {
+       const data = await client.DescribePullTransformPushInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("live.v20180801.CreateLiveCallbackTemplate", async function () {
     try {
        const data = await client.CreateLiveCallbackTemplate({})
