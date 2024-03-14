@@ -45,6 +45,7 @@ import {
   CreateParamTemplateRequest,
   DescribeClusterDetailRequest,
   ModifyResourcePackageNameRequest,
+  UpgradeProxy,
   BackupFileInfo,
   UpgradeProxyRequest,
   DescribeBinlogDownloadUrlResponse,

@@ -204,6 +204,16 @@ export interface Quota {
    */
   RiskQuota?: number
   /**
+   * AI文字数量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AigcTextQuota?: number
+  /**
+   * AI图片数量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AigcImageQuota?: number
+  /**
    * 溯源类型
 注意：此字段可能返回 null，表示取不到有效值。
    */

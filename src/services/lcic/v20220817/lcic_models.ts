@@ -145,6 +145,14 @@ video 纯视频
    * 录制文件背景图片，支持png、jpg、jpeg、bmp格式，暂不支持透明通道
    */
   RecordBackground?: string
+  /**
+   * 录制自定义场景，仅recordlayout=9的时候此参数有效
+   */
+  RecordScene?: string
+  /**
+   * 录制自定义语言，仅recordlayout=9的时候此参数有效
+   */
+  RecordLang?: string
 }
 
 /**
@@ -789,6 +797,16 @@ export interface RoomItem {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RecordBackground?: string
+  /**
+   * 录制自定义场景，仅recordlayout=9的时候此参数有效
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RecordScene?: string
+  /**
+   * 录制自定义语言，仅recordlayout=9的时候此参数有效
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RecordLang?: string
 }
 
 /**
@@ -2196,6 +2214,14 @@ video 纯视频
    */
   RTMPStreamingURL?: string
   /**
+   * 录制自定义场景，仅recordlayout=9的时候此参数有效
+   */
+  RecordScene?: string
+  /**
+   * 录制自定义语言，仅recordlayout=9的时候此参数有效
+   */
+  RecordLang?: string
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -2774,6 +2800,14 @@ export interface RoomInfo {
    * 录制文件背景图片，支持png、jpg、jpeg、bmp格式，暂不支持透明通道
    */
   RecordBackground?: string
+  /**
+   * 录制自定义场景，仅recordlayout=9的时候此参数有效
+   */
+  RecordScene?: string
+  /**
+   * 录制自定义语言，仅recordlayout=9的时候此参数有效
+   */
+  RecordLang?: string
 }
 
 /**
@@ -2895,6 +2929,14 @@ video 纯视频
    * 是否自动开始上课：0 不自动上课（默认） 1 自动上课 live_type=1的时候有效
    */
   EnableAutoStart?: number
+  /**
+   * 录制自定义场景，仅recordlayout=9的时候此参数有效
+   */
+  RecordScene?: string
+  /**
+   * 录制自定义语言，仅recordlayout=9的时候此参数有效
+   */
+  RecordLang?: string
 }
 
 /**

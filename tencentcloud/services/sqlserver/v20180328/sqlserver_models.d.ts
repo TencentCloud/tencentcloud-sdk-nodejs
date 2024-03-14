@@ -6010,6 +6010,10 @@ export interface DescribeCollationTimeZoneRequest {
   CLOUD_SSD-云服务器SSD云盘,CLOUD_HSSD-云服务器加强型SSD云盘，CLOUD_TSSD-云服务器极速型SSD云盘，CLOUD_BSSD-云服务器通用型SSD云盘,CLOUD_BASIC-云服务器云硬盘，默认取值PM
      */
     MachineType?: string;
+    /**
+     * 购买实例版本号
+     */
+    DBVersion?: string;
 }
 /**
  * ModifyDBInstanceNote请求参数结构体

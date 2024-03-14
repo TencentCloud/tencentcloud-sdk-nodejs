@@ -3492,7 +3492,7 @@ export interface DescribeFileUrlsRequest {
   /**
    * 文件对应的业务类型，目前支持：
 <ul>
-<li>**FLOW ** : 如需下载合同文件请选择此项</li>
+<li>**FLOW ** : <font color="red">如需下载合同文件请选择此项</font></li>
 <li>**TEMPLATE ** : 如需下载模板文件请选择此项</li>
 <li>**DOCUMENT  **: 如需下载文档文件请选择此项</li>
 <li>**SEAL  **: 如需下载印章图片请选择此项</li>
@@ -5616,6 +5616,31 @@ export interface ModifyIntegrationDepartmentRequest {
 }
 
 /**
+ * RenewAutoSignLicense请求参数结构体
+ */
+export interface RenewAutoSignLicenseRequest {
+  /**
+   * 执行本接口操作的员工信息。
+注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。`
+   */
+  Operator: UserInfo
+  /**
+   * 自动签使用的场景值, 可以选择的场景值如下:
+<ul><li> **E_PRESCRIPTION_AUTO_SIGN** :  电子处方场景</li><li> **OTHER** :  通用场景</li></ul>
+   */
+  SceneKey: string
+  /**
+   * 需要续期自动签的个人的信息，如姓名，证件信息等。
+   */
+  UserInfo: UserThreeFactor
+  /**
+   * 代理企业和员工的信息。
+在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。
+   */
+  Agent?: Agent
+}
+
+/**
  * 查询过滤条件
  */
 export interface Filter {
@@ -7726,6 +7751,22 @@ export interface DescribeFlowInfoResponse {
    * 合同组名称，只有在查询合同组信息时才会返回。
    */
   FlowGroupName?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * RenewAutoSignLicense返回参数结构体
+ */
+export interface RenewAutoSignLicenseResponse {
+  /**
+   * 续期成功后新的自动签许可到期时间。当且仅当已通过许可开通自动签时有值。
+
+值为unix时间戳,单位为秒。
+   */
+  LicenseTo?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

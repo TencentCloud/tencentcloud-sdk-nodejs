@@ -34,6 +34,14 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ChannelDeleteSealPolicies", req, cb);
     }
     /**
+     * 给医疗个人自动签许可续期。续期成功后，可对医疗自动签许可追加一年有效期，只可续期一次。
+
+注意: `处方单等特殊场景专用，此接口为白名单功能，使用前请联系对接的客户经理沟通。`
+     */
+    async ChannelRenewAutoSignLicense(req, cb) {
+        return this.request("ChannelRenewAutoSignLicense", req, cb);
+    }
+    /**
      * 提交企业流程审批结果
 **当前存在两种审核操作：**
 <ul>
@@ -1277,7 +1285,11 @@ Web链接访问后，会根据子客企业(**Agent中ProxyOrganizationOpenId表�
         return this.request("DescribeFlowDetailInfo", req, cb);
     }
     /**
-     * 通过此接口（ChannelDescribeBillUsageDetail）查询该第三方平台子客企业的套餐消耗详情。
+     * 通过此接口（ChannelDescribeBillUsageDetail）查询该第三方平台子客企业的套餐消耗详情。可以支持单个子客和整个应用下所有子客的查询。
+<ul>
+<li>对于单个子客企业的查询，通过指定子客的唯一标识(Agent.ProxyOrganizationOpenId)来查询该子客消耗详情</li>
+<li>对于整个应用下所有企业的查询，不需要指定子客的唯一标识，只需要传入渠道应用标识(Agent.AppId)直接查询整个应用下所有子客企业消耗详情</li>
+</ul>
      */
     async ChannelDescribeBillUsageDetail(req, cb) {
         return this.request("ChannelDescribeBillUsageDetail", req, cb);

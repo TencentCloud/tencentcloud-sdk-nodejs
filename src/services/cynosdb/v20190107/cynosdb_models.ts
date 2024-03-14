@@ -643,6 +643,28 @@ export interface ModifyResourcePackageNameRequest {
 }
 
 /**
+ * 添加实例或者变配实例时同步升级proxy.
+ */
+export interface UpgradeProxy {
+  /**
+   * cpu
+   */
+  Cpu: number
+  /**
+   * memory
+   */
+  Mem: number
+  /**
+   * 代理节点信息
+   */
+  ProxyZones: Array<ProxyZone>
+  /**
+   * 重新负载均衡
+   */
+  ReloadBalance?: string
+}
+
+/**
  * 备份文件信息
  */
 export interface BackupFileInfo {
@@ -2827,6 +2849,10 @@ export interface UpgradeInstanceRequest {
    * NormalUpgrade：普通变配，FastUpgrade：极速变配，若变配过程判断会造成闪断，变配流程会终止。
    */
   UpgradeMode?: string
+  /**
+   * proxy同步升级
+   */
+  UpgradeProxy?: UpgradeProxy
 }
 
 /**
@@ -3994,6 +4020,10 @@ export interface AddInstancesRequest {
    * 安全组ID，新建只读实例时可以指定安全组。
    */
   SecurityGroupIds?: Array<string>
+  /**
+   * proxy同步升级
+   */
+  UpgradeProxy?: UpgradeProxy
 }
 
 /**

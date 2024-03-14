@@ -1512,6 +1512,22 @@ export interface Tag {
 }
 
 /**
+ * 通用的参数
+ */
+export interface Arg {
+  /**
+   * key
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Key?: string
+  /**
+   * 值列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Values?: Array<string>
+}
+
+/**
  * 集群id与流程id的mapping
  */
 export interface ClusterIDToFlowID {
@@ -2166,59 +2182,6 @@ export interface JobResult {
 }
 
 /**
- * DescribeClusterNodes请求参数结构体
- */
-export interface DescribeClusterNodesRequest {
-  /**
-   * 集群实例ID,实例ID形如: emr-xxxxxxxx
-   */
-  InstanceId: string
-  /**
-   * 节点标识，取值为：
-<li>all：表示获取全部类型节点，cdb信息除外。</li>
-<li>master：表示获取master节点信息。</li>
-<li>core：表示获取core节点信息。</li>
-<li>task：表示获取task节点信息。</li>
-<li>common：表示获取common节点信息。</li>
-<li>router：表示获取router节点信息。</li>
-<li>db：表示获取正常状态的cdb信息。</li>
-<li>recyle：表示获取回收站隔离中的节点信息，包括cdb信息。</li>
-<li>renew：表示获取所有待续费的节点信息，包括cdb信息，自动续费节点不会返回。</li>
-注意：现在只支持以上取值，输入其他值会导致错误。
-   */
-  NodeFlag: string
-  /**
-   * 导出全部节点信息csv时是否携带cdb信息
-   */
-  ExportDb?: boolean
-  /**
-   * 页编号，默认值为0，表示第一页。
-   */
-  Offset?: number
-  /**
-   * 每页返回数量，默认值为100，最大值为100。
-如果offset和limit都不填，或者都填0，则返回全部数据
-   */
-  Limit?: number
-  /**
-   * 资源类型:支持all/host/pod，默认为all
-   */
-  HardwareResourceType?: string
-  /**
-   * 支持搜索的字段
-   */
-  SearchFields?: Array<SearchItem>
-  /**
-   * 无
-   */
-  OrderField?: string
-  /**
-   * 无
-   */
-  Asc?: number
-}
-
-/**
  * DescribeAutoScaleStrategies返回参数结构体
  */
 export interface DescribeAutoScaleStrategiesResponse {
@@ -2231,6 +2194,21 @@ export interface DescribeAutoScaleStrategiesResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 停止服务时的参数
+ */
+export interface StopParams {
+  /**
+   * 安全模式：safe
+默认模式：default
+   */
+  StopPolicy?: string
+  /**
+   * 线程数
+   */
+  ThreadCount?: number
 }
 
 /**
@@ -2412,6 +2390,10 @@ export interface StartStopServiceOrMonitorRequest {
    * 操作策略
    */
   StrategyConfig?: StrategyConfig
+  /**
+   * 暂停服务时用的参数
+   */
+  StopParams?: StopParams
 }
 
 /**
@@ -3542,6 +3524,32 @@ true 表示安装kerberos，false表示不安装kerberos。
 }
 
 /**
+ * 集群所有伸缩组全局参数信息
+ */
+export interface GroupGlobalConfs {
+  /**
+   * 伸缩组信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  GroupGlobalConf?: AutoScaleResourceConf
+  /**
+   * 当前伸缩组扩容出来的节点数量。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CurrentNodes?: number
+  /**
+   * 当前伸缩组扩容出来的后付费节点数量。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CurrentPostPaidNodes?: number
+  /**
+   * 当前伸缩组扩容出来的竞价实例节点数量。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CurrentSpotPaidNodes?: number
+}
+
+/**
  * 询价资源
  */
 export interface PriceResource {
@@ -4006,29 +4014,56 @@ clusterAfter 表示在集群初始化后执行。
 }
 
 /**
- * 集群所有伸缩组全局参数信息
+ * DescribeClusterNodes请求参数结构体
  */
-export interface GroupGlobalConfs {
+export interface DescribeClusterNodesRequest {
   /**
-   * 伸缩组信息
-注意：此字段可能返回 null，表示取不到有效值。
+   * 集群实例ID,实例ID形如: emr-xxxxxxxx
    */
-  GroupGlobalConf?: AutoScaleResourceConf
+  InstanceId: string
   /**
-   * 当前伸缩组扩容出来的节点数量。
-注意：此字段可能返回 null，表示取不到有效值。
+   * 节点标识，取值为：
+<li>all：表示获取全部类型节点，cdb信息除外。</li>
+<li>master：表示获取master节点信息。</li>
+<li>core：表示获取core节点信息。</li>
+<li>task：表示获取task节点信息。</li>
+<li>common：表示获取common节点信息。</li>
+<li>router：表示获取router节点信息。</li>
+<li>db：表示获取正常状态的cdb信息。</li>
+<li>recyle：表示获取回收站隔离中的节点信息，包括cdb信息。</li>
+<li>renew：表示获取所有待续费的节点信息，包括cdb信息，自动续费节点不会返回。</li>
+注意：现在只支持以上取值，输入其他值会导致错误。
    */
-  CurrentNodes?: number
+  NodeFlag: string
   /**
-   * 当前伸缩组扩容出来的后付费节点数量。
-注意：此字段可能返回 null，表示取不到有效值。
+   * 导出全部节点信息csv时是否携带cdb信息
    */
-  CurrentPostPaidNodes?: number
+  ExportDb?: boolean
   /**
-   * 当前伸缩组扩容出来的竞价实例节点数量。
-注意：此字段可能返回 null，表示取不到有效值。
+   * 页编号，默认值为0，表示第一页。
    */
-  CurrentSpotPaidNodes?: number
+  Offset?: number
+  /**
+   * 每页返回数量，默认值为100，最大值为100。
+如果offset和limit都不填，或者都填0，则返回全部数据
+   */
+  Limit?: number
+  /**
+   * 资源类型:支持all/host/pod，默认为all
+   */
+  HardwareResourceType?: string
+  /**
+   * 支持搜索的字段
+   */
+  SearchFields?: Array<SearchItem>
+  /**
+   * 无
+   */
+  OrderField?: string
+  /**
+   * 无
+   */
+  Asc?: number
 }
 
 /**
@@ -5955,6 +5990,11 @@ export interface StrategyConfig {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DealOnFail?: number
+  /**
+   * 指令需要指定的参数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Args?: Array<Arg>
 }
 
 /**

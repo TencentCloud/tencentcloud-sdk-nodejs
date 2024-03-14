@@ -838,7 +838,16 @@ export interface ConfigInfo {
    */
   Path?: string
   /**
-   * 采集的日志类型，json_log代表json格式日志，delimiter_log代表分隔符格式日志，minimalist_log代表极简日志，multiline_log代表多行日志，fullregex_log代表完整正则，默认为minimalist_log
+   * 采集的日志类型。
+- json_log代表：JSON-文件日志（详见[使用 JSON 提取模式采集日志](https://cloud.tencent.com/document/product/614/17419)）；
+- delimiter_log代表：分隔符-文件日志（详见[使用分隔符提取模式采集日志](https://cloud.tencent.com/document/product/614/17420)）；
+- minimalist_log代表：单行全文-文件日志（详见[使用单行全文提取模式采集日志](https://cloud.tencent.com/document/product/614/17421)）；
+- fullregex_log代表：单行完全正则-文件日志（详见[使用单行-完全正则提取模式采集日志](https://cloud.tencent.com/document/product/614/52365)）；
+- multiline_log代表：多行全文-文件日志（详见[使用多行全文提取模式采集日志](https://cloud.tencent.com/document/product/614/17422)）；
+- multiline_fullregex_log代表：多行完全正则-文件日志（详见[使用多行-完全正则提取模式采集日志](https://cloud.tencent.com/document/product/614/52366)）；
+- user_define_log代表：组合解析（适用于多格式嵌套的日志，详见[使用组合解析提取模式采集日志](https://cloud.tencent.com/document/product/614/61310)）；
+- service_syslog代表：syslog 采集（详见[采集 Syslog](https://cloud.tencent.com/document/product/614/81454)）；
+- windows_event_log代表：Windows事件日志（详见[采集 Windows 事件日志](https://cloud.tencent.com/document/product/614/96678)）。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   LogType?: string
@@ -866,7 +875,7 @@ export interface ConfigInfo {
    */
   CreateTime?: string
   /**
-   * 用户自定义解析字符串
+   * 用户自定义解析字符串，详见[使用组合解析提取模式采集日志](https://cloud.tencent.com/document/product/614/61310)。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   UserDefineRule?: string
@@ -875,7 +884,10 @@ export interface ConfigInfo {
 - ClsAgentFileTimeout(超时属性), 取值范围: 大于等于0的整数， 0为不超时
 - ClsAgentMaxDepth(最大目录深度)，取值范围: 大于等于0的整数
 - ClsAgentParseFailMerge(合并解析失败日志)，取值范围: true或false
-样例：{"ClsAgentFileTimeout":0,"ClsAgentMaxDepth":10,"ClsAgentParseFailMerge":true}
+样例：
+`{\"ClsAgentFileTimeout\":0,\"ClsAgentMaxDepth\":10,\"ClsAgentParseFailMerge\":true}`
+
+控制台默认占位值：`{\"ClsAgentDefault\":0}`
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AdvancedConfig?: string
@@ -3741,7 +3753,7 @@ export interface CreateDeliverCloudFunctionResponse {
  */
 export interface ModifyConfigRequest {
   /**
-   * 采集规则配置ID
+   * 采集规则配置ID，通过[获取采集规则配置](https://cloud.tencent.com/document/product/614/58616)返回信息获取。
    */
   ConfigId: string
   /**
@@ -3753,7 +3765,18 @@ export interface ModifyConfigRequest {
    */
   Path?: string
   /**
-   * 采集的日志类型，json_log代表json格式日志，delimiter_log代表分隔符格式日志，minimalist_log代表极简日志，multiline_log代表多行日志，fullregex_log代表完整正则，默认为minimalist_log
+   * 采集的日志类型。支持以下类型：
+- json_log代表：JSON-文件日志（详见[使用 JSON 提取模式采集日志](https://cloud.tencent.com/document/product/614/17419)）；
+- delimiter_log代表：分隔符-文件日志（详见[使用分隔符提取模式采集日志](https://cloud.tencent.com/document/product/614/17420)）；
+- minimalist_log代表：单行全文-文件日志（详见[使用单行全文提取模式采集日志](https://cloud.tencent.com/document/product/614/17421)）；
+- fullregex_log代表：单行完全正则-文件日志（详见[使用单行-完全正则提取模式采集日志](https://cloud.tencent.com/document/product/614/52365)）；
+- multiline_log代表：多行全文-文件日志（详见[使用多行全文提取模式采集日志](https://cloud.tencent.com/document/product/614/17422)）；
+- multiline_fullregex_log代表：多行完全正则-文件日志（详见[使用多行-完全正则提取模式采集日志](https://cloud.tencent.com/document/product/614/52366)）；
+- user_define_log代表：组合解析（适用于多格式嵌套的日志，详见[使用组合解析提取模式采集日志](https://cloud.tencent.com/document/product/614/61310)）；
+- service_syslog代表：syslog 采集（详见[采集 Syslog](https://cloud.tencent.com/document/product/614/81454)）；
+- windows_event_log代表：Windows事件日志（详见[采集 Windows 事件日志](https://cloud.tencent.com/document/product/614/96678)）。
+
+
    */
   LogType?: string
   /**
@@ -3769,7 +3792,7 @@ export interface ModifyConfigRequest {
    */
   Output?: string
   /**
-   * 用户自定义解析字符串，Json格式序列化的字符串
+   * 用户自定义解析字符串，Json格式序列化的字符串。
    */
   UserDefineRule?: string
   /**
@@ -3777,7 +3800,8 @@ export interface ModifyConfigRequest {
 - ClsAgentFileTimeout(超时属性), 取值范围: 大于等于0的整数， 0为不超时
 - ClsAgentMaxDepth(最大目录深度)，取值范围: 大于等于0的整数
 - ClsAgentParseFailMerge(合并解析失败日志)，取值范围: true或false
-样例：{"ClsAgentFileTimeout":0,"ClsAgentMaxDepth":10,"ClsAgentParseFailMerge":true}
+样例：
+`{\"ClsAgentFileTimeout\":0,\"ClsAgentMaxDepth\":10,\"ClsAgentParseFailMerge\":true}`
    */
   AdvancedConfig?: string
 }
@@ -4039,7 +4063,16 @@ export interface CreateConfigRequest {
    */
   Path?: string
   /**
-   * 采集的日志类型，json_log代表json格式日志，delimiter_log代表分隔符格式日志，minimalist_log代表极简日志，multiline_log代表多行日志，fullregex_log代表完整正则，默认为minimalist_log
+   * 采集的日志类型，默认为minimalist_log。支持以下类型：
+- json_log代表：JSON-文件日志（详见[使用 JSON 提取模式采集日志](https://cloud.tencent.com/document/product/614/17419)）；
+- delimiter_log代表：分隔符-文件日志（详见[使用分隔符提取模式采集日志](https://cloud.tencent.com/document/product/614/17420)）；
+- minimalist_log代表：单行全文-文件日志（详见[使用单行全文提取模式采集日志](https://cloud.tencent.com/document/product/614/17421)）；
+- fullregex_log代表：单行完全正则-文件日志（详见[使用单行-完全正则提取模式采集日志](https://cloud.tencent.com/document/product/614/52365)）；
+- multiline_log代表：多行全文-文件日志（详见[使用多行全文提取模式采集日志](https://cloud.tencent.com/document/product/614/17422)）；
+- multiline_fullregex_log代表：多行完全正则-文件日志（详见[使用多行-完全正则提取模式采集日志](https://cloud.tencent.com/document/product/614/52366)）；
+- user_define_log代表：组合解析（适用于多格式嵌套的日志，详见[使用组合解析提取模式采集日志](https://cloud.tencent.com/document/product/614/61310)）；
+- service_syslog代表：syslog 采集（详见[采集 Syslog](https://cloud.tencent.com/document/product/614/81454)）；
+- windows_event_log代表：Windows事件日志（详见[采集 Windows 事件日志](https://cloud.tencent.com/document/product/614/96678)）。
    */
   LogType?: string
   /**
@@ -4051,7 +4084,7 @@ export interface CreateConfigRequest {
    */
   ExcludePaths?: Array<ExcludePathInfo>
   /**
-   * 用户自定义采集规则，Json格式序列化的字符串
+   * 用户自定义采集规则，Json格式序列化的字符串。当LogType为user_define_log时，必填。
    */
   UserDefineRule?: string
   /**
@@ -4059,7 +4092,10 @@ export interface CreateConfigRequest {
 - ClsAgentFileTimeout(超时属性), 取值范围: 大于等于0的整数， 0为不超时
 - ClsAgentMaxDepth(最大目录深度)，取值范围: 大于等于0的整数
 - ClsAgentParseFailMerge(合并解析失败日志)，取值范围: true或false
-样例：{"ClsAgentFileTimeout":0,"ClsAgentMaxDepth":10,"ClsAgentParseFailMerge":true}
+样例：
+`{\"ClsAgentFileTimeout\":0,\"ClsAgentMaxDepth\":10,\"ClsAgentParseFailMerge\":true}`
+
+控制台默认占位值：`{\"ClsAgentDefault\":0}`
    */
   AdvancedConfig?: string
 }
@@ -4802,6 +4838,10 @@ export interface CreateKafkaRechargeRequest {
    */
   Offset: number
   /**
+   * 日志导入规则。
+   */
+  LogRechargeRule: LogRechargeRuleInfo
+  /**
    * 腾讯云CKafka实例ID，KafkaType为0时必填
    */
   KafkaInstance?: string
@@ -4822,11 +4862,6 @@ KafkaType为1并且IsEncryptionAddr为true时Protocol必填
    * 用户Kafka消费组名称
    */
   ConsumerGroupName?: string
-  /**
-   * 日志导入规则。
-必填字段。
-   */
-  LogRechargeRule?: LogRechargeRuleInfo
 }
 
 /**

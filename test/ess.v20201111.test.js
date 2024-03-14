@@ -128,6 +128,16 @@ it("ess.v20201111.CreateFlowGroupSignReview", async function () {
     }
 })
 
+it("ess.v20201111.RenewAutoSignLicense", async function () {
+    try {
+       const data = await client.RenewAutoSignLicense({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ess.v20201111.CreateEmbedWebUrl", async function () {
     try {
        const data = await client.CreateEmbedWebUrl({})

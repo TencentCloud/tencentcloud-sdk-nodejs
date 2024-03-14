@@ -164,6 +164,14 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateFlowGroupSignReview", req, cb);
     }
     /**
+     * 给医疗个人自动签许可续期。续期成功后，可对医疗自动签许可追加一年有效期，只可续期一次。
+
+注意: `处方单等特殊场景专用，此接口为白名单功能，使用前请联系对接的客户经理沟通。`
+     */
+    async RenewAutoSignLicense(req, cb) {
+        return this.request("RenewAutoSignLicense", req, cb);
+    }
+    /**
      * 本接口（CreateEmbedWebUrl）用于创建嵌入Web的链接，支持以下类型的Web链接创建：
 1. 创建印章
 2. 创建模板

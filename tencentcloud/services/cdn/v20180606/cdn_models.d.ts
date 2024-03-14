@@ -8618,7 +8618,7 @@ export interface HttpsBilling {
  */
 export interface DescribeCdnIpRequest {
     /**
-     * 需要查询的 IP 列表
+     * 需要查询的 IP 列表，单次可支持1-20个IP查询。
      */
     Ips: Array<string>;
 }

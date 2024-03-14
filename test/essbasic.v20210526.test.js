@@ -28,6 +28,16 @@ it("essbasic.v20210526.ChannelDeleteSealPolicies", async function () {
     }
 })
 
+it("essbasic.v20210526.ChannelRenewAutoSignLicense", async function () {
+    try {
+       const data = await client.ChannelRenewAutoSignLicense({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("essbasic.v20210526.ChannelCreateFlowSignReview", async function () {
     try {
        const data = await client.ChannelCreateFlowSignReview({})
