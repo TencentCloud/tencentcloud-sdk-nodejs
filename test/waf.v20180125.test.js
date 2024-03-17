@@ -608,16 +608,6 @@ it("waf.v20180125.DescribeAttackOverview", async function () {
     }
 })
 
-it("waf.v20180125.DescribeWafInfo", async function () {
-    try {
-       const data = await client.DescribeWafInfo({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("waf.v20180125.DescribeAttackWhiteRule", async function () {
     try {
        const data = await client.DescribeAttackWhiteRule({})

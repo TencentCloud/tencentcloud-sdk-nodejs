@@ -127,7 +127,7 @@ import {
   CCRuleLists,
   PostAttackDownloadTaskRequest,
   ModifyAntiFakeUrlStatusRequest,
-  DescribeCCRuleListRequest,
+  TLSCiphers,
   ResponseCode,
   ModifyAccessPeriodResponse,
   ModifyAttackWhiteRuleResponse,
@@ -157,7 +157,6 @@ import {
   GoodsDetailNew,
   GoodsDetail,
   DeleteIpAccessControlResponse,
-  DescribeWafInfoResponse,
   BatchIpAccessControlItem,
   UserWhiteRule,
   PortInfo,
@@ -230,7 +229,6 @@ import {
   DeleteSpartaProtectionRequest,
   UserDomainInfo,
   DescribeAntiFakeRulesResponse,
-  DescribeWafInfoRequest,
   GetAttackTotalCountRequest,
   DeleteDomainWhiteRulesResponse,
   DescribeAttackOverviewResponse,
@@ -249,7 +247,6 @@ import {
   DescribeAttackOverviewRequest,
   DescribeUserLevelRequest,
   InstanceInfo,
-  ClbHostsParams,
   HostStatus,
   ModifyAntiFakeUrlResponse,
   DescribeBatchIpAccessControlRequest,
@@ -318,7 +315,7 @@ import {
   DeleteCustomWhiteRuleRequest,
   ModifyInstanceRenewFlagResponse,
   AddAttackWhiteRuleResponse,
-  ClbHostResult,
+  ModifyDomainsCLSStatusRequest,
   DescribeWafThreatenIntelligenceResponse,
   DomainsPartInfo,
   DescribeAutoDenyIPRequest,
@@ -346,7 +343,7 @@ import {
   GetAttackTotalCountResponse,
   DescribeDomainRulesResponse,
   CreateDealsResponse,
-  TLSCiphers,
+  DescribeCCRuleListRequest,
   DescribeDomainVerifyResultResponse,
   AddCustomRuleRequest,
   DescribeWafAutoDenyRulesResponse,
@@ -366,7 +363,6 @@ import {
   DescribeVipInfoResponse,
   DescribeRuleLimitRequest,
   ModifyDomainPostActionResponse,
-  ModifyDomainsCLSStatusRequest,
   DeleteAccessExportRequest,
   DescribeTlsVersionResponse,
   DescribeDomainWhiteRulesResponse,
@@ -983,19 +979,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAttackOverviewResponse) => void
   ): Promise<DescribeAttackOverviewResponse> {
     return this.request("DescribeAttackOverview", req, cb)
-  }
-
-  /**
-     * 获取负载均衡绑定的WAF信息，可以根据租户负载均衡实例ID、负载均衡监听器ID、负载均衡的域名信息来查询对应绑定的 Waf的状态信息。
-查询的范围：负载均衡实例ID、负载均衡实例ID+监听器ID、负载均衡实例ID+监听器ID+域名。
-可能的错误码：ResourceNotFound（没有找到对应的资源）、UnsupportedRegion（目前clb-waf只支持北京、广州、上海、成都、重庆、香港地域）。
-
-     */
-  async DescribeWafInfo(
-    req: DescribeWafInfoRequest,
-    cb?: (error: string, rep: DescribeWafInfoResponse) => void
-  ): Promise<DescribeWafInfoResponse> {
-    return this.request("DescribeWafInfo", req, cb)
   }
 
   /**

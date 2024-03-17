@@ -69,6 +69,20 @@ export interface DeleteCloudNativeAPIGatewayPublicNetworkResponse {
 }
 
 /**
+ * CreateOrUpdateConfigFileAndRelease请求参数结构体
+ */
+export interface CreateOrUpdateConfigFileAndReleaseRequest {
+  /**
+   * 实例id
+   */
+  InstanceId: string
+  /**
+   * 配置文件列表详情
+   */
+  ConfigFilePublishInfo: ConfigFilePublishInfo
+}
+
+/**
  * DeleteCloudNativeAPIGatewayRouteRateLimit返回参数结构体
  */
 export interface DeleteCloudNativeAPIGatewayRouteRateLimitResponse {
@@ -239,6 +253,24 @@ export interface CreateCloudNativeAPIGatewayRequest {
 }
 
 /**
+ * DescribeConfigFileGroups返回参数结构体
+ */
+export interface DescribeConfigFileGroupsResponse {
+  /**
+   * 列表总数量
+   */
+  TotalCount?: number
+  /**
+   * 配置文件组列表
+   */
+  ConfigFileGroups?: Array<ConfigFileGroup>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 定时伸缩策略配置
  */
 export interface CloudNativeAPIGatewayStrategyCronScalerConfig {
@@ -274,6 +306,20 @@ export interface CloudNativeAPIGatewayStrategyCronScalerConfig {
 }
 
 /**
+ * 列表过滤条件，模糊匹配
+ */
+export interface ListFilter {
+  /**
+   * 过滤字段
+   */
+  Key?: string
+  /**
+   * 过滤值
+   */
+  Value?: string
+}
+
+/**
  * 策略绑定的网关分组信息
  */
 export interface CloudNativeAPIGatewayStrategyBindingGroupInfo {
@@ -305,84 +351,25 @@ export interface CloudNativeAPIGatewayStrategyBindingGroupInfo {
 }
 
 /**
- * ModifyCloudNativeAPIGatewayRoute请求参数结构体
+ * DescribeCloudNativeAPIGatewayCertificates请求参数结构体
  */
-export interface ModifyCloudNativeAPIGatewayRouteRequest {
+export interface DescribeCloudNativeAPIGatewayCertificatesRequest {
   /**
    * 网关ID
    */
   GatewayId: string
   /**
-   * 所属服务的ID
+   * 列表数量
    */
-  ServiceID: string
+  Limit?: number
   /**
-   * 路由的ID，实例级别唯一
+   * 列表offset
    */
-  RouteID: string
+  Offset?: number
   /**
-   * 路由的名字，实例级别唯一，可以不提供
+   * 过滤条件，多个过滤条件之间是与的关系，支持BindDomain ，Name
    */
-  RouteName?: string
-  /**
-   * 路由的方法，其中方法可选值：
-- GET
-- POST
-- DELETE
-- PUT
-- OPTIONS
-- PATCH
-- HEAD
-- ANY
-- TRACE
-- COPY
-- MOVE
-- PROPFIND
-- PROPPATCH
-- MKCOL
-- LOCK
-- UNLOCK
-   */
-  Methods?: Array<string>
-  /**
-   * 路由的域名
-   */
-  Hosts?: Array<string>
-  /**
-   * 路由的路径
-   */
-  Paths?: Array<string>
-  /**
-   * 路由的协议，可选
-- https
-- http
-   */
-  Protocols?: Array<string>
-  /**
-   * 转发到后端时是否保留Host
-   */
-  PreserveHost?: boolean
-  /**
-   * https重定向状态码
-   */
-  HttpsRedirectStatusCode?: number
-  /**
-   * 转发到后端时是否StripPath
-   */
-  StripPath?: boolean
-  /**
-   * 是否开启强制HTTPS
-   * @deprecated
-   */
-  ForceHttps?: boolean
-  /**
-   * 四层匹配的目的端口
-   */
-  DestinationPorts?: Array<number | bigint>
-  /**
-   * 路由的Headers
-   */
-  Headers?: Array<KVMapping>
+  Filters?: Array<ListFilter>
 }
 
 /**
@@ -397,6 +384,28 @@ export interface DescribeCloudNativeAPIGatewayUpstreamRequest {
    * 服务名字
    */
   ServiceName: string
+}
+
+/**
+ * DescribeCloudNativeAPIGatewayNodes请求参数结构体
+ */
+export interface DescribeCloudNativeAPIGatewayNodesRequest {
+  /**
+   * 云原生API网关实例ID。
+   */
+  GatewayId: string
+  /**
+   * 实例分组id
+   */
+  GroupId?: string
+  /**
+   * 翻页获取多少个
+   */
+  Limit?: number
+  /**
+   * 翻页从第几个开始获取
+   */
+  Offset?: number
 }
 
 /**
@@ -430,13 +439,17 @@ export interface Metadata {
 }
 
 /**
- * ModifyCloudNativeAPIGatewayCertificate返回参数结构体
+ * 查询过滤通用对象
  */
-export interface ModifyCloudNativeAPIGatewayCertificateResponse {
+export interface Filter {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 过滤参数名
    */
-  RequestId?: string
+  Name: string
+  /**
+   * 过滤参数值
+   */
+  Values: Array<string>
 }
 
 /**
@@ -528,9 +541,51 @@ export interface DescribeSREInstanceAccessAddressResponse {
 }
 
 /**
+ * CreateConfigFile请求参数结构体
+ */
+export interface CreateConfigFileRequest {
+  /**
+   * TSE 实例id
+   */
+  InstanceId: string
+  /**
+   * 配置文件列表详情
+   */
+  ConfigFile: ConfigFile
+}
+
+/**
  * ModifyCloudNativeAPIGatewayCanaryRule返回参数结构体
  */
 export interface ModifyCloudNativeAPIGatewayCanaryRuleResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeCloudNativeAPIGateways返回参数结构体
+ */
+export interface DescribeCloudNativeAPIGatewaysResponse {
+  /**
+   * 获取云原生API网关实例列表响应结果。
+   */
+  Result: ListCloudNativeAPIGatewayResult
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateGovernanceAlias返回参数结构体
+ */
+export interface CreateGovernanceAliasResponse {
+  /**
+   * 创建是否成功。
+   */
+  Result?: boolean
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -551,6 +606,20 @@ export interface CloudNativeAPIGatewayNodeConfig {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Number: number
+}
+
+/**
+ * DeleteConfigFileGroup返回参数结构体
+ */
+export interface DeleteConfigFileGroupResponse {
+  /**
+   * 是否删除成功
+   */
+  Result?: boolean
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -611,25 +680,67 @@ export interface CreateNativeGatewayServerGroupRequest {
 }
 
 /**
- * DescribeCloudNativeAPIGatewayCertificates请求参数结构体
+ * DescribeAllConfigFileTemplates返回参数结构体
  */
-export interface DescribeCloudNativeAPIGatewayCertificatesRequest {
+export interface DescribeAllConfigFileTemplatesResponse {
   /**
-   * 网关ID
+   * 数据总数量
    */
-  GatewayId: string
+  TotalCount?: number
   /**
-   * 列表数量
+   * 配置文件模板列表
    */
-  Limit?: number
+  ConfigFileTemplates?: Array<ConfigFileTemplate>
   /**
-   * 列表offset
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Offset?: number
+  RequestId?: string
+}
+
+/**
+ * 发布详情
+ */
+export interface ConfigFilePublishInfo {
   /**
-   * 过滤条件，多个过滤条件之间是与的关系，支持BindDomain ，Name
+   * 发布名称
    */
-  Filters?: Array<ListFilter>
+  ReleaseName?: string
+  /**
+   * 命名空间
+   */
+  Namespace?: string
+  /**
+   * 发布组
+   */
+  Group?: string
+  /**
+   * 文件名
+   */
+  FileName?: string
+  /**
+   * 内容
+   */
+  Content?: string
+  /**
+   * 描述
+   */
+  Comment?: string
+  /**
+   * 格式
+   */
+  Format?: string
+  /**
+   * 创建者
+   */
+  CreateBy?: string
+  /**
+   * 修改者
+   */
+  ModifyBy?: string
+  /**
+   * 标签
+   */
+  Tags?: Array<ConfigFileTag>
 }
 
 /**
@@ -694,13 +805,57 @@ export interface ListCloudNativeAPIGatewayStrategyResult {
 }
 
 /**
- * ModifyCloudNativeAPIGateway返回参数结构体
+ * DescribeGovernanceAliases请求参数结构体
  */
-export interface ModifyCloudNativeAPIGatewayResponse {
+export interface DescribeGovernanceAliasesRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * tse实例id。
    */
-  RequestId?: string
+  InstanceId: string
+  /**
+   * 服务别名所指向的服务名。
+   */
+  Service?: string
+  /**
+   * 服务别名所指向的命名空间名。
+   */
+  Namespace?: string
+  /**
+   * 服务别名。
+   */
+  Alias?: string
+  /**
+   * 服务别名命名空间。
+   */
+  AliasNamespace?: string
+  /**
+   * 服务别名描述。
+   */
+  Comment?: string
+  /**
+   * 偏移量，默认为0。
+   */
+  Offset?: number
+  /**
+   * 返回数量，默认为20，最大值为100。
+   */
+  Limit?: number
+}
+
+/**
+ * 配置文件标签
+ */
+export interface ConfigFileGroupTag {
+  /**
+   * key-value 键
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Key?: string
+  /**
+   * key-value 值
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Value?: string
 }
 
 /**
@@ -736,6 +891,86 @@ export interface ModifyCloudNativeAPIGatewayServiceResponse {
 }
 
 /**
+ * 治理中心服务入参
+ */
+export interface GovernanceServiceInput {
+  /**
+   * 服务名。
+   */
+  Name: string
+  /**
+   * 服务所属命名空间。
+   */
+  Namespace: string
+  /**
+   * 服务描述信息。
+   */
+  Comment?: string
+  /**
+   * 服务元数据。
+   */
+  Metadatas?: Array<Metadata>
+  /**
+   * 服务所属部门。
+   */
+  Department?: string
+  /**
+   * 服务所属业务。
+   */
+  Business?: string
+  /**
+   * 被添加进来可以操作此命名空间的用户ID列表
+   */
+  UserIds?: Array<string>
+  /**
+   * 被添加进来可以操作此命名空间的用户组ID列表
+   */
+  GroupIds?: Array<string>
+  /**
+   * 从操作此命名空间的用户组ID列表被移除的ID列表
+   */
+  RemoveUserIds?: Array<string>
+  /**
+   * 从可以操作此命名空间的用户组ID列表中被移除的ID列表
+   */
+  RemoveGroupIds?: Array<string>
+  /**
+   * 该服务对哪些命名空间可见
+   */
+  ExportTo?: Array<string>
+}
+
+/**
+ * ModifyGovernanceAlias请求参数结构体
+ */
+export interface ModifyGovernanceAliasRequest {
+  /**
+   * tse实例id。
+   */
+  InstanceId: string
+  /**
+   * 服务别名
+   */
+  Alias: string
+  /**
+   * 服务别名命名空间
+   */
+  AliasNamespace: string
+  /**
+   * 服务别名所指向的服务名
+   */
+  Service: string
+  /**
+   * 服务别名所指向的命名空间
+   */
+  Namespace: string
+  /**
+   * 服务别名描述
+   */
+  Comment?: string
+}
+
+/**
  * DescribeCloudNativeAPIGatewayNodes返回参数结构体
  */
 export interface DescribeCloudNativeAPIGatewayNodesResponse {
@@ -747,6 +982,28 @@ export interface DescribeCloudNativeAPIGatewayNodesResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeConfigFileReleaseVersions请求参数结构体
+ */
+export interface DescribeConfigFileReleaseVersionsRequest {
+  /**
+   * 实例id
+   */
+  InstanceId: string
+  /**
+   * 命名空间
+   */
+  Namespace?: string
+  /**
+   * 配置分组
+   */
+  Group?: string
+  /**
+   * 文件名称
+   */
+  FileName?: string
 }
 
 /**
@@ -790,21 +1047,149 @@ export interface DescribeUpstreamHealthCheckConfigResponse {
 }
 
 /**
- * 网络访问策略
+ * 服务契约版本信息
  */
-export interface NetworkAccessControl {
+export interface GovernanceServiceContractVersion {
   /**
-   * 访问模式：Whitelist|Blacklist
+   * 契约版本
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Mode: string
+  Version?: string
   /**
-   * 白名单列表
+   * 契约名称
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  CidrWhiteList?: Array<string>
+  Name?: string
   /**
-   * 黑名单列表
+   * 唯一名称
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  CidrBlackList?: Array<string>
+  Key?: string
+}
+
+/**
+ * 配置文件
+ */
+export interface ConfigFile {
+  /**
+   * 配置文件id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Id?: number
+  /**
+   * 配置文件名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name?: string
+  /**
+   * 配置文件命名空间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Namespace?: string
+  /**
+   * 配置文件组
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Group?: string
+  /**
+   * 配置文件内容
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Content?: string
+  /**
+   * 配置文件格式
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Format?: string
+  /**
+   * 配置文件注释
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Comment?: string
+  /**
+   * 配置文件状态
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status?: string
+  /**
+   * 配置文件标签数组
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Tags?: Array<ConfigFileTag>
+  /**
+   * 配置文件创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateTime?: string
+  /**
+   * 配置文件创建者
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateBy?: string
+  /**
+   * 配置文件修改时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ModifyTime?: string
+  /**
+   * 配置文件修改者
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ModifyBy?: string
+  /**
+   * 配置文件发布时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ReleaseTime?: string
+  /**
+   * 配置文件发布者
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ReleaseBy?: string
+}
+
+/**
+ * 治理中心命名空间输入参数
+ */
+export interface GovernanceNamespaceInput {
+  /**
+   * 命名空间名。
+   */
+  Name: string
+  /**
+   * 描述信息。
+   */
+  Comment?: string
+  /**
+   * 新增的可以操作此命名空间的用户ID列表
+   */
+  UserIds?: Array<string>
+  /**
+   * 新增的可以操作此命名空间的用户组ID列表
+   */
+  GroupIds?: Array<string>
+  /**
+   * 移除可以操作此命名空间的用户ID列表
+   */
+  RemoveUserIds?: Array<string>
+  /**
+   * 移除可以操作此命名空间的用户组ID列表
+   */
+  RemoveGroupIds?: Array<string>
+}
+
+/**
+ * DeleteGovernanceServices返回参数结构体
+ */
+export interface DeleteGovernanceServicesResponse {
+  /**
+   * 删除服务结果。
+   */
+  Result?: boolean
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -875,6 +1260,16 @@ export interface DeleteCloudNativeAPIGatewayCanaryRuleRequest {
    * 优先级
    */
   Priority: number
+}
+
+/**
+ * ModifyNativeGatewayServerGroup返回参数结构体
+ */
+export interface ModifyNativeGatewayServerGroupResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1120,6 +1515,20 @@ export interface ExternalRedis {
 }
 
 /**
+ * DeleteGovernanceNamespaces返回参数结构体
+ */
+export interface DeleteGovernanceNamespacesResponse {
+  /**
+   * 删除是否成功。
+   */
+  Result?: boolean
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyCloudNativeAPIGatewayCertificate请求参数结构体
  */
 export interface ModifyCloudNativeAPIGatewayCertificateRequest {
@@ -1163,41 +1572,17 @@ export interface ModifyCloudNativeAPIGatewayCertificateRequest {
 }
 
 /**
- * 多环境网络信息
+ * DeleteCloudNativeAPIGatewayService请求参数结构体
  */
-export interface EnvAddressInfo {
+export interface DeleteCloudNativeAPIGatewayServiceRequest {
   /**
-   * 环境名
+   * 网关ID
    */
-  EnvName?: string
+  GatewayId: string
   /**
-   * 是否开启config公网
+   * 服务名字，服务ID
    */
-  EnableConfigInternet?: boolean
-  /**
-   * config公网ip
-   */
-  ConfigInternetServiceIp?: string
-  /**
-   * config内网访问地址
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ConfigIntranetAddress?: string
-  /**
-   * 是否开启config内网clb
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  EnableConfigIntranet?: boolean
-  /**
-   * 客户端公网带宽
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  InternetBandWidth?: number
-  /**
-   * 客户端公网CLB多可用区信息
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CLBMultiRegion?: CLBMultiRegion
+  Name: string
 }
 
 /**
@@ -1400,6 +1785,27 @@ export interface CreateWafDomainsResponse {
 }
 
 /**
+ * 云原生网关限流插件自定义响应
+ */
+export interface RateLimitResponse {
+  /**
+   * 自定义响应体
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Body?: string
+  /**
+   * Headers
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Headers?: Array<KVMapping>
+  /**
+   * http状态码
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HttpStatus?: number
+}
+
+/**
  * DescribeCloudNativeAPIGatewayServices请求参数结构体
  */
 export interface DescribeCloudNativeAPIGatewayServicesRequest {
@@ -1422,13 +1828,13 @@ export interface DescribeCloudNativeAPIGatewayServicesRequest {
 }
 
 /**
- * UnbindAutoScalerResourceStrategyFromGroups返回参数结构体
+ * CreateConfigFile返回参数结构体
  */
-export interface UnbindAutoScalerResourceStrategyFromGroupsResponse {
+export interface CreateConfigFileResponse {
   /**
-   * 是否成功
+   * 是否创建成功
    */
-  Result: boolean
+  Result?: boolean
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1450,6 +1856,75 @@ export interface DescribeCloudNativeAPIGatewayUpstreamResponse {
 }
 
 /**
+ * 服务契约接口定义
+ */
+export interface GovernanceInterfaceDescription {
+  /**
+   * 契约接口ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ID?: string
+  /**
+   * 方法名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Method?: string
+  /**
+   * 路径/接口名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Path?: string
+  /**
+   * 内容
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Content?: string
+  /**
+   * 创建来源
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Source?: string
+  /**
+   * 信息摘要
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Revision?: string
+  /**
+   * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateTime?: string
+  /**
+   * 修改时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ModifyTime?: string
+  /**
+   * 接口名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name?: string
+}
+
+/**
+ * DescribeGovernanceServiceContractVersions请求参数结构体
+ */
+export interface DescribeGovernanceServiceContractVersionsRequest {
+  /**
+   * 引擎实例ID
+   */
+  InstanceId: string
+  /**
+   * 命名空间
+   */
+  Namespace: string
+  /**
+   * 服务名
+   */
+  Service?: string
+}
+
+/**
  * DeleteAutoScalerResourceStrategy请求参数结构体
  */
 export interface DeleteAutoScalerResourceStrategyRequest {
@@ -1461,6 +1936,117 @@ export interface DeleteAutoScalerResourceStrategyRequest {
    * 策略ID
    */
   StrategyId: string
+}
+
+/**
+ * DescribePublicNetwork请求参数结构体
+ */
+export interface DescribePublicNetworkRequest {
+  /**
+   * 云原生API网关实例ID。
+   */
+  GatewayId: string
+  /**
+   * 网关分组ID
+   */
+  GroupId: string
+  /**
+   * 网络ID
+   */
+  NetworkId: string
+}
+
+/**
+ * 治理中心实例信息。
+ */
+export interface GovernanceInstance {
+  /**
+   * 实例id。
+   */
+  Id?: string
+  /**
+   * 实例所在服务名。
+   */
+  Service?: string
+  /**
+   * 实例所在命名空间名。
+   */
+  Namespace?: string
+  /**
+   * 实例ip地址。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Host?: string
+  /**
+   * 实例端口信息。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Port?: number
+  /**
+   * 通信协议。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Protocol?: string
+  /**
+   * 版本信息。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Version?: string
+  /**
+   * 负载均衡权重。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Weight?: number
+  /**
+   * 是否开启健康检查。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EnableHealthCheck?: boolean
+  /**
+   * 实例是否健康。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Healthy?: boolean
+  /**
+   * 实例是否隔离。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Isolate?: boolean
+  /**
+   * 实例创建时间。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateTime?: string
+  /**
+   * 实例修改时间。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ModifyTime?: string
+  /**
+   * 元数据数组。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Metadatas?: Array<Metadata>
+  /**
+   * 上报心跳间隔。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Ttl?: number
+  /**
+   * 版本信息。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceVersion?: string
+  /**
+   * 状态信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HealthStatus?: string
+  /**
+   * 描述
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Comment?: string
 }
 
 /**
@@ -1529,7 +2115,7 @@ export interface CreateGovernanceInstancesResponse {
   /**
    * 创建是否成功。
    */
-  Result: boolean
+  Result?: boolean
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1537,25 +2123,17 @@ export interface CreateGovernanceInstancesResponse {
 }
 
 /**
- * DescribeCloudNativeAPIGatewayNodes请求参数结构体
+ * CreateGovernanceNamespaces请求参数结构体
  */
-export interface DescribeCloudNativeAPIGatewayNodesRequest {
+export interface CreateGovernanceNamespacesRequest {
   /**
-   * 云原生API网关实例ID。
+   * tse 实例id。
    */
-  GatewayId: string
+  InstanceId: string
   /**
-   * 实例分组id
+   * 命名空间信息。
    */
-  GroupId?: string
-  /**
-   * 翻页获取多少个
-   */
-  Limit?: number
-  /**
-   * 翻页从第几个开始获取
-   */
-  Offset?: number
+  GovernanceNamespaces: Array<GovernanceNamespaceInput>
 }
 
 /**
@@ -1606,14 +2184,50 @@ export interface CreateGatewayServiceResult {
 }
 
 /**
- * 云原生网关证书
+ * 服务别名结构信息
  */
-export interface KongCertificate {
+export interface GovernanceAlias {
   /**
-   * 无
+   * 服务别名
+   */
+  Alias?: string
+  /**
+   * 服务别名命名空间
+   */
+  AliasNamespace?: string
+  /**
+   * 服务别名指向的服务名
+   */
+  Service?: string
+  /**
+   * 服务别名指向的服务命名空间
+   */
+  Namespace?: string
+  /**
+   * 服务别名的描述信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Cert?: KongCertificatesPreview
+  Comment?: string
+  /**
+   * 服务别名创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateTime?: string
+  /**
+   * 服务别名修改时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ModifyTime?: string
+  /**
+   * 服务别名ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Id?: string
+  /**
+   * 该服务别名是否可以编辑
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Editable?: boolean
 }
 
 /**
@@ -1694,7 +2308,7 @@ export interface DeleteGovernanceInstancesResponse {
   /**
    * 操作是否成功。
    */
-  Result: boolean
+  Result?: boolean
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1981,9 +2595,169 @@ export interface DeleteNativeGatewayServerGroupRequest {
 }
 
 /**
+ * DeleteGovernanceAliases返回参数结构体
+ */
+export interface DeleteGovernanceAliasesResponse {
+  /**
+   * 创建是否成功。
+   */
+  Result?: boolean
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * RollbackConfigFileReleases返回参数结构体
+ */
+export interface RollbackConfigFileReleasesResponse {
+  /**
+   * 回滚结果
+   */
+  Result?: boolean
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyUpstreamNodeStatus请求参数结构体
+ */
+export interface ModifyUpstreamNodeStatusRequest {
+  /**
+   * 网关实例ID
+   */
+  GatewayId: string
+  /**
+   * 服务名称
+   */
+  ServiceName: string
+  /**
+   * 访问IP地址或域名
+   */
+  Host: string
+  /**
+   * 访问端口
+   */
+  Port: number
+  /**
+   * HEALTHY或UNHEALTHY
+   */
+  Status: string
+}
+
+/**
  * ModifyCloudNativeAPIGatewayRoute返回参数结构体
  */
 export interface ModifyCloudNativeAPIGatewayRouteResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 配置文件发布历史
+ */
+export interface ConfigFileReleaseHistory {
+  /**
+   * 配置文件发布历史记录id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Id?: number
+  /**
+   * 配置文件发布历史名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name?: string
+  /**
+   * 配置文件发布历史命名空间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Namespace?: string
+  /**
+   * 配置文件发布历史组
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Group?: string
+  /**
+   * 配置文件发布历史名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FileName?: string
+  /**
+   * 配置文件发布历史内容
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Content?: string
+  /**
+   * 配置文件发布历史格式
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Format?: string
+  /**
+   * 配置文件发布历史注释
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Comment?: string
+  /**
+   * 配置文件发布历史Md5
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Md5?: string
+  /**
+   * 配置文件发布历史类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Type?: string
+  /**
+   * 配置文件发布历史状态
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status?: string
+  /**
+   * 配置文件发布历史标签组
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Tags?: Array<ConfigFileTag>
+  /**
+   * 配置文件发布创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateTime?: string
+  /**
+   * 配置文件发布创建者
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateBy?: string
+  /**
+   * 配置文件发布修改时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ModifyTime?: string
+  /**
+   * 配置文件发布修改者
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ModifyBy?: string
+  /**
+   * 发布描述
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ReleaseDescription?: string
+  /**
+   * 原因，用于失败时原因展示
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ReleaseReason?: string
+}
+
+/**
+ * OpenWafProtection返回参数结构体
+ */
+export interface OpenWafProtectionResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2090,9 +2864,17 @@ export interface DeleteCloudNativeAPIGatewayServiceRateLimitRequest {
 }
 
 /**
- * OpenWafProtection返回参数结构体
+ * DescribeConfigFileReleases返回参数结构体
  */
-export interface OpenWafProtectionResponse {
+export interface DescribeConfigFileReleasesResponse {
+  /**
+   * 总条数
+   */
+  TotalCount?: number
+  /**
+   * 发布列表
+   */
+  Releases?: Array<ConfigFileRelease>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2111,6 +2893,20 @@ export interface KongPassiveHealthCheck {
 }
 
 /**
+ * DescribeCloudNativeAPIGatewayConfig返回参数结构体
+ */
+export interface DescribeCloudNativeAPIGatewayConfigResponse {
+  /**
+   * 获取云原生API网关响应结果。
+   */
+  Result?: DescribeCloudNativeAPIGatewayConfigResult
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeCloudNativeAPIGateway请求参数结构体
  */
 export interface DescribeCloudNativeAPIGatewayRequest {
@@ -2118,6 +2914,25 @@ export interface DescribeCloudNativeAPIGatewayRequest {
    * 云原生API网关实例ID
    */
   GatewayId: string
+}
+
+/**
+ * 私有网络信息
+ */
+export interface VpcInfo {
+  /**
+   * Vpc Id
+   */
+  VpcId: string
+  /**
+   * 子网ID
+   */
+  SubnetId: string
+  /**
+   * 内网访问地址
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IntranetAddress?: string
 }
 
 /**
@@ -2153,29 +2968,107 @@ export interface CloudAPIGatewayCanaryRuleList {
 }
 
 /**
- * ModifyUpstreamNodeStatus请求参数结构体
+ * 治理中心服务信息。
  */
-export interface ModifyUpstreamNodeStatusRequest {
+export interface GovernanceService {
   /**
-   * 网关实例ID
+   * 服务名称。
    */
-  GatewayId: string
+  Name?: string
   /**
-   * 服务名称
+   * 命名空间名称。
    */
-  ServiceName: string
+  Namespace?: string
   /**
-   * 访问IP地址或域名
+   * 元数据信息数组。
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Host: string
+  Metadatas?: Array<Metadata>
   /**
-   * 访问端口
+   * 描述信息。
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Port: number
+  Comment?: string
   /**
-   * HEALTHY或UNHEALTHY
+   * 创建时间。
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Status: string
+  CreateTime?: string
+  /**
+   * 修改时间。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ModifyTime?: string
+  /**
+   * 服务所属部门。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Department?: string
+  /**
+   * 服务所属业务。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Business?: string
+  /**
+   * 健康服务实例数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HealthyInstanceCount?: number
+  /**
+   * 服务实例总数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalInstanceCount?: number
+  /**
+   * 服务ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Id?: string
+  /**
+   * 是否可以编辑
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Editable?: boolean
+  /**
+   * 可以编辑该资源的用户ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UserIds?: Array<string>
+  /**
+   * 可以编辑该资源的用户组ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  GroupIds?: Array<string>
+  /**
+   * 移除可以编辑该资源的用户ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RemoveUserIds?: Array<string>
+  /**
+   * 移除可以编辑该资源的用户组ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RemoveGroupIds?: Array<string>
+  /**
+   * 该服务对哪些命名空间可见	
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExportTo?: Array<string>
+  /**
+   * 该服务信息摘要签名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Revision?: string
+}
+
+/**
+ * ModifyCloudNativeAPIGatewayCertificate返回参数结构体
+ */
+export interface ModifyCloudNativeAPIGatewayCertificateResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2185,11 +3078,11 @@ export interface DescribeGovernanceInstancesResponse {
   /**
    * 服务实例总数量。
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 服务里实例列表。
    */
-  Content: Array<GovernanceInstance>
+  Content?: Array<GovernanceInstance>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2197,17 +3090,117 @@ export interface DescribeGovernanceInstancesResponse {
 }
 
 /**
- * DescribeCloudNativeAPIGatewayConfig返回参数结构体
+ * 配置文件发布
  */
-export interface DescribeCloudNativeAPIGatewayConfigResponse {
+export interface ConfigFileRelease {
   /**
-   * 获取云原生API网关响应结果。
+   * 配置文件发布id
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Result?: DescribeCloudNativeAPIGatewayConfigResult
+  Id?: number
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 配置文件发布名称
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  RequestId?: string
+  Name?: string
+  /**
+   * 配置文件发布命名空间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Namespace?: string
+  /**
+   * 配置文件发布组
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Group?: string
+  /**
+   * 配置文件发布文件名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FileName?: string
+  /**
+   * 配置文件发布内容
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Content?: string
+  /**
+   * 配置文件发布注释
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Comment?: string
+  /**
+   * 配置文件发布Md5
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Md5?: string
+  /**
+   * 配置文件发布版本
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Version?: number
+  /**
+   * 配置文件发布创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateTime?: string
+  /**
+   * 配置文件发布创建者
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateBy?: string
+  /**
+   * 配置文件发布修改时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ModifyTime?: string
+  /**
+   * 配置文件发布修改者
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ModifyBy?: string
+  /**
+   * 发布描述
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ReleaseDescription?: string
+  /**
+   * 是否生效
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Active?: boolean
+  /**
+   * 格式
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Format?: string
+}
+
+/**
+ * ModifyConfigFiles请求参数结构体
+ */
+export interface ModifyConfigFilesRequest {
+  /**
+   * ins-df344df5
+   */
+  InstanceId: string
+  /**
+   * 配置文件列表
+   */
+  ConfigFile: ConfigFile
+}
+
+/**
+ * DeleteGovernanceNamespaces请求参数结构体
+ */
+export interface DeleteGovernanceNamespacesRequest {
+  /**
+   * tse 实例 id。
+   */
+  InstanceId: string
+  /**
+   * 命名空间信息。
+   */
+  GovernanceNamespaces: Array<GovernanceNamespaceInput>
 }
 
 /**
@@ -2315,6 +3308,20 @@ export interface KongCertificatesList {
 }
 
 /**
+ * ModifyGovernanceNamespaces返回参数结构体
+ */
+export interface ModifyGovernanceNamespacesResponse {
+  /**
+   * 操作是否成功。
+   */
+  Result?: boolean
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 云原生网关Tse 限流插件配置
  */
 export interface CloudNativeAPIGatewayRateLimitDetail {
@@ -2389,6 +3396,32 @@ external_redis 外部redis
 }
 
 /**
+ * DescribeConfigFileRelease请求参数结构体
+ */
+export interface DescribeConfigFileReleaseRequest {
+  /**
+   * TSE实例id
+   */
+  InstanceId: string
+  /**
+   * 命名空间名称
+   */
+  Namespace: string
+  /**
+   * 配置分组名称
+   */
+  Group: string
+  /**
+   * 配置文件名称
+   */
+  Name: string
+  /**
+   * 配置文件发布名称
+   */
+  ReleaseName?: string
+}
+
+/**
  * CreateCloudNativeAPIGatewayRoute返回参数结构体
  */
 export interface CreateCloudNativeAPIGatewayRouteResponse {
@@ -2424,6 +3457,20 @@ export interface DescribeCloudNativeAPIGatewayConfigRequest {
    * 分组id，不填时为默认分组
    */
   GroupId?: string
+}
+
+/**
+ * ModifyConfigFileGroup请求参数结构体
+ */
+export interface ModifyConfigFileGroupRequest {
+  /**
+   * tse实例id
+   */
+  InstanceId: string
+  /**
+   * 配置文件组
+   */
+  ConfigFileGroup: ConfigFileGroup
 }
 
 /**
@@ -2473,9 +3520,27 @@ export interface KongTarget {
 }
 
 /**
- * UpdateEngineInternetAccess返回参数结构体
+ * UnbindAutoScalerResourceStrategyFromGroups返回参数结构体
  */
-export interface UpdateEngineInternetAccessResponse {
+export interface UnbindAutoScalerResourceStrategyFromGroupsResponse {
+  /**
+   * 是否成功
+   */
+  Result: boolean
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeleteConfigFiles返回参数结构体
+ */
+export interface DeleteConfigFilesResponse {
+  /**
+   * 修改是否成功
+   */
+  Result?: boolean
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2515,21 +3580,29 @@ export interface CreateGovernanceInstancesRequest {
 }
 
 /**
- * DescribeNacosServerInterfaces返回参数结构体
+ * 配置发布删除
  */
-export interface DescribeNacosServerInterfacesResponse {
+export interface ConfigFileReleaseDeletion {
   /**
-   * 接口总个数
+   * 命名空间
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  TotalCount?: number
+  Namespace?: string
   /**
-   * 接口列表
+   * 配置分组
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Content?: Array<NacosServerInterface>
+  Group?: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 文件名称
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  RequestId?: string
+  FileName?: string
+  /**
+   * 发布版本
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ReleaseVersion?: string
 }
 
 /**
@@ -2578,6 +3651,20 @@ export interface KVMapping {
 }
 
 /**
+ * ModifyConfigFiles返回参数结构体
+ */
+export interface ModifyConfigFilesResponse {
+  /**
+   * 修改是否成功
+   */
+  Result?: boolean
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * BindAutoScalerResourceStrategyToGroups请求参数结构体
  */
 export interface BindAutoScalerResourceStrategyToGroupsRequest {
@@ -2596,24 +3683,13 @@ export interface BindAutoScalerResourceStrategyToGroupsRequest {
 }
 
 /**
- * 云原生网关限流插件自定义响应
+ * ModifyNetworkAccessStrategy返回参数结构体
  */
-export interface RateLimitResponse {
+export interface ModifyNetworkAccessStrategyResponse {
   /**
-   * 自定义响应体
-注意：此字段可能返回 null，表示取不到有效值。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Body?: string
-  /**
-   * Headers
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Headers?: Array<KVMapping>
-  /**
-   * http状态码
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  HttpStatus?: number
+  RequestId?: string
 }
 
 /**
@@ -2631,15 +3707,15 @@ export interface DescribeCloudNativeAPIGatewayServiceRateLimitResponse {
 }
 
 /**
- * DeleteCloudNativeAPIGatewayService请求参数结构体
+ * DeleteCloudNativeAPIGatewayRoute请求参数结构体
  */
-export interface DeleteCloudNativeAPIGatewayServiceRequest {
+export interface DeleteCloudNativeAPIGatewayRouteRequest {
   /**
    * 网关ID
    */
   GatewayId: string
   /**
-   * 服务名字，服务ID
+   * 路由的ID或名字，不支持名称“未命名”
    */
   Name: string
 }
@@ -2688,24 +3764,74 @@ export interface CreateCloudNativeAPIGatewayCertificateResponse {
 }
 
 /**
- * 存储的额外选项
+ * 治理中心命名空间
  */
-export interface StorageOption {
+export interface GovernanceNamespace {
   /**
-   * 存储对象，分为snap和txn两种
+   * 命名空间名称。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Name?: string
   /**
-   * 存储类型，分为三类CLOUD_PREMIUM/CLOUD_SSD/CLOUD_SSD_PLUS，分别对应高性能云硬盘、SSD云硬盘、增强型SSD云硬盘
+   * 命名空间描述信息。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Type?: string
+  Comment?: string
   /**
-   * 存储容量，[50, 3200]的范围
+   * 创建时间。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Capacity?: number
+  CreateTime?: string
+  /**
+   * 修改时间。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ModifyTime?: string
+  /**
+   * 命名空间下总服务数据量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalServiceCount?: number
+  /**
+   * 命名空间下总健康实例数量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalHealthInstanceCount?: number
+  /**
+   * 命名空间下总实例数量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalInstanceCount?: number
+  /**
+   * 命名空间ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Id?: string
+  /**
+   * 是否可以编辑
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Editable?: boolean
+  /**
+   * 可以操作此命名空间的用户ID列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UserIds?: Array<string>
+  /**
+   * 可以操作此命名空间的用户组ID列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  GroupIds?: Array<string>
+  /**
+   * 移除可以操作此命名空间的用户ID列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RemoveUserIds?: Array<string>
+  /**
+   * 移除可以操作此命名空间的用户组ID列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RemoveGroupIds?: Array<string>
 }
 
 /**
@@ -2925,81 +4051,118 @@ export interface DeleteGovernanceInstancesRequest {
 }
 
 /**
- * 治理中心实例信息。
+ * DeleteGovernanceInstancesByHost请求参数结构体
  */
-export interface GovernanceInstance {
+export interface DeleteGovernanceInstancesByHostRequest {
   /**
-   * 实例id。
+   * tse实例id。
    */
-  Id: string
+  InstanceId: string
   /**
-   * 实例所在服务名。
+   * 要删除的服务实例信息。
    */
-  Service: string
+  GovernanceInstances: Array<GovernanceInstanceUpdate>
+}
+
+/**
+ * 存储的额外选项
+ */
+export interface StorageOption {
   /**
-   * 实例所在命名空间名。
-   */
-  Namespace: string
-  /**
-   * 实例ip地址。
+   * 存储对象，分为snap和txn两种
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Host: string
+  Name?: string
   /**
-   * 实例端口信息。
+   * 存储类型，分为三类CLOUD_PREMIUM/CLOUD_SSD/CLOUD_SSD_PLUS，分别对应高性能云硬盘、SSD云硬盘、增强型SSD云硬盘
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Port: number
+  Type?: string
   /**
-   * 通信协议。
+   * 存储容量，[50, 3200]的范围
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Protocol: string
+  Capacity?: number
+}
+
+/**
+ * DescribeConfigFile返回参数结构体
+ */
+export interface DescribeConfigFileResponse {
   /**
-   * 版本信息。
+   * 配置文件
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Version: string
+  ConfigFile?: ConfigFile
   /**
-   * 负载均衡权重。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * RollbackConfigFileReleases请求参数结构体
+ */
+export interface RollbackConfigFileReleasesRequest {
+  /**
+   * TSE实例id
+   */
+  InstanceId: string
+  /**
+   * 回滚发布
+   */
+  RollbackConfigFileReleases: Array<ConfigFileRelease>
+}
+
+/**
+ * 配置文件模板
+ */
+export interface ConfigFileTemplate {
+  /**
+   * 配置文件模板id
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Weight: number
+  Id?: number
   /**
-   * 是否开启健康检查。
+   * 配置文件模板名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  EnableHealthCheck: boolean
+  Name?: string
   /**
-   * 实例是否健康。
+   * 配置文件模板内容
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Healthy: boolean
+  Content?: string
   /**
-   * 实例是否隔离。
+   * 配置文件模板格式
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Isolate: boolean
+  Format?: string
   /**
-   * 实例创建时间。
+   * 配置文件模板注释
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CreateTime: string
+  Comment?: string
   /**
-   * 实例修改时间。
+   * 配置文件模板创建时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ModifyTime: string
+  CreateTime?: string
   /**
-   * 元数据数组。
+   * 配置文件模板创建者
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Metadatas: Array<Metadata>
+  CreateBy?: string
   /**
-   * 上报心跳间隔。
+   * 配置文件模板修改时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Ttl: number
+  ModifyTime?: string
+  /**
+   * 配置文件模板修改者
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ModifyBy?: string
 }
 
 /**
@@ -3054,13 +4217,39 @@ export interface CloudNativeAPIGatewayStrategy {
 }
 
 /**
- * DescribeCloudNativeAPIGateways返回参数结构体
+ * DeleteConfigFiles请求参数结构体
  */
-export interface DescribeCloudNativeAPIGatewaysResponse {
+export interface DeleteConfigFilesRequest {
   /**
-   * 获取云原生API网关实例列表响应结果。
+   * TSE实例id
    */
-  Result: ListCloudNativeAPIGatewayResult
+  InstanceId: string
+  /**
+   * 命名空间
+   */
+  Namespace: string
+  /**
+   * 配置分组名称
+   */
+  Group: string
+  /**
+   * 配置文件名称
+   */
+  Name: string
+}
+
+/**
+ * DescribeGovernanceServices返回参数结构体
+ */
+export interface DescribeGovernanceServicesResponse {
+  /**
+   * 服务数总量。
+   */
+  TotalCount?: number
+  /**
+   * 服务信息详情。
+   */
+  Content?: Array<GovernanceService>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3068,19 +4257,31 @@ export interface DescribeCloudNativeAPIGatewaysResponse {
 }
 
 /**
- * kong服务路由列表
+ * CreateGovernanceServices请求参数结构体
  */
-export interface KongServiceRouteList {
+export interface CreateGovernanceServicesRequest {
   /**
-   * 无
-注意：此字段可能返回 null，表示取不到有效值。
+   * tse 实例 id。
    */
-  RouteList?: Array<KongRoutePreview>
+  InstanceId: string
   /**
-   * 总数
-注意：此字段可能返回 null，表示取不到有效值。
+   * 服务信息。
    */
-  TotalCount?: number
+  GovernanceServices: Array<GovernanceServiceInput>
+}
+
+/**
+ * CreateGovernanceNamespaces返回参数结构体
+ */
+export interface CreateGovernanceNamespacesResponse {
+  /**
+   * 操作是否成功。
+   */
+  Result?: boolean
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3149,17 +4350,17 @@ export interface AutoScalerBehavior {
 }
 
 /**
- * 列表过滤条件，模糊匹配
+ * CreateConfigFileGroup请求参数结构体
  */
-export interface ListFilter {
+export interface CreateConfigFileGroupRequest {
   /**
-   * 过滤字段
+   * tse 实例 id
    */
-  Key?: string
+  InstanceId: string
   /**
-   * 过滤值
+   * 配置文件组实体
    */
-  Value?: string
+  ConfigFileGroup: ConfigFileGroup
 }
 
 /**
@@ -3311,18 +4512,43 @@ export interface AutoScalerPolicy {
 }
 
 /**
- * UpdateUpstreamTargets返回参数结构体
+ * ModifyConsoleNetwork返回参数结构体
  */
-export interface UpdateUpstreamTargetsResponse {
-  /**
-   * 是否更新成功
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Result?: boolean
+export interface ModifyConsoleNetworkResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeConfigFileGroups请求参数结构体
+ */
+export interface DescribeConfigFileGroupsRequest {
+  /**
+   * tse实例id
+   */
+  InstanceId: string
+  /**
+   * 根据命名空间过滤
+   */
+  Namespace?: string
+  /**
+   * 根据配置文件组名过滤
+   */
+  Group?: string
+  /**
+   * 根据配置文件组名过滤
+   */
+  FileName?: string
+  /**
+   * 返回数量，默认为20，最大值为100。
+   */
+  Limit?: number
+  /**
+   * 偏移量，默认为0。
+   */
+  Offset?: number
 }
 
 /**
@@ -3411,9 +4637,85 @@ export interface DeleteCloudNativeAPIGatewayServiceRateLimitResponse {
 }
 
 /**
+ * 服务契约定义
+ */
+export interface GovernanceServiceContract {
+  /**
+   * 契约名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name: string
+  /**
+   * 所属服务命名空间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Namespace: string
+  /**
+   * 协议
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Protocol: string
+  /**
+   * 契约ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ID?: string
+  /**
+   * 所属服务名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Service?: string
+  /**
+   * 版本
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Version?: string
+  /**
+   * 信息摘要
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Revision?: string
+  /**
+   * 额外内容描述
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Content?: string
+  /**
+   * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateTime?: string
+  /**
+   * 修改时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ModifyTime?: string
+  /**
+   * 契约接口列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Interfaces?: Array<GovernanceInterfaceDescription>
+}
+
+/**
  * CloseWafProtection返回参数结构体
  */
 export interface CloseWafProtectionResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * UpdateUpstreamTargets返回参数结构体
+ */
+export interface UpdateUpstreamTargetsResponse {
+  /**
+   * 是否更新成功
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Result?: boolean
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3646,13 +4948,45 @@ export interface DescribeZookeeperServerInterfacesResponse {
 }
 
 /**
- * ModifyNetworkAccessStrategy返回参数结构体
+ * DescribeGovernanceServiceContracts请求参数结构体
  */
-export interface ModifyNetworkAccessStrategyResponse {
+export interface DescribeGovernanceServiceContractsRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 北极星引擎实例ID
    */
-  RequestId?: string
+  InstanceId: string
+  /**
+   * 分页偏移量
+   */
+  Offset: number
+  /**
+   * 分页条数
+   */
+  Limit: number
+  /**
+   * 命名空间
+   */
+  Namespace?: string
+  /**
+   * 服务名
+   */
+  Service?: string
+  /**
+   * 契约名称
+   */
+  Name?: string
+  /**
+   * 契约版本
+   */
+  ContractVersion?: string
+  /**
+   * 契约协议
+   */
+  Protocol?: string
+  /**
+   * 是否只展示基本信息
+   */
+  Brief?: boolean
 }
 
 /**
@@ -3696,25 +5030,47 @@ export interface ModifyAutoScalerResourceStrategyRequest {
 }
 
 /**
- * DescribeNativeGatewayServerGroups请求参数结构体
+ * DescribeConfigFileReleaseVersions返回参数结构体
  */
-export interface DescribeNativeGatewayServerGroupsRequest {
+export interface DescribeConfigFileReleaseVersionsResponse {
   /**
-   * 云原生API网关实例ID。
+   * 版本信息
    */
-  GatewayId: string
+  ReleaseVersions?: Array<ReleaseVersion>
   /**
-   * 翻页从第几个开始获取
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Offset?: number
+  RequestId?: string
+}
+
+/**
+ * kong服务路由列表
+ */
+export interface KongServiceRouteList {
   /**
-   * 翻页获取多少个
+   * 无
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Limit?: number
+  RouteList?: Array<KongRoutePreview>
   /**
-   * 过滤参数
+   * 总数
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Filters?: Array<Filter>
+  TotalCount?: number
+}
+
+/**
+ * DeleteGovernanceAliases请求参数结构体
+ */
+export interface DeleteGovernanceAliasesRequest {
+  /**
+   * tse实例id。
+   */
+  InstanceId: string
+  /**
+   * 服务别名列表
+   */
+  GovernanceAliases: Array<GovernanceAlias>
 }
 
 /**
@@ -3787,55 +5143,107 @@ export interface CertificateInfo {
 }
 
 /**
- * 获取云原生API网关实例协议端口列表响应结果
+ * DescribeConfigFiles返回参数结构体
  */
-export interface DescribeGatewayInstancePortResult {
+export interface DescribeConfigFilesResponse {
   /**
-   * 云原生API网关ID
-注意：此字段可能返回 null，表示取不到有效值。
+   * 分页总数量
    */
-  GatewayId?: string
+  TotalCount?: number
   /**
-   * 网关实例协议端口列表
-注意：此字段可能返回 null，表示取不到有效值。
+   * 配置文件列表
    */
-  GatewayInstancePortList?: Array<GatewayInstanceSchemeAndPorts>
+  ConfigFiles?: Array<ConfigFile>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
- * UnbindAutoScalerResourceStrategyFromGroups请求参数结构体
+ * DescribeConfigFileReleases请求参数结构体
  */
-export interface UnbindAutoScalerResourceStrategyFromGroupsRequest {
+export interface DescribeConfigFileReleasesRequest {
   /**
-   * 网关实例ID
+   * 实例id
    */
-  GatewayId: string
+  InstanceId: string
   /**
-   * 策略ID
+   * 条数
    */
-  StrategyId: string
+  Limit: number
   /**
-   * 网关分组ID列表
+   * 偏移量
    */
-  GroupIds: Array<string>
+  Offset: number
+  /**
+   * 命名空间
+   */
+  Namespace?: string
+  /**
+   * 配置分组
+   */
+  Group?: string
+  /**
+   * 文件名称
+   */
+  FileName?: string
+  /**
+   * 只保护处于使用状态
+   */
+  OnlyUse?: boolean
+  /**
+   * 发布名称
+   */
+  ReleaseName?: string
+  /**
+   * 排序字段，mtime/version/name
+，默认version
+   */
+  OrderField?: string
+  /**
+   * 排序，asc/desc，默认 desc
+   */
+  OrderDesc?: string
 }
 
 /**
- * DescribePublicNetwork请求参数结构体
+ * DescribeAllConfigFileTemplates请求参数结构体
  */
-export interface DescribePublicNetworkRequest {
+export interface DescribeAllConfigFileTemplatesRequest {
   /**
-   * 云原生API网关实例ID。
+   * TSE实例id
    */
-  GatewayId: string
+  InstanceId: string
+}
+
+/**
+ * DescribeGovernanceNamespaces返回参数结构体
+ */
+export interface DescribeGovernanceNamespacesResponse {
   /**
-   * 网关分组ID
+   * 列表总数量。
    */
-  GroupId: string
+  TotalCount?: number
   /**
-   * 网络ID
+   * 治理中心命名空间实例列表。
    */
-  NetworkId: string
+  Content?: Array<GovernanceNamespace>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 云原生网关证书
+ */
+export interface KongCertificate {
+  /**
+   * 无
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Cert?: KongCertificatesPreview
 }
 
 /**
@@ -3877,25 +5285,17 @@ export interface DeleteCloudNativeAPIGatewayPublicNetworkRequest {
 }
 
 /**
- * UpdateCloudNativeAPIGatewayCertificateInfo请求参数结构体
+ * DeleteGovernanceInstancesByHost返回参数结构体
  */
-export interface UpdateCloudNativeAPIGatewayCertificateInfoRequest {
+export interface DeleteGovernanceInstancesByHostResponse {
   /**
-   * 网关ID
+   * 操作是否成功。
    */
-  GatewayId: string
+  Result?: boolean
   /**
-   * 证书id
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Id: string
-  /**
-   * 绑定的域名列表
-   */
-  BindDomains: Array<string>
-  /**
-   * 证书名称
-   */
-  Name?: string
+  RequestId?: string
 }
 
 /**
@@ -3907,6 +5307,32 @@ export interface KongUpstreamList {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   UpstreamList?: Array<KongUpstreamPreview>
+}
+
+/**
+ * DescribeConfigFilesByGroup请求参数结构体
+ */
+export interface DescribeConfigFilesByGroupRequest {
+  /**
+   * TSE实例id
+   */
+  InstanceId: string
+  /**
+   * 命名空间名
+   */
+  Namespace: string
+  /**
+   * 组名
+   */
+  Group: string
+  /**
+   * 返回数量，默认为20，最大值为100。
+   */
+  Limit?: number
+  /**
+   * 偏移量，默认为0。
+   */
+  Offset?: number
 }
 
 /**
@@ -3960,6 +5386,31 @@ export interface GovernanceInstanceInput {
 }
 
 /**
+ * CreateGovernanceServices返回参数结构体
+ */
+export interface CreateGovernanceServicesResponse {
+  /**
+   * 创建是否成功。
+   */
+  Result?: boolean
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 查询Limiter的接入地址
+ */
+export interface PolarisLimiterAddress {
+  /**
+   * VPC接入IP列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IntranetAddress: string
+}
+
+/**
  * 引擎的初始管理账号，当前仅支持Apollo引擎
  */
 export interface EngineAdmin {
@@ -3978,14 +5429,75 @@ export interface EngineAdmin {
 }
 
 /**
- * 查询Limiter的接入地址
+ * CreateConfigFileGroup返回参数结构体
  */
-export interface PolarisLimiterAddress {
+export interface CreateConfigFileGroupResponse {
   /**
-   * VPC接入IP列表
-注意：此字段可能返回 null，表示取不到有效值。
+   * 是否创建成功
    */
-  IntranetAddress: string
+  Result?: boolean
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyGovernanceNamespaces请求参数结构体
+ */
+export interface ModifyGovernanceNamespacesRequest {
+  /**
+   * tse实例id。
+   */
+  InstanceId: string
+  /**
+   * 命名空间信息。
+   */
+  GovernanceNamespaces: Array<GovernanceNamespaceInput>
+}
+
+/**
+ * CreateGovernanceAlias请求参数结构体
+ */
+export interface CreateGovernanceAliasRequest {
+  /**
+   * tse实例id。
+   */
+  InstanceId: string
+  /**
+   * 服务别名
+   */
+  Alias: string
+  /**
+   * 服务别名命名空间
+   */
+  AliasNamespace: string
+  /**
+   * 服务别名所指向的服务名
+   */
+  Service: string
+  /**
+   * 服务别名所指向的命名空间
+   */
+  Namespace: string
+  /**
+   * 服务别名描述
+   */
+  Comment?: string
+}
+
+/**
+ * CreateOrUpdateConfigFileAndRelease返回参数结构体
+ */
+export interface CreateOrUpdateConfigFileAndReleaseResponse {
+  /**
+   * 操作是否成功
+   */
+  Result?: boolean
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -4068,19 +5580,37 @@ export interface DeleteCloudNativeAPIGatewayResponse {
 }
 
 /**
- * kong实例的服务列表
+ * DescribeConfigFiles请求参数结构体
  */
-export interface KongServices {
+export interface DescribeConfigFilesRequest {
   /**
-   * kong实例的服务列表
-注意：此字段可能返回 null，表示取不到有效值。
+   * 命名空间名称
    */
-  ServiceList?: Array<KongServicePreview>
+  Namespace: string
   /**
-   * 列表总数
-注意：此字段可能返回 null，表示取不到有效值。
+   * TSE实例id
    */
-  TotalCount?: number
+  InstanceId?: string
+  /**
+   * 组名
+   */
+  Group?: string
+  /**
+   * 名称
+   */
+  Name?: string
+  /**
+   * 标签列表
+   */
+  Tags?: Array<ConfigFileTag>
+  /**
+   * 返回数量，默认为20，最大值为100。
+   */
+  Limit?: number
+  /**
+   * 偏移量，默认为0。
+   */
+  Offset?: number
 }
 
 /**
@@ -4113,6 +5643,24 @@ export interface CreateCloudNativeAPIGatewayCertificateRequest {
    * @deprecated
    */
   Crt?: string
+}
+
+/**
+ * DescribeConfigFilesByGroup返回参数结构体
+ */
+export interface DescribeConfigFilesByGroupResponse {
+  /**
+   * 记录总数量
+   */
+  TotalCount?: number
+  /**
+   * 配置文件列表
+   */
+  ConfigFiles?: Array<ConfigFile>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -4279,6 +5827,20 @@ export interface UpdateCloudNativeAPIGatewayResult {
 }
 
 /**
+ * ModifyGovernanceServices请求参数结构体
+ */
+export interface ModifyGovernanceServicesRequest {
+  /**
+   * tse 实例 id。
+   */
+  InstanceId: string
+  /**
+   * 服务信息。
+   */
+  GovernanceServices: Array<GovernanceServiceInput>
+}
+
+/**
  * DescribeCloudNativeAPIGatewayCertificateDetails返回参数结构体
  */
 export interface DescribeCloudNativeAPIGatewayCertificateDetailsResponse {
@@ -4291,6 +5853,24 @@ export interface DescribeCloudNativeAPIGatewayCertificateDetailsResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DeleteConfigFileGroup请求参数结构体
+ */
+export interface DeleteConfigFileGroupRequest {
+  /**
+   * tse 实例 id。
+   */
+  InstanceId: string
+  /**
+   * 命名空间
+   */
+  Namespace: string
+  /**
+   * 组
+   */
+  Group: string
 }
 
 /**
@@ -4352,6 +5932,16 @@ export interface InstancePort {
 }
 
 /**
+ * ModifyCloudNativeAPIGateway返回参数结构体
+ */
+export interface ModifyCloudNativeAPIGatewayResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 定时伸缩配置参数
  */
 export interface CloudNativeAPIGatewayStrategyCronScalerConfigParam {
@@ -4400,13 +5990,45 @@ export interface OpenWafProtectionRequest {
 }
 
 /**
- * DescribeCloudNativeAPIGatewayCertificates返回参数结构体
+ * DeleteGovernanceServices请求参数结构体
  */
-export interface DescribeCloudNativeAPIGatewayCertificatesResponse {
+export interface DeleteGovernanceServicesRequest {
   /**
-   * 无
+   * tse实例id。
    */
-  Result?: KongCertificatesList
+  InstanceId: string
+  /**
+   * 服务信息。
+   */
+  GovernanceServices: Array<GovernanceServiceInput>
+}
+
+/**
+ * UnbindAutoScalerResourceStrategyFromGroups请求参数结构体
+ */
+export interface UnbindAutoScalerResourceStrategyFromGroupsRequest {
+  /**
+   * 网关实例ID
+   */
+  GatewayId: string
+  /**
+   * 策略ID
+   */
+  StrategyId: string
+  /**
+   * 网关分组ID列表
+   */
+  GroupIds: Array<string>
+}
+
+/**
+ * ModifyConfigFileGroup返回参数结构体
+ */
+export interface ModifyConfigFileGroupResponse {
+  /**
+   * 修改是否成功
+   */
+  Result?: boolean
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4424,13 +6046,35 @@ export interface CreateCloudNativeAPIGatewayServiceRateLimitResponse {
 }
 
 /**
- * ModifyNativeGatewayServerGroup返回参数结构体
+ * DescribeNacosServerInterfaces返回参数结构体
  */
-export interface ModifyNativeGatewayServerGroupResponse {
+export interface DescribeNacosServerInterfacesResponse {
+  /**
+   * 接口总个数
+   */
+  TotalCount?: number
+  /**
+   * 接口列表
+   */
+  Content?: Array<NacosServerInterface>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DeleteConfigFileReleases请求参数结构体
+ */
+export interface DeleteConfigFileReleasesRequest {
+  /**
+   * 实例id
+   */
+  InstanceId: string
+  /**
+   * 待删除配置发布详情
+   */
+  ConfigFileReleases: Array<ConfigFileReleaseDeletion>
 }
 
 /**
@@ -4552,6 +6196,24 @@ export interface CreateEngineResponse {
 }
 
 /**
+ * 网络访问策略
+ */
+export interface NetworkAccessControl {
+  /**
+   * 访问模式：Whitelist|Blacklist
+   */
+  Mode: string
+  /**
+   * 白名单列表
+   */
+  CidrWhiteList?: Array<string>
+  /**
+   * 黑名单列表
+   */
+  CidrBlackList?: Array<string>
+}
+
+/**
  * ModifyCloudNativeAPIGatewayServiceRateLimit请求参数结构体
  */
 export interface ModifyCloudNativeAPIGatewayServiceRateLimitRequest {
@@ -4570,17 +6232,133 @@ export interface ModifyCloudNativeAPIGatewayServiceRateLimitRequest {
 }
 
 /**
- * DeleteCloudNativeAPIGatewayRoute请求参数结构体
+ * ModifyNetworkBasicInfo返回参数结构体
  */
-export interface DeleteCloudNativeAPIGatewayRouteRequest {
+export interface ModifyNetworkBasicInfoResponse {
   /**
-   * 网关ID
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  GatewayId: string
+  RequestId?: string
+}
+
+/**
+ * ModifyGovernanceServices返回参数结构体
+ */
+export interface ModifyGovernanceServicesResponse {
   /**
-   * 路由的ID或名字，不支持名称“未命名”
+   * 是否成功
    */
-  Name: string
+  Result?: boolean
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * UpdateEngineInternetAccess返回参数结构体
+ */
+export interface UpdateEngineInternetAccessResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 配置文件组
+ */
+export interface ConfigFileGroup {
+  /**
+   * 配置文件组id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Id?: number
+  /**
+   * 配置文件组名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name?: string
+  /**
+   * 命名空间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Namespace?: string
+  /**
+   * 备注
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Comment?: string
+  /**
+   * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateTime?: string
+  /**
+   * 创建者
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateBy?: string
+  /**
+   * 修改时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ModifyTime?: string
+  /**
+   * 修改者
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ModifyBy?: string
+  /**
+   * 文件数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FileCount?: number
+  /**
+   * 关联用户，link_users
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UserIds?: Array<string>
+  /**
+   * 组id，link_groups
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  GroupIds?: Array<string>
+  /**
+   * remove_link_users
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RemoveUserIds?: Array<string>
+  /**
+   * remove_link_groups
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RemoveGroupIds?: Array<string>
+  /**
+   * 是否可编辑
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Editable?: boolean
+  /**
+   * 归属者
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Owner?: string
+  /**
+   * 部门
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Department?: string
+  /**
+   * 业务
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Business?: string
+  /**
+   * 配置文件组标签
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ConfigFileGroupTags?: Array<ConfigFileGroupTag>
 }
 
 /**
@@ -4709,6 +6487,29 @@ export interface CloudNativeAPIGatewayStrategyAutoScalerConfig {
 }
 
 /**
+ * DescribeGovernanceServiceContracts返回参数结构体
+ */
+export interface DescribeGovernanceServiceContractsResponse {
+  /**
+   * 总数
+   */
+  TotalCount?: number
+  /**
+   * 返回条数
+   */
+  Size?: number
+  /**
+   * 契约定义列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ServiceContracts?: Array<GovernanceServiceContract>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * Zookeeper副本信息
  */
 export interface ZookeeperReplica {
@@ -4826,6 +6627,131 @@ export interface UpdateUpstreamHealthCheckConfigResponse {
 }
 
 /**
+ * DescribeNativeGatewayServerGroups请求参数结构体
+ */
+export interface DescribeNativeGatewayServerGroupsRequest {
+  /**
+   * 云原生API网关实例ID。
+   */
+  GatewayId: string
+  /**
+   * 翻页从第几个开始获取
+   */
+  Offset?: number
+  /**
+   * 翻页获取多少个
+   */
+  Limit?: number
+  /**
+   * 过滤参数
+   */
+  Filters?: Array<Filter>
+}
+
+/**
+ * ModifyCloudNativeAPIGatewayRoute请求参数结构体
+ */
+export interface ModifyCloudNativeAPIGatewayRouteRequest {
+  /**
+   * 网关ID
+   */
+  GatewayId: string
+  /**
+   * 所属服务的ID
+   */
+  ServiceID: string
+  /**
+   * 路由的ID，实例级别唯一
+   */
+  RouteID: string
+  /**
+   * 路由的名字，实例级别唯一，可以不提供
+   */
+  RouteName?: string
+  /**
+   * 路由的方法，其中方法可选值：
+- GET
+- POST
+- DELETE
+- PUT
+- OPTIONS
+- PATCH
+- HEAD
+- ANY
+- TRACE
+- COPY
+- MOVE
+- PROPFIND
+- PROPPATCH
+- MKCOL
+- LOCK
+- UNLOCK
+   */
+  Methods?: Array<string>
+  /**
+   * 路由的域名
+   */
+  Hosts?: Array<string>
+  /**
+   * 路由的路径
+   */
+  Paths?: Array<string>
+  /**
+   * 路由的协议，可选
+- https
+- http
+   */
+  Protocols?: Array<string>
+  /**
+   * 转发到后端时是否保留Host
+   */
+  PreserveHost?: boolean
+  /**
+   * https重定向状态码
+   */
+  HttpsRedirectStatusCode?: number
+  /**
+   * 转发到后端时是否StripPath
+   */
+  StripPath?: boolean
+  /**
+   * 是否开启强制HTTPS
+   * @deprecated
+   */
+  ForceHttps?: boolean
+  /**
+   * 四层匹配的目的端口
+   */
+  DestinationPorts?: Array<number | bigint>
+  /**
+   * 路由的Headers
+   */
+  Headers?: Array<KVMapping>
+}
+
+/**
+ * DescribeGovernanceNamespaces请求参数结构体
+ */
+export interface DescribeGovernanceNamespacesRequest {
+  /**
+   * tse实例id
+   */
+  InstanceId: string
+  /**
+   * 根据命名空间名称过滤。
+   */
+  Name?: string
+  /**
+   * 偏移量，默认为0。
+   */
+  Offset?: number
+  /**
+   * 返回数量，默认为20，最大值为100。
+   */
+  Limit?: number
+}
+
+/**
  * DescribeSREInstances返回参数结构体
  */
 export interface DescribeSREInstancesResponse {
@@ -4837,6 +6763,20 @@ export interface DescribeSREInstancesResponse {
    * 实例记录
    */
   Content?: Array<SREInstance>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * PublishConfigFiles返回参数结构体
+ */
+export interface PublishConfigFilesResponse {
+  /**
+   * 配置文件发布是否成功
+   */
+  Result?: boolean
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4876,6 +6816,28 @@ export interface CreateCloudNativeAPIGatewayServerGroupResult {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskId?: string
+}
+
+/**
+ * UpdateCloudNativeAPIGatewayCertificateInfo请求参数结构体
+ */
+export interface UpdateCloudNativeAPIGatewayCertificateInfoRequest {
+  /**
+   * 网关ID
+   */
+  GatewayId: string
+  /**
+   * 证书id
+   */
+  Id: string
+  /**
+   * 绑定的域名列表
+   */
+  BindDomains: Array<string>
+  /**
+   * 证书名称
+   */
+  Name?: string
 }
 
 /**
@@ -4961,6 +6923,42 @@ export interface RouteWafStatus {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ServiceId?: string
+}
+
+/**
+ * DescribeConfigFile请求参数结构体
+ */
+export interface DescribeConfigFileRequest {
+  /**
+   * TSE实例id
+   */
+  InstanceId: string
+  /**
+   * 命名空间
+   */
+  Namespace: string
+  /**
+   * 组
+   */
+  Group: string
+  /**
+   * 名称
+   */
+  Name: string
+}
+
+/**
+ * ModifyGovernanceAlias返回参数结构体
+ */
+export interface ModifyGovernanceAliasResponse {
+  /**
+   * 创建是否成功。
+   */
+  Result?: boolean
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -5202,6 +7200,38 @@ export interface CreateNativeGatewayServerGroupResponse {
 }
 
 /**
+ * 配置发布版本信息
+ */
+export interface ReleaseVersion {
+  /**
+   * 名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name?: string
+  /**
+   * 是否生效
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Active?: boolean
+}
+
+/**
+ * kong实例的服务列表
+ */
+export interface KongServices {
+  /**
+   * kong实例的服务列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ServiceList?: Array<KongServicePreview>
+  /**
+   * 列表总数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalCount?: number
+}
+
+/**
  * 云原生网关证书预览信息
  */
 export interface KongCertificatesPreview {
@@ -5283,6 +7313,20 @@ export interface CreateCloudNativeAPIGatewayServiceRateLimitRequest {
 }
 
 /**
+ * DeleteConfigFileReleases返回参数结构体
+ */
+export interface DeleteConfigFileReleasesResponse {
+  /**
+   * 删除配置发布结果
+   */
+  Result?: boolean
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeZookeeperReplicas返回参数结构体
  */
 export interface DescribeZookeeperReplicasResponse {
@@ -5325,6 +7369,20 @@ export interface PolarisCLSTopicInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TopicName?: string
+}
+
+/**
+ * DescribeGovernanceServiceContractVersions返回参数结构体
+ */
+export interface DescribeGovernanceServiceContractVersionsResponse {
+  /**
+   * 服务契约版本列表
+   */
+  GovernanceServiceContractVersions?: Array<GovernanceServiceContractVersion>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -5490,22 +7548,33 @@ export interface ModifyCloudNativeAPIGatewayCanaryRuleRequest {
 }
 
 /**
- * 私有网络信息
+ * 获取云原生API网关实例协议端口列表响应结果
  */
-export interface VpcInfo {
+export interface DescribeGatewayInstancePortResult {
   /**
-   * Vpc Id
-   */
-  VpcId: string
-  /**
-   * 子网ID
-   */
-  SubnetId: string
-  /**
-   * 内网访问地址
+   * 云原生API网关ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  IntranetAddress?: string
+  GatewayId?: string
+  /**
+   * 网关实例协议端口列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  GatewayInstancePortList?: Array<GatewayInstanceSchemeAndPorts>
+}
+
+/**
+ * PublishConfigFiles请求参数结构体
+ */
+export interface PublishConfigFilesRequest {
+  /**
+   * TSE实例id
+   */
+  InstanceId: string
+  /**
+   * 配置文件发布
+   */
+  ConfigFileReleases: ConfigFileRelease
 }
 
 /**
@@ -5529,13 +7598,37 @@ export interface CreateAutoScalerResourceStrategyResponse {
 }
 
 /**
- * ModifyConsoleNetwork返回参数结构体
+ * DescribeConfigFileReleaseHistories请求参数结构体
  */
-export interface ModifyConsoleNetworkResponse {
+export interface DescribeConfigFileReleaseHistoriesRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * TSE实例id
    */
-  RequestId?: string
+  InstanceId: string
+  /**
+   * 命名空间
+   */
+  Namespace?: string
+  /**
+   * 组
+   */
+  Group?: string
+  /**
+   * 名称
+   */
+  Name?: string
+  /**
+   * 发布历史记录id，用于分页优化，一般指定 EndId，就不用指定 Offset，否则分页可能不连续
+   */
+  EndId?: number
+  /**
+   * 返回数量，默认为20，最大值为100。
+   */
+  Limit?: number
+  /**
+   * 偏移量，默认为0。
+   */
+  Offset?: number
 }
 
 /**
@@ -5640,6 +7733,20 @@ export interface KongServicePreview {
 }
 
 /**
+ * DescribeCloudNativeAPIGatewayCertificates返回参数结构体
+ */
+export interface DescribeCloudNativeAPIGatewayCertificatesResponse {
+  /**
+   * 无
+   */
+  Result?: KongCertificatesList
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyCloudNativeAPIGatewayRouteRateLimit返回参数结构体
  */
 export interface ModifyCloudNativeAPIGatewayRouteRateLimitResponse {
@@ -5650,17 +7757,21 @@ export interface ModifyCloudNativeAPIGatewayRouteRateLimitResponse {
 }
 
 /**
- * 查询过滤通用对象
+ * DescribeConfigFileReleaseHistories返回参数结构体
  */
-export interface Filter {
+export interface DescribeConfigFileReleaseHistoriesResponse {
   /**
-   * 过滤参数名
+   * 数据总数量
    */
-  Name: string
+  TotalCount?: number
   /**
-   * 过滤参数值
+   * 配置文件发布历史列表
    */
-  Values: Array<string>
+  ConfigFileReleaseHistories?: Array<ConfigFileReleaseHistory>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -5686,6 +7797,44 @@ export interface DescribeCloudNativeAPIGatewayCanaryRulesRequest {
 }
 
 /**
+ * 多环境网络信息
+ */
+export interface EnvAddressInfo {
+  /**
+   * 环境名
+   */
+  EnvName?: string
+  /**
+   * 是否开启config公网
+   */
+  EnableConfigInternet?: boolean
+  /**
+   * config公网ip
+   */
+  ConfigInternetServiceIp?: string
+  /**
+   * config内网访问地址
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ConfigIntranetAddress?: string
+  /**
+   * 是否开启config内网clb
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EnableConfigIntranet?: boolean
+  /**
+   * 客户端公网带宽
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InternetBandWidth?: number
+  /**
+   * 客户端公网CLB多可用区信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CLBMultiRegion?: CLBMultiRegion
+}
+
+/**
  * DeleteCloudNativeAPIGatewayCanaryRule返回参数结构体
  */
 export interface DeleteCloudNativeAPIGatewayCanaryRuleResponse {
@@ -5702,7 +7851,7 @@ export interface ModifyGovernanceInstancesResponse {
   /**
    * 修改是否成功。
    */
-  Result: boolean
+  Result?: boolean
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5770,9 +7919,75 @@ export interface UpdateCloudNativeAPIGatewayCertificateInfoResponse {
 }
 
 /**
- * ModifyNetworkBasicInfo返回参数结构体
+ * 配置文件标签
  */
-export interface ModifyNetworkBasicInfoResponse {
+export interface ConfigFileTag {
+  /**
+   * key-value 键
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Key?: string
+  /**
+   * key-value 值
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Value?: string
+}
+
+/**
+ * DescribeGovernanceServices请求参数结构体
+ */
+export interface DescribeGovernanceServicesRequest {
+  /**
+   * 按照服务名过滤，精确匹配。
+   */
+  Name?: string
+  /**
+   * 按照命名空间过滤，精确匹配。
+   */
+  Namespace?: string
+  /**
+   * 使用元数据过滤，目前只支持一组元组数，若传了多条，只会使用第一条元数据过滤。
+   */
+  Metadatas?: Array<Metadata>
+  /**
+   * 偏移量，默认为0。
+   */
+  Offset?: number
+  /**
+   * 返回数量，默认为20，最大值为100。
+   */
+  Limit?: number
+  /**
+   * tse 实例 id。
+   */
+  InstanceId?: string
+  /**
+   * 服务所属部门。
+   */
+  Department?: string
+  /**
+   * 服务所属业务。
+   */
+  Business?: string
+  /**
+   * 服务中实例的ip，用来过滤服务。
+   */
+  Host?: string
+  /**
+   * 是否只查询存在健康实例的服务
+   */
+  OnlyExistHealthyInstance?: boolean
+}
+
+/**
+ * DescribeConfigFileRelease返回参数结构体
+ */
+export interface DescribeConfigFileReleaseResponse {
+  /**
+   * 配置文件发布详情
+   */
+  ConfigFileRelease?: ConfigFileRelease
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5864,4 +8079,22 @@ export interface KongServiceDetail {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CreatedTime?: string
+}
+
+/**
+ * DescribeGovernanceAliases返回参数结构体
+ */
+export interface DescribeGovernanceAliasesResponse {
+  /**
+   * 服务别名总数量。
+   */
+  TotalCount?: number
+  /**
+   * 服务别名列表。
+   */
+  Content?: Array<GovernanceAlias>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }

@@ -92,7 +92,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeSlowLogs(req: DescribeSlowLogsRequest, cb?: (error: string, rep: DescribeSlowLogsResponse) => void): Promise<DescribeSlowLogsResponse>;
     /**
-     * 本接口(ModifyDBInstanceNetworkAddress)用于修改云数据库实例的网络信息，可进行基础网络转VPC网络和VPC网络之间的变换。
+     * 本接口（ModifyDBInstanceNetworkAddress）用于修改云数据库实例的网络信息，支持基础网络切换为私有网络、私有网络切换私有网络。
      */
     ModifyDBInstanceNetworkAddress(req: ModifyDBInstanceNetworkAddressRequest, cb?: (error: string, rep: ModifyDBInstanceNetworkAddressResponse) => void): Promise<ModifyDBInstanceNetworkAddressResponse>;
     /**

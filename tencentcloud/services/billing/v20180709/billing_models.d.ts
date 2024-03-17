@@ -5958,7 +5958,7 @@ export interface DescribeBillDetailRequest {
      */
     Offset: number;
     /**
-     * 数量，最大值为100
+     * 数量，最大值为300
      */
     Limit: number;
     /**

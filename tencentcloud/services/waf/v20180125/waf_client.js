@@ -385,15 +385,6 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeAttackOverview", req, cb);
     }
     /**
-     * 获取负载均衡绑定的WAF信息，可以根据租户负载均衡实例ID、负载均衡监听器ID、负载均衡的域名信息来查询对应绑定的 Waf的状态信息。
-查询的范围：负载均衡实例ID、负载均衡实例ID+监听器ID、负载均衡实例ID+监听器ID+域名。
-可能的错误码：ResourceNotFound（没有找到对应的资源）、UnsupportedRegion（目前clb-waf只支持北京、广州、上海、成都、重庆、香港地域）。
-
-     */
-    async DescribeWafInfo(req, cb) {
-        return this.request("DescribeWafInfo", req, cb);
-    }
-    /**
      * 获取用户规则白名单列表
      */
     async DescribeAttackWhiteRule(req, cb) {

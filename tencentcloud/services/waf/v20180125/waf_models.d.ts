@@ -2860,33 +2860,24 @@ export interface ModifyAntiFakeUrlStatusRequest {
     Ids: Array<number | bigint>;
 }
 /**
- * DescribeCCRuleList请求参数结构体
+ * TLS 加密套件
  */
-export interface DescribeCCRuleListRequest {
+export interface TLSCiphers {
     /**
-     * 需要查询的API所属的域名
+     * TLS版本ID
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Domain: string;
+    VersionId: number;
     /**
-     * 偏移
+     * 加密套件ID
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Offset: number;
+    CipherId: number;
     /**
-     * 容量
+     * 加密套件
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Limit: number;
-    /**
-     * 目前支持根据ts_version排序
-     */
-    By: string;
-    /**
-     * 过滤数组,name可以是如下的值： RuleID,ParamName,Url,Action,Method,Source,Status
-     */
-    Filters?: Array<FiltersItemNew>;
-    /**
-     * asc或者desc
-     */
-    Order?: string;
+    CipherName: string;
 }
 /**
  * 响应体的返回码
@@ -3639,23 +3630,6 @@ export interface DeleteIpAccessControlResponse {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     FailedCount?: number;
-    /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
-}
-/**
- * DescribeWafInfo返回参数结构体
- */
-export interface DescribeWafInfoResponse {
-    /**
-     * 返回的WAF信息数组的长度，为0则表示没有查询到对应的信息
-     */
-    Total?: number;
-    /**
-     * 对应的WAF信息的数组。
-     */
-    HostList?: Array<ClbHostResult>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -5269,15 +5243,6 @@ export interface DescribeAntiFakeRulesResponse {
     RequestId?: string;
 }
 /**
- * DescribeWafInfo请求参数结构体
- */
-export interface DescribeWafInfoRequest {
-    /**
-     * CLB回调WAF接口（获取、删除）的参数
-     */
-    Params: Array<ClbHostsParams>;
-}
-/**
  * GetAttackTotalCount请求参数结构体
  */
 export interface GetAttackTotalCountRequest {
@@ -5822,23 +5787,6 @@ export interface InstanceInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     LastQpsExceedTime?: string;
-}
-/**
- * CLB回调WAF接口（获取、删除）的参数
- */
-export interface ClbHostsParams {
-    /**
-     * 负载均衡实例ID，如果不传次参数则默认认为操作的是整个AppId的监听器，如果此参数不为空则认为操作的是对应负载均衡实例。
-     */
-    LoadBalancerId: string;
-    /**
-     * 负载均衡监听器ID，，如果不传次参数则默认认为操作的是整个负载均衡实例，如果此参数不为空则认为操作的是对应负载均衡监听器。
-     */
-    ListenerId?: string;
-    /**
-     * WAF实例ID，，如果不传次参数则默认认为操作的是整个负载均衡监听器实例，如果此参数不为空则认为操作的是对应负载均衡监听器的某一个具体的域名。
-     */
-    DomainId?: string;
 }
 /**
  * 设置WAF状态的结构体
@@ -7421,29 +7369,17 @@ export interface AddAttackWhiteRuleResponse {
     RequestId?: string;
 }
 /**
- * CLB查询对应绑定的WAF状态的结果参数
+ * ModifyDomainsCLSStatus请求参数结构体
  */
-export interface ClbHostResult {
+export interface ModifyDomainsCLSStatusRequest {
     /**
-     * WAF绑定的监听器实例
+     * 需要修改的域名列表
      */
-    LoadBalancer: LoadBalancer;
+    Domains: Array<DomainURI>;
     /**
-     * WAF绑定的域名
-     */
-    Domain: string;
-    /**
-     * WAF绑定的实例ID
-     */
-    DomainId: string;
-    /**
-     * 是否有绑定WAF，1：绑定了WAF，0：没有绑定WAF
+     * 修改域名的访问日志开关为Status
      */
     Status: number;
-    /**
-     * 绑定了WAF的情况下，WAF流量模式，1：清洗模式，0：镜像模式（默认）
-     */
-    FlowMode: number;
 }
 /**
  * DescribeWafThreatenIntelligence返回参数结构体
@@ -8335,24 +8271,33 @@ export interface CreateDealsResponse {
     RequestId?: string;
 }
 /**
- * TLS 加密套件
+ * DescribeCCRuleList请求参数结构体
  */
-export interface TLSCiphers {
+export interface DescribeCCRuleListRequest {
     /**
-     * TLS版本ID
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 需要查询的API所属的域名
      */
-    VersionId: number;
+    Domain: string;
     /**
-     * 加密套件ID
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 偏移
      */
-    CipherId: number;
+    Offset: number;
     /**
-     * 加密套件
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 容量
      */
-    CipherName: string;
+    Limit: number;
+    /**
+     * 目前支持根据ts_version排序
+     */
+    By: string;
+    /**
+     * 过滤数组,name可以是如下的值： RuleID,ParamName,Url,Action,Method,Source,Status
+     */
+    Filters?: Array<FiltersItemNew>;
+    /**
+     * asc或者desc
+     */
+    Order?: string;
 }
 /**
  * DescribeDomainVerifyResult返回参数结构体
@@ -8699,19 +8644,6 @@ export interface ModifyDomainPostActionResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
-}
-/**
- * ModifyDomainsCLSStatus请求参数结构体
- */
-export interface ModifyDomainsCLSStatusRequest {
-    /**
-     * 需要修改的域名列表
-     */
-    Domains: Array<DomainURI>;
-    /**
-     * 修改域名的访问日志开关为Status
-     */
-    Status: number;
 }
 /**
  * DeleteAccessExport请求参数结构体

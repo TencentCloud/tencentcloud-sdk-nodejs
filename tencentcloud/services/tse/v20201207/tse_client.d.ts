@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeCloudNativeAPIGatewayResponse, CreateCloudNativeAPIGatewayServiceResponse, DeleteCloudNativeAPIGatewayPublicNetworkResponse, DeleteCloudNativeAPIGatewayRouteRateLimitResponse, DeleteWafDomainsRequest, DescribeCloudNativeAPIGatewayServiceRateLimitRequest, CreateCloudNativeAPIGatewayRequest, ModifyCloudNativeAPIGatewayRouteRequest, DescribeCloudNativeAPIGatewayUpstreamRequest, DeleteNativeGatewayServerGroupResponse, ModifyCloudNativeAPIGatewayCertificateResponse, ModifyConsoleNetworkRequest, CreateCloudNativeAPIGatewayRouteRateLimitResponse, DescribeSREInstanceAccessAddressResponse, ModifyCloudNativeAPIGatewayCanaryRuleResponse, DescribeAutoScalerResourceStrategyBindingGroupsRequest, CreateNativeGatewayServerGroupRequest, DescribeCloudNativeAPIGatewayCertificatesRequest, ModifyCloudNativeAPIGatewayRouteRateLimitRequest, ModifyCloudNativeAPIGatewayResponse, CloseWafProtectionRequest, ModifyCloudNativeAPIGatewayServiceResponse, DescribeCloudNativeAPIGatewayNodesResponse, CreateCloudNativeAPIGatewayResponse, DescribeUpstreamHealthCheckConfigResponse, DeleteCloudNativeAPIGatewayCertificateResponse, DeleteCloudNativeAPIGatewayCanaryRuleRequest, DescribeAutoScalerResourceStrategyBindingGroupsResponse, DescribeNacosReplicasRequest, CreateCloudNativeAPIGatewayServiceRequest, DescribeZookeeperServerInterfacesRequest, ModifyCloudNativeAPIGatewayCertificateRequest, CreateWafDomainsResponse, DescribeCloudNativeAPIGatewayServicesRequest, UnbindAutoScalerResourceStrategyFromGroupsResponse, DescribeCloudNativeAPIGatewayUpstreamResponse, DeleteAutoScalerResourceStrategyRequest, CreateGovernanceInstancesResponse, DescribeCloudNativeAPIGatewayNodesRequest, CreateCloudNativeAPIGatewayCanaryRuleResponse, DescribeSREInstancesRequest, DeleteEngineResponse, DescribeCloudNativeAPIGatewayRoutesResponse, DescribeWafProtectionResponse, DescribeZookeeperReplicasRequest, DeleteGovernanceInstancesResponse, UpdateUpstreamTargetsRequest, DeleteCloudNativeAPIGatewayServiceResponse, BindAutoScalerResourceStrategyToGroupsResponse, DescribeAutoScalerResourceStrategiesResponse, ModifyNetworkAccessStrategyRequest, DeleteCloudNativeAPIGatewayRouteResponse, DescribeCloudNativeAPIGatewayPortsResponse, CreateCloudNativeAPIGatewayRouteRateLimitRequest, DeleteNativeGatewayServerGroupRequest, ModifyCloudNativeAPIGatewayRouteResponse, DescribeNacosReplicasResponse, DeleteCloudNativeAPIGatewayServiceRateLimitRequest, OpenWafProtectionResponse, DescribeCloudNativeAPIGatewayRequest, ModifyUpstreamNodeStatusRequest, DescribeGovernanceInstancesResponse, DescribeCloudNativeAPIGatewayConfigResponse, CreateCloudNativeAPIGatewayRouteResponse, DescribeCloudNativeAPIGatewayCanaryRulesResponse, DescribeCloudNativeAPIGatewayConfigRequest, UpdateEngineInternetAccessResponse, DescribeCloudNativeAPIGatewaysRequest, CreateGovernanceInstancesRequest, DescribeNacosServerInterfacesResponse, BindAutoScalerResourceStrategyToGroupsRequest, DescribeCloudNativeAPIGatewayServiceRateLimitResponse, DeleteCloudNativeAPIGatewayServiceRequest, ModifyAutoScalerResourceStrategyResponse, CreateCloudNativeAPIGatewayCertificateResponse, CreateCloudNativeAPIGatewayCanaryRuleRequest, DescribePublicNetworkResponse, ModifyNativeGatewayServerGroupRequest, DescribeCloudNativeAPIGatewayRouteRateLimitRequest, DescribeOneCloudNativeAPIGatewayServiceRequest, DeleteGovernanceInstancesRequest, DescribeCloudNativeAPIGatewaysResponse, UpdateCloudNativeAPIGatewaySpecRequest, DescribeCloudNativeAPIGatewayServicesResponse, DeleteCloudNativeAPIGatewayRouteRateLimitRequest, DeleteEngineRequest, CreateCloudNativeAPIGatewayPublicNetworkResponse, DescribeWafDomainsResponse, ModifyNetworkBasicInfoRequest, DescribeUpstreamHealthCheckConfigRequest, DescribeSREInstanceAccessAddressRequest, DeleteAutoScalerResourceStrategyResponse, UpdateUpstreamTargetsResponse, DeleteCloudNativeAPIGatewayCertificateRequest, DeleteCloudNativeAPIGatewayServiceRateLimitResponse, CloseWafProtectionResponse, UpdateUpstreamHealthCheckConfigRequest, UpdateCloudNativeAPIGatewaySpecResponse, DescribeZookeeperServerInterfacesResponse, ModifyNetworkAccessStrategyResponse, ModifyAutoScalerResourceStrategyRequest, DescribeNativeGatewayServerGroupsRequest, UnbindAutoScalerResourceStrategyFromGroupsRequest, DescribePublicNetworkRequest, DeleteCloudNativeAPIGatewayRequest, DeleteCloudNativeAPIGatewayPublicNetworkRequest, UpdateCloudNativeAPIGatewayCertificateInfoRequest, DescribeOneCloudNativeAPIGatewayServiceResponse, ModifyCloudNativeAPIGatewayServiceRequest, DeleteCloudNativeAPIGatewayResponse, CreateCloudNativeAPIGatewayCertificateRequest, DescribeWafDomainsRequest, DescribeWafProtectionRequest, ModifyUpstreamNodeStatusResponse, DescribeAutoScalerResourceStrategiesRequest, CreateCloudNativeAPIGatewayPublicNetworkRequest, DescribeGovernanceInstancesRequest, DescribeCloudNativeAPIGatewayRouteRateLimitResponse, DescribeCloudNativeAPIGatewayCertificateDetailsResponse, DescribeNativeGatewayServerGroupsResponse, UpdateEngineInternetAccessRequest, OpenWafProtectionRequest, DescribeCloudNativeAPIGatewayCertificatesResponse, CreateCloudNativeAPIGatewayServiceRateLimitResponse, ModifyNativeGatewayServerGroupResponse, CreateAutoScalerResourceStrategyRequest, DescribeCloudNativeAPIGatewayRoutesRequest, CreateEngineResponse, ModifyCloudNativeAPIGatewayServiceRateLimitRequest, DeleteCloudNativeAPIGatewayRouteRequest, ModifyCloudNativeAPIGatewayServiceRateLimitResponse, DescribeNacosServerInterfacesRequest, UpdateUpstreamHealthCheckConfigResponse, DescribeSREInstancesResponse, DescribeCloudNativeAPIGatewayCertificateDetailsRequest, CreateWafDomainsRequest, CreateCloudNativeAPIGatewayRouteRequest, CreateNativeGatewayServerGroupResponse, CreateCloudNativeAPIGatewayServiceRateLimitRequest, DescribeZookeeperReplicasResponse, ModifyGovernanceInstancesRequest, CreateEngineRequest, ModifyCloudNativeAPIGatewayCanaryRuleRequest, CreateAutoScalerResourceStrategyResponse, ModifyConsoleNetworkResponse, DeleteWafDomainsResponse, ModifyCloudNativeAPIGatewayRequest, ModifyCloudNativeAPIGatewayRouteRateLimitResponse, DescribeCloudNativeAPIGatewayCanaryRulesRequest, DeleteCloudNativeAPIGatewayCanaryRuleResponse, ModifyGovernanceInstancesResponse, DescribeCloudNativeAPIGatewayPortsRequest, UpdateCloudNativeAPIGatewayCertificateInfoResponse, ModifyNetworkBasicInfoResponse } from "./tse_models";
+import { DescribeCloudNativeAPIGatewayResponse, CreateCloudNativeAPIGatewayServiceResponse, DeleteCloudNativeAPIGatewayPublicNetworkResponse, CreateOrUpdateConfigFileAndReleaseRequest, DeleteCloudNativeAPIGatewayRouteRateLimitResponse, DeleteWafDomainsRequest, DescribeCloudNativeAPIGatewayServiceRateLimitRequest, CreateCloudNativeAPIGatewayRequest, DescribeConfigFileGroupsResponse, DescribeCloudNativeAPIGatewayCertificatesRequest, DescribeCloudNativeAPIGatewayUpstreamRequest, DescribeCloudNativeAPIGatewayNodesRequest, DeleteNativeGatewayServerGroupResponse, ModifyConsoleNetworkRequest, CreateCloudNativeAPIGatewayRouteRateLimitResponse, DescribeSREInstanceAccessAddressResponse, CreateConfigFileRequest, ModifyCloudNativeAPIGatewayCanaryRuleResponse, DescribeCloudNativeAPIGatewaysResponse, CreateGovernanceAliasResponse, DeleteConfigFileGroupResponse, DescribeAutoScalerResourceStrategyBindingGroupsRequest, CreateNativeGatewayServerGroupRequest, DescribeAllConfigFileTemplatesResponse, ModifyCloudNativeAPIGatewayRouteRateLimitRequest, DescribeGovernanceAliasesRequest, CloseWafProtectionRequest, ModifyCloudNativeAPIGatewayServiceResponse, ModifyGovernanceAliasRequest, DescribeCloudNativeAPIGatewayNodesResponse, DescribeConfigFileReleaseVersionsRequest, CreateCloudNativeAPIGatewayResponse, DescribeUpstreamHealthCheckConfigResponse, DeleteGovernanceServicesResponse, DeleteCloudNativeAPIGatewayCertificateResponse, DeleteCloudNativeAPIGatewayCanaryRuleRequest, ModifyNativeGatewayServerGroupResponse, DescribeAutoScalerResourceStrategyBindingGroupsResponse, DescribeNacosReplicasRequest, CreateCloudNativeAPIGatewayServiceRequest, DescribeZookeeperServerInterfacesRequest, DeleteGovernanceNamespacesResponse, ModifyCloudNativeAPIGatewayCertificateRequest, DeleteCloudNativeAPIGatewayServiceRequest, CreateWafDomainsResponse, DescribeCloudNativeAPIGatewayServicesRequest, CreateConfigFileResponse, DescribeCloudNativeAPIGatewayUpstreamResponse, DescribeGovernanceServiceContractVersionsRequest, DeleteAutoScalerResourceStrategyRequest, DescribePublicNetworkRequest, CreateGovernanceInstancesResponse, CreateGovernanceNamespacesRequest, CreateCloudNativeAPIGatewayCanaryRuleResponse, DescribeSREInstancesRequest, DeleteEngineResponse, DescribeCloudNativeAPIGatewayRoutesResponse, DescribeWafProtectionResponse, DescribeZookeeperReplicasRequest, DeleteGovernanceInstancesResponse, UpdateUpstreamTargetsRequest, DeleteCloudNativeAPIGatewayServiceResponse, BindAutoScalerResourceStrategyToGroupsResponse, DescribeAutoScalerResourceStrategiesResponse, ModifyNetworkAccessStrategyRequest, DeleteCloudNativeAPIGatewayRouteResponse, DescribeCloudNativeAPIGatewayPortsResponse, CreateCloudNativeAPIGatewayRouteRateLimitRequest, DeleteNativeGatewayServerGroupRequest, DeleteGovernanceAliasesResponse, RollbackConfigFileReleasesResponse, ModifyUpstreamNodeStatusRequest, ModifyCloudNativeAPIGatewayRouteResponse, OpenWafProtectionResponse, DescribeNacosReplicasResponse, DeleteCloudNativeAPIGatewayServiceRateLimitRequest, DescribeConfigFileReleasesResponse, DescribeCloudNativeAPIGatewayConfigResponse, DescribeCloudNativeAPIGatewayRequest, ModifyCloudNativeAPIGatewayCertificateResponse, DescribeGovernanceInstancesResponse, ModifyConfigFilesRequest, DeleteGovernanceNamespacesRequest, ModifyGovernanceNamespacesResponse, DescribeConfigFileReleaseRequest, CreateCloudNativeAPIGatewayRouteResponse, DescribeCloudNativeAPIGatewayCanaryRulesResponse, DescribeCloudNativeAPIGatewayConfigRequest, ModifyConfigFileGroupRequest, UnbindAutoScalerResourceStrategyFromGroupsResponse, DeleteConfigFilesResponse, DescribeCloudNativeAPIGatewaysRequest, CreateGovernanceInstancesRequest, ModifyConfigFilesResponse, BindAutoScalerResourceStrategyToGroupsRequest, ModifyNetworkAccessStrategyResponse, DescribeCloudNativeAPIGatewayServiceRateLimitResponse, DeleteCloudNativeAPIGatewayRouteRequest, ModifyAutoScalerResourceStrategyResponse, CreateCloudNativeAPIGatewayCertificateResponse, CreateCloudNativeAPIGatewayCanaryRuleRequest, DescribePublicNetworkResponse, ModifyNativeGatewayServerGroupRequest, DescribeCloudNativeAPIGatewayRouteRateLimitRequest, DescribeOneCloudNativeAPIGatewayServiceRequest, DeleteGovernanceInstancesRequest, DeleteGovernanceInstancesByHostRequest, DescribeConfigFileResponse, RollbackConfigFileReleasesRequest, DeleteConfigFilesRequest, DescribeGovernanceServicesResponse, CreateGovernanceServicesRequest, CreateGovernanceNamespacesResponse, UpdateCloudNativeAPIGatewaySpecRequest, DescribeCloudNativeAPIGatewayServicesResponse, DeleteCloudNativeAPIGatewayRouteRateLimitRequest, CreateConfigFileGroupRequest, DeleteEngineRequest, CreateCloudNativeAPIGatewayPublicNetworkResponse, DescribeWafDomainsResponse, ModifyNetworkBasicInfoRequest, DescribeUpstreamHealthCheckConfigRequest, DescribeSREInstanceAccessAddressRequest, DeleteAutoScalerResourceStrategyResponse, ModifyConsoleNetworkResponse, DescribeConfigFileGroupsRequest, DeleteCloudNativeAPIGatewayCertificateRequest, DeleteCloudNativeAPIGatewayServiceRateLimitResponse, CloseWafProtectionResponse, UpdateUpstreamTargetsResponse, UpdateUpstreamHealthCheckConfigRequest, UpdateCloudNativeAPIGatewaySpecResponse, DescribeZookeeperServerInterfacesResponse, DescribeGovernanceServiceContractsRequest, ModifyAutoScalerResourceStrategyRequest, DescribeConfigFileReleaseVersionsResponse, DeleteGovernanceAliasesRequest, DescribeConfigFilesResponse, DescribeConfigFileReleasesRequest, DescribeAllConfigFileTemplatesRequest, DescribeGovernanceNamespacesResponse, DeleteCloudNativeAPIGatewayRequest, DeleteCloudNativeAPIGatewayPublicNetworkRequest, DeleteGovernanceInstancesByHostResponse, DescribeConfigFilesByGroupRequest, CreateGovernanceServicesResponse, CreateConfigFileGroupResponse, ModifyGovernanceNamespacesRequest, CreateGovernanceAliasRequest, CreateOrUpdateConfigFileAndReleaseResponse, DescribeOneCloudNativeAPIGatewayServiceResponse, ModifyCloudNativeAPIGatewayServiceRequest, DeleteCloudNativeAPIGatewayResponse, DescribeConfigFilesRequest, CreateCloudNativeAPIGatewayCertificateRequest, DescribeConfigFilesByGroupResponse, DescribeWafDomainsRequest, DescribeWafProtectionRequest, ModifyUpstreamNodeStatusResponse, DescribeAutoScalerResourceStrategiesRequest, CreateCloudNativeAPIGatewayPublicNetworkRequest, DescribeGovernanceInstancesRequest, DescribeCloudNativeAPIGatewayRouteRateLimitResponse, ModifyGovernanceServicesRequest, DescribeCloudNativeAPIGatewayCertificateDetailsResponse, DeleteConfigFileGroupRequest, DescribeNativeGatewayServerGroupsResponse, UpdateEngineInternetAccessRequest, ModifyCloudNativeAPIGatewayResponse, OpenWafProtectionRequest, DeleteGovernanceServicesRequest, UnbindAutoScalerResourceStrategyFromGroupsRequest, ModifyConfigFileGroupResponse, CreateCloudNativeAPIGatewayServiceRateLimitResponse, DescribeNacosServerInterfacesResponse, DeleteConfigFileReleasesRequest, CreateAutoScalerResourceStrategyRequest, DescribeCloudNativeAPIGatewayRoutesRequest, CreateEngineResponse, ModifyCloudNativeAPIGatewayServiceRateLimitRequest, ModifyNetworkBasicInfoResponse, ModifyGovernanceServicesResponse, UpdateEngineInternetAccessResponse, ModifyCloudNativeAPIGatewayServiceRateLimitResponse, DescribeGovernanceServiceContractsResponse, DescribeNacosServerInterfacesRequest, UpdateUpstreamHealthCheckConfigResponse, DescribeNativeGatewayServerGroupsRequest, ModifyCloudNativeAPIGatewayRouteRequest, DescribeGovernanceNamespacesRequest, DescribeSREInstancesResponse, PublishConfigFilesResponse, UpdateCloudNativeAPIGatewayCertificateInfoRequest, DescribeCloudNativeAPIGatewayCertificateDetailsRequest, DescribeConfigFileRequest, ModifyGovernanceAliasResponse, CreateWafDomainsRequest, CreateCloudNativeAPIGatewayRouteRequest, CreateNativeGatewayServerGroupResponse, CreateCloudNativeAPIGatewayServiceRateLimitRequest, DeleteConfigFileReleasesResponse, DescribeZookeeperReplicasResponse, DescribeGovernanceServiceContractVersionsResponse, ModifyGovernanceInstancesRequest, CreateEngineRequest, ModifyCloudNativeAPIGatewayCanaryRuleRequest, PublishConfigFilesRequest, CreateAutoScalerResourceStrategyResponse, DescribeConfigFileReleaseHistoriesRequest, DeleteWafDomainsResponse, ModifyCloudNativeAPIGatewayRequest, DescribeCloudNativeAPIGatewayCertificatesResponse, ModifyCloudNativeAPIGatewayRouteRateLimitResponse, DescribeConfigFileReleaseHistoriesResponse, DescribeCloudNativeAPIGatewayCanaryRulesRequest, DeleteCloudNativeAPIGatewayCanaryRuleResponse, ModifyGovernanceInstancesResponse, DescribeCloudNativeAPIGatewayPortsRequest, UpdateCloudNativeAPIGatewayCertificateInfoResponse, DescribeGovernanceServicesRequest, DescribeConfigFileReleaseResponse, DescribeGovernanceAliasesResponse } from "./tse_models";
 /**
  * tse client
  * @class
@@ -8,125 +8,41 @@ import { DescribeCloudNativeAPIGatewayResponse, CreateCloudNativeAPIGatewayServi
 export declare class Client extends AbstractClient {
     constructor(clientConfig: ClientConfig);
     /**
-     * 修改网关实例Konga网络配置
-     */
-    ModifyConsoleNetwork(req: ModifyConsoleNetworkRequest, cb?: (error: string, rep: ModifyConsoleNetworkResponse) => void): Promise<ModifyConsoleNetworkResponse>;
-    /**
-     * 删除引擎实例
-     */
-    DeleteEngine(req: DeleteEngineRequest, cb?: (error: string, rep: DeleteEngineResponse) => void): Promise<DeleteEngineResponse>;
-    /**
-     * 获取云原生网关服务健康检查配置
-     */
-    DescribeUpstreamHealthCheckConfig(req: DescribeUpstreamHealthCheckConfigRequest, cb?: (error: string, rep: DescribeUpstreamHealthCheckConfigResponse) => void): Promise<DescribeUpstreamHealthCheckConfigResponse>;
-    /**
-     * 查询Zookeeper类型注册引擎实例副本信息
-     */
-    DescribeZookeeperReplicas(req: DescribeZookeeperReplicasRequest, cb?: (error: string, rep: DescribeZookeeperReplicasResponse) => void): Promise<DescribeZookeeperReplicasResponse>;
-    /**
-     * 修改云原生网关的灰度规则
-     */
-    ModifyCloudNativeAPIGatewayCanaryRule(req: ModifyCloudNativeAPIGatewayCanaryRuleRequest, cb?: (error: string, rep: ModifyCloudNativeAPIGatewayCanaryRuleResponse) => void): Promise<ModifyCloudNativeAPIGatewayCanaryRuleResponse>;
-    /**
-     * 修改云原生网关上游实例节点健康状态
-     */
-    ModifyUpstreamNodeStatus(req: ModifyUpstreamNodeStatusRequest, cb?: (error: string, rep: ModifyUpstreamNodeStatusResponse) => void): Promise<ModifyUpstreamNodeStatusResponse>;
-    /**
-     * 删除云原生网关的限流插件(服务)
-     */
-    DeleteCloudNativeAPIGatewayServiceRateLimit(req: DeleteCloudNativeAPIGatewayServiceRateLimitRequest, cb?: (error: string, rep: DeleteCloudNativeAPIGatewayServiceRateLimitResponse) => void): Promise<DeleteCloudNativeAPIGatewayServiceRateLimitResponse>;
-    /**
-     * 新建 WAF 防护域名
-     */
-    CreateWafDomains(req: CreateWafDomainsRequest, cb?: (error: string, rep: CreateWafDomainsResponse) => void): Promise<CreateWafDomainsResponse>;
-    /**
-     * 查询zookeeper服务接口列表
-     */
-    DescribeZookeeperServerInterfaces(req: DescribeZookeeperServerInterfacesRequest, cb?: (error: string, rep: DescribeZookeeperServerInterfacesResponse) => void): Promise<DescribeZookeeperServerInterfacesResponse>;
-    /**
      * 获取云原生网关服务详情
      */
     DescribeOneCloudNativeAPIGatewayService(req: DescribeOneCloudNativeAPIGatewayServiceRequest, cb?: (error: string, rep: DescribeOneCloudNativeAPIGatewayServiceResponse) => void): Promise<DescribeOneCloudNativeAPIGatewayServiceResponse>;
     /**
-     * 获取云原生网关服务详情下的Upstream列表
+     * 修改引擎公网访问配置
      */
-    DescribeCloudNativeAPIGatewayUpstream(req: DescribeCloudNativeAPIGatewayUpstreamRequest, cb?: (error: string, rep: DescribeCloudNativeAPIGatewayUpstreamResponse) => void): Promise<DescribeCloudNativeAPIGatewayUpstreamResponse>;
+    UpdateEngineInternetAccess(req: UpdateEngineInternetAccessRequest, cb?: (error: string, rep: UpdateEngineInternetAccessResponse) => void): Promise<UpdateEngineInternetAccessResponse>;
     /**
-     * 查询云原生网关证书列表
+     * 查询云原生网关的限流插件(服务)
      */
-    DescribeCloudNativeAPIGatewayCertificates(req: DescribeCloudNativeAPIGatewayCertificatesRequest, cb?: (error: string, rep: DescribeCloudNativeAPIGatewayCertificatesResponse) => void): Promise<DescribeCloudNativeAPIGatewayCertificatesResponse>;
-    /**
-     * 修改云原生网关限流插件(服务)
-     */
-    ModifyCloudNativeAPIGatewayServiceRateLimit(req: ModifyCloudNativeAPIGatewayServiceRateLimitRequest, cb?: (error: string, rep: ModifyCloudNativeAPIGatewayServiceRateLimitResponse) => void): Promise<ModifyCloudNativeAPIGatewayServiceRateLimitResponse>;
-    /**
-     * 创建引擎实例
-     */
-    CreateEngine(req: CreateEngineRequest, cb?: (error: string, rep: CreateEngineResponse) => void): Promise<CreateEngineResponse>;
-    /**
-     * 修改云原生API网关实例基础信息
-     */
-    ModifyCloudNativeAPIGateway(req: ModifyCloudNativeAPIGatewayRequest, cb?: (error: string, rep: ModifyCloudNativeAPIGatewayResponse) => void): Promise<ModifyCloudNativeAPIGatewayResponse>;
-    /**
-     * 弹性伸缩策略批量解绑网关分组
-     */
-    UnbindAutoScalerResourceStrategyFromGroups(req: UnbindAutoScalerResourceStrategyFromGroupsRequest, cb?: (error: string, rep: UnbindAutoScalerResourceStrategyFromGroupsResponse) => void): Promise<UnbindAutoScalerResourceStrategyFromGroupsResponse>;
+    DescribeCloudNativeAPIGatewayServiceRateLimit(req: DescribeCloudNativeAPIGatewayServiceRateLimitRequest, cb?: (error: string, rep: DescribeCloudNativeAPIGatewayServiceRateLimitResponse) => void): Promise<DescribeCloudNativeAPIGatewayServiceRateLimitResponse>;
     /**
      * 删除公网网络配置
      */
     DeleteCloudNativeAPIGatewayPublicNetwork(req: DeleteCloudNativeAPIGatewayPublicNetworkRequest, cb?: (error: string, rep: DeleteCloudNativeAPIGatewayPublicNetworkResponse) => void): Promise<DeleteCloudNativeAPIGatewayPublicNetworkResponse>;
     /**
-     * 删除 WAF 防护域名
+     * 查询治理中心服务别名列表
      */
-    DeleteWafDomains(req: DeleteWafDomainsRequest, cb?: (error: string, rep: DeleteWafDomainsResponse) => void): Promise<DeleteWafDomainsResponse>;
+    DescribeGovernanceAliases(req: DescribeGovernanceAliasesRequest, cb?: (error: string, rep: DescribeGovernanceAliasesResponse) => void): Promise<DescribeGovernanceAliasesResponse>;
     /**
-     * 弹性伸缩策略批量绑定网关分组
+     * 删除配置文件分组
      */
-    BindAutoScalerResourceStrategyToGroups(req: BindAutoScalerResourceStrategyToGroupsRequest, cb?: (error: string, rep: BindAutoScalerResourceStrategyToGroupsResponse) => void): Promise<BindAutoScalerResourceStrategyToGroupsResponse>;
+    DeleteConfigFileGroup(req: DeleteConfigFileGroupRequest, cb?: (error: string, rep: DeleteConfigFileGroupResponse) => void): Promise<DeleteConfigFileGroupResponse>;
     /**
-     * 删除云原生网关服务
+     * 创建服务治理中心配置文件组
      */
-    DeleteCloudNativeAPIGatewayService(req: DeleteCloudNativeAPIGatewayServiceRequest, cb?: (error: string, rep: DeleteCloudNativeAPIGatewayServiceResponse) => void): Promise<DeleteCloudNativeAPIGatewayServiceResponse>;
+    CreateConfigFileGroup(req: CreateConfigFileGroupRequest, cb?: (error: string, rep: CreateConfigFileGroupResponse) => void): Promise<CreateConfigFileGroupResponse>;
     /**
-     * 更新云原生网关健康检查配置
+     * 删除引擎实例
      */
-    UpdateUpstreamHealthCheckConfig(req: UpdateUpstreamHealthCheckConfigRequest, cb?: (error: string, rep: UpdateUpstreamHealthCheckConfigResponse) => void): Promise<UpdateUpstreamHealthCheckConfigResponse>;
+    DeleteEngine(req: DeleteEngineRequest, cb?: (error: string, rep: DeleteEngineResponse) => void): Promise<DeleteEngineResponse>;
     /**
-     * 创建云原生网关服务
+     * 修改治理中心服务
      */
-    CreateCloudNativeAPIGatewayService(req: CreateCloudNativeAPIGatewayServiceRequest, cb?: (error: string, rep: CreateCloudNativeAPIGatewayServiceResponse) => void): Promise<CreateCloudNativeAPIGatewayServiceResponse>;
-    /**
-     * 查询云原生网关路由列表
-     */
-    DescribeCloudNativeAPIGatewayRoutes(req: DescribeCloudNativeAPIGatewayRoutesRequest, cb?: (error: string, rep: DescribeCloudNativeAPIGatewayRoutesResponse) => void): Promise<DescribeCloudNativeAPIGatewayRoutesResponse>;
-    /**
-     * 获取云原生API网关实例信息
-     */
-    DescribeCloudNativeAPIGateway(req: DescribeCloudNativeAPIGatewayRequest, cb?: (error: string, rep: DescribeCloudNativeAPIGatewayResponse) => void): Promise<DescribeCloudNativeAPIGatewayResponse>;
-    /**
-     * 获取云原生API网关实例端口信息
-     */
-    DescribeCloudNativeAPIGatewayPorts(req: DescribeCloudNativeAPIGatewayPortsRequest, cb?: (error: string, rep: DescribeCloudNativeAPIGatewayPortsResponse) => void): Promise<DescribeCloudNativeAPIGatewayPortsResponse>;
-    /**
-     * 删除云原生网关路由
-     */
-    DeleteCloudNativeAPIGatewayRoute(req: DeleteCloudNativeAPIGatewayRouteRequest, cb?: (error: string, rep: DeleteCloudNativeAPIGatewayRouteResponse) => void): Promise<DeleteCloudNativeAPIGatewayRouteResponse>;
-    /**
-     * 创建公网网络配置
-     */
-    CreateCloudNativeAPIGatewayPublicNetwork(req: CreateCloudNativeAPIGatewayPublicNetworkRequest, cb?: (error: string, rep: CreateCloudNativeAPIGatewayPublicNetworkResponse) => void): Promise<CreateCloudNativeAPIGatewayPublicNetworkResponse>;
-    /**
-     * 更新弹性伸缩策略
-     */
-    ModifyAutoScalerResourceStrategy(req: ModifyAutoScalerResourceStrategyRequest, cb?: (error: string, rep: ModifyAutoScalerResourceStrategyResponse) => void): Promise<ModifyAutoScalerResourceStrategyResponse>;
-    /**
-     * 更新云原生网关证书
-     */
-    ModifyCloudNativeAPIGatewayCertificate(req: ModifyCloudNativeAPIGatewayCertificateRequest, cb?: (error: string, rep: ModifyCloudNativeAPIGatewayCertificateResponse) => void): Promise<ModifyCloudNativeAPIGatewayCertificateResponse>;
-    /**
-     * 删除云原生网关的灰度规则
-     */
-    DeleteCloudNativeAPIGatewayCanaryRule(req: DeleteCloudNativeAPIGatewayCanaryRuleRequest, cb?: (error: string, rep: DeleteCloudNativeAPIGatewayCanaryRuleResponse) => void): Promise<DeleteCloudNativeAPIGatewayCanaryRuleResponse>;
+    ModifyGovernanceServices(req: ModifyGovernanceServicesRequest, cb?: (error: string, rep: ModifyGovernanceServicesResponse) => void): Promise<ModifyGovernanceServicesResponse>;
     /**
      * 获取云原生API网关实例列表
      */
@@ -144,61 +60,17 @@ export declare class Client extends AbstractClient {
      */
     ModifyCloudNativeAPIGatewayRouteRateLimit(req: ModifyCloudNativeAPIGatewayRouteRateLimitRequest, cb?: (error: string, rep: ModifyCloudNativeAPIGatewayRouteRateLimitResponse) => void): Promise<ModifyCloudNativeAPIGatewayRouteRateLimitResponse>;
     /**
-     * 修改云原生API网关实例分组基础信息
+     * 删除治理中心服务别名
      */
-    ModifyNativeGatewayServerGroup(req: ModifyNativeGatewayServerGroupRequest, cb?: (error: string, rep: ModifyNativeGatewayServerGroupResponse) => void): Promise<ModifyNativeGatewayServerGroupResponse>;
+    DeleteGovernanceAliases(req: DeleteGovernanceAliasesRequest, cb?: (error: string, rep: DeleteGovernanceAliasesResponse) => void): Promise<DeleteGovernanceAliasesResponse>;
     /**
-     * 查询nacos服务接口列表
+     * 查询Zookeeper类型注册引擎实例副本信息
      */
-    DescribeNacosServerInterfaces(req: DescribeNacosServerInterfacesRequest, cb?: (error: string, rep: DescribeNacosServerInterfacesResponse) => void): Promise<DescribeNacosServerInterfacesResponse>;
+    DescribeZookeeperReplicas(req: DescribeZookeeperReplicasRequest, cb?: (error: string, rep: DescribeZookeeperReplicasResponse) => void): Promise<DescribeZookeeperReplicasResponse>;
     /**
-     * 查看弹性伸缩策略绑定的网关分组
-     */
-    DescribeAutoScalerResourceStrategyBindingGroups(req: DescribeAutoScalerResourceStrategyBindingGroupsRequest, cb?: (error: string, rep: DescribeAutoScalerResourceStrategyBindingGroupsResponse) => void): Promise<DescribeAutoScalerResourceStrategyBindingGroupsResponse>;
-    /**
-     * 修改云原生网关路由
-     */
-    ModifyCloudNativeAPIGatewayRoute(req: ModifyCloudNativeAPIGatewayRouteRequest, cb?: (error: string, rep: ModifyCloudNativeAPIGatewayRouteResponse) => void): Promise<ModifyCloudNativeAPIGatewayRouteResponse>;
-    /**
-     * 关闭 WAF 防护
-     */
-    CloseWafProtection(req: CloseWafProtectionRequest, cb?: (error: string, rep: CloseWafProtectionResponse) => void): Promise<CloseWafProtectionResponse>;
-    /**
-     * 修改治理中心服务实例
-     */
-    ModifyGovernanceInstances(req: ModifyGovernanceInstancesRequest, cb?: (error: string, rep: ModifyGovernanceInstancesResponse) => void): Promise<ModifyGovernanceInstancesResponse>;
-    /**
-     * 创建云原生API网关实例
-     */
-    CreateCloudNativeAPIGateway(req: CreateCloudNativeAPIGatewayRequest, cb?: (error: string, rep: CreateCloudNativeAPIGatewayResponse) => void): Promise<CreateCloudNativeAPIGatewayResponse>;
-    /**
-     * 用于查询引擎实例列表
-     */
-    DescribeSREInstances(req: DescribeSREInstancesRequest, cb?: (error: string, rep: DescribeSREInstancesResponse) => void): Promise<DescribeSREInstancesResponse>;
-    /**
-     * 查询云原生网关的限流插件(路由)
-     */
-    DescribeCloudNativeAPIGatewayRouteRateLimit(req: DescribeCloudNativeAPIGatewayRouteRateLimitRequest, cb?: (error: string, rep: DescribeCloudNativeAPIGatewayRouteRateLimitResponse) => void): Promise<DescribeCloudNativeAPIGatewayRouteRateLimitResponse>;
-    /**
-     * 删除治理中心服务实例
+     * 删除服务实例
      */
     DeleteGovernanceInstances(req: DeleteGovernanceInstancesRequest, cb?: (error: string, rep: DeleteGovernanceInstancesResponse) => void): Promise<DeleteGovernanceInstancesResponse>;
-    /**
-     * 获取 WAF 防护状态
-     */
-    DescribeWafProtection(req: DescribeWafProtectionRequest, cb?: (error: string, rep: DescribeWafProtectionResponse) => void): Promise<DescribeWafProtectionResponse>;
-    /**
-     * 获取云原生API网关实例网络配置信息
-     */
-    DescribeCloudNativeAPIGatewayConfig(req: DescribeCloudNativeAPIGatewayConfigRequest, cb?: (error: string, rep: DescribeCloudNativeAPIGatewayConfigResponse) => void): Promise<DescribeCloudNativeAPIGatewayConfigResponse>;
-    /**
-     * 修改云原生网关服务
-     */
-    ModifyCloudNativeAPIGatewayService(req: ModifyCloudNativeAPIGatewayServiceRequest, cb?: (error: string, rep: ModifyCloudNativeAPIGatewayServiceResponse) => void): Promise<ModifyCloudNativeAPIGatewayServiceResponse>;
-    /**
-     * 获取云原生网关节点列表
-     */
-    DescribeCloudNativeAPIGatewayNodes(req: DescribeCloudNativeAPIGatewayNodesRequest, cb?: (error: string, rep: DescribeCloudNativeAPIGatewayNodesResponse) => void): Promise<DescribeCloudNativeAPIGatewayNodesResponse>;
     /**
      * 创建云原生网关的灰度规则
      */
@@ -212,107 +84,371 @@ export declare class Client extends AbstractClient {
      */
     DescribeCloudNativeAPIGatewayCertificateDetails(req: DescribeCloudNativeAPIGatewayCertificateDetailsRequest, cb?: (error: string, rep: DescribeCloudNativeAPIGatewayCertificateDetailsResponse) => void): Promise<DescribeCloudNativeAPIGatewayCertificateDetailsResponse>;
     /**
-     * 修改引擎公网访问配置
-     */
-    UpdateEngineInternetAccess(req: UpdateEngineInternetAccessRequest, cb?: (error: string, rep: UpdateEngineInternetAccessResponse) => void): Promise<UpdateEngineInternetAccessResponse>;
-    /**
-     * 开启 WAF 防护
-     */
-    OpenWafProtection(req: OpenWafProtectionRequest, cb?: (error: string, rep: OpenWafProtectionResponse) => void): Promise<OpenWafProtectionResponse>;
-    /**
-     * 更新网关上游实例列表，仅支持IPList服务类型
-     */
-    UpdateUpstreamTargets(req: UpdateUpstreamTargetsRequest, cb?: (error: string, rep: UpdateUpstreamTargetsResponse) => void): Promise<UpdateUpstreamTargetsResponse>;
-    /**
      * 查看弹性伸缩策略列表
      */
     DescribeAutoScalerResourceStrategies(req: DescribeAutoScalerResourceStrategiesRequest, cb?: (error: string, rep: DescribeAutoScalerResourceStrategiesResponse) => void): Promise<DescribeAutoScalerResourceStrategiesResponse>;
-    /**
-     * 创建云原生网关限流插件(服务)
-     */
-    CreateCloudNativeAPIGatewayServiceRateLimit(req: CreateCloudNativeAPIGatewayServiceRateLimitRequest, cb?: (error: string, rep: CreateCloudNativeAPIGatewayServiceRateLimitResponse) => void): Promise<CreateCloudNativeAPIGatewayServiceRateLimitResponse>;
-    /**
-     * 删除云原生API网关实例
-     */
-    DeleteCloudNativeAPIGateway(req: DeleteCloudNativeAPIGatewayRequest, cb?: (error: string, rep: DeleteCloudNativeAPIGatewayResponse) => void): Promise<DeleteCloudNativeAPIGatewayResponse>;
     /**
      * 修改云原生API网关实例网络基本信息，例如带宽以及描述，只支持修改客户端公网/内网的信息。
      */
     ModifyNetworkBasicInfo(req: ModifyNetworkBasicInfoRequest, cb?: (error: string, rep: ModifyNetworkBasicInfoResponse) => void): Promise<ModifyNetworkBasicInfoResponse>;
     /**
-     * 修改云原生API网关实例Kong访问策略，支持白名单或者黑名单。
-     */
-    ModifyNetworkAccessStrategy(req: ModifyNetworkAccessStrategyRequest, cb?: (error: string, rep: ModifyNetworkAccessStrategyResponse) => void): Promise<ModifyNetworkAccessStrategyResponse>;
-    /**
-     * 查询云原生API网关实例公网详情
-     */
-    DescribePublicNetwork(req: DescribePublicNetworkRequest, cb?: (error: string, rep: DescribePublicNetworkResponse) => void): Promise<DescribePublicNetworkResponse>;
-    /**
      * 删除云原生网关证书
      */
     DeleteCloudNativeAPIGatewayCertificate(req: DeleteCloudNativeAPIGatewayCertificateRequest, cb?: (error: string, rep: DeleteCloudNativeAPIGatewayCertificateResponse) => void): Promise<DeleteCloudNativeAPIGatewayCertificateResponse>;
     /**
-     * 创建云原生网关路由
+     * 查询服务契约定义列表
      */
-    CreateCloudNativeAPIGatewayRoute(req: CreateCloudNativeAPIGatewayRouteRequest, cb?: (error: string, rep: CreateCloudNativeAPIGatewayRouteResponse) => void): Promise<CreateCloudNativeAPIGatewayRouteResponse>;
+    DescribeGovernanceServiceContracts(req: DescribeGovernanceServiceContractsRequest, cb?: (error: string, rep: DescribeGovernanceServiceContractsResponse) => void): Promise<DescribeGovernanceServiceContractsResponse>;
     /**
      * 修改云原生网关证书信息
      */
     UpdateCloudNativeAPIGatewayCertificateInfo(req: UpdateCloudNativeAPIGatewayCertificateInfoRequest, cb?: (error: string, rep: UpdateCloudNativeAPIGatewayCertificateInfoResponse) => void): Promise<UpdateCloudNativeAPIGatewayCertificateInfoResponse>;
     /**
-     * 创建治理中心服务实例
+     * 获取全量配置文件模板列表
      */
-    CreateGovernanceInstances(req: CreateGovernanceInstancesRequest, cb?: (error: string, rep: CreateGovernanceInstancesResponse) => void): Promise<CreateGovernanceInstancesResponse>;
+    DescribeAllConfigFileTemplates(req: DescribeAllConfigFileTemplatesRequest, cb?: (error: string, rep: DescribeAllConfigFileTemplatesResponse) => void): Promise<DescribeAllConfigFileTemplatesResponse>;
     /**
      * 创建云原生网关引擎分组
      */
     CreateNativeGatewayServerGroup(req: CreateNativeGatewayServerGroupRequest, cb?: (error: string, rep: CreateNativeGatewayServerGroupResponse) => void): Promise<CreateNativeGatewayServerGroupResponse>;
     /**
+     * 删除云原生网关的限流插件(服务)
+     */
+    DeleteCloudNativeAPIGatewayServiceRateLimit(req: DeleteCloudNativeAPIGatewayServiceRateLimitRequest, cb?: (error: string, rep: DeleteCloudNativeAPIGatewayServiceRateLimitResponse) => void): Promise<DeleteCloudNativeAPIGatewayServiceRateLimitResponse>;
+    /**
+     * 查询zookeeper服务接口列表
+     */
+    DescribeZookeeperServerInterfaces(req: DescribeZookeeperServerInterfacesRequest, cb?: (error: string, rep: DescribeZookeeperServerInterfacesResponse) => void): Promise<DescribeZookeeperServerInterfacesResponse>;
+    /**
+     * 删除配置文件
+     */
+    DeleteConfigFiles(req: DeleteConfigFilesRequest, cb?: (error: string, rep: DeleteConfigFilesResponse) => void): Promise<DeleteConfigFilesResponse>;
+    /**
+     * 更新弹性伸缩策略
+     */
+    ModifyAutoScalerResourceStrategy(req: ModifyAutoScalerResourceStrategyRequest, cb?: (error: string, rep: ModifyAutoScalerResourceStrategyResponse) => void): Promise<ModifyAutoScalerResourceStrategyResponse>;
+    /**
+     * 更新云原生网关证书
+     */
+    ModifyCloudNativeAPIGatewayCertificate(req: ModifyCloudNativeAPIGatewayCertificateRequest, cb?: (error: string, rep: ModifyCloudNativeAPIGatewayCertificateResponse) => void): Promise<ModifyCloudNativeAPIGatewayCertificateResponse>;
+    /**
+     * 发布配置文件
+     */
+    PublishConfigFiles(req: PublishConfigFilesRequest, cb?: (error: string, rep: PublishConfigFilesResponse) => void): Promise<PublishConfigFilesResponse>;
+    /**
+     * 根据命名空间、组、名字查找配置文件
+     */
+    DescribeConfigFile(req: DescribeConfigFileRequest, cb?: (error: string, rep: DescribeConfigFileResponse) => void): Promise<DescribeConfigFileResponse>;
+    /**
+     * 查询配置版本列表
+     */
+    DescribeConfigFileReleases(req: DescribeConfigFileReleasesRequest, cb?: (error: string, rep: DescribeConfigFileReleasesResponse) => void): Promise<DescribeConfigFileReleasesResponse>;
+    /**
+     * 关闭 WAF 防护
+     */
+    CloseWafProtection(req: CloseWafProtectionRequest, cb?: (error: string, rep: CloseWafProtectionResponse) => void): Promise<CloseWafProtectionResponse>;
+    /**
+     * 创建云原生API网关实例
+     */
+    CreateCloudNativeAPIGateway(req: CreateCloudNativeAPIGatewayRequest, cb?: (error: string, rep: CreateCloudNativeAPIGatewayResponse) => void): Promise<CreateCloudNativeAPIGatewayResponse>;
+    /**
+     * 查询云原生网关的限流插件(路由)
+     */
+    DescribeCloudNativeAPIGatewayRouteRateLimit(req: DescribeCloudNativeAPIGatewayRouteRateLimitRequest, cb?: (error: string, rep: DescribeCloudNativeAPIGatewayRouteRateLimitResponse) => void): Promise<DescribeCloudNativeAPIGatewayRouteRateLimitResponse>;
+    /**
+     * 修改云原生网关服务
+     */
+    ModifyCloudNativeAPIGatewayService(req: ModifyCloudNativeAPIGatewayServiceRequest, cb?: (error: string, rep: ModifyCloudNativeAPIGatewayServiceResponse) => void): Promise<ModifyCloudNativeAPIGatewayServiceResponse>;
+    /**
+     * 查看弹性伸缩策略绑定的网关分组
+     */
+    DescribeAutoScalerResourceStrategyBindingGroups(req: DescribeAutoScalerResourceStrategyBindingGroupsRequest, cb?: (error: string, rep: DescribeAutoScalerResourceStrategyBindingGroupsResponse) => void): Promise<DescribeAutoScalerResourceStrategyBindingGroupsResponse>;
+    /**
+     * 获取配置文件发布
+     */
+    DescribeConfigFileRelease(req: DescribeConfigFileReleaseRequest, cb?: (error: string, rep: DescribeConfigFileReleaseResponse) => void): Promise<DescribeConfigFileReleaseResponse>;
+    /**
+     * 查询服务治理中心命名空间列表
+     */
+    DescribeGovernanceNamespaces(req: DescribeGovernanceNamespacesRequest, cb?: (error: string, rep: DescribeGovernanceNamespacesResponse) => void): Promise<DescribeGovernanceNamespacesResponse>;
+    /**
+     * 更新网关上游实例列表，仅支持IPList服务类型
+     */
+    UpdateUpstreamTargets(req: UpdateUpstreamTargetsRequest, cb?: (error: string, rep: UpdateUpstreamTargetsResponse) => void): Promise<UpdateUpstreamTargetsResponse>;
+    /**
+     * 创建云原生网关路由
+     */
+    CreateCloudNativeAPIGatewayRoute(req: CreateCloudNativeAPIGatewayRouteRequest, cb?: (error: string, rep: CreateCloudNativeAPIGatewayRouteResponse) => void): Promise<CreateCloudNativeAPIGatewayRouteResponse>;
+    /**
+     * 创建服务实例
+     */
+    CreateGovernanceInstances(req: CreateGovernanceInstancesRequest, cb?: (error: string, rep: CreateGovernanceInstancesResponse) => void): Promise<CreateGovernanceInstancesResponse>;
+    /**
      * 删除云原生网关的限流插件(路由)
      */
     DeleteCloudNativeAPIGatewayRouteRateLimit(req: DeleteCloudNativeAPIGatewayRouteRateLimitRequest, cb?: (error: string, rep: DeleteCloudNativeAPIGatewayRouteRateLimitResponse) => void): Promise<DeleteCloudNativeAPIGatewayRouteRateLimitResponse>;
     /**
-     * 创建弹性伸缩策略
+     * 删除配置发布
      */
-    CreateAutoScalerResourceStrategy(req: CreateAutoScalerResourceStrategyRequest, cb?: (error: string, rep: CreateAutoScalerResourceStrategyResponse) => void): Promise<CreateAutoScalerResourceStrategyResponse>;
-    /**
-     * 创建云原生网关限流插件(路由)
-     */
-    CreateCloudNativeAPIGatewayRouteRateLimit(req: CreateCloudNativeAPIGatewayRouteRateLimitRequest, cb?: (error: string, rep: CreateCloudNativeAPIGatewayRouteRateLimitResponse) => void): Promise<CreateCloudNativeAPIGatewayRouteRateLimitResponse>;
-    /**
-     * 查询云原生网关分组信息
-     */
-    DescribeNativeGatewayServerGroups(req: DescribeNativeGatewayServerGroupsRequest, cb?: (error: string, rep: DescribeNativeGatewayServerGroupsResponse) => void): Promise<DescribeNativeGatewayServerGroupsResponse>;
-    /**
-     * 查询Nacos类型引擎实例副本信息
-     */
-    DescribeNacosReplicas(req: DescribeNacosReplicasRequest, cb?: (error: string, rep: DescribeNacosReplicasResponse) => void): Promise<DescribeNacosReplicasResponse>;
+    DeleteConfigFileReleases(req: DeleteConfigFileReleasesRequest, cb?: (error: string, rep: DeleteConfigFileReleasesResponse) => void): Promise<DeleteConfigFileReleasesResponse>;
     /**
      * 删除弹性伸缩策略
      */
     DeleteAutoScalerResourceStrategy(req: DeleteAutoScalerResourceStrategyRequest, cb?: (error: string, rep: DeleteAutoScalerResourceStrategyResponse) => void): Promise<DeleteAutoScalerResourceStrategyResponse>;
     /**
-     * 查询引擎实例访问地址
+     * 修改云原生网关路由
      */
-    DescribeSREInstanceAccessAddress(req: DescribeSREInstanceAccessAddressRequest, cb?: (error: string, rep: DescribeSREInstanceAccessAddressResponse) => void): Promise<DescribeSREInstanceAccessAddressResponse>;
+    ModifyCloudNativeAPIGatewayRoute(req: ModifyCloudNativeAPIGatewayRouteRequest, cb?: (error: string, rep: ModifyCloudNativeAPIGatewayRouteResponse) => void): Promise<ModifyCloudNativeAPIGatewayRouteResponse>;
     /**
      * 删除网关实例分组
      */
     DeleteNativeGatewayServerGroup(req: DeleteNativeGatewayServerGroupRequest, cb?: (error: string, rep: DeleteNativeGatewayServerGroupResponse) => void): Promise<DeleteNativeGatewayServerGroupResponse>;
     /**
+     * 获取云原生API网关实例端口信息
+     */
+    DescribeCloudNativeAPIGatewayPorts(req: DescribeCloudNativeAPIGatewayPortsRequest, cb?: (error: string, rep: DescribeCloudNativeAPIGatewayPortsResponse) => void): Promise<DescribeCloudNativeAPIGatewayPortsResponse>;
+    /**
      * 查询云原生网关灰度规则列表
      */
     DescribeCloudNativeAPIGatewayCanaryRules(req: DescribeCloudNativeAPIGatewayCanaryRulesRequest, cb?: (error: string, rep: DescribeCloudNativeAPIGatewayCanaryRulesResponse) => void): Promise<DescribeCloudNativeAPIGatewayCanaryRulesResponse>;
+    /**
+     * 查询引擎实例访问地址
+     */
+    DescribeSREInstanceAccessAddress(req: DescribeSREInstanceAccessAddressRequest, cb?: (error: string, rep: DescribeSREInstanceAccessAddressResponse) => void): Promise<DescribeSREInstanceAccessAddressResponse>;
+    /**
+     * 修改网关实例Konga网络配置
+     */
+    ModifyConsoleNetwork(req: ModifyConsoleNetworkRequest, cb?: (error: string, rep: ModifyConsoleNetworkResponse) => void): Promise<ModifyConsoleNetworkResponse>;
+    /**
+     * 查询Nacos类型引擎实例副本信息
+     */
+    DescribeNacosReplicas(req: DescribeNacosReplicasRequest, cb?: (error: string, rep: DescribeNacosReplicasResponse) => void): Promise<DescribeNacosReplicasResponse>;
+    /**
+     * 获取云原生网关服务健康检查配置
+     */
+    DescribeUpstreamHealthCheckConfig(req: DescribeUpstreamHealthCheckConfigRequest, cb?: (error: string, rep: DescribeUpstreamHealthCheckConfigResponse) => void): Promise<DescribeUpstreamHealthCheckConfigResponse>;
+    /**
+     * 修改云原生API网关实例分组基础信息
+     */
+    ModifyNativeGatewayServerGroup(req: ModifyNativeGatewayServerGroupRequest, cb?: (error: string, rep: ModifyNativeGatewayServerGroupResponse) => void): Promise<ModifyNativeGatewayServerGroupResponse>;
+    /**
+     * 查询云原生网关证书列表
+     */
+    DescribeCloudNativeAPIGatewayCertificates(req: DescribeCloudNativeAPIGatewayCertificatesRequest, cb?: (error: string, rep: DescribeCloudNativeAPIGatewayCertificatesResponse) => void): Promise<DescribeCloudNativeAPIGatewayCertificatesResponse>;
+    /**
+     * 修改云原生网关限流插件(服务)
+     */
+    ModifyCloudNativeAPIGatewayServiceRateLimit(req: ModifyCloudNativeAPIGatewayServiceRateLimitRequest, cb?: (error: string, rep: ModifyCloudNativeAPIGatewayServiceRateLimitResponse) => void): Promise<ModifyCloudNativeAPIGatewayServiceRateLimitResponse>;
+    /**
+     * 删除治理中心服务
+     */
+    DeleteGovernanceServices(req: DeleteGovernanceServicesRequest, cb?: (error: string, rep: DeleteGovernanceServicesResponse) => void): Promise<DeleteGovernanceServicesResponse>;
+    /**
+     * 创建治理中心服务别名
+     */
+    CreateGovernanceAlias(req: CreateGovernanceAliasRequest, cb?: (error: string, rep: CreateGovernanceAliasResponse) => void): Promise<CreateGovernanceAliasResponse>;
+    /**
+     * 查询服务实例
+     */
+    DescribeGovernanceInstances(req: DescribeGovernanceInstancesRequest, cb?: (error: string, rep: DescribeGovernanceInstancesResponse) => void): Promise<DescribeGovernanceInstancesResponse>;
+    /**
+     * 查询治理中心服务列表
+     */
+    DescribeGovernanceServices(req: DescribeGovernanceServicesRequest, cb?: (error: string, rep: DescribeGovernanceServicesResponse) => void): Promise<DescribeGovernanceServicesResponse>;
+    /**
+     * 删除云原生网关的灰度规则
+     */
+    DeleteCloudNativeAPIGatewayCanaryRule(req: DeleteCloudNativeAPIGatewayCanaryRuleRequest, cb?: (error: string, rep: DeleteCloudNativeAPIGatewayCanaryRuleResponse) => void): Promise<DeleteCloudNativeAPIGatewayCanaryRuleResponse>;
+    /**
+     * 获取云原生网关节点列表
+     */
+    DescribeCloudNativeAPIGatewayNodes(req: DescribeCloudNativeAPIGatewayNodesRequest, cb?: (error: string, rep: DescribeCloudNativeAPIGatewayNodesResponse) => void): Promise<DescribeCloudNativeAPIGatewayNodesResponse>;
+    /**
+     * 弹性伸缩策略批量解绑网关分组
+     */
+    UnbindAutoScalerResourceStrategyFromGroups(req: UnbindAutoScalerResourceStrategyFromGroupsRequest, cb?: (error: string, rep: UnbindAutoScalerResourceStrategyFromGroupsResponse) => void): Promise<UnbindAutoScalerResourceStrategyFromGroupsResponse>;
+    /**
+     * 查询某个配置所有版本信息
+     */
+    DescribeConfigFileReleaseVersions(req: DescribeConfigFileReleaseVersionsRequest, cb?: (error: string, rep: DescribeConfigFileReleaseVersionsResponse) => void): Promise<DescribeConfigFileReleaseVersionsResponse>;
+    /**
+     * 用于查询引擎实例列表
+     */
+    DescribeSREInstances(req: DescribeSREInstancesRequest, cb?: (error: string, rep: DescribeSREInstancesResponse) => void): Promise<DescribeSREInstancesResponse>;
+    /**
+     * 根据group查询配置文件列表
+     */
+    DescribeConfigFilesByGroup(req: DescribeConfigFilesByGroupRequest, cb?: (error: string, rep: DescribeConfigFilesByGroupResponse) => void): Promise<DescribeConfigFilesByGroupResponse>;
+    /**
+     * 获取 WAF 防护状态
+     */
+    DescribeWafProtection(req: DescribeWafProtectionRequest, cb?: (error: string, rep: DescribeWafProtectionResponse) => void): Promise<DescribeWafProtectionResponse>;
+    /**
+     * 获取云原生API网关实例网络配置信息
+     */
+    DescribeCloudNativeAPIGatewayConfig(req: DescribeCloudNativeAPIGatewayConfigRequest, cb?: (error: string, rep: DescribeCloudNativeAPIGatewayConfigResponse) => void): Promise<DescribeCloudNativeAPIGatewayConfigResponse>;
+    /**
+     * 创建治理中心命名空间
+     */
+    CreateGovernanceNamespaces(req: CreateGovernanceNamespacesRequest, cb?: (error: string, rep: CreateGovernanceNamespacesResponse) => void): Promise<CreateGovernanceNamespacesResponse>;
+    /**
+     * 查询服务下契约版本列表
+     */
+    DescribeGovernanceServiceContractVersions(req: DescribeGovernanceServiceContractVersionsRequest, cb?: (error: string, rep: DescribeGovernanceServiceContractVersionsResponse) => void): Promise<DescribeGovernanceServiceContractVersionsResponse>;
+    /**
+     * 开启 WAF 防护
+     */
+    OpenWafProtection(req: OpenWafProtectionRequest, cb?: (error: string, rep: OpenWafProtectionResponse) => void): Promise<OpenWafProtectionResponse>;
+    /**
+     * 修改云原生网关的灰度规则
+     */
+    ModifyCloudNativeAPIGatewayCanaryRule(req: ModifyCloudNativeAPIGatewayCanaryRuleRequest, cb?: (error: string, rep: ModifyCloudNativeAPIGatewayCanaryRuleResponse) => void): Promise<ModifyCloudNativeAPIGatewayCanaryRuleResponse>;
+    /**
+     * 创建云原生网关服务
+     */
+    CreateCloudNativeAPIGatewayService(req: CreateCloudNativeAPIGatewayServiceRequest, cb?: (error: string, rep: CreateCloudNativeAPIGatewayServiceResponse) => void): Promise<CreateCloudNativeAPIGatewayServiceResponse>;
+    /**
+     * 删除云原生API网关实例
+     */
+    DeleteCloudNativeAPIGateway(req: DeleteCloudNativeAPIGatewayRequest, cb?: (error: string, rep: DeleteCloudNativeAPIGatewayResponse) => void): Promise<DeleteCloudNativeAPIGatewayResponse>;
+    /**
+     * 修改治理中心命名空间
+     */
+    ModifyGovernanceNamespaces(req: ModifyGovernanceNamespacesRequest, cb?: (error: string, rep: ModifyGovernanceNamespacesResponse) => void): Promise<ModifyGovernanceNamespacesResponse>;
+    /**
+     * 查询云原生API网关实例公网详情
+     */
+    DescribePublicNetwork(req: DescribePublicNetworkRequest, cb?: (error: string, rep: DescribePublicNetworkResponse) => void): Promise<DescribePublicNetworkResponse>;
+    /**
+     * 创建弹性伸缩策略
+     */
+    CreateAutoScalerResourceStrategy(req: CreateAutoScalerResourceStrategyRequest, cb?: (error: string, rep: CreateAutoScalerResourceStrategyResponse) => void): Promise<CreateAutoScalerResourceStrategyResponse>;
+    /**
+     * 创建配置文件
+     */
+    CreateConfigFile(req: CreateConfigFileRequest, cb?: (error: string, rep: CreateConfigFileResponse) => void): Promise<CreateConfigFileResponse>;
+    /**
+     * 修改云原生API网关实例Kong访问策略，支持白名单或者黑名单。
+     */
+    ModifyNetworkAccessStrategy(req: ModifyNetworkAccessStrategyRequest, cb?: (error: string, rep: ModifyNetworkAccessStrategyResponse) => void): Promise<ModifyNetworkAccessStrategyResponse>;
+    /**
+     * 获取云原生网关服务详情下的Upstream列表
+     */
+    DescribeCloudNativeAPIGatewayUpstream(req: DescribeCloudNativeAPIGatewayUpstreamRequest, cb?: (error: string, rep: DescribeCloudNativeAPIGatewayUpstreamResponse) => void): Promise<DescribeCloudNativeAPIGatewayUpstreamResponse>;
+    /**
+     * 创建或更新配置文件并发布配置
+     */
+    CreateOrUpdateConfigFileAndRelease(req: CreateOrUpdateConfigFileAndReleaseRequest, cb?: (error: string, rep: CreateOrUpdateConfigFileAndReleaseResponse) => void): Promise<CreateOrUpdateConfigFileAndReleaseResponse>;
+    /**
+     * 修改治理中心服务别名
+     */
+    ModifyGovernanceAlias(req: ModifyGovernanceAliasRequest, cb?: (error: string, rep: ModifyGovernanceAliasResponse) => void): Promise<ModifyGovernanceAliasResponse>;
+    /**
+     * 新建 WAF 防护域名
+     */
+    CreateWafDomains(req: CreateWafDomainsRequest, cb?: (error: string, rep: CreateWafDomainsResponse) => void): Promise<CreateWafDomainsResponse>;
+    /**
+     * 批量修改配置文件组
+     */
+    ModifyConfigFileGroup(req: ModifyConfigFileGroupRequest, cb?: (error: string, rep: ModifyConfigFileGroupResponse) => void): Promise<ModifyConfigFileGroupResponse>;
+    /**
+     * 回滚配置发布
+     */
+    RollbackConfigFileReleases(req: RollbackConfigFileReleasesRequest, cb?: (error: string, rep: RollbackConfigFileReleasesResponse) => void): Promise<RollbackConfigFileReleasesResponse>;
+    /**
+     * 创建引擎实例
+     */
+    CreateEngine(req: CreateEngineRequest, cb?: (error: string, rep: CreateEngineResponse) => void): Promise<CreateEngineResponse>;
+    /**
+     * 修改云原生网关上游实例节点健康状态
+     */
+    ModifyUpstreamNodeStatus(req: ModifyUpstreamNodeStatusRequest, cb?: (error: string, rep: ModifyUpstreamNodeStatusResponse) => void): Promise<ModifyUpstreamNodeStatusResponse>;
+    /**
+     * 弹性伸缩策略批量绑定网关分组
+     */
+    BindAutoScalerResourceStrategyToGroups(req: BindAutoScalerResourceStrategyToGroupsRequest, cb?: (error: string, rep: BindAutoScalerResourceStrategyToGroupsResponse) => void): Promise<BindAutoScalerResourceStrategyToGroupsResponse>;
+    /**
+     * 创建云原生网关限流插件(路由)
+     */
+    CreateCloudNativeAPIGatewayRouteRateLimit(req: CreateCloudNativeAPIGatewayRouteRateLimitRequest, cb?: (error: string, rep: CreateCloudNativeAPIGatewayRouteRateLimitResponse) => void): Promise<CreateCloudNativeAPIGatewayRouteRateLimitResponse>;
+    /**
+     * 删除 WAF 防护域名
+     */
+    DeleteWafDomains(req: DeleteWafDomainsRequest, cb?: (error: string, rep: DeleteWafDomainsResponse) => void): Promise<DeleteWafDomainsResponse>;
+    /**
+     * 删除云原生网关服务
+     */
+    DeleteCloudNativeAPIGatewayService(req: DeleteCloudNativeAPIGatewayServiceRequest, cb?: (error: string, rep: DeleteCloudNativeAPIGatewayServiceResponse) => void): Promise<DeleteCloudNativeAPIGatewayServiceResponse>;
+    /**
+     * 查询云原生网关路由列表
+     */
+    DescribeCloudNativeAPIGatewayRoutes(req: DescribeCloudNativeAPIGatewayRoutesRequest, cb?: (error: string, rep: DescribeCloudNativeAPIGatewayRoutesResponse) => void): Promise<DescribeCloudNativeAPIGatewayRoutesResponse>;
+    /**
+     * 根据条件分页查询配置文件组
+     */
+    DescribeConfigFileGroups(req: DescribeConfigFileGroupsRequest, cb?: (error: string, rep: DescribeConfigFileGroupsResponse) => void): Promise<DescribeConfigFileGroupsResponse>;
+    /**
+     * 获取云原生API网关实例信息
+     */
+    DescribeCloudNativeAPIGateway(req: DescribeCloudNativeAPIGatewayRequest, cb?: (error: string, rep: DescribeCloudNativeAPIGatewayResponse) => void): Promise<DescribeCloudNativeAPIGatewayResponse>;
+    /**
+     * 删除云原生网关路由
+     */
+    DeleteCloudNativeAPIGatewayRoute(req: DeleteCloudNativeAPIGatewayRouteRequest, cb?: (error: string, rep: DeleteCloudNativeAPIGatewayRouteResponse) => void): Promise<DeleteCloudNativeAPIGatewayRouteResponse>;
+    /**
+     * 创建公网网络配置
+     */
+    CreateCloudNativeAPIGatewayPublicNetwork(req: CreateCloudNativeAPIGatewayPublicNetworkRequest, cb?: (error: string, rep: CreateCloudNativeAPIGatewayPublicNetworkResponse) => void): Promise<CreateCloudNativeAPIGatewayPublicNetworkResponse>;
+    /**
+     * 查询nacos服务接口列表
+     */
+    DescribeNacosServerInterfaces(req: DescribeNacosServerInterfacesRequest, cb?: (error: string, rep: DescribeNacosServerInterfacesResponse) => void): Promise<DescribeNacosServerInterfacesResponse>;
+    /**
+     * 修改配置文件
+     */
+    ModifyConfigFiles(req: ModifyConfigFilesRequest, cb?: (error: string, rep: ModifyConfigFilesResponse) => void): Promise<ModifyConfigFilesResponse>;
     /**
      * 修改云原生API网关实例的节点规格信息，例如节点扩缩容或者升降配
      */
     UpdateCloudNativeAPIGatewaySpec(req: UpdateCloudNativeAPIGatewaySpecRequest, cb?: (error: string, rep: UpdateCloudNativeAPIGatewaySpecResponse) => void): Promise<UpdateCloudNativeAPIGatewaySpecResponse>;
     /**
-     * 查询治理中心服务实例
+     * 创建治理中心服务
      */
-    DescribeGovernanceInstances(req: DescribeGovernanceInstancesRequest, cb?: (error: string, rep: DescribeGovernanceInstancesResponse) => void): Promise<DescribeGovernanceInstancesResponse>;
+    CreateGovernanceServices(req: CreateGovernanceServicesRequest, cb?: (error: string, rep: CreateGovernanceServicesResponse) => void): Promise<CreateGovernanceServicesResponse>;
     /**
-     * 查询云原生网关的限流插件(服务)
+     * 删除治理中心命名空间
      */
-    DescribeCloudNativeAPIGatewayServiceRateLimit(req: DescribeCloudNativeAPIGatewayServiceRateLimitRequest, cb?: (error: string, rep: DescribeCloudNativeAPIGatewayServiceRateLimitResponse) => void): Promise<DescribeCloudNativeAPIGatewayServiceRateLimitResponse>;
+    DeleteGovernanceNamespaces(req: DeleteGovernanceNamespacesRequest, cb?: (error: string, rep: DeleteGovernanceNamespacesResponse) => void): Promise<DeleteGovernanceNamespacesResponse>;
+    /**
+     * 修改治理中心服务实例
+     */
+    ModifyGovernanceInstances(req: ModifyGovernanceInstancesRequest, cb?: (error: string, rep: ModifyGovernanceInstancesResponse) => void): Promise<ModifyGovernanceInstancesResponse>;
+    /**
+     * 根据命名空间、组名、名称、标签查询配置文件列表
+     */
+    DescribeConfigFiles(req: DescribeConfigFilesRequest, cb?: (error: string, rep: DescribeConfigFilesResponse) => void): Promise<DescribeConfigFilesResponse>;
+    /**
+     * 修改云原生API网关实例基础信息
+     */
+    ModifyCloudNativeAPIGateway(req: ModifyCloudNativeAPIGatewayRequest, cb?: (error: string, rep: ModifyCloudNativeAPIGatewayResponse) => void): Promise<ModifyCloudNativeAPIGatewayResponse>;
+    /**
+     * 创建云原生网关限流插件(服务)
+     */
+    CreateCloudNativeAPIGatewayServiceRateLimit(req: CreateCloudNativeAPIGatewayServiceRateLimitRequest, cb?: (error: string, rep: CreateCloudNativeAPIGatewayServiceRateLimitResponse) => void): Promise<CreateCloudNativeAPIGatewayServiceRateLimitResponse>;
+    /**
+     * 删除治理中心服务实例
+     */
+    DeleteGovernanceInstancesByHost(req: DeleteGovernanceInstancesByHostRequest, cb?: (error: string, rep: DeleteGovernanceInstancesByHostResponse) => void): Promise<DeleteGovernanceInstancesByHostResponse>;
+    /**
+     * 获取配置文件发布历史列表
+     */
+    DescribeConfigFileReleaseHistories(req: DescribeConfigFileReleaseHistoriesRequest, cb?: (error: string, rep: DescribeConfigFileReleaseHistoriesResponse) => void): Promise<DescribeConfigFileReleaseHistoriesResponse>;
+    /**
+     * 查询云原生网关分组信息
+     */
+    DescribeNativeGatewayServerGroups(req: DescribeNativeGatewayServerGroupsRequest, cb?: (error: string, rep: DescribeNativeGatewayServerGroupsResponse) => void): Promise<DescribeNativeGatewayServerGroupsResponse>;
+    /**
+     * 更新云原生网关健康检查配置
+     */
+    UpdateUpstreamHealthCheckConfig(req: UpdateUpstreamHealthCheckConfigRequest, cb?: (error: string, rep: UpdateUpstreamHealthCheckConfigResponse) => void): Promise<UpdateUpstreamHealthCheckConfigResponse>;
 }
