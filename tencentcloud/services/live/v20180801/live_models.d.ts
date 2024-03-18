@@ -5779,6 +5779,10 @@ export interface CreateLiveTranscodeRuleRequest {
      */
     AppName: string;
     /**
+     * 流名称。已废弃该字段，请传入空字符串。
+     */
+    StreamName: string;
+    /**
      * 指定已有的模板Id。
      */
     TemplateId: number;
