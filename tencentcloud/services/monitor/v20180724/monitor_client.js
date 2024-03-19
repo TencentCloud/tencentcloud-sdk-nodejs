@@ -34,6 +34,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UpdateGrafanaNotificationChannel", req, cb);
     }
     /**
+     * 获取告警短信配额
+     */
+    async DescribeAlarmSmsQuota(req, cb) {
+        return this.request("DescribeAlarmSmsQuota", req, cb);
+    }
+    /**
      * 创建 Prometheus 告警规则。
 
 请注意，**告警对象和告警消息是 Prometheus Rule Annotations 的特殊字段，需要通过 annotations 来传递，对应的 Key 分别为summary/description**，，请参考 [Prometheus Rule更多配置请参考](https://prometheus.io/docs/prometheus/latest/configuration/alerting_rules/)。
@@ -60,6 +66,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async UpdateAlertRule(req, cb) {
         return this.request("UpdateAlertRule", req, cb);
+    }
+    /**
+     * 获取资源消耗页概览
+     */
+    async DescribeMonitorResourceInfo(req, cb) {
+        return this.request("DescribeMonitorResourceInfo", req, cb);
     }
     /**
      * 修改2.0实例告警策略
@@ -210,6 +222,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeAlarmEvents(req, cb) {
         return this.request("DescribeAlarmEvents", req, cb);
+    }
+    /**
+     * 查询周期内电话流水总数
+     */
+    async DescribePhoneAlarmFlowTotalCount(req, cb) {
+        return this.request("DescribePhoneAlarmFlowTotalCount", req, cb);
     }
     /**
      * 删除告警通知模板

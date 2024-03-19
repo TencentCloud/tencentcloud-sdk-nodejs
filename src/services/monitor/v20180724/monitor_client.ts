@@ -65,9 +65,10 @@ import {
   CreateGrafanaIntegrationRequest,
   Dimension,
   DescribeBindingPolicyObjectListResponse,
-  PrometheusInstancesOverview,
+  DescribeAlarmSmsQuotaRequest,
   DescribePrometheusInstanceInitStatusResponse,
   DescribeProductEventListResponse,
+  Targets,
   AlarmGroupByItem,
   DescribeAlarmNoticeCallbacksResponse,
   DescribePrometheusInstanceUsageRequest,
@@ -103,7 +104,7 @@ import {
   GrafanaAccountRole,
   DeleteRecordingRulesResponse,
   PolicyGroupReceiverInfo,
-  Metric,
+  CreateGrafanaNotificationChannelRequest,
   MidQueryCondition,
   DescribeGrafanaInstancesRequest,
   DescribePrometheusAgentInstancesResponse,
@@ -130,7 +131,7 @@ import {
   UnBindingAllPolicyObjectRequest,
   SendCustomAlarmMsgResponse,
   AlarmPolicyCondition,
-  DescribeGrafanaChannelsRequest,
+  ModifyPolicyGroupCondition,
   NoticeBindPolicys,
   DescribeGrafanaConfigRequest,
   UpdateRecordingRuleRequest,
@@ -154,6 +155,7 @@ import {
   CreateAlarmPolicyRequest,
   PrometheusZoneItem,
   PrometheusAlertCustomReceiver,
+  DescribeAlarmSmsQuotaQuota,
   ModifyPrometheusAlertPolicyRequest,
   ModifyPrometheusInstanceAttributesResponse,
   PrometheusTemplateSyncTarget,
@@ -180,10 +182,11 @@ import {
   DescribeBasicAlarmListResponse,
   ModifyAlarmReceiversRequest,
   DescribeExporterIntegrationsRequest,
+  DescribeAlarmSmsQuotaResponse,
   DescribePrometheusInstanceDetailResponse,
   Point,
   ModifyPolicyGroupEventCondition,
-  CreateGrafanaNotificationChannelRequest,
+  Metric,
   DescribePrometheusTargetsTMPResponse,
   DescribePrometheusClusterAgentsResponse,
   UpdatePrometheusScrapeJobRequest,
@@ -226,7 +229,7 @@ import {
   DeleteSSOAccountResponse,
   DescribePolicyGroupListGroup,
   GrafanaAccountInfo,
-  DescribePrometheusRegionsRequest,
+  DescribePrometheusTargetsTMPRequest,
   DescribeBindingPolicyObjectListInstanceGroup,
   ModifyAlarmPolicyTasksRequest,
   GetPrometheusAgentManagementCommandRequest,
@@ -246,6 +249,7 @@ import {
   DescribeAlertRulesRequest,
   DescribePrometheusInstancesResponse,
   LogFilterInfo,
+  DescribeGrafanaChannelsRequest,
   BindingPolicyTagResponse,
   DeleteServiceDiscoveryResponse,
   CreateExporterIntegrationRequest,
@@ -261,6 +265,7 @@ import {
   GetMonitorDataRequest,
   CreateRecordingRuleRequest,
   ModifyPrometheusConfigRequest,
+  DescribeMonitorResourceInfoRequest,
   DescribeGrafanaEnvironmentsResponse,
   DescribePolicyConditionListRequest,
   DeletePolicyGroupResponse,
@@ -268,7 +273,7 @@ import {
   GrafanaIntegrationConfig,
   DeleteGrafanaIntegrationRequest,
   ModifyPrometheusAlertPolicyResponse,
-  DescribePrometheusTargetsTMPRequest,
+  DescribePhoneAlarmFlowTotalCountResponse,
   CreateServiceDiscoveryRequest,
   PeriodsSt,
   ModifyAlarmReceiversResponse,
@@ -328,7 +333,7 @@ import {
   CreatePrometheusTempRequest,
   ModifyAlarmPolicyInfoResponse,
   MetricConfig,
-  Targets,
+  PrometheusInstancesOverview,
   DescribeAlarmEventsRequest,
   ModifyAlarmPolicyConditionRequest,
   ModifyAlarmNoticeResponse,
@@ -373,6 +378,7 @@ import {
   UpdateAlertRuleStateResponse,
   ModifyPrometheusRecordRuleYamlRequest,
   DeletePrometheusAlertPolicyResponse,
+  DescribePrometheusRegionsRequest,
   DescribeProductEventListDimensions,
   ModifyAlarmPolicyNoticeRequest,
   DeleteAlarmPolicyRequest,
@@ -408,9 +414,9 @@ import {
   PrometheusInstanceTenantUsage,
   DescribePrometheusZonesRequest,
   DescribePrometheusAlertGroupsRequest,
-  ModifyPolicyGroupCondition,
   ModifyPolicyGroupRequest,
   DescribeBaseMetricsRequest,
+  DescribePhoneAlarmFlowTotalCountRequest,
   DeletePrometheusConfigRequest,
   PrometheusAlertPolicyItem,
   ModifyPrometheusAgentExternalLabelsRequest,
@@ -454,6 +460,7 @@ import {
   CLSNotice,
   LogAlarmReq,
   TerminatePrometheusInstancesResponse,
+  DescribeMonitorResourceInfoResponse,
   UpdateSSOAccountResponse,
   RunPrometheusInstanceRequest,
   UpdateAlertRuleStateRequest,
@@ -478,6 +485,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: UpdateGrafanaNotificationChannelResponse) => void
   ): Promise<UpdateGrafanaNotificationChannelResponse> {
     return this.request("UpdateGrafanaNotificationChannel", req, cb)
+  }
+
+  /**
+   * 获取告警短信配额
+   */
+  async DescribeAlarmSmsQuota(
+    req: DescribeAlarmSmsQuotaRequest,
+    cb?: (error: string, rep: DescribeAlarmSmsQuotaResponse) => void
+  ): Promise<DescribeAlarmSmsQuotaResponse> {
+    return this.request("DescribeAlarmSmsQuota", req, cb)
   }
 
   /**
@@ -522,6 +539,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: UpdateAlertRuleResponse) => void
   ): Promise<UpdateAlertRuleResponse> {
     return this.request("UpdateAlertRule", req, cb)
+  }
+
+  /**
+   * 获取资源消耗页概览
+   */
+  async DescribeMonitorResourceInfo(
+    req?: DescribeMonitorResourceInfoRequest,
+    cb?: (error: string, rep: DescribeMonitorResourceInfoResponse) => void
+  ): Promise<DescribeMonitorResourceInfoResponse> {
+    return this.request("DescribeMonitorResourceInfo", req, cb)
   }
 
   /**
@@ -772,6 +799,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAlarmEventsResponse) => void
   ): Promise<DescribeAlarmEventsResponse> {
     return this.request("DescribeAlarmEvents", req, cb)
+  }
+
+  /**
+   * 查询周期内电话流水总数
+   */
+  async DescribePhoneAlarmFlowTotalCount(
+    req: DescribePhoneAlarmFlowTotalCountRequest,
+    cb?: (error: string, rep: DescribePhoneAlarmFlowTotalCountResponse) => void
+  ): Promise<DescribePhoneAlarmFlowTotalCountResponse> {
+    return this.request("DescribePhoneAlarmFlowTotalCount", req, cb)
   }
 
   /**

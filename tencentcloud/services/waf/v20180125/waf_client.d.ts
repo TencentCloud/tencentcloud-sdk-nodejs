@@ -142,7 +142,7 @@ export declare class Client extends AbstractClient {
      */
     CreateDeals(req: CreateDealsRequest, cb?: (error: string, rep: CreateDealsResponse) => void): Promise<CreateDealsResponse>;
     /**
-     * Waf 斯巴达版本更新cc自动封堵状态
+     * 编辑SAAS型接入的紧急CC防护状态
      */
     UpsertCCAutoStatus(req: UpsertCCAutoStatusRequest, cb?: (error: string, rep: UpsertCCAutoStatusResponse) => void): Promise<UpsertCCAutoStatusResponse>;
     /**
@@ -279,7 +279,7 @@ export declare class Client extends AbstractClient {
      */
     ModifyBotStatus(req: ModifyBotStatusRequest, cb?: (error: string, rep: ModifyBotStatusResponse) => void): Promise<ModifyBotStatusResponse>;
     /**
-     * waf斯巴达-waf开关
+     * 获取基础安全防护（WAF开关）状态
      */
     ModifyProtectionStatus(req: ModifyProtectionStatusRequest, cb?: (error: string, rep: ModifyProtectionStatusResponse) => void): Promise<ModifyProtectionStatusResponse>;
     /**
@@ -367,7 +367,7 @@ export declare class Client extends AbstractClient {
      */
     SwitchDomainRules(req: SwitchDomainRulesRequest, cb?: (error: string, rep: SwitchDomainRulesResponse) => void): Promise<SwitchDomainRulesResponse>;
     /**
-     * Waf 多域名ip黑白名单查询
+     * Waf 批量防护IP黑白名单查询
      */
     DescribeBatchIpAccessControl(req: DescribeBatchIpAccessControlRequest, cb?: (error: string, rep: DescribeBatchIpAccessControlResponse) => void): Promise<DescribeBatchIpAccessControlResponse>;
     /**
@@ -519,7 +519,7 @@ export declare class Client extends AbstractClient {
      */
     UpsertSession(req: UpsertSessionRequest, cb?: (error: string, rep: UpsertSessionResponse) => void): Promise<UpsertSessionResponse>;
     /**
-     * Waf 斯巴达版本查询cc自动封堵状态
+     * 获取SAAS型接入的紧急CC防护状态
      */
     DescribeCCAutoStatus(req: DescribeCCAutoStatusRequest, cb?: (error: string, rep: DescribeCCAutoStatusResponse) => void): Promise<DescribeCCAutoStatusResponse>;
     /**

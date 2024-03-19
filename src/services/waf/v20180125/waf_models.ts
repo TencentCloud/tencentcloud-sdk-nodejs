@@ -1955,7 +1955,11 @@ export interface ModifySpartaProtectionRequest {
   /**
    * 必填项。域名唯一ID
    */
-  DomainId?: string
+  DomainId: string
+  /**
+   * 必填项。域名所属实例id
+   */
+  InstanceID: string
   /**
    * 必填项。证书类型。
 0：仅配置HTTP监听端口，没有证书
@@ -2051,10 +2055,6 @@ https：使用https协议回源
    */
   IsKeepAlive?: string
   /**
-   * 必填项。域名所属实例id
-   */
-  InstanceID?: string
-  /**
    * 必填项，待废弃。目前填0即可。anycast IP类型开关： 0 普通IP 1 Anycast IP
    */
   Anycast?: number
@@ -2122,6 +2122,10 @@ https：使用https协议回源
    * 自定义回源Host。默认为空字符串，表示使用防护域名作为回源Host。
    */
   UpstreamHost?: string
+  /**
+   * 是否开启缓存 0-关闭 1-开启
+   */
+  ProxyBuffer?: number
 }
 
 /**
@@ -2641,7 +2645,7 @@ cdc-clb-waf：CDC环境下负载均衡型WAF实例
 "日本": "jp"
 "弗吉尼亚": "use"
 "北京": "bj"
-"香港": "hk"
+"中国香港": "hk"
 "杭州": "hzec"
 "北京金融": "bjjr"
 "上海金融": "shjr"
@@ -2820,6 +2824,11 @@ public：公有云域名
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SgID?: string
+  /**
+   * clbwaf接入状态
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AccessStatus?: number
 }
 
 /**
@@ -3792,7 +3801,7 @@ export interface DeleteIpAccessControlResponse {
 }
 
 /**
- * 多域名黑白名单列表Ip
+ * 批量多域名黑白名单列表Ip
  */
 export interface BatchIpAccessControlItem {
   /**
@@ -3828,6 +3837,16 @@ export interface BatchIpAccessControlItem {
    * 域名列表
    */
   Hosts?: Array<string>
+  /**
+   * 55101145
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RuleId?: number
+  /**
+   * IP列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IpList?: Array<string>
 }
 
 /**
@@ -4099,7 +4118,7 @@ export interface DescribeIpAccessControlRequest {
    */
   Sort?: string
   /**
-   * ip
+   * IP
    */
   Ip?: string
   /**
@@ -4114,6 +4133,10 @@ export interface DescribeIpAccessControlRequest {
    * 最大有效时间的时间戳
    */
   ValidTimeStampMax?: string
+  /**
+   * 规则ID
+   */
+  RuleId?: number
 }
 
 /**
@@ -4820,6 +4843,11 @@ export interface DescribeIpAccessControlResponse {
    */
   Data?: IpAccessControlData
   /**
+   * 已经使用的IP黑白名单的IP总数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UsedTotal?: number
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -4930,6 +4958,16 @@ export interface IpAccessControlItem {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ValidStatus?: number
+  /**
+   * 55000001
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RuleId?: number
+  /**
+   * IP列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IpList?: Array<string>
 }
 
 /**
@@ -5555,6 +5593,11 @@ export interface DescribeAttackOverviewResponse {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   LeakCount?: number
+  /**
+   * API风险事件周环比
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ApiRiskEventCircleCount?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6191,7 +6234,7 @@ export interface DescribeBatchIpAccessControlResponse {
    * 输出
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Data: BatchIpAccessControlData
+  Data?: BatchIpAccessControlData
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -7937,6 +7980,11 @@ https：使用https协议回源
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Level?: string
+  /**
+   * 是否开启缓存 0-关闭 1-开启
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProxyBuffer?: number
 }
 
 /**
@@ -8036,6 +8084,25 @@ export interface AddSpartaProtectionRequest {
    */
   LoadBalance: string
   /**
+   * 服务端口列表配置。
+NginxServerId：新增域名时填'0'
+Port：监听端口号
+Protocol：端口协议
+UpstreamPort：与Port相同
+UpstreamProtocol：与Protocol相同
+   */
+  Ports: Array<PortItem>
+  /**
+   * 必填项，是否开启长连接。
+0： 短连接
+1： 长连接
+   */
+  IsKeepAlive: string
+  /**
+   * 必填项，域名所属实例id
+   */
+  InstanceID: string
+  /**
    * CertType为1时，需要填充此参数，表示自有证书的证书链
    */
   Cert?: string
@@ -8094,31 +8161,12 @@ https：使用https协议回源
    */
   IsHttp2?: number
   /**
-   * 服务端口列表配置。
-NginxServerId：新增域名时填'0'
-Port：监听端口号
-Protocol：端口协议
-UpstreamPort：与Port相同
-UpstreamProtocol：与Protocol相同
-   */
-  Ports?: Array<PortItem>
-  /**
    * 待废弃，可不填。WAF实例类型。
 sparta-waf：SAAS型WAF
 clb-waf：负载均衡型WAF
 cdn-waf：CDN上的Web防护能力
    */
   Edition?: string
-  /**
-   * 必填项，是否开启长连接。
-0： 短连接
-1： 长连接
-   */
-  IsKeepAlive?: string
-  /**
-   * 必填项，域名所属实例id
-   */
-  InstanceID?: string
   /**
    * 待废弃，目前填0即可。anycast IP类型开关： 0 普通IP 1 Anycast IP
    */
@@ -8183,6 +8231,10 @@ cdn-waf：CDN上的Web防护能力
    * 自定义回源Host。默认为空字符串，表示使用防护域名作为回源Host。
    */
   UpstreamHost?: string
+  /**
+   * 是否开启缓存 0-关闭 1-开启
+   */
+  ProxyBuffer?: number
 }
 
 /**
@@ -8222,7 +8274,7 @@ export interface AttackLogInfo {
  */
 export interface DescribeCCAutoStatusResponse {
   /**
-   * 配置状态
+   * 配置状态，0表示关闭，1表示开启
    */
   AutoCCSwitch?: number
   /**
@@ -8443,8 +8495,9 @@ export interface ModifyAccessPeriodRequest {
   Period: number
   /**
    * 日志主题，新版本不需要再传
+   * @deprecated
    */
-  TopicId: string
+  TopicId?: string
 }
 
 /**

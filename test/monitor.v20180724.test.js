@@ -28,6 +28,16 @@ it("monitor.v20180724.UpdateGrafanaNotificationChannel", async function () {
     }
 })
 
+it("monitor.v20180724.DescribeAlarmSmsQuota", async function () {
+    try {
+       const data = await client.DescribeAlarmSmsQuota({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("monitor.v20180724.CreateAlertRule", async function () {
     try {
        const data = await client.CreateAlertRule({})
@@ -61,6 +71,16 @@ it("monitor.v20180724.DescribeBindingPolicyObjectList", async function () {
 it("monitor.v20180724.UpdateAlertRule", async function () {
     try {
        const data = await client.UpdateAlertRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("monitor.v20180724.DescribeMonitorResourceInfo", async function () {
+    try {
+       const data = await client.DescribeMonitorResourceInfo({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -311,6 +331,16 @@ it("monitor.v20180724.DescribeBaseMetrics", async function () {
 it("monitor.v20180724.DescribeAlarmEvents", async function () {
     try {
        const data = await client.DescribeAlarmEvents({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("monitor.v20180724.DescribePhoneAlarmFlowTotalCount", async function () {
+    try {
+       const data = await client.DescribePhoneAlarmFlowTotalCount({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

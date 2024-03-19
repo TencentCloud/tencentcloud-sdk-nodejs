@@ -198,6 +198,16 @@ it("essbasic.v20210526.ChannelCreateOrganizationBatchSignUrl", async function ()
     }
 })
 
+it("essbasic.v20210526.DescribeCancelFlowsTask", async function () {
+    try {
+       const data = await client.DescribeCancelFlowsTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("essbasic.v20210526.ChannelCreateSealPolicy", async function () {
     try {
        const data = await client.ChannelCreateSealPolicy({})

@@ -20,6 +20,7 @@ import { ClientConfig } from "../../../common/interface"
 import {
   DescribePersonCertificateResponse,
   BillUsageDetail,
+  DescribeCancelFlowsTaskResponse,
   IntentionActionResult,
   CreateSealRequest,
   ModifyIntegrationDepartmentResponse,
@@ -75,7 +76,7 @@ import {
   DescribeSignFaceVideoRequest,
   DeleteSealPoliciesRequest,
   CreateFlowGroupByTemplatesResponse,
-  DetectInfoVideoData,
+  CancelFailureFlow,
   TemplateInfo,
   CreateDocumentResponse,
   DescribeIntegrationEmployeesRequest,
@@ -135,6 +136,7 @@ import {
   RecipientComponentInfo,
   CreateFlowEvidenceReportResponse,
   CreateIntegrationRoleResponse,
+  DetectInfoVideoData,
   DescribeFlowComponentsRequest,
   CreateIntegrationDepartmentRequest,
   GroupOrganization,
@@ -194,6 +196,7 @@ import {
   CreateSealResponse,
   CreatePrepareFlowRequest,
   ApproverOption,
+  DescribeCancelFlowsTaskRequest,
   CreateEmbedWebUrlResponse,
   ModifyExtendedServiceResponse,
   CreateSealPolicyRequest,
@@ -801,6 +804,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateFlowResponse) => void
   ): Promise<CreateFlowResponse> {
     return this.request("CreateFlow", req, cb)
+  }
+
+  /**
+   * 通过[获取批量撤销签署流程腾讯电子签小程序链接](https://qian.tencent.com/developers/companyApis/operateFlows/CreateBatchCancelFlowUrl)发起批量撤销任务后，可通过此接口查询批量撤销任务的结果。
+   */
+  async DescribeCancelFlowsTask(
+    req: DescribeCancelFlowsTaskRequest,
+    cb?: (error: string, rep: DescribeCancelFlowsTaskResponse) => void
+  ): Promise<DescribeCancelFlowsTaskResponse> {
+    return this.request("DescribeCancelFlowsTask", req, cb)
   }
 
   /**

@@ -459,6 +459,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateFlow", req, cb);
     }
     /**
+     * 通过[获取批量撤销签署流程腾讯电子签小程序链接](https://qian.tencent.com/developers/companyApis/operateFlows/CreateBatchCancelFlowUrl)发起批量撤销任务后，可通过此接口查询批量撤销任务的结果。
+     */
+    async DescribeCancelFlowsTask(req, cb) {
+        return this.request("DescribeCancelFlowsTask", req, cb);
+    }
+    /**
      * 发起解除协议的主要应用场景为：基于一份已经签署的合同（签署流程），进行解除操作。
 解除协议的模板是官方提供 ，经过提供法务审核，暂不支持自定义。
 

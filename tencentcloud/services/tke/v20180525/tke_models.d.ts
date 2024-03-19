@@ -1178,17 +1178,22 @@ export interface PodLimitsByType {
      * TKE共享网卡非固定IP模式可支持的Pod数量
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TKERouteENINonStaticIP: number;
+    TKERouteENINonStaticIP?: number;
     /**
      * TKE共享网卡固定IP模式可支持的Pod数量
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TKERouteENIStaticIP: number;
+    TKERouteENIStaticIP?: number;
     /**
      * TKE独立网卡模式可支持的Pod数量
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TKEDirectENI: number;
+    TKEDirectENI?: number;
+    /**
+     * TKE中继网卡模式可支持的Pod数量
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TKESubENI?: number;
 }
 /**
  * DeletePrometheusTemplateSync请求参数结构体

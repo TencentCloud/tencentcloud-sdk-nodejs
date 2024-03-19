@@ -29,6 +29,7 @@ import {
   DescribeExtendedServiceAuthDetailResponse,
   Department,
   CommonApproverOption,
+  DescribeCancelFlowsTaskResponse,
   ChannelCreateFlowGroupByTemplatesResponse,
   ChannelCreateFlowSignReviewRequest,
   AuthFailMessage,
@@ -45,6 +46,7 @@ import {
   ChannelCreateBatchSignUrlResponse,
   ChannelCreatePrepareFlowResponse,
   WebThemeConfig,
+  DetectInfoVideoData,
   OperateChannelTemplateResponse,
   FlowFileInfo,
   CreateFlowOption,
@@ -79,7 +81,7 @@ import {
   ChannelCreateFlowByFilesResponse,
   DescribeFlowDetailInfoResponse,
   RecipientComponentInfo,
-  DetectInfoVideoData,
+  CancelFailureFlow,
   ChannelDescribeRolesRequest,
   DescribeBatchOrganizationRegistrationUrlsRequest,
   PrepareFlowsResponse,
@@ -187,6 +189,7 @@ import {
   ChannelCreateFlowGroupByFilesResponse,
   ChannelCreateMultiFlowSignQRCodeResponse,
   ApproverOption,
+  DescribeCancelFlowsTaskRequest,
   ChannelDescribeUserAutoSignStatusResponse,
   ProxyOrganizationOperator,
   ModifyExtendedServiceResponse,
@@ -618,6 +621,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ChannelCreateOrganizationBatchSignUrlResponse) => void
   ): Promise<ChannelCreateOrganizationBatchSignUrlResponse> {
     return this.request("ChannelCreateOrganizationBatchSignUrl", req, cb)
+  }
+
+  /**
+   * 通过接口[批量撤销合同流程](https://qian.tencent.com/developers/partnerApis/operateFlows/ChannelBatchCancelFlows)或者[获取批量撤销签署流程腾讯电子签小程序链接](https://qian.tencent.com/developers/partnerApis/operateFlows/ChannelCreateBatchCancelFlowUrl)发起批量撤销任务后，可通过此接口查询批量撤销任务的结果。
+   */
+  async DescribeCancelFlowsTask(
+    req: DescribeCancelFlowsTaskRequest,
+    cb?: (error: string, rep: DescribeCancelFlowsTaskResponse) => void
+  ): Promise<DescribeCancelFlowsTaskResponse> {
+    return this.request("DescribeCancelFlowsTask", req, cb)
   }
 
   /**

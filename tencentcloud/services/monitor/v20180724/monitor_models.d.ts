@@ -1246,85 +1246,13 @@ export interface DescribeBindingPolicyObjectListResponse {
     RequestId?: string;
 }
 /**
- * 托管prometheusV2实例概览
+ * DescribeAlarmSmsQuota请求参数结构体
  */
-export interface PrometheusInstancesOverview {
+export interface DescribeAlarmSmsQuotaRequest {
     /**
-     * 实例ID
+     * 固定值，为"monitor"
      */
-    InstanceId: string;
-    /**
-     * 实例名
-     */
-    InstanceName: string;
-    /**
-     * VPC ID
-     */
-    VpcId: string;
-    /**
-     * 子网ID
-     */
-    SubnetId: string;
-    /**
-     * 运行状态（1:正在创建；2:运行中；3:异常；4:重启中；5:销毁中； 6:已停机； 7: 已删除）
-     */
-    InstanceStatus: number;
-    /**
-     * 计费状态（1:正常；2:过期; 3:销毁; 4:分配中; 5:分配失败）
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ChargeStatus: number;
-    /**
-     * 是否开启 Grafana（0:不开启，1:开启）
-     */
-    EnableGrafana: number;
-    /**
-     * Grafana 面板 URL
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    GrafanaURL: string;
-    /**
-     * 实例付费类型（1:试用版；2:预付费）
-     */
-    InstanceChargeType: number;
-    /**
-     * 规格名称
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    SpecName: string;
-    /**
-     * 存储周期
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    DataRetentionTime: number;
-    /**
-     * 购买的实例过期时间
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ExpireTime: string;
-    /**
-     * 自动续费标记(0:不自动续费；1:开启自动续费；2:禁止自动续费；-1:无效)
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    AutoRenewFlag: number;
-    /**
-     * 绑定集群总数
-     */
-    BoundTotal: number;
-    /**
-     * 绑定集群正常状态总数
-     */
-    BoundNormal: number;
-    /**
-     * 资源包状态，0-无可用资源包，1-有可用资源包
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ResourcePackageStatus?: number;
-    /**
-     * 资源包规格名称
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ResourcePackageSpecName?: string;
+    Module: string;
 }
 /**
  * DescribePrometheusInstanceInitStatus返回参数结构体
@@ -1380,6 +1308,31 @@ export interface DescribeProductEventListResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * 抓取目标数
+ */
+export interface Targets {
+    /**
+     * 总数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Total?: number;
+    /**
+     * 在线数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Up?: number;
+    /**
+     * 不在线数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Down?: number;
+    /**
+     * 未知状态数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Unknown?: number;
 }
 /**
  * 聚合条件
@@ -2013,67 +1966,33 @@ export interface PolicyGroupReceiverInfo {
     UIDList: Array<number | bigint>;
 }
 /**
- * 指标，可用于设置告警、查询数据
+ * CreateGrafanaNotificationChannel请求参数结构体
  */
-export interface Metric {
+export interface CreateGrafanaNotificationChannelRequest {
     /**
-     * 告警策略类型
+     * Grafana 实例 ID，例如：grafana-abcdefgh
      */
-    Namespace: string;
+    InstanceId: string;
     /**
-     * 指标名
+     * 告警通道名称，例如：test
      */
-    MetricName: string;
+    ChannelName: string;
     /**
-     * 指标展示名
+     * 接受告警通道 ID 数组，值为告警管理/基础配置/通知模板中的模板 ID
      */
-    Description: string;
+    Receivers: Array<string>;
     /**
-     * 最小值
+     * 默认为1，建议使用 OrganizationIds
      */
-    Min: number;
+    OrgId?: number;
     /**
-     * 最大值
+     * 额外组织 ID 数组，已废弃，请使用 OrganizationIds
      */
-    Max: number;
+    ExtraOrgIds?: Array<string>;
     /**
-     * 维度列表
+     * 生效的所有组织 ID 数组，默认为 ["1"]
      */
-    Dimensions: Array<string>;
-    /**
-     * 单位
-     */
-    Unit: string;
-    /**
-     * 指标配置
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    MetricConfig: MetricConfig;
-    /**
-     * 是否为高级指标。1是 0否
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    IsAdvanced: number;
-    /**
-     * 高级指标是否开通。1是 0否
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    IsOpen: number;
-    /**
-     * 集成中心产品ID
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ProductId: number;
-    /**
-     * 匹配运算符
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Operators?: Array<Operator>;
-    /**
-     * 指标触发
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Periods?: Array<number | bigint>;
+    OrganizationIds?: Array<string>;
 }
 /**
  * DescribeMidDimensionValueList的查询条件
@@ -2665,33 +2584,41 @@ export interface AlarmPolicyCondition {
     ComplexExpression?: string;
 }
 /**
- * DescribeGrafanaChannels请求参数结构体
+ * 修改告警策略组传入的指标阈值条件
  */
-export interface DescribeGrafanaChannelsRequest {
+export interface ModifyPolicyGroupCondition {
     /**
-     * Grafana 实例 ID，例如：grafana-12345678
+     * 指标id
      */
-    InstanceId: string;
+    MetricId: number;
     /**
-     * 偏移量
+     * 比较类型，1表示大于，2表示大于等于，3表示小于，4表示小于等于，5表示相等，6表示不相等
      */
-    Offset: number;
+    CalcType: number;
     /**
-     * 查询数量
+     * 检测阈值
      */
-    Limit: number;
+    CalcValue: string;
     /**
-     * 告警通道名称，例如：test
+     * 检测指标的数据周期
      */
-    ChannelName?: string;
+    CalcPeriod: number;
     /**
-     * 告警通道 ID，例如：nchannel-abcd1234
+     * 持续周期个数
      */
-    ChannelIds?: Array<string>;
+    ContinuePeriod: number;
     /**
-     * 告警通道状态(不用填写，目前只有可用和删除状态，默认只能查询可用的告警通道)
+     * 告警发送收敛类型。0连续告警，1指数告警
      */
-    ChannelState?: number;
+    AlarmNotifyType: number;
+    /**
+     * 告警发送周期单位秒。<0 不触发, 0 只触发一次, >0 每隔triggerTime秒触发一次
+     */
+    AlarmNotifyPeriod: number;
+    /**
+     * 规则id，不填表示新增，填写了ruleId表示在已存在的规则基础上进行修改
+     */
+    RuleId?: number;
 }
 /**
  * 通知模板与策略绑定关系
@@ -3303,6 +3230,31 @@ export interface PrometheusAlertCustomReceiver {
     ClusterType?: string;
 }
 /**
+ * DescribeAlarmSmsQuota接口的配额信息
+ */
+export interface DescribeAlarmSmsQuotaQuota {
+    /**
+     * 配额类型
+     */
+    Type: string;
+    /**
+     * 配额名称
+     */
+    Name: string;
+    /**
+     * 免费配额剩余量
+     */
+    FreeLeft: number;
+    /**
+     * 付费配额剩余量
+     */
+    PurchaseLeft: number;
+    /**
+     * 已使用量
+     */
+    Used: number;
+}
+/**
  * ModifyPrometheusAlertPolicy请求参数结构体
  */
 export interface ModifyPrometheusAlertPolicyRequest {
@@ -3828,6 +3780,28 @@ export interface DescribeExporterIntegrationsRequest {
     Name?: string;
 }
 /**
+ * DescribeAlarmSmsQuota返回参数结构体
+ */
+export interface DescribeAlarmSmsQuotaResponse {
+    /**
+     * 配额总数
+     */
+    Total?: number;
+    /**
+     * 总使用量
+     */
+    Used?: number;
+    /**
+     * 短信配额信息列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    QuotaList?: Array<DescribeAlarmSmsQuotaQuota>;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * DescribePrometheusInstanceDetail返回参数结构体
  */
 export interface DescribePrometheusInstanceDetailResponse {
@@ -3955,33 +3929,67 @@ export interface ModifyPolicyGroupEventCondition {
     RuleId?: number;
 }
 /**
- * CreateGrafanaNotificationChannel请求参数结构体
+ * 指标，可用于设置告警、查询数据
  */
-export interface CreateGrafanaNotificationChannelRequest {
+export interface Metric {
     /**
-     * Grafana 实例 ID，例如：grafana-abcdefgh
+     * 告警策略类型
      */
-    InstanceId: string;
+    Namespace: string;
     /**
-     * 告警通道名称，例如：test
+     * 指标名
      */
-    ChannelName: string;
+    MetricName: string;
     /**
-     * 接受告警通道 ID 数组，值为告警管理/基础配置/通知模板中的模板 ID
+     * 指标展示名
      */
-    Receivers: Array<string>;
+    Description: string;
     /**
-     * 默认为1，建议使用 OrganizationIds
+     * 最小值
      */
-    OrgId?: number;
+    Min: number;
     /**
-     * 额外组织 ID 数组，已废弃，请使用 OrganizationIds
+     * 最大值
      */
-    ExtraOrgIds?: Array<string>;
+    Max: number;
     /**
-     * 生效的所有组织 ID 数组，默认为 ["1"]
+     * 维度列表
      */
-    OrganizationIds?: Array<string>;
+    Dimensions: Array<string>;
+    /**
+     * 单位
+     */
+    Unit: string;
+    /**
+     * 指标配置
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MetricConfig: MetricConfig;
+    /**
+     * 是否为高级指标。1是 0否
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IsAdvanced: number;
+    /**
+     * 高级指标是否开通。1是 0否
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IsOpen: number;
+    /**
+     * 集成中心产品ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ProductId: number;
+    /**
+     * 匹配运算符
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Operators?: Array<Operator>;
+    /**
+     * 指标触发
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Periods?: Array<number | bigint>;
 }
 /**
  * DescribePrometheusTargetsTMP返回参数结构体
@@ -4716,13 +4724,28 @@ export interface GrafanaAccountInfo {
     Uin: string;
 }
 /**
- * DescribePrometheusRegions请求参数结构体
+ * DescribePrometheusTargetsTMP请求参数结构体
  */
-export interface DescribePrometheusRegionsRequest {
+export interface DescribePrometheusTargetsTMPRequest {
     /**
-     * 1-预付费，2-后付费，3-全地域（不填默认全地域）
+     * 实例id
      */
-    PayMode?: number;
+    InstanceId: string;
+    /**
+     * 集成容器服务填绑定的集群id；
+  集成中心填 non-cluster
+     */
+    ClusterId: string;
+    /**
+     * 集群类型(可不填)
+     */
+    ClusterType?: string;
+    /**
+     * 过滤条件，当前支持
+  Name=state
+  Value=up, down, unknown
+     */
+    Filters?: Array<Filter>;
 }
 /**
  * DescribeBindingPolicyObjectList返回的是实例分组信息
@@ -5094,6 +5117,35 @@ export interface LogFilterInfo {
      * 字段值
      */
     Value: string;
+}
+/**
+ * DescribeGrafanaChannels请求参数结构体
+ */
+export interface DescribeGrafanaChannelsRequest {
+    /**
+     * Grafana 实例 ID，例如：grafana-12345678
+     */
+    InstanceId: string;
+    /**
+     * 偏移量
+     */
+    Offset: number;
+    /**
+     * 查询数量
+     */
+    Limit: number;
+    /**
+     * 告警通道名称，例如：test
+     */
+    ChannelName?: string;
+    /**
+     * 告警通道 ID，例如：nchannel-abcd1234
+     */
+    ChannelIds?: Array<string>;
+    /**
+     * 告警通道状态(不用填写，目前只有可用和删除状态，默认只能查询可用的告警通道)
+     */
+    ChannelState?: number;
 }
 /**
  * BindingPolicyTag返回参数结构体
@@ -5628,6 +5680,10 @@ export interface ModifyPrometheusConfigRequest {
     UpdateImage?: number;
 }
 /**
+ * DescribeMonitorResourceInfo请求参数结构体
+ */
+export declare type DescribeMonitorResourceInfoRequest = null;
+/**
  * DescribeGrafanaEnvironments返回参数结构体
  */
 export interface DescribeGrafanaEnvironmentsResponse {
@@ -5716,28 +5772,17 @@ export interface ModifyPrometheusAlertPolicyResponse {
     RequestId?: string;
 }
 /**
- * DescribePrometheusTargetsTMP请求参数结构体
+ * DescribePhoneAlarmFlowTotalCount返回参数结构体
  */
-export interface DescribePrometheusTargetsTMPRequest {
+export interface DescribePhoneAlarmFlowTotalCountResponse {
     /**
-     * 实例id
+     * 电话流水总数
      */
-    InstanceId: string;
+    Count: number;
     /**
-     * 集成容器服务填绑定的集群id；
-  集成中心填 non-cluster
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
-    ClusterId: string;
-    /**
-     * 集群类型(可不填)
-     */
-    ClusterType?: string;
-    /**
-     * 过滤条件，当前支持
-  Name=state
-  Value=up, down, unknown
-     */
-    Filters?: Array<Filter>;
+    RequestId?: string;
 }
 /**
  * CreateServiceDiscovery请求参数结构体
@@ -7197,29 +7242,85 @@ export interface MetricConfig {
     ContinuePeriod: Array<number | bigint>;
 }
 /**
- * 抓取目标数
+ * 托管prometheusV2实例概览
  */
-export interface Targets {
+export interface PrometheusInstancesOverview {
     /**
-     * 总数
+     * 实例ID
+     */
+    InstanceId: string;
+    /**
+     * 实例名
+     */
+    InstanceName: string;
+    /**
+     * VPC ID
+     */
+    VpcId: string;
+    /**
+     * 子网ID
+     */
+    SubnetId: string;
+    /**
+     * 运行状态（1:正在创建；2:运行中；3:异常；4:重启中；5:销毁中； 6:已停机； 7: 已删除）
+     */
+    InstanceStatus: number;
+    /**
+     * 计费状态（1:正常；2:过期; 3:销毁; 4:分配中; 5:分配失败）
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Total?: number;
+    ChargeStatus: number;
     /**
-     * 在线数
+     * 是否开启 Grafana（0:不开启，1:开启）
+     */
+    EnableGrafana: number;
+    /**
+     * Grafana 面板 URL
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Up?: number;
+    GrafanaURL: string;
     /**
-     * 不在线数
+     * 实例付费类型（1:试用版；2:预付费）
+     */
+    InstanceChargeType: number;
+    /**
+     * 规格名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Down?: number;
+    SpecName: string;
     /**
-     * 未知状态数
+     * 存储周期
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Unknown?: number;
+    DataRetentionTime: number;
+    /**
+     * 购买的实例过期时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ExpireTime: string;
+    /**
+     * 自动续费标记(0:不自动续费；1:开启自动续费；2:禁止自动续费；-1:无效)
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AutoRenewFlag: number;
+    /**
+     * 绑定集群总数
+     */
+    BoundTotal: number;
+    /**
+     * 绑定集群正常状态总数
+     */
+    BoundNormal: number;
+    /**
+     * 资源包状态，0-无可用资源包，1-有可用资源包
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ResourcePackageStatus?: number;
+    /**
+     * 资源包规格名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ResourcePackageSpecName?: string;
 }
 /**
  * DescribeAlarmEvents请求参数结构体
@@ -8078,31 +8179,31 @@ export interface PrometheusRegionItem {
     /**
      * 区域
      */
-    Region: string;
+    Region?: string;
     /**
      * 区域 ID
      */
-    RegionId: number;
+    RegionId?: number;
     /**
      * 区域状态( 0: 不可用；1: 可用)
      */
-    RegionState: number;
+    RegionState?: number;
     /**
      * 区域名(中文)
      */
-    RegionName: string;
+    RegionName?: string;
     /**
      * 区域名(英文缩写)
      */
-    RegionShortName: string;
+    RegionShortName?: string;
     /**
      * 区域所在大区名
      */
-    Area: string;
+    Area?: string;
     /**
      * 1-仅支持预付费，2-仅支持后付费，3-支持两种计费模式实例
      */
-    RegionPayMode: number;
+    RegionPayMode?: number;
 }
 /**
  * ModifyPrometheusInstanceAttributes请求参数结构体
@@ -8378,6 +8479,15 @@ export interface DeletePrometheusAlertPolicyResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * DescribePrometheusRegions请求参数结构体
+ */
+export interface DescribePrometheusRegionsRequest {
+    /**
+     * 1-预付费，2-后付费，3-全地域（不填默认全地域）
+     */
+    PayMode?: number;
 }
 /**
  * DescribeProductEventList的入参Dimensions
@@ -9069,43 +9179,6 @@ export interface DescribePrometheusAlertGroupsRequest {
     GroupName?: string;
 }
 /**
- * 修改告警策略组传入的指标阈值条件
- */
-export interface ModifyPolicyGroupCondition {
-    /**
-     * 指标id
-     */
-    MetricId: number;
-    /**
-     * 比较类型，1表示大于，2表示大于等于，3表示小于，4表示小于等于，5表示相等，6表示不相等
-     */
-    CalcType: number;
-    /**
-     * 检测阈值
-     */
-    CalcValue: string;
-    /**
-     * 检测指标的数据周期
-     */
-    CalcPeriod: number;
-    /**
-     * 持续周期个数
-     */
-    ContinuePeriod: number;
-    /**
-     * 告警发送收敛类型。0连续告警，1指数告警
-     */
-    AlarmNotifyType: number;
-    /**
-     * 告警发送周期单位秒。<0 不触发, 0 只触发一次, >0 每隔triggerTime秒触发一次
-     */
-    AlarmNotifyPeriod: number;
-    /**
-     * 规则id，不填表示新增，填写了ruleId表示在已存在的规则基础上进行修改
-     */
-    RuleId?: number;
-}
-/**
  * ModifyPolicyGroup请求参数结构体
  */
 export interface ModifyPolicyGroupRequest {
@@ -9158,6 +9231,19 @@ export interface DescribeBaseMetricsRequest {
      * 可选参数，按照维度过滤
      */
     Dimensions?: Array<string>;
+}
+/**
+ * DescribePhoneAlarmFlowTotalCount请求参数结构体
+ */
+export interface DescribePhoneAlarmFlowTotalCountRequest {
+    /**
+     * 默认monitor
+     */
+    Module: string;
+    /**
+     * unix时间戳，单位：s
+     */
+    QueryTime: number;
 }
 /**
  * DeletePrometheusConfig请求参数结构体
@@ -10302,6 +10388,31 @@ export interface LogAlarmReq {
  * TerminatePrometheusInstances返回参数结构体
  */
 export interface TerminatePrometheusInstancesResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * DescribeMonitorResourceInfo返回参数结构体
+ */
+export interface DescribeMonitorResourceInfoResponse {
+    /**
+     * 电话告警数量
+     */
+    PhoneAlarmNumber: number;
+    /**
+     * 高级指标数量
+     */
+    AdvancedMetricNumber: number;
+    /**
+     * API调用量
+     */
+    APIUsageNumber: number;
+    /**
+     * 告警短信数量
+     */
+    AlarmSMSNumber: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */

@@ -3470,7 +3470,7 @@ export interface CreateTrafficPackagesResponse {
     /**
      * 创建的流量包ID列表。
      */
-    TrafficPackageSet: Array<string>;
+    TrafficPackageSet?: Array<string>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -4945,45 +4945,45 @@ export interface TrafficPackage {
     /**
      * 流量包唯一ID
      */
-    TrafficPackageId: string;
+    TrafficPackageId?: string;
     /**
      * 流量包名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TrafficPackageName: string;
+    TrafficPackageName?: string;
     /**
      * 流量包总量，单位GB
      */
-    TotalAmount: number;
+    TotalAmount?: number;
     /**
      * 流量包剩余量，单位GB
      */
-    RemainingAmount: number;
+    RemainingAmount?: number;
     /**
      * 流量包状态，可能的值有: AVAILABLE-可用状态， EXPIRED-已过期， EXHAUSTED-已用完， REFUNDED-已退还， DELETED-已删除
      */
-    Status: string;
+    Status?: string;
     /**
      * 流量包创建时间
      */
-    CreatedTime: string;
+    CreatedTime?: string;
     /**
      * 流量包截止时间
      */
-    Deadline: string;
+    Deadline?: string;
     /**
      * 已使用的流量，单位GB
      */
-    UsedAmount: number;
+    UsedAmount?: number;
     /**
      * 流量包标签
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TagSet: Array<Tag>;
+    TagSet?: Array<Tag>;
     /**
      * 区分闲时流量包与全时流量包
      */
-    DeductType: string;
+    DeductType?: string;
 }
 /**
  * WithdrawNotifyRoutes请求参数结构体
