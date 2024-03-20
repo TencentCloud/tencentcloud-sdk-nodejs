@@ -816,7 +816,20 @@ export interface DeleteLiveWatermarkRuleRequest {
 /**
  * DescribeLiveWatermarks请求参数结构体
  */
-export declare type DescribeLiveWatermarksRequest = null;
+export interface DescribeLiveWatermarksRequest {
+    /**
+     * 水印名称
+     */
+    Name?: string;
+    /**
+     * 分页的索引参数，从1开始
+     */
+    PageNo?: number;
+    /**
+     * 分页的大小参数，默认值500
+     */
+    PageSize?: number;
+}
 /**
  * DescribeLiveWatermarkRules请求参数结构体
  */

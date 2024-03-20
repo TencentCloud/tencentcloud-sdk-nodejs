@@ -1109,9 +1109,13 @@ export interface ModifyDisksRenewFlagRequest {
      */
     DiskIds: Array<string>;
     /**
-     * 云盘的续费标识。取值范围：<br><li>NOTIFY_AND_AUTO_RENEW：通知过期且自动续费<br><li>NOTIFY_AND_MANUAL_RENEW：通知过期不自动续费<br><li>DISABLE_NOTIFY_AND_MANUAL_RENEW：不通知过期不自动续费。
+     * 	云硬盘的自动续费标识。取值范围：<ul><li>NOTIFY_AND_AUTO_RENEW：通知过期且自动续费</li><li>NOTIFY_AND_MANUAL_RENEW：通知过期不自动续费</li><li>DISABLE_NOTIFY_AND_MANUAL_RENEW：不通知过期不自动续费</li></ul>
      */
     RenewFlag: string;
+    /**
+     * 该参数支持设置云硬盘的自动续费周期，单位为月。
+     */
+    AutoRenewPeriod?: number;
 }
 /**
  * ModifySnapshotAttribute返回参数结构体

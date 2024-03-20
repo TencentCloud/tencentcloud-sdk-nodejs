@@ -4740,11 +4740,11 @@ export interface DescribeGovernanceServiceContractsRequest {
     /**
      * 分页偏移量
      */
-    Offset: number;
+    Offset?: number;
     /**
      * 分页条数
      */
-    Limit: number;
+    Limit?: number;
     /**
      * 命名空间
      */

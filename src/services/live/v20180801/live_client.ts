@@ -437,7 +437,7 @@ export class Client extends AbstractClient {
    * 查询水印列表。
    */
   async DescribeLiveWatermarks(
-    req?: DescribeLiveWatermarksRequest,
+    req: DescribeLiveWatermarksRequest,
     cb?: (error: string, rep: DescribeLiveWatermarksResponse) => void
   ): Promise<DescribeLiveWatermarksResponse> {
     return this.request("DescribeLiveWatermarks", req, cb)

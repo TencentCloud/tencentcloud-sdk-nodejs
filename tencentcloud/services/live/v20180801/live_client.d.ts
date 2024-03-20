@@ -15,7 +15,7 @@ export declare class Client extends AbstractClient {
     /**
      * 查询水印列表。
      */
-    DescribeLiveWatermarks(req?: DescribeLiveWatermarksRequest, cb?: (error: string, rep: DescribeLiveWatermarksResponse) => void): Promise<DescribeLiveWatermarksResponse>;
+    DescribeLiveWatermarks(req: DescribeLiveWatermarksRequest, cb?: (error: string, rep: DescribeLiveWatermarksResponse) => void): Promise<DescribeLiveWatermarksResponse>;
     /**
      * 查询并发录制路数，对慢直播和普通直播适用。
      */
