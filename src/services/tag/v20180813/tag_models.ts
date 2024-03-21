@@ -85,7 +85,7 @@ export interface DetachResourcesTagRequest {
  */
 export interface GetTagValuesResponse {
   /**
-   * 获取的下一页的Token值
+   * 获取的下一页的Token值，如果当前是最后一页，返回为空
    */
   PaginationToken?: string
   /**
@@ -117,7 +117,7 @@ export interface AddProjectResponse {
    */
   ProjectId?: number
   /**
-   * 是否为新项目
+   * 是否为新项目，1是新项目，0不是新项目
    */
   IsNew?: number
   /**
@@ -650,7 +650,7 @@ export interface DescribeResourceTagsByResourceIdsResponse {
  */
 export interface GetTagsResponse {
   /**
-   * 获取的下一页的Token值
+   * 获取的下一页的Token值，如果当前是最后一页，返回为空
    */
   PaginationToken?: string
   /**
@@ -1228,7 +1228,7 @@ export interface UpdateResourceTagValueRequest {
  */
 export interface GetTagKeysResponse {
   /**
-   * 获取的下一页的Token值
+   * 获取的下一页的Token值，如果当前是最后一页，返回为空
    */
   PaginationToken?: string
   /**

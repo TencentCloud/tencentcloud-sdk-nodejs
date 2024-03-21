@@ -48,6 +48,16 @@ it("trtc.v20190722.DescribeTRTCMarketQualityMetricData", async function () {
     }
 })
 
+it("trtc.v20190722.DescribeWebRecord", async function () {
+    try {
+       const data = await client.DescribeWebRecord({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("trtc.v20190722.StartPublishCdnStream", async function () {
     try {
        const data = await client.StartPublishCdnStream({})
@@ -198,6 +208,16 @@ it("trtc.v20190722.DescribeUserEvent", async function () {
     }
 })
 
+it("trtc.v20190722.StartWebRecord", async function () {
+    try {
+       const data = await client.StartWebRecord({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("trtc.v20190722.StartMCUMixTranscode", async function () {
     try {
        const data = await client.StartMCUMixTranscode({})
@@ -211,6 +231,16 @@ it("trtc.v20190722.StartMCUMixTranscode", async function () {
 it("trtc.v20190722.DescribeTRTCMarketScaleData", async function () {
     try {
        const data = await client.DescribeTRTCMarketScaleData({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("trtc.v20190722.StopWebRecord", async function () {
+    try {
+       const data = await client.StopWebRecord({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

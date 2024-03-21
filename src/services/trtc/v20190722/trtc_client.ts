@@ -33,16 +33,18 @@ import {
   AbnormalEvent,
   ScaleInfomation,
   DescribeTRTCRealTimeScaleMetricDataRequest,
+  StopWebRecordRequest,
   VideoEncodeParams,
   DescribeUserEventResponse,
   VideoEncode,
-  LayoutParams,
   StopMCUMixTranscodeByStrRoomIdResponse,
   PictureInfo,
   DescribeCallDetailInfoRequest,
   DescribeTRTCMarketScaleDataResponse,
   ModifyPictureRequest,
+  DescribeWebRecordResponse,
   DescribeUserInfoRequest,
+  DescribeTRTCMarketQualityDataResponse,
   DescribeRelayUsageRequest,
   WaterMarkParams,
   DescribeRecordStatisticResponse,
@@ -52,6 +54,7 @@ import {
   TimeValue,
   DismissRoomByStrRoomIdRequest,
   DescribeTRTCMarketQualityMetricDataRequest,
+  DescribeWebRecordRequest,
   DescribeTRTCRealTimeScaleDataResponse,
   DescribeRecordStatisticRequest,
   DescribeRoomInfoRequest,
@@ -65,7 +68,7 @@ import {
   DescribeStreamIngestResponse,
   MixTranscodeParams,
   StopStreamIngestRequest,
-  DescribeTRTCMarketQualityDataResponse,
+  DescribeTRTCRealTimeQualityDataRequest,
   SmallVideoLayoutParams,
   SubscribeStreamUserIds,
   WaterMarkImage,
@@ -82,6 +85,7 @@ import {
   RemoveUserByStrRoomIdResponse,
   DescribeTRTCRealTimeScaleMetricDataResponse,
   StartMCUMixTranscodeRequest,
+  WebRecordVideoParams,
   McuWaterMarkImage,
   StartPublishCdnStreamResponse,
   TrtcUsage,
@@ -109,7 +113,8 @@ import {
   TencentVod,
   McuPassThrough,
   DescribeTRTCRealTimeQualityMetricDataResponse,
-  DescribeTRTCRealTimeQualityDataRequest,
+  LayoutParams,
+  StartWebRecordResponse,
   RecordUsage,
   CreateCloudRecordingRequest,
   OutputParams,
@@ -146,8 +151,10 @@ import {
   EventMessage,
   DescribeTRTCMarketQualityDataRequest,
   UpdatePublishCdnStreamRequest,
+  StartWebRecordRequest,
   MaxVideoUser,
   AgentParams,
+  StopWebRecordResponse,
   DeletePictureRequest,
   McuSeiParams,
   UpdatePublishCdnStreamResponse,
@@ -225,6 +232,16 @@ networkDelay ：网络延迟率。
     cb?: (error: string, rep: DescribeTRTCMarketQualityMetricDataResponse) => void
   ): Promise<DescribeTRTCMarketQualityMetricDataResponse> {
     return this.request("DescribeTRTCMarketQualityMetricData", req, cb)
+  }
+
+  /**
+   * 查询页面录制任务
+   */
+  async DescribeWebRecord(
+    req: DescribeWebRecordRequest,
+    cb?: (error: string, rep: DescribeWebRecordResponse) => void
+  ): Promise<DescribeWebRecordResponse> {
+    return this.request("DescribeWebRecord", req, cb)
   }
 
   /**
@@ -516,6 +533,17 @@ TRTC 的一个房间中可能会同时存在多路音视频流，您可以通过
   }
 
   /**
+     * 通过此接口可以发起 WEB 页面录制任务，在接口参数中指定录制 URL，录制分辨率，录制结果存储等参数。
+因为参数或API逻辑问题会立即返回结果。而因为页面问题，如页面无法访问，会在回调中返回结果，请关注。
+     */
+  async StartWebRecord(
+    req: StartWebRecordRequest,
+    cb?: (error: string, rep: StartWebRecordResponse) => void
+  ): Promise<StartWebRecordResponse> {
+    return this.request("StartWebRecord", req, cb)
+  }
+
+  /**
      * 接口说明：启动云端混流，并指定混流画面中各路画面的布局位置。
 
 TRTC 的一个房间中可能会同时存在多路音视频流，您可以通过此 API 接口，通知腾讯云服务端将多路视频画面合成一路，并指定每一路画面的位置，同时将多路声音进行混音，最终形成一路音视频流，以便用于录制和直播观看。房间销毁后混流自动结束。
@@ -560,6 +588,16 @@ peakCurrentUsers：峰值同时在线人数。
     cb?: (error: string, rep: DescribeTRTCMarketScaleDataResponse) => void
   ): Promise<DescribeTRTCMarketScaleDataResponse> {
     return this.request("DescribeTRTCMarketScaleData", req, cb)
+  }
+
+  /**
+   * 停止页面录制任务
+   */
+  async StopWebRecord(
+    req: StopWebRecordRequest,
+    cb?: (error: string, rep: StopWebRecordResponse) => void
+  ): Promise<StopWebRecordResponse> {
+    return this.request("StopWebRecord", req, cb)
   }
 
   /**

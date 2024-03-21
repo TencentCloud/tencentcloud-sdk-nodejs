@@ -217,6 +217,11 @@ export interface Instance {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     LoginServices?: Array<LoginService>;
+    /**
+     * 应用服务的操作系统类型
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    OSType?: string;
 }
 /**
  * TerminateInstances返回参数结构体

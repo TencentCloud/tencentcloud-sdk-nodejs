@@ -62,6 +62,12 @@ networkDelay ：网络延迟率。
         return this.request("DescribeTRTCMarketQualityMetricData", req, cb);
     }
     /**
+     * 查询页面录制任务
+     */
+    async DescribeWebRecord(req, cb) {
+        return this.request("DescribeWebRecord", req, cb);
+    }
+    /**
      * TRTC房间中可能会同时存在多路音视频流，您可以通过混流转推API，通知腾讯云服务端将同个房间或者多个房间的多路视频画面混合到一起，并指定每一路画面的位置，同时将多路声音进行混音，最终形成一路音视频流，以便用于录制和直播观看，同时可以支持将这一路音视频的混流回推到TRTC房间内部。
 
 云api混流转推功能包含三个接口：
@@ -290,6 +296,13 @@ TRTC 的一个房间中可能会同时存在多路音视频流，您可以通过
         return this.request("DescribeUserEvent", req, cb);
     }
     /**
+     * 通过此接口可以发起 WEB 页面录制任务，在接口参数中指定录制 URL，录制分辨率，录制结果存储等参数。
+因为参数或API逻辑问题会立即返回结果。而因为页面问题，如页面无法访问，会在回调中返回结果，请关注。
+     */
+    async StartWebRecord(req, cb) {
+        return this.request("StartWebRecord", req, cb);
+    }
+    /**
      * 接口说明：启动云端混流，并指定混流画面中各路画面的布局位置。
 
 TRTC 的一个房间中可能会同时存在多路音视频流，您可以通过此 API 接口，通知腾讯云服务端将多路视频画面合成一路，并指定每一路画面的位置，同时将多路声音进行混音，最终形成一路音视频流，以便用于录制和直播观看。房间销毁后混流自动结束。
@@ -327,6 +340,12 @@ peakCurrentUsers：峰值同时在线人数。
      */
     async DescribeTRTCMarketScaleData(req, cb) {
         return this.request("DescribeTRTCMarketScaleData", req, cb);
+    }
+    /**
+     * 停止页面录制任务
+     */
+    async StopWebRecord(req, cb) {
+        return this.request("StopWebRecord", req, cb);
     }
     /**
      * 接口说明：

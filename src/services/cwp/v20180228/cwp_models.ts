@@ -8249,6 +8249,10 @@ export interface DescribeBanStatusResponse {
    */
   ShowTips?: boolean
   /**
+   * 是否开启智能过白模式
+   */
+  OpenSmartMode?: boolean
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -12362,9 +12366,13 @@ export interface CheckFirstScanBaselineResponse {
  */
 export interface ModifyBanStatusRequest {
   /**
-   * 阻断状态 0:关闭 1:开启
+   * 阻断开关状态: 0 -- 关闭 1 -- 高级阻断 2 -- 基础阻断(只阻断情报库黑ip)
    */
   Status: number
+  /**
+   * 是否开启智能过白模式
+   */
+  OpenSmartMode?: boolean
 }
 
 /**
@@ -29796,7 +29804,17 @@ export interface BruteAttackInfo {
    */
   CreateTime?: string
   /**
-   * 阻断状态：1-阻断成功；非1-阻断失败
+   * 0 -不阻断(客户端版本不支持)
+1 -已阻断
+2 -阻断失败(程序异常)
+3 -不阻断(内网不阻断)
+4 -可用区不支持阻断
+10-阻断中
+81-不阻断(未开启阻断)
+82-不阻断(非专业版)
+83-不阻断(已加白名单)
+86-不阻断(系统白名单)
+87-不阻断(客户端离线)
 注意：此字段可能返回 null，表示取不到有效值。
    */
   BanStatus?: number
@@ -29865,6 +29883,16 @@ export interface BruteAttackInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DataFrom?: number
+  /**
+   * 破解状态说明
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AttackStatusDesc?: string
+  /**
+   * 阻断过期时间（仅阻断中事件有效）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BanExpiredTime?: string
 }
 
 /**

@@ -382,6 +382,15 @@ export interface DescribeTRTCRealTimeScaleMetricDataRequest {
     RoomId?: string;
 }
 /**
+ * StopWebRecord请求参数结构体
+ */
+export interface StopWebRecordRequest {
+    /**
+     * 需要停止的任务Id
+     */
+    TaskId: string;
+}
+/**
  * 视频转码参数
  */
 export interface VideoEncodeParams {
@@ -443,55 +452,6 @@ export interface VideoEncode {
      * 输出流gop，音视频输出时必填。取值范围[1,5]，单位为秒。
      */
     Gop: number;
-}
-/**
- * MCU混流布局参数
- */
-export interface LayoutParams {
-    /**
-     * 混流布局模板ID，0为悬浮模板(默认);1为九宫格模板;2为屏幕分享模板;3为画中画模板;4为自定义模板。
-     */
-    Template?: number;
-    /**
-     * 屏幕分享模板、悬浮模板、画中画模板中有效，代表大画面对应的用户ID。
-     */
-    MainVideoUserId?: string;
-    /**
-     * 屏幕分享模板、悬浮模板、画中画模板中有效，代表大画面对应的流类型，0为摄像头，1为屏幕分享。左侧大画面为web用户时此值填0。
-     */
-    MainVideoStreamType?: number;
-    /**
-     * 画中画模板中有效，代表小画面的布局参数。
-     */
-    SmallVideoLayoutParams?: SmallVideoLayoutParams;
-    /**
-     * 屏幕分享模板有效。设置为1时代表大画面居右，小画面居左布局。默认为0。
-     */
-    MainVideoRightAlign?: number;
-    /**
-     * 指定混视频的用户ID列表。设置此参数后，输出流混合此参数中包含用户的音视频，以及其他用户的纯音频。悬浮模板、九宫格、屏幕分享模板有效，最多可设置16个用户。
-     */
-    MixVideoUids?: Array<string>;
-    /**
-     * 自定义模板中有效，指定用户视频在混合画面中的位置。
-     */
-    PresetLayoutConfig?: Array<PresetLayoutConfig>;
-    /**
-     * 自定义模板中有效，设置为1时代表启用占位图功能，0时代表不启用占位图功能，默认为0。启用占位图功能时，在预设位置的用户没有上行视频时可显示对应的占位图。
-     */
-    PlaceHolderMode?: number;
-    /**
-     * 悬浮模板、九宫格、屏幕分享模板生效，用于控制纯音频上行是否占用画面布局位置。设置为0是代表后台默认处理方式，悬浮小画面占布局位置，九宫格画面占布局位置、屏幕分享小画面不占布局位置；设置为1时代表纯音频上行占布局位置；设置为2时代表纯音频上行不占布局位置。默认为0。
-     */
-    PureAudioHoldPlaceMode?: number;
-    /**
-     * 水印参数。
-     */
-    WaterMarkParams?: WaterMarkParams;
-    /**
-     * 屏幕分享模板、悬浮模板、九宫格模板、画中画模版有效，画面在输出时的显示模式：0为裁剪，1为缩放，2为缩放并显示黑底，不填采用后台的默认渲染方式（屏幕分享大画面为缩放，其他为裁剪）。若此参数不生效，请提交工单寻求帮助。
-     */
-    RenderMode?: number;
 }
 /**
  * StopMCUMixTranscodeByStrRoomId返回参数结构体
@@ -634,6 +594,20 @@ export interface ModifyPictureRequest {
     YPosition?: number;
 }
 /**
+ * DescribeWebRecord返回参数结构体
+ */
+export interface DescribeWebRecordResponse {
+    /**
+     * 1: 正在录制中
+  2: 任务不存在
+     */
+    Status?: number;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * DescribeUserInfo请求参数结构体
  */
 export interface DescribeUserInfoRequest {
@@ -670,6 +644,20 @@ export interface DescribeUserInfoRequest {
   范围：[1，100]。
      */
     PageSize?: number;
+}
+/**
+ * DescribeTRTCMarketQualityData返回参数结构体
+ */
+export interface DescribeTRTCMarketQualityDataResponse {
+    /**
+     * TRTC监控数据出参
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Data?: TRTCDataResult;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * DescribeRelayUsage请求参数结构体
@@ -839,6 +827,15 @@ export interface DescribeTRTCMarketQualityMetricDataRequest {
   h：按小时。此时返回查询时间范围内 UTC 时间为整小时的数据。
      */
     Period: string;
+}
+/**
+ * DescribeWebRecord请求参数结构体
+ */
+export interface DescribeWebRecordRequest {
+    /**
+     * 开始页面录制时返回的任务id
+     */
+    TaskId: string;
 }
 /**
  * DescribeTRTCRealTimeScaleData返回参数结构体
@@ -1106,18 +1103,25 @@ export interface StopStreamIngestRequest {
     TaskId: string;
 }
 /**
- * DescribeTRTCMarketQualityData返回参数结构体
+ * DescribeTRTCRealTimeQualityData请求参数结构体
  */
-export interface DescribeTRTCMarketQualityDataResponse {
+export interface DescribeTRTCRealTimeQualityDataRequest {
     /**
-     * TRTC监控数据出参
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 用户SdkAppId（如：1400xxxxxx）
      */
-    Data?: TRTCDataResult;
+    SdkAppId: string;
     /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     * 开始时间，unix时间戳，单位：秒（查询时间范围根据监控仪表盘功能版本而定，基础版可查近3小时，进阶版可查近12小时）
      */
-    RequestId?: string;
+    StartTime: number;
+    /**
+     * 结束时间，unix时间戳，单位：秒
+     */
+    EndTime: number;
+    /**
+     * 房间ID
+     */
+    RoomId?: string;
 }
 /**
  * 画中画模板中有效，代表小画面的布局参数
@@ -1459,6 +1463,24 @@ export interface StartMCUMixTranscodeRequest {
      * 第三方CDN转推参数。如需转推至腾讯云云直播，此参数无需填写，会默认转推
      */
     PublishCdnParams?: PublishCdnParams;
+}
+/**
+ * 页面录制视频参数
+ */
+export interface WebRecordVideoParams {
+    /**
+     * 录制画面宽度，默认为1280，取值范围[0, 1920]
+     */
+    Width?: number;
+    /**
+     * 录制画面高度，默认为720，取值范围[0, 1080]
+     */
+    Height?: number;
+    /**
+     * 指定输出格式，可选hls,mp4
+  
+     */
+    Format?: string;
 }
 /**
  * 图片水印参数。
@@ -2019,7 +2041,7 @@ export interface TencentVod {
      */
     MediaType?: number;
     /**
-     * 仅支持API录制上传vod，该参数表示用户可以自定义录制文件名前缀，【限制长度为64字节，只允许包含大小写英文字母（a-zA-Z）、数字（0-9）及下划线和连词符】。前缀与自动生成的录制文件名之间用__UserDefine_u_分开。
+     * 仅支持API录制上传vod，该参数表示用户可以自定义录制文件名前缀，【限制长度为64字节，只允许包含大小写英文字母（a-zA-Z）、数字（0-9）及下划线和连词符】。前缀与自动生成的录制文件名之间用`__UserDefine_u_` 分开。
      */
     UserDefineRecordId?: string;
 }
@@ -2063,25 +2085,66 @@ export interface DescribeTRTCRealTimeQualityMetricDataResponse {
     RequestId?: string;
 }
 /**
- * DescribeTRTCRealTimeQualityData请求参数结构体
+ * MCU混流布局参数
  */
-export interface DescribeTRTCRealTimeQualityDataRequest {
+export interface LayoutParams {
     /**
-     * 用户SdkAppId（如：1400xxxxxx）
+     * 混流布局模板ID，0为悬浮模板(默认);1为九宫格模板;2为屏幕分享模板;3为画中画模板;4为自定义模板。
      */
-    SdkAppId: string;
+    Template?: number;
     /**
-     * 开始时间，unix时间戳，单位：秒（查询时间范围根据监控仪表盘功能版本而定，基础版可查近3小时，进阶版可查近12小时）
+     * 屏幕分享模板、悬浮模板、画中画模板中有效，代表大画面对应的用户ID。
      */
-    StartTime: number;
+    MainVideoUserId?: string;
     /**
-     * 结束时间，unix时间戳，单位：秒
+     * 屏幕分享模板、悬浮模板、画中画模板中有效，代表大画面对应的流类型，0为摄像头，1为屏幕分享。左侧大画面为web用户时此值填0。
      */
-    EndTime: number;
+    MainVideoStreamType?: number;
     /**
-     * 房间ID
+     * 画中画模板中有效，代表小画面的布局参数。
      */
-    RoomId?: string;
+    SmallVideoLayoutParams?: SmallVideoLayoutParams;
+    /**
+     * 屏幕分享模板有效。设置为1时代表大画面居右，小画面居左布局。默认为0。
+     */
+    MainVideoRightAlign?: number;
+    /**
+     * 指定混视频的用户ID列表。设置此参数后，输出流混合此参数中包含用户的音视频，以及其他用户的纯音频。悬浮模板、九宫格、屏幕分享模板有效，最多可设置16个用户。
+     */
+    MixVideoUids?: Array<string>;
+    /**
+     * 自定义模板中有效，指定用户视频在混合画面中的位置。
+     */
+    PresetLayoutConfig?: Array<PresetLayoutConfig>;
+    /**
+     * 自定义模板中有效，设置为1时代表启用占位图功能，0时代表不启用占位图功能，默认为0。启用占位图功能时，在预设位置的用户没有上行视频时可显示对应的占位图。
+     */
+    PlaceHolderMode?: number;
+    /**
+     * 悬浮模板、九宫格、屏幕分享模板生效，用于控制纯音频上行是否占用画面布局位置。设置为0是代表后台默认处理方式，悬浮小画面占布局位置，九宫格画面占布局位置、屏幕分享小画面不占布局位置；设置为1时代表纯音频上行占布局位置；设置为2时代表纯音频上行不占布局位置。默认为0。
+     */
+    PureAudioHoldPlaceMode?: number;
+    /**
+     * 水印参数。
+     */
+    WaterMarkParams?: WaterMarkParams;
+    /**
+     * 屏幕分享模板、悬浮模板、九宫格模板、画中画模版有效，画面在输出时的显示模式：0为裁剪，1为缩放，2为缩放并显示黑底，不填采用后台的默认渲染方式（屏幕分享大画面为缩放，其他为裁剪）。若此参数不生效，请提交工单寻求帮助。
+     */
+    RenderMode?: number;
+}
+/**
+ * StartWebRecord返回参数结构体
+ */
+export interface StartWebRecordResponse {
+    /**
+     * 录制任务的唯一Id
+     */
+    TaskId?: string;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * 录制的使用信息。
@@ -2812,6 +2875,38 @@ export interface UpdatePublishCdnStreamRequest {
     FeedBackRoomParams?: Array<McuFeedBackRoomParams>;
 }
 /**
+ * StartWebRecord请求参数结构体
+ */
+export interface StartWebRecordRequest {
+    /**
+     * 需要录制的网页URL
+  
+     */
+    RecordUrl: string;
+    /**
+     * 录制最大时长限制， 单位 s, 合法取值范围[0, 36000], 默认 36000s(10 小时)
+  
+     */
+    MaxDurationLimit?: number;
+    /**
+     * 云存储相关的参数，目前支持腾讯云对象存储，不支持第三方云存储以及VOD
+     */
+    StorageParams?: StorageParams;
+    /**
+     * 页面录制视频参数
+     */
+    WebRecordVideoParams?: WebRecordVideoParams;
+    /**
+     * TRTC的SdkAppId
+     */
+    SdkAppId?: number;
+    /**
+     * 当对重复任务敏感时，请关注此值： 为了避免任务在短时间内重复发起，导致任务重复
+  传入录制RecordId来标识此次任务， 小于32字节，若携带RecordId发起两次以上的开始录制请求，任务只会启动一个，第二个报错FailedOperation.TaskExist。注意StartWebRecord调用失败时而非FailedOperation.TaskExist错误，请更换RecordId重新发起。
+     */
+    RecordId?: string;
+}
+/**
  * 指定动态布局中悬浮布局和屏幕分享布局的大画面信息，只在悬浮布局和屏幕分享布局有效。
  */
 export interface MaxVideoUser {
@@ -2836,6 +2931,15 @@ export interface AgentParams {
      * 所有参与混流转推的主播持续离开TRTC房间超过MaxIdleTime的时长，自动停止转推，单位：秒。默认值为 30 秒，该值需大于等于 5秒，且小于等于 86400秒(24小时)。
      */
     MaxIdleTime?: number;
+}
+/**
+ * StopWebRecord返回参数结构体
+ */
+export interface StopWebRecordResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * DeletePicture请求参数结构体
