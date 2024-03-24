@@ -248,6 +248,7 @@ import {
   DescribeExtendedServiceAuthInfosResponse,
   CcInfo,
   IntentionQuestion,
+  CreateResultPageConfig,
 } from "./ess_models"
 
 /**

@@ -2658,7 +2658,7 @@ export interface CreateServiceRequest {
      */
     NetTypes?: Array<string>;
     /**
-     * IP版本号，支持IPv4和IPv6，默认为IPv4。
+     * IP版本号，仅支持IPv4。
      */
     IpVersion?: string;
     /**

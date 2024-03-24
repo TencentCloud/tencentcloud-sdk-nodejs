@@ -1222,6 +1222,11 @@ export interface AssetMachineBaseInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   MachineExtraInfo?: MachineExtraInfo
+  /**
+   * cpu负载读数（仅linux系统有效）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CpuLoadNum?: string
 }
 
 /**

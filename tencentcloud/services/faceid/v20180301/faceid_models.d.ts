@@ -163,6 +163,7 @@ export interface IntentionQuestionResult {
   -201: "人脸比对相似度低"
   -202: "人脸比对失败"
   -301: "意愿核验不通过"
+  -302: "用户回答阶段未检测到张嘴动作"
   -800: "前端不兼容错误"
   -801: "用户未授权摄像头和麦克风权限"
   -802: "核验流程异常中断，请勿切屏或进行其他操作"
@@ -1709,6 +1710,10 @@ export interface GetEidTokenConfig {
      * 是否支持港澳台居住证识别
      */
     IsSupportHMTResidentPermitOCR?: boolean;
+    /**
+     * 用户语音回答过程中是否开启张嘴识别检测，默认不开启，仅在意愿核身问答模式中使用。
+     */
+    MouthOpenRecognition?: boolean;
 }
 /**
  * MinorsVerification返回参数结构体

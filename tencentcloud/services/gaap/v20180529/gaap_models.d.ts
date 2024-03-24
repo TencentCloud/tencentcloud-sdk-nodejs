@@ -3134,15 +3134,15 @@ export interface ProxyGroupDetail {
     /**
      * 创建时间
      */
-    CreateTime: number;
+    CreateTime?: number;
     /**
      * 项目ID
      */
-    ProjectId: number;
+    ProjectId?: number;
     /**
      * 通道组中通道数量
      */
-    ProxyNum: number;
+    ProxyNum?: number;
     /**
      * 通道组状态：
   0表示正常运行；
@@ -3151,77 +3151,77 @@ export interface ProxyGroupDetail {
   11表示迁移中；
   12表示部分部署中。
      */
-    Status: number;
+    Status?: number;
     /**
      * 归属Uin
      */
-    OwnerUin: string;
+    OwnerUin?: string;
     /**
      * 创建Uin
      */
-    CreateUin: string;
+    CreateUin?: string;
     /**
      * 通道名称
      */
-    GroupName: string;
+    GroupName?: string;
     /**
      * 通道组域名解析默认IP
      */
-    DnsDefaultIp: string;
+    DnsDefaultIp?: string;
     /**
      * 通道组域名
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Domain: string;
+    Domain?: string;
     /**
      * 目标地域
      */
-    RealServerRegionInfo: RegionDetail;
+    RealServerRegionInfo?: RegionDetail;
     /**
      * 是否老通道组，2018-08-03之前创建的通道组为老通道组
      */
-    IsOldGroup: boolean;
+    IsOldGroup?: boolean;
     /**
      * 通道组ID
      */
-    GroupId: string;
+    GroupId?: string;
     /**
      * 标签列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TagSet: Array<TagPair>;
+    TagSet?: Array<TagPair>;
     /**
      * 安全策略ID，当设置了安全策略时，存在该字段。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    PolicyId: string;
+    PolicyId?: string;
     /**
      * 通道组版本
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Version: string;
+    Version?: string;
     /**
      * 通道获取客户端IP的方式，0表示TOA，1表示Proxy Protocol
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ClientIPMethod: Array<number | bigint>;
+    ClientIPMethod?: Array<number | bigint>;
     /**
      * IP版本，可取值：IPv4、IPv6，默认值IPv4
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    IPAddressVersion: string;
+    IPAddressVersion?: string;
     /**
      * 通道组套餐类型：Thunder表示标准通道组，Accelerator表示银牌加速通道组，CrossBorder表示跨境通道组。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    PackageType: string;
+    PackageType?: string;
     /**
      * 支持Http3特性的标识，其中：
   0表示关闭；
   1表示启用。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Http3Supported: number;
+    Http3Supported?: number;
     /**
      * 特性位图，每个bit位代表一种特性，其中：
   0，表示不支持该特性；
@@ -3237,7 +3237,14 @@ export interface ProxyGroupDetail {
   注意：此字段可能返回 null，表示取不到有效值。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    FeatureBitmap: number;
+    FeatureBitmap?: number;
+    /**
+     * 是否支持设置TSL设置
+  0表示不支持；
+  1表示支持。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IsSupportTLSChoice?: number;
 }
 /**
  * CreateHTTPListener请求参数结构体
@@ -3393,19 +3400,19 @@ export interface HTTPSListener {
     /**
      * 监听器ID
      */
-    ListenerId: string;
+    ListenerId?: string;
     /**
      * 监听器名称
      */
-    ListenerName: string;
+    ListenerName?: string;
     /**
      * 监听器端口
      */
-    Port: number;
+    Port?: number;
     /**
      * 监听器协议， HTTP表示HTTP，HTTPS表示HTTPS，此结构取值HTTPS
      */
-    Protocol: string;
+    Protocol?: string;
     /**
      * 监听器状态，其中：
   0表示运行中；
@@ -3414,46 +3421,46 @@ export interface HTTPSListener {
   3表示源站调整中；
   4表示配置变更中。
      */
-    ListenerStatus: number;
+    ListenerStatus?: number;
     /**
      * 监听器服务器SSL证书ID
      */
-    CertificateId: string;
+    CertificateId?: string;
     /**
      * 监听器后端转发源站协议
      */
-    ForwardProtocol: string;
+    ForwardProtocol?: string;
     /**
      * 监听器创建时间，Unix时间戳
      */
-    CreateTime: number;
+    CreateTime?: number;
     /**
      * 服务器SSL证书的别名
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CertificateAlias: string;
+    CertificateAlias?: string;
     /**
      * 监听器客户端CA证书ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ClientCertificateId: string;
+    ClientCertificateId?: string;
     /**
      * 监听器认证方式。其中，
   0表示单向认证；
   1表示双向认证。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    AuthType: number;
+    AuthType?: number;
     /**
      * 客户端CA证书别名
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ClientCertificateAlias: string;
+    ClientCertificateAlias?: string;
     /**
      * 多客户端CA证书别名信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    PolyClientCertificateAliasInfo: Array<CertificateAliasInfo>;
+    PolyClientCertificateAliasInfo?: Array<CertificateAliasInfo>;
     /**
      * 是否支持Http3，其中：
   0，不支持Http3接入；
@@ -3461,17 +3468,27 @@ export interface HTTPSListener {
   注意：如果支持了Http3的功能，那么该监听器会占用对应的UDP接入端口，不可再创建相同端口的UDP监听器。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Http3Supported: number;
+    Http3Supported?: number;
     /**
      * 监听器的通道ID，如果监听器属于通道组，则为null
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ProxyId: string;
+    ProxyId?: string;
     /**
      * 监听器的通道组ID，如果监听器属于通道，则为null
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    GroupId: string;
+    GroupId?: string;
+    /**
+     * 支持的TLS版本
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TLSSupportVersion?: Array<string>;
+    /**
+     * 支持的TLS密码套件
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TLSCiphers?: string;
 }
 /**
  * ModifyRuleAttribute返回参数结构体
@@ -5529,6 +5546,13 @@ export interface ProxyInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     IsAutoScaleProxy?: number;
+    /**
+     * 是否允许设置TLS配置
+  0表示不支持；
+  1表示支持。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IsSupportTLSChoice?: number;
 }
 /**
  * RemoveRealServers返回参数结构体
