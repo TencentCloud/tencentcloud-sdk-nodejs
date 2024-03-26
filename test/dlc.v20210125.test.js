@@ -718,6 +718,16 @@ it("dlc.v20210125.DescribeDMSTable", async function () {
     }
 })
 
+it("dlc.v20210125.QueryTaskCostDetail", async function () {
+    try {
+       const data = await client.QueryTaskCostDetail({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dlc.v20210125.DropDMSPartitions", async function () {
     try {
        const data = await client.DropDMSPartitions({})

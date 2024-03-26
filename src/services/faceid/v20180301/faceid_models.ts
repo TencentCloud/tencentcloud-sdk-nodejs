@@ -1004,38 +1004,38 @@ export interface GetFaceIdResultResponse {
   /**
    * 身份证
    */
-  IdCard: string
+  IdCard?: string
   /**
    * 姓名
    */
-  Name: string
+  Name?: string
   /**
    * 业务核验结果，参考https://cloud.tencent.com/document/product/1007/47912
    */
-  Result: string
+  Result?: string
   /**
    * 业务核验描述
    */
-  Description: string
+  Description?: string
   /**
    * 相似度，0-100，数值越大相似度越高
    */
-  Similarity: number
+  Similarity?: number
   /**
    * 用户核验的视频base64，如果选择了使用cos，返回完整cos地址如https://bucket.cos.ap-guangzhou.myqcloud.com/objectKey
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  VideoBase64: string
+  VideoBase64?: string
   /**
    * 用户核验视频的截帧base64，如果选择了使用cos，返回完整cos地址如https://bucket.cos.ap-guangzhou.myqcloud.com/objectKey
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  BestFrameBase64: string
+  BestFrameBase64?: string
   /**
    * 获取token时透传的信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Extra: string
+  Extra?: string
   /**
    * 设备风险标签，仅错误码返回1007（设备疑似被劫持）时返回风险标签。标签说明：
 202、5001：设备疑似被Root
@@ -1046,13 +1046,13 @@ export interface GetFaceIdResultResponse {
 8000：设备疑似存在异常篡改行为
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DeviceInfoTag: string
+  DeviceInfoTag?: string
   /**
    * 行为风险标签，仅错误码返回1007（设备疑似被劫持）时返回风险标签。标签说明：
 02：攻击风险
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RiskInfoTag: string
+  RiskInfoTag?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2567,6 +2567,11 @@ export interface GetFaceIdTokenRequest {
    * 敏感数据加密信息。对传入信息（姓名、身份证号）有加密需求的用户可使用此参数，详情请点击左侧链接。
    */
   Encryption?: Encryption
+  /**
+   * 用于细分客户使用场景，申请开通服务后，可以在腾讯云慧眼人脸核身控制台（https://console.cloud.tencent.com/faceid） 自助接入里面创建，审核通过后即可调用。如有疑问，请添加腾讯云人脸核身小助手进行咨询。
+示例值：1
+   */
+  RuleId?: string
 }
 
 /**

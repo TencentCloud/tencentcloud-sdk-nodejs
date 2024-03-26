@@ -40,11 +40,13 @@ import {
   UpdateProjectRequest,
   AbortJobResponse,
   Project,
-  UpdateScenarioRequest,
+  UpdateEnvironmentRequest,
   DescribeRegionsResponse,
   Attributes,
+  CreateEnvironmentResponse,
   UpdateScenarioResponse,
   File,
+  DescribeEnvironmentsRequest,
   CustomSample,
   CreateProjectRequest,
   AdjustJobSpeedRequest,
@@ -53,6 +55,7 @@ import {
   CreateFileResponse,
   DeleteProjectsResponse,
   GeoRegionsLoadItem,
+  UpdateEnvironmentResponse,
   LabelWithValues,
   Label,
   ProtocolInfo,
@@ -78,12 +81,14 @@ import {
   CreateProjectResponse,
   DescribeSampleQueryRequest,
   DescribeSampleMatrixBatchQueryResponse,
+  DeleteEnvironmentsResponse,
   SLALabel,
   AlertRecord,
   RequestsPerSecond,
   DescribeRegionsRequest,
   DeleteScenariosResponse,
-  DeleteFilesRequest,
+  CreateEnvironmentRequest,
+  DescribeErrorSummaryRequest,
   CopyScenarioRequest,
   TestData,
   SampleLog,
@@ -104,6 +109,7 @@ import {
   FileInfo,
   LoadSpec,
   AlertChannel,
+  DescribeEnvironmentsResponse,
   ScriptOrigin,
   ScenarioRelatedJobsParams,
   Credentials,
@@ -130,6 +136,7 @@ import {
   DescribeAlertRecordsResponse,
   DescribeProjectsRequest,
   DescribeSampleQueryResponse,
+  DeleteEnvironmentsRequest,
   CreateScenarioRequest,
   DescribeMetricLabelWithValuesRequest,
   Scenario,
@@ -142,13 +149,14 @@ import {
   DescribeScenariosResponse,
   CreateScenarioResponse,
   AbortJobRequest,
-  DescribeErrorSummaryRequest,
+  DeleteFilesRequest,
   CheckSummary,
   NotificationHook,
   DescribeJobsResponse,
   GenerateTmpKeyRequest,
   DescribeSampleBatchQueryResponse,
   StartJobResponse,
+  UpdateScenarioRequest,
   MetricLabelWithValues,
   DeleteCronJobsResponse,
   StartJobRequest,
@@ -178,6 +186,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeScenarioWithJobsResponse) => void
   ): Promise<DescribeScenarioWithJobsResponse> {
     return this.request("DescribeScenarioWithJobs", req, cb)
+  }
+
+  /**
+   * 删除环境
+   */
+  async DeleteEnvironments(
+    req?: DeleteEnvironmentsRequest,
+    cb?: (error: string, rep: DeleteEnvironmentsResponse) => void
+  ): Promise<DeleteEnvironmentsResponse> {
+    return this.request("DeleteEnvironments", req, cb)
   }
 
   /**
@@ -361,6 +379,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 批量查询指标，返回固定时间点指标内容
+   */
+  async DescribeSampleBatchQuery(
+    req: DescribeSampleBatchQueryRequest,
+    cb?: (error: string, rep: DescribeSampleBatchQueryResponse) => void
+  ): Promise<DescribeSampleBatchQueryResponse> {
+    return this.request("DescribeSampleBatchQuery", req, cb)
+  }
+
+  /**
    * 查询告警通知接收组
    */
   async DescribeAlertChannels(
@@ -421,6 +449,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 更新环境
+   */
+  async UpdateEnvironment(
+    req?: UpdateEnvironmentRequest,
+    cb?: (error: string, rep: UpdateEnvironmentResponse) => void
+  ): Promise<UpdateEnvironmentResponse> {
+    return this.request("UpdateEnvironment", req, cb)
+  }
+
+  /**
    * 创建告警通知接收组
    */
   async CreateAlertChannel(
@@ -431,13 +469,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 批量查询指标，返回固定时间点指标内容
+   * 查看环境列表
    */
-  async DescribeSampleBatchQuery(
-    req: DescribeSampleBatchQueryRequest,
-    cb?: (error: string, rep: DescribeSampleBatchQueryResponse) => void
-  ): Promise<DescribeSampleBatchQueryResponse> {
-    return this.request("DescribeSampleBatchQuery", req, cb)
+  async DescribeEnvironments(
+    req?: DescribeEnvironmentsRequest,
+    cb?: (error: string, rep: DescribeEnvironmentsResponse) => void
+  ): Promise<DescribeEnvironmentsResponse> {
+    return this.request("DescribeEnvironments", req, cb)
   }
 
   /**
@@ -488,6 +526,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeSampleLogsResponse) => void
   ): Promise<DescribeSampleLogsResponse> {
     return this.request("DescribeSampleLogs", req, cb)
+  }
+
+  /**
+   * 创建环境
+   */
+  async CreateEnvironment(
+    req?: CreateEnvironmentRequest,
+    cb?: (error: string, rep: CreateEnvironmentResponse) => void
+  ): Promise<CreateEnvironmentResponse> {
+    return this.request("CreateEnvironment", req, cb)
   }
 
   /**

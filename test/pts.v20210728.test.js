@@ -28,6 +28,16 @@ it("pts.v20210728.DescribeScenarioWithJobs", async function () {
     }
 })
 
+it("pts.v20210728.DeleteEnvironments", async function () {
+    try {
+       const data = await client.DeleteEnvironments({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("pts.v20210728.UpdateJob", async function () {
     try {
        const data = await client.UpdateJob({})
@@ -208,6 +218,16 @@ it("pts.v20210728.DescribeAlertRecords", async function () {
     }
 })
 
+it("pts.v20210728.DescribeSampleBatchQuery", async function () {
+    try {
+       const data = await client.DescribeSampleBatchQuery({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("pts.v20210728.DescribeAlertChannels", async function () {
     try {
        const data = await client.DescribeAlertChannels({})
@@ -268,6 +288,16 @@ it("pts.v20210728.RestartCronJobs", async function () {
     }
 })
 
+it("pts.v20210728.UpdateEnvironment", async function () {
+    try {
+       const data = await client.UpdateEnvironment({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("pts.v20210728.CreateAlertChannel", async function () {
     try {
        const data = await client.CreateAlertChannel({})
@@ -278,9 +308,9 @@ it("pts.v20210728.CreateAlertChannel", async function () {
     }
 })
 
-it("pts.v20210728.DescribeSampleBatchQuery", async function () {
+it("pts.v20210728.DescribeEnvironments", async function () {
     try {
-       const data = await client.DescribeSampleBatchQuery({})
+       const data = await client.DescribeEnvironments({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -331,6 +361,16 @@ it("pts.v20210728.CopyScenario", async function () {
 it("pts.v20210728.DescribeSampleLogs", async function () {
     try {
        const data = await client.DescribeSampleLogs({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("pts.v20210728.CreateEnvironment", async function () {
+    try {
+       const data = await client.CreateEnvironment({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

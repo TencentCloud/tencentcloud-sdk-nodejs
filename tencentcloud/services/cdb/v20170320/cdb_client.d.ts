@@ -195,7 +195,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeDataBackupOverview(req: DescribeDataBackupOverviewRequest, cb?: (error: string, rep: DescribeDataBackupOverviewResponse) => void): Promise<DescribeDataBackupOverviewResponse>;
     /**
-     * 本接口（ReleaseIsolatedDBInstances）用于恢复已隔离云数据库实例。
+     * 本接口（ReleaseIsolatedDBInstances）用于恢复已隔离云数据库实例。仅用于按量计费实例的解隔离，包年包月实例的解隔离请使用 RenewDBInstance 。
      */
     ReleaseIsolatedDBInstances(req: ReleaseIsolatedDBInstancesRequest, cb?: (error: string, rep: ReleaseIsolatedDBInstancesResponse) => void): Promise<ReleaseIsolatedDBInstancesResponse>;
     /**

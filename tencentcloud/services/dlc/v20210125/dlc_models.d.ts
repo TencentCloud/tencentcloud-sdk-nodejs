@@ -7619,6 +7619,25 @@ export interface DescribeStoreLocationResponse {
     RequestId?: string;
 }
 /**
+ * QueryTaskCostDetail返回参数结构体
+ */
+export interface QueryTaskCostDetailResponse {
+    /**
+     * 下一页的标识
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SearchAfter?: string;
+    /**
+     * 返回的数据
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Data?: string;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * SQL语句对象
  */
 export interface Execution {
@@ -8066,6 +8085,39 @@ export interface DescribeDataEngineResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * QueryTaskCostDetail请求参数结构体
+ */
+export interface QueryTaskCostDetailRequest {
+    /**
+     * 过滤条件，如下支持的过滤类型，传参Name应为以下其中一个,其中task-id支持最大50个过滤个数，其他过滤参数支持的总数不超过5个。
+  task-id - String - （任务ID准确过滤）task-id取值形如：e386471f-139a-4e59-877f-50ece8135b99。
+  task-state - String - （任务状态过滤）取值范围 0(初始化)， 1(运行中)， 2(成功)， -1(失败)。
+  task-sql-keyword - String - （SQL语句关键字模糊过滤）取值形如：DROP TABLE。
+  task-operator- string （子uin过滤）
+     */
+    Filters?: Array<Filter>;
+    /**
+     * 起始时间点，格式为yyyy-mm-dd HH:MM:SS。默认为45天前的当前时刻
+     */
+    StartTime?: string;
+    /**
+     * 结束时间点，格式为yyyy-mm-dd HH:MM:SS时间跨度在(0,30天]，支持最近45天数据查询。默认为当前时刻
+     */
+    EndTime?: string;
+    /**
+     * 数据引擎名称，用于筛选
+     */
+    DataEngineName?: string;
+    /**
+     * 下一页的标识
+     */
+    SearchAfter?: string;
+    /**
+     * 每页的大小
+     */
+    PageSize?: number;
 }
 /**
  * ModifyDataEngineDescription返回参数结构体

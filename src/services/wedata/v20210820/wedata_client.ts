@@ -391,6 +391,7 @@ import {
   DeleteWorkflowNewRequest,
   BatchUpdateIntegrationTasksResponse,
   TaskLogResponse,
+  QuietPeriod,
   CheckDuplicateRuleNameRequest,
   AdhocDetail,
   ModifyRuleTemplateResponse,

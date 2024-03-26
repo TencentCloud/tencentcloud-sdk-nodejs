@@ -322,6 +322,7 @@ import {
   StreamingStatistics,
   TaskResponseInfo,
   DescribeStoreLocationResponse,
+  QueryTaskCostDetailResponse,
   Execution,
   CreateNotebookSessionStatementSupportBatchSQLResponse,
   BindWorkGroupsToUserRequest,
@@ -347,6 +348,7 @@ import {
   LockMetaDataRequest,
   CreateNotebookSessionResponse,
   DescribeDataEngineResponse,
+  QueryTaskCostDetailRequest,
   ModifyDataEngineDescriptionResponse,
   UpdateDataEngineConfigRequest,
   DropDMSTableRequest,
@@ -1069,6 +1071,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDMSTableResponse) => void
   ): Promise<DescribeDMSTableResponse> {
     return this.request("DescribeDMSTable", req, cb)
+  }
+
+  /**
+   * 该接口（QueryTaskCostDetail）用于查询任务消耗明细
+   */
+  async QueryTaskCostDetail(
+    req: QueryTaskCostDetailRequest,
+    cb?: (error: string, rep: QueryTaskCostDetailResponse) => void
+  ): Promise<QueryTaskCostDetailResponse> {
+    return this.request("QueryTaskCostDetail", req, cb)
   }
 
   /**

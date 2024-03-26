@@ -299,7 +299,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDataBackupOverview", req, cb);
     }
     /**
-     * 本接口（ReleaseIsolatedDBInstances）用于恢复已隔离云数据库实例。
+     * 本接口（ReleaseIsolatedDBInstances）用于恢复已隔离云数据库实例。仅用于按量计费实例的解隔离，包年包月实例的解隔离请使用 RenewDBInstance 。
      */
     async ReleaseIsolatedDBInstances(req, cb) {
         return this.request("ReleaseIsolatedDBInstances", req, cb);

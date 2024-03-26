@@ -3760,7 +3760,7 @@ export interface ServerRisk {
      */
     InstanceType?: string;
     /**
-     * 风险等级
+     * 风险等级 low:低危 high:高危 middle:中危 info:提示 extreme:严重
      */
     Level?: string;
     /**

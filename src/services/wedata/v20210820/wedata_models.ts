@@ -165,62 +165,62 @@ export interface DescribeIntegrationStatisticsResponse {
    * 总任务数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TotalTask: number
+  TotalTask?: number
   /**
    * 生产态任务数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ProdTask: number
+  ProdTask?: number
   /**
    * 开发态任务数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DevTask: number
+  DevTask?: number
   /**
    * 总读取条数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TotalReadRecords: number
+  TotalReadRecords?: number
   /**
    * 总写入条数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TotalWriteRecords: number
+  TotalWriteRecords?: number
   /**
    * 总脏数据条数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TotalErrorRecords: number
+  TotalErrorRecords?: number
   /**
    * 总告警事件数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TotalAlarmEvent: number
+  TotalAlarmEvent?: number
   /**
    * 当天读取增长条数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  IncreaseReadRecords: number
+  IncreaseReadRecords?: number
   /**
    * 当天写入增长条数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  IncreaseWriteRecords: number
+  IncreaseWriteRecords?: number
   /**
    * 当天脏数据增长条数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  IncreaseErrorRecords: number
+  IncreaseErrorRecords?: number
   /**
    * 当天告警事件增长数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  IncreaseAlarmEvent: number
+  IncreaseAlarmEvent?: number
   /**
    * 告警事件统计
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  AlarmEvent: string
+  AlarmEvent?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -385,12 +385,12 @@ export interface DescribeIntegrationNodeResponse {
    * 节点信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  NodeInfo: IntegrationNodeInfo
+  NodeInfo?: IntegrationNodeInfo
   /**
    * 上游节点是否已经修改。true 已修改，需要提示；false 没有修改
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SourceCheckFlag: boolean
+  SourceCheckFlag?: boolean
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -568,11 +568,11 @@ export interface CheckIntegrationTaskNameExistsResponse {
   /**
    * true表示存在，false表示不存在
    */
-  Data: boolean
+  Data?: boolean
   /**
    * 任务名重复类型（0:未重复, 1:开发态重复, 2:生产态重复）
    */
-  ExistsType: number
+  ExistsType?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -669,6 +669,10 @@ export interface CreateDataSourceRequest {
    * 连接测试结果
    */
   ConnectResult?: string
+  /**
+   * 开发环境数据源配置
+   */
+  DevelopmentParams?: string
 }
 
 /**
@@ -2581,6 +2585,16 @@ export interface AlarmEventInfo {
    */
   IsSendSuccess?: number
   /**
+   * 是否在免打扰时间内，0:否, 1:是
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InQuitePeriods?: number
+  /**
+   * 告警记录id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RecordId?: number
+  /**
    * 消息ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
@@ -2886,7 +2900,7 @@ export interface ModifyIntegrationTaskResponse {
   /**
    * 任务id
    */
-  TaskId: string
+  TaskId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3318,7 +3332,7 @@ export interface DescribeStandardRuleDetailInfoListResponse {
    * 返回值
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  StandardRuleDetailList: string
+  StandardRuleDetailList?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3963,7 +3977,7 @@ export interface DescribeClusterNamespaceListResponse {
   /**
    * 命名空间
    */
-  Namespaces: Array<Namespace>
+  Namespaces?: Array<Namespace>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3977,7 +3991,7 @@ export interface CreateInLongAgentResponse {
   /**
    * 采集器ID
    */
-  AgentId: string
+  AgentId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4050,7 +4064,7 @@ export interface DescribeIntegrationStatisticsTaskStatusTrendResponse {
    * 统计结果
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TrendsData: Array<IntegrationStatisticsTrendResult>
+  TrendsData?: Array<IntegrationStatisticsTrendResult>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6547,7 +6561,7 @@ export interface ModifyTaskNameResponse {
   /**
    * 结果
    */
-  Data: boolean
+  Data?: boolean
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6752,23 +6766,23 @@ export interface DescribeTaskReportDetailListResponse {
   /**
    * 页码，从1开始
    */
-  PageIndex: number
+  PageIndex?: number
   /**
    * 每页的记录数
    */
-  PageSize: number
+  PageSize?: number
   /**
    * 总记录数
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 总页数
    */
-  TotalPage: number
+  TotalPage?: number
   /**
    * 任务运行指标
    */
-  Items: Array<TaskReportDetail>
+  Items?: Array<TaskReportDetail>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6809,7 +6823,7 @@ export interface DescribeIntegrationStatisticsInstanceTrendResponse {
    * 统计结果
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TrendsData: Array<IntegrationStatisticsTrendResult>
+  TrendsData?: Array<IntegrationStatisticsTrendResult>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -10024,7 +10038,7 @@ export interface CheckIntegrationNodeNameExistsResponse {
   /**
    * 返回true代表存在，返回false代表不存在
    */
-  Data: boolean
+  Data?: boolean
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -10798,7 +10812,7 @@ export interface DescribeIntegrationStatisticsRecordsTrendResponse {
    * 统计结果
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TrendsData: Array<IntegrationStatisticsTrendResult>
+  TrendsData?: Array<IntegrationStatisticsTrendResult>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -11140,15 +11154,15 @@ export interface BatchForceSuccessIntegrationTaskInstancesResponse {
   /**
    * 操作成功的任务数
    */
-  SuccessCount: number
+  SuccessCount?: number
   /**
    * 操作失败的任务数
    */
-  FailedCount: number
+  FailedCount?: number
   /**
    * 任务总数
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -11882,7 +11896,7 @@ export interface LockIntegrationTaskResponse {
   /**
    * 操作成功与否标识
    */
-  Data: boolean
+  Data?: boolean
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -12091,11 +12105,32 @@ export interface TaskLogResponse {
   /**
    * 详细日志
    */
-  LogContentList: Array<LogContent>
+  LogContentList?: Array<LogContent>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 数据集成 - 告警免打扰时间
+ */
+export interface QuietPeriod {
+  /**
+   * 代表一周里的哪些天，1代表周一，7代表周日，以此类推
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DaysOfWeek?: Array<number | bigint>
+  /**
+   * 开始时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StartTime?: string
+  /**
+   * 结束时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EndTime?: string
 }
 
 /**
@@ -12370,7 +12405,7 @@ export interface CreateTaskAlarmRegularResponse {
   /**
    * 告警ID
    */
-  AlarmId: number
+  AlarmId?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -12609,10 +12644,6 @@ export interface DescribeAlarmReceiverRequest {
    */
   ProjectId: string
   /**
-   * 消息ID
-   */
-  MessageId: string
-  /**
    * 类型
    */
   TaskType?: number
@@ -12628,6 +12659,14 @@ export interface DescribeAlarmReceiverRequest {
    * 告警时间
    */
   AlarmTime?: string
+  /**
+   * 消息ID
+   */
+  MessageId?: string
+  /**
+   * 告警记录id
+   */
+  RecordId?: number
   /**
    * 监控对象类型(1:所有任务,2:指定任务,3:指定责任人,4:指定资源组)
    */
@@ -13487,7 +13526,7 @@ export interface DeleteIntegrationNodeResponse {
   /**
    * 删除返回是否成功标识
    */
-  Data: boolean
+  Data?: boolean
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -14046,7 +14085,7 @@ export interface DescribeSchedulerRunTimeInstanceCntByStatusResponse {
  */
 export interface DescribeDataTypesRequest {
   /**
-   * 数据源类型，MYSQL|HIVE|KAFKA|POSTGRE|CDW|ORACLE|SQLSERVER|FTP|HDFS|ICEBERG|HBASE|TDSQL|TDSQLC|SPARK|VIRTUAL|TBASE|DB2|DM|GAUSSDB|GBASE|IMPALA|ES|S3_DATAINSIGHT|GREENPLUM|PHOENIX|SAP_HANA|SFTP|OCEANBASE|CLICKHOUSE|KUDU|VERTICA|REDIS|COS|DLC|DORIS|CKAFKA|MONGODB|FTP_FILE|HDFS_FILE|DTS_KAFKA|REST_API|FILE|TIDB|SYBASE|TCHOUSE_X 等
+   * 数据源类型，MYSQL|HIVE|KAFKA|POSTGRE|TCHouse-P|ORACLE|SQLSERVER|FTP|HDFS|ICEBERG|HBASE|TDSQL|TDSQLC|SPARK|VIRTUAL|TBASE|DB2|DM|GAUSSDB|GBASE|IMPALA|ES|S3_DATAINSIGHT|GREENPLUM|PHOENIX|SAP_HANA|SFTP|OCEANBASE|CLICKHOUSE|KUDU|VERTICA|REDIS|COS|DLC|DORIS|CKAFKA|MONGODB|FTP_FILE|HDFS_FILE|DTS_KAFKA|REST_API|FILE|TIDB|SYBASE|TCHOUSE_X 等
    */
   DatasourceType: string
   /**
@@ -14243,7 +14282,7 @@ export interface DescribeIntegrationStatisticsAgentStatusResponse {
    * 统计结果
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  StatusData: string
+  StatusData?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -15245,12 +15284,12 @@ export interface ModifyIntegrationNodeResponse {
   /**
    * 节点id
    */
-  Id: string
+  Id?: string
   /**
    * 任务id
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TaskId: string
+  TaskId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -15545,7 +15584,7 @@ export interface ModifyTaskAlarmRegularResponse {
    * 判断是否修改成功
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Data: boolean
+  Data?: boolean
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -17252,15 +17291,15 @@ export interface DescribeTaskInstanceReportDetailResponse {
   /**
    * 任务实例运行指标概览
    */
-  Summary: InstanceReportSummary
+  Summary?: InstanceReportSummary
   /**
    * 任务实例读取节点运行指标
    */
-  ReadNode: InstanceReportReadNode
+  ReadNode?: InstanceReportReadNode
   /**
    * 任务实例写入节点运行指标
    */
-  WriteNode: InstanceReportWriteNode
+  WriteNode?: InstanceReportWriteNode
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -17635,7 +17674,7 @@ export interface DescribeTaskLockStatusResponse {
   /**
    * 任务锁状态信息
    */
-  TaskLockStatus: TaskLockStatus
+  TaskLockStatus?: TaskLockStatus
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -18621,6 +18660,10 @@ export interface ModifyDataSourceRequest {
    * 操作项目id
    */
   ProjectId?: string
+  /**
+   * 数据源开发环境配置
+   */
+  DevelopmentParams?: string
 }
 
 /**
@@ -18768,6 +18811,11 @@ export interface TaskAlarmInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AlarmRecipientType?: number
+  /**
+   * 免打扰时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  QuietPeriods?: Array<QuietPeriod>
   /**
    * 企业微信群Hook地址，多个hook地址使用,隔开
 注意：此字段可能返回 null，表示取不到有效值。
@@ -20623,6 +20671,21 @@ export interface DataSourceInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ShowType?: string
+  /**
+   * 当前数据源生产源Id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProductId?: number
+  /**
+   * 当前数据源开发源Id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DevelopmentId?: number
+  /**
+   * 同params 内容为开发数据源的数据
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DevelopmentParams?: string
 }
 
 /**
@@ -21374,7 +21437,7 @@ export interface RobAndLockIntegrationTaskResponse {
   /**
    * 抢锁状态
    */
-  RobLockState: RobLockState
+  RobLockState?: RobLockState
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -21563,7 +21626,7 @@ export interface DeleteOfflineTaskResponse {
   /**
    * 结果
    */
-  Data: boolean
+  Data?: boolean
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -21767,23 +21830,23 @@ export interface DescribeTaskReportResponse {
   /**
    * 总读取条数
    */
-  TotalReadRecords: number
+  TotalReadRecords?: number
   /**
    * 总读取字节数，单位为Byte
    */
-  TotalReadBytes: number
+  TotalReadBytes?: number
   /**
    * 总写入条数
    */
-  TotalWriteRecords: number
+  TotalWriteRecords?: number
   /**
    * 总写入字节数，单位为Byte
    */
-  TotalWriteBytes: number
+  TotalWriteBytes?: number
   /**
    * 总脏数据条数
    */
-  TotalErrorRecords: number
+  TotalErrorRecords?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -21838,11 +21901,11 @@ export interface GetOfflineDIInstanceListResponse {
   /**
    * 总条数
    */
-  Total: number
+  Total?: number
   /**
    * 实例详情
    */
-  List: Array<OfflineInstance>
+  List?: Array<OfflineInstance>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -23267,7 +23330,7 @@ export interface DescribeRealTimeTaskInstanceNodeInfoResponse {
    * 实时任务实例节点相关信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RealTimeTaskInstanceNodeInfo: RealTimeTaskInstanceNodeInfo
+  RealTimeTaskInstanceNodeInfo?: RealTimeTaskInstanceNodeInfo
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -23579,12 +23642,12 @@ export interface DescribeOfflineTaskTokenResponse {
   /**
    * 长连接临时token
    */
-  Token: string
+  Token?: string
   /**
    * 长连接临时token。与Token相同含义，优先取Data，Data为空时，取Token。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Data: string
+  Data?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -23599,7 +23662,7 @@ export interface DescribeTableInfoListResponse {
    * 表信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TableInfo: Array<TableInfo>
+  TableInfo?: Array<TableInfo>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -25040,15 +25103,15 @@ export interface DescribeRealTimeTaskSpeedResponse {
   /**
    * 同步速度条/s列表
    */
-  RecordsSpeedList: Array<RecordsSpeed>
+  RecordsSpeedList?: Array<RecordsSpeed>
   /**
    * 同步速度字节/s列表
    */
-  BytesSpeedList: Array<BytesSpeed>
+  BytesSpeedList?: Array<BytesSpeed>
   /**
    * 同步速度，包括了RecordsSpeedList和BytesSpeedList
    */
-  Data: RealTimeTaskSpeed
+  Data?: RealTimeTaskSpeed
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -25133,7 +25196,7 @@ export interface CheckTaskNameExistResponse {
   /**
    * 结果
    */
-  Data: boolean
+  Data?: boolean
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -25285,7 +25348,7 @@ export interface DescribeInLongAgentTaskListResponse {
   /**
    * 采集器关联的集成任务列表
    */
-  Items: Array<InLongAgentTask>
+  Items?: Array<InLongAgentTask>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -25620,15 +25683,20 @@ export interface BatchKillIntegrationTaskInstancesResponse {
   /**
    * 操作成功的任务数
    */
-  SuccessCount: number
+  SuccessCount?: number
   /**
    * 操作失败的任务数
    */
-  FailedCount: number
+  FailedCount?: number
   /**
    * 任务总数
    */
-  TotalCount: number
+  TotalCount?: number
+  /**
+   * 实际传的为taskId
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskNames?: Array<string>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -25814,7 +25882,7 @@ export interface MakePlanTaskOpsDto {
    */
   TaskBaseInfo?: TaskOpsDto
   /**
-   * 补录计划该任务实例数
+   * 补录该任务当前已生成的实例数
 注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceCount?: number
@@ -25828,6 +25896,11 @@ export interface MakePlanTaskOpsDto {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SuccessPercent?: number
+  /**
+   * 预计生成的总实例个数，由于是异步生成，-1代表实例还未完完全生成
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceTotalCount?: number
 }
 
 /**
@@ -25867,7 +25940,7 @@ export interface DescribeInLongAgentVpcListResponse {
   /**
    * VPC列表
    */
-  VpcList: Array<string>
+  VpcList?: Array<string>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -26135,7 +26208,7 @@ export interface UnlockIntegrationTaskResponse {
   /**
    * 操作成功与否标识
    */
-  Data: boolean
+  Data?: boolean
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -26347,7 +26420,7 @@ export interface DescribeIntegrationStatisticsTaskStatusResponse {
    * 统计结果
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  StatusData: string
+  StatusData?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -26613,7 +26686,7 @@ export interface GetIntegrationNodeColumnSchemaResponse {
    * 字段列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Schemas: Array<IntegrationNodeSchema>
+  Schemas?: Array<IntegrationNodeSchema>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -26627,7 +26700,7 @@ export interface StopIntegrationTaskResponse {
   /**
    * 操作成功与否标识
    */
-  Data: boolean
+  Data?: boolean
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -26930,23 +27003,23 @@ export interface DryRunDIOfflineTaskResponse {
   /**
    * 数据时间
    */
-  CurrentRunDate: string
+  CurrentRunDate?: string
   /**
    * 项目Id
    */
-  ProjectId: string
+  ProjectId?: string
   /**
    * 任务状态
    */
-  Status: string
+  Status?: string
   /**
    * 任务Id
    */
-  TaskId: string
+  TaskId?: string
   /**
    * 任务实例唯一key
    */
-  TaskInstanceKey: string
+  TaskInstanceKey?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -27264,17 +27337,17 @@ export interface BatchCreateIntegrationTaskAlarmsResponse {
    * 操作成功的任务数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SuccessCount: number
+  SuccessCount?: number
   /**
    * 操作失败的任务数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  FailedCount: number
+  FailedCount?: number
   /**
    * 任务总数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -27876,15 +27949,19 @@ export interface BatchRerunIntegrationTaskInstancesResponse {
   /**
    * 操作成功的任务数
    */
-  SuccessCount: number
+  SuccessCount?: number
   /**
    * 操作失败的任务数
    */
-  FailedCount: number
+  FailedCount?: number
   /**
    * 任务总数
    */
-  TotalCount: number
+  TotalCount?: number
+  /**
+   * 实际传的为taskId
+   */
+  TaskNames?: Array<string>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -28241,15 +28318,15 @@ export interface BatchMakeUpIntegrationTasksResponse {
   /**
    * 操作成功的任务数
    */
-  SuccessCount: number
+  SuccessCount?: number
   /**
    * 操作失败的任务数
    */
-  FailedCount: number
+  FailedCount?: number
   /**
    * 任务总数
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

@@ -448,6 +448,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDMSTable", req, cb);
     }
     /**
+     * 该接口（QueryTaskCostDetail）用于查询任务消耗明细
+     */
+    async QueryTaskCostDetail(req, cb) {
+        return this.request("QueryTaskCostDetail", req, cb);
+    }
+    /**
      * DMS元数据删除分区
      */
     async DropDMSPartitions(req, cb) {

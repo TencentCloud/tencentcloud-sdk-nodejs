@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeCronJobsRequest, UpdateJobRequest, UpdateCronJobResponse, DescribeSampleMatrixQueryResponse, DescribeSampleLogsRequest, DeleteJobsRequest, DescribeAlertRecordsRequest, DeleteAlertChannelResponse, DescribeLabelValuesRequest, AbortCronJobsResponse, DescribeRequestSummaryResponse, DescribeScenarioWithJobsRequest, CreateCronJobResponse, RestartCronJobsResponse, UpdateProjectRequest, AbortJobResponse, UpdateScenarioRequest, DescribeRegionsResponse, UpdateScenarioResponse, CreateProjectRequest, AdjustJobSpeedRequest, DescribeRequestSummaryRequest, CreateFileResponse, DeleteProjectsResponse, DescribeLabelValuesResponse, DescribeAvailableMetricsRequest, CopyScenarioResponse, DescribeSampleMatrixQueryRequest, GenerateTmpKeyResponse, DescribeFilesResponse, DeleteProjectsRequest, UpdateFileScenarioRelationRequest, DeleteJobsResponse, AdjustJobSpeedResponse, CreateProjectResponse, DescribeSampleQueryRequest, DescribeSampleMatrixBatchQueryResponse, DescribeRegionsRequest, DeleteScenariosResponse, DeleteFilesRequest, CopyScenarioRequest, DescribeNormalLogsResponse, DescribeSampleBatchQueryRequest, RestartCronJobsRequest, DeleteScenariosRequest, CreateAlertChannelResponse, CreateAlertChannelRequest, DescribeAlertChannelsRequest, DescribeAvailableMetricsResponse, DescribeMetricLabelWithValuesResponse, DescribeAlertChannelsResponse, CreateCronJobRequest, UpdateJobResponse, DescribeCheckSummaryRequest, DeleteFilesResponse, CreateFileRequest, DeleteCronJobsRequest, DescribeSampleLogsResponse, DescribeCronJobsResponse, DescribeNormalLogsRequest, DescribeJobsRequest, DescribeFilesRequest, AbortCronJobsRequest, DescribeSampleMatrixBatchQueryRequest, DescribeAlertRecordsResponse, DescribeProjectsRequest, DescribeSampleQueryResponse, CreateScenarioRequest, DescribeMetricLabelWithValuesRequest, DescribeProjectsResponse, UpdateCronJobRequest, DescribeCheckSummaryResponse, DescribeScenariosRequest, DescribeScenariosResponse, CreateScenarioResponse, AbortJobRequest, DescribeErrorSummaryRequest, DescribeJobsResponse, GenerateTmpKeyRequest, DescribeSampleBatchQueryResponse, StartJobResponse, DeleteCronJobsResponse, StartJobRequest, DescribeScenarioWithJobsResponse, DeleteAlertChannelRequest, DescribeErrorSummaryResponse, UpdateProjectResponse, UpdateFileScenarioRelationResponse } from "./pts_models";
+import { DescribeCronJobsRequest, UpdateJobRequest, UpdateCronJobResponse, DescribeSampleMatrixQueryResponse, DescribeSampleLogsRequest, DeleteJobsRequest, DescribeAlertRecordsRequest, DeleteAlertChannelResponse, DescribeLabelValuesRequest, AbortCronJobsResponse, DescribeRequestSummaryResponse, DescribeScenarioWithJobsRequest, CreateCronJobResponse, RestartCronJobsResponse, UpdateProjectRequest, AbortJobResponse, UpdateEnvironmentRequest, DescribeRegionsResponse, CreateEnvironmentResponse, UpdateScenarioResponse, DescribeEnvironmentsRequest, CreateProjectRequest, AdjustJobSpeedRequest, DescribeRequestSummaryRequest, CreateFileResponse, DeleteProjectsResponse, UpdateEnvironmentResponse, DescribeLabelValuesResponse, DescribeAvailableMetricsRequest, CopyScenarioResponse, DescribeSampleMatrixQueryRequest, GenerateTmpKeyResponse, DescribeFilesResponse, DeleteProjectsRequest, UpdateFileScenarioRelationRequest, DeleteJobsResponse, AdjustJobSpeedResponse, CreateProjectResponse, DescribeSampleQueryRequest, DescribeSampleMatrixBatchQueryResponse, DeleteEnvironmentsResponse, DescribeRegionsRequest, DeleteScenariosResponse, CreateEnvironmentRequest, DescribeErrorSummaryRequest, CopyScenarioRequest, DescribeNormalLogsResponse, DescribeSampleBatchQueryRequest, RestartCronJobsRequest, DeleteScenariosRequest, CreateAlertChannelResponse, CreateAlertChannelRequest, DescribeAlertChannelsRequest, DescribeAvailableMetricsResponse, DescribeMetricLabelWithValuesResponse, DescribeEnvironmentsResponse, DescribeAlertChannelsResponse, CreateCronJobRequest, UpdateJobResponse, DescribeCheckSummaryRequest, DeleteFilesResponse, CreateFileRequest, DeleteCronJobsRequest, DescribeSampleLogsResponse, DescribeCronJobsResponse, DescribeNormalLogsRequest, DescribeJobsRequest, DescribeFilesRequest, AbortCronJobsRequest, DescribeSampleMatrixBatchQueryRequest, DescribeAlertRecordsResponse, DescribeProjectsRequest, DescribeSampleQueryResponse, DeleteEnvironmentsRequest, CreateScenarioRequest, DescribeMetricLabelWithValuesRequest, DescribeProjectsResponse, UpdateCronJobRequest, DescribeCheckSummaryResponse, DescribeScenariosRequest, DescribeScenariosResponse, CreateScenarioResponse, AbortJobRequest, DeleteFilesRequest, DescribeJobsResponse, GenerateTmpKeyRequest, DescribeSampleBatchQueryResponse, StartJobResponse, UpdateScenarioRequest, DeleteCronJobsResponse, StartJobRequest, DescribeScenarioWithJobsResponse, DeleteAlertChannelRequest, DescribeErrorSummaryResponse, UpdateProjectResponse, UpdateFileScenarioRelationResponse } from "./pts_models";
 /**
  * pts client
  * @class
@@ -11,6 +11,10 @@ export declare class Client extends AbstractClient {
      * 查询场景配置并附带已经执行的任务内容
      */
     DescribeScenarioWithJobs(req: DescribeScenarioWithJobsRequest, cb?: (error: string, rep: DescribeScenarioWithJobsResponse) => void): Promise<DescribeScenarioWithJobsResponse>;
+    /**
+     * 删除环境
+     */
+    DeleteEnvironments(req?: DeleteEnvironmentsRequest, cb?: (error: string, rep: DeleteEnvironmentsResponse) => void): Promise<DeleteEnvironmentsResponse>;
     /**
      * 更新任务
      */
@@ -84,6 +88,10 @@ export declare class Client extends AbstractClient {
      */
     DescribeAlertRecords(req: DescribeAlertRecordsRequest, cb?: (error: string, rep: DescribeAlertRecordsResponse) => void): Promise<DescribeAlertRecordsResponse>;
     /**
+     * 批量查询指标，返回固定时间点指标内容
+     */
+    DescribeSampleBatchQuery(req: DescribeSampleBatchQueryRequest, cb?: (error: string, rep: DescribeSampleBatchQueryResponse) => void): Promise<DescribeSampleBatchQueryResponse>;
+    /**
      * 查询告警通知接收组
      */
     DescribeAlertChannels(req: DescribeAlertChannelsRequest, cb?: (error: string, rep: DescribeAlertChannelsResponse) => void): Promise<DescribeAlertChannelsResponse>;
@@ -108,13 +116,17 @@ export declare class Client extends AbstractClient {
      */
     RestartCronJobs(req: RestartCronJobsRequest, cb?: (error: string, rep: RestartCronJobsResponse) => void): Promise<RestartCronJobsResponse>;
     /**
+     * 更新环境
+     */
+    UpdateEnvironment(req?: UpdateEnvironmentRequest, cb?: (error: string, rep: UpdateEnvironmentResponse) => void): Promise<UpdateEnvironmentResponse>;
+    /**
      * 创建告警通知接收组
      */
     CreateAlertChannel(req: CreateAlertChannelRequest, cb?: (error: string, rep: CreateAlertChannelResponse) => void): Promise<CreateAlertChannelResponse>;
     /**
-     * 批量查询指标，返回固定时间点指标内容
+     * 查看环境列表
      */
-    DescribeSampleBatchQuery(req: DescribeSampleBatchQueryRequest, cb?: (error: string, rep: DescribeSampleBatchQueryResponse) => void): Promise<DescribeSampleBatchQueryResponse>;
+    DescribeEnvironments(req?: DescribeEnvironmentsRequest, cb?: (error: string, rep: DescribeEnvironmentsResponse) => void): Promise<DescribeEnvironmentsResponse>;
     /**
      * 删除任务
      */
@@ -135,6 +147,10 @@ export declare class Client extends AbstractClient {
      * 查询采样日志
      */
     DescribeSampleLogs(req: DescribeSampleLogsRequest, cb?: (error: string, rep: DescribeSampleLogsResponse) => void): Promise<DescribeSampleLogsResponse>;
+    /**
+     * 创建环境
+     */
+    CreateEnvironment(req?: CreateEnvironmentRequest, cb?: (error: string, rep: CreateEnvironmentResponse) => void): Promise<CreateEnvironmentResponse>;
     /**
      * 查询场景列表
      */

@@ -34,6 +34,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeScenarioWithJobs", req, cb);
     }
     /**
+     * 删除环境
+     */
+    async DeleteEnvironments(req, cb) {
+        return this.request("DeleteEnvironments", req, cb);
+    }
+    /**
      * 更新任务
      */
     async UpdateJob(req, cb) {
@@ -142,6 +148,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeAlertRecords", req, cb);
     }
     /**
+     * 批量查询指标，返回固定时间点指标内容
+     */
+    async DescribeSampleBatchQuery(req, cb) {
+        return this.request("DescribeSampleBatchQuery", req, cb);
+    }
+    /**
      * 查询告警通知接收组
      */
     async DescribeAlertChannels(req, cb) {
@@ -178,16 +190,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("RestartCronJobs", req, cb);
     }
     /**
+     * 更新环境
+     */
+    async UpdateEnvironment(req, cb) {
+        return this.request("UpdateEnvironment", req, cb);
+    }
+    /**
      * 创建告警通知接收组
      */
     async CreateAlertChannel(req, cb) {
         return this.request("CreateAlertChannel", req, cb);
     }
     /**
-     * 批量查询指标，返回固定时间点指标内容
+     * 查看环境列表
      */
-    async DescribeSampleBatchQuery(req, cb) {
-        return this.request("DescribeSampleBatchQuery", req, cb);
+    async DescribeEnvironments(req, cb) {
+        return this.request("DescribeEnvironments", req, cb);
     }
     /**
      * 删除任务
@@ -218,6 +236,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeSampleLogs(req, cb) {
         return this.request("DescribeSampleLogs", req, cb);
+    }
+    /**
+     * 创建环境
+     */
+    async CreateEnvironment(req, cb) {
+        return this.request("CreateEnvironment", req, cb);
     }
     /**
      * 查询场景列表

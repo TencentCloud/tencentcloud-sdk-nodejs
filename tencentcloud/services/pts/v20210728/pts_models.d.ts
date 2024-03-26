@@ -560,98 +560,9 @@ export interface Project {
     SubAccountUin: string;
 }
 /**
- * UpdateScenario请求参数结构体
+ * UpdateEnvironment请求参数结构体
  */
-export interface UpdateScenarioRequest {
-    /**
-     * 场景ID
-     */
-    ScenarioId: string;
-    /**
-     * 场景名
-     */
-    Name?: string;
-    /**
-     * 场景描述
-     */
-    Description?: string;
-    /**
-     * 压测场景的模式类型。取值范围：pts-http 代表简单模式，pts-js 代表脚本模式，pts-jmeter 代表 JMeter 模式。
-     */
-    Type?: string;
-    /**
-     * 施压配置
-     */
-    Load?: Load;
-    /**
-     * deprecated
-     */
-    EncodedScripts?: string;
-    /**
-     * deprecated
-     */
-    Configs?: Array<string>;
-    /**
-     * 测试数据集
-     */
-    Datasets?: Array<TestData>;
-    /**
-     * deprecated
-     */
-    Extensions?: Array<string>;
-    /**
-     * SLA规则ID
-     */
-    SLAId?: string;
-    /**
-     * cron job ID
-     */
-    CronId?: string;
-    /**
-     * 场景状态（注：现已无需传递该参数）
-     */
-    Status?: number;
-    /**
-     * 项目ID
-     */
-    ProjectId?: string;
-    /**
-     * 测试脚本路径
-     */
-    TestScripts?: Array<ScriptInfo>;
-    /**
-     * 协议文件路径
-     */
-    Protocols?: Array<ProtocolInfo>;
-    /**
-     * 请求文件路径
-     */
-    RequestFiles?: Array<FileInfo>;
-    /**
-     * SLA 策略
-     */
-    SLAPolicy?: SLAPolicy;
-    /**
-     * 拓展包文件路径
-     */
-    Plugins?: Array<FileInfo>;
-    /**
-     * 域名解析配置
-     */
-    DomainNameConfig?: DomainNameConfig;
-    /**
-     * WebHook请求配置
-     */
-    NotificationHooks?: Array<Notification>;
-    /**
-     * 创建人名
-     */
-    Owner?: string;
-    /**
-     * 环境ID
-     */
-    EnvId?: string;
-}
+export declare type UpdateEnvironmentRequest = null;
 /**
  * DescribeRegions返回参数结构体
  */
@@ -695,6 +606,15 @@ export interface Attributes {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Duration: string;
+}
+/**
+ * CreateEnvironment返回参数结构体
+ */
+export interface CreateEnvironmentResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * UpdateScenario返回参数结构体
@@ -804,6 +724,10 @@ export interface File {
      */
     AppId: number;
 }
+/**
+ * DescribeEnvironments请求参数结构体
+ */
+export declare type DescribeEnvironmentsRequest = null;
 /**
  * sample附带原始查询语句中的metric, aggregation
  */
@@ -936,6 +860,15 @@ export interface GeoRegionsLoadItem {
      * 百分比
      */
     Percentage?: number;
+}
+/**
+ * UpdateEnvironment返回参数结构体
+ */
+export interface UpdateEnvironmentResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * 标签及对应的值
@@ -1664,6 +1597,15 @@ export interface DescribeSampleMatrixBatchQueryResponse {
     RequestId?: string;
 }
 /**
+ * DeleteEnvironments返回参数结构体
+ */
+export interface DeleteEnvironmentsResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * SLA 标签
  */
 export interface SLALabel {
@@ -1807,17 +1749,29 @@ export interface DeleteScenariosResponse {
     RequestId?: string;
 }
 /**
- * DeleteFiles请求参数结构体
+ * CreateEnvironment请求参数结构体
  */
-export interface DeleteFilesRequest {
+export declare type CreateEnvironmentRequest = null;
+/**
+ * DescribeErrorSummary请求参数结构体
+ */
+export interface DescribeErrorSummaryRequest {
     /**
-     * 项目 ID
+     * 任务ID
+     */
+    JobId: string;
+    /**
+     * 场景ID
+     */
+    ScenarioId: string;
+    /**
+     * 项目ID
      */
     ProjectId: string;
     /**
-     * 待删除的文件的 ID（所有文件 ID 可从接口 DescribeFiles 获取）
+     * 过滤参数
      */
-    FileIds: Array<string>;
+    Filters?: Array<Filter>;
 }
 /**
  * CopyScenario请求参数结构体
@@ -2245,6 +2199,15 @@ export interface AlertChannel {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     AMPConsumerId?: string;
+}
+/**
+ * DescribeEnvironments返回参数结构体
+ */
+export interface DescribeEnvironmentsResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * 脚本内置压力模型
@@ -2897,6 +2860,10 @@ export interface DescribeSampleQueryResponse {
     RequestId?: string;
 }
 /**
+ * DeleteEnvironments请求参数结构体
+ */
+export declare type DeleteEnvironmentsRequest = null;
+/**
  * CreateScenario请求参数结构体
  */
 export interface CreateScenarioRequest {
@@ -3357,25 +3324,17 @@ export interface AbortJobRequest {
     AbortReason?: number;
 }
 /**
- * DescribeErrorSummary请求参数结构体
+ * DeleteFiles请求参数结构体
  */
-export interface DescribeErrorSummaryRequest {
+export interface DeleteFilesRequest {
     /**
-     * 任务ID
-     */
-    JobId: string;
-    /**
-     * 场景ID
-     */
-    ScenarioId: string;
-    /**
-     * 项目ID
+     * 项目 ID
      */
     ProjectId: string;
     /**
-     * 过滤参数
+     * 待删除的文件的 ID（所有文件 ID 可从接口 DescribeFiles 获取）
      */
-    Filters?: Array<Filter>;
+    FileIds: Array<string>;
 }
 /**
  * 检查点汇总结果
@@ -3475,6 +3434,99 @@ export interface StartJobResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * UpdateScenario请求参数结构体
+ */
+export interface UpdateScenarioRequest {
+    /**
+     * 场景ID
+     */
+    ScenarioId: string;
+    /**
+     * 场景名
+     */
+    Name?: string;
+    /**
+     * 场景描述
+     */
+    Description?: string;
+    /**
+     * 压测场景的模式类型。取值范围：pts-http 代表简单模式，pts-js 代表脚本模式，pts-jmeter 代表 JMeter 模式。
+     */
+    Type?: string;
+    /**
+     * 施压配置
+     */
+    Load?: Load;
+    /**
+     * deprecated
+     */
+    EncodedScripts?: string;
+    /**
+     * deprecated
+     */
+    Configs?: Array<string>;
+    /**
+     * 测试数据集
+     */
+    Datasets?: Array<TestData>;
+    /**
+     * deprecated
+     */
+    Extensions?: Array<string>;
+    /**
+     * SLA规则ID
+     */
+    SLAId?: string;
+    /**
+     * cron job ID
+     */
+    CronId?: string;
+    /**
+     * 场景状态（注：现已无需传递该参数）
+     */
+    Status?: number;
+    /**
+     * 项目ID
+     */
+    ProjectId?: string;
+    /**
+     * 测试脚本路径
+     */
+    TestScripts?: Array<ScriptInfo>;
+    /**
+     * 协议文件路径
+     */
+    Protocols?: Array<ProtocolInfo>;
+    /**
+     * 请求文件路径
+     */
+    RequestFiles?: Array<FileInfo>;
+    /**
+     * SLA 策略
+     */
+    SLAPolicy?: SLAPolicy;
+    /**
+     * 拓展包文件路径
+     */
+    Plugins?: Array<FileInfo>;
+    /**
+     * 域名解析配置
+     */
+    DomainNameConfig?: DomainNameConfig;
+    /**
+     * WebHook请求配置
+     */
+    NotificationHooks?: Array<Notification>;
+    /**
+     * 创建人名
+     */
+    Owner?: string;
+    /**
+     * 环境ID
+     */
+    EnvId?: string;
 }
 /**
  * PTS提供的指标名，指标对应的labels及values
