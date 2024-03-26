@@ -297,6 +297,7 @@ import {
   DescribeAuditPoliciesRequest,
   AdjustCdbProxyAddressRequest,
   DescribeDatabasesResponse,
+  TaskAttachInfo,
   DescribeRoGroupsResponse,
   CloseCdbProxyAddressResponse,
   DescribeAuditRulesResponse,

@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { CheckIdNameDateResponse, IdCardVerificationRequest, ImageRecognitionV2Response, GetDetectInfoEnhancedResponse, MobileStatusRequest, GetActionSequenceResponse, LivenessRecognitionRequest, CheckEidTokenStatusResponse, DetectAuthRequest, CheckEidTokenStatusRequest, ParseNfcDataResponse, LivenessCompareResponse, BankCard2EVerificationResponse, MobileStatusResponse, LivenessResponse, EncryptedPhoneVerificationRequest, EncryptedPhoneVerificationResponse, LivenessRequest, DetectAIFakeFacesRequest, CheckBankCardInformationResponse, GetEidTokenRequest, CheckIdNameDateRequest, GetFaceIdTokenResponse, MinorsVerificationRequest, GetFaceIdResultResponse, DetectAIFakeFacesResponse, LivenessCompareRequest, CheckBankCardInformationRequest, BankCardVerificationRequest, GetWeChatBillDetailsResponse, CheckIdCardInformationResponse, GetEidResultRequest, DetectAuthResponse, PhoneVerificationResponse, IdCardOCRVerificationRequest, BankCard4EVerificationResponse, MobileNetworkTimeVerificationRequest, PhoneVerificationCMCCResponse, MobileNetworkTimeVerificationResponse, PhoneVerificationCUCCResponse, CheckIdCardInformationRequest, MinorsVerificationResponse, GetWeChatBillDetailsRequest, BankCardVerificationResponse, PhoneVerificationCUCCRequest, PhoneVerificationCMCCRequest, ImageRecognitionResponse, GetDetectInfoResponse, IdCardOCRVerificationResponse, IdCardVerificationResponse, GetDetectInfoEnhancedRequest, LivenessRecognitionResponse, GetLiveCodeRequest, GetEidResultResponse, PhoneVerificationRequest, GetFaceIdResultRequest, CheckPhoneAndNameResponse, GetFaceIdTokenRequest, BankCard2EVerificationRequest, ImageRecognitionV2Request, PhoneVerificationCTCCResponse, ParseNfcDataRequest, PhoneVerificationCTCCRequest, ImageRecognitionRequest, BankCard4EVerificationRequest, GetActionSequenceRequest, GetLiveCodeResponse, GetDetectInfoRequest, CheckPhoneAndNameRequest, GetEidTokenResponse } from "./faceid_models";
+import { GetFaceidRiskInfoTokenResponse, CheckIdNameDateResponse, IdCardVerificationRequest, ImageRecognitionV2Response, GetDetectInfoEnhancedResponse, MobileStatusRequest, ParseNfcDataResponse, LivenessRecognitionRequest, CheckEidTokenStatusResponse, DetectAuthRequest, CheckEidTokenStatusRequest, GetFaceIdRiskInfoResponse, LivenessCompareResponse, BankCard2EVerificationResponse, MobileStatusResponse, LivenessResponse, EncryptedPhoneVerificationRequest, EncryptedPhoneVerificationResponse, LivenessRequest, DetectAIFakeFacesRequest, CheckBankCardInformationResponse, GetEidTokenRequest, CheckIdNameDateRequest, GetFaceIdTokenResponse, MinorsVerificationRequest, GetFaceIdResultResponse, DetectAIFakeFacesResponse, LivenessCompareRequest, CheckBankCardInformationRequest, BankCardVerificationRequest, GetWeChatBillDetailsResponse, CheckIdCardInformationResponse, GetEidResultRequest, DetectAuthResponse, PhoneVerificationResponse, IdCardOCRVerificationRequest, BankCard4EVerificationResponse, MobileNetworkTimeVerificationRequest, PhoneVerificationCMCCResponse, MobileNetworkTimeVerificationResponse, PhoneVerificationCUCCResponse, CheckIdCardInformationRequest, MinorsVerificationResponse, GetWeChatBillDetailsRequest, BankCardVerificationResponse, PhoneVerificationCUCCRequest, PhoneVerificationCMCCRequest, ImageRecognitionResponse, GetDetectInfoResponse, IdCardOCRVerificationResponse, IdCardVerificationResponse, GetActionSequenceRequest, GetDetectInfoEnhancedRequest, LivenessRecognitionResponse, GetLiveCodeRequest, GetEidResultResponse, PhoneVerificationRequest, GetFaceIdResultRequest, CheckPhoneAndNameResponse, GetFaceIdTokenRequest, GetFaceidRiskInfoTokenRequest, BankCard2EVerificationRequest, ImageRecognitionV2Request, PhoneVerificationCTCCResponse, ParseNfcDataRequest, PhoneVerificationCTCCRequest, ImageRecognitionRequest, BankCard4EVerificationRequest, GetActionSequenceResponse, GetFaceIdRiskInfoRequest, GetLiveCodeResponse, GetDetectInfoRequest, CheckPhoneAndNameRequest, GetEidTokenResponse } from "./faceid_models";
 /**
  * faceid client
  * @class
@@ -12,9 +12,9 @@ export declare class Client extends AbstractClient {
      */
     GetLiveCode(req?: GetLiveCodeRequest, cb?: (error: string, rep: GetLiveCodeResponse) => void): Promise<GetLiveCodeResponse>;
     /**
-     * 使用动作活体检测模式前，需调用本接口获取动作顺序。
+     * 完成验证后，用FaceIdToken调用本接口获取设备风险相关信息，FaceIdToken生成后三天内（3\*24\*3,600秒）可多次拉取。
      */
-    GetActionSequence(req: GetActionSequenceRequest, cb?: (error: string, rep: GetActionSequenceResponse) => void): Promise<GetActionSequenceResponse>;
+    GetFaceIdRiskInfo(req: GetFaceIdRiskInfoRequest, cb?: (error: string, rep: GetFaceIdRiskInfoResponse) => void): Promise<GetFaceIdRiskInfoResponse>;
     /**
      * 查询微信渠道服务（微信小程序、微信原生H5、微信普通H5）的账单明细及计费状态。
      */
@@ -35,6 +35,10 @@ export declare class Client extends AbstractClient {
      * 本接口用于校验手机号、姓名和身份证号的真实性和一致性，入参支持明文、MD5和SHA256加密传输。
      */
     EncryptedPhoneVerification(req: EncryptedPhoneVerificationRequest, cb?: (error: string, rep: EncryptedPhoneVerificationResponse) => void): Promise<EncryptedPhoneVerificationResponse>;
+    /**
+     * 使用动作活体检测模式前，需调用本接口获取动作顺序。
+     */
+    GetActionSequence(req: GetActionSequenceRequest, cb?: (error: string, rep: GetActionSequenceResponse) => void): Promise<GetActionSequenceResponse>;
     /**
      * 完成验证后，用BizToken调用本接口获取结果信息，BizToken生成后三天内（3\*24\*3,600秒）可多次拉取。
      */
@@ -89,6 +93,10 @@ export declare class Client extends AbstractClient {
      */
     MobileStatus(req: MobileStatusRequest, cb?: (error: string, rep: MobileStatusResponse) => void): Promise<MobileStatusResponse>;
     /**
+     * 本接口用于校验姓名、身份证号、身份证有效期的真实性和一致性。
+     */
+    CheckIdNameDate(req: CheckIdNameDateRequest, cb?: (error: string, rep: CheckIdNameDateResponse) => void): Promise<CheckIdNameDateResponse>;
+    /**
      * 本接口用于校验中国移动手机号、姓名和身份证号的真实性和一致性。中国移动支持的手机号段详情请查阅<a href="https://cloud.tencent.com/document/product/1007/46063">运营商类</a>文档。
      */
     PhoneVerificationCMCC(req: PhoneVerificationCMCCRequest, cb?: (error: string, rep: PhoneVerificationCMCCResponse) => void): Promise<PhoneVerificationCMCCResponse>;
@@ -97,9 +105,9 @@ export declare class Client extends AbstractClient {
      */
     MinorsVerification(req: MinorsVerificationRequest, cb?: (error: string, rep: MinorsVerificationResponse) => void): Promise<MinorsVerificationResponse>;
     /**
-     * 本接口用于校验姓名、身份证号、身份证有效期的真实性和一致性。
+     * 每次调用人脸核身SDK服务前，需先调用本接口获取SDKToken，用来串联核身流程，在验证完成后，用于获取风险结果信息，该Token仅能核身一次。
      */
-    CheckIdNameDate(req: CheckIdNameDateRequest, cb?: (error: string, rep: CheckIdNameDateResponse) => void): Promise<CheckIdNameDateResponse>;
+    GetFaceidRiskInfoToken(req: GetFaceidRiskInfoTokenRequest, cb?: (error: string, rep: GetFaceidRiskInfoTokenResponse) => void): Promise<GetFaceidRiskInfoTokenResponse>;
     /**
      * 活体检测
      */

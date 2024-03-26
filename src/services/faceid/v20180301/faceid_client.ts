@@ -20,6 +20,7 @@ import { ClientConfig } from "../../../common/interface"
 import {
   AttackRiskDetail,
   ExtraInfo,
+  GetFaceidRiskInfoTokenResponse,
   CheckIdNameDateResponse,
   IdCardVerificationRequest,
   ImageRecognitionV2Response,
@@ -27,13 +28,13 @@ import {
   IntentionQuestionResult,
   RuleIdConfig,
   MobileStatusRequest,
-  GetActionSequenceResponse,
+  ParseNfcDataResponse,
   LivenessRecognitionRequest,
   CheckEidTokenStatusResponse,
   EidInfo,
   DetectAuthRequest,
   CheckEidTokenStatusRequest,
-  ParseNfcDataResponse,
+  GetFaceIdRiskInfoResponse,
   LivenessCompareResponse,
   BankCard2EVerificationResponse,
   MobileStatusResponse,
@@ -83,6 +84,7 @@ import {
   GetDetectInfoResponse,
   IdCardOCRVerificationResponse,
   IdCardVerificationResponse,
+  GetActionSequenceRequest,
   GetDetectInfoEnhancedRequest,
   LivenessRecognitionResponse,
   GetLiveCodeRequest,
@@ -93,6 +95,7 @@ import {
   CheckPhoneAndNameResponse,
   GetFaceIdTokenRequest,
   IntentionActionResult,
+  GetFaceidRiskInfoTokenRequest,
   BankCard2EVerificationRequest,
   ImageRecognitionV2Request,
   PhoneVerificationCTCCResponse,
@@ -101,7 +104,8 @@ import {
   PhoneVerificationCTCCRequest,
   ImageRecognitionRequest,
   BankCard4EVerificationRequest,
-  GetActionSequenceRequest,
+  GetActionSequenceResponse,
+  GetFaceIdRiskInfoRequest,
   GetLiveCodeResponse,
   GetDetectInfoRequest,
   DetectInfoIdCardData,
@@ -130,13 +134,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 使用动作活体检测模式前，需调用本接口获取动作顺序。
+   * 完成验证后，用FaceIdToken调用本接口获取设备风险相关信息，FaceIdToken生成后三天内（3\*24\*3,600秒）可多次拉取。
    */
-  async GetActionSequence(
-    req: GetActionSequenceRequest,
-    cb?: (error: string, rep: GetActionSequenceResponse) => void
-  ): Promise<GetActionSequenceResponse> {
-    return this.request("GetActionSequence", req, cb)
+  async GetFaceIdRiskInfo(
+    req: GetFaceIdRiskInfoRequest,
+    cb?: (error: string, rep: GetFaceIdRiskInfoResponse) => void
+  ): Promise<GetFaceIdRiskInfoResponse> {
+    return this.request("GetFaceIdRiskInfo", req, cb)
   }
 
   /**
@@ -187,6 +191,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: EncryptedPhoneVerificationResponse) => void
   ): Promise<EncryptedPhoneVerificationResponse> {
     return this.request("EncryptedPhoneVerification", req, cb)
+  }
+
+  /**
+   * 使用动作活体检测模式前，需调用本接口获取动作顺序。
+   */
+  async GetActionSequence(
+    req: GetActionSequenceRequest,
+    cb?: (error: string, rep: GetActionSequenceResponse) => void
+  ): Promise<GetActionSequenceResponse> {
+    return this.request("GetActionSequence", req, cb)
   }
 
   /**
@@ -321,6 +335,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口用于校验姓名、身份证号、身份证有效期的真实性和一致性。
+   */
+  async CheckIdNameDate(
+    req: CheckIdNameDateRequest,
+    cb?: (error: string, rep: CheckIdNameDateResponse) => void
+  ): Promise<CheckIdNameDateResponse> {
+    return this.request("CheckIdNameDate", req, cb)
+  }
+
+  /**
    * 本接口用于校验中国移动手机号、姓名和身份证号的真实性和一致性。中国移动支持的手机号段详情请查阅<a href="https://cloud.tencent.com/document/product/1007/46063">运营商类</a>文档。
    */
   async PhoneVerificationCMCC(
@@ -341,13 +365,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口用于校验姓名、身份证号、身份证有效期的真实性和一致性。
+   * 每次调用人脸核身SDK服务前，需先调用本接口获取SDKToken，用来串联核身流程，在验证完成后，用于获取风险结果信息，该Token仅能核身一次。
    */
-  async CheckIdNameDate(
-    req: CheckIdNameDateRequest,
-    cb?: (error: string, rep: CheckIdNameDateResponse) => void
-  ): Promise<CheckIdNameDateResponse> {
-    return this.request("CheckIdNameDate", req, cb)
+  async GetFaceidRiskInfoToken(
+    req: GetFaceidRiskInfoTokenRequest,
+    cb?: (error: string, rep: GetFaceidRiskInfoTokenResponse) => void
+  ): Promise<GetFaceidRiskInfoTokenResponse> {
+    return this.request("GetFaceidRiskInfoToken", req, cb)
   }
 
   /**

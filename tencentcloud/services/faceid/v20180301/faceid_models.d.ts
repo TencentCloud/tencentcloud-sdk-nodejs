@@ -26,6 +26,19 @@ export interface ExtraInfo {
     RetrievalLivenessExtraInfo?: Array<RetrievalLivenessExtraInfo>;
 }
 /**
+ * GetFaceidRiskInfoToken返回参数结构体
+ */
+export interface GetFaceidRiskInfoTokenResponse {
+    /**
+     * 有效期 10分钟。只能完成1次核身。
+     */
+    FaceIdToken?: string;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * CheckIdNameDate返回参数结构体
  */
 export interface CheckIdNameDateResponse {
@@ -241,13 +254,111 @@ export interface MobileStatusRequest {
     Encryption?: Encryption;
 }
 /**
- * GetActionSequence返回参数结构体
+ * ParseNfcData返回参数结构体
  */
-export interface GetActionSequenceResponse {
+export interface ParseNfcDataResponse {
     /**
-     * 动作顺序(2,1 or 1,2) 。1代表张嘴，2代表闭眼。
+     * 0为首次查询成功，-1为查询失败。
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    ActionSequence?: string;
+    ResultCode: string;
+    /**
+     * 身份证号
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IdNum: string;
+    /**
+     * 姓名
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Name: string;
+    /**
+     * 照片
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Picture: string;
+    /**
+     * 出生日期
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    BirthDate: string;
+    /**
+     * 有效期起始时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    BeginTime: string;
+    /**
+     * 有效期结束时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    EndTime: string;
+    /**
+     * 住址
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Address: string;
+    /**
+     * 民族
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Nation: string;
+    /**
+     * 性别
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Sex: string;
+    /**
+     * 身份证 01 中国护照 03 军官证 04 武警证 05 港澳通行证 06 台胞证 07 外国护照 08 士兵证 09 临时身份证 10 户口本 11 警官证 12 外国人永久居留证 13 港澳台居民居住证 14 回乡证 15 大陆居民来往台湾通行证 16 其他证件 99
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IdType: string;
+    /**
+     * 英文姓名
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    EnName: string;
+    /**
+     * 签发机关
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SigningOrganization: string;
+    /**
+     * 港澳台居民居住证，通行证号码
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    OtherIdNum: string;
+    /**
+     * 旅行证件国籍
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Nationality: string;
+    /**
+     * 旅行证件机读区第二行 29~42 位
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PersonalNumber: string;
+    /**
+     * 旅行证件类的核验结果。JSON格式如下：
+  {"result_issuer ":"签发者证书合法性验证结果 ","result_pape r":"证件安全对象合法性验证 结果 ","result_data" :"防数据篡改验证结果 ","result_chip" :"防证书件芯片被复制验证结果"}
+   0:验证通过，1: 验证不通过，2: 未验证，3:部分通过，当4项核验结果都为0时，表示证件为真
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CheckMRTD: string;
+    /**
+     * 身份证照片面合成图片
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ImageA: string;
+    /**
+     * 身份证国徽面合成图片
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ImageB: string;
+    /**
+     * 对result code的结果描述
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ResultDescription: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -405,111 +516,39 @@ export interface CheckEidTokenStatusRequest {
     EidToken: string;
 }
 /**
- * ParseNfcData返回参数结构体
+ * GetFaceIdRiskInfo返回参数结构体
  */
-export interface ParseNfcDataResponse {
+export interface GetFaceIdRiskInfoResponse {
     /**
-     * 0为首次查询成功，-1为查询失败。
+     * 描述当前请求所在设备的风险标签，详情如下： 01-设备疑似被Root/设备疑似越狱 02-设备疑似被注入 03-设备疑似为模拟器 04-设备疑似存在风险操作 05-摄像头疑似被劫持 06-疑似黑产设备
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ResultCode: string;
+    DeviceInfoTag?: string;
     /**
-     * 身份证号
+     * 描述当前请求所在设备的风险等级，共4级，详情如下： 1 - 安全 2 - 低风险 3 - 中风险 4 - 高危 ，-1表示未获取到风险等级
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    IdNum: string;
+    DeviceInfoLevel?: number;
     /**
-     * 姓名
+     * 设备id标识
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Name: string;
+    OpenId?: string;
     /**
-     * 照片
+     * 描述当前请求所在设备的相机指纹风险等级，共4级，详情如下： 1 - 安全 2 - 低风险 3 - 中风险 4 - 高危 ，-1表示未获取到风险等级
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Picture: string;
+    CameraInfoLevel?: number;
     /**
-     * 出生日期
+     * 描述当前请求所在设备的相机指纹风险标签，详情如下： 01-设备疑似被Root/设备疑似越狱 02-设备疑似被注入 03-设备疑似为模拟器 04-设备疑似存在风险操作 05-摄像头疑似被劫持 06-疑似黑产设备，空表示没有相机指纹风险
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    BirthDate: string;
+    CameraInfoTag?: string;
     /**
-     * 有效期起始时间
+     * 获取token时透传的信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    BeginTime: string;
-    /**
-     * 有效期结束时间
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    EndTime: string;
-    /**
-     * 住址
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Address: string;
-    /**
-     * 民族
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Nation: string;
-    /**
-     * 性别
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Sex: string;
-    /**
-     * 身份证 01 中国护照 03 军官证 04 武警证 05 港澳通行证 06 台胞证 07 外国护照 08 士兵证 09 临时身份证 10 户口本 11 警官证 12 外国人永久居留证 13 港澳台居民居住证 14 回乡证 15 大陆居民来往台湾通行证 16 其他证件 99
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    IdType: string;
-    /**
-     * 英文姓名
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    EnName: string;
-    /**
-     * 签发机关
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    SigningOrganization: string;
-    /**
-     * 港澳台居民居住证，通行证号码
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    OtherIdNum: string;
-    /**
-     * 旅行证件国籍
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    Nationality: string;
-    /**
-     * 旅行证件机读区第二行 29~42 位
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    PersonalNumber: string;
-    /**
-     * 旅行证件类的核验结果。JSON格式如下：
-  {"result_issuer ":"签发者证书合法性验证结果 ","result_pape r":"证件安全对象合法性验证 结果 ","result_data" :"防数据篡改验证结果 ","result_chip" :"防证书件芯片被复制验证结果"}
-   0:验证通过，1: 验证不通过，2: 未验证，3:部分通过，当4项核验结果都为0时，表示证件为真
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    CheckMRTD: string;
-    /**
-     * 身份证照片面合成图片
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ImageA: string;
-    /**
-     * 身份证国徽面合成图片
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ImageB: string;
-    /**
-     * 对result code的结果描述
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ResultDescription: string;
+    Extra?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2177,6 +2216,15 @@ export interface IdCardVerificationResponse {
     RequestId?: string;
 }
 /**
+ * GetActionSequence请求参数结构体
+ */
+export interface GetActionSequenceRequest {
+    /**
+     * 默认不需要使用
+     */
+    ActionType?: string;
+}
+/**
  * GetDetectInfoEnhanced请求参数结构体
  */
 export interface GetDetectInfoEnhancedRequest {
@@ -2469,6 +2517,19 @@ export interface IntentionActionResult {
     Details?: Array<IntentionActionResultDetail>;
 }
 /**
+ * GetFaceidRiskInfoToken请求参数结构体
+ */
+export interface GetFaceidRiskInfoTokenRequest {
+    /**
+     * SDK中生成的Meta字符串
+     */
+    Meta?: string;
+    /**
+     * 透传参数 1000长度字符串
+     */
+    Extra?: string;
+}
+/**
  * BankCard2EVerification请求参数结构体
  */
 export interface BankCard2EVerificationRequest {
@@ -2677,13 +2738,26 @@ export interface BankCard4EVerificationRequest {
     Encryption?: Encryption;
 }
 /**
- * GetActionSequence请求参数结构体
+ * GetActionSequence返回参数结构体
  */
-export interface GetActionSequenceRequest {
+export interface GetActionSequenceResponse {
     /**
-     * 默认不需要使用
+     * 动作顺序(2,1 or 1,2) 。1代表张嘴，2代表闭眼。
      */
-    ActionType?: string;
+    ActionSequence?: string;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * GetFaceIdRiskInfo请求参数结构体
+ */
+export interface GetFaceIdRiskInfoRequest {
+    /**
+     * SDK人脸核身流程的标识，调用GetFaceidRiskInfoToken接口时生成。
+     */
+    FaceIdToken: string;
 }
 /**
  * GetLiveCode返回参数结构体

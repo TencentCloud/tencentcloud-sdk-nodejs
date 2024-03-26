@@ -184,7 +184,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeTopicFlowRanking(req: DescribeTopicFlowRankingRequest, cb?: (error: string, rep: DescribeTopicFlowRankingResponse) => void): Promise<DescribeTopicFlowRankingResponse>;
     /**
-     * 修改AC策略，目前只支持预设规则的是否应用到新增topic这一项的修改
+     * 修改ACL策略，目前只支持预设规则的是否应用到新增topic这一项的修改
      */
     ModifyAclRule(req: ModifyAclRuleRequest, cb?: (error: string, rep: ModifyAclRuleResponse) => void): Promise<ModifyAclRuleResponse>;
     /**

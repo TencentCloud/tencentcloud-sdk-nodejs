@@ -1072,7 +1072,7 @@ export interface CreateFolderRequest {
      */
     FolderName: string;
     /**
-     * 新建文件夹的父目录ID
+     * 新建文件夹的父目录ID（根目录为"root"）
      */
     ParentId: string;
     /**

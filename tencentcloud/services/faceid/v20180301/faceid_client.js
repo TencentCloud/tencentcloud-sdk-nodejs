@@ -34,10 +34,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("GetLiveCode", req, cb);
     }
     /**
-     * 使用动作活体检测模式前，需调用本接口获取动作顺序。
+     * 完成验证后，用FaceIdToken调用本接口获取设备风险相关信息，FaceIdToken生成后三天内（3\*24\*3,600秒）可多次拉取。
      */
-    async GetActionSequence(req, cb) {
-        return this.request("GetActionSequence", req, cb);
+    async GetFaceIdRiskInfo(req, cb) {
+        return this.request("GetFaceIdRiskInfo", req, cb);
     }
     /**
      * 查询微信渠道服务（微信小程序、微信原生H5、微信普通H5）的账单明细及计费状态。
@@ -68,6 +68,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async EncryptedPhoneVerification(req, cb) {
         return this.request("EncryptedPhoneVerification", req, cb);
+    }
+    /**
+     * 使用动作活体检测模式前，需调用本接口获取动作顺序。
+     */
+    async GetActionSequence(req, cb) {
+        return this.request("GetActionSequence", req, cb);
     }
     /**
      * 完成验证后，用BizToken调用本接口获取结果信息，BizToken生成后三天内（3\*24\*3,600秒）可多次拉取。
@@ -149,6 +155,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("MobileStatus", req, cb);
     }
     /**
+     * 本接口用于校验姓名、身份证号、身份证有效期的真实性和一致性。
+     */
+    async CheckIdNameDate(req, cb) {
+        return this.request("CheckIdNameDate", req, cb);
+    }
+    /**
      * 本接口用于校验中国移动手机号、姓名和身份证号的真实性和一致性。中国移动支持的手机号段详情请查阅<a href="https://cloud.tencent.com/document/product/1007/46063">运营商类</a>文档。
      */
     async PhoneVerificationCMCC(req, cb) {
@@ -161,10 +173,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("MinorsVerification", req, cb);
     }
     /**
-     * 本接口用于校验姓名、身份证号、身份证有效期的真实性和一致性。
+     * 每次调用人脸核身SDK服务前，需先调用本接口获取SDKToken，用来串联核身流程，在验证完成后，用于获取风险结果信息，该Token仅能核身一次。
      */
-    async CheckIdNameDate(req, cb) {
-        return this.request("CheckIdNameDate", req, cb);
+    async GetFaceidRiskInfoToken(req, cb) {
+        return this.request("GetFaceidRiskInfoToken", req, cb);
     }
     /**
      * 活体检测

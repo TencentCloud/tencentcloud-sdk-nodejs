@@ -5,19 +5,19 @@ export interface TaskDetail {
     /**
      * 错误码。
      */
-    Code: number;
+    Code?: number;
     /**
      * 错误信息。
      */
-    Message: string;
+    Message?: string;
     /**
      * 实例任务 ID。
      */
-    JobId: number;
+    JobId?: number;
     /**
      * 实例任务进度。
      */
-    Progress: number;
+    Progress?: number;
     /**
      * 实例任务状态，可能的值包括：
   "UNDEFINED" - 未定义；
@@ -30,7 +30,7 @@ export interface TaskDetail {
   "PAUSED" - 已暂停。
   "WAITING" - 等待中（可撤销）
      */
-    TaskStatus: string;
+    TaskStatus?: string;
     /**
      * 实例任务类型，可能的值包括：
   "ROLLBACK" - 数据库回档；
@@ -46,24 +46,29 @@ export interface TaskDetail {
   "DROP TABLES" - 删除云数据库库表；
   "SWITCH DR TO MASTER" - 灾备实例提升为主。
      */
-    TaskType: string;
+    TaskType?: string;
     /**
      * 实例任务开始时间。
      */
-    StartTime: string;
+    StartTime?: string;
     /**
      * 实例任务结束时间。
      */
-    EndTime: string;
+    EndTime?: string;
     /**
      * 任务关联的实例 ID。
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    InstanceIds: Array<string>;
+    InstanceIds?: Array<string>;
     /**
      * 异步任务的请求 ID。
      */
-    AsyncRequestId: string;
+    AsyncRequestId?: string;
+    /**
+     * 任务的附加信息。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TaskAttachInfo?: Array<TaskAttachInfo>;
 }
 /**
  * 可用区售卖配置
@@ -3483,7 +3488,7 @@ export interface CreateCloneInstanceResponse {
     /**
      * 异步任务的请求ID，可使用此 ID 查询异步任务的执行结果。
      */
-    AsyncRequestId: string;
+    AsyncRequestId?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -6496,6 +6501,23 @@ export interface DescribeDatabasesResponse {
     RequestId?: string;
 }
 /**
+ * 任务列表中的部分任务支持特定的附加信息
+ */
+export interface TaskAttachInfo {
+    /**
+     * 升级任务：
+  ”FastUpgradeStatus“：表示升级类型。1-原地升级；0-普通升级。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AttachKey?: string;
+    /**
+     * 升级任务：
+  ”FastUpgradeStatus“：表示升级类型。1-原地升级；0-普通升级。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AttachValue?: string;
+}
+/**
  * DescribeRoGroups返回参数结构体
  */
 export interface DescribeRoGroupsResponse {
@@ -8230,6 +8252,14 @@ export interface CreateCloneInstanceRequest {
      * 项目ID，默认项目ID0
      */
     ProjectId?: number;
+    /**
+     * 付费类型，PRE_PAID：包年包月，USED_PAID：按量计费。默认为按量计费
+     */
+    PayType?: string;
+    /**
+     * 实例时长，PayType为PRE_PAID时必传，单位：月，可选值包括 [1,2,3,4,5,6,7,8,9,10,11,12,24,36]。
+     */
+    Period?: number;
 }
 /**
  * CloseCDBProxy请求参数结构体

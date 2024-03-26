@@ -265,13 +265,13 @@ export interface CreateSealRequest {
 }
 
 /**
- * ModifyIntegrationDepartment返回参数结构体
+ * 合同组相关信息，指定合同组子合同和签署方的信息，用于补充动态签署人。
  */
-export interface ModifyIntegrationDepartmentResponse {
+export interface FlowGroupUrlInfo {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 合同组子合同和签署方的信息，用于补充动态签署人。
    */
-  RequestId?: string
+  FlowGroupApproverInfos?: Array<FlowGroupApproverInfo>
 }
 
 /**
@@ -1758,6 +1758,10 @@ export interface CreateFlowGroupByTemplatesResponse {
    */
   FlowIds?: Array<string>
   /**
+   * 合同组签署人信息。
+   */
+  Approvers?: Array<FlowGroupApprovers>
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -2233,6 +2237,10 @@ export interface CreateSchemeUrlRequest {
 注：`生成动态签署人补充链接时必传。`
    */
   RecipientId?: string
+  /**
+   * 合同组相关信息，指定合同组子合同和签署方的信息，用于补充动态签署人。
+   */
+  FlowGroupUrlInfo?: FlowGroupUrlInfo
 }
 
 /**
@@ -2849,6 +2857,10 @@ WEWORKAPP: 企业微信
 注：`补充个人签署方时，若该用户已在电子签完成实名则可通过指定姓名和证件类型、证件号码完成补充。`
    */
   ApproverIdCardNumber?: string
+  /**
+   * 合同流程ID，补充合同组子合同动态签署人时必传。
+   */
+  FlowId?: string
 }
 
 /**
@@ -4048,12 +4060,6 @@ export interface CreateFlowApproversRequest {
    */
   Operator: UserInfo
   /**
-   * 合同流程ID，为32位字符串。
-建议开发者妥善保存此流程ID，以便于顺利进行后续操作。
-可登录腾讯电子签控制台，在 "合同"->"合同中心" 中查看某个合同的FlowId(在页面中展示为合同ID)。
-   */
-  FlowId: string
-  /**
    * 补充企业签署人信息。
 
 - 如果发起方指定的补充签署人是企业微信签署人（ApproverSource=WEWORKAPP），则需要提供企业微信UserId进行补充；
@@ -4061,6 +4067,12 @@ export interface CreateFlowApproversRequest {
 - 如果不指定，则使用姓名和手机号进行补充。
    */
   Approvers: Array<FillApproverInfo>
+  /**
+   * 合同流程ID，为32位字符串。
+建议开发者妥善保存此流程ID，以便于顺利进行后续操作。
+可登录腾讯电子签控制台，在 "合同"->"合同中心" 中查看某个合同的FlowId(在页面中展示为合同ID)。
+   */
+  FlowId?: string
   /**
    * 签署人信息补充方式
 
@@ -4078,6 +4090,10 @@ export interface CreateFlowApproversRequest {
 在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。
    */
   Agent?: Agent
+  /**
+   * 合同流程组的组ID, 在合同流程组场景下，生成合同流程组的签署链接时需要赋值
+   */
+  FlowGroupId?: string
 }
 
 /**
@@ -5019,6 +5035,10 @@ export interface CreateFlowGroupByFilesResponse {
    */
   FlowIds?: Array<string>
   /**
+   * 合同组签署方信息。
+   */
+  Approvers?: Array<FlowGroupApprovers>
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -5534,12 +5554,12 @@ export interface ApproverInfo {
    * 签署方经办人的姓名。
 经办人的姓名将用于身份认证和电子签名，请确保填写的姓名为签署方的真实姓名，而非昵称等代名。
    */
-  ApproverName: string
+  ApproverName?: string
   /**
    * 签署方经办人手机号码， 支持国内手机号11位数字(无需加+86前缀或其他字符)。
 请确认手机号所有方为此合同签署方。
    */
-  ApproverMobile: string
+  ApproverMobile?: string
   /**
    * 组织机构名称。
 请确认该名称与企业营业执照中注册的名称一致。
@@ -6108,6 +6128,16 @@ export interface CreatePrepareFlowResponse {
 }
 
 /**
+ * ModifyIntegrationDepartment返回参数结构体
+ */
+export interface ModifyIntegrationDepartmentResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * GetTaskResultApi返回参数结构体
  */
 export interface GetTaskResultApiResponse {
@@ -6537,6 +6567,20 @@ export interface CreateSealPolicyRequest {
 在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。
    */
   Agent?: Agent
+}
+
+/**
+ * 合同组相关信息，指定合同组子合同和签署方的信息，用于补充动态签署人。
+ */
+export interface FlowGroupApproverInfo {
+  /**
+   * 合同流程ID。
+   */
+  FlowId?: string
+  /**
+   * 签署节点ID，用于生成动态签署人链接完成领取。注：`生成动态签署人补充链接时必传。`
+   */
+  RecipientId?: string
 }
 
 /**
@@ -7161,6 +7205,22 @@ export interface UpdateIntegrationEmployeesRequest {
    * 要跳转的链接类型<ul><li> **HTTP**：跳转电子签小程序的http_url, 短信通知或者H5跳转适合此类型  ，此时返回长链 (默认类型)</li><li>**HTTP_SHORT_URL**：跳转电子签小程序的http_url, 短信通知或者H5跳转适合此类型，此时返回短链</li><li>**APP**： 第三方APP或小程序跳转电子签小程序的path,  APP或者小程序跳转适合此类型</li><li>**H5**： 第三方移动端浏览器进行嵌入，不支持小程序嵌入，过期时间一个月</li></ul>注意：InvitationNotifyType 和 Endpoint 的关系图<table><tbody><tr><td>通知类型（InvitationNotifyType）</td><td>Endpoint</td></tr><tr><td>SMS（默认）</td><td>不需要传递，会将 Endpoint 默认设置为HTTP_SHORT_URL</td></tr><tr><td>H5</td><td>不需要传递，会将 Endpoint 默认设置为 H5</td></tr><tr><td>NONE</td><td>所有 Endpoint 都支持（HTTP_URL/HTTP_SHORT_URL/H5/APP）默认为HTTP_SHORT_URL</td></tr></tbody></table>
    */
   Endpoint?: string
+}
+
+/**
+ * 合同组签署方信息
+ */
+export interface FlowGroupApprovers {
+  /**
+   * 合同流程ID 
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FlowId?: string
+  /**
+   * 签署方信息，包含合同ID和角色ID用于定位RecipientId。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Approvers?: Array<ApproverItem>
 }
 
 /**

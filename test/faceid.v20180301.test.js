@@ -28,9 +28,9 @@ it("faceid.v20180301.GetLiveCode", async function () {
     }
 })
 
-it("faceid.v20180301.GetActionSequence", async function () {
+it("faceid.v20180301.GetFaceIdRiskInfo", async function () {
     try {
-       const data = await client.GetActionSequence({})
+       const data = await client.GetFaceIdRiskInfo({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -81,6 +81,16 @@ it("faceid.v20180301.BankCard4EVerification", async function () {
 it("faceid.v20180301.EncryptedPhoneVerification", async function () {
     try {
        const data = await client.EncryptedPhoneVerification({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("faceid.v20180301.GetActionSequence", async function () {
+    try {
+       const data = await client.GetActionSequence({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -218,6 +228,16 @@ it("faceid.v20180301.MobileStatus", async function () {
     }
 })
 
+it("faceid.v20180301.CheckIdNameDate", async function () {
+    try {
+       const data = await client.CheckIdNameDate({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("faceid.v20180301.PhoneVerificationCMCC", async function () {
     try {
        const data = await client.PhoneVerificationCMCC({})
@@ -238,9 +258,9 @@ it("faceid.v20180301.MinorsVerification", async function () {
     }
 })
 
-it("faceid.v20180301.CheckIdNameDate", async function () {
+it("faceid.v20180301.GetFaceidRiskInfoToken", async function () {
     try {
-       const data = await client.CheckIdNameDate({})
+       const data = await client.GetFaceidRiskInfoToken({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

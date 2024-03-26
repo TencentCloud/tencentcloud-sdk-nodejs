@@ -351,6 +351,15 @@ export interface ChannelBatchCancelFlowsResponse {
     RequestId?: string;
 }
 /**
+ * 合同组相关信息，指定合同组子合同和签署方的信息，用于补充动态签署人。
+ */
+export interface FlowGroupUrlInfo {
+    /**
+     * 合同组子合同和签署方的信息，用于补充动态签署人。
+     */
+    FlowGroupApproverInfos?: Array<FlowGroupApproverInfo>;
+}
+/**
  * ChannelDescribeSignFaceVideo请求参数结构体
  */
 export interface ChannelDescribeSignFaceVideoRequest {
@@ -470,6 +479,10 @@ export interface ChannelCreateFlowGroupByTemplatesResponse {
   如果文档需要异步合成，此字段会返回该异步任务的任务信息，后续可以通过ChannelGetTaskResultApi接口查询任务详情；
      */
     TaskInfos?: Array<TaskInfo>;
+    /**
+     * 合同组签署方信息
+     */
+    Approvers?: Array<FlowGroupApprovers>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2430,6 +2443,19 @@ export interface ChannelRole {
     PermissionGroups?: Array<PermissionGroup>;
 }
 /**
+ * 合同组相关信息，指定合同组子合同和签署方的信息，用于补充动态签署人。
+ */
+export interface FlowGroupApproverInfo {
+    /**
+     * 合同流程ID。
+     */
+    FlowId?: string;
+    /**
+     * 签署节点ID，用于生成动态签署人链接完成领取。注：`生成动态签署人补充链接时必传。`
+     */
+    RecipientId?: string;
+}
+/**
  * 流程中签署方和填写方(如果有填写控件存证时)的信息
  */
 export interface Recipient {
@@ -3357,6 +3383,10 @@ export interface FillApproverInfo {
   注：`补充个人签署方时，若该用户已在电子签完成实名则可通过指定姓名和证件类型、证件号码完成补充。`
      */
     ApproverIdCardNumber?: string;
+    /**
+     * 合同流程ID，补充合同组子合同动态签署人时必传。
+     */
+    FlowId?: string;
 }
 /**
  * 意愿核身点头确认模式结果详细数据
@@ -4396,6 +4426,10 @@ export interface CreateSignUrlsRequest {
   注：`使用此参数需要与flow_ids数量一致并且一一对应, 表示在对应同序号的流程中的参与角色ID`，
      */
     RecipientIds?: Array<string>;
+    /**
+     * 合同组相关信息，指定合同组子合同和签署方的信息，用于补充动态签署人。
+     */
+    FlowGroupUrlInfo?: FlowGroupUrlInfo;
 }
 /**
  * 企业认证信息参数， 需要保证这些参数跟营业执照中的信息一致。
@@ -5880,6 +5914,10 @@ export interface ChannelCreateFlowGroupByFilesResponse {
      */
     FlowIds?: Array<string>;
     /**
+     * 合同组签署方信息。
+     */
+    Approvers?: Array<FlowGroupApprovers>;
+    /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
@@ -6412,6 +6450,21 @@ export interface ChannelModifyRoleRequest {
      * 权限树，权限树内容 PermissionGroups 可参考接口 ChannelDescribeRoles的输出
      */
     PermissionGroups?: Array<PermissionGroup>;
+}
+/**
+ * 合同组签署方信息
+ */
+export interface FlowGroupApprovers {
+    /**
+     * 合同流程ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    FlowId?: string;
+    /**
+     * 签署方信息，包含合同ID和角色ID用于定位RecipientId。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Approvers?: Array<ApproverItem>;
 }
 /**
  * ModifyFlowDeadline请求参数结构体
@@ -7596,10 +7649,6 @@ export interface ChannelCreateFlowApproversRequest {
      */
     Agent: Agent;
     /**
-     * 合同流程ID，为32位字符串。 建议开发者妥善保存此流程ID，以便于顺利进行后续操作。 可登录腾讯电子签控制台，在 "合同"->"合同中心" 中查看某个合同的FlowId(在页面中展示为合同ID)。
-     */
-    FlowId: string;
-    /**
      * 补充企业签署人信息。
   
   - 如果发起方指定的补充签署人是企业签署人，则需要提供企业名称或者企业OpenId；
@@ -7607,6 +7656,10 @@ export interface ChannelCreateFlowApproversRequest {
   - 如果不指定，则使用姓名和手机号进行补充。
      */
     Approvers: Array<FillApproverInfo>;
+    /**
+     * 合同流程ID，为32位字符串。 建议开发者妥善保存此流程ID，以便于顺利进行后续操作。 可登录腾讯电子签控制台，在 "合同"->"合同中心" 中查看某个合同的FlowId(在页面中展示为合同ID)。
+     */
+    FlowId?: string;
     /**
      * 签署人信息补充方式
   
@@ -7617,6 +7670,10 @@ export interface ChannelCreateFlowApproversRequest {
      * 操作人信息
      */
     Operator?: UserInfo;
+    /**
+     * 合同流程组的组ID, 在合同流程组场景下，生成合同流程组的签署链接时需要赋值
+     */
+    FlowGroupId?: string;
 }
 /**
  * ChannelUpdateSealStatus返回参数结构体

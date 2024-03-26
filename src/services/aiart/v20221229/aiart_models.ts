@@ -32,6 +32,44 @@ export interface ImageToImageResponse {
 }
 
 /**
+ * SubmitTextToImageProJob请求参数结构体
+ */
+export interface SubmitTextToImageProJobRequest {
+  /**
+   * 文本描述。 
+算法将根据输入的文本智能生成与之相关的图像。 
+不能为空，推荐使用中文。最多可传100个 utf-8 字符。
+   */
+  Prompt: string
+  /**
+   * 绘画风格。
+请在 [文生图（高级版）风格列表](https://cloud.tencent.com/document/product/1668/104567) 中选择期望的风格，传入风格编号。
+不传默认不指定风格。
+   */
+  Style?: string
+  /**
+   * 生成图分辨率。
+支持生成以下分辨率的图片：768:768（1:1）、768:1024（3:4）、1024:768（4:3）、1024:1024（1:1）、720:1280（9:16）、1280:720（16:9）、768:1280（3:5）、1280:768（5:3），不传默认使用1024:1024。
+   */
+  Resolution?: string
+  /**
+   * 为生成结果图添加显式水印标识的开关，默认为1。  
+1：添加。  
+0：不添加。  
+其他数值：默认按1处理。  
+建议您使用显著标识来提示结果图使用了 AI 绘画技术，是 AI 生成的图片。
+   */
+  LogoAdd?: number
+  /**
+   * 文生图引擎，默认使用engine1。 
+取值：  
+engine1  
+engine2
+   */
+  Engine?: string
+}
+
+/**
  * logo参数
  */
 export interface LogoParam {
@@ -138,6 +176,57 @@ export interface LogoRect {
 }
 
 /**
+ * QueryTextToImageProJob返回参数结构体
+ */
+export interface QueryTextToImageProJobResponse {
+  /**
+   * 当前任务状态码：
+1：排队中、3：处理中、5：处理失败、7：处理完成。
+
+   */
+  JobStatusCode?: string
+  /**
+   * 当前任务状态：排队中、处理中、处理失败或者处理完成。
+
+   */
+  JobStatusMsg?: string
+  /**
+   * 任务处理失败错误码。
+
+   */
+  JobErrorCode?: string
+  /**
+   * 任务处理失败错误信息。
+
+   */
+  JobErrorMsg?: string
+  /**
+   * 生成图 URL 列表，有效期1小时，请及时保存。
+
+   */
+  ResultImage?: Array<string>
+  /**
+   * 结果 detail 数组，Success 代表成功。
+
+   */
+  ResultDetails?: Array<string>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * QueryTextToImageProJob请求参数结构体
+ */
+export interface QueryTextToImageProJobRequest {
+  /**
+   * 任务 ID。
+   */
+  JobId: string
+}
+
+/**
  * 返回结果配置
  */
 export interface ResultConfig {
@@ -149,6 +238,20 @@ export interface ResultConfig {
 智能图生图支持生成以下分辨率的图片：origin（与输入图分辨率一致）、768:768（1:1）、768:1024（3:4）、1024:768（4:3），不传默认使用origin，如果指定生成的长宽比与输入图长宽比差异过大可能导致图片内容被裁剪
    */
   Resolution?: string
+}
+
+/**
+ * SubmitTextToImageProJob返回参数结构体
+ */
+export interface SubmitTextToImageProJobResponse {
+  /**
+   * 任务 ID。
+   */
+  JobId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

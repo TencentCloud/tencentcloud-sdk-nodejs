@@ -17345,7 +17345,7 @@ export interface ModifyTaskInfoResponse {
     /**
      * 执行结果
      */
-    Data: boolean;
+    Data?: boolean;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -19660,6 +19660,7 @@ export interface ModifyTaskInfoRequest {
     BrokerIp?: string;
     /**
      * 责任人
+     * @deprecated
      */
     InCharge?: string;
     /**
@@ -19686,6 +19687,18 @@ export interface ModifyTaskInfoRequest {
      * 依赖配置
      */
     DependencyConfigDTOs?: Array<DependencyConfig>;
+    /**
+     * 执行耗时
+     */
+    ExecutionTTL?: number;
+    /**
+     * 脚本是否改变
+     */
+    ScriptChange?: boolean;
+    /**
+     * 责任人id
+     */
+    InChargeIds?: Array<string>;
 }
 /**
  * DescribeOperateOpsTasks请求参数结构体

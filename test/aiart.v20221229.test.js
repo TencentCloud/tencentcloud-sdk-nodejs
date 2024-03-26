@@ -18,6 +18,26 @@ const client = new tencentcloud.aiart.v20221229.Client({
 })
 describe("aiart.v20221229.test.js", function () {
 
+it("aiart.v20221229.QueryTextToImageProJob", async function () {
+    try {
+       const data = await client.QueryTextToImageProJob({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("aiart.v20221229.SubmitTextToImageProJob", async function () {
+    try {
+       const data = await client.SubmitTextToImageProJob({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("aiart.v20221229.TextToImage", async function () {
     try {
        const data = await client.TextToImage({})

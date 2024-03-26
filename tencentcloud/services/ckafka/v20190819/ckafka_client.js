@@ -292,7 +292,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeTopicFlowRanking", req, cb);
     }
     /**
-     * 修改AC策略，目前只支持预设规则的是否应用到新增topic这一项的修改
+     * 修改ACL策略，目前只支持预设规则的是否应用到新增topic这一项的修改
      */
     async ModifyAclRule(req, cb) {
         return this.request("ModifyAclRule", req, cb);
