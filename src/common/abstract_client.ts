@@ -12,6 +12,7 @@ import { HttpConnection } from "./http/http_connection"
 import TencentCloudSDKHttpException from "./exception/tencent_cloud_sdk_exception"
 import { Response } from "node-fetch"
 import { SSEResponseModel } from "./sse_response_model"
+import { v4 as uuidv4 } from "uuid"
 
 export type ResponseCallback<TReuslt = any> = (error: string, rep: TReuslt) => void
 export interface RequestOptions extends Partial<Pick<HttpProfile, "headers">> {
@@ -187,6 +188,20 @@ export class AbstractClient {
     }
     let params = this.mergeData(req)
     params = await this.formatRequestData(action, params)
+
+    const headers = Object.assign({}, this.profile.httpProfile.headers, options.headers)
+    let traceId = ""
+    for (let key in headers) {
+      if (key.toLowerCase() === "x-tc-traceid") {
+        traceId = headers[key]
+        break
+      }
+    }
+    if (!traceId) {
+      traceId = uuidv4()
+      headers["X-TC-TraceId"] = traceId
+    }
+
     let res
     try {
       res = await HttpConnection.doRequest({
@@ -194,13 +209,13 @@ export class AbstractClient {
         url: this.profile.httpProfile.protocol + this.endpoint + this.path,
         data: params,
         timeout: this.profile.httpProfile.reqTimeout * 1000,
-        headers: Object.assign({}, this.profile.httpProfile.headers, options.headers),
+        headers,
         agent: this.profile.httpProfile.agent,
         proxy: this.profile.httpProfile.proxy,
         signal: options.signal,
       })
     } catch (error) {
-      throw new TencentCloudSDKHttpException((error as any).message)
+      throw new TencentCloudSDKHttpException((error as any).message, "", traceId)
     }
     return this.parseResponse(res)
   }
@@ -213,6 +228,19 @@ export class AbstractClient {
     params: any,
     options: RequestOptions = {}
   ): Promise<ResponseData> {
+    const headers = Object.assign({}, this.profile.httpProfile.headers, options.headers)
+    let traceId = ""
+    for (let key in headers) {
+      if (key.toLowerCase() === "x-tc-traceid") {
+        traceId = headers[key]
+        break
+      }
+    }
+    if (!traceId) {
+      traceId = uuidv4()
+      headers["X-TC-TraceId"] = traceId
+    }
+
     let res
     try {
       const credential = await this.getCredential()
@@ -231,20 +259,21 @@ export class AbstractClient {
         token: credential.token,
         requestClient: this.sdkVersion,
         language: this.profile.language,
-        headers: Object.assign({}, this.profile.httpProfile.headers, options.headers),
+        headers,
         agent: this.profile.httpProfile.agent,
         proxy: this.profile.httpProfile.proxy,
         signal: options.signal,
       })
     } catch (e) {
-      throw new TencentCloudSDKHttpException((e as any).message)
+      throw new TencentCloudSDKHttpException((e as any).message, "", traceId)
     }
     return this.parseResponse(res)
   }
 
   private async parseResponse(res: Response): Promise<ResponseData> {
+    const traceId = res.headers.get("x-tc-traceid")
     if (res.status !== 200) {
-      const tcError = new TencentCloudSDKHttpException(res.statusText)
+      const tcError = new TencentCloudSDKHttpException(res.statusText, "", traceId)
       tcError.httpCode = res.status
       throw tcError
     } else {
@@ -255,7 +284,8 @@ export class AbstractClient {
         if (data.Response.Error) {
           const tcError = new TencentCloudSDKHttpException(
             data.Response.Error.Message,
-            data.Response.RequestId
+            data.Response.RequestId,
+            traceId
           )
           tcError.code = data.Response.Error.Code
           throw tcError

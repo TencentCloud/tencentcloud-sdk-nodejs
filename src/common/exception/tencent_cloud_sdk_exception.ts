@@ -8,6 +8,11 @@ export default class TencentCloudSDKHttpException extends Error {
   requestId: string
 
   /**
+   * 请求traceId
+   */
+  traceId: string
+
+  /**
    * http状态码
    */
   httpCode?: number
@@ -17,9 +22,10 @@ export default class TencentCloudSDKHttpException extends Error {
    */
   code?: string
 
-  constructor(error: string, requestId = "") {
+  constructor(error: string, requestId = "", traceId = "") {
     super(error)
     this.requestId = requestId || ""
+    this.traceId = traceId || ""
   }
 
   getMessage(): string {
@@ -30,13 +36,19 @@ export default class TencentCloudSDKHttpException extends Error {
     return this.requestId
   }
 
+  getTraceId(): string {
+    return this.traceId
+  }
+
   toString(): string {
     return (
       "[TencentCloudSDKException]" +
       "message:" +
       this.getMessage() +
       "  requestId:" +
-      this.getRequestId()
+      this.getRequestId() +
+      "  traceId:" +
+      this.getTraceId()
     )
   }
 
@@ -46,7 +58,9 @@ export default class TencentCloudSDKHttpException extends Error {
       "message:" +
       this.getMessage() +
       "  requestId:" +
-      this.getRequestId()
+      this.getRequestId() +
+      "  traceId:" +
+      this.getTraceId()
     )
   }
 }
