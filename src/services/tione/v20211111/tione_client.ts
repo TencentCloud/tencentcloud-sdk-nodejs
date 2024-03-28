@@ -65,6 +65,7 @@ import {
   RowValue,
   CreateBatchTaskRequest,
   ResourceInstanceRunningJobInfo,
+  ImageFIlter,
   DescribeLatestTrainingMetricsResponse,
   DefaultNginxGatewayCallInfo,
   FilterLabelInfo,
@@ -395,7 +396,7 @@ export class Client extends AbstractClient {
    * 获取内置镜像列表
    */
   async DescribeBuildInImages(
-    req?: DescribeBuildInImagesRequest,
+    req: DescribeBuildInImagesRequest,
     cb?: (error: string, rep: DescribeBuildInImagesResponse) => void
   ): Promise<DescribeBuildInImagesResponse> {
     return this.request("DescribeBuildInImages", req, cb)

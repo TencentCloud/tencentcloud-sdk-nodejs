@@ -192,6 +192,10 @@ export interface CreateDatasourceRequest {
      * 腾讯云私有网络标识
      */
     VpcId?: string;
+    /**
+     * 操作权限限制
+     */
+    OperationAuthLimit?: Array<string>;
 }
 /**
  * DeleteDatasource请求参数结构体
@@ -1156,6 +1160,10 @@ export interface ModifyProjectRequest {
      * 2
      */
     PanelScope?: string;
+    /**
+     * 项目管理平台
+     */
+    ManagePlatform?: string;
 }
 /**
  * ModifyUserRoleProject请求参数结构体
@@ -2338,4 +2346,8 @@ export interface CreateProjectRequest {
      * 默认看板
      */
     DefaultPanelType?: number;
+    /**
+     * 管理平台
+     */
+    ManagePlatform?: string;
 }

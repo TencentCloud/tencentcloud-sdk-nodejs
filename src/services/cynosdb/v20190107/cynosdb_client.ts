@@ -244,6 +244,7 @@ import {
   ModifyProxyDescResponse,
   DbTable,
   ModifyClusterSlaveZoneResponse,
+  RollbackToNewClusterRequest,
   BinlogItem,
   ModifyProxyDescRequest,
   ReloadBalanceProxyNodeResponse,
@@ -347,6 +348,7 @@ import {
   ModifyInstanceParamResponse,
   TemplateParamInfo,
   CreateBackupResponse,
+  RollbackToNewClusterResponse,
   ResourcePackage,
   DescribeBinlogSaveDaysResponse,
   BillingResourceInfo,
@@ -960,6 +962,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateAccountsResponse) => void
   ): Promise<CreateAccountsResponse> {
     return this.request("CreateAccounts", req, cb)
+  }
+
+  /**
+   * 回档到新集群
+   */
+  async RollbackToNewCluster(
+    req: RollbackToNewClusterRequest,
+    cb?: (error: string, rep: RollbackToNewClusterResponse) => void
+  ): Promise<RollbackToNewClusterResponse> {
+    return this.request("RollbackToNewCluster", req, cb)
   }
 
   /**

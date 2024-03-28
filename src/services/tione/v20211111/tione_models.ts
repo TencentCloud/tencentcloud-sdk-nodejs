@@ -1855,6 +1855,24 @@ export interface ResourceInstanceRunningJobInfo {
 }
 
 /**
+ * 镜像列表过滤
+ */
+export interface ImageFIlter {
+  /**
+   * 过滤字段名称
+   */
+  Name: string
+  /**
+   * 过滤值
+   */
+  Values: Array<string>
+  /**
+   * 是否反选
+   */
+  Negative?: boolean
+}
+
+/**
  * DescribeLatestTrainingMetrics返回参数结构体
  */
 export interface DescribeLatestTrainingMetricsResponse {
@@ -2190,7 +2208,12 @@ export interface DescribeModelAccelerateVersionsResponse {
 /**
  * DescribeBuildInImages请求参数结构体
  */
-export type DescribeBuildInImagesRequest = null
+export interface DescribeBuildInImagesRequest {
+  /**
+   * 镜像过滤器
+   */
+  ImageFilters?: Array<ImageFIlter>
+}
 
 /**
  * notebook ssh端口配置
@@ -5055,6 +5078,16 @@ DISABLE_NOTIFY_AND_MANUAL_RENEW：手动续费(取消自动续费)且到期不�
    * 纳管cvmid
    */
   CvmInstanceId?: string
+  /**
+   * 部署失败错误码
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ErrCode?: string
+  /**
+   * 部署失败错误信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ErrMsg?: string
 }
 
 /**

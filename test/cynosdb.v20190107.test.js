@@ -588,6 +588,16 @@ it("cynosdb.v20190107.CreateAccounts", async function () {
     }
 })
 
+it("cynosdb.v20190107.RollbackToNewCluster", async function () {
+    try {
+       const data = await client.RollbackToNewCluster({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cynosdb.v20190107.CreateResourcePackage", async function () {
     try {
        const data = await client.CreateResourcePackage({})

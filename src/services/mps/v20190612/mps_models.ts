@@ -1620,20 +1620,20 @@ export interface AudioTemplateInfoForUpdate {
 当不需要对音频进行转码时，可选值为：
 <li>copy。</li>
 当外层参数 Container 为 mp3 时，可选值为：
-<li>libmp3lame。</li>
+<li>mp3。</li>
 当外层参数 Container 为 ogg 或 flac 时，可选值为：
 <li>flac。</li>
 当外层参数 Container 为 m4a 时，可选值为：
-<li>libfdk_aac；</li>
-<li>libmp3lame；</li>
+<li>aac；</li>
+<li>mp3；</li>
 <li>ac3。</li>
 当外层参数 Container 为 mp4 或 flv 时，可选值为：
-<li>libfdk_aac：更适合 mp4；</li>
-<li>libmp3lame：更适合 flv；</li>
+<li>aac：更适合 mp4；</li>
+<li>mp3：更适合 flv；</li>
 <li>mp2。</li>
 当外层参数 Container 为 hls 时，可选值为：
-<li>libfdk_aac；</li>
-<li>libmp3lame。</li>
+<li>aac；</li>
+<li>mp3。</li>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Codec?: string
@@ -1974,20 +1974,20 @@ export interface AudioTemplateInfo {
 当不需要对音频进行转码时，可选值为：
 <li>copy。</li>
 当外层参数 Container 为 mp3 时，可选值为：
-<li>libmp3lame。</li>
+<li>mp3。</li>
 当外层参数 Container 为 ogg 或 flac 时，可选值为：
 <li>flac。</li>
 当外层参数 Container 为 m4a 时，可选值为：
-<li>libfdk_aac；</li>
-<li>libmp3lame；</li>
+<li>aac；</li>
+<li>mp3；</li>
 <li>ac3。</li>
 当外层参数 Container 为 mp4 或 flv 时，可选值为：
-<li>libfdk_aac：更适合 mp4；</li>
-<li>libmp3lame：更适合 flv；</li>
+<li>aac：更适合 mp4；</li>
+<li>mp3：更适合 flv；</li>
 <li>mp2。</li>
 当外层参数 Container 为 hls 时，可选值为：
-<li>libfdk_aac；</li>
-<li>libmp3lame。</li>
+<li>aac；</li>
+<li>mp3。</li>
    */
   Codec: string
   /**
@@ -2468,7 +2468,7 @@ export interface HdrConfig {
 <li>HDR10</li>
 <li>HLG</li>
 默认值：HDR10。
-注意：video的编码方式需要为libx265；
+注意：video的编码方式需要为h265；
 注意：视频编码位深为10。
 注意：此字段可能返回 null，表示取不到有效值。
    */
@@ -4906,8 +4906,8 @@ export interface LiveStreamTaskNotifyConfig {
 export interface VideoTemplateInfo {
   /**
    * 视频流的编码格式，可选值：
-<li>libx264：H.264 编码</li>
-<li>libx265：H.265 编码</li>
+<li>h264：H.264 编码</li>
+<li>h265：H.265 编码</li>
 <li>av1：AOMedia Video 1 编码</li>
 注意：目前 H.265 编码必须指定分辨率，并且需要在 640*480 以内。
 注意：av1 编码容器目前只支持 mp4 。
@@ -6201,7 +6201,14 @@ export interface SnapshotByTimeOffsetTaskInput {
    */
   OutputStorage?: TaskOutputStorage
   /**
-   * 时间点截图后图片文件的输出路径，可以为相对路径或者绝对路径。如果不填，则默认为相对路径：`{inputName}_snapshotByTimeOffset_{definition}_{number}.{format}`。
+   * 时间点截图后图片文件的输出路径，可以为相对路径或者绝对路径。
+若需定义输出路径，路径需以`.{format}`结尾。变量名请参考 [文件名变量说明](https://cloud.tencent.com/document/product/862/37039)。
+相对路径示例：
+<li>文件名_{变量名}.{format}</li>
+<li>文件名.{format}</li>
+绝对路径示例：
+<li>/自定义路径/文件名_{变量名}.{format}</li>
+如果不填，则默认为相对路径：`{inputName}_snapshotByTimeOffset_{definition}_{number}.{format}`。
    */
   OutputObjectPath?: string
   /**
@@ -6225,7 +6232,14 @@ export interface ImageSpriteTaskInput {
    */
   OutputStorage?: TaskOutputStorage
   /**
-   * 截取雪碧图后，雪碧图图片文件的输出路径，可以为相对路径或者绝对路径。如果不填，则默认为相对路径：`{inputName}_imageSprite_{definition}_{number}.{format}`。
+   * 截取雪碧图后，雪碧图图片文件的输出路径，可以为相对路径或者绝对路径。
+若需定义输出路径，路径需以`.{format}`结尾。变量名请参考 [文件名变量说明](https://cloud.tencent.com/document/product/862/37039)。
+相对路径示例：
+<li>文件名_{变量名}.{format}</li>
+<li>文件名.{format}</li>
+绝对路径示例：
+<li>/自定义路径/文件名_{变量名}.{format}</li>
+如果不填，则默认为相对路径：`{inputName}_imageSprite_{definition}_{number}.{format}`。
    */
   OutputObjectPath?: string
   /**
@@ -7150,7 +7164,14 @@ export interface AnimatedGraphicTaskInput {
    */
   OutputStorage?: TaskOutputStorage
   /**
-   * 转动图后文件的输出路径，可以为相对路径或者绝对路径。如果不填，则默认为相对路径：`{inputName}_animatedGraphic_{definition}.{format}`。
+   * 转动图后文件的输出路径，可以为相对路径或者绝对路径。
+若需定义输出路径，路径需以`.{format}`结尾。变量名请参考 [文件名变量说明](https://cloud.tencent.com/document/product/862/37039)。
+相对路径示例：
+<li>文件名_{变量名}.{format}</li>
+<li>文件名.{format}</li>
+绝对路径示例：
+<li>/自定义路径/文件名_{变量名}.{format}</li>
+如果不填，则默认为相对路径：`{inputName}_animatedGraphic_{definition}.{format}`。
    */
   OutputObjectPath?: string
 }
@@ -9297,7 +9318,15 @@ export interface TranscodeTaskInput {
    */
   OutputStorage?: TaskOutputStorage
   /**
-   * 转码后主文件的输出路径，可以为相对路径或者绝对路径。如果不填，则默认为相对路径：`{inputName}_transcode_{definition}.{format}`。
+   * 转码后主文件的输出路径，可以为相对路径或者绝对路径。
+若需定义输出路径，路径需以`.{format}`结尾。变量名请参考 [文件名变量说明](https://cloud.tencent.com/document/product/862/37039)。
+相对路径示例：
+<li>文件名_{变量名}.{format}</li>
+<li>文件名.{format}</li>
+绝对路径示例：
+<li>/自定义路径/文件名_{变量名}.{format}</li>
+如果不填，则默认为相对路径：`{inputName}_transcode_{definition}.{format}`。
+
    */
   OutputObjectPath?: string
   /**
@@ -10504,8 +10533,8 @@ export interface ExpressionConfigInfo {
 export interface VideoTemplateInfoForUpdate {
   /**
    * 视频流的编码格式，可选值：
-<li>libx264：H.264 编码</li>
-<li>libx265：H.265 编码</li>
+<li>h264：H.264 编码</li>
+<li>h265：H.265 编码</li>
 <li>av1：AOMedia Video 1 编码</li>
 注意：目前 H.265 编码必须指定分辨率，并且需要在 640*480 以内。
 注意：av1 编码容器目前只支持 mp4 。
@@ -10655,7 +10684,14 @@ export interface AdaptiveDynamicStreamingTaskInput {
    */
   OutputStorage?: TaskOutputStorage
   /**
-   * 转自适应码流后，manifest 文件的输出路径，可以为相对路径或者绝对路径。如果不填，则默认为相对路径：`{inputName}_adaptiveDynamicStreaming_{definition}.{format}`。
+   * 转自适应码流后，manifest 文件的输出路径，可以为相对路径或者绝对路径。
+若需定义输出路径，路径需以`.{format}`结尾。变量名请参考 [文件名变量说明](https://cloud.tencent.com/document/product/862/37039)。
+相对路径示例：
+<li>文件名_{变量名}.{format}</li>
+<li>文件名.{format}</li>
+绝对路径示例：
+<li>/自定义路径/文件名_{变量名}.{format}</li>
+如果不填，则默认为相对路径：{inputName}_adaptiveDynamicStreaming_{definition}.{format}。
    */
   OutputObjectPath?: string
   /**
@@ -13916,7 +13952,15 @@ export interface SampleSnapshotTaskInput {
    */
   OutputStorage?: TaskOutputStorage
   /**
-   * 采样截图后图片文件的输出路径，可以为相对路径或者绝对路径。如果不填，则默认为相对路径：`{inputName}_sampleSnapshot_{definition}_{number}.{format}`。
+   * 采样截图后图片文件的输出路径，可以为相对路径或者绝对路径。
+若需定义输出路径，路径需以`.{format}`结尾。变量名请参考 [文件名变量说明](https://cloud.tencent.com/document/product/862/37039)。
+相对路径示例：
+<li>文件名_{变量名}.{format}</li>
+<li>文件名.{format}</li>
+绝对路径示例：
+<li>/自定义路径/文件名_{变量名}.{format}</li>
+如果不填，则默认为相对路径：`{inputName}_sampleSnapshot_{definition}_{number}.{format}`。
+
    */
   OutputObjectPath?: string
   /**

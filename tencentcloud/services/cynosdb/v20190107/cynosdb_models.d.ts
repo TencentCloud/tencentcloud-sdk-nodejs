@@ -5695,6 +5695,100 @@ export interface ModifyClusterSlaveZoneResponse {
     RequestId?: string;
 }
 /**
+ * RollbackToNewCluster请求参数结构体
+ */
+export interface RollbackToNewClusterRequest {
+    /**
+     * 可用区
+     */
+    Zone: string;
+    /**
+     * 回档时，传入源集群ID，用于查找源poolId
+     */
+    OriginalClusterId: string;
+    /**
+     * 集群名称，长度小于64个字符，每个字符取值范围：大/小写字母，数字，特殊符号（'-','_','.'）
+     */
+    ClusterName?: string;
+    /**
+     * 所属VPC网络ID
+     */
+    UniqVpcId?: string;
+    /**
+     * 所属子网ID
+     */
+    UniqSubnetId?: string;
+    /**
+     * 是否自动选择代金券 1是 0否 默认为0
+     */
+    AutoVoucher?: number;
+    /**
+     * Db类型
+  当DbType为MYSQL时可选(默认NORMAL)：
+  <li>NORMAL</li>
+  <li>SERVERLESS</li>
+     */
+    DbMode?: string;
+    /**
+     * 当DbMode为SEVERLESS时必填
+  cpu最小值，可选范围参考DescribeServerlessInstanceSpecs接口返回
+     */
+    MinCpu?: number;
+    /**
+     * 当DbMode为SEVERLESS时必填：
+  cpu最大值，可选范围参考DescribeServerlessInstanceSpecs接口返回
+     */
+    MaxCpu?: number;
+    /**
+     * 当DbMode为SEVERLESS时，指定集群是否自动暂停，可选范围
+  <li>yes</li>
+  <li>no</li>
+  默认值:yes
+     */
+    AutoPause?: string;
+    /**
+     * 当DbMode为SEVERLESS时，指定集群自动暂停的延迟，单位秒，可选范围[600,691200]
+  默认值:600
+     */
+    AutoPauseDelay?: number;
+    /**
+     * 安全组id数组
+     */
+    SecurityGroupIds?: Array<string>;
+    /**
+     * 告警策略Id数组
+     */
+    AlarmPolicyIds?: Array<string>;
+    /**
+     * 参数数组，暂时支持character_set_server （utf8｜latin1｜gbk｜utf8mb4） ，lower_case_table_names，1-大小写不敏感，0-大小写敏感
+     */
+    ClusterParams?: Array<ParamItem>;
+    /**
+     * 0-下单并支付 1-下单
+     */
+    DealMode?: number;
+    /**
+     * 参数模板ID，可以通过查询参数模板信息DescribeParamTemplates获得参数模板ID
+     */
+    ParamTemplateId?: number;
+    /**
+     * 集群创建需要绑定的tag数组信息
+     */
+    ResourceTags?: Array<Tag>;
+    /**
+     * 实例初始化配置信息，主要用于购买集群时选不同规格实例
+     */
+    InstanceInitInfos?: Array<InstanceInitInfo>;
+    /**
+     * 快照回档，表示snapshotId；时间点回档，表示queryId，为0，表示需要判断时间点是否有效
+     */
+    RollbackId?: number;
+    /**
+     * 时间点回档，指定时间；快照回档，快照时间
+     */
+    ExpectTime?: string;
+}
+/**
  * Binlog描述
  */
 export interface BinlogItem {
@@ -8284,6 +8378,40 @@ export interface CreateBackupResponse {
      * 异步任务流ID
      */
     FlowId?: number;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * RollbackToNewCluster返回参数结构体
+ */
+export interface RollbackToNewClusterResponse {
+    /**
+     * 冻结流水ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TranId?: string;
+    /**
+     * 订单号
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DealNames?: Array<string>;
+    /**
+     * 资源ID列表（该字段已不再维护，请使用dealNames字段查询接口DescribeResourcesByDealName获取资源ID）
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ResourceIds?: Array<string>;
+    /**
+     * 集群ID列表（该字段已不再维护，请使用dealNames字段查询接口DescribeResourcesByDealName获取集群ID）
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ClusterIds?: Array<string>;
+    /**
+     * 大订单号
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    BigDealIds?: Array<string>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */

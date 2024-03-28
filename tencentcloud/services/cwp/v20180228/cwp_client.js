@@ -1729,7 +1729,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeTrialReport", req, cb);
     }
     /**
-     * 导出网络攻击日志
+     * ExportAttackEvents接口替代
+
+导出网络攻击日志
      */
     async ExportAttackLogs(req, cb) {
         return this.request("ExportAttackLogs", req, cb);
@@ -3013,7 +3015,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ExportReverseShellEvents", req, cb);
     }
     /**
-     * 删除网络攻击日志
+     * ModifyEventAttackStatus 接口替代
+
+删除网络攻击日志
      */
     async DeleteAttackLogs(req, cb) {
         return this.request("DeleteAttackLogs", req, cb);

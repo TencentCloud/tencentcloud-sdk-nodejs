@@ -50,7 +50,7 @@ export declare class Client extends AbstractClient {
     /**
      * 获取内置镜像列表
      */
-    DescribeBuildInImages(req?: DescribeBuildInImagesRequest, cb?: (error: string, rep: DescribeBuildInImagesResponse) => void): Promise<DescribeBuildInImagesResponse>;
+    DescribeBuildInImages(req: DescribeBuildInImagesRequest, cb?: (error: string, rep: DescribeBuildInImagesResponse) => void): Promise<DescribeBuildInImagesResponse>;
     /**
      * 启动Notebook
      */

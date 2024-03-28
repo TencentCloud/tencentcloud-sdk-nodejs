@@ -731,6 +731,18 @@ export interface ModifyBaselineRuleRequest {
      * <li>ItemName - string - 是否必填：否 - 项名称</li>
      */
     Filters?: Array<Filter>;
+    /**
+     * 0:检测项，1:检测项分类
+     */
+    IdType?: number;
+    /**
+     * 需要排除的检测项id
+     */
+    ExcludeIds?: Array<number | bigint>;
+    /**
+     * 勾选的检测项分类
+     */
+    CategoryIds?: Array<number | bigint>;
 }
 /**
  * SearchLog返回参数结构体
@@ -4712,6 +4724,11 @@ export interface DescribeBaselineItemInfoResponse {
      */
     Total?: number;
     /**
+     * 基线分类列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CategoryList?: Array<BaselineItemsCategory>;
+    /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
@@ -7523,15 +7540,20 @@ export interface BaselineCategory {
     /**
      * 分类Id
      */
-    CategoryId: number;
+    CategoryId?: number;
     /**
      * 分类名称
      */
-    CategoryName: string;
+    CategoryName?: string;
     /**
      * 父分类ID,如果为0则没有父分类
      */
-    ParentCategoryId: number;
+    ParentCategoryId?: number;
+    /**
+     * 子分类下检测项总数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ItemCount?: number;
 }
 /**
  * DescribeEventByTable返回参数结构体
@@ -16544,7 +16566,11 @@ export interface CreateSearchTemplateResponse {
     /**
      * 0：成功，非0：失败
      */
-    Status: number;
+    Status?: number;
+    /**
+     * 失败原因
+     */
+    Message?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -21453,6 +21479,11 @@ export interface Item {
      * 名称
      */
     ItemName?: string;
+    /**
+     * 自定义阈值
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CustomItemValues?: Array<number | bigint>;
 }
 /**
  * ExportVulDetectionExcel请求参数结构体
@@ -27651,6 +27682,27 @@ export interface OrderModifyObject {
      * 扩容/缩容数,变配子产品忽略该参数
      */
     InquireNum?: number;
+}
+/**
+ * 基线检测项分类树状结构
+ */
+export interface BaselineItemsCategory {
+    /**
+     * 基线检测项父分类id
+     */
+    ParentCategoryId?: number;
+    /**
+     * 基线检测项父分类名称
+     */
+    ParentCategoryName?: string;
+    /**
+     * 基线检测项子分类数目
+     */
+    CategoryCount?: number;
+    /**
+     * 基线检测项子分类列表
+     */
+    CategoryLists?: Array<BaselineCategory>;
 }
 /**
  * 帐号统计数据。

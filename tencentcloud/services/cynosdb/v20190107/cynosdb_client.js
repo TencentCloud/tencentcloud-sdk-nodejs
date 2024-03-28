@@ -370,6 +370,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateAccounts", req, cb);
     }
     /**
+     * 回档到新集群
+     */
+    async RollbackToNewCluster(req, cb) {
+        return this.request("RollbackToNewCluster", req, cb);
+    }
+    /**
      * 新购资源包
      */
     async CreateResourcePackage(req, cb) {

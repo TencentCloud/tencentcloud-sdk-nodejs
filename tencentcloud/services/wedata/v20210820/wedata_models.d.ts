@@ -449,7 +449,7 @@ export interface DescribeRuleDimStatResponse {
     /**
      * 结果
      */
-    Data: RuleDimStat;
+    Data?: RuleDimStat;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1109,7 +1109,7 @@ export interface DescribeTrendStatResponse {
     /**
      * 结果
      */
-    Data: Array<RuleExecDateStat>;
+    Data?: Array<RuleExecDateStat>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1145,7 +1145,7 @@ export interface DescribeRealTimeTaskSpeedRequest {
  */
 export interface DescribeRuleDimStatRequest {
     /**
-     * Project Id
+     * 项目id
      */
     ProjectId: string;
     /**
@@ -1178,7 +1178,7 @@ export interface DescribeDataObjectsResponse {
      * 数据对象列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Data: Array<SourceObject>;
+    Data?: Array<SourceObject>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1203,7 +1203,7 @@ export interface DescribeRuleTemplatesResponse {
  */
 export interface DescribeRuleExecStatRequest {
     /**
-     * ProjectId 值
+     * 项目id
      */
     ProjectId: string;
     /**
@@ -2326,7 +2326,7 @@ export interface DescribeRuleExecResultsByPageResponse {
      * results
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Data: RuleExecResultPage;
+    Data?: RuleExecResultPage;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2411,6 +2411,11 @@ export interface RuleGroupExecResult {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     EngineType?: string;
+    /**
+     * 规则执行结果
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RuleExecResultVOList?: Array<RuleExecResult>;
 }
 /**
  * MakeUpTasksByWorkflow返回参数结构体
@@ -2997,7 +3002,7 @@ export interface DescribeOperateTasksRequest {
  */
 export interface DescribeDataCheckStatRequest {
     /**
-     * Project id
+     * 项目id
      */
     ProjectId: string;
     /**
@@ -5184,6 +5189,11 @@ export interface Rule {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     MonitorStatus?: number;
+    /**
+     * 触发条件
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TriggerCondition?: string;
 }
 /**
  * DescribeTableLineage返回参数结构体
@@ -5319,6 +5329,31 @@ export interface ExportTaskInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     FilePath?: string;
+    /**
+     * 是否过期(1.已过期 2.未过期)
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Expire?: number;
+    /**
+     * 数据源名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DatasourceName?: string;
+    /**
+     * 库名+表名
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DbTableName?: string;
+    /**
+     * 规则名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RuleName?: string;
+    /**
+     * 规则执行id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RuleExecId?: number;
 }
 /**
  * DescribeInstanceLogDetail请求参数结构体
@@ -6773,7 +6808,7 @@ export interface DescribeRuleGroupResponse {
      * 数据质量规则组详情
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Data: RuleGroup;
+    Data?: RuleGroup;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -7253,7 +7288,7 @@ export interface DescribeRuleTemplateResponse {
      * 模板详情
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Data: RuleTemplate;
+    Data?: RuleTemplate;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -8919,7 +8954,7 @@ export interface DescribeRuleExecLogResponse {
      * 规则执行日志
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Data: RuleExecLog;
+    Data?: RuleExecLog;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -9499,7 +9534,7 @@ export interface DescribeExecStrategyResponse {
      * 规则组执行策略
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Data: RuleGroupExecStrategy;
+    Data?: RuleGroupExecStrategy;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -11194,7 +11229,7 @@ export interface DescribeRuleExecStatResponse {
     /**
      * 结果
      */
-    Data: RuleExecStat;
+    Data?: RuleExecStat;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -12721,7 +12756,7 @@ export interface DeleteRuleResponse {
      * 是否删除成功
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Data: boolean;
+    Data?: boolean;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -13312,7 +13347,7 @@ export interface DescribeRuleGroupExecResultsByPageWithoutAuthResponse {
      * 规则组执行结果列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Data: RuleGroupExecResultPage;
+    Data?: RuleGroupExecResultPage;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -14424,7 +14459,7 @@ export interface CheckDuplicateRuleNameResponse {
      * 规则名称是否重复
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Data: boolean;
+    Data?: boolean;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -14693,7 +14728,7 @@ export interface DescribeRuleGroupExecResultsByPageResponse {
      * 规则组执行结果列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Data: RuleGroupExecResultPage;
+    Data?: RuleGroupExecResultPage;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -14779,7 +14814,7 @@ export interface DescribeInstancesResponse {
      * Json 结果
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Data: string;
+    Data?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -14993,7 +15028,7 @@ export interface DescribeRuleHistoryByPageResponse {
      * 规则组操作历史列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Data: RuleHistoryPage;
+    Data?: RuleHistoryPage;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -15551,7 +15586,7 @@ export interface ModifyMonitorStatusResponse {
      * 监控状态修改成功
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Data: boolean;
+    Data?: boolean;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -16047,7 +16082,7 @@ export interface DescribeTopTableStatResponse {
     /**
      * 结果
      */
-    Data: TopTableStat;
+    Data?: TopTableStat;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -16951,7 +16986,7 @@ export interface DescribeRuleGroupsByPageResponse {
      * 规则组列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Data: RuleGroupPage;
+    Data?: RuleGroupPage;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -17440,7 +17475,7 @@ export interface CommitExportTaskResponse {
      * 提交结果
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Data: boolean;
+    Data?: boolean;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -17652,7 +17687,7 @@ export interface DescribeRuleExecResultsResponse {
      * 规则执行结果列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Data: RuleExecResultPage;
+    Data?: RuleExecResultPage;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -18351,11 +18386,11 @@ export interface DescribeInstancesRequest {
      */
     ProjectId?: string;
     /**
-     * 页数
+     * 页数:默认1
      */
     PageNumber?: number;
     /**
-     * 分页大小
+     * 分页大小,默认最小10
      */
     PageSize?: number;
     /**
@@ -19353,7 +19388,7 @@ export interface DescribeRuleTablesByPageResponse {
      * 表列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Data: RuleGroupPage;
+    Data?: RuleGroupPage;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -21367,37 +21402,37 @@ export interface RuleExecResult {
      * 模版名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TemplateName: string;
+    TemplateName?: string;
     /**
      * 质量维度
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    QualityDim: number;
+    QualityDim?: number;
     /**
      * 目标表-库表名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TargetDBTableName: string;
+    TargetDBTableName?: string;
     /**
      * 目标表-字段名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TargetObjectValue: string;
+    TargetObjectValue?: string;
     /**
      * 目标表-字段类型
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TargetObjectDataType: string;
+    TargetObjectDataType?: string;
     /**
      * 自定义模版sql表达式参数
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    FieldConfig: RuleFieldConfig;
+    FieldConfig?: RuleFieldConfig;
     /**
      * 源字段与目标字段关联条件on表达式
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    RelConditionExpr: string;
+    RelConditionExpr?: string;
     /**
      * 执行时间
   注意：此字段可能返回 null，表示取不到有效值。
@@ -22725,7 +22760,7 @@ export interface DescribeProdTasksResponse {
      * 生产调度任务列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Data: Array<ProdSchedulerTask>;
+    Data?: Array<ProdSchedulerTask>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -23302,7 +23337,7 @@ export interface DescribeDataBasesResponse {
      * 数据来源数据数据库列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Data: Array<DatabaseInfo>;
+    Data?: Array<DatabaseInfo>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -23687,7 +23722,7 @@ export interface DescribeRuleResponse {
      * 规则详情
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Data: Rule;
+    Data?: Rule;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -23852,7 +23887,7 @@ export interface DescribeRuleDataSourcesResponse {
      * 数据源列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Data: Array<DatabaseInfo>;
+    Data?: Array<DatabaseInfo>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -23975,7 +24010,7 @@ export interface DescribeRulesByPageResponse {
      * 规则质量列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Data: RulePage;
+    Data?: RulePage;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -24693,7 +24728,7 @@ export interface DescribeMonitorsByPageResponse {
      * 分页查询结果
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Data: RuleGroupMonitorPage;
+    Data?: RuleGroupMonitorPage;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -25034,7 +25069,7 @@ export interface DescribeRuleGroupTableResponse {
      * 数据
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Data: RuleGroupTable;
+    Data?: RuleGroupTable;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -25430,7 +25465,7 @@ export interface DescribeRuleExecDetailResponse {
      * 规则执行结果详情
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Data: RuleExecResultDetail;
+    Data?: RuleExecResultDetail;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -25926,7 +25961,7 @@ export interface CheckDuplicateTemplateNameResponse {
      * 是否重名
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Data: boolean;
+    Data?: boolean;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -25968,7 +26003,7 @@ export interface DescribeDataCheckStatResponse {
     /**
      * 结果
      */
-    Data: DataCheckStat;
+    Data?: DataCheckStat;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -26419,7 +26454,7 @@ export interface DescribeRuleExecExportResultResponse {
      * 导出结果
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Data: RuleExecExportResult;
+    Data?: RuleExecExportResult;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -26477,7 +26512,7 @@ export interface DescribeBaselineResponse {
  */
 export interface DescribeTopTableStatRequest {
     /**
-     * Project Id
+     * 项目id
      */
     ProjectId: string;
     /**
@@ -26642,7 +26677,7 @@ export interface ModifyTaskNameRequest {
  */
 export interface DescribeTrendStatRequest {
     /**
-     * Project id
+     * 项目id
      */
     ProjectId: string;
     /**

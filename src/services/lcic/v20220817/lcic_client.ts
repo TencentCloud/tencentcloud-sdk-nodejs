@@ -136,6 +136,7 @@ import {
   ModifyRoomRequest,
   AnswerInfo,
   DescribeRoomStatisticsRequest,
+  CustomMsgContent,
   DescribeDocumentsByRoomResponse,
   LoginOriginIdResponse,
   DescribeQuestionListResponse,

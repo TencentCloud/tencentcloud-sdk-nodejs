@@ -715,7 +715,7 @@ export interface CreateRecTaskRequest {
   /**
    * 是否开启说话人分离
 0：不开启；
-1：开启（仅支持以下引擎：8k_zh/16k_zh/16k_ms/16k_en/16k_id/16k_zh_large/16k_dialect_large，且ChannelNum=1时可用）；
+1：开启（仅支持以下引擎：8k_zh/16k_zh/16k_ms/16k_en/16k_id/16k_zh_large/16k_zh_dialect，且ChannelNum=1时可用）；
 默认值为 0
 
 注意：
@@ -1224,7 +1224,7 @@ export interface UpdateAsrVocabRequest {
    */
   Name?: string
   /**
-   * 词权重数组，包含全部的热词和对应的权重。每个热词的长度不大于10个汉字或30个英文字符，权重为[1,10]之间整数，数组长度不大于1000
+   * 词权重数组，包含全部的热词和对应的权重。每个热词的长度不大于10个汉字或30个英文字符，权重为[1,11]之间整数，数组长度不大于1000
    */
   WordWeights?: Array<HotWord>
   /**

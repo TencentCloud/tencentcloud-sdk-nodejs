@@ -90,11 +90,11 @@ export interface CreateWorkspaceTokenRequest {
  */
 export interface CreateWorkspaceRequest {
     /**
-     * 工作空间名称
+     * 工作空间名称, 长度限制 2~64
      */
     Name: string;
     /**
-     * 工作空间描述
+     * 工作空间描述, 长度限制 0~255
      */
     Description?: string;
     /**
@@ -102,7 +102,7 @@ export interface CreateWorkspaceRequest {
      */
     Specs?: string;
     /**
-     * 工作空间基础镜像名称, 默认会使用 All In One 镜像
+     * 工作空间基础镜像名称, 默认会使用 All In One 镜像, 长度限制 1~255
      */
     Image?: string;
     /**
@@ -114,13 +114,29 @@ export interface CreateWorkspaceRequest {
      */
     Envs?: Array<Env>;
     /**
-     * 预装插件. 工作空间启动时, 会自动安装这些插件
+     * 预装插件. 工作空间启动时, 会自动安装这些插件。长度限制: 0~10
      */
     Extensions?: Array<string>;
     /**
      * 工作空间生命周期钩子.  分为三个阶段 init, start, destroy. 分别表示工作空间数据初始化阶段, 工作空间启动阶段, 工作空间关闭阶段.  用户可以自定义 shell 命令.
      */
     Lifecycle?: LifeCycle;
+    /**
+     * 应用名称
+     */
+    AppId?: number;
+    /**
+     * 用户UIN
+     */
+    Uin?: string;
+    /**
+     * VPCID
+     */
+    UniqVpcId?: string;
+    /**
+     * 子网ID
+     */
+    SubnetId?: string;
 }
 /**
  * RunWorkspace返回参数结构体

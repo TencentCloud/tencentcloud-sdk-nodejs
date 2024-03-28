@@ -1323,6 +1323,11 @@ export interface MessageItem {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     ImageMessage?: string;
+    /**
+     * 自定义消息内容。message type为2时有效。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CustomMessage?: CustomMsgContent;
 }
 /**
  * 获取群组列表返回的群组信息
@@ -2851,6 +2856,26 @@ export interface DescribeRoomStatisticsRequest {
     Limit: number;
 }
 /**
+ * 自定义消息
+ */
+export interface CustomMsgContent {
+    /**
+     * 自定义消息数据。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Data?: string;
+    /**
+     * 自定义消息描述信息。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Desc?: string;
+    /**
+     * 扩展字段。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Ext?: string;
+}
+/**
  * DescribeDocumentsByRoom返回参数结构体
  */
 export interface DescribeDocumentsByRoomResponse {
@@ -3194,6 +3219,7 @@ export interface MsgBody {
   TIMTextElem（文本消息）
   TIMFaceElem（表情消息）
   TIMImageElem（图像消息）
+  TIMCustomElem（自定义消息）
      */
     MsgType: string;
     /**
@@ -3208,6 +3234,10 @@ export interface MsgBody {
      * 图像消息，当MsgType为TIMImageElem（图像消息）必选。
      */
     ImageMsgContent?: ImageMsgContent;
+    /**
+     * 自定义消息，TIMCustomElem（自定义消息）必选。
+     */
+    CustomMsgContent?: CustomMsgContent;
 }
 /**
  * CreateSupervisor返回参数结构体

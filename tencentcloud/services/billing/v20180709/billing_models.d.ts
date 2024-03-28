@@ -68,19 +68,19 @@ export interface ConsumptionBusinessSummaryDataItem {
     /**
      * 产品名称代码
      */
-    BusinessCode: string;
+    BusinessCode?: string;
     /**
      * 产品名称
      */
-    BusinessCodeName: string;
+    BusinessCodeName?: string;
     /**
      * 折后总价
      */
-    RealTotalCost: string;
+    RealTotalCost?: string;
     /**
      * 费用趋势
      */
-    Trend: ConsumptionSummaryTrend;
+    Trend?: ConsumptionSummaryTrend;
     /**
      * 现金
   注意：此字段可能返回 null，表示取不到有效值。
@@ -101,6 +101,11 @@ export interface ConsumptionBusinessSummaryDataItem {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     TransferPayAmount?: string;
+    /**
+     * 地域名称（仅在地域汇总总展示）
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RegionName?: string;
 }
 /**
  * 账单 Tag 信息
@@ -488,23 +493,43 @@ export interface ConsumptionRegionSummaryDataItem {
     /**
      * 地域ID
      */
-    RegionId: string;
+    RegionId?: string;
     /**
      * 地域名称
      */
-    RegionName: string;
+    RegionName?: string;
     /**
      * 折后总价
      */
-    RealTotalCost: string;
+    RealTotalCost?: string;
     /**
      * 趋势
      */
-    Trend: ConsumptionSummaryTrend;
+    Trend?: ConsumptionSummaryTrend;
     /**
      * 产品消费详情
      */
-    Business: Array<ConsumptionBusinessSummaryDataItem>;
+    Business?: Array<ConsumptionBusinessSummaryDataItem>;
+    /**
+     * 现金
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CashPayAmount?: string;
+    /**
+     * 代金券
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    VoucherPayAmount?: string;
+    /**
+     * 赠送金
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IncentivePayAmount?: string;
+    /**
+     * 分成金
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TransferPayAmount?: string;
 }
 /**
  * DescribeBillSummary请求参数结构体
@@ -646,12 +671,12 @@ export interface AllocationSummaryByItem {
      */
     InstanceTypeName?: string;
     /**
-     * 资源ID：账单中出账对象 ID，不同产品因资源形态不同，资源内容不完全相同，如云服务器 CVM 为对应的实例 ID
+     * 资源ID：不同产品因资源形态不同，资源内容不完全相同，如云服务器 CVM 为对应的实例 ID； 若该产品被分拆，则展示产品分拆后的分拆项 ID，如 COS 桶 ID，CDN 域名
   注意：此字段可能返回 null，表示取不到有效值。
      */
     ResourceId?: string;
     /**
-     * 实例名称：用户在控制台为资源设置的名称，如未设置默认为空
+     * 实例名称：用户在控制台为资源设置的名称，如未设置默认为空；若该产品被分拆，则展示分拆产品分拆后的分拆项资源别名
   注意：此字段可能返回 null，表示取不到有效值。
      */
     ResourceName?: string;
@@ -741,11 +766,13 @@ export interface AllocationSummaryByItem {
     /**
      * 分拆项 ID：涉及分拆产品的分拆后的分拆项 ID，如 COS 桶 ID，CDN 域名
   注意：此字段可能返回 null，表示取不到有效值。
+     * @deprecated
      */
     SplitItemId?: string;
     /**
      * 分拆项名称：涉及分拆产品的分拆后的分拆项
   注意：此字段可能返回 null，表示取不到有效值。
+     * @deprecated
      */
     SplitItemName?: string;
     /**
@@ -1348,7 +1375,7 @@ export interface DescribeAllocationBillDetailRequest {
      */
     Limit: number;
     /**
-     * 分页偏移量，Offset=0表示第一页，如果Limit=100，则Offset=100表示第二页，Offset=200表示第三页，依次类推
+     * 分页偏移量，Offset=0表示第一页，如果Limit=100，则Offset=100表示第二页，Offset=200表示第三页，以此类推
      */
     Offset: number;
     /**
@@ -1426,7 +1453,7 @@ export interface DescribeAllocationBillDetailRequest {
      */
     ItemCodes?: Array<string>;
     /**
-     * 模糊搜索：支持标签、资源id、资源别名、分拆项id和分拆项名称
+     * 模糊搜索：支持标签、资源id、资源别名
      */
     SearchKey?: string;
     /**
@@ -1854,7 +1881,7 @@ export interface DescribeGatherResourceRequest {
      */
     Limit: number;
     /**
-     * 分页偏移量，Offset=0表示第一页，如果Limit=100，则Offset=100表示第二页，Offset=200表示第三页，依次类推
+     * 分页偏移量，Offset=0表示第一页，如果Limit=100，则Offset=100表示第二页，Offset=200表示第三页，以此类推
      */
     Offset: number;
     /**
@@ -1919,7 +1946,7 @@ export interface DescribeGatherResourceRequest {
      */
     OwnerUins?: Array<string>;
     /**
-     * 模糊搜索：支持标签、资源id、资源别名、分拆项id和分拆项名称
+     * 模糊搜索：支持标签、资源id、资源别名
      */
     SearchKey?: string;
     /**
@@ -2096,7 +2123,7 @@ export interface DescribeAllocationSummaryByItemRequest {
      */
     Limit: number;
     /**
-     * 分页偏移量，Offset=0表示第一页，如果Limit=100，则Offset=100表示第二页，Offset=200表示第三页，依次类推
+     * 分页偏移量，Offset=0表示第一页，如果Limit=100，则Offset=100表示第二页，Offset=200表示第三页，以此类推
      */
     Offset: number;
     /**
@@ -2197,8 +2224,7 @@ export interface DescribeAllocationSummaryByItemRequest {
      */
     ItemCodes?: Array<string>;
     /**
-     * 模糊搜索：支持标签、资源id、资源别名、分拆项id和分拆项名称
-  
+     * 模糊搜索：支持标签、资源id、资源别名
      */
     SearchKey?: string;
     /**
@@ -2805,12 +2831,12 @@ export interface AllocationSummaryByResource {
      */
     InstanceTypeName?: string;
     /**
-     * 资源ID：账单中出账对象 ID，不同产品因资源形态不同，资源内容不完全相同，如云服务器 CVM 为对应的实例 ID
+     * 资源ID：不同产品因资源形态不同，资源内容不完全相同，如云服务器 CVM 为对应的实例 ID； 若该产品被分拆，则展示产品分拆后的分拆项 ID，如 COS 桶 ID，CDN 域名
   注意：此字段可能返回 null，表示取不到有效值。
      */
     ResourceId?: string;
     /**
-     * 实例名称：用户在控制台为资源设置的名称，如未设置默认为空
+     * 实例名称：用户在控制台为资源设置的名称，如未设置默认为空；若该产品被分拆，则展示分拆产品分拆后的分拆项资源别名
   注意：此字段可能返回 null，表示取不到有效值。
      */
     ResourceName?: string;
@@ -2880,11 +2906,13 @@ export interface AllocationSummaryByResource {
     /**
      * 分拆项 ID：涉及分拆产品的分拆后的分拆项 ID，如 COS 桶 ID，CDN 域名
   注意：此字段可能返回 null，表示取不到有效值。
+     * @deprecated
      */
     SplitItemId?: string;
     /**
      * 分拆项名称：涉及分拆产品的分拆后的分拆项
   注意：此字段可能返回 null，表示取不到有效值。
+     * @deprecated
      */
     SplitItemName?: string;
     /**
@@ -3624,51 +3652,51 @@ export interface CostComponentSet {
     /**
      * 组件类型名称
      */
-    ComponentCodeName: string;
+    ComponentCodeName?: string;
     /**
      * 组件名称
      */
-    ItemCodeName: string;
+    ItemCodeName?: string;
     /**
      * 刊例价
      */
-    SinglePrice: string;
+    SinglePrice?: string;
     /**
      * 刊例价单位
      */
-    PriceUnit: string;
+    PriceUnit?: string;
     /**
      * 用量
      */
-    UsedAmount: string;
+    UsedAmount?: string;
     /**
      * 用量单位
      */
-    UsedAmountUnit: string;
+    UsedAmountUnit?: string;
     /**
      * 原价
      */
-    Cost: string;
+    Cost?: string;
     /**
      * 折扣
      */
-    Discount: string;
+    Discount?: string;
     /**
      * 折后价
      */
-    RealCost: string;
+    RealCost?: string;
     /**
      * 代金券支付金额
      */
-    VoucherPayAmount: string;
+    VoucherPayAmount?: string;
     /**
      * 现金支付金额
      */
-    CashPayAmount: string;
+    CashPayAmount?: string;
     /**
      * 赠送金支付金额
      */
-    IncentivePayAmount: string;
+    IncentivePayAmount?: string;
 }
 /**
  * 成本分析表头数据复杂类型
@@ -4044,23 +4072,23 @@ export interface ConsumptionProjectSummaryDataItem {
     /**
      * 项目ID
      */
-    ProjectId: string;
+    ProjectId?: string;
     /**
      * 项目名称
      */
-    ProjectName: string;
+    ProjectName?: string;
     /**
      * 折后总价
      */
-    RealTotalCost: string;
+    RealTotalCost?: string;
     /**
      * 趋势
      */
-    Trend: ConsumptionSummaryTrend;
+    Trend?: ConsumptionSummaryTrend;
     /**
      * 产品消耗详情
      */
-    Business: Array<ConsumptionBusinessSummaryDataItem>;
+    Business?: Array<ConsumptionBusinessSummaryDataItem>;
     /**
      * 现金
   注意：此字段可能返回 null，表示取不到有效值。
@@ -4264,12 +4292,12 @@ export interface AllocationDetail {
      */
     ZoneName?: string;
     /**
-     * 资源ID：账单中出账对象 ID，不同产品因资源形态不同，资源内容不完全相同，如云服务器 CVM 为对应的实例 ID
+     * 资源ID：不同产品因资源形态不同，资源内容不完全相同，如云服务器 CVM 为对应的实例 ID； 若该产品被分拆，则展示产品分拆后的分拆项 ID，如 COS 桶 ID，CDN 域名
   注意：此字段可能返回 null，表示取不到有效值。
      */
     ResourceId?: string;
     /**
-     * 实例名称：用户在控制台为资源设置的名称，如未设置默认为空
+     * 实例名称：用户在控制台为资源设置的名称，如未设置默认为空；若该产品被分拆，则展示分拆产品分拆后的分拆项资源别名
   注意：此字段可能返回 null，表示取不到有效值。
      */
     ResourceName?: string;
@@ -4286,11 +4314,13 @@ export interface AllocationDetail {
     /**
      * 分拆项 ID：涉及分拆产品的分拆后的分拆项 ID，如 COS 桶 ID，CDN 域名
   注意：此字段可能返回 null，表示取不到有效值。
+     * @deprecated
      */
     SplitItemId?: string;
     /**
      * 分拆项名称：涉及分拆产品的分拆后的分拆项
   注意：此字段可能返回 null，表示取不到有效值。
+     * @deprecated
      */
     SplitItemName?: string;
     /**
@@ -5276,7 +5306,7 @@ export interface DescribeAllocationSummaryByResourceRequest {
      */
     Limit: number;
     /**
-     * 分页偏移量，Offset=0表示第一页，如果Limit=100，则Offset=100表示第二页，Offset=200表示第三页，依次类推
+     * 分页偏移量，Offset=0表示第一页，如果Limit=100，则Offset=100表示第二页，Offset=200表示第三页，以此类推
      */
     Offset: number;
     /**
@@ -5357,7 +5387,7 @@ export interface DescribeAllocationSummaryByResourceRequest {
      */
     Tag?: Array<string>;
     /**
-     * 模糊搜索：支持标签、资源id、资源别名、分拆项id和分拆项名称
+     * 模糊搜索：支持标签、资源id、资源别名
      */
     SearchKey?: string;
     /**
@@ -5684,68 +5714,68 @@ export interface CostDetail {
     /**
      * 支付者uin
      */
-    PayerUin: string;
+    PayerUin?: string;
     /**
      * 产品名称
      */
-    BusinessCodeName: string;
+    BusinessCodeName?: string;
     /**
      * 子产品名称
      */
-    ProductCodeName: string;
+    ProductCodeName?: string;
     /**
      * 计费模式名称
      */
-    PayModeName: string;
+    PayModeName?: string;
     /**
      * 项目名称
      */
-    ProjectName: string;
+    ProjectName?: string;
     /**
      * 区域名称
      */
-    RegionName: string;
+    RegionName?: string;
     /**
      * 地区名称
      */
-    ZoneName: string;
+    ZoneName?: string;
     /**
      * 资源id
      */
-    ResourceId: string;
+    ResourceId?: string;
     /**
      * 资源名称
      */
-    ResourceName: string;
+    ResourceName?: string;
     /**
      * 类型名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ActionTypeName: string;
+    ActionTypeName?: string;
     /**
      * 订单id
      */
-    OrderId: string;
+    OrderId?: string;
     /**
      * 交易id
      */
-    BillId: string;
+    BillId?: string;
     /**
      * 费用开始时间
      */
-    FeeBeginTime: string;
+    FeeBeginTime?: string;
     /**
      * 费用结束时间
      */
-    FeeEndTime: string;
+    FeeEndTime?: string;
     /**
      * 组件明细
      */
-    ComponentSet: Array<CostComponentSet>;
+    ComponentSet?: Array<CostComponentSet>;
     /**
      * 子产品名称代码
      */
-    ProductCode: string;
+    ProductCode?: string;
 }
 /**
  * DescribeBillSummaryByProduct返回参数结构体
@@ -5850,55 +5880,55 @@ export interface ConsumptionResourceSummaryDataItem {
     /**
      * 资源ID
      */
-    ResourceId: string;
+    ResourceId?: string;
     /**
      * 资源名称
      */
-    ResourceName: string;
+    ResourceName?: string;
     /**
      * 折后总价
      */
-    RealTotalCost: string;
+    RealTotalCost?: string;
     /**
      * 现金花费
      */
-    CashPayAmount: string;
+    CashPayAmount?: string;
     /**
      * 项目ID
      */
-    ProjectId: string;
+    ProjectId?: string;
     /**
      * 项目名称
      */
-    ProjectName: string;
+    ProjectName?: string;
     /**
      * 地域ID
      */
-    RegionId: string;
+    RegionId?: string;
     /**
      * 地域名称
      */
-    RegionName: string;
+    RegionName?: string;
     /**
      * 付费模式
      */
-    PayMode: string;
+    PayMode?: string;
     /**
      * 付费模式名称
      */
-    PayModeName: string;
+    PayModeName?: string;
     /**
      * 产品名称代码
      */
-    BusinessCode: string;
+    BusinessCode?: string;
     /**
      * 产品名称
      */
-    BusinessCodeName: string;
+    BusinessCodeName?: string;
     /**
      * 消耗类型
      */
-    ConsumptionTypeName: string;
+    ConsumptionTypeName?: string;
     /**
      * 折前价
   注意：此字段可能返回 null，表示取不到有效值。
@@ -5944,6 +5974,91 @@ export interface ConsumptionResourceSummaryDataItem {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     TransferPayAmount?: string;
+    /**
+     * 支付者UIN：支付者的账号 ID，账号 ID 是用户在腾讯云的唯一账号标识
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PayerUin?: string;
+    /**
+     * 使用者UIN：实际使用资源的账号 ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    OwnerUin?: string;
+    /**
+     * 操作者UIN：操作者账号 ID（预付费资源下单或后付费操作开通资源账号的 ID 或者角色 ID ）
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    OperateUin?: string;
+    /**
+     * 子产品编码
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ProductCode?: string;
+    /**
+     * 子产品名称：用户采购的具体产品细分类型，例如：云服务器 CVM-标准型 S1
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ProductCodeName?: string;
+    /**
+     * 地域类型
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RegionType?: string;
+    /**
+     * 地域类型名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RegionTypeName?: string;
+    /**
+     * 扩展字段1
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Extend1?: string;
+    /**
+     * 扩展字段2
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Extend2?: string;
+    /**
+     * 扩展字段3
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Extend3?: string;
+    /**
+     * 扩展字段4
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Extend4?: string;
+    /**
+     * 扩展字段5
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Extend5?: string;
+    /**
+     * 实例类型
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InstanceType?: string;
+    /**
+     * 实例类型名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InstanceTypeName?: string;
+    /**
+     * 扣费时间：结算扣费时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PayTime?: string;
+    /**
+     * 可用区：资源所属可用区，如广州三区
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ZoneName?: string;
+    /**
+     * 配置描述
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ComponentConfig?: string;
 }
 /**
  * DescribeAccountBalance请求参数结构体
@@ -6618,12 +6733,12 @@ export interface GatherResourceSummary {
      */
     InstanceTypeName?: string;
     /**
-     * 资源ID：账单中出账对象 ID，不同产品因资源形态不同，资源内容不完全相同，如云服务器 CVM 为对应的实例 ID
+     * 资源ID：不同产品因资源形态不同，资源内容不完全相同，如云服务器 CVM 为对应的实例 ID； 若该产品被分拆，则展示产品分拆后的分拆项 ID，如 COS 桶 ID，CDN 域名
   注意：此字段可能返回 null，表示取不到有效值。
      */
     ResourceId?: string;
     /**
-     * 实例名称：用户在控制台为资源设置的名称，如未设置默认为空
+     * 实例名称：用户在控制台为资源设置的名称，如未设置默认为空；若该产品被分拆，则展示分拆产品分拆后的分拆项资源别名
   注意：此字段可能返回 null，表示取不到有效值。
      */
     ResourceName?: string;
@@ -6778,11 +6893,13 @@ export interface GatherResourceSummary {
     /**
      * 分拆项 ID：涉及分拆产品的分拆后的分拆项 ID，如 COS 桶 ID，CDN 域名
   注意：此字段可能返回 null，表示取不到有效值。
+     * @deprecated
      */
     SplitItemId?: string;
     /**
      * 分拆项名称：涉及分拆产品的分拆后的分拆项
   注意：此字段可能返回 null，表示取不到有效值。
+     * @deprecated
      */
     SplitItemName?: string;
 }

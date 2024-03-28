@@ -28,7 +28,7 @@ class Client extends abstract_client_1.AbstractClient {
         super("tms.tencentcloudapi.com", "2020-12-29", clientConfig);
     }
     /**
-     * 天御文本内容安全审核接口，改接口会按照客户定制标签输出审核结果
+     * 天御文本内容安全定制标签文本审核接口为定制接口，会按照客户定制标签输出审核结果，如需使用请联系商务经理或[在线客服](https://cloud.tencent.com/online-service?from=doc_1125)咨询。
      */
     async ModerateText(req, cb) {
         return this.request("ModerateText", req, cb);

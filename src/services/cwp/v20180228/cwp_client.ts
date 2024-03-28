@@ -1234,6 +1234,7 @@ import {
   DescribeLicenseGeneralRequest,
   DescribeAssetJarInfoRequest,
   OrderModifyObject,
+  BaselineItemsCategory,
   AccountStatistics,
   AssetUserKeyInfo,
   DescribeMachinesResponse,
@@ -4157,8 +4158,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 导出网络攻击日志
-   */
+     * ExportAttackEvents接口替代
+
+导出网络攻击日志
+     */
   async ExportAttackLogs(
     req: ExportAttackLogsRequest,
     cb?: (error: string, rep: ExportAttackLogsResponse) => void
@@ -6293,8 +6296,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除网络攻击日志
-   */
+     * ModifyEventAttackStatus 接口替代
+
+删除网络攻击日志
+     */
   async DeleteAttackLogs(
     req: DeleteAttackLogsRequest,
     cb?: (error: string, rep: DeleteAttackLogsResponse) => void

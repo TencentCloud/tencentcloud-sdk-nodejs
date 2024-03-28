@@ -1143,7 +1143,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeTrialReport(req?: DescribeTrialReportRequest, cb?: (error: string, rep: DescribeTrialReportResponse) => void): Promise<DescribeTrialReportResponse>;
     /**
-     * 导出网络攻击日志
+     * ExportAttackEvents接口替代
+
+导出网络攻击日志
      */
     ExportAttackLogs(req: ExportAttackLogsRequest, cb?: (error: string, rep: ExportAttackLogsResponse) => void): Promise<ExportAttackLogsResponse>;
     /**
@@ -2001,7 +2003,9 @@ export declare class Client extends AbstractClient {
      */
     ExportReverseShellEvents(req: ExportReverseShellEventsRequest, cb?: (error: string, rep: ExportReverseShellEventsResponse) => void): Promise<ExportReverseShellEventsResponse>;
     /**
-     * 删除网络攻击日志
+     * ModifyEventAttackStatus 接口替代
+
+删除网络攻击日志
      */
     DeleteAttackLogs(req: DeleteAttackLogsRequest, cb?: (error: string, rep: DeleteAttackLogsResponse) => void): Promise<DeleteAttackLogsResponse>;
     /**
