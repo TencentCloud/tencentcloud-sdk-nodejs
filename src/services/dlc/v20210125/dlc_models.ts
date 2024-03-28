@@ -7126,11 +7126,13 @@ export interface TableBaseInfo {
   /**
    * 数据治理配置项
 注意：此字段可能返回 null，表示取不到有效值。
+   * @deprecated
    */
   GovernPolicy?: DataGovernPolicy
   /**
    * 库数据治理是否关闭，关闭：true，开启：false
 注意：此字段可能返回 null，表示取不到有效值。
+   * @deprecated
    */
   DbGovernPolicyIsDisable?: string
   /**

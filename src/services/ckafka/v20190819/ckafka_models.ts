@@ -1011,44 +1011,41 @@ export interface CreateRouteRequest {
 }
 
 /**
- * SQLServer修改连接源参数
+ * ModifyGroupOffsets请求参数结构体
  */
-export interface SQLServerModifyConnectParam {
+export interface ModifyGroupOffsetsRequest {
   /**
-   * SQLServer连接源的实例资源【不支持修改】
-注意：此字段可能返回 null，表示取不到有效值。
+   * kafka实例id
    */
-  Resource: string
+  InstanceId: string
   /**
-   * SQLServer的连接port【不支持修改】
-注意：此字段可能返回 null，表示取不到有效值。
+   * kafka 消费分组
    */
-  Port?: number
+  Group: string
   /**
-   * SQLServer连接源的实例vip【不支持修改】
-注意：此字段可能返回 null，表示取不到有效值。
+   * 重置offset的策略，入参含义 0. 对齐shift-by参数，代表把offset向前或向后移动shift条 1. 对齐参考(by-duration,to-datetime,to-earliest,to-latest),代表把offset移动到指定timestamp的位置 2. 对齐参考(to-offset)，代表把offset移动到指定的offset位置
    */
-  ServiceVip?: string
+  Strategy: number
   /**
-   * SQLServer连接源的vpcId【不支持修改】
-注意：此字段可能返回 null，表示取不到有效值。
+   * 表示需要重置的topics， 不填表示全部
    */
-  UniqVpcId?: string
+  Topics?: Array<string>
   /**
-   * SQLServer连接源的用户名
-注意：此字段可能返回 null，表示取不到有效值。
+   * 当strategy为0时，必须包含该字段，可以大于零代表会把offset向后移动shift条，小于零则将offset向前回溯shift条数。正确重置后新的offset应该是(old_offset + shift)，需要注意的是如果新的offset小于partition的earliest则会设置为earliest，如果大于partition 的latest则会设置为latest
    */
-  UserName?: string
+  Shift?: number
   /**
-   * SQLServer连接源的密码
-注意：此字段可能返回 null，表示取不到有效值。
+   * 单位ms。当strategy为1时，必须包含该字段，其中-2表示重置offset到最开始的位置，-1表示重置到最新的位置(相当于清空)，其它值则代表指定的时间，会获取topic中指定时间的offset然后进行重置，需要注意的时，如果指定的时间不存在消息，则获取最末尾的offset。
    */
-  Password?: string
+  ShiftTimestamp?: number
   /**
-   * 是否更新到关联的Dip任务
-注意：此字段可能返回 null，表示取不到有效值。
+   * 需要重新设置的offset位置。当strategy为2，必须包含该字段。
    */
-  IsUpdate?: boolean
+  Offset?: number
+  /**
+   * 需要重新设置的partition的列表，如果没有指定Topics参数。则重置全部topics的对应的Partition列表里的partition。指定Topics时则重置指定的topic列表的对应的Partitions列表的partition。
+   */
+  Partitions?: Array<number | bigint>
 }
 
 /**
@@ -1748,6 +1745,20 @@ export interface DescribeAppInfoRequest {
    * 本次查询用户数目最大数量限制，最大值为50，默认50
    */
   Limit?: number
+}
+
+/**
+ * DescribePrometheus返回参数结构体
+ */
+export interface DescribePrometheusResponse {
+  /**
+   * Prometheus监控映射列表
+   */
+  Result: Array<PrometheusDTO>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2572,41 +2583,48 @@ export interface TdwParam {
 }
 
 /**
- * ModifyGroupOffsets请求参数结构体
+ * 消费组返回结果实体
  */
-export interface ModifyGroupOffsetsRequest {
+export interface ConsumerGroupResponse {
   /**
-   * kafka实例id
+   * 符合条件的消费组数量
    */
-  InstanceId: string
+  TotalCount: number
   /**
-   * kafka 消费分组
+   * 主题列表
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Group: string
+  TopicList: Array<ConsumerGroupTopic>
   /**
-   * 重置offset的策略，入参含义 0. 对齐shift-by参数，代表把offset向前或向后移动shift条 1. 对齐参考(by-duration,to-datetime,to-earliest,to-latest),代表把offset移动到指定timestamp的位置 2. 对齐参考(to-offset)，代表把offset移动到指定的offset位置
+   * 消费分组List
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Strategy: number
+  GroupList: Array<ConsumerGroup>
   /**
-   * 表示需要重置的topics， 不填表示全部
+   * 所有分区数量
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Topics?: Array<string>
+  TotalPartition: number
   /**
-   * 当strategy为0时，必须包含该字段，可以大于零代表会把offset向后移动shift条，小于零则将offset向前回溯shift条数。正确重置后新的offset应该是(old_offset + shift)，需要注意的是如果新的offset小于partition的earliest则会设置为earliest，如果大于partition 的latest则会设置为latest
+   * 监控的分区列表
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Shift?: number
+  PartitionListForMonitor: Array<Partition>
   /**
-   * 单位ms。当strategy为1时，必须包含该字段，其中-2表示重置offset到最开始的位置，-1表示重置到最新的位置(相当于清空)，其它值则代表指定的时间，会获取topic中指定时间的offset然后进行重置，需要注意的时，如果指定的时间不存在消息，则获取最末尾的offset。
+   * 主题总数
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  ShiftTimestamp?: number
+  TotalTopic: number
   /**
-   * 需要重新设置的offset位置。当strategy为2，必须包含该字段。
+   * 监控的主题列表
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Offset?: number
+  TopicListForMonitor: Array<ConsumerGroupTopic>
   /**
-   * 需要重新设置的partition的列表，如果没有指定Topics参数。则重置全部topics的对应的Partition列表里的partition。指定Topics时则重置指定的topic列表的对应的Partitions列表的partition。
+   * 监控的组列表
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Partitions?: Array<number | bigint>
+  GroupListForMonitor: Array<Group>
 }
 
 /**
@@ -3572,48 +3590,17 @@ export interface CreateDatahubTaskRes {
 }
 
 /**
- * 消费组返回结果实体
+ * CreatePrometheus返回参数结构体
  */
-export interface ConsumerGroupResponse {
+export interface CreatePrometheusResponse {
   /**
-   * 符合条件的消费组数量
+   * 打通普罗米修斯
    */
-  TotalCount: number
+  Result: PrometheusResult
   /**
-   * 主题列表
-注意：此字段可能返回 null，表示取不到有效值。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  TopicList: Array<ConsumerGroupTopic>
-  /**
-   * 消费分组List
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  GroupList: Array<ConsumerGroup>
-  /**
-   * 所有分区数量
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TotalPartition: number
-  /**
-   * 监控的分区列表
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  PartitionListForMonitor: Array<Partition>
-  /**
-   * 主题总数
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TotalTopic: number
-  /**
-   * 监控的主题列表
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TopicListForMonitor: Array<ConsumerGroupTopic>
-  /**
-   * 监控的组列表
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  GroupListForMonitor: Array<Group>
+  RequestId?: string
 }
 
 /**
@@ -4195,7 +4182,7 @@ export interface DescribeGroupInfoRequest {
    */
   InstanceId: string
   /**
-   * Kafka 消费分组，Consumer-group，这里是数组形式，格式：GroupList.0=xxx&GroupList.1=yyy。
+   * Kafka 消费分组，Consumer-group，这里是数组形式，示例：["xxx","yyy"]
    */
   GroupList: Array<string>
 }
@@ -4725,6 +4712,24 @@ export interface AclResponse {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AclList: Array<Acl>
+}
+
+/**
+ * Prometheus 监控返回
+ */
+export interface PrometheusResult {
+  /**
+   * 返回的code，0为正常，非0为错误
+   */
+  ReturnCode: string
+  /**
+   * 成功消息
+   */
+  ReturnMessage: string
+  /**
+   * 操作型返回的Data数据,可能有flowId等
+   */
+  Data: OperateResponseData
 }
 
 /**
@@ -5960,6 +5965,47 @@ export interface ModifyInstancePreResponse {
 }
 
 /**
+ * SQLServer修改连接源参数
+ */
+export interface SQLServerModifyConnectParam {
+  /**
+   * SQLServer连接源的实例资源【不支持修改】
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Resource: string
+  /**
+   * SQLServer的连接port【不支持修改】
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Port?: number
+  /**
+   * SQLServer连接源的实例vip【不支持修改】
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ServiceVip?: string
+  /**
+   * SQLServer连接源的vpcId【不支持修改】
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UniqVpcId?: string
+  /**
+   * SQLServer连接源的用户名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UserName?: string
+  /**
+   * SQLServer连接源的密码
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Password?: string
+  /**
+   * 是否更新到关联的Dip任务
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsUpdate?: boolean
+}
+
+/**
  * CreateUser请求参数结构体
  */
 export interface CreateUserRequest {
@@ -6122,6 +6168,20 @@ export interface ConnectResourceResourceIdResp {
 }
 
 /**
+ * 数据处理——Value处理参数——截取参数
+ */
+export interface SubstrParam {
+  /**
+   * 截取起始位置
+   */
+  Start: number
+  /**
+   * 截取截止位置
+   */
+  End: number
+}
+
+/**
  * CheckCdcCluster请求参数结构体
  */
 export interface CheckCdcClusterRequest {
@@ -6262,17 +6322,21 @@ export interface JsonPathReplaceParam {
 }
 
 /**
- * 数据处理——Value处理参数——截取参数
+ * 普罗米修斯打通的vipVport
  */
-export interface SubstrParam {
+export interface PrometheusDTO {
   /**
-   * 截取起始位置
+   * export类型（jmx_export\node_export）
    */
-  Start: number
+  Type: string
   /**
-   * 截取截止位置
+   * vip
    */
-  End: number
+  SourceIp: string
+  /**
+   * vport
+   */
+  SourcePort: number
 }
 
 /**
@@ -6554,6 +6618,153 @@ export interface DescribeDatahubTasksResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 实例详情
+ */
+export interface InstanceDetail {
+  /**
+   * 实例id
+   */
+  InstanceId?: string
+  /**
+   * 实例名称
+   */
+  InstanceName?: string
+  /**
+   * 访问实例的vip 信息
+   */
+  Vip?: string
+  /**
+   * 访问实例的端口信息
+   */
+  Vport?: string
+  /**
+   * 虚拟IP列表
+   */
+  VipList?: Array<VipEntity>
+  /**
+   * 实例的状态。0：创建中，1：运行中，2：删除中：5隔离中， -1 创建失败
+   */
+  Status?: number
+  /**
+   * 实例带宽，单位Mbps
+   */
+  Bandwidth?: number
+  /**
+   * 实例的存储大小，单位GB
+   */
+  DiskSize?: number
+  /**
+   * 可用区域ID
+   */
+  ZoneId?: number
+  /**
+   * vpcId，如果为空，说明是基础网络
+   */
+  VpcId?: string
+  /**
+   * 子网id
+   */
+  SubnetId?: string
+  /**
+   * 实例是否续费，int  枚举值：1表示自动续费，2表示明确不自动续费
+   */
+  RenewFlag?: number
+  /**
+   * 实例状态 int：1表示健康，2表示告警，3 表示实例状态异常
+   */
+  Healthy?: number
+  /**
+   * 实例状态信息
+   */
+  HealthyMessage?: string
+  /**
+   * 实例创建时间
+   */
+  CreateTime?: number
+  /**
+   * 实例过期时间
+   */
+  ExpireTime?: number
+  /**
+   * 是否为内部客户。值为1 表示内部客户
+   */
+  IsInternal?: number
+  /**
+   * Topic个数
+   */
+  TopicNum?: number
+  /**
+   * 标识tag
+   */
+  Tags?: Array<Tag>
+  /**
+   * kafka版本信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Version?: string
+  /**
+   * 跨可用区
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ZoneIds?: Array<number | bigint>
+  /**
+   * ckafka售卖类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Cvm?: number
+  /**
+   * ckafka实例类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceType?: string
+  /**
+   * 磁盘类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DiskType?: string
+  /**
+   * 当前规格最大Topic数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MaxTopicNumber?: number
+  /**
+   * 当前规格最大Partition数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MaxPartitionNumber?: number
+  /**
+   * 计划升级配置时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RebalanceTime?: string
+  /**
+   * 实例当前partition数量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PartitionNumber?: number
+  /**
+   * 公网带宽类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PublicNetworkChargeType?: string
+  /**
+   * 公网带宽值
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PublicNetwork?: number
+  /**
+   * 实例类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ClusterType?: string
+  /**
+   * 实例功能列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Features?: Array<string>
 }
 
 /**
@@ -6915,6 +7126,64 @@ export interface CreateRouteResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * PostgreSQL类型入参
+ */
+export interface PostgreSQLParam {
+  /**
+   * PostgreSQL的数据库名称
+   */
+  Database: string
+  /**
+   * PostgreSQL的数据表名称，"*"为所监听的所有数据库中的非系统表，可以","间隔，监听多个数据表，但数据表需要以"Schema名.数据表名"的格式进行填写，需要填入正则表达式时，格式为"Schema名\\.数据表名"
+   */
+  Table: string
+  /**
+   * 该PostgreSQL在连接管理内的Id
+   */
+  Resource: string
+  /**
+   * 插件名(decoderbufs/pgoutput)，默认为decoderbufs
+   */
+  PluginName: string
+  /**
+   * 复制存量信息(never增量, initial全量)，默认为initial
+   */
+  SnapshotMode?: string
+  /**
+   * 上游数据格式(JSON/Debezium), 当数据库同步模式为默认字段匹配时,必填
+   */
+  DataFormat?: string
+  /**
+   * "INSERT" 表示使用 Insert 模式插入，"UPSERT" 表示使用 Upsert 模式插入
+   */
+  DataTargetInsertMode?: string
+  /**
+   * 当 "DataInsertMode"="UPSERT" 时，传入当前 upsert 时依赖的主键
+   */
+  DataTargetPrimaryKeyField?: string
+  /**
+   * 表与消息间的映射关系
+   */
+  DataTargetRecordMapping?: Array<RecordMapping>
+  /**
+   * 是否抛弃解析失败的消息，默认为true
+   */
+  DropInvalidMessage?: boolean
+  /**
+   * 输入的table是否为正则表达式
+   */
+  IsTableRegular?: boolean
+  /**
+   * 格式：库1.表1:字段1,字段2;库2.表2:字段2，表之间;（分号）隔开，字段之间,（逗号）隔开。不指定的表默认取表的主键
+   */
+  KeyColumns?: string
+  /**
+   * 如果该值为 true，则消息中会携带消息结构体对应的schema，如果该值为false则不会携带
+   */
+  RecordWithSchema?: boolean
 }
 
 /**
@@ -7615,61 +7884,13 @@ export interface CreateTopicIpWhiteListRequest {
 }
 
 /**
- * PostgreSQL类型入参
+ * DescribePrometheus请求参数结构体
  */
-export interface PostgreSQLParam {
+export interface DescribePrometheusRequest {
   /**
-   * PostgreSQL的数据库名称
+   * ckafka实例Id
    */
-  Database: string
-  /**
-   * PostgreSQL的数据表名称，"*"为所监听的所有数据库中的非系统表，可以","间隔，监听多个数据表，但数据表需要以"Schema名.数据表名"的格式进行填写，需要填入正则表达式时，格式为"Schema名\\.数据表名"
-   */
-  Table: string
-  /**
-   * 该PostgreSQL在连接管理内的Id
-   */
-  Resource: string
-  /**
-   * 插件名(decoderbufs/pgoutput)，默认为decoderbufs
-   */
-  PluginName: string
-  /**
-   * 复制存量信息(never增量, initial全量)，默认为initial
-   */
-  SnapshotMode?: string
-  /**
-   * 上游数据格式(JSON/Debezium), 当数据库同步模式为默认字段匹配时,必填
-   */
-  DataFormat?: string
-  /**
-   * "INSERT" 表示使用 Insert 模式插入，"UPSERT" 表示使用 Upsert 模式插入
-   */
-  DataTargetInsertMode?: string
-  /**
-   * 当 "DataInsertMode"="UPSERT" 时，传入当前 upsert 时依赖的主键
-   */
-  DataTargetPrimaryKeyField?: string
-  /**
-   * 表与消息间的映射关系
-   */
-  DataTargetRecordMapping?: Array<RecordMapping>
-  /**
-   * 是否抛弃解析失败的消息，默认为true
-   */
-  DropInvalidMessage?: boolean
-  /**
-   * 输入的table是否为正则表达式
-   */
-  IsTableRegular?: boolean
-  /**
-   * 格式：库1.表1:字段1,字段2;库2.表2:字段2，表之间;（分号）隔开，字段之间,（逗号）隔开。不指定的表默认取表的主键
-   */
-  KeyColumns?: string
-  /**
-   * 如果该值为 true，则消息中会携带消息结构体对应的schema，如果该值为false则不会携带
-   */
-  RecordWithSchema?: boolean
+  InstanceId: string
 }
 
 /**
@@ -8519,150 +8740,21 @@ export interface ModifyDatahubTaskRequest {
 }
 
 /**
- * 实例详情
+ * CreatePrometheus请求参数结构体
  */
-export interface InstanceDetail {
+export interface CreatePrometheusRequest {
   /**
-   * 实例id
+   * ckafka实例id
    */
-  InstanceId?: string
+  InstanceId: string
   /**
-   * 实例名称
+   * vpc地址
    */
-  InstanceName?: string
+  VpcId: string
   /**
-   * 访问实例的vip 信息
+   * 子网地址
    */
-  Vip?: string
-  /**
-   * 访问实例的端口信息
-   */
-  Vport?: string
-  /**
-   * 虚拟IP列表
-   */
-  VipList?: Array<VipEntity>
-  /**
-   * 实例的状态。0：创建中，1：运行中，2：删除中：5隔离中， -1 创建失败
-   */
-  Status?: number
-  /**
-   * 实例带宽，单位Mbps
-   */
-  Bandwidth?: number
-  /**
-   * 实例的存储大小，单位GB
-   */
-  DiskSize?: number
-  /**
-   * 可用区域ID
-   */
-  ZoneId?: number
-  /**
-   * vpcId，如果为空，说明是基础网络
-   */
-  VpcId?: string
-  /**
-   * 子网id
-   */
-  SubnetId?: string
-  /**
-   * 实例是否续费，int  枚举值：1表示自动续费，2表示明确不自动续费
-   */
-  RenewFlag?: number
-  /**
-   * 实例状态 int：1表示健康，2表示告警，3 表示实例状态异常
-   */
-  Healthy?: number
-  /**
-   * 实例状态信息
-   */
-  HealthyMessage?: string
-  /**
-   * 实例创建时间
-   */
-  CreateTime?: number
-  /**
-   * 实例过期时间
-   */
-  ExpireTime?: number
-  /**
-   * 是否为内部客户。值为1 表示内部客户
-   */
-  IsInternal?: number
-  /**
-   * Topic个数
-   */
-  TopicNum?: number
-  /**
-   * 标识tag
-   */
-  Tags?: Array<Tag>
-  /**
-   * kafka版本信息
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Version?: string
-  /**
-   * 跨可用区
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ZoneIds?: Array<number | bigint>
-  /**
-   * ckafka售卖类型
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Cvm?: number
-  /**
-   * ckafka实例类型
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  InstanceType?: string
-  /**
-   * 磁盘类型
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  DiskType?: string
-  /**
-   * 当前规格最大Topic数
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  MaxTopicNumber?: number
-  /**
-   * 当前规格最大Partition数
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  MaxPartitionNumber?: number
-  /**
-   * 计划升级配置时间
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  RebalanceTime?: string
-  /**
-   * 实例当前partition数量
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  PartitionNumber?: number
-  /**
-   * 公网带宽类型
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  PublicNetworkChargeType?: string
-  /**
-   * 公网带宽值
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  PublicNetwork?: number
-  /**
-   * 实例类型
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ClusterType?: string
-  /**
-   * 实例功能列表
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Features?: Array<string>
+  SubnetId: string
 }
 
 /**

@@ -7,6 +7,10 @@ export default class TencentCloudSDKHttpException extends Error {
      */
     requestId: string;
     /**
+     * 请求traceId
+     */
+    traceId: string;
+    /**
      * http状态码
      */
     httpCode?: number;
@@ -14,9 +18,10 @@ export default class TencentCloudSDKHttpException extends Error {
      * 接口返回状态码
      */
     code?: string;
-    constructor(error: string, requestId?: string);
+    constructor(error: string, requestId?: string, traceId?: string);
     getMessage(): string;
     getRequestId(): string;
+    getTraceId(): string;
     toString(): string;
     toLocaleString(): string;
 }

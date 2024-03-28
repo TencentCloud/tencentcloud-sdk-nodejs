@@ -57,7 +57,7 @@ import {
   FetchMessageListByOffsetResponse,
   InquireCkafkaPriceResp,
   CreateRouteRequest,
-  SQLServerModifyConnectParam,
+  ModifyGroupOffsetsRequest,
   DeleteTopicRequest,
   DescribeDatahubTasksRequest,
   DescribeInstancesResponse,
@@ -81,6 +81,7 @@ import {
   DescribeInstancesDetailResponse,
   CreateInstancePreData,
   DescribeAppInfoRequest,
+  DescribePrometheusResponse,
   AclRule,
   SMTParam,
   CheckCdcClusterResponse,
@@ -112,7 +113,7 @@ import {
   CreateInstancePostResp,
   MongoDBModifyConnectParam,
   TdwParam,
-  ModifyGroupOffsetsRequest,
+  ConsumerGroupResponse,
   DescribeDatahubTopicResponse,
   DescribeCkafkaZoneRequest,
   FetchDatahubMessageByOffsetResponse,
@@ -151,7 +152,7 @@ import {
   DeleteRouteResponse,
   Partitions,
   CreateDatahubTaskRes,
-  ConsumerGroupResponse,
+  CreatePrometheusResponse,
   CreateTopicIpWhiteListResponse,
   GroupOffsetTopic,
   ModifyGroupOffsetsResponse,
@@ -199,6 +200,7 @@ import {
   DescribeAppInfoResponse,
   CosParam,
   AclResponse,
+  PrometheusResult,
   ZoneResponse,
   Instance,
   DescribeInstanceAttributesResponse,
@@ -245,6 +247,7 @@ import {
   BatchCreateAclResponse,
   ZoneInfo,
   ModifyInstancePreResponse,
+  SQLServerModifyConnectParam,
   CreateUserRequest,
   RouteResponse,
   DtsModifyConnectParam,
@@ -253,12 +256,13 @@ import {
   DeleteTopicIpWhiteListResponse,
   CreateInstancePreResponse,
   ConnectResourceResourceIdResp,
+  SubstrParam,
   CheckCdcClusterRequest,
   FetchMessageByOffsetRequest,
   DescribeDatahubTopicResp,
   DescribeInstancesDetailRequest,
   JsonPathReplaceParam,
-  SubstrParam,
+  PrometheusDTO,
   TopicFlowRankingResult,
   FetchMessageByOffsetResponse,
   CreateConsumerRequest,
@@ -270,6 +274,7 @@ import {
   FetchDatahubMessageByOffsetRequest,
   ValueParam,
   DescribeDatahubTasksResponse,
+  InstanceDetail,
   InquiryDiskParam,
   LowercaseParam,
   ScalingDownResp,
@@ -283,6 +288,7 @@ import {
   RegexReplaceParam,
   PrivateLinkParam,
   CreateRouteResponse,
+  PostgreSQLParam,
   InstanceResponse,
   DatahubTopicDTO,
   JgwOperateResponse,
@@ -313,7 +319,7 @@ import {
   BatchModifyTopicAttributesRequest,
   DeleteGroupResponse,
   CreateTopicIpWhiteListRequest,
-  PostgreSQLParam,
+  DescribePrometheusRequest,
   MariaDBConnectParam,
   AclRuleInfo,
   RenewCkafkaInstanceRequest,
@@ -339,7 +345,7 @@ import {
   DescribeTopicSyncReplicaRequest,
   DescribeConnectResource,
   ModifyDatahubTaskRequest,
-  InstanceDetail,
+  CreatePrometheusRequest,
   InstanceQuotaConfigResp,
   DescribeTopicDetailResponse,
   MySQLModifyConnectParam,
@@ -540,6 +546,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 根据位点查询消息列表
+   */
+  async FetchMessageListByOffset(
+    req: FetchMessageListByOffsetRequest,
+    cb?: (error: string, rep: FetchMessageListByOffsetResponse) => void
+  ): Promise<FetchMessageListByOffsetResponse> {
+    return this.request("FetchMessageListByOffset", req, cb)
+  }
+
+  /**
    * 修改Datahub任务
    */
   async ModifyDatahubTask(
@@ -620,13 +636,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 根据位点查询消息列表
+   * 获取实例Prometheus信息
    */
-  async FetchMessageListByOffset(
-    req: FetchMessageListByOffsetRequest,
-    cb?: (error: string, rep: FetchMessageListByOffsetResponse) => void
-  ): Promise<FetchMessageListByOffsetResponse> {
-    return this.request("FetchMessageListByOffset", req, cb)
+  async DescribePrometheus(
+    req: DescribePrometheusRequest,
+    cb?: (error: string, rep: DescribePrometheusResponse) => void
+  ): Promise<DescribePrometheusResponse> {
+    return this.request("DescribePrometheus", req, cb)
   }
 
   /**
@@ -907,6 +923,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAppInfoResponse) => void
   ): Promise<DescribeAppInfoResponse> {
     return this.request("DescribeAppInfo", req, cb)
+  }
+
+  /**
+   * 添加普罗米修斯监控1
+   */
+  async CreatePrometheus(
+    req: CreatePrometheusRequest,
+    cb?: (error: string, rep: CreatePrometheusResponse) => void
+  ): Promise<CreatePrometheusResponse> {
+    return this.request("CreatePrometheus", req, cb)
   }
 
   /**

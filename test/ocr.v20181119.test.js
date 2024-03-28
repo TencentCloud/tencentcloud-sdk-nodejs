@@ -328,6 +328,16 @@ it("ocr.v20181119.InvoiceGeneralOCR", async function () {
     }
 })
 
+it("ocr.v20181119.RideHailingTransportLicenseOCR", async function () {
+    try {
+       const data = await client.RideHailingTransportLicenseOCR({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ocr.v20181119.GetTaskState", async function () {
     try {
        const data = await client.GetTaskState({})
@@ -808,9 +818,9 @@ it("ocr.v20181119.EduPaperOCR", async function () {
     }
 })
 
-it("ocr.v20181119.RideHailingTransportLicenseOCR", async function () {
+it("ocr.v20181119.ReconstructDocument", async function () {
     try {
-       const data = await client.RideHailingTransportLicenseOCR({})
+       const data = await client.ReconstructDocument({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

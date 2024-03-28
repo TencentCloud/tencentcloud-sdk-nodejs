@@ -289,6 +289,19 @@ export interface CarInvoiceOCRRequest {
     PdfPageNumber?: number;
 }
 /**
+ * 识别结果
+ */
+export interface TextDetectionResult {
+    /**
+     * 识别出的文本行内容
+     */
+    Value: string;
+    /**
+     * 坐标，以四个顶点坐标表示
+     */
+    Polygon: Array<Coord>;
+}
+/**
  * 混贴票据单张发票识别信息
  */
 export interface MixedInvoiceItem {
@@ -5286,6 +5299,54 @@ export interface WordCoordPoint {
     WordCoordinate: Array<Coord>;
 }
 /**
+ * 单页文档识别的内容
+ */
+export interface DocumentRecognizeInfo {
+    /**
+     * 输入PDF文件的页码，从1开始。输入图片的话值始终为1
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PageNumber?: number;
+    /**
+     * 旋转角度
+  
+  注意：此字段可能返回 null，表示取不到有效值。
+     * @deprecated
+     */
+    Angle?: number;
+    /**
+     * AI算法识别处理后的图片高度
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Height?: number;
+    /**
+     * AI算法识别处理后的图片宽度
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Width?: number;
+    /**
+     * 图片的原始高度，输入PDF文件则表示单页PDF转图片之后的图片高度
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    OriginHeight?: number;
+    /**
+     * 图片的原始宽度，输入PDF文件则表示单页PDF转图片之后的图片宽度
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    OriginWidth?: number;
+    /**
+     * 文档元素信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Elements?: Array<DocumentElement>;
+    /**
+     * 旋转角度
+  
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RotatedAngle?: number;
+}
+/**
  * LicensePlateOCR请求参数结构体
  */
 export interface LicensePlateOCRRequest {
@@ -5509,6 +5570,30 @@ export interface RecognizeIndonesiaIDCardOCRResponse {
      * 城市，Scene为V2时支持识别
      */
     Kota?: string;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * ReconstructDocument返回参数结构体
+ */
+export interface ReconstructDocumentResponse {
+    /**
+     * 识别生成的Markdown文件base64编码的字符串
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MarkdownBase64?: string;
+    /**
+     * 输入文件中嵌入的图片放在一个文件夹中打包为.zip压缩文件，识别生成的Markdown文件通过路径关联插入本文件夹中的图片。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InsetImagePackage?: string;
+    /**
+     * 输入文件中嵌入的图片中文字内容的识别结果
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DocumentRecognizeInfo?: Array<DocumentRecognizeInfo>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -6073,17 +6158,51 @@ export interface FlightInvoiceOCRResponse {
     RequestId?: string;
 }
 /**
- * 识别结果
+ * ShipInvoiceOCR返回参数结构体
  */
-export interface TextDetectionResult {
+export interface ShipInvoiceOCRResponse {
     /**
-     * 识别出的文本行内容
+     * 轮船票识别结果，具体内容请点击左侧链接。
      */
-    Value: string;
+    ShipInvoiceInfos?: Array<ShipInvoiceInfo>;
     /**
-     * 坐标，以四个顶点坐标表示
+     * 图片旋转角度（角度制），文本的水平方向为0°，顺时针为正，逆时针为负。
      */
-    Polygon: Array<Coord>;
+    Angle?: number;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * ReconstructDocument请求参数结构体
+ */
+export interface ReconstructDocumentRequest {
+    /**
+     * PDF,Image
+     */
+    FileType: string;
+    /**
+     * 图片的 Base64 值。 支持的图片格式：PNG、JPG、JPEG、PDF，暂不支持 GIF 格式。 支持的图片大小：所下载图片经Base64编码后不超过 8M。图片下载时间不超过 3 秒。 支持的图片像素：单边介于20-10000px之间。 图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
+     */
+    FileBase64?: string;
+    /**
+     * 图片的 Url 地址。 支持的图片格式：PNG、JPG、JPEG、PDF，暂不支持 GIF 格式。 支持的图片大小：所下载图片经 Base64 编码后不超过 8M。图片下载时间不超过 3 秒。 支持的图片像素：单边介于20-10000px之间。 图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。 非腾讯云存储的 Url 速度和稳定性可能受一定影响。
+     */
+    FileUrl?: string;
+    /**
+     * 当传入文件是PDF类型（IsPdf=true）时，用来指定pdf识别的起始页码，识别的页码包含当前值。
+     */
+    FileStartPageNumber?: number;
+    /**
+     * 当传入文件是PDF类型（IsPdf=true）时，用来指定pdf识别的结束页码，识别的页码包含当前值。
+  单次调用，最多支持10页pdf的智能识别。
+     */
+    FileEndPageNumber?: number;
+    /**
+     * 配置选项，支持配置是否在生成的Markdown中是否嵌入图片
+     */
+    Config?: ReconstructDocumentConfig;
 }
 /**
  * InstitutionOCR请求参数结构体
@@ -7857,21 +7976,42 @@ export interface MedicalInvoiceItem {
     Coord: Rect;
 }
 /**
- * ShipInvoiceOCR返回参数结构体
+ * 文档元素字段
  */
-export interface ShipInvoiceOCRResponse {
+export interface DocumentElement {
     /**
-     * 轮船票识别结果，具体内容请点击左侧链接。
+     * 文档元素索引
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    ShipInvoiceInfos?: Array<ShipInvoiceInfo>;
+    Index?: number;
     /**
-     * 图片旋转角度（角度制），文本的水平方向为0°，顺时针为正，逆时针为负。
+     * 元素类型，包括paragraph、table、formula、figure、title、header、footer、figure_text
+  
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    Angle?: number;
+    Type?: string;
     /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     * 元素内容，当type为figure或formula(公式识别关闭)时该字段内容为图片的位置
+  
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    RequestId?: string;
+    Text?: string;
+    /**
+     * 元素坐标，左上角(x1, y1)，右上角(x2, y2)，右下角(x3, y3)，左下角(x4, y4)
+  
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Polygon?: Polygon;
+    /**
+     * 元素层级
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Level?: number;
+    /**
+     * 嵌套的文档元素信息，一般包含的是文档内嵌入图片的文字识别结果
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Elements?: Array<DocumentElement>;
 }
 /**
  * RecognizeGeneralInvoice返回参数结构体
@@ -9200,6 +9340,15 @@ export interface WaybillOCRRequest {
      * 需要识别的PDF页面的对应页码，仅支持PDF单页识别，当上传文件为PDF且IsPdf参数值为true时有效，默认值为1。
      */
     PdfPageNumber?: number;
+}
+/**
+ * ReconstructDocument配置选项
+ */
+export interface ReconstructDocumentConfig {
+    /**
+     * 生成的Markdown中是否嵌入图片
+     */
+    EnableInsetImage?: boolean;
 }
 /**
  * VinOCR请求参数结构体

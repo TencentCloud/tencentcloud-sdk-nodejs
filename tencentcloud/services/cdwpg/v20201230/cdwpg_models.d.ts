@@ -577,6 +577,10 @@ export interface CreateInstanceByApiRequest {
      * 标签列表
      */
     Tags?: Tag;
+    /**
+     * 版本
+     */
+    ProductVersion?: string;
 }
 /**
  * 列表页搜索的标记列表

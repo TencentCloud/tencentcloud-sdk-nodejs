@@ -4740,11 +4740,16 @@ export interface FlowApproverInfo {
      */
     SignComponents?: Array<Component>;
     /**
-     * 签署方控件类型为 SIGN_SIGNATURE时，可以指定签署方签名方式
-      HANDWRITE – 手写签名
-      OCR_ESIGN -- AI智能识别手写签名
-      ESIGN -- 个人印章类型
-      SYSTEM_ESIGN -- 系统签名（该类型可以在用户签署时根据用户姓名一键生成一个签名来进行签署）
+     * 当签署方控件类型为 <b>SIGN_SIGNATURE</b> 时，可以指定签署方签名方式。如果不指定，签署人可以使用所有的签名类型，可指定的签名类型包括：
+  
+  <ul><li> <b>HANDWRITE</b> :手写签名。</li>
+  <li> <b>OCR_ESIGN</b> :AI智能识别手写签名。</li>
+  <li> <b>ESIGN</b> :个人印章类型。</li>
+  <li> <b>IMG_ESIGN</b>  : 图片印章。该类型支持用户在签署将上传的PNG格式的图片作为签名。</li>
+  <li> <b>SYSTEM_ESIGN</b> :系统签名。该类型可以在用户签署时根据用户姓名一键生成一个签名来进行签署。</li></ul>
+  
+  各种签名的样式可以参考下图：
+  ![image](https://qcloudimg.tencent-cloud.cn/raw/ee0498856c060c065628a0c5ba780d6b.jpg)
      */
     ComponentLimitType?: Array<string>;
     /**
@@ -5958,8 +5963,10 @@ export interface ApproverOption {
     /**
      * 签署人信息补充类型，默认无需补充。
   
-  <ul><li> **1** : ( 动态签署人（可发起合同后再补充签署人信息）注：`企业自动签不支持动态补充`</li>
-  </ul>
+  <ul><li> **1** : ( 动态签署人（可发起合同后再补充签署人信息）注：`企业自动签不支持动态补充`</li></ul>
+  
+  注：
+  `使用动态签署人能力前，需登陆腾讯电子签控制台打开服务开关`
      */
     FillType?: number;
     /**

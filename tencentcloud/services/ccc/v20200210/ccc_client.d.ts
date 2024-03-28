@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeExtensionRequest, StopAutoCalloutTaskRequest, HangUpCallRequest, CreateSDKLoginTokenResponse, ModifyStaffRequest, BindNumberCallOutSkillGroupResponse, ResetExtensionPasswordRequest, DisableCCCPhoneNumberResponse, DescribeProtectedTelCdrResponse, DescribeAutoCalloutTaskRequest, CreateUserSigResponse, DescribeIMCdrsResponse, CreateAdminURLResponse, PausePredictiveDialingCampaignRequest, CreateCallOutSessionResponse, DescribeCarrierPrivilegeNumberApplicantsRequest, DisableCCCPhoneNumberRequest, CreatePredictiveDialingCampaignRequest, DescribeTelCallInfoResponse, DescribeExtensionsResponse, DeleteExtensionRequest, DescribePredictiveDialingCampaignResponse, DescribeTelCdrRequest, DescribeAutoCalloutTasksResponse, ModifyExtensionResponse, DescribeIMCdrListResponse, CreateStaffResponse, DescribePredictiveDialingCampaignsRequest, DescribeSkillGroupInfoListResponse, DescribeNumbersResponse, DeletePredictiveDialingCampaignRequest, DescribeStaffInfoListResponse, UnbindNumberCallOutSkillGroupRequest, CreateAutoCalloutTaskRequest, ResumePredictiveDialingCampaignResponse, CreateExtensionResponse, CreateUserSigRequest, CreateCCCSkillGroupRequest, DescribeAutoCalloutTaskResponse, CreateCCCSkillGroupResponse, DescribeTelSessionRequest, DescribeIMCdrsRequest, DescribeSkillGroupInfoListRequest, CreateCarrierPrivilegeNumberApplicantResponse, DescribePredictiveDialingCampaignRequest, UpdateCCCSkillGroupResponse, DescribePredictiveDialingSessionsResponse, PausePredictiveDialingCampaignResponse, UpdatePredictiveDialingCampaignRequest, DescribeStaffInfoListRequest, ResetExtensionPasswordResponse, UpdateCCCSkillGroupRequest, ModifyStaffResponse, ModifyExtensionRequest, CreatePredictiveDialingCampaignResponse, UpdatePredictiveDialingCampaignResponse, AbortPredictiveDialingCampaignResponse, DescribeNumbersRequest, BindNumberCallOutSkillGroupRequest, DeletePredictiveDialingCampaignResponse, UnbindNumberCallOutSkillGroupResponse, CreateAutoCalloutTaskResponse, DeleteStaffRequest, DescribeCCCBuyInfoListRequest, DescribePredictiveDialingCampaignsResponse, DescribeTelCallInfoRequest, CreateExtensionRequest, CreateCarrierPrivilegeNumberApplicantRequest, UnbindStaffSkillGroupListRequest, HangUpCallResponse, StopAutoCalloutTaskResponse, AbortPredictiveDialingCampaignRequest, DescribeCCCBuyInfoListResponse, UnbindStaffSkillGroupListResponse, ResumePredictiveDialingCampaignRequest, DeleteExtensionResponse, BindStaffSkillGroupListRequest, DescribePSTNActiveSessionListRequest, DescribeCallInMetricsResponse, DescribeActiveCarrierPrivilegeNumberResponse, DescribeTelCdrResponse, DescribeStaffStatusMetricsRequest, DeleteStaffResponse, CreateStaffRequest, DescribeChatMessagesResponse, DescribePSTNActiveSessionListResponse, DescribeIMCdrListRequest, DescribeAutoCalloutTasksRequest, DescribeChatMessagesRequest, DescribeTelSessionResponse, CreateAdminURLRequest, DescribeStaffStatusMetricsResponse, DescribeCarrierPrivilegeNumberApplicantsResponse, CreateCallOutSessionRequest, BindStaffSkillGroupListResponse, DescribeExtensionsRequest, DescribeProtectedTelCdrRequest, DescribePredictiveDialingSessionsRequest, CreateSDKLoginTokenRequest, DescribeActiveCarrierPrivilegeNumberRequest, DescribeCallInMetricsRequest, DescribeExtensionResponse } from "./ccc_models";
+import { DescribeExtensionRequest, StopAutoCalloutTaskRequest, CreateSDKLoginTokenResponse, ModifyStaffRequest, BindNumberCallOutSkillGroupResponse, ResetExtensionPasswordRequest, DisableCCCPhoneNumberResponse, DescribeProtectedTelCdrResponse, DescribeAutoCalloutTaskRequest, CreateUserSigResponse, DescribeIMCdrsResponse, CreateAdminURLResponse, PausePredictiveDialingCampaignRequest, CreateCallOutSessionResponse, DescribeCarrierPrivilegeNumberApplicantsRequest, DisableCCCPhoneNumberRequest, CreatePredictiveDialingCampaignRequest, DescribeChatMessagesResponse, DescribeTelCallInfoResponse, DescribeExtensionsResponse, DeleteExtensionRequest, DescribePredictiveDialingCampaignResponse, DescribeTelCdrRequest, DescribeAutoCalloutTasksResponse, ModifyExtensionResponse, DescribeIMCdrListResponse, CreateStaffResponse, DescribePredictiveDialingCampaignsRequest, DescribeSkillGroupInfoListResponse, DescribeNumbersResponse, DeletePredictiveDialingCampaignRequest, DescribeStaffInfoListResponse, UnbindNumberCallOutSkillGroupRequest, CreateAutoCalloutTaskRequest, ResumePredictiveDialingCampaignResponse, CreateExtensionResponse, CreateUserSigRequest, CreateCCCSkillGroupRequest, DescribeAutoCalloutTaskResponse, CreateCompanyApplyRequest, CreateCCCSkillGroupResponse, DescribeTelSessionRequest, DescribeIMCdrsRequest, DescribeSkillGroupInfoListRequest, CreateCarrierPrivilegeNumberApplicantResponse, DescribePredictiveDialingCampaignRequest, UpdateCCCSkillGroupResponse, DescribePredictiveDialingSessionsResponse, PausePredictiveDialingCampaignResponse, UpdatePredictiveDialingCampaignRequest, DescribeStaffInfoListRequest, ResetExtensionPasswordResponse, UpdateCCCSkillGroupRequest, ModifyStaffResponse, ModifyExtensionRequest, CreatePredictiveDialingCampaignResponse, UpdatePredictiveDialingCampaignResponse, AbortPredictiveDialingCampaignResponse, DescribeNumbersRequest, BindNumberCallOutSkillGroupRequest, DeletePredictiveDialingCampaignResponse, UnbindNumberCallOutSkillGroupResponse, CreateAutoCalloutTaskResponse, DescribeCompanyListResponse, DeleteStaffRequest, DescribeCCCBuyInfoListRequest, DescribePredictiveDialingCampaignsResponse, DescribeTelCallInfoRequest, CreateExtensionRequest, CreateCarrierPrivilegeNumberApplicantRequest, UnbindStaffSkillGroupListRequest, HangUpCallResponse, StopAutoCalloutTaskResponse, AbortPredictiveDialingCampaignRequest, ModifyCompanyApplyResponse, DescribeCCCBuyInfoListResponse, UnbindStaffSkillGroupListResponse, ResumePredictiveDialingCampaignRequest, DeleteExtensionResponse, BindStaffSkillGroupListRequest, DescribePSTNActiveSessionListRequest, DescribeCallInMetricsResponse, ModifyCompanyApplyRequest, DescribeCompanyListRequest, DescribeActiveCarrierPrivilegeNumberResponse, HangUpCallRequest, DescribeTelCdrResponse, DescribeStaffStatusMetricsRequest, DeleteStaffResponse, CreateStaffRequest, CreateCompanyApplyResponse, DescribePSTNActiveSessionListResponse, DescribeIMCdrListRequest, DescribeAutoCalloutTasksRequest, DescribeChatMessagesRequest, DescribeTelSessionResponse, CreateAdminURLRequest, DescribeStaffStatusMetricsResponse, DescribeCarrierPrivilegeNumberApplicantsResponse, CreateCallOutSessionRequest, BindStaffSkillGroupListResponse, DescribeExtensionsRequest, DescribeProtectedTelCdrRequest, DescribePredictiveDialingSessionsRequest, CreateSDKLoginTokenRequest, DescribeActiveCarrierPrivilegeNumberRequest, DescribeCallInMetricsRequest, DescribeExtensionResponse } from "./ccc_models";
 /**
  * ccc client
  * @class
@@ -8,9 +8,9 @@ import { DescribeExtensionRequest, StopAutoCalloutTaskRequest, HangUpCallRequest
 export declare class Client extends AbstractClient {
     constructor(clientConfig: ClientConfig);
     /**
-     * 解绑号码外呼技能组
+     * 修改客服账号
      */
-    UnbindNumberCallOutSkillGroup(req: UnbindNumberCallOutSkillGroupRequest, cb?: (error: string, rep: UnbindNumberCallOutSkillGroupResponse) => void): Promise<UnbindNumberCallOutSkillGroupResponse>;
+    ModifyStaff(req: ModifyStaffRequest, cb?: (error: string, rep: ModifyStaffResponse) => void): Promise<ModifyStaffResponse>;
     /**
      * 查询话机列表信息
      */
@@ -52,9 +52,9 @@ export declare class Client extends AbstractClient {
      */
     DeleteStaff(req: DeleteStaffRequest, cb?: (error: string, rep: DeleteStaffResponse) => void): Promise<DeleteStaffResponse>;
     /**
-     * 修改客服账号
+     * 修改公司资质申请，只能修改状态为驳回或待审核的申请单。（1、首次使用接口，建议先在云联络中心控制台查看各个资料模版:https://console.cloud.tencent.com/ccc/enterprise/update。2、参数中图片Url建议使用腾讯云Cos存储的临时链接）
      */
-    ModifyStaff(req: ModifyStaffRequest, cb?: (error: string, rep: ModifyStaffResponse) => void): Promise<ModifyStaffResponse>;
+    ModifyCompanyApply(req: ModifyCompanyApplyRequest, cb?: (error: string, rep: ModifyCompanyApplyResponse) => void): Promise<ModifyCompanyApplyResponse>;
     /**
      * 创建话机账号
      */
@@ -96,6 +96,10 @@ export declare class Client extends AbstractClient {
      */
     DescribePredictiveDialingSessions(req: DescribePredictiveDialingSessionsRequest, cb?: (error: string, rep: DescribePredictiveDialingSessionsResponse) => void): Promise<DescribePredictiveDialingSessionsResponse>;
     /**
+     * 创建公司资质申请（1、首次使用接口，建议先在云联络中心控制台查看各个资料模版:https://console.cloud.tencent.com/ccc/enterprise/update。2、参数中图片Url建议使用腾讯云Cos存储的临时链接）
+     */
+    CreateCompanyApply(req: CreateCompanyApplyRequest, cb?: (error: string, rep: CreateCompanyApplyResponse) => void): Promise<CreateCompanyApplyResponse>;
+    /**
      * 获取电话服务记录与录音
      */
     DescribeTelCdr(req: DescribeTelCdrRequest, cb?: (error: string, rep: DescribeTelCdrResponse) => void): Promise<DescribeTelCdrResponse>;
@@ -103,6 +107,10 @@ export declare class Client extends AbstractClient {
      * 获取技能组信息列表
      */
     DescribeSkillGroupInfoList(req: DescribeSkillGroupInfoListRequest, cb?: (error: string, rep: DescribeSkillGroupInfoListResponse) => void): Promise<DescribeSkillGroupInfoListResponse>;
+    /**
+     * 解绑号码外呼技能组
+     */
+    UnbindNumberCallOutSkillGroup(req: UnbindNumberCallOutSkillGroupRequest, cb?: (error: string, rep: UnbindNumberCallOutSkillGroupResponse) => void): Promise<UnbindNumberCallOutSkillGroupResponse>;
     /**
      * 停止自动外呼任务
      */
@@ -205,6 +213,10 @@ export declare class Client extends AbstractClient {
      * 停止预测式外呼任务
      */
     AbortPredictiveDialingCampaign(req: AbortPredictiveDialingCampaignRequest, cb?: (error: string, rep: AbortPredictiveDialingCampaignResponse) => void): Promise<AbortPredictiveDialingCampaignResponse>;
+    /**
+     * 查询公司资质申请列表
+     */
+    DescribeCompanyList(req: DescribeCompanyListRequest, cb?: (error: string, rep: DescribeCompanyListResponse) => void): Promise<DescribeCompanyListResponse>;
     /**
      * 删除预测式外呼任务
      */

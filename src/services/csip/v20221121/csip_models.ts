@@ -523,7 +523,7 @@ export interface AssetViewCFGRisk {
    */
   AffectAsset?: string
   /**
-   * 风险等级
+   * 风险等级，low-低危，high-高危，middle-中危，info-提示，extreme-严重。
    */
   Level?: string
   /**
@@ -587,7 +587,8 @@ export interface AssetViewVULRisk {
    */
   AffectAsset?: string
   /**
-   * 风险等级
+   * 风险等级，low-低危，high-高危，middle-中危，info-提示，extreme-严重。
+
    */
   Level?: string
   /**
@@ -2391,7 +2392,7 @@ export interface VULRiskAdvanceCFGList {
    */
   VULName?: string
   /**
-   * 风险等级
+   * 风险等级，low-低危，high-高危，middle-中危，info-提示，extreme-严重。
    */
   RiskLevel?: string
   /**
@@ -2615,7 +2616,7 @@ export interface AssetViewWeakPassRisk {
    */
   AffectAsset?: string
   /**
-   * 风险等级
+   * 风险等级，low-低危，high-高危，middle-中危，info-提示，extreme-严重。
    */
   Level?: string
   /**
@@ -2707,7 +2708,7 @@ export interface WebsiteRisk {
    */
   AffectAsset?: string
   /**
-   * 风险等级
+   * 风险等级，low-低危，high-高危，middle-中危，info-提示，extreme-严重。
    */
   Level?: string
   /**
@@ -3127,7 +3128,7 @@ export interface VULViewVULRisk {
    */
   NoHandleCount?: number
   /**
-   * 风险等级
+   * 风险等级，low-低危，high-高危，middle-中危，info-提示，extreme-严重。
    */
   Level?: string
   /**
@@ -3229,7 +3230,7 @@ export interface PortViewPortRisk {
    */
   NoHandleCount?: number
   /**
-   * 风险等级
+   * 风险等级，low-低危，high-高危，middle-中危，info-提示，extreme-严重。
    */
   Level?: string
   /**
@@ -3710,7 +3711,7 @@ export interface AssetViewPortRisk {
    */
   AffectAsset?: string
   /**
-   * 风险等级
+   * 风险等级，low-低危，high-高危，middle-中危，info-提示，extreme-严重。
    */
   Level?: string
   /**

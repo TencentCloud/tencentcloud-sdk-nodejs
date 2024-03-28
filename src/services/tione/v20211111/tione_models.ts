@@ -163,7 +163,7 @@ HYBRID_PAID:
    */
   Command?: string
   /**
-   * 是否开启TIONE内网访问外部
+   * 是否开启TIONE内网访问外部，此功能仅支持后付费机型与从TIONE平台购买的预付费机型；使用从CVM选择资源组时此配置不生效。
    */
   ServiceEIP?: ServiceEIP
 }
@@ -2411,7 +2411,7 @@ HYBRID_PAID:
    */
   Command?: string
   /**
-   * 是否开启TIONE内网访问外部
+   * 是否开启TIONE内网访问外部，此功能仅支持后付费机型与从TIONE平台购买的预付费机型；使用从CVM选择资源组时此配置不生效。
    */
   ServiceEIP?: ServiceEIP
 }
@@ -4256,6 +4256,11 @@ export interface ImageInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ImageName?: string
+  /**
+   * 是否支持数据构建
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SupportDataPipeline?: boolean
 }
 
 /**

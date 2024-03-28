@@ -18,9 +18,9 @@ const client = new tencentcloud.ccc.v20200210.Client({
 })
 describe("ccc.v20200210.test.js", function () {
 
-it("ccc.v20200210.UnbindNumberCallOutSkillGroup", async function () {
+it("ccc.v20200210.ModifyStaff", async function () {
     try {
-       const data = await client.UnbindNumberCallOutSkillGroup({})
+       const data = await client.ModifyStaff({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -128,9 +128,9 @@ it("ccc.v20200210.DeleteStaff", async function () {
     }
 })
 
-it("ccc.v20200210.ModifyStaff", async function () {
+it("ccc.v20200210.ModifyCompanyApply", async function () {
     try {
-       const data = await client.ModifyStaff({})
+       const data = await client.ModifyCompanyApply({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -238,6 +238,16 @@ it("ccc.v20200210.DescribePredictiveDialingSessions", async function () {
     }
 })
 
+it("ccc.v20200210.CreateCompanyApply", async function () {
+    try {
+       const data = await client.CreateCompanyApply({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ccc.v20200210.DescribeTelCdr", async function () {
     try {
        const data = await client.DescribeTelCdr({})
@@ -251,6 +261,16 @@ it("ccc.v20200210.DescribeTelCdr", async function () {
 it("ccc.v20200210.DescribeSkillGroupInfoList", async function () {
     try {
        const data = await client.DescribeSkillGroupInfoList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ccc.v20200210.UnbindNumberCallOutSkillGroup", async function () {
+    try {
+       const data = await client.UnbindNumberCallOutSkillGroup({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -501,6 +521,16 @@ it("ccc.v20200210.DescribeNumbers", async function () {
 it("ccc.v20200210.AbortPredictiveDialingCampaign", async function () {
     try {
        const data = await client.AbortPredictiveDialingCampaign({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ccc.v20200210.DescribeCompanyList", async function () {
+    try {
+       const data = await client.DescribeCompanyList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

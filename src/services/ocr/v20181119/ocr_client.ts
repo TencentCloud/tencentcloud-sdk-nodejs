@@ -27,6 +27,7 @@ import {
   TextArithmetic,
   HKIDCardOCRRequest,
   CarInvoiceOCRRequest,
+  TextDetectionResult,
   MixedInvoiceItem,
   RecognizeTravelCardOCRRequest,
   TrainTicketOCRRequest,
@@ -159,10 +160,12 @@ import {
   RecognizeTravelCardOCRResponse,
   ElectronicAirTransportDetail,
   WordCoordPoint,
+  DocumentRecognizeInfo,
   LicensePlateOCRRequest,
   GeneralBasicOCRRequest,
   TextVehicleBack,
   RecognizeIndonesiaIDCardOCRResponse,
+  ReconstructDocumentResponse,
   GeneralEfficientOCRRequest,
   RecognizePhilippinesUMIDOCRResponse,
   AdvertiseOCRRequest,
@@ -181,7 +184,8 @@ import {
   GeneralAccurateOCRRequest,
   OrgCodeCertOCRRequest,
   FlightInvoiceOCRResponse,
-  TextDetectionResult,
+  ShipInvoiceOCRResponse,
+  ReconstructDocumentRequest,
   InstitutionOCRRequest,
   CarInvoiceInfo,
   FlightInvoiceInfo,
@@ -232,7 +236,7 @@ import {
   VehicleRegCertOCRResponse,
   GeneralFastOCRRequest,
   MedicalInvoiceItem,
-  ShipInvoiceOCRResponse,
+  DocumentElement,
   RecognizeGeneralInvoiceResponse,
   InsuranceBillInfo,
   GetTaskStateRequest,
@@ -277,6 +281,7 @@ import {
   IDCardOCRRequest,
   MixedInvoiceDetectRequest,
   WaybillOCRRequest,
+  ReconstructDocumentConfig,
   VinOCRRequest,
   VatInvoiceOCRRequest,
   RecognizePhilippinesUMIDOCRRequest,
@@ -830,6 +835,18 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: InvoiceGeneralOCRResponse) => void
   ): Promise<InvoiceGeneralOCRResponse> {
     return this.request("InvoiceGeneralOCR", req, cb)
+  }
+
+  /**
+     * 本接口支持网约车运输证关键字段的识别，包括交运管许可字号、车辆所有人、车辆号牌、起始日期、截止日期、发证日期。
+
+默认接口请求频率限制：5次/秒。
+     */
+  async RideHailingTransportLicenseOCR(
+    req: RideHailingTransportLicenseOCRRequest,
+    cb?: (error: string, rep: RideHailingTransportLicenseOCRResponse) => void
+  ): Promise<RideHailingTransportLicenseOCRResponse> {
+    return this.request("RideHailingTransportLicenseOCR", req, cb)
   }
 
   /**
@@ -1529,15 +1546,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 本接口支持网约车运输证关键字段的识别，包括交运管许可字号、车辆所有人、车辆号牌、起始日期、截止日期、发证日期。
-
-默认接口请求频率限制：5次/秒。
-     */
-  async RideHailingTransportLicenseOCR(
-    req: RideHailingTransportLicenseOCRRequest,
-    cb?: (error: string, rep: RideHailingTransportLicenseOCRResponse) => void
-  ): Promise<RideHailingTransportLicenseOCRResponse> {
-    return this.request("RideHailingTransportLicenseOCR", req, cb)
+   * 支持将图片或PDF文件转换成Markdown格式文件，可解析包括表格、公式、图片、标题、段落、页眉、页脚等内容元素，并将内容智能转换成阅读顺序。
+   */
+  async ReconstructDocument(
+    req: ReconstructDocumentRequest,
+    cb?: (error: string, rep: ReconstructDocumentResponse) => void
+  ): Promise<ReconstructDocumentResponse> {
+    return this.request("ReconstructDocument", req, cb)
   }
 
   /**

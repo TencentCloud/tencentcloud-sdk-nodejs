@@ -136,6 +136,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeGroup", req, cb);
     }
     /**
+     * 根据位点查询消息列表
+     */
+    async FetchMessageListByOffset(req, cb) {
+        return this.request("FetchMessageListByOffset", req, cb);
+    }
+    /**
      * 修改Datahub任务
      */
     async ModifyDatahubTask(req, cb) {
@@ -184,10 +190,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeUser", req, cb);
     }
     /**
-     * 根据位点查询消息列表
+     * 获取实例Prometheus信息
      */
-    async FetchMessageListByOffset(req, cb) {
-        return this.request("FetchMessageListByOffset", req, cb);
+    async DescribePrometheus(req, cb) {
+        return this.request("DescribePrometheus", req, cb);
     }
     /**
      * 创建Datahub主题
@@ -356,6 +362,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeAppInfo(req, cb) {
         return this.request("DescribeAppInfo", req, cb);
+    }
+    /**
+     * 添加普罗米修斯监控1
+     */
+    async CreatePrometheus(req, cb) {
+        return this.request("CreatePrometheus", req, cb);
     }
     /**
      * 按量实例缩容

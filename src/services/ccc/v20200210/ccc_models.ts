@@ -44,17 +44,89 @@ export interface StopAutoCalloutTaskRequest {
 }
 
 /**
- * HangUpCall请求参数结构体
+ * 企业资质申请信息
  */
-export interface HangUpCallRequest {
+export interface CompanyApplyInfo {
   /**
-   * TCCC 实例应用 ID
+   * 申请人身份，0-公司法定代表人，1-经办人（受法定代表人委托）
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  SdkAppId: number
+  ApplicantType: number
   /**
-   * 会话ID
+   * 企业名称
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  SessionId: string
+  CompanyName: string
+  /**
+   * 统一社会信用代码
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BusinessId: string
+  /**
+   * 营业执照扫描件(加盖公章)。(支持jpg、png、gif、jpeg格式的图片，每张图片应大于50K，不超过5MB，模版参见控制台:https://console.cloud.tencent.com/ccc/enterprise/update)
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BusinessIdPicUrl: string
+  /**
+   * 法定代表人名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CorporationName: string
+  /**
+   * 法定代表人身份证号码
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CorporationId: string
+  /**
+   * 法定代表人身份证正反面扫描件。(支持jpg、png、gif、jpeg格式的图片，每张图片应大于50K，不超过5MB，模版参见控制台:https://console.cloud.tencent.com/ccc/enterprise/update)
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CorporationIdPicUrl: string
+  /**
+   * 业务经营范围
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BusinessScope: string
+  /**
+   * 电话受理单。(支持jpg、png、gif、jpeg格式的图片，每张图片应大于50K，不超过5MB，模版参见控制台:https://console.cloud.tencent.com/ccc/enterprise/update)
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AcceptPicUrl: string
+  /**
+   * 电信入网承诺书。(支持jpg、png、gif、jpeg格式的图片，每张图片应大于50K，不超过5MB，模版参见控制台:https://console.cloud.tencent.com/ccc/enterprise/update)
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NetworkCommitmentPicUrl: string
+  /**
+   * 法定代表人手持身份证照，申请人类型为法定代表人时必填。(支持jpg、png、gif、jpeg格式的图片，每张图片应大于50K，不超过5MB，模版参见控制台:https://console.cloud.tencent.com/ccc/enterprise/update)
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CorporationHoldingOnIdPicUrl?: string
+  /**
+   * 经办人名称，申请人类型为经办人时必填。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OperatorName?: string
+  /**
+   * 经办人证件号码，申请人类型为经办人时必填。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OperatorId?: string
+  /**
+   * 经办人身份证正反面扫描件，申请人类型为经办人时必填。(支持jpg、png、gif、jpeg格式的图片，每张图片应大于50K，不超过5MB，模版参见控制台:https://console.cloud.tencent.com/ccc/enterprise/update)
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OperatorIdPicUrl?: string
+  /**
+   * 经办人手持身份证照，申请人类型为经办人时必填。(支持jpg、png、gif、jpeg格式的图片，每张图片应大于50K，不超过5MB，模版参见控制台:https://console.cloud.tencent.com/ccc/enterprise/update)
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OperatorHoldingOnIdPicUrl?: string
+  /**
+   * 委托授权书，申请人类型为经办人时必填。(支持jpg、png、gif、jpeg格式的图片，每张图片应大于50K，不超过5MB，模版参见控制台:https://console.cloud.tencent.com/ccc/enterprise/update)
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CommissionPicUrl?: string
 }
 
 /**
@@ -364,6 +436,25 @@ export interface CreatePredictiveDialingCampaignRequest {
    * 呼叫重试次数，0 - 2
    */
   RetryTimes?: number
+}
+
+/**
+ * DescribeChatMessages返回参数结构体
+ */
+export interface DescribeChatMessagesResponse {
+  /**
+   * 总记录数
+   */
+  TotalCount?: number
+  /**
+   * 消息列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Messages?: Array<MessageBody>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1106,6 +1197,16 @@ export interface DescribeAutoCalloutTaskResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * CreateCompanyApply请求参数结构体
+ */
+export interface CreateCompanyApplyRequest {
+  /**
+   * 企业资质信息
+   */
+  CompanyInfo: CompanyApplyInfo
 }
 
 /**
@@ -2242,6 +2343,25 @@ export interface TelCdrInfo {
 }
 
 /**
+ * DescribeCompanyList返回参数结构体
+ */
+export interface DescribeCompanyListResponse {
+  /**
+   * 总数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalCount?: number
+  /**
+   * 企业资质审核信息
+   */
+  CompanyInfo?: Array<CompanyStateInfo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 号码信息
  */
 export interface NumberInfo {
@@ -2648,6 +2768,16 @@ export interface PhoneNumBuyInfo {
 }
 
 /**
+ * ModifyCompanyApply返回参数结构体
+ */
+export interface ModifyCompanyApplyResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeCCCBuyInfoList返回参数结构体
  */
 export interface DescribeCCCBuyInfoListResponse {
@@ -2713,6 +2843,46 @@ export interface ResumePredictiveDialingCampaignRequest {
    * 任务 ID
    */
   CampaignId: number
+}
+
+/**
+ * 公司资质审核状态信息
+ */
+export interface CompanyStateInfo {
+  /**
+   * 申请单ID
+   */
+  Id?: number
+  /**
+   * 公司名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CompanyName?: string
+  /**
+   * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateTime?: number
+  /**
+   * 审核时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CheckTime?: number
+  /**
+   * 审核备注
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CheckMsg?: string
+  /**
+   * 审核状态，1-待审核，2-审核通过，3-驳回
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  State?: number
+  /**
+   * 公司统一社会信用代码
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BusinessId?: string
 }
 
 /**
@@ -2795,6 +2965,46 @@ export interface DescribeCallInMetricsResponse {
 }
 
 /**
+ * ModifyCompanyApply请求参数结构体
+ */
+export interface ModifyCompanyApplyRequest {
+  /**
+   * 申请单ID(只能修改状态为“驳回”或者“待审核”的申请单)
+   */
+  ApplyId: number
+  /**
+   * 企业资质信息
+   */
+  CompanyInfo: CompanyApplyInfo
+}
+
+/**
+ * DescribeCompanyList请求参数结构体
+ */
+export interface DescribeCompanyListRequest {
+  /**
+   * 分页尺寸，上限 100
+   */
+  PageSize: number
+  /**
+   * 分页页码，从 0 开始
+   */
+  PageNumber: number
+  /**
+   * 公司名称
+   */
+  CompanyName?: Array<string>
+  /**
+   * 审核状态，1-待审核，2-审核通过，3-驳回
+   */
+  State?: Array<number | bigint>
+  /**
+   * 申请ID
+   */
+  ApplyID?: Array<number | bigint>
+}
+
+/**
  * DescribeActiveCarrierPrivilegeNumber返回参数结构体
  */
 export interface DescribeActiveCarrierPrivilegeNumberResponse {
@@ -2830,6 +3040,20 @@ export interface IMSatisfaction {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Label: string
+}
+
+/**
+ * HangUpCall请求参数结构体
+ */
+export interface HangUpCallRequest {
+  /**
+   * TCCC 实例应用 ID
+   */
+  SdkAppId: number
+  /**
+   * 会话ID
+   */
+  SessionId: string
 }
 
 /**
@@ -2943,18 +3167,13 @@ export interface CreateStaffRequest {
 }
 
 /**
- * DescribeChatMessages返回参数结构体
+ * CreateCompanyApply返回参数结构体
  */
-export interface DescribeChatMessagesResponse {
+export interface CreateCompanyApplyResponse {
   /**
-   * 总记录数
+   * 申请单ID
    */
-  TotalCount?: number
-  /**
-   * 消息列表
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Messages?: Array<MessageBody>
+  Id?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

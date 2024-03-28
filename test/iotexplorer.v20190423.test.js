@@ -38,6 +38,16 @@ it("iotexplorer.v20190423.ModifyStudioProduct", async function () {
     }
 })
 
+it("iotexplorer.v20190423.DescribeDevicePackages", async function () {
+    try {
+       const data = await client.DescribeDevicePackages({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotexplorer.v20190423.GetBatchProductionsList", async function () {
     try {
        const data = await client.GetBatchProductionsList({})
@@ -98,6 +108,16 @@ it("iotexplorer.v20190423.DescribeDeviceLocationSolve", async function () {
     }
 })
 
+it("iotexplorer.v20190423.GenerateSignedVideoURL", async function () {
+    try {
+       const data = await client.GenerateSignedVideoURL({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotexplorer.v20190423.DescribeDeviceBindGateway", async function () {
     try {
        const data = await client.DescribeDeviceBindGateway({})
@@ -118,9 +138,9 @@ it("iotexplorer.v20190423.GetDeviceLocationHistory", async function () {
     }
 })
 
-it("iotexplorer.v20190423.PublishMessage", async function () {
+it("iotexplorer.v20190423.ListEventHistory", async function () {
     try {
-       const data = await client.PublishMessage({})
+       const data = await client.ListEventHistory({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -158,9 +178,39 @@ it("iotexplorer.v20190423.ReleaseStudioProduct", async function () {
     }
 })
 
+it("iotexplorer.v20190423.DescribeCloudStorageThumbnailList", async function () {
+    try {
+       const data = await client.DescribeCloudStorageThumbnailList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotexplorer.v20190423.ModifyFenceBind", async function () {
     try {
        const data = await client.ModifyFenceBind({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotexplorer.v20190423.DescribePackageConsumeTasks", async function () {
+    try {
+       const data = await client.DescribePackageConsumeTasks({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotexplorer.v20190423.DescribeCloudStoragePackageConsumeStats", async function () {
+    try {
+       const data = await client.DescribeCloudStoragePackageConsumeStats({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -218,6 +268,16 @@ it("iotexplorer.v20190423.DescribeFenceEventList", async function () {
     }
 })
 
+it("iotexplorer.v20190423.CreateIotVideoCloudStorage", async function () {
+    try {
+       const data = await client.CreateIotVideoCloudStorage({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotexplorer.v20190423.DeleteTopicRule", async function () {
     try {
        const data = await client.DeleteTopicRule({})
@@ -238,9 +298,9 @@ it("iotexplorer.v20190423.PublishRRPCMessage", async function () {
     }
 })
 
-it("iotexplorer.v20190423.SearchPositionSpace", async function () {
+it("iotexplorer.v20190423.DescribeFenceBindList", async function () {
     try {
-       const data = await client.SearchPositionSpace({})
+       const data = await client.DescribeFenceBindList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -268,6 +328,16 @@ it("iotexplorer.v20190423.CreateStudioProduct", async function () {
     }
 })
 
+it("iotexplorer.v20190423.DescribeCloudStorageDate", async function () {
+    try {
+       const data = await client.DescribeCloudStorageDate({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotexplorer.v20190423.EnableTopicRule", async function () {
     try {
        const data = await client.EnableTopicRule({})
@@ -288,6 +358,26 @@ it("iotexplorer.v20190423.DescribeGatewaySubDeviceList", async function () {
     }
 })
 
+it("iotexplorer.v20190423.DescribeCloudStorageUsers", async function () {
+    try {
+       const data = await client.DescribeCloudStorageUsers({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotexplorer.v20190423.TransferCloudStorage", async function () {
+    try {
+       const data = await client.TransferCloudStorage({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotexplorer.v20190423.SearchStudioProduct", async function () {
     try {
        const data = await client.SearchStudioProduct({})
@@ -301,6 +391,16 @@ it("iotexplorer.v20190423.SearchStudioProduct", async function () {
 it("iotexplorer.v20190423.ModifyTopicRule", async function () {
     try {
        const data = await client.ModifyTopicRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotexplorer.v20190423.InheritCloudStorageUser", async function () {
+    try {
+       const data = await client.InheritCloudStorageUser({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -368,6 +468,16 @@ it("iotexplorer.v20190423.GetPositionSpaceList", async function () {
     }
 })
 
+it("iotexplorer.v20190423.ResetCloudStorage", async function () {
+    try {
+       const data = await client.ResetCloudStorage({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotexplorer.v20190423.DescribeLoRaFrequency", async function () {
     try {
        const data = await client.DescribeLoRaFrequency({})
@@ -378,9 +488,19 @@ it("iotexplorer.v20190423.DescribeLoRaFrequency", async function () {
     }
 })
 
-it("iotexplorer.v20190423.ModifyTopicPolicy", async function () {
+it("iotexplorer.v20190423.ModifyPositionSpace", async function () {
     try {
-       const data = await client.ModifyTopicPolicy({})
+       const data = await client.ModifyPositionSpace({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotexplorer.v20190423.DescribeCloudStorageTime", async function () {
+    try {
+       const data = await client.DescribeCloudStorageTime({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -398,9 +518,19 @@ it("iotexplorer.v20190423.GetTopicRuleList", async function () {
     }
 })
 
-it("iotexplorer.v20190423.CreateProject", async function () {
+it("iotexplorer.v20190423.DescribeCloudStorageThumbnail", async function () {
     try {
-       const data = await client.CreateProject({})
+       const data = await client.DescribeCloudStorageThumbnail({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotexplorer.v20190423.DescribeCloudStorageMultiThumbnail", async function () {
+    try {
+       const data = await client.DescribeCloudStorageMultiThumbnail({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -411,6 +541,16 @@ it("iotexplorer.v20190423.CreateProject", async function () {
 it("iotexplorer.v20190423.CallDeviceActionAsync", async function () {
     try {
        const data = await client.CallDeviceActionAsync({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotexplorer.v20190423.ModifyLoRaFrequency", async function () {
+    try {
+       const data = await client.ModifyLoRaFrequency({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -548,6 +688,16 @@ it("iotexplorer.v20190423.CreateTopicPolicy", async function () {
     }
 })
 
+it("iotexplorer.v20190423.DescribeCloudStorage", async function () {
+    try {
+       const data = await client.DescribeCloudStorage({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotexplorer.v20190423.UploadFirmware", async function () {
     try {
        const data = await client.UploadFirmware({})
@@ -588,9 +738,9 @@ it("iotexplorer.v20190423.BindProducts", async function () {
     }
 })
 
-it("iotexplorer.v20190423.DescribeFenceBindList", async function () {
+it("iotexplorer.v20190423.SearchPositionSpace", async function () {
     try {
-       const data = await client.DescribeFenceBindList({})
+       const data = await client.SearchPositionSpace({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -598,9 +748,9 @@ it("iotexplorer.v20190423.DescribeFenceBindList", async function () {
     }
 })
 
-it("iotexplorer.v20190423.ModifyPositionSpace", async function () {
+it("iotexplorer.v20190423.CreateProject", async function () {
     try {
-       const data = await client.ModifyPositionSpace({})
+       const data = await client.CreateProject({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -698,9 +848,29 @@ it("iotexplorer.v20190423.GetStudioProductList", async function () {
     }
 })
 
+it("iotexplorer.v20190423.BindCloudStorageUser", async function () {
+    try {
+       const data = await client.BindCloudStorageUser({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotexplorer.v20190423.DescribeBatchProduction", async function () {
     try {
        const data = await client.DescribeBatchProduction({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotexplorer.v20190423.DeleteCloudStorageEvent", async function () {
+    try {
+       const data = await client.DeleteCloudStorageEvent({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -728,9 +898,29 @@ it("iotexplorer.v20190423.GetGatewaySubDeviceList", async function () {
     }
 })
 
-it("iotexplorer.v20190423.ListEventHistory", async function () {
+it("iotexplorer.v20190423.ModifyTopicPolicy", async function () {
     try {
-       const data = await client.ListEventHistory({})
+       const data = await client.ModifyTopicPolicy({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotexplorer.v20190423.DescribeCloudStorageOrder", async function () {
+    try {
+       const data = await client.DescribeCloudStorageOrder({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotexplorer.v20190423.PublishMessage", async function () {
+    try {
+       const data = await client.PublishMessage({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -781,6 +971,26 @@ it("iotexplorer.v20190423.DescribePositionFenceList", async function () {
 it("iotexplorer.v20190423.DeleteLoRaFrequency", async function () {
     try {
        const data = await client.DeleteLoRaFrequency({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotexplorer.v20190423.DescribePackageConsumeTask", async function () {
+    try {
+       const data = await client.DescribePackageConsumeTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotexplorer.v20190423.ResetCloudStorageEvent", async function () {
+    try {
+       const data = await client.ResetCloudStorageEvent({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -848,9 +1058,9 @@ it("iotexplorer.v20190423.DescribeInstance", async function () {
     }
 })
 
-it("iotexplorer.v20190423.ModifyLoRaFrequency", async function () {
+it("iotexplorer.v20190423.DescribeCloudStorageStreamData", async function () {
     try {
-       const data = await client.ModifyLoRaFrequency({})
+       const data = await client.DescribeCloudStorageStreamData({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -871,6 +1081,16 @@ it("iotexplorer.v20190423.DeletePositionFence", async function () {
 it("iotexplorer.v20190423.SearchTopicRule", async function () {
     try {
        const data = await client.SearchTopicRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotexplorer.v20190423.DescribeCloudStorageEvents", async function () {
+    try {
+       const data = await client.DescribeCloudStorageEvents({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -941,6 +1161,16 @@ it("iotexplorer.v20190423.DescribeDeviceFirmWare", async function () {
 it("iotexplorer.v20190423.CreateFenceBind", async function () {
     try {
        const data = await client.CreateFenceBind({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotexplorer.v20190423.DescribeCloudStoragePackageConsumeDetails", async function () {
+    try {
+       const data = await client.DescribeCloudStoragePackageConsumeDetails({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

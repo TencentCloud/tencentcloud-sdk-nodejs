@@ -7,6 +7,7 @@ const sign_1 = require("./sign");
 const http_connection_1 = require("./http/http_connection");
 const tencent_cloud_sdk_exception_1 = require("./exception/tencent_cloud_sdk_exception");
 const sse_response_model_1 = require("./sse_response_model");
+const uuid_1 = require("uuid");
 /**
  * @inner
  */
@@ -114,6 +115,18 @@ class AbstractClient {
         }
         let params = this.mergeData(req);
         params = await this.formatRequestData(action, params);
+        const headers = Object.assign({}, this.profile.httpProfile.headers, options.headers);
+        let traceId = "";
+        for (let key in headers) {
+            if (key.toLowerCase() === "x-tc-traceid") {
+                traceId = headers[key];
+                break;
+            }
+        }
+        if (!traceId) {
+            traceId = uuid_1.v4();
+            headers["X-TC-TraceId"] = traceId;
+        }
         let res;
         try {
             res = await http_connection_1.HttpConnection.doRequest({
@@ -121,14 +134,14 @@ class AbstractClient {
                 url: this.profile.httpProfile.protocol + this.endpoint + this.path,
                 data: params,
                 timeout: this.profile.httpProfile.reqTimeout * 1000,
-                headers: Object.assign({}, this.profile.httpProfile.headers, options.headers),
+                headers,
                 agent: this.profile.httpProfile.agent,
                 proxy: this.profile.httpProfile.proxy,
                 signal: options.signal,
             });
         }
         catch (error) {
-            throw new tencent_cloud_sdk_exception_1.default(error.message);
+            throw new tencent_cloud_sdk_exception_1.default(error.message, "", traceId);
         }
         return this.parseResponse(res);
     }
@@ -136,6 +149,18 @@ class AbstractClient {
      * @inner
      */
     async doRequestWithSign3(action, params, options = {}) {
+        const headers = Object.assign({}, this.profile.httpProfile.headers, options.headers);
+        let traceId = "";
+        for (let key in headers) {
+            if (key.toLowerCase() === "x-tc-traceid") {
+                traceId = headers[key];
+                break;
+            }
+        }
+        if (!traceId) {
+            traceId = uuid_1.v4();
+            headers["X-TC-TraceId"] = traceId;
+        }
         let res;
         try {
             const credential = await this.getCredential();
@@ -154,20 +179,21 @@ class AbstractClient {
                 token: credential.token,
                 requestClient: this.sdkVersion,
                 language: this.profile.language,
-                headers: Object.assign({}, this.profile.httpProfile.headers, options.headers),
+                headers,
                 agent: this.profile.httpProfile.agent,
                 proxy: this.profile.httpProfile.proxy,
                 signal: options.signal,
             });
         }
         catch (e) {
-            throw new tencent_cloud_sdk_exception_1.default(e.message);
+            throw new tencent_cloud_sdk_exception_1.default(e.message, "", traceId);
         }
         return this.parseResponse(res);
     }
     async parseResponse(res) {
+        const traceId = res.headers.get("x-tc-traceid");
         if (res.status !== 200) {
-            const tcError = new tencent_cloud_sdk_exception_1.default(res.statusText);
+            const tcError = new tencent_cloud_sdk_exception_1.default(res.statusText, "", traceId);
             tcError.httpCode = res.status;
             throw tcError;
         }
@@ -178,7 +204,7 @@ class AbstractClient {
             else {
                 const data = await res.json();
                 if (data.Response.Error) {
-                    const tcError = new tencent_cloud_sdk_exception_1.default(data.Response.Error.Message, data.Response.RequestId);
+                    const tcError = new tencent_cloud_sdk_exception_1.default(data.Response.Error.Message, data.Response.RequestId, traceId);
                     tcError.code = data.Response.Error.Code;
                     throw tcError;
                 }

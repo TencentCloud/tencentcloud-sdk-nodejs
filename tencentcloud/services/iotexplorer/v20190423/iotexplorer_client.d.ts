@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { UpdateDevicesEnableStateResponse, DescribeDeviceLocationSolveRequest, DeleteProjectRequest, DeleteFenceBindRequest, DescribeModelDefinitionResponse, UnbindDevicesRequest, DeleteDevicesResponse, ModifyStudioProductResponse, GetGatewaySubDeviceListResponse, DeleteStudioProductResponse, BindDevicesRequest, DescribeGatewaySubProductsResponse, GetDeviceListResponse, DeleteLoRaFrequencyResponse, DescribeTopicPolicyRequest, ModifyPositionFenceRequest, DeleteTopicRuleResponse, ModifyModelDefinitionRequest, CreateStudioProductResponse, CallDeviceActionSyncRequest, DescribeDevicePositionListRequest, GetDeviceLocationHistoryResponse, UpdateFirmwareResponse, ModifyPositionFenceResponse, ModifyStudioProductRequest, ModifyPositionSpaceResponse, CreateStudioProductRequest, ModifyFenceBindResponse, CreateBatchProductionRequest, DeletePositionFenceResponse, UploadFirmwareRequest, ListEventHistoryRequest, SearchTopicRuleRequest, DescribeDeviceDataRequest, PublishRRPCMessageRequest, ListTopicPolicyResponse, SearchPositionSpaceResponse, DescribePositionFenceListResponse, GenSingleDeviceSignatureOfPublicResponse, DescribeDevicePositionListResponse, GetProjectListResponse, CreateProjectRequest, DescribeProjectResponse, UnbindProductsRequest, SearchStudioProductResponse, GetTopicRuleListRequest, GetFamilyDeviceUserListResponse, ModifyProjectRequest, DescribeBatchProductionResponse, ListTopicPolicyRequest, DeleteDeviceRequest, DeleteLoRaFrequencyRequest, ControlDeviceDataRequest, ListFirmwaresResponse, ReleaseStudioProductResponse, DescribeSpaceFenceEventListResponse, DeleteLoRaGatewayRequest, UnbindProductsResponse, DescribeTopicPolicyResponse, SearchPositionSpaceRequest, ModifyTopicPolicyResponse, GetPositionSpaceListRequest, DescribeDeviceFirmWareResponse, SearchTopicRuleResponse, DescribeFenceEventListResponse, DescribeDeviceFirmWareRequest, UpdateDevicesEnableStateRequest, DescribeTopicRuleRequest, GetDeviceLocationHistoryRequest, CallDeviceActionSyncResponse, CreateLoRaGatewayRequest, ReleaseStudioProductRequest, CreateProjectResponse, DescribeDeviceDataHistoryResponse, DeleteProjectResponse, CreateTopicPolicyResponse, CreateDeviceResponse, CreateDeviceRequest, DeletePositionSpaceRequest, GetStudioProductListRequest, DescribeFirmwareTaskResponse, DisableTopicRuleResponse, DescribeDeviceLocationSolveResponse, DescribeStudioProductResponse, CreateFenceBindRequest, DescribeDeviceResponse, PublishBroadcastMessageRequest, ListFirmwaresRequest, GetStudioProductListResponse, PublishMessageRequest, ModifyTopicRuleRequest, GetDeviceListRequest, ModifySpacePropertyRequest, GetPositionSpaceListResponse, GetCOSURLResponse, ModifyFenceBindRequest, GetTopicRuleListResponse, DescribeFenceEventListRequest, ModifyPositionSpaceRequest, GetLoRaGatewayListResponse, ModifyLoRaGatewayResponse, DirectBindDeviceInFamilyResponse, CallDeviceActionAsyncRequest, CallDeviceActionAsyncResponse, DeleteFenceBindResponse, DeleteTopicPolicyRequest, CreateFenceBindResponse, DescribeTopicRuleResponse, CreatePositionFenceResponse, PublishBroadcastMessageResponse, DescribeFenceBindListRequest, DescribeBindedProductsResponse, DescribeDeviceRequest, DescribePositionFenceListRequest, ModifyTopicRuleResponse, DescribeBatchProductionRequest, CreateTopicPolicyRequest, DirectBindDeviceInFamilyRequest, GetFamilyDeviceUserListRequest, DescribeBindedProductsRequest, DescribeLoRaFrequencyResponse, DescribeInstanceResponse, DescribeGatewaySubDeviceListResponse, DescribeSpaceFenceEventListRequest, GetLoRaGatewayListRequest, DescribeProjectRequest, UnbindDevicesResponse, ModifyLoRaFrequencyRequest, ModifyModelDefinitionResponse, UploadFirmwareResponse, ModifyTopicPolicyRequest, DeleteTopicRuleRequest, CreateLoRaGatewayResponse, DeleteTopicPolicyResponse, DeleteLoRaGatewayResponse, CreateLoRaFrequencyRequest, DescribeDeviceBindGatewayResponse, DescribeGatewaySubDeviceListRequest, ControlDeviceDataResponse, DescribeDeviceDataHistoryRequest, UpdateFirmwareRequest, DescribeStudioProductRequest, CreatePositionSpaceResponse, CreateBatchProductionResponse, ModifyLoRaFrequencyResponse, DeletePositionFenceRequest, GetProjectListRequest, DeletePositionSpaceResponse, DescribeDeviceBindGatewayRequest, CreateLoRaFrequencyResponse, EnableTopicRuleResponse, GetGatewaySubDeviceListRequest, SearchStudioProductRequest, GenSingleDeviceSignatureOfPublicRequest, DeleteDevicesRequest, BindProductsResponse, ModifyProjectResponse, GetCOSURLRequest, DescribeLoRaFrequencyRequest, DescribeGatewayBindDevicesRequest, GetDeviceSumStatisticsResponse, DescribeGatewaySubProductsRequest, DeleteStudioProductRequest, BindProductsRequest, GetDeviceSumStatisticsRequest, ModifySpacePropertyResponse, PublishMessageResponse, BindDevicesResponse, DescribeFenceBindListResponse, CreatePositionFenceRequest, DescribeModelDefinitionRequest, EnableTopicRuleRequest, DisableTopicRuleRequest, CreateTopicRuleResponse, DescribeDeviceDataResponse, CreateTopicRuleRequest, PublishRRPCMessageResponse, GetBatchProductionsListRequest, DeleteDeviceResponse, DescribeInstanceRequest, ModifyLoRaGatewayRequest, ListEventHistoryResponse, GetBatchProductionsListResponse, DescribeGatewayBindDevicesResponse, DescribeFirmwareTaskRequest, CreatePositionSpaceRequest } from "./iotexplorer_models";
+import { UpdateDevicesEnableStateResponse, DescribeCloudStorageDateRequest, DescribeDeviceLocationSolveRequest, DeleteProjectRequest, ListEventHistoryResponse, ModifyLoRaGatewayRequest, DeleteFenceBindRequest, DescribeModelDefinitionResponse, UnbindDevicesRequest, PublishBroadcastMessageRequest, DeleteDevicesResponse, DeleteCloudStorageEventResponse, DescribeCloudStorageTimeResponse, GetGatewaySubDeviceListResponse, DescribeCloudStorageThumbnailListRequest, DeleteStudioProductResponse, BindDevicesRequest, DescribeDevicePackagesRequest, GetDeviceListResponse, GenerateSignedVideoURLRequest, DeleteLoRaFrequencyResponse, DescribeCloudStoragePackageConsumeDetailsResponse, ModifyPositionFenceRequest, DeleteTopicRuleResponse, InheritCloudStorageUserRequest, TransferCloudStorageResponse, CreateStudioProductResponse, CallDeviceActionSyncRequest, GetProjectListResponse, DescribeDevicePositionListRequest, GetDeviceLocationHistoryResponse, UpdateFirmwareResponse, ModifyPositionFenceResponse, ModifyStudioProductRequest, ModifyPositionSpaceResponse, CreateStudioProductRequest, DisableTopicRuleRequest, CreateBatchProductionRequest, DeletePositionFenceResponse, ModifyLoRaFrequencyRequest, DescribeCloudStoragePackageConsumeStatsResponse, DescribeCloudStorageUsersResponse, SearchTopicRuleRequest, DescribeDeviceDataRequest, GetDeviceSumStatisticsResponse, ListTopicPolicyResponse, SearchPositionSpaceResponse, DescribePositionFenceListResponse, DescribeCloudStorageMultiThumbnailRequest, GenSingleDeviceSignatureOfPublicResponse, DeletePositionSpaceRequest, DescribePackageConsumeTasksRequest, CreateProjectRequest, DescribeProjectResponse, UnbindProductsRequest, SearchStudioProductResponse, GetTopicRuleListRequest, GetFamilyDeviceUserListResponse, DescribeCloudStorageOrderRequest, ModifyProjectRequest, DescribeBatchProductionResponse, PublishRRPCMessageRequest, ListTopicPolicyRequest, DeleteDeviceRequest, DeleteLoRaFrequencyRequest, ModifyStudioProductResponse, ControlDeviceDataRequest, ListFirmwaresResponse, ReleaseStudioProductResponse, DescribeSpaceFenceEventListResponse, DescribePackageConsumeTasksResponse, DeleteLoRaGatewayRequest, UnbindProductsResponse, DescribeTopicPolicyResponse, SearchPositionSpaceRequest, ModifyTopicPolicyResponse, DescribeCloudStorageStreamDataResponse, GetPositionSpaceListRequest, DescribeDeviceFirmWareResponse, SearchTopicRuleResponse, DescribeFenceEventListResponse, DescribeDeviceFirmWareRequest, UpdateDevicesEnableStateRequest, BindCloudStorageUserRequest, DescribeTopicRuleRequest, GetDeviceLocationHistoryRequest, CallDeviceActionSyncResponse, CreateLoRaGatewayRequest, ReleaseStudioProductRequest, CreateProjectResponse, DescribeDeviceDataHistoryResponse, DeleteProjectResponse, CreateTopicPolicyResponse, CreateDeviceResponse, CreateDeviceRequest, DescribeDevicePositionListResponse, InheritCloudStorageUserResponse, GetStudioProductListRequest, DescribeFirmwareTaskResponse, DescribeTopicPolicyRequest, DisableTopicRuleResponse, DescribeDeviceLocationSolveResponse, DescribeStudioProductResponse, CreateFenceBindRequest, CreateIotVideoCloudStorageResponse, DescribePackageConsumeTaskResponse, DescribeDeviceResponse, DescribeCloudStorageEventsRequest, ListFirmwaresRequest, GetStudioProductListResponse, PublishMessageRequest, DescribeCloudStorageMultiThumbnailResponse, ModifyTopicRuleRequest, UploadFirmwareRequest, GetDeviceListRequest, ModifySpacePropertyRequest, GetPositionSpaceListResponse, GetCOSURLResponse, ModifyFenceBindRequest, GetTopicRuleListResponse, ResetCloudStorageEventRequest, DescribeFenceEventListRequest, GetLoRaGatewayListResponse, ModifyPositionSpaceRequest, DescribeGatewaySubProductsResponse, ModifyLoRaGatewayResponse, DirectBindDeviceInFamilyResponse, CallDeviceActionAsyncRequest, CallDeviceActionAsyncResponse, DescribeCloudStoragePackageConsumeStatsRequest, ListEventHistoryRequest, DeleteFenceBindResponse, DeleteTopicPolicyRequest, CreateFenceBindResponse, DescribeTopicRuleResponse, CreatePositionFenceResponse, DescribeCloudStorageThumbnailRequest, PublishBroadcastMessageResponse, DescribeFenceBindListRequest, TransferCloudStorageRequest, DescribeBindedProductsResponse, DescribeDeviceRequest, ModifyModelDefinitionRequest, DescribePositionFenceListRequest, ModifyTopicRuleResponse, DescribeBatchProductionRequest, CreateTopicPolicyRequest, DirectBindDeviceInFamilyRequest, DescribeCloudStorageEventsResponse, GetFamilyDeviceUserListRequest, DescribeBindedProductsRequest, DescribeCloudStorageDateResponse, DescribeInstanceResponse, DescribeGatewaySubDeviceListResponse, DescribeSpaceFenceEventListRequest, GetLoRaGatewayListRequest, DescribeProjectRequest, UnbindDevicesResponse, CreateIotVideoCloudStorageRequest, ModifyModelDefinitionResponse, DescribeCloudStoragePackageConsumeDetailsRequest, UploadFirmwareResponse, DescribePackageConsumeTaskRequest, DeleteTopicRuleRequest, CreateLoRaGatewayResponse, BindCloudStorageUserResponse, DeleteTopicPolicyResponse, DeleteLoRaGatewayResponse, CreateLoRaFrequencyRequest, DescribeDeviceBindGatewayResponse, DescribeGatewaySubDeviceListRequest, ControlDeviceDataResponse, DescribeDeviceDataHistoryRequest, UpdateFirmwareRequest, DescribeStudioProductRequest, CreatePositionSpaceResponse, CreateBatchProductionResponse, ModifyLoRaFrequencyResponse, DescribeFenceBindListResponse, DescribeCloudStorageThumbnailListResponse, DeletePositionFenceRequest, ResetCloudStorageResponse, ResetCloudStorageEventResponse, GetProjectListRequest, DeletePositionSpaceResponse, DescribeDeviceBindGatewayRequest, CreateLoRaFrequencyResponse, EnableTopicRuleResponse, GetGatewaySubDeviceListRequest, SearchStudioProductRequest, GenSingleDeviceSignatureOfPublicRequest, DeleteDevicesRequest, BindProductsResponse, ModifyProjectResponse, DeleteCloudStorageEventRequest, GetCOSURLRequest, DescribeLoRaFrequencyRequest, DescribeCloudStorageResponse, ResetCloudStorageRequest, DescribeGatewayBindDevicesRequest, DescribeCloudStorageStreamDataRequest, DescribeGatewaySubProductsRequest, DeleteStudioProductRequest, BindProductsRequest, GetDeviceSumStatisticsRequest, ModifySpacePropertyResponse, PublishMessageResponse, ModifyTopicPolicyRequest, DescribeCloudStorageRequest, BindDevicesResponse, GenerateSignedVideoURLResponse, DescribeCloudStorageThumbnailResponse, CreatePositionFenceRequest, DescribeModelDefinitionRequest, EnableTopicRuleRequest, DescribeCloudStorageUsersRequest, CreateTopicRuleResponse, DescribeDeviceDataResponse, DescribeCloudStorageOrderResponse, CreateTopicRuleRequest, PublishRRPCMessageResponse, DescribeDevicePackagesResponse, GetBatchProductionsListRequest, DeleteDeviceResponse, ModifyFenceBindResponse, DescribeInstanceRequest, DescribeLoRaFrequencyResponse, DescribeCloudStorageTimeRequest, GetBatchProductionsListResponse, DescribeGatewayBindDevicesResponse, DescribeFirmwareTaskRequest, CreatePositionSpaceRequest } from "./iotexplorer_models";
 /**
  * iotexplorer client
  * @class
@@ -15,6 +15,10 @@ export declare class Client extends AbstractClient {
      * 提供修改产品的名称和描述等信息的能力，对于已发布产品不允许进行修改。
      */
     ModifyStudioProduct(req: ModifyStudioProductRequest, cb?: (error: string, rep: ModifyStudioProductResponse) => void): Promise<ModifyStudioProductResponse>;
+    /**
+     * 根据设备信息拉取有效套餐列表
+     */
+    DescribeDevicePackages(req: DescribeDevicePackagesRequest, cb?: (error: string, rep: DescribeDevicePackagesResponse) => void): Promise<DescribeDevicePackagesResponse>;
     /**
      * 列出量产数据列表信息。
      */
@@ -40,6 +44,10 @@ export declare class Client extends AbstractClient {
      */
     DescribeDeviceLocationSolve(req: DescribeDeviceLocationSolveRequest, cb?: (error: string, rep: DescribeDeviceLocationSolveResponse) => void): Promise<DescribeDeviceLocationSolveResponse>;
     /**
+     * 获取视频防盗链播放URL
+     */
+    GenerateSignedVideoURL(req: GenerateSignedVideoURLRequest, cb?: (error: string, rep: GenerateSignedVideoURLResponse) => void): Promise<GenerateSignedVideoURLResponse>;
+    /**
      * 查询设备绑定的网关设备
      */
     DescribeDeviceBindGateway(req: DescribeDeviceBindGatewayRequest, cb?: (error: string, rep: DescribeDeviceBindGatewayResponse) => void): Promise<DescribeDeviceBindGatewayResponse>;
@@ -48,9 +56,9 @@ export declare class Client extends AbstractClient {
      */
     GetDeviceLocationHistory(req: GetDeviceLocationHistoryRequest, cb?: (error: string, rep: GetDeviceLocationHistoryResponse) => void): Promise<GetDeviceLocationHistoryResponse>;
     /**
-     * 本接口（PublishMessage）用于使用自定义透传协议进行设备远控
+     * 获取设备的历史事件
      */
-    PublishMessage(req: PublishMessageRequest, cb?: (error: string, rep: PublishMessageResponse) => void): Promise<PublishMessageResponse>;
+    ListEventHistory(req: ListEventHistoryRequest, cb?: (error: string, rep: ListEventHistoryResponse) => void): Promise<ListEventHistoryResponse>;
     /**
      * 提供查看产品详细信息的能力，包括产品的ID、数据协议、认证类型等重要参数
      */
@@ -64,9 +72,21 @@ export declare class Client extends AbstractClient {
      */
     ReleaseStudioProduct(req: ReleaseStudioProductRequest, cb?: (error: string, rep: ReleaseStudioProductResponse) => void): Promise<ReleaseStudioProductResponse>;
     /**
+     * 批量拉取云存事件缩略图
+     */
+    DescribeCloudStorageThumbnailList(req: DescribeCloudStorageThumbnailListRequest, cb?: (error: string, rep: DescribeCloudStorageThumbnailListResponse) => void): Promise<DescribeCloudStorageThumbnailListResponse>;
+    /**
      * 更新围栏绑定信息
      */
     ModifyFenceBind(req: ModifyFenceBindRequest, cb?: (error: string, rep: ModifyFenceBindResponse) => void): Promise<ModifyFenceBindResponse>;
+    /**
+     * 查询套餐消耗记录列表
+     */
+    DescribePackageConsumeTasks(req: DescribePackageConsumeTasksRequest, cb?: (error: string, rep: DescribePackageConsumeTasksResponse) => void): Promise<DescribePackageConsumeTasksResponse>;
+    /**
+     * 获取云存套餐包消耗统计
+     */
+    DescribeCloudStoragePackageConsumeStats(req: DescribeCloudStoragePackageConsumeStatsRequest, cb?: (error: string, rep: DescribeCloudStoragePackageConsumeStatsResponse) => void): Promise<DescribeCloudStoragePackageConsumeStatsResponse>;
     /**
      * 删除位置空间
      */
@@ -88,6 +108,10 @@ export declare class Client extends AbstractClient {
      */
     DescribeFenceEventList(req: DescribeFenceEventListRequest, cb?: (error: string, rep: DescribeFenceEventListResponse) => void): Promise<DescribeFenceEventListResponse>;
     /**
+     * 开通云存服务
+     */
+    CreateIotVideoCloudStorage(req: CreateIotVideoCloudStorageRequest, cb?: (error: string, rep: CreateIotVideoCloudStorageResponse) => void): Promise<CreateIotVideoCloudStorageResponse>;
+    /**
      * 删除规则
      */
     DeleteTopicRule(req: DeleteTopicRuleRequest, cb?: (error: string, rep: DeleteTopicRuleResponse) => void): Promise<DeleteTopicRuleResponse>;
@@ -96,9 +120,9 @@ export declare class Client extends AbstractClient {
      */
     PublishRRPCMessage(req: PublishRRPCMessageRequest, cb?: (error: string, rep: PublishRRPCMessageResponse) => void): Promise<PublishRRPCMessageResponse>;
     /**
-     * 搜索位置空间
+     * 获取围栏绑定信息列表
      */
-    SearchPositionSpace(req: SearchPositionSpaceRequest, cb?: (error: string, rep: SearchPositionSpaceResponse) => void): Promise<SearchPositionSpaceResponse>;
+    DescribeFenceBindList(req: DescribeFenceBindListRequest, cb?: (error: string, rep: DescribeFenceBindListResponse) => void): Promise<DescribeFenceBindListResponse>;
     /**
      * 删除  LoRa 网关的接口
      */
@@ -108,6 +132,10 @@ export declare class Client extends AbstractClient {
      */
     CreateStudioProduct(req: CreateStudioProductRequest, cb?: (error: string, rep: CreateStudioProductResponse) => void): Promise<CreateStudioProductResponse>;
     /**
+     * 获取具有云存的日期
+     */
+    DescribeCloudStorageDate(req: DescribeCloudStorageDateRequest, cb?: (error: string, rep: DescribeCloudStorageDateResponse) => void): Promise<DescribeCloudStorageDateResponse>;
+    /**
      * 启用规则
      */
     EnableTopicRule(req: EnableTopicRuleRequest, cb?: (error: string, rep: EnableTopicRuleResponse) => void): Promise<EnableTopicRuleResponse>;
@@ -116,6 +144,14 @@ export declare class Client extends AbstractClient {
      */
     DescribeGatewaySubDeviceList(req: DescribeGatewaySubDeviceListRequest, cb?: (error: string, rep: DescribeGatewaySubDeviceListResponse) => void): Promise<DescribeGatewaySubDeviceListResponse>;
     /**
+     * 拉取云存用户列表
+     */
+    DescribeCloudStorageUsers(req: DescribeCloudStorageUsersRequest, cb?: (error: string, rep: DescribeCloudStorageUsersResponse) => void): Promise<DescribeCloudStorageUsersResponse>;
+    /**
+     * 转移云存服务
+     */
+    TransferCloudStorage(req: TransferCloudStorageRequest, cb?: (error: string, rep: TransferCloudStorageResponse) => void): Promise<TransferCloudStorageResponse>;
+    /**
      * 提供根据产品名称查找产品的能力
      */
     SearchStudioProduct(req: SearchStudioProductRequest, cb?: (error: string, rep: SearchStudioProductResponse) => void): Promise<SearchStudioProductResponse>;
@@ -123,6 +159,10 @@ export declare class Client extends AbstractClient {
      * 修改规则
      */
     ModifyTopicRule(req: ModifyTopicRuleRequest, cb?: (error: string, rep: ModifyTopicRuleResponse) => void): Promise<ModifyTopicRuleResponse>;
+    /**
+     * 继承云存用户
+     */
+    InheritCloudStorageUser(req: InheritCloudStorageUserRequest, cb?: (error: string, rep: InheritCloudStorageUserResponse) => void): Promise<InheritCloudStorageUserResponse>;
     /**
      * 本接口（ListFirmwares）用于获取固件列表
      */
@@ -148,25 +188,41 @@ export declare class Client extends AbstractClient {
      */
     GetPositionSpaceList(req: GetPositionSpaceListRequest, cb?: (error: string, rep: GetPositionSpaceListResponse) => void): Promise<GetPositionSpaceListResponse>;
     /**
+     * 重置云存服务
+     */
+    ResetCloudStorage(req: ResetCloudStorageRequest, cb?: (error: string, rep: ResetCloudStorageResponse) => void): Promise<ResetCloudStorageResponse>;
+    /**
      * 提供查询LoRa自定义频点详情的能力
      */
     DescribeLoRaFrequency(req: DescribeLoRaFrequencyRequest, cb?: (error: string, rep: DescribeLoRaFrequencyResponse) => void): Promise<DescribeLoRaFrequencyResponse>;
     /**
-     * 本接口（UpdateTopicPolicy）用于更新Topic信息
+     * 更新位置空间
      */
-    ModifyTopicPolicy(req: ModifyTopicPolicyRequest, cb?: (error: string, rep: ModifyTopicPolicyResponse) => void): Promise<ModifyTopicPolicyResponse>;
+    ModifyPositionSpace(req: ModifyPositionSpaceRequest, cb?: (error: string, rep: ModifyPositionSpaceResponse) => void): Promise<ModifyPositionSpaceResponse>;
+    /**
+     * 获取某一天云存时间轴
+     */
+    DescribeCloudStorageTime(req: DescribeCloudStorageTimeRequest, cb?: (error: string, rep: DescribeCloudStorageTimeResponse) => void): Promise<DescribeCloudStorageTimeResponse>;
     /**
      * 获取规则列表
      */
     GetTopicRuleList(req: GetTopicRuleListRequest, cb?: (error: string, rep: GetTopicRuleListResponse) => void): Promise<GetTopicRuleListResponse>;
     /**
-     * 为用户提供新建项目的能力，用于集中管理产品和应用。
+     * 拉取云存事件缩略图
      */
-    CreateProject(req: CreateProjectRequest, cb?: (error: string, rep: CreateProjectResponse) => void): Promise<CreateProjectResponse>;
+    DescribeCloudStorageThumbnail(req: DescribeCloudStorageThumbnailRequest, cb?: (error: string, rep: DescribeCloudStorageThumbnailResponse) => void): Promise<DescribeCloudStorageThumbnailResponse>;
+    /**
+     * 拉取多个云存事件缩略图
+     */
+    DescribeCloudStorageMultiThumbnail(req: DescribeCloudStorageMultiThumbnailRequest, cb?: (error: string, rep: DescribeCloudStorageMultiThumbnailResponse) => void): Promise<DescribeCloudStorageMultiThumbnailResponse>;
     /**
      * 提供给用户异步调用设备行为的能力
      */
     CallDeviceActionAsync(req: CallDeviceActionAsyncRequest, cb?: (error: string, rep: CallDeviceActionAsyncResponse) => void): Promise<CallDeviceActionAsyncResponse>;
+    /**
+     * 修改LoRa自定义频点
+     */
+    ModifyLoRaFrequency(req: ModifyLoRaFrequencyRequest, cb?: (error: string, rep: ModifyLoRaFrequencyResponse) => void): Promise<ModifyLoRaFrequencyResponse>;
     /**
      * 拉取设备统计汇总数据
      */
@@ -220,6 +276,10 @@ export declare class Client extends AbstractClient {
      */
     CreateTopicPolicy(req: CreateTopicPolicyRequest, cb?: (error: string, rep: CreateTopicPolicyResponse) => void): Promise<CreateTopicPolicyResponse>;
     /**
+     * 获取设备云存服务详情
+     */
+    DescribeCloudStorage(req: DescribeCloudStorageRequest, cb?: (error: string, rep: DescribeCloudStorageResponse) => void): Promise<DescribeCloudStorageResponse>;
+    /**
      * 本接口（UploadFirmware）用于创建设备固件版本信息，在平台用于固件版本升级、固件资源下发等。
      */
     UploadFirmware(req: UploadFirmwareRequest, cb?: (error: string, rep: UploadFirmwareResponse) => void): Promise<UploadFirmwareResponse>;
@@ -236,13 +296,13 @@ export declare class Client extends AbstractClient {
      */
     BindProducts(req: BindProductsRequest, cb?: (error: string, rep: BindProductsResponse) => void): Promise<BindProductsResponse>;
     /**
-     * 获取围栏绑定信息列表
+     * 搜索位置空间
      */
-    DescribeFenceBindList(req: DescribeFenceBindListRequest, cb?: (error: string, rep: DescribeFenceBindListResponse) => void): Promise<DescribeFenceBindListResponse>;
+    SearchPositionSpace(req: SearchPositionSpaceRequest, cb?: (error: string, rep: SearchPositionSpaceResponse) => void): Promise<SearchPositionSpaceResponse>;
     /**
-     * 更新位置空间
+     * 为用户提供新建项目的能力，用于集中管理产品和应用。
      */
-    ModifyPositionSpace(req: ModifyPositionSpaceRequest, cb?: (error: string, rep: ModifyPositionSpaceResponse) => void): Promise<ModifyPositionSpaceResponse>;
+    CreateProject(req: CreateProjectRequest, cb?: (error: string, rep: CreateProjectResponse) => void): Promise<CreateProjectResponse>;
     /**
      * 获取位置空间中围栏告警事件列表
      */
@@ -280,9 +340,17 @@ export declare class Client extends AbstractClient {
      */
     GetStudioProductList(req: GetStudioProductListRequest, cb?: (error: string, rep: GetStudioProductListResponse) => void): Promise<GetStudioProductListResponse>;
     /**
+     * 绑定云存用户
+     */
+    BindCloudStorageUser(req: BindCloudStorageUserRequest, cb?: (error: string, rep: BindCloudStorageUserResponse) => void): Promise<BindCloudStorageUserResponse>;
+    /**
      * 获取量产详情信息。
      */
     DescribeBatchProduction(req: DescribeBatchProductionRequest, cb?: (error: string, rep: DescribeBatchProductionResponse) => void): Promise<DescribeBatchProductionResponse>;
+    /**
+     * 删除云存事件
+     */
+    DeleteCloudStorageEvent(req: DeleteCloudStorageEventRequest, cb?: (error: string, rep: DeleteCloudStorageEventResponse) => void): Promise<DeleteCloudStorageEventResponse>;
     /**
      * 批量删除设备
      */
@@ -292,9 +360,17 @@ export declare class Client extends AbstractClient {
      */
     GetGatewaySubDeviceList(req: GetGatewaySubDeviceListRequest, cb?: (error: string, rep: GetGatewaySubDeviceListResponse) => void): Promise<GetGatewaySubDeviceListResponse>;
     /**
-     * 获取设备的历史事件
+     * 本接口（UpdateTopicPolicy）用于更新Topic信息
      */
-    ListEventHistory(req: ListEventHistoryRequest, cb?: (error: string, rep: ListEventHistoryResponse) => void): Promise<ListEventHistoryResponse>;
+    ModifyTopicPolicy(req: ModifyTopicPolicyRequest, cb?: (error: string, rep: ModifyTopicPolicyResponse) => void): Promise<ModifyTopicPolicyResponse>;
+    /**
+     * 查询云存服务详情
+     */
+    DescribeCloudStorageOrder(req: DescribeCloudStorageOrderRequest, cb?: (error: string, rep: DescribeCloudStorageOrderResponse) => void): Promise<DescribeCloudStorageOrderResponse>;
+    /**
+     * 本接口（PublishMessage）用于使用自定义透传协议进行设备远控
+     */
+    PublishMessage(req: PublishMessageRequest, cb?: (error: string, rep: PublishMessageResponse) => void): Promise<PublishMessageResponse>;
     /**
      * 获取设备在指定时间范围内上报的历史数据。
      */
@@ -315,6 +391,14 @@ export declare class Client extends AbstractClient {
      * 提供删除LoRa自定义频点的能力
      */
     DeleteLoRaFrequency(req: DeleteLoRaFrequencyRequest, cb?: (error: string, rep: DeleteLoRaFrequencyResponse) => void): Promise<DeleteLoRaFrequencyResponse>;
+    /**
+     * 查询套餐消耗记录详情
+     */
+    DescribePackageConsumeTask(req: DescribePackageConsumeTaskRequest, cb?: (error: string, rep: DescribePackageConsumeTaskResponse) => void): Promise<DescribePackageConsumeTaskResponse>;
+    /**
+     * 重置云存事件
+     */
+    ResetCloudStorageEvent(req: ResetCloudStorageEventRequest, cb?: (error: string, rep: ResetCloudStorageEventResponse) => void): Promise<ResetCloudStorageEventResponse>;
     /**
      * 更新位置空间产品属性
      */
@@ -340,9 +424,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeInstance(req: DescribeInstanceRequest, cb?: (error: string, rep: DescribeInstanceResponse) => void): Promise<DescribeInstanceResponse>;
     /**
-     * 修改LoRa自定义频点
+     * 获取设备图片流数据
      */
-    ModifyLoRaFrequency(req: ModifyLoRaFrequencyRequest, cb?: (error: string, rep: ModifyLoRaFrequencyResponse) => void): Promise<ModifyLoRaFrequencyResponse>;
+    DescribeCloudStorageStreamData(req: DescribeCloudStorageStreamDataRequest, cb?: (error: string, rep: DescribeCloudStorageStreamDataResponse) => void): Promise<DescribeCloudStorageStreamDataResponse>;
     /**
      * 删除围栏
      */
@@ -351,6 +435,10 @@ export declare class Client extends AbstractClient {
      * 搜索规则
      */
     SearchTopicRule(req: SearchTopicRuleRequest, cb?: (error: string, rep: SearchTopicRuleResponse) => void): Promise<SearchTopicRuleResponse>;
+    /**
+     * 拉取云存事件列表
+     */
+    DescribeCloudStorageEvents(req: DescribeCloudStorageEventsRequest, cb?: (error: string, rep: DescribeCloudStorageEventsResponse) => void): Promise<DescribeCloudStorageEventsResponse>;
     /**
      * 提供修改产品的数据模板的能力
      */
@@ -379,4 +467,8 @@ export declare class Client extends AbstractClient {
      * 创建围栏绑定信息
      */
     CreateFenceBind(req: CreateFenceBindRequest, cb?: (error: string, rep: CreateFenceBindResponse) => void): Promise<CreateFenceBindResponse>;
+    /**
+     * 获取云存套餐包消耗详细记录
+     */
+    DescribeCloudStoragePackageConsumeDetails(req: DescribeCloudStoragePackageConsumeDetailsRequest, cb?: (error: string, rep: DescribeCloudStoragePackageConsumeDetailsResponse) => void): Promise<DescribeCloudStoragePackageConsumeDetailsResponse>;
 }

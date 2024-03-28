@@ -1617,7 +1617,7 @@ export interface CreateIndexRequest {
     /**
      * 【必填】创建的索引元数据JSON，如mappings、settings
      */
-    IndexMetaJson?: string;
+    IndexMetaJson: string;
     /**
      * 集群访问用户名
      */
@@ -2804,7 +2804,7 @@ export interface InstanceInfo {
      */
     SubnetUid?: string;
     /**
-     * 实例状态，0:处理中,1:正常,-1停止,-2:销毁中,-3:已销毁, 2:创建集群时初始化中
+     * 实例状态，0:处理中,1:正常,-1:停止,-2:销毁中,-3:已销毁, -4:隔离中,2:创建集群时初始化中
      */
     Status?: number;
     /**
@@ -2972,7 +2972,7 @@ export interface InstanceInfo {
      */
     DeployMode?: number;
     /**
-     * ES公网访问状态<li>OPEN：开启</li><li>CLOSE：关闭
+     * ES公网访问状态<li>OPEN：开启</li><li>CLOSE：关闭</li>
   注意：此字段可能返回 null，表示取不到有效值。
      */
     PublicAccess?: string;
@@ -2986,12 +2986,12 @@ export interface InstanceInfo {
      */
     KibanaPrivateUrl?: string;
     /**
-     * Kibana公网访问状态<li>OPEN：开启</li><li>CLOSE：关闭
+     * Kibana公网访问状态<li>OPEN：开启</li><li>CLOSE：关闭</li>
   注意：此字段可能返回 null，表示取不到有效值。
      */
     KibanaPublicAccess?: string;
     /**
-     * Kibana内网访问状态<li>OPEN：开启</li><li>CLOSE：关闭
+     * Kibana内网访问状态<li>OPEN：开启</li><li>CLOSE：关闭</li>
   注意：此字段可能返回 null，表示取不到有效值。
      */
     KibanaPrivateAccess?: string;
@@ -3141,7 +3141,7 @@ export interface InstanceInfo {
      */
     ProcessPercent?: number;
     /**
-     * Kibana的alerting外网告警策略<li>OPEN：开启</li><li>CLOSE：关闭
+     * Kibana的alerting外网告警策略<li>OPEN：开启</li><li>CLOSE：关闭</li>
   注意：此字段可能返回 null，表示取不到有效值。
      */
     KibanaAlteringPublicAccess?: string;
@@ -3165,6 +3165,16 @@ export interface InstanceInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     CustomKibanaPrivateUrl?: string;
+    /**
+     * 节点出站访问详细信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    OutboundPublicAcls?: Array<OutboundPublicAcl>;
+    /**
+     * 网络连接方案
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    NetConnectScheme?: string;
 }
 /**
  * 数据接入cvm实例信息
@@ -3334,29 +3344,19 @@ export interface DescribeLogstashPipelinesRequest {
     InstanceId: string;
 }
 /**
- * RestartNodes请求参数结构体
+ * 节点出站访问信息
  */
-export interface RestartNodesRequest {
+export interface OutboundPublicAcl {
     /**
-     * 集群实例ID
+     * 允许节点出站访问的节点类型
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    InstanceId: string;
+    NodeType: string;
     /**
-     * 节点名称列表
+     * 允许节点出站访问的白名单
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    NodeNames: Array<string>;
-    /**
-     * 是否强制重启
-     */
-    ForceRestart?: boolean;
-    /**
-     * 可选重启模式"in-place","blue-green"，分别表示重启，蓝绿重启；默认值为"in-place"
-     */
-    RestartMode?: string;
-    /**
-     * 节点状态，在蓝绿模式中使用；离线节点蓝绿有风险
-     */
-    IsOffline?: boolean;
+    WhiteHostList?: Array<string>;
 }
 /**
  * 自治索引信息
@@ -3957,75 +3957,79 @@ export interface NodeView {
     /**
      * 节点ID
      */
-    NodeId: string;
+    NodeId?: string;
     /**
      * 节点IP
      */
-    NodeIp: string;
+    NodeIp?: string;
     /**
      * 节点是否可见
      */
-    Visible: number;
+    Visible?: number;
     /**
      * 是否熔断
      */
-    Break: number;
+    Break?: number;
     /**
      * 节点总磁盘大小
      */
-    DiskSize: number;
+    DiskSize?: number;
     /**
      * 磁盘使用率
      */
-    DiskUsage: number;
+    DiskUsage?: number;
     /**
      * 节点内存大小，单位GB
      */
-    MemSize: number;
+    MemSize?: number;
     /**
      * 内存使用率
      */
-    MemUsage: number;
+    MemUsage?: number;
     /**
      * 节点cpu个数
      */
-    CpuNum: number;
+    CpuNum?: number;
     /**
      * cpu使用率
      */
-    CpuUsage: number;
+    CpuUsage?: number;
     /**
      * 可用区
      */
-    Zone: string;
+    Zone?: string;
     /**
      * 节点角色
      */
-    NodeRole: string;
+    NodeRole?: string;
     /**
      * 节点HTTP IP
      */
-    NodeHttpIp: string;
+    NodeHttpIp?: string;
     /**
      * JVM内存使用率
      */
-    JvmMemUsage: number;
+    JvmMemUsage?: number;
     /**
      * 节点分片数
      */
-    ShardNum: number;
+    ShardNum?: number;
     /**
      * 节点上磁盘ID列表
      */
-    DiskIds: Array<string>;
+    DiskIds?: Array<string>;
     /**
      * 是否为隐藏可用区
      */
-    Hidden: boolean;
+    Hidden?: boolean;
     /**
      * 是否充当协调节点的角色
      */
     IsCoordinationNode?: boolean;
+    /**
+     * CVM运行状态
+     */
+    CVMStatus?: string;
 }
 /**
  * ModifyEsVipSecurityGroup返回参数结构体
@@ -4198,6 +4202,21 @@ export interface UpdateInstanceRequest {
      * 变更为https集群，默认是http
      */
     Protocol?: string;
+    /**
+     * 节点出站访问详细信息
+  
+     */
+    OutboundPublicAcls?: Array<OutboundPublicAcl>;
+    /**
+     * 节点出站访问操作
+  OPEN 开启
+  CLOSE 关闭
+     */
+    OutboundPublicAccess?: string;
+    /**
+     * cvm延迟上架参数
+     */
+    CvmDelayOnlineTime?: number;
 }
 /**
  * CreateServerlessInstance返回参数结构体
@@ -4490,6 +4509,35 @@ export interface DescribeInstancePluginListRequest {
     PluginType?: number;
 }
 /**
+ * RestartNodes请求参数结构体
+ */
+export interface RestartNodesRequest {
+    /**
+     * 集群实例ID
+     */
+    InstanceId: string;
+    /**
+     * 节点名称列表
+     */
+    NodeNames: Array<string>;
+    /**
+     * 是否强制重启
+     */
+    ForceRestart?: boolean;
+    /**
+     * 可选重启模式"in-place","blue-green"，分别表示重启，蓝绿重启；默认值为"in-place"
+     */
+    RestartMode?: string;
+    /**
+     * 节点状态，在蓝绿模式中使用；离线节点蓝绿有风险
+     */
+    IsOffline?: boolean;
+    /**
+     * cvm延迟上架时间
+     */
+    CvmDelayOnlineTime?: number;
+}
+/**
  * DescribeUserCosSnapshotList返回参数结构体
  */
 export interface DescribeUserCosSnapshotListResponse {
@@ -4551,6 +4599,10 @@ export interface UpgradeInstanceRequest {
      * 滚动模式时，是否跳过检查，进行强制重启。默认值为false
      */
     SkipCheckForceRestart?: boolean;
+    /**
+     * cvm延迟上架参数
+     */
+    CvmDelayOnlineTime?: number;
 }
 /**
  * DescribeViews返回参数结构体

@@ -20,7 +20,7 @@ import { ClientConfig } from "../../../common/interface"
 import {
   DescribeExtensionRequest,
   StopAutoCalloutTaskRequest,
-  HangUpCallRequest,
+  CompanyApplyInfo,
   CreateSDKLoginTokenResponse,
   ModifyStaffRequest,
   BindNumberCallOutSkillGroupResponse,
@@ -36,6 +36,7 @@ import {
   DescribeCarrierPrivilegeNumberApplicantsRequest,
   DisableCCCPhoneNumberRequest,
   CreatePredictiveDialingCampaignRequest,
+  DescribeChatMessagesResponse,
   ServeParticipant,
   DescribeTelCallInfoResponse,
   DescribeExtensionsResponse,
@@ -62,6 +63,7 @@ import {
   CreateUserSigRequest,
   CreateCCCSkillGroupRequest,
   DescribeAutoCalloutTaskResponse,
+  CreateCompanyApplyRequest,
   CreateCCCSkillGroupResponse,
   DescribeTelSessionRequest,
   DescribeIMCdrsRequest,
@@ -97,6 +99,7 @@ import {
   StaffInfo,
   CreateAutoCalloutTaskResponse,
   TelCdrInfo,
+  DescribeCompanyListResponse,
   NumberInfo,
   DeleteStaffRequest,
   CallInMetrics,
@@ -117,23 +120,28 @@ import {
   SkillGroupItem,
   MessageBody,
   PhoneNumBuyInfo,
+  ModifyCompanyApplyResponse,
   DescribeCCCBuyInfoListResponse,
   ActiveCarrierPrivilegeNumber,
   UnbindStaffSkillGroupListResponse,
   ResumePredictiveDialingCampaignRequest,
+  CompanyStateInfo,
   DeleteExtensionResponse,
   BindStaffSkillGroupListRequest,
   DescribePSTNActiveSessionListRequest,
   DescribeCallInMetricsResponse,
+  ModifyCompanyApplyRequest,
+  DescribeCompanyListRequest,
   DescribeActiveCarrierPrivilegeNumberResponse,
   IMSatisfaction,
+  HangUpCallRequest,
   DescribeTelCdrResponse,
   DescribeStaffStatusMetricsRequest,
   DeleteStaffResponse,
   CalleeAttribute,
   StaffStatusExtra,
   CreateStaffRequest,
-  DescribeChatMessagesResponse,
+  CreateCompanyApplyResponse,
   SdkAppIdBuyInfo,
   DescribePSTNActiveSessionListResponse,
   IMCdrInfo,
@@ -166,13 +174,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 解绑号码外呼技能组
+   * 修改客服账号
    */
-  async UnbindNumberCallOutSkillGroup(
-    req: UnbindNumberCallOutSkillGroupRequest,
-    cb?: (error: string, rep: UnbindNumberCallOutSkillGroupResponse) => void
-  ): Promise<UnbindNumberCallOutSkillGroupResponse> {
-    return this.request("UnbindNumberCallOutSkillGroup", req, cb)
+  async ModifyStaff(
+    req: ModifyStaffRequest,
+    cb?: (error: string, rep: ModifyStaffResponse) => void
+  ): Promise<ModifyStaffResponse> {
+    return this.request("ModifyStaff", req, cb)
   }
 
   /**
@@ -276,13 +284,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改客服账号
+   * 修改公司资质申请，只能修改状态为驳回或待审核的申请单。（1、首次使用接口，建议先在云联络中心控制台查看各个资料模版:https://console.cloud.tencent.com/ccc/enterprise/update。2、参数中图片Url建议使用腾讯云Cos存储的临时链接）
    */
-  async ModifyStaff(
-    req: ModifyStaffRequest,
-    cb?: (error: string, rep: ModifyStaffResponse) => void
-  ): Promise<ModifyStaffResponse> {
-    return this.request("ModifyStaff", req, cb)
+  async ModifyCompanyApply(
+    req: ModifyCompanyApplyRequest,
+    cb?: (error: string, rep: ModifyCompanyApplyResponse) => void
+  ): Promise<ModifyCompanyApplyResponse> {
+    return this.request("ModifyCompanyApply", req, cb)
   }
 
   /**
@@ -386,6 +394,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 创建公司资质申请（1、首次使用接口，建议先在云联络中心控制台查看各个资料模版:https://console.cloud.tencent.com/ccc/enterprise/update。2、参数中图片Url建议使用腾讯云Cos存储的临时链接）
+   */
+  async CreateCompanyApply(
+    req: CreateCompanyApplyRequest,
+    cb?: (error: string, rep: CreateCompanyApplyResponse) => void
+  ): Promise<CreateCompanyApplyResponse> {
+    return this.request("CreateCompanyApply", req, cb)
+  }
+
+  /**
    * 获取电话服务记录与录音
    */
   async DescribeTelCdr(
@@ -403,6 +421,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeSkillGroupInfoListResponse) => void
   ): Promise<DescribeSkillGroupInfoListResponse> {
     return this.request("DescribeSkillGroupInfoList", req, cb)
+  }
+
+  /**
+   * 解绑号码外呼技能组
+   */
+  async UnbindNumberCallOutSkillGroup(
+    req: UnbindNumberCallOutSkillGroupRequest,
+    cb?: (error: string, rep: UnbindNumberCallOutSkillGroupResponse) => void
+  ): Promise<UnbindNumberCallOutSkillGroupResponse> {
+    return this.request("UnbindNumberCallOutSkillGroup", req, cb)
   }
 
   /**
@@ -655,6 +683,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: AbortPredictiveDialingCampaignResponse) => void
   ): Promise<AbortPredictiveDialingCampaignResponse> {
     return this.request("AbortPredictiveDialingCampaign", req, cb)
+  }
+
+  /**
+   * 查询公司资质申请列表
+   */
+  async DescribeCompanyList(
+    req: DescribeCompanyListRequest,
+    cb?: (error: string, rep: DescribeCompanyListResponse) => void
+  ): Promise<DescribeCompanyListResponse> {
+    return this.request("DescribeCompanyList", req, cb)
   }
 
   /**

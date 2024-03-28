@@ -40,6 +40,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyStudioProduct", req, cb);
     }
     /**
+     * 根据设备信息拉取有效套餐列表
+     */
+    async DescribeDevicePackages(req, cb) {
+        return this.request("DescribeDevicePackages", req, cb);
+    }
+    /**
      * 列出量产数据列表信息。
      */
     async GetBatchProductionsList(req, cb) {
@@ -76,6 +82,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDeviceLocationSolve", req, cb);
     }
     /**
+     * 获取视频防盗链播放URL
+     */
+    async GenerateSignedVideoURL(req, cb) {
+        return this.request("GenerateSignedVideoURL", req, cb);
+    }
+    /**
      * 查询设备绑定的网关设备
      */
     async DescribeDeviceBindGateway(req, cb) {
@@ -88,10 +100,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("GetDeviceLocationHistory", req, cb);
     }
     /**
-     * 本接口（PublishMessage）用于使用自定义透传协议进行设备远控
+     * 获取设备的历史事件
      */
-    async PublishMessage(req, cb) {
-        return this.request("PublishMessage", req, cb);
+    async ListEventHistory(req, cb) {
+        return this.request("ListEventHistory", req, cb);
     }
     /**
      * 提供查看产品详细信息的能力，包括产品的ID、数据协议、认证类型等重要参数
@@ -112,10 +124,28 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ReleaseStudioProduct", req, cb);
     }
     /**
+     * 批量拉取云存事件缩略图
+     */
+    async DescribeCloudStorageThumbnailList(req, cb) {
+        return this.request("DescribeCloudStorageThumbnailList", req, cb);
+    }
+    /**
      * 更新围栏绑定信息
      */
     async ModifyFenceBind(req, cb) {
         return this.request("ModifyFenceBind", req, cb);
+    }
+    /**
+     * 查询套餐消耗记录列表
+     */
+    async DescribePackageConsumeTasks(req, cb) {
+        return this.request("DescribePackageConsumeTasks", req, cb);
+    }
+    /**
+     * 获取云存套餐包消耗统计
+     */
+    async DescribeCloudStoragePackageConsumeStats(req, cb) {
+        return this.request("DescribeCloudStoragePackageConsumeStats", req, cb);
     }
     /**
      * 删除位置空间
@@ -148,6 +178,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeFenceEventList", req, cb);
     }
     /**
+     * 开通云存服务
+     */
+    async CreateIotVideoCloudStorage(req, cb) {
+        return this.request("CreateIotVideoCloudStorage", req, cb);
+    }
+    /**
      * 删除规则
      */
     async DeleteTopicRule(req, cb) {
@@ -160,10 +196,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("PublishRRPCMessage", req, cb);
     }
     /**
-     * 搜索位置空间
+     * 获取围栏绑定信息列表
      */
-    async SearchPositionSpace(req, cb) {
-        return this.request("SearchPositionSpace", req, cb);
+    async DescribeFenceBindList(req, cb) {
+        return this.request("DescribeFenceBindList", req, cb);
     }
     /**
      * 删除  LoRa 网关的接口
@@ -178,6 +214,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateStudioProduct", req, cb);
     }
     /**
+     * 获取具有云存的日期
+     */
+    async DescribeCloudStorageDate(req, cb) {
+        return this.request("DescribeCloudStorageDate", req, cb);
+    }
+    /**
      * 启用规则
      */
     async EnableTopicRule(req, cb) {
@@ -190,6 +232,18 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeGatewaySubDeviceList", req, cb);
     }
     /**
+     * 拉取云存用户列表
+     */
+    async DescribeCloudStorageUsers(req, cb) {
+        return this.request("DescribeCloudStorageUsers", req, cb);
+    }
+    /**
+     * 转移云存服务
+     */
+    async TransferCloudStorage(req, cb) {
+        return this.request("TransferCloudStorage", req, cb);
+    }
+    /**
      * 提供根据产品名称查找产品的能力
      */
     async SearchStudioProduct(req, cb) {
@@ -200,6 +254,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ModifyTopicRule(req, cb) {
         return this.request("ModifyTopicRule", req, cb);
+    }
+    /**
+     * 继承云存用户
+     */
+    async InheritCloudStorageUser(req, cb) {
+        return this.request("InheritCloudStorageUser", req, cb);
     }
     /**
      * 本接口（ListFirmwares）用于获取固件列表
@@ -238,16 +298,28 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("GetPositionSpaceList", req, cb);
     }
     /**
+     * 重置云存服务
+     */
+    async ResetCloudStorage(req, cb) {
+        return this.request("ResetCloudStorage", req, cb);
+    }
+    /**
      * 提供查询LoRa自定义频点详情的能力
      */
     async DescribeLoRaFrequency(req, cb) {
         return this.request("DescribeLoRaFrequency", req, cb);
     }
     /**
-     * 本接口（UpdateTopicPolicy）用于更新Topic信息
+     * 更新位置空间
      */
-    async ModifyTopicPolicy(req, cb) {
-        return this.request("ModifyTopicPolicy", req, cb);
+    async ModifyPositionSpace(req, cb) {
+        return this.request("ModifyPositionSpace", req, cb);
+    }
+    /**
+     * 获取某一天云存时间轴
+     */
+    async DescribeCloudStorageTime(req, cb) {
+        return this.request("DescribeCloudStorageTime", req, cb);
     }
     /**
      * 获取规则列表
@@ -256,16 +328,28 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("GetTopicRuleList", req, cb);
     }
     /**
-     * 为用户提供新建项目的能力，用于集中管理产品和应用。
+     * 拉取云存事件缩略图
      */
-    async CreateProject(req, cb) {
-        return this.request("CreateProject", req, cb);
+    async DescribeCloudStorageThumbnail(req, cb) {
+        return this.request("DescribeCloudStorageThumbnail", req, cb);
+    }
+    /**
+     * 拉取多个云存事件缩略图
+     */
+    async DescribeCloudStorageMultiThumbnail(req, cb) {
+        return this.request("DescribeCloudStorageMultiThumbnail", req, cb);
     }
     /**
      * 提供给用户异步调用设备行为的能力
      */
     async CallDeviceActionAsync(req, cb) {
         return this.request("CallDeviceActionAsync", req, cb);
+    }
+    /**
+     * 修改LoRa自定义频点
+     */
+    async ModifyLoRaFrequency(req, cb) {
+        return this.request("ModifyLoRaFrequency", req, cb);
     }
     /**
      * 拉取设备统计汇总数据
@@ -346,6 +430,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateTopicPolicy", req, cb);
     }
     /**
+     * 获取设备云存服务详情
+     */
+    async DescribeCloudStorage(req, cb) {
+        return this.request("DescribeCloudStorage", req, cb);
+    }
+    /**
      * 本接口（UploadFirmware）用于创建设备固件版本信息，在平台用于固件版本升级、固件资源下发等。
      */
     async UploadFirmware(req, cb) {
@@ -370,16 +460,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("BindProducts", req, cb);
     }
     /**
-     * 获取围栏绑定信息列表
+     * 搜索位置空间
      */
-    async DescribeFenceBindList(req, cb) {
-        return this.request("DescribeFenceBindList", req, cb);
+    async SearchPositionSpace(req, cb) {
+        return this.request("SearchPositionSpace", req, cb);
     }
     /**
-     * 更新位置空间
+     * 为用户提供新建项目的能力，用于集中管理产品和应用。
      */
-    async ModifyPositionSpace(req, cb) {
-        return this.request("ModifyPositionSpace", req, cb);
+    async CreateProject(req, cb) {
+        return this.request("CreateProject", req, cb);
     }
     /**
      * 获取位置空间中围栏告警事件列表
@@ -436,10 +526,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("GetStudioProductList", req, cb);
     }
     /**
+     * 绑定云存用户
+     */
+    async BindCloudStorageUser(req, cb) {
+        return this.request("BindCloudStorageUser", req, cb);
+    }
+    /**
      * 获取量产详情信息。
      */
     async DescribeBatchProduction(req, cb) {
         return this.request("DescribeBatchProduction", req, cb);
+    }
+    /**
+     * 删除云存事件
+     */
+    async DeleteCloudStorageEvent(req, cb) {
+        return this.request("DeleteCloudStorageEvent", req, cb);
     }
     /**
      * 批量删除设备
@@ -454,10 +556,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("GetGatewaySubDeviceList", req, cb);
     }
     /**
-     * 获取设备的历史事件
+     * 本接口（UpdateTopicPolicy）用于更新Topic信息
      */
-    async ListEventHistory(req, cb) {
-        return this.request("ListEventHistory", req, cb);
+    async ModifyTopicPolicy(req, cb) {
+        return this.request("ModifyTopicPolicy", req, cb);
+    }
+    /**
+     * 查询云存服务详情
+     */
+    async DescribeCloudStorageOrder(req, cb) {
+        return this.request("DescribeCloudStorageOrder", req, cb);
+    }
+    /**
+     * 本接口（PublishMessage）用于使用自定义透传协议进行设备远控
+     */
+    async PublishMessage(req, cb) {
+        return this.request("PublishMessage", req, cb);
     }
     /**
      * 获取设备在指定时间范围内上报的历史数据。
@@ -488,6 +602,18 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DeleteLoRaFrequency(req, cb) {
         return this.request("DeleteLoRaFrequency", req, cb);
+    }
+    /**
+     * 查询套餐消耗记录详情
+     */
+    async DescribePackageConsumeTask(req, cb) {
+        return this.request("DescribePackageConsumeTask", req, cb);
+    }
+    /**
+     * 重置云存事件
+     */
+    async ResetCloudStorageEvent(req, cb) {
+        return this.request("ResetCloudStorageEvent", req, cb);
     }
     /**
      * 更新位置空间产品属性
@@ -526,10 +652,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeInstance", req, cb);
     }
     /**
-     * 修改LoRa自定义频点
+     * 获取设备图片流数据
      */
-    async ModifyLoRaFrequency(req, cb) {
-        return this.request("ModifyLoRaFrequency", req, cb);
+    async DescribeCloudStorageStreamData(req, cb) {
+        return this.request("DescribeCloudStorageStreamData", req, cb);
     }
     /**
      * 删除围栏
@@ -542,6 +668,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async SearchTopicRule(req, cb) {
         return this.request("SearchTopicRule", req, cb);
+    }
+    /**
+     * 拉取云存事件列表
+     */
+    async DescribeCloudStorageEvents(req, cb) {
+        return this.request("DescribeCloudStorageEvents", req, cb);
     }
     /**
      * 提供修改产品的数据模板的能力
@@ -584,6 +716,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CreateFenceBind(req, cb) {
         return this.request("CreateFenceBind", req, cb);
+    }
+    /**
+     * 获取云存套餐包消耗详细记录
+     */
+    async DescribeCloudStoragePackageConsumeDetails(req, cb) {
+        return this.request("DescribeCloudStoragePackageConsumeDetails", req, cb);
     }
 }
 exports.Client = Client;

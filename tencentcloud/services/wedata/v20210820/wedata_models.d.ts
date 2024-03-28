@@ -5413,42 +5413,42 @@ export interface TaskCanvasInfo {
      * 任务Id
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TaskId: string;
+    TaskId?: string;
     /**
      * 任务名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TaskName: string;
+    TaskName?: string;
     /**
      * 工作流id
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    WorkflowId: string;
+    WorkflowId?: string;
     /**
      * 工作流名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    WorkflowName: string;
+    WorkflowName?: string;
     /**
      * 项目名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ProjectName: string;
+    ProjectName?: string;
     /**
      * 项目标识
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ProjectIdent: string;
+    ProjectIdent?: string;
     /**
      * 任务状态，'Y','F','O','T','INVALID' 分别表示调度中、已停止、已暂停、停止中、已失效
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    Status: string;
+    Status?: string;
     /**
      * 任务类型id
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TaskTypeId: number;
+    TaskTypeId?: number;
     /**
      * 任务类型描述，其中任务类型id和任务类型描述的对应的关系为
   20	通用数据同步任务
@@ -5503,72 +5503,72 @@ export interface TaskCanvasInfo {
   10000	自定义业务
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TaskTypeDesc: string;
+    TaskTypeDesc?: string;
     /**
      * 项目id
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ProjectId: string;
+    ProjectId?: string;
     /**
      * 文件夹名称
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    FolderName: string;
+    FolderName?: string;
     /**
      * 文件夹id
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    FolderId: string;
+    FolderId?: string;
     /**
      * 最近提交时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    FirstSubmitTime: string;
+    FirstSubmitTime?: string;
     /**
      * 首次运行时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    FirstRunTime: string;
+    FirstRunTime?: string;
     /**
      * 调度计划展示描述信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    ScheduleDesc: string;
+    ScheduleDesc?: string;
     /**
      * 负责人
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    InCharge: string;
+    InCharge?: string;
     /**
      * 调度周期类型
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    CycleUnit: string;
+    CycleUnit?: string;
     /**
      * 画布x轴坐标点
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    LeftCoordinate: number;
+    LeftCoordinate?: number;
     /**
      * 画布y轴坐标点
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TopCoordinate: number;
+    TopCoordinate?: number;
     /**
      * 跨工作流虚拟任务标识；true标识跨工作流任务；false标识本工作流任务
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    VirtualFlag: boolean;
+    VirtualFlag?: boolean;
     /**
      * 弹性周期配置
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    TaskAction: string;
+    TaskAction?: string;
     /**
      * 延迟时间
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DelayTime: number;
+    DelayTime?: number;
     /**
      * 执行开始时间
   注意：此字段可能返回 null，表示取不到有效值。
@@ -5630,6 +5630,76 @@ export interface TaskCanvasInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     TenantId?: string;
+    /**
+     * 自依赖类型
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SelfDepend?: number;
+    /**
+     * 资源组id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ExecutorGroupId?: string;
+    /**
+     * 资源组名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ExecutorGroupName?: string;
+    /**
+     * 优先级
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RunPriority?: string;
+    /**
+     * 可充实次数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TryLimit?: string;
+    /**
+     * 可充实
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RetryAble?: string;
+    /**
+     * 重试等待事件
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RetryWait?: string;
+    /**
+     * 最近提交时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    LastSchedulerCommitTime?: string;
+    /**
+     * 备注
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Notes?: string;
+    /**
+     * 创建人
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Creator?: string;
+    /**
+     * 创建人id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    UpdateUser?: string;
+    /**
+     * 更新人id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    UpdateUserId?: string;
+    /**
+     * yarn队列
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    YarnQueue?: string;
+    /**
+     * 可执行的timeToLive
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ExecutionTTL?: number;
 }
 /**
  * 任务依赖的边信息

@@ -198,6 +198,16 @@ it("ckafka.v20190819.DescribeGroup", async function () {
     }
 })
 
+it("ckafka.v20190819.FetchMessageListByOffset", async function () {
+    try {
+       const data = await client.FetchMessageListByOffset({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ckafka.v20190819.ModifyDatahubTask", async function () {
     try {
        const data = await client.ModifyDatahubTask({})
@@ -278,9 +288,9 @@ it("ckafka.v20190819.DescribeUser", async function () {
     }
 })
 
-it("ckafka.v20190819.FetchMessageListByOffset", async function () {
+it("ckafka.v20190819.DescribePrometheus", async function () {
     try {
-       const data = await client.FetchMessageListByOffset({})
+       const data = await client.DescribePrometheus({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -561,6 +571,16 @@ it("ckafka.v20190819.DeleteAcl", async function () {
 it("ckafka.v20190819.DescribeAppInfo", async function () {
     try {
        const data = await client.DescribeAppInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ckafka.v20190819.CreatePrometheus", async function () {
+    try {
+       const data = await client.CreatePrometheus({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

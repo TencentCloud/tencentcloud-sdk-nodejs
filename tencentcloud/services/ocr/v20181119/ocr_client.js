@@ -428,6 +428,14 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("InvoiceGeneralOCR", req, cb);
     }
     /**
+     * 本接口支持网约车运输证关键字段的识别，包括交运管许可字号、车辆所有人、车辆号牌、起始日期、截止日期、发证日期。
+
+默认接口请求频率限制：5次/秒。
+     */
+    async RideHailingTransportLicenseOCR(req, cb) {
+        return this.request("RideHailingTransportLicenseOCR", req, cb);
+    }
+    /**
      * 支持查询智能表单录入任务的状态。本产品免费公测中，您可以点击demo（超链接：https://ocr.smartform.cloud.tencent.com/）试用，如需购买请与商务团队联系。
      */
     async GetTaskState(req, cb) {
@@ -932,12 +940,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("EduPaperOCR", req, cb);
     }
     /**
-     * 本接口支持网约车运输证关键字段的识别，包括交运管许可字号、车辆所有人、车辆号牌、起始日期、截止日期、发证日期。
-
-默认接口请求频率限制：5次/秒。
+     * 支持将图片或PDF文件转换成Markdown格式文件，可解析包括表格、公式、图片、标题、段落、页眉、页脚等内容元素，并将内容智能转换成阅读顺序。
      */
-    async RideHailingTransportLicenseOCR(req, cb) {
-        return this.request("RideHailingTransportLicenseOCR", req, cb);
+    async ReconstructDocument(req, cb) {
+        return this.request("ReconstructDocument", req, cb);
     }
     /**
      * 菲律宾TinID识别
