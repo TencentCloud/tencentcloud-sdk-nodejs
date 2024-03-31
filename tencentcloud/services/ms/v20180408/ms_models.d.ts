@@ -1369,11 +1369,11 @@ export interface DescribeUrlDetectionResultResponse {
     /**
      * [查询结果]查询结果；枚举值：0 查询成功，否则查询失败
      */
-    ResultCode: number;
+    ResultCode?: number;
     /**
      * [固定信息]响应协议版本号
      */
-    RespVer: number;
+    RespVer?: number;
     /**
      * [查询结果]url恶意状态
   枚举值：
@@ -1383,7 +1383,7 @@ export interface DescribeUrlDetectionResultResponse {
   
   注意：查询结果EvilClass字段在Urltype=2时，才有意义。
      */
-    UrlType: number;
+    UrlType?: number;
     /**
      * [查询结果]url恶意类型大类:{
       "1": "社工欺诈（仿冒、账号钓鱼、中奖诈骗）",
@@ -1391,46 +1391,48 @@ export interface DescribeUrlDetectionResultResponse {
       "3": "虚假销售（男女保健美容减肥产品、电子产品、虚假广告、违法销售）",
       "4": "恶意文件（病毒文件，木马文件，恶意apk文件的下载链接以及站点，挂马网站）",
       "5": "博彩网站（博彩网站，在线赌博网站）",
-      "6": "色情网站（涉嫌传播色情内容，提供色情服务的网站）"
+      "6": "色情网站（涉嫌传播色情内容，提供色情服务的网站）"，
+      "7": "风险网站（弱类型，传播垃圾信息的网站，如果客户端有阻断，不建议使用这个网站）"，
+      "8": "违法网站（根据法律法规不能传播的内容，以及侵犯知识产权的类型）"
     }
      */
-    EvilClass: number;
+    EvilClass?: number;
     /**
      * 该字段暂为空
      */
-    EvilType: number;
+    EvilType?: number;
     /**
      * 该字段暂为空
      */
-    Level: number;
+    Level?: number;
     /**
      * [查询详情]url检出时间；时间戳
      */
-    DetectTime: number;
+    DetectTime?: number;
     /**
      * 该字段暂为空
      */
-    Wording: string;
+    Wording?: string;
     /**
      * 该字段暂为空
      */
-    WordingTitle: string;
+    WordingTitle?: string;
     /**
      * [查询结果]url恶意状态说明；为UrlType字段值对应的说明
      */
-    UrlTypeDesc: string;
+    UrlTypeDesc?: string;
     /**
      * [查询结果]url恶意大类说明；为EvilClass字段值对应的说明
      */
-    EvilClassDesc: string;
+    EvilClassDesc?: string;
     /**
      * 该字段暂为空
      */
-    EvilTypeDesc: string;
+    EvilTypeDesc?: string;
     /**
      * 该字段暂为空
      */
-    LevelDesc: string;
+    LevelDesc?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */

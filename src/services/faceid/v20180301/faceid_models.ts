@@ -558,7 +558,7 @@ export interface GetFaceIdRiskInfoResponse {
    */
   DeviceInfoTag?: string
   /**
-   * 描述当前请求所在设备的风险等级，共4级，详情如下： 1 - 安全 2 - 低风险 3 - 中风险 4 - 高危 ，-1表示未获取到风险等级
+   * 描述当前请求所在设备的风险等级，共4级，详情如下： 1 - 低风险 2 - 中风险 3 - 高风险 4 - 攻击 ，-1表示未获取到风险等级
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DeviceInfoLevel?: number
@@ -568,7 +568,7 @@ export interface GetFaceIdRiskInfoResponse {
    */
   OpenId?: string
   /**
-   * 描述当前请求所在设备的相机指纹风险等级，共4级，详情如下： 1 - 安全 2 - 低风险 3 - 中风险 4 - 高危 ，-1表示未获取到风险等级
+   * 描述当前请求所在设备的相机指纹风险等级，共4级，详情如下： 1 - 低风险 2 - 中风险 3 - 高风险 4 - 攻击 ，-1表示未获取到风险等级
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CameraInfoLevel?: number

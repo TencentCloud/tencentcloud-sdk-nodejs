@@ -14516,6 +14516,10 @@ export interface CreateOrUpdateResourceRequest {
    * 必填项，文件大小，与 Files 字段对应
    */
   FilesSize?: Array<string>
+  /**
+   * 必填项，资源的Md5值（COS中的ETag）
+   */
+  FileMd5?: string
 }
 
 /**

@@ -640,7 +640,6 @@ export interface ModifyPictureRequest {
 export interface DescribeWebRecordResponse {
   /**
    * 1: 正在录制中
-2: 任务不存在
    */
   Status?: number
   /**
