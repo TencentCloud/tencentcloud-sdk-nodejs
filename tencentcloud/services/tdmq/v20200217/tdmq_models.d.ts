@@ -1667,6 +1667,26 @@ export interface CreateRocketMQVipInstanceRequest {
      * 购买时长，月为单位
      */
     TimeSpan: number;
+    /**
+     * 是否用于迁移上云，默认为false
+     */
+    SupportsMigrateToCloud?: boolean;
+    /**
+     * 是否开启公网
+     */
+    EnablePublic?: boolean;
+    /**
+     * 公网带宽，在开启公网情况下为必传字段
+     */
+    Bandwidth?: number;
+    /**
+     * 公网白名单
+     */
+    IpRules?: Array<PublicAccessRule>;
+    /**
+     * 标签
+     */
+    Tags?: Array<Tag>;
 }
 /**
  * Pulsar 网络接入点信息

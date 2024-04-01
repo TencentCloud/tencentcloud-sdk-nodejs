@@ -84,6 +84,31 @@ export interface NodeInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Status?: number;
+    /**
+     * 节点角色名
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    NodeName?: string;
+    /**
+     * 组件名
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ComponentName?: string;
+    /**
+     * 节点角色
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    NodeRole?: string;
+    /**
+     * 节点上次重启的时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    LastRestartTime?: string;
+    /**
+     * 节点所在可用区
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Zone?: string;
 }
 /**
  * RestartClusterForNode返回参数结构体
@@ -496,6 +521,14 @@ export interface CreateInstanceNewRequest {
      * 表名大小写是否敏感，0：敏感；1：不敏感，以小写进行比较；2：不敏感，表名改为以小写存储
      */
     CaseSensitive?: number;
+    /**
+     * 是否开启多可用区
+     */
+    EnableMultiZones?: boolean;
+    /**
+     * 开启多可用区后，用户的所有可用区和子网信息
+     */
+    UserMultiZoneInfos?: NetworkInfo;
 }
 /**
  * 实例描述信息
@@ -724,6 +757,16 @@ export interface InstanceInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     BindSGs?: Array<string>;
+    /**
+     * 是否为多可用区
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    EnableMultiZones?: boolean;
+    /**
+     * 用户可用区和子网信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    UserNetworkInfos?: string;
 }
 /**
  * DescribeInstances返回参数结构体
@@ -1028,6 +1071,31 @@ export interface DescribeInstanceResponse {
     RequestId?: string;
 }
 /**
+ * RestartClusterForNode请求参数结构体
+ */
+export interface RestartClusterForNodeRequest {
+    /**
+     * 集群ID，例如cdwch-xxxx
+     */
+    InstanceId: string;
+    /**
+     * 配置文件名称
+     */
+    ConfigName: string;
+    /**
+     * 每次重启的批次
+     */
+    BatchSize?: number;
+    /**
+     * 重启节点
+     */
+    NodeList?: Array<string>;
+    /**
+     * false表示非滚动重启，true表示滚动重启
+     */
+    RollingRestart?: boolean;
+}
+/**
  * ScaleUpInstance请求参数结构体
  */
 export interface ScaleUpInstanceRequest {
@@ -1113,29 +1181,24 @@ export interface NodesSummary {
     MaxDiskSize?: number;
 }
 /**
- * RestartClusterForNode请求参数结构体
+ * 网络信息
  */
-export interface RestartClusterForNodeRequest {
+export interface NetworkInfo {
     /**
-     * 集群ID，例如cdwch-xxxx
+     * 可用区
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    InstanceId: string;
+    Zone?: string;
     /**
-     * 配置文件名称
+     * 子网id
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    ConfigName: string;
+    SubnetId?: string;
     /**
-     * 每次重启的批次
+     * 当前子网可用ip数
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    BatchSize?: number;
-    /**
-     * 重启节点
-     */
-    NodeList?: Array<string>;
-    /**
-     * false表示非滚动重启，true表示滚动重启
-     */
-    RollingRestart?: boolean;
+    SubnetIpNum?: number;
 }
 /**
  * 集群规格

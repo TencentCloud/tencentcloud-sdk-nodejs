@@ -678,10 +678,12 @@ export interface CreateInstanceNewRequest {
   InstanceName: string
   /**
    * 数据节点
+SpecName从DescribeSpec接口中返回的DataSpec.Name获取
    */
   DataSpec: NodeSpec
   /**
-   * 标签列表
+   * 标签列表（废弃）
+   * @deprecated
    */
   Tags?: Tag
   /**
@@ -702,8 +704,13 @@ export interface CreateInstanceNewRequest {
   HAZk?: boolean
   /**
    * ZK节点
+SpecName从DescribeSpec接口中返回的CommonSpec.Name（ZK节点）获取
    */
   CommonSpec?: NodeSpec
+  /**
+   * 标签列表
+   */
+  TagItems?: Array<Tag>
 }
 
 /**

@@ -3736,38 +3736,13 @@ export interface ClassificationConfigureInfoForUpdate {
 }
 
 /**
- * CreateSchedule请求参数结构体
+ * DeleteAdaptiveDynamicStreamingTemplate返回参数结构体
  */
-export interface CreateScheduleRequest {
+export interface DeleteAdaptiveDynamicStreamingTemplateResponse {
   /**
-   * 编排名称，最多128字符。同一个用户该名称唯一。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  ScheduleName: string
-  /**
-   * 编排绑定的触发规则，当上传视频命中该规则到该对象时即触发编排。
-   */
-  Trigger: WorkflowTrigger
-  /**
-   * 编排任务列表。
-   */
-  Activities: Array<Activity>
-  /**
-   * 媒体处理的文件输出存储位置。不填则继承 Trigger 中的存储位置。
-   */
-  OutputStorage?: TaskOutputStorage
-  /**
-   * 媒体处理生成的文件输出的目标目录，必选以 / 开头和结尾，如`/movie/201907/`。
-如果不填，表示与触发文件所在的目录一致。
-   */
-  OutputDir?: string
-  /**
-   * 任务的事件通知配置，不填代表不获取事件通知。
-   */
-  TaskNotifyConfig?: TaskNotifyConfig
-  /**
-   * 资源ID，需要保证对应资源是开启状态。默认为帐号主资源ID。
-   */
-  ResourceId?: string
+  RequestId?: string
 }
 
 /**
@@ -7091,13 +7066,38 @@ export interface OutputSRTSourceAddressResp {
 }
 
 /**
- * DeleteAdaptiveDynamicStreamingTemplate返回参数结构体
+ * CreateSchedule请求参数结构体
  */
-export interface DeleteAdaptiveDynamicStreamingTemplateResponse {
+export interface CreateScheduleRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 编排名称，最多128字符。同一个用户该名称唯一。
    */
-  RequestId?: string
+  ScheduleName: string
+  /**
+   * 编排绑定的触发规则，当上传视频命中该规则到该对象时即触发编排。
+   */
+  Trigger: WorkflowTrigger
+  /**
+   * 编排任务列表。
+   */
+  Activities: Array<Activity>
+  /**
+   * 媒体处理的文件输出存储位置。不填则继承 Trigger 中的存储位置。
+   */
+  OutputStorage?: TaskOutputStorage
+  /**
+   * 媒体处理生成的文件输出的目标目录，必选以 / 开头和结尾，如`/movie/201907/`。
+如果不填，表示与触发文件所在的目录一致。
+   */
+  OutputDir?: string
+  /**
+   * 任务的事件通知配置，不填代表不获取事件通知。
+   */
+  TaskNotifyConfig?: TaskNotifyConfig
+  /**
+   * 资源ID，需要保证对应资源是开启状态。默认为帐号主资源ID。
+   */
+  ResourceId?: string
 }
 
 /**
@@ -7715,6 +7715,11 @@ export interface AiAnalysisResult {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DeLogoTask?: AiAnalysisTaskDelLogoResult
+  /**
+   * 视频内容分析片头片尾任务的查询结果，当任务类型为 HeadTailRecognition 时有效。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HeadTailTask?: AiAnalysisTaskHeadTailResult
   /**
    * 视频内容分析摘要任务的查询结果，当任务类型为 Description 时有效。
 注意：此字段可能返回 null，表示取不到有效值。
@@ -12640,6 +12645,16 @@ export interface TranslateConfigureInfo {
 }
 
 /**
+ * 片头片尾任务输入类型
+ */
+export interface AiAnalysisTaskHeadTailInput {
+  /**
+   * 片头片尾识别模板 ID。
+   */
+  Definition: number
+}
+
+/**
  * 传输流媒体的音频数据。
  */
 export interface FlowMediaAudio {
@@ -12948,6 +12963,22 @@ export interface DescribeStreamLinkFlowLogsResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 片头片尾结果信息
+ */
+export interface AiAnalysisTaskHeadTailOutput {
+  /**
+   * 片头pts。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HeadTimeOffset: number
+  /**
+   * 片尾pts。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TailTimeOffset?: number
 }
 
 /**
@@ -13363,6 +13394,33 @@ export interface AiRecognitionTaskAsrWordsResult {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Output?: AiRecognitionTaskAsrWordsResultOutput
+}
+
+/**
+ * 片头片尾结果类型
+ */
+export interface AiAnalysisTaskHeadTailResult {
+  /**
+   * 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。
+   */
+  Status?: string
+  /**
+   * 错误码，0：成功，其他值：失败。
+   */
+  ErrCode?: number
+  /**
+   * 错误信息。
+   */
+  Message?: string
+  /**
+   * 片头片尾任务输入。
+   */
+  Input?: AiAnalysisTaskHeadTailInput
+  /**
+   * 片头片尾任务输出。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Output?: AiAnalysisTaskHeadTailOutput
 }
 
 /**

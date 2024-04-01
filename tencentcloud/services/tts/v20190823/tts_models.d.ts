@@ -131,10 +131,6 @@ export interface CreateTtsTaskRequest {
      */
     Text: string;
     /**
-     * 模型类型，1-默认模型。
-     */
-    ModelType: number;
-    /**
      * 音量大小，范围：[0，10]，分别对应11个等级的音量，默认为0，代表正常音量。没有静音选项。
      */
     Volume?: number;
@@ -146,6 +142,10 @@ export interface CreateTtsTaskRequest {
      * 项目id，用户自定义，默认为0。
      */
     ProjectId?: number;
+    /**
+     * 模型类型，1-默认模型。
+     */
+    ModelType?: number;
     /**
      * 音色 ID，包括标准音色与精品音色，精品音色拟真度更高，价格不同于标准音色，请参见[购买指南](https://cloud.tencent.com/document/product/1073/34112)。完整的音色 ID 列表请参见[音色列表](https://cloud.tencent.com/document/product/1073/92668)。
      */

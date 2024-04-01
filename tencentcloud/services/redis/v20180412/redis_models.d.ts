@@ -1091,6 +1091,84 @@ export interface RenewInstanceRequest {
     ModifyPayMode?: string;
 }
 /**
+ * 实例事件信息
+ */
+export interface RedisInstanceEvent {
+    /**
+     * 事件 ID。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ID?: number;
+    /**
+     * 实例 ID。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InstanceId?: string;
+    /**
+     * 实例名称。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InstanceName?: string;
+    /**
+     * 事件类型，当前仅支持配置实例迁移、资源腾挪、机房裁撤相关的运维操作。该参数仅支持配置为 **InstanceMigration**。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Type?: string;
+    /**
+     * 事件等级根据其影响严重程度和紧急程度进行分级，由重至轻依次为关键、重要、中等、一般。
+  - Critical：关键
+  - High：重要
+  - Middle：中等
+  - Low：一般
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Grade?: string;
+    /**
+     * 事件计划执行日期。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ExecutionDate?: string;
+    /**
+     * 事件计划执行开始时间。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    StartTime?: string;
+    /**
+     * 事件计划执行结束时间。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    EndTime?: string;
+    /**
+     * 运维事件最迟执行的日期，即该事件必须在该日期之前完成，否则可能会对业务产生影响。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    LatestExecutionDate?: string;
+    /**
+     * 事件当前状态。
+  - Waiting：未到达执行日期或不在维护时间窗内的事件。
+  - Running：在维护时间窗内，正在执行维护的事件。
+  - Finished：已全部完成维护的事件。
+  - Canceled：已取消执行的事件。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Status?: string;
+    /**
+     * 事件执行任务完成时间。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TaskEndTime?: string;
+    /**
+     * 事件影响信息。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    EffectInfo?: string;
+    /**
+     * 事件最初计划执行日期。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InitialExecutionDate?: string;
+}
+/**
  * UpgradeVersionToMultiAvailabilityZones返回参数结构体
  */
 export interface UpgradeVersionToMultiAvailabilityZonesResponse {
@@ -1102,6 +1180,39 @@ export interface UpgradeVersionToMultiAvailabilityZonesResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * 安全组规则
+ */
+export interface SecurityGroup {
+    /**
+     * 创建时间，时间格式：yyyy-mm-dd hh:mm:ss。
+     */
+    CreateTime: string;
+    /**
+     * 项目ID。
+     */
+    ProjectId: number;
+    /**
+     * 安全组ID。
+     */
+    SecurityGroupId: string;
+    /**
+     * 安全组名称。
+     */
+    SecurityGroupName: string;
+    /**
+     * 安全组备注。
+     */
+    SecurityGroupRemark: string;
+    /**
+     * 出站规则。
+     */
+    Outbound: Array<Outbound>;
+    /**
+     * 入站规则。
+     */
+    Inbound: Array<Inbound>;
 }
 /**
  * DescribeInstanceBackups返回参数结构体
@@ -1523,6 +1634,51 @@ export interface DescribeInstanceDTSInfoResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * DescribeInstanceEvents请求参数结构体
+ */
+export interface DescribeInstanceEventsRequest {
+    /**
+     * 配置查询事件执行计划的起始日期。
+     */
+    ExecutionStartDate: string;
+    /**
+     * 配置查询事件执行计划的结束日期。
+     */
+    ExecutionEndDate: string;
+    /**
+     * 指定实例 ID。例如：crs-xjhsdj****。请登录[Redis控制台](https://console.cloud.tencent.com/redis)在实例列表复制实例 ID。
+     */
+    InstanceId?: string;
+    /**
+     * 输出每页显示事件的数量，默认：10。
+     */
+    PageSize?: number;
+    /**
+     * 配置查询事件的输出页码，即支持根据PageNo（页码）与 PageSize （每页输出数量）查询某一页的事件。默认：1。
+     */
+    PageNo?: number;
+    /**
+     * 事件当前状态。
+  - Waiting：未到达执行日期或不在维护时间窗内的事件。
+  - Running：在维护时间窗内，正在执行维护的事件。
+  - Finished：已全部完成维护的事件。
+  - Canceled：已取消执行的事件。
+     */
+    Status?: Array<string>;
+    /**
+     * 事件类型，当前仅支持配置实例迁移、资源腾挪、机房裁撤相关的运维操作。该参数仅支持配置为 **InstanceMigration**。
+     */
+    EventTypes?: Array<string>;
+    /**
+     * 配置查询事件等级。事件等级根据其影响严重程度和紧急程度进行分级，由重至轻依次为关键、重要、中等、一般。
+  - Critical：关键
+  - High：重要
+  - Middle：中等
+  - Low：一般
+     */
+    Grades?: Array<string>;
 }
 /**
  * ChangeMasterInstance返回参数结构体
@@ -2458,6 +2614,37 @@ export interface DescribeTaskListRequest {
     OperateUin?: Array<string>;
 }
 /**
+ * ModifyInstanceEvent请求参数结构体
+ */
+export interface ModifyInstanceEventRequest {
+    /**
+     * 指定实例 ID。例如：crs-xjhsdj****。请登录[Redis控制台](https://console.cloud.tencent.com/redis#/)在实例列表复制实例 ID。
+     */
+    InstanceId: string;
+    /**
+     * 事件 ID。请通过 DescribeInstanceEvents 获取需修改的事件 ID。
+     */
+    EventId: number;
+    /**
+     * 修改事件执行的计划开始时间。
+     */
+    StartTime?: string;
+    /**
+     * 修改事件计划执行的结束时间。开始时间配置之后，结束时间只能选择在开始时间之后的 30 分钟、1 小时、1.5 小时、2 小时和 3 小时之内。
+     */
+    EndTime?: string;
+    /**
+     * 修改事件执行计划的开始日期。
+     */
+    ExecutionDate?: string;
+    /**
+     * 修改事件的运行状态。该参数当前仅支持设置为 **Canceled**， 即取消执行当前事件。可通过 DescribeInstanceEvents 接口查询当前事件的运行状态与事件级别。
+  - 事件级别为Critical（关键）或 High（重要）类事件不支持取消。即严重的事件必须执行，不可取消。
+  - 仅运行状态为 Waiting （待执行的事件）的事件，才能执行取消操作。
+     */
+    Status?: string;
+}
+/**
  * ChangeReplicaToMaster返回参数结构体
  */
 export interface ChangeReplicaToMasterResponse {
@@ -2933,37 +3120,21 @@ export interface DescribeInstanceMonitorBigKeySizeDistResponse {
     RequestId?: string;
 }
 /**
- * 安全组规则
+ * DescribeInstanceEvents返回参数结构体
  */
-export interface SecurityGroup {
+export interface DescribeInstanceEventsResponse {
     /**
-     * 创建时间，时间格式：yyyy-mm-dd hh:mm:ss。
+     * 总条数
      */
-    CreateTime: string;
+    TotalCount?: number;
     /**
-     * 项目ID。
+     * 实例事件信息
      */
-    ProjectId: number;
+    RedisInstanceEvents?: Array<RedisInstanceEvent>;
     /**
-     * 安全组ID。
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
-    SecurityGroupId: string;
-    /**
-     * 安全组名称。
-     */
-    SecurityGroupName: string;
-    /**
-     * 安全组备注。
-     */
-    SecurityGroupRemark: string;
-    /**
-     * 出站规则。
-     */
-    Outbound: Array<Outbound>;
-    /**
-     * 入站规则。
-     */
-    Inbound: Array<Inbound>;
+    RequestId?: string;
 }
 /**
  * CreateInstanceAccount请求参数结构体
@@ -5256,6 +5427,19 @@ export interface ZoneCapacityConf {
      * 可用区ID：如100003
      */
     OldZoneId: number;
+}
+/**
+ * ModifyInstanceEvent返回参数结构体
+ */
+export interface ModifyInstanceEventResponse {
+    /**
+     * 事件 ID。
+     */
+    EventId?: number;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * UpgradeInstance请求参数结构体

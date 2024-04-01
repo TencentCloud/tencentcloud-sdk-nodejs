@@ -64,7 +64,9 @@ import {
   DescribeBandwidthRangeResponse,
   DescribeParamTemplatesRequest,
   RenewInstanceRequest,
+  RedisInstanceEvent,
   UpgradeVersionToMultiAvailabilityZonesResponse,
+  SecurityGroup,
   DescribeInstanceBackupsResponse,
   DescribeInstanceParamRecordsResponse,
   ModifyAutoBackupConfigRequest,
@@ -82,6 +84,7 @@ import {
   CreateParamTemplateResponse,
   InstanceTagInfo,
   DescribeInstanceDTSInfoResponse,
+  DescribeInstanceEventsRequest,
   ChangeMasterInstanceResponse,
   AddReplicationInstanceResponse,
   DestroyPostpaidInstanceResponse,
@@ -129,6 +132,7 @@ import {
   InstanceTextParam,
   DescribeInstanceParamRecordsRequest,
   DescribeTaskListRequest,
+  ModifyInstanceEventRequest,
   ChangeReplicaToMasterResponse,
   CreateInstancesResponse,
   DescribeTaskInfoRequest,
@@ -151,7 +155,7 @@ import {
   ModifyParamTemplateResponse,
   DescribeProjectSecurityGroupsRequest,
   DescribeInstanceMonitorBigKeySizeDistResponse,
-  SecurityGroup,
+  DescribeInstanceEventsResponse,
   CreateInstanceAccountRequest,
   RemoveReplicationInstanceRequest,
   EnableReplicaReadonlyResponse,
@@ -248,6 +252,7 @@ import {
   ChangeInstanceRoleResponse,
   UpgradeProxyVersionRequest,
   ZoneCapacityConf,
+  ModifyInstanceEventResponse,
   UpgradeInstanceRequest,
   DescribeInstanceNodeInfoResponse,
   DescribeProjectSecurityGroupResponse,
@@ -516,6 +521,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateInstanceAccountResponse) => void
   ): Promise<CreateInstanceAccountResponse> {
     return this.request("CreateInstanceAccount", req, cb)
+  }
+
+  /**
+   * 本接口（ModifyInstanceEvent）用于修改实例的运维事件的执行计划。
+   */
+  async ModifyInstanceEvent(
+    req: ModifyInstanceEventRequest,
+    cb?: (error: string, rep: ModifyInstanceEventResponse) => void
+  ): Promise<ModifyInstanceEventResponse> {
+    return this.request("ModifyInstanceEvent", req, cb)
   }
 
   /**
@@ -986,6 +1001,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeInstanceZoneInfoResponse) => void
   ): Promise<DescribeInstanceZoneInfoResponse> {
     return this.request("DescribeInstanceZoneInfo", req, cb)
+  }
+
+  /**
+   * 本接口（DescribeInstanceEvents）用于查询 Redis 实例事件信息。
+   */
+  async DescribeInstanceEvents(
+    req: DescribeInstanceEventsRequest,
+    cb?: (error: string, rep: DescribeInstanceEventsResponse) => void
+  ): Promise<DescribeInstanceEventsResponse> {
+    return this.request("DescribeInstanceEvents", req, cb)
   }
 
   /**

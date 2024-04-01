@@ -645,6 +645,22 @@ export interface DescribeAutoScalerResourceStrategyBindingGroupsRequest {
 }
 
 /**
+ * Key/Value结构
+ */
+export interface KeyValue {
+  /**
+   * 条件的Key
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Key?: string
+  /**
+   * 条件的Value
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Value?: string
+}
+
+/**
  * CreateNativeGatewayServerGroup请求参数结构体
  */
 export interface CreateNativeGatewayServerGroupRequest {
@@ -3328,32 +3344,11 @@ export interface CloudNativeAPIGatewayRateLimitDetail {
   /**
    * 插件启用状态
    */
-  Enabled: boolean
+  Enabled?: boolean
   /**
    * qps阈值
    */
-  QpsThresholds: Array<QpsThreshold>
-  /**
-   * 限流依据
-ip service consumer credential path header
-   */
-  LimitBy: string
-  /**
-   * 响应策略
-url请求转发
-text 响应配置
-default 直接返回
-
-   */
-  ResponseType: string
-  /**
-   * 是否隐藏限流客户端响应头
-   */
-  HideClientHeaders: boolean
-  /**
-   * 是否开启请求排队
-   */
-  IsDelay: boolean
+  QpsThresholds?: Array<QpsThreshold>
   /**
    * 需要进行流量控制的请求路径
 注意：此字段可能返回 null，表示取不到有效值。
@@ -3364,6 +3359,11 @@ default 直接返回
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Header?: string
+  /**
+   * 限流依据
+ip service consumer credential path header
+   */
+  LimitBy?: string
   /**
    * 外部redis配置
 注意：此字段可能返回 null，表示取不到有效值。
@@ -3390,9 +3390,35 @@ external_redis 外部redis
    */
   RateLimitResponseUrl?: string
   /**
+   * 响应策略
+url请求转发
+text 响应配置
+default 直接返回
+
+   */
+  ResponseType?: string
+  /**
+   * 是否隐藏限流客户端响应头
+   */
+  HideClientHeaders?: boolean
+  /**
    * 排队时间
    */
   LineUpTime?: number
+  /**
+   * 是否开启请求排队
+   */
+  IsDelay?: boolean
+  /**
+   * 基础限流
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BasicLimitQpsThresholds?: Array<QpsThreshold>
+  /**
+   * 参数限流的规则
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LimitRules?: Array<LimitRule>
 }
 
 /**
@@ -3517,6 +3543,11 @@ export interface KongTarget {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CvmInstanceName?: string
+  /**
+   * target标签
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Tags?: Array<string>
 }
 
 /**
@@ -5841,6 +5872,22 @@ export interface ModifyGovernanceServicesRequest {
 }
 
 /**
+ * 限流规则的Filter
+ */
+export interface RuleFilter {
+  /**
+   * 限流条件的Key
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Key?: string
+  /**
+   * 限流条件的Values
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Values?: Array<string>
+}
+
+/**
  * DescribeCloudNativeAPIGatewayCertificateDetails返回参数结构体
  */
 export interface DescribeCloudNativeAPIGatewayCertificateDetailsResponse {
@@ -6033,6 +6080,27 @@ export interface ModifyConfigFileGroupResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 参数限流的规则
+ */
+export interface LimitRule {
+  /**
+   * 请求匹配条件
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Filters?: Array<RuleFilter>
+  /**
+   * 参数限流依据组合
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LimitBy?: Array<KeyValue>
+  /**
+   * 限流阈值
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  QpsThresholds?: Array<QpsThreshold>
 }
 
 /**
@@ -6409,6 +6477,47 @@ export interface CloudNativeAPIGatewayCanaryRule {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ServiceName?: string
+  /**
+   * 灰度规则类别
+Standard｜Lane
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RuleType?: string
+  /**
+   * 全链路灰度策略多个条件之间的匹配方式，与AND，或OR
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MatchType?: string
+  /**
+   * 泳道组ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  GroupId?: string
+  /**
+   * 泳道组名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  GroupName?: string
+  /**
+   * 泳道ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LaneId?: string
+  /**
+   * 泳道名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LaneName?: string
+  /**
+   * 泳道匹配规则：严格STRICT｜宽松PERMISSIVE
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MatchMode?: string
+  /**
+   * 泳道标签
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LaneTag?: string
 }
 
 /**
@@ -7786,6 +7895,10 @@ export interface DescribeCloudNativeAPIGatewayCanaryRulesRequest {
    * 服务 ID
    */
   ServiceId: string
+  /**
+   * 灰度规则类别 Standard｜Lane
+   */
+  RuleType?: string
   /**
    * 列表数量
    */

@@ -5049,6 +5049,11 @@ export interface RecordTemplateInfo {
      */
     RemoveWatermark?: boolean;
     /**
+     * 是否存储至cos
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CosStore?: number;
+    /**
      * FLV 录制定制参数。
   注意：此字段可能返回 null，表示取不到有效值。
      */

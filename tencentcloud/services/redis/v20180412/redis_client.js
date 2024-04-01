@@ -178,6 +178,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateInstanceAccount", req, cb);
     }
     /**
+     * 本接口（ModifyInstanceEvent）用于修改实例的运维事件的执行计划。
+     */
+    async ModifyInstanceEvent(req, cb) {
+        return this.request("ModifyInstanceEvent", req, cb);
+    }
+    /**
      * 实例proxy版本升级
      */
     async UpgradeProxyVersion(req, cb) {
@@ -458,6 +464,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeInstanceZoneInfo(req, cb) {
         return this.request("DescribeInstanceZoneInfo", req, cb);
+    }
+    /**
+     * 本接口（DescribeInstanceEvents）用于查询 Redis 实例事件信息。
+     */
+    async DescribeInstanceEvents(req, cb) {
+        return this.request("DescribeInstanceEvents", req, cb);
     }
     /**
      * 在通过DTS支持跨可用区灾备的场景中，通过该接口交换实例VIP完成实例灾备切换。交换VIP后目标实例可写，源和目标实例VIP互换，同时源与目标实例间DTS同步任务断开

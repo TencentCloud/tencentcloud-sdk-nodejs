@@ -268,6 +268,16 @@ it("redis.v20180412.CreateInstanceAccount", async function () {
     }
 })
 
+it("redis.v20180412.ModifyInstanceEvent", async function () {
+    try {
+       const data = await client.ModifyInstanceEvent({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("redis.v20180412.UpgradeProxyVersion", async function () {
     try {
        const data = await client.UpgradeProxyVersion({})
@@ -731,6 +741,16 @@ it("redis.v20180412.DescribeBackupDownloadRestriction", async function () {
 it("redis.v20180412.DescribeInstanceZoneInfo", async function () {
     try {
        const data = await client.DescribeInstanceZoneInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("redis.v20180412.DescribeInstanceEvents", async function () {
+    try {
+       const data = await client.DescribeInstanceEvents({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

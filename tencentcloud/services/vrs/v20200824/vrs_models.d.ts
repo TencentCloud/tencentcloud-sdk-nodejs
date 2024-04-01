@@ -109,7 +109,7 @@ export interface DescribeVRSTaskStatusRespData {
      */
     StatusStr?: string;
     /**
-     * 音色id
+     * 音色id。
   注意：此字段可能返回 null，表示取不到有效值。
      */
     VoiceType?: number;
@@ -239,12 +239,6 @@ export interface CreateVRSTaskRequest {
      */
     VoiceName: string;
     /**
-     * 音频采样率：
-  
-  16000：16k
-     */
-    SampleRate: number;
-    /**
      * 音色性别:
   
   1-male
@@ -259,13 +253,19 @@ export interface CreateVRSTaskRequest {
      */
     VoiceLanguage: number;
     /**
-     * 音频格式，音频类型(wav,mp3,aac,m4a)
-     */
-    Codec: string;
-    /**
      * 音频ID集合
      */
     AudioIdList: Array<string>;
+    /**
+     * 音频采样率：
+  
+  16000：16k
+     */
+    SampleRate?: number;
+    /**
+     * 音频格式，音频类型(wav,mp3,aac,m4a)
+     */
+    Codec?: string;
     /**
      * 回调 URL，用户自行搭建的用于接收结果的服务URL。如果用户使用轮询方式获取识别结果，则无需提交该参数。
   回调采用POST请求方式，Content-Type为application/json，回调数据格式如下:{"TaskId":"xxxxxxxxxxxxxx","Status":2,"StatusStr":"success","VoiceType":xxxxx,"ErrorMsg":""}
@@ -276,12 +276,11 @@ export interface CreateVRSTaskRequest {
      */
     ModelType?: number;
     /**
-     * 任务类型 0:轻量版复刻
-  默认为0
+     * 复刻类型。 0 - 轻量版声音复刻（默认）。
      */
     TaskType?: number;
     /**
-     * 校验音频ID
+     * 校验音频ID。
      */
     VPRAudioId?: string;
 }
@@ -389,13 +388,13 @@ export interface DetectEnvAndSoundQualityRequest {
      */
     AudioData: string;
     /**
-     * 音频格式，音频类型(wav,mp3,aac,m4a)
-     */
-    Codec: string;
-    /**
      * 1:环境检测 2:音质检测
      */
     TypeId: number;
+    /**
+     * 音频格式，音频类型(wav,mp3,aac,m4a)
+     */
+    Codec?: string;
     /**
      * 音频采样率：
   
