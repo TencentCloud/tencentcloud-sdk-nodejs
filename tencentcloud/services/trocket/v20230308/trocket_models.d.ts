@@ -1921,6 +1921,10 @@ export interface ModifyTopicRequest {
      * 备注信息
      */
     Remark?: string;
+    /**
+     * 消息保留时长
+     */
+    MsgTTL?: number;
 }
 /**
  * DescribeInstance返回参数结构体
