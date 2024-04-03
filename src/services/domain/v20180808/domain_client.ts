@@ -90,6 +90,7 @@ import {
   CreatePhoneEmailRequest,
   PriceInfo,
   DescribeTemplateRequest,
+  DescribeTldListRequest,
   DescribeBatchOperationLogDetailsRequest,
   DescribeDomainNameListResponse,
   SyncCustomDnsHostRequest,
@@ -100,6 +101,7 @@ import {
   DomainList,
   DescribePhoneEmailListRequest,
   DomainBaseInfo,
+  DescribeTldListResponse,
   CreateCustomDnsHostRequest,
   DeleteCustomDnsHostRequest,
   CheckBatchStatusResponse,
@@ -246,6 +248,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteTemplateResponse) => void
   ): Promise<DeleteTemplateResponse> {
     return this.request("DeleteTemplate", req, cb)
+  }
+
+  /**
+   * 用于获取域名注册当前支持注册的后缀
+   */
+  async DescribeTldList(
+    req?: DescribeTldListRequest,
+    cb?: (error: string, rep: DescribeTldListResponse) => void
+  ): Promise<DescribeTldListResponse> {
+    return this.request("DescribeTldList", req, cb)
   }
 
   /**

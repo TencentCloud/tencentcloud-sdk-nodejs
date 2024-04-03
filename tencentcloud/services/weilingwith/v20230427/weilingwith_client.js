@@ -118,6 +118,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDeviceTagList", req, cb);
     }
     /**
+     * 设备分组列表
+     */
+    async DescribeDeviceGroupList(req, cb) {
+        return this.request("DescribeDeviceGroupList", req, cb);
+    }
+    /**
      * 告警类型获取
      */
     async DescribeAlarmTypeList(req, cb) {
@@ -128,6 +134,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeSpaceTypeList(req, cb) {
         return this.request("DescribeSpaceTypeList", req, cb);
+    }
+    /**
+     * 批量修改设备组
+     */
+    async ModifyDeviceGroup(req, cb) {
+        return this.request("ModifyDeviceGroup", req, cb);
     }
     /**
      * 拉取设备的设备类型列表
@@ -160,6 +172,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UpdateWorkspaceParkAttributes", req, cb);
     }
     /**
+     * 断流接口
+     */
+    async StopVideoStreaming(req, cb) {
+        return this.request("StopVideoStreaming", req, cb);
+    }
+    /**
      * 模型列表查询/单个查询（产品模型/标准模型）
      */
     async DescribeModelList(req, cb) {
@@ -176,6 +194,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeProductList(req, cb) {
         return this.request("DescribeProductList", req, cb);
+    }
+    /**
+     * 批量删除设备
+     */
+    async BatchDeleteDevice(req, cb) {
+        return this.request("BatchDeleteDevice", req, cb);
     }
     /**
      * 动作列表查询
@@ -256,6 +280,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("BatchCreateDevice", req, cb);
     }
     /**
+     * 批量修改设备标签
+     */
+    async ModifyDeviceTag(req, cb) {
+        return this.request("ModifyDeviceTag", req, cb);
+    }
+    /**
      * 获取视频扩展信息
      */
     async DescribeCameraExtendInfo(req, cb) {
@@ -286,6 +316,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeBuildingModel", req, cb);
     }
     /**
+     * 删除设备分组
+     */
+    async DeleteDeviceGroup(req, cb) {
+        return this.request("DeleteDeviceGroup", req, cb);
+    }
+    /**
      * 查询指定空间下设备与构件绑定关系列表
      */
     async DescribeSpaceDeviceRelationList(req, cb) {
@@ -296,6 +332,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeBuildingList(req, cb) {
         return this.request("DescribeBuildingList", req, cb);
+    }
+    /**
+     * 设备分组新增/修改
+     */
+    async SaveDeviceGroup(req, cb) {
+        return this.request("SaveDeviceGroup", req, cb);
     }
     /**
      * 云台控制
@@ -364,10 +406,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDeviceStatusList", req, cb);
     }
     /**
-     * 断流接口
+     * 批量修改设备自定义字段值
      */
-    async StopVideoStreaming(req, cb) {
-        return this.request("StopVideoStreaming", req, cb);
+    async ModifyDeviceField(req, cb) {
+        return this.request("ModifyDeviceField", req, cb);
     }
 }
 exports.Client = Client;

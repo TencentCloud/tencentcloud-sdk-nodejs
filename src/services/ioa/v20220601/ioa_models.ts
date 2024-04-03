@@ -156,7 +156,7 @@ export interface DescribeDevicesRequest {
 }
 
 /**
- * 数据分页信息
+ * 页码
  */
 export interface Paging {
   /**

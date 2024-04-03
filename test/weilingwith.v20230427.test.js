@@ -168,6 +168,16 @@ it("weilingwith.v20230427.DescribeDeviceTagList", async function () {
     }
 })
 
+it("weilingwith.v20230427.DescribeDeviceGroupList", async function () {
+    try {
+       const data = await client.DescribeDeviceGroupList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("weilingwith.v20230427.DescribeAlarmTypeList", async function () {
     try {
        const data = await client.DescribeAlarmTypeList({})
@@ -181,6 +191,16 @@ it("weilingwith.v20230427.DescribeAlarmTypeList", async function () {
 it("weilingwith.v20230427.DescribeSpaceTypeList", async function () {
     try {
        const data = await client.DescribeSpaceTypeList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("weilingwith.v20230427.ModifyDeviceGroup", async function () {
+    try {
+       const data = await client.ModifyDeviceGroup({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -238,6 +258,16 @@ it("weilingwith.v20230427.UpdateWorkspaceParkAttributes", async function () {
     }
 })
 
+it("weilingwith.v20230427.StopVideoStreaming", async function () {
+    try {
+       const data = await client.StopVideoStreaming({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("weilingwith.v20230427.DescribeModelList", async function () {
     try {
        const data = await client.DescribeModelList({})
@@ -261,6 +291,16 @@ it("weilingwith.v20230427.DescribePropertyList", async function () {
 it("weilingwith.v20230427.DescribeProductList", async function () {
     try {
        const data = await client.DescribeProductList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("weilingwith.v20230427.BatchDeleteDevice", async function () {
+    try {
+       const data = await client.BatchDeleteDevice({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -398,6 +438,16 @@ it("weilingwith.v20230427.BatchCreateDevice", async function () {
     }
 })
 
+it("weilingwith.v20230427.ModifyDeviceTag", async function () {
+    try {
+       const data = await client.ModifyDeviceTag({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("weilingwith.v20230427.DescribeCameraExtendInfo", async function () {
     try {
        const data = await client.DescribeCameraExtendInfo({})
@@ -448,6 +498,16 @@ it("weilingwith.v20230427.DescribeBuildingModel", async function () {
     }
 })
 
+it("weilingwith.v20230427.DeleteDeviceGroup", async function () {
+    try {
+       const data = await client.DeleteDeviceGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("weilingwith.v20230427.DescribeSpaceDeviceRelationList", async function () {
     try {
        const data = await client.DescribeSpaceDeviceRelationList({})
@@ -461,6 +521,16 @@ it("weilingwith.v20230427.DescribeSpaceDeviceRelationList", async function () {
 it("weilingwith.v20230427.DescribeBuildingList", async function () {
     try {
        const data = await client.DescribeBuildingList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("weilingwith.v20230427.SaveDeviceGroup", async function () {
+    try {
+       const data = await client.SaveDeviceGroup({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -578,9 +648,9 @@ it("weilingwith.v20230427.DescribeDeviceStatusList", async function () {
     }
 })
 
-it("weilingwith.v20230427.StopVideoStreaming", async function () {
+it("weilingwith.v20230427.ModifyDeviceField", async function () {
     try {
-       const data = await client.StopVideoStreaming({})
+       const data = await client.ModifyDeviceField({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

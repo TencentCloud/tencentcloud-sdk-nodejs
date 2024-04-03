@@ -106,6 +106,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteTemplate", req, cb);
     }
     /**
+     * 用于获取域名注册当前支持注册的后缀
+     */
+    async DescribeTldList(req, cb) {
+        return this.request("DescribeTldList", req, cb);
+    }
+    /**
      * 检查域名是否可以注册。
      */
     async CheckDomain(req, cb) {

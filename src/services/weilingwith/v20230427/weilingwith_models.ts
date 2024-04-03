@@ -46,49 +46,57 @@ export interface ApplicationList {
 }
 
 /**
- * 模型基础信息
+ * SaveDeviceGroup请求参数结构体
  */
-export interface ModelInfo {
+export interface SaveDeviceGroupRequest {
   /**
-   * 工作空间id
+   * 分组名称
+   */
+  Name: string
+  /**
+   * 分组描述
+   */
+  Description: string
+  /**
+   * 空间id
+   */
+  WorkspaceId: number
+  /**
+   * 应用token
+   */
+  ApplicationToken: string
+  /**
+   * 分组id, 携带则为修改, 不携带则为新增
+   */
+  Id?: number
+  /**
+   * 分组父级id
+   */
+  ParentId?: number
+}
+
+/**
+ * 分组信息实体类
+ */
+export interface DescribeGroupInfo {
+  /**
+   * 分组
+   */
+  Id?: number
+  /**
+   * 设备分组名称
+   */
+  Name?: string
+  /**
+   * 分组描述
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  WorkspaceId?: number
+  Description?: string
   /**
-   * 模型名称
+   * 分组父级ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ModelName?: string
-  /**
-   * 物模型id
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ModelId?: string
-  /**
-   * 关联产品信息
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  RelatedProduct?: Array<RelatedProduct>
-  /**
-   * 设备类型名
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  DeviceTypeName?: string
-  /**
-   * 设备类型id
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  DeviceType?: string
-  /**
-   * 物模型类型，产品模型/标准模型
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ModelType?: number
-  /**
-   * 模型参数内容,有效字段为"x-json:"后的字段
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ModelParams?: string
+  ParentId?: number
 }
 
 /**
@@ -495,6 +503,20 @@ export interface MessageProfile {
 }
 
 /**
+ * 设备标签修改信息入参
+ */
+export interface ModifyDeviceTagInfo {
+  /**
+   * 设备id
+   */
+  WID: string
+  /**
+   * 设备标签名称集合
+   */
+  NameSet: Array<string>
+}
+
+/**
  * ModifyDeviceName返回参数结构体
  */
 export interface ModifyDeviceNameResponse {
@@ -706,6 +728,17 @@ export interface DescribeWorkspaceListResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 设备-空间绑定关系响应体
+ */
+export interface SpaceDeviceRelationRes {
+  /**
+   * 设备空间绑定关系列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SpaceDeviceRelationList?: Array<SpaceDeviceRelation>
 }
 
 /**
@@ -1047,13 +1080,13 @@ export interface DescribeTenantUserListRequest {
 }
 
 /**
- * StopVideoStreaming返回参数结构体
+ * BatchReportAppMessage返回参数结构体
  */
-export interface StopVideoStreamingResponse {
+export interface BatchReportAppMessageResponse {
   /**
-   * 停流接口返回结果
+   * 批量消息上报结果
    */
-  Result?: EmptyRes
+  Result?: BatchReportAppMessageRes
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1090,6 +1123,20 @@ export interface ModifyDeviceNameRequest {
    * 应用token
    */
   ApplicationToken: string
+}
+
+/**
+ * DeleteDeviceGroup返回参数结构体
+ */
+export interface DeleteDeviceGroupResponse {
+  /**
+   * 无返回信息
+   */
+  Result?: EmptyRes
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1150,6 +1197,17 @@ export interface ReportMsgRes {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ReportStatus?: number
+}
+
+/**
+ * 设备分组信息
+ */
+export interface DescribeDeviceGroupListRes {
+  /**
+   * 设备分组list
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  List?: Array<DescribeGroupInfo>
 }
 
 /**
@@ -1403,13 +1461,13 @@ export interface DescribeBuildingModelResponse {
 }
 
 /**
- * BatchReportAppMessage返回参数结构体
+ * DescribeDeviceGroupList返回参数结构体
  */
-export interface BatchReportAppMessageResponse {
+export interface DescribeDeviceGroupListResponse {
   /**
-   * 批量消息上报结果
+   * 分组信息
    */
-  Result?: BatchReportAppMessageRes
+  Result?: DescribeDeviceGroupListRes
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1995,6 +2053,20 @@ export interface DescribeBuildingListResponse {
 }
 
 /**
+ * BatchDeleteDevice返回参数结构体
+ */
+export interface BatchDeleteDeviceResponse {
+  /**
+   * 返回请求结果
+   */
+  Result?: EmptyRes
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 空间层级关系响应体
  */
 export interface SpaceRelationRes {
@@ -2245,39 +2317,43 @@ export interface DescribeWorkspaceListRequest {
 }
 
 /**
- * 建筑概要信息
+ * ModifyDeviceField返回参数结构体
  */
-export interface BuildingProfile {
+export interface ModifyDeviceFieldResponse {
   /**
-   * 建筑id
-注意：此字段可能返回 null，表示取不到有效值。
+   * 返回请求结果
    */
-  BuildingId?: string
+  Result?: EmptyRes
   /**
-   * 建筑名称
-注意：此字段可能返回 null，表示取不到有效值。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  BuildingName?: string
+  RequestId?: string
+}
+
+/**
+ * ControlDevice请求参数结构体
+ */
+export interface ControlDeviceRequest {
   /**
-   * 空间编码
-注意：此字段可能返回 null，表示取不到有效值。
+   * 工作空间id
    */
-  SpaceCode?: string
+  WorkspaceId: number
   /**
-   * 经度
-注意：此字段可能返回 null，表示取不到有效值。
+   * 设备wid，最大100个
    */
-  Longitude?: number
+  WIDSet: Array<string>
   /**
-   * 纬度
-注意：此字段可能返回 null，表示取不到有效值。
+   * 控制内容
    */
-  Latitude?: number
+  ControlData: string
   /**
-   * 地址
-注意：此字段可能返回 null，表示取不到有效值。
+   * 应用token
    */
-  Address?: string
+  ApplicationToken: string
+  /**
+   * 是否同步返回设备下控ack结果
+   */
+  IsSynchronized?: boolean
 }
 
 /**
@@ -2787,6 +2863,24 @@ export interface DescribeElementProfileTreeResponse {
 }
 
 /**
+ * 设备自定义值修改信息入参
+ */
+export interface ModifyDeviceFieldInfo {
+  /**
+   * 设备id
+   */
+  WID: string
+  /**
+   * 自定义字段key
+   */
+  Key: string
+  /**
+   * 自定义字段值
+   */
+  Val: string
+}
+
+/**
  * DescribeTenantDepartmentList请求参数结构体
  */
 export interface DescribeTenantDepartmentListRequest {
@@ -2818,6 +2912,20 @@ export interface DescribeTenantDepartmentListRequest {
    * 用户id
    */
   Cursor?: string
+}
+
+/**
+ * StopVideoStreaming返回参数结构体
+ */
+export interface StopVideoStreamingResponse {
+  /**
+   * 停流接口返回结果
+   */
+  Result?: EmptyRes
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2935,14 +3043,17 @@ export interface DescribeBuildingListRequest {
 }
 
 /**
- * 设备-空间绑定关系响应体
+ * 设备组修改信息入参
  */
-export interface SpaceDeviceRelationRes {
+export interface ModifyDeviceGroupInfo {
   /**
-   * 设备空间绑定关系列表
-注意：此字段可能返回 null，表示取不到有效值。
+   * 设备id
    */
-  SpaceDeviceRelationList?: Array<SpaceDeviceRelation>
+  WID: string
+  /**
+   * 设备分组id
+   */
+  GroupId: number
 }
 
 /**
@@ -3053,6 +3164,17 @@ export interface DescribeVideoCloudRecordResponse {
 }
 
 /**
+ * 保存or修改设备分组回包
+ */
+export interface SaveDeviceGroupRes {
+  /**
+   * 保存or修改设备分组回包信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Id?: number
+}
+
+/**
  * 设备列表查询结果
  */
 export interface DescribeDeviceListRes {
@@ -3120,6 +3242,38 @@ export interface UpdateWorkspaceParkAttributesRequest {
 }
 
 /**
+ * ModifyDeviceTag请求参数结构体
+ */
+export interface ModifyDeviceTagRequest {
+  /**
+   * 工作空间id
+   */
+  WorkspaceId: number
+  /**
+   * 设备标签修改信息集合
+   */
+  Set: Array<ModifyDeviceTagInfo>
+  /**
+   * 应用token
+   */
+  ApplicationToken: string
+}
+
+/**
+ * ModifyDeviceGroup返回参数结构体
+ */
+export interface ModifyDeviceGroupResponse {
+  /**
+   * 返回请求结果
+   */
+  Result?: EmptyRes
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeLinkRuleList返回参数结构体
  */
 export interface DescribeLinkRuleListResponse {
@@ -3148,29 +3302,39 @@ export interface DescribeSpaceTypeListResponse {
 }
 
 /**
- * ControlDevice请求参数结构体
+ * 建筑概要信息
  */
-export interface ControlDeviceRequest {
+export interface BuildingProfile {
   /**
-   * 工作空间id
+   * 建筑id
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  WorkspaceId: number
+  BuildingId?: string
   /**
-   * 设备wid，最大100个
+   * 建筑名称
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  WIDSet: Array<string>
+  BuildingName?: string
   /**
-   * 控制内容
+   * 空间编码
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  ControlData: string
+  SpaceCode?: string
   /**
-   * 应用token
+   * 经度
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  ApplicationToken: string
+  Longitude?: number
   /**
-   * 是否同步返回设备下控ack结果
+   * 纬度
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  IsSynchronized?: boolean
+  Latitude?: number
+  /**
+   * 地址
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Address?: string
 }
 
 /**
@@ -3321,6 +3485,42 @@ export interface DeviceTagRes {
 }
 
 /**
+ * BatchDeleteDevice请求参数结构体
+ */
+export interface BatchDeleteDeviceRequest {
+  /**
+   * 工作空间id
+   */
+  WorkspaceId: number
+  /**
+   * 设备wid数组列表
+   */
+  WIDSet: Array<string>
+  /**
+   * 应用token
+   */
+  ApplicationToken: string
+}
+
+/**
+ * DescribeDeviceGroupList请求参数结构体
+ */
+export interface DescribeDeviceGroupListRequest {
+  /**
+   * 应用token
+   */
+  ApplicationToken: string
+  /**
+   * 工作空间ID
+   */
+  WorkspaceId: number
+  /**
+   * 分组id, 不传默认全部
+   */
+  GroupId?: number
+}
+
+/**
  * 详细动作信息
  */
 export interface ActionDetail {
@@ -3416,17 +3616,21 @@ export interface UpdateWorkspaceParkAttributesResponse {
 }
 
 /**
- * DescribeDeviceTagList返回参数结构体
+ * DeleteDeviceGroup请求参数结构体
  */
-export interface DescribeDeviceTagListResponse {
+export interface DeleteDeviceGroupRequest {
   /**
-   * 设备标签查询结果
+   * 设备分组的id
    */
-  Result?: DeviceTagRes
+  Id: number
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 工作空间的id
    */
-  RequestId?: string
+  WorkspaceId: number
+  /**
+   * 应用token
+   */
+  ApplicationToken: string
 }
 
 /**
@@ -3635,6 +3839,24 @@ export interface StatDeviceType {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DeviceType?: string
+}
+
+/**
+ * ModifyDeviceGroup请求参数结构体
+ */
+export interface ModifyDeviceGroupRequest {
+  /**
+   * 工作空间id
+   */
+  WorkspaceId: number
+  /**
+   * 设备组修改信息集合
+   */
+  Set: Array<ModifyDeviceGroupInfo>
+  /**
+   * 应用token
+   */
+  ApplicationToken: string
 }
 
 /**
@@ -4051,6 +4273,20 @@ export interface DescribeDeviceStatusListRequest {
    * 推流状态，推流中-true，未推流-false 仅摄像头有的状态
    */
   IsAlive?: Array<boolean>
+}
+
+/**
+ * DescribeDeviceTagList返回参数结构体
+ */
+export interface DescribeDeviceTagListResponse {
+  /**
+   * 设备标签查询结果
+   */
+  Result?: DeviceTagRes
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -4595,6 +4831,20 @@ export interface DescribeFileUploadURLResponse {
 }
 
 /**
+ * SaveDeviceGroup返回参数结构体
+ */
+export interface SaveDeviceGroupResponse {
+  /**
+   * 新增/修改的设备分组记录的id
+   */
+  Result?: SaveDeviceGroupRes
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 构件概要信息
  */
 export interface ElementProfile {
@@ -4961,6 +5211,52 @@ export interface ActionObj {
 }
 
 /**
+ * 模型基础信息
+ */
+export interface ModelInfo {
+  /**
+   * 工作空间id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WorkspaceId?: number
+  /**
+   * 模型名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ModelName?: string
+  /**
+   * 物模型id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ModelId?: string
+  /**
+   * 关联产品信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RelatedProduct?: Array<RelatedProduct>
+  /**
+   * 设备类型名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DeviceTypeName?: string
+  /**
+   * 设备类型id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DeviceType?: string
+  /**
+   * 物模型类型，产品模型/标准模型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ModelType?: number
+  /**
+   * 模型参数内容,有效字段为"x-json:"后的字段
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ModelParams?: string
+}
+
+/**
  * 设备状态信息
  */
 export interface DeviceStatusInfo {
@@ -5314,6 +5610,20 @@ export interface DescribeAlarmStatusListRes {
 }
 
 /**
+ * ModifyDeviceTag返回参数结构体
+ */
+export interface ModifyDeviceTagResponse {
+  /**
+   * 返回请求结果
+   */
+  Result?: EmptyRes
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeVideoLiveStream请求参数结构体
  */
 export interface DescribeVideoLiveStreamRequest {
@@ -5656,6 +5966,24 @@ export interface RelatedProduct {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Name?: string
+}
+
+/**
+ * ModifyDeviceField请求参数结构体
+ */
+export interface ModifyDeviceFieldRequest {
+  /**
+   * 工作空间id
+   */
+  WorkspaceId: number
+  /**
+   * 设备自定义字段修改信息集合
+   */
+  Set: Array<ModifyDeviceFieldInfo>
+  /**
+   * 应用token
+   */
+  ApplicationToken: string
 }
 
 /**

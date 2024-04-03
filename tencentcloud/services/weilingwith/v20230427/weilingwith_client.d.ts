@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeWorkSpaceBuildingCountAndAreaRequest, DescribeAlarmTypeListResponse, DescribeDeviceStatusStatRequest, DescribeTenantBuildingCountAndAreaRequest, AddAlarmProcessRecordRequest, DescribeInterfaceListResponse, ModifyDeviceNameResponse, DescribeEdgeApplicationTokenResponse, DescribeWorkspaceListResponse, DescribeModelListResponse, DescribeRuleDetailRequest, BatchCreateDeviceResponse, CreateApplicationTokenResponse, DescribeTenantUserListRequest, StopVideoStreamingResponse, DescribeDeviceStatusListResponse, ModifyDeviceNameRequest, DescribeAlarmStatusListRequest, DescribeFileDownloadURLResponse, DescribeRuleDetailResponse, DescribeSpaceInfoByDeviceIdResponse, DescribeApplicationListRequest, DescribeSceneListRequest, DescribeDeviceListRequest, DescribeSpaceRelationByDeviceIdRequest, ChangeAlarmStatusResponse, DescribeBuildingModelResponse, BatchReportAppMessageResponse, DescribeElementProfilePageRequest, DescribePropertyListResponse, DescribeSpaceDeviceRelationListRequest, DescribeApplicationListResponse, DescribeFileDownloadURLRequest, StopVideoStreamingRequest, DescribeSpaceTypeListRequest, DescribeModelListRequest, DescribeBuildingListResponse, DescribeWorkspaceUserListResponse, DescribePropertyListRequest, DescribeProductListRequest, ControlCameraPTZResponse, DescribeWorkspaceListRequest, DescribeDeviceTypeListResponse, DescribeVideoRecordStreamResponse, DescribeAlarmLevelListRequest, BatchReportAppMessageRequest, DescribeDeviceStatusStatResponse, DescribeBuildingModelRequest, ControlCameraPTZRequest, DescribeSpaceDeviceIdListResponse, DescribeElementProfileTreeResponse, DescribeTenantDepartmentListRequest, DescribeBuildingProfileRequest, DescribeDeviceShadowListResponse, DescribeBuildingListRequest, DescribeWorkspaceUserListRequest, DescribeVideoCloudRecordResponse, DescribeSpaceDeviceRelationListResponse, UpdateWorkspaceParkAttributesRequest, DescribeLinkRuleListResponse, DescribeSpaceTypeListResponse, ControlDeviceRequest, DescribeAlarmLevelListResponse, DescribeCityWorkspaceListRequest, UpdateWorkspaceParkAttributesResponse, DescribeDeviceTagListResponse, DescribeCityWorkspaceListResponse, BatchCreateDeviceRequest, BatchKillAlarmRequest, DescribeElementProfileTreeRequest, DescribeLinkRuleListRequest, DescribeEventListResponse, DescribeDeviceTagListRequest, DescribeBuildingProfileResponse, ReportAppMessageRequest, DescribeFileUploadURLRequest, DescribeDeviceStatusListRequest, DescribeVideoCloudRecordRequest, DescribeAdministrationByTagRequest, ControlDeviceResponse, DescribeAlarmListResponse, DescribeSpaceRelationByDeviceIdResponse, AddAlarmProcessRecordResponse, DescribeActionListResponse, DescribeInterfaceListRequest, DescribeProductListResponse, DescribeVideoRecordStreamRequest, DescribeAlarmStatusListResponse, CreateApplicationTokenRequest, DescribeFileUploadURLResponse, DescribeTenantDepartmentListResponse, DescribeWorkSpaceBuildingCountAndAreaResponse, ReportAppMessageResponse, DescribeAlarmListRequest, DescribeAdministrationByTagResponse, BatchKillAlarmResponse, DescribeDeviceTypeListRequest, DescribeDeviceShadowListRequest, DescribeSceneListResponse, DescribeDeviceListResponse, DescribeTenantBuildingCountAndAreaResponse, DescribeVideoLiveStreamRequest, ChangeAlarmStatusRequest, DescribeAlarmTypeListRequest, DescribeCameraExtendInfoResponse, DescribeSpaceInfoByDeviceIdRequest, DescribeCameraExtendInfoRequest, DescribeVideoLiveStreamResponse, DescribeTenantUserListResponse, DescribeEventListRequest, DescribeElementProfilePageResponse, DescribeSpaceDeviceIdListRequest, DescribeActionListRequest, DescribeEdgeApplicationTokenRequest } from "./weilingwith_models";
+import { DescribeWorkSpaceBuildingCountAndAreaRequest, SaveDeviceGroupRequest, DescribeAlarmTypeListResponse, DescribeDeviceStatusStatRequest, DescribeTenantBuildingCountAndAreaRequest, AddAlarmProcessRecordRequest, DescribeInterfaceListResponse, ModifyDeviceNameResponse, DescribeEdgeApplicationTokenResponse, DescribeWorkspaceListResponse, DescribeModelListResponse, DescribeRuleDetailRequest, BatchCreateDeviceResponse, CreateApplicationTokenResponse, DescribeTenantUserListRequest, BatchReportAppMessageResponse, DescribeDeviceStatusListResponse, ModifyDeviceNameRequest, DeleteDeviceGroupResponse, DescribeAlarmStatusListRequest, DescribeFileDownloadURLResponse, DescribeRuleDetailResponse, DescribeSpaceInfoByDeviceIdResponse, DescribeApplicationListRequest, DescribeSceneListRequest, DescribeDeviceListRequest, DescribeSpaceRelationByDeviceIdRequest, ChangeAlarmStatusResponse, DescribeBuildingModelResponse, DescribeDeviceGroupListResponse, DescribeElementProfilePageRequest, DescribePropertyListResponse, DescribeSpaceDeviceRelationListRequest, DescribeApplicationListResponse, DescribeFileDownloadURLRequest, StopVideoStreamingRequest, DescribeSpaceTypeListRequest, DescribeModelListRequest, DescribeBuildingListResponse, BatchDeleteDeviceResponse, DescribeWorkspaceUserListResponse, DescribePropertyListRequest, DescribeProductListRequest, ControlCameraPTZResponse, DescribeWorkspaceListRequest, ModifyDeviceFieldResponse, ControlDeviceRequest, DescribeDeviceTypeListResponse, DescribeVideoRecordStreamResponse, DescribeAlarmLevelListRequest, BatchReportAppMessageRequest, DescribeDeviceStatusStatResponse, DescribeBuildingModelRequest, ControlCameraPTZRequest, DescribeSpaceDeviceIdListResponse, DescribeElementProfileTreeResponse, DescribeTenantDepartmentListRequest, StopVideoStreamingResponse, DescribeBuildingProfileRequest, DescribeDeviceShadowListResponse, DescribeBuildingListRequest, DescribeWorkspaceUserListRequest, DescribeVideoCloudRecordResponse, DescribeSpaceDeviceRelationListResponse, UpdateWorkspaceParkAttributesRequest, ModifyDeviceTagRequest, ModifyDeviceGroupResponse, DescribeLinkRuleListResponse, DescribeSpaceTypeListResponse, DescribeAlarmLevelListResponse, BatchDeleteDeviceRequest, DescribeDeviceGroupListRequest, DescribeCityWorkspaceListRequest, UpdateWorkspaceParkAttributesResponse, DeleteDeviceGroupRequest, DescribeCityWorkspaceListResponse, BatchCreateDeviceRequest, BatchKillAlarmRequest, ModifyDeviceGroupRequest, DescribeElementProfileTreeRequest, DescribeLinkRuleListRequest, DescribeEventListResponse, DescribeDeviceTagListRequest, DescribeBuildingProfileResponse, ReportAppMessageRequest, DescribeFileUploadURLRequest, DescribeDeviceStatusListRequest, DescribeDeviceTagListResponse, DescribeVideoCloudRecordRequest, DescribeAdministrationByTagRequest, ControlDeviceResponse, DescribeAlarmListResponse, DescribeSpaceRelationByDeviceIdResponse, AddAlarmProcessRecordResponse, DescribeActionListResponse, DescribeInterfaceListRequest, DescribeProductListResponse, DescribeVideoRecordStreamRequest, DescribeAlarmStatusListResponse, CreateApplicationTokenRequest, DescribeFileUploadURLResponse, SaveDeviceGroupResponse, DescribeTenantDepartmentListResponse, DescribeWorkSpaceBuildingCountAndAreaResponse, ReportAppMessageResponse, DescribeAlarmListRequest, DescribeAdministrationByTagResponse, BatchKillAlarmResponse, DescribeDeviceTypeListRequest, DescribeDeviceShadowListRequest, DescribeSceneListResponse, DescribeDeviceListResponse, DescribeTenantBuildingCountAndAreaResponse, ModifyDeviceTagResponse, DescribeVideoLiveStreamRequest, ChangeAlarmStatusRequest, DescribeAlarmTypeListRequest, DescribeCameraExtendInfoResponse, DescribeSpaceInfoByDeviceIdRequest, DescribeCameraExtendInfoRequest, DescribeVideoLiveStreamResponse, DescribeTenantUserListResponse, DescribeEventListRequest, DescribeElementProfilePageResponse, DescribeSpaceDeviceIdListRequest, ModifyDeviceFieldRequest, DescribeActionListRequest, DescribeEdgeApplicationTokenRequest } from "./weilingwith_models";
 /**
  * weilingwith client
  * @class
@@ -68,6 +68,10 @@ export declare class Client extends AbstractClient {
      */
     DescribeDeviceTagList(req: DescribeDeviceTagListRequest, cb?: (error: string, rep: DescribeDeviceTagListResponse) => void): Promise<DescribeDeviceTagListResponse>;
     /**
+     * 设备分组列表
+     */
+    DescribeDeviceGroupList(req: DescribeDeviceGroupListRequest, cb?: (error: string, rep: DescribeDeviceGroupListResponse) => void): Promise<DescribeDeviceGroupListResponse>;
+    /**
      * 告警类型获取
      */
     DescribeAlarmTypeList(req: DescribeAlarmTypeListRequest, cb?: (error: string, rep: DescribeAlarmTypeListResponse) => void): Promise<DescribeAlarmTypeListResponse>;
@@ -75,6 +79,10 @@ export declare class Client extends AbstractClient {
      * 查询空间分类
      */
     DescribeSpaceTypeList(req: DescribeSpaceTypeListRequest, cb?: (error: string, rep: DescribeSpaceTypeListResponse) => void): Promise<DescribeSpaceTypeListResponse>;
+    /**
+     * 批量修改设备组
+     */
+    ModifyDeviceGroup(req: ModifyDeviceGroupRequest, cb?: (error: string, rep: ModifyDeviceGroupResponse) => void): Promise<ModifyDeviceGroupResponse>;
     /**
      * 拉取设备的设备类型列表
      */
@@ -96,6 +104,10 @@ export declare class Client extends AbstractClient {
      */
     UpdateWorkspaceParkAttributes(req: UpdateWorkspaceParkAttributesRequest, cb?: (error: string, rep: UpdateWorkspaceParkAttributesResponse) => void): Promise<UpdateWorkspaceParkAttributesResponse>;
     /**
+     * 断流接口
+     */
+    StopVideoStreaming(req: StopVideoStreamingRequest, cb?: (error: string, rep: StopVideoStreamingResponse) => void): Promise<StopVideoStreamingResponse>;
+    /**
      * 模型列表查询/单个查询（产品模型/标准模型）
      */
     DescribeModelList(req: DescribeModelListRequest, cb?: (error: string, rep: DescribeModelListResponse) => void): Promise<DescribeModelListResponse>;
@@ -107,6 +119,10 @@ export declare class Client extends AbstractClient {
      * 产品列表查询
      */
     DescribeProductList(req: DescribeProductListRequest, cb?: (error: string, rep: DescribeProductListResponse) => void): Promise<DescribeProductListResponse>;
+    /**
+     * 批量删除设备
+     */
+    BatchDeleteDevice(req: BatchDeleteDeviceRequest, cb?: (error: string, rep: BatchDeleteDeviceResponse) => void): Promise<BatchDeleteDeviceResponse>;
     /**
      * 动作列表查询
      */
@@ -160,6 +176,10 @@ export declare class Client extends AbstractClient {
      */
     BatchCreateDevice(req: BatchCreateDeviceRequest, cb?: (error: string, rep: BatchCreateDeviceResponse) => void): Promise<BatchCreateDeviceResponse>;
     /**
+     * 批量修改设备标签
+     */
+    ModifyDeviceTag(req: ModifyDeviceTagRequest, cb?: (error: string, rep: ModifyDeviceTagResponse) => void): Promise<ModifyDeviceTagResponse>;
+    /**
      * 获取视频扩展信息
      */
     DescribeCameraExtendInfo(req: DescribeCameraExtendInfoRequest, cb?: (error: string, rep: DescribeCameraExtendInfoResponse) => void): Promise<DescribeCameraExtendInfoResponse>;
@@ -180,6 +200,10 @@ export declare class Client extends AbstractClient {
      */
     DescribeBuildingModel(req: DescribeBuildingModelRequest, cb?: (error: string, rep: DescribeBuildingModelResponse) => void): Promise<DescribeBuildingModelResponse>;
     /**
+     * 删除设备分组
+     */
+    DeleteDeviceGroup(req: DeleteDeviceGroupRequest, cb?: (error: string, rep: DeleteDeviceGroupResponse) => void): Promise<DeleteDeviceGroupResponse>;
+    /**
      * 查询指定空间下设备与构件绑定关系列表
      */
     DescribeSpaceDeviceRelationList(req: DescribeSpaceDeviceRelationListRequest, cb?: (error: string, rep: DescribeSpaceDeviceRelationListResponse) => void): Promise<DescribeSpaceDeviceRelationListResponse>;
@@ -187,6 +211,10 @@ export declare class Client extends AbstractClient {
      * 查询建筑列表
      */
     DescribeBuildingList(req: DescribeBuildingListRequest, cb?: (error: string, rep: DescribeBuildingListResponse) => void): Promise<DescribeBuildingListResponse>;
+    /**
+     * 设备分组新增/修改
+     */
+    SaveDeviceGroup(req: SaveDeviceGroupRequest, cb?: (error: string, rep: SaveDeviceGroupResponse) => void): Promise<SaveDeviceGroupResponse>;
     /**
      * 云台控制
      */
@@ -232,7 +260,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeDeviceStatusList(req: DescribeDeviceStatusListRequest, cb?: (error: string, rep: DescribeDeviceStatusListResponse) => void): Promise<DescribeDeviceStatusListResponse>;
     /**
-     * 断流接口
+     * 批量修改设备自定义字段值
      */
-    StopVideoStreaming(req: StopVideoStreamingRequest, cb?: (error: string, rep: StopVideoStreamingResponse) => void): Promise<StopVideoStreamingResponse>;
+    ModifyDeviceField(req: ModifyDeviceFieldRequest, cb?: (error: string, rep: ModifyDeviceFieldResponse) => void): Promise<ModifyDeviceFieldResponse>;
 }
