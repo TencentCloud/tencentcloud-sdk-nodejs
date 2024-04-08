@@ -168,6 +168,23 @@ export interface ModifyStaffRequest {
     UseMobileAccept?: number;
 }
 /**
+ * DescribeIvrAudioList返回参数结构体
+ */
+export interface DescribeIvrAudioListResponse {
+    /**
+     * 总数
+     */
+    TotalCount?: number;
+    /**
+     * 文件信息
+     */
+    FileInfo?: Array<AudioFileInfo>;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * BindNumberCallOutSkillGroup返回参数结构体
  */
 export interface BindNumberCallOutSkillGroupResponse {
@@ -931,6 +948,19 @@ export interface DeletePredictiveDialingCampaignRequest {
     CampaignId: number;
 }
 /**
+ * UploadIvrAudio请求参数结构体
+ */
+export interface UploadIvrAudioRequest {
+    /**
+     * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
+     */
+    SdkAppId: number;
+    /**
+     * 音频文件列表
+     */
+    AudioList: Array<UploadAudioInfo>;
+}
+/**
  * DescribeStaffInfoList返回参数结构体
  */
 export interface DescribeStaffInfoListResponse {
@@ -1592,6 +1622,35 @@ export interface AutoCalloutTaskInfo {
     TaskId?: number;
 }
 /**
+ * DescribeIvrAudioList请求参数结构体
+ */
+export interface DescribeIvrAudioListRequest {
+    /**
+     * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
+     */
+    SdkAppId: number;
+    /**
+     * 分页尺寸，上限 50
+     */
+    PageSize: number;
+    /**
+     * 分页页码，从 0 开始
+     */
+    PageNumber: number;
+    /**
+     * 文件别名
+     */
+    CustomFileName?: Array<string>;
+    /**
+     * 文件名
+     */
+    AudioFileName?: Array<string>;
+    /**
+     * 文件ID
+     */
+    FileId?: Array<number | bigint>;
+}
+/**
  * 技能组信息
  */
 export interface SkillGroupInfoItem {
@@ -2245,6 +2304,20 @@ export interface TelCdrInfo {
     VoicemailAsrURL?: Array<string>;
 }
 /**
+ * UploadIvrAudio返回参数结构体
+ */
+export interface UploadIvrAudioResponse {
+    /**
+     * 上传失败的文件列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    FailedFileList?: Array<UploadIvrAudioFailedInfo>;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * DescribeCompanyList返回参数结构体
  */
 export interface DescribeCompanyListResponse {
@@ -2722,6 +2795,19 @@ export interface ResumePredictiveDialingCampaignRequest {
     CampaignId: number;
 }
 /**
+ * 上传音频文件信息
+ */
+export interface UploadAudioInfo {
+    /**
+     * 文件别名（可重复）
+     */
+    CustomFileName: string;
+    /**
+     * 音频文件链接。(支持mp3和wav格式，文件不超过5MB)
+     */
+    AudioUrl: string;
+}
+/**
  * 公司资质审核状态信息
  */
 export interface CompanyStateInfo {
@@ -2807,6 +2893,21 @@ export interface DescribePSTNActiveSessionListRequest {
      * 返回的数据条数，最大 25
      */
     Limit: number;
+}
+/**
+ * 上传音频文件失败信息
+ */
+export interface UploadIvrAudioFailedInfo {
+    /**
+     * 文件名
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    FileName?: string;
+    /**
+     * 失败原因
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    FailedMsg?: string;
 }
 /**
  * DescribeCallInMetrics返回参数结构体
@@ -3265,6 +3366,31 @@ export interface DescribeStaffStatusMetricsResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * 音频文件审核信息
+ */
+export interface AudioFileInfo {
+    /**
+     * 文件ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    FileId?: number;
+    /**
+     * 文件别名
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CustomFileName?: string;
+    /**
+     * 文件名
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AudioFileName?: string;
+    /**
+     * 审核状态，0-未审核，1-审核通过，2-审核拒绝
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Status?: number;
 }
 /**
  * DescribeCarrierPrivilegeNumberApplicants返回参数结构体

@@ -88,6 +88,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeIMCdrs", req, cb);
     }
     /**
+     * 查询IVR音频文件列表信息
+     */
+    async DescribeIvrAudioList(req, cb) {
+        return this.request("DescribeIvrAudioList", req, cb);
+    }
+    /**
      * 删除坐席信息
      */
     async DeleteStaff(req, cb) {
@@ -200,6 +206,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CreateCarrierPrivilegeNumberApplicant(req, cb) {
         return this.request("CreateCarrierPrivilegeNumberApplicant", req, cb);
+    }
+    /**
+     * 上传IVR中使用的音频文件，每日上传文件限制50个。（参数中音频文件Url建议使用腾讯云Cos存储的临时链接）
+     */
+    async UploadIvrAudio(req, cb) {
+        return this.request("UploadIvrAudio", req, cb);
     }
     /**
      * 获取指定服务记录文本聊天内容，需要先使用查询在线客服记录（DescribeIMCdrs） API 获取服务记录 SessionId。

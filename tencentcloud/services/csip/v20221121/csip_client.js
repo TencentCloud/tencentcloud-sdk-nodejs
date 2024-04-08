@@ -130,6 +130,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyRiskCenterScanTask", req, cb);
     }
     /**
+     * 获取资产视角的漏洞风险列表
+     */
+    async DescribeAssetViewVulRiskList(req, cb) {
+        return this.request("DescribeAssetViewVulRiskList", req, cb);
+    }
+    /**
      * 获取内容风险列表
      */
     async DescribeRiskCenterWebsiteRiskList(req, cb) {

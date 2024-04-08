@@ -10842,6 +10842,11 @@ export interface Address {
   
      */
     RenewFlag?: string;
+    /**
+     * 当前公网IP所关联的带宽包ID，如果该公网IP未使用带宽包计费，则返回为空
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    BandwidthPackageId?: string;
 }
 /**
  * VPN网关对象。

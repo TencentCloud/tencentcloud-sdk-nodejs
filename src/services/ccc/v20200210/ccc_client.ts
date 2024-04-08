@@ -23,6 +23,7 @@ import {
   CompanyApplyInfo,
   CreateSDKLoginTokenResponse,
   ModifyStaffRequest,
+  DescribeIvrAudioListResponse,
   BindNumberCallOutSkillGroupResponse,
   ResetExtensionPasswordRequest,
   DisableCCCPhoneNumberResponse,
@@ -54,6 +55,7 @@ import {
   DescribeSkillGroupInfoListResponse,
   DescribeNumbersResponse,
   DeletePredictiveDialingCampaignRequest,
+  UploadIvrAudioRequest,
   DescribeStaffInfoListResponse,
   UnbindNumberCallOutSkillGroupRequest,
   CreateAutoCalloutTaskRequest,
@@ -80,6 +82,7 @@ import {
   UpdatePredictiveDialingCampaignRequest,
   DescribeStaffInfoListRequest,
   AutoCalloutTaskInfo,
+  DescribeIvrAudioListRequest,
   SkillGroupInfoItem,
   ResetExtensionPasswordResponse,
   UpdateCCCSkillGroupRequest,
@@ -99,6 +102,7 @@ import {
   StaffInfo,
   CreateAutoCalloutTaskResponse,
   TelCdrInfo,
+  UploadIvrAudioResponse,
   DescribeCompanyListResponse,
   NumberInfo,
   DeleteStaffRequest,
@@ -125,10 +129,12 @@ import {
   ActiveCarrierPrivilegeNumber,
   UnbindStaffSkillGroupListResponse,
   ResumePredictiveDialingCampaignRequest,
+  UploadAudioInfo,
   CompanyStateInfo,
   DeleteExtensionResponse,
   BindStaffSkillGroupListRequest,
   DescribePSTNActiveSessionListRequest,
+  UploadIvrAudioFailedInfo,
   DescribeCallInMetricsResponse,
   ModifyCompanyApplyRequest,
   DescribeCompanyListRequest,
@@ -151,6 +157,7 @@ import {
   DescribeTelSessionResponse,
   CreateAdminURLRequest,
   DescribeStaffStatusMetricsResponse,
+  AudioFileInfo,
   DescribeCarrierPrivilegeNumberApplicantsResponse,
   CreateCallOutSessionRequest,
   BindStaffSkillGroupListResponse,
@@ -271,6 +278,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeIMCdrsResponse) => void
   ): Promise<DescribeIMCdrsResponse> {
     return this.request("DescribeIMCdrs", req, cb)
+  }
+
+  /**
+   * 查询IVR音频文件列表信息
+   */
+  async DescribeIvrAudioList(
+    req: DescribeIvrAudioListRequest,
+    cb?: (error: string, rep: DescribeIvrAudioListResponse) => void
+  ): Promise<DescribeIvrAudioListResponse> {
+    return this.request("DescribeIvrAudioList", req, cb)
   }
 
   /**
@@ -461,6 +478,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateCarrierPrivilegeNumberApplicantResponse) => void
   ): Promise<CreateCarrierPrivilegeNumberApplicantResponse> {
     return this.request("CreateCarrierPrivilegeNumberApplicant", req, cb)
+  }
+
+  /**
+   * 上传IVR中使用的音频文件，每日上传文件限制50个。（参数中音频文件Url建议使用腾讯云Cos存储的临时链接）
+   */
+  async UploadIvrAudio(
+    req: UploadIvrAudioRequest,
+    cb?: (error: string, rep: UploadIvrAudioResponse) => void
+  ): Promise<UploadIvrAudioResponse> {
+    return this.request("UploadIvrAudio", req, cb)
   }
 
   /**

@@ -23,6 +23,7 @@ import {
   DescribeRiskCenterAssetViewWeakPasswordRiskListResponse,
   DescribeVULRiskAdvanceCFGListResponse,
   TaskCenterWeakPwdRiskInputParam,
+  DescribeAssetViewVulRiskListResponse,
   DescribeOrganizationUserInfoRequest,
   FilterDataObject,
   ReportItemKey,
@@ -54,7 +55,7 @@ import {
   DescribeScanReportListResponse,
   DescribeSearchBugInfoRequest,
   TaskLogURL,
-  AddNewBindRoleUserRequest,
+  AssetViewVULRiskData,
   DescribeOrganizationUserInfoResponse,
   NICAsset,
   DescribeListenerListResponse,
@@ -99,6 +100,7 @@ import {
   DescribeTaskLogURLResponse,
   ModifyOrganizationAccountStatusResponse,
   DescribeDbAssetInfoRequest,
+  DescribeAssetViewVulRiskListRequest,
   Filter,
   DescribeRiskCenterWebsiteRiskListRequest,
   ServerRiskSuggestion,
@@ -143,6 +145,7 @@ import {
   DescribeTaskLogListRequest,
   DescribeRiskCenterAssetViewPortRiskListResponse,
   DescribeTaskLogURLRequest,
+  AddNewBindRoleUserRequest,
 } from "./csip_models"
 
 /**
@@ -322,6 +325,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyRiskCenterScanTaskResponse) => void
   ): Promise<ModifyRiskCenterScanTaskResponse> {
     return this.request("ModifyRiskCenterScanTask", req, cb)
+  }
+
+  /**
+   * 获取资产视角的漏洞风险列表
+   */
+  async DescribeAssetViewVulRiskList(
+    req: DescribeAssetViewVulRiskListRequest,
+    cb?: (error: string, rep: DescribeAssetViewVulRiskListResponse) => void
+  ): Promise<DescribeAssetViewVulRiskListResponse> {
+    return this.request("DescribeAssetViewVulRiskList", req, cb)
   }
 
   /**

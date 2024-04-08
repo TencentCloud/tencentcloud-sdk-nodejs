@@ -118,6 +118,16 @@ it("ccc.v20200210.DescribeIMCdrs", async function () {
     }
 })
 
+it("ccc.v20200210.DescribeIvrAudioList", async function () {
+    try {
+       const data = await client.DescribeIvrAudioList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ccc.v20200210.DeleteStaff", async function () {
     try {
        const data = await client.DeleteStaff({})
@@ -301,6 +311,16 @@ it("ccc.v20200210.CreatePredictiveDialingCampaign", async function () {
 it("ccc.v20200210.CreateCarrierPrivilegeNumberApplicant", async function () {
     try {
        const data = await client.CreateCarrierPrivilegeNumberApplicant({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ccc.v20200210.UploadIvrAudio", async function () {
+    try {
+       const data = await client.UploadIvrAudio({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

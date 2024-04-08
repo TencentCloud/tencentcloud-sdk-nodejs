@@ -110,6 +110,49 @@ export interface TaskCenterWeakPwdRiskInputParam {
     Enable: number;
 }
 /**
+ * DescribeAssetViewVulRiskList返回参数结构体
+ */
+export interface DescribeAssetViewVulRiskListResponse {
+    /**
+     * 总条数
+     */
+    TotalCount?: number;
+    /**
+     * 资产视角的漏洞风险列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Data?: Array<AssetViewVULRiskData>;
+    /**
+     * 状态列表
+     */
+    StatusLists?: Array<FilterDataObject>;
+    /**
+     * 危险等级列表
+     */
+    LevelLists?: Array<FilterDataObject>;
+    /**
+     * 来源列表
+     */
+    FromLists?: Array<FilterDataObject>;
+    /**
+     * 漏洞类型列表
+     */
+    VULTypeLists?: Array<FilterDataObject>;
+    /**
+     * 资产类型列表
+     */
+    InstanceTypeLists?: Array<FilterDataObject>;
+    /**
+     * tag枚举
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Tags?: Array<FilterDataObject>;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * DescribeOrganizationUserInfo请求参数结构体
  */
 export interface DescribeOrganizationUserInfoRequest {
@@ -1577,9 +1620,177 @@ export interface TaskLogURL {
     AppId?: string;
 }
 /**
- * AddNewBindRoleUser请求参数结构体
+ * 资产视角的漏洞风险对象
  */
-export declare type AddNewBindRoleUserRequest = null;
+export interface AssetViewVULRiskData {
+    /**
+     * 影响资产
+     */
+    AffectAsset?: string;
+    /**
+     * 风险等级，low-低危，high-高危，middle-中危，info-提示，extreme-严重。
+     */
+    Level?: string;
+    /**
+     * 资产类型
+     */
+    InstanceType?: string;
+    /**
+     * 组件
+     */
+    Component?: string;
+    /**
+     * 最近识别时间
+     */
+    RecentTime?: string;
+    /**
+     * 首次识别时间
+     */
+    FirstTime?: string;
+    /**
+     * 状态，0未处理、1标记已处置、2已忽略，3已处置 ，4 处置中 ，5 检测中 ，6部分已处置
+     */
+    Status?: number;
+    /**
+     * 风险ID
+     */
+    RiskId?: string;
+    /**
+     * 实例id
+     */
+    InstanceId?: string;
+    /**
+     * 实例名
+     */
+    InstanceName?: string;
+    /**
+     * 用户appid
+     */
+    AppId?: string;
+    /**
+     * 用户昵称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Nick?: string;
+    /**
+     * 用户uin
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Uin?: string;
+    /**
+     * 漏洞类型
+     */
+    VULType?: string;
+    /**
+     * 端口
+     */
+    Port?: string;
+    /**
+     * 漏洞影响组件
+     */
+    AppName?: string;
+    /**
+     * 漏洞影响版本
+     */
+    AppVersion?: string;
+    /**
+     * 风险点
+     */
+    VULURL?: string;
+    /**
+     * 漏洞名称
+     */
+    VULName?: string;
+    /**
+     * cve
+     */
+    CVE?: string;
+    /**
+     * pocid
+     */
+    POCId?: string;
+    /**
+     * 扫描来源
+     */
+    From?: string;
+    /**
+     * 主机版本
+     */
+    CWPVersion?: number;
+    /**
+     * 实例uuid
+     */
+    InstanceUUID?: string;
+    /**
+     * 攻击载荷
+     */
+    Payload?: string;
+    /**
+     * 应急漏洞类型，1-应急漏洞，0-非应急漏洞
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    EMGCVulType?: number;
+    /**
+     * CVSS评分
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    CVSS?: number;
+    /**
+     * 前端索引id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Index?: string;
+    /**
+     * pcmgrId
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    PCMGRId?: string;
+    /**
+     * 报告id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    LogId?: string;
+    /**
+     * 任务id
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TaskId?: string;
+    /**
+     * 漏洞标签
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    VulTag?: Array<string>;
+    /**
+     * 漏洞披露时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DisclosureTime?: string;
+    /**
+     * 攻击热度
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AttackHeat?: number;
+    /**
+     * 是否必修漏洞1是，0不是
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IsSuggest?: number;
+    /**
+     * 处置任务ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    HandleTaskId?: string;
+    /**
+     * 引擎来源
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    EngineSource?: string;
+    /**
+     * 新的漏洞风险id(同全网漏洞表的riskid)
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    VulRiskId?: string;
+}
 /**
  * DescribeOrganizationUserInfo返回参数结构体
  */
@@ -3306,6 +3517,23 @@ export interface DescribeDbAssetInfoRequest {
      * 资产id
      */
     AssetId: string;
+}
+/**
+ * DescribeAssetViewVulRiskList请求参数结构体
+ */
+export interface DescribeAssetViewVulRiskListRequest {
+    /**
+     * 集团账号的成员id
+     */
+    MemberId?: Array<string>;
+    /**
+     * 过滤内容
+     */
+    Filter?: Filter;
+    /**
+     * 资产标签
+     */
+    Tags?: Array<AssetTag>;
 }
 /**
  * 列表查询接口采用新filter 接口，直接传给后台供后台查询过滤
@@ -5037,3 +5265,7 @@ export interface DescribeTaskLogURLRequest {
      */
     ReportTaskIdList?: Array<ReportTaskIdList>;
 }
+/**
+ * AddNewBindRoleUser请求参数结构体
+ */
+export declare type AddNewBindRoleUserRequest = null;
