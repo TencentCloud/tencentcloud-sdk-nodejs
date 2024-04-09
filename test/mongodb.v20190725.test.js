@@ -188,6 +188,16 @@ it("mongodb.v20190725.CreateBackupDownloadTask", async function () {
     }
 })
 
+it("mongodb.v20190725.FlashBackDBInstance", async function () {
+    try {
+       const data = await client.FlashBackDBInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mongodb.v20190725.DescribeDBInstances", async function () {
     try {
        const data = await client.DescribeDBInstances({})

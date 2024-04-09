@@ -24,7 +24,7 @@ import {
   DescribeAccountUsersRequest,
   SetInstanceMaintenanceResponse,
   CreateBackupDBInstanceResponse,
-  DBInstancePrice,
+  FlushInstanceRouterConfigRequest,
   KillOpsRequest,
   InquirePriceRenewDBInstancesRequest,
   DescribeSlowLogsRequest,
@@ -38,9 +38,10 @@ import {
   DescribeSecurityGroupRequest,
   DescribeBackupDownloadTaskResponse,
   AddNodeList,
-  FlushInstanceRouterConfigRequest,
+  DBInstancePrice,
   DBInstanceInfo,
   SetAccountUserPrivilegeResponse,
+  FlashbackDatabase,
   ModifyDBInstanceNetworkAddressRequest,
   CreateDBInstanceHourResponse,
   DescribeDBInstanceNodePropertyRequest,
@@ -57,6 +58,7 @@ import {
   CurrentOp,
   ModifyDBInstanceSpecRequest,
   Auth,
+  FlashBackDBInstanceRequest,
   ResetDBInstancePasswordRequest,
   InstanceIntegerParam,
   ModifyNetworkAddress,
@@ -73,7 +75,7 @@ import {
   DescribeDBBackupsResponse,
   ModifyDBInstanceSecurityGroupResponse,
   UserInfo,
-  RemoveNodeList,
+  DescribeInstanceParamsRequest,
   NodeTag,
   InquirePriceCreateDBInstancesResponse,
   DescribeSecurityGroupResponse,
@@ -84,6 +86,7 @@ import {
   ReplicateSetInfo,
   DescribeDBInstanceDealRequest,
   DescribeAsyncRequestInfoRequest,
+  FBKeyValue,
   CreateBackupDownloadTaskRequest,
   InquirePriceModifyDBInstanceSpecResponse,
   SecurityGroupBound,
@@ -97,6 +100,7 @@ import {
   RenameInstanceRequest,
   RenewDBInstancesResponse,
   InstanceEnumParam,
+  FlashBackDBInstanceResponse,
   RenameInstanceResponse,
   CreateBackupDBInstanceRequest,
   SetAccountUserPrivilegeRequest,
@@ -108,6 +112,7 @@ import {
   CreateBackupDownloadTaskResponse,
   SpecificationInfo,
   DescribeSlowLogPatternsRequest,
+  FlashbackCollection,
   DescribeSpecInfoResponse,
   InquirePriceRenewDBInstancesResponse,
   TagInfo,
@@ -116,7 +121,7 @@ import {
   OfflineIsolatedDBInstanceRequest,
   InquirePriceCreateDBInstancesRequest,
   DescribeInstanceParamsResponse,
-  DescribeInstanceParamsRequest,
+  RemoveNodeList,
   SetInstanceMaintenanceRequest,
   InstanceDetail,
   ModifyDBInstanceSpecResponse,
@@ -301,6 +306,17 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateBackupDownloadTaskResponse) => void
   ): Promise<CreateBackupDownloadTaskResponse> {
     return this.request("CreateBackupDownloadTask", req, cb)
+  }
+
+  /**
+   * 该接口用于发起按 Key 闪回任务，依据数据的闪回 Key（默认为 id）对数据进行极速回档，快速恢复业务。
+   **说明：按 Key 闪回于2023年09月11日正式进行公测，在此期间，该接口仅对公测用户开放。**
+   */
+  async FlashBackDBInstance(
+    req: FlashBackDBInstanceRequest,
+    cb?: (error: string, rep: FlashBackDBInstanceResponse) => void
+  ): Promise<FlashBackDBInstanceResponse> {
+    return this.request("FlashBackDBInstance", req, cb)
   }
 
   /**

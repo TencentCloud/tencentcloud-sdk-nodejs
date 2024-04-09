@@ -2547,11 +2547,11 @@ export interface DeployCertificateInstanceResponse {
      * 云资源部署任务ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DeployRecordId: number;
+    DeployRecordId?: number;
     /**
      * 部署状态，1表示部署成功，0表示部署失败
      */
-    DeployStatus: number;
+    DeployStatus?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -3981,6 +3981,10 @@ export interface DeployCertificateInstanceRequest {
   0： 域名https已关闭。
      */
     Status?: number;
+    /**
+     * 是否查询缓存，1：是； 0：否， 默认为查询缓存，缓存半小时
+     */
+    IsCache?: number;
 }
 /**
  * apiGateway实例详情

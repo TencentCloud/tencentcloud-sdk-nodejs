@@ -106,6 +106,7 @@ export interface CreateRoomRequest {
     IsGradingRequiredPostClass?: number;
     /**
      * 房间类型: 0 小班课（默认值）; 1 大班课; 2 1V1 (预留参数，暂未开放)
+  注：大班课的布局(layout)只有三分屏
      */
     RoomType?: number;
     /**
@@ -725,6 +726,7 @@ export interface RoomItem {
     IsGradingRequiredPostClass?: number;
     /**
      * 房间类型。0:小班课（默认值）；1:大班课；2:1V1（后续扩展）
+  注：大班课的布局(layout)只有三分屏
   注意：此字段可能返回 null，表示取不到有效值。
      */
     RoomType?: number;
@@ -2084,6 +2086,7 @@ export interface DescribeRoomResponse {
     IsGradingRequiredPostClass?: number;
     /**
      * 房间类型: 0 小班课（默认值）; 1 大班课; 2 1V1 (后续扩展)
+  注：大班课的布局(layout)只有三分屏
      */
     RoomType?: number;
     /**
@@ -2652,6 +2655,7 @@ export interface RoomInfo {
     IsGradingRequiredPostClass?: number;
     /**
      * 房间类型: 0 小班课（默认值）; 1 大班课; 2 1V1 (后续扩展)
+  注：大班课的布局(layout)只有三分屏
      */
     RoomType?: number;
     /**
@@ -2781,6 +2785,7 @@ export interface ModifyRoomRequest {
     IsGradingRequiredPostClass?: number;
     /**
      * 房间类型: 0 小班课（默认值）; 1 大班课; 2 1V1 （预留参数、暂未开放)
+  注：大班课的布局(layout)只有三分屏
      */
     RoomType?: number;
     /**

@@ -202,22 +202,13 @@ export interface CreateBackupDBInstanceResponse {
     RequestId?: string;
 }
 /**
- * 数据库实例价格
+ * FlushInstanceRouterConfig请求参数结构体
  */
-export interface DBInstancePrice {
+export interface FlushInstanceRouterConfigRequest {
     /**
-     * 单价
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 实例ID
      */
-    UnitPrice: number;
-    /**
-     * 原价
-     */
-    OriginalPrice: number;
-    /**
-     * 折扣价
-     */
-    DiscountPrice: number;
+    InstanceId: string;
 }
 /**
  * KillOps请求参数结构体
@@ -462,13 +453,22 @@ export interface AddNodeList {
     Zone: string;
 }
 /**
- * FlushInstanceRouterConfig请求参数结构体
+ * 数据库实例价格
  */
-export interface FlushInstanceRouterConfigRequest {
+export interface DBInstancePrice {
     /**
-     * 实例ID
+     * 单价
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    InstanceId: string;
+    UnitPrice: number;
+    /**
+     * 原价
+     */
+    OriginalPrice: number;
+    /**
+     * 折扣价
+     */
+    DiscountPrice: number;
 }
 /**
  * 实例信息
@@ -495,6 +495,19 @@ export interface SetAccountUserPrivilegeResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * 按key回档，源数据所在的库表
+ */
+export interface FlashbackDatabase {
+    /**
+     * 按key回档源数据所在库
+     */
+    DBName: string;
+    /**
+     * 按key回档的集群数组
+     */
+    Collections: Array<FlashbackCollection>;
 }
 /**
  * ModifyDBInstanceNetworkAddress请求参数结构体
@@ -1008,6 +1021,27 @@ export interface Auth {
     NameSpace: string;
 }
 /**
+ * FlashBackDBInstance请求参数结构体
+ */
+export interface FlashBackDBInstanceRequest {
+    /**
+     * 开启按 Key 回档的实例 ID。
+     */
+    InstanceId: string;
+    /**
+     * 源数据想恢复到的时间。
+     */
+    TargetFlashbackTime: string;
+    /**
+     * 源数据所在的库表信息。
+     */
+    TargetDatabases: Array<FlashbackDatabase>;
+    /**
+     * 数据最终写入的实例 ID。
+     */
+    TargetInstanceId?: string;
+}
+/**
  * ResetDBInstancePassword请求参数结构体
  */
 export interface ResetDBInstancePasswordRequest {
@@ -1346,29 +1380,13 @@ export interface UserInfo {
     UserDesc: string;
 }
 /**
- * 修改实例节点详情
+ * DescribeInstanceParams请求参数结构体
  */
-export interface RemoveNodeList {
+export interface DescribeInstanceParamsRequest {
     /**
-     * 需要删除的节点角色。
-  - SECONDARY：Mongod 节点。
-  - READONLY：只读节点。
-  - MONGOS：Mongos 节点。
+     * 指定待查询参数列表的实例ID。例如：cmgo-p8vn****。请登录 [MongoDB 控制台](https://console.cloud.tencent.com/mongodb)在实例列表复制实例 ID。
      */
-    Role: string;
-    /**
-     * 要删除的节点 ID。分片集群须指定一组分片要删除的节点名称即可，其余分片对改组对齐。
-  
-  - 获取方式：登录 [MongoDB控制台](https://console.cloud.tencent.com/)，在**节点管理**页签，可获取**节点 ID**。
-  - 特别说明：分片集群同一节点上的分片，仅需指定0分片节点 ID 即可。例如：cmgo-6hfk****_0-node-primary。
-     */
-    NodeName: string;
-    /**
-     * 节点所对应的可用区。
-  - 单可用区，所有节点在同一可用区。
-  - 多可用区：当前标准规格是三可用区分布，主从节点不在同一可用区，需注意配置所删除节点对应的可用区，且删除后必须满足任意2个可用区节点数大于第3个可用区原则。
-     */
-    Zone: string;
+    InstanceId: string;
 }
 /**
  * 节点Tag
@@ -1510,6 +1528,19 @@ export interface DescribeAsyncRequestInfoRequest {
      * 异步请求Id，涉及到异步流程的接口返回，如CreateBackupDBInstance
      */
     AsyncRequestId: string;
+}
+/**
+ * 按key回档，用于筛选数据的键值对
+ */
+export interface FBKeyValue {
+    /**
+     * 用于按key回档过滤的key
+     */
+    Key?: string;
+    /**
+     * 用于按key回档过滤的value
+     */
+    Value?: string;
 }
 /**
  * CreateBackupDownloadTask请求参数结构体
@@ -1837,6 +1868,20 @@ export interface InstanceEnumParam {
   - 0：非运行中参数值。
      */
     Status: number;
+}
+/**
+ * FlashBackDBInstance返回参数结构体
+ */
+export interface FlashBackDBInstanceResponse {
+    /**
+     * 回档数据异步任务 ID。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    FlowId?: number;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * RenameInstance返回参数结构体
@@ -2177,6 +2222,27 @@ export interface DescribeSlowLogPatternsRequest {
     Format?: string;
 }
 /**
+ * 按key回档，源数据所在的表
+ */
+export interface FlashbackCollection {
+    /**
+     * 按key回档指定的集合名
+     */
+    CollectionName: string;
+    /**
+     * 按key回档到的目标集合名
+     */
+    TargetResultCollectionName: string;
+    /**
+     * 上传到cos的文件的value所对应的key值
+     */
+    FilterKey: string;
+    /**
+     * 用于按key回档过滤的键值对
+     */
+    KeyValues?: Array<FBKeyValue>;
+}
+/**
  * DescribeSpecInfo返回参数结构体
  */
 export interface DescribeSpecInfoResponse {
@@ -2380,13 +2446,29 @@ export interface DescribeInstanceParamsResponse {
     RequestId?: string;
 }
 /**
- * DescribeInstanceParams请求参数结构体
+ * 修改实例节点详情
  */
-export interface DescribeInstanceParamsRequest {
+export interface RemoveNodeList {
     /**
-     * 指定待查询参数列表的实例ID。例如：cmgo-p8vn****。请登录 [MongoDB 控制台](https://console.cloud.tencent.com/mongodb)在实例列表复制实例 ID。
+     * 需要删除的节点角色。
+  - SECONDARY：Mongod 节点。
+  - READONLY：只读节点。
+  - MONGOS：Mongos 节点。
      */
-    InstanceId: string;
+    Role: string;
+    /**
+     * 要删除的节点 ID。分片集群须指定一组分片要删除的节点名称即可，其余分片对改组对齐。
+  
+  - 获取方式：登录 [MongoDB控制台](https://console.cloud.tencent.com/)，在**节点管理**页签，可获取**节点 ID**。
+  - 特别说明：分片集群同一节点上的分片，仅需指定0分片节点 ID 即可。例如：cmgo-6hfk****_0-node-primary。
+     */
+    NodeName: string;
+    /**
+     * 节点所对应的可用区。
+  - 单可用区，所有节点在同一可用区。
+  - 多可用区：当前标准规格是三可用区分布，主从节点不在同一可用区，需注意配置所删除节点对应的可用区，且删除后必须满足任意2个可用区节点数大于第3个可用区原则。
+     */
+    Zone: string;
 }
 /**
  * SetInstanceMaintenance请求参数结构体

@@ -28,7 +28,9 @@ class Client extends abstract_client_1.AbstractClient {
         super("bri.tencentcloudapi.com", "2019-03-28", clientConfig);
     }
     /**
-     * 输入业务名 (bri_num, bri_dev, bri_ip, bri_apk, bri_url, bri_social 六种之一)  及其 相应字段, 获取业务风险分数和标签。
+     * 产品不在使用，业务已经下线
+
+输入业务名 (bri_num, bri_dev, bri_ip, bri_apk, bri_url, bri_social 六种之一)  及其 相应字段, 获取业务风险分数和标签。
 
 当业务名为bri_num时，必须填PhoneNumber字段.
 

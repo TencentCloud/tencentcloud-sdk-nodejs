@@ -130,6 +130,13 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateBackupDownloadTask", req, cb);
     }
     /**
+     * 该接口用于发起按 Key 闪回任务，依据数据的闪回 Key（默认为 id）对数据进行极速回档，快速恢复业务。
+**说明：按 Key 闪回于2023年09月11日正式进行公测，在此期间，该接口仅对公测用户开放。**
+     */
+    async FlashBackDBInstance(req, cb) {
+        return this.request("FlashBackDBInstance", req, cb);
+    }
+    /**
      * 本接口（DescribeDBInstances）用于查询云数据库实例列表，支持通过项目ID、实例ID、实例状态等过滤条件来筛选主实例、灾备实例和只读实例信息列表。
      */
     async DescribeDBInstances(req, cb) {
