@@ -16,9 +16,9 @@
  */
 
 /**
- * StopPublishStream返回参数结构体
+ * StartPublishStreamToCSS返回参数结构体
  */
-export interface StopPublishStreamResponse {
+export interface StartPublishStreamToCSSResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -60,6 +60,26 @@ export interface StopPublishStreamRequest {
 }
 
 /**
+ * StopPublishStream返回参数结构体
+ */
+export interface StopPublishStreamResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * TrylockWorker返回参数结构体
+ */
+export interface TrylockWorkerResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * SwitchGameArchive请求参数结构体
  */
 export interface SwitchGameArchiveRequest {
@@ -82,13 +102,17 @@ export interface SwitchGameArchiveRequest {
 }
 
 /**
- * TrylockWorker返回参数结构体
+ * StartPublishStreamToCSS请求参数结构体
  */
-export interface TrylockWorkerResponse {
+export interface StartPublishStreamToCSSRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 唯一用户身份标识，由业务方自定义，平台不予理解。（可根据业务需要决定使用用户的唯一身份标识或是使用时间戳随机生成；在用户重连时应保持UserId不变）
    */
-  RequestId?: string
+  UserId: string
+  /**
+   * 推流参数，推流时携带自定义参数。
+   */
+  PublishStreamArgs?: string
 }
 
 /**

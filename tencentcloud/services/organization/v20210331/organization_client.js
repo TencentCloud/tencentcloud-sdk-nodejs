@@ -161,7 +161,6 @@ class Client extends abstract_client_1.AbstractClient {
     }
     /**
      * 取消组织成员和组织管理员子账号的授权关系
-
      */
     async CancelOrganizationMemberAuthAccount(req, cb) {
         return this.request("CancelOrganizationMemberAuthAccount", req, cb);

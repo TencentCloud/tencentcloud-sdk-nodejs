@@ -49,7 +49,6 @@ export declare class Client extends AbstractClient {
     GetFaceIdToken(req: GetFaceIdTokenRequest, cb?: (error: string, rep: GetFaceIdTokenResponse) => void): Promise<GetFaceIdTokenResponse>;
     /**
      * 手机号二要素核验接口用于校验手机号和姓名的真实性和一致性，支持的手机号段详情请查阅<a href="https://cloud.tencent.com/document/product/1007/46063">运营商类</a>文档。
-
      */
     CheckPhoneAndName(req: CheckPhoneAndNameRequest, cb?: (error: string, rep: CheckPhoneAndNameResponse) => void): Promise<CheckPhoneAndNameResponse>;
     /**

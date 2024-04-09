@@ -22,17 +22,17 @@ export interface DescribeCaptchaOperDataResponse {
   /**
    * 成功返回 0 其它失败
    */
-  CaptchaCode: number
+  CaptchaCode?: number
   /**
    * 返回信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CaptchaMsg: string
+  CaptchaMsg?: string
   /**
    * 用户操作数据
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Data: CaptchaOperDataRes
+  Data?: CaptchaOperDataRes
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -641,40 +641,40 @@ export interface DescribeCaptchaDataSumResponse {
   /**
    * 请求总量
    */
-  GetSum: number
+  GetSum?: number
   /**
    * 请求验证成功量
    */
-  VfySuccSum: number
+  VfySuccSum?: number
   /**
    * 请求验证量
    */
-  VfySum: number
+  VfySum?: number
   /**
    * 拦截攻击量
    */
-  AttackSum: number
+  AttackSum?: number
   /**
    * 返回信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CaptchaMsg: string
+  CaptchaMsg?: string
   /**
    * 成功返回0  其它失败
    */
-  CaptchaCode: number
+  CaptchaCode?: number
   /**
    * 票据校验总量
    */
-  CheckTicketSum: number
+  CheckTicketSum?: number
   /**
    * 票据验证通过量
    */
-  TicketThroughputSum: number
+  TicketThroughputSum?: number
   /**
    * 票据验证拦截量
    */
-  TicketInterceptSum: number
+  TicketInterceptSum?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -879,15 +879,15 @@ export interface GetTicketStatisticsResponse {
    * 查询后数据块
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Data: CaptchaStatisticObj
+  Data?: CaptchaStatisticObj
   /**
    * 验证码返回码
    */
-  CaptchaCode: number
+  CaptchaCode?: number
   /**
    * 验证码返回信息
    */
-  CaptchaMsg: string
+  CaptchaMsg?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

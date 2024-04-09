@@ -52,6 +52,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("SaveGameArchive", req, cb);
     }
     /**
+     * 开始云端推流
+     */
+    async StartPublishStreamToCSS(req, cb) {
+        return this.request("StartPublishStreamToCSS", req, cb);
+    }
+    /**
      * 切换游戏存档
      */
     async SwitchGameArchive(req, cb) {

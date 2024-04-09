@@ -366,9 +366,8 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 取消组织成员和组织管理员子账号的授权关系
-
-     */
+   * 取消组织成员和组织管理员子账号的授权关系
+   */
   async CancelOrganizationMemberAuthAccount(
     req: CancelOrganizationMemberAuthAccountRequest,
     cb?: (error: string, rep: CancelOrganizationMemberAuthAccountResponse) => void

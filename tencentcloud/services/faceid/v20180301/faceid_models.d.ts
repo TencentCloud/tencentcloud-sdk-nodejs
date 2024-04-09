@@ -2426,12 +2426,14 @@ export interface CheckPhoneAndNameResponse {
   -1:查无记录
   -2:引擎未知错误
   -3:引擎服务异常
+  -4:姓名校验不通过
+  -5:手机号码不合法
      */
-    Result: string;
+    Result?: string;
     /**
      * 业务结果描述
      */
-    Description: string;
+    Description?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */

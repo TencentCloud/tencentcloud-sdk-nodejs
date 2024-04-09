@@ -40,15 +40,15 @@ export interface DescribeShareUnitResourcesResponse {
  */
 export interface UpdateOrganizationIdentityRequest {
   /**
-   * 身份ID
+   * 身份ID。可以通过[ListOrganizationIdentity](https://cloud.tencent.com/document/product/850/82934)获取
    */
   IdentityId: number
   /**
-   * 身份描述
+   * 身份描述。
    */
   Description: string
   /**
-   * 身份策略
+   * 身份策略。
    */
   IdentityPolicy: Array<IdentityPolicy>
 }
@@ -75,7 +75,7 @@ export interface ListOrganizationIdentityRequest {
    */
   SearchKey?: string
   /**
-   * 身份ID搜索。
+   * 身份ID。可以通过身份ID搜索
    */
   IdentityId?: number
   /**
@@ -89,7 +89,7 @@ export interface ListOrganizationIdentityRequest {
  */
 export interface DeleteOrganizationMembersRequest {
   /**
-   * 被删除成员的UIN列表。
+   * 被删除成员的Uin列表。
    */
   MemberUin: Array<number | bigint>
 }
@@ -129,7 +129,7 @@ export interface AddOrganizationNodeResponse {
   /**
    * 节点ID。
    */
-  NodeId: number
+  NodeId?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -320,11 +320,11 @@ export interface DescribeOrganizationResponse {
  */
 export interface DescribeOrganizationMemberPoliciesRequest {
   /**
-   * 偏移量。
+   * 偏移量。取值是limit的整数倍。默认值 : 0。
    */
   Offset: number
   /**
-   * 限制数目。最大50
+   * 限制数目。取值范围：1~50。默认值：10。
    */
   Limit: number
   /**
@@ -371,7 +371,7 @@ export interface CancelOrganizationMemberAuthAccountRequest {
    */
   MemberUin: number
   /**
-   * 策略ID。
+   * 策略ID。可以通过[DescribeOrganizationMemberPolicies](https://cloud.tencent.com/document/product/850/82935)获取
    */
   PolicyId: number
   /**
@@ -482,7 +482,7 @@ export interface DescribeShareUnitResourcesRequest {
    */
   SearchKey?: string
   /**
-   * 共享资源类型。
+   * 共享资源类型。支持共享的资源类型,请参见[资源共享概述](https://cloud.tencent.com/document/product/850/59489)
    */
   Type?: string
 }
@@ -500,7 +500,7 @@ export interface DeleteShareUnitResourcesRequest {
    */
   Area: string
   /**
-   * 资源类型。支持共享的资源类型。
+   * 共享资源类型。支持共享的资源类型,请参见[资源共享概述](https://cloud.tencent.com/document/product/850/59489)
    */
   Type: string
   /**
@@ -530,7 +530,7 @@ export interface MemberIdentity {
  */
 export interface UpdateOrganizationNodeRequest {
   /**
-   * 节点ID。
+   * 节点ID。可以通过[DescribeOrganizationNodes](https://cloud.tencent.com/document/product/850/82926)获取
    */
   NodeId: number
   /**
@@ -587,7 +587,7 @@ export interface BindOrganizationMemberAuthAccountRequest {
    */
   MemberUin: number
   /**
-   * 策略ID。可以调用DescribeOrganizationMemberPolicies获取
+   * 策略ID。可以调用[DescribeOrganizationMemberPolicies](https://cloud.tencent.com/document/product/850/82935)获取
    */
   PolicyId: number
   /**
@@ -699,7 +699,7 @@ export interface DescribeOrganizationMemberAuthIdentitiesRequest {
    */
   MemberUin?: number
   /**
-   * 身份ID。入参MemberUin与IdentityId至少填写一个
+   * 身份ID。入参MemberUin与IdentityId至少填写一个, 可以通过[ListOrganizationIdentity](https://cloud.tencent.com/document/product/850/82934)获取
    */
   IdentityId?: number
 }
@@ -737,7 +737,7 @@ export interface DescribeOrganizationNodesRequest {
    */
   Limit: number
   /**
-   * 偏移量。
+   * 偏移量。取值是limit的整数倍。默认值 : 0。
    */
   Offset: number
 }
@@ -772,11 +772,11 @@ export interface CreateOrganizationMemberResponse {
  */
 export interface MoveOrganizationNodeMembersRequest {
   /**
-   * 组织节点ID。
+   * 组织节点ID。可以通过[DescribeOrganizationNodes](https://cloud.tencent.com/document/product/850/82926)获取
    */
   NodeId: number
   /**
-   * 成员UIN列表。
+   * 成员Uin列表。
    */
   MemberUin: Array<number | bigint>
 }
@@ -817,50 +817,50 @@ export interface AuthNode {
  */
 export interface DescribeOrganizationMemberEmailBindResponse {
   /**
-   * 绑定ID
+   * 绑定ID。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  BindId: number
+  BindId?: number
   /**
-   * 申请时间
+   * 申请时间。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ApplyTime: string
+  ApplyTime?: string
   /**
-   * 邮箱地址
+   * 邮箱地址。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Email: string
+  Email?: string
   /**
-   * 手机号
+   * 安全手机号。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Phone: string
+  Phone?: string
   /**
-   * 绑定状态    未绑定：Unbound，待激活：Valid，绑定成功：Success，绑定失败：Failed
+   * 绑定状态。    未绑定：Unbound，待激活：Valid，绑定成功：Success，绑定失败：Failed
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  BindStatus: string
+  BindStatus?: string
   /**
-   * 绑定时间
+   * 绑定时间。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  BindTime: string
+  BindTime?: string
   /**
-   * 失败说明
+   * 失败说明。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Description: string
+  Description?: string
   /**
-   * 安全手机绑定状态  未绑定：0，已绑定：1
+   * 安全手机绑定状态 。 未绑定：0，已绑定：1
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  PhoneBind: number
+  PhoneBind?: number
   /**
-   * 国际区号
+   * 国际区号。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CountryCode: string
+  CountryCode?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -872,7 +872,7 @@ export interface DescribeOrganizationMemberEmailBindResponse {
  */
 export interface DeleteOrganizationNodesRequest {
   /**
-   * 节点ID列表。
+   * 节点ID列表。可以通过[DescribeOrganizationNodes](https://cloud.tencent.com/document/product/850/82926)获取
    */
   NodeId: Array<number | bigint>
 }
@@ -916,19 +916,19 @@ export interface IdentityPolicy {
  */
 export interface AddOrganizationMemberEmailRequest {
   /**
-   * 成员Uin
+   * 成员Uin。
    */
   MemberUin: number
   /**
-   * 邮箱地址
+   * 邮箱地址。
    */
   Email: string
   /**
-   * 国际区号
+   * 国际区号。
    */
   CountryCode: string
   /**
-   * 手机号
+   * 手机号。
    */
   Phone: string
 }
@@ -986,7 +986,7 @@ export interface QuitOrganizationRequest {
  */
 export interface AddOrganizationNodeRequest {
   /**
-   * 父节点ID。可以调用DescribeOrganizationNodes获取
+   * 父节点ID。可以通过[DescribeOrganizationNodes](https://cloud.tencent.com/document/product/850/82926)获取
    */
   ParentNodeId: number
   /**
@@ -1026,7 +1026,7 @@ export interface AddShareUnitRequest {
    */
   Name: string
   /**
-   * 共享单元地域。可通过接口DescribeShareAreas获取支持共享的地域。
+   * 共享单元地域。可通过接口[DescribeShareAreas](https://cloud.tencent.com/document/product/850/103050)获取支持共享的地域。
    */
   Area: string
   /**
@@ -1066,11 +1066,11 @@ export interface OrgMemberFinancial {
  */
 export interface DescribeOrganizationAuthNodeRequest {
   /**
-   * 偏移量。
+   * 偏移量。取值是limit的整数倍。默认值 : 0。
    */
   Offset: number
   /**
-   * 限制数目。最大50
+   * 限制数目。取值范围：1~50。默认值：10。
    */
   Limit: number
   /**
@@ -1084,11 +1084,11 @@ export interface DescribeOrganizationAuthNodeRequest {
  */
 export interface DescribeOrganizationMemberAuthAccountsRequest {
   /**
-   * 偏移量。
+   * 偏移量。取值是limit的整数倍。默认值 : 0。
    */
   Offset: number
   /**
-   * 限制数目。
+   * 限制数目。取值范围：1~50。默认值：10。
    */
   Limit: number
   /**
@@ -1096,7 +1096,7 @@ export interface DescribeOrganizationMemberAuthAccountsRequest {
    */
   MemberUin: number
   /**
-   * 策略ID。
+   * 策略ID。可以通过[DescribeOrganizationMemberPolicies](https://cloud.tencent.com/document/product/850/82935)
    */
   PolicyId: number
 }
@@ -1139,12 +1139,12 @@ export interface DescribeOrganizationMemberAuthAccountsResponse {
    * 列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Items: Array<OrgMemberAuthAccount>
+  Items?: Array<OrgMemberAuthAccount>
   /**
    * 总数目
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Total: number
+  Total?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1242,23 +1242,23 @@ export interface DeleteOrganizationMemberAuthIdentityResponse {
  */
 export interface UpdateOrganizationMemberEmailBindRequest {
   /**
-   * 成员Uin
+   * 成员Uin。
    */
   MemberUin: number
   /**
-   * 绑定ID
+   * 绑定ID。可以通过[DescribeOrganizationMemberEmailBind](https://cloud.tencent.com/document/product/850/93332)获取
    */
   BindId: number
   /**
-   * 邮箱
+   * 邮箱地址。
    */
   Email: string
   /**
-   * 国际区号
+   * 国际区号。
    */
   CountryCode: string
   /**
-   * 手机号
+   * 手机号。
    */
   Phone: string
 }
@@ -1286,7 +1286,7 @@ export interface UpdateShareUnitRequest {
  */
 export interface DescribeShareUnitsRequest {
   /**
-   * 共享单元地域。可通过接口DescribeShareAreas获取支持共享的地域。
+   * 共享单元地域。可通过接口[DescribeShareAreas](https://cloud.tencent.com/document/product/850/103050)获取支持共享的地域。
    */
   Area: string
   /**
@@ -1355,7 +1355,7 @@ export interface CreateOrganizationMemberPolicyRequest {
    */
   PolicyName: string
   /**
-   * 成员访问身份ID。可以调用DescribeOrganizationMemberAuthIdentities获取
+   * 成员访问身份ID。可以调用[DescribeOrganizationMemberAuthIdentities](https://cloud.tencent.com/document/product/850/82936)获取
    */
   IdentityId: number
   /**
@@ -1398,7 +1398,7 @@ export interface CreateOrganizationMembersPolicyRequest {
    */
   PolicyName: string
   /**
-   * 成员访问身份ID。
+   * 成员访问身份ID。可以通过[ListOrganizationIdentity](https://cloud.tencent.com/document/product/850/82934)获取
    */
   IdentityId: number
   /**
@@ -1412,7 +1412,7 @@ export interface CreateOrganizationMembersPolicyRequest {
  */
 export interface CheckAccountDeleteRequest {
   /**
-   * 成员uin。
+   * 成员Uin。
    */
   MemberUin: number
 }
@@ -1566,7 +1566,7 @@ export interface CreateOrganizationMemberPolicyResponse {
    * 策略ID。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  PolicyId: number
+  PolicyId?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1767,7 +1767,7 @@ export interface DeleteOrganizationIdentityResponse {
  */
 export interface DescribeOrganizationMemberEmailBindRequest {
   /**
-   * 成员Uin
+   * 成员Uin。
    */
   MemberUin: number
 }
@@ -1880,7 +1880,7 @@ export interface CreateOrganizationMemberRequest {
    */
   PermissionIds: Array<number | bigint>
   /**
-   * 成员所属部门的节点ID。可以调用DescribeOrganizationNodes获取
+   * 成员所属部门的节点ID。可以通过[DescribeOrganizationNodes](https://cloud.tencent.com/document/product/850/82926)获取
    */
   NodeId: number
   /**
@@ -2075,7 +2075,7 @@ export interface CheckAccountDeleteResponse {
  */
 export interface DeleteAccountRequest {
   /**
-   * 成员uin。
+   * 成员Uin。
    */
   MemberUin: number
 }
@@ -2085,11 +2085,11 @@ export interface DeleteAccountRequest {
  */
 export interface CreateOrganizationMemberAuthIdentityRequest {
   /**
-   * 成员uin列表。最多10个
+   * 成员Uin列表。最多10个
    */
   MemberUins: Array<number | bigint>
   /**
-   * 身份Id列表。最多5个
+   * 身份Id列表。最多5个，可以通过[ListOrganizationIdentity](https://cloud.tencent.com/document/product/850/82934)获取
    */
   IdentityIds: Array<number | bigint>
 }
@@ -2204,12 +2204,12 @@ export interface DescribeOrganizationNodesResponse {
    * 总数。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Total: number
+  Total?: number
   /**
    * 列表详情。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Items: Array<OrgNode>
+  Items?: Array<OrgNode>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2221,7 +2221,7 @@ export interface DescribeOrganizationNodesResponse {
  */
 export interface DeleteOrganizationMembersPolicyRequest {
   /**
-   * 访问策略ID。
+   * 访问策略ID。可以通过[DescribeOrganizationMemberPolicies](https://cloud.tencent.com/document/product/850/82935)获取
    */
   PolicyId: number
 }
@@ -2231,7 +2231,7 @@ export interface DeleteOrganizationMembersPolicyRequest {
  */
 export interface DeleteOrganizationIdentityRequest {
   /**
-   * 身份ID
+   * 身份ID。可以通过[ListOrganizationIdentity](https://cloud.tencent.com/document/product/850/82934)获取
    */
   IdentityId: number
 }
@@ -2314,12 +2314,12 @@ export interface DescribeOrganizationMemberPoliciesResponse {
    * 列表。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Items: Array<OrgMemberPolicy>
+  Items?: Array<OrgMemberPolicy>
   /**
    * 总数目。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Total: number
+  Total?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2331,11 +2331,11 @@ export interface DescribeOrganizationMemberPoliciesResponse {
  */
 export interface DeleteOrganizationMemberAuthIdentityRequest {
   /**
-   * 成员uin。
+   * 成员Uin。
    */
   MemberUin: number
   /**
-   * 身份Id。
+   * 身份ID。可以通过[ListOrganizationIdentity](https://cloud.tencent.com/document/product/850/82934)获取
    */
   IdentityId: number
 }

@@ -18,12 +18,14 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
-  StopPublishStreamResponse,
+  StartPublishStreamToCSSResponse,
   StopGameRequest,
   SaveGameArchiveResponse,
   StopPublishStreamRequest,
-  SwitchGameArchiveRequest,
+  StopPublishStreamResponse,
   TrylockWorkerResponse,
+  SwitchGameArchiveRequest,
+  StartPublishStreamToCSSRequest,
   DescribeInstancesCountResponse,
   StartPublishStreamResponse,
   CreateSessionRequest,
@@ -83,6 +85,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: SaveGameArchiveResponse) => void
   ): Promise<SaveGameArchiveResponse> {
     return this.request("SaveGameArchive", req, cb)
+  }
+
+  /**
+   * 开始云端推流
+   */
+  async StartPublishStreamToCSS(
+    req: StartPublishStreamToCSSRequest,
+    cb?: (error: string, rep: StartPublishStreamToCSSResponse) => void
+  ): Promise<StartPublishStreamToCSSResponse> {
+    return this.request("StartPublishStreamToCSS", req, cb)
   }
 
   /**

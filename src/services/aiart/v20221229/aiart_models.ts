@@ -181,8 +181,7 @@ export interface LogoRect {
 export interface QueryTextToImageProJobResponse {
   /**
    * 当前任务状态码：
-1：排队中、3：处理中、5：处理失败、7：处理完成。
-
+1：等待中、2：运行中、4：处理失败、5：处理完成。
    */
   JobStatusCode?: string
   /**

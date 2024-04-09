@@ -159,13 +159,17 @@ HYBRID_PAID:
    */
   ServiceCategory?: string
   /**
-   * 服务的启动命令
+   * 服务的启动命令，如遇特殊字符导致配置失败，可使用CommandBase64参数
    */
   Command?: string
   /**
    * 是否开启TIONE内网访问外部，此功能仅支持后付费机型与从TIONE平台购买的预付费机型；使用从CVM选择资源组时此配置不生效。
    */
   ServiceEIP?: ServiceEIP
+  /**
+   * 服务的启动命令，以base64格式进行输入
+   */
+  CommandBase64?: string
 }
 
 /**
@@ -1800,6 +1804,7 @@ export interface CreateBatchTaskRequest {
   CodePackage?: CosPathInfo
   /**
    * 启动命令
+   * @deprecated
    */
   StartCmd?: string
   /**
@@ -1826,6 +1831,10 @@ export interface CreateBatchTaskRequest {
    * 任务执行结果回调URL，仅支持http和https。回调格式&内容详见: [TI-ONE 接口回调说明](https://cloud.tencent.com/document/product/851/84292)
    */
   CallbackUrl?: string
+  /**
+   * 以Base64方式编码的启动命令。假设启动命令是/app/run.sh，则此处输入参数应该为L2FwcC9ydW4uc2g=。
+   */
+  StartCmdBase64?: string
 }
 
 /**
@@ -2430,13 +2439,17 @@ HYBRID_PAID:
    */
   ModelTurboEnable?: boolean
   /**
-   * 服务的启动命令
+   * 服务的启动命令，如遇特殊字符导致配置失败，可使用CommandBase64参数
    */
   Command?: string
   /**
    * 是否开启TIONE内网访问外部，此功能仅支持后付费机型与从TIONE平台购买的预付费机型；使用从CVM选择资源组时此配置不生效。
    */
   ServiceEIP?: ServiceEIP
+  /**
+   * 服务的启动命令，以base64格式进行输入
+   */
+  CommandBase64?: string
 }
 
 /**

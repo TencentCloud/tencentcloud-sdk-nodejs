@@ -353,6 +353,7 @@ import {
   DescribeBackupMigrationResponse,
   RestoreTask,
   DescribeUploadBackupInfoResponse,
+  OldVip,
   StartMigrationCheckRequest,
   DescribeBackupCommandRequest,
   CrossSummaryDetailRes,
