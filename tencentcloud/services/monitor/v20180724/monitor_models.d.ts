@@ -423,23 +423,6 @@ export interface PrometheusTempModify {
     AlertDetailRules?: Array<PrometheusAlertPolicyItem>;
 }
 /**
- * SendCustomAlarmMsg请求参数结构体
- */
-export interface SendCustomAlarmMsgRequest {
-    /**
-     * 接口模块名，当前取值monitor
-     */
-    Module: string;
-    /**
-     * 消息策略ID，在自定义消息页面配置
-     */
-    PolicyId: string;
-    /**
-     * 用户想要发送的自定义消息内容
-     */
-    Msg: string;
-}
-/**
  * UnBindingPolicyObject请求参数结构体
  */
 export interface UnBindingPolicyObjectRequest {
@@ -2553,15 +2536,6 @@ export interface UnBindingAllPolicyObjectRequest {
      * 是否配置了事件告警
      */
     EbEventFlag?: number;
-}
-/**
- * SendCustomAlarmMsg返回参数结构体
- */
-export interface SendCustomAlarmMsgResponse {
-    /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-     */
-    RequestId?: string;
 }
 /**
  * 告警策略指标触发条件

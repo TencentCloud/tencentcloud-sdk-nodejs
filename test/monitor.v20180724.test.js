@@ -778,16 +778,6 @@ it("monitor.v20180724.CreateSSOAccount", async function () {
     }
 })
 
-it("monitor.v20180724.SendCustomAlarmMsg", async function () {
-    try {
-       const data = await client.SendCustomAlarmMsg({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("monitor.v20180724.ModifyAlarmPolicyNotice", async function () {
     try {
        const data = await client.ModifyAlarmPolicyNotice({})

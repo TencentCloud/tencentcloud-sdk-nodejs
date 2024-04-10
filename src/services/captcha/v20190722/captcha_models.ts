@@ -82,17 +82,17 @@ export interface DescribeCaptchaMiniOperDataResponse {
   /**
    * 成功返回 0 其它失败
    */
-  CaptchaCode: number
+  CaptchaCode?: number
   /**
    * 返回信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CaptchaMsg: string
+  CaptchaMsg?: string
   /**
    * 用户操作数据
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Data: CaptchaOperDataRes
+  Data?: CaptchaOperDataRes
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -460,15 +460,15 @@ export interface GetTotalTicketStatisticsResponse {
    * 返回数据
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Data: CaptchaStatisticObj
+  Data?: CaptchaStatisticObj
   /**
    * 返回码
    */
-  CaptchaCode: number
+  CaptchaCode?: number
   /**
    * 返回信息
    */
-  CaptchaMsg: string
+  CaptchaMsg?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -504,17 +504,17 @@ export interface DescribeCaptchaMiniDataResponse {
   /**
    * 返回码 0 成功 其它失败
    */
-  CaptchaCode: number
+  CaptchaCode?: number
   /**
    * 数据数组
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Data: Array<CaptchaQueryData>
+  Data?: Array<CaptchaQueryData>
   /**
    * 返回信息描述
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CaptchaMsg: string
+  CaptchaMsg?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1437,17 +1437,17 @@ export interface DescribeCaptchaTicketDataResponse {
   /**
    * 成功返回 0 其它失败
    */
-  CaptchaCode: number
+  CaptchaCode?: number
   /**
    * 返回信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CaptchaMsg: string
+  CaptchaMsg?: string
   /**
    * 验证码票据信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Data: CaptchaTicketDataRes
+  Data?: CaptchaTicketDataRes
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

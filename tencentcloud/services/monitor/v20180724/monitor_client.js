@@ -495,12 +495,6 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateSSOAccount", req, cb);
     }
     /**
-     * 发送自定义消息告警
-     */
-    async SendCustomAlarmMsg(req, cb) {
-        return this.request("SendCustomAlarmMsg", req, cb);
-    }
-    /**
      * 修改告警策略绑定的告警通知模板
      */
     async ModifyAlarmPolicyNotice(req, cb) {

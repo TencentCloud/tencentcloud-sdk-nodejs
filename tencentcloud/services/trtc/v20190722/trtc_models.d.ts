@@ -834,7 +834,15 @@ export interface DescribeWebRecordRequest {
     /**
      * 开始页面录制时返回的任务id
      */
-    TaskId: string;
+    TaskId?: string;
+    /**
+     * 发起页面录制时传递的SdkAppId
+     */
+    SdkAppId?: number;
+    /**
+     * 发起录制时传递的RecordId, 传入此值时需要传递SdkAppId
+     */
+    RecordId?: string;
 }
 /**
  * DescribeTRTCRealTimeScaleData返回参数结构体
@@ -1257,11 +1265,11 @@ export interface DescribeRoomInfoResponse {
     /**
      * 返回当页数据总数
      */
-    Total: number;
+    Total?: number;
     /**
      * 房间信息列表
      */
-    RoomList: Array<RoomState>;
+    RoomList?: Array<RoomState>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1400,12 +1408,12 @@ export interface DescribeUserInfoResponse {
     /**
      * 返回的用户总条数
      */
-    Total: number;
+    Total?: number;
     /**
      * 用户信息列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    UserList: Array<UserInformation>;
+    UserList?: Array<UserInformation>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -2883,7 +2891,7 @@ export interface StartWebRecordRequest {
      */
     RecordUrl: string;
     /**
-     * 录制最大时长限制， 单位 s, 合法取值范围[0, 36000], 默认 36000s(10 小时)
+     * 录制最大时长限制， 单位 s, 合法取值范围[1800, 36000], 默认 36000s(10 小时)
   
      */
     MaxDurationLimit?: number;

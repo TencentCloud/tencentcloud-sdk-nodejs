@@ -37,7 +37,6 @@ import {
   CreatePrometheusMultiTenantInstancePostPayModeRequest,
   DescribePolicyConditionListResponseDeprecatingInfo,
   PrometheusTempModify,
-  SendCustomAlarmMsgRequest,
   UnBindingPolicyObjectRequest,
   CommonNamespaceNew,
   Tag,
@@ -129,7 +128,6 @@ import {
   UpdateGrafanaNotificationChannelResponse,
   CreateExporterIntegrationResponse,
   UnBindingAllPolicyObjectRequest,
-  SendCustomAlarmMsgResponse,
   AlarmPolicyCondition,
   ModifyPolicyGroupCondition,
   NoticeBindPolicys,
@@ -1246,16 +1244,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateSSOAccountResponse) => void
   ): Promise<CreateSSOAccountResponse> {
     return this.request("CreateSSOAccount", req, cb)
-  }
-
-  /**
-   * 发送自定义消息告警
-   */
-  async SendCustomAlarmMsg(
-    req: SendCustomAlarmMsgRequest,
-    cb?: (error: string, rep: SendCustomAlarmMsgResponse) => void
-  ): Promise<SendCustomAlarmMsgResponse> {
-    return this.request("SendCustomAlarmMsg", req, cb)
   }
 
   /**

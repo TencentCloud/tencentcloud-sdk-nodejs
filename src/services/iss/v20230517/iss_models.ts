@@ -899,6 +899,14 @@ export interface UpdateUserDeviceRequest {
    * 网关设备接入协议（仅网关接入支持）
    */
   ProtocolType?: number
+  /**
+   * 音频关开（0：关闭；1：开启）默认开启，关闭时丢弃音频
+   */
+  AudioSwitch?: number
+  /**
+   * 订阅开关（0：关闭；1：开启）默认开启，开启状态下会订阅设备通道变化，仅国标NVR设备有效
+   */
+  SubscribeSwitch?: number
 }
 
 /**
@@ -2871,6 +2879,16 @@ export interface DescribeDeviceData {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Manufacturer?: string
+  /**
+   * 音频关开（0：关闭；1：开启）关闭时丢弃音频	
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AudioSwitch?: number
+  /**
+   * 订阅开关（0：关闭；1：开启）默认开启，开启状态下会订阅设备通道变化，仅国标NVR设备有效	
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SubscribeSwitch?: number
 }
 
 /**

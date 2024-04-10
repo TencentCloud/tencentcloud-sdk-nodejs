@@ -4220,10 +4220,12 @@ export interface AddNewBindRoleUserResponse {
 export interface WhereFilter {
   /**
    * 过滤的项
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Name: string
   /**
    * 过滤的值
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Values: Array<string>
   /**
@@ -4231,6 +4233,7 @@ export interface WhereFilter {
 1等于 2大于 3小于 4大于等于 5小于等于 6不等于 9模糊匹配 13非模糊匹配 14按位与
 精确匹配填 7 模糊匹配填9 
 
+注意：此字段可能返回 null，表示取不到有效值。
    */
   OperatorType?: number
 }
