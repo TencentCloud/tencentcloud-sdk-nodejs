@@ -4575,7 +4575,7 @@ export interface CreateTrainingTaskRequest {
      */
     CodePackagePath?: CosPathInfo;
     /**
-     * 启动命令信息，默认为sh start.sh
+     * 任务的启动命令，按任务训练模式输入，如遇特殊字符导致配置失败，可使用EncodedStartCmdInfo参数
      */
     StartCmdInfo?: StartCmdInfo;
     /**
@@ -4626,6 +4626,10 @@ export interface CreateTrainingTaskRequest {
      * 太极预训练模型ID
      */
     PreTrainModel?: PreTrainModel;
+    /**
+     * 编码后的任务启动命令，与StartCmdInfo同时配置时，仅当前参数生效
+     */
+    EncodedStartCmdInfo?: EncodedStartCmdInfo;
 }
 /**
  * 对话输入内容
@@ -6795,6 +6799,15 @@ export interface DescribeLogsResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * 编码后的启动命令信息
+ */
+export interface EncodedStartCmdInfo {
+    /**
+     * 任务的启动命令，以base64格式输入，注意转换时需要完整输入{"StartCmd":"","PsStartCmd":"","WorkerStartCmd":""}
+     */
+    StartCmdInfo?: string;
 }
 /**
  * CreateOptimizedModel请求参数结构体

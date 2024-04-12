@@ -63,13 +63,11 @@ import {
   InstanceOpsInfoPage,
   DeleteBaselineRequest,
   DescribeRulesResponse,
-  InLongAgentTask,
+  WorkFlowExecuteDto,
   RuleGroupPage,
   RecordsSpeed,
   ColumnLineageInfo,
-  InLongAgentDetail,
   CreateWorkflowRequest,
-  FindAllFolderRequest,
   DlcMergeManifestsInfo,
   DescribeTableMetasRequest,
   RuleExecResultDetail,
@@ -98,25 +96,22 @@ import {
   DescribeFunctionKindsRequest,
   DescribeFunctionKindsResponse,
   SaveCustomFunctionResponse,
-  UpdateInLongAgentResponse,
   DescribeTemplateDimCountRequest,
   ModifyIntegrationTaskResponse,
   DescribeDataSourceListRequest,
   DescribeInstanceByCycleResponse,
   BatchCreateTaskVersionDsDTOLite,
   DescribeIntegrationStatisticsRecordsTrendRequest,
-  DescribeInLongTkeClusterListResponse,
   DescribeOperateTasksRequest,
   DescribeDataCheckStatRequest,
   RegisterEventListenerResponse,
   SubscribeWebHook,
-  RestartInLongAgentResponse,
   GetOfflineInstanceListRequest,
   ModifyAlarmRuleRequest,
   InstanceLifeDetailDto,
   Workflow,
   DescribeRuleExecResultsRequest,
-  DescribeStandardRuleDetailInfoListResponse,
+  InstanceDownloadLogInfo,
   EventCaseDTO,
   DescribeDrSonInstanceResponse,
   InstanceOpsDto,
@@ -128,8 +123,6 @@ import {
   StageCloudApiRequest,
   DescribeDependOpsTasksRequest,
   ColumnBasicInfo,
-  DescribeClusterNamespaceListResponse,
-  CreateInLongAgentResponse,
   RuleGroupTable,
   DescribeInstanceLogRequest,
   DescribeRuleGroupSubscriptionResponse,
@@ -137,7 +130,7 @@ import {
   DeleteResourceFileRequest,
   SaveCustomFunctionRequest,
   DescribeSchedulerTaskTypeCntRequest,
-  InLongTkeDetail,
+  MakePlanTaskOpsDto,
   RuleGroupExecStrategy,
   ModifyWorkflowScheduleRequest,
   CreateDsFolderRequest,
@@ -158,7 +151,6 @@ import {
   BatchRerunIntegrationTaskInstancesRequest,
   ParameterTaskInDsDto,
   DescribeDrSonInstanceRequest,
-  TableLineageInfo,
   DescribeWorkflowTaskCountResponse,
   RuleTemplateHistoryPage,
   AlarmRuleDto,
@@ -189,7 +181,7 @@ import {
   ForceSucScheduleInstancesResponse,
   CollectionInstanceOpsDto,
   DescribeIntegrationTasksRequest,
-  RuleExecDateStat,
+  TableLineageInfo,
   DescribeTaskInstanceResponse,
   DescribeSchedulerInstanceStatusResponse,
   CountOpsInstanceStateRequest,
@@ -213,7 +205,7 @@ import {
   DescribeTaskReportDetailListResponse,
   DescribeBaselineInstanceDagRequest,
   DescribeIntegrationStatisticsInstanceTrendResponse,
-  BatchReturn,
+  DescribeInstanceLogListRequest,
   RerunOpsMakePlanInstancesResponse,
   DescribeTableMetaRequest,
   RunnerRuleExecResult,
@@ -236,7 +228,6 @@ import {
   OpsTaskCanvasInfoList,
   DescribeDependTaskListsRequest,
   DatabaseMeta,
-  DlcRemoveOrphanFilesInfo,
   DescribeEventsRequest,
   DescribeAllByFolderNewRequest,
   DescribeTaskRunHistoryResponse,
@@ -271,7 +262,7 @@ import {
   CreateTaskAlarmRegularRequest,
   ModifyRuleRequest,
   DescribeTableMetasResponse,
-  DescribeInstanceLogListRequest,
+  BatchReturn,
   DescribeDiagnosticInfoResponse,
   AlarmDsVO,
   DependencyConfigDsDTONoRecurV2,
@@ -279,7 +270,6 @@ import {
   MakeUpOpsTasksResponse,
   ResourcePathTree,
   StopBaselineRequest,
-  DescribeInLongAgentListRequest,
   DescribeRuleExecLogResponse,
   DescribeDependOpsTaskListRequest,
   ParamInfo,
@@ -315,7 +305,6 @@ import {
   SubmitBaselineResponse,
   PairDto,
   DeleteTaskDsResponse,
-  Namespace,
   DescribeAllByFolderNewResponse,
   DescribeDsParentFolderTreeRequest,
   KillScheduleInstancesResponse,
@@ -335,7 +324,6 @@ import {
   DescribeSonInstancesRequest,
   DescribeBaselinesResponse,
   DescribeTaskInstancesData,
-  DescribeIntegrationStatisticsAgentStatusRequest,
   SqlExpressionTable,
   MakePlanInstanceOpsDtoCollection,
   OrderFieldOptional,
@@ -357,13 +345,11 @@ import {
   BatchForceSuccessIntegrationTaskInstancesResponse,
   BaselineTaskInfo,
   InstanceLifeCycleOpsDto,
-  DescribeClusterNamespaceListRequest,
   AlarmReceiverInfo,
   GeneralTaskParam,
   CandidateDsDTo,
   DescribeTableBasicInfoResponse,
   DescribeDiagnosticInfoByBaselineIdResponse,
-  CompareRuleItem,
   ModifyRuleTemplateRequest,
   DescribeRuleExecStatResponse,
   DescribeInstanceLogFileRequest,
@@ -431,8 +417,8 @@ import {
   MakePlanTaskOpsDtoCollection,
   SimpleColumnInfo,
   LinkOpsDto,
-  DescribeOpsMakePlanTasksResponse,
-  DescribeInLongAgentListResponse,
+  TaskTypeDsVO,
+  InstanceReportReadNode,
   Folder,
   CreateTaskResponse,
   TableQualityDetail,
@@ -443,7 +429,6 @@ import {
   CommitRuleGroupExecResultRequest,
   DescribeDataSourceInfoListRequest,
   DescribeTaskInstancesRequest,
-  UpdateInLongAgentRequest,
   DescribeRuleGroupExecResultsByPageWithoutAuthResponse,
   DescribeIntegrationNodeRequest,
   DescribeOperateOpsTaskDatasourceResponse,
@@ -458,11 +443,10 @@ import {
   RecordField,
   RunForceSucScheduleInstancesRequest,
   DescribeQualityScoreResponse,
-  DeleteInLongAgentRequest,
+  DescribeRulesByPageResponse,
   DescribeDsParentFolderTreeResponse,
   DescribeRuleTablesByPageRequest,
   TopTableStatItem,
-  DescribeIntegrationStatisticsAgentStatusResponse,
   DescribeEventConsumeTasksRequest,
   DescribeDataSourceInfoListResponse,
   InstanceStatisticInfo,
@@ -477,7 +461,7 @@ import {
   DescribeDimensionScoreResponse,
   ScriptRequestInfo,
   DescribeOrganizationalFunctionsResponse,
-  CollectionFolderOpsDto,
+  DescribeInstancesInfoWithTaskInfoRequest,
   DescribeEventDetailRequest,
   FreezeTasksByWorkflowIdsRequest,
   DescribeDataTypesResponse,
@@ -528,7 +512,6 @@ import {
   DeleteOfflineTaskRequest,
   SubmitTaskRequest,
   WeightInfo,
-  DescribeInLongAgentVpcListRequest,
   RuleExecExportResult,
   DescribeDatabaseInfoListResponse,
   ModifyDsFolderResponse,
@@ -540,14 +523,13 @@ import {
   InstanceLog,
   DescribeTemplateDimCountResponse,
   DescribeFunctionTypesRequest,
-  RestartInLongAgentRequest,
   BatchDeleteTasksNewRequest,
   DimensionCount,
   AttributeItemDTO,
   DescribeInstanceLogResponse,
   DiagnosePlusRequest,
   ApproveModify,
-  DeleteInLongAgentResponse,
+  DescribeOpsMakePlanTasksResponse,
   InstanceLogList,
   ModifyMonitorStatusRequest,
   DescribeColumnLineageResponse,
@@ -632,9 +614,7 @@ import {
   FunctionResource,
   DescribeInstanceByCycleReportRequest,
   DescribeTableQualityDetailsResponse,
-  DescribeStandardRuleDetailInfoListRequest,
   DescribeDataSourceWithoutInfoResponse,
-  WorkFlowExecuteDto,
   CommonIdOpsDto,
   BatchStopWorkflowsByIdsResponse,
   DescribeDependOpsTaskListResponse,
@@ -660,9 +640,8 @@ import {
   DescribeRuleTablesByPageResponse,
   SpeedValue,
   FunctionVersion,
-  InstanceDownloadLogInfo,
   DescribeSonInstancesResponse,
-  InstanceReportReadNode,
+  RuleExecDateStat,
   DescribeThirdTaskRunLogResponse,
   DescribeTaskAlarmRegulationsRequest,
   DescribeRuleExecHistoryRequest,
@@ -689,7 +668,7 @@ import {
   DescribeFathersRequest,
   DeleteTaskAlarmRegularRequest,
   CompareRule,
-  CreateInLongAgentRequest,
+  CompareRuleItem,
   DescribeApproveTypeListRequest,
   UnlockIntegrationTaskRequest,
   DeleteOfflineTaskResponse,
@@ -800,7 +779,6 @@ import {
   DlcExpiredSnapshotsInfo,
   DescribeWorkflowCanvasInfoResponse,
   DependencyConfig,
-  DescribeRulesByPageResponse,
   Partition,
   AttributeItemDsVO,
   RuleDimCnt,
@@ -808,7 +786,7 @@ import {
   BatchOperateResult,
   ModifyTaskScriptResponse,
   DescribeDimensionScoreRequest,
-  CvmAgentStatus,
+  FindAllFolderRequest,
   FolderDsDto,
   BatchStartIntegrationTasksResponse,
   DescribeIntegrationVersionNodesInfoRequest,
@@ -824,7 +802,7 @@ import {
   DescribeSchedulerRunTimeInstanceCntByStatusRequest,
   StrToStrMap,
   WorkflowCanvasOpsDto,
-  DescribeInLongAgentTaskListResponse,
+  DlcRemoveOrphanFilesInfo,
   LockIntegrationTaskRequest,
   TaskInfoPage,
   BatchStopIntegrationTasksRequest,
@@ -847,9 +825,7 @@ import {
   DailyScoreInfo,
   DescribeTemplateHistoryResponse,
   DescribeWorkflowOpsCanvasInfoResponse,
-  MakePlanTaskOpsDto,
   RuleTemplateHistory,
-  DescribeInLongAgentVpcListResponse,
   DescribeDependOpsTasksResponse,
   DeleteRuleTemplateResponse,
   DescribeRuleTemplateRequest,
@@ -877,7 +853,6 @@ import {
   DescribeAllUsedVersionSonRequest,
   DescribeOpsMakePlanInstancesResponse,
   DescribeDatabaseInfoListRequest,
-  DescribeInLongTkeClusterListRequest,
   DescribeRuleExecHistoryResponse,
   DescribeIntegrationTaskResponse,
   ModifyBaselineAlarmStatusResponse,
@@ -912,9 +887,8 @@ import {
   DescribeBaselineResponse,
   DescribeTopTableStatRequest,
   BatchCreateIntegrationTaskAlarmsResponse,
-  DescribeInstancesInfoWithTaskInfoRequest,
+  CollectionFolderOpsDto,
   BatchStopTasksNewRequest,
-  DescribeInLongAgentTaskListRequest,
   ModifyTaskNameRequest,
   DescribeTrendStatRequest,
   DescribeEventTypesRequest,
@@ -925,7 +899,6 @@ import {
   DescribeBaselineInstanceGanttRequest,
   OrganizationalFunction,
   OrderField,
-  TaskTypeDsVO,
   BatchSuspendIntegrationTasksResponse,
   DeleteProjectUsersRequest,
   DescribeWorkflowExecuteByIdRequest,
@@ -1130,16 +1103,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取采集器所在集群的VPC列表
-   */
-  async DescribeInLongAgentVpcList(
-    req: DescribeInLongAgentVpcListRequest,
-    cb?: (error: string, rep: DescribeInLongAgentVpcListResponse) => void
-  ): Promise<DescribeInLongAgentVpcListResponse> {
-    return this.request("DescribeInLongAgentVpcList", req, cb)
-  }
-
-  /**
    * 查询运维画布信息，只需要获取边和节点
    */
   async DescribeWorkflowOpsCanvasInfo(
@@ -1188,16 +1151,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateHiveTableResponse) => void
   ): Promise<CreateHiveTableResponse> {
     return this.request("CreateHiveTable", req, cb)
-  }
-
-  /**
-   * 获取集群命名空间列表
-   */
-  async DescribeClusterNamespaceList(
-    req: DescribeClusterNamespaceListRequest,
-    cb?: (error: string, rep: DescribeClusterNamespaceListResponse) => void
-  ): Promise<DescribeClusterNamespaceListResponse> {
-    return this.request("DescribeClusterNamespaceList", req, cb)
   }
 
   /**
@@ -1344,16 +1297,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 数据集成大屏采集器状态分布统计
-   */
-  async DescribeIntegrationStatisticsAgentStatus(
-    req: DescribeIntegrationStatisticsAgentStatusRequest,
-    cb?: (error: string, rep: DescribeIntegrationStatisticsAgentStatusResponse) => void
-  ): Promise<DescribeIntegrationStatisticsAgentStatusResponse> {
-    return this.request("DescribeIntegrationStatisticsAgentStatus", req, cb)
-  }
-
-  /**
    * 提交基线
    */
   async StopBaseline(
@@ -1484,17 +1427,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeOpsInstanceLogListResponse) => void
   ): Promise<DescribeOpsInstanceLogListResponse> {
     return this.request("DescribeOpsInstanceLogList", req, cb)
-  }
-
-  /**
-     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
-设置任务告警，新建/更新告警信息（最新）
-     */
-  async SetTaskAlarmNew(
-    req: SetTaskAlarmNewRequest,
-    cb?: (error: string, rep: SetTaskAlarmNewResponse) => void
-  ): Promise<SetTaskAlarmNewResponse> {
-    return this.request("SetTaskAlarmNew", req, cb)
   }
 
   /**
@@ -1678,13 +1610,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除采集器
+   * 解锁集成任务
    */
-  async DeleteInLongAgent(
-    req: DeleteInLongAgentRequest,
-    cb?: (error: string, rep: DeleteInLongAgentResponse) => void
-  ): Promise<DeleteInLongAgentResponse> {
-    return this.request("DeleteInLongAgent", req, cb)
+  async UnlockIntegrationTask(
+    req: UnlockIntegrationTaskRequest,
+    cb?: (error: string, rep: UnlockIntegrationTaskResponse) => void
+  ): Promise<UnlockIntegrationTaskResponse> {
+    return this.request("UnlockIntegrationTask", req, cb)
   }
 
   /**
@@ -2103,16 +2035,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 注册采集器
-   */
-  async CreateInLongAgent(
-    req: CreateInLongAgentRequest,
-    cb?: (error: string, rep: CreateInLongAgentResponse) => void
-  ): Promise<CreateInLongAgentResponse> {
-    return this.request("CreateInLongAgent", req, cb)
-  }
-
-  /**
      * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
 运行任务
      */
@@ -2131,16 +2053,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: GetOfflineInstanceListResponse) => void
   ): Promise<GetOfflineInstanceListResponse> {
     return this.request("GetOfflineInstanceList", req, cb)
-  }
-
-  /**
-   * 更新采集器
-   */
-  async UpdateInLongAgent(
-    req: UpdateInLongAgentRequest,
-    cb?: (error: string, rep: UpdateInLongAgentResponse) => void
-  ): Promise<UpdateInLongAgentResponse> {
-    return this.request("UpdateInLongAgent", req, cb)
   }
 
   /**
@@ -2235,16 +2147,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeTaskReportDetailListResponse) => void
   ): Promise<DescribeTaskReportDetailListResponse> {
     return this.request("DescribeTaskReportDetailList", req, cb)
-  }
-
-  /**
-   * 解锁集成任务
-   */
-  async UnlockIntegrationTask(
-    req: UnlockIntegrationTaskRequest,
-    cb?: (error: string, rep: UnlockIntegrationTaskResponse) => void
-  ): Promise<UnlockIntegrationTaskResponse> {
-    return this.request("UnlockIntegrationTask", req, cb)
   }
 
   /**
@@ -2680,17 +2582,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
-修改数据源
-     */
-  async ModifyDataSource(
-    req: ModifyDataSourceRequest,
-    cb?: (error: string, rep: ModifyDataSourceResponse) => void
-  ): Promise<ModifyDataSourceResponse> {
-    return this.request("ModifyDataSource", req, cb)
-  }
-
-  /**
    * 编辑规则模板
    */
   async ModifyRuleTemplate(
@@ -2959,16 +2850,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 提交自定义函数
-   */
-  async SubmitCustomFunction(
-    req: SubmitCustomFunctionRequest,
-    cb?: (error: string, rep: SubmitCustomFunctionResponse) => void
-  ): Promise<SubmitCustomFunctionResponse> {
-    return this.request("SubmitCustomFunction", req, cb)
-  }
-
-  /**
    * 获取关联父实例
    */
   async DescribeFathers(
@@ -3030,13 +2911,14 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取数据标准规则详情
-   */
-  async DescribeStandardRuleDetailInfoList(
-    req: DescribeStandardRuleDetailInfoListRequest,
-    cb?: (error: string, rep: DescribeStandardRuleDetailInfoListResponse) => void
-  ): Promise<DescribeStandardRuleDetailInfoListResponse> {
-    return this.request("DescribeStandardRuleDetailInfoList", req, cb)
+     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
+更新工作流
+     */
+  async ModifyWorkflowInfo(
+    req: ModifyWorkflowInfoRequest,
+    cb?: (error: string, rep: ModifyWorkflowInfoResponse) => void
+  ): Promise<ModifyWorkflowInfoResponse> {
+    return this.request("ModifyWorkflowInfo", req, cb)
   }
 
   /**
@@ -3161,17 +3043,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeIntegrationStatisticsTaskStatusTrendResponse) => void
   ): Promise<DescribeIntegrationStatisticsTaskStatusTrendResponse> {
     return this.request("DescribeIntegrationStatisticsTaskStatusTrend", req, cb)
-  }
-
-  /**
-     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
-获取实例日志列表
-     */
-  async DescribeInstanceLogs(
-    req: DescribeInstanceLogsRequest,
-    cb?: (error: string, rep: DescribeInstanceLogsResponse) => void
-  ): Promise<DescribeInstanceLogsResponse> {
-    return this.request("DescribeInstanceLogs", req, cb)
   }
 
   /**
@@ -3537,13 +3408,14 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取TKE集群列表
-   */
-  async DescribeInLongTkeClusterList(
-    req: DescribeInLongTkeClusterListRequest,
-    cb?: (error: string, rep: DescribeInLongTkeClusterListResponse) => void
-  ): Promise<DescribeInLongTkeClusterListResponse> {
-    return this.request("DescribeInLongTkeClusterList", req, cb)
+     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
+修改数据源
+     */
+  async ModifyDataSource(
+    req: ModifyDataSourceRequest,
+    cb?: (error: string, rep: ModifyDataSourceResponse) => void
+  ): Promise<ModifyDataSourceResponse> {
+    return this.request("ModifyDataSource", req, cb)
   }
 
   /**
@@ -3719,13 +3591,14 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取采集器列表
-   */
-  async DescribeInLongAgentList(
-    req: DescribeInLongAgentListRequest,
-    cb?: (error: string, rep: DescribeInLongAgentListResponse) => void
-  ): Promise<DescribeInLongAgentListResponse> {
-    return this.request("DescribeInLongAgentList", req, cb)
+     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
+获取实例日志列表
+     */
+  async DescribeInstanceLogs(
+    req: DescribeInstanceLogsRequest,
+    cb?: (error: string, rep: DescribeInstanceLogsResponse) => void
+  ): Promise<DescribeInstanceLogsResponse> {
+    return this.request("DescribeInstanceLogs", req, cb)
   }
 
   /**
@@ -3750,14 +3623,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
-更新工作流
-     */
-  async ModifyWorkflowInfo(
-    req: ModifyWorkflowInfoRequest,
-    cb?: (error: string, rep: ModifyWorkflowInfoResponse) => void
-  ): Promise<ModifyWorkflowInfoResponse> {
-    return this.request("ModifyWorkflowInfo", req, cb)
+   * 提交自定义函数
+   */
+  async SubmitCustomFunction(
+    req: SubmitCustomFunctionRequest,
+    cb?: (error: string, rep: SubmitCustomFunctionResponse) => void
+  ): Promise<SubmitCustomFunctionResponse> {
+    return this.request("SubmitCustomFunction", req, cb)
   }
 
   /**
@@ -3851,13 +3723,14 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 重启采集器
-   */
-  async RestartInLongAgent(
-    req: RestartInLongAgentRequest,
-    cb?: (error: string, rep: RestartInLongAgentResponse) => void
-  ): Promise<RestartInLongAgentResponse> {
-    return this.request("RestartInLongAgent", req, cb)
+     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
+设置任务告警，新建/更新告警信息（最新）
+     */
+  async SetTaskAlarmNew(
+    req: SetTaskAlarmNewRequest,
+    cb?: (error: string, rep: SetTaskAlarmNewResponse) => void
+  ): Promise<SetTaskAlarmNewResponse> {
+    return this.request("SetTaskAlarmNew", req, cb)
   }
 
   /**
@@ -3928,16 +3801,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeFunctionKindsResponse) => void
   ): Promise<DescribeFunctionKindsResponse> {
     return this.request("DescribeFunctionKinds", req, cb)
-  }
-
-  /**
-   * 查询采集器关联的任务列表
-   */
-  async DescribeInLongAgentTaskList(
-    req: DescribeInLongAgentTaskListRequest,
-    cb?: (error: string, rep: DescribeInLongAgentTaskListResponse) => void
-  ): Promise<DescribeInLongAgentTaskListResponse> {
-    return this.request("DescribeInLongAgentTaskList", req, cb)
   }
 
   /**

@@ -138,11 +138,12 @@ import {
   ReleaseIsolatedDBInstancesRequest,
   BinlogInfo,
   CreateDatabaseResponse,
+  CheckMigrateClusterResponse,
   DescribeErrorLogDataResponse,
   AddTimeWindowRequest,
   ImportRecord,
   DeleteAuditLogFileResponse,
-  Parameter,
+  DescribeSlowLogsResponse,
   SlaveInfo,
   DescribeDBSecurityGroupsRequest,
   DescribeDBSwitchRecordsResponse,
@@ -173,7 +174,7 @@ import {
   StartCpuExpandResponse,
   CreateCloneInstanceResponse,
   DescribeCdbZoneConfigRequest,
-  DeviceCpuInfo,
+  OpenDBInstanceGTIDRequest,
   DescribeAsyncRequestInfoRequest,
   BalanceRoGroupLoadRequest,
   DescribeBackupOverviewResponse,
@@ -188,6 +189,7 @@ import {
   LogToCLSConfig,
   ResetRootAccountRequest,
   DescribeDBInstanceConfigRequest,
+  ClusterNodeInfo,
   ModifyAuditServiceRequest,
   DescribeProxyCustomConfResponse,
   ModifyAuditConfigResponse,
@@ -239,6 +241,7 @@ import {
   ResetRootAccountResponse,
   Account,
   ModifyNameOrDescByDpIdResponse,
+  DescribeClusterInfoRequest,
   DescribeDBPriceResponse,
   AuditLogFilter,
   OpenDBInstanceGTIDResponse,
@@ -333,6 +336,7 @@ import {
   ModifyAuditServiceResponse,
   ModifyInstancePasswordComplexityRequest,
   OpenWanServiceResponse,
+  CheckMigrateClusterRequest,
   DescribeDBInstanceGTIDRequest,
   DescribeBackupEncryptionStatusResponse,
   DescribeCdbProxyInfoResponse,
@@ -388,6 +392,7 @@ import {
   AutoStrategy,
   ModifyAccountMaxUserConnectionsResponse,
   Outbound,
+  DescribeClusterInfoResponse,
   AuditInstanceFilters,
   ParamInfo,
   DescribeBackupDecryptionKeyResponse,
@@ -399,7 +404,7 @@ import {
   DescribeUploadedFilesResponse,
   InitDBInstancesRequest,
   CreateBackupResponse,
-  OpenDBInstanceGTIDRequest,
+  DeviceCpuInfo,
   OpenDBInstanceEncryptionResponse,
   CdbZoneDataResult,
   SqlFileInfo,
@@ -423,7 +428,7 @@ import {
   DescribeSlowLogDataRequest,
   ReleaseIsolatedDBInstancesResponse,
   DeleteAuditLogFileRequest,
-  DescribeSlowLogsResponse,
+  Parameter,
   DeleteTimeWindowRequest,
   SwitchCDBProxyResponse,
   RestartDBInstancesRequest,
@@ -435,6 +440,7 @@ import {
   UpgradeCDBProxyVersionRequest,
   DeleteAuditRuleTemplatesResponse,
   DescribeDeviceMonitorInfoResponse,
+  AddressInfo,
   ModifyAuditRuleTemplatesResponse,
 } from "./cdb_models"
 
@@ -683,6 +689,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeRollbackTaskDetailResponse) => void
   ): Promise<DescribeRollbackTaskDetailResponse> {
     return this.request("DescribeRollbackTaskDetail", req, cb)
+  }
+
+  /**
+   * 高可用实例一键迁移到集群版校验
+   */
+  async CheckMigrateCluster(
+    req?: CheckMigrateClusterRequest,
+    cb?: (error: string, rep: CheckMigrateClusterResponse) => void
+  ): Promise<CheckMigrateClusterResponse> {
+    return this.request("CheckMigrateCluster", req, cb)
   }
 
   /**
@@ -1341,6 +1357,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDBInstanceInfoResponse) => void
   ): Promise<DescribeDBInstanceInfoResponse> {
     return this.request("DescribeDBInstanceInfo", req, cb)
+  }
+
+  /**
+   * 本接口(DescribeClusterInfo)用于查询集群版实例信息。
+   */
+  async DescribeClusterInfo(
+    req: DescribeClusterInfoRequest,
+    cb?: (error: string, rep: DescribeClusterInfoResponse) => void
+  ): Promise<DescribeClusterInfoResponse> {
+    return this.request("DescribeClusterInfo", req, cb)
   }
 
   /**

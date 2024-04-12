@@ -248,6 +248,16 @@ it("cdb.v20170320.DescribeRollbackTaskDetail", async function () {
     }
 })
 
+it("cdb.v20170320.CheckMigrateCluster", async function () {
+    try {
+       const data = await client.CheckMigrateCluster({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cdb.v20170320.ModifyBackupDownloadRestriction", async function () {
     try {
        const data = await client.ModifyBackupDownloadRestriction({})
@@ -871,6 +881,16 @@ it("cdb.v20170320.DeleteAccounts", async function () {
 it("cdb.v20170320.DescribeDBInstanceInfo", async function () {
     try {
        const data = await client.DescribeDBInstanceInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cdb.v20170320.DescribeClusterInfo", async function () {
+    try {
+       const data = await client.DescribeClusterInfo({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

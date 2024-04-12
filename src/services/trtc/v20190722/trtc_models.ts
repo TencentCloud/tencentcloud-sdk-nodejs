@@ -280,6 +280,24 @@ export interface DescribeUserEventRequest {
 }
 
 /**
+ * 混流自定义渲染参数
+ */
+export interface McuBackgroundCustomRender {
+  /**
+   * 自定义渲染画面的宽度，单位为像素值，需大于0，且不能超过子布局的宽。
+   */
+  Width: number
+  /**
+   * 自定义渲染画面的高度，单位为像素值，需大于0，且不能超过子布局的高。
+   */
+  Height: number
+  /**
+   * 自定义渲染画面的圆角半径，单位为像素值，不能超过渲染画面Width和Height最小值的一半，不指定默认为0，表示直角。
+   */
+  Radius?: number
+}
+
+/**
  * 自定义文字水印数据结构
  */
 export interface WaterMarkChar {
@@ -1471,7 +1489,7 @@ export interface McuLayout {
    */
   CustomCrop?: McuCustomCrop
   /**
-   * 子背景图在输出时的显示模式：0为裁剪，1为缩放并显示背景，2为缩放并显示黑底，3为变比例伸缩。不填默认为3。
+   * 子背景图在输出时的显示模式：0为裁剪，1为缩放并显示背景，2为缩放并显示黑底，3为变比例伸缩，4为自定义渲染。不填默认为3。
    */
   BackgroundRenderMode?: number
   /**
@@ -1479,6 +1497,10 @@ export interface McuLayout {
 注：1，模板图片宽高比应接近目标画面宽高比，以避免缩放适配目标画面时出现模板效果变形；2，透明模版只有RenderMode为0（裁剪）时才生效；3，您需要确保图片链接的可访问性，后台单次下载超时时间为10秒，最多重试3次，若最终图片下载失败，透明模版将不会生效。
    */
   TransparentUrl?: string
+  /**
+   * 子背景图的自定义渲染参数，当BackgroundRenderMode为4时必须配置。
+   */
+  BackgroundCustomRender?: McuBackgroundCustomRender
 }
 
 /**

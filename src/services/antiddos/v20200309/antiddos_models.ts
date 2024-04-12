@@ -5464,6 +5464,11 @@ export interface BGPInstance {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   PlanCntFlag?: number
+  /**
+   * 是否为超级高防包
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SuperPackFlag?: number
 }
 
 /**

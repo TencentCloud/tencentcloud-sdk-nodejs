@@ -238,6 +238,7 @@ import {
   CronInfo,
   FrameworkInfo,
   DescribeLogsResponse,
+  EncodedStartCmdInfo,
   CreateOptimizedModelRequest,
   StopNotebookRequest,
   DeleteModelServiceGroupRequest,

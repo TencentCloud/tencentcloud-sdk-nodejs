@@ -1386,21 +1386,21 @@ export interface GetDiagnoseSettingsResponse {
  */
 export interface CreateServerlessInstanceRequest {
   /**
-   * 可用区
-   */
-  Zone: string
-  /**
-   * 私有网络ID
-   */
-  VpcId: string
-  /**
-   * 子网ID
-   */
-  SubnetId: string
-  /**
    * 索引名，需以-AppId结尾
    */
   IndexName: string
+  /**
+   * 可用区
+   */
+  Zone?: string
+  /**
+   * 私有网络ID
+   */
+  VpcId?: string
+  /**
+   * 子网ID
+   */
+  SubnetId?: string
   /**
    * 创建的索引元数据JSON，如mappings、settings
    */

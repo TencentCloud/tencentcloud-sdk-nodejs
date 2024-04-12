@@ -270,6 +270,8 @@ var lighthouse_1 = require("./lighthouse");
 Object.defineProperty(exports, "lighthouse", { enumerable: true, get: function () { return lighthouse_1.lighthouse; } });
 var live_1 = require("./live");
 Object.defineProperty(exports, "live", { enumerable: true, get: function () { return live_1.live; } });
+var lke_1 = require("./lke");
+Object.defineProperty(exports, "lke", { enumerable: true, get: function () { return lke_1.lke; } });
 var lowcode_1 = require("./lowcode");
 Object.defineProperty(exports, "lowcode", { enumerable: true, get: function () { return lowcode_1.lowcode; } });
 var lp_1 = require("./lp");

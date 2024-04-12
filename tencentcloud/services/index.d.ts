@@ -133,6 +133,7 @@ export { kms } from "./kms";
 export { lcic } from "./lcic";
 export { lighthouse } from "./lighthouse";
 export { live } from "./live";
+export { lke } from "./lke";
 export { lowcode } from "./lowcode";
 export { lp } from "./lp";
 export { mall } from "./mall";

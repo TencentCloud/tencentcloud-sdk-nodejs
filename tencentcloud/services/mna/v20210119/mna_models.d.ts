@@ -80,7 +80,7 @@ export interface GetFlowStatisticRequest {
      */
     EndTime: number;
     /**
-     * 流量种类（1：上行流量，2：下行流量）
+     * 流量种类（1：上行流量，2：下行流量，3：上下行总和）
      */
     Type: number;
     /**
@@ -95,6 +95,10 @@ export interface GetFlowStatisticRequest {
      * 网关类型。0：公有云网关；1：自有网关。不传默认为0。
      */
     GatewayType?: number;
+    /**
+     * 设备ID列表，用于查询多设备流量，该字段启用时DeviceId可传"-1"
+     */
+    DeviceList?: Array<string>;
 }
 /**
  * 多网聚合加速目标地址结构体
@@ -235,6 +239,7 @@ export interface VendorHardware {
     DeviceId?: string;
     /**
      * license计费模式： 1，租户月付费 2，厂商月付费 3，license永久授权
+  注：设备为租户付费且未激活（未选择月付还是永久付费）时，此参数返回1，仅代表租户付费。后续将废弃此参数，新接入请使用LicensePayMode和Payer
   注意：此字段可能返回 null，表示取不到有效值。
      */
     LicenseChargingMode?: number;
@@ -243,6 +248,21 @@ export interface VendorHardware {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     LastOnlineTime?: string;
+    /**
+     * license授权有效期
+  0：月度授权
+  1：永久授权
+  -1：未知
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    LicensePayMode?: number;
+    /**
+     * 付费方
+  0：客户付费
+  1：厂商付费
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Payer?: number;
 }
 /**
  * 设备网络状态信息
@@ -498,6 +518,26 @@ export interface ActivateHardware {
      * 接入环境。0：公有云网关；1：自有网关；2：公有云网关和自有网关。不填默认公有云网关。 具体含义： 公有云网关：即该设备只能接入公有云网关（就近接入） 自有网关：即该设备只能接入已经注册上线的自有网关（就近接入或固定ip接入） 公有云网关和自有网关：即该设备同时可以接入公有云网关和已经注册上线的自有网关（就近接入或固定ip接入）
      */
     AccessScope?: number;
+    /**
+     * 当付费方为租户时，可选择租户license付费方式：
+  0，月度授权
+  1，永久授权
+  若不传则默认为月度授权。
+  当付费方为厂商时，此参数无效
+  
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    LicensePayMode?: number;
+    /**
+     * 设备分组ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    GroupId?: string;
+    /**
+     * 设备分组名称，预留参数，需要分组时传入GroupId
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    GroupName?: string;
 }
 /**
  * DeleteDevice请求参数结构体
@@ -606,12 +646,12 @@ export interface DeviceDetails {
     /**
      * 设备基本信息
      */
-    DeviceBaseInfo: DeviceBaseInfo;
+    DeviceBaseInfo?: DeviceBaseInfo;
     /**
      * 设备网络信息
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    DeviceNetInfo: Array<DeviceNetInfo>;
+    DeviceNetInfo?: Array<DeviceNetInfo>;
     /**
      * 聚合服务器地址
   注意：此字段可能返回 null，表示取不到有效值。
@@ -715,6 +755,14 @@ export interface GetStatisticDataRequest {
      * 网关类型。0：公有云网关；1：自有网关。不传默认为0。
      */
     GatewayType?: number;
+    /**
+     * 设备ID列表，最多10个设备，下载多个设备流量和时使用，此时DeviceId可传"-1"
+     */
+    DeviceList?: Array<string>;
+    /**
+     * 设备分组ID，若不指定分组则不传，按分组下载数据时使用
+     */
+    GroupId?: string;
 }
 /**
  * GetFlowPackages返回参数结构体
@@ -836,7 +884,7 @@ export interface GetMultiFlowStatisticRequest {
      */
     EndTime: number;
     /**
-     * 统计流量类型（1：上行流量，2：下行流量）
+     * 统计流量类型（1：上行流量，2：下行流量， 3: 上下行总和）
      */
     Type: number;
     /**
@@ -880,6 +928,26 @@ export interface DeviceBaseInfo {
      * 接入环境。0：公有云网关；1：自有网关；2：公有云网关和自有网关。默认公有云网关。 具体含义： 公有云网关：即该设备只能接入公有云网关（就近接入） 自有网关：即该设备只能接入已经注册上线的自有网关（就近接入或固定ip接入） 公有云网关和自有网关：即该设备同时可以接入公有云网关和已经注册上线的自有网关（就近接入或固定ip接入）
      */
     AccessScope?: number;
+    /**
+     * license授权有效期 0：月度授权 1：永久授权
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    LicensePayMode?: number;
+    /**
+     * 付费方 0：厂商付费 1：客户付费
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Payer?: number;
+    /**
+     * 设备分组ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    GroupId?: string;
+    /**
+     * 设备分组名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    GroupName?: string;
 }
 /**
  * 用户期望门限
@@ -1015,13 +1083,17 @@ export interface OrderFlowPackageRequest {
      */
     DeviceList: Array<string>;
     /**
-     * 是否自动续费
+     * 是否自动续费，该选项和流量截断冲突，只能开启一个
      */
     AutoRenewFlag: boolean;
     /**
      * 区域标识，0：国内，1：国外
      */
     PackageRegion: number;
+    /**
+     * 是否开启流量截断功能，该选项和自动续费冲突
+     */
+    FlowTruncFlag?: boolean;
     /**
      * 是否自动选择代金券，默认false。
   有多张券时的选择策略：按照可支付订单全部金额的券，先到期的券，可抵扣金额最大的券，余额最小的券，现金券 这个优先级进行扣券，且最多只抵扣一张券。
@@ -1078,6 +1150,7 @@ export interface HardwareInfo {
     VendorDescription?: string;
     /**
      * license计费模式： 1，租户月付费 2，厂商月付费 3，license永久授权
+  注：后续将废弃此参数，新接入请使用LicensePayMode和Payer
   注意：此字段可能返回 null，表示取不到有效值。
      */
     LicenseChargingMode?: number;
@@ -1091,6 +1164,30 @@ export interface HardwareInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     SN?: string;
+    /**
+     * license授权有效期
+  0：月度授权
+  1：永久授权
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    LicensePayMode?: number;
+    /**
+     * 付费方
+  0：客户付费
+  1：厂商付费
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Payer?: number;
+    /**
+     * 设备分组ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    GroupId?: string;
+    /**
+     * 设备分组名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    GroupName?: string;
 }
 /**
  * GetDevices返回参数结构体
@@ -1246,9 +1343,9 @@ export interface Hardware {
     SN: string;
     /**
      * license计费模式：
-  1，租户月付费
+  1，租户付费
   2，厂商月付费
-  3，license永久授权
+  3，厂商永久授权
   注意：此字段可能返回 null，表示取不到有效值。
      */
     LicenseChargingMode: number;
@@ -1348,6 +1445,14 @@ export interface FlowPackageInfo {
      * 资源包变更状态，0：未发生变配；1：变配中；2：已变配或已续费
      */
     ModifyStatus?: number;
+    /**
+     * 流量截断标识。true代表开启流量截断，false代表不开启流量截断
+     */
+    TruncFlag?: boolean;
+    /**
+     * 流量包精确余量，单位：MB
+     */
+    CapacityRemainPrecise?: number;
 }
 /**
  * GetHardwareList返回参数结构体
@@ -1436,6 +1541,21 @@ export interface AddDeviceRequest {
   公有云网关和自有网关：即该设备同时可以接入公有云网关和已经注册上线的自有网关（就近接入或固定ip接入）
      */
     AccessScope?: number;
+    /**
+     * license付费方式：
+  0，月度授权
+  1，永久授权
+  若不传则默认为月度授权
+     */
+    LicensePayMode?: number;
+    /**
+     * 设备分组名称，非必选，预留参数，需要分组时传入GroupId
+     */
+    GroupName?: string;
+    /**
+     * 设备分组ID，非必选，如果不填写则默认设备无分组
+     */
+    GroupId?: string;
 }
 /**
  * GetPublicKey请求参数结构体

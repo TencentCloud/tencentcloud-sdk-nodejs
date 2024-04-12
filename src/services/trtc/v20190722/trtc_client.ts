@@ -27,6 +27,7 @@ import {
   DescribeTRTCMarketScaleDataRequest,
   McuLayoutVolume,
   DescribeUserEventRequest,
+  McuBackgroundCustomRender,
   WaterMarkChar,
   DescribeTrtcRoomUsageResponse,
   StopPublishCdnStreamResponse,

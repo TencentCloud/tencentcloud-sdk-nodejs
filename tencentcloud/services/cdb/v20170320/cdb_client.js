@@ -174,6 +174,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeRollbackTaskDetail", req, cb);
     }
     /**
+     * 高可用实例一键迁移到集群版校验
+     */
+    async CheckMigrateCluster(req, cb) {
+        return this.request("CheckMigrateCluster", req, cb);
+    }
+    /**
      * 该接口用于修改用户当前地域的备份文件限制下载来源，可以设置内外网均可下载、仅内网可下载，或内网指定的vpc、ip可以下载。
      */
     async ModifyBackupDownloadRestriction(req, cb) {
@@ -578,6 +584,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeDBInstanceInfo(req, cb) {
         return this.request("DescribeDBInstanceInfo", req, cb);
+    }
+    /**
+     * 本接口(DescribeClusterInfo)用于查询集群版实例信息。
+     */
+    async DescribeClusterInfo(req, cb) {
+        return this.request("DescribeClusterInfo", req, cb);
     }
     /**
      * 本接口(DescribeRollbackRangeTime)用于查询云数据库实例可回档的时间范围。

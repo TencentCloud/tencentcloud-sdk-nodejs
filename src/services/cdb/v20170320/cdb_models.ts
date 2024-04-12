@@ -2944,6 +2944,16 @@ export interface CreateDatabaseResponse {
 }
 
 /**
+ * CheckMigrateCluster返回参数结构体
+ */
+export interface CheckMigrateClusterResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeErrorLogData返回参数结构体
  */
 export interface DescribeErrorLogDataResponse {
@@ -3073,17 +3083,21 @@ export interface DeleteAuditLogFileResponse {
 }
 
 /**
- * 数据库实例参数
+ * DescribeSlowLogs返回参数结构体
  */
-export interface Parameter {
+export interface DescribeSlowLogsResponse {
   /**
-   * 参数名称
+   * 符合查询条件的慢查询日志总数。
    */
-  Name?: string
+  TotalCount?: number
   /**
-   * 参数值
+   * 符合查询条件的慢查询日志详情。
    */
-  CurrentValue?: string
+  Items?: Array<SlowLogInfo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3671,17 +3685,13 @@ export interface CreateCloneInstanceResponse {
 export type DescribeCdbZoneConfigRequest = null
 
 /**
- *  CPU负载
+ * OpenDBInstanceGTID请求参数结构体
  */
-export interface DeviceCpuInfo {
+export interface OpenDBInstanceGTIDRequest {
   /**
-   * 实例CPU平均使用率
+   * 实例 ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。
    */
-  Rate: Array<DeviceCpuRateInfo>
-  /**
-   * 实例CPU监控数据
-   */
-  Load: Array<number | bigint>
+  InstanceId: string
 }
 
 /**
@@ -3933,6 +3943,33 @@ export interface DescribeDBInstanceConfigRequest {
    * 实例 ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。
    */
   InstanceId: string
+}
+
+/**
+ * 集群版实例节点信息
+ */
+export interface ClusterNodeInfo {
+  /**
+   * 节点id。
+   */
+  NodeId?: string
+  /**
+   * 节点的角色。
+   */
+  Role?: string
+  /**
+   * 节点所在可用区。
+   */
+  Zone?: string
+  /**
+   * 节点的权重
+   */
+  Weight?: number
+  /**
+   * 节点状态。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status?: string
 }
 
 /**
@@ -5215,6 +5252,16 @@ export interface ModifyNameOrDescByDpIdResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeClusterInfo请求参数结构体
+ */
+export interface DescribeClusterInfoRequest {
+  /**
+   * 实例id。
+   */
+  InstanceId: string
 }
 
 /**
@@ -7591,6 +7638,11 @@ export interface OpenWanServiceResponse {
 }
 
 /**
+ * CheckMigrateCluster请求参数结构体
+ */
+export type CheckMigrateClusterRequest = null
+
+/**
  * DescribeDBInstanceGTID请求参数结构体
  */
 export interface DescribeDBInstanceGTIDRequest {
@@ -8932,6 +8984,40 @@ export interface Outbound {
 }
 
 /**
+ * DescribeClusterInfo返回参数结构体
+ */
+export interface DescribeClusterInfoResponse {
+  /**
+   * 实例名称。
+   */
+  ClusterName?: string
+  /**
+   * 集群读写地址信息。
+   */
+  ReadWriteAddress?: AddressInfo
+  /**
+   * 集群只读地址信息。
+   */
+  ReadOnlyAddress?: Array<AddressInfo>
+  /**
+   * 集群节点列表信息。
+   */
+  NodeList?: Array<ClusterNodeInfo>
+  /**
+   * 只读空间保护阈值,单位GB
+   */
+  ReadonlyLimit?: number
+  /**
+   * 实例节点数。
+   */
+  NodeCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 查询审计实例的过滤条件
  */
 export interface AuditInstanceFilters {
@@ -9146,13 +9232,17 @@ export interface CreateBackupResponse {
 }
 
 /**
- * OpenDBInstanceGTID请求参数结构体
+ *  CPU负载
  */
-export interface OpenDBInstanceGTIDRequest {
+export interface DeviceCpuInfo {
   /**
-   * 实例 ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。
+   * 实例CPU平均使用率
    */
-  InstanceId: string
+  Rate: Array<DeviceCpuRateInfo>
+  /**
+   * 实例CPU监控数据
+   */
+  Load: Array<number | bigint>
 }
 
 /**
@@ -9644,21 +9734,17 @@ export interface DeleteAuditLogFileRequest {
 }
 
 /**
- * DescribeSlowLogs返回参数结构体
+ * 数据库实例参数
  */
-export interface DescribeSlowLogsResponse {
+export interface Parameter {
   /**
-   * 符合查询条件的慢查询日志总数。
+   * 参数名称
    */
-  TotalCount?: number
+  Name?: string
   /**
-   * 符合查询条件的慢查询日志详情。
+   * 参数值
    */
-  Items?: Array<SlowLogInfo>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  CurrentValue?: string
 }
 
 /**
@@ -9845,6 +9931,40 @@ export interface DescribeDeviceMonitorInfoResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 实例地址信息
+ */
+export interface AddressInfo {
+  /**
+   * 地址的资源id标识。
+   */
+  ResourceId?: string
+  /**
+   * 地址所在的vpc。
+   */
+  UniqVpcId?: string
+  /**
+   * 地址所在的子网。
+   */
+  UniqSubnetId?: string
+  /**
+   * 地址的vip。
+   */
+  Vip?: string
+  /**
+   * 地址的端口。
+   */
+  VPort?: number
+  /**
+   * 外网地址域名。
+   */
+  WanDomain?: string
+  /**
+   * 外网地址端口。
+   */
+  WanPort?: number
 }
 
 /**

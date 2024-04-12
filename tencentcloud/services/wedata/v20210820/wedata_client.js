@@ -132,12 +132,6 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeRuleExecResultsByPage", req, cb);
     }
     /**
-     * 获取采集器所在集群的VPC列表
-     */
-    async DescribeInLongAgentVpcList(req, cb) {
-        return this.request("DescribeInLongAgentVpcList", req, cb);
-    }
-    /**
      * 查询运维画布信息，只需要获取边和节点
      */
     async DescribeWorkflowOpsCanvasInfo(req, cb) {
@@ -167,12 +161,6 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CreateHiveTable(req, cb) {
         return this.request("CreateHiveTable", req, cb);
-    }
-    /**
-     * 获取集群命名空间列表
-     */
-    async DescribeClusterNamespaceList(req, cb) {
-        return this.request("DescribeClusterNamespaceList", req, cb);
     }
     /**
      * 任务运维列表组合条件查询
@@ -262,12 +250,6 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteWorkflowNew", req, cb);
     }
     /**
-     * 数据集成大屏采集器状态分布统计
-     */
-    async DescribeIntegrationStatisticsAgentStatus(req, cb) {
-        return this.request("DescribeIntegrationStatisticsAgentStatus", req, cb);
-    }
-    /**
      * 提交基线
      */
     async StopBaseline(req, cb) {
@@ -347,13 +329,6 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeOpsInstanceLogList(req, cb) {
         return this.request("DescribeOpsInstanceLogList", req, cb);
-    }
-    /**
-     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
-设置任务告警，新建/更新告警信息（最新）
-     */
-    async SetTaskAlarmNew(req, cb) {
-        return this.request("SetTaskAlarmNew", req, cb);
     }
     /**
      * 查看事件实例的消费任务
@@ -464,10 +439,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeOrganizationalFunctions", req, cb);
     }
     /**
-     * 删除采集器
+     * 解锁集成任务
      */
-    async DeleteInLongAgent(req, cb) {
-        return this.request("DeleteInLongAgent", req, cb);
+    async UnlockIntegrationTask(req, cb) {
+        return this.request("UnlockIntegrationTask", req, cb);
     }
     /**
      * 实例强制成功
@@ -721,12 +696,6 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeTaskByStatusReport", req, cb);
     }
     /**
-     * 注册采集器
-     */
-    async CreateInLongAgent(req, cb) {
-        return this.request("CreateInLongAgent", req, cb);
-    }
-    /**
      * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
 运行任务
      */
@@ -738,12 +707,6 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async GetOfflineInstanceList(req, cb) {
         return this.request("GetOfflineInstanceList", req, cb);
-    }
-    /**
-     * 更新采集器
-     */
-    async UpdateInLongAgent(req, cb) {
-        return this.request("UpdateInLongAgent", req, cb);
     }
     /**
      * 创建离线任务
@@ -802,12 +765,6 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeTaskReportDetailList(req, cb) {
         return this.request("DescribeTaskReportDetailList", req, cb);
-    }
-    /**
-     * 解锁集成任务
-     */
-    async UnlockIntegrationTask(req, cb) {
-        return this.request("UnlockIntegrationTask", req, cb);
     }
     /**
      * 创建基线
@@ -1070,13 +1027,6 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeInstanceLogFile", req, cb);
     }
     /**
-     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
-修改数据源
-     */
-    async ModifyDataSource(req, cb) {
-        return this.request("ModifyDataSource", req, cb);
-    }
-    /**
      * 编辑规则模板
      */
     async ModifyRuleTemplate(req, cb) {
@@ -1241,12 +1191,6 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UploadContent", req, cb);
     }
     /**
-     * 提交自定义函数
-     */
-    async SubmitCustomFunction(req, cb) {
-        return this.request("SubmitCustomFunction", req, cb);
-    }
-    /**
      * 获取关联父实例
      */
     async DescribeFathers(req, cb) {
@@ -1284,10 +1228,11 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeRuleTemplatesByPage", req, cb);
     }
     /**
-     * 获取数据标准规则详情
+     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
+更新工作流
      */
-    async DescribeStandardRuleDetailInfoList(req, cb) {
-        return this.request("DescribeStandardRuleDetailInfoList", req, cb);
+    async ModifyWorkflowInfo(req, cb) {
+        return this.request("ModifyWorkflowInfo", req, cb);
     }
     /**
      * 数据质量概览页面规则运行情况接口
@@ -1364,13 +1309,6 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeIntegrationStatisticsTaskStatusTrend(req, cb) {
         return this.request("DescribeIntegrationStatisticsTaskStatusTrend", req, cb);
-    }
-    /**
-     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
-获取实例日志列表
-     */
-    async DescribeInstanceLogs(req, cb) {
-        return this.request("DescribeInstanceLogs", req, cb);
     }
     /**
      * 更新监控状态
@@ -1591,10 +1529,11 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("SaveCustomFunction", req, cb);
     }
     /**
-     * 获取TKE集群列表
+     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
+修改数据源
      */
-    async DescribeInLongTkeClusterList(req, cb) {
-        return this.request("DescribeInLongTkeClusterList", req, cb);
+    async ModifyDataSource(req, cb) {
+        return this.request("ModifyDataSource", req, cb);
     }
     /**
      * 查询任务告警规则列表
@@ -1701,10 +1640,11 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDependOpsTaskList", req, cb);
     }
     /**
-     * 获取采集器列表
+     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
+获取实例日志列表
      */
-    async DescribeInLongAgentList(req, cb) {
-        return this.request("DescribeInLongAgentList", req, cb);
+    async DescribeInstanceLogs(req, cb) {
+        return this.request("DescribeInstanceLogs", req, cb);
     }
     /**
      * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
@@ -1720,11 +1660,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeOpsMakePlans", req, cb);
     }
     /**
-     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
-更新工作流
+     * 提交自定义函数
      */
-    async ModifyWorkflowInfo(req, cb) {
-        return this.request("ModifyWorkflowInfo", req, cb);
+    async SubmitCustomFunction(req, cb) {
+        return this.request("SubmitCustomFunction", req, cb);
     }
     /**
      * 离线任务实例运行日志列表
@@ -1781,10 +1720,11 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("BatchResumeIntegrationTasks", req, cb);
     }
     /**
-     * 重启采集器
+     * <p style="color:red;">[注意：该Beta版本只满足广州区部分白名单客户使用]</p>
+设置任务告警，新建/更新告警信息（最新）
      */
-    async RestartInLongAgent(req, cb) {
-        return this.request("RestartInLongAgent", req, cb);
+    async SetTaskAlarmNew(req, cb) {
+        return this.request("SetTaskAlarmNew", req, cb);
     }
     /**
      * 查询模板详情
@@ -1827,12 +1767,6 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeFunctionKinds(req, cb) {
         return this.request("DescribeFunctionKinds", req, cb);
-    }
-    /**
-     * 查询采集器关联的任务列表
-     */
-    async DescribeInLongAgentTaskList(req, cb) {
-        return this.request("DescribeInLongAgentTaskList", req, cb);
     }
     /**
      * 查询规则执行历史， 最近30条
