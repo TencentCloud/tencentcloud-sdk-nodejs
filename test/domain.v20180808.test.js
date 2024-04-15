@@ -28,6 +28,16 @@ it("domain.v20180808.SetDomainAutoRenew", async function () {
     }
 })
 
+it("domain.v20180808.DescribeReservedBidInfo", async function () {
+    try {
+       const data = await client.DescribeReservedBidInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("domain.v20180808.ModifyCustomDnsHost", async function () {
     try {
        const data = await client.ModifyCustomDnsHost({})
@@ -71,6 +81,16 @@ it("domain.v20180808.DeletePhoneEmail", async function () {
 it("domain.v20180808.DescribePreDomainList", async function () {
     try {
        const data = await client.DescribePreDomainList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("domain.v20180808.BidPreDomains", async function () {
+    try {
+       const data = await client.BidPreDomains({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -34,6 +34,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("SetDomainAutoRenew", req, cb);
     }
     /**
+     * 接口用于获取合作商竞价过程中竞价详情数据
+     */
+    async DescribeReservedBidInfo(req, cb) {
+        return this.request("DescribeReservedBidInfo", req, cb);
+    }
+    /**
      * 修改自定义DNS Host
      */
     async ModifyCustomDnsHost(req, cb) {
@@ -62,6 +68,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribePreDomainList(req, cb) {
         return this.request("DescribePreDomainList", req, cb);
+    }
+    /**
+     * 用户合作商预释放出价
+     */
+    async BidPreDomains(req, cb) {
+        return this.request("BidPreDomains", req, cb);
     }
     /**
      * 查询自定义DNS Host

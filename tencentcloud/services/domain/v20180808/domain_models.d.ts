@@ -254,13 +254,80 @@ export interface CheckBatchStatusRequest {
     LogIds: Array<number | bigint>;
 }
 /**
- * SetDomainAutoRenew返回参数结构体
+ * 合作商竞价详情
  */
-export interface SetDomainAutoRenewResponse {
+export interface ReserveBidInfo {
     /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     * 用户
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    RequestId?: string;
+    User?: string;
+    /**
+     * 出价
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Price?: number;
+    /**
+     * 出价时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    BidTime?: string;
+    /**
+     * 当前状态
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    BidStatus?: string;
+}
+/**
+ * CreateDomainBatch请求参数结构体
+ */
+export interface CreateDomainBatchRequest {
+    /**
+     * 模板ID。详情请查看：[获取模板列表](https://cloud.tencent.com/document/product/242/48940)
+     */
+    TemplateId: string;
+    /**
+     * 购买域名的年限，可选值：[1-10]
+     */
+    Period: number;
+    /**
+     * 批量购买的域名,最多为4000个
+     */
+    Domains: Array<string>;
+    /**
+     * 付费模式 0手动在线付费，1使用余额付费，2使用特惠包
+     */
+    PayMode: number;
+    /**
+     * 自动续费开关。有两个可选值：
+  0 表示关闭，不自动续费（默认值）
+  1 表示开启，将自动续费
+     */
+    AutoRenewFlag?: number;
+    /**
+     * 使用的特惠包ID，PayMode为2时必填
+     */
+    PackageResourceId?: string;
+    /**
+     * 是否开启更新锁：0=默认不开启，1=开启
+     */
+    UpdateProhibition?: number;
+    /**
+     * 是否开启转移锁：0=默认不开启，1=开启
+     */
+    TransferProhibition?: number;
+    /**
+     * 渠道来源，pc/miniprogram/h5等
+     */
+    ChannelFrom?: string;
+    /**
+     * 订单来源，common正常/dianshi_active点石活动等
+     */
+    OrderFrom?: string;
+    /**
+     * 活动id
+     */
+    ActivityId?: string;
 }
 /**
  * DescribeBatchOperationLogs请求参数结构体
@@ -298,6 +365,15 @@ export interface ModifyCustomDnsHostResponse {
     RequestId?: string;
 }
 /**
+ * BidPreDomains返回参数结构体
+ */
+export interface BidPreDomainsResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * ModifyDomainDNSBatch请求参数结构体
  */
 export interface ModifyDomainDNSBatchRequest {
@@ -327,6 +403,15 @@ export interface DescribeBatchOperationLogDetailsResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * DescribeReservedBidInfo请求参数结构体
+ */
+export interface DescribeReservedBidInfoRequest {
+    /**
+     * 业务ID
+     */
+    BusinessId: string;
 }
 /**
  * DeletePhoneEmail返回参数结构体
@@ -410,57 +495,129 @@ export interface UploadImageResponse {
     RequestId?: string;
 }
 /**
- * Template数据
+ * 获取域名基础模板信息
  */
-export interface TemplateInfo {
+export interface DomainSimpleInfo {
     /**
-     * 模板ID
+     * 域名资源ID。
      */
-    TemplateId?: string;
+    DomainId: string;
     /**
-     * 认证状态：未实名认证:NotUpload, 实名审核中:InAudit，已实名认证:Approved，实名审核失败:Reject
+     * 域名名称。
      */
-    AuditStatus?: string;
+    DomainName: string;
     /**
-     * 创建时间
+     * 域名实名认证状态。
+  NotUpload：未实名认证
+  InAudit：实名审核中
+  Approved：实名审核通过
+  Reject：实名审核失败
+  NoAudit: 无需实名认证
      */
-    CreatedOn?: string;
+    RealNameAuditStatus: string;
     /**
-     * 更新时间
+     * 域名实名认证不通过原因。
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    UpdatedOn?: string;
+    RealNameAuditUnpassReason: string;
     /**
-     * 用户UIN
+     * 域名命名审核状态。
+  NotAudit：命名审核未上传
+  Pending：命名审核待上传
+  Auditing：域名命名审核中
+  Approved：域名命名审核通过
+  Rejected：域名命名审核拒绝
      */
-    UserUin?: string;
+    DomainNameAuditStatus: string;
     /**
-     * 是否是默认模板: 是:yes，否:no
+     * 域名命名审核不通过原因。
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    IsDefault?: string;
+    DomainNameAuditUnpassReason: string;
     /**
-     * 认证失败原因
+     * 注册时间。
      */
-    AuditReason?: string;
+    CreationDate: string;
     /**
-     * 认证信息
+     * 到期时间
      */
-    CertificateInfo?: CertificateInfo;
+    ExpirationDate: string;
     /**
-     * 联系人信息
+     * 域名状态。
+  ok：正常
+  serverHold：注册局暂停解析
+  clientHold：注册商暂停解析
+  pendingTransfer：转移中
+  renewingPeriod：续费期
+  redemptionPeriod：偿还期
+  pendingDelete：删除期
+  serverTransferProhibited：注册局禁止转移
+  serverUpdateProhibited：注册局禁止更新
+  serverDeleteProhibited：注册局禁止删除
+  clientTransferProhibited：注册商禁止转移
+  clientUpdateProhibited：注册商禁止更新
+  clientDeleteProhibited：注册商禁止删除
+  serverRenewProhibited: 注册局禁止续费
+  clientRenewProhobited: 注册商禁止续费
      */
-    ContactInfo?: ContactInfo;
+    DomainStatus: Array<string>;
     /**
-     * 模板是否符合规范， 1是 0 否
+     * 域名购买状态。
+  ok：正常
+  RegisterPending：待注册
+  RegisterDoing：注册中
+  RegisterFailed：注册失败
+  AboutToExpire: 即将过期
+  RenewPending：已进入续费期，需要进行续费
+  RenewDoing：续费中
+  RedemptionPending：已进入赎回期，需要进行续费
+  RedemptionDoing：赎回中
+  TransferPending：待转入中
+  TransferTransing：转入中
+  TransferFailed：转入失败
      */
-    IsValidTemplate?: number;
+    BuyStatus: string;
     /**
-     * 不符合规范原因
+     * 注册商类型
+  epp: DNSPod, Inc.（烟台帝思普网络科技有限公司）
+  qcloud: Tencent Cloud Computing (Beijing) Limited Liability Company（腾讯云计算（北京）有限责任公司）
+  yunxun: Guangzhou Yunxun Information Technology Co., Ltd.（广州云讯信息科技有限公司）
+  xinnet: Xin Net Technology Corporation（北京新网数码信息技术有限公司）
      */
-    InvalidReason?: string;
+    RegistrarType: string;
     /**
-     * 是包含黑名单手机或邮箱
+     * 域名绑定的ns
      */
-    IsBlack?: boolean;
+    NameServer: Array<string>;
+    /**
+     * true：开启锁定
+  false：关闭锁定
+     */
+    LockTransfer: boolean;
+    /**
+     * 锁定结束时间
+     */
+    LockEndTime: string;
+    /**
+     * 认证类型：I=个人，E=企业
+     */
+    RegistrantType: string;
+    /**
+     * 域名所有者，中文
+     */
+    OrganizationNameCN: string;
+    /**
+     * 域名所有者，英文
+     */
+    OrganizationName: string;
+    /**
+     * 域名联系人，中文
+     */
+    RegistrantNameCN: string;
+    /**
+     * 域名联系人，英文
+     */
+    RegistrantName: string;
 }
 /**
  * CreateDomainRedemption返回参数结构体
@@ -910,129 +1067,57 @@ export interface DescribeDomainSimpleInfoResponse {
     RequestId?: string;
 }
 /**
- * 获取域名基础模板信息
+ * Template数据
  */
-export interface DomainSimpleInfo {
+export interface TemplateInfo {
     /**
-     * 域名资源ID。
+     * 模板ID
      */
-    DomainId: string;
+    TemplateId?: string;
     /**
-     * 域名名称。
+     * 认证状态：未实名认证:NotUpload, 实名审核中:InAudit，已实名认证:Approved，实名审核失败:Reject
      */
-    DomainName: string;
+    AuditStatus?: string;
     /**
-     * 域名实名认证状态。
-  NotUpload：未实名认证
-  InAudit：实名审核中
-  Approved：实名审核通过
-  Reject：实名审核失败
-  NoAudit: 无需实名认证
+     * 创建时间
      */
-    RealNameAuditStatus: string;
+    CreatedOn?: string;
     /**
-     * 域名实名认证不通过原因。
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 更新时间
      */
-    RealNameAuditUnpassReason: string;
+    UpdatedOn?: string;
     /**
-     * 域名命名审核状态。
-  NotAudit：命名审核未上传
-  Pending：命名审核待上传
-  Auditing：域名命名审核中
-  Approved：域名命名审核通过
-  Rejected：域名命名审核拒绝
+     * 用户UIN
      */
-    DomainNameAuditStatus: string;
+    UserUin?: string;
     /**
-     * 域名命名审核不通过原因。
-  注意：此字段可能返回 null，表示取不到有效值。
+     * 是否是默认模板: 是:yes，否:no
      */
-    DomainNameAuditUnpassReason: string;
+    IsDefault?: string;
     /**
-     * 注册时间。
+     * 认证失败原因
      */
-    CreationDate: string;
+    AuditReason?: string;
     /**
-     * 到期时间
+     * 认证信息
      */
-    ExpirationDate: string;
+    CertificateInfo?: CertificateInfo;
     /**
-     * 域名状态。
-  ok：正常
-  serverHold：注册局暂停解析
-  clientHold：注册商暂停解析
-  pendingTransfer：转移中
-  renewingPeriod：续费期
-  redemptionPeriod：偿还期
-  pendingDelete：删除期
-  serverTransferProhibited：注册局禁止转移
-  serverUpdateProhibited：注册局禁止更新
-  serverDeleteProhibited：注册局禁止删除
-  clientTransferProhibited：注册商禁止转移
-  clientUpdateProhibited：注册商禁止更新
-  clientDeleteProhibited：注册商禁止删除
-  serverRenewProhibited: 注册局禁止续费
-  clientRenewProhobited: 注册商禁止续费
+     * 联系人信息
      */
-    DomainStatus: Array<string>;
+    ContactInfo?: ContactInfo;
     /**
-     * 域名购买状态。
-  ok：正常
-  RegisterPending：待注册
-  RegisterDoing：注册中
-  RegisterFailed：注册失败
-  AboutToExpire: 即将过期
-  RenewPending：已进入续费期，需要进行续费
-  RenewDoing：续费中
-  RedemptionPending：已进入赎回期，需要进行续费
-  RedemptionDoing：赎回中
-  TransferPending：待转入中
-  TransferTransing：转入中
-  TransferFailed：转入失败
+     * 模板是否符合规范， 1是 0 否
      */
-    BuyStatus: string;
+    IsValidTemplate?: number;
     /**
-     * 注册商类型
-  epp: DNSPod, Inc.（烟台帝思普网络科技有限公司）
-  qcloud: Tencent Cloud Computing (Beijing) Limited Liability Company（腾讯云计算（北京）有限责任公司）
-  yunxun: Guangzhou Yunxun Information Technology Co., Ltd.（广州云讯信息科技有限公司）
-  xinnet: Xin Net Technology Corporation（北京新网数码信息技术有限公司）
+     * 不符合规范原因
      */
-    RegistrarType: string;
+    InvalidReason?: string;
     /**
-     * 域名绑定的ns
+     * 是包含黑名单手机或邮箱
      */
-    NameServer: Array<string>;
-    /**
-     * true：开启锁定
-  false：关闭锁定
-     */
-    LockTransfer: boolean;
-    /**
-     * 锁定结束时间
-     */
-    LockEndTime: string;
-    /**
-     * 认证类型：I=个人，E=企业
-     */
-    RegistrantType: string;
-    /**
-     * 域名所有者，中文
-     */
-    OrganizationNameCN: string;
-    /**
-     * 域名所有者，英文
-     */
-    OrganizationName: string;
-    /**
-     * 域名联系人，中文
-     */
-    RegistrantNameCN: string;
-    /**
-     * 域名联系人，英文
-     */
-    RegistrantName: string;
+    IsBlack?: boolean;
 }
 /**
  * ModifyDomainOwnerBatch返回参数结构体
@@ -1122,7 +1207,7 @@ export interface DescribeReservedPreDomainInfoRequest {
      */
     DomainList?: Array<string>;
     /**
-     * 状态，用于筛选，可不填写(1. 预定成功 2. 预定失败（预定失败Reason字段将会被赋值）3. 域名交割中 4. 域名交割完成)
+     * 状态，用于筛选，可不填写(1. 成功 2. 失败（失败Reason字段将会被赋值）3. 域名交割中 4. 域名交割完成 5. 预约 6. 竞价)
      */
     ReservedStatus?: number;
     /**
@@ -1171,6 +1256,49 @@ export interface ModifyIntlCustomDnsHostRequest {
      * IP地址
      */
     IpSet: Array<string>;
+}
+/**
+ * 预约预释放域名详情信息
+ */
+export interface ReservedPreDomainInfo {
+    /**
+     * 域名
+     */
+    Domain?: string;
+    /**
+     * 1. 预定成功 2. 预定失败（预定失败Reason字段将会被赋值）3. 域名交割中 4. 域名交割完成
+     */
+    ReservedStatus?: number;
+    /**
+     * 域名预定失败原因
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    FailReason?: string;
+    /**
+     * 预计变更所有权时间（仅用于参考，实际时间会存在误差）
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ChangeOwnerTime?: string;
+    /**
+     * 注册时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RegTime?: string;
+    /**
+     * 到期时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ExpireTime?: string;
+    /**
+     * 资源ID，用于删除资源信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ResourceId?: string;
+    /**
+     * 业务ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    BusinessId?: string;
 }
 /**
  * CheckDomain请求参数结构体
@@ -1330,42 +1458,17 @@ export interface CertificateInfo {
     RegistrantImgUrl?: string;
 }
 /**
- * 预约预释放域名详情信息
+ * BidPreDomains请求参数结构体
  */
-export interface ReservedPreDomainInfo {
+export interface BidPreDomainsRequest {
     /**
-     * 域名
+     * 业务ID
      */
-    Domain?: string;
+    BusinessId?: string;
     /**
-     * 1. 预定成功 2. 预定失败（预定失败Reason字段将会被赋值）3. 域名交割中 4. 域名交割完成
+     * 价格
      */
-    ReservedStatus?: number;
-    /**
-     * 域名预定失败原因
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    FailReason?: string;
-    /**
-     * 预计变更所有权时间（仅用于参考，实际时间会存在误差）
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ChangeOwnerTime?: string;
-    /**
-     * 注册时间
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    RegTime?: string;
-    /**
-     * 到期时间
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ExpireTime?: string;
-    /**
-     * 资源ID，用于删除资源信息
-  注意：此字段可能返回 null，表示取不到有效值。
-     */
-    ResourceId?: string;
+    Price?: number;
 }
 /**
  * CreateTemplate请求参数结构体
@@ -1443,6 +1546,32 @@ export interface DescribeTemplateRequest {
      * 模板ID
      */
     TemplateId: string;
+}
+/**
+ * DescribeReservedBidInfo返回参数结构体
+ */
+export interface DescribeReservedBidInfoResponse {
+    /**
+     * 竞价领先价格
+     */
+    UpPrice?: number;
+    /**
+     * 请求用户当前价格
+     */
+    Price?: number;
+    /**
+     * 领先用户
+     */
+    UpUser?: string;
+    /**
+     * 竞价详细数据
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    BidList?: Array<ReserveBidInfo>;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * DescribeTldList请求参数结构体
@@ -1571,55 +1700,13 @@ export interface DeleteTemplateRequest {
     TemplateId: string;
 }
 /**
- * CreateDomainBatch请求参数结构体
+ * SetDomainAutoRenew返回参数结构体
  */
-export interface CreateDomainBatchRequest {
+export interface SetDomainAutoRenewResponse {
     /**
-     * 模板ID。详情请查看：[获取模板列表](https://cloud.tencent.com/document/product/242/48940)
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
-    TemplateId: string;
-    /**
-     * 购买域名的年限，可选值：[1-10]
-     */
-    Period: number;
-    /**
-     * 批量购买的域名,最多为4000个
-     */
-    Domains: Array<string>;
-    /**
-     * 付费模式 0手动在线付费，1使用余额付费，2使用特惠包
-     */
-    PayMode: number;
-    /**
-     * 自动续费开关。有两个可选值：
-  0 表示关闭，不自动续费（默认值）
-  1 表示开启，将自动续费
-     */
-    AutoRenewFlag?: number;
-    /**
-     * 使用的特惠包ID，PayMode为2时必填
-     */
-    PackageResourceId?: string;
-    /**
-     * 是否开启更新锁：0=默认不开启，1=开启
-     */
-    UpdateProhibition?: number;
-    /**
-     * 是否开启转移锁：0=默认不开启，1=开启
-     */
-    TransferProhibition?: number;
-    /**
-     * 渠道来源，pc/miniprogram/h5等
-     */
-    ChannelFrom?: string;
-    /**
-     * 订单来源，common正常/dianshi_active点石活动等
-     */
-    OrderFrom?: string;
-    /**
-     * 活动id
-     */
-    ActivityId?: string;
+    RequestId?: string;
 }
 /**
  * 自定义DNS Host

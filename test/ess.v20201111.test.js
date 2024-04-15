@@ -228,9 +228,19 @@ it("ess.v20201111.CreateFlowApprovers", async function () {
     }
 })
 
-it("ess.v20201111.ModifyIntegrationDepartment", async function () {
+it("ess.v20201111.DescribeCancelFlowsTask", async function () {
     try {
-       const data = await client.ModifyIntegrationDepartment({})
+       const data = await client.DescribeCancelFlowsTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ess.v20201111.CreateOrganizationAuthUrl", async function () {
+    try {
+       const data = await client.CreateOrganizationAuthUrl({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -308,9 +318,9 @@ it("ess.v20201111.CreateFlow", async function () {
     }
 })
 
-it("ess.v20201111.DescribeCancelFlowsTask", async function () {
+it("ess.v20201111.CreateBatchOrganizationRegistrationTasks", async function () {
     try {
-       const data = await client.DescribeCancelFlowsTask({})
+       const data = await client.CreateBatchOrganizationRegistrationTasks({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -451,6 +461,16 @@ it("ess.v20201111.GetTaskResultApi", async function () {
 it("ess.v20201111.DescribeExtendedServiceAuthDetail", async function () {
     try {
        const data = await client.DescribeExtendedServiceAuthDetail({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ess.v20201111.ModifyIntegrationDepartment", async function () {
+    try {
+       const data = await client.ModifyIntegrationDepartment({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

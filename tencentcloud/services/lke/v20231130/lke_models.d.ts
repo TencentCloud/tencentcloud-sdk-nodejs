@@ -2600,7 +2600,7 @@ export interface DescribeReleaseResponse {
  */
 export interface TaskParams {
     /**
-     * 下载地址,需要通过cos桶临时秘钥去下载
+     * 下载地址,需要通过cos桶临时密钥去下载
   注意：此字段可能返回 null，表示取不到有效值。
      */
     CosPath?: string;

@@ -748,6 +748,16 @@ it("sqlserver.v20180328.ModifyInstanceParam", async function () {
     }
 })
 
+it("sqlserver.v20180328.DescribeRestoreTimeRange", async function () {
+    try {
+       const data = await client.DescribeRestoreTimeRange({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("sqlserver.v20180328.DescribeSlowlogs", async function () {
     try {
        const data = await client.DescribeSlowlogs({})

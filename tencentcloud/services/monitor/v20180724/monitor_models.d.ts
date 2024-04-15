@@ -8522,24 +8522,29 @@ export interface EventCondition {
      * 告警通知频率
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    AlarmNotifyPeriod: string;
+    AlarmNotifyPeriod?: string;
     /**
      * 重复通知策略预定义（0 - 只告警一次， 1 - 指数告警，2 - 连接告警）
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    AlarmNotifyType: string;
+    AlarmNotifyType?: string;
     /**
      * 事件ID
      */
-    EventID: string;
+    EventID?: string;
     /**
      * 事件展示名称（对外）
      */
-    EventDisplayName: string;
+    EventDisplayName?: string;
     /**
      * 规则ID
      */
-    RuleID: string;
+    RuleID?: string;
+    /**
+     * 指标名
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MetricName?: string;
 }
 /**
  * DescribeClusterAgentCreatingProgress返回参数结构体
@@ -9603,6 +9608,11 @@ export interface Condition {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     ProductId: string;
+    /**
+     * 告警分级阈值配置
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    HierarchicalValue: AlarmHierarchicalValue;
 }
 /**
  * DeleteGrafanaInstance返回参数结构体

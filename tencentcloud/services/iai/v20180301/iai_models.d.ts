@@ -2047,44 +2047,45 @@ export interface DeleteGroupResponse {
 }
 /**
  * 五官定位（人脸关键点）具体信息。
+![image](https://iai-face-demo-default-1254418846.cos.ap-guangzhou.myqcloud.com/130pts.jpg)
  */
 export interface FaceShape {
     /**
      * 描述脸型轮廓的 21 点。
      */
-    FaceProfile: Array<Point>;
+    FaceProfile?: Array<Point>;
     /**
      * 描述左侧眼睛轮廓的 8 点。
      */
-    LeftEye: Array<Point>;
+    LeftEye?: Array<Point>;
     /**
      * 描述右侧眼睛轮廓的 8 点。
      */
-    RightEye: Array<Point>;
+    RightEye?: Array<Point>;
     /**
      * 描述左侧眉毛轮廓的 8 点。
      */
-    LeftEyeBrow: Array<Point>;
+    LeftEyeBrow?: Array<Point>;
     /**
      * 描述右侧眉毛轮廓的 8 点。
      */
-    RightEyeBrow: Array<Point>;
+    RightEyeBrow?: Array<Point>;
     /**
      * 描述嘴巴轮廓的 22 点。
      */
-    Mouth: Array<Point>;
+    Mouth?: Array<Point>;
     /**
      * 描述鼻子轮廓的 13 点。
      */
-    Nose: Array<Point>;
+    Nose?: Array<Point>;
     /**
      * 左瞳孔轮廓的 1 个点。
      */
-    LeftPupil: Array<Point>;
+    LeftPupil?: Array<Point>;
     /**
      * 右瞳孔轮廓的 1 个点。
      */
-    RightPupil: Array<Point>;
+    RightPupil?: Array<Point>;
 }
 /**
  * CompareFace请求参数结构体

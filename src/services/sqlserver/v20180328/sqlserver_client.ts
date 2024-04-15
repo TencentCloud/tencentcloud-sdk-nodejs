@@ -79,6 +79,7 @@ import {
   ModifyDBNameRequest,
   ModifyDBInstanceRenewFlagRequest,
   DescribeUpgradeInstanceCheckResponse,
+  DescribeRestoreTimeRangeResponse,
   CreateIncrementalMigrationResponse,
   DescribeZonesResponse,
   UpgradeDBInstanceRequest,
@@ -346,6 +347,7 @@ import {
   InstanceDBDetail,
   BalanceReadOnlyGroupRequest,
   ModifyInstanceParamResponse,
+  DescribeRestoreTimeRangeRequest,
   DbRollbackTimeInfo,
   CreateCloudReadOnlyDBInstancesResponse,
   DbNormalDetail,
@@ -1124,6 +1126,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyInstanceParamResponse) => void
   ): Promise<ModifyInstanceParamResponse> {
     return this.request("ModifyInstanceParam", req, cb)
+  }
+
+  /**
+   * 本接口(DescribeRestoreTimeRange)用于查询按照时间点可回档的时间范围。
+   */
+  async DescribeRestoreTimeRange(
+    req: DescribeRestoreTimeRangeRequest,
+    cb?: (error: string, rep: DescribeRestoreTimeRangeResponse) => void
+  ): Promise<DescribeRestoreTimeRangeResponse> {
+    return this.request("DescribeRestoreTimeRange", req, cb)
   }
 
   /**

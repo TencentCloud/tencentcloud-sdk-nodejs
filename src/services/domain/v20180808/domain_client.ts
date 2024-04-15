@@ -31,17 +31,20 @@ import {
   ModifyCustomDnsHostRequest,
   DescribeDomainPriceListResponse,
   CheckBatchStatusRequest,
-  SetDomainAutoRenewResponse,
+  ReserveBidInfo,
+  CreateDomainBatchRequest,
   DescribeBatchOperationLogsRequest,
   UploadImageRequest,
   ModifyCustomDnsHostResponse,
+  BidPreDomainsResponse,
   ModifyDomainDNSBatchRequest,
   DescribeBatchOperationLogDetailsResponse,
+  DescribeReservedBidInfoRequest,
   DeletePhoneEmailResponse,
   ReservedPreDomainsResponse,
   DomainBatchDetailSet,
   UploadImageResponse,
-  TemplateInfo,
+  DomainSimpleInfo,
   CreateDomainRedemptionResponse,
   DeletePhoneEmailRequest,
   DescribeReservedPreDomainInfoResponse,
@@ -72,31 +75,33 @@ import {
   DescribeTemplateResponse,
   DescribeDomainSimpleInfoRequest,
   DescribeDomainSimpleInfoResponse,
-  DomainSimpleInfo,
+  TemplateInfo,
   ModifyDomainOwnerBatchResponse,
   TransferInDomainBatchRequest,
   ModifyDomainDNSBatchResponse,
   DescribeReservedPreDomainInfoRequest,
   DescribeDomainPriceListRequest,
   ModifyIntlCustomDnsHostRequest,
+  ReservedPreDomainInfo,
   CheckDomainRequest,
   TransferProhibitionBatchResponse,
   ModifyIntlCustomDnsHostResponse,
   DescribeTemplateListRequest,
   CertificateInfo,
-  ReservedPreDomainInfo,
+  BidPreDomainsRequest,
   CreateTemplateRequest,
   UpdateProhibitionBatchResponse,
   CreatePhoneEmailRequest,
   PriceInfo,
   DescribeTemplateRequest,
+  DescribeReservedBidInfoResponse,
   DescribeTldListRequest,
   DescribeBatchOperationLogDetailsRequest,
   DescribeDomainNameListResponse,
   SyncCustomDnsHostRequest,
   ContactInfo,
   DeleteTemplateRequest,
-  CreateDomainBatchRequest,
+  SetDomainAutoRenewResponse,
   CustomDnsHost,
   DomainList,
   DescribePhoneEmailListRequest,
@@ -128,6 +133,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: SetDomainAutoRenewResponse) => void
   ): Promise<SetDomainAutoRenewResponse> {
     return this.request("SetDomainAutoRenew", req, cb)
+  }
+
+  /**
+   * 接口用于获取合作商竞价过程中竞价详情数据
+   */
+  async DescribeReservedBidInfo(
+    req: DescribeReservedBidInfoRequest,
+    cb?: (error: string, rep: DescribeReservedBidInfoResponse) => void
+  ): Promise<DescribeReservedBidInfoResponse> {
+    return this.request("DescribeReservedBidInfo", req, cb)
   }
 
   /**
@@ -178,6 +193,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribePreDomainListResponse) => void
   ): Promise<DescribePreDomainListResponse> {
     return this.request("DescribePreDomainList", req, cb)
+  }
+
+  /**
+   * 用户合作商预释放出价
+   */
+  async BidPreDomains(
+    req: BidPreDomainsRequest,
+    cb?: (error: string, rep: BidPreDomainsResponse) => void
+  ): Promise<BidPreDomainsResponse> {
+    return this.request("BidPreDomains", req, cb)
   }
 
   /**

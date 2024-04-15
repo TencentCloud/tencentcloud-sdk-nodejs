@@ -514,6 +514,31 @@ export interface IntentionQuestionResult {
     AsrResult?: Array<string>;
 }
 /**
+ * CancelUserAutoSignEnableUrl请求参数结构体
+ */
+export interface CancelUserAutoSignEnableUrlRequest {
+    /**
+     * 执行本接口操作的员工信息。
+  注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。`
+     */
+    Operator: UserInfo;
+    /**
+     * 自动签使用的场景值, 可以选择的场景值如下:
+  <ul><li> **E_PRESCRIPTION_AUTO_SIGN** :  电子处方场景</li><li> **OTHER** :  通用场景</li></ul>
+     */
+    SceneKey: string;
+    /**
+     * 预撤销链接的用户信息，包含姓名、证件类型、证件号码等信息。
+  
+     */
+    UserInfo: UserThreeFactor;
+    /**
+     * 代理企业和员工的信息。
+  在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。
+     */
+    Agent?: Agent;
+}
+/**
  * 企业扩展服务授权列表详情
  */
 export interface AuthInfoDetail {
@@ -1143,6 +1168,10 @@ export interface StaffRole {
      */
     RoleName?: string;
 }
+/**
+ * CreateOrganizationAuthUrl请求参数结构体
+ */
+export declare type CreateOrganizationAuthUrlRequest = null;
 /**
  * CreateBatchQuickSignUrl返回参数结构体
  */
@@ -1930,6 +1959,21 @@ export interface DescribeIntegrationEmployeesRequest {
     Offset?: number;
 }
 /**
+ * UnbindEmployeeUserIdWithClientOpenId返回参数结构体
+ */
+export interface UnbindEmployeeUserIdWithClientOpenIdResponse {
+    /**
+     * 解绑是否成功。
+  <ul><li> **0**：失败 </li>
+  <li> **1**：成功 </li></ul>
+     */
+    Status?: number;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * CreateIntegrationUserRoles返回参数结构体
  */
 export interface CreateIntegrationUserRolesResponse {
@@ -2231,7 +2275,7 @@ export interface AutoSignConfig {
   <li>**贵方原生App -> 腾讯电子签H5 -> 贵方原生App** : JumpUrl格式: qianapp://YOUR_CUSTOM_URL，只需满足 qianapp:// 开头的URL即可。`APP实现方，需要拦截Webview地址跳转，发现url是qianapp:// 开头时跳转到原生页面。`APP拦截地址跳转可参考：<a href='https://stackoverflow.com/questions/41693263/android-webview-err-unknown-url-scheme'>Android</a>，<a href='https://razorpay.com/docs/payments/payment-gateway/web-integration/standard/webview/upi-intent-ios/'>IOS</a> </li></ul>
   
   成功结果返回：
-  若贵方需要在跳转回时通过链接query参数提示开通成功，JumpUrl中的query应携带如下参数：`appendResult=qian`。这样腾讯电子签H5会在跳转回的url后面会添加query参数提示贵方签署成功，比如 qianapp://YOUR_CUSTOM_URL?action=sign&result=success&from=tencent_ess
+  若贵方需要在跳转回时通过链接query参数提示开通成功，JumpUrl中的query应携带如下参数：`appendResult=qian`。这样腾讯电子签H5会在跳转回的url后面会添加query参数提示贵方签署成功，例如： qianapp://YOUR_CUSTOM_URL?action=sign&result=success&from=tencent_ess
      */
     JumpUrl?: string;
 }
@@ -2255,15 +2299,21 @@ export interface DescribeThirdPartyAuthCodeRequest {
     Agent?: Agent;
 }
 /**
- * UnbindEmployeeUserIdWithClientOpenId返回参数结构体
+ * CreateBatchOrganizationRegistrationTasks返回参数结构体
  */
-export interface UnbindEmployeeUserIdWithClientOpenIdResponse {
+export interface CreateBatchOrganizationRegistrationTasksResponse {
     /**
-     * 解绑是否成功。
-  <ul><li> **0**：失败 </li>
-  <li> **1**：成功 </li></ul>
+     * 生成注册链接的任务Id，
+  根据这个id， 调用DescribeBatchOrganizationRegistrationUrls 获取生成的链接，进入认证流程
      */
-    Status?: number;
+    TaskId?: string;
+    /**
+     * 批量生成企业认证链接的详细错误信息，
+  顺序与输入参数保持一致。
+  若企业认证均成功生成，则不返回错误信息；
+  若存在任何错误，则返回具体的错误描述。
+     */
+    ErrorMessages?: Array<string>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -3177,6 +3227,15 @@ export interface CreateFlowSignReviewRequest {
   
      */
     ReviewMessage?: string;
+}
+/**
+ * CreateOrganizationAuthUrl返回参数结构体
+ */
+export interface CreateOrganizationAuthUrlResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * UnbindEmployeeUserIdWithClientOpenId请求参数结构体
@@ -4093,7 +4152,7 @@ export interface FlowCreateApprover {
     /**
      * 签署方经办人在模板中配置的参与方ID，与控件绑定，是控件的归属方，ID为32位字符串。
   
-  <b>模板发起合同时，该参数为必填项，可以通过[查询模版信息接口](https://qian.tencent.com/developers/companyApis/templatesAndFiles/DescribeFlowTemplates)获得。</b>
+  <b>模板发起合同时，该参数为必填项，可以通过[查询模板信息接口](https://qian.tencent.com/developers/companyApis/templatesAndFiles/DescribeFlowTemplates)获得。</b>
   <b>文件发起合同时，该参数无需传值。</b>
   
   如果开发者后续用合同模板发起合同，建议保存此值，在用合同模板发起合同中需此值绑定对应的签署经办人 。
@@ -4689,6 +4748,73 @@ export interface DescribeOrganizationSealsResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * 企业认证信息参数， 需要保证这些参数跟营业执照中的信息一致。
+ */
+export interface RegistrationOrganizationInfo {
+    /**
+     * 组织机构名称。
+  请确认该名称与企业营业执照中注册的名称一致。
+  如果名称中包含英文括号()，请使用中文括号（）代替。
+     */
+    OrganizationName: string;
+    /**
+     * 组织机构企业统一社会信用代码。
+  请确认该企业统一社会信用代码与企业营业执照中注册的统一社会信用代码一致。
+     */
+    UniformSocialCreditCode: string;
+    /**
+     * 组织机构法人的姓名。
+  请确认该企业统一社会信用代码与企业营业执照中注册的法人姓名一致。
+     */
+    LegalName: string;
+    /**
+     * 组织机构企业注册地址。
+  请确认该企业注册地址与企业营业执照中注册的地址一致。
+     */
+    Address: string;
+    /**
+     * 组织机构超管姓名。
+  在注册流程中，必须是超管本人进行操作。
+  如果法人做为超管管理组织机构,超管姓名就是法人姓名
+     */
+    AdminName?: string;
+    /**
+     * 组织机构超管姓名。
+  在注册流程中，这个手机号必须跟操作人在电子签注册的个人手机号一致。
+     */
+    AdminMobile?: string;
+    /**
+     * 可选的此企业允许的授权方式, 可以设置的方式有:
+  1：上传授权书
+  2：法人授权超管
+  5：授权书+对公打款
+  
+  
+  注:
+  `1. 当前仅支持一种认证方式`
+  `2. 如果当前的企业类型是政府/事业单位, 则只支持上传授权书+对公打款`
+  `3. 如果当前操作人是法人,则是法人认证`
+     */
+    AuthorizationTypes?: Array<number | bigint>;
+    /**
+     * 认证人身份证号
+     */
+    AdminIdCardNumber?: string;
+    /**
+     * 认证人证件类型
+  支持以下类型
+  <ul><li>ID_CARD : 居民身份证  (默认值)</li>
+  <li>HONGKONG_AND_MACAO : 港澳居民来往内地通行证</li>
+  <li>HONGKONG_MACAO_AND_TAIWAN : 港澳台居民居住证(格式同居民身份证)</li></ul>
+  
+     */
+    AdminIdCardType?: string;
+    /**
+     * 营业执照正面照(PNG或JPG) base64格式, 大小不超过5M
+     */
+    BusinessLicense?: string;
 }
 /**
  * CreateEmbedWebUrl请求参数结构体
@@ -5457,10 +5583,9 @@ export interface ApproverInfo {
      * 通知签署方经办人的方式,  有以下途径:
   <ul><li>  **sms**  :  (默认)短信</li>
   <li>   **none**   : 不通知</li></ul>
-  ```
+  
   注意：
-  如果使用的是通过文件发起合同（CreateFlowByFiles），NotifyType必须 是 sms 才会发送短信
-  ```
+  `如果使用的是通过文件发起合同（CreateFlowByFiles），NotifyType必须 是 sms 才会发送短信`
      */
     NotifyType?: string;
     /**
@@ -5763,29 +5888,36 @@ export interface FileInfo {
     CreatedOn?: number;
 }
 /**
- * CancelUserAutoSignEnableUrl请求参数结构体
+ * CreateBatchOrganizationRegistrationTasks请求参数结构体
  */
-export interface CancelUserAutoSignEnableUrlRequest {
+export interface CreateBatchOrganizationRegistrationTasksRequest {
     /**
      * 执行本接口操作的员工信息。
   注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。`
      */
     Operator: UserInfo;
     /**
-     * 自动签使用的场景值, 可以选择的场景值如下:
-  <ul><li> **E_PRESCRIPTION_AUTO_SIGN** :  电子处方场景</li><li> **OTHER** :  通用场景</li></ul>
+     * 组织机构注册信息。
+  一次最多支持10条认证流
      */
-    SceneKey: string;
-    /**
-     * 预撤销链接的用户信息，包含姓名、证件类型、证件号码等信息。
-  
-     */
-    UserInfo: UserThreeFactor;
+    RegistrationOrganizations: Array<RegistrationOrganizationInfo>;
     /**
      * 代理企业和员工的信息。
   在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。
      */
     Agent?: Agent;
+    /**
+     * 要生成链接的类型, 可以选择的值如下:
+  
+  <ul>
+  <li>(默认)PC: 生成PC端的链接</li>
+  <li>SHORT_URL: H5跳转到电子签小程序链接的短链形式, 一般用于发送短信中带的链接, 打开后进入腾讯电子签小程序</li>
+  <li>APP：生成小程序跳转链接</li>
+  <li>H5：生成H5跳转长链接</li>
+  <li>SHORT_H5：生成H5跳转短链</li>
+  </ul>
+     */
+    Endpoint?: string;
 }
 /**
  * 创建员工的失败数据
@@ -5922,6 +6054,12 @@ export interface CreateOrganizationBatchSignUrlRequest {
    如果UserId为空，则此字段不能为空。同时，姓名和手机号码必须与传入合同（FlowId）中的签署人信息一致。
      */
     Mobile?: string;
+    /**
+     * 为签署方经办人在签署合同中的参与方ID，必须与参数FlowIds数组一一对应。
+  您可以通过查询合同接口（DescribeFlowInfo）查询此参数。
+  若传了此参数，则可以不传 UserId, Name, Mobile等参数
+     */
+    RecipientIds?: Array<string>;
 }
 /**
  * 企业角色数据信息
@@ -6369,41 +6507,36 @@ export interface ModifyExtendedServiceResponse {
     RequestId?: string;
 }
 /**
- * CreateSealPolicy请求参数结构体
+ * CreateFlowGroupByTemplates请求参数结构体
  */
-export interface CreateSealPolicyRequest {
+export interface CreateFlowGroupByTemplatesRequest {
     /**
      * 执行本接口操作的员工信息。
   注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。`
      */
     Operator: UserInfo;
     /**
-     * 用户在电子文件签署平台标识信息，具体参考UserInfo结构体。可跟下面的UserIds可叠加起作用
+     * 合同（流程）组名称（可自定义此名称），长度不能超过200，只能由中文、字母、数字和下划线组成。
      */
-    Users: Array<UserInfo>;
+    FlowGroupName: string;
     /**
-     * 电子印章ID，为32位字符串。
-  建议开发者保留此印章ID，后续指定签署区印章或者操作印章需此印章ID。
-  可登录腾讯电子签控制台，在 "印章"->"印章中心"选择查看的印章，在"印章详情" 中查看某个印章的SealId(在页面中展示为印章ID)。
+     * 合同（流程）组的子合同信息，支持2-50个子合同
      */
-    SealId: string;
-    /**
-     * 授权有效期。时间戳秒级
-     */
-    Expired: number;
-    /**
-     * 需要授权的用户UserId集合。跟上面的SealId参数配合使用。选填，跟上面的Users同时起作用
-     */
-    UserIds?: Array<string>;
-    /**
-     * 印章授权内容
-     */
-    Policy?: string;
+    FlowGroupInfos: Array<FlowGroupInfo>;
     /**
      * 代理企业和员工的信息。
   在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。
      */
     Agent?: Agent;
+    /**
+     * 合同（流程）组的配置项信息。
+  其中包括：
+  <ul>
+  <li>是否通知本企业签署方</li>
+  <li>是否通知其他签署方</li>
+  </ul>
+     */
+    FlowGroupOptions?: FlowGroupOptions;
 }
 /**
  * 合同组相关信息，指定合同组子合同和签署方的信息，用于补充动态签署人。
@@ -7067,36 +7200,41 @@ export interface DescribeFlowBriefsRequest {
     Agent?: Agent;
 }
 /**
- * CreateFlowGroupByTemplates请求参数结构体
+ * CreateSealPolicy请求参数结构体
  */
-export interface CreateFlowGroupByTemplatesRequest {
+export interface CreateSealPolicyRequest {
     /**
      * 执行本接口操作的员工信息。
   注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。`
      */
     Operator: UserInfo;
     /**
-     * 合同（流程）组名称（可自定义此名称），长度不能超过200，只能由中文、字母、数字和下划线组成。
+     * 用户在电子文件签署平台标识信息，具体参考UserInfo结构体。可跟下面的UserIds可叠加起作用
      */
-    FlowGroupName: string;
+    Users: Array<UserInfo>;
     /**
-     * 合同（流程）组的子合同信息，支持2-50个子合同
+     * 电子印章ID，为32位字符串。
+  建议开发者保留此印章ID，后续指定签署区印章或者操作印章需此印章ID。
+  可登录腾讯电子签控制台，在 "印章"->"印章中心"选择查看的印章，在"印章详情" 中查看某个印章的SealId(在页面中展示为印章ID)。
      */
-    FlowGroupInfos: Array<FlowGroupInfo>;
+    SealId: string;
+    /**
+     * 授权有效期。时间戳秒级
+     */
+    Expired: number;
+    /**
+     * 需要授权的用户UserId集合。跟上面的SealId参数配合使用。选填，跟上面的Users同时起作用
+     */
+    UserIds?: Array<string>;
+    /**
+     * 印章授权内容
+     */
+    Policy?: string;
     /**
      * 代理企业和员工的信息。
   在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。
      */
     Agent?: Agent;
-    /**
-     * 合同（流程）组的配置项信息。
-  其中包括：
-  <ul>
-  <li>是否通知本企业签署方</li>
-  <li>是否通知其他签署方</li>
-  </ul>
-     */
-    FlowGroupOptions?: FlowGroupOptions;
 }
 /**
  * DescribeBillUsageDetail返回参数结构体

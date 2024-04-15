@@ -1291,6 +1291,24 @@ export interface DescribeUpgradeInstanceCheckResponse {
 }
 
 /**
+ * DescribeRestoreTimeRange返回参数结构体
+ */
+export interface DescribeRestoreTimeRangeResponse {
+  /**
+   * 按照时间点可回档的最小时间
+   */
+  MinTime?: string
+  /**
+   * 按照时间点可回档的最大时间
+   */
+  MaxTime?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateIncrementalMigration返回参数结构体
  */
 export interface CreateIncrementalMigrationResponse {
@@ -7764,6 +7782,20 @@ export interface ModifyInstanceParamResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeRestoreTimeRange请求参数结构体
+ */
+export interface DescribeRestoreTimeRangeRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+  /**
+   * 回档的目标实例ID，不填默认回档到原实例
+   */
+  TargetInstanceId?: string
 }
 
 /**

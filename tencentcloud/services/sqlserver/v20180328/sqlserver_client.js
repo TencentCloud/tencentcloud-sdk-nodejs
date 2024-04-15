@@ -468,6 +468,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyInstanceParam", req, cb);
     }
     /**
+     * 本接口(DescribeRestoreTimeRange)用于查询按照时间点可回档的时间范围。
+     */
+    async DescribeRestoreTimeRange(req, cb) {
+        return this.request("DescribeRestoreTimeRange", req, cb);
+    }
+    /**
      * 本接口（DescribeSlowlogs）用于获取慢查询日志文件信息
      */
     async DescribeSlowlogs(req, cb) {
