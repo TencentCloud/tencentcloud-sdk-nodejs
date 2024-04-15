@@ -620,7 +620,7 @@ export class Client extends AbstractClient {
 注： **此接口需要购买单独的实名套餐包方可调用，如有需求请联系对接人员评估**
      */
   async CreateOrganizationAuthUrl(
-    req?: CreateOrganizationAuthUrlRequest,
+    req: CreateOrganizationAuthUrlRequest,
     cb?: (error: string, rep: CreateOrganizationAuthUrlResponse) => void
   ): Promise<CreateOrganizationAuthUrlResponse> {
     return this.request("CreateOrganizationAuthUrl", req, cb)

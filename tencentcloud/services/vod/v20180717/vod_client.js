@@ -889,7 +889,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteAIRecognitionTemplate", req, cb);
     }
     /**
-     * 该接口用于创建点播子应用。
+     * 该接口用于创建点播应用。
      */
     async CreateSubAppId(req, cb) {
         return this.request("CreateSubAppId", req, cb);
@@ -1065,7 +1065,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeSuperPlayerConfigs", req, cb);
     }
     /**
-     * 该接口用于获取当前账号的子应用列表，包含主应用。
+     * 该接口用于获取当前账号的应用列表。
      */
     async DescribeSubAppIds(req, cb) {
         return this.request("DescribeSubAppIds", req, cb);

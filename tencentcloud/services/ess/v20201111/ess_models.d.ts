@@ -1171,7 +1171,117 @@ export interface StaffRole {
 /**
  * CreateOrganizationAuthUrl请求参数结构体
  */
-export declare type CreateOrganizationAuthUrlRequest = null;
+export interface CreateOrganizationAuthUrlRequest {
+    /**
+     * 操作人信息
+     */
+    Operator: UserInfo;
+    /**
+     * 指定授权方式 支持多选:
+  1-上传授权书方式
+  2- 法人授权方式
+  3- 法人身份认证方式
+     */
+    AuthorizationTypes?: Array<number | bigint>;
+    /**
+     * 企业名称
+  EndPointType=“H5”或者"SHORT_H5"时，该参数必填
+  
+     */
+    OrganizationName?: string;
+    /**
+     * 企业统一社会信用代码
+     */
+    UniformSocialCreditCode?: string;
+    /**
+     * 法人姓名
+     */
+    LegalName?: string;
+    /**
+     * 认证完成跳转链接
+     */
+    AutoJumpUrl?: string;
+    /**
+     * 营业执照企业地址
+  示例：xx省xx市xx县/区xx街道
+     */
+    OrganizationAddress?: string;
+    /**
+     * 认证人姓名
+     */
+    AdminName?: string;
+    /**
+     * 认证人手机号
+     */
+    AdminMobile?: string;
+    /**
+     * 认证人身份证号
+     */
+    AdminIdCardNumber?: string;
+    /**
+     * 认证人证件类型
+  支持以下类型
+  <ul><li>ID_CARD : 居民身份证  (默认值)</li>
+  <li>HONGKONG_AND_MACAO : 港澳居民来往内地通行证</li>
+  <li>HONGKONG_MACAO_AND_TAIWAN : 港澳台居民居住证(格式同居民身份证)</li></ul>
+  
+     */
+    AdminIdCardType?: string;
+    /**
+     * 营业执照的社会信用代码保持一致
+  false 关闭-默认
+  true 开启
+     */
+    UniformSocialCreditCodeSame?: boolean;
+    /**
+     * 法人姓名保持一致
+  false 关闭-默认
+  true 开启
+     */
+    LegalNameSame?: boolean;
+    /**
+     * 认证人姓名一致
+  false 关闭-默认
+  true 开启
+  注意：
+  开启后在认证过程前会校验拦截
+     */
+    AdminNameSame?: boolean;
+    /**
+     * 认证人居民身份证件号一致
+  false 关闭-默认
+  true 开启
+  注意：
+  开启后在认证过程前会校验拦截
+     */
+    AdminIdCardNumberSame?: boolean;
+    /**
+     * 认证人手机号一致
+  false 关闭-默认
+  true 开启
+  注意：
+  开启后在认证过程前会校验拦截
+     */
+    AdminMobileSame?: boolean;
+    /**
+     * 企业名称保持一致
+  false 关闭-默认
+  true 开启
+     */
+    OrganizationNameSame?: boolean;
+    /**
+     * 营业执照正面照(PNG或JPG) base64格式, 大小不超过5M
+     */
+    BusinessLicense?: string;
+    /**
+     * 跳转链接类型：
+  "PC"-PC端认证链接
+  "APP"-全屏或半屏跳转小程序链接
+  “H5”-H5页面认证链接 "SHORT_H5"- H5认证短链
+  "SHORT_URL"- 跳转小程序短链
+     */
+    Endpoint?: string;
+}
 /**
  * CreateBatchQuickSignUrl返回参数结构体
  */
@@ -3232,6 +3342,18 @@ export interface CreateFlowSignReviewRequest {
  * CreateOrganizationAuthUrl返回参数结构体
  */
 export interface CreateOrganizationAuthUrlResponse {
+    /**
+     * “H5”-H5长连接
+  "SHORT_H5"- H5短链
+  "APP"-小程序
+  "PC"-PC浏览器
+  链接有效期统一30天
+     */
+    AuthUrl?: string;
+    /**
+     * 链接过期时间戳
+     */
+    ExpiredTime?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */

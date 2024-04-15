@@ -58,6 +58,16 @@ it("tke.v20180525.CreateCluster", async function () {
     }
 })
 
+it("tke.v20180525.DescribeSupportedRuntime", async function () {
+    try {
+       const data = await client.DescribeSupportedRuntime({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tke.v20180525.InstallEdgeLogAgent", async function () {
     try {
        const data = await client.InstallEdgeLogAgent({})
@@ -2181,6 +2191,16 @@ it("tke.v20180525.CheckEdgeClusterCIDR", async function () {
 it("tke.v20180525.CreateClusterEndpointVip", async function () {
     try {
        const data = await client.CreateClusterEndpointVip({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tke.v20180525.ModifyClusterRuntimeConfig", async function () {
+    try {
+       const data = await client.ModifyClusterRuntimeConfig({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

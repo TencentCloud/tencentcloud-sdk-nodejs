@@ -100,7 +100,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteStaff", req, cb);
     }
     /**
-     * 修改公司资质申请，只能修改状态为驳回或待审核的申请单。（1、首次使用接口，建议先在云联络中心控制台查看各个资料模版:https://console.cloud.tencent.com/ccc/enterprise/update。2、参数中图片Url建议使用腾讯云Cos存储的临时链接）
+     * 修改公司资质申请，只能修改状态为驳回或待审核的申请单。（1、首次使用接口，建议先在云联络中心控制台查看各个资料模板:https://console.cloud.tencent.com/ccc/enterprise/update。2、参数中图片Url建议使用腾讯云Cos存储的临时链接）
      */
     async ModifyCompanyApply(req, cb) {
         return this.request("ModifyCompanyApply", req, cb);
@@ -166,7 +166,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribePredictiveDialingSessions", req, cb);
     }
     /**
-     * 创建公司资质申请（1、首次使用接口，建议先在云联络中心控制台查看各个资料模版:https://console.cloud.tencent.com/ccc/enterprise/update。2、参数中图片Url建议使用腾讯云Cos存储的临时链接）
+     * 创建公司资质申请（1、首次使用接口，建议先在云联络中心控制台查看各个资料模板:https://console.cloud.tencent.com/ccc/enterprise/update。2、参数中图片Url建议使用腾讯云Cos存储的临时链接）
      */
     async CreateCompanyApply(req, cb) {
         return this.request("CreateCompanyApply", req, cb);

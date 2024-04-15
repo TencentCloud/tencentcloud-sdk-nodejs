@@ -643,7 +643,7 @@ export declare class Client extends AbstractClient {
      */
     DeleteAIRecognitionTemplate(req: DeleteAIRecognitionTemplateRequest, cb?: (error: string, rep: DeleteAIRecognitionTemplateResponse) => void): Promise<DeleteAIRecognitionTemplateResponse>;
     /**
-     * 该接口用于创建点播子应用。
+     * 该接口用于创建点播应用。
      */
     CreateSubAppId(req: CreateSubAppIdRequest, cb?: (error: string, rep: CreateSubAppIdResponse) => void): Promise<CreateSubAppIdResponse>;
     /**
@@ -765,7 +765,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeSuperPlayerConfigs(req: DescribeSuperPlayerConfigsRequest, cb?: (error: string, rep: DescribeSuperPlayerConfigsResponse) => void): Promise<DescribeSuperPlayerConfigsResponse>;
     /**
-     * 该接口用于获取当前账号的子应用列表，包含主应用。
+     * 该接口用于获取当前账号的应用列表。
      */
     DescribeSubAppIds(req: DescribeSubAppIdsRequest, cb?: (error: string, rep: DescribeSubAppIdsResponse) => void): Promise<DescribeSubAppIdsResponse>;
     /**

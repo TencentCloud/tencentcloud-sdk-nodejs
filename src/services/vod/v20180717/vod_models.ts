@@ -283,7 +283,7 @@ export interface WeChatMiniProgramPublishRequest {
    */
   FileId: string
   /**
-   * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
+   * <b>点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b>
    */
   SubAppId?: number
   /**
@@ -3133,7 +3133,7 @@ export interface ReviewAudioVideoRequest {
    */
   FileId: string
   /**
-   * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
+   * <b>点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b>
    */
   SubAppId?: number
   /**
@@ -5113,7 +5113,7 @@ export interface SetCLSPushTargetRequest {
    */
   Domain: string
   /**
-   * 点播应用 ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
+   * <b>点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b>
    */
   SubAppId?: number
   /**
@@ -6137,11 +6137,11 @@ export interface DescribeAdaptiveDynamicStreamingTemplatesResponse {
   /**
    * 符合过滤条件的记录总数。
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 转自适应码流模板详情列表。
    */
-  AdaptiveDynamicStreamingTemplateSet: Array<AdaptiveDynamicStreamingTemplate>
+  AdaptiveDynamicStreamingTemplateSet?: Array<AdaptiveDynamicStreamingTemplate>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6193,7 +6193,7 @@ export interface TimeRange {
  */
 export interface DescribeAdaptiveDynamicStreamingTemplatesRequest {
   /**
-   * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
+   * <b>点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b>
    */
   SubAppId?: number
   /**
@@ -8626,7 +8626,7 @@ export interface DeleteMediaRequest {
    */
   FileId: string
   /**
-   * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
+   * <b>点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b>
    */
   SubAppId?: number
   /**
@@ -8849,11 +8849,11 @@ export interface DeleteRebuildMediaTemplateResponse {
  */
 export interface DescribeSubAppIdsResponse {
   /**
-   * 子应用信息集合。
+   * 应用信息集合。
    */
   SubAppIdInfoSet?: Array<SubAppIdInfo>
   /**
-   * 子应用总数量。
+   * 应用总数量。
    */
   TotalCount?: number
   /**
@@ -10448,9 +10448,9 @@ export interface ModifySubAppIdStatusRequest {
  */
 export interface CreateSubAppIdResponse {
   /**
-   * 新创建的子应用 ID。
+   * 新创建的应用 ID。
    */
-  SubAppId: number
+  SubAppId?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -11997,7 +11997,7 @@ export interface ApplyUploadRequest {
    */
   MediaType: string
   /**
-   * <b>点播 [子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
+   * <b>点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b>
    */
   SubAppId?: number
   /**
@@ -13602,7 +13602,7 @@ export interface PushUrlCacheRequest {
    */
   Urls: Array<string>
   /**
-   * <b>点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。</b>
+   * <b>点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b>
    */
   SubAppId?: number
 }
@@ -16102,11 +16102,11 @@ export interface DescribeTasksResponse {
  */
 export interface DescribeSubAppIdsRequest {
   /**
-   * 子应用名称。
+   * 应用名称。
    */
   Name?: string
   /**
-   * 标签信息，查询指定标签的子应用列表。
+   * 标签信息，查询指定标签的应用列表。
    */
   Tags?: Array<ResourceTag>
   /**
@@ -18479,7 +18479,7 @@ export interface RestoreMediaRequest {
    */
   FileIds: Array<string>
   /**
-   * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
+   * <b>点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b>
    */
   SubAppId?: number
   /**
@@ -18696,11 +18696,11 @@ export interface AiRecognitionTaskAsrWordsResult {
  */
 export interface CreateSubAppIdRequest {
   /**
-   * 子应用名称，长度限制：40个字符。
+   * 应用名称，长度限制：40个字符。
    */
   Name: string
   /**
-   * 子应用简介，长度限制： 300个字符。
+   * 应用简介，长度限制： 300个字符。
    */
   Description?: string
 }
@@ -20266,8 +20266,7 @@ export interface DescribeStorageDetailsRequest {
    */
   EndTime: string
   /**
-   * <b>点播 [子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
-当该字段为1时，表示以管理员身份查询所有子应用（含主应用）的用量合计。</b>
+   * <b>点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b>
    */
   SubAppId?: number
   /**
@@ -20286,7 +20285,7 @@ export interface DescribeStorageDetailsRequest {
 <li>DeepArchiveStorage：深度归档存储。</li>
 <li>DeletedInfrequentStorage：低频存储提前删除量。</li>
 <li>DeletedArchiveStorage：归档提前删除量。</li>
-<li>DeletedDeepArchiveStorage：深度归档提前删除量。
+<li>DeletedDeepArchiveStorage：深度归档提前删除量。</li>
 <li>ArchiveStandardRetrieval：归档标准取回量。</li>
 <li>ArchiveExpeditedRetrieval：归档快速取回量。</li>
 <li>ArchiveBulkRetrieval：归档批量取回量。</li>

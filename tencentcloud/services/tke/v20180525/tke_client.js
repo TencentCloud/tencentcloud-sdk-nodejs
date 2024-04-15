@@ -52,6 +52,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateCluster", req, cb);
     }
     /**
+     * 根据K8S版本获取可选运行时版本
+     */
+    async DescribeSupportedRuntime(req, cb) {
+        return this.request("DescribeSupportedRuntime", req, cb);
+    }
+    /**
      * 在tke@edge集群的边缘节点上安装日志采集组件
      */
     async InstallEdgeLogAgent(req, cb) {
@@ -1328,6 +1334,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CreateClusterEndpointVip(req, cb) {
         return this.request("CreateClusterEndpointVip", req, cb);
+    }
+    /**
+     * 修改集群及节点池纬度运行时配置
+     */
+    async ModifyClusterRuntimeConfig(req, cb) {
+        return this.request("ModifyClusterRuntimeConfig", req, cb);
     }
     /**
      * 查询路由表冲突列表

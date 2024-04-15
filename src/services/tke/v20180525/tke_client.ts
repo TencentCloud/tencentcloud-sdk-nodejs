@@ -157,6 +157,7 @@ import {
   DescribeClusterReleaseHistoryResponse,
   DescribeImagesRequest,
   UninstallEdgeLogAgentResponse,
+  DescribeSupportedRuntimeRequest,
   AddVpcCniSubnetsRequest,
   DescribePrometheusAlertHistoryResponse,
   ExistedInstancesPara,
@@ -258,6 +259,7 @@ import {
   UpgradeClusterReleaseResponse,
   DescribePrometheusAlertPolicyRequest,
   DeleteClusterAsGroupsResponse,
+  ModifyClusterRuntimeConfigRequest,
   RegionInstance,
   DescribePrometheusConfigRequest,
   DescribeEdgeLogSwitchesRequest,
@@ -469,6 +471,7 @@ import {
   CreatePrometheusAlertRuleRequest,
   UpdateEKSClusterRequest,
   CreateTKEEdgeClusterRequest,
+  DescribeSupportedRuntimeResponse,
   CreateClusterVirtualNodePoolResponse,
   CreateEKSClusterResponse,
   CreateImageCacheResponse,
@@ -509,12 +512,14 @@ import {
   CreateClusterEndpointVipResponse,
   TaskStepInfo,
   DeletePrometheusAlertRuleRequest,
+  NodePoolRuntime,
   ModifyReservedInstanceScopeResponse,
   DescribeRouteTableConflictsRequest,
   DeleteClusterEndpointVipResponse,
   ClusterBasicSettings,
   PrometheusTemp,
   DescribeBackupStorageLocationsResponse,
+  OptionalRuntimes,
   ModifyClusterAsGroupAttributeResponse,
   DeletePrometheusTempRequest,
   DescribeTKEEdgeScriptResponse,
@@ -583,6 +588,7 @@ import {
   DescribePodsBySpecRequest,
   UpdateClusterKubeconfigResponse,
   ForwardApplicationRequestV3Response,
+  RuntimeConfig,
   ModifyClusterAuthenticationOptionsRequest,
   DeleteClusterEndpointVipRequest,
   LivenessOrReadinessProbe,
@@ -592,6 +598,7 @@ import {
   DescribeVpcCniPodLimitsRequest,
   DeleteImageCachesResponse,
   DescribeEKSContainerInstanceRegionsResponse,
+  ModifyClusterRuntimeConfigResponse,
   ModifyPrometheusRecordRuleYamlResponse,
   DescribeTKEEdgeScriptRequest,
   AddVpcCniSubnetsResponse,
@@ -671,6 +678,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateClusterResponse) => void
   ): Promise<CreateClusterResponse> {
     return this.request("CreateCluster", req, cb)
+  }
+
+  /**
+   * 根据K8S版本获取可选运行时版本
+   */
+  async DescribeSupportedRuntime(
+    req: DescribeSupportedRuntimeRequest,
+    cb?: (error: string, rep: DescribeSupportedRuntimeResponse) => void
+  ): Promise<DescribeSupportedRuntimeResponse> {
+    return this.request("DescribeSupportedRuntime", req, cb)
   }
 
   /**
@@ -2801,6 +2818,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateClusterEndpointVipResponse) => void
   ): Promise<CreateClusterEndpointVipResponse> {
     return this.request("CreateClusterEndpointVip", req, cb)
+  }
+
+  /**
+   * 修改集群及节点池纬度运行时配置
+   */
+  async ModifyClusterRuntimeConfig(
+    req: ModifyClusterRuntimeConfigRequest,
+    cb?: (error: string, rep: ModifyClusterRuntimeConfigResponse) => void
+  ): Promise<ModifyClusterRuntimeConfigResponse> {
+    return this.request("ModifyClusterRuntimeConfig", req, cb)
   }
 
   /**

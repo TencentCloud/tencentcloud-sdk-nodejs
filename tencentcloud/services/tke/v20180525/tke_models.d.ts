@@ -2887,6 +2887,15 @@ export interface UninstallEdgeLogAgentResponse {
     RequestId?: string;
 }
 /**
+ * DescribeSupportedRuntime请求参数结构体
+ */
+export interface DescribeSupportedRuntimeRequest {
+    /**
+     * K8S版本
+     */
+    K8sVersion: string;
+}
+/**
  * AddVpcCniSubnets请求参数结构体
  */
 export interface AddVpcCniSubnetsRequest {
@@ -5101,6 +5110,27 @@ export interface DeleteClusterAsGroupsResponse {
     RequestId?: string;
 }
 /**
+ * ModifyClusterRuntimeConfig请求参数结构体
+ */
+export interface ModifyClusterRuntimeConfigRequest {
+    /**
+     * 集群ID，必填
+     */
+    ClusterId: string;
+    /**
+     * 当需要修改运行时版本是根据另外的K8S版本获取时，需填写。例如升级校验有冲突后修改场景
+     */
+    DstK8SVersion?: string;
+    /**
+     * 需要修改集群运行时时填写
+     */
+    ClusterRuntimeConfig?: RuntimeConfig;
+    /**
+     * 需要修改节点池运行时时，填需要修改的部分
+     */
+    NodePoolRuntimeConfig?: Array<NodePoolRuntime>;
+}
+/**
  * 地域属性信息
  */
 export interface RegionInstance {
@@ -5879,7 +5909,7 @@ export interface EnableClusterAuditRequest {
  */
 export interface CreateClusterRouteTableRequest {
     /**
-     * 路由表名称
+     * 路由表名称，一般为集群ID
      */
     RouteTableName: string;
     /**
@@ -5891,7 +5921,7 @@ export interface CreateClusterRouteTableRequest {
      */
     VpcId: string;
     /**
-     * 是否忽略CIDR冲突
+     * 是否忽略CIDR与 vpc 路由表的冲突， 0 表示不忽略，1表示忽略。默认不忽略
      */
     IgnoreClusterCidrConflict?: number;
 }
@@ -6311,11 +6341,11 @@ export interface CreateClusterRouteRequest {
      */
     RouteTableName: string;
     /**
-     * 目的端CIDR。
+     * 目的节点的 PodCIDR
      */
     DestinationCidrBlock: string;
     /**
-     * 下一跳地址。
+     * 下一跳地址，即目的节点的内网 IP 地址
      */
     GatewayIp: string;
 }
@@ -6892,7 +6922,7 @@ export interface ForwardTKEEdgeApplicationRequestV3Response {
     /**
      * 请求集群addon后返回的数据
      */
-    ResponseBody: string;
+    ResponseBody?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -9595,6 +9625,20 @@ export interface CreateTKEEdgeClusterRequest {
     TagSpecification?: TagSpecification;
 }
 /**
+ * DescribeSupportedRuntime返回参数结构体
+ */
+export interface DescribeSupportedRuntimeResponse {
+    /**
+     * 可选运行时列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    OptionalRuntimes?: Array<OptionalRuntimes>;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * CreateClusterVirtualNodePool返回参数结构体
  */
 export interface CreateClusterVirtualNodePoolResponse {
@@ -10319,6 +10363,31 @@ export interface DeletePrometheusAlertRuleRequest {
     AlertIds: Array<string>;
 }
 /**
+ * NodePool的运行时配置
+ */
+export interface NodePoolRuntime {
+    /**
+     * 节点池ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    NodePoolId?: string;
+    /**
+     * 运行时类型
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RuntimeType?: string;
+    /**
+     * 运行时版本
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RuntimeVersion?: string;
+    /**
+     * 节点池名称
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    NodePoolName?: string;
+}
+/**
  * ModifyReservedInstanceScope返回参数结构体
  */
 export interface ModifyReservedInstanceScopeResponse {
@@ -10490,6 +10559,26 @@ export interface DescribeBackupStorageLocationsResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * 可选运行时
+ */
+export interface OptionalRuntimes {
+    /**
+     * 运行时类型
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RuntimeType?: string;
+    /**
+     * 运行时版本列表
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RuntimeVersions?: Array<string>;
+    /**
+     * 该类型的默认运行时版本
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    DefaultVersion?: string;
 }
 /**
  * ModifyClusterAsGroupAttribute返回参数结构体
@@ -11823,6 +11912,21 @@ export interface ForwardApplicationRequestV3Response {
     RequestId?: string;
 }
 /**
+ * 运行时配置
+ */
+export interface RuntimeConfig {
+    /**
+     * 运行时类型
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RuntimeType?: string;
+    /**
+     * 运行时版本
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RuntimeVersion?: string;
+}
+/**
  * ModifyClusterAuthenticationOptions请求参数结构体
  */
 export interface ModifyClusterAuthenticationOptionsRequest {
@@ -11999,6 +12103,15 @@ export interface DescribeEKSContainerInstanceRegionsResponse {
      * 总数
      */
     TotalCount: number;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
+ * ModifyClusterRuntimeConfig返回参数结构体
+ */
+export interface ModifyClusterRuntimeConfigResponse {
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */

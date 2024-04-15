@@ -23,6 +23,10 @@ export interface DescribeKBComponentVulnerabilityRequest {
      * 组件的PURL，其中Name和Version为必填字段
      */
     PURL: PURL;
+    /**
+     * 语言，ZH或EN
+     */
+    Language?: string;
 }
 /**
  * 受漏洞影响的组件信息。
@@ -87,7 +91,7 @@ export interface DescribeKBComponentVulnerabilityResponse {
      * 漏洞信息列表
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    VulnerabilityList: Array<ComponentVulnerabilityUnion>;
+    VulnerabilityList?: Array<ComponentVulnerabilityUnion>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -372,6 +376,10 @@ export interface DescribeKBVulnerabilityRequest {
      * 根据CNNVD ID查询（不能与其他参数同时存在）
      */
     CNNVDID?: Array<string>;
+    /**
+     * 语言，ZH或EN
+     */
+    Language?: string;
 }
 /**
  * 描述漏洞详细信息。

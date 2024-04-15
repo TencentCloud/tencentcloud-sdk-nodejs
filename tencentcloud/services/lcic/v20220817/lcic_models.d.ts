@@ -1227,6 +1227,16 @@ export interface DocumentInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     Preview?: string;
+    /**
+     * 文档的分辨率
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Resolution?: string;
+    /**
+     * 转码后文档的最小分辨率，和创建文档时传入的参数一致。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    MinScaleResolution?: string;
 }
 /**
  * DeleteDocument返回参数结构体
@@ -1469,6 +1479,14 @@ export interface DescribeDocumentResponse {
      * 课件预览地址
      */
     Preview?: string;
+    /**
+     * 文档的分辨率
+     */
+    Resolution?: string;
+    /**
+     * 转码后文档的最小分辨率，和创建文档时传入的参数一致。
+     */
+    MinScaleResolution?: string;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1921,6 +1939,10 @@ export interface CreateDocumentRequest {
   3. 已损坏音视频：移除PPT上对损坏音视频的引用
      */
     AutoHandleUnsupportedElement?: boolean;
+    /**
+     * 转码后文档的最小分辨率，不传、传空字符串或分辨率格式错误则使用文档原分辨率。示例：1280x720，注意分辨率宽高中间为英文字母"xyz"的"x"
+     */
+    MinScaleResolution?: string;
 }
 /**
  * GetRoomMessage返回参数结构体

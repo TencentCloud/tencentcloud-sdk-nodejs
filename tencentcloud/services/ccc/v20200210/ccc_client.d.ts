@@ -56,7 +56,7 @@ export declare class Client extends AbstractClient {
      */
     DeleteStaff(req: DeleteStaffRequest, cb?: (error: string, rep: DeleteStaffResponse) => void): Promise<DeleteStaffResponse>;
     /**
-     * 修改公司资质申请，只能修改状态为驳回或待审核的申请单。（1、首次使用接口，建议先在云联络中心控制台查看各个资料模版:https://console.cloud.tencent.com/ccc/enterprise/update。2、参数中图片Url建议使用腾讯云Cos存储的临时链接）
+     * 修改公司资质申请，只能修改状态为驳回或待审核的申请单。（1、首次使用接口，建议先在云联络中心控制台查看各个资料模板:https://console.cloud.tencent.com/ccc/enterprise/update。2、参数中图片Url建议使用腾讯云Cos存储的临时链接）
      */
     ModifyCompanyApply(req: ModifyCompanyApplyRequest, cb?: (error: string, rep: ModifyCompanyApplyResponse) => void): Promise<ModifyCompanyApplyResponse>;
     /**
@@ -100,7 +100,7 @@ export declare class Client extends AbstractClient {
      */
     DescribePredictiveDialingSessions(req: DescribePredictiveDialingSessionsRequest, cb?: (error: string, rep: DescribePredictiveDialingSessionsResponse) => void): Promise<DescribePredictiveDialingSessionsResponse>;
     /**
-     * 创建公司资质申请（1、首次使用接口，建议先在云联络中心控制台查看各个资料模版:https://console.cloud.tencent.com/ccc/enterprise/update。2、参数中图片Url建议使用腾讯云Cos存储的临时链接）
+     * 创建公司资质申请（1、首次使用接口，建议先在云联络中心控制台查看各个资料模板:https://console.cloud.tencent.com/ccc/enterprise/update。2、参数中图片Url建议使用腾讯云Cos存储的临时链接）
      */
     CreateCompanyApply(req: CreateCompanyApplyRequest, cb?: (error: string, rep: CreateCompanyApplyResponse) => void): Promise<CreateCompanyApplyResponse>;
     /**

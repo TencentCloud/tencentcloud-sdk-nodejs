@@ -3974,7 +3974,7 @@ export interface EndpointItem {
      */
     ChildInstanceId?: string;
     /**
-     * 数据库为cynos、且是cynos集群内的一个子数据库实例时、该参数为该子实例的类型、比如：只读实例传ro、读写实例传rw
+     * 数据库为cynos、且是cynos集群内的一个子数据库实例时、该参数为该子实例的类型、例如：只读实例传ro、读写实例传rw
   注意：此字段可能返回 null，表示取不到有效值。
      */
     ChildInstanceType?: string;
@@ -4542,7 +4542,7 @@ export interface Endpoint {
      */
     ChildInstanceId?: string;
     /**
-     * 数据库为cynos、且是cynos集群内的一个子数据库实例时、该参数为该子实例的类型、比如：只读实例传ro、读写实例传rw
+     * 数据库为cynos、且是cynos集群内的一个子数据库实例时、该参数为该子实例的类型、例如：只读实例传ro、读写实例传rw
   注意：此字段可能返回 null，表示取不到有效值。
      */
     ChildInstanceType?: string;

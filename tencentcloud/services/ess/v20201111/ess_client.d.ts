@@ -226,7 +226,7 @@ export declare class Client extends AbstractClient {
 
 注： **此接口需要购买单独的实名套餐包方可调用，如有需求请联系对接人员评估**
      */
-    CreateOrganizationAuthUrl(req?: CreateOrganizationAuthUrlRequest, cb?: (error: string, rep: CreateOrganizationAuthUrlResponse) => void): Promise<CreateOrganizationAuthUrlResponse>;
+    CreateOrganizationAuthUrl(req: CreateOrganizationAuthUrlRequest, cb?: (error: string, rep: CreateOrganizationAuthUrlResponse) => void): Promise<CreateOrganizationAuthUrlResponse>;
     /**
      * 解绑员工与对应角色的关系，如需绑定请使用 CreateIntegrationUserRoles 接口。
      */
