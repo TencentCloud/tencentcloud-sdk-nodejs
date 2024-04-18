@@ -58,7 +58,7 @@ export declare class Client extends AbstractClient {
     /**
      * 查询地域列表
      */
-    DescribeRegions(req?: DescribeRegionsRequest, cb?: (error: string, rep: DescribeRegionsResponse) => void): Promise<DescribeRegionsResponse>;
+    DescribeRegions(req: DescribeRegionsRequest, cb?: (error: string, rep: DescribeRegionsResponse) => void): Promise<DescribeRegionsResponse>;
     /**
      * 查询检查点汇总信息
      */

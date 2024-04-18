@@ -571,7 +571,7 @@ export interface DescribeRegionsResponse {
      * 地域数组
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    RegionSet: Array<RegionDetail>;
+    RegionSet?: Array<RegionDetail>;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -1738,7 +1738,12 @@ export interface RequestsPerSecond {
 /**
  * DescribeRegions请求参数结构体
  */
-export declare type DescribeRegionsRequest = null;
+export interface DescribeRegionsRequest {
+    /**
+     * 通过该参数指定不同压测网络环境，在不同网络环境下，PTS可用的地域不一样
+     */
+    LoadType?: number;
+}
 /**
  * DeleteScenarios返回参数结构体
  */
@@ -2467,7 +2472,7 @@ export interface Load {
      */
     VpcLoadDistribution?: VpcLoadDistribution;
     /**
-     * 压力分布
+     * 多地域压力分布
   注意：此字段可能返回 null，表示取不到有效值。
      */
     GeoRegionsLoadDistribution?: Array<GeoRegionsLoadItem>;

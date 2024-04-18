@@ -1348,6 +1348,18 @@ export interface ExpandCfwVerticalRequest {
    * 防火墙实例id
    */
   CfwInstance?: string
+  /**
+   * 弹性开关 1打开 0 关闭
+   */
+  ElasticSwitch?: number
+  /**
+   * 弹性带宽上限，单位Mbps
+   */
+  ElasticBandwidth?: number
+  /**
+   * 按量计费标签
+   */
+  Tags?: Array<TagInfo>
 }
 
 /**
@@ -2197,6 +2209,38 @@ export interface VpcFwInstanceInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TrafficMode?: string
+  /**
+   * 引擎预约升级时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ReserveTime?: string
+  /**
+   * 预约引擎升级版本
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ReserveVersion?: string
+  /**
+   * 引擎预约升级版本状态
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ReserveVersionState?: string
+  /**
+   * 弹性开关 1打开 0关闭
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ElasticSwitch?: number
+  /**
+   * 弹性带宽，单位Mbps
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ElasticBandwidth?: number
+  /**
+   * 是否首次开通按量付费
+1 是
+0 不是
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsFirstAfterPay?: number
 }
 
 /**
@@ -2372,6 +2416,40 @@ export interface NatInstanceInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ZoneBak?: string
+  /**
+   * 引擎预约升级时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ReserveTime?: string
+  /**
+   * 引擎预约升级版本
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ReserveVersion?: string
+  /**
+   * 引擎预约升级版本状态
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ReserveVersionState?: string
+  /**
+   * 弹性开关
+1 打开
+0 关闭
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ElasticSwitch?: number
+  /**
+   * 弹性带宽，单位Mbps
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ElasticBandwidth?: number
+  /**
+   * 是否首次开通按量付费
+1 是
+0 不是
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsFirstAfterPay?: number
 }
 
 /**
@@ -6505,6 +6583,20 @@ export interface RemoveVpcAcRuleRequest {
    * 规则的uuid列表，可通过查询规则列表获取，注意：如果传入的是[-1]将删除所有规则
    */
   RuleUuids: Array<number | bigint>
+}
+
+/**
+ * 标签信息
+ */
+export interface TagInfo {
+  /**
+   * 目标key
+   */
+  TagKey?: string
+  /**
+   * 目标值
+   */
+  TagValue?: string
 }
 
 /**

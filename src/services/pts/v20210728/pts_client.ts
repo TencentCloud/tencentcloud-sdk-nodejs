@@ -302,7 +302,7 @@ export class Client extends AbstractClient {
    * 查询地域列表
    */
   async DescribeRegions(
-    req?: DescribeRegionsRequest,
+    req: DescribeRegionsRequest,
     cb?: (error: string, rep: DescribeRegionsResponse) => void
   ): Promise<DescribeRegionsResponse> {
     return this.request("DescribeRegions", req, cb)

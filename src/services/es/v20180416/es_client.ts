@@ -35,6 +35,7 @@ import {
   DeleteLogstashPipelinesResponse,
   TagInfo,
   KeyValue,
+  UpdateDiagnoseSettingsResponse,
   UpdateLogstashPipelineDescResponse,
   DescribeInstancesResponse,
   DescribeInstanceLogsResponse,
@@ -66,7 +67,7 @@ import {
   DescribeServerlessSpaceUserResponse,
   LogDetail,
   DescribeLogstashInstanceLogsRequest,
-  GetRequestTargetNodeTypesRequest,
+  DescribeIndexMetaResponse,
   DiagnoseJobMeta,
   StartLogstashPipelinesRequest,
   GetDiagnoseSettingsResponse,
@@ -75,6 +76,7 @@ import {
   DeleteServerlessSpaceUserResponse,
   DiData,
   UpgradeLicenseResponse,
+  ServerlessIndexSettingsField,
   LogstashExtendedFile,
   UpdateLogstashInstanceRequest,
   UpdateRequestTargetNodeTypesRequest,
@@ -96,7 +98,7 @@ import {
   DeleteIndexRequest,
   DescribeViewsRequest,
   DescribeIndexListResponse,
-  StartLogstashPipelinesResponse,
+  DescribeUserCosSnapshotListRequest,
   DescribeLogstashInstanceOperationsRequest,
   DescribeInstancePluginInfo,
   CreateLogstashInstanceResponse,
@@ -110,6 +112,7 @@ import {
   DiagnoseResult,
   RestartKibanaRequest,
   SaveAndDeployLogstashPipelineResponse,
+  ServerlessIndexOptionsField,
   UpdateDictionariesRequest,
   OperationDuration,
   UpgradeLicenseRequest,
@@ -120,18 +123,21 @@ import {
   OperationDurationUpdated,
   CreateInstanceRequest,
   CreateLogstashInstanceRequest,
+  UpdateServerlessInstanceResponse,
   UpdateDictionariesResponse,
   InstanceInfo,
   DiDataSourceCvmInstance,
   DeleteIndexResponse,
   DeleteServerlessSpaceUserRequest,
+  RestartNodesResponse,
   DescribeInstancesRequest,
   CheckMigrateIndexMetaDataRequest,
   EsDictionaryInfo,
   DescribeLogstashPipelinesRequest,
   OutboundPublicAcl,
   DataStreamInfo,
-  DescribeIndexMetaResponse,
+  ServerlessIndexMetaField,
+  GetRequestTargetNodeTypesRequest,
   ModifyEsVipSecurityGroupRequest,
   ProcessDetail,
   DiSourceTke,
@@ -142,14 +148,14 @@ import {
   DescribeIndexMetaRequest,
   UpdateJdkResponse,
   RestartKibanaResponse,
-  RestartNodesResponse,
+  DescribeUserCosSnapshotListResponse,
   UpdateIndexRequest,
-  UpdateIndexResponse,
+  ServerlessIndexNetworkField,
   WebNodeTypeInfo,
   LocalDiskInfo,
   IndexPolicyField,
   UpdatePluginsResponse,
-  UpdateServerlessInstanceResponse,
+  UpdateIndexResponse,
   UpdateJdkRequest,
   UpdateLogstashInstanceResponse,
   StopLogstashPipelinesRequest,
@@ -175,14 +181,14 @@ import {
   ZoneDetail,
   ServerlessDi,
   StopLogstashPipelinesResponse,
-  DescribeUserCosSnapshotListRequest,
+  DescribeServerlessInstancesRequest,
   KibanaNodeInfo,
-  UpdateDiagnoseSettingsResponse,
+  StartLogstashPipelinesResponse,
   GetDiagnoseSettingsRequest,
   EsAcl,
   DescribeInstancePluginListRequest,
   RestartNodesRequest,
-  DescribeUserCosSnapshotListResponse,
+  DescribeServerlessInstancesResponse,
   DeleteLogstashInstanceRequest,
   UpgradeInstanceRequest,
   DescribeViewsResponse,
@@ -710,6 +716,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeInstancePluginListResponse) => void
   ): Promise<DescribeInstancePluginListResponse> {
     return this.request("DescribeInstancePluginList", req, cb)
+  }
+
+  /**
+   * Serverless获取索引列表
+   */
+  async DescribeServerlessInstances(
+    req: DescribeServerlessInstancesRequest,
+    cb?: (error: string, rep: DescribeServerlessInstancesResponse) => void
+  ): Promise<DescribeServerlessInstancesResponse> {
+    return this.request("DescribeServerlessInstances", req, cb)
   }
 
   /**

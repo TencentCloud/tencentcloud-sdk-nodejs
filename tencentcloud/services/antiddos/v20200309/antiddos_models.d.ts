@@ -613,6 +613,10 @@ export interface DescribeListBGPInstancesRequest {
   
      */
     FilterPlanCntFlag?: number;
+    /**
+     * 是否跨区域产品 0: 不包含跨区域产品 1: 中国大陆跨区域产品 2: 非中国大陆跨区域产品 3: 包含全部
+     */
+    FilterTransRegionFlag?: number;
 }
 /**
  * 字段值，K-V形式
@@ -5216,6 +5220,11 @@ export interface BGPInstance {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     PlanCntFlag?: number;
+    /**
+     * 是否跨区域产品 0: 不包含跨区域产品 1: 中国大陆跨区域产品 2: 非中国大陆跨区域产品
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TransRegionFlag?: number;
     /**
      * 是否为超级高防包
   注意：此字段可能返回 null，表示取不到有效值。

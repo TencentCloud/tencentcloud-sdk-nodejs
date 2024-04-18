@@ -518,6 +518,16 @@ it("es.v20180416.DescribeInstancePluginList", async function () {
     }
 })
 
+it("es.v20180416.DescribeServerlessInstances", async function () {
+    try {
+       const data = await client.DescribeServerlessInstances({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("es.v20180416.DescribeIndexMeta", async function () {
     try {
        const data = await client.DescribeIndexMeta({})

@@ -437,6 +437,15 @@ export interface KeyValue {
     Value: string;
 }
 /**
+ * UpdateDiagnoseSettings返回参数结构体
+ */
+export interface UpdateDiagnoseSettingsResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * UpdateLogstashPipelineDesc返回参数结构体
  */
 export interface UpdateLogstashPipelineDescResponse {
@@ -1245,13 +1254,18 @@ export interface DescribeLogstashInstanceLogsRequest {
     OrderByType?: number;
 }
 /**
- * GetRequestTargetNodeTypes请求参数结构体
+ * DescribeIndexMeta返回参数结构体
  */
-export interface GetRequestTargetNodeTypesRequest {
+export interface DescribeIndexMetaResponse {
     /**
-     * 实例ID
+     * 索引元数据字段
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    InstanceId: string;
+    IndexMetaField?: IndexMetaField;
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
 }
 /**
  * 智能运维支持的诊断项和元信息
@@ -1460,6 +1474,21 @@ export interface UpgradeLicenseResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * 索引配置字段
+ */
+export interface ServerlessIndexSettingsField {
+    /**
+     * 索引主分片数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    NumberOfShards?: string;
+    /**
+     * 索引刷新频率
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    RefreshInterval?: string;
 }
 /**
  * Logstash扩展文件信息
@@ -1905,13 +1934,21 @@ export interface DescribeIndexListResponse {
     RequestId?: string;
 }
 /**
- * StartLogstashPipelines返回参数结构体
+ * DescribeUserCosSnapshotList请求参数结构体
  */
-export interface StartLogstashPipelinesResponse {
+export interface DescribeUserCosSnapshotListRequest {
     /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     * cos桶名
      */
-    RequestId?: string;
+    CosBucket?: string;
+    /**
+     * bucket 桶下的备份路径
+     */
+    BasePath?: string;
+    /**
+     * 云上集群迁移集群名
+     */
+    ClusterInstanceId?: string;
 }
 /**
  * DescribeLogstashInstanceOperations请求参数结构体
@@ -2287,6 +2324,21 @@ export interface SaveAndDeployLogstashPipelineResponse {
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     RequestId?: string;
+}
+/**
+ * 索引自治字段
+ */
+export interface ServerlessIndexOptionsField {
+    /**
+     * 过期时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    ExpireMaxAge?: string;
+    /**
+     * 时间分区字段
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    TimestampField?: string;
 }
 /**
  * UpdateDictionaries请求参数结构体
@@ -2759,6 +2811,15 @@ export interface CreateLogstashInstanceRequest {
     OperationDuration?: OperationDuration;
 }
 /**
+ * UpdateServerlessInstance返回参数结构体
+ */
+export interface UpdateServerlessInstanceResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * UpdateDictionaries返回参数结构体
  */
 export interface UpdateDictionariesResponse {
@@ -3224,6 +3285,15 @@ export interface DeleteServerlessSpaceUserRequest {
     Username: string;
 }
 /**
+ * RestartNodes返回参数结构体
+ */
+export interface RestartNodesResponse {
+    /**
+     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     */
+    RequestId?: string;
+}
+/**
  * DescribeInstances请求参数结构体
  */
 export interface DescribeInstancesRequest {
@@ -3374,18 +3444,102 @@ export interface DataStreamInfo {
     IsShardComplete?: number;
 }
 /**
- * DescribeIndexMeta返回参数结构体
+ * 索引元数据字段
  */
-export interface DescribeIndexMetaResponse {
+export interface ServerlessIndexMetaField {
     /**
-     * 索引元数据字段
+     * 索引所属集群APP ID
   注意：此字段可能返回 null，表示取不到有效值。
      */
-    IndexMetaField?: IndexMetaField;
+    AppId?: number;
     /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     * 索引名
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    RequestId?: string;
+    IndexName?: string;
+    /**
+     * 索引文档数
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IndexDocs?: number;
+    /**
+     * 索引存储大小，单位Byte
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IndexStorage?: number;
+    /**
+     * 索引创建时间
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IndexCreateTime?: string;
+    /**
+     * 索引实例ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    InstanceId?: string;
+    /**
+     * 索引自治字段
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IndexOptionsField?: ServerlessIndexOptionsField;
+    /**
+     * 索引配置字段
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IndexSettingsField?: ServerlessIndexSettingsField;
+    /**
+     * 索引所属连接相关信息
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IndexNetworkField?: ServerlessIndexNetworkField;
+    /**
+     * Kibana公网域名
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    KibanaUrl?: string;
+    /**
+     * Kibana内网域名
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    KibanaPrivateUrl?: string;
+    /**
+     * 索引内网访问地址
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    IndexAccessUrl?: string;
+    /**
+     * 状态
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Status?: number;
+    /**
+     * 索引空间ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SpaceId?: string;
+    /**
+     * 索引空间名
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SpaceName?: string;
+    /**
+     * 存储类型
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    StorageType?: number;
+    /**
+     * 标签信息
+     */
+    TagList?: Array<TagInfo>;
+}
+/**
+ * GetRequestTargetNodeTypes请求参数结构体
+ */
+export interface GetRequestTargetNodeTypesRequest {
+    /**
+     * 实例ID
+     */
+    InstanceId: string;
 }
 /**
  * ModifyEsVipSecurityGroup请求参数结构体
@@ -3581,9 +3735,17 @@ export interface RestartKibanaResponse {
     RequestId?: string;
 }
 /**
- * RestartNodes返回参数结构体
+ * DescribeUserCosSnapshotList返回参数结构体
  */
-export interface RestartNodesResponse {
+export interface DescribeUserCosSnapshotListResponse {
+    /**
+     * cos 快照信息列表
+     */
+    CosSnapshotInfoList?: Array<CosSnapShotInfo>;
+    /**
+     * cos 快照数量
+     */
+    TotalCount?: number;
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -3623,13 +3785,39 @@ export interface UpdateIndexRequest {
     RolloverBackingIndex?: boolean;
 }
 /**
- * UpdateIndex返回参数结构体
+ * Serverless实例，网络、索引、kibana等连接信息
  */
-export interface UpdateIndexResponse {
+export interface ServerlessIndexNetworkField {
     /**
-     * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+     * 地域
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    RequestId?: string;
+    Region: string;
+    /**
+     * 区域
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Zone: string;
+    /**
+     * vpc唯一ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    VpcUid: string;
+    /**
+     * 子网唯一ID
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    SubnetUid: string;
+    /**
+     * 用户名
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Username: string;
+    /**
+     * 密码
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    Password: string;
 }
 /**
  * 可视化节点配置
@@ -3711,9 +3899,9 @@ export interface UpdatePluginsResponse {
     RequestId?: string;
 }
 /**
- * UpdateServerlessInstance返回参数结构体
+ * UpdateIndex返回参数结构体
  */
-export interface UpdateServerlessInstanceResponse {
+export interface UpdateIndexResponse {
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -4403,21 +4591,49 @@ export interface StopLogstashPipelinesResponse {
     RequestId?: string;
 }
 /**
- * DescribeUserCosSnapshotList请求参数结构体
+ * DescribeServerlessInstances请求参数结构体
  */
-export interface DescribeUserCosSnapshotListRequest {
+export interface DescribeServerlessInstancesRequest {
     /**
-     * cos桶名
+     * 索引集群ID
      */
-    CosBucket?: string;
+    InstanceIds?: Array<string>;
     /**
-     * bucket 桶下的备份路径
+     * 索引名
      */
-    BasePath?: string;
+    IndexNames?: Array<string>;
     /**
-     * 云上集群迁移集群名
+     * 分页起始位置
      */
-    ClusterInstanceId?: string;
+    Offset?: number;
+    /**
+     * 一页展示数量
+     */
+    Limit?: number;
+    /**
+     * 排序字段，支持索引名：IndexName、索引存储量：IndexStorage、索引创建时间：IndexCreateTime
+     */
+    OrderBy?: string;
+    /**
+     * 过滤索引状态
+     */
+    IndexStatusList?: Array<string>;
+    /**
+     * 排序顺序，支持asc、desc，默认为desc
+     */
+    Order?: string;
+    /**
+     * 索引空间ID列表
+     */
+    SpaceIds?: Array<string>;
+    /**
+     * 数据链路数据源类型
+     */
+    DiSourceTypes?: Array<string>;
+    /**
+     * 标签信息
+     */
+    TagList?: Array<TagInfo>;
 }
 /**
  * 实例Kibana节点相关信息
@@ -4449,9 +4665,9 @@ export interface KibanaNodeInfo {
     KibanaNodeDiskSize: number;
 }
 /**
- * UpdateDiagnoseSettings返回参数结构体
+ * StartLogstashPipelines返回参数结构体
  */
-export interface UpdateDiagnoseSettingsResponse {
+export interface StartLogstashPipelinesResponse {
     /**
      * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
@@ -4538,15 +4754,17 @@ export interface RestartNodesRequest {
     CvmDelayOnlineTime?: number;
 }
 /**
- * DescribeUserCosSnapshotList返回参数结构体
+ * DescribeServerlessInstances返回参数结构体
  */
-export interface DescribeUserCosSnapshotListResponse {
+export interface DescribeServerlessInstancesResponse {
     /**
-     * cos 快照信息列表
+     * 索引元数据字段
+  注意：此字段可能返回 null，表示取不到有效值。
      */
-    CosSnapshotInfoList?: Array<CosSnapShotInfo>;
+    IndexMetaFields?: Array<ServerlessIndexMetaField>;
     /**
-     * cos 快照数量
+     * 查询总数
+  注意：此字段可能返回 null，表示取不到有效值。
      */
     TotalCount?: number;
     /**

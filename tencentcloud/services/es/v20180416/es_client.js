@@ -340,6 +340,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeInstancePluginList", req, cb);
     }
     /**
+     * Serverless获取索引列表
+     */
+    async DescribeServerlessInstances(req, cb) {
+        return this.request("DescribeServerlessInstances", req, cb);
+    }
+    /**
      * 获取索引元数据
      */
     async DescribeIndexMeta(req, cb) {

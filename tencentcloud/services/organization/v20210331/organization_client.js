@@ -352,7 +352,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CheckAccountDelete", req, cb);
     }
     /**
-     * 创建一个特殊类型的策略，你可以关联到企业组织Root节点、企业单元或者企业的成员账号。
+     * 创建一个特殊类型的策略，您可以关联到企业组织Root节点、企业部门节点或者企业的成员账号。
      */
     async CreatePolicy(req, cb) {
         return this.request("CreatePolicy", req, cb);

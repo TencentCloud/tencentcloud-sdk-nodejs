@@ -398,6 +398,13 @@ export interface CreateInstancesRequest {
    * 独享集群 ID。当**ProductVersion**设置为**cdc**时，该参数必须设置。
    */
   RedisClusterId?: string
+  /**
+   * 告警策略 ID 数组。
+
+- 请登录[腾讯云可观测平台-告警管理-策略管理](https://console.cloud.tencent.com/monitor/alarm/policy)获取告警策略 ID。
+- 若不配置该参数，则绑定默认告警策略。默认告警策略具体信息，请登录[腾讯云可观测平台-告警管理-策略管理](https://console.cloud.tencent.com/monitor/alarm/policy)查看。
+   */
+  AlarmPolicyList?: Array<string>
 }
 
 /**

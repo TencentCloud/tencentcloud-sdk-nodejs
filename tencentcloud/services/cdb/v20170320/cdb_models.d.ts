@@ -1591,6 +1591,7 @@ export interface UpgradeDBInstanceRequest {
     InstanceId: string;
     /**
      * 升级后的内存大小，单位：MB，为保证传入 Memory 值有效，请使用 [获取云数据库可售卖规格](https://cloud.tencent.com/document/product/236/17229) 接口获取可升级的内存规格。
+  说明：如果进行迁移业务，请一定填写实例规格（CPU、内存），不然系统会默认以最小允许规格传参。
      */
     Memory: number;
     /**
@@ -1631,6 +1632,7 @@ export interface UpgradeDBInstanceRequest {
     DeviceType?: string;
     /**
      * 升级后的实例cpu核数，如果不传将根据 Memory 指定的内存值自动填充最小允许规格的cpu值。
+  说明：如果进行迁移业务，请一定填写实例规格（CPU、内存），不然系统会默认以最小允许规格传参。
      */
     Cpu?: number;
     /**

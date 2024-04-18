@@ -266,6 +266,7 @@ import {
   CreateVpcFwGroupRequest,
   CreateNatFwInstanceWithDomainRequest,
   RemoveVpcAcRuleRequest,
+  TagInfo,
   DescribeResourceGroupResponse,
   DeleteAddressTemplateResponse,
   CreateBlockIgnoreRuleListResponse,

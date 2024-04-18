@@ -713,7 +713,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建一个特殊类型的策略，你可以关联到企业组织Root节点、企业单元或者企业的成员账号。
+   * 创建一个特殊类型的策略，您可以关联到企业组织Root节点、企业部门节点或者企业的成员账号。
    */
   async CreatePolicy(
     req: CreatePolicyRequest,

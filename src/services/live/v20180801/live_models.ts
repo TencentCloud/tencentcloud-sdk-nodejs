@@ -2181,6 +2181,10 @@ export interface CreateLiveStreamMonitorRequest {
    * 是否开启格式诊断。
    */
   AiFormatDiagnose?: number
+  /**
+   * 是否开启内容质检。
+   */
+  AiQualityControl?: number
 }
 
 /**
@@ -5667,6 +5671,10 @@ export interface ModifyLiveStreamMonitorRequest {
    * 是否开启格式诊断。
    */
   AiFormatDiagnose?: number
+  /**
+   * 是否开启内容质检。
+   */
+  AiQualityControl?: number
 }
 
 /**
@@ -9029,6 +9037,11 @@ export interface LiveStreamMonitorInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AiFormatDiagnose?: number
+  /**
+   * 是否开启内容质检。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AiQualityControl?: number
 }
 
 /**

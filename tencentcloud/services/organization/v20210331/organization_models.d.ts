@@ -1071,7 +1071,7 @@ export interface ListOrganizationIdentityResponse {
  */
 export interface DeletePolicyRequest {
     /**
-     * 需要删除的策略ID。可以调用[ListPolicies](https://tcloud4api.woa.com/document/product/1128/79356?!preview&!document=1)获取
+     * 需要删除的策略ID。可以调用[ListPolicies](https://cloud.tencent.com/document/product/850/105311)获取
   
      */
     PolicyId: number;
@@ -2734,7 +2734,7 @@ export interface DeleteAccountResponse {
  */
 export interface UpdatePolicyRequest {
     /**
-     * 需要编辑的策略ID。可以调用[ListPolicies](https://tcloud4api.woa.com/document/product/1128/79356?!preview&!document=1)获取
+     * 需要编辑的策略ID。可以调用[ListPolicies](https://cloud.tencent.com/document/product/850/105311)获取
      */
     PolicyId: number;
     /**

@@ -2078,6 +2078,10 @@ export interface CreateLiveStreamMonitorRequest {
      * 是否开启格式诊断。
      */
     AiFormatDiagnose?: number;
+    /**
+     * 是否开启内容质检。
+     */
+    AiQualityControl?: number;
 }
 /**
  * DescribeScreenShotSheetNumList请求参数结构体
@@ -5427,6 +5431,10 @@ export interface ModifyLiveStreamMonitorRequest {
      * 是否开启格式诊断。
      */
     AiFormatDiagnose?: number;
+    /**
+     * 是否开启内容质检。
+     */
+    AiQualityControl?: number;
 }
 /**
  * ModifyLiveSnapshotTemplate返回参数结构体
@@ -8652,6 +8660,11 @@ export interface LiveStreamMonitorInfo {
   注意：此字段可能返回 null，表示取不到有效值。
      */
     AiFormatDiagnose?: number;
+    /**
+     * 是否开启内容质检。
+  注意：此字段可能返回 null，表示取不到有效值。
+     */
+    AiQualityControl?: number;
 }
 /**
  * 直播拉流当前正在拉的文件信息。
